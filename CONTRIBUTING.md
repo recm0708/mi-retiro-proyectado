@@ -32,6 +32,30 @@ refactor: reorganizar motor de pensiones
 chore: actualizar dependencias
 ```
 
+## Comentarios y documentación del código
+
+Los archivos de código deben documentarse de forma consistente, evitando comentarios redundantes.
+
+- Python: docstrings de módulo, clase y función cuando aporten contexto; 4 espacios de sangría.
+- HTML: comentarios estructurales para secciones y pasos importantes; 2 espacios de sangría.
+- CSS: comentarios por bloques funcionales; 2 espacios de sangría.
+- JavaScript: encabezados por módulo y JSDoc en funciones relevantes; 2 espacios de sangría.
+- JSON normativo: no utilizar comentarios, porque JSON estándar no los admite. La explicación de parámetros se mantendrá en `docs/NORMATIVA.md`.
+
+Los archivos Markdown, `requirements.txt` y `.gitkeep` no requieren comentarios de código.
+
+## Validación mínima antes de un commit
+
+Ejecutar:
+
+```powershell
+python -m compileall app
+```
+
+También se deben probar en el navegador las rutas y pasos afectados por el cambio.
+
+Cuando existan pruebas automatizadas, deberán ejecutarse antes de consolidar cambios en motores de cálculo.
+
 ## Datos personales
 
 Está prohibido subir al repositorio información personal real utilizada durante las pruebas.
@@ -44,4 +68,9 @@ Todo cambio relacionado con fórmulas, parámetros o reglas legales deberá:
 
 1. estar documentado;
 2. identificar la fuente normativa correspondiente;
-3. incorporar o actualizar pruebas cuando corresponda.
+3. incorporar o actualizar pruebas cuando corresponda;
+4. mantener separados los parámetros legales de la lógica de presentación.
+
+## Actualización de documentación
+
+Los archivos de `docs/`, `README.md` y `CHANGELOG.md` se actualizarán cuando un cambio funcional, técnico o arquitectónico lo amerite. No es obligatorio modificar todos los documentos en cada avance.
