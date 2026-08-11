@@ -41,9 +41,9 @@ El asistente está organizado en seis pasos:
 3. **Historial:** implementado en validación. Incluye captura anual de cuotas y salario cotizado/reportado, validación contra las cuotas reales del Paso 2, formato monetario controlado y salario actual normalizado para proyección.
 4. **Proyección:** implementado en validación. Incluye salario constante, variación porcentual, salario futuro conocido, comparación de escenarios, precisión monetaria sin redondeos intermedios y línea temporal que separa historial real, año actual y futuro proyectado.
 5. **Retiro:** implementado en validación. Calcula edad y fecha de referencia, escenarios adicionales, cuotas futuras estimadas respetando el cierre del año actual y verifica si la proyección salarial cubre el horizonte de retiro.
-6. **Resultados:** pendiente.
+6. **Resultados:** primera integración implementada para la Pensión de Retiro por Vejez Normal del SEBD. Permite seleccionar un escenario de retiro, escoger el escenario salarial, verificar elegibilidad y mostrar el desglose del cálculo.
 
-Todavía no se han implementado los motores legales definitivos de SEBD, Mixto y SUCGS.
+El motor normal del SEBD ya dispone de una primera implementación validada. Las modalidades SEBD proporcional/anticipada, el Subsistema Mixto y SUCGS continúan pendientes.
 
 ## API disponible
 
@@ -60,6 +60,8 @@ POST /api/simulacion/salario
 POST /api/simulacion/proyeccion-salario
 POST /api/simulacion/linea-tiempo
 POST /api/simulacion/retiro
+POST /api/simulacion/sebd/normal
+POST /api/simulacion/resultados/sebd-normal
 ```
 
 La documentación automática está disponible en `/docs` durante la ejecución local.
@@ -174,6 +176,18 @@ Los cálculos monetarios utilizan `Decimal` en las operaciones donde la precisi�
 
 Los campos monetarios editables muestran separadores de miles y admiten como máximo dos decimales.
 
+## Motor SEBD en desarrollo
+
+El backend ya incorpora la primera modalidad legal del Paso 6: Pensión de Retiro por Vejez Normal del Subsistema Exclusivamente de Beneficio Definido.
+
+La implementación actual calcula los diez mejores años, tasa básica del 60 %, bloques completos de doce cuotas adicionales antes y después de la edad de referencia y los límites máximos aplicables. El monto mínimo indexado por fecha se mantiene pendiente de versionar antes de considerar completo el motor.
+
+La API provisional de esta modalidad está disponible en:
+
+```text
+POST /api/simulacion/sebd/normal
+```
+
 ## Documentación técnica
 
 Los documentos de `docs/` registran progresivamente:
@@ -210,3 +224,18 @@ Esta aplicación genera estimaciones con fines informativos, educativos y de pla
 Los resultados no constituyen una certificación ni determinación oficial de una pensión.
 
 La determinación oficial de prestaciones corresponde exclusivamente a la Caja de Seguro Social de Panamá.
+
+## Paso 6C — modalidades SEBD
+
+El motor SEBD ya clasifica automáticamente la modalidad aplicable al escenario de retiro entre Normal, Anticipada, Proporcional y Proporcional Anticipada. También identifica escenarios de posible Indemnización por Vejez y situaciones que todavía no cumplen una prestación calculable.
+
+Endpoints generales añadidos:
+
+```text
+POST /api/simulacion/sebd
+POST /api/simulacion/resultados/sebd
+```
+
+Los endpoints específicos de SEBD Normal se conservan para compatibilidad y pruebas de regresión.
+
+La explicación funcional y las fórmulas se resumen en `docs/MODALIDADES_SEBD.md`.

@@ -39,6 +39,17 @@ Todos los cambios importantes realizados en este proyecto serán documentados en
 - Archivo `.gitattributes` para normalizar finales de línea.
 - Documento `docs/VALIDACION.md` y reglas para casos de prueba anonimizados.
 - Metadatos de trazabilidad de la fuente oficial en `normativa/parametros_generales.json`.
+- Parámetros específicos del SEBD en `normativa/sebd.json`, con trazabilidad de los artículos 178-181 y 192-193 del Texto Único vigente.
+- Modelos jurídicos separados en `app/modelos/pension.py`.
+- Primera implementación del motor de Pensión de Retiro por Vejez Normal del SEBD.
+- Endpoint `POST /api/simulacion/sebd/normal`.
+- Pruebas automatizadas del SEBD, incluida una regresión anonimizada que reproduce B/.741.59.
+- Paso 6 visual para la primera integración de Pensión de Retiro por Vejez Normal del SEBD.
+- Selección explícita del escenario de retiro que alimentará el cálculo final.
+- Selector de escenario salarial en resultados cuando el Paso 4 contiene varias hipótesis.
+- Servicio `app/servicios/resultados.py` para consolidar historial, proyección y retiro antes de invocar el motor legal.
+- Endpoint `POST /api/simulacion/resultados/sebd-normal`.
+- Pruebas de integración del Paso 6 para la regresión B/.741.59 y un escenario posterior a la edad de referencia.
 
 ### Cambiado
 
@@ -53,6 +64,8 @@ Todos los cambios importantes realizados en este proyecto serán documentados en
 - Los campos monetarios editables usan separadores de miles y limitan la entrada a dos decimales.
 - El Paso 5 muestra explícitamente los datos heredados de pasos anteriores y advierte cuando el horizonte salarial no cubre todos los escenarios de retiro.
 - La estimación de cuotas del Paso 5 respeta primero el cierre del año actual definido en el Paso 2 y aplica la densidad anual a partir del año siguiente.
+- Los escenarios de retiro ya transcurridos permanecen visibles para comparación, pero no se seleccionan automáticamente para cálculo cuando el historial anual no permite reconstruir cuotas exactas a esa fecha.
+- Los salarios futuros se incorporan al Paso 6 de forma trazable y se prorratea el último año proyectado cuando la fecha de retiro consume solo una parte de sus cuotas previstas.
 
 ### Corregido
 
@@ -66,3 +79,15 @@ Todos los cambios importantes realizados en este proyecto serán documentados en
 - Diferencias de un centavo provocadas por redondear el salario mensual antes de calcular el anual proyectado.
 - Proyección de cuotas del Paso 5 que podía agregar cuotas al año actual aunque el usuario hubiera indicado que no esperaba más cuotas ese año.
 - Artefactos visuales de punto flotante en campos salariales históricos.
+
+### Paso 6C — modalidades SEBD
+
+- Se agregó clasificación automática Normal / Anticipada / Proporcional / Proporcional Anticipada.
+- Se incorporó identificación de posible Indemnización por Vejez y escenarios no elegibles.
+- Se versionó la tabla mensual de factores de reducción de retiro anticipado.
+- Se añadieron escenarios estándar -2 y -1 años en el Paso 5.
+- Se añadió el endpoint general `POST /api/simulacion/sebd`.
+- Se añadió el endpoint integrado `POST /api/simulacion/resultados/sebd`.
+- El Paso 6 muestra la modalidad detectada y los factores por cuotas y edad.
+- Se documentó el tratamiento de años calendario parciales dentro de los diez mejores años.
+- La suite automatizada se amplió con pruebas de las cuatro modalidades y una integración anticipada femenina.

@@ -21,7 +21,8 @@ app/
 │   ├── dinero.py
 │   └── normativa.py
 ├── modelos/
-│   └── simulacion.py
+│   ├── simulacion.py
+│   └── pension.py
 ├── motores/
 │   ├── elegibilidad.py
 │   ├── sebd.py
@@ -32,6 +33,7 @@ app/
 │   ├── linea_tiempo.py
 │   ├── proyeccion_cuotas.py
 │   ├── proyeccion_salarios.py
+│   ├── resultados.py
 │   └── retiro.py
 ├── static/
 │   ├── css/
@@ -41,7 +43,7 @@ app/
 └── main.py
 ```
 
-Los motores previsionales legales todavía están en preparación; los servicios actuales resuelven captura, normalización, proyección y escenarios preliminares.
+La modalidad normal del SEBD ya dispone de motor legal e integración con el asistente. Las demás modalidades y sistemas continúan en preparación.
 
 ## Núcleo común
 
@@ -51,7 +53,7 @@ Centraliza la conversión a `Decimal`, la validación de precisión y el redonde
 
 ### `app/core/normativa.py`
 
-Carga parámetros versionados desde `normativa/`. Actualmente se utiliza `parametros_generales.json` para edades de referencia y otros metadatos generales. Los parámetros específicos de SEBD, Mixto y SUCGS se incorporarán conforme se implementen sus motores.
+Carga parámetros versionados desde `normativa/`. `parametros_generales.json` mantiene edades de referencia y metadatos comunes, mientras `sebd.json` contiene la primera parametrización específica del SEBD normal. Mixto, SUCGS y las demás modalidades se incorporarán conforme se verifiquen e implementen.
 
 ## Modelos
 
@@ -65,6 +67,8 @@ Carga parámetros versionados desde `normativa/`. Actualmente se utiliza `parame
 - fechas y escenarios preliminares de retiro.
 
 Los campos monetarios y porcentuales editables relevantes validan como máximo dos decimales en la frontera del backend.
+
+`app/modelos/pension.py` define las entradas y salidas de los motores legales y de la capa de integración del Paso 6.
 
 ## Servicios
 
@@ -108,6 +112,8 @@ POST /api/simulacion/salario
 POST /api/simulacion/proyeccion-salario
 POST /api/simulacion/linea-tiempo
 POST /api/simulacion/retiro
+POST /api/simulacion/sebd/normal
+POST /api/simulacion/resultados/sebd-normal
 ```
 
 ## Interfaz del asistente
@@ -119,11 +125,12 @@ Los módulos principales del frontend son:
 - `simulacion.js`: estado compartido, navegación y formularios generales;
 - `historial_salarios.js`: historial anual;
 - `linea_tiempo.js`: presentación integrada del Paso 4;
-- `retiro.js`: Paso 5 y escenarios de retiro;
+- `retiro.js`: Paso 5, escenarios de retiro y selección del escenario que alimenta Resultados;
+- `resultados.js`: Paso 6, selección salarial, llamada al endpoint integrado y presentación del desglose SEBD;
 - `moneda.js`: entrada/formato monetario con separadores de miles y máximo dos decimales;
 - `navegacion_wizard.js`: barra de navegación rápida `sticky` para pasos extensos.
 
-Los parciales Jinja `historial_salarial.html` y `retiro.html` mantienen modularizadas las secciones de mayor complejidad.
+Los parciales Jinja `historial_salarial.html`, `retiro.html` y `resultados.html` mantienen modularizadas las secciones de mayor complejidad.
 
 ## Persistencia
 
@@ -139,3 +146,62 @@ python -m unittest discover -s tests -v
 ```
 
 además de pruebas manuales del flujo web. Los casos de validación reales deben anonimizarse y sus documentos originales no se versionan.
+
+## Capa legal del Paso 6
+
+El Paso 6 introduce una separación adicional:
+
+```text
+modelos/pension.py
+        ↓
+motores/elegibilidad.py
+        ↓
+motores/sebd.py
+        ↓
+API /api/simulacion/sebd/normal
+```
+
+Los parámetros legales se obtienen desde `normativa/sebd.json`; la interfaz no contiene porcentajes ni topes codificados directamente.
+
+## Integración del Paso 6
+
+La interfaz no construye directamente la entrada jurídica del motor. La capa de integración queda separada:
+
+```text
+Pasos 1–5 / sessionStorage
+        ↓
+partials/resultados.html + resultados.js
+        ↓
+POST /api/simulacion/resultados/sebd-normal
+        ↓
+servicios/resultados.py
+        ↓
+motores/sebd.py
+```
+
+`servicios/resultados.py` consolida el historial real, la línea temporal salarial y el escenario de retiro seleccionado. Cuando un retiro futuro corta un año proyectado, consume cronológicamente las cuotas disponibles y prorratea únicamente el salario asociado a las cuotas utilizadas.
+
+El motor legal sigue siendo independiente de esta capa: recibe una estructura `DatosCalculoSEBDNormal` ya coherente y no depende de HTML, `sessionStorage` ni del flujo visual.
+
+El Paso 5 incorpora una selección explícita del escenario que alimentará el Paso 6. Los escenarios pasados pueden mostrarse, pero no se usan automáticamente para reconstruir cuotas históricas a una fecha exacta cuando solo existe detalle anual.
+
+
+## Extensión Paso 6C
+
+La arquitectura SEBD queda dividida en dos niveles compatibles:
+
+```text
+sebd.py
+└─ motor Normal validado y compatibilidad de regresión
+
+sebd_modalidades.py
+├─ clasificador aplicado al cálculo
+├─ Anticipada
+├─ Proporcional
+└─ Proporcional Anticipada
+
+resultados_sebd.py
+└─ integra el escenario del asistente con el motor general
+```
+
+Los endpoints previos de SEBD Normal se conservan para regresión, mientras se añaden endpoints generales que permiten evolucionar el Paso 6 sin romper las pruebas existentes.

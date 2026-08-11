@@ -211,3 +211,49 @@ Los pasos largos del asistente dispondrán de una barra de navegación rápida v
 
 La barra delegará sus acciones en los formularios y botones existentes. No contendrá fórmulas ni validaciones previsionales paralelas, evitando duplicar lógica y manteniendo accesibles las acciones Anterior/Continuar/Analizar.
 
+## ADR-014 — Clasificar explícitamente cuotas excedentes por edad de referencia
+
+**Decisión:** el motor SEBD no inferirá silenciosamente, para retiros posteriores a la edad de referencia, qué cuotas excedentes corresponden al incremento de 1.25 % y cuáles al incremento de 2 %.
+
+**Motivo:** la ley asigna porcentajes diferentes según el momento en que fueron aportadas. Cuando el historial anual no ofrece granularidad suficiente, el dato debe ser proporcionado o derivado por una capa con mejor detalle antes de ejecutar el cálculo definitivo.
+
+---
+
+## ADR-020 — Selección explícita del escenario que alimenta el Paso 6
+
+**Estado:** Aceptada
+
+El Paso 5 no enviará implícitamente el primer escenario disponible al cálculo de pensión. La persona debe disponer de una selección visible del escenario futuro que se utilizará en Resultados.
+
+Los escenarios ya transcurridos permanecen visibles para comparación, pero no se seleccionan automáticamente mientras el proyecto solo disponga de historial anual. Reconstruir cuotas exactas en una fecha pasada requiere mayor granularidad.
+
+---
+
+## ADR-021 — Capa de integración entre el asistente y los motores legales
+
+**Estado:** Aceptada
+
+La transformación de historial real, salarios proyectados y cuotas estimadas en una entrada para el motor legal se realizará en Python mediante `app/servicios/resultados.py`.
+
+JavaScript enviará el estado validado y presentará la respuesta, pero no decidirá fórmulas legales ni repartirá silenciosamente cuotas excedentes.
+
+Cuando un año futuro solo se utiliza parcialmente hasta la fecha de retiro, el salario proyectado se prorrateará por las cuotas consumidas y se mostrará una advertencia de que se trata de una estimación.
+
+
+## ADR-022 — Clasificación automática de modalidad SEBD
+
+**Decisión:** el usuario selecciona una fecha/escenario de retiro y la aplicación determina automáticamente si corresponde Normal, Anticipada, Proporcional, Proporcional Anticipada, posible Indemnización por Vejez o un escenario no elegible.
+
+**Motivo:** evita que el usuario tenga que conocer de antemano la denominación jurídica correcta y reduce inconsistencias entre edad, cuotas y modalidad seleccionada manualmente.
+
+## ADR-023 — Años calendario parciales dentro de los mejores años
+
+**Decisión:** no anualizar un año parcial. Se conserva su total cotizado y puede competir entre los mejores años por su total anual. Cuando se seleccionan diez años, la suma se lleva a promedio mensual sobre 120 meses.
+
+**Motivo:** mantener el tratamiento del procedimiento reglamentario y evitar inventar salarios no cotizados.
+
+## ADR-024 — Factores anticipados versionados por mes
+
+**Decisión:** los factores de reducción de la banda anticipada se almacenan como parámetros normativos y no se interpolan en el motor.
+
+**Motivo:** un factor reglamentario debe reproducirse desde una tabla versionada, no deducirse por aproximación matemática.

@@ -210,3 +210,52 @@ El modelo deberá ampliarse para incorporar:
 - resultados por sistema previsional;
 - desglose de componentes de pensión;
 - persistencia voluntaria.
+
+## Modelos del motor SEBD
+
+`app/modelos/pension.py` incorpora:
+
+- `DatosCalculoSEBDNormal`;
+- `AnioSeleccionadoSEBD`;
+- `ResumenCalculoSEBDNormal`.
+
+El resultado conserva por separado elegibilidad, edad, cuotas, años utilizados para la base salarial, porcentajes adicionales, límite máximo y advertencias normativas.
+
+## Modelos de integración del Paso 6
+
+`app/modelos/pension.py` también incorpora:
+
+- `DatosResultadoSEBDNormal`;
+- `ResumenResultadoSEBDNormal`.
+
+`DatosResultadoSEBDNormal` recibe la fecha de nacimiento y sexo, el historial anual validado, la línea temporal salarial, el resumen de retiro, la fecha de retiro seleccionada y el nombre del escenario salarial.
+
+`ResumenResultadoSEBDNormal` conserva:
+
+- el escenario de retiro efectivamente utilizado;
+- el escenario salarial utilizado;
+- los años proyectados incorporados al cálculo;
+- advertencias propias de la integración;
+- el `ResumenCalculoSEBDNormal` producido por el motor legal.
+
+El estado temporal de `sessionStorage` incorpora además:
+
+- `escenario_retiro_seleccionado`;
+- `escenario_salarial_seleccionado`;
+- `resultado_sebd_normal`.
+
+Estos campos se invalidan cuando cambian datos de origen de los Pasos 1–5.
+
+
+## Modelos generales SEBD
+
+`app/modelos/pension.py` incorpora:
+
+- `DatosCalculoSEBD`;
+- `ResumenCalculoSEBD`;
+- `DatosResultadoSEBD`;
+- `ResumenResultadoSEBD`.
+
+El resumen general añade, entre otros, `modalidad`, `tipo_prestacion`, `factor_proporcional_cuotas`, `factor_reduccion_edad`, `meses_anticipacion_referencia` y `calculo_disponible`.
+
+`TipoEscenarioRetiro` incorpora también `ANTICIPADO` y el Paso 5 admite escenarios estándar `-2` y `-1` años respecto de la edad de referencia.

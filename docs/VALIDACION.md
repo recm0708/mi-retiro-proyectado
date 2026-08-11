@@ -23,6 +23,7 @@ Actualmente existen pruebas para:
 - línea temporal y años sin cotización;
 - cierre del año actual;
 - escenarios de retiro;
+- integración del Paso 6 con escenario de retiro y escenario salarial;
 - edad de referencia femenina y masculina;
 - advertencia de horizonte salarial insuficiente.
 
@@ -103,3 +104,52 @@ No versionar:
 - archivos exportados que permitan identificar al asegurado.
 
 `tests/casos_validacion/originales/` está excluido mediante `.gitignore`.
+
+## Regresión SEBD anonimizada
+
+Se añadió `tests/test_sebd.py` con datos sintéticos no identificables.
+
+El caso de regresión reproduce matemáticamente el resultado oficial de referencia:
+
+```text
+Cuotas totales:                 281
+Exceso sobre 240:                41
+Bloques completos de 12:          3
+Tasa adicional:                3.75 %
+Tasa total:                   63.75 %
+Suma de diez mejores años: B/.139,593.71
+Salario base mensual:        B/.1,163.28 (visible)
+Pensión mensual estimada:      B/.741.59
+```
+
+La prueba conserva precisión interna antes del redondeo monetario final. También se prueban el incremento posterior a la edad de referencia, el límite máximo ordinario y la advertencia de mínimo indexado pendiente.
+
+## Integración del Paso 6
+
+`tests/test_resultados.py` valida que la capa de integración:
+
+- reproduzca B/.741.59 en el escenario de edad de referencia usando la regresión salarial conocida;
+- conserve 41 cuotas excedentes anteriores a la referencia en el caso base;
+- para un escenario posterior, separe las cuotas nuevas posteriores a la referencia;
+- incorpore un año salarial proyectado y emita advertencia cuando se utiliza proyección.
+
+La suite completa de esta etapa contiene 24 pruebas automatizadas.
+
+
+## Paso 6C — clasificación de modalidades SEBD
+
+La suite automatizada incorpora pruebas para:
+
+- clasificación Normal;
+- Anticipada;
+- Proporcional;
+- Proporcional Anticipada;
+- identificación de Indemnización por Vejez;
+- escenario no elegible antes de la banda anticipada;
+- factor mensual `0.9927` a los 23 meses desde el límite inferior de la banda;
+- combinación de factor proporcional y factor de reducción;
+- integración del caso femenino con una fecha personalizada anticipada;
+- conservación de la regresión normal B/.741.59;
+- conservación del escenario +1 año B/.765.67 con año calendario parcial proyectado.
+
+La prueba del año parcial confirma que el año proyectado conserva sus cuotas y salario prorrateados y puede formar parte de los diez mejores años cuando su total anual así lo determina.

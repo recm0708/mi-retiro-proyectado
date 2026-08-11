@@ -123,15 +123,20 @@ Estos escenarios no determinan todavía elegibilidad legal.
 
 ## Paso 6 — Resultados
 
-Pendiente.
+**Primera capacidad implementada: SEBD normal.**
 
-Deberá:
+El Paso 5 permite seleccionar explícitamente el escenario futuro que alimentará Resultados. En el Paso 6:
 
-- determinar la prestación/sistema aplicable;
-- verificar elegibilidad;
-- calcular el monto según normativa versionada;
-- mostrar supuestos, desglose y advertencias;
-- comparar escenarios cuando corresponda.
+- se muestra sistema, fecha, edad y cuotas estimadas del escenario elegido;
+- si existen varios escenarios salariales del Paso 4, se selecciona cuál utilizar;
+- se verifica elegibilidad para la Pensión de Retiro por Vejez Normal del SEBD;
+- se seleccionan automáticamente los mejores años aplicables al salario base;
+- se muestra la tasa base, bloques completos de cuotas excedentes e incrementos;
+- se presentan monto antes del máximo, máximo aplicable y pensión mensual estimada;
+- los años salariales proyectados quedan identificados como tales;
+- las advertencias de integración y del motor normativo permanecen visibles.
+
+Los motores Mixto, SUCGS y las demás modalidades SEBD continúan pendientes. Un escenario pasado no se calcula automáticamente con cuotas actuales porque el historial anual no permite reconstruir con precisión el total existente en una fecha histórica exacta.
 
 ## Reglas de experiencia de usuario
 
@@ -143,3 +148,24 @@ Deberá:
 - la barra rápida reutiliza las acciones existentes y no duplica reglas;
 - las advertencias de horizonte deben resolverse antes de utilizar un escenario en el cálculo final;
 - una fecha de referencia no se presentará como derecho adquirido sin pasar por elegibilidad.
+
+## Paso 6 — primera capacidad implementada
+
+El backend puede calcular y explicar la modalidad normal del SEBD a partir de fecha de nacimiento, sexo, fecha de retiro, cuotas totales y registros salariales anuales.
+
+La interfaz del Paso 6 ya integra la modalidad normal del SEBD, pero la aplicación sigue presentándola explícitamente como una estimación parcial del sistema mientras faltan las demás modalidades y motores.
+
+## RF — Clasificación automática de la prestación SEBD
+
+El Paso 6 deberá identificar automáticamente la modalidad jurídica general que corresponde al escenario seleccionado, sin exigir que el usuario conozca previamente su nombre.
+
+Para SEBD se distinguen en esta fase:
+
+- Pensión de Retiro por Vejez Normal;
+- Anticipada;
+- Proporcional;
+- Proporcional Anticipada;
+- posible Indemnización por Vejez;
+- escenario todavía no elegible.
+
+El resultado deberá mostrar los factores que expliquen la diferencia entre modalidades: cuotas/240 y/o reducción por edad.

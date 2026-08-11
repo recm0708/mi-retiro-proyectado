@@ -62,12 +62,13 @@ Pendiente:
 
 ## Fase 5 — Motores previsionales
 
-**Estado:** iniciada en capa normativa general
+**Estado:** en desarrollo — SEBD normal implementado en backend
 
 - `parametros_generales.json`;
 - cargador normativo;
 - trazabilidad de edades generales;
-- pendiente SEBD;
+- SEBD normal: fórmula base, elegibilidad y tope máximo implementados;
+- pendiente completar mínimo indexado y modalidades SEBD proporcional/anticipada;
 - pendiente Subsistema Mixto;
 - pendiente SUCGS;
 - pendiente transiciones;
@@ -75,14 +76,18 @@ Pendiente:
 
 ## Fase 6 — Resultados y comparación
 
-**Estado:** pendiente
+**Estado:** en desarrollo; SEBD normal integrado en backend e interfaz
 
-- Paso 6;
-- elegibilidad;
-- resultados por sistema;
-- comparador;
-- gráficos;
-- desglose de supuestos y advertencias.
+- Paso 6 visual para SEBD normal: implementado;
+- selección explícita del escenario de retiro: implementada;
+- selección de escenario salarial: implementada;
+- elegibilidad SEBD normal y desglose: implementados;
+- integración de salarios proyectados hasta la fecha de retiro: implementada con advertencias;
+- SEBD proporcional y retiro anticipado: pendiente;
+- Subsistema Mixto: pendiente;
+- SUCGS: pendiente;
+- comparador global entre modalidades/escenarios: pendiente;
+- gráficos de resultados: pendiente.
 
 ## Fase 7 — Persistencia e informes
 
@@ -93,3 +98,18 @@ Pendiente:
 - importación de datos cuando sea viable;
 - informes PDF;
 - accesibilidad y despliegue.
+
+## Actualización Paso 6C
+
+**SEBD general:** implementado en validación.
+
+- clasificación automática de modalidad: implementada;
+- Normal: implementada y regresionada;
+- Anticipada: implementada;
+- Proporcional: implementada;
+- Proporcional Anticipada: implementada;
+- factores anticipados mensuales: versionados;
+- Indemnización por Vejez: clasificación implementada, monto pendiente;
+- regímenes especiales: pendientes;
+- Mixto: pendiente;
+- SUCGS: pendiente.

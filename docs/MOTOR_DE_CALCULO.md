@@ -4,7 +4,7 @@
 
 La lógica de cálculo permanece separada de HTML y JavaScript. La interfaz captura y presenta; Python valida y calcula.
 
-Los motores legales definitivos de SEBD, Subsistema Mixto y SUCGS todavía no forman parte de esta etapa.
+La primera modalidad legal implementada es la Pensión de Retiro por Vejez Normal del SEBD. Las demás modalidades SEBD, el Subsistema Mixto y SUCGS continúan en desarrollo.
 
 ## Precisión monetaria y redondeo
 
@@ -195,3 +195,73 @@ Faltan los motores legales completos de:
 - SUCGS.
 
 También queda pendiente incorporar detalle mensual/importación cuando sea necesario para reglas sensibles al mes exacto.
+
+## SEBD — Pensión de Retiro por Vejez Normal
+
+Archivos principales:
+
+```text
+app/motores/elegibilidad.py
+app/motores/sebd.py
+app/modelos/pension.py
+normativa/sebd.json
+```
+
+La primera modalidad legal implementada utiliza:
+
+- edad de referencia por sexo;
+- 240 cuotas de referencia;
+- promedio mensual de los diez mejores años de cotizaciones;
+- tasa básica de reemplazo del 60 %;
+- 1.25 puntos porcentuales por cada bloque completo de 12 cuotas en exceso de 240 aportadas antes de la edad de referencia;
+- 2 puntos porcentuales por cada bloque completo de 12 cuotas en exceso de 240 aportadas después de la edad de referencia;
+- límites máximos ordinario y ampliados cuando se cumplen sus condiciones.
+
+Para retiros posteriores a la edad de referencia, las cuotas excedentes antes y después de esa fecha deben quedar clasificadas explícitamente. El motor no asigna silenciosamente cuotas cuando el historial disponible no permite determinar su momento.
+
+El artículo 192 establece un monto mínimo sujeto a ajuste anual. Hasta versionar el monto indexado aplicable a cada fecha, el motor no eleva automáticamente resultados inferiores al mínimo base y devuelve una advertencia.
+
+## Integración del SEBD normal con los Pasos 1–5
+
+Archivo:
+
+```text
+app/servicios/resultados.py
+```
+
+La capa de integración realiza estas tareas antes de invocar `calcular_sebd_normal`:
+
+1. localiza el escenario de retiro seleccionado;
+2. localiza el escenario salarial elegido;
+3. combina el historial real con los salarios proyectados necesarios hasta la fecha de retiro;
+4. consume las cuotas proyectadas cronológicamente;
+5. si el retiro corta un año futuro, prorratea el salario de ese año según las cuotas utilizadas;
+6. para una referencia futura, utiliza el total estimado en la fecha de referencia como frontera para separar exceso anterior y posterior;
+7. rechaza inferencias de esa distribución cuando la edad de referencia ya transcurrió y el historial anual no ofrece detalle mensual;
+8. entrega al motor legal una estructura independiente de la interfaz.
+
+El endpoint integrado es:
+
+```text
+POST /api/simulacion/resultados/sebd-normal
+```
+
+La respuesta mantiene separadas las advertencias de integración de las advertencias normativas producidas por el motor.
+
+
+## Paso 6C — clasificador general SEBD
+
+Se incorpora `app/motores/sebd_modalidades.py`, que no reemplaza la regresión del motor normal: la reutiliza cuando la clasificación es `NORMAL` y añade las fórmulas de `ANTICIPADA`, `PROPORCIONAL` y `PROPORCIONAL_ANTICIPADA`.
+
+La capa `app/servicios/resultados_sebd.py` reutiliza la consolidación cronológica del Paso 6B y entrega al motor la fecha, cuotas y salarios correspondientes al escenario elegido.
+
+El orden de operaciones se conserva explícitamente:
+
+1. determinar salario base;
+2. aplicar tasa base e incrementos que correspondan;
+3. aplicar límite máximo;
+4. aplicar factor proporcional por cuotas, si corresponde;
+5. aplicar factor de reducción por edad, si corresponde;
+6. materializar el importe monetario con la política de precisión del proyecto.
+
+La modalidad normal mantiene la posibilidad de máximos ampliados bajo las condiciones del artículo 193. Las modalidades distintas de Normal usan el límite ordinario en esta implementación.

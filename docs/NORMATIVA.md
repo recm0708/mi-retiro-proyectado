@@ -13,7 +13,7 @@ app/core/normativa.py
 
 El archivo JSON mantiene parámetros generales versionados y el módulo Python concentra su lectura.
 
-Los parámetros específicos de los motores SEBD, Subsistema Mixto y SUCGS todavía están pendientes y deberán incorporarse con trazabilidad normativa antes de considerarse definitivos.
+Los parámetros de la primera modalidad SEBD normal ya se encuentran versionados en `normativa/sebd.json`. Los parámetros del Subsistema Mixto, SUCGS y las demás modalidades SEBD continúan pendientes y deberán incorporarse con trazabilidad normativa antes de considerarse definitivos.
 
 ## Fuente base actual
 
@@ -74,3 +74,50 @@ JSON estándar no admite comentarios; la explicación y trazabilidad se mantendr
 El criterio técnico general del proyecto es `Decimal` + `ROUND_HALF_UP` a centavos al materializar un importe.
 
 Si una norma, reglamento, tabla actuarial o procedimiento oficial aplicable establece una regla distinta para un cálculo específico, esa regla tendrá prioridad dentro de ese motor y deberá documentarse.
+
+## Parámetros SEBD versionados
+
+Se incorporó:
+
+```text
+normativa/sebd.json
+```
+
+La primera versión registra reglas verificadas del Texto Único publicado en la Gaceta Oficial 30284-B de 22 de mayo de 2025:
+
+- artículos 178 y 179: condiciones generales y edad de referencia;
+- artículo 180: promedio mensual de los diez mejores años;
+- artículo 181: 240 cuotas de referencia, tasa básica del 60 %, incremento de 1.25 % por cada doce cuotas completas excedentes anteriores a la edad de referencia e incremento de 2 % por cada doce cuotas completas posteriores;
+- artículo 192: monto mínimo base de B/.265.00 sujeto a ajuste anual;
+- artículo 193: máximo ordinario de B/.1,500.00 y niveles ampliados de B/.2,000.00 y B/.2,500.00 cuando se cumplen las condiciones de cuotas y promedios salariales indicadas por la ley.
+
+El monto mínimo indexado no se considera todavía un parámetro definitivo porque debe relacionarse con la fecha de cálculo. Esta limitación queda visible en la salida del motor.
+
+## Modalidades SEBD incorporadas en Paso 6C
+
+El artículo 181 del Texto Único vigente distingue cuatro modalidades generales de Pensión de Retiro por Vejez para el SEBD y el componente de Beneficio Definido del Subsistema Mixto:
+
+- **Normal:** edad de referencia o superior y 240 cuotas o más.
+- **Anticipada:** hasta dos años antes de la edad de referencia y 240 cuotas o más.
+- **Proporcional:** edad de referencia o superior, con 180 a 239 cuotas.
+- **Proporcional Anticipada:** hasta dos años antes de la edad de referencia, con 180 a 239 cuotas.
+
+La modalidad anticipada aplica un factor de reducción después de calcular la base, incrementos y límites que correspondan. La modalidad proporcional multiplica el resultado limitado por `cuotas / 240`. La proporcional anticipada aplica ambos factores en ese orden.
+
+Para la banda anticipada, `normativa/sebd.json` versiona la tabla mensual de factores del Reglamento para el Cálculo de Prestaciones Económicas (Resolución 39,302-2007-J.D.) y conserva como anclas los valores expresamente recogidos por la Ley para uno y dos años de anticipación: `0.9128` y `0.8342`.
+
+La CSS mantiene publicado el Reglamento para el Cálculo de Prestaciones Económicas y sus modificaciones dentro de su sección de normativa vigente de Prestaciones Económicas.
+
+## Años calendario parciales en el salario base
+
+El procedimiento reglamentario del cálculo de prestaciones trabaja con los años calendario en los que el total de ingresos cotizados resulta más alto. Cuando se seleccionan diez años para formar la base, la suma de esos diez años se lleva a promedio mensual dividiendo entre 120 meses.
+
+Por esta razón, un año calendario parcial puede entrar dentro de los diez mejores si su total cotizado supera al de otro año candidato. La aplicación conserva las cuotas visibles de ese año y no anualiza artificialmente el salario cotizado.
+
+Si no existieran diez años suficientes, el tratamiento especial deberá seguir la regla reglamentaria aplicable a meses efectivamente acreditados; esa excepción se implementará únicamente cuando aparezca un caso real que la requiera.
+
+## Indemnización por vejez
+
+El artículo 186 establece, antes del 1 de marzo de 2036, una indemnización por vejez para personas del SEBD o del componente de Beneficio Definido del Subsistema Mixto que alcancen la edad de referencia sin acreditar 180 cuotas. La aplicación ya **clasifica** este escenario, pero todavía no calcula el importe de la indemnización.
+
+A partir del 1 de marzo de 2036, la Ley dispone que la CSS deje de conceder esta indemnización y proceda conforme al SUCGS. Esta transición se mantendrá explícita en el clasificador.
