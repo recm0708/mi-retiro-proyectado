@@ -1,0 +1,13 @@
+{
+  "version": "texto_unico_ley_51_reformas_hasta_ley_462_2025",
+  "fuente": "Caja de Seguro Social de Panama",
+  "gaceta_oficial": "30284-B",
+  "fecha_gaceta": "2025-05-22",
+  "fuente_url": "https://www.css.gob.pa/normativas-ley-organica/",
+  "fuente_pension_vejez_url": "https://www.css.gob.pa/pension-por-vejez/",
+  "edades_referencia": {
+    "FEMENINO": 57,
+    "MASCULINO": 62
+  },
+  "anticipacion_solicitud_meses": 3
+}

@@ -300,12 +300,11 @@ function crearFilaHistorial(
   const inputSalario =
     document.createElement("input");
 
-  inputSalario.type = "number";
-  inputSalario.min = "0";
-  inputSalario.step = "0.01";
+  inputSalario.type = "text";
+  inputSalario.inputMode = "decimal";
 
   inputSalario.className =
-    "form-control history-input-salario";
+    "form-control history-input-salario money-input";
 
   inputSalario.setAttribute(
     "aria-label",
@@ -385,6 +384,11 @@ function crearFilaHistorial(
       inputCuotas.readOnly = true;
     }
   }
+
+
+  configurarCampoMonetario(
+    inputSalario,
+  );
 
 
   // ----------------------------------------------------------
@@ -654,7 +658,7 @@ function leerRegistrosHistorial() {
       cuotasTexto,
     );
 
-    const salario = Number(
+    const salario = obtenerValorMonetario(
       salarioTexto,
     );
 
@@ -673,7 +677,7 @@ function leerRegistrosHistorial() {
       || salario < 0
     ) {
       throw new Error(
-        `El salario del año ${anio} no es válido.`,
+        `El salario del año ${anio} no es válido. Usa como máximo dos decimales.`,
       );
     }
 

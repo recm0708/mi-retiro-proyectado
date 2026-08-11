@@ -722,6 +722,11 @@ body {
   white-space: nowrap;
 }
 
+.timeline-status-none {
+  background-color: #f3f4f6;
+  color: #5d6675;
+}
+
 .timeline-status-historic {
   background-color: #e8f7ee;
   color: #176b3a;
@@ -754,5 +759,233 @@ body {
 
   .timeline-current-card {
     min-height: auto;
+  }
+}
+
+
+
+/* ============================================================
+   Paso 5 — Retiro
+   ============================================================ */
+
+.retirement-context-card {
+  padding: 1.15rem 1.25rem;
+
+  background-color: #fbfcfe;
+
+  border: 1px solid var(--app-border);
+  border-radius: 0.9rem;
+}
+
+.retirement-context-label {
+  display: block;
+  margin-bottom: 0.3rem;
+
+  color: var(--app-muted);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.retirement-context-value {
+  display: block;
+
+  color: var(--app-text);
+  font-size: 1.05rem;
+}
+
+.retirement-option-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.retirement-option {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+
+  min-height: 110px;
+  padding: 1rem;
+
+  background-color: #ffffff;
+
+  border: 1px solid var(--app-border);
+  border-radius: 0.85rem;
+
+  cursor: pointer;
+}
+
+.retirement-option:hover {
+  border-color: #b8c9e6;
+}
+
+.retirement-option-fixed {
+  background-color: #f8faff;
+  cursor: default;
+}
+
+.retirement-custom-card {
+  padding: 1.15rem 1.25rem;
+
+  background-color: #fbfcfe;
+
+  border: 1px solid var(--app-border);
+  border-radius: 0.9rem;
+}
+
+.retirement-summary-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+
+  height: 100%;
+  min-height: 105px;
+  padding: 1rem 1.1rem;
+
+  background-color: #ffffff;
+
+  border: 1px solid #dfe8f7;
+  border-radius: 0.85rem;
+}
+
+.retirement-summary-card span {
+  color: var(--app-muted);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.retirement-summary-card strong {
+  color: var(--app-primary);
+  font-size: 1.1rem;
+}
+
+.retirement-table-wrapper {
+  border: 1px solid var(--app-border);
+  border-radius: 0.9rem;
+}
+
+.retirement-table {
+  margin-bottom: 0;
+}
+
+.retirement-table th,
+.retirement-table td {
+  padding: 0.85rem 1rem;
+  white-space: nowrap;
+}
+
+.retirement-table thead {
+  background-color: #f8faff;
+}
+
+.retirement-status {
+  display: inline-flex;
+  padding: 0.35rem 0.65rem;
+
+  border-radius: 999px;
+
+  font-size: 0.78rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.retirement-status-future {
+  background-color: #eaf2ff;
+  color: #0b5ed7;
+}
+
+.retirement-status-past {
+  background-color: #fff4d6;
+  color: #8a6100;
+}
+
+@media (max-width: 1200px) {
+  .retirement-option-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .retirement-option-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .retirement-option {
+    min-height: auto;
+  }
+}
+
+
+/* ==========================================================
+   Navegación rápida persistente
+   ========================================================== */
+
+.wizard-sticky-nav {
+  position: sticky;
+  top: 0.75rem;
+  z-index: 1020;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+
+  padding: 0.75rem 1rem;
+
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(10px);
+
+  border: 1px solid var(--app-border);
+  border-radius: 0.9rem;
+
+  box-shadow: 0 0.4rem 1.2rem rgba(25, 44, 78, 0.08);
+}
+
+.wizard-sticky-nav-main {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+
+  min-width: 0;
+}
+
+#wizard-sticky-status {
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+/* Los campos monetarios mantienen alineación tabular al mostrar miles. */
+.money-input {
+  font-variant-numeric: tabular-nums;
+}
+
+
+/* Advertencias del Paso 5. */
+#retiro-advertencias p:last-child {
+  margin-bottom: 0 !important;
+}
+
+
+@media (max-width: 768px) {
+  .wizard-sticky-nav {
+    top: 0.4rem;
+
+    align-items: stretch;
+  }
+
+  .wizard-sticky-nav-main {
+    flex: 1;
+  }
+
+  #wizard-sticky-status {
+    display: none;
+  }
+
+  .wizard-sticky-nav .btn {
+    white-space: nowrap;
   }
 }

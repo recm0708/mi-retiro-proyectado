@@ -5,9 +5,29 @@ validaciones básicas de los datos intercambiados entre la interfaz,
 los endpoints de FastAPI y los servicios de cálculo.
 """
 
+from datetime import date
 from typing import Literal
+from pydantic import BaseModel, Field, field_validator
 
-from pydantic import BaseModel, Field
+from app.core.dinero import (
+    tiene_maximo_dos_decimales,
+)
+
+
+def _validar_precision_dos_decimales(
+    valor: float | None,
+) -> float | None:
+    """Valida que un dato editable no exceda dos decimales."""
+
+    if valor is None:
+        return valor
+
+    if not tiene_maximo_dos_decimales(valor):
+        raise ValueError(
+            "El valor admite como máximo dos decimales."
+        )
+
+    return valor
 
 
 # ============================================================
@@ -105,6 +125,12 @@ class RegistroHistorialSalarial(BaseModel):
         ),
     )
 
+    _validar_salario_cotizado = field_validator(
+        "salario_cotizado",
+    )(
+        _validar_precision_dos_decimales
+    )
+
 
 class RegistroHistorialNormalizado(BaseModel):
     """Registro histórico validado por el servicio."""
@@ -188,6 +214,12 @@ class DatosSalario(BaseModel):
         ),
     )
 
+    _validar_monto = field_validator(
+        "monto",
+    )(
+        _validar_precision_dos_decimales
+    )
+
     periodicidad: PeriodicidadSalario
 
 
@@ -263,6 +295,39 @@ class DatosProyeccionSalario(BaseModel):
         ],
     )
 
+    _validar_salario_mensual_actual = field_validator(
+        "salario_mensual_actual",
+    )(
+        _validar_precision_dos_decimales
+    )
+
+    _validar_porcentaje_anual = field_validator(
+        "porcentaje_anual",
+    )(
+        _validar_precision_dos_decimales
+    )
+
+    _validar_salario_mensual_futuro = field_validator(
+        "salario_mensual_futuro",
+    )(
+        _validar_precision_dos_decimales
+    )
+
+    @field_validator("escenarios_porcentajes")
+    @classmethod
+    def validar_precision_escenarios(
+        cls,
+        valores: list[float],
+    ) -> list[float]:
+        """Limita cada porcentaje editable a dos decimales."""
+
+        for valor in valores:
+            _validar_precision_dos_decimales(
+                valor
+            )
+
+        return valores
+
 
 class ProyeccionSalarioAnual(BaseModel):
     """Salario proyectado correspondiente a un año."""
@@ -300,6 +365,7 @@ class ResumenProyeccionSalario(BaseModel):
 # ============================================================
 
 EstadoLineaTiempo = Literal[
+    "SIN_COTIZACION",
     "HISTORICO",
     "HISTORICO_PARCIAL",
     "MIXTO",
@@ -358,3 +424,140 @@ class ResumenLineaTiempo(BaseModel):
     escenarios: list[
         EscenarioLineaTiempo
     ]
+
+# ============================================================
+# Retiro
+# ============================================================
+
+TipoEscenarioRetiro = Literal[
+    "REFERENCIA",
+    "ADICIONAL",
+    "PERSONALIZADO",
+]
+
+
+class DatosRetiro(BaseModel):
+    """Datos utilizados para construir escenarios de retiro.
+
+    Las fechas se calculan con precisión de día. Las cuotas futuras
+    de esta primera versión siguen siendo estimaciones basadas en
+    una densidad anual, porque todavía no disponemos necesariamente
+    del detalle mensual de cotizaciones.
+    """
+
+    fecha_nacimiento: date
+
+    sexo: str = Field(
+        min_length=1,
+    )
+
+    fecha_corte: date | None = Field(
+        default=None,
+        description=(
+            "Fecha en la que se evalúa la situación previsional. "
+            "Si se omite, se utiliza la fecha actual del servidor."
+        ),
+    )
+
+    # Las cuotas reales pueden provenir de un reporte cuya fecha
+    # sea anterior a la fecha en que se realiza la simulación.
+    fecha_corte_cuotas: date | None = Field(
+        default=None,
+        description=(
+            "Fecha hasta la cual se consideran acreditadas "
+            "las cuotas reales. Si se omite, se utiliza "
+            "la fecha de corte de la evaluación."
+        ),
+    )
+
+    cuotas_reales: int = Field(
+        ge=0,
+    )
+
+    cuotas_anio_actual: int = Field(
+        ge=0,
+        le=12,
+        description=(
+            "Cuotas del año de evaluación ya incluidas "
+            "dentro del total real."
+        ),
+    )
+
+    cuotas_esperadas_cierre_anio: int = Field(
+        ge=0,
+        le=12,
+        description=(
+            "Total de cuotas esperado al cierre del año "
+            "de evaluación."
+        ),
+    )
+
+    continua_cotizando: bool
+
+    cuotas_esperadas_por_anio: int = Field(
+        ge=0,
+        le=12,
+    )
+
+    anio_fin_proyeccion_salarial: int | None = Field(
+        default=None,
+        ge=1900,
+        le=2200,
+        description=(
+            "Último año cubierto por la proyección salarial "
+            "del Paso 4."
+        ),
+    )
+
+    anios_adicionales: list[int] = Field(
+        default_factory=lambda: [
+            0,
+            1,
+            2,
+            3,
+            5,
+        ],
+    )
+
+    fecha_retiro_personalizada: date | None = None
+
+
+class EscenarioRetiro(BaseModel):
+    """Posible momento de retiro utilizado para comparación."""
+
+    tipo: TipoEscenarioRetiro
+    nombre: str
+
+    fecha_retiro: date
+    edad_retiro_anios: int
+
+    meses_desde_corte_cuotas: int
+
+    cuotas_estimadas_adicionales: int
+    cuotas_estimadas_totales: int
+
+    fecha_ya_transcurrida: bool
+
+
+class ResumenRetiro(BaseModel):
+    """Resultado preliminar del análisis de fechas de retiro."""
+
+    fecha_corte: date
+    fecha_corte_cuotas: date
+
+    edad_actual_anios: int
+    edad_referencia: int
+    fecha_referencia: date
+
+    alcanzo_edad_referencia: bool
+    dias_hasta_referencia: int
+
+    escenarios: list[
+        EscenarioRetiro
+    ]
+
+    anio_fin_proyeccion_salarial: int | None
+    proyeccion_salarial_cubre_escenarios: bool
+    advertencias: list[str]
+
+    metodo_estimacion_cuotas: str

@@ -592,6 +592,7 @@ function agregarCeldaEstado(fila, estado) {
   const badge = document.createElement("span");
 
   const configuracion = {
+    SIN_COTIZACION: ["Sin cotización", "timeline-status-none"],
     HISTORICO: ["Histórico", "timeline-status-historic"],
     HISTORICO_PARCIAL: ["Histórico parcial", "timeline-status-partial"],
     MIXTO: ["Real + proyectado", "timeline-status-mixed"],

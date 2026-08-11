@@ -57,6 +57,9 @@ function crearSimulacionVacia() {
     proyeccion: {},
     resumen_proyeccion: null,
     resumen_linea_tiempo: null,
+
+    retiro: {},
+    resumen_retiro: null,
   };
 }
 
@@ -106,6 +109,9 @@ function obtenerSimulacion() {
 
       proyeccion:
         simulacion.proyeccion || {},
+
+      retiro:
+        simulacion.retiro || {},
     };
 
   } catch {
@@ -126,6 +132,13 @@ function guardarSimulacion(simulacion) {
     CLAVE_SIMULACION,
     JSON.stringify(simulacion),
   );
+
+  if (
+    typeof actualizarNavegacionFlotante
+    === "function"
+  ) {
+    actualizarNavegacionFlotante();
+  }
 }
 
 
@@ -238,6 +251,10 @@ function guardarDatosPersonales() {
         "sistema",
       ).value,
   };
+
+  // Las fechas de retiro dependen de nacimiento y sexo.
+  simulacion.retiro = {};
+  simulacion.resumen_retiro = null;
 
   guardarSimulacion(simulacion);
 
@@ -426,6 +443,8 @@ function invalidarResumenCuotas() {
   // completamente confiables hasta volver a analizar las cuotas.
   simulacion.resumen_proyeccion = null;
   simulacion.resumen_linea_tiempo = null;
+  simulacion.retiro = {};
+  simulacion.resumen_retiro = null;
 
   guardarSimulacion(simulacion);
 
@@ -643,9 +662,13 @@ function restaurarDatosSalario(simulacion) {
   }
 
   if (salario.monto !== undefined) {
-    document.getElementById(
+    const campoMonto = document.getElementById(
       "monto_salario",
-    ).value = salario.monto;
+    );
+
+    campoMonto.value = formatearNumeroMonetario(
+      salario.monto,
+    );
   }
 
   if (salario.periodicidad) {
@@ -673,6 +696,8 @@ function invalidarResumenSalario() {
   simulacion.proyeccion = {};
   simulacion.resumen_proyeccion = null;
   simulacion.resumen_linea_tiempo = null;
+  simulacion.resumen_retiro = null;
+  simulacion.resumen_retiro = null;
 
   guardarSimulacion(simulacion);
 
@@ -705,7 +730,7 @@ async function analizarSalario(evento) {
   }
 
   const datos = {
-    monto: Number(
+    monto: obtenerValorMonetario(
       document.getElementById(
         "monto_salario",
       ).value,
@@ -716,6 +741,16 @@ async function analizarSalario(evento) {
         "periodicidad_salario",
       ).value,
   };
+
+  if (
+    !Number.isFinite(datos.monto)
+    || datos.monto <= 0
+  ) {
+    mostrarErrorSalario(
+      "El salario debe ser un monto mayor que cero y admite como máximo dos decimales.",
+    );
+    return;
+  }
 
   ocultarErrorSalario();
 
@@ -756,6 +791,7 @@ async function analizarSalario(evento) {
     simulacion.proyeccion = {};
     simulacion.resumen_proyeccion = null;
     simulacion.resumen_linea_tiempo = null;
+    simulacion.resumen_retiro = null;
 
     guardarSimulacion(simulacion);
 
@@ -946,8 +982,9 @@ function restaurarDatosProyeccion(simulacion) {
   ) {
     document.getElementById(
       "salario_mensual_futuro",
-    ).value =
-      proyeccion.salario_mensual_futuro;
+    ).value = formatearNumeroMonetario(
+      proyeccion.salario_mensual_futuro,
+    );
   }
 
   if (
@@ -1130,6 +1167,18 @@ function convertirEscenariosPorcentajes(texto) {
     );
   }
 
+  const formatoInvalido = partes.some(
+    (valor) => !/^-?\d+(?:\.\d{1,2})?$/.test(
+      valor,
+    ),
+  );
+
+  if (formatoInvalido) {
+    throw new Error(
+      "Cada porcentaje admite como máximo dos decimales.",
+    );
+  }
+
   const porcentajes = partes.map(
     (valor) => Number(valor),
   );
@@ -1267,7 +1316,7 @@ async function analizarProyeccion(evento) {
 
     salario_mensual_futuro:
       modalidad === "FUTURO_CONOCIDO"
-        ? Number(
+        ? obtenerValorMonetario(
             document.getElementById(
               "salario_mensual_futuro",
             ).value,
@@ -1330,6 +1379,7 @@ async function analizarProyeccion(evento) {
     // La línea temporal depende de esta proyección. Se elimina
     // cualquier resultado anterior antes de reconstruirla.
     simulacion.resumen_linea_tiempo = null;
+    simulacion.resumen_retiro = null;
 
     guardarSimulacion(
       simulacion,
@@ -1698,7 +1748,7 @@ function formatearPorcentaje(valor) {
     "es-PA",
     {
       minimumFractionDigits: 0,
-      maximumFractionDigits: 4,
+      maximumFractionDigits: 2,
     },
   )} %`;
 }
@@ -1753,6 +1803,13 @@ function obtenerMensajeError(
 document.addEventListener(
   "DOMContentLoaded",
   () => {
+    configurarCampoDecimal(
+      document.getElementById(
+        "porcentaje_anual",
+      ),
+      true,
+    );
+
     const simulacion =
       obtenerSimulacion();
 
@@ -1788,7 +1845,7 @@ document.addEventListener(
 
     mostrarPaso(
       pasoGuardado >= 1
-      && pasoGuardado <= 4
+      && pasoGuardado <= 5
         ? pasoGuardado
         : 1,
     );

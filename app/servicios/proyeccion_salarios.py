@@ -8,6 +8,12 @@ pensión. Su objetivo es producir la información salarial que
 posteriormente utilizarán los motores previsionales.
 """
 
+from decimal import Decimal
+
+from app.core.dinero import (
+    a_decimal,
+    redondear_moneda,
+)
 from app.modelos.simulacion import (
     DatosProyeccionSalario,
     DatosSalario,
@@ -27,49 +33,72 @@ def normalizar_salario(
 ) -> ResumenSalario:
     """Convierte un salario a todas las periodicidades soportadas.
 
-    Primero se obtiene un salario anual equivalente. A partir de
-    ese valor común se calculan las demás periodicidades para evitar
-    conversiones encadenadas y diferencias innecesarias de redondeo.
+    Las operaciones monetarias se realizan con ``Decimal`` y no se
+    redondean durante conversiones intermedias. Cada equivalencia se
+    redondea únicamente al materializar el resultado visible.
     """
 
-    monto = datos.monto
+    monto = a_decimal(
+        datos.monto
+    )
 
-    # Normaliza el dato original a un equivalente anual.
     if datos.periodicidad == "SEMANAL":
-        salario_anual = monto * 52
+        salario_anual = (
+            monto
+            * Decimal("52")
+        )
 
     elif datos.periodicidad == "QUINCENAL":
-        salario_anual = monto * 24
+        salario_anual = (
+            monto
+            * Decimal("24")
+        )
 
     elif datos.periodicidad == "MENSUAL":
-        salario_anual = monto * 12
+        salario_anual = (
+            monto
+            * Decimal("12")
+        )
 
     elif datos.periodicidad == "ANUAL":
         salario_anual = monto
 
     else:
-        # Esta validación normalmente será interceptada primero
-        # por Pydantic, pero se conserva como protección del servicio.
         raise ValueError(
             "La periodicidad salarial indicada no es válida."
         )
 
-    # Todas las demás equivalencias se derivan del valor anual.
-    salario_mensual = salario_anual / 12
-    salario_quincenal = salario_anual / 24
-    salario_semanal = salario_anual / 52
-
-    # Los valores mostrados y enviados a la interfaz se expresan
-    # con dos decimales monetarios.
-    return ResumenSalario(
-        monto_original=round(monto, 2),
-        periodicidad_original=datos.periodicidad,
-        salario_semanal=round(salario_semanal, 2),
-        salario_quincenal=round(salario_quincenal, 2),
-        salario_mensual=round(salario_mensual, 2),
-        salario_anual=round(salario_anual, 2),
+    salario_mensual = (
+        salario_anual
+        / Decimal("12")
+    )
+    salario_quincenal = (
+        salario_anual
+        / Decimal("24")
+    )
+    salario_semanal = (
+        salario_anual
+        / Decimal("52")
     )
 
+    return ResumenSalario(
+        monto_original=redondear_moneda(
+            monto
+        ),
+        periodicidad_original=datos.periodicidad,
+        salario_semanal=redondear_moneda(
+            salario_semanal
+        ),
+        salario_quincenal=redondear_moneda(
+            salario_quincenal
+        ),
+        salario_mensual=redondear_moneda(
+            salario_mensual
+        ),
+        salario_anual=redondear_moneda(
+            salario_anual
+        ),
+    )
 
 # ============================================================
 # Funciones auxiliares de proyección
@@ -90,53 +119,45 @@ def _validar_rango_anios(
 
 def _crear_registro_anual(
     anio: int,
-    salario_mensual: float,
-    salario_base: float,
+    salario_mensual: Decimal,
+    salario_base: Decimal,
 ) -> ProyeccionSalarioAnual:
-    """Construye un registro salarial anual normalizado.
+    """Construye un registro anual sin redondeo intermedio.
 
-    El salario mensual se redondea primero a centavos. El salario
-    anual se calcula a partir de ese valor visible para garantizar
-    que ambas cifras sean consistentes entre sí en la interfaz.
+    El salario mensual y el anual se redondean de forma independiente
+    desde el valor preciso del escenario. Por ello, una cifra mensual
+    visible multiplicada por doce puede diferir por un centavo del
+    resultado anual cuando existan fracciones de centavo internas.
     """
 
-    # Los salarios proyectados se expresan monetariamente
-    # con una precisión máxima de dos decimales.
-    salario_mensual_redondeado = round(
-        salario_mensual,
-        2,
+    salario_anual_preciso = (
+        salario_mensual
+        * Decimal("12")
     )
 
-    # El salario anual debe coincidir exactamente con el
-    # salario mensual mostrado multiplicado por doce meses.
-    salario_anual = (
-        salario_mensual_redondeado
-        * 12
-    )
-
-    # El crecimiento acumulado también utiliza el salario
-    # mensual ya redondeado que verá el usuario.
     crecimiento_desde_base = (
         (
-            salario_mensual_redondeado
+            salario_mensual
             / salario_base
         )
-        - 1
-    ) * 100
+        - Decimal("1")
+    ) * Decimal("100")
 
     return ProyeccionSalarioAnual(
         anio=anio,
-        salario_mensual=salario_mensual_redondeado,
-        salario_anual=round(
-            salario_anual,
-            2,
+        salario_mensual=redondear_moneda(
+            salario_mensual
+        ),
+        salario_anual=redondear_moneda(
+            salario_anual_preciso
         ),
         crecimiento_desde_base_pct=round(
-            crecimiento_desde_base,
+            float(
+                crecimiento_desde_base
+            ),
             4,
         ),
     )
-
 
 def _proyectar_por_porcentaje(
     salario_base: float,
@@ -144,39 +165,55 @@ def _proyectar_por_porcentaje(
     anio_fin: int,
     porcentaje_anual: float,
 ) -> list[ProyeccionSalarioAnual]:
-    """Genera una serie salarial utilizando crecimiento compuesto."""
+    """Genera una serie salarial mediante crecimiento compuesto.
 
-    registros: list[ProyeccionSalarioAnual] = []
+    La potencia se calcula con ``Decimal`` y se conserva toda la
+    precisión interna hasta crear cada registro monetario.
+    """
 
-    # Convierte el porcentaje a un factor multiplicativo.
-    factor_anual = 1 + (
-        porcentaje_anual / 100
+    registros: list[
+        ProyeccionSalarioAnual
+    ] = []
+
+    salario_base_decimal = a_decimal(
+        salario_base
+    )
+
+    factor_anual = (
+        Decimal("1")
+        + (
+            a_decimal(
+                porcentaje_anual
+            )
+            / Decimal("100")
+        )
     )
 
     for anio in range(
         anio_inicio,
         anio_fin + 1,
     ):
-        # El año inicial conserva el salario base.
         cantidad_anios = (
             anio - anio_inicio
         )
 
         salario_mensual = (
-            salario_base
-            * (factor_anual ** cantidad_anios)
+            salario_base_decimal
+            * (
+                factor_anual
+                ** cantidad_anios
+            )
         )
 
         registros.append(
             _crear_registro_anual(
                 anio=anio,
                 salario_mensual=salario_mensual,
-                salario_base=salario_base,
+                salario_base=salario_base_decimal,
             )
         )
 
     return registros
-
 
 def _calcular_tasa_hasta_salario_futuro(
     salario_actual: float,

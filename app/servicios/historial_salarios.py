@@ -8,6 +8,10 @@ Los datos históricos se mantienen separados de cualquier
 proyección salarial futura.
 """
 
+from app.core.dinero import (
+    a_decimal,
+    redondear_moneda,
+)
 from app.modelos.simulacion import (
     DatosHistorialSalarial,
     RegistroHistorialNormalizado,
@@ -114,9 +118,8 @@ def analizar_historial_salarial(
             RegistroHistorialNormalizado(
                 anio=registro.anio,
                 cuotas=registro.cuotas,
-                salario_cotizado=round(
-                    registro.salario_cotizado,
-                    2,
+                salario_cotizado=redondear_moneda(
+                    registro.salario_cotizado
                 ),
                 estado=_determinar_estado_registro(
                     registro.cuotas,
@@ -146,8 +149,13 @@ def analizar_historial_salarial(
     )
 
     total_salarios = sum(
-        registro.salario_cotizado
-        for registro in registros_normalizados
+        (
+            a_decimal(
+                registro.salario_cotizado
+            )
+            for registro in registros_normalizados
+        ),
+        start=a_decimal("0"),
     )
 
     # Un valor positivo significa que todavía faltan cuotas
@@ -189,9 +197,8 @@ def analizar_historial_salarial(
         cuotas_coinciden=cuotas_coinciden,
         historial_completo=historial_completo,
         anios_sin_registro=anios_sin_registro,
-        total_salarios_reportados=round(
-            total_salarios,
-            2,
+        total_salarios_reportados=redondear_moneda(
+            total_salarios
         ),
         ultimo_anio_con_cuotas=(
             ultimo_registro.anio

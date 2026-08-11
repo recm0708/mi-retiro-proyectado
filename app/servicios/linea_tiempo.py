@@ -8,6 +8,12 @@ La línea temporal se utiliza para presentación y planificación.
 Todavía no constituye un cálculo de pensión.
 """
 
+from decimal import Decimal
+
+from app.core.dinero import (
+    a_decimal,
+    redondear_moneda,
+)
 from app.modelos.simulacion import (
     DatosLineaTiempo,
     EscenarioLineaTiempo,
@@ -109,10 +115,11 @@ def construir_linea_tiempo(
     # Una cuota futura se aproxima a un mes adicional cotizado
     # al salario mensual actual. Esta aproximación se mantendrá
     # identificada como proyección en la interfaz.
-    salario_restante_actual = round(
-        resumen_salario.salario_mensual
-        * cuotas_restantes_actual,
-        2,
+    salario_restante_actual = redondear_moneda(
+        a_decimal(
+            resumen_salario.salario_mensual
+        )
+        * cuotas_restantes_actual
     )
 
 
@@ -168,11 +175,14 @@ def construir_linea_tiempo(
 
                 continue
 
-            estado = (
-                "HISTORICO"
-                if registro_historico.cuotas == 12
-                else "HISTORICO_PARCIAL"
-            )
+            if registro_historico.cuotas == 0:
+                estado = "SIN_COTIZACION"
+
+            elif registro_historico.cuotas == 12:
+                estado = "HISTORICO"
+
+            else:
+                estado = "HISTORICO_PARCIAL"
 
             registros_linea.append(
                 RegistroLineaTiempo(
@@ -220,14 +230,20 @@ def construir_linea_tiempo(
             else 0.0
         )
 
-        salario_cierre_actual = round(
-            salario_historico_actual
-            + salario_restante_actual,
-            2,
+        salario_cierre_actual = redondear_moneda(
+            a_decimal(
+                salario_historico_actual
+            )
+            + a_decimal(
+                salario_restante_actual
+            )
         )
 
         if cuotas_restantes_actual > 0:
             estado_actual = "MIXTO"
+
+        elif cuotas_historicas_actual == 0:
+            estado_actual = "SIN_COTIZACION"
 
         elif cuotas_historicas_actual >= 12:
             estado_actual = "HISTORICO"
@@ -293,10 +309,14 @@ def construir_linea_tiempo(
             # cantidad de cuotas esperada. Si se proyectan menos
             # de doce cuotas, no se utiliza el salario anual completo.
             salario_proyectado = (
-                round(
-                    registro_proyectado.salario_mensual
-                    * cuotas_proyectadas,
-                    2,
+                redondear_moneda(
+                    a_decimal(
+                        registro_proyectado.salario_anual
+                    )
+                    * Decimal(
+                        cuotas_proyectadas
+                    )
+                    / Decimal("12")
                 )
                 if cuotas_proyectadas > 0
                 else 0.0

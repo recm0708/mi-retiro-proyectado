@@ -23,6 +23,8 @@ from app.modelos.simulacion import (
     ResumenSalario,
     DatosLineaTiempo,
     ResumenLineaTiempo,
+    DatosRetiro,
+    ResumenRetiro,
 )
 from app.servicios.historial_salarios import (
     analizar_historial_salarial,
@@ -35,7 +37,9 @@ from app.servicios.proyeccion_salarios import (
     normalizar_salario,
     proyectar_salario,
 )
-
+from app.servicios.retiro import (
+    analizar_retiro,
+)
 
 # ============================================================
 # Rutas internas de la aplicación
@@ -254,6 +258,30 @@ async def calcular_linea_tiempo(
 
     try:
         return construir_linea_tiempo(
+            datos,
+        )
+
+    except ValueError as error:
+        raise HTTPException(
+            status_code=422,
+            detail=str(error),
+        ) from error
+
+# ============================================================
+# API — Retiro
+# ============================================================
+
+@app.post(
+    "/api/simulacion/retiro",
+    response_model=ResumenRetiro,
+)
+async def calcular_retiro(
+    datos: DatosRetiro,
+):
+    """Construye fechas y escenarios preliminares de retiro."""
+
+    try:
+        return analizar_retiro(
             datos,
         )
 

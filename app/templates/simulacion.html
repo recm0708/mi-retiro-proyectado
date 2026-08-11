@@ -102,6 +102,40 @@ Nueva simulación | Calculadora de Pensión CSS
     </div>
 
 
+    <!-- Navegación rápida persistente para pasos largos. -->
+    <div
+      id="wizard-sticky-nav"
+      class="wizard-sticky-nav mb-4"
+      aria-label="Navegación rápida del asistente"
+    >
+      <button
+        type="button"
+        id="wizard-sticky-back"
+        class="btn btn-outline-secondary"
+      >
+        ← Anterior
+      </button>
+
+      <div class="wizard-sticky-nav-main">
+        <small
+          id="wizard-sticky-status"
+          class="text-secondary"
+          aria-live="polite"
+        >
+          Paso 1 de 6
+        </small>
+
+        <button
+          type="button"
+          id="wizard-sticky-primary"
+          class="btn btn-primary"
+        >
+          Continuar
+        </button>
+      </div>
+    </div>
+
+
     <div class="row justify-content-center">
 
       <div class="col-12 col-xl-11">
@@ -755,11 +789,11 @@ Nueva simulación | Calculadora de Pensión CSS
                       </span>
 
                       <input
-                        type="number"
-                        min="0.01"
-                        step="0.01"
-                        class="form-control"
+                        type="text"
+                        inputmode="decimal"
+                        class="form-control money-input"
                         id="monto_salario"
+                        placeholder="0.00"
                         required
                       >
 
@@ -1178,12 +1212,12 @@ Nueva simulación | Calculadora de Pensión CSS
                       <div class="input-group input-group-lg">
 
                         <input
-                          type="number"
-                          min="-99.99"
-                          max="100"
-                          step="0.01"
-                          class="form-control"
+                          type="text"
+                          inputmode="decimal"
+                          class="form-control decimal-two-input"
                           id="porcentaje_anual"
+                          data-allow-negative="true"
+                          placeholder="0.00"
                         >
 
                         <span class="input-group-text">
@@ -1230,11 +1264,11 @@ Nueva simulación | Calculadora de Pensión CSS
                         </span>
 
                         <input
-                          type="number"
-                          min="0.01"
-                          step="0.01"
-                          class="form-control"
+                          type="text"
+                          inputmode="decimal"
+                          class="form-control money-input"
                           id="salario_mensual_futuro"
+                          placeholder="0.00"
                         >
 
                       </div>
@@ -1404,6 +1438,19 @@ Nueva simulación | Calculadora de Pensión CSS
 
                 </div>
 
+
+                <div class="d-flex justify-content-end mt-4">
+
+                  <button
+                    type="button"
+                    id="btn-continuar-paso-5"
+                    class="btn btn-primary px-4"
+                  >
+                    Continuar a retiro
+                  </button>
+
+                </div>
+
               </div>
 
             </div>
@@ -1411,6 +1458,12 @@ Nueva simulación | Calculadora de Pensión CSS
           </div>
 
         </div>
+
+
+        <!-- Paso 5 modularizado para evitar aumentar este archivo. -->
+
+        {% include "partials/retiro.html" %}
+
 
       </div>
 
@@ -1424,6 +1477,12 @@ Nueva simulación | Calculadora de Pensión CSS
 
 
 {% block scripts %}
+
+<!-- Utilidades de entrada y formato monetario. -->
+<script
+  src="{{ url_for('static', path='/js/moneda.js') }}"
+></script>
+
 
 <!-- JavaScript principal del asistente. -->
 
@@ -1443,6 +1502,19 @@ Nueva simulación | Calculadora de Pensión CSS
 
 <script
   src="{{ url_for('static', path='/js/linea_tiempo.js') }}"
+></script>
+
+
+<!-- Gestión específica de fechas y escenarios de retiro. -->
+
+<script
+  src="{{ url_for('static', path='/js/retiro.js') }}"
+></script>
+
+
+<!-- Navegación rápida persistente del asistente. -->
+<script
+  src="{{ url_for('static', path='/js/navegacion_wizard.js') }}"
 ></script>
 
 {% endblock %}

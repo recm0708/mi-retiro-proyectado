@@ -1,0 +1,511 @@
+<!-- ==================================================
+     PASO 5 — RETIRO
+     ================================================== -->
+
+<div
+  class="wizard-panel d-none"
+  data-panel="5"
+>
+
+  <div class="card border-0 shadow-sm simulation-card">
+
+    <div class="card-body p-4 p-lg-5">
+
+      <!-- Encabezado del Paso 5. -->
+
+      <div class="mb-4">
+
+        <span class="text-primary fw-semibold">
+          Paso 5 de 6
+        </span>
+
+        <h2 class="h4 fw-bold mt-2 mb-2">
+          Condiciones y escenarios de retiro
+        </h2>
+
+        <p class="text-secondary mb-0">
+          Define las fechas que deseas comparar. La aplicación
+          calculará la edad y una estimación de cuotas para cada
+          escenario, sin asumir todavía que existe elegibilidad
+          legal para pensionarse.
+        </p>
+
+      </div>
+
+
+      <!-- Resumen proveniente de los pasos anteriores. -->
+
+      <div class="retirement-context-card mb-4">
+
+        <div class="row g-3">
+
+          <div class="col-md-4 col-xl-2">
+            <span class="retirement-context-label">
+              Fecha de nacimiento
+            </span>
+            <strong
+              id="retiro-fecha-nacimiento"
+              class="retirement-context-value"
+            >
+              —
+            </strong>
+          </div>
+
+          <div class="col-md-4 col-xl-2">
+            <span class="retirement-context-label">
+              Sexo
+            </span>
+            <strong
+              id="retiro-sexo"
+              class="retirement-context-value"
+            >
+              —
+            </strong>
+          </div>
+
+          <div class="col-md-4 col-xl-2">
+            <span class="retirement-context-label">
+              Cuotas reales
+            </span>
+            <strong
+              id="retiro-cuotas-reales"
+              class="retirement-context-value"
+            >
+              0
+            </strong>
+          </div>
+
+          <div class="col-md-4 col-xl-2">
+            <span class="retirement-context-label">
+              Cierre esperado este año
+            </span>
+            <strong
+              id="retiro-cuotas-cierre"
+              class="retirement-context-value"
+            >
+              0
+            </strong>
+          </div>
+
+          <div class="col-md-4 col-xl-2">
+            <span class="retirement-context-label">
+              Continuará cotizando
+            </span>
+            <strong
+              id="retiro-continua-cotizando"
+              class="retirement-context-value"
+            >
+              —
+            </strong>
+          </div>
+
+          <div class="col-md-4 col-xl-2">
+            <span class="retirement-context-label">
+              Cuotas/año futuro
+            </span>
+            <strong
+              id="retiro-cuotas-anuales"
+              class="retirement-context-value"
+            >
+              0
+            </strong>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <form id="form-retiro">
+
+        <!-- Fechas de evaluación y actualización de cuotas. -->
+
+        <div class="row g-4 mb-4">
+
+          <div class="col-md-6">
+
+            <label
+              for="fecha_corte_retiro"
+              class="form-label fw-semibold"
+            >
+              Fecha de evaluación
+            </label>
+
+            <input
+              type="date"
+              class="form-control form-control-lg"
+              id="fecha_corte_retiro"
+              required
+            >
+
+            <div class="form-text">
+              Fecha desde la cual se evalúan tu edad y los
+              escenarios previsionales. Normalmente será hoy.
+            </div>
+
+          </div>
+
+
+          <div class="col-md-6">
+
+            <label
+              for="fecha_corte_cuotas"
+              class="form-label fw-semibold"
+            >
+              ¿Hasta qué fecha están actualizadas tus cuotas?
+            </label>
+
+            <input
+              type="date"
+              class="form-control form-control-lg"
+              id="fecha_corte_cuotas"
+              required
+            >
+
+            <div class="form-text">
+              Si provienen de un reporte de la CSS, usa la fecha
+              hasta la cual ese reporte refleja cuotas acreditadas.
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- Escenarios predefinidos. -->
+
+        <div class="mb-4">
+
+          <label class="form-label fw-semibold d-block mb-3">
+            Escenarios que deseas comparar
+          </label>
+
+          <div class="retirement-option-grid">
+
+            <div class="retirement-option retirement-option-fixed">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="retiro-referencia"
+                  checked
+                  disabled
+                >
+                <label
+                  class="form-check-label fw-semibold"
+                  for="retiro-referencia"
+                >
+                  Edad de referencia
+                </label>
+              </div>
+              <small class="text-secondary">
+                Se incluye siempre como punto de comparación.
+              </small>
+            </div>
+
+            <label class="retirement-option" for="retiro-adicional-1">
+              <span class="form-check">
+                <input
+                  class="form-check-input retiro-adicional"
+                  type="checkbox"
+                  value="1"
+                  id="retiro-adicional-1"
+                  checked
+                >
+                <span class="form-check-label fw-semibold">
+                  +1 año
+                </span>
+              </span>
+              <small class="text-secondary">
+                Un año después de la edad de referencia.
+              </small>
+            </label>
+
+            <label class="retirement-option" for="retiro-adicional-2">
+              <span class="form-check">
+                <input
+                  class="form-check-input retiro-adicional"
+                  type="checkbox"
+                  value="2"
+                  id="retiro-adicional-2"
+                  checked
+                >
+                <span class="form-check-label fw-semibold">
+                  +2 años
+                </span>
+              </span>
+              <small class="text-secondary">
+                Dos años después de la edad de referencia.
+              </small>
+            </label>
+
+            <label class="retirement-option" for="retiro-adicional-3">
+              <span class="form-check">
+                <input
+                  class="form-check-input retiro-adicional"
+                  type="checkbox"
+                  value="3"
+                  id="retiro-adicional-3"
+                  checked
+                >
+                <span class="form-check-label fw-semibold">
+                  +3 años
+                </span>
+              </span>
+              <small class="text-secondary">
+                Tres años después de la edad de referencia.
+              </small>
+            </label>
+
+            <label class="retirement-option" for="retiro-adicional-5">
+              <span class="form-check">
+                <input
+                  class="form-check-input retiro-adicional"
+                  type="checkbox"
+                  value="5"
+                  id="retiro-adicional-5"
+                  checked
+                >
+                <span class="form-check-label fw-semibold">
+                  +5 años
+                </span>
+              </span>
+              <small class="text-secondary">
+                Cinco años después de la edad de referencia.
+              </small>
+            </label>
+
+          </div>
+
+        </div>
+
+
+        <!-- Escenario personalizado. -->
+
+        <div class="retirement-custom-card mb-4">
+
+          <div class="form-check form-switch mb-3">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              role="switch"
+              id="usar_fecha_retiro_personalizada"
+            >
+            <label
+              class="form-check-label fw-semibold"
+              for="usar_fecha_retiro_personalizada"
+            >
+              Agregar una fecha personalizada
+            </label>
+          </div>
+
+          <div
+            id="contenedor-fecha-retiro-personalizada"
+            class="d-none"
+          >
+
+            <div class="row">
+              <div class="col-md-6">
+
+                <label
+                  for="fecha_retiro_personalizada"
+                  class="form-label fw-semibold"
+                >
+                  Fecha personalizada de retiro
+                </label>
+
+                <input
+                  type="date"
+                  class="form-control form-control-lg"
+                  id="fecha_retiro_personalizada"
+                >
+
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- Advertencia metodológica. -->
+
+        <div class="info-box mb-4">
+
+          <strong>
+            Las cuotas futuras son una estimación.
+          </strong>
+
+          <p class="mb-0 mt-1">
+            El año actual respeta el cierre de cuotas indicado en
+            el Paso 2. Desde el año siguiente se utiliza la densidad
+            anual esperada. El resultado no sustituye el historial
+            mensual oficial de la CSS ni determina por sí solo el
+            derecho a pensión.
+          </p>
+
+        </div>
+
+
+        <div
+          id="error-retiro"
+          class="alert alert-danger d-none"
+          role="alert"
+        ></div>
+
+
+        <!-- Navegación y ejecución. -->
+
+        <div
+          class="d-flex justify-content-between align-items-center mt-5"
+        >
+
+          <button
+            type="button"
+            id="btn-volver-paso-4"
+            class="btn btn-outline-secondary"
+          >
+            Anterior
+          </button>
+
+          <button
+            type="submit"
+            class="btn btn-primary px-4"
+          >
+            Analizar escenarios de retiro
+          </button>
+
+        </div>
+
+      </form>
+
+
+      <!-- ================================================
+           RESULTADOS DEL PASO 5
+           ================================================ -->
+
+      <div
+        id="resultado-retiro"
+        class="mt-5 d-none"
+      >
+
+        <hr class="mb-4">
+
+        <div class="mb-4">
+          <h3 class="h5 fw-bold mb-2">
+            Fechas y cuotas estimadas de retiro
+          </h3>
+          <p class="text-secondary mb-0">
+            Estos escenarios permiten comparar momentos posibles.
+            La elegibilidad legal se verificará en la etapa de
+            resultados antes de calcular una pensión.
+          </p>
+        </div>
+
+
+        <!-- Resumen de edad y fecha de referencia. -->
+
+        <div class="row g-3 mb-4">
+
+          <div class="col-sm-6 col-xl-3">
+            <div class="retirement-summary-card">
+              <span>Edad actual</span>
+              <strong id="retiro-edad-actual">—</strong>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-xl-3">
+            <div class="retirement-summary-card">
+              <span>Edad de referencia</span>
+              <strong id="retiro-edad-referencia">—</strong>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-xl-3">
+            <div class="retirement-summary-card">
+              <span>Fecha de referencia</span>
+              <strong id="retiro-fecha-referencia">—</strong>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-xl-3">
+            <div class="retirement-summary-card">
+              <span>Situación frente a referencia</span>
+              <strong id="retiro-situacion-referencia">—</strong>
+            </div>
+          </div>
+
+        </div>
+
+
+        <!-- Advertencias de coherencia con la proyección salarial. -->
+        <div
+          id="retiro-advertencias"
+          class="alert alert-warning d-none mb-4"
+          role="alert"
+          aria-live="polite"
+        >
+          <div id="retiro-advertencias-texto"></div>
+
+          <button
+            type="button"
+            id="btn-ajustar-proyeccion-retiro"
+            class="btn btn-sm btn-outline-dark mt-3 d-none"
+          >
+            Ajustar horizonte en el Paso 4
+          </button>
+        </div>
+
+
+        <!-- Tabla de escenarios. -->
+
+        <div class="table-responsive retirement-table-wrapper">
+
+          <table class="table table-hover align-middle retirement-table">
+
+            <thead>
+              <tr>
+                <th scope="col">Escenario</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Edad</th>
+                <th scope="col">Meses desde corte</th>
+                <th scope="col">Cuotas nuevas est.</th>
+                <th scope="col">Cuotas totales est.</th>
+                <th scope="col">Estado</th>
+              </tr>
+            </thead>
+
+            <tbody id="retiro-tabla-body"></tbody>
+
+          </table>
+
+        </div>
+
+
+        <div
+          id="retiro-metodo-estimacion"
+          class="alert alert-light border mt-4 mb-0"
+        ></div>
+
+
+        <div class="alert alert-light border mt-4 mb-0">
+
+          <strong>
+            Próximo paso: resultados y cálculo de pensión.
+          </strong>
+
+          <div class="text-secondary mt-1">
+            El Paso 6 utilizará el sistema previsional, la fecha
+            seleccionada, las cuotas y los salarios para verificar
+            elegibilidad y calcular los escenarios correspondientes.
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
