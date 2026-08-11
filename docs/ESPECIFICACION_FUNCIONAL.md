@@ -169,3 +169,13 @@ Para SEBD se distinguen en esta fase:
 - escenario todavía no elegible.
 
 El resultado deberá mostrar los factores que expliquen la diferencia entre modalidades: cuotas/240 y/o reducción por edad.
+
+Cuando corresponda `INDEMNIZACION`, el Paso 6 deberá cambiar la presentación de “pensión mensual” a “pago único estimado” y mostrar de forma auditable:
+
+- mensualidad de pensión normal hipotética;
+- meses/cuotas mensuales acreditados;
+- divisor reglamentario 6;
+- cociente de meses entre seis;
+- pago único resultante;
+- advertencia de que no se trata de una pensión vitalicia;
+- transición a SUCGS desde el 01/03/2036.

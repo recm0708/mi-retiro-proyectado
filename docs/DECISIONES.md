@@ -211,7 +211,7 @@ Los pasos largos del asistente dispondrán de una barra de navegación rápida v
 
 La barra delegará sus acciones en los formularios y botones existentes. No contendrá fórmulas ni validaciones previsionales paralelas, evitando duplicar lógica y manteniendo accesibles las acciones Anterior/Continuar/Analizar.
 
-## ADR-014 — Clasificar explícitamente cuotas excedentes por edad de referencia
+## ADR-019A — Clasificar explícitamente cuotas excedentes por edad de referencia
 
 **Decisión:** el motor SEBD no inferirá silenciosamente, para retiros posteriores a la edad de referencia, qué cuotas excedentes corresponden al incremento de 1.25 % y cuáles al incremento de 2 %.
 
@@ -257,3 +257,14 @@ Cuando un año futuro solo se utiliza parcialmente hasta la fecha de retiro, el 
 **Decisión:** los factores de reducción de la banda anticipada se almacenan como parámetros normativos y no se interpolan en el motor.
 
 **Motivo:** un factor reglamentario debe reproducirse desde una tabla versionada, no deducirse por aproximación matemática.
+
+
+## ADR-025 — Indemnización por Vejez como pago único separado
+
+**Estado:** Aceptada
+
+La Indemnización por Vejez no se almacenará ni presentará como `pension_mensual_estimada`. El motor conservará por separado la mensualidad normal hipotética, el divisor reglamentario, el factor `meses cotizados / 6` y el pago único resultante.
+
+El cociente entre meses acreditados y seis se calculará mediante división decimal directa, sin truncarlo a bloques enteros, porque el procedimiento reglamentario ordena dividir el total de meses registrados entre seis y multiplicar el resultado por la mensualidad hipotética.
+
+Desde el 01/03/2036 el clasificador no calculará esta indemnización y derivará el escenario a la transición SUCGS prevista por el artículo 186.

@@ -258,4 +258,15 @@ Estos campos se invalidan cuando cambian datos de origen de los Pasos 1–5.
 
 El resumen general añade, entre otros, `modalidad`, `tipo_prestacion`, `factor_proporcional_cuotas`, `factor_reduccion_edad`, `meses_anticipacion_referencia` y `calculo_disponible`.
 
+En modalidades donde un campo no tiene significado jurídico o matemático, la API usa `null` en vez de un cero artificial. En particular, la Indemnización por Vejez devuelve `factor_proporcional_cuotas = null` y `monto_despues_factor_proporcional = null`, porque el factor proporcional corresponde a las pensiones proporcionales y no al pago único.
+
+Para `modalidad = INDEMNIZACION`, `ResumenCalculoSEBD` utiliza campos separados de la pensión mensual:
+
+- `indemnizacion_mensualidad_hipotetica`;
+- `indemnizacion_factor_cuotas`;
+- `indemnizacion_divisor_cuotas`;
+- `indemnizacion_pago_unico_estimado`.
+
+En este caso `pension_mensual_estimada` permanece en `None`, evitando que un pago único se interprete como renta mensual.
+
 `TipoEscenarioRetiro` incorpora también `ANTICIPADO` y el Paso 5 admite escenarios estándar `-2` y `-1` años respecto de la edad de referencia.

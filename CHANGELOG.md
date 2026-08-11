@@ -51,6 +51,11 @@ Todos los cambios importantes realizados en este proyecto serán documentados en
 - Endpoint `POST /api/simulacion/resultados/sebd-normal`.
 - Pruebas de integración del Paso 6 para la regresión B/.741.59 y un escenario posterior a la edad de referencia.
 
+- Cálculo de la Indemnización por Vejez del SEBD como prestación de pago único.
+- Presentación específica en el Paso 6 de la mensualidad hipotética, factor de cotizaciones entre seis y pago único estimado.
+- Pruebas automatizadas para 120 y 179 cuotas, transición SUCGS desde 01/03/2036 e integración del Paso 6.
+- Limpieza semántica de la respuesta SEBD: los campos de pensión proporcional no aplicables a una Indemnización por Vejez ahora se entregan como `null`.
+
 ### Cambiado
 
 - Se separó la lógica de cálculo de la interfaz web.

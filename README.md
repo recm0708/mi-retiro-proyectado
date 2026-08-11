@@ -239,3 +239,13 @@ POST /api/simulacion/resultados/sebd
 Los endpoints específicos de SEBD Normal se conservan para compatibilidad y pruebas de regresión.
 
 La explicación funcional y las fórmulas se resumen en `docs/MODALIDADES_SEBD.md`.
+
+## Paso 6C.2 — Indemnización por Vejez
+
+El motor SEBD calcula también la **Indemnización por Vejez** cuando el escenario alcanza la edad de referencia con menos de 180 cuotas y la fecha es anterior al 1 de marzo de 2036.
+
+Esta prestación se presenta separada de las pensiones mensuales porque es un **pago único**. El cálculo parte de la mensualidad de Pensión de Retiro por Vejez Normal que hipotéticamente habría correspondido y la multiplica por el cociente entre los meses/cuotas mensuales acreditados y seis.
+
+La interfaz del Paso 6 muestra de forma independiente la mensualidad hipotética, el factor `cuotas / 6`, la fórmula aplicada y el pago único estimado. Desde el 1 de marzo de 2036 el clasificador deriva estos casos a la transición SUCGS prevista por la normativa vigente.
+
+En la respuesta de la API, los campos exclusivos de pensión proporcional se expresan como `null` durante una Indemnización por Vejez para indicar que no aplican, en lugar de devolver un cero que pueda interpretarse como un factor utilizado.

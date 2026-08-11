@@ -265,3 +265,26 @@ El orden de operaciones se conserva explícitamente:
 6. materializar el importe monetario con la política de precisión del proyecto.
 
 La modalidad normal mantiene la posibilidad de máximos ampliados bajo las condiciones del artículo 193. Las modalidades distintas de Normal usan el límite ordinario en esta implementación.
+
+## Paso 6C.2 — Indemnización por Vejez
+
+`app/motores/sebd_modalidades.py` calcula la Indemnización por Vejez como una prestación distinta de las pensiones mensuales.
+
+El procedimiento implementado es:
+
+```text
+1. Seleccionar los 10 mayores totales salariales anuales hasta el retiro.
+2. Salario base = suma de esos 10 años / 120.
+3. Mensualidad normal hipotética = salario base × 60 %.
+4. Aplicar el máximo ordinario que corresponda a esa mensualidad hipotética.
+5. Factor indemnización = cuotas mensuales acreditadas / 6.
+6. Pago único = mensualidad hipotética × factor indemnización.
+```
+
+El factor del punto 5 usa división decimal directa. No se redondea a bloques completos de seis porque el procedimiento reglamentario ordena dividir el número de meses registrados entre seis.
+
+La salida no utiliza `pension_mensual_estimada`: el pago se conserva en `indemnizacion_pago_unico_estimado`. El mínimo indexado del artículo 192 no se fuerza hasta contar con su valor versionado para la fecha de cálculo.
+
+La salida tampoco asigna valores ficticios a campos de pensión proporcional: `factor_proporcional_cuotas` y `monto_despues_factor_proporcional` quedan en `null` durante una Indemnización por Vejez.
+
+La clasificación deja de ofrecer esta indemnización a partir del 01/03/2036 y devuelve la transición a SUCGS.

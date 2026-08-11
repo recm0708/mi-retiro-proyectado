@@ -73,9 +73,32 @@ La regla general utiliza el promedio mensual de los diez mejores años de cotiza
 
 Un año parcial no se anualiza artificialmente. Si entra entre los diez mejores, conserva las cuotas y el salario efectivamente atribuido a ese año; la suma de los diez años se divide entre 120 meses.
 
+## Indemnización por Vejez
+
+Cuando la persona alcanza la edad de referencia con menos de 180 cuotas y la fecha es anterior al 1 de marzo de 2036, el clasificador identifica una Indemnización por Vejez. Es una prestación de **pago único**, no una pensión mensual vitalicia.
+
+El cálculo implementado sigue el procedimiento reglamentario:
+
+```text
+Mensualidad normal hipotética = 60 % del salario base
+                              → aplicar máximo ordinario
+
+Factor de cotizaciones = cuotas mensuales acreditadas / 6
+
+Indemnización estimada = mensualidad normal hipotética
+                       × factor de cotizaciones
+```
+
+El cociente `cuotas / 6` se conserva como división directa; no se trunca a bloques completos porque el reglamento ordena dividir los meses de cotización registrados entre seis y multiplicar el resultado por la mensualidad hipotética.
+
+Los campos propios de una pensión proporcional no se reutilizan para esta prestación. En la respuesta de la API, `factor_proporcional_cuotas` y `monto_despues_factor_proporcional` se devuelven como `null` para indicar explícitamente **no aplica**.
+
+El mínimo indexado del artículo 192 continúa pendiente de versionarse por fecha. Si la mensualidad hipotética pudiera quedar afectada por ese mínimo, la interfaz muestra una advertencia en lugar de inventar un valor actualizado.
+
+A partir del 1 de marzo de 2036 el artículo 186 dispone que no se conceda esta indemnización y que el cálculo proceda conforme al SUCGS.
+
 ## Prestaciones todavía no calculadas aquí
 
-- monto de la Indemnización por Vejez;
 - regímenes especiales;
 - componente de Beneficio Definido del Subsistema Mixto;
 - componente de ahorro del Mixto;

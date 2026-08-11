@@ -118,6 +118,10 @@ Si no existieran diez años suficientes, el tratamiento especial deberá seguir 
 
 ## Indemnización por vejez
 
-El artículo 186 establece, antes del 1 de marzo de 2036, una indemnización por vejez para personas del SEBD o del componente de Beneficio Definido del Subsistema Mixto que alcancen la edad de referencia sin acreditar 180 cuotas. La aplicación ya **clasifica** este escenario, pero todavía no calcula el importe de la indemnización.
+El artículo 186 establece una Indemnización por Vejez para personas del SEBD o del componente de Beneficio Definido del Subsistema Mixto que, al solicitar la prestación y cumplir la edad de referencia, no hayan podido acreditar 180 cuotas. La prestación equivale a una mensualidad de la Pensión de Retiro por Vejez que habría correspondido por cada seis meses de cotizaciones acreditados.
 
-A partir del 1 de marzo de 2036, la Ley dispone que la CSS deje de conceder esta indemnización y proceda conforme al SUCGS. Esta transición se mantendrá explícita en el clasificador.
+El Reglamento para el Cálculo de Prestaciones Económicas desarrolla el procedimiento: primero se calcula la Pensión de Retiro por Vejez Normal hipotética; luego los meses de cotización registrados se dividen entre seis y el resultado se multiplica por esa mensualidad. `normativa/sebd.json` versiona el divisor `6`, la naturaleza de pago único y la fecha de transición.
+
+La implementación conserva la división directa `meses / 6`; no usa cociente entero. Para construir la mensualidad hipotética se aplica la regla de los diez mejores años y el denominador de 120 meses. El mínimo indexado sigue pendiente de versionarse por fecha y, cuando pudiera afectar el cálculo, se genera una advertencia.
+
+A partir del 1 de marzo de 2036, el artículo 186 dispone que la CSS deje de conceder esta indemnización y proceda conforme al SUCGS.

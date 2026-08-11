@@ -62,7 +62,7 @@ Pendiente:
 
 ## Fase 5 — Motores previsionales
 
-**Estado:** en desarrollo — SEBD normal implementado en backend
+**Estado:** en desarrollo — modalidades generales SEBD e indemnización implementadas
 
 - `parametros_generales.json`;
 - cargador normativo;
@@ -76,7 +76,7 @@ Pendiente:
 
 ## Fase 6 — Resultados y comparación
 
-**Estado:** en desarrollo; SEBD normal integrado en backend e interfaz
+**Estado:** en desarrollo; modalidades generales SEBD e indemnización integradas
 
 - Paso 6 visual para SEBD normal: implementado;
 - selección explícita del escenario de retiro: implementada;
@@ -109,7 +109,7 @@ Pendiente:
 - Proporcional: implementada;
 - Proporcional Anticipada: implementada;
 - factores anticipados mensuales: versionados;
-- Indemnización por Vejez: clasificación implementada, monto pendiente;
+- Indemnización por Vejez: clasificación, cálculo de pago único e interfaz implementados;
 - regímenes especiales: pendientes;
 - Mixto: pendiente;
 - SUCGS: pendiente.

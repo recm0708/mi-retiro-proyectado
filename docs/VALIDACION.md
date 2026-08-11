@@ -133,7 +133,7 @@ La prueba conserva precisión interna antes del redondeo monetario final. Tambi�
 - para un escenario posterior, separe las cuotas nuevas posteriores a la referencia;
 - incorpore un año salarial proyectado y emita advertencia cuando se utiliza proyección.
 
-La suite completa de esta etapa contiene 24 pruebas automatizadas.
+La suite completa de esta etapa contiene 28 pruebas automatizadas.
 
 
 ## Paso 6C — clasificación de modalidades SEBD
@@ -153,3 +153,15 @@ La suite automatizada incorpora pruebas para:
 - conservación del escenario +1 año B/.765.67 con año calendario parcial proyectado.
 
 La prueba del año parcial confirma que el año proyectado conserva sus cuotas y salario prorrateados y puede formar parte de los diez mejores años cuando su total anual así lo determina.
+
+## Paso 6C.2 — Indemnización por Vejez
+
+`tests/test_indemnizacion_vejez.py` agrega regresiones específicas de la prestación de pago único:
+
+- 120 cuotas con salario base mensual B/.1,000.00 → mensualidad hipotética B/.600.00, factor `120 / 6 = 20` y pago único B/.12,000.00;
+- 179 cuotas → se conserva el cociente `179 / 6` sin truncarlo y el pago resultante es B/.17,900.00 con la base controlada del caso;
+- desde el 01/03/2036 el clasificador deja de conceder Indemnización por Vejez y marca la transición SUCGS;
+- la capa integrada del Paso 6 entrega la prestación como `INDEMNIZACION`, sin confundir el pago único con `pension_mensual_estimada`.
+- los campos exclusivos de pensión proporcional se devuelven como `null` en una indemnización, evitando que `0` se interprete como un factor aplicado.
+
+Estas pruebas usan datos sintéticos y no contienen información personal real.
