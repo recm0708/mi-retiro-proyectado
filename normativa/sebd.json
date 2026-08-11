@@ -80,6 +80,25 @@
         "mejores_anios_base": 20,
         "monto_maximo": 2500.0
       }
+    },
+    "indemnizacion_vejez": {
+      "fecha_fin_regimen": "2036-03-01",
+      "divisor_meses_cotizados": 6,
+      "tipo_pago": "UNICO",
+      "regla_calculo": "Calcular primero la Pensión de Retiro por Vejez normal hipotética conforme al reglamento; dividir los meses de cotización acreditados entre seis y multiplicar ese resultado por la mensualidad hipotética.",
+      "fuente_legal": {
+        "articulo": 186,
+        "nota": "Aplica a asegurados con menos de 180 cuotas que hayan alcanzado la edad de referencia. Desde 2036-03-01 la Ley remite al SUCGS."
+      },
+      "fuente_reglamentaria": {
+        "norma": "Reglamento para el Calculo de las Prestaciones Economicas",
+        "articulos": [
+          25,
+          26
+        ],
+        "pagina_css": "https://www.css.gob.pa/normativa-prestaciones-economicas/",
+        "nota": "El articulo 26 dispone calcular primero la pension normal hipotetica y multiplicarla por el cociente de meses cotizados entre seis."
+      }
     }
   }
 }
