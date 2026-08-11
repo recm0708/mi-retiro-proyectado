@@ -1,0 +1,67 @@
+# ============================================
+# Calculadora de Pensión CSS
+# Archivos excluidos del control de versiones
+# ============================================
+
+# Entornos virtuales de Python
+.venv/
+venv/
+env/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Variables de entorno y secretos
+.env
+.env.*
+!.env.example
+
+# Bases de datos locales
+*.db
+*.sqlite
+*.sqlite3
+
+# Datos personales, importaciones y archivos sensibles
+data/personales/
+data/importaciones/
+uploads/
+temp/
+tmp/
+
+# Logs
+*.log
+logs/
+
+# Caché de pruebas
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# Herramientas de análisis
+.mypy_cache/
+.ruff_cache/
+
+# Archivos de distribución
+build/
+dist/
+*.egg-info/
+
+# IDE y editores
+.vscode/
+.idea/
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Archivos temporales
+*.tmp
+*.temp
+*.bak
+*.swp
+*~
