@@ -11,7 +11,7 @@ Nueva simulación | Calculadora de Pensión CSS
 
   <div class="container">
 
-    <div class="simulation-header mb-5">
+    <div class="simulation-header mb-4">
 
       <span class="text-primary fw-semibold">
         Nueva simulación
@@ -29,7 +29,9 @@ Nueva simulación | Calculadora de Pensión CSS
     </div>
 
 
-    <!-- Progreso -->
+    <!-- ==================================================
+         PROGRESO DEL ASISTENTE
+         ================================================== -->
 
     <div class="wizard-steps mb-5">
 
@@ -96,11 +98,11 @@ Nueva simulación | Calculadora de Pensión CSS
 
     <div class="row justify-content-center">
 
-      <div class="col-xl-9">
+      <div class="col-12 col-xl-11">
 
 
         <!-- ==================================================
-             PASO 1
+             PASO 1 — DATOS PERSONALES
              ================================================== -->
 
         <div
@@ -292,7 +294,7 @@ Nueva simulación | Calculadora de Pensión CSS
 
 
         <!-- ==================================================
-             PASO 2
+             PASO 2 — CUOTAS
              ================================================== -->
 
         <div
@@ -507,7 +509,9 @@ Nueva simulación | Calculadora de Pensión CSS
               </form>
 
 
-              <!-- Resultado preliminar -->
+              <!-- ==========================================
+                   RESULTADO DE CUOTAS
+                   ========================================== -->
 
               <div
                 id="resultado-cuotas"
@@ -638,8 +642,300 @@ Nueva simulación | Calculadora de Pensión CSS
                   </strong>
 
                   <div class="text-secondary mt-1">
-                    Incorporaremos el historial y la proyección
-                    salarial antes de calcular prestaciones.
+                    Incorporaremos el salario actual antes
+                    de construir los escenarios de proyección.
+                  </div>
+
+                </div>
+
+
+                <!-- ESTE ES EL BOTÓN QUE TE FALTABA -->
+
+                <div class="d-flex justify-content-end mt-4">
+
+                  <button
+                    type="button"
+                    id="btn-continuar-paso-3"
+                    class="btn btn-primary px-4"
+                  >
+                    Continuar a salarios
+                  </button>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- ==================================================
+             PASO 3 — SALARIO
+             ================================================== -->
+
+        <div
+          class="wizard-panel d-none"
+          data-panel="3"
+        >
+
+          <div class="card border-0 shadow-sm simulation-card">
+
+            <div class="card-body p-4 p-lg-5">
+
+              <div class="mb-4">
+
+                <span class="text-primary fw-semibold">
+                  Paso 3 de 6
+                </span>
+
+                <h2 class="h4 fw-bold mt-2 mb-2">
+                  Salario actual
+                </h2>
+
+                <p class="text-secondary mb-0">
+                  Ingresa tu salario de la forma en que normalmente
+                  lo conoces. La aplicación hará automáticamente
+                  las conversiones necesarias.
+                </p>
+
+              </div>
+
+
+              <form id="form-salario">
+
+                <div class="row g-4">
+
+                  <div class="col-md-6">
+
+                    <label
+                      for="monto_salario"
+                      class="form-label fw-semibold"
+                    >
+                      Salario
+                    </label>
+
+                    <div class="input-group input-group-lg">
+
+                      <span class="input-group-text">
+                        B/.
+                      </span>
+
+                      <input
+                        type="number"
+                        min="0.01"
+                        step="0.01"
+                        class="form-control"
+                        id="monto_salario"
+                        required
+                      >
+
+                    </div>
+
+                  </div>
+
+
+                  <div class="col-md-6">
+
+                    <label
+                      for="periodicidad_salario"
+                      class="form-label fw-semibold"
+                    >
+                      ¿Cómo recibes o conoces este salario?
+                    </label>
+
+                    <select
+                      class="form-select form-select-lg"
+                      id="periodicidad_salario"
+                      required
+                    >
+
+                      <option value="" selected disabled>
+                        Selecciona una opción
+                      </option>
+
+                      <option value="SEMANAL">
+                        Semanal
+                      </option>
+
+                      <option value="QUINCENAL">
+                        Quincenal
+                      </option>
+
+                      <option value="MENSUAL">
+                        Mensual
+                      </option>
+
+                      <option value="ANUAL">
+                        Anual
+                      </option>
+
+                    </select>
+
+                  </div>
+
+                </div>
+
+
+                <div class="info-box mt-4">
+
+                  <strong>
+                    La aplicación conservará el monto que ingresaste.
+                  </strong>
+
+                  <p class="mb-0 mt-1">
+                    Además calculará equivalentes semanales,
+                    quincenales, mensuales y anuales para utilizarlos
+                    posteriormente en las proyecciones.
+                  </p>
+
+                </div>
+
+
+                <div
+                  id="error-salario"
+                  class="alert alert-danger mt-4 d-none"
+                  role="alert"
+                ></div>
+
+
+                <div
+                  class="d-flex justify-content-between
+                         align-items-center mt-5"
+                >
+
+                  <button
+                    type="button"
+                    id="btn-volver-paso-2"
+                    class="btn btn-outline-secondary"
+                  >
+                    Anterior
+                  </button>
+
+                  <button
+                    type="submit"
+                    class="btn btn-primary px-4"
+                  >
+                    Analizar salario
+                  </button>
+
+                </div>
+
+              </form>
+
+
+              <!-- ==========================================
+                   RESULTADO DEL SALARIO
+                   ========================================== -->
+
+              <div
+                id="resultado-salario"
+                class="resultado-salario mt-5 d-none"
+              >
+
+                <hr class="mb-4">
+
+                <h3 class="h5 fw-bold mb-3">
+                  Equivalencias salariales
+                </h3>
+
+
+                <div class="row g-3">
+
+                  <div class="col-md-6 col-xl-3">
+
+                    <div class="summary-card">
+
+                      <span class="summary-label">
+                        Semanal
+                      </span>
+
+                      <strong
+                        id="salario-semanal"
+                        class="summary-value salary-value"
+                      >
+                        B/.0.00
+                      </strong>
+
+                    </div>
+
+                  </div>
+
+
+                  <div class="col-sm-6 col-lg-3">
+
+                    <div class="summary-card">
+
+                      <span class="summary-label">
+                        Quincenal
+                      </span>
+
+                      <strong
+                        id="salario-quincenal"
+                        class="summary-value salary-value"
+                      >
+                        B/.0.00
+                      </strong>
+
+                    </div>
+
+                  </div>
+
+
+                  <div class="col-sm-6 col-lg-3">
+
+                    <div class="summary-card">
+
+                      <span class="summary-label">
+                        Mensual
+                      </span>
+
+                      <strong
+                        id="salario-mensual"
+                        class="summary-value salary-value"
+                      >
+                        B/.0.00
+                      </strong>
+
+                    </div>
+
+                  </div>
+
+
+                  <div class="col-sm-6 col-lg-3">
+
+                    <div class="summary-card">
+
+                      <span class="summary-label">
+                        Anual
+                      </span>
+
+                      <strong
+                        id="salario-anual"
+                        class="summary-value salary-value"
+                      >
+                        B/.0.00
+                      </strong>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+
+                <div class="alert alert-light border mt-4 mb-0">
+
+                  <strong>
+                    Próximo paso: proyección laboral y salarial.
+                  </strong>
+
+                  <div class="text-secondary mt-1">
+                    Allí podrás indicar si tu salario permanecerá
+                    igual, aumentará cada año o si deseas comparar
+                    diferentes escenarios.
                   </div>
 
                 </div>

@@ -1,5 +1,5 @@
+from typing import Literal
 from pydantic import BaseModel, Field
-
 
 class DatosCuotas(BaseModel):
     cuotas_totales: int = Field(
@@ -30,7 +30,6 @@ class DatosCuotas(BaseModel):
         description="Cuotas que se espera aportar por cada año futuro.",
     )
 
-
 class ResumenCuotas(BaseModel):
     cuotas_reales: int
     cuotas_anio_actual: int
@@ -42,3 +41,27 @@ class ResumenCuotas(BaseModel):
 
     anios_aprox_180: float | None
     anios_aprox_240: float | None
+
+PeriodicidadSalario = Literal[
+    "SEMANAL",
+    "QUINCENAL",
+    "MENSUAL",
+    "ANUAL",
+]
+
+class DatosSalario(BaseModel):
+    monto: float = Field(
+        gt=0,
+        description="Monto salarial indicado por el usuario.",
+    )
+
+    periodicidad: PeriodicidadSalario
+
+class ResumenSalario(BaseModel):
+    monto_original: float
+    periodicidad_original: PeriodicidadSalario
+
+    salario_semanal: float
+    salario_quincenal: float
+    salario_mensual: float
+    salario_anual: float

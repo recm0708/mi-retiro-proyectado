@@ -1,9 +1,7 @@
 from app.modelos.simulacion import DatosCuotas, ResumenCuotas
 
-
 CUOTAS_PENSION_PROPORCIONAL = 180
 CUOTAS_REFERENCIA = 240
-
 
 def _calcular_anios_aproximados(
     cuotas_faltantes: int,
@@ -19,7 +17,6 @@ def _calcular_anios_aproximados(
         cuotas_faltantes / cuotas_por_anio,
         2,
     )
-
 
 def analizar_cuotas(datos: DatosCuotas) -> ResumenCuotas:
     if datos.cuotas_anio_actual > datos.cuotas_totales:

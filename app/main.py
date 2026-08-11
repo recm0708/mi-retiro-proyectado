@@ -1,15 +1,20 @@
 from pathlib import Path
 
-from fastapi import FastAPI, Request
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-from app.modelos.simulacion import DatosCuotas, ResumenCuotas
+
+from app.modelos.simulacion import (
+    DatosCuotas,
+    DatosSalario,
+    ResumenCuotas,
+    ResumenSalario,
+)
 from app.servicios.proyeccion_cuotas import analizar_cuotas
+from app.servicios.proyeccion_salarios import normalizar_salario
 
 BASE_DIR = Path(__file__).resolve().parent
-
 
 app = FastAPI(
     title="Calculadora de Pensión CSS",
@@ -20,18 +25,15 @@ app = FastAPI(
     version="0.1.0",
 )
 
-
 app.mount(
     "/static",
     StaticFiles(directory=BASE_DIR / "static"),
     name="static",
 )
 
-
 templates = Jinja2Templates(
     directory=BASE_DIR / "templates"
 )
-
 
 @app.get("/", response_class=HTMLResponse)
 async def inicio(request: Request):
@@ -43,7 +45,6 @@ async def inicio(request: Request):
             "version": "0.1.0",
         },
     )
-
 
 @app.get("/simulacion", response_class=HTMLResponse)
 async def simulacion(request: Request):
@@ -77,6 +78,22 @@ async def calcular_resumen_cuotas(
 ):
     try:
         return analizar_cuotas(datos)
+
+    except ValueError as error:
+        raise HTTPException(
+            status_code=422,
+            detail=str(error),
+        ) from error
+
+@app.post(
+    "/api/simulacion/salario",
+    response_model=ResumenSalario,
+)
+async def calcular_resumen_salario(
+    datos: DatosSalario,
+):
+    try:
+        return normalizar_salario(datos)
 
     except ValueError as error:
         raise HTTPException(

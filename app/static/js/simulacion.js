@@ -6,30 +6,45 @@ let pasoActual = 1;
 
 
 // ============================================================
-// Almacenamiento temporal
+// ALMACENAMIENTO TEMPORAL
 // ============================================================
+
+function crearSimulacionVacia() {
+  return {
+    paso_actual: 1,
+
+    persona: {},
+
+    cuotas: {},
+    resumen_cuotas: null,
+
+    salario: {},
+    resumen_salario: null,
+  };
+}
+
 
 function obtenerSimulacion() {
   const almacenada = sessionStorage.getItem(CLAVE_SIMULACION);
 
   if (!almacenada) {
-    return {
-      paso_actual: 1,
-      persona: {},
-      cuotas: {},
-      resumen_cuotas: null,
-    };
+    return crearSimulacionVacia();
   }
 
   try {
-    return JSON.parse(almacenada);
-  } catch {
+    const simulacion = JSON.parse(almacenada);
+
     return {
-      paso_actual: 1,
-      persona: {},
-      cuotas: {},
-      resumen_cuotas: null,
+      ...crearSimulacionVacia(),
+      ...simulacion,
+
+      persona: simulacion.persona || {},
+      cuotas: simulacion.cuotas || {},
+      salario: simulacion.salario || {},
     };
+
+  } catch {
+    return crearSimulacionVacia();
   }
 }
 
@@ -43,7 +58,7 @@ function guardarSimulacion(simulacion) {
 
 
 // ============================================================
-// Navegación del asistente
+// NAVEGACIÓN DEL ASISTENTE
 // ============================================================
 
 function mostrarPaso(numeroPaso) {
@@ -64,17 +79,23 @@ function mostrarPaso(numeroPaso) {
   document.querySelectorAll(".wizard-step").forEach((elemento) => {
     const numero = Number(elemento.dataset.step);
 
-    elemento.classList.remove("active", "completed");
+    elemento.classList.remove(
+      "active",
+      "completed",
+    );
 
     if (numero === numeroPaso) {
       elemento.classList.add("active");
+
     } else if (numero < numeroPaso) {
       elemento.classList.add("completed");
     }
   });
 
   const simulacion = obtenerSimulacion();
+
   simulacion.paso_actual = numeroPaso;
+
   guardarSimulacion(simulacion);
 
   window.scrollTo({
@@ -85,7 +106,7 @@ function mostrarPaso(numeroPaso) {
 
 
 // ============================================================
-// Paso 1 — Datos personales
+// PASO 1 — DATOS PERSONALES
 // ============================================================
 
 function guardarDatosPersonales() {
@@ -102,16 +123,24 @@ function guardarDatosPersonales() {
 
   simulacion.persona = {
     fecha_nacimiento:
-      document.getElementById("fecha_nacimiento").value,
+      document.getElementById(
+        "fecha_nacimiento",
+      ).value,
 
     sexo:
-      document.getElementById("sexo").value,
+      document.getElementById(
+        "sexo",
+      ).value,
 
     fecha_ingreso_css:
-      document.getElementById("fecha_ingreso_css").value || null,
+      document.getElementById(
+        "fecha_ingreso_css",
+      ).value || null,
 
     sistema:
-      document.getElementById("sistema").value,
+      document.getElementById(
+        "sistema",
+      ).value,
   };
 
   guardarSimulacion(simulacion);
@@ -121,11 +150,11 @@ function guardarDatosPersonales() {
 
 
 function restaurarDatosPersonales(simulacion) {
-  if (!simulacion.persona) {
+  const persona = simulacion.persona;
+
+  if (!persona) {
     return;
   }
-
-  const persona = simulacion.persona;
 
   if (persona.fecha_nacimiento) {
     document.getElementById(
@@ -154,15 +183,18 @@ function restaurarDatosPersonales(simulacion) {
 
 
 // ============================================================
-// Paso 2 — Cuotas
+// PASO 2 — CUOTAS
 // ============================================================
 
 function actualizarEstadoContinuidad() {
-  const continua =
-    document.getElementById("continua_cotizando").value;
+  const continua = document.getElementById(
+    "continua_cotizando",
+  ).value;
 
   const cuotasActuales = Number(
-    document.getElementById("cuotas_anio_actual").value || 0,
+    document.getElementById(
+      "cuotas_anio_actual",
+    ).value || 0,
   );
 
   const cierre = document.getElementById(
@@ -179,15 +211,22 @@ function actualizarEstadoContinuidad() {
 
     cierre.disabled = true;
     futuras.disabled = true;
+
   } else {
     cierre.disabled = false;
     futuras.disabled = false;
 
-    if (!cierre.value || Number(cierre.value) < cuotasActuales) {
+    if (
+      !cierre.value ||
+      Number(cierre.value) < cuotasActuales
+    ) {
       cierre.value = 12;
     }
 
-    if (!futuras.value || Number(futuras.value) === 0) {
+    if (
+      !futuras.value ||
+      Number(futuras.value) === 0
+    ) {
       futuras.value = 12;
     }
   }
@@ -195,11 +234,11 @@ function actualizarEstadoContinuidad() {
 
 
 function restaurarDatosCuotas(simulacion) {
-  if (!simulacion.cuotas) {
+  const cuotas = simulacion.cuotas;
+
+  if (!cuotas) {
     return;
   }
-
-  const cuotas = simulacion.cuotas;
 
   if (cuotas.cuotas_totales !== undefined) {
     document.getElementById(
@@ -216,16 +255,22 @@ function restaurarDatosCuotas(simulacion) {
   if (cuotas.continua_cotizando !== undefined) {
     document.getElementById(
       "continua_cotizando",
-    ).value = String(cuotas.continua_cotizando);
+    ).value = String(
+      cuotas.continua_cotizando,
+    );
   }
 
-  if (cuotas.cuotas_esperadas_cierre_anio !== undefined) {
+  if (
+    cuotas.cuotas_esperadas_cierre_anio !== undefined
+  ) {
     document.getElementById(
       "cuotas_esperadas_cierre_anio",
     ).value = cuotas.cuotas_esperadas_cierre_anio;
   }
 
-  if (cuotas.cuotas_esperadas_por_anio !== undefined) {
+  if (
+    cuotas.cuotas_esperadas_por_anio !== undefined
+  ) {
     document.getElementById(
       "cuotas_esperadas_por_anio",
     ).value = cuotas.cuotas_esperadas_por_anio;
@@ -234,7 +279,9 @@ function restaurarDatosCuotas(simulacion) {
   actualizarEstadoContinuidad();
 
   if (simulacion.resumen_cuotas) {
-    mostrarResumenCuotas(simulacion.resumen_cuotas);
+    mostrarResumenCuotas(
+      simulacion.resumen_cuotas,
+    );
   }
 }
 
@@ -251,37 +298,48 @@ async function analizarCuotas(evento) {
     return;
   }
 
-  const continua =
-    document.getElementById("continua_cotizando").value === "true";
+  const continua = (
+    document.getElementById(
+      "continua_cotizando",
+    ).value === "true"
+  );
 
   const cuotasAnioActual = Number(
-    document.getElementById("cuotas_anio_actual").value,
+    document.getElementById(
+      "cuotas_anio_actual",
+    ).value,
   );
 
   const datos = {
     cuotas_totales: Number(
-      document.getElementById("cuotas_totales").value,
+      document.getElementById(
+        "cuotas_totales",
+      ).value,
     ),
 
-    cuotas_anio_actual: cuotasAnioActual,
+    cuotas_anio_actual:
+      cuotasAnioActual,
 
-    continua_cotizando: continua,
+    continua_cotizando:
+      continua,
 
-    cuotas_esperadas_cierre_anio: continua
-      ? Number(
-          document.getElementById(
-            "cuotas_esperadas_cierre_anio",
-          ).value,
-        )
-      : cuotasAnioActual,
+    cuotas_esperadas_cierre_anio:
+      continua
+        ? Number(
+            document.getElementById(
+              "cuotas_esperadas_cierre_anio",
+            ).value,
+          )
+        : cuotasAnioActual,
 
-    cuotas_esperadas_por_anio: continua
-      ? Number(
-          document.getElementById(
-            "cuotas_esperadas_por_anio",
-          ).value,
-        )
-      : 0,
+    cuotas_esperadas_por_anio:
+      continua
+        ? Number(
+            document.getElementById(
+              "cuotas_esperadas_por_anio",
+            ).value,
+          )
+        : 0,
   };
 
   ocultarErrorCuotas();
@@ -303,9 +361,10 @@ async function analizarCuotas(evento) {
     const contenido = await respuesta.json();
 
     if (!respuesta.ok) {
-      const mensaje =
-        contenido.detail ||
-        "No fue posible analizar las cuotas.";
+      const mensaje = obtenerMensajeError(
+        contenido,
+        "No fue posible analizar las cuotas.",
+      );
 
       mostrarErrorCuotas(mensaje);
       return;
@@ -339,15 +398,18 @@ function mostrarResumenCuotas(resumen) {
 
   document.getElementById(
     "resultado-cuotas-cierre",
-  ).textContent = resumen.cuotas_proyectadas_cierre_anio;
+  ).textContent =
+    resumen.cuotas_proyectadas_cierre_anio;
 
   document.getElementById(
     "resultado-faltantes-180",
-  ).textContent = resumen.faltantes_180;
+  ).textContent =
+    resumen.faltantes_180;
 
   document.getElementById(
     "resultado-faltantes-240",
-  ).textContent = resumen.faltantes_240;
+  ).textContent =
+    resumen.faltantes_240;
 
   document.getElementById(
     "resultado-tiempo-180",
@@ -360,42 +422,6 @@ function mostrarResumenCuotas(resumen) {
   ).textContent = formatearTiempo(
     resumen.anios_aprox_240,
   );
-}
-
-
-function formatearTiempo(anios) {
-  if (anios === null) {
-    return "No alcanzable con la proyección actual";
-  }
-
-  if (anios === 0) {
-    return "Requisito alcanzado";
-  }
-
-  const meses = Math.round(anios * 12);
-
-  const aniosCompletos = Math.floor(meses / 12);
-  const mesesRestantes = meses % 12;
-
-  const partes = [];
-
-  if (aniosCompletos > 0) {
-    partes.push(
-      `${aniosCompletos} ${
-        aniosCompletos === 1 ? "año" : "años"
-      }`,
-    );
-  }
-
-  if (mesesRestantes > 0) {
-    partes.push(
-      `${mesesRestantes} ${
-        mesesRestantes === 1 ? "mes" : "meses"
-      }`,
-    );
-  }
-
-  return partes.join(" y ");
 }
 
 
@@ -417,59 +443,369 @@ function ocultarErrorCuotas() {
 
 
 // ============================================================
-// Inicialización
+// PASO 3 — SALARIO
 // ============================================================
 
-document.addEventListener("DOMContentLoaded", () => {
-  const simulacion = obtenerSimulacion();
+function restaurarDatosSalario(simulacion) {
+  const salario = simulacion.salario;
 
-  restaurarDatosPersonales(simulacion);
-  restaurarDatosCuotas(simulacion);
+  if (!salario) {
+    return;
+  }
 
-  const pasoGuardado = Number(
-    simulacion.paso_actual || 1,
+  if (salario.monto !== undefined) {
+    document.getElementById(
+      "monto_salario",
+    ).value = salario.monto;
+  }
+
+  if (salario.periodicidad) {
+    document.getElementById(
+      "periodicidad_salario",
+    ).value = salario.periodicidad;
+  }
+
+  if (simulacion.resumen_salario) {
+    mostrarResumenSalario(
+      simulacion.resumen_salario,
+    );
+  }
+}
+
+
+async function analizarSalario(evento) {
+  evento.preventDefault();
+
+  const formulario = document.getElementById(
+    "form-salario",
   );
 
-  mostrarPaso(
-    pasoGuardado >= 1 && pasoGuardado <= 2
-      ? pasoGuardado
-      : 1,
-  );
+  if (!formulario.checkValidity()) {
+    formulario.reportValidity();
+    return;
+  }
 
-  document.getElementById(
-    "form-datos-personales",
-  ).addEventListener("submit", (evento) => {
-    evento.preventDefault();
+  const datos = {
+    monto: Number(
+      document.getElementById(
+        "monto_salario",
+      ).value,
+    ),
 
-    if (guardarDatosPersonales()) {
-      mostrarPaso(2);
+    periodicidad:
+      document.getElementById(
+        "periodicidad_salario",
+      ).value,
+  };
+
+  ocultarErrorSalario();
+
+  try {
+    const respuesta = await fetch(
+      "/api/simulacion/salario",
+      {
+        method: "POST",
+
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        body: JSON.stringify(datos),
+      },
+    );
+
+    const contenido = await respuesta.json();
+
+    if (!respuesta.ok) {
+      const mensaje = obtenerMensajeError(
+        contenido,
+        "No fue posible analizar el salario.",
+      );
+
+      mostrarErrorSalario(mensaje);
+      return;
     }
-  });
+
+    const simulacion = obtenerSimulacion();
+
+    simulacion.salario = datos;
+    simulacion.resumen_salario = contenido;
+
+    guardarSimulacion(simulacion);
+
+    mostrarResumenSalario(contenido);
+
+  } catch {
+    mostrarErrorSalario(
+      "No fue posible comunicarse con el servidor.",
+    );
+  }
+}
+
+
+function mostrarResumenSalario(resumen) {
+  document.getElementById(
+    "resultado-salario",
+  ).classList.remove("d-none");
 
   document.getElementById(
-    "form-cuotas",
-  ).addEventListener(
-    "submit",
-    analizarCuotas,
+    "salario-semanal",
+  ).textContent = formatearMoneda(
+    resumen.salario_semanal,
   );
 
   document.getElementById(
-    "btn-volver-paso-1",
-  ).addEventListener("click", () => {
-    mostrarPaso(1);
-  });
-
-  document.getElementById(
-    "continua_cotizando",
-  ).addEventListener(
-    "change",
-    actualizarEstadoContinuidad,
+    "salario-quincenal",
+  ).textContent = formatearMoneda(
+    resumen.salario_quincenal,
   );
 
   document.getElementById(
-    "cuotas_anio_actual",
-  ).addEventListener(
-    "input",
-    actualizarEstadoContinuidad,
+    "salario-mensual",
+  ).textContent = formatearMoneda(
+    resumen.salario_mensual,
   );
-});
+
+  document.getElementById(
+    "salario-anual",
+  ).textContent = formatearMoneda(
+    resumen.salario_anual,
+  );
+}
+
+
+function mostrarErrorSalario(mensaje) {
+  const error = document.getElementById(
+    "error-salario",
+  );
+
+  error.textContent = mensaje;
+  error.classList.remove("d-none");
+}
+
+
+function ocultarErrorSalario() {
+  document.getElementById(
+    "error-salario",
+  ).classList.add("d-none");
+}
+
+
+// ============================================================
+// FORMATEADORES
+// ============================================================
+
+function formatearTiempo(anios) {
+  if (anios === null) {
+    return "No alcanzable con la proyección actual";
+  }
+
+  if (anios === 0) {
+    return "Requisito alcanzado";
+  }
+
+  const meses = Math.round(
+    anios * 12,
+  );
+
+  const aniosCompletos = Math.floor(
+    meses / 12,
+  );
+
+  const mesesRestantes =
+    meses % 12;
+
+  const partes = [];
+
+  if (aniosCompletos > 0) {
+    partes.push(
+      `${aniosCompletos} ${
+        aniosCompletos === 1
+          ? "año"
+          : "años"
+      }`,
+    );
+  }
+
+  if (mesesRestantes > 0) {
+    partes.push(
+      `${mesesRestantes} ${
+        mesesRestantes === 1
+          ? "mes"
+          : "meses"
+      }`,
+    );
+  }
+
+  return partes.join(" y ");
+}
+
+
+function formatearMoneda(valor) {
+  const numero = Number(valor);
+
+  return `B/.${numero.toLocaleString(
+    "es-PA",
+    {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    },
+  )}`;
+}
+
+
+// ============================================================
+// MANEJO DE ERRORES DE LA API
+// ============================================================
+
+function obtenerMensajeError(
+  contenido,
+  mensajePredeterminado,
+) {
+  if (!contenido) {
+    return mensajePredeterminado;
+  }
+
+  if (typeof contenido.detail === "string") {
+    return contenido.detail;
+  }
+
+  if (Array.isArray(contenido.detail)) {
+    return contenido.detail
+      .map((error) => error.msg)
+      .join(" ");
+  }
+
+  return mensajePredeterminado;
+}
+
+
+// ============================================================
+// INICIALIZACIÓN
+// ============================================================
+
+document.addEventListener(
+  "DOMContentLoaded",
+  () => {
+    const simulacion = obtenerSimulacion();
+
+    restaurarDatosPersonales(simulacion);
+    restaurarDatosCuotas(simulacion);
+    restaurarDatosSalario(simulacion);
+
+
+    // --------------------------------------------------------
+    // Restaurar paso actual
+    // --------------------------------------------------------
+
+    const pasoGuardado = Number(
+      simulacion.paso_actual || 1,
+    );
+
+    mostrarPaso(
+      pasoGuardado >= 1 &&
+      pasoGuardado <= 3
+        ? pasoGuardado
+        : 1,
+    );
+
+
+    // --------------------------------------------------------
+    // Paso 1
+    // --------------------------------------------------------
+
+    document.getElementById(
+      "form-datos-personales",
+    ).addEventListener(
+      "submit",
+      (evento) => {
+        evento.preventDefault();
+
+        if (guardarDatosPersonales()) {
+          mostrarPaso(2);
+        }
+      },
+    );
+
+
+    // --------------------------------------------------------
+    // Paso 2
+    // --------------------------------------------------------
+
+    document.getElementById(
+      "form-cuotas",
+    ).addEventListener(
+      "submit",
+      analizarCuotas,
+    );
+
+
+    document.getElementById(
+      "btn-volver-paso-1",
+    ).addEventListener(
+      "click",
+      () => {
+        mostrarPaso(1);
+      },
+    );
+
+
+    document.getElementById(
+      "btn-continuar-paso-3",
+    ).addEventListener(
+      "click",
+      () => {
+        const simulacionActual =
+          obtenerSimulacion();
+
+        if (!simulacionActual.resumen_cuotas) {
+          mostrarErrorCuotas(
+            "Primero debes analizar las cuotas.",
+          );
+
+          return;
+        }
+
+        mostrarPaso(3);
+      },
+    );
+
+
+    document.getElementById(
+      "continua_cotizando",
+    ).addEventListener(
+      "change",
+      actualizarEstadoContinuidad,
+    );
+
+
+    document.getElementById(
+      "cuotas_anio_actual",
+    ).addEventListener(
+      "input",
+      actualizarEstadoContinuidad,
+    );
+
+
+    // --------------------------------------------------------
+    // Paso 3
+    // --------------------------------------------------------
+
+    document.getElementById(
+      "form-salario",
+    ).addEventListener(
+      "submit",
+      analizarSalario,
+    );
+
+
+    document.getElementById(
+      "btn-volver-paso-2",
+    ).addEventListener(
+      "click",
+      () => {
+        mostrarPaso(2);
+      },
+    );
+  },
+);
