@@ -1,12 +1,16 @@
 # Modelo de datos
 
-## Ubicación actual
+## Ubicación
 
 Los modelos Pydantic se encuentran en:
 
 ```text
 app/modelos/simulacion.py
 ```
+
+## Precisión de entrada
+
+Los campos monetarios y porcentuales editables relevantes validan un máximo de dos decimales en el backend. La interfaz aplica la misma restricción para ofrecer retroalimentación inmediata, pero Python conserva la validación autoritativa.
 
 ## Cuotas
 
@@ -22,23 +26,23 @@ Contiene:
 
 ### `ResumenCuotas`
 
-Contiene cuotas reales, cuotas proyectadas al cierre, faltantes para umbrales preliminares y tiempo aproximado.
+Contiene cuotas reales, cierre proyectado, faltantes preliminares y estimaciones de tiempo.
 
 ## Historial salarial
 
 ### `RegistroHistorialSalarial`
 
-Representa un año calendario y contiene:
+Representa un año calendario:
 
 - `anio`;
 - `cuotas`;
 - `salario_cotizado`.
 
-`salario_cotizado` es el total reportado durante ese año y no debe confundirse con un salario anualizado de doce meses.
+`salario_cotizado` es el total reportado durante ese año, no un salario anualizado de doce meses.
 
 ### `RegistroHistorialNormalizado`
 
-Agrega el estado del registro:
+Estados:
 
 ```text
 SIN_COTIZACION
@@ -48,21 +52,17 @@ HISTORICO_COMPLETO
 
 ### `DatosHistorialSalarial`
 
-Contiene:
-
-- año inicial y final;
-- total de cuotas reales usado como referencia;
-- registros anuales.
+Contiene rango de años, cuotas de referencia y registros.
 
 ### `ResumenHistorialSalarial`
 
-Contiene, entre otros datos:
+Incluye:
 
 - cuotas sumadas;
-- diferencia respecto del total de referencia;
+- diferencia respecto de referencia;
 - indicador de coincidencia;
 - años sin registro;
-- total de salarios reportados;
+- total salarial reportado;
 - último año con cuotas;
 - último salario cotizado.
 
@@ -70,12 +70,7 @@ Contiene, entre otros datos:
 
 ### `DatosSalario`
 
-Contiene:
-
-- `monto`;
-- `periodicidad`.
-
-Periodicidades admitidas:
+Contiene monto y periodicidad:
 
 ```text
 SEMANAL
@@ -86,7 +81,7 @@ ANUAL
 
 ### `ResumenSalario`
 
-Conserva el monto y periodicidad originales y agrega equivalentes semanal, quincenal, mensual y anual.
+Conserva la entrada original y agrega equivalentes semanal, quincenal, mensual y anual.
 
 ## Proyección salarial
 
@@ -95,13 +90,12 @@ Conserva el monto y periodicidad originales y agrega equivalentes semanal, quinc
 Contiene:
 
 - salario mensual base;
-- año inicial;
-- año final;
+- año inicial y final;
 - modalidad;
 - porcentaje anual opcional;
 - salario futuro conocido opcional;
-- año del salario futuro opcional;
-- lista de porcentajes para comparación.
+- año del salario futuro;
+- lista de porcentajes para escenarios.
 
 Modalidades:
 
@@ -114,22 +108,17 @@ ESCENARIOS
 
 ### `ProyeccionSalarioAnual`
 
-Representa una fila anual con:
-
-- año;
-- salario mensual;
-- salario anual;
-- crecimiento acumulado respecto de la base.
+Registra año, salario mensual, salario anual y crecimiento acumulado.
 
 ### `EscenarioProyeccionSalario`
 
-Agrupa una tasa anual y sus registros anuales.
+Agrupa una tasa y sus registros.
 
 ### `ResumenProyeccionSalario`
 
-Agrupa la modalidad, período y uno o varios escenarios.
+Agrupa modalidad, período y escenarios.
 
-## Línea temporal histórica y proyectada
+## Línea temporal
 
 ### `RegistroLineaTiempo`
 
@@ -139,38 +128,85 @@ Separa por año:
 - salario histórico;
 - cuotas proyectadas;
 - salario proyectado;
-- cuotas esperadas al cierre;
-- salario esperado al cierre;
-- estado del registro.
+- cuotas al cierre;
+- salario al cierre;
+- estado.
 
-Estados actuales:
+Estados:
 
 ```text
 HISTORICO
 HISTORICO_PARCIAL
+SIN_COTIZACION
 MIXTO
 PROYECTADO
 PENDIENTE
 ```
 
-### `EscenarioLineaTiempo`
-
-Agrupa una línea temporal completa para una hipótesis salarial.
-
 ### `DatosLineaTiempo`
 
-Integra historial, cuotas, salario actual y parámetros de proyección.
+Integra historial, cuotas, salario actual y proyección.
 
 ### `ResumenLineaTiempo`
 
-Devuelve el período histórico, el año actual, el final de la proyección y los escenarios integrados.
+Devuelve período y escenarios integrados.
+
+## Retiro
+
+### `DatosRetiro`
+
+Contiene:
+
+- `fecha_nacimiento`;
+- `sexo`;
+- `fecha_corte`;
+- `fecha_corte_cuotas`;
+- `cuotas_reales`;
+- `cuotas_anio_actual`;
+- `continua_cotizando`;
+- `cuotas_esperadas_cierre_anio`;
+- `cuotas_esperadas_por_anio`;
+- `anio_fin_proyeccion_salarial`;
+- `anios_adicionales`;
+- `fecha_retiro_personalizada`.
+
+La fecha de evaluación y la fecha de corte de cuotas se mantienen separadas porque un reporte puede estar actualizado hasta un día anterior al de la simulación.
+
+### `EscenarioRetiro`
+
+Representa una fecha posible y contiene:
+
+- tipo y nombre;
+- fecha de retiro;
+- edad en esa fecha;
+- meses calendario desde el corte de cuotas;
+- cuotas adicionales estimadas;
+- cuotas totales estimadas;
+- indicador de fecha transcurrida.
+
+### `ResumenRetiro`
+
+Incluye:
+
+- fecha de evaluación;
+- fecha de corte de cuotas;
+- edad actual;
+- edad y fecha de referencia;
+- situación respecto de la referencia;
+- escenarios;
+- método de estimación;
+- año final de la proyección salarial;
+- indicador de cobertura del horizonte;
+- advertencias.
+
+El resumen no equivale a una decisión legal de elegibilidad.
 
 ## Evolución prevista
 
 El modelo deberá ampliarse para incorporar:
 
-- períodos mensuales de cotización;
-- fechas de referencia;
-- escenarios de retiro;
+- detalle mensual de cotización cuando sea necesario;
+- determinación legal de elegibilidad;
 - resultados por sistema previsional;
-- desglose de componentes de pensión.
+- desglose de componentes de pensión;
+- persistencia voluntaria.

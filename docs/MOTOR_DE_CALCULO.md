@@ -2,7 +2,39 @@
 
 ## Principio general
 
-La lógica de cálculo debe permanecer separada de HTML y JavaScript. La interfaz captura y presenta; Python valida y calcula.
+La lógica de cálculo permanece separada de HTML y JavaScript. La interfaz captura y presenta; Python valida y calcula.
+
+Los motores legales definitivos de SEBD, Subsistema Mixto y SUCGS todavía no forman parte de esta etapa.
+
+## Precisión monetaria y redondeo
+
+Archivo común:
+
+```text
+app/core/dinero.py
+```
+
+Criterio técnico general:
+
+1. convertir valores monetarios relevantes a `Decimal`;
+2. conservar precisión durante las operaciones;
+3. evitar redondear valores intermedios únicamente para hacer coincidir cifras visibles;
+4. materializar importes monetarios a dos decimales con `ROUND_HALF_UP`;
+5. permitir que una regla normativa específica sustituya este criterio dentro del motor legal correspondiente.
+
+Ejemplo de proyección:
+
+```text
+B/. 1,331.90 mensuales
+→ B/. 15,982.80 anuales
+→ crecimiento 1 %
+→ B/. 16,142.628
+→ resultado monetario: B/. 16,142.63
+```
+
+El salario mensual visible del mismo escenario puede ser B/. 1,345.22. No se vuelve a multiplicar ese valor ya redondeado por 12 para obtener el anual, porque introduciría un redondeo intermedio.
+
+Los campos monetarios editables se limitan a dos decimales tanto en frontend como en la validación del backend.
 
 ## Análisis preliminar de cuotas
 
@@ -16,13 +48,14 @@ Comportamiento actual:
 
 - valida que las cuotas del año actual no superen el total acreditado;
 - diferencia cuotas reales de cuotas futuras;
+- respeta las cuotas esperadas al cierre del año;
 - si la persona no continuará cotizando, no agrega cuotas futuras;
 - calcula faltantes preliminares para 180 y 240 cuotas;
-- estima tiempo usando `cuotas_faltantes / cuotas_por_anio`.
+- estima tiempo usando la densidad anual futura.
 
-Los umbrales actuales son preliminares y no sustituyen el futuro motor de elegibilidad legal.
+Los umbrales de 180 y 240 son referencias del asistente. La elegibilidad definitiva dependerá del sistema y prestación que determine el motor legal.
 
-## Análisis del historial salarial
+## Historial salarial
 
 Archivo:
 
@@ -30,19 +63,17 @@ Archivo:
 app/servicios/historial_salarios.py
 ```
 
-Comportamiento actual:
+El servicio:
 
 - valida el rango de años;
 - rechaza años duplicados;
-- valida coherencia básica entre cuotas y salario reportado;
+- valida coherencia entre cuotas y salario;
 - clasifica registros como completos, parciales o sin cotización;
 - detecta años sin registro;
-- suma las cuotas introducidas;
-- compara esa suma con las cuotas reales del Paso 2;
-- calcula la diferencia de cuotas sin bloquear automáticamente el flujo;
-- resume el total salarial histórico reportado.
+- suma cuotas y salarios con precisión controlada;
+- compara las cuotas identificadas con las cuotas reales del Paso 2.
 
-Este análisis todavía trabaja a nivel anual. Los cálculos legales sensibles al mes o fecha exacta requerirán detalle mensual en una fase posterior.
+El historial continúa siendo anual. Cuando una regla legal dependa del mes exacto, el motor correspondiente deberá utilizar una fuente con mayor granularidad o una aproximación explícitamente identificada.
 
 ## Normalización salarial
 
@@ -52,7 +83,7 @@ Archivo:
 app/servicios/proyeccion_salarios.py
 ```
 
-Conversión a equivalente anual:
+Conversión mediante equivalente anual:
 
 ```text
 semanal     = monto × 52
@@ -61,7 +92,7 @@ mensual     = monto × 12
 anual       = monto
 ```
 
-Las demás periodicidades se derivan del equivalente anual.
+Las demás periodicidades se derivan del equivalente anual preciso.
 
 ## Proyección por porcentaje
 
@@ -73,27 +104,27 @@ salario_año_n = salario_base × (1 + tasa)^n
 
 El año inicial conserva el salario base.
 
+Los importes mensual y anual visibles se redondean de forma independiente desde el valor preciso del escenario.
+
 ## Salario futuro conocido
 
-Cuando el usuario conoce un salario para un año futuro, se calcula una tasa anual compuesta equivalente que conecta el salario actual con el salario futuro:
+Cuando el usuario conoce un salario para un año futuro, se obtiene la tasa anual compuesta equivalente:
 
 ```text
 tasa = (salario_futuro / salario_actual)^(1 / años) - 1
 ```
 
-La tasa obtenida se utiliza para construir la serie anual.
+La tasa se utiliza para construir la serie anual. La implementación futura podrá aumentar aún más la precisión interna de esta modalidad si el motor legal lo necesita.
 
 ## Comparación de escenarios
 
-La modalidad `ESCENARIOS` genera una serie independiente por cada porcentaje solicitado. El valor inicial sugerido actualmente es:
+La modalidad `ESCENARIOS` genera una serie independiente por porcentaje. La sugerencia inicial es:
 
 ```text
 0 %, 1 %, 2 %, 3 %
 ```
 
-## Redondeo monetario
-
-El salario mensual proyectado se redondea a dos decimales y el salario anual visible se calcula a partir de ese valor mensual redondeado multiplicado por 12. Esto mantiene coherencia entre cifras mostradas.
+Los porcentajes introducidos admiten como máximo dos decimales.
 
 ## Línea temporal histórica y proyectada
 
@@ -103,24 +134,64 @@ Archivo:
 app/servicios/linea_tiempo.py
 ```
 
-Comportamiento actual:
+La línea temporal:
 
-- reutiliza los servicios de historial, cuotas, salario actual y proyección;
 - mantiene separados valores históricos y proyectados;
-- representa el año actual como `MIXTO` cuando existen cuotas reales y cuotas todavía estimadas;
-- calcula el tramo salarial restante del año actual como salario mensual actual por cuotas/meses todavía proyectados;
-- para años futuros, limita el salario cotizado proyectado a la cantidad de cuotas esperadas;
-- genera una línea temporal independiente por escenario salarial.
+- usa `SIN_COTIZACION` cuando un año histórico tiene cero cuotas;
+- representa el año actual como histórico, parcial o mixto según corresponda;
+- respeta las cuotas esperadas al cierre del año actual;
+- limita el salario futuro al número de cuotas proyectadas;
+- conserva la precisión anual producida por el motor salarial.
 
-La equivalencia provisional de una cuota futura con un mes cotizado se utiliza únicamente para planificación anual. Los cálculos legales sensibles a fechas exactas deberán utilizar detalle mensual.
+La equivalencia provisional entre una cuota futura y un mes cotizado se utiliza para planificación cuando no existe detalle mensual.
+
+## Escenarios de retiro
+
+Archivo:
+
+```text
+app/servicios/retiro.py
+```
+
+El servicio trabaja con fechas exactas para edad y fecha de referencia.
+
+### Fecha de evaluación y fecha de corte de cuotas
+
+Son conceptos distintos:
+
+- **fecha de evaluación:** día en que se analiza la situación previsional;
+- **fecha de corte de cuotas:** día hasta el cual se consideran actualizadas las cuotas reales informadas.
+
+### Cuotas futuras
+
+La estimación evita aplicar directamente la densidad anual al resto del año actual. Primero respeta:
+
+```text
+cuotas restantes año actual =
+max(cuotas esperadas al cierre - cuotas ya acreditadas este año, 0)
+```
+
+A partir del siguiente año se aplica `cuotas_esperadas_por_anio`, prorrateando el año de retiro cuando la fecha evaluada cae dentro del año.
+
+Por tanto, si el usuario tiene 5 cuotas en 2026 y espera cerrar 2026 con 5, un retiro en noviembre de 2026 no agrega tres cuotas artificiales.
+
+### Horizonte salarial
+
+Cada escenario de retiro se compara con `anio_fin_proyeccion_salarial`.
+
+Si una fecha de retiro excede ese horizonte:
+
+- el backend devuelve una advertencia;
+- la interfaz ofrece ajustar el Paso 4;
+- no se extiende silenciosamente el salario con una hipótesis no confirmada.
 
 ## Pendiente
 
-Faltan los motores legales de:
+Faltan los motores legales completos de:
 
 - elegibilidad;
 - SEBD;
 - Subsistema Mixto;
 - SUCGS.
 
-También falta incorporar proyecciones por meses y fechas exactas para decisiones legales sensibles al momento de cotización.
+También queda pendiente incorporar detalle mensual/importación cuando sea necesario para reglas sensibles al mes exacto.

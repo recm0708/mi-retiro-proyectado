@@ -30,6 +30,15 @@ Todos los cambios importantes realizados en este proyecto serán documentados en
 - Estructura para motores SEBD, Mixto y SUCGS.
 - Directorios de normativa, documentación técnica y casos de validación.
 - Configuración inicial de Git y GitHub.
+- Paso 5 para fechas y escenarios preliminares de retiro.
+- Endpoint `POST /api/simulacion/retiro`.
+- Carga versionada de parámetros generales desde `normativa/parametros_generales.json`.
+- Utilidades monetarias comunes en `app/core/dinero.py`.
+- Navegación rápida persistente para pasos largos del asistente.
+- Pruebas automatizadas con `unittest` para precisión monetaria, proyección salarial, línea temporal y retiro.
+- Archivo `.gitattributes` para normalizar finales de línea.
+- Documento `docs/VALIDACION.md` y reglas para casos de prueba anonimizados.
+- Metadatos de trazabilidad de la fuente oficial en `normativa/parametros_generales.json`.
 
 ### Cambiado
 
@@ -38,9 +47,12 @@ Todos los cambios importantes realizados en este proyecto serán documentados en
 - Se amplió el ancho del asistente y se mejoró la presentación de valores monetarios.
 - Los resultados dependientes se invalidan cuando el usuario modifica datos que los originaron.
 - El Paso 3 separa el historial real del salario actual utilizado como base de proyección.
-- El salario anual proyectado se deriva del salario mensual visible redondeado para mantener consistencia monetaria.
+- Los cálculos monetarios conservan precisión interna y redondean a centavos con `ROUND_HALF_UP` al materializar cada resultado, evitando redondeos intermedios acumulativos.
 - En años futuros con menos de 12 cuotas, el salario cotizado proyectado se limita a los meses/cuotas realmente proyectados.
 - El historial real se muestra una sola vez aunque existan varios escenarios salariales futuros.
+- Los campos monetarios editables usan separadores de miles y limitan la entrada a dos decimales.
+- El Paso 5 muestra explícitamente los datos heredados de pasos anteriores y advierte cuando el horizonte salarial no cubre todos los escenarios de retiro.
+- La estimación de cuotas del Paso 5 respeta primero el cierre del año actual definido en el Paso 2 y aplica la densidad anual a partir del año siguiente.
 
 ### Corregido
 
@@ -50,3 +62,7 @@ Todos los cambios importantes realizados en este proyecto serán documentados en
 - Jerarquía HTML del Paso 4 para evitar que quedara anidado dentro del Paso 3.
 - Duplicación accidental del componente de historial fuera del bloque principal de Jinja.
 - Restauración de los scripts específicos de simulación e historial en `simulacion.html`.
+- Clasificación de años con cero cuotas en la línea temporal para mostrarlos como `SIN_COTIZACION`.
+- Diferencias de un centavo provocadas por redondear el salario mensual antes de calcular el anual proyectado.
+- Proyección de cuotas del Paso 5 que podía agregar cuotas al año actual aunque el usuario hubiera indicado que no esperaba más cuotas ese año.
+- Artefactos visuales de punto flotante en campos salariales históricos.

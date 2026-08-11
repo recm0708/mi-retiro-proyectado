@@ -38,9 +38,9 @@ El asistente está organizado en seis pasos:
 
 1. **Datos personales:** implementado.
 2. **Cuotas:** implementado con análisis preliminar mediante API.
-3. **Historial:** en implementación. Incluye captura anual de cuotas y salario cotizado/reportado, validación contra las cuotas reales del Paso 2 y salario actual normalizado para proyección.
-4. **Proyección:** implementado en validación. Incluye salario constante, variación porcentual, salario futuro conocido, comparación de escenarios y línea temporal que separa historial real, año actual mixto y futuro proyectado.
-5. **Retiro:** pendiente.
+3. **Historial:** implementado en validación. Incluye captura anual de cuotas y salario cotizado/reportado, validación contra las cuotas reales del Paso 2, formato monetario controlado y salario actual normalizado para proyección.
+4. **Proyección:** implementado en validación. Incluye salario constante, variación porcentual, salario futuro conocido, comparación de escenarios, precisión monetaria sin redondeos intermedios y línea temporal que separa historial real, año actual y futuro proyectado.
+5. **Retiro:** implementado en validación. Calcula edad y fecha de referencia, escenarios adicionales, cuotas futuras estimadas respetando el cierre del año actual y verifica si la proyección salarial cubre el horizonte de retiro.
 6. **Resultados:** pendiente.
 
 Todavía no se han implementado los motores legales definitivos de SEBD, Mixto y SUCGS.
@@ -59,6 +59,7 @@ POST /api/simulacion/historial-salarial
 POST /api/simulacion/salario
 POST /api/simulacion/proyeccion-salario
 POST /api/simulacion/linea-tiempo
+POST /api/simulacion/retiro
 ```
 
 La documentación automática está disponible en `/docs` durante la ejecución local.
@@ -82,7 +83,6 @@ Previstas para fases posteriores:
 
 - Chart.js
 - SQLite
-- Pytest
 - generación de informes PDF
 
 ## Estructura general
@@ -102,6 +102,7 @@ calculadora-pension-css/
 ├── normativa/
 ├── tests/
 ├── .editorconfig
+├── .gitattributes
 ├── .gitignore
 ├── CHANGELOG.md
 ├── CONTRIBUTING.md
@@ -158,13 +159,20 @@ http://127.0.0.1:8000/docs
 
 ## Validación rápida
 
-Para verificar que los módulos Python no contienen errores de sintaxis:
+Para verificar sintaxis y los casos automatizados disponibles:
 
 ```powershell
 python -m compileall app
+python -m unittest discover -s tests -v
 ```
 
-Después se deben validar manualmente las rutas principales y el flujo del asistente en el navegador.
+Después se deben validar manualmente las rutas principales y el flujo del asistente en el navegador. Los casos reales utilizados para contrastar resultados se mantienen anonimizados y sus documentos originales no se versionan.
+
+## Precisión monetaria
+
+Los cálculos monetarios utilizan `Decimal` en las operaciones donde la precisión es relevante. El criterio técnico actual es conservar precisión durante el cálculo y redondear a centavos con `ROUND_HALF_UP` cuando se materializa un resultado monetario. Una regla normativa específica podrá sustituir este criterio en el motor que corresponda.
+
+Los campos monetarios editables muestran separadores de miles y admiten como máximo dos decimales.
 
 ## Documentación técnica
 
@@ -176,7 +184,8 @@ Los documentos de `docs/` registran progresivamente:
 - motores de cálculo;
 - normativa;
 - decisiones técnicas;
-- hoja de ruta.
+- hoja de ruta;
+- validación y casos de prueba.
 
 La documentación debe actualizarse cuando un cambio funcional o arquitectónico lo amerite; no es necesario modificar todos los archivos `.md` en cada commit.
 
@@ -192,7 +201,7 @@ El repositorio no debe contener:
 - bases de datos reales;
 - información confidencial.
 
-Los casos utilizados para validar los cálculos deberán estar anonimizados.
+Los casos utilizados para validar los cálculos deberán estar anonimizados. Las convenciones y casos técnicos se documentan en `docs/VALIDACION.md`.
 
 ## Advertencia
 

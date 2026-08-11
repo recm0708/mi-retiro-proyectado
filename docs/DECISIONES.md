@@ -168,3 +168,46 @@ Cuando existan varios escenarios salariales, solo la parte futura se repetirá p
 Si un año futuro contiene menos de 12 cuotas proyectadas, el salario cotizado estimado no utilizará el salario anual completo. Se calculará a partir del salario mensual del escenario multiplicado por la cantidad de cuotas/meses proyectados.
 
 Esta equivalencia anual es provisional y será refinada con detalle mensual cuando los motores de elegibilidad y pensión lo requieran.
+
+---
+
+## ADR-016 — Precisión monetaria con `Decimal` y redondeo al materializar
+
+**Estado:** Aceptada
+
+Los cálculos monetarios sensibles utilizarán `Decimal` para evitar artefactos binarios de punto flotante.
+
+El criterio técnico general será conservar precisión durante las operaciones y redondear a centavos con `ROUND_HALF_UP` al materializar un importe. No se redondearán valores intermedios únicamente para forzar coincidencia con otra cifra visible.
+
+Si una norma aplicable establece un método de redondeo distinto, esa regla normativa tendrá prioridad dentro del motor correspondiente.
+
+---
+
+## ADR-017 — El cierre del año actual precede a la densidad futura
+
+**Estado:** Aceptada
+
+La proyección de cuotas del Paso 5 respetará primero `cuotas_esperadas_cierre_anio` del Paso 2.
+
+La densidad `cuotas_esperadas_por_anio` se utilizará para los años futuros y, cuando sea necesario, se prorrateará el año de retiro. Esto evita agregar cuotas en el año actual cuando el usuario ya indicó que no espera nuevas acreditaciones antes de cerrarlo.
+
+---
+
+## ADR-018 — El horizonte salarial debe cubrir el escenario de retiro
+
+**Estado:** Aceptada
+
+Un escenario de retiro no se considerará completamente cubierto si su fecha se extiende más allá del último año de la proyección salarial.
+
+La aplicación advertirá la inconsistencia y ofrecerá volver al Paso 4 para extender el horizonte. No se extrapolarán silenciosamente salarios sin confirmación del usuario.
+
+---
+
+## ADR-019 — Navegación rápida `sticky` sin duplicar lógica de negocio
+
+**Estado:** Aceptada
+
+Los pasos largos del asistente dispondrán de una barra de navegación rápida visible al desplazarse.
+
+La barra delegará sus acciones en los formularios y botones existentes. No contendrá fórmulas ni validaciones previsionales paralelas, evitando duplicar lógica y manteniendo accesibles las acciones Anterior/Continuar/Analizar.
+

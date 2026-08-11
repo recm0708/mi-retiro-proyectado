@@ -1,77 +1,99 @@
 # Arquitectura
 
-## Objetivo
+## Principios
 
-La aplicación utiliza una arquitectura web local separando presentación, API, modelos de datos, servicios de cálculo y futuros motores previsionales.
+La aplicación mantiene separadas cuatro responsabilidades:
 
-## Capas actuales
+1. **Interfaz:** Jinja2, HTML, CSS y JavaScript capturan datos y presentan resultados.
+2. **API:** FastAPI valida la frontera entre interfaz y backend.
+3. **Servicios y motores:** Python concentra cálculos, validaciones y reglas de negocio.
+4. **Normativa:** los parámetros legales versionables se mantienen fuera de la presentación y de los algoritmos cuando corresponde.
+
+Los datos históricos reales y los datos proyectados permanecen diferenciados durante todo el flujo.
+
+## Estructura principal
 
 ```text
-Navegador
-  ├── Jinja2 / HTML
-  ├── Bootstrap / CSS
-  └── JavaScript + sessionStorage
-            ↓ HTTP/JSON
-FastAPI
-            ↓
-Modelos Pydantic
-            ↓
-Servicios de cálculo
-  ├── proyeccion_cuotas.py
-  ├── historial_salarios.py
-  ├── proyeccion_salarios.py
-  └── linea_tiempo.py
-            ↓
-Motores previsionales futuros
-  ├── elegibilidad.py
-  ├── sebd.py
-  ├── mixto.py
-  └── sucgs.py
-            ↓
-Normativa versionada futura
+app/
+├── core/
+│   ├── config.py
+│   ├── constants.py
+│   ├── dinero.py
+│   └── normativa.py
+├── modelos/
+│   └── simulacion.py
+├── motores/
+│   ├── elegibilidad.py
+│   ├── sebd.py
+│   ├── mixto.py
+│   └── sucgs.py
+├── servicios/
+│   ├── historial_salarios.py
+│   ├── linea_tiempo.py
+│   ├── proyeccion_cuotas.py
+│   ├── proyeccion_salarios.py
+│   └── retiro.py
+├── static/
+│   ├── css/
+│   └── js/
+├── templates/
+│   └── partials/
+└── main.py
 ```
 
-## Responsabilidades
+Los motores previsionales legales todavía están en preparación; los servicios actuales resuelven captura, normalización, proyección y escenarios preliminares.
 
-### Interfaz
+## Núcleo común
 
-- captura datos;
-- controla la navegación del asistente;
-- conserva temporalmente la simulación en `sessionStorage`;
-- presenta respuestas de la API;
-- invalida resultados cuando cambian datos de los que dependen.
+### `app/core/dinero.py`
 
-### FastAPI
+Centraliza la conversión a `Decimal`, la validación de precisión y el redondeo monetario técnico. El criterio general actual es conservar precisión durante la operación y redondear a centavos con `ROUND_HALF_UP` al materializar un importe, salvo que una regla normativa específica exija otra cosa.
 
-- expone páginas y endpoints;
-- recibe modelos Pydantic;
-- traduce errores de negocio a respuestas HTTP;
-- delega los cálculos a servicios o motores.
+### `app/core/normativa.py`
 
-### Modelos
+Carga parámetros versionados desde `normativa/`. Actualmente se utiliza `parametros_generales.json` para edades de referencia y otros metadatos generales. Los parámetros específicos de SEBD, Mixto y SUCGS se incorporarán conforme se implementen sus motores.
 
-`app/modelos/simulacion.py` define actualmente estructuras para:
+## Modelos
+
+`app/modelos/simulacion.py` define estructuras Pydantic para:
 
 - cuotas;
 - historial salarial anual;
-- salario actual;
-- equivalencias salariales;
-- configuración de proyección;
-- registros anuales y escenarios.
+- salario actual y equivalencias;
+- configuración y escenarios de proyección salarial;
+- línea temporal histórica/proyectada;
+- fechas y escenarios preliminares de retiro.
 
-### Servicios
+Los campos monetarios y porcentuales editables relevantes validan como máximo dos decimales en la frontera del backend.
 
-Los servicios actuales realizan cálculos no específicos de un sistema legal completo:
+## Servicios
 
-- análisis preliminar de cuotas;
-- validación y resumen del historial salarial;
-- normalización salarial;
-- proyección salarial;
-- integración de historial y proyección en una línea temporal anual.
+### Cuotas
 
-### Motores
+`proyeccion_cuotas.py` analiza cuotas acreditadas, cierre esperado del año y densidad anual futura. Sus referencias de 180 y 240 cuotas siguen siendo preliminares hasta que el motor legal determine la prestación aplicable.
 
-Los motores SEBD, Mixto, SUCGS y elegibilidad todavía no contienen las fórmulas legales definitivas.
+### Historial
+
+`historial_salarios.py` valida años, cuotas y salarios históricos, clasifica años completos, parciales o sin cotización y contrasta la suma de cuotas con el Paso 2.
+
+### Proyección salarial
+
+`proyeccion_salarios.py` normaliza periodicidades y genera escenarios salariales manteniendo precisión interna. Los importes mensual y anual se derivan desde el valor preciso y se redondean de forma independiente al presentarse.
+
+### Línea temporal
+
+`linea_tiempo.py` integra historial, año actual y futuro sin sobrescribir información real. Los años con cero cuotas se representan explícitamente como `SIN_COTIZACION`.
+
+### Retiro
+
+`retiro.py` calcula edad, fecha de referencia y escenarios por fecha exacta. La estimación de cuotas:
+
+- respeta primero el cierre del año actual indicado en el Paso 2;
+- aplica después la densidad anual futura;
+- mantiene visible que se trata de una aproximación cuando no existe detalle mensual;
+- verifica si la proyección salarial alcanza el horizonte de retiro seleccionado.
+
+Este servicio no determina por sí mismo la elegibilidad legal.
 
 ## Endpoints actuales
 
@@ -85,15 +107,35 @@ POST /api/simulacion/historial-salarial
 POST /api/simulacion/salario
 POST /api/simulacion/proyeccion-salario
 POST /api/simulacion/linea-tiempo
+POST /api/simulacion/retiro
 ```
+
+## Interfaz del asistente
+
+El asistente conserva estado temporal en `sessionStorage`.
+
+Los módulos principales del frontend son:
+
+- `simulacion.js`: estado compartido, navegación y formularios generales;
+- `historial_salarios.js`: historial anual;
+- `linea_tiempo.js`: presentación integrada del Paso 4;
+- `retiro.js`: Paso 5 y escenarios de retiro;
+- `moneda.js`: entrada/formato monetario con separadores de miles y máximo dos decimales;
+- `navegacion_wizard.js`: barra de navegación rápida `sticky` para pasos extensos.
+
+Los parciales Jinja `historial_salarial.html` y `retiro.html` mantienen modularizadas las secciones de mayor complejidad.
 
 ## Persistencia
 
-Actualmente no existe persistencia permanente. `sessionStorage` conserva únicamente el estado temporal de la pestaña durante una simulación.
-## Modularización del Paso 3
+No existe todavía persistencia permanente. `sessionStorage` conserva únicamente el estado temporal de la pestaña. SQLite y el guardado voluntario pertenecen a una fase posterior.
 
-El historial salarial se mantiene en un parcial Jinja independiente (`templates/partials/historial_salarial.html`) y su comportamiento de interfaz se gestiona en `static/js/historial_salarios.js`. El archivo `simulacion.js` conserva la navegación general y el estado compartido del asistente.
+## Validación
 
-## Modularización de la línea temporal
+La base actual utiliza:
 
-La presentación integrada del Paso 4 se gestiona en `static/js/linea_tiempo.js`. Este módulo consume `POST /api/simulacion/linea-tiempo` y evita duplicar el historial real en cada escenario futuro.
+```powershell
+python -m compileall app
+python -m unittest discover -s tests -v
+```
+
+además de pruebas manuales del flujo web. Los casos de validación reales deben anonimizarse y sus documentos originales no se versionan.

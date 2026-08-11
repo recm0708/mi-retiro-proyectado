@@ -6,18 +6,18 @@ La aplicación utiliza un asistente de seis pasos.
 
 ## Paso 1 — Datos personales
 
-Datos actuales:
+Datos:
 
 - fecha de nacimiento;
 - sexo;
 - fecha de ingreso a la CSS, opcional;
-- sistema previsional conocido o selección `No sé cuál tengo`.
+- sistema previsional conocido o `No sé cuál tengo`.
 
-La edad no se solicita manualmente; será calculada a partir de la fecha de nacimiento.
+La edad se calcula; no se solicita manualmente.
 
 ## Paso 2 — Cuotas
 
-Datos actuales:
+Datos:
 
 - total de cuotas acreditadas;
 - cuotas acreditadas en el año actual;
@@ -25,80 +25,121 @@ Datos actuales:
 - cuotas esperadas al cierre del año;
 - cuotas esperadas por año futuro.
 
-Resultados actuales:
+Resultados:
 
 - cuotas reales;
-- proyección al cierre del año;
-- faltantes preliminares para 180 y 240 cuotas;
-- tiempo aproximado para alcanzar esos umbrales según la proyección.
+- proyección al cierre;
+- distancia preliminar respecto de 180 y 240 cuotas;
+- tiempo aproximado según densidad futura.
 
-Las cuotas del año actual ya forman parte del total acreditado y no deben sumarse dos veces.
+Las cuotas del año actual ya están incluidas en el total real.
 
 ## Paso 3 — Historial salarial y salario actual
 
-El Paso 3 mantiene separados dos conceptos:
+El Paso 3 separa:
 
-1. **Historial real:** cuotas y salario cotizado/reportado por año calendario.
-2. **Salario actual:** remuneración vigente que servirá como punto de partida para proyecciones futuras.
+1. **historial real:** cuotas y salario cotizado/reportado por año;
+2. **salario actual:** remuneración vigente para la proyección.
 
-Modos previstos para proporcionar el historial:
+Modos previstos:
 
-- introducción manual anual;
-- continuar solo con salario actual cuando no exista historial suficiente;
-- importación desde Mi Retiro Seguro en una fase posterior.
+- historial manual anual;
+- continuar solo con salario actual cuando no exista información histórica suficiente;
+- importación de Mi Retiro Seguro en una fase posterior.
 
-En modo manual, la aplicación genera los años desde la fecha de ingreso a la CSS hasta el año actual. Cada fila contiene:
+En modo manual se generan años automáticamente, pero el usuario puede corregir el año inicial cuando una fuente histórica contenga registros anteriores.
+
+Cada fila muestra:
 
 - año;
 - cuotas;
-- salario cotizado/reportado en ese año;
-- estado visual: completo, parcial, sin cotización o pendiente.
+- salario;
+- estado: completo, parcial o sin cotización.
 
-El backend compara la suma de cuotas del historial con las cuotas reales informadas en el Paso 2. Una diferencia genera una advertencia, pero no bloquea automáticamente la simulación.
+Los campos monetarios:
 
-El salario actual puede ingresarse como semanal, quincenal, mensual o anual. La aplicación devuelve equivalentes en las cuatro periodicidades.
+- muestran separadores de miles al quedar formateados;
+- admiten como máximo dos decimales;
+- se validan nuevamente en backend.
+
+El historial se contrasta con las cuotas del Paso 2. Una diferencia se informa al usuario.
+
+El salario actual admite periodicidad semanal, quincenal, mensual o anual.
 
 ## Paso 4 — Proyección salarial
 
-Modalidades previstas e implementadas en el motor:
+Modalidades implementadas:
 
-1. mantener salario constante;
-2. aplicar porcentaje anual;
-3. indicar un salario futuro conocido;
-4. comparar varios porcentajes.
+1. salario constante;
+2. porcentaje anual;
+3. salario futuro conocido;
+4. comparación de porcentajes.
 
-La interfaz muestra el salario mensual normalizado del Paso 3 como valor base. Cuando existe historial manual validado, el resultado se presenta como una línea temporal dividida en tres zonas:
+La proyección:
 
-- historial real anterior al año actual;
-- año actual, separando parte histórica y parte proyectada;
-- años futuros, organizados por escenario salarial.
+- usa el salario normalizado del Paso 3;
+- conserva precisión interna;
+- redondea los resultados monetarios a centavos al materializarlos;
+- mantiene el historial separado;
+- representa de forma explícita años sin cotización;
+- respeta el cierre de cuotas del año actual;
+- repite únicamente la parte futura cuando hay varios escenarios.
 
-Cuando el usuario continúa sin historial completo, se conserva una vista de proyección futura con una advertencia de información limitada.
+## Paso 5 — Condiciones y escenarios de retiro
 
-Los datos proyectados se almacenan separados de los datos reales.
+**Estado:** implementado en validación.
 
-## Paso 5 — Retiro
-
-Pendiente.
-
-Deberá combinar, entre otros elementos:
+Datos heredados visibles:
 
 - fecha de nacimiento;
 - sexo;
-- sistema previsional;
-- cuotas reales y futuras;
-- salarios históricos y proyectados;
-- fecha o edad de retiro evaluada.
+- cuotas reales;
+- cuotas del año actual y cierre esperado;
+- continuidad;
+- densidad de cuotas futuras.
+
+Datos específicos:
+
+- fecha de evaluación;
+- fecha hasta la que están actualizadas las cuotas;
+- escenarios de edad de referencia y años adicionales;
+- fecha personalizada opcional.
+
+Resultados:
+
+- edad actual;
+- edad de referencia;
+- fecha exacta de referencia;
+- días respecto de esa fecha;
+- fecha y edad por escenario;
+- cuotas adicionales y totales estimadas;
+- estado temporal de la fecha.
+
+La estimación de cuotas del año actual respeta primero el cierre definido en el Paso 2. La densidad anual futura se aplica después.
+
+El Paso 5 también verifica que la proyección salarial cubra el año del escenario de retiro. Si no lo cubre, muestra una advertencia y ofrece regresar al Paso 4 para extender el horizonte. No extrapola salarios de forma silenciosa.
+
+Estos escenarios no determinan todavía elegibilidad legal.
 
 ## Paso 6 — Resultados
 
 Pendiente.
 
-Deberá presentar el cálculo estimado, supuestos, desglose, advertencias y comparaciones pertinentes.
+Deberá:
+
+- determinar la prestación/sistema aplicable;
+- verificar elegibilidad;
+- calcular el monto según normativa versionada;
+- mostrar supuestos, desglose y advertencias;
+- comparar escenarios cuando corresponda.
 
 ## Reglas de experiencia de usuario
 
-- los datos de una simulación en curso se conservan temporalmente;
-- al cambiar un dato que alimenta un resultado, ese resultado se invalida;
-- las proyecciones nunca deben presentarse como datos históricos reales;
-- la interfaz no debe contener fórmulas legales principales duplicadas en JavaScript.
+- `sessionStorage` conserva temporalmente la simulación;
+- al cambiar un dato de origen se invalidan resultados dependientes;
+- los datos reales y proyectados nunca se mezclan silenciosamente;
+- los cálculos principales permanecen en Python;
+- los pasos extensos disponen de navegación rápida `sticky`;
+- la barra rápida reutiliza las acciones existentes y no duplica reglas;
+- las advertencias de horizonte deben resolverse antes de utilizar un escenario en el cálculo final;
+- una fecha de referencia no se presentará como derecho adquirido sin pasar por elegibilidad.

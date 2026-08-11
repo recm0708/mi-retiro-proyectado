@@ -50,11 +50,25 @@ Ejecutar:
 
 ```powershell
 python -m compileall app
+python -m unittest discover -s tests -v
 ```
 
 También se deben probar en el navegador las rutas y pasos afectados por el cambio.
 
-Cuando existan pruebas automatizadas, deberán ejecutarse antes de consolidar cambios en motores de cálculo.
+Las pruebas automatizadas son obligatorias antes de consolidar cambios en motores de cálculo, precisión monetaria, cuotas o fechas de retiro.
+
+
+## Precisión monetaria
+
+- Los cálculos monetarios deben usar las utilidades de `app/core/dinero.py` cuando exista riesgo de redondeo.
+- Se conservará precisión durante las operaciones y se redondeará al materializar importes monetarios.
+- El criterio técnico general es `ROUND_HALF_UP` a dos decimales, salvo regla normativa específica.
+- No se deben introducir redondeos intermedios únicamente para hacer coincidir una cifra visible con otra.
+- Los campos monetarios editables deben admitir como máximo dos decimales.
+
+## Finales de línea
+
+`.editorconfig` y `.gitattributes` establecen LF para los archivos de texto principales. No se deben normalizar manualmente archivos completos salvo que sea necesario para evitar diffs masivos sin cambios funcionales.
 
 ## Datos personales
 
