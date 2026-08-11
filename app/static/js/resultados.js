@@ -9,7 +9,8 @@
 /*
  * Este módulo conecta los datos validados en los Pasos 1–5 con
  * los motores legales. La integración SEBD clasifica automáticamente
- * la modalidad normal, anticipada, proporcional o proporcional anticipada.
+ * la modalidad normal, anticipada, proporcional, proporcional anticipada
+ * o la Indemnización por Vejez de pago único.
  */
 
 
@@ -329,6 +330,15 @@ async function calcularResultadoSEBD() {
  */
 function mostrarResultadoSEBD(resultado) {
   const calculo = resultado.calculo;
+  const esIndemnizacion = (
+    calculo.modalidad === "INDEMNIZACION"
+    && calculo.calculo_disponible
+  );
+
+  configurarVistaPrestacionSEBD(
+    calculo,
+    esIndemnizacion,
+  );
 
   document.getElementById(
     "resultado-sebd-modalidad",
@@ -344,9 +354,13 @@ function mostrarResultadoSEBD(resultado) {
 
   document.getElementById(
     "resultado-sebd-pension",
-  ).textContent = calculo.pension_mensual_estimada == null
-    ? "—"
-    : formatearMoneda(calculo.pension_mensual_estimada);
+  ).textContent = esIndemnizacion
+    ? formatearMoneda(calculo.indemnizacion_pago_unico_estimado)
+    : (
+      calculo.pension_mensual_estimada == null
+        ? "—"
+        : formatearMoneda(calculo.pension_mensual_estimada)
+    );
 
   document.getElementById(
     "resultado-sebd-salario-base",
@@ -372,10 +386,15 @@ function mostrarResultadoSEBD(resultado) {
 
   document.getElementById(
     "resultado-sebd-cuotas-nota",
-  ).textContent = (
-    `${calculo.cuotas_exceso_total} sobre las `
-    + `${calculo.cuotas_referencia} de referencia`
-  );
+  ).textContent = esIndemnizacion
+    ? (
+      `${calculo.cuotas_totales} meses acreditados · divisor `
+      + `${calculo.indemnizacion_divisor_cuotas}`
+    )
+    : (
+      `${calculo.cuotas_exceso_total} sobre las `
+      + `${calculo.cuotas_referencia} de referencia`
+    );
 
   document.getElementById(
     "resultado-sebd-anios-requeridos",
@@ -484,6 +503,12 @@ function mostrarResultadoSEBD(resultado) {
     ? "—"
     : formatearMoneda(calculo.pension_mensual_estimada);
 
+  if (esIndemnizacion) {
+    mostrarDetalleIndemnizacionSEBD(
+      calculo,
+    );
+  }
+
   mostrarAdvertenciasResultadoSEBD(
     resultado,
   );
@@ -505,6 +530,111 @@ function mostrarResultadoSEBD(resultado) {
 }
 
 
+
+/**
+ * Ajusta etiquetas y secciones según se trate de una pensión o indemnización.
+ *
+ * @param {Object} calculo Resultado del motor.
+ * @param {boolean} esIndemnizacion Indica si es una prestación de pago único.
+ */
+function configurarVistaPrestacionSEBD(
+  calculo,
+  esIndemnizacion,
+) {
+  const etiquetaPrestacion = document.getElementById(
+    "resultado-sebd-prestacion-label",
+  );
+  const notaPrestacion = document.getElementById(
+    "resultado-sebd-prestacion-nota",
+  );
+  const etiquetaTasa = document.getElementById(
+    "resultado-sebd-tasa-label",
+  );
+  const notaTasa = document.getElementById(
+    "resultado-sebd-tasa-nota",
+  );
+  const factores = document.getElementById(
+    "resultado-sebd-factores",
+  );
+  const limites = document.getElementById(
+    "resultado-sebd-limites",
+  );
+  const indemnizacion = document.getElementById(
+    "resultado-sebd-indemnizacion",
+  );
+
+  if (esIndemnizacion) {
+    etiquetaPrestacion.textContent = "Pago único estimado";
+    notaPrestacion.textContent = (
+      "Indemnización por Vejez; no es una pensión mensual vitalicia."
+    );
+    etiquetaTasa.textContent = "Tasa hipotética";
+    notaTasa.textContent = (
+      "Tasa utilizada para obtener la mensualidad de pensión normal hipotética."
+    );
+    factores.classList.add("d-none");
+    limites.classList.add("d-none");
+    indemnizacion.classList.remove("d-none");
+    return;
+  }
+
+  etiquetaPrestacion.textContent = "Pensión mensual estimada";
+  notaPrestacion.textContent = (
+    "Antes de asignaciones familiares u otros conceptos."
+  );
+  etiquetaTasa.textContent = "Tasa de reemplazo";
+  notaTasa.textContent = (
+    "Base legal + incrementos completos aplicables."
+  );
+  factores.classList.remove("d-none");
+  limites.classList.remove("d-none");
+  indemnizacion.classList.add("d-none");
+}
+
+
+/**
+ * Muestra la fórmula específica de la Indemnización por Vejez.
+ *
+ * @param {Object} calculo Resultado del motor.
+ */
+function mostrarDetalleIndemnizacionSEBD(calculo) {
+  const mensualidad = Number(
+    calculo.indemnizacion_mensualidad_hipotetica,
+  );
+  const factor = Number(
+    calculo.indemnizacion_factor_cuotas,
+  );
+  const divisor = Number(
+    calculo.indemnizacion_divisor_cuotas,
+  );
+  const pago = Number(
+    calculo.indemnizacion_pago_unico_estimado,
+  );
+
+  document.getElementById(
+    "resultado-sebd-indem-mensualidad",
+  ).textContent = formatearMoneda(mensualidad);
+
+  document.getElementById(
+    "resultado-sebd-indem-factor",
+  ).textContent = Number.isFinite(factor)
+    ? factor.toFixed(4)
+    : "—";
+
+  document.getElementById(
+    "resultado-sebd-indem-pago",
+  ).textContent = formatearMoneda(pago);
+
+  document.getElementById(
+    "resultado-sebd-indem-formula",
+  ).textContent = (
+    `${formatearMoneda(mensualidad)} × `
+    + `(${calculo.cuotas_totales} ÷ ${divisor}) = `
+    + `${formatearMoneda(pago)}`
+  );
+}
+
+
 /**
  * Muestra si la modalidad normal SEBD es elegible en el escenario.
  *
@@ -518,6 +648,19 @@ function mostrarElegibilidadSEBD(calculo) {
   alerta.replaceChildren();
 
   const titulo = document.createElement("strong");
+
+  if (
+    calculo.modalidad === "INDEMNIZACION"
+    && calculo.elegible
+    && calculo.calculo_disponible
+  ) {
+    alerta.className = "alert alert-info";
+    titulo.textContent = (
+      "Modalidad aplicable: Indemnización por Vejez de pago único."
+    );
+    alerta.appendChild(titulo);
+    return;
+  }
 
   if (calculo.elegible && calculo.calculo_disponible) {
     alerta.className = "alert alert-success";
@@ -575,7 +718,7 @@ function obtenerNotaModalidadSEBD(calculo) {
     ANTICIPADA: "Hasta dos años antes de la edad de referencia, con 240 cuotas o más y factor de reducción por edad.",
     PROPORCIONAL: "Edad de referencia o superior, con entre 180 y 239 cuotas.",
     PROPORCIONAL_ANTICIPADA: "Dentro de la banda anticipada, con entre 180 y 239 cuotas; combina factor por cuotas y factor por edad.",
-    INDEMNIZACION: "Con menos de 180 cuotas a la edad de referencia, puede corresponder una indemnización por vejez según la fecha aplicable.",
+    INDEMNIZACION: "Con menos de 180 cuotas y la edad de referencia cumplida, corresponde una prestación de pago único antes de la transición legal de 2036.",
     NO_ELEGIBLE: "La edad y/o las cuotas del escenario todavía no permiten una prestación SEBD calculable.",
   };
 

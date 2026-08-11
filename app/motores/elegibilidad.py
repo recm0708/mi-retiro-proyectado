@@ -214,7 +214,9 @@ def clasificar_modalidad_sebd(
             "elegible": True,
         }
 
-    transicion = date(2036, 3, 1)
+    transicion = date.fromisoformat(
+        parametros["indemnizacion_vejez"]["fecha_fin_regimen"]
+    )
 
     if fecha_retiro < transicion:
         return {
@@ -224,7 +226,7 @@ def clasificar_modalidad_sebd(
             "tipo_prestacion": "INDEMNIZACION",
             "elegible": True,
             "advertencias": [
-                "La aplicación identifica la posible indemnización por vejez, pero su monto todavía no se calcula en esta fase."
+                "La prestación identificada es de pago único y no una pensión mensual vitalicia."
             ],
         }
 

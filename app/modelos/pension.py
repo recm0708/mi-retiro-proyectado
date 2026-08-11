@@ -191,13 +191,20 @@ class ResumenCalculoSEBD(BaseModel):
     monto_maximo_aplicable: float
     monto_despues_limite_maximo: float
 
-    factor_proporcional_cuotas: float
+    factor_proporcional_cuotas: float | None
     factor_reduccion_edad: float
     meses_desde_limite_anticipado: int | None
     meses_anticipacion_referencia: int
 
-    monto_despues_factor_proporcional: float
+    monto_despues_factor_proporcional: float | None
     pension_mensual_estimada: float | None
+
+    # Campos exclusivos de la Indemnización por Vejez.
+    # Para las modalidades de pensión permanecen en ``None``.
+    indemnizacion_mensualidad_hipotetica: float | None = None
+    indemnizacion_factor_cuotas: float | None = None
+    indemnizacion_divisor_cuotas: int | None = None
+    indemnizacion_pago_unico_estimado: float | None = None
 
     minimo_indexado_aplicado: bool
     advertencias: list[str]

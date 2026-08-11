@@ -1,10 +1,9 @@
 """Cálculo general de las modalidades de retiro por vejez del SEBD.
 
 Este módulo extiende el motor normal ya validado y aplica las modalidades
-Anticipada, Proporcional y Proporcional Anticipada del artículo 181.
-La indemnización por vejez se clasifica, pero su monto queda pendiente de una
-subfase propia para evitar mezclar una prestación de pago único con una pensión
-mensual.
+Anticipada, Proporcional y Proporcional Anticipada del artículo 181, así como
+la Indemnización por Vejez del artículo 186. Esta última se mantiene separada
+de las pensiones mensuales porque constituye una prestación de pago único.
 """
 
 from decimal import Decimal
@@ -194,12 +193,6 @@ def _resultado_sin_calculo(
         clasificacion.get("advertencias", [])
     )
 
-    if clasificacion["modalidad"] == "INDEMNIZACION":
-        advertencias.append(
-            "La indemnización por vejez es una prestación de pago único. "
-            "Su cálculo monetario se implementará en una subfase específica."
-        )
-
     return ResumenCalculoSEBD(
         modalidad=clasificacion["modalidad"],
         modalidad_nombre=clasificacion["modalidad_nombre"],
@@ -248,6 +241,196 @@ def _resultado_sin_calculo(
     )
 
 
+
+def _calcular_indemnizacion_vejez(
+    datos: DatosCalculoSEBD,
+    clasificacion: dict,
+) -> ResumenCalculoSEBD:
+    """Calcula la Indemnización por Vejez como prestación de pago único.
+
+    El Reglamento para el Cálculo de las Prestaciones Económicas dispone
+    calcular primero la Pensión de Retiro por Vejez normal hipotética y luego
+    multiplicarla por el resultado de dividir los meses de cotización entre
+    seis. Para la base salarial se conservan los diez mejores años y el
+    denominador reglamentario de 120 meses.
+    """
+
+    parametros = cargar_parametros_sebd()["pension_vejez"]
+    configuracion = parametros["indemnizacion_vejez"]
+
+    cantidad = int(parametros["mejores_anios_base"])
+
+    # A diferencia del motor normal, aquí también son relevantes los años
+    # explícitamente registrados con salario cero: el reglamento ordena escoger
+    # los diez años con mayor total anual y dividirlos entre 120 meses.
+    registros_disponibles = [
+        registro
+        for registro in datos.registros
+        if registro.anio <= datos.fecha_retiro.year
+    ]
+
+    if len(registros_disponibles) < cantidad:
+        raise ValueError(
+            "Para estimar la Indemnización por Vejez se requieren al menos "
+            f"{cantidad} años calendario de historial, incluso si algunos "
+            "no tuvieron cotización. Amplía el historial del Paso 3."
+        )
+
+    seleccion = sorted(
+        registros_disponibles,
+        key=lambda registro: (
+            registro.salario_cotizado,
+            registro.anio,
+        ),
+        reverse=True,
+    )[:cantidad]
+    seleccion = sorted(
+        seleccion,
+        key=lambda registro: registro.anio,
+    )
+
+    salario_base = _calcular_promedio_mensual(
+        seleccion,
+    )
+
+    total_salarios = sum(
+        (
+            a_decimal(registro.salario_cotizado)
+            for registro in seleccion
+        ),
+        Decimal("0"),
+    )
+
+    tasa_base = a_decimal(
+        parametros["tasa_reemplazo_base_pct"]
+    )
+
+    mensualidad_hipotetica_sin_maximo = (
+        salario_base
+        * tasa_base
+        / Decimal("100")
+    )
+
+    monto_maximo = a_decimal(
+        parametros["montos_maximos_sebd"]["ordinario"]["monto_maximo"]
+    )
+
+    mensualidad_hipotetica = min(
+        mensualidad_hipotetica_sin_maximo,
+        monto_maximo,
+    )
+
+    divisor = int(
+        configuracion["divisor_meses_cotizados"]
+    )
+
+    # El reglamento indica dividir el total de meses de cotización entre seis.
+    # No se trunca a bloques completos porque la norma reglamentaria describe
+    # una división directa, no una operación de cociente entero.
+    factor_cuotas = (
+        Decimal(datos.cuotas_totales)
+        / Decimal(divisor)
+    )
+
+    pago_unico = (
+        mensualidad_hipotetica
+        * factor_cuotas
+    )
+
+    advertencias = list(
+        clasificacion.get("advertencias", [])
+    )
+
+    advertencias.extend(
+        [
+            "El factor de la indemnización se obtiene dividiendo los meses "
+            "de cotización acreditados entre seis, conforme al reglamento.",
+            "El monto mínimo indexado del artículo 192 aún no está versionado "
+            "por fecha. Si la mensualidad hipotética quedara afectada por ese "
+            "mínimo, el resultado oficial podría variar.",
+            "Quien reciba esta indemnización no puede volver a percibir otra "
+            "suma por el mismo concepto si posteriormente vuelve a cotizar.",
+        ]
+    )
+
+    minimo_base = a_decimal(
+        parametros["monto_minimo_base"]["valor"]
+    )
+
+    if mensualidad_hipotetica < minimo_base:
+        advertencias.append(
+            "La mensualidad hipotética está por debajo del mínimo base de "
+            "B/.265.00. El mínimo indexado aplicable debe ser confirmado por "
+            "la CSS antes de considerar definitivo el pago único estimado."
+        )
+
+    return ResumenCalculoSEBD(
+        modalidad="INDEMNIZACION",
+        modalidad_nombre="Indemnización por Vejez",
+        tipo_prestacion="INDEMNIZACION",
+        elegible=True,
+        calculo_disponible=True,
+        motivos_no_elegible=[],
+        edad_retiro_anios=clasificacion["edad_retiro_anios"],
+        edad_referencia=clasificacion["edad_referencia"],
+        fecha_referencia=clasificacion["fecha_referencia"],
+        fecha_minima_anticipada=clasificacion["fecha_minima_anticipada"],
+        cuotas_referencia=clasificacion["cuotas_referencia"],
+        cuotas_minimas_proporcional=(
+            clasificacion["cuotas_minimas_proporcional"]
+        ),
+        cuotas_totales=datos.cuotas_totales,
+        cuotas_exceso_total=0,
+        cuotas_exceso_antes_referencia=0,
+        cuotas_exceso_despues_referencia=0,
+        mejores_anios_requeridos=cantidad,
+        anios_seleccionados=[
+            AnioSeleccionadoSEBD(
+                anio=registro.anio,
+                cuotas=registro.cuotas,
+                salario_cotizado=redondear_moneda(
+                    registro.salario_cotizado
+                ),
+            )
+            for registro in seleccion
+        ],
+        total_salarios_seleccionados=redondear_moneda(total_salarios),
+        salario_base_mensual=redondear_moneda(salario_base),
+        tasa_base_pct=float(tasa_base),
+        bloques_12_antes_referencia=0,
+        incremento_antes_referencia_pct=0.0,
+        bloques_12_despues_referencia=0,
+        incremento_despues_referencia_pct=0.0,
+        tasa_reemplazo_total_pct=float(tasa_base),
+        monto_antes_limite_maximo=redondear_moneda(
+            mensualidad_hipotetica_sin_maximo
+        ),
+        monto_maximo_aplicable=redondear_moneda(monto_maximo),
+        monto_despues_limite_maximo=redondear_moneda(
+            mensualidad_hipotetica
+        ),
+        # Estos campos pertenecen exclusivamente al cálculo de pensiones
+        # proporcionales. En una indemnización no aplican y se expresan como
+        # ``None`` para que la API no sugiera un factor matemático inexistente.
+        factor_proporcional_cuotas=None,
+        factor_reduccion_edad=1.0,
+        meses_desde_limite_anticipado=None,
+        meses_anticipacion_referencia=0,
+        monto_despues_factor_proporcional=None,
+        pension_mensual_estimada=None,
+        indemnizacion_mensualidad_hipotetica=redondear_moneda(
+            mensualidad_hipotetica
+        ),
+        indemnizacion_factor_cuotas=float(factor_cuotas),
+        indemnizacion_divisor_cuotas=divisor,
+        indemnizacion_pago_unico_estimado=redondear_moneda(
+            pago_unico
+        ),
+        minimo_indexado_aplicado=False,
+        advertencias=advertencias,
+        fuente_normativa=_fuente_normativa(),
+    )
+
 def calcular_sebd(
     datos: DatosCalculoSEBD,
 ) -> ResumenCalculoSEBD:
@@ -263,10 +446,13 @@ def calcular_sebd(
     if clasificacion["modalidad"] == "NORMAL":
         return _convertir_normal(datos)
 
-    if clasificacion["modalidad"] in {
-        "INDEMNIZACION",
-        "NO_ELEGIBLE",
-    }:
+    if clasificacion["modalidad"] == "INDEMNIZACION":
+        return _calcular_indemnizacion_vejez(
+            datos,
+            clasificacion,
+        )
+
+    if clasificacion["modalidad"] == "NO_ELEGIBLE":
         return _resultado_sin_calculo(
             datos,
             clasificacion,

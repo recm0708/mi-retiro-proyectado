@@ -189,9 +189,9 @@
 
           <div class="col-sm-6 col-xl-3">
             <div class="results-summary-card results-summary-primary">
-              <span>Pensión mensual estimada</span>
+              <span id="resultado-sebd-prestacion-label">Pensión mensual estimada</span>
               <strong id="resultado-sebd-pension">—</strong>
-              <small>Antes de asignaciones familiares u otros conceptos.</small>
+              <small id="resultado-sebd-prestacion-nota">Antes de asignaciones familiares u otros conceptos.</small>
             </div>
           </div>
 
@@ -205,9 +205,9 @@
 
           <div class="col-sm-6 col-xl-3">
             <div class="results-summary-card">
-              <span>Tasa de reemplazo</span>
+              <span id="resultado-sebd-tasa-label">Tasa de reemplazo</span>
               <strong id="resultado-sebd-tasa-total">—</strong>
-              <small>Base legal + incrementos completos aplicables.</small>
+              <small id="resultado-sebd-tasa-nota">Base legal + incrementos completos aplicables.</small>
             </div>
           </div>
 
@@ -280,7 +280,10 @@
 
         <!-- Desglose de tasa. -->
 
-        <section class="results-section mb-4">
+        <section
+          id="resultado-sebd-tasa-section"
+          class="results-section mb-4"
+        >
 
           <div class="results-section-heading">
             <h3 class="h5 fw-bold mb-1">
@@ -374,9 +377,67 @@
         </section>
 
 
+        <!-- Desglose específico de la Indemnización por Vejez. -->
+
+        <section
+          id="resultado-sebd-indemnizacion"
+          class="results-section mb-4 d-none"
+        >
+
+          <div class="results-section-heading">
+            <h3 class="h5 fw-bold mb-1">
+              Cálculo del pago único
+            </h3>
+            <p class="text-secondary mb-0">
+              La indemnización parte de la pensión normal hipotética y
+              la multiplica por el cociente entre los meses cotizados y seis.
+            </p>
+          </div>
+
+          <div class="row g-3 mb-3">
+
+            <div class="col-md-4">
+              <div class="results-detail-card">
+                <span>Mensualidad hipotética</span>
+                <strong id="resultado-sebd-indem-mensualidad">—</strong>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="results-detail-card">
+                <span>Factor meses ÷ 6</span>
+                <strong id="resultado-sebd-indem-factor">—</strong>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="results-detail-card results-detail-emphasis">
+                <span>Pago único estimado</span>
+                <strong id="resultado-sebd-indem-pago">—</strong>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="info-box mb-0">
+            <strong>Fórmula aplicada</strong>
+            <p
+              id="resultado-sebd-indem-formula"
+              class="mb-0 mt-1"
+            >
+              —
+            </p>
+          </div>
+
+        </section>
+
+
         <!-- Límites y monto final. -->
 
-        <section class="results-section mb-4">
+        <section
+          id="resultado-sebd-limites"
+          class="results-section mb-4"
+        >
 
           <div class="results-section-heading">
             <h3 class="h5 fw-bold mb-1">
