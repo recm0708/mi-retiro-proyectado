@@ -27,6 +27,9 @@ __pycache__/
 # Datos personales, importaciones y archivos sensibles
 data/personales/
 data/importaciones/
+data/documentos_personales/
+tests/casos_validacion/originales/
+tests/casos_validacion/**/*.pdf
 uploads/
 temp/
 tmp/
