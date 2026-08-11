@@ -107,3 +107,25 @@ def obtener_edad_referencia(
             "edades_referencia"
         ][sexo_normalizado]
     )
+
+@lru_cache(maxsize=1)
+def cargar_parametros_sebd() -> dict:
+    """Carga los parámetros normativos versionados del SEBD."""
+
+    ruta = (
+        DIRECTORIO_NORMATIVA
+        / "sebd.json"
+    )
+
+    if not ruta.exists():
+        raise FileNotFoundError(
+            "No se encontró el archivo normativa/sebd.json."
+        )
+
+    with ruta.open(
+        "r",
+        encoding="utf-8",
+    ) as archivo:
+        return json.load(
+            archivo,
+        )

@@ -1465,6 +1465,11 @@ Nueva simulación | Calculadora de Pensión CSS
         {% include "partials/retiro.html" %}
 
 
+        <!-- Paso 6 modularizado: resultados y cálculo de pensión. -->
+
+        {% include "partials/resultados.html" %}
+
+
       </div>
 
     </div>
@@ -1509,6 +1514,12 @@ Nueva simulación | Calculadora de Pensión CSS
 
 <script
   src="{{ url_for('static', path='/js/retiro.js') }}"
+></script>
+
+
+<!-- Integración de los motores legales con el Paso 6. -->
+<script
+  src="{{ url_for('static', path='/js/resultados.js') }}"
 ></script>
 
 

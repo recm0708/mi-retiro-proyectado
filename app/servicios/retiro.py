@@ -363,9 +363,10 @@ def analizar_retiro(
     )
 
     for adicional in adicionales:
-        if adicional < 0:
+        if adicional < -2:
             raise ValueError(
-                "Los años adicionales no pueden ser negativos."
+                "Los escenarios anticipados estándar no pueden superar "
+                "dos años antes de la edad de referencia."
             )
 
         fecha_retiro = (
@@ -375,7 +376,16 @@ def analizar_retiro(
             )
         )
 
-        if adicional == 0:
+        if adicional < 0:
+            tipo = "ANTICIPADO"
+            cantidad = abs(adicional)
+            nombre = (
+                f"Edad de referencia - "
+                f"{cantidad} "
+                f"{'año' if cantidad == 1 else 'años'}"
+            )
+
+        elif adicional == 0:
             tipo = "REFERENCIA"
             nombre = "Edad de referencia"
 

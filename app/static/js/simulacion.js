@@ -60,6 +60,10 @@ function crearSimulacionVacia() {
 
     retiro: {},
     resumen_retiro: null,
+    escenario_retiro_seleccionado: null,
+
+    escenario_salarial_seleccionado: null,
+    resultado_sebd_normal: null,
   };
 }
 
@@ -255,6 +259,9 @@ function guardarDatosPersonales() {
   // Las fechas de retiro dependen de nacimiento y sexo.
   simulacion.retiro = {};
   simulacion.resumen_retiro = null;
+  simulacion.escenario_retiro_seleccionado = null;
+  simulacion.escenario_salarial_seleccionado = null;
+  simulacion.resultado_sebd_normal = null;
 
   guardarSimulacion(simulacion);
 
@@ -445,6 +452,9 @@ function invalidarResumenCuotas() {
   simulacion.resumen_linea_tiempo = null;
   simulacion.retiro = {};
   simulacion.resumen_retiro = null;
+  simulacion.escenario_retiro_seleccionado = null;
+  simulacion.escenario_salarial_seleccionado = null;
+  simulacion.resultado_sebd_normal = null;
 
   guardarSimulacion(simulacion);
 
@@ -696,8 +706,11 @@ function invalidarResumenSalario() {
   simulacion.proyeccion = {};
   simulacion.resumen_proyeccion = null;
   simulacion.resumen_linea_tiempo = null;
+  simulacion.retiro = {};
   simulacion.resumen_retiro = null;
-  simulacion.resumen_retiro = null;
+  simulacion.escenario_retiro_seleccionado = null;
+  simulacion.escenario_salarial_seleccionado = null;
+  simulacion.resultado_sebd_normal = null;
 
   guardarSimulacion(simulacion);
 
@@ -791,7 +804,11 @@ async function analizarSalario(evento) {
     simulacion.proyeccion = {};
     simulacion.resumen_proyeccion = null;
     simulacion.resumen_linea_tiempo = null;
+    simulacion.retiro = {};
     simulacion.resumen_retiro = null;
+    simulacion.escenario_retiro_seleccionado = null;
+    simulacion.escenario_salarial_seleccionado = null;
+    simulacion.resultado_sebd_normal = null;
 
     guardarSimulacion(simulacion);
 
@@ -1213,6 +1230,11 @@ function invalidarResumenProyeccion() {
 
   simulacion.resumen_proyeccion = null;
   simulacion.resumen_linea_tiempo = null;
+  simulacion.retiro = {};
+  simulacion.resumen_retiro = null;
+  simulacion.escenario_retiro_seleccionado = null;
+  simulacion.escenario_salarial_seleccionado = null;
+  simulacion.resultado_sebd_normal = null;
 
   guardarSimulacion(
     simulacion,
@@ -1379,7 +1401,11 @@ async function analizarProyeccion(evento) {
     // La línea temporal depende de esta proyección. Se elimina
     // cualquier resultado anterior antes de reconstruirla.
     simulacion.resumen_linea_tiempo = null;
+    simulacion.retiro = {};
     simulacion.resumen_retiro = null;
+    simulacion.escenario_retiro_seleccionado = null;
+    simulacion.escenario_salarial_seleccionado = null;
+    simulacion.resultado_sebd_normal = null;
 
     guardarSimulacion(
       simulacion,
@@ -1845,7 +1871,7 @@ document.addEventListener(
 
     mostrarPaso(
       pasoGuardado >= 1
-      && pasoGuardado <= 5
+      && pasoGuardado <= 6
         ? pasoGuardado
         : 1,
     );

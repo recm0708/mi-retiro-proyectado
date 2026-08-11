@@ -182,6 +182,42 @@
 
           <div class="retirement-option-grid">
 
+            <label class="retirement-option" for="retiro-anticipado-2">
+              <span class="form-check">
+                <input
+                  class="form-check-input retiro-adicional"
+                  type="checkbox"
+                  value="-2"
+                  id="retiro-anticipado-2"
+                  checked
+                >
+                <span class="form-check-label fw-semibold">
+                  -2 años
+                </span>
+              </span>
+              <small class="text-secondary">
+                Límite inferior de la banda anticipada estándar.
+              </small>
+            </label>
+
+            <label class="retirement-option" for="retiro-anticipado-1">
+              <span class="form-check">
+                <input
+                  class="form-check-input retiro-adicional"
+                  type="checkbox"
+                  value="-1"
+                  id="retiro-anticipado-1"
+                  checked
+                >
+                <span class="form-check-label fw-semibold">
+                  -1 año
+                </span>
+              </span>
+              <small class="text-secondary">
+                Un año antes de la edad de referencia.
+              </small>
+            </label>
+
             <div class="retirement-option retirement-option-fixed">
               <div class="form-check">
                 <input
@@ -465,6 +501,7 @@
 
             <thead>
               <tr>
+                <th scope="col" class="text-center">Usar</th>
                 <th scope="col">Escenario</th>
                 <th scope="col">Fecha</th>
                 <th scope="col">Edad</th>
@@ -488,6 +525,35 @@
         ></div>
 
 
+        <!-- Selección explícita del escenario que alimentará el Paso 6. -->
+
+        <div class="retirement-selection-card mt-4">
+
+          <div>
+            <strong>
+              Escenario para calcular la pensión
+            </strong>
+
+            <p
+              id="retiro-seleccion-ayuda"
+              class="text-secondary mb-0 mt-1"
+            >
+              Selecciona un escenario futuro de la tabla.
+            </p>
+          </div>
+
+          <button
+            type="button"
+            id="btn-continuar-paso-6"
+            class="btn btn-primary px-4"
+            disabled
+          >
+            Continuar a resultados
+          </button>
+
+        </div>
+
+
         <div class="alert alert-light border mt-4 mb-0">
 
           <strong>
@@ -495,9 +561,9 @@
           </strong>
 
           <div class="text-secondary mt-1">
-            El Paso 6 utilizará el sistema previsional, la fecha
-            seleccionada, las cuotas y los salarios para verificar
-            elegibilidad y calcular los escenarios correspondientes.
+            El Paso 6 utilizará el sistema previsional, el escenario
+            de retiro elegido, las cuotas y la trayectoria salarial
+            para verificar elegibilidad y explicar el cálculo.
           </div>
 
         </div>

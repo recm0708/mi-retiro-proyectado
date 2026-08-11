@@ -1,0 +1,474 @@
+<!-- ==================================================
+     PASO 6 — RESULTADOS
+     ================================================== -->
+
+<div
+  class="wizard-panel d-none"
+  data-panel="6"
+>
+
+  <div class="card border-0 shadow-sm simulation-card">
+
+    <div class="card-body p-4 p-lg-5">
+
+      <!-- Encabezado del Paso 6. -->
+
+      <div class="mb-4">
+
+        <span class="text-primary fw-semibold">
+          Paso 6 de 6
+        </span>
+
+        <h2 class="h4 fw-bold mt-2 mb-2">
+          Resultados y cálculo de pensión
+        </h2>
+
+        <p class="text-secondary mb-0">
+          La aplicación combina el escenario de retiro seleccionado,
+          las cuotas y la trayectoria salarial para verificar la
+          modalidad disponible y explicar el cálculo paso a paso.
+        </p>
+
+      </div>
+
+
+      <!-- Contexto heredado del asistente. -->
+
+      <div class="results-context-card mb-4">
+
+        <div class="row g-3">
+
+          <div class="col-md-6 col-xl-3">
+            <span class="results-context-label">
+              Sistema previsional
+            </span>
+            <strong
+              id="resultado-sistema"
+              class="results-context-value"
+            >
+              —
+            </strong>
+          </div>
+
+          <div class="col-md-6 col-xl-3">
+            <span class="results-context-label">
+              Escenario de retiro
+            </span>
+            <strong
+              id="resultado-escenario-retiro"
+              class="results-context-value"
+            >
+              —
+            </strong>
+          </div>
+
+          <div class="col-md-6 col-xl-3">
+            <span class="results-context-label">
+              Fecha y edad
+            </span>
+            <strong
+              id="resultado-fecha-edad"
+              class="results-context-value"
+            >
+              —
+            </strong>
+          </div>
+
+          <div class="col-md-6 col-xl-3">
+            <span class="results-context-label">
+              Cuotas estimadas
+            </span>
+            <strong
+              id="resultado-pension-cuotas"
+              class="results-context-value"
+            >
+              —
+            </strong>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- Mensaje para sistemas cuyo motor todavía no está habilitado. -->
+
+      <div
+        id="resultado-motor-pendiente"
+        class="alert alert-info d-none"
+        role="alert"
+      ></div>
+
+
+      <!-- Configuración específica del cálculo SEBD. -->
+
+      <div
+        id="resultado-config-sebd"
+        class="results-calculation-card"
+      >
+
+        <div class="row g-4 align-items-end">
+
+          <div class="col-lg-8">
+
+            <label
+              for="resultado-escenario-salarial"
+              class="form-label fw-semibold"
+            >
+              Escenario salarial utilizado
+            </label>
+
+            <select
+              id="resultado-escenario-salarial"
+              class="form-select form-select-lg"
+            ></select>
+
+            <div class="form-text">
+              Si comparaste varios escenarios en el Paso 4, puedes
+              cambiar aquí cuál de ellos alimentará este cálculo.
+            </div>
+
+          </div>
+
+          <div class="col-lg-4 d-grid">
+
+            <button
+              type="button"
+              id="btn-calcular-resultado-sebd"
+              class="btn btn-primary btn-lg"
+            >
+              Calcular prestación SEBD
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div
+        id="error-resultados"
+        class="alert alert-danger mt-4 d-none"
+        role="alert"
+      ></div>
+
+
+      <!-- ================================================
+           RESULTADO SEBD
+           ================================================ -->
+
+      <div
+        id="resultado-sebd"
+        class="mt-5 d-none"
+      >
+
+        <hr class="mb-4">
+
+
+        <!-- Estado de elegibilidad. -->
+
+        <div
+          id="resultado-sebd-elegibilidad"
+          class="alert"
+          role="status"
+        ></div>
+
+        <div class="results-modality-card mb-4">
+          <span>Modalidad determinada</span>
+          <strong id="resultado-sebd-modalidad">—</strong>
+          <small id="resultado-sebd-modalidad-nota">
+            La modalidad se determina automáticamente según edad, fecha y cuotas.
+          </small>
+        </div>
+
+
+        <!-- Resumen principal. -->
+
+        <div class="row g-3 mb-4">
+
+          <div class="col-sm-6 col-xl-3">
+            <div class="results-summary-card results-summary-primary">
+              <span>Pensión mensual estimada</span>
+              <strong id="resultado-sebd-pension">—</strong>
+              <small>Antes de asignaciones familiares u otros conceptos.</small>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-xl-3">
+            <div class="results-summary-card">
+              <span>Salario base mensual</span>
+              <strong id="resultado-sebd-salario-base">—</strong>
+              <small id="resultado-sebd-base-nota">—</small>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-xl-3">
+            <div class="results-summary-card">
+              <span>Tasa de reemplazo</span>
+              <strong id="resultado-sebd-tasa-total">—</strong>
+              <small>Base legal + incrementos completos aplicables.</small>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-xl-3">
+            <div class="results-summary-card">
+              <span>Cuotas consideradas</span>
+              <strong id="resultado-sebd-cuotas">—</strong>
+              <small id="resultado-sebd-cuotas-nota">—</small>
+            </div>
+          </div>
+
+        </div>
+
+
+        <!-- Desglose del salario base. -->
+
+        <section class="results-section mb-4">
+
+          <div class="results-section-heading">
+            <h3 class="h5 fw-bold mb-1">
+              Salario base
+            </h3>
+            <p class="text-secondary mb-0">
+              Se seleccionan automáticamente los mejores años exigidos
+              por el nivel de pensión aplicable.
+            </p>
+          </div>
+
+          <div class="row g-3 mb-3">
+
+            <div class="col-md-4">
+              <div class="results-detail-card">
+                <span>Años seleccionados</span>
+                <strong id="resultado-sebd-anios-requeridos">—</strong>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="results-detail-card">
+                <span>Total salarial seleccionado</span>
+                <strong id="resultado-sebd-total-salarios">—</strong>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="results-detail-card">
+                <span>Promedio mensual resultante</span>
+                <strong id="resultado-sebd-promedio">—</strong>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="table-responsive results-table-wrapper">
+            <table class="table table-hover align-middle results-table">
+              <thead>
+                <tr>
+                  <th scope="col">Año</th>
+                  <th scope="col">Cuotas</th>
+                  <th scope="col">Salario cotizado</th>
+                  <th scope="col">Origen</th>
+                </tr>
+              </thead>
+              <tbody id="resultado-sebd-anios-body"></tbody>
+            </table>
+          </div>
+
+        </section>
+
+
+        <!-- Desglose de tasa. -->
+
+        <section class="results-section mb-4">
+
+          <div class="results-section-heading">
+            <h3 class="h5 fw-bold mb-1">
+              Construcción de la tasa
+            </h3>
+            <p class="text-secondary mb-0">
+              Los incrementos solo cuentan bloques completos de
+              doce cuotas excedentes.
+            </p>
+          </div>
+
+          <div class="table-responsive results-table-wrapper">
+            <table class="table align-middle results-table mb-0">
+              <thead>
+                <tr>
+                  <th scope="col">Componente</th>
+                  <th scope="col">Cuotas / bloques</th>
+                  <th scope="col">Efecto en la tasa</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Tasa base de la modalidad</td>
+                  <td id="resultado-sebd-cuotas-referencia">—</td>
+                  <td id="resultado-sebd-tasa-base">—</td>
+                </tr>
+                <tr>
+                  <td>Exceso antes de la edad de referencia</td>
+                  <td id="resultado-sebd-exceso-antes">—</td>
+                  <td id="resultado-sebd-incremento-antes">—</td>
+                </tr>
+                <tr>
+                  <td>Exceso después de la edad de referencia</td>
+                  <td id="resultado-sebd-exceso-despues">—</td>
+                  <td id="resultado-sebd-incremento-despues">—</td>
+                </tr>
+                <tr class="fw-bold">
+                  <td>Tasa total</td>
+                  <td>—</td>
+                  <td id="resultado-sebd-tasa-final-tabla">—</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </section>
+
+
+        <!-- Factores propios de modalidades proporcional/anticipada. -->
+
+        <section
+          id="resultado-sebd-factores"
+          class="results-section mb-4"
+        >
+
+          <div class="results-section-heading">
+            <h3 class="h5 fw-bold mb-1">
+              Factores de la modalidad
+            </h3>
+            <p class="text-secondary mb-0">
+              La pensión proporcional utiliza la relación cuotas/240.
+              La anticipada aplica además el factor de reducción por edad.
+            </p>
+          </div>
+
+          <div class="row g-3">
+
+            <div class="col-md-4">
+              <div class="results-detail-card">
+                <span>Factor por cuotas</span>
+                <strong id="resultado-sebd-factor-cuotas">—</strong>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="results-detail-card">
+                <span>Factor por edad</span>
+                <strong id="resultado-sebd-factor-edad">—</strong>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="results-detail-card">
+                <span>Anticipación</span>
+                <strong id="resultado-sebd-meses-anticipacion">—</strong>
+              </div>
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- Límites y monto final. -->
+
+        <section class="results-section mb-4">
+
+          <div class="results-section-heading">
+            <h3 class="h5 fw-bold mb-1">
+              Monto y límites
+            </h3>
+            <p class="text-secondary mb-0">
+              El monto calculado se contrasta con el máximo legal
+              aplicable al nivel determinado por cuotas y salario base.
+            </p>
+          </div>
+
+          <div class="row g-3">
+
+            <div class="col-md-4">
+              <div class="results-detail-card">
+                <span>Monto antes del máximo</span>
+                <strong id="resultado-sebd-monto-previo">—</strong>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="results-detail-card">
+                <span>Máximo aplicable</span>
+                <strong id="resultado-sebd-maximo">—</strong>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="results-detail-card">
+                <span>Resultado mensual</span>
+                <strong id="resultado-sebd-monto-final">—</strong>
+              </div>
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- Advertencias y trazabilidad. -->
+
+        <div
+          id="resultado-sebd-advertencias"
+          class="alert alert-warning d-none"
+          role="alert"
+        ></div>
+
+        <div class="results-source-card">
+          <strong>Fuente normativa utilizada</strong>
+          <p
+            id="resultado-sebd-fuente"
+            class="mb-0 mt-1 text-secondary"
+          >
+            —
+          </p>
+        </div>
+
+
+        <div class="info-box mt-4">
+
+          <strong>
+            Resultado estimado, no resolución de la CSS.
+          </strong>
+
+          <p class="mb-0 mt-1">
+            La aplicación explica los datos y reglas utilizados.
+            El monto oficial depende del historial reconocido por la
+            Caja de Seguro Social y de las reglas vigentes al momento
+            de tramitar la prestación.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- Navegación. -->
+
+      <div class="d-flex justify-content-start mt-5">
+
+        <button
+          type="button"
+          id="btn-volver-paso-5"
+          class="btn btn-outline-secondary"
+        >
+          Anterior
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

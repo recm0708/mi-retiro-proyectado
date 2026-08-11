@@ -40,6 +40,28 @@ from app.servicios.proyeccion_salarios import (
 from app.servicios.retiro import (
     analizar_retiro,
 )
+from app.modelos.pension import (
+    DatosCalculoSEBD,
+    DatosCalculoSEBDNormal,
+    DatosResultadoSEBD,
+    DatosResultadoSEBDNormal,
+    ResumenCalculoSEBD,
+    ResumenCalculoSEBDNormal,
+    ResumenResultadoSEBD,
+    ResumenResultadoSEBDNormal,
+)
+from app.motores.sebd import (
+    calcular_sebd_normal,
+)
+from app.motores.sebd_modalidades import (
+    calcular_sebd,
+)
+from app.servicios.resultados import (
+    calcular_resultado_sebd_normal,
+)
+from app.servicios.resultados_sebd import (
+    calcular_resultado_sebd,
+)
 
 # ============================================================
 # Rutas internas de la aplicación
@@ -290,6 +312,98 @@ async def calcular_retiro(
             status_code=422,
             detail=str(error),
         ) from error
+
+# ============================================================
+# API — SEBD: Pensión de Vejez Normal
+# ============================================================
+
+@app.post(
+    "/api/simulacion/sebd/normal",
+    response_model=ResumenCalculoSEBDNormal,
+)
+async def calcular_pension_sebd_normal(
+    datos: DatosCalculoSEBDNormal,
+):
+    """Calcula el desglose de la Pensión de Vejez Normal del SEBD."""
+
+    try:
+        return calcular_sebd_normal(
+            datos,
+        )
+
+    except ValueError as error:
+        raise HTTPException(
+            status_code=422,
+            detail=str(error),
+        ) from error
+
+
+# ============================================================
+# API — Resultados integrados SEBD
+# ============================================================
+
+@app.post(
+    "/api/simulacion/resultados/sebd-normal",
+    response_model=ResumenResultadoSEBDNormal,
+)
+async def calcular_resultado_integrado_sebd_normal(
+    datos: DatosResultadoSEBDNormal,
+):
+    """Calcula SEBD normal a partir de los Pasos 1–5."""
+
+    try:
+        return calcular_resultado_sebd_normal(
+            datos,
+        )
+
+    except ValueError as error:
+        raise HTTPException(
+            status_code=422,
+            detail=str(error),
+        ) from error
+
+
+# ============================================================
+# API — SEBD: clasificación y modalidades generales
+# ============================================================
+
+@app.post(
+    "/api/simulacion/sebd",
+    response_model=ResumenCalculoSEBD,
+)
+async def calcular_pension_sebd(
+    datos: DatosCalculoSEBD,
+):
+    """Clasifica y calcula la modalidad SEBD aplicable."""
+
+    try:
+        return calcular_sebd(datos)
+
+    except ValueError as error:
+        raise HTTPException(
+            status_code=422,
+            detail=str(error),
+        ) from error
+
+
+@app.post(
+    "/api/simulacion/resultados/sebd",
+    response_model=ResumenResultadoSEBD,
+)
+async def calcular_resultado_integrado_sebd(
+    datos: DatosResultadoSEBD,
+):
+    """Clasifica y calcula SEBD a partir de los Pasos 1–5."""
+
+    try:
+        return calcular_resultado_sebd(datos)
+
+    except ValueError as error:
+        raise HTTPException(
+            status_code=422,
+            detail=str(error),
+        ) from error
+
 
 # ============================================================
 # Estado del servicio

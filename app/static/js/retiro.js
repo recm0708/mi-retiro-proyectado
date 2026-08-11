@@ -273,6 +273,8 @@ function invalidarResumenRetiro() {
   const simulacion = obtenerSimulacion();
 
   simulacion.resumen_retiro = null;
+  simulacion.escenario_retiro_seleccionado = null;
+  simulacion.resultado_sebd_normal = null;
 
   guardarSimulacion(simulacion);
 
@@ -283,6 +285,25 @@ function invalidarResumenRetiro() {
   document.getElementById(
     "retiro-advertencias",
   ).classList.add("d-none");
+
+  const botonPaso6 = document.getElementById(
+    "btn-continuar-paso-6",
+  );
+
+  if (botonPaso6) {
+    botonPaso6.disabled = true;
+  }
+
+  const ayudaSeleccion = document.getElementById(
+    "retiro-seleccion-ayuda",
+  );
+
+  if (ayudaSeleccion) {
+    ayudaSeleccion.textContent = (
+      "Analiza nuevamente los escenarios para elegir "
+      + "cuál utilizar en el cálculo."
+    );
+  }
 
   ocultarErrorRetiro();
 }
@@ -481,6 +502,7 @@ async function analizarRetiro(evento) {
 
     simulacion.retiro = datos;
     simulacion.resumen_retiro = contenido;
+    simulacion.resultado_sebd_normal = null;
 
     guardarSimulacion(simulacion);
 
@@ -579,6 +601,10 @@ function mostrarResumenRetiro(resumen) {
     },
   );
 
+  restaurarSeleccionEscenarioRetiro(
+    resumen,
+  );
+
   document.getElementById(
     "retiro-metodo-estimacion",
   ).textContent = resumen.metodo_estimacion_cuotas;
@@ -627,6 +653,44 @@ function obtenerTextoSituacionReferencia(resumen) {
  */
 function crearFilaEscenarioRetiro(escenario) {
   const fila = document.createElement("tr");
+  const clave = obtenerClaveEscenarioRetiro(
+    escenario,
+  );
+
+  fila.dataset.escenarioClave = clave;
+
+  const celdaSeleccion = document.createElement("td");
+  celdaSeleccion.className = "text-center";
+
+  const selector = document.createElement("input");
+  selector.type = "radio";
+  selector.name = "escenario_retiro_calculo";
+  selector.value = clave;
+  selector.className = "form-check-input retirement-scenario-radio";
+  selector.disabled = Boolean(
+    escenario.fecha_ya_transcurrida,
+  );
+  selector.setAttribute(
+    "aria-label",
+    `Usar ${escenario.nombre} para el cálculo`,
+  );
+
+  selector.addEventListener(
+    "change",
+    () => {
+      seleccionarEscenarioRetiro(
+        escenario,
+      );
+    },
+  );
+
+  celdaSeleccion.appendChild(
+    selector,
+  );
+
+  fila.appendChild(
+    celdaSeleccion,
+  );
 
   agregarCeldaRetiro(
     fila,
@@ -677,6 +741,144 @@ function crearFilaEscenarioRetiro(escenario) {
   fila.appendChild(estado);
 
   return fila;
+}
+
+
+
+/**
+ * Construye una clave estable para identificar un escenario de retiro.
+ *
+ * @param {Object} escenario Escenario recibido desde FastAPI.
+ * @returns {string} Clave basada en tipo y fecha.
+ */
+function obtenerClaveEscenarioRetiro(escenario) {
+  return `${escenario.tipo}|${escenario.fecha_retiro}`;
+}
+
+
+/**
+ * Guarda el escenario que se utilizará en el Paso 6.
+ *
+ * @param {Object} escenario Escenario elegido por el usuario.
+ */
+function seleccionarEscenarioRetiro(escenario) {
+  const simulacion = obtenerSimulacion();
+
+  simulacion.escenario_retiro_seleccionado = escenario;
+  simulacion.resultado_sebd_normal = null;
+
+  guardarSimulacion(simulacion);
+
+  document
+    .querySelectorAll("#retiro-tabla-body tr")
+    .forEach((fila) => {
+      fila.classList.toggle(
+        "retirement-row-selected",
+        fila.dataset.escenarioClave
+          === obtenerClaveEscenarioRetiro(
+            escenario,
+          ),
+      );
+    });
+
+  const ayuda = document.getElementById(
+    "retiro-seleccion-ayuda",
+  );
+
+  if (ayuda) {
+    ayuda.textContent = (
+      `Se calculará el Paso 6 usando: ${escenario.nombre} `
+      + `(${formatearFechaRetiro(escenario.fecha_retiro)}).`
+    );
+  }
+
+  const boton = document.getElementById(
+    "btn-continuar-paso-6",
+  );
+
+  if (boton) {
+    boton.disabled = false;
+  }
+}
+
+
+/**
+ * Restaura una selección previa o elige el primer escenario futuro.
+ *
+ * Los escenarios ya transcurridos se muestran para comparación, pero no
+ * se seleccionan automáticamente porque el historial anual no permite
+ * reconstruir con precisión las cuotas existentes en una fecha pasada.
+ *
+ * @param {Object} resumen Resultado completo del Paso 5.
+ */
+function restaurarSeleccionEscenarioRetiro(resumen) {
+  const simulacion = obtenerSimulacion();
+  const guardado = simulacion.escenario_retiro_seleccionado;
+
+  let seleccionado = null;
+
+  if (guardado) {
+    const claveGuardada = obtenerClaveEscenarioRetiro(
+      guardado,
+    );
+
+    seleccionado = resumen.escenarios.find(
+      (escenario) => (
+        !escenario.fecha_ya_transcurrida
+        && obtenerClaveEscenarioRetiro(escenario)
+          === claveGuardada
+      ),
+    ) || null;
+  }
+
+  if (!seleccionado) {
+    seleccionado = resumen.escenarios.find(
+      (escenario) => !escenario.fecha_ya_transcurrida,
+    ) || null;
+  }
+
+  const boton = document.getElementById(
+    "btn-continuar-paso-6",
+  );
+
+  const ayuda = document.getElementById(
+    "retiro-seleccion-ayuda",
+  );
+
+  if (!seleccionado) {
+    simulacion.escenario_retiro_seleccionado = null;
+    simulacion.resultado_sebd_normal = null;
+    guardarSimulacion(simulacion);
+
+    if (boton) {
+      boton.disabled = true;
+    }
+
+    if (ayuda) {
+      ayuda.textContent = (
+        "No hay un escenario futuro seleccionable. "
+        + "Agrega una fecha personalizada futura para continuar."
+      );
+    }
+
+    return;
+  }
+
+  const clave = obtenerClaveEscenarioRetiro(
+    seleccionado,
+  );
+
+  const radio = document.querySelector(
+    `.retirement-scenario-radio[value="${CSS.escape(clave)}"]`,
+  );
+
+  if (radio) {
+    radio.checked = true;
+  }
+
+  seleccionarEscenarioRetiro(
+    seleccionado,
+  );
 }
 
 

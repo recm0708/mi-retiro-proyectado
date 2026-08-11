@@ -1,0 +1,85 @@
+{
+  "version": "texto_unico_ley_51_reformas_hasta_ley_462_2025",
+  "fuente": "Caja de Seguro Social de Panama",
+  "gaceta_oficial": "30284-B",
+  "fecha_gaceta": "2025-05-22",
+  "fuente_url": "https://www.css.gob.pa/wp-content/uploads/2025/05/TEXTO-UNICO-DE-LA-LEY-51-DE-2005-CSS-GACETA-OFICIAL-22-5-25.pdf",
+  "articulos": [
+    178,
+    179,
+    180,
+    181,
+    186,
+    192,
+    193
+  ],
+  "pension_vejez": {
+    "cuotas_referencia": 240,
+    "cuotas_minimas_proporcional": 180,
+    "mejores_anios_base": 10,
+    "tasa_reemplazo_base_pct": 60.0,
+    "incremento_12_cuotas_antes_referencia_pct": 1.25,
+    "incremento_12_cuotas_despues_referencia_pct": 2.0,
+    "retiro_anticipado": {
+      "maximo_anios_anticipacion": 2,
+      "factor_reduccion": {
+        "1": 0.9128,
+        "2": 0.8342
+      },
+      "maximo_meses_anticipacion": 24,
+      "tabla_factor_reduccion_meses_desde_limite_inferior": {
+        "0": 0.8342,
+        "1": 0.8408,
+        "2": 0.8473,
+        "3": 0.8539,
+        "4": 0.8604,
+        "5": 0.867,
+        "6": 0.8735,
+        "7": 0.8801,
+        "8": 0.8866,
+        "9": 0.8932,
+        "10": 0.8997,
+        "11": 0.9062,
+        "12": 0.9128,
+        "13": 0.9201,
+        "14": 0.9273,
+        "15": 0.9346,
+        "16": 0.9419,
+        "17": 0.9491,
+        "18": 0.9564,
+        "19": 0.9637,
+        "20": 0.9709,
+        "21": 0.9782,
+        "22": 0.9855,
+        "23": 0.9927
+      },
+      "fuente_reglamentaria": {
+        "norma": "Resolucion 39,302-2007-J.D. - Reglamento para el Calculo de Prestaciones Economicas",
+        "pagina_css": "https://www.css.gob.pa/normativa-prestaciones-economicas/",
+        "nota": "La CSS mantiene este reglamento y sus modificaciones dentro de la normativa vigente de Prestaciones Economicas."
+      }
+    },
+    "monto_minimo_base": {
+      "valor": 265.0,
+      "nota": "El articulo 192 dispone ajuste anual. El motor no aplicara un minimo indexado hasta versionar el valor vigente para la fecha de calculo."
+    },
+    "montos_maximos_sebd": {
+      "ordinario": {
+        "monto_maximo": 1500.0,
+        "mejores_anios_base": 10
+      },
+      "ampliado_2000": {
+        "cuotas_minimas": 300,
+        "promedio_mensual_minimo": 2000.0,
+        "mejores_anios_base": 15,
+        "monto_maximo": 2000.0
+      },
+      "ampliado_2500": {
+        "cuotas_minimas": 360,
+        "promedio_mensual_minimo": 2500.0,
+        "mejores_anios_base": 20,
+        "monto_maximo": 2500.0
+      }
+    }
+  }
+}

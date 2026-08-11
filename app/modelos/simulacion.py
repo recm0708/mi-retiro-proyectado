@@ -430,6 +430,7 @@ class ResumenLineaTiempo(BaseModel):
 # ============================================================
 
 TipoEscenarioRetiro = Literal[
+    "ANTICIPADO",
     "REFERENCIA",
     "ADICIONAL",
     "PERSONALIZADO",
@@ -511,6 +512,8 @@ class DatosRetiro(BaseModel):
 
     anios_adicionales: list[int] = Field(
         default_factory=lambda: [
+            -2,
+            -1,
             0,
             1,
             2,

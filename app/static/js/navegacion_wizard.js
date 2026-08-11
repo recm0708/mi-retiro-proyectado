@@ -113,10 +113,44 @@ function obtenerConfiguracionNavegacionFlotante() {
       };
     }
 
+    if (!simulacion.escenario_retiro_seleccionado) {
+      return {
+        estado: "Paso 5 de 6 · Selecciona un escenario futuro",
+        etiqueta: "Selecciona escenario",
+        deshabilitado: true,
+      };
+    }
+
     return {
-      estado: "Paso 5 de 6 · Análisis listo",
-      etiqueta: "Paso 6 próximamente",
-      deshabilitado: true,
+      estado: "Paso 5 de 6 · Escenario listo para calcular",
+      etiqueta: "Continuar a resultados",
+      deshabilitado: false,
+    };
+  }
+
+  if (pasoActual === 6) {
+    const sistema = simulacion.persona?.sistema;
+
+    if (sistema !== "SEBD") {
+      return {
+        estado: "Paso 6 de 6 · Motor todavía no habilitado",
+        etiqueta: "Sin cálculo disponible",
+        deshabilitado: true,
+      };
+    }
+
+    return {
+      estado: (
+        simulacion.resultado_sebd_normal
+          ? "Paso 6 de 6 · Resultado SEBD calculado"
+          : "Paso 6 de 6 · Listo para calcular SEBD"
+      ),
+      etiqueta: (
+        simulacion.resultado_sebd_normal
+          ? "Recalcular pensión"
+          : "Calcular pensión SEBD"
+      ),
+      deshabilitado: false,
     };
   }
 
@@ -252,6 +286,23 @@ function ejecutarAccionPrimariaFlotante() {
     ) {
       document.getElementById(
         "btn-ajustar-proyeccion-retiro",
+      ).click();
+      return;
+    }
+
+    if (simulacion.escenario_retiro_seleccionado) {
+      document.getElementById(
+        "btn-continuar-paso-6",
+      ).click();
+    }
+
+    return;
+  }
+
+  if (pasoActual === 6) {
+    if (simulacion.persona?.sistema === "SEBD") {
+      document.getElementById(
+        "btn-calcular-resultado-sebd",
       ).click();
     }
   }
