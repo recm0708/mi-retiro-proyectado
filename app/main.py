@@ -1,8 +1,8 @@
 """Punto de entrada principal de la aplicación Calculadora de Pensión CSS.
 
 Este módulo configura FastAPI, registra los recursos estáticos,
-las plantillas HTML y los endpoints utilizados actualmente por
-la interfaz y por los servicios de cálculo.
+las plantillas HTML y los endpoints utilizados por la interfaz
+y por los servicios de cálculo.
 """
 
 from pathlib import Path
@@ -14,21 +14,34 @@ from fastapi.templating import Jinja2Templates
 
 from app.modelos.simulacion import (
     DatosCuotas,
+    DatosHistorialSalarial,
+    DatosProyeccionSalario,
     DatosSalario,
     ResumenCuotas,
+    ResumenHistorialSalarial,
+    ResumenProyeccionSalario,
     ResumenSalario,
+    DatosLineaTiempo,
+    ResumenLineaTiempo,
+)
+from app.servicios.historial_salarios import (
+    analizar_historial_salarial,
+)
+from app.servicios.linea_tiempo import (
+    construir_linea_tiempo,
 )
 from app.servicios.proyeccion_cuotas import analizar_cuotas
-from app.servicios.proyeccion_salarios import normalizar_salario
+from app.servicios.proyeccion_salarios import (
+    normalizar_salario,
+    proyectar_salario,
+)
 
 
 # ============================================================
 # Rutas internas de la aplicación
 # ============================================================
 
-# Directorio base del paquete "app". Se utiliza para construir
-# rutas absolutas independientes del directorio desde el cual
-# se ejecute Uvicorn.
+# Directorio base del paquete "app".
 BASE_DIR = Path(__file__).resolve().parent
 
 
@@ -50,16 +63,18 @@ app = FastAPI(
 # Recursos estáticos y plantillas
 # ============================================================
 
-# Expone CSS, JavaScript, imágenes y otros recursos bajo /static.
+# Expone CSS, JavaScript, imágenes y otros recursos.
 app.mount(
     "/static",
-    StaticFiles(directory=BASE_DIR / "static"),
+    StaticFiles(
+        directory=BASE_DIR / "static",
+    ),
     name="static",
 )
 
-# Configura Jinja2 para renderizar las páginas HTML.
+# Configura Jinja2 para renderizar páginas HTML.
 templates = Jinja2Templates(
-    directory=BASE_DIR / "templates"
+    directory=BASE_DIR / "templates",
 )
 
 
@@ -67,9 +82,14 @@ templates = Jinja2Templates(
 # Rutas de interfaz
 # ============================================================
 
-@app.get("/", response_class=HTMLResponse)
-async def inicio(request: Request):
-    """Muestra la página principal de la aplicación."""
+@app.get(
+    "/",
+    response_class=HTMLResponse,
+)
+async def inicio(
+    request: Request,
+):
+    """Muestra la página principal."""
 
     return templates.TemplateResponse(
         request=request,
@@ -81,9 +101,14 @@ async def inicio(request: Request):
     )
 
 
-@app.get("/simulacion", response_class=HTMLResponse)
-async def simulacion(request: Request):
-    """Muestra el asistente para crear una nueva simulación."""
+@app.get(
+    "/simulacion",
+    response_class=HTMLResponse,
+)
+async def simulacion(
+    request: Request,
+):
+    """Muestra el asistente de simulación."""
 
     return templates.TemplateResponse(
         request=request,
@@ -95,9 +120,14 @@ async def simulacion(request: Request):
     )
 
 
-@app.get("/comparar", response_class=HTMLResponse)
-async def comparar(request: Request):
-    """Muestra la página destinada al comparador de sistemas."""
+@app.get(
+    "/comparar",
+    response_class=HTMLResponse,
+)
+async def comparar(
+    request: Request,
+):
+    """Muestra la página del comparador."""
 
     return templates.TemplateResponse(
         request=request,
@@ -120,19 +150,14 @@ async def comparar(request: Request):
 async def calcular_resumen_cuotas(
     datos: DatosCuotas,
 ):
-    """Analiza las cuotas reales y las cuotas proyectadas.
-
-    La lógica se mantiene fuera del endpoint y se delega al
-    servicio ``analizar_cuotas`` para conservar la separación
-    entre la API y el motor de cálculo.
-    """
+    """Analiza cuotas acreditadas y proyectadas."""
 
     try:
-        return analizar_cuotas(datos)
+        return analizar_cuotas(
+            datos,
+        )
 
     except ValueError as error:
-        # Los errores de reglas de negocio se devuelven como
-        # respuestas 422 para que la interfaz pueda mostrarlos.
         raise HTTPException(
             status_code=422,
             detail=str(error),
@@ -140,7 +165,32 @@ async def calcular_resumen_cuotas(
 
 
 # ============================================================
-# API — Salario
+# API — Historial salarial
+# ============================================================
+
+@app.post(
+    "/api/simulacion/historial-salarial",
+    response_model=ResumenHistorialSalarial,
+)
+async def calcular_resumen_historial_salarial(
+    datos: DatosHistorialSalarial,
+):
+    """Valida y resume el historial salarial anual."""
+
+    try:
+        return analizar_historial_salarial(
+            datos,
+        )
+
+    except ValueError as error:
+        raise HTTPException(
+            status_code=422,
+            detail=str(error),
+        ) from error
+
+
+# ============================================================
+# API — Salario actual
 # ============================================================
 
 @app.post(
@@ -150,14 +200,14 @@ async def calcular_resumen_cuotas(
 async def calcular_resumen_salario(
     datos: DatosSalario,
 ):
-    """Normaliza un salario a diferentes periodicidades."""
+    """Normaliza el salario actual."""
 
     try:
-        return normalizar_salario(datos)
+        return normalizar_salario(
+            datos,
+        )
 
     except ValueError as error:
-        # Mantiene un formato de error consistente con el
-        # endpoint utilizado para analizar cuotas.
         raise HTTPException(
             status_code=422,
             detail=str(error),
@@ -165,12 +215,61 @@ async def calcular_resumen_salario(
 
 
 # ============================================================
+# API — Proyección salarial
+# ============================================================
+
+@app.post(
+    "/api/simulacion/proyeccion-salario",
+    response_model=ResumenProyeccionSalario,
+)
+async def calcular_proyeccion_salario(
+    datos: DatosProyeccionSalario,
+):
+    """Construye uno o varios escenarios salariales futuros."""
+
+    try:
+        return proyectar_salario(
+            datos,
+        )
+
+    except ValueError as error:
+        raise HTTPException(
+            status_code=422,
+            detail=str(error),
+        ) from error
+
+
+# ============================================================
+# API — Línea temporal
+# ============================================================
+
+@app.post(
+    "/api/simulacion/linea-tiempo",
+    response_model=ResumenLineaTiempo,
+)
+async def calcular_linea_tiempo(
+    datos: DatosLineaTiempo,
+):
+    """Une información histórica y proyectada por año."""
+
+    try:
+        return construir_linea_tiempo(
+            datos,
+        )
+
+    except ValueError as error:
+        raise HTTPException(
+            status_code=422,
+            detail=str(error),
+        ) from error
+
+# ============================================================
 # Estado del servicio
 # ============================================================
 
 @app.get("/salud")
 async def salud():
-    """Devuelve información mínima para verificar que la API funciona."""
+    """Permite verificar que el servicio está funcionando."""
 
     return {
         "estado": "ok",

@@ -1,0 +1,381 @@
+<!-- ==================================================
+     Historial salarial anual
+     ================================================== -->
+
+<section
+  id="seccion-historial-salarial"
+  class="history-section"
+>
+
+  <!-- Selección del método de ingreso. -->
+
+  <div class="mb-4">
+
+    <label
+      for="modo_historial"
+      class="form-label fw-semibold"
+    >
+      ¿Cómo deseas proporcionar tu historial salarial?
+    </label>
+
+    <select
+      id="modo_historial"
+      class="form-select form-select-lg"
+    >
+      <option value="MANUAL" selected>
+        Introducir historial anual
+      </option>
+
+      <option value="SOLO_ACTUAL">
+        Solo conozco mi salario actual
+      </option>
+
+      <option value="IMPORTAR" disabled>
+        Importar Mi Retiro Seguro — próximamente
+      </option>
+    </select>
+
+  </div>
+
+
+  <!-- ==================================================
+       Modo manual
+       ================================================== -->
+
+  <div id="historial-modo-manual">
+
+    <div class="info-box mb-4">
+
+      <strong>
+        Los años se generan automáticamente.
+      </strong>
+
+      <p class="mb-0 mt-1">
+        La aplicación utiliza como referencia el año de ingreso
+        a la CSS indicado en el Paso 1. Puedes corregir el año
+        inicial si fuera necesario.
+      </p>
+
+    </div>
+
+
+    <!-- Configuración del período histórico. -->
+
+    <div class="row g-4 align-items-end mb-4">
+
+      <div class="col-md-4">
+
+        <label
+          for="historial_anio_inicio"
+          class="form-label fw-semibold"
+        >
+          Año inicial del historial
+        </label>
+
+        <input
+          type="number"
+          min="1900"
+          max="2200"
+          step="1"
+          class="form-control form-control-lg"
+          id="historial_anio_inicio"
+        >
+
+      </div>
+
+
+      <div class="col-md-4">
+
+        <label
+          for="historial_anio_fin"
+          class="form-label fw-semibold"
+        >
+          Año final
+        </label>
+
+        <input
+          type="number"
+          class="form-control form-control-lg"
+          id="historial_anio_fin"
+          readonly
+        >
+
+      </div>
+
+
+      <div class="col-md-4">
+
+        <button
+          type="button"
+          id="btn-generar-historial"
+          class="btn btn-outline-primary w-100"
+        >
+          Generar / actualizar años
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- Acciones auxiliares. -->
+
+    <div class="history-toolbar mb-3">
+
+      <button
+        type="button"
+        id="btn-completar-cuotas"
+        class="btn btn-sm btn-outline-secondary"
+      >
+        Completar cuotas vacías con 12
+      </button>
+
+      <span class="history-toolbar-note">
+        Podrás modificar cualquier año posteriormente.
+      </span>
+
+    </div>
+
+
+    <!-- Tabla editable del historial. -->
+
+    <div class="history-table-wrapper">
+
+      <table
+        class="table table-hover align-middle history-table"
+      >
+
+        <thead>
+
+          <tr>
+            <th scope="col">
+              Año
+            </th>
+
+            <th scope="col">
+              Cuotas
+            </th>
+
+            <th scope="col">
+              Salario cotizado/reportado
+            </th>
+
+            <th scope="col">
+              Estado
+            </th>
+          </tr>
+
+        </thead>
+
+        <tbody id="historial-tabla-body">
+          <!-- JavaScript genera las filas. -->
+        </tbody>
+
+      </table>
+
+    </div>
+
+
+    <div class="form-text mt-2">
+
+      El salario indicado corresponde al total reportado durante
+      ese año. En un año parcial no debe anualizarse manualmente.
+
+    </div>
+
+
+    <!-- Mensajes de validación. -->
+
+    <div
+      id="error-historial"
+      class="alert alert-danger mt-4 d-none"
+      role="alert"
+    ></div>
+
+
+    <div
+      id="advertencia-historial"
+      class="alert alert-warning mt-4 d-none"
+      role="alert"
+    ></div>
+
+
+    <!-- Acción principal. -->
+
+    <div class="d-flex justify-content-end mt-4">
+
+      <button
+        type="button"
+        id="btn-analizar-historial"
+        class="btn btn-primary px-4"
+      >
+        Analizar historial
+      </button>
+
+    </div>
+
+
+    <!-- ==================================================
+         Resultado del análisis
+         ================================================== -->
+
+    <div
+      id="resultado-historial"
+      class="mt-5 d-none"
+    >
+
+      <hr class="mb-4">
+
+      <div class="mb-4">
+
+        <h3 class="h5 fw-bold mb-2">
+          Resumen del historial
+        </h3>
+
+        <p class="text-secondary mb-0">
+          La comparación de cuotas permite detectar si todavía
+          faltan años o registros por completar.
+        </p>
+
+      </div>
+
+
+      <div class="row g-3">
+
+        <div class="col-sm-6 col-xl-3">
+
+          <div class="summary-card history-summary-card">
+
+            <span class="summary-label">
+              Cuotas de referencia
+            </span>
+
+            <strong
+              id="historial-cuotas-referencia"
+              class="summary-value"
+            >
+              0
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <div class="col-sm-6 col-xl-3">
+
+          <div class="summary-card history-summary-card">
+
+            <span class="summary-label">
+              Cuotas identificadas
+            </span>
+
+            <strong
+              id="historial-cuotas-sumadas"
+              class="summary-value"
+            >
+              0
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <div class="col-sm-6 col-xl-3">
+
+          <div class="summary-card history-summary-card">
+
+            <span class="summary-label">
+              Diferencia
+            </span>
+
+            <strong
+              id="historial-diferencia-cuotas"
+              class="summary-value"
+            >
+              0
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <div class="col-sm-6 col-xl-3">
+
+          <div class="summary-card history-summary-card">
+
+            <span class="summary-label">
+              Total salarial reportado
+            </span>
+
+            <strong
+              id="historial-total-salarios"
+              class="summary-value salary-value"
+            >
+              B/.0.00
+            </strong>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div
+        id="historial-estado-general"
+        class="alert mt-4 mb-0"
+        role="alert"
+      ></div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ==================================================
+       Modo simplificado
+       ================================================== -->
+
+  <div
+    id="historial-modo-solo-actual"
+    class="d-none"
+  >
+
+    <div class="alert alert-warning">
+
+      <h3 class="h6 fw-bold">
+        Simulación con información histórica limitada
+      </h3>
+
+      <p class="mb-2">
+        Podrás continuar usando tu salario actual y las cuotas
+        acumuladas, pero algunos cálculos posteriores pueden ser
+        menos precisos o no estar disponibles.
+      </p>
+
+      <p class="mb-0">
+        Para cálculos como el salario base del SEBD será necesario
+        disponer del historial salarial correspondiente.
+      </p>
+
+    </div>
+
+
+    <div class="d-flex justify-content-end">
+
+      <button
+        type="button"
+        id="btn-confirmar-solo-actual"
+        class="btn btn-outline-primary"
+      >
+        Continuar con información limitada
+      </button>
+
+    </div>
+
+  </div>
+
+</section>

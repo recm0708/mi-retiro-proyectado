@@ -345,3 +345,414 @@ body {
 
   font-variant-numeric: tabular-nums;
 }
+
+/* ==========================================================
+   Paso 4 — Proyección salarial
+   ========================================================== */
+
+/*
+ * Resume el salario mensual que se utilizará como punto de
+ * partida para generar las proyecciones.
+ */
+.projection-base-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+
+  padding: 1.25rem 1.5rem;
+
+  background-color: #f4f8ff;
+
+  border: 1px solid #d9e7ff;
+  border-radius: 0.9rem;
+}
+
+.projection-base-card > div:first-child {
+  display: flex;
+  flex-direction: column;
+}
+
+.projection-base-label {
+  color: var(--app-muted);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.projection-base-value {
+  margin-top: 0.25rem;
+
+  color: var(--app-primary);
+
+  font-size: 1.7rem;
+  line-height: 1.15;
+
+  white-space: nowrap;
+}
+
+.projection-base-note {
+  color: var(--app-muted);
+
+  font-size: 0.9rem;
+  text-align: right;
+}
+
+
+/*
+ * Las configuraciones adicionales aparecen únicamente cuando
+ * la modalidad seleccionada las necesita.
+ */
+.projection-config {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+
+  background-color: #fbfcfe;
+
+  border: 1px solid var(--app-border);
+  border-radius: 0.9rem;
+}
+
+
+/*
+ * Cada escenario generado se presenta dentro de su propia
+ * sección para facilitar la comparación.
+ */
+.projection-scenario {
+  margin-bottom: 1.5rem;
+
+  border: 1px solid var(--app-border);
+  border-radius: 0.9rem;
+
+  overflow: hidden;
+}
+
+.projection-scenario-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+
+  padding: 1rem 1.25rem;
+
+  background-color: #f8faff;
+}
+
+.projection-scenario-title {
+  margin: 0;
+
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.projection-rate {
+  color: var(--app-primary);
+
+  font-size: 0.9rem;
+  font-weight: 600;
+
+  white-space: nowrap;
+}
+
+.projection-table {
+  margin-bottom: 0;
+}
+
+.projection-table th {
+  white-space: nowrap;
+}
+
+.projection-table td {
+  vertical-align: middle;
+}
+
+
+/* Adaptación del resumen salarial a pantallas pequeñas. */
+@media (max-width: 768px) {
+  .projection-base-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .projection-base-note {
+    text-align: left;
+  }
+
+  .projection-scenario-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* ==========================================================
+   Paso 3 — Historial salarial
+   ========================================================== */
+
+/*
+ * La tabla histórica puede abarcar varias décadas, por lo que
+ * utiliza un área desplazable con encabezados persistentes.
+ */
+.history-table-wrapper {
+  max-height: 560px;
+
+  overflow: auto;
+
+  border: 1px solid var(--app-border);
+  border-radius: 0.9rem;
+}
+
+.history-table {
+  margin-bottom: 0;
+}
+
+.history-table thead {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+
+  background-color: #f8faff;
+}
+
+.history-table th {
+  padding: 1rem;
+
+  white-space: nowrap;
+}
+
+.history-table td {
+  padding: 0.75rem 1rem;
+
+  vertical-align: middle;
+}
+
+.history-table th:nth-child(1),
+.history-table td:nth-child(1) {
+  width: 110px;
+}
+
+.history-table th:nth-child(2),
+.history-table td:nth-child(2) {
+  width: 160px;
+}
+
+.history-table th:nth-child(4),
+.history-table td:nth-child(4) {
+  width: 180px;
+}
+
+
+/* Barra de acciones auxiliares del historial. */
+.history-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  flex-wrap: wrap;
+}
+
+.history-toolbar-note {
+  color: var(--app-muted);
+  font-size: 0.9rem;
+}
+
+
+/* Año destacado dentro de la tabla. */
+.history-year-cell {
+  font-weight: 700;
+}
+
+
+/* Estados visuales de cada año. */
+.history-status {
+  display: inline-flex;
+
+  padding: 0.35rem 0.65rem;
+
+  border-radius: 999px;
+
+  font-size: 0.8rem;
+  font-weight: 700;
+
+  white-space: nowrap;
+}
+
+.history-status-pending {
+  background-color: #eef1f5;
+  color: #65758b;
+}
+
+.history-status-none {
+  background-color: #f3f4f6;
+  color: #5d6675;
+}
+
+.history-status-partial {
+  background-color: #fff4d6;
+  color: #8a6100;
+}
+
+.history-status-complete {
+  background-color: #e8f7ee;
+  color: #176b3a;
+}
+
+
+/* Resumen del análisis histórico. */
+.history-summary-card {
+  min-height: 125px;
+}
+
+
+/* Adaptación para dispositivos pequeños. */
+@media (max-width: 768px) {
+  .history-table-wrapper {
+    max-height: 480px;
+  }
+
+  .history-toolbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+/* ==========================================================
+   Paso 4 — Línea temporal histórica y proyectada
+   ========================================================== */
+
+.timeline-overview {
+  margin-bottom: 1.5rem;
+  padding: 1.1rem 1.25rem;
+
+  background-color: #f4f8ff;
+
+  border: 1px solid #d9e7ff;
+  border-radius: 0.9rem;
+}
+
+.timeline-section {
+  margin-bottom: 1.75rem;
+}
+
+.timeline-section-heading {
+  margin-bottom: 1rem;
+}
+
+.timeline-history-wrapper {
+  max-height: 460px;
+  overflow: auto;
+
+  border: 1px solid var(--app-border);
+  border-radius: 0.9rem;
+}
+
+.timeline-table {
+  margin-bottom: 0;
+}
+
+.timeline-table thead {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+
+  background-color: #f8faff;
+}
+
+.timeline-table th,
+.timeline-table td {
+  padding: 0.85rem 1rem;
+  vertical-align: middle;
+}
+
+.timeline-table th {
+  white-space: nowrap;
+}
+
+.timeline-current-year {
+  padding: 1.25rem;
+
+  background-color: #fbfcfe;
+
+  border: 1px solid var(--app-border);
+  border-radius: 0.9rem;
+}
+
+.timeline-current-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+
+  height: 100%;
+  min-height: 145px;
+  padding: 1.15rem 1.25rem;
+
+  background-color: #ffffff;
+
+  border: 1px solid #dfe8f7;
+  border-radius: 0.85rem;
+}
+
+.timeline-current-label {
+  color: var(--app-muted);
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.timeline-current-quotas {
+  color: var(--app-primary);
+  font-size: 1.45rem;
+}
+
+.timeline-current-salary {
+  font-size: 1.05rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.timeline-future-scenario {
+  margin-bottom: 1.5rem;
+}
+
+.timeline-status {
+  display: inline-flex;
+  padding: 0.35rem 0.65rem;
+
+  border-radius: 999px;
+
+  font-size: 0.78rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.timeline-status-historic {
+  background-color: #e8f7ee;
+  color: #176b3a;
+}
+
+.timeline-status-partial {
+  background-color: #fff4d6;
+  color: #8a6100;
+}
+
+.timeline-status-mixed {
+  background-color: #eaf2ff;
+  color: #0b5ed7;
+}
+
+.timeline-status-projected {
+  background-color: #eef2ff;
+  color: #4f46e5;
+}
+
+.timeline-status-pending {
+  background-color: #eef1f5;
+  color: #65758b;
+}
+
+@media (max-width: 768px) {
+  .timeline-history-wrapper {
+    max-height: 380px;
+  }
+
+  .timeline-current-card {
+    min-height: auto;
+  }
+}

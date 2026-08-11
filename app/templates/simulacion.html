@@ -66,7 +66,7 @@ Nueva simulación | Calculadora de Pensión CSS
         data-step="3"
       >
         <span>3</span>
-        <small>Salarios</small>
+        <small>Historial</small>
       </div>
 
       <div class="wizard-line"></div>
@@ -644,12 +644,12 @@ Nueva simulación | Calculadora de Pensión CSS
                 <div class="alert alert-light border mt-4 mb-0">
 
                   <strong>
-                    Próximo paso: salarios.
+                    Próximo paso: historial salarial.
                   </strong>
 
                   <div class="text-secondary mt-1">
-                    Incorporaremos el salario actual antes
-                    de construir los escenarios de proyección.
+                    Incorporaremos el historial de cuotas y salarios reales
+                    antes de definir el salario actual para proyección.
                   </div>
 
                 </div>
@@ -664,7 +664,7 @@ Nueva simulación | Calculadora de Pensión CSS
                     id="btn-continuar-paso-3"
                     class="btn btn-primary px-4"
                   >
-                    Continuar a salarios
+                    Continuar al historial
                   </button>
 
                 </div>
@@ -679,7 +679,7 @@ Nueva simulación | Calculadora de Pensión CSS
 
 
         <!-- ==================================================
-             PASO 3 — SALARIO
+             PASO 3 — HISTORIAL Y SALARIO ACTUAL
              ================================================== -->
 
         <div
@@ -698,17 +698,42 @@ Nueva simulación | Calculadora de Pensión CSS
                 </span>
 
                 <h2 class="h4 fw-bold mt-2 mb-2">
-                  Salario actual
+                  Historial salarial y salario actual
                 </h2>
 
                 <p class="text-secondary mb-0">
-                  Ingresa tu salario de la forma en que normalmente
-                  lo conoces. La aplicación hará automáticamente
-                  las conversiones necesarias.
+                  Registra el historial de salarios y cuotas reportadas
+                  a la CSS. Después indica el salario que utilizaremos
+                  como punto de partida para las proyecciones futuras.
                 </p>
 
               </div>
 
+
+              <!-- Historial salarial anual. -->
+
+              {% include "partials/historial_salarial.html" %}
+
+
+              <!-- ==================================================
+                  Salario actual utilizado para la proyección
+                  ================================================== -->
+
+              <hr class="my-5">
+
+              <div class="mb-4">
+
+                <h3 class="h5 fw-bold mb-2">
+                  Salario actual para proyección
+                </h3>
+
+                <p class="text-secondary mb-0">
+                  Este valor representa tu remuneración vigente.
+                  Puede ser diferente del salario cotizado acumulado
+                  durante el año actual.
+                </p>
+
+              </div>
 
               <form id="form-salario">
 
@@ -870,7 +895,7 @@ Nueva simulación | Calculadora de Pensión CSS
                   </div>
 
 
-                  <div class="col-sm-6 col-lg-3">
+                  <div class="col-md-6 col-xl-3">
 
                     <div class="summary-card">
 
@@ -890,7 +915,7 @@ Nueva simulación | Calculadora de Pensión CSS
                   </div>
 
 
-                  <div class="col-sm-6 col-lg-3">
+                  <div class="col-md-6 col-xl-3">
 
                     <div class="summary-card">
 
@@ -910,7 +935,7 @@ Nueva simulación | Calculadora de Pensión CSS
                   </div>
 
 
-                  <div class="col-sm-6 col-lg-3">
+                  <div class="col-md-6 col-xl-3">
 
                     <div class="summary-card">
 
@@ -946,7 +971,23 @@ Nueva simulación | Calculadora de Pensión CSS
 
                 </div>
 
+
+                <!-- Permite avanzar al Paso 4 después de analizar el salario. -->
+
+                <div class="d-flex justify-content-end mt-4">
+
+                  <button
+                    type="button"
+                    id="btn-continuar-paso-4"
+                    class="btn btn-primary px-4"
+                  >
+                    Continuar a proyección
+                  </button>
+
+                </div>
+
               </div>
+
 
             </div>
 
@@ -954,6 +995,422 @@ Nueva simulación | Calculadora de Pensión CSS
 
         </div>
 
+
+        <!-- ==================================================
+            PASO 4 — PROYECCIÓN
+            ================================================== -->
+
+        <div
+          class="wizard-panel d-none"
+          data-panel="4"
+        >
+
+          <div class="card border-0 shadow-sm simulation-card">
+
+            <div class="card-body p-4 p-lg-5">
+
+              <!-- Encabezado del Paso 4. -->
+
+              <div class="mb-4">
+
+                <span class="text-primary fw-semibold">
+                  Paso 4 de 6
+                </span>
+
+                <h2 class="h4 fw-bold mt-2 mb-2">
+                  Proyección salarial
+                </h2>
+
+                <p class="text-secondary mb-0">
+                  Define cómo deseas estimar la evolución de tu
+                  salario durante los próximos años.
+                </p>
+
+              </div>
+
+
+              <!-- Salario base proveniente del Paso 3. -->
+
+              <div class="projection-base-card mb-4">
+
+                <div>
+
+                  <span class="projection-base-label">
+                    Salario mensual utilizado como base
+                  </span>
+
+                  <strong
+                    id="proyeccion-salario-base"
+                    class="projection-base-value"
+                  >
+                    B/.0.00
+                  </strong>
+
+                </div>
+
+                <div class="projection-base-note">
+                  Obtenido automáticamente del Paso 3
+                </div>
+
+              </div>
+
+
+              <form id="form-proyeccion">
+
+                <!-- Período de proyección. -->
+
+                <div class="row g-4 mb-4">
+
+                  <div class="col-md-6">
+
+                    <label
+                      for="proyeccion_anio_inicio"
+                      class="form-label fw-semibold"
+                    >
+                      Año inicial
+                    </label>
+
+                    <input
+                      type="number"
+                      class="form-control form-control-lg"
+                      id="proyeccion_anio_inicio"
+                      readonly
+                    >
+
+                    <div class="form-text">
+                      Corresponde al año calendario actual.
+                    </div>
+
+                  </div>
+
+
+                  <div class="col-md-6">
+
+                    <label
+                      for="proyeccion_anio_fin"
+                      class="form-label fw-semibold"
+                    >
+                      Proyectar hasta el año
+                    </label>
+
+                    <input
+                      type="number"
+                      min="1900"
+                      max="2200"
+                      step="1"
+                      class="form-control form-control-lg"
+                      id="proyeccion_anio_fin"
+                      required
+                    >
+
+                    <div class="form-text">
+                      Podrás modificar posteriormente este período
+                      según la edad de retiro que quieras comparar.
+                    </div>
+
+                  </div>
+
+                </div>
+
+
+                <!-- Modalidad de proyección. -->
+
+                <div class="mb-4">
+
+                  <label
+                    for="modalidad_proyeccion"
+                    class="form-label fw-semibold"
+                  >
+                    ¿Cómo deseas proyectar tu salario?
+                  </label>
+
+                  <select
+                    class="form-select form-select-lg"
+                    id="modalidad_proyeccion"
+                    required
+                  >
+
+                    <option value="" selected disabled>
+                      Selecciona una opción
+                    </option>
+
+                    <option value="CONSTANTE">
+                      Mantener el salario actual
+                    </option>
+
+                    <option value="PORCENTAJE">
+                      Aplicar un porcentaje de cambio cada año
+                    </option>
+
+                    <option value="FUTURO_CONOCIDO">
+                      Conozco un salario que tendré en el futuro
+                    </option>
+
+                    <option value="ESCENARIOS">
+                      No sé — comparar varios escenarios
+                    </option>
+
+                  </select>
+
+                </div>
+
+
+                <!-- ==========================================
+                    Configuración: porcentaje anual
+                    ========================================== -->
+
+                <div
+                  id="config-proyeccion-porcentaje"
+                  class="projection-config d-none"
+                >
+
+                  <div class="row g-4">
+
+                    <div class="col-md-6">
+
+                      <label
+                        for="porcentaje_anual"
+                        class="form-label fw-semibold"
+                      >
+                        Variación anual
+                      </label>
+
+                      <div class="input-group input-group-lg">
+
+                        <input
+                          type="number"
+                          min="-99.99"
+                          max="100"
+                          step="0.01"
+                          class="form-control"
+                          id="porcentaje_anual"
+                        >
+
+                        <span class="input-group-text">
+                          %
+                        </span>
+
+                      </div>
+
+                      <div class="form-text">
+                        Puede ser positiva o negativa.
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+
+                <!-- ==========================================
+                    Configuración: salario futuro conocido
+                    ========================================== -->
+
+                <div
+                  id="config-proyeccion-futuro"
+                  class="projection-config d-none"
+                >
+
+                  <div class="row g-4">
+
+                    <div class="col-md-6">
+
+                      <label
+                        for="salario_mensual_futuro"
+                        class="form-label fw-semibold"
+                      >
+                        Salario mensual futuro
+                      </label>
+
+                      <div class="input-group input-group-lg">
+
+                        <span class="input-group-text">
+                          B/.
+                        </span>
+
+                        <input
+                          type="number"
+                          min="0.01"
+                          step="0.01"
+                          class="form-control"
+                          id="salario_mensual_futuro"
+                        >
+
+                      </div>
+
+                    </div>
+
+
+                    <div class="col-md-6">
+
+                      <label
+                        for="anio_salario_futuro"
+                        class="form-label fw-semibold"
+                      >
+                        Año de ese salario
+                      </label>
+
+                      <input
+                        type="number"
+                        min="1900"
+                        max="2200"
+                        step="1"
+                        class="form-control form-control-lg"
+                        id="anio_salario_futuro"
+                      >
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+
+                <!-- ==========================================
+                    Configuración: varios escenarios
+                    ========================================== -->
+
+                <div
+                  id="config-proyeccion-escenarios"
+                  class="projection-config d-none"
+                >
+
+                  <div class="row">
+
+                    <div class="col-lg-8">
+
+                      <label
+                        for="escenarios_porcentajes"
+                        class="form-label fw-semibold"
+                      >
+                        Porcentajes a comparar
+                      </label>
+
+                      <input
+                        type="text"
+                        class="form-control form-control-lg"
+                        id="escenarios_porcentajes"
+                        value="0, 1, 2, 3"
+                      >
+
+                      <div class="form-text">
+                        Separa cada porcentaje con una coma.
+                        Ejemplo: 0, 1, 2, 3
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+
+                <!-- Explicación sobre el carácter estimado. -->
+
+                <div class="info-box mt-4">
+
+                  <strong>
+                    Esta etapa genera escenarios, no salarios reales.
+                  </strong>
+
+                  <p class="mb-0 mt-1">
+                    Los valores futuros se mantendrán identificados
+                    como proyecciones y no reemplazarán información
+                    salarial histórica.
+                  </p>
+
+                </div>
+
+
+                <!-- Mensajes de error del Paso 4. -->
+
+                <div
+                  id="error-proyeccion"
+                  class="alert alert-danger mt-4 d-none"
+                  role="alert"
+                ></div>
+
+
+                <!-- Navegación y ejecución. -->
+
+                <div
+                  class="d-flex justify-content-between
+                        align-items-center mt-5"
+                >
+
+                  <button
+                    type="button"
+                    id="btn-volver-paso-3"
+                    class="btn btn-outline-secondary"
+                  >
+                    Anterior
+                  </button>
+
+                  <button
+                    type="submit"
+                    class="btn btn-primary px-4"
+                  >
+                    Generar proyección
+                  </button>
+
+                </div>
+
+              </form>
+
+
+              <!-- ==========================================
+                  RESULTADOS DE LA PROYECCIÓN
+                  ========================================== -->
+
+              <div
+                id="resultado-proyeccion"
+                class="mt-5 d-none"
+              >
+
+                <hr class="mb-4">
+
+
+                <div class="mb-4">
+
+                  <h3 class="h5 fw-bold mb-2">
+                    Historial y proyección salarial
+                  </h3>
+
+                  <p class="text-secondary mb-0">
+                    La aplicación separa los datos históricos reales,
+                    el año actual y las estimaciones futuras.
+                  </p>
+
+                </div>
+
+
+                <!-- JavaScript insertará aquí las tablas. -->
+
+                <div id="contenedor-escenarios"></div>
+
+
+                <div class="alert alert-light border mt-4 mb-0">
+
+                  <strong>
+                    Próximo paso: condiciones de retiro.
+                  </strong>
+
+                  <div class="text-secondary mt-1">
+                    En el Paso 5 combinaremos edad, fechas,
+                    cuotas y proyección salarial para evaluar
+                    distintos momentos de retiro.
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
 
       </div>
 
@@ -968,10 +1425,24 @@ Nueva simulación | Calculadora de Pensión CSS
 
 {% block scripts %}
 
-<!-- JavaScript específico del asistente de simulación. -->
+<!-- JavaScript principal del asistente. -->
 
 <script
   src="{{ url_for('static', path='/js/simulacion.js') }}"
+></script>
+
+
+<!-- Gestión específica del historial salarial. -->
+
+<script
+  src="{{ url_for('static', path='/js/historial_salarios.js') }}"
+></script>
+
+
+<!-- Presentación integrada de historial y proyección. -->
+
+<script
+  src="{{ url_for('static', path='/js/linea_tiempo.js') }}"
 ></script>
 
 {% endblock %}
