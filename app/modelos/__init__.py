@@ -1,0 +1,1 @@
+"""Modelos de datos utilizados por la aplicación y sus servicios."""

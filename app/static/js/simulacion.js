@@ -9,6 +9,12 @@ let pasoActual = 1;
 // ALMACENAMIENTO TEMPORAL
 // ============================================================
 
+/**
+ * Crea la estructura inicial utilizada para una nueva simulación.
+ *
+ * @returns {Object} Estado vacío del asistente.
+ */
+
 function crearSimulacionVacia() {
   return {
     paso_actual: 1,
@@ -23,6 +29,13 @@ function crearSimulacionVacia() {
   };
 }
 
+/**
+ * Recupera la simulación almacenada temporalmente en la pestaña.
+ *
+ * Si no existe información válida, devuelve una estructura vacía.
+ *
+ * @returns {Object} Estado actual de la simulación.
+ */
 
 function obtenerSimulacion() {
   const almacenada = sessionStorage.getItem(CLAVE_SIMULACION);
@@ -48,6 +61,11 @@ function obtenerSimulacion() {
   }
 }
 
+/**
+ * Guarda temporalmente el estado completo de la simulación.
+ *
+ * @param {Object} simulacion Estado que debe conservarse.
+ */
 
 function guardarSimulacion(simulacion) {
   sessionStorage.setItem(
@@ -60,6 +78,12 @@ function guardarSimulacion(simulacion) {
 // ============================================================
 // NAVEGACIÓN DEL ASISTENTE
 // ============================================================
+
+/**
+ * Muestra un panel del asistente y actualiza su indicador de progreso.
+ *
+ * @param {number} numeroPaso Número del paso que debe mostrarse.
+ */
 
 function mostrarPaso(numeroPaso) {
   pasoActual = numeroPaso;
@@ -109,6 +133,12 @@ function mostrarPaso(numeroPaso) {
 // PASO 1 — DATOS PERSONALES
 // ============================================================
 
+/**
+ * Valida y guarda los datos introducidos en el Paso 1.
+ *
+ * @returns {boolean} true cuando los datos pudieron guardarse.
+ */
+
 function guardarDatosPersonales() {
   const formulario = document.getElementById(
     "form-datos-personales",
@@ -148,6 +178,11 @@ function guardarDatosPersonales() {
   return true;
 }
 
+/**
+ * Restaura los datos personales previamente guardados.
+ *
+ * @param {Object} simulacion Estado actual de la simulación.
+ */
 
 function restaurarDatosPersonales(simulacion) {
   const persona = simulacion.persona;
@@ -185,6 +220,11 @@ function restaurarDatosPersonales(simulacion) {
 // ============================================================
 // PASO 2 — CUOTAS
 // ============================================================
+
+/**
+ * Activa o desactiva los campos de proyección de cuotas según
+ * la decisión del usuario de continuar o no cotizando.
+ */
 
 function actualizarEstadoContinuidad() {
   const continua = document.getElementById(
@@ -232,6 +272,11 @@ function actualizarEstadoContinuidad() {
   }
 }
 
+/**
+ * Restaura los datos y el resultado del análisis de cuotas.
+ *
+ * @param {Object} simulacion Estado actual de la simulación.
+ */
 
 function restaurarDatosCuotas(simulacion) {
   const cuotas = simulacion.cuotas;
@@ -285,6 +330,12 @@ function restaurarDatosCuotas(simulacion) {
   }
 }
 
+/**
+ * Envía las cuotas al backend, guarda el resultado y actualiza
+ * el resumen mostrado al usuario.
+ *
+ * @param {SubmitEvent} evento Evento submit del formulario.
+ */
 
 async function analizarCuotas(evento) {
   evento.preventDefault();
@@ -386,6 +437,11 @@ async function analizarCuotas(evento) {
   }
 }
 
+/**
+ * Muestra en la interfaz el resultado preliminar de cuotas.
+ *
+ * @param {Object} resumen Respuesta obtenida desde la API.
+ */
 
 function mostrarResumenCuotas(resumen) {
   document.getElementById(
@@ -446,6 +502,12 @@ function ocultarErrorCuotas() {
 // PASO 3 — SALARIO
 // ============================================================
 
+/**
+ * Restaura el salario introducido y sus equivalencias calculadas.
+ *
+ * @param {Object} simulacion Estado actual de la simulación.
+ */
+
 function restaurarDatosSalario(simulacion) {
   const salario = simulacion.salario;
 
@@ -472,6 +534,12 @@ function restaurarDatosSalario(simulacion) {
   }
 }
 
+/**
+ * Normaliza el salario mediante la API y conserva el resultado
+ * dentro de la simulación temporal.
+ *
+ * @param {SubmitEvent} evento Evento submit del formulario.
+ */
 
 async function analizarSalario(evento) {
   evento.preventDefault();
@@ -542,6 +610,11 @@ async function analizarSalario(evento) {
   }
 }
 
+/**
+ * Muestra las equivalencias salariales devueltas por el backend.
+ *
+ * @param {Object} resumen Resultado de normalización salarial.
+ */
 
 function mostrarResumenSalario(resumen) {
   document.getElementById(
@@ -595,6 +668,13 @@ function ocultarErrorSalario() {
 // FORMATEADORES
 // ============================================================
 
+/**
+ * Convierte una cantidad decimal de años en un texto legible.
+ *
+ * @param {number|null} anios Cantidad aproximada de años.
+ * @returns {string} Representación en años y meses.
+ */
+
 function formatearTiempo(anios) {
   if (anios === null) {
     return "No alcanzable con la proyección actual";
@@ -640,6 +720,12 @@ function formatearTiempo(anios) {
   return partes.join(" y ");
 }
 
+/**
+ * Formatea un valor numérico como moneda panameña.
+ *
+ * @param {number} valor Monto que debe mostrarse.
+ * @returns {string} Valor con prefijo B/. y dos decimales.
+ */
 
 function formatearMoneda(valor) {
   const numero = Number(valor);
@@ -657,6 +743,14 @@ function formatearMoneda(valor) {
 // ============================================================
 // MANEJO DE ERRORES DE LA API
 // ============================================================
+
+/**
+ * Extrae un mensaje legible de una respuesta de error de FastAPI.
+ *
+ * @param {Object} contenido Respuesta recibida desde la API.
+ * @param {string} mensajePredeterminado Mensaje alternativo.
+ * @returns {string} Mensaje que se mostrará al usuario.
+ */
 
 function obtenerMensajeError(
   contenido,

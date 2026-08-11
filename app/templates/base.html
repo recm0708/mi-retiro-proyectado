@@ -1,8 +1,17 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+  <!-- ==================================================
+       Configuración general del documento
+       ================================================== -->
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <meta
     name="description"
@@ -10,30 +19,57 @@
   >
 
   <title>
-    {% block title %}Calculadora de Pensión CSS{% endblock %}
+    {% block title %}
+    Calculadora de Pensión CSS
+    {% endblock %}
   </title>
+
+
+  <!-- ==================================================
+       Bootstrap
+       ================================================== -->
 
   <link
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
     rel="stylesheet"
   >
 
+
+  <!-- ==================================================
+       Estilos propios de la aplicación
+       ================================================== -->
+
   <link
     rel="stylesheet"
     href="{{ url_for('static', path='/css/style.css') }}"
   >
 
+
+  <!-- Recursos adicionales específicos de cada página. -->
+
   {% block head %}{% endblock %}
 </head>
 
+
 <body>
 
+  <!-- ==================================================
+       Barra de navegación principal
+       ================================================== -->
+
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+
     <div class="container">
 
-      <a class="navbar-brand fw-bold" href="/">
+      <a
+        class="navbar-brand fw-bold"
+        href="/"
+      >
         Calculadora de Pensión CSS
       </a>
+
+
+      <!-- Botón utilizado por Bootstrap en pantallas pequeñas. -->
 
       <button
         class="navbar-toggler"
@@ -47,10 +83,14 @@
         <span class="navbar-toggler-icon"></span>
       </button>
 
+
+      <!-- Enlaces principales de navegación. -->
+
       <div
         class="collapse navbar-collapse"
         id="navbarPrincipal"
       >
+
         <div class="navbar-nav ms-auto">
 
           <a
@@ -75,16 +115,29 @@
           </a>
 
         </div>
+
       </div>
 
     </div>
+
   </nav>
+
+
+  <!-- ==================================================
+       Contenido específico de cada página
+       ================================================== -->
 
   <main>
     {% block content %}{% endblock %}
   </main>
 
+
+  <!-- ==================================================
+       Pie de página
+       ================================================== -->
+
   <footer class="footer py-4 mt-auto">
+
     <div class="container text-center">
 
       <p class="mb-1">
@@ -97,13 +150,23 @@
       </small>
 
     </div>
+
   </footer>
+
+
+  <!-- ==================================================
+       JavaScript de Bootstrap
+       ================================================== -->
 
   <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
   ></script>
 
+
+  <!-- Scripts adicionales específicos de cada página. -->
+
   {% block scripts %}{% endblock %}
 
 </body>
+
 </html>

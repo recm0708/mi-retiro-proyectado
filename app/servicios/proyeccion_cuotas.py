@@ -1,12 +1,47 @@
+"""Servicios para analizar las cuotas de una simulación previsional.
+
+Este módulo mantiene separadas las cuotas que ya están acreditadas
+de aquellas que solamente forman parte de una proyección futura.
+"""
+
 from app.modelos.simulacion import DatosCuotas, ResumenCuotas
 
+
+# ============================================================
+# Umbrales preliminares
+# ============================================================
+
+# Estos valores se utilizan actualmente para mostrar al usuario
+# su distancia respecto de dos referencias de cuotas.
+#
+# Más adelante los parámetros normativos definitivos serán
+# obtenidos desde los archivos versionados de "normativa/".
 CUOTAS_PENSION_PROPORCIONAL = 180
 CUOTAS_REFERENCIA = 240
+
+
+# ============================================================
+# Funciones auxiliares
+# ============================================================
 
 def _calcular_anios_aproximados(
     cuotas_faltantes: int,
     cuotas_por_anio: int,
 ) -> float | None:
+    """Calcula años aproximados para alcanzar una cantidad de cuotas.
+
+    Devuelve:
+        0.0:
+            Cuando el umbral ya fue alcanzado.
+
+        None:
+            Cuando todavía faltan cuotas pero la proyección indica
+            que no se aportarán cuotas futuras.
+
+        float:
+            Cantidad aproximada de años necesarios.
+    """
+
     if cuotas_faltantes <= 0:
         return 0.0
 
@@ -18,7 +53,21 @@ def _calcular_anios_aproximados(
         2,
     )
 
+
+# ============================================================
+# Análisis principal
+# ============================================================
+
 def analizar_cuotas(datos: DatosCuotas) -> ResumenCuotas:
+    """Analiza cuotas acreditadas y proyectadas.
+
+    Las cuotas correspondientes al año actual ya forman parte
+    de ``cuotas_totales``. Por esa razón únicamente se agregan
+    al total las cuotas futuras que todavía no han sido acreditadas.
+    """
+
+    # Una parte de las cuotas del año actual no puede superar
+    # el total histórico que ya aparece acreditado.
     if datos.cuotas_anio_actual > datos.cuotas_totales:
         raise ValueError(
             "Las cuotas del año actual no pueden superar "
@@ -26,6 +75,8 @@ def analizar_cuotas(datos: DatosCuotas) -> ResumenCuotas:
         )
 
     if datos.continua_cotizando:
+        # Si continuará cotizando, el cierre proyectado del año
+        # no puede ser inferior a lo ya acreditado.
         if (
             datos.cuotas_esperadas_cierre_anio
             < datos.cuotas_anio_actual
@@ -44,32 +95,41 @@ def analizar_cuotas(datos: DatosCuotas) -> ResumenCuotas:
         )
 
     else:
+        # Si el usuario indica que dejará de cotizar, no se
+        # incorporan cuotas adicionales al año ni a años futuros.
         cuotas_cierre_anio = datos.cuotas_anio_actual
         cuotas_por_anio_futuras = 0
 
+    # Calcula únicamente las cuotas del año actual que todavía
+    # no existen como cuotas reales.
     proyectadas_restantes = max(
         0,
         cuotas_cierre_anio
         - datos.cuotas_anio_actual,
     )
 
+    # El total proyectado parte siempre del total REAL acreditado.
     proyectadas_cierre = (
         datos.cuotas_totales
         + proyectadas_restantes
     )
 
+    # Diferencia respecto del umbral de 180 cuotas.
     faltantes_180 = max(
         0,
         CUOTAS_PENSION_PROPORCIONAL
         - proyectadas_cierre,
     )
 
+    # Diferencia respecto del umbral de 240 cuotas.
     faltantes_240 = max(
         0,
         CUOTAS_REFERENCIA
         - proyectadas_cierre,
     )
 
+    # Estima cuánto tiempo tomaría alcanzar los umbrales
+    # utilizando el ritmo anual indicado por el usuario.
     anios_180 = _calcular_anios_aproximados(
         faltantes_180,
         cuotas_por_anio_futuras,

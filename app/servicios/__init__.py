@@ -1,0 +1,1 @@
+"""Servicios auxiliares de análisis, proyección y comparación."""

@@ -1,0 +1,1 @@
+"""Paquete principal de la aplicación Calculadora de Pensión CSS."""

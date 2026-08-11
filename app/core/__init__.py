@@ -1,0 +1,1 @@
+"""Configuración y componentes fundamentales de la aplicación."""

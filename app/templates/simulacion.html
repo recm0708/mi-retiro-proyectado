@@ -7,9 +7,15 @@ Nueva simulación | Calculadora de Pensión CSS
 
 {% block content %}
 
+<!-- ==================================================
+     Asistente principal de simulación previsional
+     ================================================== -->
+
 <section class="simulation-section py-5">
 
   <div class="container">
+
+    <!-- Encabezado general del asistente. -->
 
     <div class="simulation-header mb-4">
 
@@ -961,6 +967,8 @@ Nueva simulación | Calculadora de Pensión CSS
 
 
 {% block scripts %}
+
+<!-- JavaScript específico del asistente de simulación. -->
 
 <script
   src="{{ url_for('static', path='/js/simulacion.js') }}"

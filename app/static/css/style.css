@@ -1,3 +1,21 @@
+/* ==========================================================
+   Calculadora de Pensión CSS
+   Hoja de estilos principal
+   ========================================================== */
+
+/*
+ * Este archivo contiene los estilos generales de la aplicación,
+ * la página de inicio y el asistente de simulación.
+ *
+ * Bootstrap proporciona la estructura base y este archivo contiene
+ * únicamente las personalizaciones visuales propias del proyecto.
+ */
+
+
+/* ==========================================================
+   Variables generales
+   ========================================================== */
+
 :root {
   --app-primary: #0d6efd;
   --app-dark: #172033;
@@ -5,6 +23,10 @@
   --app-background: #f6f8fb;
   --app-border: #e7ebf1;
 }
+
+/* ==========================================================
+   Estructura y apariencia general
+   ========================================================== */
 
 body {
   background-color: var(--app-background);
@@ -21,6 +43,10 @@ body {
 .min-vh-75 {
   min-height: 75vh;
 }
+
+/* ==========================================================
+   Página de inicio
+   ========================================================== */
 
 .hero-section {
   background:
@@ -83,6 +109,10 @@ body {
 .footer small {
   color: #b8c2d3;
 }
+
+/* ==========================================================
+   Asistente de simulación
+   ========================================================== */
 
 .simulation-section {
   min-height: calc(100vh - 150px);
