@@ -2,7 +2,7 @@
 
 Aplicación web para estimar y comparar pensiones de jubilación de la Caja de Seguro Social de Panamá.
 
-El proyecto contempla los distintos sistemas y subsistemas de pensiones aplicables conforme a la normativa vigente y permitirá realizar proyecciones considerando edad, cuotas, historial salarial, continuidad laboral y escenarios de crecimiento salarial.
+El proyecto contempla los distintos sistemas y subsistemas previsionales y permitirá realizar proyecciones considerando edad, cuotas, historial salarial, continuidad laboral y escenarios de crecimiento salarial. Los cálculos legales definitivos se incorporarán únicamente después de consolidar y versionar la normativa aplicable.
 
 ## Sistemas contemplados
 
@@ -15,52 +15,75 @@ El proyecto contempla los distintos sistemas y subsistemas de pensiones aplicabl
 La aplicación busca permitir al usuario:
 
 - registrar sus datos previsionales;
-- calcular su edad de referencia;
-- registrar cuotas históricas;
-- proyectar cuotas futuras;
-- ingresar salarios semanales, quincenales, mensuales o anuales;
-- proyectar salarios futuros;
-- determinar si cumple los requisitos para una prestación;
+- calcular su edad y fechas de referencia;
+- registrar cuotas históricas y proyectar cuotas futuras;
+- registrar historial anual de cuotas y salario cotizado/reportado;
+- ingresar el salario actual como semanal, quincenal, mensual o anual;
+- normalizar el salario actual a diferentes periodicidades;
+- proyectar salarios futuros mediante distintos escenarios;
+- combinar historial real, año actual parcial y proyección futura en una línea temporal;
+- determinar si cumple requisitos para una prestación;
 - calcular pensiones según el sistema correspondiente;
 - estimar cuándo alcanzará determinados requisitos de cuotas;
-- comparar distintas edades de retiro;
-- simular años adicionales de trabajo;
-- comparar escenarios salariales;
+- comparar edades de retiro y años adicionales de trabajo;
 - visualizar la evolución estimada de la pensión;
 - generar informes de resultados;
 - mantener separados los datos históricos de los datos proyectados.
 
-## Sistemas de cálculo
+## Estado actual del desarrollo
 
-La arquitectura contempla motores independientes para:
+La versión `0.1.0` se encuentra en desarrollo.
 
-### SEBD
+El asistente está organizado en seis pasos:
 
-Motor correspondiente al Subsistema Exclusivamente de Beneficio Definido.
+1. **Datos personales:** implementado.
+2. **Cuotas:** implementado con análisis preliminar mediante API.
+3. **Historial:** en implementación. Incluye captura anual de cuotas y salario cotizado/reportado, validación contra las cuotas reales del Paso 2 y salario actual normalizado para proyección.
+4. **Proyección:** implementado en validación. Incluye salario constante, variación porcentual, salario futuro conocido, comparación de escenarios y línea temporal que separa historial real, año actual mixto y futuro proyectado.
+5. **Retiro:** pendiente.
+6. **Resultados:** pendiente.
 
-### Subsistema Mixto
+Todavía no se han implementado los motores legales definitivos de SEBD, Mixto y SUCGS.
 
-Motor encargado de calcular los componentes correspondientes al Subsistema Mixto.
+## API disponible
 
-### SUCGS
+Actualmente FastAPI expone:
 
-Motor correspondiente al Sistema Único de Capitalización con Garantía Solidaria.
+```text
+GET  /
+GET  /simulacion
+GET  /comparar
+GET  /salud
+POST /api/simulacion/cuotas
+POST /api/simulacion/historial-salarial
+POST /api/simulacion/salario
+POST /api/simulacion/proyeccion-salario
+POST /api/simulacion/linea-tiempo
+```
+
+La documentación automática está disponible en `/docs` durante la ejecución local.
 
 ## Tecnologías
+
+Implementadas actualmente:
 
 - Python
 - FastAPI
 - Uvicorn
+- Pydantic
 - Jinja2
 - HTML
 - CSS
 - JavaScript
 - Bootstrap
+- `sessionStorage` para el estado temporal del asistente
+
+Previstas para fases posteriores:
+
 - Chart.js
 - SQLite
 - Pytest
-
-Algunas tecnologías se incorporarán progresivamente durante el desarrollo.
+- generación de informes PDF
 
 ## Estructura general
 
@@ -133,15 +156,29 @@ Documentación automática de la API:
 http://127.0.0.1:8000/docs
 ```
 
-## Estado del proyecto
+## Validación rápida
 
-**En desarrollo.**
+Para verificar que los módulos Python no contienen errores de sintaxis:
 
-Versión inicial:
-
-```text
-0.1.0
+```powershell
+python -m compileall app
 ```
+
+Después se deben validar manualmente las rutas principales y el flujo del asistente en el navegador.
+
+## Documentación técnica
+
+Los documentos de `docs/` registran progresivamente:
+
+- arquitectura;
+- especificación funcional;
+- modelo de datos;
+- motores de cálculo;
+- normativa;
+- decisiones técnicas;
+- hoja de ruta.
+
+La documentación debe actualizarse cuando un cambio funcional o arquitectónico lo amerite; no es necesario modificar todos los archivos `.md` en cada commit.
 
 ## Privacidad
 
