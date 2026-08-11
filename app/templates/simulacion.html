@@ -4,6 +4,7 @@
 Nueva simulación | Calculadora de Pensión CSS
 {% endblock %}
 
+
 {% block content %}
 
 <section class="simulation-section py-5">
@@ -21,235 +22,636 @@ Nueva simulación | Calculadora de Pensión CSS
       </h1>
 
       <p class="text-secondary mb-0">
-        Completa los datos paso a paso. La aplicación utilizará esta
-        información para determinar tu situación previsional y construir
-        los escenarios de jubilación.
+        Completa los datos paso a paso. La aplicación utilizará
+        esta información para construir los escenarios de jubilación.
       </p>
 
     </div>
 
+
+    <!-- Progreso -->
+
     <div class="wizard-steps mb-5">
 
-      <div class="wizard-step active">
+      <div
+        class="wizard-step active"
+        data-step="1"
+      >
         <span>1</span>
         <small>Datos personales</small>
       </div>
 
       <div class="wizard-line"></div>
 
-      <div class="wizard-step">
+      <div
+        class="wizard-step"
+        data-step="2"
+      >
         <span>2</span>
         <small>Cuotas</small>
       </div>
 
       <div class="wizard-line"></div>
 
-      <div class="wizard-step">
+      <div
+        class="wizard-step"
+        data-step="3"
+      >
         <span>3</span>
         <small>Salarios</small>
       </div>
 
       <div class="wizard-line"></div>
 
-      <div class="wizard-step">
+      <div
+        class="wizard-step"
+        data-step="4"
+      >
         <span>4</span>
         <small>Proyección</small>
       </div>
 
       <div class="wizard-line"></div>
 
-      <div class="wizard-step">
+      <div
+        class="wizard-step"
+        data-step="5"
+      >
         <span>5</span>
         <small>Retiro</small>
       </div>
 
       <div class="wizard-line"></div>
 
-      <div class="wizard-step">
+      <div
+        class="wizard-step"
+        data-step="6"
+      >
         <span>6</span>
         <small>Resultados</small>
       </div>
 
     </div>
 
+
     <div class="row justify-content-center">
 
       <div class="col-xl-9">
 
-        <div class="card border-0 shadow-sm simulation-card">
 
-          <div class="card-body p-4 p-lg-5">
+        <!-- ==================================================
+             PASO 1
+             ================================================== -->
 
-            <div class="mb-4">
+        <div
+          class="wizard-panel"
+          data-panel="1"
+        >
 
-              <h2 class="h4 fw-bold mb-2">
-                Datos personales y sistema previsional
-              </h2>
+          <div class="card border-0 shadow-sm simulation-card">
 
-              <p class="text-secondary mb-0">
-                Estos datos permiten calcular la edad actual,
-                la edad de referencia y las reglas que podrían corresponder.
-              </p>
+            <div class="card-body p-4 p-lg-5">
 
-            </div>
+              <div class="mb-4">
 
-            <form id="form-datos-personales">
+                <h2 class="h4 fw-bold mb-2">
+                  Datos personales y sistema previsional
+                </h2>
 
-              <div class="row g-4">
-
-                <div class="col-md-6">
-
-                  <label
-                    for="fecha_nacimiento"
-                    class="form-label fw-semibold"
-                  >
-                    Fecha de nacimiento
-                  </label>
-
-                  <input
-                    type="date"
-                    class="form-control form-control-lg"
-                    id="fecha_nacimiento"
-                    name="fecha_nacimiento"
-                    required
-                  >
-
-                </div>
-
-                <div class="col-md-6">
-
-                  <label
-                    for="sexo"
-                    class="form-label fw-semibold"
-                  >
-                    Sexo
-                  </label>
-
-                  <select
-                    class="form-select form-select-lg"
-                    id="sexo"
-                    name="sexo"
-                    required
-                  >
-                    <option value="" selected disabled>
-                      Selecciona una opción
-                    </option>
-
-                    <option value="F">
-                      Femenino
-                    </option>
-
-                    <option value="M">
-                      Masculino
-                    </option>
-
-                  </select>
-
-                </div>
-
-                <div class="col-md-6">
-
-                  <label
-                    for="fecha_ingreso_css"
-                    class="form-label fw-semibold"
-                  >
-                    Fecha de ingreso a la CSS
-                  </label>
-
-                  <input
-                    type="date"
-                    class="form-control form-control-lg"
-                    id="fecha_ingreso_css"
-                    name="fecha_ingreso_css"
-                  >
-
-                  <div class="form-text">
-                    Si no conoces el día exacto, este dato podrá
-                    completarse posteriormente con tu historial.
-                  </div>
-
-                </div>
-
-                <div class="col-md-6">
-
-                  <label
-                    for="sistema"
-                    class="form-label fw-semibold"
-                  >
-                    Sistema actual
-                  </label>
-
-                  <select
-                    class="form-select form-select-lg"
-                    id="sistema"
-                    name="sistema"
-                    required
-                  >
-
-                    <option value="" selected disabled>
-                      Selecciona una opción
-                    </option>
-
-                    <option value="NO_SE">
-                      No sé cuál tengo
-                    </option>
-
-                    <option value="SEBD">
-                      SEBD — Beneficio Definido
-                    </option>
-
-                    <option value="MIXTO">
-                      Subsistema Mixto
-                    </option>
-
-                    <option value="SUCGS">
-                      SUCGS
-                    </option>
-
-                  </select>
-
-                </div>
-
-              </div>
-
-              <div class="info-box mt-4">
-
-                <strong>
-                  No necesitas calcular tu edad.
-                </strong>
-
-                <p class="mb-0 mt-1">
-                  La aplicación utilizará la fecha de nacimiento para
-                  determinar automáticamente la edad y las fechas relevantes.
+                <p class="text-secondary mb-0">
+                  Estos datos permiten calcular posteriormente
+                  la edad y las fechas previsionales relevantes.
                 </p>
 
               </div>
 
-              <div
-                class="d-flex justify-content-between align-items-center mt-5"
-              >
 
-                <a
-                  href="/"
-                  class="btn btn-outline-secondary"
+              <form id="form-datos-personales">
+
+                <div class="row g-4">
+
+                  <div class="col-md-6">
+
+                    <label
+                      for="fecha_nacimiento"
+                      class="form-label fw-semibold"
+                    >
+                      Fecha de nacimiento
+                    </label>
+
+                    <input
+                      type="date"
+                      class="form-control form-control-lg"
+                      id="fecha_nacimiento"
+                      required
+                    >
+
+                  </div>
+
+
+                  <div class="col-md-6">
+
+                    <label
+                      for="sexo"
+                      class="form-label fw-semibold"
+                    >
+                      Sexo
+                    </label>
+
+                    <select
+                      class="form-select form-select-lg"
+                      id="sexo"
+                      required
+                    >
+
+                      <option value="" selected disabled>
+                        Selecciona una opción
+                      </option>
+
+                      <option value="F">
+                        Femenino
+                      </option>
+
+                      <option value="M">
+                        Masculino
+                      </option>
+
+                    </select>
+
+                  </div>
+
+
+                  <div class="col-md-6">
+
+                    <label
+                      for="fecha_ingreso_css"
+                      class="form-label fw-semibold"
+                    >
+                      Fecha de ingreso a la CSS
+                    </label>
+
+                    <input
+                      type="date"
+                      class="form-control form-control-lg"
+                      id="fecha_ingreso_css"
+                    >
+
+                    <div class="form-text">
+                      Puede completarse posteriormente si no
+                      conoces la fecha exacta.
+                    </div>
+
+                  </div>
+
+
+                  <div class="col-md-6">
+
+                    <label
+                      for="sistema"
+                      class="form-label fw-semibold"
+                    >
+                      Sistema actual
+                    </label>
+
+                    <select
+                      class="form-select form-select-lg"
+                      id="sistema"
+                      required
+                    >
+
+                      <option value="" selected disabled>
+                        Selecciona una opción
+                      </option>
+
+                      <option value="NO_SE">
+                        No sé cuál tengo
+                      </option>
+
+                      <option value="SEBD">
+                        SEBD — Beneficio Definido
+                      </option>
+
+                      <option value="MIXTO">
+                        Subsistema Mixto
+                      </option>
+
+                      <option value="SUCGS">
+                        SUCGS
+                      </option>
+
+                    </select>
+
+                  </div>
+
+                </div>
+
+
+                <div class="info-box mt-4">
+
+                  <strong>
+                    No necesitas calcular tu edad.
+                  </strong>
+
+                  <p class="mb-0 mt-1">
+                    La aplicación utilizará la fecha de nacimiento
+                    para determinar automáticamente las fechas
+                    relevantes.
+                  </p>
+
+                </div>
+
+
+                <div
+                  class="d-flex justify-content-between
+                         align-items-center mt-5"
                 >
-                  Volver
-                </a>
 
-                <button
-                  type="submit"
-                  class="btn btn-primary px-4"
-                >
-                  Continuar
-                </button>
+                  <a
+                    href="/"
+                    class="btn btn-outline-secondary"
+                  >
+                    Volver
+                  </a>
 
-              </div>
+                  <button
+                    type="submit"
+                    class="btn btn-primary px-4"
+                  >
+                    Continuar
+                  </button>
 
-            </form>
+                </div>
+
+              </form>
+
+            </div>
 
           </div>
 
         </div>
+
+
+        <!-- ==================================================
+             PASO 2
+             ================================================== -->
+
+        <div
+          class="wizard-panel d-none"
+          data-panel="2"
+        >
+
+          <div class="card border-0 shadow-sm simulation-card">
+
+            <div class="card-body p-4 p-lg-5">
+
+              <div class="mb-4">
+
+                <span class="text-primary fw-semibold">
+                  Paso 2 de 6
+                </span>
+
+                <h2 class="h4 fw-bold mt-2 mb-2">
+                  Cuotas acreditadas y proyección
+                </h2>
+
+                <p class="text-secondary mb-0">
+                  Ingresa las cuotas que ya aparecen acreditadas
+                  por la CSS y cómo esperas continuar cotizando.
+                </p>
+
+              </div>
+
+
+              <form id="form-cuotas">
+
+                <div class="row g-4">
+
+                  <div class="col-md-6">
+
+                    <label
+                      for="cuotas_totales"
+                      class="form-label fw-semibold"
+                    >
+                      Total de cuotas acreditadas
+                    </label>
+
+                    <input
+                      type="number"
+                      min="0"
+                      step="1"
+                      class="form-control form-control-lg"
+                      id="cuotas_totales"
+                      required
+                    >
+
+                    <div class="form-text">
+                      Utiliza el total que aparece actualmente
+                      en tu historial de la CSS.
+                    </div>
+
+                  </div>
+
+
+                  <div class="col-md-6">
+
+                    <label
+                      for="cuotas_anio_actual"
+                      class="form-label fw-semibold"
+                    >
+                      Cuotas acreditadas este año
+                    </label>
+
+                    <input
+                      type="number"
+                      min="0"
+                      max="12"
+                      step="1"
+                      class="form-control form-control-lg"
+                      id="cuotas_anio_actual"
+                      required
+                    >
+
+                    <div class="form-text">
+                      Estas cuotas ya están incluidas dentro
+                      del total anterior.
+                    </div>
+
+                  </div>
+
+
+                  <div class="col-md-6">
+
+                    <label
+                      for="continua_cotizando"
+                      class="form-label fw-semibold"
+                    >
+                      ¿Continuarás cotizando?
+                    </label>
+
+                    <select
+                      class="form-select form-select-lg"
+                      id="continua_cotizando"
+                      required
+                    >
+
+                      <option value="true" selected>
+                        Sí
+                      </option>
+
+                      <option value="false">
+                        No
+                      </option>
+
+                    </select>
+
+                  </div>
+
+
+                  <div class="col-md-6">
+
+                    <label
+                      for="cuotas_esperadas_cierre_anio"
+                      class="form-label fw-semibold"
+                    >
+                      Cuotas esperadas al cerrar este año
+                    </label>
+
+                    <input
+                      type="number"
+                      min="0"
+                      max="12"
+                      step="1"
+                      value="12"
+                      class="form-control form-control-lg"
+                      id="cuotas_esperadas_cierre_anio"
+                      required
+                    >
+
+                  </div>
+
+
+                  <div class="col-md-6">
+
+                    <label
+                      for="cuotas_esperadas_por_anio"
+                      class="form-label fw-semibold"
+                    >
+                      Cuotas esperadas por año futuro
+                    </label>
+
+                    <input
+                      type="number"
+                      min="0"
+                      max="12"
+                      step="1"
+                      value="12"
+                      class="form-control form-control-lg"
+                      id="cuotas_esperadas_por_anio"
+                      required
+                    >
+
+                    <div class="form-text">
+                      Normalmente será 12 si esperas cotizar
+                      durante todos los meses del año.
+                    </div>
+
+                  </div>
+
+                </div>
+
+
+                <div
+                  id="error-cuotas"
+                  class="alert alert-danger mt-4 d-none"
+                  role="alert"
+                ></div>
+
+
+                <div class="info-box mt-4">
+
+                  <strong>
+                    Las cuotas futuras son una proyección.
+                  </strong>
+
+                  <p class="mb-0 mt-1">
+                    La aplicación mantendrá separadas las cuotas
+                    que ya están acreditadas de las que todavía
+                    se espera aportar.
+                  </p>
+
+                </div>
+
+
+                <div
+                  class="d-flex justify-content-between
+                         align-items-center mt-5"
+                >
+
+                  <button
+                    type="button"
+                    id="btn-volver-paso-1"
+                    class="btn btn-outline-secondary"
+                  >
+                    Anterior
+                  </button>
+
+                  <button
+                    type="submit"
+                    class="btn btn-primary px-4"
+                  >
+                    Analizar cuotas
+                  </button>
+
+                </div>
+
+              </form>
+
+
+              <!-- Resultado preliminar -->
+
+              <div
+                id="resultado-cuotas"
+                class="resultado-cuotas mt-5 d-none"
+              >
+
+                <hr class="mb-4">
+
+
+                <div class="mb-4">
+
+                  <h3 class="h5 fw-bold mb-2">
+                    Resumen preliminar
+                  </h3>
+
+                  <p class="text-secondary mb-0">
+                    Esta información todavía no representa
+                    el cálculo de una pensión.
+                  </p>
+
+                </div>
+
+
+                <div class="row g-3">
+
+                  <div class="col-md-6">
+
+                    <div class="summary-card">
+
+                      <span class="summary-label">
+                        Cuotas acreditadas
+                      </span>
+
+                      <strong
+                        id="resultado-cuotas-reales"
+                        class="summary-value"
+                      >
+                        0
+                      </strong>
+
+                      <small>
+                        Históricas reales
+                      </small>
+
+                    </div>
+
+                  </div>
+
+
+                  <div class="col-md-6">
+
+                    <div class="summary-card">
+
+                      <span class="summary-label">
+                        Proyección al cierre del año
+                      </span>
+
+                      <strong
+                        id="resultado-cuotas-cierre"
+                        class="summary-value"
+                      >
+                        0
+                      </strong>
+
+                      <small>
+                        Incluye únicamente cuotas futuras previstas
+                      </small>
+
+                    </div>
+
+                  </div>
+
+
+                  <div class="col-md-6">
+
+                    <div class="summary-card">
+
+                      <span class="summary-label">
+                        Faltantes para 180
+                      </span>
+
+                      <strong
+                        id="resultado-faltantes-180"
+                        class="summary-value"
+                      >
+                        0
+                      </strong>
+
+                      <small id="resultado-tiempo-180">
+                        —
+                      </small>
+
+                    </div>
+
+                  </div>
+
+
+                  <div class="col-md-6">
+
+                    <div class="summary-card">
+
+                      <span class="summary-label">
+                        Faltantes para 240
+                      </span>
+
+                      <strong
+                        id="resultado-faltantes-240"
+                        class="summary-value"
+                      >
+                        0
+                      </strong>
+
+                      <small id="resultado-tiempo-240">
+                        —
+                      </small>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+
+                <div class="alert alert-light border mt-4 mb-0">
+
+                  <strong>
+                    Próximo paso: salarios.
+                  </strong>
+
+                  <div class="text-secondary mt-1">
+                    Incorporaremos el historial y la proyección
+                    salarial antes de calcular prestaciones.
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
 
       </div>
 
@@ -258,5 +660,14 @@ Nueva simulación | Calculadora de Pensión CSS
   </div>
 
 </section>
+
+{% endblock %}
+
+
+{% block scripts %}
+
+<script
+  src="{{ url_for('static', path='/js/simulacion.js') }}"
+></script>
 
 {% endblock %}
