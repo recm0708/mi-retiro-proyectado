@@ -65,3 +65,6 @@ Desktop.ini
 *.bak
 *.swp
 *~
+
+# Copias comprimidas del proyecto
+*.zip

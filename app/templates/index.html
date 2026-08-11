@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+
+{% block title %}
+Inicio | Calculadora de Pensión CSS
+{% endblock %}
+
+{% block content %}
+
+<section class="hero-section">
+  <div class="container py-5">
+
+    <div class="row align-items-center min-vh-75">
+
+      <div class="col-lg-7">
+
+        <span class="badge text-bg-primary mb-3">
+          Proyecto de simulación previsional
+        </span>
+
+        <h1 class="display-4 fw-bold mb-4">
+          Estima y compara tu futura pensión
+        </h1>
+
+        <p class="lead text-secondary mb-4">
+          Proyecta tu jubilación utilizando tu edad, cuotas,
+          historial salarial y expectativas laborales.
+        </p>
+
+        <div class="d-flex flex-wrap gap-3">
+
+          <a
+            href="/simulacion"
+            class="btn btn-primary btn-lg px-4"
+          >
+            Nueva simulación
+          </a>
+
+          <a
+            href="/comparar"
+            class="btn btn-outline-primary btn-lg px-4"
+          >
+            Comparar sistemas
+          </a>
+
+        </div>
+
+      </div>
+
+      <div class="col-lg-5 mt-5 mt-lg-0">
+
+        <div class="card shadow-lg border-0">
+
+          <div class="card-body p-4 p-lg-5">
+
+            <h2 class="h4 fw-bold mb-4">
+              Sistemas contemplados
+            </h2>
+
+            <div class="system-card mb-3">
+              <strong>SEBD</strong>
+              <span>
+                Subsistema Exclusivamente de Beneficio Definido
+              </span>
+            </div>
+
+            <div class="system-card mb-3">
+              <strong>Mixto</strong>
+              <span>
+                Subsistema Mixto
+              </span>
+            </div>
+
+            <div class="system-card">
+              <strong>SUCGS</strong>
+              <span>
+                Sistema Único de Capitalización con Garantía Solidaria
+              </span>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<section class="py-5 bg-light">
+
+  <div class="container">
+
+    <div class="text-center mb-5">
+
+      <h2 class="fw-bold">
+        ¿Qué podrá calcular la aplicación?
+      </h2>
+
+      <p class="text-secondary">
+        Diferentes escenarios de retiro a partir de los datos del usuario.
+      </p>
+
+    </div>
+
+    <div class="row g-4">
+
+      <div class="col-md-4">
+        <div class="feature-card h-100">
+
+          <h3 class="h5 fw-bold">
+            Cuotas y elegibilidad
+          </h3>
+
+          <p>
+            Determina las cuotas acumuladas, las faltantes y
+            cuándo podrían alcanzarse los requisitos correspondientes.
+          </p>
+
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="feature-card h-100">
+
+          <h3 class="h5 fw-bold">
+            Proyección salarial
+          </h3>
+
+          <p>
+            Simula salarios constantes, aumentos porcentuales
+            o escenarios personalizados.
+          </p>
+
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="feature-card h-100">
+
+          <h3 class="h5 fw-bold">
+            Trabajar más años
+          </h3>
+
+          <p>
+            Compara cómo podría cambiar la pensión si se continúa
+            cotizando después de la edad de referencia.
+          </p>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+{% endblock %}

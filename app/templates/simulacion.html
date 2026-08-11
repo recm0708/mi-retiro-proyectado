@@ -1,0 +1,262 @@
+{% extends "base.html" %}
+
+{% block title %}
+Nueva simulación | Calculadora de Pensión CSS
+{% endblock %}
+
+{% block content %}
+
+<section class="simulation-section py-5">
+
+  <div class="container">
+
+    <div class="simulation-header mb-5">
+
+      <span class="text-primary fw-semibold">
+        Nueva simulación
+      </span>
+
+      <h1 class="fw-bold mt-2 mb-3">
+        Proyección de jubilación
+      </h1>
+
+      <p class="text-secondary mb-0">
+        Completa los datos paso a paso. La aplicación utilizará esta
+        información para determinar tu situación previsional y construir
+        los escenarios de jubilación.
+      </p>
+
+    </div>
+
+    <div class="wizard-steps mb-5">
+
+      <div class="wizard-step active">
+        <span>1</span>
+        <small>Datos personales</small>
+      </div>
+
+      <div class="wizard-line"></div>
+
+      <div class="wizard-step">
+        <span>2</span>
+        <small>Cuotas</small>
+      </div>
+
+      <div class="wizard-line"></div>
+
+      <div class="wizard-step">
+        <span>3</span>
+        <small>Salarios</small>
+      </div>
+
+      <div class="wizard-line"></div>
+
+      <div class="wizard-step">
+        <span>4</span>
+        <small>Proyección</small>
+      </div>
+
+      <div class="wizard-line"></div>
+
+      <div class="wizard-step">
+        <span>5</span>
+        <small>Retiro</small>
+      </div>
+
+      <div class="wizard-line"></div>
+
+      <div class="wizard-step">
+        <span>6</span>
+        <small>Resultados</small>
+      </div>
+
+    </div>
+
+    <div class="row justify-content-center">
+
+      <div class="col-xl-9">
+
+        <div class="card border-0 shadow-sm simulation-card">
+
+          <div class="card-body p-4 p-lg-5">
+
+            <div class="mb-4">
+
+              <h2 class="h4 fw-bold mb-2">
+                Datos personales y sistema previsional
+              </h2>
+
+              <p class="text-secondary mb-0">
+                Estos datos permiten calcular la edad actual,
+                la edad de referencia y las reglas que podrían corresponder.
+              </p>
+
+            </div>
+
+            <form id="form-datos-personales">
+
+              <div class="row g-4">
+
+                <div class="col-md-6">
+
+                  <label
+                    for="fecha_nacimiento"
+                    class="form-label fw-semibold"
+                  >
+                    Fecha de nacimiento
+                  </label>
+
+                  <input
+                    type="date"
+                    class="form-control form-control-lg"
+                    id="fecha_nacimiento"
+                    name="fecha_nacimiento"
+                    required
+                  >
+
+                </div>
+
+                <div class="col-md-6">
+
+                  <label
+                    for="sexo"
+                    class="form-label fw-semibold"
+                  >
+                    Sexo
+                  </label>
+
+                  <select
+                    class="form-select form-select-lg"
+                    id="sexo"
+                    name="sexo"
+                    required
+                  >
+                    <option value="" selected disabled>
+                      Selecciona una opción
+                    </option>
+
+                    <option value="F">
+                      Femenino
+                    </option>
+
+                    <option value="M">
+                      Masculino
+                    </option>
+
+                  </select>
+
+                </div>
+
+                <div class="col-md-6">
+
+                  <label
+                    for="fecha_ingreso_css"
+                    class="form-label fw-semibold"
+                  >
+                    Fecha de ingreso a la CSS
+                  </label>
+
+                  <input
+                    type="date"
+                    class="form-control form-control-lg"
+                    id="fecha_ingreso_css"
+                    name="fecha_ingreso_css"
+                  >
+
+                  <div class="form-text">
+                    Si no conoces el día exacto, este dato podrá
+                    completarse posteriormente con tu historial.
+                  </div>
+
+                </div>
+
+                <div class="col-md-6">
+
+                  <label
+                    for="sistema"
+                    class="form-label fw-semibold"
+                  >
+                    Sistema actual
+                  </label>
+
+                  <select
+                    class="form-select form-select-lg"
+                    id="sistema"
+                    name="sistema"
+                    required
+                  >
+
+                    <option value="" selected disabled>
+                      Selecciona una opción
+                    </option>
+
+                    <option value="NO_SE">
+                      No sé cuál tengo
+                    </option>
+
+                    <option value="SEBD">
+                      SEBD — Beneficio Definido
+                    </option>
+
+                    <option value="MIXTO">
+                      Subsistema Mixto
+                    </option>
+
+                    <option value="SUCGS">
+                      SUCGS
+                    </option>
+
+                  </select>
+
+                </div>
+
+              </div>
+
+              <div class="info-box mt-4">
+
+                <strong>
+                  No necesitas calcular tu edad.
+                </strong>
+
+                <p class="mb-0 mt-1">
+                  La aplicación utilizará la fecha de nacimiento para
+                  determinar automáticamente la edad y las fechas relevantes.
+                </p>
+
+              </div>
+
+              <div
+                class="d-flex justify-content-between align-items-center mt-5"
+              >
+
+                <a
+                  href="/"
+                  class="btn btn-outline-secondary"
+                >
+                  Volver
+                </a>
+
+                <button
+                  type="submit"
+                  class="btn btn-primary px-4"
+                >
+                  Continuar
+                </button>
+
+              </div>
+
+            </form>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+{% endblock %}
