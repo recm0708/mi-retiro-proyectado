@@ -124,6 +124,31 @@ class RetiroTests(unittest.TestCase):
             291,
         )
 
+    def test_incluye_escenarios_anticipados_estandar(self):
+        resumen = analizar_retiro(
+            DatosRetiro(
+                fecha_nacimiento=date(1969, 11, 16),
+                sexo="FEMENINO",
+                fecha_corte=date(2024, 8, 10),
+                fecha_corte_cuotas=date(2024, 8, 10),
+                cuotas_reales=240,
+                cuotas_anio_actual=8,
+                cuotas_esperadas_cierre_anio=12,
+                continua_cotizando=True,
+                cuotas_esperadas_por_anio=12,
+                anio_fin_proyeccion_salarial=2031,
+                anios_adicionales=[-2, -1, 0],
+            )
+        )
+
+        self.assertEqual(resumen.escenarios[0].tipo, "ANTICIPADO")
+        self.assertEqual(
+            resumen.escenarios[0].fecha_retiro,
+            date(2024, 11, 16),
+        )
+        self.assertEqual(resumen.escenarios[1].tipo, "ANTICIPADO")
+        self.assertEqual(resumen.escenarios[2].tipo, "REFERENCIA")
+
     def test_referencia_masculina_es_62(self):
         resumen = analizar_retiro(
             DatosRetiro(
