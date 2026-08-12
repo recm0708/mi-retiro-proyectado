@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-Comparar escenarios | Calculadora de Pensión CSS
+Comparar escenarios | {{ app_name }}
 {% endblock %}
 
 {% block content %}
@@ -9,12 +9,11 @@ Comparar escenarios | Calculadora de Pensión CSS
   <div class="container comparison-container">
 
     <div class="mb-4">
-      <span class="badge text-bg-primary mb-2">Paso 6F.1</span>
       <h1 class="fw-bold mb-2">Comparador de escenarios</h1>
       <p class="text-secondary mb-0">
         Compara fechas de retiro y escenarios salariales usando los mismos
         motores validados de la simulación. Las diferencias se calculan contra
-        el escenario actualmente seleccionado como base.
+        el escenario actualmente seleccionado como base por el Asegurado(a).
       </p>
     </div>
 

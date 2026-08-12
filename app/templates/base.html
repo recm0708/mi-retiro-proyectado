@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-app-theme="system">
 
 <head>
   <!-- ==================================================
@@ -15,14 +15,27 @@
 
   <meta
     name="description"
-    content="Aplicación para estimar y comparar pensiones de jubilación de la Caja de Seguro Social de Panamá."
+    content="Mi Retiro Proyectado: herramienta independiente para estimar y comparar escenarios de retiro de Asegurados(as) de la Caja de Seguro Social de Panamá."
   >
+
+  <meta name="color-scheme" content="light dark">
 
   <title>
     {% block title %}
-    Calculadora de Pensión CSS
+    {{ app_name }}
     {% endblock %}
   </title>
+
+
+  <!-- ==================================================
+       Preferencia visual
+       ================================================== -->
+
+  <!--
+    Este script se carga antes de los estilos para aplicar la preferencia
+    guardada con el menor cambio visual posible al abrir una página.
+  -->
+  <script src="{{ url_for('static', path='/js/tema.js') }}"></script>
 
 
   <!-- ==================================================
@@ -53,11 +66,17 @@
 
 <body>
 
+  <!-- Enlace de acceso rápido para teclado y lectores de pantalla. -->
+  <a class="skip-link" href="#contenido-principal">
+    Saltar al contenido principal
+  </a>
+
+
   <!-- ==================================================
        Barra de navegación principal
        ================================================== -->
 
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+  <nav class="navbar navbar-expand-lg navbar-dark app-navbar shadow-sm">
 
     <div class="container">
 
@@ -65,7 +84,7 @@
         class="navbar-brand fw-bold"
         href="/"
       >
-        Calculadora de Pensión CSS
+        {{ app_name }}
       </a>
 
 
@@ -91,11 +110,12 @@
         id="navbarPrincipal"
       >
 
-        <div class="navbar-nav ms-auto">
+        <div class="navbar-nav ms-auto align-items-lg-center">
 
           <a
             class="nav-link {% if pagina_activa == 'inicio' %}active{% endif %}"
             href="/"
+            {% if pagina_activa == 'inicio' %}aria-current="page"{% endif %}
           >
             Inicio
           </a>
@@ -103,6 +123,7 @@
           <a
             class="nav-link {% if pagina_activa == 'simulacion' %}active{% endif %}"
             href="/simulacion"
+            {% if pagina_activa == 'simulacion' %}aria-current="page"{% endif %}
           >
             Nueva simulación
           </a>
@@ -110,17 +131,35 @@
           <a
             class="nav-link {% if pagina_activa == 'comparar' %}active{% endif %}"
             href="/comparar"
+            {% if pagina_activa == 'comparar' %}aria-current="page"{% endif %}
           >
             Comparar escenarios
           </a>
 
-
           <a
             class="nav-link {% if pagina_activa == 'metodologia' %}active{% endif %}"
             href="/metodologia"
+            {% if pagina_activa == 'metodologia' %}aria-current="page"{% endif %}
           >
             Metodología y fuentes
           </a>
+
+          <div class="theme-control ms-lg-3 mt-3 mt-lg-0">
+            <label class="visually-hidden" for="selector-tema">
+              Tema visual
+            </label>
+
+            <select
+              class="form-select theme-select"
+              id="selector-tema"
+              aria-label="Tema visual"
+            >
+              <option value="system">Seguir sistema</option>
+              <option value="light">Claro</option>
+              <option value="dark">Oscuro</option>
+              <option value="contrast">Alto contraste</option>
+            </select>
+          </div>
 
         </div>
 
@@ -135,7 +174,7 @@
        Contenido específico de cada página
        ================================================== -->
 
-  <main>
+  <main id="contenido-principal" tabindex="-1">
     {% block content %}{% endblock %}
   </main>
 
@@ -144,18 +183,34 @@
        Pie de página
        ================================================== -->
 
-  <footer class="footer py-4 mt-auto">
+  <footer
+    class="footer mt-auto"
+    aria-label="Información legal y acceso oficial"
+  >
 
-    <div class="container text-center">
+    <div class="container footer-compact">
 
-      <p class="mb-1">
-        Calculadora de Pensión CSS
+      <p class="footer-line">
+        <strong>{{ app_name }}.</strong>
+        © 2026 {{ app_author }}. Todos los derechos reservados.
       </p>
 
-      <small>
-        Herramienta de estimación y planificación.
-        El cálculo oficial corresponde a la Caja de Seguro Social de Panamá.
-      </small>
+      <div class="footer-line footer-legal-row">
+        <span>
+          Herramienta independiente de estimación previsional. No es una
+          aplicación oficial de la Caja de Seguro Social de Panamá y no emite
+          resoluciones ni certificaciones.
+        </span>
+        <span class="footer-separator" aria-hidden="true">·</span>
+        <a
+          class="footer-link"
+          href="{{ mi_caja_digital_url }}"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Abrir Mi Caja Digital
+        </a>
+      </div>
 
     </div>
 

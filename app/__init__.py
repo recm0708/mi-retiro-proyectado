@@ -1,1 +1,1 @@
-"""Paquete principal de la aplicación Calculadora de Pensión CSS."""
+"""Paquete principal de la aplicación Mi Retiro Proyectado."""

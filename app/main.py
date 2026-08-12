@@ -1,4 +1,4 @@
-"""Punto de entrada principal de la aplicación Calculadora de Pensión CSS.
+"""Punto de entrada principal de la aplicación Mi Retiro Proyectado.
 
 Este módulo configura FastAPI, registra los recursos estáticos,
 las plantillas HTML y los endpoints utilizados por la interfaz
@@ -6,6 +6,15 @@ y por los servicios de cálculo.
 """
 
 from pathlib import Path
+
+from app.core.config import (
+    APP_AUTHOR,
+    APP_DESCRIPTION,
+    APP_NAME,
+    APP_SUBTITLE,
+    APP_VERSION,
+    MI_CAJA_DIGITAL_URL,
+)
 
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import HTMLResponse
@@ -105,12 +114,9 @@ from app.servicios.fuentes_normativas import construir_catalogo_metodologia
 
 
 app = FastAPI(
-    title="Calculadora de Pensión CSS",
-    description=(
-        "Aplicación web para estimar y comparar pensiones "
-        "de jubilación de la Caja de Seguro Social de Panamá."
-    ),
-    version="0.1.0",
+    title=APP_NAME,
+    description=APP_DESCRIPTION,
+    version=APP_VERSION,
 )
 
 
@@ -132,6 +138,14 @@ templates = Jinja2Templates(
     directory=BASE_DIR / "templates",
 )
 
+templates.env.globals.update(
+    app_name=APP_NAME,
+    app_subtitle=APP_SUBTITLE,
+    app_author=APP_AUTHOR,
+    app_version=APP_VERSION,
+    mi_caja_digital_url=MI_CAJA_DIGITAL_URL,
+)
+
 
 # ============================================================
 # Rutas de interfaz
@@ -151,7 +165,7 @@ async def inicio(
         name="index.html",
         context={
             "pagina_activa": "inicio",
-            "version": "0.1.0",
+            "version": APP_VERSION,
         },
     )
 
@@ -170,7 +184,7 @@ async def simulacion(
         name="simulacion.html",
         context={
             "pagina_activa": "simulacion",
-            "version": "0.1.0",
+            "version": APP_VERSION,
         },
     )
 
@@ -189,7 +203,7 @@ async def comparar(
         name="comparar.html",
         context={
             "pagina_activa": "comparar",
-            "version": "0.1.0",
+            "version": APP_VERSION,
         },
     )
 
@@ -208,7 +222,7 @@ async def metodologia(
         name="metodologia.html",
         context={
             "pagina_activa": "metodologia",
-            "version": "0.1.0",
+            "version": APP_VERSION,
             "catalogo": construir_catalogo_metodologia(),
         },
     )
@@ -539,7 +553,7 @@ async def calcular_resultado_integrado_sucgs(
 
 
 # ============================================================
-# API — Comparación transversal de escenarios (6F.1)
+# API — Comparación transversal de escenarios
 # ============================================================
 
 @app.post(
@@ -571,6 +585,6 @@ async def salud():
 
     return {
         "estado": "ok",
-        "servicio": "Calculadora de Pensión CSS",
-        "version": "0.1.0",
+        "servicio": "Mi Retiro Proyectado",
+        "version": APP_VERSION,
     }
