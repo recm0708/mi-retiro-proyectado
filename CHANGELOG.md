@@ -126,6 +126,8 @@ El proyecto todavía no ha publicado una versión estable; los cambios actuales 
 - Normalización de la numeración ADR en `docs/DECISIONES.md`.
 - Reorganización del roadmap y de la documentación por capacidades actuales en lugar de acumulación histórica de subfases.
 - Mejora de `.gitignore`, `.gitattributes`, `.editorconfig` y `CONTRIBUTING.md`.
+- Los respaldos históricos y paquetes comprimidos de trabajo (`.zip`, `.7z`, `.rar`) se mantienen fuera de la raíz del repositorio; Git conserva la historia versionada y los paquetes locales quedan como respaldo secundario externo.
+- Se eliminan archivos `.gitkeep` de directorios que ya contienen archivos versionados reales. `.gitkeep` se conserva únicamente cuando una carpeta vacía necesita existir en el repositorio.
 
 ### Cambiado
 

@@ -118,3 +118,12 @@ Cuando los iconos oficiales estén disponibles se deberá:
 2. declarar favicon y variantes necesarias en `app/templates/base.html`;
 3. retirar la ruta temporal `/favicon.ico` de `app/main.py`;
 4. actualizar pruebas, `CHANGELOG.md`, `README.md`, `ROADMAP.md` y esta guía.
+
+## 11. Higiene de estructura y respaldos
+
+- Los paquetes `.zip`, `.7z` y `.rar` creados durante revisiones o entregas son artefactos locales, no componentes del proyecto.
+- Los respaldos históricos deben guardarse fuera de la raíz del repositorio, preferentemente en una carpeta externa o hermana dedicada a respaldos.
+- Git y GitHub constituyen la historia principal del código versionado; los comprimidos externos son únicamente una capa adicional de recuperación.
+- `.gitkeep` solo se utiliza para conservar en Git un directorio que todavía no contiene archivos versionados reales.
+- Cuando una carpeta recibe su primer archivo real, el `.gitkeep` correspondiente debe eliminarse.
+- No mover carpetas funcionales solo para mejorar la apariencia del árbol. Toda reorganización real debe actualizar código, imports, rutas, pruebas y documentación relacionada dentro de la misma unidad de cambio.

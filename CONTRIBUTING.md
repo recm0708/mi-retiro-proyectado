@@ -182,3 +182,11 @@ Los detalles de estas convenciones se documentan en `docs/GUIA_INTERNA_DESARROLL
 ## Documentación como parte del cambio
 
 Todo cambio de código, UX, lógica, normativa, pruebas o configuración debe revisar y actualizar los archivos `.md` que dependan de él. La documentación no se corrige después del commit: forma parte de la misma unidad de trabajo. Si una decisión introduce una regla arquitectónica o funcional nueva, debe registrarse en `docs/DECISIONES.md` y, cuando corresponda, en la especificación, roadmap, modelo de datos y validación.
+
+## 11. Higiene de estructura y respaldos locales
+
+- Los archivos comprimidos generados durante el desarrollo (`.zip`, `.7z`, `.rar`) no forman parte de la estructura del repositorio y deben mantenerse fuera de su raíz.
+- Los respaldos históricos pueden conservarse en una ubicación externa, por ejemplo una carpeta hermana como `_respaldos/Mi_Retiro_Proyectado/historico/`.
+- `.gitignore` continúa excluyendo archivos comprimidos para evitar su incorporación accidental.
+- Un archivo `.gitkeep` solo se mantiene cuando una carpeta vacía debe existir en Git. Debe eliminarse cuando el directorio ya contiene archivos versionados reales.
+- No se reorganizarán `app/`, `tests/`, `docs/`, `normativa/` u otras rutas funcionales únicamente por estética. Si una reorganización aporta un beneficio técnico real, el mismo cambio debe actualizar imports, rutas, pruebas y documentación dependiente.

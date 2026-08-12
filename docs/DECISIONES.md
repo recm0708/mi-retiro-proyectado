@@ -599,3 +599,13 @@ Los botones de la sección **Recursos oficiales para verificar información indi
 **Decisión:** mientras los iconos definitivos no estén integrados, FastAPI responderá `204 No Content` a `/favicon.ico`, fuera del esquema OpenAPI y con `Cache-Control: no-store`. La ruta temporal se retirará cuando exista el favicon oficial y `base.html` lo declare explícitamente.
 
 **Motivo:** los navegadores solicitan `/favicon.ico` de forma automática. Devolver `204` elimina el `404` de desarrollo sin versionar un recurso gráfico provisional ni favorecer que el navegador almacene permanentemente la ausencia de icono.
+
+## ADR-061 — Mantener respaldos comprimidos fuera de la raíz y limitar `.gitkeep`
+
+**Estado:** Aceptada
+
+**Decisión:** los paquetes comprimidos de revisiones, entregas y respaldos históricos se conservarán fuera de la raíz del repositorio. Git y GitHub continúan siendo la historia principal del código versionado. Los archivos `.gitkeep` se utilizarán únicamente para directorios vacíos que necesiten existir en Git y se eliminarán cuando esas carpetas contengan archivos versionados reales.
+
+No se reorganizarán rutas funcionales del proyecto únicamente por estética. Si una reorganización futura aporta un beneficio técnico suficiente, deberá modificar en la misma unidad de trabajo todos los imports, rutas, pruebas y documentos que dependan de la estructura anterior.
+
+**Motivo:** separar respaldos locales de la copia de trabajo reduce ruido, evita incluir artefactos históricos en búsquedas o paquetes y mantiene el árbol del repositorio representativo del producto actual. Limitar `.gitkeep` evita archivos sin función una vez que el directorio ya está materializado por contenido real.

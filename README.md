@@ -150,6 +150,8 @@ calculadora-pension-css/
 
 Para una descripción completa: [docs/ARQUITECTURA.md](docs/ARQUITECTURA.md).
 
+Los paquetes comprimidos y respaldos históricos no forman parte de esta estructura. Deben conservarse fuera de la raíz del repositorio para mantener limpia la copia de trabajo. Los archivos `.gitkeep` se usan únicamente en directorios vacíos que necesitan existir en Git y se eliminan cuando la carpeta ya contiene archivos versionados reales.
+
 ## 7. Tecnologías
 
 Actualmente:
