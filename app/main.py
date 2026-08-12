@@ -82,6 +82,13 @@ from app.servicios.resultados_mixto import (
 from app.servicios.resultados_sucgs import (
     calcular_resultado_sucgs,
 )
+from app.modelos.comparacion import (
+    DatosComparacionEscenarios,
+    ResumenComparacionEscenarios,
+)
+from app.servicios.comparador import (
+    comparar_escenarios,
+)
 
 # ============================================================
 # Rutas internas de la aplicación
@@ -94,6 +101,8 @@ BASE_DIR = Path(__file__).resolve().parent
 # ============================================================
 # Configuración de FastAPI
 # ============================================================
+from app.servicios.fuentes_normativas import construir_catalogo_metodologia
+
 
 app = FastAPI(
     title="Calculadora de Pensión CSS",
@@ -181,6 +190,26 @@ async def comparar(
         context={
             "pagina_activa": "comparar",
             "version": "0.1.0",
+        },
+    )
+
+
+@app.get(
+    "/metodologia",
+    response_class=HTMLResponse,
+)
+async def metodologia(
+    request: Request,
+):
+    """Muestra la metodología transversal y las fuentes oficiales."""
+
+    return templates.TemplateResponse(
+        request=request,
+        name="metodologia.html",
+        context={
+            "pagina_activa": "metodologia",
+            "version": "0.1.0",
+            "catalogo": construir_catalogo_metodologia(),
         },
     )
 
@@ -501,6 +530,29 @@ async def calcular_resultado_integrado_sucgs(
 
     try:
         return calcular_resultado_sucgs(datos)
+
+    except ValueError as error:
+        raise HTTPException(
+            status_code=422,
+            detail=str(error),
+        ) from error
+
+
+# ============================================================
+# API — Comparación transversal de escenarios (6F.1)
+# ============================================================
+
+@app.post(
+    "/api/simulacion/comparar-escenarios",
+    response_model=ResumenComparacionEscenarios,
+)
+async def calcular_comparacion_escenarios(
+    datos: DatosComparacionEscenarios,
+):
+    """Compara escenarios de retiro y salario sin duplicar fórmulas legales."""
+
+    try:
+        return comparar_escenarios(datos)
 
     except ValueError as error:
         raise HTTPException(

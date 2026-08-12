@@ -511,6 +511,70 @@
 
 
       <!-- ================================================
+           RESUMEN FINAL UNIFICADO — 6F.4
+           ================================================ -->
+
+      <section
+        id="resultado-resumen-unificado"
+        class="mt-5 d-none"
+        aria-labelledby="resultado-resumen-unificado-titulo"
+      >
+        <hr class="mb-4">
+
+        <div class="results-section-heading mb-3">
+          <span class="text-primary fw-semibold small">Cierre funcional 6F.4</span>
+          <h3 id="resultado-resumen-unificado-titulo" class="h5 fw-bold mb-1">
+            Resumen final de la prestación
+          </h3>
+          <p class="text-secondary mb-0">
+            Esta fila usa la misma semántica para SEBD, Mixto y SUCGS.
+            La mensualidad y los pagos únicos permanecen separados.
+          </p>
+        </div>
+
+        <div class="row g-3 mb-3">
+          <div class="col-sm-6 col-xl-3">
+            <div class="results-summary-card">
+              <span>Estado del cálculo</span>
+              <strong id="resultado-unificado-estado">—</strong>
+              <small id="resultado-unificado-estado-nota">—</small>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-xl-3">
+            <div class="results-summary-card results-summary-primary">
+              <span>Pensión mensual estimada</span>
+              <strong id="resultado-unificado-mensual">—</strong>
+              <small>Renta mensual, cuando corresponde.</small>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-xl-3">
+            <div class="results-summary-card">
+              <span>Pago único estimado</span>
+              <strong id="resultado-unificado-pago-unico">—</strong>
+              <small>Indemnización o devolución, cuando corresponde.</small>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-xl-3">
+            <div class="results-summary-card">
+              <span>Naturaleza de la prestación</span>
+              <strong id="resultado-unificado-naturaleza">—</strong>
+              <small id="resultado-unificado-modalidad">—</small>
+            </div>
+          </div>
+        </div>
+
+        <div
+          id="resultado-unificado-no-confirmados"
+          class="alert alert-warning d-none mb-0"
+          role="status"
+        ></div>
+      </section>
+
+
+      <!-- ================================================
            RESULTADO SEBD
            ================================================ -->
 
@@ -1406,6 +1470,83 @@
         </div>
 
       </div>
+
+
+      <!-- Trazabilidad transversal 6F.2. -->
+
+      <section
+        id="resultado-trazabilidad-calculo"
+        class="results-trace-card d-none mt-4"
+        aria-labelledby="resultado-trazabilidad-titulo"
+      >
+        <div class="d-flex flex-column flex-lg-row gap-3 justify-content-between align-items-lg-center">
+          <div>
+            <span class="text-primary fw-semibold">Metodología 6F.2</span>
+            <h3 id="resultado-trazabilidad-titulo" class="h5 fw-bold mt-1 mb-1">
+              Ver cálculo completo
+            </h3>
+            <p class="text-secondary mb-0">
+              Revisa los datos usados, la regla aplicada, la fórmula, la
+              sustitución numérica, los resultados intermedios y las fuentes.
+            </p>
+          </div>
+
+          <button
+            type="button"
+            id="btn-ver-calculo-completo"
+            class="btn btn-outline-primary"
+            data-bs-toggle="collapse"
+            data-bs-target="#resultado-trazabilidad-detalle"
+            aria-expanded="false"
+            aria-controls="resultado-trazabilidad-detalle"
+          >
+            Ver cálculo completo
+          </button>
+        </div>
+
+        <div
+          id="resultado-trazabilidad-detalle"
+          class="collapse mt-4"
+        >
+          <div class="trace-subsection">
+            <h4 class="h6 fw-bold">Datos utilizados</h4>
+            <div
+              id="resultado-trazabilidad-datos"
+              class="row g-3"
+            ></div>
+          </div>
+
+          <div class="trace-subsection mt-4">
+            <h4 class="h6 fw-bold">Cadena de cálculo</h4>
+            <div id="resultado-trazabilidad-pasos" class="trace-steps"></div>
+          </div>
+
+          <div class="trace-final-result mt-4">
+            <span id="resultado-trazabilidad-final-label">Resultado final</span>
+            <strong id="resultado-trazabilidad-final">—</strong>
+            <small id="resultado-trazabilidad-final-tipo">—</small>
+          </div>
+
+          <div
+            id="resultado-trazabilidad-advertencias"
+            class="alert alert-warning d-none mt-4"
+            role="alert"
+          ></div>
+
+          <div class="trace-subsection mt-4">
+            <h4 class="h6 fw-bold">Fuentes oficiales vinculadas</h4>
+            <p class="text-secondary small mb-3">
+              Los enlaces se cargan desde los metadatos versionados de
+              <code>normativa/*.json</code>. Abren la fuente oficial en una
+              pestaña nueva.
+            </p>
+            <div
+              id="resultado-trazabilidad-fuentes"
+              class="trace-sources"
+            ></div>
+          </div>
+        </div>
+      </section>
 
 
       <!-- Navegación. -->

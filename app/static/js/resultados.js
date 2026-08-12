@@ -45,6 +45,14 @@ function prepararPasoResultados() {
   const seleccionado = simulacion.escenario_retiro_seleccionado;
 
   ocultarErrorResultados();
+  ocultarTrazabilidadResultado();
+
+  const resumenUnificado = document.getElementById(
+    "resultado-resumen-unificado",
+  );
+  if (resumenUnificado) {
+    resumenUnificado.classList.add("d-none");
+  }
 
   document.getElementById(
     "resultado-sistema",
@@ -987,6 +995,420 @@ async function calcularResultadoSUCGS() {
 
 
 // ============================================================
+// Trazabilidad transversal 6F.2
+// ============================================================
+
+/**
+ * Oculta la explicación de cálculo cuando todavía no existe un resultado.
+ */
+function ocultarTrazabilidadResultado() {
+  const contenedor = document.getElementById(
+    "resultado-trazabilidad-calculo",
+  );
+
+  if (contenedor) {
+    contenedor.classList.add("d-none");
+  }
+}
+
+
+/**
+ * Agrega un texto etiquetado a un bloque de trazabilidad.
+ *
+ * @param {HTMLElement} padre Contenedor del elemento.
+ * @param {string} etiqueta Etiqueta visible.
+ * @param {string|null} valor Valor que se mostrará.
+ */
+function agregarLineaTrazabilidad(padre, etiqueta, valor) {
+  if (!valor) {
+    return;
+  }
+
+  const linea = document.createElement("div");
+  linea.className = "trace-line";
+
+  const titulo = document.createElement("span");
+  titulo.className = "trace-line-label";
+  titulo.textContent = etiqueta;
+
+  const contenido = document.createElement("span");
+  contenido.className = "trace-line-value";
+  contenido.textContent = valor;
+
+  linea.append(titulo, contenido);
+  padre.appendChild(linea);
+}
+
+
+/**
+ * Presenta la cadena auditable enviada por el backend.
+ *
+ * @param {Object|null} trazabilidad Explicación transversal del cálculo.
+ */
+function mostrarTrazabilidadCalculo(trazabilidad) {
+  const contenedor = document.getElementById(
+    "resultado-trazabilidad-calculo",
+  );
+
+  if (!contenedor || !trazabilidad) {
+    ocultarTrazabilidadResultado();
+    return;
+  }
+
+  const datosContenedor = document.getElementById(
+    "resultado-trazabilidad-datos",
+  );
+  const pasosContenedor = document.getElementById(
+    "resultado-trazabilidad-pasos",
+  );
+  const fuentesContenedor = document.getElementById(
+    "resultado-trazabilidad-fuentes",
+  );
+
+  datosContenedor.replaceChildren();
+  pasosContenedor.replaceChildren();
+  fuentesContenedor.replaceChildren();
+
+  (trazabilidad.datos_utilizados || []).forEach((dato) => {
+    const columna = document.createElement("div");
+    columna.className = "col-md-6 col-xl-4";
+
+    const tarjeta = document.createElement("div");
+    tarjeta.className = "trace-data-card";
+
+    const etiqueta = document.createElement("span");
+    etiqueta.textContent = dato.etiqueta || dato.clave || "Dato";
+
+    const valor = document.createElement("strong");
+    valor.textContent = dato.valor ?? "—";
+
+    const origen = document.createElement("small");
+    origen.textContent = dato.origen || "Origen no indicado";
+
+    tarjeta.append(etiqueta, valor, origen);
+
+    if (dato.confirmado != null) {
+      const estado = document.createElement("span");
+      estado.className = dato.confirmado
+        ? "trace-confirmed"
+        : "trace-unconfirmed";
+      estado.textContent = dato.confirmado
+        ? "Confirmado"
+        : "No confirmado";
+      tarjeta.appendChild(estado);
+    }
+
+    columna.appendChild(tarjeta);
+    datosContenedor.appendChild(columna);
+  });
+
+  (trazabilidad.pasos || []).forEach((paso) => {
+    const tarjeta = document.createElement("article");
+    tarjeta.className = "trace-step";
+
+    const cabecera = document.createElement("div");
+    cabecera.className = "trace-step-header";
+
+    const numero = document.createElement("span");
+    numero.className = "trace-step-number";
+    numero.textContent = String(paso.orden ?? "");
+
+    const titulo = document.createElement("strong");
+    titulo.textContent = paso.titulo || "Paso de cálculo";
+
+    cabecera.append(numero, titulo);
+    tarjeta.appendChild(cabecera);
+
+    agregarLineaTrazabilidad(tarjeta, "Regla", paso.regla);
+    agregarLineaTrazabilidad(tarjeta, "Fórmula", paso.formula);
+    agregarLineaTrazabilidad(tarjeta, "Sustitución", paso.sustitucion);
+    agregarLineaTrazabilidad(tarjeta, "Resultado", paso.resultado);
+    agregarLineaTrazabilidad(tarjeta, "Redondeo", paso.redondeo);
+
+    if ((paso.fuentes || []).length) {
+      const fuentesDisponibles = new Map(
+        (trazabilidad.fuentes || []).map((fuente) => [fuente.id, fuente]),
+      );
+
+      const bloqueFuentes = document.createElement("div");
+      bloqueFuentes.className = "trace-step-sources";
+
+      const etiquetaFuentes = document.createElement("span");
+      etiquetaFuentes.className = "trace-step-sources-label";
+      etiquetaFuentes.textContent = "Fuentes: ";
+      bloqueFuentes.appendChild(etiquetaFuentes);
+
+      paso.fuentes.forEach((fuenteId, indice) => {
+        const fuente = fuentesDisponibles.get(fuenteId);
+
+        if (indice > 0) {
+          bloqueFuentes.appendChild(document.createTextNode(" · "));
+        }
+
+        if (fuente?.url) {
+          const enlaceFuente = document.createElement("a");
+          enlaceFuente.href = fuente.url;
+          enlaceFuente.target = "_blank";
+          enlaceFuente.rel = "noopener noreferrer";
+          enlaceFuente.textContent = fuente.titulo || fuenteId;
+          bloqueFuentes.appendChild(enlaceFuente);
+        } else {
+          const textoFuente = document.createElement("span");
+          textoFuente.textContent = fuente?.titulo || fuenteId;
+          bloqueFuentes.appendChild(textoFuente);
+        }
+      });
+
+      tarjeta.appendChild(bloqueFuentes);
+    }
+
+    pasosContenedor.appendChild(tarjeta);
+  });
+
+  document.getElementById(
+    "resultado-trazabilidad-final-label",
+  ).textContent = trazabilidad.resultado_final_etiqueta || "Resultado final";
+
+  document.getElementById(
+    "resultado-trazabilidad-final",
+  ).textContent = trazabilidad.resultado_final || "—";
+
+  const nombresTipo = {
+    MENSUAL: "Prestación mensual",
+    PAGO_UNICO: "Pago único",
+    MENSUAL_Y_PAGO_UNICO: "Prestación mensual + pago único",
+    PENDIENTE: "Resultado pendiente",
+  };
+
+  document.getElementById(
+    "resultado-trazabilidad-final-tipo",
+  ).textContent = nombresTipo[
+    trazabilidad.resultado_final_tipo
+  ] || trazabilidad.resultado_final_tipo || "—";
+
+  const advertencias = document.getElementById(
+    "resultado-trazabilidad-advertencias",
+  );
+  const mensajes = Array.from(
+    new Set((trazabilidad.advertencias || []).filter(Boolean)),
+  );
+
+  if (mensajes.length) {
+    advertencias.replaceChildren();
+    const lista = document.createElement("ul");
+    lista.className = "mb-0";
+
+    mensajes.forEach((mensaje) => {
+      const item = document.createElement("li");
+      item.textContent = mensaje;
+      lista.appendChild(item);
+    });
+
+    advertencias.appendChild(lista);
+    advertencias.classList.remove("d-none");
+  } else {
+    advertencias.classList.add("d-none");
+    advertencias.replaceChildren();
+  }
+
+  (trazabilidad.fuentes || []).forEach((fuente) => {
+    const tarjeta = document.createElement("div");
+    tarjeta.className = "trace-source-card";
+
+    const titulo = document.createElement("strong");
+    titulo.textContent = fuente.titulo || fuente.id || "Fuente oficial";
+
+    const referencia = document.createElement("span");
+    referencia.textContent = fuente.referencia || "";
+
+    const articulos = document.createElement("small");
+    articulos.textContent = (fuente.articulos || []).length
+      ? `Artículos / alcance: ${fuente.articulos.join(", ")}`
+      : "Fuente general";
+
+    const enlace = document.createElement("a");
+    enlace.className = "btn btn-sm btn-outline-primary mt-2 align-self-start";
+    enlace.href = fuente.url;
+    enlace.target = "_blank";
+    enlace.rel = "noopener noreferrer";
+    enlace.textContent = "Abrir fuente oficial";
+
+    tarjeta.append(titulo, referencia, articulos, enlace);
+
+    if (fuente.nota) {
+      const nota = document.createElement("small");
+      nota.className = "text-secondary";
+      nota.textContent = fuente.nota;
+      tarjeta.appendChild(nota);
+    }
+
+    fuentesContenedor.appendChild(tarjeta);
+  });
+
+  const detalle = document.getElementById(
+    "resultado-trazabilidad-detalle",
+  );
+  detalle.classList.remove("show");
+
+  const boton = document.getElementById(
+    "btn-ver-calculo-completo",
+  );
+  boton.setAttribute("aria-expanded", "false");
+  boton.textContent = "Ver cálculo completo";
+
+  contenedor.classList.remove("d-none");
+}
+
+
+/**
+ * Mantiene sincronizado el texto del botón de la sección colapsable.
+ */
+function configurarBotonTrazabilidad() {
+  const detalle = document.getElementById(
+    "resultado-trazabilidad-detalle",
+  );
+  const boton = document.getElementById(
+    "btn-ver-calculo-completo",
+  );
+
+  if (!detalle || !boton || detalle.dataset.listenerTrazabilidad === "1") {
+    return;
+  }
+
+  detalle.addEventListener("shown.bs.collapse", () => {
+    boton.textContent = "Ocultar cálculo completo";
+  });
+  detalle.addEventListener("hidden.bs.collapse", () => {
+    boton.textContent = "Ver cálculo completo";
+  });
+  detalle.dataset.listenerTrazabilidad = "1";
+}
+
+
+// ============================================================
+// Resumen transversal 6F.4
+// ============================================================
+
+/**
+ * Traduce el estado normalizado a una etiqueta visible.
+ *
+ * @param {string} estado Estado devuelto por el backend.
+ * @returns {string} Etiqueta legible.
+ */
+function nombreEstadoResultadoUnificado(estado) {
+  const nombres = {
+    COMPLETO: "Completo",
+    INCOMPLETO: "Incompleto",
+    DECISION_REQUERIDA: "Decisión requerida",
+    NO_ELEGIBLE: "No elegible",
+    TRANSICION: "Transición de sistema",
+  };
+
+  return nombres[estado] || estado || "—";
+}
+
+
+/**
+ * Traduce la naturaleza económica sin mezclar pagos mensuales y únicos.
+ *
+ * @param {string} naturaleza Código normalizado.
+ * @returns {string} Etiqueta visible.
+ */
+function nombreNaturalezaResultadoUnificado(naturaleza) {
+  const nombres = {
+    PENSION_MENSUAL: "Pensión mensual",
+    PAGO_UNICO: "Pago único",
+    PENSION_MAS_PAGO_UNICO: "Pensión mensual + pago único",
+    SIN_MONTO: "Sin monto calculable",
+    TRANSICION: "Transición a otro sistema",
+  };
+
+  return nombres[naturaleza] || naturaleza || "—";
+}
+
+
+/**
+ * Presenta el contrato común de salida de SEBD, Mixto y SUCGS.
+ *
+ * @param {Object|null} resumen Resumen normalizado del backend.
+ */
+function mostrarResumenResultadoUnificado(resumen) {
+  const contenedor = document.getElementById(
+    "resultado-resumen-unificado",
+  );
+
+  if (!contenedor || !resumen) {
+    if (contenedor) {
+      contenedor.classList.add("d-none");
+    }
+    return;
+  }
+
+  document.getElementById(
+    "resultado-unificado-estado",
+  ).textContent = nombreEstadoResultadoUnificado(
+    resumen.estado_resultado,
+  );
+
+  document.getElementById(
+    "resultado-unificado-estado-nota",
+  ).textContent = resumen.requiere_decision_usuario
+    ? "Debes elegir una alternativa antes de cerrar el resultado."
+    : (
+      resumen.calculo_completo
+        ? "El motor cerró las reglas evaluables con los datos disponibles."
+        : "El resultado conserva una condición o dato pendiente."
+    );
+
+  document.getElementById(
+    "resultado-unificado-mensual",
+  ).textContent = resumen.pension_mensual_estimada == null
+    ? "—"
+    : formatearMoneda(resumen.pension_mensual_estimada);
+
+  document.getElementById(
+    "resultado-unificado-pago-unico",
+  ).textContent = resumen.pago_unico_estimado == null
+    ? "—"
+    : formatearMoneda(resumen.pago_unico_estimado);
+
+  document.getElementById(
+    "resultado-unificado-naturaleza",
+  ).textContent = nombreNaturalezaResultadoUnificado(
+    resumen.naturaleza_prestacion,
+  );
+
+  document.getElementById(
+    "resultado-unificado-modalidad",
+  ).textContent = resumen.modalidad_nombre
+    || resumen.modalidad_codigo
+    || resumen.nombre_sistema
+    || "—";
+
+  const alerta = document.getElementById(
+    "resultado-unificado-no-confirmados",
+  );
+  const noConfirmados = Array.isArray(resumen.datos_no_confirmados)
+    ? resumen.datos_no_confirmados
+    : [];
+
+  if (noConfirmados.length > 0) {
+    alerta.textContent = (
+      "Datos aún no confirmados oficialmente: "
+      + noConfirmados.join(", ")
+      + "."
+    );
+    alerta.classList.remove("d-none");
+  } else {
+    alerta.textContent = "";
+    alerta.classList.add("d-none");
+  }
+
+  contenedor.classList.remove("d-none");
+}
+
+
+// ============================================================
 // Presentación del resultado
 // ============================================================
 
@@ -997,6 +1419,7 @@ async function calcularResultadoSUCGS() {
  */
 function mostrarResultadoSEBD(resultado) {
   const calculo = resultado.calculo;
+  mostrarResumenResultadoUnificado(resultado.resumen_unificado);
   const esIndemnizacion = (
     calculo.modalidad === "INDEMNIZACION"
     && calculo.calculo_disponible
@@ -1183,6 +1606,9 @@ function mostrarResultadoSEBD(resultado) {
   document.getElementById(
     "resultado-sebd-fuente",
   ).textContent = calculo.fuente_normativa;
+
+  mostrarTrazabilidadCalculo(resultado.trazabilidad);
+  configurarBotonTrazabilidad();
 
   const contenedor = document.getElementById(
     "resultado-sebd",
@@ -1576,6 +2002,7 @@ function obtenerNombreOpcionCAP(opcion) {
  */
 function mostrarResultadoMixto(resultado) {
   const calculo = resultado.calculo;
+  mostrarResumenResultadoUnificado(resultado.resumen_unificado);
   const bd = calculo.componente_beneficio_definido;
   const cap = calculo.componente_ahorro_personal;
 
@@ -1642,6 +2069,9 @@ function mostrarResultadoMixto(resultado) {
   document.getElementById(
     "resultado-mixto-fuente",
   ).textContent = calculo.fuente_normativa || "—";
+
+  mostrarTrazabilidadCalculo(resultado.trazabilidad);
+  configurarBotonTrazabilidad();
 
   const contenedor = document.getElementById(
     "resultado-mixto",
@@ -2037,6 +2467,7 @@ function formatearCondicionSUCGS(valor) {
  */
 function mostrarResultadoSUCGS(resultado) {
   const calculo = resultado.calculo;
+  mostrarResumenResultadoUnificado(resultado.resumen_unificado);
 
   mostrarEstadoSUCGS(calculo);
 
@@ -2207,6 +2638,9 @@ function mostrarResultadoSUCGS(resultado) {
   document.getElementById(
     "resultado-sucgs-fuente",
   ).textContent = calculo.fuente_normativa || "—";
+
+  mostrarTrazabilidadCalculo(resultado.trazabilidad);
+  configurarBotonTrazabilidad();
 
   const contenedor = document.getElementById(
     "resultado-sucgs",

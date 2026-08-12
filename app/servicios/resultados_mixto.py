@@ -12,6 +12,8 @@ from app.modelos.pension import (
     ResumenResultadoMixto,
 )
 from app.motores.mixto import calcular_mixto
+from app.servicios.trazabilidad import construir_trazabilidad_mixto
+from app.servicios.resultado_unificado import construir_resumen_unificado_mixto
 from app.servicios.resultados import (
     _buscar_escenario_referencia,
     _buscar_escenario_retiro,
@@ -97,10 +99,13 @@ def calcular_resultado_mixto(
             "ocurre antes de consumir todas las cuotas previstas de ese año."
         )
 
-    return ResumenResultadoMixto(
+    resumen = ResumenResultadoMixto(
         escenario_retiro=escenario_retiro,
         escenario_salarial_nombre=escenario_salarial.nombre,
         anios_proyectados_incluidos=anios_proyectados,
         advertencias_integracion=advertencias,
         calculo=calculo,
     )
+    resumen.trazabilidad = construir_trazabilidad_mixto(resumen)
+    resumen.resumen_unificado = construir_resumen_unificado_mixto(resumen)
+    return resumen

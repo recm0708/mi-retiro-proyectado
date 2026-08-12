@@ -10,6 +10,8 @@ from app.modelos.pension import (
     ResumenResultadoSEBD,
 )
 from app.motores.sebd_modalidades import calcular_sebd
+from app.servicios.trazabilidad import construir_trazabilidad_sebd
+from app.servicios.resultado_unificado import construir_resumen_unificado_sebd
 from app.servicios.resultados import (
     _buscar_escenario_referencia,
     _buscar_escenario_retiro,
@@ -87,10 +89,13 @@ def calcular_resultado_sebd(
             "ocurre antes de consumir todas las cuotas previstas de ese año."
         )
 
-    return ResumenResultadoSEBD(
+    resumen = ResumenResultadoSEBD(
         escenario_retiro=escenario_retiro,
         escenario_salarial_nombre=datos.escenario_salarial_nombre,
         anios_proyectados_incluidos=anios_proyectados,
         advertencias_integracion=advertencias,
         calculo=calculo,
     )
+    resumen.trazabilidad = construir_trazabilidad_sebd(resumen)
+    resumen.resumen_unificado = construir_resumen_unificado_sebd(resumen)
+    return resumen

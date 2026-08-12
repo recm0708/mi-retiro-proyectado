@@ -10,6 +10,9 @@ from typing import Literal
 
 from pydantic import BaseModel, Field
 
+from app.modelos.trazabilidad import ResumenTrazabilidadCalculo
+from app.modelos.resultado_unificado import ResumenPrestacionUnificada
+
 from app.modelos.simulacion import (
     DatosHistorialSalarial,
     EscenarioRetiro,
@@ -235,6 +238,8 @@ class ResumenResultadoSEBD(BaseModel):
     anios_proyectados_incluidos: list[int]
     advertencias_integracion: list[str]
 
+    trazabilidad: ResumenTrazabilidadCalculo | None = None
+    resumen_unificado: ResumenPrestacionUnificada | None = None
     calculo: ResumenCalculoSEBD
 
 
@@ -469,6 +474,8 @@ class ResumenResultadoMixto(BaseModel):
     anios_proyectados_incluidos: list[int]
     advertencias_integracion: list[str]
 
+    trazabilidad: ResumenTrazabilidadCalculo | None = None
+    resumen_unificado: ResumenPrestacionUnificada | None = None
     calculo: ResumenCalculoMixto
 
 
@@ -678,4 +685,6 @@ class ResumenResultadoSUCGS(BaseModel):
     escenario_salarial_nombre: str
     anios_proyectados_incluidos: list[int]
     advertencias_integracion: list[str]
+    trazabilidad: ResumenTrazabilidadCalculo | None = None
+    resumen_unificado: ResumenPrestacionUnificada | None = None
     calculo: ResumenCalculoSUCGS

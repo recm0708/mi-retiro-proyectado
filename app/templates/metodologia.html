@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+
+{% block title %}Metodología y fuentes | Calculadora de Pensión CSS{% endblock %}
+
+{% block content %}
+<section class="container py-4 py-lg-5 methodology-page">
+  <div class="mb-4">
+    <span class="badge text-bg-primary mb-2">Metodología {{ catalogo.version }}</span>
+    <h1 class="display-6 fw-bold mb-2">Metodología y fuentes oficiales</h1>
+    <p class="lead text-secondary mb-0">
+      Consulta cómo se priorizan las normas, qué artículos utiliza cada motor y desde qué fuente oficial puede verificarse cada referencia.
+    </p>
+  </div>
+
+  <div class="alert alert-primary border-0 methodology-disclaimer" role="note">
+    <strong>Estimador independiente.</strong>
+    Esta aplicación explica y documenta sus cálculos, pero no emite resoluciones ni certificaciones de la Caja de Seguro Social de Panamá.
+  </div>
+
+  <section class="methodology-section" aria-labelledby="metodologia-principios">
+    <h2 id="metodologia-principios" class="h3">Cómo se construye un resultado</h2>
+    <div class="row g-3 mt-1">
+      {% for principio in catalogo.principios %}
+      <div class="col-12 col-lg-6">
+        <div class="methodology-principle-card h-100">
+          <span class="methodology-principle-number">{{ loop.index }}</span>
+          <p class="mb-0">{{ principio }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="methodology-section" aria-labelledby="metodologia-fuentes-generales">
+    <h2 id="metodologia-fuentes-generales" class="h3">Fuentes generales y prioridad normativa</h2>
+    <p class="text-secondary">
+      El Texto Único vigente es la referencia legal consolidada principal. Los reglamentos y resoluciones desarrollan reglas operativas, y las páginas institucionales se usan como orientación complementaria.
+    </p>
+    <div class="row g-3">
+      {% for fuente in catalogo.fuentes_generales %}
+      <div class="col-12 col-md-6">
+        <article class="methodology-source-card h-100">
+          <span class="badge text-bg-light border mb-2">{{ fuente.tipo }}</span>
+          <h3 class="h5">{{ fuente.titulo }}</h3>
+          <p class="small text-secondary mb-2">{{ fuente.referencia }}</p>
+          <p>{{ fuente.alcance }}</p>
+          <a class="btn btn-sm btn-outline-primary" href="{{ fuente.url }}" target="_blank" rel="noopener noreferrer">
+            Abrir fuente oficial
+          </a>
+        </article>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="methodology-section" aria-labelledby="metodologia-sistemas">
+    <h2 id="metodologia-sistemas" class="h3">Normativa utilizada por sistema</h2>
+    <div class="accordion methodology-accordion" id="accordionSistemas">
+      {% for grupo in catalogo.grupos %}
+      <div class="accordion-item">
+        <h3 class="accordion-header" id="heading-{{ grupo.id }}">
+          <button
+            class="accordion-button {% if not loop.first %}collapsed{% endif %}"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapse-{{ grupo.id }}"
+            aria-expanded="{{ 'true' if loop.first else 'false' }}"
+            aria-controls="collapse-{{ grupo.id }}"
+          >
+            {{ grupo.titulo }}
+          </button>
+        </h3>
+        <div
+          id="collapse-{{ grupo.id }}"
+          class="accordion-collapse collapse {% if loop.first %}show{% endif %}"
+          aria-labelledby="heading-{{ grupo.id }}"
+          data-bs-parent="#accordionSistemas"
+        >
+          <div class="accordion-body">
+            <p>{{ grupo.descripcion }}</p>
+            <div class="d-flex flex-wrap gap-2 mb-4" aria-label="Artículos utilizados">
+              {% for articulo in grupo.articulos %}
+              <span class="badge rounded-pill text-bg-light border">{{ articulo }}</span>
+              {% endfor %}
+            </div>
+            <div class="row g-3">
+              {% for fuente in grupo.fuentes %}
+              <div class="col-12 col-lg-6">
+                <article class="methodology-source-card h-100">
+                  <h4 class="h6 fw-bold">{{ fuente.titulo }}</h4>
+                  <p class="small text-secondary mb-2">{{ fuente.referencia }}</p>
+                  <p class="mb-3">{{ fuente.alcance }}</p>
+                  <a class="btn btn-sm btn-outline-primary" href="{{ fuente.url }}" target="_blank" rel="noopener noreferrer">
+                    Abrir fuente oficial
+                  </a>
+                </article>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="methodology-section" aria-labelledby="metodologia-limitaciones">
+    <h2 id="metodologia-limitaciones" class="h3">Limitaciones e interpretaciones documentadas</h2>
+    <div class="alert alert-warning mb-0">
+      <ul class="mb-0">
+        {% for limitacion in catalogo.limitaciones %}
+        <li>{{ limitacion }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </section>
+
+  <section class="methodology-section" aria-labelledby="metodologia-recursos">
+    <h2 id="metodologia-recursos" class="h3">Recursos oficiales para verificar información individual</h2>
+    <div class="row g-3">
+      {% for recurso in catalogo.recursos %}
+      <div class="col-12 col-md-6">
+        <article class="methodology-resource-card h-100">
+          <h3 class="h5">{{ recurso.titulo }}</h3>
+          <p>{{ recurso.descripcion }}</p>
+          <a class="btn btn-sm btn-outline-primary" href="{{ recurso.url }}" target="_blank" rel="noopener noreferrer">
+            Abrir recurso oficial
+          </a>
+        </article>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <div class="methodology-documentation-note mt-4">
+    <strong>Documentación técnica del proyecto:</strong>
+    el repositorio mantiene el mapa detallado de artículos, decisiones y enlaces versionados en
+    <code>docs/FUENTES_NORMATIVAS.md</code>, <code>docs/NORMATIVA.md</code> y <code>normativa/*.json</code>.
+  </div>
+</section>
+{% endblock %}

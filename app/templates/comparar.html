@@ -1,47 +1,166 @@
 {% extends "base.html" %}
 
-
 {% block title %}
-Comparar sistemas | Calculadora de Pensión CSS
+Comparar escenarios | Calculadora de Pensión CSS
 {% endblock %}
 
-
 {% block content %}
+<section class="py-5 comparison-section">
+  <div class="container comparison-container">
 
-<!-- ==================================================
-     Página provisional del comparador
-     ================================================== -->
-
-<section class="py-5">
-
-  <div class="container">
-
-    <div class="text-center py-5">
-
-      <span class="badge text-bg-primary mb-3">
-        Comparador
-      </span>
-
-      <h1 class="fw-bold">
-        Comparación de sistemas
-      </h1>
-
-      <p class="text-secondary mt-3">
-        Esta función se habilitará cuando los tres motores de cálculo
-        estén implementados y validados.
+    <div class="mb-4">
+      <span class="badge text-bg-primary mb-2">Paso 6F.1</span>
+      <h1 class="fw-bold mb-2">Comparador de escenarios</h1>
+      <p class="text-secondary mb-0">
+        Compara fechas de retiro y escenarios salariales usando los mismos
+        motores validados de la simulación. Las diferencias se calculan contra
+        el escenario actualmente seleccionado como base.
       </p>
+    </div>
 
-      <a
-        href="/simulacion"
-        class="btn btn-primary mt-3"
-      >
-        Crear una simulación
-      </a>
+    <div
+      id="comparador-sin-simulacion"
+      class="alert alert-info d-none"
+      role="alert"
+    >
+      No hay una simulación completa disponible en esta pestaña.
+      <a href="/simulacion" class="alert-link">Abre el asistente y calcula un resultado</a>
+      antes de usar el comparador.
+    </div>
 
+    <div id="comparador-contenido" class="d-none">
+      <div class="card border-0 shadow-sm comparison-card mb-4">
+        <div class="card-body p-4">
+          <div class="row g-3 align-items-center">
+            <div class="col-lg-5">
+              <div class="comparison-meta-label">Sistema previsional</div>
+              <div id="comparador-sistema" class="comparison-meta-value">—</div>
+            </div>
+            <div class="col-lg-4">
+              <div class="comparison-meta-label">Escenario base</div>
+              <div id="comparador-base" class="comparison-meta-value">—</div>
+            </div>
+            <div class="col-lg-3 text-lg-end">
+              <a href="/simulacion" class="btn btn-outline-primary">
+                Editar simulación
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-4 mb-4">
+        <div class="col-xl-6">
+          <div class="card h-100 border-0 shadow-sm comparison-card">
+            <div class="card-body p-4">
+              <h2 class="h5 fw-bold mb-2">Escenarios de retiro</h2>
+              <p class="text-secondary small mb-3">
+                Selecciona las fechas que deseas incluir. El escenario base se
+                conserva siempre para calcular las diferencias.
+              </p>
+              <div id="comparador-retiros" class="comparison-options"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-6">
+          <div class="card h-100 border-0 shadow-sm comparison-card">
+            <div class="card-body p-4">
+              <h2 class="h5 fw-bold mb-2">Escenarios salariales</h2>
+              <p class="text-secondary small mb-3">
+                Puedes comparar una misma fecha de retiro bajo varias
+                trayectorias salariales disponibles del Paso 4.
+              </p>
+              <div id="comparador-salarios" class="comparison-options"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="comparador-aviso-saldos" class="alert alert-warning d-none"></div>
+      <div id="comparador-error" class="alert alert-danger d-none" role="alert"></div>
+
+      <div class="d-flex flex-wrap gap-2 justify-content-end mb-4">
+        <button id="btn-comparar-escenarios" type="button" class="btn btn-primary btn-lg">
+          Comparar escenarios
+        </button>
+      </div>
+
+      <div id="comparador-resultados" class="d-none">
+        <div class="row g-3 mb-4">
+          <div class="col-sm-6 col-xl-3">
+            <div class="summary-card h-100">
+              <div class="summary-label">Pensión mensual base</div>
+              <div id="comparador-resumen-base" class="summary-value salary-value">—</div>
+              <small>Combinación seleccionada en el Paso 6.</small>
+            </div>
+          </div>
+          <div class="col-sm-6 col-xl-3">
+            <div class="summary-card h-100">
+              <div class="summary-label">Mayor pensión comparable</div>
+              <div id="comparador-resumen-mejor" class="summary-value salary-value">—</div>
+              <small id="comparador-resumen-mejor-detalle">Solo resultados completos.</small>
+            </div>
+          </div>
+          <div class="col-sm-6 col-xl-3">
+            <div class="summary-card h-100">
+              <div class="summary-label">Resultados completos</div>
+              <div id="comparador-resumen-completos" class="summary-value">—</div>
+              <small>Filas con cálculo suficientemente cerrado.</small>
+            </div>
+          </div>
+          <div class="col-sm-6 col-xl-3">
+            <div class="summary-card h-100">
+              <div class="summary-label">Combinaciones evaluadas</div>
+              <div id="comparador-resumen-total" class="summary-value">—</div>
+              <small>Retiro × trayectoria salarial.</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="card border-0 shadow-sm comparison-card mb-4">
+          <div class="card-body p-0">
+            <div class="p-4 pb-2">
+              <h2 class="h4 fw-bold mb-1">Matriz comparativa</h2>
+              <p class="text-secondary mb-0">
+                Los importes mensuales y pagos únicos se mantienen separados.
+              </p>
+            </div>
+            <div class="table-responsive">
+              <table class="table align-middle comparison-table mb-0">
+                <thead>
+                  <tr>
+                    <th>Retiro</th>
+                    <th>Escenario salarial</th>
+                    <th>Cuotas</th>
+                    <th>Modalidad / prestación</th>
+                    <th class="text-end">Pensión mensual</th>
+                    <th class="text-end">Diferencia</th>
+                    <th class="text-end">Variación</th>
+                    <th class="text-end">Pago único</th>
+                    <th>Estado</th>
+                  </tr>
+                </thead>
+                <tbody id="comparador-tabla-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div id="comparador-advertencias" class="card border-0 shadow-sm comparison-card d-none">
+          <div class="card-body p-4">
+            <h2 class="h5 fw-bold mb-3">Notas para interpretar la comparación</h2>
+            <ul id="comparador-lista-advertencias" class="mb-0"></ul>
+          </div>
+        </div>
+      </div>
     </div>
 
   </div>
-
 </section>
+{% endblock %}
 
+{% block scripts %}
+<script src="{{ url_for('static', path='/js/moneda.js') }}"></script>
+<script src="{{ url_for('static', path='/js/comparador.js') }}"></script>
 {% endblock %}

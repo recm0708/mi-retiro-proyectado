@@ -11,6 +11,8 @@ from app.modelos.pension import (
     ResumenResultadoSUCGS,
 )
 from app.motores.sucgs import calcular_sucgs
+from app.servicios.trazabilidad import construir_trazabilidad_sucgs
+from app.servicios.resultado_unificado import construir_resumen_unificado_sucgs
 from app.servicios.resultados import (
     _buscar_escenario_retiro,
     _buscar_escenario_salarial,
@@ -106,10 +108,13 @@ def calcular_resultado_sucgs(
             "la vida laboral relevante."
         )
 
-    return ResumenResultadoSUCGS(
+    resumen = ResumenResultadoSUCGS(
         escenario_retiro=escenario_retiro,
         escenario_salarial_nombre=escenario_salarial.nombre,
         anios_proyectados_incluidos=anios_proyectados,
         advertencias_integracion=advertencias,
         calculo=calculo,
     )
+    resumen.trazabilidad = construir_trazabilidad_sucgs(resumen)
+    resumen.resumen_unificado = construir_resumen_unificado_sucgs(resumen)
+    return resumen
