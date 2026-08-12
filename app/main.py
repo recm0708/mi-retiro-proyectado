@@ -17,7 +17,7 @@ from app.core.config import (
 )
 
 from fastapi import FastAPI, HTTPException, Request
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, Response
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
@@ -145,6 +145,25 @@ templates.env.globals.update(
     app_version=APP_VERSION,
     mi_caja_digital_url=MI_CAJA_DIGITAL_URL,
 )
+
+
+# ============================================================
+# Recursos del navegador
+# ============================================================
+
+@app.get(
+    "/favicon.ico",
+    include_in_schema=False,
+)
+async def favicon_temporal():
+    """Evita un 404 mientras se integra el favicon definitivo."""
+
+    return Response(
+        status_code=204,
+        headers={
+            "Cache-Control": "no-store",
+        },
+    )
 
 
 # ============================================================
