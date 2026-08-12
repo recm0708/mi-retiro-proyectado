@@ -4,6 +4,17 @@
   "gaceta_oficial": "30284-B",
   "fecha_gaceta": "2025-05-22",
   "fuente_url": "https://www.css.gob.pa/wp-content/uploads/2025/05/TEXTO-UNICO-DE-LA-LEY-51-DE-2005-CSS-GACETA-OFICIAL-22-5-25.pdf",
+  "fuentes_oficiales": {
+    "texto_unico_css": "https://www.css.gob.pa/wp-content/uploads/2025/05/TEXTO-UNICO-DE-LA-LEY-51-DE-2005-CSS-GACETA-OFICIAL-22-5-25.pdf",
+    "normativa_ley_organica_css": "https://www.css.gob.pa/normativas-ley-organica/",
+    "gaceta_oficial_30284_b": "https://www.gacetaoficial.gob.pa/pdfTemp/30284_B/GacetaNo_30284b_20250522.pdf",
+    "normativa_prestaciones_economicas_css": "https://www.css.gob.pa/normativa-prestaciones-economicas/",
+    "resolucion_39302_2007_jd": "https://w3.css.gob.pa/wp-content/wdocs/Resolucion%20%2039%2C302-2007-J.D..pdf",
+    "pension_vejez_css": "https://www.css.gob.pa/pension-por-vejez/",
+    "pension_vejez_anticipada_css": "https://www.css.gob.pa/pension-por-vejez-anticipada/",
+    "pension_vejez_proporcional_css": "https://www.css.gob.pa/pension-por-vejez-proporcional/",
+    "pension_vejez_proporcional_anticipada_css": "https://www.css.gob.pa/pension-por-vejez-proporcional-anticipada/"
+  },
   "articulos": [
     178,
     179,

@@ -2,6 +2,19 @@
   "version": "texto_unico_ley_51_reformas_hasta_ley_462_2025_y_reglamento_57805_2025",
   "sistema": "SUBSISTEMA_MIXTO",
   "fuente_principal": "Texto Único de la Ley 51 de 2005, Gaceta Oficial 30284-B de 22/05/2025",
+  "fuentes_oficiales": {
+    "texto_unico_css": "https://www.css.gob.pa/wp-content/uploads/2025/05/TEXTO-UNICO-DE-LA-LEY-51-DE-2005-CSS-GACETA-OFICIAL-22-5-25.pdf",
+    "normativa_ley_organica_css": "https://www.css.gob.pa/normativas-ley-organica/",
+    "gaceta_oficial_30284_b": "https://www.gacetaoficial.gob.pa/pdfTemp/30284_B/GacetaNo_30284b_20250522.pdf",
+    "normativa_prestaciones_economicas_css": "https://www.css.gob.pa/normativa-prestaciones-economicas/",
+    "reglamento_incorporacion_mixto": "https://w3.css.gob.pa/wp-content/wdocs/REGLAMENTO%20DE%20INCORPORACION%20AL%20SUBSISTEMA%20MIXTO.pdf",
+    "resolucion_39470_2007_jd": "https://w3.css.gob.pa/wp-content/wdocs/RES%2039470-2007-JD.pdf",
+    "resolucion_41055_2009_jd": "https://w3.css.gob.pa/wp-content/wdocs/RES%2041%2C055-2009-J.D..pdf",
+    "reglamento_seguros_colectivos_cap": "https://www.css.gob.pa/wp-content/uploads/2023/10/REGLAMENTO-DE-SEGUROS-COLECTIVOS-DEL-COMPONENTE-DE-AHORRO-PERSONAL-DEL-SUBSISTEMA-MIXTO-actualizado.pdf",
+    "ley_58_2008": "https://w3.css.gob.pa/wp-content/wdocs/LEY%2058%20DE%202008.pdf",
+    "reglamento_incorporacion_cccs": "https://www.css.gob.pa/wp-content/uploads/2025/07/REGLAMENTO-DE-INCORPORACION-AL-CCCS.pdf",
+    "comunicacion_css_fecha_18_agosto_2026": "https://prensa.css.gob.pa/2026/07/10/css-intensifica-jornadas-de-capacitacion-sobre-mi-retiro-seguro-ante-la-fecha-clave-del-18-de-agosto/"
+  },
   "articulos_principales": [
     155,
     178,

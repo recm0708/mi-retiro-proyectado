@@ -16,6 +16,14 @@
       198
     ]
   },
+  "fuentes_oficiales": {
+    "texto_unico_css": "https://www.css.gob.pa/wp-content/uploads/2025/05/TEXTO-UNICO-DE-LA-LEY-51-DE-2005-CSS-GACETA-OFICIAL-22-5-25.pdf",
+    "normativa_ley_organica_css": "https://www.css.gob.pa/normativas-ley-organica/",
+    "gaceta_oficial_30284_b": "https://www.gacetaoficial.gob.pa/pdfTemp/30284_B/GacetaNo_30284b_20250522.pdf",
+    "normativa_prestaciones_economicas_css": "https://www.css.gob.pa/normativa-prestaciones-economicas/",
+    "ley_462_2025": "https://www.css.gob.pa/wp-content/uploads/2025/03/Ley-462-de-2025.pdf",
+    "reglamento_incorporacion_cccs": "https://www.css.gob.pa/wp-content/uploads/2025/07/REGLAMENTO-DE-INCORPORACION-AL-CCCS.pdf"
+  },
   "componente_contributivo": {
     "formula_pension_mensual": "saldo_capitalizacion_solidaria / 1000 * factor_pensionamiento_actuarial",
     "divisor_formula": 1000,
