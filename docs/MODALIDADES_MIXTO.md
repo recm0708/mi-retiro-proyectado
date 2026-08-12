@@ -86,7 +86,7 @@ La entrada `opcion_prestacion_cap` admite:
 - `PENSION_PROGRAMADA`;
 - `DEVOLUCION_TOTAL`.
 
-Cuando la devolución está disponible y `AUTO` no permite concluir la intención del asegurado, el resultado queda pendiente hasta una decisión expresa.
+Cuando la devolución está disponible y `AUTO` no permite concluir la intención del Asegurado(a), el resultado queda pendiente hasta una decisión expresa.
 
 ## 5. Devolución total del CAP
 

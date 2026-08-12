@@ -27,6 +27,7 @@ Este archivo es el punto de entrada para la documentación técnica, funcional y
 | [MODALIDADES_SUCGS.md](MODALIDADES_SUCGS.md) | Capas del Sistema Único de Capitalización con Garantía Solidaria. |
 | [VALIDACION.md](VALIDACION.md) | Estrategia de pruebas, regresiones y casos sintéticos. |
 | [ROADMAP.md](ROADMAP.md) | Fases terminadas, cierre de 6F y trabajo posterior. |
+| [GUIA_INTERNA_DESARROLLO.md](GUIA_INTERNA_DESARROLLO.md) | Convenciones internas de marca, terminología, tipografía y contenido no visible. |
 
 ## 3. Archivos normativos versionados
 
@@ -55,4 +56,4 @@ Cuando un cambio altere una fórmula, parámetro, flujo o fuente legal, no se de
 
 ## 6. Consulta desde la interfaz
 
-La aplicación expone `/metodologia` como versión navegable de la metodología y de las principales fuentes oficiales. Para mantenimiento técnico y trazabilidad completa siguen siendo autoritativos los documentos de este directorio y `normativa/*.json`.
+La aplicación expone `/metodologia` como versión navegable de la metodología y de las principales fuentes oficiales para el Asegurado(a). Los detalles de estructura del repositorio y mantenimiento permanecen exclusivamente en esta documentación técnica.

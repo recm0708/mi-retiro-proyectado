@@ -113,7 +113,7 @@ Las condiciones se evalúan con los años de salario y cuotas requeridos cuando 
 
 ## 9. Prestaciones fuera del motor general
 
-El clasificador no debe tratar como idénticos todos los regímenes de asegurados. Los regímenes especiales —por ejemplo, trabajadores estacionales agrícolas y de la construcción— requieren reglas propias y una identificación explícita del tipo de asegurado.
+El clasificador no debe tratar como idénticos todos los regímenes de asegurados. Los regímenes especiales —por ejemplo, trabajadores estacionales agrícolas y de la construcción— requieren reglas propias y una identificación explícita del tipo de Asegurado(a).
 
 ## 10. Fuentes principales
 

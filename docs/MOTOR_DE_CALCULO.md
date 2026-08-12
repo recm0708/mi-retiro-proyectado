@@ -8,7 +8,7 @@ Este documento describe el flujo técnico de cálculo. Las reglas legales detall
 
 La aplicación separa cuatro capas:
 
-1. **entrada del usuario**;
+1. **entrada del Asegurado(a)**;
 2. **servicios de normalización/proyección**;
 3. **motor previsional**;
 4. **presentación del resultado**.
@@ -36,7 +36,7 @@ El análisis del Paso 2 recibe:
 - cuotas esperadas al cierre del año;
 - densidad futura.
 
-La proyección de retiro usa primero el cierre del año actual y aplica la densidad futura a partir del año siguiente. Esto evita añadir cuotas en el año actual contra lo declarado por el usuario.
+La proyección de retiro usa primero el cierre del año actual y aplica la densidad futura a partir del año siguiente. Esto evita añadir cuotas en el año actual contra lo declarado por el Asegurado(a).
 
 ## 4. Historial y salario actual
 
@@ -185,7 +185,7 @@ salario considerado BD del año
 = mínimo(salario cotizado del año, B/.500 × cuotas del año)
 ```
 
-Con datos anuales, esta es una aproximación del límite mensual y se advierte al usuario.
+Con datos anuales, esta es una aproximación del límite mensual y se advierte al Asegurado(a).
 
 Después se reutiliza la lógica de modalidad SEBD con parámetros propios del componente.
 

@@ -21,7 +21,7 @@ La aplicación distingue entre:
 - **regla legal**: proviene de ley o Texto Único;
 - **desarrollo reglamentario**: proviene de resolución o reglamento de la CSS;
 - **parámetro versionado**: valor almacenado en `normativa/*.json` con fecha y fuente;
-- **dato oficial individual**: saldo, bono, divisor o confirmación que debe provenir del asegurado/CSS y no puede deducirse con seguridad;
+- **dato oficial individual**: saldo, bono, divisor o confirmación que debe provenir del Asegurado(a)/CSS y no puede deducirse con seguridad;
 - **decisión de implementación**: criterio técnico adoptado cuando hay una ambigüedad o superposición normativa; debe quedar registrado en `docs/DECISIONES.md`.
 
 No se deben ocultar conflictos entre fuentes ni convertir una comunicación operativa temporal en una regla legal permanente.
@@ -141,11 +141,11 @@ El artículo 183 se conserva como regla separada. La aplicación acepta un monto
 
 El artículo 184 y el reglamento de seguros colectivos se modelan como una garantía futura: si el pensionado sobrevive la expectativa de vida utilizada y se agota el capital, el seguro continúa pagando el componente CAP según las condiciones reglamentarias.
 
-La referencia histórica de prima del reglamento se conserva para trazabilidad, pero no se vuelve a descontar de un saldo oficial suministrado por el usuario.
+La referencia histórica de prima del reglamento se conserva para trazabilidad, pero no se vuelve a descontar de un saldo oficial suministrado por el Asegurado(a).
 
 ### 6.6. Devolución del CAP
 
-Cuando el artículo 187 habilita la devolución total, la aplicación no decide por el asegurado. `AUTO` deja la decisión pendiente; `PENSION_PROGRAMADA` y `DEVOLUCION_TOTAL` representan elecciones explícitas.
+Cuando el artículo 187 habilita la devolución total, la aplicación no decide por el Asegurado(a). `AUTO` deja la decisión pendiente; `PENSION_PROGRAMADA` y `DEVOLUCION_TOTAL` representan elecciones explícitas.
 
 La devolución es un **pago único** y no se suma como si fuera una mensualidad.
 
@@ -226,7 +226,7 @@ El motor general no cubre todavía todos los regímenes especiales. Por ejemplo,
 
 - [CSS — Pensión por Vejez para Trabajadores Estacionales Agrícolas y de la Construcción](https://www.css.gob.pa/pension-por-vejez-para-los-trabajadores-estacionales-agricolas-y-de-la-construccion/)
 
-Antes de incorporar un régimen especial se debe crear una fuente versionada, pruebas independientes y una forma de identificar el tipo de asegurado.
+Antes de incorporar un régimen especial se debe crear una fuente versionada, pruebas independientes y una forma de identificar el tipo de Asegurado(a).
 
 ## 9. Redondeo y valores monetarios
 
@@ -251,6 +251,6 @@ Cuando cambie una fuente:
 
 La aplicación debe favorecer resultados **auditables y conservadores** frente a una precisión aparente basada en parámetros inventados.
 
-## Presentación de fuentes en 6F.3
+## Presentación de fuentes en la interfaz
 
 Los enlaces normativos continúan versionados en `normativa/*.json`. La interfaz no debe duplicar URLs en JavaScript. `app/servicios/fuentes_normativas.py` transforma esos metadatos en un catálogo humano para `/metodologia`, mientras la trazabilidad resuelve los IDs internos a títulos y enlaces oficiales.
