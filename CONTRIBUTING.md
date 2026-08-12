@@ -1,27 +1,33 @@
 # Guía de contribución
 
-## Flujo básico de trabajo
+Este documento define el flujo mínimo para modificar código, parámetros normativos, pruebas y documentación sin perder trazabilidad.
 
-Antes de comenzar a trabajar:
+## 1. Antes de empezar
+
+Actualizar la rama local:
 
 ```powershell
 git pull
 ```
 
-Después de realizar cambios:
+Comprobar que el árbol de trabajo esté limpio:
 
 ```powershell
 git status
-git add .
-git commit -m "tipo: descripción del cambio"
-git push
 ```
 
-## Convención de commits
+## 2. Principios de trabajo
 
-Se utilizarán mensajes descriptivos siguiendo una convención sencilla.
+- La interfaz no debe duplicar fórmulas previsionales del backend.
+- Los parámetros legales modificables deben residir en `normativa/` o estar claramente aislados.
+- Los datos históricos y los proyectados deben permanecer diferenciados.
+- Los pagos únicos y las pensiones mensuales no se deben mezclar.
+- Cuando falta un dato oficial indispensable, la aplicación debe indicar que el resultado está incompleto en lugar de inventar un parámetro.
+- Los cambios normativos deben poder rastrearse hasta una fuente oficial.
 
-Ejemplos:
+## 3. Convención de commits
+
+Se utilizan mensajes breves y descriptivos:
 
 ```text
 feat: agregar cálculo de cuotas proyectadas
@@ -29,22 +35,53 @@ fix: corregir cálculo de edad de referencia
 docs: actualizar normativa del SEBD
 test: agregar caso de validación femenino
 refactor: reorganizar motor de pensiones
-chore: actualizar dependencias
+chore: actualizar configuración del repositorio
 ```
 
-## Comentarios y documentación del código
+Cuando un avance afecta funcionalidad, pruebas y documentación, se recomienda mantener commits separados por tipo cuando resulte práctico.
 
-Los archivos de código deben documentarse de forma consistente, evitando comentarios redundantes.
+## 4. Flujo recomendado de staging
 
-- Python: docstrings de módulo, clase y función cuando aporten contexto; 4 espacios de sangría.
-- HTML: comentarios estructurales para secciones y pasos importantes; 2 espacios de sangría.
-- CSS: comentarios por bloques funcionales; 2 espacios de sangría.
-- JavaScript: encabezados por módulo y JSDoc en funciones relevantes; 2 espacios de sangría.
-- JSON normativo: no utilizar comentarios, porque JSON estándar no los admite. La explicación de parámetros se mantendrá en `docs/NORMATIVA.md`.
+Evitar `git add .` como hábito cuando hay cambios heterogéneos. Revisar y agrupar:
 
-Los archivos Markdown, `requirements.txt` y `.gitkeep` no requieren comentarios de código.
+```powershell
+git status
+git diff
+```
 
-## Validación mínima antes de un commit
+Ejemplo para funcionalidad:
+
+```powershell
+git add app normativa
+git diff --cached --check
+git status
+git commit -m "feat: describir cambio"
+```
+
+Ejemplo para pruebas:
+
+```powershell
+git add tests
+git diff --cached --check
+git commit -m "test: describir validacion"
+```
+
+Ejemplo para documentación:
+
+```powershell
+git add README.md CHANGELOG.md CONTRIBUTING.md docs .gitignore .gitattributes .editorconfig
+git diff --cached --check
+git commit -m "docs: actualizar documentacion"
+```
+
+Finalmente:
+
+```powershell
+git push
+git status
+```
+
+## 5. Validación mínima antes de un commit
 
 Ejecutar:
 
@@ -53,38 +90,69 @@ python -m compileall app
 python -m unittest discover -s tests -v
 ```
 
-También se deben probar en el navegador las rutas y pasos afectados por el cambio.
+También se deben probar manualmente en navegador las rutas y pasos afectados.
 
-Las pruebas automatizadas son obligatorias antes de consolidar cambios en motores de cálculo, precisión monetaria, cuotas o fechas de retiro.
+Para cambios en archivos Markdown o configuración, revisar además:
 
+```powershell
+git diff --check
+```
 
-## Precisión monetaria
+## 6. Comentarios y formato del código
 
-- Los cálculos monetarios deben usar las utilidades de `app/core/dinero.py` cuando exista riesgo de redondeo.
-- Se conservará precisión durante las operaciones y se redondeará al materializar importes monetarios.
-- El criterio técnico general es `ROUND_HALF_UP` a dos decimales, salvo regla normativa específica.
-- No se deben introducir redondeos intermedios únicamente para hacer coincidir una cifra visible con otra.
-- Los campos monetarios editables deben admitir como máximo dos decimales.
+- **Python:** 4 espacios; docstrings cuando aporten contexto.
+- **HTML/CSS/JavaScript/JSON:** 2 espacios.
+- **JSON normativo:** sin comentarios, porque JSON estándar no los admite.
+- **Markdown:** títulos jerárquicos y listas coherentes; evitar secciones históricas añadidas al final si el contenido puede integrarse en la estructura principal.
 
-## Finales de línea
+`.editorconfig` y `.gitattributes` fijan LF para los archivos de texto principales.
 
-`.editorconfig` y `.gitattributes` establecen LF para los archivos de texto principales. No se deben normalizar manualmente archivos completos salvo que sea necesario para evitar diffs masivos sin cambios funcionales.
+## 7. Precisión monetaria
 
-## Datos personales
+- Usar `app/core/dinero.py` cuando exista riesgo de redondeo.
+- Conservar precisión interna y materializar importes a dos decimales.
+- Usar `ROUND_HALF_UP` como criterio técnico general, salvo regla normativa específica.
+- No redondear valores intermedios para forzar una cifra visible.
+- Los campos monetarios editables deben aceptar como máximo dos decimales y presentar separadores de miles.
 
-Está prohibido subir al repositorio información personal real utilizada durante las pruebas.
+## 8. Cambios en fórmulas o normativa
 
-Los casos de validación deberán ser anonimizados.
+Todo cambio de fórmula, parámetro legal, tabla actuarial, fecha de transición o requisito debe incluir:
 
-## Cambios en fórmulas
+1. fuente oficial verificable;
+2. fecha o versión de la fuente;
+3. actualización de `normativa/*.json` cuando corresponda;
+4. actualización de [docs/NORMATIVA.md](docs/NORMATIVA.md);
+5. actualización de [docs/FUENTES_NORMATIVAS.md](docs/FUENTES_NORMATIVAS.md) si aparece una nueva fuente o enlace;
+6. prueba automatizada nueva o ajustada;
+7. ADR en [docs/DECISIONES.md](docs/DECISIONES.md) si existe interpretación, ambigüedad o decisión de diseño relevante.
 
-Todo cambio relacionado con fórmulas, parámetros o reglas legales deberá:
+No se debe usar una nota de prensa como sustituto de una ley o reglamento cuando la norma formal está disponible. Las comunicaciones institucionales pueden usarse para fechas o procedimientos operativos, dejando claro su carácter temporal.
 
-1. estar documentado;
-2. identificar la fuente normativa correspondiente;
-3. incorporar o actualizar pruebas cuando corresponda;
-4. mantener separados los parámetros legales de la lógica de presentación.
+## 9. Datos personales y casos de validación
 
-## Actualización de documentación
+Está prohibido versionar información personal real no anonimizada.
 
-Los archivos de `docs/`, `README.md` y `CHANGELOG.md` se actualizarán cuando un cambio funcional, técnico o arquitectónico lo amerite. No es obligatorio modificar todos los documentos en cada avance.
+Los archivos originales utilizados para validar contra Mi Caja Digital, Mi Retiro Seguro u otra documentación oficial deben permanecer fuera del repositorio. `tests/casos_validacion/originales/` está ignorado por Git.
+
+Los casos públicos deben ser:
+
+- sintéticos; o
+- anonimizados de forma irreversible para los fines del repositorio.
+
+Ver [tests/casos_validacion/README.md](tests/casos_validacion/README.md).
+
+## 10. Documentación que debe mantenerse coherente
+
+No es necesario modificar todos los documentos en cada commit. Se actualizan únicamente los afectados, manteniendo consistencia entre:
+
+- `README.md` — estado y uso general;
+- `CHANGELOG.md` — cambios acumulados;
+- `docs/INDICE.md` — mapa de documentación;
+- `docs/ESPECIFICACION_FUNCIONAL.md` — requisitos;
+- `docs/ARQUITECTURA.md` — estructura técnica;
+- `docs/MODELO_DE_DATOS.md` — contratos de datos;
+- `docs/MOTOR_DE_CALCULO.md` — algoritmos;
+- `docs/NORMATIVA.md` y `docs/FUENTES_NORMATIVAS.md` — reglas y fuentes;
+- `docs/VALIDACION.md` — regresiones;
+- `docs/ROADMAP.md` — trabajo pendiente.

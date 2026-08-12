@@ -1,73 +1,83 @@
-# ============================================
+# ============================================================
 # Calculadora de Pensión CSS
 # Archivos excluidos del control de versiones
-# ============================================
+# ============================================================
 
-# Entornos virtuales de Python
+# Entornos virtuales y gestores de Python
 .venv/
 venv/
 env/
+ENV/
 
-# Python
+# Python: caché, compilados y metadatos
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
+*.pyd
+*.egg-info/
+build/
+dist/
 
-# Variables de entorno y secretos
+# Variables de entorno, secretos y credenciales
 .env
 .env.*
 !.env.example
+*.pem
+*.key
 
-# Bases de datos locales
+# Bases de datos y almacenamiento local
 *.db
 *.sqlite
 *.sqlite3
 
-# Datos personales, importaciones y archivos sensibles
+# Datos personales, importaciones y originales de validación
+# Los casos anonimizados sí pueden versionarse.
 data/personales/
 data/importaciones/
 data/documentos_personales/
 tests/casos_validacion/originales/
 tests/casos_validacion/**/*.pdf
 uploads/
+
+# Salidas locales, temporales y logs
+logs/
+*.log
 temp/
 tmp/
-
-# Logs
-*.log
-logs/
-
-# Caché de pruebas
-.pytest_cache/
-.coverage
-.coverage.*
-htmlcov/
-
-# Herramientas de análisis
-.mypy_cache/
-.ruff_cache/
-
-# Archivos de distribución
-build/
-dist/
-*.egg-info/
-
-# IDE y editores
-.vscode/
-.idea/
-
-# Archivos del sistema operativo
-.DS_Store
-Thumbs.db
-Desktop.ini
-
-# Archivos temporales
 *.tmp
 *.temp
 *.bak
 *.swp
 *~
 
-# Copias comprimidas del proyecto
+# Pruebas y cobertura
+.pytest_cache/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+
+# Herramientas de análisis y caché
+.mypy_cache/
+.ruff_cache/
+.pyright/
+
+# IDE y editores
+.vscode/
+.idea/
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Copias comprimidas y paquetes locales del proyecto
 *.zip
+*.7z
+*.rar

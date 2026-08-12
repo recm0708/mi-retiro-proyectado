@@ -1,12 +1,31 @@
-# Normalización de finales de línea del repositorio.
+# ============================================================
+# Normalización de finales de línea y tratamiento de binarios
+# ============================================================
+
 * text=auto
 
-*.py text eol=lf
-*.html text eol=lf
-*.css text eol=lf
-*.js text eol=lf
-*.json text eol=lf
-*.md text eol=lf
-*.yml text eol=lf
-*.yaml text eol=lf
-*.txt text eol=lf
+# Texto del proyecto: LF en el repositorio para evitar diffs por plataforma.
+*.py    text eol=lf
+*.html  text eol=lf
+*.css   text eol=lf
+*.js    text eol=lf
+*.json  text eol=lf
+*.md    text eol=lf
+*.txt   text eol=lf
+*.yml   text eol=lf
+*.yaml  text eol=lf
+*.toml  text eol=lf
+*.ini   text eol=lf
+*.cfg   text eol=lf
+
+# Archivos binarios: no intentar normalizar ni fusionar como texto.
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.webp  binary
+*.ico   binary
+*.pdf   binary
+*.zip   binary
+*.7z    binary
+*.rar   binary
