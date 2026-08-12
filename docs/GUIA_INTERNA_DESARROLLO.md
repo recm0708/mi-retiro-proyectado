@@ -155,3 +155,12 @@ node --check app/static/js/retiro.js
 
 La ausencia de Node.js no impide ejecutar FastAPI ni la suite `unittest`. Si en el futuro el frontend incorpora dependencias npm reales, deberán declararse en un manifiesto JavaScript independiente y documentarse en el mismo cambio.
 
+## 14. UX.4.2 — estados activos y selección perceptible
+
+- El paso activo del wizard debe mantener contraste suficiente entre número y círculo; cuando `data-bs-theme="light"`, el número activo se presenta en blanco sobre el color primario.
+- Los estados seleccionados que afectan decisiones posteriores deben combinar más de una señal visual. En la tabla de retiro se utilizan fondo, contorno, radio y badge.
+- Los tokens `--app-retirement-selected-*` son específicos de esta selección y no deben sustituirse por colores literales dentro de celdas o badges.
+- Claro, Oscuro y Alto contraste definen valores propios para estos tokens.
+- `:focus-within` debe hacer visible la fila asociada al radio cuando se navega con teclado.
+- `forced-colors: active` debe delegar la selección en `Highlight` y `HighlightText` del sistema.
+- No eliminar el control de radio: el clic sobre toda la fila es una mejora de puntero, mientras el radio conserva la semántica y operación de teclado.

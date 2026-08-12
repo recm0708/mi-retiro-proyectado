@@ -39,6 +39,9 @@ El proyecto todavía no ha publicado una versión estable; los cambios actuales 
 - Los dos botones de **Recursos oficiales para verificar información individual** reciben el mismo centrado visual que las demás acciones de Metodología y conservan `Abrir recurso oficial`, porque esos enlaces no son necesariamente fuentes normativas del cálculo.
 - `.gitattributes` fuerza LF para todo archivo detectado como texto, incluidos archivos sin extensión, evitando advertencias de conversión LF/CRLF en Windows.
 - `/favicon.ico` responde temporalmente con `204 No Content` y `Cache-Control: no-store` hasta integrar el favicon definitivo, eliminando el `404` del navegador sin inventar un icono provisional.
+- UX.4.2 mantiene el número del paso activo en blanco cuando el tema efectivo es Claro, mejorando contraste sobre el círculo azul.
+- La fila seleccionada de **Fechas y cuotas estimadas de retiro** refuerza su estado mediante fondo, contorno, radio y badge específicos para Claro, Oscuro y Alto contraste, con señal adicional de foco y soporte para colores forzados.
+- La suite alcanza **112 pruebas automatizadas** con regresiones específicas de estados activos y selección perceptible.
 - UX.4.1 incorpora una capa global de accesibilidad mediante `accesibilidad.js` y `accesibilidad.css`, sin trasladar lógica previsional al frontend.
 - Los campos que suelen generar dudas reciben ayudas contextuales desplegables y accesibles mediante `aria-expanded` y `aria-controls`.
 - Los formularios marcan controles inválidos con `aria-invalid`, llevan el foco al primer campo que requiere corrección y anuncian el problema mediante una región viva global.

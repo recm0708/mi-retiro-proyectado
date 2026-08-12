@@ -413,3 +413,13 @@ La revisión visual inmediata de UX.4.1 se realizó en PC/laptop. Se comprobaron
 
 Con estas regresiones la suite completa queda en **108 pruebas automatizadas**.
 
+## Validación UX.4.2 — estados activos y selección perceptible
+
+La suite alcanza **112 pruebas automatizadas**. `tests/test_ux42_estados_visuales.py` añade cuatro regresiones de presentación:
+
+1. el paso activo usa número blanco cuando el tema efectivo es Claro;
+2. la fila seleccionada de retiro dispone de tokens específicos para Claro, Oscuro y Alto contraste;
+3. la selección refuerza fondo, contorno, radio y badge de `Fecha futura`;
+4. el foco de teclado sobre el radio resalta la fila asociada y existe una adaptación para `forced-colors`.
+
+Estas regresiones protegen la estructura CSS, pero la percepción final del contraste y de la jerarquía de selección se revisa manualmente en PC/laptop antes del cierre de UX.4.2. La ronda multidispositivo continúa diferida.

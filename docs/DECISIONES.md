@@ -620,3 +620,12 @@ El indicador continúa siendo un control enfocable para que la información no d
 
 **Motivo:** el patrón reduce el tamaño visual del indicador de ayuda y evita obligar a hacer clic en PC, sin perder acceso mediante teclado o interacción táctil. Mantener el contenido fuera de la lógica de negocio preserva la separación entre explicación contextual y cálculo previsional.
 
+## ADR-063 — Los estados seleccionados deben usar señales redundantes por tema
+
+**Estado:** Aceptada
+
+**Decisión:** los estados activos o seleccionados que condicionan una acción posterior no dependerán de una única diferencia de color. En el wizard, el paso activo debe mantener contraste suficiente entre número y círculo. En la tabla de escenarios de retiro, la selección utiliza conjuntamente fondo, contorno, realce del radio y badge de estado, con tokens específicos para Claro, Oscuro y Alto contraste.
+
+Cuando el sistema operativo fuerce colores, la selección debe delegar en los colores de resaltado del sistema en lugar de conservar una paleta propia que pueda perder contraste. El foco de teclado sobre el radio debe permitir localizar también la fila asociada.
+
+**Motivo:** una selección previsional puede determinar el escenario utilizado por el Paso 6. Hacerla perceptible mediante varias señales reduce ambigüedad visual, mejora orientación con teclado y evita que una combinación de tema o contraste convierta una decisión importante en un cambio cromático demasiado sutil.

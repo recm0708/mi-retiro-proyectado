@@ -299,7 +299,15 @@ La comparación debe reutilizar los motores existentes, conservar un escenario b
 
 **RF-111.** En el bloque SEBD de Resultados, la acción de calcular o recalcular debe quedar alineada con el control de escenario salarial al que acompaña en disposiciones de escritorio.
 
-## 14. Fuera del alcance inmediato
+## 14. UX.4.2 — estados activos y selección perceptible
+
+**RF-112.** Cuando el tema efectivo sea Claro, el número del paso activo debe conservar texto blanco sobre el círculo primario para mantener contraste suficiente. El ajuste debe aplicarse a cualquier paso que se encuentre activo y no alterar la combinación ya validada en Oscuro y Alto contraste.
+
+**RF-113.** La fila seleccionada de la tabla de escenarios de retiro debe distinguirse mediante señales redundantes: fondo, contorno de fila, realce del control de radio y badge de estado. Estas señales deben definirse por tema y no depender exclusivamente del color de fondo.
+
+**RF-114.** El foco de teclado sobre el control de selección de retiro debe reforzar visualmente la fila asociada y, cuando el sistema operativo active colores forzados, la selección debe respetar los colores de resaltado del sistema.
+
+## 15. Fuera del alcance inmediato
 
 Quedan para fases posteriores:
 
