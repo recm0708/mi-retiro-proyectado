@@ -41,9 +41,10 @@ La próxima versión `0.1.0` continúa en desarrollo. El asistente de seis pasos
 | Temas visuales y persistencia local | Implementados |
 | Accesibilidad base: teclado, foco, movimiento reducido y objetivos táctiles | Implementada |
 | Estabilización visual Claro/Oscuro/Alto contraste | Implementada |
-| UX.3 — responsive real y navegación móvil | Implementada técnicamente; pendiente validación visual |
+| UX.3 — responsive real y navegación móvil | Implementada; validación manual inmediata en PC/laptop, multidispositivo diferida |
+| UX.4.1 — semántica accesible y ayudas contextuales | Implementada y revisada manualmente en PC/laptop |
 
-La suite actual contiene **96 pruebas automatizadas**. UX.3 añade regresiones para responsive, navegación móvil y la separación entre fecha de evaluación y último mes con cuotas acreditadas en el Paso 5; las regresiones de mantenimiento técnico verifican además la normalización LF del repositorio y la respuesta temporal de `/favicon.ico`.
+La suite actual contiene **108 pruebas automatizadas**. UX.3 añade regresiones para responsive, navegación móvil y la separación entre fecha de evaluación y último mes con cuotas acreditadas en el Paso 5; las regresiones de mantenimiento técnico verifican la normalización LF y la respuesta temporal de `/favicon.ico`; UX.4.1 incorpora pruebas para semántica del wizard, ayudas contextuales, validación accesible, tablas desplazables, enlaces externos y los ajustes visuales finales validados en PC/laptop.
 
 ## 3. Qué permite hacer el asistente
 
@@ -186,7 +187,7 @@ La interfaz usa colores semánticos por tema para superficies, textos, estados y
 
 La preferencia se conserva localmente en el navegador y no se mezcla con los datos previsionales de la simulación. La interfaz incluye enlace de salto al contenido, foco visible para teclado, objetivos táctiles con altura mínima, soporte para `prefers-reduced-motion` y un pie de página compacto con autoría, aviso de independencia y acceso a Mi Caja Digital.
 
-Estas medidas constituyen la base de accesibilidad del producto; la revisión integral responsive y WCAG continúa dentro de la Fase 8.
+UX.4.1 amplía esta base con ayudas contextuales compactas que aparecen al pasar el puntero o al recibir foco —con clic como alternativa táctil—, regiones dinámicas para mensajes de error y estado, marcado `aria-invalid` con foco sobre el primer campo inválido, relaciones semánticas entre pasos y paneles del asistente, captions accesibles en tablas y aviso no visual para enlaces que abren una pestaña nueva. También mejora la selección de escenarios de retiro desde toda la fila y corrige pequeños detalles de jerarquía y alineación. La auditoría integral WCAG 2.2 con tecnologías de apoyo continúa dentro de la Fase 8.
 
 ## 9. Instalación
 
@@ -208,6 +209,21 @@ python -m venv .venv
 
 ```powershell
 python -m pip install -r requirements.txt
+```
+
+`requirements.txt` contiene únicamente dependencias Python. **Node.js no es necesario para ejecutar la aplicación**; se utiliza de forma opcional durante desarrollo para validar sintaxis JavaScript con `node --check`.
+
+En Windows, si se desea habilitar esa validación auxiliar:
+
+```powershell
+winget install --id OpenJS.NodeJS.LTS -e --source winget
+```
+
+Después de instalarlo, abrir una terminal nueva y comprobar:
+
+```powershell
+node --version
+npm --version
 ```
 
 ## 10. Ejecución

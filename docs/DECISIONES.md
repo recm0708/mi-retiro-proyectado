@@ -609,3 +609,14 @@ Los botones de la sección **Recursos oficiales para verificar información indi
 No se reorganizarán rutas funcionales del proyecto únicamente por estética. Si una reorganización futura aporta un beneficio técnico suficiente, deberá modificar en la misma unidad de trabajo todos los imports, rutas, pruebas y documentos que dependan de la estructura anterior.
 
 **Motivo:** separar respaldos locales de la copia de trabajo reduce ruido, evita incluir artefactos históricos en búsquedas o paquetes y mantiene el árbol del repositorio representativo del producto actual. Limitar `.gitkeep` evita archivos sin función una vez que el directorio ya está materializado por contenido real.
+
+## ADR-062 — Ayuda contextual compacta mediante hover, foco y alternativa táctil
+
+**Estado:** Aceptada
+
+**Decisión:** las ayudas breves asociadas a campos previsionales se presentan como tooltips compactos anclados a un indicador `?`. En equipos con puntero la información aparece al pasar sobre el indicador y en navegación por teclado aparece al recibir foco. El clic se conserva como alternativa para dispositivos táctiles y `Esc` puede cerrar ayudas abiertas.
+
+El indicador continúa siendo un control enfocable para que la información no dependa exclusivamente del ratón. El tooltip reutiliza tokens visuales de la aplicación y no incorpora reglas previsionales propias.
+
+**Motivo:** el patrón reduce el tamaño visual del indicador de ayuda y evita obligar a hacer clic en PC, sin perder acceso mediante teclado o interacción táctil. Mantener el contenido fuera de la lógica de negocio preserva la separación entre explicación contextual y cálculo previsional.
+

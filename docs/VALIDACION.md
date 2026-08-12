@@ -44,6 +44,7 @@ tests/test_dinero.py
 tests/test_proyeccion_salarios.py
 tests/test_linea_tiempo.py
 tests/test_retiro.py
+tests/test_accesibilidad_ux4.py
 
 tests/test_sebd.py
 tests/test_sebd_modalidades.py
@@ -383,3 +384,32 @@ La revisión manual inmediata se realiza en laptop/PC. La comprobación específ
 2. `/favicon.ico` debe responder `204 No Content` mientras no exista el favicon definitivo, evitando un `404` sin introducir un icono provisional.
 
 Con estas dos regresiones, la suite completa alcanza **96 pruebas automatizadas**.
+
+## Validación UX.4.1 — semántica y ayudas contextuales
+
+La suite completa alcanza **108 pruebas automatizadas**. `tests/test_accesibilidad_ux4.py` conserva siete regresiones base que verifican:
+
+1. carga global de `accesibilidad.css` y `accesibilidad.js`;
+2. landmark de navegación, región viva global y descripción del selector de tema;
+3. catálogo de ayudas contextuales para campos previsionales ambiguos;
+4. marcado `aria-invalid`, anuncio y foco del primer control inválido;
+5. relación semántica entre progreso, controles y paneles del wizard;
+6. captions de tablas y foco de contenedores cuando existe desplazamiento horizontal;
+7. estilos de ayudas, alto contraste y controles inválidos.
+
+Cuando Node.js LTS está instalado en el equipo de desarrollo, se valida adicionalmente la sintaxis de `app/static/js/accesibilidad.js` y `app/static/js/retiro.js` con `node --check`. Esta comprobación es auxiliar: Node.js no es requisito de ejecución de FastAPI ni forma parte de `requirements.txt`. Las regresiones verifican presencia y contrato de la capa accesible, pero no sustituyen una auditoría manual con lector de pantalla.
+
+La revisión visual inmediata de UX.4.1 se realizó en PC/laptop. Se comprobaron los temas visuales, ayudas contextuales, navegación del asistente, selección de escenarios y alineación de Resultados. La revisión específica en móvil/tablet y la auditoría con tecnologías de apoyo permanecen diferidas para el cierre integral de WCAG 2.2.
+
+### Remate visual de UX.4.1
+
+`tests/test_ux4_remate_visual.py` agrega cinco regresiones adicionales:
+
+1. nombre abreviado de SUCGS en el selector del Paso 1;
+2. tratamiento semántico propio para **Completar cuotas vacías con 12**;
+3. selección de un escenario futuro desde cualquier punto de su fila;
+4. alineación de la acción SEBD con el selector salarial;
+5. tooltip contextual compacto operable mediante hover y foco.
+
+Con estas regresiones la suite completa queda en **108 pruebas automatizadas**.
+

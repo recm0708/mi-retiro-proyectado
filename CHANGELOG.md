@@ -39,6 +39,18 @@ El proyecto todavía no ha publicado una versión estable; los cambios actuales 
 - Los dos botones de **Recursos oficiales para verificar información individual** reciben el mismo centrado visual que las demás acciones de Metodología y conservan `Abrir recurso oficial`, porque esos enlaces no son necesariamente fuentes normativas del cálculo.
 - `.gitattributes` fuerza LF para todo archivo detectado como texto, incluidos archivos sin extensión, evitando advertencias de conversión LF/CRLF en Windows.
 - `/favicon.ico` responde temporalmente con `204 No Content` y `Cache-Control: no-store` hasta integrar el favicon definitivo, eliminando el `404` del navegador sin inventar un icono provisional.
+- UX.4.1 incorpora una capa global de accesibilidad mediante `accesibilidad.js` y `accesibilidad.css`, sin trasladar lógica previsional al frontend.
+- Los campos que suelen generar dudas reciben ayudas contextuales desplegables y accesibles mediante `aria-expanded` y `aria-controls`.
+- Los formularios marcan controles inválidos con `aria-invalid`, llevan el foco al primer campo que requiere corrección y anuncian el problema mediante una región viva global.
+- El wizard relaciona pasos y paneles con regiones etiquetadas; las tablas reciben captions accesibles y sus contenedores desplazables pueden recibir foco cuando existe desbordamiento horizontal.
+- Los enlaces que abren una pestaña nueva incorporan una indicación para lectores de pantalla sin añadir ruido visual.
+- La suite alcanza **108 pruebas automatizadas** después del remate visual e interactivo de UX.4.1.
+- Las ayudas contextuales pasan a un formato compacto tipo tooltip: aparecen con `hover` o foco de teclado y conservan clic como alternativa para interacción táctil.
+- El selector del Paso 1 abrevia SUCGS como **Capitalización con Garantía Solidaria** sin cambiar la denominación jurídica utilizada en metodología, resultados o documentación normativa.
+- La acción **Completar cuotas vacías con 12** recibe un tratamiento visual propio y distinguible en Claro, Oscuro y Alto contraste.
+- En el Paso 5, cualquier punto de una fila de escenario futuro seleccionable activa el mismo escenario que su control de radio.
+- En el Paso 6, la acción de cálculo SEBD se alinea con el selector de escenario salarial.
+- Node.js LTS se documenta como herramienta opcional de desarrollo para `node --check`; no se incorpora como dependencia de `pip` ni como requisito de ejecución.
 
 ### Agregado
 

@@ -190,3 +190,29 @@ Todo cambio de código, UX, lógica, normativa, pruebas o configuración debe re
 - `.gitignore` continúa excluyendo archivos comprimidos para evitar su incorporación accidental.
 - Un archivo `.gitkeep` solo se mantiene cuando una carpeta vacía debe existir en Git. Debe eliminarse cuando el directorio ya contiene archivos versionados reales.
 - No se reorganizarán `app/`, `tests/`, `docs/`, `normativa/` u otras rutas funcionales únicamente por estética. Si una reorganización aporta un beneficio técnico real, el mismo cambio debe actualizar imports, rutas, pruebas y documentación dependiente.
+
+## 12. Accesibilidad semántica y ayudas contextuales
+
+- Las páginas nuevas deben heredar de `base.html` y mantener la carga de `accesibilidad.css` y `accesibilidad.js`.
+- Las ayudas de campos no deben duplicar fórmulas ni introducir reglas legales nuevas; su función es explicar qué dato se solicita y cómo distinguirlo de otros conceptos.
+- Todo control requerido debe conservar una etiqueta programática. Los mensajes de error visibles deben poder anunciarse y el control inválido debe quedar identificable mediante `aria-invalid`.
+- Los componentes dinámicos deben actualizar su semántica al mostrarse: paneles, alertas, tablas y controles agregados por JavaScript no pueden depender únicamente de cambios visuales.
+- Las tablas complejas deben incluir un `caption` visible o no visual que describa su propósito. Si un contenedor necesita desplazamiento horizontal, debe poder recorrerse con teclado cuando el desbordamiento exista.
+- Un enlace con `target="_blank"` debe informar de forma accesible que abrirá una pestaña nueva.
+- Las ayudas contextuales deben poder abrirse y cerrarse con teclado, reflejar su estado mediante `aria-expanded` y cerrarse con `Escape`.
+
+## 12. Herramientas opcionales de validación frontend
+
+La aplicación no requiere Node.js para ejecutarse y `requirements.txt` debe contener únicamente dependencias instalables por `pip`.
+
+Node.js LTS puede instalarse de forma opcional en el entorno de desarrollo para comprobar sintaxis JavaScript:
+
+```powershell
+winget install --id OpenJS.NodeJS.LTS -e --source winget
+node --version
+npm --version
+node --check app/static/js/accesibilidad.js
+```
+
+No se debe crear `package.json` ni añadir paquetes npm mientras el frontend no tenga una dependencia real que lo justifique. Si en una fase futura aparece una dependencia JavaScript de compilación o pruebas, se documentará y versionará con su propio mecanismo de dependencias en lugar de mezclarla con `requirements.txt`.
+

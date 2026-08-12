@@ -1,3 +1,6 @@
+# Dependencias Python de Mi Retiro Proyectado.
+# Node.js LTS es una herramienta opcional de desarrollo para validar JavaScript con `node --check`;
+# no es una dependencia de Python y no se instala mediante este archivo.
 annotated-doc==0.0.5
 annotated-types==0.8.0
 anyio==4.14.2

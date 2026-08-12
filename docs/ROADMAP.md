@@ -201,7 +201,7 @@ Previsto:
 - [x] identidad visual profesional con portada orientada al Asegurado(a), sin aparentar ser una aplicación oficial;
 - [x] temas claro, oscuro, alto contraste y seguimiento del sistema;
 - [x] persistencia local de preferencia visual;
-- revisión WCAG 2.2 completa;
+- [ ] revisión WCAG 2.2 completa con tecnologías de apoyo;
 - [x] estabilización visual de Oscuro y Alto contraste con tokens semánticos;
 - [x] wizard, navegación rápida, tarjetas y footer adaptativos por tema;
 - [x] foco visible, enlace de salto y base de navegación por teclado;
@@ -213,6 +213,10 @@ Previsto:
 - [x] navegación principal colapsada y navegación persistente inferior del wizard en móvil;
 - [x] tablas extensas con desplazamiento localizado y acciones de formulario adaptativas;
 - [x] Paso 5 con último mes acreditado separado de evaluación y retiro.
+- [x] UX.4.1 con semántica programática del wizard, regiones de estado y anuncios de validación;
+- [x] ayudas contextuales accesibles y compactas para campos previsionales ambiguos, activadas por hover/foco con alternativa táctil;
+- [x] captions accesibles para tablas, foco condicionado a desbordamiento y aviso de enlaces que abren otra pestaña;
+- [x] selección de escenarios de retiro desde cualquier punto de una fila futura y remate visual de acciones auxiliares;
 - [x] respuesta temporal sin error para `/favicon.ico` mientras no se integran los iconos definitivos;
 - [ ] integrar favicon e iconos definitivos de **Mi Retiro Proyectado** y retirar la respuesta temporal `204`.
 
@@ -220,7 +224,7 @@ Previsto:
 
 Estado técnico actual; la validación manual multidispositivo queda aplazada y las revisiones inmediatas se realizan en laptop/PC:
 
-- **96 pruebas automatizadas** en `OK`;
+- **108 pruebas automatizadas** en `OK`;
 - regresión SEBD real anonimizada;
 - casos sintéticos de Mixto;
 - casos sintéticos SUCGS;

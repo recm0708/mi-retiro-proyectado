@@ -127,3 +127,31 @@ Cuando los iconos oficiales estén disponibles se deberá:
 - `.gitkeep` solo se utiliza para conservar en Git un directorio que todavía no contiene archivos versionados reales.
 - Cuando una carpeta recibe su primer archivo real, el `.gitkeep` correspondiente debe eliminarse.
 - No mover carpetas funcionales solo para mejorar la apariencia del árbol. Toda reorganización real debe actualizar código, imports, rutas, pruebas y documentación relacionada dentro de la misma unidad de cambio.
+
+## 12. UX.4.1 — semántica accesible y ayudas contextuales
+
+UX.4.1 desarrolla la accesibilidad transversal ya establecida en ADR-050 sin introducir una capa nueva de cálculo.
+
+- `app/static/js/accesibilidad.js` concentra comportamiento accesible reutilizable: ayudas contextuales, `aria-invalid`, foco del primer campo inválido, relaciones del wizard, regiones vivas, captions y aviso de enlaces externos.
+- `app/static/css/accesibilidad.css` contiene únicamente estilos de esa capa y debe reutilizar los tokens `--app-*`; no debe duplicar la paleta de `style.css`.
+- Las ayudas contextuales explican el significado del dato solicitado y diferencias con conceptos cercanos. Se presentan como tooltips compactos al pasar el puntero o al enfocar el control de ayuda; el clic queda como alternativa para dispositivos táctiles. No deben afirmar una regla legal que no esté respaldada por el motor y la normativa versionada.
+- Al agregar un campo ambiguo al asistente se debe evaluar si necesita una entrada en `AYUDAS_CONTEXTUALES`. No todos los campos requieren ayuda contextual y el indicador visual debe permanecer compacto para no competir con la etiqueta.
+- Los errores visibles continúan siendo el contenido principal; `aria-live` y la región `a11y-global-status` sirven para anunciar cambios, no para ocultar mensajes al Asegurado(a).
+- Los paneles del wizard deben conservar un encabezado estructural que pueda actuar como nombre accesible de la región.
+- Las tablas generadas por JavaScript deben usar una de las clases reconocidas por `CAPTIONS_TABLAS` o incorporar su propio `caption`.
+- Los contenedores de tablas solo reciben `tabindex="0"` cuando existe desbordamiento horizontal real, evitando paradas de foco innecesarias.
+- La validación manual inmediata de este bloque se realiza en laptop/PC. La auditoría con lector de pantalla y la ronda multidispositivo quedan para el cierre integral de WCAG 2.2.
+
+## 13. Node.js como herramienta opcional
+
+Node.js no forma parte del runtime de Mi Retiro Proyectado ni de las dependencias Python. `requirements.txt` se reserva para paquetes instalables con `pip`.
+
+Cuando esté disponible en el equipo de desarrollo, Node.js LTS puede usarse para validaciones auxiliares como:
+
+```powershell
+node --check app/static/js/accesibilidad.js
+node --check app/static/js/retiro.js
+```
+
+La ausencia de Node.js no impide ejecutar FastAPI ni la suite `unittest`. Si en el futuro el frontend incorpora dependencias npm reales, deberán declararse en un manifiesto JavaScript independiente y documentarse en el mismo cambio.
+

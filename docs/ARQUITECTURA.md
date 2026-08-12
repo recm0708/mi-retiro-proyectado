@@ -79,6 +79,8 @@ Responsabilidades:
 - formularios;
 - navegación entre pasos;
 - formato visual;
+- semántica accesible transversal y ayudas contextuales;
+- gestión del foco y estados de validación visibles/no visuales;
 - estado temporal en `sessionStorage`;
 - envío de solicitudes a FastAPI;
 - representación de resultados y advertencias.
@@ -305,11 +307,13 @@ Paso 6 / Comparador / futuras exportaciones
 
 ## Apariencia y accesibilidad transversal
 
-`app/templates/base.html` concentra navegación, selector de tema, enlace de salto y pie de página. `app/static/js/tema.js` resuelve la preferencia visual y la conserva en `localStorage`; no accede ni modifica el estado previsional del asistente.
+`app/templates/base.html` concentra navegación, selector de tema, enlace de salto, región viva global y pie de página. `app/static/js/tema.js` resuelve la preferencia visual y la conserva en `localStorage`; no accede ni modifica el estado previsional del asistente.
 
-`app/static/css/style.css` expone tokens de superficie, texto, borde y foco para adaptar los componentes personalizados a los modos claro, oscuro y alto contraste. Bootstrap continúa resolviendo los controles estándar mediante `data-bs-theme`.
+`app/static/css/style.css` expone tokens de superficie, texto, borde y foco para adaptar los componentes personalizados a los modos claro, oscuro y alto contraste. `app/static/css/accesibilidad.css` añade únicamente presentación de ayudas contextuales, foco de contenedores desplazables y estado visual de controles inválidos reutilizando los tokens existentes. Bootstrap continúa resolviendo los controles estándar mediante `data-bs-theme`.
 
-La accesibilidad base se implementa en la capa global para que las páginas Inicio, Simulación, Comparador y Metodología compartan foco visible, objetivos táctiles y respeto a movimiento reducido.
+`app/static/js/accesibilidad.js` constituye una capa de presentación transversal: relaciona ayudas con controles, sincroniza semántica del wizard, prepara mensajes dinámicos, captions de tablas, foco de validación y avisos accesibles para enlaces externos. Las ayudas se abren mediante hover o foco y conservan clic como alternativa táctil. No calcula cuotas, salarios, edades ni prestaciones y no modifica el estado previsional guardado.
+
+La accesibilidad base y UX.4.1 se implementan en la capa global para que Inicio, Simulación, Comparador y Metodología compartan comportamiento coherente sin duplicarlo en cada plantilla.
 
 
 ## UX.3 — adaptación responsive y dato mensual de cuotas
@@ -317,3 +321,8 @@ La accesibilidad base se implementa en la capa global para que las páginas Inic
 La presentación mantiene una única plantilla global y una sola hoja principal de estilos. UX.3 no introduce una aplicación móvil separada: `style.css` reorganiza navegación, tarjetas, formularios y acciones mediante breakpoints, mientras que las tablas extensas conservan su estructura dentro de contenedores desplazables. En anchos inferiores a 768 px, la navegación persistente del wizard pasa a la parte inferior y respeta las áreas seguras del dispositivo.
 
 En el Paso 5, JavaScript captura `ultimo_mes_cuotas` con granularidad `YYYY-MM` y envía también la fecha técnica equivalente. El servicio de retiro vuelve a derivar y validar ese corte en Python; por tanto, la interfaz no se convierte en fuente de verdad para la regla temporal. `fecha_corte_cuotas` se conserva para compatibilidad con solicitudes y pruebas anteriores.
+
+## Herramientas de desarrollo fuera del runtime
+
+Las dependencias de ejecución Python continúan centralizadas en `requirements.txt`. Node.js LTS no forma parte del runtime ni se instala mediante `pip`; se usa únicamente como herramienta opcional para validaciones estáticas como `node --check`. Actualmente no existe una cadena de compilación frontend ni dependencias npm que requieran `package.json`.
+

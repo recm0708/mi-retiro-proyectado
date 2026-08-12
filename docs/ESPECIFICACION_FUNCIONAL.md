@@ -34,7 +34,7 @@ No debe presentarse como una herramienta oficial de la CSS ni emitir una certifi
 - No sé cuál tengo;
 - SEBD — Subsistema Exclusivamente de Beneficio Definido;
 - Subsistema Mixto;
-- SUCGS — Sistema Único de Capitalización con Garantía Solidaria.
+- SUCGS — Capitalización con Garantía Solidaria.
 
 La aplicación debe mostrar el nombre completo de siglas que puedan no ser conocidas por el Asegurado(a).
 
@@ -277,7 +277,29 @@ La comparación debe reutilizar los motores existentes, conservar un escenario b
 
 **RF-101.** Los recursos de consulta individual que no constituyen fuentes normativas del cálculo deben conservar la denominación **recurso oficial** en la interfaz, aunque compartan tratamiento visual con los botones de fuentes oficiales.
 
-## 13. Fuera del alcance inmediato
+## 13. UX.4.1 — accesibilidad semántica y ayudas contextuales
+
+**RF-102.** La plantilla global debe exponer landmarks y regiones de estado identificables, y el asistente debe relacionar cada control de paso con el panel que gobierna.
+
+**RF-103.** Los campos previsionales que puedan confundirse con conceptos cercanos deben disponer de ayuda contextual breve, opcional y operable mediante puntero y teclado. La ayuda debe aparecer con `hover` o foco, conservar una alternativa de clic para interacción táctil y no sustituir la etiqueta ni duplicar reglas de negocio.
+
+**RF-104.** Cuando un control requerido sea inválido, la interfaz debe identificarlo programáticamente mediante `aria-invalid`, mover el foco al primer campo que requiere corrección y anunciar que existe un dato por revisar.
+
+**RF-105.** Los mensajes de error y advertencia generados dinámicamente deben usar regiones vivas apropiadas y conservar su contenido visible como fuente principal de información.
+
+**RF-106.** Las tablas previsionales deben disponer de una descripción programática mediante `caption`; cuando un contenedor tenga desplazamiento horizontal real, debe poder recibir foco para permitir navegación por teclado.
+
+**RF-107.** Los enlaces que abran una pestaña nueva deben informar ese comportamiento a tecnologías de apoyo sin añadir texto visual repetitivo.
+
+**RF-108.** La capa de accesibilidad del frontend no debe calcular, reinterpretar ni modificar cuotas, salarios, fechas legales, modalidades o prestaciones; únicamente mejora interacción, semántica y comprensión de los datos solicitados.
+
+**RF-109.** En la tabla de escenarios de retiro, una fila correspondiente a una fecha futura seleccionable debe poder activarse haciendo clic en cualquier área no interactiva de la fila; el control de radio permanece como control semántico y de teclado.
+
+**RF-110.** Las acciones auxiliares que modifican datos masivamente, como completar cuotas vacías con 12, deben distinguirse visualmente de controles secundarios neutros en Claro, Oscuro y Alto contraste.
+
+**RF-111.** En el bloque SEBD de Resultados, la acción de calcular o recalcular debe quedar alineada con el control de escenario salarial al que acompaña en disposiciones de escritorio.
+
+## 14. Fuera del alcance inmediato
 
 Quedan para fases posteriores:
 
@@ -286,5 +308,5 @@ Quedan para fases posteriores:
 - informes PDF;
 - regímenes especiales no implementados;
 - reconstrucción completa de cuentas CAP/SUCGS desde movimientos mensuales oficiales;
-- revisión integral WCAG 2.2 y pruebas asistidas con tecnologías de apoyo;
+- auditoría integral WCAG 2.2 y pruebas asistidas con tecnologías de apoyo;
 - revisión visual cruzada de todos los temas en formularios y resultados extensos.
