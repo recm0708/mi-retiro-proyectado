@@ -3413,3 +3413,120 @@ html[data-app-theme="contrast"] .history-fill-action:focus-visible {
   }
 }
 
+
+/* ==========================================================
+   UX.4.2 — estados activos y selección perceptible
+   ========================================================== */
+
+/*
+ * El estado seleccionado del Paso 5 utiliza señales redundantes:
+ * fondo, contorno de fila, realce del radio y badge de estado.
+ * Los tokens son específicos para no endurecer otros componentes
+ * que reutilizan --app-selected-* con una intensidad menor.
+ */
+:root {
+  --app-retirement-selected-bg: #dbeafe;
+  --app-retirement-selected-border: #0d6efd;
+  --app-retirement-selected-text: #10213c;
+  --app-retirement-selected-badge-bg: #0b5ed7;
+  --app-retirement-selected-badge-text: #ffffff;
+  --app-retirement-selected-radio-ring: rgba(13, 110, 253, 0.34);
+}
+
+html[data-bs-theme="dark"] {
+  --app-retirement-selected-bg: #15365e;
+  --app-retirement-selected-border: #7db7ff;
+  --app-retirement-selected-text: #ffffff;
+  --app-retirement-selected-badge-bg: #2f7de1;
+  --app-retirement-selected-badge-text: #ffffff;
+  --app-retirement-selected-radio-ring: rgba(125, 183, 255, 0.38);
+}
+
+html[data-app-theme="contrast"] {
+  --app-retirement-selected-bg: #07192a;
+  --app-retirement-selected-border: #ffdf00;
+  --app-retirement-selected-text: #ffffff;
+  --app-retirement-selected-badge-bg: #ffdf00;
+  --app-retirement-selected-badge-text: #000000;
+  --app-retirement-selected-radio-ring: rgba(255, 223, 0, 0.52);
+}
+
+/* En Claro, el número del paso activo permanece blanco sobre el azul. */
+html[data-bs-theme="light"] .wizard-step.active span {
+  color: #ffffff;
+}
+
+/* La fila seleccionada se percibe como una unidad completa. */
+.retirement-row-selected > td,
+.retirement-row-selected:hover > td {
+  background-color: var(--app-retirement-selected-bg) !important;
+  color: var(--app-retirement-selected-text);
+  box-shadow:
+    inset 0 2px 0 var(--app-retirement-selected-border),
+    inset 0 -2px 0 var(--app-retirement-selected-border);
+}
+
+.retirement-row-selected > td:first-child {
+  box-shadow:
+    inset 4px 0 0 var(--app-retirement-selected-border),
+    inset 0 2px 0 var(--app-retirement-selected-border),
+    inset 0 -2px 0 var(--app-retirement-selected-border);
+}
+
+.retirement-row-selected > td:last-child {
+  box-shadow:
+    inset -2px 0 0 var(--app-retirement-selected-border),
+    inset 0 2px 0 var(--app-retirement-selected-border),
+    inset 0 -2px 0 var(--app-retirement-selected-border);
+}
+
+/* Radio y estado acompañan visualmente la selección de la fila. */
+.retirement-row-selected .retirement-scenario-radio {
+  border-color: var(--app-retirement-selected-border);
+  box-shadow: 0 0 0 0.22rem var(--app-retirement-selected-radio-ring);
+}
+
+.retirement-row-selected .retirement-status-future {
+  background-color: var(--app-retirement-selected-badge-bg);
+  color: var(--app-retirement-selected-badge-text);
+  border: 1px solid var(--app-retirement-selected-border);
+}
+
+/* El foco del radio también permite localizar la fila con teclado. */
+.retirement-row-selectable:focus-within > td {
+  box-shadow:
+    inset 0 2px 0 var(--app-focus),
+    inset 0 -2px 0 var(--app-focus);
+}
+
+.retirement-row-selectable:focus-within > td:first-child {
+  box-shadow:
+    inset 4px 0 0 var(--app-focus),
+    inset 0 2px 0 var(--app-focus),
+    inset 0 -2px 0 var(--app-focus);
+}
+
+/* Respeta los colores de selección del sistema en modos forzados. */
+@media (forced-colors: active) {
+  html[data-bs-theme="light"] .wizard-step.active span {
+    color: HighlightText;
+  }
+
+  .retirement-row-selected > td,
+  .retirement-row-selected:hover > td {
+    background-color: Highlight !important;
+    color: HighlightText;
+    border-color: Highlight;
+  }
+
+  .retirement-row-selected .retirement-status-future {
+    background-color: Highlight;
+    color: HighlightText;
+    border-color: HighlightText;
+  }
+
+  .retirement-row-selected .retirement-scenario-radio {
+    outline: 2px solid HighlightText;
+    outline-offset: 2px;
+  }
+}
