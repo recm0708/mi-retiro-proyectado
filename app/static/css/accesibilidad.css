@@ -1,0 +1,135 @@
+/* ==========================================================
+   UX.4.1 — Accesibilidad semántica y ayudas contextuales
+   ========================================================== */
+
+.context-help-heading {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.context-help-heading .form-label {
+  margin-bottom: 0;
+}
+
+.context-help-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+
+  width: 1.7rem;
+  min-width: 1.7rem;
+  height: 1.7rem;
+  min-height: 1.7rem;
+  padding: 0;
+
+  border: 1px solid color-mix(
+    in srgb,
+    var(--app-primary) 72%,
+    var(--app-control-border)
+  );
+  border-radius: 50%;
+
+  background-color: transparent;
+  color: var(--app-primary);
+
+  font-size: 0.84rem;
+  font-weight: 800;
+  line-height: 1;
+
+  cursor: help;
+}
+
+.context-help-trigger:hover,
+.context-help-trigger:focus-visible,
+.context-help-trigger[aria-expanded="true"] {
+  border-color: var(--app-primary);
+  background-color: var(--app-selected-bg);
+  color: var(--app-primary-hover);
+}
+
+.context-help-trigger:focus-visible,
+.table-scroll-focus:focus-visible {
+  outline: 3px solid var(--app-focus);
+  outline-offset: 3px;
+}
+
+.context-help-panel {
+  position: absolute;
+  top: calc(100% + 0.45rem);
+  left: 0;
+  z-index: 1080;
+
+  width: max-content;
+  min-width: min(18rem, calc(100vw - 3rem));
+  max-width: min(24rem, calc(100vw - 3rem));
+
+  padding: 0.8rem 0.95rem;
+
+  border: 1px solid var(--app-info-border);
+  border-radius: 0.7rem;
+
+  background-color: var(--app-info-bg);
+  color: var(--app-info-text);
+
+  box-shadow:
+    0 12px 28px color-mix(
+      in srgb,
+      #000000 22%,
+      transparent
+    );
+}
+
+.context-help-panel[hidden] {
+  display: none !important;
+}
+
+.context-help-panel strong {
+  display: block;
+  margin-bottom: 0.25rem;
+  color: inherit;
+}
+
+.context-help-panel p {
+  margin: 0;
+}
+
+.form-control[aria-invalid="true"],
+.form-select[aria-invalid="true"] {
+  border-color: var(--bs-danger);
+  box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--bs-danger) 18%, transparent);
+}
+
+.table-scroll-focus {
+  scroll-margin: 1rem;
+}
+
+html[data-app-theme="contrast"] .context-help-trigger {
+  border-width: 2px;
+}
+
+html[data-app-theme="contrast"] .context-help-panel {
+  border-width: 2px;
+}
+
+@media (prefers-contrast: more) {
+  .context-help-trigger,
+  .context-help-panel {
+    border-width: 2px;
+  }
+
+  .context-help-trigger:focus-visible,
+  .table-scroll-focus:focus-visible {
+    outline-width: 4px;
+  }
+}
+
+@media print {
+  .context-help-trigger,
+  .context-help-panel {
+    display: none !important;
+  }
+}

@@ -57,6 +57,11 @@
     href="{{ url_for('static', path='/css/style.css') }}"
   >
 
+  <link
+    rel="stylesheet"
+    href="{{ url_for('static', path='/css/accesibilidad.css') }}"
+  >
+
 
   <!-- Recursos adicionales específicos de cada página. -->
 
@@ -76,7 +81,10 @@
        Barra de navegación principal
        ================================================== -->
 
-  <nav class="navbar navbar-expand-lg navbar-dark app-navbar shadow-sm">
+  <nav
+    class="navbar navbar-expand-lg navbar-dark app-navbar shadow-sm"
+    aria-label="Navegación principal"
+  >
 
     <div class="container">
 
@@ -149,10 +157,18 @@
               Tema visual
             </label>
 
+            <span
+              id="ayuda-selector-tema"
+              class="visually-hidden"
+            >
+              La preferencia visual se guarda únicamente en este navegador.
+            </span>
+
             <select
               class="form-select theme-select"
               id="selector-tema"
               aria-label="Tema visual"
+              aria-describedby="ayuda-selector-tema"
             >
               <option value="system">Seguir sistema</option>
               <option value="light">Claro</option>
@@ -177,6 +193,14 @@
   <main id="contenido-principal" tabindex="-1">
     {% block content %}{% endblock %}
   </main>
+
+  <div
+    id="a11y-global-status"
+    class="visually-hidden"
+    role="status"
+    aria-live="polite"
+    aria-atomic="true"
+  ></div>
 
 
   <!-- ==================================================
@@ -223,6 +247,10 @@
 
   <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+  ></script>
+
+  <script
+    src="{{ url_for('static', path='/js/accesibilidad.js') }}"
   ></script>
 
 

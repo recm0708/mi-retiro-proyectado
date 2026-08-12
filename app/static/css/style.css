@@ -3358,3 +3358,58 @@ main,
     border-top-width: 2px;
   }
 }
+
+/* ==========================================================
+   UX.4.1 — remate visual y microinteracciones
+   ========================================================== */
+
+/* Acción auxiliar del historial: distinguible sin competir con la primaria. */
+.history-fill-action {
+  border-color: var(--app-warning-border);
+  background-color: var(--app-warning-bg);
+  color: var(--app-warning-text);
+  font-weight: 700;
+}
+
+.history-fill-action:hover,
+.history-fill-action:focus-visible {
+  border-color: var(--app-warning-text);
+  background-color: color-mix(
+    in srgb,
+    var(--app-warning-bg) 78%,
+    var(--app-warning-text)
+  );
+  color: var(--app-warning-text);
+}
+
+html[data-app-theme="contrast"] .history-fill-action:hover,
+html[data-app-theme="contrast"] .history-fill-action:focus-visible {
+  background-color: var(--app-warning-text);
+  color: #000000;
+}
+
+/* La fila completa de un escenario futuro funciona como área de selección. */
+.retirement-row-selectable {
+  cursor: pointer;
+}
+
+.retirement-row-selectable:hover > td {
+  background-color: color-mix(
+    in srgb,
+    var(--app-selected-bg) 72%,
+    transparent
+  );
+}
+
+.retirement-row-selected > td,
+.retirement-row-selected:hover > td {
+  background-color: var(--app-selected-bg);
+}
+
+/* El botón SEBD queda alineado con el selector, no con su texto de ayuda. */
+@media (min-width: 992px) {
+  .results-sebd-action-col {
+    padding-top: 2rem;
+  }
+}
+
