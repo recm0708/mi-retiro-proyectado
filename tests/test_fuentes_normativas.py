@@ -1,4 +1,4 @@
-"""Pruebas de la página transversal de metodología y fuentes 6F.3."""
+"""Pruebas de la página transversal de metodología y fuentes."""
 
 import unittest
 
@@ -16,7 +16,7 @@ class TestFuentesNormativas(unittest.TestCase):
         ids = [grupo["id"] for grupo in catalogo["grupos"]]
 
         self.assertEqual(ids, ["sebd", "mixto", "sucgs"])
-        self.assertEqual(catalogo["version"], "6F.3")
+        self.assertEqual(catalogo["version"], "1.0")
 
     def test_fuentes_tienen_etiquetas_humanas_y_https(self):
         catalogo = construir_catalogo_metodologia()
