@@ -231,6 +231,45 @@ function crearEncabezadoLineaTiempo(resumen) {
 
 
 // ============================================================
+// Edad por año calendario
+// ============================================================
+
+/**
+ * Calcula la edad que el Asegurado(a) cumple durante un año calendario.
+ * Esta convención coincide con los comprobantes de Mi Retiro Seguro:
+ * edad = año mostrado - año de nacimiento.
+ *
+ * @param {number} anio Año calendario de la fila.
+ * @returns {number|string} Edad cumplida durante ese año o raya si no hay dato válido.
+ */
+function obtenerEdadEnAnio(anio) {
+  const simulacion = obtenerSimulacion();
+  const fechaNacimiento = simulacion.persona?.fecha_nacimiento;
+
+  if (!fechaNacimiento) {
+    return "—";
+  }
+
+  const anioNacimiento = Number.parseInt(
+    fechaNacimiento.slice(0, 4),
+    10,
+  );
+
+  const anioFila = Number(anio);
+
+  if (
+    !Number.isInteger(anioNacimiento)
+    || !Number.isInteger(anioFila)
+    || anioFila < anioNacimiento
+  ) {
+    return "—";
+  }
+
+  return anioFila - anioNacimiento;
+}
+
+
+// ============================================================
 // Historial real
 // ============================================================
 
@@ -267,6 +306,7 @@ function crearTablaHistorialLineaTiempo(registros) {
 
   const tabla = crearTablaBaseLineaTiempo([
     "Año",
+    "Edad",
     "Cuotas",
     "Salario cotizado/reportado",
     "Estado",
@@ -278,6 +318,7 @@ function crearTablaHistorialLineaTiempo(registros) {
     const fila = document.createElement("tr");
 
     agregarCelda(fila, registro.anio);
+    agregarCelda(fila, obtenerEdadEnAnio(registro.anio));
     agregarCelda(fila, registro.cuotas_historicas);
     agregarCelda(
       fila,
@@ -456,6 +497,7 @@ function crearTablaProyeccionLineaTiempo(
 
   const tabla = crearTablaBaseLineaTiempo([
     "Año",
+    "Edad",
     "Cuotas proyectadas",
     "Salario mensual estimado",
     "Salario cotizado proyectado",
@@ -474,6 +516,7 @@ function crearTablaProyeccionLineaTiempo(
     );
 
     agregarCelda(fila, registro.anio);
+    agregarCelda(fila, obtenerEdadEnAnio(registro.anio));
     agregarCelda(fila, registro.cuotas_proyectadas);
     agregarCelda(
       fila,
