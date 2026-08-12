@@ -1,11 +1,10 @@
 {% extends "base.html" %}
 
-{% block title %}Metodología y fuentes | Calculadora de Pensión CSS{% endblock %}
+{% block title %}Metodología y fuentes | {{ app_name }}{% endblock %}
 
 {% block content %}
 <section class="container py-4 py-lg-5 methodology-page">
   <div class="mb-4">
-    <span class="badge text-bg-primary mb-2">Metodología {{ catalogo.version }}</span>
     <h1 class="display-6 fw-bold mb-2">Metodología y fuentes oficiales</h1>
     <p class="lead text-secondary mb-0">
       Consulta cómo se priorizan las normas, qué artículos utiliza cada motor y desde qué fuente oficial puede verificarse cada referencia.
@@ -13,8 +12,9 @@
   </div>
 
   <div class="alert alert-primary border-0 methodology-disclaimer" role="note">
-    <strong>Estimador independiente.</strong>
-    Esta aplicación explica y documenta sus cálculos, pero no emite resoluciones ni certificaciones de la Caja de Seguro Social de Panamá.
+    <strong>Herramienta independiente de la CSS.</strong>
+    Está dirigida a Asegurados(as) que desean estimar y comprender escenarios de retiro.
+    No emite resoluciones ni certificaciones de la Caja de Seguro Social de Panamá.
   </div>
 
   <section class="methodology-section" aria-labelledby="metodologia-principios">
@@ -44,7 +44,7 @@
           <h3 class="h5">{{ fuente.titulo }}</h3>
           <p class="small text-secondary mb-2">{{ fuente.referencia }}</p>
           <p>{{ fuente.alcance }}</p>
-          <a class="btn btn-sm btn-outline-primary" href="{{ fuente.url }}" target="_blank" rel="noopener noreferrer">
+          <a class="btn btn-sm btn-outline-primary btn-center-content" href="{{ fuente.url }}" target="_blank" rel="noopener noreferrer">
             Abrir fuente oficial
           </a>
         </article>
@@ -90,7 +90,7 @@
                   <h4 class="h6 fw-bold">{{ fuente.titulo }}</h4>
                   <p class="small text-secondary mb-2">{{ fuente.referencia }}</p>
                   <p class="mb-3">{{ fuente.alcance }}</p>
-                  <a class="btn btn-sm btn-outline-primary" href="{{ fuente.url }}" target="_blank" rel="noopener noreferrer">
+                  <a class="btn btn-sm btn-outline-primary btn-center-content" href="{{ fuente.url }}" target="_blank" rel="noopener noreferrer">
                     Abrir fuente oficial
                   </a>
                 </article>
@@ -123,7 +123,7 @@
         <article class="methodology-resource-card h-100">
           <h3 class="h5">{{ recurso.titulo }}</h3>
           <p>{{ recurso.descripcion }}</p>
-          <a class="btn btn-sm btn-outline-primary" href="{{ recurso.url }}" target="_blank" rel="noopener noreferrer">
+          <a class="btn btn-sm btn-outline-primary btn-center-content" href="{{ recurso.url }}" target="_blank" rel="noopener noreferrer">
             Abrir recurso oficial
           </a>
         </article>
@@ -131,11 +131,5 @@
       {% endfor %}
     </div>
   </section>
-
-  <div class="methodology-documentation-note mt-4">
-    <strong>Documentación técnica del proyecto:</strong>
-    el repositorio mantiene el mapa detallado de artículos, decisiones y enlaces versionados en
-    <code>docs/FUENTES_NORMATIVAS.md</code>, <code>docs/NORMATIVA.md</code> y <code>normativa/*.json</code>.
-  </div>
 </section>
 {% endblock %}

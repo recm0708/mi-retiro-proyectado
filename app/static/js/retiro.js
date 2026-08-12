@@ -59,6 +59,59 @@ function formatearFechaRetiro(fechaIso) {
 }
 
 
+/**
+ * Obtiene YYYY-MM desde una fecha ISO o desde un valor mensual.
+ *
+ * @param {string|null|undefined} valor Fecha o mes ISO.
+ * @returns {string} Mes YYYY-MM o cadena vacía.
+ */
+function obtenerMesCuotasDesdeValor(valor) {
+  if (!valor || typeof valor !== "string") {
+    return "";
+  }
+
+  return /^\d{4}-\d{2}/.test(valor)
+    ? valor.slice(0, 7)
+    : "";
+}
+
+
+/**
+ * Convierte el último mes acreditado en la fecha de corte usada por la API.
+ * Los meses anteriores cierran en su último día. Si coincide con el mes de
+ * evaluación, se limita al propio día de evaluación.
+ *
+ * @param {string} mesIso Mes YYYY-MM.
+ * @param {string} fechaEvaluacionIso Fecha YYYY-MM-DD.
+ * @returns {string} Fecha YYYY-MM-DD.
+ */
+function convertirMesCuotasAFechaCorte(
+  mesIso,
+  fechaEvaluacionIso,
+) {
+  if (!/^\d{4}-\d{2}$/.test(mesIso)) {
+    throw new Error(
+      "Debes indicar el último mes con cuotas acreditadas.",
+    );
+  }
+
+  const [anio, mes] = mesIso.split("-").map(Number);
+  const ultimoDia = new Date(anio, mes, 0).getDate();
+  const fechaFinMes = `${mesIso}-${String(ultimoDia).padStart(2, "0")}`;
+
+  if (
+    fechaEvaluacionIso
+    && obtenerMesCuotasDesdeValor(fechaEvaluacionIso) === mesIso
+  ) {
+    return fechaEvaluacionIso < fechaFinMes
+      ? fechaEvaluacionIso
+      : fechaFinMes;
+  }
+
+  return fechaFinMes;
+}
+
+
 // ============================================================
 // Preparación y restauración
 // ============================================================
@@ -117,8 +170,8 @@ function prepararPasoRetiro() {
     "fecha_corte_retiro",
   );
 
-  const fechaCuotas = document.getElementById(
-    "fecha_corte_cuotas",
+  const ultimoMesCuotas = document.getElementById(
+    "ultimo_mes_cuotas",
   );
 
   const hoy = obtenerFechaLocalActual();
@@ -130,15 +183,18 @@ function prepararPasoRetiro() {
     );
   }
 
-  if (!fechaCuotas.value) {
-    fechaCuotas.value = (
-      simulacion.retiro?.fecha_corte_cuotas
-      || fechaEvaluacion.value
-      || hoy
+  if (!ultimoMesCuotas.value) {
+    ultimoMesCuotas.value = (
+      simulacion.retiro?.ultimo_mes_cuotas
+      || obtenerMesCuotasDesdeValor(
+        simulacion.retiro?.fecha_corte_cuotas,
+      )
+      || obtenerMesCuotasDesdeValor(fechaEvaluacion.value)
+      || obtenerMesCuotasDesdeValor(hoy)
     );
   }
 
-  actualizarLimiteFechaCuotas();
+  actualizarLimiteUltimoMesCuotas();
 }
 
 
@@ -157,10 +213,18 @@ function restaurarDatosRetiro() {
     ).value = retiro.fecha_corte;
   }
 
-  if (retiro.fecha_corte_cuotas) {
+  if (
+    retiro.ultimo_mes_cuotas
+    || retiro.fecha_corte_cuotas
+  ) {
     document.getElementById(
-      "fecha_corte_cuotas",
-    ).value = retiro.fecha_corte_cuotas;
+      "ultimo_mes_cuotas",
+    ).value = (
+      retiro.ultimo_mes_cuotas
+      || obtenerMesCuotasDesdeValor(
+        retiro.fecha_corte_cuotas,
+      )
+    );
   }
 
   if (Array.isArray(retiro.anios_adicionales)) {
@@ -197,7 +261,7 @@ function restaurarDatosRetiro() {
   ).value = retiro.fecha_retiro_personalizada || "";
 
   actualizarEstadoFechaPersonalizada();
-  actualizarLimiteFechaCuotas();
+  actualizarLimiteUltimoMesCuotas();
 
   if (simulacion.resumen_retiro) {
     mostrarResumenRetiro(
@@ -215,23 +279,27 @@ function restaurarDatosRetiro() {
  * Impide que la fecha de actualización de cuotas quede después
  * de la fecha utilizada para evaluar la simulación.
  */
-function actualizarLimiteFechaCuotas() {
+function actualizarLimiteUltimoMesCuotas() {
   const fechaEvaluacion = document.getElementById(
     "fecha_corte_retiro",
   ).value;
 
-  const fechaCuotas = document.getElementById(
-    "fecha_corte_cuotas",
+  const ultimoMesCuotas = document.getElementById(
+    "ultimo_mes_cuotas",
   );
 
-  fechaCuotas.max = fechaEvaluacion || "";
+  const mesMaximo = obtenerMesCuotasDesdeValor(
+    fechaEvaluacion,
+  );
+
+  ultimoMesCuotas.max = mesMaximo;
 
   if (
-    fechaEvaluacion
-    && fechaCuotas.value
-    && fechaCuotas.value > fechaEvaluacion
+    mesMaximo
+    && ultimoMesCuotas.value
+    && ultimoMesCuotas.value > mesMaximo
   ) {
-    fechaCuotas.value = fechaEvaluacion;
+    ultimoMesCuotas.value = mesMaximo;
   }
 }
 
@@ -316,7 +384,7 @@ function invalidarResumenRetiro() {
 // ============================================================
 
 /**
- * Obtiene los años adicionales seleccionados por el usuario.
+ * Obtiene los años adicionales seleccionados por el Asegurado(a).
  * La edad de referencia siempre se envía como escenario base 0.
  *
  * @returns {number[]} Años adicionales ordenados.
@@ -374,21 +442,30 @@ function construirDatosRetiro() {
     "fecha_corte_retiro",
   ).value;
 
-  const fechaCuotas = document.getElementById(
-    "fecha_corte_cuotas",
+  const ultimoMesCuotas = document.getElementById(
+    "ultimo_mes_cuotas",
   ).value;
 
-  if (!fechaEvaluacion || !fechaCuotas) {
+  if (!fechaEvaluacion || !ultimoMesCuotas) {
     throw new Error(
-      "Debes indicar la fecha de evaluación y la fecha de actualización de cuotas.",
+      "Debes indicar la fecha de evaluación y el último mes con cuotas acreditadas.",
     );
   }
 
-  if (fechaCuotas > fechaEvaluacion) {
+  const mesEvaluacion = obtenerMesCuotasDesdeValor(
+    fechaEvaluacion,
+  );
+
+  if (ultimoMesCuotas > mesEvaluacion) {
     throw new Error(
-      "La fecha de actualización de cuotas no puede ser posterior a la fecha de evaluación.",
+      "El último mes con cuotas acreditadas no puede ser posterior al mes de evaluación.",
     );
   }
+
+  const fechaCuotas = convertirMesCuotasAFechaCorte(
+    ultimoMesCuotas,
+    fechaEvaluacion,
+  );
 
   const usarPersonalizada = document.getElementById(
     "usar_fecha_retiro_personalizada",
@@ -410,6 +487,7 @@ function construirDatosRetiro() {
     fecha_nacimiento: persona.fecha_nacimiento,
     sexo: persona.sexo,
     fecha_corte: fechaEvaluacion,
+    ultimo_mes_cuotas: ultimoMesCuotas,
     fecha_corte_cuotas: fechaCuotas,
     cuotas_reales: Number(
       cuotas.cuotas_totales,
@@ -763,7 +841,7 @@ function obtenerClaveEscenarioRetiro(escenario) {
 /**
  * Guarda el escenario que se utilizará en el Paso 6.
  *
- * @param {Object} escenario Escenario elegido por el usuario.
+ * @param {Object} escenario Escenario elegido por el Asegurado(a).
  */
 function seleccionarEscenarioRetiro(escenario) {
   const simulacion = obtenerSimulacion();
@@ -917,7 +995,7 @@ function agregarCeldaRetiro(
 /**
  * Amplía el horizonte del Paso 4 hasta el escenario de retiro más lejano.
  *
- * La modificación solo actualiza el año final editable; el usuario debe
+ * La modificación solo actualiza el año final editable; el Asegurado(a) debe
  * volver a generar la proyección para confirmar los nuevos resultados.
  */
 function ajustarHorizonteProyeccionDesdeRetiro() {
@@ -959,7 +1037,7 @@ function ajustarHorizonteProyeccionDesdeRetiro() {
 /**
  * Muestra un error del Paso 5.
  *
- * @param {string} mensaje Texto que se presentará al usuario.
+ * @param {string} mensaje Texto que se presentará al Asegurado(a).
  */
 function mostrarErrorRetiro(mensaje) {
   const error = document.getElementById(
@@ -1035,13 +1113,13 @@ document.addEventListener(
     ).addEventListener(
       "change",
       () => {
-        actualizarLimiteFechaCuotas();
+        actualizarLimiteUltimoMesCuotas();
         invalidarResumenRetiro();
       },
     );
 
     document.getElementById(
-      "fecha_corte_cuotas",
+      "ultimo_mes_cuotas",
     ).addEventListener(
       "change",
       invalidarResumenRetiro,

@@ -114,6 +114,37 @@ def _calcular_edad(
     return edad
 
 
+def _fecha_corte_desde_ultimo_mes(
+    ultimo_mes: str,
+    fecha_evaluacion: date,
+) -> date:
+    """Convierte YYYY-MM en una fecha de corte mensual coherente.
+
+    El último mes acreditado no puede ser posterior al mes en que se
+    realiza la evaluación. Para meses anteriores se utiliza el último día
+    del mes; si coincide con el mes de evaluación, la fecha se limita al
+    propio día de evaluación para no crear una fecha futura artificial.
+    """
+
+    anio_texto, mes_texto = ultimo_mes.split("-", maxsplit=1)
+    anio = int(anio_texto)
+    mes = int(mes_texto)
+
+    if (anio, mes) > (fecha_evaluacion.year, fecha_evaluacion.month):
+        raise ValueError(
+            "El último mes con cuotas acreditadas no puede "
+            "ser posterior al mes de la fecha de evaluación."
+        )
+
+    ultimo_dia = monthrange(anio, mes)[1]
+    fecha_mes = date(anio, mes, ultimo_dia)
+
+    if (anio, mes) == (fecha_evaluacion.year, fecha_evaluacion.month):
+        return min(fecha_mes, fecha_evaluacion)
+
+    return fecha_mes
+
+
 # ============================================================
 # Estimación de cuotas
 # ============================================================
@@ -149,7 +180,7 @@ def _estimar_cuotas_hasta_fecha(
     se aplica ``cuotas_esperadas_por_anio``.
 
     Esto evita que una densidad futura de 12 cuotas por año agregue
-    cuotas al año actual cuando el usuario ya indicó, por ejemplo,
+    cuotas al año actual cuando el Asegurado(a) ya indicó, por ejemplo,
     que ese año cerrará con la misma cantidad que ya tiene acreditada.
     """
 
@@ -169,7 +200,7 @@ def _estimar_cuotas_hasta_fecha(
 
     # Si el objetivo todavía está dentro del mismo año, la cantidad
     # estimada no puede exceder ni los meses transcurridos ni el cierre
-    # anual que el usuario definió en el Paso 2.
+    # anual que el Asegurado(a) definió en el Paso 2.
     if fecha_objetivo.year == anio_actual:
         meses_disponibles = (
             _meses_completos_entre(
@@ -292,10 +323,25 @@ def analizar_retiro(
         or date.today()
     )
 
-    fecha_corte_cuotas = (
-        datos.fecha_corte_cuotas
-        or fecha_corte
-    )
+    if datos.ultimo_mes_cuotas:
+        fecha_corte_cuotas = _fecha_corte_desde_ultimo_mes(
+            datos.ultimo_mes_cuotas,
+            fecha_corte,
+        )
+
+        if (
+            datos.fecha_corte_cuotas is not None
+            and datos.fecha_corte_cuotas != fecha_corte_cuotas
+        ):
+            raise ValueError(
+                "El último mes acreditado y la fecha de corte de cuotas "
+                "deben representar el mismo cierre."
+            )
+    else:
+        fecha_corte_cuotas = (
+            datos.fecha_corte_cuotas
+            or fecha_corte
+        )
 
     if datos.fecha_nacimiento > fecha_corte:
         raise ValueError(
@@ -511,6 +557,14 @@ def analizar_retiro(
         ),
         advertencias=advertencias,
         metodo_estimacion_cuotas=(
+            (
+                "El último mes con cuotas acreditadas define el cierre "
+                "del historial real. "
+            )
+            if datos.ultimo_mes_cuotas
+            else ""
+        )
+        + (
             "El año actual respeta las cuotas esperadas al cierre "
             "definidas en el Paso 2. Desde el año siguiente se usa "
             "la densidad anual esperada. Las cuotas dentro de un "

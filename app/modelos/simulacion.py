@@ -35,7 +35,7 @@ def _validar_precision_dos_decimales(
 # ============================================================
 
 class DatosCuotas(BaseModel):
-    """Datos de cuotas proporcionados por el usuario."""
+    """Datos de cuotas proporcionados por el Asegurado(a)."""
 
     cuotas_totales: int = Field(
         ge=0,
@@ -210,7 +210,7 @@ class DatosSalario(BaseModel):
     monto: float = Field(
         gt=0,
         description=(
-            "Monto salarial actual indicado por el usuario."
+            "Monto salarial actual indicado por el Asegurado(a)."
         ),
     )
 
@@ -460,14 +460,26 @@ class DatosRetiro(BaseModel):
         ),
     )
 
-    # Las cuotas reales pueden provenir de un reporte cuya fecha
-    # sea anterior a la fecha en que se realiza la simulación.
+    # Las cuotas reales pueden provenir de un reporte cuyo último mes
+    # acreditado sea anterior al momento en que se realiza la simulación.
+    # UX.3 permite expresar ese dato como YYYY-MM y conserva la fecha
+    # exacta de corte para compatibilidad y trazabilidad interna.
+    ultimo_mes_cuotas: str | None = Field(
+        default=None,
+        pattern=r"^\d{4}-(0[1-9]|1[0-2])$",
+        description=(
+            "Último mes con cuotas reales acreditadas, en formato YYYY-MM. "
+            "Cuando se proporciona, el servicio deriva la fecha de corte "
+            "al último día de ese mes, limitada por la fecha de evaluación."
+        ),
+    )
+
     fecha_corte_cuotas: date | None = Field(
         default=None,
         description=(
-            "Fecha hasta la cual se consideran acreditadas "
-            "las cuotas reales. Si se omite, se utiliza "
-            "la fecha de corte de la evaluación."
+            "Fecha exacta hasta la cual se consideran acreditadas "
+            "las cuotas reales. Se conserva para compatibilidad; cuando "
+            "se informa ultimo_mes_cuotas ambos valores deben ser coherentes."
         ),
     )
 

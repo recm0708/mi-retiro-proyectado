@@ -1,5 +1,5 @@
 /* ==========================================================
-   Calculadora de Pensión CSS
+   Mi Retiro Proyectado
    Hoja de estilos principal
    ========================================================== */
 
@@ -18,10 +18,32 @@
 
 :root {
   --app-primary: #0d6efd;
+  --app-primary-hover: #0b5ed7;
+  --app-primary-border: #cfe0ff;
   --app-dark: #172033;
   --app-muted: #65758b;
   --app-background: #f6f8fb;
+  --app-surface: #ffffff;
+  --app-surface-subtle: #fbfcfe;
+  --app-surface-accent: #f8faff;
+  --app-surface-muted: #f8f9fb;
+  --app-info-bg: #f4f8ff;
+  --app-info-text: #40516b;
   --app-border: #e7ebf1;
+  --app-border-strong: #dfe8f7;
+  --app-info-border: #d9e7ff;
+  --app-line: #d9e1ec;
+  --app-control-border: #dce3ec;
+  --app-selected-bg: #f3f7ff;
+  --app-selected-border: #c7d8f5;
+  --app-warning-bg: #fff4d6;
+  --app-warning-text: #8a6100;
+  --app-footer-bg: #172033;
+  --app-footer-text: #d7dfeb;
+  --app-focus: #0b5ed7;
+  --app-font-base: 1rem;
+  --app-font-important: clamp(1.45rem, 1.8vw, 2rem);
+  --app-radius: 0.9rem;
 }
 
 /* ==========================================================
@@ -55,7 +77,7 @@ body {
       rgba(13, 110, 253, 0.12),
       transparent 35%
     ),
-    #ffffff;
+    var(--app-surface);
 }
 
 .navbar-brand {
@@ -69,9 +91,9 @@ body {
 
   padding: 1rem;
 
-  background-color: #f8faff;
+  background-color: var(--app-surface-accent);
 
-  border: 1px solid #dfe8f7;
+  border: 1px solid var(--app-border-strong);
   border-radius: 0.75rem;
 }
 
@@ -81,13 +103,13 @@ body {
 
 .system-card span {
   color: var(--app-muted);
-  font-size: 0.92rem;
+  font-size: var(--app-font-base);
 }
 
 .feature-card {
   padding: 1.75rem;
 
-  background-color: #ffffff;
+  background-color: var(--app-surface);
 
   border: 1px solid var(--app-border);
   border-radius: 1rem;
@@ -102,13 +124,10 @@ body {
 }
 
 .footer {
-  background-color: #172033;
-  color: #ffffff;
+  background-color: var(--app-footer-bg);
+  color: var(--app-footer-text);
 }
 
-.footer small {
-  color: #b8c2d3;
-}
 
 /* ==========================================================
    Asistente de simulación
@@ -158,7 +177,7 @@ body {
 }
 
 .wizard-step:focus-visible {
-  outline: 3px solid rgba(13, 110, 253, 0.25);
+  outline: 3px solid color-mix(in srgb, var(--app-focus) 35%, transparent);
   outline-offset: 0.35rem;
   border-radius: 0.5rem;
 }
@@ -176,10 +195,10 @@ body {
   width: 42px;
   height: 42px;
 
-  border: 2px solid #d9e1ec;
+  border: 2px solid var(--app-line);
   border-radius: 50%;
 
-  background-color: #ffffff;
+  background-color: var(--app-surface);
   color: var(--app-muted);
 
   font-weight: 700;
@@ -193,7 +212,7 @@ body {
 .wizard-step.active span {
   border-color: var(--app-primary);
   background-color: var(--app-primary);
-  color: #ffffff;
+  color: var(--app-surface);
 }
 
 .wizard-step.active small {
@@ -205,23 +224,23 @@ body {
   flex: 1;
   height: 2px;
   margin-top: 21px;
-  background-color: #d9e1ec;
+  background-color: var(--app-line);
 }
 
 .info-box {
   padding: 1rem 1.25rem;
 
-  background-color: #f4f8ff;
+  background-color: var(--app-info-bg);
 
-  border: 1px solid #d9e7ff;
+  border: 1px solid var(--app-info-border);
   border-radius: 0.75rem;
 
-  color: #40516b;
+  color: var(--app-info-text);
 }
 
 .form-control,
 .form-select {
-  border-color: #dce3ec;
+  border-color: var(--app-control-border);
 }
 
 .form-control:focus,
@@ -229,7 +248,7 @@ body {
   border-color: var(--app-primary);
 
   box-shadow:
-    0 0 0 0.2rem rgba(13, 110, 253, 0.12);
+    0 0 0 0.2rem color-mix(in srgb, var(--app-focus) 18%, transparent);
 }
 
 @media (max-width: 768px) {
@@ -281,9 +300,9 @@ body {
 
   padding: 1.25rem 1.5rem;
 
-  background-color: #f8faff;
+  background-color: var(--app-surface-accent);
 
-  border: 1px solid #dfe8f7;
+  border: 1px solid var(--app-border-strong);
   border-radius: 0.9rem;
 }
 
@@ -291,7 +310,7 @@ body {
   margin-bottom: 0.5rem;
 
   color: var(--app-muted);
-  font-size: 0.9rem;
+  font-size: var(--app-font-base);
   font-weight: 600;
 }
 
@@ -386,9 +405,9 @@ body {
 
   padding: 1.25rem 1.5rem;
 
-  background-color: #f4f8ff;
+  background-color: var(--app-info-bg);
 
-  border: 1px solid #d9e7ff;
+  border: 1px solid var(--app-info-border);
   border-radius: 0.9rem;
 }
 
@@ -399,7 +418,7 @@ body {
 
 .projection-base-label {
   color: var(--app-muted);
-  font-size: 0.9rem;
+  font-size: var(--app-font-base);
   font-weight: 600;
 }
 
@@ -417,7 +436,7 @@ body {
 .projection-base-note {
   color: var(--app-muted);
 
-  font-size: 0.9rem;
+  font-size: var(--app-font-base);
   text-align: right;
 }
 
@@ -430,7 +449,7 @@ body {
   margin-top: 1.5rem;
   padding: 1.5rem;
 
-  background-color: #fbfcfe;
+  background-color: var(--app-surface-subtle);
 
   border: 1px solid var(--app-border);
   border-radius: 0.9rem;
@@ -458,20 +477,20 @@ body {
 
   padding: 1rem 1.25rem;
 
-  background-color: #f8faff;
+  background-color: var(--app-surface-accent);
 }
 
 .projection-scenario-title {
   margin: 0;
 
-  font-size: 1rem;
+  font-size: var(--app-font-base);
   font-weight: 700;
 }
 
 .projection-rate {
   color: var(--app-primary);
 
-  font-size: 0.9rem;
+  font-size: var(--app-font-base);
   font-weight: 600;
 
   white-space: nowrap;
@@ -533,7 +552,7 @@ body {
   top: 0;
   z-index: 2;
 
-  background-color: #f8faff;
+  background-color: var(--app-surface-accent);
 }
 
 .history-table th {
@@ -575,7 +594,7 @@ body {
 
 .history-toolbar-note {
   color: var(--app-muted);
-  font-size: 0.9rem;
+  font-size: var(--app-font-base);
 }
 
 
@@ -593,7 +612,7 @@ body {
 
   border-radius: 999px;
 
-  font-size: 0.8rem;
+  font-size: var(--app-font-base);
   font-weight: 700;
 
   white-space: nowrap;
@@ -601,7 +620,7 @@ body {
 
 .history-status-pending {
   background-color: #eef1f5;
-  color: #65758b;
+  color: var(--app-muted);
 }
 
 .history-status-none {
@@ -610,8 +629,8 @@ body {
 }
 
 .history-status-partial {
-  background-color: #fff4d6;
-  color: #8a6100;
+  background-color: var(--app-warning-bg);
+  color: var(--app-warning-text);
 }
 
 .history-status-complete {
@@ -646,9 +665,9 @@ body {
   margin-bottom: 1.5rem;
   padding: 1.1rem 1.25rem;
 
-  background-color: #f4f8ff;
+  background-color: var(--app-info-bg);
 
-  border: 1px solid #d9e7ff;
+  border: 1px solid var(--app-info-border);
   border-radius: 0.9rem;
 }
 
@@ -677,7 +696,7 @@ body {
   top: 0;
   z-index: 2;
 
-  background-color: #f8faff;
+  background-color: var(--app-surface-accent);
 }
 
 .timeline-table th,
@@ -693,7 +712,7 @@ body {
 .timeline-current-year {
   padding: 1.25rem;
 
-  background-color: #fbfcfe;
+  background-color: var(--app-surface-subtle);
 
   border: 1px solid var(--app-border);
   border-radius: 0.9rem;
@@ -708,15 +727,15 @@ body {
   min-height: 145px;
   padding: 1.15rem 1.25rem;
 
-  background-color: #ffffff;
+  background-color: var(--app-surface);
 
-  border: 1px solid #dfe8f7;
+  border: 1px solid var(--app-border-strong);
   border-radius: 0.85rem;
 }
 
 .timeline-current-label {
   color: var(--app-muted);
-  font-size: 0.88rem;
+  font-size: var(--app-font-base);
   font-weight: 700;
 }
 
@@ -726,7 +745,7 @@ body {
 }
 
 .timeline-current-salary {
-  font-size: 1.05rem;
+  font-size: var(--app-font-base);
   font-weight: 700;
   white-space: nowrap;
 }
@@ -741,7 +760,7 @@ body {
 
   border-radius: 999px;
 
-  font-size: 0.78rem;
+  font-size: 0.875rem;
   font-weight: 700;
   white-space: nowrap;
 }
@@ -757,13 +776,13 @@ body {
 }
 
 .timeline-status-partial {
-  background-color: #fff4d6;
-  color: #8a6100;
+  background-color: var(--app-warning-bg);
+  color: var(--app-warning-text);
 }
 
 .timeline-status-mixed {
   background-color: #eaf2ff;
-  color: #0b5ed7;
+  color: var(--app-primary-hover);
 }
 
 .timeline-status-projected {
@@ -773,7 +792,7 @@ body {
 
 .timeline-status-pending {
   background-color: #eef1f5;
-  color: #65758b;
+  color: var(--app-muted);
 }
 
 @media (max-width: 768px) {
@@ -795,7 +814,7 @@ body {
 .retirement-context-card {
   padding: 1.15rem 1.25rem;
 
-  background-color: #fbfcfe;
+  background-color: var(--app-surface-subtle);
 
   border: 1px solid var(--app-border);
   border-radius: 0.9rem;
@@ -806,7 +825,7 @@ body {
   margin-bottom: 0.3rem;
 
   color: var(--app-muted);
-  font-size: 0.82rem;
+  font-size: var(--app-font-base);
   font-weight: 700;
 }
 
@@ -814,7 +833,7 @@ body {
   display: block;
 
   color: var(--app-text);
-  font-size: 1.05rem;
+  font-size: var(--app-font-base);
 }
 
 .retirement-option-grid {
@@ -831,7 +850,7 @@ body {
   min-height: 110px;
   padding: 1rem;
 
-  background-color: #ffffff;
+  background-color: var(--app-surface);
 
   border: 1px solid var(--app-border);
   border-radius: 0.85rem;
@@ -844,14 +863,14 @@ body {
 }
 
 .retirement-option-fixed {
-  background-color: #f8faff;
+  background-color: var(--app-surface-accent);
   cursor: default;
 }
 
 .retirement-custom-card {
   padding: 1.15rem 1.25rem;
 
-  background-color: #fbfcfe;
+  background-color: var(--app-surface-subtle);
 
   border: 1px solid var(--app-border);
   border-radius: 0.9rem;
@@ -866,15 +885,15 @@ body {
   min-height: 105px;
   padding: 1rem 1.1rem;
 
-  background-color: #ffffff;
+  background-color: var(--app-surface);
 
-  border: 1px solid #dfe8f7;
+  border: 1px solid var(--app-border-strong);
   border-radius: 0.85rem;
 }
 
 .retirement-summary-card span {
   color: var(--app-muted);
-  font-size: 0.82rem;
+  font-size: var(--app-font-base);
   font-weight: 700;
 }
 
@@ -899,7 +918,7 @@ body {
 }
 
 .retirement-table thead {
-  background-color: #f8faff;
+  background-color: var(--app-surface-accent);
 }
 
 .retirement-status {
@@ -908,19 +927,19 @@ body {
 
   border-radius: 999px;
 
-  font-size: 0.78rem;
+  font-size: 0.875rem;
   font-weight: 700;
   white-space: nowrap;
 }
 
 .retirement-status-future {
   background-color: #eaf2ff;
-  color: #0b5ed7;
+  color: var(--app-primary-hover);
 }
 
 .retirement-status-past {
-  background-color: #fff4d6;
-  color: #8a6100;
+  background-color: var(--app-warning-bg);
+  color: var(--app-warning-text);
 }
 
 @media (max-width: 1200px) {
@@ -1050,7 +1069,7 @@ body {
 }
 
 .retirement-row-selected > td {
-  background-color: #f3f7ff;
+  background-color: var(--app-selected-bg);
 }
 
 .retirement-selection-card {
@@ -1061,9 +1080,9 @@ body {
 
   padding: 1.15rem 1.25rem;
 
-  background-color: #f8faff;
+  background-color: var(--app-surface-accent);
 
-  border: 1px solid #d9e7ff;
+  border: 1px solid var(--app-info-border);
   border-radius: 0.9rem;
 }
 
@@ -1076,7 +1095,7 @@ body {
 .results-calculation-card {
   padding: 1.2rem 1.3rem;
 
-  background-color: #fbfcfe;
+  background-color: var(--app-surface-subtle);
 
   border: 1px solid var(--app-border);
   border-radius: 0.9rem;
@@ -1087,7 +1106,7 @@ body {
   margin-bottom: 0.3rem;
 
   color: var(--app-muted);
-  font-size: 0.82rem;
+  font-size: var(--app-font-base);
   font-weight: 700;
 }
 
@@ -1095,7 +1114,7 @@ body {
   display: block;
 
   color: var(--app-dark);
-  font-size: 1.02rem;
+  font-size: var(--app-font-base);
 }
 
 .results-summary-card {
@@ -1107,15 +1126,15 @@ body {
   min-height: 150px;
   padding: 1.2rem 1.3rem;
 
-  background-color: #ffffff;
+  background-color: var(--app-surface);
 
-  border: 1px solid #dfe8f7;
+  border: 1px solid var(--app-border-strong);
   border-radius: 0.9rem;
 }
 
 .results-summary-card > span {
   color: var(--app-muted);
-  font-size: 0.86rem;
+  font-size: var(--app-font-base);
   font-weight: 700;
 }
 
@@ -1139,14 +1158,14 @@ body {
 }
 
 .results-summary-primary {
-  background-color: #f4f8ff;
-  border-color: #cfe0ff;
+  background-color: var(--app-info-bg);
+  border-color: var(--app-primary-border);
 }
 
 .results-section {
   padding: 1.25rem;
 
-  background-color: #fbfcfe;
+  background-color: var(--app-surface-subtle);
 
   border: 1px solid var(--app-border);
   border-radius: 0.9rem;
@@ -1165,21 +1184,21 @@ body {
   min-height: 100px;
   padding: 1rem 1.1rem;
 
-  background-color: #ffffff;
+  background-color: var(--app-surface);
 
-  border: 1px solid #dfe8f7;
+  border: 1px solid var(--app-border-strong);
   border-radius: 0.8rem;
 }
 
 .results-detail-card span {
   color: var(--app-muted);
-  font-size: 0.82rem;
+  font-size: var(--app-font-base);
   font-weight: 700;
 }
 
 .results-detail-card strong {
   color: var(--app-dark);
-  font-size: 1.05rem;
+  font-size: var(--app-font-base);
 
   font-variant-numeric: tabular-nums;
 }
@@ -1202,7 +1221,7 @@ body {
 }
 
 .results-table thead {
-  background-color: #f8faff;
+  background-color: var(--app-surface-accent);
 }
 
 .results-origin {
@@ -1212,7 +1231,7 @@ body {
 
   border-radius: 999px;
 
-  font-size: 0.78rem;
+  font-size: 0.875rem;
   font-weight: 700;
 
   white-space: nowrap;
@@ -1231,7 +1250,7 @@ body {
 .results-source-card {
   padding: 1rem 1.15rem;
 
-  background-color: #f8f9fb;
+  background-color: var(--app-surface-muted);
 
   border: 1px solid var(--app-border);
   border-radius: 0.85rem;
@@ -1274,7 +1293,7 @@ body {
 }
 
 .results-modality-card > strong {
-  font-size: 1.15rem;
+  font-size: var(--app-font-base);
 }
 
 /* ============================================================
@@ -1282,12 +1301,12 @@ body {
    ============================================================ */
 
 .results-detail-emphasis {
-  background-color: #f4f8ff;
-  border-color: #cfe0ff;
+  background-color: var(--app-info-bg);
+  border-color: var(--app-primary-border);
 }
 
 #resultado-config-mixto .alert-secondary {
-  background-color: #f8f9fb;
+  background-color: var(--app-surface-muted);
   border-color: var(--app-border);
 }
 
@@ -1296,7 +1315,7 @@ body {
 }
 
 /* ==========================================================
-   6F.1 — Comparador de escenarios
+   Comparador de escenarios
    ========================================================== */
 
 .comparison-container {
@@ -1310,12 +1329,12 @@ body {
 .comparison-meta-label {
   margin-bottom: 0.35rem;
   color: var(--app-muted);
-  font-size: 0.88rem;
+  font-size: var(--app-font-base);
   font-weight: 600;
 }
 
 .comparison-meta-value {
-  font-size: 1.05rem;
+  font-size: var(--app-font-base);
   font-weight: 700;
 }
 
@@ -1333,19 +1352,19 @@ body {
 
   border: 1px solid var(--app-border);
   border-radius: 0.8rem;
-  background-color: #ffffff;
+  background-color: var(--app-surface);
 
   cursor: pointer;
 }
 
 .comparison-option:hover {
-  border-color: #c7d8f5;
-  background-color: #f8faff;
+  border-color: var(--app-selected-border);
+  background-color: var(--app-surface-accent);
 }
 
 .comparison-option:has(input:disabled) {
   cursor: default;
-  background-color: #f4f8ff;
+  background-color: var(--app-info-bg);
 }
 
 .comparison-option .form-check-input {
@@ -1370,8 +1389,8 @@ body {
 }
 
 .comparison-table th {
-  color: #40516b;
-  font-size: 0.86rem;
+  color: var(--app-info-text);
+  font-size: var(--app-font-base);
   white-space: nowrap;
 }
 
@@ -1394,7 +1413,7 @@ body {
 }
 
 /* ============================================================
-   6F.2 — Trazabilidad y cálculo completo
+   Trazabilidad y cálculo completo
    ============================================================ */
 
 .results-trace-card {
@@ -1435,7 +1454,7 @@ body {
 }
 
 .trace-data-card strong {
-  font-size: 1.05rem;
+  font-size: var(--app-font-base);
 }
 
 .trace-data-card small {
@@ -1448,7 +1467,7 @@ body {
   margin-top: 0.3rem;
   padding: 0.2rem 0.55rem;
   border-radius: 999px;
-  font-size: 0.78rem;
+  font-size: 0.875rem;
   font-weight: 700;
 }
 
@@ -1484,7 +1503,7 @@ body {
   flex: 0 0 2rem;
   border-radius: 999px;
   background: var(--bs-primary);
-  color: #fff;
+  color: var(--app-surface);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1552,12 +1571,12 @@ body {
 
 
 /* ==========================================================
-   Metodología 6F.3 y fuentes legibles en trazabilidad
+   Metodología y fuentes legibles en trazabilidad
    ========================================================== */
 
 .trace-step-sources {
   margin-top: 0.75rem;
-  font-size: 0.875rem;
+  font-size: var(--app-font-base);
   color: var(--bs-secondary-color);
 }
 
@@ -1628,4 +1647,1714 @@ body {
   border-radius: 0.85rem;
   padding: 1rem 1.25rem;
   background: var(--bs-tertiary-bg);
+}
+
+
+/* ==========================================================
+   Tipografía unificada para la interfaz del Asegurado(a)
+   ========================================================== */
+
+/*
+ * Todo texto de lectura, ayuda, controles y tablas usa una base común.
+ * Solo encabezados, métricas principales y valores de resultado se
+ * separan de esta escala para mantener jerarquía visual.
+ */
+body,
+.form-control,
+.form-select,
+.btn,
+.table,
+.nav-link,
+.navbar-brand,
+.accordion-button,
+.small,
+small,
+.lead,
+.form-text,
+.text-secondary,
+.footer-copy,
+.footer-link {
+  font-size: var(--app-font-base);
+}
+
+.summary-label,
+.projection-base-label,
+.projection-base-note,
+.projection-rate,
+.history-toolbar-note,
+.history-status,
+.timeline-current-label,
+.retirement-context-label,
+.results-context-label,
+.results-summary-card > span,
+.results-detail-card span,
+.results-detail-card strong,
+.comparison-meta-label,
+.comparison-meta-value,
+.comparison-table th,
+.trace-data-card strong,
+.trace-data-card small,
+.trace-step-sources,
+.methodology-source-card p,
+.methodology-principle-card p {
+  font-size: var(--app-font-base);
+}
+
+/* Valores que el Asegurado(a) necesita identificar con rapidez. */
+.summary-value,
+.salary-value,
+.projection-base-value,
+.timeline-current-quotas,
+.results-summary-card > strong,
+.trace-final-result strong {
+  font-size: var(--app-font-important);
+}
+
+/* Valores secundarios importantes, sin competir con el resultado final. */
+.timeline-current-salary,
+.retirement-summary-card strong {
+  font-size: 1.25rem;
+}
+
+/* Los estados compactos se conservan como elementos de señalización. */
+.badge,
+.results-tag,
+.timeline-badge,
+.trace-badge {
+  font-size: 0.875rem;
+}
+
+/* Pie de página y vínculo oficial. */
+.footer-copy {
+  color: #c8d1df;
+}
+
+.footer-link {
+  color: var(--app-surface);
+  text-decoration: underline;
+  text-underline-offset: 0.2rem;
+}
+
+.footer-link:hover,
+.footer-link:focus-visible {
+  color: #dbe8ff;
+}
+
+/* ==========================================================
+   Temas visuales y accesibilidad
+   ========================================================== */
+
+/* Tema oscuro: Bootstrap adapta controles estándar y estos tokens
+ * mantienen coherentes las superficies personalizadas del proyecto. */
+html[data-bs-theme="dark"] {
+  --app-primary: #78a9ff;
+  --app-primary-hover: #9bbfff;
+  --app-primary-border: #39557c;
+  --app-dark: #eef3f8;
+  --app-muted: #b8c4d6;
+  --app-background: #0f141c;
+  --app-surface: #171e28;
+  --app-surface-subtle: #1b2330;
+  --app-surface-accent: #192435;
+  --app-surface-muted: #1a212c;
+  --app-info-bg: #14223a;
+  --app-info-text: #d5e2f5;
+  --app-border: #344156;
+  --app-border-strong: #3e4c61;
+  --app-info-border: #35527c;
+  --app-line: #3a4659;
+  --app-control-border: #445168;
+  --app-selected-bg: #172b48;
+  --app-selected-border: #45658f;
+  --app-warning-bg: #493c12;
+  --app-warning-text: #ffe49a;
+  --app-footer-bg: #090d13;
+  --app-footer-text: #dbe4f1;
+  --app-focus: #9fc3ff;
+}
+
+/* Alto contraste conserva fondo claro y eleva bordes, texto y foco. */
+html[data-app-theme="contrast"] {
+  --app-primary: #0037a5;
+  --app-primary-hover: #001f63;
+  --app-primary-border: #000000;
+  --app-dark: #000000;
+  --app-muted: #000000;
+  --app-background: #ffffff;
+  --app-surface: #ffffff;
+  --app-surface-subtle: #ffffff;
+  --app-surface-accent: #ffffff;
+  --app-surface-muted: #ffffff;
+  --app-info-bg: #ffffff;
+  --app-info-text: #000000;
+  --app-border: #000000;
+  --app-border-strong: #000000;
+  --app-info-border: #000000;
+  --app-line: #000000;
+  --app-control-border: #000000;
+  --app-selected-bg: #fff4b8;
+  --app-selected-border: #000000;
+  --app-warning-bg: #fff4b8;
+  --app-warning-text: #000000;
+  --app-footer-bg: #000000;
+  --app-footer-text: #ffffff;
+  --app-focus: #ffbf00;
+}
+
+html {
+  scroll-padding-top: 5rem;
+}
+
+body {
+  min-height: 100vh;
+}
+
+main:focus {
+  outline: none;
+}
+
+.app-navbar {
+  background-color: #0d6efd;
+}
+
+html[data-bs-theme="dark"] .app-navbar {
+  background-color: #0a58ca;
+}
+
+html[data-app-theme="contrast"] .app-navbar {
+  background-color: #000000;
+  border-bottom: 2px solid #ffffff;
+}
+
+.theme-control {
+  min-width: 10.5rem;
+}
+
+.theme-select {
+  min-height: 44px;
+  border-color: rgba(255, 255, 255, 0.65);
+  background-color: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+
+.theme-select option {
+  color: #111827;
+  background-color: #ffffff;
+}
+
+.theme-select:focus {
+  border-color: #ffffff;
+  box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.3);
+}
+
+/* Acceso rápido visible solo al recibir foco mediante teclado. */
+.skip-link {
+  position: fixed;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 2000;
+  transform: translateY(-150%);
+  padding: 0.65rem 0.9rem;
+  border: 2px solid var(--app-dark);
+  border-radius: 0.5rem;
+  background: var(--app-surface);
+  color: var(--app-dark);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+/* Foco visible y consistente para navegación por teclado. */
+:where(
+  a,
+  button,
+  input,
+  select,
+  textarea,
+  [tabindex]:not([tabindex="-1"])
+):focus-visible {
+  outline: 3px solid var(--app-focus);
+  outline-offset: 3px;
+}
+
+.btn:focus-visible,
+.form-control:focus-visible,
+.form-select:focus-visible,
+.form-check-input:focus-visible,
+.accordion-button:focus-visible {
+  box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--app-focus) 28%, transparent);
+}
+
+/* Objetivos táctiles con altura mínima adecuada sin alterar la escala textual. */
+.btn,
+.form-control,
+.form-select,
+.navbar-toggler {
+  min-height: 44px;
+}
+
+.form-check-input {
+  min-width: 1.15rem;
+  min-height: 1.15rem;
+}
+
+/* Superficies personalizadas que requieren adaptación semántica en oscuro. */
+html[data-bs-theme="dark"] .history-status-pending,
+html[data-bs-theme="dark"] .history-status-none,
+html[data-bs-theme="dark"] .timeline-status-none {
+  background-color: #2b3442;
+  color: #d7dfeb;
+}
+
+html[data-bs-theme="dark"] .history-status-partial {
+  background-color: #493c12;
+  color: #ffe49a;
+}
+
+html[data-bs-theme="dark"] .history-status-complete,
+html[data-bs-theme="dark"] .timeline-status-historic,
+html[data-bs-theme="dark"] .results-origin-historic {
+  background-color: #163b29;
+  color: #a8e8c1;
+}
+
+html[data-bs-theme="dark"] .results-origin-projected {
+  background-color: #252d58;
+  color: #c4c9ff;
+}
+
+html[data-app-theme="contrast"] .badge,
+html[data-app-theme="contrast"] .history-status,
+html[data-app-theme="contrast"] .timeline-status,
+html[data-app-theme="contrast"] .results-origin,
+html[data-app-theme="contrast"] .results-tag,
+html[data-app-theme="contrast"] .trace-badge {
+  border: 2px solid #000000;
+}
+
+/* ==========================================================
+   Pie de página compacto
+   ========================================================== */
+
+.footer {
+  padding: 0.8rem 0;
+  background-color: var(--app-footer-bg);
+  color: var(--app-footer-text);
+  border-top: 1px solid color-mix(in srgb, var(--app-footer-text) 22%, transparent);
+}
+
+.footer-compact {
+  display: flex;
+  flex-direction: column;
+  gap: 0.12rem;
+  text-align: center;
+}
+
+.footer-line {
+  margin: 0;
+  color: var(--app-footer-text);
+  font-size: var(--app-font-base);
+  line-height: 1.3;
+}
+
+.footer-line strong {
+  color: #ffffff;
+}
+
+.footer-separator {
+  display: inline-block;
+  margin: 0 0.3rem;
+}
+
+.footer-link {
+  color: #ffffff;
+  font-size: var(--app-font-base);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.2rem;
+}
+
+.footer-link:hover,
+.footer-link:focus-visible {
+  color: #dbe8ff;
+}
+
+/* ==========================================================
+   Ajustes responsivos
+   ========================================================== */
+
+@media (max-width: 991.98px) {
+  .theme-control {
+    width: 100%;
+    min-width: 0;
+    padding-bottom: 0.5rem;
+  }
+
+  .theme-select {
+    width: 100%;
+  }
+
+  .navbar-nav .nav-link {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .footer {
+    padding: 0.7rem 0;
+  }
+
+  .footer-compact {
+    text-align: left;
+  }
+
+  .footer-separator {
+    margin-left: 0.15rem;
+  }
+
+  .simulation-section > .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .results-summary-card,
+  .summary-card,
+  .feature-card,
+  .methodology-principle-card,
+  .methodology-source-card,
+  .methodology-resource-card {
+    padding: 1rem;
+  }
+}
+
+/* Evita animaciones innecesarias cuando el sistema solicita movimiento reducido. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ==========================================================
+   UX.2.1 — estabilización visual transversal
+   ========================================================== */
+
+/*
+ * Los componentes visibles usan tokens semánticos. Esto evita que un color
+ * pensado para el tema claro reaparezca con bajo contraste en Oscuro o Alto
+ * contraste.
+ */
+:root {
+  --app-text: #172033;
+  --app-text-secondary: #58677b;
+  --app-navbar-bg: #0d6efd;
+  --app-navbar-text: #ffffff;
+  --app-navbar-muted: #d7e5ff;
+  --app-sticky-bg: rgba(255, 255, 255, 0.96);
+  --app-card-shadow: 0 12px 34px rgba(23, 32, 51, 0.07);
+
+  --app-success-bg: #e8f7ee;
+  --app-success-text: #176b3a;
+  --app-success-border: #9dd9b7;
+  --app-neutral-bg: #eef1f5;
+  --app-neutral-text: #566274;
+  --app-neutral-border: #d2d9e3;
+  --app-indigo-bg: #eef2ff;
+  --app-indigo-text: #4338ca;
+  --app-indigo-border: #c7d2fe;
+  --app-warning-border: #e8c866;
+}
+
+html[data-bs-theme="dark"] {
+  --app-primary: #6ea8fe;
+  --app-primary-hover: #9ec5fe;
+  --app-primary-border: #31588e;
+  --app-dark: #f5f7fa;
+  --app-text: #f5f7fa;
+  --app-muted: #c5cfdb;
+  --app-text-secondary: #c5cfdb;
+  --app-background: #05070b;
+  --app-surface: #0d1117;
+  --app-surface-subtle: #111720;
+  --app-surface-accent: #121c2a;
+  --app-surface-muted: #10161f;
+  --app-info-bg: #0d1b31;
+  --app-info-text: #e1ebf8;
+  --app-border: #303b4a;
+  --app-border-strong: #415064;
+  --app-info-border: #31588e;
+  --app-line: #405069;
+  --app-control-border: #4b596c;
+  --app-selected-bg: #10284a;
+  --app-selected-border: #5a83bd;
+  --app-warning-bg: #332a0d;
+  --app-warning-text: #ffe79b;
+  --app-warning-border: #8c7423;
+  --app-footer-bg: #020305;
+  --app-footer-text: #e4eaf2;
+  --app-focus: #a9c9ff;
+  --app-navbar-bg: #0b3d91;
+  --app-navbar-text: #ffffff;
+  --app-navbar-muted: #d4e4ff;
+  --app-sticky-bg: rgba(13, 17, 23, 0.96);
+  --app-card-shadow: 0 16px 40px rgba(0, 0, 0, 0.32);
+
+  --app-success-bg: #0e2d20;
+  --app-success-text: #a8f0c7;
+  --app-success-border: #327b58;
+  --app-neutral-bg: #202833;
+  --app-neutral-text: #d4dce7;
+  --app-neutral-border: #465365;
+  --app-indigo-bg: #20254d;
+  --app-indigo-text: #d4d7ff;
+  --app-indigo-border: #5d65ae;
+
+  --bs-body-bg: var(--app-background);
+  --bs-body-color: var(--app-text);
+  --bs-secondary-color: var(--app-muted);
+  --bs-tertiary-bg: var(--app-surface-subtle);
+  --bs-secondary-bg: var(--app-surface-muted);
+  --bs-border-color: var(--app-border);
+  --bs-heading-color: var(--app-text);
+  --bs-link-color: #82b4ff;
+  --bs-link-hover-color: #b6d2ff;
+}
+
+html[data-app-theme="contrast"] {
+  --app-primary: #35b9ff;
+  --app-primary-hover: #74d0ff;
+  --app-primary-border: #ffffff;
+  --app-dark: #ffffff;
+  --app-text: #ffffff;
+  --app-muted: #ffffff;
+  --app-text-secondary: #ffffff;
+  --app-background: #000000;
+  --app-surface: #000000;
+  --app-surface-subtle: #050505;
+  --app-surface-accent: #080808;
+  --app-surface-muted: #050505;
+  --app-info-bg: #000000;
+  --app-info-text: #ffffff;
+  --app-border: #ffffff;
+  --app-border-strong: #ffffff;
+  --app-info-border: #ffffff;
+  --app-line: #ffffff;
+  --app-control-border: #ffffff;
+  --app-selected-bg: #08213a;
+  --app-selected-border: #ffffff;
+  --app-warning-bg: #211b00;
+  --app-warning-text: #fff27a;
+  --app-warning-border: #fff27a;
+  --app-footer-bg: #000000;
+  --app-footer-text: #ffffff;
+  --app-focus: #ffdf00;
+  --app-navbar-bg: #000000;
+  --app-navbar-text: #ffffff;
+  --app-navbar-muted: #ffffff;
+  --app-sticky-bg: #000000;
+  --app-card-shadow: none;
+
+  --app-success-bg: #001f0f;
+  --app-success-text: #6dffad;
+  --app-success-border: #6dffad;
+  --app-neutral-bg: #090909;
+  --app-neutral-text: #ffffff;
+  --app-neutral-border: #ffffff;
+  --app-indigo-bg: #080d2b;
+  --app-indigo-text: #dce4ff;
+  --app-indigo-border: #ffffff;
+
+  --bs-body-bg: #000000;
+  --bs-body-color: #ffffff;
+  --bs-secondary-color: #ffffff;
+  --bs-tertiary-bg: #050505;
+  --bs-secondary-bg: #050505;
+  --bs-border-color: #ffffff;
+  --bs-heading-color: #ffffff;
+  --bs-link-color: #75caff;
+  --bs-link-hover-color: #ffffff;
+}
+
+/* La superficie general y los textos secundarios deben obedecer el tema. */
+body {
+  background-color: var(--app-background);
+  color: var(--app-text);
+}
+
+.text-secondary,
+.form-text,
+.help-text,
+.home-lead,
+.home-section-heading p,
+.home-process-intro {
+  color: var(--app-text-secondary) !important;
+}
+
+html[data-bs-theme="dark"] .bg-light,
+html[data-app-theme="contrast"] .bg-light {
+  background-color: var(--app-surface-subtle) !important;
+}
+
+html[data-bs-theme="dark"] .card,
+html[data-bs-theme="dark"] .accordion-item,
+html[data-bs-theme="dark"] .accordion-button,
+html[data-bs-theme="dark"] .list-group-item,
+html[data-app-theme="contrast"] .card,
+html[data-app-theme="contrast"] .accordion-item,
+html[data-app-theme="contrast"] .accordion-button,
+html[data-app-theme="contrast"] .list-group-item {
+  background-color: var(--app-surface);
+  color: var(--app-text);
+  border-color: var(--app-border);
+}
+
+html[data-app-theme="contrast"] .card,
+html[data-app-theme="contrast"] .accordion-item,
+html[data-app-theme="contrast"] .accordion-button {
+  border-width: 2px;
+}
+
+html[data-bs-theme="dark"] code,
+html[data-app-theme="contrast"] code {
+  color: var(--app-primary-hover);
+}
+
+/* Navegación global. */
+.app-navbar {
+  background-color: var(--app-navbar-bg);
+}
+
+.app-navbar .navbar-brand,
+.app-navbar .nav-link.active,
+.app-navbar .nav-link[aria-current="page"] {
+  color: var(--app-navbar-text);
+}
+
+.app-navbar .nav-link {
+  color: var(--app-navbar-muted);
+}
+
+.app-navbar .nav-link:hover,
+.app-navbar .nav-link:focus-visible {
+  color: var(--app-navbar-text);
+}
+
+html[data-app-theme="contrast"] .app-navbar {
+  border-bottom: 2px solid #ffffff;
+}
+
+/* Selector de tema coherente con la barra. */
+.theme-select {
+  background-color: color-mix(in srgb, var(--app-navbar-text) 10%, transparent);
+  color: var(--app-navbar-text);
+  border-color: color-mix(in srgb, var(--app-navbar-text) 65%, transparent);
+}
+
+html[data-bs-theme="dark"] .theme-select option,
+html[data-app-theme="contrast"] .theme-select option {
+  background-color: var(--app-surface);
+  color: var(--app-text);
+}
+
+/* Alertas semánticas sin superficies heredadas del tema claro. */
+.alert-primary,
+.alert-info {
+  color: var(--app-info-text);
+  background-color: var(--app-info-bg);
+  border-color: var(--app-info-border);
+}
+
+.alert-secondary {
+  color: var(--app-text);
+  background-color: var(--app-surface-muted);
+  border-color: var(--app-border);
+}
+
+.alert-warning {
+  color: var(--app-warning-text);
+  background-color: var(--app-warning-bg);
+  border-color: var(--app-warning-border);
+}
+
+.alert-success {
+  color: var(--app-success-text);
+  background-color: var(--app-success-bg);
+  border-color: var(--app-success-border);
+}
+
+/* Estados reutilizables. */
+.history-status-pending,
+.history-status-none,
+.timeline-status-none,
+.timeline-status-pending {
+  background-color: var(--app-neutral-bg);
+  color: var(--app-neutral-text);
+  border: 1px solid var(--app-neutral-border);
+}
+
+.history-status-partial,
+.timeline-status-partial,
+.retirement-status-past {
+  background-color: var(--app-warning-bg);
+  color: var(--app-warning-text);
+  border: 1px solid var(--app-warning-border);
+}
+
+.history-status-complete,
+.timeline-status-historic,
+.results-origin-historic {
+  background-color: var(--app-success-bg);
+  color: var(--app-success-text);
+  border: 1px solid var(--app-success-border);
+}
+
+.timeline-status-projected,
+.results-origin-projected {
+  background-color: var(--app-indigo-bg);
+  color: var(--app-indigo-text);
+  border: 1px solid var(--app-indigo-border);
+}
+
+.timeline-status-mixed,
+.retirement-status-future,
+.wizard-step.completed span {
+  background-color: var(--app-selected-bg);
+  color: var(--app-primary);
+  border-color: var(--app-selected-border);
+}
+
+.comparison-row-base > * {
+  background-color: var(--app-selected-bg) !important;
+}
+
+.comparison-row-best > * {
+  box-shadow: inset 0 3px 0 var(--app-success-border);
+}
+
+.trace-confirmed {
+  background-color: var(--app-success-bg);
+  color: var(--app-success-text);
+  border: 1px solid var(--app-success-border);
+}
+
+.trace-unconfirmed {
+  background-color: var(--app-warning-bg);
+  color: var(--app-warning-text);
+  border: 1px solid var(--app-warning-border);
+}
+
+/* ==========================================================
+   Inicio — portada profesional
+   ========================================================== */
+
+.home-hero {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 88% 14%, color-mix(in srgb, var(--app-primary) 16%, transparent), transparent 30%),
+    linear-gradient(135deg, var(--app-background), var(--app-surface-subtle));
+  border-bottom: 1px solid var(--app-border);
+}
+
+.home-hero .container {
+  min-height: min(720px, calc(100vh - 74px));
+  display: flex;
+  align-items: center;
+}
+
+.home-eyebrow,
+.home-section-kicker,
+.home-panel-kicker {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  color: var(--app-primary);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.home-eyebrow {
+  padding: 0.45rem 0.75rem;
+  border: 1px solid var(--app-primary-border);
+  border-radius: 999px;
+  background-color: var(--app-selected-bg);
+}
+
+.home-title {
+  max-width: 820px;
+  color: var(--app-text);
+  font-size: clamp(2.5rem, 5vw, 4.7rem);
+  line-height: 1.03;
+  letter-spacing: -0.04em;
+  font-weight: 750;
+}
+
+.home-lead {
+  max-width: 760px;
+  line-height: 1.65;
+}
+
+.home-trust-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.2rem;
+  color: var(--app-text-secondary);
+}
+
+.home-trust-list span {
+  position: relative;
+  padding-left: 1.1rem;
+}
+
+.home-trust-list span::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 50%;
+  background-color: var(--app-primary);
+}
+
+.home-systems-panel {
+  padding: clamp(1.4rem, 2.4vw, 2.2rem);
+  background-color: var(--app-surface);
+  border: 1px solid var(--app-border);
+  border-radius: 1.25rem;
+  box-shadow: var(--app-card-shadow);
+}
+
+.home-panel-heading p,
+.home-system-card span {
+  color: var(--app-text-secondary);
+}
+
+.home-system-list {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.home-system-card {
+  display: grid;
+  grid-template-columns: minmax(4.3rem, auto) 1fr;
+  align-items: center;
+  gap: 1rem;
+  min-height: 96px;
+  padding: 1rem 1.1rem;
+  background-color: var(--app-surface-accent);
+  border: 1px solid var(--app-border-strong);
+  border-radius: 0.95rem;
+}
+
+.home-system-card > div:last-child {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.home-system-code {
+  color: var(--app-primary);
+  font-weight: 800;
+}
+
+.home-system-card strong {
+  color: var(--app-text);
+}
+
+.home-section {
+  background-color: var(--app-background);
+}
+
+.home-capabilities-section {
+  background-color: var(--app-surface-subtle);
+}
+
+.home-section-heading {
+  max-width: 760px;
+}
+
+.home-section-heading h2,
+.home-process-section h2 {
+  color: var(--app-text);
+}
+
+.home-feature-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 230px;
+  padding: 1.6rem;
+  background-color: var(--app-surface);
+  border: 1px solid var(--app-border);
+  border-radius: 1rem;
+  box-shadow: var(--app-card-shadow);
+}
+
+.home-feature-number {
+  margin-bottom: 1rem;
+  color: var(--app-primary);
+  font-weight: 800;
+}
+
+.home-feature-card h3 {
+  color: var(--app-text);
+}
+
+.home-feature-card p {
+  margin-bottom: 0;
+  color: var(--app-text-secondary);
+  line-height: 1.6;
+}
+
+.home-process-section {
+  background-color: var(--app-background);
+}
+
+.home-process-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.home-process-step {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 82px;
+  padding: 0.9rem 1rem;
+  background-color: var(--app-surface);
+  border: 1px solid var(--app-border);
+  border-radius: 0.85rem;
+}
+
+.home-process-step span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 2.3rem;
+  width: 2.3rem;
+  height: 2.3rem;
+  border-radius: 50%;
+  background-color: var(--app-selected-bg);
+  border: 1px solid var(--app-selected-border);
+  color: var(--app-primary);
+  font-weight: 800;
+}
+
+.home-process-step strong {
+  color: var(--app-text);
+}
+
+.home-disclaimer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.25rem 1.4rem;
+  background-color: var(--app-info-bg);
+  border: 1px solid var(--app-info-border);
+  border-radius: 1rem;
+}
+
+.home-disclaimer strong {
+  color: var(--app-text);
+}
+
+.home-disclaimer p {
+  color: var(--app-text-secondary);
+}
+
+/* ==========================================================
+   Wizard — estados y barra rápida adaptativos
+   ========================================================== */
+
+.wizard-step span {
+  background-color: var(--app-surface);
+  color: var(--app-text-secondary);
+  border-color: var(--app-line);
+}
+
+.wizard-step small {
+  color: var(--app-text-secondary);
+}
+
+.wizard-step.completed small,
+.wizard-step.active small {
+  color: var(--app-primary);
+}
+
+.wizard-step.active span {
+  background-color: var(--app-primary);
+  border-color: var(--app-primary);
+  color: #06101f;
+}
+
+html[data-app-theme="contrast"] .wizard-step.active span {
+  color: #000000;
+  border: 2px solid #ffffff;
+}
+
+.wizard-line {
+  background-color: var(--app-line);
+}
+
+.wizard-sticky-nav {
+  background: var(--app-sticky-bg);
+  border-color: var(--app-border-strong);
+  box-shadow: var(--app-card-shadow);
+}
+
+#wizard-sticky-status {
+  color: var(--app-text-secondary) !important;
+}
+
+.wizard-sticky-nav .form-select {
+  background-color: var(--app-surface);
+  color: var(--app-text);
+  border-color: var(--app-control-border);
+}
+
+html[data-app-theme="contrast"] .wizard-sticky-nav {
+  border-width: 2px;
+}
+
+/* ==========================================================
+   Tarjetas y métricas — alineación vertical consistente
+   ========================================================== */
+
+.summary-card,
+.timeline-current-card,
+.retirement-summary-card,
+.results-summary-card,
+.results-detail-card,
+.trace-data-card {
+  justify-content: center;
+}
+
+.summary-card small,
+.results-summary-card > small {
+  margin-top: 0.35rem;
+}
+
+.methodology-principle-card {
+  min-height: 112px;
+  align-items: center;
+}
+
+.methodology-source-card,
+.methodology-resource-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.methodology-source-card .btn,
+.methodology-resource-card .btn {
+  align-self: flex-start;
+  margin-top: auto;
+}
+
+.methodology-source-card p,
+.methodology-resource-card p {
+  color: var(--app-text-secondary);
+}
+
+.methodology-source-card,
+.methodology-resource-card,
+.methodology-principle-card,
+.results-trace-card,
+.trace-data-card,
+.trace-source-card,
+.trace-step,
+.trace-final-result {
+  background-color: var(--app-surface);
+  border-color: var(--app-border);
+  color: var(--app-text);
+}
+
+/* ==========================================================
+   Footer compacto y profesional
+   ========================================================== */
+
+.footer-compact {
+  gap: 0.05rem;
+}
+
+.footer-line {
+  line-height: 1.22;
+}
+
+.footer-legal-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  flex-wrap: wrap;
+  column-gap: 0.35rem;
+  row-gap: 0.05rem;
+}
+
+.footer-link {
+  white-space: nowrap;
+}
+
+html[data-app-theme="contrast"] .footer-link {
+  color: #75caff;
+}
+
+/* Alto contraste: elementos interactivos y señales dependen también de borde. */
+html[data-app-theme="contrast"] :where(
+  .home-system-card,
+  .home-feature-card,
+  .home-process-step,
+  .home-disclaimer,
+  .summary-card,
+  .timeline-current-card,
+  .retirement-summary-card,
+  .results-summary-card,
+  .results-detail-card,
+  .methodology-source-card,
+  .methodology-resource-card,
+  .methodology-principle-card,
+  .results-trace-card,
+  .trace-step,
+  .trace-data-card,
+  .trace-source-card
+) {
+  border-width: 2px;
+}
+
+html[data-app-theme="contrast"] .btn-outline-primary,
+html[data-app-theme="contrast"] .btn-outline-secondary {
+  --bs-btn-color: #ffffff;
+  --bs-btn-border-color: #ffffff;
+  --bs-btn-hover-color: #000000;
+  --bs-btn-hover-bg: #ffffff;
+  --bs-btn-hover-border-color: #ffffff;
+}
+
+html[data-app-theme="contrast"] .btn-primary {
+  --bs-btn-bg: #35b9ff;
+  --bs-btn-border-color: #ffffff;
+  --bs-btn-color: #000000;
+  --bs-btn-hover-bg: #ffffff;
+  --bs-btn-hover-border-color: #ffffff;
+  --bs-btn-hover-color: #000000;
+}
+
+/* ==========================================================
+   Ajustes de escritorio previos a la revisión responsive profunda
+   ========================================================== */
+
+@media (max-width: 1199.98px) {
+  .home-process-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 767.98px) {
+  .home-hero .container {
+    min-height: auto;
+  }
+
+  .home-title {
+    font-size: clamp(2.35rem, 11vw, 3.4rem);
+  }
+
+  .home-process-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .home-disclaimer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .home-process-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .home-system-card {
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+  }
+
+  .footer-legal-row {
+    justify-content: flex-start;
+  }
+}
+
+/* Sobrescribe reglas específicas heredadas de UX.2 con los tokens UX.2.1. */
+html[data-bs-theme="dark"] .app-navbar,
+html[data-app-theme="contrast"] .app-navbar {
+  background-color: var(--app-navbar-bg);
+}
+
+html[data-bs-theme="dark"] .history-status-pending,
+html[data-bs-theme="dark"] .history-status-none,
+html[data-bs-theme="dark"] .timeline-status-none,
+html[data-bs-theme="dark"] .timeline-status-pending {
+  background-color: var(--app-neutral-bg);
+  color: var(--app-neutral-text);
+  border-color: var(--app-neutral-border);
+}
+
+html[data-bs-theme="dark"] .history-status-partial,
+html[data-bs-theme="dark"] .timeline-status-partial {
+  background-color: var(--app-warning-bg);
+  color: var(--app-warning-text);
+  border-color: var(--app-warning-border);
+}
+
+html[data-bs-theme="dark"] .history-status-complete,
+html[data-bs-theme="dark"] .timeline-status-historic,
+html[data-bs-theme="dark"] .results-origin-historic {
+  background-color: var(--app-success-bg);
+  color: var(--app-success-text);
+  border-color: var(--app-success-border);
+}
+
+html[data-bs-theme="dark"] .results-origin-projected {
+  background-color: var(--app-indigo-bg);
+  color: var(--app-indigo-text);
+  border-color: var(--app-indigo-border);
+}
+
+
+/* ==========================================================
+   UX.2.1 — remate final de alineación y footer
+   ========================================================== */
+
+/*
+ * Solo se aplica a los botones que mostraron desalineación visual en la
+ * revisión final. Los botones que ya estaban correctos conservan intacta
+ * su composición.
+ */
+.btn-center-content {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 1.2;
+}
+
+/*
+ * En escritorios amplios, el aviso legal y el acceso a Mi Caja Digital
+ * comparten la segunda línea del footer. En anchos menores se permite el
+ * salto natural para evitar desbordamientos.
+ */
+@media (min-width: 1400px) {
+  .footer-compact {
+    max-width: 1760px;
+  }
+
+  .footer-legal-row {
+    flex-wrap: nowrap;
+    white-space: nowrap;
+  }
+}
+
+/* ==========================================================
+   UX.3 — responsive real y navegación móvil
+   ========================================================== */
+
+/*
+ * Los breakpoints siguen la estructura de Bootstrap, pero las reglas de UX.3
+ * priorizan legibilidad, acciones táctiles y desplazamiento horizontal solo
+ * donde el contenido tabular realmente lo necesita.
+ */
+
+html,
+body {
+  max-width: 100%;
+}
+
+main,
+.simulation-section,
+.comparison-section,
+.methodology-page {
+  min-width: 0;
+}
+
+/* Las tablas extensas conservan columnas legibles y se desplazan dentro de
+ * su propio contenedor en vez de comprimir texto hasta volverlo ilegible. */
+.table-responsive,
+.history-table-wrapper,
+.timeline-history-wrapper,
+.retirement-table-wrapper,
+.results-table-wrapper {
+  -webkit-overflow-scrolling: touch;
+  scrollbar-gutter: stable;
+}
+
+.history-table {
+  min-width: 760px;
+}
+
+.timeline-table {
+  min-width: 820px;
+}
+
+.retirement-table {
+  min-width: 940px;
+}
+
+.comparison-table {
+  min-width: 1080px;
+}
+
+.results-table {
+  min-width: 780px;
+}
+
+.results-table-wrapper {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+/* El selector mensual del Paso 5 mantiene la misma jerarquía que el resto
+ * de campos de fecha y la ayuda distingue evaluación, cotización y retiro. */
+.retirement-date-help {
+  max-width: 100%;
+}
+
+/* ----------------------------------------------------------
+   Laptop compacta y tablet horizontal
+   ---------------------------------------------------------- */
+@media (max-width: 1199.98px) {
+  .simulation-section > .container,
+  .comparison-container,
+  .methodology-page {
+    max-width: 100%;
+  }
+
+  .simulation-section > .container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .home-hero .container {
+    min-height: auto;
+  }
+
+  .home-title {
+    font-size: clamp(2.55rem, 6vw, 4rem);
+  }
+
+  .retirement-option-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .trace-sources {
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  }
+}
+
+/* ----------------------------------------------------------
+   Navegación principal en tablet y móvil
+   ---------------------------------------------------------- */
+@media (max-width: 991.98px) {
+  .app-navbar .container {
+    max-width: 100%;
+  }
+
+  .app-navbar .navbar-collapse {
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.35rem;
+    border-top: 1px solid color-mix(
+      in srgb,
+      var(--app-navbar-text) 24%,
+      transparent
+    );
+  }
+
+  .app-navbar .navbar-nav {
+    align-items: stretch !important;
+    gap: 0.15rem;
+  }
+
+  .app-navbar .nav-link {
+    width: 100%;
+    padding: 0.7rem 0.8rem;
+    border-radius: 0.55rem;
+  }
+
+  .app-navbar .nav-link.active,
+  .app-navbar .nav-link[aria-current="page"] {
+    background-color: color-mix(
+      in srgb,
+      var(--app-navbar-text) 12%,
+      transparent
+    );
+  }
+
+  .theme-control {
+    margin-left: 0 !important;
+    margin-top: 0.65rem !important;
+  }
+
+  .theme-select {
+    width: 100%;
+    min-height: 48px;
+  }
+
+  .home-systems-panel {
+    margin-top: 0.5rem;
+  }
+
+  .home-feature-card {
+    min-height: 200px;
+  }
+
+  .comparison-options {
+    grid-template-columns: 1fr;
+  }
+
+  .retirement-context-card .row > [class*="col-"] {
+    min-width: 0;
+  }
+}
+
+/* ----------------------------------------------------------
+   Móvil y tablet vertical
+   ---------------------------------------------------------- */
+@media (max-width: 767.98px) {
+  .simulation-section {
+    padding-top: 1.75rem !important;
+    padding-bottom: calc(9.25rem + env(safe-area-inset-bottom)) !important;
+  }
+
+  .simulation-section > .container,
+  .comparison-container,
+  .methodology-page {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .simulation-header {
+    margin-bottom: 1.25rem !important;
+  }
+
+  .simulation-header h1,
+  .comparison-section h1,
+  .methodology-page h1 {
+    line-height: 1.08;
+  }
+
+  /* Progreso superior desplazable, con objetivos táctiles independientes. */
+  .wizard-steps {
+    justify-content: flex-start;
+    max-width: none;
+    margin-bottom: 1.25rem !important;
+    padding: 0.25rem 0.15rem 0.8rem;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x proximity;
+  }
+
+  .wizard-step {
+    flex: 0 0 78px;
+    min-width: 78px;
+    scroll-snap-align: center;
+  }
+
+  .wizard-step span {
+    width: 40px;
+    height: 40px;
+  }
+
+  .wizard-step small {
+    max-width: 78px;
+    line-height: 1.15;
+  }
+
+  .wizard-line {
+    flex: 0 0 26px;
+    min-width: 26px;
+    margin-top: 20px;
+  }
+
+  /* La navegación persistente pasa a la parte inferior. No ocupa el ancho
+   * útil del formulario y respeta el área segura de dispositivos móviles. */
+  .wizard-sticky-nav {
+    position: fixed;
+    top: auto;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1040;
+
+    width: 100%;
+    margin: 0 !important;
+    padding:
+      0.7rem
+      max(1rem, env(safe-area-inset-right))
+      calc(0.7rem + env(safe-area-inset-bottom))
+      max(1rem, env(safe-area-inset-left));
+
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.55rem;
+
+    border-right: 0;
+    border-bottom: 0;
+    border-left: 0;
+    border-radius: 1rem 1rem 0 0;
+
+    box-shadow: 0 -0.55rem 1.6rem rgba(0, 0, 0, 0.18);
+  }
+
+  .wizard-sticky-nav-main,
+  .wizard-sticky-nav-secondary {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .wizard-sticky-nav-main {
+    order: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .wizard-sticky-nav-secondary {
+    order: 2;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .wizard-step-jump {
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+  }
+
+  #wizard-sticky-status {
+    display: block;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .wizard-sticky-nav .btn,
+  .wizard-sticky-nav .form-select {
+    min-height: 48px;
+  }
+
+  .simulation-card > .card-body {
+    padding: 1.25rem !important;
+  }
+
+  .projection-base-card,
+  .retirement-selection-card,
+  .home-disclaimer {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .projection-base-note {
+    text-align: left;
+  }
+
+  .retirement-option-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .retirement-option {
+    min-height: 0;
+  }
+
+  .retirement-selection-card .btn,
+  .wizard-result-action .btn {
+    width: 100%;
+  }
+
+  /* Acciones de cada formulario: primaria arriba, retroceso debajo. */
+  .wizard-actions {
+    flex-direction: column-reverse;
+    align-items: stretch !important;
+    gap: 0.75rem;
+  }
+
+  .wizard-actions .btn,
+  .wizard-actions > a,
+  .wizard-actions-end .btn,
+  .wizard-actions-start .btn {
+    width: 100%;
+    min-height: 48px;
+  }
+
+  .wizard-actions-end,
+  .wizard-actions-start {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .history-toolbar .btn {
+    width: 100%;
+  }
+
+  .comparison-section {
+    padding-top: 1.75rem !important;
+  }
+
+  .comparison-card .card-body,
+  .methodology-principle-card,
+  .methodology-source-card,
+  .methodology-resource-card {
+    padding: 1.1rem !important;
+  }
+
+  .methodology-source-card .btn,
+  .methodology-resource-card .btn {
+    width: 100%;
+    align-self: stretch;
+  }
+
+  .results-trace-card,
+  .results-section {
+    padding: 1rem;
+  }
+
+  .trace-step-header {
+    align-items: flex-start;
+  }
+
+  .footer-legal-row {
+    white-space: normal;
+  }
+}
+
+/* ----------------------------------------------------------
+   Móvil estrecho
+   ---------------------------------------------------------- */
+@media (max-width: 575.98px) {
+  .app-navbar .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .navbar-brand {
+    max-width: calc(100vw - 6rem);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .home-hero .container,
+  .home-section .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .home-hero .row {
+    --bs-gutter-y: 2rem;
+  }
+
+  .home-title {
+    font-size: clamp(2.15rem, 12vw, 3rem);
+  }
+
+  .home-lead {
+    line-height: 1.55;
+  }
+
+  .home-actions {
+    width: 100%;
+  }
+
+  .home-actions .btn {
+    width: 100%;
+  }
+
+  .home-trust-list {
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+
+  .home-system-card {
+    padding: 0.95rem;
+  }
+
+  .home-feature-card {
+    min-height: 0;
+  }
+
+  .wizard-sticky-nav-main {
+    grid-template-columns: 1fr;
+  }
+
+  #wizard-sticky-status {
+    display: none;
+  }
+
+  #wizard-sticky-primary {
+    width: 100%;
+  }
+
+  .wizard-sticky-nav-secondary {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .wizard-sticky-nav-secondary .btn {
+    padding-left: 0.8rem;
+    padding-right: 0.8rem;
+    white-space: nowrap;
+  }
+
+  .simulation-card > .card-body,
+  .comparison-card .card-body {
+    padding: 1rem !important;
+  }
+
+  .info-box,
+  .projection-base-card,
+  .projection-config,
+  .retirement-context-card,
+  .retirement-custom-card,
+  .results-context-card,
+  .results-calculation-card {
+    padding: 1rem;
+  }
+
+  .summary-value,
+  .salary-value,
+  .projection-base-value,
+  .results-summary-card > strong,
+  .trace-final-result strong {
+    overflow-wrap: anywhere;
+  }
+
+  .methodology-principle-card {
+    align-items: flex-start;
+  }
+
+  .footer-compact {
+    text-align: left;
+  }
+}
+
+/* Alto contraste conserva un borde explícito en la barra inferior móvil. */
+@media (max-width: 767.98px) {
+  html[data-app-theme="contrast"] .wizard-sticky-nav {
+    border-top-width: 2px;
+  }
 }

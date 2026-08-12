@@ -149,26 +149,42 @@
           <div class="col-md-6">
 
             <label
-              for="fecha_corte_cuotas"
+              for="ultimo_mes_cuotas"
               class="form-label fw-semibold"
             >
-              ¿Hasta qué fecha están actualizadas tus cuotas?
+              Último mes con cuotas acreditadas
             </label>
 
             <input
-              type="date"
+              type="month"
               class="form-control form-control-lg"
-              id="fecha_corte_cuotas"
+              id="ultimo_mes_cuotas"
+              aria-describedby="ayuda-ultimo-mes-cuotas"
               required
             >
 
-            <div class="form-text">
-              Si provienen de un reporte de la CSS, usa la fecha
-              hasta la cual ese reporte refleja cuotas acreditadas.
+            <div
+              id="ayuda-ultimo-mes-cuotas"
+              class="form-text"
+            >
+              Selecciona el último mes que aparece acreditado en tu
+              historial o reporte de la CSS. No es la fecha en la que
+              piensas retirarte.
             </div>
 
           </div>
 
+        </div>
+
+
+        <div class="info-box retirement-date-help mb-4">
+          <strong>Dos referencias distintas.</strong>
+          <p class="mb-0 mt-1">
+            La fecha de evaluación indica cuándo estás realizando la
+            simulación. El último mes acreditado indica hasta dónde llega
+            tu historial real de cuotas. Los escenarios de retiro se
+            calculan después y pueden ubicarse en fechas futuras diferentes.
+          </p>
         </div>
 
 
@@ -393,7 +409,7 @@
         <!-- Navegación y ejecución. -->
 
         <div
-          class="d-flex justify-content-between align-items-center mt-5"
+          class="d-flex justify-content-between align-items-center mt-5 wizard-actions"
         >
 
           <button
@@ -527,7 +543,7 @@
 
         <!-- Selección explícita del escenario que alimentará el Paso 6. -->
 
-        <div class="retirement-selection-card mt-4">
+        <div class="retirement-selection-card mt-4 wizard-result-action">
 
           <div>
             <strong>
