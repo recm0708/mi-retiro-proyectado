@@ -1,17 +1,24 @@
 # Casos de validación
 
-Este directorio se reserva para casos reproducibles y anonimizados.
+Este directorio contiene únicamente casos sintéticos o anonimizados aptos para control de versiones.
 
-## Reglas
+## 1. Reglas
 
-- No almacenar PDFs personales originales.
-- No incluir nombres, cédulas, números de Seguro Social ni otros identificadores.
-- Preferir pruebas automatizadas con datos mínimos.
-- Registrar en `docs/VALIDACION.md` el propósito del caso y el resultado esperado.
-- Los documentos originales, si se conservan localmente para contraste, deben ubicarse en `tests/casos_validacion/originales/`, ruta ignorada por Git.
+- No guardar cédulas, nombres completos, números de asegurado, direcciones, teléfonos ni correos reales.
+- No versionar PDF, capturas o exportaciones originales de Mi Caja Digital/Mi Retiro Seguro con datos personales.
+- Los originales deben mantenerse fuera de Git en `tests/casos_validacion/originales/`, ruta excluida por `.gitignore`.
+- Un caso anonimizado debe conservar solo los datos necesarios para reproducir la propiedad matemática que se prueba.
+- Un caso sintético debe indicar expresamente que sus parámetros actuariales o saldos son de prueba cuando no representan valores oficiales.
 
-Las pruebas automatizadas del proyecto se ejecutan con:
+## 2. Nombres recomendados
 
-```powershell
-python -m unittest discover -s tests -v
+```text
+sebd_normal_regresion_741_59.json
+mixto_pension_programada_sintetico.json
+mixto_devolucion_cap_sintetico.json
+sucgs_art197_240_cuotas_sintetico.json
 ```
+
+## 3. Documentación
+
+La descripción consolidada de regresiones se mantiene en [`docs/VALIDACION.md`](../../docs/VALIDACION.md).
