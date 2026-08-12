@@ -213,12 +213,14 @@ Previsto:
 - [x] navegación principal colapsada y navegación persistente inferior del wizard en móvil;
 - [x] tablas extensas con desplazamiento localizado y acciones de formulario adaptativas;
 - [x] Paso 5 con último mes acreditado separado de evaluación y retiro.
+- [x] respuesta temporal sin error para `/favicon.ico` mientras no se integran los iconos definitivos;
+- [ ] integrar favicon e iconos definitivos de **Mi Retiro Proyectado** y retirar la respuesta temporal `204`.
 
 ## 9. Estado de validación
 
-Estado técnico de UX.3, pendiente de validación visual final:
+Estado técnico actual; la validación manual multidispositivo queda aplazada y las revisiones inmediatas se realizan en laptop/PC:
 
-- **94 pruebas automatizadas** en `OK`;
+- **96 pruebas automatizadas** en `OK`;
 - regresión SEBD real anonimizada;
 - casos sintéticos de Mixto;
 - casos sintéticos SUCGS;

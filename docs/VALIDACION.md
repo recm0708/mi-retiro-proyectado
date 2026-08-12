@@ -356,7 +356,7 @@ La validación automatizada no sustituye la revisión visual manual en los cuatr
 
 ## Validación UX.3 — responsive y último mes acreditado
 
-La suite queda en **94 pruebas automatizadas** antes de la validación visual final de UX.3.
+La suite queda en **96 pruebas automatizadas** después de incorporar las regresiones de mantenimiento técnico posteriores a UX.3.
 
 `tests/test_responsive_ux3.py` protege:
 
@@ -373,4 +373,13 @@ La suite queda en **94 pruebas automatizadas** antes de la validación visual fi
 2. el mes actual nunca genera una fecha de corte posterior a la evaluación;
 3. un mes futuro se rechaza.
 
-La revisión manual de UX.3 debe realizarse al menos en 375×812, 768×1024, 1024×768 y 1920×1080, comprobando navegación principal, Inicio, los seis pasos del wizard, tablas, Comparador, Metodología, footer y los modos Claro, Oscuro y Alto contraste.
+La revisión manual inmediata se realiza en laptop/PC. La comprobación específica en móvil, tablet y pantallas grandes se mantiene pendiente para una ronda posterior de validación multidispositivo.
+
+## Mantenimiento técnico posterior a UX.3
+
+`tests/test_mantenimiento_tecnico.py` protege dos condiciones de infraestructura:
+
+1. `.gitattributes` debe forzar `eol=lf` para todo archivo detectado como texto, incluidos archivos sin extensión;
+2. `/favicon.ico` debe responder `204 No Content` mientras no exista el favicon definitivo, evitando un `404` sin introducir un icono provisional.
+
+Con estas dos regresiones, la suite completa alcanza **96 pruebas automatizadas**.

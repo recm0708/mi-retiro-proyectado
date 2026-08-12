@@ -22,7 +22,7 @@ El proyecto todavía no ha publicado una versión estable; los cambios actuales 
 - Se incorporan los modos **Seguir sistema**, **Claro**, **Oscuro** y **Alto contraste**, con persistencia local independiente de la simulación.
 - Se añade enlace de salto al contenido, foco visible global, objetivos táctiles mínimos y respeto a movimiento reducido.
 - El pie de página se compacta en dos líneas con copyright, aviso de independencia y acceso a Mi Caja Digital.
-- La suite alcanza **94 pruebas automatizadas** después de las regresiones de UX.3.
+- La suite alcanza **96 pruebas automatizadas** después de añadir regresiones de mantenimiento técnico.
 - UX.2.1 oscurece las superficies del modo Oscuro, convierte Alto contraste en un tema negro/blanco de contraste máximo y unifica colores semánticos para estados, alertas y badges.
 - Se rediseña Inicio como portada del producto con propósito, sistemas contemplados, capacidades, proceso guiado y acciones principales.
 - El wizard y la navegación rápida pasan a utilizar superficies adaptativas por tema en lugar de conservar fondos claros.
@@ -37,6 +37,8 @@ El proyecto todavía no ha publicado una versión estable; los cambios actuales 
 - El Paso 5 reemplaza la fecha exacta visible de actualización de cuotas por **Último mes con cuotas acreditadas**, separado de la fecha de evaluación y de las fechas de retiro.
 - El backend deriva y valida la fecha técnica de corte desde el último mes acreditado y rechaza meses posteriores a la evaluación.
 - Los dos botones de **Recursos oficiales para verificar información individual** reciben el mismo centrado visual que las demás acciones de Metodología y conservan `Abrir recurso oficial`, porque esos enlaces no son necesariamente fuentes normativas del cálculo.
+- `.gitattributes` fuerza LF para todo archivo detectado como texto, incluidos archivos sin extensión, evitando advertencias de conversión LF/CRLF en Windows.
+- `/favicon.ico` responde temporalmente con `204 No Content` y `Cache-Control: no-store` hasta integrar el favicon definitivo, eliminando el `404` del navegador sin inventar un icono provisional.
 
 ### Agregado
 

@@ -105,7 +105,15 @@ git diff --check
 - **JSON normativo:** sin comentarios, porque JSON estándar no los admite.
 - **Markdown:** títulos jerárquicos y listas coherentes; evitar secciones históricas añadidas al final si el contenido puede integrarse en la estructura principal.
 
-`.editorconfig` y `.gitattributes` fijan LF para los archivos de texto principales.
+`.editorconfig` fija LF desde el editor y `.gitattributes` aplica `eol=lf` a todo archivo detectado como texto, incluidos archivos sin extensión como `.gitignore`. Esto evita que la configuración `core.autocrlf` de Windows introduzca conversiones CRLF dentro del proyecto.
+
+Después de modificar reglas de finales de línea, normalizar el índice una sola vez con:
+
+```powershell
+git add --renormalize .
+```
+
+A continuación se debe revisar `git status` y `git diff --cached --check` antes de confirmar el cambio.
 
 ## 7. Precisión monetaria
 

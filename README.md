@@ -43,7 +43,7 @@ La próxima versión `0.1.0` continúa en desarrollo. El asistente de seis pasos
 | Estabilización visual Claro/Oscuro/Alto contraste | Implementada |
 | UX.3 — responsive real y navegación móvil | Implementada técnicamente; pendiente validación visual |
 
-La suite actual contiene **94 pruebas automatizadas**. UX.3 añade regresiones para responsive, navegación móvil y la separación entre fecha de evaluación y último mes con cuotas acreditadas en el Paso 5.
+La suite actual contiene **96 pruebas automatizadas**. UX.3 añade regresiones para responsive, navegación móvil y la separación entre fecha de evaluación y último mes con cuotas acreditadas en el Paso 5; las regresiones de mantenimiento técnico verifican además la normalización LF del repositorio y la respuesta temporal de `/favicon.ico`.
 
 ## 3. Qué permite hacer el asistente
 

@@ -583,3 +583,19 @@ El resumen transversal se construye después de ejecutar el motor y la trazabili
 Los botones de la sección **Recursos oficiales para verificar información individual** conservan el texto **Abrir recurso oficial**, porque Mi Caja Digital es un recurso de consulta personal y no una fuente normativa utilizada por el motor. Su alineación visual sí se unifica con los demás botones de Metodología.
 
 **Motivo:** preguntar por una fecha exacta de actualización podía confundirse con la fecha prevista de retiro y sugería una precisión diaria que el historial principal no posee. Trabajar con el último mes acreditado corresponde mejor a la granularidad disponible y mantiene clara la diferencia entre dato real, fecha de evaluación y escenario futuro.
+
+## ADR-059 — Forzar LF para todo archivo de texto del repositorio
+
+**Estado:** Aceptada
+
+**Decisión:** `.gitattributes` utiliza `* text=auto eol=lf` como regla transversal. Los formatos binarios continúan marcados como `binary`. Cuando cambien estas reglas se ejecutará `git add --renormalize .` y se revisará el diff antes del commit.
+
+**Motivo:** en Windows, `core.autocrlf` puede convertir a CRLF archivos de texto sin extensión que antes solo heredaban `text=auto`, como `.gitignore`. Forzar LF desde el repositorio elimina advertencias de conversión, evita diffs exclusivos por plataforma y mantiene coherencia con `.editorconfig`.
+
+## ADR-060 — Responder temporalmente `/favicon.ico` sin crear un icono ficticio
+
+**Estado:** Aceptada
+
+**Decisión:** mientras los iconos definitivos no estén integrados, FastAPI responderá `204 No Content` a `/favicon.ico`, fuera del esquema OpenAPI y con `Cache-Control: no-store`. La ruta temporal se retirará cuando exista el favicon oficial y `base.html` lo declare explícitamente.
+
+**Motivo:** los navegadores solicitan `/favicon.ico` de forma automática. Devolver `204` elimina el `404` de desarrollo sin versionar un recurso gráfico provisional ni favorecer que el navegador almacene permanentemente la ausencia de icono.

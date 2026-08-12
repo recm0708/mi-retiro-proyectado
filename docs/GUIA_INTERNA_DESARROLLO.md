@@ -107,3 +107,14 @@ UX.3 establece estas reglas para componentes nuevos:
 ## 10. Criterio de cierre de cambios
 
 Un cambio no se considera terminado si modifica código, comportamiento o UX y deja desactualizada la documentación dependiente. Antes de cerrar una fase deben revisarse, según corresponda, `README.md`, `CHANGELOG.md`, `ROADMAP.md`, `DECISIONES.md`, especificaciones, modelo de datos, arquitectura, guía interna y validación. También deben agregarse o actualizarse regresiones automatizadas cuando el cambio sea verificable por pruebas.
+
+## Recursos gráficos pendientes y favicon temporal
+
+Hasta integrar la familia definitiva de iconos de **Mi Retiro Proyectado**, no se debe crear ni versionar un favicon genérico o provisional. La ruta `/favicon.ico` responde temporalmente `204 No Content` para evitar errores 404 provocados por solicitudes automáticas del navegador.
+
+Cuando los iconos oficiales estén disponibles se deberá:
+
+1. guardar los recursos en la estructura aprobada de `app/static/img/`;
+2. declarar favicon y variantes necesarias en `app/templates/base.html`;
+3. retirar la ruta temporal `/favicon.ico` de `app/main.py`;
+4. actualizar pruebas, `CHANGELOG.md`, `README.md`, `ROADMAP.md` y esta guía.
