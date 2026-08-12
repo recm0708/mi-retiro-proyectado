@@ -307,7 +307,30 @@ La comparación debe reutilizar los motores existentes, conservar un escenario b
 
 **RF-114.** El foco de teclado sobre el control de selección de retiro debe reforzar visualmente la fila asociada y, cuando el sistema operativo active colores forzados, la selección debe respetar los colores de resaltado del sistema.
 
-## 15. Fuera del alcance inmediato
+
+## 15. UX.4.3 — errores, foco y operación por teclado
+
+**RF-115.** Cuando la validación nativa de un control falle, el campo debe quedar marcado con `aria-invalid` y disponer de un mensaje programáticamente asociado mediante `aria-errormessage`, sin reemplazar la ayuda contextual o descriptiva ya existente.
+
+**RF-116.** Al corregirse un control inválido o reiniciarse el formulario, la asociación de error y el estado `aria-invalid` deben retirarse para evitar mensajes obsoletos.
+
+**RF-117.** Los errores dinámicos de una operación deben usar una única semántica urgente, recibir foco programático cuando pasan de ocultos a visibles y mostrar un foco perceptible; no deben combinar `role="alert"` con una segunda región `aria-live="assertive"` redundante.
+
+**RF-118.** Las advertencias dinámicas no urgentes pueden utilizar `role="status"` y `aria-live="polite"`; si una advertencia se declara explícitamente urgente como `alert`, no debe duplicar otra región viva.
+
+**RF-119.** Los controles de selección de escenarios de retiro deben conservar la operación nativa con teclado y aceptar Enter como alternativa sobre el radio, sin convertir toda la fila en un segundo control enfocable.
+
+**RF-120.** Las páginas públicas principales deben conservar un único `h1` como encabezado principal de la vista; los encabezados internos del wizard y resultados continúan desde niveles subordinados.
+
+**RF-121.** La capa de accesibilidad dinámica no debe generar ciclos de mutación sobre las clases que observa. Las actualizaciones de clase ejecutadas desde el observador deben ser idempotentes para mantener la interfaz disponible.
+
+**RF-122.** La limpieza reactiva de errores durante `input` y `change` debe consultar el estado de validez sin redisparar el evento `invalid`.
+
+**RF-123.** Todo control inválido debe mostrar un mensaje de error visible junto al campo, además de mantener la asociación programática mediante `aria-errormessage`; el color o el borde no pueden ser la única señal de error.
+
+**RF-124.** La presentación de errores de campo no debe depender del globo nativo del navegador. La aplicación puede suprimir esa presentación durante `invalid` siempre que conserve la validación, el bloqueo de avance, el foco sobre el primer campo inválido y el mensaje accesible propio.
+
+## 16. Fuera del alcance inmediato
 
 Quedan para fases posteriores:
 
@@ -318,3 +341,12 @@ Quedan para fases posteriores:
 - reconstrucción completa de cuentas CAP/SUCGS desde movimientos mensuales oficiales;
 - auditoría integral WCAG 2.2 y pruebas asistidas con tecnologías de apoyo;
 - revisión visual cruzada de todos los temas en formularios y resultados extensos.
+
+
+## 16. UX.4.4 — edad por año en la línea temporal
+
+**RF-125.** Las tablas **Historial salarial real** y **Proyección futura** del Paso 4 deben mostrar una columna **Edad** asociada a cada año calendario presentado.
+
+**RF-126.** La edad anual se deriva de la fecha de nacimiento ya capturada en el Paso 1 mediante la convención `año mostrado - año de nacimiento`, que representa la edad que el Asegurado(a) cumple durante ese año. Si la fecha de nacimiento no está disponible o no es válida, la interfaz debe mostrar una raya en lugar de inventar un valor.
+
+**RF-127.** La edad anual es un dato derivado de presentación y no puede modificar salarios, cuotas, elegibilidad, fechas de retiro ni resultados de los motores previsionales.

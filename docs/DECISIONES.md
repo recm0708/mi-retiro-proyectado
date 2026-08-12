@@ -629,3 +629,42 @@ El indicador continúa siendo un control enfocable para que la información no d
 Cuando el sistema operativo fuerce colores, la selección debe delegar en los colores de resaltado del sistema en lugar de conservar una paleta propia que pueda perder contraste. El foco de teclado sobre el radio debe permitir localizar también la fila asociada.
 
 **Motivo:** una selección previsional puede determinar el escenario utilizado por el Paso 6. Hacerla perceptible mediante varias señales reduce ambigüedad visual, mejora orientación con teclado y evita que una combinación de tema o contraste convierta una decisión importante en un cambio cromático demasiado sutil.
+
+## ADR-064 — Separar validación de campo, alerta urgente y advertencia no urgente
+
+**Estado:** Aceptada
+
+**Decisión:** la interfaz distinguirá tres canales de retroalimentación accesible. Un error de validación nativa se asocia directamente con su control mediante `aria-invalid` y `aria-errormessage`; un error dinámico de operación usa `role="alert"`, se vuelve enfocable programáticamente al aparecer y no añade una segunda región `aria-live="assertive"`; una advertencia no urgente puede usar `role="status"` con prioridad `polite`.
+
+La asociación de error de campo debe retirarse cuando el valor vuelve a ser válido o el formulario se reinicia. El foco automático de una alerta dinámica no debe desplazar al Asegurado(a) si ya está corrigiendo un control marcado como inválido.
+
+**Motivo:** separar estos canales evita anuncios duplicados, reduce ruido para tecnologías de apoyo y conserva una relación clara entre el problema, el control que debe corregirse y los mensajes generales emitidos por una operación.
+
+
+## ADR-065 — Las mutaciones observadas de accesibilidad deben ser idempotentes
+
+**Estado:** Aceptada
+
+**Decisión:** cualquier función invocada desde el `MutationObserver` global de accesibilidad debe evitar escrituras redundantes sobre los atributos que el propio observador vigila. Antes de añadir una clase se comprobará que no exista y antes de retirarla se comprobará que esté presente. Para consultar validez durante `input` o `change` se utilizará `ValidityState.valid` cuando no se quiera emitir de nuevo el evento `invalid`.
+
+**Motivo:** escribir repetidamente una clase observada puede generar una cadena de notificaciones del `MutationObserver`, saturar el hilo principal y dejar la interfaz cargando sin responder aunque FastAPI siga devolviendo HTTP 200. Asimismo, `checkValidity()` puede volver a emitir `invalid` y provocar retroalimentación innecesaria durante la corrección de un campo.
+
+
+## ADR-066 — Los errores de campo deben ser visibles y no depender del globo nativo
+
+**Estado:** Aceptada
+
+**Decisión:** cuando un control falle la validación, la interfaz mostrará un mensaje inline visible junto al campo y lo asociará programáticamente mediante `aria-errormessage`. El manejador `invalid` suprimirá únicamente la presentación nativa del navegador mediante `preventDefault()`; la restricción de validación y el bloqueo de avance permanecen activos.
+
+**Motivo:** los globos nativos no se presentan de forma uniforme entre navegadores, tipos de control ni plataformas. Un borde rojo sin texto tampoco comunica por sí solo la causa del problema. El mensaje propio mantiene consistencia visual, accesibilidad, trazabilidad y permite validar el comportamiento de manera automatizada.
+
+
+## ADR-067 — Mostrar la edad que se cumple durante cada año de la línea temporal
+
+**Estado:** Aceptada
+
+**Decisión:** el Paso 4 mostrará una columna **Edad** inmediatamente después de **Año** tanto en Historial salarial real como en Proyección futura. La edad se calculará exclusivamente para presentación como `año calendario - año de nacimiento`. Si la fecha de nacimiento no está disponible o no puede interpretarse, se mostrará una raya.
+
+La edad no se incorporará al contrato de los motores ni se persistirá como un dato independiente, porque puede derivarse de la fecha de nacimiento ya capturada.
+
+**Motivo:** los comprobantes oficiales utilizados como referencia presentan Año y Edad de forma conjunta. Mostrar ambos valores facilita contrastar la simulación con el historial de la CSS y evita que el Asegurado(a) tenga que calcular manualmente su edad para cada período. Mantenerla como dato derivado evita duplicidad y riesgo de inconsistencias.

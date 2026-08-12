@@ -1,5 +1,15 @@
 # Changelog
 
+### UX.4.4 — edad por año en línea temporal
+
+- Historial salarial real incorpora la columna **Edad** inmediatamente después de Año.
+- Proyección futura incorpora la misma columna para mantener continuidad entre datos históricos y estimaciones.
+- La edad se deriva de la fecha de nacimiento ya guardada en el Paso 1 usando la convención de año calendario observada en los comprobantes de validación: `año - año de nacimiento`.
+- La presentación no altera cálculos previsionales, cuotas ni salarios; es información derivada exclusivamente para orientación visual.
+- La tabla temporal aumenta su ancho mínimo para conservar legibilidad con la columna adicional.
+- La suite alcanza **128 pruebas automatizadas**.
+
+
 Todos los cambios relevantes del proyecto se documentan aquí.
 
 El proyecto todavía no ha publicado una versión estable; los cambios actuales se acumulan bajo **Unreleased** para la futura versión `0.1.0`.
@@ -42,6 +52,12 @@ El proyecto todavía no ha publicado una versión estable; los cambios actuales 
 - UX.4.2 mantiene el número del paso activo en blanco cuando el tema efectivo es Claro, mejorando contraste sobre el círculo azul.
 - La fila seleccionada de **Fechas y cuotas estimadas de retiro** refuerza su estado mediante fondo, contorno, radio y badge específicos para Claro, Oscuro y Alto contraste, con señal adicional de foco y soporte para colores forzados.
 - La suite alcanza **112 pruebas automatizadas** con regresiones específicas de estados activos y selección perceptible.
+- UX.4.3 asocia los errores de validación nativa con cada control mediante `aria-errormessage` y limpia ese estado cuando el dato vuelve a ser válido.
+- Los errores dinámicos se enfocan al aparecer y usan `role="alert"` sin duplicar una segunda región viva `assertive`; las advertencias no urgentes pueden anunciarse como `status` de prioridad `polite`.
+- El selector de escenario de retiro admite Enter sobre el radio, manteniendo la operación nativa con Espacio y flechas sin agregar un tab stop a toda la fila.
+- Se corrige un ciclo de mutaciones de clase en la capa de accesibilidad que podía mantener ocupado el hilo principal y dejar las páginas públicas cargando indefinidamente; las mutaciones observadas pasan a ser idempotentes.
+- La limpieza de errores usa `ValidityState.valid` en lugar de `checkValidity()`, evitando redisparar eventos `invalid` durante `input`/`change`.
+- La suite alcanza **122 pruebas automatizadas** con regresiones específicas de UX.4.3 y su remate de estabilidad.
 - UX.4.1 incorpora una capa global de accesibilidad mediante `accesibilidad.js` y `accesibilidad.css`, sin trasladar lógica previsional al frontend.
 - Los campos que suelen generar dudas reciben ayudas contextuales desplegables y accesibles mediante `aria-expanded` y `aria-controls`.
 - Los formularios marcan controles inválidos con `aria-invalid`, llevan el foco al primer campo que requiere corrección y anuncian el problema mediante una región viva global.

@@ -90,7 +90,7 @@ python -m compileall app
 python -m unittest discover -s tests -v
 ```
 
-También se deben probar manualmente en navegador las rutas y pasos afectados.
+También se deben probar manualmente en navegador las rutas y pasos afectados. En cambios de accesibilidad, revisar además recorrido con teclado, foco visible y comportamiento de errores sin asumir que una prueba automatizada equivale a una auditoría con tecnologías de apoyo.
 
 Para cambios en archivos Markdown o configuración, revisar además:
 
@@ -216,3 +216,8 @@ node --check app/static/js/accesibilidad.js
 
 No se debe crear `package.json` ni añadir paquetes npm mientras el frontend no tenga una dependencia real que lo justifique. Si en una fase futura aparece una dependencia JavaScript de compilación o pruebas, se documentará y versionará con su propio mecanismo de dependencias en lugar de mezclarla con `requirements.txt`.
 
+
+
+## 16. Datos derivados de presentación
+
+Cuando un valor visible pueda derivarse de un dato fuente ya persistido, evitar duplicarlo en el modelo salvo que el motor lo necesite como contrato independiente. La edad anual de la línea temporal se deriva de la fecha de nacimiento para cada año mostrado y debe mantenerse sincronizada en historial y proyección.

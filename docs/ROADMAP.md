@@ -218,6 +218,10 @@ Previsto:
 - [x] captions accesibles para tablas, foco condicionado a desbordamiento y aviso de enlaces que abren otra pestaña;
 - [x] selección de escenarios de retiro desde cualquier punto de una fila futura y remate visual de acciones auxiliares;
 - [x] UX.4.2 con contraste corregido del paso activo en Claro y selección reforzada de filas de retiro en los tres temas;
+- [x] UX.4.3 con errores de campo asociados, foco de recuperación, anuncios no duplicados y operación del radio de retiro con Enter;
+- [x] remate UX.4.3 con `MutationObserver` idempotente y validación reactiva sin redisparar `invalid`;
+- [x] remate UX.4.3 con mensajes de error inline visibles y sin dependencia del globo nativo del navegador;
+- [x] UX.4.4: columna **Edad** en Historial salarial real y Proyección futura, derivada de la fecha de nacimiento y alineada con la convención de los comprobantes oficiales;
 - [x] respuesta temporal sin error para `/favicon.ico` mientras no se integran los iconos definitivos;
 - [ ] integrar favicon e iconos definitivos de **Mi Retiro Proyectado** y retirar la respuesta temporal `204`.
 
@@ -225,7 +229,7 @@ Previsto:
 
 Estado técnico actual; la validación manual multidispositivo queda aplazada y las revisiones inmediatas se realizan en laptop/PC:
 
-- **112 pruebas automatizadas** en `OK`;
+- **128 pruebas automatizadas** en `OK`;
 - regresión SEBD real anonimizada;
 - casos sintéticos de Mixto;
 - casos sintéticos SUCGS;

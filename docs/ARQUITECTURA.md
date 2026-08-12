@@ -326,3 +326,16 @@ En el Paso 5, JavaScript captura `ultimo_mes_cuotas` con granularidad `YYYY-MM` 
 
 Las dependencias de ejecución Python continúan centralizadas en `requirements.txt`. Node.js LTS no forma parte del runtime ni se instala mediante `pip`; se usa únicamente como herramienta opcional para validaciones estáticas como `node --check`. Actualmente no existe una cadena de compilación frontend ni dependencias npm que requieran `package.json`.
 
+
+## UX.4.3 — canal de errores y foco de recuperación
+
+`app/static/js/accesibilidad.js` mantiene la semántica de validación separada de la lógica de negocio. La validación crea un mensaje inline visible asociado al campo mediante `aria-errormessage`; al corregirse el valor, se elimina tanto el mensaje como `aria-invalid`. Los errores generales generados por servicios o reglas del frontend permanecen en sus contenedores visibles existentes y reciben foco únicamente cuando pasan de ocultos a visibles.
+
+La presentación nativa variable del navegador se suprime durante `invalid`; la aplicación conserva el bloqueo de envío, enfoca el primer control inválido y presenta su propio mensaje consistente. Esta capa evita duplicar anuncios urgentes: `role="alert"` es suficiente para errores críticos y no se combina con otra región `aria-live="assertive"`. Las advertencias no urgentes pueden usar `status/polite`. La tabla de retiro conserva el radio como único control enfocable de cada fila; Enter se añade como alternativa de teclado sin introducir un segundo tab stop en el `<tr>`.
+
+El `MutationObserver` transversal observa inserciones y cambios de clase necesarios para componentes dinámicos. Toda mutación de clase realizada por funciones llamadas desde ese observador debe ser idempotente: antes de añadir una clase se verifica que no exista y antes de retirarla se verifica que esté presente. Esto evita realimentaciones infinitas del propio observador y protege el hilo principal del navegador. La limpieza de errores consulta `ValidityState.valid` para no redisparar `invalid` mediante `checkValidity()`.
+
+
+## UX.4.4 — dato derivado de edad en presentación
+
+`app/static/js/linea_tiempo.js` deriva la edad anual desde `simulacion.persona.fecha_nacimiento` únicamente para renderizar las tablas del Paso 4. No se añade un campo nuevo a los modelos ni a los endpoints de cálculo: la fecha de nacimiento continúa siendo la fuente única y la edad se recalcula como `año - año de nacimiento` al construir cada fila.

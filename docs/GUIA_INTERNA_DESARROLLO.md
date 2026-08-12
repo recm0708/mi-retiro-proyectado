@@ -164,3 +164,26 @@ La ausencia de Node.js no impide ejecutar FastAPI ni la suite `unittest`. Si en 
 - `:focus-within` debe hacer visible la fila asociada al radio cuando se navega con teclado.
 - `forced-colors: active` debe delegar la selección en `Highlight` y `HighlightText` del sistema.
 - No eliminar el control de radio: el clic sobre toda la fila es una mejora de puntero, mientras el radio conserva la semántica y operación de teclado.
+
+
+## 15. UX.4.3 — errores y recuperación por teclado
+
+- Un control inválido debe conservar su etiqueta y ayudas existentes; el mensaje de error específico se muestra inline y se asocia mediante `aria-errormessage`.
+- `aria-invalid` y el mensaje asociado se eliminan cuando el valor vuelve a ser válido o el formulario se reinicia.
+- No depender del globo nativo del navegador como única retroalimentación: suprimir su presentación en `invalid` y usar el mensaje inline propio.
+- Un error general de operación usa `role="alert"`; no añadir además `aria-live="assertive"` al mismo nodo.
+- Las advertencias no urgentes pueden usar `role="status"` con `aria-live="polite"`.
+- Cuando un error general pasa de oculto a visible puede recibir foco programático, pero no debe desplazar el foco si el Asegurado(a) ya está corrigiendo un control inválido.
+- No hacer enfocable una fila completa si ya contiene un radio, checkbox, enlace o botón que representa la acción. Para selección de retiro, el radio sigue siendo el control semántico y Enter actúa como alternativa adicional.
+- Las páginas públicas deben conservar un único `h1`; los títulos de paneles y secciones deben continuar con niveles subordinados coherentes.
+- Las funciones llamadas por el `MutationObserver` deben ser idempotentes sobre `class`; no repetir `classList.add()` para una clase ya presente ni `classList.remove()` para una ausente.
+- En validación reactiva, usar `control.validity.valid` para consultar estado sin emitir de nuevo `invalid`; reservar `checkValidity()`/`reportValidity()` para flujos donde esa emisión sea intencional.
+
+
+## 16. UX.4.4 — edad anual en la línea temporal
+
+- La columna **Edad** de Paso 4 es derivada; no almacenar una segunda edad persistente.
+- Usar la convención `año calendario - año de nacimiento`, que expresa la edad que se cumple durante ese año y coincide con los comprobantes usados en validación.
+- Si falta una fecha de nacimiento válida, mostrar `—`; no asumir una edad.
+- Mantener la columna inmediatamente después de **Año** en Historial salarial real y Proyección futura.
+- Cualquier cambio futuro de esta convención debe actualizar pruebas, especificación, ADR y validación manual de los casos de referencia.

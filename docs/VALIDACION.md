@@ -423,3 +423,35 @@ La suite alcanza **112 pruebas automatizadas**. `tests/test_ux42_estados_visuale
 4. el foco de teclado sobre el radio resalta la fila asociada y existe una adaptación para `forced-colors`.
 
 Estas regresiones protegen la estructura CSS, pero la percepción final del contraste y de la jerarquía de selección se revisa manualmente en PC/laptop antes del cierre de UX.4.2. La ronda multidispositivo continúa diferida.
+
+
+## Validación UX.4.3 — errores, foco y teclado
+
+La suite alcanza **124 pruebas automatizadas**. `tests/test_ux43_formularios_teclado.py` añade doce regresiones:
+
+1. los errores nativos crean un mensaje asociado mediante `aria-errormessage`;
+2. el estado inválido y su mensaje se eliminan cuando el control vuelve a ser válido o el formulario se reinicia;
+3. los errores dinámicos usan `role="alert"` sin una segunda región `assertive`;
+4. una alerta general recibe foco únicamente cuando pasa de oculta a visible y no desplaza un campo que ya se está corrigiendo;
+5. las advertencias no urgentes pueden usar `status/polite`;
+6. el foco programático de mensajes dispone de contorno visible también en Alto contraste;
+7. el radio de escenarios de retiro acepta Enter sin convertir la fila completa en un tab stop adicional;
+8. Inicio, Simulación, Comparador y Metodología conservan un único `h1`;
+9. las clases añadidas desde la sincronización observada se protegen contra escrituras redundantes para evitar ciclos del `MutationObserver`;
+10. la limpieza reactiva consulta `ValidityState.valid` y no usa `checkValidity()` para evitar redisparar `invalid`;
+11. el mensaje específico de un control inválido es visible y no usa `visually-hidden`;
+12. el manejador `invalid` suprime el globo nativo y mantiene el mensaje inline propio asociado.
+
+Además de las pruebas unitarias, el remate de estabilidad se verifica con un navegador Chromium real contra `/simulacion`, comprobando que el documento termina de cargar y que el proceso no queda atrapado en un ciclo de mutaciones. La validación manual inmediata de UX.4.3 se mantiene en PC/laptop e incluye provocar campos obligatorios vacíos en los Pasos 1 y 2 para confirmar que el mensaje inline aparece, el foco llega al primer control inválido y el estado se limpia al corregirlo. La comprobación con lector de pantalla, móvil/tablet y otras tecnologías de apoyo sigue reservada para la ronda integral de cierre WCAG 2.2.
+
+
+## Validación UX.4.4 — edad anual en historial y proyección
+
+La suite alcanza **128 pruebas automatizadas**. `tests/test_ux44_edad_linea_tiempo.py` protege cuatro condiciones:
+
+1. la edad anual se deriva de `persona.fecha_nacimiento` y del año de cada fila;
+2. Historial salarial real contiene la columna **Edad** entre Año y Cuotas;
+3. Proyección futura contiene la columna **Edad** entre Año y Cuotas proyectadas;
+4. la tabla conserva un ancho mínimo legible y `/simulacion` continúa cargando el recurso de línea temporal.
+
+La validación manual debe contrastar al menos los casos de referencia disponibles contra sus comprobantes oficiales. Para el caso femenino de nacimiento en 1969, 1992 debe mostrar 23 y 2027 debe mostrar 58; para el caso masculino de nacimiento en 1966, 1986 debe mostrar 20 y 2028 debe mostrar 62. Los documentos originales con datos personales permanecen fuera del repositorio.
