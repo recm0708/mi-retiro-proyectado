@@ -139,6 +139,11 @@ class TestResultadosSUCGS(unittest.TestCase):
         self.assertEqual(resultado.calculo.pension_mensual_total_estimada, 477.00)
         self.assertFalse(resultado.calculo.garantia_reemplazo_aplica)
         self.assertIn(2001, resultado.calculo.anios_con_1_a_4_cuotas)
+        self.assertIsNotNone(resultado.resumen_unificado)
+        self.assertEqual(
+            resultado.resumen_unificado.pension_mensual_estimada,
+            477.00,
+        )
 
     def test_integrado_240_equilibrado_aplica_garantia_600(self):
         registros = []

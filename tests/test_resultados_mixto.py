@@ -125,6 +125,11 @@ class TestResultadosMixto(unittest.TestCase):
             856.25,
         )
         self.assertEqual(resultado.anios_proyectados_incluidos, [])
+        self.assertIsNotNone(resultado.resumen_unificado)
+        self.assertEqual(
+            resultado.resumen_unificado.pension_mensual_estimada,
+            856.25,
+        )
 
     def test_auto_integrado_con_200_cuotas_exige_decision(self):
         datos = DatosResultadoMixto(

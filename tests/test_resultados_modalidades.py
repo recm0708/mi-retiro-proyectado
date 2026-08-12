@@ -131,6 +131,11 @@ class TestResultadosModalidadesSEBD(unittest.TestCase):
         self.assertEqual(resultado.calculo.modalidad, "ANTICIPADA")
         self.assertEqual(resultado.calculo.factor_reduccion_edad, 0.9927)
         self.assertEqual(resultado.calculo.pension_mensual_estimada, 736.18)
+        self.assertIsNotNone(resultado.resumen_unificado)
+        self.assertEqual(
+            resultado.resumen_unificado.pension_mensual_estimada,
+            736.18,
+        )
 
 
 if __name__ == "__main__":
