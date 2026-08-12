@@ -149,6 +149,76 @@ class RetiroTests(unittest.TestCase):
         self.assertEqual(resumen.escenarios[1].tipo, "ANTICIPADO")
         self.assertEqual(resumen.escenarios[2].tipo, "REFERENCIA")
 
+
+    def test_ultimo_mes_acreditado_deriva_corte_al_fin_de_mes(self):
+        resumen = analizar_retiro(
+            DatosRetiro(
+                fecha_nacimiento=date(1969, 11, 16),
+                sexo="FEMENINO",
+                fecha_corte=date(2026, 8, 10),
+                ultimo_mes_cuotas="2026-05",
+                cuotas_reales=281,
+                cuotas_anio_actual=5,
+                cuotas_esperadas_cierre_anio=5,
+                continua_cotizando=True,
+                cuotas_esperadas_por_anio=12,
+                anio_fin_proyeccion_salarial=2031,
+                anios_adicionales=[0],
+            )
+        )
+
+        self.assertEqual(
+            resumen.fecha_corte_cuotas,
+            date(2026, 5, 31),
+        )
+        self.assertIn(
+            "último mes con cuotas acreditadas",
+            resumen.metodo_estimacion_cuotas.lower(),
+        )
+
+    def test_ultimo_mes_actual_no_supera_fecha_de_evaluacion(self):
+        resumen = analizar_retiro(
+            DatosRetiro(
+                fecha_nacimiento=date(1969, 11, 16),
+                sexo="FEMENINO",
+                fecha_corte=date(2026, 8, 10),
+                ultimo_mes_cuotas="2026-08",
+                cuotas_reales=281,
+                cuotas_anio_actual=5,
+                cuotas_esperadas_cierre_anio=5,
+                continua_cotizando=True,
+                cuotas_esperadas_por_anio=12,
+                anio_fin_proyeccion_salarial=2031,
+                anios_adicionales=[0],
+            )
+        )
+
+        self.assertEqual(
+            resumen.fecha_corte_cuotas,
+            date(2026, 8, 10),
+        )
+
+    def test_ultimo_mes_futuro_se_rechaza(self):
+        with self.assertRaisesRegex(
+            ValueError,
+            "último mes con cuotas acreditadas",
+        ):
+            analizar_retiro(
+                DatosRetiro(
+                    fecha_nacimiento=date(1969, 11, 16),
+                    sexo="FEMENINO",
+                    fecha_corte=date(2026, 8, 10),
+                    ultimo_mes_cuotas="2026-09",
+                    cuotas_reales=281,
+                    cuotas_anio_actual=5,
+                    cuotas_esperadas_cierre_anio=5,
+                    continua_cotizando=True,
+                    cuotas_esperadas_por_anio=12,
+                    anio_fin_proyeccion_salarial=2031,
+                    anios_adicionales=[0],
+                )
+            )
+
     def test_referencia_masculina_es_62(self):
         resumen = analizar_retiro(
             DatosRetiro(
