@@ -95,7 +95,7 @@ Esto permitirá desarrollar indistintamente desde diferentes computadoras utiliz
 
 Durante la primera etapa del proyecto, los datos de una simulación en curso se conservarán temporalmente en `sessionStorage`.
 
-Esto permite mantener la información al recargar la pestaña sin guardar automáticamente datos personales en una base de datos. Una futura persistencia permanente deberá ser una acción explícita del usuario.
+Esto permite mantener la información al recargar la pestaña sin guardar automáticamente datos personales en una base de datos. Una futura persistencia permanente deberá ser una acción explícita del Asegurado(a).
 
 ---
 
@@ -195,7 +195,7 @@ Si una norma aplicable establece un método de redondeo distinto, esa regla norm
 
 La proyección de cuotas del Paso 5 respetará primero `cuotas_esperadas_cierre_anio` del Paso 2.
 
-La densidad `cuotas_esperadas_por_anio` se utilizará para los años futuros y, cuando sea necesario, se prorrateará el año de retiro. Esto evita agregar cuotas en el año actual cuando el usuario ya indicó que no espera nuevas acreditaciones antes de cerrarlo.
+La densidad `cuotas_esperadas_por_anio` se utilizará para los años futuros y, cuando sea necesario, se prorrateará el año de retiro. Esto evita agregar cuotas en el año actual cuando el Asegurado(a) ya indicó que no espera nuevas acreditaciones antes de cerrarlo.
 
 ---
 
@@ -205,7 +205,7 @@ La densidad `cuotas_esperadas_por_anio` se utilizará para los años futuros y, 
 
 Un escenario de retiro no se considerará completamente cubierto si su fecha se extiende más allá del último año de la proyección salarial.
 
-La aplicación advertirá la inconsistencia y ofrecerá volver al Paso 4 para extender el horizonte. No se extrapolarán silenciosamente salarios sin confirmación del usuario.
+La aplicación advertirá la inconsistencia y ofrecerá volver al Paso 4 para extender el horizonte. No se extrapolarán silenciosamente salarios sin confirmación del Asegurado(a).
 
 ---
 
@@ -252,9 +252,9 @@ Cuando un año futuro solo se utiliza parcialmente hasta la fecha de retiro, el 
 
 **Estado:** Aceptada
 
-**Decisión:** el usuario selecciona una fecha/escenario de retiro y la aplicación determina automáticamente si corresponde Normal, Anticipada, Proporcional, Proporcional Anticipada, posible Indemnización por Vejez o un escenario no elegible.
+**Decisión:** el Asegurado(a) selecciona una fecha/escenario de retiro y la aplicación determina automáticamente si corresponde Normal, Anticipada, Proporcional, Proporcional Anticipada, posible Indemnización por Vejez o un escenario no elegible.
 
-**Motivo:** evita que el usuario tenga que conocer de antemano la denominación jurídica correcta y reduce inconsistencias entre edad, cuotas y modalidad seleccionada manualmente.
+**Motivo:** evita que el Asegurado(a) tenga que conocer de antemano la denominación jurídica correcta y reduce inconsistencias entre edad, cuotas y modalidad seleccionada manualmente.
 
 ## ADR-024 — Años calendario parciales dentro de los mejores años
 
@@ -448,13 +448,13 @@ Para Mixto y SUCGS, cuando se evalúe una fecha alternativa se reutilizarán exp
 
 Los enlaces oficiales provienen de `normativa/*.json`; JavaScript solo renderiza la estructura recibida.
 
-**Motivo:** evita inconsistencias entre la cifra mostrada y su explicación, permite reutilizar una misma estructura en SEBD, Mixto y SUCGS y prepara la futura metodología 6F.3 y los informes sin crear una cuarta implementación de las fórmulas previsionales.
+**Motivo:** evita inconsistencias entre la cifra mostrada y su explicación, permite reutilizar una misma estructura en SEBD, Mixto y SUCGS y permite reutilizar la metodología y los futuros informes sin crear una cuarta implementación de las fórmulas previsionales.
 
 ## ADR-043 — Las fuentes visibles usan nombres humanos y metadatos versionados
 
 **Estado:** Aceptada
 
-**Decisión:** los identificadores internos como `texto_unico`, `ley_462` o `reglamento_cccs` no se mostrarán literalmente al usuario. La interfaz resolverá cada identificador contra el catálogo de fuentes recibido del backend y presentará el título humano y, cuando exista, un enlace oficial.
+**Decisión:** los identificadores internos como `texto_unico`, `ley_462` o `reglamento_cccs` no se mostrarán literalmente al Asegurado(a). La interfaz resolverá cada identificador contra el catálogo de fuentes recibido del backend y presentará el título humano y, cuando exista, un enlace oficial.
 
 La página `/metodologia` reutiliza las URLs versionadas de `normativa/*.json` y las agrupa por SEBD, Mixto y SUCGS. La capa de presentación puede añadir etiquetas y alcance, pero no sustituye la fuente normativa ni introduce reglas de cálculo.
 
@@ -470,3 +470,116 @@ El resumen transversal se construye después de ejecutar el motor y la trazabili
 
 **Motivo:** evita que la interfaz, el comparador y futuros informes mantengan tres interpretaciones distintas de conceptos equivalentes. También garantiza que una indemnización o devolución no pueda confundirse con una pensión mensual y que los estados pendientes o de transición conserven una interpretación homogénea.
 
+## ADR-045 — Adoptar una identidad de producto independiente
+
+**Estado:** Aceptada
+
+**Decisión:** la aplicación se denomina **Mi Retiro Proyectado** en la interfaz, documentación y metadatos públicos.
+
+**Motivo:** `Mi Retiro Seguro` es el nombre de una herramienta oficial de la CSS. Usar ese nombre con un sufijo como `v2` podría sugerir una versión oficial, sucesora o afiliada. El nombre adoptado mantiene el propósito previsional sin crear esa apariencia.
+
+## ADR-046 — Denominar Asegurado(a) al público de la aplicación
+
+**Estado:** Aceptada
+
+**Decisión:** los textos visibles y la documentación funcional utilizan **Asegurado(a)** en singular y **Asegurados(as)** en plural para referirse a quienes realizan simulaciones.
+
+**Motivo:** alinea la terminología con el dominio de seguridad social y evita usar `usuario` como denominación pública genérica.
+
+## ADR-047 — Unificar la escala tipográfica visible
+
+**Estado:** Aceptada
+
+**Decisión:** párrafos, ayudas, controles, tablas y navegación comparten un tamaño base. Solo encabezados, valores previsionales relevantes y elementos compactos de estado pueden apartarse de esa escala.
+
+**Motivo:** reduce variaciones arbitrarias de tamaño, mejora consistencia y conserva énfasis para montos y resultados que requieren atención.
+
+## ADR-048 — Separar información del Asegurado(a) y documentación interna
+
+**Estado:** Aceptada
+
+**Decisión:** la interfaz no muestra nombres de subfases, rutas del repositorio, ADR, archivos `docs/*.md` ni identificadores técnicos. Esos elementos permanecen en la documentación de desarrollo.
+
+**Motivo:** el Asegurado(a) necesita metodología, fuentes y resultados, no detalles de organización interna del proyecto.
+
+## ADR-049 — Preferencia visual local e independiente de la simulación
+
+**Estado:** Aceptada
+
+**Decisión:** la aplicación ofrece los modos **Seguir sistema**, **Claro**, **Oscuro** y **Alto contraste**. La preferencia se conserva en `localStorage` con una clave propia y no forma parte del objeto previsional ni del estado de cálculo almacenado en `sessionStorage`.
+
+**Motivo:** la apariencia es una preferencia del navegador, no un dato de la prestación. Separarla evita contaminar simulaciones y permite respetar la configuración del sistema operativo cuando el Asegurado(a) así lo elige.
+
+## ADR-050 — Accesibilidad base transversal en la plantilla global
+
+**Estado:** Aceptada
+
+**Decisión:** la plantilla global incorpora enlace de salto al contenido, `aria-current` para navegación activa, foco visible, objetivos táctiles principales de al menos 44 px y respeto a `prefers-reduced-motion`. Las mejoras se aplican de forma transversal y no se duplican en cada pantalla.
+
+**Motivo:** estas medidas reducen barreras de teclado, movilidad y sensibilidad al movimiento y constituyen una base verificable para la revisión WCAG 2.2 posterior.
+
+## ADR-051 — Pie de página compacto como información legal global
+
+**Estado:** Aceptada
+
+**Decisión:** el pie de página utiliza dos líneas compactas: la primera concentra nombre, copyright, autor y reserva de derechos; la segunda concentra el aviso de independencia y el acceso a Mi Caja Digital. Se evita presentarlo como una tarjeta o bloque separado.
+
+**Motivo:** el contenido legal debe estar siempre disponible sin competir visualmente con los resultados previsionales ni aumentar innecesariamente la altura de cada página.
+
+## ADR-052 — Usar tokens semánticos para todos los colores visibles
+
+**Estado:** Aceptada
+
+**Decisión:** los componentes visibles deben consumir tokens semánticos de superficie, texto, borde, información, éxito, advertencia, neutral y selección. Los colores literales quedan limitados a la definición central de cada tema y no deben introducirse directamente en tarjetas, estados o alertas nuevas.
+
+**Motivo:** evita que un componente diseñado para Claro conserve fondos o textos de bajo contraste al cambiar a Oscuro o Alto contraste y permite mantener una jerarquía cromática consistente en toda la aplicación.
+
+## ADR-053 — Tratar Alto contraste como tema oscuro de contraste máximo
+
+**Estado:** Aceptada
+
+**Decisión:** Alto contraste utiliza fondo negro, texto blanco, bordes visibles y foco amarillo, con acciones primarias claramente diferenciadas. No se implementa como una variante clara con bordes más fuertes.
+
+**Motivo:** un modo de alto contraste debe reducir ambigüedad visual y depender también de bordes y forma, no solamente de cambios de color sobre superficies claras.
+
+## ADR-054 — Convertir Inicio en una portada orientada al Asegurado(a)
+
+**Estado:** Aceptada
+
+**Decisión:** la página de Inicio prioriza propósito, acción principal, sistemas cubiertos, capacidades, proceso de seis pasos y aviso breve de independencia. Se eliminan composiciones de maqueta que no ayudan a decidir qué hacer a continuación.
+
+**Motivo:** la portada debe explicar en pocos segundos qué hace Mi Retiro Proyectado y cómo comenzar, sin exponer terminología de desarrollo ni competir con las pantallas de cálculo.
+
+## ADR-055 — Reservar detalles de implementación para documentación interna
+
+**Estado:** Aceptada
+
+**Decisión:** expresiones sobre metadatos, rutas `normativa/*.json`, backend, endpoints, estructura del repositorio y mecanismos internos de carga no deben mostrarse al Asegurado(a). Cuando sea útil explicar una fuente, se presenta únicamente su nombre humano, alcance y enlace oficial.
+
+**Motivo:** la trazabilidad jurídica es contenido del producto; el mecanismo técnico con el que se obtiene esa trazabilidad pertenece a mantenimiento y desarrollo.
+
+## ADR-056 — Responsive por contenido y no por reducción indiscriminada
+
+**Estado:** Aceptada
+
+**Decisión:** UX.3 utiliza los breakpoints de Bootstrap como referencia, pero cada componente define su adaptación según su contenido. Las tablas extensas conservan un ancho mínimo legible y se desplazan dentro de su propio contenedor; las tarjetas, formularios y acciones sí se reorganizan en una sola columna cuando el ancho disponible lo requiere.
+
+**Motivo:** comprimir todas las columnas hasta que entren en una pantalla móvil degrada la lectura y puede ocultar la relación entre datos. El desplazamiento localizado conserva la estructura de tablas previsionales sin provocar desbordamiento horizontal de toda la página.
+
+## ADR-057 — Navegación persistente inferior en móvil
+
+**Estado:** Aceptada
+
+**Decisión:** en anchos menores de 768 px la navegación persistente del asistente se fija en la parte inferior, respeta las áreas seguras del dispositivo y mantiene la acción principal, retroceso y selector de paso. El progreso de seis pasos permanece arriba como una franja horizontal desplazable.
+
+**Motivo:** una barra superior persistente consume demasiado espacio vertical en móvil y compite con encabezados y formularios. La barra inferior mantiene las acciones al alcance del pulgar sin eliminar la navegación directa entre pasos.
+
+## ADR-058 — El Paso 5 solicita el último mes acreditado, no una fecha de retiro implícita
+
+**Estado:** Aceptada
+
+**Decisión:** la interfaz del Paso 5 separa tres conceptos: fecha de evaluación, último mes con cuotas acreditadas y fechas de retiro. El Asegurado(a) selecciona el último mes acreditado mediante un control mensual `YYYY-MM`. El servicio deriva la fecha técnica de corte al último día de ese mes; si el mes coincide con el de evaluación, la fecha se limita al propio día de evaluación. La fecha exacta anterior se conserva como campo de compatibilidad.
+
+Los botones de la sección **Recursos oficiales para verificar información individual** conservan el texto **Abrir recurso oficial**, porque Mi Caja Digital es un recurso de consulta personal y no una fuente normativa utilizada por el motor. Su alineación visual sí se unifica con los demás botones de Metodología.
+
+**Motivo:** preguntar por una fecha exacta de actualización podía confundirse con la fecha prevista de retiro y sugería una precisión diaria que el historial principal no posee. Trabajar con el último mes acreditado corresponde mejor a la granularidad disponible y mantiene clara la diferencia entre dato real, fecha de evaluación y escenario futuro.

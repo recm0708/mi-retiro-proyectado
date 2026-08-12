@@ -156,3 +156,21 @@ No es necesario modificar todos los documentos en cada commit. Se actualizan ún
 - `docs/NORMATIVA.md` y `docs/FUENTES_NORMATIVAS.md` — reglas y fuentes;
 - `docs/VALIDACION.md` — regresiones;
 - `docs/ROADMAP.md` — trabajo pendiente.
+
+
+## Terminología visible
+
+La interfaz y documentación funcional se dirigen a **Asegurados(as)**.
+
+- usar **Asegurado(a)** en singular;
+- usar **Asegurados(as)** en plural;
+- no mostrar nombres internos de fases, ADR, rutas del repositorio ni IDs de fuentes;
+- conservar el nombre visible de la aplicación en `app/core/config.py`;
+- evitar introducir tamaños tipográficos aislados fuera de la escala definida en `app/static/css/style.css`.
+
+Los detalles de estas convenciones se documentan en `docs/GUIA_INTERNA_DESARROLLO.md`.
+
+
+## Documentación como parte del cambio
+
+Todo cambio de código, UX, lógica, normativa, pruebas o configuración debe revisar y actualizar los archivos `.md` que dependan de él. La documentación no se corrige después del commit: forma parte de la misma unidad de trabajo. Si una decisión introduce una regla arquitectónica o funcional nueva, debe registrarse en `docs/DECISIONES.md` y, cuando corresponda, en la especificación, roadmap, modelo de datos y validación.

@@ -1,8 +1,10 @@
-# Calculadora de Pensión CSS
+# Mi Retiro Proyectado
 
 Aplicación web local para **estimar y explicar** prestaciones de retiro de la Caja de Seguro Social (CSS) de Panamá a partir de datos de edad, cuotas, historial salarial, proyección de ingresos, escenario de retiro y sistema previsional.
 
-> **Proyecto independiente.** No es una aplicación oficial de la Caja de Seguro Social, no emite certificaciones y no sustituye una resolución de la CSS. Los resultados son estimaciones sujetas a la calidad de los datos ingresados y a la normativa vigente aplicable al caso individual.
+**Nombre de producto:** Mi Retiro Proyectado. Está dirigido a **Asegurados(as)** que desean analizar escenarios previsionales con trazabilidad normativa.
+
+> **Herramienta independiente de la CSS.** No es una aplicación oficial de la Caja de Seguro Social, no emite certificaciones y no sustituye una resolución de la CSS. Los resultados son estimaciones sujetas a la calidad de los datos ingresados y a la normativa vigente aplicable al caso individual.
 
 ## 1. Sistemas contemplados
 
@@ -35,13 +37,17 @@ La próxima versión `0.1.0` continúa en desarrollo. El asistente de seis pasos
 | Unificación final de resultados — 6F.4 | Implementado |
 | Persistencia permanente / SQLite | Pendiente |
 | Informes PDF | Pendiente |
-| Pulido final de identidad, accesibilidad y temas | Pendiente después de 6F |
+| Identidad, terminología y tipografía de producto | Implementado |
+| Temas visuales y persistencia local | Implementados |
+| Accesibilidad base: teclado, foco, movimiento reducido y objetivos táctiles | Implementada |
+| Estabilización visual Claro/Oscuro/Alto contraste | Implementada |
+| UX.3 — responsive real y navegación móvil | Implementada técnicamente; pendiente validación visual |
 
-La suite actual contiene **69 pruebas automatizadas** después del cierre transversal 6F.4.
+La suite actual contiene **94 pruebas automatizadas**. UX.3 añade regresiones para responsive, navegación móvil y la separación entre fecha de evaluación y último mes con cuotas acreditadas en el Paso 5.
 
 ## 3. Qué permite hacer el asistente
 
-El usuario puede:
+El Asegurado(a) puede:
 
 1. registrar fecha de nacimiento, sexo, fecha de ingreso y sistema previsional;
 2. registrar cuotas acreditadas y expectativas de cotización futura;
@@ -49,7 +55,7 @@ El usuario puede:
 4. ingresar salario actual y normalizarlo entre periodicidades;
 5. proyectar salario constante, variación porcentual, salario futuro conocido o varios escenarios;
 6. combinar historial real y proyección en una línea temporal trazable;
-7. construir escenarios de retiro por fecha y años adicionales;
+7. indicar el último mes con cuotas acreditadas y construir escenarios de retiro por fecha y años adicionales;
 8. seleccionar directamente cualquier paso disponible para revisar datos;
 9. calcular la prestación aplicable según el motor del sistema seleccionado;
 10. ver componentes mensuales, pagos únicos, factores y advertencias cuando correspondan;
@@ -109,6 +115,7 @@ Documentos principales:
 - [Modalidades SEBD](docs/MODALIDADES_SEBD.md)
 - [Subsistema Mixto](docs/MODALIDADES_MIXTO.md)
 - [SUCGS](docs/MODALIDADES_SUCGS.md)
+- [Guía interna de desarrollo](docs/GUIA_INTERNA_DESARROLLO.md)
 
 Fuente legal consolidada utilizada por el proyecto:
 
@@ -155,6 +162,7 @@ Actualmente:
 - HTML/CSS/JavaScript;
 - Bootstrap;
 - `sessionStorage` para estado temporal del asistente;
+- `localStorage` exclusivamente para la preferencia visual del Asegurado(a);
 - `unittest` para regresiones automatizadas.
 
 Previstas en fases posteriores:
@@ -163,7 +171,22 @@ Previstas en fases posteriores:
 - Chart.js para visualizaciones comparativas;
 - generación de informes PDF.
 
-## 8. Instalación
+## 8. Apariencia y accesibilidad
+
+La interfaz ofrece cuatro preferencias visuales:
+
+- **Seguir sistema**;
+- **Claro**;
+- **Oscuro**;
+- **Alto contraste**.
+
+La interfaz usa colores semánticos por tema para superficies, textos, estados y alertas. El modo Oscuro prioriza fondos casi negros y texto de alta legibilidad; Alto contraste usa negro, blanco, bordes explícitos y foco visible.
+
+La preferencia se conserva localmente en el navegador y no se mezcla con los datos previsionales de la simulación. La interfaz incluye enlace de salto al contenido, foco visible para teclado, objetivos táctiles con altura mínima, soporte para `prefers-reduced-motion` y un pie de página compacto con autoría, aviso de independencia y acceso a Mi Caja Digital.
+
+Estas medidas constituyen la base de accesibilidad del producto; la revisión integral responsive y WCAG continúa dentro de la Fase 8.
+
+## 9. Instalación
 
 ### 8.1. Clonar el repositorio
 
@@ -185,7 +208,7 @@ python -m venv .venv
 python -m pip install -r requirements.txt
 ```
 
-## 9. Ejecución
+## 10. Ejecución
 
 ```powershell
 python -m uvicorn app.main:app --reload
@@ -203,7 +226,7 @@ Swagger/OpenAPI:
 http://127.0.0.1:8000/docs
 ```
 
-## 10. API disponible
+## 11. API disponible
 
 ```text
 GET  /

@@ -324,7 +324,7 @@ Se valida que el catálogo incluya SEBD, Mixto y SUCGS, que sus fuentes tengan U
 
 ## Validación 6F.4
 
-La suite queda en **69 pruebas automatizadas**. `tests/test_resultado_unificado.py` valida el contrato transversal en tres situaciones: 
+La suite queda en **83 pruebas automatizadas**. `tests/test_resultado_unificado.py` valida el contrato transversal en tres situaciones: 
 
 1. SEBD: una Indemnización por Vejez se normaliza como **pago único** y no como pensión mensual;
 2. Mixto: una decisión pendiente del CAP conserva `DECISION_REQUERIDA` y no finge un cálculo completo;
@@ -332,3 +332,45 @@ La suite queda en **69 pruebas automatizadas**. `tests/test_resultado_unificado.
 
 Las pruebas integradas existentes de SEBD, Mixto y SUCGS también comprueban que los servicios anexen `resumen_unificado` sin modificar las cifras de regresión validadas. El comparador consume este resumen común y continúa calculando diferencias sin replicar fórmulas previsionales.
 
+
+
+## 14. Identidad y contenido visible
+
+`tests/test_identidad_interfaz.py` protege la capa pública frente a regresiones de presentación:
+
+- nombre visible `Mi Retiro Proyectado`;
+- ausencia del nombre anterior;
+- ausencia de etiquetas de subfase en páginas públicas;
+- uso de `Asegurado(a) / Asegurados(as)`;
+- separación entre información normativa útil y rutas técnicas del repositorio;
+- pie de página con aviso de independencia y acceso a Mi Caja Digital.
+
+Estas pruebas no validan fórmulas previsionales; complementan las regresiones de motor verificando la presentación destinada al Asegurado(a).
+
+## Validación de apariencia y accesibilidad base
+
+La suite incluye regresiones que verifican la presencia de los cuatro modos visuales, persistencia local de la preferencia, enlace de salto al contenido, semántica de página activa, footer compacto, foco visible, movimiento reducido y altura mínima de objetivos táctiles.
+
+La validación automatizada no sustituye la revisión visual manual en los cuatro temas ni una auditoría WCAG con tecnologías de apoyo.
+
+
+## Validación UX.3 — responsive y último mes acreditado
+
+La suite queda en **94 pruebas automatizadas** antes de la validación visual final de UX.3.
+
+`tests/test_responsive_ux3.py` protege:
+
+- navegación persistente inferior en móvil y respeto a áreas seguras;
+- progreso horizontal desplazable;
+- tablas extensas con ancho mínimo y desplazamiento localizado;
+- acciones de formularios a ancho completo en móvil;
+- selector mensual `ultimo_mes_cuotas`;
+- conservación de la denominación `Abrir recurso oficial` para recursos que no son fuente normativa.
+
+`tests/test_retiro.py` incorpora tres regresiones adicionales:
+
+1. un último mes anterior deriva al último día calendario del mes;
+2. el mes actual nunca genera una fecha de corte posterior a la evaluación;
+3. un mes futuro se rechaza.
+
+La revisión manual de UX.3 debe realizarse al menos en 375×812, 768×1024, 1024×768 y 1920×1080, comprobando navegación principal, Inicio, los seis pasos del wizard, tablas, Comparador, Metodología, footer y los modos Claro, Oscuro y Alto contraste.

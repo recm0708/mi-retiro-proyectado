@@ -12,6 +12,7 @@ La aplicación sigue una arquitectura web local con separación explícita entre
 4. **Resultados auditables:** los motores exponen valores intermedios, factores, advertencias y fuentes.
 5. **Datos faltantes explícitos:** un parámetro oficial ausente produce un resultado pendiente, no una estimación inventada.
 6. **Privacidad por defecto:** la sesión del asistente se conserva temporalmente en el navegador; no se persiste automáticamente información personal.
+7. **Identidad centralizada:** nombre, descripción pública, autoría y enlace a Mi Caja Digital se definen en `app/core/config.py`, separados de la normativa previsional.
 
 ## 2. Estructura del repositorio
 
@@ -23,8 +24,11 @@ app/
 │   ├── dinero.py
 │   └── normativa.py
 ├── modelos/
+│   ├── comparacion.py
 │   ├── pension.py
-│   └── simulacion.py
+│   ├── resultado_unificado.py
+│   ├── simulacion.py
+│   └── trazabilidad.py
 ├── motores/
 │   ├── elegibilidad.py
 │   ├── sebd.py
@@ -33,15 +37,18 @@ app/
 │   └── sucgs.py
 ├── servicios/
 │   ├── comparador.py
+│   ├── fuentes_normativas.py
 │   ├── historial_salarios.py
 │   ├── linea_tiempo.py
 │   ├── proyeccion_cuotas.py
 │   ├── proyeccion_salarios.py
+│   ├── resultado_unificado.py
 │   ├── resultados.py
 │   ├── resultados_sebd.py
 │   ├── resultados_mixto.py
 │   ├── resultados_sucgs.py
-│   └── retiro.py
+│   ├── retiro.py
+│   └── trazabilidad.py
 ├── static/
 ├── templates/
 └── main.py
@@ -158,7 +165,7 @@ Paso 6 — Motor del sistema seleccionado
 Resultado + desglose + advertencias + fuente normativa
 ```
 
-Cada paso posterior depende de información validada de los anteriores. Si el usuario modifica un dato de origen, los resultados dependientes se invalidan.
+Cada paso posterior depende de información validada de los anteriores. Si el Asegurado(a) modifica un dato de origen, los resultados dependientes se invalidan.
 
 ## 5. Navegación y estado temporal
 
@@ -251,7 +258,7 @@ La validación automatizada usa `unittest` y cubre:
 - SUCGS;
 - servicios integrados.
 
-Estado después del cierre 6F.4: **69 pruebas**.
+Estado actual después de la primera revisión de producto: **73 pruebas**.
 
 Ver [VALIDACION.md](VALIDACION.md).
 
@@ -270,13 +277,13 @@ Ver [VALIDACION.md](VALIDACION.md).
 
 Toda la capa 6F consume resultados de los motores existentes; no crea una cuarta implementación de las fórmulas.
 
-## Metodología 6F.3
+## Metodología y fuentes
 
 La ruta `GET /metodologia` renderiza un catálogo transversal construido por `app/servicios/fuentes_normativas.py`. El servicio reutiliza las URLs de `normativa/*.json` y añade únicamente títulos, agrupación y alcance para la interfaz.
 
-La trazabilidad 6F.2 conserva IDs estables para relacionar pasos con fuentes, pero `resultados.js` resuelve esos IDs contra `trazabilidad.fuentes` antes de mostrarlos. Los IDs internos no forman parte de la experiencia visible del usuario.
+La trazabilidad conserva IDs estables para relacionar pasos con fuentes, pero `resultados.js` resuelve esos IDs contra `trazabilidad.fuentes` antes de mostrarlos. Los IDs internos no forman parte de la experiencia visible del Asegurado(a).
 
-## Capa transversal de resultado final — 6F.4
+## Capa transversal de resultado final
 
 `app/modelos/resultado_unificado.py` define el contrato común `ResumenPrestacionUnificada`. `app/servicios/resultado_unificado.py` adapta resultados ya calculados de SEBD, Mixto y SUCGS sin ejecutar fórmulas previsionales.
 
@@ -296,3 +303,17 @@ Paso 6 / Comparador / futuras exportaciones
 
 `calculo` conserva siempre el detalle jurídico completo. `resumen_unificado` existe para semántica transversal y no puede convertirse en una cuarta capa de cálculo.
 
+## Apariencia y accesibilidad transversal
+
+`app/templates/base.html` concentra navegación, selector de tema, enlace de salto y pie de página. `app/static/js/tema.js` resuelve la preferencia visual y la conserva en `localStorage`; no accede ni modifica el estado previsional del asistente.
+
+`app/static/css/style.css` expone tokens de superficie, texto, borde y foco para adaptar los componentes personalizados a los modos claro, oscuro y alto contraste. Bootstrap continúa resolviendo los controles estándar mediante `data-bs-theme`.
+
+La accesibilidad base se implementa en la capa global para que las páginas Inicio, Simulación, Comparador y Metodología compartan foco visible, objetivos táctiles y respeto a movimiento reducido.
+
+
+## UX.3 — adaptación responsive y dato mensual de cuotas
+
+La presentación mantiene una única plantilla global y una sola hoja principal de estilos. UX.3 no introduce una aplicación móvil separada: `style.css` reorganiza navegación, tarjetas, formularios y acciones mediante breakpoints, mientras que las tablas extensas conservan su estructura dentro de contenedores desplazables. En anchos inferiores a 768 px, la navegación persistente del wizard pasa a la parte inferior y respeta las áreas seguras del dispositivo.
+
+En el Paso 5, JavaScript captura `ultimo_mes_cuotas` con granularidad `YYYY-MM` y envía también la fecha técnica equivalente. El servicio de retiro vuelve a derivar y validar ese corte en Python; por tanto, la interfaz no se convierte en fuente de verdad para la regla temporal. `fecha_corte_cuotas` se conserva para compatibilidad con solicitudes y pruebas anteriores.

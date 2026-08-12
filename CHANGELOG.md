@@ -7,6 +7,37 @@ El proyecto todavía no ha publicado una versión estable; los cambios actuales 
 
 ## [Unreleased]
 
+### Identidad y experiencia del producto
+
+- La aplicación adopta el nombre visible **Mi Retiro Proyectado**.
+- La identidad se centraliza en `app/core/config.py` para evitar nombres duplicados en plantillas y metadatos.
+- La terminología pública usa **Asegurado(a)** y **Asegurados(as)** en lugar de `usuario` para referirse a quienes realizan simulaciones.
+- Se eliminan de la interfaz etiquetas internas como `Paso 6F.1`, `Metodología 6F.2` y `Cierre funcional 6F.4`.
+- La información sobre archivos `docs/*.md`, `normativa/*.json`, ADR y fases internas queda reservada a documentación de desarrollo.
+- Se unifica el tamaño base de texto en formularios, ayudas, tablas, navegación y contenido explicativo; encabezados y valores previsionales mantienen jerarquía propia.
+- El pie de página incorpora autoría, aviso de independencia y acceso directo a Mi Caja Digital.
+- El acceso pendiente de importación se denomina `Importar desde Mi Caja Digital` para no presentar Mi Retiro Seguro como un recurso separado.
+- Se agrega `docs/GUIA_INTERNA_DESARROLLO.md` con convenciones de marca, terminología y contenido exclusivamente técnico.
+- Se agregan pruebas de regresión de identidad e interfaz.
+- Se incorporan los modos **Seguir sistema**, **Claro**, **Oscuro** y **Alto contraste**, con persistencia local independiente de la simulación.
+- Se añade enlace de salto al contenido, foco visible global, objetivos táctiles mínimos y respeto a movimiento reducido.
+- El pie de página se compacta en dos líneas con copyright, aviso de independencia y acceso a Mi Caja Digital.
+- La suite alcanza **94 pruebas automatizadas** después de las regresiones de UX.3.
+- UX.2.1 oscurece las superficies del modo Oscuro, convierte Alto contraste en un tema negro/blanco de contraste máximo y unifica colores semánticos para estados, alertas y badges.
+- Se rediseña Inicio como portada del producto con propósito, sistemas contemplados, capacidades, proceso guiado y acciones principales.
+- El wizard y la navegación rápida pasan a utilizar superficies adaptativas por tema en lugar de conservar fondos claros.
+- Las tarjetas equivalentes alinean verticalmente sus contenidos y mantienen acciones al mismo nivel.
+- Se elimina de Resultados la explicación técnica sobre `normativa/*.json`; la interfaz conserva únicamente la referencia oficial útil para el Asegurado(a).
+- El footer evita partir el enlace a Mi Caja Digital y mantiene su segunda línea como una fila flexible compacta.
+- El remate final de UX.2.1 centra únicamente los botones identificados en Inicio, Datos personales, Resultados y Metodología, sin alterar los botones que ya estaban correctos.
+- En escritorios amplios, el aviso legal y `Abrir Mi Caja Digital` permanecen juntos en la segunda línea del footer.
+- UX.3 adapta Inicio, navegación, formularios, tarjetas, Metodología, Comparador y resultados a laptop, tablet y móvil.
+- En móvil, la navegación persistente del wizard se traslada a la parte inferior, respeta áreas seguras y mantiene retroceso, selector de paso y acción principal.
+- Las tablas extensas conservan columnas legibles mediante desplazamiento horizontal dentro de su propio contenedor.
+- El Paso 5 reemplaza la fecha exacta visible de actualización de cuotas por **Último mes con cuotas acreditadas**, separado de la fecha de evaluación y de las fechas de retiro.
+- El backend deriva y valida la fecha técnica de corte desde el último mes acreditado y rechaza meses posteriores a la evaluación.
+- Los dos botones de **Recursos oficiales para verificar información individual** reciben el mismo centrado visual que las demás acciones de Metodología y conservan `Abrir recurso oficial`, porque esos enlaces no son necesariamente fuentes normativas del cálculo.
+
 ### Agregado
 
 #### Cierre funcional 6F
@@ -17,7 +48,7 @@ El proyecto todavía no ha publicado una versión estable; los cambios actuales 
 - 6F.4: contrato transversal `resumen_unificado` para SEBD, Mixto y SUCGS.
 - El comparador consume el contrato común en lugar de extraer montos con semánticas distintas de cada motor.
 - El Paso 6 presenta un resumen final homogéneo que mantiene separadas mensualidades y pagos únicos.
-- La suite alcanza **69 pruebas automatizadas**.
+- Al cierre funcional 6F.4, la suite alcanzó **69 pruebas automatizadas**.
 - Mi Retiro Seguro deja de mostrarse como recurso independiente; la verificación individual queda centralizada en Mi Caja Digital junto con el régimen especial identificado.
 
 #### Asistente y base técnica
@@ -114,7 +145,7 @@ El proyecto todavía no ha publicado una versión estable; los cambios actuales 
 - Restauración de scripts específicos de simulación e historial.
 - Clasificación visual de años sin cotización.
 - Diferencias de un centavo provocadas por redondeos intermedios.
-- Proyección de cuotas que podía agregar meses al año actual contra la expectativa declarada por el usuario.
+- Proyección de cuotas que podía agregar meses al año actual contra la expectativa declarada por el Asegurado(a).
 - Artefactos de punto flotante en campos monetarios.
 - Semántica de campos no aplicables en la Indemnización por Vejez, usando `null` en lugar de valores numéricos engañosos.
 - Navegación del Paso 6 para reconocer SEBD, Mixto y SUCGS sin tratar motores ya implementados como pendientes.

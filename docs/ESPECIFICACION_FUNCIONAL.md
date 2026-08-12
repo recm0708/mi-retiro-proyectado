@@ -1,6 +1,6 @@
 # Especificación funcional
 
-La aplicación guía al usuario por seis pasos y calcula una prestación estimada según el sistema previsional seleccionado. Este documento describe el comportamiento funcional actual y el trabajo que queda para 6F.
+La aplicación guía al Asegurado(a) por seis pasos y calcula una prestación estimada según el sistema previsional seleccionado. Este documento describe el comportamiento funcional vigente y las mejoras de producto posteriores al cierre de la Fase 6.
 
 [Índice de documentación](INDICE.md) · [Normativa](NORMATIVA.md) · [Fuentes oficiales](FUENTES_NORMATIVAS.md)
 
@@ -32,11 +32,11 @@ No debe presentarse como una herramienta oficial de la CSS ni emitir una certifi
 **RF-004.** Seleccionar sistema actual:
 
 - No sé cuál tengo;
-- SEBD — Beneficio Definido;
+- SEBD — Subsistema Exclusivamente de Beneficio Definido;
 - Subsistema Mixto;
 - SUCGS — Sistema Único de Capitalización con Garantía Solidaria.
 
-La aplicación debe mostrar el nombre completo de siglas que puedan no ser conocidas por el usuario.
+La aplicación debe mostrar el nombre completo de siglas que puedan no ser conocidas por el Asegurado(a).
 
 ### 2.2. Paso 2 — Cuotas
 
@@ -44,7 +44,7 @@ La aplicación debe mostrar el nombre completo de siglas que puedan no ser conoc
 
 **RF-006.** Registrar cuotas del año actual incluidas en el total.
 
-**RF-007.** Registrar si el usuario espera continuar cotizando.
+**RF-007.** Registrar si el Asegurado(a) espera continuar cotizando.
 
 **RF-008.** Registrar cuotas esperadas al cierre del año actual y densidad futura.
 
@@ -80,7 +80,7 @@ El análisis debe mantener separado el total histórico de la proyección futura
 
 **RF-018.** Calcular edad exacta y fecha de referencia.
 
-**RF-019.** Separar fecha de evaluación y fecha de corte de cuotas.
+**RF-019.** Separar fecha de evaluación, último mes con cuotas acreditadas, fecha técnica de corte y fechas de retiro.
 
 **RF-020.** Construir escenarios anticipados, edad de referencia, años adicionales y fecha personalizada.
 
@@ -155,7 +155,7 @@ El análisis debe mantener separado el total histórico de la proyección futura
 
 **RF-048.** Permitir `AUTO`, `PENSION_PROGRAMADA` o `DEVOLUCION_TOTAL`.
 
-**RF-049.** Cuando `AUTO` requiera una decisión del asegurado, mantener el resultado pendiente.
+**RF-049.** Cuando `AUTO` requiera una decisión del Asegurado(a), mantener el resultado pendiente.
 
 **RF-050.** Separar devolución CAP, indemnización BD y total de pagos únicos.
 
@@ -221,7 +221,63 @@ La comparación debe reutilizar los motores existentes, conservar un escenario b
 
 **RF-076.** Estructura de salida reutilizable por futuros informes PDF. **Implementado como contrato transversal en 6F.4.**
 
-## 10. Fuera del alcance inmediato
+**RF-077.** Mantener una página permanente de metodología y fuentes con jerarquía normativa, artículos por sistema y recursos oficiales de verificación. **Implementado.**
+
+**RF-078.** Mantener los identificadores técnicos de fuentes exclusivamente como IDs internos; la interfaz debe mostrar títulos humanos y enlaces oficiales. **Implementado.**
+
+**RF-079.** Exponer un resumen común de resultado final para SEBD, Mixto y SUCGS con estado, naturaleza, pensión mensual, pago único, modalidad, escenario y advertencias. **Implementado.**
+
+## 10. Identidad y terminología de producto
+
+**RF-080.** La aplicación debe presentarse bajo el nombre **Mi Retiro Proyectado** y conservar una declaración visible de independencia respecto de la CSS.
+
+**RF-081.** La persona que realiza una simulación debe denominarse **Asegurado(a)** y, en plural, **Asegurados(as)** en la interfaz y documentación funcional.
+
+**RF-082.** La interfaz debe usar un tamaño tipográfico base común para contenido, controles, ayudas, tablas y navegación; los encabezados y valores previsionales relevantes pueden usar tamaños diferenciados.
+
+**RF-083.** La interfaz no debe exponer nombres de subfases, ADR, rutas del repositorio, nombres de archivos técnicos ni identificadores internos de fuentes.
+
+**RF-084.** La interfaz debe ofrecer los modos visuales **Seguir sistema**, **Claro**, **Oscuro** y **Alto contraste**.
+
+**RF-085.** La preferencia visual debe persistirse en `localStorage` sin mezclarse con los datos previsionales guardados en `sessionStorage`.
+
+**RF-086.** La navegación principal debe incluir un mecanismo para saltar directamente al contenido y señalar la página activa mediante semántica accesible.
+
+**RF-087.** Los controles interactivos principales deben mantener foco visible, objetivos táctiles de al menos 44 px de altura y respetar `prefers-reduced-motion`.
+
+**RF-088.** El pie de página debe presentar en formato compacto el nombre del producto, copyright, aviso de independencia y acceso a Mi Caja Digital.
+
+## 11. UX.2.1 — estabilización visual y contenido público
+
+**RF-089.** Los temas Oscuro y Alto contraste deben adaptar fondos, textos secundarios, tarjetas, tablas, alertas, badges, wizard y navegación rápida sin conservar superficies claras o textos de bajo contraste.
+
+**RF-090.** Los estados visuales de información, éxito, advertencia, neutral y proyección deben usar colores semánticos definidos por tema y no colores literales por componente.
+
+**RF-091.** La página de Inicio debe funcionar como portada del producto: explicar propósito, sistemas contemplados, capacidades principales, proceso de seis pasos y acciones para iniciar una simulación o consultar metodología.
+
+**RF-092.** La interfaz no debe mostrar detalles de implementación como rutas `normativa/*.json`, nombres de endpoints, backend, repositorio o mecanismos internos de carga de fuentes.
+
+**RF-093.** Las tarjetas equivalentes de métricas, metodología y recursos deben mantener alineación vertical y ubicación de acciones consistente dentro de una misma fila visual.
+
+## 12. UX.3 — responsive y precisión del corte de cuotas
+
+**RF-094.** La interfaz debe adaptarse a laptop, tablet y móvil sin provocar desplazamiento horizontal de toda la página.
+
+**RF-095.** La navegación principal colapsada debe conservar enlaces, estado de página activa, selector de tema y objetivos táctiles adecuados en tablet y móvil.
+
+**RF-096.** Las tablas previsionales extensas deben conservar columnas legibles mediante desplazamiento horizontal dentro de su propio contenedor cuando el ancho disponible no sea suficiente.
+
+**RF-097.** En móvil, la navegación persistente del asistente debe situarse en la parte inferior, respetar las áreas seguras del dispositivo y mantener retroceso, selector de paso y acción principal.
+
+**RF-098.** Las acciones principales de formularios y resultados deben reorganizarse a ancho completo en móvil cuando una disposición horizontal reduzca su legibilidad o superficie táctil.
+
+**RF-099.** El Paso 5 debe distinguir explícitamente la fecha de evaluación, el último mes con cuotas acreditadas y la fecha de cada escenario de retiro.
+
+**RF-100.** Cuando se informe `ultimo_mes_cuotas`, el servicio debe derivar una fecha técnica de corte al último día del mes; si coincide con el mes de evaluación, no puede superar la fecha de evaluación. Un mes posterior al de evaluación debe rechazarse.
+
+**RF-101.** Los recursos de consulta individual que no constituyen fuentes normativas del cálculo deben conservar la denominación **recurso oficial** en la interfaz, aunque compartan tratamiento visual con los botones de fuentes oficiales.
+
+## 13. Fuera del alcance inmediato
 
 Quedan para fases posteriores:
 
@@ -230,16 +286,5 @@ Quedan para fases posteriores:
 - informes PDF;
 - regímenes especiales no implementados;
 - reconstrucción completa de cuentas CAP/SUCGS desde movimientos mensuales oficiales;
-- identidad visual final, temas y revisión integral WCAG 2.2.
-
-### RF-077 — Página transversal de metodología y fuentes
-
-**Implementado en 6F.3.** La aplicación ofrece una página permanente de metodología y fuentes que permite consultar la jerarquía normativa, los artículos utilizados por sistema, los reglamentos y resoluciones relacionados y los recursos oficiales de verificación.
-
-### RF-078 — Etiquetas humanas para fuentes de trazabilidad
-
-**Implementado en 6F.3.** Los identificadores técnicos de fuentes permanecen internos. `Ver cálculo completo` muestra títulos comprensibles y enlaces oficiales cuando están disponibles.
-
-### RF-079 — Contrato transversal de resultado final
-
-**Implementado en 6F.4.** Los resultados integrados de SEBD, Mixto y SUCGS deben exponer un resumen común con estado del cálculo, naturaleza de la prestación, pensión mensual, pago único, modalidad, escenario y advertencias, sin recalcular la prestación ni borrar el desglose específico de cada motor.
+- revisión integral WCAG 2.2 y pruebas asistidas con tecnologías de apoyo;
+- revisión visual cruzada de todos los temas en formularios y resultados extensos.

@@ -110,12 +110,15 @@ Incluye:
 - fecha de nacimiento;
 - sexo;
 - fecha de evaluación;
-- fecha de corte de cuotas;
+- `ultimo_mes_cuotas` (`YYYY-MM`) como dato visible preferente en UX.3;
+- `fecha_corte_cuotas` como fecha técnica exacta y campo de compatibilidad;
 - cuotas informadas;
 - cierre esperado del año actual;
 - densidad futura;
 - horizonte salarial;
 - escenarios adicionales/personalizados.
+
+Cuando `ultimo_mes_cuotas` está presente, el servicio convierte ese mes al último día calendario. Si corresponde al mismo mes de la fecha de evaluación, el corte se limita al día de evaluación. Esto evita fingir precisión diaria en un dato que el Asegurado(a) aporta con granularidad mensual.
 
 ### 8.2. `EscenarioRetiro`
 

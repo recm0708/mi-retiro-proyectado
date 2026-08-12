@@ -56,13 +56,13 @@ Incluye:
 Incluye:
 
 - edad exacta y fecha de referencia;
-- fecha de evaluación separada de fecha de corte de cuotas;
+- fecha de evaluación separada del último mes con cuotas acreditadas y de las fechas de retiro;
 - escenarios anticipados, edad de referencia, años adicionales y fecha personalizada;
 - cierre del año actual antes de densidad futura;
 - validación de horizonte salarial;
 - selección explícita del escenario que alimenta Resultados.
 
-**Mejora futura:** permitir definir con mayor detalle el último mes o fecha de cotización cuando sea necesario distinguir solicitud, retiro y último aporte.
+**UX.3 implementado:** el Paso 5 solicita el último mes con cuotas acreditadas y deriva internamente la fecha de corte sin confundirla con la fecha de evaluación ni con los escenarios de retiro.
 
 ## 5. Fase 5 — Motores previsionales
 
@@ -191,43 +191,36 @@ Previsto:
 
 ## 8. Fase 8 — Pulido de producto y accesibilidad
 
-**Estado:** reservada para después de 6F.
+**Estado:** en ejecución.
 
 Previsto:
 
-- identidad visual profesional inspirada en el contexto institucional sin aparentar ser una aplicación oficial;
-- temas claro, oscuro, alto contraste y seguimiento del sistema;
-- persistencia de preferencia visual;
-- revisión WCAG 2.2;
-- foco visible y navegación por teclado;
-- tamaños de objetivos táctiles adecuados;
-- pie de página con autoría, aviso de independencia y fuentes;
-- enlace visible a Mi Caja Digital;
-- sección de Metodología y fuentes en la navegación;
-- mejoras responsivas y móviles.
+- [x] identidad visible independiente bajo el nombre **Mi Retiro Proyectado**;
+- [x] terminología pública estandarizada como **Asegurado(a) / Asegurados(as)**;
+- [x] tipografía base unificada con jerarquía reservada a encabezados y valores importantes;
+- [x] identidad visual profesional con portada orientada al Asegurado(a), sin aparentar ser una aplicación oficial;
+- [x] temas claro, oscuro, alto contraste y seguimiento del sistema;
+- [x] persistencia local de preferencia visual;
+- revisión WCAG 2.2 completa;
+- [x] estabilización visual de Oscuro y Alto contraste con tokens semánticos;
+- [x] wizard, navegación rápida, tarjetas y footer adaptativos por tema;
+- [x] foco visible, enlace de salto y base de navegación por teclado;
+- [x] tamaños mínimos de objetivos táctiles y respeto a movimiento reducido;
+- [x] pie de página compacto con autoría, aviso de independencia y acceso oficial;
+- [x] enlace visible a Mi Caja Digital;
+- [x] sección de Metodología y fuentes en la navegación;
+- [x] responsive real para laptop, tablet y móvil;
+- [x] navegación principal colapsada y navegación persistente inferior del wizard en móvil;
+- [x] tablas extensas con desplazamiento localizado y acciones de formulario adaptativas;
+- [x] Paso 5 con último mes acreditado separado de evaluación y retiro.
 
 ## 9. Estado de validación
 
-Después del cierre 6F.4:
+Estado técnico de UX.3, pendiente de validación visual final:
 
-- **69 pruebas automatizadas** en `OK`;
+- **94 pruebas automatizadas** en `OK`;
 - regresión SEBD real anonimizada;
 - casos sintéticos de Mixto;
 - casos sintéticos SUCGS;
 - validaciones visuales de los tres motores integrados.
 
-### 6F.3 — Metodología y fuentes — completado
-
-- página `/metodologia`;
-- jerarquía de fuentes y normativa por sistema;
-- enlaces oficiales reutilizados desde metadatos versionados;
-- IDs internos de trazabilidad reemplazados visualmente por títulos humanos;
-- limitaciones e interpretaciones conocidas visibles.
-
-### 6F.4 — Unificación final — completado
-
-- resumen común `SEBD / Mixto / SUCGS`;
-- mensualidades y pagos únicos con la misma semántica;
-- estados `COMPLETO / INCOMPLETO / DECISION_REQUERIDA / NO_ELEGIBLE / TRANSICION`;
-- comparador reutilizando el contrato común;
-- salida reutilizable para informes futuros.
