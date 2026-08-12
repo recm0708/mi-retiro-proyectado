@@ -766,6 +766,21 @@ function crearFilaEscenarioRetiro(escenario) {
     },
   );
 
+  selector.addEventListener(
+    "keydown",
+    (evento) => {
+      if (evento.key !== "Enter" || selector.disabled) {
+        return;
+      }
+
+      evento.preventDefault();
+      selector.checked = true;
+      seleccionarEscenarioRetiro(
+        escenario,
+      );
+    },
+  );
+
   if (!selector.disabled) {
     fila.classList.add(
       "retirement-row-selectable",

@@ -114,6 +114,102 @@ function agregarDescripcion(control, idDescripcion) {
   }
 }
 
+function obtenerMensajeValidacionControl(control) {
+  const etiqueta = obtenerEtiquetaControl(control);
+
+  if (control.validity?.valueMissing) {
+    return `Completa el campo ${etiqueta}.`;
+  }
+
+  if (control.validity?.rangeUnderflow) {
+    return `${etiqueta} debe ser igual o mayor que ${control.min}.`;
+  }
+
+  if (control.validity?.rangeOverflow) {
+    return `${etiqueta} debe ser igual o menor que ${control.max}.`;
+  }
+
+  if (control.validity?.stepMismatch) {
+    return `Revisa el valor indicado en ${etiqueta}.`;
+  }
+
+  return control.validationMessage || `Revisa el campo ${etiqueta}.`;
+}
+
+
+function asegurarErrorDeCampo(control) {
+  if (!control.id) {
+    return null;
+  }
+
+  const idError = `a11y-error-${control.id}`;
+  let error = document.getElementById(idError);
+
+  if (!error) {
+    error = document.createElement("span");
+    error.id = idError;
+    error.className = "a11y-field-error";
+
+    const grupo = control.closest(".input-group");
+    const referencia = grupo || control;
+    referencia.insertAdjacentElement("afterend", error);
+  }
+
+  error.textContent = obtenerMensajeValidacionControl(control);
+  control.setAttribute("aria-errormessage", idError);
+  return error;
+}
+
+
+function limpiarErrorDeCampo(control) {
+  if (!control.id) {
+    control.removeAttribute("aria-errormessage");
+    return;
+  }
+
+  const idError = control.getAttribute("aria-errormessage");
+  control.removeAttribute("aria-errormessage");
+
+  if (idError?.startsWith("a11y-error-")) {
+    document.getElementById(idError)?.remove();
+  }
+}
+
+
+function elementoVisible(elemento) {
+  return Boolean(
+    elemento
+    && !elemento.hidden
+    && !elemento.classList.contains("d-none")
+    && elemento.textContent.trim(),
+  );
+}
+
+
+function prepararEstadoVisibilidadMensaje(elemento) {
+  const visible = elementoVisible(elemento);
+  const teniaEstado = elemento.dataset.a11yVisible !== undefined;
+  const estabaVisible = elemento.dataset.a11yVisible === "true";
+
+  elemento.dataset.a11yVisible = String(visible);
+
+  if (
+    teniaEstado
+    && visible
+    && !estabaVisible
+    && !focoInvalidoProgramado
+  ) {
+    window.setTimeout(() => {
+      const activo = document.activeElement;
+      if (activo?.getAttribute("aria-invalid") === "true") {
+        return;
+      }
+
+      elemento.focus({ preventScroll: false });
+    }, 0);
+  }
+}
+
 function vincularAyudasDeFormulario() {
   document
     .querySelectorAll("input, select, textarea")
@@ -273,16 +369,27 @@ function prepararAyudasContextuales() {
 }
 
 function prepararMensajesDinamicos() {
-  document.querySelectorAll(".alert-danger, [id^='error-']").forEach((elemento) => {
+  document.querySelectorAll(".alert-danger, [id^='error-'], #comparador-error").forEach((elemento) => {
     elemento.setAttribute("role", "alert");
-    elemento.setAttribute("aria-live", "assertive");
+    elemento.removeAttribute("aria-live");
     elemento.setAttribute("aria-atomic", "true");
+    elemento.setAttribute("tabindex", "-1");
+
+    if (!elemento.classList.contains("a11y-message-focus")) {
+      elemento.classList.add("a11y-message-focus");
+    }
+
+    prepararEstadoVisibilidadMensaje(elemento);
   });
 
   document.querySelectorAll(".alert-warning").forEach((elemento) => {
-    if (!elemento.hasAttribute("aria-live")) {
+    if (elemento.getAttribute("role") === "alert") {
+      elemento.removeAttribute("aria-live");
+    } else {
+      elemento.setAttribute("role", "status");
       elemento.setAttribute("aria-live", "polite");
     }
+
     elemento.setAttribute("aria-atomic", "true");
   });
 }
@@ -297,7 +404,13 @@ function prepararValidacionAccesible() {
 
     formulario.addEventListener("invalid", (evento) => {
       const control = evento.target;
+
+      // UX.4.3: la retroalimentación visual se controla de forma local para
+      // evitar depender de globos nativos inconsistentes entre navegadores.
+      evento.preventDefault();
+
       control.setAttribute("aria-invalid", "true");
+      asegurarErrorDeCampo(control);
 
       if (!focoInvalidoProgramado) {
         focoInvalidoProgramado = true;
@@ -310,18 +423,24 @@ function prepararValidacionAccesible() {
       }
     }, true);
 
-    formulario.addEventListener("input", (evento) => {
+    const limpiarSiValido = (evento) => {
       const control = evento.target;
-      if (typeof control.checkValidity === "function" && control.checkValidity()) {
+      if (control.validity?.valid === true) {
         control.removeAttribute("aria-invalid");
+        limpiarErrorDeCampo(control);
       }
-    });
+    };
 
-    formulario.addEventListener("change", (evento) => {
-      const control = evento.target;
-      if (typeof control.checkValidity === "function" && control.checkValidity()) {
-        control.removeAttribute("aria-invalid");
-      }
+    formulario.addEventListener("input", limpiarSiValido);
+    formulario.addEventListener("change", limpiarSiValido);
+
+    formulario.addEventListener("reset", () => {
+      window.setTimeout(() => {
+        formulario.querySelectorAll("[aria-invalid='true']").forEach((control) => {
+          control.removeAttribute("aria-invalid");
+          limpiarErrorDeCampo(control);
+        });
+      }, 0);
     });
   });
 }
@@ -404,7 +523,11 @@ function prepararContenedoresDesplazables() {
 
       if (tieneDesbordamiento) {
         contenedor.tabIndex = 0;
-        contenedor.classList.add("table-scroll-focus");
+
+        if (!contenedor.classList.contains("table-scroll-focus")) {
+          contenedor.classList.add("table-scroll-focus");
+        }
+
         contenedor.setAttribute("aria-label", "Tabla desplazable horizontalmente");
       } else if (contenedor.classList.contains("table-scroll-focus")) {
         contenedor.removeAttribute("tabindex");

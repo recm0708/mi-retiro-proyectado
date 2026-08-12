@@ -103,8 +103,37 @@
   box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--bs-danger) 18%, transparent);
 }
 
+.a11y-field-error {
+  display: block;
+  margin-top: 0.4rem;
+  color: var(--bs-danger-text-emphasis, var(--bs-danger));
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+html[data-app-theme="dark"] .a11y-field-error,
+html[data-app-theme="contrast"] .a11y-field-error {
+  color: color-mix(in srgb, var(--bs-danger) 62%, var(--app-text));
+}
+
+html[data-app-theme="contrast"] .a11y-field-error {
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.14em;
+}
+
 .table-scroll-focus {
   scroll-margin: 1rem;
+}
+
+.a11y-message-focus:focus {
+  outline: 3px solid var(--app-focus);
+  outline-offset: 3px;
+}
+
+html[data-app-theme="contrast"] .a11y-message-focus:focus {
+  outline-width: 4px;
 }
 
 html[data-app-theme="contrast"] .context-help-trigger {
