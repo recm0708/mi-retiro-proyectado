@@ -1,250 +1,233 @@
 # Especificación funcional
 
-## Flujo principal
+La aplicación guía al usuario por seis pasos y calcula una prestación estimada según el sistema previsional seleccionado. Este documento describe el comportamiento funcional actual y el trabajo que queda para 6F.
 
-La aplicación utiliza un asistente de seis pasos.
+[Índice de documentación](INDICE.md) · [Normativa](NORMATIVA.md) · [Fuentes oficiales](FUENTES_NORMATIVAS.md)
 
-## Paso 1 — Datos personales
+## 1. Alcance
 
-Datos:
+La aplicación debe:
 
-- fecha de nacimiento;
-- sexo;
-- fecha de ingreso a la CSS, opcional;
-- sistema previsional conocido o `No sé cuál tengo`.
+- recopilar datos personales y previsionales;
+- validar cuotas e historial;
+- construir proyecciones salariales y de retiro;
+- determinar la modalidad aplicable;
+- calcular SEBD, Mixto o SUCGS según corresponda;
+- distinguir pensiones mensuales de pagos únicos;
+- mostrar advertencias cuando falten datos oficiales o exista una limitación del modelo;
+- conservar trazabilidad normativa.
 
-La edad se calcula; no se solicita manualmente.
+No debe presentarse como una herramienta oficial de la CSS ni emitir una certificación de derechos.
 
-## Paso 2 — Cuotas
+## 2. Flujo principal de seis pasos
 
-Datos:
+### 2.1. Paso 1 — Datos personales y sistema previsional
 
-- total de cuotas acreditadas;
-- cuotas acreditadas en el año actual;
-- continuidad de cotización;
-- cuotas esperadas al cierre del año;
-- cuotas esperadas por año futuro.
+**RF-001.** Registrar fecha de nacimiento.
 
-Resultados:
+**RF-002.** Registrar sexo para determinar edad de referencia cuando la norma lo requiera.
 
-- cuotas reales;
-- proyección al cierre;
-- distancia preliminar respecto de 180 y 240 cuotas;
-- tiempo aproximado según densidad futura.
+**RF-003.** Registrar fecha de ingreso a la CSS cuando se conozca.
 
-Las cuotas del año actual ya están incluidas en el total real.
+**RF-004.** Seleccionar sistema actual:
 
-## Paso 3 — Historial salarial y salario actual
+- No sé cuál tengo;
+- SEBD — Beneficio Definido;
+- Subsistema Mixto;
+- SUCGS — Sistema Único de Capitalización con Garantía Solidaria.
 
-El Paso 3 separa:
+La aplicación debe mostrar el nombre completo de siglas que puedan no ser conocidas por el usuario.
 
-1. **historial real:** cuotas y salario cotizado/reportado por año;
-2. **salario actual:** remuneración vigente para la proyección.
+### 2.2. Paso 2 — Cuotas
 
-Modos previstos:
+**RF-005.** Registrar cuotas totales acreditadas.
 
-- historial manual anual;
-- continuar solo con salario actual cuando no exista información histórica suficiente;
-- importación de Mi Retiro Seguro en una fase posterior.
+**RF-006.** Registrar cuotas del año actual incluidas en el total.
 
-En modo manual se generan años automáticamente, pero el usuario puede corregir el año inicial cuando una fuente histórica contenga registros anteriores.
+**RF-007.** Registrar si el usuario espera continuar cotizando.
 
-Cada fila muestra:
+**RF-008.** Registrar cuotas esperadas al cierre del año actual y densidad futura.
 
-- año;
-- cuotas;
-- salario;
-- estado: completo, parcial o sin cotización.
+El análisis debe mantener separado el total histórico de la proyección futura.
 
-Los campos monetarios:
+### 2.3. Paso 3 — Historial salarial y salario actual
 
-- muestran separadores de miles al quedar formateados;
-- admiten como máximo dos decimales;
-- se validan nuevamente en backend.
+**RF-009.** Permitir historial anual de cuotas y salario cotizado/reportado.
 
-El historial se contrasta con las cuotas del Paso 2. Una diferencia se informa al usuario.
+**RF-010.** Validar la suma de cuotas del historial contra el Paso 2.
 
-El salario actual admite periodicidad semanal, quincenal, mensual o anual.
+**RF-011.** Permitir años sin cotización y años parciales.
 
-## Paso 4 — Proyección salarial
+**RF-012.** Registrar salario actual como semanal, quincenal, mensual o anual y normalizarlo para proyección.
 
-Modalidades implementadas:
+### 2.4. Paso 4 — Proyección salarial
 
-1. salario constante;
-2. porcentaje anual;
-3. salario futuro conocido;
-4. comparación de porcentajes.
+**RF-013.** Permitir salario constante.
 
-La proyección:
+**RF-014.** Permitir variación porcentual anual.
 
-- usa el salario normalizado del Paso 3;
-- conserva precisión interna;
-- redondea los resultados monetarios a centavos al materializarlos;
-- mantiene el historial separado;
-- representa de forma explícita años sin cotización;
-- respeta el cierre de cuotas del año actual;
-- repite únicamente la parte futura cuando hay varios escenarios.
+**RF-015.** Permitir salario futuro conocido y derivar una trayectoria coherente.
 
-## Paso 5 — Condiciones y escenarios de retiro
+**RF-016.** Permitir comparación de varios escenarios salariales.
 
-**Estado:** implementado en validación.
+**RF-017.** Construir una línea temporal que identifique claramente:
 
-Datos heredados visibles:
+- histórico;
+- año actual real/proyectado;
+- futuro proyectado.
 
-- fecha de nacimiento;
-- sexo;
-- cuotas reales;
-- cuotas del año actual y cierre esperado;
-- continuidad;
-- densidad de cuotas futuras.
+### 2.5. Paso 5 — Escenarios de retiro
 
-Datos específicos:
+**RF-018.** Calcular edad exacta y fecha de referencia.
 
-- fecha de evaluación;
-- fecha hasta la que están actualizadas las cuotas;
-- escenarios de edad de referencia y años adicionales;
-- fecha personalizada opcional.
+**RF-019.** Separar fecha de evaluación y fecha de corte de cuotas.
 
-Resultados:
+**RF-020.** Construir escenarios anticipados, edad de referencia, años adicionales y fecha personalizada.
 
-- edad actual;
-- edad de referencia;
-- fecha exacta de referencia;
-- días respecto de esa fecha;
-- fecha y edad por escenario;
-- cuotas adicionales y totales estimadas;
-- estado temporal de la fecha.
+**RF-021.** Respetar primero las cuotas esperadas al cierre del año actual antes de aplicar densidad futura.
 
-La estimación de cuotas del año actual respeta primero el cierre definido en el Paso 2. La densidad anual futura se aplica después.
+**RF-022.** Advertir cuando el horizonte salarial no cubra la fecha de retiro.
 
-El Paso 5 también verifica que la proyección salarial cubra el año del escenario de retiro. Si no lo cubre, muestra una advertencia y ofrece regresar al Paso 4 para extender el horizonte. No extrapola salarios de forma silenciosa.
+**RF-023.** Permitir seleccionar explícitamente el escenario que alimentará Resultados.
 
-Estos escenarios no determinan todavía elegibilidad legal.
+### 2.6. Paso 6 — Resultados
 
-## Paso 6 — Resultados
+**RF-024.** Mostrar sistema, escenario de retiro, fecha, edad y cuotas estimadas.
 
-**Primera capacidad implementada: SEBD normal.**
+**RF-025.** Solicitar solo los datos específicos del sistema que no puedan deducirse de los pasos anteriores.
 
-El Paso 5 permite seleccionar explícitamente el escenario futuro que alimentará Resultados. En el Paso 6:
+**RF-026.** Invocar el motor correspondiente en backend.
 
-- se muestra sistema, fecha, edad y cuotas estimadas del escenario elegido;
-- si existen varios escenarios salariales del Paso 4, se selecciona cuál utilizar;
-- se verifica elegibilidad para la Pensión de Retiro por Vejez Normal del SEBD;
-- se seleccionan automáticamente los mejores años aplicables al salario base;
-- se muestra la tasa base, bloques completos de cuotas excedentes e incrementos;
-- se presentan monto antes del máximo, máximo aplicable y pensión mensual estimada;
-- los años salariales proyectados quedan identificados como tales;
-- las advertencias de integración y del motor normativo permanecen visibles.
+**RF-027.** Mostrar una prestación mensual, un pago único o ambos según la naturaleza jurídica del resultado.
 
-Los motores SEBD, Subsistema Mixto y SUCGS disponen ya de integración con el Paso 6 en las capacidades documentadas para cada subfase. Un escenario pasado no se calcula automáticamente con cuotas actuales porque el historial anual no permite reconstruir con precisión el total existente en una fecha histórica exacta.
+**RF-028.** Mostrar advertencias de datos proyectados, parámetros no confirmados o reglas pendientes.
 
-## Reglas de experiencia de usuario
+**RF-029.** Invalidar resultados cuando cambie un dato de origen.
 
-- `sessionStorage` conserva temporalmente la simulación;
-- al cambiar un dato de origen se invalidan resultados dependientes;
-- los datos reales y proyectados nunca se mezclan silenciosamente;
-- los cálculos principales permanecen en Python;
-- los pasos extensos disponen de navegación rápida `sticky`;
-- el usuario puede abrir directamente cualquier paso que conserve sus prerrequisitos mediante los indicadores superiores o el selector `Ir a paso`;
-- los pasos cuyo estado haya quedado inválido por cambios anteriores permanecen deshabilitados hasta ser recalculados;
-- la barra rápida reutiliza las acciones existentes y no duplica reglas;
-- las advertencias de horizonte deben resolverse antes de utilizar un escenario en el cálculo final;
-- una fecha de referencia no se presentará como derecho adquirido sin pasar por elegibilidad.
+## 3. Requisitos de navegación y experiencia
 
-## Paso 6 — primera capacidad implementada
+**RF-030.** Permitir volver directamente a un paso ya disponible mediante los indicadores superiores.
 
-El backend puede calcular y explicar la modalidad normal del SEBD a partir de fecha de nacimiento, sexo, fecha de retiro, cuotas totales y registros salariales anuales.
+**RF-031.** Mantener un selector persistente `Ir a paso` en flujos largos.
 
-La interfaz del Paso 6 ya integra la modalidad normal del SEBD, pero la aplicación sigue presentándola explícitamente como una estimación parcial del sistema mientras faltan las demás modalidades y motores.
+**RF-032.** No permitir saltar a un paso cuyos prerrequisitos no estén satisfechos.
 
-## RF — Clasificación automática de la prestación SEBD
+**RF-033.** Conservar temporalmente la simulación en `sessionStorage` sin persistir datos personales de forma permanente por defecto.
 
-El Paso 6 deberá identificar automáticamente la modalidad jurídica general que corresponde al escenario seleccionado, sin exigir que el usuario conozca previamente su nombre.
+**RF-034.** Los campos monetarios editables deben usar separadores de miles y máximo dos decimales.
 
-Para SEBD se distinguen en esta fase:
+**RF-035.** Los factores/divisores actuariales no deben presentarse con símbolo monetario.
 
-- Pensión de Retiro por Vejez Normal;
+## 4. Requisitos del motor SEBD
+
+**RF-036.** Clasificar automáticamente:
+
+- Normal;
 - Anticipada;
 - Proporcional;
 - Proporcional Anticipada;
-- posible Indemnización por Vejez;
-- escenario todavía no elegible.
+- Indemnización por Vejez;
+- no elegible/transición cuando corresponda.
 
-El resultado deberá mostrar los factores que expliquen la diferencia entre modalidades: cuotas/240 y/o reducción por edad.
+**RF-037.** Calcular el salario base con los años requeridos por la regla implementada.
 
-Cuando corresponda `INDEMNIZACION`, el Paso 6 deberá cambiar la presentación de “pensión mensual” a “pago único estimado” y mostrar de forma auditable:
+**RF-038.** Aplicar tasa base e incrementos por bloques completos de cuotas según el momento de cotización.
 
-- mensualidad de pensión normal hipotética;
-- meses/cuotas mensuales acreditados;
-- divisor reglamentario 6;
-- cociente de meses entre seis;
-- pago único resultante;
-- advertencia de que no se trata de una pensión vitalicia;
-- transición a SUCGS desde el 01/03/2036.
+**RF-039.** Aplicar factores de anticipación versionados por mes.
 
+**RF-040.** Mantener la Indemnización por Vejez como pago único separado.
 
-## RF — Motor preliminar del Subsistema Mixto
+**RF-041.** Aplicar límites máximos cuando se cumplen las condiciones disponibles.
 
-La aplicación deberá poder recibir una entrada independiente para el Subsistema Mixto con:
+**RF-042.** No aplicar silenciosamente un mínimo indexado del artículo 192 sin un valor vigente versionado.
 
-- fecha de nacimiento y sexo;
-- fecha de retiro;
-- cuotas totales;
-- distribución de cuotas excedentes antes/después de la referencia cuando sea necesaria;
-- historial anual de cuotas y salario;
-- sistema seleccionado (`MIXTO` o `SUCGS`);
-- saldo de ahorro personal, cuando esté disponible;
-- bono de reconocimiento, cuando corresponda;
-- valor actuarial oficial de expectativa de vida, cuando esté disponible.
+## 5. Requisitos del Subsistema Mixto
 
-El resultado deberá:
+**RF-043.** Calcular el Componente de Beneficio Definido usando el tramo salarial participante del Mixto.
 
-1. verificar primero si la fecha y opción permiten todavía un cálculo bajo Mixto;
-2. calcular por separado el Componente de Beneficio Definido;
-3. limitar la participación salarial del BD a B/.500.00 mensuales;
-4. advertir cuando el historial anual obliga a aproximar un tope que jurídicamente es mensual;
-5. calcular el CAP solo con saldo y divisor actuarial explícitos;
-6. no reutilizar factores actuariales de SUCGS para el CAP;
-7. sumar ambos componentes únicamente cuando ambos cálculos estén disponibles;
-8. identificar de forma separada una transición a SUCGS;
-9. mantener visibles las fuentes normativas y las limitaciones de datos.
+**RF-044.** Advertir cuando el tope mensual de B/.500 deba aproximarse a partir de datos anuales.
 
-La selección individual de cambio de sistema antes de la fecha límite operativa no se determinará automáticamente en esta subfase. La interfaz podrá mostrar información general, pero la elegibilidad específica para ejercer una opción deberá implementarse cuando las reglas operativas estén totalmente reconciliadas.
+**RF-045.** Solicitar saldo CAP en lugar de reconstruirlo artificialmente desde el historial anual.
 
-## Requisitos funcionales Mixto — 6D.2
+**RF-046.** Permitir bono de reconocimiento e indicar si fue confirmado oficialmente.
 
-- RF-MIX-06: cuando el artículo 187 permita devolución del CAP, la aplicación deberá solicitar una elección expresa y no asumirla automáticamente.
-- RF-MIX-07: la devolución del CAP deberá mostrarse como pago único separado de cualquier pensión mensual.
-- RF-MIX-08: si el componente BD produce indemnización y el CAP se devuelve, deberán mostrarse ambos pagos únicos y su suma.
-- RF-MIX-09: la garantía del Seguro Colectivo de Renta Vitalicia deberá explicarse como continuidad futura del CAP después del agotamiento de los fondos, no como incremento inicial.
-- RF-MIX-10: un bono de reconocimiento ingresado pero no confirmado oficialmente deberá marcar el resultado como provisional.
-- RF-MIX-11: las primas históricas de seguros colectivos podrán mostrarse como trazabilidad, pero no utilizarse para reconstruir saldos individuales sin normativa vigente y movimientos de cuenta.
+**RF-047.** Calcular pensión programada solo cuando se dispone del valor actuarial aplicable.
 
-### Integración visual Mixto — Paso 6D.3
+**RF-048.** Permitir `AUTO`, `PENSION_PROGRAMADA` o `DEVOLUCION_TOTAL`.
 
-Cuando el sistema seleccionado sea `MIXTO`, el Paso 6 debe:
+**RF-049.** Cuando `AUTO` requiera una decisión del asegurado, mantener el resultado pendiente.
 
-- permitir seleccionar el escenario salarial construido en el Paso 4;
-- solicitar saldo CAP, bono, confirmación del bono, valor actuarial y tratamiento del CAP;
-- mantener `AUTO` como opción que puede exigir decisión expresa;
-- mostrar por separado pensión mensual y pagos únicos;
-- identificar visualmente los componentes BD y CAP;
-- informar si el resultado está completo, pendiente de decisión o incompleto por falta de datos;
-- mostrar la garantía de renta vitalicia únicamente cuando el motor la declare aplicable;
-- conservar fuentes y advertencias devueltas por el backend.
+**RF-050.** Separar devolución CAP, indemnización BD y total de pagos únicos.
 
-## RF — cálculo SUCGS por capas
+**RF-051.** Modelar la garantía de renta vitalicia como continuidad futura del CAP, no como aumento inicial.
 
-La aplicación debe calcular el componente contributivo base del SUCGS usando el saldo acumulado informado y el factor actuarial versionado por edad. Después debe evaluar los artículos 194 y 195, distinguiendo el complemento solidario, la Pensión de Beneficio Mínimo, la Pensión de Beneficio Solidario y la Pensión Garantizada Solidaria cuando corresponda.
+**RF-052.** Aplicar la transición operativa Mixto → SUCGS desde la fecha versionada, dejando documentada cualquier discrepancia normativa.
 
-La API debe mantener separados `pension_contributiva_mensual`, `pension_despues_componente_solidario` y `pension_mensual_total_estimada`. La última cifra solo debe completarse cuando la garantía del artículo 197 pueda determinarse o cuando se compruebe que no aplica.
+## 6. Requisitos del SUCGS
 
-### RF — garantía de reemplazo mínimo SUCGS
+**RF-053.** Solicitar saldo de Capitalización Solidaria y su confirmación oficial.
 
-La aplicación debe preevaluar el artículo 197 con trazabilidad de: años con menos de cinco cuotas, total y racha de años sin cotización, cuotas en los primeros veinte años y en los restantes, salario promedio base mensual y condición de estabilidad salarial. No debe reinterpretar automáticamente la regla de estabilidad del 30 %; mientras no exista una aplicación operativa inequívoca, debe requerirse confirmación explícita.
+**RF-054.** Calcular el componente contributivo mediante saldo, divisor legal y factor actuarial por edad.
 
-### Integración visual SUCGS — Paso 6E.4
+**RF-055.** Mantener la tabla actuarial fuera de la interfaz y versionada en `normativa/sucgs.json`.
 
-Cuando el sistema seleccionado sea `SUCGS`, el Paso 6 debe permitir seleccionar el escenario salarial, introducir el saldo de Capitalización Solidaria, confirmar su procedencia oficial, revisar los valores solidarios vigentes y declarar si el historial cubre toda la vida laboral relevante para el artículo 197. La condición de estabilidad salarial debe admitir tres estados: confirmada, no cumple o pendiente.
+**RF-056.** Evaluar la capa solidaria del artículo 194.
 
-El resultado debe presentar por separado la pensión contributiva, el complemento solidario, el resultado después de los artículos 194 y 195, la evaluación del artículo 197, el complemento de garantía y la pensión mensual total cuando el cálculo pueda cerrarse.
+**RF-057.** Evaluar la Pensión Garantizada Solidaria del artículo 195.
+
+**RF-058.** Permitir reemplazar valores legales de referencia por valores vigentes confirmados cuando la norma esté indexada.
+
+**RF-059.** Preevaluar las condiciones objetivas del artículo 197 con historial anual completo.
+
+**RF-060.** Mantener la estabilidad salarial del artículo 197 como condición explícita cuando no pueda deducirse con seguridad.
+
+**RF-061.** Completar la pensión total cuando la garantía de reemplazo pueda evaluarse o cuando se determine que no aplica.
+
+## 7. Requisitos de transparencia normativa
+
+**RF-062.** Todo motor debe devolver una referencia normativa legible.
+
+**RF-063.** Los parámetros legales modificables deben estar versionados fuera del código de presentación.
+
+**RF-064.** Las ambigüedades o decisiones interpretativas deben quedar registradas en `docs/DECISIONES.md`.
+
+**RF-065.** La documentación debe enlazar a las fuentes oficiales utilizadas.
+
+**RF-066.** Una comunicación operativa temporal debe identificarse como tal y no presentarse como sustituto de una ley o reglamento.
+
+## 8. Requisitos de precisión y consistencia
+
+**RF-067.** Los importes sensibles deben usar `Decimal` cuando exista riesgo de error binario.
+
+**RF-068.** El redondeo general debe materializarse a centavos con `ROUND_HALF_UP`, salvo norma específica.
+
+**RF-069.** Los resultados intermedios no deben redondearse arbitrariamente para forzar una coincidencia visual.
+
+**RF-070.** Los datos históricos y proyectados deben mantenerse distinguibles en API e interfaz.
+
+## 9. Bloque 6F — requisitos pendientes
+
+El siguiente bloque debe agregar:
+
+**RF-071.** Comparación transversal entre escenarios de retiro.
+
+**RF-072.** Comparación entre escenarios salariales.
+
+**RF-073.** Vista `Ver cálculo completo` con dato → regla → fórmula → sustitución → resultado intermedio → redondeo/límite → resultado final.
+
+**RF-074.** Enlaces clicables a la fuente normativa aplicable desde Resultados o una vista de metodología.
+
+**RF-075.** Página o sección de Metodología y fuentes.
+
+**RF-076.** Estructura de salida reutilizable por futuros informes PDF.
+
+## 10. Fuera del alcance inmediato
+
+Quedan para fases posteriores:
+
+- persistencia permanente;
+- importaciones oficiales automatizadas;
+- informes PDF;
+- regímenes especiales no implementados;
+- reconstrucción completa de cuentas CAP/SUCGS desde movimientos mensuales oficiales;
+- identidad visual final, temas y revisión integral WCAG 2.2.

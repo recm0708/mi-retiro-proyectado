@@ -1,304 +1,151 @@
 # Subsistema Mixto — diseño y alcance del motor
 
-## Propósito
+El Subsistema Mixto combina un **Componente de Beneficio Definido (BD)** y un **Componente de Ahorro Personal (CAP)**. La aplicación conserva ambos componentes separados y solo suma resultados cuando su naturaleza y datos permiten hacerlo.
 
-Este documento describe la implementación progresiva del Subsistema Mixto dentro del Paso 6 de la Calculadora de Pensión CSS.
+[Índice de documentación](INDICE.md) · [Normativa](NORMATIVA.md) · [Fuentes oficiales](FUENTES_NORMATIVAS.md)
 
-La finalidad es mantener separados los dos componentes que forman la prestación y evitar cálculos aparentemente exactos cuando falten datos de la cuenta individual o parámetros actuariales oficiales.
+Fuentes y enlaces completos: [FUENTES_NORMATIVAS.md](FUENTES_NORMATIVAS.md).
 
-## Fuentes normativas de referencia
-
-La implementación se basa principalmente en:
-
-- Texto Único de la Ley 51 de 2005 con reformas hasta la Ley 462 de 2025, Gaceta Oficial 30284-B de 22 de mayo de 2025;
-- artículos 155 y 178–188 para ámbito, retiro y componentes del Mixto;
-- artículos 192 y 193 para mínimos/máximos aplicables al componente definido;
-- Reglamento de Incorporación al Componente Contributivo de Capitalización Solidaria, Resolución 57,805-2025-J.D.;
-- Reglamento de Incorporación al Subsistema Mixto;
-- Reglamento de Seguros Colectivos del Componente de Ahorro Personal del Subsistema Mixto.
-
-Cuando exista una discrepancia entre disposiciones o comunicaciones operativas, el proyecto la documentará expresamente.
-
-## Estructura de la prestación
-
-La pensión bajo Mixto se modela como:
+## 1. Estructura general
 
 ```text
-Pensión Mixto
-=
-Componente de Beneficio Definido
-+
-Componente de Ahorro Personal
+Subsistema Mixto
+├── Componente de Beneficio Definido
+│   └── prestación mensual o indemnización según modalidad
+└── Componente de Ahorro Personal
+    ├── pensión programada; o
+    └── devolución total cuando corresponda
 ```
 
-Ambos componentes se calculan y presentan de forma separada antes de producir el total.
+El resultado puede contener:
 
-## 1. Componente de Beneficio Definido
+- pensión mensual total;
+- pago único BD;
+- pago único CAP;
+- total de pagos únicos;
+- garantía futura del CAP.
 
-### Salario participante
+## 2. Componente de Beneficio Definido
 
-La participación del componente definido está limitada a B/.500.00 mensuales.
+### 2.1. Salario participante
 
-Con detalle mensual, el cálculo debe aplicar el límite mes por mes.
+La participación salarial se limita a **B/.500.00 mensuales**.
 
-La versión 6D.1 dispone solo de historial anual en el asistente. Por tanto usa una aproximación:
+Como el historial actual es anual, la aplicación aproxima el máximo del año como:
 
 ```text
-salario considerado BD del año
-=
-min(
-  salario cotizado/reportado del año,
-  B/.500.00 × cuotas acreditadas del año
-)
+B/.500 × cuotas registradas en el año
 ```
 
-Cuando esta aproximación recorta un salario, la salida marca:
+La interfaz muestra una advertencia porque un historial mensual oficial puede producir un resultado distinto en años irregulares.
 
-```text
-usa_aproximacion_anual_tope_mensual = true
-```
+### 2.2. Modalidad
 
-y genera una advertencia.
-
-### Modalidad
-
-La clasificación de edad/cuotas se reutiliza desde el motor general SEBD:
+El componente BD reutiliza la clasificación general de edad/cuotas del SEBD:
 
 - Normal;
 - Anticipada;
 - Proporcional;
-- Proporcional Anticipada.
+- Proporcional Anticipada;
+- Indemnización por Vejez cuando corresponde.
 
-La reutilización no implica que los importes máximos sean iguales. El componente BD del Mixto aplica su máximo propio de B/.500.00 mensuales.
+Los parámetros monetarios del componente siguen siendo propios del Mixto.
 
-### Orden de cálculo
+## 3. Componente de Ahorro Personal
 
-En la primera implementación:
+### 3.1. Saldo
 
-```text
-1. formar historial participante BD;
-2. seleccionar base salarial;
-3. determinar tasa e incrementos;
-4. obtener monto previo al máximo;
-5. limitar el componente a B/.500.00;
-6. aplicar factor proporcional, si corresponde;
-7. aplicar factor de edad, si corresponde.
-```
+El motor exige un saldo CAP informado o validado. No reconstruye la cuenta sumando porcentajes sobre salarios anuales porque la cuenta real depende de movimientos, rendimientos y reglas que no se reproducen con suficiente fidelidad desde un resumen anual.
 
-El mínimo indexado continúa pendiente de versionarse por fecha.
+### 3.2. Bono de reconocimiento
 
-## 2. Componente de Ahorro Personal
+El artículo 183 se modela como un monto adicional cuando corresponde.
 
-### Dato principal
+La aplicación:
 
-El motor no reconstruye el saldo actual sumando porcentajes al historial salarial.
+- acepta el monto ya determinado;
+- registra si fue confirmado oficialmente;
+- no reconstruye automáticamente el bono individual con datos insuficientes.
 
-Necesita el saldo ahorrado y capitalizado de la cuenta individual cuando esté disponible por una fuente oficial o verificable.
+### 3.3. Pensión programada
 
-### Bono de reconocimiento
-
-Cuando corresponda, el bono de reconocimiento se suma de manera separada al saldo:
+Cuando se dispone del valor actuarial aplicable:
 
 ```text
-capital total =
-saldo ahorro personal
-+
-bono de reconocimiento
+pensión programada CAP
+= (saldo CAP + bono aplicable) / valor actuarial de expectativa de vida
 ```
 
-6D.1 acepta un monto de bono ya determinado. Todavía no calcula el bono desde sus reglas reglamentarias.
+El valor actuarial no es un monto monetario y no se presenta con prefijo `B/.`.
 
-### Pensión programada
-
-La fórmula implementada es:
-
-```text
-pensión programada CAP =
-capital total
-/
-valor actuarial de expectativa de vida
-```
-
-El valor actuarial depende de la expectativa de vida, tabla de mortalidad y tasa de descuento aplicables.
-
-La aplicación no ha versionado aún un divisor actuarial oficial vigente. Por ello, si no se proporciona el valor:
-
-```text
-calculo_disponible = false
-```
-
-y no se calcula un total Mixto.
-
-### Sin máximo propio
-
-El CAP se conserva sin un máximo mensual artificial en el modelo.
-
-## 3. Resultado total
-
-Solo cuando ambos componentes mensuales están disponibles:
-
-```text
-pensión_mensual_total_estimada =
-pensión_BD
-+
-pensión_programada_CAP
-```
-
-Si el CAP está incompleto, el BD puede mostrarse, pero el total queda pendiente.
-
-## 4. Transición hacia SUCGS
-
-La implementación operativa de retiro usa:
-
-```text
-Hasta 29/02/2032 → posible cálculo Mixto
-Desde 01/03/2032 → transición SUCGS
-```
-
-Esta fecha se fundamenta en el artículo 188 y el reglamento de incorporación al componente contributivo de capitalización solidaria.
-
-El artículo 153 del Texto Único contiene también una fecha 01/03/2036 para asegurados del Mixto. Esta discrepancia queda registrada en los parámetros y documentación; no se modifica silenciosamente el texto legal.
-
-## 5. Opción de sistema en 2026
-
-El reglamento original de 2025 registró 17/03/2026 como fecha límite de opción. Comunicaciones oficiales de la CSS en 2026 utilizan 18/08/2026 como fecha límite operativa.
-
-6D.1 conserva ambos datos para trazabilidad y no decide automáticamente si una persona específica tiene derecho a ejercer la opción.
-
-## 6. Prestaciones aún pendientes
-
-La primera subfase no considera completo el Subsistema Mixto. Quedan pendientes:
-
-- integración del Mixto con el Paso 6 visual;
-- cálculo reglamentario del bono de reconocimiento;
-- tratamiento combinado de indemnización del BD y devolución del CAP;
-- devolución del ahorro cuando no se alcance una pensión;
-- garantía mediante seguros colectivos y continuidad de pago cuando se agote el CAP;
-- parámetros actuariales oficiales versionados;
-- regímenes y casos especiales;
-- transición completa y comparación con SUCGS.
-
-## 7. Principio de transparencia
-
-La aplicación debe diferenciar siempre:
-
-```text
-dato oficial/ingresado
-dato proyectado
-parámetro normativo versionado
-valor sintético de prueba
-cálculo no disponible
-```
-
-Un resultado parcial del componente BD no se presentará como pensión total Mixto si el CAP no puede calcularse.
-
-## 8. Paso 6D.2 — opciones, devolución y garantía del CAP
-
-### Opción explícita del asegurado
+## 4. Opciones del CAP
 
 La entrada `opcion_prestacion_cap` admite:
 
-```text
-AUTO
-PENSION_PROGRAMADA
-DEVOLUCION_TOTAL
-```
+- `AUTO`;
+- `PENSION_PROGRAMADA`;
+- `DEVOLUCION_TOTAL`.
 
-Cuando el asegurado alcanza la edad de referencia sin cumplir los requisitos de la Pensión de Retiro por Vejez Normal, el artículo 187 permite solicitar la devolución total de la suma ahorrada y capitalizada en la cuenta. La aplicación no toma esa decisión por el usuario.
+Cuando la devolución está disponible y `AUTO` no permite concluir la intención del asegurado, el resultado queda pendiente hasta una decisión expresa.
 
-Si `AUTO` encuentra una devolución disponible, devuelve:
+## 5. Devolución total del CAP
 
-```text
-decision_requerida = true
-calculo_disponible = false
-```
+El artículo 187 permite la devolución en los casos previstos cuando se alcanza la edad de referencia sin cumplir los requisitos de la pensión normal.
 
-hasta que se elija una vía.
+La devolución:
 
-### Devolución total del CAP
+- se presenta como pago único;
+- no se convierte en pensión mensual;
+- se mantiene separada de cualquier indemnización del componente BD.
 
-Cuando procede y se elige `DEVOLUCION_TOTAL`:
+## 6. Indemnización BD + devolución CAP
 
-```text
-devolucion_pago_unico_estimado = capital_total_considerado
-pension_programada_mensual = null
-```
+Con menos de 180 cuotas puede existir una indemnización del componente BD y, de forma separada, una devolución del CAP.
 
-La salida indica que se trata de un pago único. Las primas del Seguro Colectivo de Renta Vitalicia no se agregan a la devolución porque el reglamento las considera parte del aporte de solidaridad.
-
-### Indemnización del BD + devolución CAP
-
-Con menos de 180 cuotas a la edad de referencia, el componente BD puede producir la Indemnización por Vejez del artículo 186. Si además se solicita la devolución del CAP, ambos importes se conservan por separado:
+La API conserva:
 
 ```text
-pago_unico_bd_estimado
-pago_unico_cap_estimado
-pago_unico_total_estimado
-```
-
-No se genera una pensión mensual total en esa ruta.
-
-### Pensión proporcional + devolución CAP
-
-Con 180–239 cuotas a la edad de referencia, el componente BD puede producir una pensión proporcional. Si el usuario elige la devolución total del CAP, la salida conserva:
-
-- la pensión mensual BD;
-- el pago único de devolución CAP;
-- sin inventar una renta mensual CAP.
-
-### Garantía de renta vitalicia
-
-El artículo 184 y el artículo 10 del Reglamento de Seguros Colectivos establecen que, si el pensionado sobrevive la expectativa de vida utilizada para determinar la pensión CAP y se agotan los fondos, el Seguro Colectivo de Renta Vitalicia continúa pagando mensualmente la suma correspondiente al CAP hasta la muerte.
-
-La garantía:
-
-```text
-NO aumenta la pensión inicial
-NO se suma como complemento inmediato
-SÍ conserva la continuidad futura del pago CAP bajo la condición legal
-```
-
-La prima histórica de 0.93 % se conserva únicamente como referencia normativa de la edición reglamentaria actualizada a junio de 2020. No se utiliza para reconstruir saldos individuales ni para descontar nuevamente el capital ingresado.
-
-### Bono de reconocimiento
-
-El artículo 183 reconoce un bono a determinados asegurados que ingresaron voluntariamente al Mixto desde el SEBD y reunían las condiciones legales correspondientes.
-
-6D.2 no calcula ese bono automáticamente. Si se introduce un monto mayor que cero, el modelo registra además si fue confirmado oficialmente. Un bono no confirmado deja el total como provisional.
-
-## 9. Estado después de 6D.2
-
-Implementado en backend:
-
-- componente BD de pensión;
-- indemnización del componente BD;
-- pensión programada CAP;
-- devolución total CAP;
-- decisión explícita entre alternativas cuando procede;
-- garantía de renta vitalicia como continuidad futura;
-- separación de pagos únicos y mensuales;
-- trazabilidad del bono de reconocimiento;
-- transición Mixto → SUCGS.
-
-Pendiente:
-
-- integración visual del Mixto en el Paso 6;
-- importación/lectura del saldo CAP oficial;
-- obtención de divisor actuarial vigente desde una fuente pública versionable;
-- cálculo automático del bono de reconocimiento si se documenta una regla reproducible;
-- SUCGS y comparación final entre sistemas.
-
-## Integración visual 6D.3
-
-La interfaz del Paso 6 consume `POST /api/simulacion/resultados/mixto`. El historial, las cuotas y el escenario de retiro se heredan del asistente; los datos propios del CAP se solicitan de forma explícita.
-
-La presentación separa cuatro resultados posibles:
-
-```text
-pensión mensual BD
-pensión programada CAP
 pago único BD
-pago único CAP
++ pago único CAP
+= total de pagos únicos
 ```
 
-La pensión mensual total solo suma rentas mensuales. El total de pagos únicos solo suma prestaciones de pago único. Una decisión CAP pendiente se muestra como tal y no produce un total mensual ficticio.
+Nunca se presenta esa suma como una mensualidad.
+
+## 7. Garantía del Seguro Colectivo de Renta Vitalicia
+
+El artículo 184 y el reglamento de seguros colectivos se modelan como una garantía futura.
+
+Se activa cuando:
+
+- el pensionado sobrevive la expectativa de vida utilizada; y
+- se extinguen los fondos ahorrados del CAP.
+
+El seguro continúa el pago mensual correspondiente al CAP según las condiciones reglamentarias. No aumenta la pensión inicial.
+
+La referencia histórica de prima 0.93 % se documenta para trazabilidad y no se vuelve a descontar de un saldo oficial ingresado.
+
+## 8. Transición hacia SUCGS
+
+La aplicación usa:
+
+- hasta 29/02/2032: cálculo Mixto;
+- desde 01/03/2032: cálculo bajo artículo 196 y concordantes del SUCGS.
+
+Esta frontera se apoya en el artículo 188 y en el Reglamento de Incorporación al Componente Contributivo de Capitalización Solidaria.
+
+El artículo 153 contiene una referencia distinta a 01/03/2036. La discrepancia se mantiene documentada en lugar de armonizarla silenciosamente.
+
+## 9. Opción operativa de sistema en 2026
+
+La Resolución 57,805-2025-J.D. contiene originalmente 17/03/2026. Comunicaciones oficiales posteriores de la CSS señalan **18/08/2026** como fecha límite operativa para quienes cumplen los requisitos de la opción.
+
+Esta información es temporal y debe verificarse antes de usarse en una decisión individual.
+
+## 10. Fuentes principales
+
+- [Texto Único de la Ley 51 — PDF CSS](https://www.css.gob.pa/wp-content/uploads/2025/05/TEXTO-UNICO-DE-LA-LEY-51-DE-2005-CSS-GACETA-OFICIAL-22-5-25.pdf)
+- [Reglamento de Incorporación al Subsistema Mixto](https://w3.css.gob.pa/wp-content/wdocs/REGLAMENTO%20DE%20INCORPORACION%20AL%20SUBSISTEMA%20MIXTO.pdf)
+- [Reglamento de Seguros Colectivos del CAP](https://www.css.gob.pa/wp-content/uploads/2023/10/REGLAMENTO-DE-SEGUROS-COLECTIVOS-DEL-COMPONENTE-DE-AHORRO-PERSONAL-DEL-SUBSISTEMA-MIXTO-actualizado.pdf)
+- [Reglamento de Incorporación al Componente Contributivo de Capitalización Solidaria](https://www.css.gob.pa/wp-content/uploads/2025/07/REGLAMENTO-DE-INCORPORACION-AL-CCCS.pdf)
+- [Normativa de Prestaciones Económicas — CSS](https://www.css.gob.pa/normativa-prestaciones-economicas/)

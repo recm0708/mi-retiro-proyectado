@@ -1,111 +1,123 @@
 # Modalidades de retiro por vejez — SEBD
 
-Este documento resume la lógica implementada en el clasificador general del Paso 6. No sustituye la Ley ni una resolución de la Caja de Seguro Social.
+Este documento resume las modalidades generales implementadas del **Subsistema Exclusivamente de Beneficio Definido (SEBD)**. Las fuentes oficiales y enlaces se centralizan en [FUENTES_NORMATIVAS.md](FUENTES_NORMATIVAS.md).
 
-## Árbol general de clasificación
+[Índice de documentación](INDICE.md) · [Normativa](NORMATIVA.md) · [Fuentes oficiales](FUENTES_NORMATIVAS.md)
 
-```text
-Fecha anterior a referencia - 2 años
-└─ No elegible por la banda estándar
+## 1. Árbol general de clasificación
 
-Desde referencia - 2 años hasta antes de referencia
-├─ >= 240 cuotas → Anticipada
-├─ 180–239       → Proporcional Anticipada
-└─ < 180         → No elegible para pensión por vejez en esa fecha
+La aplicación determina automáticamente la modalidad a partir de:
 
-Edad de referencia o superior
-├─ >= 240 cuotas → Normal
-├─ 180–239       → Proporcional
-└─ < 180         → Indemnización por Vejez, si corresponde antes de 01/03/2036
-```
+- sexo;
+- fecha de nacimiento;
+- fecha de retiro seleccionada;
+- edad de referencia;
+- cuotas totales estimadas a esa fecha.
 
-Los regímenes especiales y trabajadores independientes requieren reglas adicionales y no se confunden con este árbol general.
-
-## Normal
+Clasificación general:
 
 ```text
-Tasa = 60 %
-     + 1.25 puntos por cada bloque completo de 12 cuotas excedentes antes de referencia
-     + 2 puntos por cada bloque completo de 12 cuotas posteriores a referencia
+Antes de la banda anticipada
+└── No elegible por edad
 
-Pensión preliminar = salario base × tasa
+Dentro de la banda anticipada
+├── 240 o más cuotas → Anticipada
+├── 180 a 239 cuotas → Proporcional Anticipada
+└── menos de 180 → No elegible por esta vía
+
+Edad de referencia o posterior
+├── 240 o más cuotas → Normal
+├── 180 a 239 cuotas → Proporcional
+└── menos de 180 → Indemnización por Vejez, cuando legalmente corresponda
 ```
 
-Después se aplican los límites legalmente correspondientes.
+## 2. Pensión Normal
 
-## Anticipada
+Condiciones generales implementadas:
+
+- haber alcanzado la edad de referencia;
+- contar con al menos 240 cuotas.
+
+La tasa parte de 60 % del salario base y puede incrementarse por bloques completos de doce cuotas excedentes según hayan sido aportadas antes o después de la edad de referencia.
+
+## 3. Pensión Anticipada
+
+La banda general permite solicitar la prestación hasta dos años antes de la edad de referencia cuando se cumplen las cuotas requeridas.
+
+El motor:
+
+1. calcula la pensión antes de reducción;
+2. aplica límites correspondientes;
+3. obtiene el factor reglamentario mensual según la anticipación;
+4. aplica el factor de edad.
+
+Los factores se versionan en `normativa/sebd.json` y su fuente reglamentaria es el Reglamento para el Cálculo de Prestaciones Económicas.
+
+## 4. Pensión Proporcional
+
+Con edad de referencia y entre 180 y 239 cuotas:
 
 ```text
-Tasa = 60 %
-     + 1.25 puntos por cada bloque completo de 12 cuotas excedentes antes de referencia
-
-Monto limitado = aplicar límites al salario base × tasa
-Pensión = monto limitado × factor de reducción por edad
+pensión proporcional
+= pensión base aplicable × cuotas / 240
 ```
 
-La tabla mensual del factor se versiona en `normativa/sebd.json`.
+El motor conserva por separado el factor de cuotas y el resultado posterior a su aplicación.
 
-## Proporcional
+## 5. Pensión Proporcional Anticipada
 
-```text
-Monto base = 60 % del salario base
-Monto limitado = aplicar límites
-Factor de cuotas = cuotas acreditadas / 240
-Pensión = monto limitado × factor de cuotas
-```
+Dentro de la banda anticipada y con 180 a 239 cuotas:
 
-La Ley permite que esta modalidad quede por debajo del mínimo general.
+1. se calcula la base de la pensión;
+2. se aplica el factor proporcional `cuotas / 240`;
+3. se aplica el factor de reducción por edad.
 
-## Proporcional Anticipada
+## 6. Salario base
 
-```text
-Monto base = 60 % del salario base
-Monto limitado = aplicar límites
-Factor de cuotas = cuotas acreditadas / 240
-Factor de edad = tabla de reducción anticipada
+La implementación usa el promedio mensual de los diez mejores años conforme al artículo 180 y al procedimiento reglamentario disponible.
 
-Pensión = monto limitado × factor de cuotas × factor de edad
-```
+Con historial anual:
 
-## Salario base
+- no se anualiza artificialmente un año parcial;
+- se conserva su salario efectivamente cotizado;
+- cuando se seleccionan diez años, la suma se lleva a promedio mensual sobre 120 meses.
 
-La regla general utiliza el promedio mensual de los diez mejores años de cotizaciones. La implementación conserva cada año calendario con su salario cotizado real o proyectado y selecciona los diez totales anuales más altos disponibles hasta la fecha de retiro.
+Esta aproximación debe revisarse si se incorpora detalle mensual oficial.
 
-Un año parcial no se anualiza artificialmente. Si entra entre los diez mejores, conserva las cuotas y el salario efectivamente atribuido a ese año; la suma de los diez años se divide entre 120 meses.
+## 7. Indemnización por Vejez
 
-## Indemnización por Vejez
+Cuando la persona alcanza la edad de referencia con menos de 180 cuotas y el régimen de indemnización sigue vigente:
 
-Cuando la persona alcanza la edad de referencia con menos de 180 cuotas y la fecha es anterior al 1 de marzo de 2036, el clasificador identifica una Indemnización por Vejez. Es una prestación de **pago único**, no una pensión mensual vitalicia.
+1. se calcula una mensualidad hipotética de retiro;
+2. se divide el total de meses/cuotas acreditados entre seis;
+3. se multiplica ese factor por la mensualidad hipotética;
+4. el resultado se presenta como **pago único**, no como pensión mensual.
 
-El cálculo implementado sigue el procedimiento reglamentario:
+Desde **01/03/2036**, el artículo 186 remite estos casos al SUCGS.
 
-```text
-Mensualidad normal hipotética = 60 % del salario base
-                              → aplicar máximo ordinario
+## 8. Mínimos y máximos
 
-Factor de cotizaciones = cuotas mensuales acreditadas / 6
+### 8.1. Monto mínimo
 
-Indemnización estimada = mensualidad normal hipotética
-                       × factor de cotizaciones
-```
+El artículo 192 establece un monto sujeto a ajuste anual. La aplicación no fuerza un mínimo indexado sin tener el valor vigente versionado para la fecha de cálculo.
 
-El cociente `cuotas / 6` se conserva como división directa; no se trunca a bloques completos porque el reglamento ordena dividir los meses de cotización registrados entre seis y multiplicar el resultado por la mensualidad hipotética.
+### 8.2. Límites máximos
 
-Los campos propios de una pensión proporcional no se reutilizan para esta prestación. En la respuesta de la API, `factor_proporcional_cuotas` y `monto_despues_factor_proporcional` se devuelven como `null` para indicar explícitamente **no aplica**.
+El artículo 193 establece:
 
-El mínimo indexado del artículo 192 continúa pendiente de versionarse por fecha. Si la mensualidad hipotética pudiera quedar afectada por ese mínimo, la interfaz muestra una advertencia en lugar de inventar un valor actualizado.
+- máximo ordinario de B/.1,500.00;
+- máximo de B/.2,000.00 bajo requisitos ampliados;
+- máximo de B/.2,500.00 bajo requisitos superiores.
 
-A partir del 1 de marzo de 2036 el artículo 186 dispone que no se conceda esta indemnización y que el cálculo proceda conforme al SUCGS.
+Las condiciones se evalúan con los años de salario y cuotas requeridos cuando la información disponible lo permite.
 
-## Prestaciones todavía no calculadas aquí
+## 9. Prestaciones fuera del motor general
 
-- regímenes especiales;
-- componente de Beneficio Definido del Subsistema Mixto;
-- componente de ahorro del Mixto;
-- SUCGS.
+El clasificador no debe tratar como idénticos todos los regímenes de asegurados. Los regímenes especiales —por ejemplo, trabajadores estacionales agrícolas y de la construcción— requieren reglas propias y una identificación explícita del tipo de asegurado.
 
-## Fuentes principales
+## 10. Fuentes principales
 
-- Texto Único de la Ley 51 de 2005 con reformas hasta la Ley 462 de 2025, Gaceta Oficial 30284-B del 22 de mayo de 2025, artículos 178–181 y 186.
-- Reglamento para el Cálculo de Prestaciones Económicas, Resolución 39,302-2007-J.D. y modificaciones listadas por la CSS.
-- Sección oficial de Normativa de Prestaciones Económicas de la CSS.
+- [Texto Único de la Ley 51 — PDF CSS](https://www.css.gob.pa/wp-content/uploads/2025/05/TEXTO-UNICO-DE-LA-LEY-51-DE-2005-CSS-GACETA-OFICIAL-22-5-25.pdf)
+- [Normativa de Prestaciones Económicas — CSS](https://www.css.gob.pa/normativa-prestaciones-economicas/)
+- [Resolución 39,302-2007-J.D. — CSS](https://w3.css.gob.pa/wp-content/wdocs/Resolucion%20%2039%2C302-2007-J.D..pdf)
+- [Mapa completo de fuentes del proyecto](FUENTES_NORMATIVAS.md)

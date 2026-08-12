@@ -1,6 +1,12 @@
 # Registro de decisiones técnicas
 
-Este documento registra decisiones relevantes tomadas durante el desarrollo.
+Este documento registra decisiones de arquitectura, modelado, precisión y aplicación normativa. La numeración ADR es única y consecutiva; no se reutilizan identificadores.
+
+- [Índice de documentación](INDICE.md)
+- [Normativa implementada](NORMATIVA.md)
+- [Fuentes normativas oficiales](FUENTES_NORMATIVAS.md)
+
+Cuando una decisión interpreta una superposición, ambigüedad o limitación de datos, debe leerse junto con la fuente oficial correspondiente y no como una norma autónoma.
 
 ---
 
@@ -211,7 +217,9 @@ Los pasos largos del asistente dispondrán de una barra de navegación rápida v
 
 La barra delegará sus acciones en los formularios y botones existentes. No contendrá fórmulas ni validaciones previsionales paralelas, evitando duplicar lógica y manteniendo accesibles las acciones Anterior/Continuar/Analizar.
 
-## ADR-019A — Clasificar explícitamente cuotas excedentes por edad de referencia
+## ADR-020 — Clasificar explícitamente cuotas excedentes por edad de referencia
+
+**Estado:** Aceptada
 
 **Decisión:** el motor SEBD no inferirá silenciosamente, para retiros posteriores a la edad de referencia, qué cuotas excedentes corresponden al incremento de 1.25 % y cuáles al incremento de 2 %.
 
@@ -219,7 +227,7 @@ La barra delegará sus acciones en los formularios y botones existentes. No cont
 
 ---
 
-## ADR-020 — Selección explícita del escenario que alimenta el Paso 6
+## ADR-021 — Selección explícita del escenario que alimenta el Paso 6
 
 **Estado:** Aceptada
 
@@ -229,7 +237,7 @@ Los escenarios ya transcurridos permanecen visibles para comparación, pero no s
 
 ---
 
-## ADR-021 — Capa de integración entre el asistente y los motores legales
+## ADR-022 — Capa de integración entre el asistente y los motores legales
 
 **Estado:** Aceptada
 
@@ -240,26 +248,32 @@ JavaScript enviará el estado validado y presentará la respuesta, pero no decid
 Cuando un año futuro solo se utiliza parcialmente hasta la fecha de retiro, el salario proyectado se prorrateará por las cuotas consumidas y se mostrará una advertencia de que se trata de una estimación.
 
 
-## ADR-022 — Clasificación automática de modalidad SEBD
+## ADR-023 — Clasificación automática de modalidad SEBD
+
+**Estado:** Aceptada
 
 **Decisión:** el usuario selecciona una fecha/escenario de retiro y la aplicación determina automáticamente si corresponde Normal, Anticipada, Proporcional, Proporcional Anticipada, posible Indemnización por Vejez o un escenario no elegible.
 
 **Motivo:** evita que el usuario tenga que conocer de antemano la denominación jurídica correcta y reduce inconsistencias entre edad, cuotas y modalidad seleccionada manualmente.
 
-## ADR-023 — Años calendario parciales dentro de los mejores años
+## ADR-024 — Años calendario parciales dentro de los mejores años
+
+**Estado:** Aceptada
 
 **Decisión:** no anualizar un año parcial. Se conserva su total cotizado y puede competir entre los mejores años por su total anual. Cuando se seleccionan diez años, la suma se lleva a promedio mensual sobre 120 meses.
 
 **Motivo:** mantener el tratamiento del procedimiento reglamentario y evitar inventar salarios no cotizados.
 
-## ADR-024 — Factores anticipados versionados por mes
+## ADR-025 — Factores anticipados versionados por mes
+
+**Estado:** Aceptada
 
 **Decisión:** los factores de reducción de la banda anticipada se almacenan como parámetros normativos y no se interpolan en el motor.
 
 **Motivo:** un factor reglamentario debe reproducirse desde una tabla versionada, no deducirse por aproximación matemática.
 
 
-## ADR-025 — Indemnización por Vejez como pago único separado
+## ADR-026 — Indemnización por Vejez como pago único separado
 
 **Estado:** Aceptada
 
@@ -270,7 +284,7 @@ El cociente entre meses acreditados y seis se calculará mediante división deci
 Desde el 01/03/2036 el clasificador no calculará esta indemnización y derivará el escenario a la transición SUCGS prevista por el artículo 186.
 
 
-## ADR-026 — No reconstruir el saldo CAP desde historial anual
+## ADR-027 — No reconstruir el saldo CAP desde historial anual
 
 **Estado:** Aceptada
 
@@ -282,7 +296,7 @@ Para calcular la pensión programada se exigirá el saldo ahorrado/capitalizado 
 
 ---
 
-## ADR-027 — Reutilizar clasificación SEBD en el componente BD del Mixto
+## ADR-028 — Reutilizar clasificación SEBD en el componente BD del Mixto
 
 **Estado:** Aceptada
 
@@ -292,7 +306,7 @@ El Componente de Beneficio Definido del Subsistema Mixto reutilizará el clasifi
 
 ---
 
-## ADR-028 — Frontera operativa del Mixto en 01/03/2032
+## ADR-029 — Frontera operativa del Mixto en 01/03/2032
 
 **Estado:** Aceptada con discrepancia normativa documentada
 
@@ -304,7 +318,7 @@ El artículo 153 del Texto Único contiene una referencia a 01/03/2036 para aseg
 
 ---
 
-## ADR-029 — La opción del CAP no se decide automáticamente
+## ADR-030 — La opción del CAP no se decide automáticamente
 
 **Estado:** Aceptada
 
@@ -316,7 +330,7 @@ La entrada `opcion_prestacion_cap` admite `AUTO`, `PENSION_PROGRAMADA` y `DEVOLU
 
 ---
 
-## ADR-030 — La garantía de renta vitalicia no incrementa la pensión inicial
+## ADR-031 — La garantía de renta vitalicia no incrementa la pensión inicial
 
 **Estado:** Aceptada
 
@@ -328,7 +342,7 @@ No se sumará un complemento a la pensión inicial. La salida conservará la pen
 
 ---
 
-## ADR-031 — El bono de reconocimiento requiere un monto oficial o validado
+## ADR-032 — El bono de reconocimiento requiere un monto oficial o validado
 
 **Estado:** Aceptada
 
@@ -340,7 +354,7 @@ Un bono mayor que cero que no esté marcado como confirmado permitirá mostrar u
 
 ---
 
-## ADR-032 — Pagos únicos y pensiones mensuales permanecen separados
+## ADR-033 — Pagos únicos y pensiones mensuales permanecen separados
 
 **Estado:** Aceptada
 
@@ -350,7 +364,7 @@ Cuando ambos pagos únicos procedan, el motor podrá presentar un total de pagos
 
 **Motivo:** evita mezclar prestaciones de naturaleza y periodicidad diferentes en la API, la interfaz y futuros informes.
 
-## ADR-033 — La interfaz Mixto consume el motor integrado y no replica fórmulas
+## ADR-034 — La interfaz Mixto consume el motor integrado y no replica fórmulas
 
 **Estado:** Aceptada
 
@@ -362,7 +376,7 @@ La clasificación de modalidad, la decisión pendiente, la pensión programada, 
 
 ---
 
-## ADR-034 — Navegación directa condicionada entre pasos del asistente
+## ADR-035 — Navegación directa condicionada entre pasos del asistente
 
 **Estado:** Aceptada
 
@@ -372,25 +386,33 @@ El salto directo reutiliza las funciones existentes de preparación de Historial
 
 **Motivo:** permite corregir o revisar datos sin presionar repetidamente `Anterior`, pero evita saltar a resultados que hayan quedado inválidos después de modificar información de origen.
 
-## ADR-026 — Separar saldo SUCGS y garantías
+## ADR-036 — Separar saldo SUCGS y garantías
+
+**Estado:** Aceptada
 
 **Decisión:** el SUCGS calcula el componente contributivo a partir de un saldo explícito y no reconstruye todavía ese saldo desde el historial anual. La pensión contributiva, la capa solidaria de los artículos 194 y 195 y la pensión total definitiva se mantienen como niveles separados.
 
 **Motivo:** la reconstrucción del saldo depende del origen previsional del asegurado, aportes previos y posteriores a la reforma y rendimientos efectivos del Fondo Único Solidario. Además, el artículo 197 puede elevar el resultado después de la capa solidaria, por lo que no debe confundirse un resultado intermedio con la pensión definitiva.
 
-## ADR-027 — Versionar referencias solidarias y permitir valores vigentes
+## ADR-037 — Versionar referencias solidarias y permitir valores vigentes
+
+**Estado:** Aceptada
 
 **Decisión:** B/.144.00 y B/.265.00 se conservan en `normativa/sucgs.json` como referencias legales al 22/05/2025. El motor permite suministrar valores vigentes confirmados y advierte cuando utiliza las referencias base.
 
 **Motivo:** el artículo 194 somete sus prestaciones a indexación y el artículo 195 establece la Pensión Garantizada Solidaria como un monto de al menos B/.265.00. Tratar esos importes como eternamente fijos produciría resultados desactualizados.
 
-## ADR-028 — Prioridad del artículo 195 en el límite exacto de 240 cuotas
+## ADR-038 — Prioridad del artículo 195 en el límite exacto de 240 cuotas
+
+**Estado:** Aceptada
 
 **Decisión:** cuando existen exactamente 240 cuotas y se cumple la edad de referencia, el motor aplica la Pensión Garantizada Solidaria del artículo 195 antes de la regla del numeral 2 del artículo 194.
 
 **Motivo:** el numeral 2 del artículo 194 incluye literalmente hasta 240 cuotas, mientras el artículo 195 concede la Pensión Garantizada Solidaria desde 240 cuotas. La aplicación documenta esta superposición y usa el artículo 195 como regla específica de la garantía mínima, sin ocultar la interpretación adoptada.
 
-## ADR-027 — Preevaluación conservadora del artículo 197
+## ADR-039 — Preevaluación conservadora del artículo 197
+
+**Estado:** Aceptada
 
 **Decisión:** automatizar las condiciones de número anual de cuotas y distribución temporal con historial anual completo; calcular el salario promedio base como salarios cotizados dividido entre meses cotizados; y exigir confirmación explícita para la estabilidad salarial.
 
@@ -398,7 +420,9 @@ El salto directo reutiliza las funciones existentes de preparación de Historial
 
 **Consecuencia:** `pension_mensual_total_estimada` solo se completa cuando la garantía puede determinarse o cuando una condición comprobada demuestra que no aplica.
 
-## ADR-027 — Integrar SUCGS al Paso 6 sin duplicar fórmulas
+## ADR-040 — Integrar SUCGS al Paso 6 sin duplicar fórmulas
+
+**Estado:** Aceptada
 
 **Decisión:** la interfaz SUCGS reutilizará los Pasos 1–5 y enviará al backend el historial, la línea temporal y el escenario de retiro seleccionados. JavaScript no implementará la fórmula del artículo 196 ni las garantías de los artículos 194, 195 y 197.
 

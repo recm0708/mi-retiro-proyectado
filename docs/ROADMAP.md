@@ -1,189 +1,193 @@
 # Roadmap
 
-## Fase 1 — Base técnica
+Este roadmap refleja el estado funcional actual del proyecto. Las secciones históricas de subfases se integraron en las fases principales para evitar contradicciones y pendientes obsoletos.
 
-**Estado:** completada
+[Índice de documentación](INDICE.md) · [Normativa](NORMATIVA.md) · [Fuentes oficiales](FUENTES_NORMATIVAS.md)
+
+## 1. Fase 1 — Base técnica
+
+**Estado:** completada.
+
+Incluye:
 
 - estructura del repositorio;
-- entorno virtual y dependencias;
 - FastAPI y Jinja2;
 - Bootstrap y CSS propio;
+- entorno virtual y dependencias;
 - Git/GitHub;
-- documentación inicial.
+- separación entre código, normativa, pruebas y documentación;
+- reglas de formato y finales de línea.
 
-## Fase 2 — Asistente básico
+## 2. Fase 2 — Asistente básico
 
-**Estado:** completada / mantenimiento
+**Estado:** completada y en mantenimiento.
 
-- Paso 1 — Datos personales;
-- Paso 2 — Cuotas;
-- Paso 3 — historial anual y salario actual;
-- validación del historial;
-- `sessionStorage`;
-- invalidación de resultados dependientes.
+Incluye:
 
-## Fase 3 — Historial y proyección salarial
+- Paso 1 — datos personales y sistema previsional;
+- Paso 2 — cuotas;
+- Paso 3 — historial salarial y salario actual;
+- estado temporal en `sessionStorage`;
+- invalidación de resultados dependientes;
+- navegación directa entre pasos disponibles.
 
-**Estado:** implementada en validación final
+## 3. Fase 3 — Historial y proyección salarial
 
-- captura y análisis del historial;
+**Estado:** completada para el alcance actual.
+
+Incluye:
+
+- captura de historial anual;
+- validación contra las cuotas del Paso 2;
 - normalización salarial;
-- cuatro modalidades de proyección;
-- escenarios personalizados;
+- salario constante;
+- variación porcentual;
+- salario futuro conocido;
+- comparación de escenarios;
 - línea temporal histórica/proyectada;
-- precisión monetaria con `Decimal`;
-- formato de entrada con separadores de miles y máximo dos decimales;
-- clasificación explícita de años sin cotización;
-- pruebas automatizadas de precisión y línea temporal.
+- precisión monetaria y formato de entrada.
 
-Pendiente de cierre manual:
+**Mejora futura:** granularidad mensual cuando una regla legal o una importación oficial la requiera.
 
-- repetir caso femenino real después de las correcciones;
-- prueba corta del caso masculino.
+## 4. Fase 4 — Fechas, cuotas y retiro
 
-## Fase 4 — Fechas, cuotas y retiro
+**Estado:** completada para el alcance actual.
 
-**Estado:** implementada en validación
+Incluye:
 
-- cálculo de edad y fecha de referencia;
+- edad exacta y fecha de referencia;
 - fecha de evaluación separada de fecha de corte de cuotas;
-- Paso 5 — Retiro;
-- escenarios +0/+1/+2/+3/+5 y fecha personalizada;
-- cierre del año actual respetado antes de densidad futura;
-- advertencia cuando la proyección salarial no cubre el retiro;
-- navegación rápida `sticky`;
-- pruebas automatizadas femenina y masculina.
+- escenarios anticipados, edad de referencia, años adicionales y fecha personalizada;
+- cierre del año actual antes de densidad futura;
+- validación de horizonte salarial;
+- selección explícita del escenario que alimenta Resultados.
+
+**Mejora futura:** permitir definir con mayor detalle el último mes o fecha de cotización cuando sea necesario distinguir solicitud, retiro y último aporte.
+
+## 5. Fase 5 — Motores previsionales
+
+**Estado:** completada para los tres motores generales principales.
+
+### 5.1. SEBD
+
+Implementado:
+
+- Normal;
+- Anticipada;
+- Proporcional;
+- Proporcional Anticipada;
+- Indemnización por Vejez;
+- máximos aplicables según las condiciones disponibles;
+- factores anticipados versionados.
+
+Pendiente fuera del motor general:
+
+- monto mínimo indexado por fecha del artículo 192;
+- regímenes especiales con reglas propias.
+
+### 5.2. Subsistema Mixto
+
+Implementado:
+
+- Componente de Beneficio Definido;
+- Componente de Ahorro Personal con saldo y divisor explícitos;
+- pensión programada;
+- devolución total del CAP;
+- indemnización BD + devolución CAP;
+- garantía de renta vitalicia;
+- bono de reconocimiento como dato oficial/validado;
+- transición operativa hacia SUCGS;
+- integración visual.
+
+Pendiente específico:
+
+- reconstrucción reglamentaria completa del bono de reconocimiento;
+- obtención/versionado de parámetros actuariales oficiales cuando la CSS publique una fuente utilizable;
+- reconstrucción de cuenta CAP a partir de movimientos oficiales, no desde simples agregados anuales.
+
+### 5.3. SUCGS
+
+Implementado:
+
+- componente contributivo del artículo 196;
+- tabla de factores actuariales;
+- capa solidaria de los artículos 194 y 195;
+- Pensión Garantizada Solidaria;
+- garantía de reemplazo mínimo del artículo 197;
+- preevaluación de condiciones de cuotas y distribución;
+- confirmación explícita de estabilidad salarial;
+- integración visual.
+
+Pendiente específico:
+
+- reconstrucción completa del saldo desde aportes, conversión pre-reforma y rendimientos efectivos;
+- actualización futura de factores actuariales y valores indexados cuando cambien oficialmente.
+
+## 6. Fase 6 — Resultados, comparación y transparencia
+
+**Estado:** en desarrollo.
+
+### 6.1. Paso 6 por sistema
+
+**Completado:**
+
+- resultados SEBD;
+- resultados Mixto;
+- resultados SUCGS;
+- desglose por componentes;
+- separación de pensiones mensuales y pagos únicos;
+- advertencias y datos no confirmados;
+- fuentes normativas en backend.
+
+### 6.2. Bloque 6F — siguiente trabajo
 
 Pendiente:
 
-- validación manual integrada;
-- detalle mensual cuando un motor legal lo requiera;
-- motor legal de elegibilidad.
+- comparador transversal entre escenarios de retiro;
+- comparación entre escenarios salariales;
+- diferencias absolutas y porcentuales;
+- metodología visible desde la interfaz;
+- botón o panel **Ver cálculo completo**;
+- cadena auditable: dato → regla → fórmula → sustitución → resultado intermedio → redondeo → límite/garantía → resultado final;
+- enlaces clicables a las fuentes normativas aplicables;
+- preparación del resultado estructurado para informes futuros.
 
-## Fase 5 — Motores previsionales
+## 7. Fase 7 — Persistencia e informes
 
-**Estado:** en desarrollo — SEBD implementado y base backend del Subsistema Mixto en validación
+**Estado:** pendiente.
 
-- `parametros_generales.json`;
-- cargador normativo;
-- trazabilidad de edades generales;
-- SEBD normal: fórmula base, elegibilidad y tope máximo implementados;
-- pendiente completar mínimo indexado y modalidades SEBD proporcional/anticipada;
-- Subsistema Mixto 6D.1: BD, CAP explícito y transición backend implementados en validación;
-- pendiente SUCGS;
-- pendiente transiciones;
-- ampliar casos de validación anonimizados.
-
-## Fase 6 — Resultados y comparación
-
-**Estado:** en desarrollo; modalidades generales SEBD e indemnización integradas
-
-- Paso 6 visual para SEBD normal: implementado;
-- selección explícita del escenario de retiro: implementada;
-- selección de escenario salarial: implementada;
-- elegibilidad SEBD normal y desglose: implementados;
-- integración de salarios proyectados hasta la fecha de retiro: implementada con advertencias;
-- SEBD proporcional y retiro anticipado: pendiente;
-- Subsistema Mixto: base backend 6D.1 implementada; integración del asistente, bono, garantías y casos incompletos pendientes;
-- SUCGS: pendiente;
-- comparador global entre modalidades/escenarios: pendiente;
-- gráficos de resultados: pendiente.
-
-## Fase 7 — Persistencia e informes
-
-**Estado:** pendiente
+Previsto:
 
 - SQLite;
-- guardado voluntario;
-- importación de datos cuando sea viable;
+- guardado voluntario de simulaciones;
+- importación de datos cuando sea legal y técnicamente viable;
 - informes PDF;
-- accesibilidad y despliegue.
+- exportación de resultados y metodología;
+- manejo explícito de versiones normativas por fecha.
 
-## Actualización Paso 6C
+## 8. Fase 8 — Pulido de producto y accesibilidad
 
-**SEBD general:** implementado en validación.
+**Estado:** reservada para después de 6F.
 
-- clasificación automática de modalidad: implementada;
-- Normal: implementada y regresionada;
-- Anticipada: implementada;
-- Proporcional: implementada;
-- Proporcional Anticipada: implementada;
-- factores anticipados mensuales: versionados;
-- Indemnización por Vejez: clasificación, cálculo de pago único e interfaz implementados;
-- regímenes especiales: pendientes;
-- Mixto: pendiente;
-- SUCGS: pendiente.
+Previsto:
 
+- identidad visual profesional inspirada en el contexto institucional sin aparentar ser una aplicación oficial;
+- temas claro, oscuro, alto contraste y seguimiento del sistema;
+- persistencia de preferencia visual;
+- revisión WCAG 2.2;
+- foco visible y navegación por teclado;
+- tamaños de objetivos táctiles adecuados;
+- pie de página con autoría, aviso de independencia y fuentes;
+- enlace visible a Mi Caja Digital;
+- sección de Metodología y fuentes en la navegación;
+- mejoras responsivas y móviles.
 
-## Actualización Paso 6D.1
+## 9. Estado de validación
 
-**Subsistema Mixto — base backend:** implementado en validación.
+Antes del bloque 6F:
 
-- `normativa/mixto.json`: creado;
-- cargador normativo Mixto: implementado;
-- Componente de Beneficio Definido: implementado con tope de participación B/.500.00;
-- advertencia por aproximación anual del tope mensual: implementada;
-- Componente de Ahorro Personal con saldo y divisor actuarial explícitos: implementado;
-- ausencia de parámetros actuariales: no se suple con valores inventados;
-- suma BD + CAP: implementada únicamente cuando ambos componentes están disponibles;
-- transición Mixto → SUCGS desde 01/03/2032: implementada;
-- opción explícita SUCGS: respetada;
-- pruebas automatizadas iniciales: implementadas;
-- integración visual con Paso 6: pendiente;
-- cálculo reglamentario del bono de reconocimiento: pendiente;
-- devolución del CAP e indemnización combinada para escenarios con menos de 180 cuotas: pendiente;
-- garantía/seguro colectivo después del agotamiento del CAP: pendiente;
-- obtención/versionado del valor actuarial oficial vigente: pendiente;
-- SUCGS: pendiente.
-
-## Actualización Paso 6D.2
-
-**Subsistema Mixto — prestaciones CAP complementarias:** implementado en backend y en validación.
-
-- elección explícita `AUTO / PENSION_PROGRAMADA / DEVOLUCION_TOTAL`: implementada;
-- devolución total CAP del artículo 187: implementada;
-- indemnización BD + devolución CAP como pagos únicos separados: implementada;
-- pensión proporcional BD + devolución CAP: implementada;
-- garantía de renta vitalicia del artículo 184: modelada como continuidad futura;
-- referencia histórica de prima 0.93 %: documentada y excluida del cálculo individual;
-- bono de reconocimiento: entrada trazable; cálculo automático continúa pendiente;
-- integración visual del Mixto en Paso 6: implementada en 6D.3;
-- SUCGS: pendiente.
-
-## Actualización Paso 6D.3
-
-**Subsistema Mixto — integración visual:** implementado en validación.
-
-- endpoint integrado `POST /api/simulacion/resultados/mixto`: implementado;
-- consolidación de Pasos 1–5 con el motor Mixto: implementada;
-- captura explícita de saldo CAP, bono, divisor actuarial y opción CAP: implementada;
-- presentación separada de BD, CAP, pensión mensual y pagos únicos: implementada;
-- decisión CAP pendiente visible y recalculable: implementada;
-- garantía de renta vitalicia visible cuando aplica: implementada;
-- persistencia temporal de configuración y resultado Mixto en la sesión: implementada;
-- SUCGS: pendiente.
-
-## Actualización Paso 6E.3
-
-**SUCGS — componente contributivo + capa solidaria:** implementado en backend.
-
-- `normativa/sucgs.json`: tabla actuarial y referencias solidarias versionadas;
-- fórmula `saldo / 1000 × factor actuarial`: implementada y validada;
-- artículos 194 y 195: implementados con clasificación explícita de prestaciones y complemento solidario;
-- valores B/.144.00 y B/.265.00: tratados como referencias legales sustituibles por valores vigentes confirmados;
-- superposición exacta de 240 cuotas entre artículos 194 y 195: documentada y resuelta priorizando el artículo 195;
-- artículo 197: implementado en backend con preevaluación conservadora;
-- integración visual completa del SUCGS: implementada en 6E.4;
-- el saldo se recibe explícitamente y no se reconstruye todavía desde el historial salarial.
-
-## Actualización Paso 6E.4
-
-**SUCGS — integración visual:** implementada.
-
-Estado actual de motores principales:
-
-- SEBD: motor e integración visual implementados;
-- Subsistema Mixto: motor e integración visual implementados;
-- SUCGS: componente contributivo, capa solidaria, garantía de reemplazo e integración visual implementados.
-
-Siguiente bloque: comparación transversal, transparencia del cálculo y cierre funcional del Paso 6 antes del pulido general de UX/accesibilidad.
+- **57 pruebas automatizadas** en `OK`;
+- regresión SEBD real anonimizada;
+- casos sintéticos de Mixto;
+- casos sintéticos SUCGS;
+- validaciones visuales de los tres motores integrados.

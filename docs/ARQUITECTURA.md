@@ -1,17 +1,19 @@
 # Arquitectura
 
-## Principios
+La aplicación sigue una arquitectura web local con separación explícita entre interfaz, servicios de integración, motores previsionales y parámetros normativos.
 
-La aplicación mantiene separadas cuatro responsabilidades:
+[Índice de documentación](INDICE.md) · [Normativa](NORMATIVA.md) · [Fuentes oficiales](FUENTES_NORMATIVAS.md)
 
-1. **Interfaz:** Jinja2, HTML, CSS y JavaScript capturan datos y presentan resultados.
-2. **API:** FastAPI valida la frontera entre interfaz y backend.
-3. **Servicios y motores:** Python concentra cálculos, validaciones y reglas de negocio.
-4. **Normativa:** los parámetros legales versionables se mantienen fuera de la presentación y de los algoritmos cuando corresponde.
+## 1. Principios
 
-Los datos históricos reales y los datos proyectados permanecen diferenciados durante todo el flujo.
+1. **Una sola fuente de verdad para el cálculo:** las fórmulas viven en Python, no en JavaScript.
+2. **Normativa versionada:** parámetros modificables se almacenan en `normativa/`.
+3. **Datos reales y proyectados separados:** ninguna proyección reemplaza silenciosamente el historial.
+4. **Resultados auditables:** los motores exponen valores intermedios, factores, advertencias y fuentes.
+5. **Datos faltantes explícitos:** un parámetro oficial ausente produce un resultado pendiente, no una estimación inventada.
+6. **Privacidad por defecto:** la sesión del asistente se conserva temporalmente en el navegador; no se persiste automáticamente información personal.
 
-## Estructura principal
+## 2. Estructura del repositorio
 
 ```text
 app/
@@ -21,286 +23,246 @@ app/
 │   ├── dinero.py
 │   └── normativa.py
 ├── modelos/
-│   ├── simulacion.py
-│   └── pension.py
+│   ├── pension.py
+│   └── simulacion.py
 ├── motores/
 │   ├── elegibilidad.py
 │   ├── sebd.py
+│   ├── sebd_modalidades.py
 │   ├── mixto.py
 │   └── sucgs.py
 ├── servicios/
+│   ├── comparador.py
 │   ├── historial_salarios.py
 │   ├── linea_tiempo.py
 │   ├── proyeccion_cuotas.py
 │   ├── proyeccion_salarios.py
 │   ├── resultados.py
+│   ├── resultados_sebd.py
+│   ├── resultados_mixto.py
+│   ├── resultados_sucgs.py
 │   └── retiro.py
 ├── static/
-│   ├── css/
-│   └── js/
 ├── templates/
-│   └── partials/
 └── main.py
+
+normativa/
+├── parametros_generales.json
+├── sebd.json
+├── mixto.json
+└── sucgs.json
+
+tests/
+docs/
+data/
 ```
 
-La modalidad normal del SEBD ya dispone de motor legal e integración con el asistente. Las demás modalidades y sistemas continúan en preparación.
+## 3. Capas de la aplicación
 
-## Núcleo común
+### 3.1. Presentación
 
-### `app/core/dinero.py`
+Ubicación:
 
-Centraliza la conversión a `Decimal`, la validación de precisión y el redondeo monetario técnico. El criterio general actual es conservar precisión durante la operación y redondear a centavos con `ROUND_HALF_UP` al materializar un importe, salvo que una regla normativa específica exija otra cosa.
+- `app/templates/`
+- `app/static/css/`
+- `app/static/js/`
 
-### `app/core/normativa.py`
+Responsabilidades:
 
-Carga parámetros versionados desde `normativa/`. `parametros_generales.json` mantiene edades de referencia y metadatos comunes, mientras `sebd.json` contiene la primera parametrización específica del SEBD normal. Mixto, SUCGS y las demás modalidades se incorporarán conforme se verifiquen e implementen.
+- formularios;
+- navegación entre pasos;
+- formato visual;
+- estado temporal en `sessionStorage`;
+- envío de solicitudes a FastAPI;
+- representación de resultados y advertencias.
 
-## Modelos
+No debe contener fórmulas previsionales independientes del backend.
 
-`app/modelos/simulacion.py` define estructuras Pydantic para:
+### 3.2. API
+
+`app/main.py` expone las vistas HTML y los endpoints de cálculo.
+
+La API actúa como frontera entre la interfaz y los servicios/motores.
+
+### 3.3. Modelos
+
+`app/modelos/simulacion.py` define contratos para:
 
 - cuotas;
-- historial salarial anual;
-- salario actual y equivalencias;
-- configuración y escenarios de proyección salarial;
-- línea temporal histórica/proyectada;
-- fechas y escenarios preliminares de retiro.
+- historial;
+- salario;
+- proyección;
+- línea temporal;
+- retiro.
 
-Los campos monetarios y porcentuales editables relevantes validan como máximo dos decimales en la frontera del backend.
+`app/modelos/pension.py` contiene contratos específicos de:
 
-`app/modelos/pension.py` define las entradas y salidas de los motores legales y de la capa de integración del Paso 6 para SEBD, Mixto y SUCGS.
+- SEBD;
+- Subsistema Mixto;
+- SUCGS;
+- resultados integrados.
 
-## Servicios
+### 3.4. Servicios de integración
 
-### Cuotas
+Los servicios transforman el estado de los Pasos 1–5 en entradas coherentes para cada motor.
 
-`proyeccion_cuotas.py` analiza cuotas acreditadas, cierre esperado del año y densidad anual futura. Sus referencias de 180 y 240 cuotas siguen siendo preliminares hasta que el motor legal determine la prestación aplicable.
+Ejemplos:
 
-### Historial
+- `historial_salarios.py`: valida y normaliza historial;
+- `proyeccion_salarios.py`: construye escenarios;
+- `linea_tiempo.py`: combina realidad y proyección;
+- `retiro.py`: genera escenarios de retiro y cuotas futuras;
+- `resultados_sebd.py`: prepara entrada SEBD;
+- `resultados_mixto.py`: prepara entrada Mixto;
+- `resultados_sucgs.py`: prepara entrada SUCGS.
 
-`historial_salarios.py` valida años, cuotas y salarios históricos, clasifica años completos, parciales o sin cotización y contrasta la suma de cuotas con el Paso 2.
+### 3.5. Motores legales
 
-### Proyección salarial
+Los motores reciben datos ya consolidados y aplican las reglas previsionales:
 
-`proyeccion_salarios.py` normaliza periodicidades y genera escenarios salariales manteniendo precisión interna. Los importes mensual y anual se derivan desde el valor preciso y se redondean de forma independiente al presentarse.
+- `sebd.py`: cálculo normal base;
+- `sebd_modalidades.py`: clasificación y modalidades generales SEBD;
+- `mixto.py`: BD + CAP, opciones, pagos únicos y transición;
+- `sucgs.py`: componente contributivo, capa solidaria y garantía de reemplazo.
 
-### Línea temporal
+### 3.6. Núcleo común
 
-`linea_tiempo.py` integra historial, año actual y futuro sin sobrescribir información real. Los años con cero cuotas se representan explícitamente como `SIN_COTIZACION`.
+#### `app/core/dinero.py`
 
-### Retiro
+Centraliza:
 
-`retiro.py` calcula edad, fecha de referencia y escenarios por fecha exacta. La estimación de cuotas:
+- conversión segura a `Decimal`;
+- materialización a centavos;
+- `ROUND_HALF_UP`;
+- utilidades comunes de precisión monetaria.
 
-- respeta primero el cierre del año actual indicado en el Paso 2;
-- aplica después la densidad anual futura;
-- mantiene visible que se trata de una aproximación cuando no existe detalle mensual;
-- verifica si la proyección salarial alcanza el horizonte de retiro seleccionado.
+#### `app/core/normativa.py`
 
-Este servicio no determina por sí mismo la elegibilidad legal.
+Carga los JSON versionados de `normativa/` y evita dispersar constantes legales por múltiples módulos.
 
-## Endpoints actuales
+## 4. Flujo de datos del asistente
 
 ```text
-GET  /
-GET  /simulacion
-GET  /comparar
-GET  /salud
+Paso 1 — Datos personales
+        ↓
+Paso 2 — Cuotas
+        ↓
+Paso 3 — Historial + salario actual
+        ↓
+Paso 4 — Proyección + línea temporal
+        ↓
+Paso 5 — Escenarios de retiro
+        ↓
+Paso 6 — Motor del sistema seleccionado
+        ↓
+Resultado + desglose + advertencias + fuente normativa
+```
+
+Cada paso posterior depende de información validada de los anteriores. Si el usuario modifica un dato de origen, los resultados dependientes se invalidan.
+
+## 5. Navegación y estado temporal
+
+El asistente utiliza `sessionStorage` para preservar temporalmente:
+
+- datos de los pasos;
+- escenarios construidos;
+- selección de retiro;
+- configuración específica Mixto/SUCGS;
+- último resultado calculado.
+
+La navegación permite abrir directamente pasos ya disponibles mediante:
+
+- indicadores superiores;
+- selector persistente `Ir a paso`.
+
+Un paso posterior permanece deshabilitado si sus prerrequisitos dejaron de ser válidos.
+
+## 6. Endpoints actuales
+
+### 6.1. Vistas
+
+```text
+GET /
+GET /simulacion
+GET /comparar
+GET /salud
+```
+
+### 6.2. Servicios comunes
+
+```text
 POST /api/simulacion/cuotas
 POST /api/simulacion/historial-salarial
 POST /api/simulacion/salario
 POST /api/simulacion/proyeccion-salario
 POST /api/simulacion/linea-tiempo
 POST /api/simulacion/retiro
+```
+
+### 6.3. SEBD
+
+```text
 POST /api/simulacion/sebd/normal
 POST /api/simulacion/resultados/sebd-normal
 POST /api/simulacion/sebd
 POST /api/simulacion/resultados/sebd
+```
+
+### 6.4. Mixto
+
+```text
 POST /api/simulacion/mixto
+POST /api/simulacion/resultados/mixto
 ```
 
-## Interfaz del asistente
-
-El asistente conserva estado temporal en `sessionStorage`.
-
-Los módulos principales del frontend son:
-
-- `simulacion.js`: estado compartido, navegación y formularios generales;
-- `historial_salarios.js`: historial anual;
-- `linea_tiempo.js`: presentación integrada del Paso 4;
-- `retiro.js`: Paso 5, escenarios de retiro y selección del escenario que alimenta Resultados;
-- `resultados.js`: Paso 6, selección salarial, configuración específica y presentación integrada de SEBD, Mixto y SUCGS;
-- `moneda.js`: entrada/formato monetario con separadores de miles y máximo dos decimales;
-- `navegacion_wizard.js`: barra de navegación rápida `sticky` para pasos extensos.
-
-Los parciales Jinja `historial_salarial.html`, `retiro.html` y `resultados.html` mantienen modularizadas las secciones de mayor complejidad.
-
-## Persistencia
-
-No existe todavía persistencia permanente. `sessionStorage` conserva únicamente el estado temporal de la pestaña. SQLite y el guardado voluntario pertenecen a una fase posterior.
-
-## Validación
-
-La base actual utiliza:
-
-```powershell
-python -m compileall app
-python -m unittest discover -s tests -v
-```
-
-además de pruebas manuales del flujo web. Los casos de validación reales deben anonimizarse y sus documentos originales no se versionan.
-
-## Capa legal del Paso 6
-
-El Paso 6 introduce una separación adicional:
+### 6.5. SUCGS
 
 ```text
-modelos/pension.py
-        ↓
-motores/elegibilidad.py
-        ↓
-motores/sebd.py
-        ↓
-API /api/simulacion/sebd/normal
+POST /api/simulacion/sucgs
+POST /api/simulacion/resultados/sucgs
 ```
 
-Los parámetros legales se obtienen desde `normativa/sebd.json`; la interfaz no contiene porcentajes ni topes codificados directamente.
+## 7. Arquitectura normativa
 
-## Integración del Paso 6
+Los archivos `normativa/*.json` contienen parámetros y metadatos de fuente.
 
-La interfaz no construye directamente la entrada jurídica del motor. La capa de integración queda separada:
+La documentación se divide entre:
 
-```text
-Pasos 1–5 / sessionStorage
-        ↓
-partials/resultados.html + resultados.js
-        ↓
-POST /api/simulacion/resultados/sebd-normal
-POST /api/simulacion/sebd
-POST /api/simulacion/resultados/sebd
-POST /api/simulacion/mixto
-        ↓
-servicios/resultados.py
-        ↓
-motores/sebd.py
-```
+- [NORMATIVA.md](NORMATIVA.md): cómo se aplica/versiona cada regla;
+- [FUENTES_NORMATIVAS.md](FUENTES_NORMATIVAS.md): enlaces oficiales y mapa de artículos;
+- [DECISIONES.md](DECISIONES.md): criterios adoptados ante ambigüedad o decisiones de diseño.
 
-`servicios/resultados.py` consolida el historial real, la línea temporal salarial y el escenario de retiro seleccionado. Cuando un retiro futuro corta un año proyectado, consume cronológicamente las cuotas disponibles y prorratea únicamente el salario asociado a las cuotas utilizadas.
+## 8. Precisión y representación monetaria
 
-El motor legal sigue siendo independiente de esta capa: recibe una estructura `DatosCalculoSEBDNormal` ya coherente y no depende de HTML, `sessionStorage` ni del flujo visual.
+La lógica monetaria se ejecuta con `Decimal` cuando corresponde. JavaScript puede formatear valores para presentación, pero no debe alterar el resultado legal calculado en Python.
 
-El Paso 5 incorpora una selección explícita del escenario que alimentará el Paso 6. Los escenarios pasados pueden mostrarse, pero no se usan automáticamente para reconstruir cuotas históricas a una fecha exacta cuando solo existe detalle anual.
+Los valores actuariales que son factores/divisores no se presentan como importes monetarios.
 
+## 9. Pruebas
 
-## Extensión Paso 6C
+La validación automatizada usa `unittest` y cubre:
 
-La arquitectura SEBD queda dividida en dos niveles compatibles:
+- utilidades monetarias;
+- proyección;
+- línea temporal;
+- retiro;
+- SEBD;
+- Mixto;
+- SUCGS;
+- servicios integrados.
 
-```text
-sebd.py
-└─ motor Normal validado y compatibilidad de regresión
+Estado previo a 6F: **57 pruebas**.
 
-sebd_modalidades.py
-├─ clasificador aplicado al cálculo
-├─ Anticipada
-├─ Proporcional
-└─ Proporcional Anticipada
+Ver [VALIDACION.md](VALIDACION.md).
 
-resultados_sebd.py
-└─ integra el escenario del asistente con el motor general
-```
+## 10. Próxima evolución — 6F
 
-Los endpoints previos de SEBD Normal se conservan para regresión, mientras se añaden endpoints generales que permiten evolucionar el Paso 6 sin romper las pruebas existentes.
+El siguiente bloque añadirá una capa transversal sobre los motores ya implementados:
 
+- comparador de escenarios;
+- metodología visible;
+- desglose completo y auditable;
+- enlaces normativos clicables;
+- estructura preparada para informes.
 
-## Paso 6D.1 — arquitectura del Subsistema Mixto
-
-La primera capa del motor Mixto mantiene separados los componentes que jurídicamente tienen naturaleza distinta:
-
-```text
-DatosCalculoMixto
-       ↓
-motores/mixto.py
-       ├── Componente de Beneficio Definido
-       │      ↓
-       │   sebd_modalidades.py
-       │   con historial limitado a la participación BD
-       │
-       └── Componente de Ahorro Personal
-              ↓
-           saldo oficial + bono aplicable
-           + valor actuarial oficial
-```
-
-Los parámetros se leen desde `normativa/mixto.json` mediante `cargar_parametros_mixto()`.
-
-El componente BD reutiliza la clasificación del SEBD para evitar duplicar reglas de Normal, Anticipada y Proporcional, pero recalcula el máximo propio del Mixto de B/.500.00 antes de aplicar, cuando corresponda, factores proporcional y de edad.
-
-El CAP no se reconstruye desde salarios anuales. La arquitectura exige como datos explícitos el saldo ahorrado/capitalizado y el valor actuarial oficial aplicable. Si falta cualquiera de los elementos necesarios, el componente devuelve `calculo_disponible = false` y el total Mixto permanece sin calcular.
-
-La transición temporal se resuelve antes de ejecutar ambos componentes. Si el usuario seleccionó SUCGS o la fecha de retiro se encuentra desde el 01/03/2032, el motor Mixto no produce una pensión bajo reglas Mixto y devuelve el estado de transición correspondiente.
-
-La integración visual con el Paso 6 se realizará en una subfase posterior, después de validar la capa backend y la disponibilidad de datos oficiales del CAP.
-
-## Extensión 6D.2 del motor Mixto
-
-El flujo CAP incorpora una decisión explícita antes de materializar la prestación:
-
-```text
-motores/mixto.py
-    ├── componente BD
-    │     ├── pensión
-    │     └── indemnización
-    │
-    └── componente CAP
-          ├── AUTO → decisión pendiente si art. 187 aplica
-          ├── PENSION_PROGRAMADA
-          │      ├── saldo
-          │      ├── bono validado
-          │      ├── divisor actuarial
-          │      └── garantía de renta vitalicia
-          └── DEVOLUCION_TOTAL
-                 └── pago único
-```
-
-El seguro colectivo se representa como metadato de continuidad de la prestación, no como un tercer sumando de la pensión inicial.
-
-## Paso 6D.3 — integración del asistente con Mixto
-
-La interfaz no llama directamente al motor con datos reconstruidos en JavaScript. Se añadió una capa de servicio equivalente a la integración SEBD:
-
-```text
-Pasos 1–5
-   ↓
-DatosResultadoMixto
-   ↓
-servicios/resultados_mixto.py
-   ↓
-DatosCalculoMixto
-   ↓
-motores/mixto.py
-   ↓
-ResumenResultadoMixto
-   ↓
-Paso 6
-```
-
-`resultados_mixto.py` reutiliza la construcción cronológica de registros y la separación de cuotas antes/después de la edad de referencia. El JavaScript se limita a recopilar los datos CAP explícitos, invocar el endpoint y presentar la respuesta del backend.
-
-## Motor SUCGS 6E.3
-
-La capa SUCGS se distribuye en:
-
-- `normativa/sucgs.json`: parámetros versionados, tabla actuarial y referencias solidarias;
-- `app/motores/sucgs.py`: fórmula contributiva del artículo 196 y evaluación de los artículos 194 y 195;
-- `app/servicios/resultados_sucgs.py`: integración con el escenario de retiro del asistente;
-- modelos `DatosCalculoSUCGS`, `ResumenCalculoSUCGS`, `DatosResultadoSUCGS` y `ResumenResultadoSUCGS`;
-- endpoints directos e integrados en `app/main.py`.
-
-La arquitectura conserva tres niveles separados: pensión contributiva, pensión después de la capa solidaria y pensión total definitiva. El artículo 197 constituye la tercera capa y expone por separado cada condición de elegibilidad, su monto objetivo y el complemento aplicado.
-
-## Paso 6E.4 — integración visual SUCGS
-
-El flujo visual SUCGS reutiliza la misma separación arquitectónica aplicada a SEBD y Mixto. `resultados.js` no implementa fórmulas legales: construye `DatosResultadoSUCGS` con los datos ya validados en los Pasos 1–5 y los datos específicos solicitados en el Paso 6. `app/servicios/resultados_sucgs.py` consolida el historial real y la proyección hasta la fecha de retiro mediante las mismas funciones cronológicas compartidas por los demás motores, y luego invoca `app/motores/sucgs.py`.
-
-La configuración y el último resultado SUCGS se conservan temporalmente en `sessionStorage`. Los cambios en datos personales, cuotas, historial, proyección o retiro invalidan el resultado previamente calculado para impedir que se muestre una salida obsoleta.
+Esta capa debe consumir resultados de los motores existentes; no debe crear una cuarta implementación de las fórmulas.

@@ -1,448 +1,318 @@
 # Motor de cálculo
 
-## Principio general
+Este documento describe el flujo técnico de cálculo. Las reglas legales detalladas se documentan en [NORMATIVA.md](NORMATIVA.md) y sus fuentes oficiales en [FUENTES_NORMATIVAS.md](FUENTES_NORMATIVAS.md).
 
-La lógica de cálculo permanece separada de HTML y JavaScript. La interfaz captura y presenta; Python valida y calcula.
+[Índice de documentación](INDICE.md) · [Normativa](NORMATIVA.md) · [Fuentes oficiales](FUENTES_NORMATIVAS.md)
 
-El motor cubre las modalidades generales implementadas de SEBD, el Subsistema Mixto y SUCGS por capas hasta la garantía de reemplazo del artículo 197; las extensiones restantes se documentan por subfase.
+## 1. Principio general
 
-## Precisión monetaria y redondeo
+La aplicación separa cuatro capas:
 
-Archivo común:
+1. **entrada del usuario**;
+2. **servicios de normalización/proyección**;
+3. **motor previsional**;
+4. **presentación del resultado**.
 
-```text
-app/core/dinero.py
-```
+JavaScript no implementa las fórmulas legales principales. El cálculo se ejecuta en Python.
 
-Criterio técnico general:
+## 2. Precisión monetaria
 
-1. convertir valores monetarios relevantes a `Decimal`;
-2. conservar precisión durante las operaciones;
-3. evitar redondear valores intermedios únicamente para hacer coincidir cifras visibles;
-4. materializar importes monetarios a dos decimales con `ROUND_HALF_UP`;
-5. permitir que una regla normativa específica sustituya este criterio dentro del motor legal correspondiente.
+Regla general:
 
-Ejemplo de proyección:
+- usar `Decimal` en operaciones sensibles;
+- conservar precisión interna;
+- redondear al materializar un importe;
+- usar `ROUND_HALF_UP` a dos decimales salvo norma específica.
 
-```text
-B/. 1,331.90 mensuales
-→ B/. 15,982.80 anuales
-→ crecimiento 1 %
-→ B/. 16,142.628
-→ resultado monetario: B/. 16,142.63
-```
+No se redondean valores intermedios para hacer coincidir artificialmente una cifra visible.
 
-El salario mensual visible del mismo escenario puede ser B/. 1,345.22. No se vuelve a multiplicar ese valor ya redondeado por 12 para obtener el anual, porque introduciría un redondeo intermedio.
+## 3. Cuotas
 
-Los campos monetarios editables se limitan a dos decimales tanto en frontend como en la validación del backend.
+El análisis del Paso 2 recibe:
 
-## Análisis preliminar de cuotas
+- cuotas totales;
+- cuotas del año actual;
+- continuidad;
+- cuotas esperadas al cierre del año;
+- densidad futura.
 
-Archivo:
+La proyección de retiro usa primero el cierre del año actual y aplica la densidad futura a partir del año siguiente. Esto evita añadir cuotas en el año actual contra lo declarado por el usuario.
 
-```text
-app/servicios/proyeccion_cuotas.py
-```
+## 4. Historial y salario actual
 
-Comportamiento actual:
-
-- valida que las cuotas del año actual no superen el total acreditado;
-- diferencia cuotas reales de cuotas futuras;
-- respeta las cuotas esperadas al cierre del año;
-- si la persona no continuará cotizando, no agrega cuotas futuras;
-- calcula faltantes preliminares para 180 y 240 cuotas;
-- estima tiempo usando la densidad anual futura.
-
-Los umbrales de 180 y 240 son referencias del asistente. La elegibilidad definitiva dependerá del sistema y prestación que determine el motor legal.
-
-## Historial salarial
-
-Archivo:
+El historial anual almacena:
 
 ```text
-app/servicios/historial_salarios.py
+año + cuotas + salario cotizado
 ```
 
-El servicio:
+El salario actual se almacena separadamente y se normaliza mediante un valor anual común.
 
-- valida el rango de años;
-- rechaza años duplicados;
-- valida coherencia entre cuotas y salario;
-- clasifica registros como completos, parciales o sin cotización;
-- detecta años sin registro;
-- suma cuotas y salarios con precisión controlada;
-- compara las cuotas identificadas con las cuotas reales del Paso 2.
+Las periodicidades soportadas son semanal, quincenal, mensual y anual.
 
-El historial continúa siendo anual. Cuando una regla legal dependa del mes exacto, el motor correspondiente deberá utilizar una fuente con mayor granularidad o una aproximación explícitamente identificada.
+## 5. Proyección salarial
 
-## Normalización salarial
+### 5.1. Salario constante
 
-Archivo:
+Mantiene el salario mensual normalizado durante el horizonte.
+
+### 5.2. Porcentaje anual
+
+Aplica crecimiento compuesto sin redondear el salario intermedio antes de tiempo.
+
+### 5.3. Salario futuro conocido
+
+Deriva una trayectoria anual coherente entre el salario actual y el valor objetivo.
+
+### 5.4. Escenarios múltiples
+
+Genera varias trayectorias futuras sobre un único historial real.
+
+## 6. Línea temporal
+
+El servicio combina:
+
+- histórico real;
+- año actual real/proyectado;
+- futuro proyectado.
+
+Si un año futuro tiene menos de 12 cuotas, el salario cotizado proyectado se limita a los meses/cuotas proyectados.
+
+## 7. Escenarios de retiro
+
+El motor de retiro calcula:
+
+- fecha de referencia;
+- edad exacta;
+- meses desde el corte;
+- cuotas nuevas;
+- cuotas totales estimadas;
+- cobertura del horizonte salarial.
+
+Un escenario posterior al último año salarial proyectado queda advertido como incompleto hasta ampliar el Paso 4.
+
+## 8. Integración con Resultados
+
+Los servicios `resultados_*.py` consolidan los Pasos 1–5 antes de invocar un motor legal.
+
+Responsabilidades:
+
+- escoger el escenario de retiro seleccionado;
+- escoger el escenario salarial;
+- combinar historial y proyección hasta la fecha de retiro;
+- identificar años proyectados;
+- preparar cuotas antes/después de referencia cuando puedan determinarse;
+- agregar advertencias de aproximación.
+
+## 9. Motor SEBD
+
+### 9.1. Clasificación
+
+El clasificador general decide entre:
+
+- Normal;
+- Anticipada;
+- Proporcional;
+- Proporcional Anticipada;
+- Indemnización por Vejez;
+- No elegible;
+- transición SUCGS cuando corresponda.
+
+### 9.2. Salario base
+
+Se seleccionan los mejores años requeridos por la modalidad/regla y se obtiene el promedio mensual correspondiente.
+
+Con historial anual, un año parcial conserva su monto real y no se anualiza artificialmente.
+
+### 9.3. Pensión Normal
+
+Esquema general:
 
 ```text
-app/servicios/proyeccion_salarios.py
+tasa = 60 %
+     + 1.25 puntos por cada bloque completo de 12 cuotas excedentes antes de referencia
+     + 2 puntos por cada bloque completo de 12 cuotas posteriores a referencia y excedentes
+
+pensión antes de límite = salario base × tasa
+pensión = aplicar máximo cuando corresponda
 ```
 
-Conversión mediante equivalente anual:
+La separación de cuotas antes/después de referencia no se infiere silenciosamente cuando el historial no tiene granularidad suficiente.
+
+### 9.4. Anticipada
+
+Después del cálculo base y límites:
 
 ```text
-semanal     = monto × 52
-quincenal   = monto × 24
-mensual     = monto × 12
-anual       = monto
+pensión anticipada = monto previo × factor mensual de edad
 ```
 
-Las demás periodicidades se derivan del equivalente anual preciso.
+El factor se consulta en `normativa/sebd.json`.
 
-## Proyección por porcentaje
-
-Se utiliza crecimiento compuesto:
+### 9.5. Proporcional
 
 ```text
-salario_año_n = salario_base × (1 + tasa)^n
+factor cuotas = cuotas / 240
+pensión proporcional = monto base aplicable × factor cuotas
 ```
 
-El año inicial conserva el salario base.
+### 9.6. Proporcional Anticipada
 
-Los importes mensual y anual visibles se redondean de forma independiente desde el valor preciso del escenario.
+Aplica tanto el factor de cuotas como el factor de edad.
 
-## Salario futuro conocido
+### 9.7. Indemnización por Vejez
 
-Cuando el usuario conoce un salario para un año futuro, se obtiene la tasa anual compuesta equivalente:
+La salida es de pago único:
 
 ```text
-tasa = (salario_futuro / salario_actual)^(1 / años) - 1
+mensualidad hipotética
+× (meses/cuotas acreditados / 6)
+= indemnización estimada
 ```
 
-La tasa se utiliza para construir la serie anual. La implementación futura podrá aumentar aún más la precisión interna de esta modalidad si el motor legal lo necesita.
+Los campos propios de pensión proporcional no aplicables se devuelven como `null`.
 
-## Comparación de escenarios
+Desde 01/03/2036, el motor no calcula esta indemnización y deriva el caso al SUCGS según el artículo 186.
 
-La modalidad `ESCENARIOS` genera una serie independiente por porcentaje. La sugerencia inicial es:
+## 10. Motor del Subsistema Mixto
+
+### 10.1. Componente BD
+
+El motor transforma el historial al tramo participante del Mixto:
 
 ```text
-0 %, 1 %, 2 %, 3 %
+salario considerado BD del año
+= mínimo(salario cotizado del año, B/.500 × cuotas del año)
 ```
 
-Los porcentajes introducidos admiten como máximo dos decimales.
+Con datos anuales, esta es una aproximación del límite mensual y se advierte al usuario.
 
-## Línea temporal histórica y proyectada
+Después se reutiliza la lógica de modalidad SEBD con parámetros propios del componente.
 
-Archivo:
+### 10.2. Componente CAP — pensión programada
 
 ```text
-app/servicios/linea_tiempo.py
+capital total = saldo CAP + bono aplicable
+pensión CAP = capital total / valor actuarial
 ```
 
-La línea temporal:
+Si falta el valor actuarial, la pensión CAP permanece pendiente.
 
-- mantiene separados valores históricos y proyectados;
-- usa `SIN_COTIZACION` cuando un año histórico tiene cero cuotas;
-- representa el año actual como histórico, parcial o mixto según corresponda;
-- respeta las cuotas esperadas al cierre del año actual;
-- limita el salario futuro al número de cuotas proyectadas;
-- conserva la precisión anual producida por el motor salarial.
+### 10.3. Opción CAP
 
-La equivalencia provisional entre una cuota futura y un mes cotizado se utiliza para planificación cuando no existe detalle mensual.
+- `PENSION_PROGRAMADA`: calcula renta mensual si están los datos.
+- `DEVOLUCION_TOTAL`: produce pago único.
+- `AUTO`: mantiene `decision_requerida = true` cuando corresponde escoger.
 
-## Escenarios de retiro
+### 10.4. Resultado total
 
-Archivo:
+Cuando ambos componentes generan renta:
 
 ```text
-app/servicios/retiro.py
+pensión Mixto = pensión BD + pensión CAP
 ```
 
-El servicio trabaja con fechas exactas para edad y fecha de referencia.
+Cuando existe una devolución o indemnización, los pagos únicos se mantienen separados.
 
-### Fecha de evaluación y fecha de corte de cuotas
+### 10.5. Garantía de renta vitalicia
 
-Son conceptos distintos:
+La garantía del CAP no incrementa el monto inicial. Solo registra la continuidad futura del componente cuando se cumplen las condiciones de agotamiento del capital y supervivencia a la expectativa utilizada.
 
-- **fecha de evaluación:** día en que se analiza la situación previsional;
-- **fecha de corte de cuotas:** día hasta el cual se consideran actualizadas las cuotas reales informadas.
+### 10.6. Transición
 
-### Cuotas futuras
+Hasta 29/02/2032 se permite cálculo Mixto según el alcance implementado. Desde 01/03/2032 el servicio devuelve transición a SUCGS conforme a la regla operativa versionada.
 
-La estimación evita aplicar directamente la densidad anual al resto del año actual. Primero respeta:
+## 11. Motor SUCGS
+
+### 11.1. Componente contributivo — artículo 196
 
 ```text
-cuotas restantes año actual =
-max(cuotas esperadas al cierre - cuotas ya acreditadas este año, 0)
+pensión contributiva
+= saldo de Capitalización Solidaria / 1,000 × factor actuarial por edad
 ```
 
-A partir del siguiente año se aplica `cuotas_esperadas_por_anio`, prorrateando el año de retiro cuando la fecha evaluada cae dentro del año.
+El factor se obtiene de `normativa/sucgs.json`.
 
-Por tanto, si el usuario tiene 5 cuotas en 2026 y espera cerrar 2026 con 5, un retiro en noviembre de 2026 no agrega tres cuotas artificiales.
+### 11.2. Capa solidaria — artículos 194 y 195
 
-### Horizonte salarial
+El motor obtiene primero `pension_contributiva_mensual` y después determina si corresponde:
 
-Cada escenario de retiro se compara con `anio_fin_proyeccion_salarial`.
+- mantener la contributiva;
+- elevar a Beneficio Mínimo;
+- elevar a Pensión Garantizada Solidaria.
 
-Si una fecha de retiro excede ese horizonte:
-
-- el backend devuelve una advertencia;
-- la interfaz ofrece ajustar el Paso 4;
-- no se extiende silenciosamente el salario con una hipótesis no confirmada.
-
-## Pendiente
-
-Faltan los motores legales completos de:
-
-- elegibilidad;
-- SEBD;
-- Subsistema Mixto;
-- SUCGS.
-
-También queda pendiente incorporar detalle mensual/importación cuando sea necesario para reglas sensibles al mes exacto.
-
-## SEBD — Pensión de Retiro por Vejez Normal
-
-Archivos principales:
+Se conserva:
 
 ```text
-app/motores/elegibilidad.py
-app/motores/sebd.py
-app/modelos/pension.py
-normativa/sebd.json
+pension_contributiva_mensual
+pension_despues_componente_solidario
 ```
 
-La primera modalidad legal implementada utiliza:
+como resultados separados.
 
-- edad de referencia por sexo;
-- 240 cuotas de referencia;
-- promedio mensual de los diez mejores años de cotizaciones;
-- tasa básica de reemplazo del 60 %;
-- 1.25 puntos porcentuales por cada bloque completo de 12 cuotas en exceso de 240 aportadas antes de la edad de referencia;
-- 2 puntos porcentuales por cada bloque completo de 12 cuotas en exceso de 240 aportadas después de la edad de referencia;
-- límites máximos ordinario y ampliados cuando se cumplen sus condiciones.
+### 11.3. Artículo 197 — condiciones
 
-Para retiros posteriores a la edad de referencia, las cuotas excedentes antes y después de esa fecha deben quedar clasificadas explícitamente. El motor no asigna silenciosamente cuotas cuando el historial disponible no permite determinar su momento.
+La preevaluación verifica:
 
-El artículo 192 establece un monto mínimo sujeto a ajuste anual. Hasta versionar el monto indexado aplicable a cada fecha, el motor no eleva automáticamente resultados inferiores al mínimo base y devuelve una advertencia.
+1. mínimo de cuotas por año activo;
+2. total máximo de años sin cotización;
+3. máximo de años sin cotización consecutivos;
+4. distribución mínima de cuotas entre primeros 20 años y años restantes;
+5. estabilidad salarial, cuando existe confirmación suficiente.
 
-## Integración del SEBD normal con los Pasos 1–5
-
-Archivo:
+### 11.4. Salario promedio base
 
 ```text
-app/servicios/resultados.py
+salario promedio base mensual
+= total de salarios cotizados / total de meses cotizados
 ```
 
-La capa de integración realiza estas tareas antes de invocar `calcular_sebd_normal`:
+### 11.5. Monto objetivo
 
-1. localiza el escenario de retiro seleccionado;
-2. localiza el escenario salarial elegido;
-3. combina el historial real con los salarios proyectados necesarios hasta la fecha de retiro;
-4. consume las cuotas proyectadas cronológicamente;
-5. si el retiro corta un año futuro, prorratea el salario de ese año según las cuotas utilizadas;
-6. para una referencia futura, utiliza el total estimado en la fecha de referencia como frontera para separar exceso anterior y posterior;
-7. rechaza inferencias de esa distribución cuando la edad de referencia ya transcurrió y el historial anual no ofrece detalle mensual;
-8. entrega al motor legal una estructura independiente de la interfaz.
-
-El endpoint integrado es:
+Con garantía completa:
 
 ```text
-POST /api/simulacion/resultados/sebd-normal
+objetivo = salario promedio base × 60 %
 ```
 
-La respuesta mantiene separadas las advertencias de integración de las advertencias normativas producidas por el motor.
-
-
-## Paso 6C — clasificador general SEBD
-
-Se incorpora `app/motores/sebd_modalidades.py`, que no reemplaza la regresión del motor normal: la reutiliza cuando la clasificación es `NORMAL` y añade las fórmulas de `ANTICIPADA`, `PROPORCIONAL` y `PROPORCIONAL_ANTICIPADA`.
-
-La capa `app/servicios/resultados_sebd.py` reutiliza la consolidación cronológica del Paso 6B y entrega al motor la fecha, cuotas y salarios correspondientes al escenario elegido.
-
-El orden de operaciones se conserva explícitamente:
-
-1. determinar salario base;
-2. aplicar tasa base e incrementos que correspondan;
-3. aplicar límite máximo;
-4. aplicar factor proporcional por cuotas, si corresponde;
-5. aplicar factor de reducción por edad, si corresponde;
-6. materializar el importe monetario con la política de precisión del proyecto.
-
-La modalidad normal mantiene la posibilidad de máximos ampliados bajo las condiciones del artículo 193. Las modalidades distintas de Normal usan el límite ordinario en esta implementación.
-
-## Paso 6C.2 — Indemnización por Vejez
-
-`app/motores/sebd_modalidades.py` calcula la Indemnización por Vejez como una prestación distinta de las pensiones mensuales.
-
-El procedimiento implementado es:
+Cuando la implementación permite garantía proporcional para un requisito inferior:
 
 ```text
-1. Seleccionar los 10 mayores totales salariales anuales hasta el retiro.
-2. Salario base = suma de esos 10 años / 120.
-3. Mensualidad normal hipotética = salario base × 60 %.
-4. Aplicar el máximo ordinario que corresponda a esa mensualidad hipotética.
-5. Factor indemnización = cuotas mensuales acreditadas / 6.
-6. Pago único = mensualidad hipotética × factor indemnización.
+tasa proporcional = 60 % × cuotas / 240
+objetivo = salario promedio base × tasa proporcional
 ```
 
-El factor del punto 5 usa división decimal directa. No se redondea a bloques completos de seis porque el procedimiento reglamentario ordena dividir el número de meses registrados entre seis.
+### 11.6. Resultado final
 
-La salida no utiliza `pension_mensual_estimada`: el pago se conserva en `indemnizacion_pago_unico_estimado`. El mínimo indexado del artículo 192 no se fuerza hasta contar con su valor versionado para la fecha de cálculo.
-
-La salida tampoco asigna valores ficticios a campos de pensión proporcional: `factor_proporcional_cuotas` y `monto_despues_factor_proporcional` quedan en `null` durante una Indemnización por Vejez.
-
-La clasificación deja de ofrecer esta indemnización a partir del 01/03/2036 y devuelve la transición a SUCGS.
-
-
-## Paso 6D.1 — motor preliminar del Subsistema Mixto
-
-Archivos principales:
+Si la garantía puede evaluarse:
 
 ```text
-app/motores/mixto.py
-app/modelos/pension.py
-app/core/normativa.py
-normativa/mixto.json
+pensión total
+= máximo(pensión después de capa solidaria, monto objetivo art. 197)
 ```
 
-### Componente de Beneficio Definido
+Si una condición indispensable permanece pendiente, `pension_mensual_total_estimada` permanece `null`.
 
-El motor transforma el historial original a un historial de participación BD:
+## 12. Limitaciones explícitas
 
-```text
-salario BD anual aproximado =
-min(salario cotizado anual, B/.500.00 × cuotas del año)
-```
+El motor actual no debe ocultar estas limitaciones:
 
-Esta fórmula es una aproximación necesaria cuando solo existe información anual. El límite jurídico es mensual; por tanto, si el salario original supera el límite anual aproximado, el resultado incluye una advertencia y no se presenta como reproducción exacta de la cuenta oficial.
+- historial anual en lugar de mensual para ciertas reglas;
+- mínimo SEBD indexado no versionado por fecha;
+- saldo CAP Mixto no reconstruido desde agregados anuales;
+- divisor actuarial Mixto debe ser suministrado cuando corresponda;
+- bono Mixto no se reconstruye automáticamente;
+- saldo SUCGS no se reconstruye todavía desde todos los aportes/rendimientos;
+- valores solidarios pueden requerir actualización por indexación;
+- estabilidad salarial del artículo 197 puede requerir confirmación explícita;
+- regímenes especiales no están cubiertos por el motor general.
 
-El historial resultante se entrega al clasificador general SEBD para determinar modalidad, tasa y factores. El máximo monetario del componente Mixto se recalcula en B/.500.00 mensuales antes de aplicar los factores proporcional y de reducción por edad que correspondan.
+## 13. Próximo bloque — 6F
 
-### Componente de Ahorro Personal
+6F no debe modificar las fórmulas ya validadas salvo que se detecte un error. Su objetivo es añadir una capa transversal para:
 
-La pensión programada se representa como:
-
-```text
-capital considerado =
-saldo ahorrado/capitalizado + bono de reconocimiento aplicable
-
-pensión programada mensual =
-capital considerado / valor actuarial de expectativa de vida
-```
-
-El valor actuarial depende de las bases biométricas y de la tasa de descuento adoptadas por la Junta Directiva. La aplicación no dispone todavía de un valor oficial público versionado por fecha y no lo sustituye por factores del SUCGS.
-
-Si falta el saldo o el valor actuarial, el componente CAP queda sin cálculo y la pensión total Mixto permanece en `None`.
-
-### Suma de componentes
-
-La pensión mensual total solo se materializa cuando:
-
-```text
-BD disponible
-AND
-CAP disponible
-```
-
-Entonces:
-
-```text
-pensión Mixto =
-pensión BD + pensión programada CAP
-```
-
-### Transición
-
-Antes del cálculo se verifica:
-
-```text
-sistema seleccionado = SUCGS
-OR
-fecha retiro >= 01/03/2032
-```
-
-En cualquiera de esos casos el motor no calcula una pensión bajo Mixto.
-
-La fecha 01/03/2032 se utiliza conforme al artículo 188 y al reglamento de incorporación al componente contributivo de capitalización solidaria. La referencia a 01/03/2036 existente en el artículo 153 se conserva documentada como discrepancia pendiente de interpretación definitiva.
-
-## Motor Mixto 6D.2 — decisión CAP y pagos únicos
-
-Después de calcular el componente BD, el motor determina si el artículo 187 habilita devolución CAP:
-
-```text
-fecha retiro >= fecha referencia
-AND
-cuotas < 240
-```
-
-Cuando la devolución está disponible:
-
-```text
-AUTO
-  → decisión pendiente
-
-PENSION_PROGRAMADA
-  → requiere saldo + divisor actuarial
-
-DEVOLUCION_TOTAL
-  → pago único del capital considerado
-```
-
-Para una devolución total no se exige divisor actuarial porque no existe conversión a renta programada.
-
-Cuando el BD genera indemnización y se elige devolución CAP:
-
-```text
-pago único total
-=
-indemnización BD
-+
-devolución CAP
-```
-
-Cuando el BD genera pensión proporcional y se elige devolución CAP:
-
-```text
-pensión mensual total = pensión BD
-pago único CAP = devolución de la cuenta
-```
-
-La garantía de renta vitalicia se registra como una condición futura y no modifica el importe inicial de la pensión programada CAP.
-
-## Integración Mixto con Pasos 1–5
-
-La capa `servicios/resultados_mixto.py` no implementa fórmulas previsionales nuevas. Su función es construir los registros hasta la fecha de retiro elegida, respetar el prorrateo de años proyectados y resolver las cuotas excedentes por momento antes de entregar los datos al motor Mixto.
-
-Los datos del CAP se transmiten sin reconstrucción automática. Esto mantiene la regla arquitectónica de que un dato actuarial u oficial ausente permanece ausente.
-
-## SUCGS 6E.3 — componente contributivo, capa solidaria y reemplazo mínimo
-
-Entrada mínima: fecha de nacimiento, sexo, fecha de retiro, cuotas totales y saldo del Componente Contributivo de Capitalización Solidaria. Opcionalmente se reciben valores solidarios vigentes confirmados.
-
-Fórmula contributiva:
-
-```text
-pension_contributiva_mensual =
-    saldo_capitalizacion_solidaria / 1000
-    × factor_pensionamiento_actuarial(edad)
-```
-
-Después se aplican los artículos 194 y 195. Con 240 o más cuotas y edad de referencia, la Pensión Garantizada Solidaria se usa como mínimo. Con menos de 240 cuotas, la capa solidaria del artículo 194 se evalúa desde los 65 años.
-
-Después de obtener `pension_despues_componente_solidario`, el motor evalúa el artículo 197. Las condiciones de cuotas y distribución usan el historial anual completo; la estabilidad salarial requiere confirmación explícita. Cuando todas las condiciones están determinadas, la pensión total es el mayor valor entre el resultado de las capas anteriores y la garantía de reemplazo aplicable.
-
-### Fórmula de la garantía del artículo 197
-
-Con 240 o más cuotas:
-
-`garantía = salario_promedio_base_mensual × 60 %`
-
-Cuando la Ley admite una pensión con requisito de cuotas inferior y se cumplen las condiciones del artículo 197:
-
-`tasa proporcional = 60 % × cuotas / 240`
-
-`garantía = salario_promedio_base_mensual × tasa proporcional`
-
-El salario promedio base mensual se obtiene como `total salarios cotizados / total meses cotizados`. La aplicación no interpreta automáticamente la condición de estabilidad salarial del numeral 3.
-
-## SUCGS 6E.4 — integración con el asistente
-
-La capa `app/servicios/resultados_sucgs.py` reutiliza `_buscar_escenario_retiro`, `_buscar_escenario_salarial` y `_construir_registros_hasta_retiro`. De este modo no se duplican reglas de proyección ni prorrateo en el motor SUCGS.
-
-El saldo solidario continúa siendo un dato explícito. El historial anual consolidado hasta el retiro se utiliza para la preevaluación del artículo 197. Si la fecha de retiro requiere salarios futuros, estos se incorporan desde el escenario del Paso 4 y quedan identificados en `anios_proyectados_incluidos`.
+- comparar escenarios;
+- exponer metodología;
+- mostrar sustitución numérica;
+- enlazar fuentes;
+- preparar informes.
