@@ -1,6 +1,6 @@
 """Modelos de trazabilidad para explicar un cálculo previsional paso a paso.
 
-La capa 6F.2 no vuelve a calcular la prestación. Solo transforma resultados
+La capa de trazabilidad no vuelve a calcular la prestación. Solo transforma resultados
 ya producidos por los motores legales en una secuencia auditable de datos,
 reglas, fórmulas, sustituciones numéricas, resultados intermedios y fuentes.
 """
@@ -55,7 +55,7 @@ TipoResultadoTrazabilidad = Literal[
 class ResumenTrazabilidadCalculo(BaseModel):
     """Explicación transversal de un resultado SEBD, Mixto o SUCGS."""
 
-    version_metodologia: str = "6F.2"
+    version_metodologia: str = "1.0"
     sistema: str
     tipo_prestacion: str
     datos_utilizados: list[DatoTrazabilidad]

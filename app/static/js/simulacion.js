@@ -2,7 +2,7 @@
 
 
 /* ============================================================
-   Calculadora de Pensión CSS
+   Mi Retiro Proyectado
    Asistente de simulación
    ============================================================ */
 
@@ -19,7 +19,7 @@
 
 const CLAVE_SIMULACION = "calculadoraPensionCSS.simulacion";
 
-// El año se obtiene dinámicamente del equipo del usuario.
+// El año se obtiene dinámicamente del equipo del Asegurado(a).
 const ANIO_ACTUAL = new Date().getFullYear();
 
 // Si todavía no existe una proyección guardada, se muestran
@@ -330,7 +330,7 @@ function restaurarDatosPersonales(simulacion) {
 
 /**
  * Activa o desactiva los campos de proyección de cuotas según
- * la decisión del usuario de continuar o no cotizando.
+ * la decisión del Asegurado(a) de continuar o no cotizando.
  */
 function actualizarEstadoContinuidad() {
   const continua = document.getElementById(
@@ -451,7 +451,7 @@ function restaurarDatosCuotas(simulacion) {
 
 
 /**
- * Elimina el resultado de cuotas cuando el usuario modifica
+ * Elimina el resultado de cuotas cuando el Asegurado(a) modifica
  * alguno de los datos que sirvieron para calcularlo.
  */
 function invalidarResumenCuotas() {
@@ -497,7 +497,7 @@ function invalidarResumenCuotas() {
 
 /**
  * Envía las cuotas al backend, guarda el resultado y actualiza
- * el resumen mostrado al usuario.
+ * el resumen mostrado al Asegurado(a).
  *
  * @param {SubmitEvent} evento Evento submit del formulario.
  */
@@ -652,7 +652,7 @@ function mostrarResumenCuotas(resumen) {
 /**
  * Muestra un mensaje de error en el Paso 2.
  *
- * @param {string} mensaje Texto que se mostrará al usuario.
+ * @param {string} mensaje Texto que se mostrará al Asegurado(a).
  */
 function mostrarErrorCuotas(mensaje) {
   const error = document.getElementById(
@@ -716,7 +716,7 @@ function restaurarDatosSalario(simulacion) {
 
 /**
  * Elimina el resultado salarial y la proyección posterior cuando
- * el usuario modifica el salario del Paso 3.
+ * el Asegurado(a) modifica el salario del Paso 3.
  */
 function invalidarResumenSalario() {
   const simulacion = obtenerSimulacion();
@@ -886,7 +886,7 @@ function mostrarResumenSalario(resumen) {
 /**
  * Muestra un mensaje de error en el Paso 3.
  *
- * @param {string} mensaje Texto que se mostrará al usuario.
+ * @param {string} mensaje Texto que se mostrará al Asegurado(a).
  */
 function mostrarErrorSalario(mensaje) {
   const error = document.getElementById(
@@ -1192,7 +1192,7 @@ function actualizarLimitesSalarioFuturo() {
  *
  * Se admiten comas o punto y coma como separadores.
  *
- * @param {string} texto Porcentajes escritos por el usuario.
+ * @param {string} texto Porcentajes escritos por el Asegurado(a).
  * @returns {number[]} Lista de porcentajes.
  */
 function convertirEscenariosPorcentajes(texto) {
@@ -1681,7 +1681,7 @@ function crearTablaEscenario(escenario) {
 /**
  * Muestra un mensaje de error en el Paso 4.
  *
- * @param {string} mensaje Texto que se mostrará al usuario.
+ * @param {string} mensaje Texto que se mostrará al Asegurado(a).
  */
 function mostrarErrorProyeccion(mensaje) {
   const error = document.getElementById(
@@ -1816,7 +1816,7 @@ function formatearPorcentaje(valor) {
  *
  * @param {Object} contenido Respuesta recibida desde la API.
  * @param {string} mensajePredeterminado Mensaje alternativo.
- * @returns {string} Mensaje que se mostrará al usuario.
+ * @returns {string} Mensaje que se mostrará al Asegurado(a).
  */
 function obtenerMensajeError(
   contenido,

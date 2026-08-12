@@ -12,7 +12,7 @@ permanecer explícitamente separados:
 El motor tampoco reconstruye el saldo CAP ni el bono de reconocimiento a
 partir de salarios anuales. Esos importes deben provenir de información
 oficial o de una entrada identificada como tal. Cuando el artículo 187 permite
-más de una alternativa, ``AUTO`` no toma la decisión por el usuario.
+más de una alternativa, ``AUTO`` no toma la decisión por el Asegurado(a).
 """
 
 from calendar import monthrange
@@ -59,7 +59,7 @@ def _sumar_anios(fecha: date, cantidad: int) -> date:
 
 
 def _fecha_referencia(datos: DatosCalculoMixto) -> date:
-    """Obtiene la fecha de edad de referencia del asegurado."""
+    """Obtiene la fecha de edad de referencia del Asegurado(a)."""
 
     return _sumar_anios(
         datos.fecha_nacimiento,
@@ -435,7 +435,7 @@ def _calcular_componente_cap(
             "El artículo 187 permite solicitar la devolución total del CAP "
             "al alcanzar la edad de referencia sin cumplir los requisitos "
             "de la pensión normal. La aplicación no elige entre devolución "
-            "y prestación programada sin una decisión expresa del usuario."
+            "y prestación programada sin una decisión expresa del Asegurado(a)."
         )
         return _resumen_cap_vacio(
             datos,
@@ -470,7 +470,7 @@ def _calcular_componente_cap(
             [
                 "La devolución del CAP es un pago único. No se presenta como "
                 "pensión mensual.",
-                "Con la devolución total del artículo 187 el asegurado queda "
+                "Con la devolución total del artículo 187 el Asegurado(a) queda "
                 "desligado del Subsistema Mixto respecto de este componente.",
                 "Las primas del Seguro Colectivo de Renta Vitalicia no son "
                 "objeto de devolución porque forman parte del aporte de "
@@ -643,7 +643,7 @@ def calcular_mixto(datos: DatosCalculoMixto) -> ResumenCalculoMixto:
             fecha_fin_mixto=fecha_fin_mixto,
             fecha_inicio_sucgs=fecha_inicio_sucgs,
             advertencia=(
-                "El escenario indica que el asegurado optó por el SUCGS. "
+                "El escenario indica que el Asegurado(a) optó por el SUCGS. "
                 "La prestación debe calcularse bajo el artículo 196 y no "
                 "con las reglas del Subsistema Mixto."
             ),
@@ -685,7 +685,7 @@ def calcular_mixto(datos: DatosCalculoMixto) -> ResumenCalculoMixto:
         and componente_cap.calculo_disponible
     ):
         # En la ruta de pensión programada se suman ambos componentes. Si el
-        # usuario eligió devolución total, el CAP deja de aportar una renta
+        # Asegurado(a) eligió devolución total, el CAP deja de aportar una renta
         # mensual y el total mensual queda compuesto únicamente por el BD.
         pension_total_decimal = a_decimal(
             componente_bd.pension_mensual_estimada

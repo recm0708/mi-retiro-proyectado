@@ -2,7 +2,7 @@
 
 
 /* ============================================================
-   Calculadora de Pensión CSS
+   Mi Retiro Proyectado
    Paso 6 — Resultados
    ============================================================ */
 
@@ -995,7 +995,7 @@ async function calcularResultadoSUCGS() {
 
 
 // ============================================================
-// Trazabilidad transversal 6F.2
+// Trazabilidad transversal
 // ============================================================
 
 /**
@@ -1227,7 +1227,7 @@ function mostrarTrazabilidadCalculo(trazabilidad) {
       : "Fuente general";
 
     const enlace = document.createElement("a");
-    enlace.className = "btn btn-sm btn-outline-primary mt-2 align-self-start";
+    enlace.className = "btn btn-sm btn-outline-primary mt-2 align-self-start btn-center-content";
     enlace.href = fuente.url;
     enlace.target = "_blank";
     enlace.rel = "noopener noreferrer";
@@ -1286,7 +1286,7 @@ function configurarBotonTrazabilidad() {
 
 
 // ============================================================
-// Resumen transversal 6F.4
+// Resumen transversal
 // ============================================================
 
 /**

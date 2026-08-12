@@ -11,7 +11,7 @@ from app.modelos.simulacion import DatosCuotas, ResumenCuotas
 # Umbrales preliminares
 # ============================================================
 
-# Estos valores se utilizan actualmente para mostrar al usuario
+# Estos valores se utilizan actualmente para mostrar al Asegurado(a)
 # su distancia respecto de dos referencias de cuotas.
 #
 # Más adelante los parámetros normativos definitivos serán
@@ -95,7 +95,7 @@ def analizar_cuotas(datos: DatosCuotas) -> ResumenCuotas:
         )
 
     else:
-        # Si el usuario indica que dejará de cotizar, no se
+        # Si el Asegurado(a) indica que dejará de cotizar, no se
         # incorporan cuotas adicionales al año ni a años futuros.
         cuotas_cierre_anio = datos.cuotas_anio_actual
         cuotas_por_anio_futuras = 0
@@ -129,7 +129,7 @@ def analizar_cuotas(datos: DatosCuotas) -> ResumenCuotas:
     )
 
     # Estima cuánto tiempo tomaría alcanzar los umbrales
-    # utilizando el ritmo anual indicado por el usuario.
+    # utilizando el ritmo anual indicado por el Asegurado(a).
     anios_180 = _calcular_anios_aproximados(
         faltantes_180,
         cuotas_por_anio_futuras,

@@ -60,7 +60,7 @@ def _buscar_escenario_referencia(
 def _buscar_escenario_salarial(
     datos: DatosResultadoSEBDNormal,
 ) -> EscenarioLineaTiempo:
-    """Obtiene la línea temporal salarial elegida por el usuario."""
+    """Obtiene la línea temporal salarial elegida por el Asegurado(a)."""
 
     for escenario in datos.linea_tiempo.escenarios:
         if escenario.nombre == datos.escenario_salarial_nombre:

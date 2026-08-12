@@ -1,7 +1,7 @@
 """Servicios para validar y resumir el historial salarial.
 
 Este módulo procesa los registros históricos proporcionados por
-el usuario. Cada registro representa las cuotas acreditadas y el
+el Asegurado(a). Cada registro representa las cuotas acreditadas y el
 salario reportado a la CSS durante un año calendario.
 
 Los datos históricos se mantienen separados de cualquier
@@ -49,7 +49,7 @@ def analizar_historial_salarial(
     El servicio comprueba años duplicados, límites temporales,
     coherencia básica entre cuotas y salarios y la diferencia
     entre la suma anual de cuotas y el total de referencia
-    informado previamente por el usuario.
+    informado previamente por el Asegurado(a).
     """
 
     if datos.anio_fin < datos.anio_inicio:
@@ -81,7 +81,7 @@ def analizar_historial_salarial(
     anios_sin_registro: list[int] = []
 
     # Se recorre todo el período para poder detectar años
-    # que no fueron proporcionados por el usuario.
+    # que no fueron proporcionados por el Asegurado(a).
     for anio in range(
         datos.anio_inicio,
         datos.anio_fin + 1,

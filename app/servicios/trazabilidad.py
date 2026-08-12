@@ -2,7 +2,7 @@
 
 Este módulo no contiene fórmulas jurídicas nuevas. Recibe resultados ya
 calculados y crea una representación humana de la cadena de cálculo para la
-interfaz de 6F.2. Las URLs se toman de ``normativa/*.json`` para evitar que la
+interfaz de trazabilidad. Las URLs se toman de ``normativa/*.json`` para evitar que la
 interfaz mantenga enlaces legales hardcodeados.
 """
 
@@ -419,7 +419,7 @@ def construir_trazabilidad_mixto(
                 PasoTrazabilidad(
                     orden=len(pasos) + 1,
                     titulo="Resolver decisión del CAP",
-                    regla="La aplicación no elige por el usuario cuando la devolución total requiere una decisión expresa.",
+                    regla="La aplicación no elige por el Asegurado(a) cuando la devolución total requiere una decisión expresa.",
                     resultado="Decisión pendiente",
                     fuentes=["texto_unico"],
                 )

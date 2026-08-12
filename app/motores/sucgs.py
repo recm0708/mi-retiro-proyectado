@@ -93,7 +93,7 @@ def _resolver_valores_solidarios(
 
     La Ley versionada fija B/.144.00 como referencia del valor mínimo
     universal y establece una Pensión Garantizada Solidaria de al menos
-    B/.265.00. El usuario puede aportar valores vigentes confirmados; de lo
+    B/.265.00. El Asegurado(a) puede aportar valores vigentes confirmados; de lo
     contrario se conservan las referencias legales de la versión cargada.
     """
 

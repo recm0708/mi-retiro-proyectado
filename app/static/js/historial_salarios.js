@@ -2,7 +2,7 @@
 
 
 /* ============================================================
-   Calculadora de Pensión CSS
+   Mi Retiro Proyectado
    Gestión del historial salarial
    ============================================================ */
 
@@ -128,7 +128,7 @@ function sincronizarHistorialConDatosActuales() {
 
 /**
  * Muestra la interfaz correspondiente al método seleccionado
- * por el usuario.
+ * por el Asegurado(a).
  */
 function actualizarModoHistorial() {
   const modo = document.getElementById(
@@ -162,7 +162,7 @@ function actualizarModoHistorial() {
 
 
 /**
- * Confirma que el usuario desea continuar sin proporcionar
+ * Confirma que el Asegurado(a) desea continuar sin proporcionar
  * el historial anual completo.
  */
 function confirmarModoSoloActual() {

@@ -2,7 +2,7 @@
 
 
 /* ============================================================
-   Calculadora de Pensión CSS
+   Mi Retiro Proyectado
    Línea temporal histórica y proyectada
    ============================================================ */
 
@@ -30,7 +30,7 @@ async function generarLineaTiempo(
 ) {
   const simulacion = obtenerSimulacion();
 
-  // Si el usuario decidió continuar sin historial completo,
+  // Si el Asegurado(a) decidió continuar sin historial completo,
   // se conserva la visualización de proyección futura únicamente.
   if (
     simulacion.modo_historial !== "MANUAL"

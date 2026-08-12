@@ -224,7 +224,7 @@ def _calcular_tasa_hasta_salario_futuro(
 
     Esta modalidad evita inventar aumentos intermedios arbitrarios.
     Se calcula una tasa anual equivalente que conecta el salario
-    actual con el salario futuro indicado por el usuario.
+    actual con el salario futuro indicado por el Asegurado(a).
     """
 
     if cantidad_anios <= 0:

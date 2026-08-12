@@ -311,7 +311,7 @@ class DatosCalculoMixto(BaseModel):
         default=False,
         description=(
             "Indica si el monto del bono proviene de un dato oficial o ya "
-            "validado para el asegurado."
+            "validado para el Asegurado(a)."
         ),
     )
     valor_actuarial_expectativa_vida: float | None = Field(
@@ -327,7 +327,7 @@ class DatosCalculoMixto(BaseModel):
         description=(
             "AUTO calcula la pensión programada cuando no existe una opción "
             "de devolución. Cuando el artículo 187 permite devolución, AUTO "
-            "deja la decisión pendiente en vez de escoger por el usuario."
+            "deja la decisión pendiente en vez de escoger por el Asegurado(a)."
         ),
     )
 
@@ -516,7 +516,7 @@ class DatosCalculoSUCGS(BaseModel):
         default=False,
         description=(
             "Indica si el saldo proviene de una fuente oficial o validada "
-            "para el asegurado."
+            "para el Asegurado(a)."
         ),
     )
 

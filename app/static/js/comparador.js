@@ -2,8 +2,8 @@
 
 
 /* ============================================================
-   Calculadora de Pensión CSS
-   6F.1 — Comparador transversal de escenarios
+   Mi Retiro Proyectado
+   Comparador transversal de escenarios
    ============================================================ */
 
 const CLAVE_SIMULACION_COMPARADOR = "calculadoraPensionCSS.simulacion";

@@ -15,7 +15,7 @@
 /**
  * Elimina separadores visuales y limita la parte decimal.
  *
- * @param {string} texto Texto introducido por el usuario.
+ * @param {string} texto Texto introducido por el Asegurado(a).
  * @param {boolean} permitirNegativo Permite signo negativo.
  * @returns {string} Texto numérico normalizado.
  */

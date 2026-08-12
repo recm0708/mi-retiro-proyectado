@@ -1,6 +1,6 @@
 """Catálogo legible de metodología y fuentes oficiales de la aplicación.
 
-La vista 6F.3 reutiliza las URLs versionadas de ``normativa/*.json``. Este
+La vista de metodología reutiliza las URLs versionadas de ``normativa/*.json``. Este
 módulo añade únicamente etiquetas, agrupación y alcance humano para la interfaz;
 no incorpora reglas de cálculo ni sustituye los motores previsionales.
 """
@@ -89,7 +89,7 @@ def construir_catalogo_metodologia() -> dict:
     grupos = [
         {
             "id": "sebd",
-            "titulo": "SEBD — Beneficio Definido",
+            "titulo": "SEBD — Subsistema Exclusivamente de Beneficio Definido",
             "descripcion": "Reglas de vejez normal, anticipada, proporcional, indemnización y límites del componente definido.",
             "articulos": ["178", "179", "180", "181", "186", "192", "193"],
             "fuentes": [
@@ -186,7 +186,7 @@ def construir_catalogo_metodologia() -> dict:
         },
         {
             "id": "sucgs",
-            "titulo": "SUCGS — Capitalización con Garantía Solidaria",
+            "titulo": "SUCGS — Sistema Único de Capitalización con Garantía Solidaria",
             "descripcion": "Componente contributivo, capa solidaria, factores actuariales y garantía de reemplazo.",
             "articulos": ["Art. 1, num. 41", "152", "153", "194", "195", "196", "197", "198"],
             "fuentes": [
@@ -204,7 +204,7 @@ def construir_catalogo_metodologia() -> dict:
     recursos = [
         {
             "titulo": "Mi Caja Digital",
-            "descripcion": "Consulta individual de información del asegurado. No sustituye la normativa del motor.",
+            "descripcion": "Consulta individual de información del Asegurado(a). No sustituye la normativa aplicada por los motores.",
             "url": "https://micajadigital.css.gob.pa/Auth/SignIn",
         },
         {
@@ -215,7 +215,7 @@ def construir_catalogo_metodologia() -> dict:
     ]
 
     return {
-        "version": "6F.3",
+        "version": "1.0",
         "fuentes_generales": fuentes_generales,
         "grupos": grupos,
         "recursos": recursos,
@@ -224,7 +224,7 @@ def construir_catalogo_metodologia() -> dict:
             "Las páginas informativas de la CSS apoyan la interpretación operativa, pero no reemplazan la Ley o el reglamento.",
             "Los importes indexables, saldos individuales y parámetros actuariales que no puedan reconstruirse con seguridad deben confirmarse o mostrarse como pendientes.",
             "SEBD, Mixto y SUCGS conservan motores separados; la trazabilidad y el comparador explican resultados sin recalcular las fórmulas jurídicas.",
-            "La herramienta es un estimador independiente; la determinación oficial corresponde a la Caja de Seguro Social de Panamá.",
+            "La herramienta es independiente de la CSS y está dirigida a Asegurados(as); la determinación oficial corresponde a la Caja de Seguro Social de Panamá.",
         ],
         "limitaciones": [
             "El historial principal es anual; algunas reglas legales operan con granularidad mensual y se identifican como aproximaciones cuando corresponde.",
