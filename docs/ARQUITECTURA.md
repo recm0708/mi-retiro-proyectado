@@ -68,7 +68,7 @@ Carga parámetros versionados desde `normativa/`. `parametros_generales.json` ma
 
 Los campos monetarios y porcentuales editables relevantes validan como máximo dos decimales en la frontera del backend.
 
-`app/modelos/pension.py` define las entradas y salidas de los motores legales y de la capa de integración del Paso 6.
+`app/modelos/pension.py` define las entradas y salidas de los motores legales y de la capa de integración del Paso 6 para SEBD, Mixto y SUCGS.
 
 ## Servicios
 
@@ -114,6 +114,9 @@ POST /api/simulacion/linea-tiempo
 POST /api/simulacion/retiro
 POST /api/simulacion/sebd/normal
 POST /api/simulacion/resultados/sebd-normal
+POST /api/simulacion/sebd
+POST /api/simulacion/resultados/sebd
+POST /api/simulacion/mixto
 ```
 
 ## Interfaz del asistente
@@ -126,7 +129,7 @@ Los módulos principales del frontend son:
 - `historial_salarios.js`: historial anual;
 - `linea_tiempo.js`: presentación integrada del Paso 4;
 - `retiro.js`: Paso 5, escenarios de retiro y selección del escenario que alimenta Resultados;
-- `resultados.js`: Paso 6, selección salarial, llamada al endpoint integrado y presentación del desglose SEBD;
+- `resultados.js`: Paso 6, selección salarial, configuración específica y presentación integrada de SEBD, Mixto y SUCGS;
 - `moneda.js`: entrada/formato monetario con separadores de miles y máximo dos decimales;
 - `navegacion_wizard.js`: barra de navegación rápida `sticky` para pasos extensos.
 
@@ -173,6 +176,9 @@ Pasos 1–5 / sessionStorage
 partials/resultados.html + resultados.js
         ↓
 POST /api/simulacion/resultados/sebd-normal
+POST /api/simulacion/sebd
+POST /api/simulacion/resultados/sebd
+POST /api/simulacion/mixto
         ↓
 servicios/resultados.py
         ↓
@@ -205,3 +211,96 @@ resultados_sebd.py
 ```
 
 Los endpoints previos de SEBD Normal se conservan para regresión, mientras se añaden endpoints generales que permiten evolucionar el Paso 6 sin romper las pruebas existentes.
+
+
+## Paso 6D.1 — arquitectura del Subsistema Mixto
+
+La primera capa del motor Mixto mantiene separados los componentes que jurídicamente tienen naturaleza distinta:
+
+```text
+DatosCalculoMixto
+       ↓
+motores/mixto.py
+       ├── Componente de Beneficio Definido
+       │      ↓
+       │   sebd_modalidades.py
+       │   con historial limitado a la participación BD
+       │
+       └── Componente de Ahorro Personal
+              ↓
+           saldo oficial + bono aplicable
+           + valor actuarial oficial
+```
+
+Los parámetros se leen desde `normativa/mixto.json` mediante `cargar_parametros_mixto()`.
+
+El componente BD reutiliza la clasificación del SEBD para evitar duplicar reglas de Normal, Anticipada y Proporcional, pero recalcula el máximo propio del Mixto de B/.500.00 antes de aplicar, cuando corresponda, factores proporcional y de edad.
+
+El CAP no se reconstruye desde salarios anuales. La arquitectura exige como datos explícitos el saldo ahorrado/capitalizado y el valor actuarial oficial aplicable. Si falta cualquiera de los elementos necesarios, el componente devuelve `calculo_disponible = false` y el total Mixto permanece sin calcular.
+
+La transición temporal se resuelve antes de ejecutar ambos componentes. Si el usuario seleccionó SUCGS o la fecha de retiro se encuentra desde el 01/03/2032, el motor Mixto no produce una pensión bajo reglas Mixto y devuelve el estado de transición correspondiente.
+
+La integración visual con el Paso 6 se realizará en una subfase posterior, después de validar la capa backend y la disponibilidad de datos oficiales del CAP.
+
+## Extensión 6D.2 del motor Mixto
+
+El flujo CAP incorpora una decisión explícita antes de materializar la prestación:
+
+```text
+motores/mixto.py
+    ├── componente BD
+    │     ├── pensión
+    │     └── indemnización
+    │
+    └── componente CAP
+          ├── AUTO → decisión pendiente si art. 187 aplica
+          ├── PENSION_PROGRAMADA
+          │      ├── saldo
+          │      ├── bono validado
+          │      ├── divisor actuarial
+          │      └── garantía de renta vitalicia
+          └── DEVOLUCION_TOTAL
+                 └── pago único
+```
+
+El seguro colectivo se representa como metadato de continuidad de la prestación, no como un tercer sumando de la pensión inicial.
+
+## Paso 6D.3 — integración del asistente con Mixto
+
+La interfaz no llama directamente al motor con datos reconstruidos en JavaScript. Se añadió una capa de servicio equivalente a la integración SEBD:
+
+```text
+Pasos 1–5
+   ↓
+DatosResultadoMixto
+   ↓
+servicios/resultados_mixto.py
+   ↓
+DatosCalculoMixto
+   ↓
+motores/mixto.py
+   ↓
+ResumenResultadoMixto
+   ↓
+Paso 6
+```
+
+`resultados_mixto.py` reutiliza la construcción cronológica de registros y la separación de cuotas antes/después de la edad de referencia. El JavaScript se limita a recopilar los datos CAP explícitos, invocar el endpoint y presentar la respuesta del backend.
+
+## Motor SUCGS 6E.3
+
+La capa SUCGS se distribuye en:
+
+- `normativa/sucgs.json`: parámetros versionados, tabla actuarial y referencias solidarias;
+- `app/motores/sucgs.py`: fórmula contributiva del artículo 196 y evaluación de los artículos 194 y 195;
+- `app/servicios/resultados_sucgs.py`: integración con el escenario de retiro del asistente;
+- modelos `DatosCalculoSUCGS`, `ResumenCalculoSUCGS`, `DatosResultadoSUCGS` y `ResumenResultadoSUCGS`;
+- endpoints directos e integrados en `app/main.py`.
+
+La arquitectura conserva tres niveles separados: pensión contributiva, pensión después de la capa solidaria y pensión total definitiva. El artículo 197 constituye la tercera capa y expone por separado cada condición de elegibilidad, su monto objetivo y el complemento aplicado.
+
+## Paso 6E.4 — integración visual SUCGS
+
+El flujo visual SUCGS reutiliza la misma separación arquitectónica aplicada a SEBD y Mixto. `resultados.js` no implementa fórmulas legales: construye `DatosResultadoSUCGS` con los datos ya validados en los Pasos 1–5 y los datos específicos solicitados en el Paso 6. `app/servicios/resultados_sucgs.py` consolida el historial real y la proyección hasta la fecha de retiro mediante las mismas funciones cronológicas compartidas por los demás motores, y luego invoca `app/motores/sucgs.py`.
+
+La configuración y el último resultado SUCGS se conservan temporalmente en `sessionStorage`. Los cambios en datos personales, cuotas, historial, proyección o retiro invalidan el resultado previamente calculado para impedir que se muestre una salida obsoleta.

@@ -13,7 +13,7 @@ app/core/normativa.py
 
 El archivo JSON mantiene parámetros generales versionados y el módulo Python concentra su lectura.
 
-Los parámetros de la primera modalidad SEBD normal ya se encuentran versionados en `normativa/sebd.json`. Los parámetros del Subsistema Mixto, SUCGS y las demás modalidades SEBD continúan pendientes y deberán incorporarse con trazabilidad normativa antes de considerarse definitivos.
+Los parámetros implementados de SEBD, Mixto y SUCGS se encuentran versionados en archivos específicos dentro de `normativa/`. Los valores sujetos a actualización o a determinación individual continúan identificados explícitamente como tales.
 
 ## Fuente base actual
 
@@ -125,3 +125,93 @@ El Reglamento para el Cálculo de Prestaciones Económicas desarrolla el procedi
 La implementación conserva la división directa `meses / 6`; no usa cociente entero. Para construir la mensualidad hipotética se aplica la regla de los diez mejores años y el denominador de 120 meses. El mínimo indexado sigue pendiente de versionarse por fecha y, cuando pudiera afectar el cálculo, se genera una advertencia.
 
 A partir del 1 de marzo de 2036, el artículo 186 dispone que la CSS deje de conceder esta indemnización y proceda conforme al SUCGS.
+
+
+## Subsistema Mixto — parámetros versionados
+
+`normativa/mixto.json` registra la primera parametrización del Subsistema Mixto.
+
+### Componente de Beneficio Definido
+
+Se documentan:
+
+- participación salarial hasta B/.500.00 mensuales;
+- diez mejores años para la base;
+- 240 cuotas de referencia;
+- 180 cuotas para la banda proporcional;
+- tasa base de 60 %;
+- incrementos por bloques completos de doce cuotas antes y después de la edad de referencia;
+- máximo mensual del componente de B/.500.00;
+- mínimo base B/.265.00 sujeto a indexación anual.
+
+La indexación del mínimo continúa pendiente de versionarse por fecha.
+
+### Componente de Ahorro Personal
+
+El artículo 182 establece una pensión programada basada en el total ahorrado y capitalizado de la cuenta individual, dividido entre el valor actuarial de la expectativa de vida usando la tasa de descuento vigente y la tabla de mortalidad adoptada por la Junta Directiva.
+
+En esta etapa no se ha localizado/versionado un divisor actuarial vigente por fecha que pueda utilizarse como parámetro general. Por ello:
+
+- `valor_actuarial_expectativa_vida = null`;
+- `tasa_descuento = null`;
+- `tabla_mortalidad = null`;
+
+en el archivo normativo. El motor exige esos datos de forma explícita cuando se quiera producir un cálculo CAP.
+
+Los factores del SUCGS no se utilizarán como sustitutos.
+
+### Bono de reconocimiento
+
+El artículo 183 se conserva como regla separada para los casos en que proceda un bono de reconocimiento por incorporación voluntaria al Mixto desde el SEBD. Esta etapa acepta el monto ya determinado; el cálculo reglamentario del bono se implementará en una subfase posterior.
+
+### Transición Mixto → SUCGS
+
+Para la prestación de retiro, el artículo 188 y el Reglamento de Incorporación al Componente Contributivo de Capitalización Solidaria ubican la transición operativa en:
+
+```text
+último día bajo cálculo Mixto: 29/02/2032
+inicio de cálculo SUCGS:       01/03/2032
+```
+
+El artículo 153 del mismo Texto Único contiene una referencia a 01/03/2036 para asegurados del Subsistema Mixto. Esta diferencia se documenta expresamente en vez de armonizarla de manera silenciosa. La implementación preliminar utiliza 2032 por ser la regla específica de cálculo del artículo 188 y la fecha utilizada por el reglamento operativo.
+
+### Opción de sistema en 2026
+
+La Resolución 57,805-2025-J.D. registró originalmente un plazo de opción hasta 17/03/2026. Comunicaciones oficiales posteriores de la CSS en 2026 utilizan 18/08/2026 como fecha límite operativa y explican que la decisión se dirige a personas del Sistema Mixto que no alcanzan la edad de retiro al 01/03/2032.
+
+La aplicación documenta ambas fechas. La lógica de elegibilidad individual para ejercer la opción no se automatiza todavía debido a la evolución de las reglas operativas y a que debe evitarse inferir una decisión jurídica a partir de información incompleta.
+
+### Parámetros históricos de seguros colectivos
+
+Se conservan, solo para trazabilidad, porcentajes históricos de los seguros colectivos del CAP. Estos parámetros no se usan en 6D.1 para reconstruir el saldo actual de una cuenta individual.
+
+## Subsistema Mixto — ampliación 6D.2
+
+Fuentes oficiales consultadas para esta subfase:
+
+- Texto Único de la Ley 51 de 2005, artículos 182–188, Gaceta Oficial 30284-B de 22/05/2025;
+- Reglamento de Seguros Colectivos del Componente de Ahorro Personal del Subsistema Mixto, Resolución 41,055-2009-J.D., edición actualizada a junio de 2020;
+- página oficial de Normativa de Prestaciones Económicas de la CSS.
+
+Reglas versionadas:
+
+1. **Artículo 182:** la pensión programada CAP divide el monto ahorrado/capitalizado por el valor actuarial de expectativa de vida con la tasa de descuento aplicable.
+2. **Artículo 183:** el bono de reconocimiento se reconoce a determinados asegurados que ingresaron voluntariamente desde el SEBD. La aplicación no reconstruye su monto automáticamente.
+3. **Artículo 184:** el seguro colectivo garantiza la continuidad de la pensión CAP si el pensionado sobrevive la expectativa de vida usada y se agotan los fondos.
+4. **Artículo 187:** quien no cumpla los requisitos de la Pensión de Retiro por Vejez Normal puede solicitar, al alcanzar la edad de referencia, la devolución total de la suma ahorrada y capitalizada mediante un pago único.
+5. **Reglamento de Seguros Colectivos, artículo 10:** el Seguro Colectivo de Renta Vitalicia continúa pagando el monto CAP hasta la muerte bajo la condición prevista.
+6. **Reglamento de Seguros Colectivos, artículo 12:** las primas del seguro colectivo no se devuelven en la indemnización/devolución por vejez, porque forman parte del aporte de solidaridad.
+
+La prima de 0.93 % del Seguro Colectivo de Renta Vitalicia se conserva como **referencia histórica reglamentaria** y no como parámetro vigente presumido para reconstruir cuentas individuales.
+
+## SUCGS — artículos 194 a 197
+
+La fuente principal versionada es el Texto Único de la Ley 51 de 2005 publicado en la Gaceta Oficial 30284-B de 22/05/2025.
+
+El artículo 196 establece que la pensión mensual contributiva se obtiene dividiendo el saldo entre mil y multiplicándolo por el factor de pensionamiento actuarial correspondiente a la edad de retiro. La tabla legal usa factores similares para ambos sexos y establece 4.77 a los 57 años, 5.15 a los 62 años y 7.94 para 80 años o más.
+
+En 6E.3 se materializan los artículos 194, 195 y 197. El artículo 194 introduce el Componente Solidario No Contributivo y usa como referencia el valor mínimo universal de B/.144.00, con indexación posterior. El artículo 195 fija la Pensión Garantizada Solidaria en al menos B/.265.00 para quien alcance la edad de referencia y tenga como mínimo 240 cuotas.
+
+La redacción del numeral 2 del artículo 194 incluye literalmente 240 cuotas, mientras el artículo 195 comienza precisamente en 240. La implementación prioriza el artículo 195 en ese punto y deja constancia de la superposición.
+
+El artículo 197 exige condiciones sobre número anual de cuotas, distribución durante la vida laboral y estabilidad salarial. La aplicación automatiza las dos primeras con historial anual completo y exige confirmación explícita para la tercera. El artículo 1 numeral 41 sirve como base para calcular el salario base mensual promedio a partir de salarios y meses cotizados.

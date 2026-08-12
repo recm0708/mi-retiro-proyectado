@@ -41,9 +41,11 @@ El asistente está organizado en seis pasos:
 3. **Historial:** implementado en validación. Incluye captura anual de cuotas y salario cotizado/reportado, validación contra las cuotas reales del Paso 2, formato monetario controlado y salario actual normalizado para proyección.
 4. **Proyección:** implementado en validación. Incluye salario constante, variación porcentual, salario futuro conocido, comparación de escenarios, precisión monetaria sin redondeos intermedios y línea temporal que separa historial real, año actual y futuro proyectado.
 5. **Retiro:** implementado en validación. Calcula edad y fecha de referencia, escenarios adicionales, cuotas futuras estimadas respetando el cierre del año actual y verifica si la proyección salarial cubre el horizonte de retiro.
-6. **Resultados:** primera integración implementada para la Pensión de Retiro por Vejez Normal del SEBD. Permite seleccionar un escenario de retiro, escoger el escenario salarial, verificar elegibilidad y mostrar el desglose del cálculo.
+6. **Resultados:** integración implementada para las modalidades generales del SEBD y para el Subsistema Mixto. Permite seleccionar un escenario de retiro, escoger el escenario salarial, verificar la prestación aplicable y mostrar el desglose del cálculo.
 
-El motor normal del SEBD ya dispone de una primera implementación validada. Las modalidades SEBD proporcional/anticipada, el Subsistema Mixto y SUCGS continúan pendientes.
+El SEBD ya cubre Normal, Anticipada, Proporcional, Proporcional Anticipada e Indemnización por Vejez. El Subsistema Mixto dispone de backend e integración visual para su Componente de Beneficio Definido, Componente de Ahorro Personal cuando se suministran parámetros oficiales y transición operativa hacia SUCGS. SUCGS dispone del componente contributivo del artículo 196, la capa solidaria de los artículos 194 y 195, la garantía de reemplazo mínimo del artículo 197 y su integración visual completa en el Paso 6.
+
+El asistente permite volver directamente a pasos ya disponibles desde los indicadores de progreso o desde el selector persistente `Ir a paso`; un paso posterior se deshabilita si sus prerrequisitos dejaron de ser válidos después de una edición.
 
 ## API disponible
 
@@ -62,6 +64,12 @@ POST /api/simulacion/linea-tiempo
 POST /api/simulacion/retiro
 POST /api/simulacion/sebd/normal
 POST /api/simulacion/resultados/sebd-normal
+POST /api/simulacion/sebd
+POST /api/simulacion/resultados/sebd
+POST /api/simulacion/mixto
+POST /api/simulacion/resultados/mixto
+POST /api/simulacion/sucgs
+POST /api/simulacion/resultados/sucgs
 ```
 
 La documentación automática está disponible en `/docs` durante la ejecución local.
@@ -249,3 +257,64 @@ Esta prestación se presenta separada de las pensiones mensuales porque es un **
 La interfaz del Paso 6 muestra de forma independiente la mensualidad hipotética, el factor `cuotas / 6`, la fórmula aplicada y el pago único estimado. Desde el 1 de marzo de 2036 el clasificador deriva estos casos a la transición SUCGS prevista por la normativa vigente.
 
 En la respuesta de la API, los campos exclusivos de pensión proporcional se expresan como `null` durante una Indemnización por Vejez para indicar que no aplican, en lugar de devolver un cero que pueda interpretarse como un factor utilizado.
+
+
+## Paso 6D.1 — base del Subsistema Mixto
+
+El backend incorpora una primera implementación controlada del Subsistema Mixto mediante:
+
+```text
+POST /api/simulacion/mixto
+POST /api/simulacion/resultados/mixto
+POST /api/simulacion/sucgs
+POST /api/simulacion/resultados/sucgs
+```
+
+El cálculo separa estrictamente:
+
+- **Componente de Beneficio Definido (BD):** reutiliza la clasificación legal de retiro por vejez y limita la participación salarial a B/.500.00 mensuales. Cuando solo existe historial anual, el tope mensual se aproxima como `B/.500.00 × cuotas del año` y se emite una advertencia.
+- **Componente de Ahorro Personal (CAP):** solo calcula la pensión programada cuando se proporciona el saldo ahorrado/capitalizado y el valor actuarial oficial aplicable. La aplicación no reconstruye todavía el saldo individual a partir del historial anual y no reutiliza factores del SUCGS.
+- **Transición:** para el cálculo de retiro, esta fase utiliza como frontera operativa el 01/03/2032 conforme al artículo 188 y al Reglamento de Incorporación al Componente Contributivo de Capitalización Solidaria. La discrepancia con la fecha 01/03/2036 que aparece en el artículo 153 se conserva documentada.
+
+Los valores de prueba del divisor actuarial son deliberadamente sintéticos. No deben interpretarse como parámetros vigentes de la CSS.
+
+La explicación técnica y normativa de esta fase se encuentra en `docs/MODALIDADES_MIXTO.md`.
+
+## Paso 6D.2 — devolución y garantía del CAP Mixto
+
+El motor Mixto distingue ahora entre **pensión programada** y **devolución total** del Componente de Ahorro Personal cuando el artículo 187 habilita esta última. La aplicación no escoge automáticamente por el usuario: si existe más de una vía y se utiliza `AUTO`, el resultado queda pendiente hasta una decisión expresa.
+
+También se modela la garantía del Seguro Colectivo de Renta Vitalicia del artículo 184 como continuidad futura de la pensión CAP cuando se agotan los fondos después de superar la expectativa de vida utilizada; esta garantía no incrementa la pensión inicial.
+
+Los pagos únicos del componente BD y del CAP permanecen separados de las pensiones mensuales. El bono de reconocimiento puede ingresarse como dato, pero un monto no confirmado oficialmente mantiene el resultado en estado provisional.
+
+## Paso 6D.3 — integración visual del Subsistema Mixto
+
+El Paso 6 habilita ahora el Subsistema Mixto desde el asistente, sin depender de Swagger. La interfaz reutiliza el historial, la línea temporal salarial y el escenario de retiro de los Pasos 1–5, y solicita de forma explícita los datos del CAP que no pueden deducirse del historial anual:
+
+- saldo ahorrado y capitalizado;
+- bono de reconocimiento y su estado de confirmación;
+- valor actuarial aplicable, cuando se dispone de él;
+- opción `AUTO`, `PENSION_PROGRAMADA` o `DEVOLUCION_TOTAL`.
+
+El resultado visual mantiene separados el componente BD, el CAP, la pensión mensual total, los pagos únicos y la garantía de renta vitalicia. Cuando falta un dato oficial o existe una decisión CAP pendiente, la interfaz muestra el resultado como incompleto en lugar de completar la cifra silenciosamente.
+
+Endpoint integrado:
+
+```text
+POST /api/simulacion/resultados/mixto
+```
+
+## SUCGS — subfase 6E.3
+
+El motor del Sistema Único de Capitalización con Garantía Solidaria calcula el **Componente Contributivo de Capitalización Solidaria** del artículo 196 cuando se proporciona un saldo acumulado a la fecha de retiro. La fórmula versionada es `saldo / 1000 × factor de pensionamiento actuarial por edad`.
+
+La subfase 6E.3 conserva el **Componente Solidario No Contributivo** del artículo 194 y la **Pensión Garantizada Solidaria** del artículo 195, y añade la garantía de reemplazo mínimo del artículo 197. Los valores B/.144.00 y B/.265.00 se conservan como referencias legales versionadas al 22/05/2025; cuando existan valores vigentes confirmados pueden suministrarse explícitamente.
+
+El saldo no se reconstruye automáticamente desde salarios históricos: esa reconstrucción depende del origen del asegurado, aportes anteriores y posteriores a la reforma y rendimientos efectivos del Fondo Único Solidario. Para el artículo 197, las condiciones de cuotas y distribución se preevalúan con historial anual completo; la estabilidad salarial exige confirmación expresa. Cuando las tres condiciones pueden cerrarse, `pension_mensual_total_estimada` contiene el resultado definitivo del motor SUCGS.
+
+## Paso 6E.4 — integración visual completa del SUCGS
+
+El SUCGS ya puede calcularse desde el Paso 6 del asistente. La interfaz reutiliza historial, proyección y escenario de retiro, solicita el saldo de Capitalización Solidaria y las confirmaciones que no pueden deducirse automáticamente, y presenta de forma separada el componente contributivo, la capa solidaria y la garantía de reemplazo del artículo 197.
+
+La integración no duplica fórmulas en JavaScript. El backend consolida los registros reales y proyectados hasta la fecha de retiro y entrega el resultado explicable del motor SUCGS. La suite de regresión del proyecto alcanza 57 pruebas automatizadas.

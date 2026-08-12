@@ -268,3 +268,138 @@ La Indemnización por Vejez no se almacenará ni presentará como `pension_mensu
 El cociente entre meses acreditados y seis se calculará mediante división decimal directa, sin truncarlo a bloques enteros, porque el procedimiento reglamentario ordena dividir el total de meses registrados entre seis y multiplicar el resultado por la mensualidad hipotética.
 
 Desde el 01/03/2036 el clasificador no calculará esta indemnización y derivará el escenario a la transición SUCGS prevista por el artículo 186.
+
+
+## ADR-026 — No reconstruir el saldo CAP desde historial anual
+
+**Estado:** Aceptada
+
+El Componente de Ahorro Personal del Subsistema Mixto no se estimará acumulando porcentajes sobre el historial anual mientras no exista una regla versionada que permita reproducir la cuenta individual con sus movimientos y rendimientos.
+
+Para calcular la pensión programada se exigirá el saldo ahorrado/capitalizado oficial o validado y el valor actuarial aplicable. Si el parámetro actuarial no está disponible, el motor mostrará el componente como pendiente en lugar de reutilizar factores del SUCGS.
+
+**Motivo:** el CAP depende del saldo efectivo de la cuenta, su capitalización y parámetros actuariales adoptados periódicamente. Reconstruirlo con datos anuales produciría una precisión aparente no auditable.
+
+---
+
+## ADR-027 — Reutilizar clasificación SEBD en el componente BD del Mixto
+
+**Estado:** Aceptada
+
+El Componente de Beneficio Definido del Subsistema Mixto reutilizará el clasificador general de modalidades de retiro por vejez, pero con un historial salarial limitado a la participación propia del Mixto y con el máximo mensual específico del componente.
+
+**Motivo:** las modalidades legales comparten estructura de edad/cuotas, mientras el salario participante y los límites monetarios del Mixto son distintos. Reutilizar el clasificador reduce duplicación sin confundir parámetros.
+
+---
+
+## ADR-028 — Frontera operativa del Mixto en 01/03/2032
+
+**Estado:** Aceptada con discrepancia normativa documentada
+
+Para determinar si un retiro continúa calculándose bajo el Subsistema Mixto, la aplicación utilizará 01/03/2032 como inicio de la transición a SUCGS, conforme al artículo 188 y al Reglamento de Incorporación al Componente Contributivo de Capitalización Solidaria.
+
+El artículo 153 del Texto Único contiene una referencia a 01/03/2036 para asegurados del Subsistema Mixto. La aplicación no oculta ni corrige silenciosamente esa diferencia: la conserva en `normativa/mixto.json` y en `docs/NORMATIVA.md`.
+
+**Motivo:** la lógica operativa del retiro debe seguir la disposición específica de cálculo y el reglamento aplicable, dejando trazabilidad de la inconsistencia textual para revisión jurídica futura.
+
+---
+
+## ADR-029 — La opción del CAP no se decide automáticamente
+
+**Estado:** Aceptada
+
+Cuando el artículo 187 habilite la devolución total del Componente de Ahorro Personal, el motor no escogerá silenciosamente entre pensión programada y devolución total.
+
+La entrada `opcion_prestacion_cap` admite `AUTO`, `PENSION_PROGRAMADA` y `DEVOLUCION_TOTAL`. En `AUTO`, si ambas vías requieren una decisión del asegurado, el resultado quedará pendiente hasta que exista una selección expresa.
+
+**Motivo:** la devolución es una facultad del asegurado y cambia la naturaleza del resultado entre renta mensual y pago único.
+
+---
+
+## ADR-030 — La garantía de renta vitalicia no incrementa la pensión inicial
+
+**Estado:** Aceptada
+
+La garantía del artículo 184 se modelará como continuidad futura del pago del CAP cuando el pensionado sobreviva la expectativa de vida utilizada y se extingan los fondos de su cuenta.
+
+No se sumará un complemento a la pensión inicial. La salida conservará la pensión CAP programada, la condición de activación y la referencia al Seguro Colectivo de Renta Vitalicia.
+
+**Motivo:** el seguro cubre el agotamiento posterior del capital; no constituye un aumento inicial de la prestación.
+
+---
+
+## ADR-031 — El bono de reconocimiento requiere un monto oficial o validado
+
+**Estado:** Aceptada
+
+La aplicación no reconstruirá automáticamente el bono de reconocimiento del artículo 183 a partir del historial anual. Aceptará un monto ya determinado y registrará si fue confirmado oficialmente.
+
+Un bono mayor que cero que no esté marcado como confirmado permitirá mostrar un resultado provisional, pero impedirá considerar el cálculo Mixto como completo.
+
+**Motivo:** la Ley define el derecho y la naturaleza del bono, pero la aplicación no dispone todavía de granularidad y reglas reglamentarias suficientes para reconstruir su valor individual con garantías de exactitud.
+
+---
+
+## ADR-032 — Pagos únicos y pensiones mensuales permanecen separados
+
+**Estado:** Aceptada
+
+Las indemnizaciones del componente BD y las devoluciones del CAP se almacenarán como pagos únicos independientes de `pension_mensual_total_estimada`.
+
+Cuando ambos pagos únicos procedan, el motor podrá presentar un total de pagos únicos, pero nunca convertirlo en una pensión mensual.
+
+**Motivo:** evita mezclar prestaciones de naturaleza y periodicidad diferentes en la API, la interfaz y futuros informes.
+
+## ADR-033 — La interfaz Mixto consume el motor integrado y no replica fórmulas
+
+**Estado:** Aceptada
+
+El Paso 6 no implementará fórmulas previsionales Mixto en JavaScript. La interfaz recopila los datos explícitos del CAP y los datos ya validados del asistente, y los envía a `POST /api/simulacion/resultados/mixto`.
+
+La clasificación de modalidad, la decisión pendiente, la pensión programada, las devoluciones, las indemnizaciones y la garantía provienen exclusivamente del backend.
+
+**Motivo:** evita divergencia entre la API y la interfaz y conserva una única fuente de verdad para el cálculo legal.
+
+---
+
+## ADR-034 — Navegación directa condicionada entre pasos del asistente
+
+**Estado:** Aceptada
+
+Los indicadores de progreso y la barra persistente permitirán abrir directamente un paso anterior o posterior que siga teniendo satisfechos sus prerrequisitos. Los pasos no disponibles permanecerán deshabilitados hasta que se completen nuevamente los datos dependientes.
+
+El salto directo reutiliza las funciones existentes de preparación de Historial, Proyección, Retiro y Resultados; no duplica validaciones ni reglas de cálculo.
+
+**Motivo:** permite corregir o revisar datos sin presionar repetidamente `Anterior`, pero evita saltar a resultados que hayan quedado inválidos después de modificar información de origen.
+
+## ADR-026 — Separar saldo SUCGS y garantías
+
+**Decisión:** el SUCGS calcula el componente contributivo a partir de un saldo explícito y no reconstruye todavía ese saldo desde el historial anual. La pensión contributiva, la capa solidaria de los artículos 194 y 195 y la pensión total definitiva se mantienen como niveles separados.
+
+**Motivo:** la reconstrucción del saldo depende del origen previsional del asegurado, aportes previos y posteriores a la reforma y rendimientos efectivos del Fondo Único Solidario. Además, el artículo 197 puede elevar el resultado después de la capa solidaria, por lo que no debe confundirse un resultado intermedio con la pensión definitiva.
+
+## ADR-027 — Versionar referencias solidarias y permitir valores vigentes
+
+**Decisión:** B/.144.00 y B/.265.00 se conservan en `normativa/sucgs.json` como referencias legales al 22/05/2025. El motor permite suministrar valores vigentes confirmados y advierte cuando utiliza las referencias base.
+
+**Motivo:** el artículo 194 somete sus prestaciones a indexación y el artículo 195 establece la Pensión Garantizada Solidaria como un monto de al menos B/.265.00. Tratar esos importes como eternamente fijos produciría resultados desactualizados.
+
+## ADR-028 — Prioridad del artículo 195 en el límite exacto de 240 cuotas
+
+**Decisión:** cuando existen exactamente 240 cuotas y se cumple la edad de referencia, el motor aplica la Pensión Garantizada Solidaria del artículo 195 antes de la regla del numeral 2 del artículo 194.
+
+**Motivo:** el numeral 2 del artículo 194 incluye literalmente hasta 240 cuotas, mientras el artículo 195 concede la Pensión Garantizada Solidaria desde 240 cuotas. La aplicación documenta esta superposición y usa el artículo 195 como regla específica de la garantía mínima, sin ocultar la interpretación adoptada.
+
+## ADR-027 — Preevaluación conservadora del artículo 197
+
+**Decisión:** automatizar las condiciones de número anual de cuotas y distribución temporal con historial anual completo; calcular el salario promedio base como salarios cotizados dividido entre meses cotizados; y exigir confirmación explícita para la estabilidad salarial.
+
+**Motivo:** el artículo 197 formula de manera directa las dos primeras condiciones, mientras el numeral 3 contiene una redacción sobre variación del 30 % cuya aplicación operativa no debe ser corregida ni reinterpretada silenciosamente por la aplicación. La propia Ley dispone que la CSS implemente mecanismos de control. Hasta contar con una regla operativa oficial inequívoca, la confirmación de estabilidad permanece separada y auditable.
+
+**Consecuencia:** `pension_mensual_total_estimada` solo se completa cuando la garantía puede determinarse o cuando una condición comprobada demuestra que no aplica.
+
+## ADR-027 — Integrar SUCGS al Paso 6 sin duplicar fórmulas
+
+**Decisión:** la interfaz SUCGS reutilizará los Pasos 1–5 y enviará al backend el historial, la línea temporal y el escenario de retiro seleccionados. JavaScript no implementará la fórmula del artículo 196 ni las garantías de los artículos 194, 195 y 197.
+
+El año inicial usado para distribuir cuotas en el artículo 197 se tomará del inicio del historial declarado en el Paso 3. La confirmación de que ese historial cubre toda la vida laboral relevante permanecerá como una declaración explícita, y la estabilidad salarial conservará un estado pendiente cuando no exista confirmación suficiente.

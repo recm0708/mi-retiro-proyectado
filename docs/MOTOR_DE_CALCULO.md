@@ -4,7 +4,7 @@
 
 La lógica de cálculo permanece separada de HTML y JavaScript. La interfaz captura y presenta; Python valida y calcula.
 
-La primera modalidad legal implementada es la Pensión de Retiro por Vejez Normal del SEBD. Las demás modalidades SEBD, el Subsistema Mixto y SUCGS continúan en desarrollo.
+El motor cubre las modalidades generales implementadas de SEBD, el Subsistema Mixto y SUCGS por capas hasta la garantía de reemplazo del artículo 197; las extensiones restantes se documentan por subfase.
 
 ## Precisión monetaria y redondeo
 
@@ -288,3 +288,161 @@ La salida no utiliza `pension_mensual_estimada`: el pago se conserva en `indemni
 La salida tampoco asigna valores ficticios a campos de pensión proporcional: `factor_proporcional_cuotas` y `monto_despues_factor_proporcional` quedan en `null` durante una Indemnización por Vejez.
 
 La clasificación deja de ofrecer esta indemnización a partir del 01/03/2036 y devuelve la transición a SUCGS.
+
+
+## Paso 6D.1 — motor preliminar del Subsistema Mixto
+
+Archivos principales:
+
+```text
+app/motores/mixto.py
+app/modelos/pension.py
+app/core/normativa.py
+normativa/mixto.json
+```
+
+### Componente de Beneficio Definido
+
+El motor transforma el historial original a un historial de participación BD:
+
+```text
+salario BD anual aproximado =
+min(salario cotizado anual, B/.500.00 × cuotas del año)
+```
+
+Esta fórmula es una aproximación necesaria cuando solo existe información anual. El límite jurídico es mensual; por tanto, si el salario original supera el límite anual aproximado, el resultado incluye una advertencia y no se presenta como reproducción exacta de la cuenta oficial.
+
+El historial resultante se entrega al clasificador general SEBD para determinar modalidad, tasa y factores. El máximo monetario del componente Mixto se recalcula en B/.500.00 mensuales antes de aplicar los factores proporcional y de reducción por edad que correspondan.
+
+### Componente de Ahorro Personal
+
+La pensión programada se representa como:
+
+```text
+capital considerado =
+saldo ahorrado/capitalizado + bono de reconocimiento aplicable
+
+pensión programada mensual =
+capital considerado / valor actuarial de expectativa de vida
+```
+
+El valor actuarial depende de las bases biométricas y de la tasa de descuento adoptadas por la Junta Directiva. La aplicación no dispone todavía de un valor oficial público versionado por fecha y no lo sustituye por factores del SUCGS.
+
+Si falta el saldo o el valor actuarial, el componente CAP queda sin cálculo y la pensión total Mixto permanece en `None`.
+
+### Suma de componentes
+
+La pensión mensual total solo se materializa cuando:
+
+```text
+BD disponible
+AND
+CAP disponible
+```
+
+Entonces:
+
+```text
+pensión Mixto =
+pensión BD + pensión programada CAP
+```
+
+### Transición
+
+Antes del cálculo se verifica:
+
+```text
+sistema seleccionado = SUCGS
+OR
+fecha retiro >= 01/03/2032
+```
+
+En cualquiera de esos casos el motor no calcula una pensión bajo Mixto.
+
+La fecha 01/03/2032 se utiliza conforme al artículo 188 y al reglamento de incorporación al componente contributivo de capitalización solidaria. La referencia a 01/03/2036 existente en el artículo 153 se conserva documentada como discrepancia pendiente de interpretación definitiva.
+
+## Motor Mixto 6D.2 — decisión CAP y pagos únicos
+
+Después de calcular el componente BD, el motor determina si el artículo 187 habilita devolución CAP:
+
+```text
+fecha retiro >= fecha referencia
+AND
+cuotas < 240
+```
+
+Cuando la devolución está disponible:
+
+```text
+AUTO
+  → decisión pendiente
+
+PENSION_PROGRAMADA
+  → requiere saldo + divisor actuarial
+
+DEVOLUCION_TOTAL
+  → pago único del capital considerado
+```
+
+Para una devolución total no se exige divisor actuarial porque no existe conversión a renta programada.
+
+Cuando el BD genera indemnización y se elige devolución CAP:
+
+```text
+pago único total
+=
+indemnización BD
++
+devolución CAP
+```
+
+Cuando el BD genera pensión proporcional y se elige devolución CAP:
+
+```text
+pensión mensual total = pensión BD
+pago único CAP = devolución de la cuenta
+```
+
+La garantía de renta vitalicia se registra como una condición futura y no modifica el importe inicial de la pensión programada CAP.
+
+## Integración Mixto con Pasos 1–5
+
+La capa `servicios/resultados_mixto.py` no implementa fórmulas previsionales nuevas. Su función es construir los registros hasta la fecha de retiro elegida, respetar el prorrateo de años proyectados y resolver las cuotas excedentes por momento antes de entregar los datos al motor Mixto.
+
+Los datos del CAP se transmiten sin reconstrucción automática. Esto mantiene la regla arquitectónica de que un dato actuarial u oficial ausente permanece ausente.
+
+## SUCGS 6E.3 — componente contributivo, capa solidaria y reemplazo mínimo
+
+Entrada mínima: fecha de nacimiento, sexo, fecha de retiro, cuotas totales y saldo del Componente Contributivo de Capitalización Solidaria. Opcionalmente se reciben valores solidarios vigentes confirmados.
+
+Fórmula contributiva:
+
+```text
+pension_contributiva_mensual =
+    saldo_capitalizacion_solidaria / 1000
+    × factor_pensionamiento_actuarial(edad)
+```
+
+Después se aplican los artículos 194 y 195. Con 240 o más cuotas y edad de referencia, la Pensión Garantizada Solidaria se usa como mínimo. Con menos de 240 cuotas, la capa solidaria del artículo 194 se evalúa desde los 65 años.
+
+Después de obtener `pension_despues_componente_solidario`, el motor evalúa el artículo 197. Las condiciones de cuotas y distribución usan el historial anual completo; la estabilidad salarial requiere confirmación explícita. Cuando todas las condiciones están determinadas, la pensión total es el mayor valor entre el resultado de las capas anteriores y la garantía de reemplazo aplicable.
+
+### Fórmula de la garantía del artículo 197
+
+Con 240 o más cuotas:
+
+`garantía = salario_promedio_base_mensual × 60 %`
+
+Cuando la Ley admite una pensión con requisito de cuotas inferior y se cumplen las condiciones del artículo 197:
+
+`tasa proporcional = 60 % × cuotas / 240`
+
+`garantía = salario_promedio_base_mensual × tasa proporcional`
+
+El salario promedio base mensual se obtiene como `total salarios cotizados / total meses cotizados`. La aplicación no interpreta automáticamente la condición de estabilidad salarial del numeral 3.
+
+## SUCGS 6E.4 — integración con el asistente
+
+La capa `app/servicios/resultados_sucgs.py` reutiliza `_buscar_escenario_retiro`, `_buscar_escenario_salarial` y `_construir_registros_hasta_retiro`. De este modo no se duplican reglas de proyección ni prorrateo en el motor SUCGS.
+
+El saldo solidario continúa siendo un dato explícito. El historial anual consolidado hasta el retiro se utiliza para la preevaluación del artículo 197. Si la fecha de retiro requiere salarios futuros, estos se incorporan desde el escenario del Paso 4 y quedan identificados en `anios_proyectados_incluidos`.
