@@ -137,10 +137,9 @@ Otros regímenes especiales deberán incorporarse solo después de documentar su
 
 ## 7. Herramientas oficiales de verificación del asegurado
 
-Estas herramientas son de orientación/verificación individual y no constituyen una fuente normativa del motor:
+Estas herramientas son de orientación/verificación individual y no constituyen una fuente normativa del motor. Mi Retiro Seguro se consulta desde el ecosistema de Mi Caja Digital, por lo que no se presenta como recurso independiente en la interfaz:
 
 - [Mi Caja Digital — acceso](https://micajadigital.css.gob.pa/Auth/SignIn)
-- [Categoría Mi Retiro Seguro — comunicaciones CSS](https://prensa.css.gob.pa/category/mi-retiro-seguro/)
 
 ## 8. Regla de mantenimiento de enlaces y parámetros
 
@@ -154,3 +153,16 @@ Cuando cambie una norma, un monto indexado, una tabla actuarial o una fecha oper
 6. registrar la decisión en `docs/DECISIONES.md` cuando exista interpretación o conflicto entre fuentes.
 
 **Última verificación de enlaces públicos de esta edición documental:** 11 de agosto de 2026.
+
+
+### 8.1. Uso de enlaces en la interfaz
+
+Desde 6F.2, la vista `Ver cálculo completo` consume los enlaces de `fuentes_oficiales` definidos en `normativa/*.json`. De esta manera, cada resultado puede abrir la fuente oficial sin duplicar URLs en JavaScript. La futura página de metodología 6F.3 reutilizará el mismo registro.
+
+## 9. Presentación en la interfaz 6F.3
+
+La ruta `/metodologia` constituye el punto central visible de consulta normativa. Reutiliza las URLs versionadas en `normativa/*.json`, las agrupa por sistema y mantiene separadas las fuentes legales, reglamentarias, de orientación y los recursos de verificación individual.
+
+En `Ver cálculo completo`, los IDs internos de integración (`texto_unico`, `ley_462`, `reglamento_calculo`, etc.) no se presentan literalmente. Cada paso muestra el título humano de la fuente y un enlace oficial cuando está disponible.
+
+La página de metodología no sustituye este documento técnico: la interfaz está orientada al usuario final y este archivo conserva el inventario y las notas de mantenimiento del repositorio.

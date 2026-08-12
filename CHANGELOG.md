@@ -4,9 +4,21 @@ Todos los cambios relevantes del proyecto se documentan aquí.
 
 El proyecto todavía no ha publicado una versión estable; los cambios actuales se acumulan bajo **Unreleased** para la futura versión `0.1.0`.
 
+
 ## [Unreleased]
 
 ### Agregado
+
+#### Cierre funcional 6F
+
+- 6F.1: comparador transversal de escenarios de retiro y salario.
+- 6F.2: `Ver cálculo completo` con trazabilidad de datos, regla, fórmula, sustitución y resultado.
+- 6F.3: página `/metodologia`, enlaces normativos con nombres humanos y recursos oficiales de verificación.
+- 6F.4: contrato transversal `resumen_unificado` para SEBD, Mixto y SUCGS.
+- El comparador consume el contrato común en lugar de extraer montos con semánticas distintas de cada motor.
+- El Paso 6 presenta un resumen final homogéneo que mantiene separadas mensualidades y pagos únicos.
+- La suite alcanza **69 pruebas automatizadas**.
+- Mi Retiro Seguro deja de mostrarse como recurso independiente; la verificación individual queda centralizada en Mi Caja Digital junto con el régimen especial identificado.
 
 #### Asistente y base técnica
 
@@ -57,9 +69,18 @@ El proyecto todavía no ha publicado una versión estable; los cambios actuales 
 - Estabilidad salarial del artículo 197 como condición explícita y auditable.
 - Endpoints directos e integrados e interfaz completa en el Paso 6.
 
+#### Comparación 6F.1
+
+- Comparador transversal de escenarios de retiro y trayectorias salariales.
+- Endpoint `POST /api/simulacion/comparar-escenarios` que reutiliza los servicios integrados SEBD, Mixto y SUCGS.
+- Escenario base explícito y diferencias mensuales absolutas y porcentuales.
+- Pagos únicos separados de pensiones mensuales dentro de la matriz comparativa.
+- Advertencias de saldo constante para comparaciones hipotéticas Mixto y SUCGS.
+- Página `/comparar` habilitada con selección de escenarios y tabla responsiva.
+
 #### Pruebas
 
-- Suite automatizada con **57 pruebas** antes del bloque 6F.
+- Suite automatizada con **60 pruebas** después de 6F.1.
 - Casos para precisión monetaria, proyecciones, línea temporal y retiro.
 - Regresiones SEBD para modalidades e indemnización.
 - Casos Mixto para pensión programada, devolución, garantías y pagos únicos.
@@ -100,11 +121,15 @@ El proyecto todavía no ha publicado una versión estable; los cambios actuales 
 - Numeración duplicada y no consecutiva de ADR en la documentación.
 - Secciones documentales obsoletas que seguían marcando como pendientes motores ya implementados.
 
-### Pendiente para 6F y fases posteriores
+### Pendiente para fases posteriores
 
-- Comparación transversal final entre escenarios de retiro y escenarios salariales.
-- Vista de metodología y fuentes desde la interfaz.
-- Desglose auditable de fórmula, sustitución numérica, redondeo y límites.
 - Preparación de estructura para informes y PDF.
 - Persistencia voluntaria con SQLite.
 - Pulido final de identidad visual, temas, accesibilidad y enlaces institucionales.
+
+### 6F.3 — Metodología y fuentes
+
+- Se agrega `/metodologia` como punto central de consulta de metodología, artículos, reglamentos, resoluciones y recursos oficiales.
+- `Ver cálculo completo` deja de mostrar identificadores internos como `texto_unico` o `ley_462`; ahora presenta nombres humanos y enlaces oficiales.
+- Se centraliza la presentación de fuentes de SEBD, Mixto y SUCGS reutilizando las URLs versionadas de `normativa/*.json`.
+- Se documentan limitaciones conocidas, jerarquía de fuentes y recursos oficiales de verificación individual.

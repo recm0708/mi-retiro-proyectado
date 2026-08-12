@@ -205,21 +205,21 @@ El análisis debe mantener separado el total histórico de la proyección futura
 
 **RF-070.** Los datos históricos y proyectados deben mantenerse distinguibles en API e interfaz.
 
-## 9. Bloque 6F — requisitos pendientes
+## 9. Bloque 6F — cierre funcional y transparencia
 
-El siguiente bloque debe agregar:
+**RF-071.** Comparación transversal entre escenarios de retiro. **Implementado en 6F.1.**
 
-**RF-071.** Comparación transversal entre escenarios de retiro.
+**RF-072.** Comparación entre escenarios salariales. **Implementado en 6F.1.**
 
-**RF-072.** Comparación entre escenarios salariales.
+La comparación debe reutilizar los motores existentes, conservar un escenario base, separar pensiones mensuales de pagos únicos y advertir cuando un saldo específico se reutiliza como hipótesis para una fecha alternativa.
 
-**RF-073.** Vista `Ver cálculo completo` con dato → regla → fórmula → sustitución → resultado intermedio → redondeo/límite → resultado final.
+**RF-073.** Vista `Ver cálculo completo` con dato → regla → fórmula → sustitución → resultado intermedio → redondeo/límite → resultado final. **Implementado en 6F.2.**
 
-**RF-074.** Enlaces clicables a la fuente normativa aplicable desde Resultados o una vista de metodología.
+**RF-074.** Enlaces clicables a la fuente normativa aplicable desde Resultados o una vista de metodología. **Implementado en 6F.2–6F.3.**
 
-**RF-075.** Página o sección de Metodología y fuentes.
+**RF-075.** Página o sección de Metodología y fuentes. **Implementado en 6F.3.**
 
-**RF-076.** Estructura de salida reutilizable por futuros informes PDF.
+**RF-076.** Estructura de salida reutilizable por futuros informes PDF. **Implementado como contrato transversal en 6F.4.**
 
 ## 10. Fuera del alcance inmediato
 
@@ -231,3 +231,15 @@ Quedan para fases posteriores:
 - regímenes especiales no implementados;
 - reconstrucción completa de cuentas CAP/SUCGS desde movimientos mensuales oficiales;
 - identidad visual final, temas y revisión integral WCAG 2.2.
+
+### RF-077 — Página transversal de metodología y fuentes
+
+**Implementado en 6F.3.** La aplicación ofrece una página permanente de metodología y fuentes que permite consultar la jerarquía normativa, los artículos utilizados por sistema, los reglamentos y resoluciones relacionados y los recursos oficiales de verificación.
+
+### RF-078 — Etiquetas humanas para fuentes de trazabilidad
+
+**Implementado en 6F.3.** Los identificadores técnicos de fuentes permanecen internos. `Ver cálculo completo` muestra títulos comprensibles y enlaces oficiales cuando están disponibles.
+
+### RF-079 — Contrato transversal de resultado final
+
+**Implementado en 6F.4.** Los resultados integrados de SEBD, Mixto y SUCGS deben exponer un resumen común con estado del cálculo, naturaleza de la prestación, pensión mensual, pago único, modalidad, escenario y advertencias, sin recalcular la prestación ni borrar el desglose específico de cada motor.

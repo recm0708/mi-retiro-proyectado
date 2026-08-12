@@ -251,18 +251,48 @@ La validación automatizada usa `unittest` y cubre:
 - SUCGS;
 - servicios integrados.
 
-Estado previo a 6F: **57 pruebas**.
+Estado después del cierre 6F.4: **69 pruebas**.
 
 Ver [VALIDACION.md](VALIDACION.md).
 
-## 10. Próxima evolución — 6F
+## 10. Capa transversal 6F
 
-El siguiente bloque añadirá una capa transversal sobre los motores ya implementados:
+6F.1 agrega:
 
-- comparador de escenarios;
-- metodología visible;
-- desglose completo y auditable;
-- enlaces normativos clicables;
-- estructura preparada para informes.
+- `app/modelos/comparacion.py` para solicitudes y salidas normalizadas;
+- `app/servicios/comparador.py` para coordinar los tres motores sin replicar fórmulas;
+- `POST /api/simulacion/comparar-escenarios`;
+- `app/static/js/comparador.js` y la página `/comparar`.
 
-Esta capa debe consumir resultados de los motores existentes; no debe crear una cuarta implementación de las fórmulas.
+6F.2 agrega `app/servicios/trazabilidad.py` y `app/modelos/trazabilidad.py`. El servicio no recalcula prestaciones: transforma resultados ya emitidos por los motores en una cadena auditable y obtiene las URLs oficiales desde `normativa/*.json`.
+
+6F.3 agrega la metodología visible y los enlaces normativos clicables. 6F.4 agrega el contrato transversal de resultado final reutilizable por comparador, interfaz y futuros informes.
+
+Toda la capa 6F consume resultados de los motores existentes; no crea una cuarta implementación de las fórmulas.
+
+## Metodología 6F.3
+
+La ruta `GET /metodologia` renderiza un catálogo transversal construido por `app/servicios/fuentes_normativas.py`. El servicio reutiliza las URLs de `normativa/*.json` y añade únicamente títulos, agrupación y alcance para la interfaz.
+
+La trazabilidad 6F.2 conserva IDs estables para relacionar pasos con fuentes, pero `resultados.js` resuelve esos IDs contra `trazabilidad.fuentes` antes de mostrarlos. Los IDs internos no forman parte de la experiencia visible del usuario.
+
+## Capa transversal de resultado final — 6F.4
+
+`app/modelos/resultado_unificado.py` define el contrato común `ResumenPrestacionUnificada`. `app/servicios/resultado_unificado.py` adapta resultados ya calculados de SEBD, Mixto y SUCGS sin ejecutar fórmulas previsionales.
+
+Flujo:
+
+```text
+Motor específico
+    ↓
+Resultado integrado del sistema
+    ↓
+Trazabilidad 6F.2
+    ↓
+Resumen unificado 6F.4
+    ↓
+Paso 6 / Comparador / futuras exportaciones
+```
+
+`calculo` conserva siempre el detalle jurídico completo. `resumen_unificado` existe para semántica transversal y no puede convertirse en una cuarta capa de cálculo.
+

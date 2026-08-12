@@ -427,3 +427,46 @@ El salto directo reutiliza las funciones existentes de preparación de Historial
 **Decisión:** la interfaz SUCGS reutilizará los Pasos 1–5 y enviará al backend el historial, la línea temporal y el escenario de retiro seleccionados. JavaScript no implementará la fórmula del artículo 196 ni las garantías de los artículos 194, 195 y 197.
 
 El año inicial usado para distribuir cuotas en el artículo 197 se tomará del inicio del historial declarado en el Paso 3. La confirmación de que ese historial cubre toda la vida laboral relevante permanecerá como una declaración explícita, y la estabilidad salarial conservará un estado pendiente cuando no exista confirmación suficiente.
+
+
+## ADR-041 — El comparador coordina motores y no recalcula fórmulas
+
+**Estado:** Aceptada
+
+**Decisión:** la comparación transversal de 6F.1 construirá combinaciones de fecha de retiro y escenario salarial y delegará cada cálculo al servicio integrado SEBD, Mixto o SUCGS. La capa transversal solo normaliza resultados y calcula diferencias contra una combinación base.
+
+Para Mixto y SUCGS, cuando se evalúe una fecha alternativa se reutilizarán explícitamente los saldos y parámetros específicos ingresados en el Paso 6 y se mostrará una advertencia de escenario hipotético con saldo constante. No se proyectarán silenciosamente cuentas CAP o de Capitalización Solidaria.
+
+**Motivo:** evita una cuarta implementación de fórmulas previsionales y, al mismo tiempo, impide presentar como proyección actuarial un saldo futuro que la aplicación todavía no puede reconstruir con datos oficiales suficientes.
+
+
+## ADR-042 — La trazabilidad explica resultados y no recalcula prestaciones
+
+**Estado:** Aceptada
+
+**Decisión:** `Ver cálculo completo` se construye en backend a partir del resultado ya emitido por cada motor. La capa transversal puede presentar datos, reglas, fórmulas, sustituciones, redondeos y fuentes, pero no vuelve a ejecutar ni replica la lógica jurídica del motor.
+
+Los enlaces oficiales provienen de `normativa/*.json`; JavaScript solo renderiza la estructura recibida.
+
+**Motivo:** evita inconsistencias entre la cifra mostrada y su explicación, permite reutilizar una misma estructura en SEBD, Mixto y SUCGS y prepara la futura metodología 6F.3 y los informes sin crear una cuarta implementación de las fórmulas previsionales.
+
+## ADR-043 — Las fuentes visibles usan nombres humanos y metadatos versionados
+
+**Estado:** Aceptada
+
+**Decisión:** los identificadores internos como `texto_unico`, `ley_462` o `reglamento_cccs` no se mostrarán literalmente al usuario. La interfaz resolverá cada identificador contra el catálogo de fuentes recibido del backend y presentará el título humano y, cuando exista, un enlace oficial.
+
+La página `/metodologia` reutiliza las URLs versionadas de `normativa/*.json` y las agrupa por SEBD, Mixto y SUCGS. La capa de presentación puede añadir etiquetas y alcance, pero no sustituye la fuente normativa ni introduce reglas de cálculo.
+
+**Motivo:** los IDs internos son adecuados para integrar servicios, pero no son una referencia jurídica legible. Mantener títulos humanos y enlaces oficiales mejora la auditabilidad sin duplicar URLs ni fórmulas en JavaScript.
+
+## ADR-044 — Contrato transversal común para el resultado final
+
+**Estado:** Aceptada
+
+**Decisión:** los resultados integrados de SEBD, Mixto y SUCGS expondrán un `resumen_unificado` con la misma semántica para estado, naturaleza de la prestación, monto mensual, pago único, modalidad, escenario, datos no confirmados y advertencias.
+
+El resumen transversal se construye después de ejecutar el motor y la trazabilidad. No recalcula importes ni sustituye `calculo`, que continúa siendo el desglose jurídico específico de cada sistema. El comparador debe consumir este contrato común cuando normalice filas.
+
+**Motivo:** evita que la interfaz, el comparador y futuros informes mantengan tres interpretaciones distintas de conceptos equivalentes. También garantiza que una indemnización o devolución no pueda confundirse con una pensión mensual y que los estados pendientes o de transición conserven una interpretación homogénea.
+

@@ -29,12 +29,15 @@ La próxima versión `0.1.0` continúa en desarrollo. El asistente de seis pasos
 | Paso 6 — Resultados Mixto | Implementado |
 | Paso 6 — Resultados SUCGS | Implementado |
 | Navegación directa entre pasos | Implementada |
-| Comparación transversal y transparencia final — 6F | Siguiente bloque |
+| Comparador de escenarios — 6F.1 | Implementado |
+| Ver cálculo completo — 6F.2 | Implementado |
+| Metodología y fuentes — 6F.3 | Implementado |
+| Unificación final de resultados — 6F.4 | Implementado |
 | Persistencia permanente / SQLite | Pendiente |
 | Informes PDF | Pendiente |
 | Pulido final de identidad, accesibilidad y temas | Pendiente después de 6F |
 
-La suite actual contiene **57 pruebas automatizadas** antes del bloque 6F.
+La suite actual contiene **69 pruebas automatizadas** después del cierre transversal 6F.4.
 
 ## 3. Qué permite hacer el asistente
 
@@ -49,7 +52,8 @@ El usuario puede:
 7. construir escenarios de retiro por fecha y años adicionales;
 8. seleccionar directamente cualquier paso disponible para revisar datos;
 9. calcular la prestación aplicable según el motor del sistema seleccionado;
-10. ver componentes mensuales, pagos únicos, factores y advertencias cuando correspondan.
+10. ver componentes mensuales, pagos únicos, factores y advertencias cuando correspondan;
+11. comparar combinaciones de fechas de retiro y escenarios salariales contra un escenario base, con diferencias absolutas y porcentuales.
 
 ## 4. Alcance de los motores
 
@@ -279,6 +283,10 @@ Documentos clave:
 - [Validación](docs/VALIDACION.md)
 - [Roadmap](docs/ROADMAP.md)
 
-## 15. Próximo bloque
+## 15. Cierre de la Fase 6 y siguiente trabajo
 
-El siguiente bloque es **6F — comparación transversal, metodología y transparencia del cálculo**. Después se abordará el pulido general de UX, accesibilidad, temas visuales, identidad independiente, enlaces institucionales y preparación de informes.
+La **Fase 6 — Resultados, comparación y transparencia** queda cerrada funcionalmente con 6F.1–6F.4. Los tres sistemas comparten ahora una salida transversal que conserva por separado pensiones mensuales, pagos únicos, estado del cálculo, naturaleza de la prestación, modalidad, advertencias y trazabilidad.
+
+La página `/metodologia` centraliza las fuentes legales y reglamentarias utilizadas por los motores. `Ver cálculo completo` presenta datos, reglas, fórmulas, sustituciones y enlaces oficiales con nombres legibles.
+
+Los siguientes bloques del roadmap son persistencia/informes y el pulido de producto: identidad visual, accesibilidad, temas, pie de página, enlaces institucionales y mejoras responsivas.

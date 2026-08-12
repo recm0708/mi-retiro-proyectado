@@ -304,3 +304,45 @@ dato de entrada
 ```
 
 Esta estructura se diseñará para reutilizarse en la interfaz comparativa y en futuros informes PDF.
+
+
+## Comparación transversal — 6F.1
+
+`app/modelos/comparacion.py` define una capa normalizada que no sustituye los modelos de cada motor.
+
+- `DatosComparacionEscenarios`: sistema, bloque integrado correspondiente, filtros de fechas de retiro y escenarios salariales.
+- `FilaComparacionEscenario`: fecha, edad, cuotas, modalidad/prestación, pensión mensual, pago único, estado y diferencias contra la base.
+- `ResumenComparacionEscenarios`: matriz completa, conteos, mejor pensión mensual comparable y advertencias globales.
+
+Los pagos únicos y las pensiones mensuales permanecen en campos separados.
+
+
+## 11. Trazabilidad 6F.2
+
+`app/modelos/trazabilidad.py` define una representación transversal que no sustituye los modelos de cada motor:
+
+- `DatoTrazabilidad`: dato, valor, origen y estado de confirmación;
+- `PasoTrazabilidad`: regla, fórmula, sustitución, resultado, redondeo y fuentes;
+- `FuenteTrazabilidad`: referencia oficial, artículos y URL;
+- `ResumenTrazabilidadCalculo`: secuencia completa y resultado final tipificado.
+
+Los modelos integrados `ResumenResultadoSEBD`, `ResumenResultadoMixto` y `ResumenResultadoSUCGS` incluyen `trazabilidad`. Esta propiedad es explicativa: el importe legal continúa proviniendo del campo `calculo` generado por el motor correspondiente.
+
+## Resultado transversal 6F.4
+
+`app/modelos/resultado_unificado.py` incorpora `ResumenPrestacionUnificada` con campos comunes a los tres sistemas:
+
+- sistema y nombre visible;
+- escenario de retiro y salarial;
+- fecha, edad y cuotas;
+- modalidad/código;
+- estado del resultado;
+- naturaleza de la prestación;
+- pensión mensual estimada;
+- pago único estimado;
+- decisión requerida;
+- datos no confirmados;
+- advertencias.
+
+Los modelos `ResumenResultadoSEBD`, `ResumenResultadoMixto` y `ResumenResultadoSUCGS` incluyen ahora `resumen_unificado`. El desglose específico continúa en `calculo` y la explicación en `trazabilidad`.
+

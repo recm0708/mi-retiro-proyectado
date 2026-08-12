@@ -26,7 +26,7 @@ Este archivo es el punto de entrada para la documentación técnica, funcional y
 | [MODALIDADES_MIXTO.md](MODALIDADES_MIXTO.md) | Componentes y prestaciones del Subsistema Mixto. |
 | [MODALIDADES_SUCGS.md](MODALIDADES_SUCGS.md) | Capas del Sistema Único de Capitalización con Garantía Solidaria. |
 | [VALIDACION.md](VALIDACION.md) | Estrategia de pruebas, regresiones y casos sintéticos. |
-| [ROADMAP.md](ROADMAP.md) | Fases terminadas, fase 6F y trabajo posterior. |
+| [ROADMAP.md](ROADMAP.md) | Fases terminadas, cierre de 6F y trabajo posterior. |
 
 ## 3. Archivos normativos versionados
 
@@ -52,3 +52,7 @@ Cuando un cambio altere una fórmula, parámetro, flujo o fuente legal, no se de
 - pruebas;
 - documentación técnica;
 - fuentes oficiales.
+
+## 6. Consulta desde la interfaz
+
+La aplicación expone `/metodologia` como versión navegable de la metodología y de las principales fuentes oficiales. Para mantenimiento técnico y trazabilidad completa siguen siendo autoritativos los documentos de este directorio y `normativa/*.json`.

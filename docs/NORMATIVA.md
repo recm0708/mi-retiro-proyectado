@@ -250,3 +250,7 @@ Cuando cambie una fuente:
 7. reflejar el cambio en `CHANGELOG.md`.
 
 La aplicación debe favorecer resultados **auditables y conservadores** frente a una precisión aparente basada en parámetros inventados.
+
+## Presentación de fuentes en 6F.3
+
+Los enlaces normativos continúan versionados en `normativa/*.json`. La interfaz no debe duplicar URLs en JavaScript. `app/servicios/fuentes_normativas.py` transforma esos metadatos en un catálogo humano para `/metodologia`, mientras la trazabilidad resuelve los IDs internos a títulos y enlaces oficiales.

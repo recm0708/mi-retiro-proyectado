@@ -295,3 +295,40 @@ Toda nueva fórmula o interpretación normativa debe incluir al menos:
 - caso de dato faltante cuando la ausencia sea legalmente relevante.
 
 Si una corrección responde a un error encontrado manualmente, debe añadirse una regresión automatizada antes de cerrar el cambio.
+
+
+## Comparador 6F.1
+
+La suite incorpora `tests/test_comparador.py` con tres regresiones transversales:
+
+1. SEBD reproduce B/.741.59 como base y B/.765.67 en +1 año, con diferencia de B/.24.08.
+2. Mixto normaliza B/.856.25 como pensión mensual y mantiene separado cualquier pago único.
+3. SUCGS normaliza el caso maestro de B/.477.00 como resultado mensual completo.
+
+Estado después de 6F.1: **60 pruebas automatizadas en OK**.
+
+
+## 12. Validación 6F.2
+
+La suite contiene **63 pruebas**. `tests/test_trazabilidad.py` valida tres cadenas explicativas:
+
+1. SEBD normal: salario base, tasa y resultado mensual;
+2. Mixto: separación BD/CAP y suma mensual;
+3. SUCGS: fórmula saldo ÷ 1,000 × factor y evaluación del artículo 197.
+
+También se verifica que las fuentes expuestas por la trazabilidad utilicen URLs oficiales `https://` cargadas desde los JSON normativos.
+
+## Validación 6F.3
+
+Se valida que el catálogo incluya SEBD, Mixto y SUCGS, que sus fuentes tengan URLs HTTPS y títulos legibles y que `/metodologia` responda correctamente incluyendo el Texto Único, la Resolución 57,805-2025-J.D. y el acceso a Mi Caja Digital.
+
+## Validación 6F.4
+
+La suite queda en **69 pruebas automatizadas**. `tests/test_resultado_unificado.py` valida el contrato transversal en tres situaciones: 
+
+1. SEBD: una Indemnización por Vejez se normaliza como **pago único** y no como pensión mensual;
+2. Mixto: una decisión pendiente del CAP conserva `DECISION_REQUERIDA` y no finge un cálculo completo;
+3. SUCGS: el caso completo de B/.477.00 se conserva como **pensión mensual** sin pago único.
+
+Las pruebas integradas existentes de SEBD, Mixto y SUCGS también comprueban que los servicios anexen `resumen_unificado` sin modificar las cifras de regresión validadas. El comparador consume este resumen común y continúa calculando diferencias sin replicar fórmulas previsionales.
+

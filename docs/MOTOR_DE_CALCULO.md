@@ -307,12 +307,31 @@ El motor actual no debe ocultar estas limitaciones:
 - estabilidad salarial del artículo 197 puede requerir confirmación explícita;
 - regímenes especiales no están cubiertos por el motor general.
 
-## 13. Próximo bloque — 6F
+## 13. Capa explicativa 6F.2
 
-6F no debe modificar las fórmulas ya validadas salvo que se detecte un error. Su objetivo es añadir una capa transversal para:
+La función de 6F.2 es explicar, no recalcular. `app/servicios/trazabilidad.py` recibe los resultados integrados y construye una secuencia: dato → regla → fórmula → sustitución → resultado intermedio → redondeo/condición → resultado final.
 
-- comparar escenarios;
-- exponer metodología;
-- mostrar sustitución numérica;
-- enlazar fuentes;
-- preparar informes.
+La capa usa los valores ya producidos por SEBD, Mixto y SUCGS. Por diseño, una divergencia entre la traza y el motor debe corregirse en la traza; nunca se introduce una segunda fórmula legal en JavaScript.
+
+Las fuentes enlazadas se leen de `normativa/sebd.json`, `normativa/mixto.json` y `normativa/sucgs.json`.
+
+## 14. Resultado transversal 6F.4
+
+`app/servicios/resultado_unificado.py` recibe el resultado integrado ya calculado y normaliza únicamente conceptos comunes:
+
+- estado del cálculo;
+- naturaleza de la prestación;
+- pensión mensual;
+- pago único;
+- modalidad;
+- escenario;
+- decisión pendiente;
+- datos no confirmados;
+- advertencias.
+
+No contiene fórmulas legales. El comparador y la interfaz pueden consumir este contrato común sin conocer la estructura interna específica de cada motor.
+
+## 15. Estado del bloque 6F
+
+6F.1–6F.4 están completados para el alcance actual: comparación, trazabilidad, metodología/fuentes y unificación transversal. Las ampliaciones posteriores deben reutilizar estas capas y no duplicar cálculos previsionales.
+

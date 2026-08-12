@@ -125,7 +125,7 @@ Pendiente específico:
 
 ## 6. Fase 6 — Resultados, comparación y transparencia
 
-**Estado:** en desarrollo.
+**Estado:** completada para el alcance funcional actual.
 
 ### 6.1. Paso 6 por sistema
 
@@ -139,18 +139,42 @@ Pendiente específico:
 - advertencias y datos no confirmados;
 - fuentes normativas en backend.
 
-### 6.2. Bloque 6F — siguiente trabajo
+### 6.2. Bloque 6F
 
-Pendiente:
+**6F.1 — completado:**
 
 - comparador transversal entre escenarios de retiro;
 - comparación entre escenarios salariales;
-- diferencias absolutas y porcentuales;
-- metodología visible desde la interfaz;
-- botón o panel **Ver cálculo completo**;
-- cadena auditable: dato → regla → fórmula → sustitución → resultado intermedio → redondeo → límite/garantía → resultado final;
-- enlaces clicables a las fuentes normativas aplicables;
-- preparación del resultado estructurado para informes futuros.
+- diferencias absolutas y porcentuales contra un escenario base;
+- separación de pensión mensual y pago único;
+- advertencias explícitas cuando Mixto o SUCGS reutilizan saldos constantes en fechas alternativas.
+
+**6F.2 — completado:**
+
+- trazabilidad transversal para SEBD, Mixto y SUCGS;
+- datos utilizados y su origen;
+- regla, fórmula, sustitución y resultado por paso;
+- resultado final tipificado como mensual, pago único o pendiente;
+- enlaces oficiales cargados desde `normativa/*.json`;
+- vista colapsable `Ver cálculo completo` en el Paso 6.
+
+**6F.3 — completado:**
+
+- página `/metodologia`;
+- jerarquía de fuentes y normativa por sistema;
+- enlaces oficiales con nombres legibles;
+- limitaciones e interpretaciones documentadas;
+- recursos oficiales de verificación individual.
+
+**6F.4 — completado:**
+
+- contrato transversal común para SEBD, Mixto y SUCGS;
+- estado homogéneo del cálculo;
+- separación común entre pensión mensual y pago único;
+- naturaleza de la prestación normalizada;
+- comparador alimentado por el resumen transversal en lugar de extraer campos distintos de cada motor;
+- resumen final unificado en el Paso 6;
+- estructura preparada para persistencia e informes posteriores.
 
 ## 7. Fase 7 — Persistencia e informes
 
@@ -184,10 +208,26 @@ Previsto:
 
 ## 9. Estado de validación
 
-Antes del bloque 6F:
+Después del cierre 6F.4:
 
-- **57 pruebas automatizadas** en `OK`;
+- **69 pruebas automatizadas** en `OK`;
 - regresión SEBD real anonimizada;
 - casos sintéticos de Mixto;
 - casos sintéticos SUCGS;
 - validaciones visuales de los tres motores integrados.
+
+### 6F.3 — Metodología y fuentes — completado
+
+- página `/metodologia`;
+- jerarquía de fuentes y normativa por sistema;
+- enlaces oficiales reutilizados desde metadatos versionados;
+- IDs internos de trazabilidad reemplazados visualmente por títulos humanos;
+- limitaciones e interpretaciones conocidas visibles.
+
+### 6F.4 — Unificación final — completado
+
+- resumen común `SEBD / Mixto / SUCGS`;
+- mensualidades y pagos únicos con la misma semántica;
+- estados `COMPLETO / INCOMPLETO / DECISION_REQUERIDA / NO_ELEGIBLE / TRANSICION`;
+- comparador reutilizando el contrato común;
+- salida reutilizable para informes futuros.
