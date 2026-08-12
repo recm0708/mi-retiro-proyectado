@@ -147,6 +147,362 @@
       </div>
 
 
+      <!-- Configuración específica del Subsistema Mixto. -->
+
+      <div
+        id="resultado-config-mixto"
+        class="results-calculation-card d-none"
+      >
+
+        <div class="results-section-heading">
+          <h3 class="h5 fw-bold mb-1">
+            Datos específicos del Subsistema Mixto
+          </h3>
+          <p class="text-secondary mb-0">
+            El historial y las cuotas provienen de los pasos anteriores.
+            El CAP requiere datos que no pueden deducirse de forma fiable
+            del historial anual.
+          </p>
+        </div>
+
+        <div class="row g-3">
+
+          <div class="col-lg-6">
+            <label
+              for="resultado-mixto-escenario-salarial"
+              class="form-label fw-semibold"
+            >
+              Escenario salarial utilizado
+            </label>
+            <select
+              id="resultado-mixto-escenario-salarial"
+              class="form-select"
+            ></select>
+          </div>
+
+          <div class="col-md-6 col-lg-3">
+            <label
+              for="resultado-mixto-saldo-cap"
+              class="form-label fw-semibold"
+            >
+              Saldo CAP
+            </label>
+            <div class="input-group">
+              <span class="input-group-text">B/.</span>
+              <input
+                type="text"
+                id="resultado-mixto-saldo-cap"
+                class="form-control money-input"
+                inputmode="decimal"
+                placeholder="0.00"
+              >
+            </div>
+            <div class="form-text">
+              Saldo ahorrado y capitalizado de la cuenta individual.
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3">
+            <label
+              for="resultado-mixto-bono"
+              class="form-label fw-semibold"
+            >
+              Bono de reconocimiento
+            </label>
+            <div class="input-group">
+              <span class="input-group-text">B/.</span>
+              <input
+                type="text"
+                id="resultado-mixto-bono"
+                class="form-control money-input"
+                inputmode="decimal"
+                value="0.00"
+              >
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <label
+              for="resultado-mixto-valor-actuarial"
+              class="form-label fw-semibold"
+            >
+              Valor actuarial de expectativa de vida
+            </label>
+            <input
+              type="number"
+              id="resultado-mixto-valor-actuarial"
+              class="form-control"
+              min="0.0001"
+              step="0.0001"
+              inputmode="decimal"
+              placeholder="Dato oficial aplicable"
+            >
+            <div class="form-text">
+              Déjalo vacío si no dispones de un divisor actuarial oficial.
+              Es un factor/divisor actuarial, no un monto en balboas.
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <label
+              for="resultado-mixto-opcion-cap"
+              class="form-label fw-semibold"
+            >
+              Tratamiento del CAP
+            </label>
+            <select
+              id="resultado-mixto-opcion-cap"
+              class="form-select"
+            >
+              <option value="AUTO">
+                Automático / pedir decisión cuando corresponda
+              </option>
+              <option value="PENSION_PROGRAMADA">
+                Pensión programada
+              </option>
+              <option value="DEVOLUCION_TOTAL">
+                Devolución total
+              </option>
+            </select>
+          </div>
+
+          <div class="col-lg-4 d-flex align-items-end">
+            <div class="form-check mb-2">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="resultado-mixto-bono-confirmado"
+              >
+              <label
+                class="form-check-label"
+                for="resultado-mixto-bono-confirmado"
+              >
+                El bono ingresado fue confirmado oficialmente
+              </label>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="alert alert-secondary mb-0 small">
+              El saldo CAP, el bono y el valor actuarial no se reconstruyen
+              automáticamente. Si falta un dato indispensable, el resultado
+              se mostrará como incompleto en lugar de inventar una cifra.
+            </div>
+          </div>
+
+          <div class="col-12 d-grid d-md-flex justify-content-md-end">
+            <button
+              type="button"
+              id="btn-calcular-resultado-mixto"
+              class="btn btn-primary btn-lg"
+            >
+              Calcular prestación Mixto
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- Configuración específica del SUCGS. -->
+
+      <div
+        id="resultado-config-sucgs"
+        class="results-calculation-card d-none"
+      >
+
+        <div class="results-section-heading">
+          <h3 class="h5 fw-bold mb-1">
+            Datos específicos del SUCGS
+          </h3>
+          <p class="text-secondary mb-0">
+            El historial, las cuotas y la trayectoria salarial provienen de
+            los pasos anteriores. El saldo solidario y las confirmaciones
+            oficiales se solicitan aquí porque no pueden reconstruirse con
+            fiabilidad a partir del historial anual.
+          </p>
+        </div>
+
+        <div class="row g-3">
+
+          <div class="col-lg-6">
+            <label
+              for="resultado-sucgs-escenario-salarial"
+              class="form-label fw-semibold"
+            >
+              Escenario salarial utilizado
+            </label>
+            <select
+              id="resultado-sucgs-escenario-salarial"
+              class="form-select"
+            ></select>
+          </div>
+
+          <div class="col-md-6 col-lg-3">
+            <label
+              for="resultado-sucgs-saldo"
+              class="form-label fw-semibold"
+            >
+              Saldo de Capitalización Solidaria
+            </label>
+            <div class="input-group">
+              <span class="input-group-text">B/.</span>
+              <input
+                type="text"
+                id="resultado-sucgs-saldo"
+                class="form-control money-input"
+                inputmode="decimal"
+                placeholder="0.00"
+              >
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3 d-flex align-items-end">
+            <div class="form-check mb-2">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="resultado-sucgs-saldo-confirmado"
+              >
+              <label
+                class="form-check-label"
+                for="resultado-sucgs-saldo-confirmado"
+              >
+                Saldo confirmado oficialmente
+              </label>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3">
+            <label
+              for="resultado-sucgs-minimo-universal"
+              class="form-label fw-semibold"
+            >
+              Valor mínimo universal vigente
+            </label>
+            <div class="input-group">
+              <span class="input-group-text">B/.</span>
+              <input
+                type="text"
+                id="resultado-sucgs-minimo-universal"
+                class="form-control money-input"
+                inputmode="decimal"
+                value="144.00"
+              >
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3">
+            <label
+              for="resultado-sucgs-pgs"
+              class="form-label fw-semibold"
+            >
+              Pensión Garantizada Solidaria vigente
+            </label>
+            <div class="input-group">
+              <span class="input-group-text">B/.</span>
+              <input
+                type="text"
+                id="resultado-sucgs-pgs"
+                class="form-control money-input"
+                inputmode="decimal"
+                value="265.00"
+              >
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3 d-flex align-items-end">
+            <div class="form-check mb-2">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="resultado-sucgs-valores-confirmados"
+              >
+              <label
+                class="form-check-label"
+                for="resultado-sucgs-valores-confirmados"
+              >
+                Valores solidarios confirmados oficialmente
+              </label>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3">
+            <span class="form-label fw-semibold d-block">
+              Inicio de vida laboral usado
+            </span>
+            <div class="form-control bg-body-tertiary">
+              <span id="resultado-sucgs-anio-inicio">—</span>
+            </div>
+            <div class="form-text">
+              Se toma del año inicial del historial ingresado en el Paso 3.
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <label
+              for="resultado-sucgs-estabilidad"
+              class="form-label fw-semibold"
+            >
+              Condición de estabilidad salarial del artículo 197
+            </label>
+            <select
+              id="resultado-sucgs-estabilidad"
+              class="form-select"
+            >
+              <option value="">Pendiente / no confirmada</option>
+              <option value="SI">Sí, cumple y fue confirmada</option>
+              <option value="NO">No cumple</option>
+            </select>
+            <div class="form-text">
+              La aplicación no presupone esta condición por la redacción del
+              numeral 3 y los controles reservados a la CSS.
+            </div>
+          </div>
+
+          <div class="col-lg-6 d-flex align-items-end">
+            <div class="form-check mb-2">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="resultado-sucgs-historial-completo"
+              >
+              <label
+                class="form-check-label"
+                for="resultado-sucgs-historial-completo"
+              >
+                Confirmo que el historial ingresado cubre toda la vida
+                laboral relevante para evaluar el artículo 197
+              </label>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="alert alert-secondary mb-0 small">
+              B/.144.00 y B/.265.00 se cargan como referencias legales
+              versionadas. Si existen valores indexados vigentes distintos,
+              reemplázalos y marca la confirmación oficial correspondiente.
+              La aplicación mantiene separado el componente contributivo, la
+              capa solidaria y la garantía de reemplazo.
+            </div>
+          </div>
+
+          <div class="col-12 d-grid d-md-flex justify-content-md-end">
+            <button
+              type="button"
+              id="btn-calcular-resultado-sucgs"
+              class="btn btn-primary btn-lg"
+            >
+              Calcular prestación SUCGS
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+
+
       <div
         id="error-resultados"
         class="alert alert-danger mt-4 d-none"
@@ -509,6 +865,544 @@
             de tramitar la prestación.
           </p>
 
+        </div>
+
+      </div>
+
+
+      <!-- ================================================
+           RESULTADO SUBSISTEMA MIXTO
+           ================================================ -->
+
+      <div
+        id="resultado-mixto"
+        class="mt-5 d-none"
+      >
+
+        <hr class="mb-4">
+
+        <div
+          id="resultado-mixto-estado"
+          class="alert"
+          role="status"
+        ></div>
+
+        <div class="results-modality-card mb-4">
+          <span>Modalidad / estado determinado</span>
+          <strong id="resultado-mixto-modalidad">—</strong>
+          <small id="resultado-mixto-modalidad-nota">
+            El motor mantiene separados el componente definido y el CAP.
+          </small>
+        </div>
+
+        <div class="row g-3 mb-4">
+
+          <div class="col-sm-6 col-xl-3">
+            <div class="results-summary-card results-summary-primary">
+              <span>Pensión mensual total</span>
+              <strong id="resultado-mixto-pension-total">—</strong>
+              <small>BD + CAP cuando ambos generan renta mensual.</small>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-xl-3">
+            <div class="results-summary-card">
+              <span>Pago único total</span>
+              <strong id="resultado-mixto-pago-unico-total">—</strong>
+              <small>Indemnización y/o devolución, cuando corresponda.</small>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-xl-3">
+            <div class="results-summary-card">
+              <span>Componente BD mensual</span>
+              <strong id="resultado-mixto-pension-bd">—</strong>
+              <small id="resultado-mixto-bd-prestacion-nota">—</small>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-xl-3">
+            <div class="results-summary-card">
+              <span>Componente CAP mensual</span>
+              <strong id="resultado-mixto-pension-cap">—</strong>
+              <small id="resultado-mixto-cap-prestacion-nota">—</small>
+            </div>
+          </div>
+
+        </div>
+
+
+        <section
+          id="resultado-mixto-seccion-bd"
+          class="results-section mb-4"
+        >
+
+          <div class="results-section-heading">
+            <h3 class="h5 fw-bold mb-1">
+              Componente de Beneficio Definido
+            </h3>
+            <p class="text-secondary mb-0">
+              Aplica las reglas de la modalidad detectada sobre el tramo
+              salarial que participa en este componente.
+            </p>
+          </div>
+
+          <div class="row g-3 mb-3">
+
+            <div class="col-md-3">
+              <div class="results-detail-card">
+                <span>Salario base mensual</span>
+                <strong id="resultado-mixto-bd-salario-base">—</strong>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="results-detail-card">
+                <span>Tasa resultante</span>
+                <strong id="resultado-mixto-bd-tasa">—</strong>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="results-detail-card">
+                <span>Máximo del componente</span>
+                <strong id="resultado-mixto-bd-maximo">—</strong>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="results-detail-card">
+                <span>Pago único BD</span>
+                <strong id="resultado-mixto-bd-pago-unico">—</strong>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="table-responsive results-table-wrapper">
+            <table class="table table-hover align-middle results-table">
+              <thead>
+                <tr>
+                  <th scope="col">Año</th>
+                  <th scope="col">Cuotas</th>
+                  <th scope="col">Salario original</th>
+                  <th scope="col">Salario considerado BD</th>
+                  <th scope="col">Origen</th>
+                </tr>
+              </thead>
+              <tbody id="resultado-mixto-bd-anios-body"></tbody>
+            </table>
+          </div>
+
+        </section>
+
+
+        <section
+          id="resultado-mixto-seccion-cap"
+          class="results-section mb-4"
+        >
+
+          <div class="results-section-heading">
+            <h3 class="h5 fw-bold mb-1">
+              Componente de Ahorro Personal
+            </h3>
+            <p class="text-secondary mb-0">
+              Muestra el capital informado, la opción seleccionada y si
+              produce una pensión programada o un pago único.
+            </p>
+          </div>
+
+          <div class="row g-3 mb-3">
+
+            <div class="col-md-4 col-xl-3">
+              <div class="results-detail-card">
+                <span>Saldo CAP</span>
+                <strong id="resultado-mixto-cap-saldo">—</strong>
+              </div>
+            </div>
+
+            <div class="col-md-4 col-xl-3">
+              <div class="results-detail-card">
+                <span>Bono de reconocimiento</span>
+                <strong id="resultado-mixto-cap-bono">—</strong>
+                <small id="resultado-mixto-cap-bono-estado">—</small>
+              </div>
+            </div>
+
+            <div class="col-md-4 col-xl-3">
+              <div class="results-detail-card">
+                <span>Capital total</span>
+                <strong id="resultado-mixto-cap-capital">—</strong>
+              </div>
+            </div>
+
+            <div class="col-md-4 col-xl-3">
+              <div class="results-detail-card">
+                <span>Valor actuarial</span>
+                <strong id="resultado-mixto-cap-actuarial">—</strong>
+              </div>
+            </div>
+
+            <div class="col-md-4 col-xl-3">
+              <div class="results-detail-card">
+                <span>Opción aplicada</span>
+                <strong id="resultado-mixto-cap-opcion">—</strong>
+              </div>
+            </div>
+
+            <div class="col-md-4 col-xl-3">
+              <div class="results-detail-card">
+                <span>Decisión requerida</span>
+                <strong id="resultado-mixto-cap-decision">—</strong>
+              </div>
+            </div>
+
+            <div class="col-md-4 col-xl-3">
+              <div class="results-detail-card">
+                <span>Devolución disponible</span>
+                <strong id="resultado-mixto-cap-devolucion-disponible">—</strong>
+              </div>
+            </div>
+
+            <div class="col-md-4 col-xl-3">
+              <div class="results-detail-card results-detail-emphasis">
+                <span>Pago único CAP</span>
+                <strong id="resultado-mixto-cap-pago-unico">—</strong>
+              </div>
+            </div>
+
+          </div>
+
+          <div
+            id="resultado-mixto-decision-ayuda"
+            class="alert alert-info d-none mb-0"
+          >
+            Este escenario permite una decisión sobre el CAP. Selecciona
+            “Pensión programada” o “Devolución total” arriba y recalcula.
+          </div>
+
+        </section>
+
+
+        <section
+          id="resultado-mixto-garantia"
+          class="results-section mb-4 d-none"
+        >
+
+          <div class="results-section-heading">
+            <h3 class="h5 fw-bold mb-1">
+              Garantía de renta vitalicia del CAP
+            </h3>
+            <p class="text-secondary mb-0">
+              Esta garantía no aumenta la pensión inicial; opera bajo las
+              condiciones informadas por el motor.
+            </p>
+          </div>
+
+          <div class="row g-3">
+
+            <div class="col-md-4">
+              <div class="results-detail-card">
+                <span>Monto mensual garantizado</span>
+                <strong id="resultado-mixto-garantia-monto">—</strong>
+              </div>
+            </div>
+
+            <div class="col-md-8">
+              <div class="results-detail-card">
+                <span>Condición de activación</span>
+                <strong id="resultado-mixto-garantia-condicion">—</strong>
+              </div>
+            </div>
+
+          </div>
+
+          <p
+            id="resultado-mixto-garantia-prima"
+            class="small text-secondary mb-0 mt-3"
+          >
+            —
+          </p>
+
+        </section>
+
+
+        <div
+          id="resultado-mixto-advertencias"
+          class="alert alert-warning d-none"
+          role="alert"
+        ></div>
+
+        <div class="results-source-card">
+          <strong>Fuente normativa utilizada</strong>
+          <p
+            id="resultado-mixto-fuente"
+            class="mb-0 mt-1 text-secondary"
+          >
+            —
+          </p>
+        </div>
+
+        <div class="info-box mt-4">
+          <strong>
+            Resultado estimado, no resolución de la CSS.
+          </strong>
+          <p class="mb-0 mt-1">
+            Los componentes mensuales y los pagos únicos se muestran por
+            separado. Los datos oficiales del CAP y los parámetros actuariales
+            deben validarse con la Caja de Seguro Social.
+          </p>
+        </div>
+
+      </div>
+
+
+      <!-- ================================================
+           RESULTADO SUCGS
+           ================================================ -->
+
+      <div
+        id="resultado-sucgs"
+        class="mt-5 d-none"
+      >
+
+        <hr class="mb-4">
+
+        <div
+          id="resultado-sucgs-estado"
+          class="alert"
+          role="status"
+        ></div>
+
+        <div class="results-modality-card mb-4">
+          <span>Sistema y alcance del cálculo</span>
+          <strong>SUCGS — Sistema Único de Capitalización con Garantía Solidaria</strong>
+          <small id="resultado-sucgs-alcance">
+            Componente contributivo, capa solidaria y garantía de reemplazo.
+          </small>
+        </div>
+
+        <div class="row g-3 mb-4">
+
+          <div class="col-sm-6 col-xl-3">
+            <div class="results-summary-card results-summary-primary">
+              <span>Pensión mensual total</span>
+              <strong id="resultado-sucgs-pension-total">—</strong>
+              <small id="resultado-sucgs-pension-total-nota">—</small>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-xl-3">
+            <div class="results-summary-card">
+              <span>Componente contributivo</span>
+              <strong id="resultado-sucgs-contributiva">—</strong>
+              <small>Saldo ÷ 1,000 × factor actuarial.</small>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-xl-3">
+            <div class="results-summary-card">
+              <span>Después de capa solidaria</span>
+              <strong id="resultado-sucgs-despues-solidaria">—</strong>
+              <small id="resultado-sucgs-tipo-solidaria">—</small>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-xl-3">
+            <div class="results-summary-card">
+              <span>Complemento art. 197</span>
+              <strong id="resultado-sucgs-complemento-197">—</strong>
+              <small id="resultado-sucgs-aplica-197">—</small>
+            </div>
+          </div>
+
+        </div>
+
+        <section class="results-section mb-4">
+          <div class="results-section-heading">
+            <h3 class="h5 fw-bold mb-1">
+              Componente Contributivo de Capitalización Solidaria
+            </h3>
+            <p class="text-secondary mb-0">
+              Desglose del saldo informado y el factor actuarial que
+              corresponde a la edad del escenario de retiro.
+            </p>
+          </div>
+
+          <div class="row g-3">
+            <div class="col-md-3">
+              <div class="results-detail-card">
+                <span>Saldo considerado</span>
+                <strong id="resultado-sucgs-saldo-considerado">—</strong>
+                <small id="resultado-sucgs-saldo-estado">—</small>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="results-detail-card">
+                <span>Edad / factor actuarial</span>
+                <strong id="resultado-sucgs-factor">—</strong>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="results-detail-card">
+                <span>Divisor legal</span>
+                <strong id="resultado-sucgs-divisor">—</strong>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="results-detail-card results-detail-emphasis">
+                <span>Resultado contributivo</span>
+                <strong id="resultado-sucgs-contributiva-detalle">—</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="results-source-card mt-3">
+            <strong>Fórmula aplicada</strong>
+            <p id="resultado-sucgs-formula" class="mb-0 mt-1 text-secondary">—</p>
+          </div>
+        </section>
+
+        <section class="results-section mb-4">
+          <div class="results-section-heading">
+            <h3 class="h5 fw-bold mb-1">
+              Componente Solidario No Contributivo y PGS
+            </h3>
+            <p class="text-secondary mb-0">
+              Muestra si los artículos 194 o 195 complementan el resultado
+              contributivo antes de evaluar la garantía de reemplazo.
+            </p>
+          </div>
+
+          <div class="row g-3">
+            <div class="col-md-3">
+              <div class="results-detail-card">
+                <span>Tipo de prestación solidaria</span>
+                <strong id="resultado-sucgs-solidaria-tipo">—</strong>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="results-detail-card">
+                <span>Valor mínimo universal</span>
+                <strong id="resultado-sucgs-vmu">—</strong>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="results-detail-card">
+                <span>Pensión Garantizada Solidaria</span>
+                <strong id="resultado-sucgs-pgs-utilizada">—</strong>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="results-detail-card results-detail-emphasis">
+                <span>Complemento solidario</span>
+                <strong id="resultado-sucgs-complemento-solidario">—</strong>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="results-section mb-4">
+          <div class="results-section-heading">
+            <h3 class="h5 fw-bold mb-1">
+              Garantía de reemplazo mínimo — artículo 197
+            </h3>
+            <p class="text-secondary mb-0">
+              La aplicación audita las condiciones que pueden evaluarse con
+              el historial anual y conserva explícita la confirmación de
+              estabilidad salarial.
+            </p>
+          </div>
+
+          <div class="row g-3 mb-3">
+            <div class="col-md-4 col-xl-3">
+              <div class="results-detail-card">
+                <span>Evaluación</span>
+                <strong id="resultado-sucgs-197-evaluada">—</strong>
+              </div>
+            </div>
+            <div class="col-md-4 col-xl-3">
+              <div class="results-detail-card">
+                <span>Mínimo anual de cuotas</span>
+                <strong id="resultado-sucgs-197-anual">—</strong>
+              </div>
+            </div>
+            <div class="col-md-4 col-xl-3">
+              <div class="results-detail-card">
+                <span>Distribución 50 % / 50 %</span>
+                <strong id="resultado-sucgs-197-distribucion">—</strong>
+              </div>
+            </div>
+            <div class="col-md-4 col-xl-3">
+              <div class="results-detail-card">
+                <span>Estabilidad salarial</span>
+                <strong id="resultado-sucgs-197-estabilidad">—</strong>
+              </div>
+            </div>
+            <div class="col-md-4 col-xl-3">
+              <div class="results-detail-card">
+                <span>Cuotas primeros 20 años</span>
+                <strong id="resultado-sucgs-197-primeros">—</strong>
+              </div>
+            </div>
+            <div class="col-md-4 col-xl-3">
+              <div class="results-detail-card">
+                <span>Cuotas años restantes</span>
+                <strong id="resultado-sucgs-197-restantes">—</strong>
+              </div>
+            </div>
+            <div class="col-md-4 col-xl-3">
+              <div class="results-detail-card">
+                <span>Salario promedio base</span>
+                <strong id="resultado-sucgs-197-salario-base">—</strong>
+              </div>
+            </div>
+            <div class="col-md-4 col-xl-3">
+              <div class="results-detail-card">
+                <span>Tasa mínima aplicable</span>
+                <strong id="resultado-sucgs-197-tasa">—</strong>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="results-detail-card">
+                <span>Monto objetivo de garantía</span>
+                <strong id="resultado-sucgs-197-objetivo">—</strong>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="results-detail-card results-detail-emphasis">
+                <span>Complemento de garantía</span>
+                <strong id="resultado-sucgs-197-complemento">—</strong>
+              </div>
+            </div>
+          </div>
+
+          <div
+            id="resultado-sucgs-197-detalle"
+            class="alert alert-secondary mb-0"
+          >
+            —
+          </div>
+        </section>
+
+        <div
+          id="resultado-sucgs-advertencias"
+          class="alert alert-warning d-none"
+          role="alert"
+        ></div>
+
+        <div class="results-source-card">
+          <strong>Fuente normativa utilizada</strong>
+          <p id="resultado-sucgs-fuente" class="mb-0 mt-1 text-secondary">—</p>
+        </div>
+
+        <div class="info-box mt-4">
+          <strong>Resultado estimado, no resolución de la CSS.</strong>
+          <p class="mb-0 mt-1">
+            El saldo, los valores solidarios vigentes y las condiciones del
+            artículo 197 deben corresponder a la información oficialmente
+            reconocida para el asegurado y a la normativa aplicable.
+          </p>
         </div>
 
       </div>

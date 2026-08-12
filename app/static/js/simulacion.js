@@ -64,6 +64,12 @@ function crearSimulacionVacia() {
 
     escenario_salarial_seleccionado: null,
     resultado_sebd_normal: null,
+
+    configuracion_mixto_resultados: {},
+    resultado_mixto: null,
+
+    configuracion_sucgs_resultados: {},
+    resultado_sucgs: null,
   };
 }
 
@@ -142,6 +148,13 @@ function guardarSimulacion(simulacion) {
     === "function"
   ) {
     actualizarNavegacionFlotante();
+  }
+
+  if (
+    typeof actualizarNavegacionDirecta
+    === "function"
+  ) {
+    actualizarNavegacionDirecta();
   }
 }
 
@@ -262,6 +275,10 @@ function guardarDatosPersonales() {
   simulacion.escenario_retiro_seleccionado = null;
   simulacion.escenario_salarial_seleccionado = null;
   simulacion.resultado_sebd_normal = null;
+  simulacion.configuracion_mixto_resultados = {};
+  simulacion.resultado_mixto = null;
+  simulacion.configuracion_sucgs_resultados = {};
+  simulacion.resultado_sucgs = null;
 
   guardarSimulacion(simulacion);
 
@@ -455,6 +472,8 @@ function invalidarResumenCuotas() {
   simulacion.escenario_retiro_seleccionado = null;
   simulacion.escenario_salarial_seleccionado = null;
   simulacion.resultado_sebd_normal = null;
+  simulacion.resultado_mixto = null;
+  simulacion.resultado_sucgs = null;
 
   guardarSimulacion(simulacion);
 
@@ -711,6 +730,8 @@ function invalidarResumenSalario() {
   simulacion.escenario_retiro_seleccionado = null;
   simulacion.escenario_salarial_seleccionado = null;
   simulacion.resultado_sebd_normal = null;
+  simulacion.resultado_mixto = null;
+  simulacion.resultado_sucgs = null;
 
   guardarSimulacion(simulacion);
 
@@ -809,6 +830,8 @@ async function analizarSalario(evento) {
     simulacion.escenario_retiro_seleccionado = null;
     simulacion.escenario_salarial_seleccionado = null;
     simulacion.resultado_sebd_normal = null;
+    simulacion.resultado_mixto = null;
+  simulacion.resultado_sucgs = null;
 
     guardarSimulacion(simulacion);
 
@@ -1235,6 +1258,8 @@ function invalidarResumenProyeccion() {
   simulacion.escenario_retiro_seleccionado = null;
   simulacion.escenario_salarial_seleccionado = null;
   simulacion.resultado_sebd_normal = null;
+  simulacion.resultado_mixto = null;
+  simulacion.resultado_sucgs = null;
 
   guardarSimulacion(
     simulacion,
@@ -1406,6 +1431,8 @@ async function analizarProyeccion(evento) {
     simulacion.escenario_retiro_seleccionado = null;
     simulacion.escenario_salarial_seleccionado = null;
     simulacion.resultado_sebd_normal = null;
+    simulacion.resultado_mixto = null;
+  simulacion.resultado_sucgs = null;
 
     guardarSimulacion(
       simulacion,

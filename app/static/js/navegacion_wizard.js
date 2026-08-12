@@ -12,6 +12,197 @@
  */
 
 
+const PASOS_NAVEGACION = [
+  { numero: 1, nombre: "Datos personales" },
+  { numero: 2, nombre: "Cuotas" },
+  { numero: 3, nombre: "Historial" },
+  { numero: 4, nombre: "Proyección" },
+  { numero: 5, nombre: "Retiro" },
+  { numero: 6, nombre: "Resultados" },
+];
+
+
+/**
+ * Indica si un paso puede abrirse directamente con el estado guardado.
+ *
+ * Los pasos anteriores siempre pueden revisarse cuando sus datos base
+ * ya existen. Los pasos posteriores se habilitan solo si continúan
+ * cumpliéndose los prerrequisitos que usa el flujo normal.
+ *
+ * @param {number} numeroPaso Paso solicitado.
+ * @param {Object} simulacion Estado persistido del asistente.
+ * @returns {boolean} true cuando el salto es seguro.
+ */
+function puedeAccederDirectamenteAPaso(
+  numeroPaso,
+  simulacion,
+) {
+  if (numeroPaso === 1) {
+    return true;
+  }
+
+  const persona = simulacion.persona || {};
+  const personaLista = Boolean(
+    persona.fecha_nacimiento
+    && persona.sexo
+    && persona.sistema,
+  );
+
+  if (numeroPaso === 2) {
+    return personaLista;
+  }
+
+  if (numeroPaso === 3) {
+    return Boolean(
+      personaLista
+      && simulacion.resumen_cuotas,
+    );
+  }
+
+  const historialListo = (
+    (simulacion.modo_historial || "MANUAL") !== "MANUAL"
+    || Boolean(simulacion.resumen_historial)
+  );
+
+  if (numeroPaso === 4) {
+    return Boolean(
+      simulacion.resumen_cuotas
+      && historialListo
+      && simulacion.resumen_salario,
+    );
+  }
+
+  if (numeroPaso === 5) {
+    return Boolean(
+      simulacion.resumen_proyeccion,
+    );
+  }
+
+  if (numeroPaso === 6) {
+    return Boolean(
+      simulacion.resumen_retiro
+      && simulacion.escenario_retiro_seleccionado
+      && simulacion.resumen_retiro
+        .proyeccion_salarial_cubre_escenarios !== false,
+    );
+  }
+
+  return false;
+}
+
+
+/**
+ * Actualiza los accesos directos del progreso y del selector persistente.
+ */
+function actualizarNavegacionDirecta() {
+  const simulacion = obtenerSimulacion();
+
+  document
+    .querySelectorAll(".wizard-step")
+    .forEach((control) => {
+      const numeroPaso = Number(
+        control.dataset.step,
+      );
+      const disponible = (
+        numeroPaso === pasoActual
+        || puedeAccederDirectamenteAPaso(
+          numeroPaso,
+          simulacion,
+        )
+      );
+
+      control.disabled = !disponible;
+      control.setAttribute(
+        "aria-current",
+        numeroPaso === pasoActual
+          ? "step"
+          : "false",
+      );
+
+      const paso = PASOS_NAVEGACION.find(
+        (item) => item.numero === numeroPaso,
+      );
+
+      control.title = disponible
+        ? `Ir al paso ${numeroPaso}: ${paso?.nombre || ""}`
+        : "Completa primero los pasos anteriores.";
+    });
+
+  const selector = document.getElementById(
+    "wizard-step-jump",
+  );
+
+  if (!selector) {
+    return;
+  }
+
+  Array.from(selector.options).forEach(
+    (opcion) => {
+      const numeroPaso = Number(opcion.value);
+      opcion.disabled = !puedeAccederDirectamenteAPaso(
+        numeroPaso,
+        simulacion,
+      ) && numeroPaso !== pasoActual;
+    },
+  );
+
+  selector.value = String(pasoActual);
+}
+
+
+/**
+ * Prepara los datos visuales necesarios y abre un paso concreto.
+ *
+ * @param {number} numeroPaso Paso de destino.
+ */
+function irDirectamenteAPaso(numeroPaso) {
+  const simulacion = obtenerSimulacion();
+
+  if (
+    numeroPaso !== pasoActual
+    && !puedeAccederDirectamenteAPaso(
+      numeroPaso,
+      simulacion,
+    )
+  ) {
+    actualizarNavegacionDirecta();
+    return;
+  }
+
+  if (
+    numeroPaso === 3
+    && typeof sincronizarHistorialConDatosActuales === "function"
+  ) {
+    sincronizarHistorialConDatosActuales();
+  }
+
+  if (
+    numeroPaso === 4
+    && typeof prepararPasoProyeccion === "function"
+  ) {
+    prepararPasoProyeccion(simulacion);
+  }
+
+  if (
+    numeroPaso === 5
+    && typeof prepararPasoRetiro === "function"
+  ) {
+    prepararPasoRetiro();
+  }
+
+  mostrarPaso(numeroPaso);
+
+  if (
+    numeroPaso === 6
+    && typeof prepararPasoResultados === "function"
+  ) {
+    prepararPasoResultados();
+    restaurarResultadoSEBDGuardado();
+    restaurarResultadoMixtoGuardado();
+  }
+}
+
+
 /**
  * Devuelve el estado y la acción principal apropiados para el paso.
  *
@@ -131,26 +322,58 @@ function obtenerConfiguracionNavegacionFlotante() {
   if (pasoActual === 6) {
     const sistema = simulacion.persona?.sistema;
 
-    if (sistema !== "SEBD") {
+    if (sistema === "SEBD") {
       return {
-        estado: "Paso 6 de 6 · Motor todavía no habilitado",
-        etiqueta: "Sin cálculo disponible",
-        deshabilitado: true,
+        estado: (
+          simulacion.resultado_sebd_normal
+            ? "Paso 6 de 6 · Resultado SEBD calculado"
+            : "Paso 6 de 6 · Listo para calcular SEBD"
+        ),
+        etiqueta: (
+          simulacion.resultado_sebd_normal
+            ? "Recalcular pensión"
+            : "Calcular pensión SEBD"
+        ),
+        deshabilitado: false,
+      };
+    }
+
+    if (sistema === "MIXTO") {
+      return {
+        estado: (
+          simulacion.resultado_mixto
+            ? "Paso 6 de 6 · Resultado Mixto calculado"
+            : "Paso 6 de 6 · Listo para calcular Mixto"
+        ),
+        etiqueta: (
+          simulacion.resultado_mixto
+            ? "Recalcular Mixto"
+            : "Calcular prestación Mixto"
+        ),
+        deshabilitado: false,
+      };
+    }
+
+    if (sistema === "SUCGS") {
+      return {
+        estado: (
+          simulacion.resultado_sucgs
+            ? "Paso 6 de 6 · Resultado SUCGS calculado"
+            : "Paso 6 de 6 · Listo para calcular SUCGS"
+        ),
+        etiqueta: (
+          simulacion.resultado_sucgs
+            ? "Recalcular SUCGS"
+            : "Calcular prestación SUCGS"
+        ),
+        deshabilitado: false,
       };
     }
 
     return {
-      estado: (
-        simulacion.resultado_sebd_normal
-          ? "Paso 6 de 6 · Resultado SEBD calculado"
-          : "Paso 6 de 6 · Listo para calcular SEBD"
-      ),
-      etiqueta: (
-        simulacion.resultado_sebd_normal
-          ? "Recalcular pensión"
-          : "Calcular pensión SEBD"
-      ),
-      deshabilitado: false,
+      estado: "Paso 6 de 6 · Sistema por identificar",
+      etiqueta: "Identificar sistema",
+      deshabilitado: true,
     };
   }
 
@@ -304,6 +527,20 @@ function ejecutarAccionPrimariaFlotante() {
       document.getElementById(
         "btn-calcular-resultado-sebd",
       ).click();
+      return;
+    }
+
+    if (simulacion.persona?.sistema === "MIXTO") {
+      document.getElementById(
+        "btn-calcular-resultado-mixto",
+      ).click();
+      return;
+    }
+
+    if (simulacion.persona?.sistema === "SUCGS") {
+      document.getElementById(
+        "btn-calcular-resultado-sucgs",
+      ).click();
     }
   }
 }
@@ -341,6 +578,31 @@ document.addEventListener(
       ejecutarAccionPrimariaFlotante,
     );
 
+    document.getElementById(
+      "wizard-step-jump",
+    ).addEventListener(
+      "change",
+      (evento) => {
+        irDirectamenteAPaso(
+          Number(evento.target.value),
+        );
+      },
+    );
+
+    document
+      .querySelectorAll(".wizard-step")
+      .forEach((control) => {
+        control.addEventListener(
+          "click",
+          () => {
+            irDirectamenteAPaso(
+              Number(control.dataset.step),
+            );
+          },
+        );
+      });
+
     actualizarNavegacionFlotante();
+    actualizarNavegacionDirecta();
   },
 );

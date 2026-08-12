@@ -275,6 +275,8 @@ function invalidarResumenRetiro() {
   simulacion.resumen_retiro = null;
   simulacion.escenario_retiro_seleccionado = null;
   simulacion.resultado_sebd_normal = null;
+  simulacion.resultado_mixto = null;
+  simulacion.resultado_sucgs = null;
 
   guardarSimulacion(simulacion);
 
@@ -503,6 +505,8 @@ async function analizarRetiro(evento) {
     simulacion.retiro = datos;
     simulacion.resumen_retiro = contenido;
     simulacion.resultado_sebd_normal = null;
+    simulacion.resultado_mixto = null;
+  simulacion.resultado_sucgs = null;
 
     guardarSimulacion(simulacion);
 
@@ -766,6 +770,8 @@ function seleccionarEscenarioRetiro(escenario) {
 
   simulacion.escenario_retiro_seleccionado = escenario;
   simulacion.resultado_sebd_normal = null;
+  simulacion.resultado_mixto = null;
+  simulacion.resultado_sucgs = null;
 
   guardarSimulacion(simulacion);
 
@@ -848,6 +854,8 @@ function restaurarSeleccionEscenarioRetiro(resumen) {
   if (!seleccionado) {
     simulacion.escenario_retiro_seleccionado = null;
     simulacion.resultado_sebd_normal = null;
+    simulacion.resultado_mixto = null;
+  simulacion.resultado_sucgs = null;
     guardarSimulacion(simulacion);
 
     if (boton) {

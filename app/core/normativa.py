@@ -129,3 +129,45 @@ def cargar_parametros_sebd() -> dict:
         return json.load(
             archivo,
         )
+
+
+@lru_cache(maxsize=1)
+def cargar_parametros_mixto() -> dict:
+    """Carga los parámetros normativos versionados del Subsistema Mixto."""
+
+    ruta = (
+        DIRECTORIO_NORMATIVA
+        / "mixto.json"
+    )
+
+    if not ruta.exists():
+        raise FileNotFoundError(
+            "No se encontró el archivo normativa/mixto.json."
+        )
+
+    with ruta.open(
+        "r",
+        encoding="utf-8",
+    ) as archivo:
+        return json.load(archivo)
+
+
+@lru_cache(maxsize=1)
+def cargar_parametros_sucgs() -> dict:
+    """Carga los parámetros normativos versionados del SUCGS."""
+
+    ruta = (
+        DIRECTORIO_NORMATIVA
+        / "sucgs.json"
+    )
+
+    if not ruta.exists():
+        raise FileNotFoundError(
+            "No se encontró el archivo normativa/sucgs.json."
+        )
+
+    with ruta.open(
+        "r",
+        encoding="utf-8",
+    ) as archivo:
+        return json.load(archivo)

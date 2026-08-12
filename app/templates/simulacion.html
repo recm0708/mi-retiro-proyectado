@@ -41,63 +41,75 @@ Nueva simulación | Calculadora de Pensión CSS
 
     <div class="wizard-steps mb-5">
 
-      <div
+      <button
+        type="button"
         class="wizard-step active"
         data-step="1"
+        aria-label="Ir al paso 1"
       >
         <span>1</span>
         <small>Datos personales</small>
-      </div>
+      </button>
 
       <div class="wizard-line"></div>
 
-      <div
+      <button
+        type="button"
         class="wizard-step"
         data-step="2"
+        aria-label="Ir al paso 2"
       >
         <span>2</span>
         <small>Cuotas</small>
-      </div>
+      </button>
 
       <div class="wizard-line"></div>
 
-      <div
+      <button
+        type="button"
         class="wizard-step"
         data-step="3"
+        aria-label="Ir al paso 3"
       >
         <span>3</span>
         <small>Historial</small>
-      </div>
+      </button>
 
       <div class="wizard-line"></div>
 
-      <div
+      <button
+        type="button"
         class="wizard-step"
         data-step="4"
+        aria-label="Ir al paso 4"
       >
         <span>4</span>
         <small>Proyección</small>
-      </div>
+      </button>
 
       <div class="wizard-line"></div>
 
-      <div
+      <button
+        type="button"
         class="wizard-step"
         data-step="5"
+        aria-label="Ir al paso 5"
       >
         <span>5</span>
         <small>Retiro</small>
-      </div>
+      </button>
 
       <div class="wizard-line"></div>
 
-      <div
+      <button
+        type="button"
         class="wizard-step"
         data-step="6"
+        aria-label="Ir al paso 6"
       >
         <span>6</span>
         <small>Resultados</small>
-      </div>
+      </button>
 
     </div>
 
@@ -108,13 +120,37 @@ Nueva simulación | Calculadora de Pensión CSS
       class="wizard-sticky-nav mb-4"
       aria-label="Navegación rápida del asistente"
     >
-      <button
-        type="button"
-        id="wizard-sticky-back"
-        class="btn btn-outline-secondary"
-      >
-        ← Anterior
-      </button>
+      <div class="wizard-sticky-nav-secondary">
+
+        <button
+          type="button"
+          id="wizard-sticky-back"
+          class="btn btn-outline-secondary"
+        >
+          ← Anterior
+        </button>
+
+        <label
+          for="wizard-step-jump"
+          class="visually-hidden"
+        >
+          Ir directamente a un paso del asistente
+        </label>
+
+        <select
+          id="wizard-step-jump"
+          class="form-select wizard-step-jump"
+          aria-label="Ir directamente a un paso del asistente"
+        >
+          <option value="1">Paso 1 · Datos personales</option>
+          <option value="2">Paso 2 · Cuotas</option>
+          <option value="3">Paso 3 · Historial</option>
+          <option value="4">Paso 4 · Proyección</option>
+          <option value="5">Paso 5 · Retiro</option>
+          <option value="6">Paso 6 · Resultados</option>
+        </select>
+
+      </div>
 
       <div class="wizard-sticky-nav-main">
         <small
@@ -278,7 +314,7 @@ Nueva simulación | Calculadora de Pensión CSS
                       </option>
 
                       <option value="SUCGS">
-                        SUCGS
+                        SUCGS — Sistema Único de Capitalización con Garantía Solidaria
                       </option>
 
                     </select>

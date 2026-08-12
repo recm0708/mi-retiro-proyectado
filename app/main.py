@@ -49,6 +49,14 @@ from app.modelos.pension import (
     ResumenCalculoSEBDNormal,
     ResumenResultadoSEBD,
     ResumenResultadoSEBDNormal,
+    DatosCalculoMixto,
+    DatosResultadoMixto,
+    ResumenCalculoMixto,
+    ResumenResultadoMixto,
+    DatosCalculoSUCGS,
+    DatosResultadoSUCGS,
+    ResumenCalculoSUCGS,
+    ResumenResultadoSUCGS,
 )
 from app.motores.sebd import (
     calcular_sebd_normal,
@@ -56,11 +64,23 @@ from app.motores.sebd import (
 from app.motores.sebd_modalidades import (
     calcular_sebd,
 )
+from app.motores.mixto import (
+    calcular_mixto,
+)
+from app.motores.sucgs import (
+    calcular_sucgs,
+)
 from app.servicios.resultados import (
     calcular_resultado_sebd_normal,
 )
 from app.servicios.resultados_sebd import (
     calcular_resultado_sebd,
+)
+from app.servicios.resultados_mixto import (
+    calcular_resultado_mixto,
+)
+from app.servicios.resultados_sucgs import (
+    calcular_resultado_sucgs,
 )
 
 # ============================================================
@@ -397,6 +417,90 @@ async def calcular_resultado_integrado_sebd(
 
     try:
         return calcular_resultado_sebd(datos)
+
+    except ValueError as error:
+        raise HTTPException(
+            status_code=422,
+            detail=str(error),
+        ) from error
+
+
+# ============================================================
+# API — Subsistema Mixto: evaluación preliminar
+# ============================================================
+
+@app.post(
+    "/api/simulacion/mixto",
+    response_model=ResumenCalculoMixto,
+)
+async def calcular_pension_mixto(
+    datos: DatosCalculoMixto,
+):
+    """Evalúa transición y componentes de retiro por vejez del Mixto."""
+
+    try:
+        return calcular_mixto(datos)
+
+    except ValueError as error:
+        raise HTTPException(
+            status_code=422,
+            detail=str(error),
+        ) from error
+
+
+@app.post(
+    "/api/simulacion/resultados/mixto",
+    response_model=ResumenResultadoMixto,
+)
+async def calcular_resultado_integrado_mixto(
+    datos: DatosResultadoMixto,
+):
+    """Calcula el Mixto a partir de los Pasos 1–5 y datos explícitos CAP."""
+
+    try:
+        return calcular_resultado_mixto(datos)
+
+    except ValueError as error:
+        raise HTTPException(
+            status_code=422,
+            detail=str(error),
+        ) from error
+
+
+# ============================================================
+# API — SUCGS: cálculo por capas hasta el artículo 197
+# ============================================================
+
+@app.post(
+    "/api/simulacion/sucgs",
+    response_model=ResumenCalculoSUCGS,
+)
+async def calcular_pension_sucgs(
+    datos: DatosCalculoSUCGS,
+):
+    """Calcula SUCGS por capas hasta la garantía del artículo 197."""
+
+    try:
+        return calcular_sucgs(datos)
+
+    except ValueError as error:
+        raise HTTPException(
+            status_code=422,
+            detail=str(error),
+        ) from error
+
+
+@app.post(
+    "/api/simulacion/resultados/sucgs",
+    response_model=ResumenResultadoSUCGS,
+)
+async def calcular_resultado_integrado_sucgs(
+    datos: DatosResultadoSUCGS,
+):
+    """Calcula SUCGS hasta el artículo 197 con el escenario del asistente."""
+
+    try:
+        return calcular_resultado_sucgs(datos)
 
     except ValueError as error:
         raise HTTPException(

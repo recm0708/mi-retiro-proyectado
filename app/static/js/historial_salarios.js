@@ -180,6 +180,8 @@ function confirmarModoSoloActual() {
   simulacion.escenario_retiro_seleccionado = null;
   simulacion.escenario_salarial_seleccionado = null;
   simulacion.resultado_sebd_normal = null;
+  simulacion.resultado_mixto = null;
+  simulacion.resultado_sucgs = null;
 
   guardarSimulacion(simulacion);
 
@@ -805,6 +807,8 @@ async function analizarHistorialSalarial() {
     simulacion.escenario_retiro_seleccionado = null;
     simulacion.escenario_salarial_seleccionado = null;
     simulacion.resultado_sebd_normal = null;
+    simulacion.resultado_mixto = null;
+  simulacion.resultado_sucgs = null;
 
     guardarSimulacion(
       simulacion,
@@ -922,6 +926,8 @@ function invalidarHistorial() {
   simulacion.escenario_retiro_seleccionado = null;
   simulacion.escenario_salarial_seleccionado = null;
   simulacion.resultado_sebd_normal = null;
+  simulacion.resultado_mixto = null;
+  simulacion.resultado_sucgs = null;
 
   guardarSimulacion(
     simulacion,

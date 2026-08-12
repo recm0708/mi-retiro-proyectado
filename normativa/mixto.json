@@ -1,0 +1,100 @@
+{
+  "version": "texto_unico_ley_51_reformas_hasta_ley_462_2025_y_reglamento_57805_2025",
+  "sistema": "SUBSISTEMA_MIXTO",
+  "fuente_principal": "Texto Único de la Ley 51 de 2005, Gaceta Oficial 30284-B de 22/05/2025",
+  "articulos_principales": [
+    155,
+    178,
+    179,
+    180,
+    181,
+    182,
+    183,
+    184,
+    185,
+    186,
+    187,
+    188,
+    192,
+    193
+  ],
+  "componente_beneficio_definido": {
+    "salario_mensual_maximo_participacion": 500.0,
+    "mejores_anios_base": 10,
+    "cuotas_referencia": 240,
+    "cuotas_minimas_proporcional": 180,
+    "tasa_reemplazo_base_pct": 60.0,
+    "incremento_12_cuotas_antes_referencia_pct": 1.25,
+    "incremento_12_cuotas_despues_referencia_pct": 2.0,
+    "monto_maximo_mensual": 500.0,
+    "monto_minimo_base_no_indexado": 265.0,
+    "nota_monto_minimo": "El mínimo se ajusta anualmente. La aplicación no lo aplica como mínimo definitivo hasta versionar el valor correspondiente a la fecha de cálculo."
+  },
+  "componente_ahorro_personal": {
+    "formula_pension_programada": "(saldo_ahorrado_capitalizado + bono_reconocimiento_aplicable) / valor_actuarial_expectativa_vida",
+    "monto_maximo": null,
+    "valor_actuarial_expectativa_vida": null,
+    "tasa_descuento": null,
+    "tabla_mortalidad": null,
+    "requiere_parametros_actuariales_vigentes": true,
+    "nota": "La Ley remite a la tabla de mortalidad y a la tasa de descuento adoptadas periódicamente por la Junta Directiva. No se reutilizan factores del SUCGS.",
+    "opciones_prestacion": {
+      "pension_programada": {
+        "articulo": 182,
+        "formula": "(saldo_ahorrado_capitalizado + bono_reconocimiento_aplicable) / valor_actuarial_expectativa_vida",
+        "requiere_divisor_actuarial_oficial": true
+      },
+      "devolucion_total": {
+        "articulo": 187,
+        "disponible_desde_edad_referencia_si_no_cumple_pension_normal": true,
+        "tipo_pago": "UNICO",
+        "requiere_solicitud_explicita": true,
+        "efecto": "El asegurado queda desligado del Subsistema Mixto respecto de este componente."
+      }
+    },
+    "nota_opcion": "Cuando el artículo 187 habilita la devolución, la aplicación no elige automáticamente entre pensión programada y devolución total. La decisión debe ser explícita."
+  },
+  "bono_reconocimiento": {
+    "articulo": 183,
+    "aplica_a_ingreso_voluntario_desde_sebd": true,
+    "nota": "Cuando corresponda, debe incorporarse como suma adicional a la cuenta de ahorro personal. Su cálculo reglamentario se mantiene separado del saldo ordinario.",
+    "requiere_promedio_ultimos_12_meses_sebd_mayor_500": true,
+    "se_reconoce_a_fecha_retiro": true,
+    "calculo_automatico_disponible": false,
+    "requiere_monto_oficial_o_validado": true,
+    "nota_calculo": "El artículo 183 define la naturaleza del bono, pero esta versión no reconstruye su monto desde el historial anual. Se acepta únicamente un monto ya determinado y se exige marcar si fue confirmado oficialmente para considerar completo el resultado."
+  },
+  "transicion": {
+    "fecha_fin_calculo_bajo_mixto": "2032-02-29",
+    "fecha_inicio_calculo_bajo_sucgs": "2032-03-01",
+    "fuente_operativa": "Artículo 188 y Reglamento de Incorporación al Componente Contributivo de Capitalización Solidaria, Resolución 57,805-2025-J.D., artículo 5.",
+    "fecha_limite_opcion_reglamento_original": "2026-03-17",
+    "fecha_limite_opcion_operativa_css_2026": "2026-08-18",
+    "nota_discrepancia": "El artículo 153 del Texto Único menciona 01/03/2036 para asegurados del Subsistema Mixto, mientras el artículo 188, la Resolución 57,805-2025-J.D. y comunicaciones operativas recientes de la CSS utilizan 01/03/2032 para el cálculo de retiro de quienes permanezcan en el Mixto. La aplicación utiliza 2032 para esta transición y conserva la discrepancia documentada."
+  },
+  "seguros_colectivos": {
+    "prima_renta_vitalicia_pct_historica": 0.93,
+    "prima_invalidez_pct_historica": 0.07,
+    "aporte_solidaridad_pct_historico": 3.5,
+    "fuente": "Reglamento de Seguros Colectivos del Componente de Ahorro Personal del Subsistema Mixto, Resolución 41,055-2009-J.D., edición actualizada a junio de 2020.",
+    "nota": "Estos porcentajes históricos se documentan para trazabilidad y no se usan todavía para reconstruir saldos individuales a partir del historial anual."
+  },
+  "garantia_renta_vitalicia": {
+    "articulo_ley": 184,
+    "reglamento_articulo": 10,
+    "condicion_activacion": "El pensionado sobrevive la expectativa de vida utilizada para determinar la pensión CAP y se extinguen los fondos ahorrados.",
+    "beneficio": "El Seguro Colectivo de Renta Vitalicia continúa pagando mensualmente la suma correspondiente a la pensión por vejez del CAP hasta la muerte del pensionado.",
+    "no_incrementa_pension_inicial": true,
+    "prima_pct_referencia_historica": 0.93,
+    "prima_fuente": "Reglamento de Seguros Colectivos del Componente de Ahorro Personal del Subsistema Mixto, Resolución 41,055-2009-J.D., artículo 7, edición actualizada a junio de 2020.",
+    "prima_se_usa_en_calculo_actual": false
+  },
+  "indemnizacion_cap": {
+    "articulo_ley": 187,
+    "reglamento_seguro_articulo": 12,
+    "pago_unico": true,
+    "devuelve_saldo_ahorrado_y_capitalizado": true,
+    "primas_seguro_colectivo_no_reembolsables": true,
+    "nota": "La devolución se modela por separado de la indemnización del Componente de Beneficio Definido del artículo 186. Si ambas proceden, la salida conserva ambos importes y un total de pagos únicos."
+  }
+}
