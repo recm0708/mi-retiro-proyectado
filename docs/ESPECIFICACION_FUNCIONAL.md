@@ -497,7 +497,7 @@ Quedan para fases posteriores:
 
 **RF-182.** El cargador PDF debe presentar selector y acción de análisis con altura/alineación coherentes. La vista previa debe eliminar lenguaje técnico innecesario y no mostrar leyendas redundantes sobre `Detectado/No detectado` ni avisos de nombre completo sin dividir.
 
-**RF-183.** Las tablas interactivas deben ofrecer un hover suficientemente perceptible en Claro, Oscuro y Alto contraste. Las ayudas contextuales deben utilizar un control visual `Info` y reposicionarse cuando su panel pudiera recortarse por los bordes del viewport o por contenido inferior.
+**RF-183.** Las tablas interactivas deben ofrecer un hover suficientemente perceptible en Claro, Oscuro y Alto contraste. Las ayudas contextuales deben utilizar un botón compacto con icono `i`, sin texto visible redundante, y reposicionarse cuando su panel pudiera recortarse por los bordes del viewport o por contenido inferior.
 
 **RF-184.** La futura exportación desde Resultados debe generarse solo por acción explícita, identificar el contenido como estimación orientativa/no oficial, permitir seleccionar información relevante y ofrecer la posibilidad de excluir identificadores personales. No debe subirse automáticamente a servicios externos.
 
@@ -509,3 +509,46 @@ Quedan para fases posteriores:
 **RF-187.** Todos los pasos de Simular deben compartir dos barras visualmente simétricas y sincronizadas, con Inicio/Anterior, selector directo de paso, estado y acción primaria. En escritorio la superior puede mantenerse visible bajo el encabezado; la inferior permanece al final del contenido.
 
 **RF-188.** Los textos visibles de la aplicación deben estar vinculados a su finalidad previsional o a necesidades funcionales, legales, de privacidad, seguridad y accesibilidad. No deben presentar Mi Retiro Proyectado como aplicación educativa, didáctica o pedagógica ni exponer detalles internos que no ayuden al usuario a tomar una acción o comprender el alcance del producto.
+
+
+## 24. UX.4.6c — Simular / Paso 2 · Cuotas
+
+**RF-189.** El Paso 2 debe separar visualmente las cuotas ya acreditadas de los supuestos de cotización futura.
+
+**RF-190.** `cuotas_totales`, `cuotas_anio_actual` y `continua_cotizando` son obligatorios. `cuotas_esperadas_cierre_anio` y `cuotas_esperadas_por_anio` son obligatorios solo cuando el Asegurado(a) indica que continuará cotizando.
+
+**RF-191.** Un campo acreditado confirmado desde Mi Retiro Seguro debe quedar de solo lectura en el Paso 2. Un campo no detectado por el PDF debe permanecer editable para captura manual.
+
+**RF-192.** La interfaz debe informar de forma visible si un valor proviene del PDF o si quedó pendiente de captura manual, sin exponer terminología interna de persistencia.
+
+**RF-193.** La corrección de un dato importado debe realizarse desde la vista previa del comprobante, no editando directamente el campo protegido en el Paso 2.
+
+**RF-194.** Los supuestos de cotización futura no se deben bloquear por la existencia de un PDF, porque representan decisiones futuras que el documento no determina por el Asegurado(a).
+
+**RF-195.** Si `continua_cotizando = false`, los controles de cuotas futuras deben quedar deshabilitados, no requeridos y acompañados de una explicación visible.
+
+**RF-196.** Las barras superior e inferior del wizard deben ser la única acción primaria de Analizar/Continuar para el Paso 2; no se deben renderizar botones equivalentes dentro de la tarjeta.
+
+**RF-197.** El resultado del Paso 2 debe diferenciar cuotas acreditadas y estimación al cierre y declarar que todavía no constituye un cálculo de pensión.
+
+**RF-198.** El selector de apariencia debe representar Sistema, Claro, Oscuro y Alto contraste mediante iconografía SVG reconocible sin sustituir sus etiquetas textuales accesibles.
+
+
+**RF-199.** Desde cualquier paso que consuma datos importados, la acción de revisar la importación debe abrir la misma vista previa aunque el componente original se haya renderizado dentro de otro panel del wizard.
+
+**RF-200.** Las leyendas de obligatoriedad deben usar de forma uniforme `* Campo obligatorio`. Cuando una obligación dependa de otra respuesta, el asterisco y el atributo `required` se actualizarán dinámicamente sin cambiar la redacción general de la leyenda.
+
+**RF-201.** Los campos editables de texto o número deben ofrecer una pista breve o ejemplo cuando ayude a entender el formato esperado. La pista debe desaparecer de forma nativa al existir un valor y no debe duplicar una ayuda contextual equivalente debajo del campo.
+
+**RF-202.** Las ayudas contextuales deben mostrar únicamente el icono `i` en la interfaz, conservando un nombre accesible mediante `aria-label`.
+
+**RF-203.** Los estados de datos importados deben describirse en lenguaje neutral, por ejemplo “Dato completado desde la importación”, evitando mensajes técnicos como “protegido contra edición” o referencias innecesarias al mecanismo interno.
+
+
+**RF-204.** La vista previa de Mi Retiro Seguro debe estar agrupada por destino funcional y mostrar en los títulos el paso correspondiente: Datos personales e Información previsional básica en Paso 1, Cuotas acreditadas en Paso 2, Historial anual en Paso 3 y referencia de retiro/prestación en Pasos 5 y 6.
+
+**RF-205.** El Paso 1 es la única excepción que puede mostrar la vista previa completa. Cuando **Revisar importación** se invoque desde un paso posterior, solo deben mostrarse los datos aplicables a ese paso.
+
+**RF-206.** La sección del Paso 2 debe presentar tanto el total de cuotas acreditadas como las cuotas acreditadas del año actual. Cuando estas últimas provengan de un registro anual del comprobante, la edición confirmada debe mantenerse sincronizada con ese registro.
+
+**RF-207.** El disparador de ayuda contextual debe conservar una sola circunferencia visible alrededor del icono `i`; el área exterior de interacción no debe dibujar un segundo contorno.

@@ -110,3 +110,10 @@ El consentimiento informado se presenta antes de la captura/importación. Su ver
 ## Consentimiento visible UX.4.6b R4
 
 El consentimiento previo se presenta como un documento extenso y versionado. La casilla de aceptación se habilita únicamente después de alcanzar el final del texto. La interfaz no agrega un bloque de **Fin de los términos** ni un mensaje de **Lectura completada**: al cumplirse el requisito desaparece la ayuda previa y la casilla queda disponible. La interfaz pública describe conservación temporal, cookies, terceros y derechos en lenguaje comprensible; la documentación técnica conserva los nombres de las tecnologías cuando son necesarios para auditoría.
+
+
+## 9. UX.4.6c — integridad de datos importados por campo
+
+La protección de información importada se aplica por campo y no por pantalla completa. Un valor confirmado desde Mi Retiro Seguro queda de solo lectura en los pasos posteriores para evitar modificaciones accidentales fuera del flujo de revisión documental. Si el PDF no aporta un dato, ese control permanece habilitado para que el titular lo complete manualmente.
+
+La corrección de información documental vuelve a la vista previa del comprobante, de forma que exista una única vía explícita de edición. `origen_campos_cuotas` conserva únicamente metadata de procedencia en la sesión; no altera los datos enviados al motor ni agrega persistencia permanente.

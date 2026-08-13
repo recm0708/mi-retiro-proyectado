@@ -268,7 +268,7 @@ La validación automatizada usa `unittest` y cubre:
 - SUCGS;
 - servicios integrados.
 
-Estado técnico actual durante UX.4.6b Revisión 4: **233 pruebas automatizadas**.
+Estado técnico de cierre de UX.4.6c Revisión 3: **253 pruebas automatizadas en OK**.
 
 Ver [VALIDACION.md](VALIDACION.md).
 
@@ -436,3 +436,25 @@ Las ayudas contextuales del formulario pueden proyectarse fuera del borde de `.s
 La detección de llegada al final del documento de privacidad continúa siendo una condición de interfaz para habilitar la casilla de consentimiento, pero no genera un bloque de “fin” ni un mensaje de “lectura completada”. Antes de llegar al final se conserva únicamente la ayuda necesaria para explicar por qué la casilla todavía está deshabilitada; al cumplirse el requisito, esa ayuda desaparece.
 
 Como criterio transversal de presentación, las plantillas públicas deben limitar la redacción a información funcional, previsional, legal, de privacidad, seguridad o accesibilidad que ayude al usuario a operar o comprender el alcance del producto. Terminología de implementación, mensajes meta de desarrollo o posicionamientos ajenos al propósito de Mi Retiro Proyectado —por ejemplo presentarlo como recurso educativo/didáctico— no deben formar parte de la interfaz salvo que exista una función real que lo justifique.
+
+
+## UX.4.6c — frontera de cuotas acreditadas e hipótesis futuras
+
+El Paso 2 conserva `DatosCuotas` como contrato del backend, pero la interfaz distingue explícitamente **datos acreditados** y **supuestos de cotización futura**. La procedencia de los dos campos acreditados se conserva fuera del modelo legal, en `origen_campos_cuotas`, porque esa trazabilidad es una propiedad de la sesión/UI y no modifica el cálculo.
+
+Cuando Mi Retiro Seguro confirma `cuotas_historicas`, `cuotas_totales` queda de solo lectura. `cuotas_anio_actual` queda protegido únicamente cuando el comprobante contiene una fila no proyectada del año calendario actual. Un campo ausente en el PDF permanece editable y se identifica como pendiente de captura manual. Esta regla evita convertir la importación documental en un bloqueo global del formulario.
+
+Las barras superior e inferior del wizard son la única superficie de acción primaria del Paso 2. `navegacion_wizard.js` delega en `continuarDesdePasoCuotas()` cuando ya existe `resumen_cuotas`, eliminando la necesidad de botones duplicados dentro de la tarjeta.
+
+El selector global de apariencia mantiene los mismos cuatro valores de estado, pero su representación visual pasa a SVG inline, sin depender de imágenes externas ni alterar la persistencia del tema.
+
+
+### Revisión 2: modal compartido y pistas de campos
+
+La vista previa de Mi Retiro Seguro deja de depender del panel donde fue renderizada: antes de abrirse se mueve a `body`, permitiendo reutilizar la misma instancia desde Cuotas y pasos posteriores aun cuando Datos personales esté oculto. `accesibilidad.js` incorpora además una capa transversal de pistas para campos editables de texto/número y conserva las ayudas extensas en iconos contextuales compactos.
+
+## UX.4.6c R3 — vista previa documental contextual
+
+El modal de Mi Retiro Seguro sigue siendo un componente único anexado a `body`, pero sus secciones declaran `data-preview-step`. `revisarComprobanteImportado(numeroPaso)` filtra la presentación sin duplicar estado ni parser: el Paso 1 usa la vista completa y los pasos posteriores muestran solo el subconjunto relevante.
+
+La cuota acreditada del año actual se expone como campo de resumen en la sección del Paso 2. Si existe un registro anual no proyectado del año actual, ambos valores se sincronizan antes de confirmar para mantener coherencia entre Cuotas e Historial.

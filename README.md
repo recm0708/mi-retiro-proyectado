@@ -48,9 +48,10 @@ La próxima versión `0.1.0` continúa en desarrollo. El asistente de seis pasos
 | UX.4.4 — edad anual, detalle salarial e importación oficial revisable | Implementada y validada manualmente en PC/laptop |
 | UX.4.5 — origen acreditado/proyectado y cierre accesible | Implementada técnicamente; pendiente validación manual de cierre en PC/laptop |
 | UX.4.6a — rediseño visual integral e Inicio | Cerrada y validada en PC/laptop |
-| UX.4.6b — Simular / Paso 1 · Datos personales | Revisión 4 implementada técnicamente; pendiente validación visual en PC/laptop |
+| UX.4.6b — Simular / Paso 1 · Datos personales | Cerrada y validada en PC/laptop |
+| UX.4.6c — Simular / Paso 2 · Cuotas | Cerrada y validada en PC/laptop; 253 pruebas automatizadas en OK |
 
-La suite actual contiene **233 pruebas automatizadas**. UX.3 protege responsive y la separación entre evaluación y último mes acreditado; UX.4.1–UX.4.3 cubren semántica del wizard, ayudas contextuales, validación accesible, estados seleccionados, recuperación de foco y estabilidad del `MutationObserver`; UX.4.4 añade la edad anual, un detalle opcional del año actual que separa salario disponible, cuota acreditada y períodos parciales, bases salariales recientes y una importación revisable de documentos oficiales. La Ficha Digital conserva únicamente salarios del año calendario actual y las vistas previas monetarias usan separador de miles con dos decimales.
+La suite actual contiene **253 pruebas automatizadas**. UX.3 protege responsive y la separación entre evaluación y último mes acreditado; UX.4.1–UX.4.3 cubren semántica del wizard, ayudas contextuales, validación accesible, estados seleccionados, recuperación de foco y estabilidad del `MutationObserver`; UX.4.4 añade la edad anual, un detalle opcional del año actual que separa salario disponible, cuota acreditada y períodos parciales, bases salariales recientes y una importación revisable de documentos oficiales. La Ficha Digital conserva únicamente salarios del año calendario actual y las vistas previas monetarias usan separador de miles con dos decimales.
 
 ## Hardening previo a beta
 
@@ -217,11 +218,15 @@ Antes de ingresar o importar información, la ruta **Simular** solicita un conse
 
 La vista previa de Mi Retiro Seguro abre en modo revisión. **Editar campos** habilita correcciones, **Finalizar edición** vuelve a bloquear los controles y **Importar datos** aplica lo confirmado. El parser puede descomponer nombres completos de forma conservadora y reconoce el patrón final `de Apellido` como apellido de casada cuando aparece en un nombre femenino; toda información importada sigue siendo revisable antes de aplicarse.
 
-Los seis pasos comparten navegación superior e inferior sincronizada y alineada al mismo ancho de las tarjetas. En PC/laptop la superior permanece disponible durante formularios largos y la inferior ofrece la misma navegación al terminar el paso. Las tablas refuerzan el hover y las ayudas contextuales utilizan un control **Info** que se reposiciona para evitar recortes.
+Los seis pasos comparten navegación superior e inferior sincronizada y alineada al mismo ancho de las tarjetas. En PC/laptop la superior permanece disponible durante formularios largos y la inferior ofrece la misma navegación al terminar el paso. Las tablas refuerzan el hover y las ayudas contextuales utilizan un botón compacto de información con icono `i`, sin texto redundante, que se reposiciona para evitar recortes.
 
 La política detallada se documenta en [Política de privacidad](docs/POLITICA_PRIVACIDAD.md), [Términos de uso y tratamiento de datos](docs/TERMINOS_USO_PRIVACIDAD.md) y [Matriz de alineación con Ley 81](docs/CUMPLIMIENTO_LEY_81.md). La publicación pública/comercial deberá someter estos textos y controles a revisión jurídica formal.
 
-La Revisión 4 de UX.4.6b queda validada técnicamente con **233 pruebas automatizadas**; permanece pendiente la revisión visual manual en PC/laptop antes del cierre de la fase. La redacción pública se mantiene centrada en la finalidad previsional, funcional, legal y de privacidad del producto, sin posicionarlo como aplicación educativa o exponer jerga interna innecesaria.
+La Revisión 4 de UX.4.6b quedó validada técnica y visualmente en PC/laptop y fue cerrada en `main` con CI verde en Python 3.13 y 3.14. La redacción pública se mantiene centrada en la finalidad previsional, funcional, legal y de privacidad del producto, sin posicionarlo como aplicación educativa o exponer jerga interna innecesaria.
+
+### UX.4.6c — Paso 2 de Simular
+
+UX.4.6c reorganiza el Paso 2 en **Cuotas acreditadas** y **Cotización futura**, aplica el mismo contrato de obligatoriedad accesible del Paso 1 y elimina acciones duplicadas dentro de la tarjeta. Cuando Mi Retiro Seguro aporta una cuota, ese campo se mantiene sin cambios en el Paso 2; si el PDF no aporta el dato, el control permanece habilitado para completarlo manualmente. Las correcciones de datos importados se realizan desde la vista previa del documento. El selector global de apariencia reemplaza el símbolo abstracto por iconos SVG de sistema, claro, oscuro y alto contraste. La Revisión 2 corrige la reapertura de la vista previa desde pasos posteriores, simplifica el mensaje de procedencia importada, normaliza `* Campo obligatorio`, elimina la palabra visible `Info` de las ayudas y añade pistas internas en campos editables que desaparecen cuando existe un valor. La Revisión 3 elimina el doble contorno visual del icono `i` y hace que **Revisar importación** sea contextual: Paso 1 muestra toda la información extraída y Paso 2 únicamente **Cuotas acreditadas (Paso 2)**. La vista previa etiqueta además cada grupo con su etapa de destino para reutilizar el mismo patrón en los pasos siguientes. Queda cerrada y validada en PC/laptop con **253 pruebas automatizadas en OK**.
 
 ## 9. Instalación
 

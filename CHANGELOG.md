@@ -1,5 +1,26 @@
 # Changelog
 
+### UX.4.6c — Simular / Paso 2 · Cuotas
+
+- El Paso 2 se reorganiza en **Cuotas acreditadas** y **Cotización futura** para separar datos ya registrados por la CSS de supuestos futuros.
+- Los cinco controles conservan validación accesible y muestran el asterisco de obligatoriedad cuando corresponde; los dos campos de cuotas futuras dejan de ser obligatorios cuando el usuario indica que no continuará cotizando.
+- Los valores de `cuotas_totales` y `cuotas_anio_actual` detectados y confirmados desde Mi Retiro Seguro quedan de solo lectura en el Paso 2. Si el PDF no aporta uno de ellos, únicamente ese campo permanece editable para captura manual.
+- Se incorpora trazabilidad por campo mediante `origen_campos_cuotas`; una simulación previa a UX.4.6c puede reconstruir el origen a partir de la referencia PDF confirmada.
+- El Paso 2 ofrece **Revisar importación** para volver a la vista previa del comprobante; la corrección no se realiza directamente sobre un dato importado dentro del formulario.
+- Al indicar que no continuará cotizando, los campos futuros se deshabilitan, dejan de ser requeridos y muestran una explicación visible del estado.
+- Se eliminan el `Paso 2 de 6` redundante, el cuadro amplio sobre proyección y los botones internos duplicados. Las barras superior e inferior del wizard concentran Analizar/Continuar.
+- El resultado se presenta como **Situación de tus cuotas**, con lenguaje orientado al usuario y separación entre acreditado y estimado.
+- El selector global de apariencia sustituye el símbolo circular abstracto por iconos SVG de sistema, sol, luna y contraste, también visibles dentro del menú.
+- Revisión 2: se corrige la reapertura del modal de importación desde Cuotas y pasos posteriores moviendo los modales fuera de paneles ocultos antes de mostrarlos.
+- Revisión 2: los mensajes de origen se simplifican a lenguaje orientado al usuario; se elimina la frase “protegidos contra edición” y se sustituye el candado visual por un estado de confirmación.
+- Revisión 2: `* Campo obligatorio` se normaliza como leyenda transversal; las ayudas contextuales quedan como icono `i` sin la palabra visible `Info`.
+- Revisión 2: los campos editables reciben pistas/ejemplos breves dentro del control; desaparecen automáticamente cuando existe un valor manual o importado, evitando duplicar ayudas visibles.
+- Revisión 3: el disparador de ayuda conserva un único círculo visual alrededor de `i`; el botón exterior mantiene el área de foco/clic sin dibujar un segundo contorno.
+- Revisión 3: **Revisar importación** abre una vista contextual por paso. Paso 1 conserva la vista completa; Paso 2 muestra únicamente las cuotas que corresponden a esa etapa, y el patrón queda preparado para Historial, Retiro y Resultados.
+- Revisión 3: la vista previa se reorganiza como **Datos personales (Paso 1)**, **Información previsional básica (Paso 1)**, **Cuotas acreditadas (Paso 2)**, **Historial anual detectado (Paso 3)** y **Referencia de retiro y prestación (Pasos 5 y 6)**.
+- Revisión 3: se expone de forma explícita la cuota acreditada del año actual dentro del bloque del Paso 2 y se sincroniza con el registro anual correspondiente cuando existe.
+- La suite completa alcanza **253 pruebas automatizadas en OK** en la Revisión 3 y la validación visual en PC/laptop queda completada; UX.4.6c se cierra.
+
 ### UX.4.6b — Simular / Paso 1 · Datos personales
 
 - El Paso 1 separa **captura manual** e **importación desde PDF** como modalidades mutuamente excluyentes, con captura manual seleccionada por defecto.
@@ -11,7 +32,7 @@
 - La vista previa de Mi Retiro Seguro inicia bloqueada; **Editar campos** habilita cambios, **Finalizar edición** vuelve al modo revisión y **Importar datos** confirma la transferencia. Mientras existe una edición abierta, la importación permanece deshabilitada.
 - El parser puede descomponer un nombre completo de forma conservadora y revisable; en nombres femeninos reconoce el patrón final `de Apellido` como apellido de casada cuando existe en el documento. Los campos explícitamente etiquetados por el PDF conservan prioridad.
 - Se eliminan del modal los textos técnicos `Detectado = ...`, el aviso sobre nombre completo sin dividir y otros mensajes que no ayudan a tomar una decisión.
-- Las filas de tablas reciben un hover global más perceptible y las ayudas contextuales cambian del círculo `?` a un control **Info**, con reposicionamiento vertical/horizontal para evitar recortes cerca del viewport o footer.
+- Las filas de tablas reciben un hover global más perceptible y las ayudas contextuales cambian del círculo `?` a un botón compacto con icono `i`, con reposicionamiento vertical/horizontal para evitar recortes cerca del viewport o footer.
 - `sessionStorage` conserva el origen del bloque personal como `MANUAL`, `MI_RETIRO_SEGURO` o `MI_RETIRO_SEGURO_EDITADO`; los documentos PDF continúan procesándose en memoria y no se persiste el archivo original.
 - La navegación común del asistente usa dos barras sincronizadas y del mismo ancho que las tarjetas: una superior disponible durante pasos largos en PC/laptop y otra inferior al cierre del contenido. Ambas conservan Inicio/Anterior, salto directo, estado y acción primaria.
 - Antes de capturar o importar datos, **Simular** presenta un consentimiento versionado de privacidad. Rechazarlo elimina el estado de simulación de la pestaña y devuelve a Inicio; aceptarlo habilita el flujo.
@@ -23,7 +44,7 @@
 - Revisión 3: las ayudas contextuales de la simulación pueden salir del borde de la tarjeta sin quedar recortadas.
 - Revisión 4: se elimina del consentimiento el bloque visual **Fin de los términos** y el mensaje **Lectura completada**. Llegar al final sigue siendo requisito técnico para habilitar la casilla, pero la interfaz no añade mensajes meta una vez cumplido.
 - Revisión 4: se formaliza que el texto público debe limitarse a contenido funcional, previsional, legal, de privacidad o de seguridad relevante para el usuario; no se presenta el producto como aplicación educativa, didáctica o pedagógica ni se muestran detalles internos sin utilidad práctica.
-- UX.4.6b permanece **pendiente de validación visual manual en PC/laptop** antes de su cierre y commits. La suite completa queda en **233 pruebas automatizadas en OK** tras la validación técnica de R4.
+- UX.4.6b quedó **cerrada y validada en PC/laptop**, con commits por categorías y CI remoto en verde para Python 3.13 y 3.14. La suite de cierre fue de **233 pruebas automatizadas en OK**.
 
 ### UX.4.6a — rediseño visual integral y nueva página de Inicio
 

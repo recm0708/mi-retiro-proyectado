@@ -798,7 +798,7 @@ El footer global se presentará centrado con nombre, versión, aviso de independ
 
 ## ADR-079 — Separar captura manual e importación documental en Datos personales
 
-**Estado:** Aceptada para validación UX.4.6b
+**Estado:** Aceptada
 
 **Decisión:** el Paso 1 presenta dos modalidades excluyentes: captura manual e importación desde un comprobante de Mi Retiro Seguro. La captura manual es predeterminada. La Ficha Digital se traslada al Paso 3 porque sus datos describen salarios del año actual, no identidad personal.
 
@@ -806,7 +806,7 @@ El footer global se presentará centrado con nombre, versión, aviso de independ
 
 ## ADR-080 — Identificadores personales opcionales y de sesión
 
-**Estado:** Aceptada para validación UX.4.6b
+**Estado:** Aceptada
 
 **Decisión:** nombres, apellidos, cédula y número de Seguro Social pueden capturarse manualmente o devolverse desde Mi Retiro Seguro cuando el PDF los etiqueta de forma inequívoca. Son opcionales para el cálculo, permanecen en `sessionStorage` durante la simulación actual y no se escriben en archivos, base de datos, logs, fixtures ni documentación. El código único del documento continúa excluido.
 
@@ -825,7 +825,7 @@ Si el PDF ofrece un nombre completo, el parser puede descomponerlo de forma cons
 
 ## ADR-082 — Consentimiento informado y versionado antes de Simular
 
-**Estado:** Aceptada para validación UX.4.6b
+**Estado:** Aceptada
 
 **Decisión:** antes de permitir captura manual o importación documental, `/simulacion` debe presentar información clara sobre datos tratados, finalidades, almacenamiento temporal, derechos, contacto y ausencia actual de cookies/rastreadores. La aceptación se versiona en `localStorage` sin copiar la simulación y requiere además una marca de sesión en `sessionStorage`, por lo que una nueva pestaña/sesión vuelve a presentar las condiciones. Rechazar elimina el estado temporal de la simulación y devuelve a Inicio. Un cambio material de la política incrementará la versión y solicitará aceptación nuevamente.
 
@@ -833,7 +833,7 @@ Si el PDF ofrece un nombre completo, el parser puede descomponerlo de forma cons
 
 ## ADR-083 — No mostrar un banner de cookies cuando la aplicación no usa cookies
 
-**Estado:** Aceptada para validación UX.4.6b
+**Estado:** Aceptada
 
 **Decisión:** la versión actual no mostrará un banner independiente de cookies porque no crea cookies, no integra analítica, publicidad ni rastreadores. La política sí informará el uso de `sessionStorage` para la simulación y `localStorage` para apariencia y consentimiento. Si se añaden cookies no esenciales, analítica o telemetría, se diseñará consentimiento granular previo y se actualizará la política.
 
@@ -841,7 +841,7 @@ Si el PDF ofrece un nombre completo, el parser puede descomponerlo de forma cons
 
 ## ADR-084 — Descomposición conservadora y revisable del nombre completo
 
-**Estado:** Aceptada para validación UX.4.6b
+**Estado:** Aceptada
 
 **Decisión:** Mi Retiro Seguro puede descomponer un nombre completo cuando la estructura sea suficientemente reconocible. Para cuatro o más componentes, conserva el primer token como primer nombre, los dos últimos como apellidos y el bloque intermedio como segundo nombre; para nombres femeninos, un sufijo final `de Apellido` se extrae como apellido de casada. Los campos explícitamente etiquetados por el documento siempre prevalecen y la importación no se aplica sin revisión previa.
 
@@ -849,7 +849,7 @@ Si el PDF ofrece un nombre completo, el parser puede descomponerlo de forma cons
 
 ## ADR-085 — Privacidad por diseño y hardening de la frontera de simulación
 
-**Estado:** Aceptada para validación UX.4.6b
+**Estado:** Aceptada
 
 **Decisión:** toda respuesta bajo `/api/simulacion/` debe declarar `Cache-Control: no-store`; la aplicación mantiene CSP, políticas de referrer/permisos, protección contra framing y `nosniff`. Bootstrap servido temporalmente por jsDelivr usa SRI y deberá evaluarse para localización antes de beta pública. La política de privacidad y la matriz de cumplimiento forman parte del contrato documental de cualquier cambio que agregue datos, almacenamiento, exportaciones, analítica o terceros.
 
@@ -867,8 +867,76 @@ Si el PDF ofrece un nombre completo, el parser puede descomponerlo de forma cons
 
 ## ADR-087 — El contenido público debe ser pertinente al propósito del producto
 
-**Estado:** Aceptada para validación UX.4.6b R4
+**Estado:** Aceptada
 
 **Decisión:** la interfaz solo debe presentar información que ayude a operar la aplicación, comprender una estimación previsional, conocer su alcance, ejercer decisiones de privacidad, cumplir requisitos legales o utilizar funciones de seguridad/accesibilidad. Se eliminan mensajes meta como **Fin de los términos** y **Lectura completada** cuando no aportan una decisión adicional. Mi Retiro Proyectado no se presentará como aplicación educativa, didáctica o pedagógica mientras ese no sea un propósito real del producto.
 
 **Motivo:** reducir texto ajeno a la tarea mejora claridad, evita confundir el posicionamiento del producto y mantiene coherencia entre interfaz, finalidad previsional y documentación.
+
+
+## ADR-088 — Los datos importados se bloquean por campo, no por paso
+
+**Estado:** Aceptada, aplicada y validada en UX.4.6c
+
+**Decisión:** un valor detectado y confirmado desde Mi Retiro Seguro queda protegido contra edición directa en los pasos posteriores. La protección se aplica únicamente al campo efectivamente aportado por el documento. Si un dato no fue detectado, ese control permanece habilitado para captura manual. La corrección de un valor importado se realiza desde la vista previa documental mediante el flujo explícito **Editar campos → Finalizar edición → Importar datos**.
+
+Para el Paso 2, `origen_campos_cuotas` registra de forma independiente el origen de `cuotas_totales` y `cuotas_anio_actual`. Los supuestos futuros (`continua_cotizando`, cierre del año y cuotas futuras por año) siguen siendo decisiones manuales.
+
+**Motivo:** bloquear todo el paso cuando el PDF está incompleto impediría completar la simulación; permitir editar cualquier dato importado en cada pantalla rompería la trazabilidad y crearía múltiples lugares de corrección para un mismo valor.
+
+## ADR-089 — El Paso 2 separa información acreditada y supuestos futuros
+
+**Estado:** Aceptada, aplicada y validada en UX.4.6c
+
+**Decisión:** la interfaz del Paso 2 se organiza en **Cuotas acreditadas** y **Cotización futura**. Las acciones internas duplicadas se eliminan y la navegación dual concentra Analizar/Continuar. Si el Asegurado(a) indica que no continuará cotizando, los campos futuros se deshabilitan y dejan de ser requeridos.
+
+**Motivo:** la separación reduce el riesgo de interpretar una expectativa futura como dato ya acreditado y mantiene coherencia con la distinción acreditado/proyectado aplicada en fases anteriores.
+
+## ADR-090 — La apariencia usa iconografía reconocible sin activos externos
+
+**Estado:** Aceptada, aplicada y validada en UX.4.6c
+
+**Decisión:** el control global de apariencia usa SVG inline para representar Sistema, Claro, Oscuro y Alto contraste. Los SVG son decorativos (`aria-hidden`) y el nombre textual del tema sigue siendo la fuente accesible de significado.
+
+**Motivo:** la iconografía de monitor, sol, luna y contraste comunica mejor el estado que el símbolo circular abstracto anterior, sin añadir archivos gráficos ni dependencias externas.
+
+
+## ADR-091 — Los modales de importación son superficies globales del wizard
+
+**Estado:** Aceptada, aplicada y validada en UX.4.6c R2
+
+**Decisión:** antes de abrir una vista previa documental, el modal se reubica como hijo directo de `body` si todavía se encuentra dentro de un panel del wizard. De esta forma puede abrirse desde Cuotas o pasos posteriores aunque el Paso 1 esté oculto.
+
+**Motivo:** Bootstrap puede mostrar el backdrop pero mantener invisible un modal cuyo ancestro está oculto con `display: none`. La vista previa es una única superficie de corrección compartida por todo el flujo, no un componente exclusivo del Paso 1.
+
+## ADR-092 — Las pistas de captura viven dentro del campo cuando sea posible
+
+**Estado:** Aceptada, aplicada y validada en UX.4.6c R2
+
+**Decisión:** los campos editables de texto/número usan placeholders breves y orientados al formato esperado. Cuando existe un valor manual o importado, la pista desaparece de forma nativa. Las explicaciones extensas permanecen en ayudas contextuales y no se duplican debajo del control salvo necesidad funcional.
+
+**Motivo:** reduce ruido visual y conserva orientación justo cuando el campo está vacío. El patrón es reutilizable en UX.4.6d–g y pasos futuros.
+
+## ADR-093 — Las ayudas contextuales usan iconografía compacta sin la palabra Info
+
+**Estado:** Aceptada, aplicada y validada en UX.4.6c R2
+
+**Decisión:** el disparador visual de ayuda muestra únicamente un icono `i` circular. El significado accesible se conserva mediante `aria-label`, hover, foco, clic táctil y panel reposicionable.
+
+**Motivo:** la etiqueta del campo ya aporta contexto y la palabra `Info` repetida en cada control añade anchura y ruido sin mejorar la comprensión.
+
+## ADR-094 — Una vista previa documental, filtrada por el paso que la invoca
+
+**Estado:** Aceptada, aplicada y validada en UX.4.6c R3
+
+**Decisión:** Mi Retiro Seguro mantiene un único modal de revisión. El Paso 1 muestra todas las secciones extraídas; cualquier paso posterior invoca `revisarComprobanteImportado(numeroPaso)` y solo presenta los grupos etiquetados para esa etapa. Los títulos visibles indican explícitamente el paso de destino.
+
+**Motivo:** evita obligar al usuario a recorrer datos ajenos a la tarea actual y, al mismo tiempo, conserva una sola fuente de verdad para edición, confirmación y trazabilidad.
+
+## ADR-095 — El control de ayuda conserva un único círculo visual
+
+**Estado:** Aceptada, aplicada y validada en UX.4.6c R3
+
+**Decisión:** el botón exterior de ayuda mantiene su área de interacción, foco y semántica, pero no dibuja borde propio. El único contorno circular visible pertenece a `.context-help-icon`.
+
+**Motivo:** elimina el efecto de doble círculo observado en la interfaz sin reducir la accesibilidad por teclado ni el área útil del control.

@@ -279,7 +279,7 @@ Cuando Dependabot proponga un cambio Python, revisar primero si corresponde a un
 - Un cambio material en categorías de datos, finalidades, terceros, retención o almacenamiento exige incrementar la versión del consentimiento y actualizar la documentación legal/técnica relacionada.
 - No agregar un banner de cookies mientras no existan cookies. Si se incorpora analítica, telemetría o cookies no esenciales, implementar consentimiento granular antes de activarlas.
 - Mantener `/api/simulacion/*` con `Cache-Control: no-store` y evitar logging de cuerpos/archivos/identificadores.
-- Mantener las ayudas `Info` y el hover de tablas como patrones transversales para los siguientes pasos UX.4.6c–g.
+- Mantener las ayudas mediante icono `i` y el hover de tablas como patrones transversales para los siguientes pasos UX.4.6c–g.
 - Antes de beta pública, preferir Bootstrap local sobre CDN y revisar jurídicamente los textos de privacidad/condiciones.
 
 
@@ -299,3 +299,26 @@ Cuando Dependabot proponga un cambio Python, revisar primero si corresponde a un
 - Toda redacción pública debe estar justificada por una necesidad funcional, previsional, legal, de privacidad, seguridad o accesibilidad.
 - No presentar Mi Retiro Proyectado como aplicación educativa, didáctica o pedagógica salvo que en el futuro exista una función explícita de ese tipo aprobada como alcance del producto.
 - No exponer jerga técnica, estados internos o mensajes meta de desarrollo cuando el usuario no necesite conocerlos para tomar una decisión.
+
+
+## UX.4.6c — reglas de mantenimiento del Paso 2
+
+- No bloquear un formulario completo por el solo hecho de existir una importación PDF; bloquear únicamente campos con origen documental confirmado.
+- Un campo que el documento no aporta debe seguir siendo editable y debe indicar al usuario que necesita captura manual.
+- No permitir una segunda vía de corrección de datos importados en pasos posteriores: la edición vuelve a la vista previa documental.
+- Mantener `origen_campos_cuotas` separado de `DatosCuotas`; la procedencia es metadata de interfaz y no una regla legal.
+- Cuando `continua_cotizando` sea `false`, retirar dinámicamente `required` de los campos futuros además de deshabilitarlos.
+- Las barras del wizard concentran la acción primaria; no reintroducir botones equivalentes dentro del Paso 2.
+- Los iconos del selector de apariencia deben seguir siendo decorativos y acompañarse siempre del nombre textual del tema.
+- Usar `* Campo obligatorio` como leyenda estándar; la condicionalidad se expresa habilitando/deshabilitando el asterisco y `required`.
+- Los inputs vacíos de texto/número deben ofrecer una pista breve; evitar repetir debajo del campo la misma explicación que ya existe en la ayuda contextual.
+- Los disparadores de ayuda muestran solo el icono `i`, pero deben conservar `aria-label` descriptivo.
+- Cualquier modal que deba abrirse desde varios pasos debe estar desacoplado visualmente de paneles ocultables del wizard.
+
+## Patrón de revisión importada por contexto — UX.4.6c R3
+
+- Paso 1: `revisarComprobanteImportado(1)` muestra todo el comprobante.
+- Pasos posteriores: pasar siempre el número real del paso y etiquetar las secciones reutilizables con `data-preview-step`.
+- No crear un modal nuevo para cada etapa.
+- Si un dato resumen también vive dentro de una tabla importada —como las cuotas del año actual— sincronizar ambos controles antes de confirmar.
+- El control `.context-help-trigger` no debe dibujar borde; `.context-help-icon` conserva el único círculo visible.

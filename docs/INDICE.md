@@ -70,3 +70,7 @@ La aplicación expone `/metodologia` como versión navegable de la metodología 
 - [Política de privacidad](POLITICA_PRIVACIDAD.md)
 - [Matriz interna de alineación con Ley 81](CUMPLIMIENTO_LEY_81.md)
 - [UX.4.6b — Paso 1](UX_4_6B_PASO1_DATOS_PERSONALES.md)
+
+## UX.4.6c — Paso 2
+
+- [UX.4.6c — Simular / Paso 2 · Cuotas](UX_4_6C_PASO2_CUOTAS.md)

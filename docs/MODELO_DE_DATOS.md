@@ -410,3 +410,15 @@ El estado agrega:
 ### Consentimiento de privacidad fuera del modelo previsional
 
 La aceptación de privacidad no forma parte de `simulacion.persona` ni de los modelos Pydantic de cálculo. `privacidad.js` conserva en `localStorage` únicamente versión, estado de aceptación y fecha técnica de aceptación. El contenido de la simulación permanece en `sessionStorage`. Esta separación evita que un estado legal/de interfaz se mezcle con los contratos de los motores.
+
+
+## UX.4.6c — trazabilidad de campos de cuotas
+
+`DatosCuotas` no cambia su contrato con la API. UX.4.6c añade en el estado temporal del frontend `origen_campos_cuotas`, un mapa de procedencia por campo que actualmente puede identificar `cuotas_totales` y `cuotas_anio_actual` como `MI_RETIRO_SEGURO` o `MI_RETIRO_SEGURO_EDITADO`. La ausencia de una marca de origen significa que el valor es manual o todavía está pendiente.
+
+Esta metadata no forma parte del cálculo legal ni se envía al endpoint de análisis de cuotas. Su finalidad es impedir ediciones accidentales de información documental ya confirmada y mantener habilitados únicamente los datos que el PDF no proporcionó.
+
+
+### Vista previa contextual de cuotas — UX.4.6c R3
+
+La referencia confirmada puede conservar en el estado temporal del frontend `cuotas_anio_actual` como valor auxiliar de revisión. Si el comprobante ya contiene un registro anual no proyectado para el año actual, ese valor se deriva del registro y se sincroniza al confirmar. Este campo auxiliar no modifica el contrato `DatosCuotas` de la API; sirve para mantener consistente la vista filtrada del Paso 2 con el historial importado.

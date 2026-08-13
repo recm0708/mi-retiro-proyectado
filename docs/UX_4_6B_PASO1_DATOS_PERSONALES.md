@@ -2,7 +2,7 @@
 
 ## Estado
 
-**Revisión 4 implementada técnicamente; pendiente validación manual en PC/laptop.**
+**Cerrada y validada en PC/laptop. CI remoto en verde para Python 3.13 y 3.14.**
 
 Base: `main` después del cierre de UX.4.6a. La fase no modifica fórmulas previsionales.
 
@@ -28,7 +28,7 @@ Reducir la carga visual del Paso 1, separar captura manual e importación docume
 14. Origen de datos personales: `MANUAL`, `MI_RETIRO_SEGURO`, `MI_RETIRO_SEGURO_EDITADO`.
 15. Navegación dual y simétrica: barra superior dentro del mismo ancho del formulario y barra inferior equivalente. En escritorio la superior usa `sticky` bajo el encabezado para mantener Inicio/Anterior, selector de paso y acción primaria accesibles durante pasos largos; la inferior ofrece cierre natural del paso.
 16. Hover de tablas más perceptible como regla transversal.
-17. Ayuda contextual `Info` en lugar del círculo `?`, con reposicionamiento para evitar recortes.
+17. Ayuda contextual mediante icono `i` en lugar del círculo `?`, con reposicionamiento para evitar recortes.
 18. Menor espacio vertical y alineación de la fila final de identificación en escritorio.
 
 ## Consentimiento, privacidad y cookies
@@ -73,7 +73,7 @@ La Revisión 4 conserva las regresiones de lectura completa antes de consentir, 
 
 ## Pendiente para cierre
 
-Validación manual en PC/laptop de: consentimiento aceptar/rechazar y habilitación silenciosa de la casilla al llegar al final, Manual/PDF, asteriscos y errores obligatorios, cargador compacto, parser de nombre/apellido de casada, modal revisión/edición/importación, hover de tablas, ayuda `Info`, navegación superior/inferior y comportamiento `sticky` de escritorio, Fuentes/privacidad y los tres temas. Después de la aceptación se actualizará el estado documental y se prepararán commits lógicos por categorías.
+Validación manual en PC/laptop de: consentimiento aceptar/rechazar y habilitación silenciosa de la casilla al llegar al final, Manual/PDF, asteriscos y errores obligatorios, cargador compacto, parser de nombre/apellido de casada, modal revisión/edición/importación, hover de tablas, ayuda mediante icono `i`, navegación superior/inferior y comportamiento `sticky` de escritorio, Fuentes/privacidad y los tres temas. Después de la aceptación se actualizará el estado documental y se prepararán commits lógicos por categorías.
 
 
 ## Criterio transversal de contenido visible

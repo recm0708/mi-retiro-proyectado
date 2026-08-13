@@ -655,15 +655,15 @@ La Revisión 2 deja la suite en **223 pruebas automatizadas en `OK`**. Las regre
 15. consentimiento versionado antes de la captura y retorno a Inicio al rechazar;
 16. ausencia de cookies/analítica/rastreadores en el contrato actual y separación entre `sessionStorage`/`localStorage`;
 17. `Cache-Control: no-store` en la API de simulación, CSP y SRI;
-18. hover transversal de tablas y control `Info` reposicionable;
+18. hover transversal de tablas y icono contextual `i` reposicionable;
 19. sección pública de privacidad y fuentes oficiales;
 20. permanencia de la importación de Ficha Digital en Paso 3.
 
 Las regresiones históricas de UX.3, UX.4.1, UX.4.4 y UX.4.5 se actualizan al nuevo contrato sin eliminar sus garantías de responsive, validación accesible, importación revisable y separación acreditado/proyectado.
 
-### Validación manual pendiente
+### Validación manual de cierre — completada
 
-Antes de cerrar UX.4.6b en PC/laptop se debe comprobar:
+UX.4.6b fue revisada y aprobada en PC/laptop antes de sus commits de cierre. La lista utilizada fue:
 
 - primera entrada a **Simular**: modal de privacidad visible antes de capturar datos;
 - **No acepto** vuelve a Inicio y **Aceptar y continuar** habilita el flujo;
@@ -676,7 +676,7 @@ Antes de cerrar UX.4.6b en PC/laptop se debe comprobar:
 - vista previa inicialmente bloqueada, **Editar campos**, **Finalizar edición** e **Importar datos**;
 - ausencia de leyendas redundantes retiradas;
 - hover de filas suficientemente perceptible;
-- ayuda `Info` de Sistema previsional sin recorte cerca del footer/viewport;
+- ayuda mediante icono `i` de Sistema previsional sin recorte cerca del footer/viewport;
 - fila de NSS alineada sin espacio vertical excesivo;
 - barra al final del Paso 1 sin superposición;
 - Ficha Digital únicamente en Paso 3;
@@ -710,6 +710,62 @@ Comprobar en PC/laptop:
 3. no aparece el mensaje **Lectura completada. Marca la casilla para aceptar y continuar.**;
 4. antes de alcanzar el final, la ayuda de desplazamiento explica por qué la casilla está deshabilitada y desaparece al cumplirse el requisito;
 5. las plantillas públicas no posicionan Mi Retiro Proyectado como aplicación educativa, didáctica o pedagógica;
-6. navegación superior/inferior, términos, Manual/PDF, campos obligatorios y ayuda `Info` conservan el comportamiento validado en R3.
+6. navegación superior/inferior, términos, Manual/PDF, campos obligatorios y ayuda mediante icono `i` conservan el comportamiento validado en R3.
 
 La validación técnica de UX.4.6b Revisión 4 ejecutó **233 pruebas automatizadas en OK**, además de `compileall`, validación de sintaxis JavaScript y revisión de espacios finales.
+
+
+## Validación UX.4.6c — Simular / Paso 2 · Cuotas
+
+### Regresiones automatizadas
+
+La Revisión 3 amplía `tests/test_ux46c_cuotas.py` con cobertura de filtrado por paso, rotulado de secciones, cuotas del año actual y eliminación del doble círculo visual. La suite completa debe finalizar con **253 pruebas automatizadas en OK**.
+
+Se protege que:
+
+1. el Paso 2 separe cuotas acreditadas y cotización futura;
+2. los campos obligatorios mantengan indicador y validación accesible;
+3. `cuotas_totales` y `cuotas_anio_actual` se bloqueen solo si fueron detectados y confirmados desde Mi Retiro Seguro;
+4. un dato ausente en el PDF permanezca editable y muestre que debe completarse manualmente;
+5. la procedencia se conserve por campo en `origen_campos_cuotas`;
+6. quitar la importación elimine las marcas de origen;
+7. la corrección de datos importados vuelva a la vista previa documental;
+8. no existan acciones duplicadas dentro del Paso 2;
+9. la navegación común continúe al Paso 3 sin depender de un botón duplicado;
+10. la obligatoriedad de las cuotas futuras se desactive cuando no se continuará cotizando;
+11. el resumen use lenguaje orientado al usuario;
+12. el selector de apariencia use iconos SVG semánticos;
+13. los estados importado/faltante tengan estilos diferenciados;
+14. el modal de importación se desacople de paneles ocultos antes de abrirse;
+15. la leyenda visible sea exactamente `* Campo obligatorio`;
+16. los campos editables tengan pistas breves que desaparezcan al existir un valor;
+17. las ayudas contextuales no muestren la palabra visible `Info`.
+
+### Revisión manual PC/laptop pendiente
+
+La validación visual de cierre de UX.4.6c en PC/laptop comprobó en Claro, Oscuro y Alto contraste:
+
+- PDF con ambos campos de cuotas detectados: ambos deben quedar protegidos;
+- PDF con solo uno de los dos campos: únicamente el detectado debe quedar protegido y el faltante debe poder completarse;
+- captura completamente manual: ambos campos deben permanecer editables;
+- **Revisar importación** debe abrir nuevamente la vista previa del comprobante sin dejar únicamente el fondo oscurecido;
+- `¿Continuarás cotizando? = No` debe desactivar cuotas futuras y retirar sus asteriscos dinámicos;
+- las barras superior e inferior deben mostrar la misma acción y el mismo estado;
+- después de analizar, la acción principal debe cambiar de **Analizar cuotas** a **Continuar al historial**;
+- los iconos Sistema/Claro/Oscuro/Contraste deben coincidir con la apariencia seleccionada.
+
+### Comprobaciones específicas de Revisión 3
+
+- Desde Paso 1, **Revisar importación** muestra todos los grupos del comprobante.
+- Desde Paso 2, la misma acción muestra únicamente **Cuotas acreditadas (Paso 2)**.
+- El bloque del Paso 2 contiene total de cuotas y cuotas acreditadas del año actual.
+- Los encabezados de la vista previa identifican el paso de destino de cada grupo.
+- El icono de ayuda muestra una sola circunferencia visual y conserva foco/hover/teclado.
+
+
+### Cierre confirmado de UX.4.6c
+
+- Revisión visual PC/laptop: **completada**.
+- Suite completa: **253 pruebas automatizadas en OK**.
+- `git diff --check`: debe permanecer sin incidencias antes del commit.
+- Revisión manual móvil/tablet/pantallas grandes: diferida para beta/RC.

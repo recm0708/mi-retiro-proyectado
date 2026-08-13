@@ -2,7 +2,7 @@
 
 **Producto:** Mi Retiro Proyectado
 **Versión:** 2026-08-13.2
-**Estado:** UX.4.6b Revisión 4 — implementado técnicamente; pendiente validación manual en PC/laptop.
+**Estado:** Vigente desde el cierre de UX.4.6b; validado en PC/laptop. Revisión jurídica formal pendiente antes de una publicación pública o comercial.
 
 ## 1. Principio general
 

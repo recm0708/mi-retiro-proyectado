@@ -236,7 +236,8 @@ Previsto:
 - [x] UX.4.6a: sistema visual transversal en `design-system.css` con paletas Claro/Oscuro modernizadas y Alto contraste preservado como opción secundaria de accesibilidad;
 - [x] UX.4.6a: navegación pública simplificada, selector compacto de apariencia y footer global centrado con versión, Fuentes oficiales, autoría y copyright;
 - [x] UX.4.6a: nueva página de Inicio orientada a beneficios, mockup sin resultados ficticios, tarjetas de capacidades y proceso guiado rematado en PC/laptop;
-- [ ] UX.4.6b: Revisión 4 del Paso 1 con Manual/PDF, campos obligatorios señalados, identificación opcional, parser revisable de nombre/apellido de casada, consentimiento de privacidad, Ficha Digital en Paso 3, ayudas/tablas transversales y navegación dual simétrica; implementación técnica lista, pendiente validación manual PC/laptop;
+- [x] UX.4.6b: Paso 1 cerrado y validado en PC/laptop con Manual/PDF, identificación opcional, consentimiento de privacidad, Ficha Digital trasladada al Paso 3, navegación dual y CI remoto en verde;
+- [x] UX.4.6c: Paso 2 cerrado y validado en PC/laptop con vista previa filtrada por etapa, nombres de secciones vinculados a sus pasos, cuota del año actual revisable, bloqueo por campo importado y un único círculo visual en ayudas contextuales;
 - [x] hardening pre-beta: validación defensiva común de PDFs, cabeceras de privacidad local y límites de texto/páginas;
 - [x] regresión E2E pre-beta por API para SEBD, Mixto y SUCGS;
 - [x] CI pre-beta definida para Python 3.13/3.14 y Node.js 24; primera validación remota de `main` completada en verde;
@@ -251,7 +252,7 @@ Previsto:
 
 Estado técnico actual; la validación manual multidispositivo queda aplazada y las revisiones inmediatas se realizan en laptop/PC:
 
-- **233 pruebas automatizadas** en `OK`;
+- **253 pruebas automatizadas** en `OK`;
 - regresión SEBD real anonimizada;
 - casos sintéticos de Mixto;
 - casos sintéticos SUCGS;
@@ -274,4 +275,8 @@ La prueba manual en todos los tipos de dispositivos no es requisito de bloqueo p
 
 ### Revisión 4 de UX.4.6b
 
-Implementada técnicamente: términos ampliados con lectura completa antes de aceptar, navegación dual superior/inferior, corrección de recortes de ayudas contextuales y eliminación de mensajes meta al final del documento de consentimiento. El contenido público se restringe a información pertinente al propósito previsional, funcional y legal del producto. Pendiente validación manual en PC/laptop antes del cierre y commits.
+Implementada, validada en PC/laptop y cerrada en `main`: términos ampliados, navegación dual superior/inferior, corrección de recortes de ayudas contextuales y eliminación de mensajes meta al final del documento de consentimiento. El cierre remoto quedó con CI verde en Python 3.13 y 3.14.
+
+### Revisión 3 de UX.4.6c — cerrada
+
+Implementada técnicamente: Paso 2 mantiene la separación entre cuotas acreditadas y cotización futura; la vista previa documental se filtra por etapa y etiqueta cada grupo con su paso de destino. El Paso 1 conserva la revisión completa y Cuotas muestra únicamente sus datos. Las ayudas contextuales mantienen un solo círculo visible alrededor de `i`. La suite queda en **253 pruebas automatizadas en OK**. Pendiente revisión visual en PC/laptop.

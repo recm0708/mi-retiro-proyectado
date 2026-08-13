@@ -291,3 +291,23 @@ Reglas mínimas:
 - los endpoints que reciban o devuelvan información de simulación deben conservar `Cache-Control: no-store` salvo justificación explícita;
 - cambios materiales de la política deben incrementar la versión del consentimiento para solicitar aceptación nuevamente;
 - antes de publicar una beta remota, verificar que la configuración de logs no registre cuerpos, archivos ni identificadores.
+
+
+## Integridad de datos importados en el asistente
+
+Desde UX.4.6c, cualquier cambio que consuma datos provenientes de un PDF debe conservar trazabilidad por campo cuando la fuente pueda ser parcial. Los campos confirmados desde el documento no se editan silenciosamente en pasos posteriores; los campos ausentes deben permanecer disponibles para captura manual. Las regresiones deben cubrir ambos casos.
+
+
+### Patrón transversal de campos y ayudas desde UX.4.6c R2
+
+- Los campos editables deben ofrecer una pista o ejemplo breve dentro del control cuando el tipo de entrada lo permita; la pista no sustituye la etiqueta y desaparece al existir un valor.
+- No duplicar debajo del control una explicación que ya esté disponible en la ayuda contextual, salvo que sea necesaria para validar o decidir una acción.
+- Las ayudas contextuales se representan con un botón compacto de icono `i`; la palabra visible `Info` no forma parte del patrón. El `aria-label` debe conservar un nombre accesible descriptivo.
+- Los modales reutilizables del wizard deben poder abrirse desde cualquier paso visible; no deben depender de permanecer dentro de un panel que pueda ocultarse con `display: none`.
+- La leyenda de obligatoriedad visible se redacta de forma uniforme como `* Campo obligatorio`; la obligatoriedad condicional se comunica mediante el estado dinámico del campo, no mediante una leyenda distinta.
+
+### Revisión contextual de importaciones por paso
+
+Desde UX.4.6c R3, los controles que reabran un comprobante ya confirmado deben llamar la vista previa indicando el paso activo. El Paso 1 es la única vista completa; los pasos posteriores muestran únicamente las secciones etiquetadas para esa etapa mediante `data-preview-step`. No se deben duplicar modales por paso.
+
+Las ayudas contextuales conservan un área de interacción accesible, pero visualmente solo dibujan el círculo interno que contiene `i`; no se debe reintroducir un segundo borde circular en el botón exterior.
