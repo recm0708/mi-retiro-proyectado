@@ -267,3 +267,11 @@ Cuando se modifique el flujo de salarios recientes:
 - `requirements.txt` conserva un snapshot completamente fijado para reproducibilidad, pero Dependabot solo propone de forma ordinaria cambios sobre las dependencias directas declaradas por el proyecto. Si una actualización directa exige regenerar el snapshot transitivo, debe hacerse como cambio controlado y volver a ejecutar la suite completa.
 - GitHub Actions puede agruparse en una sola propuesta. `pypdf` y actualizaciones major se revisan con especial atención por su impacto potencial en importadores o compatibilidad. No habilitar auto-merge sin una decisión ADR explícita.
 - No agregar una CSP estricta sin inventariar previamente recursos inline y externos; una política incorrecta puede dejar la interfaz inutilizable.
+
+## 19. Cambios del sistema visual UX.4.6a
+
+- Conservar el orden de hojas `style.css` → `design-system.css` → `accesibilidad.css`.
+- Los cambios puramente visuales deben concentrarse preferentemente en `design-system.css`; no reescribir la base histórica si una regla de capa puede resolver el cambio sin afectar comportamiento.
+- No eliminar Alto contraste al simplificar el selector de apariencia.
+- Toda modificación transversal de header, footer, Inicio, controles o tokens debe actualizar sus regresiones visuales y la documentación afectada en la misma unidad de trabajo.
+- Un cambio de etiqueta visible no implica renombrar rutas, IDs o contratos consumidos por JavaScript salvo que exista una decisión funcional explícita.

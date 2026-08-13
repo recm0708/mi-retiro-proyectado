@@ -62,8 +62,10 @@ Documentos técnicos relacionados:
 ## Temas visuales
 
 - La preferencia visual se gestiona únicamente en `app/static/js/tema.js`.
-- Los componentes personalizados deben usar los tokens `--app-*` definidos en `style.css` en lugar de introducir nuevas superficies claras mediante colores literales.
+- `style.css` conserva la base histórica y responsive; `design-system.css` es la capa visual transversal vigente de UX.4.6a; `accesibilidad.css` conserva precedencia para remates accesibles.
+- Los componentes personalizados deben reutilizar tokens `--app-*` y evitar nuevas superficies mediante colores literales cuando exista un token semántico equivalente.
 - Un componente nuevo debe revisarse al menos en Claro, Oscuro y Alto contraste.
+- Alto contraste puede mostrarse como opción secundaria de Accesibilidad, pero no debe eliminarse ni degradarse por cambios de la capa Oscura.
 - No guardar el tema dentro de la simulación ni usarlo como parámetro del backend.
 
 ## Accesibilidad de interfaz
@@ -247,3 +249,14 @@ Los cambios que rompan `.github/workflows/ci.yml`, `pip check`, `compileall`, `n
 Las pruebas que inspeccionan CI deben comprobar el contrato del pipeline y aceptar majors futuros de `actions/checkout`, `actions/setup-python` y `actions/setup-node` cuando Dependabot los proponga. No deben convertir una versión histórica (`@v6`, por ejemplo) en requisito funcional. De igual forma, una dependencia versionada como `pypdf` se valida por presencia de pin exacto y por sus regresiones funcionales, no por un número histórico inmutable.
 
 Cuando Dependabot proponga un cambio Python, revisar primero si corresponde a una dependencia directa permitida. Si una actualización directa obliga a cambiar transitivas fijadas, regenerar el snapshot como un cambio controlado, ejecutar la instalación limpia y comprobar la suite. No activar auto-merge.
+
+## 20. UX.4.6a — reglas para mantener el rediseño
+
+- Mantener el orden de carga `style.css` → `design-system.css` → `accesibilidad.css`.
+- No trasladar fórmulas, criterios previsionales ni estados de negocio a `design-system.css`.
+- Conservar las rutas internas aunque las etiquetas públicas del header sean breves.
+- En Inicio, priorizar lenguaje orientado a tareas y beneficios; evitar frases sobre motores, metadatos o estructura interna.
+- No usar cifras monetarias ficticias en mockups que puedan confundirse con un resultado real.
+- Mi Caja Digital debe aparecer donde ayuda a verificar información individual; el footer global se reserva para identidad, aviso legal, versión y acceso a Fuentes.
+- El marcador de marca `MR` es temporal y deberá reemplazarse cuando se integren favicon e iconos definitivos.
+- La validación inmediata de cambios visuales continúa en PC/laptop; la matriz completa de móvil/tablet/pantallas grandes se ejecutará en beta/RC.

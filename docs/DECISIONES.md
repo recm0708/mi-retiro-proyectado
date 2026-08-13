@@ -771,3 +771,26 @@ Las respuestas de importación se marcan `Cache-Control: no-store` y la aplicaci
 `requirements.txt` se mantiene completamente fijado como snapshot reproducible, pero documenta sus dependencias directas. Dependabot solo propone actualizaciones ordinarias para `fastapi`, `Jinja2`, `pydantic`, `python-multipart`, `pypdf` y `uvicorn`; las dependencias transitivas fijadas no generan ruido de actualización individual. Las actualizaciones minor/patch del runtime, salvo `pypdf`, se agrupan; GitHub Actions se agrupa en una sola propuesta. `pypdf` y las actualizaciones major permanecen fuera del grupo general para revisión específica. No se habilita auto-merge.
 
 **Motivo:** la primera ejecución de Dependabot demostró dos clases de falsos negativos: una Action actualizada podía completar correctamente instalación, compilación y validación de JavaScript pero fallar porque una prueba exigía literalmente `@v6`; y `pypdf` podía superar los tests del parser pero fallar porque una regresión esperaba exactamente `5.9.0`. Al mismo tiempo, proponer por separado paquetes transitivos fijados, como `pydantic_core`, puede crear combinaciones incompatibles con su dependencia principal. La estrategia nueva conserva reproducibilidad, reduce ruido y hace que CI mida compatibilidad real en vez de números históricos.
+
+## ADR-077 — Mantener una capa visual transversal separada antes de la beta
+
+**Estado:** Aceptada
+
+**Decisión:** UX.4.6a incorpora `app/static/css/design-system.css` como capa explícita de presentación cargada después de `style.css` y antes de `accesibilidad.css`. `style.css` conserva la base histórica, reglas funcionales y responsive ya estabilizadas; `design-system.css` concentra los tokens y acabados visuales modernos; `accesibilidad.css` mantiene la última precedencia para ayudas, foco y estados accesibles.
+
+La modernización visual no puede cambiar IDs consumidos por JavaScript, contratos de formularios, rutas, persistencia ni fórmulas previsionales. Una consolidación futura de CSS solo se hará después de estabilizar la beta y deberá conservar las regresiones existentes.
+
+**Motivo:** separar la nueva presentación reduce el riesgo de una reescritura masiva del CSS histórico inmediatamente antes de la beta, permite aislar regresiones visuales y mantiene clara la frontera entre cálculo, comportamiento y apariencia.
+
+
+## ADR-078 — Priorizar tareas del Asegurado(a) y simplificar controles globales
+
+**Estado:** Aceptada
+
+**Decisión:** la navegación pública utilizará etiquetas breves —**Inicio, Simular, Escenarios y Fuentes**— sin cambiar las rutas internas. El control de apariencia mostrará **Automático, Claro y Oscuro** como opciones principales y conservará **Alto contraste** dentro de una sección secundaria de Accesibilidad.
+
+La página de Inicio debe comunicar beneficios y tareas del Asegurado(a) antes que detalles de implementación. Cualquier mockup de resultado utilizado como recurso visual no mostrará una cifra monetaria ficticia que pueda interpretarse como estimación real.
+
+El footer global se presentará centrado con nombre, versión, aviso de independencia, enlace a Fuentes oficiales, autoría y copyright. Mi Caja Digital no se duplicará en el footer; permanecerá en los puntos funcionales destinados a verificar información individual.
+
+**Motivo:** reducir terminología y controles globales visibles mejora jerarquía sin perder funcionalidad. Separar recursos normativos de recursos personales evita que el footer se convierta en un contenedor de acciones operativas y mantiene la portada enfocada en orientar al Asegurado(a).

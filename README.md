@@ -47,8 +47,9 @@ La próxima versión `0.1.0` continúa en desarrollo. El asistente de seis pasos
 | UX.4.3 — errores, foco y operación por teclado | Validada manualmente en PC/laptop |
 | UX.4.4 — edad anual, detalle salarial e importación oficial revisable | Implementada y validada manualmente en PC/laptop |
 | UX.4.5 — origen acreditado/proyectado y cierre accesible | Implementada técnicamente; pendiente validación manual de cierre en PC/laptop |
+| UX.4.6a — rediseño visual integral y nueva página de Inicio | Implementada y validada manualmente en PC/laptop |
 
-La suite actual contiene **185 pruebas automatizadas**. UX.3 protege responsive y la separación entre evaluación y último mes acreditado; UX.4.1–UX.4.3 cubren semántica del wizard, ayudas contextuales, validación accesible, estados seleccionados, recuperación de foco y estabilidad del `MutationObserver`; UX.4.4 añade la edad anual, un detalle opcional del año actual que separa salario disponible, cuota acreditada y períodos parciales, bases salariales recientes y una importación revisable de documentos oficiales. La Ficha Digital conserva únicamente salarios del año calendario actual y las vistas previas monetarias usan separador de miles con dos decimales.
+La suite actual contiene **198 pruebas automatizadas**. UX.3 protege responsive y la separación entre evaluación y último mes acreditado; UX.4.1–UX.4.3 cubren semántica del wizard, ayudas contextuales, validación accesible, estados seleccionados, recuperación de foco y estabilidad del `MutationObserver`; UX.4.4 añade la edad anual, un detalle opcional del año actual que separa salario disponible, cuota acreditada y períodos parciales, bases salariales recientes y una importación revisable de documentos oficiales. La Ficha Digital conserva únicamente salarios del año calendario actual y las vistas previas monetarias usan separador de miles con dos decimales.
 
 ## Hardening previo a beta
 
@@ -187,18 +188,25 @@ Previstas en fases posteriores:
 
 ## 8. Apariencia y accesibilidad
 
-La interfaz ofrece cuatro preferencias visuales:
+UX.4.6a consolida la presentación mediante `app/static/css/design-system.css`, cargado después de la base histórica `style.css` y antes de `accesibilidad.css`. Esta capa define la paleta, superficies, controles, cards, navegación, footer y jerarquía visual sin modificar contratos previsionales.
 
-- **Seguir sistema**;
+El control de apariencia es compacto y presenta como opciones principales:
+
+- **Automático** — sigue la preferencia del sistema;
 - **Claro**;
-- **Oscuro**;
-- **Alto contraste**.
+- **Oscuro**.
 
-La interfaz usa colores semánticos por tema para superficies, textos, estados y alertas. El modo Oscuro prioriza fondos casi negros y texto de alta legibilidad; Alto contraste usa negro, blanco, bordes explícitos y foco visible.
+**Alto contraste** permanece disponible como opción secundaria de **Accesibilidad**. La preferencia se conserva localmente en el navegador y no se mezcla con los datos previsionales de la simulación.
 
-La preferencia se conserva localmente en el navegador y no se mezcla con los datos previsionales de la simulación. La interfaz incluye enlace de salto al contenido, foco visible para teclado, objetivos táctiles con altura mínima, soporte para `prefers-reduced-motion` y un pie de página compacto con autoría, aviso de independencia y acceso a Mi Caja Digital.
+El modo Oscuro usa un fondo profundo casi negro y superficies diferenciadas; Alto contraste conserva negro/blanco, bordes explícitos y foco amarillo. La interfaz mantiene enlace de salto al contenido, foco visible para teclado, objetivos táctiles con altura mínima y soporte para `prefers-reduced-motion`.
+
+El footer global se centra y conserva nombre del producto, versión, aviso de independencia, enlace a **Fuentes oficiales**, autoría y copyright. **Mi Caja Digital** ya no se duplica en el footer: continúa disponible únicamente en los puntos funcionales donde sirve para verificar información individual.
 
 UX.4.1 amplía esta base con ayudas contextuales compactas que aparecen al pasar el puntero o al recibir foco —con clic como alternativa táctil—, regiones dinámicas para mensajes de error y estado, marcado `aria-invalid` con foco sobre el primer campo inválido, relaciones semánticas entre pasos y paneles del asistente, captions accesibles en tablas y aviso no visual para enlaces que abren una pestaña nueva. También mejora la selección de escenarios de retiro desde toda la fila y corrige pequeños detalles de jerarquía y alineación. UX.4.2 refuerza estados activos y seleccionados: el número del paso activo usa texto blanco cuando el tema resuelto es Claro y la fila seleccionada de escenarios de retiro combina fondo, contorno, radio y badge diferenciados por tema, además de señal de foco y compatibilidad con colores forzados. UX.4.3 mejora la recuperación ante errores: los controles inválidos reciben un mensaje inline visible y asociado programáticamente mediante `aria-errormessage`, los errores dinámicos reciben foco cuando aparecen sin duplicar regiones `assertive`, las advertencias no urgentes pueden usar estado `polite` y el radio de escenarios de retiro admite Enter además de la operación nativa con teclado. El remate de estabilidad evita escrituras redundantes de clases dentro del `MutationObserver` y consulta `ValidityState.valid` sin redisparar eventos `invalid`, previniendo bloqueos o bucles de retroalimentación del frontend. UX.4.4 añade la columna **Edad** en las tablas de Historial salarial real y Proyección futura. La edad mostrada es la que el Asegurado(a) cumple durante el año calendario (`año - año de nacimiento`), siguiendo la convención observada en los comprobantes oficiales usados para validación. También incorpora un detalle opcional del año actual: puede capturarse un total mensual o primera/segunda quincena, marcar si la cuota ya está acreditada y distinguir meses completos, parciales o sin información. La suma de meses acreditados sincroniza el salario anual actual únicamente cuando coincide con las cuotas del Paso 2; los salarios visibles sin cuota acreditada permanecen separados. Para proyectar, el Asegurado(a) puede continuar con ingreso manual o usar el último mes completo, el promedio de meses completos del año actual, el promedio de los últimos tres meses completos o el promedio del salario acreditado por cuota del año actual.  UX.4.4 también permite cargar de forma opcional un comprobante PDF de Mi Retiro Seguro: el archivo se procesa en memoria, se omiten nombre, cédula, seguro social ni código único del documento, y se extraen de forma variable el sistema elegido, la edad de retiro, las cuotas históricas y el monto estimado. En el Paso 6 esa referencia personal se compara preferentemente con la fotografía propia de información acreditada cuando sistema, persona, edad y naturaleza de la prestación son compatibles; ningún monto de un comprobante concreto queda hardcodeado en la aplicación. La auditoría integral WCAG 2.2 con tecnologías de apoyo continúa dentro de la Fase 8.
+
+### UX.4.6a — rediseño visual integral
+
+La página de Inicio se orienta a beneficios y tareas del Asegurado(a), utiliza un mockup sin resultados monetarios ficticios y conserva la explicación de SEBD, Mixto y SUCGS sin exponer detalles de motores internos. La navegación pública se simplifica a **Inicio, Simular, Escenarios y Fuentes** sin cambiar rutas. La revisión final en PC/laptop ajustó escala del hero, centrado de los seis pasos, continuidad del aviso orientativo y composición centrada del footer. La validación multidispositivo permanece diferida para beta/RC.
 
 ## 9. Instalación
 

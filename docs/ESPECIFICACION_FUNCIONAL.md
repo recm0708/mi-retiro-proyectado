@@ -443,3 +443,22 @@ Quedan para fases posteriores:
 **RF-159.** Las regresiones de infraestructura deben verificar la presencia y el contrato funcional de las GitHub Actions necesarias sin fijar permanentemente su major; una actualización de Action solo debe fallar si rompe el pipeline o una validación real.
 
 **RF-160.** La vigilancia de dependencias debe distinguir paquetes directos de transitivos fijados, agrupar propuestas relacionadas cuando sea seguro y mantener revisión explícita sin auto-merge.
+
+
+## 22. UX.4.6a — rediseño visual integral
+
+**RF-161.** La modernización visual debe ser transversal a Inicio, Simulación, Comparador y Fuentes sin modificar fórmulas, contratos previsionales, rutas ni datos persistidos.
+
+**RF-162.** La presentación debe cargar `style.css` como base histórica, `design-system.css` como capa de sistema visual y `accesibilidad.css` como remate accesible con precedencia final.
+
+**RF-163.** El control de apariencia debe ofrecer **Automático**, **Claro** y **Oscuro** como opciones principales, mantener **Alto contraste** dentro de Accesibilidad y conservar la preferencia exclusivamente en `localStorage`.
+
+**RF-164.** La navegación pública debe usar las etiquetas **Inicio**, **Simular**, **Escenarios** y **Fuentes** sin alterar las rutas existentes.
+
+**RF-165.** La página de Inicio debe priorizar beneficios, tareas, sistemas contemplados y el proceso guiado. No debe exponer detalles de implementación de los motores ni presentar una pensión ficticia dentro de recursos visuales o mockups.
+
+**RF-166.** El footer global debe identificar producto y versión, declarar la independencia de la CSS, enlazar a Fuentes oficiales y mostrar autoría/copyright. Mi Caja Digital debe permanecer en los puntos de verificación individual y no duplicarse globalmente en el footer.
+
+**RF-167.** Botones, controles, cards, tablas, alertas, acordeones, wizard y superficies de páginas internas deben reutilizar tokens semánticos compatibles con Claro, Oscuro y Alto contraste.
+
+**RF-168.** El cierre inmediato de UX.4.6a requiere validación manual en PC/laptop y regresiones automatizadas en verde. La validación específica en móvil, tablet, macOS y pantallas grandes puede diferirse para beta/RC mientras se conserven las reglas responsive existentes y no exista una incidencia conocida.

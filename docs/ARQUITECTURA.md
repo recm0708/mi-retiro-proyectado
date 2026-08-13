@@ -50,6 +50,11 @@ app/
 │   ├── retiro.py
 │   └── trazabilidad.py
 ├── static/
+│   ├── css/
+│   │   ├── style.css
+│   │   ├── design-system.css
+│   │   └── accesibilidad.css
+│   └── js/
 ├── templates/
 └── main.py
 
@@ -263,7 +268,7 @@ La validación automatizada usa `unittest` y cubre:
 - SUCGS;
 - servicios integrados.
 
-Estado técnico pre-beta actual: **185 pruebas automatizadas**.
+Estado técnico actual después de UX.4.6a: **198 pruebas automatizadas**.
 
 Ver [VALIDACION.md](VALIDACION.md).
 
@@ -310,9 +315,15 @@ Paso 6 / Comparador / futuras exportaciones
 
 ## Apariencia y accesibilidad transversal
 
-`app/templates/base.html` concentra navegación, selector de tema, enlace de salto, región viva global y pie de página. `app/static/js/tema.js` resuelve la preferencia visual y la conserva en `localStorage`; no accede ni modifica el estado previsional del asistente.
+`app/templates/base.html` concentra navegación, control de apariencia, enlace de salto, región viva global y pie de página. `app/static/js/tema.js` resuelve la preferencia visual y la conserva en `localStorage`; no accede ni modifica el estado previsional del asistente.
 
-`app/static/css/style.css` expone tokens de superficie, texto, borde y foco para adaptar los componentes personalizados a los modos claro, oscuro y alto contraste. `app/static/css/accesibilidad.css` añade únicamente presentación de ayudas contextuales, foco de contenedores desplazables y estado visual de controles inválidos reutilizando los tokens existentes. Bootstrap continúa resolviendo los controles estándar mediante `data-bs-theme`.
+La presentación CSS usa tres capas con responsabilidades distintas:
+
+1. `app/static/css/style.css` — base histórica, reglas funcionales y responsive ya estabilizadas;
+2. `app/static/css/design-system.css` — tokens y acabado visual transversal de UX.4.6a para Claro, Oscuro y componentes globales;
+3. `app/static/css/accesibilidad.css` — ayudas contextuales, foco y estados accesibles con precedencia final.
+
+Alto contraste conserva tokens explícitos dentro de la capa visual moderna y las reglas accesibles continúan prevaleciendo. Bootstrap resuelve controles estándar mediante `data-bs-theme`.
 
 `app/static/js/accesibilidad.js` constituye una capa de presentación transversal: relaciona ayudas con controles, sincroniza semántica del wizard, prepara mensajes dinámicos, captions de tablas, foco de validación y avisos accesibles para enlaces externos. Las ayudas se abren mediante hover o foco y conservan clic como alternativa táctil. No calcula cuotas, salarios, edades ni prestaciones y no modifica el estado previsional guardado.
 
@@ -381,3 +392,11 @@ Un middleware transversal añade cabeceras defensivas que no modifican la semán
 La verificación continua vive en `.github/workflows/ci.yml` y trata el repositorio como una instalación limpia: instala `requirements.txt`, ejecuta `pip check`, compila Python, valida JavaScript y corre la suite. La primera ejecución remota de `main` quedó en verde sobre Python 3.13 y 3.14. Las regresiones de infraestructura validan la presencia de las Actions y el contrato del pipeline mediante patrones de versión, evitando fijar un major concreto.
 
 `requirements.txt` continúa siendo el snapshot reproducible completo, pero distingue documentalmente las dependencias directas de las transitivas fijadas. `.github/dependabot.yml` limita las propuestas ordinarias de `pip` a las dependencias directas, agrupa actualizaciones minor/patch compatibles del runtime y agrupa GitHub Actions. `pypdf` queda fuera del grupo general para que los cambios de parser se revisen de forma individual. No existe auto-merge.
+
+## UX.4.6a — sistema visual sin acoplamiento al motor
+
+La capa `design-system.css` no forma parte del dominio previsional. Puede redefinir color, tipografía, superficies, controles, cards, navegación, footer, wizard, Comparador y Metodología/Fuentes, pero no contiene reglas de edad, cuotas, salario, elegibilidad ni prestación.
+
+La página `index.html` utiliza un mockup puramente presentacional construido con HTML/CSS. El marcador `B/. —` evita presentar una cifra ficticia y no se vincula a ninguna respuesta del backend.
+
+La simplificación de etiquetas del header es únicamente visual: `/`, `/simulacion`, `/comparar` y `/metodologia` continúan siendo las rutas reales. El footer consume `app_version` desde la configuración común y enlaza a la vista de Fuentes; Mi Caja Digital permanece en los flujos de verificación individual.

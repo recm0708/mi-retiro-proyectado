@@ -29,6 +29,7 @@ Este archivo es el punto de entrada para la documentación técnica, funcional y
 | [SEGURIDAD_PRIVACIDAD.md](SEGURIDAD_PRIVACIDAD.md) | Modelo de privacidad local, validación de documentos, CI y límites de la beta. |
 | [ROADMAP.md](ROADMAP.md) | Fases terminadas, cierre de 6F y trabajo posterior. |
 | [GUIA_INTERNA_DESARROLLO.md](GUIA_INTERNA_DESARROLLO.md) | Convenciones internas de marca, terminología, tipografía y contenido no visible. |
+| [UX_4_6A_REDISENO_VISUAL.md](UX_4_6A_REDISENO_VISUAL.md) | Cierre del rediseño visual integral, nueva página de Inicio y criterio de validación UX.4.6a. |
 
 ## 3. Archivos normativos versionados
 

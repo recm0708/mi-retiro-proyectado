@@ -1,5 +1,17 @@
 # Changelog
 
+### UX.4.6a — rediseño visual integral y nueva página de Inicio
+
+- Se incorpora `app/static/css/design-system.css` como capa transversal de presentación entre `style.css` y `accesibilidad.css`, sin modificar fórmulas ni contratos previsionales.
+- La navegación pública se simplifica a **Inicio, Simular, Escenarios y Fuentes** conservando las rutas existentes.
+- El selector visual se reemplaza por un menú compacto con **Automático, Claro y Oscuro** como opciones principales y **Alto contraste** dentro de Accesibilidad.
+- El tema Claro adopta superficies más limpias y el tema Oscuro usa una base profunda casi negra; Alto contraste conserva negro/blanco, bordes explícitos y foco visible.
+- La página de Inicio se rediseña alrededor de beneficios, sistemas contemplados, capacidades y proceso guiado; el mockup de resultado no presenta una pensión ficticia.
+- El remate de PC/laptop reduce la escala del hero, mejora su interlineado, centra número/texto de los seis pasos y mantiene el aviso **Estimación orientativa** sobre la misma superficie del proceso.
+- El footer se reorganiza en una composición centrada con producto, versión, aviso legal, **Fuentes oficiales**, autoría y copyright. Mi Caja Digital deja de duplicarse globalmente y permanece en los flujos de verificación individual.
+- Las regresiones históricas de apariencia se actualizan al nuevo contrato visual y `tests/test_ux46a_redisenio_integral.py` añade trece comprobaciones específicas.
+- La validación final de UX.4.6a alcanza **198 pruebas automatizadas en OK**, además de `compileall`, `node --check` y `git diff --check` sin incidencias. La revisión manual inmediata se cerró en PC/laptop; móvil, tablet y pantallas grandes quedan para beta/RC.
+
 ### Pre-beta — ajuste de CI y Dependabot
 
 - La primera ejecución remota de `main` confirma CI verde en Python 3.13 y 3.14.

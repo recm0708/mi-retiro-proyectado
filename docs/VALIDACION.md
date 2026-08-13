@@ -23,7 +23,9 @@ Antes de consolidar cambios:
 
 ```powershell
 python -m compileall app
+Get-ChildItem .\app\static\js\*.js | ForEach-Object { node --check $_.FullName }
 python -m unittest discover -s tests -v
+git diff --check
 ```
 
 Estado antes del bloque 6F:
@@ -45,6 +47,7 @@ tests/test_proyeccion_salarios.py
 tests/test_linea_tiempo.py
 tests/test_retiro.py
 tests/test_accesibilidad_ux4.py
+tests/test_ux46a_redisenio_integral.py
 
 tests/test_sebd.py
 tests/test_sebd_modalidades.py
@@ -578,3 +581,53 @@ La corrección mantiene **185 pruebas automatizadas** y cambia el criterio de es
 - no se configura auto-merge.
 
 Después de aplicar este bloque, la validación local debe repetir `compileall`, `node --check` para todos los JavaScript, suite completa y `git diff --check`. Tras el siguiente `push`, el workflow de `main` debe permanecer verde; los PR existentes de Dependabot que ya no correspondan a la estrategia nueva pueden cerrarse o dejar que Dependabot los reevalúe, sin fusionarlos mientras estén rojos.
+
+## Validación UX.4.6a — rediseño visual integral
+
+El cierre de UX.4.6a deja la suite en **198 pruebas automatizadas, todas en `OK`**. `tests/test_ux46a_redisenio_integral.py` aporta trece regresiones específicas:
+
+1. orden de carga `style.css` → `design-system.css` → `accesibilidad.css`;
+2. navegación pública abreviada;
+3. Alto contraste conservado como opción secundaria de Accesibilidad;
+4. actualización del estado del control de apariencia;
+5. footer legal sin duplicar Mi Caja Digital;
+6. Inicio orientado a beneficios y mockup sin resultado ficticio;
+7. tokens principales del tema Claro;
+8. tokens principales del tema Oscuro;
+9. lenguaje visual común para controles y tarjetas;
+10. adaptación explícita de los componentes nuevos a Alto contraste;
+11. escala/interlineado final del hero y centrado de los seis pasos;
+12. continuidad visual entre el proceso guiado y **Estimación orientativa**;
+13. footer final centrado con versión y acceso a Fuentes oficiales.
+
+Las regresiones históricas de identidad, temas y estabilización visual se actualizaron para comprobar el nuevo contrato sin conservar selectores o clases retiradas.
+
+### Cierre manual en PC/laptop
+
+La revisión manual inmediata fue aceptada después del remate final. Se verificaron:
+
+- hero de Inicio con escala e interlineado corregidos;
+- centrado del número y texto de los seis pasos;
+- continuidad de superficie en el bloque **Estimación orientativa**;
+- footer centrado con versión, Fuentes oficiales y copyright;
+- menú de apariencia con Claro, Oscuro y Alto contraste;
+- conservación del comportamiento general del asistente y páginas internas.
+
+La ejecución de cierre confirmó:
+
+```text
+python -m compileall app
+# OK
+
+node --check app/static/js/*.js
+# OK
+
+python -m unittest discover -s tests -v
+Ran 198 tests
+OK
+
+git diff --check
+# sin salida
+```
+
+La validación específica en móvil, tablet, macOS y pantallas grandes permanece diferida para la matriz beta/RC y no bloquea este cierre.

@@ -233,6 +233,9 @@ Previsto:
 - [x] UX.4.5: tabla transversal de información acreditada vs proyección al retiro para SEBD, Mixto y SUCGS;
 - [x] UX.4.5: referencia PDF comparada preferentemente contra la fotografía acreditada propia;
 - [x] UX.4.5: cierre semántico de la comparación con caption, encabezados programáticos, estado textual y soporte de Alto contraste;
+- [x] UX.4.6a: sistema visual transversal en `design-system.css` con paletas Claro/Oscuro modernizadas y Alto contraste preservado como opción secundaria de accesibilidad;
+- [x] UX.4.6a: navegación pública simplificada, selector compacto de apariencia y footer global centrado con versión, Fuentes oficiales, autoría y copyright;
+- [x] UX.4.6a: nueva página de Inicio orientada a beneficios, mockup sin resultados ficticios, tarjetas de capacidades y proceso guiado rematado en PC/laptop;
 - [x] hardening pre-beta: validación defensiva común de PDFs, cabeceras de privacidad local y límites de texto/páginas;
 - [x] regresión E2E pre-beta por API para SEBD, Mixto y SUCGS;
 - [x] CI pre-beta definida para Python 3.13/3.14 y Node.js 24; primera validación remota de `main` completada en verde;
@@ -245,7 +248,7 @@ Previsto:
 
 Estado técnico actual; la validación manual multidispositivo queda aplazada y las revisiones inmediatas se realizan en laptop/PC:
 
-- **185 pruebas automatizadas** en `OK`;
+- **198 pruebas automatizadas** en `OK`;
 - regresión SEBD real anonimizada;
 - casos sintéticos de Mixto;
 - casos sintéticos SUCGS;
@@ -257,11 +260,11 @@ Estado técnico actual; la validación manual multidispositivo queda aplazada y 
 
 Antes de `v0.1.0-beta.1` se mantiene este orden de cierre:
 
-1. completar UX.4.5 y su validación manual en PC/laptop;
-2. ejecutar regresión E2E y hardening de seguridad/privacidad/dependencias — **implementado técnicamente; pendiente validar CI tras el commit**;
-3. realizar, si se confirma al llegar a ese punto, una revisión completa de interfaz, textos y consistencia visual antes del empaquetado;
-4. integrar favicon e iconos definitivos y retirar `/favicon.ico` temporal;
-5. preparar el paquete portable para usuarios y validarlo en una instalación limpia;
-6. configurar GitHub para publicación, CI, seguridad, documentación y crear `v0.1.0-beta.1`.
+1. completar cualquier validación manual remanente de UX.4.5 que todavía esté pendiente;
+2. conservar UX.4.6a como rediseño visual cerrado y validado en PC/laptop, con la matriz multidispositivo diferida para beta/RC;
+3. integrar favicon e iconos definitivos y retirar `/favicon.ico` temporal;
+4. preparar el paquete portable para usuarios y validarlo en una instalación limpia;
+5. revisar el estado remoto de CI/Dependabot después de los commits de cierre;
+6. preparar GitHub para publicación y crear `v0.1.0-beta.1`.
 
 La prueba manual en todos los tipos de dispositivos no es requisito de bloqueo para UX.4.5. La compatibilidad ampliada se tratará como matriz de beta/RC, priorizando los dispositivos realmente disponibles.
