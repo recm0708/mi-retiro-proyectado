@@ -268,7 +268,7 @@ La validación automatizada usa `unittest` y cubre:
 - SUCGS;
 - servicios integrados.
 
-Estado técnico actual después de UX.4.6a: **198 pruebas automatizadas**.
+Estado técnico actual durante UX.4.6b Revisión 4: **233 pruebas automatizadas**.
 
 Ver [VALIDACION.md](VALIDACION.md).
 
@@ -357,7 +357,7 @@ El `MutationObserver` transversal observa inserciones y cambios de clase necesar
 
 ## Referencia PDF personal de Mi Retiro Seguro
 
-`app/servicios/referencia_mi_retiro_seguro.py` constituye una capa de extracción documental, no un motor previsional. El endpoint `POST /api/simulacion/referencia-mi-retiro-seguro` recibe un `UploadFile`, limita tamaño y tipo, lee el PDF en memoria con `pypdf` y devuelve un contrato reducido sin identificadores personales directos.
+`app/servicios/referencia_mi_retiro_seguro.py` constituye una capa de extracción documental, no un motor previsional. El endpoint `POST /api/simulacion/referencia-mi-retiro-seguro` recibe un `UploadFile`, limita tamaño y tipo, lee el PDF en memoria con `pypdf` y devuelve un contrato revisable. Desde UX.4.6b puede incluir identificadores personales opcionales cuando el PDF los etiqueta de forma inequívoca; el código único del documento continúa excluido y el archivo no se persiste.
 
 `app/static/js/referencia_mi_retiro_seguro.js` conserva el resumen extraído únicamente dentro del estado temporal de la pestaña. En Resultados compara esa referencia con `resumen_unificado`, reutilizando la semántica común de pensión mensual o pago único. El motor actual sigue siendo la fuente del resultado de Mi Retiro Proyectado; el PDF solo aporta una fotografía personal externa.
 
@@ -400,3 +400,39 @@ La capa `design-system.css` no forma parte del dominio previsional. Puede redefi
 La página `index.html` utiliza un mockup puramente presentacional construido con HTML/CSS. El marcador `B/. —` evita presentar una cifra ficticia y no se vincula a ninguna respuesta del backend.
 
 La simplificación de etiquetas del header es únicamente visual: `/`, `/simulacion`, `/comparar` y `/metodologia` continúan siendo las rutas reales. El footer consume `app_version` desde la configuración común y enlaza a la vista de Fuentes; Mi Caja Digital permanece en los flujos de verificación individual.
+
+
+
+## UX.4.6b — frontera de Datos personales e importación
+
+La capa de presentación mantiene `simulacion.persona` en `sessionStorage` y agrega `modo_datos_personales` y `origen_persona`. Los identificadores opcionales no se envían a los motores previsionales: solo fecha de nacimiento, sexo, fecha de ingreso y sistema continúan alimentando las dependencias de cálculo correspondientes.
+
+`app/templates/partials/importacion_datos_oficiales.html` queda dedicado a Mi Retiro Seguro en el Paso 1. `app/templates/partials/importacion_ficha_digital.html` contiene la importación salarial trasladada al Paso 3. Ambos reutilizan `app/static/js/importacion_datos_oficiales.js`, manteniendo una sola frontera HTTP por tipo de documento.
+
+La navegación del wizard conserva selectores históricos por compatibilidad, pero UX.4.6b renderiza dos instancias `wizard-navigation-bar` sincronizadas por `data-wizard-*`: superior e inferior. En PC/laptop la barra superior utiliza `position: sticky` bajo el header dentro del mismo ancho de las tarjetas; la inferior permanece en el flujo normal al final del panel. Ninguna de las dos duplica lógica de negocio.
+
+
+### UX.4.6b R2 — consentimiento y frontera de privacidad
+
+`app/templates/partials/privacidad_consentimiento.html` y `app/static/js/privacidad.js` forman la puerta previa a la captura de datos en `/simulacion`. El consentimiento se versiona en `localStorage`; no contiene la simulación ni identificadores. La autorización activa se marca además en `sessionStorage`, por lo que una nueva sesión de pestaña vuelve a mostrar el modal aunque exista una aceptación histórica de la misma versión. Rechazar elimina el estado de simulación y la marca de consentimiento y vuelve a Inicio.
+
+`sessionStorage` continúa siendo el almacén temporal de la simulación. La política de privacidad, la modalidad de origen y los identificadores no alteran la interfaz de los motores: solo los datos previsionales necesarios pasan a los servicios de cálculo.
+
+La frontera HTTP aplica `Cache-Control: no-store` a `/api/simulacion/*`. Las cabeceras globales incluyen CSP, `nosniff`, denegación de framing, `Referrer-Policy` y `Permissions-Policy`. Mientras Bootstrap permanezca en jsDelivr, `base.html` usa Subresource Integrity; antes de la beta pública se recomienda servir Bootstrap desde `app/static/` para eliminar esa solicitud de tercero.
+
+La página `/metodologia#privacidad-datos` expone al Asegurado(a) un resumen de privacidad y enlaces oficiales de la Ley 81 de 2019, Decreto Ejecutivo 285 de 2021 y ANTAI. La documentación extendida vive en `docs/POLITICA_PRIVACIDAD.md`, `docs/TERMINOS_USO_PRIVACIDAD.md` y `docs/CUMPLIMIENTO_LEY_81.md`.
+
+### UX.4.6b R3 — consentimiento y navegación del asistente
+
+La ruta `Simular` incorpora una puerta de consentimiento previa a la captura/importación. El documento visible es versionado y la casilla de aceptación solo se habilita después de alcanzar el final del contenido. El estado de aceptación se gestiona en el navegador y se invalida cuando cambia la versión del texto.
+
+La navegación del wizard se renderiza dos veces dentro del mismo contenedor de ancho que las tarjetas: una barra superior y otra inferior. Ambos controles comparten `data-wizard-*` y son sincronizados por `navegacion_wizard.js`; no contienen lógica de negocio propia. En escritorio la barra superior puede usar `position: sticky` bajo el encabezado global para mantener accesibles Inicio/Anterior, selector de paso y acción primaria durante pasos largos.
+
+Las ayudas contextuales del formulario pueden proyectarse fuera del borde de `.simulation-card` para evitar recortes por `overflow` cuando se abren cerca del final de la página.
+
+
+### UX.4.6b R4 — cierre de lectura y criterio de contenido público
+
+La detección de llegada al final del documento de privacidad continúa siendo una condición de interfaz para habilitar la casilla de consentimiento, pero no genera un bloque de “fin” ni un mensaje de “lectura completada”. Antes de llegar al final se conserva únicamente la ayuda necesaria para explicar por qué la casilla todavía está deshabilitada; al cumplirse el requisito, esa ayuda desaparece.
+
+Como criterio transversal de presentación, las plantillas públicas deben limitar la redacción a información funcional, previsional, legal, de privacidad, seguridad o accesibilidad que ayude al usuario a operar o comprender el alcance del producto. Terminología de implementación, mensajes meta de desarrollo o posicionamientos ajenos al propósito de Mi Retiro Proyectado —por ejemplo presentarlo como recurso educativo/didáctico— no deben formar parte de la interfaz salvo que exista una función real que lo justifique.

@@ -689,7 +689,7 @@ La interfaz ofrece acceso a Mi Caja Digital y, cuando el documento PDF contiene 
 
 **Estado:** Aceptada
 
-**Decisión:** el Asegurado(a) puede cargar opcionalmente un comprobante PDF digital de Mi Retiro Seguro. El backend procesa el archivo únicamente en memoria con `pypdf`, valida que corresponda al formato esperado y extrae solo datos operativos para comparación: fecha del comprobante, sistema elegido, edad de retiro, cuotas históricas, naturaleza y monto estimado de la prestación y filas anuales reconocibles. El contrato excluye deliberadamente nombre, cédula, número de seguro social ni código único del documento.
+**Decisión:** el Asegurado(a) puede cargar opcionalmente un comprobante PDF digital de Mi Retiro Seguro. El backend procesa el archivo únicamente en memoria con `pypdf`, valida que corresponda al formato esperado y extrae solo datos operativos para comparación: fecha del comprobante, sistema elegido, edad de retiro, cuotas históricas, naturaleza y monto estimado de la prestación y filas anuales reconocibles. El contrato continúa excluyendo el código único del documento. Desde UX.4.6b puede devolver identificadores opcionales cuando están etiquetados de forma inequívoca y el Asegurado(a) los revisa antes de importarlos.
 
 Ningún monto procedente de los comprobantes usados durante el desarrollo puede quedar hardcodeado en código de producción. El PDF original no se persiste. El análisis por sí solo no modifica la simulación; después de una confirmación explícita, los datos detectados pueden utilizarse para prellenar campos, mientras la referencia personal continúa separada de los motores y de la normativa versionada.
 
@@ -714,7 +714,7 @@ La fecha de corte, cuotas y supuestos salariales pueden diferir entre el comprob
 
 El comprobante puede prellenar datos personales, sistema, cuotas y filas anuales seleccionadas. Las filas clasificadas como proyectadas no se importan como historial real por defecto; las filas mixtas requieren decisión explícita. La Ficha Digital puede prellenar salarios mensuales del año actual, pero no infiere cuotas acreditadas: esas marcas deben ser confirmadas por el Asegurado(a). Los registros de años anteriores se descartan en esta importación: la Ficha Digital se usa únicamente para el detalle salarial del año calendario actual.
 
-Los archivos se procesan en memoria y los contratos del backend excluyen identificadores directos que no sean necesarios para la simulación. Los valores confirmados conservan trazabilidad de origen en `sessionStorage`, pero el documento original no se persiste.
+Los archivos se procesan en memoria. Los contratos del backend limitan los identificadores directos a los campos opcionales que UX.4.6b permite revisar y confirmar para la sesión actual; no se persiste el documento ni su código único. Los valores confirmados conservan trazabilidad de origen en `sessionStorage`, pero el documento original no se persiste.
 
 **Motivo:** los documentos pueden contener valores parciales, proyectados o actualizados en momentos distintos. Prellenar sin revisión podría convertir una detección imperfecta en un dato operativo y alterar el cálculo. La confirmación explícita mantiene al Asegurado(a) en control y permite corregir errores del parser sin renunciar a la automatización.
 
@@ -794,3 +794,81 @@ La página de Inicio debe comunicar beneficios y tareas del Asegurado(a) antes q
 El footer global se presentará centrado con nombre, versión, aviso de independencia, enlace a Fuentes oficiales, autoría y copyright. Mi Caja Digital no se duplicará en el footer; permanecerá en los puntos funcionales destinados a verificar información individual.
 
 **Motivo:** reducir terminología y controles globales visibles mejora jerarquía sin perder funcionalidad. Separar recursos normativos de recursos personales evita que el footer se convierta en un contenedor de acciones operativas y mantiene la portada enfocada en orientar al Asegurado(a).
+
+
+## ADR-079 — Separar captura manual e importación documental en Datos personales
+
+**Estado:** Aceptada para validación UX.4.6b
+
+**Decisión:** el Paso 1 presenta dos modalidades excluyentes: captura manual e importación desde un comprobante de Mi Retiro Seguro. La captura manual es predeterminada. La Ficha Digital se traslada al Paso 3 porque sus datos describen salarios del año actual, no identidad personal.
+
+**Motivo:** mostrar simultáneamente formularios manuales y dos importadores sobrecargaba el primer paso y mezclaba dominios distintos. Separar intención antes de capturar datos reduce ruido y evita que la Ficha Digital se interprete como fuente de identidad.
+
+## ADR-080 — Identificadores personales opcionales y de sesión
+
+**Estado:** Aceptada para validación UX.4.6b
+
+**Decisión:** nombres, apellidos, cédula y número de Seguro Social pueden capturarse manualmente o devolverse desde Mi Retiro Seguro cuando el PDF los etiqueta de forma inequívoca. Son opcionales para el cálculo, permanecen en `sessionStorage` durante la simulación actual y no se escriben en archivos, base de datos, logs, fixtures ni documentación. El código único del documento continúa excluido.
+
+Si el PDF ofrece un nombre completo, el parser puede descomponerlo de forma conservadora y siempre revisable. Los campos explícitamente etiquetados tienen prioridad. En nombres femeninos, un patrón final `de Apellido` se interpreta como apellido de casada cuando está presente; cualquier resultado puede corregirse antes de importar.
+
+**Motivo:** estos datos pueden ser útiles para identificar una simulación o un futuro informe, pero no justifican persistencia permanente. Una descomposición conservadora reduce captura manual sin convertir el parser en fuente definitiva de identidad, porque la vista previa sigue siendo obligatoria y editable solo por decisión del Asegurado(a).
+
+## ADR-081 — La navegación del wizard no debe superponerse al contenido
+
+**Estado:** Superada por ADR-086 durante UX.4.6b R3
+
+**Decisión:** la barra común de los Pasos 1–6 conserva su lógica de retroceso, salto directo, estado y acción principal, pero deja de usar posicionamiento `sticky/fixed`. Se renderiza después del contenido activo.
+
+**Motivo:** la persistencia flotante cumplía una decisión UX anterior, pero en formularios largos ocultaba información y competía con el contenido. Mantener un único componente estático conserva consistencia sin sacrificar legibilidad.
+
+
+## ADR-082 — Consentimiento informado y versionado antes de Simular
+
+**Estado:** Aceptada para validación UX.4.6b
+
+**Decisión:** antes de permitir captura manual o importación documental, `/simulacion` debe presentar información clara sobre datos tratados, finalidades, almacenamiento temporal, derechos, contacto y ausencia actual de cookies/rastreadores. La aceptación se versiona en `localStorage` sin copiar la simulación y requiere además una marca de sesión en `sessionStorage`, por lo que una nueva pestaña/sesión vuelve a presentar las condiciones. Rechazar elimina el estado temporal de la simulación y devuelve a Inicio. Un cambio material de la política incrementará la versión y solicitará aceptación nuevamente.
+
+**Motivo:** cédula, NSS, salarios e historial son datos personales y económicos que requieren transparencia y control previo. Un consentimiento trazable y versionado evita que la captura preceda a la información sobre su finalidad.
+
+## ADR-083 — No mostrar un banner de cookies cuando la aplicación no usa cookies
+
+**Estado:** Aceptada para validación UX.4.6b
+
+**Decisión:** la versión actual no mostrará un banner independiente de cookies porque no crea cookies, no integra analítica, publicidad ni rastreadores. La política sí informará el uso de `sessionStorage` para la simulación y `localStorage` para apariencia y consentimiento. Si se añaden cookies no esenciales, analítica o telemetría, se diseñará consentimiento granular previo y se actualizará la política.
+
+**Motivo:** equiparar Web Storage con cookies sería técnicamente impreciso y podría inducir al usuario a creer que existe un seguimiento que la aplicación no realiza.
+
+## ADR-084 — Descomposición conservadora y revisable del nombre completo
+
+**Estado:** Aceptada para validación UX.4.6b
+
+**Decisión:** Mi Retiro Seguro puede descomponer un nombre completo cuando la estructura sea suficientemente reconocible. Para cuatro o más componentes, conserva el primer token como primer nombre, los dos últimos como apellidos y el bloque intermedio como segundo nombre; para nombres femeninos, un sufijo final `de Apellido` se extrae como apellido de casada. Los campos explícitamente etiquetados por el documento siempre prevalecen y la importación no se aplica sin revisión previa.
+
+**Motivo:** los comprobantes reales pueden ofrecer un nombre completo sin campos separados. La heurística limitada reduce trabajo manual, pero la revisión obligatoria evita tratar una inferencia de presentación como dato oficial incuestionable.
+
+## ADR-085 — Privacidad por diseño y hardening de la frontera de simulación
+
+**Estado:** Aceptada para validación UX.4.6b
+
+**Decisión:** toda respuesta bajo `/api/simulacion/` debe declarar `Cache-Control: no-store`; la aplicación mantiene CSP, políticas de referrer/permisos, protección contra framing y `nosniff`. Bootstrap servido temporalmente por jsDelivr usa SRI y deberá evaluarse para localización antes de beta pública. La política de privacidad y la matriz de cumplimiento forman parte del contrato documental de cualquier cambio que agregue datos, almacenamiento, exportaciones, analítica o terceros.
+
+**Motivo:** el flujo ya maneja identificadores, salarios y documentos personales. Las medidas deben proteger el conjunto de la simulación y no solamente los endpoints de PDF.
+
+
+## ADR-086 — Consentimiento con lectura completa y navegación dual del wizard (UX.4.6b R3)
+
+- El aviso de privacidad visible se amplía a un documento de 21 apartados alineado con Ley 81/Decreto 285 y adaptado a la realidad de Mi Retiro Proyectado.
+- La casilla de aceptación permanece deshabilitada hasta que el usuario llega al final del documento; aceptar requiere además una acción afirmativa sobre la casilla.
+- La interfaz evita términos internos de almacenamiento cuando no aportan valor al usuario y explica el comportamiento en lenguaje común.
+- El asistente usa dos barras simétricas dentro del mismo ancho del contenido: superior e inferior. En PC/laptop la superior puede permanecer disponible bajo el encabezado durante pasos largos; la inferior ofrece cierre natural.
+- Las ayudas contextuales no deben quedar recortadas por `overflow` de la tarjeta de simulación.
+
+
+## ADR-087 — El contenido público debe ser pertinente al propósito del producto
+
+**Estado:** Aceptada para validación UX.4.6b R4
+
+**Decisión:** la interfaz solo debe presentar información que ayude a operar la aplicación, comprender una estimación previsional, conocer su alcance, ejercer decisiones de privacidad, cumplir requisitos legales o utilizar funciones de seguridad/accesibilidad. Se eliminan mensajes meta como **Fin de los términos** y **Lectura completada** cuando no aportan una decisión adicional. Mi Retiro Proyectado no se presentará como aplicación educativa, didáctica o pedagógica mientras ese no sea un propósito real del producto.
+
+**Motivo:** reducir texto ajeno a la tarea mejora claridad, evita confundir el posicionamiento del producto y mantiene coherencia entre interfaz, finalidad previsional y documentación.

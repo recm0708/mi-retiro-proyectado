@@ -487,7 +487,7 @@ La suite alcanzaba **147 pruebas automatizadas** antes del cierre del flujo de i
 1. el parser extrae una referencia femenina sintética con monto, cuotas, edad, sistema y filas anuales;
 2. un segundo caso con valores diferentes demuestra que el importador no depende de un monto único;
 3. un documento ajeno al formato esperado se rechaza;
-4. el contrato de salida no contiene nombre, cédula, número de seguro social ni código único del documento;
+4. el contrato de salida no contiene el código único del documento; UX.4.6b permite identificadores opcionales únicamente cuando aparecen etiquetados y los protege con revisión explícita;
 5. el endpoint rechaza archivos que no sean PDF;
 6. la interfaz ofrece carga PDF opcional y declara que no existe un monto predeterminado;
 7. la comparación usa el monto extraído, el resultado actual, sistema y edad para decidir si puede calcular una diferencia;
@@ -631,3 +631,85 @@ git diff --check
 ```
 
 La validación específica en móvil, tablet, macOS y pantallas grandes permanece diferida para la matriz beta/RC y no bloquea este cierre.
+
+
+
+## Validación UX.4.6b — Simular / Paso 1 · Datos personales
+
+La Revisión 2 deja la suite en **223 pruebas automatizadas en `OK`**. Las regresiones específicas cubren:
+
+1. modalidad manual predeterminada y alternativa PDF;
+2. siete campos opcionales de identificación;
+3. asterisco y semántica accesible de fecha de nacimiento, sexo y sistema;
+4. apellido de casada condicionado a sexo femenino;
+5. exclusión visual mutua entre captura manual e importación;
+6. traslado de Ficha Digital al Paso 3;
+7. barra común después de los paneles y con `position: static`;
+8. ausencia de acciones duplicadas dentro del formulario del Paso 1;
+9. cargador PDF compacto y acción de análisis condicionada a archivo;
+10. vista previa bloqueada, edición explícita y bloqueo de importación durante edición;
+11. continuidad bloqueada cuando faltan datos previsionales obligatorios;
+12. extracción de identificadores explícitos;
+13. descomposición conservadora de nombre completo y patrón femenino `de Apellido`;
+14. trazabilidad del origen manual/importado/editado;
+15. consentimiento versionado antes de la captura y retorno a Inicio al rechazar;
+16. ausencia de cookies/analítica/rastreadores en el contrato actual y separación entre `sessionStorage`/`localStorage`;
+17. `Cache-Control: no-store` en la API de simulación, CSP y SRI;
+18. hover transversal de tablas y control `Info` reposicionable;
+19. sección pública de privacidad y fuentes oficiales;
+20. permanencia de la importación de Ficha Digital en Paso 3.
+
+Las regresiones históricas de UX.3, UX.4.1, UX.4.4 y UX.4.5 se actualizan al nuevo contrato sin eliminar sus garantías de responsive, validación accesible, importación revisable y separación acreditado/proyectado.
+
+### Validación manual pendiente
+
+Antes de cerrar UX.4.6b en PC/laptop se debe comprobar:
+
+- primera entrada a **Simular**: modal de privacidad visible antes de capturar datos;
+- **No acepto** vuelve a Inicio y **Aceptar y continuar** habilita el flujo;
+- reapertura/versión del consentimiento sin perder coherencia;
+- selección Manual/PDF y cambio entre modalidades;
+- asteriscos de campos obligatorios y borde/mensaje/foco al intentar continuar vacíos;
+- apellido de casada para Femenino y ocultación para Masculino;
+- cargador PDF compacto y botón **Analizar documento** alineado;
+- comprobante con `Anabel Estela Miranda Madrid de Cañizares`: revisión de nombres, apellidos y apellido de casada;
+- vista previa inicialmente bloqueada, **Editar campos**, **Finalizar edición** e **Importar datos**;
+- ausencia de leyendas redundantes retiradas;
+- hover de filas suficientemente perceptible;
+- ayuda `Info` de Sistema previsional sin recorte cerca del footer/viewport;
+- fila de NSS alineada sin espacio vertical excesivo;
+- barra al final del Paso 1 sin superposición;
+- Ficha Digital únicamente en Paso 3;
+- sección de Privacidad en Fuentes;
+- Claro, Oscuro y Alto contraste.
+
+La matriz móvil/tablet/macOS/pantallas grandes continúa diferida para beta/RC.
+
+
+### Validación adicional UX.4.6b Revisión 3
+
+Comprobar en PC/laptop:
+
+1. el modal de términos contiene los apartados de objeto, responsable, marco legal, datos, finalidad, consentimiento, custodia, terceros, cookies, derechos, resultados, incidentes y cambios;
+2. la casilla **He leído y acepto...** inicia deshabilitada y solo se habilita al llegar al final del texto;
+3. **Aceptar y continuar** no puede activarse sin lectura completada y casilla marcada;
+4. los textos visibles no contienen `sessionStorage` ni `localStorage`;
+5. la barra superior e inferior tienen el mismo ancho que las tarjetas del asistente y muestran el mismo paso/acción;
+6. la barra superior permanece accesible en escritorio durante pasos largos sin invadir el ancho del contenido;
+7. la ayuda contextual de Sistema previsional no queda recortada por tarjeta, navegación o footer.
+
+La validación técnica de UX.4.6b Revisión 3 ejecutó **232 pruebas automatizadas en OK**, además de `compileall` y validación de sintaxis JavaScript.
+
+
+### Validación adicional UX.4.6b Revisión 4
+
+Comprobar en PC/laptop:
+
+1. la casilla **He leído y acepto...** continúa deshabilitada hasta alcanzar el final del documento;
+2. al llegar al final se habilita la casilla sin mostrar un bloque **Fin de los términos**;
+3. no aparece el mensaje **Lectura completada. Marca la casilla para aceptar y continuar.**;
+4. antes de alcanzar el final, la ayuda de desplazamiento explica por qué la casilla está deshabilitada y desaparece al cumplirse el requisito;
+5. las plantillas públicas no posicionan Mi Retiro Proyectado como aplicación educativa, didáctica o pedagógica;
+6. navegación superior/inferior, términos, Manual/PDF, campos obligatorios y ayuda `Info` conservan el comportamiento validado en R3.
+
+La validación técnica de UX.4.6b Revisión 4 ejecutó **233 pruebas automatizadas en OK**, además de `compileall`, validación de sintaxis JavaScript y revisión de espacios finales.

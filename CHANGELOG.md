@@ -1,5 +1,30 @@
 # Changelog
 
+### UX.4.6b — Simular / Paso 1 · Datos personales
+
+- El Paso 1 separa **captura manual** e **importación desde PDF** como modalidades mutuamente excluyentes, con captura manual seleccionada por defecto.
+- Se agregan campos opcionales de identificación: primer/segundo nombre, primer/segundo apellido, apellido de casada, cédula y número de Seguro Social. Ninguno modifica las fórmulas previsionales.
+- Fecha de nacimiento, sexo y sistema previsional muestran un asterisco semántico de **campo obligatorio** y conservan la validación accesible con borde/mensaje de error y foco sobre el primer campo inválido.
+- El apellido de casada se muestra únicamente cuando el sexo seleccionado es femenino.
+- La Ficha Digital sale del Paso 1 y se traslada al Paso 3, donde corresponde al historial salarial y al detalle del año actual.
+- El cargador de Mi Retiro Seguro se compacta: selector de archivo y acción **Analizar documento** comparten altura y alineación, y el texto interno sobre memoria/motores se sustituye por un acceso breve a privacidad.
+- La vista previa de Mi Retiro Seguro inicia bloqueada; **Editar campos** habilita cambios, **Finalizar edición** vuelve al modo revisión y **Importar datos** confirma la transferencia. Mientras existe una edición abierta, la importación permanece deshabilitada.
+- El parser puede descomponer un nombre completo de forma conservadora y revisable; en nombres femeninos reconoce el patrón final `de Apellido` como apellido de casada cuando existe en el documento. Los campos explícitamente etiquetados por el PDF conservan prioridad.
+- Se eliminan del modal los textos técnicos `Detectado = ...`, el aviso sobre nombre completo sin dividir y otros mensajes que no ayudan a tomar una decisión.
+- Las filas de tablas reciben un hover global más perceptible y las ayudas contextuales cambian del círculo `?` a un control **Info**, con reposicionamiento vertical/horizontal para evitar recortes cerca del viewport o footer.
+- `sessionStorage` conserva el origen del bloque personal como `MANUAL`, `MI_RETIRO_SEGURO` o `MI_RETIRO_SEGURO_EDITADO`; los documentos PDF continúan procesándose en memoria y no se persiste el archivo original.
+- La navegación común del asistente usa dos barras sincronizadas y del mismo ancho que las tarjetas: una superior disponible durante pasos largos en PC/laptop y otra inferior al cierre del contenido. Ambas conservan Inicio/Anterior, salto directo, estado y acción primaria.
+- Antes de capturar o importar datos, **Simular** presenta un consentimiento versionado de privacidad. Rechazarlo elimina el estado de simulación de la pestaña y devuelve a Inicio; aceptarlo habilita el flujo.
+- La versión actual declara expresamente que no crea cookies, no integra analítica, publicidad ni rastreadores. Utiliza `sessionStorage` para la simulación y para la autorización activa de la pestaña; `localStorage` se limita a apariencia y constancia/versionado de la aceptación.
+- Se añade una sección de privacidad en **Fuentes**, la Política de Privacidad, los Términos de uso y tratamiento de datos y una matriz interna de alineación con Ley 81 de 2019 / Decreto Ejecutivo 285 de 2021.
+- El hardening incorpora `Cache-Control: no-store` en toda la API `/api/simulacion/`, Content Security Policy y Subresource Integrity para Bootstrap servido temporalmente por CDN. La localización de Bootstrap queda como acción pre-beta.
+- Revisión 3: los términos visibles se amplían a 21 apartados en lenguaje comprensible; la casilla de aceptación permanece deshabilitada hasta llegar al final del documento y la política evita mostrar terminología técnica innecesaria al usuario.
+- Revisión 3: la navegación del wizard pasa a un patrón dual y simétrico dentro del mismo ancho de las tarjetas: barra superior accesible durante pasos largos y barra inferior equivalente al cierre del paso.
+- Revisión 3: las ayudas contextuales de la simulación pueden salir del borde de la tarjeta sin quedar recortadas.
+- Revisión 4: se elimina del consentimiento el bloque visual **Fin de los términos** y el mensaje **Lectura completada**. Llegar al final sigue siendo requisito técnico para habilitar la casilla, pero la interfaz no añade mensajes meta una vez cumplido.
+- Revisión 4: se formaliza que el texto público debe limitarse a contenido funcional, previsional, legal, de privacidad o de seguridad relevante para el usuario; no se presenta el producto como aplicación educativa, didáctica o pedagógica ni se muestran detalles internos sin utilidad práctica.
+- UX.4.6b permanece **pendiente de validación visual manual en PC/laptop** antes de su cierre y commits. La suite completa queda en **233 pruebas automatizadas en OK** tras la validación técnica de R4.
+
 ### UX.4.6a — rediseño visual integral y nueva página de Inicio
 
 - Se incorpora `app/static/css/design-system.css` como capa transversal de presentación entre `style.css` y `accesibilidad.css`, sin modificar fórmulas ni contratos previsionales.

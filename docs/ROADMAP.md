@@ -210,7 +210,7 @@ Previsto:
 - [x] enlace visible a Mi Caja Digital;
 - [x] sección de Metodología y fuentes en la navegación;
 - [x] responsive real para laptop, tablet y móvil;
-- [x] navegación principal colapsada y navegación persistente inferior del wizard en móvil;
+- [x] navegación principal colapsada; UX.4.6b usa navegación dual sincronizada del wizard, con barra superior accesible durante pasos largos en PC/laptop y barra inferior al cierre del contenido;
 - [x] tablas extensas con desplazamiento localizado y acciones de formulario adaptativas;
 - [x] Paso 5 con último mes acreditado separado de evaluación y retiro.
 - [x] UX.4.1 con semántica programática del wizard, regiones de estado y anuncios de validación;
@@ -236,11 +236,14 @@ Previsto:
 - [x] UX.4.6a: sistema visual transversal en `design-system.css` con paletas Claro/Oscuro modernizadas y Alto contraste preservado como opción secundaria de accesibilidad;
 - [x] UX.4.6a: navegación pública simplificada, selector compacto de apariencia y footer global centrado con versión, Fuentes oficiales, autoría y copyright;
 - [x] UX.4.6a: nueva página de Inicio orientada a beneficios, mockup sin resultados ficticios, tarjetas de capacidades y proceso guiado rematado en PC/laptop;
+- [ ] UX.4.6b: Revisión 4 del Paso 1 con Manual/PDF, campos obligatorios señalados, identificación opcional, parser revisable de nombre/apellido de casada, consentimiento de privacidad, Ficha Digital en Paso 3, ayudas/tablas transversales y navegación dual simétrica; implementación técnica lista, pendiente validación manual PC/laptop;
 - [x] hardening pre-beta: validación defensiva común de PDFs, cabeceras de privacidad local y límites de texto/páginas;
 - [x] regresión E2E pre-beta por API para SEBD, Mixto y SUCGS;
 - [x] CI pre-beta definida para Python 3.13/3.14 y Node.js 24; primera validación remota de `main` completada en verde;
 - [x] Dependabot ajustado para evitar falsos negativos por majors hardcodeados, limitar `pip` a dependencias directas y agrupar propuestas relacionadas sin auto-merge;
 - [ ] validación manual ampliada opcional: teléfono Android por red local; tablet Android, iPhone/iPad, macOS y pantallas grandes quedan diferidos para beta/RC;
+- [ ] privacidad pre-beta: servir Bootstrap localmente, formalizar respuesta a incidentes y solicitudes de derechos, verificar política de logs y someter los textos legales a revisión jurídica;
+- [ ] UX.4.6g: exportación explícita y seleccionable desde Resultados, marcada como orientativa/no oficial y con opción de excluir identificadores;
 - [x] respuesta temporal sin error para `/favicon.ico` mientras no se integran los iconos definitivos;
 - [ ] integrar favicon e iconos definitivos de **Mi Retiro Proyectado** y retirar la respuesta temporal `204`.
 
@@ -248,7 +251,7 @@ Previsto:
 
 Estado técnico actual; la validación manual multidispositivo queda aplazada y las revisiones inmediatas se realizan en laptop/PC:
 
-- **198 pruebas automatizadas** en `OK`;
+- **233 pruebas automatizadas** en `OK`;
 - regresión SEBD real anonimizada;
 - casos sintéticos de Mixto;
 - casos sintéticos SUCGS;
@@ -268,3 +271,7 @@ Antes de `v0.1.0-beta.1` se mantiene este orden de cierre:
 6. preparar GitHub para publicación y crear `v0.1.0-beta.1`.
 
 La prueba manual en todos los tipos de dispositivos no es requisito de bloqueo para UX.4.5. La compatibilidad ampliada se tratará como matriz de beta/RC, priorizando los dispositivos realmente disponibles.
+
+### Revisión 4 de UX.4.6b
+
+Implementada técnicamente: términos ampliados con lectura completa antes de aceptar, navegación dual superior/inferior, corrección de recortes de ayudas contextuales y eliminación de mensajes meta al final del documento de consentimiento. El contenido público se restringe a información pertinente al propósito previsional, funcional y legal del producto. Pendiente validación manual en PC/laptop antes del cierre y commits.

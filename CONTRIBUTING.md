@@ -275,3 +275,19 @@ Cuando se modifique el flujo de salarios recientes:
 - No eliminar Alto contraste al simplificar el selector de apariencia.
 - Toda modificación transversal de header, footer, Inicio, controles o tokens debe actualizar sus regresiones visuales y la documentación afectada en la misma unidad de trabajo.
 - Un cambio de etiqueta visible no implica renombrar rutas, IDs o contratos consumidos por JavaScript salvo que exista una decisión funcional explícita.
+
+
+
+## Privacidad — tratamiento de datos en cambios de producto
+
+Todo cambio que añada un dato personal, una finalidad, almacenamiento, exportación, telemetría, analítica, cookie, servicio remoto o tercero debe revisar conjuntamente `docs/POLITICA_PRIVACIDAD.md`, `docs/CUMPLIMIENTO_LEY_81.md`, `docs/SEGURIDAD_PRIVACIDAD.md`, `docs/ESPECIFICACION_FUNCIONAL.md`, `docs/MODELO_DE_DATOS.md`, `docs/DECISIONES.md` y `docs/VALIDACION.md`.
+
+Reglas mínimas:
+
+- no incluir datos personales reales en pruebas, fixtures, logs, capturas versionadas ni commits;
+- mantener identificadores fuera de los motores previsionales salvo decisión jurídica/funcional documentada;
+- no introducir cookies, analítica o telemetría silenciosamente;
+- cualquier almacenamiento permanente o transferencia a terceros exige revisar finalidad, consentimiento/base jurídica, retención, destinatarios y medidas de seguridad;
+- los endpoints que reciban o devuelvan información de simulación deben conservar `Cache-Control: no-store` salvo justificación explícita;
+- cambios materiales de la política deben incrementar la versión del consentimiento para solicitar aceptación nuevamente;
+- antes de publicar una beta remota, verificar que la configuración de logs no registre cuerpos, archivos ni identificadores.

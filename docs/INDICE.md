@@ -27,9 +27,13 @@ Este archivo es el punto de entrada para la documentación técnica, funcional y
 | [MODALIDADES_SUCGS.md](MODALIDADES_SUCGS.md) | Capas del Sistema Único de Capitalización con Garantía Solidaria. |
 | [VALIDACION.md](VALIDACION.md) | Estrategia de pruebas, regresiones y casos sintéticos. |
 | [SEGURIDAD_PRIVACIDAD.md](SEGURIDAD_PRIVACIDAD.md) | Modelo de privacidad local, validación de documentos, CI y límites de la beta. |
+| [POLITICA_PRIVACIDAD.md](POLITICA_PRIVACIDAD.md) | Política pública de privacidad, finalidades, almacenamiento, derechos y exportaciones. |
+| [TERMINOS_USO_PRIVACIDAD.md](TERMINOS_USO_PRIVACIDAD.md) | Condiciones de uso, tratamiento de datos y alcance no oficial de la herramienta. |
+| [CUMPLIMIENTO_LEY_81.md](CUMPLIMIENTO_LEY_81.md) | Matriz técnica de alineación y pendientes pre-beta frente a Ley 81/Decreto 285. |
 | [ROADMAP.md](ROADMAP.md) | Fases terminadas, cierre de 6F y trabajo posterior. |
 | [GUIA_INTERNA_DESARROLLO.md](GUIA_INTERNA_DESARROLLO.md) | Convenciones internas de marca, terminología, tipografía y contenido no visible. |
 | [UX_4_6A_REDISENO_VISUAL.md](UX_4_6A_REDISENO_VISUAL.md) | Cierre del rediseño visual integral, nueva página de Inicio y criterio de validación UX.4.6a. |
+| [UX_4_6B_PASO1_DATOS_PERSONALES.md](UX_4_6B_PASO1_DATOS_PERSONALES.md) | Implementación y revisión del Paso 1, consentimiento, importación y navegación común. |
 
 ## 3. Archivos normativos versionados
 
@@ -59,3 +63,10 @@ Cuando un cambio altere una fórmula, parámetro, flujo o fuente legal, no se de
 ## 6. Consulta desde la interfaz
 
 La aplicación expone `/metodologia` como versión navegable de la metodología y de las principales fuentes oficiales para el Asegurado(a). Los detalles de estructura del repositorio y mantenimiento permanecen exclusivamente en esta documentación técnica.
+
+## Consentimiento y privacidad UX.4.6b R4
+
+- [Términos de uso, privacidad y tratamiento de datos](TERMINOS_USO_PRIVACIDAD.md)
+- [Política de privacidad](POLITICA_PRIVACIDAD.md)
+- [Matriz interna de alineación con Ley 81](CUMPLIMIENTO_LEY_81.md)
+- [UX.4.6b — Paso 1](UX_4_6B_PASO1_DATOS_PERSONALES.md)

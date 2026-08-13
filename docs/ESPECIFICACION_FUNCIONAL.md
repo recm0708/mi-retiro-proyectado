@@ -364,7 +364,7 @@ La comparación debe reutilizar los motores existentes, conservar un escenario b
 
 **RF-137.** El Paso 1 debe permitir cargar opcionalmente un comprobante digital PDF de Mi Retiro Seguro sin convertirlo en requisito para completar una simulación.
 
-**RF-138.** El PDF debe procesarse en memoria y el contrato devuelto al frontend no debe incluir nombre, cédula, número de seguro social ni código único del documento.
+**RF-138.** El PDF debe procesarse en memoria. El contrato no debe incluir el código único del documento; desde UX.4.6b puede incluir identificadores personales opcionales solo cuando el documento los etiqueta de forma inequívoca y siempre sujetos a revisión antes de importarlos.
 
 **RF-139.** La referencia importada debe extraer dinámicamente, cuando estén disponibles, fecha del comprobante, sistema elegido, edad de retiro elegida, cuotas históricas, naturaleza de la prestación, monto estimado y registros anuales. No se permite usar un monto fijo procedente de un caso de validación.
 
@@ -392,11 +392,11 @@ Quedan para fases posteriores:
 
 ## 19. UX.4.4 — importación revisable de documentos oficiales
 
-**RF-144.** El Paso 1 debe concentrar las importaciones opcionales de **Comprobante de Mi Retiro Seguro** y **Ficha Digital**, antes de la captura manual del asistente.
+**RF-144.** El Paso 1 debe concentrar únicamente la importación opcional del **Comprobante de Mi Retiro Seguro**. La **Ficha Digital** pertenece al Paso 3 por tratarse de información salarial del año actual.
 
-**RF-145.** Analizar un archivo debe abrir una vista previa editable. Ningún dato detectado puede escribirse en la simulación hasta que el Asegurado(a) pulse una acción explícita de confirmación. Cancelar o cerrar la vista previa conserva intactos los datos existentes.
+**RF-145.** Analizar un comprobante debe abrir una vista previa inicialmente bloqueada. Ningún dato detectado puede escribirse en la simulación hasta que el Asegurado(a) pulse una acción explícita de confirmación. La edición se habilita únicamente mediante **Editar campos**; cancelar o cerrar conserva intactos los datos existentes.
 
-**RF-146.** La vista previa del comprobante debe permitir corregir fecha de nacimiento, sexo, fecha de ingreso, sistema, cuotas históricas, edad de retiro, monto de referencia, fecha del comprobante, prestación y filas anuales detectadas.
+**RF-146.** La vista previa del comprobante debe permitir revisar y, tras una acción explícita de edición, corregir identificación personal, fecha de nacimiento, sexo, fecha de ingreso, sistema, cuotas históricas, edad de retiro, monto de referencia, fecha del comprobante, prestación y filas anuales detectadas.
 
 **RF-147.** Las filas anuales `HISTORICO` pueden proponerse para el historial real. Las filas `PROYECTADO` deben quedar excluidas por defecto y las filas `HISTORICO_PROYECTADO` no pueden asumirse reales sin decisión explícita.
 
@@ -462,3 +462,50 @@ Quedan para fases posteriores:
 **RF-167.** Botones, controles, cards, tablas, alertas, acordeones, wizard y superficies de páginas internas deben reutilizar tokens semánticos compatibles con Claro, Oscuro y Alto contraste.
 
 **RF-168.** El cierre inmediato de UX.4.6a requiere validación manual en PC/laptop y regresiones automatizadas en verde. La validación específica en móvil, tablet, macOS y pantallas grandes puede diferirse para beta/RC mientras se conserven las reglas responsive existentes y no exista una incidencia conocida.
+
+
+## 23. UX.4.6b — Simular / Paso 1 · Datos personales
+
+**RF-169.** El Paso 1 debe permitir elegir entre **Ingresarlos manualmente** e **Importar desde PDF**. La captura manual es la modalidad predeterminada y ambas presentaciones deben ser mutuamente excluyentes.
+
+**RF-170.** La identificación personal puede incluir primer nombre, segundo nombre, primer apellido, segundo apellido, apellido de casada, número de cédula y número de Seguro Social. Estos campos son opcionales y no pueden alterar las fórmulas previsionales.
+
+**RF-171.** El apellido de casada debe mostrarse únicamente cuando el sexo sea femenino y permanecer opcional.
+
+**RF-172.** En modo PDF, el formulario principal no debe mostrarse antes de confirmar una importación. Después de confirmarla puede mostrarse como resumen bloqueado; cualquier corrección de datos importados debe realizarse desde la vista previa mediante **Editar campos**.
+
+**RF-173.** El parser de Mi Retiro Seguro debe priorizar campos explícitamente etiquetados. Cuando el documento solo exponga un nombre completo, puede descomponerlo de forma conservadora y revisable; para nombres femeninos debe reconocer un sufijo final `de Apellido` como apellido de casada cuando exista.
+
+**RF-174.** La Ficha Digital debe renderizarse en el Paso 3 y no en el Paso 1. Su contrato salarial, confirmación de cuotas y límites del año actual se mantienen sin cambios funcionales.
+
+**RF-175.** La navegación común de los seis pasos debe disponer de una barra superior y otra inferior visualmente simétricas, sincronizadas desde la misma lógica. En PC/laptop la superior puede mantenerse visible bajo el encabezado durante pasos largos; la inferior permanece en el flujo normal al final del contenido.
+
+**RF-176.** El estado temporal debe distinguir el origen personal `MANUAL`, `MI_RETIRO_SEGURO` o `MI_RETIRO_SEGURO_EDITADO`. El PDF original no se guarda y los identificadores confirmados permanecen únicamente en la sesión de la pestaña.
+
+**RF-177.** En modalidad PDF no se puede continuar si faltan fecha de nacimiento, sexo o sistema previsional; la interfaz debe indicar que esos campos se completan mediante la revisión editable del documento.
+
+
+### UX.4.6b Revisión 2 — privacidad, validación y consistencia transversal
+
+**RF-178.** Fecha de nacimiento, sexo y sistema previsional deben mostrar un indicador visual de campo obligatorio, acompañado de una alternativa textual accesible. Al intentar continuar con un requerido inválido, se conserva borde/estado de error, mensaje inline asociado y foco sobre el primer campo inválido.
+
+**RF-179.** Antes de ingresar o importar datos en `Simular`, la aplicación debe presentar un consentimiento informado y versionado que explique categorías de datos, finalidades, conservación, derechos, contacto y tecnologías de almacenamiento utilizadas.
+
+**RF-180.** Si el usuario rechaza el tratamiento, la aplicación debe eliminar el estado temporal de simulación de la pestaña y volver a Inicio. Un cambio material de la política debe provocar una nueva solicitud de aceptación.
+
+**RF-181.** Mientras la aplicación no cree cookies, analítica, publicidad ni rastreadores, no debe mostrar un banner de cookies que sugiera lo contrario. Debe informar de forma separada el uso de `sessionStorage` y `localStorage`. Cualquier cookie no esencial futura requiere consentimiento granular previo.
+
+**RF-182.** El cargador PDF debe presentar selector y acción de análisis con altura/alineación coherentes. La vista previa debe eliminar lenguaje técnico innecesario y no mostrar leyendas redundantes sobre `Detectado/No detectado` ni avisos de nombre completo sin dividir.
+
+**RF-183.** Las tablas interactivas deben ofrecer un hover suficientemente perceptible en Claro, Oscuro y Alto contraste. Las ayudas contextuales deben utilizar un control visual `Info` y reposicionarse cuando su panel pudiera recortarse por los bordes del viewport o por contenido inferior.
+
+**RF-184.** La futura exportación desde Resultados debe generarse solo por acción explícita, identificar el contenido como estimación orientativa/no oficial, permitir seleccionar información relevante y ofrecer la posibilidad de excluir identificadores personales. No debe subirse automáticamente a servicios externos.
+
+**RF-185.** La vista pública de Fuentes debe incluir el marco de protección de datos aplicable al producto —Ley 81 de 2019, Decreto Ejecutivo 285 de 2021 y orientación oficial de ANTAI— y acceso a la política/condiciones de tratamiento vigentes.
+
+
+**RF-186.** La casilla de aceptación de términos debe permanecer deshabilitada hasta que el usuario alcance el final del documento visible. La aplicación no debe añadir un bloque **Fin de los términos** ni mostrar un mensaje **Lectura completada**; al cumplirse el requisito se habilita la casilla y desaparece la ayuda previa de desplazamiento.
+
+**RF-187.** Todos los pasos de Simular deben compartir dos barras visualmente simétricas y sincronizadas, con Inicio/Anterior, selector directo de paso, estado y acción primaria. En escritorio la superior puede mantenerse visible bajo el encabezado; la inferior permanece al final del contenido.
+
+**RF-188.** Los textos visibles de la aplicación deben estar vinculados a su finalidad previsional o a necesidades funcionales, legales, de privacidad, seguridad y accesibilidad. No deben presentar Mi Retiro Proyectado como aplicación educativa, didáctica o pedagógica ni exponer detalles internos que no ayuden al usuario a tomar una acción o comprender el alcance del producto.

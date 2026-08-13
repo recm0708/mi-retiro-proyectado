@@ -18,7 +18,7 @@ Los comprobantes de Mi Retiro Seguro y la Ficha Digital:
 - no deben aparecer en fixtures de pruebas reales;
 - se reducen a los campos operativos necesarios antes de devolver información al frontend.
 
-Los contratos del importador excluyen identificadores directos que no sean necesarios para la simulación.
+Los contratos del importador minimizan identificadores directos. Desde UX.4.6b, Mi Retiro Seguro puede devolver nombres, apellidos, cédula y número de Seguro Social opcionales cuando aparecen con etiquetas inequívocas; el código único del documento continúa excluido.
 
 ## 3. Validación defensiva de PDF
 
@@ -41,9 +41,7 @@ Las respuestas incorporan defensas de bajo riesgo compatibles con la aplicación
 - `Referrer-Policy: no-referrer`;
 - `Permissions-Policy` sin cámara, micrófono ni geolocalización.
 
-Las respuestas de los dos importadores PDF usan `Cache-Control: no-store`.
-
-No se incorpora todavía una política CSP estricta porque la interfaz actual debe revisarse previamente para eliminar o inventariar dependencias y fragmentos inline sin romper el producto.
+Desde UX.4.6b R2, todas las respuestas bajo `/api/simulacion/` usan `Cache-Control: no-store`. La aplicación incorpora Content Security Policy compatible con los recursos actuales y Bootstrap servido temporalmente por jsDelivr utiliza Subresource Integrity. Antes de beta pública se recomienda servir Bootstrap localmente para reducir dependencias de terceros.
 
 ## 5. CI y dependencias
 
@@ -74,4 +72,41 @@ Los casos reales de validación deben anonimizarse o transformarse en fixtures s
 
 ## 7. Límites de esta beta
 
-Esta fase no afirma resistencia contra cargas hostiles a nivel de un servicio expuesto a Internet. Antes de desplegar la aplicación como servicio público remoto harían falta controles adicionales de infraestructura, límites de concurrencia, observabilidad, política CSP completa, revisión de dependencias y una evaluación de amenazas acorde al entorno de despliegue.
+Esta fase no afirma resistencia contra cargas hostiles a nivel de un servicio expuesto a Internet. Antes de desplegar la aplicación como servicio público remoto harían falta controles adicionales de infraestructura, límites de concurrencia, observabilidad, revisión/endurecimiento de CSP para el entorno de producción, revisión de dependencias y una evaluación de amenazas acorde al entorno de despliegue.
+
+
+## 8. UX.4.6b — identificadores personales, consentimiento y Web Storage
+
+La incorporación opcional de datos de identidad modifica la política anterior de exclusión total de identificadores, pero no habilita persistencia permanente. Se aplican estas condiciones:
+
+- los PDF continúan procesándose en memoria y no se persiste el archivo original;
+- nombre, apellidos, cédula y número de Seguro Social pueden devolverse cuando el parser reconoce el campo o una estructura de nombre revisable;
+- un nombre completo puede descomponerse de forma conservadora, incluyendo el sufijo femenino `de Apellido` como apellido de casada; nunca se aplica sin vista previa;
+- la vista previa se abre bloqueada y cualquier corrección requiere **Editar campos**;
+- los datos confirmados permanecen en `sessionStorage` de la pestaña actual;
+- `localStorage` no contiene la simulación: solo apariencia y versión/estado/fecha técnica de aceptación; la autorización activa de la pestaña se conserva en `sessionStorage`;
+- la versión actual no usa cookies, analítica, publicidad ni rastreadores;
+- no se escriben identificadores reales en logs, pruebas, fixtures, capturas versionadas ni documentación;
+- el código único del documento no forma parte del contrato;
+- los identificadores no se transmiten a los motores previsionales.
+
+## 9. Controles R2 de navegador y API
+
+Toda ruta `/api/simulacion/` utiliza `Cache-Control: no-store`. Se mantienen `X-Content-Type-Options`, denegación de framing, política de referrer y permisos, y se añade Content Security Policy. Mientras Bootstrap continúe servido por jsDelivr, la aplicación fija Subresource Integrity y `crossorigin`; antes de beta pública se recomienda empaquetar esas dependencias en `app/static/`.
+
+El consentimiento informado se presenta antes de la captura/importación. Su versión se almacena localmente para poder solicitar una nueva aceptación cuando exista un cambio material de finalidad, categorías de datos, retención o terceros. Rechazar elimina la simulación de la pestaña y devuelve a Inicio.
+
+## 10. Pendientes de seguridad y privacidad antes de beta pública
+
+- servir Bootstrap localmente para retirar la dependencia de CDN;
+- disponer de una acción siempre accesible **Borrar mi simulación**;
+- formalizar procedimiento de incidentes/vulneraciones y registro de respuesta;
+- formalizar flujo de atención de derechos de acceso, rectificación, cancelación, oposición y portabilidad;
+- verificar que la configuración de producción no registre cuerpos de solicitudes, PDFs ni identificadores;
+- revisar jurídicamente política y consentimiento;
+- reevaluar el modelo si se añaden cuentas, almacenamiento remoto, sincronización, analítica, telemetría, publicidad o terceros.
+
+
+## Consentimiento visible UX.4.6b R4
+
+El consentimiento previo se presenta como un documento extenso y versionado. La casilla de aceptación se habilita únicamente después de alcanzar el final del texto. La interfaz no agrega un bloque de **Fin de los términos** ni un mensaje de **Lectura completada**: al cumplirse el requisito desaparece la ayuda previa y la casilla queda disponible. La interfaz pública describe conservación temporal, cookies, terceros y derechos en lenguaje comprensible; la documentación técnica conserva los nombres de las tecnologías cuando son necesarios para auditoría.

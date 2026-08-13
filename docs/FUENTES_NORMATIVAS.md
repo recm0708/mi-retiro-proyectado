@@ -166,3 +166,14 @@ La ruta `/metodologia` constituye el punto central visible de consulta normativa
 En `Ver cálculo completo`, los IDs internos de integración (`texto_unico`, `ley_462`, `reglamento_calculo`, etc.) no se presentan literalmente. Cada paso muestra el título humano de la fuente y un enlace oficial cuando está disponible.
 
 La página de metodología no sustituye este documento técnico: la interfaz está orientada al Asegurado(a) final y este archivo conserva el inventario y las notas de mantenimiento del repositorio.
+
+
+## Protección de datos personales y privacidad de la aplicación
+
+Estas fuentes no modifican las fórmulas previsionales. Regulan y orientan el tratamiento de la información personal utilizada por la aplicación.
+
+- **Ley 81 de 26 de marzo de 2019 sobre Protección de Datos Personales.** Referencia general: https://antai.gob.pa/legislacion/
+- **Decreto Ejecutivo No. 285 de 28 de mayo de 2021**, que reglamenta la Ley 81 de 2019: https://antai.gob.pa/reglamentan-ley-81-de-proteccion-de-datos-personales/
+- **Preguntas frecuentes de Protección de Datos Personales — ANTAI**, con derechos de acceso, rectificación, cancelación, oposición y portabilidad; consentimiento y deber de información: https://antai.gob.pa/preguntas-frecuentes-proteccion-de-datos-personales/
+
+La implementación de producto se documenta en `POLITICA_PRIVACIDAD.md`, `TERMINOS_USO_PRIVACIDAD.md`, `CUMPLIMIENTO_LEY_81.md` y `SEGURIDAD_PRIVACIDAD.md`. Estos documentos no sustituyen asesoría jurídica ni una auditoría formal de cumplimiento.

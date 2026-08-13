@@ -207,7 +207,7 @@ Reglas de implementación:
 
 ## UX.4.4 — comprobante personal como referencia dinámica
 
-El importador de Mi Retiro Seguro debe mantenerse independiente de los motores. Los cambios al parser se validan contra texto sintético y, de forma manual, contra documentos personales conservados fuera de Git. La respuesta del endpoint omite identificadores personales directos y el archivo no se escribe en disco.
+El importador de Mi Retiro Seguro debe mantenerse independiente de los motores. Los cambios al parser se validan contra texto sintético y, de forma manual, contra documentos personales conservados fuera de Git. La respuesta del endpoint puede incluir identificadores personales opcionales desde UX.4.6b cuando están etiquetados de forma inequívoca; el código único del documento se omite y el archivo no se escribe en disco.
 
 La comparación de Resultados consume `resumen_unificado`; no debe conocer campos internos exclusivos de SEBD, Mixto o SUCGS. Un caso de validación puede aparecer en tests, pero su monto nunca debe formar parte de JavaScript, plantillas o servicios de producción.
 
@@ -260,3 +260,42 @@ Cuando Dependabot proponga un cambio Python, revisar primero si corresponde a un
 - Mi Caja Digital debe aparecer donde ayuda a verificar información individual; el footer global se reserva para identidad, aviso legal, versión y acceso a Fuentes.
 - El marcador de marca `MR` es temporal y deberá reemplazarse cuando se integren favicon e iconos definitivos.
 - La validación inmediata de cambios visuales continúa en PC/laptop; la matriz completa de móvil/tablet/pantallas grandes se ejecutará en beta/RC.
+
+
+
+## UX.4.6b — reglas de mantenimiento del Paso 1
+
+- No volver a mostrar simultáneamente captura manual e importación PDF.
+- La Ficha Digital pertenece al Paso 3 salvo que cambie su contrato funcional.
+- Mantener la descomposición de nombres limitada, revisable y protegida por pruebas; los campos explícitos prevalecen y el sufijo femenino `de Apellido` puede mapearse a apellido de casada.
+- Mantener nombres/cédula/NSS fuera de motores, logs y fixtures reales.
+- La vista previa del comprobante debe abrir bloqueada y requerir una acción explícita para editar.
+- La barra común del wizard debe permanecer en flujo normal y no recuperar `position: sticky` o `fixed` sin una nueva decisión de UX.
+
+
+### UX.4.6b R2 — privacidad y consentimiento
+
+- `privacidad.js` no debe almacenar la simulación ni identificadores en `localStorage`; solo versión/estado/fecha técnica de aceptación. La autorización activa de la pestaña debe permanecer en `sessionStorage`.
+- Un cambio material en categorías de datos, finalidades, terceros, retención o almacenamiento exige incrementar la versión del consentimiento y actualizar la documentación legal/técnica relacionada.
+- No agregar un banner de cookies mientras no existan cookies. Si se incorpora analítica, telemetría o cookies no esenciales, implementar consentimiento granular antes de activarlas.
+- Mantener `/api/simulacion/*` con `Cache-Control: no-store` y evitar logging de cuerpos/archivos/identificadores.
+- Mantener las ayudas `Info` y el hover de tablas como patrones transversales para los siguientes pasos UX.4.6c–g.
+- Antes de beta pública, preferir Bootstrap local sobre CDN y revisar jurídicamente los textos de privacidad/condiciones.
+
+
+## UX.4.6b R3 — reglas transversales
+
+- No mostrar `sessionStorage`, `localStorage` u otros nombres de implementación en textos destinados al usuario salvo que exista una razón funcional clara; describir el comportamiento en lenguaje común.
+- Toda nueva versión material de términos debe incrementar `VERSION_PRIVACIDAD` y obligar a una nueva aceptación.
+- La casilla de consentimiento no se habilita antes de llegar al final del documento.
+- Las barras superior e inferior del wizard deben actualizarse desde la misma lógica y conservar simetría de ancho/alineación.
+- Las ayudas contextuales nunca deben quedar recortadas por tarjetas o footer.
+
+
+## UX.4.6b R4 — criterio de contenido público
+
+- La casilla del consentimiento se habilita únicamente después de llegar al final del documento, pero no debe mostrarse un bloque de **Fin de los términos** ni una confirmación **Lectura completada**.
+- Mientras todavía no se alcance el final puede mostrarse una instrucción breve que explique por qué la casilla está deshabilitada; al cumplirse el requisito, esa ayuda debe desaparecer.
+- Toda redacción pública debe estar justificada por una necesidad funcional, previsional, legal, de privacidad, seguridad o accesibilidad.
+- No presentar Mi Retiro Proyectado como aplicación educativa, didáctica o pedagógica salvo que en el futuro exista una función explícita de ese tipo aprobada como alcance del producto.
+- No exponer jerga técnica, estados internos o mensajes meta de desarrollo cuando el usuario no necesite conocerlos para tomar una decisión.

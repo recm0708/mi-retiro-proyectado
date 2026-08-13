@@ -101,7 +101,7 @@ Periodicidades soportadas:
 
 ### Importación revisable
 
-`ResumenReferenciaMiRetiroSeguro` conserva la referencia personal y filas anuales detectadas sin identificadores directos innecesarios. `ResumenFichaDigital` contiene únicamente registros del año calendario actual mediante `RegistroFichaDigital` (`anio`, `mes`, `salario` y estado inicial del salario). Los períodos de años anteriores detectados en el PDF se descartan antes de construir el contrato.
+`ResumenReferenciaMiRetiroSeguro` conserva la referencia personal, filas anuales detectadas e identificadores opcionales etiquetados de forma inequívoca para revisión en UX.4.6b. `ResumenFichaDigital` contiene únicamente registros del año calendario actual mediante `RegistroFichaDigital` (`anio`, `mes`, `salario` y estado inicial del salario). Los períodos de años anteriores detectados en el PDF se descartan antes de construir el contrato.
 
 En el navegador se distinguen dos estados adicionales: `importacion_comprobante_confirmada` y `importacion_ficha_digital_confirmada`. La detección previa a la confirmación no se persiste. Después de confirmar una Ficha Digital, los registros del año actual se traducen a `DatosDetalleAnioActual` y la marca `cuota_acreditada` procede exclusivamente de la decisión revisada por el Asegurado(a).
 
@@ -382,7 +382,7 @@ Los modelos `ResumenResultadoSEBD`, `ResumenResultadoMixto` y `ResumenResultadoS
 
 - `RegistroReferenciaMiRetiroSeguro`: año, edad, tipo histórico/proyectado, salario anual y cuotas extraídos de una fila del comprobante.
 - `ResumenReferenciaMiRetiroSeguro`: fecha del comprobante, datos mínimos de compatibilidad, sistema elegido, edad de retiro, cuotas históricas, naturaleza y monto estimado de prestación, total de cuotas acumuladas, filas anuales y advertencias.
-- El modelo excluye nombre, cédula, número de seguro social ni código único del documento. El PDF original no forma parte del estado persistido.
+- El modelo excluye el código único del documento. Puede contener nombres, apellidos, cédula y número de Seguro Social opcionales cuando el PDF los identifica explícitamente. El PDF original no forma parte del estado de simulación.
 
 
 ## UX.4.5 — modo de integración del resultado
@@ -393,3 +393,20 @@ Los modelos `ResumenResultadoSEBD`, `ResumenResultadoMixto` y `ResumenResultadoS
 - `SOLO_ACREDITADO`: conserva la fecha de retiro, usa `historial.cuotas_totales_referencia` como total de cuotas y no añade registros salariales proyectados.
 
 Los resúmenes integrados devuelven también el modo utilizado para que la interfaz pueda almacenar y presentar ambas fotografías sin confundirlas.
+
+
+## UX.4.6b — estado personal de la simulación
+
+`simulacion.persona` puede contener: `primer_nombre`, `segundo_nombre`, `primer_apellido`, `segundo_apellido`, `apellido_casada`, `cedula`, `numero_seguro_social`, `fecha_nacimiento`, `sexo`, `fecha_ingreso_css` y `sistema`. Los siete primeros campos de identificación son opcionales para el cálculo.
+
+El estado agrega:
+
+- `modo_datos_personales`: `MANUAL` o `MI_RETIRO_SEGURO`;
+- `origen_persona`: `MANUAL`, `MI_RETIRO_SEGURO` o `MI_RETIRO_SEGURO_EDITADO`.
+
+`ResumenReferenciaMiRetiroSeguro` puede conservar `nombre_completo_detectado` como trazabilidad del texto original y, al mismo tiempo, devolver componentes descompuestos de forma conservadora. Los campos explícitos del documento prevalecen. Para nombres femeninos, el patrón final `de Apellido` puede poblar `apellido_casada`; la vista previa sigue siendo la autoridad de revisión antes de importar.
+
+
+### Consentimiento de privacidad fuera del modelo previsional
+
+La aceptación de privacidad no forma parte de `simulacion.persona` ni de los modelos Pydantic de cálculo. `privacidad.js` conserva en `localStorage` únicamente versión, estado de aceptación y fecha técnica de aceptación. El contenido de la simulación permanece en `sessionStorage`. Esta separación evita que un estado legal/de interfaz se mezcle con los contratos de los motores.
