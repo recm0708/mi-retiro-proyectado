@@ -528,3 +528,20 @@ La validación manual de cierre de UX.4.4 debe comprobar en PC/laptop:
 - volver a ejecutar un caso SEBD completo y luego un documento deliberadamente incompatible para confirmar la comparación `No comparable`.
 
 Los documentos personales reales permanecen fuera del repositorio.
+
+
+## Validación UX.4.5 — información acreditada, proyección y cierre accesible
+
+La suite alcanza **170 pruebas automatizadas**. `tests/test_ux45_cierre_resultados_accesibilidad.py` añade nueve regresiones específicas:
+
+1. la fotografía SEBD `SOLO_ACREDITADO` del caso controlado conserva 281 cuotas, salario base B/.1,163.28 y pensión B/.741.59 sin períodos futuros;
+2. el mismo escenario en `PROYECTADO`, con cinco cuotas futuras y B/.1,500 mensuales, conserva B/.769.42;
+3. el frontend solicita una segunda evaluación acreditada para SEBD, Mixto y SUCGS;
+4. `sessionStorage` mantiene resultados acreditados separados y los invalida con sus dependencias;
+5. la comparación acreditada/proyectada existe sin depender de un PDF;
+6. la tabla incluye caption y encabezados programáticos de fila/columna;
+7. la referencia PDF prefiere la fotografía acreditada propia;
+8. los modales de importación conservan títulos y cierres accesibles;
+9. la comparación utiliza estilos compatibles con Alto contraste y números tabulares.
+
+La validación manual obligatoria de UX.4.5 se realiza en PC/laptop y debe comprobar: cálculo SEBD con ambas fotografías, un caso Mixto y uno SUCGS, navegación por teclado, reapertura de resultados guardados y temas Claro/Oscuro/Alto contraste. Si se dispone de un teléfono Android, puede añadirse una prueba real por red local. Tablet Android, iPhone/iPad, macOS y pantallas muy grandes quedan diferidos para la ronda beta/RC; su ausencia no bloquea el cierre mientras las regresiones responsive permanezcan en verde y no exista una incidencia conocida.

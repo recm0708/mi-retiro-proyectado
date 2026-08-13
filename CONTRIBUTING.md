@@ -244,3 +244,13 @@ Cuando se modifique el flujo de salarios recientes:
 - Una cifra importada es una referencia de comparación y no reemplaza los motores previsionales ni las fuentes normativas.
 - La diferencia monetaria solo se presenta cuando sistema, identidad mínima disponible, edad de retiro y naturaleza de la prestación son compatibles.
 - Los tests del importador deben usar texto sintético o fixtures anonimizados; los PDFs personales originales permanecen fuera del repositorio.
+
+
+## 18. Resultados acreditados y proyectados
+
+- Los motores legales no se duplican para comparar origen de datos: el mismo servicio integrado recibe `modo_integracion` y conserva una única implementación jurídica.
+- `SOLO_ACREDITADO` mantiene la fecha de retiro elegida, sustituye el total del escenario por las cuotas actualmente acreditadas y no consume registros salariales proyectados.
+- La comparación visual nunca debe depender de un PDF personal. El comprobante externo es solo una referencia opcional.
+- En Mixto y SUCGS no se proyectarán saldos CAP/solidarios sin una fuente o regla oficial; si se comparan ambas fotografías, esos saldos permanecen constantes y la interfaz debe explicarlo.
+- Cualquier cambio que invalide un resultado proyectado debe invalidar también su fotografía acreditada asociada.
+- Las tablas comparativas nuevas deben conservar `caption`, `scope` y foco/contraste coherentes con los temas existentes.

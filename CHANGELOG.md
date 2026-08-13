@@ -1,5 +1,16 @@
 # Changelog
 
+### UX.4.5 — información acreditada, proyección y cierre accesible
+
+- El Paso 6 genera una segunda evaluación `SOLO_ACREDITADO` con la misma fecha de retiro pero sin añadir salarios ni cuotas futuras.
+- SEBD reproduce de forma separada la fotografía acreditada y la proyección; el caso de regresión femenino conserva B/.741.59 acreditados frente a B/.769.42 cuando el escenario añade cinco cuotas a B/.1,500 mensuales.
+- Mixto y SUCGS reutilizan la misma separación sin proyectar automáticamente sus saldos específicos; esos valores permanecen iguales en ambas fotografías.
+- La interfaz incorpora una tabla accesible **Información acreditada y proyección al retiro**, con caption, encabezados de fila/columna, cuotas, pensión, pago único y diferencias.
+- La referencia importada de Mi Retiro Seguro prefiere el cálculo propio acreditado cuando está disponible.
+- Los resultados acreditados se almacenan e invalidan junto a su resultado proyectado correspondiente.
+- Se refuerza el contraste de la tabla comparativa en Alto contraste y se revisa la semántica de los modales de importación.
+- La suite alcanza **170 pruebas automatizadas**.
+
 ### UX.4.4 — edad anual y detalle salarial del año actual
 
 - Historial salarial real incorpora la columna **Edad** inmediatamente después de Año.

@@ -222,3 +222,17 @@ La comparación de Resultados consume `resumen_unificado`; no debe conocer campo
 - al confirmar datos que afectan cálculos, invalidar resultados derivados y exigir recálculo;
 - probar parsers con fixtures sintéticos; documentos personales reales se usan solo fuera de Git para validación manual;
 - todo nuevo importador debe declarar límites de tamaño, formato, páginas y tratamiento de documentos sin texto extraíble.
+
+
+## 19. UX.4.5 — cierre de resultados y accesibilidad
+
+Para validar UX.4.5:
+
+1. calcular primero la prestación normal del escenario;
+2. confirmar que se genere automáticamente una segunda fotografía sin cuotas/salarios futuros;
+3. verificar que ambas usen la misma fecha de retiro;
+4. comprobar que la tabla de comparación siga siendo legible en Claro, Oscuro y Alto contraste;
+5. recorrer la tabla, los botones de cálculo y los modales de importación con `Tab`, `Shift+Tab`, `Enter` y `Esc`;
+6. comprobar que una referencia PDF compatible se compare preferentemente con el cálculo acreditado.
+
+La validación manual obligatoria inmediata se limita a PC/laptop. La matriz real de dispositivos puede ampliarse con un teléfono Android en la misma red local. Tablet Android, iOS/iPadOS, pantallas de escritorio muy grandes y macOS se mantienen como compatibilidad diferida para la beta/RC y no bloquean por sí solos el cierre de UX.4.5. Las regresiones responsive automatizadas continúan siendo obligatorias.

@@ -409,3 +409,18 @@ Quedan para fases posteriores:
 **RF-151.** Los importadores deben procesar archivos en memoria, rechazar formatos no compatibles y evitar persistir documentos o identificadores directos innecesarios. La interfaz debe informar qué datos quedan pendientes para captura manual.
 
 **RF-152.** Todo importe monetario editable en las vistas previas de importación debe mostrarse con separador de miles y exactamente dos decimales, reutilizando la normalización monetaria común de la aplicación.
+
+
+## 20. UX.4.5 — origen acreditado y proyección al retiro
+
+**RF-123.** El Paso 6 debe poder evaluar la prestación en la fecha de retiro seleccionada usando únicamente salarios y cuotas ya acreditados, sin añadir períodos futuros.
+
+**RF-124.** La proyección principal debe continuar incorporando las cuotas y salarios futuros del escenario seleccionado, manteniendo ambos resultados separados.
+
+**RF-125.** La comparación entre ambas fotografías debe exponer pensión mensual, pago único, cuotas consideradas y períodos salariales proyectados, y solo calcular una diferencia monetaria cuando exista el mismo tipo de monto en ambas columnas.
+
+**RF-126.** La comparación acreditada/proyectada debe funcionar sin necesidad de cargar un comprobante PDF. Cuando exista una referencia de Mi Retiro Seguro compatible, su comparación preferirá la fotografía acreditada propia.
+
+**RF-127.** En Mixto y SUCGS, los saldos y parámetros específicos que no pueden proyectarse de forma fiable se mantendrán constantes entre ambas fotografías y se informará esta limitación.
+
+**RF-128.** La tabla comparativa debe disponer de caption accesible, encabezados programáticos de fila/columna y estado textual que no dependa únicamente del color.

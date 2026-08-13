@@ -354,3 +354,10 @@ No contiene fórmulas legales. El comparador y la interfaz pueden consumir este 
 El comprobante de Mi Retiro Seguro no participa en las fórmulas de SEBD, Mixto o SUCGS. Su monto estimado se conserva como una referencia externa variable y se compara únicamente después de que el motor actual produce `resumen_unificado`. Ninguna cifra del PDF se usa para ajustar, forzar o calibrar el resultado de los motores.
 
 El promedio salarial por cuota acreditada del año actual se calcula como `total_salario_acreditado / cuotas_acreditadas_identificadas` y constituye una opción explícita de base futura. No reemplaza el historial acreditado ni se interpreta como regla legal.
+
+
+## UX.4.5 — misma fórmula, distinto origen temporal
+
+La fotografía `SOLO_ACREDITADO` no introduce una modalidad ni una fórmula nueva. Antes de invocar el motor correspondiente, la capa de integración conserva la fecha de retiro seleccionada, fija las cuotas al total actualmente acreditado y evita consumir salarios futuros de la línea temporal. El motor jurídico recibe así una entrada distinta, pero ejecuta exactamente sus mismas reglas.
+
+En SEBD esto permite separar, por ejemplo, una base construida solo con historial acreditado de otra que incorpora meses futuros. En Mixto y SUCGS los saldos específicos introducidos en el Paso 6 no se extrapolan automáticamente; permanecen constantes entre fotografías y cualquier limitación se conserva en advertencias.

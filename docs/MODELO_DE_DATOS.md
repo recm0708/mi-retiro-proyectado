@@ -383,3 +383,13 @@ Los modelos `ResumenResultadoSEBD`, `ResumenResultadoMixto` y `ResumenResultadoS
 - `RegistroReferenciaMiRetiroSeguro`: año, edad, tipo histórico/proyectado, salario anual y cuotas extraídos de una fila del comprobante.
 - `ResumenReferenciaMiRetiroSeguro`: fecha del comprobante, datos mínimos de compatibilidad, sistema elegido, edad de retiro, cuotas históricas, naturaleza y monto estimado de prestación, total de cuotas acumuladas, filas anuales y advertencias.
 - El modelo excluye nombre, cédula, número de seguro social ni código único del documento. El PDF original no forma parte del estado persistido.
+
+
+## UX.4.5 — modo de integración del resultado
+
+`DatosResultadoSEBD`, `DatosResultadoMixto` y `DatosResultadoSUCGS` aceptan `modo_integracion` con dos valores:
+
+- `PROYECTADO`: usa el escenario completo de los Pasos 4–5;
+- `SOLO_ACREDITADO`: conserva la fecha de retiro, usa `historial.cuotas_totales_referencia` como total de cuotas y no añade registros salariales proyectados.
+
+Los resúmenes integrados devuelven también el modo utilizado para que la interfaz pueda almacenar y presentar ambas fotografías sin confundirlas.

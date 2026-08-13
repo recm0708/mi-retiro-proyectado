@@ -363,3 +363,10 @@ El importador no ejecuta motores legales ni valida elegibilidad. Después de la 
 ### Alcance temporal y formato de la Ficha Digital
 
 El parser `ficha_digital.py` descarta períodos de años distintos al año calendario actual antes de construir `ResumenFichaDigital`. De esta forma el frontend no recibe ni persiste contexto histórico que no vaya a utilizarse en el detalle mensual. Los campos monetarios editables de las vistas previas reutilizan `moneda.js`: se muestran con coma de miles y dos decimales, se editan sin separadores visuales y se normalizan de nuevo al salir del campo.
+
+
+## UX.4.5 — doble integración sin duplicar motores
+
+Los modelos integrados de SEBD, Mixto y SUCGS incorporan `modo_integracion`, con `PROYECTADO` como valor predeterminado y `SOLO_ACREDITADO` como fotografía alternativa. `app/servicios/resultados.py` ajusta el escenario seleccionado en modo acreditado para conservar la fecha/edad de retiro, fijar las cuotas al total real del historial y eliminar cuotas futuras. La construcción cronológica existente recibe entonces cero cuotas nuevas y no consume salarios proyectados.
+
+Los tres servicios de resultados reutilizan sus motores legales sin ramas de fórmula paralelas. El frontend solicita ambas fotografías, almacena cada una por separado en `sessionStorage` y las invalida conjuntamente cuando cambia una dependencia. La comparación con Mi Retiro Seguro consulta primero la fotografía acreditada guardada y solo recurre al resultado proyectado si todavía no existe aquella.

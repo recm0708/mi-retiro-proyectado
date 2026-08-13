@@ -201,7 +201,7 @@ Previsto:
 - [x] identidad visual profesional con portada orientada al Asegurado(a), sin aparentar ser una aplicación oficial;
 - [x] temas claro, oscuro, alto contraste y seguimiento del sistema;
 - [x] persistencia local de preferencia visual;
-- [ ] revisión WCAG 2.2 completa con tecnologías de apoyo;
+- [ ] revisión WCAG 2.2 ampliada con tecnologías de apoyo y matriz real de dispositivos;
 - [x] estabilización visual de Oscuro y Alto contraste con tokens semánticos;
 - [x] wizard, navegación rápida, tarjetas y footer adaptativos por tema;
 - [x] foco visible, enlace de salto y base de navegación por teclado;
@@ -229,7 +229,11 @@ Previsto:
 - [x] UX.4.4: Ficha Digital limitada al año calendario actual y formato monetario uniforme con separador de miles y dos decimales en las vistas previas;
 - [ ] UX.4.4+: ampliar importadores a otros formatos exportables de Mi Caja Digital cuando exista un contrato estable y verificable;
 - [x] UX.4.4: importar opcionalmente un comprobante PDF personal de Mi Retiro Seguro y comparar su referencia variable con el resultado actual cuando el contexto sea compatible;
-- [ ] UX.4.4: ampliar en una fase posterior la distinción entre información acreditada y períodos proyectados como cálculo propio, independiente de la referencia PDF;
+- [x] UX.4.5: distinguir información acreditada y períodos proyectados como cálculo propio, independiente de la referencia PDF;
+- [x] UX.4.5: tabla transversal de información acreditada vs proyección al retiro para SEBD, Mixto y SUCGS;
+- [x] UX.4.5: referencia PDF comparada preferentemente contra la fotografía acreditada propia;
+- [x] UX.4.5: cierre semántico de la comparación con caption, encabezados programáticos, estado textual y soporte de Alto contraste;
+- [ ] validación manual ampliada opcional: teléfono Android por red local; tablet Android, iPhone/iPad, macOS y pantallas grandes quedan diferidos para beta/RC;
 - [x] respuesta temporal sin error para `/favicon.ico` mientras no se integran los iconos definitivos;
 - [ ] integrar favicon e iconos definitivos de **Mi Retiro Proyectado** y retirar la respuesta temporal `204`.
 
@@ -237,9 +241,23 @@ Previsto:
 
 Estado técnico actual; la validación manual multidispositivo queda aplazada y las revisiones inmediatas se realizan en laptop/PC:
 
-- **161 pruebas automatizadas** en `OK`;
+- **170 pruebas automatizadas** en `OK`;
 - regresión SEBD real anonimizada;
 - casos sintéticos de Mixto;
 - casos sintéticos SUCGS;
 - validaciones visuales de los tres motores integrados.
 
+
+
+## 10. Camino a la primera beta
+
+Antes de `v0.1.0-beta.1` se mantiene este orden de cierre:
+
+1. completar UX.4.5 y su validación manual en PC/laptop;
+2. ejecutar regresión E2E y hardening de seguridad/privacidad/dependencias;
+3. realizar, si se confirma al llegar a ese punto, una revisión completa de interfaz, textos y consistencia visual antes del empaquetado;
+4. integrar favicon e iconos definitivos y retirar `/favicon.ico` temporal;
+5. preparar el paquete portable para usuarios y validarlo en una instalación limpia;
+6. configurar GitHub para publicación, CI, seguridad, documentación y crear `v0.1.0-beta.1`.
+
+La prueba manual en todos los tipos de dispositivos no es requisito de bloqueo para UX.4.5. La compatibilidad ampliada se tratará como matriz de beta/RC, priorizando los dispositivos realmente disponibles.

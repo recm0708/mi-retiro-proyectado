@@ -728,3 +728,16 @@ Los archivos se procesan en memoria y los contratos del backend excluyen identif
 Las vistas previas monetarias deben utilizar el mismo formato público del resto de la aplicación: coma como separador de miles y dos decimales, manteniendo edición segura mediante la utilidad común `moneda.js`.
 
 **Motivo:** el objetivo de la Ficha Digital dentro de UX.4.4 es completar el detalle reciente del año actual y separar salario disponible, cuota acreditada y períodos parciales. Conservar meses del año anterior añadía información que no alimentaba ninguna decisión posterior y aumentaba el riesgo de confusión. Un formato monetario uniforme reduce errores de revisión antes de confirmar la importación.
+
+
+## ADR-073 — Separar una fotografía acreditada de la proyección al retiro
+
+**Estado:** Aceptada
+
+**Decisión:** el Paso 6 ofrecerá, para la misma fecha de retiro seleccionada, dos lecturas calculadas por los mismos motores jurídicos. `PROYECTADO` conserva el comportamiento habitual e incorpora las cuotas y salarios futuros del escenario. `SOLO_ACREDITADO` usa el total de cuotas actualmente acreditadas y el historial salarial real disponible, sin consumir períodos proyectados.
+
+La comparación existe aunque el Asegurado(a) no cargue un comprobante de Mi Retiro Seguro. Cuando sí exista una referencia PDF compatible, la aplicación preferirá comparar esa referencia con la fotografía acreditada propia antes que con la proyección futura.
+
+En Mixto y SUCGS los datos específicos del Paso 6 que la aplicación no puede proyectar de forma fiable —por ejemplo, saldos acumulados— se mantienen iguales en ambas fotografías y esta limitación se comunica expresamente.
+
+**Motivo:** mezclar salarios/cuotas ya acreditados con períodos futuros impedía distinguir una referencia basada en la fotografía actual de una estimación que supone continuidad laboral. Separar ambas lecturas mejora transparencia sin duplicar fórmulas legales ni convertir un PDF personal en una regla general.
