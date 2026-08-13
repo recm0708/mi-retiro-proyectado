@@ -150,11 +150,22 @@ async def agregar_cabeceras_defensivas(request: Request, call_next):
         "Permissions-Policy",
         "camera=(), microphone=(), geolocation=()",
     )
+    respuesta.headers.setdefault(
+        "Content-Security-Policy",
+        "default-src 'self'; "
+        "script-src 'self' https://cdn.jsdelivr.net; "
+        "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; "
+        "img-src 'self' data:; "
+        "font-src 'self' data:; "
+        "connect-src 'self'; "
+        "frame-ancestors 'none'; "
+        "base-uri 'self'; "
+        "form-action 'self'",
+    )
 
-    if request.url.path in {
-        "/api/simulacion/referencia-mi-retiro-seguro",
-        "/api/simulacion/ficha-digital",
-    }:
+    # Las respuestas del asistente pueden contener datos personales, salariales
+    # o previsionales. Se evita su reutilización desde la caché HTTP.
+    if request.url.path.startswith("/api/simulacion/"):
         respuesta.headers["Cache-Control"] = "no-store"
 
     return respuesta
@@ -375,8 +386,9 @@ async def analizar_referencia_mi_retiro_seguro(
 ):
     """Extrae una referencia variable desde un comprobante PDF personal.
 
-    El archivo se procesa en memoria y no se persiste. El servicio devuelve
-    únicamente datos operativos; no expone nombre, cédula ni seguro social.
+    El archivo se procesa en memoria y no se persiste. UX.4.6b permite
+    devolver identificadores opcionales cuando el PDF los etiqueta de forma
+    inequívoca; el navegador solo los conserva durante la simulación actual.
     """
 
     contenido = await leer_pdf_subido(

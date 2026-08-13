@@ -43,6 +43,8 @@ function crearSimulacionVacia() {
     paso_actual: 1,
 
     persona: {},
+    modo_datos_personales: "MANUAL",
+    origen_persona: "MANUAL",
 
     cuotas: {},
     resumen_cuotas: null,
@@ -118,6 +120,12 @@ function obtenerSimulacion() {
 
       persona:
         simulacion.persona || {},
+
+      modo_datos_personales:
+        simulacion.modo_datos_personales || "MANUAL",
+
+      origen_persona:
+        simulacion.origen_persona || "MANUAL",
 
       cuotas:
         simulacion.cuotas || {},
@@ -257,34 +265,53 @@ function guardarDatosPersonales() {
     "form-datos-personales",
   );
 
+  const modoDatos = document.querySelector('input[name="modo_datos_personales"]:checked')?.value || "MANUAL";
+  const fechaNacimiento = document.getElementById("fecha_nacimiento")?.value || "";
+  const sexo = document.getElementById("sexo")?.value || "";
+  const sistema = document.getElementById("sistema")?.value || "";
+  const error = document.getElementById("error-datos-personales");
+
+  if (!fechaNacimiento || !sexo || !sistema) {
+    if (error) {
+      error.textContent = modoDatos === "MI_RETIRO_SEGURO"
+        ? "El PDF no completó toda la información previsional obligatoria. Abre Revisar datos importados, pulsa Editar campos y completa fecha de nacimiento, sexo y sistema previsional."
+        : "Completa fecha de nacimiento, sexo y sistema previsional antes de continuar.";
+      error.classList.remove("d-none");
+    }
+    if (modoDatos === "MANUAL") formulario.reportValidity();
+    return false;
+  }
+
   if (!formulario.checkValidity()) {
     formulario.reportValidity();
     return false;
   }
 
+  if (error) {
+    error.classList.add("d-none");
+    error.textContent = "";
+  }
+
   const simulacion = obtenerSimulacion();
 
+  const valor = (id) => document.getElementById(id)?.value.trim() || null;
   simulacion.persona = {
-    fecha_nacimiento:
-      document.getElementById(
-        "fecha_nacimiento",
-      ).value,
-
-    sexo:
-      document.getElementById(
-        "sexo",
-      ).value,
-
-    fecha_ingreso_css:
-      document.getElementById(
-        "fecha_ingreso_css",
-      ).value || null,
-
-    sistema:
-      document.getElementById(
-        "sistema",
-      ).value,
+    primer_nombre: valor("primer_nombre"),
+    segundo_nombre: valor("segundo_nombre"),
+    primer_apellido: valor("primer_apellido"),
+    segundo_apellido: valor("segundo_apellido"),
+    apellido_casada: document.getElementById("sexo").value === "F" ? valor("apellido_casada") : null,
+    cedula: valor("cedula"),
+    numero_seguro_social: valor("numero_seguro_social"),
+    fecha_nacimiento: document.getElementById("fecha_nacimiento").value,
+    sexo: document.getElementById("sexo").value,
+    fecha_ingreso_css: document.getElementById("fecha_ingreso_css").value || null,
+    sistema: document.getElementById("sistema").value,
   };
+  simulacion.modo_datos_personales = modoDatos;
+  if (modoDatos === "MANUAL") {
+    simulacion.origen_persona = "MANUAL";
+  }
 
   // Las fechas de retiro dependen de nacimiento y sexo.
   simulacion.retiro = {};
@@ -318,6 +345,15 @@ function restaurarDatosPersonales(simulacion) {
     return;
   }
 
+  [
+    "primer_nombre", "segundo_nombre", "primer_apellido", "segundo_apellido",
+    "apellido_casada", "cedula", "numero_seguro_social",
+  ].forEach((id) => {
+    if (persona[id] && document.getElementById(id)) {
+      document.getElementById(id).value = persona[id];
+    }
+  });
+
   if (persona.fecha_nacimiento) {
     document.getElementById(
       "fecha_nacimiento",
@@ -340,6 +376,13 @@ function restaurarDatosPersonales(simulacion) {
     document.getElementById(
       "sistema",
     ).value = persona.sistema;
+  }
+
+  if (typeof actualizarApellidoCasada === "function") {
+    actualizarApellidoCasada();
+  }
+  if (typeof restaurarModoDatosPersonales === "function") {
+    restaurarModoDatosPersonales(simulacion);
   }
 }
 

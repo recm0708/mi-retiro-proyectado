@@ -2,13 +2,14 @@
 
 
 /* ============================================================
-   Navegación rápida persistente del asistente
+   Navegación común del asistente
    ============================================================ */
 
 /*
- * La barra permanece visible mientras se desplaza un paso largo.
- * No duplica lógica de negocio: delega en los formularios y botones
- * originales para conservar sus validaciones.
+ * El asistente dispone de una barra superior y otra inferior con el mismo
+ * contrato funcional. La superior puede mantenerse visible en escritorio
+ * sin ampliar el ancho del contenido; la inferior ofrece cierre natural del paso.
+ * Ambas delegan en los formularios y botones originales para conservar validaciones.
  */
 
 
@@ -128,25 +129,21 @@ function actualizarNavegacionDirecta() {
         : "Completa primero los pasos anteriores.";
     });
 
-  const selector = document.getElementById(
-    "wizard-step-jump",
-  );
+  document
+    .querySelectorAll("[data-wizard-step-jump]")
+    .forEach((selector) => {
+      Array.from(selector.options).forEach(
+        (opcion) => {
+          const numeroPaso = Number(opcion.value);
+          opcion.disabled = !puedeAccederDirectamenteAPaso(
+            numeroPaso,
+            simulacion,
+          ) && numeroPaso !== pasoActual;
+        },
+      );
 
-  if (!selector) {
-    return;
-  }
-
-  Array.from(selector.options).forEach(
-    (opcion) => {
-      const numeroPaso = Number(opcion.value);
-      opcion.disabled = !puedeAccederDirectamenteAPaso(
-        numeroPaso,
-        simulacion,
-      ) && numeroPaso !== pasoActual;
-    },
-  );
-
-  selector.value = String(pasoActual);
+      selector.value = String(pasoActual);
+    });
 }
 
 
@@ -212,6 +209,20 @@ function obtenerConfiguracionNavegacionFlotante() {
   const simulacion = obtenerSimulacion();
 
   if (pasoActual === 1) {
+    const modoDatos = simulacion.modo_datos_personales || "MANUAL";
+    const importacionLista = Boolean(
+      simulacion.importacion_comprobante_confirmada
+      && simulacion.referencia_mi_retiro_seguro,
+    );
+
+    if (modoDatos === "MI_RETIRO_SEGURO" && !importacionLista) {
+      return {
+        estado: "Paso 1 de 6 · Importa y revisa el PDF",
+        etiqueta: "Importa datos para continuar",
+        deshabilitado: true,
+      };
+    }
+
     return {
       estado: "Paso 1 de 6 · Datos personales",
       etiqueta: "Continuar",
@@ -389,11 +400,9 @@ function obtenerConfiguracionNavegacionFlotante() {
  * Actualiza textos y disponibilidad de la barra persistente.
  */
 function actualizarNavegacionFlotante() {
-  const barra = document.getElementById(
-    "wizard-sticky-nav",
-  );
+  const barras = document.querySelectorAll("[data-wizard-nav]");
 
-  if (!barra) {
+  if (!barras.length) {
     return;
   }
 
@@ -401,27 +410,30 @@ function actualizarNavegacionFlotante() {
     obtenerConfiguracionNavegacionFlotante()
   );
 
-  const botonVolver = document.getElementById(
-    "wizard-sticky-back",
-  );
+  document
+    .querySelectorAll('[data-wizard-action="back"]')
+    .forEach((botonVolver) => {
+      botonVolver.textContent = (
+        pasoActual === 1
+          ? "← Inicio"
+          : "← Anterior"
+      );
+    });
 
-  botonVolver.textContent = (
-    pasoActual === 1
-      ? "← Inicio"
-      : "← Anterior"
-  );
+  document
+    .querySelectorAll("[data-wizard-status]")
+    .forEach((estado) => {
+      estado.textContent = configuracion.estado;
+    });
 
-  document.getElementById(
-    "wizard-sticky-status",
-  ).textContent = configuracion.estado;
-
-  const principal = document.getElementById(
-    "wizard-sticky-primary",
-  );
-
-  principal.textContent = configuracion.etiqueta;
-  principal.disabled = configuracion.deshabilitado;
+  document
+    .querySelectorAll('[data-wizard-action="primary"]')
+    .forEach((principal) => {
+      principal.textContent = configuracion.etiqueta;
+      principal.disabled = configuracion.deshabilitado;
+    });
 }
+
 
 
 /**
@@ -564,30 +576,36 @@ function ejecutarRetrocesoFlotante() {
 document.addEventListener(
   "DOMContentLoaded",
   () => {
-    document.getElementById(
-      "wizard-sticky-back",
-    ).addEventListener(
-      "click",
-      ejecutarRetrocesoFlotante,
-    );
-
-    document.getElementById(
-      "wizard-sticky-primary",
-    ).addEventListener(
-      "click",
-      ejecutarAccionPrimariaFlotante,
-    );
-
-    document.getElementById(
-      "wizard-step-jump",
-    ).addEventListener(
-      "change",
-      (evento) => {
-        irDirectamenteAPaso(
-          Number(evento.target.value),
+    document
+      .querySelectorAll('[data-wizard-action="back"]')
+      .forEach((control) => {
+        control.addEventListener(
+          "click",
+          ejecutarRetrocesoFlotante,
         );
-      },
-    );
+      });
+
+    document
+      .querySelectorAll('[data-wizard-action="primary"]')
+      .forEach((control) => {
+        control.addEventListener(
+          "click",
+          ejecutarAccionPrimariaFlotante,
+        );
+      });
+
+    document
+      .querySelectorAll("[data-wizard-step-jump]")
+      .forEach((selector) => {
+        selector.addEventListener(
+          "change",
+          (evento) => {
+            irDirectamenteAPaso(
+              Number(evento.target.value),
+            );
+          },
+        );
+      });
 
     document
       .querySelectorAll(".wizard-step")

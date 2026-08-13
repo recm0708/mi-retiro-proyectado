@@ -6,6 +6,8 @@
    ============================================================ */
 
 let borradorImportacionComprobante = null;
+let edicionPreviewComprobanteHabilitada = false;
+let previewComprobanteFueEditado = false;
 let borradorImportacionFichaDigital = null;
 
 const MESES_IMPORTACION = [
@@ -85,6 +87,132 @@ function invalidarResultadosPorImportacion(simulacion) {
   simulacion.resultado_sucgs = null;
 }
 
+
+
+// ============================================================
+// UX.4.6b — Modalidad de datos personales
+// ============================================================
+
+function actualizarApellidoCasada() {
+  const sexo = document.getElementById("sexo")?.value;
+  const contenedor = document.getElementById("apellido-casada-wrapper");
+  if (!contenedor) return;
+  const mostrar = sexo === "F";
+  contenedor.classList.toggle("d-none", !mostrar);
+  if (!mostrar) {
+    const campo = document.getElementById("apellido_casada");
+    if (campo) campo.value = "";
+  }
+}
+
+function bloquearFormularioPersonal(bloqueado) {
+  document.querySelectorAll("#bloque-datos-personales input, #bloque-datos-personales select").forEach((control) => {
+    if (control.matches("select")) {
+      control.disabled = bloqueado;
+    } else {
+      control.readOnly = bloqueado;
+    }
+  });
+}
+
+function aplicarModoDatosPersonales(modo, simulacion = obtenerSimulacion()) {
+  const esPdf = modo === "MI_RETIRO_SEGURO";
+  const importacion = document.getElementById("seccion-importacion-comprobante");
+  const formulario = document.getElementById("form-datos-personales");
+  const importacionConfirmada = Boolean(
+    simulacion.importacion_comprobante_confirmada
+    && simulacion.referencia_mi_retiro_seguro,
+  );
+
+  importacion?.classList.toggle("d-none", !esPdf);
+  if (formulario) {
+    formulario.classList.toggle("d-none", esPdf && !importacionConfirmada);
+  }
+  bloquearFormularioPersonal(esPdf && importacionConfirmada);
+
+  document.querySelectorAll(".personal-data-source-option").forEach((opcion) => {
+    const radio = opcion.querySelector('input[name="modo_datos_personales"]');
+    opcion.classList.toggle("selected", Boolean(radio?.checked));
+  });
+
+  actualizarApellidoCasada();
+  if (typeof actualizarNavegacionFlotante === "function") actualizarNavegacionFlotante();
+}
+
+function restaurarModoDatosPersonales(simulacion = obtenerSimulacion()) {
+  const modo = simulacion.modo_datos_personales || (
+    simulacion.importacion_comprobante_confirmada ? "MI_RETIRO_SEGURO" : "MANUAL"
+  );
+  const radio = document.querySelector(`input[name="modo_datos_personales"][value="${modo}"]`);
+  if (radio) radio.checked = true;
+  aplicarModoDatosPersonales(modo, simulacion);
+}
+
+function cambiarModoDatosPersonales(evento) {
+  const modo = evento.target.value;
+  const simulacion = obtenerSimulacion();
+  simulacion.modo_datos_personales = modo;
+  if (modo === "MANUAL") {
+    simulacion.origen_persona = "MANUAL";
+  }
+  guardarSimulacion(simulacion);
+  aplicarModoDatosPersonales(modo, simulacion);
+}
+
+function actualizarEstadoBotonAnalizarComprobante() {
+  const input = document.getElementById("import-comprobante-pdf");
+  const boton = document.getElementById("btn-analizar-comprobante-importacion");
+  if (boton) boton.disabled = !input?.files?.length;
+}
+
+function actualizarApellidoCasadaPreview() {
+  const sexo = document.getElementById("preview-comprobante-sexo")?.value;
+  document.querySelectorAll(".preview-apellido-casada-wrapper").forEach((elemento) => {
+    elemento.classList.toggle("d-none", sexo !== "F");
+  });
+}
+
+function marcarEstadoDeteccion(idControl, valor) {
+  const estado = document.getElementById(`estado-${idControl}`);
+  if (!estado) return;
+  const detectado = valor !== null && valor !== undefined && String(valor).trim() !== "" && valor !== "NO_IDENTIFICADO";
+  estado.textContent = detectado ? "Detectado" : "No detectado";
+  estado.className = `import-field-status ${detectado ? "detected" : "missing"}`;
+}
+
+function establecerEdicionPreviewComprobante(habilitada) {
+  edicionPreviewComprobanteHabilitada = habilitada;
+  const modal = document.getElementById("modal-import-comprobante");
+  if (!modal) return;
+
+  modal.querySelectorAll(".modal-body input").forEach((control) => {
+    if (control.type === "checkbox") {
+      control.disabled = !habilitada;
+    } else {
+      control.readOnly = !habilitada;
+    }
+  });
+  modal.querySelectorAll(".modal-body select").forEach((control) => {
+    control.disabled = !habilitada;
+  });
+
+  const boton = document.getElementById("btn-editar-import-comprobante");
+  if (boton) boton.textContent = habilitada ? "Finalizar edición" : "Editar campos";
+  const importar = document.getElementById("btn-confirmar-import-comprobante");
+  if (importar) importar.disabled = habilitada;
+  const estado = document.getElementById("estado-edicion-comprobante");
+  if (estado) {
+    estado.textContent = habilitada ? "Editando" : "Modo revisión";
+    estado.className = `badge rounded-pill ${habilitada ? "text-bg-primary" : "text-bg-secondary"}`;
+  }
+  actualizarApellidoCasadaPreview();
+}
+
+function alternarEdicionPreviewComprobante() {
+  const habilitar = !edicionPreviewComprobanteHabilitada;
+  if (habilitar) previewComprobanteFueEditado = true;
+  establecerEdicionPreviewComprobante(habilitar);
+}
 
 // ============================================================
 // Comprobante de Mi Retiro Seguro
@@ -166,26 +294,40 @@ function crearFilaPreviewComprobante(registro) {
 
 function renderizarPreviewComprobante(referencia) {
   borradorImportacionComprobante = structuredClone(referencia);
+  previewComprobanteFueEditado = false;
 
-  document.getElementById("preview-comprobante-fecha-nacimiento").value = referencia.fecha_nacimiento || "";
-  document.getElementById("preview-comprobante-sexo").value = referencia.sexo || "";
-  document.getElementById("preview-comprobante-fecha-ingreso").value = referencia.fecha_ingreso_css || "";
-  document.getElementById("preview-comprobante-sistema").value = referencia.sistema_elegido || "NO_IDENTIFICADO";
+  const campos = {
+    "preview-comprobante-primer-nombre": referencia.primer_nombre,
+    "preview-comprobante-segundo-nombre": referencia.segundo_nombre,
+    "preview-comprobante-primer-apellido": referencia.primer_apellido,
+    "preview-comprobante-segundo-apellido": referencia.segundo_apellido,
+    "preview-comprobante-apellido-casada": referencia.apellido_casada,
+    "preview-comprobante-cedula": referencia.cedula,
+    "preview-comprobante-seguro-social": referencia.numero_seguro_social,
+    "preview-comprobante-fecha-nacimiento": referencia.fecha_nacimiento,
+    "preview-comprobante-sexo": referencia.sexo,
+    "preview-comprobante-fecha-ingreso": referencia.fecha_ingreso_css,
+    "preview-comprobante-sistema": referencia.sistema_elegido || "NO_IDENTIFICADO",
+  };
+
+  Object.entries(campos).forEach(([id, valor]) => {
+    const control = document.getElementById(id);
+    if (control) control.value = valor || (id === "preview-comprobante-sistema" ? "NO_IDENTIFICADO" : "");
+    marcarEstadoDeteccion(id, valor);
+  });
+
+
   document.getElementById("preview-comprobante-cuotas").value = referencia.cuotas_historicas ?? "";
   document.getElementById("preview-comprobante-edad-retiro").value = referencia.edad_retiro_elegida ?? "";
   const campoMontoReferencia = document.getElementById("preview-comprobante-monto");
-  campoMontoReferencia.value = formatearNumeroMonetario(
-    referencia.monto_estimado_prestacion ?? 0,
-  );
+  campoMontoReferencia.value = formatearNumeroMonetario(referencia.monto_estimado_prestacion ?? 0);
   configurarCampoMonetario(campoMontoReferencia);
   document.getElementById("preview-comprobante-fecha").value = referencia.fecha_comprobante || "";
   document.getElementById("preview-comprobante-prestacion").value = referencia.prestacion_esperada || "";
 
   const cuerpo = document.getElementById("preview-comprobante-registros");
   cuerpo.replaceChildren();
-  (referencia.registros || []).forEach((registro) => {
-    cuerpo.appendChild(crearFilaPreviewComprobante(registro));
-  });
+  (referencia.registros || []).forEach((registro) => cuerpo.appendChild(crearFilaPreviewComprobante(registro)));
   document.getElementById("preview-comprobante-registros-contador").textContent = `${(referencia.registros || []).length} registros`;
 
   const advertencias = document.getElementById("advertencias-import-comprobante");
@@ -193,9 +335,10 @@ function renderizarPreviewComprobante(referencia) {
   advertencias.textContent = mensajes.join(" ");
   advertencias.classList.toggle("d-none", mensajes.length === 0);
 
+  actualizarApellidoCasadaPreview();
+  establecerEdicionPreviewComprobante(false);
   obtenerModalBootstrap("modal-import-comprobante").show();
 }
-
 
 async function analizarComprobanteImportacion() {
   ocultarEstadoImportacion("estado-comprobante-importacion");
@@ -232,7 +375,7 @@ async function analizarComprobanteImportacion() {
     mostrarEstadoImportacion("estado-comprobante-importacion", "No fue posible comunicarse con el servidor.", "danger");
   } finally {
     boton.disabled = false;
-    boton.textContent = "Analizar comprobante";
+    boton.textContent = "Analizar documento";
   }
 }
 
@@ -257,9 +400,17 @@ function confirmarComprobanteImportacion() {
   const registrosPreview = leerRegistrosPreviewComprobante();
   const sistema = document.getElementById("preview-comprobante-sistema").value;
   const prestacion = document.getElementById("preview-comprobante-prestacion").value.trim();
+  const texto = (id) => document.getElementById(id)?.value.trim() || null;
 
   const referencia = {
     ...borradorImportacionComprobante,
+    primer_nombre: texto("preview-comprobante-primer-nombre"),
+    segundo_nombre: texto("preview-comprobante-segundo-nombre"),
+    primer_apellido: texto("preview-comprobante-primer-apellido"),
+    segundo_apellido: texto("preview-comprobante-segundo-apellido"),
+    apellido_casada: document.getElementById("preview-comprobante-sexo").value === "F" ? texto("preview-comprobante-apellido-casada") : null,
+    cedula: texto("preview-comprobante-cedula"),
+    numero_seguro_social: texto("preview-comprobante-seguro-social"),
     fecha_nacimiento: document.getElementById("preview-comprobante-fecha-nacimiento").value || null,
     sexo: document.getElementById("preview-comprobante-sexo").value || null,
     fecha_ingreso_css: document.getElementById("preview-comprobante-fecha-ingreso").value || null,
@@ -267,9 +418,7 @@ function confirmarComprobanteImportacion() {
     sistema_elegido_nombre: textoSistemaImportado(sistema),
     cuotas_historicas: Number(document.getElementById("preview-comprobante-cuotas").value || 0),
     edad_retiro_elegida: Number(document.getElementById("preview-comprobante-edad-retiro").value || 0) || null,
-    monto_estimado_prestacion: obtenerValorMonetario(
-      document.getElementById("preview-comprobante-monto").value || 0,
-    ),
+    monto_estimado_prestacion: obtenerValorMonetario(document.getElementById("preview-comprobante-monto").value || 0),
     fecha_comprobante: document.getElementById("preview-comprobante-fecha").value || null,
     prestacion_esperada: prestacion || null,
     naturaleza_prestacion: naturalezaPrestacionImportada(prestacion),
@@ -279,19 +428,27 @@ function confirmarComprobanteImportacion() {
   const simulacion = obtenerSimulacion();
   simulacion.referencia_mi_retiro_seguro = referencia;
   simulacion.importacion_comprobante_confirmada = true;
+  simulacion.modo_datos_personales = "MI_RETIRO_SEGURO";
+  simulacion.origen_persona = previewComprobanteFueEditado
+    ? "MI_RETIRO_SEGURO_EDITADO"
+    : "MI_RETIRO_SEGURO";
 
   simulacion.persona = {
     ...simulacion.persona,
+    primer_nombre: referencia.primer_nombre,
+    segundo_nombre: referencia.segundo_nombre,
+    primer_apellido: referencia.primer_apellido,
+    segundo_apellido: referencia.segundo_apellido,
+    apellido_casada: referencia.apellido_casada,
+    cedula: referencia.cedula,
+    numero_seguro_social: referencia.numero_seguro_social,
     ...(referencia.fecha_nacimiento ? { fecha_nacimiento: referencia.fecha_nacimiento } : {}),
     ...(referencia.sexo ? { sexo: referencia.sexo } : {}),
     ...(referencia.fecha_ingreso_css ? { fecha_ingreso_css: referencia.fecha_ingreso_css } : {}),
     ...(sistema !== "NO_IDENTIFICADO" ? { sistema } : {}),
   };
 
-  const registroActual = registrosPreview.find((registro) => (
-    registro.anio === ANIO_ACTUAL && registro.tipo !== "PROYECTADO"
-  ));
-
+  const registroActual = registrosPreview.find((registro) => registro.anio === ANIO_ACTUAL && registro.tipo !== "PROYECTADO");
   simulacion.cuotas = {
     ...simulacion.cuotas,
     ...(referencia.cuotas_historicas != null ? { cuotas_totales: referencia.cuotas_historicas } : {}),
@@ -307,11 +464,7 @@ function confirmarComprobanteImportacion() {
       anio_inicio: anioInicio,
       anio_fin: ANIO_ACTUAL,
       cuotas_totales_referencia: referencia.cuotas_historicas || 0,
-      registros: reales.map((registro) => ({
-        anio: registro.anio,
-        cuotas: registro.cuotas,
-        salario_cotizado: registro.salario_anual,
-      })),
+      registros: reales.map((registro) => ({ anio: registro.anio, cuotas: registro.cuotas, salario_cotizado: registro.salario_anual })),
     };
   }
 
@@ -324,26 +477,36 @@ function confirmarComprobanteImportacion() {
 
   mostrarEstadoImportacion(
     "estado-comprobante-importacion",
-    `Datos confirmados: ${textoSistemaImportado(sistema)} · ${referencia.cuotas_historicas ?? "—"} cuotas · referencia ${formatearMoneda(referencia.monto_estimado_prestacion)}. Completa manualmente los campos que el documento no puede determinar.`,
+    `Datos importados desde Mi Retiro Seguro. Revisa cualquier campo pendiente antes de continuar.`,
     "success",
   );
-  document.getElementById("btn-quitar-comprobante-importacion").classList.remove("d-none");
+  document.getElementById("acciones-comprobante-importado")?.classList.remove("d-none");
   obtenerModalBootstrap("modal-import-comprobante").hide();
+  restaurarModoDatosPersonales(simulacion);
 
-  if (typeof prepararComparacionReferenciaMiRetiroGuardada === "function") {
-    prepararComparacionReferenciaMiRetiroGuardada();
-  }
+  if (typeof prepararComparacionReferenciaMiRetiroGuardada === "function") prepararComparacionReferenciaMiRetiroGuardada();
 }
-
 
 function quitarComprobanteImportacion() {
   const simulacion = obtenerSimulacion();
   simulacion.referencia_mi_retiro_seguro = null;
   simulacion.importacion_comprobante_confirmada = false;
+  simulacion.modo_datos_personales = "MANUAL";
+  simulacion.origen_persona = "MANUAL";
   guardarSimulacion(simulacion);
+
   document.getElementById("import-comprobante-pdf").value = "";
+  actualizarEstadoBotonAnalizarComprobante();
   ocultarEstadoImportacion("estado-comprobante-importacion");
-  document.getElementById("btn-quitar-comprobante-importacion").classList.add("d-none");
+  document.getElementById("acciones-comprobante-importado")?.classList.add("d-none");
+  restaurarModoDatosPersonales(simulacion);
+}
+
+function revisarComprobanteImportado() {
+  const simulacion = obtenerSimulacion();
+  if (simulacion.referencia_mi_retiro_seguro) {
+    renderizarPreviewComprobante(simulacion.referencia_mi_retiro_seguro);
+  }
 }
 
 
@@ -576,7 +739,7 @@ function restaurarResumenImportaciones() {
       `Comprobante confirmado: ${textoSistemaImportado(ref.sistema_elegido)} · ${ref.cuotas_historicas ?? "—"} cuotas · referencia ${formatearMoneda(ref.monto_estimado_prestacion)}.`,
       "success",
     );
-    document.getElementById("btn-quitar-comprobante-importacion").classList.remove("d-none");
+    document.getElementById("acciones-comprobante-importado")?.classList.remove("d-none");
   }
 
   if (simulacion.ficha_digital_importada && simulacion.importacion_ficha_digital_confirmada) {
@@ -593,13 +756,22 @@ function restaurarResumenImportaciones() {
 
 
 document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("import-comprobante-pdf")?.addEventListener("change", actualizarEstadoBotonAnalizarComprobante);
   document.getElementById("btn-analizar-comprobante-importacion")?.addEventListener("click", analizarComprobanteImportacion);
+  document.getElementById("btn-editar-import-comprobante")?.addEventListener("click", alternarEdicionPreviewComprobante);
   document.getElementById("btn-confirmar-import-comprobante")?.addEventListener("click", confirmarComprobanteImportacion);
+  document.getElementById("btn-revisar-comprobante-importacion")?.addEventListener("click", revisarComprobanteImportado);
   document.getElementById("btn-quitar-comprobante-importacion")?.addEventListener("click", quitarComprobanteImportacion);
+  document.querySelectorAll('input[name="modo_datos_personales"]').forEach((control) => control.addEventListener("change", cambiarModoDatosPersonales));
+  document.getElementById("sexo")?.addEventListener("change", actualizarApellidoCasada);
+  document.getElementById("preview-comprobante-sexo")?.addEventListener("change", actualizarApellidoCasadaPreview);
 
   document.getElementById("btn-analizar-ficha-digital-importacion")?.addEventListener("click", analizarFichaDigitalImportacion);
   document.getElementById("btn-confirmar-import-ficha")?.addEventListener("click", confirmarFichaDigitalImportacion);
   document.getElementById("btn-quitar-ficha-digital-importacion")?.addEventListener("click", quitarFichaDigitalImportacion);
 
+  actualizarEstadoBotonAnalizarComprobante();
+  restaurarModoDatosPersonales();
+  actualizarApellidoCasada();
   restaurarResumenImportaciones();
 });

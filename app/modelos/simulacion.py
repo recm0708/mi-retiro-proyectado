@@ -322,12 +322,21 @@ class RegistroReferenciaMiRetiroSeguro(BaseModel):
 
 
 class ResumenReferenciaMiRetiroSeguro(BaseModel):
-    """Datos operativos extraídos de un comprobante personal en PDF.
+    """Datos confirmables extraídos de un comprobante personal en PDF.
 
-    El contrato excluye deliberadamente nombre, cédula y número de seguro
-    social. La referencia se usa para comparar fotografías personales, no
-    para sustituir los motores legales de la aplicación.
+    UX.4.6b permite devolver identificadores opcionales cuando el documento
+    los etiqueta de forma inequívoca. Se usan solo en la sesión local y no
+    intervienen en los motores de cálculo.
     """
+
+    primer_nombre: str | None = Field(default=None, max_length=80)
+    segundo_nombre: str | None = Field(default=None, max_length=80)
+    primer_apellido: str | None = Field(default=None, max_length=80)
+    segundo_apellido: str | None = Field(default=None, max_length=80)
+    apellido_casada: str | None = Field(default=None, max_length=80)
+    nombre_completo_detectado: str | None = Field(default=None, max_length=240)
+    cedula: str | None = Field(default=None, max_length=40)
+    numero_seguro_social: str | None = Field(default=None, max_length=40)
 
     fecha_comprobante: date | None = None
     fecha_decision_texto: str | None = None

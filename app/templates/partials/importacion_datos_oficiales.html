@@ -1,334 +1,181 @@
 <!-- ==================================================
-     Importación revisable de datos oficiales
+     UX.4.6b R2 — Importación opcional de Mi Retiro Seguro
      ================================================== -->
-
-<section
-  id="seccion-importacion-oficial"
-  class="official-import-section mb-4"
->
+<section id="seccion-importacion-comprobante" class="official-import-section personal-import-panel d-none">
   <div class="official-import-card">
     <div class="mb-4">
-      <h3 class="h5 fw-bold mb-2">
-        Importar datos oficiales
-        <span class="text-secondary fw-normal">(opcional)</span>
-      </h3>
+      <span class="official-import-source-kicker">Mi Retiro Seguro</span>
+      <h3 class="h5 fw-bold mt-1 mb-2">Importar desde un comprobante PDF</h3>
       <p class="text-secondary mb-0">
-        Puedes analizar documentos de Mi Caja Digital para reducir la captura manual.
-        <strong>Ningún dato se aplica automáticamente:</strong> primero verás una vista
-        previa editable y solo se copiará a la simulación cuando pulses Confirmar.
+        Selecciona un comprobante compatible y revisa la información detectada antes
+        de incorporarla a tu simulación.
       </p>
     </div>
 
-    <div class="row g-4">
-      <div class="col-lg-6">
-        <div class="official-import-source-card h-100">
-          <div>
-            <span class="official-import-source-kicker">Mi Retiro Seguro</span>
-            <h4 class="h6 fw-bold mt-1 mb-2">Comprobante de decisión en PDF</h4>
-            <p class="text-secondary mb-3">
-              Puede recuperar datos personales, sistema, cuotas, historial anual y la
-              referencia de pensión de ese comprobante. Los campos no detectados quedan
-              pendientes para completarlos manualmente.
-            </p>
-          </div>
-
-          <label for="import-comprobante-pdf" class="form-label fw-semibold">
-            Seleccionar comprobante
-          </label>
-          <input
-            type="file"
-            id="import-comprobante-pdf"
-            class="form-control official-import-file-input"
-            accept=".pdf,application/pdf"
-          >
-
-          <div class="d-flex flex-wrap gap-2 mt-3">
-            <button
-              type="button"
-              id="btn-analizar-comprobante-importacion"
-              class="btn btn-outline-primary"
-            >
-              Analizar comprobante
-            </button>
-            <button
-              type="button"
-              id="btn-quitar-comprobante-importacion"
-              class="btn btn-outline-secondary d-none"
-            >
-              Quitar datos importados
-            </button>
-          </div>
-
-          <div
-            id="estado-comprobante-importacion"
-            class="official-import-status mt-3 d-none"
-            role="status"
-            aria-live="polite"
-          ></div>
+    <div class="official-import-source-card official-import-upload-card">
+      <div class="official-import-upload-grid">
+        <div class="official-import-upload-file">
+          <label for="import-comprobante-pdf" class="form-label fw-semibold">1. Selecciona el PDF</label>
+          <input type="file" id="import-comprobante-pdf" class="form-control official-import-file-input"
+                 accept=".pdf,application/pdf">
+        </div>
+        <div class="official-import-upload-action">
+          <span class="form-label fw-semibold" aria-hidden="true">2. Analiza el documento</span>
+          <button type="button" id="btn-analizar-comprobante-importacion" class="btn btn-outline-primary" disabled>
+            Analizar documento
+          </button>
         </div>
       </div>
 
-      <div class="col-lg-6">
-        <div class="official-import-source-card h-100">
-          <div>
-            <span class="official-import-source-kicker">Ficha Digital</span>
-            <h4 class="h6 fw-bold mt-1 mb-2">Salarios del año actual</h4>
-            <p class="text-secondary mb-3">
-              Detecta únicamente los salarios mensuales del año calendario actual. En la
-              vista previa puedes corregir montos, marcar un mes como parcial y confirmar
-              qué cuotas ya aparecen acreditadas.
-            </p>
-          </div>
+      <div id="estado-comprobante-importacion" class="official-import-status mt-3 d-none" role="status" aria-live="polite"></div>
 
-          <label for="import-ficha-digital-pdf" class="form-label fw-semibold">
-            Seleccionar Ficha Digital
-          </label>
-          <input
-            type="file"
-            id="import-ficha-digital-pdf"
-            class="form-control official-import-file-input"
-            accept=".pdf,application/pdf"
-          >
-
-          <div class="d-flex flex-wrap gap-2 mt-3">
-            <button
-              type="button"
-              id="btn-analizar-ficha-digital-importacion"
-              class="btn btn-outline-primary"
-            >
-              Analizar Ficha Digital
-            </button>
-            <button
-              type="button"
-              id="btn-quitar-ficha-digital-importacion"
-              class="btn btn-outline-secondary d-none"
-            >
-              Quitar datos importados
-            </button>
-          </div>
-
-          <div
-            id="estado-ficha-digital-importacion"
-            class="official-import-status mt-3 d-none"
-            role="status"
-            aria-live="polite"
-          ></div>
-        </div>
+      <div id="acciones-comprobante-importado" class="d-flex flex-wrap gap-2 mt-3 d-none">
+        <button type="button" id="btn-revisar-comprobante-importacion" class="btn btn-outline-primary">
+          Revisar datos importados
+        </button>
+        <button type="button" id="btn-quitar-comprobante-importacion" class="btn btn-outline-secondary">
+          Quitar importación
+        </button>
       </div>
     </div>
 
-    <div class="official-import-privacy mt-4">
-      Los documentos se procesan en memoria y no se guardan. La importación conserva
-      únicamente los datos necesarios para la simulación; no se almacenan nombre,
-      cédula, número de seguro social ni códigos únicos del documento.
-    </div>
+    <p class="official-import-policy-link mb-0 mt-3">
+      <a href="/metodologia#privacidad-datos">Consulta cómo protegemos y utilizamos tus datos.</a>
+    </p>
   </div>
 </section>
 
-
-<!-- ==================================================
-     Vista previa: Comprobante Mi Retiro Seguro
-     ================================================== -->
-<div
-  class="modal fade"
-  id="modal-import-comprobante"
-  tabindex="-1"
-  aria-labelledby="modal-import-comprobante-titulo"
-  aria-hidden="true"
->
+<div class="modal fade" id="modal-import-comprobante" tabindex="-1"
+     aria-labelledby="modal-import-comprobante-titulo" aria-hidden="true">
   <div class="modal-dialog modal-xl modal-dialog-scrollable">
     <div class="modal-content official-import-modal">
       <div class="modal-header">
         <div>
-          <h3 class="modal-title h5 fw-bold" id="modal-import-comprobante-titulo">
-            Revisar datos detectados del comprobante
-          </h3>
-          <p class="text-secondary small mb-0 mt-1">
-            Corrige cualquier dato antes de confirmar. Los campos sin información se
-            dejarán pendientes en el asistente.
+          <div class="d-flex flex-wrap align-items-center gap-2 mb-1">
+            <h3 class="modal-title h5 fw-bold mb-0" id="modal-import-comprobante-titulo">Vista previa del documento</h3>
+            <span id="estado-edicion-comprobante" class="badge rounded-pill text-bg-secondary">Modo revisión</span>
+          </div>
+          <p class="text-secondary small mb-0">
+            Revisa la información. Los campos permanecen bloqueados hasta que decidas editarlos.
           </p>
         </div>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
       </div>
 
       <div class="modal-body">
-        <div
-          id="advertencias-import-comprobante"
-          class="alert alert-warning d-none"
-          role="status"
-        ></div>
+        <div id="advertencias-import-comprobante" class="alert alert-warning d-none" role="status"></div>
 
-        <h4 class="h6 fw-bold mb-3">Datos personales y previsionales</h4>
-        <div class="row g-3 mb-4">
-          <div class="col-md-4">
-            <label for="preview-comprobante-fecha-nacimiento" class="form-label">Fecha de nacimiento</label>
-            <input type="date" id="preview-comprobante-fecha-nacimiento" class="form-control">
-          </div>
-          <div class="col-md-4">
-            <label for="preview-comprobante-sexo" class="form-label">Sexo</label>
-            <select id="preview-comprobante-sexo" class="form-select">
-              <option value="">No detectado</option>
-              <option value="F">Femenino</option>
-              <option value="M">Masculino</option>
-            </select>
-          </div>
-          <div class="col-md-4">
-            <label for="preview-comprobante-fecha-ingreso" class="form-label">Fecha de ingreso CSS</label>
-            <input type="date" id="preview-comprobante-fecha-ingreso" class="form-control">
-          </div>
-          <div class="col-md-4">
-            <label for="preview-comprobante-sistema" class="form-label">Sistema</label>
-            <select id="preview-comprobante-sistema" class="form-select">
-              <option value="NO_IDENTIFICADO">No identificado</option>
-              <option value="SEBD">SEBD — Beneficio Definido</option>
-              <option value="MIXTO">Subsistema Mixto</option>
-              <option value="SUCGS">SUCGS — Capitalización con Garantía Solidaria</option>
-            </select>
-          </div>
-          <div class="col-md-4">
-            <label for="preview-comprobante-cuotas" class="form-label">Cuotas históricas</label>
-            <input type="number" min="0" step="1" id="preview-comprobante-cuotas" class="form-control">
-          </div>
-          <div class="col-md-4">
-            <label for="preview-comprobante-edad-retiro" class="form-label">Edad de retiro del comprobante</label>
-            <input type="number" min="0" max="150" step="1" id="preview-comprobante-edad-retiro" class="form-control">
-          </div>
-        </div>
-
-        <h4 class="h6 fw-bold mb-3">Referencia personal del comprobante</h4>
-        <div class="row g-3 mb-4">
-          <div class="col-md-4">
-            <label for="preview-comprobante-monto" class="form-label">Monto estimado</label>
-            <div class="input-group">
-              <span class="input-group-text">B/.</span>
-              <input type="text" id="preview-comprobante-monto" class="form-control money-input" inputmode="decimal">
+        <section class="import-preview-section mb-4" aria-labelledby="preview-identificacion-titulo">
+          <div class="d-flex flex-column flex-lg-row justify-content-between gap-2 mb-3">
+            <div>
+              <h4 class="h6 fw-bold mb-1" id="preview-identificacion-titulo">Identificación personal</h4>
+              <p class="text-secondary small mb-0">Los identificadores son opcionales para el cálculo.</p>
             </div>
           </div>
-          <div class="col-md-4">
-            <label for="preview-comprobante-fecha" class="form-label">Fecha del comprobante</label>
-            <input type="date" id="preview-comprobante-fecha" class="form-control">
+          <div class="row g-3">
+            <div class="col-md-6 col-xl-3">
+              <label for="preview-comprobante-primer-nombre" class="form-label">Primer nombre</label>
+              <input type="text" id="preview-comprobante-primer-nombre" class="form-control" maxlength="80">
+              <small id="estado-preview-comprobante-primer-nombre" class="import-field-status"></small>
+            </div>
+            <div class="col-md-6 col-xl-3">
+              <label for="preview-comprobante-segundo-nombre" class="form-label">Segundo nombre</label>
+              <input type="text" id="preview-comprobante-segundo-nombre" class="form-control" maxlength="80">
+              <small id="estado-preview-comprobante-segundo-nombre" class="import-field-status"></small>
+            </div>
+            <div class="col-md-6 col-xl-3">
+              <label for="preview-comprobante-primer-apellido" class="form-label">Primer apellido</label>
+              <input type="text" id="preview-comprobante-primer-apellido" class="form-control" maxlength="80">
+              <small id="estado-preview-comprobante-primer-apellido" class="import-field-status"></small>
+            </div>
+            <div class="col-md-6 col-xl-3">
+              <label for="preview-comprobante-segundo-apellido" class="form-label">Segundo apellido</label>
+              <input type="text" id="preview-comprobante-segundo-apellido" class="form-control" maxlength="80">
+              <small id="estado-preview-comprobante-segundo-apellido" class="import-field-status"></small>
+            </div>
+            <div class="col-md-6 col-xl-4 preview-apellido-casada-wrapper d-none">
+              <label for="preview-comprobante-apellido-casada" class="form-label">Apellido de casada <span class="text-secondary">(si aplica)</span></label>
+              <input type="text" id="preview-comprobante-apellido-casada" class="form-control" maxlength="80">
+              <small id="estado-preview-comprobante-apellido-casada" class="import-field-status"></small>
+            </div>
+            <div class="col-md-6 col-xl-4">
+              <label for="preview-comprobante-cedula" class="form-label">Número de cédula</label>
+              <input type="text" id="preview-comprobante-cedula" class="form-control" maxlength="40">
+              <small id="estado-preview-comprobante-cedula" class="import-field-status"></small>
+            </div>
+            <div class="col-md-6 col-xl-4">
+              <label for="preview-comprobante-seguro-social" class="form-label">Número de Seguro Social</label>
+              <input type="text" id="preview-comprobante-seguro-social" class="form-control" maxlength="40">
+              <small id="estado-preview-comprobante-seguro-social" class="import-field-status"></small>
+            </div>
           </div>
-          <div class="col-md-4">
-            <label for="preview-comprobante-prestacion" class="form-label">Prestación esperada</label>
-            <input type="text" id="preview-comprobante-prestacion" class="form-control">
+        </section>
+
+        <section class="import-preview-section mb-4" aria-labelledby="preview-previsional-titulo">
+          <h4 class="h6 fw-bold mb-3" id="preview-previsional-titulo">Información previsional básica</h4>
+          <div class="row g-3">
+            <div class="col-md-6 col-xl-3">
+              <label for="preview-comprobante-fecha-nacimiento" class="form-label">Fecha de nacimiento</label>
+              <input type="date" id="preview-comprobante-fecha-nacimiento" class="form-control">
+              <small id="estado-preview-comprobante-fecha-nacimiento" class="import-field-status"></small>
+            </div>
+            <div class="col-md-6 col-xl-3">
+              <label for="preview-comprobante-sexo" class="form-label">Sexo</label>
+              <select id="preview-comprobante-sexo" class="form-select">
+                <option value="">No detectado</option><option value="F">Femenino</option><option value="M">Masculino</option>
+              </select>
+              <small id="estado-preview-comprobante-sexo" class="import-field-status"></small>
+            </div>
+            <div class="col-md-6 col-xl-3">
+              <label for="preview-comprobante-fecha-ingreso" class="form-label">Fecha de ingreso CSS</label>
+              <input type="date" id="preview-comprobante-fecha-ingreso" class="form-control">
+              <small id="estado-preview-comprobante-fecha-ingreso" class="import-field-status"></small>
+            </div>
+            <div class="col-md-6 col-xl-3">
+              <label for="preview-comprobante-sistema" class="form-label">Sistema previsional</label>
+              <select id="preview-comprobante-sistema" class="form-select">
+                <option value="NO_IDENTIFICADO">No identificado</option>
+                <option value="SEBD">SEBD — Beneficio Definido</option>
+                <option value="MIXTO">Subsistema Mixto</option>
+                <option value="SUCGS">SUCGS — Capitalización con Garantía Solidaria</option>
+              </select>
+              <small id="estado-preview-comprobante-sistema" class="import-field-status"></small>
+            </div>
           </div>
-        </div>
+        </section>
 
-        <div class="d-flex flex-column flex-lg-row justify-content-between gap-2 align-items-lg-end mb-2">
-          <div>
-            <h4 class="h6 fw-bold mb-1">Historial anual detectado</h4>
-            <p class="text-secondary small mb-0">
-              Solo las filas marcadas en “Pasar al historial” se copiarán como datos reales.
-              Las filas proyectadas quedan como referencia salvo que tú decidas lo contrario.
-            </p>
+        <section class="import-preview-section mb-4" aria-labelledby="preview-otros-titulo">
+          <div class="d-flex flex-column flex-lg-row justify-content-between gap-2 align-items-lg-end mb-2">
+            <div>
+              <h4 class="h6 fw-bold mb-1" id="preview-otros-titulo">Datos para pasos posteriores</h4>
+              <p class="text-secondary small mb-0">Se conservan separados para que puedas revisarlos en Cuotas, Historial y Resultados.</p>
+            </div>
+            <span class="badge text-bg-secondary" id="preview-comprobante-registros-contador">0 registros</span>
           </div>
-          <span class="badge text-bg-secondary" id="preview-comprobante-registros-contador">0 registros</span>
-        </div>
+          <div class="row g-3 mb-3">
+            <div class="col-md-3"><label for="preview-comprobante-cuotas" class="form-label">Cuotas históricas</label><input type="number" min="0" step="1" id="preview-comprobante-cuotas" class="form-control"></div>
+            <div class="col-md-3"><label for="preview-comprobante-edad-retiro" class="form-label">Edad de retiro</label><input type="number" min="0" max="150" step="1" id="preview-comprobante-edad-retiro" class="form-control"></div>
+            <div class="col-md-3"><label for="preview-comprobante-monto" class="form-label">Monto estimado</label><div class="input-group"><span class="input-group-text">B/.</span><input type="text" id="preview-comprobante-monto" class="form-control money-input" inputmode="decimal"></div></div>
+            <div class="col-md-3"><label for="preview-comprobante-fecha" class="form-label">Fecha del comprobante</label><input type="date" id="preview-comprobante-fecha" class="form-control"></div>
+            <div class="col-12"><label for="preview-comprobante-prestacion" class="form-label">Prestación esperada</label><input type="text" id="preview-comprobante-prestacion" class="form-control"></div>
+          </div>
+          <div class="official-import-table-wrapper">
+            <table class="table align-middle mb-0 official-import-preview-table">
+              <caption class="visually-hidden">Datos anuales detectados en el comprobante y selección de filas que se aplicarán al historial real.</caption>
+              <thead><tr><th scope="col">Pasar al historial</th><th scope="col">Año</th><th scope="col">Edad</th><th scope="col">Tipo</th><th scope="col">Salario anual</th><th scope="col">Cuotas</th></tr></thead>
+              <tbody id="preview-comprobante-registros"></tbody>
+            </table>
+          </div>
+        </section>
 
-        <div class="official-import-table-wrapper">
-          <table class="table align-middle mb-0 official-import-preview-table">
-            <caption class="visually-hidden">Datos anuales detectados en el comprobante y selección de filas que se aplicarán al historial real.</caption>
-            <thead>
-              <tr>
-                <th scope="col">Pasar al historial</th>
-                <th scope="col">Año</th>
-                <th scope="col">Edad</th>
-                <th scope="col">Tipo</th>
-                <th scope="col">Salario anual</th>
-                <th scope="col">Cuotas</th>
-              </tr>
-            </thead>
-            <tbody id="preview-comprobante-registros"></tbody>
-          </table>
-        </div>
-
-        <div class="alert alert-info mt-4 mb-0">
-          <strong>Quedarán pendientes de confirmación manual:</strong>
-          continuidad laboral, cuotas futuras, salarios todavía no acreditados y cualquier
-          supuesto de proyección que el documento no permita distinguir como dato real.
-        </div>
       </div>
 
-      <div class="modal-footer">
-        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-          Cancelar
-        </button>
-        <button type="button" id="btn-confirmar-import-comprobante" class="btn btn-primary">
-          Confirmar y aplicar datos
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<!-- ==================================================
-     Vista previa: Ficha Digital
-     ================================================== -->
-<div
-  class="modal fade"
-  id="modal-import-ficha-digital"
-  tabindex="-1"
-  aria-labelledby="modal-import-ficha-digital-titulo"
-  aria-hidden="true"
->
-  <div class="modal-dialog modal-xl modal-dialog-scrollable">
-    <div class="modal-content official-import-modal">
-      <div class="modal-header">
-        <div>
-          <h3 class="modal-title h5 fw-bold" id="modal-import-ficha-digital-titulo">
-            Revisar salarios detectados de la Ficha Digital
-          </h3>
-          <p class="text-secondary small mb-0 mt-1">
-            Confirma los salarios detectados del año actual, indica si el último mes
-            está completo o parcial y marca únicamente las cuotas que ya aparecen
-            acreditadas en la CSS.
-          </p>
+      <div class="modal-footer justify-content-between gap-2">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <div class="d-flex flex-wrap gap-2">
+          <button type="button" id="btn-editar-import-comprobante" class="btn btn-outline-primary">Editar campos</button>
+          <button type="button" id="btn-confirmar-import-comprobante" class="btn btn-primary">Importar datos</button>
         </div>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-      </div>
-
-      <div class="modal-body">
-        <div
-          id="advertencias-import-ficha"
-          class="alert alert-warning d-none"
-          role="status"
-        ></div>
-
-        <div class="alert alert-info">
-          La Ficha Digital puede mostrar un salario antes de que la cuota correspondiente
-          quede acreditada. La importación no marca cuotas por su cuenta: tú las confirmas
-          en esta vista previa.
-        </div>
-
-        <div class="official-import-table-wrapper">
-          <table class="table align-middle mb-0 official-import-preview-table">
-            <caption class="visually-hidden">Salarios mensuales detectados en la Ficha Digital y confirmación de estado y cuota acreditada.</caption>
-            <thead>
-              <tr>
-                <th scope="col">Mes</th>
-                <th scope="col">Salario detectado</th>
-                <th scope="col">Estado</th>
-                <th scope="col">Cuota acreditada</th>
-              </tr>
-            </thead>
-            <tbody id="preview-ficha-digital-registros"></tbody>
-          </table>
-        </div>
-
-        <div class="form-text mt-3">
-          Solo se muestran y conservan los salarios correspondientes al año calendario actual.
-          Los períodos de años anteriores no se utilizan en esta importación.
-        </div>
-      </div>
-
-      <div class="modal-footer">
-        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-          Cancelar
-        </button>
-        <button type="button" id="btn-confirmar-import-ficha" class="btn btn-primary">
-          Confirmar y aplicar salarios
-        </button>
       </div>
     </div>
   </div>

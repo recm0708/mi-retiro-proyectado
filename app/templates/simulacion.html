@@ -114,68 +114,28 @@ Nueva simulación | {{ app_name }}
     </div>
 
 
-    <!-- Navegación rápida persistente para pasos largos. -->
-    <div
-      id="wizard-sticky-nav"
-      class="wizard-sticky-nav mb-4"
-      aria-label="Navegación rápida del asistente"
-    >
-      <div class="wizard-sticky-nav-secondary">
 
-        <button
-          type="button"
-          id="wizard-sticky-back"
-          class="btn btn-outline-secondary"
-        >
-          ← Anterior
-        </button>
-
-        <label
-          for="wizard-step-jump"
-          class="visually-hidden"
-        >
-          Ir directamente a un paso del asistente
-        </label>
-
-        <select
-          id="wizard-step-jump"
-          class="form-select wizard-step-jump"
-          aria-label="Ir directamente a un paso del asistente"
-        >
-          <option value="1">Paso 1 · Datos personales</option>
-          <option value="2">Paso 2 · Cuotas</option>
-          <option value="3">Paso 3 · Historial</option>
-          <option value="4">Paso 4 · Proyección</option>
-          <option value="5">Paso 5 · Retiro</option>
-          <option value="6">Paso 6 · Resultados</option>
-        </select>
-
-      </div>
-
-      <div class="wizard-sticky-nav-main">
-        <small
-          id="wizard-sticky-status"
-          class="text-secondary"
-          aria-live="polite"
-        >
-          Paso 1 de 6
-        </small>
-
-        <button
-          type="button"
-          id="wizard-sticky-primary"
-          class="btn btn-primary"
-        >
-          Continuar
-        </button>
-      </div>
-    </div>
 
 
     <div class="row justify-content-center">
 
       <div class="col-12 col-xl-11">
 
+
+        <!-- UX.4.6b R3: navegación superior común; permanece disponible al recorrer pasos largos. -->
+        <div id="wizard-sticky-nav" class="wizard-navigation-bar wizard-navigation-bar-top mb-4" data-wizard-nav="top" aria-label="Navegación superior del asistente">
+          <div class="wizard-sticky-nav-secondary">
+            <button type="button" id="wizard-sticky-back" class="btn btn-outline-secondary" data-wizard-action="back">← Anterior</button>
+            <label for="wizard-step-jump" class="visually-hidden">Ir directamente a un paso del asistente</label>
+            <select id="wizard-step-jump" class="form-select wizard-step-jump" data-wizard-step-jump aria-label="Ir directamente a un paso del asistente">
+              <option value="1">Paso 1 · Datos personales</option><option value="2">Paso 2 · Cuotas</option><option value="3">Paso 3 · Historial</option><option value="4">Paso 4 · Proyección</option><option value="5">Paso 5 · Retiro</option><option value="6">Paso 6 · Resultados</option>
+            </select>
+          </div>
+          <div class="wizard-sticky-nav-main">
+            <small id="wizard-sticky-status" class="text-secondary" data-wizard-status aria-live="polite">Paso 1 de 6</small>
+            <button type="button" id="wizard-sticky-primary" class="btn btn-primary" data-wizard-action="primary">Continuar</button>
+          </div>
+        </div>
 
         <!-- ==================================================
              PASO 1 — DATOS PERSONALES
@@ -204,166 +164,82 @@ Nueva simulación | {{ app_name }}
               </div>
 
 
-              <!-- Importación opcional con revisión previa y confirmación explícita. -->
+              <div class="personal-data-source mb-4" aria-labelledby="modo-datos-personales-titulo">
+                <div class="mb-3">
+                  <h3 id="modo-datos-personales-titulo" class="h5 fw-bold mb-1">¿Cómo quieres proporcionar tus datos?</h3>
+                  <p class="text-secondary mb-0">Elige una modalidad. Puedes cambiarla sin perder silenciosamente la información ya escrita.</p>
+                </div>
+                <div class="personal-data-source-grid" role="radiogroup" aria-label="Modalidad de captura de datos personales">
+                  <label class="personal-data-source-option" for="modo-datos-manual">
+                    <input class="form-check-input" type="radio" name="modo_datos_personales" id="modo-datos-manual" value="MANUAL" checked>
+                    <span><strong>Ingresarlos manualmente</strong><small>Completaré personalmente los campos necesarios.</small></span>
+                  </label>
+                  <label class="personal-data-source-option" for="modo-datos-pdf">
+                    <input class="form-check-input" type="radio" name="modo_datos_personales" id="modo-datos-pdf" value="MI_RETIRO_SEGURO">
+                    <span><strong>Importar desde PDF</strong><small>Usaré un comprobante de Mi Retiro Seguro para detectar información.</small></span>
+                  </label>
+                </div>
+              </div>
+
               {% include "partials/importacion_datos_oficiales.html" %}
 
-
               <form id="form-datos-personales">
-
-                <div class="row g-4">
-
-                  <div class="col-md-6">
-
-                    <label
-                      for="fecha_nacimiento"
-                      class="form-label fw-semibold"
-                    >
-                      Fecha de nacimiento
-                    </label>
-
-                    <input
-                      type="date"
-                      class="form-control form-control-lg"
-                      id="fecha_nacimiento"
-                      required
-                    >
-
-                  </div>
-
-
-                  <div class="col-md-6">
-
-                    <label
-                      for="sexo"
-                      class="form-label fw-semibold"
-                    >
-                      Sexo
-                    </label>
-
-                    <select
-                      class="form-select form-select-lg"
-                      id="sexo"
-                      required
-                    >
-
-                      <option value="" selected disabled>
-                        Selecciona una opción
-                      </option>
-
-                      <option value="F">
-                        Femenino
-                      </option>
-
-                      <option value="M">
-                        Masculino
-                      </option>
-
-                    </select>
-
-                  </div>
-
-
-                  <div class="col-md-6">
-
-                    <label
-                      for="fecha_ingreso_css"
-                      class="form-label fw-semibold"
-                    >
-                      Fecha de ingreso a la CSS
-                    </label>
-
-                    <input
-                      type="date"
-                      class="form-control form-control-lg"
-                      id="fecha_ingreso_css"
-                    >
-
-                    <div class="form-text">
-                      Puede completarse posteriormente si no
-                      conoces la fecha exacta.
+                <div id="bloque-datos-personales" class="personal-data-form">
+                  <section class="personal-form-section" aria-labelledby="identificacion-personal-titulo">
+                    <div class="personal-form-heading">
+                      <div>
+                        <h3 id="identificacion-personal-titulo" class="h5 fw-bold mb-1">Identificación personal</h3>
+                        <p class="text-secondary mb-0">Opcional. Estos datos permiten identificar la simulación, pero no modifican el cálculo.</p>
+                      </div>
+                      <span class="badge rounded-pill text-bg-secondary">Opcional</span>
                     </div>
+                    <div class="row g-4">
+                      <div class="col-md-6"><label for="primer_nombre" class="form-label fw-semibold">Primer nombre</label><input type="text" class="form-control form-control-lg" id="primer_nombre" maxlength="80" autocomplete="given-name"></div>
+                      <div class="col-md-6"><label for="segundo_nombre" class="form-label fw-semibold">Segundo nombre</label><input type="text" class="form-control form-control-lg" id="segundo_nombre" maxlength="80" autocomplete="additional-name"></div>
+                      <div class="col-md-6"><label for="primer_apellido" class="form-label fw-semibold">Primer apellido</label><input type="text" class="form-control form-control-lg" id="primer_apellido" maxlength="80" autocomplete="family-name"></div>
+                      <div class="col-md-6"><label for="segundo_apellido" class="form-label fw-semibold">Segundo apellido</label><input type="text" class="form-control form-control-lg" id="segundo_apellido" maxlength="80"></div>
+                      <div id="apellido-casada-wrapper" class="col-md-4 d-none"><label for="apellido_casada" class="form-label fw-semibold">Apellido de casada <span class="text-secondary fw-normal">(si aplica)</span></label><input type="text" class="form-control form-control-lg" id="apellido_casada" maxlength="80"></div>
+                      <div class="col-md-4"><label for="cedula" class="form-label fw-semibold">Número de cédula</label><input type="text" class="form-control form-control-lg" id="cedula" maxlength="40" autocomplete="off"></div>
+                      <div class="col-md-4"><label for="numero_seguro_social" class="form-label fw-semibold">Número de Seguro Social</label><input type="text" class="form-control form-control-lg" id="numero_seguro_social" maxlength="40" autocomplete="off"></div>
+                    </div>
+                  </section>
 
-                  </div>
+                  <hr class="my-5">
 
+                  <section class="personal-form-section" aria-labelledby="informacion-previsional-titulo">
+                    <div class="personal-form-heading mb-4">
+                      <div>
+                        <h3 id="informacion-previsional-titulo" class="h5 fw-bold mb-1">Información previsional básica</h3>
+                        <p class="text-secondary mb-1">Estos datos sí se utilizan para determinar edades, fechas y reglas aplicables.</p>
+                        <p class="required-fields-note mb-0"><span class="required-marker" aria-hidden="true">*</span> Campo obligatorio</p>
+                      </div>
+                    </div>
+                    <div class="row g-4">
+                      <div class="col-md-6">
+                        <label for="fecha_nacimiento" class="form-label fw-semibold">Fecha de nacimiento <span class="required-marker" aria-hidden="true">*</span><span class="visually-hidden"> (obligatorio)</span></label>
+                        <input type="date" class="form-control form-control-lg" id="fecha_nacimiento" required>
+                        <div class="form-text">La edad y las fechas previsionales se calculan automáticamente.</div>
+                      </div>
+                      <div class="col-md-6">
+                        <label for="sexo" class="form-label fw-semibold">Sexo <span class="required-marker" aria-hidden="true">*</span><span class="visually-hidden"> (obligatorio)</span></label>
+                        <select class="form-select form-select-lg" id="sexo" required><option value="" selected disabled>Selecciona una opción</option><option value="F">Femenino</option><option value="M">Masculino</option></select>
+                      </div>
+                      <div class="col-md-6">
+                        <label for="fecha_ingreso_css" class="form-label fw-semibold">Fecha de ingreso a la CSS</label>
+                        <input type="date" class="form-control form-control-lg" id="fecha_ingreso_css">
+                        <div class="form-text">Puede completarse posteriormente si no conoces la fecha exacta.</div>
+                      </div>
+                      <div class="col-md-6">
+                        <label for="sistema" class="form-label fw-semibold">Sistema previsional <span class="required-marker" aria-hidden="true">*</span><span class="visually-hidden"> (obligatorio)</span></label>
+                        <select class="form-select form-select-lg" id="sistema" required>
+                          <option value="" selected disabled>Selecciona una opción</option><option value="NO_SE">No sé cuál tengo</option><option value="SEBD">SEBD — Beneficio Definido</option><option value="MIXTO">Subsistema Mixto</option><option value="SUCGS">SUCGS — Capitalización con Garantía Solidaria</option>
+                        </select>
+                      </div>
+                    </div>
+                  </section>
 
-                  <div class="col-md-6">
-
-                    <label
-                      for="sistema"
-                      class="form-label fw-semibold"
-                    >
-                      Sistema actual
-                    </label>
-
-                    <select
-                      class="form-select form-select-lg"
-                      id="sistema"
-                      required
-                    >
-
-                      <option value="" selected disabled>
-                        Selecciona una opción
-                      </option>
-
-                      <option value="NO_SE">
-                        No sé cuál tengo
-                      </option>
-
-                      <option value="SEBD">
-                        SEBD — Beneficio Definido
-                      </option>
-
-                      <option value="MIXTO">
-                        Subsistema Mixto
-                      </option>
-
-                      <option value="SUCGS">
-                        SUCGS — Capitalización con Garantía Solidaria
-                      </option>
-
-                    </select>
-
-                  </div>
-
+                  <div id="error-datos-personales" class="alert alert-danger mt-4 d-none" role="alert"></div>
                 </div>
-
-
-                <div class="info-box mt-4">
-
-                  <strong>
-                    No necesitas calcular tu edad.
-                  </strong>
-
-                  <p class="mb-0 mt-1">
-                    La aplicación utilizará la fecha de nacimiento
-                    para determinar automáticamente las fechas
-                    relevantes.
-                  </p>
-
-                </div>
-
-
-                <div
-                  class="d-flex justify-content-between
-                         align-items-center mt-5 wizard-actions"
-                >
-
-                  <a
-                    href="/"
-                    class="btn btn-outline-secondary btn-center-content"
-                  >
-                    Volver
-                  </a>
-
-                  <button
-                    type="submit"
-                    class="btn btn-primary px-4"
-                  >
-                    Continuar
-                  </button>
-
-                </div>
-
               </form>
 
             </div>
@@ -787,6 +663,10 @@ Nueva simulación | {{ app_name }}
               <!-- Historial salarial anual. -->
 
               {% include "partials/historial_salarial.html" %}
+
+
+              <!-- Ficha Digital pertenece al historial salarial y se revisa en el Paso 3. -->
+              {% include "partials/importacion_ficha_digital.html" %}
 
 
               <!-- Detalle opcional del año actual proveniente de Ficha Digital. -->
@@ -1555,6 +1435,22 @@ Nueva simulación | {{ app_name }}
         {% include "partials/resultados.html" %}
 
 
+
+        <!-- UX.4.6b R3: navegación inferior simétrica con la barra superior. -->
+        <div id="wizard-navigation-bottom" class="wizard-navigation-bar wizard-navigation-bar-bottom mt-4" data-wizard-nav="bottom" aria-label="Navegación inferior del asistente">
+          <div class="wizard-sticky-nav-secondary">
+            <button type="button" id="wizard-back-bottom" class="btn btn-outline-secondary" data-wizard-action="back">← Anterior</button>
+            <label for="wizard-step-jump-bottom" class="visually-hidden">Ir directamente a un paso del asistente</label>
+            <select id="wizard-step-jump-bottom" class="form-select wizard-step-jump" data-wizard-step-jump aria-label="Ir directamente a un paso del asistente">
+              <option value="1">Paso 1 · Datos personales</option><option value="2">Paso 2 · Cuotas</option><option value="3">Paso 3 · Historial</option><option value="4">Paso 4 · Proyección</option><option value="5">Paso 5 · Retiro</option><option value="6">Paso 6 · Resultados</option>
+            </select>
+          </div>
+          <div class="wizard-sticky-nav-main">
+            <small id="wizard-status-bottom" class="text-secondary" data-wizard-status aria-live="polite">Paso 1 de 6</small>
+            <button type="button" id="wizard-primary-bottom" class="btn btn-primary" data-wizard-action="primary">Continuar</button>
+          </div>
+        </div>
+
       </div>
 
     </div>
@@ -1563,10 +1459,17 @@ Nueva simulación | {{ app_name }}
 
 </section>
 
+{% include "partials/privacidad_consentimiento.html" %}
+
 {% endblock %}
 
 
 {% block scripts %}
+
+<!-- Consentimiento informado y control local de privacidad. -->
+<script
+  src="{{ url_for('static', path='/js/privacidad.js') }}"
+></script>
 
 <!-- Utilidades de entrada y formato monetario. -->
 <script
@@ -1594,7 +1497,7 @@ Nueva simulación | {{ app_name }}
 ></script>
 
 
-<!-- Importación revisable de documentos oficiales en el Paso 1. -->
+<!-- Importación revisable: Mi Retiro Seguro en Paso 1 y Ficha Digital en Paso 3. -->
 <script
   src="{{ url_for('static', path='/js/importacion_datos_oficiales.js') }}"
 ></script>
@@ -1626,7 +1529,7 @@ Nueva simulación | {{ app_name }}
 ></script>
 
 
-<!-- Navegación rápida persistente del asistente. -->
+<!-- Navegación común del asistente al final del paso activo. -->
 <script
   src="{{ url_for('static', path='/js/navegacion_wizard.js') }}"
 ></script>

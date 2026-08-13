@@ -1,8 +1,8 @@
 """Extracción segura de referencias desde comprobantes PDF de Mi Retiro Seguro.
 
-El servicio procesa el archivo en memoria y devuelve solo los datos necesarios
-para comparar una simulación actual con la referencia personal del Asegurado(a).
-No persiste el PDF ni expone nombre, cédula o número de seguro social.
+El servicio procesa el archivo en memoria y devuelve los datos que el Asegurado(a)
+puede revisar antes de importarlos. No persiste el PDF. Desde UX.4.6b puede exponer
+identificadores opcionales cuando aparecen con una etiqueta inequívoca.
 """
 
 from __future__ import annotations
@@ -29,6 +29,87 @@ def _buscar(patron: str, texto: str, flags: int = re.IGNORECASE) -> str | None:
     if not coincidencia:
         return None
     return coincidencia.group(1).strip()
+
+
+def _texto_opcional(valor: str | None) -> str | None:
+    """Normaliza espacios de un texto opcional extraído del documento."""
+
+    if not valor:
+        return None
+    limpio = re.sub(r"\s+", " ", valor).strip(" :-\t")
+    return limpio or None
+
+
+def _descomponer_nombre_completo(
+    nombre: str | None,
+    sexo: str | None,
+) -> dict[str, str | None]:
+    """Descompone un nombre completo usando una regla conservadora y revisable.
+
+    Para mujeres, la construcción ``... de APELLIDO`` al final se interpreta
+    como apellido de casada. Del resto se reservan los dos últimos componentes
+    como apellidos y el primer componente como primer nombre; cualquier término
+    intermedio se conserva unido como segundo nombre. El resultado siempre pasa
+    por la vista previa antes de incorporarse a la simulación.
+    """
+
+    limpio = _texto_opcional(nombre)
+    resultado = {
+        "primer_nombre": None,
+        "segundo_nombre": None,
+        "primer_apellido": None,
+        "segundo_apellido": None,
+        "apellido_casada": None,
+    }
+    if not limpio:
+        return resultado
+
+    base = limpio
+    if sexo == "F":
+        coincidencia_casada = re.match(
+            r"^(.*?)\s+de\s+([^\n\r]+)$",
+            base,
+            re.IGNORECASE,
+        )
+        if coincidencia_casada:
+            base = coincidencia_casada.group(1).strip()
+            resultado["apellido_casada"] = _texto_opcional(
+                coincidencia_casada.group(2)
+            )
+
+    partes = base.split()
+    if not partes:
+        return resultado
+
+    if len(partes) == 1:
+        resultado["primer_nombre"] = partes[0]
+    elif len(partes) == 2:
+        resultado["primer_nombre"] = partes[0]
+        resultado["primer_apellido"] = partes[1]
+    elif len(partes) == 3:
+        resultado["primer_nombre"] = partes[0]
+        resultado["primer_apellido"] = partes[1]
+        resultado["segundo_apellido"] = partes[2]
+    else:
+        resultado["primer_nombre"] = partes[0]
+        resultado["segundo_nombre"] = " ".join(partes[1:-2]) or None
+        resultado["primer_apellido"] = partes[-2]
+        resultado["segundo_apellido"] = partes[-1]
+
+    return resultado
+
+
+def _buscar_identificador(
+    texto: str,
+    patrones: tuple[str, ...],
+) -> str | None:
+    """Devuelve el primer identificador claramente etiquetado que se encuentre."""
+
+    for patron in patrones:
+        valor = _texto_opcional(_buscar(patron, texto))
+        if valor:
+            return valor
+    return None
 
 
 def _monto(valor: str | None) -> float | None:
@@ -175,7 +256,54 @@ def extraer_referencia_desde_texto(texto: str) -> ResumenReferenciaMiRetiroSegur
     if sexo:
         sexo_codigo = "F" if sexo.lower().startswith("f") else "M"
 
+    # Se priorizan componentes etiquetados explícitamente. Si el comprobante
+    # solo ofrece un nombre completo, UX.4.6b R2 aplica una descomposición
+    # conservadora que el Asegurado(a) puede revisar antes de importar.
+    primer_nombre = _texto_opcional(_buscar(r"Primer\s+Nombre:\s*([^\n\r]+)", texto))
+    segundo_nombre = _texto_opcional(_buscar(r"Segundo\s+Nombre:\s*([^\n\r]+)", texto))
+    primer_apellido = _texto_opcional(_buscar(r"Primer\s+Apellido:\s*([^\n\r]+)", texto))
+    segundo_apellido = _texto_opcional(_buscar(r"Segundo\s+Apellido:\s*([^\n\r]+)", texto))
+    apellido_casada = _texto_opcional(_buscar(r"Apellido\s+de\s+Casada:\s*([^\n\r]+)", texto))
+    nombre_completo = _texto_opcional(
+        _buscar(r"(?:Nombre\s+Completo|Nombre):\s*([^\n\r]+)", texto)
+    )
+
+    if nombre_completo and not any(
+        (primer_nombre, segundo_nombre, primer_apellido, segundo_apellido)
+    ):
+        componentes = _descomponer_nombre_completo(nombre_completo, sexo_codigo)
+        primer_nombre = componentes["primer_nombre"]
+        segundo_nombre = componentes["segundo_nombre"]
+        primer_apellido = componentes["primer_apellido"]
+        segundo_apellido = componentes["segundo_apellido"]
+        apellido_casada = apellido_casada or componentes["apellido_casada"]
+
+    cedula = _buscar_identificador(
+        texto,
+        (
+            r"C[eé]dula(?:\s+de\s+Identidad\s+Personal)?\s*[:#-]\s*([^\n\r]+)",
+            r"(?:No\.?|Nro\.?|N[°º])\s*(?:de\s+)?C[eé]dula\s*[:#-]?\s*([A-Z0-9-]+)",
+        ),
+    )
+    numero_seguro_social = _buscar_identificador(
+        texto,
+        (
+            r"N[uú]mero\s+(?:de\s+)?Seguro\s+Social\s*[:#-]\s*([A-Z0-9-]+)",
+            r"(?:No\.?|Nro\.?|N[°º])\s*(?:de\s+)?Seguro\s+Social\s*[:#-]?\s*([A-Z0-9-]+)",
+            r"NSS\s*[:#-]\s*([A-Z0-9-]+)",
+            r"Seguro\s+Social\s*:\s*([A-Z0-9-]+)",
+        ),
+    )
+
     return ResumenReferenciaMiRetiroSeguro(
+        primer_nombre=primer_nombre,
+        segundo_nombre=segundo_nombre,
+        primer_apellido=primer_apellido,
+        segundo_apellido=segundo_apellido,
+        apellido_casada=apellido_casada,
+        nombre_completo_detectado=nombre_completo,
+        cedula=cedula,
+        numero_seguro_social=numero_seguro_social,
         fecha_comprobante=_fecha_ddmmyyyy(
             _buscar(r"Fecha de Comprobante:\s*(\d{2}/\d{2}/\d{4})", texto)
         ),

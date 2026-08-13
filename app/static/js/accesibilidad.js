@@ -280,7 +280,23 @@ function cerrarAyudasContextuales(excepto = null) {
 function abrirAyudaContextual(boton, panel) {
   cerrarAyudasContextuales(boton);
   boton.setAttribute("aria-expanded", "true");
+  panel.classList.remove("context-help-panel-up", "context-help-panel-end");
   panel.hidden = false;
+
+  // Ajusta la dirección del panel según el espacio real disponible.
+  // Evita que las ayudas cercanas al final del contenido queden recortadas
+  // por el footer o que se salgan lateralmente del viewport.
+  window.requestAnimationFrame(() => {
+    const rect = panel.getBoundingClientRect();
+    if (rect.bottom > window.innerHeight - 16) {
+      panel.classList.add("context-help-panel-up");
+    }
+
+    const rectAjustado = panel.getBoundingClientRect();
+    if (rectAjustado.right > window.innerWidth - 16) {
+      panel.classList.add("context-help-panel-end");
+    }
+  });
 }
 
 
@@ -318,8 +334,8 @@ function prepararAyudasContextuales() {
     const boton = document.createElement("button");
     boton.type = "button";
     boton.className = "context-help-trigger";
-    boton.textContent = "?";
-    boton.setAttribute("aria-label", `Ayuda sobre ${ayuda.titulo}`);
+    boton.innerHTML = `<span class="context-help-icon" aria-hidden="true">i</span><span aria-hidden="true">Info</span>`;
+    boton.setAttribute("aria-label", `Más información sobre ${ayuda.titulo}`);
     boton.setAttribute("aria-expanded", "false");
     boton.setAttribute("aria-controls", `ayuda-contextual-${idControl}`);
     contenedor.appendChild(boton);
