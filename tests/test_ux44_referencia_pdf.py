@@ -1,5 +1,6 @@
 """Regresiones UX.4.4 para referencia personal importada desde PDF."""
 
+import re
 import unittest
 from pathlib import Path
 
@@ -153,7 +154,8 @@ class TestUX44ReferenciaPDF(unittest.TestCase):
         self.assertNotIn("1265.23", contenido)
 
     def test_pypdf_esta_versionado_y_boton_mi_caja_queda_centrado(self):
-        self.assertIn("pypdf==5.9.0", self.requirements)
+        self.assertRegex(self.requirements, r"(?m)^pypdf==\d+\.\d+\.\d+$")
+        self.assertEqual(len(re.findall(r"(?m)^pypdf==", self.requirements)), 1)
         self.assertIn(".current-year-detail-source {", self.css)
         self.assertIn("align-items: center;", self.css)
         self.assertIn(".current-year-detail-source .btn", self.css)
