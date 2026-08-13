@@ -68,7 +68,7 @@ class TestRemateUX41(unittest.TestCase):
         self.assertIn('"mouseleave"', js)
         self.assertIn('"focus"', js)
         self.assertIn('role", "tooltip"', js)
-        self.assertIn("min-height: 1.75rem", css)
+        self.assertIn("min-height: 1.8rem", css)
         self.assertIn("border-radius: 999px", css)
         self.assertIn(".context-help-icon", css)
         self.assertIn("position: absolute", css)

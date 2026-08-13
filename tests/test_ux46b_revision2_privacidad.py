@@ -106,9 +106,9 @@ class TestUX46bRevision2Privacidad(unittest.TestCase):
         self.assertIn("var(--app-primary) 11%", self.design)
         self.assertIn("box-shadow: inset 3px 0 0 var(--app-primary)", self.design)
 
-    def test_ayuda_contextual_usa_info_y_se_reposiciona(self):
+    def test_ayuda_contextual_usa_icono_y_se_reposiciona(self):
         self.assertIn("context-help-icon", self.accesibilidad_js)
-        self.assertIn("Info", self.accesibilidad_js)
+        self.assertNotIn('<span aria-hidden="true">Info</span>', self.accesibilidad_js)
         self.assertIn("context-help-panel-up", self.accesibilidad_js)
         self.assertIn("context-help-panel-end", self.accesibilidad_js)
 

@@ -152,7 +152,7 @@ class TestUX46bPaso1DatosPersonales(unittest.TestCase):
         self.assertIn('modoDatos === "MI_RETIRO_SEGURO" && !importacionLista', self.navegacion_js)
         self.assertIn('etiqueta: "Importa datos para continuar"', self.navegacion_js)
         self.assertIn("deshabilitado: true", self.navegacion_js)
-        self.assertIn("El PDF no completó toda la información previsional obligatoria", self.simulacion_js)
+        self.assertIn("La importación no completó toda la información previsional obligatoria", self.simulacion_js)
 
     def test_parser_extrae_identificadores_solo_cuando_estan_etiquetados(self):
         referencia = extraer_referencia_desde_texto(TEXTO_IDENTIFICADO)

@@ -40,7 +40,8 @@ class TestResponsiveUX3(unittest.TestCase):
 
         self.assertIn(".wizard-actions {", css)
         self.assertIn("flex-direction: column-reverse;", css)
-        self.assertGreaterEqual(simulacion.count("wizard-actions"), 6)
+        self.assertIn('data-wizard-nav="top"', simulacion)
+        self.assertIn('data-wizard-nav="bottom"', simulacion)
         self.assertIn('id="wizard-sticky-primary"', simulacion)
         self.assertIn(".wizard-actions .btn", css)
         self.assertIn("width: 100%;", css)

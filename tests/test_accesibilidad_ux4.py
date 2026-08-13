@@ -78,7 +78,7 @@ class TestAccesibilidadUX4(unittest.TestCase):
     def test_css_protege_ayudas_contraste_y_estado_invalido(self):
         self.assertIn(".context-help-trigger", self.css)
         self.assertIn(".context-help-panel", self.css)
-        self.assertIn("min-height: 1.75rem", self.css)
+        self.assertIn("min-height: 1.8rem", self.css)
         self.assertIn("border-radius: 999px", self.css)
         self.assertIn(".context-help-icon", self.css)
         self.assertIn("cursor: help", self.css)
