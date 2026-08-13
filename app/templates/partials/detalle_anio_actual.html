@@ -1,0 +1,225 @@
+<!-- ==================================================
+     Detalle salarial del año actual
+     ================================================== -->
+
+<section
+  id="seccion-detalle-anio-actual"
+  class="current-year-detail-section mt-5"
+>
+
+  <hr class="mb-4">
+
+  <div class="d-flex flex-column flex-lg-row justify-content-between gap-3 mb-4">
+
+    <div>
+      <h3 class="h5 fw-bold mb-2">
+        Detalle salarial del año actual
+      </h3>
+
+      <p class="text-secondary mb-0">
+        Opcionalmente puedes registrar los salarios que ya aparecen en tu
+        Ficha Digital. Puedes importarlos desde el Paso 1 o introducirlos aquí
+        manualmente. Esto permite distinguir datos completos, períodos parciales
+        y meses cuya cuota todavía no aparece acreditada.
+      </p>
+    </div>
+
+    <div class="current-year-detail-source">
+      <a
+        href="{{ mi_caja_digital_url }}"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn btn-outline-primary btn-sm"
+      >
+        Abrir Mi Caja Digital
+      </a>
+      <small class="text-secondary d-block mt-2">
+        Consulta allí tu Ficha Digital y copia los valores si deseas usar este detalle.
+      </small>
+    </div>
+
+  </div>
+
+
+  <div class="row g-4 align-items-end mb-4">
+
+    <div class="col-lg-6">
+      <label
+        for="usar_detalle_anio_actual"
+        class="form-label fw-semibold"
+      >
+        ¿Deseas detallar el año actual?
+      </label>
+
+      <select
+        id="usar_detalle_anio_actual"
+        class="form-select form-select-lg"
+      >
+        <option value="false" selected>
+          No — usar el total anual del historial
+        </option>
+        <option value="true">
+          Sí — registrar salarios por período
+        </option>
+      </select>
+    </div>
+
+    <div class="col-lg-6">
+      <label
+        for="modo_detalle_anio_actual"
+        class="form-label fw-semibold"
+      >
+        Forma de captura
+      </label>
+
+      <select
+        id="modo_detalle_anio_actual"
+        class="form-select form-select-lg"
+        disabled
+      >
+        <option value="MENSUAL" selected>
+          Total mensual
+        </option>
+        <option value="QUINCENAL">
+          Primera y segunda quincena
+        </option>
+      </select>
+    </div>
+
+  </div>
+
+
+  <div
+    id="detalle-anio-actual-contenido"
+    class="d-none"
+  >
+
+    <div class="info-box mb-4">
+      <strong>
+        Salario disponible y cuota acreditada no siempre avanzan al mismo tiempo.
+      </strong>
+      <p class="mb-0 mt-1">
+        Marca una cuota como acreditada solo cuando ya conste como tal en la CSS.
+        Un salario puede estar visible en la Ficha Digital aunque la cuota asociada
+        todavía no aparezca acreditada. Si solo tienes una quincena, el mes se
+        conservará como parcial.
+      </p>
+    </div>
+
+
+    <div class="current-year-detail-table-wrapper">
+      <table
+        class="table align-middle current-year-detail-table"
+      >
+        <thead>
+          <tr>
+            <th scope="col">Mes</th>
+            <th scope="col">Cuota acreditada</th>
+            <th scope="col" class="detalle-col-mensual">Salario reportado</th>
+            <th scope="col" class="detalle-col-quincenal d-none">1.ª quincena</th>
+            <th scope="col" class="detalle-col-quincenal d-none">2.ª quincena</th>
+            <th scope="col">Estado del salario</th>
+            <th scope="col">Total disponible</th>
+          </tr>
+        </thead>
+        <tbody id="detalle-anio-actual-body">
+          <!-- JavaScript genera los meses disponibles del año actual. -->
+        </tbody>
+      </table>
+    </div>
+
+    <div class="form-text mt-2">
+      En modo mensual debes indicar si el dato es completo o parcial. En modo
+      quincenal el estado se deriva automáticamente según las quincenas ingresadas.
+    </div>
+
+
+    <div
+      id="error-detalle-anio-actual"
+      class="alert alert-danger mt-4 d-none"
+      role="alert"
+    ></div>
+
+    <div
+      id="advertencia-detalle-anio-actual"
+      class="alert alert-warning mt-4 d-none"
+      role="status"
+      aria-live="polite"
+    ></div>
+
+    <div class="d-flex justify-content-end mt-4 wizard-actions-end">
+      <button
+        type="button"
+        id="btn-validar-detalle-anio-actual"
+        class="btn btn-primary px-4"
+      >
+        Validar detalle del año actual
+      </button>
+    </div>
+
+
+    <div
+      id="resultado-detalle-anio-actual"
+      class="mt-5 d-none"
+    >
+      <hr class="mb-4">
+
+      <div class="mb-4">
+        <h4 class="h6 fw-bold mb-2">
+          Resumen del detalle disponible
+        </h4>
+        <p class="text-secondary mb-0">
+          Los totales acreditados se usarán para sincronizar el año actual del
+          historial. Los salarios completos también pueden servir como base para
+          proyectar períodos futuros.
+        </p>
+      </div>
+
+      <div class="row g-3">
+        <div class="col-sm-6 col-xl-3">
+          <div class="summary-card">
+            <span class="summary-label">Cuotas identificadas</span>
+            <strong id="detalle-cuotas-identificadas" class="summary-value">0</strong>
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-xl-3">
+          <div class="summary-card">
+            <span class="summary-label">Salario con cuota acreditada</span>
+            <strong id="detalle-salario-acreditado" class="summary-value salary-value">B/.0.00</strong>
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-xl-3">
+          <div class="summary-card">
+            <span class="summary-label">Salario disponible</span>
+            <strong id="detalle-salario-disponible" class="summary-value salary-value">B/.0.00</strong>
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-xl-3">
+          <div class="summary-card">
+            <span class="summary-label">Último mes acreditado</span>
+            <strong id="detalle-ultimo-mes-acreditado" class="summary-value">—</strong>
+          </div>
+        </div>
+      </div>
+
+      <div
+        id="detalle-base-cuota-acreditada"
+        class="retirement-derived-note mt-3"
+      >
+        Promedio del salario acreditado por cuota del año actual: —
+      </div>
+
+      <div
+        id="detalle-estado-coherencia"
+        class="alert mt-4 mb-0"
+        role="status"
+        aria-live="polite"
+      ></div>
+    </div>
+
+  </div>
+
+</section>

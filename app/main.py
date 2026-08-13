@@ -16,7 +16,7 @@ from app.core.config import (
     MI_CAJA_DIGITAL_URL,
 )
 
-from fastapi import FastAPI, HTTPException, Request
+from fastapi import FastAPI, File, HTTPException, Request, UploadFile
 from fastapi.responses import HTMLResponse, Response
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
@@ -24,10 +24,14 @@ from fastapi.templating import Jinja2Templates
 from app.modelos.simulacion import (
     DatosCuotas,
     DatosHistorialSalarial,
+    DatosDetalleAnioActual,
     DatosProyeccionSalario,
     DatosSalario,
     ResumenCuotas,
     ResumenHistorialSalarial,
+    ResumenDetalleAnioActual,
+    ResumenReferenciaMiRetiroSeguro,
+    ResumenFichaDigital,
     ResumenProyeccionSalario,
     ResumenSalario,
     DatosLineaTiempo,
@@ -38,8 +42,17 @@ from app.modelos.simulacion import (
 from app.servicios.historial_salarios import (
     analizar_historial_salarial,
 )
+from app.servicios.detalle_anio_actual import (
+    analizar_detalle_anio_actual,
+)
 from app.servicios.linea_tiempo import (
     construir_linea_tiempo,
+)
+from app.servicios.referencia_mi_retiro_seguro import (
+    analizar_comprobante_pdf,
+)
+from app.servicios.ficha_digital import (
+    analizar_ficha_digital_pdf,
 )
 from app.servicios.proyeccion_cuotas import analizar_cuotas
 from app.servicios.proyeccion_salarios import (
@@ -290,6 +303,122 @@ async def calcular_resumen_historial_salarial(
             datos,
         )
 
+    except ValueError as error:
+        raise HTTPException(
+            status_code=422,
+            detail=str(error),
+        ) from error
+
+
+# ============================================================
+# API — Detalle salarial del año actual
+# ============================================================
+
+@app.post(
+    "/api/simulacion/detalle-anio-actual",
+    response_model=ResumenDetalleAnioActual,
+)
+async def calcular_detalle_anio_actual(
+    datos: DatosDetalleAnioActual,
+):
+    """Valida salarios mensuales/quincenales del año actual."""
+
+    try:
+        return analizar_detalle_anio_actual(
+            datos,
+        )
+
+    except ValueError as error:
+        raise HTTPException(
+            status_code=422,
+            detail=str(error),
+        ) from error
+
+
+# ============================================================
+# API — Referencia personal de Mi Retiro Seguro
+# ============================================================
+
+@app.post(
+    "/api/simulacion/referencia-mi-retiro-seguro",
+    response_model=ResumenReferenciaMiRetiroSeguro,
+)
+async def analizar_referencia_mi_retiro_seguro(
+    archivo: UploadFile = File(...),
+):
+    """Extrae una referencia variable desde un comprobante PDF personal.
+
+    El archivo se procesa en memoria y no se persiste. El servicio devuelve
+    únicamente datos operativos; no expone nombre, cédula ni seguro social.
+    """
+
+    nombre = (archivo.filename or "").lower()
+    tipo = (archivo.content_type or "").lower()
+
+    if not nombre.endswith(".pdf") and tipo != "application/pdf":
+        raise HTTPException(
+            status_code=415,
+            detail="Selecciona un comprobante en formato PDF.",
+        )
+
+    limite_bytes = 8 * 1024 * 1024
+    contenido = await archivo.read(limite_bytes + 1)
+    await archivo.close()
+
+    if len(contenido) > limite_bytes:
+        raise HTTPException(
+            status_code=413,
+            detail="El PDF supera el límite de 8 MB permitido para esta importación.",
+        )
+
+    try:
+        return analizar_comprobante_pdf(contenido)
+    except ValueError as error:
+        raise HTTPException(
+            status_code=422,
+            detail=str(error),
+        ) from error
+
+
+# ============================================================
+# API — Ficha Digital de Mi Caja Digital
+# ============================================================
+
+@app.post(
+    "/api/simulacion/ficha-digital",
+    response_model=ResumenFichaDigital,
+)
+async def analizar_ficha_digital(
+    archivo: UploadFile = File(...),
+):
+    """Extrae salarios del año calendario actual desde una Ficha Digital.
+
+    El archivo se procesa en memoria y no se persiste. La respuesta no
+    contiene nombre, cédula ni número de seguro social ni períodos de
+    años anteriores.
+    """
+
+    nombre = (archivo.filename or "").lower()
+    tipo = (archivo.content_type or "").lower()
+
+    if not nombre.endswith(".pdf") and tipo != "application/pdf":
+        raise HTTPException(
+            status_code=415,
+            detail="Selecciona la Ficha Digital en formato PDF.",
+        )
+
+    limite_bytes = 12 * 1024 * 1024
+    contenido = await archivo.read(limite_bytes + 1)
+    await archivo.close()
+
+    if len(contenido) > limite_bytes:
+        raise HTTPException(
+            status_code=413,
+            detail="La Ficha Digital supera el límite de 12 MB permitido.",
+        )
+
+    try:
+        return analizar_ficha_digital_pdf(contenido)
     except ValueError as error:
         raise HTTPException(
             status_code=422,

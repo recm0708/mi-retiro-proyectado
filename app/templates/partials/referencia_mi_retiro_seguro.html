@@ -1,0 +1,158 @@
+<!-- ==================================================
+     Referencia personal importada de Mi Retiro Seguro
+     ================================================== -->
+
+<section
+  id="seccion-referencia-mi-retiro-seguro"
+  class="reference-pdf-section mb-5"
+>
+
+  <div class="reference-pdf-card">
+
+    <div class="mb-4">
+      <h3 class="h5 fw-bold mb-2">
+        Comprobante de Mi Retiro Seguro
+        <span class="text-secondary fw-normal">(opcional)</span>
+      </h3>
+
+      <p class="text-secondary mb-0">
+        Si ya tienes un comprobante personal en PDF, puedes cargarlo para
+        recuperar la referencia de pensión que aparecía en esa fotografía.
+        La aplicación no usa un monto fijo: cada referencia se extrae del
+        documento que cargue el Asegurado(a).
+      </p>
+    </div>
+
+    <div class="row g-3 align-items-end">
+
+      <div class="col-lg-7">
+        <label
+          for="referencia-mi-retiro-pdf"
+          class="form-label fw-semibold"
+        >
+          Comprobante PDF
+        </label>
+
+        <input
+          type="file"
+          id="referencia-mi-retiro-pdf"
+          class="form-control"
+          accept=".pdf,application/pdf"
+        >
+
+        <div class="form-text">
+          El archivo se procesa en memoria. No se guarda el PDF ni se
+          conservan nombre, cédula o número de seguro social.
+        </div>
+      </div>
+
+      <div class="col-lg-5">
+        <div class="d-grid d-sm-flex gap-2 justify-content-lg-end">
+          <button
+            type="button"
+            id="btn-analizar-referencia-mi-retiro"
+            class="btn btn-outline-primary"
+          >
+            Analizar comprobante
+          </button>
+
+          <button
+            type="button"
+            id="btn-quitar-referencia-mi-retiro"
+            class="btn btn-outline-secondary d-none"
+          >
+            Quitar referencia
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <div
+      id="error-referencia-mi-retiro"
+      class="alert alert-danger mt-4 d-none"
+      role="alert"
+    ></div>
+
+    <div
+      id="resultado-referencia-mi-retiro"
+      class="mt-4 d-none"
+    >
+
+      <div class="reference-pdf-summary-heading mb-3">
+        <span class="text-primary fw-semibold">
+          Referencia detectada en el PDF
+        </span>
+        <p class="text-secondary mb-0 mt-1">
+          Esta cifra se conserva como referencia personal del comprobante.
+          No reemplaza los motores ni modifica por sí sola la proyección actual.
+        </p>
+      </div>
+
+      <div class="row g-3">
+        <div class="col-sm-6 col-xl-3">
+          <div class="summary-card reference-pdf-summary-card">
+            <span class="summary-label">Monto estimado del PDF</span>
+            <strong
+              id="referencia-mi-retiro-monto"
+              class="summary-value salary-value"
+            >
+              —
+            </strong>
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-xl-3">
+          <div class="summary-card reference-pdf-summary-card">
+            <span class="summary-label">Sistema elegido</span>
+            <strong
+              id="referencia-mi-retiro-sistema"
+              class="reference-pdf-summary-text"
+            >
+              —
+            </strong>
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-xl-3">
+          <div class="summary-card reference-pdf-summary-card">
+            <span class="summary-label">Edad de retiro del PDF</span>
+            <strong
+              id="referencia-mi-retiro-edad"
+              class="summary-value"
+            >
+              —
+            </strong>
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-xl-3">
+          <div class="summary-card reference-pdf-summary-card">
+            <span class="summary-label">Cuotas históricas del PDF</span>
+            <strong
+              id="referencia-mi-retiro-cuotas"
+              class="summary-value"
+            >
+              —
+            </strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="reference-pdf-meta mt-3">
+        <span id="referencia-mi-retiro-fecha">Fecha del comprobante: —</span>
+        <span id="referencia-mi-retiro-registros">Registros anuales detectados: —</span>
+      </div>
+
+      <div
+        id="referencia-mi-retiro-coherencia"
+        class="alert alert-info mt-3 mb-0"
+        role="status"
+        aria-live="polite"
+      ></div>
+
+    </div>
+
+  </div>
+
+</section>

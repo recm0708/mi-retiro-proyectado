@@ -117,6 +117,32 @@ function convertirMesCuotasAFechaCorte(
 // ============================================================
 
 /**
+ * Aplica el último mes acreditado derivado del detalle del año actual.
+ * Si no existe un detalle coherente, el campo permanece editable.
+ */
+function aplicarUltimoMesCuotasDerivado() {
+  const simulacion = obtenerSimulacion();
+  const campo = document.getElementById("ultimo_mes_cuotas");
+  const nota = document.getElementById("origen-ultimo-mes-cuotas");
+
+  const derivado = (
+    simulacion.resumen_detalle_anio_actual?.cuotas_coinciden
+      ? simulacion.resumen_detalle_anio_actual.ultimo_mes_cuota_acreditada
+      : null
+  );
+
+  if (derivado) {
+    campo.value = derivado;
+    campo.readOnly = true;
+    nota?.classList.remove("d-none");
+  } else {
+    campo.readOnly = false;
+    nota?.classList.add("d-none");
+  }
+}
+
+
+/**
  * Sincroniza el Paso 5 con los datos ya validados en los pasos
  * anteriores y completa valores predeterminados cuando es necesario.
  */
@@ -194,6 +220,7 @@ function prepararPasoRetiro() {
     );
   }
 
+  aplicarUltimoMesCuotasDerivado();
   actualizarLimiteUltimoMesCuotas();
 }
 
@@ -260,6 +287,7 @@ function restaurarDatosRetiro() {
     "fecha_retiro_personalizada",
   ).value = retiro.fecha_retiro_personalizada || "";
 
+  aplicarUltimoMesCuotasDerivado();
   actualizarEstadoFechaPersonalizada();
   actualizarLimiteUltimoMesCuotas();
 

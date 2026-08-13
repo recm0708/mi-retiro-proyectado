@@ -54,6 +54,13 @@ function prepararPasoResultados() {
     resumenUnificado.classList.add("d-none");
   }
 
+  const comparacionReferencia = document.getElementById(
+    "resultado-comparacion-referencia",
+  );
+  if (comparacionReferencia) {
+    comparacionReferencia.classList.add("d-none");
+  }
+
   document.getElementById(
     "resultado-sistema",
   ).textContent = obtenerNombreSistemaResultados(
@@ -1405,6 +1412,13 @@ function mostrarResumenResultadoUnificado(resumen) {
   }
 
   contenedor.classList.remove("d-none");
+
+  if (
+    typeof mostrarComparacionReferenciaMiRetiroSeguro
+    === "function"
+  ) {
+    mostrarComparacionReferenciaMiRetiroSeguro(resumen);
+  }
 }
 
 
@@ -2787,6 +2801,13 @@ function invalidarResultadoSEBD() {
   document.getElementById(
     "resultado-sebd",
   ).classList.add("d-none");
+
+  const comparacionReferencia = document.getElementById(
+    "resultado-comparacion-referencia",
+  );
+  if (comparacionReferencia) {
+    comparacionReferencia.classList.add("d-none");
+  }
 }
 
 
@@ -2846,6 +2867,13 @@ function invalidarResultadoMixto() {
   document.getElementById(
     "resultado-mixto",
   ).classList.add("d-none");
+
+  const comparacionReferencia = document.getElementById(
+    "resultado-comparacion-referencia",
+  );
+  if (comparacionReferencia) {
+    comparacionReferencia.classList.add("d-none");
+  }
 }
 
 
@@ -2907,6 +2935,13 @@ function invalidarResultadoSUCGS() {
   document.getElementById(
     "resultado-sucgs",
   ).classList.add("d-none");
+
+  const comparacionReferencia = document.getElementById(
+    "resultado-comparacion-referencia",
+  );
+  if (comparacionReferencia) {
+    comparacionReferencia.classList.add("d-none");
+  }
 }
 
 

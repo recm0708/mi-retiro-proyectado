@@ -190,6 +190,205 @@ class ResumenHistorialSalarial(BaseModel):
 
 
 # ============================================================
+# Detalle salarial del año actual
+# ============================================================
+
+ModoDetalleAnioActual = Literal[
+    "MENSUAL",
+    "QUINCENAL",
+]
+
+EstadoPeriodoSalarial = Literal[
+    "SIN_INFORMACION",
+    "PARCIAL",
+    "COMPLETO",
+]
+
+
+class RegistroDetalleAnioActual(BaseModel):
+    """Información salarial disponible para un mes del año actual.
+
+    Un mes puede disponer de salario aun cuando su cuota todavía no
+    aparezca acreditada. En modo quincenal, el total se deriva de las
+    dos quincenas y permite representar un mes parcialmente reportado.
+    """
+
+    mes: int = Field(ge=1, le=12)
+    cuota_acreditada: bool = False
+
+    estado: EstadoPeriodoSalarial = "SIN_INFORMACION"
+
+    salario_mensual: float | None = Field(default=None, ge=0)
+    primera_quincena: float | None = Field(default=None, ge=0)
+    segunda_quincena: float | None = Field(default=None, ge=0)
+
+    _validar_salario_mensual = field_validator(
+        "salario_mensual",
+    )(
+        _validar_precision_dos_decimales
+    )
+
+    _validar_primera_quincena = field_validator(
+        "primera_quincena",
+    )(
+        _validar_precision_dos_decimales
+    )
+
+    _validar_segunda_quincena = field_validator(
+        "segunda_quincena",
+    )(
+        _validar_precision_dos_decimales
+    )
+
+
+class RegistroDetalleAnioActualNormalizado(BaseModel):
+    """Mes normalizado después de aplicar las reglas de captura."""
+
+    mes: int
+    cuota_acreditada: bool
+    estado: EstadoPeriodoSalarial
+    salario_total: float
+    primera_quincena: float | None = None
+    segunda_quincena: float | None = None
+
+
+class DatosDetalleAnioActual(BaseModel):
+    """Detalle mensual o quincenal disponible para el año actual."""
+
+    anio: int = Field(ge=1900, le=2200)
+    modo_captura: ModoDetalleAnioActual
+    cuotas_anio_actual_referencia: int = Field(ge=0, le=12)
+    registros: list[RegistroDetalleAnioActual]
+
+
+class ResumenDetalleAnioActual(BaseModel):
+    """Resumen del detalle salarial real disponible en el año actual."""
+
+    anio: int
+    modo_captura: ModoDetalleAnioActual
+
+    cuotas_acreditadas_identificadas: int
+    cuotas_coinciden: bool
+
+    ultimo_mes_cuota_acreditada: str | None
+    ultimo_mes_con_salario_completo: str | None
+
+    total_salario_disponible: float
+    total_salario_acreditado: float
+
+    meses_con_informacion: int
+    meses_completos: int
+
+    salario_ultimo_mes_completo: float | None
+    promedio_meses_completos: float | None
+    promedio_ultimos_3_meses_completos: float | None
+    promedio_por_cuota_acreditada: float | None
+
+    registros: list[RegistroDetalleAnioActualNormalizado]
+
+
+# ============================================================
+# Referencia importada de Mi Retiro Seguro
+# ============================================================
+
+SistemaReferenciaMiRetiroSeguro = Literal[
+    "SEBD",
+    "MIXTO",
+    "SUCGS",
+    "NO_IDENTIFICADO",
+]
+
+NaturalezaReferenciaMiRetiroSeguro = Literal[
+    "PENSION_MENSUAL",
+    "PAGO_UNICO",
+    "NO_IDENTIFICADA",
+]
+
+TipoRegistroReferenciaMiRetiroSeguro = Literal[
+    "HISTORICO",
+    "HISTORICO_PROYECTADO",
+    "PROYECTADO",
+]
+
+
+class RegistroReferenciaMiRetiroSeguro(BaseModel):
+    """Fila anual extraída del comprobante sin datos identificativos."""
+
+    anio: int = Field(ge=1900, le=2200)
+    edad: int = Field(ge=0, le=150)
+    tipo: TipoRegistroReferenciaMiRetiroSeguro
+    salario_anual: float = Field(ge=0)
+    cuotas: int = Field(ge=0, le=12)
+
+
+class ResumenReferenciaMiRetiroSeguro(BaseModel):
+    """Datos operativos extraídos de un comprobante personal en PDF.
+
+    El contrato excluye deliberadamente nombre, cédula y número de seguro
+    social. La referencia se usa para comparar fotografías personales, no
+    para sustituir los motores legales de la aplicación.
+    """
+
+    fecha_comprobante: date | None = None
+    fecha_decision_texto: str | None = None
+    fecha_nacimiento: date | None = None
+    sexo: str | None = None
+    fecha_ingreso_css: date | None = None
+
+    sistema_elegido: SistemaReferenciaMiRetiroSeguro
+    sistema_elegido_nombre: str
+
+    edad_retiro_elegida: int | None = Field(default=None, ge=0, le=150)
+    cuotas_historicas: int | None = Field(default=None, ge=0)
+
+    prestacion_esperada: str | None = None
+    naturaleza_prestacion: NaturalezaReferenciaMiRetiroSeguro
+    monto_estimado_prestacion: float = Field(gt=0)
+
+    total_cuotas_acumuladas: int | None = Field(default=None, ge=0)
+    registros: list[RegistroReferenciaMiRetiroSeguro] = Field(default_factory=list)
+    advertencias: list[str] = Field(default_factory=list)
+
+
+
+# ============================================================
+# Ficha Digital — salarios del último año
+# ============================================================
+
+EstadoRegistroFichaDigital = Literal[
+    "COMPLETO",
+    "PARCIAL",
+    "SIN_INFORMACION",
+]
+
+
+class RegistroFichaDigital(BaseModel):
+    """Salario mensual detectado en la Ficha Digital.
+
+    El importador no presume si la cuota del mes ya está acreditada.
+    Esa decisión se confirma en la vista previa antes de aplicar datos.
+    """
+
+    anio: int = Field(ge=1900, le=2200)
+    mes: int = Field(ge=1, le=12)
+    salario: float = Field(ge=0)
+    estado: EstadoRegistroFichaDigital = "COMPLETO"
+
+    _validar_salario = field_validator("salario")(
+        _validar_precision_dos_decimales
+    )
+
+
+class ResumenFichaDigital(BaseModel):
+    """Datos salariales no identificativos extraídos de la Ficha Digital."""
+
+    registros: list[RegistroFichaDigital]
+    anio_mas_reciente: int | None = None
+    mes_mas_reciente: int | None = Field(default=None, ge=1, le=12)
+    advertencias: list[str] = Field(default_factory=list)
+
+
+# ============================================================
 # Salario actual
 # ============================================================
 

@@ -392,6 +392,20 @@ function crearFilaHistorial(
       // las informadas previamente en el Paso 2.
       inputCuotas.readOnly = true;
     }
+
+    if (
+      simulacion.resumen_detalle_anio_actual?.cuotas_coinciden
+    ) {
+      inputSalario.value = formatearNumeroMonetario(
+        simulacion.resumen_detalle_anio_actual.total_salario_acreditado,
+      );
+      inputSalario.readOnly = true;
+      inputSalario.dataset.sincronizadoDetalle = "true";
+      inputSalario.setAttribute(
+        "title",
+        "Sincronizado desde el detalle salarial del año actual.",
+      );
+    }
   }
 
 

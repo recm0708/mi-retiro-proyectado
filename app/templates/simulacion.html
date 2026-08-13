@@ -204,6 +204,10 @@ Nueva simulación | {{ app_name }}
               </div>
 
 
+              <!-- Importación opcional con revisión previa y confirmación explícita. -->
+              {% include "partials/importacion_datos_oficiales.html" %}
+
+
               <form id="form-datos-personales">
 
                 <div class="row g-4">
@@ -785,6 +789,10 @@ Nueva simulación | {{ app_name }}
               {% include "partials/historial_salarial.html" %}
 
 
+              <!-- Detalle opcional del año actual proveniente de Ficha Digital. -->
+              {% include "partials/detalle_anio_actual.html" %}
+
+
               <!-- ==================================================
                   Salario actual utilizado para la proyección
                   ================================================== -->
@@ -794,18 +802,59 @@ Nueva simulación | {{ app_name }}
               <div class="mb-4">
 
                 <h3 class="h5 fw-bold mb-2">
-                  Salario actual para proyección
+                  Base salarial para proyección
                 </h3>
 
                 <p class="text-secondary mb-0">
-                  Este valor representa tu remuneración vigente.
-                  Puede ser diferente del salario cotizado acumulado
-                  durante el año actual.
+                  Elige de dónde debe salir el salario mensual utilizado como
+                  punto de partida. Si registraste el detalle del año actual,
+                  la aplicación puede sugerir una base reciente sin confundirla
+                  con el salario ya acreditado.
                 </p>
 
               </div>
 
               <form id="form-salario">
+
+                <div class="row g-4 mb-4">
+                  <div class="col-lg-8">
+                    <label
+                      for="origen_salario_proyeccion"
+                      class="form-label fw-semibold"
+                    >
+                      Base para proyectar salarios futuros
+                    </label>
+
+                    <select
+                      id="origen_salario_proyeccion"
+                      class="form-select form-select-lg"
+                    >
+                      <option value="MANUAL" selected>
+                        Indicar el salario manualmente
+                      </option>
+                      <option value="ULTIMO_MES_COMPLETO" disabled>
+                        Último mes completo disponible
+                      </option>
+                      <option value="PROMEDIO_ANIO_ACTUAL" disabled>
+                        Promedio de meses completos del año actual
+                      </option>
+                      <option value="PROMEDIO_3_MESES" disabled>
+                        Promedio de los últimos 3 meses completos
+                      </option>
+                      <option value="PROMEDIO_CUOTA_ACREDITADA" disabled>
+                        Promedio del salario acreditado por cuota del año actual
+                      </option>
+                    </select>
+
+                    <div
+                      id="origen-salario-proyeccion-ayuda"
+                      class="form-text"
+                    >
+                      Las opciones automáticas se habilitan después de validar
+                      el detalle salarial del año actual.
+                    </div>
+                  </div>
+                </div>
 
                 <div class="row g-4">
 
@@ -883,13 +932,13 @@ Nueva simulación | {{ app_name }}
                 <div class="info-box mt-4">
 
                   <strong>
-                    La aplicación conservará el monto que ingresaste.
+                    La aplicación conservará el origen de la base utilizada.
                   </strong>
 
                   <p class="mb-0 mt-1">
-                    Además calculará equivalentes semanales,
-                    quincenales, mensuales y anuales para utilizarlos
-                    posteriormente en las proyecciones.
+                    Si eliges una base automática, se utilizará un valor mensual
+                    derivado del detalle validado. Si eliges ingreso manual, se
+                    conservará el monto y la periodicidad que indiques.
                   </p>
 
                 </div>
@@ -1536,6 +1585,24 @@ Nueva simulación | {{ app_name }}
 
 <script
   src="{{ url_for('static', path='/js/historial_salarios.js') }}"
+></script>
+
+
+<!-- Referencia personal opcional de Mi Retiro Seguro. -->
+<script
+  src="{{ url_for('static', path='/js/referencia_mi_retiro_seguro.js') }}"
+></script>
+
+
+<!-- Importación revisable de documentos oficiales en el Paso 1. -->
+<script
+  src="{{ url_for('static', path='/js/importacion_datos_oficiales.js') }}"
+></script>
+
+
+<!-- Detalle mensual/quincenal del año actual. -->
+<script
+  src="{{ url_for('static', path='/js/detalle_anio_actual.js') }}"
 ></script>
 
 

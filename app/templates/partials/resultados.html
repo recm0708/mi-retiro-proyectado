@@ -575,6 +575,69 @@
 
 
       <!-- ================================================
+           COMPARACIÓN CON REFERENCIA PERSONAL IMPORTADA
+           ================================================ -->
+
+      <section
+        id="resultado-comparacion-referencia"
+        class="reference-result-comparison mt-4 d-none"
+        aria-labelledby="resultado-comparacion-referencia-titulo"
+      >
+        <div class="results-section-heading mb-3">
+          <span class="text-primary fw-semibold">Referencia personal importada</span>
+          <h3
+            id="resultado-comparacion-referencia-titulo"
+            class="h5 fw-bold mb-1"
+          >
+            Comparación con Mi Retiro Seguro
+          </h3>
+          <p class="text-secondary mb-0">
+            La referencia se obtiene del PDF personal cargado en el Paso 3.
+            No existe un monto predeterminado dentro de la aplicación.
+          </p>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-md-4">
+            <div class="results-summary-card">
+              <span>Referencia del comprobante</span>
+              <strong id="resultado-referencia-pdf-monto">—</strong>
+              <small>Valor extraído del PDF cargado.</small>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="results-summary-card results-summary-primary">
+              <span>Proyección actual</span>
+              <strong id="resultado-referencia-actual-monto">—</strong>
+              <small>Resultado calculado con los datos y supuestos actuales.</small>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="results-summary-card">
+              <span>Diferencia</span>
+              <strong id="resultado-referencia-diferencia">—</strong>
+              <small>Solo se calcula cuando la comparación es compatible.</small>
+            </div>
+          </div>
+        </div>
+
+        <div
+          id="resultado-referencia-contexto"
+          class="reference-result-context mt-3"
+        ></div>
+
+        <div
+          id="resultado-referencia-estado-comparacion"
+          class="alert alert-info mb-0 mt-3"
+          role="status"
+          aria-live="polite"
+        ></div>
+      </section>
+
+
+      <!-- ================================================
            RESULTADO SEBD
            ================================================ -->
 

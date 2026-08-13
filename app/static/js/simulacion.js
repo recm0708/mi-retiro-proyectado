@@ -51,6 +51,17 @@ function crearSimulacionVacia() {
     historial: null,
     resumen_historial: null,
 
+    referencia_mi_retiro_seguro: null,
+    importacion_comprobante_confirmada: false,
+    ficha_digital_importada: null,
+    importacion_ficha_digital_confirmada: false,
+
+    detalle_anio_actual_habilitado: false,
+    detalle_anio_actual: null,
+    resumen_detalle_anio_actual: null,
+    ultimo_mes_cuotas_derivado: null,
+
+    origen_salario_proyeccion: "MANUAL",
     salario: {},
     resumen_salario: null,
 
@@ -113,6 +124,9 @@ function obtenerSimulacion() {
 
       historial:
         simulacion.historial || null,
+
+      detalle_anio_actual:
+        simulacion.detalle_anio_actual || null,
 
       salario:
         simulacion.salario || {},
@@ -462,6 +476,8 @@ function invalidarResumenCuotas() {
   // El historial se conserva, pero debe volver a validarse porque
   // utiliza el total real de cuotas del Paso 2 como referencia.
   simulacion.resumen_historial = null;
+  simulacion.resumen_detalle_anio_actual = null;
+  simulacion.ultimo_mes_cuotas_derivado = null;
 
   // Los resultados de etapas posteriores también dejan de ser
   // completamente confiables hasta volver a analizar las cuotas.
@@ -476,6 +492,14 @@ function invalidarResumenCuotas() {
   simulacion.resultado_sucgs = null;
 
   guardarSimulacion(simulacion);
+
+  if (typeof liberarSalarioAnualActual === "function") {
+    liberarSalarioAnualActual();
+  }
+
+  if (typeof actualizarOpcionesBaseSalarial === "function") {
+    actualizarOpcionesBaseSalarial(false);
+  }
 
   document.getElementById(
     "resultado-cuotas",
@@ -591,7 +615,21 @@ async function analizarCuotas(evento) {
     simulacion.cuotas = datos;
     simulacion.resumen_cuotas = contenido;
 
+    if (simulacion.detalle_anio_actual_habilitado) {
+      simulacion.resumen_detalle_anio_actual = null;
+      simulacion.ultimo_mes_cuotas_derivado = null;
+    }
+
     guardarSimulacion(simulacion);
+
+    if (simulacion.detalle_anio_actual_habilitado) {
+      if (typeof liberarSalarioAnualActual === "function") {
+        liberarSalarioAnualActual();
+      }
+      if (typeof actualizarOpcionesBaseSalarial === "function") {
+        actualizarOpcionesBaseSalarial(false);
+      }
+    }
 
     mostrarResumenCuotas(
       contenido,
@@ -819,6 +857,10 @@ async function analizarSalario(evento) {
 
     simulacion.salario = datos;
     simulacion.resumen_salario = contenido;
+    simulacion.origen_salario_proyeccion = (
+      document.getElementById("origen_salario_proyeccion")?.value
+      || "MANUAL"
+    );
 
     // Una nueva normalización salarial invalida cualquier
     // proyección construida con un salario anterior.
@@ -932,6 +974,21 @@ function prepararPasoProyeccion(simulacion) {
   ).textContent = formatearMoneda(
     resumenSalario.salario_mensual,
   );
+
+  const notaBase = document.querySelector(
+    ".projection-base-note",
+  );
+
+  if (notaBase) {
+    const origen = simulacion.origen_salario_proyeccion || "MANUAL";
+    const resumenDetalle = simulacion.resumen_detalle_anio_actual;
+
+    notaBase.textContent = (
+      typeof descripcionOrigenBaseSalarial === "function"
+        ? descripcionOrigenBaseSalarial(origen, resumenDetalle)
+        : "Obtenido automáticamente del Paso 3"
+    );
+  }
 
   const campoInicio = document.getElementById(
     "proyeccion_anio_inicio",

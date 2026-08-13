@@ -657,6 +657,153 @@ body {
   }
 }
 
+/* Detalle mensual/quincenal del año actual. */
+.current-year-detail-section {
+  scroll-margin-top: 1rem;
+}
+
+.current-year-detail-source {
+  flex: 0 0 min(100%, 18rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.current-year-detail-source .btn {
+  align-self: center;
+}
+
+.current-year-detail-table-wrapper {
+  overflow: auto;
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius);
+}
+
+.current-year-detail-table {
+  min-width: 980px;
+  margin-bottom: 0;
+}
+
+.current-year-detail-table thead {
+  background-color: var(--app-surface-accent);
+}
+
+.current-year-detail-table th,
+.current-year-detail-table td {
+  padding: 0.75rem;
+  vertical-align: middle;
+}
+
+.current-year-detail-month {
+  min-width: 8rem;
+}
+
+.current-year-detail-table .form-check-input {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.current-year-detail-partial > * {
+  background-color: color-mix(
+    in srgb,
+    var(--app-warning-bg) 48%,
+    var(--app-surface)
+  );
+}
+
+.current-year-detail-complete > * {
+  background-color: color-mix(
+    in srgb,
+    var(--app-info-bg) 38%,
+    var(--app-surface)
+  );
+}
+
+.detalle-total-mes {
+  white-space: nowrap;
+}
+
+.retirement-derived-note {
+  padding: 0.55rem 0.7rem;
+  color: var(--app-info-text);
+  background-color: var(--app-info-bg);
+  border: 1px solid var(--app-info-border);
+  border-radius: 0.65rem;
+  font-size: 0.9rem;
+}
+
+html[data-app-theme="contrast"] .current-year-detail-partial > *,
+html[data-app-theme="contrast"] .current-year-detail-complete > * {
+  background-color: var(--app-surface);
+}
+
+html[data-app-theme="contrast"] .current-year-detail-partial {
+  outline: 2px solid var(--app-warning-text);
+  outline-offset: -2px;
+}
+
+html[data-app-theme="contrast"] .current-year-detail-complete {
+  outline: 2px solid var(--app-info-border);
+  outline-offset: -2px;
+}
+
+@media (max-width: 768px) {
+  .current-year-detail-source {
+    flex-basis: auto;
+  }
+}
+
+
+/* Referencia personal importada desde Mi Retiro Seguro. */
+.reference-pdf-card {
+  padding: 1.25rem;
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius);
+  background: var(--app-surface-accent);
+}
+
+.reference-pdf-summary-card {
+  min-height: 132px;
+}
+
+.reference-pdf-summary-text {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 1.05rem;
+  line-height: 1.35;
+}
+
+.reference-pdf-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  color: var(--bs-secondary-color);
+  font-size: 0.925rem;
+}
+
+.reference-result-comparison {
+  padding: 1.25rem;
+  border: 1px solid var(--app-info-border);
+  border-radius: var(--app-radius);
+  background: color-mix(
+    in srgb,
+    var(--app-info-bg) 42%,
+    var(--app-surface)
+  );
+}
+
+.reference-result-context {
+  color: var(--bs-secondary-color);
+  font-weight: 600;
+}
+
+html[data-app-theme="contrast"] .reference-pdf-card,
+html[data-app-theme="contrast"] .reference-result-comparison {
+  background: var(--app-surface);
+  border-width: 2px;
+}
+
 /* ==========================================================
    Paso 4 — Línea temporal histórica y proyectada
    ========================================================== */
@@ -3528,5 +3675,121 @@ html[data-bs-theme="light"] .wizard-step.active span {
   .retirement-row-selected .retirement-scenario-radio {
     outline: 2px solid HighlightText;
     outline-offset: 2px;
+  }
+}
+
+/* ============================================================
+   UX.4.4 — Importación revisable de documentos oficiales
+   ============================================================ */
+
+.official-import-section {
+  scroll-margin-top: 1rem;
+}
+
+.official-import-card {
+  padding: 1.25rem;
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius);
+  background: var(--app-surface-accent);
+}
+
+.official-import-source-card {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  border: 1px solid var(--app-border);
+  border-radius: 0.9rem;
+  background: var(--app-surface);
+}
+
+.official-import-source-kicker {
+  color: var(--bs-primary);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+/* Corrige el pequeño espacio inferior que algunos navegadores dejan en input[type=file]. */
+.official-import-file-input {
+  min-height: 3rem;
+  padding: 0;
+  overflow: hidden;
+  line-height: 3rem;
+}
+
+.official-import-file-input::file-selector-button {
+  height: 3rem;
+  margin: 0 0.85rem 0 0;
+  padding: 0 1rem;
+  border-top: 0;
+  border-bottom: 0;
+  border-left: 0;
+  line-height: 3rem;
+}
+
+.official-import-status {
+  margin-bottom: 0;
+}
+
+.official-import-privacy {
+  padding: 0.75rem 0.9rem;
+  color: var(--app-text-secondary);
+  border: 1px solid var(--app-border);
+  border-radius: 0.75rem;
+  background: var(--app-surface-subtle);
+  font-size: 0.925rem;
+}
+
+.official-import-modal {
+  color: var(--bs-body-color);
+  background: var(--bs-body-bg);
+  border-color: var(--app-border);
+}
+
+.official-import-table-wrapper {
+  max-height: 28rem;
+  overflow: auto;
+  border: 1px solid var(--app-border);
+  border-radius: 0.8rem;
+}
+
+.official-import-preview-table {
+  min-width: 940px;
+}
+
+.official-import-preview-table thead {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: var(--app-surface-accent);
+}
+
+.official-import-preview-table th,
+.official-import-preview-table td {
+  padding: 0.7rem;
+  vertical-align: middle;
+}
+
+.official-import-preview-table .form-check-input {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+html[data-app-theme="contrast"] .official-import-card,
+html[data-app-theme="contrast"] .official-import-source-card,
+html[data-app-theme="contrast"] .official-import-modal,
+html[data-app-theme="contrast"] .official-import-table-wrapper {
+  border-width: 2px;
+  background: var(--app-surface);
+}
+
+@media (max-width: 768px) {
+  .official-import-card {
+    padding: 1rem;
+  }
+
+  .official-import-file-input,
+  .official-import-file-input::file-selector-button {
+    min-height: 2.75rem;
+    line-height: 2.75rem;
   }
 }

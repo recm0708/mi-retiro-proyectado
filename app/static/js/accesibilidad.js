@@ -33,6 +33,18 @@ const AYUDAS_CONTEXTUALES = {
     titulo: "Año inicial del historial",
     texto: "Usa el primer año que deseas registrar dentro de tu historial de cuotas y salarios. Puedes corregirlo si la fecha de ingreso indicada anteriormente no coincide con tu primer registro útil.",
   },
+  usar_detalle_anio_actual: {
+    titulo: "Detalle del año actual",
+    texto: "Actívalo si puedes consultar salarios recientes en tu Ficha Digital. Permite separar salario visible, cuota acreditada y períodos todavía parciales.",
+  },
+  modo_detalle_anio_actual: {
+    titulo: "Forma de captura reciente",
+    texto: "Usa total mensual si conoces el salario completo del mes. Usa captura quincenal si deseas registrar cada quincena por separado y detectar automáticamente meses parciales.",
+  },
+  origen_salario_proyeccion: {
+    titulo: "Base salarial futura",
+    texto: "Puedes indicar un salario manual o utilizar una base derivada de meses completos del año actual. Esta elección solo afecta la proyección futura; no reemplaza el salario histórico acreditado.",
+  },
   monto_salario: {
     titulo: "Salario actual",
     texto: "Ingresa el monto vigente que deseas usar como punto de partida para proyectar salarios futuros. No escribas aquí el acumulado salarial del año.",
@@ -73,6 +85,7 @@ const AYUDAS_CONTEXTUALES = {
 
 const CAPTIONS_TABLAS = [
   ["history-table", "Historial anual de cuotas y salarios reportados"],
+  ["current-year-detail-table", "Detalle mensual o quincenal del año actual"],
   ["projection-table", "Proyección salarial por año"],
   ["timeline-table", "Línea temporal de historial y proyección"],
   ["retirement-table", "Escenarios de retiro comparados"],
