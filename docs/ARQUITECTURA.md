@@ -156,7 +156,7 @@ Paso 1 — Datos personales
         ↓
 Paso 2 — Cuotas
         ↓
-Paso 3 — Historial + salario actual
+Paso 3 — Historial + detalle reciente + base salarial
         ↓
 Paso 4 — Proyección + línea temporal
         ↓
@@ -168,6 +168,8 @@ Resultado + desglose + advertencias + fuente normativa
 ```
 
 Cada paso posterior depende de información validada de los anteriores. Si el Asegurado(a) modifica un dato de origen, los resultados dependientes se invalidan.
+
+El detalle reciente de UX.4.4 se procesa en `app/servicios/detalle_anio_actual.py`. Es una capa de normalización y consistencia, no un motor legal: separa salarios visibles, cuotas acreditadas y períodos parciales; cuando existe coherencia con el Paso 2 puede sincronizar el año actual del historial y aportar una base salarial para proyección.
 
 ## 5. Navegación y estado temporal
 
@@ -202,6 +204,7 @@ GET /salud
 ```text
 POST /api/simulacion/cuotas
 POST /api/simulacion/historial-salarial
+POST /api/simulacion/detalle-anio-actual
 POST /api/simulacion/salario
 POST /api/simulacion/proyeccion-salario
 POST /api/simulacion/linea-tiempo
@@ -339,3 +342,24 @@ El `MutationObserver` transversal observa inserciones y cambios de clase necesar
 ## UX.4.4 — dato derivado de edad en presentación
 
 `app/static/js/linea_tiempo.js` deriva la edad anual desde `simulacion.persona.fecha_nacimiento` únicamente para renderizar las tablas del Paso 4. No se añade un campo nuevo a los modelos ni a los endpoints de cálculo: la fecha de nacimiento continúa siendo la fuente única y la edad se recalcula como `año - año de nacimiento` al construir cada fila.
+
+
+## Referencia PDF personal de Mi Retiro Seguro
+
+`app/servicios/referencia_mi_retiro_seguro.py` constituye una capa de extracción documental, no un motor previsional. El endpoint `POST /api/simulacion/referencia-mi-retiro-seguro` recibe un `UploadFile`, limita tamaño y tipo, lee el PDF en memoria con `pypdf` y devuelve un contrato reducido sin identificadores personales directos.
+
+`app/static/js/referencia_mi_retiro_seguro.js` conserva el resumen extraído únicamente dentro del estado temporal de la pestaña. En Resultados compara esa referencia con `resumen_unificado`, reutilizando la semántica común de pensión mensual o pago único. El motor actual sigue siendo la fuente del resultado de Mi Retiro Proyectado; el PDF solo aporta una fotografía personal externa.
+
+
+## Importación revisable de documentos oficiales
+
+UX.4.4 centraliza en el Paso 1 dos entradas opcionales: `referencia_mi_retiro_seguro.py` y `ficha_digital.py`. Ambos servicios reciben bytes de PDF, extraen texto con `pypdf` y devuelven contratos sin persistir el archivo. La extracción es deliberadamente separada de la escritura del estado de simulación.
+
+`app/static/js/importacion_datos_oficiales.js` mantiene el borrador detectado únicamente en memoria del navegador mientras la vista previa está abierta. La escritura en `sessionStorage` ocurre al confirmar. El comprobante puede prellenar `persona`, partes de `cuotas`, `historial` y `referencia_mi_retiro_seguro`; la Ficha Digital filtra desde el backend y conserva únicamente los salarios del año calendario actual; esos mismos registros pueden pasar al `detalle_anio_actual` después de la confirmación.
+
+El importador no ejecuta motores legales ni valida elegibilidad. Después de la confirmación invalida resultados derivados para obligar a recalcular con los datos revisados. Las filas proyectadas del comprobante se mantienen fuera del historial real por defecto y la presencia de salario en Ficha Digital nunca implica una cuota acreditada.
+
+
+### Alcance temporal y formato de la Ficha Digital
+
+El parser `ficha_digital.py` descarta períodos de años distintos al año calendario actual antes de construir `ResumenFichaDigital`. De esta forma el frontend no recibe ni persiste contexto histórico que no vaya a utilizarse en el detalle mensual. Los campos monetarios editables de las vistas previas reutilizan `moneda.js`: se muestran con coma de miles y dos decimales, se editan sin separadores visuales y se normalizan de nuevo al salir del campo.

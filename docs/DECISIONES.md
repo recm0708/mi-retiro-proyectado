@@ -668,3 +668,63 @@ La asociación de error de campo debe retirarse cuando el valor vuelve a ser vá
 La edad no se incorporará al contrato de los motores ni se persistirá como un dato independiente, porque puede derivarse de la fecha de nacimiento ya capturada.
 
 **Motivo:** los comprobantes oficiales utilizados como referencia presentan Año y Edad de forma conjunta. Mostrar ambos valores facilita contrastar la simulación con el historial de la CSS y evita que el Asegurado(a) tenga que calcular manualmente su edad para cada período. Mantenerla como dato derivado evita duplicidad y riesgo de inconsistencias.
+
+
+## ADR-068 — Separar salario visible, cuota acreditada y períodos parciales del año actual
+
+**Estado:** Aceptada
+
+**Decisión:** el detalle reciente del año actual se modelará separando el salario disponible en la Ficha Digital del estado de acreditación de la cuota. Un mes puede estar **completo**, **parcial** o **sin información**, y puede disponer de salario aunque su cuota todavía no aparezca acreditada. La captura puede hacerse como total mensual o como primera/segunda quincena.
+
+Cuando la cantidad de meses marcados con cuota acreditada coincide con `cuotas_anio_actual` del Paso 2, la suma salarial de esos meses puede sincronizar la fila anual del año actual y el último mes acreditado puede derivarse para el Paso 5. Si no coincide, el sistema muestra la discrepancia y no inventa el mes faltante.
+
+La base de proyección futura permanece conceptualmente separada del salario acreditado. El Asegurado(a) puede usar ingreso manual o una base derivada únicamente de meses completos: último mes completo, promedio de meses completos del año actual o promedio de los últimos tres meses completos.
+
+La interfaz ofrece acceso a Mi Caja Digital y, cuando el documento PDF contiene texto estructurado reconocible, permite analizar la Ficha Digital. El parser nunca aplica datos directamente: la información detectada pasa primero por una vista previa editable y requiere confirmación explícita.
+
+**Motivo:** la información salarial y la acreditación de cuotas pueden actualizarse en momentos distintos; además, una consulta puede capturar solo una quincena de un mes. Mezclar estos estados como si fueran un único dato anual puede alterar el corte real y la base utilizada para proyección.
+
+
+## ADR-069 — La referencia de Mi Retiro Seguro se extrae del PDF personal y no es una constante
+
+**Estado:** Aceptada
+
+**Decisión:** el Asegurado(a) puede cargar opcionalmente un comprobante PDF digital de Mi Retiro Seguro. El backend procesa el archivo únicamente en memoria con `pypdf`, valida que corresponda al formato esperado y extrae solo datos operativos para comparación: fecha del comprobante, sistema elegido, edad de retiro, cuotas históricas, naturaleza y monto estimado de la prestación y filas anuales reconocibles. El contrato excluye deliberadamente nombre, cédula, número de seguro social ni código único del documento.
+
+Ningún monto procedente de los comprobantes usados durante el desarrollo puede quedar hardcodeado en código de producción. El PDF original no se persiste. El análisis por sí solo no modifica la simulación; después de una confirmación explícita, los datos detectados pueden utilizarse para prellenar campos, mientras la referencia personal continúa separada de los motores y de la normativa versionada.
+
+**Motivo:** cada comprobante representa una fotografía personal y temporal distinta. Tratar un caso de validación como valor universal produciría comparaciones falsas y mezclaría evidencia individual con reglas generales.
+
+## ADR-070 — La comparación con un comprobante es contextual y puede no ser directa
+
+**Estado:** Aceptada
+
+**Decisión:** el Paso 6 mostrará la referencia importada y la proyección actual como cifras separadas. La diferencia se calculará únicamente cuando coincidan la persona según los datos mínimos disponibles, el sistema, la edad de retiro y la naturaleza económica de la prestación. Si alguno de esos elementos no es compatible, ambas referencias pueden mostrarse, pero la interfaz debe indicar que no existe una comparación directa.
+
+La fecha de corte, cuotas y supuestos salariales pueden diferir entre el comprobante y la simulación actual; por ello una diferencia válida se interpreta como variación entre fotografías, no como prueba automática de error de una de ellas.
+
+**Motivo:** una referencia personal puede haber sido calculada con información acreditada o supuestos distintos a los actuales. Separar contexto y compatibilidad evita presentar diferencias engañosas.
+
+
+## ADR-071 — Toda importación oficial requiere vista previa editable y confirmación explícita
+
+**Estado:** Aceptada
+
+**Decisión:** los documentos oficiales se analizan en el Paso 1, pero su detección no escribe inmediatamente sobre la simulación. Tanto el comprobante de Mi Retiro Seguro como la Ficha Digital deben abrir una vista previa modal donde el Asegurado(a) pueda revisar y corregir los campos detectados antes de confirmar. Cancelar la vista previa no modifica datos existentes.
+
+El comprobante puede prellenar datos personales, sistema, cuotas y filas anuales seleccionadas. Las filas clasificadas como proyectadas no se importan como historial real por defecto; las filas mixtas requieren decisión explícita. La Ficha Digital puede prellenar salarios mensuales del año actual, pero no infiere cuotas acreditadas: esas marcas deben ser confirmadas por el Asegurado(a). Los registros de años anteriores se descartan en esta importación: la Ficha Digital se usa únicamente para el detalle salarial del año calendario actual.
+
+Los archivos se procesan en memoria y los contratos del backend excluyen identificadores directos que no sean necesarios para la simulación. Los valores confirmados conservan trazabilidad de origen en `sessionStorage`, pero el documento original no se persiste.
+
+**Motivo:** los documentos pueden contener valores parciales, proyectados o actualizados en momentos distintos. Prellenar sin revisión podría convertir una detección imperfecta en un dato operativo y alterar el cálculo. La confirmación explícita mantiene al Asegurado(a) en control y permite corregir errores del parser sin renunciar a la automatización.
+
+
+## ADR-072 — La Ficha Digital se limita al año calendario actual
+
+**Estado:** Aceptada
+
+**Decisión:** la importación de Ficha Digital debe extraer, mostrar y conservar únicamente los salarios cuyo año coincida con el año calendario actual de ejecución. Los meses de años anteriores presentes en la sección “Salarios del último año” no se utilizan como contexto ni se persisten en la simulación.
+
+Las vistas previas monetarias deben utilizar el mismo formato público del resto de la aplicación: coma como separador de miles y dos decimales, manteniendo edición segura mediante la utilidad común `moneda.js`.
+
+**Motivo:** el objetivo de la Ficha Digital dentro de UX.4.4 es completar el detalle reciente del año actual y separar salario disponible, cuota acreditada y períodos parciales. Conservar meses del año anterior añadía información que no alimentaba ninguna decisión posterior y aumentaba el riesgo de confusión. Un formato monetario uniforme reduce errores de revisión antes de confirmar la importación.

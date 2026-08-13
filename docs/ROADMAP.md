@@ -222,6 +222,14 @@ Previsto:
 - [x] remate UX.4.3 con `MutationObserver` idempotente y validación reactiva sin redisparar `invalid`;
 - [x] remate UX.4.3 con mensajes de error inline visibles y sin dependencia del globo nativo del navegador;
 - [x] UX.4.4: columna **Edad** en Historial salarial real y Proyección futura, derivada de la fecha de nacimiento y alineada con la convención de los comprobantes oficiales;
+- [x] UX.4.4: detalle opcional del año actual con captura mensual/quincenal, estado parcial/completo y cuota acreditada por mes;
+- [x] UX.4.4: separación entre salario disponible y salario con cuota acreditada, sincronización condicionada con el historial anual y derivación del último mes acreditado;
+- [x] UX.4.4: bases de proyección manual, último mes completo, promedio del año actual, promedio de los últimos tres meses completos y promedio salarial por cuota acreditada;
+- [x] UX.4.4: importación revisable desde PDF digital de Ficha Digital y comprobante de Mi Retiro Seguro, con vista previa editable y confirmación explícita antes de prellenar el asistente;
+- [x] UX.4.4: Ficha Digital limitada al año calendario actual y formato monetario uniforme con separador de miles y dos decimales en las vistas previas;
+- [ ] UX.4.4+: ampliar importadores a otros formatos exportables de Mi Caja Digital cuando exista un contrato estable y verificable;
+- [x] UX.4.4: importar opcionalmente un comprobante PDF personal de Mi Retiro Seguro y comparar su referencia variable con el resultado actual cuando el contexto sea compatible;
+- [ ] UX.4.4: ampliar en una fase posterior la distinción entre información acreditada y períodos proyectados como cálculo propio, independiente de la referencia PDF;
 - [x] respuesta temporal sin error para `/favicon.ico` mientras no se integran los iconos definitivos;
 - [ ] integrar favicon e iconos definitivos de **Mi Retiro Proyectado** y retirar la respuesta temporal `204`.
 
@@ -229,7 +237,7 @@ Previsto:
 
 Estado técnico actual; la validación manual multidispositivo queda aplazada y las revisiones inmediatas se realizan en laptop/PC:
 
-- **128 pruebas automatizadas** en `OK`;
+- **161 pruebas automatizadas** en `OK`;
 - regresión SEBD real anonimizada;
 - casos sintéticos de Mixto;
 - casos sintéticos SUCGS;

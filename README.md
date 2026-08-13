@@ -45,9 +45,9 @@ La próxima versión `0.1.0` continúa en desarrollo. El asistente de seis pasos
 | UX.4.1 — semántica accesible y ayudas contextuales | Implementada y revisada manualmente en PC/laptop |
 | UX.4.2 — estados activos y selección perceptible | Implementada y revisada manualmente en PC/laptop |
 | UX.4.3 — errores, foco y operación por teclado | Validada manualmente en PC/laptop |
-| UX.4.4 — edad por año en historial y proyección | Implementada técnicamente; pendiente validación manual en PC/laptop |
+| UX.4.4 — edad anual, detalle salarial y referencia PDF personal | Implementada técnicamente; pendiente validación manual completa en PC/laptop |
 
-La suite actual contiene **128 pruebas automatizadas**. UX.3 protege responsive y la separación entre evaluación y último mes acreditado; UX.4.1–UX.4.3 cubren semántica del wizard, ayudas contextuales, validación accesible, estados seleccionados, recuperación de foco y estabilidad del `MutationObserver`; UX.4.4 añade regresiones para que Historial salarial real y Proyección futura muestren la edad correspondiente a cada año sin modificar el motor previsional.
+La suite actual contiene **161 pruebas automatizadas**. UX.3 protege responsive y la separación entre evaluación y último mes acreditado; UX.4.1–UX.4.3 cubren semántica del wizard, ayudas contextuales, validación accesible, estados seleccionados, recuperación de foco y estabilidad del `MutationObserver`; UX.4.4 añade la edad anual, un detalle opcional del año actual que separa salario disponible, cuota acreditada y períodos parciales, bases salariales recientes y una importación revisable de documentos oficiales. La Ficha Digital conserva únicamente salarios del año calendario actual y las vistas previas monetarias usan separador de miles con dos decimales.
 
 ## 3. Qué permite hacer el asistente
 
@@ -56,14 +56,15 @@ El Asegurado(a) puede:
 1. registrar fecha de nacimiento, sexo, fecha de ingreso y sistema previsional;
 2. registrar cuotas acreditadas y expectativas de cotización futura;
 3. construir un historial anual de cuotas y salarios cotizados;
-4. ingresar salario actual y normalizarlo entre periodicidades;
-5. proyectar salario constante, variación porcentual, salario futuro conocido o varios escenarios;
-6. combinar historial real y proyección en una línea temporal trazable;
-7. indicar el último mes con cuotas acreditadas y construir escenarios de retiro por fecha y años adicionales;
-8. seleccionar directamente cualquier paso disponible para revisar datos;
-9. calcular la prestación aplicable según el motor del sistema seleccionado;
-10. ver componentes mensuales, pagos únicos, factores y advertencias cuando correspondan;
-11. comparar combinaciones de fechas de retiro y escenarios salariales contra un escenario base, con diferencias absolutas y porcentuales.
+4. opcionalmente detallar el año actual por total mensual o por quincenas, marcando qué meses ya tienen cuota acreditada;
+5. elegir una base salarial manual o derivada de meses completos recientes y normalizarla para proyección;
+6. proyectar salario constante, variación porcentual, salario futuro conocido o varios escenarios;
+7. combinar historial real y proyección en una línea temporal trazable;
+8. derivar el último mes acreditado desde el detalle reciente cuando las cuotas coinciden, o indicarlo manualmente cuando no existe ese detalle;
+9. seleccionar directamente cualquier paso disponible para revisar datos;
+10. calcular la prestación aplicable según el motor del sistema seleccionado;
+11. ver componentes mensuales, pagos únicos, factores y advertencias cuando correspondan;
+12. comparar combinaciones de fechas de retiro y escenarios salariales contra un escenario base, con diferencias absolutas y porcentuales.
 
 ## 4. Alcance de los motores
 
@@ -190,25 +191,25 @@ La interfaz usa colores semánticos por tema para superficies, textos, estados y
 
 La preferencia se conserva localmente en el navegador y no se mezcla con los datos previsionales de la simulación. La interfaz incluye enlace de salto al contenido, foco visible para teclado, objetivos táctiles con altura mínima, soporte para `prefers-reduced-motion` y un pie de página compacto con autoría, aviso de independencia y acceso a Mi Caja Digital.
 
-UX.4.1 amplía esta base con ayudas contextuales compactas que aparecen al pasar el puntero o al recibir foco —con clic como alternativa táctil—, regiones dinámicas para mensajes de error y estado, marcado `aria-invalid` con foco sobre el primer campo inválido, relaciones semánticas entre pasos y paneles del asistente, captions accesibles en tablas y aviso no visual para enlaces que abren una pestaña nueva. También mejora la selección de escenarios de retiro desde toda la fila y corrige pequeños detalles de jerarquía y alineación. UX.4.2 refuerza estados activos y seleccionados: el número del paso activo usa texto blanco cuando el tema resuelto es Claro y la fila seleccionada de escenarios de retiro combina fondo, contorno, radio y badge diferenciados por tema, además de señal de foco y compatibilidad con colores forzados. UX.4.3 mejora la recuperación ante errores: los controles inválidos reciben un mensaje no visual asociado mediante `aria-errormessage`, los errores dinámicos reciben foco cuando aparecen sin duplicar regiones `assertive`, las advertencias no urgentes pueden usar estado `polite` y el radio de escenarios de retiro admite Enter además de la operación nativa con teclado. El remate de estabilidad evita escrituras redundantes de clases dentro del `MutationObserver` y consulta `ValidityState.valid` sin redisparar eventos `invalid`, previniendo bloqueos o bucles de retroalimentación del frontend. UX.4.4 añade la columna **Edad** en las tablas de Historial salarial real y Proyección futura. La edad mostrada es la que el Asegurado(a) cumple durante el año calendario (`año - año de nacimiento`), siguiendo la convención observada en los comprobantes oficiales usados para validación. La auditoría integral WCAG 2.2 con tecnologías de apoyo continúa dentro de la Fase 8.
+UX.4.1 amplía esta base con ayudas contextuales compactas que aparecen al pasar el puntero o al recibir foco —con clic como alternativa táctil—, regiones dinámicas para mensajes de error y estado, marcado `aria-invalid` con foco sobre el primer campo inválido, relaciones semánticas entre pasos y paneles del asistente, captions accesibles en tablas y aviso no visual para enlaces que abren una pestaña nueva. También mejora la selección de escenarios de retiro desde toda la fila y corrige pequeños detalles de jerarquía y alineación. UX.4.2 refuerza estados activos y seleccionados: el número del paso activo usa texto blanco cuando el tema resuelto es Claro y la fila seleccionada de escenarios de retiro combina fondo, contorno, radio y badge diferenciados por tema, además de señal de foco y compatibilidad con colores forzados. UX.4.3 mejora la recuperación ante errores: los controles inválidos reciben un mensaje inline visible y asociado programáticamente mediante `aria-errormessage`, los errores dinámicos reciben foco cuando aparecen sin duplicar regiones `assertive`, las advertencias no urgentes pueden usar estado `polite` y el radio de escenarios de retiro admite Enter además de la operación nativa con teclado. El remate de estabilidad evita escrituras redundantes de clases dentro del `MutationObserver` y consulta `ValidityState.valid` sin redisparar eventos `invalid`, previniendo bloqueos o bucles de retroalimentación del frontend. UX.4.4 añade la columna **Edad** en las tablas de Historial salarial real y Proyección futura. La edad mostrada es la que el Asegurado(a) cumple durante el año calendario (`año - año de nacimiento`), siguiendo la convención observada en los comprobantes oficiales usados para validación. También incorpora un detalle opcional del año actual: puede capturarse un total mensual o primera/segunda quincena, marcar si la cuota ya está acreditada y distinguir meses completos, parciales o sin información. La suma de meses acreditados sincroniza el salario anual actual únicamente cuando coincide con las cuotas del Paso 2; los salarios visibles sin cuota acreditada permanecen separados. Para proyectar, el Asegurado(a) puede continuar con ingreso manual o usar el último mes completo, el promedio de meses completos del año actual, el promedio de los últimos tres meses completos o el promedio del salario acreditado por cuota del año actual.  UX.4.4 también permite cargar de forma opcional un comprobante PDF de Mi Retiro Seguro: el archivo se procesa en memoria, se omiten nombre, cédula, seguro social ni código único del documento, y se extraen de forma variable el sistema elegido, la edad de retiro, las cuotas históricas y el monto estimado. En el Paso 6 esa referencia personal puede compararse con la proyección actual cuando sistema, persona, edad y naturaleza de la prestación son compatibles; ningún monto de un comprobante concreto queda hardcodeado en la aplicación. La auditoría integral WCAG 2.2 con tecnologías de apoyo continúa dentro de la Fase 8.
 
 ## 9. Instalación
 
-### 8.1. Clonar el repositorio
+### 9.1. Clonar el repositorio
 
 ```powershell
 git clone https://github.com/recm0708/calculadora-pension-css.git
 cd calculadora-pension-css
 ```
 
-### 8.2. Crear y activar el entorno virtual
+### 9.2. Crear y activar el entorno virtual
 
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 ```
 
-### 8.3. Instalar dependencias
+### 9.3. Instalar dependencias
 
 ```powershell
 python -m pip install -r requirements.txt

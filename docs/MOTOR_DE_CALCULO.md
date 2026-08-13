@@ -46,9 +46,21 @@ El historial anual almacena:
 año + cuotas + salario cotizado
 ```
 
-El salario actual se almacena separadamente y se normaliza mediante un valor anual común.
+El salario utilizado como base de proyección se almacena separadamente del historial acreditado y se normaliza mediante un valor anual común.
 
-Las periodicidades soportadas son semanal, quincenal, mensual y anual.
+UX.4.4 permite añadir un detalle opcional del año actual. Ese detalle mantiene separados:
+
+- salario visible/disponible;
+- mes con cuota acreditada;
+- salario parcial o completo.
+
+La suma salarial que sincroniza el año actual del historial incluye únicamente meses marcados con cuota acreditada y solo se aplica cuando su cantidad coincide con el Paso 2. La base futura puede seguir siendo manual o derivarse de meses **completos** recientes; esa elección no convierte un salario no acreditado en histórico.
+
+Las periodicidades manuales soportadas son semanal, quincenal, mensual y anual.
+
+### Importaciones y motores
+
+Los parsers de Comprobante y Ficha Digital son capas de entrada. Analizar un documento no ejecuta ni calibra SEBD, Mixto o SUCGS. Solo después de una confirmación explícita los datos revisados pueden prellenar entradas ordinarias del asistente; los motores reciben esos valores del mismo modo que si hubieran sido introducidos manualmente. Las referencias monetarias del comprobante nunca se usan para forzar coincidencias.
 
 ## 5. Proyección salarial
 
@@ -335,3 +347,10 @@ No contiene fórmulas legales. El comparador y la interfaz pueden consumir este 
 
 6F.1–6F.4 están completados para el alcance actual: comparación, trazabilidad, metodología/fuentes y unificación transversal. Las ampliaciones posteriores deben reutilizar estas capas y no duplicar cálculos previsionales.
 
+
+
+## Referencias importadas y motores
+
+El comprobante de Mi Retiro Seguro no participa en las fórmulas de SEBD, Mixto o SUCGS. Su monto estimado se conserva como una referencia externa variable y se compara únicamente después de que el motor actual produce `resumen_unificado`. Ninguna cifra del PDF se usa para ajustar, forzar o calibrar el resultado de los motores.
+
+El promedio salarial por cuota acreditada del año actual se calcula como `total_salario_acreditado / cuotas_acreditadas_identificadas` y constituye una opción explícita de base futura. No reemplaza el historial acreditado ni se interpreta como regla legal.

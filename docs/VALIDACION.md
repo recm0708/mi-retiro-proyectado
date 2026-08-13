@@ -325,7 +325,7 @@ Se valida que el catálogo incluya SEBD, Mixto y SUCGS, que sus fuentes tengan U
 
 ## Validación 6F.4
 
-La suite queda en **83 pruebas automatizadas**. `tests/test_resultado_unificado.py` valida el contrato transversal en tres situaciones: 
+La suite queda en **83 pruebas automatizadas**. `tests/test_resultado_unificado.py` valida el contrato transversal en tres situaciones:
 
 1. SEBD: una Indemnización por Vejez se normaliza como **pago único** y no como pensión mensual;
 2. Mixto: una decisión pendiente del CAP conserva `DECISION_REQUERIDA` y no finge un cálculo completo;
@@ -447,7 +447,7 @@ Además de las pruebas unitarias, el remate de estabilidad se verifica con un na
 
 ## Validación UX.4.4 — edad anual en historial y proyección
 
-La suite alcanza **128 pruebas automatizadas**. `tests/test_ux44_edad_linea_tiempo.py` protege cuatro condiciones:
+La suite alcanzaba **128 pruebas automatizadas** al incorporar la edad anual. `tests/test_ux44_edad_linea_tiempo.py` protege cuatro condiciones:
 
 1. la edad anual se deriva de `persona.fecha_nacimiento` y del año de cada fila;
 2. Historial salarial real contiene la columna **Edad** entre Año y Cuotas;
@@ -455,3 +455,76 @@ La suite alcanza **128 pruebas automatizadas**. `tests/test_ux44_edad_linea_tiem
 4. la tabla conserva un ancho mínimo legible y `/simulacion` continúa cargando el recurso de línea temporal.
 
 La validación manual debe contrastar al menos los casos de referencia disponibles contra sus comprobantes oficiales. Para el caso femenino de nacimiento en 1969, 1992 debe mostrar 23 y 2027 debe mostrar 58; para el caso masculino de nacimiento en 1966, 1986 debe mostrar 20 y 2028 debe mostrar 62. Los documentos originales con datos personales permanecen fuera del repositorio.
+
+
+## Validación UX.4.4 — detalle salarial del año actual
+
+La suite alcanza **138 pruebas automatizadas**. `tests/test_ux44_detalle_anio_actual.py` añade diez regresiones:
+
+1. salario disponible y salario con cuota acreditada se totalizan por separado;
+2. la captura quincenal deriva correctamente un mes parcial o completo;
+3. las bases sugeridas usan únicamente meses completos;
+4. una diferencia entre cuotas marcadas y Paso 2 se informa sin inventar un mes;
+5. `POST /api/simulacion/detalle-anio-actual` responde con el último mes acreditado normalizado;
+6. la interfaz ofrece captura mensual/quincenal, acceso a Mi Caja Digital y continuidad con la importación confirmada desde el Paso 1;
+7. la base salarial permite último mes completo, promedio del año actual y promedio de tres meses completos;
+8. un detalle coherente sincroniza el salario acreditado con la fila anual actual;
+9. el Paso 5 deriva el último mes acreditado únicamente cuando las cuotas coinciden;
+10. `/simulacion` carga el módulo `detalle_anio_actual.js`.
+
+La validación manual en PC/laptop debe ejecutar al menos dos fotografías del mismo año: una con el último mes **parcial** y otra con ese mismo mes ya **completo**, confirmando que cambia el salario disponible sin inventar cuotas. También debe comprobarse un mes con salario completo pero cuota todavía no acreditada, y verificar que el Paso 5 derive el corte desde la última cuota realmente marcada.
+
+Los valores personales utilizados para esas comprobaciones permanecen fuera del repositorio.
+
+
+## Validación UX.4.4 — referencia PDF personal y comparación dinámica
+
+La suite alcanzaba **147 pruebas automatizadas** antes del cierre del flujo de importación revisable. `tests/test_ux44_referencia_pdf.py` añade nueve regresiones y se amplía la cobertura del detalle salarial:
+
+1. el parser extrae una referencia femenina sintética con monto, cuotas, edad, sistema y filas anuales;
+2. un segundo caso con valores diferentes demuestra que el importador no depende de un monto único;
+3. un documento ajeno al formato esperado se rechaza;
+4. el contrato de salida no contiene nombre, cédula, número de seguro social ni código único del documento;
+5. el endpoint rechaza archivos que no sean PDF;
+6. la interfaz ofrece carga PDF opcional y declara que no existe un monto predeterminado;
+7. la comparación usa el monto extraído, el resultado actual, sistema y edad para decidir si puede calcular una diferencia;
+8. código de producción del importador y la comparación no contiene hardcodeados los montos de los comprobantes de validación;
+9. `pypdf` queda versionado y el botón **Abrir Mi Caja Digital** se centra dentro de su bloque.
+
+Además, el detalle salarial comprueba `promedio_por_cuota_acreditada`; para una fotografía con B/.6,659.50 y cinco cuotas el valor esperado es B/.1,331.90.
+
+En validación manual se deben probar al menos dos comprobantes personales distintos fuera del repositorio. Se confirma que el PDF femenino y el masculino usados durante el desarrollo son reconocidos dinámicamente, pero esos archivos y sus identificadores personales no se versionan. También se verifica que una edad o sistema distinto muestre la referencia sin calcular una diferencia engañosa.
+
+
+## Validación UX.4.4 — importación revisable y Ficha Digital
+
+La suite alcanza **161 pruebas automatizadas**. `tests/test_ux44_importacion_oficial.py` reúne catorce regresiones que verifican:
+
+1. extracción sintética únicamente de los salarios del año calendario actual y detección del período más reciente;
+2. rechazo de texto que no contiene la sección esperada;
+3. rechazo del endpoint cuando el archivo no es PDF;
+4. ubicación de ambos importadores en el Paso 1 y retiro de la carga de comprobante del Paso 3;
+5. presencia de dos vistas previas modales editables y confirmación explícita;
+6. prellenado confirmado de persona, cuotas, historial seleccionado y referencia del comprobante;
+7. exclusión por defecto de filas proyectadas del historial real;
+8. ausencia de inferencia automática de cuotas desde salarios de Ficha Digital y aplicación mensual solo al año actual;
+9. corrección visual del `input[type=file]` y soporte de temas/alto contraste en los modales;
+10. carga del módulo de importación y disponibilidad del endpoint `/api/simulacion/ficha-digital`;
+11. descarte de períodos de años anteriores en el contrato de Ficha Digital;
+12. error explícito cuando el documento no contiene salarios del año calendario actual;
+13. formato monetario de miles y dos decimales en comprobante y Ficha Digital;
+14. eliminación de columnas redundantes de año/aplicación en la vista previa de Ficha Digital.
+
+La validación manual de cierre de UX.4.4 debe comprobar en PC/laptop:
+
+- analizar un comprobante sin que cambie ningún campo antes de confirmar;
+- editar al menos un valor en la vista previa y confirmar que ese valor corregido pase al asistente;
+- comprobar que filas `Proyectado` no estén marcadas para historial real por defecto;
+- cancelar una segunda importación y verificar que el estado anterior permanezca intacto;
+- importar una Ficha Digital digital, corregir el último mes a `Parcial` cuando corresponda y marcar solo cuotas realmente acreditadas;
+- confirmar que la vista previa de Ficha Digital muestre únicamente los salarios del año actual y que no aparezcan períodos de años anteriores;
+- confirmar que salarios y monto de referencia se muestren con coma de miles y dos decimales;
+- revisar Claro, Oscuro y Alto contraste, incluido el selector de archivo sin hueco inferior;
+- volver a ejecutar un caso SEBD completo y luego un documento deliberadamente incompatible para confirmar la comparación `No comparable`.
+
+Los documentos personales reales permanecen fuera del repositorio.

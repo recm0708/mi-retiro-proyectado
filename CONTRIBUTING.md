@@ -221,3 +221,26 @@ No se debe crear `package.json` ni añadir paquetes npm mientras el frontend no 
 ## 16. Datos derivados de presentación
 
 Cuando un valor visible pueda derivarse de un dato fuente ya persistido, evitar duplicarlo en el modelo salvo que el motor lo necesite como contrato independiente. La edad anual de la línea temporal se deriva de la fecha de nacimiento para cada año mostrado y debe mantenerse sincronizada en historial y proyección.
+
+
+## 13. Datos recientes del año actual
+
+Cuando se modifique el flujo de salarios recientes:
+
+- salario visible y cuota acreditada deben seguir siendo conceptos independientes;
+- un período parcial no debe anualizarse ni completarse silenciosamente;
+- cualquier base automática de proyección debe indicar su origen y usar solo meses completos;
+- la sincronización con el historial anual requiere coherencia con las cuotas del Paso 2;
+- los archivos reales de Ficha Digital o historiales personales no se incorporan al repositorio ni a fixtures; las pruebas automatizadas deben usar datos sintéticos.
+- la importación de Ficha Digital solo conserva el año calendario actual; no añadir persistencia de meses de años anteriores sin una necesidad funcional aprobada;
+- los importes editables en vistas previas deben reutilizar la utilidad monetaria común y mostrar miles + dos decimales al perder el foco.
+
+
+## 17. Referencias PDF personales
+
+- Los comprobantes de Mi Retiro Seguro se procesan en memoria y no se guardan en el repositorio ni en el servidor local.
+- El contrato de extracción no debe devolver nombre, cédula, número de seguro social ni código único del documento.
+- Nunca se hardcodeará en código de producción el monto de un comprobante usado para validación; cada referencia debe provenir del PDF cargado.
+- Una cifra importada es una referencia de comparación y no reemplaza los motores previsionales ni las fuentes normativas.
+- La diferencia monetaria solo se presenta cuando sistema, identidad mínima disponible, edad de retiro y naturaleza de la prestación son compatibles.
+- Los tests del importador deben usar texto sintético o fixtures anonimizados; los PDFs personales originales permanecen fuera del repositorio.

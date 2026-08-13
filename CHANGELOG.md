@@ -1,13 +1,23 @@
 # Changelog
 
-### UX.4.4 — edad por año en línea temporal
+### UX.4.4 — edad anual y detalle salarial del año actual
 
 - Historial salarial real incorpora la columna **Edad** inmediatamente después de Año.
 - Proyección futura incorpora la misma columna para mantener continuidad entre datos históricos y estimaciones.
 - La edad se deriva de la fecha de nacimiento ya guardada en el Paso 1 usando la convención de año calendario observada en los comprobantes de validación: `año - año de nacimiento`.
-- La presentación no altera cálculos previsionales, cuotas ni salarios; es información derivada exclusivamente para orientación visual.
+- El Paso 3 incorpora un detalle opcional del año actual con captura por total mensual o primera/segunda quincena.
+- Cada mes diferencia salario disponible, estado completo/parcial y cuota ya acreditada; un salario puede existir sin que su cuota haya sido acreditada todavía.
+- `POST /api/simulacion/detalle-anio-actual` valida el detalle, calcula totales disponibles/acreditados, último mes acreditado y bases salariales sugeridas.
+- Cuando las cuotas marcadas coinciden con el Paso 2, el salario acreditado del detalle sincroniza la fila anual actual y el Paso 5 deriva automáticamente el último mes acreditado.
+- La base de proyección puede continuar siendo manual o derivarse del último mes completo, del promedio de meses completos del año, de los últimos tres meses completos o del promedio salarial por cuota acreditada del año actual.
+- El Paso 3 incorpora acceso contextual a Mi Caja Digital y centra esa acción dentro de su bloque.
+- Se agrega carga opcional del comprobante PDF de Mi Retiro Seguro para extraer una referencia personal variable sin persistir el archivo ni exponer nombre, cédula o seguro social.
+- El Paso 6 compara la referencia importada con la proyección actual únicamente cuando sistema, edad de retiro, persona y naturaleza de prestación son compatibles; si no, muestra ambas cifras sin fabricar una diferencia.
 - La tabla temporal aumenta su ancho mínimo para conservar legibilidad con la columna adicional.
-- La suite alcanza **128 pruebas automatizadas**.
+- La Ficha Digital importada se limita al año calendario actual; los salarios de años anteriores dejan de mostrarse y no se conservan en el estado de simulación.
+- Los importes monetarios editables de las vistas previas usan separador de miles y exactamente dos decimales al mostrarse, reutilizando la utilidad monetaria común.
+- La vista previa de Ficha Digital elimina las columnas redundantes Año y Aplicación porque todos sus registros pertenecen al año actual.
+- La suite alcanza **161 pruebas automatizadas**.
 
 
 Todos los cambios relevantes del proyecto se documentan aquí.

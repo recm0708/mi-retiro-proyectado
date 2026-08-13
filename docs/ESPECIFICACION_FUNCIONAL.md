@@ -330,7 +330,54 @@ La comparación debe reutilizar los motores existentes, conservar un escenario b
 
 **RF-124.** La presentación de errores de campo no debe depender del globo nativo del navegador. La aplicación puede suprimir esa presentación durante `invalid` siempre que conserve la validación, el bloqueo de avance, el foco sobre el primer campo inválido y el mensaje accesible propio.
 
-## 16. Fuera del alcance inmediato
+## 16. UX.4.4 — edad por año en la línea temporal
+
+**RF-125.** Las tablas **Historial salarial real** y **Proyección futura** del Paso 4 deben mostrar una columna **Edad** asociada a cada año calendario presentado.
+
+**RF-126.** La edad anual se deriva de la fecha de nacimiento ya capturada en el Paso 1 mediante la convención `año mostrado - año de nacimiento`, que representa la edad que el Asegurado(a) cumple durante ese año. Si la fecha de nacimiento no está disponible o no es válida, la interfaz debe mostrar una raya en lugar de inventar un valor.
+
+**RF-127.** La edad anual es un dato derivado de presentación y no puede modificar salarios, cuotas, elegibilidad, fechas de retiro ni resultados de los motores previsionales.
+
+
+## 17. UX.4.4 — detalle salarial del año actual
+
+**RF-128.** El Paso 3 debe permitir activar opcionalmente un detalle del año calendario actual sin obligar al Asegurado(a) a abandonar el historial anual existente.
+
+**RF-129.** El detalle debe admitir captura como total mensual o como primera/segunda quincena. En modo mensual el Asegurado(a) identifica si el salario es completo o parcial; en modo quincenal el estado se deriva de las quincenas disponibles.
+
+**RF-130.** Cada mes debe distinguir el salario disponible de la existencia de una cuota ya acreditada. La presencia de salario no puede implicar automáticamente que la cuota esté acreditada.
+
+**RF-131.** El servicio del detalle debe calcular por separado salario total disponible y salario asociado a meses con cuota acreditada, además de identificar el último mes acreditado y el último mes con salario completo.
+
+**RF-132.** La cantidad de meses marcados con cuota acreditada debe contrastarse con `cuotas_anio_actual` del Paso 2. Si no coincide, la aplicación debe mostrar la discrepancia y no derivar silenciosamente un corte de cuotas.
+
+**RF-133.** Cuando las cuotas coincidan, el salario acreditado del detalle puede sincronizar la fila anual actual del historial y el Paso 5 puede derivar automáticamente `ultimo_mes_cuotas`. El campo debe permanecer editable cuando no existe un detalle coherente.
+
+**RF-134.** La base salarial de proyección debe poder ser manual o derivarse mediante: último mes completo, promedio de meses completos del año actual, promedio de los últimos tres meses completos o promedio del salario acreditado por cuota del año actual. Las tres primeras bases usan únicamente meses completos; la última representa explícitamente el cociente entre salario acreditado y cuotas acreditadas y debe identificarse como tal.
+
+**RF-135.** Una base salarial automática modifica exclusivamente la proyección futura y no debe reemplazar salarios históricos acreditados. El Paso 4 debe informar el origen de la base utilizada.
+
+**RF-136.** La interfaz debe enlazar a Mi Caja Digital para consulta manual y puede analizar una Ficha Digital PDF cuando exista texto estructurado reconocible. El análisis no debe aplicar datos hasta que el Asegurado(a) revise y confirme la vista previa.
+
+
+## 18. UX.4.4 — referencia personal desde comprobante PDF
+
+**RF-137.** El Paso 1 debe permitir cargar opcionalmente un comprobante digital PDF de Mi Retiro Seguro sin convertirlo en requisito para completar una simulación.
+
+**RF-138.** El PDF debe procesarse en memoria y el contrato devuelto al frontend no debe incluir nombre, cédula, número de seguro social ni código único del documento.
+
+**RF-139.** La referencia importada debe extraer dinámicamente, cuando estén disponibles, fecha del comprobante, sistema elegido, edad de retiro elegida, cuotas históricas, naturaleza de la prestación, monto estimado y registros anuales. No se permite usar un monto fijo procedente de un caso de validación.
+
+**RF-140.** Un PDF que no corresponda al comprobante compatible, no contenga texto extraíble, esté protegido o exceda los límites del importador debe rechazarse con un mensaje visible sin afectar el resto de la simulación.
+
+**RF-141.** El análisis inicial del comprobante no debe alterar la simulación. Después de una confirmación explícita en la vista previa, los datos detectados pueden prellenar persona, cuotas e historial seleccionado; la referencia monetaria continúa separada de los motores y no puede ajustar sus fórmulas.
+
+**RF-142.** El Paso 6 debe mostrar referencia importada, resultado actual y diferencia solo cuando la comparación sea compatible en persona, sistema, edad de retiro y naturaleza económica de la prestación. Cuando no lo sea, debe conservar ambas cifras y explicar por qué no se calcula una diferencia.
+
+**RF-143.** La interfaz debe explicar que el comprobante y la simulación actual pueden corresponder a fechas de corte o supuestos distintos y que una diferencia no implica por sí misma un error de cálculo.
+
+
+## 19. Fuera del alcance inmediato
 
 Quedan para fases posteriores:
 
@@ -343,10 +390,22 @@ Quedan para fases posteriores:
 - revisión visual cruzada de todos los temas en formularios y resultados extensos.
 
 
-## 16. UX.4.4 — edad por año en la línea temporal
+## 19. UX.4.4 — importación revisable de documentos oficiales
 
-**RF-125.** Las tablas **Historial salarial real** y **Proyección futura** del Paso 4 deben mostrar una columna **Edad** asociada a cada año calendario presentado.
+**RF-144.** El Paso 1 debe concentrar las importaciones opcionales de **Comprobante de Mi Retiro Seguro** y **Ficha Digital**, antes de la captura manual del asistente.
 
-**RF-126.** La edad anual se deriva de la fecha de nacimiento ya capturada en el Paso 1 mediante la convención `año mostrado - año de nacimiento`, que representa la edad que el Asegurado(a) cumple durante ese año. Si la fecha de nacimiento no está disponible o no es válida, la interfaz debe mostrar una raya en lugar de inventar un valor.
+**RF-145.** Analizar un archivo debe abrir una vista previa editable. Ningún dato detectado puede escribirse en la simulación hasta que el Asegurado(a) pulse una acción explícita de confirmación. Cancelar o cerrar la vista previa conserva intactos los datos existentes.
 
-**RF-127.** La edad anual es un dato derivado de presentación y no puede modificar salarios, cuotas, elegibilidad, fechas de retiro ni resultados de los motores previsionales.
+**RF-146.** La vista previa del comprobante debe permitir corregir fecha de nacimiento, sexo, fecha de ingreso, sistema, cuotas históricas, edad de retiro, monto de referencia, fecha del comprobante, prestación y filas anuales detectadas.
+
+**RF-147.** Las filas anuales `HISTORICO` pueden proponerse para el historial real. Las filas `PROYECTADO` deben quedar excluidas por defecto y las filas `HISTORICO_PROYECTADO` no pueden asumirse reales sin decisión explícita.
+
+**RF-148.** La Ficha Digital debe extraer de la sección **Salarios del último año** únicamente los registros que pertenezcan al año calendario actual cuando el PDF contenga texto digital reconocible. La vista previa debe permitir corregir mes, salario y estado completo/parcial.
+
+**RF-149.** La Ficha Digital no puede inferir una cuota acreditada a partir de la presencia de salario. La vista previa debe pedir confirmación independiente de cada cuota y, al confirmar, puede prellenar `cuotas_anio_actual` con la cantidad de meses marcados.
+
+**RF-150.** Los registros de la Ficha Digital del año actual pueden prellenar el detalle mensual del Paso 3. Los registros de años anteriores no se muestran, no se utilizan y no se conservan en el estado importado.
+
+**RF-151.** Los importadores deben procesar archivos en memoria, rechazar formatos no compatibles y evitar persistir documentos o identificadores directos innecesarios. La interfaz debe informar qué datos quedan pendientes para captura manual.
+
+**RF-152.** Todo importe monetario editable en las vistas previas de importación debe mostrarse con separador de miles y exactamente dos decimales, reutilizando la normalización monetaria común de la aplicación.

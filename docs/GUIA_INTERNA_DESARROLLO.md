@@ -187,3 +187,38 @@ La ausencia de Node.js no impide ejecutar FastAPI ni la suite `unittest`. Si en 
 - Si falta una fecha de nacimiento válida, mostrar `—`; no asumir una edad.
 - Mantener la columna inmediatamente después de **Año** en Historial salarial real y Proyección futura.
 - Cualquier cambio futuro de esta convención debe actualizar pruebas, especificación, ADR y validación manual de los casos de referencia.
+
+
+## 17. UX.4.4 — detalle reciente y base salarial
+
+Reglas de implementación:
+
+- no inferir una cuota acreditada únicamente porque exista salario visible en Ficha Digital;
+- conservar `PARCIAL` cuando solo se conoce una parte del mes;
+- en modo quincenal, derivar el estado del mes a partir de las quincenas disponibles;
+- no sincronizar el salario anual actual si la cantidad de meses acreditados no coincide con el Paso 2;
+- las bases automáticas de proyección solo usan meses completos y nunca reescriben salarios históricos de años anteriores;
+- el último mes acreditado del Paso 5 solo puede quedar bloqueado cuando se deriva de un detalle coherente; en ausencia de ese detalle permanece manual;
+- los importadores solo aceptan formatos cuya estructura pueda validarse; para PDF digital se exige texto extraíble y una vista previa editable antes de aplicar;
+- no versionar fichas, comprobantes, capturas ni datos personales usados para validación manual.
+
+
+## UX.4.4 — comprobante personal como referencia dinámica
+
+El importador de Mi Retiro Seguro debe mantenerse independiente de los motores. Los cambios al parser se validan contra texto sintético y, de forma manual, contra documentos personales conservados fuera de Git. La respuesta del endpoint omite identificadores personales directos y el archivo no se escribe en disco.
+
+La comparación de Resultados consume `resumen_unificado`; no debe conocer campos internos exclusivos de SEBD, Mixto o SUCGS. Un caso de validación puede aparecer en tests, pero su monto nunca debe formar parte de JavaScript, plantillas o servicios de producción.
+
+
+## 18. UX.4.4 — importación revisable
+
+- mantener análisis y aplicación como operaciones separadas;
+- no escribir en `sessionStorage` hasta confirmar la vista previa;
+- permitir editar los campos detectados que alimentarán el asistente;
+- excluir filas proyectadas del historial real por defecto;
+- no inferir cuotas acreditadas desde salarios de Ficha Digital;
+- usar `money-input`, `formatearNumeroMonetario()` y `obtenerValorMonetario()` en todo importe editable de vistas previas;
+- si la Ficha Digital contiene meses de dos años, filtrar antes de la vista previa y conservar únicamente el año calendario actual;
+- al confirmar datos que afectan cálculos, invalidar resultados derivados y exigir recálculo;
+- probar parsers con fixtures sintéticos; documentos personales reales se usan solo fuera de Git para validación manual;
+- todo nuevo importador debe declarar límites de tamaño, formato, páginas y tratamiento de documentos sin texto extraíble.
