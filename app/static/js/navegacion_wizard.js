@@ -451,9 +451,9 @@ function ejecutarAccionPrimariaFlotante() {
 
   if (pasoActual === 2) {
     if (simulacion.resumen_cuotas) {
-      document.getElementById(
-        "btn-continuar-paso-3",
-      ).click();
+      if (typeof continuarDesdePasoCuotas === "function") {
+        continuarDesdePasoCuotas();
+      }
     } else {
       document.getElementById(
         "form-cuotas",

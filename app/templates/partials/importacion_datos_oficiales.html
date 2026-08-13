@@ -31,7 +31,7 @@
 
       <div id="acciones-comprobante-importado" class="d-flex flex-wrap gap-2 mt-3 d-none">
         <button type="button" id="btn-revisar-comprobante-importacion" class="btn btn-outline-primary">
-          Revisar datos importados
+          Revisar importación
         </button>
         <button type="button" id="btn-quitar-comprobante-importacion" class="btn btn-outline-secondary">
           Quitar importación
@@ -65,10 +65,10 @@
       <div class="modal-body">
         <div id="advertencias-import-comprobante" class="alert alert-warning d-none" role="status"></div>
 
-        <section class="import-preview-section mb-4" aria-labelledby="preview-identificacion-titulo">
+        <section class="import-preview-section mb-4" data-preview-step="1" aria-labelledby="preview-identificacion-titulo">
           <div class="d-flex flex-column flex-lg-row justify-content-between gap-2 mb-3">
             <div>
-              <h4 class="h6 fw-bold mb-1" id="preview-identificacion-titulo">Identificación personal</h4>
+              <h4 class="h6 fw-bold mb-1" id="preview-identificacion-titulo">Datos personales <span class="text-secondary fw-normal">(Paso 1)</span></h4>
               <p class="text-secondary small mb-0">Los identificadores son opcionales para el cálculo.</p>
             </div>
           </div>
@@ -111,8 +111,8 @@
           </div>
         </section>
 
-        <section class="import-preview-section mb-4" aria-labelledby="preview-previsional-titulo">
-          <h4 class="h6 fw-bold mb-3" id="preview-previsional-titulo">Información previsional básica</h4>
+        <section class="import-preview-section mb-4" data-preview-step="1" aria-labelledby="preview-previsional-titulo">
+          <h4 class="h6 fw-bold mb-3" id="preview-previsional-titulo">Información previsional básica <span class="text-secondary fw-normal">(Paso 1)</span></h4>
           <div class="row g-3">
             <div class="col-md-6 col-xl-3">
               <label for="preview-comprobante-fecha-nacimiento" class="form-label">Fecha de nacimiento</label>
@@ -144,24 +144,49 @@
           </div>
         </section>
 
-        <section class="import-preview-section mb-4" aria-labelledby="preview-otros-titulo">
+        <section class="import-preview-section mb-4" data-preview-step="2" aria-labelledby="preview-cuotas-titulo">
+          <div class="mb-3">
+            <h4 class="h6 fw-bold mb-1" id="preview-cuotas-titulo">Cuotas acreditadas <span class="text-secondary fw-normal">(Paso 2)</span></h4>
+            <p class="text-secondary small mb-0">Revisa las cuotas que el comprobante aporta para esta etapa.</p>
+          </div>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label for="preview-comprobante-cuotas" class="form-label">Total de cuotas acreditadas</label>
+              <input type="number" min="0" step="1" id="preview-comprobante-cuotas" class="form-control">
+              <small id="estado-preview-comprobante-cuotas" class="import-field-status"></small>
+            </div>
+            <div class="col-md-6">
+              <label for="preview-comprobante-cuotas-anio-actual" class="form-label">Cuotas acreditadas este año</label>
+              <input type="number" min="0" max="12" step="1" id="preview-comprobante-cuotas-anio-actual" class="form-control">
+              <small id="estado-preview-comprobante-cuotas-anio-actual" class="import-field-status"></small>
+            </div>
+          </div>
+        </section>
+
+        <section class="import-preview-section mb-4" data-preview-step="5,6" aria-labelledby="preview-retiro-prestacion-titulo">
+          <div class="mb-3">
+            <h4 class="h6 fw-bold mb-1" id="preview-retiro-prestacion-titulo">Referencia de retiro y prestación <span class="text-secondary fw-normal">(Pasos 5 y 6)</span></h4>
+            <p class="text-secondary small mb-0">Datos de referencia del comprobante que se utilizarán más adelante para contextualizar el retiro y los resultados.</p>
+          </div>
+          <div class="row g-3">
+            <div class="col-md-6 col-xl-3"><label for="preview-comprobante-edad-retiro" class="form-label">Edad de retiro</label><input type="number" min="0" max="150" step="1" id="preview-comprobante-edad-retiro" class="form-control"></div>
+            <div class="col-md-6 col-xl-3"><label for="preview-comprobante-monto" class="form-label">Monto estimado</label><div class="input-group"><span class="input-group-text">B/.</span><input type="text" id="preview-comprobante-monto" class="form-control money-input" inputmode="decimal"></div></div>
+            <div class="col-md-6 col-xl-3"><label for="preview-comprobante-fecha" class="form-label">Fecha del comprobante</label><input type="date" id="preview-comprobante-fecha" class="form-control"></div>
+            <div class="col-md-6 col-xl-3"><label for="preview-comprobante-prestacion" class="form-label">Prestación esperada</label><input type="text" id="preview-comprobante-prestacion" class="form-control"></div>
+          </div>
+        </section>
+
+        <section class="import-preview-section mb-4" data-preview-step="3" aria-labelledby="preview-historial-titulo">
           <div class="d-flex flex-column flex-lg-row justify-content-between gap-2 align-items-lg-end mb-2">
             <div>
-              <h4 class="h6 fw-bold mb-1" id="preview-otros-titulo">Datos para pasos posteriores</h4>
-              <p class="text-secondary small mb-0">Se conservan separados para que puedas revisarlos en Cuotas, Historial y Resultados.</p>
+              <h4 class="h6 fw-bold mb-1" id="preview-historial-titulo">Historial anual detectado <span class="text-secondary fw-normal">(Paso 3)</span></h4>
+              <p class="text-secondary small mb-0">Registros anuales de cuotas y salarios identificados en el comprobante.</p>
             </div>
             <span class="badge text-bg-secondary" id="preview-comprobante-registros-contador">0 registros</span>
           </div>
-          <div class="row g-3 mb-3">
-            <div class="col-md-3"><label for="preview-comprobante-cuotas" class="form-label">Cuotas históricas</label><input type="number" min="0" step="1" id="preview-comprobante-cuotas" class="form-control"></div>
-            <div class="col-md-3"><label for="preview-comprobante-edad-retiro" class="form-label">Edad de retiro</label><input type="number" min="0" max="150" step="1" id="preview-comprobante-edad-retiro" class="form-control"></div>
-            <div class="col-md-3"><label for="preview-comprobante-monto" class="form-label">Monto estimado</label><div class="input-group"><span class="input-group-text">B/.</span><input type="text" id="preview-comprobante-monto" class="form-control money-input" inputmode="decimal"></div></div>
-            <div class="col-md-3"><label for="preview-comprobante-fecha" class="form-label">Fecha del comprobante</label><input type="date" id="preview-comprobante-fecha" class="form-control"></div>
-            <div class="col-12"><label for="preview-comprobante-prestacion" class="form-label">Prestación esperada</label><input type="text" id="preview-comprobante-prestacion" class="form-control"></div>
-          </div>
           <div class="official-import-table-wrapper">
             <table class="table align-middle mb-0 official-import-preview-table">
-              <caption class="visually-hidden">Datos anuales detectados en el comprobante y selección de filas que se aplicarán al historial real.</caption>
+              <caption class="visually-hidden">Historial anual detectado en el comprobante y selección de filas que se aplicarán al historial real del Paso 3.</caption>
               <thead><tr><th scope="col">Pasar al historial</th><th scope="col">Año</th><th scope="col">Edad</th><th scope="col">Tipo</th><th scope="col">Salario anual</th><th scope="col">Cuotas</th></tr></thead>
               <tbody id="preview-comprobante-registros"></tbody>
             </table>

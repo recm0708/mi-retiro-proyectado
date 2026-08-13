@@ -263,360 +263,219 @@ Nueva simulación | {{ app_name }}
             <div class="card-body p-4 p-lg-5">
 
               <div class="mb-4">
-
-                <span class="text-primary fw-semibold">
-                  Paso 2 de 6
-                </span>
-
-                <h2 class="h4 fw-bold mt-2 mb-2">
-                  Cuotas acreditadas y proyección
+                <h2 class="h4 fw-bold mb-2">
+                  Cuotas acreditadas y cotización futura
                 </h2>
-
                 <p class="text-secondary mb-0">
-                  Ingresa las cuotas que ya aparecen acreditadas
-                  por la CSS y cómo esperas continuar cotizando.
+                  Revisa las cuotas que ya están acreditadas y define cómo esperas continuar cotizando.
                 </p>
-
               </div>
-
 
               <form id="form-cuotas">
 
-                <div class="row g-4">
+                <section class="quota-form-section" aria-labelledby="cuotas-acreditadas-titulo">
+                  <div class="quota-section-heading">
+                    <div>
+                      <h3 id="cuotas-acreditadas-titulo" class="h5 fw-bold mb-1">
+                        Cuotas acreditadas
+                      </h3>
+                      <p class="text-secondary mb-1">
+                        Son las cuotas que ya figuran acreditadas por la CSS.
+                      </p>
+                      <p class="required-fields-note mb-0">
+                        <span class="required-marker" aria-hidden="true">*</span> Campo obligatorio
+                      </p>
+                    </div>
+                  </div>
 
-                  <div class="col-md-6">
-
-                    <label
-                      for="cuotas_totales"
-                      class="form-label fw-semibold"
-                    >
-                      Total de cuotas acreditadas
-                    </label>
-
-                    <input
-                      type="number"
-                      min="0"
-                      step="1"
-                      class="form-control form-control-lg"
-                      id="cuotas_totales"
-                      required
-                    >
-
-                    <div class="form-text">
-                      Utiliza el total que aparece actualmente
-                      en tu historial de la CSS.
+                  <div class="row g-4 mt-1">
+                    <div class="col-md-6">
+                      <label for="cuotas_totales" class="form-label fw-semibold">
+                        Total de cuotas acreditadas
+                        <span class="required-marker" aria-hidden="true">*</span>
+                        <span class="visually-hidden"> (obligatorio)</span>
+                      </label>
+                      <input
+                        type="number"
+                        min="0"
+                        step="1"
+                        class="form-control form-control-lg"
+                        id="cuotas_totales"
+                        placeholder="Ej.: 281"
+                        required
+                      >
+                      <div class="form-text">
+                        Utiliza el total que aparece actualmente en tu historial de la CSS.
+                      </div>
+                      <div id="origen-cuotas-totales" class="field-origin-note d-none"></div>
                     </div>
 
+                    <div class="col-md-6">
+                      <label for="cuotas_anio_actual" class="form-label fw-semibold">
+                        Cuotas acreditadas este año
+                        <span class="required-marker" aria-hidden="true">*</span>
+                        <span class="visually-hidden"> (obligatorio)</span>
+                      </label>
+                      <input
+                        type="number"
+                        min="0"
+                        max="12"
+                        step="1"
+                        class="form-control form-control-lg"
+                        id="cuotas_anio_actual"
+                        placeholder="Ej.: 5"
+                        required
+                      >
+                      <div class="form-text">
+                        Estas cuotas ya están incluidas dentro del total anterior.
+                      </div>
+                      <div id="origen-cuotas-anio-actual" class="field-origin-note d-none"></div>
+                    </div>
                   </div>
 
+                  <div id="cuotas-importadas-acciones" class="imported-data-actions d-none mt-3">
+                    <span class="imported-data-status-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 2.5 2.5L16 9"></path></svg></span>
+                    <span id="cuotas-importadas-estado">Los datos confirmados desde la importación se mantienen sin cambios en este paso.</span>
+                    <button type="button" id="btn-revisar-cuotas-importadas" class="btn btn-sm btn-outline-primary">
+                      Revisar importación
+                    </button>
+                  </div>
+                </section>
 
-                  <div class="col-md-6">
+                <hr class="my-5">
 
-                    <label
-                      for="cuotas_anio_actual"
-                      class="form-label fw-semibold"
-                    >
-                      Cuotas acreditadas este año
-                    </label>
+                <section class="quota-form-section" aria-labelledby="cotizacion-futura-titulo">
+                  <div class="quota-section-heading">
+                    <div>
+                      <h3 id="cotizacion-futura-titulo" class="h5 fw-bold mb-1">
+                        Cotización futura
+                      </h3>
+                      <p class="text-secondary mb-1">
+                        Estos valores son supuestos y no cuotas ya acreditadas.
+                      </p>
+                      <p class="required-fields-note mb-0">
+                        <span class="required-marker" aria-hidden="true">*</span> Campo obligatorio
+                      </p>
+                    </div>
+                  </div>
 
-                    <input
-                      type="number"
-                      min="0"
-                      max="12"
-                      step="1"
-                      class="form-control form-control-lg"
-                      id="cuotas_anio_actual"
-                      required
-                    >
-
-                    <div class="form-text">
-                      Estas cuotas ya están incluidas dentro
-                      del total anterior.
+                  <div class="row g-4 mt-1">
+                    <div class="col-md-6">
+                      <label for="continua_cotizando" class="form-label fw-semibold">
+                        ¿Continuarás cotizando?
+                        <span class="required-marker" aria-hidden="true">*</span>
+                        <span class="visually-hidden"> (obligatorio)</span>
+                      </label>
+                      <select class="form-select form-select-lg" id="continua_cotizando" required>
+                        <option value="true" selected>Sí</option>
+                        <option value="false">No</option>
+                      </select>
                     </div>
 
-                  </div>
-
-
-                  <div class="col-md-6">
-
-                    <label
-                      for="continua_cotizando"
-                      class="form-label fw-semibold"
-                    >
-                      ¿Continuarás cotizando?
-                    </label>
-
-                    <select
-                      class="form-select form-select-lg"
-                      id="continua_cotizando"
-                      required
-                    >
-
-                      <option value="true" selected>
-                        Sí
-                      </option>
-
-                      <option value="false">
-                        No
-                      </option>
-
-                    </select>
-
-                  </div>
-
-
-                  <div class="col-md-6">
-
-                    <label
-                      for="cuotas_esperadas_cierre_anio"
-                      class="form-label fw-semibold"
-                    >
-                      Cuotas esperadas al cerrar este año
-                    </label>
-
-                    <input
-                      type="number"
-                      min="0"
-                      max="12"
-                      step="1"
-                      value="12"
-                      class="form-control form-control-lg"
-                      id="cuotas_esperadas_cierre_anio"
-                      required
-                    >
-
-                  </div>
-
-
-                  <div class="col-md-6">
-
-                    <label
-                      for="cuotas_esperadas_por_anio"
-                      class="form-label fw-semibold"
-                    >
-                      Cuotas esperadas por año futuro
-                    </label>
-
-                    <input
-                      type="number"
-                      min="0"
-                      max="12"
-                      step="1"
-                      value="12"
-                      class="form-control form-control-lg"
-                      id="cuotas_esperadas_por_anio"
-                      required
-                    >
-
-                    <div class="form-text">
-                      Normalmente será 12 si esperas cotizar
-                      durante todos los meses del año.
+                    <div class="col-md-6">
+                      <label for="cuotas_esperadas_cierre_anio" class="form-label fw-semibold">
+                        Cuotas esperadas al cerrar este año
+                        <span id="required-cierre-anio" class="required-marker" aria-hidden="true">*</span>
+                        <span class="visually-hidden"> (obligatorio cuando continúas cotizando)</span>
+                      </label>
+                      <input
+                        type="number"
+                        min="0"
+                        max="12"
+                        step="1"
+                        value="12"
+                        class="form-control form-control-lg"
+                        id="cuotas_esperadas_cierre_anio"
+                        placeholder="Ej.: 12"
+                        required
+                      >
                     </div>
 
+                    <div class="col-md-6">
+                      <label for="cuotas_esperadas_por_anio" class="form-label fw-semibold">
+                        Cuotas esperadas por año futuro
+                        <span id="required-cuotas-futuras" class="required-marker" aria-hidden="true">*</span>
+                        <span class="visually-hidden"> (obligatorio cuando continúas cotizando)</span>
+                      </label>
+                      <input
+                        type="number"
+                        min="0"
+                        max="12"
+                        step="1"
+                        value="12"
+                        class="form-control form-control-lg"
+                        id="cuotas_esperadas_por_anio"
+                        placeholder="Ej.: 12"
+                        required
+                      >
+                    </div>
                   </div>
 
-                </div>
+                  <div id="cuotas-sin-continuidad" class="form-state-note d-none mt-3" role="status">
+                    No se proyectarán nuevas cuotas porque indicaste que no continuarás cotizando.
+                  </div>
+                </section>
 
-
-                <div
-                  id="error-cuotas"
-                  class="alert alert-danger mt-4 d-none"
-                  role="alert"
-                ></div>
-
-
-                <div class="info-box mt-4">
-
-                  <strong>
-                    Las cuotas futuras son una proyección.
-                  </strong>
-
-                  <p class="mb-0 mt-1">
-                    La aplicación mantendrá separadas las cuotas
-                    que ya están acreditadas de las que todavía
-                    se espera aportar.
-                  </p>
-
-                </div>
-
-
-                <div
-                  class="d-flex justify-content-between
-                         align-items-center mt-5 wizard-actions"
-                >
-
-                  <button
-                    type="button"
-                    id="btn-volver-paso-1"
-                    class="btn btn-outline-secondary"
-                  >
-                    Anterior
-                  </button>
-
-                  <button
-                    type="submit"
-                    class="btn btn-primary px-4"
-                  >
-                    Analizar cuotas
-                  </button>
-
-                </div>
+                <div id="error-cuotas" class="alert alert-danger mt-4 d-none" role="alert"></div>
 
               </form>
-
 
               <!-- ==========================================
                    RESULTADO DE CUOTAS
                    ========================================== -->
 
-              <div
-                id="resultado-cuotas"
-                class="resultado-cuotas mt-5 d-none"
-              >
+              <div id="resultado-cuotas" class="resultado-cuotas mt-5 d-none">
 
                 <hr class="mb-4">
 
-
                 <div class="mb-4">
-
                   <h3 class="h5 fw-bold mb-2">
-                    Resumen preliminar
+                    Situación de tus cuotas
                   </h3>
-
                   <p class="text-secondary mb-0">
-                    Esta información todavía no representa
-                    el cálculo de una pensión.
+                    Esta información todavía no representa el cálculo de una pensión.
                   </p>
-
                 </div>
-
 
                 <div class="row g-3">
-
                   <div class="col-md-6">
-
                     <div class="summary-card">
-
-                      <span class="summary-label">
-                        Cuotas acreditadas
-                      </span>
-
-                      <strong
-                        id="resultado-cuotas-reales"
-                        class="summary-value"
-                      >
-                        0
-                      </strong>
-
-                      <small>
-                        Históricas reales
-                      </small>
-
+                      <span class="summary-label">Cuotas acreditadas</span>
+                      <strong id="resultado-cuotas-reales" class="summary-value">0</strong>
+                      <small>Ya acreditadas por la CSS</small>
                     </div>
-
                   </div>
 
-
                   <div class="col-md-6">
-
                     <div class="summary-card">
-
-                      <span class="summary-label">
-                        Proyección al cierre del año
-                      </span>
-
-                      <strong
-                        id="resultado-cuotas-cierre"
-                        class="summary-value"
-                      >
-                        0
-                      </strong>
-
-                      <small>
-                        Incluye únicamente cuotas futuras previstas
-                      </small>
-
+                      <span class="summary-label">Estimación al cierre del año</span>
+                      <strong id="resultado-cuotas-cierre" class="summary-value">0</strong>
+                      <small>Incluye las cuotas futuras que indicaste</small>
                     </div>
-
                   </div>
 
-
                   <div class="col-md-6">
-
                     <div class="summary-card">
-
-                      <span class="summary-label">
-                        Faltantes para 180
-                      </span>
-
-                      <strong
-                        id="resultado-faltantes-180"
-                        class="summary-value"
-                      >
-                        0
-                      </strong>
-
-                      <small id="resultado-tiempo-180">
-                        —
-                      </small>
-
+                      <span class="summary-label">Faltantes para 180</span>
+                      <strong id="resultado-faltantes-180" class="summary-value">0</strong>
+                      <small id="resultado-tiempo-180">—</small>
                     </div>
-
                   </div>
 
-
                   <div class="col-md-6">
-
                     <div class="summary-card">
-
-                      <span class="summary-label">
-                        Faltantes para 240
-                      </span>
-
-                      <strong
-                        id="resultado-faltantes-240"
-                        class="summary-value"
-                      >
-                        0
-                      </strong>
-
-                      <small id="resultado-tiempo-240">
-                        —
-                      </small>
-
+                      <span class="summary-label">Faltantes para 240</span>
+                      <strong id="resultado-faltantes-240" class="summary-value">0</strong>
+                      <small id="resultado-tiempo-240">—</small>
                     </div>
-
                   </div>
-
                 </div>
-
 
                 <div class="alert alert-light border mt-4 mb-0">
-
-                  <strong>
-                    Próximo paso: historial salarial.
-                  </strong>
-
+                  <strong>Próximo paso: historial salarial.</strong>
                   <div class="text-secondary mt-1">
-                    Incorporaremos el historial de cuotas y salarios reales
-                    antes de definir el salario actual para proyección.
+                    Revisaremos el historial de cuotas y salarios antes de construir las proyecciones futuras.
                   </div>
-
-                </div>
-
-
-                <!-- ESTE ES EL BOTÓN QUE TE FALTABA -->
-
-                <div class="d-flex justify-content-end mt-4 wizard-actions-end">
-
-                  <button
-                    type="button"
-                    id="btn-continuar-paso-3"
-                    class="btn btn-primary px-4"
-                  >
-                    Continuar al historial
-                  </button>
-
                 </div>
 
               </div>

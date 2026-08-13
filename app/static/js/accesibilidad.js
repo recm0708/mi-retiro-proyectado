@@ -96,6 +96,70 @@ const CAPTIONS_TABLAS = [
 let ultimoPanelWizardVisible = null;
 let focoInvalidoProgramado = false;
 
+
+// UX.4.6c R2: pistas breves dentro de campos editables. El placeholder
+// desaparece de forma nativa cuando existe un valor manual o importado.
+const PISTAS_CAMPOS = {
+  primer_nombre: "Ej.: Anabel",
+  segundo_nombre: "Ej.: Estela",
+  primer_apellido: "Ej.: Miranda",
+  segundo_apellido: "Ej.: Madrid",
+  apellido_casada: "Ej.: Cañizares",
+  cedula: "Ej.: 4-710-1295",
+  numero_seguro_social: "Ingresa el número de Seguro Social",
+  cuotas_totales: "Ej.: 281",
+  cuotas_anio_actual: "Ej.: 5",
+  cuotas_esperadas_cierre_anio: "Ej.: 12",
+  cuotas_esperadas_por_anio: "Ej.: 12",
+  historial_anio_inicio: "Ej.: 1992",
+  historial_anio_fin: "Ej.: 2026",
+  monto_salario: "Ej.: 1480.00",
+  proyeccion_anio_inicio: "Ej.: 2026",
+  proyeccion_anio_fin: "Ej.: 2031",
+  porcentaje_anual: "Ej.: 2.00",
+  salario_mensual_futuro: "Ej.: 1650.00",
+  anio_salario_futuro: "Ej.: 2030",
+  escenarios_porcentajes: "Ej.: 0, 1, 2, 3",
+};
+
+function limpiarTextoEtiquetaParaPista(texto) {
+  return (texto || "")
+    .replace(/\*/g, "")
+    .replace(/\(obligatorio(?:[^)]*)?\)/gi, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function aplicarPistaAControl(control) {
+  if (!control || !control.id || control.placeholder) {
+    return;
+  }
+
+  const tipo = (control.getAttribute("type") || "text").toLowerCase();
+  if (!["text", "number", "email", "tel", "search", "url"].includes(tipo)) {
+    return;
+  }
+
+  const pistaDefinida = PISTAS_CAMPOS[control.id];
+  if (pistaDefinida) {
+    control.placeholder = pistaDefinida;
+    return;
+  }
+
+  const etiqueta = document.querySelector(`label[for="${control.id}"]`);
+  const textoReferencia = etiqueta?.textContent || control.getAttribute("aria-label") || "";
+  const textoEtiqueta = limpiarTextoEtiquetaParaPista(textoReferencia);
+  if (textoEtiqueta) {
+    control.placeholder = `Ingresa ${textoEtiqueta.toLocaleLowerCase("es")}`;
+  }
+}
+
+function prepararPistasCampos() {
+  document
+    .querySelectorAll("input, textarea")
+    .forEach(aplicarPistaAControl);
+}
+
 function obtenerEtiquetaControl(control) {
   const etiqueta = document.querySelector(`label[for="${control.id}"]`);
   if (etiqueta) {
@@ -334,7 +398,7 @@ function prepararAyudasContextuales() {
     const boton = document.createElement("button");
     boton.type = "button";
     boton.className = "context-help-trigger";
-    boton.innerHTML = `<span class="context-help-icon" aria-hidden="true">i</span><span aria-hidden="true">Info</span>`;
+    boton.innerHTML = `<span class="context-help-icon" aria-hidden="true">i</span>`;
     boton.setAttribute("aria-label", `Más información sobre ${ayuda.titulo}`);
     boton.setAttribute("aria-expanded", "false");
     boton.setAttribute("aria-controls", `ayuda-contextual-${idControl}`);
@@ -581,6 +645,7 @@ function prepararEnlacesExternos() {
 }
 
 function sincronizarAccesibilidadDinamica() {
+  prepararPistasCampos();
   vincularAyudasDeFormulario();
   prepararAyudasContextuales();
   prepararMensajesDinamicos();

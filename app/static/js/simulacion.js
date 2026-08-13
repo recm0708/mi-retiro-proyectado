@@ -47,6 +47,7 @@ function crearSimulacionVacia() {
     origen_persona: "MANUAL",
 
     cuotas: {},
+    origen_campos_cuotas: {},
     resumen_cuotas: null,
 
     modo_historial: "MANUAL",
@@ -129,6 +130,9 @@ function obtenerSimulacion() {
 
       cuotas:
         simulacion.cuotas || {},
+
+      origen_campos_cuotas:
+        simulacion.origen_campos_cuotas || {},
 
       modo_historial:
         simulacion.modo_historial || "MANUAL",
@@ -274,7 +278,7 @@ function guardarDatosPersonales() {
   if (!fechaNacimiento || !sexo || !sistema) {
     if (error) {
       error.textContent = modoDatos === "MI_RETIRO_SEGURO"
-        ? "El PDF no completó toda la información previsional obligatoria. Abre Revisar datos importados, pulsa Editar campos y completa fecha de nacimiento, sexo y sistema previsional."
+        ? "La importación no completó toda la información previsional obligatoria. Abre Revisar importación, pulsa Editar campos y completa fecha de nacimiento, sexo y sistema previsional."
         : "Completa fecha de nacimiento, sexo y sistema previsional antes de continuar.";
       error.classList.remove("d-none");
     }
@@ -414,20 +418,37 @@ function actualizarEstadoContinuidad() {
     "cuotas_esperadas_por_anio",
   );
 
+  const marcadorCierre = document.getElementById(
+    "required-cierre-anio",
+  );
+  const marcadorFuturas = document.getElementById(
+    "required-cuotas-futuras",
+  );
+  const notaSinContinuidad = document.getElementById(
+    "cuotas-sin-continuidad",
+  );
+
   if (continua === "false") {
-    // Si no continuará cotizando, las cuotas futuras se anulan.
     cierre.value = cuotasActuales;
     futuras.value = 0;
 
     cierre.disabled = true;
     futuras.disabled = true;
+    cierre.required = false;
+    futuras.required = false;
+    marcadorCierre?.classList.add("d-none");
+    marcadorFuturas?.classList.add("d-none");
+    notaSinContinuidad?.classList.remove("d-none");
 
   } else {
     cierre.disabled = false;
     futuras.disabled = false;
+    cierre.required = true;
+    futuras.required = true;
+    marcadorCierre?.classList.remove("d-none");
+    marcadorFuturas?.classList.remove("d-none");
+    notaSinContinuidad?.classList.add("d-none");
 
-    // Si todavía no existe un valor válido, se utiliza
-    // como referencia un máximo de doce cuotas por año.
     if (
       !cierre.value ||
       Number(cierre.value) < cuotasActuales
@@ -443,6 +464,116 @@ function actualizarEstadoContinuidad() {
     }
   }
 }
+
+
+/**
+ * Refleja en el Paso 2 qué valores fueron confirmados desde un PDF.
+ *
+ * Los campos detectados quedan de solo lectura. Los campos que el documento
+ * no aportó permanecen editables para que el Asegurado(a) los complete.
+ *
+ * @param {Object} simulacion Estado actual de la simulación.
+ */
+function actualizarOrigenCamposCuotas(simulacion) {
+  const importacionConfirmada = Boolean(
+    simulacion.importacion_comprobante_confirmada,
+  );
+  const origenes = {
+    ...(simulacion.origen_campos_cuotas || {}),
+  };
+
+  // Compatibilidad con simulaciones creadas antes de UX.4.6c: cuando ya
+  // existe una referencia confirmada, se reconstruye el origen de los
+  // campos que el propio comprobante sí aportó.
+  if (importacionConfirmada && simulacion.referencia_mi_retiro_seguro) {
+    const referencia = simulacion.referencia_mi_retiro_seguro;
+
+    if (
+      referencia.cuotas_historicas != null
+      && !origenes.cuotas_totales
+    ) {
+      origenes.cuotas_totales = "MI_RETIRO_SEGURO";
+    }
+
+    const registroActual = (referencia.registros || []).find(
+      (registro) => (
+        Number(registro.anio) === ANIO_ACTUAL
+        && registro.tipo !== "PROYECTADO"
+      ),
+    );
+
+    if (registroActual && !origenes.cuotas_anio_actual) {
+      origenes.cuotas_anio_actual = "MI_RETIRO_SEGURO";
+    }
+  }
+
+  const campos = [
+    {
+      id: "cuotas_totales",
+      notaId: "origen-cuotas-totales",
+    },
+    {
+      id: "cuotas_anio_actual",
+      notaId: "origen-cuotas-anio-actual",
+    },
+  ];
+
+  let hayImportados = false;
+
+  campos.forEach(({ id, notaId }) => {
+    const control = document.getElementById(id);
+    const nota = document.getElementById(notaId);
+    const origen = origenes[id] || null;
+    const importado = Boolean(
+      origen && origen.startsWith("MI_RETIRO_SEGURO"),
+    );
+
+    if (!control || !nota) {
+      return;
+    }
+
+    control.readOnly = importado;
+    control.classList.toggle("field-imported-readonly", importado);
+
+    if (importado) {
+      hayImportados = true;
+      nota.textContent = "Dato completado desde la importación.";
+      nota.className = "field-origin-note imported";
+    } else if (importacionConfirmada) {
+      nota.textContent = "Este dato no estaba disponible en el comprobante. Complétalo manualmente.";
+      nota.className = "field-origin-note missing";
+    } else {
+      nota.textContent = "";
+      nota.className = "field-origin-note d-none";
+    }
+  });
+
+  const acciones = document.getElementById(
+    "cuotas-importadas-acciones",
+  );
+
+  if (acciones) {
+    acciones.classList.toggle(
+      "d-none",
+      !importacionConfirmada,
+    );
+    acciones.classList.toggle(
+      "has-locked-fields",
+      hayImportados,
+    );
+
+    const estado = document.getElementById(
+      "cuotas-importadas-estado",
+    );
+
+    if (estado) {
+      estado.textContent = hayImportados
+        ? "Los datos confirmados desde la importación se mantienen sin cambios en este paso."
+        : "La importación no aportó estas cuotas. Completa manualmente los campos pendientes.";
+    }
+  }
+}
+
 
 
 /**
@@ -504,6 +635,7 @@ function restaurarDatosCuotas(simulacion) {
   }
 
   actualizarEstadoContinuidad();
+  actualizarOrigenCamposCuotas(simulacion);
 
   if (simulacion.resumen_cuotas) {
     mostrarResumenCuotas(
@@ -692,6 +824,29 @@ async function analizarCuotas(evento) {
       "No fue posible comunicarse con el servidor.",
     );
   }
+}
+
+
+/**
+ * Continúa al historial cuando el análisis de cuotas ya está disponible.
+ */
+function continuarDesdePasoCuotas() {
+  const simulacionActual = obtenerSimulacion();
+
+  if (!simulacionActual.resumen_cuotas) {
+    mostrarErrorCuotas(
+      "Primero debes analizar las cuotas.",
+    );
+    return;
+  }
+
+  if (
+    typeof sincronizarHistorialConDatosActuales === "function"
+  ) {
+    sincronizarHistorialConDatosActuales();
+  }
+
+  mostrarPaso(3);
 }
 
 
@@ -2058,45 +2213,16 @@ document.addEventListener(
 
 
     document.getElementById(
-      "btn-volver-paso-1",
-    ).addEventListener(
+      "btn-revisar-cuotas-importadas",
+    )?.addEventListener(
       "click",
       () => {
-        mostrarPaso(1);
+        if (typeof revisarComprobanteImportado === "function") {
+          revisarComprobanteImportado(2);
+        }
       },
     );
 
-
-    document.getElementById(
-      "btn-continuar-paso-3",
-    ).addEventListener(
-      "click",
-      () => {
-        const simulacionActual =
-          obtenerSimulacion();
-
-        if (
-          !simulacionActual
-            .resumen_cuotas
-        ) {
-          mostrarErrorCuotas(
-            "Primero debes analizar las cuotas.",
-          );
-
-          return;
-        }
-
-        // El historial se vuelve a sincronizar aquí porque la fecha
-        // de ingreso y las cuotas se introducen después de cargar la página.
-        if (
-          typeof sincronizarHistorialConDatosActuales === "function"
-        ) {
-          sincronizarHistorialConDatosActuales();
-        }
-
-        mostrarPaso(3);
-      },
-    );
 
 
     document.getElementById(

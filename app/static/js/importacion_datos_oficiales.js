@@ -8,6 +8,7 @@
 let borradorImportacionComprobante = null;
 let edicionPreviewComprobanteHabilitada = false;
 let previewComprobanteFueEditado = false;
+let pasoVistaPreviewComprobante = 1;
 let borradorImportacionFichaDigital = null;
 
 const MESES_IMPORTACION = [
@@ -18,6 +19,19 @@ const MESES_IMPORTACION = [
 
 function obtenerModalBootstrap(id) {
   const elemento = document.getElementById(id);
+
+  if (!elemento) {
+    return null;
+  }
+
+  // Los modales deben vivir fuera de los paneles del wizard. Si el
+  // componente fue renderizado dentro de un paso que luego queda oculto,
+  // Bootstrap puede mostrar únicamente el backdrop. Se mueve una sola vez
+  // al body para que pueda revisarse desde Cuotas y pasos posteriores.
+  if (elemento.parentElement !== document.body) {
+    document.body.appendChild(elemento);
+  }
+
   return bootstrap.Modal.getOrCreateInstance(elemento);
 }
 
@@ -221,6 +235,7 @@ function alternarEdicionPreviewComprobante() {
 function crearFilaPreviewComprobante(registro) {
   const fila = document.createElement("tr");
   fila.dataset.tipoOriginal = registro.tipo;
+  fila.dataset.anio = String(registro.anio);
 
   const aplicar = document.createElement("input");
   aplicar.type = "checkbox";
@@ -292,7 +307,64 @@ function crearFilaPreviewComprobante(registro) {
 }
 
 
-function renderizarPreviewComprobante(referencia) {
+function configurarVistaPreviewComprobante(numeroPaso = 1) {
+  pasoVistaPreviewComprobante = Number(numeroPaso) || 1;
+
+  document
+    .querySelectorAll("#modal-import-comprobante [data-preview-step]")
+    .forEach((seccion) => {
+      const pasos = (seccion.dataset.previewStep || "")
+        .split(",")
+        .map((valor) => Number(valor.trim()))
+        .filter(Boolean);
+
+      const visible = (
+        pasoVistaPreviewComprobante === 1
+        || pasos.includes(pasoVistaPreviewComprobante)
+      );
+
+      seccion.classList.toggle("d-none", !visible);
+    });
+}
+
+
+function obtenerCuotasAnioActualReferencia(referencia) {
+  if (referencia.cuotas_anio_actual !== null && referencia.cuotas_anio_actual !== undefined) {
+    return referencia.cuotas_anio_actual;
+  }
+
+  const registroActual = (referencia.registros || []).find((registro) => (
+    registro.anio === ANIO_ACTUAL
+    && registro.tipo !== "PROYECTADO"
+  ));
+
+  return registroActual ? registroActual.cuotas : null;
+}
+
+
+function sincronizarCuotaAnioActualPreviewConHistorial() {
+  const control = document.getElementById("preview-comprobante-cuotas-anio-actual");
+  if (!control || control.value === "") return;
+
+  const filaActual = Array.from(
+    document.querySelectorAll("#preview-comprobante-registros tr"),
+  ).find((fila) => (
+    Number(fila.dataset.anio) === ANIO_ACTUAL
+    && fila.querySelector(".preview-comprobante-tipo")?.value !== "PROYECTADO"
+  ));
+
+  const campoCuotas = filaActual?.querySelector(".preview-comprobante-cuotas-anio");
+  if (campoCuotas) campoCuotas.value = control.value;
+}
+
+
+function leerNumeroOpcionalPreview(id) {
+  const valor = document.getElementById(id)?.value ?? "";
+  return valor === "" ? null : Number(valor);
+}
+
+
+function renderizarPreviewComprobante(referencia, numeroPaso = 1) {
   borradorImportacionComprobante = structuredClone(referencia);
   previewComprobanteFueEditado = false;
 
@@ -317,7 +389,11 @@ function renderizarPreviewComprobante(referencia) {
   });
 
 
+  const cuotasAnioActual = obtenerCuotasAnioActualReferencia(referencia);
   document.getElementById("preview-comprobante-cuotas").value = referencia.cuotas_historicas ?? "";
+  document.getElementById("preview-comprobante-cuotas-anio-actual").value = cuotasAnioActual ?? "";
+  marcarEstadoDeteccion("preview-comprobante-cuotas", referencia.cuotas_historicas);
+  marcarEstadoDeteccion("preview-comprobante-cuotas-anio-actual", cuotasAnioActual);
   document.getElementById("preview-comprobante-edad-retiro").value = referencia.edad_retiro_elegida ?? "";
   const campoMontoReferencia = document.getElementById("preview-comprobante-monto");
   campoMontoReferencia.value = formatearNumeroMonetario(referencia.monto_estimado_prestacion ?? 0);
@@ -336,8 +412,9 @@ function renderizarPreviewComprobante(referencia) {
   advertencias.classList.toggle("d-none", mensajes.length === 0);
 
   actualizarApellidoCasadaPreview();
+  configurarVistaPreviewComprobante(numeroPaso);
   establecerEdicionPreviewComprobante(false);
-  obtenerModalBootstrap("modal-import-comprobante").show();
+  obtenerModalBootstrap("modal-import-comprobante")?.show();
 }
 
 async function analizarComprobanteImportacion() {
@@ -370,7 +447,7 @@ async function analizarComprobanteImportacion() {
       return;
     }
 
-    renderizarPreviewComprobante(contenido);
+    renderizarPreviewComprobante(contenido, 1);
   } catch {
     mostrarEstadoImportacion("estado-comprobante-importacion", "No fue posible comunicarse con el servidor.", "danger");
   } finally {
@@ -397,6 +474,7 @@ function leerRegistrosPreviewComprobante() {
 function confirmarComprobanteImportacion() {
   if (!borradorImportacionComprobante) return;
 
+  sincronizarCuotaAnioActualPreviewConHistorial();
   const registrosPreview = leerRegistrosPreviewComprobante();
   const sistema = document.getElementById("preview-comprobante-sistema").value;
   const prestacion = document.getElementById("preview-comprobante-prestacion").value.trim();
@@ -416,7 +494,8 @@ function confirmarComprobanteImportacion() {
     fecha_ingreso_css: document.getElementById("preview-comprobante-fecha-ingreso").value || null,
     sistema_elegido: sistema,
     sistema_elegido_nombre: textoSistemaImportado(sistema),
-    cuotas_historicas: Number(document.getElementById("preview-comprobante-cuotas").value || 0),
+    cuotas_historicas: leerNumeroOpcionalPreview("preview-comprobante-cuotas"),
+    cuotas_anio_actual: leerNumeroOpcionalPreview("preview-comprobante-cuotas-anio-actual"),
     edad_retiro_elegida: Number(document.getElementById("preview-comprobante-edad-retiro").value || 0) || null,
     monto_estimado_prestacion: obtenerValorMonetario(document.getElementById("preview-comprobante-monto").value || 0),
     fecha_comprobante: document.getElementById("preview-comprobante-fecha").value || null,
@@ -449,11 +528,32 @@ function confirmarComprobanteImportacion() {
   };
 
   const registroActual = registrosPreview.find((registro) => registro.anio === ANIO_ACTUAL && registro.tipo !== "PROYECTADO");
+  const cuotasAnioActualConfirmadas = referencia.cuotas_anio_actual ?? registroActual?.cuotas ?? null;
   simulacion.cuotas = {
     ...simulacion.cuotas,
     ...(referencia.cuotas_historicas != null ? { cuotas_totales: referencia.cuotas_historicas } : {}),
-    ...(registroActual ? { cuotas_anio_actual: registroActual.cuotas } : {}),
+    ...(cuotasAnioActualConfirmadas != null ? { cuotas_anio_actual: cuotasAnioActualConfirmadas } : {}),
   };
+
+  const origenImportado = previewComprobanteFueEditado
+    ? "MI_RETIRO_SEGURO_EDITADO"
+    : "MI_RETIRO_SEGURO";
+
+  simulacion.origen_campos_cuotas = {
+    ...(simulacion.origen_campos_cuotas || {}),
+  };
+
+  if (referencia.cuotas_historicas != null) {
+    simulacion.origen_campos_cuotas.cuotas_totales = origenImportado;
+  } else {
+    delete simulacion.origen_campos_cuotas.cuotas_totales;
+  }
+
+  if (cuotasAnioActualConfirmadas != null) {
+    simulacion.origen_campos_cuotas.cuotas_anio_actual = origenImportado;
+  } else {
+    delete simulacion.origen_campos_cuotas.cuotas_anio_actual;
+  }
 
   const reales = registrosPreview.filter((registro) => registro.aplicar_historial);
   if (reales.length > 0) {
@@ -493,6 +593,7 @@ function quitarComprobanteImportacion() {
   simulacion.importacion_comprobante_confirmada = false;
   simulacion.modo_datos_personales = "MANUAL";
   simulacion.origen_persona = "MANUAL";
+  simulacion.origen_campos_cuotas = {};
   guardarSimulacion(simulacion);
 
   document.getElementById("import-comprobante-pdf").value = "";
@@ -500,12 +601,18 @@ function quitarComprobanteImportacion() {
   ocultarEstadoImportacion("estado-comprobante-importacion");
   document.getElementById("acciones-comprobante-importado")?.classList.add("d-none");
   restaurarModoDatosPersonales(simulacion);
+  if (typeof restaurarDatosCuotas === "function") {
+    restaurarDatosCuotas(simulacion);
+  }
 }
 
-function revisarComprobanteImportado() {
+function revisarComprobanteImportado(numeroPaso = 1) {
   const simulacion = obtenerSimulacion();
   if (simulacion.referencia_mi_retiro_seguro) {
-    renderizarPreviewComprobante(simulacion.referencia_mi_retiro_seguro);
+    renderizarPreviewComprobante(
+      simulacion.referencia_mi_retiro_seguro,
+      numeroPaso,
+    );
   }
 }
 
@@ -760,7 +867,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("btn-analizar-comprobante-importacion")?.addEventListener("click", analizarComprobanteImportacion);
   document.getElementById("btn-editar-import-comprobante")?.addEventListener("click", alternarEdicionPreviewComprobante);
   document.getElementById("btn-confirmar-import-comprobante")?.addEventListener("click", confirmarComprobanteImportacion);
-  document.getElementById("btn-revisar-comprobante-importacion")?.addEventListener("click", revisarComprobanteImportado);
+  document.getElementById("btn-revisar-comprobante-importacion")?.addEventListener("click", () => revisarComprobanteImportado(1));
   document.getElementById("btn-quitar-comprobante-importacion")?.addEventListener("click", quitarComprobanteImportacion);
   document.querySelectorAll('input[name="modo_datos_personales"]').forEach((control) => control.addEventListener("change", cambiarModoDatosPersonales));
   document.getElementById("sexo")?.addEventListener("change", actualizarApellidoCasada);
