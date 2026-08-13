@@ -235,7 +235,8 @@ Previsto:
 - [x] UX.4.5: cierre semántico de la comparación con caption, encabezados programáticos, estado textual y soporte de Alto contraste;
 - [x] hardening pre-beta: validación defensiva común de PDFs, cabeceras de privacidad local y límites de texto/páginas;
 - [x] regresión E2E pre-beta por API para SEBD, Mixto y SUCGS;
-- [x] CI pre-beta definida para Python 3.13/3.14 y Node.js 24; validación remota pendiente hasta publicar el workflow;
+- [x] CI pre-beta definida para Python 3.13/3.14 y Node.js 24; primera validación remota de `main` completada en verde;
+- [x] Dependabot ajustado para evitar falsos negativos por majors hardcodeados, limitar `pip` a dependencias directas y agrupar propuestas relacionadas sin auto-merge;
 - [ ] validación manual ampliada opcional: teléfono Android por red local; tablet Android, iPhone/iPad, macOS y pantallas grandes quedan diferidos para beta/RC;
 - [x] respuesta temporal sin error para `/favicon.ico` mientras no se integran los iconos definitivos;
 - [ ] integrar favicon e iconos definitivos de **Mi Retiro Proyectado** y retirar la respuesta temporal `204`.

@@ -760,3 +760,14 @@ Las respuestas de importación se marcan `Cache-Control: no-store` y la aplicaci
 **Decisión:** `main` y los pull requests se validarán con GitHub Actions sobre Python 3.13 y 3.14, con instalación desde `requirements.txt`, `pip check`, `compileall`, `node --check` y `unittest`. El token del workflow mantendrá `contents: read`. Dependabot revisará semanalmente `pip` y GitHub Actions.
 
 **Motivo:** las pruebas locales no detectan por sí solas una instalación limpia rota, incompatibilidades entre versiones de Python o cambios de dependencias. Automatizar el mismo contrato antes de la beta reduce el riesgo de publicar un paquete que solo funciona en la máquina de desarrollo.
+
+
+## ADR-076 — Dependabot no debe convertir versiones concretas en falsos fallos de CI
+
+**Estado:** Aceptada
+
+**Decisión:** las regresiones que inspeccionan `.github/workflows/ci.yml` validarán que existan `actions/checkout`, `actions/setup-python` y `actions/setup-node` con una versión mayor explícita, además del contrato funcional del pipeline, pero no exigirán que dichas Actions permanezcan para siempre en un major específico. De forma equivalente, la regresión de `pypdf` comprobará que exista una única versión exacta con formato `X.Y.Z`, mientras los tests funcionales de importación determinan si una versión nueva es compatible.
+
+`requirements.txt` se mantiene completamente fijado como snapshot reproducible, pero documenta sus dependencias directas. Dependabot solo propone actualizaciones ordinarias para `fastapi`, `Jinja2`, `pydantic`, `python-multipart`, `pypdf` y `uvicorn`; las dependencias transitivas fijadas no generan ruido de actualización individual. Las actualizaciones minor/patch del runtime, salvo `pypdf`, se agrupan; GitHub Actions se agrupa en una sola propuesta. `pypdf` y las actualizaciones major permanecen fuera del grupo general para revisión específica. No se habilita auto-merge.
+
+**Motivo:** la primera ejecución de Dependabot demostró dos clases de falsos negativos: una Action actualizada podía completar correctamente instalación, compilación y validación de JavaScript pero fallar porque una prueba exigía literalmente `@v6`; y `pypdf` podía superar los tests del parser pero fallar porque una regresión esperaba exactamente `5.9.0`. Al mismo tiempo, proponer por separado paquetes transitivos fijados, como `pydantic_core`, puede crear combinaciones incompatibles con su dependencia principal. La estrategia nueva conserva reproducibilidad, reduce ruido y hace que CI mida compatibilidad real en vez de números históricos.

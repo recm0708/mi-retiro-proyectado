@@ -1,5 +1,14 @@
 # Changelog
 
+### Pre-beta — ajuste de CI y Dependabot
+
+- La primera ejecución remota de `main` confirma CI verde en Python 3.13 y 3.14.
+- Las regresiones del workflow dejan de exigir majors concretos de `actions/checkout`, `actions/setup-python` y `actions/setup-node`; validan el contrato de CI y permiten que Dependabot actualice esas Actions sin provocar falsos negativos.
+- La regresión de `pypdf` deja de fijar `5.9.0` como valor eterno y pasa a exigir una única versión explícita `X.Y.Z`; la compatibilidad real continúa protegida por los tests de importación PDF.
+- Dependabot limita las propuestas `pip` a las dependencias directas mantenidas por el proyecto, agrupa actualizaciones minor/patch compatibles del runtime y agrupa GitHub Actions en una sola propuesta. `pypdf` y los cambios major continúan sujetos a revisión individual.
+- `requirements.txt` documenta qué paquetes son dependencias directas y qué líneas forman parte del snapshot transitivo reproducible.
+- Se mantiene deshabilitado cualquier auto-merge: una actualización solo se acepta con CI verde y revisión explícita.
+
 ### Pre-beta — regresión E2E y hardening
 
 - Se agrega regresión E2E por API para SEBD acreditado/proyectado, Mixto y SUCGS.

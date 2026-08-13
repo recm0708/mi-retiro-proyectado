@@ -378,4 +378,6 @@ La frontera HTTP valida los PDFs mediante `app/core/archivos_pdf.py` antes de de
 
 Un middleware transversal añade cabeceras defensivas que no modifican la semántica de los cálculos. Los endpoints de importación declaran `Cache-Control: no-store`.
 
-La verificación continua vive en `.github/workflows/ci.yml` y trata el repositorio como una instalación limpia: instala `requirements.txt`, ejecuta `pip check`, compila Python, valida JavaScript y corre la suite. Dependabot mantiene propuestas de actualización separadas para `pip` y GitHub Actions.
+La verificación continua vive en `.github/workflows/ci.yml` y trata el repositorio como una instalación limpia: instala `requirements.txt`, ejecuta `pip check`, compila Python, valida JavaScript y corre la suite. La primera ejecución remota de `main` quedó en verde sobre Python 3.13 y 3.14. Las regresiones de infraestructura validan la presencia de las Actions y el contrato del pipeline mediante patrones de versión, evitando fijar un major concreto.
+
+`requirements.txt` continúa siendo el snapshot reproducible completo, pero distingue documentalmente las dependencias directas de las transitivas fijadas. `.github/dependabot.yml` limita las propuestas ordinarias de `pip` a las dependencias directas, agrupa actualizaciones minor/patch compatibles del runtime y agrupa GitHub Actions. `pypdf` queda fuera del grupo general para que los cambios de parser se revisen de forma individual. No existe auto-merge.

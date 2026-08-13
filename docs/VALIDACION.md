@@ -562,3 +562,19 @@ La suite alcanza **185 pruebas automatizadas**. `tests/test_prebeta_e2e_hardenin
 - `Cache-Control: no-store` en importaciones.
 
 La validación local del entorno de desarrollo incluye `compileall` y `node --check` sobre todos los JavaScript. La instalación realmente limpia y `pip check` quedan además automatizados en `.github/workflows/ci.yml`; su resultado remoto debe verificarse después de commitear/pushear el workflow.
+
+
+## Validación pre-beta — ajuste CI/Dependabot
+
+La primera ejecución remota del workflow de `main` se completó correctamente en Python 3.13 y 3.14. Las ejecuciones rojas posteriores correspondieron a PR automáticos de Dependabot y permitieron identificar dos falsos negativos de las regresiones: el test de CI exigía literalmente `actions/setup-node@v6` y el test de PDF exigía `pypdf==5.9.0`, aunque los pasos previos y las regresiones funcionales de esos PR habían avanzado correctamente.
+
+La corrección mantiene **185 pruebas automatizadas** y cambia el criterio de esas regresiones:
+
+- `checkout`, `setup-python` y `setup-node` deben existir con un major explícito, pero el major no se congela en el test;
+- el workflow continúa obligado a cubrir Python 3.13/3.14, Node.js 24, `pip check`, `compileall`, `node --check` y la suite;
+- `pypdf` debe aparecer exactamente una vez con pin `X.Y.Z`; la compatibilidad la determinan los tests de ambos importadores;
+- Dependabot solo vigila de forma ordinaria las dependencias directas declaradas por el proyecto, agrupa minor/patch compatibles del runtime y agrupa GitHub Actions;
+- `pypdf` y actualizaciones major permanecen bajo revisión individual;
+- no se configura auto-merge.
+
+Después de aplicar este bloque, la validación local debe repetir `compileall`, `node --check` para todos los JavaScript, suite completa y `git diff --check`. Tras el siguiente `push`, el workflow de `main` debe permanecer verde; los PR existentes de Dependabot que ya no correspondan a la estrategia nueva pueden cerrarse o dejar que Dependabot los reevalúe, sin fusionarlos mientras estén rojos.

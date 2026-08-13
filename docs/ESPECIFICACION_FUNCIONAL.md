@@ -439,3 +439,7 @@ Quedan para fases posteriores:
 **RF-157.** La validación continua debe cubrir instalación de dependencias, coherencia de paquetes, compilación Python, sintaxis JavaScript y suite completa en las versiones de Python soportadas para la beta.
 
 **RF-158.** Las respuestas HTML deben incluir cabeceras defensivas de bajo riesgo contra sniffing de tipos, framing y exposición innecesaria de referrer/permisos del navegador.
+
+**RF-159.** Las regresiones de infraestructura deben verificar la presencia y el contrato funcional de las GitHub Actions necesarias sin fijar permanentemente su major; una actualización de Action solo debe fallar si rompe el pipeline o una validación real.
+
+**RF-160.** La vigilancia de dependencias debe distinguir paquetes directos de transitivos fijados, agrupar propuestas relacionadas cuando sea seguro y mantener revisión explícita sin auto-merge.

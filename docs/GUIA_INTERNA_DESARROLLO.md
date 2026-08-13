@@ -243,3 +243,7 @@ La validación manual obligatoria inmediata se limita a PC/laptop. La matriz rea
 Antes de `v0.1.0-beta.1`, cualquier cambio sobre importadores debe probar archivo válido, archivo ajeno, extensión/MIME incompatibles, archivo vacío y exceso de tamaño. Los datos personales reales permanecen fuera del repositorio.
 
 Los cambios que rompan `.github/workflows/ci.yml`, `pip check`, `compileall`, `node --check` o la suite no se consideran candidatos a beta. La matriz de CI complementa, pero no sustituye, la revisión manual del producto.
+
+Las pruebas que inspeccionan CI deben comprobar el contrato del pipeline y aceptar majors futuros de `actions/checkout`, `actions/setup-python` y `actions/setup-node` cuando Dependabot los proponga. No deben convertir una versión histórica (`@v6`, por ejemplo) en requisito funcional. De igual forma, una dependencia versionada como `pypdf` se valida por presencia de pin exacto y por sus regresiones funcionales, no por un número histórico inmutable.
+
+Cuando Dependabot proponga un cambio Python, revisar primero si corresponde a una dependencia directa permitida. Si una actualización directa obliga a cambiar transitivas fijadas, regenerar el snapshot como un cambio controlado, ejecutar la instalación limpia y comprobar la suite. No activar auto-merge.

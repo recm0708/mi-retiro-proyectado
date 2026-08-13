@@ -263,4 +263,7 @@ Cuando se modifique el flujo de salarios recientes:
 - Los cambios que afecten motores, endpoints o importadores deben mantener una ruta E2E automatizada cuando exista un caso estable.
 - La CI debe permanecer con permisos mínimos de solo lectura mientras no exista una necesidad explícita de publicación.
 - Las actualizaciones propuestas por Dependabot no se aceptan por versión solamente: requieren CI verde y revisión de compatibilidad funcional/normativa.
+- Las regresiones de infraestructura deben validar capacidades del workflow (`checkout`, `setup-python`, `setup-node`, Python soportado, `pip check`, `compileall`, `node --check` y suite), no congelar el major de una Action concreta.
+- `requirements.txt` conserva un snapshot completamente fijado para reproducibilidad, pero Dependabot solo propone de forma ordinaria cambios sobre las dependencias directas declaradas por el proyecto. Si una actualización directa exige regenerar el snapshot transitivo, debe hacerse como cambio controlado y volver a ejecutar la suite completa.
+- GitHub Actions puede agruparse en una sola propuesta. `pypdf` y actualizaciones major se revisan con especial atención por su impacto potencial en importadores o compatibilidad. No habilitar auto-merge sin una decisión ADR explícita.
 - No agregar una CSP estricta sin inventariar previamente recursos inline y externos; una política incorrecta puede dejar la interfaz inutilizable.

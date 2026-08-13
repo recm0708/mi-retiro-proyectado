@@ -54,7 +54,7 @@ La suite actual contiene **185 pruebas automatizadas**. UX.3 protege responsive 
 
 La preparación pre-beta incorpora una regresión E2E sobre los endpoints integrados de SEBD, Mixto y SUCGS, validación defensiva común para PDFs, cabeceras de navegador orientadas a privacidad local y CI en GitHub Actions. Los importadores rechazan extensión/MIME incompatibles, archivos vacíos, exceso de tamaño y contenido sin firma PDF antes de invocar `pypdf`.
 
-La estrategia y los límites están documentados en [`docs/SEGURIDAD_PRIVACIDAD.md`](docs/SEGURIDAD_PRIVACIDAD.md). La CI se ejecuta sobre Python 3.13 y 3.14 y valida también la sintaxis de todo el JavaScript.
+La estrategia y los límites están documentados en [`docs/SEGURIDAD_PRIVACIDAD.md`](docs/SEGURIDAD_PRIVACIDAD.md). La CI se ejecuta sobre Python 3.13 y 3.14 y valida también la sintaxis de todo el JavaScript. La primera ejecución remota de `main` quedó en verde. Dependabot propone semanalmente actualizaciones de las dependencias directas mantenidas por el proyecto y de GitHub Actions; las Actions se agrupan y las pruebas verifican su presencia y contrato, no un major congelado. No existe auto-merge.
 
 ## 3. Qué permite hacer el asistente
 

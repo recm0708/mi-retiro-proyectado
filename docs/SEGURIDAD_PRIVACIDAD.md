@@ -57,7 +57,7 @@ No se incorpora todavía una política CSP estricta porque la interfaz actual de
 
 La matriz cubre Python 3.13 y 3.14. Node.js se usa únicamente como herramienta de validación estática del frontend.
 
-`.github/dependabot.yml` solicita revisiones semanales de dependencias `pip` y GitHub Actions. La aceptación de una actualización continúa requiriendo que la CI pase y que el cambio sea revisado.
+`.github/dependabot.yml` solicita revisiones semanales, pero evita actualizar transitivas fijadas de forma aislada. Para `pip` se permiten propuestas ordinarias únicamente sobre `fastapi`, `Jinja2`, `pydantic`, `python-multipart`, `pypdf` y `uvicorn`; las minor/patch compatibles del runtime se agrupan y `pypdf` queda separado para revisión específica. Las GitHub Actions se agrupan en una sola propuesta. La aceptación de cualquier actualización continúa requiriendo CI verde y revisión explícita; no existe auto-merge.
 
 ## 6. Datos sensibles y registros
 
