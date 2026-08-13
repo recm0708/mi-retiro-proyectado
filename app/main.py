@@ -7,6 +7,7 @@ y por los servicios de cálculo.
 
 from pathlib import Path
 
+from app.core.archivos_pdf import leer_pdf_subido
 from app.core.config import (
     APP_AUTHOR,
     APP_DESCRIPTION,
@@ -131,6 +132,32 @@ app = FastAPI(
     description=APP_DESCRIPTION,
     version=APP_VERSION,
 )
+
+
+# ============================================================
+# Cabeceras defensivas para la aplicación local
+# ============================================================
+
+@app.middleware("http")
+async def agregar_cabeceras_defensivas(request: Request, call_next):
+    """Reduce exposición innecesaria del navegador sin alterar cálculos."""
+
+    respuesta = await call_next(request)
+    respuesta.headers.setdefault("X-Content-Type-Options", "nosniff")
+    respuesta.headers.setdefault("X-Frame-Options", "DENY")
+    respuesta.headers.setdefault("Referrer-Policy", "no-referrer")
+    respuesta.headers.setdefault(
+        "Permissions-Policy",
+        "camera=(), microphone=(), geolocation=()",
+    )
+
+    if request.url.path in {
+        "/api/simulacion/referencia-mi-retiro-seguro",
+        "/api/simulacion/ficha-digital",
+    }:
+        respuesta.headers["Cache-Control"] = "no-store"
+
+    return respuesta
 
 
 # ============================================================
@@ -352,24 +379,11 @@ async def analizar_referencia_mi_retiro_seguro(
     únicamente datos operativos; no expone nombre, cédula ni seguro social.
     """
 
-    nombre = (archivo.filename or "").lower()
-    tipo = (archivo.content_type or "").lower()
-
-    if not nombre.endswith(".pdf") and tipo != "application/pdf":
-        raise HTTPException(
-            status_code=415,
-            detail="Selecciona un comprobante en formato PDF.",
-        )
-
-    limite_bytes = 8 * 1024 * 1024
-    contenido = await archivo.read(limite_bytes + 1)
-    await archivo.close()
-
-    if len(contenido) > limite_bytes:
-        raise HTTPException(
-            status_code=413,
-            detail="El PDF supera el límite de 8 MB permitido para esta importación.",
-        )
+    contenido = await leer_pdf_subido(
+        archivo,
+        limite_bytes=8 * 1024 * 1024,
+        etiqueta="el comprobante",
+    )
 
     try:
         return analizar_comprobante_pdf(contenido)
@@ -398,24 +412,11 @@ async def analizar_ficha_digital(
     años anteriores.
     """
 
-    nombre = (archivo.filename or "").lower()
-    tipo = (archivo.content_type or "").lower()
-
-    if not nombre.endswith(".pdf") and tipo != "application/pdf":
-        raise HTTPException(
-            status_code=415,
-            detail="Selecciona la Ficha Digital en formato PDF.",
-        )
-
-    limite_bytes = 12 * 1024 * 1024
-    contenido = await archivo.read(limite_bytes + 1)
-    await archivo.close()
-
-    if len(contenido) > limite_bytes:
-        raise HTTPException(
-            status_code=413,
-            detail="La Ficha Digital supera el límite de 12 MB permitido.",
-        )
+    contenido = await leer_pdf_subido(
+        archivo,
+        limite_bytes=12 * 1024 * 1024,
+        etiqueta="la Ficha Digital",
+    )
 
     try:
         return analizar_ficha_digital_pdf(contenido)

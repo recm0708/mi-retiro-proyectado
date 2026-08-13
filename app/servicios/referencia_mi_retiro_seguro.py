@@ -236,9 +236,18 @@ def analizar_comprobante_pdf(contenido: bytes) -> ResumenReferenciaMiRetiroSegur
 
     partes: list[str] = []
 
+    total_caracteres = 0
     try:
         for pagina in lector.pages:
-            partes.append(pagina.extract_text() or "")
+            texto_pagina = pagina.extract_text() or ""
+            total_caracteres += len(texto_pagina)
+            if total_caracteres > 1500000:
+                raise ValueError(
+                    "El comprobante contiene demasiado texto para este importador."
+                )
+            partes.append(texto_pagina)
+    except ValueError:
+        raise
     except Exception as error:
         raise ValueError(
             "No fue posible extraer el texto del comprobante PDF."

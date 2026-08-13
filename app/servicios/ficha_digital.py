@@ -143,9 +143,18 @@ def analizar_ficha_digital_pdf(contenido: bytes) -> ResumenFichaDigital:
         )
 
     partes: list[str] = []
+    total_caracteres = 0
     try:
         for pagina in lector.pages:
-            partes.append(pagina.extract_text() or "")
+            texto_pagina = pagina.extract_text() or ""
+            total_caracteres += len(texto_pagina)
+            if total_caracteres > 2000000:
+                raise ValueError(
+                    "La Ficha Digital contiene demasiado texto para este importador."
+                )
+            partes.append(texto_pagina)
+    except ValueError:
+        raise
     except Exception as error:
         raise ValueError(
             "No fue posible extraer el texto de la Ficha Digital."
