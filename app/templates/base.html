@@ -2,22 +2,15 @@
 <html lang="es" data-app-theme="system">
 
 <head>
-  <!-- ==================================================
-       Configuración general del documento
-       ================================================== -->
-
   <meta charset="UTF-8">
-
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0"
   >
-
   <meta
     name="description"
     content="Mi Retiro Proyectado: herramienta independiente para estimar y comparar escenarios de retiro de Asegurados(as) de la Caja de Seguro Social de Panamá."
   >
-
   <meta name="color-scheme" content="light dark">
 
   <title>
@@ -26,77 +19,48 @@
     {% endblock %}
   </title>
 
-
-  <!-- ==================================================
-       Preferencia visual
-       ================================================== -->
-
-  <!--
-    Este script se carga antes de los estilos para aplicar la preferencia
-    guardada con el menor cambio visual posible al abrir una página.
-  -->
+  <!-- Se aplica antes de los estilos para reducir cambios visuales al cargar. -->
   <script src="{{ url_for('static', path='/js/tema.js') }}"></script>
-
-
-  <!-- ==================================================
-       Bootstrap
-       ================================================== -->
 
   <link
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
     rel="stylesheet"
   >
 
-
-  <!-- ==================================================
-       Estilos propios de la aplicación
-       ================================================== -->
-
+  <!-- Base histórica + capa visual UX.4.6a + remates de accesibilidad. -->
   <link
     rel="stylesheet"
     href="{{ url_for('static', path='/css/style.css') }}"
   >
-
+  <link
+    rel="stylesheet"
+    href="{{ url_for('static', path='/css/design-system.css') }}"
+  >
   <link
     rel="stylesheet"
     href="{{ url_for('static', path='/css/accesibilidad.css') }}"
   >
 
-
-  <!-- Recursos adicionales específicos de cada página. -->
-
   {% block head %}{% endblock %}
 </head>
 
-
-<body>
-
-  <!-- Enlace de acceso rápido para teclado y lectores de pantalla. -->
+<body class="app-body page-{{ pagina_activa|default('general') }}">
   <a class="skip-link" href="#contenido-principal">
     Saltar al contenido principal
   </a>
 
-
-  <!-- ==================================================
-       Barra de navegación principal
-       ================================================== -->
-
   <nav
-    class="navbar navbar-expand-lg navbar-dark app-navbar shadow-sm"
+    class="navbar navbar-expand-lg app-navbar sticky-top"
     aria-label="Navegación principal"
   >
-
-    <div class="container">
-
-      <a
-        class="navbar-brand fw-bold"
-        href="/"
-      >
-        {{ app_name }}
+    <div class="container app-navbar-inner">
+      <a class="navbar-brand app-brand" href="/" aria-label="{{ app_name }}, inicio">
+        <span class="app-brand-mark" aria-hidden="true">MR</span>
+        <span class="app-brand-copy">
+          <strong>{{ app_name }}</strong>
+          <small>Planificación previsional</small>
+        </span>
       </a>
-
-
-      <!-- Botón utilizado por Bootstrap en pantallas pequeñas. -->
 
       <button
         class="navbar-toggler"
@@ -110,16 +74,8 @@
         <span class="navbar-toggler-icon"></span>
       </button>
 
-
-      <!-- Enlaces principales de navegación. -->
-
-      <div
-        class="collapse navbar-collapse"
-        id="navbarPrincipal"
-      >
-
-        <div class="navbar-nav ms-auto align-items-lg-center">
-
+      <div class="collapse navbar-collapse" id="navbarPrincipal">
+        <div class="navbar-nav ms-auto align-items-lg-center app-nav-links">
           <a
             class="nav-link {% if pagina_activa == 'inicio' %}active{% endif %}"
             href="/"
@@ -133,7 +89,7 @@
             href="/simulacion"
             {% if pagina_activa == 'simulacion' %}aria-current="page"{% endif %}
           >
-            Nueva simulación
+            Simular
           </a>
 
           <a
@@ -141,7 +97,7 @@
             href="/comparar"
             {% if pagina_activa == 'comparar' %}aria-current="page"{% endif %}
           >
-            Comparar escenarios
+            Escenarios
           </a>
 
           <a
@@ -149,46 +105,73 @@
             href="/metodologia"
             {% if pagina_activa == 'metodologia' %}aria-current="page"{% endif %}
           >
-            Metodología y fuentes
+            Fuentes
           </a>
 
-          <div class="theme-control ms-lg-3 mt-3 mt-lg-0">
-            <label class="visually-hidden" for="selector-tema">
-              Tema visual
-            </label>
-
-            <span
-              id="ayuda-selector-tema"
-              class="visually-hidden"
-            >
-              La preferencia visual se guarda únicamente en este navegador.
-            </span>
-
-            <select
-              class="form-select theme-select"
-              id="selector-tema"
-              aria-label="Tema visual"
+          <div class="dropdown theme-control ms-lg-3 mt-3 mt-lg-0">
+            <button
+              class="btn theme-trigger dropdown-toggle"
+              type="button"
+              id="menu-apariencia"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+              aria-label="Cambiar apariencia"
               aria-describedby="ayuda-selector-tema"
             >
-              <option value="system">Seguir sistema</option>
-              <option value="light">Claro</option>
-              <option value="dark">Oscuro</option>
-              <option value="contrast">Alto contraste</option>
-            </select>
+              <span class="theme-trigger-symbol" aria-hidden="true"></span>
+              <span id="theme-trigger-label">Sistema</span>
+            </button>
+
+            <div
+              class="dropdown-menu dropdown-menu-end theme-menu"
+              aria-labelledby="menu-apariencia"
+            >
+              <div class="theme-menu-heading">Apariencia</div>
+
+              <button class="dropdown-item theme-choice" type="button" data-theme-choice="system">
+                <span class="theme-choice-dot" aria-hidden="true"></span>
+                <span>
+                  <strong>Automático</strong>
+                  <small>Seguir la apariencia del sistema</small>
+                </span>
+              </button>
+
+              <button class="dropdown-item theme-choice" type="button" data-theme-choice="light">
+                <span class="theme-choice-dot" aria-hidden="true"></span>
+                <span>
+                  <strong>Claro</strong>
+                  <small>Superficies luminosas y limpias</small>
+                </span>
+              </button>
+
+              <button class="dropdown-item theme-choice" type="button" data-theme-choice="dark">
+                <span class="theme-choice-dot" aria-hidden="true"></span>
+                <span>
+                  <strong>Oscuro</strong>
+                  <small>Fondo profundo y menor luminancia</small>
+                </span>
+              </button>
+
+              <div class="dropdown-divider"></div>
+              <div class="theme-menu-heading">Accesibilidad</div>
+
+              <button class="dropdown-item theme-choice" type="button" data-theme-choice="contrast">
+                <span class="theme-choice-dot" aria-hidden="true"></span>
+                <span>
+                  <strong>Alto contraste</strong>
+                  <small>Opción reforzada para máxima diferenciación</small>
+                </span>
+              </button>
+
+              <p id="ayuda-selector-tema" class="theme-storage-note mb-0">
+                La preferencia se guarda únicamente en este navegador.
+              </p>
+            </div>
           </div>
-
         </div>
-
       </div>
-
     </div>
-
   </nav>
-
-
-  <!-- ==================================================
-       Contenido específico de cada página
-       ================================================== -->
 
   <main id="contenido-principal" tabindex="-1">
     {% block content %}{% endblock %}
@@ -202,62 +185,35 @@
     aria-atomic="true"
   ></div>
 
-
-  <!-- ==================================================
-       Pie de página
-       ================================================== -->
-
-  <footer
-    class="footer mt-auto"
-    aria-label="Información legal y acceso oficial"
-  >
-
-    <div class="container footer-compact">
-
-      <p class="footer-line">
-        <strong>{{ app_name }}.</strong>
-        © 2026 {{ app_author }}. Todos los derechos reservados.
-      </p>
-
-      <div class="footer-line footer-legal-row">
-        <span>
-          Herramienta independiente de estimación previsional. No es una
-          aplicación oficial de la Caja de Seguro Social de Panamá y no emite
-          resoluciones ni certificaciones.
-        </span>
-        <span class="footer-separator" aria-hidden="true">·</span>
-        <a
-          class="footer-link"
-          href="{{ mi_caja_digital_url }}"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Abrir Mi Caja Digital
-        </a>
+  <footer class="footer" aria-label="Información legal">
+    <div class="container footer-modern">
+      <div class="footer-identity">
+        <strong>{{ app_name }}</strong>
+        <span class="footer-version">v{{ app_version }}</span>
       </div>
 
+      <p class="footer-disclaimer mb-0">
+        Herramienta independiente de estimación previsional.
+        No sustituye la determinación oficial de la Caja de Seguro Social de Panamá ni emite
+        resoluciones o certificaciones.
+      </p>
+
+      <div class="footer-bottom" aria-label="Fuentes, autoría y derechos">
+        <a class="footer-link" href="/metodologia">Fuentes oficiales</a>
+        <span aria-hidden="true">·</span>
+        <span class="footer-copyright">
+          © 2026 {{ app_author }}. Todos los derechos reservados.
+        </span>
+      </div>
     </div>
-
   </footer>
-
-
-  <!-- ==================================================
-       JavaScript de Bootstrap
-       ================================================== -->
 
   <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
   ></script>
-
-  <script
-    src="{{ url_for('static', path='/js/accesibilidad.js') }}"
-  ></script>
-
-
-  <!-- Scripts adicionales específicos de cada página. -->
+  <script src="{{ url_for('static', path='/js/accesibilidad.js') }}"></script>
 
   {% block scripts %}{% endblock %}
-
 </body>
 
 </html>

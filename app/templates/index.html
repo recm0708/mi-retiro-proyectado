@@ -3,20 +3,20 @@
 {% block title %}Inicio | {{ app_name }}{% endblock %}
 
 {% block content %}
-<section class="home-hero">
-  <div class="container py-5 py-lg-6">
-    <div class="row align-items-center g-5">
-      <div class="col-lg-7">
-        <span class="home-eyebrow">Planificación previsional para Asegurados(as)</span>
+<section class="home-hero home-hero-modern">
+  <div class="container py-5 py-xl-6">
+    <div class="row align-items-center g-5 g-xl-6">
+      <div class="col-lg-7 col-xl-6">
+        <span class="home-eyebrow">Planifica tu retiro con más claridad</span>
 
         <h1 class="home-title mt-3 mb-3">
-          Proyecta tu retiro con información clara y comparable
+          Proyecta tu jubilación con información clara, útil y comparable
         </h1>
 
         <p class="home-lead mb-4">
-          Organiza tus cuotas, historial salarial y expectativas laborales para
-          estimar distintos escenarios de jubilación y comprender cómo cambia
-          el resultado según la fecha de retiro.
+          Simula escenarios, revisa tus cuotas y estima tu pensión con una
+          herramienta guiada que mantiene separados tus datos acreditados y
+          las proyecciones futuras.
         </p>
 
         <div class="d-flex flex-wrap gap-3 home-actions">
@@ -24,52 +24,70 @@
             Comenzar simulación
           </a>
           <a href="/metodologia" class="btn btn-outline-primary btn-lg px-4">
-            Ver metodología y fuentes
+            Explorar fuentes oficiales
           </a>
         </div>
 
         <div class="home-trust-list mt-4" aria-label="Características principales">
-          <span>Resultados explicados paso a paso</span>
-          <span>Fuentes oficiales vinculadas</span>
-          <span>Comparación de escenarios</span>
+          <span>Datos bajo tu control</span>
+          <span>Resultados explicados</span>
+          <span>Escenarios comparables</span>
         </div>
       </div>
 
-      <div class="col-lg-5">
-        <aside class="home-systems-panel" aria-labelledby="sistemas-contemplados">
-          <div class="home-panel-heading">
-            <span class="home-panel-kicker">Cobertura previsional</span>
-            <h2 id="sistemas-contemplados" class="h3 mb-2">Sistemas contemplados</h2>
-            <p class="mb-0">
-              La aplicación utiliza un motor de cálculo específico según el
-              sistema previsional indicado por el Asegurado(a).
-            </p>
+      <div class="col-lg-5 col-xl-6">
+        <aside class="home-preview-shell" aria-labelledby="vista-ilustrativa-titulo">
+          <div class="home-preview-toolbar">
+            <div>
+              <span class="home-preview-kicker">Vista ilustrativa</span>
+              <h2 id="vista-ilustrativa-titulo" class="h5 mb-0">Tu escenario de retiro</h2>
+            </div>
+            <span class="home-preview-status">
+              <span aria-hidden="true"></span>
+              Guiado
+            </span>
           </div>
 
-          <div class="home-system-list mt-4">
-            <div class="home-system-card">
-              <div class="home-system-code">SEBD</div>
-              <div>
-                <strong>Beneficio Definido</strong>
-                <span>Subsistema Exclusivamente de Beneficio Definido</span>
-              </div>
-            </div>
+          <div class="home-preview-primary">
+            <span>Pensión estimada</span>
+            <strong>B/. —</strong>
+            <small>El resultado se calcula con tus propios datos.</small>
+          </div>
 
-            <div class="home-system-card">
-              <div class="home-system-code">Mixto</div>
-              <div>
-                <strong>Subsistema Mixto</strong>
-                <span>Beneficio Definido + Componente de Ahorro Personal</span>
-              </div>
+          <div class="home-preview-grid" aria-label="Elementos que considera la simulación">
+            <div class="home-preview-metric">
+              <span>Cuotas</span>
+              <strong>Acreditadas + futuras</strong>
             </div>
+            <div class="home-preview-metric">
+              <span>Salario</span>
+              <strong>Histórico + escenario</strong>
+            </div>
+            <div class="home-preview-metric">
+              <span>Retiro</span>
+              <strong>Varias fechas</strong>
+            </div>
+          </div>
 
-            <div class="home-system-card">
-              <div class="home-system-code">SUCGS</div>
-              <div>
-                <strong>Capitalización con Garantía Solidaria</strong>
-                <span>Sistema Único de Capitalización con Garantía Solidaria</span>
-              </div>
+          <div class="home-preview-chart" aria-hidden="true">
+            <div class="home-preview-chart-head">
+              <span>Proyección comparativa</span>
+              <span>Escenarios</span>
             </div>
+            <div class="home-preview-bars">
+              <span style="--bar-size: 42%"></span>
+              <span style="--bar-size: 58%"></span>
+              <span style="--bar-size: 72%"></span>
+              <span style="--bar-size: 88%"></span>
+              <span style="--bar-size: 68%"></span>
+            </div>
+          </div>
+
+          <div class="home-preview-footer">
+            <span class="home-preview-check" aria-hidden="true">✓</span>
+            <span>
+              Compara el escenario actual con alternativas sin alterar tus datos históricos.
+            </span>
           </div>
         </aside>
       </div>
@@ -77,47 +95,101 @@
   </div>
 </section>
 
+<section class="home-systems-strip" aria-labelledby="sistemas-contemplados">
+  <div class="container py-4 py-lg-5">
+    <div class="home-section-heading home-section-heading-wide mb-4">
+      <span class="home-section-kicker">Cobertura previsional</span>
+      <h2 id="sistemas-contemplados" class="h2 mb-2">Sistemas contemplados</h2>
+      <p class="mb-0">
+        La experiencia se adapta al sistema que indiques y presenta únicamente
+        los datos y resultados que corresponden a ese contexto.
+      </p>
+    </div>
+
+    <div class="row g-3 g-xl-4">
+      <div class="col-lg-4">
+        <article class="home-system-card home-system-card-modern h-100">
+          <div class="home-system-code">SEBD</div>
+          <div>
+            <h3 class="h5 mb-1">Beneficio Definido</h3>
+            <p class="mb-0">
+              Revisa cuotas, salario base y escenarios de retiro dentro del
+              Subsistema Exclusivamente de Beneficio Definido.
+            </p>
+          </div>
+        </article>
+      </div>
+
+      <div class="col-lg-4">
+        <article class="home-system-card home-system-card-modern h-100">
+          <div class="home-system-code">Mixto</div>
+          <div>
+            <h3 class="h5 mb-1">Subsistema Mixto</h3>
+            <p class="mb-0">
+              Distingue los componentes que forman el resultado y mantiene
+              separados los importes mensuales y los pagos únicos.
+            </p>
+          </div>
+        </article>
+      </div>
+
+      <div class="col-lg-4">
+        <article class="home-system-card home-system-card-modern h-100">
+          <div class="home-system-code">SUCGS</div>
+          <div>
+            <h3 class="h5 mb-1">Capitalización con Garantía Solidaria</h3>
+            <p class="mb-0">
+              Presenta el cálculo aplicable y sus condiciones sin mezclar la
+              proyección con información que todavía deba confirmarse.
+            </p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="home-section home-capabilities-section" aria-labelledby="capacidades-aplicacion">
-  <div class="container py-5">
+  <div class="container py-5 py-xl-6">
     <div class="home-section-heading text-center mx-auto mb-4 mb-lg-5">
       <span class="home-section-kicker">Qué puedes hacer</span>
-      <h2 id="capacidades-aplicacion" class="h2 mb-2">Analiza tu retiro desde varios ángulos</h2>
+      <h2 id="capacidades-aplicacion" class="h2 mb-2">Entiende mejor cada decisión de retiro</h2>
       <p class="mb-0">
-        La simulación conecta cuotas, salarios y fechas para ofrecer una visión
-        más completa de cada escenario.
+        La aplicación organiza los datos que ya tienes y los supuestos futuros
+        para que puedas revisar cada escenario con contexto.
       </p>
     </div>
 
     <div class="row g-4">
       <div class="col-md-4">
         <article class="home-feature-card h-100">
-          <span class="home-feature-number">01</span>
-          <h3 class="h5">Cuotas y requisitos</h3>
+          <span class="home-feature-icon" aria-hidden="true">✓</span>
+          <h3 class="h5">Revisar cuotas</h3>
           <p>
-            Identifica las cuotas acumuladas, las faltantes y el momento en que
-            podrían alcanzarse los requisitos aplicables.
+            Identifica cuotas acreditadas, faltantes y períodos proyectados sin
+            confundir lo registrado con lo que todavía depende del futuro.
           </p>
         </article>
       </div>
 
       <div class="col-md-4">
         <article class="home-feature-card h-100">
-          <span class="home-feature-number">02</span>
-          <h3 class="h5">Proyección salarial</h3>
+          <span class="home-feature-icon" aria-hidden="true">↗</span>
+          <h3 class="h5">Proyectar salario</h3>
           <p>
-            Compara salario constante, crecimiento porcentual y escenarios
-            personalizados sin mezclar los datos históricos con los proyectados.
+            Evalúa salario constante, crecimiento porcentual o una trayectoria
+            personalizada manteniendo visible el origen de cada dato.
           </p>
         </article>
       </div>
 
       <div class="col-md-4">
         <article class="home-feature-card h-100">
-          <span class="home-feature-number">03</span>
-          <h3 class="h5">Comparación de escenarios</h3>
+          <span class="home-feature-icon" aria-hidden="true">⇄</span>
+          <h3 class="h5">Comparar escenarios</h3>
           <p>
-            Revisa cómo pueden variar la prestación, las cuotas y la fecha de
-            retiro al continuar cotizando por más tiempo.
+            Contrasta distintas fechas de retiro y trayectorias salariales para
+            entender cómo cambia el resultado de la proyección.
           </p>
         </article>
       </div>
@@ -126,19 +198,17 @@
 </section>
 
 <section class="home-section home-process-section" aria-labelledby="como-funciona">
-  <div class="container py-5">
-    <div class="row align-items-end g-4 mb-4">
-      <div class="col-lg-8">
-        <span class="home-section-kicker">Proceso guiado</span>
-        <h2 id="como-funciona" class="h2 mb-2">De tus datos a un resultado explicado</h2>
-        <p class="mb-0 home-process-intro">
-          El asistente conserva una secuencia sencilla de seis pasos y permite
-          regresar directamente a cualquier paso disponible para corregir datos.
-        </p>
-      </div>
-      <div class="col-lg-4 text-lg-end">
-        <a href="/simulacion" class="btn btn-primary btn-center-content">Iniciar ahora</a>
-      </div>
+  <div class="container py-5 py-xl-6">
+    <div class="home-process-heading mb-4 mb-lg-5">
+      <span class="home-section-kicker">Proceso guiado</span>
+      <h2 id="como-funciona" class="h2 mb-2">De tus datos a un resultado explicado</h2>
+      <p class="mb-4 home-process-intro">
+        Avanza por seis pasos claros. Puedes volver a cualquier paso disponible
+        para corregir información antes de comparar resultados.
+      </p>
+      <a href="/simulacion" class="btn btn-primary btn-center-content px-4">
+        Iniciar ahora
+      </a>
     </div>
 
     <div class="home-process-grid">
@@ -161,17 +231,18 @@
 </section>
 
 <section class="home-section home-disclaimer-section">
-  <div class="container pb-5">
-    <div class="home-disclaimer">
-      <div>
-        <strong>Estimación orientativa y trazable.</strong>
+  <div class="container pb-5 pb-xl-6">
+    <div class="home-disclaimer home-disclaimer-modern">
+      <div class="home-disclaimer-icon" aria-hidden="true">i</div>
+      <div class="home-disclaimer-copy">
+        <strong>Estimación orientativa</strong>
         <p class="mb-0">
-          Mi Retiro Proyectado no sustituye la determinación oficial de la Caja
-          de Seguro Social de Panamá.
+          Mi Retiro Proyectado ayuda a explorar escenarios, pero no sustituye la
+          determinación oficial de la Caja de Seguro Social de Panamá.
         </p>
       </div>
       <a href="/metodologia" class="btn btn-outline-primary btn-center-content">
-        Consultar fuentes oficiales
+        Ver fuentes oficiales
       </a>
     </div>
   </div>
