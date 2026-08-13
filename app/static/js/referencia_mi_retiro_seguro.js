@@ -279,6 +279,23 @@ function formatearDiferenciaReferencia(valor) {
 }
 
 
+function obtenerResumenAcreditadoReferenciaGuardado() {
+  const simulacion = obtenerSimulacion();
+  const sistema = simulacion.persona?.sistema;
+
+  if (sistema === "SEBD") {
+    return simulacion.resultado_sebd_acreditado?.resumen_unificado || null;
+  }
+  if (sistema === "MIXTO") {
+    return simulacion.resultado_mixto_acreditado?.resumen_unificado || null;
+  }
+  if (sistema === "SUCGS") {
+    return simulacion.resultado_sucgs_acreditado?.resumen_unificado || null;
+  }
+  return null;
+}
+
+
 function mostrarComparacionReferenciaMiRetiroSeguro(resumenActual) {
   const contenedor = document.getElementById(
     "resultado-comparacion-referencia",
@@ -290,14 +307,16 @@ function mostrarComparacionReferenciaMiRetiroSeguro(resumenActual) {
 
   const simulacion = obtenerSimulacion();
   const referencia = simulacion.referencia_mi_retiro_seguro;
+  const resumenAcreditado = obtenerResumenAcreditadoReferenciaGuardado();
+  const resumenComparado = resumenAcreditado || resumenActual;
 
-  if (!referencia || !resumenActual) {
+  if (!referencia || !resumenComparado) {
     contenedor.classList.add("d-none");
     return;
   }
 
   const actual = montoActualComparable(
-    resumenActual,
+    resumenComparado,
     referencia.naturaleza_prestacion,
   );
 
@@ -314,11 +333,11 @@ function mostrarComparacionReferenciaMiRetiroSeguro(resumenActual) {
     .length === 0;
   const mismoSistema = (
     referencia.sistema_elegido !== "NO_IDENTIFICADO"
-    && referencia.sistema_elegido === resumenActual.sistema
+    && referencia.sistema_elegido === resumenComparado.sistema
   );
   const mismaEdad = (
     referencia.edad_retiro_elegida != null
-    && Number(referencia.edad_retiro_elegida) === Number(resumenActual.edad_retiro_anios)
+    && Number(referencia.edad_retiro_elegida) === Number(resumenComparado.edad_retiro_anios)
   );
   const mismoTipo = actual != null;
 
@@ -335,11 +354,16 @@ function mostrarComparacionReferenciaMiRetiroSeguro(resumenActual) {
     const diferencia = Number(actual) - Number(referencia.monto_estimado_prestacion);
     diferenciaElemento.textContent = formatearDiferenciaReferencia(diferencia);
     estado.className = "alert alert-info mb-0 mt-3";
-    estado.textContent = (
-      "La diferencia compara la proyección actual con la cifra variable extraída "
-      + "del comprobante cargado. Puede cambiar si el PDF y la simulación usan "
-      + "fotografías de datos o supuestos salariales distintos."
-    );
+    estado.textContent = resumenAcreditado
+      ? (
+        "La diferencia compara el comprobante con el cálculo propio que usa "
+        + "solo la información actualmente acreditada. Si el PDF corresponde "
+        + "a una fotografía anterior, ambos valores todavía pueden diferir."
+      )
+      : (
+        "La diferencia usa el resultado disponible de la simulación. Recalcula "
+        + "la prestación para generar también la fotografía acreditada propia."
+      );
   } else {
     diferenciaElemento.textContent = "No comparable";
     estado.className = "alert alert-warning mb-0 mt-3";

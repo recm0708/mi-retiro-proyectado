@@ -72,6 +72,31 @@ def _buscar_escenario_salarial(
     )
 
 
+def _ajustar_escenario_solo_acreditado(
+    datos: DatosResultadoSEBDNormal,
+    escenario: EscenarioRetiro,
+) -> EscenarioRetiro:
+    """Devuelve el mismo momento de retiro usando solo cuotas ya acreditadas.
+
+    La fecha y la edad del escenario no cambian. Únicamente se elimina la
+    incorporación de cuotas futuras para que los motores puedan responder a
+    la pregunta: qué prestación resultaría en esa fecha si no se añadieran
+    nuevos salarios ni nuevas cuotas después del corte actual.
+    """
+
+    if getattr(datos, "modo_integracion", "PROYECTADO") != "SOLO_ACREDITADO":
+        return escenario
+
+    cuotas_acreditadas = int(datos.historial.cuotas_totales_referencia)
+
+    return escenario.model_copy(
+        update={
+            "cuotas_estimadas_adicionales": 0,
+            "cuotas_estimadas_totales": cuotas_acreditadas,
+        }
+    )
+
+
 def _prorratear_salario_proyectado(
     salario_proyectado: float,
     cuotas_disponibles: int,
@@ -300,6 +325,11 @@ def calcular_resultado_sebd_normal(
         )
     )
 
+    escenario_retiro = _ajustar_escenario_solo_acreditado(
+        datos,
+        escenario_retiro,
+    )
+
     if escenario_retiro.fecha_ya_transcurrida:
         raise ValueError(
             "El escenario de retiro seleccionado ya transcurrió. "
@@ -313,6 +343,11 @@ def calcular_resultado_sebd_normal(
         _buscar_escenario_referencia(
             datos
         )
+    )
+
+    escenario_referencia = _ajustar_escenario_solo_acreditado(
+        datos,
+        escenario_referencia,
     )
 
     escenario_salarial = (
@@ -383,6 +418,7 @@ def calcular_resultado_sebd_normal(
         )
 
     return ResumenResultadoSEBDNormal(
+        modo_integracion=datos.modo_integracion,
         escenario_retiro=(
             escenario_retiro
         ),

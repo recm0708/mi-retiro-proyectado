@@ -103,11 +103,23 @@ class ResumenCalculoSEBDNormal(BaseModel):
     fuente_normativa: str
 
 # ============================================================
+# Modo de integración del resultado
+# ============================================================
+
+ModoIntegracionResultado = Literal[
+    "PROYECTADO",
+    "SOLO_ACREDITADO",
+]
+
+
+# ============================================================
 # Integración del asistente con el motor SEBD
 # ============================================================
 
 class DatosResultadoSEBDNormal(BaseModel):
     """Datos consolidados de los Pasos 1–5 para calcular SEBD normal."""
+
+    modo_integracion: ModoIntegracionResultado = "PROYECTADO"
 
     fecha_nacimiento: date
     sexo: str = Field(min_length=1)
@@ -123,6 +135,7 @@ class DatosResultadoSEBDNormal(BaseModel):
 class ResumenResultadoSEBDNormal(BaseModel):
     """Resultado SEBD normal unido al escenario elegido en el asistente."""
 
+    modo_integracion: ModoIntegracionResultado = "PROYECTADO"
     escenario_retiro: EscenarioRetiro
     escenario_salarial_nombre: str
 
@@ -218,6 +231,8 @@ class ResumenCalculoSEBD(BaseModel):
 class DatosResultadoSEBD(BaseModel):
     """Datos consolidados de los Pasos 1–5 para cualquier modalidad SEBD."""
 
+    modo_integracion: ModoIntegracionResultado = "PROYECTADO"
+
     fecha_nacimiento: date
     sexo: str = Field(min_length=1)
 
@@ -232,6 +247,7 @@ class DatosResultadoSEBD(BaseModel):
 class ResumenResultadoSEBD(BaseModel):
     """Resultado integrado del asistente para la modalidad SEBD detectada."""
 
+    modo_integracion: ModoIntegracionResultado = "PROYECTADO"
     escenario_retiro: EscenarioRetiro
     escenario_salarial_nombre: str
 
@@ -439,6 +455,8 @@ class DatosResultadoMixto(BaseModel):
     no pueden reconstruirse de forma fiable a partir del historial anual.
     """
 
+    modo_integracion: ModoIntegracionResultado = "PROYECTADO"
+
     fecha_nacimiento: date
     sexo: str = Field(min_length=1)
 
@@ -468,6 +486,7 @@ class DatosResultadoMixto(BaseModel):
 class ResumenResultadoMixto(BaseModel):
     """Resultado Mixto integrado con el escenario elegido en el asistente."""
 
+    modo_integracion: ModoIntegracionResultado = "PROYECTADO"
     escenario_retiro: EscenarioRetiro
     escenario_salarial_nombre: str
 
@@ -651,6 +670,8 @@ class DatosResultadoSUCGS(BaseModel):
     pasos se mantienen como datos explícitos del Paso 6.
     """
 
+    modo_integracion: ModoIntegracionResultado = "PROYECTADO"
+
     fecha_nacimiento: date
     sexo: str = Field(min_length=1)
 
@@ -681,6 +702,7 @@ class DatosResultadoSUCGS(BaseModel):
 class ResumenResultadoSUCGS(BaseModel):
     """Resultado SUCGS asociado al escenario de retiro seleccionado."""
 
+    modo_integracion: ModoIntegracionResultado = "PROYECTADO"
     escenario_retiro: EscenarioRetiro
     escenario_salarial_nombre: str
     anios_proyectados_incluidos: list[int]

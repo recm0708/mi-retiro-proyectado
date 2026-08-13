@@ -61,6 +61,13 @@ function prepararPasoResultados() {
     comparacionReferencia.classList.add("d-none");
   }
 
+  const comparacionOrigen = document.getElementById(
+    "resultado-comparacion-origen-datos",
+  );
+  if (comparacionOrigen) {
+    comparacionOrigen.classList.add("d-none");
+  }
+
   document.getElementById(
     "resultado-sistema",
   ).textContent = obtenerNombreSistemaResultados(
@@ -406,6 +413,45 @@ function prepararConfiguracionSUCGS(simulacion) {
 // ============================================================
 
 /**
+ * Obtiene una segunda evaluación usando exclusivamente salarios y cuotas ya
+ * acreditados. La fecha de retiro y los datos específicos del sistema se
+ * conservan para que la diferencia visible provenga únicamente de los
+ * períodos futuros añadidos por el escenario.
+ *
+ * @param {string} endpoint Ruta del motor integrado.
+ * @param {Object} datos Solicitud principal.
+ * @returns {Promise<Object|null>} Resultado acreditado o null si no pudo cerrarse.
+ */
+async function solicitarResultadoSoloAcreditado(endpoint, datos) {
+  const respuesta = await fetch(
+    endpoint,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        ...datos,
+        modo_integracion: "SOLO_ACREDITADO",
+      }),
+    },
+  );
+
+  let contenido = null;
+  try {
+    contenido = await respuesta.json();
+  } catch {
+    contenido = null;
+  }
+
+  if (!respuesta.ok) {
+    return null;
+  }
+
+  return contenido;
+}
+
+/**
  * Construye la entrada integrada para el motor general SEBD.
  *
  * @returns {Object} Solicitud lista para FastAPI.
@@ -452,6 +498,7 @@ function construirSolicitudResultadoSEBD() {
   }
 
   return {
+    modo_integracion: "PROYECTADO",
     fecha_nacimiento: persona.fecha_nacimiento,
     sexo: persona.sexo,
     historial: simulacion.historial,
@@ -517,18 +564,28 @@ async function calcularResultadoSEBD() {
       return;
     }
 
+    const contenidoAcreditado = await solicitarResultadoSoloAcreditado(
+      "/api/simulacion/resultados/sebd",
+      datos,
+    );
+
     const simulacion = obtenerSimulacion();
 
     simulacion.escenario_salarial_seleccionado = (
       datos.escenario_salarial_nombre
     );
     simulacion.resultado_sebd_normal = contenido;
+    simulacion.resultado_sebd_acreditado = contenidoAcreditado;
 
     guardarSimulacion(
       simulacion,
     );
 
     mostrarResultadoSEBD(
+      contenido,
+    );
+    mostrarComparacionOrigenDatos(
+      contenidoAcreditado,
       contenido,
     );
 
@@ -646,6 +703,7 @@ function construirSolicitudResultadoMixto() {
   ) ?? 0;
 
   return {
+    modo_integracion: "PROYECTADO",
     fecha_nacimiento: persona.fecha_nacimiento,
     sexo: persona.sexo,
     historial: simulacion.historial,
@@ -752,6 +810,11 @@ async function calcularResultadoMixto() {
       return;
     }
 
+    const contenidoAcreditado = await solicitarResultadoSoloAcreditado(
+      "/api/simulacion/resultados/mixto",
+      datos,
+    );
+
     const simulacion = obtenerSimulacion();
 
     guardarConfiguracionResultadoMixto(
@@ -759,10 +822,15 @@ async function calcularResultadoMixto() {
       datos,
     );
     simulacion.resultado_mixto = contenido;
+    simulacion.resultado_mixto_acreditado = contenidoAcreditado;
 
     guardarSimulacion(simulacion);
 
     mostrarResultadoMixto(contenido);
+    mostrarComparacionOrigenDatos(
+      contenidoAcreditado,
+      contenido,
+    );
 
   } catch {
     mostrarErrorResultados(
@@ -874,6 +942,7 @@ function construirSolicitudResultadoSUCGS() {
   }
 
   return {
+    modo_integracion: "PROYECTADO",
     fecha_nacimiento: persona.fecha_nacimiento,
     sexo: persona.sexo,
     historial: simulacion.historial,
@@ -981,13 +1050,23 @@ async function calcularResultadoSUCGS() {
       return;
     }
 
+    const contenidoAcreditado = await solicitarResultadoSoloAcreditado(
+      "/api/simulacion/resultados/sucgs",
+      datos,
+    );
+
     const simulacion = obtenerSimulacion();
 
     guardarConfiguracionResultadoSUCGS(simulacion, datos);
     simulacion.resultado_sucgs = contenido;
+    simulacion.resultado_sucgs_acreditado = contenidoAcreditado;
     guardarSimulacion(simulacion);
 
     mostrarResultadoSUCGS(contenido);
+    mostrarComparacionOrigenDatos(
+      contenidoAcreditado,
+      contenido,
+    );
 
   } catch {
     mostrarErrorResultados(
@@ -1419,6 +1498,172 @@ function mostrarResumenResultadoUnificado(resumen) {
   ) {
     mostrarComparacionReferenciaMiRetiroSeguro(resumen);
   }
+}
+
+
+// ============================================================
+// Información acreditada vs proyección al retiro
+// ============================================================
+
+function formatearDiferenciaOrigen(valor, esMoneda = true) {
+  if (!Number.isFinite(valor)) {
+    return "No comparable";
+  }
+
+  const prefijo = valor > 0 ? "+" : (valor < 0 ? "−" : "");
+  const absoluto = Math.abs(valor);
+  return esMoneda
+    ? `${prefijo}${formatearMoneda(absoluto)}`
+    : `${prefijo}${absoluto}`;
+}
+
+
+function escribirMontoOrigen(id, valor) {
+  document.getElementById(id).textContent = valor == null
+    ? "—"
+    : formatearMoneda(valor);
+}
+
+
+/**
+ * Presenta una comparación propia entre la fotografía acreditada y el
+ * escenario que incorpora períodos futuros. No depende de un PDF externo.
+ *
+ * @param {Object|null} acreditado Resultado recalculado sin períodos futuros.
+ * @param {Object|null} proyectado Resultado principal del escenario.
+ */
+function mostrarComparacionOrigenDatos(acreditado, proyectado) {
+  const contenedor = document.getElementById(
+    "resultado-comparacion-origen-datos",
+  );
+
+  if (!contenedor || !proyectado?.resumen_unificado) {
+    if (contenedor) {
+      contenedor.classList.add("d-none");
+    }
+    return;
+  }
+
+  const resumenP = proyectado.resumen_unificado;
+  const resumenA = acreditado?.resumen_unificado || null;
+
+  escribirMontoOrigen(
+    "resultado-origen-proyectado-mensual",
+    resumenP.pension_mensual_estimada,
+  );
+  escribirMontoOrigen(
+    "resultado-origen-proyectado-pago-unico",
+    resumenP.pago_unico_estimado,
+  );
+  document.getElementById(
+    "resultado-origen-proyectado-cuotas",
+  ).textContent = resumenP.cuotas_estimadas_totales ?? "—";
+
+  const anios = Array.isArray(proyectado.anios_proyectados_incluidos)
+    ? proyectado.anios_proyectados_incluidos
+    : [];
+  document.getElementById(
+    "resultado-origen-anios-proyectados",
+  ).textContent = anios.length > 0
+    ? anios.join(", ")
+    : "Ninguno";
+
+  const estado = document.getElementById("resultado-origen-estado");
+
+  if (!resumenA) {
+    escribirMontoOrigen("resultado-origen-acreditado-mensual", null);
+    escribirMontoOrigen("resultado-origen-acreditado-pago-unico", null);
+    document.getElementById(
+      "resultado-origen-acreditado-cuotas",
+    ).textContent = "—";
+    document.getElementById(
+      "resultado-origen-diferencia-mensual",
+    ).textContent = "No disponible";
+    document.getElementById(
+      "resultado-origen-diferencia-pago-unico",
+    ).textContent = "No disponible";
+    document.getElementById(
+      "resultado-origen-diferencia-cuotas",
+    ).textContent = "No disponible";
+
+    estado.className = "alert alert-warning mb-0 mt-3";
+    estado.textContent = (
+      "La proyección principal se calculó correctamente, pero no fue posible "
+      + "cerrar la comparación usando solo la información acreditada."
+    );
+    contenedor.classList.remove("d-none");
+    return;
+  }
+
+  escribirMontoOrigen(
+    "resultado-origen-acreditado-mensual",
+    resumenA.pension_mensual_estimada,
+  );
+  escribirMontoOrigen(
+    "resultado-origen-acreditado-pago-unico",
+    resumenA.pago_unico_estimado,
+  );
+  document.getElementById(
+    "resultado-origen-acreditado-cuotas",
+  ).textContent = resumenA.cuotas_estimadas_totales ?? "—";
+
+  const ambosMensualesAusentes = (
+    resumenA.pension_mensual_estimada == null
+    && resumenP.pension_mensual_estimada == null
+  );
+  const ambosPagosAusentes = (
+    resumenA.pago_unico_estimado == null
+    && resumenP.pago_unico_estimado == null
+  );
+
+  const diferenciaMensual = (
+    resumenA.pension_mensual_estimada != null
+    && resumenP.pension_mensual_estimada != null
+  )
+    ? Number(resumenP.pension_mensual_estimada)
+      - Number(resumenA.pension_mensual_estimada)
+    : NaN;
+
+  const diferenciaPago = (
+    resumenA.pago_unico_estimado != null
+    && resumenP.pago_unico_estimado != null
+  )
+    ? Number(resumenP.pago_unico_estimado)
+      - Number(resumenA.pago_unico_estimado)
+    : NaN;
+
+  const diferenciaCuotas = (
+    Number.isFinite(Number(resumenA.cuotas_estimadas_totales))
+    && Number.isFinite(Number(resumenP.cuotas_estimadas_totales))
+  )
+    ? Number(resumenP.cuotas_estimadas_totales)
+      - Number(resumenA.cuotas_estimadas_totales)
+    : NaN;
+
+  document.getElementById(
+    "resultado-origen-diferencia-mensual",
+  ).textContent = ambosMensualesAusentes
+    ? "No aplica"
+    : formatearDiferenciaOrigen(diferenciaMensual, true);
+  document.getElementById(
+    "resultado-origen-diferencia-pago-unico",
+  ).textContent = ambosPagosAusentes
+    ? "No aplica"
+    : formatearDiferenciaOrigen(diferenciaPago, true);
+  document.getElementById(
+    "resultado-origen-diferencia-cuotas",
+  ).textContent = formatearDiferenciaOrigen(diferenciaCuotas, false);
+
+  estado.className = "alert alert-info mb-0 mt-3";
+  estado.textContent = (
+    "Ambas columnas usan la misma fecha de retiro. La columna acreditada "
+    + "mantiene únicamente salarios y cuotas ya registrados; la proyección "
+    + "añade las cotizaciones futuras del escenario seleccionado. En Mixto "
+    + "y SUCGS, los saldos y parámetros específicos introducidos en el Paso 6 "
+    + "se mantienen iguales en ambas columnas y no se proyectan automáticamente."
+  );
+
+  contenedor.classList.remove("d-none");
 }
 
 
@@ -2795,6 +3040,7 @@ function invalidarResultadoSEBD() {
     ).value || null
   );
   simulacion.resultado_sebd_normal = null;
+  simulacion.resultado_sebd_acreditado = null;
 
   guardarSimulacion(simulacion);
 
@@ -2807,6 +3053,13 @@ function invalidarResultadoSEBD() {
   );
   if (comparacionReferencia) {
     comparacionReferencia.classList.add("d-none");
+  }
+
+  const comparacionOrigen = document.getElementById(
+    "resultado-comparacion-origen-datos",
+  );
+  if (comparacionOrigen) {
+    comparacionOrigen.classList.add("d-none");
   }
 }
 
@@ -2822,6 +3075,10 @@ function restaurarResultadoSEBDGuardado() {
     && simulacion.persona?.sistema === "SEBD"
   ) {
     mostrarResultadoSEBD(
+      simulacion.resultado_sebd_normal,
+    );
+    mostrarComparacionOrigenDatos(
+      simulacion.resultado_sebd_acreditado || null,
       simulacion.resultado_sebd_normal,
     );
   }
@@ -2862,6 +3119,7 @@ function invalidarResultadoMixto() {
   }
 
   simulacion.resultado_mixto = null;
+  simulacion.resultado_mixto_acreditado = null;
   guardarSimulacion(simulacion);
 
   document.getElementById(
@@ -2873,6 +3131,13 @@ function invalidarResultadoMixto() {
   );
   if (comparacionReferencia) {
     comparacionReferencia.classList.add("d-none");
+  }
+
+  const comparacionOrigen = document.getElementById(
+    "resultado-comparacion-origen-datos",
+  );
+  if (comparacionOrigen) {
+    comparacionOrigen.classList.add("d-none");
   }
 }
 
@@ -2888,6 +3153,10 @@ function restaurarResultadoMixtoGuardado() {
     && simulacion.persona?.sistema === "MIXTO"
   ) {
     mostrarResultadoMixto(
+      simulacion.resultado_mixto,
+    );
+    mostrarComparacionOrigenDatos(
+      simulacion.resultado_mixto_acreditado || null,
       simulacion.resultado_mixto,
     );
   }
@@ -2930,6 +3199,7 @@ function invalidarResultadoSUCGS() {
   }
 
   simulacion.resultado_sucgs = null;
+  simulacion.resultado_sucgs_acreditado = null;
   guardarSimulacion(simulacion);
 
   document.getElementById(
@@ -2941,6 +3211,13 @@ function invalidarResultadoSUCGS() {
   );
   if (comparacionReferencia) {
     comparacionReferencia.classList.add("d-none");
+  }
+
+  const comparacionOrigen = document.getElementById(
+    "resultado-comparacion-origen-datos",
+  );
+  if (comparacionOrigen) {
+    comparacionOrigen.classList.add("d-none");
   }
 }
 
@@ -2956,6 +3233,10 @@ function restaurarResultadoSUCGSGuardado() {
     && simulacion.persona?.sistema === "SUCGS"
   ) {
     mostrarResultadoSUCGS(simulacion.resultado_sucgs);
+    mostrarComparacionOrigenDatos(
+      simulacion.resultado_sucgs_acreditado || null,
+      simulacion.resultado_sucgs,
+    );
   }
 }
 

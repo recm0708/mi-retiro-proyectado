@@ -16,6 +16,7 @@ from app.servicios.resultados import (
     _buscar_escenario_referencia,
     _buscar_escenario_retiro,
     _buscar_escenario_salarial,
+    _ajustar_escenario_solo_acreditado,
     _construir_registros_hasta_retiro,
     _resolver_exceso_por_momento,
 )
@@ -33,6 +34,9 @@ def calcular_resultado_sebd(
         )
 
     escenario_retiro = _buscar_escenario_retiro(datos)
+    escenario_retiro = _ajustar_escenario_solo_acreditado(
+        datos, escenario_retiro
+    )
 
     if escenario_retiro.fecha_ya_transcurrida:
         raise ValueError(
@@ -43,6 +47,9 @@ def calcular_resultado_sebd(
         )
 
     escenario_referencia = _buscar_escenario_referencia(datos)
+    escenario_referencia = _ajustar_escenario_solo_acreditado(
+        datos, escenario_referencia
+    )
     escenario_salarial = _buscar_escenario_salarial(datos)
 
     (
@@ -76,6 +83,13 @@ def calcular_resultado_sebd(
 
     advertencias: list[str] = []
 
+    if datos.modo_integracion == "SOLO_ACREDITADO":
+        advertencias.append(
+            "Este cálculo conserva la fecha de retiro seleccionada, pero usa "
+            "solo cuotas y salarios ya acreditados en el historial actual; "
+            "no incorpora nuevas cotizaciones futuras."
+        )
+
     if anios_proyectados:
         advertencias.append(
             "El cálculo incorpora salarios proyectados de los años: "
@@ -90,6 +104,7 @@ def calcular_resultado_sebd(
         )
 
     resumen = ResumenResultadoSEBD(
+        modo_integracion=datos.modo_integracion,
         escenario_retiro=escenario_retiro,
         escenario_salarial_nombre=datos.escenario_salarial_nombre,
         anios_proyectados_incluidos=anios_proyectados,

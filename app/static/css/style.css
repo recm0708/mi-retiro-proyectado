@@ -798,6 +798,45 @@ html[data-app-theme="contrast"] .current-year-detail-complete {
   font-weight: 600;
 }
 
+.result-data-origin-comparison {
+  padding: 1.25rem;
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius);
+  background: var(--app-surface-subtle);
+}
+
+.result-origin-table-wrap {
+  border: 1px solid var(--app-border);
+  border-radius: 0.85rem;
+}
+
+.result-origin-table {
+  min-width: 760px;
+  margin-bottom: 0;
+  color: var(--app-dark);
+}
+
+.result-origin-table thead {
+  background: var(--app-surface-accent);
+}
+
+.result-origin-table th,
+.result-origin-table td {
+  padding: 0.85rem 1rem;
+  border-color: var(--app-border);
+  vertical-align: middle;
+}
+
+.result-origin-table td:not(:first-child) {
+  font-variant-numeric: tabular-nums;
+  font-weight: 650;
+}
+
+html[data-app-theme="contrast"] .result-data-origin-comparison,
+html[data-app-theme="contrast"] .result-origin-table-wrap {
+  border-width: 2px;
+}
+
 html[data-app-theme="contrast"] .reference-pdf-card,
 html[data-app-theme="contrast"] .reference-result-comparison {
   background: var(--app-surface);

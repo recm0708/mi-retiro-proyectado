@@ -575,6 +575,82 @@
 
 
       <!-- ================================================
+           DATOS ACREDITADOS VS PROYECCIÓN
+           ================================================ -->
+
+      <section
+        id="resultado-comparacion-origen-datos"
+        class="result-data-origin-comparison mt-4 d-none"
+        aria-labelledby="resultado-comparacion-origen-titulo"
+      >
+        <div class="results-section-heading mb-3">
+          <span class="text-primary fw-semibold">Origen de los datos</span>
+          <h3
+            id="resultado-comparacion-origen-titulo"
+            class="h5 fw-bold mb-1"
+          >
+            Información acreditada y proyección al retiro
+          </h3>
+          <p class="text-secondary mb-0">
+            La primera columna conserva únicamente salarios y cuotas ya
+            acreditados en el historial actual. La segunda incorpora los
+            períodos futuros del escenario seleccionado.
+          </p>
+        </div>
+
+        <div class="table-responsive result-origin-table-wrap">
+          <table class="table align-middle result-origin-table mb-0">
+            <caption class="visually-hidden">
+              Comparación entre información acreditada y proyección al retiro.
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">Concepto</th>
+                <th scope="col">Solo información acreditada</th>
+                <th scope="col">Proyección al retiro</th>
+                <th scope="col">Diferencia</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Pensión mensual</th>
+                <td id="resultado-origen-acreditado-mensual">—</td>
+                <td id="resultado-origen-proyectado-mensual">—</td>
+                <td id="resultado-origen-diferencia-mensual">—</td>
+              </tr>
+              <tr>
+                <th scope="row">Pago único</th>
+                <td id="resultado-origen-acreditado-pago-unico">—</td>
+                <td id="resultado-origen-proyectado-pago-unico">—</td>
+                <td id="resultado-origen-diferencia-pago-unico">—</td>
+              </tr>
+              <tr>
+                <th scope="row">Cuotas consideradas</th>
+                <td id="resultado-origen-acreditado-cuotas">—</td>
+                <td id="resultado-origen-proyectado-cuotas">—</td>
+                <td id="resultado-origen-diferencia-cuotas">—</td>
+              </tr>
+              <tr>
+                <th scope="row">Períodos salariales proyectados</th>
+                <td>Ninguno</td>
+                <td id="resultado-origen-anios-proyectados">—</td>
+                <td aria-hidden="true">—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div
+          id="resultado-origen-estado"
+          class="alert alert-info mb-0 mt-3"
+          role="status"
+        >
+          El cálculo comparativo se mostrará después de calcular la prestación.
+        </div>
+      </section>
+
+
+      <!-- ================================================
            COMPARACIÓN CON REFERENCIA PERSONAL IMPORTADA
            ================================================ -->
 
@@ -592,7 +668,7 @@
             Comparación con Mi Retiro Seguro
           </h3>
           <p class="text-secondary mb-0">
-            La referencia se obtiene del PDF personal cargado en el Paso 3.
+            La referencia se obtiene del PDF personal cargado en el Paso 1.
             No existe un monto predeterminado dentro de la aplicación.
           </p>
         </div>
@@ -608,9 +684,9 @@
 
           <div class="col-md-4">
             <div class="results-summary-card results-summary-primary">
-              <span>Proyección actual</span>
+              <span>Cálculo con datos acreditados</span>
               <strong id="resultado-referencia-actual-monto">—</strong>
-              <small>Resultado calculado con los datos y supuestos actuales.</small>
+              <small>Se usa para comparar cuando existe una fotografía acreditada propia.</small>
             </div>
           </div>
 

@@ -16,6 +16,7 @@ from app.servicios.resultado_unificado import construir_resumen_unificado_sucgs
 from app.servicios.resultados import (
     _buscar_escenario_retiro,
     _buscar_escenario_salarial,
+    _ajustar_escenario_solo_acreditado,
     _construir_registros_hasta_retiro,
 )
 
@@ -32,6 +33,9 @@ def calcular_resultado_sucgs(
         )
 
     escenario_retiro = _buscar_escenario_retiro(datos)
+    escenario_retiro = _ajustar_escenario_solo_acreditado(
+        datos, escenario_retiro
+    )
 
     if escenario_retiro.fecha_ya_transcurrida:
         raise ValueError(
@@ -88,6 +92,13 @@ def calcular_resultado_sucgs(
 
     advertencias: list[str] = []
 
+    if datos.modo_integracion == "SOLO_ACREDITADO":
+        advertencias.append(
+            "La comparación acreditada conserva el saldo solidario y valores "
+            "específicos introducidos en el Paso 6, pero no añade salarios ni "
+            "cuotas futuras al historial."
+        )
+
     if anios_proyectados:
         advertencias.append(
             "La evaluación SUCGS incorpora salarios proyectados de los años: "
@@ -109,6 +120,7 @@ def calcular_resultado_sucgs(
         )
 
     resumen = ResumenResultadoSUCGS(
+        modo_integracion=datos.modo_integracion,
         escenario_retiro=escenario_retiro,
         escenario_salarial_nombre=escenario_salarial.nombre,
         anios_proyectados_incluidos=anios_proyectados,
