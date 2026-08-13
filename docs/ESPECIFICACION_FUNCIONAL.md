@@ -424,3 +424,18 @@ Quedan para fases posteriores:
 **RF-127.** En Mixto y SUCGS, los saldos y parámetros específicos que no pueden proyectarse de forma fiable se mantendrán constantes entre ambas fotografías y se informará esta limitación.
 
 **RF-128.** La tabla comparativa debe disponer de caption accesible, encabezados programáticos de fila/columna y estado textual que no dependa únicamente del color.
+
+
+## 21. Pre-beta — regresión E2E y hardening
+
+**RF-153.** Los importadores PDF deben validar extensión, tipo MIME compatible, tamaño máximo, archivo no vacío y firma PDF antes de iniciar extracción de texto.
+
+**RF-154.** Los documentos importados deben continuar procesándose en memoria y sus respuestas no deben habilitar caché del navegador.
+
+**RF-155.** La aplicación debe devolver errores controlados para PDF corrupto, protegido, ajeno al formato esperado, con exceso de páginas o texto anómalo, sin exponer trazas internas.
+
+**RF-156.** Las rutas integradas de SEBD, Mixto y SUCGS deben disponer de regresiones E2E por API con resultados controlados.
+
+**RF-157.** La validación continua debe cubrir instalación de dependencias, coherencia de paquetes, compilación Python, sintaxis JavaScript y suite completa en las versiones de Python soportadas para la beta.
+
+**RF-158.** Las respuestas HTML deben incluir cabeceras defensivas de bajo riesgo contra sniffing de tipos, framing y exposición innecesaria de referrer/permisos del navegador.

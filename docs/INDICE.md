@@ -26,6 +26,7 @@ Este archivo es el punto de entrada para la documentación técnica, funcional y
 | [MODALIDADES_MIXTO.md](MODALIDADES_MIXTO.md) | Componentes y prestaciones del Subsistema Mixto. |
 | [MODALIDADES_SUCGS.md](MODALIDADES_SUCGS.md) | Capas del Sistema Único de Capitalización con Garantía Solidaria. |
 | [VALIDACION.md](VALIDACION.md) | Estrategia de pruebas, regresiones y casos sintéticos. |
+| [SEGURIDAD_PRIVACIDAD.md](SEGURIDAD_PRIVACIDAD.md) | Modelo de privacidad local, validación de documentos, CI y límites de la beta. |
 | [ROADMAP.md](ROADMAP.md) | Fases terminadas, cierre de 6F y trabajo posterior. |
 | [GUIA_INTERNA_DESARROLLO.md](GUIA_INTERNA_DESARROLLO.md) | Convenciones internas de marca, terminología, tipografía y contenido no visible. |
 

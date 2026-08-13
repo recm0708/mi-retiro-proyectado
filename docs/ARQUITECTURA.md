@@ -263,7 +263,7 @@ La validación automatizada usa `unittest` y cubre:
 - SUCGS;
 - servicios integrados.
 
-Estado actual después de la primera revisión de producto: **73 pruebas**.
+Estado técnico pre-beta actual: **185 pruebas automatizadas**.
 
 Ver [VALIDACION.md](VALIDACION.md).
 
@@ -370,3 +370,12 @@ El parser `ficha_digital.py` descarta períodos de años distintos al año calen
 Los modelos integrados de SEBD, Mixto y SUCGS incorporan `modo_integracion`, con `PROYECTADO` como valor predeterminado y `SOLO_ACREDITADO` como fotografía alternativa. `app/servicios/resultados.py` ajusta el escenario seleccionado en modo acreditado para conservar la fecha/edad de retiro, fijar las cuotas al total real del historial y eliminar cuotas futuras. La construcción cronológica existente recibe entonces cero cuotas nuevas y no consume salarios proyectados.
 
 Los tres servicios de resultados reutilizan sus motores legales sin ramas de fórmula paralelas. El frontend solicita ambas fotografías, almacena cada una por separado en `sessionStorage` y las invalida conjuntamente cuando cambia una dependencia. La comparación con Mi Retiro Seguro consulta primero la fotografía acreditada guardada y solo recurre al resultado proyectado si todavía no existe aquella.
+
+
+## Hardening previo a beta
+
+La frontera HTTP valida los PDFs mediante `app/core/archivos_pdf.py` antes de delegar en `referencia_mi_retiro_seguro.py` o `ficha_digital.py`. La validación cubre extensión, MIME tolerado, tamaño, vacío y firma PDF; los parsers conservan límites independientes de páginas y texto extraído.
+
+Un middleware transversal añade cabeceras defensivas que no modifican la semántica de los cálculos. Los endpoints de importación declaran `Cache-Control: no-store`.
+
+La verificación continua vive en `.github/workflows/ci.yml` y trata el repositorio como una instalación limpia: instala `requirements.txt`, ejecuta `pip check`, compila Python, valida JavaScript y corre la suite. Dependabot mantiene propuestas de actualización separadas para `pip` y GitHub Actions.

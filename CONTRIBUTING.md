@@ -254,3 +254,13 @@ Cuando se modifique el flujo de salarios recientes:
 - En Mixto y SUCGS no se proyectarán saldos CAP/solidarios sin una fuente o regla oficial; si se comparan ambas fotografías, esos saldos permanecen constantes y la interfaz debe explicarlo.
 - Cualquier cambio que invalide un resultado proyectado debe invalidar también su fotografía acreditada asociada.
 - Las tablas comparativas nuevas deben conservar `caption`, `scope` y foco/contraste coherentes con los temas existentes.
+
+
+## Pre-beta — archivos, CI y privacidad
+
+- Toda nueva carga de PDF debe reutilizar la validación común de `app/core/archivos_pdf.py`; no duplicar comprobaciones de extensión/tamaño en endpoints.
+- Un PDF personal real nunca se incorpora al repositorio. Las regresiones usan texto sintético, modelos controlados o PDFs generados en memoria.
+- Los cambios que afecten motores, endpoints o importadores deben mantener una ruta E2E automatizada cuando exista un caso estable.
+- La CI debe permanecer con permisos mínimos de solo lectura mientras no exista una necesidad explícita de publicación.
+- Las actualizaciones propuestas por Dependabot no se aceptan por versión solamente: requieren CI verde y revisión de compatibilidad funcional/normativa.
+- No agregar una CSP estricta sin inventariar previamente recursos inline y externos; una política incorrecta puede dejar la interfaz inutilizable.

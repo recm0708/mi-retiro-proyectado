@@ -1,5 +1,16 @@
 # Changelog
 
+### Pre-beta — regresión E2E y hardening
+
+- Se agrega regresión E2E por API para SEBD acreditado/proyectado, Mixto y SUCGS.
+- Los dos importadores PDF comparten validación defensiva de extensión, MIME, tamaño, archivo vacío y firma `%PDF-` antes del parser.
+- Se mantienen límites de páginas y se añaden límites de texto extraído para documentos anómalos.
+- Las respuestas incorporan `nosniff`, bloqueo de framing, política de referrer y desactivación de cámara/micrófono/geolocalización; las importaciones usan `Cache-Control: no-store`.
+- Se agrega CI para Python 3.13/3.14 y Node.js 24, con `pip check`, `compileall`, `node --check` y suite completa.
+- Se agrega Dependabot semanal para `pip` y GitHub Actions.
+- La suite alcanza **185 pruebas automatizadas**.
+
+
 ### UX.4.5 — información acreditada, proyección y cierre accesible
 
 - El Paso 6 genera una segunda evaluación `SOLO_ACREDITADO` con la misma fecha de retiro pero sin añadir salarios ni cuotas futuras.

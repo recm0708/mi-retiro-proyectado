@@ -48,7 +48,13 @@ La próxima versión `0.1.0` continúa en desarrollo. El asistente de seis pasos
 | UX.4.4 — edad anual, detalle salarial e importación oficial revisable | Implementada y validada manualmente en PC/laptop |
 | UX.4.5 — origen acreditado/proyectado y cierre accesible | Implementada técnicamente; pendiente validación manual de cierre en PC/laptop |
 
-La suite actual contiene **170 pruebas automatizadas**. UX.3 protege responsive y la separación entre evaluación y último mes acreditado; UX.4.1–UX.4.3 cubren semántica del wizard, ayudas contextuales, validación accesible, estados seleccionados, recuperación de foco y estabilidad del `MutationObserver`; UX.4.4 añade la edad anual, un detalle opcional del año actual que separa salario disponible, cuota acreditada y períodos parciales, bases salariales recientes y una importación revisable de documentos oficiales. La Ficha Digital conserva únicamente salarios del año calendario actual y las vistas previas monetarias usan separador de miles con dos decimales.
+La suite actual contiene **185 pruebas automatizadas**. UX.3 protege responsive y la separación entre evaluación y último mes acreditado; UX.4.1–UX.4.3 cubren semántica del wizard, ayudas contextuales, validación accesible, estados seleccionados, recuperación de foco y estabilidad del `MutationObserver`; UX.4.4 añade la edad anual, un detalle opcional del año actual que separa salario disponible, cuota acreditada y períodos parciales, bases salariales recientes y una importación revisable de documentos oficiales. La Ficha Digital conserva únicamente salarios del año calendario actual y las vistas previas monetarias usan separador de miles con dos decimales.
+
+## Hardening previo a beta
+
+La preparación pre-beta incorpora una regresión E2E sobre los endpoints integrados de SEBD, Mixto y SUCGS, validación defensiva común para PDFs, cabeceras de navegador orientadas a privacidad local y CI en GitHub Actions. Los importadores rechazan extensión/MIME incompatibles, archivos vacíos, exceso de tamaño y contenido sin firma PDF antes de invocar `pypdf`.
+
+La estrategia y los límites están documentados en [`docs/SEGURIDAD_PRIVACIDAD.md`](docs/SEGURIDAD_PRIVACIDAD.md). La CI se ejecuta sobre Python 3.13 y 3.14 y valida también la sintaxis de todo el JavaScript.
 
 ## 3. Qué permite hacer el asistente
 

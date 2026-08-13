@@ -233,6 +233,9 @@ Previsto:
 - [x] UX.4.5: tabla transversal de información acreditada vs proyección al retiro para SEBD, Mixto y SUCGS;
 - [x] UX.4.5: referencia PDF comparada preferentemente contra la fotografía acreditada propia;
 - [x] UX.4.5: cierre semántico de la comparación con caption, encabezados programáticos, estado textual y soporte de Alto contraste;
+- [x] hardening pre-beta: validación defensiva común de PDFs, cabeceras de privacidad local y límites de texto/páginas;
+- [x] regresión E2E pre-beta por API para SEBD, Mixto y SUCGS;
+- [x] CI pre-beta definida para Python 3.13/3.14 y Node.js 24; validación remota pendiente hasta publicar el workflow;
 - [ ] validación manual ampliada opcional: teléfono Android por red local; tablet Android, iPhone/iPad, macOS y pantallas grandes quedan diferidos para beta/RC;
 - [x] respuesta temporal sin error para `/favicon.ico` mientras no se integran los iconos definitivos;
 - [ ] integrar favicon e iconos definitivos de **Mi Retiro Proyectado** y retirar la respuesta temporal `204`.
@@ -241,7 +244,7 @@ Previsto:
 
 Estado técnico actual; la validación manual multidispositivo queda aplazada y las revisiones inmediatas se realizan en laptop/PC:
 
-- **170 pruebas automatizadas** en `OK`;
+- **185 pruebas automatizadas** en `OK`;
 - regresión SEBD real anonimizada;
 - casos sintéticos de Mixto;
 - casos sintéticos SUCGS;
@@ -254,7 +257,7 @@ Estado técnico actual; la validación manual multidispositivo queda aplazada y 
 Antes de `v0.1.0-beta.1` se mantiene este orden de cierre:
 
 1. completar UX.4.5 y su validación manual en PC/laptop;
-2. ejecutar regresión E2E y hardening de seguridad/privacidad/dependencias;
+2. ejecutar regresión E2E y hardening de seguridad/privacidad/dependencias — **implementado técnicamente; pendiente validar CI tras el commit**;
 3. realizar, si se confirma al llegar a ese punto, una revisión completa de interfaz, textos y consistencia visual antes del empaquetado;
 4. integrar favicon e iconos definitivos y retirar `/favicon.ico` temporal;
 5. preparar el paquete portable para usuarios y validarlo en una instalación limpia;

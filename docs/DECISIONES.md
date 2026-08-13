@@ -741,3 +741,22 @@ La comparación existe aunque el Asegurado(a) no cargue un comprobante de Mi Ret
 En Mixto y SUCGS los datos específicos del Paso 6 que la aplicación no puede proyectar de forma fiable —por ejemplo, saldos acumulados— se mantienen iguales en ambas fotografías y esta limitación se comunica expresamente.
 
 **Motivo:** mezclar salarios/cuotas ya acreditados con períodos futuros impedía distinguir una referencia basada en la fotografía actual de una estimación que supone continuidad laboral. Separar ambas lecturas mejora transparencia sin duplicar fórmulas legales ni convertir un PDF personal en una regla general.
+
+
+## ADR-074 — Validar PDFs en la frontera HTTP antes del parser
+
+**Estado:** Aceptada
+
+**Decisión:** los endpoints que reciben documentos personales reutilizarán una única validación de archivo antes de invocar `pypdf`. Se exige extensión `.pdf`, MIME compatible o genérico aceptado, archivo no vacío, límite de tamaño y presencia de la firma `%PDF-` dentro del primer KiB. El archivo se cierra siempre y permanece en memoria. Los parsers mantienen límites adicionales de páginas y texto extraído.
+
+Las respuestas de importación se marcan `Cache-Control: no-store` y la aplicación añade cabeceras defensivas de navegador que no alteran los motores.
+
+**Motivo:** validar únicamente el nombre o el MIME permite que contenido ajeno alcance un parser complejo. Centralizar la frontera evita reglas divergentes entre importadores, reduce superficie de error y protege mejor documentos personales sin añadir persistencia.
+
+## ADR-075 — La primera beta exige CI reproducible y vigilancia de dependencias
+
+**Estado:** Aceptada
+
+**Decisión:** `main` y los pull requests se validarán con GitHub Actions sobre Python 3.13 y 3.14, con instalación desde `requirements.txt`, `pip check`, `compileall`, `node --check` y `unittest`. El token del workflow mantendrá `contents: read`. Dependabot revisará semanalmente `pip` y GitHub Actions.
+
+**Motivo:** las pruebas locales no detectan por sí solas una instalación limpia rota, incompatibilidades entre versiones de Python o cambios de dependencias. Automatizar el mismo contrato antes de la beta reduce el riesgo de publicar un paquete que solo funciona en la máquina de desarrollo.

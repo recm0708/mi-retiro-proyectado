@@ -236,3 +236,10 @@ Para validar UX.4.5:
 6. comprobar que una referencia PDF compatible se compare preferentemente con el cálculo acreditado.
 
 La validación manual obligatoria inmediata se limita a PC/laptop. La matriz real de dispositivos puede ampliarse con un teléfono Android en la misma red local. Tablet Android, iOS/iPadOS, pantallas de escritorio muy grandes y macOS se mantienen como compatibilidad diferida para la beta/RC y no bloquean por sí solos el cierre de UX.4.5. Las regresiones responsive automatizadas continúan siendo obligatorias.
+
+
+## Pre-beta — criterio de hardening
+
+Antes de `v0.1.0-beta.1`, cualquier cambio sobre importadores debe probar archivo válido, archivo ajeno, extensión/MIME incompatibles, archivo vacío y exceso de tamaño. Los datos personales reales permanecen fuera del repositorio.
+
+Los cambios que rompan `.github/workflows/ci.yml`, `pip check`, `compileall`, `node --check` o la suite no se consideran candidatos a beta. La matriz de CI complementa, pero no sustituye, la revisión manual del producto.

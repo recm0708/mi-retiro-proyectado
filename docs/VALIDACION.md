@@ -545,3 +545,20 @@ La suite alcanza **170 pruebas automatizadas**. `tests/test_ux45_cierre_resultad
 9. la comparación utiliza estilos compatibles con Alto contraste y números tabulares.
 
 La validación manual obligatoria de UX.4.5 se realiza en PC/laptop y debe comprobar: cálculo SEBD con ambas fotografías, un caso Mixto y uno SUCGS, navegación por teclado, reapertura de resultados guardados y temas Claro/Oscuro/Alto contraste. Si se dispone de un teléfono Android, puede añadirse una prueba real por red local. Tablet Android, iPhone/iPad, macOS y pantallas muy grandes quedan diferidos para la ronda beta/RC; su ausencia no bloquea el cierre mientras las regresiones responsive permanezcan en verde y no exista una incidencia conocida.
+
+
+## Validación pre-beta — E2E y hardening
+
+La suite alcanza **185 pruebas automatizadas**. `tests/test_prebeta_e2e_hardening.py` añade 15 regresiones centradas en la frontera real de la API:
+
+- SEBD acreditado B/.741.59 y proyección B/.769.42 por endpoint integrado;
+- Mixto controlado B/.856.25 por endpoint integrado;
+- SUCGS controlado B/.600.00 por endpoint integrado;
+- cabeceras defensivas en HTML;
+- rechazo de extensión falsa, MIME incompatible, archivo vacío y contenido sin firma PDF;
+- rechazo por exceso de tamaño antes de parsear;
+- distinción entre un PDF estructuralmente válido pero ajeno y un archivo que ni siquiera es PDF;
+- conservación del límite de páginas;
+- `Cache-Control: no-store` en importaciones.
+
+La validación local del entorno de desarrollo incluye `compileall` y `node --check` sobre todos los JavaScript. La instalación realmente limpia y `pip check` quedan además automatizados en `.github/workflows/ci.yml`; su resultado remoto debe verificarse después de commitear/pushear el workflow.
