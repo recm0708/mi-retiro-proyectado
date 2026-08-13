@@ -1,4 +1,7 @@
 # Dependencias Python de Mi Retiro Proyectado.
+# Dependencias directas mantenidas de forma explícita: fastapi, Jinja2, pydantic,
+# python-multipart, pypdf y uvicorn. El resto conserva un snapshot transitivo fijado
+# para que las instalaciones de CI y desarrollo sean reproducibles.
 # Node.js LTS es una herramienta opcional de desarrollo para validar JavaScript con `node --check`;
 # no es una dependencia de Python y no se instala mediante este archivo.
 annotated-doc==0.0.5
