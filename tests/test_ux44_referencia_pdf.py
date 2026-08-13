@@ -137,7 +137,7 @@ class TestUX44ReferenciaPDF(unittest.TestCase):
         self.assertIn("Number(actual) - Number(referencia.monto_estimado_prestacion)", self.referencia_js)
         self.assertIn("referencia.edad_retiro_elegida", self.referencia_js)
         self.assertIn("referencia.fecha_ingreso_css", self.referencia_js)
-        self.assertIn("referencia.sistema_elegido === resumenActual.sistema", self.referencia_js)
+        self.assertIn("referencia.sistema_elegido === resumenComparado.sistema", self.referencia_js)
         self.assertIn("mostrarComparacionReferenciaMiRetiroSeguro(resumen)", self.resultados_js)
 
     def test_produccion_no_hardcodea_montos_de_los_dos_comprobantes(self):
