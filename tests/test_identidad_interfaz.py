@@ -40,13 +40,14 @@ class TestIdentidadInterfaz(unittest.TestCase):
         self.assertNotIn("docs/FUENTES_NORMATIVAS.md", respuesta.text)
         self.assertNotIn("normativa/*.json", respuesta.text)
 
-    def test_footer_identifica_independencia_y_acceso_oficial(self):
+    def test_footer_identifica_independencia_sin_duplicar_mi_caja_digital(self):
         respuesta = self.cliente.get("/")
 
         self.assertIn("Todos los derechos reservados", respuesta.text)
-        self.assertIn("Abrir Mi Caja Digital", respuesta.text)
-        self.assertIn("No es una", respuesta.text)
-        self.assertIn("aplicación oficial", respuesta.text)
+        self.assertIn("Herramienta independiente de estimación previsional", respuesta.text)
+        self.assertIn("No sustituye la determinación oficial", respuesta.text)
+        self.assertIn("Fuentes oficiales", respuesta.text)
+        self.assertNotIn("Abrir Mi Caja Digital", respuesta.text)
 
 
 if __name__ == "__main__":
