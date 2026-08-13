@@ -5,6 +5,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 CSS = ROOT / "app/static/css/style.css"
+DESIGN = ROOT / "app/static/css/design-system.css"
 SIMULACION = ROOT / "app/templates/simulacion.html"
 RETIRO = ROOT / "app/templates/partials/retiro.html"
 METODOLOGIA = ROOT / "app/templates/metodologia.html"
@@ -14,15 +15,16 @@ RETIRO_JS = ROOT / "app/static/js/retiro.js"
 class TestResponsiveUX3(unittest.TestCase):
     """Protege las decisiones responsive y la semántica del Paso 5."""
 
-    def test_barra_wizard_pasa_a_sticky_inferior_en_movil(self):
+    def test_barra_wizard_conserva_responsive_sin_cubrir_contenido(self):
         css = CSS.read_text(encoding="utf-8")
+        moderno = DESIGN.read_text(encoding="utf-8")
 
         self.assertIn("UX.3 — responsive real y navegación móvil", css)
-        self.assertIn("position: fixed;", css)
-        self.assertIn("bottom: 0;", css)
-        self.assertIn("top: auto;", css)
-        self.assertIn("env(safe-area-inset-bottom)", css)
-        self.assertIn("padding-bottom: calc(9.25rem", css)
+        self.assertIn("UX.4.6b — Paso 1 y navegación común del asistente", moderno)
+        self.assertIn(".wizard-navigation-bar-top", moderno)
+        self.assertIn("position: sticky;", moderno)
+        self.assertIn(".wizard-navigation-bar-bottom", moderno)
+        self.assertIn("padding-bottom: 2rem !important;", moderno)
 
     def test_progreso_y_tablas_no_comprimen_contenido_en_movil(self):
         css = CSS.read_text(encoding="utf-8")
@@ -38,7 +40,8 @@ class TestResponsiveUX3(unittest.TestCase):
 
         self.assertIn(".wizard-actions {", css)
         self.assertIn("flex-direction: column-reverse;", css)
-        self.assertGreaterEqual(simulacion.count("wizard-actions"), 7)
+        self.assertGreaterEqual(simulacion.count("wizard-actions"), 6)
+        self.assertIn('id="wizard-sticky-primary"', simulacion)
         self.assertIn(".wizard-actions .btn", css)
         self.assertIn("width: 100%;", css)
 

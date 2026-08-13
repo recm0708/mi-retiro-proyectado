@@ -37,9 +37,13 @@ class TestUX44ImportacionOficial(unittest.TestCase):
     def setUpClass(cls):
         cls.cliente = TestClient(app)
         cls.simulacion = (ROOT / "app/templates/simulacion.html").read_text(encoding="utf-8")
-        cls.parcial = (
+        cls.parcial_comprobante = (
             ROOT / "app/templates/partials/importacion_datos_oficiales.html"
         ).read_text(encoding="utf-8")
+        cls.parcial_ficha = (
+            ROOT / "app/templates/partials/importacion_ficha_digital.html"
+        ).read_text(encoding="utf-8")
+        cls.parcial = cls.parcial_comprobante + "\n" + cls.parcial_ficha
         cls.js = (
             ROOT / "app/static/js/importacion_datos_oficiales.js"
         ).read_text(encoding="utf-8")
@@ -71,22 +75,27 @@ class TestUX44ImportacionOficial(unittest.TestCase):
         )
         self.assertEqual(respuesta.status_code, 415)
 
-    def test_importadores_estan_en_paso_uno_y_referencia_sale_del_paso_tres(self):
+    def test_comprobante_esta_en_paso_uno_y_ficha_digital_en_paso_tres(self):
         posicion_paso_1 = self.simulacion.index('data-panel="1"')
-        posicion_importacion = self.simulacion.index('partials/importacion_datos_oficiales.html')
+        posicion_comprobante = self.simulacion.index('partials/importacion_datos_oficiales.html')
         posicion_paso_2 = self.simulacion.index('data-panel="2"')
+        posicion_paso_3 = self.simulacion.index('data-panel="3"')
+        posicion_ficha = self.simulacion.index('partials/importacion_ficha_digital.html')
 
-        self.assertLess(posicion_paso_1, posicion_importacion)
-        self.assertLess(posicion_importacion, posicion_paso_2)
-        self.assertNotIn('partials/referencia_mi_retiro_seguro.html', self.simulacion)
+        self.assertLess(posicion_paso_1, posicion_comprobante)
+        self.assertLess(posicion_comprobante, posicion_paso_2)
+        self.assertLess(posicion_paso_3, posicion_ficha)
+        self.assertNotIn('id="import-ficha-digital-pdf"', self.parcial_comprobante)
+        self.assertIn('id="import-ficha-digital-pdf"', self.parcial_ficha)
 
     def test_interfaz_exige_revision_y_confirmacion_antes_de_aplicar(self):
-        self.assertIn("Ningún dato se aplica automáticamente", self.parcial)
-        self.assertIn('id="modal-import-comprobante"', self.parcial)
-        self.assertIn('id="modal-import-ficha-digital"', self.parcial)
-        self.assertIn("Confirmar y aplicar datos", self.parcial)
-        self.assertIn("Confirmar y aplicar salarios", self.parcial)
-        self.assertIn("Corrige cualquier dato antes de confirmar", self.parcial)
+        self.assertIn("revisa la información detectada antes", self.parcial_comprobante)
+        self.assertIn('id="modal-import-comprobante"', self.parcial_comprobante)
+        self.assertIn('id="modal-import-ficha-digital"', self.parcial_ficha)
+        self.assertIn("Editar campos", self.parcial_comprobante)
+        self.assertIn("Importar datos", self.parcial_comprobante)
+        self.assertIn("Confirmar y aplicar salarios", self.parcial_ficha)
+        self.assertIn("permanecen bloqueados", self.parcial_comprobante)
 
     def test_comprobante_puede_rellenar_persona_cuotas_historial_y_referencia(self):
         self.assertIn("simulacion.persona =", self.js)
@@ -102,7 +111,7 @@ class TestUX44ImportacionOficial(unittest.TestCase):
 
     def test_ficha_no_inventa_cuotas_y_solo_aplica_anio_actual_al_detalle(self):
         self.assertIn('cuota.type = "checkbox"', self.js)
-        self.assertIn("La importación no marca cuotas por su cuenta", self.parcial)
+        self.assertIn("La importación no marca cuotas por su cuenta", self.parcial_ficha)
         self.assertIn('registros.filter((registro) => registro.anio === ANIO_ACTUAL)', self.js)
         self.assertIn('modo_captura: "MENSUAL"', self.js)
         self.assertIn("detalle_anio_actual_habilitado = true", self.js)
@@ -125,8 +134,8 @@ class TestUX44ImportacionOficial(unittest.TestCase):
         )
 
         self.assertNotIn(2025, {registro.anio for registro in resumen.registros})
-        self.assertIn("Solo se muestran y conservan", self.parcial)
-        self.assertNotIn("se conservan como contexto", self.parcial)
+        self.assertIn("Solo se muestran y conservan", self.parcial_ficha)
+        self.assertNotIn("se conservan como contexto", self.parcial_ficha)
 
     def test_ficha_digital_avisa_si_no_hay_salarios_del_anio_actual(self):
         with self.assertRaisesRegex(ValueError, "año actual 2027"):
@@ -145,7 +154,7 @@ class TestUX44ImportacionOficial(unittest.TestCase):
 
     def test_preview_ficha_se_limita_al_anio_actual_y_elimina_columnas_redundantes(self):
         self.assertIn("registro.anio === ANIO_ACTUAL", self.js)
-        ficha_modal = self.parcial.split('id="modal-import-ficha-digital"', 1)[1]
+        ficha_modal = self.parcial_ficha.split('id="modal-import-ficha-digital"', 1)[1]
         self.assertNotIn('<th scope="col">Año</th>', ficha_modal)
         self.assertNotIn('<th scope="col">Aplicación</th>', ficha_modal)
         self.assertNotIn('aplicacion.textContent = "Contexto"', self.js)
@@ -154,7 +163,8 @@ class TestUX44ImportacionOficial(unittest.TestCase):
         respuesta = self.cliente.get("/simulacion")
         self.assertEqual(respuesta.status_code, 200)
         self.assertIn("importacion_datos_oficiales.js", respuesta.text)
-        self.assertIn("Importar datos oficiales", respuesta.text)
+        self.assertIn("Importar desde un comprobante PDF", respuesta.text)
+        self.assertIn("Importar salarios recientes desde Ficha Digital", respuesta.text)
         self.assertIn('/api/simulacion/ficha-digital', self.main)
 
 

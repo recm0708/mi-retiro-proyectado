@@ -109,12 +109,15 @@ class TestUX44ReferenciaPDF(unittest.TestCase):
         with self.assertRaises(ValueError):
             extraer_referencia_desde_texto("Documento cualquiera sin marcador")
 
-    def test_contrato_no_expone_identificadores_personales(self):
+    def test_contrato_admite_identificadores_opcionales_sin_codigo_documento(self):
         referencia = extraer_referencia_desde_texto(TEXTO_FEMENINO).model_dump()
 
-        self.assertNotIn("nombre", referencia)
-        self.assertNotIn("cedula", referencia)
-        self.assertNotIn("seguro_social", referencia)
+        self.assertIn("primer_nombre", referencia)
+        self.assertIn("cedula", referencia)
+        self.assertIn("numero_seguro_social", referencia)
+        self.assertIsNone(referencia["primer_nombre"])
+        self.assertIsNone(referencia["cedula"])
+        self.assertIsNone(referencia["numero_seguro_social"])
         self.assertNotIn("codigo_documento", referencia)
 
     def test_endpoint_rechaza_archivo_no_pdf(self):
@@ -128,7 +131,8 @@ class TestUX44ReferenciaPDF(unittest.TestCase):
     def test_interfaz_ofrece_carga_revisable_y_aclara_que_no_hay_monto_fijo(self):
         self.assertIn('id="import-comprobante-pdf"', self.parcial)
         self.assertIn('accept=".pdf,application/pdf"', self.parcial)
-        self.assertIn("previa editable", self.parcial)
+        self.assertIn("Vista previa del documento", self.parcial)
+        self.assertIn("Editar campos", self.parcial)
         self.assertIn("No existe un monto predeterminado", self.resultados_html)
         self.assertIn("referencia_mi_retiro_seguro.js", self.simulacion)
         self.assertIn("resultado-comparacion-referencia", self.resultados_html)

@@ -64,7 +64,8 @@ class TestEstabilizacionVisual(unittest.TestCase):
         self.assertIn("justify-content: center;", css)
         self.assertIn('btn-primary btn-center-content px-4', index)
         self.assertIn('btn-outline-primary btn-center-content', index)
-        self.assertIn('btn-outline-secondary btn-center-content', simulacion)
+        self.assertIn('id="wizard-sticky-back"', simulacion)
+        self.assertIn('class="btn btn-outline-secondary"', simulacion)
         self.assertGreaterEqual(metodologia.count("btn-center-content"), 2)
         self.assertIn("align-self-start btn-center-content", resultados_js)
 

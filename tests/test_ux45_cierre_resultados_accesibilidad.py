@@ -37,9 +37,10 @@ class TestUX45CierreResultadosAccesibilidad(unittest.TestCase):
         cls.resultados_html = (
             ROOT / "app/templates/partials/resultados.html"
         ).read_text(encoding="utf-8")
-        cls.importacion_html = (
-            ROOT / "app/templates/partials/importacion_datos_oficiales.html"
-        ).read_text(encoding="utf-8")
+        cls.importacion_html = "\n".join([
+            (ROOT / "app/templates/partials/importacion_datos_oficiales.html").read_text(encoding="utf-8"),
+            (ROOT / "app/templates/partials/importacion_ficha_digital.html").read_text(encoding="utf-8"),
+        ])
         cls.css = (ROOT / "app/static/css/style.css").read_text(encoding="utf-8")
 
     def _datos_femeninos(self, modo: str) -> DatosResultadoSEBD:
