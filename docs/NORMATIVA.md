@@ -1,256 +1,188 @@
 # Normativa
 
-Este documento describe **cómo la aplicación interpreta, versiona y aplica** las reglas normativas. Para enlaces oficiales y catálogo de leyes, reglamentos y resoluciones, consultar [FUENTES_NORMATIVAS.md](FUENTES_NORMATIVAS.md).
+**Estado:** Vigente
+**Versión de aplicación revisada:** `0.0.23-beta`
+**Revisión documental:** GOV.1.3 R3 — 2026-08-17
+**Clasificación:** Normativa / Técnica / Pública
+**Revisión externa:** Pendiente antes de una publicación pública o comercial
 
-[Índice de documentación](INDICE.md) · [Normativa](NORMATIVA.md) · [Fuentes oficiales](FUENTES_NORMATIVAS.md)
+Este documento describe cómo Mi Retiro Proyectado interpreta y versiona las reglas previsionales implementadas. No sustituye el texto legal, un reglamento, una resolución de la CSS ni una determinación individual.
 
-## 1. Fuente base del proyecto
+[Índice](INDICE.md) · [Fuentes oficiales](FUENTES_NORMATIVAS.md) · [Decisiones](DECISIONES.md)
 
-La fuente legal consolidada es el **Texto Único de la Ley 51 de 2005, Orgánica de la Caja de Seguro Social**, con reformas incorporadas hasta la Ley 462 de 2025, publicado en la **Gaceta Oficial 30284-B de 22 de mayo de 2025**.
+## 1. Jerarquía documental
 
-Enlaces oficiales:
+Para una regla previsional se prioriza:
 
-- [Normativa de la Ley Orgánica — CSS](https://www.css.gob.pa/normativas-ley-organica/)
-- [Texto Único de la Ley 51 — PDF CSS](https://www.css.gob.pa/wp-content/uploads/2025/05/TEXTO-UNICO-DE-LA-LEY-51-DE-2005-CSS-GACETA-OFICIAL-22-5-25.pdf)
-- [Gaceta Oficial 30284-B — PDF](https://www.gacetaoficial.gob.pa/pdfTemp/30284_B/GacetaNo_30284b_20250522.pdf)
+1. Texto Único vigente de la Ley 51 de 2005 y sus reformas;
+2. leyes especiales/reformatorias cuando sea necesario estudiar el origen del cambio;
+3. reglamentos y resoluciones de la CSS;
+4. páginas institucionales para orientación operativa;
+5. comunicaciones oficiales para fechas o procedimientos temporales.
 
-## 2. Regla de implementación normativa
+Una comunicación operativa no sustituye una disposición legal o reglamentaria.
 
-La aplicación distingue entre:
+## 2. Fuente base
 
-- **regla legal**: proviene de ley o Texto Único;
-- **desarrollo reglamentario**: proviene de resolución o reglamento de la CSS;
-- **parámetro versionado**: valor almacenado en `normativa/*.json` con fecha y fuente;
-- **dato oficial individual**: saldo, bono, divisor o confirmación que debe provenir del Asegurado(a)/CSS y no puede deducirse con seguridad;
-- **decisión de implementación**: criterio técnico adoptado cuando hay una ambigüedad o superposición normativa; debe quedar registrado en `docs/DECISIONES.md`.
+El proyecto utiliza como referencia consolidada el **Texto Único de la Ley 51 de 2005, Orgánica de la Caja de Seguro Social**, con reformas aprobadas por las Leyes 2 de 2007, 70 de 2011, 45 de 2017, 419 de 2024 y 462 de 2025, publicado en la **Gaceta Oficial 30284-B de 22 de mayo de 2025**.
 
-No se deben ocultar conflictos entre fuentes ni convertir una comunicación operativa temporal en una regla legal permanente.
+Fuentes oficiales:
 
-## 3. Archivos normativos versionados
+- CSS: https://www.css.gob.pa/normativas-ley-organica/
+- Texto Único PDF: https://www.css.gob.pa/wp-content/uploads/2025/05/TEXTO-UNICO-DE-LA-LEY-51-DE-2005-CSS-GACETA-OFICIAL-22-5-25.pdf
+- Gaceta Oficial: https://www.gacetaoficial.gob.pa/pdfTemp/30284_B/GacetaNo_30284b_20250522.pdf
+
+**Metadata de la fuente base:** `fecha_gaceta = 2025-05-22`.
+
+**Última verificación documental:** 2026-08-17.
+
+## 3. Contrato de versionado normativo
 
 | Archivo | Alcance |
 |---|---|
 | `normativa/parametros_generales.json` | Edades de referencia y metadatos generales. |
-| `normativa/sebd.json` | Reglas SEBD, factores anticipados, límites e indemnización. |
-| `normativa/mixto.json` | Componente BD, CAP, devolución, seguros y transición. |
-| `normativa/sucgs.json` | Tabla actuarial, capa solidaria y garantía de reemplazo. |
+| `normativa/sebd.json` | SEBD, anticipación, mínimos/máximos e indemnización. |
+| `normativa/mixto.json` | BD, CAP, transición y fuentes del Mixto. |
+| `normativa/sucgs.json` | SUCGS, factores y garantías modeladas. |
 
-Los valores sujetos a actualización deben conservar fecha de referencia y no tratarse como constantes eternas.
+Los JSON son parámetros de implementación, no sustitutos de la fuente oficial.
+
+Cuando un monto, factor o fecha sea actualizable, debe conservar fuente y fecha. No se convierte en constante eterna.
 
 ## 4. Parámetros generales
 
-Actualmente se versionan:
+El archivo vigente versiona:
 
-- edad de referencia femenina: **57 años**;
-- edad de referencia masculina: **62 años**;
-- fuente consolidada y fecha de Gaceta;
-- anticipación operativa de solicitud utilizada por la aplicación cuando corresponda.
+- edad de referencia femenina: 57 años;
+- edad de referencia masculina: 62 años;
+- anticipación operativa de solicitud: 3 meses;
+- Texto Único/Gaceta de referencia.
 
-Los motores usan fechas completas; no se decide elegibilidad únicamente restando años calendario.
+Los motores usan fechas completas cuando la regla depende del momento efectivo.
 
 ## 5. SEBD
 
-### 5.1. Artículos principales
+Artículos principales documentados: **178, 179, 180, 181, 186, 192 y 193**.
 
-La implementación general se apoya en los artículos **178, 179, 180, 181, 186, 192 y 193**.
+Contrato técnico vigente:
 
-Resumen funcional:
+- referencia general de 240 cuotas para pensión normal;
+- umbral modelado de 180 cuotas para modalidades proporcionales;
+- salario base conforme al criterio de mejores años implementado;
+- factores anticipados almacenados por mes;
+- Indemnización por Vejez separada como pago único;
+- mínimo del artículo 192 no tratado como monto vigente eterno;
+- máximos del artículo 193 sujetos a sus condiciones.
 
-- **Arts. 178–179:** condiciones generales y edad de referencia.
-- **Art. 180:** salario base sobre los diez mejores años.
-- **Art. 181:** modalidades generales, 240 cuotas de referencia, tasa base de 60 %, incrementos por cuotas y factores de anticipación.
-- **Art. 186:** Indemnización por Vejez y transición desde 01/03/2036.
-- **Art. 192:** monto mínimo sujeto a actualización.
-- **Art. 193:** topes máximos y condiciones para límites ampliados.
+El historial anual puede introducir aproximaciones frente a un detalle mensual oficial. Esa limitación debe permanecer visible.
 
-### 5.2. Salario base y años parciales
-
-El historial actual es anual. Un año parcial no se anualiza artificialmente: conserva el salario efectivamente cotizado y puede competir como año calendario dentro de la selección reglamentaria. Cuando se seleccionan diez años, el total se lleva a promedio mensual sobre 120 meses según el criterio implementado.
-
-Esta limitación se documenta porque el detalle mensual oficial puede producir diferencias en casos irregulares.
-
-### 5.3. Retiro anticipado
-
-`normativa/sebd.json` almacena la tabla mensual de factores de reducción utilizada por el motor. La fuente reglamentaria se mantiene en la sección **Reglamento para el Cálculo de Prestaciones Económicas** de la página oficial de Prestaciones Económicas de la CSS.
-
-- [Normativa de Prestaciones Económicas — CSS](https://www.css.gob.pa/normativa-prestaciones-economicas/)
-- [Resolución 39,302-2007-J.D. — CSS](https://w3.css.gob.pa/wp-content/wdocs/Resolucion%20%2039%2C302-2007-J.D..pdf)
-
-### 5.4. Monto mínimo del artículo 192
-
-El valor base B/.265.00 no se aplica automáticamente como si fuera el valor vigente para cualquier fecha. La ley dispone ajuste anual; por ello el motor advierte cuando no existe un mínimo indexado versionado para la fecha evaluada.
-
-### 5.5. Máximos del artículo 193
-
-El motor conserva:
-
-- máximo ordinario: B/.1,500.00;
-- nivel ampliado a B/.2,000.00 con requisitos de cuotas/promedio;
-- nivel ampliado a B/.2,500.00 con requisitos superiores de cuotas/promedio.
-
-Las comparaciones de requisitos usan `>=` cuando la norma establece un mínimo.
-
-### 5.6. Indemnización por Vejez
-
-La Indemnización por Vejez se modela como **pago único**, no como pensión mensual.
-
-Flujo:
-
-1. calcular la mensualidad hipotética que habría correspondido;
-2. dividir los meses/cuotas acreditados entre seis;
-3. multiplicar ese cociente por la mensualidad hipotética;
-4. conservar el resultado en un campo de pago único.
-
-Desde **01/03/2036**, el clasificador deja de aplicar esta indemnización y deriva el caso a la transición SUCGS prevista por el artículo 186.
+Consultar [MODALIDADES_SEBD.md](MODALIDADES_SEBD.md).
 
 ## 6. Subsistema Mixto
 
-### 6.1. Fuentes principales
+El motor mantiene separados:
 
-El motor utiliza los artículos **155 y 178–188**, además de los artículos 192 y 193 cuando resultan concordantes con el componente definido.
+- Componente de Beneficio Definido;
+- Componente de Ahorro Personal.
 
-Reglamentos principales:
+El CAP requiere saldo y parámetros individualizados cuando no puedan reconstruirse con fidelidad. La aplicación no fabrica una cuenta individual desde salarios anuales.
 
-- [Reglamento de Incorporación al Subsistema Mixto](https://w3.css.gob.pa/wp-content/wdocs/REGLAMENTO%20DE%20INCORPORACION%20AL%20SUBSISTEMA%20MIXTO.pdf)
-- [Resolución 39,470-2007-J.D.](https://w3.css.gob.pa/wp-content/wdocs/RES%2039470-2007-JD.pdf)
-- [Resolución 41,055-2009-J.D.](https://w3.css.gob.pa/wp-content/wdocs/RES%2041%2C055-2009-J.D..pdf)
-- [Reglamento de Seguros Colectivos del CAP](https://www.css.gob.pa/wp-content/uploads/2023/10/REGLAMENTO-DE-SEGUROS-COLECTIVOS-DEL-COMPONENTE-DE-AHORRO-PERSONAL-DEL-SUBSISTEMA-MIXTO-actualizado.pdf)
-- [Reglamento de Incorporación al Componente Contributivo de Capitalización Solidaria](https://www.css.gob.pa/wp-content/uploads/2025/07/REGLAMENTO-DE-INCORPORACION-AL-CCCS.pdf)
+### 6.1. Transición
 
-### 6.2. Componente de Beneficio Definido
+`normativa/mixto.json` conserva:
 
-El salario participante del componente se limita a **B/.500.00 mensuales**. Como el historial de la aplicación es anual, la aproximación actual limita el salario anual participante a `B/.500 × cuotas del año` y muestra una advertencia cuando este criterio sustituye un detalle mensual real.
+- fin del cálculo operativo Mixto: 29/02/2032;
+- inicio operativo SUCGS: 01/03/2032;
+- referencia distinta a 01/03/2036 presente en el artículo 153.
 
-Las modalidades de edad/cuotas reutilizan el clasificador general SEBD, pero con parámetros y topes propios del Mixto.
+La discrepancia permanece explícita y vinculada al ADR correspondiente; no se armoniza silenciosamente.
 
-### 6.3. Componente de Ahorro Personal
+### 6.2. Fecha operativa de 2026
 
-La pensión programada se calcula a partir de:
+La CSS continúa comunicando el **18/08/2026** como fecha límite operativa para asegurados que cumplan los requisitos de la opción de sistema.
 
-- saldo ahorrado y capitalizado informado;
-- bono de reconocimiento cuando corresponde;
-- valor actuarial de expectativa de vida aplicable.
+Esta fecha es **temporal y contextual**. Debe revalidarse antes de utilizarse después de 2026 o para orientar una decisión individual.
 
-La aplicación **no reconstruye el saldo CAP** acumulando porcentajes sobre salarios anuales ni reutiliza los factores actuariales del SUCGS.
+Fuentes:
 
-### 6.4. Bono de reconocimiento
+- https://prensa.css.gob.pa/2026/07/10/css-intensifica-jornadas-de-capacitacion-sobre-mi-retiro-seguro-ante-la-fecha-clave-del-18-de-agosto/
+- https://prensa.css.gob.pa/2026/07/13/cuenta-regresiva-hacia-el-18-de-agosto-asegurados-deben-decidir-su-futuro-pensional/
 
-El artículo 183 se conserva como regla separada. La aplicación acepta un monto oficial o validado y registra si fue confirmado. No reconstruye todavía el bono individual desde el historial anual.
+Última verificación: **2026-08-17**.
 
-### 6.5. Seguro Colectivo de Renta Vitalicia
-
-El artículo 184 y el reglamento de seguros colectivos se modelan como una garantía futura: si el pensionado sobrevive la expectativa de vida utilizada y se agota el capital, el seguro continúa pagando el componente CAP según las condiciones reglamentarias.
-
-La referencia histórica de prima del reglamento se conserva para trazabilidad, pero no se vuelve a descontar de un saldo oficial suministrado por el Asegurado(a).
-
-### 6.6. Devolución del CAP
-
-Cuando el artículo 187 habilita la devolución total, la aplicación no decide por el Asegurado(a). `AUTO` deja la decisión pendiente; `PENSION_PROGRAMADA` y `DEVOLUCION_TOTAL` representan elecciones explícitas.
-
-La devolución es un **pago único** y no se suma como si fuera una mensualidad.
-
-### 6.7. Transición Mixto → SUCGS
-
-La implementación utiliza como frontera operativa:
-
-- último día de cálculo bajo Mixto: **29/02/2032**;
-- inicio de cálculo bajo SUCGS: **01/03/2032**.
-
-Esta decisión se fundamenta en el artículo 188 y en el artículo 5 del Reglamento de Incorporación al Componente Contributivo de Capitalización Solidaria.
-
-El artículo 153 del Texto Único contiene una referencia distinta a **01/03/2036** para asegurados del Mixto. La aplicación conserva esta discrepancia en documentación y parámetros; no la corrige silenciosamente.
-
-### 6.8. Fecha operativa de opción en 2026
-
-La Resolución 57,805-2025-J.D. publicada en 2025 contiene originalmente 17/03/2026. Comunicaciones oficiales posteriores de la CSS utilizan **18/08/2026** como fecha límite operativa para quienes cumplan los requisitos de cambio.
-
-- [CSS — fecha clave del 18 de agosto](https://prensa.css.gob.pa/2026/07/10/css-intensifica-jornadas-de-capacitacion-sobre-mi-retiro-seguro-ante-la-fecha-clave-del-18-de-agosto/)
-- [CSS — cuenta regresiva hacia el 18 de agosto](https://prensa.css.gob.pa/2026/07/13/cuenta-regresiva-hacia-el-18-de-agosto-asegurados-deben-decidir-su-futuro-pensional/)
-
-Esta fecha debe revalidarse cuando se use fuera del contexto temporal de 2026.
+Consultar [MODALIDADES_MIXTO.md](MODALIDADES_MIXTO.md).
 
 ## 7. SUCGS
 
-### 7.1. Artículos principales
+Artículos principales versionados: **152, 153 y 194–198**.
 
-El motor utiliza los artículos **152, 153 y 194–198**, además del artículo 1 numeral 41 para la definición de salario promedio base utilizada en la garantía de reemplazo.
+El modelo separa:
 
-### 7.2. Componente contributivo — artículo 196
+- componente contributivo;
+- componente solidario no contributivo;
+- Pensión Garantizada Solidaria;
+- garantía de reemplazo modelada.
 
-Fórmula versionada:
+Los factores actuariales se cargan desde `normativa/sucgs.json`. La propia metadata normativa indica que requieren actualización periódica.
 
-```text
-pensión contributiva mensual
-= saldo de capitalización solidaria / 1000 × factor actuarial de la edad
-```
+Los valores de referencia indexables no se presentan como vigentes para siempre.
 
-La tabla de factores se almacena en `normativa/sucgs.json`. La ley dispone actualización periódica, por lo que el motor no debe tratarlos como inmutables fuera de su versión.
+Consultar [MODALIDADES_SUCGS.md](MODALIDADES_SUCGS.md).
 
-### 7.3. Componente Solidario No Contributivo — artículo 194
+## 8. Datos individualizados no inferibles
 
-La aplicación versiona como referencias legales:
+Saldo CAP, bono, divisor actuarial, saldo solidario y cualquier otro dato individual que no pueda determinarse con seguridad deben permanecer como:
 
-- valor mínimo universal: B/.144.00;
-- edad de referencia de la capa solidaria: 65 años;
-- reglas por cantidad de cuotas.
+- dato oficial suministrado;
+- dato confirmado;
+- o dato pendiente.
 
-Como el artículo prevé indexación, el motor permite introducir valores vigentes confirmados.
+No se utilizan valores personales de casos de prueba como parámetros de producción.
 
-### 7.4. Pensión Garantizada Solidaria — artículo 195
+## 9. Regímenes especiales
 
-Con edad de referencia y al menos 240 cuotas, el motor compara el resultado contributivo con la referencia de la Pensión Garantizada Solidaria.
+El motor general no afirma cubrir todos los regímenes especiales.
 
-Existe una superposición literal en 240 cuotas entre el artículo 194 y el artículo 195. La implementación prioriza el artículo 195 como regla específica de garantía mínima y registra la decisión en `docs/DECISIONES.md`.
+Antes de incorporar uno se requiere:
 
-### 7.5. Garantía de reemplazo mínimo — artículo 197
+1. fuente oficial;
+2. identificación inequívoca del régimen;
+3. parámetros propios;
+4. pruebas independientes;
+5. actualización de documentación y trazabilidad.
 
-La aplicación preevalúa automáticamente:
+## 10. Decisiones interpretativas
 
-- mínimo anual de cuotas;
-- cantidad total y consecutiva de años sin cotización;
-- distribución temporal mínima 50 % / 50 %;
-- salario promedio base mensual.
+Una decisión técnica frente a una ambigüedad debe registrarse en `docs/DECISIONES.md`.
 
-La condición de estabilidad salarial se conserva como confirmación explícita porque el numeral 3 y los mecanismos de control institucional no permiten una inferencia segura con el historial anual actual.
+Una ADR:
 
-Cuando todas las condiciones pueden determinarse, la pensión total es el mayor valor entre:
+- explica la decisión de implementación;
+- no crea una norma;
+- no sustituye revisión jurídica;
+- debe enlazarse con la fuente oficial que originó la decisión.
 
-- resultado previo después de la capa solidaria; y
-- monto objetivo de la garantía de reemplazo.
+## 11. Mantenimiento
 
-Para requisitos inferiores a 240 cuotas, la aplicación modela una garantía proporcional desde el umbral documentado de 120 cuotas. Esta es una **decisión de implementación conservadora** y no se presenta como una transcripción literal independiente del artículo 197.
+Ante un cambio normativo o reglamentario:
 
-## 8. Regímenes especiales
+1. verificar fuente oficial y vigencia;
+2. conservar trazabilidad de la versión anterior cuando sea necesaria;
+3. actualizar `normativa/*.json`;
+4. actualizar motores/servicios afectados;
+5. actualizar pruebas;
+6. actualizar `FUENTES_NORMATIVAS.md`;
+7. registrar ADR cuando exista interpretación;
+8. actualizar changelog/versionado según corresponda.
 
-El motor general no cubre todavía todos los regímenes especiales. Por ejemplo, trabajadores estacionales agrícolas y de la construcción tienen reglas propias.
+## 12. Frontera de R3
 
-- [CSS — Pensión por Vejez para Trabajadores Estacionales Agrícolas y de la Construcción](https://www.css.gob.pa/pension-por-vejez-para-los-trabajadores-estacionales-agricolas-y-de-la-construccion/)
+GOV.1.3 R3 realiza **alineación documental**. No declara certificación jurídica ni resuelve por sí sola las discrepancias normativas ya documentadas.
 
-Antes de incorporar un régimen especial se debe crear una fuente versionada, pruebas independientes y una forma de identificar el tipo de Asegurado(a).
+La revisión jurídica formal se mantiene planificada para GOV.1.5 antes de una publicación pública o comercial.
 
-## 9. Redondeo y valores monetarios
+## 13. Historia
 
-El criterio técnico general de la aplicación es:
+La versión acumulativa previa se conserva en:
 
-- cálculo con `Decimal`;
-- precisión conservada durante operaciones;
-- materialización a centavos con `ROUND_HALF_UP`;
-- prioridad de cualquier regla normativa específica de redondeo cuando exista.
-
-## 10. Mantenimiento normativo
-
-Cuando cambie una fuente:
-
-1. verificar la publicación oficial;
-2. registrar fecha y URL;
-3. modificar el JSON normativo sin destruir la versión histórica que pueda ser necesaria;
-4. actualizar pruebas;
-5. actualizar `FUENTES_NORMATIVAS.md`;
-6. registrar un ADR cuando exista una decisión interpretativa;
-7. reflejar el cambio en `CHANGELOG.md`.
-
-La aplicación debe favorecer resultados **auditables y conservadores** frente a una precisión aparente basada en parámetros inventados.
-
-## Presentación de fuentes en la interfaz
-
-Los enlaces normativos continúan versionados en `normativa/*.json`. La interfaz no debe duplicar URLs en JavaScript. `app/servicios/fuentes_normativas.py` transforma esos metadatos en un catálogo humano para `/metodologia`, mientras la trazabilidad resuelve los IDs internos a títulos y enlaces oficiales.
+`docs/historico/normativa_privacidad/NORMATIVA_PRE_GOV1_3_R3.md`

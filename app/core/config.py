@@ -5,8 +5,10 @@ versionados en ``normativa/`` para conservar la separación entre identidad,
 configuración técnica y reglas previsionales.
 """
 
+from app.core.version import APP_VERSION
+
+
 APP_NAME = "Mi Retiro Proyectado"
-APP_VERSION = "0.1.0"
 APP_DESCRIPTION = (
     "Herramienta web independiente para estimar, explicar y comparar "
     "escenarios de retiro de Asegurados(as) de la Caja de Seguro Social "

@@ -1,77 +1,152 @@
 # Seguridad y privacidad
 
-Este documento resume las defensas técnicas aplicables a la primera beta de **Mi Retiro Proyectado**. No sustituye una auditoría de seguridad externa ni convierte la aplicación en un servicio remoto multiusuario.
+**Estado:** Vigente
+**Versión de aplicación revisada:** `0.0.23-beta`
+**Revisión documental:** GOV.1.3 R3 — 2026-08-17
+**Clasificación:** Seguridad / Privacidad / Técnica
+**Revisión externa:** Pendiente antes de beta pública
+
+Este documento describe controles técnicos existentes. No constituye una auditoría de seguridad externa.
 
 ## 1. Modelo de ejecución
 
-La primera beta está diseñada para ejecutarse localmente. Los datos del asistente permanecen en el navegador mediante `sessionStorage` y los cálculos se realizan contra la API local de FastAPI.
+La aplicación está diseñada actualmente para ejecución local.
 
-No existe persistencia de simulaciones en base de datos en esta versión.
+- FastAPI procesa cálculos;
+- el navegador mantiene el estado de simulación;
+- no existe base de datos permanente de simulaciones;
+- no existen cuentas de usuario.
 
-## 2. Documentos personales importados
+Un despliegue remoto cambia el modelo de amenazas y requiere revisión específica.
 
-Los comprobantes de Mi Retiro Seguro y la Ficha Digital:
+## 2. Datos en Web Storage
+
+La simulación se guarda en `sessionStorage`.
+
+El consentimiento utiliza dos piezas:
+
+- `localStorage`: versión, aceptación y fecha técnica;
+- `sessionStorage`: marca que activa esa aceptación para la sesión/pestaña actual.
+
+La apariencia se recuerda en `localStorage`.
+
+## 3. Archivos importados
+
+Los PDF:
 
 - se leen en memoria;
-- no se guardan en el sistema de archivos por los endpoints de importación;
-- no se incorporan al repositorio;
-- no deben aparecer en fixtures de pruebas reales;
-- se reducen a los campos operativos necesarios antes de devolver información al frontend.
+- no se persisten por los endpoints de importación;
+- se someten a controles de extensión/MIME/firma/tamaño;
+- tienen límites de páginas/texto;
+- no deben entrar al repositorio si contienen datos personales reales.
 
-Los contratos del importador excluyen identificadores directos que no sean necesarios para la simulación.
+La metadata de continuidad puede conservar el nombre visible del archivo, nunca su ruta local ni el binario.
 
-## 3. Validación defensiva de PDF
+## 4. Identificadores
 
-Antes de invocar `pypdf`, la capa HTTP valida:
+Mi Retiro Seguro puede devolver identificadores opcionales cuando el parser los reconoce.
 
-- extensión `.pdf`;
-- tipo MIME compatible (`application/pdf`, genérico binario o ausente cuando el navegador no informa uno específico);
-- archivo no vacío;
-- límite de tamaño por importador;
-- cabecera `%PDF-` dentro del primer KiB.
+Ficha Digital no expone identidad en su contrato salarial.
 
-Los parsers mantienen además límites de páginas y de texto extraído. Los errores de parsing se convierten en mensajes controlados y no exponen trazas internas al Asegurado(a).
+Los identificadores no forman parte del cálculo previsional principal.
 
-## 4. Cabeceras del navegador
+## 5. Cabeceras HTTP
 
-Las respuestas incorporan defensas de bajo riesgo compatibles con la aplicación local:
+El middleware actual establece:
 
 - `X-Content-Type-Options: nosniff`;
 - `X-Frame-Options: DENY`;
 - `Referrer-Policy: no-referrer`;
-- `Permissions-Policy` sin cámara, micrófono ni geolocalización.
+- `Permissions-Policy` restrictiva;
+- Content Security Policy.
 
-Las respuestas de los dos importadores PDF usan `Cache-Control: no-store`.
+Las respuestas bajo `/api/simulacion/` usan `Cache-Control: no-store`.
 
-No se incorpora todavía una política CSP estricta porque la interfaz actual debe revisarse previamente para eliminar o inventariar dependencias y fragmentos inline sin romper el producto.
+## 6. Recursos externos
 
-## 5. CI y dependencias
+Bootstrap 5.3.8 se carga actualmente desde **cdn.jsdelivr.net** con Subresource Integrity y `crossorigin`.
 
-`.github/workflows/ci.yml` ejecuta en cada `push` y `pull_request` sobre `main`:
+Esto produce una conexión técnica del navegador al CDN y puede revelar metadatos ordinarios de red.
 
-- instalación limpia de dependencias;
-- `pip check`;
-- `compileall`;
-- `node --check` para todos los JavaScript;
-- suite completa de `unittest`.
+Servir dependencias críticas localmente continúa como objetivo pre-beta.
 
-La matriz cubre Python 3.13 y 3.14. Node.js se usa únicamente como herramienta de validación estática del frontend.
+## 7. Verificación externa de fecha
 
-`.github/dependabot.yml` solicita revisiones semanales, pero evita actualizar transitivas fijadas de forma aislada. Para `pip` se permiten propuestas ordinarias únicamente sobre `fastapi`, `Jinja2`, `pydantic`, `python-multipart`, `pypdf` y `uvicorn`; las minor/patch compatibles del runtime se agrupan y `pypdf` queda separado para revisión específica. Las GitHub Actions se agrupan en una sola propuesta. La aceptación de cualquier actualización continúa requiriendo CI verde y revisión explícita; no existe auto-merge.
+El backend puede consultar por HTTPS infraestructura oficial de la CSS para leer el encabezado HTTP `Date`.
 
-## 6. Datos sensibles y registros
+La solicitud:
 
-No deben añadirse a logs, documentación pública, commits ni fixtures:
+- no incluye PDF;
+- no incluye identidad;
+- no incluye salarios/cuotas/resultados;
+- puede exponer a la infraestructura consultada metadatos normales de red del servidor que ejecuta la aplicación.
 
-- nombre completo del Asegurado(a);
-- cédula;
-- número de seguro social;
-- PDFs personales originales;
-- capturas de Mi Caja Digital con identificadores;
-- códigos únicos o QR personales.
+Si la consulta falla, no se sustituye silenciosamente por la fecha local.
 
-Los casos reales de validación deben anonimizarse o transformarse en fixtures sintéticos antes de versionarse.
+## 8. Cookies y seguimiento
 
-## 7. Límites de esta beta
+La aplicación no implementa cookies propias de publicidad, analítica, seguimiento ni perfilado.
 
-Esta fase no afirma resistencia contra cargas hostiles a nivel de un servicio expuesto a Internet. Antes de desplegar la aplicación como servicio público remoto harían falta controles adicionales de infraestructura, límites de concurrencia, observabilidad, política CSP completa, revisión de dependencias y una evaluación de amenazas acorde al entorno de despliegue.
+Tampoco incorpora actualmente herramientas de analítica/telemetría de producto.
+
+La existencia de solicitudes a recursos externos se documenta por separado y no debe confundirse con inexistencia de conexiones de red.
+
+## 9. Registros
+
+En la versión actual no existe todavía el sistema de Developer Diagnostics de GOV.1.4.
+
+Hasta implementarlo:
+
+- no debe introducirse logging informal de PII;
+- no deben registrarse cuerpos de PDF;
+- no deben registrarse salarios/historial/identificadores;
+- las trazas de error no deben exponerse al usuario final.
+
+GOV.1.4 definirá el contrato real de observabilidad.
+
+## 10. Gestión local
+
+La interfaz implementa:
+
+- limpiar paso;
+- reiniciar simulación;
+- borrar datos de la aplicación en este navegador.
+
+El borrado integral elimina únicamente claves propiedad de Mi Retiro Proyectado.
+
+## 11. CI y dependencias
+
+CI ejecuta instalación/validación, `compileall`, sintaxis JavaScript y suite `unittest`.
+
+Dependabot propone actualizaciones; no existe auto-merge.
+
+Las actualizaciones de `pypdf` requieren revisión explícita de importadores.
+
+## 12. Pendientes pre-beta
+
+- threat model formal;
+- procedimiento de incidentes;
+- procedimiento de derechos del titular;
+- revisión de logs/despliegue;
+- servir dependencias críticas localmente cuando sea viable;
+- TLS obligatorio para un servicio remoto;
+- revisión de proveedores/terceros;
+- revisión jurídica de textos;
+- configuración endurecida de producción.
+
+Estos pendientes pertenecen principalmente a GOV.1.5 y GOV.1.6.
+
+## 13. Frontera de afirmación
+
+Este documento registra controles observables en el repositorio.
+
+No afirma:
+
+- invulnerabilidad;
+- certificación de seguridad;
+- cumplimiento jurídico certificado;
+- idoneidad automática para Internet.
+
+## 14. Historia
+
+`docs/historico/normativa_privacidad/SEGURIDAD_PRIVACIDAD_PRE_GOV1_3_R3.md`

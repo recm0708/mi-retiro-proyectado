@@ -1,13 +1,13 @@
 """Extracción segura de salarios recientes desde una Ficha Digital de Mi Caja Digital.
 
-El archivo se procesa únicamente en memoria. El contrato de salida contiene solo
-registros del año calendario actual con mes, año y salario; no conserva períodos
-de años anteriores ni expone identificadores del Asegurado(a).
+El archivo se procesa únicamente en memoria. El contrato de salida contiene los
+registros del año más reciente detectado con mes, año y salario; no expone
+identificadores del Asegurado(a). La vigencia se evalúa por separado contra una
+fecha externa verificable.
 """
 
 from __future__ import annotations
 
-from datetime import date
 from io import BytesIO
 import re
 import unicodedata
@@ -46,9 +46,13 @@ def extraer_ficha_digital_desde_texto(
     texto: str,
     anio_actual: int | None = None,
 ) -> ResumenFichaDigital:
-    """Extrae únicamente los salarios mensuales del año calendario actual."""
+    """Extrae salarios del año más reciente presente en la Ficha Digital.
 
-    anio_objetivo = anio_actual if anio_actual is not None else date.today().year
+    ``anio_actual`` se conserva como argumento explícito para pruebas y llamadas
+    controladas. En producción no se deriva del reloj local del equipo: si no se
+    proporciona, se utiliza el año más reciente encontrado en el propio documento
+    y la vigencia se evalúa después contra una fecha externa verificable.
+    """
 
     texto_normalizado = _normalizar(texto)
     if "SALARIOS DEL ULTIMO ANO" not in texto_normalizado.upper():
@@ -63,10 +67,23 @@ def extraer_ficha_digital_desde_texto(
         re.IGNORECASE,
     )
 
+    coincidencias = list(patron.finditer(texto_normalizado))
+    if not coincidencias:
+        raise ValueError(
+            "No fue posible detectar salarios mensuales en la Ficha Digital. "
+            "Puedes continuar con captura manual."
+        )
+
+    anio_objetivo = (
+        anio_actual
+        if anio_actual is not None
+        else max(int(coincidencia.group("anio")) for coincidencia in coincidencias)
+    )
+
     por_periodo: dict[tuple[int, int], RegistroFichaDigital] = {}
     advertencias: list[str] = []
 
-    for coincidencia in patron.finditer(texto_normalizado):
+    for coincidencia in coincidencias:
         anio = int(coincidencia.group("anio"))
         if anio != anio_objetivo:
             continue
@@ -90,7 +107,7 @@ def extraer_ficha_digital_desde_texto(
 
     if not por_periodo:
         raise ValueError(
-            f"No fue posible detectar salarios del año actual {anio_objetivo} en la Ficha Digital. "
+            f"No fue posible detectar salarios del año {anio_objetivo} en la Ficha Digital. "
             "Puedes continuar con captura manual."
         )
 

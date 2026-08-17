@@ -302,7 +302,7 @@ function crearTablaHistorialLineaTiempo(registros) {
   );
 
   const envoltura = document.createElement("div");
-  envoltura.className = "timeline-history-wrapper";
+  envoltura.className = "timeline-history-wrapper app-table-shell";
 
   const tabla = crearTablaBaseLineaTiempo([
     "Año",
@@ -493,7 +493,7 @@ function crearTablaProyeccionLineaTiempo(
   );
 
   const envoltura = document.createElement("div");
-  envoltura.className = "table-responsive";
+  envoltura.className = "table-responsive app-table-shell";
 
   const tabla = crearTablaBaseLineaTiempo([
     "Año",

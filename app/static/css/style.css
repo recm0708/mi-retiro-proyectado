@@ -543,6 +543,21 @@ body {
   border-radius: 0.9rem;
 }
 
+.table-scroll-compact {
+  max-height: none !important;
+  overflow: visible !important;
+  scrollbar-gutter: auto !important;
+}
+
+/* En tablas cortas no se reserva ni dibuja un carril vertical de scroll.
+ * En pantallas estrechas se conserva únicamente el desplazamiento horizontal. */
+@media (max-width: 991.98px) {
+  .table-scroll-compact {
+    overflow-x: auto !important;
+    overflow-y: clip !important;
+  }
+}
+
 .history-table {
   margin-bottom: 0;
 }
@@ -619,8 +634,20 @@ body {
 }
 
 .history-status-pending {
-  background-color: #eef1f5;
-  color: var(--app-muted);
+  background-color: var(--app-neutral-bg);
+  color: var(--app-neutral-text);
+}
+
+.history-status-missing {
+  background-color: var(--app-info-bg);
+  color: var(--app-info-text);
+  border: 1px solid var(--app-info-border);
+}
+
+.history-status-review {
+  background-color: var(--app-warning-bg);
+  color: var(--app-warning-text);
+  border: 1px solid var(--app-warning-border);
 }
 
 .history-status-none {
@@ -642,6 +669,17 @@ body {
 /* Resumen del análisis histórico. */
 .history-summary-card {
   min-height: 125px;
+}
+
+.history-analysis-summary {
+  padding: 1rem;
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius-md);
+  background: var(--app-surface-subtle);
+}
+
+.history-analysis-summary-card {
+  min-height: 96px;
 }
 
 
@@ -3083,7 +3121,7 @@ main,
 .retirement-table-wrapper,
 .results-table-wrapper {
   -webkit-overflow-scrolling: touch;
-  scrollbar-gutter: stable;
+  scrollbar-gutter: auto;
 }
 
 .history-table {
@@ -3549,31 +3587,6 @@ main,
    UX.4.1 — remate visual y microinteracciones
    ========================================================== */
 
-/* Acción auxiliar del historial: distinguible sin competir con la primaria. */
-.history-fill-action {
-  border-color: var(--app-warning-border);
-  background-color: var(--app-warning-bg);
-  color: var(--app-warning-text);
-  font-weight: 700;
-}
-
-.history-fill-action:hover,
-.history-fill-action:focus-visible {
-  border-color: var(--app-warning-text);
-  background-color: color-mix(
-    in srgb,
-    var(--app-warning-bg) 78%,
-    var(--app-warning-text)
-  );
-  color: var(--app-warning-text);
-}
-
-html[data-app-theme="contrast"] .history-fill-action:hover,
-html[data-app-theme="contrast"] .history-fill-action:focus-visible {
-  background-color: var(--app-warning-text);
-  color: #000000;
-}
-
 /* La fila completa de un escenario futuro funciona como área de selección. */
 .retirement-row-selectable {
   cursor: pointer;
@@ -3763,6 +3776,32 @@ html[data-bs-theme="light"] .wizard-step.active span {
   border-bottom: 0;
   border-left: 0;
   line-height: 3rem;
+}
+
+/* Contrato transversal para todo selector de archivo actual o futuro. */
+input[type="file"].form-control::file-selector-button {
+  color: var(--app-primary-strong);
+  background: var(--app-primary-soft);
+  border-color: var(--app-primary-border);
+  font-weight: 700;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+input[type="file"].form-control:hover::file-selector-button {
+  color: var(--app-primary-contrast, #ffffff);
+  background: var(--app-primary);
+}
+
+html[data-bs-theme="dark"] input[type="file"].form-control::file-selector-button {
+  color: #dbeafe;
+  background: #17345c;
+  border-color: var(--app-primary-border);
+}
+
+html[data-app-theme="contrast"] input[type="file"].form-control::file-selector-button {
+  color: #ffffff;
+  background: var(--app-selected-bg);
+  border-color: #ffffff;
 }
 
 .official-import-status {

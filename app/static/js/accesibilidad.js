@@ -26,8 +26,8 @@ const AYUDAS_CONTEXTUALES = {
     texto: "Representa cuántos meses por año esperas seguir cotizando a partir del próximo año. Usa 12 si prevés cotizar todos los meses.",
   },
   modo_historial: {
-    titulo: "Cómo proporcionar el historial",
-    texto: "El historial anual permite cálculos más completos. Si solo conoces tu salario actual podrás continuar, pero algunas prestaciones pueden quedar incompletas por falta de información histórica.",
+    titulo: "Disponibilidad del historial",
+    texto: "Registra o completa el historial anual cuando dispongas de él. Si solo conoces información salarial reciente podrás continuar, aunque algunos cálculos pueden quedar limitados por falta de historial.",
   },
   historial_anio_inicio: {
     titulo: "Año inicial del historial",
@@ -42,16 +42,16 @@ const AYUDAS_CONTEXTUALES = {
     texto: "Usa total mensual si conoces el salario completo del mes. Usa captura quincenal si deseas registrar cada quincena por separado y detectar automáticamente meses parciales.",
   },
   origen_salario_proyeccion: {
-    titulo: "Base salarial futura",
-    texto: "Puedes indicar un salario manual o utilizar una base derivada de meses completos del año actual. Esta elección solo afecta la proyección futura; no reemplaza el salario histórico acreditado.",
+    titulo: "Base salarial para proyección",
+    texto: "Puedes indicar un salario manual o utilizar una base calculada a partir del detalle validado del año actual. Esta elección se usa únicamente como punto de partida de la proyección futura.",
   },
   monto_salario: {
-    titulo: "Salario actual",
-    texto: "Ingresa el monto vigente que deseas usar como punto de partida para proyectar salarios futuros. No escribas aquí el acumulado salarial del año.",
+    titulo: "Salario base",
+    texto: "Ingresa el monto que deseas usar como punto de partida de la proyección cuando hayas elegido una base manual. No escribas aquí el acumulado salarial del año.",
   },
   periodicidad_salario: {
-    titulo: "Periodicidad del salario",
-    texto: "Selecciona la forma en que está expresado el monto anterior. La aplicación calculará equivalentes sin cambiar el valor original que ingresaste.",
+    titulo: "Periodicidad del salario base",
+    texto: "Selecciona si el monto manual está expresado de forma semanal, quincenal, mensual o anual. Si utilizas una base automática se aplicará la periodicidad mensual.",
   },
   proyeccion_anio_fin: {
     titulo: "Horizonte de proyección",
@@ -95,6 +95,70 @@ const CAPTIONS_TABLAS = [
 
 let ultimoPanelWizardVisible = null;
 let focoInvalidoProgramado = false;
+
+
+// UX.4.6c R2: pistas breves dentro de campos editables. El placeholder
+// desaparece de forma nativa cuando existe un valor manual o importado.
+const PISTAS_CAMPOS = {
+  primer_nombre: "Ej.: Nombre",
+  segundo_nombre: "Ej.: Segundo nombre",
+  primer_apellido: "Ej.: Apellido",
+  segundo_apellido: "Ej.: Segundo apellido",
+  apellido_casada: "Ej.: Apellido de casada",
+  cedula: "Ej.: 8-000-0000",
+  numero_seguro_social: "Ej.: 00000000",
+  cuotas_totales: "Ej.: 281",
+  cuotas_anio_actual: "Ej.: 5",
+  cuotas_esperadas_cierre_anio: "Ej.: 12",
+  cuotas_esperadas_por_anio: "Ej.: 12",
+  historial_anio_inicio: "Ej.: 1992",
+  historial_anio_fin: "Ej.: 2026",
+  monto_salario: "Ej.: 1500.00",
+  proyeccion_anio_inicio: "Ej.: 2026",
+  proyeccion_anio_fin: "Ej.: 2031",
+  porcentaje_anual: "Ej.: 2.00",
+  salario_mensual_futuro: "Ej.: 1650.00",
+  anio_salario_futuro: "Ej.: 2030",
+  escenarios_porcentajes: "Ej.: 0, 1, 2, 3",
+};
+
+function limpiarTextoEtiquetaParaPista(texto) {
+  return (texto || "")
+    .replace(/\*/g, "")
+    .replace(/\(obligatorio(?:[^)]*)?\)/gi, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function aplicarPistaAControl(control) {
+  if (!control || !control.id || control.placeholder) {
+    return;
+  }
+
+  const tipo = (control.getAttribute("type") || "text").toLowerCase();
+  if (!["text", "number", "email", "tel", "search", "url"].includes(tipo)) {
+    return;
+  }
+
+  const pistaDefinida = PISTAS_CAMPOS[control.id];
+  if (pistaDefinida) {
+    control.placeholder = pistaDefinida;
+    return;
+  }
+
+  const etiqueta = document.querySelector(`label[for="${control.id}"]`);
+  const textoReferencia = etiqueta?.textContent || control.getAttribute("aria-label") || "";
+  const textoEtiqueta = limpiarTextoEtiquetaParaPista(textoReferencia);
+  if (textoEtiqueta) {
+    control.placeholder = `Ingresa ${textoEtiqueta.toLocaleLowerCase("es")}`;
+  }
+}
+
+function prepararPistasCampos() {
+  document
+    .querySelectorAll("input, textarea")
+    .forEach(aplicarPistaAControl);
+}
 
 function obtenerEtiquetaControl(control) {
   const etiqueta = document.querySelector(`label[for="${control.id}"]`);
@@ -280,7 +344,23 @@ function cerrarAyudasContextuales(excepto = null) {
 function abrirAyudaContextual(boton, panel) {
   cerrarAyudasContextuales(boton);
   boton.setAttribute("aria-expanded", "true");
+  panel.classList.remove("context-help-panel-up", "context-help-panel-end");
   panel.hidden = false;
+
+  // Ajusta la dirección del panel según el espacio real disponible.
+  // Evita que las ayudas cercanas al final del contenido queden recortadas
+  // por el footer o que se salgan lateralmente del viewport.
+  window.requestAnimationFrame(() => {
+    const rect = panel.getBoundingClientRect();
+    if (rect.bottom > window.innerHeight - 16) {
+      panel.classList.add("context-help-panel-up");
+    }
+
+    const rectAjustado = panel.getBoundingClientRect();
+    if (rectAjustado.right > window.innerWidth - 16) {
+      panel.classList.add("context-help-panel-end");
+    }
+  });
 }
 
 
@@ -318,8 +398,8 @@ function prepararAyudasContextuales() {
     const boton = document.createElement("button");
     boton.type = "button";
     boton.className = "context-help-trigger";
-    boton.textContent = "?";
-    boton.setAttribute("aria-label", `Ayuda sobre ${ayuda.titulo}`);
+    boton.innerHTML = `<span class="context-help-icon" aria-hidden="true">i</span>`;
+    boton.setAttribute("aria-label", `Más información sobre ${ayuda.titulo}`);
     boton.setAttribute("aria-expanded", "false");
     boton.setAttribute("aria-controls", `ayuda-contextual-${idControl}`);
     contenedor.appendChild(boton);
@@ -530,7 +610,7 @@ function prepararCaptionsTablas() {
 
 function prepararContenedoresDesplazables() {
   document
-    .querySelectorAll(".table-responsive, .history-table-wrapper, .timeline-table-wrapper, .retirement-table-wrapper, .comparison-table-wrapper")
+    .querySelectorAll(".app-table-shell, .table-responsive, .history-table-wrapper, .timeline-table-wrapper, .retirement-table-wrapper, .comparison-table-wrapper")
     .forEach((contenedor) => {
       const tieneDesbordamiento = contenedor.scrollWidth > contenedor.clientWidth + 1;
 
@@ -565,6 +645,7 @@ function prepararEnlacesExternos() {
 }
 
 function sincronizarAccesibilidadDinamica() {
+  prepararPistasCampos();
   vincularAyudasDeFormulario();
   prepararAyudasContextuales();
   prepararMensajesDinamicos();

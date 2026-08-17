@@ -1,123 +1,80 @@
 # Modalidades de retiro por vejez — SEBD
 
-Este documento resume las modalidades generales implementadas del **Subsistema Exclusivamente de Beneficio Definido (SEBD)**. Las fuentes oficiales y enlaces se centralizan en [FUENTES_NORMATIVAS.md](FUENTES_NORMATIVAS.md).
+**Estado:** Vigente
+**Versión de aplicación revisada:** `0.0.23-beta`
+**Revisión documental:** GOV.1.3 R3 — 2026-08-17
+**Clasificación:** Normativa / Motor
+**Revisión externa:** Pendiente
 
-[Índice de documentación](INDICE.md) · [Normativa](NORMATIVA.md) · [Fuentes oficiales](FUENTES_NORMATIVAS.md)
+[Normativa](NORMATIVA.md) · [Fuentes](FUENTES_NORMATIVAS.md) · [Motor](MOTOR_DE_CALCULO.md)
 
-## 1. Árbol general de clasificación
+## 1. Alcance
 
-La aplicación determina automáticamente la modalidad a partir de:
+El clasificador general modela:
 
-- sexo;
-- fecha de nacimiento;
-- fecha de retiro seleccionada;
-- edad de referencia;
-- cuotas totales estimadas a esa fecha.
+- Normal;
+- Anticipada;
+- Proporcional;
+- Proporcional Anticipada;
+- Indemnización por Vejez cuando legalmente corresponda;
+- estados no elegibles/transición.
 
-Clasificación general:
+## 2. Árbol general
 
 ```text
-Antes de la banda anticipada
-└── No elegible por edad
-
-Dentro de la banda anticipada
-├── 240 o más cuotas → Anticipada
-├── 180 a 239 cuotas → Proporcional Anticipada
-└── menos de 180 → No elegible por esta vía
+Banda anticipada
+├── >= 240 cuotas → Anticipada
+├── 180–239 → Proporcional Anticipada
+└── < 180 → No elegible por esa vía
 
 Edad de referencia o posterior
-├── 240 o más cuotas → Normal
-├── 180 a 239 cuotas → Proporcional
-└── menos de 180 → Indemnización por Vejez, cuando legalmente corresponda
+├── >= 240 → Normal
+├── 180–239 → Proporcional
+└── < 180 → posible Indemnización por Vejez
 ```
 
-## 2. Pensión Normal
+El árbol es una representación funcional de la implementación; la fuente jurídica prevalece.
 
-Condiciones generales implementadas:
+## 3. Salario base
 
-- haber alcanzado la edad de referencia;
-- contar con al menos 240 cuotas.
-
-La tasa parte de 60 % del salario base y puede incrementarse por bloques completos de doce cuotas excedentes según hayan sido aportadas antes o después de la edad de referencia.
-
-## 3. Pensión Anticipada
-
-La banda general permite solicitar la prestación hasta dos años antes de la edad de referencia cuando se cumplen las cuotas requeridas.
-
-El motor:
-
-1. calcula la pensión antes de reducción;
-2. aplica límites correspondientes;
-3. obtiene el factor reglamentario mensual según la anticipación;
-4. aplica el factor de edad.
-
-Los factores se versionan en `normativa/sebd.json` y su fuente reglamentaria es el Reglamento para el Cálculo de Prestaciones Económicas.
-
-## 4. Pensión Proporcional
-
-Con edad de referencia y entre 180 y 239 cuotas:
-
-```text
-pensión proporcional
-= pensión base aplicable × cuotas / 240
-```
-
-El motor conserva por separado el factor de cuotas y el resultado posterior a su aplicación.
-
-## 5. Pensión Proporcional Anticipada
-
-Dentro de la banda anticipada y con 180 a 239 cuotas:
-
-1. se calcula la base de la pensión;
-2. se aplica el factor proporcional `cuotas / 240`;
-3. se aplica el factor de reducción por edad.
-
-## 6. Salario base
-
-La implementación usa el promedio mensual de los diez mejores años conforme al artículo 180 y al procedimiento reglamentario disponible.
+La implementación usa el historial disponible y el criterio de mejores años versionado.
 
 Con historial anual:
 
-- no se anualiza artificialmente un año parcial;
-- se conserva su salario efectivamente cotizado;
-- cuando se seleccionan diez años, la suma se lleva a promedio mensual sobre 120 meses.
+- un año parcial no se anualiza artificialmente;
+- conserva el salario efectivamente reportado;
+- la granularidad anual puede diferir del detalle oficial mensual.
 
-Esta aproximación debe revisarse si se incorpora detalle mensual oficial.
+## 4. Anticipación
 
-## 7. Indemnización por Vejez
+Los factores mensuales se encuentran en `normativa/sebd.json`.
 
-Cuando la persona alcanza la edad de referencia con menos de 180 cuotas y el régimen de indemnización sigue vigente:
+No se interpolan factores reglamentarios inventados.
 
-1. se calcula una mensualidad hipotética de retiro;
-2. se divide el total de meses/cuotas acreditados entre seis;
-3. se multiplica ese factor por la mensualidad hipotética;
-4. el resultado se presenta como **pago único**, no como pensión mensual.
+## 5. Proporcionalidad
 
-Desde **01/03/2036**, el artículo 186 remite estos casos al SUCGS.
+Las modalidades proporcionales conservan de forma separada el factor por cuotas y, cuando corresponde, el factor de anticipación.
 
-## 8. Mínimos y máximos
+## 6. Indemnización por Vejez
 
-### 8.1. Monto mínimo
+Se modela como **pago único**, no como pensión mensual.
 
-El artículo 192 establece un monto sujeto a ajuste anual. La aplicación no fuerza un mínimo indexado sin tener el valor vigente versionado para la fecha de cálculo.
+El JSON normativo conserva la frontera `2036-03-01` y el divisor reglamentario modelado.
 
-### 8.2. Límites máximos
+## 7. Mínimos y máximos
 
-El artículo 193 establece:
+El monto mínimo base sujeto a actualización no se presenta como valor vigente eterno.
 
-- máximo ordinario de B/.1,500.00;
-- máximo de B/.2,000.00 bajo requisitos ampliados;
-- máximo de B/.2,500.00 bajo requisitos superiores.
+Los máximos ordinario/ampliados se aplican únicamente cuando los requisitos disponibles permiten evaluarlos.
 
-Las condiciones se evalúan con los años de salario y cuotas requeridos cuando la información disponible lo permite.
+## 8. Regímenes especiales
 
-## 9. Prestaciones fuera del motor general
+No quedan absorbidos por el clasificador general. Requieren fuentes y pruebas propias.
 
-El clasificador no debe tratar como idénticos todos los regímenes de asegurados. Los regímenes especiales —por ejemplo, trabajadores estacionales agrícolas y de la construcción— requieren reglas propias y una identificación explícita del tipo de Asegurado(a).
+## 9. Fuentes
 
-## 10. Fuentes principales
+Consultar `FUENTES_NORMATIVAS.md`. Los artículos principales documentados por el proyecto son 178, 179, 180, 181, 186, 192 y 193.
 
-- [Texto Único de la Ley 51 — PDF CSS](https://www.css.gob.pa/wp-content/uploads/2025/05/TEXTO-UNICO-DE-LA-LEY-51-DE-2005-CSS-GACETA-OFICIAL-22-5-25.pdf)
-- [Normativa de Prestaciones Económicas — CSS](https://www.css.gob.pa/normativa-prestaciones-economicas/)
-- [Resolución 39,302-2007-J.D. — CSS](https://w3.css.gob.pa/wp-content/wdocs/Resolucion%20%2039%2C302-2007-J.D..pdf)
-- [Mapa completo de fuentes del proyecto](FUENTES_NORMATIVAS.md)
+## 10. Historia
+
+`docs/historico/normativa_privacidad/MODALIDADES_SEBD_PRE_GOV1_3_R3.md`

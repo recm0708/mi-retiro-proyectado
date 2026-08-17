@@ -1,14 +1,196 @@
 # Registro de decisiones técnicas
 
-Este documento registra decisiones de arquitectura, modelado, precisión y aplicación normativa. La numeración ADR es única y consecutiva; no se reutilizan identificadores.
+**Estado:** Vigente
+**Versión de aplicación revisada:** `0.0.23-beta`
+**Revisión documental:** GOV.1.3 R4 — 2026-08-17
+**Última actualización de gobierno:** Firma Git / ADR-159 — 2026-08-17
+**Clasificación:** Técnica / Gobierno / Auditoría
+**ADR indexadas:** 159 (`ADR-001` a `ADR-159`)
 
-- [Índice de documentación](INDICE.md)
-- [Normativa implementada](NORMATIVA.md)
-- [Fuentes normativas oficiales](FUENTES_NORMATIVAS.md)
+Este registro conserva decisiones de arquitectura, modelado, UX, precisión, seguridad y aplicación normativa. Una ADR explica por qué el proyecto adoptó una decisión; no crea una norma jurídica.
 
-Cuando una decisión interpreta una superposición, ambigüedad o limitación de datos, debe leerse junto con la fuente oficial correspondiente y no como una norma autónoma.
+## 1. Reglas de lectura
 
----
+- La numeración es única y consecutiva.
+- El campo **Estado** dentro de cada ADR es la fuente de vigencia de esa decisión.
+- Una decisión sustituida no se elimina.
+- Las relaciones de sustitución se conservan en el texto de las ADR implicadas.
+- Una ADR normativa debe leerse junto con la fuente oficial correspondiente.
+- El snapshot pre-R4 se conserva en `docs/historico/gobierno/DECISIONES_PRE_GOV1_3_R4.md`.
+
+## 2. Anomalías históricas de metadata
+
+Las ADR siguientes no declaraban una línea `**Estado:**` en el registro inmediatamente anterior a R4:
+
+`ADR-086`
+
+R4 **no inventa un estado retroactivo** para esas decisiones. El índice las marca como `No declarado explícitamente en el registro pre-R4` y el registro íntegro inferior conserva su contenido original sin alterarlo.
+
+## 3. Índice de decisiones
+
+| ADR | Decisión | Estado declarado |
+|---|---|---|
+| ADR-001 | Aplicación web local | Aceptada |
+| ADR-002 | FastAPI como backend | Aceptada |
+| ADR-003 | Separación del motor de cálculo | Aceptada |
+| ADR-004 | Normativa separada del código | Aceptada |
+| ADR-005 | Fechas reales | Aceptada |
+| ADR-006 | Historial y proyección separados | Aceptada |
+| ADR-007 | GitHub como repositorio principal | Aceptada |
+| ADR-008 | Estado temporal del asistente en `sessionStorage` | Aceptada |
+| ADR-009 | API como frontera entre interfaz y cálculos | Aceptada |
+| ADR-010 | Normalización salarial mediante valor anual común | Aceptada |
+| ADR-011 | Proyecciones salariales por escenarios | Aceptada |
+| ADR-012 | Proyección anual no sustituye cálculos por fecha exacta | Aceptada |
+| ADR-013 | Historial anual separado del salario actual | Aceptada |
+| ADR-014 | Línea temporal única con separación entre realidad y proyección | Aceptada |
+| ADR-015 | Salario cotizado futuro proporcional a las cuotas proyectadas | Aceptada |
+| ADR-016 | Precisión monetaria con `Decimal` y redondeo al materializar | Aceptada |
+| ADR-017 | El cierre del año actual precede a la densidad futura | Aceptada |
+| ADR-018 | El horizonte salarial debe cubrir el escenario de retiro | Aceptada |
+| ADR-019 | Navegación rápida `sticky` sin duplicar lógica de negocio | Aceptada |
+| ADR-020 | Clasificar explícitamente cuotas excedentes por edad de referencia | Aceptada |
+| ADR-021 | Selección explícita del escenario que alimenta el Paso 6 | Aceptada |
+| ADR-022 | Capa de integración entre el asistente y los motores legales | Aceptada |
+| ADR-023 | Clasificación automática de modalidad SEBD | Aceptada |
+| ADR-024 | Años calendario parciales dentro de los mejores años | Aceptada |
+| ADR-025 | Factores anticipados versionados por mes | Aceptada |
+| ADR-026 | Indemnización por Vejez como pago único separado | Aceptada |
+| ADR-027 | No reconstruir el saldo CAP desde historial anual | Aceptada |
+| ADR-028 | Reutilizar clasificación SEBD en el componente BD del Mixto | Aceptada |
+| ADR-029 | Frontera operativa del Mixto en 01/03/2032 | Aceptada con discrepancia normativa documentada |
+| ADR-030 | La opción del CAP no se decide automáticamente | Aceptada |
+| ADR-031 | La garantía de renta vitalicia no incrementa la pensión inicial | Aceptada |
+| ADR-032 | El bono de reconocimiento requiere un monto oficial o validado | Aceptada |
+| ADR-033 | Pagos únicos y pensiones mensuales permanecen separados | Aceptada |
+| ADR-034 | La interfaz Mixto consume el motor integrado y no replica fórmulas | Aceptada |
+| ADR-035 | Navegación directa condicionada entre pasos del asistente | Aceptada |
+| ADR-036 | Separar saldo SUCGS y garantías | Aceptada |
+| ADR-037 | Versionar referencias solidarias y permitir valores vigentes | Aceptada |
+| ADR-038 | Prioridad del artículo 195 en el límite exacto de 240 cuotas | Aceptada |
+| ADR-039 | Preevaluación conservadora del artículo 197 | Aceptada |
+| ADR-040 | Integrar SUCGS al Paso 6 sin duplicar fórmulas | Aceptada |
+| ADR-041 | El comparador coordina motores y no recalcula fórmulas | Aceptada |
+| ADR-042 | La trazabilidad explica resultados y no recalcula prestaciones | Aceptada |
+| ADR-043 | Las fuentes visibles usan nombres humanos y metadatos versionados | Aceptada |
+| ADR-044 | Contrato transversal común para el resultado final | Aceptada |
+| ADR-045 | Adoptar una identidad de producto independiente | Aceptada |
+| ADR-046 | Denominar Asegurado(a) al público de la aplicación | Aceptada |
+| ADR-047 | Unificar la escala tipográfica visible | Aceptada |
+| ADR-048 | Separar información del Asegurado(a) y documentación interna | Aceptada |
+| ADR-049 | Preferencia visual local e independiente de la simulación | Aceptada |
+| ADR-050 | Accesibilidad base transversal en la plantilla global | Aceptada |
+| ADR-051 | Pie de página compacto como información legal global | Aceptada |
+| ADR-052 | Usar tokens semánticos para todos los colores visibles | Aceptada |
+| ADR-053 | Tratar Alto contraste como tema oscuro de contraste máximo | Aceptada |
+| ADR-054 | Convertir Inicio en una portada orientada al Asegurado(a) | Aceptada |
+| ADR-055 | Reservar detalles de implementación para documentación interna | Aceptada |
+| ADR-056 | Responsive por contenido y no por reducción indiscriminada | Aceptada |
+| ADR-057 | Navegación persistente inferior en móvil | Aceptada |
+| ADR-058 | El Paso 5 solicita el último mes acreditado, no una fecha de retiro implícita | Aceptada |
+| ADR-059 | Forzar LF para todo archivo de texto del repositorio | Aceptada |
+| ADR-060 | Responder temporalmente `/favicon.ico` sin crear un icono ficticio | Aceptada |
+| ADR-061 | Mantener respaldos comprimidos fuera de la raíz y limitar `.gitkeep` | Aceptada |
+| ADR-062 | Ayuda contextual compacta mediante hover, foco y alternativa táctil | Aceptada |
+| ADR-063 | Los estados seleccionados deben usar señales redundantes por tema | Aceptada |
+| ADR-064 | Separar validación de campo, alerta urgente y advertencia no urgente | Aceptada |
+| ADR-065 | Las mutaciones observadas de accesibilidad deben ser idempotentes | Aceptada |
+| ADR-066 | Los errores de campo deben ser visibles y no depender del globo nativo | Aceptada |
+| ADR-067 | Mostrar la edad que se cumple durante cada año de la línea temporal | Aceptada |
+| ADR-068 | Separar salario visible, cuota acreditada y períodos parciales del año actual | Aceptada; criterio de confirmación manual de Ficha Digital sustituido parcialmente por ADR-103 |
+| ADR-069 | La referencia de Mi Retiro Seguro se extrae del PDF personal y no es una constante | Aceptada |
+| ADR-070 | La comparación con un comprobante es contextual y puede no ser directa | Aceptada |
+| ADR-071 | Toda importación oficial requiere vista previa editable y confirmación explícita | Aceptada |
+| ADR-072 | La Ficha Digital se limita al año calendario actual | Aceptada |
+| ADR-073 | Separar una fotografía acreditada de la proyección al retiro | Aceptada |
+| ADR-074 | Validar PDFs en la frontera HTTP antes del parser | Aceptada |
+| ADR-075 | La primera beta exige CI reproducible y vigilancia de dependencias | Aceptada |
+| ADR-076 | Dependabot no debe convertir versiones concretas en falsos fallos de CI | Aceptada |
+| ADR-077 | Mantener una capa visual transversal separada antes de la beta | Aceptada |
+| ADR-078 | Priorizar tareas del Asegurado(a) y simplificar controles globales | Aceptada |
+| ADR-079 | Separar captura manual e importación documental en Datos personales | Aceptada |
+| ADR-080 | Identificadores personales opcionales y de sesión | Aceptada |
+| ADR-081 | La navegación del wizard no debe superponerse al contenido | Superada por ADR-086 durante UX.4.6b R3 |
+| ADR-082 | Consentimiento informado y versionado antes de Simular | Aceptada |
+| ADR-083 | No mostrar un banner de cookies cuando la aplicación no usa cookies | Aceptada |
+| ADR-084 | Descomposición conservadora y revisable del nombre completo | Aceptada |
+| ADR-085 | Privacidad por diseño y hardening de la frontera de simulación | Aceptada |
+| ADR-086 | Consentimiento con lectura completa y navegación dual del wizard (UX.4.6b R3) | No declarado explícitamente en el registro pre-R4 |
+| ADR-087 | El contenido público debe ser pertinente al propósito del producto | Aceptada |
+| ADR-088 | Los datos importados se bloquean por campo, no por paso | Aceptada, aplicada y validada en UX.4.6c |
+| ADR-089 | El Paso 2 separa información acreditada y supuestos futuros | Aceptada, aplicada y validada en UX.4.6c |
+| ADR-090 | La apariencia usa iconografía reconocible sin activos externos | Aceptada, aplicada y validada en UX.4.6c |
+| ADR-091 | Los modales de importación son superficies globales del wizard | Aceptada, aplicada y validada en UX.4.6c R2 |
+| ADR-092 | Las pistas de captura viven dentro del campo cuando sea posible | Aceptada, aplicada y validada en UX.4.6c R2 |
+| ADR-093 | Las ayudas contextuales usan iconografía compacta sin la palabra Info | Aceptada, aplicada y validada en UX.4.6c R2 |
+| ADR-094 | Una vista previa documental, filtrada por el paso que la invoca | Aceptada, aplicada y validada en UX.4.6c R3 |
+| ADR-095 | El control de ayuda conserva un único círculo visual | Aceptada, aplicada y validada en UX.4.6c R3 |
+| ADR-096 | El Paso 3 se valida como una sola unidad funcional | Aceptada para validación UX.4.6d |
+| ADR-097 | Un dato histórico desconocido permanece pendiente | Aceptada para validación UX.4.6d |
+| ADR-098 | Ficha Digital reutiliza el contrato de revisión documental | Aceptada para validación UX.4.6d |
+| ADR-099 | El asistente no necesita paneles que anuncien el siguiente paso | Aceptada para validación UX.4.6d |
+| ADR-100 | Paso 3 conserva tres secciones internas y un resumen único | Aceptada para validación UX.4.6d |
+| ADR-101 | Ficha Digital no redefine las cuotas acreditadas del Paso 2 | Sustituida parcialmente por ADR-155 en UX.4.6d R23; se conserva como historial de la protección introducida en R2 |
+| ADR-102 | El detalle del año actual es opcional y debe explicar cuándo una importación queda inactiva | Aceptada para validación UX.4.6d R2 |
+| ADR-103 | Los meses detectados por Ficha Digital fijan la casilla de cuota en la captura principal | Aceptada para validación UX.4.6d R3 |
+| ADR-104 | Las tablas distinguen visualmente procedencia documental y captura manual | Aceptada para validación UX.4.6d R4 |
+| ADR-105 | Las casillas importadas deben conservar una marca visual inequívoca | Aceptada para validación UX.4.6d R4 |
+| ADR-106 | Estado seleccionado de casillas documentales independiente del pintado nativo | Aceptada para validación UX.4.6d R5 |
+| ADR-107 | Borrado por paso con invalidación descendente | Aceptada para validación UX.4.6d R6. |
+| ADR-108 | Reinicio integral separado de preferencias y consentimiento | Aceptada para validación UX.4.6d R6. |
+| ADR-109 | Borrado local integral desde Privacidad | Aceptada para validación UX.4.6d R6. |
+| ADR-110 | Nueva versión de términos por controles de conservación y eliminación | Aceptada para validación UX.4.6d R6. |
+| ADR-111 | Consulta posterior de términos no modifica el consentimiento | Aceptada para validación UX.4.6d R7. |
+| ADR-112 | El estado de una fila editable deriva de sus datos actuales | Aceptada para UX.4.6d R8. |
+| ADR-113 | El resumen anual debe ser visible antes de terminar todo el Paso 3 | Aceptada para UX.4.6d R8. |
+| ADR-114 | El scroll de tablas y los mensajes de fila no deben introducir ruido visual | Aceptada para UX.4.6d R8. |
+| ADR-115 | Seleccionar archivo usa un tratamiento visual global | Aceptada para UX.4.6d R8. |
+| ADR-116 | La reactividad tabular se resuelve por delegación de eventos | Aceptada para UX.4.6d R9. |
+| ADR-117 | Una tabla corta no dibuja carril vertical | Aceptada para UX.4.6d R9. |
+| ADR-118 | Fuentes puede captar consentimiento pendiente y Escape es contextual | Aceptada para UX.4.6d R9. |
+| ADR-119 | Los ejemplos de captura son sintéticos y genéricos | Aceptada para UX.4.6d R9. |
+| ADR-120 | Todas las tablas usan una superficie visual común | Aceptada para UX.4.6d R10. |
+| ADR-121 | Las reglas transversales de tabla se aplican por semántica | Aceptada para UX.4.6d R10. |
+| ADR-122 | Claro, Oscuro y Alto contraste comparten geometría tabular | Aceptada para UX.4.6d R10. |
+| ADR-123 | El scrollbar tabular forma parte de la geometría de `app-table-shell` | Aceptada para UX.4.6d R11. |
+| ADR-124 | Selector de archivo y acción de análisis comparten altura | Aceptada para UX.4.6d R11. |
+| ADR-125 | El scrollbar temático es transversal a las superficies desplazables | Aceptada para UX.4.6d R12. |
+| ADR-126 | Las tablas usan un radio específico menor que las tarjetas | Aceptada para UX.4.6d R12. |
+| ADR-127 | Un filtro sin filas no conserva una tabla vacía | Aceptada para UX.4.6d R12. |
+| ADR-128 | El selector nativo de archivo no depende del hover interno | Aceptada para UX.4.6d R13. |
+| ADR-129 | El Paso 1 manual usa un único bloque de Información personal | Aceptada para UX.4.6d R14. |
+| ADR-130 | Los campos no editables tienen una semántica visual transversal | Aceptada para UX.4.6d R15. |
+| ADR-131 | El lenguaje de importación no acopla el producto al formato del archivo | Aceptada para UX.4.6d R15. |
+| ADR-132 | Limpiar Paso 2 elimina también los supuestos futuros | Aceptada para UX.4.6d R15. |
+| ADR-133 | Paso 3 revalida dependencias recuperables sin navegar hacia atrás | Aceptada para UX.4.6d R16. |
+| ADR-134 | La restauración nunca reabre un paso con prerrequisitos inválidos | Aceptada para UX.4.6d R16. |
+| ADR-135 | Ficha Digital pertenece al Detalle salarial del año actual | Aceptada para UX.4.6d R16. |
+| ADR-136 | Bloqueo documental y valor booleano son estados independientes | Aceptada para UX.4.6d R17. |
+| ADR-137 | Cuotas acreditadas y cuotas acumuladas con proyección se muestran separadas | Aceptada para UX.4.6d R17. |
+| ADR-138 | Las inconsistencias internas del documento se conservan y se advierten | Aceptada para UX.4.6d R17. |
+| ADR-139 | Un dato editado por el usuario deja de etiquetarse como detectado | Aceptada para UX.4.6d R17. |
+| ADR-140 | Salario disponible no equivale automáticamente a cuota acreditada | Aceptada para UX.4.6d R17. |
+| ADR-141 | La procedencia se modela separada del valor y de su validez | Aceptada para UX.4.6d R18. |
+| ADR-142 | El selector nativo de archivos no se restaura tras F5 | Aceptada para UX.4.6d R18. |
+| ADR-143 | El nombre del documento es metadata local, no persistencia del archivo | Aceptada para UX.4.6d R18. |
+| ADR-144 | El detalle del año actual es la fuente de la fila anual vigente cuando está habilitado | Aceptada para UX.4.6d R19. |
+| ADR-145 | Una casilla manual de cuota actual puede actualizar Paso 2 sin navegación regresiva | Aceptada para UX.4.6d R19. |
+| ADR-146 | Salario disponible y salario anual acreditado continúan separados | Aceptada para UX.4.6d R19. |
+| ADR-147 | La vigencia de Ficha Digital se evalúa por el último período detectado | Sustituida por ADR-149 en UX.4.6d R21; se conserva como historial de R20. |
+| ADR-148 | Los resúmenes derivados relevantes deben ser auditables desde el Paso 3 | Aceptada para UX.4.6d R20. |
+| ADR-149 | Una Ficha Digital anterior al mes actual siempre requiere revisión | Aceptada para UX.4.6d R21. Sustituye el criterio de tolerancia de ADR-147. |
+| ADR-150 | La vigencia documental no confía en el reloj local del cliente | Aceptada para UX.4.6d R21. |
+| ADR-151 | La consulta de fecha oficial no transmite información previsional | Aceptada para UX.4.6d R21. |
+| ADR-152 | El Paso 3 reconcilia cuotas manuales antes de validar el detalle | Aceptada para UX.4.6d R22. |
+| ADR-153 | Ningún bloqueo del Paso 3 puede ser silencioso | Aceptada para UX.4.6d R22. |
+| ADR-154 | El resumen del detalle conserva métricas semánticamente distintas | Aceptada para UX.4.6d R22. |
+| ADR-155 | Una Ficha Digital confirmada puede ampliar la referencia agregada del año actual | Aceptada para UX.4.6d R23. Sustituye parcialmente ADR-101 para discrepancias documentales al alza. |
+| ADR-156 | Una Ficha Digital nunca reduce silenciosamente una referencia superior de Paso 2 | Aceptada para UX.4.6d R23. |
+| ADR-157 | VERSION es la fuente canónica de versión de aplicación | vigente. |
+| ADR-158 | Reconstrucción histórica sin tags retroactivos | Parcialmente sustituida por ADR-159 para la materialización criptográfica de tags. |
+| ADR-159 | Firma SSH obligatoria y materialización controlada de tags históricos | vigente. |
+
+## 4. Registro íntegro de ADR
 
 ## ADR-001 — Aplicación web local
 
@@ -672,7 +854,7 @@ La edad no se incorporará al contrato de los motores ni se persistirá como un 
 
 ## ADR-068 — Separar salario visible, cuota acreditada y períodos parciales del año actual
 
-**Estado:** Aceptada
+**Estado:** Aceptada; criterio de confirmación manual de Ficha Digital sustituido parcialmente por ADR-103
 
 **Decisión:** el detalle reciente del año actual se modelará separando el salario disponible en la Ficha Digital del estado de acreditación de la cuota. Un mes puede estar **completo**, **parcial** o **sin información**, y puede disponer de salario aunque su cuota todavía no aparezca acreditada. La captura puede hacerse como total mensual o como primera/segunda quincena.
 
@@ -689,7 +871,7 @@ La interfaz ofrece acceso a Mi Caja Digital y, cuando el documento PDF contiene 
 
 **Estado:** Aceptada
 
-**Decisión:** el Asegurado(a) puede cargar opcionalmente un comprobante PDF digital de Mi Retiro Seguro. El backend procesa el archivo únicamente en memoria con `pypdf`, valida que corresponda al formato esperado y extrae solo datos operativos para comparación: fecha del comprobante, sistema elegido, edad de retiro, cuotas históricas, naturaleza y monto estimado de la prestación y filas anuales reconocibles. El contrato excluye deliberadamente nombre, cédula, número de seguro social ni código único del documento.
+**Decisión:** el Asegurado(a) puede cargar opcionalmente un comprobante PDF digital de Mi Retiro Seguro. El backend procesa el archivo únicamente en memoria con `pypdf`, valida que corresponda al formato esperado y extrae solo datos operativos para comparación: fecha del comprobante, sistema elegido, edad de retiro, cuotas históricas, naturaleza y monto estimado de la prestación y filas anuales reconocibles. El contrato continúa excluyendo el código único del documento. Desde UX.4.6b puede devolver identificadores opcionales cuando están etiquetados de forma inequívoca y el Asegurado(a) los revisa antes de importarlos.
 
 Ningún monto procedente de los comprobantes usados durante el desarrollo puede quedar hardcodeado en código de producción. El PDF original no se persiste. El análisis por sí solo no modifica la simulación; después de una confirmación explícita, los datos detectados pueden utilizarse para prellenar campos, mientras la referencia personal continúa separada de los motores y de la normativa versionada.
 
@@ -712,9 +894,9 @@ La fecha de corte, cuotas y supuestos salariales pueden diferir entre el comprob
 
 **Decisión:** los documentos oficiales se analizan en el Paso 1, pero su detección no escribe inmediatamente sobre la simulación. Tanto el comprobante de Mi Retiro Seguro como la Ficha Digital deben abrir una vista previa modal donde el Asegurado(a) pueda revisar y corregir los campos detectados antes de confirmar. Cancelar la vista previa no modifica datos existentes.
 
-El comprobante puede prellenar datos personales, sistema, cuotas y filas anuales seleccionadas. Las filas clasificadas como proyectadas no se importan como historial real por defecto; las filas mixtas requieren decisión explícita. La Ficha Digital puede prellenar salarios mensuales del año actual, pero no infiere cuotas acreditadas: esas marcas deben ser confirmadas por el Asegurado(a). Los registros de años anteriores se descartan en esta importación: la Ficha Digital se usa únicamente para el detalle salarial del año calendario actual.
+El comprobante puede prellenar datos personales, sistema, cuotas y filas anuales seleccionadas. Las filas clasificadas como proyectadas no se importan como historial real por defecto; las filas mixtas requieren decisión explícita. La Ficha Digital puede prellenar salarios mensuales del año actual. Desde UX.4.6d R3, los meses efectivamente detectados se consideran registros documentales confirmados y su casilla de cuota queda marcada/bloqueada; los meses no detectados continúan bajo captura manual. Los registros de años anteriores se descartan en esta importación: la Ficha Digital se usa únicamente para el detalle salarial del año calendario actual.
 
-Los archivos se procesan en memoria y los contratos del backend excluyen identificadores directos que no sean necesarios para la simulación. Los valores confirmados conservan trazabilidad de origen en `sessionStorage`, pero el documento original no se persiste.
+Los archivos se procesan en memoria. Los contratos del backend limitan los identificadores directos a los campos opcionales que UX.4.6b permite revisar y confirmar para la sesión actual; no se persiste el documento ni su código único. Los valores confirmados conservan trazabilidad de origen en `sessionStorage`, pero el documento original no se persiste.
 
 **Motivo:** los documentos pueden contener valores parciales, proyectados o actualizados en momentos distintos. Prellenar sin revisión podría convertir una detección imperfecta en un dato operativo y alterar el cálculo. La confirmación explícita mantiene al Asegurado(a) en control y permite corregir errores del parser sin renunciar a la automatización.
 
@@ -794,3 +976,660 @@ La página de Inicio debe comunicar beneficios y tareas del Asegurado(a) antes q
 El footer global se presentará centrado con nombre, versión, aviso de independencia, enlace a Fuentes oficiales, autoría y copyright. Mi Caja Digital no se duplicará en el footer; permanecerá en los puntos funcionales destinados a verificar información individual.
 
 **Motivo:** reducir terminología y controles globales visibles mejora jerarquía sin perder funcionalidad. Separar recursos normativos de recursos personales evita que el footer se convierta en un contenedor de acciones operativas y mantiene la portada enfocada en orientar al Asegurado(a).
+
+
+## ADR-079 — Separar captura manual e importación documental en Datos personales
+
+**Estado:** Aceptada
+
+**Decisión:** el Paso 1 presenta dos modalidades excluyentes: captura manual e importación desde un comprobante de Mi Retiro Seguro. La captura manual es predeterminada. La Ficha Digital se traslada al Paso 3 porque sus datos describen salarios del año actual, no identidad personal.
+
+**Motivo:** mostrar simultáneamente formularios manuales y dos importadores sobrecargaba el primer paso y mezclaba dominios distintos. Separar intención antes de capturar datos reduce ruido y evita que la Ficha Digital se interprete como fuente de identidad.
+
+## ADR-080 — Identificadores personales opcionales y de sesión
+
+**Estado:** Aceptada
+
+**Decisión:** nombres, apellidos, cédula y número de Seguro Social pueden capturarse manualmente o devolverse desde Mi Retiro Seguro cuando el PDF los etiqueta de forma inequívoca. Son opcionales para el cálculo, permanecen en `sessionStorage` durante la simulación actual y no se escriben en archivos, base de datos, logs, fixtures ni documentación. El código único del documento continúa excluido.
+
+Si el PDF ofrece un nombre completo, el parser puede descomponerlo de forma conservadora y siempre revisable. Los campos explícitamente etiquetados tienen prioridad. En nombres femeninos, un patrón final `de Apellido` se interpreta como apellido de casada cuando está presente; cualquier resultado puede corregirse antes de importar.
+
+**Motivo:** estos datos pueden ser útiles para identificar una simulación o un futuro informe, pero no justifican persistencia permanente. Una descomposición conservadora reduce captura manual sin convertir el parser en fuente definitiva de identidad, porque la vista previa sigue siendo obligatoria y editable solo por decisión del Asegurado(a).
+
+## ADR-081 — La navegación del wizard no debe superponerse al contenido
+
+**Estado:** Superada por ADR-086 durante UX.4.6b R3
+
+**Decisión:** la barra común de los Pasos 1–6 conserva su lógica de retroceso, salto directo, estado y acción principal, pero deja de usar posicionamiento `sticky/fixed`. Se renderiza después del contenido activo.
+
+**Motivo:** la persistencia flotante cumplía una decisión UX anterior, pero en formularios largos ocultaba información y competía con el contenido. Mantener un único componente estático conserva consistencia sin sacrificar legibilidad.
+
+
+## ADR-082 — Consentimiento informado y versionado antes de Simular
+
+**Estado:** Aceptada
+
+**Decisión:** antes de permitir captura manual o importación documental, `/simulacion` debe presentar información clara sobre datos tratados, finalidades, almacenamiento temporal, derechos, contacto y ausencia actual de cookies/rastreadores. La aceptación se versiona en `localStorage` sin copiar la simulación y requiere además una marca de sesión en `sessionStorage`, por lo que una nueva pestaña/sesión vuelve a presentar las condiciones. Rechazar elimina el estado temporal de la simulación y devuelve a Inicio. Un cambio material de la política incrementará la versión y solicitará aceptación nuevamente.
+
+**Motivo:** cédula, NSS, salarios e historial son datos personales y económicos que requieren transparencia y control previo. Un consentimiento trazable y versionado evita que la captura preceda a la información sobre su finalidad.
+
+## ADR-083 — No mostrar un banner de cookies cuando la aplicación no usa cookies
+
+**Estado:** Aceptada
+
+**Decisión:** la versión actual no mostrará un banner independiente de cookies porque no crea cookies, no integra analítica, publicidad ni rastreadores. La política sí informará el uso de `sessionStorage` para la simulación y `localStorage` para apariencia y consentimiento. Si se añaden cookies no esenciales, analítica o telemetría, se diseñará consentimiento granular previo y se actualizará la política.
+
+**Motivo:** equiparar Web Storage con cookies sería técnicamente impreciso y podría inducir al usuario a creer que existe un seguimiento que la aplicación no realiza.
+
+## ADR-084 — Descomposición conservadora y revisable del nombre completo
+
+**Estado:** Aceptada
+
+**Decisión:** Mi Retiro Seguro puede descomponer un nombre completo cuando la estructura sea suficientemente reconocible. Para cuatro o más componentes, conserva el primer token como primer nombre, los dos últimos como apellidos y el bloque intermedio como segundo nombre; para nombres femeninos, un sufijo final `de Apellido` se extrae como apellido de casada. Los campos explícitamente etiquetados por el documento siempre prevalecen y la importación no se aplica sin revisión previa.
+
+**Motivo:** los comprobantes reales pueden ofrecer un nombre completo sin campos separados. La heurística limitada reduce trabajo manual, pero la revisión obligatoria evita tratar una inferencia de presentación como dato oficial incuestionable.
+
+## ADR-085 — Privacidad por diseño y hardening de la frontera de simulación
+
+**Estado:** Aceptada
+
+**Decisión:** toda respuesta bajo `/api/simulacion/` debe declarar `Cache-Control: no-store`; la aplicación mantiene CSP, políticas de referrer/permisos, protección contra framing y `nosniff`. Bootstrap servido temporalmente por jsDelivr usa SRI y deberá evaluarse para localización antes de beta pública. La política de privacidad y la matriz de cumplimiento forman parte del contrato documental de cualquier cambio que agregue datos, almacenamiento, exportaciones, analítica o terceros.
+
+**Motivo:** el flujo ya maneja identificadores, salarios y documentos personales. Las medidas deben proteger el conjunto de la simulación y no solamente los endpoints de PDF.
+
+
+## ADR-086 — Consentimiento con lectura completa y navegación dual del wizard (UX.4.6b R3)
+
+- El aviso de privacidad visible se amplía a un documento de 21 apartados alineado con Ley 81/Decreto 285 y adaptado a la realidad de Mi Retiro Proyectado.
+- La casilla de aceptación permanece deshabilitada hasta que el usuario llega al final del documento; aceptar requiere además una acción afirmativa sobre la casilla.
+- La interfaz evita términos internos de almacenamiento cuando no aportan valor al usuario y explica el comportamiento en lenguaje común.
+- El asistente usa dos barras simétricas dentro del mismo ancho del contenido: superior e inferior. En PC/laptop la superior puede permanecer disponible bajo el encabezado durante pasos largos; la inferior ofrece cierre natural.
+- Las ayudas contextuales no deben quedar recortadas por `overflow` de la tarjeta de simulación.
+
+
+## ADR-087 — El contenido público debe ser pertinente al propósito del producto
+
+**Estado:** Aceptada
+
+**Decisión:** la interfaz solo debe presentar información que ayude a operar la aplicación, comprender una estimación previsional, conocer su alcance, ejercer decisiones de privacidad, cumplir requisitos legales o utilizar funciones de seguridad/accesibilidad. Se eliminan mensajes meta como **Fin de los términos** y **Lectura completada** cuando no aportan una decisión adicional. Mi Retiro Proyectado no se presentará como aplicación educativa, didáctica o pedagógica mientras ese no sea un propósito real del producto.
+
+**Motivo:** reducir texto ajeno a la tarea mejora claridad, evita confundir el posicionamiento del producto y mantiene coherencia entre interfaz, finalidad previsional y documentación.
+
+
+## ADR-088 — Los datos importados se bloquean por campo, no por paso
+
+**Estado:** Aceptada, aplicada y validada en UX.4.6c
+
+**Decisión:** un valor detectado y confirmado desde Mi Retiro Seguro queda protegido contra edición directa en los pasos posteriores. La protección se aplica únicamente al campo efectivamente aportado por el documento. Si un dato no fue detectado, ese control permanece habilitado para captura manual. La corrección de un valor importado se realiza desde la vista previa documental mediante el flujo explícito **Editar campos → Finalizar edición → Importar datos**.
+
+Para el Paso 2, `origen_campos_cuotas` registra de forma independiente el origen de `cuotas_totales` y `cuotas_anio_actual`. Los supuestos futuros (`continua_cotizando`, cierre del año y cuotas futuras por año) siguen siendo decisiones manuales.
+
+**Motivo:** bloquear todo el paso cuando el PDF está incompleto impediría completar la simulación; permitir editar cualquier dato importado en cada pantalla rompería la trazabilidad y crearía múltiples lugares de corrección para un mismo valor.
+
+## ADR-089 — El Paso 2 separa información acreditada y supuestos futuros
+
+**Estado:** Aceptada, aplicada y validada en UX.4.6c
+
+**Decisión:** la interfaz del Paso 2 se organiza en **Cuotas acreditadas** y **Cotización futura**. Las acciones internas duplicadas se eliminan y la navegación dual concentra Analizar/Continuar. Si el Asegurado(a) indica que no continuará cotizando, los campos futuros se deshabilitan y dejan de ser requeridos.
+
+**Motivo:** la separación reduce el riesgo de interpretar una expectativa futura como dato ya acreditado y mantiene coherencia con la distinción acreditado/proyectado aplicada en fases anteriores.
+
+## ADR-090 — La apariencia usa iconografía reconocible sin activos externos
+
+**Estado:** Aceptada, aplicada y validada en UX.4.6c
+
+**Decisión:** el control global de apariencia usa SVG inline para representar Sistema, Claro, Oscuro y Alto contraste. Los SVG son decorativos (`aria-hidden`) y el nombre textual del tema sigue siendo la fuente accesible de significado.
+
+**Motivo:** la iconografía de monitor, sol, luna y contraste comunica mejor el estado que el símbolo circular abstracto anterior, sin añadir archivos gráficos ni dependencias externas.
+
+
+## ADR-091 — Los modales de importación son superficies globales del wizard
+
+**Estado:** Aceptada, aplicada y validada en UX.4.6c R2
+
+**Decisión:** antes de abrir una vista previa documental, el modal se reubica como hijo directo de `body` si todavía se encuentra dentro de un panel del wizard. De esta forma puede abrirse desde Cuotas o pasos posteriores aunque el Paso 1 esté oculto.
+
+**Motivo:** Bootstrap puede mostrar el backdrop pero mantener invisible un modal cuyo ancestro está oculto con `display: none`. La vista previa es una única superficie de corrección compartida por todo el flujo, no un componente exclusivo del Paso 1.
+
+## ADR-092 — Las pistas de captura viven dentro del campo cuando sea posible
+
+**Estado:** Aceptada, aplicada y validada en UX.4.6c R2
+
+**Decisión:** los campos editables de texto/número usan placeholders breves y orientados al formato esperado. Cuando existe un valor manual o importado, la pista desaparece de forma nativa. Las explicaciones extensas permanecen en ayudas contextuales y no se duplican debajo del control salvo necesidad funcional.
+
+**Motivo:** reduce ruido visual y conserva orientación justo cuando el campo está vacío. El patrón es reutilizable en UX.4.6d–g y pasos futuros.
+
+## ADR-093 — Las ayudas contextuales usan iconografía compacta sin la palabra Info
+
+**Estado:** Aceptada, aplicada y validada en UX.4.6c R2
+
+**Decisión:** el disparador visual de ayuda muestra únicamente un icono `i` circular. El significado accesible se conserva mediante `aria-label`, hover, foco, clic táctil y panel reposicionable.
+
+**Motivo:** la etiqueta del campo ya aporta contexto y la palabra `Info` repetida en cada control añade anchura y ruido sin mejorar la comprensión.
+
+## ADR-094 — Una vista previa documental, filtrada por el paso que la invoca
+
+**Estado:** Aceptada, aplicada y validada en UX.4.6c R3
+
+**Decisión:** Mi Retiro Seguro mantiene un único modal de revisión. El Paso 1 muestra todas las secciones extraídas; cualquier paso posterior invoca `revisarComprobanteImportado(numeroPaso)` y solo presenta los grupos etiquetados para esa etapa. Los títulos visibles indican explícitamente el paso de destino.
+
+**Motivo:** evita obligar al usuario a recorrer datos ajenos a la tarea actual y, al mismo tiempo, conserva una sola fuente de verdad para edición, confirmación y trazabilidad.
+
+## ADR-095 — El control de ayuda conserva un único círculo visual
+
+**Estado:** Aceptada, aplicada y validada en UX.4.6c R3
+
+**Decisión:** el botón exterior de ayuda mantiene su área de interacción, foco y semántica, pero no dibuja borde propio. El único contorno circular visible pertenece a `.context-help-icon`.
+
+**Motivo:** elimina el efecto de doble círculo observado en la interfaz sin reducir la accesibilidad por teclado ni el área útil del control.
+
+## ADR-096 — El Paso 3 se valida como una sola unidad funcional
+
+**Estado:** Aceptada para validación UX.4.6d
+
+**Decisión:** las barras superior e inferior del wizard son la única acción primaria del Paso 3. `Analizar historial` debe validar, en orden coherente, el detalle del año actual cuando esté habilitado, el historial anual cuando corresponda y la base salarial. Solo cuando el conjunto queda válido la acción cambia a `Continuar a proyección`.
+
+**Motivo:** tres botones independientes de análisis dentro de un único paso fragmentaban la tarea y permitían estados parciales difíciles de interpretar.
+
+## ADR-097 — Un dato histórico desconocido permanece pendiente
+
+**Estado:** Aceptada para validación UX.4.6d
+
+**Decisión:** se elimina la acción masiva `Completar cuotas vacías con 12`. Los años sin información permanecen pendientes hasta que el Asegurado(a) los complete o la fuente documental los aporte. Cuotas y salario de una fila se validan conjuntamente cuando se inicia su captura.
+
+**Motivo:** asumir doce cuotas para todos los años vacíos puede transformar ausencia de información en un dato previsional falso.
+
+## ADR-098 — Ficha Digital reutiliza el contrato de revisión documental
+
+**Estado:** Aceptada para validación UX.4.6d
+
+**Decisión:** la Ficha Digital usa el mismo patrón visible que Mi Retiro Seguro: selección, análisis, vista previa bloqueada, edición por decisión explícita y confirmación mediante `Importar datos`. La procedencia se conserva por mes/campo y solo los datos efectivamente importados quedan bloqueados en el formulario principal.
+
+**Motivo:** dos documentos personales no deben ofrecer modelos de interacción contradictorios ni permitir correcciones silenciosas después de la confirmación.
+
+## ADR-099 — El asistente no necesita paneles que anuncien el siguiente paso
+
+**Estado:** Aceptada para validación UX.4.6d
+
+**Decisión:** se eliminan de los Pasos 2–6 y de futuros pasos los bloques `Próximo paso...`. El indicador de progreso, el selector de paso y la acción primaria común son suficientes para comunicar continuidad.
+
+**Motivo:** estos paneles duplicaban navegación ya visible, aumentaban longitud y competían con resultados relevantes.
+
+## ADR-100 — Paso 3 conserva tres secciones internas y un resumen único
+
+**Estado:** Aceptada para validación UX.4.6d
+
+**Decisión:** el Paso 3 no se divide en un séptimo paso. Se organiza como Historial salarial anual, Detalle salarial del año actual y Base salarial para proyección. Al finalizar presenta un resumen único con cuotas de referencia, cuotas identificadas, diferencia, total salarial reportado y base mensual utilizada.
+
+**Motivo:** la división interna reduce carga perceptiva sin alterar la arquitectura de seis pasos ni fragmentar datos que deben validarse conjuntamente antes de proyectar.
+
+
+## ADR-101 — Ficha Digital no redefine las cuotas acreditadas del Paso 2
+
+**Estado:** Sustituida parcialmente por ADR-155 en UX.4.6d R23; se conserva como historial de la protección introducida en R2
+
+**Decisión histórica R2:** `cuotas_anio_actual` se mantuvo inicialmente como referencia inmutable del Paso 2 para impedir que una importación incompleta transformara la ausencia de confirmación mensual en cero cuotas. **Vigencia actual:** ADR-155 sustituye parcialmente esta regla: una Ficha Digital confirmada puede ampliar la referencia cuando aporta más cuotas documentales del año actual, pero nunca reducirla silenciosamente cuando aporta menos.
+
+**Motivo:** una Ficha Digital puede mostrar salarios antes de que la cuota asociada esté acreditada. Reemplazar el total del Paso 2 con la cantidad de casillas marcadas generaba inconsistencias entre pasos y podía transformar ausencia de confirmación mensual en cero cuotas acreditadas.
+
+## ADR-102 — El detalle del año actual es opcional y debe explicar cuándo una importación queda inactiva
+
+**Estado:** Aceptada para validación UX.4.6d R2
+
+**Decisión:** importar una Ficha Digital activa inicialmente el detalle mensual, pero el usuario puede elegir trabajar con el total anual del historial. Si desactiva el detalle, los salarios de la Ficha no se aplican al historial y la interfaz debe explicarlo. En modo manual sin Ficha siguen disponibles captura mensual y quincenal. Un salario anual pendiente del año actual no se presenta como `0.00` cuando existen cuotas acreditadas.
+
+**Motivo:** el usuario debe poder decidir entre detalle reciente y total anual sin que la interfaz mezcle ambas fuentes o haga parecer válido un dato todavía ausente.
+
+## ADR-103 — Los meses detectados por Ficha Digital fijan la casilla de cuota en la captura principal
+
+**Estado:** Aceptada para validación UX.4.6d R3
+
+**Decisión:** cuando Ficha Digital detecta un mes con salario y estado utilizables, ese mes se incorpora como registro documental confirmado. La casilla **Cuota acreditada** se marca automáticamente y queda bloqueada tanto en la vista previa como en el detalle principal. Los meses no presentes en el documento permanecen sin marcar y editables.
+
+`cuotas_anio_actual` del Paso 2 continuaba siendo la referencia agregada en R3. Desde R23, ADR-155 permite que una Ficha Digital confirmada **amplíe** esa referencia cuando aporta más cuotas del año actual; una ficha con menos meses no puede reducirla automáticamente.
+
+**Motivo:** evita que el usuario deshaga accidentalmente un estado procedente del documento, mantiene simetría con el bloqueo por campo ya aplicado a otras importaciones y deja la captura manual únicamente para información ausente.
+
+## ADR-104 — Las tablas distinguen visualmente procedencia documental y captura manual
+
+**Estado:** Aceptada para validación UX.4.6d R4
+
+**Decisión:** las filas que contienen información importada confirmada reciben una clase visual común `data-row-imported`; las filas sin procedencia documental usan `data-row-manual`. El patrón debe reutilizarse en Pasos 1–6 y vistas futuras cuando una tabla mezcle datos importados y manuales. Desde R4 la procedencia documental usa la paleta primaria/azul y no el verde semántico de éxito. La señal visual se acompaña siempre de controles de solo lectura/deshabilitados y no se utiliza para casillas que representan decisiones del usuario.
+
+**Motivo:** permite identificar de inmediato qué información proviene de un documento y cuál requiere intervención manual sin depender exclusivamente del texto de ayuda o del color de un campo individual.
+
+
+## ADR-105 — Las casillas importadas deben conservar una marca visual inequívoca
+
+**Estado:** Aceptada para validación UX.4.6d R4
+
+**Decisión:** una casilla cuyo valor forma parte de un registro documental confirmado debe restaurarse como marcada, quedar bloqueada y conservar visualmente el gancho de selección en los tres temas. El estilo no puede depender únicamente de la representación nativa del navegador cuando el control está deshabilitado.
+
+**Motivo:** una casilla bloqueada sin marca visible se interpreta como dato no confirmado. La representación debe corresponder al estado real almacenado y mantener simetría entre Claro, Oscuro y Alto contraste.
+
+## ADR-106 — Estado seleccionado de casillas documentales independiente del pintado nativo
+
+**Estado:** Aceptada para validación UX.4.6d R5
+
+Las casillas que representan cuotas mensuales procedentes de Ficha Digital deben permanecer seleccionadas tanto semántica como visualmente. El estado importado se identifica mediante metadata de procedencia y no depende únicamente de `:checked` o de cómo cada navegador represente un control `disabled`. La lectura del formulario considera la metadata importada equivalente a `true`, mientras que los meses no importados conservan el checkbox editable normal.
+
+## ADR-107 — Borrado por paso con invalidación descendente
+
+**Estado:** Aceptada para validación UX.4.6d R6.
+
+**Decisión:** cada paso puede limpiarse sin alterar los anteriores, pero debe eliminar o invalidar todos los estados posteriores dependientes. Esto impide conservar resultados calculados con datos que ya no existen.
+
+## ADR-108 — Reinicio integral separado de preferencias y consentimiento
+
+**Estado:** Aceptada para validación UX.4.6d R6.
+
+**Decisión:** **Reiniciar simulación** elimina la simulación completa, pero no cambia el tema visual ni la aceptación vigente de términos. Estos estados no forman parte del caso previsional.
+
+## ADR-109 — Borrado local integral desde Privacidad
+
+**Estado:** Aceptada para validación UX.4.6d R6.
+
+**Decisión:** Fuentes/Privacidad ofrece una acción distinta para borrar las claves locales de simulación, consentimiento y tema. No se usa `localStorage.clear()` ni `sessionStorage.clear()` para evitar afectar datos ajenos a la aplicación en el mismo origen.
+
+## ADR-110 — Nueva versión de términos por controles de conservación y eliminación
+
+**Estado:** Aceptada para validación UX.4.6d R6.
+
+**Decisión:** el texto de privacidad cambia a **2026-08-15.1** porque se amplía materialmente la información entregada al usuario sobre conservación, limpieza, reinicio y eliminación local. La nueva versión requiere aceptación nuevamente.
+
+## ADR-111 — Consulta posterior de términos no modifica el consentimiento
+
+**Estado:** Aceptada para validación UX.4.6d R7.
+
+**Decisión:** Términos/Privacidad utiliza un único documento y modal con dos modos. El consentimiento inicial exige lectura/aceptación antes de usar Simular; una consulta posterior desde Fuentes abre el mismo contenido en la ruta actual, oculta los controles de aceptación y no modifica la constancia vigente. El cierre `×` solo cierra en revisión; durante el consentimiento inicial equivale a no continuar.
+
+**Motivo:** revisar un contrato ya aceptado no debe obligar al usuario a repetir el consentimiento ni cambiar de contexto, pero tampoco debe existir una vía para cerrar el consentimiento inicial y continuar capturando datos sin una decisión afirmativa.
+
+## ADR-112 — El estado de una fila editable deriva de sus datos actuales
+
+**Estado:** Aceptada para UX.4.6d R8.
+
+La tabla anual no mantiene `Pendiente` como estado estático. Cada modificación de cuotas o salario recalcula un estado progresivo: pendiente, dato faltante, revisar, sin cotización, parcial o completo. El filtro de pendientes usa la misma evaluación para evitar resultados contradictorios.
+
+## ADR-113 — El resumen anual debe ser visible antes de terminar todo el Paso 3
+
+**Estado:** Aceptada para UX.4.6d R8.
+
+Un análisis válido del historial anual muestra inmediatamente cuotas de referencia, cuotas identificadas, diferencia y total salarial. No es necesario haber definido todavía la base salarial. El resumen final de Paso 3 permanece como cierre integral con la base mensual.
+
+## ADR-114 — El scroll de tablas y los mensajes de fila no deben introducir ruido visual
+
+**Estado:** Aceptada para UX.4.6d R8.
+
+Las tablas con pocas filas visibles eliminan el scroll vertical innecesario; las extensas mantienen desplazamiento. Las advertencias de una fila no se insertan debajo de un control si eso rompe la alineación de columnas equivalentes.
+
+## ADR-115 — Seleccionar archivo usa un tratamiento visual global
+
+**Estado:** Aceptada para UX.4.6d R8.
+
+Todo `input[type=file]` de la aplicación utiliza un botón nativo estilizado con la paleta primaria y adaptación para Claro, Oscuro y Alto contraste. Las fases futuras deben reutilizar este contrato en lugar de definir colores por pantalla.
+
+## ADR-116 — La reactividad tabular se resuelve por delegación de eventos
+
+**Estado:** Aceptada para UX.4.6d R9.
+
+Las tablas editables que regeneran filas no deben depender exclusivamente de listeners instalados en cada control. El historial anual escucha `input` y `change` en su `tbody`, localiza la fila afectada, recalcula el estado y reaplica el filtro vigente. El patrón queda recomendado para tablas dinámicas futuras.
+
+## ADR-117 — Una tabla corta no dibuja carril vertical
+
+**Estado:** Aceptada para UX.4.6d R9.
+
+Cuando el número de filas visibles no requiere desplazamiento, el contenedor elimina el overflow interno vertical en escritorio. En viewport estrecho se permite desplazamiento horizontal sin reservar un carril vertical vacío.
+
+## ADR-118 — Fuentes puede captar consentimiento pendiente y Escape es contextual
+
+**Estado:** Aceptada para UX.4.6d R9.
+
+Si el usuario abre los términos desde Fuentes y todavía no existe una aceptación válida, la misma ventana funciona como consentimiento completo. Si ya existe, funciona solo como consulta. Cerrar con `×` o `Esc` desde Fuentes no registra aceptación; en Simular, cerrar el consentimiento obligatorio impide continuar sin aceptar.
+
+## ADR-119 — Los ejemplos de captura son sintéticos y genéricos
+
+**Estado:** Aceptada para UX.4.6d R9.
+
+Los placeholders públicos no reutilizan nombres, apellidos, identificadores o importes procedentes de casos reales de prueba. Se emplean ejemplos neutros y ficticios que explican el formato sin sugerir que pertenecen a una persona concreta.
+
+## ADR-120 — Todas las tablas usan una superficie visual común
+
+**Estado:** Aceptada para UX.4.6d R10.
+
+**Decisión:** las tablas visibles del producto deben envolverse en `app-table-shell`, tanto si se renderizan desde Jinja como si se generan por JavaScript. La superficie común define borde, radio, fondo, encabezado y adaptación de tema; el overflow concreto sigue perteneciendo a cada tabla según su contenido.
+
+**Motivo:** una tabla cuadrada o con un contenedor distinto rompe la geometría establecida por tarjetas, formularios y barras del asistente. Un contrato común evita divergencias entre pasos actuales y futuros.
+
+## ADR-121 — Las reglas transversales de tabla se aplican por semántica
+
+**Estado:** Aceptada para UX.4.6d R10.
+
+**Decisión:** geometría, accesibilidad, paleta y procedencia documental son reutilizables globalmente. Estados progresivos, filtro **Pendientes**, casillas bloqueadas o edición reactiva solo se incorporan en tablas donde esos conceptos existan realmente.
+
+**Motivo:** reutilizar patrones no significa inventar estados o controles en tablas informativas. La consistencia debe conservar el significado de cada dato.
+
+## ADR-122 — Claro, Oscuro y Alto contraste comparten geometría tabular
+
+**Estado:** Aceptada para UX.4.6d R10.
+
+**Decisión:** los tres temas mantienen el mismo radio y jerarquía de tabla. Claro y Oscuro ajustan sutilmente borde, superficie y encabezado; Alto contraste usa borde blanco reforzado y elimina sombras. Los colores de éxito, advertencia y procedencia no cambian de significado entre temas.
+
+**Motivo:** la accesibilidad visual exige que cambiar de tema no cambie la estructura percibida ni confunda origen documental con estado funcional.
+
+
+
+## ADR-123 — El scrollbar tabular forma parte de la geometría de `app-table-shell`
+
+**Estado:** Aceptada para UX.4.6d R11.
+
+**Decisión:** las tablas desplazables eliminan los botones/flechas nativos del scrollbar en Chromium/Windows, usan un carril transparente separado de las esquinas redondeadas y un thumb temático. Firefox mantiene una representación equivalente mediante propiedades estándar.
+
+**Motivo:** un scrollbar que atraviesa o sobresale sobre el radio derecho rompe la simetría visual de la tabla aunque el borde exterior esté correctamente redondeado.
+
+## ADR-124 — Selector de archivo y acción de análisis comparten altura
+
+**Estado:** Aceptada para UX.4.6d R11.
+
+**Decisión:** los importadores PDF usan una altura exterior común para `official-import-file-input` y el botón de `official-import-upload-action`. El contrato es transversal a Mi Retiro Seguro, Ficha Digital e importadores futuros.
+
+**Motivo:** ambos controles representan los pasos consecutivos de una misma operación y deben percibirse como una fila simétrica, no como componentes de jerarquía o tamaño diferentes.
+
+## ADR-125 — El scrollbar temático es transversal a las superficies desplazables
+
+**Estado:** Aceptada para UX.4.6d R12.
+
+**Decisión:** la representación temática del scrollbar deja de ser exclusiva de tablas y se comparte con términos, modales, página y navegación desplazable. Se mantiene el mecanismo nativo de scroll y se suprimen botones/flechas cuando el motor del navegador permite estilizar esas piezas.
+
+**Motivo:** el usuario debe percibir el mismo lenguaje visual al desplazarse por términos, vistas previas y tablas, sin mezclar carriles nativos de Windows con componentes tematizados.
+
+## ADR-126 — Las tablas usan un radio específico menor que las tarjetas
+
+**Estado:** Aceptada para UX.4.6d R12.
+
+**Decisión:** `app-table-shell` usa `--app-radius-md` mientras las tarjetas pueden conservar radios mayores.
+
+**Motivo:** una tabla desplazable necesita integrar el carril interno en una arista más compacta; mantener exactamente el radio grande de una card fuerza al scrollbar contra una esquina excesivamente curva.
+
+## ADR-127 — Un filtro sin filas no conserva una tabla vacía
+
+**Estado:** Aceptada para UX.4.6d R12.
+
+**Decisión:** cuando el filtro **Pendientes** del historial anual llega a cero, se oculta el contenedor tabular completo y se muestra un estado vacío accesible. El patrón es reutilizable en tablas filtrables futuras donde cero resultados haga innecesaria la cabecera.
+
+**Motivo:** una cabecera sin filas aparenta contenido incompleto y añade ruido visual; un estado vacío comunica de manera directa que no quedan registros pendientes.
+
+
+## ADR-128 — El selector nativo de archivo no depende del hover interno
+
+**Estado:** Aceptada para UX.4.6d R13.
+
+**Decisión:** el botón nativo de `input[type=file]` mantiene una paleta estable en estados base, hover y focus. El feedback interactivo se expresa en el control exterior, sin depender de `::file-selector-button:hover`.
+
+**Motivo:** Bootstrap/Chromium puede considerar `:hover` activo sobre todo el input cuando el puntero está sobre el nombre del archivo, y la pseudoclase del botón no ofrece un comportamiento suficientemente uniforme entre motores. La regla estable evita regresar accidentalmente a la paleta predeterminada.
+
+
+## ADR-129 — El Paso 1 manual usa un único bloque de Información personal
+
+**Estado:** Aceptada para UX.4.6d R14.
+
+**Decisión:** la captura manual del Paso 1 deja de separar visualmente `Identificación personal` e `Información previsional básica`. Todos los campos se presentan dentro de **Información personal**; **Sexo** queda inmediatamente antes de **Apellido de casada** para que el campo condicional aparezca en la misma zona al seleccionar Femenino.
+
+**Motivo:** la separación anterior obligaba a recorrer el formulario para seleccionar Sexo y luego volver visualmente hacia los apellidos para localizar el campo que acababa de aparecer. La unificación mejora continuidad sin mezclar responsabilidades de negocio: los campos opcionales siguen sin afectar cálculos y los obligatorios conservan la misma validación.
+
+## ADR-130 — Los campos no editables tienen una semántica visual transversal
+
+**Estado:** Aceptada para UX.4.6d R15.
+
+**Decisión:** `form-control` y `form-select` en estado `readonly`/`disabled` usan tokens de superficie, texto y borde propios, más una señal lateral primaria. La regla es común a importaciones, cálculos automáticos y campos deshabilitados por una decisión previa.
+
+**Motivo:** en Oscuro y Alto contraste la superficie anterior era demasiado parecida a un control editable. El estado debe ser perceptible sin depender únicamente del color.
+
+## ADR-131 — El lenguaje de importación no acopla el producto al formato del archivo
+
+**Estado:** Aceptada para UX.4.6d R15.
+
+**Decisión:** la interfaz habla de **Mi Retiro Seguro**, **Ficha Digital**, **comprobante** o **documento**. El PDF continúa siendo el formato técnico actualmente admitido y validado, pero no forma parte del nombre de la modalidad ni de sus encabezados principales.
+
+**Motivo:** la CSS puede cambiar el diseño del comprobante o, en una evolución futura, el formato de entrega. La experiencia de revisión/importación debe sobrevivir a esos cambios; el parser se adapta por separado.
+
+## ADR-132 — Limpiar Paso 2 elimina también los supuestos futuros
+
+**Estado:** Aceptada para UX.4.6d R15.
+
+**Decisión:** una simulación nueva o un Paso 2 recién limpiado no selecciona automáticamente continuidad ni conserva `12/12`. Los campos de supuestos futuros permanecen vacíos/deshabilitados hasta que el usuario elija Sí o No. Al elegir Sí, se pueden ofrecer 12 cuotas como sugerencia vigente.
+
+**Motivo:** una acción de limpieza debe producir un estado realmente vacío y no reintroducir valores por atributos HTML o rutinas de inicialización. La reconstrucción defensiva de procedencia para sesiones antiguas exige además que el valor correspondiente exista, evitando controles vacíos bloqueados tras limpiar el paso.
+
+## ADR-133 — Paso 3 revalida dependencias recuperables sin navegar hacia atrás
+
+**Estado:** Aceptada para UX.4.6d R16.
+
+**Decisión:** si el resumen de cuotas fue invalidado pero el formulario de Paso 2 conserva datos completos y válidos, **Analizar historial** reconstruye el resumen en segundo plano. Si los datos están incompletos, Paso 3 conserva su contenido y presenta una advertencia contextual; no cambia de paso automáticamente.
+
+**Motivo:** obligar al usuario a retroceder y volver a avanzar por una derivación que puede recalcularse automáticamente introduce fricción y rompe continuidad.
+
+## ADR-134 — La restauración nunca reabre un paso con prerrequisitos inválidos
+
+**Estado:** Aceptada para UX.4.6d R16.
+
+**Decisión:** `paso_actual` guardado se normaliza al último paso permitido por `puedeAccederDirectamenteAPaso()` antes de mostrar el asistente.
+
+**Motivo:** una limpieza o invalidación puede dejar un número de paso antiguo en almacenamiento; restaurarlo sin verificar dependencias produce estados imposibles.
+
+## ADR-135 — Ficha Digital pertenece al Detalle salarial del año actual
+
+**Estado:** Aceptada para UX.4.6d R16.
+
+**Decisión:** el cargador/revisor de Ficha Digital deja de ser una subsección paralela entre Historial anual y Detalle. Se integra dentro de **Detalle salarial del año actual** y se muestra antes de la tabla mensual que alimenta.
+
+**Motivo:** la fuente debe preceder visualmente al resultado que genera y la Ficha Digital solo aporta información del año actual.
+
+
+## ADR-136 — Bloqueo documental y valor booleano son estados independientes
+
+**Estado:** Aceptada para UX.4.6d R17.
+
+**Decisión:** `data-imported-locked` impide editar un checkbox, pero el gancho visual solo se fuerza cuando `checked=true`.
+
+**Motivo:** en la vista previa de Mi Retiro Seguro una fila proyectada puede estar correctamente bloqueada y, al mismo tiempo, correctamente excluida del historial real. Pintarla marcada por el solo hecho de estar bloqueada comunica un dato falso.
+
+## ADR-137 — Cuotas acreditadas y cuotas acumuladas con proyección se muestran separadas
+
+**Estado:** Aceptada para UX.4.6d R17.
+
+**Decisión:** Paso 2 utiliza la cifra documental de cuotas históricas/acreditadas. Si el comprobante también contiene un total acumulado mayor por períodos proyectados, la vista previa lo explica como contexto y no lo utiliza como acreditado.
+
+**Motivo:** evita confundir una proyección del comprobante con aportes ya acreditados.
+
+## ADR-138 — Las inconsistencias internas del documento se conservan y se advierten
+
+**Estado:** Aceptada para UX.4.6d R17.
+
+**Decisión:** cuando el historial detectado comienza antes del año de la fecha de ingreso CSS indicada en el mismo comprobante, el parser conserva ambos datos y genera una advertencia no bloqueante.
+
+**Motivo:** la aplicación no debe corregir silenciosamente una fuente oficial ni descartar registros históricos que sí aparecen en ella.
+
+## ADR-139 — Un dato editado por el usuario deja de etiquetarse como detectado
+
+**Estado:** Aceptada para UX.4.6d R17.
+
+**Decisión:** la vista previa registra los campos modificados y los presenta posteriormente como **Editado por ti** o **Completado manualmente**.
+
+**Motivo:** `Detectado` debe reservarse a valores extraídos del documento; de lo contrario se pierde trazabilidad sobre el origen real del dato.
+
+## ADR-140 — Salario disponible no equivale automáticamente a cuota acreditada
+
+**Estado:** Aceptada para UX.4.6d R17.
+
+**Decisión:** una diferencia entre el detalle mensual y Paso 2 no modifica silenciosamente las cuotas. La advertencia explica que puede conservarse un salario conocido sin marcar cuota si esta todavía no figura acreditada.
+
+**Motivo:** la Ficha Digital y otros comprobantes pueden actualizar salario y cuota en momentos distintos.
+
+## ADR-141 — La procedencia se modela separada del valor y de su validez
+
+**Estado:** Aceptada para UX.4.6d R18.
+
+**Decisión:** los campos que mezclan importación y edición usan cuatro estados visibles: **Detectado**, **Editado por ti**, **Completado manualmente** y **No detectado**. El estado de procedencia no sustituye validaciones de obligatoriedad, coherencia o cálculo.
+
+**Motivo:** un dato puede ser válido y manual, o importado y posteriormente corregido; mezclar esas dimensiones pierde trazabilidad.
+
+## ADR-142 — El selector nativo de archivos no se restaura tras F5
+
+**Estado:** Aceptada para UX.4.6d R18.
+
+**Decisión:** después de una recarga no se intenta repoblar `input[type=file]`. La aplicación restaura la importación confirmada, sus datos y el nombre del documento como metadata visual, dejando disponibles **Revisar importación** y **Quitar importación**.
+
+**Motivo:** los navegadores impiden restaurar rutas/archivos seleccionados por seguridad; simular que el archivo sigue adjunto sería incorrecto.
+
+## ADR-143 — El nombre del documento es metadata local, no persistencia del archivo
+
+**Estado:** Aceptada para UX.4.6d R18.
+
+**Decisión:** el nombre del documento puede conservarse en `sessionStorage` dentro del estado de la importación para identificarla visualmente. No se conservan bytes, ruta local ni contenido original fuera del procesamiento en memoria.
+
+**Motivo:** permite continuidad de UX tras F5 sin alterar el modelo de privacidad ni introducir almacenamiento remoto.
+
+
+## ADR-144 — El detalle del año actual es la fuente de la fila anual vigente cuando está habilitado
+
+**Estado:** Aceptada para UX.4.6d R19.
+
+**Decisión:** mientras **Detalle salarial del año actual** esté activo, la fila del año calendario vigente en el historial anual deriva automáticamente sus cuotas de las casillas **Cuota acreditada** y su salario anual de los salarios de esos mismos meses. La fila queda de solo lectura para evitar doble captura.
+
+**Motivo:** pedir el mismo dato mensual y anual genera inconsistencias y obliga al usuario a mantener dos representaciones manualmente.
+
+## ADR-145 — Una casilla manual de cuota actual puede actualizar Paso 2 sin navegación regresiva
+
+**Estado:** Aceptada para UX.4.6d R19.
+
+**Decisión:** marcar/desmarcar una casilla editable de **Cuota acreditada** se considera una confirmación explícita de información más reciente. La aplicación recalcula `cuotas_anio_actual` y `cuotas_totales` del Paso 2 conservando `cuotas_totales - cuotas_anio_actual` como base previa al año vigente. Los resultados dependientes se invalidan y se revalidan al analizar; no se cambia de pantalla.
+
+**Motivo:** un comprobante puede ser una fotografía anterior del año. Obligar al usuario a volver a Paso 2 después de confirmar una cuota más reciente en Paso 3 duplica trabajo; ignorar el cambio deja el modelo incoherente.
+
+## ADR-146 — Salario disponible y salario anual acreditado continúan separados
+
+**Estado:** Aceptada para UX.4.6d R19.
+
+**Decisión:** el salario anual sincronizado suma únicamente meses con cuota acreditada. Un salario conocido de un mes sin casilla marcada permanece en `total_salario_disponible` y puede alimentar bases salariales recientes, pero no incrementa el salario anual acreditado. Una cuota marcada sin salario mantiene el año como pendiente.
+
+**Motivo:** conserva la distinción temporal entre información salarial conocida y acreditación efectiva, evitando sumar como histórico un mes que aún no se confirmó como cuota.
+
+
+## ADR-147 — La vigencia de Ficha Digital se evalúa por el último período detectado
+
+**Estado:** Sustituida por ADR-149 en UX.4.6d R21; se conserva como historial de R20.
+
+**Decisión:** la interfaz compara `anio_mas_reciente`/`mes_mas_reciente` con el mes local actual. Se acepta sin advertencia el mes actual y hasta dos meses calendario anteriores. Una diferencia mayor se presenta como posible desactualización y exige elegir entre seleccionar una ficha más reciente o continuar con la actual.
+
+**Motivo:** los datos salariales pueden publicarse con retraso; exigir coincidencia con el mes actual produciría falsos positivos, mientras que ignorar varios meses de desfase puede llevar al usuario a asumir que la ficha representa información reciente.
+
+## ADR-148 — Los resúmenes derivados relevantes deben ser auditables desde el Paso 3
+
+**Estado:** Aceptada para UX.4.6d R20.
+
+**Decisión:** `resumen_detalle_anio_actual` se muestra en una sección compacta dentro del Paso 3 sin crear un nuevo modelo ni recalcular fórmulas en JavaScript. El bloque se oculta cuando el detalle se invalida.
+
+**Motivo:** las bases salariales automáticas dependen de valores que antes solo existían internamente. Mostrar el resumen permite verificar las cifras antes de continuar y evita depender de cálculos externos.
+
+
+## ADR-149 — Una Ficha Digital anterior al mes actual siempre requiere revisión
+
+**Estado:** Aceptada para UX.4.6d R21. Sustituye el criterio de tolerancia de ADR-147.
+
+**Decisión:** si el último período detectado es anterior al mes actual verificado, la Ficha Digital se presenta como potencialmente desactualizada, aunque la diferencia sea de un solo mes. La advertencia no bloquea: permite seleccionar una ficha del mes actual o continuar.
+
+**Motivo:** el usuario quiere conocer explícitamente cualquier desfase respecto del mes actual y decidir conscientemente si trabaja con información anterior.
+
+## ADR-150 — La vigencia documental no confía en el reloj local del cliente
+
+**Estado:** Aceptada para UX.4.6d R21.
+
+**Decisión:** el backend obtiene una fecha de referencia por HTTPS desde infraestructura oficial de la CSS. Si no puede verificarla, el sistema no usa silenciosamente la fecha del navegador/equipo para declarar una ficha reciente; muestra un estado de fecha no verificada y solicita decisión.
+
+**Motivo:** el reloj local puede modificarse y no constituye una fuente suficientemente confiable para una decisión de vigencia.
+
+## ADR-151 — La consulta de fecha oficial no transmite información previsional
+
+**Estado:** Aceptada para UX.4.6d R21.
+
+**Decisión:** la verificación solicita únicamente la fecha publicada por servidores oficiales. No envía documento, nombres, identificadores, salarios, cuotas ni resultados. La política de privacidad informa que la conexión puede exponer metadatos ordinarios de red como la IP y se versiona a **2026-08-16.1**.
+
+**Motivo:** la fuente externa mejora integridad temporal, pero debe mantenerse minimización y transparencia del tratamiento.
+
+## ADR-152 — El Paso 3 reconcilia cuotas manuales antes de validar el detalle
+
+**Estado:** Aceptada para UX.4.6d R22.
+
+**Decisión:** cuando el detalle del año actual contiene una cuota confirmada manualmente o la referencia de Paso 2 ya proviene de ese detalle, **Analizar historial** reconcilia primero `cuotas_anio_actual`/`cuotas_totales` y, si hubo cambios, revalida Paso 2 en segundo plano antes de enviar el detalle al backend.
+
+**Motivo:** la confirmación mensual es una fuente más reciente que la fotografía importada. Depender exclusivamente del evento `change` puede dejar un estado incoherente tras restauraciones o eventos perdidos.
+
+## ADR-153 — Ningún bloqueo del Paso 3 puede ser silencioso
+
+**Estado:** Aceptada para UX.4.6d R22.
+
+**Decisión:** si el backend devuelve `cuotas_coinciden=false`, la sección del detalle muestra un error explícito con cuotas identificadas, referencia de Paso 2 y orientación sobre las casillas **Cuota acreditada**. El scroll/foco complementa el mensaje, pero nunca lo sustituye.
+
+**Motivo:** desplazar al usuario hacia una sección sin explicar qué condición falla impide corregir el problema y parece una navegación defectuosa.
+
+## ADR-154 — El resumen del detalle conserva métricas semánticamente distintas
+
+**Estado:** Aceptada para UX.4.6d R22.
+
+**Decisión:** se mantienen cuotas identificadas, salarios disponible/acreditado, meses con información/completos, últimos períodos, último salario y los tres promedios. Aunque algunos valores coincidan en un escenario totalmente acreditado, divergen con salarios no acreditados o períodos parciales y los tres promedios alimentan opciones automáticas distintas.
+
+**Motivo:** eliminarlos por coincidencia circunstancial ocultaría diferencias relevantes para el asegurado y reduciría auditabilidad.
+
+
+
+## ADR-155 — Una Ficha Digital confirmada puede ampliar la referencia agregada del año actual
+
+**Estado:** Aceptada para UX.4.6d R23. Sustituye parcialmente ADR-101 para discrepancias documentales al alza.
+
+**Decisión:** cuando la Ficha Digital confirmada contiene más meses con `cuota_acreditada=true` que `cuotas_anio_actual` del Paso 2, el detalle mensual se considera evidencia más reciente del año vigente. Se conserva el total de cuotas anteriores al año actual y se sustituye únicamente el componente del año corriente; el resumen de Cuotas se revalida sin abandonar Paso 3.
+
+**Motivo:** una Ficha Digital posterior puede incorporar meses acreditados después de la fotografía agregada usada por Mi Retiro Seguro. Mantener indefinidamente la cifra antigua produce un bloqueo artificial aunque la aplicación ya posea evidencia mensual confirmada.
+
+## ADR-156 — Una Ficha Digital nunca reduce silenciosamente una referencia superior de Paso 2
+
+**Estado:** Aceptada para UX.4.6d R23.
+
+**Decisión:** la sincronización automática desde Ficha Digital es monotónica: puede aumentar `cuotas_anio_actual`, pero si la ficha tiene menos cuotas que Paso 2 se conserva la referencia superior y se muestra una advertencia para revisar/completar los meses. Una reducción solo puede provenir de una decisión explícita del usuario dentro de un detalle que ya sea la fuente vigente.
+
+**Motivo:** una ficha anterior, parcial o incompleta no debe borrar cuotas que otra fuente más reciente o una confirmación previa ya reconoce.
+
+## ADR-157 — VERSION es la fuente canónica de versión de aplicación
+
+**Estado:** vigente.
+**Fecha:** 2026-08-17.
+
+**Decisión:** la versión de aplicación se declara en el archivo raíz `VERSION`. `app/core/version.py` es el único adaptador Python autorizado para leerla y `app/core/config.py` importa `APP_VERSION` desde ese módulo. FastAPI y Jinja2 continúan recibiendo el mismo valor sin copias literales.
+
+**Motivo:** eliminar divergencias entre API, footer, documentación y releases y permitir validaciones automáticas de coherencia.
+
+**Consecuencia:** un cambio de versión requiere modificar `VERSION` y actualizar los documentos de release afectados; no se hardcodea la versión en plantillas, JavaScript o motores.
+
+## ADR-158 — Reconstrucción histórica sin tags retroactivos
+
+**Estado:** Parcialmente sustituida por ADR-159 para la materialización criptográfica de tags.
+**Fecha:** 2026-08-17.
+
+**Decisión:** los 80 commits previos a GOV.1.2 se agrupan documentalmente en `0.0.1-beta` a `0.0.21-beta`. No se reescribe Git ni se crean tags retrospectivos que aparenten haber existido en esas fechas. `0.0.22-beta` es la primera versión formal adoptada conscientemente bajo `VERSIONING.md`.
+
+**Motivo:** preservar la evidencia primaria de Git y, al mismo tiempo, ofrecer a revisores y auditores una cronología legible.
+
+**Consecuencia:** `RELEASES.md` distingue explícitamente versiones retrospectivas de versiones formales y clasifica el antiguo `0.1.0` como marcador histórico de desarrollo no publicado.
+
+## ADR-159 — Firma SSH obligatoria y materialización controlada de tags históricos
+
+**Estado:** vigente; materialización histórica ejecutada el 2026-08-17.
+**Fecha:** 2026-08-17.
+
+**Decisión:** a partir del primer commit posterior a `v0.0.23-beta`, los commits nuevos del mantenedor y todos los tags formales nuevos se firman criptográficamente con SSH. La clave pública autorizada se versiona en `.github/allowed_signers`; la clave privada permanece fuera del repositorio.
+
+Se autoriza además una migración histórica controlada: `v0.0.1-beta` a `v0.0.21-beta` se materializan como tags retrospectivos firmados que apuntan a los commits de cierre reconstruidos, conservando la fecha real de creación del tag y declarando por separado la fecha histórica del hito. `v0.0.22-beta` y `v0.0.23-beta`, originalmente publicados como tags anotados sin firma, pueden reemitirse una sola vez como objetos tag firmados **sin cambiar sus commits objetivo**.
+
+**Motivo:** añadir autenticidad criptográfica y una cadena verificable de releases sin reescribir commits históricos, sin falsificar fechas y sin ocultar que los primeros 21 tags fueron materializados posteriormente.
+
+**Consecuencia:** ADR-158 sigue vigente en su prohibición de reescribir Git o aparentar existencia histórica de los tags, pero queda parcialmente sustituida respecto de no crear ningún tag retrospectivo. La materialización autorizada fue ejecutada el 2026-08-17; la excepción para reemitir `v0.0.22-beta` y `v0.0.23-beta` quedó consumida y vuelve a regir la inmutabilidad estricta.

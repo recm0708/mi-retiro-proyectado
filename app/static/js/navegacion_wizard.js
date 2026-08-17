@@ -2,13 +2,14 @@
 
 
 /* ============================================================
-   Navegación rápida persistente del asistente
+   Navegación común del asistente
    ============================================================ */
 
 /*
- * La barra permanece visible mientras se desplaza un paso largo.
- * No duplica lógica de negocio: delega en los formularios y botones
- * originales para conservar sus validaciones.
+ * El asistente dispone de una barra superior y otra inferior con el mismo
+ * contrato funcional. La superior puede mantenerse visible en escritorio
+ * sin ampliar el ancho del contenido; la inferior ofrece cierre natural del paso.
+ * Ambas delegan en los formularios y botones originales para conservar validaciones.
  */
 
 
@@ -60,15 +61,19 @@ function puedeAccederDirectamenteAPaso(
   }
 
   const historialListo = (
-    (simulacion.modo_historial || "MANUAL") !== "MANUAL"
-    || Boolean(simulacion.resumen_historial)
+    typeof paso3EstaCompleto === "function"
+      ? paso3EstaCompleto(simulacion)
+      : (
+          ((simulacion.modo_historial || "MANUAL") !== "MANUAL"
+            || Boolean(simulacion.resumen_historial))
+          && Boolean(simulacion.resumen_salario)
+        )
   );
 
   if (numeroPaso === 4) {
     return Boolean(
       simulacion.resumen_cuotas
-      && historialListo
-      && simulacion.resumen_salario,
+      && historialListo,
     );
   }
 
@@ -128,25 +133,21 @@ function actualizarNavegacionDirecta() {
         : "Completa primero los pasos anteriores.";
     });
 
-  const selector = document.getElementById(
-    "wizard-step-jump",
-  );
+  document
+    .querySelectorAll("[data-wizard-step-jump]")
+    .forEach((selector) => {
+      Array.from(selector.options).forEach(
+        (opcion) => {
+          const numeroPaso = Number(opcion.value);
+          opcion.disabled = !puedeAccederDirectamenteAPaso(
+            numeroPaso,
+            simulacion,
+          ) && numeroPaso !== pasoActual;
+        },
+      );
 
-  if (!selector) {
-    return;
-  }
-
-  Array.from(selector.options).forEach(
-    (opcion) => {
-      const numeroPaso = Number(opcion.value);
-      opcion.disabled = !puedeAccederDirectamenteAPaso(
-        numeroPaso,
-        simulacion,
-      ) && numeroPaso !== pasoActual;
-    },
-  );
-
-  selector.value = String(pasoActual);
+      selector.value = String(pasoActual);
+    });
 }
 
 
@@ -212,6 +213,20 @@ function obtenerConfiguracionNavegacionFlotante() {
   const simulacion = obtenerSimulacion();
 
   if (pasoActual === 1) {
+    const modoDatos = simulacion.modo_datos_personales || "MANUAL";
+    const importacionLista = Boolean(
+      simulacion.importacion_comprobante_confirmada
+      && simulacion.referencia_mi_retiro_seguro,
+    );
+
+    if (modoDatos === "MI_RETIRO_SEGURO" && !importacionLista) {
+      return {
+        estado: "Paso 1 de 6 · Importa y revisa el documento",
+        etiqueta: "Importa datos para continuar",
+        deshabilitado: true,
+      };
+    }
+
     return {
       estado: "Paso 1 de 6 · Datos personales",
       etiqueta: "Continuar",
@@ -236,36 +251,22 @@ function obtenerConfiguracionNavegacionFlotante() {
   }
 
   if (pasoActual === 3) {
-    const modo = (
-      simulacion.modo_historial
-      || "MANUAL"
+    const listo = (
+      typeof paso3EstaCompleto === "function"
+      && paso3EstaCompleto(simulacion)
     );
 
-    if (
-      modo === "MANUAL"
-      && !simulacion.resumen_historial
-    ) {
-      return {
-        estado: "Paso 3 de 6 · Falta analizar historial",
-        etiqueta: "Analizar historial",
-        deshabilitado: false,
-      };
-    }
-
-    if (!simulacion.resumen_salario) {
-      return {
-        estado: "Paso 3 de 6 · Falta analizar salario",
-        etiqueta: "Analizar salario",
-        deshabilitado: false,
-      };
-    }
-
     return {
-      estado: "Paso 3 de 6 · Historial y salario listos",
-      etiqueta: "Continuar a proyección",
+      estado: listo
+        ? "Paso 3 de 6 · Historial y base listos"
+        : "Paso 3 de 6 · Falta analizar historial",
+      etiqueta: listo
+        ? "Continuar a proyección"
+        : "Analizar historial",
       deshabilitado: false,
     };
   }
+
 
   if (pasoActual === 4) {
     return {
@@ -389,11 +390,9 @@ function obtenerConfiguracionNavegacionFlotante() {
  * Actualiza textos y disponibilidad de la barra persistente.
  */
 function actualizarNavegacionFlotante() {
-  const barra = document.getElementById(
-    "wizard-sticky-nav",
-  );
+  const barras = document.querySelectorAll("[data-wizard-nav]");
 
-  if (!barra) {
+  if (!barras.length) {
     return;
   }
 
@@ -401,27 +400,30 @@ function actualizarNavegacionFlotante() {
     obtenerConfiguracionNavegacionFlotante()
   );
 
-  const botonVolver = document.getElementById(
-    "wizard-sticky-back",
-  );
+  document
+    .querySelectorAll('[data-wizard-action="back"]')
+    .forEach((botonVolver) => {
+      botonVolver.textContent = (
+        pasoActual === 1
+          ? "← Inicio"
+          : "← Anterior"
+      );
+    });
 
-  botonVolver.textContent = (
-    pasoActual === 1
-      ? "← Inicio"
-      : "← Anterior"
-  );
+  document
+    .querySelectorAll("[data-wizard-status]")
+    .forEach((estado) => {
+      estado.textContent = configuracion.estado;
+    });
 
-  document.getElementById(
-    "wizard-sticky-status",
-  ).textContent = configuracion.estado;
-
-  const principal = document.getElementById(
-    "wizard-sticky-primary",
-  );
-
-  principal.textContent = configuracion.etiqueta;
-  principal.disabled = configuracion.deshabilitado;
+  document
+    .querySelectorAll('[data-wizard-action="primary"]')
+    .forEach((principal) => {
+      principal.textContent = configuracion.etiqueta;
+      principal.disabled = configuracion.deshabilitado;
+    });
 }
+
 
 
 /**
@@ -439,9 +441,9 @@ function ejecutarAccionPrimariaFlotante() {
 
   if (pasoActual === 2) {
     if (simulacion.resumen_cuotas) {
-      document.getElementById(
-        "btn-continuar-paso-3",
-      ).click();
+      if (typeof continuarDesdePasoCuotas === "function") {
+        continuarDesdePasoCuotas();
+      }
     } else {
       document.getElementById(
         "form-cuotas",
@@ -452,33 +454,20 @@ function ejecutarAccionPrimariaFlotante() {
   }
 
   if (pasoActual === 3) {
-    const modo = (
-      simulacion.modo_historial
-      || "MANUAL"
-    );
-
     if (
-      modo === "MANUAL"
-      && !simulacion.resumen_historial
+      typeof paso3EstaCompleto === "function"
+      && paso3EstaCompleto(simulacion)
     ) {
-      document.getElementById(
-        "btn-analizar-historial",
-      ).click();
-      return;
+      if (typeof continuarDesdePasoHistorial === "function") {
+        continuarDesdePasoHistorial();
+      }
+    } else if (typeof analizarPasoHistorialCompleto === "function") {
+      analizarPasoHistorialCompleto();
     }
 
-    if (!simulacion.resumen_salario) {
-      document.getElementById(
-        "form-salario",
-      ).requestSubmit();
-      return;
-    }
-
-    document.getElementById(
-      "btn-continuar-paso-4",
-    ).click();
     return;
   }
+
 
   if (pasoActual === 4) {
     if (simulacion.resumen_proyeccion) {
@@ -564,30 +553,36 @@ function ejecutarRetrocesoFlotante() {
 document.addEventListener(
   "DOMContentLoaded",
   () => {
-    document.getElementById(
-      "wizard-sticky-back",
-    ).addEventListener(
-      "click",
-      ejecutarRetrocesoFlotante,
-    );
-
-    document.getElementById(
-      "wizard-sticky-primary",
-    ).addEventListener(
-      "click",
-      ejecutarAccionPrimariaFlotante,
-    );
-
-    document.getElementById(
-      "wizard-step-jump",
-    ).addEventListener(
-      "change",
-      (evento) => {
-        irDirectamenteAPaso(
-          Number(evento.target.value),
+    document
+      .querySelectorAll('[data-wizard-action="back"]')
+      .forEach((control) => {
+        control.addEventListener(
+          "click",
+          ejecutarRetrocesoFlotante,
         );
-      },
-    );
+      });
+
+    document
+      .querySelectorAll('[data-wizard-action="primary"]')
+      .forEach((control) => {
+        control.addEventListener(
+          "click",
+          ejecutarAccionPrimariaFlotante,
+        );
+      });
+
+    document
+      .querySelectorAll("[data-wizard-step-jump]")
+      .forEach((selector) => {
+        selector.addEventListener(
+          "change",
+          (evento) => {
+            irDirectamenteAPaso(
+              Number(evento.target.value),
+            );
+          },
+        );
+      });
 
     document
       .querySelectorAll(".wizard-step")

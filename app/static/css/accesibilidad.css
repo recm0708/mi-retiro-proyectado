@@ -20,34 +20,41 @@
   justify-content: center;
   flex: 0 0 auto;
 
-  width: 1.7rem;
-  min-width: 1.7rem;
-  height: 1.7rem;
-  min-height: 1.7rem;
+  width: 1.8rem;
+  height: 1.8rem;
+  min-height: 1.8rem;
   padding: 0;
 
-  border: 1px solid color-mix(
-    in srgb,
-    var(--app-primary) 72%,
-    var(--app-control-border)
-  );
-  border-radius: 50%;
+  border: 0;
+  border-radius: 999px;
 
   background-color: transparent;
   color: var(--app-primary);
 
-  font-size: 0.84rem;
-  font-weight: 800;
+  font-size: 0.74rem;
+  font-weight: 750;
   line-height: 1;
 
   cursor: help;
 }
 
+.context-help-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.4rem;
+  height: 1.4rem;
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+  font-size: 0.72rem;
+  font-weight: 850;
+  line-height: 1;
+}
+
 .context-help-trigger:hover,
 .context-help-trigger:focus-visible,
 .context-help-trigger[aria-expanded="true"] {
-  border-color: var(--app-primary);
-  background-color: var(--app-selected-bg);
+  background-color: transparent;
   color: var(--app-primary-hover);
 }
 
@@ -81,6 +88,16 @@
       #000000 22%,
       transparent
     );
+}
+
+.context-help-panel.context-help-panel-up {
+  top: auto;
+  bottom: calc(100% + 0.45rem);
+}
+
+.context-help-panel.context-help-panel-end {
+  left: auto;
+  right: 0;
 }
 
 .context-help-panel[hidden] {
@@ -136,7 +153,7 @@ html[data-app-theme="contrast"] .a11y-message-focus:focus {
   outline-width: 4px;
 }
 
-html[data-app-theme="contrast"] .context-help-trigger {
+html[data-app-theme="contrast"] .context-help-icon {
   border-width: 2px;
 }
 
@@ -145,7 +162,7 @@ html[data-app-theme="contrast"] .context-help-panel {
 }
 
 @media (prefers-contrast: more) {
-  .context-help-trigger,
+  .context-help-icon,
   .context-help-panel {
     border-width: 2px;
   }

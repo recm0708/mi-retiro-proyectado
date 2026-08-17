@@ -1,0 +1,70 @@
+name: Verificar firmas Git
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: firmas-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  verificar-tag-publicado:
+    name: Verificar tag publicado
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar main y referencias Git
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+          fetch-tags: true
+      - name: Configurar confianza SSH
+        shell: bash
+        run: |
+          git config gpg.format ssh
+          git config gpg.ssh.allowedSignersFile "$GITHUB_WORKSPACE/.github/allowed_signers"
+      - name: Actualizar tags
+        shell: bash
+        run: git fetch --tags --force origin
+      - name: Verificar firma del tag
+        shell: bash
+        run: git tag -v "$GITHUB_REF_NAME"
+
+  auditar-todos-los-tags:
+    name: Auditar todos los tags
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar main y todo el historial
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+          fetch-tags: true
+      - name: Configurar confianza SSH
+        shell: bash
+        run: |
+          git config gpg.format ssh
+          git config gpg.ssh.allowedSignersFile "$GITHUB_WORKSPACE/.github/allowed_signers"
+      - name: Actualizar tags
+        shell: bash
+        run: git fetch --tags --force origin
+      - name: Verificar todos los tags versionados
+        shell: bash
+        run: |
+          mapfile -t tags < <(git tag --list 'v*' --sort=version:refname)
+          if [ "${#tags[@]}" -eq 0 ]; then
+            echo "No se encontraron tags v*."
+            exit 1
+          fi
+          for tag in "${tags[@]}"; do
+            echo "===== $tag ====="
+            git tag -v "$tag"
+          done

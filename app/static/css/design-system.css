@@ -33,6 +33,9 @@
   --app-border-strong: #cbd5e1;
   --app-control-border: #c7d2e0;
   --app-line: #cbd5e1;
+  --app-field-locked-bg: #e4ebf4;
+  --app-field-locked-border: #9aabc0;
+  --app-field-locked-text: #334155;
 
   --app-info-bg: #eff6ff;
   --app-info-text: #1e3a5f;
@@ -109,6 +112,9 @@ html[data-bs-theme="dark"] {
   --app-border-strong: #33455f;
   --app-control-border: #3a4b63;
   --app-line: #32445e;
+  --app-field-locked-bg: #19283d;
+  --app-field-locked-border: #6680a3;
+  --app-field-locked-text: #f1f5f9;
 
   --app-info-bg: #0e213b;
   --app-info-text: #dcecff;
@@ -182,6 +188,9 @@ html[data-app-theme="contrast"] {
   --app-border-strong: #ffffff;
   --app-control-border: #ffffff;
   --app-line: #ffffff;
+  --app-field-locked-bg: #151515;
+  --app-field-locked-border: #35b9ff;
+  --app-field-locked-text: #ffffff;
 
   --app-info-bg: #000000;
   --app-info-text: #ffffff;
@@ -847,7 +856,17 @@ html[data-app-theme="contrast"] .btn-outline-secondary {
 }
 
 .table tbody tr:hover > * {
-  background-color: color-mix(in srgb, var(--app-primary) 4%, transparent);
+  background-color: color-mix(in srgb, var(--app-primary) 11%, var(--app-surface));
+}
+
+.table tbody tr:hover > *:first-child {
+  box-shadow: inset 3px 0 0 var(--app-primary);
+}
+
+.table tbody tr:hover .form-control,
+.table tbody tr:hover .form-select,
+.table tbody tr:hover .input-group-text {
+  border-color: color-mix(in srgb, var(--app-primary) 48%, var(--app-control-border));
 }
 
 .accordion-item {
@@ -1793,4 +1812,1715 @@ html[data-app-theme="contrast"] .home-preview-bars span {
   .app-navbar .nav-link {
     transition: none;
   }
+}
+
+/* ==========================================================
+   UX.4.6b — Paso 1 y navegación común del asistente
+   ========================================================== */
+
+/* La barra conserva el contrato funcional anterior, pero deja de ser
+ * sticky/fixed. Permanece en el flujo normal y nunca cubre el formulario. */
+.wizard-sticky-nav.wizard-navigation-bar {
+  position: static;
+  inset: auto;
+  z-index: auto;
+  width: 100%;
+  margin: 1.25rem 0 0 !important;
+  padding: 0.85rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border: 1px solid var(--app-border-strong);
+  border-radius: var(--app-radius-lg);
+  background: var(--app-surface);
+  box-shadow: var(--app-shadow-xs);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.personal-data-source {
+  padding: 1.1rem;
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius-lg);
+  background: var(--app-surface-subtle);
+}
+
+.personal-data-source-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem;
+}
+
+.personal-data-source-option {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: flex-start;
+  gap: 0.75rem;
+  min-height: 92px;
+  padding: 1rem;
+  cursor: pointer;
+  border: 1px solid var(--app-border-strong);
+  border-radius: var(--app-radius-md);
+  background: var(--app-surface);
+  transition: border-color 0.16s ease, background-color 0.16s ease, box-shadow 0.16s ease;
+}
+
+.personal-data-source-option:hover,
+.personal-data-source-option:focus-within {
+  border-color: color-mix(in srgb, var(--app-primary) 48%, var(--app-border));
+}
+
+.personal-data-source-option.selected {
+  border-color: var(--app-primary);
+  background: var(--app-selected-bg);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--app-primary) 16%, transparent);
+}
+
+.personal-data-source-option .form-check-input {
+  margin-top: 0.2rem;
+}
+
+.personal-data-source-option span {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.personal-data-source-option strong {
+  color: var(--app-text);
+  font-weight: 720;
+}
+
+.personal-data-source-option small {
+  margin-top: 0.2rem;
+  color: var(--app-text-secondary);
+  line-height: 1.4;
+}
+
+.personal-form-section {
+  scroll-margin-top: 1rem;
+}
+
+.personal-form-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.personal-data-form[aria-busy="true"] {
+  opacity: 0.75;
+}
+
+.personal-import-panel {
+  margin-bottom: 1.5rem;
+}
+
+.import-preview-section {
+  padding: 1rem;
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius-md);
+  background: var(--app-surface-subtle);
+}
+
+.import-field-status {
+  display: block;
+  min-height: 1.2rem;
+  margin-top: 0.3rem;
+  font-size: 0.76rem;
+  font-weight: 650;
+}
+
+.import-field-status.detected {
+  color: var(--app-success-text);
+}
+
+.import-field-status.missing {
+  color: var(--app-muted);
+}
+
+.import-field-status.edited {
+  color: var(--app-primary);
+}
+
+.official-import-modal .modal-body input[readonly],
+.official-import-modal .modal-body select:disabled,
+.official-import-modal .modal-body input:disabled {
+  opacity: 1;
+  color: var(--app-text);
+  background: var(--app-surface-muted);
+  border-color: var(--app-border);
+  cursor: default;
+}
+
+/* En modo importado, el formulario principal funciona como resumen de lo
+ * confirmado. La edición se realiza desde la vista previa explícita. */
+#form-datos-personales input[readonly],
+#form-datos-personales select:disabled {
+  opacity: 1;
+  color: var(--app-text);
+  background: var(--app-surface-muted);
+  cursor: default;
+}
+
+.simulation-section {
+  padding-top: 3.5rem !important;
+  padding-bottom: 3.5rem !important;
+}
+
+.simulation-header {
+  margin-bottom: 1.6rem !important;
+}
+
+.wizard-steps {
+  margin-bottom: 2.25rem !important;
+}
+
+html[data-app-theme="contrast"] .personal-data-source,
+html[data-app-theme="contrast"] .personal-data-source-option,
+html[data-app-theme="contrast"] .import-preview-section,
+html[data-app-theme="contrast"] .wizard-sticky-nav.wizard-navigation-bar {
+  border-width: 2px;
+}
+
+@media (max-width: 767.98px) {
+  .simulation-section {
+    padding-top: 1.75rem !important;
+    padding-bottom: 2rem !important;
+  }
+
+  .personal-data-source-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .personal-form-heading {
+    flex-direction: column;
+  }
+
+  .wizard-sticky-nav.wizard-navigation-bar {
+    position: static;
+    inset: auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.65rem;
+    padding: 0.8rem;
+    border: 1px solid var(--app-border-strong);
+    border-radius: var(--app-radius-lg);
+    box-shadow: none;
+  }
+
+  .wizard-sticky-nav.wizard-navigation-bar .wizard-sticky-nav-main,
+  .wizard-sticky-nav.wizard-navigation-bar .wizard-sticky-nav-secondary {
+    width: 100%;
+  }
+
+  .wizard-sticky-nav.wizard-navigation-bar .wizard-sticky-nav-main {
+    order: 2;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.6rem;
+  }
+
+  .wizard-sticky-nav.wizard-navigation-bar .wizard-sticky-nav-secondary {
+    order: 1;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 0.6rem;
+  }
+
+  .wizard-sticky-nav.wizard-navigation-bar #wizard-sticky-status {
+    display: block;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .wizard-sticky-nav.wizard-navigation-bar .wizard-sticky-nav-main {
+    grid-template-columns: 1fr;
+  }
+
+  .wizard-sticky-nav.wizard-navigation-bar #wizard-sticky-primary {
+    width: 100%;
+  }
+}
+
+
+/* ==========================================================
+   UX.4.6b R2 — Privacidad, formularios e importación refinada
+   ========================================================== */
+
+.required-marker {
+  color: var(--bs-danger-text-emphasis, var(--bs-danger));
+  font-weight: 800;
+}
+
+.required-fields-note {
+  color: var(--app-text-secondary);
+  font-size: 0.86rem;
+  font-weight: 600;
+}
+
+.official-import-upload-card {
+  display: block;
+}
+
+.official-import-upload-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(15rem, 1fr);
+  align-items: end;
+  gap: 1rem;
+}
+
+.official-import-upload-file,
+.official-import-upload-action {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.official-import-upload-file .form-label,
+.official-import-upload-action .form-label {
+  min-height: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.official-import-file-input {
+  min-height: 2.8rem;
+  height: 2.8rem;
+  padding: 0;
+  line-height: 2.8rem;
+}
+
+.official-import-file-input::file-selector-button {
+  height: 2.8rem;
+  line-height: 2.8rem;
+  padding: 0 1rem;
+  color: var(--app-primary-strong);
+  background: var(--app-primary-soft);
+  border-color: var(--app-primary-border);
+  font-weight: 700;
+}
+
+.official-import-upload-action .btn {
+  min-height: 2.8rem;
+  height: 2.8rem;
+}
+
+.official-import-policy-link {
+  font-size: 0.9rem;
+}
+
+.official-import-policy-link a {
+  color: var(--app-primary);
+  font-weight: 650;
+  text-underline-offset: 0.16em;
+}
+
+.privacy-consent-modal .modal-content {
+  border: 1px solid var(--app-border-strong);
+  border-radius: var(--app-radius-xl);
+  background: var(--app-surface);
+  color: var(--app-text);
+  box-shadow: var(--app-shadow-lg);
+  overflow: hidden;
+}
+
+.privacy-consent-header {
+  padding: 1.35rem 1.5rem;
+  border-bottom: 1px solid var(--app-border);
+  background: var(--app-surface-subtle);
+}
+
+.privacy-consent-kicker {
+  display: block;
+  margin-bottom: 0.3rem;
+  color: var(--app-primary);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+}
+
+.privacy-consent-body {
+  padding: 1.35rem 1.5rem;
+}
+
+.privacy-summary-card,
+.privacy-legal-note {
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--app-info-border);
+  border-radius: var(--app-radius-md);
+  background: var(--app-info-bg);
+  color: var(--app-info-text);
+}
+
+.privacy-terms-section + .privacy-terms-section {
+  margin-top: 1.15rem;
+  padding-top: 1.15rem;
+  border-top: 1px solid var(--app-border);
+}
+
+.privacy-terms-section p {
+  margin-bottom: 0;
+  color: var(--app-text-secondary);
+  line-height: 1.6;
+}
+
+.privacy-contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem 1rem;
+}
+
+.privacy-contact-links a {
+  color: var(--app-primary);
+  font-weight: 650;
+}
+
+.privacy-consent-footer {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--app-border);
+  background: var(--app-surface-subtle);
+}
+
+.privacy-consent-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+  min-width: 0;
+}
+
+.privacy-consent-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.45rem;
+  margin: 0;
+  max-width: 34rem;
+}
+
+.privacy-consent-check .form-check-input {
+  flex: 0 0 auto;
+  margin-top: 0.2rem;
+}
+
+.methodology-privacy-card {
+  padding: 1.15rem;
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius-lg);
+  background: var(--app-surface-subtle);
+}
+
+html[data-app-theme="contrast"] .privacy-consent-modal .modal-content,
+html[data-app-theme="contrast"] .privacy-summary-card,
+html[data-app-theme="contrast"] .privacy-legal-note,
+html[data-app-theme="contrast"] .methodology-privacy-card {
+  border-width: 2px;
+}
+
+@media (max-width: 767.98px) {
+  .official-import-upload-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .privacy-consent-footer {
+    grid-template-columns: 1fr;
+  }
+
+  .privacy-consent-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .privacy-consent-actions .btn,
+  #btn-privacidad-rechazar {
+    width: 100%;
+  }
+}
+
+/* ==========================================================
+   UX.4.6b R3 — navegación dual y lectura informada
+   ========================================================== */
+
+/* La tarjeta de simulación permite que las ayudas contextuales se proyecten
+ * fuera de sus límites sin quedar cortadas por el borde de la tarjeta. */
+.simulation-card {
+  overflow: visible;
+}
+
+.wizard-navigation-bar {
+  width: 100%;
+  padding: 0.75rem 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border: 1px solid var(--app-border-strong);
+  border-radius: var(--app-radius-lg);
+  background: var(--app-surface);
+  box-shadow: var(--app-shadow-xs);
+}
+
+.wizard-navigation-bar-top {
+  position: sticky;
+  top: 86px;
+  z-index: 1015;
+  background: color-mix(in srgb, var(--app-surface) 97%, transparent);
+  box-shadow: var(--app-shadow-md);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+}
+
+.wizard-navigation-bar-bottom {
+  position: static;
+  margin-bottom: 0.25rem;
+}
+
+.wizard-navigation-bar .wizard-sticky-nav-secondary,
+.wizard-navigation-bar .wizard-sticky-nav-main {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.wizard-navigation-bar .wizard-step-jump {
+  width: min(18rem, 42vw);
+}
+
+.wizard-navigation-bar [data-wizard-status] {
+  white-space: nowrap;
+}
+
+.wizard-panel {
+  scroll-margin-top: 10.5rem;
+}
+
+.privacy-consent-modal .modal-dialog {
+  max-width: min(1120px, calc(100vw - 2rem));
+}
+
+.privacy-consent-body {
+  scroll-behavior: smooth;
+}
+
+.privacy-terms-section h3 {
+  margin-bottom: 0.55rem;
+}
+
+.privacy-terms-section p a {
+  overflow-wrap: anywhere;
+}
+
+.privacy-consent-check-wrapper {
+  min-width: 0;
+  max-width: 42rem;
+}
+
+.privacy-consent-check:has(.form-check-input:disabled) {
+  opacity: 0.68;
+}
+
+.privacy-read-status {
+  display: block;
+  margin-top: 0.3rem;
+  line-height: 1.35;
+}
+
+@media (max-width: 991.98px) {
+  .wizard-navigation-bar-top {
+    top: 78px;
+  }
+
+  .wizard-navigation-bar {
+    align-items: stretch;
+  }
+
+  .wizard-navigation-bar [data-wizard-status] {
+    white-space: normal;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .wizard-navigation-bar,
+  .wizard-navigation-bar-top,
+  .wizard-navigation-bar-bottom {
+    position: static;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.65rem;
+    padding: 0.8rem;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .wizard-navigation-bar .wizard-sticky-nav-main,
+  .wizard-navigation-bar .wizard-sticky-nav-secondary {
+    width: 100%;
+  }
+
+  .wizard-navigation-bar .wizard-sticky-nav-main {
+    order: 2;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.6rem;
+  }
+
+  .wizard-navigation-bar .wizard-sticky-nav-secondary {
+    order: 1;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 0.6rem;
+  }
+
+  .wizard-navigation-bar .wizard-step-jump {
+    width: 100%;
+  }
+
+  .privacy-consent-modal .modal-dialog {
+    max-width: calc(100vw - 1rem);
+  }
+}
+
+/* ==========================================================
+   UX.4.6c — Paso 2, origen de cuotas y selector de apariencia
+   ========================================================== */
+
+.theme-trigger-icon,
+.theme-choice-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  color: var(--app-primary);
+}
+
+.theme-trigger-icon {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+
+.theme-choice-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.theme-trigger-icon svg,
+.theme-choice-icon svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.theme-trigger-icon [data-theme-icon] {
+  display: none;
+}
+
+.theme-trigger[data-theme-current="system"] .theme-trigger-icon [data-theme-icon="system"],
+.theme-trigger[data-theme-current="light"] .theme-trigger-icon [data-theme-icon="light"],
+.theme-trigger[data-theme-current="dark"] .theme-trigger-icon [data-theme-icon="dark"],
+.theme-trigger[data-theme-current="contrast"] .theme-trigger-icon [data-theme-icon="contrast"] {
+  display: block;
+}
+
+.theme-trigger-icon [data-theme-icon="contrast"] path,
+.theme-choice[data-theme-choice="contrast"] .theme-choice-icon path {
+  fill: currentColor;
+  stroke: none;
+}
+
+.theme-choice.active .theme-choice-icon,
+.theme-choice[aria-pressed="true"] .theme-choice-icon {
+  filter: drop-shadow(0 0 0.3rem color-mix(in srgb, var(--app-primary) 28%, transparent));
+}
+
+.quota-form-section {
+  scroll-margin-top: 10.5rem;
+}
+
+.quota-section-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+#form-cuotas input[readonly],
+#form-cuotas .field-imported-readonly {
+  opacity: 1;
+  color: var(--app-text);
+  background: var(--app-surface-muted);
+  border-color: var(--app-border-strong);
+  cursor: default;
+}
+
+.field-origin-note {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.45rem;
+  font-size: 0.82rem;
+  font-weight: 650;
+  line-height: 1.35;
+}
+
+.field-origin-note.imported {
+  color: var(--app-success-text);
+}
+
+.field-origin-note.imported::before {
+  content: "✓";
+  font-weight: 800;
+}
+
+.field-origin-note.missing {
+  color: var(--app-warning-text);
+}
+
+.field-origin-note.missing::before {
+  content: "!";
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1rem;
+  height: 1rem;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  font-size: 0.68rem;
+  font-weight: 800;
+}
+
+.imported-data-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  padding: 0.75rem 0.85rem;
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius-md);
+  background: var(--app-surface-subtle);
+  color: var(--app-text-secondary);
+  font-size: 0.86rem;
+  line-height: 1.4;
+}
+
+.imported-data-actions .btn {
+  margin-left: auto;
+}
+
+.imported-data-status-icon {
+  line-height: 1;
+}
+
+.form-state-note {
+  padding: 0.75rem 0.85rem;
+  border: 1px solid var(--app-info-border);
+  border-radius: var(--app-radius-md);
+  background: var(--app-info-bg);
+  color: var(--app-info-text);
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+html[data-app-theme="contrast"] .field-origin-note.imported,
+html[data-app-theme="contrast"] .field-origin-note.missing {
+  font-weight: 750;
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
+}
+
+html[data-app-theme="contrast"] .imported-data-actions,
+html[data-app-theme="contrast"] .form-state-note {
+  border-width: 2px;
+}
+
+@media (max-width: 767.98px) {
+  .quota-section-heading {
+    flex-direction: column;
+  }
+
+  .imported-data-actions .btn {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+.imported-data-status-icon {
+  width: 1.05rem;
+  height: 1.05rem;
+  display: inline-flex;
+  color: var(--app-primary);
+}
+
+.imported-data-status-icon svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ==========================================================
+   UX.4.6d — Paso 3 · Historial
+   ========================================================== */
+
+.step3-subsection {
+  scroll-margin-top: 10.5rem;
+}
+
+.step3-section-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.history-period-panel {
+  padding: 1rem;
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius-lg);
+  background: var(--app-surface-subtle);
+}
+
+.history-period-summary {
+  min-height: 3.65rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.1rem;
+  padding: 0.6rem 0.85rem;
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius-md);
+  background: var(--app-surface);
+}
+
+.history-period-label {
+  color: var(--app-text-secondary);
+  font-size: 0.8rem;
+  font-weight: 650;
+}
+
+.history-period-summary strong {
+  color: var(--app-text);
+  font-size: 1rem;
+}
+
+.history-period-summary small {
+  color: var(--app-text-secondary);
+  font-size: 0.76rem;
+}
+
+.history-filter-group {
+  display: inline-flex;
+  gap: 0.4rem;
+  padding: 0.2rem;
+  border: 1px solid var(--app-border);
+  border-radius: 999px;
+  background: var(--app-surface-subtle);
+}
+
+.history-filter {
+  border: 0;
+  border-radius: 999px;
+  color: var(--app-text-secondary);
+  background: transparent;
+  font-weight: 700;
+}
+
+.history-filter:hover,
+.history-filter:focus-visible {
+  color: var(--app-primary);
+  background: var(--app-primary-soft);
+}
+
+.history-filter.active,
+.history-filter[aria-pressed="true"] {
+  color: var(--app-primary-contrast);
+  background: var(--app-primary);
+}
+
+.history-table tbody tr {
+  transition: background-color 0.14s ease, box-shadow 0.14s ease;
+}
+
+.history-table tbody tr:hover > * {
+  background: color-mix(in srgb, var(--app-primary) 8%, var(--app-surface));
+}
+
+.history-table tbody tr:hover {
+  box-shadow: inset 3px 0 0 var(--app-primary);
+}
+
+.history-field-imported,
+.detail-field-imported {
+  opacity: 1 !important;
+  color: var(--app-text) !important;
+  background: var(--app-surface-muted) !important;
+  border-color: var(--app-border-strong) !important;
+  cursor: default !important;
+}
+
+.history-field-imported:focus,
+.detail-field-imported:focus {
+  box-shadow: none;
+}
+
+.step3-source-action {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+
+#seccion-importacion-ficha .official-import-upload-grid {
+  align-items: end;
+}
+
+#seccion-importacion-ficha .official-import-upload-action .btn {
+  min-height: 3.35rem;
+}
+
+#detalle-anio-actual-contenido .current-year-detail-table tbody tr:hover > * {
+  background: color-mix(in srgb, var(--app-primary) 8%, var(--app-surface));
+}
+
+#detalle-anio-actual-contenido .current-year-detail-table tbody tr:hover {
+  box-shadow: inset 3px 0 0 var(--app-primary);
+}
+
+.step3-summary .summary-card {
+  height: 100%;
+  min-height: 7rem;
+}
+
+#form-salario input[readonly],
+#form-salario select:disabled {
+  opacity: 1;
+  color: var(--app-text);
+  background: var(--app-surface-muted);
+  border-color: var(--app-border-strong);
+}
+
+html[data-app-theme="contrast"] .history-period-panel,
+html[data-app-theme="contrast"] .history-period-summary,
+html[data-app-theme="contrast"] .history-filter-group {
+  border-width: 2px;
+}
+
+html[data-app-theme="contrast"] .history-field-imported,
+html[data-app-theme="contrast"] .detail-field-imported {
+  border-width: 2px !important;
+}
+
+@media (max-width: 767.98px) {
+  .step3-section-heading {
+    flex-direction: column;
+  }
+
+  .history-toolbar {
+    gap: 0.65rem;
+  }
+
+  .history-filter-group {
+    width: 100%;
+  }
+
+  .history-filter {
+    flex: 1 1 0;
+  }
+
+  .step3-source-action {
+    justify-content: flex-start;
+  }
+}
+
+/* UX.4.6d R4 — la procedencia documental usa la paleta primaria, no
+ * el verde semántico de éxito. Así se distingue origen de validación. */
+.table tbody tr.data-row-imported > *,
+.data-table tbody tr.data-row-imported > * {
+  background: var(--app-selected-bg);
+}
+
+.table tbody tr.data-row-imported {
+  box-shadow: inset 4px 0 0 var(--app-selected-border);
+}
+
+.table tbody tr.data-row-imported:hover > *,
+.data-table tbody tr.data-row-imported:hover > * {
+  background: color-mix(in srgb, var(--app-primary-soft) 88%, var(--app-surface));
+}
+
+.table tbody tr.data-row-manual > *,
+.data-table tbody tr.data-row-manual > * {
+  background: var(--app-surface);
+}
+
+.table tbody tr.data-row-manual:hover > *,
+.data-table tbody tr.data-row-manual:hover > * {
+  background: color-mix(in srgb, var(--app-primary) 8%, var(--app-surface));
+}
+
+/* UX.4.6d R17 — bloqueo documental no significa necesariamente "marcado".
+ * Las casillas importadas conservan opacidad y bloqueo, pero el gancho solo
+ * se fuerza cuando el valor booleano real está checked. Esto permite que
+ * clasificaciones como PROYECTADO/HISTORICO_PROYECTADO permanezcan visibles
+ * como excluidas del historial aunque su checkbox esté bloqueado. */
+.form-check-input[data-imported-locked="true"],
+.form-check-input.detail-field-imported:disabled {
+  opacity: 1 !important;
+  cursor: default;
+}
+
+.form-check-input[data-imported-locked="true"]:checked,
+.form-check-input.detail-field-imported:disabled:checked {
+  background-color: var(--app-primary) !important;
+  border-color: var(--app-primary) !important;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2.6' d='M3 8l3 3 7-7'/%3e%3c/svg%3e") !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: 0.9rem 0.9rem !important;
+}
+
+.form-check-input[data-imported-locked="true"]:not(:checked),
+.form-check-input.detail-field-imported:disabled:not(:checked) {
+  background-color: var(--app-field-locked-bg) !important;
+  border-color: var(--app-field-locked-border) !important;
+  background-image: none !important;
+}
+
+html[data-app-theme="contrast"] .table tbody tr.data-row-imported > *,
+html[data-app-theme="contrast"] .data-table tbody tr.data-row-imported > * {
+  background: var(--app-selected-bg);
+}
+
+html[data-app-theme="contrast"] .table tbody tr.data-row-imported {
+  outline: 2px solid var(--app-selected-border);
+  outline-offset: -2px;
+}
+
+html[data-app-theme="contrast"] .form-check-input[data-imported-locked="true"]:checked,
+html[data-app-theme="contrast"] .form-check-input.detail-field-imported:disabled:checked {
+  background-color: #ffffff !important;
+  border-color: #ffffff !important;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23000' stroke-linecap='round' stroke-linejoin='round' stroke-width='2.6' d='M3 8l3 3 7-7'/%3e%3c/svg%3e") !important;
+}
+
+html[data-app-theme="contrast"] .form-check-input[data-imported-locked="true"]:not(:checked),
+html[data-app-theme="contrast"] .form-check-input.detail-field-imported:disabled:not(:checked) {
+  background-color: #000000 !important;
+  border-color: #ffffff !important;
+  background-image: none !important;
+}
+
+/* ============================================================
+   UX.4.6d R6 — Gestión de datos del asistente
+   ============================================================ */
+
+.wizard-data-options .dropdown-toggle {
+  min-width: 7.5rem;
+}
+
+.wizard-data-options-menu {
+  min-width: 13.5rem;
+}
+
+.wizard-data-options-menu .dropdown-item {
+  font-weight: 600;
+}
+
+.data-management-modal .modal-body {
+  color: var(--app-text-secondary);
+  line-height: 1.6;
+}
+
+.data-management-modal .modal-footer {
+  gap: 0.5rem;
+}
+
+@media (max-width: 991.98px) {
+  .wizard-data-options {
+    width: 100%;
+  }
+
+  .wizard-data-options .dropdown-toggle {
+    width: 100%;
+  }
+}
+
+/* UX.4.6d R7 — consulta de términos y navegación destructiva */
+.privacy-consent-header {
+  position: relative;
+  padding-right: 4.5rem;
+}
+
+.privacy-modal-close {
+  position: absolute;
+  top: 1.15rem;
+  right: 1.2rem;
+  display: inline-grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 0.75rem;
+  background: transparent;
+  color: var(--app-text-secondary);
+  font: inherit;
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.privacy-modal-close:hover {
+  border-color: var(--app-border-strong);
+  background: var(--app-surface-soft);
+  color: var(--app-text);
+}
+
+.privacy-modal-close:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--app-primary) 42%, transparent);
+  outline-offset: 2px;
+}
+
+/* Defensa visual: las acciones destructivas pertenecen solo a la barra sticky superior. */
+.wizard-navigation-bar-bottom .wizard-data-options {
+  display: none !important;
+}
+
+
+.privacy-consent-footer[hidden] {
+  display: none !important;
+}
+
+/* ============================================================
+   UX.4.6d R10 — contrato visual transversal para tablas
+   ============================================================ */
+
+/*
+ * Toda tabla de producto vive dentro de una superficie explícita. La clase
+ * app-table-shell es el contrato para tablas actuales y futuras: borde,
+ * radios, superficie y foco visual son coherentes con tarjetas y formularios.
+ * El overflow concreto sigue perteneciendo a cada tabla según su contenido.
+ */
+.app-table-shell {
+  --app-table-radius: var(--app-radius-lg);
+  --app-table-shell-border: color-mix(
+    in srgb,
+    var(--app-border-strong) 78%,
+    var(--app-primary) 22%
+  );
+  --app-table-header-bg: color-mix(
+    in srgb,
+    var(--app-surface-subtle) 92%,
+    var(--app-primary-soft) 8%
+  );
+
+  position: relative;
+  isolation: isolate;
+  background: var(--app-surface);
+  border: 1px solid var(--app-table-shell-border) !important;
+  border-radius: var(--app-table-radius) !important;
+  box-shadow: var(--app-shadow-xs);
+  background-clip: padding-box;
+}
+
+/* border-collapse: separate permite que las esquinas de las celdas acompañen
+ * al contenedor sin crear espacios entre columnas. */
+.app-table-shell > table,
+.app-table-shell > .table {
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-bottom: 0;
+}
+
+.app-table-shell > table thead th,
+.app-table-shell > .table thead th {
+  background: var(--app-table-header-bg);
+}
+
+.app-table-shell > table thead tr:first-child > *:first-child,
+.app-table-shell > .table thead tr:first-child > *:first-child {
+  border-top-left-radius: calc(var(--app-table-radius) - 1px);
+}
+
+.app-table-shell > table thead tr:first-child > *:last-child,
+.app-table-shell > .table thead tr:first-child > *:last-child {
+  border-top-right-radius: calc(var(--app-table-radius) - 1px);
+}
+
+.app-table-shell > table tbody tr:last-child > *:first-child,
+.app-table-shell > .table tbody tr:last-child > *:first-child {
+  border-bottom-left-radius: calc(var(--app-table-radius) - 1px);
+}
+
+.app-table-shell > table tbody tr:last-child > *:last-child,
+.app-table-shell > .table tbody tr:last-child > *:last-child {
+  border-bottom-right-radius: calc(var(--app-table-radius) - 1px);
+}
+
+/* En oscuro se refuerza ligeramente el borde, sin convertir la tabla en una
+ * superficie brillante ni competir con los estados azules de importación. */
+html[data-bs-theme="dark"] .app-table-shell {
+  --app-table-shell-border: color-mix(
+    in srgb,
+    var(--app-border-strong) 88%,
+    var(--app-primary) 12%
+  );
+  --app-table-header-bg: color-mix(
+    in srgb,
+    var(--app-surface-subtle) 94%,
+    var(--app-primary-soft) 6%
+  );
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.16);
+}
+
+/* Alto contraste conserva la misma geometría, pero usa borde blanco más
+ * fuerte y elimina sombras para no perder separación por bajo contraste. */
+html[data-app-theme="contrast"] .app-table-shell {
+  --app-table-radius: var(--app-radius-lg);
+  --app-table-shell-border: #ffffff;
+  --app-table-header-bg: #000000;
+  border-width: 2px !important;
+  box-shadow: none;
+}
+
+html[data-app-theme="contrast"] .app-table-shell > table thead th,
+html[data-app-theme="contrast"] .app-table-shell > .table thead th {
+  border-bottom-color: #ffffff;
+}
+
+/* ============================================================
+   UX.4.6d R11 — scrollbars contenidos y carga de archivos simétrica
+   ============================================================ */
+
+/*
+ * El scrollbar pertenece visualmente al interior de la superficie tabular.
+ * Se elimina el botón nativo con flechas de Chromium/Windows y se deja el
+ * carril transparente para que nunca invada las esquinas redondeadas.
+ * Las reglas son globales para cualquier tabla actual o futura que adopte
+ * app-table-shell.
+ */
+.app-table-shell {
+  scrollbar-width: thin;
+  scrollbar-color:
+    color-mix(in srgb, var(--app-border-strong) 72%, var(--app-primary) 28%)
+    transparent;
+}
+
+.app-table-shell::-webkit-scrollbar {
+  width: 0.72rem;
+  height: 0.72rem;
+}
+
+.app-table-shell::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+.app-table-shell::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 999px;
+}
+
+.app-table-shell::-webkit-scrollbar-track:vertical {
+  margin-block: 0.55rem;
+}
+
+.app-table-shell::-webkit-scrollbar-track:horizontal {
+  margin-inline: 0.55rem;
+}
+
+.app-table-shell::-webkit-scrollbar-thumb {
+  min-height: 2.5rem;
+  background: color-mix(
+    in srgb,
+    var(--app-border-strong) 72%,
+    var(--app-primary) 28%
+  );
+  background-clip: padding-box;
+  border: 0.18rem solid transparent;
+  border-radius: 999px;
+}
+
+.app-table-shell::-webkit-scrollbar-thumb:hover {
+  background: color-mix(
+    in srgb,
+    var(--app-primary) 55%,
+    var(--app-border-strong) 45%
+  );
+  background-clip: padding-box;
+}
+
+.app-table-shell::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+html[data-bs-theme="dark"] .app-table-shell {
+  scrollbar-color: color-mix(in srgb, #6b87ad 68%, var(--app-primary) 32%) transparent;
+}
+
+html[data-bs-theme="dark"] .app-table-shell::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, #6b87ad 68%, var(--app-primary) 32%);
+  background-clip: padding-box;
+}
+
+html[data-app-theme="contrast"] .app-table-shell {
+  scrollbar-color: #ffffff #000000;
+}
+
+html[data-app-theme="contrast"] .app-table-shell::-webkit-scrollbar-track {
+  background: #000000;
+}
+
+html[data-app-theme="contrast"] .app-table-shell::-webkit-scrollbar-thumb {
+  background: #ffffff;
+  background-clip: padding-box;
+  border-color: #000000;
+}
+
+/*
+ * El selector de archivo y su acción forman una única fila funcional. Ambos
+ * controles comparten exactamente la misma altura exterior para evitar que
+ * «Analizar documento» se perciba más alto que el selector del PDF.
+ */
+.official-import-upload-file .official-import-file-input,
+.official-import-upload-action .btn {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 3rem !important;
+  height: 3rem !important;
+  max-height: 3rem;
+}
+
+.official-import-upload-file .official-import-file-input {
+  line-height: calc(3rem - 2px);
+}
+
+.official-import-upload-file .official-import-file-input::file-selector-button {
+  height: calc(3rem - 2px);
+  min-height: calc(3rem - 2px);
+  line-height: calc(3rem - 2px);
+}
+
+.official-import-upload-action .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding-block: 0;
+  line-height: 1.2;
+}
+
+/* ============================================================
+   UX.4.6d R12 — scrollbars globales, tablas más compactas y carga estable
+   ============================================================ */
+
+/*
+ * Las tablas usan un radio algo menor que las tarjetas. Esto conserva la
+ * geometría redondeada del producto y deja una arista derecha más limpia para
+ * el desplazamiento interno en Windows/Chromium.
+ */
+.app-table-shell {
+  --app-table-radius: var(--app-radius-md);
+}
+
+html[data-app-theme="contrast"] .app-table-shell {
+  --app-table-radius: var(--app-radius-md);
+}
+
+/*
+ * Contrato visual de desplazamiento para la página, términos, modales,
+ * navegación horizontal y superficies tabulares. Se conserva el scroll nativo
+ * para rueda, teclado y táctil, pero se eliminan los botones con flechas y se
+ * unifica el thumb con la paleta activa.
+ */
+html,
+body,
+.modal-body,
+.privacy-consent-body,
+.wizard-steps,
+.app-table-shell,
+.table-responsive {
+  scrollbar-width: thin;
+  scrollbar-color:
+    color-mix(in srgb, var(--app-border-strong) 68%, var(--app-primary) 32%)
+    transparent;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+.modal-body::-webkit-scrollbar,
+.privacy-consent-body::-webkit-scrollbar,
+.wizard-steps::-webkit-scrollbar,
+.app-table-shell::-webkit-scrollbar,
+.table-responsive::-webkit-scrollbar {
+  width: 0.68rem;
+  height: 0.68rem;
+}
+
+html::-webkit-scrollbar-button,
+body::-webkit-scrollbar-button,
+.modal-body::-webkit-scrollbar-button,
+.privacy-consent-body::-webkit-scrollbar-button,
+.wizard-steps::-webkit-scrollbar-button,
+.app-table-shell::-webkit-scrollbar-button,
+.table-responsive::-webkit-scrollbar-button,
+html::-webkit-scrollbar-button:single-button,
+body::-webkit-scrollbar-button:single-button,
+.modal-body::-webkit-scrollbar-button:single-button,
+.privacy-consent-body::-webkit-scrollbar-button:single-button,
+.wizard-steps::-webkit-scrollbar-button:single-button,
+.app-table-shell::-webkit-scrollbar-button:single-button,
+.table-responsive::-webkit-scrollbar-button:single-button {
+  -webkit-appearance: none;
+  appearance: none;
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+}
+
+html::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track,
+.modal-body::-webkit-scrollbar-track,
+.privacy-consent-body::-webkit-scrollbar-track,
+.wizard-steps::-webkit-scrollbar-track,
+.app-table-shell::-webkit-scrollbar-track,
+.table-responsive::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb,
+.modal-body::-webkit-scrollbar-thumb,
+.privacy-consent-body::-webkit-scrollbar-thumb,
+.wizard-steps::-webkit-scrollbar-thumb,
+.app-table-shell::-webkit-scrollbar-thumb,
+.table-responsive::-webkit-scrollbar-thumb {
+  min-height: 2.5rem;
+  background: color-mix(
+    in srgb,
+    var(--app-border-strong) 66%,
+    var(--app-primary) 34%
+  );
+  background-clip: padding-box;
+  border: 0.16rem solid transparent;
+  border-radius: 999px;
+}
+
+html::-webkit-scrollbar-thumb:hover,
+body::-webkit-scrollbar-thumb:hover,
+.modal-body::-webkit-scrollbar-thumb:hover,
+.privacy-consent-body::-webkit-scrollbar-thumb:hover,
+.wizard-steps::-webkit-scrollbar-thumb:hover,
+.app-table-shell::-webkit-scrollbar-thumb:hover,
+.table-responsive::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--app-primary) 62%, var(--app-border-strong) 38%);
+  background-clip: padding-box;
+}
+
+html::-webkit-scrollbar-corner,
+body::-webkit-scrollbar-corner,
+.modal-body::-webkit-scrollbar-corner,
+.privacy-consent-body::-webkit-scrollbar-corner,
+.wizard-steps::-webkit-scrollbar-corner,
+.app-table-shell::-webkit-scrollbar-corner,
+.table-responsive::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* El thumb tabular queda ligeramente separado de los extremos del contenedor. */
+.app-table-shell::-webkit-scrollbar-track:vertical {
+  margin-block: 0.4rem;
+}
+
+.app-table-shell::-webkit-scrollbar-track:horizontal {
+  margin-inline: 0.4rem;
+}
+
+html[data-bs-theme="dark"],
+html[data-bs-theme="dark"] body,
+html[data-bs-theme="dark"] .modal-body,
+html[data-bs-theme="dark"] .privacy-consent-body,
+html[data-bs-theme="dark"] .wizard-steps,
+html[data-bs-theme="dark"] .app-table-shell,
+html[data-bs-theme="dark"] .table-responsive {
+  scrollbar-color: color-mix(in srgb, #7186a5 62%, var(--app-primary) 38%) transparent;
+}
+
+html[data-app-theme="contrast"],
+html[data-app-theme="contrast"] body,
+html[data-app-theme="contrast"] .modal-body,
+html[data-app-theme="contrast"] .privacy-consent-body,
+html[data-app-theme="contrast"] .wizard-steps,
+html[data-app-theme="contrast"] .app-table-shell,
+html[data-app-theme="contrast"] .table-responsive {
+  scrollbar-color: #ffffff #000000;
+}
+
+html[data-app-theme="contrast"] ::-webkit-scrollbar-thumb {
+  background: #ffffff;
+  background-clip: padding-box;
+  border-color: #000000;
+}
+
+/* Estado vacío del filtro Pendientes: no se deja una cabecera de tabla sin filas. */
+.history-filter-empty {
+  padding: 0.95rem 1.1rem;
+  border: 1px dashed var(--app-border-strong);
+  border-radius: var(--app-radius-md);
+  color: var(--app-text-secondary);
+  background: var(--app-surface-subtle);
+}
+
+html[data-app-theme="contrast"] .history-filter-empty {
+  border-style: solid;
+  border-width: 2px;
+  color: #ffffff;
+  background: #000000;
+}
+
+/*
+ * El botón nativo de archivo conserva identidad propia aunque el puntero esté
+ * sobre el nombre del archivo. Solo el hover directo del botón cambia de tono.
+ */
+input[type="file"].form-control {
+  --app-file-button-color: var(--app-primary-strong);
+  --app-file-button-bg: var(--app-primary-soft);
+  --app-file-button-hover-bg: color-mix(in srgb, var(--app-primary-soft) 72%, var(--app-primary) 28%);
+  --app-file-button-border: var(--app-primary-border);
+}
+
+input[type="file"].form-control::file-selector-button,
+input[type="file"].form-control:hover::file-selector-button {
+  color: var(--app-file-button-color);
+  background: var(--app-file-button-bg);
+  border-color: var(--app-file-button-border);
+}
+
+input[type="file"].form-control::file-selector-button:hover {
+  color: var(--app-file-button-color);
+  background: var(--app-file-button-hover-bg);
+}
+
+html[data-bs-theme="dark"] input[type="file"].form-control {
+  --app-file-button-color: #dbeafe;
+  --app-file-button-bg: #17345c;
+  --app-file-button-hover-bg: #204777;
+  --app-file-button-border: var(--app-primary-border);
+}
+
+html[data-app-theme="contrast"] input[type="file"].form-control {
+  --app-file-button-color: #ffffff;
+  --app-file-button-bg: #08213a;
+  --app-file-button-hover-bg: #10385e;
+  --app-file-button-border: #ffffff;
+}
+
+
+/* ============================================================
+   UX.4.6d R13 — selector de archivo estable frente al hover del input
+   ============================================================ */
+
+/*
+ * Bootstrap/Chromium considera :hover activo sobre todo el input[type=file]
+ * aunque el puntero esté sobre el texto del nombre del archivo. Para que el
+ * botón nativo no vuelva a la paleta de Bootstrap, fijamos sus colores con
+ * una regla de mayor prioridad en estados base, hover y focus. El feedback de
+ * interacción permanece en el borde/foco del control completo, no cambiando
+ * el color interno del botón de forma ambigua.
+ */
+input[type="file"].form-control:not(:disabled):not([readonly])::file-selector-button,
+input[type="file"].form-control:not(:disabled):not([readonly]):hover::file-selector-button,
+input[type="file"].form-control:not(:disabled):not([readonly]):focus::file-selector-button,
+input[type="file"].form-control:not(:disabled):not([readonly]):focus-visible::file-selector-button {
+  color: var(--app-file-button-color) !important;
+  background: var(--app-file-button-bg) !important;
+  border-color: var(--app-file-button-border) !important;
+}
+
+/* Firefox/WebKit heredados: mismo contrato visual cuando exponen prefijo. */
+input[type="file"].form-control:not(:disabled):not([readonly])::-webkit-file-upload-button,
+input[type="file"].form-control:not(:disabled):not([readonly]):hover::-webkit-file-upload-button,
+input[type="file"].form-control:not(:disabled):not([readonly]):focus::-webkit-file-upload-button {
+  color: var(--app-file-button-color) !important;
+  background: var(--app-file-button-bg) !important;
+  border-color: var(--app-file-button-border) !important;
+}
+
+
+/* ============================================================
+   UX.4.6d R15 — campos editables frente a campos no editables
+   ============================================================ */
+
+/*
+ * Los controles de formulario bloqueados/solo lectura comparten un contrato
+ * visual transversal. La diferencia no depende solo del color: el borde
+ * izquierdo primario refuerza que el valor está fijado por el estado actual
+ * (por ejemplo, una importación confirmada o una opción que deshabilita el
+ * campo). Se aplica a pasos actuales y a formularios futuros que reutilicen
+ * form-control/form-select.
+ */
+:is(.form-control, .form-select):disabled,
+.form-control[readonly],
+.form-select[readonly],
+.field-imported-readonly {
+  opacity: 1 !important;
+  color: var(--app-field-locked-text) !important;
+  background-color: var(--app-field-locked-bg) !important;
+  border-color: var(--app-field-locked-border) !important;
+  box-shadow: inset 3px 0 0 var(--app-primary) !important;
+}
+
+:is(.form-control, .form-select):disabled {
+  cursor: not-allowed;
+}
+
+.form-control[readonly],
+.form-select[readonly],
+.field-imported-readonly {
+  cursor: default;
+}
+
+html[data-app-theme="contrast"] :is(.form-control, .form-select):disabled,
+html[data-app-theme="contrast"] .form-control[readonly],
+html[data-app-theme="contrast"] .form-select[readonly],
+html[data-app-theme="contrast"] .field-imported-readonly {
+  border-width: 2px;
+  box-shadow: inset 4px 0 0 var(--app-primary) !important;
+}
+
+/* ============================================================
+   UX.4.6d R18 — procedencia visible y documento importado persistente
+   ============================================================ */
+
+.import-field-status.manual,
+.field-origin-note.data-provenance-note.manual,
+.data-provenance-badge.manual {
+  color: var(--app-neutral-text);
+}
+
+.field-origin-note.data-provenance-note.detected,
+.data-provenance-badge.detected {
+  color: var(--app-primary);
+}
+
+.field-origin-note.data-provenance-note.edited,
+.data-provenance-badge.edited {
+  color: var(--app-indigo-text);
+}
+
+.field-origin-note.data-provenance-note.missing,
+.data-provenance-badge.missing {
+  color: var(--app-warning-text);
+}
+
+.field-origin-note.data-provenance-note.detected::before {
+  content: "●";
+  font-size: 0.7em;
+}
+
+.field-origin-note.data-provenance-note.edited::before {
+  content: "✎";
+  font-weight: 800;
+}
+
+.field-origin-note.data-provenance-note.manual::before {
+  content: "+";
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1rem;
+  height: 1rem;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.data-provenance-badge {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  margin-top: 0.28rem;
+  font-size: 0.72rem;
+  font-weight: 750;
+  line-height: 1.2;
+}
+
+.current-year-detail-month {
+  vertical-align: middle;
+}
+
+.current-year-detail-month > span,
+.current-year-detail-month > small {
+  display: block;
+}
+
+.official-import-persisted-document {
+  display: grid;
+  gap: 0.2rem;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid var(--app-border-strong);
+  border-radius: var(--app-radius-sm);
+  background: var(--app-info-bg);
+  color: var(--app-info-text);
+  font-size: 0.86rem;
+  line-height: 1.4;
+}
+
+.official-import-persisted-document strong {
+  color: inherit;
+  overflow-wrap: anywhere;
+}
+
+.official-import-persisted-document span {
+  color: inherit;
+  opacity: 0.9;
+}
+
+html[data-app-theme="contrast"] .field-origin-note.data-provenance-note,
+html[data-app-theme="contrast"] .data-provenance-badge {
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
+}
+
+html[data-app-theme="contrast"] .official-import-persisted-document {
+  border-width: 2px;
+}
+
+.official-import-persisted-recency.warning {
+  font-weight: 750;
+  color: var(--app-warning-text);
+}
+
+.current-year-detail-summary-card {
+  min-height: 6rem;
+  height: 100%;
+}
+
+.current-year-detail-summary-card .summary-value-text {
+  font-size: clamp(1rem, 1.6vw, 1.35rem);
+  line-height: 1.2;
+}
+
+html[data-app-theme="contrast"] .official-import-persisted-recency.warning {
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
 }

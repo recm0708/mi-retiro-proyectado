@@ -1,0 +1,353 @@
+<!-- ==================================================
+     UX.4.6b R4 — Términos, privacidad y tratamiento de datos
+     ================================================== -->
+<div
+  class="modal fade privacy-consent-modal"
+  id="modal-privacidad-simulacion"
+  tabindex="-1"
+  aria-labelledby="privacidad-simulacion-titulo"
+  aria-describedby="privacidad-simulacion-resumen"
+  aria-hidden="true"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+>
+  <div class="modal-dialog modal-xl modal-dialog-scrollable modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header privacy-consent-header">
+        <div>
+          <span class="privacy-consent-kicker" id="privacidad-modal-kicker">Antes de comenzar</span>
+          <h2 class="modal-title h4 fw-bold mb-1" id="privacidad-simulacion-titulo">
+            Términos, privacidad y tratamiento de datos
+          </h2>
+          <p class="text-secondary mb-0" id="privacidad-simulacion-resumen">
+            Lee el documento completo. Al llegar al final podrás habilitar la aceptación.
+          </p>
+        </div>
+        <button
+          type="button"
+          id="btn-privacidad-cerrar"
+          class="privacy-modal-close"
+          aria-label="Cerrar términos y privacidad"
+        >
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+
+      <div class="modal-body privacy-consent-body" id="privacidad-contenido-desplazable" tabindex="0">
+        <div class="privacy-summary-card mb-4" role="note">
+          <strong>Información importante antes de usar la simulación.</strong>
+          <p class="mb-0 mt-1">
+            Mi Retiro Proyectado es una herramienta independiente de estimación previsional.
+            Utiliza únicamente la información que decidas proporcionar para construir y explicar
+            escenarios de retiro. No sustituye una resolución, certificación ni cálculo oficial
+            de la Caja de Seguro Social de Panamá.
+          </p>
+        </div>
+
+        <section class="privacy-terms-section" aria-labelledby="privacidad-objeto">
+          <h3 class="h6 fw-bold" id="privacidad-objeto">1. Objeto y alcance de estas condiciones</h3>
+          <p>
+            Estas condiciones regulan el uso de Mi Retiro Proyectado y describen cómo se obtiene,
+            utiliza, conserva, corrige y elimina la información que el usuario suministra durante
+            una simulación. Su finalidad es ofrecer información clara y previa para que el titular
+            pueda decidir libremente si desea continuar con el tratamiento de sus datos.
+          </p>
+        </section>
+
+        <section class="privacy-terms-section" aria-labelledby="privacidad-responsable">
+          <h3 class="h6 fw-bold" id="privacidad-responsable">2. Responsable y canales de contacto</h3>
+          <p>
+            Responsable de la aplicación: <strong>Rubén Enrique Cañizares Miranda</strong>, Panamá.
+            Para consultas relacionadas con privacidad, corrección, eliminación o ejercicio de
+            derechos sobre los datos proporcionados, puedes escribir a
+            <a href="mailto:ruben.canizares@outlook.com">ruben.canizares@outlook.com</a>.
+            La información técnica y el código del proyecto pueden consultarse en el
+            <a href="https://github.com/recm0708/calculadora-pension-css" target="_blank" rel="noopener noreferrer">repositorio de Mi Retiro Proyectado</a>.
+          </p>
+        </section>
+
+        <section class="privacy-terms-section" aria-labelledby="privacidad-marco-legal">
+          <h3 class="h6 fw-bold" id="privacidad-marco-legal">3. Marco legal de referencia</h3>
+          <p>
+            El tratamiento de datos personales se diseña tomando como referencia la
+            <strong>Ley 81 de 26 de marzo de 2019 sobre Protección de Datos Personales</strong>,
+            su reglamentación mediante el <strong>Decreto Ejecutivo 285 de 28 de mayo de 2021</strong>
+            y las orientaciones de la Autoridad Nacional de Transparencia y Acceso a la Información
+            (ANTAI). La aplicación adopta como principios de trabajo la licitud, finalidad,
+            proporcionalidad, seguridad, transparencia, confidencialidad y control del titular.
+          </p>
+        </section>
+
+        <section class="privacy-terms-section" aria-labelledby="privacidad-obtencion">
+          <h3 class="h6 fw-bold" id="privacidad-obtencion">4. Obtención de la información</h3>
+          <p>
+            La información puede ser introducida manualmente por el usuario o detectada desde un
+            documento que el propio usuario seleccione para importación. Antes de incorporar datos
+            detectados desde un documento, la aplicación muestra una vista previa para que puedan
+            revisarse y, si es necesario, corregirse. Ningún dato detectado desde un documento se considera
+            aceptado por el usuario hasta que este confirme expresamente la importación.
+          </p>
+        </section>
+
+        <section class="privacy-terms-section" aria-labelledby="privacidad-datos-recopilados">
+          <h3 class="h6 fw-bold" id="privacidad-datos-recopilados">5. Datos que pueden tratarse</h3>
+          <p>
+            Según las funciones utilizadas, la simulación puede tratar nombres y apellidos,
+            apellido de casada cuando corresponda, cédula, número de Seguro Social, fecha de
+            nacimiento, sexo, fecha de ingreso a la CSS, sistema previsional, cuotas acreditadas,
+            salarios, historial anual o mensual, supuestos de proyección, fechas o escenarios de
+            retiro y resultados estimados. Los nombres, apellidos, cédula y número de Seguro Social
+            son opcionales para el cálculo y no deben impedir una simulación anónima cuando el
+            usuario prefiera no proporcionarlos.
+          </p>
+        </section>
+
+        <section class="privacy-terms-section" aria-labelledby="privacidad-finalidad">
+          <h3 class="h6 fw-bold" id="privacidad-finalidad">6. Finalidades del tratamiento</h3>
+          <p>
+            Los datos se utilizan para preparar la simulación solicitada, verificar la coherencia
+            de la información, estimar edades y fechas relevantes, analizar cuotas y salarios,
+            proyectar escenarios futuros, comparar alternativas de retiro y presentar resultados
+            explicativos. Cuando exista la función de exportación, el usuario podrá generar de forma
+            voluntaria un archivo con la información que decida incluir. Los datos no se utilizan
+            para publicidad, mercadeo, venta de información, perfilado comercial ni para adoptar
+            decisiones con efectos jurídicos sobre el usuario.
+          </p>
+        </section>
+
+        <section class="privacy-terms-section" aria-labelledby="privacidad-base">
+          <h3 class="h6 fw-bold" id="privacidad-base">7. Consentimiento y carácter voluntario</h3>
+          <p>
+            El tratamiento se realiza a partir de la decisión del usuario de utilizar la simulación
+            y aceptar estas condiciones. El consentimiento debe ser previo, informado e inequívoco.
+            La negativa a aceptarlo impide continuar con la captura o importación de datos personales
+            y devuelve al usuario a la página de Inicio. Cerrar la ventana inicial sin aceptar tiene
+            el mismo efecto: la simulación no continúa. Los campos identificativos que no sean
+            necesarios para el cálculo se mantienen como opcionales. El usuario puede dejar de usar
+            la simulación en cualquier momento y dispone de controles para limpiar un paso, reiniciar
+            toda la simulación o borrar los datos locales de la aplicación en este navegador. Las
+            condiciones vigentes pueden consultarse desde Fuentes. Si todavía no existe una aceptación
+            válida, esa misma consulta permite leer el documento completo y otorgar el consentimiento;
+            después no se solicitará nuevamente al entrar a Simular mientras siga vigente la misma
+            versión. Si ya existe una aceptación válida, abrir los términos desde Fuentes funciona solo
+            como consulta y no exige aceptarlos de nuevo. Cerrar la consulta sin aceptar, incluso mediante
+            el botón de cierre o la tecla Escape, no registra consentimiento ni habilita la simulación.
+          </p>
+        </section>
+
+        <section class="privacy-terms-section" aria-labelledby="privacidad-calidad">
+          <h3 class="h6 fw-bold" id="privacidad-calidad">8. Exactitud, revisión y responsabilidad del usuario</h3>
+          <p>
+            El usuario debe revisar que los datos utilizados sean correctos, actuales y correspondan
+            a su situación. La extracción automática desde documentos puede contener errores de
+            lectura, separación de nombres, clasificación de registros o interpretación de valores;
+            por ello siempre se ofrece una revisión previa. Las estimaciones dependen de la calidad
+            de la información suministrada y de los supuestos seleccionados.
+          </p>
+        </section>
+
+        <section class="privacy-terms-section" aria-labelledby="privacidad-documentos">
+          <h3 class="h6 fw-bold" id="privacidad-documentos">9. Tratamiento de documentos importados</h3>
+          <p>
+            Los documentos seleccionados se utilizan únicamente para extraer los datos necesarios
+            para la simulación. La aplicación no incorpora el archivo original a una base de datos
+            permanente. Si un documento contiene información que no sea necesaria para la simulación,
+            esa información no debe utilizarse para finalidades distintas a la revisión y extracción
+            solicitada por el propio usuario.
+          </p>
+          <p>
+            Para advertir si una Ficha Digital puede estar desactualizada, la aplicación intenta
+            obtener por HTTPS una fecha de referencia desde infraestructura web oficial de la Caja
+            de Seguro Social. Esa consulta solicita únicamente la fecha publicada por el servidor y
+            <strong>no envía el documento, nombres, cédula, número de Seguro Social, salarios, cuotas
+            ni resultados de la simulación</strong>. Como en cualquier conexión web, el sitio consultado
+            puede recibir datos técnicos ordinarios de conexión, incluida la dirección IP. Si la fecha
+            externa no puede verificarse, la aplicación no sustituye silenciosamente esa referencia por
+            el reloj local del equipo: muestra una advertencia y permite al usuario decidir si continúa.
+          </p>
+        </section>
+
+        <section class="privacy-terms-section" aria-labelledby="privacidad-conservacion">
+          <h3 class="h6 fw-bold" id="privacidad-conservacion">10. Conservación y eliminación</h3>
+          <p>
+            La información de la simulación se conserva temporalmente en el navegador para permitir
+            avanzar entre pasos, volver a revisar datos y recuperar el estado mientras se utiliza la
+            misma pestaña. La aplicación no mantiene, en su versión actual, una cuenta personal ni
+            una base de datos permanente con el historial del usuario.
+          </p>
+          <p>
+            Dentro del asistente, <strong>Limpiar este paso</strong> elimina los datos del paso activo
+            y también invalida los cálculos posteriores que dependan de ellos, conservando los pasos
+            anteriores. <strong>Reiniciar simulación</strong> elimina todos los datos introducidos o
+            importados y todos los cálculos de la simulación, pero conserva la apariencia elegida y
+            la aceptación vigente de estas condiciones.
+          </p>
+          <p>
+            En la sección de Privacidad, <strong>Borrar datos de esta aplicación en este navegador</strong>
+            elimina además la constancia local de aceptación y las preferencias recordadas por Mi Retiro
+            Proyectado. Esta acción se refiere a la información guardada localmente por la versión actual;
+            no equivale a una solicitud de eliminación ante un servicio remoto, ya que esta versión no
+            mantiene una base de datos permanente de simulaciones.
+          </p>
+        </section>
+
+        <section class="privacy-terms-section" aria-labelledby="privacidad-custodia">
+          <h3 class="h6 fw-bold" id="privacidad-custodia">11. Custodia, confidencialidad y seguridad</h3>
+          <p>
+            Mi Retiro Proyectado aplica medidas técnicas orientadas a reducir la exposición de la
+            información, limitar su conservación, evitar el almacenamiento innecesario de documentos
+            y separar los datos identificativos de las reglas de cálculo. Ninguna medida técnica
+            permite garantizar un riesgo cero; por ello el usuario debe utilizar equipos y navegadores
+            confiables, especialmente cuando ingrese cédula, número de Seguro Social o información
+            salarial. Los datos no deben incluirse en registros de diagnóstico, pruebas o ejemplos
+            públicos del proyecto.
+          </p>
+        </section>
+
+        <section class="privacy-terms-section" aria-labelledby="privacidad-terceros">
+          <h3 class="h6 fw-bold" id="privacidad-terceros">12. Cesión, destinatarios y transferencias</h3>
+          <p>
+            La versión actual no vende ni cede la información de la simulación a terceros para fines
+            comerciales. La interfaz puede cargar recursos técnicos necesarios para su presentación y
+            el backend puede consultar infraestructura oficial de la CSS exclusivamente para obtener una
+            fecha de referencia de vigencia documental. Esas conexiones pueden recibir información técnica
+            ordinaria de red, como la dirección IP, pero la aplicación no les envía nombres, cédula, número
+            de Seguro Social, salarios, cuotas, documentos ni resultados de la simulación. Si en el futuro
+            se incorporan servicios externos que reciban datos personales o información previsional, esta
+            política deberá actualizarse antes de habilitarlos.
+          </p>
+        </section>
+
+        <section class="privacy-terms-section" aria-labelledby="privacidad-cookies">
+          <h3 class="h6 fw-bold" id="privacidad-cookies">13. Cookies y almacenamiento en el navegador</h3>
+          <p>
+            La versión actual no utiliza cookies para publicidad, analítica, seguimiento ni creación
+            de perfiles. El navegador conserva temporalmente la información necesaria para mantener
+            la simulación en curso y puede recordar preferencias como el tema visual y la versión de
+            estas condiciones aceptada. Esta información se utiliza únicamente para el funcionamiento
+            de la aplicación. Si en el futuro se incorporan cookies no esenciales, analítica o
+            tecnologías de seguimiento, se solicitará un consentimiento separado antes de activarlas.
+          </p>
+        </section>
+
+        <section class="privacy-terms-section" aria-labelledby="privacidad-derechos">
+          <h3 class="h6 fw-bold" id="privacidad-derechos">14. Derechos del titular de los datos</h3>
+          <p>
+            De acuerdo con el marco panameño de protección de datos, el titular puede solicitar,
+            cuando corresponda, acceso a sus datos y a su finalidad, rectificación de información
+            inexacta, cancelación o eliminación, oposición a determinados tratamientos y portabilidad.
+            En esta aplicación también puede revisar y corregir datos antes de utilizarlos, limpiar
+            información por paso, reiniciar la simulación y borrar los datos locales de la aplicación
+            en este navegador. Estos controles complementan, pero no sustituyen, los mecanismos formales
+            para ejercer los derechos que correspondan frente a un responsable del tratamiento.
+          </p>
+        </section>
+
+        <section class="privacy-terms-section" aria-labelledby="privacidad-ejercicio">
+          <h3 class="h6 fw-bold" id="privacidad-ejercicio">15. Cómo ejercer derechos o presentar una consulta</h3>
+          <p>
+            Las consultas relacionadas con datos personales pueden dirigirse a
+            <a href="mailto:ruben.canizares@outlook.com">ruben.canizares@outlook.com</a> indicando
+            de forma clara la solicitud y los datos necesarios para identificar la simulación o el
+            asunto, evitando enviar información adicional que no sea necesaria. Cuando corresponda,
+            el titular también puede acudir a la Dirección de Protección de Datos Personales de ANTAI,
+            autoridad de control en esta materia en Panamá.
+          </p>
+        </section>
+
+        <section class="privacy-terms-section" aria-labelledby="privacidad-resultados">
+          <h3 class="h6 fw-bold" id="privacidad-resultados">16. Resultados, proyecciones y exportaciones</h3>
+          <p>
+            Los resultados son estimaciones orientativas y predictivas construidas con los datos y
+            supuestos seleccionados. No constituyen una certificación de cuotas, salario, derecho
+            adquirido, monto definitivo de pensión ni resolución de la CSS. Cualquier archivo de
+            exportación deberá conservar esta advertencia y permitir al usuario decidir qué datos
+            identificativos desea incluir.
+          </p>
+        </section>
+
+        <section class="privacy-terms-section" aria-labelledby="privacidad-terceros-datos">
+          <h3 class="h6 fw-bold" id="privacidad-terceros-datos">17. Datos de terceras personas</h3>
+          <p>
+            El usuario debe utilizar la aplicación con información propia o con datos que esté
+            legítimamente autorizado a tratar. No debe cargar documentos de terceros sin autorización,
+            ni utilizar la herramienta para recopilar, conservar o compartir información personal de
+            otras personas fuera de la finalidad de simulación previsional.
+          </p>
+        </section>
+
+        <section class="privacy-terms-section" aria-labelledby="privacidad-menores">
+          <h3 class="h6 fw-bold" id="privacidad-menores">18. Uso por menores de edad</h3>
+          <p>
+            La herramienta está orientada a personas que desean analizar su historial de cotización
+            y escenarios previsionales. No está diseñada para recopilar intencionalmente información
+            de menores. Si se utilizara para orientar un caso de una persona menor de edad, debe
+            evitarse proporcionar identificadores personales innecesarios y observarse la autorización
+            que legalmente corresponda.
+          </p>
+        </section>
+
+        <section class="privacy-terms-section" aria-labelledby="privacidad-incidentes">
+          <h3 class="h6 fw-bold" id="privacidad-incidentes">19. Incidentes y vulneraciones de seguridad</h3>
+          <p>
+            Si se detecta una incidencia que pueda comprometer datos personales, deberán aplicarse
+            medidas para contenerla, evaluar qué información pudo verse afectada, conservar evidencia
+            técnica útil para su análisis y cumplir las obligaciones de comunicación que resulten
+            aplicables. El proyecto mantendrá procedimientos internos específicos de respuesta a
+            incidentes antes de una publicación pública o comercial.
+          </p>
+        </section>
+
+        <section class="privacy-terms-section" aria-labelledby="privacidad-cambios">
+          <h3 class="h6 fw-bold" id="privacidad-cambios">20. Modificación de estas condiciones</h3>
+          <p>
+            Estas condiciones pueden actualizarse cuando cambien las funciones de la aplicación, el
+            tipo de datos tratados, los servicios utilizados o el marco normativo aplicable. Cuando
+            una modificación sea relevante para el tratamiento de datos, se identificará una nueva
+            versión y se solicitará nuevamente la aceptación antes de continuar con una simulación.
+          </p>
+        </section>
+
+        <section class="privacy-terms-section" aria-labelledby="privacidad-legislacion">
+          <h3 class="h6 fw-bold" id="privacidad-legislacion">21. Legislación aplicable y fuentes oficiales</h3>
+          <p>
+            Estas condiciones se interpretan dentro del marco jurídico de la República de Panamá,
+            especialmente la Ley 81 de 2019 y el Decreto Ejecutivo 285 de 2021 en materia de
+            protección de datos personales. Las fuentes oficiales y la política de privacidad del
+            proyecto pueden consultarse en la sección <a href="/metodologia#privacidad-datos">Fuentes y privacidad</a>.
+          </p>
+        </section>
+
+        <div class="privacy-legal-note mt-4">
+          <strong>Nota de transparencia:</strong> este documento describe el funcionamiento y las
+          medidas actuales de la aplicación. No representa una certificación jurídica ni sustituye
+          la revisión profesional que deba realizarse antes de ofrecer el producto como servicio
+          público, comercial o con almacenamiento remoto de datos personales.
+        </div>
+
+      </div>
+
+      <div class="modal-footer privacy-consent-footer" id="privacidad-consent-footer">
+        <button type="button" id="btn-privacidad-rechazar" class="btn btn-outline-secondary">
+          No acepto
+        </button>
+        <div class="privacy-consent-actions">
+          <div class="privacy-consent-check-wrapper">
+            <label class="form-check privacy-consent-check" for="aceptar-privacidad-check">
+              <input class="form-check-input" type="checkbox" id="aceptar-privacidad-check" disabled>
+              <span class="form-check-label">
+                He leído y acepto los términos, la política de privacidad y el tratamiento de datos descrito.
+              </span>
+            </label>
+            <small id="privacidad-lectura-estado" class="privacy-read-status text-secondary" aria-live="polite">
+              Desplázate hasta el final del documento para habilitar esta casilla.
+            </small>
+          </div>
+          <button type="button" id="btn-privacidad-aceptar" class="btn btn-primary" disabled>
+            Aceptar y continuar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
