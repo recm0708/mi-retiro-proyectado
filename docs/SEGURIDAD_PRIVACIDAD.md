@@ -1,162 +1,152 @@
 # Seguridad y privacidad
 
-Este documento resume las defensas técnicas aplicables a la primera beta de **Mi Retiro Proyectado**. No sustituye una auditoría de seguridad externa ni convierte la aplicación en un servicio remoto multiusuario.
+**Estado:** Vigente
+**Versión de aplicación revisada:** `0.0.22-beta`
+**Revisión documental:** GOV.1.3 R3 — 2026-08-17
+**Clasificación:** Seguridad / Privacidad / Técnica
+**Revisión externa:** Pendiente antes de beta pública
+
+Este documento describe controles técnicos existentes. No constituye una auditoría de seguridad externa.
 
 ## 1. Modelo de ejecución
 
-La primera beta está diseñada para ejecutarse localmente. Los datos del asistente permanecen en el navegador mediante `sessionStorage` y los cálculos se realizan contra la API local de FastAPI.
+La aplicación está diseñada actualmente para ejecución local.
 
-No existe persistencia de simulaciones en base de datos en esta versión.
+- FastAPI procesa cálculos;
+- el navegador mantiene el estado de simulación;
+- no existe base de datos permanente de simulaciones;
+- no existen cuentas de usuario.
 
-## 2. Documentos personales importados
+Un despliegue remoto cambia el modelo de amenazas y requiere revisión específica.
 
-Los comprobantes de Mi Retiro Seguro y la Ficha Digital:
+## 2. Datos en Web Storage
+
+La simulación se guarda en `sessionStorage`.
+
+El consentimiento utiliza dos piezas:
+
+- `localStorage`: versión, aceptación y fecha técnica;
+- `sessionStorage`: marca que activa esa aceptación para la sesión/pestaña actual.
+
+La apariencia se recuerda en `localStorage`.
+
+## 3. Archivos importados
+
+Los PDF:
 
 - se leen en memoria;
-- no se guardan en el sistema de archivos por los endpoints de importación;
-- no se incorporan al repositorio;
-- no deben aparecer en fixtures de pruebas reales;
-- se reducen a los campos operativos necesarios antes de devolver información al frontend.
+- no se persisten por los endpoints de importación;
+- se someten a controles de extensión/MIME/firma/tamaño;
+- tienen límites de páginas/texto;
+- no deben entrar al repositorio si contienen datos personales reales.
 
-Los contratos del importador minimizan identificadores directos. Desde UX.4.6b, Mi Retiro Seguro puede devolver nombres, apellidos, cédula y número de Seguro Social opcionales cuando aparecen con etiquetas inequívocas; el código único del documento continúa excluido.
+La metadata de continuidad puede conservar el nombre visible del archivo, nunca su ruta local ni el binario.
 
-## 3. Validación defensiva de PDF
+## 4. Identificadores
 
-Antes de invocar `pypdf`, la capa HTTP valida:
+Mi Retiro Seguro puede devolver identificadores opcionales cuando el parser los reconoce.
 
-- extensión `.pdf`;
-- tipo MIME compatible (`application/pdf`, genérico binario o ausente cuando el navegador no informa uno específico);
-- archivo no vacío;
-- límite de tamaño por importador;
-- cabecera `%PDF-` dentro del primer KiB.
+Ficha Digital no expone identidad en su contrato salarial.
 
-Los parsers mantienen además límites de páginas y de texto extraído. Los errores de parsing se convierten en mensajes controlados y no exponen trazas internas al Asegurado(a).
+Los identificadores no forman parte del cálculo previsional principal.
 
-## 4. Cabeceras del navegador
+## 5. Cabeceras HTTP
 
-Las respuestas incorporan defensas de bajo riesgo compatibles con la aplicación local:
+El middleware actual establece:
 
 - `X-Content-Type-Options: nosniff`;
 - `X-Frame-Options: DENY`;
 - `Referrer-Policy: no-referrer`;
-- `Permissions-Policy` sin cámara, micrófono ni geolocalización.
+- `Permissions-Policy` restrictiva;
+- Content Security Policy.
 
-Desde UX.4.6b R2, todas las respuestas bajo `/api/simulacion/` usan `Cache-Control: no-store`. La aplicación incorpora Content Security Policy compatible con los recursos actuales y Bootstrap servido temporalmente por jsDelivr utiliza Subresource Integrity. Antes de beta pública se recomienda servir Bootstrap localmente para reducir dependencias de terceros.
+Las respuestas bajo `/api/simulacion/` usan `Cache-Control: no-store`.
 
-## 5. CI y dependencias
+## 6. Recursos externos
 
-`.github/workflows/ci.yml` ejecuta en cada `push` y `pull_request` sobre `main`:
+Bootstrap 5.3.8 se carga actualmente desde **cdn.jsdelivr.net** con Subresource Integrity y `crossorigin`.
 
-- instalación limpia de dependencias;
-- `pip check`;
-- `compileall`;
-- `node --check` para todos los JavaScript;
-- suite completa de `unittest`.
+Esto produce una conexión técnica del navegador al CDN y puede revelar metadatos ordinarios de red.
 
-La matriz cubre Python 3.13 y 3.14. Node.js se usa únicamente como herramienta de validación estática del frontend.
+Servir dependencias críticas localmente continúa como objetivo pre-beta.
 
-`.github/dependabot.yml` solicita revisiones semanales, pero evita actualizar transitivas fijadas de forma aislada. Para `pip` se permiten propuestas ordinarias únicamente sobre `fastapi`, `Jinja2`, `pydantic`, `python-multipart`, `pypdf` y `uvicorn`; las minor/patch compatibles del runtime se agrupan y `pypdf` queda separado para revisión específica. Las GitHub Actions se agrupan en una sola propuesta. La aceptación de cualquier actualización continúa requiriendo CI verde y revisión explícita; no existe auto-merge.
+## 7. Verificación externa de fecha
 
-## 6. Datos sensibles y registros
+El backend puede consultar por HTTPS infraestructura oficial de la CSS para leer el encabezado HTTP `Date`.
 
-No deben añadirse a logs, documentación pública, commits ni fixtures:
+La solicitud:
 
-- nombre completo del Asegurado(a);
-- cédula;
-- número de seguro social;
-- PDFs personales originales;
-- capturas de Mi Caja Digital con identificadores;
-- códigos únicos o QR personales.
+- no incluye PDF;
+- no incluye identidad;
+- no incluye salarios/cuotas/resultados;
+- puede exponer a la infraestructura consultada metadatos normales de red del servidor que ejecuta la aplicación.
 
-Los casos reales de validación deben anonimizarse o transformarse en fixtures sintéticos antes de versionarse.
+Si la consulta falla, no se sustituye silenciosamente por la fecha local.
 
-## 7. Límites de esta beta
+## 8. Cookies y seguimiento
 
-Esta fase no afirma resistencia contra cargas hostiles a nivel de un servicio expuesto a Internet. Antes de desplegar la aplicación como servicio público remoto harían falta controles adicionales de infraestructura, límites de concurrencia, observabilidad, revisión/endurecimiento de CSP para el entorno de producción, revisión de dependencias y una evaluación de amenazas acorde al entorno de despliegue.
+La aplicación no implementa cookies propias de publicidad, analítica, seguimiento ni perfilado.
 
+Tampoco incorpora actualmente herramientas de analítica/telemetría de producto.
 
-## 8. UX.4.6b — identificadores personales, consentimiento y Web Storage
+La existencia de solicitudes a recursos externos se documenta por separado y no debe confundirse con inexistencia de conexiones de red.
 
-La incorporación opcional de datos de identidad modifica la política anterior de exclusión total de identificadores, pero no habilita persistencia permanente. Se aplican estas condiciones:
+## 9. Registros
 
-- los PDF continúan procesándose en memoria y no se persiste el archivo original;
-- nombre, apellidos, cédula y número de Seguro Social pueden devolverse cuando el parser reconoce el campo o una estructura de nombre revisable;
-- un nombre completo puede descomponerse de forma conservadora, incluyendo el sufijo femenino `de Apellido` como apellido de casada; nunca se aplica sin vista previa;
-- la vista previa se abre bloqueada y cualquier corrección requiere **Editar campos**;
-- los datos confirmados permanecen en `sessionStorage` de la pestaña actual;
-- `localStorage` no contiene la simulación: solo apariencia y versión/estado/fecha técnica de aceptación; la autorización activa de la pestaña se conserva en `sessionStorage`;
-- la versión actual no usa cookies, analítica, publicidad ni rastreadores;
-- no se escriben identificadores reales en logs, pruebas, fixtures, capturas versionadas ni documentación;
-- el código único del documento no forma parte del contrato;
-- los identificadores no se transmiten a los motores previsionales.
+En la versión actual no existe todavía el sistema de Developer Diagnostics de GOV.1.4.
 
-## 9. Controles R2 de navegador y API
+Hasta implementarlo:
 
-Toda ruta `/api/simulacion/` utiliza `Cache-Control: no-store`. Se mantienen `X-Content-Type-Options`, denegación de framing, política de referrer y permisos, y se añade Content Security Policy. Mientras Bootstrap continúe servido por jsDelivr, la aplicación fija Subresource Integrity y `crossorigin`; antes de beta pública se recomienda empaquetar esas dependencias en `app/static/`.
+- no debe introducirse logging informal de PII;
+- no deben registrarse cuerpos de PDF;
+- no deben registrarse salarios/historial/identificadores;
+- las trazas de error no deben exponerse al usuario final.
 
-El consentimiento informado se presenta antes de la captura/importación. Su versión se almacena localmente para poder solicitar una nueva aceptación cuando exista un cambio material de finalidad, categorías de datos, retención o terceros. Rechazar elimina la simulación de la pestaña y devuelve a Inicio.
+GOV.1.4 definirá el contrato real de observabilidad.
 
-## 10. Pendientes de seguridad y privacidad antes de beta pública
+## 10. Gestión local
 
-- servir Bootstrap localmente para retirar la dependencia de CDN;
-- [x] disponer de controles accesibles para **Limpiar este paso**, **Reiniciar simulación** y borrar los datos locales de la aplicación;
-- formalizar procedimiento de incidentes/vulneraciones y registro de respuesta;
-- formalizar flujo de atención de derechos de acceso, rectificación, cancelación, oposición y portabilidad;
-- verificar que la configuración de producción no registre cuerpos de solicitudes, PDFs ni identificadores;
-- revisar jurídicamente política y consentimiento;
-- reevaluar el modelo si se añaden cuentas, almacenamiento remoto, sincronización, analítica, telemetría, publicidad o terceros.
+La interfaz implementa:
 
+- limpiar paso;
+- reiniciar simulación;
+- borrar datos de la aplicación en este navegador.
 
-## Consentimiento visible UX.4.6b R4
+El borrado integral elimina únicamente claves propiedad de Mi Retiro Proyectado.
 
-El consentimiento previo se presenta como un documento extenso y versionado. La casilla de aceptación se habilita únicamente después de alcanzar el final del texto. La interfaz no agrega un bloque de **Fin de los términos** ni un mensaje de **Lectura completada**: al cumplirse el requisito desaparece la ayuda previa y la casilla queda disponible. La interfaz pública describe conservación temporal, cookies, terceros y derechos en lenguaje comprensible; la documentación técnica conserva los nombres de las tecnologías cuando son necesarios para auditoría.
+## 11. CI y dependencias
 
+CI ejecuta instalación/validación, `compileall`, sintaxis JavaScript y suite `unittest`.
 
-## 9. UX.4.6c — integridad de datos importados por campo
+Dependabot propone actualizaciones; no existe auto-merge.
 
-La protección de información importada se aplica por campo y no por pantalla completa. Un valor confirmado desde Mi Retiro Seguro queda de solo lectura en los pasos posteriores para evitar modificaciones accidentales fuera del flujo de revisión documental. Si el PDF no aporta un dato, ese control permanece habilitado para que el titular lo complete manualmente.
+Las actualizaciones de `pypdf` requieren revisión explícita de importadores.
 
-La corrección de información documental vuelve a la vista previa del comprobante, de forma que exista una única vía explícita de edición. `origen_campos_cuotas` conserva únicamente metadata de procedencia en la sesión; no altera los datos enviados al motor ni agrega persistencia permanente.
+## 12. Pendientes pre-beta
 
-## 10. UX.4.6d — integridad documental en historial y Ficha Digital
+- threat model formal;
+- procedimiento de incidentes;
+- procedimiento de derechos del titular;
+- revisión de logs/despliegue;
+- servir dependencias críticas localmente cuando sea viable;
+- TLS obligatorio para un servicio remoto;
+- revisión de proveedores/terceros;
+- revisión jurídica de textos;
+- configuración endurecida de producción.
 
-El Paso 3 extiende la regla de integridad por campo de UX.4.6c. Los datos confirmados desde Mi Retiro Seguro o Ficha Digital mantienen una marca temporal de procedencia y no se editan directamente en la pantalla principal. La ausencia de un dato en el documento no bloquea su captura manual.
+Estos pendientes pertenecen principalmente a GOV.1.5 y GOV.1.6.
 
-La Ficha Digital conserva el mismo límite de privacidad ya vigente: solo utiliza registros del año calendario actual. Desde UX.4.6d R3, un mes efectivamente detectado con salario/estado utilizable se incorpora como registro documental confirmado y su casilla de cuota queda marcada y bloqueada. La vista previa abre bloqueada y cualquier corrección de los demás campos requiere activar **Editar campos** antes de volver a importar.
+## 13. Frontera de afirmación
 
-UX.4.6d no introduce cookies, telemetría, persistencia remota ni una nueva finalidad de tratamiento. La Revisión 6 sí amplía materialmente los controles disponibles para conservación y eliminación local, por lo que la versión del texto de privacidad se actualiza a **2026-08-15.1** y se solicita nuevamente aceptación. Los PDFs reales continúan fuera del repositorio y las pruebas usan datos sintéticos.
+Este documento registra controles observables en el repositorio.
 
-### Integridad interpaso en R2
+No afirma:
 
-R2/R3 establecieron inicialmente que la Ficha Digital no redefinía las cuotas del Paso 2. Desde R23, una ficha confirmada puede **ampliar** la referencia del año actual cuando aporta más cuotas documentales que la fotografía agregada previa, conservando las cuotas anteriores al año vigente y registrando la nueva procedencia. Una ficha con menos meses nunca reduce silenciosamente una referencia superior. Quitar la ficha no debe borrar arbitrariamente una referencia ya vigente.
+- invulnerabilidad;
+- certificación de seguridad;
+- cumplimiento jurídico certificado;
+- idoneidad automática para Internet.
 
-### Integridad visual y semántica de selección — UX.4.6d R5
+## 14. Historia
 
-La corrección de casillas documentales no amplía la finalidad de tratamiento. Su objetivo es impedir que un dato confirmado aparezca visualmente desmarcado o se interprete como falso por una diferencia de estado de interfaz. Los meses manuales siguen siendo modificables únicamente cuando no proceden del documento.
-
-### Gestión local de datos — UX.4.6d R6
-
-El asistente incorpora tres niveles de borrado con alcances distintos. El borrado por paso invalida cualquier cálculo dependiente para impedir resultados obsoletos; el reinicio completo elimina toda la simulación sin borrar preferencias/aceptación; y el borrado desde Fuentes/Privacidad elimina además la constancia de aceptación y el tema visual. Ninguna acción borra indiscriminadamente todo el almacenamiento del dominio: solo las claves propiedad de Mi Retiro Proyectado.
-
-### Consulta posterior sin mutación — UX.4.6d R7
-
-La reapertura del documento legal desde Fuentes es una operación de lectura: no cambia la constancia de consentimiento, no elimina datos y no habilita tratamientos nuevos. El modal se comparte globalmente para evitar duplicación de contratos visibles. Cerrar la consulta solo oculta el modal; cerrar el consentimiento inicial sin aceptar conserva la frontera de privacidad y vuelve a Inicio.
-
-### Consentimiento desde Fuentes y cierre contextual — UX.4.6d R9
-
-Cuando no existe consentimiento vigente, Fuentes puede presentar el mismo documento en modo de consentimiento completo. La aceptación utiliza el mismo mecanismo y versión que Simular, por lo que no se duplica la manifestación. Cerrar con `×` o `Esc` sin aceptar no crea constancia de consentimiento. Si la solicitud se originó en Simular, el formulario permanece inaccesible; si se originó en Fuentes, el usuario puede continuar consultando esa sección sin que ello implique aceptación.
-
-Los ejemplos visibles en campos de identidad se mantienen sintéticos y genéricos para evitar reutilizar datos reales en la interfaz o documentación de prueba.
-
-## R15 — documento como concepto de UX, PDF como implementación actual
-
-La interfaz y el consentimiento describen **documentos importados** sin exigir al titular conocer la noción de “compatibilidad” del layout. Técnicamente, esta versión continúa aceptando y validando PDF digital mediante extensión/MIME/firma/límites y `pypdf`. Este cambio de redacción no amplía finalidades, categorías de datos ni persistencia y no modifica la versión jurídica vigente.
-
-## UX.4.6d R18 — recarga y nombre del documento
-
-Por seguridad del navegador, `input[type=file]` se vacía después de recargar y la aplicación no intenta reconstruirlo. Para no confundir al usuario, la sesión puede conservar el **nombre del documento** como metadata de presentación junto con los datos que ya fueron confirmados. No se persisten bytes, ruta local, copia del PDF ni contenido adicional fuera de los datos extraídos/revisados. No se incorpora telemetría ni almacenamiento remoto y se mantiene la versión de privacidad **2026-08-15.1**.
-
-
-## UX.4.6d R21 — verificación externa de fecha
-
-La vigencia de Ficha Digital ya no se decide con el reloj local. El backend realiza una solicitud HTTPS mínima a infraestructura oficial de la CSS para leer el encabezado `Date`; no adjunta documentos ni datos de la simulación. La conexión puede revelar metadatos técnicos normales, incluida la IP, al sitio oficial consultado. Si la verificación falla, el sistema adopta un estado conservador y solicita revisión en lugar de confiar en la hora local. Este cambio se informa en la versión de privacidad **2026-08-16.1**.
+`docs/historico/normativa_privacidad/SEGURIDAD_PRIVACIDAD_PRE_GOV1_3_R3.md`

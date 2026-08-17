@@ -29,7 +29,7 @@ Este roadmap describe **estado actual y trabajo futuro**. La evolución detallad
   - [x] diagnóstico documental;
   - [x] R1 — documentos de entrada, archivo histórico y estructura;
   - [x] R2 — documentación técnica vigente;
-  - [ ] R3 — normativa, seguridad y privacidad documental;
+  - [x] R3 — normativa, seguridad y privacidad documental;
   - [ ] R4 — capa de auditoría documental y controles de consistencia;
   - versión objetivo al cierre: `0.0.23-beta`.
 

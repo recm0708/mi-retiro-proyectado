@@ -2,7 +2,7 @@
 
 **Estado:** vigente
 **Versión de aplicación revisada:** `0.0.22-beta`
-**Última reorganización:** GOV.1.3 R1 — 2026-08-17
+**Última reorganización:** GOV.1.3 R3 — 2026-08-17
 
 Este archivo es el punto de entrada para la documentación técnica, funcional, normativa, de privacidad, validación y auditoría de Mi Retiro Proyectado.
 
@@ -59,7 +59,7 @@ Este archivo es el punto de entrada para la documentación técnica, funcional, 
 - [`TERMINOS_USO_PRIVACIDAD.md`](TERMINOS_USO_PRIVACIDAD.md) — términos y tratamiento de datos.
 - [`CUMPLIMIENTO_LEY_81.md`](CUMPLIMIENTO_LEY_81.md) — matriz interna de alineación.
 
-La reorganización y revisión jurídica/técnica profunda de este bloque continúa en GOV.1.3 R3 y GOV.1.5.
+GOV.1.3 R3 consolidó este bloque como contrato documental vigente. La revisión jurídica externa y los procedimientos operativos pendientes continúan en GOV.1.5.
 
 ## 9. Observabilidad y auditoría
 
@@ -93,6 +93,7 @@ No se crean contratos de logging antes de implementar y validar su comportamient
 - [`historico/README.md`](historico/README.md) — reglas del archivo histórico.
 - [`historico/ux/`](historico/ux/) — bitácoras completas de UX.4.6a–d.
 - [`historico/tecnico/`](historico/tecnico/) — snapshots técnicos previos a GOV.1.3 R2.
+- [`historico/normativa_privacidad/`](historico/normativa_privacidad/) — snapshots previos a GOV.1.3 R3.
 - [`historico/CHANGELOG_PRE_GOV1_3.md`](historico/CHANGELOG_PRE_GOV1_3.md) — snapshot del changelog acumulativo anterior a GOV.1.3.
 - [`historico/ROADMAP_PRE_GOV1_3.md`](historico/ROADMAP_PRE_GOV1_3.md) — snapshot del roadmap anterior a GOV.1.3.
 

@@ -1,145 +1,208 @@
 # Política de privacidad y tratamiento de datos
 
 **Producto:** Mi Retiro Proyectado
-**Versión:** 2026-08-16.1
-**Estado:** Vigente desde UX.4.6d R21; validación manual final pendiente antes del cierre de fase. Revisión jurídica formal pendiente antes de una publicación pública o comercial.
+**Versión del texto:** `2026-08-16.1`
+**Estado:** Vigente en la aplicación
+**Versión de aplicación revisada:** `0.0.22-beta`
+**Revisión documental:** GOV.1.3 R3 — 2026-08-17
+**Revisión jurídica externa:** Pendiente antes de publicación pública/comercial
 
-## 1. Principio general
+Esta política describe el tratamiento implementado actualmente. No constituye certificación jurídica.
 
-Mi Retiro Proyectado aplica privacidad por diseño y minimización: solicita solo la información necesaria para las funciones utilizadas, mantiene opcionales los identificadores que no afectan el cálculo y evita persistir documentos PDF o simulaciones en una base de datos permanente en la versión actual.
+## 1. Responsable
 
-## 2. Responsable
+**Rubén Enrique Cañizares Miranda**, Panamá.
 
-Rubén Enrique Cañizares Miranda, Panamá.
-Correo: `ruben.canizares@outlook.com`
-Proyecto: `https://github.com/recm0708/calculadora-pension-css`
+Contacto: `ruben.canizares@outlook.com`
 
-## 3. Marco de referencia
+## 2. Marco de referencia
 
-- Ley 81 de 26 de marzo de 2019 sobre Protección de Datos Personales.
-- Decreto Ejecutivo 285 de 28 de mayo de 2021.
-- Orientaciones de ANTAI.
+- Ley 81 de 26 de marzo de 2019 sobre Protección de Datos Personales;
+- Decreto Ejecutivo 285 de 28 de mayo de 2021;
+- orientaciones y preguntas frecuentes de ANTAI.
 
-La aplicación busca aplicar licitud, finalidad, proporcionalidad, seguridad, transparencia, confidencialidad y control del titular.
+Fuentes: `FUENTES_NORMATIVAS.md`.
 
-## 4. Inventario de datos
+## 3. Principios aplicados
 
-### 4.1. Identificación opcional
+El diseño busca aplicar:
 
-- primer nombre;
-- segundo nombre;
-- primer apellido;
-- segundo apellido;
+- finalidad;
+- minimización;
+- transparencia;
+- seguridad;
+- confidencialidad;
+- control del titular.
+
+## 4. Datos que puede tratar la simulación
+
+### Identificación opcional
+
+- nombres/apellidos;
 - apellido de casada;
 - cédula;
 - número de Seguro Social.
 
-Estos datos no modifican las fórmulas y deben poder omitirse.
+Estos datos no son necesarios para ejecutar las fórmulas principales.
 
-### 4.2. Datos previsionales necesarios o funcionales
+### Datos previsionales
 
 - fecha de nacimiento;
 - sexo;
-- fecha de ingreso a la CSS cuando se conozca;
+- fecha de ingreso a CSS cuando se conozca;
 - sistema previsional;
 - cuotas;
-- salarios e historial;
-- datos mensuales/quincenales cuando se utilicen;
-- escenarios salariales y de retiro;
-- resultados estimados.
+- salarios/historial;
+- detalle mensual/quincenal;
+- escenarios;
+- resultados.
 
-### 4.3. Metadatos técnicos mínimos
+## 5. Origen
 
-El navegador puede conservar información necesaria para mantener la sesión de uso, preferencias visuales y versión/fecha de aceptación de términos. No se utilizan cookies de publicidad, analítica o seguimiento en la versión actual.
+Los datos provienen:
 
-## 5. Fuentes de los datos
+- de captura manual; o
+- de documentos seleccionados voluntariamente.
 
-Los datos provienen del propio usuario mediante captura manual o de documentos que el usuario selecciona voluntariamente. Los documentos importados pasan por una vista previa; la incorporación requiere confirmación explícita.
+Una importación se revisa antes de confirmar.
 
 ## 6. Finalidad
 
-La información se utiliza únicamente para la simulación previsional solicitada, validación de coherencia, análisis, proyección, comparación, explicación y futura exportación voluntaria.
+Los datos se utilizan para:
 
-No se permite publicidad, venta, perfilado comercial ni decisiones con efectos jurídicos.
+- construir la simulación;
+- comprobar coherencia;
+- proyectar;
+- comparar escenarios;
+- estimar prestaciones;
+- explicar resultados.
 
-## 7. Consentimiento informado
+No se autoriza su uso para publicidad, venta de información o perfilado comercial.
 
-La ruta **Simular** muestra un documento completo antes de permitir captura/importación. La casilla de aceptación permanece deshabilitada hasta llegar al final del texto. Rechazar devuelve a Inicio y elimina el estado temporal de la simulación de esa pestaña.
+## 7. Consentimiento
 
-El consentimiento se versiona para volver a solicitarlo cuando cambie materialmente el tratamiento.
+La versión material vigente es **2026-08-16.1**.
 
-## 8. Conservación
+Para utilizar Simular se requiere:
 
-La simulación se mantiene temporalmente durante la sesión de uso. No existe actualmente una base de datos permanente de simulaciones ni cuentas de usuario.
+1. visualizar el documento;
+2. llegar al final para habilitar la casilla;
+3. marcar aceptación;
+4. confirmar.
 
-Desde UX.4.6d R6, el asistente ofrece **Limpiar este paso** y **Reiniciar simulación**, y la sección Fuentes/Privacidad ofrece **Borrar datos de esta aplicación en este navegador**. Este último control elimina simulación, constancia local de aceptación y preferencias recordadas. La definición formal de plazos seguirá siendo necesaria si en el futuro existe persistencia remota.
+El registro local conserva versión/fecha de aceptación. La autorización activa exige además una marca de la misma versión en la sesión actual; por ello una sesión nueva puede requerir una nueva aceptación.
 
-## 9. Documentos importados
+Consultar el documento desde Fuentes sin aceptar no crea consentimiento.
 
-Los archivos originales no se persisten en una base de datos. Se validan extensión, MIME, tamaño, firma PDF, páginas y volumen de texto antes del análisis. La extracción debe conservar solo los datos necesarios para la función solicitada.
+## 8. Rechazo
 
-## 10. Destinatarios y transferencias
+En el ingreso a Simular, rechazar elimina el estado temporal de simulación y la constancia de consentimiento aplicable a esa sesión, y vuelve a Inicio.
 
-No se comparten datos de la simulación con terceros para fines comerciales. Los recursos técnicos externos de interfaz pueden recibir metadatos de conexión ordinarios, pero no el contenido de la simulación. Cualquier futura integración externa que reciba datos personales requiere evaluación previa y actualización de esta política.
+En una consulta desde Fuentes, cerrar/rechazar la ventana no registra aceptación y no impide seguir consultando información pública.
 
-## 11. Seguridad y confidencialidad
+## 9. Conservación
 
-Controles actuales:
+La simulación utiliza almacenamiento temporal de sesión del navegador.
 
-- procesamiento temporal de PDF;
-- `Cache-Control: no-store` en endpoints sensibles;
-- CSP y cabeceras defensivas;
-- validación de archivos;
-- separación de identificadores respecto de motores previsionales;
-- prohibición de datos personales reales en pruebas y documentación pública;
-- CI sobre Python 3.13/3.14 y sintaxis JavaScript.
+No existe actualmente:
 
-Pendientes pre-beta:
+- cuenta de usuario;
+- base de datos permanente de simulaciones;
+- sincronización remota;
+- nube del proyecto para datos de simulación.
 
-- servir dependencias críticas localmente cuando sea viable;
-- procedimiento de gestión de incidentes;
-- revisión de logs y despliegue;
-- TLS obligatorio si se publica remotamente;
-- revisión jurídica de textos y controles.
+La aceptación/versionado y la apariencia utilizan almacenamiento local del navegador conforme al contrato implementado.
 
-## 12. Derechos
+## 10. Documentos
 
-Debe poder atenderse, cuando corresponda, acceso, rectificación, cancelación, oposición y portabilidad. El canal inicial es `ruben.canizares@outlook.com`.
+Los archivos originales no se guardan en una base de datos.
 
-Antes de beta pública se documentará un procedimiento de atención de solicitudes que minimice datos adicionales y registre únicamente la evidencia necesaria.
+Después de confirmar una importación puede conservarse metadata mínima como el nombre visible del archivo y los datos ya confirmados.
 
-## 13. Cookies y tecnologías del navegador
+No se conserva la ruta local ni el binario del PDF.
 
-La versión actual no utiliza cookies para publicidad, analítica, seguimiento o perfilado. No se requiere un banner de cookies mientras esta condición siga siendo cierta.
+## 11. Conexiones externas
 
-El navegador sí conserva temporalmente información para mantener la simulación y preferencias de funcionamiento. En la interfaz se explica en lenguaje comprensible, sin exponer términos técnicos innecesarios.
+### Bootstrap/CDN
 
-## 14. Exportaciones
+La interfaz carga Bootstrap desde jsDelivr. Ese proveedor recibe metadatos ordinarios de una solicitud web, pero Mi Retiro Proyectado no envía el contenido de la simulación en esa petición.
 
-La futura exportación de resultados deberá ser voluntaria, permitir excluir identificadores, distinguir datos acreditados/proyectados, incluir advertencia de carácter orientativo y no oficial y documentar fecha/versión de metodología.
+### Fecha CSS
 
-## 15. Cambios de arquitectura
+Para evaluar vigencia de Ficha Digital, el backend puede consultar por HTTPS infraestructura oficial de la CSS y leer el encabezado `Date`.
 
-Antes de habilitar cuentas, base de datos permanente, nube, telemetría, analítica, publicidad o transferencias a terceros se requiere una nueva evaluación de privacidad, actualización documental y nuevo consentimiento cuando corresponda.
+No se envían identidad, salarios, cuotas, resultados ni PDF.
 
+## 12. Cookies, analítica y publicidad
 
-## Criterio de presentación del consentimiento
+La aplicación no implementa cookies propias de publicidad, analítica, seguimiento o perfilado.
 
-La casilla de aceptación permanece deshabilitada hasta que el usuario llega al final del documento visible. Una vez cumplido ese requisito, la casilla se habilita sin añadir bloques de **Fin de los términos** ni mensajes de **Lectura completada**. La interfaz muestra solo la ayuda necesaria mientras el requisito todavía no se ha cumplido.
+No incorpora actualmente telemetría de producto.
 
-### Consulta posterior de los términos
+## 13. Controles del usuario
 
-El usuario puede volver a consultar el texto vigente desde **Fuentes → Privacidad** sin abandonar la página en la que se encuentra. Esta revisión es informativa: no modifica, renueva ni revoca por sí sola la aceptación vigente. Una nueva aceptación solo se solicita cuando corresponda por ausencia de consentimiento vigente o por una nueva versión material del texto.
+El usuario dispone de:
 
-### Consulta y aceptación desde Fuentes — UX.4.6d R9
+- edición/revisión de datos;
+- limpiar paso;
+- reiniciar simulación;
+- borrar datos de esta aplicación en este navegador.
 
-La sección Fuentes permite volver a consultar las condiciones vigentes. Si todavía no existe una aceptación válida, esa misma consulta ofrece el flujo completo de lectura y consentimiento; una aceptación realizada allí es válida para entrar posteriormente a Simular mientras continúe vigente la misma versión. Si el documento se cierra sin aceptar, no se registra consentimiento. La consulta de una política ya aceptada continúa sin solicitar una nueva aceptación.
+Los controles locales no sustituyen un procedimiento formal de derechos si en el futuro existe tratamiento remoto/persistente.
 
-### Aclaración UX.4.6d R18
+## 14. Derechos
 
-Tras confirmar una importación, la aplicación puede conservar temporalmente en la sesión el **nombre del documento seleccionado** para que el usuario identifique qué importación sigue vigente después de recargar la página. El navegador vacía el selector de archivos por seguridad. Esta metadata no incluye la ruta local ni el archivo original, que continúa sin almacenarse de forma permanente. Esta aclaración no cambia finalidades, destinatarios ni persistencia remota y no modifica la versión **2026-08-15.1**.
+El marco panameño reconoce derechos de acceso, rectificación, cancelación, oposición y portabilidad.
 
+Canal inicial del proyecto:
 
-### UX.4.6d R21 — fecha de referencia para vigencia documental
+`ruben.canizares@outlook.com`
 
-Para advertir si una Ficha Digital corresponde a un mes anterior al actual, Mi Retiro Proyectado puede consultar por HTTPS infraestructura oficial de la Caja de Seguro Social y leer únicamente la fecha publicada por el servidor. La consulta no transmite el documento ni datos de identidad, salarios, cuotas o resultados de la simulación. Como toda conexión web, el servidor consultado puede recibir metadatos técnicos ordinarios como la dirección IP. Si no puede verificarse la fecha externa, la aplicación informa la situación y no declara el documento reciente basándose silenciosamente en el reloj local. Por este nuevo intercambio técnico, la versión vigente pasa a **2026-08-16.1**.
+El procedimiento formal de atención se documentará en GOV.1.5 antes de una beta pública.
+
+## 15. Seguridad
+
+Controles actuales incluyen:
+
+- procesamiento en memoria de PDF;
+- validación defensiva;
+- `no-store` en APIs de simulación;
+- CSP y cabeceras;
+- minimización;
+- separación de identidad y motores;
+- pruebas automatizadas.
+
+No se garantiza riesgo cero.
+
+## 16. Terceros
+
+No se venden datos de simulación.
+
+No existe integración comercial que reciba la simulación.
+
+Recursos técnicos externos actuales se documentan en `SEGURIDAD_PRIVACIDAD.md`.
+
+## 17. Cambios materiales
+
+Un cambio material en:
+
+- finalidad;
+- categorías de datos;
+- conservación;
+- destinatarios;
+- conexiones externas relevantes;
+- seguimiento/analítica;
+
+debe provocar revisión de esta política y evaluación de incremento de versión/renovación de consentimiento.
+
+## 18. Revisión jurídica
+
+Antes de una publicación pública, comercial o un despliegue remoto con tratamiento persistente se requiere revisión jurídica formal.
+
+## 19. Historia
+
+La evolución R6–R21 se conserva en:
+
+`docs/historico/normativa_privacidad/POLITICA_PRIVACIDAD_PRE_GOV1_3_R3.md`
+
+La reorganización R3 no cambia por sí sola la versión material `2026-08-16.1`.

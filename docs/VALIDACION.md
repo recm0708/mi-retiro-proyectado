@@ -2,21 +2,23 @@
 
 **Estado:** Vigente
 **Versión de aplicación revisada:** `0.0.22-beta`
-**Revisión documental:** GOV.1.3 R2 — 2026-08-17
+**Revisión documental:** GOV.1.3 R3 — 2026-08-17
 **Clasificación:** Técnica / Calidad
 
-La estrategia combina pruebas automatizadas, CI, casos sintéticos/anonimizados y validación manual cuando la propiedad no puede demostrarse de forma suficiente mediante código.
+La estrategia combina pruebas automatizadas, CI, casos sintéticos/anonimizados y validación manual cuando una propiedad no puede demostrarse suficientemente con código.
 
 ## 1. Línea base
 
-Cierre validado de GOV.1.3 R1:
+Cierre validado de GOV.1.3 R2:
 
 ```text
-Ran 411 tests
+Ran 423 tests
 OK
 ```
 
-GOV.1.3 R2 agregó **12 regresiones documentales/técnicas**. El cierre de R2 fue validado con una suite completa de **423 pruebas en `OK`**, incluidas **12/12 regresiones específicas de R2** y la confirmación adicional de **8/8 regresiones documentales de R1**.
+GOV.1.3 R3 agregó **15 regresiones documentales**. El cierre de R3 fue validado con una suite completa de **438 pruebas en `OK`**, incluidas **15/15 regresiones específicas de R3**, **12/12 regresiones de R2** y **8/8 regresiones documentales de R1**.
+
+Durante R3 también se endureció la regresión de cierre de R2: su evidencia histórica se valida contra `CHANGELOG.md` en lugar de exigir que el documento vigente `VALIDACION.md` conserve indefinidamente la línea base de una revisión anterior.
 
 ## 2. Comandos obligatorios
 
@@ -32,11 +34,7 @@ python -m unittest discover -s tests -q
 git diff --check
 ```
 
-Cuando se modifica únicamente documentación, la suite completa continúa ejecutándose porque las regresiones documentales pueden depender de contratos del código.
-
 ## 3. Inventario actual de pruebas
-
-La lista se deriva de los archivos `tests/test_*.py` existentes al aplicar R2.
 
 - `tests/test_accesibilidad_temas.py`
 - `tests/test_accesibilidad_ux4.py`
@@ -46,6 +44,8 @@ La lista se deriva de los archivos `tests/test_*.py` existentes al aplicar R2.
 - `tests/test_fuentes_normativas.py`
 - `tests/test_gov12_versionado.py`
 - `tests/test_gov13_documentacion.py`
+- `tests/test_gov13_documentacion_r2.py`
+- `tests/test_gov13_documentacion_r3.py`
 - `tests/test_identidad_interfaz.py`
 - `tests/test_indemnizacion_vejez.py`
 - `tests/test_linea_tiempo.py`
@@ -102,144 +102,60 @@ La lista se deriva de los archivos `tests/test_*.py` existentes al aplicar R2.
 
 ## 4. Categorías
 
-### Núcleo y servicios comunes
-
-- dinero;
-- proyección salarial;
-- línea temporal;
-- retiro;
-- historial/detalle;
-- fuentes normativas.
-
-### Motores
-
-- SEBD;
-- modalidades;
-- indemnización;
-- Mixto/CAP;
-- SUCGS/capa solidaria/reemplazo.
-
-### Integración
-
-- resultados por sistema;
-- comparador;
-- resultado unificado;
-- trazabilidad;
-- E2E pre-beta.
-
-### UX y accesibilidad
-
-- responsive;
-- temas;
-- accesibilidad;
-- Pasos 1–3;
+- núcleo/servicios;
+- motores;
+- integración;
+- UX/accesibilidad;
 - importadores;
-- gestión de datos;
-- tablas/scrollbars.
-
-### Gobierno
-
-- versionado GOV.1.2;
-- estructura documental GOV.1.3.
+- gobierno/documentación.
 
 ## 5. Casos personales
 
 Los originales reales no se versionan.
 
-Una regresión derivada de un caso personal debe reducirse a datos sintéticos o anonimizados suficientes para preservar la propiedad que se prueba.
+Una regresión derivada de un caso personal debe transformarse en datos sintéticos o anonimizados suficientes para preservar la propiedad técnica.
 
-Consultar `tests/casos_validacion/README.md`.
+## 6. Importadores
 
-## 6. Regresión SEBD anonimizada
+Deben cubrir formato, límites, cifrado, texto, clasificación, año de Ficha, fecha externa, procedencia, confirmación, no persistencia y reconciliación.
 
-Existe una regresión histórica anonimizada que protege una combinación conocida de cuotas, mejores años y precisión monetaria.
+La suite no depende de disponibilidad real de CSS: las consultas externas se sustituyen/mokean en pruebas.
 
-Su finalidad es detectar cambios matemáticos; no convierte ese caso individual en parámetro de producción.
+## 7. Privacidad
 
-## 7. Casos sintéticos Mixto/SUCGS
+Las regresiones deben comprobar:
 
-Valores como saldos, bonos o divisores usados en pruebas pueden ser deliberadamente sintéticos.
+- versión de consentimiento sincronizada con el frontend;
+- ausencia de versiones intermedias en documentos vigentes;
+- almacenamiento local/sesión correctamente descrito;
+- conexiones externas documentadas;
+- separación entre control interno y certificación jurídica.
 
-Cada prueba debe distinguir un valor de prueba de un valor normativo oficial.
+## 8. Normativa
 
-## 8. Importadores
+Las regresiones documentales comprueban metadata/fuentes/versionado; **no sustituyen una revisión jurídica del contenido legal**.
 
-Las pruebas de importación deben cubrir:
-
-- formato válido/inválido;
-- archivos vacíos;
-- límites;
-- cifrado;
-- texto no extraíble;
-- clasificación histórica/proyectada;
-- año más reciente de Ficha;
-- vigencia con fecha externa;
-- procedencia y confirmación;
-- ausencia de persistencia del PDF;
-- reconciliación de cuotas.
-
-Los fixtures no deben contener PII real.
-
-## 9. Fecha de referencia
-
-Las pruebas deben poder sustituir/mokear la consulta externa.
-
-La suite no debe depender de disponibilidad real de CSS para terminar en verde.
-
-Se verifica que no exista fallback silencioso al reloj local.
-
-## 10. Gestión de datos
-
-Validar:
-
-- limpieza por paso;
-- reinicio;
-- borrado local;
-- invalidación descendente;
-- restauración del último paso accesible;
-- persistencia de metadata sin `File`;
-- resultados acreditados/proyectados.
-
-## 11. Validación manual
+## 9. Validación manual
 
 Sigue siendo necesaria para:
 
-- composición visual;
-- temas;
-- foco/teclado;
-- scroll real;
+- visual;
+- teclado/foco;
 - modales;
-- mensajes y jerarquía;
-- interacción con selectores de archivos;
-- revisión integral multidispositivo.
+- temas;
+- lectura/consentimiento;
+- selectores de archivos;
+- comportamiento multidispositivo.
 
-Una prueba estructural HTML/CSS no equivale por sí sola a una auditoría de accesibilidad.
+## 10. CI
 
-## 12. CI
+La CI debe permanecer verde antes de considerar cerrado un hito formal.
 
-`.github/workflows/ci.yml` valida instalaciones limpias con Python soportado por el proyecto y Node para sintaxis JavaScript.
+## 11. Evidencia histórica
 
-La CI debe permanecer en verde antes de considerar cerrado un hito formal.
+- `docs/historico/ux/`;
+- `docs/historico/tecnico/`;
+- `docs/historico/normativa_privacidad/`;
+- Git.
 
-## 13. Documentación
-
-Las regresiones GOV.1 comprueban, entre otros:
-
-- versión canónica;
-- existencia de documentos;
-- estructura de changelog/roadmap;
-- separación de histórico;
-- endpoints documentados;
-- modelos técnicos esenciales;
-- ausencia de diarios UX en documentos vigentes;
-- whitespace documental.
-
-## 14. Evidencia histórica
-
-Las matrices de revisión R1–R23 y los conteos intermedios anteriores se conservan en:
-
-`docs/historico/tecnico/VALIDACION_PRE_GOV1_3_R2.md`
-
-y en las bitácoras UX.
-
-Este documento solo mantiene la estrategia y el estado de validación vigente.
+Este documento describe la estrategia vigente, no un diario completo de cada revisión.
