@@ -100,11 +100,11 @@ class TestGov13DocumentacionR2(unittest.TestCase):
         self.assertNotRegex(texto, r"(?m)^##\s+UX\.")
         self.assertIn("docs/historico/", texto)
 
-    def test_validacion_registra_cierre_r2(self):
-        texto = (DOCS / "VALIDACION.md").read_text(encoding="utf-8")
-        self.assertIn("Ran 411 tests", texto)
-        self.assertIn("423 pruebas", texto)
-        self.assertIn("423 pruebas en `OK`", texto)
+    def test_changelog_preserva_cierre_r2(self):
+        texto = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
+        self.assertIn("GOV.1.3 R2 completada", texto)
+        self.assertIn("Validación R2:", texto)
+        self.assertIn("423 pruebas automatizadas en `OK`", texto)
         self.assertIn("12/12 regresiones específicas de R2", texto)
         self.assertIn("8/8 regresiones documentales de R1", texto)
 
