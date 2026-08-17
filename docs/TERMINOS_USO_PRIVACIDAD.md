@@ -3,7 +3,7 @@
 **Producto:** Mi Retiro Proyectado
 **Versión del texto:** `2026-08-16.1`
 **Estado:** Vigente en la aplicación
-**Versión de aplicación revisada:** `0.0.22-beta`
+**Versión de aplicación revisada:** `0.0.23-beta`
 **Revisión documental:** GOV.1.3 R3 — 2026-08-17
 **Revisión jurídica externa:** Pendiente antes de publicación pública/comercial
 

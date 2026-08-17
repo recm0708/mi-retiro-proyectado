@@ -6,10 +6,10 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 
 ## Estado del proyecto
 
-- **Versión formal vigente:** `0.0.22-beta`
+- **Versión formal vigente:** `0.0.23-beta`
 - **Etapa:** desarrollo interno pre-beta
 - **Programa activo:** GOV.1 — Auditoría, Gobierno y Trazabilidad Pre-Beta
-- **Bloque activo:** GOV.1.3 — reorganización y alineación documental
+- **Bloque activo:** GOV.1.4 — Observabilidad y Developer Diagnostics
 - **Primera beta pública objetivo:** familia `0.1.0-beta.1`
 
 La versión se obtiene exclusivamente del archivo [`VERSION`](VERSION). La política completa se documenta en [`VERSIONING.md`](VERSIONING.md).
@@ -74,6 +74,12 @@ Los documentos de UX que funcionaban como bitácoras de revisión se conservan b
 
 ```text
 v0.0.22-beta
+```
+
+`0.0.23-beta` cierra GOV.1.3 después de la reorganización integral, la consolidación normativa/privacidad y la incorporación de la capa de auditoría documental y trazabilidad. Su tag formal asociado es:
+
+```text
+v0.0.23-beta
 ```
 
 Consultar:

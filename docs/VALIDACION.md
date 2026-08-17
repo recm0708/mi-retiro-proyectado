@@ -1,8 +1,8 @@
 # Validación
 
 **Estado:** Vigente
-**Versión de aplicación revisada:** `0.0.22-beta`
-**Revisión documental:** GOV.1.3 R3 — 2026-08-17
+**Versión de aplicación revisada:** `0.0.23-beta`
+**Revisión documental:** GOV.1.3 R4 — 2026-08-17
 **Clasificación:** Técnica / Calidad
 
 La estrategia combina pruebas automatizadas, CI, casos sintéticos/anonimizados y validación manual cuando una propiedad no puede demostrarse suficientemente con código.
@@ -19,6 +19,8 @@ OK
 GOV.1.3 R3 agregó **15 regresiones documentales**. El cierre de R3 fue validado con una suite completa de **438 pruebas en `OK`**, incluidas **15/15 regresiones específicas de R3**, **12/12 regresiones de R2** y **8/8 regresiones documentales de R1**.
 
 Durante R3 también se endureció la regresión de cierre de R2: su evidencia histórica se valida contra `CHANGELOG.md` en lugar de exigir que el documento vigente `VALIDACION.md` conserve indefinidamente la línea base de una revisión anterior.
+GOV.1.3 R4 agregó **20 regresiones de auditoría documental y consistencia**. El cierre de R4 y de GOV.1.3 fue validado con una suite completa de **458 pruebas en `OK`**, además de compilación Python, validación de sintaxis JavaScript y `git diff --check` sin errores.
+
 
 ## 2. Comandos obligatorios
 
@@ -46,6 +48,7 @@ git diff --check
 - `tests/test_gov13_documentacion.py`
 - `tests/test_gov13_documentacion_r2.py`
 - `tests/test_gov13_documentacion_r3.py`
+- `tests/test_gov13_documentacion_r4.py`
 - `tests/test_identidad_interfaz.py`
 - `tests/test_indemnizacion_vejez.py`
 - `tests/test_linea_tiempo.py`

@@ -1,7 +1,7 @@
 # Matriz interna de alineación con Ley 81 de 2019
 
 **Estado:** Vigente como control interno
-**Versión de aplicación revisada:** `0.0.22-beta`
+**Versión de aplicación revisada:** `0.0.23-beta`
 **Versión de privacidad revisada:** `2026-08-16.1`
 **Revisión documental:** GOV.1.3 R3 — 2026-08-17
 **Clasificación:** Privacidad / Cumplimiento interno

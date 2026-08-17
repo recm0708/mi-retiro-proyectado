@@ -1,7 +1,7 @@
 # Arquitectura
 
 **Estado:** Vigente
-**Versión de aplicación revisada:** `0.0.22-beta`
+**Versión de aplicación revisada:** `0.0.23-beta`
 **Revisión documental:** GOV.1.3 R2 — 2026-08-17
 **Clasificación:** Técnica / Pública
 

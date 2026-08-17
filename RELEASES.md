@@ -1,6 +1,6 @@
 # Registro de versiones y estados del proyecto
 
-**Fecha de reconstrucción histórica:** 2026-08-17  
+**Fecha de reconstrucción histórica:** 2026-08-17
 **Fuente:** historial Git de `recm0708/calculadora-pension-css`
 
 ## 1. Naturaleza del registro
@@ -63,6 +63,35 @@ Alcance del hito:
 - validación final del hito con compilación Python, JavaScript válido, `git diff --check` limpio y **403 pruebas automatizadas en OK**;
 
 El tag `v0.0.22-beta` se crea únicamente después de validar y confirmar el commit de cierre de GOV.1.2.
+
+### `0.0.23-beta` — 2026-08-17
+
+Segunda versión formal bajo `VERSIONING.md` y cierre de GOV.1.3.
+
+Alcance del hito:
+
+- R1: reorganización de documentos de entrada y archivo histórico;
+- R2: consolidación de documentación técnica vigente;
+- R3: consolidación normativa, seguridad y privacidad documental;
+- R4: transparencia, matriz de trazabilidad, auditoría de cálculos, limitaciones conocidas, dependencias/terceros y proceso de release;
+- `DECISIONES.md` indexado sin reescribir sus 158 ADR;
+- ADR-086 registrada como anomalía histórica de metadata, sin asignarle retroactivamente un estado no documentado;
+- regresiones antiguas de gobierno/documentación endurecidas para seguir la versión canónica.
+
+Validación local del candidato de cierre:
+
+- **458 pruebas automatizadas en `OK`**;
+- compilación Python correcta;
+- sintaxis JavaScript correcta;
+- `git diff --check` limpio.
+
+Tag formal asociado:
+
+```text
+v0.0.23-beta
+```
+
+El tag se publica únicamente sobre el commit de cierre después de confirmar CI remota verde, conforme a `docs/PROCESO_RELEASE.md`.
 
 ## 5. Próxima línea pública prevista
 

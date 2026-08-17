@@ -62,7 +62,26 @@ v0.0.22-beta
 
 La validación registrada para el cierre fue de 403 pruebas automatizadas en `OK`, además de compilación Python, sintaxis JavaScript y comprobaciones Git.
 
-## 4. Bitácoras UX preservadas
+## 4. Segunda versión formal
+
+### `0.0.23-beta` — 2026-08-17
+
+GOV.1.3 cerró la reorganización y alineación integral de documentación mediante cuatro revisiones:
+
+- R1 — estructura, documentos de entrada e histórico;
+- R2 — contratos técnicos vigentes;
+- R3 — normativa, seguridad y privacidad documental;
+- R4 — transparencia, auditoría y trazabilidad.
+
+La suite de cierre validó **458 pruebas automatizadas en `OK`**.
+
+Tag formal asociado:
+
+```text
+v0.0.23-beta
+```
+
+## 5. Bitácoras UX preservadas
 
 La evolución detallada de UX.4.6 se conserva en:
 
@@ -73,20 +92,20 @@ La evolución detallada de UX.4.6 se conserva en:
 
 Es normal que estos documentos contengan estados intermedios contradictorios con el estado final: esa contradicción forma parte de la secuencia histórica.
 
-## 5. Programa GOV.1
+## 6. Programa GOV.1
 
 - GOV.1.1 — reconstrucción histórica;
 - GOV.1.2 — gobierno y versionado;
-- GOV.1.3 — reorganización documental;
+- GOV.1.3 — reorganización y auditoría documental — cerrada en `0.0.23-beta`;
 - GOV.1.4 — observabilidad y Developer Diagnostics;
 - GOV.1.5 — seguridad, privacidad y transparencia;
 - GOV.1.6 — controles GitHub;
 - GOV.1.7 — licencia;
 - GOV.1.8 — auditoría final y cierre.
 
-Los hitos posteriores a `0.0.22-beta` se incorporarán a este registro únicamente cuando se cierren formalmente.
+Los hitos posteriores a `0.0.23-beta` se incorporarán a este registro únicamente cuando se cierren formalmente.
 
-## 6. Fuentes de auditoría
+## 7. Fuentes de auditoría
 
 Orden recomendado:
 

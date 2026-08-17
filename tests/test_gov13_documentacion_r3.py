@@ -26,11 +26,14 @@ PRIVACY_DOCS = [
 
 
 class TestGov13DocumentacionR3(unittest.TestCase):
+    def setUp(self):
+        self.version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
+
     def test_r3_documentos_declaran_metadata(self):
         for nombre in R3_DOCS:
             with self.subTest(nombre=nombre):
                 texto = (DOCS / nombre).read_text(encoding="utf-8")
-                self.assertIn("0.0.22-beta", texto)
+                self.assertIn(self.version, texto)
                 self.assertIn("GOV.1.3 R3", texto)
                 self.assertIn("**Estado:**", texto)
 

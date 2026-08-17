@@ -17,11 +17,14 @@ R2_DOCS = [
 
 
 class TestGov13DocumentacionR2(unittest.TestCase):
+    def setUp(self):
+        self.version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
+
     def test_r2_documentos_declaran_estado_y_version(self):
         for nombre in R2_DOCS:
             with self.subTest(nombre=nombre):
                 texto = (DOCS / nombre).read_text(encoding="utf-8")
-                self.assertIn("0.0.22-beta", texto)
+                self.assertIn(self.version, texto)
                 self.assertIn("GOV.1.3 R2", texto)
                 self.assertIn("**Estado:**", texto)
 

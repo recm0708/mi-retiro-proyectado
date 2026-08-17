@@ -1,8 +1,8 @@
 # Índice de documentación
 
 **Estado:** vigente
-**Versión de aplicación revisada:** `0.0.22-beta`
-**Última reorganización:** GOV.1.3 R3 — 2026-08-17
+**Versión de aplicación revisada:** `0.0.23-beta`
+**Última reorganización:** GOV.1.3 R4 — 2026-08-17
 
 Este archivo es el punto de entrada para la documentación técnica, funcional, normativa, de privacidad, validación y auditoría de Mi Retiro Proyectado.
 
@@ -61,16 +61,16 @@ Este archivo es el punto de entrada para la documentación técnica, funcional, 
 
 GOV.1.3 R3 consolidó este bloque como contrato documental vigente. La revisión jurídica externa y los procedimientos operativos pendientes continúan en GOV.1.5.
 
-## 9. Observabilidad y auditoría
+## 9. Transparencia, auditoría y trazabilidad
 
-Documentación planificada durante GOV.1:
+- [`TRANSPARENCIA.md`](TRANSPARENCIA.md) — fronteras de afirmación y transparencia pública.
+- [`MATRIZ_TRAZABILIDAD.md`](MATRIZ_TRAZABILIDAD.md) — requisito/criterio → ADR → implementación → prueba → estado.
+- [`AUDITORIA_CALCULOS.md`](AUDITORIA_CALCULOS.md) — reproducibilidad y revisión de resultados.
+- [`LIMITACIONES_CONOCIDAS.md`](LIMITACIONES_CONOCIDAS.md) — límites técnicos, normativos y de despliegue.
+- [`DEPENDENCIAS_TERCEROS.md`](DEPENDENCIAS_TERCEROS.md) — dependencias, licencias upstream, conexiones y riesgos.
+- [`PROCESO_RELEASE.md`](PROCESO_RELEASE.md) — gates de cierre, versión, CI y tags.
 
-- `OBSERVABILIDAD_LOGS.md` — se creará junto con la implementación real de GOV.1.4;
-- `TRANSPARENCIA.md` — previsto para GOV.1.3 R4;
-- `MATRIZ_TRAZABILIDAD.md` — previsto para GOV.1.3 R4;
-- `AUDITORIA_CALCULOS.md` — previsto para GOV.1.3 R4.
-
-No se crean contratos de logging antes de implementar y validar su comportamiento real.
+`OBSERVABILIDAD_LOGS.md` se creará junto con la implementación real de GOV.1.4. R4 no documenta un sistema de logs inexistente.
 
 ## 10. Validación y calidad
 
@@ -94,6 +94,7 @@ No se crean contratos de logging antes de implementar y validar su comportamient
 - [`historico/ux/`](historico/ux/) — bitácoras completas de UX.4.6a–d.
 - [`historico/tecnico/`](historico/tecnico/) — snapshots técnicos previos a GOV.1.3 R2.
 - [`historico/normativa_privacidad/`](historico/normativa_privacidad/) — snapshots previos a GOV.1.3 R3.
+- [`historico/gobierno/`](historico/gobierno/) — snapshots de decisiones/gobierno previos a GOV.1.3 R4.
 - [`historico/CHANGELOG_PRE_GOV1_3.md`](historico/CHANGELOG_PRE_GOV1_3.md) — snapshot del changelog acumulativo anterior a GOV.1.3.
 - [`historico/ROADMAP_PRE_GOV1_3.md`](historico/ROADMAP_PRE_GOV1_3.md) — snapshot del roadmap anterior a GOV.1.3.
 

@@ -25,13 +25,13 @@ Este roadmap describe **estado actual y trabajo futuro**. La evolución detallad
   - primera versión formal `0.0.22-beta`;
   - tag `v0.0.22-beta`.
 
-- [ ] **GOV.1.3 — Reorganización y alineación integral de documentación**
+- [x] **GOV.1.3 — Reorganización y alineación integral de documentación**
   - [x] diagnóstico documental;
   - [x] R1 — documentos de entrada, archivo histórico y estructura;
   - [x] R2 — documentación técnica vigente;
   - [x] R3 — normativa, seguridad y privacidad documental;
-  - [ ] R4 — capa de auditoría documental y controles de consistencia;
-  - versión objetivo al cierre: `0.0.23-beta`.
+  - [x] R4 — capa de auditoría documental y controles de consistencia;
+  - versión de cierre: `0.0.23-beta`.
 
 - [ ] **GOV.1.4 — Observabilidad y Developer Diagnostics**
   - modo exclusivo de desarrollo;

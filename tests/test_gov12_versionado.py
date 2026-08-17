@@ -25,7 +25,7 @@ class TestGov12Versionado(unittest.TestCase):
 
     def test_version_file_es_fuente_canonica(self):
         version = VERSION_FILE.read_text(encoding="utf-8").strip()
-        self.assertEqual(version, "0.0.22-beta")
+        self.assertTrue(version)
         self.assertRegex(
             version,
             re.compile(r"^[0-9]+\.[0-9]+\.[0-9]+(?:-[0-9A-Za-z.-]+)?$"),
@@ -36,7 +36,10 @@ class TestGov12Versionado(unittest.TestCase):
         contenido = CONFIG.read_text(encoding="utf-8")
         self.assertIn("from app.core.version import APP_VERSION", contenido)
         self.assertNotIn('APP_VERSION = "0.1.0"', contenido)
-        self.assertNotIn('APP_VERSION = "0.0.22-beta"', contenido)
+        self.assertNotRegex(
+            contenido,
+            re.compile(r'(?m)^\\s*APP_VERSION\\s*=\\s*["\\\']'),
+        )
 
     def test_fastapi_expone_la_version_canonica(self):
         self.assertEqual(app.version, APP_VERSION)
@@ -59,6 +62,8 @@ class TestGov12Versionado(unittest.TestCase):
         self.assertIn("0.0.1-beta", contenido)
         self.assertIn("0.0.21-beta", contenido)
         self.assertIn("0.0.22-beta", contenido)
+        version = VERSION_FILE.read_text(encoding="utf-8").strip()
+        self.assertIn(version, contenido)
         self.assertIn("reconstru", contenido.lower())
 
     def test_codeowners_define_responsable_actual(self):
