@@ -1,0 +1,15 @@
+# Responsabilidad actual del proyecto.
+# CODEOWNERS expresa revisión técnica en GitHub; no certificación institucional.
+
+* @recm0708
+
+# Áreas especialmente sensibles. Se mantienen explícitas aunque hoy tengan
+# el mismo responsable para facilitar una futura separación de revisores.
+/app/core/ @recm0708
+/app/motores/ @recm0708
+/normativa/ @recm0708
+/docs/ @recm0708
+/.github/ @recm0708
+/VERSION @recm0708
+/VERSIONING.md @recm0708
+/GOVERNANCE.md @recm0708
