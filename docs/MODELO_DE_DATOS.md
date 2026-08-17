@@ -422,3 +422,76 @@ Esta metadata no forma parte del cálculo legal ni se envía al endpoint de aná
 ### Vista previa contextual de cuotas — UX.4.6c R3
 
 La referencia confirmada puede conservar en el estado temporal del frontend `cuotas_anio_actual` como valor auxiliar de revisión. Si el comprobante ya contiene un registro anual no proyectado para el año actual, ese valor se deriva del registro y se sincroniza al confirmar. Este campo auxiliar no modifica el contrato `DatosCuotas` de la API; sirve para mantener consistente la vista filtrada del Paso 2 con el historial importado.
+
+## UX.4.6d — procedencia del historial y detalle reciente
+
+UX.4.6d no altera los contratos Pydantic de `DatosHistorialSalarial`, `RegistroHistorialSalarial`, `DatosDetalleAnioActual` ni `DatosSalario`. La protección de datos importados se conserva como metadata temporal del frontend:
+
+- `origen_campos_historial`: mapa `año -> campo -> origen` para `cuotas` y `salario_cotizado`;
+- `origen_campos_detalle_anio_actual`: mapa `mes -> campo -> origen` para `cuota_acreditada`, `estado` y `salario_mensual`;
+- los orígenes documentales actuales son `MI_RETIRO_SEGURO`, `MI_RETIRO_SEGURO_EDITADO`, `FICHA_DIGITAL` y `FICHA_DIGITAL_EDITADO`.
+
+La ausencia de una marca de origen significa que el campo no fue confirmado por esa importación y puede continuar disponible para captura manual. Esta metadata controla edición y trazabilidad de interfaz; no modifica fórmulas ni se envía como entrada a los motores previsionales.
+
+El cierre visual del Paso 3 se deriva de los resúmenes existentes (`resumen_historial`, `resumen_detalle_anio_actual`, `resumen_salario`) y no crea un cuarto modelo de cálculo.
+
+### R2 — separación entre total acreditado y asignación mensual
+
+- `simulacion.cuotas.cuotas_anio_actual`: referencia agregada de cuotas acreditadas del año actual. Puede proceder de Paso 2/Mi Retiro Seguro y, desde R23, ampliarse con una Ficha Digital confirmada que aporte más meses acreditados; una ficha con menos meses no la reduce automáticamente.
+- `detalle_anio_actual.cuotas_anio_actual_referencia`: copia de referencia para validar coherencia mensual.
+- `detalle_anio_actual.registros[*].cuota_acreditada`: estado mensual. En captura manual lo define el usuario; en registros detectados por Ficha Digital R3 queda marcado/bloqueado como parte de la importación confirmada. No sustituye el total del Paso 2.
+- `origen_campos_cuotas.cuotas_anio_actual`: conserva su procedencia aunque se importe o retire una Ficha Digital.
+
+
+### Metadatos de procedencia visual — UX.4.6d R4
+
+Los metadatos `origen_campos_historial` y `origen_campos_detalle_anio_actual` determinan qué controles deben tratarse como documentales. En la UI, una casilla documental se restaura como marcada/bloqueada y una fila documental recibe `data-row-imported`. Estos atributos de presentación no cambian los contratos numéricos de historial, cuotas ni salario.
+
+### Compatibilidad de casillas importadas — UX.4.6d R5
+
+`data-imported-locked="true"` es metadata temporal de interfaz y no modifica el contrato Pydantic. Durante la lectura del detalle equivale a una cuota seleccionada para ese mes documental. Esto permite restaurar de forma segura simulaciones creadas antes de que la casilla importada se persistiera explícitamente como `true`.
+
+### Invalidación por limpieza de pasos — UX.4.6d R6
+
+La limpieza no añade campos al contrato Pydantic. Opera sobre el estado temporal del frontend y restablece grupos completos a sus valores iniciales. La dependencia es descendente: Paso 2 limpia cuotas y Pasos 3–6; Paso 3 limpia historial/detalle/base salarial y Pasos 4–6; Paso 4 limpia proyección y Pasos 5–6; Paso 5 limpia retiro/resultados; Paso 6 limpia únicamente configuraciones y resultados. Paso 1 equivale a una simulación vacía completa.
+
+### Estados de presentación del historial — UX.4.6d R8
+
+R8 no modifica `RegistroHistorialSalarial` ni los modelos Pydantic. Añade únicamente una clasificación de presentación en el navegador: `PENDIENTE`, `FALTA_SALARIO`, `FALTAN_CUOTAS`, `REVISAR`, `SIN_COTIZACION`, `PARCIAL` y `COMPLETO`. Esta clasificación sirve para feedback inmediato y filtrado, pero la aceptación definitiva de los registros continúa en `analizar_historial_salarial`.
+
+### UX.4.6d R9 — sin cambios de contrato
+
+R9 no modifica los modelos Pydantic ni las estructuras persistidas de historial, detalle o consentimiento. Los nuevos estados continúan siendo clasificación de presentación. La reactividad por delegación y el contexto del modal son metadata de interfaz y no alteran los datos previsionales.
+
+
+### Metadata de revisión documental — UX.4.6d R17
+
+La sesión puede conservar `campos_editados_importacion_comprobante: string[]` con IDs de controles modificados durante la revisión de Mi Retiro Seguro. Este arreglo no representa información previsional ni altera el contenido del documento original; permite que la UI distinga **Detectado**, **Editado por ti** y **Completado manualmente** al volver a revisar una importación confirmada.
+
+`cuotas_historicas` y `total_cuotas_acumuladas` permanecen como conceptos independientes dentro de `referencia_mi_retiro_seguro`: el primero alimenta la fotografía acreditada del Paso 2 y el segundo puede incluir períodos proyectados del comprobante.
+
+## UX.4.6d R18 — metadata de procedencia
+
+El estado cliente incorpora `origen_campos_persona` y reutiliza los mapas de origen existentes para diferenciar fuente y edición por campo. Los códigos pueden incluir sufijos `DETECTADO`, `EDITADO`, `COMPLETADO_MANUAL` o `NO_DETECTADO`. `ficha_digital_importada` y `referencia_mi_retiro_seguro` pueden incluir `nombre_archivo_origen` como metadata de presentación; este campo no representa contenido documental ni ruta local.
+
+
+## UX.4.6d R19 — cuotas actuales derivadas del detalle
+
+Cuando el usuario modifica explícitamente una casilla manual del detalle del año actual, `simulacion.cuotas.cuotas_anio_actual` puede actualizarse con el conteo confirmado y `simulacion.cuotas.cuotas_totales` se recalcula como `cuotas_previas_al_anio_actual + cuotas_anio_actual`. `origen_campos_cuotas` registra `DETALLE_ANIO_ACTUAL_EDITADO` para conservar trazabilidad.
+
+La fila vigente de `simulacion.historial` se materializa al analizar a partir del detalle: `cuotas` corresponde a meses marcados y `salario_cotizado` al total salarial de esos meses. Los salarios de meses no acreditados permanecen únicamente en `detalle_anio_actual`/`resumen_detalle_anio_actual`.
+
+
+## UX.4.6d R20 — vigencia sin nuevo estado persistente
+
+R20 no agrega campos al contrato Pydantic ni a `sessionStorage`. La vigencia se deriva dinámicamente de `ficha_digital_importada.anio_mas_reciente` y `mes_mas_reciente`, que ya existían en `ResumenFichaDigital`. `resumen_detalle_anio_actual` tampoco cambia de forma: sus valores existentes pasan a tener representación visible en el Paso 3.
+
+
+## UX.4.6d R21 — metadata temporal de Ficha Digital
+
+`ResumenFichaDigital` incorpora `fecha_referencia`, `fecha_referencia_confiable` y `fuente_fecha_referencia`. Estos campos no forman parte del cálculo salarial; documentan la referencia temporal con la que se evaluó la vigencia del archivo. La importación persistida conserva esta metadata y puede refrescarla mediante `/api/sistema/fecha-referencia`.
+
+
+### Procedencia de cuotas actualizadas desde Ficha Digital (UX.4.6d R23)
+
+Cuando una Ficha Digital confirmada amplía el conteo del año actual, `origen_campos_cuotas.cuotas_anio_actual` y `cuotas_totales` usan `FICHA_DIGITAL_ACTUALIZADO`. El total acumulado se deriva como `cuotas_previas_al_anio_actual + cuotas_confirmadas_en_detalle`; el detalle persiste además la nueva `cuotas_anio_actual_referencia`.

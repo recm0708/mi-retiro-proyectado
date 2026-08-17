@@ -26,7 +26,7 @@ Incluye:
 
 - Paso 1 — datos personales y sistema previsional;
 - Paso 2 — cuotas;
-- Paso 3 — historial salarial y salario actual;
+- Paso 3 — historial salarial y base para proyección;
 - estado temporal en `sessionStorage`;
 - invalidación de resultados dependientes;
 - navegación directa entre pasos disponibles.
@@ -238,6 +238,7 @@ Previsto:
 - [x] UX.4.6a: nueva página de Inicio orientada a beneficios, mockup sin resultados ficticios, tarjetas de capacidades y proceso guiado rematado en PC/laptop;
 - [x] UX.4.6b: Paso 1 cerrado y validado en PC/laptop con Manual/PDF, identificación opcional, consentimiento de privacidad, Ficha Digital trasladada al Paso 3, navegación dual y CI remoto en verde;
 - [x] UX.4.6c: Paso 2 cerrado y validado en PC/laptop con vista previa filtrada por etapa, nombres de secciones vinculados a sus pasos, cuota del año actual revisable, bloqueo por campo importado y un único círculo visual en ayudas contextuales;
+- [ ] UX.4.6d: Revisión 16 implementada; Paso 1 manual/importado validado, Paso 2 en certificación y Paso 3 reordenado con dependencias no regresivas; integración final y commits pendientes;
 - [x] hardening pre-beta: validación defensiva común de PDFs, cabeceras de privacidad local y límites de texto/páginas;
 - [x] regresión E2E pre-beta por API para SEBD, Mixto y SUCGS;
 - [x] CI pre-beta definida para Python 3.13/3.14 y Node.js 24; primera validación remota de `main` completada en verde;
@@ -252,7 +253,7 @@ Previsto:
 
 Estado técnico actual; la validación manual multidispositivo queda aplazada y las revisiones inmediatas se realizan en laptop/PC:
 
-- **253 pruebas automatizadas** en `OK`;
+- **278 pruebas automatizadas** en `OK`;
 - regresión SEBD real anonimizada;
 - casos sintéticos de Mixto;
 - casos sintéticos SUCGS;
@@ -279,4 +280,169 @@ Implementada, validada en PC/laptop y cerrada en `main`: términos ampliados, na
 
 ### Revisión 3 de UX.4.6c — cerrada
 
-Implementada técnicamente: Paso 2 mantiene la separación entre cuotas acreditadas y cotización futura; la vista previa documental se filtra por etapa y etiqueta cada grupo con su paso de destino. El Paso 1 conserva la revisión completa y Cuotas muestra únicamente sus datos. Las ayudas contextuales mantienen un solo círculo visible alrededor de `i`. La suite queda en **253 pruebas automatizadas en OK**. Pendiente revisión visual en PC/laptop.
+Implementada técnicamente: Paso 2 mantiene la separación entre cuotas acreditadas y cotización futura; la vista previa documental se filtra por etapa y etiqueta cada grupo con su paso de destino. El Paso 1 conserva la revisión completa y Cuotas muestra únicamente sus datos. Las ayudas contextuales mantienen un solo círculo visible alrededor de `i`. La suite de cierre quedó en **253 pruebas automatizadas en OK** y la revisión visual en PC/laptop fue completada antes de los commits de UX.4.6c.
+
+### Revisión 5 de UX.4.6d — pendiente de validación visual
+
+Implementada técnicamente: Paso 3 se concentra en tres secciones internas, elimina acciones duplicadas y rellenos masivos, reutiliza revisión documental contextual, normaliza la Ficha Digital con el mismo ciclo de revisión/edición/importación y finaliza con un resumen unificado. La suite de Revisión 2 alcanza **278 pruebas automatizadas en OK**. La revisión manual inmediata se limita a PC/laptop; la matriz multidispositivo continúa diferida para beta/RC.
+
+### Revisión 6 de UX.4.6d — gestión de datos y privacidad
+
+- [x] Menú **Opciones** únicamente en la navegación superior.
+- [x] Limpieza por paso con invalidación descendente.
+- [x] Reinicio completo conservando tema/aceptación.
+- [x] Borrado local integral desde Fuentes/Privacidad.
+- [x] Actualización del consentimiento a versión 2026-08-15.1.
+- [ ] Repetir matriz completa de validación UX.4.6d antes del cierre y commits.
+
+### Revisión 7 de UX.4.6d — revisión de privacidad sin reconsentimiento
+
+- [x] Revisar términos desde Fuentes sin navegar a Simular.
+- [x] Modo revisión sin checkbox ni nueva aceptación.
+- [x] Control `×` contextual en el modal.
+- [x] Etiqueta **Repositorio: GitHub del proyecto** en Fuentes.
+- [x] Regresión que mantiene **Opciones** fuera de la barra inferior.
+- [ ] Repetir matriz completa de UX.4.6d antes del cierre y commits.
+
+### Revisión 8 de UX.4.6d — estados y tablas
+
+- [x] Recalcular estado al escribir cuotas o salario.
+- [x] Separar `Falta salario`, `Faltan cuotas`, `Revisar`, `Parcial` y `Completo`.
+- [x] Mostrar resumen anual inmediatamente después del análisis histórico.
+- [x] Retirar scroll vertical innecesario con pocas filas visibles.
+- [x] Normalizar el botón **Seleccionar archivo** en los tres temas.
+- [x] Evitar que la ayuda del último mes desconfigure la alineación del modal de Ficha Digital.
+- [x] Suite completa R8: **317 pruebas automatizadas en OK**.
+- [ ] Revalidar puntos 4, 5, 7, 8, 9, 13 y 18 de la matriz manual.
+- [ ] Completar puntos 20–30 antes del cierre y commits.
+
+### Revisión 9 de UX.4.6d — reactividad y privacidad pendiente
+
+- [x] Recalcular estados al escribir en cualquiera de los dos campos.
+- [x] Retirar inmediatamente del filtro **Pendientes** una fila ya resuelta.
+- [x] Eliminar carril vertical cuando la tabla corta no necesita scroll.
+- [x] Permitir aceptar términos desde Fuentes cuando aún no existe consentimiento.
+- [x] Definir `Esc` contextual y sustituir placeholders de identidad por ejemplos genéricos.
+- [ ] Retestear puntos afectados y ejecutar matriz pendiente 20–30.
+- [ ] Cerrar UX.4.6d y crear commits por categorías después de aprobación manual.
+### Revisión 10 de UX.4.6d — simetría transversal de tablas
+
+- [x] Aplicar `app-table-shell` a las tablas estáticas actuales.
+- [x] Aplicar el mismo contrato a tablas dinámicas de Proyección y Línea temporal.
+- [x] Normalizar radio, borde, superficie y encabezado para Claro, Oscuro y Alto contraste.
+- [x] Extender detección accesible de scroll al contrato común.
+- [x] Documentar qué reglas tabulares son globales y cuáles dependen de la semántica de cada tabla.
+- [ ] Validar visualmente Historial anual y una muestra de tablas/importaciones en los tres temas.
+- [ ] Completar prueba integral de consentimiento desde Fuentes durante recorrido limpio 1–3.
+- [ ] Ejecutar puntos 20–30 y cerrar UX.4.6d antes de commits.
+
+
+
+### Revisión 11 de UX.4.6d — scroll contenido y carga PDF
+
+- [x] Eliminar botones/flechas nativos de scroll que invadían radios en Chromium/Windows.
+- [x] Separar el track vertical/horizontal de las esquinas y adaptar el thumb a los tres temas.
+- [x] Igualar altura exterior de **Seleccionar archivo** y **Analizar documento**.
+- [ ] Validar visualmente R11 y después continuar puntos 20–30.
+
+### Revisión 12 de UX.4.6d — scroll transversal y estado vacío
+
+- [x] Extender el scrollbar temático a términos, modales, página y superficies desplazables comunes.
+- [x] Reducir el radio de `app-table-shell` para integrar mejor el scroll interno.
+- [x] Ocultar Historial salarial anual cuando **Pendientes** llegue a cero y mostrar un estado vacío.
+- [x] Estabilizar el color de **Seleccionar archivo** al interactuar con el nombre del archivo.
+- [x] Cubrir por regresión que Comparador mantiene `app-table-shell`.
+- [x] Validar visualmente R12 y selector reforzado de R13.
+- [ ] Continuar recorrido integral Pasos 1–3 y puntos funcionales restantes antes del cierre y commits.
+
+
+### Revisión 13 de UX.4.6d — selector de archivo estable
+
+- [x] Neutralizar el hover heredado del input completo sobre **Seleccionar archivo**.
+- [x] Proteger paleta en hover/focus y prefijo WebKit.
+- [x] Mantener sin cambios motores, fórmulas y lógica previsional.
+- [x] Validar manualmente el selector en los tres temas.
+- [ ] Ejecutar recorrido limpio integral Pasos 1–3 y completar puntos 20–30.
+- [ ] Cerrar UX.4.6d y preparar commits lógicos después de la aprobación manual.
+
+
+### Revisión 14 de UX.4.6d — continuidad del formulario del Paso 1
+
+- [x] Unificar Identificación personal e Información previsional básica en **Información personal** para captura manual.
+- [x] Situar Sexo junto a Apellido de casada sin alterar su condición femenina/opcional.
+- [x] Conservar IDs, importación de Mi Retiro Seguro y validaciones existentes.
+- [ ] Validar visualmente la nueva disposición en el siguiente bloque de certificación del Paso 1.
+- [ ] Continuar certificación integral Pasos 1–3 y cerrar UX.4.6d antes de preparar commits.
+
+### UX.4.6d R15 — recorrido integral de Pasos 1–3
+
+**Estado:** en validación manual.
+
+Paso 1 manual e importado ya fue validado durante el recorrido limpio. R15 corrige la diferenciación de controles bloqueados, desacopla el copy de importación del término PDF y corrige la limpieza de Cotización futura en Paso 2. El cierre de UX.4.6d requiere completar Paso 2, Paso 3, integración 1→3 y commits acumulados.
+
+### UX.4.6d R16 — continuidad sin retrocesos
+
+- [x] Integrar Ficha Digital dentro de Detalle salarial del año actual y colocar su cargador antes de la tabla mensual.
+- [x] Revalidar automáticamente cuotas desde Paso 3 cuando los datos fuente siguen completos.
+- [x] Evitar restaurar pasos posteriores con prerrequisitos inválidos.
+- [ ] Validar manualmente R16 y continuar recorrido integral Paso 2 → Paso 3.
+- [ ] Cerrar UX.4.6d, revisar coherencia código/pruebas/documentación y preparar commits lógicos acumulados.
+
+
+### UX.4.6d R17 — auditoría Paso 1–3
+
+Completada la revisión de coherencia entre comprobante, importación y pantallas: corrección visual de checkboxes proyectados, contexto 281/293, advertencia por historial anterior a fecha de ingreso, trazabilidad de campos editados y explicación de salario disponible frente a cuota acreditada. Pendiente únicamente la validación manual final de R17 y las pruebas de integración restantes antes de commits.
+
+### UX.4.6d R18 — validación final Pasos 1–3
+- [x] Contrato transversal de procedencia de datos.
+- [x] Persistencia visual de importaciones tras F5 sin restaurar el file input.
+- [x] Procedencia específica por campo en Paso 1 y Cuotas.
+- [x] Indicador de procedencia en Ficha Digital/detalle mensual.
+- [ ] Validación manual de los puntos R17 restantes y del nuevo estado persistente.
+- [ ] Pruebas R16 de revalidación silenciosa y restauración tras limpiar Paso 2.
+- [ ] Cierre de UX.4.6d y preparación de commits lógicos antes de la siguiente fase.
+
+
+### UX.4.6d R19 — sincronización del año actual
+- [x] Derivar fila anual vigente desde el detalle mensual/quincenal.
+- [x] Actualizar Paso 2 desde una casilla manual de cuota sin navegación regresiva.
+- [x] Conservar separación entre salario disponible y salario acreditado.
+- [x] Cubrir enero–junio con 6 cuotas/B/.8,883.50 y promedio B/.1,480.58.
+- [ ] Validar manualmente sincronización 5→6→5 y total 281→282→281.
+- [ ] Completar F5/limpieza de Paso 2, recorrido final 1→3 y commits acumulados.
+
+
+### UX.4.6d R20 — vigencia de Ficha Digital y resumen auditable
+- [x] Detectar último período de Ficha Digital usando metadata extraída del documento.
+- [x] Advertir documentos con más de dos meses calendario de desfase sin bloquear la continuidad.
+- [x] Ofrecer seleccionar una ficha más reciente o continuar con la actual.
+- [x] Mostrar el último período detectado tras F5.
+- [x] Exponer `resumen_detalle_anio_actual` dentro del Paso 3 y ocultarlo al invalidar.
+- [ ] Validación manual final de R20 y recorrido limpio de cierre UX.4.6d.
+- [ ] Revisar coherencia final código/pruebas/documentación y preparar commits acumulados antes de la siguiente fase.
+
+
+### UX.4.6d R21
+- [x] Advertir por cualquier Ficha Digital anterior al mes actual verificado.
+- [x] Eliminar dependencia del reloj del navegador para vigencia.
+- [x] Añadir fuente de fecha oficial con degradación conservadora.
+- [x] Revalidar vigencia de importaciones persistidas.
+- [x] Actualizar privacidad a 2026-08-16.1.
+- [ ] Validación manual final de R21 y cierre/commits de UX.4.6d.
+
+### UX.4.6d — R22 / cierre de Paso 3
+- Reconciliación defensiva de cuotas del detalle antes de analizar historial.
+- Revalidación silenciosa de Paso 2 cuando la referencia cambia.
+- Error explícito para cualquier diferencia real de cuotas.
+- Revisión de redundancias del resumen: se conservan las 11 métricas por semántica distinta.
+- Pendiente únicamente validación manual final de **Analizar historial → Continuar a proyección** y cierre Git de UX.4.6d.
+
+
+
+### UX.4.6d — R23 / sincronización documental final de cuotas
+
+- [x] Permitir que una Ficha Digital confirmada con más cuotas del año actual actualice Paso 2 y el total acumulado.
+- [x] Revalidar Cuotas en segundo plano y conservar al usuario en Paso 3.
+- [x] Evitar reducciones automáticas cuando una ficha contiene menos meses que la referencia vigente.
+- [x] Cubrir la reconciliación al importar y al pulsar **Analizar historial** después de restauraciones/F5.
+- [ ] Validación manual final del caso 5→6 cuotas y acceso a Paso 4 antes del cierre/commits de UX.4.6d.

@@ -311,3 +311,121 @@ Desde UX.4.6c, cualquier cambio que consuma datos provenientes de un PDF debe co
 Desde UX.4.6c R3, los controles que reabran un comprobante ya confirmado deben llamar la vista previa indicando el paso activo. El Paso 1 es la única vista completa; los pasos posteriores muestran únicamente las secciones etiquetadas para esa etapa mediante `data-preview-step`. No se deben duplicar modales por paso.
 
 Las ayudas contextuales conservan un área de interacción accesible, pero visualmente solo dibujan el círculo interno que contiene `i`; no se debe reintroducir un segundo borde circular en el botón exterior.
+
+### Datos importados en tablas y casillas
+
+- Una fila que contenga información documental confirmada debe poder distinguirse visualmente de una fila de captura manual sin depender únicamente del color.
+- Si una casilla representa un estado derivado directamente de un documento confirmado, su valor se fija automáticamente y no se modifica desde la pantalla principal.
+- Los campos o filas que el documento no aporte permanecen editables para captura manual.
+- Este patrón debe reutilizarse en Pasos 1–6 y futuras vistas equivalentes; no debe aplicarse a casillas que representan decisiones propias del usuario.
+
+
+### Procedencia documental en tablas
+
+Cuando una tabla combine datos importados y manuales, la procedencia documental debe usar el patrón `data-row-imported` con la paleta primaria del sistema visual. No usar verde de éxito para indicar origen. Las casillas que provienen de un documento confirmado deben quedar marcadas y bloqueadas; las casillas que representan decisiones del usuario permanecen editables.
+
+### Casillas documentales en tablas
+
+Cuando un checkbox representa un dato confirmado por una importación, su estado visual y su lectura deben derivarse también de la metadata de procedencia y no exclusivamente del pintado nativo de `:checked`. Mantener separadas estas casillas de las decisiones manuales del usuario y actualizar las regresiones/documentación de la fase correspondiente.
+
+## Gestión de datos e invalidación
+
+Los cambios que añadan pasos, resultados o nuevas dependencias deben actualizar `gestion_datos.js` para que **Limpiar este paso** no deje cálculos obsoletos. Nunca usar `localStorage.clear()` o `sessionStorage.clear()`; deben eliminarse únicamente las claves que pertenecen a Mi Retiro Proyectado. Cualquier cambio material en conservación/eliminación requiere revisar Términos, Política de Privacidad, Cumplimiento Ley 81, Seguridad/Privacidad y sus pruebas.
+
+## Consulta no disruptiva de términos
+
+- El documento de Términos/Privacidad debe poder consultarse desde **Fuentes** sin cambiar de ruta ni alterar el consentimiento vigente.
+- La consulta posterior usa el mismo documento versionado, pero oculta los controles de aceptación.
+- El cierre `×` en modo consulta solo cierra el modal; en el consentimiento inicial no debe permitir acceder a Simular sin aceptar.
+- Las acciones destructivas del asistente se mantienen únicamente en la barra sticky superior.
+
+## Estados progresivos en tablas editables
+
+Cuando una tabla represente información que puede completarse por etapas, el estado visual debe derivarse de los datos reales de la fila y actualizarse al modificar cualquiera de sus campos. No se debe mantener un rótulo `Pendiente` si la fila ya reúne una combinación válida parcial o completa. Los contenedores desplazables deben mostrar scroll vertical únicamente cuando el contenido realmente lo requiera.
+
+Los controles de carga de archivos deben reutilizar el tratamiento visual global de `input[type=file]`; no se crearán variantes incongruentes por paso. Los mensajes contextuales dentro de una tabla no deben alterar la alineación vertical de controles equivalentes entre filas.
+
+## UX.4.6d R9 — criterios para tablas dinámicas y privacidad
+
+Toda contribución que regenere filas editables debe conservar actualización de estado en tiempo real y filtros reactivos. Los controles de privacidad deben reutilizar el modal global y respetar la diferencia entre consentimiento pendiente y consulta de una aceptación vigente. Los ejemplos públicos de formularios deben usar datos sintéticos/genéricos.
+
+## UX.4.6d R10 — contrato de tablas actuales y futuras
+
+- Toda tabla nueva debe reutilizar `.app-table-shell`; no crear una geometría paralela por pantalla.
+- Las tablas generadas dinámicamente deben incluir la clase en su wrapper desde JavaScript.
+- La paleta tabular debe probarse en Claro, Oscuro y Alto contraste.
+- Reactividad, filtros de pendientes y bloqueo documental son patrones semánticos: reutilizarlos cuando correspondan, no añadirlos a tablas meramente informativas.
+- Si una tabla necesita scroll horizontal, debe conservar el foco accesible del contenedor; si no existe desbordamiento real, no debe recibir tabulación artificial.
+
+
+
+## UX.4.6d R11 — scrollbars y controles de importación
+
+- Toda tabla nueva debe mantener `app-table-shell`; no reintroducir scrollbars nativos con botones/flechas que invadan el radio del contenedor.
+- Los carriles internos deben permanecer visualmente dentro de la superficie y conservar contraste suficiente en Claro, Oscuro y Alto contraste.
+- Un importador PDF debe usar `official-import-upload-grid`, `official-import-file-input` y `official-import-upload-action`; selector y acción deben compartir altura exterior.
+- No crear estilos locales por pantalla para **Seleccionar archivo** o **Analizar documento** si el contrato común resuelve el caso.
+
+## UX.4.6d R12 — scroll común y estados vacíos
+
+- Las superficies con desplazamiento deben reutilizar el scrollbar temático común; no se deben crear carriles, flechas o colores locales por pantalla.
+- `app-table-shell` conserva un radio menor que las tarjetas para integrar scroll y borde sin perder simetría.
+- Si un filtro tabular deja cero filas visibles, la tabla debe ocultarse y presentar un estado vacío en vez de mantener encabezados sin registros.
+- El estilo de `input[type=file]` no debe cambiar al pasar el puntero por el área que muestra el nombre del archivo; el hover visual pertenece al botón **Seleccionar archivo**.
+- Comparador y cualquier tabla futura deben continuar utilizando `app-table-shell` cuando el contrato sea aplicable.
+
+## R15 — formularios bloqueados e importadores neutrales al formato
+
+- Todo nuevo `form-control`/`form-select` bloqueado o de solo lectura debe reutilizar los tokens `--app-field-locked-*`; no crear fondos locales por pantalla.
+- La diferencia editable/no editable debe conservarse en Claro, Oscuro y Alto contraste y no depender exclusivamente del color.
+- Los textos de producto deben hablar de **documento**, **comprobante** o la fuente concreta (Mi Retiro Seguro/Ficha Digital). El formato técnico admitido se documenta en validación/seguridad y puede ampliarse mediante adaptadores.
+- Una acción **Limpiar este paso** debe restaurar el estado lógico vacío, no los valores predeterminados del HTML. Si existen sugerencias, solo se aplican después de una decisión explícita del usuario.
+
+## UX.4.6d R16 — dependencias sin navegación regresiva
+
+- Una acción del paso actual no debe enviar automáticamente al usuario a un paso anterior cuando la dependencia pueda reconstruirse con datos válidos ya presentes. En ese caso se revalida en segundo plano.
+- Si la dependencia anterior está realmente incompleta, el paso actual conserva los datos y muestra una explicación contextual; el usuario decide cuándo revisar el paso anterior.
+- Al restaurar `paso_actual`, se debe comprobar `puedeAccederDirectamenteAPaso()` y retroceder al último paso seguro.
+- Una fuente documental específica de una subsección debe ubicarse junto al resultado que alimenta. En Paso 3, Ficha Digital pertenece a **Detalle salarial del año actual** y precede a la tabla mensual.
+
+
+### Regla de importaciones revisables — R17
+
+Al crear o modificar una vista previa documental:
+
+- no uses `disabled` o metadata de procedencia como sinónimo de `checked`; bloqueo y valor booleano son estados distintos;
+- conserva la clasificación real/proyectada del documento y excluye por defecto de historial real las filas que no sean `HISTORICO`;
+- si el usuario modifica un campo detectado, registra su procedencia como editada y no lo vuelvas a presentar como detectado literalmente;
+- cuando dos datos oficiales del mismo documento sean internamente inconsistentes, conserva la fuente y muestra una advertencia revisable en lugar de corregirla silenciosamente.
+
+## UX.4.6d R18 — reglas para procedencia e importaciones
+
+Cuando una pantalla mezcle datos importados y manuales, reutilizar el contrato de procedencia común: `DETECTADO`, `EDITADO_USUARIO`, `COMPLETADO_MANUAL` y `NO_DETECTADO`. No usar “Detectado” para un valor que fue modificado por el usuario. La procedencia es independiente de la validez del dato y no debe reutilizar colores de éxito para comunicar origen.
+
+Nunca intentar rellenar programáticamente un `input[type=file]` después de una recarga. Los navegadores lo impiden por seguridad. Si la importación ya fue confirmada, restaurar únicamente metadata segura (por ejemplo, nombre del documento) y el estado derivado guardado; mantener disponibles las acciones de revisar/quitar importación.
+
+
+### Regla de sincronización del año actual
+
+No introduzcas una segunda entrada editable para un total que ya puede derivarse del detalle mensual/quincenal. Si una casilla de cuota actual modifica una referencia agregada de un paso anterior, registra procedencia, invalida dependencias y revalida mediante los servicios existentes; no dupliques fórmulas previsionales en JavaScript.
+
+
+## UX.4.6d R20 — vigencia documental y resúmenes derivados
+
+- La vigencia de una Ficha Digital se determina por el **último período salarial detectado**, no por el nombre del archivo ni por una fecha inventada.
+- La advertencia por antigüedad es orientativa y no bloqueante: siempre debe ofrecer continuar con el documento actual o seleccionar uno más reciente.
+- No ocultar resultados derivados que el usuario necesita auditar. Si un servicio ya calcula un resumen usado por decisiones posteriores, puede exponerse en interfaz siempre que se invalide/oculte junto con el estado fuente.
+- No persistir una copia del archivo para resolver vigencia; reutilizar `anio_mas_reciente`/`mes_mas_reciente` ya confirmados.
+
+### Regla de validación UX para dependencias entre pasos
+
+Una acción principal no debe fallar únicamente desplazando el viewport. Si una dependencia previa puede reconciliarse a partir de una confirmación explícita del usuario, debe revalidarse sin navegación regresiva; si no puede reconciliarse, debe mostrarse un error visible y accionable en la sección enfocada. Las métricas visibles solo deben eliminarse como redundantes cuando representen exactamente la misma semántica en todos los estados soportados.
+
+
+
+### Regla de sincronización Ficha Digital → Paso 2 (UX.4.6d R23)
+
+- Una Ficha Digital confirmada puede ampliar el número de cuotas del año actual cuando contiene más casillas documentales confirmadas que Paso 2.
+- No se permite reducir automáticamente Paso 2 por una ficha con menos meses; ese caso requiere revisión/completado explícito.
+- Toda reconciliación debe preservar las cuotas anteriores al año vigente, actualizar la referencia persistida del detalle, invalidar resultados dependientes y revalidar Cuotas sin navegación regresiva.
+- Las pruebas deben cubrir importación, F5/restauración y discrepancias tanto al alza como a la baja.

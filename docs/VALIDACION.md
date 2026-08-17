@@ -475,7 +475,7 @@ La suite alcanza **138 pruebas automatizadas**. `tests/test_ux44_detalle_anio_ac
 9. el Paso 5 deriva el último mes acreditado únicamente cuando las cuotas coinciden;
 10. `/simulacion` carga el módulo `detalle_anio_actual.js`.
 
-La validación manual en PC/laptop debe ejecutar al menos dos fotografías del mismo año: una con el último mes **parcial** y otra con ese mismo mes ya **completo**, confirmando que cambia el salario disponible sin inventar cuotas. También debe comprobarse un mes con salario completo pero cuota todavía no acreditada, y verificar que el Paso 5 derive el corte desde la última cuota realmente marcada.
+La validación manual en PC/laptop debe ejecutar al menos dos fotografías del mismo año: una con el último mes **parcial** y otra con ese mismo mes ya **completo**, confirmando que cambia el salario disponible. Desde UX.4.6d R3, los meses importados desde Ficha Digital deben aparecer con su casilla de cuota marcada y bloqueada; los meses no importados permanecen manuales.
 
 Los valores personales utilizados para esas comprobaciones permanecen fuera del repositorio.
 
@@ -769,3 +769,372 @@ La validación visual de cierre de UX.4.6c en PC/laptop comprobó en Claro, Oscu
 - Suite completa: **253 pruebas automatizadas en OK**.
 - `git diff --check`: debe permanecer sin incidencias antes del commit.
 - Revisión manual móvil/tablet/pantallas grandes: diferida para beta/RC.
+
+## Validación UX.4.6d — Simular / Paso 3 · Historial
+
+La Revisión 1 agregó `tests/test_ux46d_historial.py` con **20 regresiones específicas**. La Revisión 2 añadió cinco regresiones para la coherencia entre Ficha Digital, cuotas del Paso 2, detalle del año actual, alineación y salario pendiente. La Revisión 3 agregó cobertura para casillas importadas bloqueadas, clasificación automática del comprobante y diferenciación visual entre filas importadas/manuales. La Revisión 4 incorpora paleta primaria para procedencia. La Revisión 5 endurece la marca visible y la lectura semántica de casillas documentales, incluyendo compatibilidad con estados restaurados de revisiones anteriores. La suite completa alcanza **290 pruebas automatizadas en OK**. La validación visual completa debe repetirse antes del cierre.
+
+Cobertura específica:
+
+1. título y tres secciones internas del Paso 3;
+2. ausencia del `Paso 3 de 6` redundante dentro de la tarjeta;
+3. eliminación de acciones primarias internas duplicadas;
+4. acción unificada `analizarPasoHistorialCompleto`;
+5. cambio de navegación a `Continuar a proyección` solo cuando el paso está completo;
+6. eliminación de `Completar cuotas vacías con 12`;
+7. período histórico regenerado desde el año inicial sin botón manual;
+8. filtros Todos/Pendientes y estados de fila;
+9. placeholders y nombre `Salario anual reportado`;
+10. bloqueo por campo del historial importado;
+11. revisión contextual de Mi Retiro Seguro desde Paso 3;
+12. cargador simétrico de Ficha Digital;
+13. ausencia de textos técnicos de almacenamiento en el formulario;
+14. vista previa Ficha en modo revisión y edición explícita;
+15. procedencia por mes/campo en el detalle del año actual;
+16. concentración de `Abrir Mi Caja Digital` en el importador;
+17. base manual obligatoria frente a base automática de solo lectura;
+18. resumen unificado del Paso 3;
+19. eliminación transversal de paneles `Próximo paso...`;
+20. estilos diferenciados para campos importados, hover y resumen.
+
+### Revisión manual pendiente de UX.4.6d R2
+
+En PC/laptop se debe comprobar, como mínimo:
+
+- historial totalmente importado, parcialmente importado y completamente manual;
+
+- importar una Ficha Digital sin marcar cuotas mensuales y verificar que el total del Paso 2 no cambie;
+- comprobar que quitar la Ficha tampoco elimina la procedencia de las cuotas del Paso 2;
+- verificar el aviso cuando las cuotas mensuales identificadas no coinciden con Paso 2;
+- alternar Sí/No en detalle del año actual y confirmar que la Ficha queda inactiva de forma explícita cuando se usa total anual;
+- comprobar que un salario anual actual pendiente se muestre vacío y no `0.00`;
+- confirmar la alineación superior de los dos selectores del detalle;
+- filtro **Pendientes** en una tabla larga;
+- edición de año inicial y actualización automática del período;
+- apertura de **Revisar importación** mostrando solo Historial anual detectado;
+- Ficha Digital: selección, análisis, modo revisión, edición voluntaria e importación;
+- meses importados bloqueados y meses ausentes editables;
+- coincidencia/no coincidencia de cuotas del año actual;
+- base salarial manual y las cuatro bases automáticas cuando existan datos suficientes;
+- una sola acción principal en las barras superior/inferior;
+- resumen final y avance al Paso 4;
+- Claro, Oscuro y Alto contraste.
+
+La validación móvil/tablet/pantallas grandes continúa diferida para beta/RC.
+
+### Validación específica UX.4.6d Revisión 3
+
+1. Importar una Ficha Digital con enero–mayo y comprobar que esas cinco filas aparecen visualmente diferenciadas.
+2. Confirmar que las cinco casillas **Cuota acreditada** están marcadas y no pueden desmarcarse ni en revisión ni en el detalle principal.
+3. Confirmar que junio–agosto, cuando no estén en el PDF, permanecen con casilla editable y campos disponibles.
+4. Verificar que el total de cuotas del Paso 2 no cambia por confirmar o quitar la Ficha Digital.
+5. Si el número de meses importados difiere del Paso 2, verificar la advertencia de coherencia.
+6. En Mi Retiro Seguro, comprobar que las filas `HISTORICO` aparecen seleccionadas para historial real y la casilla no es editable; cambiar la clasificación mediante **Editar campos** debe actualizar el estado automáticamente.
+7. Verificar la diferenciación visual de filas importadas/manuales en Claro, Oscuro y Alto contraste.
+8. Repetir la matriz funcional de R2 completa antes de aceptar la revisión.
+
+
+### Validación específica UX.4.6d Revisión 4
+
+1. Verificar que las filas importadas usen una señal azul/primaria en Claro y Oscuro, sin fondos verdes de procedencia.
+2. Verificar que Alto contraste mantenga la misma semántica con fondo seleccionado y contorno de alto contraste.
+3. Importar Ficha Digital con meses detectados y comprobar que sus casillas de cuota aparezcan marcadas y bloqueadas.
+4. Confirmar que el gancho siga visible cuando la casilla está deshabilitada.
+5. Confirmar que meses no importados conserven casilla manual editable.
+6. Repetir después de recargar/restaurar la simulación para comprobar persistencia del estado.
+7. Repetir la matriz completa de 24 puntos de UX.4.6d antes del cierre.
+
+### Validación específica UX.4.6d Revisión 5
+
+1. Importar una Ficha Digital con meses detectados y comprobar que cada fila importada muestra **Cuota acreditada** con gancho visible.
+2. Confirmar que esas casillas no pueden desmarcarse en el detalle principal ni en la vista previa.
+3. Confirmar que los meses no importados mantienen checkbox vacío y editable.
+4. Recargar/restaurar una simulación creada en revisiones anteriores y verificar que los meses documentales recuperan igualmente la marca.
+5. Repetir la comprobación en Claro, Oscuro y Alto contraste.
+6. Después de este control visual, repetir la matriz funcional completa de UX.4.6d antes del cierre.
+
+### Validación específica UX.4.6d Revisión 6
+
+1. Con datos en Paso 3, **Limpiar este paso** debe conservar Pasos 1–2, borrar historial/Ficha Digital/detalle/base salarial y bloquear nuevamente Pasos 4–6.
+2. Limpiar Paso 2 debe conservar Paso 1 y borrar Paso 2–6.
+3. Limpiar Paso 6 debe conservar Pasos 1–5 y eliminar únicamente configuraciones/resultados.
+4. **Reiniciar simulación** debe volver a Paso 1 vacío conservando el tema y sin volver a pedir términos dentro de la misma aceptación vigente.
+5. **Borrar datos de esta aplicación en este navegador** desde Fuentes/Privacidad debe volver a Inicio y provocar que el siguiente ingreso a Simular solicite nuevamente términos y utilice el tema predeterminado/sistema.
+6. Confirmar que la barra inferior no contiene acciones destructivas.
+7. Confirmar que términos versión 2026-08-15.1 describen los tres niveles de eliminación.
+8. Después de validar estos controles, repetir la matriz funcional completa de UX.4.6d desde una simulación limpia.
+
+### Validación específica UX.4.6d Revisión 7
+
+Hallazgos de R6:
+
+1. Primera entrada a Simular mostró correctamente los términos vigentes.
+2. Limpiar Paso 3 conservó Pasos 1–2 e invalidó posteriores.
+3. Reiniciar simulación volvió a Paso 1 vacío sin repetir términos y conservó tema.
+4. Borrado local desde Fuentes volvió a Inicio y provocó nuevo consentimiento/tema predeterminado al regresar a Simular.
+5. Se aclaró que el menú **Opciones** visible durante scroll corresponde a la barra sticky superior; la barra inferior no debe contenerlo.
+6. Se detectó que **Revisar términos de privacidad** navegaba a Simular y exigía aceptar de nuevo.
+
+Validar R7:
+
+1. Desde Fuentes, **Revisar términos de privacidad** debe abrir el modal sin cambiar de URL/página.
+2. La consulta debe ocultar checkbox, **No acepto** y **Aceptar y continuar**.
+3. Cerrar con `×` debe volver exactamente a Fuentes sin modificar consentimiento.
+4. Entrar de nuevo a Simular después de esa consulta no debe pedir términos nuevamente si la aceptación sigue vigente.
+5. En un consentimiento realmente requerido, `×` debe volver a Inicio y no permitir acceso al formulario sin aceptar.
+6. En Fuentes debe mostrarse **Repositorio: GitHub del proyecto**.
+7. Confirmar que solo la barra sticky superior posee **Opciones**; la inferior no lo renderiza.
+8. Después, repetir la matriz funcional completa de UX.4.6d desde una simulación limpia.
+Resultado técnico de R7: **311 pruebas automatizadas en OK**, compilación Python y validación sintáctica JavaScript correctas.
+
+### Validación específica UX.4.6d Revisión 8
+
+R8 se origina durante la ejecución manual de los puntos 1–19 de la matriz. Se confirmaron los flujos principales y se detectaron cuatro refinamientos: estado visual estático, resumen anual poco visible, scroll innecesario con una sola fila y desalineación de la advertencia del último mes. También se solicita distinguir visualmente el botón **Seleccionar archivo** en todos los cargadores.
+
+Antes de continuar con los puntos 20–30 se debe revalidar:
+
+1. con `12` cuotas y salario vacío, la fila cambia de `Pendiente` a **Falta salario**;
+2. al completar el salario, 12 cuotas pasan a **Completo** y 1–11 cuotas a **Parcial**;
+3. el filtro **Pendientes** muestra solo filas que requieren acción y una sola fila no presenta scroll vertical innecesario;
+4. un historial `12 + 12 + 5` con salarios `12,000.00 + 14,400.00 + 7,321.13` muestra inmediatamente `29`, `29`, `0` y `B/.33,721.13`;
+5. **Seleccionar archivo** usa el nuevo tratamiento visual en Claro, Oscuro y Alto contraste;
+6. el último mes de la vista previa de Ficha Digital permanece alineado con las demás filas al entrar en **Editar campos**.
+
+Después de este retesteo deben ejecutarse los puntos 20–30 y los refinamientos ya reservados para la revisión final (consentimiento desde Fuentes cuando aún no existe aceptación, tecla `Esc` y placeholders genéricos).
+
+Resultado técnico de R8: **317 pruebas automatizadas en OK**, compilación Python y validación sintáctica JavaScript correctas.
+
+### Validación específica UX.4.6d Revisión 9
+
+R9 se origina porque R8 todavía mostraba dos problemas durante la prueba manual: la pista vertical de scroll seguía visible con una sola fila y el estado/filtro no reaccionaban mientras se escribía. También se incorporan los refinamientos de privacidad y placeholders que estaban reservados para el cierre.
+
+Retestar antes de continuar con el punto 20:
+
+1. Con cuotas vacías y salario vacío: **Pendiente**.
+2. Escribir primero cuotas positivas: **Falta salario**; completar salario: **Parcial** o **Completo** según cuotas.
+3. Escribir primero salario positivo: **Faltan cuotas**; completar cuotas: estado final correspondiente.
+4. Con filtro **Pendientes** activo, una fila debe desaparecer en el mismo instante en que deja de requerir acción y el contador debe disminuir.
+5. Con una sola fila visible no deben aparecer flechas, thumb ni carril vertical de scroll.
+6. Desde Fuentes sin consentimiento vigente, revisar términos debe mostrar el flujo de aceptación; después de aceptar, Simular no debe volver a pedirlo.
+7. `Esc` en Fuentes/consulta cierra el modal; `Esc` en el consentimiento obligatorio de Simular no permite entrar al formulario sin aceptar.
+8. Verificar que los placeholders de nombres, apellidos, cédula y NSS sean genéricos.
+
+Después de este retesteo continúan pendientes los puntos 20–30 de la matriz de UX.4.6d.
+
+### Validación específica UX.4.6d Revisión 10
+
+R10 no cambia motores ni fórmulas. Su objetivo es convertir la geometría tabular en un contrato transversal y asegurar que los patrones previos se reutilicen únicamente cuando su semántica corresponda.
+
+Antes de continuar con los puntos 20–30:
+
+1. verificar que **Historial salarial anual** tenga esquinas redondeadas simétricas en Claro, Oscuro y Alto contraste;
+2. verificar que encabezado, borde y superficie pertenezcan a la paleta del tema sin cambiar los colores semánticos de `Completo`, `Parcial`, advertencias o procedencia documental;
+3. revisar la tabla mensual de Ficha Digital y su vista previa: deben conservar la misma geometría redondeada;
+4. revisar al menos una tabla de un paso posterior o comparador para confirmar que `app-table-shell` no rompe scroll horizontal;
+5. con una tabla horizontalmente desplazable, confirmar que el contenedor recibe foco accesible; sin desbordamiento no debe añadirse tabulación innecesaria;
+6. confirmar que los comportamientos ya aprobados de R9 (estados reactivos, filtro Pendientes y ausencia de carril vertical corto) permanecen intactos.
+
+La prueba de consentimiento pendiente desde Fuentes se realizará durante el recorrido limpio Pasos 1–3. Después se ejecutan los puntos 20–30.
+
+Resultado técnico R10: **330 pruebas automatizadas en OK**; `compileall` y `node --check` correctos.
+
+
+
+### Validación específica UX.4.6d Revisión 11
+
+R11 no modifica motores, fórmulas, estados tabulares ni procedencia documental. Antes de continuar con los puntos 20–30 validar:
+
+1. en Historial anual, detalle mensual y ambas vistas previas de importación, un scrollbar vertical necesario no debe mostrar flechas superior/inferior ni atravesar las esquinas redondeadas;
+2. una tabla corta debe continuar sin carril vertical;
+3. el thumb debe conservar contraste adecuado en Claro, Oscuro y Alto contraste;
+4. el scroll horizontal, cuando exista, debe mantener el mismo criterio en las esquinas inferiores;
+5. **Seleccionar archivo** y **Analizar documento** deben tener exactamente la misma altura exterior en Mi Retiro Seguro y Ficha Digital;
+6. el nuevo estilo no debe alterar los ganchos importados, los bloqueos ni la alineación de celdas.
+
+Resultado técnico R11: **335 pruebas automatizadas en OK**; `compileall` y `node --check` correctos.
+
+### Validación específica UX.4.6d Revisión 12
+
+R12 no modifica motores, fórmulas, cuotas ni salarios. Validar en PC/laptop:
+
+1. Historial anual, Ficha Digital y vistas previas con suficientes filas: el thumb debe respetar el borde y no deben aparecer botones/flechas nativos visibles.
+2. Abrir Términos y una vista previa: el scrollbar debe usar el mismo lenguaje temático que las tablas.
+3. Repetir Claro, Oscuro y Alto contraste verificando contraste del thumb y dimensiones estables.
+4. Activar **Pendientes** con cero filas: la tabla y los encabezados deben ocultarse y aparecer `No hay años pendientes por completar.`
+5. En un selector PDF, mover el puntero por **Seleccionar archivo** y por el nombre del archivo: el botón no debe regresar al estilo anterior por hover del contenedor.
+6. Verificar Comparador solo a nivel visual/scroll cuando esté disponible, sin adelantar la validación funcional de su fase.
+
+Resultado técnico R12: **340 pruebas automatizadas en OK**; `compileall` y `node --check` correctos. Después de esta validación continúan los puntos 20–30 y el recorrido integral pendiente.
+
+
+### Validación específica UX.4.6d Revisión 13
+
+R12 quedó validada manualmente en scrollbars, estados vacíos, temas y Comparador a nivel visual; el único fallo persistente fue el cambio de color de **Seleccionar archivo** al pasar por el nombre del archivo. R13 corrige exclusivamente esa cascada visual.
+
+Validar antes del recorrido integral:
+
+1. en Mi Retiro Seguro y Ficha Digital, mover el puntero por el botón, por el nombre del archivo y fuera del control; la paleta del botón no debe regresar al estilo Bootstrap;
+2. repetir Claro, Oscuro y Alto contraste;
+3. comprobar foco por teclado y selección de archivo sin pérdida de contraste;
+4. confirmar que **Analizar documento** conserva la altura ya validada.
+
+Después ejecutar un recorrido limpio completo de Pasos 1–3: consentimiento desde Fuentes y Simular, captura manual/importada, Cuotas, Historial anual, Ficha Digital, detalle mensual/quincenal, bases salariales, limpieza/reinicio, persistencia temporal, errores y resúmenes. Los puntos 20–30 de la matriz original quedan integrados dentro de ese recorrido.
+
+Resultado técnico R13: **343 pruebas automatizadas en OK**; `compileall` y `node --check` correctos.
+
+
+### Validación específica UX.4.6d Revisión 14
+
+R13 quedó validada manualmente en Mi Retiro Seguro/Ficha Digital y en Claro, Oscuro y Alto contraste. R14 reorganiza únicamente el Paso 1 manual para continuar la certificación integral.
+
+Validar al iniciar el siguiente bloque:
+
+1. existe un único encabezado **Información personal** en la captura manual; no aparecen `Identificación personal` ni `Información previsional básica` como secciones separadas;
+2. Primer/Segundo nombre y Primer/Segundo apellido permanecen opcionales;
+3. al seleccionar **Femenino**, **Apellido de casada** aparece inmediatamente junto a Sexo; al seleccionar Masculino vuelve a ocultarse y limpiarse;
+4. Fecha de nacimiento, Sexo y Sistema previsional conservan `*` y validación obligatoria;
+5. Cédula, NSS y Fecha de ingreso CSS continúan opcionales;
+6. cambiar a importación PDF y confirmar datos conserva el mismo contrato de bloqueo/procedencia previo;
+7. Claro, Oscuro y Alto contraste mantienen alineación y espaciado sin cambios funcionales.
+
+Resultado técnico esperado R14: **346 pruebas automatizadas en OK**; `compileall` y `node --check` correctos. Después de validar este bloque continúa el recorrido funcional completo del Paso 1 y posteriormente Pasos 2–3.
+
+## UX.4.6d R15 — campos bloqueados, importación y limpieza Paso 2
+
+Validar antes de continuar el recorrido:
+
+1. en Paso 1 importado, comparar un campo bloqueado con uno editable en Claro, Oscuro y Alto contraste; deben distinguirse por superficie/borde y señal lateral;
+2. confirmar **Importar desde Mi Retiro Seguro**, **Importar información desde Mi Retiro Seguro** y **Selecciona el documento**, sin “PDF compatible” en encabezados/ayudas principales;
+3. confirmar la misma terminología de selección en Ficha Digital;
+4. en Paso 2 con datos, usar **Limpiar este paso** y verificar que `¿Continuarás cotizando?` regrese a `Selecciona una opción` y ambos campos de cuotas futuras queden vacíos/deshabilitados; si Paso 1 conserva un comprobante importado, los campos de cuotas que fueron limpiados no deben quedar vacíos y bloqueados por una procedencia reconstruida;
+5. elegir Sí y verificar que los campos se habilitan y pueden recibir/sugerir 12; elegir No y verificar la lógica existente de cierre actual/0 futuras;
+6. revalidar los tres temas y que Paso 1 importado continúe bloqueando únicamente los datos documentales.
+
+R15 añade cuatro regresiones específicas; después se ejecuta compilación Python, sintaxis JS y suite completa.
+
+Resultado técnico R15: **350 pruebas automatizadas en OK**; `compileall` y `node --check` correctos.
+
+## UX.4.6d R16 — flujo Paso 2 → Paso 3 y jerarquía de Ficha Digital
+
+Validar manualmente:
+
+1. con Paso 2 analizado, importar Ficha Digital y analizar Paso 3 sin navegación hacia atrás;
+2. invalidar únicamente `resumen_cuotas` manteniendo los controles de Paso 2 completos: Paso 3 debe revalidar en segundo plano y continuar;
+3. dejar realmente incompleto Paso 2 y comprobar que Paso 3 conserva sus datos y muestra una dependencia contextual sin redirección automática;
+4. limpiar Paso 2 con una sesión que antes estaba en Paso 3 y recargar: debe abrir el último paso accesible, no restaurar un Paso 3 imposible;
+5. confirmar el orden **Historial anual → Detalle del año actual → Ficha Digital → tabla mensual → Base salarial**;
+6. importar Ficha Digital y comprobar que la tabla mensual resultante aparece inmediatamente después del bloque de carga/revisión dentro de Detalle;
+7. revalidar Claro, Oscuro y Alto contraste sin cambios en bloqueos, checkboxes o scrollbars.
+
+Resultado técnico previo a validación manual R16: **356 pruebas automatizadas en OK**.
+
+
+### UX.4.6d R17 — auditoría de datos del caso real
+
+Caso documental utilizado para regresión:
+
+- cuotas históricas acreditadas: **281**;
+- total acumulado mostrado por el comprobante al incluir proyección: **293**;
+- 2026: `HISTORICO_PROYECTADO`, 5 cuotas;
+- 2027: `PROYECTADO`, 12 cuotas;
+- historial detectado desde 1992 frente a fecha de ingreso CSS 23/07/1997.
+
+Validaciones automatizadas:
+
+- una casilla bloqueada no se pinta marcada salvo `checked=true`;
+- 2026/2027 permanecen excluidos por defecto de la selección de historial real;
+- el parser emite advertencia por registros previos a la fecha de ingreso sin descartarlos;
+- el parser no inventa apellido de casada cuando el documento no lo aporta;
+- la vista previa diferencia 281 acreditadas de 293 acumuladas con proyección;
+- la revisión distingue campos detectados y campos editados/completados manualmente;
+- la advertencia mensual explica salario disponible vs. cuota acreditada.
+
+Resultado de suite tras R17: `python -m unittest discover -s tests -q` → **363 pruebas OK**.
+
+## UX.4.6d R18 — procedencia y persistencia
+
+Validación automatizada: **370 pruebas en OK**.
+
+Pruebas manuales pendientes para cierre:
+1. Confirmar en Mi Retiro Seguro los estados Detectado/Editado/Completado manualmente/No detectado y que un dato no detectado siga editable.
+2. Confirmar procedencia visible en Paso 2, Historial, Ficha Digital y detalle mensual.
+3. Importar ambos documentos, ejecutar F5 y Ctrl+F5 y comprobar que el selector nativo queda vacío pero aparece **Importación vigente**, con Revisar/Quitar importación operativos y sin perder datos.
+4. Validar 2026 Histórico + proyectado y 2027 Proyectado sin gancho; contexto 281 frente a 293; advertencia 1992 frente a 23/07/1997.
+5. Registrar junio B/.1,562.37 como salario conocido separando la casilla de cuota acreditada; julio sin información; agosto puede registrarse como parcial cuando solo se disponga de una quincena.
+6. Completar las pruebas R16 de revalidación silenciosa del Paso 2 y limpiar Paso 2 + recargar.
+
+
+## UX.4.6d R19 — sincronización del detalle con historial y Paso 2
+
+Validación automatizada: **374 pruebas en OK**.
+
+Caso controlado enero–junio 2026:
+- salarios: 1,486.88; 1,555.51; 1,381.01; 1,565.83; 1,331.90; 1,562.37;
+- seis casillas acreditadas;
+- total disponible/acreditado esperado: **B/.8,883.50**;
+- promedio seis meses y promedio por cuota acreditada: **B/.1,480.58**;
+- promedio últimos tres completos (abril–junio): **B/.1,486.70**.
+
+Pruebas manuales de cierre R19:
+1. Con enero–mayo importados, agregar junio B/.1,562.37 sin marcar cuota: la fila anual permanece en 5 cuotas/B/.7,321.13 y el salario de junio solo aumenta `total_salario_disponible`.
+2. Marcar la casilla de junio: la fila 2026 debe cambiar inmediatamente a **6 / B/.8,883.50 / Parcial**.
+3. Paso 2 debe actualizarse sin navegación a **6 cuotas este año / 282 totales** y mostrar procedencia de edición; al analizar, su estimación al cierre continúa en 288 si se mantienen 12 esperadas.
+4. Analizar Paso 3 debe producir historial con 282 cuotas de referencia/identificadas y diferencia 0; total salarial histórico esperado: **B/.205,164.64**.
+5. Desmarcar junio debe revertir la referencia a 5/281 y la fila anual a 5/B/.7,321.13.
+6. Marcar una cuota sin salario debe mantener la fila anual en estado de salario pendiente y bloquear el análisis del detalle.
+7. Verificar que julio/agosto vacíos no bloquean el Paso 3 mientras no estén marcados como cuota.
+8. Repetir F5 con importaciones vigentes y completar finalmente la prueba R16 de Limpiar Paso 2 + recargar.
+
+
+## UX.4.6d R20 — vigencia de Ficha Digital y resumen visible
+
+Validación automatizada: **379 pruebas en OK**.
+
+Pruebas manuales de cierre:
+1. En agosto de 2026, analizar una Ficha Digital cuyo último período sea mayo de 2026: debe aparecer **Revisa la vigencia de la Ficha Digital** antes de la vista previa.
+2. Elegir **Continuar con esta ficha**: debe abrir la vista previa normal y permitir importar/completar meses faltantes.
+3. Repetir y elegir **Seleccionar una ficha más reciente**: debe cerrar la advertencia y devolver el foco al selector para elegir otro documento.
+4. Tras confirmar una ficha desactualizada y ejecutar F5, debe conservarse **Importación vigente** y mostrarse el último período detectado sin exigir volver a adjuntar el archivo.
+5. Una ficha con último período dentro de los dos meses anteriores no debe interponer la advertencia de desactualización.
+6. Después de validar el detalle del año actual debe aparecer **Resumen del detalle del año actual** con las cifras devueltas por el servicio.
+7. Modificar cualquier dato del detalle debe ocultar el resumen anterior hasta volver a validar, evitando cifras obsoletas.
+8. Verificar Claro, Oscuro y Alto contraste para modal de vigencia, metadata persistente y tarjetas de resumen.
+
+
+## UX.4.6d R21 — vigencia mensual y fecha verificable
+
+1. Con fecha actual verificada en agosto de 2026, una Ficha Digital de junio de 2026 debe mostrar **Revisa la vigencia de la Ficha Digital**.
+2. Una ficha de julio de 2026 también debe advertir; ya no existe tolerancia de dos meses.
+3. Una ficha cuyo último período sea agosto de 2026 puede abrir la vista previa sin advertencia de desactualización.
+4. La lógica JavaScript de vigencia no debe contener `new Date()` ni depender del reloj del navegador.
+5. Si la consulta externa de fecha falla, debe aparecer un mensaje de fecha no verificada y las opciones para seleccionar otra ficha o continuar.
+6. Después de F5, una Ficha Digital persistida debe reconsultar la fecha de referencia y actualizar su indicador de vigencia sin pedir nuevamente el archivo.
+7. La suite automatizada debe simular fuentes de fecha; no requiere Internet para pasar.
+8. La versión de términos/privacidad visible debe ser **2026-08-16.1** y solicitar nueva aceptación respecto de la versión anterior.
+
+## UX.4.6d R22 — cierre del análisis del Paso 3
+
+Validaciones automatizadas añadidas:
+1. La reconciliación de cuotas manuales ocurre antes de construir el payload del detalle.
+2. Si cambia la referencia, Paso 2 se revalida en segundo plano sin navegación.
+3. `cuotas_coinciden=false` deja un error explícito con ambos conteos y orientación accionable.
+4. El resumen visible mantiene las 11 métricas semánticamente distintas.
+
+Prueba manual final:
+- con 6 cuotas enero–junio, B/.8,883.50 acreditados y base B/.1,500 mensual, **Analizar historial** debe completar Paso 3; si existe una diferencia real debe mostrar el motivo, nunca solo desplazar al detalle.
+- al quedar listo, las barras deben cambiar a **Continuar a proyección** y permitir entrar al Paso 4.
+
+Resultado automatizado R22: `python -m unittest discover -s tests -q` → **392 pruebas OK**; `python -m compileall app` y `node --check app/static/js/*.js` → OK.
+
+
+## UX.4.6d R23 — Ficha Digital más reciente frente a Paso 2
+
+Validar un escenario donde Mi Retiro Seguro deja `cuotas_anio_actual=5` y una Ficha Digital posterior contiene 6 meses confirmados:
+
+1. confirmar la Ficha Digital; Paso 2 debe actualizarse a 6 cuotas del año y el total acumulado debe conservar las cuotas previas al año vigente (ejemplo 281→282);
+2. el resumen de Cuotas debe revalidarse sin abandonar Paso 3;
+3. **Analizar historial** no debe volver a producir `6 vs 5`;
+4. una ficha con menos cuotas que Paso 2 no debe reducir la referencia automáticamente;
+5. después de F5, `cuotas_anio_actual_referencia` debe continuar sincronizada.
+
+Regresiones automatizadas: `test_ux46d_revision23_ficha_actualiza_cuotas.py` más cobertura histórica R22 adaptada al nuevo contrato.

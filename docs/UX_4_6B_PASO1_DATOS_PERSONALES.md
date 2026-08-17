@@ -13,11 +13,11 @@ Reducir la carga visual del Paso 1, separar captura manual e importación docume
 ## Cambios funcionales y de interfaz
 
 1. Modalidad **Ingresarlos manualmente** seleccionada por defecto.
-2. Modalidad **Importar desde PDF** para Mi Retiro Seguro; una modalidad oculta a la otra.
+2. Modalidad **Importar desde Mi Retiro Seguro**; una modalidad oculta a la otra.
 3. Identificación opcional: primer/segundo nombre, primer/segundo apellido, apellido de casada, cédula y número de Seguro Social.
 4. Fecha de nacimiento, sexo y sistema previsional se marcan con `*` como obligatorios y conservan validación accesible inline.
 5. Apellido de casada condicionado a sexo femenino.
-6. Separación visual entre Identificación personal e Información previsional básica.
+6. La separación visual original entre Identificación personal e Información previsional básica fue sustituida posteriormente por UX.4.6d R14: la captura manual usa un único bloque **Información personal** para reducir recorridos y mantener Sexo junto al Apellido de casada.
 7. Eliminación del cuadro redundante sobre cálculo de edad; la ayuda se integra debajo de Fecha de nacimiento.
 8. Ficha Digital trasladada al Paso 3.
 9. Cargador PDF compacto con selector y **Analizar documento** alineados.
@@ -79,3 +79,15 @@ Validación manual en PC/laptop de: consentimiento aceptar/rechazar y habilitaci
 ## Criterio transversal de contenido visible
 
 Los textos dirigidos al usuario deben responder a una necesidad real de operación, previsión, alcance, privacidad, seguridad, accesibilidad o cumplimiento legal. No se utilizará lenguaje que presente Mi Retiro Proyectado como producto educativo, didáctico o pedagógico, ni se mostrarán detalles internos de implementación cuando no ayuden a realizar una acción o comprender una consecuencia relevante.
+
+## Ajuste posterior durante UX.4.6d R14
+
+Durante la certificación integral de Pasos 1–3 se detectó una fricción de recorrido en captura manual: **Sexo** se encontraba en el bloque previsional inferior, mientras **Apellido de casada** aparecía en el bloque de identificación superior. R14 unifica ambos grupos bajo **Información personal** y sitúa Sexo inmediatamente antes del campo condicional. Nombres, apellidos, cédula y NSS siguen siendo opcionales; Fecha de nacimiento, Sexo y Sistema previsional conservan su obligatoriedad. La importación desde Mi Retiro Seguro y las fórmulas no cambian.
+
+## Ajuste transversal R15
+
+Durante la certificación integral de UX.4.6d, el Paso 1 adopta terminología neutral de documento: la modalidad se denomina **Importar desde Mi Retiro Seguro** y el encabezado evita “PDF compatible”. El formato técnico actual sigue siendo PDF. Los controles importados también heredan el nuevo contraste visual global de campos no editables.
+
+### Nota R18 — procedencia por campo
+
+Paso 1 adopta el contrato Detectado / Editado por ti / Completado manualmente / No detectado. Un campo ausente en Mi Retiro Seguro permanece editable en el formulario principal; los valores confirmados se bloquean y deben corregirse desde Revisar importación. La procedencia se conserva por campo para que un apellido de casada agregado manualmente no vuelva a presentarse como detectado.

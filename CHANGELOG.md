@@ -1,5 +1,129 @@
 # Changelog
 
+### UX.4.6d — Simular / Paso 3 · Historial
+
+### UX.4.6d — Revisión 20
+
+- Ficha Digital evalúa la vigencia del último período salarial detectado respecto del mes actual. Se consideran recientes el mes actual y los dos meses calendario anteriores; períodos más antiguos requieren una decisión explícita antes de abrir la vista previa.
+- Una Ficha Digital potencialmente desactualizada no se bloquea: el usuario puede **Seleccionar una ficha más reciente** o **Continuar con esta ficha** y completar manualmente los meses faltantes.
+- La importación confirmada conserva visible el último período detectado después de F5 y advierte si, por el paso del tiempo, la ficha deja de considerarse reciente.
+- El Paso 3 incorpora un **Resumen del detalle del año actual** visible con cuotas identificadas, salario disponible/acreditado, meses con información/completos, últimos períodos y promedios que ya calculaba el servicio.
+- El resumen visible se oculta al invalidarse el detalle para evitar mostrar resultados obsoletos. La suite completa alcanza **379 pruebas automatizadas en OK**.
+
+### UX.4.6d — Revisión 16
+
+- Paso 3 revalida automáticamente el resumen de cuotas cuando los datos del Paso 2 siguen completos, sin navegación regresiva.
+- Si las cuotas realmente están incompletas, Paso 3 conserva el trabajo y muestra una dependencia contextual en vez de redirigir por sorpresa.
+- La restauración de sesión retrocede al último paso accesible cuando una limpieza o invalidación dejó guardado un paso posterior.
+- Ficha Digital se integra dentro de **Detalle salarial del año actual** y el cargador queda inmediatamente antes de la tabla mensual que alimenta.
+- Se agregan regresiones R16 para estructura, restauración y dependencia Paso 2 → Paso 3.
+
+### UX.4.6d — Revisión 15
+
+- Los campos `readonly`/`disabled` adoptan un contrato visual transversal que distingue con claridad valores editables y no editables en Claro, Oscuro y Alto contraste; además del fondo/borde, incorporan una señal lateral primaria para no depender solo del color.
+- La interfaz de importación deja de presentar el formato como parte del concepto de producto: **Importar desde Mi Retiro Seguro**, **Selecciona el documento** y textos equivalentes sustituyen encabezados del tipo “PDF compatible”. El transporte actual continúa siendo PDF y conserva sus validaciones técnicas.
+- Ficha Digital reutiliza la misma terminología neutral de documento y los mensajes de selección dejan de exigir que el usuario interprete la compatibilidad del layout.
+- **Limpiar Paso 2** deja `Cotización futura` realmente vacía: no conserva `Sí`, `12` y `12`. En una simulación limpia no se presume continuidad; al seleccionar explícitamente Sí se mantienen los valores sugeridos de 12 como ayuda.
+- La redacción visible de Términos/Privacidad y Metodología se alinea con el concepto de documentos importados sin cambiar finalidades ni versión jurídica.
+
+### UX.4.6d — Revisión 14
+
+- La captura manual del Paso 1 unifica Identificación e Información previsional bajo **Información personal**.
+- **Sexo** queda junto a **Apellido de casada**, evitando recorrer el formulario para localizar el campo condicional.
+- Se mantienen IDs, obligatoriedad, importación y lógica previsional. La suite quedó en **346 pruebas automatizadas en OK**.
+
+### UX.4.6d — Revisión 13
+
+- **Seleccionar archivo** conserva su paleta aunque Chromium/Bootstrap active `:hover` sobre el `input[type=file]` completo al pasar por el nombre del archivo.
+- Se protege también foco y prefijo WebKit. La suite quedó en **343 pruebas automatizadas en OK**.
+
+### UX.4.6d — Revisión 12
+
+- Se extiende el scrollbar temático a términos, modales, página y superficies desplazables comunes, manteniendo rueda, teclado y táctil y suprimiendo los botones/flechas nativos cuando el motor los expone.
+- `app-table-shell` reduce ligeramente su radio respecto de las tarjetas para integrar mejor el desplazamiento interno sin perder la geometría redondeada de la interfaz.
+- El filtro **Pendientes** oculta completamente la tabla cuando no quedan filas y muestra un estado vacío; ya no se conserva una cabecera sin registros.
+- **Seleccionar archivo** conserva su identidad visual cuando el puntero se desplaza por el nombre del archivo; el cambio de tono queda limitado al hover directo del botón nativo.
+- Se verifica por regresión que Comparador continúa usando `app-table-shell`, de modo que el contrato transversal alcanza también una tabla posterior al asistente.
+- La suite completa alcanza **340 pruebas automatizadas en OK** en R12.
+
+### UX.4.6d — Revisión 11
+
+- El scrollbar interno de `app-table-shell` deja de usar los botones/flechas nativos de Chromium/Windows y adopta un carril transparente con margen respecto de las esquinas redondeadas.
+- El thumb de desplazamiento utiliza colores coherentes con Claro, Oscuro y Alto contraste sin invadir el borde de la tabla; las tablas cortas continúan sin carril vertical.
+- El selector **Seleccionar archivo** y la acción **Analizar documento** comparten exactamente la misma altura exterior y ancho disponible en los importadores de Mi Retiro Seguro y Ficha Digital.
+- El contrato R11 se aplica transversalmente a tablas e importadores actuales y futuros mediante `app-table-shell` y las clases comunes de carga PDF.
+- La suite completa alcanza **335 pruebas automatizadas en OK** en R11.
+
+### UX.4.6d — Revisión 10
+
+- Se introduce `app-table-shell` como contrato visual común para tablas del asistente, importaciones, comparador, retiro, resultados, proyección y línea temporal.
+- Las tablas actuales adoptan bordes redondeados simétricos con tarjetas y formularios; las tablas generadas por JavaScript usan el mismo contrato.
+- Claro, Oscuro y Alto contraste reciben una superficie, borde y encabezado tabular coherentes con la paleta de cada tema sin cambiar la semántica de colores de estado/importación ya validada.
+- La accesibilidad de contenedores desplazables reconoce `app-table-shell`, de modo que las tablas futuras heredan el mismo criterio de foco cuando exista scroll horizontal.
+- Se documenta que reactividad, filtros, estados progresivos, bloqueo de campos y casillas importadas se aplican transversalmente solo cuando el significado de la tabla lo justifica; no se fuerzan sobre tablas meramente informativas.
+- La suite completa alcanza **330 pruebas automatizadas en OK** en R10.
+
+### UX.4.6d — Revisión 9
+
+- El historial anual adopta eventos delegados sobre el `tbody` para que el estado de cada fila se recalcule al escribir cuotas o salario, independientemente del orden de captura o de regeneraciones de la tabla.
+- El filtro **Pendientes** se reaplica en el mismo evento y una fila deja de mostrarse tan pronto deja de requerir acción.
+- Las tablas cortas eliminan completamente el carril vertical de desplazamiento en escritorio; en pantallas estrechas se conserva únicamente el desplazamiento horizontal cuando haga falta.
+- Desde Fuentes, si no existe consentimiento vigente, **Revisar términos de privacidad** abre el mismo documento en modo consentimiento; al aceptarlo, Simular no vuelve a solicitarlo mientras la versión siga vigente.
+- `Esc` queda definido como cierre contextual del modal: en consulta/Fuentes cierra sin aceptar; en el consentimiento obligatorio de Simular impide continuar sin aceptación.
+- Los placeholders de identidad dejan de usar nombres, apellidos o cédulas concretas y emplean ejemplos ficticios/genéricos.
+- La suite completa alcanza **324 pruebas automatizadas en OK** en R9.
+
+### UX.4.6d — Revisión 8
+
+- La tabla anual del Paso 3 actualiza el estado en tiempo real al escribir tanto cuotas como salario y distingue **Pendiente**, **Falta salario**, **Faltan cuotas**, **Revisar**, **Sin cotización**, **Parcial** y **Completo**.
+- El filtro **Pendientes** utiliza el estado semántico real de cada fila; una fila parcial válida deja de considerarse pendiente.
+- Las tablas cortas dejan de reservar/desplegar desplazamiento vertical innecesario; el patrón `table-scroll-compact` queda disponible para tablas actuales y futuras.
+- Tras analizar el historial anual se muestra un resumen local con cuotas de referencia, cuotas identificadas, diferencia y total salarial reportado, sin esperar a completar la base salarial.
+- El botón nativo **Seleccionar archivo** adopta una superficie diferenciada basada en la paleta primaria en Claro, Oscuro y Alto contraste, aplicable globalmente a controles `input[type=file]`.
+- La advertencia del último mes de Ficha Digital deja de insertarse debajo del selector de estado para no romper la alineación de la tabla; la orientación se conserva mediante texto accesible/contextual del control.
+- La suite completa alcanza **317 pruebas automatizadas en OK** en R8.
+
+### UX.4.6d — Revisión 7
+
+- **Revisar términos de privacidad** desde Fuentes abre el documento legal en la misma página mediante un modo de consulta no disruptivo.
+- Consultar los términos no modifica la aceptación vigente ni obliga a aceptarlos nuevamente.
+- El modal de términos incorpora un control `×` superior: en modo consulta solo cierra la ventana; durante el consentimiento inicial, cerrar sin aceptar equivale a no continuar y vuelve a Inicio.
+- El modal y `privacidad.js` pasan a ser recursos globales de la interfaz para permitir la consulta desde Fuentes sin navegar a Simular.
+- En Fuentes se renombra el enlace del proyecto como **Repositorio: GitHub del proyecto**.
+- Se refuerza por CSS y regresión que **Opciones** pertenece únicamente a la barra sticky superior y no a la navegación inferior.
+- Se corrige una etiqueta `<section>` duplicada en el documento legal visible.
+
+### UX.4.6d — Revisión 6
+
+- Se incorpora **Opciones** en la navegación superior del asistente con **Limpiar este paso** y **Reiniciar simulación**.
+- Limpiar un paso elimina sus datos e invalida de forma automática todos los cálculos posteriores que dependan de ellos.
+- Reiniciar simulación elimina todos los datos/cálculos pero conserva apariencia y aceptación vigente de privacidad.
+- Fuentes/Privacidad incorpora **Borrar datos de esta aplicación en este navegador**, que elimina también constancia local de aceptación y preferencia visual.
+- El texto legal visible y los documentos de privacidad se actualizan a la versión **2026-08-15.1** para explicar conservación, eliminación y controles del titular.
+- Se agregan regresiones para impedir resultados posteriores obsoletos después de una limpieza parcial.
+
+
+- Revisión 4: las filas con procedencia documental dejan de usar verde de éxito y pasan a una señal azul derivada de la paleta primaria, consistente en Claro, Oscuro y Alto contraste.
+- Revisión 4: las casillas de cuota procedentes de Ficha Digital se fuerzan visual y funcionalmente como marcadas/bloqueadas, incluso tras restaurar una simulación existente.
+- Revisión 4: el verde queda reservado para estados semánticos de éxito/completitud, evitando confundir procedencia de datos con validación.
+- La suite completa alcanza **286 pruebas automatizadas en OK** antes de repetir la validación visual integral del Paso 3.
+
+- Revisión 3: los meses detectados automáticamente en Ficha Digital se incorporan con **Cuota acreditada** marcada y bloqueada; los meses no presentes en el documento permanecen disponibles para captura manual.
+- Revisión 3: las filas con datos documentales usan un estado visual común de procedencia para distinguirlas de filas manuales en Historial anual, Detalle del año actual y vistas previas de importación.
+- Revisión 3: las casillas cuya selección deriva directamente de una clasificación importada quedan bloqueadas; en el comprobante de Mi Retiro Seguro la pertenencia al historial real sigue la clasificación `HISTORICO` y no depende de una casilla modificable.
+- Revisión 3: se mantiene el total de cuotas del Paso 2 como referencia agregada; si la cantidad de meses importados difiere, se muestra una advertencia de coherencia sin reescribir el Paso 2.
+- La suite completa alcanza **282 pruebas automatizadas en OK** en Revisión 3; la validación visual PC/laptop continúa pendiente.
+
+- El Paso 3 se reorganiza en historial anual, detalle del año actual y base salarial, con una sola acción principal desde las barras superior/inferior.
+- Se eliminan acciones internas duplicadas, el relleno masivo de cuotas vacías, el botón manual de regeneración de años y los paneles `Próximo paso...`.
+- La Ficha Digital adopta el ciclo Seleccionar PDF → Analizar → Modo revisión → Editar campos → Importar datos y conserva procedencia por mes/campo.
+- Revisión 2: se corrige una regresión por la que confirmar una Ficha Digital podía reemplazar `cuotas_anio_actual` del Paso 2 con el número de casillas marcadas en la vista mensual. La Ficha Digital deja de redefinir cuotas acreditadas y usa el Paso 2 como referencia única.
+- Revisión 2: quitar una Ficha Digital ya no elimina la procedencia de `cuotas_anio_actual` cuando ese dato proviene de Mi Retiro Seguro o captura manual del Paso 2.
+- Revisión 2: el estado de la Ficha informa si la cantidad de meses marcados como acreditados coincide con el total del Paso 2, sin adivinar qué meses corresponden.
+- Revisión 2: se alinea verticalmente `¿Deseas detallar el año actual?` con `Forma de captura`, y cuando existe una Ficha importada pero el detalle se desactiva se explica que sus salarios no se usarán hasta volver a activar el detalle.
+- Revisión 2: el año actual con cuotas y salario pendiente deja de mostrarse como `B/.0.00`; se presenta vacío y la validación orienta a completar el total anual o activar la captura mensual/quincenal.
+- La suite completa alcanza **278 pruebas automatizadas en OK** en Revisión 2; la validación visual PC/laptop sigue pendiente.
+
 ### UX.4.6c — Simular / Paso 2 · Cuotas
 
 - El Paso 2 se reorganiza en **Cuotas acreditadas** y **Cotización futura** para separar datos ya registrados por la CSS de supuestos futuros.
@@ -298,3 +422,86 @@ El proyecto todavía no ha publicado una versión estable; los cambios actuales 
 - `Ver cálculo completo` deja de mostrar identificadores internos como `texto_unico` o `ley_462`; ahora presenta nombres humanos y enlaces oficiales.
 - Se centraliza la presentación de fuentes de SEBD, Mixto y SUCGS reutilizando las URLs versionadas de `normativa/*.json`.
 - Se documentan limitaciones conocidas, jerarquía de fuentes y recursos oficiales de verificación individual.
+
+### UX.4.6d — Revisión 5
+
+- Las casillas **Cuota acreditada** de meses importados desde Ficha Digital muestran el gancho de forma explícita y no dependen del pintado nativo de un checkbox deshabilitado.
+- Un mes con salario/estado documental se reconoce como cuota importada aunque una sesión creada por una revisión anterior no conserve metadata específica de la casilla.
+- La lectura del detalle y de la vista previa trata `data-imported-locked` como estado seleccionado, evitando discrepancias entre lo que se muestra y lo que se utiliza en la validación.
+- Los meses no importados continúan con checkbox manual editable.
+- La suite completa alcanza **290 pruebas automatizadas en OK** después de la corrección.
+
+
+### UX.4.6d — Revisión 17
+
+#### Corregido
+- Las casillas bloqueadas de la vista previa ya no muestran un gancho solo por tener procedencia documental; el gancho depende del estado `checked` real.
+- Las filas `Histórico + proyectado` y `Proyectado` dejan de parecer seleccionadas para el historial real cuando están excluidas por la clasificación automática.
+- La procedencia visual de campos editados en la revisión del comprobante deja de mostrarse como `Detectado`.
+
+#### Mejorado
+- La vista previa diferencia las cuotas acreditadas del total acumulado que incluye períodos proyectados.
+- Se advierte cuando el comprobante contiene años históricos anteriores a la fecha de ingreso CSS indicada, conservando los registros por provenir del documento.
+- La incoherencia entre cuotas mensuales y Paso 2 explica que un salario puede estar disponible antes de que la cuota figure acreditada.
+- Suite completa: **363 pruebas automatizadas en OK**.
+
+## UX.4.6d — Revisión 18
+
+### Añadido
+- Contrato transversal de procedencia: **Detectado / Editado por ti / Completado manualmente / No detectado**.
+- Procedencia por campo en Paso 1 y Paso 2; metadata de procedencia en Historial; indicador de procedencia en Ficha Digital y detalle mensual.
+- Estado persistente visible de la importación tras F5/Ctrl+F5, incluyendo el nombre del documento confirmado cuando está disponible.
+
+### Corregido
+- Los campos no detectados en Paso 1 permanecen editables aunque exista una importación confirmada; solo datos confirmados/editados mediante la revisión quedan bloqueados en el formulario principal.
+- Entrar en **Editar campos** de Ficha Digital ya no marca toda la importación como editada: la procedencia cambia únicamente cuando un control realmente se modifica.
+- Limpiar Paso 3 elimina también metadata de edición de Ficha Digital.
+
+### Privacidad
+- Se conserva únicamente metadata local de visualización del nombre del documento junto con los datos ya confirmados en la sesión; no se conserva el archivo original ni se introduce persistencia remota. La versión de privacidad **2026-08-15.1** no cambia.
+
+
+## UX.4.6d — Revisión 19
+
+### Cambiado
+- La fila del año actual del historial anual se sincroniza en tiempo real con las casillas **Cuota acreditada** y los salarios del detalle mensual/quincenal.
+- Marcar o desmarcar manualmente una cuota del año actual actualiza también la referencia de Paso 2 sin obligar a navegar hacia atrás; el total acumulado conserva las cuotas anteriores al año vigente y suma el nuevo conteo confirmado.
+- La procedencia de las cuotas recalculadas desde el detalle se registra como edición del usuario y los resúmenes dependientes se invalidan para revalidación segura.
+
+### Corregido
+- Paso 3 ya no exige volver a escribir manualmente el salario anual de 2026 cuando el mismo dato puede derivarse del detalle por meses.
+- Un detalle con seis meses acreditados y salarios enero–junio produce 6 cuotas y B/.8,883.50 en la fila anual, en vez de conservar 5 cuotas o un salario vacío/desactualizado.
+- Si una casilla está marcada pero su mes aún no tiene salario, la fila anual no presenta un total parcial engañoso: permanece en estado de salario pendiente hasta completar el dato.
+
+### Validación
+- Suite completa: **374 pruebas automatizadas en OK**.
+
+## UX.4.6d — Revisión 22
+
+### Corregido
+- **Analizar historial** reconcilia las cuotas confirmadas manualmente en el detalle del año actual con Paso 2 antes de validar el payload, evitando bloqueos silenciosos después de restauraciones/F5 o eventos de interfaz perdidos.
+- Si la referencia de Paso 2 cambia durante esa reconciliación, las cuotas se revalidan en segundo plano sin navegar hacia atrás.
+- Una diferencia real entre las casillas de **Cuota acreditada** y Paso 2 ahora genera un error visible con ambos conteos y una instrucción concreta; ya no se limita a desplazar la pantalla hasta el detalle sin explicar la causa.
+
+### Revisado
+- Se conserva completo el **Resumen del detalle del año actual**: sus 11 métricas no son redundantes funcionalmente porque distinguen disponibilidad frente a acreditación, completitud frente a información parcial y las tres bases salariales automáticas.
+
+### Validación
+- Se añaden regresiones específicas de cierre de Paso 3 para reconciliación, revalidación silenciosa, mensaje explícito y contrato del resumen visible.
+- Suite completa: **392 pruebas automatizadas en OK**.
+
+
+
+## UX.4.6d — Revisión 23
+
+### Corregido
+- Una Ficha Digital confirmada con más cuotas del año actual que la fotografía previa del Paso 2 deja de bloquear **Analizar historial** con una diferencia artificial (por ejemplo, 6 frente a 5).
+- La reconciliación previa al análisis reconoce ahora cuotas documentales bloqueadas de Ficha Digital además de cuotas añadidas manualmente.
+- `cuotas_anio_actual_referencia` del detalle se actualiza junto con Paso 2 para evitar referencias persistidas obsoletas después de F5.
+
+### Cambiado
+- Si la ficha confirma un conteo superior, Paso 2 se actualiza hacia arriba y se revalida en segundo plano; si la ficha contiene menos cuotas que Paso 2, nunca se reduce automáticamente la referencia agregada.
+- La importación informa cuando actualizó Paso 2 y muestra el nuevo total anual/acumulado.
+
+### Validación
+- Se agregan regresiones específicas para 5→6 cuotas por Ficha Digital, no degradación ante fichas incompletas y reconciliación defensiva del Paso 3.

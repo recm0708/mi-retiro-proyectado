@@ -1,8 +1,8 @@
 # Términos de uso, privacidad y tratamiento de datos
 
 **Producto:** Mi Retiro Proyectado
-**Versión del texto:** 2026-08-13.2
-**Estado:** Vigente desde el cierre de UX.4.6b; validado en PC/laptop. Revisión jurídica formal pendiente antes de una publicación pública o comercial.
+**Versión del texto:** 2026-08-16.1
+**Estado:** Vigente desde UX.4.6d R21; validación manual final pendiente antes del cierre de fase. Revisión jurídica formal pendiente antes de una publicación pública o comercial.
 
 > Este documento describe el contrato funcional y de privacidad implementado por la aplicación. No constituye una certificación jurídica. Antes de una publicación pública, comercial o con almacenamiento remoto se requiere revisión jurídica formal.
 
@@ -34,7 +34,7 @@ El diseño busca respetar licitud, finalidad, proporcionalidad, seguridad, trans
 Los datos pueden ser:
 
 1. introducidos manualmente por el usuario; o
-2. detectados desde un PDF compatible seleccionado voluntariamente por el usuario.
+2. detectados desde un documento seleccionado voluntariamente por el usuario para importación.
 
 Todo dato importado se presenta primero en una vista previa. Ningún dato detectado por un documento se incorpora a la simulación hasta que el usuario confirme expresamente la importación.
 
@@ -84,15 +84,15 @@ Si el usuario selecciona **No acepto**, se elimina el estado temporal de la simu
 
 El usuario es responsable de revisar que la información sea correcta y corresponda a su situación. La extracción automática puede equivocarse al interpretar texto, nombres, valores o clasificaciones. Por ello la vista previa inicia bloqueada, permite una edición deliberada y exige confirmación antes de importar.
 
-## 9. Documentos PDF
+## 9. Documentos importados
 
-Los PDF se procesan para extraer únicamente la información necesaria para la simulación. El archivo original no se incorpora a una base de datos permanente de la aplicación. Se mantienen límites defensivos de extensión, MIME, tamaño, firma PDF, páginas y texto extraíble.
+Los documentos seleccionados se procesan para extraer únicamente la información necesaria para la simulación. El archivo original no se incorpora a una base de datos permanente de la aplicación. Se mantienen límites defensivos de extensión, MIME, tamaño, firma PDF, páginas y texto extraíble.
 
 ## 10. Conservación y eliminación
 
 La simulación se conserva temporalmente en el navegador para permitir avanzar, retroceder y recuperar el estado mientras la sesión de uso siga activa. La versión actual no dispone de cuentas de usuario ni de una base de datos permanente de simulaciones.
 
-El usuario debe disponer de una acción explícita **Borrar mi simulación** antes de beta pública. Cerrar la sesión de navegación elimina la información temporal asociada a esa sesión conforme al comportamiento del navegador.
+El usuario dispone de tres niveles de control: **Limpiar este paso**, que elimina el paso activo e invalida resultados dependientes; **Reiniciar simulación**, que elimina toda la simulación pero conserva apariencia y aceptación vigente; y **Borrar datos de esta aplicación en este navegador**, que elimina además la constancia local de aceptación y preferencias recordadas. Cerrar la sesión de navegación elimina la información temporal asociada a esa sesión conforme al comportamiento del navegador.
 
 ## 11. Custodia, confidencialidad y seguridad
 
@@ -166,3 +166,32 @@ La Revisión 3 tomó como referencia de organización la plantilla de términos 
 ## 22. Presentación y aceptación en la interfaz
 
 La interfaz exige que el usuario llegue al final del documento antes de habilitar la casilla de aceptación. Este control no añade declaraciones de **Fin de los términos** ni mensajes de **Lectura completada**: una vez alcanzado el final, la casilla simplemente queda disponible para una decisión afirmativa. La redacción visible se limita a contenidos relacionados con el uso, alcance, privacidad y tratamiento de datos de Mi Retiro Proyectado.
+
+## Control local de eliminación y reinicio
+
+UX.4.6d R6 incorpora controles explícitos para que el titular gestione la información de la simulación sin depender de procedimientos técnicos:
+
+- **Limpiar este paso:** elimina los datos del paso activo y cualquier cálculo posterior que dependa de ellos, manteniendo los pasos anteriores.
+- **Reiniciar simulación:** elimina todos los datos introducidos/importados y todos los cálculos, conservando la apariencia y la aceptación vigente de términos.
+- **Borrar datos de esta aplicación en este navegador:** elimina la simulación, la constancia local de aceptación, la preferencia visual y demás estados locales de Mi Retiro Proyectado, y vuelve a Inicio.
+
+Estos controles son coherentes con los principios de control del titular y minimización aplicados por el proyecto. En la arquitectura actual no representan una solicitud a una base de datos remota porque no existe almacenamiento permanente de simulaciones en el servidor.
+
+## Consulta posterior del documento
+
+Después de aceptar la versión vigente, el usuario puede volver a consultar estas condiciones desde la sección **Fuentes y privacidad**. Esa consulta abre el mismo contenido en modo lectura y no exige una nueva aceptación ni modifica la aceptación vigente. El control de cierre `×` en ese contexto solo cierra la consulta.
+
+Durante el consentimiento inicial, cerrar la ventana sin aceptar equivale a decidir no continuar con la simulación y devuelve a Inicio. Esta aclaración no cambia la finalidad, categorías de datos, conservación ni destinatarios ya informados, por lo que se mantiene la versión **2026-08-15.1**.
+
+### UX.4.6d R9 — consentimiento pendiente desde Fuentes
+
+Se aclara que Fuentes no es una vía alternativa para omitir el consentimiento. Cuando no existe aceptación vigente, abrir el documento desde esa sección muestra los controles de lectura y aceptación. Una vez aceptada la versión vigente, su consulta posterior no exige repetir la aceptación. Cerrar el documento con `×` o `Esc` sin aceptar no registra consentimiento ni habilita el uso de Simular.
+
+### Aclaración operativa UX.4.6d R18
+
+Cuando el usuario confirma datos extraídos de un documento, el navegador puede borrar visualmente la selección del archivo al recargar. La aplicación puede recordar en la sesión el nombre del documento y los datos ya confirmados para permitir su revisión posterior, sin conservar el archivo original ni su ruta local. Esta precisión no modifica el alcance material del tratamiento informado en la versión **2026-08-15.1**.
+
+
+### UX.4.6d R21 — consulta de fecha oficial
+
+La aplicación puede efectuar una consulta HTTPS mínima a infraestructura oficial de la CSS para obtener una fecha de referencia y advertir si una Ficha Digital corresponde a un mes anterior al actual. No se envían documentos ni información previsional en esa consulta. La infraestructura consultada puede recibir metadatos técnicos ordinarios de conexión, incluida la dirección IP. Si la fecha no puede verificarse externamente, la aplicación solicita al usuario revisar la vigencia en vez de confiar en el reloj local. Este cambio actualiza el texto material a la versión **2026-08-16.1** y requiere nueva aceptación.

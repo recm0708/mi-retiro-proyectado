@@ -62,3 +62,11 @@ El control de apariencia reemplaza el símbolo circular abstracto por SVG inline
 UX.4.6c queda cerrada después de la validación visual en PC/laptop de la Revisión 3. Se confirmaron la captura manual, el bloqueo por campo de datos importados, la revisión contextual del comprobante desde el Paso 2, las ayudas con icono `i` de un solo contorno, la obligatoriedad accesible y la navegación superior/inferior sincronizada.
 
 La suite completa de cierre alcanza **253 pruebas automatizadas en OK**. La revisión multidispositivo manual continúa diferida para beta/RC conforme al criterio vigente del proyecto.
+
+## Ajuste transversal R15
+
+Se corrige la limpieza del Paso 2: `Cotización futura` no conserva la selección Sí ni los valores 12/12 después de **Limpiar este paso**. La decisión vuelve a estar vacía y los supuestos permanecen deshabilitados hasta que el Asegurado(a) elija explícitamente continuar o no cotizando.
+
+### Nota R18 — procedencia de cuotas
+
+Las cuotas importadas muestran procedencia específica por campo. Un valor detectado/editado se mantiene bloqueado en Paso 2; un valor no detectado permanece editable. La clasificación de origen no sustituye el análisis de cuotas ni modifica sus fórmulas.

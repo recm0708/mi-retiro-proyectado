@@ -99,7 +99,7 @@ El consentimiento informado se presenta antes de la captura/importación. Su ver
 ## 10. Pendientes de seguridad y privacidad antes de beta pública
 
 - servir Bootstrap localmente para retirar la dependencia de CDN;
-- disponer de una acción siempre accesible **Borrar mi simulación**;
+- [x] disponer de controles accesibles para **Limpiar este paso**, **Reiniciar simulación** y borrar los datos locales de la aplicación;
 - formalizar procedimiento de incidentes/vulneraciones y registro de respuesta;
 - formalizar flujo de atención de derechos de acceso, rectificación, cancelación, oposición y portabilidad;
 - verificar que la configuración de producción no registre cuerpos de solicitudes, PDFs ni identificadores;
@@ -117,3 +117,46 @@ El consentimiento previo se presenta como un documento extenso y versionado. La 
 La protección de información importada se aplica por campo y no por pantalla completa. Un valor confirmado desde Mi Retiro Seguro queda de solo lectura en los pasos posteriores para evitar modificaciones accidentales fuera del flujo de revisión documental. Si el PDF no aporta un dato, ese control permanece habilitado para que el titular lo complete manualmente.
 
 La corrección de información documental vuelve a la vista previa del comprobante, de forma que exista una única vía explícita de edición. `origen_campos_cuotas` conserva únicamente metadata de procedencia en la sesión; no altera los datos enviados al motor ni agrega persistencia permanente.
+
+## 10. UX.4.6d — integridad documental en historial y Ficha Digital
+
+El Paso 3 extiende la regla de integridad por campo de UX.4.6c. Los datos confirmados desde Mi Retiro Seguro o Ficha Digital mantienen una marca temporal de procedencia y no se editan directamente en la pantalla principal. La ausencia de un dato en el documento no bloquea su captura manual.
+
+La Ficha Digital conserva el mismo límite de privacidad ya vigente: solo utiliza registros del año calendario actual. Desde UX.4.6d R3, un mes efectivamente detectado con salario/estado utilizable se incorpora como registro documental confirmado y su casilla de cuota queda marcada y bloqueada. La vista previa abre bloqueada y cualquier corrección de los demás campos requiere activar **Editar campos** antes de volver a importar.
+
+UX.4.6d no introduce cookies, telemetría, persistencia remota ni una nueva finalidad de tratamiento. La Revisión 6 sí amplía materialmente los controles disponibles para conservación y eliminación local, por lo que la versión del texto de privacidad se actualiza a **2026-08-15.1** y se solicita nuevamente aceptación. Los PDFs reales continúan fuera del repositorio y las pruebas usan datos sintéticos.
+
+### Integridad interpaso en R2
+
+R2/R3 establecieron inicialmente que la Ficha Digital no redefinía las cuotas del Paso 2. Desde R23, una ficha confirmada puede **ampliar** la referencia del año actual cuando aporta más cuotas documentales que la fotografía agregada previa, conservando las cuotas anteriores al año vigente y registrando la nueva procedencia. Una ficha con menos meses nunca reduce silenciosamente una referencia superior. Quitar la ficha no debe borrar arbitrariamente una referencia ya vigente.
+
+### Integridad visual y semántica de selección — UX.4.6d R5
+
+La corrección de casillas documentales no amplía la finalidad de tratamiento. Su objetivo es impedir que un dato confirmado aparezca visualmente desmarcado o se interprete como falso por una diferencia de estado de interfaz. Los meses manuales siguen siendo modificables únicamente cuando no proceden del documento.
+
+### Gestión local de datos — UX.4.6d R6
+
+El asistente incorpora tres niveles de borrado con alcances distintos. El borrado por paso invalida cualquier cálculo dependiente para impedir resultados obsoletos; el reinicio completo elimina toda la simulación sin borrar preferencias/aceptación; y el borrado desde Fuentes/Privacidad elimina además la constancia de aceptación y el tema visual. Ninguna acción borra indiscriminadamente todo el almacenamiento del dominio: solo las claves propiedad de Mi Retiro Proyectado.
+
+### Consulta posterior sin mutación — UX.4.6d R7
+
+La reapertura del documento legal desde Fuentes es una operación de lectura: no cambia la constancia de consentimiento, no elimina datos y no habilita tratamientos nuevos. El modal se comparte globalmente para evitar duplicación de contratos visibles. Cerrar la consulta solo oculta el modal; cerrar el consentimiento inicial sin aceptar conserva la frontera de privacidad y vuelve a Inicio.
+
+### Consentimiento desde Fuentes y cierre contextual — UX.4.6d R9
+
+Cuando no existe consentimiento vigente, Fuentes puede presentar el mismo documento en modo de consentimiento completo. La aceptación utiliza el mismo mecanismo y versión que Simular, por lo que no se duplica la manifestación. Cerrar con `×` o `Esc` sin aceptar no crea constancia de consentimiento. Si la solicitud se originó en Simular, el formulario permanece inaccesible; si se originó en Fuentes, el usuario puede continuar consultando esa sección sin que ello implique aceptación.
+
+Los ejemplos visibles en campos de identidad se mantienen sintéticos y genéricos para evitar reutilizar datos reales en la interfaz o documentación de prueba.
+
+## R15 — documento como concepto de UX, PDF como implementación actual
+
+La interfaz y el consentimiento describen **documentos importados** sin exigir al titular conocer la noción de “compatibilidad” del layout. Técnicamente, esta versión continúa aceptando y validando PDF digital mediante extensión/MIME/firma/límites y `pypdf`. Este cambio de redacción no amplía finalidades, categorías de datos ni persistencia y no modifica la versión jurídica vigente.
+
+## UX.4.6d R18 — recarga y nombre del documento
+
+Por seguridad del navegador, `input[type=file]` se vacía después de recargar y la aplicación no intenta reconstruirlo. Para no confundir al usuario, la sesión puede conservar el **nombre del documento** como metadata de presentación junto con los datos que ya fueron confirmados. No se persisten bytes, ruta local, copia del PDF ni contenido adicional fuera de los datos extraídos/revisados. No se incorpora telemetría ni almacenamiento remoto y se mantiene la versión de privacidad **2026-08-15.1**.
+
+
+## UX.4.6d R21 — verificación externa de fecha
+
+La vigencia de Ficha Digital ya no se decide con el reloj local. El backend realiza una solicitud HTTPS mínima a infraestructura oficial de la CSS para leer el encabezado `Date`; no adjunta documentos ni datos de la simulación. La conexión puede revelar metadatos técnicos normales, incluida la IP, al sitio oficial consultado. Si la verificación falla, el sistema adopta un estado conservador y solicita revisión en lugar de confiar en la hora local. Este cambio se informa en la versión de privacidad **2026-08-16.1**.

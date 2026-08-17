@@ -345,7 +345,7 @@ La comparación debe reutilizar los motores existentes, conservar un escenario b
 
 **RF-129.** El detalle debe admitir captura como total mensual o como primera/segunda quincena. En modo mensual el Asegurado(a) identifica si el salario es completo o parcial; en modo quincenal el estado se deriva de las quincenas disponibles.
 
-**RF-130.** Cada mes debe distinguir el salario disponible de la existencia de una cuota ya acreditada. La presencia de salario no puede implicar automáticamente que la cuota esté acreditada.
+**RF-130.** Cada mes debe distinguir salario, estado y cuota. En captura manual estos datos son independientes; cuando el mes procede de una Ficha Digital confirmada, UX.4.6d R3 fija la casilla de cuota como parte del registro documental y la protege contra edición directa.
 
 **RF-131.** El servicio del detalle debe calcular por separado salario total disponible y salario asociado a meses con cuota acreditada, además de identificar el último mes acreditado y el último mes con salario completo.
 
@@ -402,7 +402,7 @@ Quedan para fases posteriores:
 
 **RF-148.** La Ficha Digital debe extraer de la sección **Salarios del último año** únicamente los registros que pertenezcan al año calendario actual cuando el PDF contenga texto digital reconocible. La vista previa debe permitir corregir mes, salario y estado completo/parcial.
 
-**RF-149.** La Ficha Digital no puede inferir una cuota acreditada a partir de la presencia de salario. La vista previa debe pedir confirmación independiente de cada cuota y, al confirmar, puede prellenar `cuotas_anio_actual` con la cantidad de meses marcados.
+**RF-149.** La Ficha Digital debe marcar automáticamente como confirmados los meses detectados con salario/estado utilizables. La casilla de cuota de esos registros queda marcada y bloqueada; los meses ausentes permanecen disponibles para captura manual. La prohibición original de modificar `cuotas_anio_actual` queda **sustituida parcialmente por RF-332** para una ficha confirmada que aporte un conteo superior.
 
 **RF-150.** Los registros de la Ficha Digital del año actual pueden prellenar el detalle mensual del Paso 3. Los registros de años anteriores no se muestran, no se utilizan y no se conservan en el estado importado.
 
@@ -466,7 +466,7 @@ Quedan para fases posteriores:
 
 ## 23. UX.4.6b — Simular / Paso 1 · Datos personales
 
-**RF-169.** El Paso 1 debe permitir elegir entre **Ingresarlos manualmente** e **Importar desde PDF**. La captura manual es la modalidad predeterminada y ambas presentaciones deben ser mutuamente excluyentes.
+**RF-169.** El Paso 1 debe permitir elegir entre **Ingresarlos manualmente** e **Importar desde Mi Retiro Seguro**. La captura manual es la modalidad predeterminada y ambas presentaciones deben ser mutuamente excluyentes.
 
 **RF-170.** La identificación personal puede incluir primer nombre, segundo nombre, primer apellido, segundo apellido, apellido de casada, número de cédula y número de Seguro Social. Estos campos son opcionales y no pueden alterar las fórmulas previsionales.
 
@@ -552,3 +552,307 @@ Quedan para fases posteriores:
 **RF-206.** La sección del Paso 2 debe presentar tanto el total de cuotas acreditadas como las cuotas acreditadas del año actual. Cuando estas últimas provengan de un registro anual del comprobante, la edición confirmada debe mantenerse sincronizada con ese registro.
 
 **RF-207.** El disparador de ayuda contextual debe conservar una sola circunferencia visible alrededor del icono `i`; el área exterior de interacción no debe dibujar un segundo contorno.
+
+## UX.4.6d — requisitos del Paso 3 · Historial
+
+**RF-208.** El Paso 3 debe denominarse **Historial salarial y base para proyección** y organizarse en tres secciones internas: historial anual, detalle del año actual y base salarial.
+
+**RF-209.** Las barras comunes superior e inferior deben ser la única acción primaria del Paso 3; no se renderizarán botones internos equivalentes para analizar historial, validar detalle, analizar salario, retroceder o continuar.
+
+**RF-210.** `Analizar historial` debe validar el detalle del año actual cuando esté habilitado, el historial anual cuando el modo lo requiera y la base salarial. Si una sección falla, la interfaz debe dirigir la atención a esa sección y no habilitar el avance al Paso 4.
+
+**RF-211.** Cuando el Paso 3 quede completo, ambas barras deben cambiar a **Continuar a proyección** y permitir el acceso al Paso 4.
+
+**RF-212.** El historial anual no debe ofrecer una acción que complete automáticamente años vacíos con 12 cuotas. Un año sin información debe permanecer pendiente.
+
+**RF-213.** El período histórico debe usar el año de ingreso a la CSS como referencia cuando exista, permitir corregir el año inicial y tratar el año calendario actual como año final sin requerir una acción manual de regeneración.
+
+**RF-214.** La tabla histórica debe permitir filtrar Todos/Pendientes y representar cada fila como Pendiente, Parcial, Completo o Sin cotización según cuotas y salario disponibles.
+
+**RF-215.** Si una fila histórica empieza a completarse, cuotas y salario anual reportado deben validarse conjuntamente. Una fila totalmente vacía continúa representando un año pendiente.
+
+**RF-216.** Cuotas o salarios anuales confirmados desde Mi Retiro Seguro deben quedar de solo lectura por campo en el Paso 3. Un campo ausente del documento debe permanecer editable.
+
+**RF-217.** Desde el Paso 3, **Revisar importación** de Mi Retiro Seguro debe mostrar únicamente **Historial anual detectado (Paso 3)**; la revisión completa permanece exclusiva del Paso 1.
+
+**RF-218.** El cargador de Ficha Digital debe usar la misma secuencia de interacción documental establecida para Mi Retiro Seguro y no mostrar explicaciones técnicas sobre almacenamiento local dentro del formulario.
+
+**RF-219.** La vista previa de Ficha Digital debe abrir en modo revisión con controles bloqueados. `Editar campos` habilita cambios, `Finalizar edición` vuelve a bloquearlos e `Importar datos` aplica la revisión confirmada.
+
+**RF-220.** La Ficha Digital solo debe aportar datos del año calendario actual. Los meses/campos efectivamente importados quedan bloqueados en el detalle principal; meses o valores no disponibles permanecen editables.
+
+**RF-221.** El enlace **Abrir Mi Caja Digital** debe concentrarse en el bloque de Ficha Digital del Paso 3 y no duplicarse en el detalle del año actual.
+
+**RF-222.** Cuando la base salarial sea manual, monto y periodicidad son obligatorios. Cuando provenga de una opción automática válida, el monto se muestra de solo lectura y la periodicidad se fija como mensual.
+
+**RF-223.** El Paso 3 debe finalizar con un resumen unificado de cuotas de referencia, cuotas identificadas, diferencia, total salarial reportado y base mensual seleccionada.
+
+**RF-224.** Las plantillas del asistente no deben incluir paneles **Próximo paso...**; la navegación común es la única superficie que anticipa y ejecuta el avance.
+
+**RF-225.** Los estados de origen de historial y detalle reciente deben conservarse en metadata del frontend separada de los contratos de cálculo, con procedencia por año/campo o mes/campo según corresponda.
+
+**RF-226.** La regla original impedía a Ficha Digital modificar `cuotas_anio_actual`; desde R23 queda **sustituida parcialmente por RF-332 a RF-335**. Quitar una Ficha Digital no debe borrar arbitrariamente una referencia de cuotas vigente, y una ficha con menos meses no puede reducir Paso 2 de forma automática.
+
+**RF-227.** Si la cantidad de meses importados con cuota marcada difiere del total del Paso 2, la interfaz debe informar la diferencia y ofrecer revisar ambos valores sin sobrescribir el total agregado del Paso 2.
+
+**RF-228.** Cuando exista una Ficha Digital importada y el usuario desactive el detalle del año actual, la interfaz debe indicar que los salarios mensuales importados no se usarán mientras permanezca seleccionado el total anual del historial.
+
+**RF-229.** `¿Deseas detallar el año actual?` y `Forma de captura` deben mantener alineación superior consistente aunque una de las columnas muestre una nota de procedencia adicional.
+
+**RF-230.** Si el año actual tiene cuotas acreditadas pero el salario anual sigue pendiente y no proviene de una fuente confirmada, el campo debe mostrarse vacío en lugar de `0.00`; el mensaje de validación debe orientar a completar el total anual o activar la captura mensual/quincenal.
+
+**RF-231.** Una casilla que representa un estado derivado directamente de un documento confirmado debe quedar fijada y no puede desmarcarse desde la pantalla principal. Esta regla no se aplica a casillas que representan decisiones del usuario.
+
+**RF-232.** En Ficha Digital, todo mes detectado con salario y estado utilizables debe presentarse con **Cuota acreditada** marcada y bloqueada; los meses no detectados permanecen manuales.
+
+**RF-233.** Las filas con datos documentales confirmados deben distinguirse visualmente mediante un patrón común reutilizable en las tablas de los Pasos 1–6 y futuras vistas equivalentes.
+
+**RF-234.** En la vista previa de Mi Retiro Seguro, la casilla de inclusión en historial real debe quedar determinada por la clasificación del registro: `HISTORICO` marcado, cualquier otra clasificación no marcada; el usuario corrige la clasificación mediante **Editar campos**, no la casilla directamente.
+
+
+**RF-235.** Las filas que mezclen procedencia documental y captura manual deben usar una señal de origen basada en la paleta primaria, reservando verde para estados semánticos de éxito/completitud.
+
+**RF-236.** Toda casilla que represente un valor documental confirmado debe mostrarse marcada y bloqueada; su marca debe permanecer visible en Claro, Oscuro y Alto contraste.
+
+**RF-237.** No se añadirán casillas de selección a tablas que no requieran una decisión o estado booleano real; la procedencia de una fila se expresará mediante estilo, bloqueo de campos y metadatos accesibles.
+
+**RF-238.** En el detalle salarial del año actual, todo mes importado desde Ficha Digital con salario/estado utilizable debe mostrar **Cuota acreditada** seleccionada y bloqueada. La marca debe seguir visible en Claro, Oscuro y Alto contraste incluso si el navegador atenúa controles deshabilitados.
+
+**RF-239.** La lectura del detalle y de la vista previa debe interpretar una casilla con procedencia documental bloqueada como seleccionada, aunque una sesión antigua no conserve el estado nativo `checked`. Los meses sin procedencia documental continúan bajo captura manual.
+
+
+### UX.4.6d R6 — gestión de datos del asistente
+
+**RF-240.** La barra superior del asistente debe incluir un menú **Opciones** con acciones para limpiar el paso activo y reiniciar la simulación.
+
+**RF-241.** Limpiar un paso debe conservar los pasos anteriores y eliminar/inutilizar todos los datos y resultados del paso activo y posteriores.
+
+**RF-242.** Si el paso activo no contiene datos, la aplicación debe informar el estado sin abrir una confirmación destructiva innecesaria.
+
+**RF-243.** Reiniciar simulación debe crear un estado vacío en Paso 1 y conservar la preferencia visual y la aceptación vigente de privacidad.
+
+**RF-244.** Fuentes/Privacidad debe permitir borrar los datos locales de Mi Retiro Proyectado en el navegador, incluyendo simulación, consentimiento y apariencia.
+
+**RF-245.** Toda acción destructiva con datos debe requerir confirmación explícita y describir su alcance antes de ejecutarse.
+
+**RF-246.** La barra inferior no debe duplicar acciones destructivas; debe mantener únicamente navegación y acción principal del paso.
+
+**RF-247.** La versión vigente de Términos/Privacidad debe describir de forma comprensible las diferencias entre limpiar un paso, reiniciar la simulación y borrar los datos locales de la aplicación.
+
+### UX.4.6d R7 — consulta posterior de privacidad
+
+**RF-248.** El botón **Revisar términos de privacidad** de Fuentes debe abrir el documento legal en la misma página y no navegar a Simular.
+
+**RF-249.** La consulta posterior debe ocultar los controles de aceptación/rechazo, conservar la aceptación vigente y no solicitar una nueva aceptación por el solo hecho de revisar el texto.
+
+**RF-250.** El modal de Términos/Privacidad debe mostrar un control `×` en la esquina superior derecha. En modo revisión cierra el modal; en el consentimiento inicial debe impedir continuar sin aceptación y devolver a Inicio.
+
+**RF-251.** El modal y su controlador deben estar disponibles globalmente desde `base.html`, manteniendo una única instancia y evitando IDs o scripts duplicados en Simular.
+
+**RF-252.** El menú **Opciones** del asistente debe existir exclusivamente en la barra superior sticky; la barra inferior conserva solo atrás, selector de paso, estado y acción principal.
+
+### UX.4.6d — Revisión 8
+
+**RF-253.** El estado visual de una fila del historial anual debe recalcularse al modificar cuotas o salario y distinguir, como mínimo, pendiente, falta de salario, falta de cuotas, revisar, sin cotización, parcial y completo.
+
+**RF-254.** El filtro **Pendientes** debe usar la misma evaluación semántica de estado; una fila parcial válida o completa no debe aparecer como pendiente.
+
+**RF-255.** Cuando una tabla muestre cuatro o menos filas visibles, la interfaz debe evitar un scroll vertical artificial; las tablas extensas deben conservar desplazamiento interno. Este patrón será reutilizable por pasos y tablas futuras.
+
+**RF-256.** Después de analizar correctamente el historial anual, el Paso 3 debe mostrar de inmediato cuotas de referencia, cuotas identificadas, diferencia y total salarial reportado, aunque la base salarial todavía esté pendiente.
+
+**RF-257.** Todo control `input[type=file]` debe distinguir visualmente el botón **Seleccionar archivo** con un tratamiento coherente de la paleta primaria en Claro, Oscuro y Alto contraste.
+
+**RF-258.** Los mensajes contextuales de tablas no deben desplazar verticalmente un control respecto de las filas equivalentes; la orientación del último mes de Ficha Digital debe conservarse sin alterar la alineación de la columna de estado.
+
+### UX.4.6d — Revisión 9
+
+**RF-259.** El estado visual del historial debe actualizarse en tiempo real al modificar cuotas o salario, sin depender del orden de captura.
+
+**RF-260.** Con el filtro **Pendientes** activo, una fila que deje de ser pendiente debe ocultarse inmediatamente y el contador debe actualizarse sin cambiar manualmente de filtro.
+
+**RF-261.** Un contenedor tabular con pocas filas visibles no debe mostrar flechas, pista o thumb de desplazamiento vertical cuando no existe contenido que desplazar.
+
+**RF-262.** Si desde Fuentes se abren los términos sin existir consentimiento vigente, el modal debe permitir completar lectura y aceptación en esa misma página; dicha aceptación debe ser reconocida posteriormente por Simular.
+
+**RF-263.** La tecla `Esc` debe cerrar de forma contextual el modal de privacidad sin activar la animación de modal estático: en Fuentes/consulta simplemente cierra; en Simular sin aceptación no habilita el formulario.
+
+**RF-264.** Los placeholders de identidad y ejemplos de captura deben ser ficticios y genéricos, sin reutilizar información personal de casos reales.
+
+**RF-265.** Toda tabla visible de la aplicación debe utilizar el contrato `app-table-shell` o un componente equivalente que preserve borde, radio, superficie y adaptación temática comunes.
+
+**RF-266.** Las tablas generadas dinámicamente por JavaScript deben adoptar el mismo contrato visual que las tablas renderizadas por plantilla.
+
+**RF-267.** Claro, Oscuro y Alto contraste deben conservar geometría tabular equivalente; Alto contraste debe reforzar el borde sin depender de sombras.
+
+**RF-268.** Los contenedores tabulares comunes deben participar en la detección accesible de desplazamiento horizontal y recibir foco únicamente cuando exista desbordamiento real.
+
+**RF-269.** Reactividad de filas, filtros de pendientes, estados progresivos y bloqueo de casillas importadas deben reutilizarse en tablas futuras solo cuando el dato representado tenga la misma semántica funcional.
+
+**RF-270.** Una nueva tabla no debe introducir radios, bordes o paletas ad hoc si puede reutilizar `app-table-shell` y los tokens visuales del sistema.
+
+
+
+### UX.4.6d — Revisión 11
+
+**RF-271.** Toda tabla con scroll interno y contrato `app-table-shell` debe mantener carril y thumb visualmente dentro de la geometría redondeada; en navegadores Chromium no deben aparecer botones/flechas que invadan las esquinas.
+
+**RF-272.** La representación del scrollbar debe conservar contraste suficiente en Claro, Oscuro y Alto contraste sin modificar las dimensiones ni el significado funcional de la tabla.
+
+**RF-273.** En todo importador PDF, **Seleccionar archivo** y **Analizar documento** deben compartir la misma altura exterior y alineación vertical.
+
+**RF-274.** Las reglas RF-271 a RF-273 deben reutilizarse por componentes comunes en tablas e importadores futuros, evitando estilos locales que vuelvan a introducir asimetrías.
+
+### UX.4.6d — Revisión 12
+
+**RF-275.** Términos, modales, página y superficies tabulares desplazables deben compartir un scrollbar temático coherente con Claro, Oscuro y Alto contraste sin alterar el mecanismo nativo de desplazamiento.
+
+**RF-276.** Cuando Chromium/Windows exponga botones o flechas del scrollbar, el estilo común debe suprimirlos para evitar que sobresalgan de la geometría del componente.
+
+**RF-277.** `app-table-shell` debe usar un radio específico menor que las tarjetas y conservar bordes/encabezados simétricos en los tres temas.
+
+**RF-278.** Si el filtro **Pendientes** del historial anual tiene cero filas visibles, la tabla y sus encabezados deben ocultarse y mostrarse un estado vacío accesible.
+
+**RF-279.** El botón **Seleccionar archivo** debe conservar su tratamiento visual al pasar el puntero por el nombre del archivo; el hover diferenciado se aplica únicamente sobre el botón de selección.
+
+**RF-280.** Comparador y las tablas posteriores que usan el contrato común deben conservar `app-table-shell`; las reglas funcionales específicas solo se añaden cuando su semántica lo requiera.
+
+
+### UX.4.6d — Revisión 13
+
+**RF-281.** Todo `input[type=file]` debe mantener el color, fondo y borde definidos por la paleta de la aplicación aunque el puntero esté sobre el nombre del archivo y el navegador active `:hover` sobre el control completo.
+
+**RF-282.** El comportamiento anterior debe conservarse en Claro, Oscuro y Alto contraste y en estados de foco; no debe depender de soporte específico para hover sobre `::file-selector-button`.
+
+
+### UX.4.6d — Revisión 14
+
+**RF-283.** La modalidad manual del Paso 1 debe presentar los campos de identidad y previsión dentro de un único bloque visible denominado **Información personal**, evitando dos secciones que obliguen a recorrer el formulario para completar datos relacionados.
+
+**RF-284.** El control **Sexo** debe aparecer antes de **Apellido de casada** y ambos deben compartir la misma zona lógica del formulario; al seleccionar Femenino, Apellido de casada debe mostrarse inmediatamente y continuar siendo opcional.
+
+**RF-285.** La reorganización visual del Paso 1 no debe modificar obligatoriedad, procedencia, contratos de importación de Mi Retiro Seguro ni fórmulas previsionales.
+
+### UX.4.6d — Revisión 15
+
+**RF-286.** Todo campo de formulario no editable debe diferenciarse perceptiblemente de uno editable en Claro, Oscuro y Alto contraste mediante un contrato visual común.
+
+**RF-287.** La diferenciación de RF-286 no debe depender solo del color y debe aplicarse a controles importados, calculados o deshabilitados cuando compartan la misma semántica de no edición.
+
+**RF-288.** Los encabezados y ayudas de importación deben identificar la fuente/documento y no denominar la modalidad por el formato PDF; la validación técnica del formato actual permanece independiente.
+
+**RF-289.** Ficha Digital y Mi Retiro Seguro deben reutilizar el mismo lenguaje de selección y análisis de documento.
+
+**RF-290.** Al limpiar Paso 2, `continua_cotizando`, `cuotas_esperadas_cierre_anio` y `cuotas_esperadas_por_anio` deben volver al estado vacío y no reaparecer por valores predeterminados de plantilla.
+
+**RF-291.** Una simulación nueva no debe presumir continuidad futura; los supuestos de 12 cuotas pueden sugerirse únicamente después de que el usuario seleccione explícitamente que continuará cotizando.
+
+### UX.4.6d — Revisión 16
+
+**RF-292.** Al analizar Paso 3, si `resumen_cuotas` no existe pero los controles de Paso 2 continúan completos, la aplicación debe revalidar cuotas automáticamente sin cambiar el paso visible.
+
+**RF-293.** Si los datos de Paso 2 están incompletos, Paso 3 debe conservar todos sus datos y mostrar una indicación contextual; no debe navegar automáticamente hacia atrás.
+
+**RF-294.** Al restaurar una simulación, un `paso_actual` que ya no cumpla sus prerrequisitos debe reducirse al último paso accesible.
+
+**RF-295.** Ficha Digital debe renderizarse dentro de **Detalle salarial del año actual**, después de sus controles de modalidad y antes de la tabla mensual.
+
+**RF-296.** La reorganización de R16 no puede modificar parser, fórmulas, motores previsionales ni el significado de los datos importados/bloqueados.
+
+
+### UX.4.6d — Revisión 17
+
+**RF-297.** Un checkbox documental bloqueado debe conservar su valor booleano real; solo un control `checked` puede mostrar el gancho de selección.
+
+**RF-298.** En la vista previa del historial, `HISTORICO` se propone para historial real; `HISTORICO_PROYECTADO` y `PROYECTADO` deben permanecer sin seleccionar por defecto aunque sus controles estén bloqueados.
+
+**RF-299.** Si el comprobante contiene un total de cuotas acumuladas superior a las cuotas históricas/acreditadas por incluir proyección, la interfaz debe explicar ambas cifras y Paso 2 debe conservar la acreditada.
+
+**RF-300.** Si el historial detectado contiene años anteriores a la fecha de ingreso CSS del mismo documento, la aplicación debe conservar los registros y mostrar una advertencia revisable.
+
+**RF-301.** Los campos modificados dentro de **Editar campos** deben conservar metadata de edición y no presentarse posteriormente como si hubieran sido detectados literalmente.
+
+**RF-302.** La incoherencia entre cuotas mensuales identificadas y cuotas del año actual debe mostrar ambos valores y explicar la diferencia entre salario disponible y cuota acreditada.
+
+**RF-303.** R17 no modifica fórmulas, motores previsionales ni la separación entre historial real y proyección; corrige trazabilidad y comunicación de datos.
+
+### UX.4.6d — Revisión 18
+
+**RF-304.** Los campos que mezclen importación y captura manual deben poder representar **Detectado**, **Editado por ti**, **Completado manualmente** y **No detectado** mediante un contrato común reutilizable.
+
+**RF-305.** Un campo no detectado por un documento no puede quedar bloqueado únicamente porque la importación esté confirmada; debe continuar editable hasta que el usuario lo complete o lo confirme desde la revisión.
+
+**RF-306.** La procedencia debe conservarse por campo cuando sea posible; entrar en modo edición sin modificar un control no debe convertirlo en “Editado por ti”.
+
+**RF-307.** Después de F5/Ctrl+F5, una importación confirmada debe conservar sus datos, acciones de revisión/eliminación y una identificación visual del documento, aunque el `input[type=file]` nativo aparezca vacío.
+
+**RF-308.** La aplicación no debe intentar restaurar programáticamente el archivo seleccionado ni almacenar su ruta local; solo puede conservar metadata necesaria para la continuidad visual.
+
+**RF-309.** Ficha Digital y el detalle del año actual deben distinguir registros detectados/editados de períodos completados manualmente o todavía no detectados.
+
+**RF-310.** Limpiar un paso debe eliminar también la metadata de procedencia/edición perteneciente a ese paso y a los posteriores que se invaliden.
+
+
+### UX.4.6d — Revisión 19
+
+**RF-311.** Cuando el detalle del año actual esté habilitado, la fila anual del año vigente debe derivar automáticamente su número de cuotas de las casillas **Cuota acreditada** del detalle.
+
+**RF-312.** El salario anual del año vigente debe ser la suma de los salarios correspondientes a meses con cuota acreditada; salarios conocidos sin cuota marcada permanecen disponibles para análisis reciente pero no se suman al historial acreditado.
+
+**RF-313.** La fila anual derivada debe actualizarse reactivamente al escribir salarios, completar quincenas o cambiar una casilla manual, y debe mostrar `Parcial` mientras el año tenga entre 1 y 11 cuotas con salario coherente.
+
+**RF-314.** Cambiar manualmente una casilla de cuota del año actual debe actualizar `cuotas_anio_actual` y `cuotas_totales` del Paso 2 conservando las cuotas anteriores al año vigente, sin navegación automática hacia atrás.
+
+**RF-315.** Las cuotas actualizadas desde el detalle deben conservar procedencia de edición del usuario, invalidar resúmenes dependientes y ser revalidadas por los servicios existentes antes de permitir continuar.
+
+**RF-316.** Si una cuota marcada carece de salario, la sincronización anual no debe presentar un total parcial como válido; la fila debe continuar pendiente y el servicio mensual debe rechazar el análisis hasta completar el salario.
+
+
+### UX.4.6d — Revisión 20
+
+**RF-317.** El importador de Ficha Digital debe evaluar el último período detectado frente al mes actual antes de abrir la vista previa.
+
+**RF-318.** Se considerará reciente una Ficha Digital cuyo último período corresponda al mes actual o a uno de los dos meses calendario anteriores; períodos más antiguos deben generar una advertencia de vigencia.
+
+**RF-319.** La advertencia de vigencia no debe bloquear la importación: debe ofrecer **Seleccionar una ficha más reciente** y **Continuar con esta ficha**.
+
+**RF-320.** Una importación de Ficha Digital confirmada debe mostrar su último período detectado también después de F5; si deja de cumplir la ventana de vigencia, debe mostrarse una advertencia no destructiva sin volver a pedir el archivo.
+
+**RF-321.** El Paso 3 debe mostrar un resumen visible de `resumen_detalle_anio_actual` con cuotas identificadas, salarios disponible/acreditado, meses con información/completos, últimos períodos y promedios utilizados por las bases automáticas; el resumen debe ocultarse al invalidar el detalle.
+
+
+### UX.4.6d — Revisión 21
+
+**RF-322.** Toda Ficha Digital cuyo último período detectado sea anterior al mes actual verificado debe mostrar advertencia de vigencia; no existe tolerancia automática de uno o dos meses.
+
+**RF-323.** La decisión de vigencia no puede depender del reloj del navegador ni de una fecha local manipulable del equipo.
+
+**RF-324.** El backend debe intentar obtener una fecha de referencia por HTTPS desde infraestructura oficial de la CSS sin enviar datos de simulación.
+
+**RF-325.** Si no se puede verificar una fecha externa, la aplicación debe mostrar una advertencia conservadora y permitir escoger otra ficha o continuar; no debe clasificar la ficha como reciente por fallback local.
+
+**RF-326.** La metadata de fecha de referencia debe persistir junto con la importación y revalidarse al restaurar una Ficha Digital confirmada.
+
+**RF-327.** El parser de Ficha Digital no debe depender de `date.today()` para escoger el año de los registros cuando la llamada no suministre un año explícito; debe usar el año más reciente detectado en el documento.
+
+**RF-328.** Antes de validar el detalle del año actual, la aplicación debe reconciliar con Paso 2 una confirmación manual de cuota vigente cuando esa confirmación sea la fuente más reciente.
+
+**RF-329.** Si la reconciliación modifica las cuotas de Paso 2, el resumen de cuotas debe revalidarse automáticamente sin abandonar Paso 3.
+
+**RF-330.** Si después de la reconciliación las cuotas del detalle no coinciden con Paso 2, debe mostrarse un error visible que indique ambos conteos y explique que los salarios conocidos pueden conservarse aunque una cuota no esté acreditada.
+
+**RF-331.** El resumen visible del detalle del año actual debe conservar las métricas necesarias para diferenciar salario disponible/acreditado, información completa/parcial y las bases automáticas soportadas.
+
+
+
+### UX.4.6d — Revisión 23
+
+**RF-332.** Si una Ficha Digital confirmada identifica más cuotas acreditadas del año actual que Paso 2, la aplicación debe actualizar `cuotas_anio_actual` al nuevo conteo y recalcular `cuotas_totales` conservando las cuotas previas al año vigente.
+
+**RF-333.** La actualización documental de RF-332 debe revalidar el resumen de Cuotas en segundo plano sin navegar hacia atrás y debe informar al usuario del cambio aplicado.
+
+**RF-334.** Una Ficha Digital con menos cuotas que la referencia vigente del Paso 2 no debe reducirla automáticamente; debe conservarse la cifra superior y mostrarse una advertencia de coherencia.
+
+**RF-335.** La reconciliación defensiva de **Analizar historial** debe reconocer tanto cuotas manuales confirmadas como cuotas documentales bloqueadas de una Ficha Digital cuando estas amplían la referencia del Paso 2.
+
+**RF-336.** Al sincronizar cuotas desde el detalle, `detalle_anio_actual.cuotas_anio_actual_referencia` debe actualizarse junto con Paso 2 para que F5/restauración no reintroduzca una referencia obsoleta.

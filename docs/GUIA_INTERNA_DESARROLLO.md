@@ -322,3 +322,172 @@ Cuando Dependabot proponga un cambio Python, revisar primero si corresponde a un
 - No crear un modal nuevo para cada etapa.
 - Si un dato resumen también vive dentro de una tabla importada —como las cuotas del año actual— sincronizar ambos controles antes de confirmar.
 - El control `.context-help-trigger` no debe dibujar borde; `.context-help-icon` conserva el único círculo visible.
+
+## UX.4.6d — reglas de mantenimiento del Paso 3
+
+- No agregar acciones internas de Analizar/Continuar que dupliquen las barras comunes.
+- No inferir 12 cuotas para años vacíos ni completar masivamente datos desconocidos.
+- Los campos importados se bloquean por procedencia; la ausencia de origen debe dejar el control disponible cuando funcionalmente corresponda.
+- Mi Retiro Seguro se revisa desde Paso 3 únicamente en su bloque de historial anual.
+- Ficha Digital usa el patrón Seleccionar → Analizar → Revisar → Editar opcionalmente → Importar y limita su contrato al año actual.
+- El detalle del año actual no debe duplicar el enlace a Mi Caja Digital ni afirmar que la importación ocurre desde Paso 1.
+- Una base salarial automática se presenta como valor derivado de solo lectura; una base manual requiere monto y periodicidad.
+- No reintroducir paneles `Próximo paso...`; la navegación común ya comunica la continuidad.
+- Cualquier cambio a estas reglas debe actualizar pruebas UX.4.6d, especificación, ADR, arquitectura, modelo/seguridad cuando corresponda y el documento específico de fase.
+
+### Regla de mantenimiento R2 para Ficha Digital
+
+- Ficha Digital nunca debe escribir `simulacion.cuotas.cuotas_anio_actual` ni borrar `origen_campos_cuotas.cuotas_anio_actual`.
+- El total del Paso 2 se pasa al detalle únicamente como referencia de coherencia.
+- No se deben seleccionar automáticamente meses acreditados a partir de un total anual/mensual agregado.
+- Si el detalle del año actual se desactiva, los salarios de Ficha Digital quedan fuera del cálculo hasta que el usuario lo reactive o complete el total anual.
+
+### Regla de procedencia en tablas (UX.4.6d R4)
+
+Cuando una tabla mezcle datos documentales y captura manual:
+
+1. registrar procedencia por campo/registro;
+2. aplicar `data-row-imported` a filas con información confirmada y `data-row-manual` a filas sin procedencia documental;
+3. bloquear controles importados, incluidas casillas cuyo estado derive del documento;
+4. mantener editables únicamente campos/filas que el documento no aporte;
+5. no aplicar este bloqueo a casillas que expresen una decisión del usuario.
+
+
+- No usar `--app-success-*` para señalar que un dato fue importado; éxito/completitud y procedencia son conceptos diferentes.
+- Para procedencia documental usar `data-row-imported` con tokens primarios/seleccionados.
+- Una casilla documental debe tener `checked`, `disabled` y `data-imported-locked="true"`; los estilos deben conservar visible el gancho en los tres temas.
+- No crear checkboxes solo para indicar procedencia en tablas que no contienen un dato booleano real.
+
+### Checkboxes importados — regla de mantenimiento UX.4.6d R5
+
+- No depender exclusivamente de `:checked` para representar un checkbox documental deshabilitado.
+- Mantener `checked=true`, `aria-checked=true` y `data-imported-locked=true`.
+- La lectura debe considerar `data-imported-locked=true` como selección confirmada.
+- No aplicar esta regla a checkboxes que representen decisiones manuales del usuario.
+
+### Regla de limpieza e invalidación — UX.4.6d R6
+
+- Nunca borrar solo el DOM: la fuente de verdad es el estado temporal de la simulación.
+- Una limpieza parcial debe invalidar todos los resultados descendentes.
+- **Reiniciar simulación** no debe borrar tema ni consentimiento.
+- **Borrar datos de esta aplicación en este navegador** solo debe eliminar claves propiedad del proyecto; no usar `storage.clear()`.
+- Cualquier nueva etapa futura debe incorporarse a la jerarquía de dependencias y a las regresiones de gestión de datos.
+- Los textos legales deben actualizarse si cambia materialmente conservación, finalidad, terceros o controles del titular.
+
+### Modal de privacidad en dos modos
+
+- Incluir `partials/privacidad_consentimiento.html` una sola vez desde `base.html`.
+- Cargar `privacidad.js` globalmente una sola vez.
+- Usar `data-privacy-action="review"` para abrir el texto en modo consulta.
+- Nunca navegar a `/simulacion?privacidad=1` desde Fuentes como mecanismo normal de revisión.
+- En modo revisión no escribir consentimiento ni mostrar checkbox/botones de aceptar.
+- Mantener `Opciones` únicamente en la navegación superior sticky.
+
+### Estados tabulares y scroll adaptativo — UX.4.6d R8
+
+- Una tabla editable por etapas debe recalcular su estado cuando cambie cualquiera de los campos que lo determinan.
+- El filtro de pendientes debe reutilizar el mismo evaluador, no implementar una segunda interpretación.
+- `table-scroll-compact` se usa para retirar desplazamiento vertical cuando hay pocas filas visibles; no se elimina el scroll de tablas extensas.
+- Los mensajes de ayuda por fila no deben aumentar solo una celda y desalinear el resto de la tabla; preferir `title`, ayuda contextual o un mensaje común fuera de la fila.
+- Todo selector de archivo nuevo debe ser un `input[type=file].form-control` y heredar el tratamiento visual global.
+
+### Reactividad de tablas y ejemplos públicos — UX.4.6d R9
+
+- Las tablas con filas generadas dinámicamente deben preferir delegación de `input`/`change` en un contenedor estable cuando el estado dependa de la captura en tiempo real.
+- Un filtro derivado del estado debe reaplicarse en la misma transición; no debe requerir que el usuario salga y vuelva a entrar al filtro.
+- Si una tabla no requiere desplazamiento vertical, no se debe mantener un carril/scrollbar decorativo.
+- Los placeholders públicos deben ser sintéticos, breves y genéricos; no reutilizar datos de usuarios, PDFs reales ni capturas de validación.
+
+### Superficie tabular común — UX.4.6d R10
+
+- Toda tabla nueva debe vivir dentro de `.app-table-shell`.
+- Si la tabla se construye por JavaScript, asignar la clase al wrapper en el mismo momento de crearlo.
+- No duplicar radios, bordes o colores de encabezado por paso salvo que exista una necesidad funcional documentada.
+- `table-scroll-compact` se usa únicamente cuando un contenedor con límite vertical deja de necesitar scroll por tener pocas filas visibles.
+- `data-row-imported` / `data-row-manual`, filtros reactivos y estados progresivos se aplican solo a tablas cuya semántica lo justifique.
+- Revisar siempre Claro, Oscuro y Alto contraste; Alto contraste debe conservar borde fuerte y no depender de sombra/color tenue para separar la tabla.
+
+
+
+### Scrollbar contenido y carga PDF simétrica — UX.4.6d R11
+
+- No estilizar scrollbars de tablas por paso: el contrato vive en `.app-table-shell`.
+- Mantener ocultos `::-webkit-scrollbar-button`; las esquinas deben quedar libres mediante margen del track y fondo transparente.
+- Si una tabla corta activa `table-scroll-compact`, no forzar un scrollbar decorativo mediante estilos locales.
+- Los tres temas deben conservar el mismo ancho/radio de scroll; solo cambia la paleta.
+- Los importadores deben reutilizar `.official-import-upload-file .official-import-file-input` y `.official-import-upload-action .btn` con una altura exterior común.
+
+### Scroll global y filtros vacíos — UX.4.6d R12
+
+- No añadir CSS de scrollbar aislado a una nueva pantalla. Extender el contrato común solo si aparece un nuevo tipo real de superficie desplazable.
+- Mantener scroll nativo; no sustituirlo por una implementación JavaScript salvo una necesidad de accesibilidad comprobada.
+- Las tablas usan `--app-radius-md`; las tarjetas pueden utilizar `--app-radius-lg` o superior.
+- Un filtro de tabla con cero resultados debe valorar un estado vacío antes de dejar encabezados sin registros.
+- Para `input[type=file]`, no usar `input:hover::file-selector-button` para un cambio de color que se active desde el nombre del archivo; el hover debe estar asociado al pseudo-elemento del botón.
+- Verificar siempre Claro, Oscuro y Alto contraste después de modificar scroll, bordes o estados vacíos.
+
+
+### Selector de archivo y hover — UX.4.6d R13
+
+Para cargadores futuros, reutilizar el contrato global de `input[type=file].form-control`. No añadir reglas locales que cambien el botón mediante `input:hover::file-selector-button`; Bootstrap/Chromium puede activar ese estado al pasar por el texto del archivo. Mantener la paleta interna estable y usar borde/foco del input para feedback interactivo.
+
+
+### Formulario personal del Paso 1 — UX.4.6d R14
+
+- Mantener una sola sección visible **Información personal** para la captura manual; no reintroducir encabezados paralelos de identificación/previsión salvo que exista una necesidad funcional nueva.
+- Mantener **Sexo** y **Apellido de casada** en la misma zona lógica. El campo condicional se muestra únicamente para Femenino y nunca se vuelve obligatorio.
+- No cambiar IDs (`sexo`, `apellido_casada`, nombres, cédula, NSS, fechas o `sistema`) por razones puramente de layout, porque importación, estado y validaciones dependen de ese contrato.
+
+### R15 — controles bloqueados y documentos
+
+Usar los tokens `--app-field-locked-*` para controles no editables. No definir un gris particular por paso. En copy de importación, preferir **documento/comprobante/fuente**; reservar “PDF” para mensajes técnicos que realmente expliquen una limitación de formato o validación. Al crear un reset, comprobar tanto `sessionStorage` como defaults HTML/JS para garantizar que el formulario no repueble valores borrados.
+
+## Regla de flujo para dependencias entre pasos — R16
+
+Antes de redirigir a un paso anterior, distinguir entre **dato faltante** y **resultado derivado invalidado**. Si los datos fuente siguen completos, recalcular el derivado en segundo plano y conservar el paso actual. Solo una entrada realmente incompleta debe exigir revisión del paso anterior, y esa revisión no se debe ejecutar mediante navegación automática sorpresiva.
+
+Las importaciones deben colocarse junto al bloque que alimentan. Ficha Digital es fuente del detalle mensual del año actual, por lo que su componente precede a esa tabla dentro de la misma subsección.
+
+
+### Checklist R17 para importadores
+
+1. Verificar por separado procedencia, editabilidad y valor booleano.
+2. No dibujar checkmarks a partir de una marca `imported/locked`.
+3. Conservar metadata de campos que el usuario haya editado durante la revisión.
+4. Mostrar diferencias internas de la fuente como advertencias, no como correcciones automáticas.
+5. Cuando existan cifras acreditadas y proyectadas en el mismo documento, nombrarlas explícitamente y no mezclarlas.
+
+## Patrón de procedencia R18
+
+Para campos mixtos usar los helpers comunes de procedencia y evitar textos ad hoc. Un origen importado bloquea únicamente cuando corresponde a un valor detectado/confirmado; `NO_DETECTADO` permanece editable. En tablas extensas puede comunicarse la procedencia mediante badge/metadata por registro o por campo según la granularidad real.
+
+Los file inputs nunca se restauran con JavaScript. La continuidad tras F5 se implementa restaurando el modelo confirmado y mostrando `Importación vigente: <nombre>` cuando exista metadata.
+
+
+## Regla de desarrollo R19 — evitar doble captura del año actual
+
+Si una pantalla mensual/quincenal alimenta un total anual, no deben existir dos fuentes editables para el mismo dato. En Paso 3, la fila del año vigente es derivada y de solo lectura cuando el detalle está activo. Los eventos de salario actualizan la vista anual; los cambios manuales de casilla de cuota actualizan además la referencia agregada de Paso 2 y obligan a invalidar/revalidar dependencias.
+
+No sumar salarios de meses sin cuota al historial acreditado. Sí conservarlos como salario disponible para bases recientes. Mantener pruebas separadas para: mes con salario sin cuota, mes con cuota sin salario y seis meses acreditados completos.
+
+
+## Regla de desarrollo R20 — vigencia de documentos periódicos
+
+Cuando un documento represente una fotografía periódica, evaluar su vigencia usando un período realmente extraído del contenido. No inferir actualidad por fecha del archivo, nombre o fecha de carga. La advertencia debe ser no bloqueante salvo que exista una regla normativa específica que exija lo contrario.
+
+Para Ficha Digital, la tolerancia UX es mes actual + dos meses calendario anteriores. Si cambia esta regla, actualizar regresiones, ADR y especificación. El resumen visible del detalle debe consumir exclusivamente el resumen backend ya validado y ocultarse ante cualquier invalidación.
+
+
+## Regla temporal para importadores — R21
+
+No introduzcas lógica de vigencia con el reloj del cliente. Usa la metadata `fecha_referencia`, `fecha_referencia_confiable` y `fuente_fecha_referencia` suministrada por backend. Los fallos de red deben producir `FECHA_NO_VERIFICADA`, no un fallback invisible a la fecha local. Las pruebas unitarias deben mockear `app.servicios.fecha_referencia._consultar_fecha_http`.
+
+### Fallos de validación con scroll/foco
+
+No usar `scrollIntoView()` como única señal de error. Toda rama que devuelva `false` en una acción principal debe dejar un mensaje visible o una validación nativa inequívoca. Para dependencias entre pasos, reconciliar primero el estado derivable y revalidar sin navegación regresiva antes de pedir intervención manual.
+
+
+
+### Ficha Digital y referencia agregada de cuotas — R23
+
+Al modificar el flujo de Ficha Digital, no asumir que Paso 2 es inmutable. Si una ficha confirmada aporta más meses con cuota acreditada que la referencia agregada, debe actualizarse hacia arriba sin retroceder de paso y conservando las cuotas previas al año actual. Si aporta menos, conservar Paso 2 y mostrar incoherencia. No duplicar esta lógica en nuevas pantallas: reutilizar la reconciliación del detalle y mantener actualizada `cuotas_anio_actual_referencia`.

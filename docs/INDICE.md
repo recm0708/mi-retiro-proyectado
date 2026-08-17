@@ -34,6 +34,8 @@ Este archivo es el punto de entrada para la documentación técnica, funcional y
 | [GUIA_INTERNA_DESARROLLO.md](GUIA_INTERNA_DESARROLLO.md) | Convenciones internas de marca, terminología, tipografía y contenido no visible. |
 | [UX_4_6A_REDISENO_VISUAL.md](UX_4_6A_REDISENO_VISUAL.md) | Cierre del rediseño visual integral, nueva página de Inicio y criterio de validación UX.4.6a. |
 | [UX_4_6B_PASO1_DATOS_PERSONALES.md](UX_4_6B_PASO1_DATOS_PERSONALES.md) | Implementación y revisión del Paso 1, consentimiento, importación y navegación común. |
+| [UX_4_6C_PASO2_CUOTAS.md](UX_4_6C_PASO2_CUOTAS.md) | Cierre del Paso 2, cuotas acreditadas, supuestos futuros e importación contextual. |
+| [UX_4_6D_PASO3_HISTORIAL.md](UX_4_6D_PASO3_HISTORIAL.md) | Revisión del Paso 3, historial anual, Ficha Digital, detalle reciente y base salarial. |
 
 ## 3. Archivos normativos versionados
 
@@ -74,3 +76,34 @@ La aplicación expone `/metodologia` como versión navegable de la metodología 
 ## UX.4.6c — Paso 2
 
 - [UX.4.6c — Simular / Paso 2 · Cuotas](UX_4_6C_PASO2_CUOTAS.md)
+
+## UX.4.6d — Paso 3
+
+- [UX.4.6d — Simular / Paso 3 · Historial](UX_4_6D_PASO3_HISTORIAL.md) — Revisión 16 en validación manual; Paso 1 certificado, Paso 2 en recorrido y Paso 3 con Ficha Digital integrada y dependencias no regresivas
+
+- [Gestión de datos de la simulación](GESTION_DATOS_SIMULACION.md) — limpieza por paso, reinicio completo y borrado local integral
+
+### R15 de UX.4.6d
+
+La documentación de Paso 1, Paso 2, arquitectura, privacidad y validación incorpora el contrato visual de campos bloqueados, terminología documental neutral y limpieza semántica de cotización futura.
+
+### R16 de UX.4.6d
+
+- Revalidación silenciosa de cuotas cuando Paso 3 solo perdió un resultado derivado.
+- Restauración al último paso realmente accesible.
+- Ficha Digital integrada dentro de Detalle salarial del año actual y antes de su tabla mensual.
+
+
+- **UX.4.6d R17:** auditoría de trazabilidad documental en Pasos 1–3: checkboxes bloqueados vs. seleccionados, cuotas acreditadas vs. proyectadas, advertencias de coherencia del comprobante y procedencia de campos editados. Véase `UX_4_6D_PASO3_HISTORIAL.md`, `DECISIONES.md` (ADR-136 a ADR-140) y `VALIDACION.md`.
+
+### Actualización UX.4.6d R18
+- `UX_4_6D_PASO3_HISTORIAL.md`: procedencia transversal y persistencia visual de importaciones.
+- `GESTION_DATOS_SIMULACION.md`: alcance de `nombre_archivo_origen` en estado local.
+- `SEGURIDAD_PRIVACIDAD.md` / `POLITICA_PRIVACIDAD.md`: aclaración de que el nombre del documento puede persistir temporalmente, pero no el archivo.
+
+- **Fecha de referencia y vigencia de Ficha Digital:** `ARQUITECTURA.md` (UX.4.6d R21), `SEGURIDAD_PRIVACIDAD.md`, `UX_4_6D_PASO3_HISTORIAL.md`.
+
+- **UX.4.6d R22:** cierre robusto del Paso 3, reconciliación de cuotas y mensajes de validación accionables. Véanse `DECISIONES.md` ADR-152 a ADR-154, `ESPECIFICACION_FUNCIONAL.md` RF-328 a RF-331 y `UX_4_6D_PASO3_HISTORIAL.md`.
+
+
+- **UX.4.6d R23:** Ficha Digital más reciente puede ampliar la referencia de cuotas del año actual sin navegación regresiva; nunca la reduce silenciosamente. Véanse `DECISIONES.md` ADR-155–156, `ESPECIFICACION_FUNCIONAL.md` RF-332–336 y `UX_4_6D_PASO3_HISTORIAL.md`.
