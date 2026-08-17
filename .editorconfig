@@ -18,8 +18,8 @@ indent_size = 2
 indent_size = 2
 
 [*.md]
-# Se permite espacio final cuando se usa intencionalmente para salto de línea Markdown.
-trim_trailing_whitespace = false
+indent_size = 4
+trim_trailing_whitespace = true
 
 [Makefile]
 indent_style = tab
