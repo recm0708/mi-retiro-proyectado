@@ -11,6 +11,8 @@ Este documento ofrece un mapa cronológico legible de la evolución del proyecto
 
 Las versiones `0.0.1-beta` a `0.0.21-beta` fueron asignadas retrospectivamente durante GOV.1.1. Sirven para agrupar estados reales del repositorio, pero no fueron tags publicados en sus fechas originales.
 
+La migración criptográfica posterior permite materializarlas como tags retrospectivos firmados sin cambiar los commits ni la semántica histórica.
+
 `0.0.22-beta` es la primera versión formal adoptada deliberadamente bajo `VERSIONING.md`.
 
 ## 2. Cronología retrospectiva
@@ -81,7 +83,15 @@ Tag formal asociado:
 v0.0.23-beta
 ```
 
-## 5. Bitácoras UX preservadas
+## 5. Migración criptográfica Git — preparada
+
+Después del cierre de `0.0.23-beta` se adoptó firma SSH para nuevos commits y tags.
+
+Los tags retrospectivos conservan fecha real de materialización y describen por separado la fecha histórica del hito. `v0.0.22-beta` y `v0.0.23-beta` conservan sus commits objetivo; solo sus objetos tag sin firma pueden sustituirse una vez.
+
+Consultar `MIGRACION_FIRMAS_GIT_2026-08-17.md`.
+
+## 6. Bitácoras UX preservadas
 
 La evolución detallada de UX.4.6 se conserva en:
 
@@ -92,7 +102,7 @@ La evolución detallada de UX.4.6 se conserva en:
 
 Es normal que estos documentos contengan estados intermedios contradictorios con el estado final: esa contradicción forma parte de la secuencia histórica.
 
-## 6. Programa GOV.1
+## 7. Programa GOV.1
 
 - GOV.1.1 — reconstrucción histórica;
 - GOV.1.2 — gobierno y versionado;
@@ -105,7 +115,7 @@ Es normal que estos documentos contengan estados intermedios contradictorios con
 
 Los hitos posteriores a `0.0.23-beta` se incorporarán a este registro únicamente cuando se cierren formalmente.
 
-## 7. Fuentes de auditoría
+## 8. Fuentes de auditoría
 
 Orden recomendado:
 

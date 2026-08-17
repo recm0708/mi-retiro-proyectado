@@ -3,8 +3,9 @@
 **Estado:** Vigente
 **Versión de aplicación revisada:** `0.0.23-beta`
 **Revisión documental:** GOV.1.3 R4 — 2026-08-17
+**Última actualización de gobierno:** Firma Git / ADR-159 — 2026-08-17
 **Clasificación:** Técnica / Gobierno / Auditoría
-**ADR indexadas:** 158 (`ADR-001` a `ADR-158`)
+**ADR indexadas:** 159 (`ADR-001` a `ADR-159`)
 
 Este registro conserva decisiones de arquitectura, modelado, UX, precisión, seguridad y aplicación normativa. Una ADR explica por qué el proyecto adoptó una decisión; no crea una norma jurídica.
 
@@ -186,7 +187,8 @@ R4 **no inventa un estado retroactivo** para esas decisiones. El índice las mar
 | ADR-155 | Una Ficha Digital confirmada puede ampliar la referencia agregada del año actual | Aceptada para UX.4.6d R23. Sustituye parcialmente ADR-101 para discrepancias documentales al alza. |
 | ADR-156 | Una Ficha Digital nunca reduce silenciosamente una referencia superior de Paso 2 | Aceptada para UX.4.6d R23. |
 | ADR-157 | VERSION es la fuente canónica de versión de aplicación | vigente. |
-| ADR-158 | Reconstrucción histórica sin tags retroactivos | vigente. |
+| ADR-158 | Reconstrucción histórica sin tags retroactivos | Parcialmente sustituida por ADR-159 para la materialización criptográfica de tags. |
+| ADR-159 | Firma SSH obligatoria y materialización controlada de tags históricos | vigente. |
 
 ## 4. Registro íntegro de ADR
 
@@ -1610,7 +1612,7 @@ Los placeholders públicos no reutilizan nombres, apellidos, identificadores o i
 
 ## ADR-158 — Reconstrucción histórica sin tags retroactivos
 
-**Estado:** vigente.
+**Estado:** Parcialmente sustituida por ADR-159 para la materialización criptográfica de tags.
 **Fecha:** 2026-08-17.
 
 **Decisión:** los 80 commits previos a GOV.1.2 se agrupan documentalmente en `0.0.1-beta` a `0.0.21-beta`. No se reescribe Git ni se crean tags retrospectivos que aparenten haber existido en esas fechas. `0.0.22-beta` es la primera versión formal adoptada conscientemente bajo `VERSIONING.md`.
@@ -1618,3 +1620,16 @@ Los placeholders públicos no reutilizan nombres, apellidos, identificadores o i
 **Motivo:** preservar la evidencia primaria de Git y, al mismo tiempo, ofrecer a revisores y auditores una cronología legible.
 
 **Consecuencia:** `RELEASES.md` distingue explícitamente versiones retrospectivas de versiones formales y clasifica el antiguo `0.1.0` como marcador histórico de desarrollo no publicado.
+
+## ADR-159 — Firma SSH obligatoria y materialización controlada de tags históricos
+
+**Estado:** vigente.
+**Fecha:** 2026-08-17.
+
+**Decisión:** a partir del primer commit posterior a `v0.0.23-beta`, los commits nuevos del mantenedor y todos los tags formales nuevos se firman criptográficamente con SSH. La clave pública autorizada se versiona en `.github/allowed_signers`; la clave privada permanece fuera del repositorio.
+
+Se autoriza además una migración histórica controlada: `v0.0.1-beta` a `v0.0.21-beta` se materializan como tags retrospectivos firmados que apuntan a los commits de cierre reconstruidos, conservando la fecha real de creación del tag y declarando por separado la fecha histórica del hito. `v0.0.22-beta` y `v0.0.23-beta`, originalmente publicados como tags anotados sin firma, pueden reemitirse una sola vez como objetos tag firmados **sin cambiar sus commits objetivo**.
+
+**Motivo:** añadir autenticidad criptográfica y una cadena verificable de releases sin reescribir commits históricos, sin falsificar fechas y sin ocultar que los primeros 21 tags fueron materializados posteriormente.
+
+**Consecuencia:** ADR-158 sigue vigente en su prohibición de reescribir Git o aparentar existencia histórica de los tags, pero queda parcialmente sustituida respecto de no crear ningún tag retrospectivo. Después de completar esta migración vuelve a regir la inmutabilidad estricta.

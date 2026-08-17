@@ -1,7 +1,7 @@
 # Roadmap
 
 **Estado:** vigente
-**Versión de aplicación:** `0.0.22-beta`
+**Versión de aplicación:** `0.0.23-beta`
 **Fecha de revisión:** 2026-08-17
 
 Este roadmap describe **estado actual y trabajo futuro**. La evolución detallada ya completada se conserva en `RELEASES.md`, `CHANGELOG.md` y `docs/historico/`.
@@ -32,6 +32,18 @@ Este roadmap describe **estado actual y trabajo futuro**. La evolución detallad
   - [x] R3 — normativa, seguridad y privacidad documental;
   - [x] R4 — capa de auditoría documental y controles de consistencia;
   - versión de cierre: `0.0.23-beta`.
+
+- [ ] **Prebloque transversal — Firma e integridad Git/GitHub**
+  - [x] respaldo completo previo a la migración;
+  - [x] clave SSH Ed25519 dedicada y verificación local;
+  - [x] política de firma, allowed signers, ADR y workflow preparados;
+  - [ ] primer commit nuevo firmado y verificado por GitHub;
+  - [ ] materialización firmada de `v0.0.1-beta` a `v0.0.21-beta`;
+  - [ ] reemisión firmada única de `v0.0.22-beta` y `v0.0.23-beta`;
+  - [ ] auditoría 23/23 tags;
+  - [ ] ruleset de tags;
+  - [ ] protección/ruleset de `main`;
+  - [ ] revisión de configuración GitHub y PR de Dependabot.
 
 - [ ] **GOV.1.4 — Observabilidad y Developer Diagnostics**
   - modo exclusivo de desarrollo;

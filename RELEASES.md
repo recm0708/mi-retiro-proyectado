@@ -5,7 +5,7 @@
 
 ## 1. Naturaleza del registro
 
-Las versiones `0.0.1-beta` a `0.0.21-beta` fueron asignadas retrospectivamente en GOV.1.1 para organizar estados funcionales que ya existían en Git. No fueron tags ni GitHub Releases publicados en sus fechas originales.
+Las versiones `0.0.1-beta` a `0.0.21-beta` fueron asignadas retrospectivamente en GOV.1.1 para organizar estados funcionales que ya existían en Git. No fueron tags ni GitHub Releases publicados en sus fechas originales. La migración criptográfica del 2026-08-17 autoriza materializarlas posteriormente como tags firmados, conservando explícitamente esa naturaleza retrospectiva.
 
 Git conserva la evidencia primaria: hashes, fechas, autores, mensajes y contenido. Este documento añade una clasificación legible sin reescribir esa evidencia.
 
@@ -93,7 +93,13 @@ v0.0.23-beta
 
 El tag se publica únicamente sobre el commit de cierre después de confirmar CI remota verde, conforme a `docs/PROCESO_RELEASE.md`.
 
-## 5. Próxima línea pública prevista
+## 5. Migración criptográfica de tags — preparada
+
+La migración no reescribe commits; materializará `v0.0.1-beta` a `v0.0.21-beta` como tags retrospectivos firmados y reemitirá una sola vez `v0.0.22-beta` y `v0.0.23-beta` sin cambiar sus commits objetivo.
+
+El cierre se registrará solo después de verificar 23/23 tags.
+
+## 6. Próxima línea pública prevista
 
 La primera beta pública objetivo mantiene la familia:
 

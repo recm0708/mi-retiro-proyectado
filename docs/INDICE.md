@@ -21,6 +21,8 @@ Este archivo es el punto de entrada para la documentación técnica, funcional, 
 - [`../CHANGELOG.md`](../CHANGELOG.md) — cambios notables por versión.
 - [`../CONTRIBUTING.md`](../CONTRIBUTING.md) — flujo de contribución.
 - [`../.github/CODEOWNERS`](../.github/CODEOWNERS) — responsables de revisión.
+- [`MIGRACION_FIRMAS_GIT_2026-08-17.md`](MIGRACION_FIRMAS_GIT_2026-08-17.md) — firma SSH y migración histórica controlada.
+- [`../.github/allowed_signers`](../.github/allowed_signers) — claves públicas autorizadas.
 
 ## 3. Arquitectura
 
@@ -77,6 +79,7 @@ GOV.1.3 R3 consolidó este bloque como contrato documental vigente. La revisión
 - [`VALIDACION.md`](VALIDACION.md) — estrategia y evidencias.
 - [`../tests/casos_validacion/README.md`](../tests/casos_validacion/README.md) — reglas de casos sintéticos/anonimizados.
 - `.github/workflows/ci.yml` — CI.
+- `.github/workflows/verificar-tags.yml` — verificación criptográfica de tags.
 - `.github/dependabot.yml` — mantenimiento de dependencias.
 
 ## 11. Desarrollo y contribución

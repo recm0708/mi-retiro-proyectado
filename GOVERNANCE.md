@@ -1,7 +1,7 @@
 # Gobierno del proyecto
 
-**Proyecto:** Mi Retiro Proyectado  
-**Estado:** vigente desde GOV.1.2  
+**Proyecto:** Mi Retiro Proyectado
+**Estado:** vigente desde GOV.1.2
 **Fecha:** 2026-08-17
 
 ## 1. Propósito
@@ -86,9 +86,16 @@ python -m unittest discover -s tests -q
 git diff --check
 ```
 
-Para JavaScript modificado se valida además `node --check` sobre los archivos correspondientes o sobre todo `app/static/js`.
+Para JavaScript modificado se valida además `node --check`.
 
-La CI remota debe permanecer en verde para los cambios que lleguen a `main`.
+Desde la migración criptográfica del 2026-08-17, todo commit nuevo debe incorporar **firma criptográfica SSH**. Antes del push se verifica con:
+
+```powershell
+git verify-commit HEAD
+git log --show-signature -1
+```
+
+La CI remota debe permanecer en verde. La protección de `main` y los rulesets de tags se activarán después de completar la migración histórica.
 
 ## 7. Versiones y tags
 
@@ -96,8 +103,10 @@ La política aplicable está en `VERSIONING.md`.
 
 - `VERSION` es la fuente canónica.
 - Los tags formales empiezan con `v`.
-- No existen releases ni tags históricos previos a GOV.1.2.
-- Las versiones `0.0.1-beta` a `0.0.21-beta` son una reconstrucción documental, no tags retroactivos.
+- `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas documentalmente y pueden materializarse posteriormente como tags retrospectivos firmados sin aparentar existencia histórica.
+- `v0.0.22-beta` y `v0.0.23-beta` pueden reemitirse una sola vez como objetos firmados sin cambiar sus commits objetivo.
+- Después de la migración, todo commit nuevo y todo tag nuevo deben estar firmados.
+- La clave privada nunca se versiona.
 
 ## 8. Propiedad y revisión de áreas críticas
 

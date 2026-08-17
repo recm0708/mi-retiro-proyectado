@@ -213,20 +213,29 @@ git diff --cached --stat
 git diff --cached --check
 ```
 
-No confirmar un commit si `git diff --cached --check` informa errores que no hayan sido revisados y justificados.
+La configuración del mantenedor debe mantener `gpg.format=ssh`, `commit.gpgSign=true` y `tag.gpgSign=true`.
+
+Después de crear un commit:
+
+```powershell
+git verify-commit HEAD
+git log --show-signature -1
+```
+
+No confirmar cambios si la firma exigida no puede verificarse.
 
 ## 15. Cierre y publicación
 
-Un hito formal solo se etiqueta cuando:
+Un hito formal solo se etiqueta cuando validaciones, documentación, `VERSION`, changelog/release y CI están correctos y el commit de cierre firmado ya existe.
 
-- las validaciones requeridas están en verde;
-- la documentación coincide con el código;
-- el árbol de trabajo está limpio;
-- `VERSION` corresponde al release;
-- el changelog/release está actualizado;
-- el commit de cierre ya existe.
+El tag se crea y verifica firmado:
 
-Los tags publicados no se mueven para ocultar cambios posteriores.
+```powershell
+git tag -s vX.Y.Z -m "Mi Retiro Proyectado vX.Y.Z"
+git tag -v vX.Y.Z
+```
+
+Los tags publicados no se mueven salvo la excepción histórica única documentada en `docs/MIGRACION_FIRMAS_GIT_2026-08-17.md`.
 
 ## 16. Gobierno
 

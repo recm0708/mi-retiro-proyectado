@@ -1,7 +1,7 @@
 # Política de versionado
 
-**Proyecto:** Mi Retiro Proyectado  
-**Estado:** vigente desde GOV.1.2  
+**Proyecto:** Mi Retiro Proyectado
+**Estado:** vigente desde GOV.1.2
 **Fecha de adopción:** 2026-08-17
 
 ## 1. Objetivo
@@ -57,11 +57,11 @@ GOV.1.1 reconstruyó retrospectivamente 21 estados anteriores:
 0.0.1-beta ... 0.0.21-beta
 ```
 
-La reconstrucción se basa en los 80 commits reales existentes hasta `7941f58` y no modifica autores, fechas, hashes ni mensajes de Git.
+La reconstrucción se basa en los 80 commits reales existentes hasta `7941f58` y **no reescribe commits históricos**, autores, fechas, hashes o mensajes.
 
-Estas versiones históricas son **etiquetas documentales retrospectivas**. No se crearán tags retroactivos que aparenten haber existido en sus fechas originales.
+Durante la migración criptográfica del 2026-08-17 se autoriza materializar esos estados como **tags retrospectivos firmados**. Esos tags apuntan al commit de cierre ya documentado, conservan su fecha real de creación, declaran en el mensaje la fecha histórica del hito y **no existieron como tags en sus fechas históricas**.
 
-El antiguo valor `0.1.0`, presente desde el commit raíz, se clasifica como **marcador histórico de versión de desarrollo no publicado**, no como release formal.
+El antiguo valor `0.1.0` continúa clasificado como marcador histórico de desarrollo no publicado.
 
 ## 5. Primera versión formal bajo esta política
 
@@ -77,14 +77,19 @@ A partir de este punto, cada versión formal cerrada debe poder relacionarse con
 
 ## 6. Tags
 
-Los tags formales usan el prefijo `v`:
+Los tags formales usan el prefijo `v`.
 
-```text
-v0.0.22-beta
-v0.1.0-beta.1
-```
+Después de la adopción de firma SSH:
 
-Los tags se crean **después** del commit de cierre y de la validación del árbol limpio. No se mueve ni reutiliza un tag publicado para apuntar a otro commit.
+- **Todo commit nuevo** del mantenedor debe estar firmado;
+- **Todo tag formal nuevo** debe estar firmado;
+- se usa `git tag -s`;
+- se verifica con `git tag -v`;
+- `.github/allowed_signers` contiene las claves públicas autorizadas.
+
+La migración del 2026-08-17 crea `v0.0.1-beta` a `v0.0.21-beta` retrospectivamente sin falsear fechas y reemite una sola vez `v0.0.22-beta` y `v0.0.23-beta` manteniendo exactamente los mismos commits objetivo.
+
+Después de esa migración, los tags publicados vuelven a ser inmutables.
 
 ## 7. Diferencia entre versiones
 
@@ -111,7 +116,9 @@ Si la respuesta es sí, se asigna el siguiente número aplicable. Durante GOV.1 
 ## 9. Prohibiciones
 
 - No hardcodear la versión visible fuera de la fuente canónica.
-- No crear releases o tags con una versión distinta de `VERSION`.
+- No reescribir commits históricos para añadir firmas.
+- No falsear fechas de creación de tags retrospectivos.
+- No presentar un tag retrospectivo como si hubiera sido publicado en la fecha histórica.
 - No modificar tags publicados para ocultar cambios posteriores.
-- No reescribir el historial Git para simular versiones antiguas.
-- No usar la versión de la aplicación como sustituto de la versión normativa o jurídica.
+- La única sustitución autorizada es la reemisión firmada de `v0.0.22-beta` y `v0.0.23-beta` documentada en `docs/MIGRACION_FIRMAS_GIT_2026-08-17.md`.
+- No usar la versión de aplicación como sustituto de la versión normativa o jurídica.

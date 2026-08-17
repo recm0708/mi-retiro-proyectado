@@ -63,16 +63,15 @@ Después del incremento:
 
 ## 6. Commit de cierre
 
-El cierre de versión debe quedar en uno o más commits lógicos.
-
-Después:
+El cierre de versión debe quedar en uno o más commits lógicos **firmados**.
 
 ```powershell
+git verify-commit HEAD
+git log --show-signature -1
 git status
-git log --oneline --decorate
 ```
 
-El árbol debe quedar limpio.
+El árbol debe quedar limpio y la firma debe verificarse.
 
 ## 7. Push y CI remota
 
@@ -90,24 +89,30 @@ Confirmar:
 
 ## 8. Tag formal
 
-Solo después de validar el commit de cierre y confirmar CI remota verde se crea el tag anotado:
+Solo después de confirmar CI remota verde se crea el **tag anotado y firmado**:
 
 ```powershell
-git tag -a vX.Y.Z -m "Mi Retiro Proyectado vX.Y.Z"
+git tag -s vX.Y.Z -m "Mi Retiro Proyectado vX.Y.Z"
+git tag -v vX.Y.Z
 git push origin vX.Y.Z
 ```
 
-El tag debe corresponder a `VERSION`.
+El tag debe apuntar al commit validado y usar una clave de `.github/allowed_signers`.
+
+`.github/workflows/verificar-tags.yml` permite verificar tags futuros y auditar manualmente toda la colección.
 
 ## 9. Inmutabilidad
 
-Un tag publicado:
+Después de la migración criptográfica del 2026-08-17, un tag publicado:
 
 - no se mueve;
 - no se reutiliza;
+- no se elimina para ocultar historia;
 - no se fuerza para ocultar una corrección posterior.
 
-Una corrección posterior recibe un nuevo commit y, si corresponde, una nueva versión.
+La única excepción autorizada es la reemisión firmada de `v0.0.22-beta` y `v0.0.23-beta`, preservando sus commits objetivo y documentando los objetos originales.
+
+Una corrección posterior recibe un nuevo commit y, si corresponde, nueva versión.
 
 ## 10. GitHub Release
 

@@ -6,7 +6,14 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ## [Unreleased]
 
-Sin cambios pendientes registrados.
+### Gobierno e integridad Git
+
+- adoptada firma SSH Ed25519 para commits y tags nuevos;
+- añadido registro público de firmantes autorizados;
+- preparada migración controlada de `v0.0.1-beta` a `v0.0.23-beta`;
+- documentada la reemisión única de `v0.0.22-beta` y `v0.0.23-beta` sin cambiar sus commits objetivo;
+- añadido workflow de verificación de firmas de tags;
+- añadidas regresiones de política de firma y trazabilidad histórica.
 
 ## [0.0.23-beta] — 2026-08-17
 
