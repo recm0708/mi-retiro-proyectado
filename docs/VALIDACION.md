@@ -1159,3 +1159,40 @@ Recorrido manual final validado:
 6. **Analizar historial → Continuar a proyección → Paso 4** sin volver a Paso 2.
 
 La matriz multidispositivo ampliada continúa diferida a beta/RC y no reabre UX.4.6d salvo regresión objetiva.
+
+## Validación GOV.1.2 — Gobierno y versionado
+
+**Fecha:** 2026-08-17.
+**Versión:** `0.0.22-beta`.
+
+La adopción de gobierno y versionado se validó sobre la suite completa después de centralizar la versión y crear los documentos de control.
+
+Resultados verificados:
+
+```text
+python -m compileall app
+OK
+
+node --check app/static/js/*.js
+OK
+
+python -m unittest discover -s tests -q
+Ran 403 tests
+OK
+
+VERSION
+0.0.22-beta
+
+APP_VERSION
+0.0.22-beta
+
+FastAPI
+0.0.22-beta
+
+Footer
+v0.0.22-beta
+```
+
+`git diff --check` detectó inicialmente dos espacios finales en los estados de ADR-157 y ADR-158; se corrigieron antes del cierre. La validación final exige `git diff --check` sin salida.
+
+Las siete regresiones nuevas de `tests/test_gov12_versionado.py` protegen la fuente canónica `VERSION`, la ausencia del antiguo hardcode `0.1.0` en `config.py`, la versión de FastAPI, el footer, la existencia de documentos de gobierno, la reconstrucción histórica y CODEOWNERS.

@@ -12,7 +12,7 @@ La aplicación sigue una arquitectura web local con separación explícita entre
 4. **Resultados auditables:** los motores exponen valores intermedios, factores, advertencias y fuentes.
 5. **Datos faltantes explícitos:** un parámetro oficial ausente produce un resultado pendiente, no una estimación inventada.
 6. **Privacidad por defecto:** la sesión del asistente se conserva temporalmente en el navegador; no se persiste automáticamente información personal.
-7. **Identidad centralizada:** nombre, descripción pública, autoría y enlace a Mi Caja Digital se definen en `app/core/config.py`, separados de la normativa previsional.
+7. **Identidad y versión centralizadas:** nombre, descripción pública, autoría y enlace a Mi Caja Digital se definen en `app/core/config.py`; la versión de aplicación procede exclusivamente de `VERSION` mediante `app/core/version.py`. Ambos contratos permanecen separados de la normativa previsional.
 
 ## 2. Estructura del repositorio
 
@@ -67,6 +67,10 @@ normativa/
 tests/
 docs/
 data/
+VERSION
+VERSIONING.md
+GOVERNANCE.md
+RELEASES.md
 ```
 
 ## 3. Capas de la aplicación

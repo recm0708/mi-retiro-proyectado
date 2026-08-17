@@ -18,7 +18,7 @@ El desarrollo actual cubre las reglas generales implementadas para estos sistema
 
 ## 2. Estado actual del desarrollo
 
-La próxima versión `0.1.0` continúa en desarrollo. El asistente de seis pasos y los tres motores principales están implementados y validados con pruebas automatizadas y casos manuales.
+La versión formal de desarrollo es `0.0.22-beta`, primera versión adoptada bajo la política de GOV.1.2. Las versiones `0.0.1-beta` a `0.0.21-beta` documentan retrospectivamente los hitos anteriores; la primera beta pública objetivo permanece en la línea `0.1.0-beta.1`. El asistente de seis pasos y los tres motores principales están implementados y validados con pruebas automatizadas y casos manuales.
 
 | Área | Estado |
 |---|---|
@@ -52,7 +52,7 @@ La próxima versión `0.1.0` continúa en desarrollo. El asistente de seis pasos
 | UX.4.6c — Simular / Paso 2 · Cuotas | Cerrada y validada en PC/laptop; 253 pruebas automatizadas en OK |
 | UX.4.6d — Simular / Paso 3 · Historial | Cerrada y validada en PC/laptop; R23 sincroniza Ficha Digital, Cuotas e historial sin navegación regresiva |
 
-La suite actual contiene **396 pruebas automatizadas**. UX.3 protege responsive y la separación entre evaluación y último mes acreditado; UX.4.1–UX.4.3 cubren semántica del wizard, ayudas contextuales, validación accesible, estados seleccionados, recuperación de foco y estabilidad del `MutationObserver`; UX.4.4 añade la edad anual, un detalle opcional del año actual que separa salario disponible, cuota acreditada y períodos parciales, bases salariales recientes y una importación revisable de documentos oficiales. La Ficha Digital conserva únicamente salarios del año calendario actual y las vistas previas monetarias usan separador de miles con dos decimales.
+La suite actual contiene **403 pruebas automatizadas**. UX.3 protege responsive y la separación entre evaluación y último mes acreditado; UX.4.1–UX.4.3 cubren semántica del wizard, ayudas contextuales, validación accesible, estados seleccionados, recuperación de foco y estabilidad del `MutationObserver`; UX.4.4 añade la edad anual, un detalle opcional del año actual que separa salario disponible, cuota acreditada y períodos parciales, bases salariales recientes y una importación revisable de documentos oficiales. La Ficha Digital conserva únicamente salarios del año calendario actual y las vistas previas monetarias usan separador de miles con dos decimales.
 
 ## Hardening previo a beta
 

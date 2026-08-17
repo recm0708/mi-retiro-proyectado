@@ -1416,3 +1416,25 @@ Los placeholders públicos no reutilizan nombres, apellidos, identificadores o i
 **Decisión:** la sincronización automática desde Ficha Digital es monotónica: puede aumentar `cuotas_anio_actual`, pero si la ficha tiene menos cuotas que Paso 2 se conserva la referencia superior y se muestra una advertencia para revisar/completar los meses. Una reducción solo puede provenir de una decisión explícita del usuario dentro de un detalle que ya sea la fuente vigente.
 
 **Motivo:** una ficha anterior, parcial o incompleta no debe borrar cuotas que otra fuente más reciente o una confirmación previa ya reconoce.
+
+## ADR-157 — VERSION es la fuente canónica de versión de aplicación
+
+**Estado:** vigente.
+**Fecha:** 2026-08-17.
+
+**Decisión:** la versión de aplicación se declara en el archivo raíz `VERSION`. `app/core/version.py` es el único adaptador Python autorizado para leerla y `app/core/config.py` importa `APP_VERSION` desde ese módulo. FastAPI y Jinja2 continúan recibiendo el mismo valor sin copias literales.
+
+**Motivo:** eliminar divergencias entre API, footer, documentación y releases y permitir validaciones automáticas de coherencia.
+
+**Consecuencia:** un cambio de versión requiere modificar `VERSION` y actualizar los documentos de release afectados; no se hardcodea la versión en plantillas, JavaScript o motores.
+
+## ADR-158 — Reconstrucción histórica sin tags retroactivos
+
+**Estado:** vigente.
+**Fecha:** 2026-08-17.
+
+**Decisión:** los 80 commits previos a GOV.1.2 se agrupan documentalmente en `0.0.1-beta` a `0.0.21-beta`. No se reescribe Git ni se crean tags retrospectivos que aparenten haber existido en esas fechas. `0.0.22-beta` es la primera versión formal adoptada conscientemente bajo `VERSIONING.md`.
+
+**Motivo:** preservar la evidencia primaria de Git y, al mismo tiempo, ofrecer a revisores y auditores una cronología legible.
+
+**Consecuencia:** `RELEASES.md` distingue explícitamente versiones retrospectivas de versiones formales y clasifica el antiguo `0.1.0` como marcador histórico de desarrollo no publicado.

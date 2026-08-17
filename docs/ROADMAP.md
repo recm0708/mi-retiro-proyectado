@@ -4,6 +4,21 @@ Este roadmap refleja el estado funcional actual del proyecto. Las secciones hist
 
 [Índice de documentación](INDICE.md) · [Normativa](NORMATIVA.md) · [Fuentes oficiales](FUENTES_NORMATIVAS.md)
 
+## Programa GOV.1 — Auditoría, Gobierno y Trazabilidad Pre-Beta
+
+**Estado:** en ejecución antes de UX.4.6e.
+
+- [x] GOV.1.1 — inventario del repositorio y reconstrucción de 80 commits en 21 hitos retrospectivos (`0.0.1-beta` a `0.0.21-beta`).
+- [x] GOV.1.2 — gobierno, política de versionado, `VERSION`, `RELEASES.md` y `.github/CODEOWNERS`; primera versión formal `0.0.22-beta`.
+- [ ] GOV.1.3 — reorganización y alineación integral de toda la documentación.
+- [ ] GOV.1.4 — observabilidad, Developer Diagnostics y auditoría operacional.
+- [ ] GOV.1.5 — seguridad, privacidad y transparencia.
+- [ ] GOV.1.6 — controles GitHub, plantillas y auditoría automática.
+- [ ] GOV.1.7 — decisión y adopción de licencia.
+- [ ] GOV.1.8 — auditoría final, release y cierre pre-beta de gobierno.
+
+UX.4.6e permanece congelada hasta completar GOV.1.
+
 ## 1. Fase 1 — Base técnica
 
 **Estado:** completada.
@@ -255,7 +270,7 @@ Previsto:
 
 Estado técnico actual; la validación manual multidispositivo queda aplazada y las revisiones inmediatas se realizan en laptop/PC:
 
-- **396 pruebas automatizadas** en `OK`;
+- **403 pruebas automatizadas** en `OK`;
 - regresión SEBD real anonimizada;
 - casos sintéticos de Mixto;
 - casos sintéticos SUCGS;

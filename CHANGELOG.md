@@ -1,3 +1,12 @@
+### GOV.1.2 — Gobierno y versionado
+
+- Se adopta `0.0.22-beta` como primera versión formal bajo una política explícita.
+- `VERSION` pasa a ser la fuente canónica consumida por `app/core/version.py`, FastAPI y el footer.
+- Se documentan 21 estados retrospectivos (`0.0.1-beta` a `0.0.21-beta`) sobre los 80 commits previos, sin crear tags retroactivos.
+- Se incorporan `GOVERNANCE.md`, `VERSIONING.md`, `RELEASES.md` y `.github/CODEOWNERS`.
+- La licencia permanece deliberadamente pendiente hasta GOV.1.7.
+- Se añaden regresiones específicas para impedir divergencias entre versión canónica, configuración, API e interfaz.
+- Validación técnica de GOV.1.2: compilación Python, sintaxis JavaScript, `git diff --check`, versión canónica/API/footer y **403 pruebas automatizadas en OK**.
 
 ### Cierre final UX.4.6d
 

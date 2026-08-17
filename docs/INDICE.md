@@ -46,8 +46,12 @@ Este archivo es el punto de entrada para la documentación técnica, funcional y
 | [`normativa/mixto.json`](../normativa/mixto.json) | Componente BD, CAP, transición, devolución y garantías del Mixto. |
 | [`normativa/sucgs.json`](../normativa/sucgs.json) | Tabla actuarial, capa solidaria y garantía de reemplazo SUCGS. |
 
-## 4. Documentos de colaboración y control de cambios
+## 4. Gobierno, versionado, colaboración y control de cambios
 
+- [GOVERNANCE.md](../GOVERNANCE.md) — gobierno, responsabilidades, revisión y decisiones del proyecto.
+- [VERSIONING.md](../VERSIONING.md) — política formal de versiones, fuente canónica y tags.
+- [RELEASES.md](../RELEASES.md) — reconstrucción histórica y versiones formales desde GOV.1.2.
+- [`VERSION`](../VERSION) — versión canónica de la aplicación.
 - [CONTRIBUTING.md](../CONTRIBUTING.md) — reglas para cambios, pruebas, commits y normativa.
 - [CHANGELOG.md](../CHANGELOG.md) — cambios acumulados para la próxima versión.
 - [Casos de validación](../tests/casos_validacion/README.md) — reglas para almacenar pruebas anonimizadas.

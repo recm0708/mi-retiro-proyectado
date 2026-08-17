@@ -40,6 +40,15 @@ chore: actualizar configuración del repositorio
 
 Cuando un avance afecta funcionalidad, pruebas y documentación, se recomienda mantener commits separados por tipo cuando resulte práctico.
 
+### 3.1. Versionado y releases
+
+- `VERSION` es la única fuente canónica de la versión de aplicación.
+- No se debe escribir una versión independiente en `config.py`, plantillas o JavaScript.
+- Todo incremento debe seguir [`VERSIONING.md`](VERSIONING.md).
+- Los tags formales se crean después del commit de cierre y usan prefijo `v`.
+- Las versiones históricas `0.0.1-beta` a `0.0.21-beta` son reconstrucciones documentales y no deben materializarse como tags retroactivos.
+- La política de gobierno general se encuentra en [`GOVERNANCE.md`](GOVERNANCE.md).
+
 ## 4. Flujo recomendado de staging
 
 Evitar `git add .` como hábito cuando hay cambios heterogéneos. Revisar y agrupar:
