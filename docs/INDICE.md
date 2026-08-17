@@ -92,6 +92,7 @@ No se crean contratos de logging antes de implementar y validar su comportamient
 - [`REGISTRO_CAMBIOS_HISTORICO.md`](REGISTRO_CAMBIOS_HISTORICO.md) — mapa cronológico.
 - [`historico/README.md`](historico/README.md) — reglas del archivo histórico.
 - [`historico/ux/`](historico/ux/) — bitácoras completas de UX.4.6a–d.
+- [`historico/tecnico/`](historico/tecnico/) — snapshots técnicos previos a GOV.1.3 R2.
 - [`historico/CHANGELOG_PRE_GOV1_3.md`](historico/CHANGELOG_PRE_GOV1_3.md) — snapshot del changelog acumulativo anterior a GOV.1.3.
 - [`historico/ROADMAP_PRE_GOV1_3.md`](historico/ROADMAP_PRE_GOV1_3.md) — snapshot del roadmap anterior a GOV.1.3.
 

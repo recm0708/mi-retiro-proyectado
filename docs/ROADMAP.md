@@ -28,7 +28,7 @@ Este roadmap describe **estado actual y trabajo futuro**. La evolución detallad
 - [ ] **GOV.1.3 — Reorganización y alineación integral de documentación**
   - [x] diagnóstico documental;
   - [x] R1 — documentos de entrada, archivo histórico y estructura;
-  - [ ] R2 — documentación técnica vigente;
+  - [x] R2 — documentación técnica vigente;
   - [ ] R3 — normativa, seguridad y privacidad documental;
   - [ ] R4 — capa de auditoría documental y controles de consistencia;
   - versión objetivo al cierre: `0.0.23-beta`.

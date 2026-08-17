@@ -1,69 +1,157 @@
 # Gestión de datos de la simulación
 
-**Fase de origen:** UX.4.6d Revisión 6
-**Estado:** implementada técnicamente; pendiente validación manual.
+**Estado:** Vigente
+**Versión de aplicación revisada:** `0.0.22-beta`
+**Revisión documental:** GOV.1.3 R2 — 2026-08-17
+**Clasificación:** Técnica / Privacidad
 
-## Objetivo
+Este documento describe el ciclo de vida actual del estado local del asistente.
 
-Permitir que el usuario repita escenarios y controle la información local sin dejar resultados obsoletos ni depender de herramientas técnicas del navegador.
+## 1. Almacenamiento actual
 
-## Niveles de control
+La simulación en curso utiliza `sessionStorage`.
 
-### Limpiar este paso
+Claves relevantes del frontend:
 
-Conserva los pasos anteriores. Elimina el paso activo y todos los estados posteriores que dependen de él. Paso 1 equivale a reiniciar toda la simulación porque todos los pasos dependen de Datos personales.
+- `calculadoraPensionCSS.simulacion`;
+- `calculadoraPensionCSS.privacidadConsentimientoSesion`.
 
-### Reiniciar simulación
+`localStorage` conserva estados que deben sobrevivir a una pestaña/sesión:
 
-Restablece el estado completo del asistente a Paso 1. Conserva la preferencia visual y la aceptación vigente de Términos/Privacidad.
+- `calculadoraPensionCSS.privacidadConsentimiento`;
+- `mi-retiro-proyectado-tema`.
 
-### Borrar datos de esta aplicación en este navegador
+No existe una base de datos permanente de simulaciones en la versión actual.
 
-Disponible en Fuentes/Privacidad. Elimina la simulación, constancia local de aceptación y preferencia visual pertenecientes a Mi Retiro Proyectado y vuelve a Inicio. No utiliza operaciones globales de borrado del almacenamiento del origen.
+## 2. Limpiar un paso
 
-## Matriz de dependencias
+**Limpiar este paso** conserva los pasos anteriores y elimina/invalida el paso activo y sus dependencias posteriores.
 
-| Acción | Conserva | Elimina/invalida |
+| Paso limpiado | Conserva | Elimina/invalida |
 |---|---|---|
-| Limpiar Paso 1 | privacidad/tema | Pasos 1–6 |
-| Limpiar Paso 2 | Paso 1 | Pasos 2–6 |
-| Limpiar Paso 3 | Pasos 1–2 | Pasos 3–6 |
-| Limpiar Paso 4 | Pasos 1–3 | Pasos 4–6 |
-| Limpiar Paso 5 | Pasos 1–4 | Pasos 5–6 |
-| Limpiar Paso 6 | Pasos 1–5 | resultados/configuración de Paso 6 |
-| Reiniciar simulación | privacidad/tema | Pasos 1–6 |
-| Borrar datos del navegador | ninguna información local de la app | simulación, consentimiento y tema |
+| 1 — Datos personales | privacidad/tema | Pasos 1–6 |
+| 2 — Cuotas | Paso 1 | Pasos 2–6 |
+| 3 — Historial | Pasos 1–2 | Pasos 3–6 |
+| 4 — Proyección | Pasos 1–3 | Pasos 4–6 |
+| 5 — Retiro | Pasos 1–4 | Pasos 5–6 |
+| 6 — Resultados | Pasos 1–5 | resultados y configuración de Paso 6 |
 
-## Privacidad
+Paso 1 equivale funcionalmente a crear una simulación vacía porque todos los pasos posteriores dependen de Datos personales.
 
-La incorporación de estos controles exige actualizar el texto visible y documental de privacidad a la versión 2026-08-15.1. No cambia la finalidad previsional ni introduce persistencia remota; sí cambia la información suministrada al titular sobre conservación y eliminación.
+## 3. Reiniciar simulación
 
-## Relación con la consulta de privacidad
+El reinicio:
 
-La consulta posterior de Términos/Privacidad desde Fuentes no es una acción de borrado ni de consentimiento. Abre el mismo documento vigente en modo lectura, no cambia la aceptación guardada y no modifica la simulación. El borrado local integral continúa siendo una acción separada y explícitamente destructiva.
+- crea una simulación vacía;
+- vuelve a `/simulacion`;
+- conserva la preferencia de apariencia;
+- conserva la aceptación vigente de privacidad;
+- no conserva resultados ni importaciones de la simulación anterior.
 
-## R15 — limpieza semántica de Cotización futura
+## 4. Borrar datos de la aplicación en el navegador
 
-**Limpiar Paso 2** elimina el objeto `cuotas`, sus orígenes y resultados dependientes. Después de recargar, la plantilla no debe reintroducir una decisión por defecto: **¿Continuarás cotizando?** vuelve a `Selecciona una opción` y los dos supuestos numéricos permanecen vacíos hasta una elección explícita. Si Paso 1 conserva una importación, la capa de compatibilidad no debe bloquear un campo de cuotas cuyo valor fue eliminado por la limpieza; solo reconstruye procedencia cuando el valor todavía existe.
+La acción de borrado integral elimina las claves propias de:
 
-## Restauración segura después de limpiar o invalidar — UX.4.6d R16
+- simulación;
+- consentimiento de sesión;
+- consentimiento local;
+- apariencia.
 
-Además de limpiar dependencias descendentes, la restauración del asistente valida `paso_actual`. Si una sesión antigua o una invalidación conserva un número de paso posterior al último prerrequisito válido, la interfaz abre el último paso seguro. Esto evita restaurar Paso 3 sin cuotas analizadas, Paso 4 sin Paso 3 completo, etc.
+Después navega a Inicio.
 
-La regla no borra información adicional: únicamente corrige qué panel puede mostrarse. Cuando una derivación anterior puede reconstruirse automáticamente —por ejemplo el resumen de cuotas requerido por Paso 3— se recalcula sin navegación regresiva.
+No ejecuta una limpieza global del almacenamiento del dominio ni borra datos ajenos a Mi Retiro Proyectado.
 
-## UX.4.6d R18 — metadata de importaciones
+## 5. Invalidación descendente
 
-El estado temporal puede conservar `nombre_archivo_origen` para identificar visualmente una importación confirmada después de recargar la página. No se conserva el archivo original, su ruta local ni una copia binaria. `Limpiar este paso`, `Reiniciar simulación` y **Borrar datos de esta aplicación en este navegador** eliminan esta metadata junto con el estado al que pertenece.
+Las dependencias principales son:
 
+```text
+Persona
+  ↓
+Cuotas
+  ↓
+Historial / detalle / salario
+  ↓
+Proyección / línea temporal
+  ↓
+Retiro
+  ↓
+Resultados
+```
 
-## UX.4.6d R19 — actualización ascendente controlada desde Paso 3
+Un cambio relevante invalida los resúmenes posteriores para impedir mostrar resultados calculados con un estado anterior.
 
-La dependencia normal del asistente sigue siendo descendente, pero existe una excepción explícita: una casilla manual de **Cuota acreditada** en el detalle del año actual puede actualizar los dos campos agregados de cuotas del Paso 2 porque el usuario está confirmando información temporalmente más reciente. Esta actualización no restaura resultados posteriores; al contrario, invalida `resumen_cuotas`, historial, proyección, retiro y resultados para recalcularlos con el dato nuevo.
+## 6. Reconciliación ascendente controlada
 
-La excepción no aplica por cargar una Ficha Digital ni por escribir un salario: requiere una acción manual sobre la casilla de acreditación.
+Existe una excepción deliberada a la dirección descendente: el Paso 3 puede aportar información más reciente sobre cuotas del año actual.
 
+### Captura manual
 
-## R21 — metadata de fecha de referencia
+Una modificación explícita de una casilla mensual de **Cuota acreditada** puede recalcular:
 
-La Ficha Digital puede conservar en la sesión la fecha y fuente con las que se verificó su vigencia. Esta metadata no es un dato previsional ni una copia del documento. Al restaurar la importación, la aplicación intenta refrescarla; si no hay fecha externa verificable, marca el estado como no confiable y conserva una advertencia.
+- `cuotas_anio_actual`;
+- `cuotas_totales`, conservando las cuotas anteriores al año vigente.
+
+El resumen de cuotas se invalida/revalida antes de continuar.
+
+### Ficha Digital confirmada
+
+Cuando una Ficha Digital confirmada identifica **más** cuotas del año actual que la referencia vigente, la aplicación puede ampliar el total del Paso 2 y su referencia del detalle.
+
+Una Ficha con menos meses **no reduce automáticamente** una cifra superior ya acreditada. La discrepancia se comunica para revisión.
+
+Esta regla sustituye cualquier descripción histórica que presentara el total del Paso 2 como inmutable frente a una Ficha Digital posterior.
+
+## 7. Historial del año vigente
+
+Cuando el detalle mensual está habilitado:
+
+- la cantidad anual se deriva de las casillas acreditadas;
+- el salario anual acreditado suma únicamente los meses marcados;
+- salarios conocidos sin cuota permanecen disponibles para análisis reciente, pero no se convierten en salario histórico acreditado;
+- una cuota sin salario suficiente mantiene el análisis pendiente.
+
+## 8. Restauración
+
+Al recargar:
+
+- la aplicación restaura el estado serializable de la simulación;
+- una importación confirmada puede conservar procedencia, edición y nombre visible del archivo;
+- el `input[type=file]` nativo queda vacío;
+- no se restaura ni se almacena la ruta local del archivo;
+- si `paso_actual` ya no cumple prerrequisitos, se corrige al último paso accesible;
+- resúmenes derivados pueden recalcularse silenciosamente cuando los datos de origen continúan completos.
+
+## 9. Ficha Digital y vigencia
+
+La importación puede conservar:
+
+- año/mes más reciente;
+- fecha externa usada como referencia;
+- confiabilidad de esa fecha;
+- fuente técnica.
+
+Al restaurar una importación, la interfaz puede volver a consultar la fecha de referencia.
+
+Una Ficha cuyo último período sea anterior al mes actual **verificado** requiere advertencia. Si no existe fecha externa confiable, no se usa el reloj local como reemplazo silencioso; se solicita revisión consciente.
+
+## 10. Privacidad de archivos
+
+Los archivos PDF se leen para su análisis y no se guardan como parte del estado de simulación.
+
+El navegador solo conserva los datos confirmados y metadata necesaria para continuidad de interfaz.
+
+## 11. Resultados por fotografía
+
+Paso 6 puede conservar por separado resultados:
+
+- proyectados;
+- solo acreditados.
+
+Una invalidación de datos de origen elimina ambas fotografías dependientes.
+
+## 12. Historia
+
+La versión anterior se conserva en:
+
+`docs/historico/tecnico/GESTION_DATOS_SIMULACION_PRE_GOV1_3_R2.md`
