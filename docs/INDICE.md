@@ -79,7 +79,7 @@ La aplicación expone `/metodologia` como versión navegable de la metodología 
 
 ## UX.4.6d — Paso 3
 
-- [UX.4.6d — Simular / Paso 3 · Historial](UX_4_6D_PASO3_HISTORIAL.md) — Revisión 16 en validación manual; Paso 1 certificado, Paso 2 en recorrido y Paso 3 con Ficha Digital integrada y dependencias no regresivas
+- [UX.4.6d — Simular / Paso 3 · Historial](UX_4_6D_PASO3_HISTORIAL.md) — cerrada tras R23; integración Pasos 1–3 validada y suite final de 396 pruebas en OK
 
 - [Gestión de datos de la simulación](GESTION_DATOS_SIMULACION.md) — limpieza por paso, reinicio completo y borrado local integral
 
@@ -107,3 +107,9 @@ La documentación de Paso 1, Paso 2, arquitectura, privacidad y validación inco
 
 
 - **UX.4.6d R23:** Ficha Digital más reciente puede ampliar la referencia de cuotas del año actual sin navegación regresiva; nunca la reduce silenciosamente. Véanse `DECISIONES.md` ADR-155–156, `ESPECIFICACION_FUNCIONAL.md` RF-332–336 y `UX_4_6D_PASO3_HISTORIAL.md`.
+
+## Próximas revisiones UX.4.6
+
+- **UX.4.6e — Paso 4 · Proyección salarial/laboral** — siguiente fase recomendada.
+- **UX.4.6f — Paso 5 · Escenarios de retiro** — posterior a UX.4.6e.
+- **UX.4.6g — Paso 6 · Resultados/exportación** — cierre de resultados y exportación orientativa.

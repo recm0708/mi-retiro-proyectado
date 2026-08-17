@@ -97,7 +97,7 @@ También se corrige la alineación vertical de `¿Deseas detallar el año actual
 
 - `python -m compileall app`: **OK**;
 - `node --check app/static/js/*.js`: **OK**;
-- `python -m unittest discover -s tests`: **278 pruebas en OK**;
+- cierre inicial R2: `python -m unittest discover -s tests`: **278 pruebas en OK**;
 - se agregan cinco regresiones específicas para R2 y se actualiza la prueba histórica de importación de Ficha Digital.
 
 La revisión visual en PC/laptop continúa pendiente antes del cierre de UX.4.6d.
@@ -336,3 +336,18 @@ Validación técnica R22: **392 pruebas automatizadas en OK**, compilación Pyth
 La validación con una Ficha Digital más reciente reveló que R22 solo reconciliaba casillas manuales. Cuando los seis meses confirmados procedían del documento y por tanto estaban bloqueados, `detallePuedeReconciliarCuotasPaso2()` descartaba esas casillas y Paso 2 permanecía en cinco cuotas, provocando exactamente el error `6 vs 5`.
 
 R23 distingue precedencia temporal y procedencia: una Ficha Digital confirmada que aporta **más cuotas** que Paso 2 amplía automáticamente la referencia del año actual, conserva las cuotas anteriores al año vigente y revalida Cuotas en segundo plano. Si una ficha aporta menos meses, no se reduce la referencia superior de Paso 2. La reconciliación se ejecuta tanto al confirmar la ficha como defensivamente al analizar el detalle, y actualiza también `detalle_anio_actual.cuotas_anio_actual_referencia` para persistencia/F5.
+
+
+## Cierre de UX.4.6d
+
+**Estado final:** cerrada y validada manualmente en PC/laptop tras R23.
+
+El recorrido final confirmó la integración completa de Pasos 1–3, la persistencia de importaciones tras F5, la reconciliación Ficha Digital → Cuotas → Historial y el acceso a Paso 4 sin navegación regresiva. El caso de cierre utilizó 6 cuotas enero–junio, B/.8,883.50 acreditados en 2026, 282 cuotas acumuladas y total salarial histórico B/.205,164.64.
+
+Validación técnica final:
+- `python -m compileall app` → OK;
+- `node --check app/static/js/*.js` → OK;
+- `python -m unittest discover -s tests -q` → **396 pruebas OK**;
+- `git diff --check` → sin incidencias.
+
+Los apartados anteriores que mencionan validaciones pendientes se conservan como trazabilidad histórica de cada revisión; este apartado prevalece como estado actual de la fase.

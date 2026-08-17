@@ -1138,3 +1138,24 @@ Validar un escenario donde Mi Retiro Seguro deja `cuotas_anio_actual=5` y una Fi
 5. después de F5, `cuotas_anio_actual_referencia` debe continuar sincronizada.
 
 Regresiones automatizadas: `test_ux46d_revision23_ficha_actualiza_cuotas.py` más cobertura histórica R22 adaptada al nuevo contrato.
+
+
+## Cierre final UX.4.6d
+
+**Estado:** cerrado y validado manualmente en PC/laptop.
+
+Resultado de cierre:
+- `python -m compileall app` → OK;
+- `node --check app/static/js/*.js` → OK;
+- `python -m unittest discover -s tests -q` → **396 pruebas OK**;
+- `git diff --check` → sin incidencias.
+
+Recorrido manual final validado:
+1. consentimiento vigente y borrado/reinicio local;
+2. Paso 1 manual e importado con procedencia `Detectado`, `Editado por ti`, `Completado manualmente` y `No detectado`;
+3. Paso 2 con 281 cuotas/5 del año actual y posterior ampliación documental a 282/6 sin retroceso;
+4. Paso 3 con Ficha Digital hasta junio, fila 2026 derivada en **6 cuotas / B/.8,883.50 / Parcial**, resumen anual **282 / 282 / diferencia 0 / B/.205,164.64** y base manual B/.1,500 mensual;
+5. persistencia tras F5 de metadata/importaciones y datos derivados;
+6. **Analizar historial → Continuar a proyección → Paso 4** sin volver a Paso 2.
+
+La matriz multidispositivo ampliada continúa diferida a beta/RC y no reabre UX.4.6d salvo regresión objetiva.

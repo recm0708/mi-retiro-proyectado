@@ -1,3 +1,10 @@
+
+### Cierre final UX.4.6d
+
+- UX.4.6d queda cerrada tras R23 con recorrido manual integral de Pasos 1–3 en PC/laptop y acceso correcto a Paso 4.
+- La suite final alcanza **396 pruebas automatizadas en OK**; compilación Python, sintaxis JavaScript y `git diff --check` quedaron sin incidencias.
+- Se valida la sincronización Ficha Digital → Paso 2 → Historial para el caso 5→6 cuotas, la persistencia tras F5 y la navegación sin retrocesos.
+
 # Changelog
 
 ### UX.4.6d — Simular / Paso 3 · Historial
