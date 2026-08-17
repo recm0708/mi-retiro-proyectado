@@ -235,7 +235,7 @@ git tag -s vX.Y.Z -m "Mi Retiro Proyectado vX.Y.Z"
 git tag -v vX.Y.Z
 ```
 
-Los tags publicados no se mueven salvo la excepción histórica única documentada en `docs/MIGRACION_FIRMAS_GIT_2026-08-17.md`.
+Los tags publicados no se mueven. La excepción histórica única documentada en `docs/MIGRACION_FIRMAS_GIT_2026-08-17.md` ya fue ejecutada y no puede reutilizarse.
 
 ## 16. Gobierno
 

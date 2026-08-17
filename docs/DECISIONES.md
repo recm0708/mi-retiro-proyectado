@@ -1623,7 +1623,7 @@ Los placeholders públicos no reutilizan nombres, apellidos, identificadores o i
 
 ## ADR-159 — Firma SSH obligatoria y materialización controlada de tags históricos
 
-**Estado:** vigente.
+**Estado:** vigente; materialización histórica ejecutada el 2026-08-17.
 **Fecha:** 2026-08-17.
 
 **Decisión:** a partir del primer commit posterior a `v0.0.23-beta`, los commits nuevos del mantenedor y todos los tags formales nuevos se firman criptográficamente con SSH. La clave pública autorizada se versiona en `.github/allowed_signers`; la clave privada permanece fuera del repositorio.
@@ -1632,4 +1632,4 @@ Se autoriza además una migración histórica controlada: `v0.0.1-beta` a `v0.0.
 
 **Motivo:** añadir autenticidad criptográfica y una cadena verificable de releases sin reescribir commits históricos, sin falsificar fechas y sin ocultar que los primeros 21 tags fueron materializados posteriormente.
 
-**Consecuencia:** ADR-158 sigue vigente en su prohibición de reescribir Git o aparentar existencia histórica de los tags, pero queda parcialmente sustituida respecto de no crear ningún tag retrospectivo. Después de completar esta migración vuelve a regir la inmutabilidad estricta.
+**Consecuencia:** ADR-158 sigue vigente en su prohibición de reescribir Git o aparentar existencia histórica de los tags, pero queda parcialmente sustituida respecto de no crear ningún tag retrospectivo. La materialización autorizada fue ejecutada el 2026-08-17; la excepción para reemitir `v0.0.22-beta` y `v0.0.23-beta` quedó consumida y vuelve a regir la inmutabilidad estricta.

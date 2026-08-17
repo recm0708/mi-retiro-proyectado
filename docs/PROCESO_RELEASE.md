@@ -110,7 +110,7 @@ Después de la migración criptográfica del 2026-08-17, un tag publicado:
 - no se elimina para ocultar historia;
 - no se fuerza para ocultar una corrección posterior.
 
-La única excepción autorizada es la reemisión firmada de `v0.0.22-beta` y `v0.0.23-beta`, preservando sus commits objetivo y documentando los objetos originales.
+La única excepción histórica fue la reemisión firmada de `v0.0.22-beta` y `v0.0.23-beta`, ejecutada el 2026-08-17 preservando sus commits objetivo y documentando los objetos originales. Esa excepción no puede repetirse.
 
 Una corrección posterior recibe un nuevo commit y, si corresponde, nueva versión.
 

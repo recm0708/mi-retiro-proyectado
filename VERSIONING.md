@@ -59,7 +59,7 @@ GOV.1.1 reconstruyó retrospectivamente 21 estados anteriores:
 
 La reconstrucción se basa en los 80 commits reales existentes hasta `7941f58` y **no reescribe commits históricos**, autores, fechas, hashes o mensajes.
 
-Durante la migración criptográfica del 2026-08-17 se autoriza materializar esos estados como **tags retrospectivos firmados**. Esos tags apuntan al commit de cierre ya documentado, conservan su fecha real de creación, declaran en el mensaje la fecha histórica del hito y **no existieron como tags en sus fechas históricas**.
+Durante la migración criptográfica del 2026-08-17 esos estados fueron materializados como **tags retrospectivos firmados**. Los tags apuntan al commit de cierre ya documentado, conservan su fecha real de creación, declaran en el mensaje la fecha histórica del hito y **no existieron como tags en sus fechas históricas**.
 
 El antiguo valor `0.1.0` continúa clasificado como marcador histórico de desarrollo no publicado.
 
@@ -87,9 +87,9 @@ Después de la adopción de firma SSH:
 - se verifica con `git tag -v`;
 - `.github/allowed_signers` contiene las claves públicas autorizadas.
 
-La migración del 2026-08-17 crea `v0.0.1-beta` a `v0.0.21-beta` retrospectivamente sin falsear fechas y reemite una sola vez `v0.0.22-beta` y `v0.0.23-beta` manteniendo exactamente los mismos commits objetivo.
+La migración del 2026-08-17 materializó `v0.0.1-beta` a `v0.0.21-beta` retrospectivamente sin falsear fechas y reemitió una sola vez `v0.0.22-beta` y `v0.0.23-beta`, manteniendo exactamente los mismos commits objetivo.
 
-Después de esa migración, los tags publicados vuelven a ser inmutables.
+La excepción histórica ya fue consumida. Desde ese momento los tags publicados vuelven a ser inmutables.
 
 ## 7. Diferencia entre versiones
 
@@ -120,5 +120,5 @@ Si la respuesta es sí, se asigna el siguiente número aplicable. Durante GOV.1 
 - No falsear fechas de creación de tags retrospectivos.
 - No presentar un tag retrospectivo como si hubiera sido publicado en la fecha histórica.
 - No modificar tags publicados para ocultar cambios posteriores.
-- La única sustitución autorizada es la reemisión firmada de `v0.0.22-beta` y `v0.0.23-beta` documentada en `docs/MIGRACION_FIRMAS_GIT_2026-08-17.md`.
+- La única sustitución histórica autorizada fue la reemisión firmada de `v0.0.22-beta` y `v0.0.23-beta` documentada en `docs/MIGRACION_FIRMAS_GIT_2026-08-17.md`; fue ejecutada el 2026-08-17 y no puede repetirse.
 - No usar la versión de aplicación como sustituto de la versión normativa o jurídica.

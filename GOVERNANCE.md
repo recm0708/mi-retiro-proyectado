@@ -95,7 +95,7 @@ git verify-commit HEAD
 git log --show-signature -1
 ```
 
-La CI remota debe permanecer en verde. La protección de `main` y los rulesets de tags se activarán después de completar la migración histórica.
+La CI remota debe permanecer en verde. La materialización histórica de tags quedó completada el 2026-08-17; la protección de `main` y el ruleset de tags son los siguientes controles obligatorios antes de cerrar el prebloque.
 
 ## 7. Versiones y tags
 
@@ -103,8 +103,8 @@ La política aplicable está en `VERSIONING.md`.
 
 - `VERSION` es la fuente canónica.
 - Los tags formales empiezan con `v`.
-- `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas documentalmente y pueden materializarse posteriormente como tags retrospectivos firmados sin aparentar existencia histórica.
-- `v0.0.22-beta` y `v0.0.23-beta` pueden reemitirse una sola vez como objetos firmados sin cambiar sus commits objetivo.
+- `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas documentalmente y posteriormente materializadas como tags retrospectivos firmados sin aparentar existencia histórica.
+- `v0.0.22-beta` y `v0.0.23-beta` fueron reemitidos una sola vez como objetos firmados sin cambiar sus commits objetivo; esa excepción ya fue consumida.
 - Después de la migración, todo commit nuevo y todo tag nuevo deben estar firmados.
 - La clave privada nunca se versiona.
 

@@ -11,7 +11,9 @@ Este documento ofrece un mapa cronológico legible de la evolución del proyecto
 
 Las versiones `0.0.1-beta` a `0.0.21-beta` fueron asignadas retrospectivamente durante GOV.1.1. Sirven para agrupar estados reales del repositorio, pero no fueron tags publicados en sus fechas originales.
 
-La migración criptográfica posterior permite materializarlas como tags retrospectivos firmados sin cambiar los commits ni la semántica histórica.
+La migración criptográfica posterior permitió materializarlas como tags retrospectivos firmados sin cambiar los commits ni la semántica histórica.
+
+El 2026-08-17 se materializaron efectivamente `v0.0.1-beta` a `v0.0.21-beta`. Esos tags no existieron en sus fechas históricas de cierre. En la misma operación se reemitieron una sola vez `v0.0.22-beta` y `v0.0.23-beta` como objetos firmados, preservando exactamente sus commits objetivo.
 
 `0.0.22-beta` es la primera versión formal adoptada deliberadamente bajo `VERSIONING.md`.
 

@@ -10,10 +10,12 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 - adoptada firma SSH Ed25519 para commits y tags nuevos;
 - añadido registro público de firmantes autorizados;
-- preparada migración controlada de `v0.0.1-beta` a `v0.0.23-beta`;
-- documentada la reemisión única de `v0.0.22-beta` y `v0.0.23-beta` sin cambiar sus commits objetivo;
+- materializados y auditados 23/23 tags firmados de `v0.0.1-beta` a `v0.0.23-beta`;
+- ejecutada la reemisión única de `v0.0.22-beta` y `v0.0.23-beta`, preservando `1222de61a6d2ca48fb8731fe4755f5b7eeef38f5` y `07278f7a193ce964612d9697da57350691bf62c0`;
 - añadido workflow de verificación de firmas de tags;
-- añadidas regresiones de política de firma y trazabilidad histórica.
+- añadidas regresiones de política de firma y trazabilidad histórica;
+- primer commit nuevo firmado confirmado por GitHub como `Verified` y CI #23 en `success`;
+- verificados 23/23 objetos y targets remotos sin reescritura de commits históricos.
 
 ## [0.0.23-beta] — 2026-08-17
 

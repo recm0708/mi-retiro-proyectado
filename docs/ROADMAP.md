@@ -37,10 +37,10 @@ Este roadmap describe **estado actual y trabajo futuro**. La evolución detallad
   - [x] respaldo completo previo a la migración;
   - [x] clave SSH Ed25519 dedicada y verificación local;
   - [x] política de firma, allowed signers, ADR y workflow preparados;
-  - [ ] primer commit nuevo firmado y verificado por GitHub;
-  - [ ] materialización firmada de `v0.0.1-beta` a `v0.0.21-beta`;
-  - [ ] reemisión firmada única de `v0.0.22-beta` y `v0.0.23-beta`;
-  - [ ] auditoría 23/23 tags;
+  - [x] primer commit nuevo firmado y verificado por GitHub;
+  - [x] materialización firmada de `v0.0.1-beta` a `v0.0.21-beta`;
+  - [x] reemisión firmada única de `v0.0.22-beta` y `v0.0.23-beta`;
+  - [x] auditoría local/remota 23/23 tags;
   - [ ] ruleset de tags;
   - [ ] protección/ruleset de `main`;
   - [ ] revisión de configuración GitHub y PR de Dependabot.

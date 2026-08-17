@@ -21,7 +21,9 @@ GOV.1.3 R3 agregó **15 regresiones documentales**. El cierre de R3 fue validado
 Durante R3 también se endureció la regresión de cierre de R2: su evidencia histórica se valida contra `CHANGELOG.md` en lugar de exigir que el documento vigente `VALIDACION.md` conserve indefinidamente la línea base de una revisión anterior.
 GOV.1.3 R4 agregó **20 regresiones de auditoría documental y consistencia**. El cierre de R4 y de GOV.1.3 fue validado con una suite completa de **458 pruebas en `OK`**, además de compilación Python, validación de sintaxis JavaScript y `git diff --check` sin errores.
 
-El prebloque de firma Git agrega **12 regresiones**. La línea base previa es de **458 pruebas** y la suite esperada tras Fase 5 es de **470 pruebas**; el cierre se registrará solo después de ejecutarla.
+El prebloque de firma Git agregó **12 regresiones** sobre una línea base previa de **458 pruebas**. La suite completa fue ejecutada con **470 pruebas en `OK`**, además de compilación Python, validación de sintaxis JavaScript y `git diff --check` limpio.
+
+La materialización criptográfica posterior no modifica lógica de aplicación: se verificaron **23/23 tags firmados**, **23/23 objetos remotos** y **23/23 targets remotos**, conservando intactos los commits históricos. Los controles GitHub de inmutabilidad permanecen como siguiente paso del prebloque.
 
 
 ## 2. Comandos obligatorios

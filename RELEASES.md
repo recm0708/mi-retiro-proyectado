@@ -93,11 +93,21 @@ v0.0.23-beta
 
 El tag se publica únicamente sobre el commit de cierre después de confirmar CI remota verde, conforme a `docs/PROCESO_RELEASE.md`.
 
-## 5. Migración criptográfica de tags — preparada
+## 5. Migración criptográfica de tags — materializada
 
-La migración no reescribe commits; materializará `v0.0.1-beta` a `v0.0.21-beta` como tags retrospectivos firmados y reemitirá una sola vez `v0.0.22-beta` y `v0.0.23-beta` sin cambiar sus commits objetivo.
+El 2026-08-17 se materializaron `v0.0.1-beta` a `v0.0.21-beta` como tags retrospectivos firmados y se reemitieron una sola vez `v0.0.22-beta` y `v0.0.23-beta`.
 
-El cierre se registrará solo después de verificar 23/23 tags.
+La operación no reescribió commits históricos ni falseó fechas de creación.
+
+Resultado de auditoría Git:
+
+- 23/23 tags con firma SSH válida;
+- 23/23 objetos tag presentes remotamente;
+- 23/23 targets remotos comprobados;
+- `v0.0.22-beta`: `31accfc9a6014367179c97cfe54c5a223be8988f` → `bda764edb84ccaeb610a629fca1283bbd97e69a4`, conservando `1222de61a6d2ca48fb8731fe4755f5b7eeef38f5`;
+- `v0.0.23-beta`: `609edf4bfed33c64770c88fab401002cd90f8e66` → `06b9260dadbcb2f0a7711841e1fad228e1badee8`, conservando `07278f7a193ce964612d9697da57350691bf62c0`.
+
+La materialización criptográfica está completada. Los rulesets y demás controles GitHub se cierran en el siguiente subbloque.
 
 ## 6. Próxima línea pública prevista
 

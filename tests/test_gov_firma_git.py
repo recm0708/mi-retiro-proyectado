@@ -67,10 +67,17 @@ class TestGovFirmaGit(unittest.TestCase):
         for valor in (
             "31accfc9a6014367179c97cfe54c5a223be8988f",
             "609edf4bfed33c64770c88fab401002cd90f8e66",
+            "bda764edb84ccaeb610a629fca1283bbd97e69a4",
+            "06b9260dadbcb2f0a7711841e1fad228e1badee8",
             "1222de61a6d2ca48fb8731fe4755f5b7eeef38f5",
             "07278f7a193ce964612d9697da57350691bf62c0",
+            "90e66a13eec554d616bb71a04e00da4ada68df54",
         ):
             self.assertIn(valor, texto)
+        self.assertIn("Materialización criptográfica completada", texto)
+        self.assertIn("23/23 tags", texto)
+        self.assertIn("23/23 objetos tag remotos", texto)
+        self.assertIn("23/23 targets remotos", texto)
 
     def test_adr159_documenta_migracion_y_adr158_sustitucion_parcial(self):
         texto = (DOCS / "DECISIONES.md").read_text(encoding="utf-8")
@@ -83,6 +90,11 @@ class TestGovFirmaGit(unittest.TestCase):
         texto = (DOCS / "ROADMAP.md").read_text(encoding="utf-8")
         self.assertIn(f"**Versión de aplicación:** `{self.version}`", texto)
         self.assertIn("Firma e integridad Git/GitHub", texto)
+        self.assertIn("- [x] primer commit nuevo firmado y verificado por GitHub;", texto)
+        self.assertIn("- [x] materialización firmada de `v0.0.1-beta` a `v0.0.21-beta`;", texto)
+        self.assertIn("- [x] reemisión firmada única de `v0.0.22-beta` y `v0.0.23-beta`;", texto)
+        self.assertIn("- [x] auditoría local/remota 23/23 tags;", texto)
+        self.assertIn("- [ ] **Prebloque transversal — Firma e integridad Git/GitHub**", texto)
 
     def test_indice_changelog_y_validacion_registran_firma(self):
         indice = (DOCS / "INDICE.md").read_text(encoding="utf-8")
@@ -91,8 +103,10 @@ class TestGovFirmaGit(unittest.TestCase):
         self.assertIn("MIGRACION_FIRMAS_GIT_2026-08-17.md", indice)
         self.assertIn(".github/allowed_signers", indice)
         self.assertIn("firma SSH", changelog)
+        self.assertIn("23/23", changelog)
         self.assertIn("12 regresiones", validacion)
-        self.assertIn("470 pruebas", validacion)
+        self.assertIn("470 pruebas en `OK`", validacion)
+        self.assertIn("23/23 objetos remotos", validacion)
 
 if __name__ == "__main__":
     unittest.main()
