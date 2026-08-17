@@ -127,18 +127,26 @@
       <h3 class="h5">Cómo trata los datos esta versión</h3>
       <ul class="mb-3">
         <li>La información de la simulación se mantiene temporalmente en el navegador mientras utilizas la herramienta.</li>
-        <li>Los PDF se analizan para extraer datos y el archivo original no se incorpora a una base de datos permanente.</li>
+        <li>Los documentos seleccionados se analizan para extraer datos y el archivo original no se incorpora a una base de datos permanente.</li>
         <li>No se utilizan cookies para publicidad, analítica, seguimiento ni creación de perfiles.</li>
         <li>El navegador puede recordar preferencias de funcionamiento, como el tema visual y la versión de los términos aceptada.</li>
         <li>Los identificadores personales son opcionales para realizar los cálculos.</li>
       </ul>
       <p class="mb-2">
         Contacto sobre privacidad: <a href="mailto:ruben.canizares@outlook.com">ruben.canizares@outlook.com</a>.
-        Proyecto: <a href="https://github.com/recm0708/calculadora-pension-css" target="_blank" rel="noopener noreferrer">repositorio de Mi Retiro Proyectado</a>.
+        Repositorio: <a href="https://github.com/recm0708/calculadora-pension-css" target="_blank" rel="noopener noreferrer">GitHub del proyecto</a>.
       </p>
-      <a class="btn btn-sm btn-outline-primary btn-center-content" href="/simulacion?privacidad=1">
-        Revisar términos de privacidad
-      </a>
+      <div class="d-flex flex-wrap gap-2">
+        <button class="btn btn-sm btn-outline-primary btn-center-content" type="button" data-privacy-action="review">
+          Revisar términos de privacidad
+        </button>
+        <button class="btn btn-sm btn-outline-danger btn-center-content" type="button" data-data-action="clear-browser-data">
+          Borrar datos de esta aplicación en este navegador
+        </button>
+      </div>
+      <p class="small text-secondary mt-3 mb-0">
+        Esta acción elimina la simulación local, la constancia de aceptación y las preferencias recordadas por la aplicación en este navegador.
+      </p>
     </div>
 
     <div class="row g-3">

@@ -194,11 +194,15 @@ class TestUX44DetalleAnioActual(unittest.TestCase):
             "2026-01",
         )
 
-    def test_interfaz_ofrece_ficha_digital_y_captura_manual(self):
-        self.assertIn("Abrir Mi Caja Digital", self.parcial)
+    def test_interfaz_ofrece_detalle_manual_y_deja_ficha_en_su_bloque(self):
+        ficha = (
+            ROOT / "app/templates/partials/importacion_ficha_digital.html"
+        ).read_text(encoding="utf-8")
+        self.assertIn("Abrir Mi Caja Digital", ficha)
+        self.assertNotIn("Abrir Mi Caja Digital", self.parcial)
         self.assertIn('value="MENSUAL"', self.parcial)
         self.assertIn('value="QUINCENAL"', self.parcial)
-        self.assertIn("Puedes importarlos desde el Paso 1", self.parcial)
+        self.assertNotIn("Puedes importarlos desde el Paso 1", self.parcial)
         self.assertIn("detalle-cuota-acreditada", self.js)
 
     def test_base_salarial_permite_ultimo_mes_y_promedios(self):
@@ -212,7 +216,8 @@ class TestUX44DetalleAnioActual(unittest.TestCase):
 
     def test_detalle_sincroniza_total_acreditado_con_historial(self):
         self.assertIn("total_salario_acreditado", self.js)
-        self.assertIn("await analizarHistorialSalarial()", self.js)
+        simulacion_js = (ROOT / "app/static/js/simulacion.js").read_text(encoding="utf-8")
+        self.assertIn("await analizarHistorialSalarial()", simulacion_js)
         self.assertIn("resumen_detalle_anio_actual?.cuotas_coinciden", self.historial)
         self.assertIn("inputSalario.readOnly = true", self.historial)
 

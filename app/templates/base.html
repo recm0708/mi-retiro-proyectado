@@ -192,6 +192,9 @@
     aria-atomic="true"
   ></div>
 
+  {% include "partials/gestion_datos.html" %}
+  {% include "partials/privacidad_consentimiento.html" %}
+
   <footer class="footer" aria-label="Información legal">
     <div class="container footer-modern">
       <div class="footer-identity">
@@ -223,6 +226,8 @@
     crossorigin="anonymous"
   ></script>
   <script src="{{ url_for('static', path='/js/accesibilidad.js') }}"></script>
+  <script src="{{ url_for('static', path='/js/gestion_datos.js') }}"></script>
+  <script src="{{ url_for('static', path='/js/privacidad.js') }}"></script>
 
   {% block scripts %}{% endblock %}
 </body>

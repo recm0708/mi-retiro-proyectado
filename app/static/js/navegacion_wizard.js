@@ -61,15 +61,19 @@ function puedeAccederDirectamenteAPaso(
   }
 
   const historialListo = (
-    (simulacion.modo_historial || "MANUAL") !== "MANUAL"
-    || Boolean(simulacion.resumen_historial)
+    typeof paso3EstaCompleto === "function"
+      ? paso3EstaCompleto(simulacion)
+      : (
+          ((simulacion.modo_historial || "MANUAL") !== "MANUAL"
+            || Boolean(simulacion.resumen_historial))
+          && Boolean(simulacion.resumen_salario)
+        )
   );
 
   if (numeroPaso === 4) {
     return Boolean(
       simulacion.resumen_cuotas
-      && historialListo
-      && simulacion.resumen_salario,
+      && historialListo,
     );
   }
 
@@ -217,7 +221,7 @@ function obtenerConfiguracionNavegacionFlotante() {
 
     if (modoDatos === "MI_RETIRO_SEGURO" && !importacionLista) {
       return {
-        estado: "Paso 1 de 6 · Importa y revisa el PDF",
+        estado: "Paso 1 de 6 · Importa y revisa el documento",
         etiqueta: "Importa datos para continuar",
         deshabilitado: true,
       };
@@ -247,36 +251,22 @@ function obtenerConfiguracionNavegacionFlotante() {
   }
 
   if (pasoActual === 3) {
-    const modo = (
-      simulacion.modo_historial
-      || "MANUAL"
+    const listo = (
+      typeof paso3EstaCompleto === "function"
+      && paso3EstaCompleto(simulacion)
     );
 
-    if (
-      modo === "MANUAL"
-      && !simulacion.resumen_historial
-    ) {
-      return {
-        estado: "Paso 3 de 6 · Falta analizar historial",
-        etiqueta: "Analizar historial",
-        deshabilitado: false,
-      };
-    }
-
-    if (!simulacion.resumen_salario) {
-      return {
-        estado: "Paso 3 de 6 · Falta analizar salario",
-        etiqueta: "Analizar salario",
-        deshabilitado: false,
-      };
-    }
-
     return {
-      estado: "Paso 3 de 6 · Historial y salario listos",
-      etiqueta: "Continuar a proyección",
+      estado: listo
+        ? "Paso 3 de 6 · Historial y base listos"
+        : "Paso 3 de 6 · Falta analizar historial",
+      etiqueta: listo
+        ? "Continuar a proyección"
+        : "Analizar historial",
       deshabilitado: false,
     };
   }
+
 
   if (pasoActual === 4) {
     return {
@@ -464,33 +454,20 @@ function ejecutarAccionPrimariaFlotante() {
   }
 
   if (pasoActual === 3) {
-    const modo = (
-      simulacion.modo_historial
-      || "MANUAL"
-    );
-
     if (
-      modo === "MANUAL"
-      && !simulacion.resumen_historial
+      typeof paso3EstaCompleto === "function"
+      && paso3EstaCompleto(simulacion)
     ) {
-      document.getElementById(
-        "btn-analizar-historial",
-      ).click();
-      return;
+      if (typeof continuarDesdePasoHistorial === "function") {
+        continuarDesdePasoHistorial();
+      }
+    } else if (typeof analizarPasoHistorialCompleto === "function") {
+      analizarPasoHistorialCompleto();
     }
 
-    if (!simulacion.resumen_salario) {
-      document.getElementById(
-        "form-salario",
-      ).requestSubmit();
-      return;
-    }
-
-    document.getElementById(
-      "btn-continuar-paso-4",
-    ).click();
     return;
   }
+
 
   if (pasoActual === 4) {
     if (simulacion.resumen_proyeccion) {

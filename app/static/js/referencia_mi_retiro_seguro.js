@@ -131,7 +131,7 @@ function mostrarReferenciaMiRetiro(referencia) {
   if (inconsistencias.length > 0) {
     coherencia.className = "alert alert-warning mt-3 mb-0";
     coherencia.textContent = (
-      "El PDF fue leído, pero "
+      "El documento fue leído, pero "
       + inconsistencias.join("; ")
       + ". La referencia se conservará, aunque la comparación del Paso 6 puede no ser directa."
     );
@@ -161,7 +161,7 @@ async function analizarReferenciaMiRetiro() {
 
   if (!archivo) {
     mostrarErrorReferenciaMiRetiro(
-      "Selecciona primero el comprobante PDF que deseas analizar.",
+      "Selecciona primero el comprobante que deseas analizar.",
     );
     return;
   }
@@ -200,7 +200,7 @@ async function analizarReferenciaMiRetiro() {
       mostrarErrorReferenciaMiRetiro(
         obtenerMensajeError(
           contenido,
-          "No fue posible analizar el comprobante PDF.",
+          "No fue posible analizar el comprobante.",
         ),
       );
       return;
@@ -218,7 +218,7 @@ async function analizarReferenciaMiRetiro() {
 
   } catch {
     mostrarErrorReferenciaMiRetiro(
-      "No fue posible comunicarse con el servidor para analizar el PDF.",
+      "No fue posible comunicarse con el servidor para analizar el documento.",
     );
   } finally {
     boton.disabled = false;
@@ -357,7 +357,7 @@ function mostrarComparacionReferenciaMiRetiroSeguro(resumenActual) {
     estado.textContent = resumenAcreditado
       ? (
         "La diferencia compara el comprobante con el cálculo propio que usa "
-        + "solo la información actualmente acreditada. Si el PDF corresponde "
+        + "solo la información actualmente acreditada. Si el documento corresponde "
         + "a una fotografía anterior, ambos valores todavía pueden diferir."
       )
       : (

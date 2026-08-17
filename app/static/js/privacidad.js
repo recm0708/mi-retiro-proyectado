@@ -1,14 +1,17 @@
 "use strict";
 
 /* ============================================================
-   UX.4.6b R4 — Consentimiento informado y control de privacidad
+   UX.4.6d R7 — Consentimiento y consulta no disruptiva
    ============================================================ */
 
 const CLAVE_PRIVACIDAD = "calculadoraPensionCSS.privacidadConsentimiento";
-const VERSION_PRIVACIDAD = "2026-08-13.2";
+const VERSION_PRIVACIDAD = "2026-08-16.1";
 const CLAVE_SIMULACION_PRIVACIDAD = "calculadoraPensionCSS.simulacion";
 const CLAVE_PRIVACIDAD_SESION = "calculadoraPensionCSS.privacidadConsentimientoSesion";
 const MARGEN_FINAL_LECTURA = 18;
+
+let modoPrivacidadActual = "consentimiento";
+let contextoPrivacidadActual = "simulacion";
 
 
 function obtenerConsentimientoPrivacidad() {
@@ -87,6 +90,11 @@ function limpiarParametroPrivacidad() {
 }
 
 
+function esRutaSimulacion() {
+  return window.location.pathname === "/simulacion";
+}
+
+
 function lecturaPrivacidadCompletada() {
   const contenido = document.getElementById("privacidad-contenido-desplazable");
   if (!contenido) return false;
@@ -101,6 +109,8 @@ function lecturaPrivacidadCompletada() {
 
 
 function actualizarEstadoLecturaPrivacidad() {
+  if (modoPrivacidadActual !== "consentimiento") return;
+
   const check = document.getElementById("aceptar-privacidad-check");
   const estado = document.getElementById("privacidad-lectura-estado");
   const aceptar = document.getElementById("btn-privacidad-aceptar");
@@ -143,12 +153,83 @@ function reiniciarLecturaPrivacidad() {
 }
 
 
-function abrirCondicionesPrivacidad() {
+function configurarModoPrivacidad(modo) {
+  modoPrivacidadActual = modo === "revision" ? "revision" : "consentimiento";
+
+  const kicker = document.getElementById("privacidad-modal-kicker");
+  const resumen = document.getElementById("privacidad-simulacion-resumen");
+  const footer = document.getElementById("privacidad-consent-footer");
+
+  if (modoPrivacidadActual === "revision") {
+    if (kicker) kicker.textContent = "Consulta de privacidad";
+    if (resumen) {
+      resumen.textContent = (
+        "Consulta las condiciones vigentes. Revisarlas no modifica tu aceptación ni exige aceptarlas nuevamente."
+      );
+    }
+    if (footer) footer.hidden = true;
+    return;
+  }
+
+  if (kicker) kicker.textContent = "Antes de comenzar";
+  if (resumen) {
+    resumen.textContent = "Lee el documento completo. Al llegar al final podrás habilitar la aceptación.";
+  }
+  if (footer) footer.hidden = false;
+}
+
+
+function abrirCondicionesPrivacidad(modo = "consentimiento", contexto = "simulacion") {
   const modal = obtenerModalPrivacidad();
   if (!modal) return;
 
-  reiniciarLecturaPrivacidad();
+  contextoPrivacidadActual = contexto;
+  configurarModoPrivacidad(modo);
+
+  const contenido = document.getElementById("privacidad-contenido-desplazable");
+  if (modoPrivacidadActual === "consentimiento") {
+    reiniciarLecturaPrivacidad();
+  } else if (contenido) {
+    contenido.scrollTop = 0;
+  }
+
   modal.show();
+}
+
+
+function rechazarPrivacidad() {
+  if (contextoPrivacidadActual === "fuentes") {
+    obtenerModalPrivacidad()?.hide();
+    return;
+  }
+
+  borrarDatosSimulacionPorPrivacidad();
+  window.location.replace("/");
+}
+
+
+function cerrarModalPrivacidad() {
+  if (modoPrivacidadActual === "revision" || contextoPrivacidadActual === "fuentes") {
+    obtenerModalPrivacidad()?.hide();
+    return;
+  }
+
+  // En Simular, cerrar el consentimiento sin aceptarlo impide continuar.
+  rechazarPrivacidad();
+}
+
+
+function manejarEscapePrivacidad(evento) {
+  if (evento.key !== "Escape") return;
+
+  const modalElemento = document.getElementById("modal-privacidad-simulacion");
+  if (!modalElemento?.classList.contains("show")) return;
+
+  // Bootstrap usa un efecto visual cuando el modal es estático. Interceptamos
+  // Escape antes de ese comportamiento para que la acción sea inequívoca.
+  evento.preventDefault();
+  evento.stopImmediatePropagation();
+  cerrarModalPrivacidad();
 }
 
 
@@ -160,16 +241,21 @@ document.addEventListener("DOMContentLoaded", () => {
   const check = document.getElementById("aceptar-privacidad-check");
   const aceptar = document.getElementById("btn-privacidad-aceptar");
   const rechazar = document.getElementById("btn-privacidad-rechazar");
+  const cerrar = document.getElementById("btn-privacidad-cerrar");
 
   contenido?.addEventListener("scroll", actualizarEstadoLecturaPrivacidad, { passive: true });
   window.addEventListener("resize", actualizarEstadoLecturaPrivacidad, { passive: true });
 
   modalElemento.addEventListener("shown.bs.modal", () => {
-    reiniciarLecturaPrivacidad();
+    if (modoPrivacidadActual === "consentimiento") {
+      reiniciarLecturaPrivacidad();
+    }
     contenido?.focus({ preventScroll: true });
   });
 
   check?.addEventListener("change", () => {
+    if (modoPrivacidadActual !== "consentimiento") return;
+
     if (!lecturaPrivacidadCompletada()) {
       check.checked = false;
       check.disabled = true;
@@ -182,6 +268,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   aceptar?.addEventListener("click", () => {
+    if (modoPrivacidadActual !== "consentimiento") return;
     if (!check?.checked || !lecturaPrivacidadCompletada()) return;
 
     guardarConsentimientoPrivacidad();
@@ -189,12 +276,31 @@ document.addEventListener("DOMContentLoaded", () => {
     limpiarParametroPrivacidad();
   });
 
-  rechazar?.addEventListener("click", () => {
-    borrarDatosSimulacionPorPrivacidad();
-    window.location.replace("/");
-  });
+  rechazar?.addEventListener("click", rechazarPrivacidad);
+  cerrar?.addEventListener("click", cerrarModalPrivacidad);
+  document.addEventListener("keydown", manejarEscapePrivacidad, true);
 
-  if (!obtenerConsentimientoPrivacidad() || debeForzarVistaPrivacidad()) {
-    abrirCondicionesPrivacidad();
+  document
+    .querySelectorAll('[data-privacy-action="review"]')
+    .forEach((control) => {
+      control.addEventListener("click", () => {
+        const consentimiento = obtenerConsentimientoPrivacidad();
+        abrirCondicionesPrivacidad(
+          consentimiento ? "revision" : "consentimiento",
+          "fuentes",
+        );
+      });
+    });
+
+  const consentimiento = obtenerConsentimientoPrivacidad();
+
+  if (esRutaSimulacion() && !consentimiento) {
+    abrirCondicionesPrivacidad("consentimiento", "simulacion");
+  } else if (debeForzarVistaPrivacidad()) {
+    abrirCondicionesPrivacidad(
+      consentimiento ? "revision" : "consentimiento",
+      "fuentes",
+    );
+    limpiarParametroPrivacidad();
   }
 });

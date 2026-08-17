@@ -33,6 +33,7 @@ from app.modelos.simulacion import (
     ResumenDetalleAnioActual,
     ResumenReferenciaMiRetiroSeguro,
     ResumenFichaDigital,
+    ResumenFechaReferencia,
     ResumenProyeccionSalario,
     ResumenSalario,
     DatosLineaTiempo,
@@ -54,6 +55,9 @@ from app.servicios.referencia_mi_retiro_seguro import (
 )
 from app.servicios.ficha_digital import (
     analizar_ficha_digital_pdf,
+)
+from app.servicios.fecha_referencia import (
+    obtener_fecha_referencia_confiable,
 )
 from app.servicios.proyeccion_cuotas import analizar_cuotas
 from app.servicios.proyeccion_salarios import (
@@ -431,12 +435,33 @@ async def analizar_ficha_digital(
     )
 
     try:
-        return analizar_ficha_digital_pdf(contenido)
+        resumen = analizar_ficha_digital_pdf(contenido)
     except ValueError as error:
         raise HTTPException(
             status_code=422,
             detail=str(error),
         ) from error
+
+    referencia = obtener_fecha_referencia_confiable()
+    resumen.fecha_referencia = referencia.fecha
+    resumen.fecha_referencia_confiable = referencia.confiable
+    resumen.fuente_fecha_referencia = referencia.fuente
+    return resumen
+
+
+@app.get(
+    "/api/sistema/fecha-referencia",
+    response_model=ResumenFechaReferencia,
+)
+def consultar_fecha_referencia():
+    """Devuelve la fecha externa usada para controles de vigencia documental."""
+
+    referencia = obtener_fecha_referencia_confiable()
+    return ResumenFechaReferencia(
+        fecha=referencia.fecha,
+        confiable=referencia.confiable,
+        fuente=referencia.fuente,
+    )
 
 
 # ============================================================

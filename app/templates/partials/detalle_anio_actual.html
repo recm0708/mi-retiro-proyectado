@@ -1,116 +1,69 @@
 <!-- ==================================================
-     Detalle salarial del año actual
+     UX.4.6d — Detalle salarial del año actual
      ================================================== -->
-
 <section
   id="seccion-detalle-anio-actual"
-  class="current-year-detail-section mt-5"
+  class="current-year-detail-section step3-subsection mt-5"
+  aria-labelledby="detalle-anio-actual-titulo"
 >
-
   <hr class="mb-4">
 
-  <div class="d-flex flex-column flex-lg-row justify-content-between gap-3 mb-4">
-
+  <div class="step3-section-heading mb-4">
     <div>
-      <h3 class="h5 fw-bold mb-2">
+      <h3 id="detalle-anio-actual-titulo" class="h5 fw-bold mb-2">
         Detalle salarial del año actual
       </h3>
-
       <p class="text-secondary mb-0">
-        Opcionalmente puedes registrar los salarios que ya aparecen en tu
-        Ficha Digital. Puedes importarlos desde el Paso 1 o introducirlos aquí
-        manualmente. Esto permite distinguir datos completos, períodos parciales
-        y meses cuya cuota todavía no aparece acreditada.
+        Úsalo si necesitas distinguir salarios recientes, períodos parciales y cuotas que ya aparecen acreditadas.
       </p>
     </div>
-
-    <div class="current-year-detail-source">
-      <a
-        href="{{ mi_caja_digital_url }}"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="btn btn-outline-primary btn-sm"
-      >
-        Abrir Mi Caja Digital
-      </a>
-      <small class="text-secondary d-block mt-2">
-        Consulta allí tu Ficha Digital y copia los valores si deseas usar este detalle.
-      </small>
-    </div>
-
   </div>
 
-
-  <div class="row g-4 align-items-end mb-4">
-
+  <div class="row g-4 align-items-start mb-4">
     <div class="col-lg-6">
-      <label
-        for="usar_detalle_anio_actual"
-        class="form-label fw-semibold"
-      >
+      <label for="usar_detalle_anio_actual" class="form-label fw-semibold">
         ¿Deseas detallar el año actual?
       </label>
-
-      <select
-        id="usar_detalle_anio_actual"
-        class="form-select form-select-lg"
-      >
-        <option value="false" selected>
-          No — usar el total anual del historial
-        </option>
-        <option value="true">
-          Sí — registrar salarios por período
-        </option>
+      <select id="usar_detalle_anio_actual" class="form-select form-select-lg">
+        <option value="false" selected>No — usar el total anual del historial</option>
+        <option value="true">Sí — registrar salarios por período</option>
       </select>
     </div>
 
     <div class="col-lg-6">
-      <label
-        for="modo_detalle_anio_actual"
-        class="form-label fw-semibold"
-      >
+      <label for="modo_detalle_anio_actual" class="form-label fw-semibold">
         Forma de captura
       </label>
-
-      <select
-        id="modo_detalle_anio_actual"
-        class="form-select form-select-lg"
-        disabled
-      >
-        <option value="MENSUAL" selected>
-          Total mensual
-        </option>
-        <option value="QUINCENAL">
-          Primera y segunda quincena
-        </option>
+      <select id="modo_detalle_anio_actual" class="form-select form-select-lg" disabled>
+        <option value="MENSUAL" selected>Total mensual</option>
+        <option value="QUINCENAL">Primera y segunda quincena</option>
       </select>
+      <div id="origen-modo-detalle" class="field-origin-note d-none"></div>
     </div>
-
   </div>
 
+  {# La Ficha Digital es una fuente del detalle del año actual, no una sección independiente. #}
+  {% include "partials/importacion_ficha_digital.html" %}
 
-  <div
-    id="detalle-anio-actual-contenido"
-    class="d-none"
-  >
+  <div id="detalle-importado-inactivo" class="form-state-note d-none mb-4" role="status">
+    La Ficha Digital está importada, pero sus salarios no se usarán mientras mantengas la opción «No — usar el total anual del historial». Si deseas aprovechar el detalle importado, selecciona «Sí — registrar salarios por período».
+  </div>
 
-    <div class="info-box mb-4">
-      <strong>
-        Salario disponible y cuota acreditada no siempre avanzan al mismo tiempo.
-      </strong>
-      <p class="mb-0 mt-1">
-        Marca una cuota como acreditada solo cuando ya conste como tal en la CSS.
-        Un salario puede estar visible en la Ficha Digital aunque la cuota asociada
-        todavía no aparezca acreditada. Si solo tienes una quincena, el mes se
-        conservará como parcial.
-      </p>
+  <div id="detalle-anio-actual-contenido" class="d-none">
+    <div id="detalle-importado-estado" class="imported-data-actions d-none mb-4">
+      <span class="imported-data-status-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" focusable="false"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 2.5 2.5L16 9"></path></svg>
+      </span>
+      <span>Los meses confirmados desde Ficha Digital se mantienen sin cambios; puedes completar la información que falte.</span>
+      <button type="button" id="btn-revisar-detalle-importado" class="btn btn-sm btn-outline-primary">Revisar importación</button>
     </div>
 
+    <div class="form-state-note mb-4">
+      Los meses importados desde Ficha Digital conservan marcada su cuota y no pueden alterarse aquí. Para los meses no importados, completa manualmente la información disponible y conserva como parcial cualquier período incompleto.
+    </div>
 
-    <div class="current-year-detail-table-wrapper">
-      <table
-        class="table align-middle current-year-detail-table"
-      >
+    <div class="current-year-detail-table-wrapper app-table-shell">
+      <table class="table align-middle current-year-detail-table">
         <thead>
           <tr>
             <th scope="col">Mes</th>
@@ -128,98 +81,33 @@
       </table>
     </div>
 
-    <div class="form-text mt-2">
-      En modo mensual debes indicar si el dato es completo o parcial. En modo
-      quincenal el estado se deriva automáticamente según las quincenas ingresadas.
-    </div>
+    <div id="detalle-cuotas-sincronizadas" class="alert alert-info mt-4 d-none" role="status" aria-live="polite"></div>
+    <div id="error-detalle-anio-actual" class="alert alert-danger mt-4 d-none" role="alert"></div>
+    <div id="advertencia-detalle-anio-actual" class="alert alert-warning mt-4 d-none" role="status" aria-live="polite"></div>
+    <div id="detalle-estado-coherencia" class="alert mt-4 mb-0 d-none" role="status" aria-live="polite"></div>
 
-
-    <div
-      id="error-detalle-anio-actual"
-      class="alert alert-danger mt-4 d-none"
-      role="alert"
-    ></div>
-
-    <div
-      id="advertencia-detalle-anio-actual"
-      class="alert alert-warning mt-4 d-none"
-      role="status"
-      aria-live="polite"
-    ></div>
-
-    <div class="d-flex justify-content-end mt-4 wizard-actions-end">
-      <button
-        type="button"
-        id="btn-validar-detalle-anio-actual"
-        class="btn btn-primary px-4"
-      >
-        Validar detalle del año actual
-      </button>
-    </div>
-
-
-    <div
-      id="resultado-detalle-anio-actual"
-      class="mt-5 d-none"
-    >
-      <hr class="mb-4">
-
-      <div class="mb-4">
-        <h4 class="h6 fw-bold mb-2">
-          Resumen del detalle disponible
-        </h4>
-        <p class="text-secondary mb-0">
-          Los totales acreditados se usarán para sincronizar el año actual del
-          historial. Los salarios completos también pueden servir como base para
-          proyectar períodos futuros.
-        </p>
+    <section id="detalle-resumen-visible" class="history-analysis-summary mt-4 d-none" aria-labelledby="detalle-resumen-visible-titulo">
+      <div class="mb-3">
+        <h4 id="detalle-resumen-visible-titulo" class="h6 fw-bold mb-1">Resumen del detalle del año actual</h4>
+        <p class="text-secondary mb-0">Estos valores alimentan las bases salariales automáticas y permiten comprobar qué información reciente está usando la simulación.</p>
       </div>
-
       <div class="row g-3">
-        <div class="col-sm-6 col-xl-3">
-          <div class="summary-card">
-            <span class="summary-label">Cuotas identificadas</span>
-            <strong id="detalle-cuotas-identificadas" class="summary-value">0</strong>
-          </div>
-        </div>
-
-        <div class="col-sm-6 col-xl-3">
-          <div class="summary-card">
-            <span class="summary-label">Salario con cuota acreditada</span>
-            <strong id="detalle-salario-acreditado" class="summary-value salary-value">B/.0.00</strong>
-          </div>
-        </div>
-
-        <div class="col-sm-6 col-xl-3">
-          <div class="summary-card">
-            <span class="summary-label">Salario disponible</span>
-            <strong id="detalle-salario-disponible" class="summary-value salary-value">B/.0.00</strong>
-          </div>
-        </div>
-
-        <div class="col-sm-6 col-xl-3">
-          <div class="summary-card">
-            <span class="summary-label">Último mes acreditado</span>
-            <strong id="detalle-ultimo-mes-acreditado" class="summary-value">—</strong>
-          </div>
-        </div>
+        <div class="col-sm-6 col-xl-3"><div class="summary-card current-year-detail-summary-card"><span class="summary-label">Cuotas identificadas</span><strong id="detalle-resumen-cuotas" class="summary-value">—</strong></div></div>
+        <div class="col-sm-6 col-xl-3"><div class="summary-card current-year-detail-summary-card"><span class="summary-label">Salario disponible</span><strong id="detalle-resumen-salario-disponible" class="summary-value salary-value">—</strong></div></div>
+        <div class="col-sm-6 col-xl-3"><div class="summary-card current-year-detail-summary-card"><span class="summary-label">Salario acreditado</span><strong id="detalle-resumen-salario-acreditado" class="summary-value salary-value">—</strong></div></div>
+        <div class="col-sm-6 col-xl-3"><div class="summary-card current-year-detail-summary-card"><span class="summary-label">Meses con información</span><strong id="detalle-resumen-meses-info" class="summary-value">—</strong></div></div>
+        <div class="col-sm-6 col-xl-3"><div class="summary-card current-year-detail-summary-card"><span class="summary-label">Meses completos</span><strong id="detalle-resumen-meses-completos" class="summary-value">—</strong></div></div>
+        <div class="col-sm-6 col-xl-3"><div class="summary-card current-year-detail-summary-card"><span class="summary-label">Último mes completo</span><strong id="detalle-resumen-ultimo-mes-completo" class="summary-value summary-value-text">—</strong></div></div>
+        <div class="col-sm-6 col-xl-3"><div class="summary-card current-year-detail-summary-card"><span class="summary-label">Último mes con cuota</span><strong id="detalle-resumen-ultimo-mes-cuota" class="summary-value summary-value-text">—</strong></div></div>
+        <div class="col-sm-6 col-xl-3"><div class="summary-card current-year-detail-summary-card"><span class="summary-label">Último salario completo</span><strong id="detalle-resumen-ultimo-salario" class="summary-value salary-value">—</strong></div></div>
+        <div class="col-sm-6 col-xl-3"><div class="summary-card current-year-detail-summary-card"><span class="summary-label">Promedio meses completos</span><strong id="detalle-resumen-promedio-completos" class="summary-value salary-value">—</strong></div></div>
+        <div class="col-sm-6 col-xl-3"><div class="summary-card current-year-detail-summary-card"><span class="summary-label">Promedio últimos 3 meses</span><strong id="detalle-resumen-promedio-tres" class="summary-value salary-value">—</strong></div></div>
+        <div class="col-sm-6 col-xl-3"><div class="summary-card current-year-detail-summary-card"><span class="summary-label">Promedio por cuota acreditada</span><strong id="detalle-resumen-promedio-cuota" class="summary-value salary-value">—</strong></div></div>
       </div>
-
-      <div
-        id="detalle-base-cuota-acreditada"
-        class="retirement-derived-note mt-3"
-      >
-        Promedio del salario acreditado por cuota del año actual: —
-      </div>
-
-      <div
-        id="detalle-estado-coherencia"
-        class="alert mt-4 mb-0"
-        role="status"
-        aria-live="polite"
-      ></div>
-    </div>
-
+    </section>
   </div>
 
+  <p class="official-import-policy-link mb-0 mt-3">
+    <a href="/metodologia#privacidad-datos">Consulta cómo protegemos y utilizamos tus datos.</a>
+  </p>
 </section>

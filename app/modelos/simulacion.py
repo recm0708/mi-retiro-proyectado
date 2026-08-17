@@ -394,7 +394,18 @@ class ResumenFichaDigital(BaseModel):
     registros: list[RegistroFichaDigital]
     anio_mas_reciente: int | None = None
     mes_mas_reciente: int | None = Field(default=None, ge=1, le=12)
+    fecha_referencia: date | None = None
+    fecha_referencia_confiable: bool = False
+    fuente_fecha_referencia: str | None = None
     advertencias: list[str] = Field(default_factory=list)
+
+
+class ResumenFechaReferencia(BaseModel):
+    """Fecha externa utilizada para controles de vigencia documental."""
+
+    fecha: date | None = None
+    confiable: bool = False
+    fuente: str
 
 
 # ============================================================

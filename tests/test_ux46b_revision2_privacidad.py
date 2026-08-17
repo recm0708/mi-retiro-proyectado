@@ -113,7 +113,7 @@ class TestUX46bRevision2Privacidad(unittest.TestCase):
         self.assertIn("context-help-panel-end", self.accesibilidad_js)
 
     def test_identificacion_agrupa_casada_cedula_y_seguro_social(self):
-        self.assertIn('id="apellido-casada-wrapper" class="col-md-4 d-none"', self.simulacion)
+        self.assertIn('id="apellido-casada-wrapper" class="col-md-6 d-none"', self.simulacion)
         zona = self.simulacion.split('id="apellido-casada-wrapper"', 1)[1][:1200]
         self.assertIn('id="cedula"', zona)
         self.assertIn('id="numero_seguro_social"', zona)

@@ -20,6 +20,8 @@
 const ANIO_HISTORIAL_ACTUAL =
   new Date().getFullYear();
 
+let filtroHistorialActual = "TODOS";
+
 
 // ============================================================
 // Inicialización
@@ -43,6 +45,8 @@ function inicializarHistorialSalarial() {
 
   actualizarModoHistorial();
   sincronizarHistorialConDatosActuales();
+  restaurarEstadoImportacionHistorial();
+  actualizarFiltroHistorial();
 
   if (
     selectorModo.value === "MANUAL"
@@ -154,8 +158,20 @@ function actualizarModoHistorial() {
   );
 
   const simulacion = obtenerSimulacion();
+  const modoAnterior = simulacion.modo_historial || "MANUAL";
 
   simulacion.modo_historial = modo;
+
+  if (modoAnterior !== modo) {
+    simulacion.resumen_historial = null;
+    simulacion.resumen_salario = null;
+    simulacion.resumen_proyeccion = null;
+    simulacion.resumen_linea_tiempo = null;
+    simulacion.retiro = {};
+    simulacion.resumen_retiro = null;
+    document.getElementById("historial-estado-general")?.classList.add("d-none");
+    document.getElementById("resultado-paso3")?.classList.add("d-none");
+  }
 
   guardarSimulacion(simulacion);
 }
@@ -168,9 +184,7 @@ function actualizarModoHistorial() {
 function confirmarModoSoloActual() {
   const simulacion = obtenerSimulacion();
 
-  simulacion.modo_historial =
-    "SOLO_ACTUAL";
-
+  simulacion.modo_historial = "SOLO_ACTUAL";
   simulacion.historial = null;
   simulacion.resumen_historial = null;
   simulacion.resumen_proyeccion = null;
@@ -185,9 +199,235 @@ function confirmarModoSoloActual() {
 
   guardarSimulacion(simulacion);
 
-  document.getElementById(
-    "monto_salario",
-  ).focus();
+  if (typeof actualizarResumenPaso3 === "function") {
+    actualizarResumenPaso3();
+  }
+
+  return true;
+}
+
+
+function restaurarEstadoImportacionHistorial() {
+  const simulacion = obtenerSimulacion();
+  const acciones = document.getElementById("historial-importado-acciones");
+
+  if (!acciones) return;
+
+  const hayImportacion = Boolean(
+    simulacion.importacion_comprobante_confirmada
+    && simulacion.referencia_mi_retiro_seguro
+    && Array.isArray(simulacion.referencia_mi_retiro_seguro.registros)
+    && simulacion.referencia_mi_retiro_seguro.registros.length,
+  );
+
+  acciones.classList.toggle("d-none", !hayImportacion);
+}
+
+
+function origenCampoHistorial(anio, campo) {
+  const simulacion = obtenerSimulacion();
+  return simulacion.origen_campos_historial?.[String(anio)]?.[campo] || null;
+}
+
+
+function aplicarOrigenCampoHistorial(control, anio, campo) {
+  if (!control) return;
+  const origen = origenCampoHistorial(anio, campo);
+  if (!origen) {
+    control.dataset.provenance = control.value.trim() ? "COMPLETADO_MANUAL" : "NO_DETECTADO";
+    return;
+  }
+
+  control.readOnly = true;
+  control.classList.add("history-field-imported");
+  control.setAttribute("aria-readonly", "true");
+  const codigo = typeof codigoProcedenciaDesdeOrigen === "function"
+    ? codigoProcedenciaDesdeOrigen(origen)
+    : "DETECTADO";
+  control.dataset.provenance = codigo || "DETECTADO";
+  const etiqueta = typeof textoProcedenciaDato === "function"
+    ? textoProcedenciaDato(codigo)
+    : "Detectado";
+  control.title = `${etiqueta}. Usa Revisar importación si necesitas corregirlo.`;
+}
+
+
+function actualizarPeriodoHistorialVisible() {
+  const inicio = document.getElementById("historial_anio_inicio")?.value || "—";
+  const fin = document.getElementById("historial_anio_fin")?.value || String(ANIO_HISTORIAL_ACTUAL);
+  const salida = document.getElementById("historial-periodo-visible");
+  if (salida) salida.textContent = `${inicio}–${fin}`;
+}
+
+
+function evaluarEstadoFilaHistorial(fila) {
+  const cuotasTexto = fila.querySelector(".history-input-cuotas")?.value.trim() || "";
+  const salarioTexto = fila.querySelector(".history-input-salario")?.value.trim() || "";
+  const tieneCuotas = cuotasTexto !== "";
+  const tieneSalario = salarioTexto !== "";
+
+  if (!tieneCuotas && !tieneSalario) {
+    return {
+      codigo: "PENDIENTE",
+      etiqueta: "Pendiente",
+      clase: "history-status-pending",
+      pendiente: true,
+    };
+  }
+
+  if (tieneCuotas && !tieneSalario) {
+    return {
+      codigo: "FALTA_SALARIO",
+      etiqueta: "Falta salario",
+      clase: "history-status-missing",
+      pendiente: true,
+    };
+  }
+
+  if (!tieneCuotas && tieneSalario) {
+    return {
+      codigo: "FALTAN_CUOTAS",
+      etiqueta: "Faltan cuotas",
+      clase: "history-status-missing",
+      pendiente: true,
+    };
+  }
+
+  const cuotas = Number(cuotasTexto);
+  const salario = obtenerValorMonetario(salarioTexto || "0");
+
+  if (
+    !Number.isInteger(cuotas)
+    || cuotas < 0
+    || cuotas > 12
+    || !Number.isFinite(salario)
+    || salario < 0
+  ) {
+    return {
+      codigo: "REVISAR",
+      etiqueta: "Revisar",
+      clase: "history-status-review",
+      pendiente: true,
+    };
+  }
+
+  if (cuotas === 0 && salario === 0) {
+    return {
+      codigo: "SIN_COTIZACION",
+      etiqueta: "Sin cotización",
+      clase: "history-status-none",
+      pendiente: false,
+    };
+  }
+
+  if ((cuotas === 0 && salario > 0) || (cuotas > 0 && salario <= 0)) {
+    return {
+      codigo: "REVISAR",
+      etiqueta: "Revisar",
+      clase: "history-status-review",
+      pendiente: true,
+    };
+  }
+
+  if (cuotas < 12) {
+    return {
+      codigo: "PARCIAL",
+      etiqueta: "Parcial",
+      clase: "history-status-partial",
+      pendiente: false,
+    };
+  }
+
+  return {
+    codigo: "COMPLETO",
+    etiqueta: "Completo",
+    clase: "history-status-complete",
+    pendiente: false,
+  };
+}
+
+
+function filaHistorialPendiente(fila) {
+  return evaluarEstadoFilaHistorial(fila).pendiente;
+}
+
+
+function actualizarFiltroHistorial() {
+  const filas = Array.from(document.querySelectorAll("#historial-tabla-body tr"));
+  let visibles = 0;
+
+  filas.forEach((fila) => {
+    const mostrar = filtroHistorialActual === "TODOS" || filaHistorialPendiente(fila);
+    fila.classList.toggle("d-none", !mostrar);
+    if (mostrar) visibles += 1;
+  });
+
+  document.querySelectorAll("[data-history-filter]").forEach((boton) => {
+    const activo = boton.dataset.historyFilter === filtroHistorialActual;
+    boton.classList.toggle("active", activo);
+    boton.setAttribute("aria-pressed", String(activo));
+  });
+
+  const estado = document.getElementById("historial-filtro-estado");
+  if (estado) {
+    estado.textContent = filtroHistorialActual === "PENDIENTES"
+      ? `${visibles} año(s) pendiente(s)`
+      : `${filas.length} año(s) en el período`;
+  }
+
+  const contenedor = document.querySelector(".history-table-wrapper");
+  const vacio = document.getElementById("historial-filtro-vacio");
+  const sinPendientesVisibles = filtroHistorialActual === "PENDIENTES" && visibles === 0;
+
+  if (contenedor) {
+    const tablaCorta = visibles <= 4;
+    contenedor.classList.toggle("table-scroll-compact", tablaCorta);
+    contenedor.classList.toggle("d-none", sinPendientesVisibles);
+    contenedor.dataset.visibleRows = String(visibles);
+
+    if (tablaCorta) {
+      contenedor.scrollTop = 0;
+    }
+  }
+
+  if (vacio) {
+    vacio.classList.toggle("d-none", !sinPendientesVisibles);
+  }
+}
+
+
+/**
+ * Mantiene el estado visual y el filtro sincronizados mientras el usuario
+ * escribe, sin depender de listeners instalados en cada fila individual.
+ */
+function manejarEdicionDelegadaHistorial(evento) {
+  const control = evento.target.closest(
+    ".history-input-cuotas, .history-input-salario",
+  );
+
+  if (!control) return;
+
+  const fila = control.closest("tr");
+  if (!fila) return;
+
+  if (!control.readOnly) {
+    control.dataset.provenance = control.value.trim()
+      ? "COMPLETADO_MANUAL"
+      : "NO_DETECTADO";
+  }
+
+  actualizarEstadoFila(fila);
+  invalidarHistorial();
+}
+
+
+function configurarEventosDelegadosHistorial() {
+  const cuerpo = document.getElementById("historial-tabla-body");
+  if (!cuerpo || cuerpo.dataset.historyDelegated === "true") return;
+
+  cuerpo.dataset.historyDelegated = "true";
+  cuerpo.addEventListener("input", manejarEdicionDelegadaHistorial);
+  cuerpo.addEventListener("change", manejarEdicionDelegadaHistorial);
 }
 
 
@@ -247,6 +487,14 @@ function crearFilaHistorial(
 
   fila.dataset.anio = anio;
 
+  const filaTieneImportacion = Boolean(
+    origenCampoHistorial(anio, "cuotas")
+    || origenCampoHistorial(anio, "salario_cotizado")
+  );
+
+  fila.classList.add(filaTieneImportacion ? "data-row-imported" : "data-row-manual");
+  fila.dataset.dataOrigin = filaTieneImportacion ? "imported" : "manual";
+
 
   // ----------------------------------------------------------
   // Año
@@ -283,6 +531,7 @@ function crearFilaHistorial(
     "aria-label",
     `Cuotas ${anio}`,
   );
+  inputCuotas.placeholder = "0–12";
 
 
   // ----------------------------------------------------------
@@ -317,8 +566,9 @@ function crearFilaHistorial(
 
   inputSalario.setAttribute(
     "aria-label",
-    `Salario cotizado ${anio}`,
+    `Salario anual reportado ${anio}`,
   );
+  inputSalario.placeholder = "Ej.: 12,000.00";
 
   grupoSalario.append(
     prefijo,
@@ -409,6 +659,22 @@ function crearFilaHistorial(
   }
 
 
+  aplicarOrigenCampoHistorial(inputCuotas, anio, "cuotas");
+  aplicarOrigenCampoHistorial(inputSalario, anio, "salario_cotizado");
+
+  // Un cero no confirmado no debe parecer un salario válido cuando el
+  // año actual ya tiene cuotas. Se muestra como pendiente para que el
+  // usuario pueda completarlo o derivarlo desde el detalle del año actual.
+  if (
+    anio === ANIO_HISTORIAL_ACTUAL
+    && Number(inputCuotas.value || 0) > 0
+    && obtenerValorMonetario(inputSalario.value || 0) <= 0
+    && !origenCampoHistorial(anio, "salario_cotizado")
+    && inputSalario.dataset.sincronizadoDetalle !== "true"
+  ) {
+    inputSalario.value = "";
+  }
+
   configurarCampoMonetario(
     inputSalario,
   );
@@ -418,21 +684,9 @@ function crearFilaHistorial(
   // Eventos
   // ----------------------------------------------------------
 
-  inputCuotas.addEventListener(
-    "input",
-    () => {
-      actualizarEstadoFila(
-        fila,
-      );
-
-      invalidarHistorial();
-    },
-  );
-
-  inputSalario.addEventListener(
-    "input",
-    invalidarHistorial,
-  );
+  // La actualización reactiva de la fila se gestiona mediante
+  // delegación sobre el tbody. Así continúa funcionando aunque
+  // la tabla se regenere, cambie el filtro o se restauren datos.
 
 
   // ----------------------------------------------------------
@@ -517,6 +771,7 @@ function generarTablaHistorial() {
   }
 
   cuerpo.replaceChildren();
+  actualizarPeriodoHistorialVisible();
 
   for (
     let anio = inicio;
@@ -535,6 +790,15 @@ function generarTablaHistorial() {
       ),
     );
   }
+
+  actualizarFiltroHistorial();
+
+  if (
+    simulacion.detalle_anio_actual_habilitado
+    && typeof sincronizarFilaAnualDesdeDetalleLocal === "function"
+  ) {
+    sincronizarFilaAnualDesdeDetalleLocal();
+  }
 }
 
 
@@ -545,84 +809,15 @@ function generarTablaHistorial() {
  * @param {HTMLTableRowElement} fila Fila que debe actualizarse.
  */
 function actualizarEstadoFila(fila) {
-  const input = fila.querySelector(
-    ".history-input-cuotas",
-  );
+  const etiqueta = fila.querySelector(".history-status");
+  if (!etiqueta) return;
 
-  const etiqueta = fila.querySelector(
-    ".history-status",
-  );
+  const estado = evaluarEstadoFilaHistorial(fila);
+  etiqueta.className = `history-status ${estado.clase}`;
+  etiqueta.textContent = estado.etiqueta;
+  etiqueta.dataset.historyState = estado.codigo;
 
-  if (input.value === "") {
-    etiqueta.className =
-      "history-status history-status-pending";
-
-    etiqueta.textContent =
-      "Pendiente";
-
-    return;
-  }
-
-  const cuotas = Number(
-    input.value,
-  );
-
-  if (cuotas === 0) {
-    etiqueta.className =
-      "history-status history-status-none";
-
-    etiqueta.textContent =
-      "Sin cotización";
-
-  } else if (cuotas < 12) {
-    etiqueta.className =
-      "history-status history-status-partial";
-
-    etiqueta.textContent =
-      "Parcial";
-
-  } else {
-    etiqueta.className =
-      "history-status history-status-complete";
-
-    etiqueta.textContent =
-      "Completo";
-  }
-}
-
-
-/**
- * Completa con doce cuotas los años que todavía no tienen
- * un valor introducido.
- */
-function completarCuotasVacias() {
-  document
-    .querySelectorAll(
-      "#historial-tabla-body tr",
-    )
-    .forEach((fila) => {
-      const anio = Number(
-        fila.dataset.anio,
-      );
-
-      const input = fila.querySelector(
-        ".history-input-cuotas",
-      );
-
-      // El año actual ya está vinculado al Paso 2.
-      if (
-        anio !== ANIO_HISTORIAL_ACTUAL
-        && input.value === ""
-      ) {
-        input.value = 12;
-
-        actualizarEstadoFila(
-          fila,
-        );
-      }
-    });
-
-  invalidarHistorial();
+  actualizarFiltroHistorial();
 }
 
 
@@ -672,6 +867,18 @@ function leerRegistrosHistorial() {
       cuotasTexto === ""
       || salarioTexto === ""
     ) {
+      if (
+        anio === ANIO_HISTORIAL_ACTUAL
+        && cuotasTexto !== ""
+        && Number(cuotasTexto) > 0
+        && salarioTexto === ""
+      ) {
+        throw new Error(
+          `Completa el salario anual reportado de ${anio}. `
+          + "Si prefieres construirlo con salarios mensuales o quincenales, activa el detalle del año actual.",
+        );
+      }
+
       throw new Error(
         `Completa tanto las cuotas como el salario del año ${anio}.`,
       );
@@ -704,6 +911,21 @@ function leerRegistrosHistorial() {
       );
     }
 
+    if (cuotas > 0 && salario <= 0) {
+      const orientacion = anio === ANIO_HISTORIAL_ACTUAL
+        ? " Completa el total anual reportado o activa el detalle del año actual para construirlo con salarios mensuales o quincenales."
+        : "";
+      throw new Error(
+        `El año ${anio} tiene cuotas acreditadas pero falta un salario anual válido.${orientacion}`,
+      );
+    }
+
+    if (cuotas === 0 && salario > 0) {
+      throw new Error(
+        `El año ${anio} tiene salario reportado pero registra cero cuotas. Revisa ambos valores.`,
+      );
+    }
+
     registros.push({
       anio: anio,
       cuotas: cuotas,
@@ -722,17 +944,20 @@ async function analizarHistorialSalarial() {
   ocultarErrorHistorial();
   ocultarAdvertenciaHistorial();
 
-  const simulacion =
+  let simulacion =
     obtenerSimulacion();
 
-  if (
-    !simulacion.resumen_cuotas
-  ) {
-    mostrarErrorHistorial(
-      "Primero debes analizar las cuotas en el Paso 2.",
+  if (!simulacion.resumen_cuotas) {
+    const puedeRevalidar = (
+      typeof asegurarCuotasAnalizadasParaPaso3 === "function"
+      && await asegurarCuotasAnalizadasParaPaso3()
     );
 
-    return;
+    if (!puedeRevalidar) {
+      return false;
+    }
+
+    simulacion = obtenerSimulacion();
   }
 
   let registros;
@@ -746,7 +971,7 @@ async function analizarHistorialSalarial() {
       error.message,
     );
 
-    return;
+    return false;
   }
 
   const anioInicio = Number(
@@ -797,7 +1022,7 @@ async function analizarHistorialSalarial() {
         ),
       );
 
-      return;
+      return false;
     }
 
     simulacion.modo_historial =
@@ -832,10 +1057,12 @@ async function analizarHistorialSalarial() {
       contenido,
     );
 
+    return true;
   } catch {
     mostrarErrorHistorial(
       "No fue posible comunicarse con el servidor.",
     );
+    return false;
   }
 }
 
@@ -844,77 +1071,70 @@ async function analizarHistorialSalarial() {
 // Presentación del resultado
 // ============================================================
 
+function ocultarResumenHistorialAnalizado() {
+  const contenedor = document.getElementById("historial-resumen-analizado");
+  contenedor?.classList.add("d-none");
+}
+
+
+function mostrarResumenHistorialAnalizado(resumen) {
+  const contenedor = document.getElementById("historial-resumen-analizado");
+  if (!contenedor || !resumen) return;
+
+  const asignar = (id, valor) => {
+    const elemento = document.getElementById(id);
+    if (elemento) elemento.textContent = valor;
+  };
+
+  asignar("historial-resumen-cuotas-referencia", resumen.cuotas_totales_referencia ?? "—");
+  asignar("historial-resumen-cuotas-identificadas", resumen.cuotas_sumadas ?? "—");
+  asignar("historial-resumen-diferencia", resumen.diferencia_cuotas ?? "—");
+  asignar(
+    "historial-resumen-total-salarios",
+    typeof formatearMoneda === "function"
+      ? formatearMoneda(resumen.total_salarios_reportados)
+      : resumen.total_salarios_reportados,
+  );
+
+  contenedor.classList.remove("d-none");
+}
+
 /**
  * Muestra el resumen devuelto por el backend.
  *
  * @param {Object} resumen Resultado del historial salarial.
  */
 function mostrarResumenHistorial(resumen) {
-  document.getElementById(
-    "resultado-historial",
-  ).classList.remove("d-none");
+  mostrarResumenHistorialAnalizado(resumen);
 
-  document.getElementById(
-    "historial-cuotas-referencia",
-  ).textContent =
-    resumen.cuotas_totales_referencia;
+  const estado = document.getElementById("historial-estado-general");
 
-  document.getElementById(
-    "historial-cuotas-sumadas",
-  ).textContent =
-    resumen.cuotas_sumadas;
+  if (estado) {
+    estado.classList.remove("d-none");
 
-  document.getElementById(
-    "historial-diferencia-cuotas",
-  ).textContent =
-    resumen.diferencia_cuotas;
+    if (resumen.cuotas_coinciden && resumen.historial_completo) {
+      estado.className = "alert alert-success mt-4 mb-0";
+      estado.textContent = "El historial registrado coincide con el total de cuotas acreditadas informado en el Paso 2.";
+    } else {
+      estado.className = "alert alert-warning mt-4 mb-0";
+      const mensajes = [];
 
-  document.getElementById(
-    "historial-total-salarios",
-  ).textContent = formatearMoneda(
-    resumen.total_salarios_reportados,
-  );
+      if (!resumen.historial_completo) {
+        mensajes.push(`Faltan registros para ${resumen.anios_sin_registro.length} año(s).`);
+      }
 
-  const estado = document.getElementById(
-    "historial-estado-general",
-  );
+      if (resumen.diferencia_cuotas !== 0) {
+        mensajes.push(
+          `Existe una diferencia de ${resumen.diferencia_cuotas} cuota(s) respecto del total informado en el Paso 2.`,
+        );
+      }
 
-  if (
-    resumen.cuotas_coinciden
-    && resumen.historial_completo
-  ) {
-    estado.className =
-      "alert alert-success mt-4 mb-0";
-
-    estado.textContent =
-      "El historial introducido explica el total de cuotas "
-      + "acreditadas informado en el Paso 2.";
-
-  } else {
-    estado.className =
-      "alert alert-warning mt-4 mb-0";
-
-    const mensajes = [];
-
-    if (
-      !resumen.historial_completo
-    ) {
-      mensajes.push(
-        `Faltan registros para ${resumen.anios_sin_registro.length} año(s).`,
-      );
+      estado.textContent = mensajes.join(" ");
     }
+  }
 
-    if (
-      resumen.diferencia_cuotas !== 0
-    ) {
-      mensajes.push(
-        `Existe una diferencia de ${resumen.diferencia_cuotas} cuota(s) `
-        + "respecto del total informado en el Paso 2.",
-      );
-    }
-
-    estado.textContent =
-      mensajes.join(" ");
+  if (typeof actualizarResumenPaso3 === "function") {
+    actualizarResumenPaso3();
   }
 }
 
@@ -928,6 +1148,8 @@ function invalidarHistorial() {
 
   simulacion.resumen_historial =
     null;
+
+  ocultarResumenHistorialAnalizado();
 
   simulacion.resumen_proyeccion =
     null;
@@ -947,9 +1169,8 @@ function invalidarHistorial() {
     simulacion,
   );
 
-  document.getElementById(
-    "resultado-historial",
-  ).classList.add("d-none");
+  document.getElementById("historial-estado-general")?.classList.add("d-none");
+  document.getElementById("resultado-paso3")?.classList.add("d-none");
 }
 
 
@@ -992,6 +1213,7 @@ function ocultarAdvertenciaHistorial() {
 document.addEventListener(
   "DOMContentLoaded",
   () => {
+    configurarEventosDelegadosHistorial();
     inicializarHistorialSalarial();
 
     document.getElementById(
@@ -1008,17 +1230,6 @@ document.addEventListener(
         ) {
           generarTablaHistorial();
         }
-      },
-    );
-
-
-    document.getElementById(
-      "btn-generar-historial",
-    ).addEventListener(
-      "click",
-      () => {
-        generarTablaHistorial();
-        invalidarHistorial();
       },
     );
 
@@ -1044,27 +1255,20 @@ document.addEventListener(
     );
 
 
-    document.getElementById(
-      "btn-completar-cuotas",
-    ).addEventListener(
+    document.querySelectorAll("[data-history-filter]").forEach((boton) => {
+      boton.addEventListener("click", () => {
+        filtroHistorialActual = boton.dataset.historyFilter || "TODOS";
+        actualizarFiltroHistorial();
+      });
+    });
+
+    document.getElementById("btn-revisar-historial-importado")?.addEventListener(
       "click",
-      completarCuotasVacias,
-    );
-
-
-    document.getElementById(
-      "btn-analizar-historial",
-    ).addEventListener(
-      "click",
-      analizarHistorialSalarial,
-    );
-
-
-    document.getElementById(
-      "btn-confirmar-solo-actual",
-    ).addEventListener(
-      "click",
-      confirmarModoSoloActual,
+      () => {
+        if (typeof revisarComprobanteImportado === "function") {
+          revisarComprobanteImportado(3);
+        }
+      },
     );
   },
 );

@@ -26,8 +26,8 @@ const AYUDAS_CONTEXTUALES = {
     texto: "Representa cuántos meses por año esperas seguir cotizando a partir del próximo año. Usa 12 si prevés cotizar todos los meses.",
   },
   modo_historial: {
-    titulo: "Cómo proporcionar el historial",
-    texto: "El historial anual permite cálculos más completos. Si solo conoces tu salario actual podrás continuar, pero algunas prestaciones pueden quedar incompletas por falta de información histórica.",
+    titulo: "Disponibilidad del historial",
+    texto: "Registra o completa el historial anual cuando dispongas de él. Si solo conoces información salarial reciente podrás continuar, aunque algunos cálculos pueden quedar limitados por falta de historial.",
   },
   historial_anio_inicio: {
     titulo: "Año inicial del historial",
@@ -42,16 +42,16 @@ const AYUDAS_CONTEXTUALES = {
     texto: "Usa total mensual si conoces el salario completo del mes. Usa captura quincenal si deseas registrar cada quincena por separado y detectar automáticamente meses parciales.",
   },
   origen_salario_proyeccion: {
-    titulo: "Base salarial futura",
-    texto: "Puedes indicar un salario manual o utilizar una base derivada de meses completos del año actual. Esta elección solo afecta la proyección futura; no reemplaza el salario histórico acreditado.",
+    titulo: "Base salarial para proyección",
+    texto: "Puedes indicar un salario manual o utilizar una base calculada a partir del detalle validado del año actual. Esta elección se usa únicamente como punto de partida de la proyección futura.",
   },
   monto_salario: {
-    titulo: "Salario actual",
-    texto: "Ingresa el monto vigente que deseas usar como punto de partida para proyectar salarios futuros. No escribas aquí el acumulado salarial del año.",
+    titulo: "Salario base",
+    texto: "Ingresa el monto que deseas usar como punto de partida de la proyección cuando hayas elegido una base manual. No escribas aquí el acumulado salarial del año.",
   },
   periodicidad_salario: {
-    titulo: "Periodicidad del salario",
-    texto: "Selecciona la forma en que está expresado el monto anterior. La aplicación calculará equivalentes sin cambiar el valor original que ingresaste.",
+    titulo: "Periodicidad del salario base",
+    texto: "Selecciona si el monto manual está expresado de forma semanal, quincenal, mensual o anual. Si utilizas una base automática se aplicará la periodicidad mensual.",
   },
   proyeccion_anio_fin: {
     titulo: "Horizonte de proyección",
@@ -100,20 +100,20 @@ let focoInvalidoProgramado = false;
 // UX.4.6c R2: pistas breves dentro de campos editables. El placeholder
 // desaparece de forma nativa cuando existe un valor manual o importado.
 const PISTAS_CAMPOS = {
-  primer_nombre: "Ej.: Anabel",
-  segundo_nombre: "Ej.: Estela",
-  primer_apellido: "Ej.: Miranda",
-  segundo_apellido: "Ej.: Madrid",
-  apellido_casada: "Ej.: Cañizares",
-  cedula: "Ej.: 4-710-1295",
-  numero_seguro_social: "Ingresa el número de Seguro Social",
+  primer_nombre: "Ej.: Nombre",
+  segundo_nombre: "Ej.: Segundo nombre",
+  primer_apellido: "Ej.: Apellido",
+  segundo_apellido: "Ej.: Segundo apellido",
+  apellido_casada: "Ej.: Apellido de casada",
+  cedula: "Ej.: 8-000-0000",
+  numero_seguro_social: "Ej.: 00000000",
   cuotas_totales: "Ej.: 281",
   cuotas_anio_actual: "Ej.: 5",
   cuotas_esperadas_cierre_anio: "Ej.: 12",
   cuotas_esperadas_por_anio: "Ej.: 12",
   historial_anio_inicio: "Ej.: 1992",
   historial_anio_fin: "Ej.: 2026",
-  monto_salario: "Ej.: 1480.00",
+  monto_salario: "Ej.: 1500.00",
   proyeccion_anio_inicio: "Ej.: 2026",
   proyeccion_anio_fin: "Ej.: 2031",
   porcentaje_anual: "Ej.: 2.00",
@@ -610,7 +610,7 @@ function prepararCaptionsTablas() {
 
 function prepararContenedoresDesplazables() {
   document
-    .querySelectorAll(".table-responsive, .history-table-wrapper, .timeline-table-wrapper, .retirement-table-wrapper, .comparison-table-wrapper")
+    .querySelectorAll(".app-table-shell, .table-responsive, .history-table-wrapper, .timeline-table-wrapper, .retirement-table-wrapper, .comparison-table-wrapper")
     .forEach((contenedor) => {
       const tieneDesbordamiento = contenedor.scrollWidth > contenedor.clientWidth + 1;
 

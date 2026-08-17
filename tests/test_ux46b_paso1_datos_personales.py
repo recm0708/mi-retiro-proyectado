@@ -66,6 +66,9 @@ class TestUX46bPaso1DatosPersonales(unittest.TestCase):
         cls.ficha = (
             ROOT / "app/templates/partials/importacion_ficha_digital.html"
         ).read_text(encoding="utf-8")
+        cls.detalle = (
+            ROOT / "app/templates/partials/detalle_anio_actual.html"
+        ).read_text(encoding="utf-8")
         cls.simulacion_js = (ROOT / "app/static/js/simulacion.js").read_text(encoding="utf-8")
         cls.importacion_js = (
             ROOT / "app/static/js/importacion_datos_oficiales.js"
@@ -97,25 +100,26 @@ class TestUX46bPaso1DatosPersonales(unittest.TestCase):
             "numero_seguro_social",
         ):
             self.assertIn(f'id="{identificador}"', self.simulacion)
-        self.assertIn("Opcional. Estos datos permiten identificar la simulación", self.simulacion)
+        self.assertIn("Los datos de identificación son opcionales", self.simulacion)
         self.assertNotIn('id="primer_nombre" maxlength="80" required', self.simulacion)
 
     def test_apellido_casada_es_condicional_para_sexo_femenino(self):
-        self.assertIn('id="apellido-casada-wrapper" class="col-md-4 d-none"', self.simulacion)
+        self.assertIn('id="apellido-casada-wrapper" class="col-md-6 d-none"', self.simulacion)
         self.assertIn('const mostrar = sexo === "F"', self.importacion_js)
         self.assertIn('actualizarApellidoCasada()', self.importacion_js)
 
     def test_manual_y_pdf_son_modalidades_mutuamente_excluyentes(self):
         self.assertIn('importacion?.classList.toggle("d-none", !esPdf)', self.importacion_js)
         self.assertIn('formulario.classList.toggle("d-none", esPdf && !importacionConfirmada)', self.importacion_js)
-        self.assertIn('bloquearFormularioPersonal(esPdf && importacionConfirmada)', self.importacion_js)
+        self.assertIn('bloquearFormularioPersonal(esPdf && importacionConfirmada, simulacion)', self.importacion_js)
         self.assertIn('modo_datos_personales: "MANUAL"', self.simulacion_js)
 
     def test_ficha_digital_sale_del_paso_uno_y_se_ubica_en_historial(self):
         paso1 = self.simulacion.split('data-panel="1"', 1)[1].split('data-panel="2"', 1)[0]
         paso3 = self.simulacion.split('data-panel="3"', 1)[1].split('data-panel="4"', 1)[0]
         self.assertNotIn('importacion_ficha_digital.html', paso1)
-        self.assertIn('importacion_ficha_digital.html', paso3)
+        self.assertIn('detalle_anio_actual.html', paso3)
+        self.assertIn('importacion_ficha_digital.html', self.detalle)
         self.assertIn("Importar salarios recientes desde Ficha Digital", self.ficha)
 
     def test_navegacion_comun_tiene_barra_superior_e_inferior(self):

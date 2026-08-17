@@ -64,7 +64,7 @@ class TestUX46bRevision3TerminosNavegacion(unittest.TestCase):
         self.assertIn("!check?.checked || !lecturaPrivacidadCompletada()", self.privacidad_js)
 
     def test_version_de_privacidad_cambia_en_revision3(self):
-        self.assertIn('VERSION_PRIVACIDAD = "2026-08-13.2"', self.privacidad_js)
+        self.assertIn('VERSION_PRIVACIDAD = "2026-08-16.1"', self.privacidad_js)
 
     def test_navegacion_superior_e_inferior_comparten_contrato(self):
         self.assertIn('data-wizard-nav="top"', self.simulacion)

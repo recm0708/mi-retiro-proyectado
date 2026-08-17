@@ -15,7 +15,7 @@
     <div class="modal-content">
       <div class="modal-header privacy-consent-header">
         <div>
-          <span class="privacy-consent-kicker">Antes de comenzar</span>
+          <span class="privacy-consent-kicker" id="privacidad-modal-kicker">Antes de comenzar</span>
           <h2 class="modal-title h4 fw-bold mb-1" id="privacidad-simulacion-titulo">
             Términos, privacidad y tratamiento de datos
           </h2>
@@ -23,6 +23,14 @@
             Lee el documento completo. Al llegar al final podrás habilitar la aceptación.
           </p>
         </div>
+        <button
+          type="button"
+          id="btn-privacidad-cerrar"
+          class="privacy-modal-close"
+          aria-label="Cerrar términos y privacidad"
+        >
+          <span aria-hidden="true">×</span>
+        </button>
       </div>
 
       <div class="modal-body privacy-consent-body" id="privacidad-contenido-desplazable" tabindex="0">
@@ -74,9 +82,9 @@
           <h3 class="h6 fw-bold" id="privacidad-obtencion">4. Obtención de la información</h3>
           <p>
             La información puede ser introducida manualmente por el usuario o detectada desde un
-            documento PDF compatible que el propio usuario seleccione. Antes de incorporar datos
+            documento que el propio usuario seleccione para importación. Antes de incorporar datos
             detectados desde un documento, la aplicación muestra una vista previa para que puedan
-            revisarse y, si es necesario, corregirse. Ningún dato detectado desde un PDF se considera
+            revisarse y, si es necesario, corregirse. Ningún dato detectado desde un documento se considera
             aceptado por el usuario hasta que este confirme expresamente la importación.
           </p>
         </section>
@@ -113,8 +121,17 @@
             El tratamiento se realiza a partir de la decisión del usuario de utilizar la simulación
             y aceptar estas condiciones. El consentimiento debe ser previo, informado e inequívoco.
             La negativa a aceptarlo impide continuar con la captura o importación de datos personales
-            y devuelve al usuario a la página de Inicio. Los campos identificativos que no sean
-            necesarios para el cálculo se mantienen como opcionales.
+            y devuelve al usuario a la página de Inicio. Cerrar la ventana inicial sin aceptar tiene
+            el mismo efecto: la simulación no continúa. Los campos identificativos que no sean
+            necesarios para el cálculo se mantienen como opcionales. El usuario puede dejar de usar
+            la simulación en cualquier momento y dispone de controles para limpiar un paso, reiniciar
+            toda la simulación o borrar los datos locales de la aplicación en este navegador. Las
+            condiciones vigentes pueden consultarse desde Fuentes. Si todavía no existe una aceptación
+            válida, esa misma consulta permite leer el documento completo y otorgar el consentimiento;
+            después no se solicitará nuevamente al entrar a Simular mientras siga vigente la misma
+            versión. Si ya existe una aceptación válida, abrir los términos desde Fuentes funciona solo
+            como consulta y no exige aceptarlos de nuevo. Cerrar la consulta sin aceptar, incluso mediante
+            el botón de cierre o la tecla Escape, no registra consentimiento ni habilita la simulación.
           </p>
         </section>
 
@@ -130,13 +147,23 @@
         </section>
 
         <section class="privacy-terms-section" aria-labelledby="privacidad-documentos">
-          <h3 class="h6 fw-bold" id="privacidad-documentos">9. Tratamiento de documentos PDF</h3>
+          <h3 class="h6 fw-bold" id="privacidad-documentos">9. Tratamiento de documentos importados</h3>
           <p>
-            Los documentos seleccionados se utilizan únicamente para extraer los datos compatibles
-            con la simulación. La aplicación no incorpora el archivo PDF original a una base de datos
+            Los documentos seleccionados se utilizan únicamente para extraer los datos necesarios
+            para la simulación. La aplicación no incorpora el archivo original a una base de datos
             permanente. Si un documento contiene información que no sea necesaria para la simulación,
             esa información no debe utilizarse para finalidades distintas a la revisión y extracción
             solicitada por el propio usuario.
+          </p>
+          <p>
+            Para advertir si una Ficha Digital puede estar desactualizada, la aplicación intenta
+            obtener por HTTPS una fecha de referencia desde infraestructura web oficial de la Caja
+            de Seguro Social. Esa consulta solicita únicamente la fecha publicada por el servidor y
+            <strong>no envía el documento, nombres, cédula, número de Seguro Social, salarios, cuotas
+            ni resultados de la simulación</strong>. Como en cualquier conexión web, el sitio consultado
+            puede recibir datos técnicos ordinarios de conexión, incluida la dirección IP. Si la fecha
+            externa no puede verificarse, la aplicación no sustituye silenciosamente esa referencia por
+            el reloj local del equipo: muestra una advertencia y permite al usuario decidir si continúa.
           </p>
         </section>
 
@@ -146,9 +173,21 @@
             La información de la simulación se conserva temporalmente en el navegador para permitir
             avanzar entre pasos, volver a revisar datos y recuperar el estado mientras se utiliza la
             misma pestaña. La aplicación no mantiene, en su versión actual, una cuenta personal ni
-            una base de datos permanente con el historial del usuario. El usuario puede eliminar la
-            simulación y retirar su autorización; cerrar la sesión de navegación también elimina la
-            información temporal asociada a esa sesión.
+            una base de datos permanente con el historial del usuario.
+          </p>
+          <p>
+            Dentro del asistente, <strong>Limpiar este paso</strong> elimina los datos del paso activo
+            y también invalida los cálculos posteriores que dependan de ellos, conservando los pasos
+            anteriores. <strong>Reiniciar simulación</strong> elimina todos los datos introducidos o
+            importados y todos los cálculos de la simulación, pero conserva la apariencia elegida y
+            la aceptación vigente de estas condiciones.
+          </p>
+          <p>
+            En la sección de Privacidad, <strong>Borrar datos de esta aplicación en este navegador</strong>
+            elimina además la constancia local de aceptación y las preferencias recordadas por Mi Retiro
+            Proyectado. Esta acción se refiere a la información guardada localmente por la versión actual;
+            no equivale a una solicitud de eliminación ante un servicio remoto, ya que esta versión no
+            mantiene una base de datos permanente de simulaciones.
           </p>
         </section>
 
@@ -169,12 +208,13 @@
           <h3 class="h6 fw-bold" id="privacidad-terceros">12. Cesión, destinatarios y transferencias</h3>
           <p>
             La versión actual no vende ni cede la información de la simulación a terceros para fines
-            comerciales. La interfaz puede cargar recursos técnicos necesarios para su presentación;
-            esos servicios pueden recibir información técnica ordinaria de conexión, como ocurre al
-            visitar cualquier recurso en Internet, pero la aplicación no les envía nombres, cédula,
-            número de Seguro Social, salarios, cuotas ni resultados de la simulación. Si en el futuro
-            se incorporan servicios externos que reciban datos personales, esta política deberá
-            actualizarse antes de habilitarlos.
+            comerciales. La interfaz puede cargar recursos técnicos necesarios para su presentación y
+            el backend puede consultar infraestructura oficial de la CSS exclusivamente para obtener una
+            fecha de referencia de vigencia documental. Esas conexiones pueden recibir información técnica
+            ordinaria de red, como la dirección IP, pero la aplicación no les envía nombres, cédula, número
+            de Seguro Social, salarios, cuotas, documentos ni resultados de la simulación. Si en el futuro
+            se incorporan servicios externos que reciban datos personales o información previsional, esta
+            política deberá actualizarse antes de habilitarlos.
           </p>
         </section>
 
@@ -196,8 +236,10 @@
             De acuerdo con el marco panameño de protección de datos, el titular puede solicitar,
             cuando corresponda, acceso a sus datos y a su finalidad, rectificación de información
             inexacta, cancelación o eliminación, oposición a determinados tratamientos y portabilidad.
-            En esta aplicación también puede revisar y corregir datos antes de utilizarlos y retirar
-            su autorización para continuar la simulación.
+            En esta aplicación también puede revisar y corregir datos antes de utilizarlos, limpiar
+            información por paso, reiniciar la simulación y borrar los datos locales de la aplicación
+            en este navegador. Estos controles complementan, pero no sustituyen, los mecanismos formales
+            para ejercer los derechos que correspondan frente a un responsable del tratamiento.
           </p>
         </section>
 
@@ -285,7 +327,7 @@
 
       </div>
 
-      <div class="modal-footer privacy-consent-footer">
+      <div class="modal-footer privacy-consent-footer" id="privacidad-consent-footer">
         <button type="button" id="btn-privacidad-rechazar" class="btn btn-outline-secondary">
           No acepto
         </button>

@@ -38,11 +38,12 @@ class TestRemateUX41(unittest.TestCase):
             self.simulacion,
         )
 
-    def test_accion_completar_cuotas_tiene_estilo_semantico_propio(self):
-        self.assertIn("history-fill-action", self.historial)
-        self.assertIn(".history-fill-action", self.estilos)
-        self.assertIn("--app-warning-bg", self.estilos)
-        self.assertIn("--app-warning-border", self.estilos)
+    def test_historial_no_inventa_cuotas_y_ofrece_filtro_de_pendientes(self):
+        self.assertNotIn("Completar cuotas vacías con 12", self.historial)
+        self.assertNotIn("history-fill-action", self.historial)
+        self.assertNotIn(".history-fill-action", self.estilos)
+        self.assertIn('data-history-filter="TODOS"', self.historial)
+        self.assertIn('data-history-filter="PENDIENTES"', self.historial)
 
     def test_fila_completa_puede_seleccionar_escenario_futuro(self):
         self.assertIn("retirement-row-selectable", self.retiro_js)

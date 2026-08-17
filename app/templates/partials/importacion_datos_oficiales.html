@@ -5,9 +5,9 @@
   <div class="official-import-card">
     <div class="mb-4">
       <span class="official-import-source-kicker">Mi Retiro Seguro</span>
-      <h3 class="h5 fw-bold mt-1 mb-2">Importar desde un comprobante PDF</h3>
+      <h3 class="h5 fw-bold mt-1 mb-2">Importar información desde Mi Retiro Seguro</h3>
       <p class="text-secondary mb-0">
-        Selecciona un comprobante compatible y revisa la información detectada antes
+        Selecciona tu comprobante y revisa la información detectada antes
         de incorporarla a tu simulación.
       </p>
     </div>
@@ -15,7 +15,7 @@
     <div class="official-import-source-card official-import-upload-card">
       <div class="official-import-upload-grid">
         <div class="official-import-upload-file">
-          <label for="import-comprobante-pdf" class="form-label fw-semibold">1. Selecciona el PDF</label>
+          <label for="import-comprobante-pdf" class="form-label fw-semibold">1. Selecciona el documento</label>
           <input type="file" id="import-comprobante-pdf" class="form-control official-import-file-input"
                  accept=".pdf,application/pdf">
         </div>
@@ -28,6 +28,8 @@
       </div>
 
       <div id="estado-comprobante-importacion" class="official-import-status mt-3 d-none" role="status" aria-live="polite"></div>
+
+      <div id="documento-comprobante-importado" class="official-import-persisted-document mt-3 d-none" role="status" aria-live="polite"></div>
 
       <div id="acciones-comprobante-importado" class="d-flex flex-wrap gap-2 mt-3 d-none">
         <button type="button" id="btn-revisar-comprobante-importacion" class="btn btn-outline-primary">
@@ -161,6 +163,7 @@
               <small id="estado-preview-comprobante-cuotas-anio-actual" class="import-field-status"></small>
             </div>
           </div>
+          <p id="preview-comprobante-cuotas-contexto" class="small text-secondary mt-3 mb-0 d-none"></p>
         </section>
 
         <section class="import-preview-section mb-4" data-preview-step="5,6" aria-labelledby="preview-retiro-prestacion-titulo">
@@ -184,7 +187,7 @@
             </div>
             <span class="badge text-bg-secondary" id="preview-comprobante-registros-contador">0 registros</span>
           </div>
-          <div class="official-import-table-wrapper">
+          <div class="official-import-table-wrapper app-table-shell">
             <table class="table align-middle mb-0 official-import-preview-table">
               <caption class="visually-hidden">Historial anual detectado en el comprobante y selección de filas que se aplicarán al historial real del Paso 3.</caption>
               <thead><tr><th scope="col">Pasar al historial</th><th scope="col">Año</th><th scope="col">Edad</th><th scope="col">Tipo</th><th scope="col">Salario anual</th><th scope="col">Cuotas</th></tr></thead>

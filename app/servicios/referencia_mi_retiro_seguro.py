@@ -256,6 +256,22 @@ def extraer_referencia_desde_texto(texto: str) -> ResumenReferenciaMiRetiroSegur
     if sexo:
         sexo_codigo = "F" if sexo.lower().startswith("f") else "M"
 
+    fecha_ingreso_css = _fecha_ddmmyyyy(
+        _buscar(r"Fecha de Ingreso CSS:\s*(\d{2}/\d{2}/\d{4})", texto)
+    )
+
+    historicos = [registro for registro in registros if registro.tipo == "HISTORICO"]
+    if fecha_ingreso_css and historicos:
+        anio_historico_inicial = min(registro.anio for registro in historicos)
+        if anio_historico_inicial < fecha_ingreso_css.year:
+            advertencias.append(
+                "El comprobante contiene historial desde "
+                f"{anio_historico_inicial}, anterior a la fecha de ingreso CSS "
+                f"indicada ({fecha_ingreso_css.strftime('%d/%m/%Y')}). "
+                "Los registros se conservarán porque aparecen en el documento; "
+                "revisa esta diferencia antes de continuar si necesitas confirmarla."
+            )
+
     # Se priorizan componentes etiquetados explícitamente. Si el comprobante
     # solo ofrece un nombre completo, UX.4.6b R2 aplica una descomposición
     # conservadora que el Asegurado(a) puede revisar antes de importar.
@@ -312,9 +328,7 @@ def extraer_referencia_desde_texto(texto: str) -> ResumenReferenciaMiRetiroSegur
             _buscar(r"Fecha de Nacimiento:\s*(\d{2}/\d{2}/\d{4})", texto)
         ),
         sexo=sexo_codigo,
-        fecha_ingreso_css=_fecha_ddmmyyyy(
-            _buscar(r"Fecha de Ingreso CSS:\s*(\d{2}/\d{2}/\d{4})", texto)
-        ),
+        fecha_ingreso_css=fecha_ingreso_css,
         sistema_elegido=sistema,
         sistema_elegido_nombre=nombre_sistema,
         edad_retiro_elegida=(

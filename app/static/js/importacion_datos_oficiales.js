@@ -8,13 +8,185 @@
 let borradorImportacionComprobante = null;
 let edicionPreviewComprobanteHabilitada = false;
 let previewComprobanteFueEditado = false;
+let camposEditadosPreviewComprobante = new Set();
 let pasoVistaPreviewComprobante = 1;
 let borradorImportacionFichaDigital = null;
+let edicionPreviewFichaHabilitada = false;
+let previewFichaFueEditado = false;
+let camposEditadosPreviewFicha = new Set();
+let borradorFichaPendienteVigencia = null;
 
 const MESES_IMPORTACION = [
   "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
   "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre",
 ];
+
+
+function textoPeriodoFicha(anio, mes) {
+  const nombreMes = MESES_IMPORTACION[Number(mes) - 1];
+  if (!nombreMes || !Number(anio)) return "período no identificado";
+  return `${nombreMes.toLowerCase()} de ${anio}`;
+}
+
+
+function descomponerFechaReferenciaFicha(resumen) {
+  if (!resumen?.fecha_referencia_confiable || !resumen?.fecha_referencia) return null;
+  const coincidencia = String(resumen.fecha_referencia).match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (!coincidencia) return null;
+  return {
+    anio: Number(coincidencia[1]),
+    mes: Number(coincidencia[2]),
+    dia: Number(coincidencia[3]),
+  };
+}
+
+
+function anioFichaDigital(resumen) {
+  const anio = Number(resumen?.anio_mas_reciente);
+  if (anio) return anio;
+  const registros = Array.isArray(resumen?.registros) ? resumen.registros : [];
+  return registros.reduce((maximo, registro) => Math.max(maximo, Number(registro.anio || 0)), 0);
+}
+
+
+function evaluarVigenciaFichaDigital(resumen) {
+  const anio = Number(resumen?.anio_mas_reciente);
+  const mes = Number(resumen?.mes_mas_reciente);
+  const referencia = descomponerFechaReferenciaFicha(resumen);
+
+  if (!anio || !mes) {
+    return {
+      estado: "NO_IDENTIFICADA",
+      diferenciaMeses: null,
+      requiereDecision: true,
+      periodo: "período no identificado",
+      periodoReferencia: referencia ? textoPeriodoFicha(referencia.anio, referencia.mes) : null,
+    };
+  }
+
+  if (!referencia) {
+    return {
+      estado: "FECHA_NO_VERIFICADA",
+      diferenciaMeses: null,
+      requiereDecision: true,
+      periodo: textoPeriodoFicha(anio, mes),
+      periodoReferencia: null,
+    };
+  }
+
+  const indiceDocumento = (anio * 12) + (mes - 1);
+  const indiceActual = (referencia.anio * 12) + (referencia.mes - 1);
+  const diferenciaMeses = indiceActual - indiceDocumento;
+
+  let estado = "RECIENTE";
+  if (diferenciaMeses > 0) {
+    estado = "DESACTUALIZADA";
+  } else if (diferenciaMeses < 0) {
+    estado = "PERIODO_FUTURO";
+  }
+
+  return {
+    estado,
+    diferenciaMeses,
+    requiereDecision: estado !== "RECIENTE",
+    periodo: textoPeriodoFicha(anio, mes),
+    periodoReferencia: textoPeriodoFicha(referencia.anio, referencia.mes),
+  };
+}
+
+
+function mensajeVigenciaFichaDigital(resumen) {
+  const vigencia = evaluarVigenciaFichaDigital(resumen);
+
+  if (vigencia.estado === "DESACTUALIZADA") {
+    return (
+      `El último salario detectado corresponde a ${vigencia.periodo}. `
+      + `La fecha actual verificada corresponde a ${vigencia.periodoReferencia}. `
+      + "Si tienes una Ficha Digital del mes actual, conviene utilizarla; también puedes continuar con esta y completar manualmente la información faltante."
+    );
+  }
+
+  if (vigencia.estado === "PERIODO_FUTURO") {
+    return (
+      `La Ficha Digital contiene como período más reciente ${vigencia.periodo}, `
+      + `posterior a la fecha actual verificada (${vigencia.periodoReferencia}). Revisa el documento antes de continuar.`
+    );
+  }
+
+  if (vigencia.estado === "FECHA_NO_VERIFICADA") {
+    return (
+      `El último salario detectado corresponde a ${vigencia.periodo}. `
+      + "No fue posible verificar en línea la fecha actual con una fuente oficial de la CSS. "
+      + "Por seguridad, revisa si dispones de una Ficha Digital más reciente o continúa con esta de forma consciente."
+    );
+  }
+
+  if (vigencia.estado === "NO_IDENTIFICADA") {
+    return (
+      "No fue posible determinar el último período salarial de la Ficha Digital. "
+      + "Puedes seleccionar otra ficha o continuar y revisar cuidadosamente la vista previa."
+    );
+  }
+
+  return `Último período detectado: ${vigencia.periodo}. Coincide con el mes actual verificado.`;
+}
+
+
+function mostrarDecisionVigenciaFichaDigital(resumen) {
+  borradorFichaPendienteVigencia = structuredClone(resumen);
+  const mensaje = document.getElementById("mensaje-vigencia-ficha-digital");
+  if (mensaje) mensaje.textContent = mensajeVigenciaFichaDigital(resumen);
+  obtenerModalBootstrap("modal-vigencia-ficha-digital")?.show();
+}
+
+
+function continuarConFichaPendienteVigencia() {
+  if (!borradorFichaPendienteVigencia) return;
+  const resumen = structuredClone(borradorFichaPendienteVigencia);
+  borradorFichaPendienteVigencia = null;
+
+  const modalElemento = document.getElementById("modal-vigencia-ficha-digital");
+  const modal = obtenerModalBootstrap("modal-vigencia-ficha-digital");
+  if (!modalElemento || !modal) {
+    renderizarPreviewFichaDigital(resumen, []);
+    return;
+  }
+
+  modalElemento.addEventListener(
+    "hidden.bs.modal",
+    () => renderizarPreviewFichaDigital(resumen, []),
+    { once: true },
+  );
+  modal.hide();
+}
+
+
+function seleccionarOtraFichaPorVigencia() {
+  borradorFichaPendienteVigencia = null;
+  const modalElemento = document.getElementById("modal-vigencia-ficha-digital");
+  const modal = obtenerModalBootstrap("modal-vigencia-ficha-digital");
+  const input = document.getElementById("import-ficha-digital-pdf");
+
+  const prepararSelector = () => {
+    if (!input) return;
+    input.value = "";
+    actualizarEstadoBotonAnalizarFichaDigital();
+    input.focus();
+    mostrarEstadoImportacion(
+      "estado-ficha-digital-importacion",
+      "Selecciona una Ficha Digital más reciente y vuelve a analizar el documento.",
+      "info",
+    );
+  };
+
+  if (!modalElemento || !modal) {
+    prepararSelector();
+    return;
+  }
+
+  modalElemento.addEventListener("hidden.bs.modal", prepararSelector, { once: true });
+  modal.hide();
+}
 
 
 function obtenerModalBootstrap(id) {
@@ -119,12 +291,22 @@ function actualizarApellidoCasada() {
   }
 }
 
-function bloquearFormularioPersonal(bloqueado) {
+function bloquearFormularioPersonal(bloqueado, simulacion = obtenerSimulacion()) {
+  let origenes = simulacion.origen_campos_persona || {};
+  if (bloqueado && Object.keys(origenes).length === 0 && typeof actualizarProcedenciaDatosPersonales === "function") {
+    origenes = actualizarProcedenciaDatosPersonales(simulacion) || {};
+  }
+
   document.querySelectorAll("#bloque-datos-personales input, #bloque-datos-personales select").forEach((control) => {
+    const bloquearCampo = Boolean(
+      bloqueado
+      && typeof origenBloqueaCampo === "function"
+      && origenBloqueaCampo(origenes[control.id]),
+    );
     if (control.matches("select")) {
-      control.disabled = bloqueado;
+      control.disabled = bloquearCampo;
     } else {
-      control.readOnly = bloqueado;
+      control.readOnly = bloquearCampo;
     }
   });
 }
@@ -142,7 +324,7 @@ function aplicarModoDatosPersonales(modo, simulacion = obtenerSimulacion()) {
   if (formulario) {
     formulario.classList.toggle("d-none", esPdf && !importacionConfirmada);
   }
-  bloquearFormularioPersonal(esPdf && importacionConfirmada);
+  bloquearFormularioPersonal(esPdf && importacionConfirmada, simulacion);
 
   document.querySelectorAll(".personal-data-source-option").forEach((opcion) => {
     const radio = opcion.querySelector('input[name="modo_datos_personales"]');
@@ -186,12 +368,81 @@ function actualizarApellidoCasadaPreview() {
   });
 }
 
-function marcarEstadoDeteccion(idControl, valor) {
+function valorFueDetectado(valor) {
+  return (
+    valor !== null
+    && valor !== undefined
+    && String(valor).trim() !== ""
+    && valor !== "NO_IDENTIFICADO"
+  );
+}
+
+
+function marcarEstadoDeteccion(idControl, valor, editado = false, origenExplicito = null) {
   const estado = document.getElementById(`estado-${idControl}`);
+  const control = document.getElementById(idControl);
   if (!estado) return;
-  const detectado = valor !== null && valor !== undefined && String(valor).trim() !== "" && valor !== "NO_IDENTIFICADO";
+
+  const detectado = valorFueDetectado(valor);
+  if (control) control.dataset.detectedOriginally = detectado ? "true" : "false";
+
+  if (origenExplicito && typeof codigoProcedenciaDesdeOrigen === "function") {
+    const codigo = codigoProcedenciaDesdeOrigen(origenExplicito);
+    if (codigo) {
+      estado.textContent = textoProcedenciaDato(codigo);
+      estado.className = `import-field-status ${claseProcedenciaDato(codigo)}`;
+      if (control) control.dataset.provenance = codigo;
+      return;
+    }
+  }
+
+  if (editado) {
+    estado.textContent = detectado ? "Editado por ti" : "Completado manualmente";
+    estado.className = "import-field-status edited";
+    return;
+  }
+
   estado.textContent = detectado ? "Detectado" : "No detectado";
   estado.className = `import-field-status ${detectado ? "detected" : "missing"}`;
+}
+
+
+function registrarEdicionCampoPreviewComprobante(control) {
+  if (!edicionPreviewComprobanteHabilitada || !control) return;
+
+  const clave = control.dataset.provenanceKey || control.id;
+  if (!clave) return;
+
+  previewComprobanteFueEditado = true;
+  camposEditadosPreviewComprobante.add(clave);
+
+  const estado = control.id ? document.getElementById(`estado-${control.id}`) : null;
+  if (!estado) return;
+
+  const detectadoOriginal = control.dataset.detectedOriginally === "true";
+  estado.textContent = detectadoOriginal ? "Editado por ti" : "Completado manualmente";
+  estado.className = "import-field-status edited";
+}
+
+
+function origenDesdeControlPreviewComprobante(control, fuente = "MI_RETIRO_SEGURO") {
+  if (!control) return `${fuente}_NO_DETECTADO`;
+  const clave = control.dataset.provenanceKey || control.id;
+  const editado = Boolean(clave && camposEditadosPreviewComprobante.has(clave));
+  const detectadoOriginal = control.dataset.detectedOriginally === "true";
+  const procedenciaActual = control.dataset.provenance || null;
+
+  if (editado) {
+    if (["COMPLETADO_MANUAL", "NO_DETECTADO"].includes(procedenciaActual)) {
+      return `${fuente}_COMPLETADO_MANUAL`;
+    }
+    return detectadoOriginal
+      ? `${fuente}_EDITADO`
+      : `${fuente}_COMPLETADO_MANUAL`;
+  }
+  return detectadoOriginal
+    ? `${fuente}_DETECTADO`
+    : `${fuente}_NO_DETECTADO`;
 }
 
 function establecerEdicionPreviewComprobante(habilitada) {
@@ -201,7 +452,7 @@ function establecerEdicionPreviewComprobante(habilitada) {
 
   modal.querySelectorAll(".modal-body input").forEach((control) => {
     if (control.type === "checkbox") {
-      control.disabled = !habilitada;
+      control.disabled = control.dataset.importedLocked === "true" || !habilitada;
     } else {
       control.readOnly = !habilitada;
     }
@@ -224,7 +475,6 @@ function establecerEdicionPreviewComprobante(habilitada) {
 
 function alternarEdicionPreviewComprobante() {
   const habilitar = !edicionPreviewComprobanteHabilitada;
-  if (habilitar) previewComprobanteFueEditado = true;
   establecerEdicionPreviewComprobante(habilitar);
 }
 
@@ -241,7 +491,11 @@ function crearFilaPreviewComprobante(registro) {
   aplicar.type = "checkbox";
   aplicar.className = "form-check-input preview-comprobante-aplicar";
   aplicar.checked = registro.tipo === "HISTORICO";
-  aplicar.setAttribute("aria-label", `Pasar ${registro.anio} al historial real`);
+  aplicar.disabled = true;
+  aplicar.dataset.importedLocked = "true";
+  aplicar.setAttribute("aria-label", `Clasificación automática del año ${registro.anio} para el historial real`);
+  fila.classList.add("data-row-imported");
+  fila.dataset.dataOrigin = "imported";
 
   const anio = document.createElement("input");
   anio.type = "number";
@@ -251,6 +505,8 @@ function crearFilaPreviewComprobante(registro) {
   anio.className = "form-control form-control-sm preview-comprobante-anio";
   anio.value = registro.anio;
   anio.setAttribute("aria-label", `Año detectado ${registro.anio}`);
+  anio.dataset.provenanceKey = `historial:${registro.anio}:anio`;
+  anio.dataset.detectedOriginally = "true";
 
   const edad = document.createElement("input");
   edad.type = "number";
@@ -260,6 +516,8 @@ function crearFilaPreviewComprobante(registro) {
   edad.className = "form-control form-control-sm preview-comprobante-edad";
   edad.value = registro.edad;
   edad.setAttribute("aria-label", `Edad detectada para ${registro.anio}`);
+  edad.dataset.provenanceKey = `historial:${registro.anio}:edad`;
+  edad.dataset.detectedOriginally = "true";
 
   const tipo = document.createElement("select");
   tipo.className = "form-select form-select-sm preview-comprobante-tipo";
@@ -270,6 +528,8 @@ function crearFilaPreviewComprobante(registro) {
   `;
   tipo.value = registro.tipo;
   tipo.setAttribute("aria-label", `Tipo de registro ${registro.anio}`);
+  tipo.dataset.provenanceKey = `historial:${registro.anio}:tipo`;
+  tipo.dataset.detectedOriginally = "true";
 
   const salarioGrupo = document.createElement("div");
   salarioGrupo.className = "input-group input-group-sm";
@@ -281,6 +541,8 @@ function crearFilaPreviewComprobante(registro) {
   salario.className = "form-control preview-comprobante-salario money-input";
   salario.value = formatearNumeroMonetario(registro.salario_anual);
   salario.setAttribute("aria-label", `Salario anual detectado ${registro.anio}`);
+  salario.dataset.provenanceKey = `historial:${registro.anio}:salario`;
+  salario.dataset.detectedOriginally = "true";
   salarioGrupo.append(prefijo, salario);
   configurarCampoMonetario(salario);
 
@@ -292,6 +554,8 @@ function crearFilaPreviewComprobante(registro) {
   cuotas.className = "form-control form-control-sm preview-comprobante-cuotas-anio";
   cuotas.value = registro.cuotas;
   cuotas.setAttribute("aria-label", `Cuotas detectadas ${registro.anio}`);
+  cuotas.dataset.provenanceKey = `historial:${registro.anio}:cuotas`;
+  cuotas.dataset.detectedOriginally = "true";
 
   [aplicar, anio, edad, tipo, salarioGrupo, cuotas].forEach((control) => {
     const celda = document.createElement("td");
@@ -300,7 +564,17 @@ function crearFilaPreviewComprobante(registro) {
   });
 
   tipo.addEventListener("change", () => {
-    if (tipo.value === "PROYECTADO") aplicar.checked = false;
+    aplicar.checked = tipo.value === "HISTORICO";
+  });
+
+  [anio, edad, tipo, salario, cuotas].forEach((control) => {
+    const clave = control.dataset.provenanceKey;
+    if (clave && camposEditadosPreviewComprobante.has(clave)) {
+      control.dataset.provenance = "EDITADO_USUARIO";
+      control.title = "Editado por ti durante la revisión de la importación.";
+    } else {
+      control.dataset.provenance = "DETECTADO";
+    }
   });
 
   return fila;
@@ -364,36 +638,69 @@ function leerNumeroOpcionalPreview(id) {
 }
 
 
-function renderizarPreviewComprobante(referencia, numeroPaso = 1) {
+function renderizarPreviewComprobante(
+  referencia,
+  numeroPaso = 1,
+  camposEditados = [],
+  origenesPersona = {},
+  origenesCuotas = {},
+) {
   borradorImportacionComprobante = structuredClone(referencia);
-  previewComprobanteFueEditado = false;
+  camposEditadosPreviewComprobante = new Set(camposEditados || []);
+  previewComprobanteFueEditado = camposEditadosPreviewComprobante.size > 0;
 
   const campos = {
-    "preview-comprobante-primer-nombre": referencia.primer_nombre,
-    "preview-comprobante-segundo-nombre": referencia.segundo_nombre,
-    "preview-comprobante-primer-apellido": referencia.primer_apellido,
-    "preview-comprobante-segundo-apellido": referencia.segundo_apellido,
-    "preview-comprobante-apellido-casada": referencia.apellido_casada,
-    "preview-comprobante-cedula": referencia.cedula,
-    "preview-comprobante-seguro-social": referencia.numero_seguro_social,
-    "preview-comprobante-fecha-nacimiento": referencia.fecha_nacimiento,
-    "preview-comprobante-sexo": referencia.sexo,
-    "preview-comprobante-fecha-ingreso": referencia.fecha_ingreso_css,
-    "preview-comprobante-sistema": referencia.sistema_elegido || "NO_IDENTIFICADO",
+    "preview-comprobante-primer-nombre": [referencia.primer_nombre, "primer_nombre"],
+    "preview-comprobante-segundo-nombre": [referencia.segundo_nombre, "segundo_nombre"],
+    "preview-comprobante-primer-apellido": [referencia.primer_apellido, "primer_apellido"],
+    "preview-comprobante-segundo-apellido": [referencia.segundo_apellido, "segundo_apellido"],
+    "preview-comprobante-apellido-casada": [referencia.apellido_casada, "apellido_casada"],
+    "preview-comprobante-cedula": [referencia.cedula, "cedula"],
+    "preview-comprobante-seguro-social": [referencia.numero_seguro_social, "numero_seguro_social"],
+    "preview-comprobante-fecha-nacimiento": [referencia.fecha_nacimiento, "fecha_nacimiento"],
+    "preview-comprobante-sexo": [referencia.sexo, "sexo"],
+    "preview-comprobante-fecha-ingreso": [referencia.fecha_ingreso_css, "fecha_ingreso_css"],
+    "preview-comprobante-sistema": [referencia.sistema_elegido || "NO_IDENTIFICADO", "sistema"],
   };
 
-  Object.entries(campos).forEach(([id, valor]) => {
+  Object.entries(campos).forEach(([id, [valor, campoPersona]]) => {
     const control = document.getElementById(id);
     if (control) control.value = valor || (id === "preview-comprobante-sistema" ? "NO_IDENTIFICADO" : "");
-    marcarEstadoDeteccion(id, valor);
+    marcarEstadoDeteccion(
+      id,
+      valor,
+      camposEditadosPreviewComprobante.has(id),
+      origenesPersona?.[campoPersona] || null,
+    );
   });
 
 
   const cuotasAnioActual = obtenerCuotasAnioActualReferencia(referencia);
   document.getElementById("preview-comprobante-cuotas").value = referencia.cuotas_historicas ?? "";
   document.getElementById("preview-comprobante-cuotas-anio-actual").value = cuotasAnioActual ?? "";
-  marcarEstadoDeteccion("preview-comprobante-cuotas", referencia.cuotas_historicas);
-  marcarEstadoDeteccion("preview-comprobante-cuotas-anio-actual", cuotasAnioActual);
+  marcarEstadoDeteccion(
+    "preview-comprobante-cuotas",
+    referencia.cuotas_historicas,
+    camposEditadosPreviewComprobante.has("preview-comprobante-cuotas"),
+    origenesCuotas?.cuotas_totales || null,
+  );
+  marcarEstadoDeteccion(
+    "preview-comprobante-cuotas-anio-actual",
+    cuotasAnioActual,
+    camposEditadosPreviewComprobante.has("preview-comprobante-cuotas-anio-actual"),
+    origenesCuotas?.cuotas_anio_actual || null,
+  );
+
+  const contextoCuotas = document.getElementById("preview-comprobante-cuotas-contexto");
+  if (contextoCuotas) {
+    const acreditadas = Number(referencia.cuotas_historicas || 0);
+    const acumuladas = Number(referencia.total_cuotas_acumuladas || 0);
+    const hayProyectadas = acumuladas > acreditadas;
+    contextoCuotas.textContent = hayProyectadas
+      ? `El comprobante también muestra ${acumuladas} cuotas acumuladas al incluir períodos proyectados. Para el Paso 2 se conservan ${acreditadas} cuotas ya acreditadas.`
+      : "";
+    contextoCuotas.classList.toggle("d-none", !hayProyectadas);
+  }
   document.getElementById("preview-comprobante-edad-retiro").value = referencia.edad_retiro_elegida ?? "";
   const campoMontoReferencia = document.getElementById("preview-comprobante-monto");
   campoMontoReferencia.value = formatearNumeroMonetario(referencia.monto_estimado_prestacion ?? 0);
@@ -423,7 +730,7 @@ async function analizarComprobanteImportacion() {
   const archivo = input.files?.[0];
 
   if (!archivo) {
-    mostrarEstadoImportacion("estado-comprobante-importacion", "Selecciona primero el comprobante PDF.", "danger");
+    mostrarEstadoImportacion("estado-comprobante-importacion", "Selecciona primero el comprobante que deseas analizar.", "danger");
     return;
   }
 
@@ -447,7 +754,8 @@ async function analizarComprobanteImportacion() {
       return;
     }
 
-    renderizarPreviewComprobante(contenido, 1);
+    contenido.nombre_archivo_origen = archivo.name;
+    renderizarPreviewComprobante(contenido, 1, []);
   } catch {
     mostrarEstadoImportacion("estado-comprobante-importacion", "No fue posible comunicarse con el servidor.", "danger");
   } finally {
@@ -460,6 +768,7 @@ async function analizarComprobanteImportacion() {
 function leerRegistrosPreviewComprobante() {
   return Array.from(document.querySelectorAll("#preview-comprobante-registros tr")).map((fila) => ({
     aplicar_historial: fila.querySelector(".preview-comprobante-aplicar").checked,
+    anio_origen: Number(fila.dataset.anio),
     anio: Number(fila.querySelector(".preview-comprobante-anio").value),
     edad: Number(fila.querySelector(".preview-comprobante-edad").value),
     tipo: fila.querySelector(".preview-comprobante-tipo").value,
@@ -501,16 +810,34 @@ function confirmarComprobanteImportacion() {
     fecha_comprobante: document.getElementById("preview-comprobante-fecha").value || null,
     prestacion_esperada: prestacion || null,
     naturaleza_prestacion: naturalezaPrestacionImportada(prestacion),
-    registros: registrosPreview.map(({ aplicar_historial, ...registro }) => registro),
+    registros: registrosPreview.map(({ aplicar_historial, anio_origen, ...registro }) => registro),
   };
 
   const simulacion = obtenerSimulacion();
+  simulacion.campos_editados_importacion_comprobante = Array.from(
+    camposEditadosPreviewComprobante,
+  );
   simulacion.referencia_mi_retiro_seguro = referencia;
   simulacion.importacion_comprobante_confirmada = true;
   simulacion.modo_datos_personales = "MI_RETIRO_SEGURO";
   simulacion.origen_persona = previewComprobanteFueEditado
     ? "MI_RETIRO_SEGURO_EDITADO"
     : "MI_RETIRO_SEGURO";
+
+  const origenesPersona = {
+    primer_nombre: origenDesdeControlPreviewComprobante(document.getElementById("preview-comprobante-primer-nombre")),
+    segundo_nombre: origenDesdeControlPreviewComprobante(document.getElementById("preview-comprobante-segundo-nombre")),
+    primer_apellido: origenDesdeControlPreviewComprobante(document.getElementById("preview-comprobante-primer-apellido")),
+    segundo_apellido: origenDesdeControlPreviewComprobante(document.getElementById("preview-comprobante-segundo-apellido")),
+    apellido_casada: origenDesdeControlPreviewComprobante(document.getElementById("preview-comprobante-apellido-casada")),
+    cedula: origenDesdeControlPreviewComprobante(document.getElementById("preview-comprobante-cedula")),
+    numero_seguro_social: origenDesdeControlPreviewComprobante(document.getElementById("preview-comprobante-seguro-social")),
+    fecha_nacimiento: origenDesdeControlPreviewComprobante(document.getElementById("preview-comprobante-fecha-nacimiento")),
+    sexo: origenDesdeControlPreviewComprobante(document.getElementById("preview-comprobante-sexo")),
+    fecha_ingreso_css: origenDesdeControlPreviewComprobante(document.getElementById("preview-comprobante-fecha-ingreso")),
+    sistema: origenDesdeControlPreviewComprobante(document.getElementById("preview-comprobante-sistema")),
+  };
+  simulacion.origen_campos_persona = origenesPersona;
 
   simulacion.persona = {
     ...simulacion.persona,
@@ -535,30 +862,32 @@ function confirmarComprobanteImportacion() {
     ...(cuotasAnioActualConfirmadas != null ? { cuotas_anio_actual: cuotasAnioActualConfirmadas } : {}),
   };
 
-  const origenImportado = previewComprobanteFueEditado
-    ? "MI_RETIRO_SEGURO_EDITADO"
-    : "MI_RETIRO_SEGURO";
-
   simulacion.origen_campos_cuotas = {
     ...(simulacion.origen_campos_cuotas || {}),
+    cuotas_totales: origenDesdeControlPreviewComprobante(
+      document.getElementById("preview-comprobante-cuotas"),
+    ),
+    cuotas_anio_actual: origenDesdeControlPreviewComprobante(
+      document.getElementById("preview-comprobante-cuotas-anio-actual"),
+    ),
   };
 
-  if (referencia.cuotas_historicas != null) {
-    simulacion.origen_campos_cuotas.cuotas_totales = origenImportado;
-  } else {
-    delete simulacion.origen_campos_cuotas.cuotas_totales;
-  }
-
-  if (cuotasAnioActualConfirmadas != null) {
-    simulacion.origen_campos_cuotas.cuotas_anio_actual = origenImportado;
-  } else {
-    delete simulacion.origen_campos_cuotas.cuotas_anio_actual;
-  }
-
   const reales = registrosPreview.filter((registro) => registro.aplicar_historial);
+  simulacion.origen_campos_historial = {};
   if (reales.length > 0) {
     const anioInicio = Math.min(...reales.map((registro) => registro.anio));
     simulacion.modo_historial = "MANUAL";
+    reales.forEach((registro) => {
+      const base = `historial:${registro.anio_origen}`;
+      simulacion.origen_campos_historial[String(registro.anio)] = {
+        cuotas: camposEditadosPreviewComprobante.has(`${base}:cuotas`)
+          ? "MI_RETIRO_SEGURO_EDITADO"
+          : "MI_RETIRO_SEGURO_DETECTADO",
+        salario_cotizado: camposEditadosPreviewComprobante.has(`${base}:salario`)
+          ? "MI_RETIRO_SEGURO_EDITADO"
+          : "MI_RETIRO_SEGURO_DETECTADO",
+      };
+    });
     simulacion.historial_anio_inicio_temporal = anioInicio;
     simulacion.historial = {
       anio_inicio: anioInicio,
@@ -581,6 +910,7 @@ function confirmarComprobanteImportacion() {
     "success",
   );
   document.getElementById("acciones-comprobante-importado")?.classList.remove("d-none");
+  actualizarDocumentoImportadoPersistente("COMPROBANTE", simulacion);
   obtenerModalBootstrap("modal-import-comprobante").hide();
   restaurarModoDatosPersonales(simulacion);
 
@@ -593,13 +923,17 @@ function quitarComprobanteImportacion() {
   simulacion.importacion_comprobante_confirmada = false;
   simulacion.modo_datos_personales = "MANUAL";
   simulacion.origen_persona = "MANUAL";
+  simulacion.origen_campos_persona = {};
   simulacion.origen_campos_cuotas = {};
+  simulacion.origen_campos_historial = {};
+  simulacion.campos_editados_importacion_comprobante = [];
   guardarSimulacion(simulacion);
 
   document.getElementById("import-comprobante-pdf").value = "";
   actualizarEstadoBotonAnalizarComprobante();
   ocultarEstadoImportacion("estado-comprobante-importacion");
   document.getElementById("acciones-comprobante-importado")?.classList.add("d-none");
+  actualizarDocumentoImportadoPersistente("COMPROBANTE", simulacion);
   restaurarModoDatosPersonales(simulacion);
   if (typeof restaurarDatosCuotas === "function") {
     restaurarDatosCuotas(simulacion);
@@ -612,14 +946,83 @@ function revisarComprobanteImportado(numeroPaso = 1) {
     renderizarPreviewComprobante(
       simulacion.referencia_mi_retiro_seguro,
       numeroPaso,
+      simulacion.campos_editados_importacion_comprobante || [],
+      simulacion.origen_campos_persona || {},
+      simulacion.origen_campos_cuotas || {},
     );
   }
+}
+
+
+function actualizarEstadoBotonAnalizarFichaDigital() {
+  const input = document.getElementById("import-ficha-digital-pdf");
+  const boton = document.getElementById("btn-analizar-ficha-digital-importacion");
+  if (!boton) return;
+  boton.disabled = !(input?.files?.length);
+}
+
+
+function establecerEdicionPreviewFicha(habilitada) {
+  edicionPreviewFichaHabilitada = habilitada;
+  const modal = document.getElementById("modal-import-ficha-digital");
+  if (!modal) return;
+
+  modal.querySelectorAll(".modal-body input").forEach((control) => {
+    if (control.type === "checkbox") {
+      control.disabled = control.dataset.importedLocked === "true" || !habilitada;
+    } else {
+      control.readOnly = !habilitada;
+    }
+  });
+
+  modal.querySelectorAll(".modal-body select").forEach((control) => {
+    control.disabled = !habilitada;
+  });
+
+  const boton = document.getElementById("btn-editar-import-ficha");
+  if (boton) boton.textContent = habilitada ? "Finalizar edición" : "Editar campos";
+
+  const importar = document.getElementById("btn-confirmar-import-ficha");
+  if (importar) importar.disabled = habilitada;
+
+  const estado = document.getElementById("estado-edicion-ficha");
+  if (estado) {
+    estado.textContent = habilitada ? "Editando" : "Modo revisión";
+    estado.className = `badge rounded-pill ${habilitada ? "text-bg-primary" : "text-bg-secondary"}`;
+  }
+}
+
+
+function alternarEdicionPreviewFicha() {
+  const habilitar = !edicionPreviewFichaHabilitada;
+  establecerEdicionPreviewFicha(habilitar);
+}
+
+
+function registrarEdicionCampoPreviewFicha(control) {
+  if (!edicionPreviewFichaHabilitada || !control) return;
+  const clave = control.dataset.provenanceKey;
+  if (!clave) return;
+  camposEditadosPreviewFicha.add(clave);
+  previewFichaFueEditado = true;
+  control.dataset.provenance = "EDITADO_USUARIO";
+  control.title = "Editado por ti durante la revisión de la Ficha Digital.";
 }
 
 
 // ============================================================
 // Ficha Digital
 // ============================================================
+
+function registroFichaImportadoAutomaticamente(registro) {
+  return Boolean(
+    registro
+    && registro.estado !== "SIN_INFORMACION"
+    && registro.salario !== null
+    && registro.salario !== undefined
+  );
+}
+
 
 function crearFilaPreviewFicha(registro, esMasReciente) {
   const fila = document.createElement("tr");
@@ -636,6 +1039,8 @@ function crearFilaPreviewFicha(registro, esMasReciente) {
   });
   mes.value = String(registro.mes);
   mes.setAttribute("aria-label", `Mes del salario detectado ${registro.anio}-${String(registro.mes).padStart(2, "0")}`);
+  mes.dataset.provenanceKey = `ficha:${registro.anio}:${registro.mes}:mes`;
+  mes.dataset.provenance = camposEditadosPreviewFicha.has(mes.dataset.provenanceKey) ? "EDITADO_USUARIO" : "DETECTADO";
 
   const salarioGrupo = document.createElement("div");
   salarioGrupo.className = "input-group input-group-sm";
@@ -647,6 +1052,8 @@ function crearFilaPreviewFicha(registro, esMasReciente) {
   salario.className = "form-control preview-ficha-salario money-input";
   salario.value = formatearNumeroMonetario(registro.salario);
   salario.setAttribute("aria-label", `Salario detectado de ${MESES_IMPORTACION[registro.mes - 1]} ${registro.anio}`);
+  salario.dataset.provenanceKey = `ficha:${registro.anio}:${registro.mes}:salario`;
+  salario.dataset.provenance = camposEditadosPreviewFicha.has(salario.dataset.provenanceKey) ? "EDITADO_USUARIO" : "DETECTADO";
   salarioGrupo.append(prefijo, salario);
   configurarCampoMonetario(salario);
 
@@ -659,22 +1066,37 @@ function crearFilaPreviewFicha(registro, esMasReciente) {
   `;
   estado.value = registro.estado || "COMPLETO";
   estado.setAttribute("aria-label", `Estado del salario de ${MESES_IMPORTACION[registro.mes - 1]} ${registro.anio}`);
+  estado.dataset.provenanceKey = `ficha:${registro.anio}:${registro.mes}:estado`;
+  estado.dataset.provenance = camposEditadosPreviewFicha.has(estado.dataset.provenanceKey) ? "EDITADO_USUARIO" : "DETECTADO";
 
   const cuota = document.createElement("input");
   cuota.type = "checkbox";
   cuota.className = "form-check-input preview-ficha-cuota";
+
+  const registroImportadoAutomaticamente =
+    registroFichaImportadoAutomaticamente(registro);
+
+  cuota.checked = registroImportadoAutomaticamente || Boolean(registro.cuota_acreditada);
+  cuota.defaultChecked = cuota.checked;
+  cuota.disabled = registroImportadoAutomaticamente;
+  if (registroImportadoAutomaticamente) {
+    cuota.setAttribute("checked", "checked");
+    cuota.setAttribute("aria-checked", "true");
+    cuota.dataset.importedLocked = "true";
+    fila.classList.add("data-row-imported");
+    fila.dataset.dataOrigin = "imported";
+  }
   cuota.setAttribute("aria-label", `Cuota acreditada de ${MESES_IMPORTACION[registro.mes - 1]} ${registro.anio}`);
 
-  const controles = esMasReciente
-    ? (() => {
-        const nota = document.createElement("small");
-        nota.className = "d-block text-warning mt-1";
-        nota.textContent = "Revisa si este mes está completo o parcial.";
-        const contenedor = document.createElement("div");
-        contenedor.append(estado, nota);
-        return [mes, salarioGrupo, contenedor, cuota];
-      })()
-    : [mes, salarioGrupo, estado, cuota];
+  if (esMasReciente) {
+    estado.title = "Revisa si el último mes detectado está completo o parcial antes de importar.";
+    estado.setAttribute(
+      "aria-label",
+      `Estado del salario de ${MESES_IMPORTACION[registro.mes - 1]} ${registro.anio}. Revisa si el último mes detectado está completo o parcial.`,
+    );
+  }
+
+  const controles = [mes, salarioGrupo, estado, cuota];
 
   controles.forEach((control) => {
     const celda = document.createElement("td");
@@ -682,17 +1104,31 @@ function crearFilaPreviewFicha(registro, esMasReciente) {
     fila.appendChild(celda);
   });
 
+  const celdaProcedencia = document.createElement("td");
+  const clavesProcedencia = [mes, salario, estado]
+    .map((control) => control.dataset.provenanceKey)
+    .filter(Boolean);
+  const fueEditado = clavesProcedencia.some((clave) => camposEditadosPreviewFicha.has(clave));
+  const etiquetaProcedencia = document.createElement("span");
+  etiquetaProcedencia.className = `data-provenance-badge ${fueEditado ? "edited" : "detected"}`;
+  etiquetaProcedencia.textContent = fueEditado ? "Editado por ti" : "Detectado";
+  celdaProcedencia.appendChild(etiquetaProcedencia);
+  fila.appendChild(celdaProcedencia);
+
   return fila;
 }
 
 
-function renderizarPreviewFichaDigital(resumen) {
+function renderizarPreviewFichaDigital(resumen, camposEditados = []) {
   borradorImportacionFichaDigital = structuredClone(resumen);
+  camposEditadosPreviewFicha = new Set(camposEditados || []);
+  previewFichaFueEditado = camposEditadosPreviewFicha.size > 0;
   const cuerpo = document.getElementById("preview-ficha-digital-registros");
   cuerpo.replaceChildren();
 
+  const anioFicha = anioFichaDigital(resumen);
   const registros = (resumen.registros || []).filter(
-    (registro) => registro.anio === ANIO_ACTUAL,
+    (registro) => Number(registro.anio) === anioFicha,
   );
   borradorImportacionFichaDigital.registros = structuredClone(registros);
   const ultimo = registros.length ? registros[registros.length - 1] : null;
@@ -706,6 +1142,7 @@ function renderizarPreviewFichaDigital(resumen) {
   advertencias.textContent = mensajes.join(" ");
   advertencias.classList.toggle("d-none", mensajes.length === 0);
 
+  establecerEdicionPreviewFicha(false);
   obtenerModalBootstrap("modal-import-ficha-digital").show();
 }
 
@@ -716,7 +1153,7 @@ async function analizarFichaDigitalImportacion() {
   const archivo = input.files?.[0];
 
   if (!archivo) {
-    mostrarEstadoImportacion("estado-ficha-digital-importacion", "Selecciona primero la Ficha Digital en PDF.", "danger");
+    mostrarEstadoImportacion("estado-ficha-digital-importacion", "Selecciona primero el documento de Ficha Digital que deseas analizar.", "danger");
     return;
   }
 
@@ -740,34 +1177,45 @@ async function analizarFichaDigitalImportacion() {
       return;
     }
 
-    renderizarPreviewFichaDigital(contenido);
+    contenido.nombre_archivo_origen = archivo.name;
+    const vigencia = evaluarVigenciaFichaDigital(contenido);
+    if (vigencia.requiereDecision) {
+      mostrarDecisionVigenciaFichaDigital(contenido);
+      return;
+    }
+    renderizarPreviewFichaDigital(contenido, []);
   } catch {
     mostrarEstadoImportacion("estado-ficha-digital-importacion", "No fue posible comunicarse con el servidor.", "danger");
   } finally {
     boton.disabled = false;
-    boton.textContent = "Analizar Ficha Digital";
+    boton.textContent = "Analizar documento";
   }
 }
 
 
 function leerRegistrosPreviewFicha() {
-  return Array.from(document.querySelectorAll("#preview-ficha-digital-registros tr")).map((fila) => ({
-    anio: Number(fila.dataset.anio || ANIO_ACTUAL),
-    mes: Number(fila.querySelector(".preview-ficha-mes").value),
-    salario: obtenerValorMonetario(
-      fila.querySelector(".preview-ficha-salario").value || 0,
-    ),
-    estado: fila.querySelector(".preview-ficha-estado").value,
-    cuota_acreditada: fila.querySelector(".preview-ficha-cuota").checked,
-  }));
+  return Array.from(document.querySelectorAll("#preview-ficha-digital-registros tr")).map((fila) => {
+    const cuota = fila.querySelector(".preview-ficha-cuota");
+
+    return {
+      anio: Number(fila.dataset.anio || anioFichaDigital(borradorImportacionFichaDigital) || ANIO_ACTUAL),
+      mes: Number(fila.querySelector(".preview-ficha-mes").value),
+      salario: obtenerValorMonetario(
+        fila.querySelector(".preview-ficha-salario").value || 0,
+      ),
+      estado: fila.querySelector(".preview-ficha-estado").value,
+      cuota_acreditada: cuota.dataset.importedLocked === "true" || cuota.checked,
+    };
+  });
 }
 
 
-function confirmarFichaDigitalImportacion() {
+async function confirmarFichaDigitalImportacion() {
   if (!borradorImportacionFichaDigital) return;
 
+  const anioFicha = anioFichaDigital(borradorImportacionFichaDigital);
   const registros = leerRegistrosPreviewFicha().filter(
-    (registro) => registro.anio === ANIO_ACTUAL,
+    (registro) => Number(registro.anio) === anioFicha,
   );
   const actuales = registros;
   const simulacion = obtenerSimulacion();
@@ -777,21 +1225,29 @@ function confirmarFichaDigitalImportacion() {
     anio_mas_reciente: borradorImportacionFichaDigital.anio_mas_reciente,
     mes_mas_reciente: borradorImportacionFichaDigital.mes_mas_reciente,
     advertencias: borradorImportacionFichaDigital.advertencias || [],
+    nombre_archivo_origen: borradorImportacionFichaDigital.nombre_archivo_origen || null,
+    fecha_referencia: borradorImportacionFichaDigital.fecha_referencia || null,
+    fecha_referencia_confiable: Boolean(borradorImportacionFichaDigital.fecha_referencia_confiable),
+    fuente_fecha_referencia: borradorImportacionFichaDigital.fuente_fecha_referencia || null,
   };
   simulacion.importacion_ficha_digital_confirmada = true;
+  simulacion.campos_editados_importacion_ficha = Array.from(camposEditadosPreviewFicha);
+  simulacion.origen_campos_detalle_anio_actual = {};
 
   if (actuales.length > 0) {
-    const cuotasConfirmadas = actuales.filter((registro) => registro.cuota_acreditada).length;
-    simulacion.cuotas = {
-      ...simulacion.cuotas,
-      cuotas_anio_actual: cuotasConfirmadas,
-    };
+    // UX.4.6d R23: la Ficha Digital aporta el detalle mensual y puede
+    // ampliar la referencia del Paso 2 cuando confirma más cuotas del
+    // año actual que la fotografía previa. Nunca reduce automáticamente
+    // una referencia superior del Paso 2.
+    const cuotasReferenciaPaso2 = Number(
+      simulacion.cuotas?.cuotas_anio_actual || 0,
+    );
 
     simulacion.detalle_anio_actual_habilitado = true;
     simulacion.detalle_anio_actual = {
-      anio: ANIO_ACTUAL,
+      anio: anioFicha,
       modo_captura: "MENSUAL",
-      cuotas_anio_actual_referencia: Number(simulacion.cuotas?.cuotas_anio_actual || 0),
+      cuotas_anio_actual_referencia: cuotasReferenciaPaso2,
       registros: actuales.map((registro) => ({
         mes: registro.mes,
         cuota_acreditada: registro.cuota_acreditada,
@@ -801,22 +1257,91 @@ function confirmarFichaDigitalImportacion() {
         segunda_quincena: null,
       })),
     };
+
+    actuales.forEach((registro) => {
+      const base = `ficha:${registro.anio}:${registro.mes}`;
+      const origenEstado = camposEditadosPreviewFicha.has(`${base}:estado`)
+        ? "FICHA_DIGITAL_EDITADO"
+        : "FICHA_DIGITAL_DETECTADO";
+      const origenSalario = camposEditadosPreviewFicha.has(`${base}:salario`)
+        ? "FICHA_DIGITAL_EDITADO"
+        : "FICHA_DIGITAL_DETECTADO";
+      simulacion.origen_campos_detalle_anio_actual[String(registro.mes)] = {
+        cuota_acreditada: "FICHA_DIGITAL_DETECTADO",
+        estado: origenEstado,
+        ...(registro.estado !== "SIN_INFORMACION" && Number(registro.salario) >= 0
+          ? { salario_mensual: origenSalario }
+          : {}),
+      };
+    });
   }
 
   invalidarResultadosPorImportacion(simulacion);
   guardarSimulacion(simulacion);
 
-  restaurarDatosCuotas(simulacion);
   if (typeof restaurarDetalleAnioActual === "function") restaurarDetalleAnioActual();
 
   const cuotasMarcadas = actuales.filter((registro) => registro.cuota_acreditada).length;
+  const cuotasReferenciaAntes = Number(
+    obtenerSimulacion().cuotas?.cuotas_anio_actual || 0,
+  );
+  let cuotasActualizadasDesdeFicha = false;
+
+  if (
+    cuotasMarcadas > cuotasReferenciaAntes
+    && typeof sincronizarCuotasPaso2DesdeDetalle === "function"
+  ) {
+    cuotasActualizadasDesdeFicha = sincronizarCuotasPaso2DesdeDetalle({
+      fuente: "FICHA_DIGITAL",
+    });
+
+    if (
+      cuotasActualizadasDesdeFicha
+      && typeof analizarCuotas === "function"
+    ) {
+      await analizarCuotas(
+        null,
+        { mostrarMensajes: false, reportarValidez: false },
+      );
+    }
+  }
+
+  const simulacionActualizada = obtenerSimulacion();
+  const cuotasReferenciaPaso2 = Number(
+    simulacionActualizada.cuotas?.cuotas_anio_actual || 0,
+  );
+  const totalActualizadoPaso2 = Number(
+    simulacionActualizada.cuotas?.cuotas_totales || 0,
+  );
+  const coincidenCuotas = cuotasMarcadas === cuotasReferenciaPaso2;
+  let mensajeCuotas;
+
+  if (cuotasActualizadasDesdeFicha) {
+    mensajeCuotas = (
+      `La ficha confirma ${cuotasMarcadas} cuota(s) del año actual. `
+      + `El Paso 2 se actualizó automáticamente de ${cuotasReferenciaAntes} a ${cuotasReferenciaPaso2} cuota(s) este año y ahora registra ${totalActualizadoPaso2} acumuladas.`
+    );
+  } else if (coincidenCuotas) {
+    mensajeCuotas = `Las ${cuotasMarcadas} cuota(s) mensuales importadas coinciden con el Paso 2.`;
+  } else if (cuotasMarcadas < cuotasReferenciaPaso2) {
+    mensajeCuotas = (
+      `La Ficha Digital aporta ${cuotasMarcadas} cuota(s) confirmadas, pero el Paso 2 registra ${cuotasReferenciaPaso2}. `
+      + "Se conserva la referencia superior del Paso 2; completa o revisa los meses faltantes antes de analizar el historial."
+    );
+  } else {
+    mensajeCuotas = `La Ficha Digital aporta ${cuotasMarcadas} cuota(s) confirmadas y el Paso 2 registra ${cuotasReferenciaPaso2}. Revisa ambos valores antes de continuar.`;
+  }
+
   mostrarEstadoImportacion(
     "estado-ficha-digital-importacion",
-    `Ficha Digital confirmada: ${actuales.length} salarios del año ${ANIO_ACTUAL} y ${cuotasMarcadas} cuotas marcadas como acreditadas. Revisa y valida el detalle en el Paso 3.`,
-    "success",
+    `Ficha Digital importada: ${actuales.length} registro(s) del año ${anioFicha}. ${mensajeCuotas}`,
+    (coincidenCuotas || cuotasActualizadasDesdeFicha) ? "success" : "warning",
   );
-  document.getElementById("btn-quitar-ficha-digital-importacion").classList.remove("d-none");
+  document.getElementById("acciones-ficha-digital-importada")?.classList.remove("d-none");
+  document.getElementById("btn-quitar-ficha-digital-importacion")?.classList.remove("d-none");
+  actualizarDocumentoImportadoPersistente("FICHA", simulacion);
   obtenerModalBootstrap("modal-import-ficha-digital").hide();
+  if (typeof inicializarHistorialSalarial === "function") inicializarHistorialSalarial();
 }
 
 
@@ -827,17 +1352,106 @@ function quitarFichaDigitalImportacion() {
   simulacion.detalle_anio_actual_habilitado = false;
   simulacion.detalle_anio_actual = null;
   simulacion.resumen_detalle_anio_actual = null;
+  simulacion.origen_campos_detalle_anio_actual = {};
+  simulacion.campos_editados_importacion_ficha = [];
   guardarSimulacion(simulacion);
 
   document.getElementById("import-ficha-digital-pdf").value = "";
   ocultarEstadoImportacion("estado-ficha-digital-importacion");
-  document.getElementById("btn-quitar-ficha-digital-importacion").classList.add("d-none");
+  document.getElementById("acciones-ficha-digital-importada")?.classList.add("d-none");
+  document.getElementById("btn-quitar-ficha-digital-importacion")?.classList.add("d-none");
+  actualizarDocumentoImportadoPersistente("FICHA", simulacion);
+  actualizarEstadoBotonAnalizarFichaDigital();
   if (typeof restaurarDetalleAnioActual === "function") restaurarDetalleAnioActual();
+}
+
+
+function revisarFichaDigitalImportada() {
+  const simulacion = obtenerSimulacion();
+  if (simulacion.ficha_digital_importada) {
+    renderizarPreviewFichaDigital(
+      simulacion.ficha_digital_importada,
+      simulacion.campos_editados_importacion_ficha || [],
+    );
+  }
+}
+
+
+function actualizarDocumentoImportadoPersistente(tipo, simulacion = obtenerSimulacion()) {
+  const esComprobante = tipo === "COMPROBANTE";
+  const contenedor = document.getElementById(
+    esComprobante ? "documento-comprobante-importado" : "documento-ficha-importado",
+  );
+  if (!contenedor) return;
+
+  const confirmado = esComprobante
+    ? Boolean(simulacion.importacion_comprobante_confirmada && simulacion.referencia_mi_retiro_seguro)
+    : Boolean(simulacion.importacion_ficha_digital_confirmada && simulacion.ficha_digital_importada);
+  if (!confirmado) {
+    contenedor.classList.add("d-none");
+    contenedor.textContent = "";
+    return;
+  }
+
+  const datos = esComprobante
+    ? simulacion.referencia_mi_retiro_seguro
+    : simulacion.ficha_digital_importada;
+  const nombre = datos?.nombre_archivo_origen || "Documento importado anteriormente";
+  contenedor.replaceChildren();
+
+  const titulo = document.createElement("strong");
+  titulo.textContent = `Importación vigente: ${nombre}`;
+  const ayuda = document.createElement("span");
+  ayuda.textContent = "El navegador vacía el selector de archivos al recargar por seguridad; los datos confirmados siguen disponibles y no necesitas volver a adjuntar el documento para revisarlos o utilizarlos.";
+  contenedor.append(titulo, ayuda);
+
+  if (!esComprobante) {
+    const vigencia = evaluarVigenciaFichaDigital(datos);
+    const periodo = document.createElement("span");
+    periodo.textContent = `Último período detectado: ${vigencia.periodo}.`;
+    periodo.className = "official-import-persisted-recency";
+    if (vigencia.estado !== "RECIENTE") {
+      periodo.classList.add("warning");
+      periodo.textContent += " Considera utilizar una Ficha Digital más reciente si está disponible.";
+    }
+    contenedor.appendChild(periodo);
+  }
+
+  contenedor.classList.remove("d-none");
+}
+
+
+async function refrescarFechaReferenciaFichaPersistida() {
+  const simulacion = obtenerSimulacion();
+  const ficha = simulacion.ficha_digital_importada;
+  if (!ficha || !simulacion.importacion_ficha_digital_confirmada) return;
+
+  try {
+    const respuesta = await fetch("/api/sistema/fecha-referencia", {
+      method: "GET",
+      headers: { Accept: "application/json" },
+      cache: "no-store",
+    });
+    if (!respuesta.ok) throw new Error("fecha no disponible");
+    const referencia = await respuesta.json();
+    ficha.fecha_referencia = referencia.fecha || null;
+    ficha.fecha_referencia_confiable = Boolean(referencia.confiable && referencia.fecha);
+    ficha.fuente_fecha_referencia = referencia.fuente || "NO_DISPONIBLE";
+  } catch {
+    ficha.fecha_referencia = null;
+    ficha.fecha_referencia_confiable = false;
+    ficha.fuente_fecha_referencia = "NO_DISPONIBLE";
+  }
+
+  guardarSimulacion(simulacion);
+  actualizarDocumentoImportadoPersistente("FICHA", simulacion);
 }
 
 
 function restaurarResumenImportaciones() {
   const simulacion = obtenerSimulacion();
+  actualizarDocumentoImportadoPersistente("COMPROBANTE", simulacion);
+  actualizarDocumentoImportadoPersistente("FICHA", simulacion);
 
   if (simulacion.referencia_mi_retiro_seguro && simulacion.importacion_comprobante_confirmada) {
     const ref = simulacion.referencia_mi_retiro_seguro;
@@ -851,13 +1465,30 @@ function restaurarResumenImportaciones() {
 
   if (simulacion.ficha_digital_importada && simulacion.importacion_ficha_digital_confirmada) {
     const registros = simulacion.ficha_digital_importada.registros || [];
-    const actuales = registros.filter((registro) => registro.anio === ANIO_ACTUAL);
+    const anioFicha = anioFichaDigital(simulacion.ficha_digital_importada);
+    const actuales = registros.filter((registro) => Number(registro.anio) === anioFicha);
+    let normalizado = false;
+    actuales.forEach((registro) => {
+      if (registroFichaImportadoAutomaticamente(registro) && !registro.cuota_acreditada) {
+        registro.cuota_acreditada = true;
+        normalizado = true;
+      }
+    });
+    if (normalizado) guardarSimulacion(simulacion);
+
+    const cuotasMarcadas = actuales.filter((registro) => registro.cuota_acreditada).length;
+    const cuotasReferenciaPaso2 = Number(simulacion.cuotas?.cuotas_anio_actual || 0);
+    const coincidenCuotas = cuotasMarcadas === cuotasReferenciaPaso2;
+    const mensajeCuotas = coincidenCuotas
+      ? `Las ${cuotasMarcadas} cuota(s) mensuales importadas coinciden con el Paso 2.`
+      : `La Ficha Digital aporta ${cuotasMarcadas} mes(es) con datos confirmados y el Paso 2 registra ${cuotasReferenciaPaso2} cuota(s) acreditadas.`;
     mostrarEstadoImportacion(
       "estado-ficha-digital-importacion",
-      `Ficha Digital confirmada: ${actuales.length} salarios del año ${ANIO_ACTUAL}.`,
-      "success",
+      `Ficha Digital importada: ${actuales.length} registro(s) del año ${anioFicha}. ${mensajeCuotas}`,
+      coincidenCuotas ? "success" : "warning",
     );
-    document.getElementById("btn-quitar-ficha-digital-importacion").classList.remove("d-none");
+    document.getElementById("acciones-ficha-digital-importada")?.classList.remove("d-none");
+    document.getElementById("btn-quitar-ficha-digital-importacion")?.classList.remove("d-none");
   }
 }
 
@@ -872,13 +1503,37 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll('input[name="modo_datos_personales"]').forEach((control) => control.addEventListener("change", cambiarModoDatosPersonales));
   document.getElementById("sexo")?.addEventListener("change", actualizarApellidoCasada);
   document.getElementById("preview-comprobante-sexo")?.addEventListener("change", actualizarApellidoCasadaPreview);
+  const modalComprobante = document.getElementById("modal-import-comprobante");
+  ["input", "change"].forEach((tipoEvento) => {
+    modalComprobante?.addEventListener(tipoEvento, (evento) => {
+      const control = evento.target.closest("input, select");
+      if (!control || control.type === "checkbox") return;
+      registrarEdicionCampoPreviewComprobante(control);
+    });
+  });
 
+  const modalFicha = document.getElementById("modal-import-ficha-digital");
+  ["input", "change"].forEach((tipoEvento) => {
+    modalFicha?.addEventListener(tipoEvento, (evento) => {
+      const control = evento.target.closest("input, select");
+      if (!control || control.type === "checkbox") return;
+      registrarEdicionCampoPreviewFicha(control);
+    });
+  });
+
+  document.getElementById("import-ficha-digital-pdf")?.addEventListener("change", actualizarEstadoBotonAnalizarFichaDigital);
   document.getElementById("btn-analizar-ficha-digital-importacion")?.addEventListener("click", analizarFichaDigitalImportacion);
+  document.getElementById("btn-continuar-ficha-vigencia")?.addEventListener("click", continuarConFichaPendienteVigencia);
+  document.getElementById("btn-seleccionar-otra-ficha-vigencia")?.addEventListener("click", seleccionarOtraFichaPorVigencia);
+  document.getElementById("btn-editar-import-ficha")?.addEventListener("click", alternarEdicionPreviewFicha);
   document.getElementById("btn-confirmar-import-ficha")?.addEventListener("click", confirmarFichaDigitalImportacion);
+  document.getElementById("btn-revisar-ficha-digital-importacion")?.addEventListener("click", revisarFichaDigitalImportada);
   document.getElementById("btn-quitar-ficha-digital-importacion")?.addEventListener("click", quitarFichaDigitalImportacion);
 
   actualizarEstadoBotonAnalizarComprobante();
+  actualizarEstadoBotonAnalizarFichaDigital();
   restaurarModoDatosPersonales();
   actualizarApellidoCasada();
   restaurarResumenImportaciones();
+  refrescarFechaReferenciaFichaPersistida();
 });

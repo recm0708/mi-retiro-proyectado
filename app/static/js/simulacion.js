@@ -45,6 +45,7 @@ function crearSimulacionVacia() {
     persona: {},
     modo_datos_personales: "MANUAL",
     origen_persona: "MANUAL",
+    origen_campos_persona: {},
 
     cuotas: {},
     origen_campos_cuotas: {},
@@ -52,15 +53,18 @@ function crearSimulacionVacia() {
 
     modo_historial: "MANUAL",
     historial: null,
+    origen_campos_historial: {},
     resumen_historial: null,
 
     referencia_mi_retiro_seguro: null,
     importacion_comprobante_confirmada: false,
     ficha_digital_importada: null,
     importacion_ficha_digital_confirmada: false,
+    campos_editados_importacion_ficha: [],
 
     detalle_anio_actual_habilitado: false,
     detalle_anio_actual: null,
+    origen_campos_detalle_anio_actual: {},
     resumen_detalle_anio_actual: null,
     ultimo_mes_cuotas_derivado: null,
 
@@ -128,6 +132,9 @@ function obtenerSimulacion() {
       origen_persona:
         simulacion.origen_persona || "MANUAL",
 
+      origen_campos_persona:
+        simulacion.origen_campos_persona || {},
+
       cuotas:
         simulacion.cuotas || {},
 
@@ -140,8 +147,14 @@ function obtenerSimulacion() {
       historial:
         simulacion.historial || null,
 
+      origen_campos_historial:
+        simulacion.origen_campos_historial || {},
+
       detalle_anio_actual:
         simulacion.detalle_anio_actual || null,
+
+      origen_campos_detalle_anio_actual:
+        simulacion.origen_campos_detalle_anio_actual || {},
 
       salario:
         simulacion.salario || {},
@@ -184,6 +197,13 @@ function guardarSimulacion(simulacion) {
     === "function"
   ) {
     actualizarNavegacionDirecta();
+  }
+
+  if (
+    typeof actualizarDisponibilidadGestionDatos
+    === "function"
+  ) {
+    actualizarDisponibilidadGestionDatos();
   }
 }
 
@@ -252,6 +272,146 @@ function mostrarPaso(numeroPaso) {
     top: 0,
     behavior: "smooth",
   });
+}
+
+
+// ============================================================
+// Procedencia visible de datos — contrato transversal UX.4.6d R18
+// ============================================================
+
+function codigoProcedenciaDesdeOrigen(origen) {
+  const valor = String(origen || "").toUpperCase();
+  if (!valor) return null;
+  if (valor.includes("NO_DETECTADO")) return "NO_DETECTADO";
+  if (valor.includes("COMPLETADO_MANUAL")) return "COMPLETADO_MANUAL";
+  if (valor.includes("EDITADO")) return "EDITADO_USUARIO";
+  if (valor.includes("MI_RETIRO_SEGURO") || valor.includes("FICHA_DIGITAL")) {
+    return "DETECTADO";
+  }
+  if (valor === "MANUAL") return "COMPLETADO_MANUAL";
+  return null;
+}
+
+
+function textoProcedenciaDato(codigo) {
+  const textos = {
+    DETECTADO: "Detectado",
+    EDITADO_USUARIO: "Editado por ti",
+    COMPLETADO_MANUAL: "Completado manualmente",
+    NO_DETECTADO: "No detectado",
+  };
+  return textos[codigo] || "";
+}
+
+
+function claseProcedenciaDato(codigo) {
+  const clases = {
+    DETECTADO: "detected",
+    EDITADO_USUARIO: "edited",
+    COMPLETADO_MANUAL: "manual",
+    NO_DETECTADO: "missing",
+  };
+  return clases[codigo] || "";
+}
+
+
+function origenBloqueaCampo(origen) {
+  const codigo = codigoProcedenciaDesdeOrigen(origen);
+  return ["DETECTADO", "EDITADO_USUARIO", "COMPLETADO_MANUAL"].includes(codigo)
+    && String(origen || "").toUpperCase() !== "MANUAL";
+}
+
+
+function asegurarNotaProcedencia(control, idPreferido = null) {
+  if (!control) return null;
+  const id = idPreferido || `procedencia-${control.id}`;
+  let nota = document.getElementById(id);
+  if (nota) return nota;
+
+  nota = document.createElement("div");
+  nota.id = id;
+  nota.className = "field-origin-note data-provenance-note d-none";
+
+  const grupo = control.closest(".input-group");
+  if (grupo) {
+    grupo.insertAdjacentElement("afterend", nota);
+  } else {
+    control.insertAdjacentElement("afterend", nota);
+  }
+  return nota;
+}
+
+
+function mostrarProcedenciaCampo(control, origen, opciones = {}) {
+  if (!control) return;
+  const codigo = codigoProcedenciaDesdeOrigen(origen);
+  const nota = asegurarNotaProcedencia(control, opciones.notaId || null);
+  if (!nota) return;
+
+  if (!codigo || (origen === "MANUAL" && !opciones.mostrarManual)) {
+    nota.textContent = "";
+    nota.className = "field-origin-note data-provenance-note d-none";
+    control.removeAttribute("data-provenance");
+    return;
+  }
+
+  nota.textContent = opciones.texto || textoProcedenciaDato(codigo);
+  nota.className = `field-origin-note data-provenance-note ${claseProcedenciaDato(codigo)}`;
+  control.dataset.provenance = codigo;
+}
+
+
+function actualizarProcedenciaDatosPersonales(simulacion = obtenerSimulacion()) {
+  const importacionConfirmada = Boolean(
+    simulacion.importacion_comprobante_confirmada
+    && simulacion.referencia_mi_retiro_seguro,
+  );
+  const origenes = { ...(simulacion.origen_campos_persona || {}) };
+
+  if (importacionConfirmada && Object.keys(origenes).length === 0) {
+    const referencia = simulacion.referencia_mi_retiro_seguro || {};
+    const editados = new Set(simulacion.campos_editados_importacion_comprobante || []);
+    const mapeo = {
+      primer_nombre: ["preview-comprobante-primer-nombre", referencia.primer_nombre],
+      segundo_nombre: ["preview-comprobante-segundo-nombre", referencia.segundo_nombre],
+      primer_apellido: ["preview-comprobante-primer-apellido", referencia.primer_apellido],
+      segundo_apellido: ["preview-comprobante-segundo-apellido", referencia.segundo_apellido],
+      apellido_casada: ["preview-comprobante-apellido-casada", referencia.apellido_casada],
+      cedula: ["preview-comprobante-cedula", referencia.cedula],
+      numero_seguro_social: ["preview-comprobante-seguro-social", referencia.numero_seguro_social],
+      fecha_nacimiento: ["preview-comprobante-fecha-nacimiento", referencia.fecha_nacimiento],
+      sexo: ["preview-comprobante-sexo", referencia.sexo],
+      fecha_ingreso_css: ["preview-comprobante-fecha-ingreso", referencia.fecha_ingreso_css],
+      sistema: ["preview-comprobante-sistema", referencia.sistema_elegido],
+    };
+    Object.entries(mapeo).forEach(([campo, [previewId, valor]]) => {
+      if (editados.has(previewId)) {
+        origenes[campo] = "MI_RETIRO_SEGURO_EDITADO";
+      } else if (valor !== null && valor !== undefined && String(valor).trim() !== "" && valor !== "NO_IDENTIFICADO") {
+        origenes[campo] = "MI_RETIRO_SEGURO_DETECTADO";
+      } else {
+        origenes[campo] = "MI_RETIRO_SEGURO_NO_DETECTADO";
+      }
+    });
+  }
+
+  const campos = [
+    "primer_nombre", "segundo_nombre", "primer_apellido", "segundo_apellido",
+    "apellido_casada", "cedula", "numero_seguro_social", "fecha_nacimiento",
+    "sexo", "fecha_ingreso_css", "sistema",
+  ];
+
+  campos.forEach((id) => {
+    const control = document.getElementById(id);
+    if (!control) return;
+    if (!importacionConfirmada) {
+      mostrarProcedenciaCampo(control, null);
+      return;
+    }
+    mostrarProcedenciaCampo(control, origenes[id] || "MI_RETIRO_SEGURO_NO_DETECTADO");
+  });
+
+  return origenes;
 }
 
 
@@ -388,6 +548,7 @@ function restaurarDatosPersonales(simulacion) {
   if (typeof restaurarModoDatosPersonales === "function") {
     restaurarModoDatosPersonales(simulacion);
   }
+  actualizarProcedenciaDatosPersonales(simulacion);
 }
 
 
@@ -440,7 +601,7 @@ function actualizarEstadoContinuidad() {
     marcadorFuturas?.classList.add("d-none");
     notaSinContinuidad?.classList.remove("d-none");
 
-  } else {
+  } else if (continua === "true") {
     cierre.disabled = false;
     futuras.disabled = false;
     cierre.required = true;
@@ -462,6 +623,18 @@ function actualizarEstadoContinuidad() {
     ) {
       futuras.value = 12;
     }
+  } else {
+    // Estado limpio/nuevo: ninguna decisión de cotización futura se presume.
+    // Los dos supuestos permanecen vacíos hasta que el usuario elija Sí/No.
+    cierre.value = "";
+    futuras.value = "";
+    cierre.disabled = true;
+    futuras.disabled = true;
+    cierre.required = false;
+    futuras.required = false;
+    marcadorCierre?.classList.add("d-none");
+    marcadorFuturas?.classList.add("d-none");
+    notaSinContinuidad?.classList.add("d-none");
   }
 }
 
@@ -490,6 +663,7 @@ function actualizarOrigenCamposCuotas(simulacion) {
 
     if (
       referencia.cuotas_historicas != null
+      && simulacion.cuotas?.cuotas_totales != null
       && !origenes.cuotas_totales
     ) {
       origenes.cuotas_totales = "MI_RETIRO_SEGURO";
@@ -502,7 +676,11 @@ function actualizarOrigenCamposCuotas(simulacion) {
       ),
     );
 
-    if (registroActual && !origenes.cuotas_anio_actual) {
+    if (
+      registroActual
+      && simulacion.cuotas?.cuotas_anio_actual != null
+      && !origenes.cuotas_anio_actual
+    ) {
       origenes.cuotas_anio_actual = "MI_RETIRO_SEGURO";
     }
   }
@@ -524,9 +702,7 @@ function actualizarOrigenCamposCuotas(simulacion) {
     const control = document.getElementById(id);
     const nota = document.getElementById(notaId);
     const origen = origenes[id] || null;
-    const importado = Boolean(
-      origen && origen.startsWith("MI_RETIRO_SEGURO"),
-    );
+    const importado = origenBloqueaCampo(origen);
 
     if (!control || !nota) {
       return;
@@ -537,11 +713,11 @@ function actualizarOrigenCamposCuotas(simulacion) {
 
     if (importado) {
       hayImportados = true;
-      nota.textContent = "Dato completado desde la importación.";
-      nota.className = "field-origin-note imported";
+      nota.textContent = textoProcedenciaDato(codigoProcedenciaDesdeOrigen(origen));
+      nota.className = `field-origin-note data-provenance-note ${claseProcedenciaDato(codigoProcedenciaDesdeOrigen(origen))}`;
     } else if (importacionConfirmada) {
-      nota.textContent = "Este dato no estaba disponible en el comprobante. Complétalo manualmente.";
-      nota.className = "field-origin-note missing";
+      nota.textContent = "No detectado";
+      nota.className = "field-origin-note data-provenance-note missing";
     } else {
       nota.textContent = "";
       nota.className = "field-origin-note d-none";
@@ -709,16 +885,21 @@ function invalidarResumenCuotas() {
  *
  * @param {SubmitEvent} evento Evento submit del formulario.
  */
-async function analizarCuotas(evento) {
-  evento.preventDefault();
+async function analizarCuotas(evento = null, opciones = {}) {
+  evento?.preventDefault();
+
+  const mostrarMensajes = opciones.mostrarMensajes !== false;
+  const reportarValidez = opciones.reportarValidez !== false;
 
   const formulario = document.getElementById(
     "form-cuotas",
   );
 
   if (!formulario.checkValidity()) {
-    formulario.reportValidity();
-    return;
+    if (mostrarMensajes && reportarValidez) {
+      formulario.reportValidity();
+    }
+    return false;
   }
 
   const continua = (
@@ -790,8 +971,10 @@ async function analizarCuotas(evento) {
         "No fue posible analizar las cuotas.",
       );
 
-      mostrarErrorCuotas(mensaje);
-      return;
+      if (mostrarMensajes) {
+        mostrarErrorCuotas(mensaje);
+      }
+      return false;
     }
 
     const simulacion = obtenerSimulacion();
@@ -819,10 +1002,14 @@ async function analizarCuotas(evento) {
       contenido,
     );
 
+    return true;
   } catch {
-    mostrarErrorCuotas(
-      "No fue posible comunicarse con el servidor.",
-    );
+    if (mostrarMensajes) {
+      mostrarErrorCuotas(
+        "No fue posible comunicarse con el servidor.",
+      );
+    }
+    return false;
   }
 }
 
@@ -983,13 +1170,9 @@ function invalidarResumenSalario() {
 
   guardarSimulacion(simulacion);
 
-  document.getElementById(
-    "resultado-salario",
-  ).classList.add("d-none");
-
-  document.getElementById(
-    "resultado-proyeccion",
-  ).classList.add("d-none");
+  document.getElementById("resultado-salario")?.classList.add("d-none");
+  document.getElementById("resultado-paso3")?.classList.add("d-none");
+  document.getElementById("resultado-proyeccion")?.classList.add("d-none");
 }
 
 
@@ -999,8 +1182,8 @@ function invalidarResumenSalario() {
  *
  * @param {SubmitEvent} evento Evento submit del formulario.
  */
-async function analizarSalario(evento) {
-  evento.preventDefault();
+async function analizarSalario(evento = null) {
+  evento?.preventDefault();
 
   const formulario = document.getElementById(
     "form-salario",
@@ -1031,7 +1214,7 @@ async function analizarSalario(evento) {
     mostrarErrorSalario(
       "El salario debe ser un monto mayor que cero y admite como máximo dos decimales.",
     );
-    return;
+    return false;
   }
 
   ocultarErrorSalario();
@@ -1060,7 +1243,7 @@ async function analizarSalario(evento) {
       );
 
       mostrarErrorSalario(mensaje);
-      return;
+      return false;
     }
 
     const simulacion = obtenerSimulacion();
@@ -1094,10 +1277,12 @@ async function analizarSalario(evento) {
       contenido,
     );
 
+    return true;
   } catch {
     mostrarErrorSalario(
       "No fue posible comunicarse con el servidor.",
     );
+    return false;
   }
 }
 
@@ -1108,33 +1293,194 @@ async function analizarSalario(evento) {
  * @param {Object} resumen Resultado de normalización salarial.
  */
 function mostrarResumenSalario(resumen) {
-  document.getElementById(
-    "resultado-salario",
-  ).classList.remove("d-none");
+  if (!resumen) return;
 
-  document.getElementById(
-    "salario-semanal",
-  ).textContent = formatearMoneda(
-    resumen.salario_semanal,
+  if (typeof actualizarResumenPaso3 === "function") {
+    actualizarResumenPaso3();
+  }
+}
+
+
+function paso3EstaCompleto(simulacion = obtenerSimulacion()) {
+  const modo = simulacion.modo_historial || "MANUAL";
+  const historial = simulacion.resumen_historial;
+  const historialListo = (
+    modo === "SOLO_ACTUAL"
+    || Boolean(
+      historial
+      && historial.cuotas_coinciden
+      && historial.historial_completo,
+    )
   );
 
-  document.getElementById(
-    "salario-quincenal",
-  ).textContent = formatearMoneda(
-    resumen.salario_quincenal,
+  const detalleListo = (
+    !simulacion.detalle_anio_actual_habilitado
+    || Boolean(
+      simulacion.resumen_detalle_anio_actual
+      && simulacion.resumen_detalle_anio_actual.cuotas_coinciden,
+    )
   );
 
-  document.getElementById(
-    "salario-mensual",
-  ).textContent = formatearMoneda(
-    resumen.salario_mensual,
+  return Boolean(
+    historialListo
+    && detalleListo
+    && simulacion.resumen_salario,
+  );
+}
+
+
+function actualizarResumenPaso3() {
+  const simulacion = obtenerSimulacion();
+  const historial = simulacion.resumen_historial;
+  const salario = simulacion.resumen_salario;
+  const contenedor = document.getElementById("resultado-paso3");
+
+  if (!contenedor) return;
+
+  const referencia = historial?.cuotas_totales_referencia
+    ?? simulacion.resumen_cuotas?.cuotas_reales
+    ?? "—";
+  const identificadas = historial?.cuotas_sumadas ?? "No detallado";
+  const diferencia = historial?.diferencia_cuotas ?? "—";
+  const totalSalarios = historial
+    ? formatearMoneda(historial.total_salarios_reportados)
+    : "No detallado";
+  const baseMensual = salario
+    ? formatearMoneda(salario.salario_mensual)
+    : "—";
+
+  const asignar = (id, valor) => {
+    const elemento = document.getElementById(id);
+    if (elemento) elemento.textContent = valor;
+  };
+
+  asignar("paso3-cuotas-referencia", referencia);
+  asignar("paso3-cuotas-identificadas", identificadas);
+  asignar("paso3-diferencia-cuotas", diferencia);
+  asignar("paso3-total-salarios", totalSalarios);
+  asignar("paso3-base-mensual", baseMensual);
+
+  const listo = paso3EstaCompleto(simulacion);
+  contenedor.classList.toggle("d-none", !listo);
+
+  const estado = document.getElementById("paso3-estado-general");
+  if (estado && listo) {
+    estado.className = "alert alert-success mt-4 mb-0";
+    estado.textContent = (
+      (simulacion.modo_historial || "MANUAL") === "SOLO_ACTUAL"
+        ? "Base salarial lista. La simulación continuará con información histórica limitada."
+        : "Historial y base salarial listos para continuar."
+    );
+  }
+}
+
+
+function enfocarSeccionPaso3(id) {
+  const seccion = document.getElementById(id);
+  seccion?.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+
+/**
+ * Garantiza la dependencia del Paso 2 sin obligar al usuario a retroceder
+ * cuando las cuotas ya están completas pero su resumen quedó invalidado.
+ *
+ * Si el formulario de cuotas aún está incompleto, Paso 3 permanece visible
+ * y explica qué dependencia falta; nunca navega hacia atrás por sorpresa.
+ *
+ * @returns {Promise<boolean>} true si existe un resumen de cuotas vigente.
+ */
+async function asegurarCuotasAnalizadasParaPaso3() {
+  const simulacion = obtenerSimulacion();
+
+  if (simulacion.resumen_cuotas) {
+    return true;
+  }
+
+  const formularioCuotas = document.getElementById("form-cuotas");
+
+  if (!formularioCuotas || !formularioCuotas.checkValidity()) {
+    if (typeof mostrarErrorHistorial === "function") {
+      mostrarErrorHistorial(
+        "Antes de analizar el historial, completa la información de cuotas del Paso 2. "
+        + "El Paso 3 conservará tus datos; revisa Cuotas únicamente si todavía falta información.",
+      );
+    }
+    return false;
+  }
+
+  const analizadas = await analizarCuotas(
+    null,
+    { mostrarMensajes: false, reportarValidez: false },
   );
 
-  document.getElementById(
-    "salario-anual",
-  ).textContent = formatearMoneda(
-    resumen.salario_anual,
-  );
+  if (!analizadas && typeof mostrarErrorHistorial === "function") {
+    mostrarErrorHistorial(
+      "No fue posible revalidar automáticamente las cuotas. Revisa los datos del Paso 2 antes de continuar.",
+    );
+  }
+
+  return analizadas;
+}
+
+
+async function analizarPasoHistorialCompleto() {
+  const cuotasListas = await asegurarCuotasAnalizadasParaPaso3();
+  if (!cuotasListas) {
+    enfocarSeccionPaso3("seccion-historial-salarial");
+    return false;
+  }
+
+  const simulacionInicial = obtenerSimulacion();
+  const modo = simulacionInicial.modo_historial || "MANUAL";
+
+  if (simulacionInicial.detalle_anio_actual_habilitado) {
+    if (typeof validarDetalleAnioActual !== "function") return false;
+    const detalleValido = await validarDetalleAnioActual();
+    if (!detalleValido) {
+      enfocarSeccionPaso3("seccion-detalle-anio-actual");
+      return false;
+    }
+  }
+
+  if (modo === "MANUAL") {
+    if (typeof analizarHistorialSalarial !== "function") return false;
+    const historialAnalizado = await analizarHistorialSalarial();
+    const simulacionHistorial = obtenerSimulacion();
+    const resumenHistorial = simulacionHistorial.resumen_historial;
+
+    if (
+      !historialAnalizado
+      || !resumenHistorial?.cuotas_coinciden
+      || !resumenHistorial?.historial_completo
+    ) {
+      enfocarSeccionPaso3("seccion-historial-salarial");
+      return false;
+    }
+  } else if (typeof confirmarModoSoloActual === "function") {
+    confirmarModoSoloActual();
+  }
+
+  const salarioAnalizado = await analizarSalario();
+  if (!salarioAnalizado) {
+    enfocarSeccionPaso3("base-salarial-titulo");
+    return false;
+  }
+
+  actualizarResumenPaso3();
+  return paso3EstaCompleto();
+}
+
+
+function continuarDesdePasoHistorial() {
+  const simulacion = obtenerSimulacion();
+  if (!paso3EstaCompleto(simulacion)) {
+    analizarPasoHistorialCompleto();
+    return;
+  }
+
+  prepararPasoProyeccion(simulacion);
+  mostrarPaso(4);
 }
 
 
@@ -1835,7 +2181,7 @@ function crearTablaEscenario(escenario) {
     document.createElement("div");
 
   tablaResponsive.className =
-    "table-responsive";
+    "table-responsive app-table-shell";
 
   const tabla =
     document.createElement("table");
@@ -2172,12 +2518,28 @@ document.addEventListener(
       simulacion.paso_actual || 1,
     );
 
-    mostrarPaso(
+    let pasoRestaurado = (
       pasoGuardado >= 1
       && pasoGuardado <= 6
         ? pasoGuardado
-        : 1,
+        : 1
     );
+
+    // Nunca restaura una etapa posterior si una dependencia previa fue
+    // limpiada o invalidada. Retrocede solo hasta el último paso seguro.
+    if (typeof puedeAccederDirectamenteAPaso === "function") {
+      while (
+        pasoRestaurado > 1
+        && !puedeAccederDirectamenteAPaso(
+          pasoRestaurado,
+          simulacion,
+        )
+      ) {
+        pasoRestaurado -= 1;
+      }
+    }
+
+    mostrarPaso(pasoRestaurado);
 
 
     // ========================================================
@@ -2269,70 +2631,12 @@ document.addEventListener(
       "form-salario",
     ).addEventListener(
       "submit",
-      analizarSalario,
-    );
-
-
-    document.getElementById(
-      "btn-volver-paso-2",
-    ).addEventListener(
-      "click",
-      () => {
-        mostrarPaso(2);
+      (evento) => {
+        evento.preventDefault();
+        analizarPasoHistorialCompleto();
       },
     );
 
-
-    document.getElementById(
-      "btn-continuar-paso-4",
-    ).addEventListener(
-      "click",
-      () => {
-        const simulacionActual =
-          obtenerSimulacion();
-
-        const modoHistorial =
-          simulacionActual.modo_historial || "MANUAL";
-
-        if (
-          modoHistorial === "MANUAL"
-          && !simulacionActual.resumen_historial
-        ) {
-          const errorHistorial = document.getElementById(
-            "error-historial",
-          );
-
-          if (errorHistorial) {
-            errorHistorial.textContent =
-              "Primero debes analizar el historial salarial.";
-            errorHistorial.classList.remove("d-none");
-            errorHistorial.scrollIntoView({
-              behavior: "smooth",
-              block: "center",
-            });
-          }
-
-          return;
-        }
-
-        if (
-          !simulacionActual
-            .resumen_salario
-        ) {
-          mostrarErrorSalario(
-            "Primero debes analizar el salario actual.",
-          );
-
-          return;
-        }
-
-        prepararPasoProyeccion(
-          simulacionActual,
-        );
-
-        mostrarPaso(4);
-      },
-    );
 
 
     document.getElementById(

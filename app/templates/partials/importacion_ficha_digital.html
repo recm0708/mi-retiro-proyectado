@@ -1,56 +1,139 @@
 <!-- ==================================================
-     UX.4.6b — Ficha Digital trasladada al Paso 3
+     UX.4.6d — Importación de Ficha Digital en Paso 3
      ================================================== -->
-<section id="seccion-importacion-ficha" class="official-import-section mb-4">
+<div id="seccion-importacion-ficha" class="official-import-section mt-4 mb-4">
   <div class="official-import-card">
-    <div class="mb-4">
-      <span class="official-import-source-kicker">Mi Caja Digital</span>
-      <h3 class="h5 fw-bold mt-1 mb-2">Importar salarios recientes desde Ficha Digital</h3>
-      <p class="text-secondary mb-0">
-        Esta fuente pertenece al historial salarial, por eso se revisa aquí. Detecta únicamente
-        salarios del año calendario actual y no presume qué cuotas ya están acreditadas.
-      </p>
-    </div>
-    <div class="official-import-source-card">
-      <label for="import-ficha-digital-pdf" class="form-label fw-semibold">Seleccionar Ficha Digital</label>
-      <input type="file" id="import-ficha-digital-pdf" class="form-control official-import-file-input" accept=".pdf,application/pdf">
-      <div class="d-flex flex-wrap gap-2 mt-3">
-        <button type="button" id="btn-analizar-ficha-digital-importacion" class="btn btn-outline-primary">Analizar Ficha Digital</button>
-        <button type="button" id="btn-quitar-ficha-digital-importacion" class="btn btn-outline-secondary d-none">Quitar datos importados</button>
+    <div class="d-flex flex-column flex-lg-row justify-content-between gap-3 mb-4">
+      <div>
+        <span class="official-import-source-kicker">Mi Caja Digital</span>
+        <h3 class="h5 fw-bold mt-1 mb-2">Importar salarios recientes desde Ficha Digital</h3>
+        <p class="text-secondary mb-0">
+          Puedes importar los salarios del año actual y revisarlos antes de incorporarlos a la simulación.
+        </p>
       </div>
-      <div id="estado-ficha-digital-importacion" class="official-import-status mt-3 d-none" role="status" aria-live="polite"></div>
+      <div class="step3-source-action">
+        <a
+          href="{{ mi_caja_digital_url }}"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-outline-primary btn-sm"
+        >
+          Abrir Mi Caja Digital
+        </a>
+      </div>
     </div>
-    <div class="official-import-privacy mt-4">
-      El PDF se procesa en memoria y no se guarda. La importación conserva únicamente los salarios del año actual y las confirmaciones que realices en la vista previa.
+
+    <div class="official-import-source-card official-import-upload-card">
+      <div class="official-import-upload-grid">
+        <div class="official-import-upload-file">
+          <label for="import-ficha-digital-pdf" class="form-label fw-semibold">1. Selecciona el documento</label>
+          <input
+            type="file"
+            id="import-ficha-digital-pdf"
+            class="form-control official-import-file-input"
+            accept=".pdf,application/pdf"
+          >
+        </div>
+        <div class="official-import-upload-action">
+          <span class="form-label fw-semibold" aria-hidden="true">2. Analiza el documento</span>
+          <button
+            type="button"
+            id="btn-analizar-ficha-digital-importacion"
+            class="btn btn-outline-primary"
+            disabled
+          >
+            Analizar documento
+          </button>
+        </div>
+      </div>
+
+      <div id="estado-ficha-digital-importacion" class="official-import-status mt-3 d-none" role="status" aria-live="polite"></div>
+
+      <div id="documento-ficha-importado" class="official-import-persisted-document mt-3 d-none" role="status" aria-live="polite"></div>
+
+      <div id="acciones-ficha-digital-importada" class="d-flex flex-wrap gap-2 mt-3 d-none">
+        <button type="button" id="btn-revisar-ficha-digital-importacion" class="btn btn-outline-primary">
+          Revisar importación
+        </button>
+        <button type="button" id="btn-quitar-ficha-digital-importacion" class="btn btn-outline-secondary">
+          Quitar importación
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="modal fade" id="modal-vigencia-ficha-digital" tabindex="-1" aria-labelledby="modal-vigencia-ficha-digital-titulo" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content official-import-modal">
+      <div class="modal-header">
+        <div>
+          <h3 class="modal-title h5 fw-bold mb-1" id="modal-vigencia-ficha-digital-titulo">Revisa la vigencia de la Ficha Digital</h3>
+          <p class="text-secondary small mb-0">La aplicación comparó el último período detectado con la fecha actual.</p>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-warning mb-0" role="status">
+          <span id="mensaje-vigencia-ficha-digital"></span>
+        </div>
+      </div>
+      <div class="modal-footer justify-content-between gap-2">
+        <button type="button" id="btn-seleccionar-otra-ficha-vigencia" class="btn btn-outline-primary">Seleccionar una ficha más reciente</button>
+        <button type="button" id="btn-continuar-ficha-vigencia" class="btn btn-primary">Continuar con esta ficha</button>
+      </div>
     </div>
   </div>
-</section>
+</div>
 
 <div class="modal fade" id="modal-import-ficha-digital" tabindex="-1" aria-labelledby="modal-import-ficha-digital-titulo" aria-hidden="true">
   <div class="modal-dialog modal-xl modal-dialog-scrollable">
     <div class="modal-content official-import-modal">
       <div class="modal-header">
         <div>
-          <h3 class="modal-title h5 fw-bold" id="modal-import-ficha-digital-titulo">Revisar salarios detectados de la Ficha Digital</h3>
-          <p class="text-secondary small mb-0 mt-1">Confirma los salarios del año actual, indica si el último mes está completo o parcial y marca únicamente las cuotas que ya aparecen acreditadas.</p>
+          <div class="d-flex flex-wrap align-items-center gap-2 mb-1">
+            <h3 class="modal-title h5 fw-bold mb-0" id="modal-import-ficha-digital-titulo">Vista previa de Ficha Digital</h3>
+            <span id="estado-edicion-ficha" class="badge rounded-pill text-bg-secondary">Modo revisión</span>
+          </div>
+          <p class="text-secondary small mb-0">
+            Revisa los salarios del año actual. Los campos permanecen bloqueados hasta que decidas editarlos.
+          </p>
         </div>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
       </div>
+
       <div class="modal-body">
         <div id="advertencias-import-ficha" class="alert alert-warning d-none" role="status"></div>
-        <div class="alert alert-info">La Ficha Digital puede mostrar un salario antes de que la cuota correspondiente quede acreditada. La importación no marca cuotas por su cuenta: tú las confirmas en esta vista previa.</div>
-        <div class="official-import-table-wrapper">
+        <div class="form-state-note mb-3">
+          Los meses detectados en la Ficha Digital se incorporan como datos confirmados y sus casillas de cuota quedan marcadas y bloqueadas. Los meses no incluidos en el documento pueden completarse manualmente.
+        </div>
+        <div class="official-import-table-wrapper app-table-shell">
           <table class="table align-middle mb-0 official-import-preview-table">
-            <caption class="visually-hidden">Salarios mensuales detectados en la Ficha Digital y confirmación de estado y cuota acreditada.</caption>
-            <thead><tr><th scope="col">Mes</th><th scope="col">Salario detectado</th><th scope="col">Estado</th><th scope="col">Cuota acreditada</th></tr></thead>
+            <caption class="visually-hidden">Salarios mensuales detectados en la Ficha Digital y revisión de estado y cuota acreditada.</caption>
+            <thead>
+              <tr>
+                <th scope="col">Mes</th>
+                <th scope="col">Salario</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Cuota acreditada</th>
+                <th scope="col">Procedencia</th>
+              </tr>
+            </thead>
             <tbody id="preview-ficha-digital-registros"></tbody>
           </table>
         </div>
-        <div class="form-text mt-3">Solo se muestran y conservan los salarios correspondientes al año calendario actual. Los períodos de años anteriores no se utilizan en esta importación.</div>
+        <p class="form-text mt-3 mb-0">
+          Solo se muestran los salarios correspondientes al año calendario actual.
+        </p>
       </div>
-      <div class="modal-footer">
+
+      <div class="modal-footer justify-content-between gap-2">
         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" id="btn-confirmar-import-ficha" class="btn btn-primary">Confirmar y aplicar salarios</button>
+        <div class="d-flex flex-wrap gap-2">
+          <button type="button" id="btn-editar-import-ficha" class="btn btn-outline-primary">Editar campos</button>
+          <button type="button" id="btn-confirmar-import-ficha" class="btn btn-primary">Importar datos</button>
+        </div>
       </div>
     </div>
   </div>

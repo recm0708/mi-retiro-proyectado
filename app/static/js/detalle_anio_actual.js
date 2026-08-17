@@ -83,6 +83,97 @@ function valorMonetarioOpcional(campo) {
 }
 
 
+function origenCampoDetalle(mes, campo) {
+  const simulacion = obtenerSimulacion();
+  return simulacion.origen_campos_detalle_anio_actual?.[String(mes)]?.[campo] || null;
+}
+
+
+function marcarCampoDetalleImportado(control, mes, campo) {
+  if (!control) return;
+
+  const origenMes = obtenerSimulacion()
+    .origen_campos_detalle_anio_actual?.[String(mes)] || {};
+  const origenDirecto = origenCampoDetalle(mes, campo);
+  const cuotaDeMesImportado = (
+    control.type === "checkbox"
+    && Boolean(origenMes.salario_mensual || origenMes.estado || origenDirecto)
+  );
+
+  if (!origenDirecto && !cuotaDeMesImportado) return;
+
+  if (control.type === "checkbox") {
+    // Si el mes fue importado con salario/estado utilizable, su cuota forma
+    // parte del registro documental confirmado aunque una sesión antigua no
+    // hubiera guardado metadata específica para la casilla.
+    control.checked = true;
+    control.defaultChecked = true;
+    control.setAttribute("checked", "checked");
+    control.setAttribute("aria-checked", "true");
+    control.disabled = true;
+    control.dataset.importedLocked = "true";
+  } else if (control.tagName === "SELECT") {
+    control.disabled = true;
+  } else {
+    control.readOnly = true;
+  }
+
+  control.classList.add("detail-field-imported");
+  control.setAttribute("aria-readonly", "true");
+  control.title = "Dato confirmado desde Ficha Digital. Usa Revisar importación si necesitas corregirlo.";
+}
+
+
+function filaDetalleTieneDatosImportados(mes) {
+  const simulacion = obtenerSimulacion();
+  const origen = simulacion.origen_campos_detalle_anio_actual?.[String(mes)] || {};
+  return Object.values(origen).some(Boolean);
+}
+
+
+function actualizarProcedenciaFilaDetalle(fila) {
+  if (!fila) return;
+  const mes = Number(fila.dataset.mes || 0);
+  const etiqueta = fila.querySelector(".detail-row-provenance");
+  if (!etiqueta || !mes) return;
+
+  const origenMes = obtenerSimulacion()
+    .origen_campos_detalle_anio_actual?.[String(mes)] || {};
+  const origenes = Object.values(origenMes).filter(Boolean);
+  const tieneImportado = origenes.some((origen) => String(origen).startsWith("FICHA_DIGITAL"));
+  const tieneEditado = origenes.some((origen) => String(origen).includes("EDITADO"));
+
+  let codigo = "NO_DETECTADO";
+  if (tieneEditado) {
+    codigo = "EDITADO_USUARIO";
+  } else if (tieneImportado) {
+    codigo = "DETECTADO";
+  } else {
+    const check = fila.querySelector(".detalle-cuota-acreditada");
+    const mensual = fila.querySelector(".detalle-col-mensual .detalle-salario-input");
+    const primera = fila.querySelectorAll(".detalle-col-quincenal .detalle-salario-input")[0];
+    const segunda = fila.querySelectorAll(".detalle-col-quincenal .detalle-salario-input")[1];
+    const estado = fila.querySelector(".detalle-estado-salario");
+    const tieneDatoManual = Boolean(
+      check?.checked
+      || mensual?.value.trim()
+      || primera?.value.trim()
+      || segunda?.value.trim()
+      || (estado?.value && estado.value !== "SIN_INFORMACION")
+    );
+    if (tieneDatoManual) codigo = "COMPLETADO_MANUAL";
+  }
+
+  etiqueta.textContent = typeof textoProcedenciaDato === "function"
+    ? textoProcedenciaDato(codigo)
+    : codigo;
+  etiqueta.className = `data-provenance-badge detail-row-provenance ${
+    typeof claseProcedenciaDato === "function" ? claseProcedenciaDato(codigo) : ""
+  }`;
+  fila.dataset.provenance = codigo;
+}
+
+
 // ============================================================
 // Tabla de captura
 // ============================================================
@@ -113,10 +204,23 @@ function crearFilaDetalleAnioActual(mes, datosGuardados) {
   const fila = document.createElement("tr");
   fila.dataset.mes = String(mes);
 
+  if (filaDetalleTieneDatosImportados(mes)) {
+    fila.classList.add("data-row-imported");
+    fila.dataset.dataOrigin = "imported";
+  } else {
+    fila.classList.add("data-row-manual");
+    fila.dataset.dataOrigin = "manual";
+  }
+
   const celdaMes = document.createElement("th");
   celdaMes.scope = "row";
-  celdaMes.textContent = MESES_DETALLE_ANIO[mes - 1];
   celdaMes.className = "current-year-detail-month";
+  const nombreMes = document.createElement("span");
+  nombreMes.textContent = MESES_DETALLE_ANIO[mes - 1];
+  const procedenciaMes = document.createElement("small");
+  procedenciaMes.className = "data-provenance-badge detail-row-provenance";
+  procedenciaMes.setAttribute("aria-label", `Procedencia de los datos de ${MESES_DETALLE_ANIO[mes - 1]}`);
+  celdaMes.append(nombreMes, procedenciaMes);
 
   const celdaCuota = document.createElement("td");
   const check = document.createElement("input");
@@ -133,6 +237,7 @@ function crearFilaDetalleAnioActual(mes, datosGuardados) {
   const mensual = crearCampoDineroDetalle(
     `Salario reportado de ${MESES_DETALLE_ANIO[mes - 1]}`,
   );
+  mensual.campo.placeholder = "Ej.: 1,500.00";
   celdaMensual.appendChild(mensual.grupo);
 
   const celdaPrimera = document.createElement("td");
@@ -140,6 +245,7 @@ function crearFilaDetalleAnioActual(mes, datosGuardados) {
   const primera = crearCampoDineroDetalle(
     `Primera quincena de ${MESES_DETALLE_ANIO[mes - 1]}`,
   );
+  primera.campo.placeholder = "Ej.: 750.00";
   celdaPrimera.appendChild(primera.grupo);
 
   const celdaSegunda = document.createElement("td");
@@ -147,6 +253,7 @@ function crearFilaDetalleAnioActual(mes, datosGuardados) {
   const segunda = crearCampoDineroDetalle(
     `Segunda quincena de ${MESES_DETALLE_ANIO[mes - 1]}`,
   );
+  segunda.campo.placeholder = "Ej.: 750.00";
   celdaSegunda.appendChild(segunda.grupo);
 
   const celdaEstado = document.createElement("td");
@@ -205,6 +312,10 @@ function crearFilaDetalleAnioActual(mes, datosGuardados) {
     }
   }
 
+  marcarCampoDetalleImportado(check, mes, "cuota_acreditada");
+  marcarCampoDetalleImportado(mensual.campo, mes, "salario_mensual");
+  marcarCampoDetalleImportado(selectorEstado, mes, "estado");
+
   [
     check,
     mensual.campo,
@@ -214,18 +325,29 @@ function crearFilaDetalleAnioActual(mes, datosGuardados) {
   ].forEach((control) => {
     control.addEventListener("input", () => {
       actualizarEstadoFilaDetalle(fila);
+      actualizarProcedenciaFilaDetalle(fila);
       guardarBorradorDetalleAnioActual();
       invalidarDetalleAnioActual();
     });
 
     control.addEventListener("change", () => {
       actualizarEstadoFilaDetalle(fila);
+      actualizarProcedenciaFilaDetalle(fila);
       guardarBorradorDetalleAnioActual();
+
+      if (
+        control === check
+        && control.dataset.importedLocked !== "true"
+      ) {
+        sincronizarCuotasPaso2DesdeDetalle();
+      }
+
       invalidarDetalleAnioActual();
     });
   });
 
   actualizarEstadoFilaDetalle(fila);
+  actualizarProcedenciaFilaDetalle(fila);
 
   return fila;
 }
@@ -258,6 +380,7 @@ function generarTablaDetalleAnioActual() {
   }
 
   actualizarColumnasModoDetalle();
+  sincronizarFilaAnualDesdeDetalleLocal();
 }
 
 
@@ -280,7 +403,9 @@ function actualizarColumnasModoDetalle() {
   document
     .querySelectorAll(".detalle-estado-salario")
     .forEach((selector) => {
-      selector.disabled = esQuincenal;
+      const fila = selector.closest("tr");
+      const mes = Number(fila?.dataset.mes || 0);
+      selector.disabled = esQuincenal || Boolean(origenCampoDetalle(mes, "estado"));
     });
 
   document
@@ -352,7 +477,11 @@ function leerDetalleAnioActual() {
     .querySelectorAll("#detalle-anio-actual-body tr")
     .forEach((fila) => {
       const mes = Number(fila.dataset.mes);
-      const cuota = fila.querySelector(".detalle-cuota-acreditada").checked;
+      const campoCuota = fila.querySelector(".detalle-cuota-acreditada");
+      const cuota = (
+        campoCuota.dataset.importedLocked === "true"
+        || campoCuota.checked
+      );
       const estado = fila.querySelector(".detalle-estado-salario").value;
       const mensual = fila.querySelector(".detalle-col-mensual input");
       const quincenas = fila.querySelectorAll(".detalle-col-quincenal input");
@@ -392,6 +521,166 @@ function leerDetalleAnioActual() {
 }
 
 
+function resumenLocalDetalleParaHistorial() {
+  const detalle = leerDetalleAnioActual();
+  let cuotas = 0;
+  let salarioAcreditado = 0;
+  let cuotasSinSalario = 0;
+
+  detalle.registros.forEach((registro) => {
+    if (!registro.cuota_acreditada) return;
+
+    cuotas += 1;
+
+    if (detalle.modo_captura === "MENSUAL") {
+      const salario = Number(registro.salario_mensual || 0);
+      salarioAcreditado += salario;
+      if (salario <= 0) cuotasSinSalario += 1;
+      return;
+    }
+
+    const salarioQuincenal = (
+      Number(registro.primera_quincena || 0)
+      + Number(registro.segunda_quincena || 0)
+    );
+    salarioAcreditado += salarioQuincenal;
+    if (salarioQuincenal <= 0) cuotasSinSalario += 1;
+  });
+
+  return {
+    cuotas,
+    salario_acreditado: salarioAcreditado,
+    cuotas_sin_salario: cuotasSinSalario,
+  };
+}
+
+
+function sincronizarFilaAnualDesdeDetalleLocal() {
+  if (!estaHabilitadoDetalleAnioActual()) return;
+
+  let resumen;
+  try {
+    resumen = resumenLocalDetalleParaHistorial();
+  } catch {
+    return;
+  }
+
+  const filaActual = document.querySelector(
+    `#historial-tabla-body tr[data-anio="${ANIO_ACTUAL}"]`,
+  );
+  if (!filaActual) return;
+
+  const cuotas = filaActual.querySelector(".history-input-cuotas");
+  const salario = filaActual.querySelector(".history-input-salario");
+  if (!cuotas || !salario) return;
+
+  cuotas.value = String(resumen.cuotas);
+  cuotas.readOnly = true;
+  cuotas.dataset.sincronizadoDetalle = "true";
+  cuotas.setAttribute(
+    "title",
+    "Sincronizado desde las cuotas confirmadas en el detalle del año actual.",
+  );
+
+  salario.value = (
+    resumen.salario_acreditado > 0
+    && resumen.cuotas_sin_salario === 0
+  )
+    ? formatearNumeroMonetario(resumen.salario_acreditado)
+    : "";
+  salario.readOnly = true;
+  salario.dataset.sincronizadoDetalle = "true";
+  salario.setAttribute(
+    "title",
+    "Sincronizado desde los salarios de los meses con cuota acreditada.",
+  );
+
+  if (typeof actualizarEstadoFila === "function") {
+    actualizarEstadoFila(filaActual);
+  }
+}
+
+
+function sincronizarCuotasPaso2DesdeDetalle(opciones = {}) {
+  if (!estaHabilitadoDetalleAnioActual()) return false;
+
+  let resumen;
+  try {
+    resumen = resumenLocalDetalleParaHistorial();
+  } catch {
+    return false;
+  }
+
+  const simulacion = obtenerSimulacion();
+  if (!simulacion.cuotas) return false;
+
+  const fuente = opciones.fuente || "DETALLE_MANUAL";
+  const cuotasAnteriores = Number(simulacion.cuotas.cuotas_anio_actual || 0);
+  if (resumen.cuotas === cuotasAnteriores) return false;
+
+  // R23: una Ficha Digital confirmada puede aportar una fotografía más
+  // reciente del año actual que Mi Retiro Seguro. Solo la usamos para
+  // ampliar automáticamente la cantidad acreditada; una ficha con menos
+  // meses nunca reduce silenciosamente una referencia superior del Paso 2.
+  if (fuente === "FICHA_DIGITAL" && resumen.cuotas < cuotasAnteriores) {
+    return false;
+  }
+
+  const totalAnterior = Number(simulacion.cuotas.cuotas_totales || 0);
+  const cuotasPreviasAlAnioActual = Math.max(0, totalAnterior - cuotasAnteriores);
+  const nuevoTotal = cuotasPreviasAlAnioActual + resumen.cuotas;
+  const origenActualizado = fuente === "FICHA_DIGITAL"
+    ? "FICHA_DIGITAL_ACTUALIZADO"
+    : "DETALLE_ANIO_ACTUAL_EDITADO";
+
+  simulacion.cuotas = {
+    ...simulacion.cuotas,
+    cuotas_totales: nuevoTotal,
+    cuotas_anio_actual: resumen.cuotas,
+  };
+  if (simulacion.detalle_anio_actual) {
+    simulacion.detalle_anio_actual.cuotas_anio_actual_referencia = resumen.cuotas;
+  }
+  simulacion.origen_campos_cuotas = {
+    ...(simulacion.origen_campos_cuotas || {}),
+    cuotas_totales: origenActualizado,
+    cuotas_anio_actual: origenActualizado,
+  };
+  simulacion.resumen_cuotas = null;
+  simulacion.resumen_historial = null;
+  simulacion.resumen_proyeccion = null;
+  simulacion.resumen_linea_tiempo = null;
+  simulacion.retiro = {};
+  simulacion.resumen_retiro = null;
+  simulacion.resultado_sebd_normal = null;
+  simulacion.resultado_mixto = null;
+  simulacion.resultado_sucgs = null;
+
+  const campoTotal = document.getElementById("cuotas_totales");
+  const campoActual = document.getElementById("cuotas_anio_actual");
+  if (campoTotal) campoTotal.value = String(nuevoTotal);
+  if (campoActual) campoActual.value = String(resumen.cuotas);
+
+  guardarSimulacion(simulacion);
+
+  const aviso = document.getElementById("detalle-cuotas-sincronizadas");
+  if (aviso) {
+    aviso.textContent = fuente === "FICHA_DIGITAL"
+      ? (
+        `La Ficha Digital confirmada identifica ${resumen.cuotas} cuota(s) acreditada(s) en el año actual. `
+        + `El Paso 2 se actualizó de ${cuotasAnteriores} a ${resumen.cuotas} y ahora registra ${nuevoTotal} cuota(s) acumuladas.`
+      )
+      : (
+        `Actualizaste las cuotas acreditadas del año actual a ${resumen.cuotas}. `
+        + `El Paso 2 se ajustó automáticamente a ${nuevoTotal} cuota(s) acumuladas usando este detalle más reciente.`
+      );
+    aviso.classList.remove("d-none");
+  }
+
+  return true;
+}
+
+
 function guardarBorradorDetalleAnioActual() {
   if (!estaHabilitadoDetalleAnioActual()) {
     return;
@@ -402,6 +691,7 @@ function guardarBorradorDetalleAnioActual() {
     simulacion.detalle_anio_actual_habilitado = true;
     simulacion.detalle_anio_actual = leerDetalleAnioActual();
     guardarSimulacion(simulacion);
+    sincronizarFilaAnualDesdeDetalleLocal();
   } catch {
     // La validación visible se realiza al pulsar el botón principal.
   }
@@ -420,16 +710,91 @@ function invalidarDetalleAnioActual() {
   simulacion.resultado_sucgs = null;
   guardarSimulacion(simulacion);
 
-  document.getElementById(
-    "resultado-detalle-anio-actual",
-  ).classList.add("d-none");
+  document.getElementById("resultado-detalle-anio-actual")?.classList.add("d-none");
+  document.getElementById("detalle-estado-coherencia")?.classList.add("d-none");
+  document.getElementById("detalle-resumen-visible")?.classList.add("d-none");
+  document.getElementById("resultado-paso3")?.classList.add("d-none");
 
   actualizarOpcionesBaseSalarial(false);
 }
 
 
+function fuenteReconciliacionCuotasPaso2() {
+  const simulacion = obtenerSimulacion();
+  const origenes = simulacion.origen_campos_cuotas || {};
+  const referenciaYaDerivadaDelDetalle = (
+    origenes.cuotas_anio_actual === "DETALLE_ANIO_ACTUAL_EDITADO"
+    || origenes.cuotas_totales === "DETALLE_ANIO_ACTUAL_EDITADO"
+    || origenes.cuotas_anio_actual === "FICHA_DIGITAL_ACTUALIZADO"
+    || origenes.cuotas_totales === "FICHA_DIGITAL_ACTUALIZADO"
+  );
+
+  const controles = Array.from(
+    document.querySelectorAll("#detalle-anio-actual-body .detalle-cuota-acreditada"),
+  );
+  const hayCuotaManualConfirmada = controles.some((control) => (
+    control.dataset.importedLocked !== "true"
+    && control.checked
+  ));
+
+  if (hayCuotaManualConfirmada || referenciaYaDerivadaDelDetalle) {
+    return "DETALLE_MANUAL";
+  }
+
+  const fichaConfirmada = Boolean(
+    simulacion.importacion_ficha_digital_confirmada
+    && simulacion.ficha_digital_importada,
+  );
+
+  if (fichaConfirmada) {
+    let resumen;
+    try {
+      resumen = resumenLocalDetalleParaHistorial();
+    } catch {
+      return null;
+    }
+    const cuotasPaso2 = Number(simulacion.cuotas?.cuotas_anio_actual || 0);
+    if (resumen.cuotas > cuotasPaso2) {
+      return "FICHA_DIGITAL";
+    }
+  }
+
+  return null;
+}
+
+
+function detallePuedeReconciliarCuotasPaso2() {
+  return Boolean(fuenteReconciliacionCuotasPaso2());
+}
+
+
 async function validarDetalleAnioActual() {
   ocultarMensajesDetalleAnioActual();
+
+  // R22: una cuota confirmada manualmente en este detalle es información
+  // más reciente que la fotografía importada en el Paso 2. Reconciliamos
+  // la referencia antes de construir el payload para que una restauración,
+  // F5 o evento perdido no deje 6 meses frente a una referencia obsoleta de 5.
+  const fuenteReconciliacion = fuenteReconciliacionCuotasPaso2();
+  if (fuenteReconciliacion) {
+    const cuotasSincronizadas = sincronizarCuotasPaso2DesdeDetalle({
+      fuente: fuenteReconciliacion,
+    });
+
+    if (cuotasSincronizadas && typeof analizarCuotas === "function") {
+      const cuotasRevalidadas = await analizarCuotas(
+        null,
+        { mostrarMensajes: false, reportarValidez: false },
+      );
+
+      if (!cuotasRevalidadas) {
+        mostrarErrorDetalleAnioActual(
+          "Las cuotas del año actual se actualizaron desde este detalle, pero no fue posible revalidar el Paso 2. Revisa los datos de cotización futura antes de continuar.",
+        );
+        return false;
+      }
+    }
+  }
 
   let datos;
 
@@ -437,7 +802,7 @@ async function validarDetalleAnioActual() {
     datos = leerDetalleAnioActual();
   } catch (error) {
     mostrarErrorDetalleAnioActual(error.message);
-    return;
+    return false;
   }
 
   try {
@@ -461,7 +826,7 @@ async function validarDetalleAnioActual() {
           "No fue posible validar el detalle del año actual.",
         ),
       );
-      return;
+      return false;
     }
 
     const simulacion = obtenerSimulacion();
@@ -484,21 +849,37 @@ async function validarDetalleAnioActual() {
 
     mostrarResumenDetalleAnioActual(contenido);
 
-    if (contenido.cuotas_coinciden) {
-      await sincronizarDetalleConHistorial(contenido);
-    }
+    await sincronizarDetalleConHistorial(contenido);
 
     actualizarOpcionesBaseSalarial(true);
 
+    if (typeof actualizarResumenPaso3 === "function") {
+      actualizarResumenPaso3();
+    }
+
+    if (!contenido.cuotas_coinciden) {
+      const cuotasPaso2 = Number(
+        obtenerSimulacion().cuotas?.cuotas_anio_actual || 0,
+      );
+      mostrarErrorDetalleAnioActual(
+        `El detalle identifica ${contenido.cuotas_acreditadas_identificadas} cuota(s) acreditada(s), `
+        + `pero el Paso 2 registra ${cuotasPaso2} para el año actual. `
+        + "Revisa únicamente las casillas de Cuota acreditada; los salarios conocidos pueden conservarse aunque su cuota todavía no figure acreditada.",
+      );
+      return false;
+    }
+
+    return true;
   } catch {
     mostrarErrorDetalleAnioActual(
       "No fue posible comunicarse con el servidor.",
     );
+    return false;
   }
 }
 
 
-async function sincronizarDetalleConHistorial(resumen) {
+function sincronizarDetalleConHistorial(resumen) {
   const filaActual = document.querySelector(
     `#historial-tabla-body tr[data-anio="${ANIO_ACTUAL}"]`,
   );
@@ -507,8 +888,15 @@ async function sincronizarDetalleConHistorial(resumen) {
     return;
   }
 
-  const salario = filaActual.querySelector(
-    ".history-input-salario",
+  const cuotas = filaActual.querySelector(".history-input-cuotas");
+  const salario = filaActual.querySelector(".history-input-salario");
+
+  cuotas.value = String(resumen.cuotas_acreditadas_identificadas || 0);
+  cuotas.readOnly = true;
+  cuotas.dataset.sincronizadoDetalle = "true";
+  cuotas.setAttribute(
+    "title",
+    "Sincronizado desde las cuotas confirmadas en el detalle del año actual.",
   );
 
   salario.value = formatearNumeroMonetario(
@@ -518,14 +906,13 @@ async function sincronizarDetalleConHistorial(resumen) {
   salario.dataset.sincronizadoDetalle = "true";
   salario.setAttribute(
     "title",
-    "Sincronizado desde el detalle salarial del año actual.",
+    "Sincronizado desde los salarios de los meses con cuota acreditada.",
   );
 
   actualizarEstadoFila(filaActual);
 
-  // Se vuelve a validar el historial para que el resumen anual y los motores
-  // posteriores consuman el total acreditado recién sincronizado.
-  await analizarHistorialSalarial();
+  // La acción principal del Paso 3 valida el historial después de sincronizar
+  // este total, evitando análisis duplicados dentro de una misma operación.
 }
 
 
@@ -538,11 +925,17 @@ function liberarSalarioAnualActual() {
     return;
   }
 
-  const salario = filaActual.querySelector(
-    ".history-input-salario",
-  );
+  const cuotas = filaActual.querySelector(".history-input-cuotas");
+  const salario = filaActual.querySelector(".history-input-salario");
 
-  if (salario.dataset.sincronizadoDetalle === "true") {
+  if (cuotas?.dataset.sincronizadoDetalle === "true") {
+    delete cuotas.dataset.sincronizadoDetalle;
+    cuotas.removeAttribute("title");
+    // Fuera del detalle, las cuotas del año actual vuelven a depender del Paso 2.
+    cuotas.readOnly = Boolean(obtenerSimulacion().cuotas?.cuotas_anio_actual !== undefined);
+  }
+
+  if (salario?.dataset.sincronizadoDetalle === "true") {
     salario.readOnly = false;
     delete salario.dataset.sincronizadoDetalle;
     salario.removeAttribute("title");
@@ -554,63 +947,69 @@ function liberarSalarioAnualActual() {
 // Resumen y base salarial sugerida
 // ============================================================
 
+function valorResumenMoneda(valor) {
+  if (valor === null || valor === undefined || valor === "") return "—";
+  return Number(valor) >= 0 ? formatearMoneda(valor) : "—";
+}
+
+
+function valorResumenMes(valor) {
+  return valor ? formatearMesIsoLegible(valor) : "—";
+}
+
+
+function actualizarResumenVisibleDetalleAnioActual(resumen) {
+  const seccion = document.getElementById("detalle-resumen-visible");
+  if (!seccion || !resumen) return;
+
+  const valores = {
+    "detalle-resumen-cuotas": resumen.cuotas_acreditadas_identificadas ?? "—",
+    "detalle-resumen-salario-disponible": valorResumenMoneda(resumen.total_salario_disponible),
+    "detalle-resumen-salario-acreditado": valorResumenMoneda(resumen.total_salario_acreditado),
+    "detalle-resumen-meses-info": resumen.meses_con_informacion ?? "—",
+    "detalle-resumen-meses-completos": resumen.meses_completos ?? "—",
+    "detalle-resumen-ultimo-mes-completo": valorResumenMes(resumen.ultimo_mes_con_salario_completo),
+    "detalle-resumen-ultimo-mes-cuota": valorResumenMes(resumen.ultimo_mes_cuota_acreditada),
+    "detalle-resumen-ultimo-salario": valorResumenMoneda(resumen.salario_ultimo_mes_completo),
+    "detalle-resumen-promedio-completos": valorResumenMoneda(resumen.promedio_meses_completos),
+    "detalle-resumen-promedio-tres": valorResumenMoneda(resumen.promedio_ultimos_3_meses_completos),
+    "detalle-resumen-promedio-cuota": valorResumenMoneda(resumen.promedio_por_cuota_acreditada),
+  };
+
+  Object.entries(valores).forEach(([id, valor]) => {
+    const elemento = document.getElementById(id);
+    if (elemento) elemento.textContent = String(valor);
+  });
+
+  seccion.classList.remove("d-none");
+}
+
+
 function mostrarResumenDetalleAnioActual(resumen) {
-  document.getElementById(
-    "resultado-detalle-anio-actual",
-  ).classList.remove("d-none");
+  const estado = document.getElementById("detalle-estado-coherencia");
+  if (!estado) return;
 
-  document.getElementById(
-    "detalle-cuotas-identificadas",
-  ).textContent = resumen.cuotas_acreditadas_identificadas;
-
-  document.getElementById(
-    "detalle-salario-acreditado",
-  ).textContent = formatearMoneda(
-    resumen.total_salario_acreditado,
-  );
-
-  document.getElementById(
-    "detalle-salario-disponible",
-  ).textContent = formatearMoneda(
-    resumen.total_salario_disponible,
-  );
-
-  document.getElementById(
-    "detalle-ultimo-mes-acreditado",
-  ).textContent = formatearMesIsoLegible(
-    resumen.ultimo_mes_cuota_acreditada,
-  );
-
-  const baseCuota = document.getElementById(
-    "detalle-base-cuota-acreditada",
-  );
-  if (baseCuota) {
-    baseCuota.textContent = (
-      "Promedio del salario acreditado por cuota del año actual: "
-      + (resumen.promedio_por_cuota_acreditada == null
-        ? "—"
-        : formatearMoneda(resumen.promedio_por_cuota_acreditada))
-    );
-  }
-
-  const estado = document.getElementById(
-    "detalle-estado-coherencia",
-  );
+  actualizarResumenVisibleDetalleAnioActual(resumen);
+  estado.classList.remove("d-none");
 
   if (resumen.cuotas_coinciden) {
     estado.className = "alert alert-success mt-4 mb-0";
     estado.textContent = (
-      "Las cuotas acreditadas marcadas coinciden con el total del año actual "
-      + "informado en el Paso 2. El total salarial acreditado se sincronizó "
-      + "con la fila anual correspondiente."
+      "Las cuotas acreditadas del detalle coinciden con el total del año actual informado en el Paso 2."
     );
   } else {
+    const simulacion = obtenerSimulacion();
+    const cuotasPaso2 = Number(simulacion.cuotas?.cuotas_anio_actual || 0);
     estado.className = "alert alert-warning mt-4 mb-0";
     estado.textContent = (
-      `Marcaste ${resumen.cuotas_acreditadas_identificadas} cuota(s), pero el `
-      + "Paso 2 contiene un total diferente para el año actual. Corrige esa "
-      + "diferencia antes de usar este detalle para los cálculos posteriores."
+      `Marcaste ${resumen.cuotas_acreditadas_identificadas} cuota(s), pero el Paso 2 registra ${cuotasPaso2} para el año actual. `
+      + "Si un mes tiene salario pero la cuota todavía no aparece acreditada por la CSS, conserva el salario y deja su casilla sin marcar. "
+      + "Si la cuota ya está acreditada, revisa el dato del Paso 2 antes de continuar."
     );
+  }
+
+  if (typeof actualizarResumenPaso3 === "function") {
+    actualizarResumenPaso3();
   }
 }
 
@@ -720,9 +1119,22 @@ function aplicarOrigenBaseSalarial(invalidar = true) {
   const simulacion = obtenerSimulacion();
   const resumen = simulacion.resumen_detalle_anio_actual;
 
+  const requiredMonto = document.getElementById("required-monto-salario");
+  const requiredPeriodicidad = document.getElementById("required-periodicidad-salario");
+  const requiredNote = document.getElementById("base-salarial-required-note");
+  const origenMonto = document.getElementById("origen-monto-salario");
+  const origenPeriodicidad = document.getElementById("origen-periodicidad-salario");
+
   if (origen === "MANUAL") {
     monto.readOnly = false;
     periodicidad.disabled = false;
+    monto.required = true;
+    periodicidad.required = true;
+    requiredMonto?.classList.remove("d-none");
+    requiredPeriodicidad?.classList.remove("d-none");
+    requiredNote?.classList.remove("d-none");
+    origenMonto?.classList.add("d-none");
+    origenPeriodicidad?.classList.add("d-none");
     ayuda.textContent = "Indica el monto y la periodicidad que deseas usar como base.";
   } else {
     const valor = obtenerValorBaseSalarial(origen, resumen);
@@ -735,12 +1147,22 @@ function aplicarOrigenBaseSalarial(invalidar = true) {
 
     monto.value = formatearNumeroMonetario(valor);
     monto.readOnly = true;
+    monto.required = false;
     periodicidad.value = "MENSUAL";
     periodicidad.disabled = true;
-    ayuda.textContent = (
-      `${descripcionOrigenBaseSalarial(origen, resumen)}: ${formatearMoneda(valor)}. `
-      + "Puedes volver a ingreso manual en cualquier momento."
-    );
+    periodicidad.required = false;
+    requiredMonto?.classList.add("d-none");
+    requiredPeriodicidad?.classList.add("d-none");
+    requiredNote?.classList.add("d-none");
+    ayuda.textContent = `${descripcionOrigenBaseSalarial(origen, resumen)}: ${formatearMoneda(valor)}.`;
+    if (origenMonto) {
+      origenMonto.textContent = "Base calculada automáticamente.";
+      origenMonto.className = "field-origin-note imported";
+    }
+    if (origenPeriodicidad) {
+      origenPeriodicidad.textContent = "Periodicidad mensual aplicada automáticamente.";
+      origenPeriodicidad.className = "field-origin-note imported";
+    }
   }
 
   simulacion.origen_salario_proyeccion = selector.value;
@@ -758,19 +1180,58 @@ function aplicarOrigenBaseSalarial(invalidar = true) {
 
 function actualizarEstadoDetalleAnioActual() {
   const habilitado = estaHabilitadoDetalleAnioActual();
+  const simulacion = obtenerSimulacion();
+  const importado = Boolean(
+    simulacion.importacion_ficha_digital_confirmada
+    && simulacion.ficha_digital_importada,
+  );
+
+  if (importado && Array.isArray(simulacion.detalle_anio_actual?.registros)) {
+    simulacion.detalle_anio_actual.registros.forEach((registro) => {
+      const origenMes = simulacion.origen_campos_detalle_anio_actual?.[String(registro.mes)] || {};
+      const salarioImportado = Boolean(origenMes.salario_mensual || origenMes.estado);
+      if (salarioImportado) {
+        registro.cuota_acreditada = true;
+        simulacion.origen_campos_detalle_anio_actual[String(registro.mes)] = {
+          ...origenMes,
+          cuota_acreditada: origenMes.cuota_acreditada || origenMes.salario_mensual || origenMes.estado,
+        };
+      }
+    });
+  }
 
   document.getElementById(
     "detalle-anio-actual-contenido",
   ).classList.toggle("d-none", !habilitado);
 
-  document.getElementById(
-    "modo_detalle_anio_actual",
-  ).disabled = !habilitado;
+  const modo = document.getElementById("modo_detalle_anio_actual");
+  if (importado) modo.value = "MENSUAL";
+  modo.disabled = !habilitado || importado;
 
-  const simulacion = obtenerSimulacion();
+  const origenModo = document.getElementById("origen-modo-detalle");
+  if (origenModo) {
+    const mostrarOrigen = importado && habilitado;
+    origenModo.textContent = mostrarOrigen
+      ? "Forma mensual definida por la Ficha Digital importada."
+      : "";
+    origenModo.className = mostrarOrigen
+      ? "field-origin-note imported"
+      : "field-origin-note d-none";
+  }
+
+  document.getElementById("detalle-importado-estado")?.classList.toggle(
+    "d-none",
+    !importado || !habilitado,
+  );
+  document.getElementById("detalle-importado-inactivo")?.classList.toggle(
+    "d-none",
+    !importado || habilitado,
+  );
   simulacion.detalle_anio_actual_habilitado = habilitado;
 
   if (!habilitado) {
+    document.getElementById("detalle-cuotas-sincronizadas")?.classList.add("d-none");
+    document.getElementById("detalle-resumen-visible")?.classList.add("d-none");
     simulacion.resumen_detalle_anio_actual = null;
     simulacion.ultimo_mes_cuotas_derivado = null;
     guardarSimulacion(simulacion);
@@ -786,7 +1247,10 @@ function actualizarEstadoDetalleAnioActual() {
 
 function restaurarDetalleAnioActual() {
   const simulacion = obtenerSimulacion();
-  const habilitado = Boolean(simulacion.detalle_anio_actual_habilitado);
+  const habilitado = Boolean(
+    simulacion.detalle_anio_actual_habilitado
+    || simulacion.importacion_ficha_digital_confirmada,
+  );
 
   document.getElementById(
     "usar_detalle_anio_actual",
@@ -805,20 +1269,9 @@ function restaurarDetalleAnioActual() {
       simulacion.resumen_detalle_anio_actual,
     );
 
-    if (simulacion.resumen_detalle_anio_actual.cuotas_coinciden) {
-      const filaActual = document.querySelector(
-        `#historial-tabla-body tr[data-anio="${ANIO_ACTUAL}"]`,
-      );
-
-      if (filaActual) {
-        const salario = filaActual.querySelector(".history-input-salario");
-        salario.value = formatearNumeroMonetario(
-          simulacion.resumen_detalle_anio_actual.total_salario_acreditado,
-        );
-        salario.readOnly = true;
-        salario.dataset.sincronizadoDetalle = "true";
-      }
-    }
+    sincronizarDetalleConHistorial(
+      simulacion.resumen_detalle_anio_actual,
+    );
   }
 
   actualizarOpcionesBaseSalarial(false);
@@ -835,6 +1288,7 @@ function mostrarErrorDetalleAnioActual(mensaje) {
 function ocultarMensajesDetalleAnioActual() {
   document.getElementById("error-detalle-anio-actual").classList.add("d-none");
   document.getElementById("advertencia-detalle-anio-actual").classList.add("d-none");
+  document.getElementById("detalle-resumen-visible")?.classList.add("d-none");
 }
 
 
@@ -867,9 +1321,14 @@ document.addEventListener("DOMContentLoaded", () => {
     invalidarDetalleAnioActual();
   });
 
-  document.getElementById(
-    "btn-validar-detalle-anio-actual",
-  ).addEventListener("click", validarDetalleAnioActual);
+  document.getElementById("btn-revisar-detalle-importado")?.addEventListener(
+    "click",
+    () => {
+      if (typeof revisarFichaDigitalImportada === "function") {
+        revisarFichaDigitalImportada();
+      }
+    },
+  );
 
   document.getElementById(
     "origen_salario_proyeccion",

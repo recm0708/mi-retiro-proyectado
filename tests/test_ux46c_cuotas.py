@@ -42,24 +42,22 @@ class TestUX46CCuotas(unittest.TestCase):
         self.assertIn('id="origen-cuotas-totales"', html)
         self.assertIn('id="origen-cuotas-anio-actual"', html)
         self.assertIn("actualizarOrigenCamposCuotas", js)
-        self.assertIn("Dato completado desde la importación.", js)
+        self.assertIn("textoProcedenciaDato", js)
+        self.assertIn('DETECTADO: "Detectado"', js)
 
     def test_campos_no_detectados_permanecen_editables(self):
         js = SIMULACION_JS.read_text(encoding="utf-8")
         self.assertIn('control.readOnly = importado;', js)
-        self.assertIn(
-            "Este dato no estaba disponible en el comprobante. Complétalo manualmente.",
-            js,
-        )
+        self.assertIn('const importado = origenBloqueaCampo(origen);', js)
+        self.assertIn('nota.textContent = "No detectado";', js)
         self.assertNotIn('control.disabled = importado;', js)
 
     def test_origen_de_cuotas_se_registra_por_campo(self):
         js = IMPORTACION_JS.read_text(encoding="utf-8")
         self.assertIn("origen_campos_cuotas", js)
-        self.assertIn("cuotas_totales = origenImportado", js)
-        self.assertIn("cuotas_anio_actual = origenImportado", js)
-        self.assertIn("delete simulacion.origen_campos_cuotas.cuotas_totales", js)
-        self.assertIn("delete simulacion.origen_campos_cuotas.cuotas_anio_actual", js)
+        self.assertIn('cuotas_totales: origenDesdeControlPreviewComprobante(', js)
+        self.assertIn('cuotas_anio_actual: origenDesdeControlPreviewComprobante(', js)
+        self.assertIn('origenDesdeControlPreviewComprobante', js)
 
     def test_quitar_importacion_libera_origenes(self):
         js = IMPORTACION_JS.read_text(encoding="utf-8")
@@ -76,7 +74,7 @@ class TestUX46CCuotas(unittest.TestCase):
     def test_no_hay_acciones_duplicadas_dentro_del_paso2(self):
         html = SIMULACION.read_text(encoding="utf-8")
         paso2 = html.split("PASO 2 — CUOTAS", 1)[1].split(
-            "PASO 3 — HISTORIAL Y SALARIO ACTUAL", 1
+            "PASO 3 — HISTORIAL Y BASE SALARIAL", 1
         )[0]
         self.assertNotIn('id="btn-volver-paso-1"', paso2)
         self.assertNotIn('id="btn-continuar-paso-3"', paso2)
