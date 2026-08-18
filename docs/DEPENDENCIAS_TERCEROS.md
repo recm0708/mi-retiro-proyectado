@@ -9,7 +9,7 @@ Este inventario distingue dependencias directas, snapshot transitivo, recursos e
 
 ## 1. Dependencias Python directas
 
-Las versiones corresponden al `requirements.txt` vigente en R4.
+Las versiones corresponden al `requirements.txt` vigente. La estructura documental se originó en GOV.1.3 R4 y se mantiene actualizada durante el mantenimiento pre-beta.
 
 | Dependencia | Versión | Finalidad en el proyecto | Licencia upstream verificada | Conexión/datos en el uso actual | Riesgo/revisión |
 |---|---:|---|---|---|---|
@@ -17,16 +17,16 @@ Las versiones corresponden al `requirements.txt` vigente en R4.
 | Jinja2 | 3.1.6 | Plantillas HTML | BSD-3-Clause | Render local del servidor | Revisar autoescape/plantillas |
 | Pydantic | 2.13.4 | Validación/modelos | MIT | Validación local de estructuras | Revisar cambios de esquema/core |
 | python-multipart | 0.0.32 | Recepción multipart de archivos | Apache-2.0 | Procesa cargas recibidas por FastAPI | Sensible a frontera de upload |
-| pypdf | 5.9.0 | Extracción de texto PDF | BSD-3-Clause | Procesa PDF en memoria; sin red propia | Dependencia crítica de parser; actualización separada |
+| pypdf | 6.15.0 | Extracción y lectura controlada de PDF | BSD-3-Clause | Procesa PDF en memoria; sin red propia | Dependencia crítica de parser; actualización mayor validada con regresiones específicas |
 | Uvicorn | 0.52.1 | Servidor ASGI | BSD-3-Clause | Sirve la aplicación; la red depende del modo de ejecución | Revisar configuración de despliegue |
 
-Fuentes upstream de licencia verificadas documentalmente para R4:
+Fuentes upstream de licencia verificadas documentalmente:
 
 - FastAPI: PyPI/repositorio oficial;
 - Jinja2: repositorio Pallets;
 - Pydantic: PyPI/repositorio oficial;
 - python-multipart: PyPI;
-- pypdf: PyPI;
+- pypdf: PyPI/repositorio oficial, licencia BSD-3-Clause;
 - Uvicorn: PyPI.
 
 La revisión definitiva de obligaciones de redistribución corresponde a GOV.1.7.
@@ -71,9 +71,9 @@ GitHub aloja el repositorio privado y ejecuta CI/Dependabot.
 
 GitHub Actions utiliza actualmente:
 
-- `actions/checkout@v6`;
-- `actions/setup-python@v6`;
-- `actions/setup-node@v6`.
+- `actions/checkout@v7`;
+- `actions/setup-python@v7`;
+- `actions/setup-node@v7`.
 
 Estas herramientas son de desarrollo/CI, no runtime del usuario final.
 
@@ -88,12 +88,19 @@ No forma parte del runtime Python de la aplicación.
 Antes de aceptar una actualización:
 
 1. revisar release/changelog upstream;
-2. ejecutar instalación limpia y `pip check`;
+2. ejecutar instalación reproducible y `pip check`;
 3. ejecutar compilación;
 4. ejecutar sintaxis JS cuando corresponda;
 5. ejecutar suite completa;
 6. revisar importadores si cambia `pypdf`/multipart;
-7. actualizar este documento si cambia licencia, función, riesgo o conexión.
+7. actualizar este documento si cambia versión, licencia, función, riesgo o conexión.
+
+Para `pypdf 6.15.0` se añadieron regresiones específicas sobre:
+
+- versión instalada;
+- roundtrip `PdfWriter` → `PdfReader`;
+- rechazo controlado de PDFs digitales sin texto por ambos importadores;
+- límites de páginas de Mi Retiro Seguro y Ficha Digital.
 
 ## 8. Licencia del proyecto
 
