@@ -36,7 +36,7 @@ Los workflows vigentes fueron migrados de GitHub Actions `@v6` a `@v7`. La valid
 ```powershell
 python -m compileall app
 
-Get-ChildItem .pp\static\js\*.js | ForEach-Object {
+Get-ChildItem .\app\static\js\*.js | ForEach-Object {
     node --check $_.FullName
     if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 }
