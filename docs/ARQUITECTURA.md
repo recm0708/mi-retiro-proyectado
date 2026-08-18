@@ -2,12 +2,12 @@
 
 **Estado:** Vigente
 **Versión de aplicación revisada:** `0.0.23-beta`
-**Revisión documental:** GOV.1.3 R2 — 2026-08-17
+**Revisión documental:** GOV.1.4 — 2026-08-17
 **Clasificación:** Técnica / Pública
 
-Mi Retiro Proyectado es una aplicación web local basada en FastAPI, Jinja2 y JavaScript del navegador. La arquitectura separa presentación, contratos de datos, servicios de integración, motores previsionales y parámetros normativos.
+Mi Retiro Proyectado es una aplicación web local basada en FastAPI, Jinja2 y JavaScript del navegador. La arquitectura separa presentación, contratos de datos, servicios de integración, motores previsionales, parámetros normativos y observabilidad de desarrollo.
 
-[Índice](INDICE.md) · [Modelo de datos](MODELO_DE_DATOS.md) · [Motor](MOTOR_DE_CALCULO.md) · [Normativa](NORMATIVA.md)
+[Índice](INDICE.md) · [Modelo de datos](MODELO_DE_DATOS.md) · [Motor](MOTOR_DE_CALCULO.md) · [Normativa](NORMATIVA.md) · [Observabilidad](OBSERVABILIDAD_LOGS.md)
 
 ## 1. Principios
 
@@ -20,32 +20,40 @@ Mi Retiro Proyectado es una aplicación web local basada en FastAPI, Jinja2 y Ja
 7. **Importación revisable:** extraer un PDF no equivale a confirmar ni calcular.
 8. **Versión única:** `VERSION` es la fuente canónica consumida por `app/core/version.py`.
 9. **Interfaz desacoplada:** JavaScript administra experiencia, estado temporal y comunicación HTTP; no constituye una segunda implementación de los motores.
-10. **Historia preservada:** la documentación vigente describe el contrato actual; bitácoras anteriores se conservan en `docs/historico/`.
+10. **Observabilidad lateral:** Developer Diagnostics observa operaciones ya ejecutadas; no vuelve a invocar motores ni replica fórmulas.
+11. **Minimización de logs:** los eventos técnicos no contienen cuerpos HTTP, documentos, identificadores ni valores financieros.
+12. **Historia preservada:** la documentación vigente describe el contrato actual; bitácoras anteriores se conservan en `docs/historico/`.
 
-## 2. Inventario actual del paquete `app`
+## 2. Inventario relevante del paquete `app`
 
-La siguiente lista se deriva del árbol local existente al aplicar GOV.1.3 R2.
+### Núcleo
 
-- `app/core/__init__.py`
 - `app/core/archivos_pdf.py`
 - `app/core/config.py`
 - `app/core/constants.py`
 - `app/core/dinero.py`
 - `app/core/normativa.py`
+- `app/core/observabilidad.py`
 - `app/core/version.py`
-- `app/modelos/__init__.py`
+
+### Modelos
+
 - `app/modelos/comparacion.py`
 - `app/modelos/pension.py`
 - `app/modelos/resultado_unificado.py`
 - `app/modelos/simulacion.py`
 - `app/modelos/trazabilidad.py`
-- `app/motores/__init__.py`
+
+### Motores
+
 - `app/motores/elegibilidad.py`
 - `app/motores/mixto.py`
 - `app/motores/sebd.py`
 - `app/motores/sebd_modalidades.py`
 - `app/motores/sucgs.py`
-- `app/servicios/__init__.py`
+
+### Servicios principales
+
 - `app/servicios/comparador.py`
 - `app/servicios/detalle_anio_actual.py`
 - `app/servicios/fecha_referencia.py`
@@ -63,6 +71,9 @@ La siguiente lista se deriva del árbol local existente al aplicar GOV.1.3 R2.
 - `app/servicios/resultados_sucgs.py`
 - `app/servicios/retiro.py`
 - `app/servicios/trazabilidad.py`
+
+### Presentación JavaScript crítica
+
 - `app/static/js/accesibilidad.js`
 - `app/static/js/comparador.js`
 - `app/static/js/detalle_anio_actual.js`
@@ -90,9 +101,10 @@ Responsabilidades:
 - precisión monetaria;
 - carga de normativa;
 - constantes comunes;
-- validación defensiva de archivos PDF.
+- validación defensiva de archivos PDF;
+- Developer Diagnostics.
 
-`app/core/version.py` lee `VERSION`; `app/core/config.py` consume ese valor y expone identidad pública. Los parámetros previsionales no se definen allí.
+`app/core/observabilidad.py` implementa el esquema JSONL, correlación aleatoria, redacción, rotación, retención y exportación controlada. El módulo no conoce modelos previsionales ni ejecuta cálculos.
 
 ### 3.2. Modelos (`app/modelos/`)
 
@@ -104,20 +116,13 @@ Pydantic define contratos HTTP y de dominio:
 - `trazabilidad.py` — pasos y fuentes de cálculo;
 - `resultado_unificado.py` — salida transversal común.
 
-La metadata puramente visual del navegador no se convierte automáticamente en modelo Pydantic.
+La metadata puramente visual y diagnóstica no se convierte automáticamente en modelo Pydantic de negocio.
 
 ### 3.3. Servicios (`app/servicios/`)
 
-Los servicios normalizan, integran y coordinan:
+Los servicios normalizan, integran y coordinan cuotas, historial, detalle actual, proyección, retiro, importaciones, resultados, comparación y fecha externa.
 
-- cuotas e historial;
-- detalle salarial del año actual;
-- proyección salarial y línea temporal;
-- escenarios de retiro;
-- extracción de Mi Retiro Seguro y Ficha Digital;
-- verificación de fecha externa;
-- preparación de resultados por sistema;
-- comparación, trazabilidad y catálogo de fuentes.
+`fecha_referencia.py` puede emitir eventos agregados de cache/consulta cuando Developer Diagnostics está activo. Esos eventos no incluyen URL, fecha recibida ni datos de simulación.
 
 Los parsers documentales son **capas de entrada**, no motores previsionales.
 
@@ -131,21 +136,13 @@ Los motores aplican las reglas previsionales ya modeladas:
 - Subsistema Mixto;
 - SUCGS.
 
-No leen PDFs, `sessionStorage` ni controles HTML.
+No leen PDFs, `sessionStorage`, controles HTML ni logs. Developer Diagnostics no vuelve a invocarlos.
 
 ### 3.5. Presentación (`app/templates/`, `app/static/`)
 
-Jinja2 genera las páginas y parciales. JavaScript:
+Jinja2 genera las páginas y parciales. JavaScript administra el asistente, estado temporal, importaciones, procedencia, invalidación, llamadas HTTP y representación de resultados.
 
-- administra el asistente;
-- conserva el estado temporal;
-- coordina importaciones y confirmaciones;
-- aplica procedencia y bloqueos de interfaz;
-- invalida resultados dependientes;
-- llama a la API;
-- representa resultados y advertencias.
-
-CSS se separa entre base, sistema visual y accesibilidad.
+JavaScript no implementa fórmulas previsionales principales ni un segundo sistema de logging de datos de negocio.
 
 ## 4. Flujo funcional
 
@@ -165,7 +162,7 @@ Paso 6 — Resultado del sistema
 Comparación + trazabilidad + resumen unificado
 ```
 
-Una modificación ascendente invalida los resultados dependientes. Existe una reconciliación ascendente controlada desde el detalle del año actual hacia las cuotas agregadas cuando el dato más reciente lo justifica; no se utiliza para conservar resultados obsoletos.
+Developer Diagnostics es transversal a las operaciones HTTP, no forma parte de este flujo de negocio y no altera sus resultados.
 
 ## 5. Estado temporal del navegador
 
@@ -179,59 +176,69 @@ Consultar [GESTION_DATOS_SIMULACION.md](GESTION_DATOS_SIMULACION.md).
 
 ### Mi Retiro Seguro
 
-`app/servicios/referencia_mi_retiro_seguro.py` extrae una referencia personal revisable. Puede devolver identificadores opcionales solo cuando el documento los permite determinar; el archivo original no se persiste.
-
-Las filas distinguen `HISTORICO`, `HISTORICO_PROYECTADO` y `PROYECTADO`. El total acreditado y el total acumulado que puede incluir proyección permanecen conceptos diferentes.
+`app/servicios/referencia_mi_retiro_seguro.py` extrae una referencia personal revisable. El archivo original no se persiste.
 
 ### Ficha Digital
 
-`app/servicios/ficha_digital.py` devuelve únicamente los registros del **año más reciente detectado** en la sección salarial del documento. No utiliza el reloj local para escoger ese año.
-
-El contrato de salida contiene año, mes, salario y estado salarial. La asignación de una cuota al detalle mensual ocurre en la capa de estado/interfaz cuando se confirma la importación; no se agrega un campo de cuota al modelo `RegistroFichaDigital`.
+`app/servicios/ficha_digital.py` devuelve únicamente los registros del año más reciente detectado en la sección salarial del documento.
 
 ### Fecha de referencia
 
-`app/servicios/fecha_referencia.py` intenta obtener el encabezado HTTP `Date` mediante HTTPS desde fuentes CSS configuradas. Si no obtiene una fecha consistente, devuelve un resultado no confiable y la interfaz adopta una conducta conservadora.
+`app/servicios/fecha_referencia.py` intenta obtener el encabezado HTTP `Date` mediante HTTPS desde fuentes CSS configuradas. Si no obtiene una fecha consistente, devuelve un resultado no confiable.
 
-No se envían datos de la simulación durante esa consulta.
+La observabilidad asociada registra solo cantidades, estado de cache, outcome y duración.
 
-## 7. API actual
+## 7. API y middleware
 
-El inventario se deriva de los decoradores FastAPI presentes en `app/main.py` al aplicar R2.
+`app/main.py` contiene el middleware global de seguridad y Developer Diagnostics.
 
-| Método | Ruta |
-|---|---|
-| `GET` | `/favicon.ico` |
-| `GET` | `/` |
-| `GET` | `/simulacion` |
-| `GET` | `/comparar` |
-| `GET` | `/metodologia` |
-| `POST` | `/api/simulacion/cuotas` |
-| `POST` | `/api/simulacion/historial-salarial` |
-| `POST` | `/api/simulacion/detalle-anio-actual` |
-| `POST` | `/api/simulacion/referencia-mi-retiro-seguro` |
-| `POST` | `/api/simulacion/ficha-digital` |
-| `GET` | `/api/sistema/fecha-referencia` |
-| `POST` | `/api/simulacion/salario` |
-| `POST` | `/api/simulacion/proyeccion-salario` |
-| `POST` | `/api/simulacion/linea-tiempo` |
-| `POST` | `/api/simulacion/retiro` |
-| `POST` | `/api/simulacion/sebd/normal` |
-| `POST` | `/api/simulacion/resultados/sebd-normal` |
-| `POST` | `/api/simulacion/sebd` |
-| `POST` | `/api/simulacion/resultados/sebd` |
-| `POST` | `/api/simulacion/mixto` |
-| `POST` | `/api/simulacion/resultados/mixto` |
-| `POST` | `/api/simulacion/sucgs` |
-| `POST` | `/api/simulacion/resultados/sucgs` |
-| `POST` | `/api/simulacion/comparar-escenarios` |
-| `GET` | `/salud` |
+Cuando `MRP_DEV_MODE` no vale `1`, la observabilidad no escribe logs ni añade `X-Correlation-ID`.
 
-Los endpoints bajo `/api/simulacion/` reciben `Cache-Control: no-store`.
+Cuando está activa:
+
+1. genera un correlation ID aleatorio;
+2. ejecuta `call_next()` exactamente una vez;
+3. registra operación técnica, método, estado y duración;
+4. conserva el mismo correlation ID para eventos internos de esa solicitud;
+5. no registra request body ni response body.
+
+Los endpoints bajo `/api/simulacion/` continúan recibiendo `Cache-Control: no-store`.
+
+## 7.1. Inventario de rutas FastAPI
+
+El siguiente inventario se deriva de los decoradores vigentes en `app/main.py`. Se conserva explícitamente para auditoría documental iniciada en GOV.1.3 R2 y actualizada por GOV.1.4.
+
+| Ruta |
+|---|
+| `/` |
+| `/api/simulacion/comparar-escenarios` |
+| `/api/simulacion/cuotas` |
+| `/api/simulacion/detalle-anio-actual` |
+| `/api/simulacion/ficha-digital` |
+| `/api/simulacion/historial-salarial` |
+| `/api/simulacion/linea-tiempo` |
+| `/api/simulacion/mixto` |
+| `/api/simulacion/proyeccion-salario` |
+| `/api/simulacion/referencia-mi-retiro-seguro` |
+| `/api/simulacion/resultados/mixto` |
+| `/api/simulacion/resultados/sebd` |
+| `/api/simulacion/resultados/sebd-normal` |
+| `/api/simulacion/resultados/sucgs` |
+| `/api/simulacion/retiro` |
+| `/api/simulacion/salario` |
+| `/api/simulacion/sebd` |
+| `/api/simulacion/sebd/normal` |
+| `/api/simulacion/sucgs` |
+| `/api/sistema/fecha-referencia` |
+| `/comparar` |
+| `/favicon.ico` |
+| `/metodologia` |
+| `/salud` |
+| `/simulacion` |
 
 ## 8. Cabeceras defensivas
 
-El middleware global establece actualmente:
+El middleware global mantiene:
 
 - `X-Content-Type-Options: nosniff`;
 - `X-Frame-Options: DENY`;
@@ -240,26 +247,38 @@ El middleware global establece actualmente:
 - CSP explícita;
 - `Cache-Control: no-store` en servicios de simulación.
 
-La CSP actual permite temporalmente recursos Bootstrap desde jsDelivr. La evaluación de terceros y el cierre pre-beta de esa decisión pertenecen a GOV.1.5.
+`X-Correlation-ID` es una cabecera diagnóstica de desarrollo y solo se añade cuando Developer Diagnostics está activo.
 
-## 9. Precisión
+## 9. Persistencia de logs
+
+Los logs se escriben localmente en `logs/diagnostico/` por defecto, directorio excluido de Git.
+
+No existe envío remoto automático. La exportación diagnóstica empaqueta únicamente los JSONL conocidos y requiere activación explícita de desarrollo.
+
+Consultar [OBSERVABILIDAD_LOGS.md](OBSERVABILIDAD_LOGS.md).
+
+## 10. Precisión
 
 `app/core/dinero.py` centraliza operaciones monetarias sensibles con `Decimal` y materialización a centavos. Los factores actuariales no se formatean ni se tratan como importes monetarios.
 
-## 10. Versionado
+Los importes no se incluyen en Developer Diagnostics.
+
+## 11. Versionado
 
 `VERSION` → `app/core/version.py` → `APP_VERSION` → FastAPI/Jinja2/footer.
 
-La versión normativa, la versión jurídica de privacidad y la futura versión de esquema de logs son contratos independientes.
+El esquema de logs (`schema_version`) es un contrato técnico independiente de `VERSION`, normativa y privacidad.
 
-## 11. Persistencia futura
+## 12. Persistencia futura
 
-La arquitectura actual no incluye una base de datos de simulaciones. La incorporación de SQLite u otro almacenamiento permanente exige una decisión explícita, migraciones/versionado de esquema y una revisión de privacidad.
+La arquitectura actual no incluye una base de datos de simulaciones. La incorporación de almacenamiento permanente exige una decisión explícita, migraciones/versionado de esquema y revisión de privacidad.
 
-## 12. Historia de esta arquitectura
+Developer Diagnostics no debe utilizarse como sustituto de persistencia de simulaciones.
 
-La versión anterior, que acumulaba descripciones cronológicas de UX.3–UX.4.6d, se conserva en:
+## 13. Historia de esta arquitectura
+
+La versión acumulativa anterior a GOV.1.3 R2 se conserva en:
 
 `docs/historico/tecnico/ARQUITECTURA_PRE_GOV1_3_R2.md`
 
-Ese snapshot es evidencia histórica; este documento describe el estado técnico vigente.
+Este documento describe el estado técnico vigente después de GOV.1.4.

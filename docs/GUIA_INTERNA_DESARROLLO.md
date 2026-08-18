@@ -2,7 +2,8 @@
 
 **Estado:** Vigente
 **Versión de aplicación revisada:** `0.0.23-beta`
-**Revisión documental:** GOV.1.3 R2 — 2026-08-17
+**Base documental preservada:** GOV.1.3 R2 — 2026-08-17
+**Revisión transversal vigente:** GOV.1.4 — 2026-08-17
 **Clasificación:** Técnica / Interna
 
 Esta guía contiene convenciones de ingeniería estables. Las bitácoras de fases anteriores viven en `docs/historico/`.
@@ -19,19 +20,9 @@ Versión: archivo raíz `VERSION`.
 
 ## 2. Frontera entre interfaz y dominio
 
-JavaScript puede:
+JavaScript puede validar interacción básica, administrar estado de pantalla, conservar la simulación temporal, coordinar importaciones y presentar resultados.
 
-- validar interacción básica;
-- administrar estado de pantalla;
-- conservar la simulación temporal;
-- coordinar importaciones;
-- presentar resultados.
-
-JavaScript no debe:
-
-- implementar fórmulas previsionales principales;
-- introducir parámetros legales independientes;
-- modificar un monto calculado por Python para igualar una referencia.
+JavaScript no debe implementar fórmulas previsionales principales, introducir parámetros legales independientes ni modificar un monto calculado por Python para igualar una referencia.
 
 ## 3. Presentación
 
@@ -39,24 +30,17 @@ Las páginas heredan de `base.html`.
 
 Capas CSS:
 
-1. `style.css` — base y reglas funcionales históricas;
-2. `design-system.css` — sistema visual vigente;
-3. `accesibilidad.css` — remates accesibles con precedencia final.
+1. `style.css`;
+2. `design-system.css`;
+3. `accesibilidad.css`.
 
 Usar tokens semánticos existentes antes de introducir colores literales.
 
 ## 4. Temas
 
-Mantener:
-
-- Automático;
-- Claro;
-- Oscuro;
-- Alto contraste.
+Mantener Automático, Claro, Oscuro y Alto contraste.
 
 Un componente nuevo debe revisarse como mínimo en Claro, Oscuro y Alto contraste.
-
-La preferencia de tema no forma parte del cálculo.
 
 ## 5. Accesibilidad
 
@@ -69,30 +53,18 @@ Criterios mínimos:
 - objetivos táctiles adecuados;
 - navegación por teclado;
 - `prefers-reduced-motion`;
-- tablas con caption/semántica y foco solo si existe desbordamiento;
+- tablas con semántica apropiada;
 - un único `h1` por página.
-
-Las mejoras automáticas no sustituyen una auditoría WCAG con tecnologías de apoyo.
 
 ## 6. Validación de formularios
 
 `accesibilidad.js` administra la capa común de errores.
 
-Reglas:
-
-- `aria-invalid` solo mientras el control sea inválido;
-- mensaje inline enlazado;
-- evitar duplicar `role="alert"` y anuncios assertive equivalentes;
-- usar `ValidityState.valid` en validación reactiva cuando no se desea disparar `invalid`;
-- funciones llamadas por `MutationObserver` deben ser idempotentes.
+Las funciones llamadas por `MutationObserver` deben ser idempotentes y no duplicar estados.
 
 ## 7. Tablas
 
-Reutilizar el contrato común (`app-table-shell` o equivalente vigente).
-
-No crear bordes, radios o scrollbars ad hoc si existe un patrón común.
-
-El scroll interno solo debe aparecer cuando exista desbordamiento real.
+Reutilizar el contrato común (`app-table-shell` o equivalente vigente). No crear scrollbars o bordes ad hoc si existe un patrón común.
 
 ## 8. Importadores
 
@@ -110,14 +82,7 @@ No versionar PDFs personales ni capturas identificativas.
 
 ## 9. Procedencia de datos
 
-Un campo puede ser:
-
-- detectado;
-- editado;
-- completado manualmente;
-- no detectado.
-
-No bloquear un campo solo porque exista una importación confirmada; el bloqueo depende de que ese campo tenga procedencia documental aplicable.
+Un campo puede ser detectado, editado, completado manualmente o no detectado.
 
 La procedencia es metadata de interfaz, no una fórmula.
 
@@ -127,33 +92,44 @@ El parser devuelve salarios del año más reciente detectado y no identidad pers
 
 La fecha externa se usa para vigencia. Si no se puede verificar, mostrar incertidumbre; no usar el reloj local como fuente silenciosa.
 
-Al aplicar la importación al detalle, respetar la reconciliación vigente de cuotas y nunca reducir silenciosamente una referencia superior.
-
 ## 11. Estado e invalidación
 
 La función de limpieza es descendente por dependencia.
 
-Paso 3 puede reconciliar cuotas del año actual hacia Paso 2 cuando existe un dato más reciente confirmado. Esa excepción debe invalidar/revalidar lo posterior.
+Paso 3 puede reconciliar cuotas del año actual hacia Paso 2 cuando existe un dato más reciente confirmado.
 
 Consultar `GESTION_DATOS_SIMULACION.md`.
 
-## 12. Privacidad
+## 12. Privacidad y Developer Diagnostics
 
 No introducir sin revisión:
 
-- telemetría;
 - analítica;
 - cookies no esenciales;
 - persistencia remota;
-- logging de PII;
 - terceros;
-- exportación automática.
+- exportación automática de datos personales;
+- sistemas paralelos de logging.
 
-GOV.1.4 definirá Developer Diagnostics; hasta entonces no crear un sistema paralelo de logs sin contrato.
+Developer Diagnostics está definido en `app/core/observabilidad.py` y `OBSERVABILIDAD_LOGS.md`.
+
+Reglas obligatorias:
+
+- apagado por defecto;
+- activar solo con `MRP_DEV_MODE=1`;
+- nunca registrar request/response bodies;
+- nunca registrar PII, salarios, cuotas detalladas, montos, PDF, cookies o tokens;
+- no registrar mensajes originales de excepciones potencialmente sensibles;
+- usar correlation IDs aleatorios no derivados del usuario;
+- observar una ejecución existente, nunca repetir un cálculo para obtener diagnóstico;
+- cualquier metadata nueva debe ser técnica, acotada y revisable;
+- no crear telemetría remota sin una decisión y revisión de privacidad separadas.
 
 ## 13. Seguridad HTTP
 
 Mantener validación de archivos, `no-store` en API sensible y cabeceras defensivas.
+
+`X-Correlation-ID` solo se usa con Developer Diagnostics activo.
 
 Cambios de CSP, CDN o conectividad externa requieren actualización de seguridad/privacidad.
 
@@ -161,19 +137,13 @@ Cambios de CSP, CDN o conectividad externa requieren actualización de seguridad
 
 No hardcodear la versión fuera de la fuente canónica.
 
-Consultar `VERSIONING.md`.
+El esquema de logs puede evolucionar independientemente mediante `schema_version`.
 
 ## 15. Documentación
 
-Los documentos vigentes describen estado actual. No añadir al final un diario de `R1`, `R2`, `R3` si la información puede integrarse en la sección correspondiente.
+Los documentos vigentes describen estado actual. No añadir un diario de revisiones si la información puede integrarse en la sección correspondiente.
 
-Historia:
-
-- `CHANGELOG.md`;
-- `RELEASES.md`;
-- `docs/REGISTRO_CAMBIOS_HISTORICO.md`;
-- `docs/historico/`;
-- Git.
+Historia: `CHANGELOG.md`, `RELEASES.md`, `docs/REGISTRO_CAMBIOS_HISTORICO.md`, `docs/historico/` y Git.
 
 ## 16. Validación antes de cierre
 
@@ -200,18 +170,11 @@ git diff --cached --check
 
 Mientras no exista el paquete gráfico definitivo, `/favicon.ico` puede responder 204 conforme a la implementación actual.
 
-Al integrar recursos definitivos:
-
-- usar `app/static/img/`;
-- actualizar `base.html`;
-- retirar la ruta temporal;
-- actualizar regresiones y documentación.
-
 ## 18. Dependencias
 
 `requirements.txt` es el snapshot reproducible Python.
 
-Node.js LTS se usa actualmente para validación sintáctica; no existe una cadena npm de runtime.
+Node.js LTS se usa para validación sintáctica; no existe una cadena npm de runtime.
 
 Dependabot no implica auto-merge.
 

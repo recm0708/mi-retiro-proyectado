@@ -6,6 +6,19 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ## [Unreleased]
 
+### GOV.1.4 — Observabilidad y Developer Diagnostics
+
+- incorporado modo exclusivo de desarrollo mediante `MRP_DEV_MODE=1`, desactivado por defecto;
+- añadido logging estructurado JSONL con esquema propio, timestamps UTC, niveles, categorías, duración, resultado y correlation IDs aleatorios;
+- añadida redacción defensiva y prohibición explícita de registrar cuerpos HTTP, PDF, identificadores, salarios, montos, cookies, tokens o mensajes de excepción potencialmente sensibles;
+- añadidas rotación local, retención acotada y exportación diagnóstica controlada sin telemetría remota;
+- integrado middleware FastAPI sin doble ejecución de cálculos y con `X-Correlation-ID` solo en modo de desarrollo;
+- instrumentada la consulta externa de fecha con metadata agregada de cache/resultado, sin URLs, fechas recibidas ni datos de simulación;
+- añadidas 13 regresiones específicas de observabilidad; la suite completa alcanza **487 pruebas en `OK`**;
+- sincronizada la documentación transversal y cerrado formalmente GOV.1.4;
+- `VERSION` permanece en `0.0.23-beta`.
+
+
 ### Gobierno e integridad Git
 
 - adoptada firma SSH Ed25519 para commits y tags nuevos;
