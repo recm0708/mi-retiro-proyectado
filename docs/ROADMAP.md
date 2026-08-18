@@ -45,16 +45,17 @@ Este roadmap describe **estado actual y trabajo futuro**. La evolución detallad
   - [x] protección/ruleset de `main`;
   - [x] revisión de configuración GitHub y PR de Dependabot.
 
-- [ ] **GOV.1.4 — Observabilidad y Developer Diagnostics**
-  - modo exclusivo de desarrollo;
-  - logging estructurado;
-  - niveles y categorías;
-  - correlación de operaciones;
-  - registro de errores, advertencias, conexiones e hitos técnicos;
-  - redacción de datos sensibles;
-  - rotación/retención;
-  - exportación diagnóstica controlada;
-  - documentación de esquema y operación.
+- [x] **GOV.1.4 — Observabilidad y Developer Diagnostics**
+  - [x] modo exclusivo de desarrollo;
+  - [x] logging estructurado;
+  - [x] niveles y categorías;
+  - [x] correlación de operaciones;
+  - [x] registro de errores, conexiones e hitos técnicos sin duplicar cálculos;
+  - [x] redacción y prohibición de datos sensibles;
+  - [x] rotación/retención local;
+  - [x] exportación diagnóstica controlada;
+  - [x] documentación de esquema y operación;
+  - [x] 13 regresiones específicas y suite completa de 487 pruebas en `OK`.
 
 - [ ] **GOV.1.5 — Seguridad, privacidad y transparencia**
   - threat model;
@@ -108,7 +109,7 @@ Este roadmap describe **estado actual y trabajo futuro**. La evolución detallad
 - informes PDF;
 - exportación final seleccionable;
 - auditoría WCAG 2.2 ampliada con tecnologías de apoyo/dispositivos;
-- observabilidad estructurada;
+- Developer Diagnostics implementado; revisión de seguridad de logs continúa en GOV.1.5;
 - procedimientos formales de seguridad/privacidad pre-publicación;
 - revisión jurídica externa;
 - licencia;

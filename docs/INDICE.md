@@ -2,7 +2,7 @@
 
 **Estado:** vigente
 **Versión de aplicación revisada:** `0.0.23-beta`
-**Última reorganización:** GOV.1.3 R4 — 2026-08-17
+**Última actualización transversal:** GOV.1.4 — 2026-08-17
 
 Este archivo es el punto de entrada para la documentación técnica, funcional, normativa, de privacidad, validación y auditoría de Mi Retiro Proyectado.
 
@@ -20,7 +20,6 @@ Este archivo es el punto de entrada para la documentación técnica, funcional, 
 - [`../RELEASES.md`](../RELEASES.md) — versiones, tags y reconstrucción histórica.
 - [`../CHANGELOG.md`](../CHANGELOG.md) — cambios notables por versión.
 - [`../CONTRIBUTING.md`](../CONTRIBUTING.md) — flujo de contribución.
-- [`../.github/CODEOWNERS`](../.github/CODEOWNERS) — responsables de revisión.
 - [`MIGRACION_FIRMAS_GIT_2026-08-17.md`](MIGRACION_FIRMAS_GIT_2026-08-17.md) — firma SSH y migración histórica controlada.
 - [`../.github/allowed_signers`](../.github/allowed_signers) — claves públicas autorizadas.
 
@@ -29,6 +28,7 @@ Este archivo es el punto de entrada para la documentación técnica, funcional, 
 - [`ARQUITECTURA.md`](ARQUITECTURA.md) — capas, módulos, endpoints y flujo.
 - [`MODELO_DE_DATOS.md`](MODELO_DE_DATOS.md) — modelos y contratos.
 - [`GESTION_DATOS_SIMULACION.md`](GESTION_DATOS_SIMULACION.md) — estado local, limpieza, restauración e invalidación.
+- [`OBSERVABILIDAD_LOGS.md`](OBSERVABILIDAD_LOGS.md) — Developer Diagnostics, esquema JSONL, correlación, redacción, retención y exportación.
 
 ## 4. Especificación funcional
 
@@ -60,8 +60,11 @@ Este archivo es el punto de entrada para la documentación técnica, funcional, 
 - [`POLITICA_PRIVACIDAD.md`](POLITICA_PRIVACIDAD.md) — política pública vigente.
 - [`TERMINOS_USO_PRIVACIDAD.md`](TERMINOS_USO_PRIVACIDAD.md) — términos y tratamiento de datos.
 - [`CUMPLIMIENTO_LEY_81.md`](CUMPLIMIENTO_LEY_81.md) — matriz interna de alineación.
+- [`OBSERVABILIDAD_LOGS.md`](OBSERVABILIDAD_LOGS.md) — minimización y manejo local de logs diagnósticos.
 
-GOV.1.3 R3 consolidó este bloque como contrato documental vigente. La revisión jurídica externa y los procedimientos operativos pendientes continúan en GOV.1.5.
+GOV.1.3 R3 consolidó originalmente el bloque normativo, de seguridad y privacidad; GOV.1.4 actualiza únicamente el contrato de observabilidad.
+
+La revisión jurídica externa y los procedimientos operativos pendientes continúan en GOV.1.5.
 
 ## 9. Transparencia, auditoría y trazabilidad
 
@@ -71,8 +74,6 @@ GOV.1.3 R3 consolidó este bloque como contrato documental vigente. La revisión
 - [`LIMITACIONES_CONOCIDAS.md`](LIMITACIONES_CONOCIDAS.md) — límites técnicos, normativos y de despliegue.
 - [`DEPENDENCIAS_TERCEROS.md`](DEPENDENCIAS_TERCEROS.md) — dependencias, licencias upstream, conexiones y riesgos.
 - [`PROCESO_RELEASE.md`](PROCESO_RELEASE.md) — gates de cierre, versión, CI y tags.
-
-`OBSERVABILIDAD_LOGS.md` se creará junto con la implementación real de GOV.1.4. R4 no documenta un sistema de logs inexistente.
 
 ## 10. Validación y calidad
 
@@ -95,9 +96,9 @@ GOV.1.3 R3 consolidó este bloque como contrato documental vigente. La revisión
 - [`REGISTRO_CAMBIOS_HISTORICO.md`](REGISTRO_CAMBIOS_HISTORICO.md) — mapa cronológico.
 - [`historico/README.md`](historico/README.md) — reglas del archivo histórico.
 - [`historico/ux/`](historico/ux/) — bitácoras completas de UX.4.6a–d.
-- [`historico/tecnico/`](historico/tecnico/) — snapshots técnicos previos a GOV.1.3 R2.
-- [`historico/normativa_privacidad/`](historico/normativa_privacidad/) — snapshots previos a GOV.1.3 R3.
-- [`historico/gobierno/`](historico/gobierno/) — snapshots de decisiones/gobierno previos a GOV.1.3 R4.
+- [`historico/tecnico/`](historico/tecnico/) — snapshots técnicos previos.
+- [`historico/normativa_privacidad/`](historico/normativa_privacidad/) — snapshots normativos/privacidad previos.
+- [`historico/gobierno/`](historico/gobierno/) — snapshots de decisiones/gobierno.
 - [`historico/CHANGELOG_PRE_GOV1_3.md`](historico/CHANGELOG_PRE_GOV1_3.md) — snapshot del changelog acumulativo anterior a GOV.1.3.
 - [`historico/ROADMAP_PRE_GOV1_3.md`](historico/ROADMAP_PRE_GOV1_3.md) — snapshot del roadmap anterior a GOV.1.3.
 
@@ -120,15 +121,6 @@ Los documentos vigentes pueden utilizar los estados:
 - **Sustituido**
 - **Histórico**
 
-Cuando una regla sea reemplazada, no se debe borrar su evidencia histórica. El documento vigente debe indicar qué regla la sustituye cuando esa relación sea relevante para auditoría.
-
 ## Regla de mantenimiento
 
-Un cambio no obliga a editar todos los `.md`. Sí obliga a revisar todos los documentos que dependan del cambio y mantener coherencia entre:
-
-- código;
-- normativa versionada;
-- pruebas;
-- documentación vigente;
-- fuentes oficiales;
-- historial de decisiones.
+Un cambio no obliga a editar todos los `.md`. Sí obliga a revisar todos los documentos que dependan del cambio y mantener coherencia entre código, normativa versionada, pruebas, documentación vigente, fuentes oficiales e historial de decisiones.

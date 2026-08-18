@@ -9,7 +9,8 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 - **Versión formal vigente:** `0.0.23-beta`
 - **Etapa:** desarrollo interno pre-beta
 - **Programa activo:** GOV.1 — Auditoría, Gobierno y Trazabilidad Pre-Beta
-- **Bloque activo:** GOV.1.4 — Observabilidad y Developer Diagnostics
+- **Bloque activo:** GOV.1.5 — Seguridad, privacidad y transparencia
+- **GOV.1.4:** Observabilidad y Developer Diagnostics cerrado
 - **Primera beta pública objetivo:** familia `0.1.0-beta.1`
 
 La versión se obtiene exclusivamente del archivo [`VERSION`](VERSION). La política completa se documenta en [`VERSIONING.md`](VERSIONING.md).
@@ -33,6 +34,8 @@ Los tres motores generales principales implementados son:
 
 El alcance jurídico y matemático exacto de cada motor se encuentra en la documentación normativa y técnica. No debe asumirse que el motor general cubre regímenes especiales no documentados.
 
+La aplicación dispone además de **Developer Diagnostics** para desarrollo interno. Está desactivado por defecto y solo se activa mediante `MRP_DEV_MODE=1`; no constituye telemetría de producto ni envía logs automáticamente a terceros.
+
 ## Principios de diseño
 
 El proyecto aplica estos criterios:
@@ -43,6 +46,7 @@ El proyecto aplica estos criterios:
 - trazabilidad de fuentes, decisiones e hipótesis;
 - datos faltantes explícitos en vez de parámetros inventados;
 - procesamiento local y minimización de datos personales;
+- observabilidad de desarrollo sin logging de PII ni valores financieros;
 - pruebas automatizadas y CI antes de cerrar hitos;
 - documentación como parte obligatoria de cada cambio.
 
@@ -58,6 +62,7 @@ Documentos principales:
 - [`docs/MOTOR_DE_CALCULO.md`](docs/MOTOR_DE_CALCULO.md) — flujo técnico de cálculo;
 - [`docs/NORMATIVA.md`](docs/NORMATIVA.md) — interpretación y aplicación normativa;
 - [`docs/FUENTES_NORMATIVAS.md`](docs/FUENTES_NORMATIVAS.md) — fuentes oficiales;
+- [`docs/OBSERVABILIDAD_LOGS.md`](docs/OBSERVABILIDAD_LOGS.md) — Developer Diagnostics, esquema y privacidad de logs;
 - [`docs/VALIDACION.md`](docs/VALIDACION.md) — estrategia y evidencia de pruebas;
 - [`docs/SEGURIDAD_PRIVACIDAD.md`](docs/SEGURIDAD_PRIVACIDAD.md) — controles técnicos de seguridad y privacidad;
 - [`docs/ROADMAP.md`](docs/ROADMAP.md) — estado actual y próximos hitos;
@@ -81,6 +86,8 @@ v0.0.22-beta
 ```text
 v0.0.23-beta
 ```
+
+GOV.1.4 se desarrolla sobre la misma versión formal porque no modifica el contrato funcional público ni los motores previsionales.
 
 Consultar:
 
@@ -158,6 +165,15 @@ Abrir:
 http://127.0.0.1:8000
 ```
 
+Para activar Developer Diagnostics en una sesión de desarrollo:
+
+```powershell
+$env:MRP_DEV_MODE = "1"
+python -m uvicorn app.main:app --reload
+```
+
+No se recomienda mantener `MRP_DEV_MODE=1` como configuración ordinaria de ejecución.
+
 ## Validación mínima
 
 Antes de cerrar un cambio:
@@ -178,6 +194,8 @@ La CI del repositorio ejecuta validaciones equivalentes sobre las versiones de P
 
 La versión actual no dispone de cuentas de usuario ni de una base de datos permanente de simulaciones. Los documentos seleccionados para importación se procesan bajo los controles documentados y los originales personales no deben incorporarse al repositorio.
 
+Developer Diagnostics no debe registrar cuerpos HTTP, contenido PDF, identidad, salarios, cuotas detalladas, montos de pensión, cookies, tokens ni mensajes de excepción potencialmente sensibles. Los logs son locales, rotan y están excluidos de Git.
+
 Los casos de validación versionados deben ser sintéticos o estar anonimizados de forma irreversible para el propósito de la prueba.
 
 Consultar:
@@ -185,6 +203,7 @@ Consultar:
 - [`docs/POLITICA_PRIVACIDAD.md`](docs/POLITICA_PRIVACIDAD.md);
 - [`docs/TERMINOS_USO_PRIVACIDAD.md`](docs/TERMINOS_USO_PRIVACIDAD.md);
 - [`docs/CUMPLIMIENTO_LEY_81.md`](docs/CUMPLIMIENTO_LEY_81.md);
+- [`docs/OBSERVABILIDAD_LOGS.md`](docs/OBSERVABILIDAD_LOGS.md);
 - [`tests/casos_validacion/README.md`](tests/casos_validacion/README.md).
 
 ## Gobierno y contribución

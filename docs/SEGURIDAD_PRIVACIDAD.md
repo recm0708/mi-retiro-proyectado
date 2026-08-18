@@ -2,7 +2,8 @@
 
 **Estado:** Vigente
 **Versión de aplicación revisada:** `0.0.23-beta`
-**Revisión documental:** GOV.1.3 R3 — 2026-08-17
+**Base documental preservada:** GOV.1.3 R3 — 2026-08-17
+**Revisión transversal vigente:** GOV.1.4 — 2026-08-17
 **Clasificación:** Seguridad / Privacidad / Técnica
 **Revisión externa:** Pendiente antes de beta pública
 
@@ -48,7 +49,7 @@ Mi Retiro Seguro puede devolver identificadores opcionales cuando el parser los 
 
 Ficha Digital no expone identidad en su contrato salarial.
 
-Los identificadores no forman parte del cálculo previsional principal.
+Los identificadores no forman parte del cálculo previsional principal ni de Developer Diagnostics.
 
 ## 5. Cabeceras HTTP
 
@@ -61,6 +62,8 @@ El middleware actual establece:
 - Content Security Policy.
 
 Las respuestas bajo `/api/simulacion/` usan `Cache-Control: no-store`.
+
+Cuando `MRP_DEV_MODE=1`, las operaciones instrumentadas pueden añadir `X-Correlation-ID`, generado aleatoriamente y no derivado del usuario.
 
 ## 6. Recursos externos
 
@@ -83,26 +86,41 @@ La solicitud:
 
 Si la consulta falla, no se sustituye silenciosamente por la fecha local.
 
+Developer Diagnostics registra únicamente metadata agregada de cache, cantidad de fuentes, outcome y duración; no registra URL, fecha recibida ni encabezados.
+
 ## 8. Cookies y seguimiento
 
 La aplicación no implementa cookies propias de publicidad, analítica, seguimiento ni perfilado.
 
-Tampoco incorpora actualmente herramientas de analítica/telemetría de producto.
+Tampoco incorpora herramientas de analítica o telemetría de producto.
 
-La existencia de solicitudes a recursos externos se documenta por separado y no debe confundirse con inexistencia de conexiones de red.
+Developer Diagnostics es una herramienta local de desarrollo y no un mecanismo de seguimiento de usuarios.
 
-## 9. Registros
+## 9. Developer Diagnostics
 
-En la versión actual no existe todavía el sistema de Developer Diagnostics de GOV.1.4.
+GOV.1.4 define un sistema estructurado de diagnóstico que:
 
-Hasta implementarlo:
+- está desactivado por defecto;
+- requiere `MRP_DEV_MODE=1`;
+- escribe JSONL local bajo `logs/diagnostico/` por defecto;
+- usa correlation IDs aleatorios;
+- rota aproximadamente a 1 MiB y conserva hasta tres respaldos;
+- no realiza telemetría remota automática;
+- permite exportación ZIP explícita solo de los JSONL reconocidos.
 
-- no debe introducirse logging informal de PII;
-- no deben registrarse cuerpos de PDF;
-- no deben registrarse salarios/historial/identificadores;
-- las trazas de error no deben exponerse al usuario final.
+Está prohibido registrar:
 
-GOV.1.4 definirá el contrato real de observabilidad.
+- cuerpos de solicitudes/respuestas;
+- contenido o texto extraído de PDF;
+- nombre, cédula, NSS, correo o teléfono;
+- fecha de nacimiento;
+- salarios, cuotas detalladas, balances o montos de pensión;
+- cookies, tokens o credenciales;
+- mensajes originales de excepciones potencialmente sensibles.
+
+La sanitización automática es defensa adicional y no autoriza a pasar datos sensibles al logger.
+
+Consultar `OBSERVABILIDAD_LOGS.md`.
 
 ## 10. Gestión local
 
@@ -112,7 +130,7 @@ La interfaz implementa:
 - reiniciar simulación;
 - borrar datos de la aplicación en este navegador.
 
-El borrado integral elimina únicamente claves propiedad de Mi Retiro Proyectado.
+El borrado integral elimina únicamente claves propiedad de Mi Retiro Proyectado. Los logs diagnósticos, cuando se han activado explícitamente, son archivos locales de desarrollo y se gestionan por separado.
 
 ## 11. CI y dependencias
 
@@ -127,9 +145,9 @@ Las actualizaciones de `pypdf` requieren revisión explícita de importadores.
 - threat model formal;
 - procedimiento de incidentes;
 - procedimiento de derechos del titular;
-- revisión de logs/despliegue;
+- revisión de logs bajo el threat model;
+- evaluación de despliegue/TLS;
 - servir dependencias críticas localmente cuando sea viable;
-- TLS obligatorio para un servicio remoto;
 - revisión de proveedores/terceros;
 - revisión jurídica de textos;
 - configuración endurecida de producción.

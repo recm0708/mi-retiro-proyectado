@@ -6,8 +6,18 @@ y por los servicios de cálculo.
 """
 
 from pathlib import Path
+from time import monotonic
 
 from app.core.archivos_pdf import leer_pdf_subido
+from app.core.observabilidad import (
+    clasificar_operacion_http,
+    correlacion_actual,
+    establecer_correlacion,
+    modo_desarrollo_activo,
+    registrar_evento,
+    registrar_excepcion,
+    restablecer_correlacion,
+)
 from app.core.config import (
     APP_AUTHOR,
     APP_DESCRIPTION,
@@ -136,6 +146,71 @@ app = FastAPI(
     description=APP_DESCRIPTION,
     version=APP_VERSION,
 )
+
+
+# ============================================================
+# Developer Diagnostics — exclusivo de desarrollo
+# ============================================================
+
+@app.middleware("http")
+async def registrar_diagnostico_http(request: Request, call_next):
+    """Observa una solicitud sin leer ni persistir su cuerpo."""
+
+    if not modo_desarrollo_activo():
+        return await call_next(request)
+
+    operacion = clasificar_operacion_http(request.url.path)
+    if operacion is None:
+        return await call_next(request)
+
+    token = establecer_correlacion()
+    inicio = monotonic()
+    try:
+        try:
+            respuesta = await call_next(request)
+        except Exception as error:
+            registrar_excepcion(
+                event="http.request",
+                component="fastapi",
+                error=error,
+                duration_ms=(monotonic() - inicio) * 1000,
+                metadata={
+                    "method": request.method,
+                    "operation": operacion,
+                },
+            )
+            raise
+
+        status_code = int(respuesta.status_code)
+        if status_code >= 500:
+            level = "ERROR"
+            outcome = "server_error"
+        elif status_code >= 400:
+            level = "WARNING"
+            outcome = "client_error"
+        else:
+            level = "INFO"
+            outcome = "success"
+
+        registrar_evento(
+            level=level,
+            event="http.request",
+            component="fastapi",
+            outcome=outcome,
+            duration_ms=(monotonic() - inicio) * 1000,
+            metadata={
+                "method": request.method,
+                "operation": operacion,
+                "status_code": status_code,
+            },
+        )
+
+        correlation_id = correlacion_actual()
+        if correlation_id is not None:
+            respuesta.headers["X-Correlation-ID"] = correlation_id
+        return respuesta
+    finally:
+        restablecer_correlacion(token)
 
 
 # ============================================================

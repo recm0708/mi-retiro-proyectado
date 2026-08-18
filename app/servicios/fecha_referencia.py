@@ -20,6 +20,8 @@ from threading import Lock
 from time import monotonic
 from urllib.request import Request, urlopen
 
+from app.core.observabilidad import registrar_evento
+
 
 PANAMA_TZ = timezone(timedelta(hours=-5))
 FUENTES_OFICIALES_FECHA = (
@@ -80,6 +82,7 @@ def _consultar_fecha_http(url: str) -> date | None:
 
 
 def _consultar_fuentes() -> FechaReferencia:
+    inicio = monotonic()
     fechas: list[tuple[str, date]] = []
 
     with ThreadPoolExecutor(max_workers=len(FUENTES_OFICIALES_FECHA)) as ejecutor:
@@ -96,7 +99,20 @@ def _consultar_fuentes() -> FechaReferencia:
             if fecha is not None:
                 fechas.append((nombre, fecha))
 
+    metadata = {
+        "source_count": len(FUENTES_OFICIALES_FECHA),
+        "success_count": len(fechas),
+    }
+
     if not fechas:
+        registrar_evento(
+            level="WARNING",
+            event="external.date_reference.query",
+            component="fecha_referencia",
+            outcome="unavailable",
+            duration_ms=(monotonic() - inicio) * 1000,
+            metadata=metadata,
+        )
         return FechaReferencia(
             fecha=None,
             confiable=False,
@@ -108,6 +124,14 @@ def _consultar_fuentes() -> FechaReferencia:
         mas_antigua = min(fechas_distintas)
         mas_reciente = max(fechas_distintas)
         if (mas_reciente - mas_antigua).days > 1:
+            registrar_evento(
+                level="WARNING",
+                event="external.date_reference.query",
+                component="fecha_referencia",
+                outcome="inconsistent",
+                duration_ms=(monotonic() - inicio) * 1000,
+                metadata=metadata,
+            )
             return FechaReferencia(
                 fecha=None,
                 confiable=False,
@@ -118,6 +142,14 @@ def _consultar_fuentes() -> FechaReferencia:
     # Elegimos la fecha más reciente y registramos las fuentes que respondieron.
     fecha_elegida = max(fecha for _, fecha in fechas)
     fuentes = "+".join(nombre for nombre, _ in fechas)
+    registrar_evento(
+        level="INFO",
+        event="external.date_reference.query",
+        component="fecha_referencia",
+        outcome="success",
+        duration_ms=(monotonic() - inicio) * 1000,
+        metadata=metadata,
+    )
     return FechaReferencia(
         fecha=fecha_elegida,
         confiable=True,
@@ -142,8 +174,22 @@ def obtener_fecha_referencia_confiable(*, forzar: bool = False) -> FechaReferenc
             and _cache_resultado is not None
             and (ahora_monotono - _cache_instante) < _CACHE_SEGUNDOS
         ):
+            registrar_evento(
+                level="DEBUG",
+                event="external.date_reference.cache",
+                component="fecha_referencia",
+                outcome="hit",
+                metadata={"cache": "hit"},
+            )
             return _cache_resultado
 
+    registrar_evento(
+        level="DEBUG",
+        event="external.date_reference.cache",
+        component="fecha_referencia",
+        outcome="miss",
+        metadata={"cache": "miss"},
+    )
     resultado = _consultar_fuentes()
 
     with _cache_lock:

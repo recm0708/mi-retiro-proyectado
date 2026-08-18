@@ -2,7 +2,8 @@
 
 **Estado:** Vigente
 **Versión de aplicación revisada:** `0.0.23-beta`
-**Revisión documental:** GOV.1.3 R4 — 2026-08-17
+**Base documental preservada:** GOV.1.3 R4 — 2026-08-17
+**Revisión transversal vigente:** GOV.1.4 — 2026-08-17
 **Clasificación:** Pública / Auditoría
 
 Mi Retiro Proyectado es una herramienta independiente de estimación previsional. Este documento delimita qué puede afirmarse sobre el producto y qué debe permanecer explícitamente como aproximación, limitación o pendiente.
@@ -16,7 +17,8 @@ La aplicación permite:
 - ejecutar motores SEBD, Mixto y SUCGS dentro del alcance documentado;
 - comparar escenarios;
 - explicar resultados mediante una capa de trazabilidad;
-- vincular fuentes y decisiones de implementación.
+- vincular fuentes y decisiones de implementación;
+- disponer de diagnóstico técnico local de desarrollo mediante Developer Diagnostics.
 
 ## 2. Qué no es
 
@@ -51,18 +53,9 @@ Las discrepancias identificadas se documentan; no se armonizan silenciosamente.
 
 ## 5. Explicabilidad del cálculo
 
-`app/modelos/trazabilidad.py` y `app/servicios/trazabilidad.py` describen:
+`app/modelos/trazabilidad.py` y `app/servicios/trazabilidad.py` describen datos utilizados, origen, reglas, fórmulas mostrables, sustituciones, resultados intermedios, fuentes y advertencias.
 
-- datos utilizados;
-- origen;
-- reglas;
-- fórmulas mostrables;
-- sustituciones;
-- resultados intermedios;
-- fuentes;
-- advertencias.
-
-La capa de trazabilidad **no vuelve a calcular** la prestación. Explica el resultado ya producido por el motor.
+La capa de trazabilidad **no vuelve a calcular** la prestación. Developer Diagnostics tampoco recalcula: observa la operación ya ejecutada.
 
 ## 6. Privacidad
 
@@ -73,7 +66,15 @@ Las conexiones externas vigentes están documentadas:
 - jsDelivr para Bootstrap;
 - infraestructura oficial CSS para consulta mínima de fecha de referencia cuando corresponde.
 
-Consultar `POLITICA_PRIVACIDAD.md` y `SEGURIDAD_PRIVACIDAD.md`.
+Developer Diagnostics:
+
+- está apagado por defecto;
+- es local;
+- no es analítica de producto;
+- no envía logs automáticamente a terceros;
+- prohíbe registrar PII, PDF y valores financieros.
+
+Consultar `POLITICA_PRIVACIDAD.md`, `SEGURIDAD_PRIVACIDAD.md` y `OBSERVABILIDAD_LOGS.md`.
 
 ## 7. Validación
 
@@ -84,40 +85,29 @@ Las pruebas automatizadas demuestran contratos técnicos concretos. No demuestra
 - exactitud de datos personales externos;
 - equivalencia universal con cálculos oficiales.
 
-La revisión jurídica externa continúa pendiente antes de publicación pública/comercial.
+GOV.1.4 dispone de regresiones específicas para observabilidad, pero la revisión jurídica y el threat model formal continúan pendientes.
 
 ## 8. Trazabilidad documental
 
-La matriz `MATRIZ_TRAZABILIDAD.md` relaciona contratos críticos con:
+La matriz `MATRIZ_TRAZABILIDAD.md` relaciona contratos críticos con fuente o criterio, ADR, implementación, prueba y estado.
 
-- fuente o criterio;
-- ADR;
-- implementación;
-- prueba;
-- estado.
-
-La matriz **no afirma todavía cobertura individual completa de todos los RF históricos**. Esa limitación se declara expresamente para evitar una apariencia falsa de cobertura.
+La matriz **no afirma todavía cobertura individual completa de todos los RF históricos**.
 
 ## 9. Estado pre-beta
 
 El producto permanece en desarrollo interno pre-beta.
 
-No existe todavía:
+GOV.1.4 está cerrado. Continúan pendientes:
 
-- Developer Diagnostics de GOV.1.4;
 - threat model formal de GOV.1.5;
 - procedimiento formal de incidentes/derechos de GOV.1.5;
-- licencia de distribución elegida en GOV.1.7;
+- controles GitHub/documentación adicionales de GOV.1.6;
+- licencia de distribución en GOV.1.7;
+- auditoría final GOV.1.8;
 - declaración de aptitud para despliegue público.
 
 ## 10. Regla de transparencia
 
-Cuando el proyecto no pueda demostrar una propiedad, debe documentarla como:
-
-- pendiente;
-- aproximación;
-- limitación;
-- supuesto;
-- decisión interpretativa.
+Cuando el proyecto no pueda demostrar una propiedad, debe documentarla como pendiente, aproximación, limitación, supuesto o decisión interpretativa.
 
 No se utilizará una cifra, etiqueta o prueba para crear una precisión aparente superior a la evidencia disponible.

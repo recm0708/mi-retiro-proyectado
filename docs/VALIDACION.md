@@ -35,6 +35,8 @@ La actualización controlada de `pypdf` a `6.15.0` añadió **4 regresiones espe
 
 El prebloque transversal de firma e integridad Git/GitHub quedó cerrado después de completar la auditoría de 23/23 tags, los rulesets de tags y `main`, la configuración de GitHub Actions, Dependency graph, Dependabot alerts/security updates y la revisión de los PR pendientes. La comprobación remota final registró **0 Pull Requests abiertos**. Los PR `#8` y `#7` quedaron sustituidos por cambios controlados del mantenedor; `#6`, `#5` y `#4` se cerraron sin merge para preservar las combinaciones compatibles y el snapshot transitivo reproducible.
 
+GOV.1.4 añadió **13 regresiones específicas**: 7 para el núcleo de Developer Diagnostics y 6 para integración HTTP/fecha externa. El cierre fue validado con **487 pruebas en `OK`**, compilación Python, sintaxis JavaScript y `git diff --check` limpio. Las regresiones comprueban modo apagado/activo, JSONL, correlación, redacción, excepciones, rotación, exportación, middleware, ausencia de doble cálculo, consulta externa y coherencia documental.
+
 ## 2. Comandos obligatorios
 
 ```powershell
@@ -70,6 +72,8 @@ python -m pip check
 - `tests/test_gov13_documentacion_r3.py`
 - `tests/test_gov13_documentacion_r4.py`
 - `tests/test_gov_firma_git.py`
+- `tests/test_gov14_observabilidad.py`
+- `tests/test_gov14_observabilidad_integracion.py`
 - `tests/test_identidad_interfaz.py`
 - `tests/test_indemnizacion_vejez.py`
 - `tests/test_linea_tiempo.py`

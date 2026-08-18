@@ -2,7 +2,8 @@
 
 **Estado:** Vigente
 **Versión de aplicación revisada:** `0.0.23-beta`
-**Revisión documental:** GOV.1.3 R4 — 2026-08-17
+**Base documental preservada:** GOV.1.3 R4 — 2026-08-17
+**Revisión transversal vigente:** GOV.1.4 — 2026-08-17
 **Clasificación:** Pública / Técnica / Riesgo
 
 Este registro enumera limitaciones conocidas que deben permanecer visibles hasta que una fase posterior las elimine o sustituya.
@@ -39,6 +40,8 @@ La comprobación de fecha de Ficha depende de obtener una referencia HTTP confia
 
 Si no puede verificarse, la aplicación adopta un estado conservador y solicita revisión; no garantiza disponibilidad de la fuente externa.
 
+Developer Diagnostics solo registra estado de cache, cantidades, outcome y duración; no elimina esta dependencia operativa.
+
 ## 4. Normativa
 
 - Existen valores sujetos a indexación.
@@ -55,7 +58,8 @@ Pendientes antes de beta pública:
 - procedimiento formal de incidentes;
 - procedimiento de derechos del titular;
 - evaluación de despliegue/TLS;
-- revisión de proveedores.
+- revisión de proveedores;
+- revisión adicional de Developer Diagnostics bajo el threat model de GOV.1.5.
 
 ## 6. Dependencias y red
 
@@ -67,9 +71,17 @@ Las dependencias críticas deberán reevaluarse antes del empaquetado público.
 
 ## 7. Observabilidad
 
-Developer Diagnostics todavía no existe. Se implementará en GOV.1.4.
+Developer Diagnostics existe desde GOV.1.4, pero tiene un alcance deliberadamente limitado:
 
-R4 no crea un contrato ficticio de logs.
+- solo se activa con `MRP_DEV_MODE=1`;
+- no es analítica de producto;
+- no existe telemetría remota automática;
+- no captura cuerpos HTTP ni valores de simulación;
+- no sustituye un sistema productivo de monitoreo;
+- la exportación diagnóstica es local y explícita;
+- la política de retención es local y acotada por rotación, no por un servicio central.
+
+Un despliegue remoto futuro debe reevaluar ubicación, permisos, retención, acceso y protección de logs.
 
 ## 8. Trazabilidad
 
@@ -79,7 +91,7 @@ No se debe interpretar el número de RF preservados como igual al número de req
 
 ## 9. Repositorio y distribución
 
-- Los commits/tags actuales no se presentan como firmados criptográficamente por una política formal.
+- Los commits y tags nuevos del mantenedor están sujetos a la política de firma SSH y los tags publicados son inmutables bajo ruleset.
 - `LICENSE` se mantiene deliberadamente pendiente hasta GOV.1.7.
 - La política de divulgación de vulnerabilidades se completará en GOV.1.6/GOV.1.5 según corresponda.
 - No existe aún una beta pública declarada.
