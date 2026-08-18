@@ -2,7 +2,8 @@
 
 **Estado:** Vigente
 **Versión de aplicación revisada:** `0.0.23-beta`
-**Revisión documental:** GOV.1.3 R4 — 2026-08-17
+**Base documental:** GOV.1.3 R4 — 2026-08-17
+**Revisión transversal:** GOV.1.5 R3 — 2026-08-18
 **Clasificación:** Técnica / Terceros / Auditoría
 
 Este inventario distingue dependencias directas, snapshot transitivo, recursos externos y servicios de red. La selección de licencia del proyecto continúa pendiente hasta GOV.1.7.
@@ -82,6 +83,18 @@ Estas herramientas son de desarrollo/CI, no runtime del usuario final.
 Node 24 se usa en CI para `node --check`.
 
 No forma parte del runtime Python de la aplicación.
+
+## 6.1. Evaluación GOV.1.5 de terceros
+
+La revisión de seguridad/privacidad clasifica:
+
+- **jsDelivr:** tercero runtime temporal, con SRI, CSP y versión fija; riesgo residual aceptado para desarrollo local;
+- **infraestructura CSS:** servicio externo operativo mínimo, sin envío de datos previsionales;
+- **GitHub:** tercero de desarrollo/CI, fuera del flujo de simulación del usuario final.
+
+La evaluación completa y los gates de despliegue se documentan en `EVALUACION_TERCEROS_DESPLIEGUE.md`.
+
+Servir Bootstrap localmente sigue siendo la opción preferida antes de una publicación amplia o deberá existir una excepción explícita y revisada en el gate pre-beta.
 
 ## 7. Política de actualización
 

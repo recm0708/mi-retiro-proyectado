@@ -57,6 +57,10 @@ Este archivo es el punto de entrada para la documentación técnica, funcional, 
 ## 8. Seguridad y privacidad
 
 - [`SEGURIDAD_PRIVACIDAD.md`](SEGURIDAD_PRIVACIDAD.md) — controles técnicos.
+- [`MODELO_AMENAZAS.md`](MODELO_AMENAZAS.md) — threat model y matriz de riesgos.
+- [`PROCEDIMIENTO_DERECHOS_TITULAR.md`](PROCEDIMIENTO_DERECHOS_TITULAR.md) — ejercicio de derechos.
+- [`PROCEDIMIENTO_INCIDENTES_SEGURIDAD.md`](PROCEDIMIENTO_INCIDENTES_SEGURIDAD.md) — incident response.
+- [`EVALUACION_TERCEROS_DESPLIEGUE.md`](EVALUACION_TERCEROS_DESPLIEGUE.md) — terceros, TLS y gates de despliegue.
 - [`POLITICA_PRIVACIDAD.md`](POLITICA_PRIVACIDAD.md) — política pública vigente.
 - [`TERMINOS_USO_PRIVACIDAD.md`](TERMINOS_USO_PRIVACIDAD.md) — términos y tratamiento de datos.
 - [`CUMPLIMIENTO_LEY_81.md`](CUMPLIMIENTO_LEY_81.md) — matriz interna de alineación.
@@ -64,7 +68,7 @@ Este archivo es el punto de entrada para la documentación técnica, funcional, 
 
 GOV.1.3 R3 consolidó originalmente el bloque normativo, de seguridad y privacidad; GOV.1.4 actualiza únicamente el contrato de observabilidad.
 
-La revisión jurídica externa y los procedimientos operativos pendientes continúan en GOV.1.5.
+GOV.1.5 completa los procedimientos internos; la revisión jurídica externa y cualquier diseño de despliegue remoto permanecen como gates pre-publicación.
 
 ## 9. Transparencia, auditoría y trazabilidad
 

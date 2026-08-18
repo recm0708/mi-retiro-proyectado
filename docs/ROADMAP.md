@@ -57,14 +57,14 @@ Este roadmap describe **estado actual y trabajo futuro**. La evolución detallad
   - [x] documentación de esquema y operación;
   - [x] 13 regresiones específicas y suite completa de 487 pruebas en `OK`.
 
-- [ ] **GOV.1.5 — Seguridad, privacidad y transparencia**
-  - threat model;
-  - procedimiento de incidentes;
-  - procedimiento de derechos del titular;
-  - revisión de logs y datos sensibles;
-  - terceros y recursos externos;
-  - TLS/despliegue;
-  - revisión jurídica previa a publicación.
+- [x] **GOV.1.5 — Seguridad, privacidad y transparencia**
+  - [x] threat model;
+  - [x] procedimiento de incidentes;
+  - [x] procedimiento de derechos del titular;
+  - [x] revisión de logs y datos sensibles;
+  - [x] terceros y recursos externos;
+  - [x] criterios TLS/despliegue;
+  - [x] gate y paquete documental para revisión jurídica externa previa a publicación.
 
 - [ ] **GOV.1.6 — Controles GitHub y auditoría automática**
   - plantillas de issues/PR;
@@ -109,9 +109,9 @@ Este roadmap describe **estado actual y trabajo futuro**. La evolución detallad
 - informes PDF;
 - exportación final seleccionable;
 - auditoría WCAG 2.2 ampliada con tecnologías de apoyo/dispositivos;
-- Developer Diagnostics implementado; revisión de seguridad de logs continúa en GOV.1.5;
-- procedimientos formales de seguridad/privacidad pre-publicación;
-- revisión jurídica externa;
+- Developer Diagnostics implementado y revisado internamente bajo GOV.1.5;
+- revisión jurídica externa previa a beta pública;
+- diseño/hardening específico si se decide un despliegue remoto;
 - licencia;
 - parámetros oficiales que la documentación identifica como no disponibles o no reconstruibles con fidelidad.
 

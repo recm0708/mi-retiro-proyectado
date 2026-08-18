@@ -110,7 +110,8 @@ class TestGov13DocumentacionR3(unittest.TestCase):
     def test_matriz_declara_no_certificacion_y_pendientes(self):
         texto = (DOCS / "CUMPLIMIENTO_LEY_81.md").read_text(encoding="utf-8")
         self.assertIn("No constituye certificación jurídica", texto)
-        self.assertIn("Pendiente GOV.1.5", texto)
+        self.assertIn("Revisión jurídica", texto)
+        self.assertIn("Pendiente antes de publicación", texto)
         self.assertIn("Implementado", texto)
 
     def test_modalidades_tienen_sistema_y_metadata(self):

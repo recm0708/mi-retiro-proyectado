@@ -4,7 +4,8 @@
 **Versión del texto:** `2026-08-16.1`
 **Estado:** Vigente en la aplicación
 **Versión de aplicación revisada:** `0.0.23-beta`
-**Revisión documental:** GOV.1.3 R3 — 2026-08-17
+**Base documental:** GOV.1.3 R3 — 2026-08-17
+**Revisión transversal:** GOV.1.5 R3 — 2026-08-18
 **Revisión jurídica externa:** Pendiente antes de publicación pública/comercial
 
 Esta política describe el tratamiento implementado actualmente. No constituye certificación jurídica.
@@ -158,7 +159,7 @@ Canal inicial del proyecto:
 
 `ruben.canizares@outlook.com`
 
-El procedimiento formal de atención se documentará en GOV.1.5 antes de una beta pública.
+El procedimiento interno se documenta en `PROCEDIMIENTO_DERECHOS_TITULAR.md`. La revisión jurídica externa continúa pendiente antes de una beta pública.
 
 ## 15. Seguridad
 
@@ -181,6 +182,14 @@ No se venden datos de simulación.
 No existe integración comercial que reciba la simulación.
 
 Recursos técnicos externos actuales se documentan en `SEGURIDAD_PRIVACIDAD.md`.
+
+## 16.1. Seguridad, incidentes y diagnóstico
+
+Developer Diagnostics es una herramienta local de desarrollo, apagada por defecto y diseñada para no registrar PII, PDF ni valores financieros.
+
+El procedimiento interno de incidentes se documenta en `PROCEDIMIENTO_INCIDENTES_SEGURIDAD.md`.
+
+GOV.1.5 no introduce una nueva finalidad, categoría de datos, destinatario ni persistencia remota. La evaluación interna mantiene la versión material `2026-08-16.1`; esta conclusión no sustituye la revisión jurídica externa.
 
 ## 17. Cambios materiales
 

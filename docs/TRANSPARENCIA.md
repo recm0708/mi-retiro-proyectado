@@ -3,7 +3,7 @@
 **Estado:** Vigente
 **Versión de aplicación revisada:** `0.0.23-beta`
 **Base documental preservada:** GOV.1.3 R4 — 2026-08-17
-**Revisión transversal vigente:** GOV.1.4 — 2026-08-17
+**Revisión transversal vigente:** GOV.1.5 R3 — 2026-08-18
 **Clasificación:** Pública / Auditoría
 
 Mi Retiro Proyectado es una herramienta independiente de estimación previsional. Este documento delimita qué puede afirmarse sobre el producto y qué debe permanecer explícitamente como aproximación, limitación o pendiente.
@@ -97,10 +97,10 @@ La matriz **no afirma todavía cobertura individual completa de todos los RF his
 
 El producto permanece en desarrollo interno pre-beta.
 
-GOV.1.4 está cerrado. Continúan pendientes:
+GOV.1.4 y GOV.1.5 están cerrados internamente. GOV.1.5 incorpora threat model, procedimientos de derechos/incidentes y evaluación de terceros/despliegue. Continúan pendientes:
 
-- threat model formal de GOV.1.5;
-- procedimiento formal de incidentes/derechos de GOV.1.5;
+- revisión jurídica externa antes de beta pública;
+- hardening específico si se decide un despliegue remoto;
 - controles GitHub/documentación adicionales de GOV.1.6;
 - licencia de distribución en GOV.1.7;
 - auditoría final GOV.1.8;

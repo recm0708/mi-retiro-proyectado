@@ -3,7 +3,7 @@
 **Estado:** Vigente
 **Versión de aplicación revisada:** `0.0.23-beta`
 **Base documental preservada:** GOV.1.3 R4 — 2026-08-17
-**Revisión transversal vigente:** GOV.1.4 — 2026-08-17
+**Revisión transversal vigente:** GOV.1.5 R3 — 2026-08-18
 **Clasificación:** Pública / Técnica / Riesgo
 
 Este registro enumera limitaciones conocidas que deben permanecer visibles hasta que una fase posterior las elimine o sustituya.
@@ -54,12 +54,9 @@ Developer Diagnostics solo registra estado de cache, cantidades, outcome y durac
 Pendientes antes de beta pública:
 
 - revisión jurídica externa;
-- threat model formal;
-- procedimiento formal de incidentes;
-- procedimiento de derechos del titular;
-- evaluación de despliegue/TLS;
-- revisión de proveedores;
-- revisión adicional de Developer Diagnostics bajo el threat model de GOV.1.5.
+- revisión jurídica externa;
+- hardening y pruebas de un despliegue remoto concreto si se decide implementarlo;
+- decisión final pre-beta sobre servir Bootstrap localmente o aceptar explícitamente el tercero.
 
 ## 6. Dependencias y red
 

@@ -3,7 +3,8 @@
 **Estado:** Vigente como control interno
 **Versión de aplicación revisada:** `0.0.23-beta`
 **Versión de privacidad revisada:** `2026-08-16.1`
-**Revisión documental:** GOV.1.3 R3 — 2026-08-17
+**Base documental:** GOV.1.3 R3 — 2026-08-17
+**Revisión transversal:** GOV.1.5 R3 — 2026-08-18
 **Clasificación:** Privacidad / Cumplimiento interno
 **Alcance:** No constituye certificación jurídica
 
@@ -34,11 +35,11 @@ Fuentes: `FUENTES_NORMATIVAS.md`.
 | Recursos externos | jsDelivr + consulta fecha CSS documentados | Implementado documental |
 | Seguridad HTTP | `no-store`, CSP y cabeceras | Implementado base |
 | Acceso/rectificación local | Edición/revisión en UI | Implementado base |
-| Derechos formales | Procedimiento interno completo | Pendiente GOV.1.5 |
+| Derechos formales | Procedimiento interno documentado | Implementado documental GOV.1.5 |
 | Portabilidad | Exportación estructurada | Pendiente de producto |
-| Incidentes | Procedimiento formal | Pendiente GOV.1.5 |
-| Logging/observabilidad | Contrato seguro de logs | Pendiente GOV.1.4 |
-| TLS remoto | Obligatorio si existe despliegue remoto | Pendiente de despliegue |
+| Incidentes | Procedimiento interno documentado | Implementado documental GOV.1.5 |
+| Logging/observabilidad | Contrato seguro + revisión threat model | Implementado base GOV.1.4/GOV.1.5 |
+| TLS remoto | Obligatorio si existe despliegue remoto | Gate documentado; no aplica al localhost actual |
 | Revisión jurídica | Revisión profesional | Pendiente antes de publicación |
 
 ## 3. Inventario de necesidad
@@ -87,19 +88,15 @@ ANTAI publica como derechos fundamentales:
 - oposición;
 - portabilidad.
 
-R3 documenta el marco. El procedimiento interno, verificación y evidencia de atención se implementarán en GOV.1.5.
+GOV.1.5 documenta el procedimiento interno, la verificación proporcional y el registro mínimo fuera de Git.
 
 Los controles locales de borrado **no se presentan como sustituto** de ese procedimiento si en el futuro existe tratamiento remoto/persistente.
 
 ## 7. Pendientes obligatorios pre-beta pública
 
-- procedimiento de derechos;
-- procedimiento de incidentes;
-- threat model;
-- revisión de logs;
-- terceros/proveedores;
-- TLS/despliegue;
-- revisión jurídica;
+- revisión jurídica externa;
+- hardening y validación de un despliegue remoto concreto si se implementa;
+- reevaluación de terceros antes de beta pública;
 - reevaluación si se incorporan cuentas, nube, telemetría o analítica.
 
 ## 8. Criterio de cambio de versión de privacidad
