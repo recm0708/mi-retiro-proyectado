@@ -23,15 +23,20 @@ GOV.1.3 R4 agregó **20 regresiones de auditoría documental y consistencia**. E
 
 El prebloque de firma Git agregó **12 regresiones** sobre una línea base previa de **458 pruebas**. La suite completa fue ejecutada con **470 pruebas en `OK`**, además de compilación Python, validación de sintaxis JavaScript y `git diff --check` limpio.
 
-La materialización criptográfica posterior no modifica lógica de aplicación: se verificaron **23/23 tags firmados**, **23/23 objetos remotos** y **23/23 targets remotos**, conservando intactos los commits históricos. Los controles GitHub de inmutabilidad permanecen como siguiente paso del prebloque.
+La materialización criptográfica posterior no modifica lógica de aplicación: se verificaron **23/23 tags firmados**, **23/23 objetos remotos** y **23/23 targets remotos**, conservando intactos los commits históricos.
 
+Posteriormente se activaron rulesets para tags `v*` y para la rama predeterminada, con Pull Request obligatorio, firmas verificadas y CI `Python 3.13`/`Python 3.14`.
+
+También se habilitaron Dependency graph, Dependabot alerts y Dependabot security updates; la primera revisión mostró **0 vulnerabilidades abiertas**.
+
+Los workflows vigentes fueron migrados de GitHub Actions `@v6` a `@v7`. La validación local de este mantenimiento conserva la línea base de **470 pruebas en `OK`**, compilación Python, sintaxis JavaScript y `git diff --check` limpio.
 
 ## 2. Comandos obligatorios
 
 ```powershell
 python -m compileall app
 
-Get-ChildItem .\app\static\js\*.js | ForEach-Object {
+Get-ChildItem .pp\static\js\*.js | ForEach-Object {
     node --check $_.FullName
     if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 }
@@ -158,6 +163,8 @@ Sigue siendo necesaria para:
 ## 10. CI
 
 La CI debe permanecer verde antes de considerar cerrado un hito formal.
+
+Los Pull Requests hacia `main` deben superar los checks requeridos `Python 3.13` y `Python 3.14`. La rama debe estar actualizada respecto de `main` antes de integrar.
 
 ## 11. Evidencia histórica
 

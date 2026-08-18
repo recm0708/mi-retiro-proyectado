@@ -95,7 +95,15 @@ git verify-commit HEAD
 git log --show-signature -1
 ```
 
-La CI remota debe permanecer en verde. La materialización histórica de tags quedó completada el 2026-08-17; la protección de `main` y el ruleset de tags son los siguientes controles obligatorios antes de cerrar el prebloque.
+La CI remota debe permanecer en verde.
+
+Desde el 2026-08-17 la rama predeterminada está protegida mediante un ruleset activo que exige Pull Request, commits verificados, historial lineal, resolución de conversaciones, checks `Python 3.13` y `Python 3.14`, rama actualizada antes de integrar y bloqueo de eliminación y force push.
+
+El rol `Repository admin` dispone únicamente de bypass mediante Pull Request para recuperación administrativa excepcional.
+
+La integración ordinaria utiliza ramas de trabajo y `Squash and merge`; no se realizan pushes directos ordinarios a `main`.
+
+Los tags `v*` están cubiertos por un ruleset activo que permite crear nuevas versiones, pero bloquea actualización, eliminación y force push de tags publicados.
 
 ## 7. Versiones y tags
 
@@ -130,6 +138,8 @@ La ausencia temporal de `LICENSE` es deliberada mientras se revisan alcance de d
 ## 10. Incidentes y vulnerabilidades
 
 La política pública de reporte se formalizará en `SECURITY.md` durante GOV.1.5/GOV.1.6. Hasta entonces no se deben publicar credenciales, datos personales reales o detalles explotables en ejemplos de documentación.
+
+El repositorio mantiene Dependency graph, Dependabot alerts y Dependabot security updates activos. Dependabot no sustituye revisión humana, pruebas de regresión ni la decisión explícita del mantenedor.
 
 ## 11. Cambios a este documento
 

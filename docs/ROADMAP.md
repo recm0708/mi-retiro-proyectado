@@ -41,8 +41,8 @@ Este roadmap describe **estado actual y trabajo futuro**. La evolución detallad
   - [x] materialización firmada de `v0.0.1-beta` a `v0.0.21-beta`;
   - [x] reemisión firmada única de `v0.0.22-beta` y `v0.0.23-beta`;
   - [x] auditoría local/remota 23/23 tags;
-  - [ ] ruleset de tags;
-  - [ ] protección/ruleset de `main`;
+  - [x] ruleset de tags;
+  - [x] protección/ruleset de `main`;
   - [ ] revisión de configuración GitHub y PR de Dependabot.
 
 - [ ] **GOV.1.4 — Observabilidad y Developer Diagnostics**

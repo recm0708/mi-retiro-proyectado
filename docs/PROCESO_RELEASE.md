@@ -29,7 +29,7 @@ Ejecutar, como mínimo:
 git diff --check
 python -m compileall app
 
-Get-ChildItem .\app\static\js\*.js | ForEach-Object {
+Get-ChildItem .pp\static\js\*.js | ForEach-Object {
     node --check $_.FullName
     if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 }
@@ -73,19 +73,35 @@ git status
 
 El árbol debe quedar limpio y la firma debe verificarse.
 
-## 7. Push y CI remota
+## 7. Pull Request, integración y CI remota
 
-Publicar el commit de cierre:
+`main` está protegida y no recibe pushes directos ordinarios.
+
+Publicar la rama de trabajo:
 
 ```powershell
-git push origin main
+git push -u origin <rama>
 ```
 
-Confirmar:
+Abrir un Pull Request hacia `main` y confirmar:
 
-- `HEAD == origin/main`;
-- GitHub Actions sobre el SHA de cierre;
-- CI remota en **success**.
+- commits de la rama firmados y verificados;
+- checks requeridos `Python 3.13` y `Python 3.14` en **success**;
+- rama actualizada respecto de `main`;
+- conversaciones resueltas;
+- ausencia de cambios no relacionados.
+
+La integración ordinaria se realiza mediante `Squash and merge`. El commit resultante en `main` debe aparecer como `Verified` en GitHub.
+
+Después de integrar:
+
+```powershell
+git switch main
+git fetch origin --prune
+git pull --ff-only origin main
+```
+
+Confirmar `HEAD == origin/main`, working tree limpio y una ejecución de CI sobre el nuevo SHA de `main` en **success**.
 
 ## 8. Tag formal
 
