@@ -3,7 +3,7 @@
 **Estado:** Vigente
 **Versión de aplicación revisada:** `0.0.23-beta`
 **Base documental preservada:** GOV.1.3 R3 — 2026-08-17
-**Revisión transversal vigente:** GOV.1.4 — 2026-08-17
+**Revisión transversal vigente:** GOV.1.5 R3 — 2026-08-18
 **Clasificación:** Seguridad / Privacidad / Técnica
 **Revisión externa:** Pendiente antes de beta pública
 
@@ -152,7 +152,21 @@ Las actualizaciones de `pypdf` requieren revisión explícita de importadores.
 - revisión jurídica de textos;
 - configuración endurecida de producción.
 
-Estos pendientes pertenecen principalmente a GOV.1.5 y GOV.1.6.
+El threat model, los procedimientos de derechos/incidentes, la revisión de logs y la evaluación de terceros/TLS fueron completados internamente en GOV.1.5. Permanecen pendientes la revisión jurídica externa, el hardening de un despliegue remoto concreto, servir dependencias críticas localmente cuando corresponda y las tareas de gobierno posteriores.
+
+## 12.1. Cierre interno GOV.1.5
+
+Documentos de control vigentes:
+
+- `MODELO_AMENAZAS.md`;
+- `PROCEDIMIENTO_DERECHOS_TITULAR.md`;
+- `PROCEDIMIENTO_INCIDENTES_SEGURIDAD.md`;
+- `EVALUACION_TERCEROS_DESPLIEGUE.md`;
+- `OBSERVABILIDAD_LOGS.md`.
+
+La aplicación continúa orientada a localhost. Un despliegue LAN/Internet exige diseño específico, TLS y nueva revisión de seguridad.
+
+La revisión jurídica externa **no se declara completada**.
 
 ## 13. Frontera de afirmación
 

@@ -203,6 +203,18 @@ Ran 487 tests
 OK
 ```
 
+## 10.1. Revisión de seguridad GOV.1.5
+
+GOV.1.5 revisa Developer Diagnostics como superficie propia del threat model y mantiene el contrato sin ampliar categorías de datos.
+
+Riesgos residuales documentados:
+
+- copia manual de un ZIP diagnóstico fuera de su ubicación controlada;
+- metadata futura añadida sin revisión;
+- lectura local por un equipo comprometido.
+
+Toda ampliación del esquema debe reevaluar redacción, finalidad y riesgo.
+
 ## 11. Cierre GOV.1.4
 
 GOV.1.4 queda cerrado después de validar:

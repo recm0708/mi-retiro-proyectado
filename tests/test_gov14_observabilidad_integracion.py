@@ -229,7 +229,7 @@ class TestGov14ObservabilidadIntegracion(unittest.TestCase):
         )
         self.assertIn("487 pruebas en `OK`", validacion)
         self.assertIn(
-            "**Bloque activo:** GOV.1.5 — Seguridad, privacidad y transparencia",
+            "**GOV.1.4:** Observabilidad y Developer Diagnostics cerrado",
             readme,
         )
 

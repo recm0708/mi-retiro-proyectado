@@ -37,6 +37,10 @@ El prebloque transversal de firma e integridad Git/GitHub quedó cerrado despué
 
 GOV.1.4 añadió **13 regresiones específicas**: 7 para el núcleo de Developer Diagnostics y 6 para integración HTTP/fecha externa. El cierre fue validado con **487 pruebas en `OK`**, compilación Python, sintaxis JavaScript y `git diff --check` limpio. Las regresiones comprueban modo apagado/activo, JSONL, correlación, redacción, excepciones, rotación, exportación, middleware, ausencia de doble cálculo, consulta externa y coherencia documental.
 
+GOV.1.5 R1 añadió **7 regresiones** del modelo de amenazas y R2 añadió **8 regresiones** de derechos/incidentes, elevando la suite validada a **502 pruebas en `OK`** antes de R3.
+
+GOV.1.5 R3 añade **10 regresiones de cierre** sobre terceros, despliegue, privacidad, seguridad, documentación y gates pre-publicación. La suite esperada de cierre es de **512 pruebas**; la cifra se considera evidencia final únicamente después de ejecutarla en la rama de trabajo y en CI.
+
 ## 2. Comandos obligatorios
 
 ```powershell
@@ -74,6 +78,9 @@ python -m pip check
 - `tests/test_gov_firma_git.py`
 - `tests/test_gov14_observabilidad.py`
 - `tests/test_gov14_observabilidad_integracion.py`
+- `tests/test_gov15_modelo_amenazas.py`
+- `tests/test_gov15_procedimientos_privacidad.py`
+- `tests/test_gov15_cierre_seguridad_privacidad.py`
 - `tests/test_identidad_interfaz.py`
 - `tests/test_indemnizacion_vejez.py`
 - `tests/test_linea_tiempo.py`

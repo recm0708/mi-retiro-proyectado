@@ -6,6 +6,19 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ## [Unreleased]
 
+### GOV.1.5 — Seguridad, privacidad y transparencia
+
+- añadido modelo de amenazas con activos, fronteras de confianza, matriz de riesgos y disparadores de revisión;
+- formalizado procedimiento de derechos del titular con plazos publicados por ANTAI y registro mínimo fuera de Git;
+- formalizado procedimiento de respuesta a incidentes con severidad, contención, evidencia, notificación, recuperación y post-mortem;
+- documentada la revisión de terceros y conexiones externas, incluidos jsDelivr, infraestructura CSS y GitHub;
+- definidos gates de TLS, proxy, forwarded headers, CORS/CSRF, secretos y despliegue remoto;
+- revisado Developer Diagnostics como superficie de seguridad sin ampliar su tratamiento de datos;
+- definida la frontera de revisión jurídica externa previa a beta pública;
+- mantenida la versión material de privacidad `2026-08-16.1` al no identificarse internamente un cambio material de finalidad, categorías, destinatarios o conservación;
+- GOV.1.5 cerrado internamente; revisión jurídica externa y despliegue remoto permanecen como gates pre-publicación;
+- `VERSION` permanece en `0.0.23-beta`.
+
 ### GOV.1.4 — Observabilidad y Developer Diagnostics
 
 - incorporado modo exclusivo de desarrollo mediante `MRP_DEV_MODE=1`, desactivado por defecto;
