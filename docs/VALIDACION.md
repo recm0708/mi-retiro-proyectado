@@ -31,6 +31,8 @@ También se habilitaron Dependency graph, Dependabot alerts y Dependabot securit
 
 Los workflows vigentes fueron migrados de GitHub Actions `@v6` a `@v7`. La validación local de este mantenimiento conserva la línea base de **470 pruebas en `OK`**, compilación Python, sintaxis JavaScript y `git diff --check` limpio.
 
+La actualización controlada de `pypdf` a `6.15.0` añade **4 regresiones específicas**. Para aceptarla, la suite completa debe alcanzar **474 pruebas en `OK`** y conservar el comportamiento de `PdfReader`/`PdfWriter`, el rechazo controlado de PDFs digitales sin texto y los límites de páginas de ambos importadores.
+
 ## 2. Comandos obligatorios
 
 ```powershell
@@ -43,6 +45,13 @@ Get-ChildItem .\app\static\js\*.js | ForEach-Object {
 
 python -m unittest discover -s tests -q
 git diff --check
+```
+
+Para cambios de dependencias también se exige:
+
+```powershell
+python -m pip install -r requirements.txt
+python -m pip check
 ```
 
 ## 3. Inventario actual de pruebas
@@ -67,6 +76,7 @@ git diff --check
 - `tests/test_mixto_prestaciones_cap.py`
 - `tests/test_prebeta_e2e_hardening.py`
 - `tests/test_proyeccion_salarios.py`
+- `tests/test_pypdf_compatibilidad.py`
 - `tests/test_responsive_ux3.py`
 - `tests/test_resultado_unificado.py`
 - `tests/test_resultados.py`
@@ -131,6 +141,8 @@ Una regresión derivada de un caso personal debe transformarse en datos sintéti
 ## 6. Importadores
 
 Deben cubrir formato, límites, cifrado, texto, clasificación, año de Ficha, fecha externa, procedencia, confirmación, no persistencia y reconciliación.
+
+La compatibilidad de la biblioteca PDF se valida sin documentos personales reales: se generan PDFs sintéticos en memoria con `PdfWriter` y se procesan con `PdfReader` a través de los servicios reales.
 
 La suite no depende de disponibilidad real de CSS: las consultas externas se sustituyen/mokean en pruebas.
 

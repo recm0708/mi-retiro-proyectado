@@ -147,7 +147,7 @@ class TestGov13DocumentacionR4(unittest.TestCase):
             "Jinja2": ("3.1.6", "BSD-3-Clause"),
             "pydantic": ("2.13.4", "MIT"),
             "python-multipart": ("0.0.32", "Apache-2.0"),
-            "pypdf": ("5.9.0", "BSD-3-Clause"),
+            "pypdf": ("6.15.0", "BSD-3-Clause"),
             "uvicorn": ("0.52.1", "BSD-3-Clause"),
         }
         for nombre, (version, licencia) in esperadas.items():
@@ -162,6 +162,12 @@ class TestGov13DocumentacionR4(unittest.TestCase):
         self.assertIn("cdn.jsdelivr.net", texto)
         self.assertIn("servicio externo operativo", texto)
         self.assertIn("No se envía:", texto)
+        self.assertIn("actions/checkout@v7", texto)
+        self.assertIn("actions/setup-python@v7", texto)
+        self.assertIn("actions/setup-node@v7", texto)
+        self.assertNotIn("actions/checkout@v6", texto)
+        self.assertNotIn("actions/setup-python@v6", texto)
+        self.assertNotIn("actions/setup-node@v6", texto)
 
     def test_proceso_release_define_gates(self):
         texto = (DOCS / "PROCESO_RELEASE.md").read_text(encoding="utf-8")
