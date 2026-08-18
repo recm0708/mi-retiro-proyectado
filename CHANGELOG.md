@@ -23,14 +23,17 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 - activados Dependency graph, Dependabot alerts y Dependabot security updates;
 - Dependabot revisado con 0 vulnerabilidades abiertas al habilitar las alertas;
 - migradas las GitHub Actions vigentes de `@v6` a `@v7` en todos los workflows actuales.
-- corregidas rutas PowerShell documentales afectadas por un carácter de control y añadida regresión preventiva.
+- corregidas rutas PowerShell documentales afectadas por un carácter de control y añadida regresión preventiva;
+- cerrado formalmente el prebloque transversal de firma e integridad Git/GitHub tras completar rulesets, configuración de Actions, Dependabot y auditoría de PR;
+- verificado el cierre remoto con 0 Pull Requests abiertos y flujo protegido por rama, firma, PR, CI requerida y squash.
 
 ### Dependencias y seguridad
 
 - preparado el salto controlado de `pypdf` `5.9.0` a `6.15.0`;
 - añadidas cuatro regresiones específicas sobre versión instalada, `PdfReader`/`PdfWriter`, rechazo controlado de PDFs sin texto y límites de páginas de ambos importadores;
 - la aceptación exige instalación reproducible desde `requirements.txt`, `pip check`, suite completa, compilación Python, sintaxis JavaScript y `git diff --check`;
-- `VERSION` permanece en `0.0.23-beta`.
+- `VERSION` permanece en `0.0.23-beta`;
+- PR de Dependabot `#7` cerrado como sustituido por la actualización controlada; `#6`, `#5` y `#4` cerrados para preservar compatibilidad y el snapshot transitivo reproducible.
 
 ## [0.0.23-beta] — 2026-08-17
 

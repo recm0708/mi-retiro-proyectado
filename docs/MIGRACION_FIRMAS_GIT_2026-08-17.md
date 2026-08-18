@@ -1,6 +1,6 @@
 # Migración de firma criptográfica Git — 2026-08-17
 
-**Estado:** Materialización criptográfica completada; rulesets de tags y `main` activos; revisión GitHub/Dependabot en curso
+**Estado:** Completado; materialización, rulesets, configuración GitHub y revisión Dependabot cerradas
 **Versión de aplicación:** `0.0.23-beta`
 **Responsable:** Rubén Enrique Cañizares Miranda (`@recm0708`)
 **Clasificación:** Gobierno / Integridad Git / Auditoría
@@ -189,9 +189,14 @@ Controles completados posteriormente:
 - configuración del repositorio alineada a `Squash and merge`;
 - endurecimiento de permisos de GitHub Actions;
 - Dependency graph, Dependabot alerts y Dependabot security updates habilitados;
-- auditoría inicial de Dependabot con 0 vulnerabilidades abiertas.
+- auditoría inicial de Dependabot con 0 vulnerabilidades abiertas;
+- GitHub Actions migradas a `@v7` en los workflows vigentes mediante PR controlado del mantenedor;
+- actualización mayor de `pypdf` `5.9.0` → `6.15.0` integrada mediante PR del mantenedor con regresiones específicas de los importadores PDF;
+- PR de Dependabot redundantes o incompatibles cerrados sin merge: `#8`, `#7`, `#6`, `#5` y `#4`;
+- snapshot transitivo preservado para `pydantic_core`, `httpx2` y `httpcore2`, evitando actualizaciones aisladas incompatibles con las dependencias directas fijadas;
+- revisión remota final con **0 Pull Requests abiertos**.
 
-Permanece pendiente finalizar la revisión general de GitHub y resolver de forma controlada los Pull Requests de Dependabot abiertos.
+El prebloque transversal **Firma e integridad Git/GitHub queda cerrado**. El flujo ordinario posterior es rama de trabajo → commit firmado → Pull Request → checks requeridos → `Squash and merge`.
 
 La excepción de ADR-159 para sustituir `v0.0.22-beta` y `v0.0.23-beta` **ya fue consumida y no puede repetirse**.
 

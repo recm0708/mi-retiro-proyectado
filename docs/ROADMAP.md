@@ -33,7 +33,7 @@ Este roadmap describe **estado actual y trabajo futuro**. La evolución detallad
   - [x] R4 — capa de auditoría documental y controles de consistencia;
   - versión de cierre: `0.0.23-beta`.
 
-- [ ] **Prebloque transversal — Firma e integridad Git/GitHub**
+- [x] **Prebloque transversal — Firma e integridad Git/GitHub**
   - [x] respaldo completo previo a la migración;
   - [x] clave SSH Ed25519 dedicada y verificación local;
   - [x] política de firma, allowed signers, ADR y workflow preparados;
@@ -43,7 +43,7 @@ Este roadmap describe **estado actual y trabajo futuro**. La evolución detallad
   - [x] auditoría local/remota 23/23 tags;
   - [x] ruleset de tags;
   - [x] protección/ruleset de `main`;
-  - [ ] revisión de configuración GitHub y PR de Dependabot.
+  - [x] revisión de configuración GitHub y PR de Dependabot.
 
 - [ ] **GOV.1.4 — Observabilidad y Developer Diagnostics**
   - modo exclusivo de desarrollo;

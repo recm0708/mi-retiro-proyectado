@@ -90,7 +90,7 @@ class TestGovFirmaGit(unittest.TestCase):
             "90e66a13eec554d616bb71a04e00da4ada68df54",
         ):
             self.assertIn(valor, texto)
-        self.assertIn("Materialización criptográfica completada", texto)
+        self.assertIn("**Materialización criptográfica:** completada el 2026-08-17.", texto)
         self.assertIn("23/23 tags", texto)
         self.assertIn("23/23 objetos tag remotos", texto)
         self.assertIn("23/23 targets remotos", texto)
@@ -112,7 +112,14 @@ class TestGovFirmaGit(unittest.TestCase):
         self.assertIn("- [x] auditoría local/remota 23/23 tags;", texto)
         self.assertIn("- [x] ruleset de tags;", texto)
         self.assertIn("- [x] protección/ruleset de `main`;", texto)
-        self.assertIn("- [ ] **Prebloque transversal — Firma e integridad Git/GitHub**", texto)
+        self.assertIn("- [x] **Prebloque transversal — Firma e integridad Git/GitHub**", texto)
+        self.assertIn("- [x] revisión de configuración GitHub y PR de Dependabot.", texto)
+
+        migracion = (DOCS / "MIGRACION_FIRMAS_GIT_2026-08-17.md").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn("Firma e integridad Git/GitHub queda cerrado", migracion)
+        self.assertIn("0 Pull Requests abiertos", migracion)
 
     def test_indice_changelog_y_validacion_registran_firma(self):
         indice = (DOCS / "INDICE.md").read_text(encoding="utf-8")
@@ -125,6 +132,8 @@ class TestGovFirmaGit(unittest.TestCase):
         self.assertIn("12 regresiones", validacion)
         self.assertIn("470 pruebas en `OK`", validacion)
         self.assertIn("23/23 objetos remotos", validacion)
+        self.assertIn("474 pruebas en `OK`", validacion)
+        self.assertIn("0 Pull Requests abiertos", validacion)
 
         for ruta in (
             ROOT / "CONTRIBUTING.md",
