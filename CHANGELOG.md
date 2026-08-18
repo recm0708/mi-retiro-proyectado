@@ -15,7 +15,14 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 - añadido workflow de verificación de firmas de tags;
 - añadidas regresiones de política de firma y trazabilidad histórica;
 - primer commit nuevo firmado confirmado por GitHub como `Verified` y CI #23 en `success`;
-- verificados 23/23 objetos y targets remotos sin reescritura de commits históricos.
+- verificados 23/23 objetos y targets remotos sin reescritura de commits históricos;
+- activado ruleset inmutable para tags `v*`: permite nuevas versiones y bloquea actualización, eliminación y force push de tags publicados;
+- activado ruleset de la rama predeterminada con Pull Request obligatorio, firmas verificadas, historial lineal, resolución de conversaciones y checks Python 3.13/3.14;
+- configurada la integración mediante `Squash and merge` y la eliminación automática de ramas remotas integradas;
+- endurecidos los permisos de GitHub Actions y restringido el uso a acciones propias y oficiales de GitHub;
+- activados Dependency graph, Dependabot alerts y Dependabot security updates;
+- Dependabot revisado con 0 vulnerabilidades abiertas al habilitar las alertas;
+- migradas las GitHub Actions vigentes de `@v6` a `@v7` en todos los workflows actuales.
 
 ## [0.0.23-beta] — 2026-08-17
 

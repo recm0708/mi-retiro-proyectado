@@ -1,6 +1,6 @@
 # Migración de firma criptográfica Git — 2026-08-17
 
-**Estado:** Materialización criptográfica completada; controles GitHub finales pendientes
+**Estado:** Materialización criptográfica completada; rulesets de tags y `main` activos; revisión GitHub/Dependabot en curso
 **Versión de aplicación:** `0.0.23-beta`
 **Responsable:** Rubén Enrique Cañizares Miranda (`@recm0708`)
 **Clasificación:** Gobierno / Integridad Git / Auditoría
@@ -177,19 +177,22 @@ La reemisión preservó:
 | `v0.0.22-beta` | `bda764edb84ccaeb610a629fca1283bbd97e69a4` | `1222de61a6d2ca48fb8731fe4755f5b7eeef38f5` |
 | `v0.0.23-beta` | `06b9260dadbcb2f0a7711841e1fad228e1badee8` | `07278f7a193ce964612d9697da57350691bf62c0` |
 
-## 11. Controles todavía pendientes
+## 11. Controles GitHub posteriores
 
-La **materialización histórica de tags está terminada**, pero el prebloque de integridad Git/GitHub todavía no se declara cerrado.
+La **materialización histórica de tags está terminada** y su excepción de reemisión quedó consumida.
 
-Permanecen pendientes:
+Controles completados posteriormente:
 
-- ejecutar/auditar el workflow completo de firmas mediante `workflow_dispatch` desde `main`;
-- crear el ruleset de tags para impedir modificaciones o eliminaciones posteriores;
-- configurar la protección/ruleset de `main`;
-- revisar configuración general de GitHub y los PR de Dependabot pendientes.
+- auditoría completa de los 23 tags mediante `workflow_dispatch` desde `main`;
+- ruleset activo `Release tags v*`, sin bypass, que bloquea actualización, eliminación y force push;
+- ruleset activo `Main branch protection`, con Pull Request obligatorio, firmas verificadas, historial lineal, resolución de conversaciones, checks requeridos y bloqueo de eliminación/force push;
+- configuración del repositorio alineada a `Squash and merge`;
+- endurecimiento de permisos de GitHub Actions;
+- Dependency graph, Dependabot alerts y Dependabot security updates habilitados;
+- auditoría inicial de Dependabot con 0 vulnerabilidades abiertas.
+
+Permanece pendiente finalizar la revisión general de GitHub y resolver de forma controlada los Pull Requests de Dependabot abiertos.
 
 La excepción de ADR-159 para sustituir `v0.0.22-beta` y `v0.0.23-beta` **ya fue consumida y no puede repetirse**.
 
 Desde este punto vuelve a regir la inmutabilidad de los tags publicados.
-
-El cierre completo del prebloque se documentará únicamente después de terminar los controles GitHub pendientes.

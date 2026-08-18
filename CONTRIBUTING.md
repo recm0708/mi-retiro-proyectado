@@ -4,16 +4,24 @@ Este documento define el flujo mínimo para modificar Mi Retiro Proyectado sin p
 
 ## 1. Antes de comenzar
 
-Actualizar la rama local:
+Actualizar primero la rama predeterminada:
 
 ```powershell
-git pull
+git switch main
+git fetch origin
+git pull --ff-only origin main
 ```
 
 Comprobar que la copia de trabajo esté limpia:
 
 ```powershell
 git status
+```
+
+Crear una rama específica antes de modificar:
+
+```powershell
+git switch -c <tipo>/<descripcion>
 ```
 
 No aplicar un paquete de cambios sobre modificaciones locales no revisadas.
@@ -68,6 +76,10 @@ refactor(core): reorganizar implementación
 
 Los commits deben ser legibles de forma independiente y no deben ocultar cambios no relacionados.
 
+`main` está protegida. El flujo ordinario es rama de trabajo → commit firmado → push de la rama → Pull Request → checks requeridos → `Squash and merge`. No se usa `git push origin main` como flujo normal.
+
+Cuando `main` exige firmas verificadas, el PR que se integre mediante squash debe ser creado por el mantenedor que realizará esa integración, salvo recuperación administrativa excepcional documentada.
+
 ## 5. Validación mínima
 
 Ejecutar antes de cerrar un bloque:
@@ -75,7 +87,7 @@ Ejecutar antes de cerrar un bloque:
 ```powershell
 python -m compileall app
 
-Get-ChildItem .\app\static\js\*.js | ForEach-Object {
+Get-ChildItem .pp\static\js\*.js | ForEach-Object {
     node --check $_.FullName
     if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 }
@@ -194,7 +206,7 @@ No introducir telemetría o registro de datos sensibles de forma silenciosa.
 
 Node.js LTS es una herramienta auxiliar para `node --check`; no forma parte del runtime y no justifica un `package.json` mientras no existan dependencias npm reales.
 
-Dependabot no reemplaza la revisión humana ni autoriza auto-merge.
+Dependabot no reemplaza la revisión humana ni autoriza auto-merge. Los PR de dependencias deben revisarse contra `main` actualizado, ejecutar CI y recibir validación adicional cuando afecten parsers, seguridad, normativa o infraestructura de publicación.
 
 ## 14. Revisión antes de commit
 

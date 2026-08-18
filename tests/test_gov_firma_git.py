@@ -23,6 +23,8 @@ class TestGovFirmaGit(unittest.TestCase):
         self.assertIn('"v*"', texto)
         self.assertIn("workflow_dispatch:", texto)
         self.assertIn("git tag -v", texto)
+        self.assertIn("actions/checkout@v7", texto)
+        self.assertNotIn("actions/checkout@v6", texto)
 
     def test_workflow_usa_allowed_signers_versionado(self):
         texto = (ROOT / ".github" / "workflows" / "verificar-tags.yml").read_text(encoding="utf-8")
@@ -30,6 +32,20 @@ class TestGovFirmaGit(unittest.TestCase):
         self.assertIn("gpg.ssh.allowedSignersFile", texto)
         self.assertIn(".github/allowed_signers", texto)
         self.assertIn("fetch-depth: 0", texto)
+
+        ci = (ROOT / ".github" / "workflows" / "ci.yml").read_text(
+            encoding="utf-8"
+        )
+        for action in (
+            "actions/checkout@v7",
+            "actions/setup-python@v7",
+            "actions/setup-node@v7",
+        ):
+            self.assertIn(action, ci)
+
+        self.assertNotIn("actions/checkout@v6", ci)
+        self.assertNotIn("actions/setup-python@v6", ci)
+        self.assertNotIn("actions/setup-node@v6", ci)
 
     def test_versioning_distingue_tags_retrospectivos_de_fecha_historica(self):
         texto = (ROOT / "VERSIONING.md").read_text(encoding="utf-8")
@@ -94,6 +110,8 @@ class TestGovFirmaGit(unittest.TestCase):
         self.assertIn("- [x] materialización firmada de `v0.0.1-beta` a `v0.0.21-beta`;", texto)
         self.assertIn("- [x] reemisión firmada única de `v0.0.22-beta` y `v0.0.23-beta`;", texto)
         self.assertIn("- [x] auditoría local/remota 23/23 tags;", texto)
+        self.assertIn("- [x] ruleset de tags;", texto)
+        self.assertIn("- [x] protección/ruleset de `main`;", texto)
         self.assertIn("- [ ] **Prebloque transversal — Firma e integridad Git/GitHub**", texto)
 
     def test_indice_changelog_y_validacion_registran_firma(self):
