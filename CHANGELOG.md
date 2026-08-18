@@ -23,6 +23,7 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 - activados Dependency graph, Dependabot alerts y Dependabot security updates;
 - Dependabot revisado con 0 vulnerabilidades abiertas al habilitar las alertas;
 - migradas las GitHub Actions vigentes de `@v6` a `@v7` en todos los workflows actuales.
+- corregidas rutas PowerShell documentales afectadas por un carácter de control y añadida regresión preventiva.
 
 ## [0.0.23-beta] — 2026-08-17
 

@@ -126,5 +126,21 @@ class TestGovFirmaGit(unittest.TestCase):
         self.assertIn("470 pruebas en `OK`", validacion)
         self.assertIn("23/23 objetos remotos", validacion)
 
+        for ruta in (
+            ROOT / "CONTRIBUTING.md",
+            DOCS / "PROCESO_RELEASE.md",
+            DOCS / "VALIDACION.md",
+        ):
+            contenido = ruta.read_text(encoding="utf-8")
+            controles = [
+                c for c in contenido
+                if ord(c) < 32 and c not in "\n\r\t"
+            ]
+            self.assertEqual([], controles, f"carácter de control en {ruta}")
+            self.assertIn(
+                r"Get-ChildItem .\app\static\js\*.js",
+                contenido,
+            )
+
 if __name__ == "__main__":
     unittest.main()

@@ -87,7 +87,7 @@ Ejecutar antes de cerrar un bloque:
 ```powershell
 python -m compileall app
 
-Get-ChildItem .pp\static\js\*.js | ForEach-Object {
+Get-ChildItem .\app\static\js\*.js | ForEach-Object {
     node --check $_.FullName
     if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 }
