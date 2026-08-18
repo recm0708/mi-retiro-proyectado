@@ -2,10 +2,11 @@
 
 **Estado:** Vigente
 **Versión de aplicación revisada:** `0.0.23-beta`
-**Revisión documental:** GOV.1.3 R4 — 2026-08-17
+**Base documental:** GOV.1.3 R4 — 2026-08-17
+**Revisión transversal:** GOV.1.7 — 2026-08-18
 **Clasificación:** Gobierno / Release / Auditoría
 
-Este procedimiento complementa `VERSIONING.md`, `RELEASES.md`, `CHANGELOG.md` y `GOVERNANCE.md`.
+Este procedimiento complementa `VERSIONING.md`, `RELEASES.md`, `CHANGELOG.md`, `GOVERNANCE.md`, `LICENSE`, `THIRD_PARTY_NOTICES.md` y `docs/LICENCIA_Y_DISTRIBUCION.md`.
 
 ## 1. Principio
 
@@ -19,7 +20,9 @@ Antes del cierre:
 - código, pruebas y documentación coherentes;
 - working tree controlado;
 - versión anterior trazable;
-- limitaciones conocidas actualizadas.
+- limitaciones conocidas actualizadas;
+- licencia del proyecto coherente con el objetivo de distribución;
+- `THIRD_PARTY_NOTICES.md` revisado si el artefacto incluye componentes de terceros.
 
 ## 3. Validación del hito antes del incremento
 
@@ -49,7 +52,9 @@ Cuando el hito está técnicamente validado:
 4. mover cambios notables de `Unreleased`/registrar cierre en `CHANGELOG.md`;
 5. actualizar `RELEASES.md`;
 6. actualizar `ROADMAP.md`;
-7. actualizar tests de coherencia si el contrato evolucionó, sin fijar innecesariamente versiones históricas como estado eterno.
+7. actualizar tests de coherencia si el contrato evolucionó, sin fijar innecesariamente versiones históricas como estado eterno;
+8. revisar `LICENSE` y `docs/LICENCIA_Y_DISTRIBUCION.md`;
+9. si se empaquetan dependencias, generar el inventario exacto del artefacto y adjuntar licencias/NOTICE upstream exigidos.
 
 ## 5. Validación del candidato de release
 
@@ -59,7 +64,9 @@ Después del incremento:
 - repetir `git diff --check`;
 - comprobar FastAPI/footer/README contra `VERSION`;
 - comprobar changelog/releases;
-- revisar que no existan logs, PDFs personales o secretos preparados para commit.
+- revisar que no existan logs, PDFs personales o secretos preparados para commit;
+- comprobar que el artefacto no omita avisos/licencias de terceros que distribuya;
+- confirmar que ningún componente de tercero se presente como cubierto por `LICENSE` del proyecto.
 
 ## 6. Commit de cierre
 
@@ -87,6 +94,7 @@ Abrir un Pull Request hacia `main` y confirmar:
 
 - commits de la rama firmados y verificados;
 - checks requeridos `Python 3.13` y `Python 3.14` en **success**;
+- check `Auditoría de gobernanza` en **success** cuando GOV.1.6 ya esté integrado en la rama;
 - rama actualizada respecto de `main`;
 - conversaciones resueltas;
 - ausencia de cambios no relacionados.
@@ -136,6 +144,8 @@ Durante la etapa interna puede existir únicamente tag formal.
 
 Antes de beta pública se decidirá si cada tag publicable tendrá GitHub Release, notas y artefactos.
 
+Si una futura GitHub Release incluye un instalador, ejecutable autocontenido, contenedor, ZIP o artefacto que incorpore físicamente dependencias de terceros, el release debe incluir los textos de licencia, avisos y NOTICE que correspondan al contenido realmente distribuido.
+
 ## 11. Evidencia de cierre
 
 Registrar:
@@ -146,7 +156,9 @@ Registrar:
 - fecha;
 - resultado de pruebas;
 - CI;
-- limitaciones relevantes.
+- limitaciones relevantes;
+- licencia del proyecto;
+- inventario/avisos de terceros cuando el artefacto los incorpore.
 
 `RELEASES.md` es el registro documental; Git/GitHub son la evidencia primaria.
 

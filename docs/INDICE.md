@@ -2,7 +2,7 @@
 
 **Estado:** vigente
 **Versión de aplicación revisada:** `0.0.23-beta`
-**Última actualización transversal:** GOV.1.6 — 2026-08-18
+**Última actualización transversal:** GOV.1.7 — 2026-08-18
 
 Este archivo es el punto de entrada para la documentación técnica, funcional, normativa, de privacidad, validación y auditoría de Mi Retiro Proyectado.
 
@@ -23,6 +23,9 @@ Este archivo es el punto de entrada para la documentación técnica, funcional, 
 - [`MIGRACION_FIRMAS_GIT_2026-08-17.md`](MIGRACION_FIRMAS_GIT_2026-08-17.md) — firma SSH y migración histórica controlada.
 - [`../.github/allowed_signers`](../.github/allowed_signers) — claves públicas autorizadas.
 - [`AUDITORIA_GITHUB.md`](AUDITORIA_GITHUB.md) — controles GitHub y auditoría automática.
+- [`../LICENSE`](../LICENSE) — licencia propietaria de materiales originales.
+- [`LICENCIA_Y_DISTRIBUCION.md`](LICENCIA_Y_DISTRIBUCION.md) — evaluación y decisión de licencia.
+- [`../THIRD_PARTY_NOTICES.md`](../THIRD_PARTY_NOTICES.md) — avisos de componentes de terceros.
 
 ## 3. Arquitectura
 

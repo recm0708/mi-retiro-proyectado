@@ -6,7 +6,7 @@
 **Revisión transversal:** GOV.1.5 R3 — 2026-08-18
 **Clasificación:** Técnica / Terceros / Auditoría
 
-Este inventario distingue dependencias directas, snapshot transitivo, recursos externos y servicios de red. La selección de licencia del proyecto continúa pendiente hasta GOV.1.7.
+Este inventario distingue dependencias directas, snapshot transitivo, recursos externos y servicios de red. GOV.1.7 adopta una licencia propietaria para materiales originales sin relicenciar dependencias upstream.
 
 ## 1. Dependencias Python directas
 
@@ -30,13 +30,13 @@ Fuentes upstream de licencia verificadas documentalmente:
 - pypdf: PyPI/repositorio oficial, licencia BSD-3-Clause;
 - Uvicorn: PyPI.
 
-La revisión definitiva de obligaciones de redistribución corresponde a GOV.1.7.
+GOV.1.7 documenta obligaciones base en `../THIRD_PARTY_NOTICES.md`; un artefacto futuro que incorpore dependencias requiere inventario de licencias del paquete real antes de publicarse.
 
 ## 2. Snapshot transitivo
 
 `requirements.txt` fija también dependencias transitivas para reproducibilidad.
 
-R4 **no declara completado un inventario jurídico licencia-por-licencia de todas las transitivas**. Ese análisis es un requisito previo a elegir la licencia/distribución en GOV.1.7.
+El snapshot transitivo mejora reproducibilidad, pero **no constituye por sí solo un inventario jurídico del artefacto distribuido**. Un paquete autocontenido futuro debe inventariar lo que realmente incorpora.
 
 Dependabot propone actualizaciones directas permitidas; no existe auto-merge.
 
@@ -117,15 +117,14 @@ Para `pypdf 6.15.0` se añadieron regresiones específicas sobre:
 
 ## 8. Licencia del proyecto
 
-La existencia de dependencias permisivas no decide automáticamente la licencia de Mi Retiro Proyectado.
+GOV.1.7 selecciona una **licencia propietaria pre-beta / todos los derechos reservados** para los materiales originales de Mi Retiro Proyectado.
 
-GOV.1.7 debe considerar:
+Las dependencias directas documentadas son MIT, BSD-3-Clause o Apache-2.0 y no se relicencian. Una distribución debe conservar los avisos y textos upstream exigidos por los componentes efectivamente incluidos.
 
-- objetivos de distribución;
-- obligaciones de avisos;
-- dependencias transitivas;
-- recursos de terceros;
-- marcas;
-- contenido normativo/documental.
+Consultar:
 
-No se crea un `LICENSE` vacío o provisional en R4.
+- `../LICENSE`;
+- `../THIRD_PARTY_NOTICES.md`;
+- `LICENCIA_Y_DISTRIBUCION.md`.
+
+Un instalador, ejecutable autocontenido o contenedor futuro debe generar su inventario real antes del release.

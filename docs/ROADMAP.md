@@ -74,12 +74,13 @@ Este roadmap describe **estado actual y trabajo futuro**. La evolución detallad
   - [x] política de rama/revisión documentada y compatible con la etapa del proyecto;
   - [x] gate para promover `Auditoría de gobernanza` a check requerido después de su primera ejecución exitosa.
 
-- [ ] **GOV.1.7 — Licencia**
-  - evaluar objetivo de distribución;
-  - compatibilidad de dependencias;
-  - derechos de terceros;
-  - seleccionar licencia;
-  - añadir `LICENSE` y avisos necesarios.
+- [x] **GOV.1.7 — Licencia**
+  - [x] objetivo de distribución evaluado;
+  - [x] compatibilidad de dependencias directas revisada;
+  - [x] derechos de terceros separados del código original;
+  - [x] seleccionada licencia propietaria pre-beta / todos los derechos reservados;
+  - [x] añadidos `LICENSE`, `THIRD_PARTY_NOTICES.md` y gates de distribución;
+  - [x] futura relicencia abierta reservada a una decisión expresa del titular.
 
 - [ ] **GOV.1.8 — Auditoría final y cierre pre-beta de gobierno**
   - revisión integral;
@@ -114,7 +115,7 @@ Este roadmap describe **estado actual y trabajo futuro**. La evolución detallad
 - Developer Diagnostics implementado y revisado internamente bajo GOV.1.5;
 - revisión jurídica externa previa a beta pública;
 - diseño/hardening específico si se decide un despliegue remoto;
-- licencia;
+- revisión jurídica externa de la estrategia de publicación/licencia antes de beta pública/comercial;
 - parámetros oficiales que la documentación identifica como no disponibles o no reconstruibles con fidelidad.
 
 ## 3. UX.4.6 pendiente después de GOV.1

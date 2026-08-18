@@ -41,7 +41,9 @@ GOV.1.5 R1 añadió **7 regresiones** del modelo de amenazas y R2 añadió **8 r
 
 GOV.1.5 R3 añadió **10 regresiones de cierre** sobre terceros, despliegue, privacidad, seguridad, documentación y gates pre-publicación. El cierre fue validado con **512 pruebas en `OK`**, además de compilación Python, sintaxis JavaScript y `git diff --check` limpio.
 
-GOV.1.6 añade **10 regresiones específicas** sobre `SECURITY.md`, issue forms, template de Pull Request, workflow de auditoría, permisos mínimos, documentación y continuidad de controles. La suite de aceptación de GOV.1.6 es de **522 pruebas**.
+GOV.1.6 añadió **10 regresiones específicas** sobre `SECURITY.md`, issue forms, template de Pull Request, workflow de auditoría, permisos mínimos, documentación y continuidad de controles. Su cierre local se valida con **522 pruebas en `OK`** antes de aplicar GOV.1.7.
+
+GOV.1.7 añade **8 regresiones específicas** sobre `LICENSE`, avisos de terceros, decisión de distribución, proceso de release y transición del roadmap a GOV.1.8. La suite de aceptación acumulada es de **530 pruebas**.
 
 ## 2. Comandos obligatorios
 
@@ -84,6 +86,7 @@ python -m pip check
 - `tests/test_gov15_procedimientos_privacidad.py`
 - `tests/test_gov15_cierre_seguridad_privacidad.py`
 - `tests/test_gov16_controles_github.py`
+- `tests/test_gov17_licencia.py`
 - `tests/test_identidad_interfaz.py`
 - `tests/test_indemnizacion_vejez.py`
 - `tests/test_linea_tiempo.py`

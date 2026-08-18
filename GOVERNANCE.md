@@ -133,9 +133,15 @@ Cuando existan nuevos mantenedores, CODEOWNERS deberá granularizar estas respon
 
 ## 9. Licencia
 
-**Pendiente en GOV.1.7.**
+GOV.1.7 adopta una **licencia propietaria pre-beta / todos los derechos reservados** para los materiales originales del proyecto.
 
-La ausencia temporal de `LICENSE` es deliberada mientras se revisan alcance de distribución, derechos de reutilización y compatibilidad con dependencias. La visibilidad o posibilidad de auditoría del código no debe interpretarse automáticamente como permiso de reutilización.
+- `LICENSE` define el alcance de esos materiales;
+- `THIRD_PARTY_NOTICES.md` separa componentes upstream;
+- `docs/LICENCIA_Y_DISTRIBUCION.md` registra alternativas y motivo de la decisión;
+- la disponibilidad del código no concede derechos de reutilización o explotación comercial;
+- una futura relicencia abierta requiere decisión expresa y derechos suficientes sobre contribuciones incorporadas.
+
+La revisión jurídica externa previa a publicación pública/comercial continúa siendo un gate.
 
 ## 10. Incidentes y vulnerabilidades
 
