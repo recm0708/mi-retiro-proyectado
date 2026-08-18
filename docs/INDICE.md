@@ -1,8 +1,8 @@
 # Índice de documentación
 
 **Estado:** vigente
-**Versión de aplicación revisada:** `0.0.23-beta`
-**Última actualización transversal:** GOV.1.7 — 2026-08-18
+**Versión de aplicación revisada:** `0.0.24-beta`
+**Última actualización transversal:** GOV.1.8 — 2026-08-18
 
 Este archivo es el punto de entrada para la documentación técnica, funcional, normativa, de privacidad, validación y auditoría de Mi Retiro Proyectado.
 

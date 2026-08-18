@@ -18,7 +18,7 @@ R4_DOCS = [
 
 class TestGov13DocumentacionR4(unittest.TestCase):
     def setUp(self):
-        self.version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
+        self.version_base = "0.0.23-beta"
 
     def test_documentos_r4_existen_y_siguen_version_canonica(self):
         for nombre in R4_DOCS:
@@ -26,7 +26,7 @@ class TestGov13DocumentacionR4(unittest.TestCase):
                 p = DOCS / nombre
                 self.assertTrue(p.is_file())
                 texto = p.read_text(encoding="utf-8")
-                self.assertIn(f"`{self.version}`", texto)
+                self.assertIn(f"`{self.version_base}`", texto)
                 self.assertIn("GOV.1.3 R4", texto)
 
     def test_indice_enlaza_documentos_r4(self):

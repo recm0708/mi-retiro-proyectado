@@ -6,14 +6,15 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 
 ## Estado del proyecto
 
-- **Versión formal vigente:** `0.0.23-beta`
+- **Versión formal vigente:** `0.0.24-beta`
 - **Etapa:** desarrollo interno pre-beta
-- **Programa activo:** GOV.1 — Auditoría, Gobierno y Trazabilidad Pre-Beta
-- **Bloque activo:** GOV.1.8 — Auditoría final y cierre pre-beta de gobierno
+- **Programa GOV.1:** cerrado — Auditoría, Gobierno y Trazabilidad Pre-Beta
+- **Bloque activo:** UX.4.6e — Paso 4 · Proyección salarial/laboral
 - **GOV.1.4:** Observabilidad y Developer Diagnostics cerrado
 - **GOV.1.5:** Seguridad, privacidad y transparencia cerrado internamente
 - **GOV.1.6:** Controles GitHub y auditoría automática cerrado
 - **GOV.1.7:** Licencia propietaria pre-beta y avisos de terceros cerrado
+- **GOV.1.8:** auditoría final y cierre pre-beta de gobierno cerrado
 - **Primera beta pública objetivo:** familia `0.1.0-beta.1`
 
 La versión se obtiene exclusivamente del archivo [`VERSION`](VERSION). La política completa se documenta en [`VERSIONING.md`](VERSIONING.md).
@@ -74,6 +75,7 @@ Documentos principales:
 - [`docs/EVALUACION_TERCEROS_DESPLIEGUE.md`](docs/EVALUACION_TERCEROS_DESPLIEGUE.md) — terceros, TLS y gates de despliegue;
 - [`SECURITY.md`](SECURITY.md) — reporte responsable de vulnerabilidades;
 - [`docs/AUDITORIA_GITHUB.md`](docs/AUDITORIA_GITHUB.md) — controles GitHub y auditoría automática;
+- [`docs/CIERRE_GOV1.md`](docs/CIERRE_GOV1.md) — auditoría final y decisión de cierre de GOV.1;
 - [`docs/LICENCIA_Y_DISTRIBUCION.md`](docs/LICENCIA_Y_DISTRIBUCION.md) — decisión de licencia y estrategia de distribución;
 - [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) — avisos y obligaciones de terceros;
 - [`docs/ROADMAP.md`](docs/ROADMAP.md) — estado actual y próximos hitos;
@@ -98,7 +100,13 @@ v0.0.22-beta
 v0.0.23-beta
 ```
 
-GOV.1.4 a GOV.1.7 se desarrollan sobre la misma versión formal porque no modifican los motores previsionales ni introducen una nueva release funcional.
+GOV.1.4 a GOV.1.7 se desarrollaron sobre `0.0.23-beta` porque fueron revisiones internas acumulativas. El cierre integral de GOV.1 se materializa como `0.0.24-beta` y dispone del tag formal:
+
+```text
+v0.0.24-beta
+```
+
+`0.0.24-beta` **no es la primera beta pública**. GOV.1 queda cerrado y se reanuda UX.4.6e; la familia pública objetivo continúa siendo `0.1.0-beta.1`.
 
 Consultar:
 

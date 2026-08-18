@@ -1,15 +1,15 @@
 # Roadmap
 
 **Estado:** vigente
-**Versión de aplicación:** `0.0.23-beta`
+**Versión de aplicación:** `0.0.24-beta`
 **Fecha de revisión:** 2026-08-18
 
 Este roadmap describe **estado actual y trabajo futuro**. La evolución detallada ya completada se conserva en `RELEASES.md`, `CHANGELOG.md` y `docs/historico/`.
 
 ## 1. Programa GOV.1 — Auditoría, Gobierno y Trazabilidad Pre-Beta
 
-**Estado general:** en ejecución.
-**Regla:** UX.4.6e permanece congelada hasta completar GOV.1.
+**Estado general:** cerrado el 2026-08-18.
+**Decisión de cierre:** UX.4.6e queda descongelada y pasa a ser el siguiente bloque activo.
 
 - [x] **GOV.1.1 — Inventario y reconstrucción histórica**
   - inventario del repositorio;
@@ -72,7 +72,7 @@ Este roadmap describe **estado actual y trabajo futuro**. La evolución detallad
   - [x] controles documentales de repositorio;
   - [x] workflow adicional `Auditoría de gobernanza`;
   - [x] política de rama/revisión documentada y compatible con la etapa del proyecto;
-  - [x] gate para promover `Auditoría de gobernanza` a check requerido después de su primera ejecución exitosa.
+  - [x] `Auditoría de gobernanza` promovido al conjunto de checks requeridos junto con Python 3.13/3.14.
 
 - [x] **GOV.1.7 — Licencia**
   - [x] objetivo de distribución evaluado;
@@ -82,11 +82,14 @@ Este roadmap describe **estado actual y trabajo futuro**. La evolución detallad
   - [x] añadidos `LICENSE`, `THIRD_PARTY_NOTICES.md` y gates de distribución;
   - [x] futura relicencia abierta reservada a una decisión expresa del titular.
 
-- [ ] **GOV.1.8 — Auditoría final y cierre pre-beta de gobierno**
-  - revisión integral;
-  - coherencia código/pruebas/documentación;
-  - release y tag;
-  - decisión de reanudar UX.4.6e.
+- [x] **GOV.1.8 — Auditoría final y cierre pre-beta de gobierno**
+  - [x] revisión integral de GOV.1.1–GOV.1.7;
+  - [x] coherencia código/pruebas/documentación;
+  - [x] versión formal de cierre `0.0.24-beta`;
+  - [x] proceso de tag firmado `v0.0.24-beta` definido post-merge/CI;
+  - [x] auditoría de GitHub con `Python 3.13`, `Python 3.14` y `Auditoría de gobernanza`;
+  - [x] decisión de reanudar UX.4.6e;
+  - [x] gates pre-publicación preservados sin declarar la beta pública lista.
 
 ## 2. Estado funcional del producto
 
@@ -118,7 +121,9 @@ Este roadmap describe **estado actual y trabajo futuro**. La evolución detallad
 - revisión jurídica externa de la estrategia de publicación/licencia antes de beta pública/comercial;
 - parámetros oficiales que la documentación identifica como no disponibles o no reconstruibles con fidelidad.
 
-## 3. UX.4.6 pendiente después de GOV.1
+## 3. UX.4.6 — trabajo reanudado después de GOV.1
+
+**Bloque activo:** UX.4.6e — Paso 4 · Proyección salarial/laboral.
 
 - [ ] **UX.4.6e — Paso 4 · Proyección salarial/laboral**
 - [ ] **UX.4.6f — Paso 5 · Escenarios de retiro**
@@ -165,11 +170,14 @@ Antes de una publicación amplia:
 
 La familia `0.1.0-beta.1` solo podrá evaluarse cuando:
 
-- GOV.1 esté cerrado;
-- exista una licencia decidida;
-- seguridad y privacidad tengan procedimientos pre-beta suficientes;
-- la documentación pública esté coherente;
-- la suite y CI estén en verde;
-- no existan discrepancias conocidas entre versión, código y documentación;
-- las limitaciones materiales estén declaradas;
-- se haya decidido expresamente qué funciones quedan dentro de la beta.
+- [x] GOV.1 esté cerrado;
+- [x] exista una licencia decidida;
+- [x] seguridad y privacidad tengan procedimientos pre-beta suficientes;
+- [x] la documentación pública pre-beta esté coherente al cierre GOV.1;
+- [x] la suite y CI de gobierno estén en verde;
+- [x] no existan discrepancias conocidas entre versión, código y documentación de GOV.1;
+- [x] las limitaciones materiales estén declaradas;
+- [ ] se complete/revise el alcance funcional restante de UX.4.6e–g;
+- [ ] se complete la revisión jurídica externa prevista antes de publicación pública/comercial;
+- [ ] se cierre la auditoría ampliada de accesibilidad y cualquier gate de despliegue aplicable;
+- [ ] se decida expresamente qué funciones quedan dentro de la primera beta pública.

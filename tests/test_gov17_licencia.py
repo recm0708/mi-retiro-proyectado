@@ -48,23 +48,17 @@ class TestGov17Licencia(unittest.TestCase):
         ):
             self.assertIn(esperado, texto)
 
-    def test_readme_declara_licencia_y_mueve_a_gov18(self):
+    def test_readme_declara_licencia_y_cierre_gov17(self):
         texto = (ROOT / "README.md").read_text(encoding="utf-8")
-        self.assertIn(
-            "**Bloque activo:** GOV.1.8 — Auditoría final y cierre pre-beta de gobierno",
-            texto,
-        )
         self.assertIn("**GOV.1.7:** Licencia propietaria pre-beta", texto)
+        self.assertIn("cerrado", texto)
         self.assertIn("(LICENSE)", texto)
         self.assertIn("(THIRD_PARTY_NOTICES.md)", texto)
 
-    def test_roadmap_cierra_gov17_y_mantiene_gov18(self):
+    def test_roadmap_preserva_cierre_gov17(self):
         texto = (DOCS / "ROADMAP.md").read_text(encoding="utf-8")
         self.assertIn("- [x] **GOV.1.7 — Licencia**", texto)
-        self.assertIn(
-            "- [ ] **GOV.1.8 — Auditoría final y cierre pre-beta de gobierno**",
-            texto,
-        )
+        self.assertIn("**GOV.1.8 — Auditoría final y cierre pre-beta de gobierno**", texto)
 
     def test_governance_respeta_decision_propietaria(self):
         texto = (ROOT / "GOVERNANCE.md").read_text(encoding="utf-8")
@@ -79,10 +73,10 @@ class TestGov17Licencia(unittest.TestCase):
         self.assertIn("licencias/NOTICE upstream", texto)
 
     def test_version_no_cambia_y_archivos_limpios(self):
-        self.assertEqual(
-            "0.0.23-beta",
-            (ROOT / "VERSION").read_text(encoding="utf-8").strip(),
+        licencia_doc = (DOCS / "LICENCIA_Y_DISTRIBUCION.md").read_text(
+            encoding="utf-8"
         )
+        self.assertIn("`0.0.23-beta`", licencia_doc)
         for path in (
             ROOT / "LICENSE",
             ROOT / "THIRD_PARTY_NOTICES.md",

@@ -1,8 +1,9 @@
 # Validación
 
 **Estado:** Vigente
-**Versión de aplicación revisada:** `0.0.23-beta`
-**Revisión documental:** GOV.1.3 R4 — 2026-08-17
+**Versión de aplicación revisada:** `0.0.24-beta`
+**Base documental histórica:** GOV.1.3 R4 — 2026-08-17
+**Revisión transversal:** GOV.1.8 — 2026-08-18
 **Clasificación:** Técnica / Calidad
 
 La estrategia combina pruebas automatizadas, CI, casos sintéticos/anonimizados y validación manual cuando una propiedad no puede demostrarse suficientemente con código.
@@ -43,7 +44,11 @@ GOV.1.5 R3 añadió **10 regresiones de cierre** sobre terceros, despliegue, pri
 
 GOV.1.6 añadió **10 regresiones específicas** sobre `SECURITY.md`, issue forms, template de Pull Request, workflow de auditoría, permisos mínimos, documentación y continuidad de controles. Su cierre local se valida con **522 pruebas en `OK`** antes de aplicar GOV.1.7.
 
-GOV.1.7 añade **8 regresiones específicas** sobre `LICENSE`, avisos de terceros, decisión de distribución, proceso de release y transición del roadmap a GOV.1.8. La suite de aceptación acumulada es de **530 pruebas**.
+GOV.1.7 añadió **8 regresiones específicas** sobre `LICENSE`, avisos de terceros, decisión de distribución, proceso de release y transición del roadmap a GOV.1.8. Después del hotfix de saltos de línea, la suite integrada quedó en **530 pruebas en `OK`** y la regresión de licencia rechaza secuencias `\n` literales.
+
+GOV.1.8 añade **10 regresiones específicas de cierre**. La suite candidata pasa a **540 pruebas**. Estas regresiones verifican `0.0.24-beta`, cierre completo GOV.1, reanudación UX.4.6e, release/tag previsto, tres checks de GitHub, soporte de seguridad, gates restantes y separación entre versión canónica actual y versiones base de auditorías históricas.
+
+A partir de GOV.1.8, las regresiones históricas de GOV.1.3, GOV.1.5 y GOV.1.7 **no obligan a reescribir sus documentos cada vez que cambia `VERSION`**. Conservan `0.0.23-beta` como versión base de la revisión que originó esos contratos; la coherencia de la versión canónica actual se valida en GOV.1.2/GOV.1.8.
 
 ## 2. Comandos obligatorios
 
@@ -87,6 +92,7 @@ python -m pip check
 - `tests/test_gov15_cierre_seguridad_privacidad.py`
 - `tests/test_gov16_controles_github.py`
 - `tests/test_gov17_licencia.py`
+- `tests/test_gov18_cierre_gobierno.py`
 - `tests/test_identidad_interfaz.py`
 - `tests/test_indemnizacion_vejez.py`
 - `tests/test_linea_tiempo.py`

@@ -1,7 +1,7 @@
 # Auditoría de GitHub y controles de repositorio
 
-**Estado:** Vigente — GOV.1.6
-**Versión de aplicación revisada:** `0.0.23-beta`
+**Estado:** Vigente — GOV.1.6 cerrado / revalidado en GOV.1.8
+**Versión de aplicación revisada:** `0.0.24-beta`
 **Fecha:** 2026-08-18
 **Clasificación:** Gobierno / GitHub / CI / Auditoría
 
@@ -30,7 +30,13 @@
 - eliminación y force push bloqueados;
 - bypass administrativo solo mediante Pull Request para recuperación excepcional.
 
-Después de la primera ejecución exitosa de **Auditoría de gobernanza**, ese check debe añadirse al ruleset sin retirar los checks Python.
+El cierre GOV.1.8 confirma el conjunto operativo esperado de checks requeridos:
+
+- `Python 3.13`;
+- `Python 3.14`;
+- `Auditoría de gobernanza`.
+
+La promoción del tercer check fue realizada durante el cierre GOV.1.6/GOV.1.7 y revalidada mediante los PR #15 y #16, ambos con ejecución exitosa del workflow.
 
 ## 3. Tags
 
@@ -63,6 +69,22 @@ La disponibilidad de code scanning, secret scanning u otras funciones depende de
 
 Antes de una beta pública y cuando cambie la configuración, revisar rulesets, métodos de merge, permisos de Actions, checks requeridos, Dependabot, visibilidad, opciones de seguridad, CODEOWNERS y canal de vulnerabilidades.
 
-## 9. Límite de afirmación
+## 9. Evidencia de cierre GOV.1
+
+Evidencia remota revisada antes de preparar GOV.1.8:
+
+- repositorio privado;
+- `main` como única rama remota persistente después de limpieza;
+- `Squash and merge` habilitado;
+- merge commit, rebase merge y auto-merge deshabilitados;
+- actualización de rama permitida;
+- PR #15 fusionado con `Python 3.13`, `Python 3.14` y `Auditoría de gobernanza` en `success`;
+- PR #16 fusionado con los mismos tres checks en `success`;
+- commits squash de ambos PR verificados por GitHub;
+- cero Pull Requests abiertos al inicio de GOV.1.8.
+
+Los settings internos del ruleset que no expone el conector se consideran evidencia manual del mantenedor y deben revisarse nuevamente antes de una beta pública.
+
+## 10. Límite de afirmación
 
 Los archivos versionados no pueden imponer por sí solos settings alojados en GitHub. Los cambios de ruleset/settings requieren verificación en GitHub antes de declarar el hito cerrado.

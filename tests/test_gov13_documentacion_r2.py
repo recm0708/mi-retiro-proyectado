@@ -5,6 +5,7 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
+BASE_VERSION = "0.0.23-beta"
 R2_DOCS = [
     "ARQUITECTURA.md",
     "MODELO_DE_DATOS.md",
@@ -17,14 +18,11 @@ R2_DOCS = [
 
 
 class TestGov13DocumentacionR2(unittest.TestCase):
-    def setUp(self):
-        self.version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
-
-    def test_r2_documentos_declaran_estado_y_version(self):
+    def test_r2_documentos_declaran_estado_y_version_base(self):
         for nombre in R2_DOCS:
             with self.subTest(nombre=nombre):
                 texto = (DOCS / nombre).read_text(encoding="utf-8")
-                self.assertIn(self.version, texto)
+                self.assertIn(BASE_VERSION, texto)
                 self.assertIn("GOV.1.3 R2", texto)
                 self.assertIn("**Estado:**", texto)
 
@@ -122,17 +120,9 @@ class TestGov13DocumentacionR2(unittest.TestCase):
             / "ESPECIFICACION_FUNCIONAL_PRE_GOV1_3_R2.md"
         ).read_text(encoding="utf-8")
 
-        ids_actuales = re.findall(
-            r"\*\*RF-(\d{3})\.\*\*",
-            texto,
-        )
-        ids_historicos = re.findall(
-            r"\*\*RF-(\d{3})\.\*\*",
-            historico,
-        )
+        ids_actuales = re.findall(r"\*\*RF-(\d{3})\.\*\*", texto)
+        ids_historicos = re.findall(r"\*\*RF-(\d{3})\.\*\*", historico)
 
-        # R2 preserva el registro RF exactamente como existía antes de la
-        # reorganización, incluidas repeticiones históricas preexistentes.
         self.assertEqual(ids_historicos, ids_actuales)
 
         for esperado in ("001", "318", "322", "336"):
