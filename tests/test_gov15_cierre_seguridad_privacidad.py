@@ -15,7 +15,7 @@ DOCS = ROOT / "docs"
 
 class TestGov15CierreSeguridadPrivacidad(unittest.TestCase):
     def setUp(self):
-        self.version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
+        self.version_base = "0.0.23-beta"
 
     def test_evaluacion_terceros_declara_escenario_local_y_no_internet_ready(self):
         texto = (DOCS / "EVALUACION_TERCEROS_DESPLIEGUE.md").read_text(
@@ -43,7 +43,7 @@ class TestGov15CierreSeguridadPrivacidad(unittest.TestCase):
         ):
             with self.subTest(nombre=nombre):
                 texto = (DOCS / nombre).read_text(encoding="utf-8")
-                self.assertIn(self.version, texto)
+                self.assertIn(self.version_base, texto)
                 self.assertIn("GOV.1.5", texto)
 
     def test_roadmap_conserva_cierre_gov15_sin_congelar_estado_futuro(self):

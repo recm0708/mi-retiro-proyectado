@@ -11,11 +11,11 @@ DOC = ROOT / "docs" / "MODELO_AMENAZAS.md"
 class TestGov15ModeloAmenazasR1(unittest.TestCase):
     def setUp(self):
         self.texto = DOC.read_text(encoding="utf-8")
-        self.version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
+        self.version_base = "0.0.23-beta"
 
     def test_documento_existe_declara_estado_version_y_limite(self):
         self.assertTrue(DOC.is_file())
-        self.assertIn(self.version, self.texto)
+        self.assertIn(self.version_base, self.texto)
         self.assertIn("GOV.1.5 R1", self.texto)
         self.assertIn("No constituye auditoría de penetración", self.texto)
         self.assertIn("garantía de riesgo cero", self.texto)

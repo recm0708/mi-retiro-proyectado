@@ -12,7 +12,7 @@ INCIDENTES = DOCS / "PROCEDIMIENTO_INCIDENTES_SEGURIDAD.md"
 
 class TestGov15ProcedimientosR2(unittest.TestCase):
     def setUp(self):
-        self.version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
+        self.version_base = "0.0.23-beta"
         self.derechos = DERECHOS.read_text(encoding="utf-8")
         self.incidentes = INCIDENTES.read_text(encoding="utf-8")
 
@@ -23,7 +23,7 @@ class TestGov15ProcedimientosR2(unittest.TestCase):
         ):
             with self.subTest(path=path.name):
                 self.assertTrue(path.is_file())
-                self.assertIn(self.version, texto)
+                self.assertIn(self.version_base, texto)
                 self.assertIn("GOV.1.5 R2", texto)
                 self.assertIn("Revisión jurídica externa", texto)
 

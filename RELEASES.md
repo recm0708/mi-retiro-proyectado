@@ -59,10 +59,10 @@ Alcance del hito:
 - carga centralizada de versión en Python;
 - CODEOWNERS;
 - registro histórico de releases/estados;
-- regresiones para impedir divergencias entre archivo canónico, FastAPI y footer.
-- validación final del hito con compilación Python, JavaScript válido, `git diff --check` limpio y **403 pruebas automatizadas en OK**;
+- regresiones para impedir divergencias entre archivo canónico, FastAPI y footer;
+- validación final del hito con compilación Python, JavaScript válido, `git diff --check` limpio y **403 pruebas automatizadas en OK**.
 
-El tag `v0.0.22-beta` se crea únicamente después de validar y confirmar el commit de cierre de GOV.1.2.
+El tag formal asociado es `v0.0.22-beta`.
 
 ### `0.0.23-beta` — 2026-08-17
 
@@ -91,7 +91,42 @@ Tag formal asociado:
 v0.0.23-beta
 ```
 
-El tag se publica únicamente sobre el commit de cierre después de confirmar CI remota verde, conforme a `docs/PROCESO_RELEASE.md`.
+### `0.0.24-beta` — 2026-08-18
+
+Tercera versión formal bajo `VERSIONING.md` y **cierre integral del programa GOV.1 — Auditoría, Gobierno y Trazabilidad Pre-Beta**.
+
+Alcance acumulado desde `0.0.23-beta`:
+
+- firma SSH obligatoria de commits y tags nuevos;
+- 23/23 tags históricos/formales auditados y rulesets de integridad;
+- GitHub `main` protegido mediante PR, firmas, historial lineal y checks requeridos;
+- actualización controlada a `pypdf 6.15.0`;
+- GOV.1.4: Developer Diagnostics local, estructurado y sin telemetría remota;
+- GOV.1.5: modelo de amenazas, derechos del titular, incidentes, terceros, TLS y gates pre-publicación;
+- GOV.1.6: `SECURITY.md`, templates GitHub y workflow `Auditoría de gobernanza`;
+- GOV.1.7: licencia propietaria pre-beta, avisos de terceros y estrategia de distribución;
+- hotfix de formato de los documentos de licencia con regresión reforzada;
+- GOV.1.8: auditoría transversal, cierre documental, versión formal y decisión de reanudar UX.4.6e.
+
+Validación del candidato:
+
+- línea base previa: **530 pruebas en `OK`**;
+- GOV.1.8 añade **10 regresiones específicas**;
+- objetivo de cierre: **540 pruebas en `OK`**;
+- compilación Python correcta;
+- sintaxis JavaScript correcta;
+- `git diff --check` limpio;
+- checks remotos `Python 3.13`, `Python 3.14` y `Auditoría de gobernanza` requeridos para el PR de cierre.
+
+Tag formal asociado:
+
+```text
+v0.0.24-beta
+```
+
+El tag se crea **después** de integrar el PR de cierre, sincronizar `main`, repetir la validación y confirmar CI remota verde. Debe ser anotado y firmado conforme a `docs/PROCESO_RELEASE.md`.
+
+`0.0.24-beta` no es una beta pública. El cierre GOV.1 habilita la reanudación de UX.4.6e.
 
 ## 5. Migración criptográfica de tags — materializada
 
@@ -107,7 +142,7 @@ Resultado de auditoría Git:
 - `v0.0.22-beta`: `31accfc9a6014367179c97cfe54c5a223be8988f` → `bda764edb84ccaeb610a629fca1283bbd97e69a4`, conservando `1222de61a6d2ca48fb8731fe4755f5b7eeef38f5`;
 - `v0.0.23-beta`: `609edf4bfed33c64770c88fab401002cd90f8e66` → `06b9260dadbcb2f0a7711841e1fad228e1badee8`, conservando `07278f7a193ce964612d9697da57350691bf62c0`.
 
-La materialización criptográfica está completada. Los rulesets y demás controles GitHub se cierran en el siguiente subbloque.
+La materialización criptográfica está completada. Desde entonces los tags publicados son inmutables.
 
 ## 6. Próxima línea pública prevista
 
@@ -117,4 +152,4 @@ La primera beta pública objetivo mantiene la familia:
 0.1.0-beta.1
 ```
 
-Su publicación depende de los criterios pre-beta documentados; no se deriva automáticamente por terminar GOV.1.
+Su publicación **no se deriva automáticamente por terminar GOV.1**. Depende del alcance funcional de UX.4.6e–g, los gates pre-publicación documentados, la revisión jurídica externa cuando corresponda, accesibilidad y validación final de la beta.

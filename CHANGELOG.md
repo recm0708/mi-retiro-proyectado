@@ -6,6 +6,22 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ## [Unreleased]
 
+Sin cambios registrados después del candidato de cierre GOV.1.
+
+## [0.0.24-beta] — 2026-08-18
+
+### GOV.1.8 — Auditoría final y cierre pre-beta de gobierno
+
+- ejecutada auditoría transversal de gobierno, seguridad, privacidad, licencia, CI, Git/GitHub y documentación;
+- cerrados formalmente GOV.1.1 a GOV.1.8;
+- promovido `0.0.24-beta` como versión formal de cierre de GOV.1;
+- reanudado UX.4.6e como siguiente bloque activo;
+- añadidas 10 regresiones específicas de cierre GOV.1;
+- desacopladas las regresiones históricas GOV.1.3/GOV.1.5/GOV.1.7 de la versión canónica futura, preservando `0.0.23-beta` como versión base de aquellas revisiones;
+- documentado el tag firmado `v0.0.24-beta`, a crear únicamente después de merge y CI remota verde;
+- se mantiene `0.1.0-beta.1` como futura primera beta pública, no como consecuencia automática del cierre de GOV.1;
+- permanecen como gates pre-publicación la revisión jurídica externa, cualquier hardening de despliegue remoto aplicable, la decisión final sobre Bootstrap local/tercero, la auditoría ampliada de accesibilidad y el alcance funcional de UX.4.6e–g.
+
 ### GOV.1.7 — Licencia y derechos de distribución
 
 - evaluadas alternativas permisivas, copyleft y propietaria para la etapa pre-beta;
@@ -15,7 +31,8 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 - añadido `docs/LICENCIA_Y_DISTRIBUCION.md` con alcance, compatibilidad y gates de distribución;
 - actualizado el proceso de release para exigir inventario real y avisos upstream cuando un artefacto incorpore dependencias;
 - añadidas 8 regresiones específicas de licencia/distribución;
-- `VERSION` permanece en `0.0.23-beta`.
+- corregido posteriormente el formato de `LICENSE`, `THIRD_PARTY_NOTICES.md` y `docs/LICENCIA_Y_DISTRIBUCION.md` para usar saltos de línea reales, con regresión reforzada;
+- durante GOV.1.7 `VERSION` permaneció en `0.0.23-beta`.
 
 ### GOV.1.6 — Controles GitHub y auditoría automática
 
