@@ -101,7 +101,7 @@ GOV.1.4 y GOV.1.5 están cerrados internamente. GOV.1.5 incorpora threat model, 
 
 - revisión jurídica externa antes de beta pública;
 - hardening específico si se decide un despliegue remoto;
-- controles GitHub/documentación adicionales de GOV.1.6;
+- controles GitHub/documentación de GOV.1.6 completados; la configuración alojada exclusivamente en GitHub requiere verificación periódica;
 - licencia de distribución en GOV.1.7;
 - auditoría final GOV.1.8;
 - declaración de aptitud para despliegue público.

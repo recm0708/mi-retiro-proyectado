@@ -2,7 +2,7 @@
 
 **Proyecto:** Mi Retiro Proyectado
 **Estado:** vigente desde GOV.1.2
-**Fecha:** 2026-08-17
+**Fecha:** 2026-08-18
 
 ## 1. Propósito
 
@@ -97,6 +97,8 @@ git log --show-signature -1
 
 La CI remota debe permanecer en verde.
 
+GOV.1.6 añade `.github/workflows/auditoria-gobernanza.yml`. El job **Auditoría de gobernanza** usa permisos de solo lectura y no reemplaza los checks funcionales `Python 3.13` y `Python 3.14`. Después de su primera ejecución exitosa debe añadirse al ruleset de `main` como check requerido, sin retirar los checks existentes.
+
 Desde el 2026-08-17 la rama predeterminada está protegida mediante un ruleset activo que exige Pull Request, commits verificados, historial lineal, resolución de conversaciones, checks `Python 3.13` y `Python 3.14`, rama actualizada antes de integrar y bloqueo de eliminación y force push.
 
 El rol `Repository admin` dispone únicamente de bypass mediante Pull Request para recuperación administrativa excepcional.
@@ -137,9 +139,11 @@ La ausencia temporal de `LICENSE` es deliberada mientras se revisan alcance de d
 
 ## 10. Incidentes y vulnerabilidades
 
-La política pública de reporte se formalizará en `SECURITY.md` durante GOV.1.5/GOV.1.6. Hasta entonces no se deben publicar credenciales, datos personales reales o detalles explotables en ejemplos de documentación.
+`SECURITY.md` es la política vigente para reportar vulnerabilidades. No deben abrirse como issues públicos vulnerabilidades con detalles explotables, credenciales, datos personales o evidencia sensible.
 
 El repositorio mantiene Dependency graph, Dependabot alerts y Dependabot security updates activos. Dependabot no sustituye revisión humana, pruebas de regresión ni la decisión explícita del mantenedor.
+
+Las plantillas `.github/ISSUE_TEMPLATE/` separan errores ordinarios y solicitudes de mejora; `.github/pull_request_template.md` estandariza el contexto mínimo de integración. `docs/AUDITORIA_GITHUB.md` registra los controles versionados y los settings que requieren verificación periódica en GitHub.
 
 ## 11. Cambios a este documento
 

@@ -6,6 +6,17 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ## [Unreleased]
 
+### GOV.1.6 — Controles GitHub y auditoría automática
+
+- añadidas plantillas estructuradas para reportes de errores y solicitudes de mejora;
+- añadido template común de Pull Request con checklist de pruebas, documentación, privacidad y alcance;
+- añadido `SECURITY.md` con canal privado de reporte y divulgación coordinada;
+- añadido `docs/AUDITORIA_GITHUB.md` con inventario de controles y revisión periódica;
+- añadido workflow `Auditoría de gobernanza` con permisos de solo lectura y acciones oficiales `@v7`;
+- añadidas 10 regresiones específicas de gobierno/repositorio;
+- documentado el gate para promover el nuevo check a requerido después de su primera ejecución exitosa;
+- `VERSION` permanece en `0.0.23-beta`.
+
 ### GOV.1.5 — Seguridad, privacidad y transparencia
 
 - añadido modelo de amenazas con activos, fronteras de confianza, matriz de riesgos y disparadores de revisión;

@@ -9,9 +9,10 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 - **Versión formal vigente:** `0.0.23-beta`
 - **Etapa:** desarrollo interno pre-beta
 - **Programa activo:** GOV.1 — Auditoría, Gobierno y Trazabilidad Pre-Beta
-- **Bloque activo:** GOV.1.6 — Controles GitHub y auditoría automática
+- **Bloque activo:** GOV.1.7 — Licencia
 - **GOV.1.4:** Observabilidad y Developer Diagnostics cerrado
 - **GOV.1.5:** Seguridad, privacidad y transparencia cerrado internamente
+- **GOV.1.6:** Controles GitHub y auditoría automática cerrado
 - **Primera beta pública objetivo:** familia `0.1.0-beta.1`
 
 La versión se obtiene exclusivamente del archivo [`VERSION`](VERSION). La política completa se documenta en [`VERSIONING.md`](VERSIONING.md).
@@ -70,6 +71,8 @@ Documentos principales:
 - [`docs/PROCEDIMIENTO_DERECHOS_TITULAR.md`](docs/PROCEDIMIENTO_DERECHOS_TITULAR.md) — ejercicio de derechos;
 - [`docs/PROCEDIMIENTO_INCIDENTES_SEGURIDAD.md`](docs/PROCEDIMIENTO_INCIDENTES_SEGURIDAD.md) — respuesta a incidentes;
 - [`docs/EVALUACION_TERCEROS_DESPLIEGUE.md`](docs/EVALUACION_TERCEROS_DESPLIEGUE.md) — terceros, TLS y gates de despliegue;
+- [`SECURITY.md`](SECURITY.md) — reporte responsable de vulnerabilidades;
+- [`docs/AUDITORIA_GITHUB.md`](docs/AUDITORIA_GITHUB.md) — controles GitHub y auditoría automática;
 - [`docs/ROADMAP.md`](docs/ROADMAP.md) — estado actual y próximos hitos;
 - [`docs/DECISIONES.md`](docs/DECISIONES.md) — decisiones ADR;
 - [`docs/REGISTRO_CAMBIOS_HISTORICO.md`](docs/REGISTRO_CAMBIOS_HISTORICO.md) — mapa histórico de evolución.
@@ -92,7 +95,7 @@ v0.0.22-beta
 v0.0.23-beta
 ```
 
-GOV.1.4 y GOV.1.5 se desarrollan sobre la misma versión formal porque no modifican los motores previsionales ni introducen una nueva release funcional.
+GOV.1.4, GOV.1.5 y GOV.1.6 se desarrollan sobre la misma versión formal porque no modifican los motores previsionales ni introducen una nueva release funcional.
 
 Consultar:
 

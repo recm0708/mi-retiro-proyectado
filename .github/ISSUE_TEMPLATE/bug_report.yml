@@ -1,0 +1,58 @@
+name: Reporte de error
+description: Reporta un comportamiento reproducible de Mi Retiro Proyectado.
+title: "[BUG] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        No incluyas cédulas, NSS, PDFs personales, historiales salariales reales,
+        credenciales ni otros datos sensibles. Las vulnerabilidades deben seguir SECURITY.md.
+  - type: input
+    id: version
+    attributes:
+      label: Versión
+      placeholder: "0.0.23-beta"
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Área
+      options:
+        - Interfaz / accesibilidad
+        - Importación de PDF
+        - Cuotas / historial salarial
+        - Motores / resultados
+        - Documentación
+        - Instalación / desarrollo
+        - Otro
+    validations:
+      required: true
+  - type: textarea
+    id: pasos
+    attributes:
+      label: Pasos para reproducir
+      description: Usa datos sintéticos o anonimizados.
+    validations:
+      required: true
+  - type: textarea
+    id: esperado
+    attributes:
+      label: Resultado esperado
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Resultado observado
+    validations:
+      required: true
+  - type: checkboxes
+    id: privacidad
+    attributes:
+      label: Verificación de privacidad
+      options:
+        - label: Confirmo que no he incluido datos personales reales ni secretos.
+          required: true
+        - label: Confirmo que este reporte no contiene una vulnerabilidad que deba tratarse en privado.
+          required: true

@@ -2,7 +2,7 @@
 
 **Estado:** vigente
 **Versión de aplicación revisada:** `0.0.23-beta`
-**Última actualización transversal:** GOV.1.4 — 2026-08-17
+**Última actualización transversal:** GOV.1.6 — 2026-08-18
 
 Este archivo es el punto de entrada para la documentación técnica, funcional, normativa, de privacidad, validación y auditoría de Mi Retiro Proyectado.
 
@@ -22,6 +22,7 @@ Este archivo es el punto de entrada para la documentación técnica, funcional, 
 - [`../CONTRIBUTING.md`](../CONTRIBUTING.md) — flujo de contribución.
 - [`MIGRACION_FIRMAS_GIT_2026-08-17.md`](MIGRACION_FIRMAS_GIT_2026-08-17.md) — firma SSH y migración histórica controlada.
 - [`../.github/allowed_signers`](../.github/allowed_signers) — claves públicas autorizadas.
+- [`AUDITORIA_GITHUB.md`](AUDITORIA_GITHUB.md) — controles GitHub y auditoría automática.
 
 ## 3. Arquitectura
 
@@ -65,6 +66,7 @@ Este archivo es el punto de entrada para la documentación técnica, funcional, 
 - [`TERMINOS_USO_PRIVACIDAD.md`](TERMINOS_USO_PRIVACIDAD.md) — términos y tratamiento de datos.
 - [`CUMPLIMIENTO_LEY_81.md`](CUMPLIMIENTO_LEY_81.md) — matriz interna de alineación.
 - [`OBSERVABILIDAD_LOGS.md`](OBSERVABILIDAD_LOGS.md) — minimización y manejo local de logs diagnósticos.
+- [`../SECURITY.md`](../SECURITY.md) — política y canal de reporte responsable de vulnerabilidades.
 
 GOV.1.3 R3 consolidó originalmente el bloque normativo, de seguridad y privacidad; GOV.1.4 actualiza únicamente el contrato de observabilidad.
 
@@ -83,8 +85,9 @@ GOV.1.5 completa los procedimientos internos; la revisión jurídica externa y c
 
 - [`VALIDACION.md`](VALIDACION.md) — estrategia y evidencias.
 - [`../tests/casos_validacion/README.md`](../tests/casos_validacion/README.md) — reglas de casos sintéticos/anonimizados.
-- `.github/workflows/ci.yml` — CI.
-- `.github/workflows/verificar-tags.yml` — verificación criptográfica de tags.
+- `../.github/workflows/ci.yml` — CI funcional.
+- `../.github/workflows/auditoria-gobernanza.yml` — auditoría automática de gobierno.
+- `../.github/workflows/verificar-tags.yml` — verificación criptográfica de tags.
 - `.github/dependabot.yml` — mantenimiento de dependencias.
 
 ## 11. Desarrollo y contribución

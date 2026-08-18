@@ -1,0 +1,49 @@
+name: Solicitud de mejora
+description: Propón una mejora funcional, técnica, documental o de UX.
+title: "[MEJORA] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Describe la necesidad y el resultado deseado. No adjuntes información personal real.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Área
+      options:
+        - UX / accesibilidad
+        - Cálculo previsional
+        - Importación / datos
+        - Seguridad / privacidad
+        - Documentación / gobierno
+        - Desarrollo / mantenimiento
+        - Otro
+    validations:
+      required: true
+  - type: textarea
+    id: problema
+    attributes:
+      label: Problema o necesidad
+    validations:
+      required: true
+  - type: textarea
+    id: propuesta
+    attributes:
+      label: Propuesta
+      description: No conviertas supuestos en requisitos normativos.
+    validations:
+      required: true
+  - type: textarea
+    id: impacto
+    attributes:
+      label: Impacto y riesgos
+      description: Señala normativa, privacidad, seguridad, accesibilidad, datos o compatibilidad.
+  - type: checkboxes
+    id: control
+    attributes:
+      label: Confirmaciones
+      options:
+        - label: He evitado incluir datos personales reales o secretos.
+          required: true
+        - label: Entiendo que una propuesta normativa necesita una fuente oficial verificable.
+          required: true

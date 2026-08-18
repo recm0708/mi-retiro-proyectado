@@ -90,7 +90,7 @@ No se debe interpretar el número de RF preservados como igual al número de req
 
 - Los commits y tags nuevos del mantenedor están sujetos a la política de firma SSH y los tags publicados son inmutables bajo ruleset.
 - `LICENSE` se mantiene deliberadamente pendiente hasta GOV.1.7.
-- La política de divulgación de vulnerabilidades se completará en GOV.1.6/GOV.1.5 según corresponda.
+- `SECURITY.md` define el canal y la política de divulgación responsable; la disponibilidad de funciones avanzadas de GitHub depende del plan/visibilidad del repositorio.
 - No existe aún una beta pública declarada.
 
 ## 10. Cierre de una limitación
