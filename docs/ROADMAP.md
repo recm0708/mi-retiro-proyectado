@@ -2,7 +2,7 @@
 
 **Estado:** vigente
 **Versión de aplicación:** `0.0.23-beta`
-**Fecha de revisión:** 2026-08-17
+**Fecha de revisión:** 2026-08-18
 
 Este roadmap describe **estado actual y trabajo futuro**. La evolución detallada ya completada se conserva en `RELEASES.md`, `CHANGELOG.md` y `docs/historico/`.
 
@@ -66,19 +66,21 @@ Este roadmap describe **estado actual y trabajo futuro**. La evolución detallad
   - [x] criterios TLS/despliegue;
   - [x] gate y paquete documental para revisión jurídica externa previa a publicación.
 
-- [ ] **GOV.1.6 — Controles GitHub y auditoría automática**
-  - plantillas de issues/PR;
-  - `SECURITY.md`;
-  - controles de documentación;
-  - workflows adicionales cuando aporten valor;
-  - políticas de rama/revisión compatibles con la etapa del proyecto.
+- [x] **GOV.1.6 — Controles GitHub y auditoría automática**
+  - [x] plantillas estructuradas de issues y Pull Request;
+  - [x] `SECURITY.md`;
+  - [x] controles documentales de repositorio;
+  - [x] workflow adicional `Auditoría de gobernanza`;
+  - [x] política de rama/revisión documentada y compatible con la etapa del proyecto;
+  - [x] gate para promover `Auditoría de gobernanza` a check requerido después de su primera ejecución exitosa.
 
-- [ ] **GOV.1.7 — Licencia**
-  - evaluar objetivo de distribución;
-  - compatibilidad de dependencias;
-  - derechos de terceros;
-  - seleccionar licencia;
-  - añadir `LICENSE` y avisos necesarios.
+- [x] **GOV.1.7 — Licencia**
+  - [x] objetivo de distribución evaluado;
+  - [x] compatibilidad de dependencias directas revisada;
+  - [x] derechos de terceros separados del código original;
+  - [x] seleccionada licencia propietaria pre-beta / todos los derechos reservados;
+  - [x] añadidos `LICENSE`, `THIRD_PARTY_NOTICES.md` y gates de distribución;
+  - [x] futura relicencia abierta reservada a una decisión expresa del titular.
 
 - [ ] **GOV.1.8 — Auditoría final y cierre pre-beta de gobierno**
   - revisión integral;
@@ -101,7 +103,8 @@ Este roadmap describe **estado actual y trabajo futuro**. La evolución detallad
 - gestión local de datos de simulación;
 - temas Claro, Oscuro, Automático y Alto contraste;
 - base responsive y accesible;
-- CI y Dependabot.
+- CI y Dependabot;
+- plantillas GitHub, política de seguridad y auditoría automática de gobernanza.
 
 ### Pendiente o incompleto
 
@@ -112,7 +115,7 @@ Este roadmap describe **estado actual y trabajo futuro**. La evolución detallad
 - Developer Diagnostics implementado y revisado internamente bajo GOV.1.5;
 - revisión jurídica externa previa a beta pública;
 - diseño/hardening específico si se decide un despliegue remoto;
-- licencia;
+- revisión jurídica externa de la estrategia de publicación/licencia antes de beta pública/comercial;
 - parámetros oficiales que la documentación identifica como no disponibles o no reconstruibles con fidelidad.
 
 ## 3. UX.4.6 pendiente después de GOV.1

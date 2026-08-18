@@ -6,6 +6,28 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ## [Unreleased]
 
+### GOV.1.7 — Licencia y derechos de distribución
+
+- evaluadas alternativas permisivas, copyleft y propietaria para la etapa pre-beta;
+- seleccionada una licencia propietaria pre-beta / todos los derechos reservados para materiales originales;
+- añadido `LICENSE` sin relicenciar componentes de terceros;
+- añadido `THIRD_PARTY_NOTICES.md` con dependencias directas y Bootstrap;
+- añadido `docs/LICENCIA_Y_DISTRIBUCION.md` con alcance, compatibilidad y gates de distribución;
+- actualizado el proceso de release para exigir inventario real y avisos upstream cuando un artefacto incorpore dependencias;
+- añadidas 8 regresiones específicas de licencia/distribución;
+- `VERSION` permanece en `0.0.23-beta`.
+
+### GOV.1.6 — Controles GitHub y auditoría automática
+
+- añadidas plantillas estructuradas para reportes de errores y solicitudes de mejora;
+- añadido template común de Pull Request con checklist de pruebas, documentación, privacidad y alcance;
+- añadido `SECURITY.md` con canal privado de reporte y divulgación coordinada;
+- añadido `docs/AUDITORIA_GITHUB.md` con inventario de controles y revisión periódica;
+- añadido workflow `Auditoría de gobernanza` con permisos de solo lectura y acciones oficiales `@v7`;
+- añadidas 10 regresiones específicas de gobierno/repositorio;
+- documentado el gate para promover el nuevo check a requerido después de su primera ejecución exitosa;
+- `VERSION` permanece en `0.0.23-beta`.
+
 ### GOV.1.5 — Seguridad, privacidad y transparencia
 
 - añadido modelo de amenazas con activos, fronteras de confianza, matriz de riesgos y disparadores de revisión;
