@@ -128,20 +128,24 @@ El tag fue creado **después** de integrar el PR #17, sincronizar `main`, repeti
 
 `0.0.24-beta` no es una beta pública. El cierre GOV.1 habilita la reanudación de UX.4.6e.
 
-### `0.0.25-beta` — candidato local 2026-08-19
+### `0.0.25-beta` — 2026-08-19
 
-Candidato de la cuarta versión formal bajo `VERSIONING.md`, preparado para cerrar UX.4.6e.
+Cuarta versión formal bajo `VERSIONING.md` y cierre de UX.4.6e.
 
-Estado actual:
+Evidencia de cierre:
 
 - `VERSION` y `APP_VERSION` apuntan a `0.0.25-beta`;
-- R8 está cerrada y R9.1 quedó validada localmente;
-- gate local alcanzado: **660 pruebas en `OK`**, con `git diff --check` limpio;
-- el PR, CI, squash, validación post-merge y tag pertenecen a R9.2;
-- **todavía no existe un tag formal `v0.0.25-beta` en este punto del proceso**;
+- R8 quedó cerrada funcionalmente y R9.1 alcanzó **660 pruebas en `OK`**, con `git diff --check` limpio;
+- PR #21: `feat(ux): cerrar UX.4.6e y preparar 0.0.25-beta`;
+- head validado: `a064bf745f4fb5e55e70f6ae3fd9b2bb80af8148`;
+- checks requeridos del PR: `Python 3.13`, `Python 3.14` y `Auditoría de gobernanza` en `success`;
+- squash integrado en `main`: `18e81e4ff58a1ad9622d366f7add10b7674f6e44`;
+- commit de squash verificado por GitHub;
+- árbol del head y del squash: `e0c4f314c5365a89178bd0fadb8a950286abb6ff`, confirmando identidad exacta del contenido validado e integrado;
+- tag formal asociado: `v0.0.25-beta`, creado sobre el commit final de cierre después de integrar la documentación de R9.2 y confirmar el gate;
 - no se declara una GitHub Release ni una beta pública de la aplicación.
 
-La sección se completará en R9.2 con el commit final de `main`, PR, checks remotos y objeto del tag firmado. La evidencia local de R9.1 ya está cerrada; no se inventan identificadores remotos antes de que existan.
+La primera beta pública continúa reservada a la familia `0.1.0-beta.1`.
 
 ## 5. Migración criptográfica de tags — materializada
 

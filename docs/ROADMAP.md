@@ -125,9 +125,9 @@ Este roadmap describe **estado actual y trabajo futuro**. La evolución detallad
 
 ## 3. UX.4.6 — trabajo reanudado después de GOV.1
 
-**Bloque en cierre:** UX.4.6e — R9.1, candidato local `0.0.25-beta`.
+**Bloque activo:** UX.4.6f — Paso 4 · Proyección salarial/laboral.
 
-- [ ] **UX.4.6e — Estandarización técnica, comentarios y coherencia de interfaz post-GOV.1**
+- [x] **UX.4.6e — Estandarización técnica, comentarios y coherencia de interfaz post-GOV.1**
   - [x] R1 — auditoría integral del código y definición del patrón documental por tecnología;
   - [x] R2 — normalización Python/tests y corrección de precisión detectada durante la auditoría; 550 pruebas en `OK`;
   - [x] R3 — normalización JavaScript y cambio definitivo de almacenamiento a `miRetiroProyectado.*`; 558 pruebas en `OK`;
@@ -137,9 +137,9 @@ Este roadmap describe **estado actual y trabajo futuro**. La evolución detallad
   - [x] R7 — regresiones y auditoría de coherencia código/interfaz/documentación; 598 pruebas en `OK`;
   - [x] checkpoint pre-R8 — identidad visual oficial, favicon, Social Preview, visibilidad pública y revalidación de seguridad GitHub; 624 pruebas en `OK`;
   - [x] R8 — prueba funcional manual y automática completa hasta Paso 3; reconsentimiento, procedencia editable y exclusión/reinclusión documental validados; 644 pruebas en `OK` antes del cierre documental;
-  - [ ] R9 — cierre técnico y publicación del hito;
+  - [x] R9 — cierre técnico y publicación del hito;
     - [x] R9.1 — candidato local `0.0.25-beta` validado con 660 pruebas en `OK`, documentación coherente y `git diff --check` limpio;
-    - [ ] R9.2 — commits firmados, PR, CI, squash, validación post-merge y tag firmado `v0.0.25-beta`.
+    - [x] R9.2 — PR #21 integrado por squash en `18e81e4f`, checks requeridos verdes, contenido post-merge idéntico al head validado y tag formal `v0.0.25-beta` asociado.
 - [ ] **UX.4.6f — Paso 4 · Proyección salarial/laboral**
 - [ ] **UX.4.6g — Paso 5 · Escenarios de retiro**
 - [ ] **UX.4.6h — Paso 6 · Resultados y exportación**

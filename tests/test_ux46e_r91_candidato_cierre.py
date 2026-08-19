@@ -19,17 +19,12 @@ class TestUx46eR91CandidatoCierre(unittest.TestCase):
         self.assertEqual("0.0.25-beta", version)
         self.assertEqual(version, APP_VERSION)
 
-    def test_readme_declara_candidato_validado_y_proximo_bloque_sin_beta_publica(self):
+    def test_readme_declara_cierre_y_siguiente_bloque_sin_beta_publica(self):
         texto = (ROOT / "README.md").read_text(encoding="utf-8")
-        self.assertIn("**Versión candidata de cierre:** `0.0.25-beta`", texto)
-        self.assertIn(
-            "R9.1 validada localmente con 660 pruebas en `OK`",
-            texto,
-        )
-        self.assertIn(
-            "R9.2 queda pendiente de commits firmados, PR, CI, squash",
-            texto,
-        )
+        self.assertIn("**Versión formal vigente:** `0.0.25-beta`", texto)
+        self.assertIn("**UX.4.6e:** cerrada en `0.0.25-beta`", texto)
+        self.assertIn("PR #21 integrado por squash", texto)
+        self.assertIn("**Bloque activo:** UX.4.6f", texto)
         self.assertIn("UX.4.6f — Paso 4 · Proyección salarial/laboral", texto)
         self.assertIn("0.1.0-beta.1", texto)
         indice = (DOCS / "INDICE.md").read_text(encoding="utf-8")
@@ -37,7 +32,8 @@ class TestUx46eR91CandidatoCierre(unittest.TestCase):
             "**Versión de aplicación revisada:** `0.0.25-beta`",
             indice,
         )
-        self.assertIn("UX.4.6e R9.1", indice)
+        self.assertIn("UX.4.6e R9.2", indice)
+        self.assertIn("cierre formal `0.0.25-beta`", indice)
 
     def test_security_soporta_nueva_linea_y_archiva_anterior(self):
         texto = (ROOT / "SECURITY.md").read_text(encoding="utf-8")
@@ -51,10 +47,11 @@ class TestUx46eR91CandidatoCierre(unittest.TestCase):
         self.assertIn("ADR-167", texto)
         self.assertIn("## [0.0.24-beta] — 2026-08-18", texto)
 
-    def test_roadmap_mantiene_r9_2_pendiente_y_paso4_sin_iniciar(self):
+    def test_roadmap_cierra_r9_y_habilita_paso4(self):
         texto = (DOCS / "ROADMAP.md").read_text(encoding="utf-8")
         self.assertIn("R9.1 — candidato local `0.0.25-beta`", texto)
-        self.assertIn("[ ] R9.2 — commits firmados, PR, CI, squash", texto)
+        self.assertIn("[x] R9.2 — PR #21 integrado por squash", texto)
+        self.assertIn("- [x] **UX.4.6e — Estandarización técnica", texto)
         self.assertIn("- [ ] **UX.4.6f — Paso 4", texto)
 
     def test_validacion_registra_gate_local_de_660_cumplido(self):
@@ -63,6 +60,8 @@ class TestUx46eR91CandidatoCierre(unittest.TestCase):
         self.assertIn("**652 pruebas en `OK`**", texto)
         self.assertIn("**8 regresiones específicas**", texto)
         self.assertIn("R9.1 alcanzó **660 pruebas en `OK`**", texto)
+        self.assertIn("Gate R9.2 — cierre formal UX.4.6e", texto)
+        self.assertIn("18e81e4ff58a1ad9622d366f7add10b7674f6e44", texto)
 
     def test_regresiones_historicas_no_congelan_version_0_0_24(self):
         rutas = (
@@ -81,19 +80,15 @@ class TestUx46eR91CandidatoCierre(unittest.TestCase):
             with self.subTest(ruta=ruta.name):
                 self.assertIsNone(patron.search(ruta.read_text(encoding="utf-8")))
 
-    def test_releases_registra_candidato_y_preserva_tag_0_0_24(self):
+    def test_releases_registra_version_formal_y_preserva_tag_0_0_24(self):
         releases = (ROOT / "RELEASES.md").read_text(encoding="utf-8")
         versioning = (ROOT / "VERSIONING.md").read_text(encoding="utf-8")
         self.assertIn("### `0.0.24-beta` — 2026-08-18", releases)
         self.assertIn("v0.0.24-beta", releases)
-        self.assertIn(
-            "### `0.0.25-beta` — candidato local 2026-08-19",
-            releases,
-        )
-        self.assertIn(
-            "todavía no existe un tag formal `v0.0.25-beta`",
-            releases,
-        )
+        self.assertIn("### `0.0.25-beta` — 2026-08-19", releases)
+        self.assertIn("PR #21", releases)
+        self.assertIn("18e81e4ff58a1ad9622d366f7add10b7674f6e44", releases)
+        self.assertIn("tag formal asociado: `v0.0.25-beta`", releases)
         self.assertIn("los tags publicados vuelven a ser inmutables", versioning)
 
 

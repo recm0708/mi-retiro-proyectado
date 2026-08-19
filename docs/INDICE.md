@@ -2,7 +2,7 @@
 
 **Estado:** vigente
 **Versión de aplicación revisada:** `0.0.25-beta`
-**Última actualización transversal:** UX.4.6e R9.1 — candidato local validado — 2026-08-19
+**Última actualización transversal:** UX.4.6e R9.2 — cierre formal `0.0.25-beta` — 2026-08-19
 
 Este archivo es el punto de entrada para la documentación técnica, funcional, normativa, de privacidad, validación y auditoría de Mi Retiro Proyectado.
 
