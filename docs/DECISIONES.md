@@ -4,9 +4,9 @@
 **Versión de aplicación revisada:** `0.0.23-beta`
 **Revisión documental:** GOV.1.3 R4 — 2026-08-17
 **Última actualización de gobierno:** Firma Git / ADR-159 — 2026-08-17
-**Última actualización técnica:** UX.4.6e R8 / ADR-166 — 2026-08-19
+**Última actualización técnica:** UX.4.6e R8 / ADR-167 — 2026-08-19
 **Clasificación:** Técnica / Gobierno / Auditoría
-**ADR indexadas:** 166 (`ADR-001` a `ADR-166`)
+**ADR indexadas:** 167 (`ADR-001` a `ADR-167`)
 
 Este registro conserva decisiones de arquitectura, modelado, UX, precisión, seguridad y aplicación normativa. Una ADR explica por qué el proyecto adoptó una decisión; no crea una norma jurídica.
 
@@ -118,7 +118,7 @@ R4 **no inventa un estado retroactivo** para esas decisiones. El índice las mar
 | ADR-085 | Privacidad por diseño y hardening de la frontera de simulación | Aceptada |
 | ADR-086 | Consentimiento con lectura completa y navegación dual del wizard (UX.4.6b R3) | No declarado explícitamente en el registro pre-R4 |
 | ADR-087 | El contenido público debe ser pertinente al propósito del producto | Aceptada |
-| ADR-088 | Los datos importados se bloquean por campo, no por paso | Aceptada, aplicada y validada en UX.4.6c |
+| ADR-088 | Los datos importados se bloquean por campo, no por paso | Sustituida parcialmente por ADR-167: se conserva la procedencia por campo, pero el bloqueo deja de ser obligatorio |
 | ADR-089 | El Paso 2 separa información acreditada y supuestos futuros | Aceptada, aplicada y validada en UX.4.6c |
 | ADR-090 | La apariencia usa iconografía reconocible sin activos externos | Aceptada, aplicada y validada en UX.4.6c |
 | ADR-091 | Los modales de importación son superficies globales del wizard | Aceptada, aplicada y validada en UX.4.6c R2 |
@@ -133,10 +133,10 @@ R4 **no inventa un estado retroactivo** para esas decisiones. El índice las mar
 | ADR-100 | Paso 3 conserva tres secciones internas y un resumen único | Aceptada para validación UX.4.6d |
 | ADR-101 | Ficha Digital no redefine las cuotas acreditadas del Paso 2 | Sustituida parcialmente por ADR-155 en UX.4.6d R23; se conserva como historial de la protección introducida en R2 |
 | ADR-102 | El detalle del año actual es opcional y debe explicar cuándo una importación queda inactiva | Aceptada para validación UX.4.6d R2 |
-| ADR-103 | Los meses detectados por Ficha Digital fijan la casilla de cuota en la captura principal | Aceptada para validación UX.4.6d R3 |
-| ADR-104 | Las tablas distinguen visualmente procedencia documental y captura manual | Aceptada para validación UX.4.6d R4 |
-| ADR-105 | Las casillas importadas deben conservar una marca visual inequívoca | Aceptada para validación UX.4.6d R4 |
-| ADR-106 | Estado seleccionado de casillas documentales independiente del pintado nativo | Aceptada para validación UX.4.6d R5 |
+| ADR-103 | Los meses detectados por Ficha Digital fijan la casilla de cuota en la captura principal | Sustituida parcialmente por ADR-167: un mes detectado inicia incluido, pero puede excluirse y reincluirse explícitamente |
+| ADR-104 | Las tablas distinguen visualmente procedencia documental y captura manual | Aceptada en su distinción de procedencia; el criterio de solo lectura queda sustituido por ADR-167 |
+| ADR-105 | Las casillas importadas deben conservar una marca visual inequívoca | Aceptada en la marca visual; el bloqueo permanente queda sustituido por ADR-167 |
+| ADR-106 | Estado seleccionado de casillas documentales independiente del pintado nativo | Sustituida parcialmente por ADR-167: la metadata conserva procedencia, pero la inclusión puede cambiar por decisión explícita |
 | ADR-107 | Borrado por paso con invalidación descendente | Aceptada para validación UX.4.6d R6. |
 | ADR-108 | Reinicio integral separado de preferencias y consentimiento | Aceptada para validación UX.4.6d R6. |
 | ADR-109 | Borrado local integral desde Privacidad | Aceptada para validación UX.4.6d R6. |
@@ -197,6 +197,7 @@ R4 **no inventa un estado retroactivo** para esas decisiones. El índice las mar
 | ADR-164 | La renumeración vigente no reescribe la historia UX anterior | Aceptada para UX.4.6e R6. |
 | ADR-165 | La auditoría transversal es un gate antes de la validación funcional manual | Aceptada para UX.4.6e R7. |
 | ADR-166 | El borrado integral invalida también residuos pre-beta y fuerza reconsentimiento | Aceptada para UX.4.6e R8. |
+| ADR-167 | Los datos documentales confirmados son editables sin perder la referencia original | Aceptada para cierre funcional UX.4.6e R8. |
 
 ## 4. Registro íntegro de ADR
 
@@ -1728,3 +1729,32 @@ mantenibilidad, no un rediseño visual.
 **Motivo:** la validación manual de R8 evidenció que un navegador podía conservar estado pre-beta o una combinación de recursos en caché suficiente para que el borrado nominal no provocara el reconsentimiento esperado. Un botón que declara eliminar la aceptación debe garantizar ese efecto incluso en instalaciones de prueba anteriores al namespace vigente.
 
 **Consecuencia:** ADR-161 continúa vigente: no existe compatibilidad, fallback ni migración desde claves pre-beta. La única excepción es su reconocimiento para borrado defensivo. No se usa `localStorage.clear()` ni `sessionStorage.clear()`, por lo que no se eliminan claves ajenas a la aplicación dentro del mismo origen. La versión material de privacidad permanece `2026-08-16.1` porque la finalidad, categorías de datos, destinatarios y conservación no cambian; se corrige el cumplimiento técnico de un control ya informado.
+
+## ADR-167 — Los datos documentales confirmados son editables sin perder la referencia original
+
+**Estado:** Aceptada para cierre funcional UX.4.6e R8.
+
+**Decisión:** una importación confirmada de Mi Retiro Seguro o Ficha Digital deja de convertir el dato detectado en un control permanentemente bloqueado. El Asegurado(a) puede ajustar, completar, excluir o reincluir información desde las superficies habilitadas. La aplicación conserva separadas la **fotografía original del documento** y la **copia de trabajo utilizada por la simulación**, actualiza en tiempo real la procedencia visible y vuelve a invalidar/reconciliar los resultados dependientes.
+
+Los estados de procedencia visibles son:
+
+- `Detectado`: valor procedente del documento y sin modificación activa;
+- `Editado por ti`: el documento aportó un valor y la copia de trabajo difiere;
+- `Completado manualmente`: el documento no aportó el dato y el usuario lo añadió;
+- `Excluido por ti`: un período detectado se conserva como referencia pero no alimenta la simulación;
+- `No detectado`: el dato continúa ausente.
+
+Para Ficha Digital, un mes detectado comienza incluido. Desmarcar su cuota constituye una **exclusión explícita** del período para la simulación: no aporta cuota, salario acreditado ni mes utilizado, aunque el valor original permanezca visible como referencia. Reintegrarlo restaura la procedencia `Detectado` cuando no existen otras modificaciones en ese período.
+
+**Motivo:** la validación funcional R8 mostró dos necesidades legítimas. Primero, un Asegurado(a) puede necesitar reproducir un corte anterior o corregir una detección sin eliminar la evidencia de qué decía el documento. Segundo, un campo que el documento no detectó puede completarse después de confirmar la importación y debe reflejar inmediatamente esa procedencia en todas las vistas. El bloqueo absoluto impedía ambos casos y confundía “fuente documental” con “valor inmutable”.
+
+**Consecuencia:** ADR-088, ADR-103, ADR-105 y ADR-106 quedan sustituidas parcialmente en sus criterios de bloqueo/inclusión inmutable; ADR-104 conserva la distinción visual de procedencia, pero no exige solo lectura. ADR-156 continúa vigente: una Ficha Digital **no reduce silenciosamente** una referencia superior; una reducción solo ocurre por una acción explícita del usuario y queda identificada como exclusión. La edición no modifica el archivo PDF ni afirma que el documento original contenía el valor ajustado.
+
+La aplicación mantiene como referencias de frontend, entre otras:
+
+- `referencia_mi_retiro_seguro_original`;
+- `ficha_digital_importada_original`;
+- `periodos_excluidos_importacion_ficha`;
+- mapas de `origen_campos_*`.
+
+Estas estructuras forman parte del estado temporal de la simulación, no de los modelos jurídicos de la CSS.

@@ -16,21 +16,36 @@ DOCS = ROOT / "docs"
 
 
 class TestUX46eAuditoriaCoherencia(unittest.TestCase):
-    """Protege el gate transversal previo a la validación funcional R8."""
+    """Protege el gate transversal y su evolución posterior sin reescribir R7."""
 
-    def test_roadmap_registra_cierre_r7_y_r8_en_validacion(self):
+    def test_roadmap_registra_cierre_r7_r8_y_estado_r9(self):
         texto = (DOCS / "ROADMAP.md").read_text(encoding="utf-8")
         self.assertIn("[x] R6 — documentación transversal", texto)
         self.assertIn("586 pruebas en `OK`", texto)
         self.assertIn("[x] R7 — regresiones y auditoría", texto)
         self.assertIn("598 pruebas en `OK`", texto)
-        self.assertIn("[ ] R8 — prueba funcional manual y automática", texto)
+        self.assertIn("[x] R8 — prueba funcional manual y automática", texto)
+        self.assertIn("644 pruebas en `OK`", texto)
+        self.assertIn("[ ] R9 — cierre técnico y publicación del hito;", texto)
+        self.assertIn("[x] R9.1 — candidato local `0.0.25-beta`", texto)
+        self.assertIn("[ ] R9.2 — commits firmados, PR, CI, squash", texto)
 
-    def test_readme_refleja_estado_actual_sin_adelantar_paso4(self):
+    def test_readme_refleja_r8_cerrada_y_r9_sin_adelantar_paso4(self):
         texto = (ROOT / "README.md").read_text(encoding="utf-8")
-        self.assertIn("UX.4.6e:** R7 cerrada con 598 pruebas", texto)
-        self.assertIn("R8 en validación funcional", texto)
+        self.assertIn("**UX.4.6e:** R8 cerrada;", texto)
+        self.assertIn(
+            "R9.1 validada localmente con 660 pruebas en `OK`",
+            texto,
+        )
+        self.assertIn(
+            "R9.2 queda pendiente de commits firmados, PR, CI, squash",
+            texto,
+        )
         self.assertIn("21 labels y 20/20 topics", texto)
+        self.assertIn(
+            "Próximo bloque habilitado después de R9:",
+            texto,
+        )
         self.assertNotIn("**Bloque activo:** UX.4.6e — Paso 4", texto)
 
     def test_auditoria_r7_existe_y_declara_linea_base_y_objetivo(self):

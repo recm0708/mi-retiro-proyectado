@@ -70,6 +70,10 @@
     rel="stylesheet"
     href="{{ url_for('static', path='/css/brand.css') }}"
   >
+  <link
+    rel="stylesheet"
+    href="{{ url_for('static', path='/css/procedencia-editable.css') }}"
+  >
 
   {% block head %}{% endblock %}
 </head>
@@ -268,6 +272,9 @@
   <script src="{{ url_for('static', path='/js/privacidad.js') }}"></script>
 
   {% block scripts %}{% endblock %}
+
+  <!-- La capa de procedencia editable se carga después de los módulos de cada vista. -->
+  <script src="{{ url_for('static', path='/js/procedencia_editable.js') }}"></script>
 </body>
 
 </html>

@@ -128,6 +128,21 @@ El tag fue creado **después** de integrar el PR #17, sincronizar `main`, repeti
 
 `0.0.24-beta` no es una beta pública. El cierre GOV.1 habilita la reanudación de UX.4.6e.
 
+### `0.0.25-beta` — candidato local 2026-08-19
+
+Candidato de la cuarta versión formal bajo `VERSIONING.md`, preparado para cerrar UX.4.6e.
+
+Estado actual:
+
+- `VERSION` y `APP_VERSION` apuntan a `0.0.25-beta`;
+- R8 está cerrada y R9.1 quedó validada localmente;
+- gate local alcanzado: **660 pruebas en `OK`**, con `git diff --check` limpio;
+- el PR, CI, squash, validación post-merge y tag pertenecen a R9.2;
+- **todavía no existe un tag formal `v0.0.25-beta` en este punto del proceso**;
+- no se declara una GitHub Release ni una beta pública de la aplicación.
+
+La sección se completará en R9.2 con el commit final de `main`, PR, checks remotos y objeto del tag firmado. La evidencia local de R9.1 ya está cerrada; no se inventan identificadores remotos antes de que existan.
+
 ## 5. Migración criptográfica de tags — materializada
 
 El 2026-08-17 se materializaron `v0.0.1-beta` a `v0.0.21-beta` como tags retrospectivos firmados y se reemitieron una sola vez `v0.0.22-beta` y `v0.0.23-beta`.

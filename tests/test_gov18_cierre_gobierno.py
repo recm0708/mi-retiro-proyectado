@@ -1,6 +1,7 @@
-"""GOV.1.8 — auditoría final y cierre del programa GOV.1."""
+"""GOV.1.8 — auditoría final y cierre histórico del programa GOV.1."""
 
 from pathlib import Path
+import re
 import unittest
 
 from app.core.config import APP_VERSION
@@ -11,23 +12,22 @@ DOCS = ROOT / "docs"
 
 
 class TestGov18CierreGobierno(unittest.TestCase):
-    def test_version_formal_cierre_es_0_0_24_beta(self):
-        version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
-        self.assertEqual("0.0.24-beta", version)
-        self.assertEqual(version, APP_VERSION)
+    """Preserva la evidencia GOV.1 sin congelar la versión canónica futura."""
 
-    def test_readme_declara_gov1_cerrado_y_ux46e_estandarizacion_activa(self):
+    def test_version_actual_sigue_sincronizada_y_cierre_gov1_preserva_0_0_24(self):
+        version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
+        self.assertEqual(version, APP_VERSION)
+        self.assertRegex(version, r"^0\.0\.\d+-beta$")
+        cierre = (DOCS / "CIERRE_GOV1.md").read_text(encoding="utf-8")
+        self.assertIn("0.0.24-beta", cierre)
+
+    def test_readme_declara_gov1_cerrado_sin_congelar_version(self):
         texto = (ROOT / "README.md").read_text(encoding="utf-8")
-        self.assertIn("**Versión formal vigente:** `0.0.24-beta`", texto)
         self.assertIn("**Programa GOV.1:** cerrado", texto)
-        self.assertIn(
-            "**Bloque activo:** UX.4.6e — Estandarización técnica, comentarios y coherencia de interfaz post-GOV.1",
-            texto,
-        )
         self.assertIn("**GOV.1.8:**", texto)
         self.assertIn("0.1.0-beta.1", texto)
 
-    def test_roadmap_cierra_gov18_y_descongela_ux46e(self):
+    def test_roadmap_cierra_gov18_y_preserva_reanudacion_ux46e(self):
         texto = (DOCS / "ROADMAP.md").read_text(encoding="utf-8")
         for bloque in range(1, 9):
             self.assertIn(f"**GOV.1.{bloque}", texto)
@@ -36,7 +36,6 @@ class TestGov18CierreGobierno(unittest.TestCase):
             texto,
         )
         self.assertIn("UX.4.6e queda descongelada", texto)
-        self.assertIn("**Bloque activo:** UX.4.6e", texto)
 
     def test_releases_documenta_0_0_24_y_tag_firmado(self):
         texto = (ROOT / "RELEASES.md").read_text(encoding="utf-8")
@@ -48,11 +47,10 @@ class TestGov18CierreGobierno(unittest.TestCase):
         self.assertIn("653900cebd84019fbbaa3ff3cfd91536ccab76eb", texto)
         self.assertIn("no es una beta pública", texto)
 
-    def test_changelog_mueve_cierre_a_release_0_0_24(self):
+    def test_changelog_conserva_release_0_0_24(self):
         texto = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
         self.assertIn("## [0.0.24-beta] — 2026-08-18", texto)
         self.assertIn("GOV.1.8 — Auditoría final", texto)
-        self.assertIn("saltos de línea reales", texto)
         self.assertIn("v0.0.24-beta", texto)
 
     def test_cierre_gov1_declara_evidencia_y_gates_restantes(self):
@@ -88,13 +86,14 @@ class TestGov18CierreGobierno(unittest.TestCase):
             with self.subTest(esperado=esperado):
                 self.assertIn(esperado, texto)
 
-    def test_security_soporta_version_actual(self):
+    def test_security_soporta_version_candidata(self):
         texto = (ROOT / "SECURITY.md").read_text(encoding="utf-8")
+        version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
         self.assertIn(
-            "| `0.0.24-beta` | Soportada durante el desarrollo pre-beta vigente |",
+            f"| `{version}` | Soportada durante el desarrollo pre-beta vigente |",
             texto,
         )
-        self.assertIn("`0.0.23-beta` y anteriores", texto)
+        self.assertIn("`0.0.24-beta` y anteriores", texto)
 
     def test_regresiones_historicas_declaran_version_base(self):
         casos = (

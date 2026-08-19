@@ -3,7 +3,7 @@
 **Estado:** Vigente
 **Versión base documental:** `0.0.23-beta`
 **Revisión documental base:** GOV.1.3 R2 — 2026-08-17
-**Actualización vigente:** UX.4.6e R8 — 2026-08-19
+**Actualización vigente:** UX.4.6e R8 — procedencia editable y control documental — 2026-08-19
 **Clasificación:** Técnica / Privacidad
 
 Este documento describe el ciclo de vida actual del estado local del asistente.
@@ -106,7 +106,7 @@ El resumen de cuotas se invalida/revalida antes de continuar.
 
 Cuando una Ficha Digital confirmada identifica **más** cuotas del año actual que la referencia vigente, la aplicación puede ampliar el total del Paso 2 y su referencia del detalle.
 
-Una Ficha con menos meses **no reduce automáticamente** una cifra superior ya acreditada. La discrepancia se comunica para revisión.
+Una Ficha con menos meses **no reduce automáticamente** una cifra superior ya acreditada. La discrepancia se comunica para revisión. Esta regla no impide una reducción posterior causada por una **exclusión explícita del usuario**: en ese caso la aplicación identifica el período como `Excluido por ti`, reconcilia los agregados y conserva el valor documental original como referencia.
 
 Esta regla sustituye cualquier descripción histórica que presentara el total del Paso 2 como inmutable frente a una Ficha Digital posterior.
 
@@ -117,7 +117,9 @@ Cuando el detalle mensual está habilitado:
 - la cantidad anual se deriva de las casillas acreditadas;
 - el salario anual acreditado suma únicamente los meses marcados;
 - salarios conocidos sin cuota permanecen disponibles para análisis reciente, pero no se convierten en salario histórico acreditado;
-- una cuota sin salario suficiente mantiene el análisis pendiente.
+- una cuota sin salario suficiente mantiene el análisis pendiente;
+- un período importado puede excluirse explícitamente de la simulación sin borrar su referencia documental;
+- reincluir un período restaura su participación y, si no existen otras modificaciones, su estado `Detectado`.
 
 ## 8. Restauración
 
@@ -125,10 +127,35 @@ Al recargar:
 
 - la aplicación restaura el estado serializable de la simulación;
 - una importación confirmada puede conservar procedencia, edición y nombre visible del archivo;
+- la fotografía original y la copia de trabajo confirmada pueden conservarse por separado para explicar ajustes posteriores;
+- las exclusiones explícitas de períodos se restauran con la simulación;
 - el `input[type=file]` nativo queda vacío;
 - no se restaura ni se almacena la ruta local del archivo;
 - si `paso_actual` ya no cumple prerrequisitos, se corrige al último paso accesible;
 - resúmenes derivados pueden recalcularse silenciosamente cuando los datos de origen continúan completos.
+
+
+## 8.1. Procedencia editable y referencias documentales
+
+Una importación confirmada no vuelve inmutable el dato para la simulación.
+
+El estado local puede conservar:
+
+- una fotografía original del resumen detectado;
+- una copia de trabajo que alimenta los campos confirmados;
+- mapas de procedencia por campo;
+- identificadores de campos editados;
+- períodos de Ficha Digital excluidos explícitamente.
+
+La fotografía original no se reescribe cuando el usuario cambia la copia de trabajo. Esto permite distinguir:
+
+- lo que decía el documento;
+- lo que el usuario completó o modificó;
+- lo que la simulación utiliza finalmente.
+
+Los estados visibles son `Detectado`, `Editado por ti`, `Completado manualmente`, `Excluido por ti` y `No detectado`.
+
+Un aviso de ajuste solo permanece visible mientras exista al menos una modificación, complemento o exclusión activa en el bloque correspondiente. Revertir todos los cambios de ese bloque oculta el aviso.
 
 ## 9. Ficha Digital y vigencia
 

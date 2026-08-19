@@ -1,9 +1,9 @@
 # Validación
 
 **Estado:** Vigente
-**Versión de aplicación revisada:** `0.0.24-beta`
+**Versión candidata revisada:** `0.0.25-beta`
 **Base documental histórica:** GOV.1.3 R4 — 2026-08-17
-**Revisión transversal:** identidad visual y repositorio público pre-R8 — 2026-08-19
+**Revisión transversal:** UX.4.6e R8 — validación funcional y procedencia editable — 2026-08-19
 **Clasificación:** Técnica / Calidad
 
 La estrategia combina pruebas automatizadas, CI, casos sintéticos/anonimizados y validación manual cuando una propiedad no puede demostrarse suficientemente con código.
@@ -68,7 +68,47 @@ UX.4.6e R7 cerró con **598 pruebas en `OK`**. Durante R8, la primera prueba man
 
 El checkpoint de identidad visual y publicación del repositorio previo a continuar R8 añadió **20 regresiones**: 10 para estructura/dimensiones de activos, favicon, navbar, temas y Social Preview; y 10 para coherencia pública de README, seguridad, soporte, versionado, identidad, auditoría y transparencia. La suite integrada fue ejecutada con **624 pruebas en `OK`**. `git diff --check` permaneció limpio y la validación visual confirmó el logo oficial en la navbar y el Social Preview. `VERSION` continúa en `0.0.24-beta`.
 
+
+UX.4.6e R8.1/R8.2 sustituyó el bloqueo obligatorio de datos importados por una procedencia editable con fotografía original preservada. La capa añadió y refinó **20 regresiones** sobre edición, exclusión, sincronización, avisos reactivos, iconografía, checkboxes y referencias documentales. Después de los hotfixes de `MutationObserver` y representación del gancho, la suite integrada alcanzó **644 pruebas en `OK`**.
+
+La validación manual del caso femenino comprobó:
+
+- Mi Retiro Seguro confirmado con 281 cuotas al corte previo;
+- Ficha Digital hasta junio con 282 cuotas totales, 6 cuotas en 2026 y B/.8,883.50;
+- exclusión explícita de junio con 281 cuotas totales, 5 cuotas en 2026 y B/.7,321.13 correspondientes a la suma real enero–mayo de la Ficha;
+- permanencia visible de B/.1,562.37 como referencia documental del mes excluido;
+- reinclusión de junio con retorno a 282/6 y B/.8,883.50;
+- actualización inmediata de `No detectado` a `Completado manualmente` al ingresar el apellido de casada;
+- sincronización del valor manual con la vista **Revisar importación**;
+- aviso de ajustes visible solo mientras existe un cambio activo en el bloque correspondiente;
+- iconografía `●`, `✎`, `⊘` y `!` coherente con la procedencia.
+
+El cierre documental de R8 añade **8 regresiones adicionales** sobre ADR-167 y coherencia funcional/documental. Partiendo de 644, el gate esperado para declarar R8 completamente cerrado es **652 pruebas en `OK`**. `VERSION` permanece en `0.0.24-beta`; la promoción de versión pertenece a R9.
+
 La revalidación manual del repositorio público del 2026-08-19 confirmó Dependency graph, Dependabot alerts/security updates, CodeQL Default setup, Secret Protection, Push protection y Private vulnerability reporting habilitados, con **0 alertas abiertas** en Code scanning, Secret scanning y Dependabot en ese momento. Esta evidencia no sustituye revisión periódica ni auditoría externa.
+
+
+## Gate R9.1 — candidato `0.0.25-beta`
+
+R8 cerró documentalmente con **652 pruebas en `OK`**.
+
+R9.1 modifica regresiones históricas que fijaban `0.0.24-beta` como si fuera la versión canónica permanente. La evidencia histórica se mantiene en sus documentos de cierre, mientras `VERSION` y `APP_VERSION` avanzan juntos a `0.0.25-beta`.
+
+R9.1 añade **8 regresiones específicas** para proteger:
+
+- versión canónica `0.0.25-beta`;
+- sincronización de `VERSION` y `APP_VERSION`;
+- README y soporte de seguridad;
+- promoción del CHANGELOG;
+- estado R8 cerrado / R9.2 pendiente;
+- preservación histórica de `v0.0.24-beta`;
+- ausencia de regresiones históricas que vuelvan a bloquear el incremento;
+- separación entre este hito y la futura beta pública.
+
+Partiendo de 652 pruebas, R9.1 alcanzó **660 pruebas en `OK`** el 2026-08-19. La compilación Python, la sintaxis JavaScript y `git diff --check` quedaron limpios.
+
+Con este gate local cumplido, R9.2 puede comenzar: commits firmados, PR, CI requerida, squash, validación post-merge y tag firmado.
+
 
 ## 2. Comandos obligatorios
 

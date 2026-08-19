@@ -3,6 +3,7 @@
 **Estado:** Vigente con registro RF histórico integrado
 **Versión de aplicación revisada:** `0.0.23-beta`
 **Revisión documental:** GOV.1.3 R2 — 2026-08-17
+**Actualización funcional vigente:** UX.4.6e R8 — procedencia editable — 2026-08-19
 **Clasificación:** Funcional / Auditoría
 
 Este documento tiene dos capas:
@@ -35,7 +36,7 @@ Debe permitir:
 - apellido de casada opcional/condicionado;
 - consentimiento vigente de privacidad antes de tratar datos del asistente.
 
-Solo los campos realmente aportados por un documento pueden quedar con procedencia documental/bloqueo aplicable.
+Solo los campos realmente aportados por un documento conservan procedencia documental. Después de confirmar una importación, el Asegurado(a) puede ajustar la copia de trabajo; la aplicación conserva la referencia original y cambia inmediatamente el estado a `Editado por ti`, `Completado manualmente`, `Excluido por ti`, `Detectado` o `No detectado` según corresponda.
 
 ### Paso 2 — Cuotas
 
@@ -49,7 +50,7 @@ Debe distinguir:
 
 Los supuestos futuros requieren una decisión explícita. Limpiar Paso 2 elimina esa decisión y sus valores.
 
-Una importación puede completar campos de cuotas por procedencia; los campos no detectados siguen manuales.
+Una importación puede completar campos de cuotas por procedencia; los campos no detectados siguen manuales. Los valores documentales confirmados pueden ajustarse explícitamente y deben conservar su referencia original.
 
 ### Paso 3 — Historial y salario reciente
 
@@ -61,7 +62,7 @@ Debe permitir:
 - bases salariales manuales/derivadas;
 - separación entre salario disponible y acreditado.
 
-Una cuota manual del detalle puede actualizar el agregado del Paso 2. Una Ficha Digital confirmada puede **aumentar** la referencia de cuotas del año actual si identifica más meses; no debe reducir automáticamente una referencia superior.
+Una cuota manual del detalle puede actualizar el agregado del Paso 2. Una Ficha Digital confirmada puede **aumentar** la referencia de cuotas del año actual si identifica más meses; no debe reducir automáticamente una referencia superior. Después de confirmar, el usuario puede excluir o reincluir explícitamente un período detectado; esa decisión sí puede reconciliar el Paso 2 a la baja o al alza y debe quedar visible como procedencia, sin alterar el documento original.
 
 ### Paso 4 — Proyección
 
@@ -93,7 +94,7 @@ Debe:
 
 El archivo se analiza sin persistirlo.
 
-La vista previa debe permitir revisar y, cuando corresponda, editar antes de confirmar.
+La vista previa debe permitir revisar y, cuando corresponda, editar antes de confirmar. Después de confirmar, los datos documentales continúan siendo ajustables en las superficies del asistente; la copia de trabajo y la fotografía original permanecen separadas.
 
 La aplicación debe diferenciar:
 
@@ -114,6 +115,8 @@ La respuesta del parser no expone identificadores personales.
 La vigencia se compara con una fecha externa verificable.
 
 Si el último período es anterior al mes actual verificado, debe advertirse. Si la fecha externa no puede verificarse, la interfaz debe adoptar una conducta conservadora y permitir decidir conscientemente.
+
+Un mes detectado comienza incluido. El usuario puede excluirlo explícitamente de la simulación sin borrar su valor documental; si lo reincluye y no existen otras modificaciones, vuelve a `Detectado`.
 
 ## 5. Gestión de datos
 

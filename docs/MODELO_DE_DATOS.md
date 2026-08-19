@@ -3,6 +3,7 @@
 **Estado:** Vigente
 **Versión de aplicación revisada:** `0.0.23-beta`
 **Revisión documental:** GOV.1.3 R2 — 2026-08-17
+**Actualización de estado frontend:** UX.4.6e R8 — procedencia editable — 2026-08-19
 **Clasificación:** Técnica / Pública
 
 Los contratos de cálculo se definen con Pydantic. El estado visual y de navegación del navegador se documenta por separado porque no todo campo de `sessionStorage` pertenece al dominio previsional.
@@ -25,7 +26,8 @@ Los contratos de cálculo se definen con Pydantic. El estado visual y de navegac
 - `null`: dato no disponible/no aplicable cuando cero podría inducir a error;
 - pagos mensuales y pagos únicos: campos separados;
 - datos históricos y proyectados: no se mezclan silenciosamente;
-- procedencia visual: metadata del frontend, salvo cuando un modelo específico expone una fuente explícita.
+- procedencia visual: metadata del frontend, salvo cuando un modelo específico expone una fuente explícita;
+- una referencia documental original y una copia de trabajo pueden coexistir en `sessionStorage` sin alterar el contrato Pydantic del parser.
 
 ## 3. Cuotas
 
@@ -158,6 +160,22 @@ El parser selecciona el año más reciente del documento cuando no se le suminis
 ### `ResumenFechaReferencia`
 
 Representa `fecha`, `confiable` y `fuente`.
+
+
+### Estado frontend de procedencia y copia de trabajo
+
+Los resúmenes Pydantic de Mi Retiro Seguro y Ficha Digital describen lo detectado por el backend. El navegador puede añadir estado temporal para permitir ajustes posteriores a la confirmación sin reinterpretar el parser.
+
+Campos/estructuras de frontend relevantes:
+
+- `referencia_mi_retiro_seguro_original`: fotografía original confirmada;
+- `referencia_mi_retiro_seguro`: copia de trabajo del comprobante;
+- `ficha_digital_importada_original`: fotografía original de Ficha Digital;
+- `ficha_digital_importada`: copia de trabajo de la Ficha;
+- `periodos_excluidos_importacion_ficha`: períodos detectados que el usuario decidió no usar;
+- `origen_campos_persona`, `origen_campos_cuotas`, `origen_campos_historial` y `origen_campos_detalle_anio_actual`: metadata de procedencia.
+
+Estos campos no cambian el documento fuente ni los modelos Pydantic recibidos desde la API. Son estado de interfaz serializable de la simulación.
 
 ## 8. Salario y proyección
 

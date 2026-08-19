@@ -1,7 +1,7 @@
 # Roadmap
 
 **Estado:** vigente
-**Versión de aplicación:** `0.0.24-beta`
+**Versión de aplicación:** `0.0.25-beta`
 **Fecha de revisión:** 2026-08-19
 
 Este roadmap describe **estado actual y trabajo futuro**. La evolución detallada ya completada se conserva en `RELEASES.md`, `CHANGELOG.md` y `docs/historico/`.
@@ -103,6 +103,7 @@ Este roadmap describe **estado actual y trabajo futuro**. La evolución detallad
 - resultado transversal;
 - importación revisable de Mi Retiro Seguro;
 - importación revisable de Ficha Digital;
+- procedencia editable con fotografía documental original, copia de trabajo y exclusión explícita de períodos;
 - gestión local de datos de simulación;
 - temas Claro, Oscuro, Automático y Alto contraste;
 - base responsive y accesible;
@@ -124,7 +125,7 @@ Este roadmap describe **estado actual y trabajo futuro**. La evolución detallad
 
 ## 3. UX.4.6 — trabajo reanudado después de GOV.1
 
-**Bloque activo:** UX.4.6e — Estandarización técnica, comentarios y coherencia de interfaz post-GOV.1.
+**Bloque en cierre:** UX.4.6e — R9.1, candidato local `0.0.25-beta`.
 
 - [ ] **UX.4.6e — Estandarización técnica, comentarios y coherencia de interfaz post-GOV.1**
   - [x] R1 — auditoría integral del código y definición del patrón documental por tecnología;
@@ -135,13 +136,15 @@ Este roadmap describe **estado actual y trabajo futuro**. La evolución detallad
   - [x] R6 — documentación transversal y normalización definitiva de la secuencia UX.4.6; 586 pruebas en `OK`;
   - [x] R7 — regresiones y auditoría de coherencia código/interfaz/documentación; 598 pruebas en `OK`;
   - [x] checkpoint pre-R8 — identidad visual oficial, favicon, Social Preview, visibilidad pública y revalidación de seguridad GitHub; 624 pruebas en `OK`;
-  - [ ] R8 — prueba funcional manual y automática completa hasta Paso 3 (en validación; corrección de reconsentimiento incorporada);
-  - [ ] R9 — cierre técnico, CI, versión, PR y tag.
+  - [x] R8 — prueba funcional manual y automática completa hasta Paso 3; reconsentimiento, procedencia editable y exclusión/reinclusión documental validados; 644 pruebas en `OK` antes del cierre documental;
+  - [ ] R9 — cierre técnico y publicación del hito;
+    - [x] R9.1 — candidato local `0.0.25-beta` validado con 660 pruebas en `OK`, documentación coherente y `git diff --check` limpio;
+    - [ ] R9.2 — commits firmados, PR, CI, squash, validación post-merge y tag firmado `v0.0.25-beta`.
 - [ ] **UX.4.6f — Paso 4 · Proyección salarial/laboral**
 - [ ] **UX.4.6g — Paso 5 · Escenarios de retiro**
 - [ ] **UX.4.6h — Paso 6 · Resultados y exportación**
 
-La visibilidad pública del repositorio no cambia la etapa funcional: `0.0.24-beta` continúa siendo pre-beta de producto y la aplicación sigue orientada a ejecución local.
+La visibilidad pública del repositorio no cambia la etapa funcional: `0.0.25-beta` continúa siendo pre-beta de producto y la aplicación sigue orientada a ejecución local.
 
 Las revisiones UX futuras deben reutilizar los contratos visuales, de navegación, procedencia, privacidad y validación ya consolidados.
 

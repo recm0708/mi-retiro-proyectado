@@ -6,8 +6,8 @@ Mi Retiro Proyectado se encuentra en desarrollo pre-beta. El repositorio de cód
 
 | Línea | Soporte de seguridad |
 |---|---|
-| `0.0.24-beta` | Soportada durante el desarrollo pre-beta vigente |
-| `0.0.23-beta` y anteriores | Históricas; no reciben correcciones independientes |
+| `0.0.25-beta` | Soportada durante el desarrollo pre-beta vigente |
+| `0.0.24-beta` y anteriores | Históricas; no reciben correcciones independientes |
 
 ## Reportar una vulnerabilidad
 

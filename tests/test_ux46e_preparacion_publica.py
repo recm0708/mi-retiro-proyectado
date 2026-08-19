@@ -18,6 +18,7 @@ class TestUX46ePreparacionPublica(unittest.TestCase):
         cls.terminos = (ROOT / "app/templates/partials/privacidad_consentimiento.html").read_text(encoding="utf-8")
         cls.readme = (ROOT / "README.md").read_text(encoding="utf-8")
         cls.publicacion = (ROOT / "docs/PREPARACION_PUBLICA_GITHUB.md").read_text(encoding="utf-8")
+        cls.version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
 
     def test_footer_enlaza_ayuda_sin_exponer_gobierno_interno(self):
         self.assertIn('href="/metodologia#ayuda-contacto"', self.base)
@@ -49,10 +50,14 @@ class TestUX46ePreparacionPublica(unittest.TestCase):
     def test_readme_muestra_badges_reales_y_estado_actual(self):
         self.assertIn("actions/workflows/ci.yml/badge.svg?branch=main", self.readme)
         self.assertIn("actions/workflows/auditoria-gobernanza.yml/badge.svg?branch=main", self.readme)
-        self.assertIn("img.shields.io/badge/versi%C3%B3n-0.0.24--beta", self.readme)
+        badge_version = self.version.replace("-", "--")
+        self.assertIn(
+            f"img.shields.io/badge/versi%C3%B3n-{badge_version}",
+            self.readme,
+        )
         self.assertIn("Python-3.13%20%7C%203.14", self.readme)
         self.assertIn("licencia-propietaria", self.readme)
-        self.assertIn("UX.4.6e — Estandarización técnica", self.readme)
+        self.assertIn("UX.4.6e", self.readme)
         self.assertIn("21 labels y 20/20 topics configurados", self.readme)
         self.assertIn("`sebd-panama` adoptado", self.readme)
 

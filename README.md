@@ -10,7 +10,7 @@
 
 [![Validación continua](https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/ci.yml)
 [![Auditoría de gobernanza](https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/auditoria-gobernanza.yml/badge.svg?branch=main)](https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/auditoria-gobernanza.yml)
-![Versión](https://img.shields.io/badge/versi%C3%B3n-0.0.24--beta-2563eb)
+![Versión](https://img.shields.io/badge/versi%C3%B3n-0.0.25--beta-2563eb)
 ![Python](https://img.shields.io/badge/Python-3.13%20%7C%203.14-3776AB?logo=python&logoColor=white)
 ![Licencia](https://img.shields.io/badge/licencia-propietaria-6B7280)
 
@@ -20,21 +20,22 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 
 ## Estado del proyecto
 
-- **Versión formal vigente:** `0.0.24-beta`
+- **Versión candidata de cierre:** `0.0.25-beta`
 - **Etapa:** desarrollo pre-beta; repositorio de código público y ejecución de aplicación orientada actualmente a entorno local
 - **Programa GOV.1:** cerrado — Auditoría, Gobierno y Trazabilidad Pre-Beta
-- **Bloque activo:** UX.4.6e — Estandarización técnica, comentarios y coherencia de interfaz post-GOV.1
+- **Bloque en cierre:** UX.4.6e — R9 · cierre técnico, versión y publicación del hito
 - **GOV.1.4:** Observabilidad y Developer Diagnostics cerrado
 - **GOV.1.5:** Seguridad, privacidad y transparencia cerrado internamente
 - **GOV.1.6:** Controles GitHub y auditoría automática cerrado
 - **GOV.1.7:** Licencia propietaria pre-beta y avisos de terceros cerrado
 - **GOV.1.8:** auditoría final y cierre pre-beta de gobierno cerrado
-- **UX.4.6e:** R7 cerrada con 598 pruebas en `OK`; R8 en validación funcional hasta Paso 3
+- **UX.4.6e:** R8 cerrada; R9.1 validada localmente con 660 pruebas en `OK`; R9.2 queda pendiente de commits firmados, PR, CI, squash, validación post-merge y tag
+- **Próximo bloque habilitado después de R9:** UX.4.6f — Paso 4 · Proyección salarial/laboral
 - **Preparación pública del repositorio:** 21 labels y 20/20 topics configurados; `sebd-panama` adoptado como topic SEBD; Social Preview e identidad visual oficial configurados
 - **Seguridad del repositorio público:** Dependency graph, Dependabot, CodeQL Default setup, Secret Protection, Push protection y Private vulnerability reporting habilitados; revisión manual del 2026-08-19 sin alertas abiertas
 - **Primera beta pública objetivo de la aplicación:** familia `0.1.0-beta.1`
 
-La visibilidad pública del repositorio **no convierte `0.0.24-beta` en una beta pública de la aplicación, no constituye un despliegue de producción y no modifica la licencia propietaria vigente**.
+La visibilidad pública del repositorio **no convierte `0.0.25-beta` en una beta pública de la aplicación, no constituye un despliegue de producción y no modifica la licencia propietaria vigente**.
 
 La versión se obtiene exclusivamente del archivo [`VERSION`](VERSION). La política completa se documenta en [`VERSIONING.md`](VERSIONING.md).
 
@@ -132,6 +133,8 @@ v0.0.24-beta
 ```
 
 `0.0.24-beta` **no es la primera beta pública de la aplicación**. El repositorio de código ya es público, pero la familia de producto objetivo para la primera beta continúa siendo `0.1.0-beta.1`.
+
+`0.0.25-beta` es el candidato de cierre de UX.4.6e. R9.1 quedó validada localmente con **660 pruebas en `OK`**; el tag formal `v0.0.25-beta` solo se creará en R9.2 después de integrar el PR, confirmar CI y repetir la validación post-merge.
 
 Consultar:
 
