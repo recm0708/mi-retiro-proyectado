@@ -1,7 +1,7 @@
 # Registro de versiones y estados del proyecto
 
 **Fecha de reconstrucción histórica:** 2026-08-17
-**Fuente:** historial Git de `recm0708/calculadora-pension-css`
+**Fuente:** historial Git de `recm0708/mi-retiro-proyectado`
 
 ## 1. Naturaleza del registro
 
@@ -108,11 +108,11 @@ Alcance acumulado desde `0.0.23-beta`:
 - hotfix de formato de los documentos de licencia con regresión reforzada;
 - GOV.1.8: auditoría transversal, cierre documental, versión formal y decisión de reanudar UX.4.6e.
 
-Validación del candidato:
+Validación final de cierre:
 
 - línea base previa: **530 pruebas en `OK`**;
-- GOV.1.8 añade **10 regresiones específicas**;
-- objetivo de cierre: **540 pruebas en `OK`**;
+- GOV.1.8 añadió **10 regresiones específicas**;
+- suite integrada post-merge: **540 pruebas en `OK`**;
 - compilación Python correcta;
 - sintaxis JavaScript correcta;
 - `git diff --check` limpio;
@@ -124,7 +124,7 @@ Tag formal asociado:
 v0.0.24-beta
 ```
 
-El tag se crea **después** de integrar el PR de cierre, sincronizar `main`, repetir la validación y confirmar CI remota verde. Debe ser anotado y firmado conforme a `docs/PROCESO_RELEASE.md`.
+El tag fue creado **después** de integrar el PR #17, sincronizar `main`, repetir la validación y confirmar CI remota verde. El objeto tag anotado y firmado `3cdf6f84804c1bb4bdda9e449eb0932528557aa3` apunta al commit `653900cebd84019fbbaa3ff3cfd91536ccab76eb`.
 
 `0.0.24-beta` no es una beta pública. El cierre GOV.1 habilita la reanudación de UX.4.6e.
 
@@ -143,6 +143,8 @@ Resultado de auditoría Git:
 - `v0.0.23-beta`: `609edf4bfed33c64770c88fab401002cd90f8e66` → `06b9260dadbcb2f0a7711841e1fad228e1badee8`, conservando `07278f7a193ce964612d9697da57350691bf62c0`.
 
 La materialización criptográfica está completada. Desde entonces los tags publicados son inmutables.
+
+El tag posterior `v0.0.24-beta` fue creado ya bajo esta política y eleva el inventario vigente a **24/24 tags con firma SSH válida**.
 
 ## 6. Próxima línea pública prevista
 

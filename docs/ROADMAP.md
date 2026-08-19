@@ -86,7 +86,7 @@ Este roadmap describe **estado actual y trabajo futuro**. La evolución detallad
   - [x] revisión integral de GOV.1.1–GOV.1.7;
   - [x] coherencia código/pruebas/documentación;
   - [x] versión formal de cierre `0.0.24-beta`;
-  - [x] proceso de tag firmado `v0.0.24-beta` definido post-merge/CI;
+  - [x] tag anotado y firmado `v0.0.24-beta` creado después de merge, validación post-merge y CI verde;
   - [x] auditoría de GitHub con `Python 3.13`, `Python 3.14` y `Auditoría de gobernanza`;
   - [x] decisión de reanudar UX.4.6e;
   - [x] gates pre-publicación preservados sin declarar la beta pública lista.
@@ -115,7 +115,6 @@ Este roadmap describe **estado actual y trabajo futuro**. La evolución detallad
 - informes PDF;
 - exportación final seleccionable;
 - auditoría WCAG 2.2 ampliada con tecnologías de apoyo/dispositivos;
-- Developer Diagnostics implementado y revisado internamente bajo GOV.1.5;
 - revisión jurídica externa previa a beta pública;
 - diseño/hardening específico si se decide un despliegue remoto;
 - revisión jurídica externa de la estrategia de publicación/licencia antes de beta pública/comercial;

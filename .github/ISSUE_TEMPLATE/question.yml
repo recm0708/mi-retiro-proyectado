@@ -1,0 +1,42 @@
+name: Consulta / soporte
+description: Solicita ayuda de uso, instalación, documentación o desarrollo sin exponer datos sensibles.
+title: "[CONSULTA] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        No incluyas cédulas, NSS, PDFs personales, historiales salariales reales,
+        credenciales ni otros datos sensibles. Para vulnerabilidades utiliza SECURITY.md.
+  - type: dropdown
+    id: tipo
+    attributes:
+      label: Tipo de consulta
+      options:
+        - Uso de la aplicación
+        - Instalación / entorno de desarrollo
+        - Documentación
+        - Contribución / GitHub
+        - Otro
+    validations:
+      required: true
+  - type: textarea
+    id: consulta
+    attributes:
+      label: Consulta
+      description: Describe el contexto necesario usando datos sintéticos o anonimizados.
+    validations:
+      required: true
+  - type: textarea
+    id: intentos
+    attributes:
+      label: Qué has intentado
+      description: Incluye comandos o mensajes de error sanitizados cuando ayuden.
+  - type: checkboxes
+    id: privacidad
+    attributes:
+      label: Confirmaciones
+      options:
+        - label: Confirmo que no he incluido datos personales reales, documentos personales ni secretos.
+          required: true
+        - label: Confirmo que esta consulta no contiene una vulnerabilidad que deba tratarse en privado.
+          required: true

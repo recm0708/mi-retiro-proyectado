@@ -16,7 +16,7 @@ from pathlib import Path
 # ============================================================
 
 # Raíz del proyecto:
-# calculadora-pension-css/
+# mi-retiro-proyectado/
 RAIZ_PROYECTO = (
     Path(__file__)
     .resolve()

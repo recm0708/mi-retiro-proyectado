@@ -11,7 +11,7 @@ body:
     id: version
     attributes:
       label: Versión
-      placeholder: "0.0.23-beta"
+      placeholder: "Ej.: valor mostrado en el pie de la aplicación"
     validations:
       required: true
   - type: dropdown

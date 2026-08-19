@@ -44,6 +44,8 @@ class TestGov18CierreGobierno(unittest.TestCase):
         self.assertIn("v0.0.24-beta", texto)
         self.assertIn("anotado y firmado", texto)
         self.assertIn("540 pruebas", texto)
+        self.assertIn("3cdf6f84804c1bb4bdda9e449eb0932528557aa3", texto)
+        self.assertIn("653900cebd84019fbbaa3ff3cfd91536ccab76eb", texto)
         self.assertIn("no es una beta pública", texto)
 
     def test_changelog_mueve_cierre_a_release_0_0_24(self):
@@ -56,11 +58,13 @@ class TestGov18CierreGobierno(unittest.TestCase):
     def test_cierre_gov1_declara_evidencia_y_gates_restantes(self):
         texto = (DOCS / "CIERRE_GOV1.md").read_text(encoding="utf-8")
         for esperado in (
+            "**Estado:** Cerrado",
             "530 pruebas",
             "540 pruebas",
             "Python 3.13",
             "Python 3.14",
             "Auditoría de gobernanza",
+            "PR #17",
             "v0.0.24-beta",
             "revisión jurídica externa",
             "UX.4.6e",
@@ -77,6 +81,8 @@ class TestGov18CierreGobierno(unittest.TestCase):
             "`Auditoría de gobernanza`",
             "PR #15",
             "PR #16",
+            "PR #17",
+            "24/24 tags",
             "cero Pull Requests abiertos",
         ):
             with self.subTest(esperado=esperado):

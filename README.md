@@ -75,12 +75,15 @@ Documentos principales:
 - [`docs/EVALUACION_TERCEROS_DESPLIEGUE.md`](docs/EVALUACION_TERCEROS_DESPLIEGUE.md) — terceros, TLS y gates de despliegue;
 - [`SECURITY.md`](SECURITY.md) — reporte responsable de vulnerabilidades;
 - [`docs/AUDITORIA_GITHUB.md`](docs/AUDITORIA_GITHUB.md) — controles GitHub y auditoría automática;
+- [`docs/AUDITORIA_REPOSITORIO_2026-08-18.md`](docs/AUDITORIA_REPOSITORIO_2026-08-18.md) — auditoría integral post-GOV.1 del repositorio;
 - [`docs/CIERRE_GOV1.md`](docs/CIERRE_GOV1.md) — auditoría final y decisión de cierre de GOV.1;
 - [`docs/LICENCIA_Y_DISTRIBUCION.md`](docs/LICENCIA_Y_DISTRIBUCION.md) — decisión de licencia y estrategia de distribución;
 - [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) — avisos y obligaciones de terceros;
 - [`docs/ROADMAP.md`](docs/ROADMAP.md) — estado actual y próximos hitos;
 - [`docs/DECISIONES.md`](docs/DECISIONES.md) — decisiones ADR;
 - [`docs/REGISTRO_CAMBIOS_HISTORICO.md`](docs/REGISTRO_CAMBIOS_HISTORICO.md) — mapa histórico de evolución.
+- [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md) — reglas de participación y convivencia;
+- [`SUPPORT.md`](SUPPORT.md) — canales para soporte, errores, mejoras, privacidad y seguridad.
 
 Los documentos de UX que funcionaban como bitácoras de revisión se conservan bajo `docs/historico/ux/`. Las rutas anteriores permanecen como índices de compatibilidad para no romper referencias existentes.
 
@@ -119,7 +122,7 @@ Git continúa siendo la evidencia primaria de autores, fechas, hashes y contenid
 ## Arquitectura resumida
 
 ```text
-calculadora-pension-css/
+mi-retiro-proyectado/
 ├── app/
 │   ├── core/
 │   ├── modelos/
@@ -155,8 +158,8 @@ Requisitos principales:
 Clonar:
 
 ```powershell
-git clone https://github.com/recm0708/calculadora-pension-css.git
-cd calculadora-pension-css
+git clone https://github.com/recm0708/mi-retiro-proyectado.git
+cd mi-retiro-proyectado
 ```
 
 Crear el entorno virtual:
@@ -232,6 +235,8 @@ Consultar:
 - [`VERSIONING.md`](VERSIONING.md) — versionado;
 - [`.github/CODEOWNERS`](.github/CODEOWNERS) — propiedad de revisión;
 - [`docs/DECISIONES.md`](docs/DECISIONES.md) — ADR.
+- [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md) — normas de participación;
+- [`SUPPORT.md`](SUPPORT.md) — rutas de soporte y reporte.
 
 ## Licencia
 
