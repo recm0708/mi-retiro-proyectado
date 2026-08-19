@@ -2,7 +2,7 @@
 
 **Estado:** vigente
 **Versión de aplicación revisada:** `0.0.24-beta`
-**Última actualización transversal:** UX.4.6e R7 — auditoría de coherencia — 2026-08-18
+**Última actualización transversal:** Identidad visual y repositorio público pre-R8 — 2026-08-19
 
 Este archivo es el punto de entrada para la documentación técnica, funcional, normativa, de privacidad, validación y auditoría de Mi Retiro Proyectado.
 
@@ -11,11 +11,12 @@ Este archivo es el punto de entrada para la documentación técnica, funcional, 
 - [`../README.md`](../README.md) — presentación, alcance, instalación y estado general.
 - [`ESPECIFICACION_FUNCIONAL.md`](ESPECIFICACION_FUNCIONAL.md) — requisitos funcionales.
 - [`ROADMAP.md`](ROADMAP.md) — estado actual y próximos hitos.
+- [`IDENTIDAD_VISUAL.md`](IDENTIDAD_VISUAL.md) — logo oficial, activos canónicos, favicons y Social Preview.
 
 ## 2. Gobierno y versionado
 
 - [`../GOVERNANCE.md`](../GOVERNANCE.md) — gobierno del proyecto.
-- [`../VERSIONING.md`](../VERSIONING.md) — política de versiones.
+- [`../VERSIONING.md`](../VERSIONING.md) — política de versiones y diferencia entre repositorio público y beta pública de producto.
 - [`../VERSION`](../VERSION) — fuente canónica de versión.
 - [`../RELEASES.md`](../RELEASES.md) — versiones, tags y reconstrucción histórica.
 - [`../CHANGELOG.md`](../CHANGELOG.md) — cambios notables por versión.
@@ -24,8 +25,8 @@ Este archivo es el punto de entrada para la documentación técnica, funcional, 
 - [`../SUPPORT.md`](../SUPPORT.md) — canales de soporte, privacidad y seguridad.
 - [`MIGRACION_FIRMAS_GIT_2026-08-17.md`](MIGRACION_FIRMAS_GIT_2026-08-17.md) — firma SSH y migración histórica controlada.
 - [`../.github/allowed_signers`](../.github/allowed_signers) — claves públicas autorizadas.
-- [`AUDITORIA_GITHUB.md`](AUDITORIA_GITHUB.md) — controles GitHub y auditoría automática.
-- [`PREPARACION_PUBLICA_GITHUB.md`](PREPARACION_PUBLICA_GITHUB.md) — metadata, topics, labels, badges y checklist pre-publicación.
+- [`AUDITORIA_GITHUB.md`](AUDITORIA_GITHUB.md) — controles GitHub, seguridad y auditoría automática.
+- [`PREPARACION_PUBLICA_GITHUB.md`](PREPARACION_PUBLICA_GITHUB.md) — estado y mantenimiento de metadata, topics, labels, badges, Social Preview y seguridad del repositorio público.
 - [`AUDITORIA_REPOSITORIO_2026-08-18.md`](AUDITORIA_REPOSITORIO_2026-08-18.md) — auditoría integral local/remota post-GOV.1.
 - [`AUDITORIA_UX46E_R7_2026-08-18.md`](AUDITORIA_UX46E_R7_2026-08-18.md) — auditoría transversal de coherencia código/interfaz/documentación de UX.4.6e.
 - [`CIERRE_GOV1.md`](CIERRE_GOV1.md) — evidencia definitiva del cierre GOV.1.
@@ -75,11 +76,11 @@ Este archivo es el punto de entrada para la documentación técnica, funcional, 
 - [`TERMINOS_USO_PRIVACIDAD.md`](TERMINOS_USO_PRIVACIDAD.md) — términos y tratamiento de datos.
 - [`CUMPLIMIENTO_LEY_81.md`](CUMPLIMIENTO_LEY_81.md) — matriz interna de alineación.
 - [`OBSERVABILIDAD_LOGS.md`](OBSERVABILIDAD_LOGS.md) — minimización y manejo local de logs diagnósticos.
-- [`../SECURITY.md`](../SECURITY.md) — política y canal de reporte responsable de vulnerabilidades.
+- [`../SECURITY.md`](../SECURITY.md) — política y canales privados de reporte responsable de vulnerabilidades.
 
 GOV.1.3 R3 consolidó originalmente el bloque normativo, de seguridad y privacidad; GOV.1.4 actualiza únicamente el contrato de observabilidad.
 
-GOV.1.5 completa los procedimientos internos; la revisión jurídica externa y cualquier diseño de despliegue remoto permanecen como gates pre-publicación.
+GOV.1.5 completa los procedimientos internos. La publicación del repositorio no elimina la revisión jurídica externa ni cualquier diseño de seguridad específico que requiera un futuro despliegue remoto de la aplicación.
 
 ## 9. Transparencia, auditoría y trazabilidad
 

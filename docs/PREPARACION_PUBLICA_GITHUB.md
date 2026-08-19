@@ -1,22 +1,24 @@
 # Preparación pública de GitHub
 
-**Estado:** Vigente — preparación pre-beta
+**Estado:** Completada para visibilidad pública — mantenimiento vigente
 **Versión de aplicación revisada:** `0.0.24-beta`
-**Fecha:** 2026-08-18
+**Fecha de preparación original:** 2026-08-18
+**Revalidación pública:** 2026-08-19
 **Clasificación:** GitHub / Comunidad / Publicación
 
-Este documento define la metadata y los controles de presentación que deben quedar listos antes de cambiar la visibilidad del repositorio. El repositorio puede permanecer privado durante esta preparación; ningún punto de esta guía sustituye los gates jurídicos, de seguridad, accesibilidad o despliegue de la primera beta pública.
+Este documento conserva la preparación realizada antes del cambio de visibilidad y registra el estado vigente después de convertir el repositorio en público. La publicación del **repositorio de código** no equivale a declarar una beta pública de la aplicación ni sustituye los gates jurídicos, de accesibilidad, alcance funcional o despliegue de producto.
 
 ## 1. Metadata About
 
 - **Nombre:** `mi-retiro-proyectado`
 - **Descripción:** `Aplicación web independiente y no oficial para estimar, explicar y comparar escenarios de retiro de la CSS de Panamá (SEBD, Mixto y SUCGS).`
-- **Homepage:** sin URL pública hasta que exista un despliegue aprobado.
-- **Visibilidad actual:** privada.
+- **Homepage:** sin URL de aplicación pública hasta que exista un despliegue aprobado.
+- **Visibilidad actual:** pública.
+- **Licencia:** propietaria pre-beta / todos los derechos reservados; la visibilidad pública del código no concede derechos adicionales de reutilización.
 
 ## 2. Topics aprobados
 
-Los topics priorizan vocabulario en español y se mantienen en minúsculas, sin tildes y con guiones. Los nombres propios de tecnologías conservan su forma canónica. La lista objetivo es de **20 topics**:
+Los topics priorizan vocabulario en español y se mantienen en minúsculas, sin tildes y con guiones. Los nombres propios de tecnologías conservan su forma canónica. La lista vigente es de **20 topics**:
 
 - `accesibilidad`
 - `caja-seguro-social`
@@ -39,9 +41,7 @@ Los topics priorizan vocabulario en español y se mantienen en minúsculas, sin 
 - `sucgs`
 - `sebd-panama`
 
-La evidencia manual posterior confirmó **20/20 topics** configurados. La interfaz de GitHub no permitió crear el identificador exacto `sebd`, por lo que se adoptó de forma definitiva `sebd-panama` como topic específico para el Subsistema Exclusivamente de Beneficio Definido. `sebd` no forma parte de la taxonomía final y no debe coexistir con `sebd-panama`, para evitar duplicidad semántica.
-
-Los nombres de topics son metadata pública de GitHub incluso cuando el repositorio es privado. La decisión de utilizarlos queda aceptada expresamente durante UX.4.6e.
+La evidencia manual confirmó **20/20 topics** configurados. La interfaz de GitHub no permitió crear el identificador exacto `sebd`, por lo que se adoptó de forma definitiva `sebd-panama` como topic específico para el Subsistema Exclusivamente de Beneficio Definido. `sebd` no forma parte de la taxonomía final y no debe coexistir con `sebd-panama`, para evitar duplicidad semántica.
 
 ## 3. Taxonomía de labels
 
@@ -71,7 +71,7 @@ Las labels clasifican Issues y Pull Requests; no se asignan a commits. Los commi
 | `invalid` | `e4e669` | No válido, no aplicable o no reproducible |
 | `wontfix` | `ffffff` | No se continuará trabajando en este cambio |
 
-Las cinco convenciones finales conservan su nombre canónico en inglés porque forman parte del lenguaje habitual de GitHub; sus descripciones y la documentación del proyecto permanecen en español. Los formularios versionados aplican automáticamente `bug`, `enhancement` o `question` junto con `needs-triage`. Las labels deben existir en GitHub antes de esperar esa asignación automática.
+Las cinco convenciones finales conservan su nombre canónico en inglés porque forman parte del lenguaje habitual de GitHub; sus descripciones y la documentación del proyecto permanecen en español. Los formularios versionados aplican automáticamente `bug`, `enhancement` o `question` junto con `needs-triage`.
 
 ## 4. Badges del README
 
@@ -93,19 +93,30 @@ Los Issue Forms continúan separados en:
 - Solicitud de mejora;
 - Consulta / soporte.
 
-Las vulnerabilidades no deben publicarse en Issues y siguen `SECURITY.md`.
+Las vulnerabilidades explotables no deben publicarse en Issues. El repositorio tiene habilitado **Private vulnerability reporting** y conserva el canal alternativo documentado en `SECURITY.md`.
 
 Los Pull Requests pueden recibir varias labels según alcance. Un PR transversal de UX puede usar, por ejemplo, `ui`, `documentation`, `tests` y `maintenance`. No se añade un workflow con permisos de escritura solo para autoetiquetar PRs; el etiquetado de PR es manual mientras el volumen de contribuciones sea bajo.
 
-## 6. Social preview
+## 6. Social Preview e identidad visual
 
-Antes de la publicación amplia debe configurarse una imagen social oficial del proyecto. Objetivo recomendado para la pieza final: 1280 × 640 px, menos de 1 MB, con identidad Mi Retiro Proyectado y sin logos que impliquen afiliación oficial con la CSS.
+El Social Preview oficial está configurado en GitHub y su copia versionada se conserva en:
 
-La imagen de social preview se configura en GitHub Settings y no forma parte del runtime.
+`assets/social/github-social-preview.png`
+
+Contrato de la pieza:
+
+- 1280 × 640 px;
+- PNG;
+- menos de 1 MiB;
+- identidad propia de Mi Retiro Proyectado;
+- aviso visible de herramienta independiente/no oficial;
+- sin logos de la CSS ni elementos que impliquen afiliación oficial.
+
+La identidad canónica y sus derivados se documentan en `docs/IDENTIDAD_VISUAL.md`.
 
 ## 7. Funciones del repositorio
 
-Configuración objetivo mientras no exista una necesidad distinta:
+Configuración vigente mientras no exista una necesidad distinta:
 
 - Issues: habilitado;
 - Wiki: deshabilitado;
@@ -117,20 +128,38 @@ Configuración objetivo mientras no exista una necesidad distinta:
 - auto-merge: deshabilitado;
 - update branch: habilitado.
 
-## 8. Gate antes de cambiar a Public
+## 8. Gate de seguridad ejecutado al cambiar a Public
 
-Antes de hacer público el repositorio se debe revisar nuevamente:
+El 2026-08-19 se revalidó manualmente el repositorio después de cambiar su visibilidad a pública.
 
-1. que no existan secretos, datos personales ni documentos reales versionados;
-2. Dependency graph, Dependabot y alertas;
-3. secret scanning, push protection y code scanning según disponibilidad del plan/visibilidad;
-4. `SECURITY.md`, licencia y avisos de terceros;
-5. revisión jurídica externa pendiente;
-6. auditoría ampliada de accesibilidad pendiente;
-7. alcance funcional de la primera beta;
-8. social preview y metadata final;
-9. suite/CI completamente verdes.
+Controles confirmados:
 
-## 9. Evidencia manual
+- Dependency graph habilitado;
+- Dependabot alerts habilitado;
+- Dependabot security updates habilitado;
+- CodeQL con **Default setup**;
+- Secret Protection / secret scanning habilitado;
+- Push protection habilitado;
+- Private vulnerability reporting habilitado;
+- Copilot Autofix habilitado para hallazgos CodeQL;
+- AI findings en Preview mantenido deshabilitado;
+- Automatic dependency submission mantenido deshabilitado;
+- Dependabot malware alerts mantenido deshabilitado para el ecosistema actual;
+- Grouped security updates mantenido deshabilitado.
 
-Topics, labels, social preview, visibilidad y algunos settings no son impuestos por archivos del repositorio. La evidencia manual confirma 21 labels y 20 topics configurados, incluido `sebd-panama`. El social preview continúa pendiente y deberá comprobarse directamente en GitHub antes de declarar completada la preparación pública.
+La revisión manual del mismo día registró **0 alertas abiertas** en Code scanning, Secret scanning y Dependabot.
+
+Este gate no equivale a una auditoría externa de seguridad y no elimina los pendientes de revisión jurídica, accesibilidad ampliada o hardening de un futuro despliegue remoto.
+
+## 9. Evidencia manual y mantenimiento
+
+Topics, labels, Social Preview, visibilidad y parte de los settings de seguridad no son impuestos por archivos versionados. La evidencia manual del mantenedor confirma:
+
+- repositorio público;
+- 21 labels;
+- 20/20 topics, incluido `sebd-panama`;
+- Social Preview configurado;
+- controles de seguridad del apartado 8 habilitados;
+- cero alertas abiertas durante la revalidación del 2026-08-19.
+
+Estos valores deben revisarse nuevamente cuando cambie la configuración del repositorio o antes de una release pública de producto.

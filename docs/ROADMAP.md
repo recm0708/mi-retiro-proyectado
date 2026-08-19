@@ -2,7 +2,7 @@
 
 **Estado:** vigente
 **Versión de aplicación:** `0.0.24-beta`
-**Fecha de revisión:** 2026-08-18
+**Fecha de revisión:** 2026-08-19
 
 Este roadmap describe **estado actual y trabajo futuro**. La evolución detallada ya completada se conserva en `RELEASES.md`, `CHANGELOG.md` y `docs/historico/`.
 
@@ -106,8 +106,10 @@ Este roadmap describe **estado actual y trabajo futuro**. La evolución detallad
 - gestión local de datos de simulación;
 - temas Claro, Oscuro, Automático y Alto contraste;
 - base responsive y accesible;
-- CI y Dependabot;
-- plantillas GitHub, política de seguridad y auditoría automática de gobernanza.
+- identidad visual oficial, favicons y Social Preview propios;
+- repositorio público con metadata, 20/20 topics, 21 labels e Issue Forms;
+- Dependency graph, Dependabot, CodeQL Default setup, Secret Protection, Push protection y Private vulnerability reporting;
+- CI y auditoría automática de gobernanza.
 
 ### Pendiente o incompleto
 
@@ -115,7 +117,7 @@ Este roadmap describe **estado actual y trabajo futuro**. La evolución detallad
 - informes PDF;
 - exportación final seleccionable;
 - auditoría WCAG 2.2 ampliada con tecnologías de apoyo/dispositivos;
-- revisión jurídica externa previa a beta pública;
+- revisión jurídica externa previa a primera beta pública de producto;
 - diseño/hardening específico si se decide un despliegue remoto;
 - revisión jurídica externa de la estrategia de publicación/licencia antes de beta pública/comercial;
 - parámetros oficiales que la documentación identifica como no disponibles o no reconstruibles con fidelidad.
@@ -132,11 +134,14 @@ Este roadmap describe **estado actual y trabajo futuro**. La evolución detallad
   - [x] R5 — coherencia GOV → interfaz visible y preparación pública del repositorio; 576 pruebas en `OK`;
   - [x] R6 — documentación transversal y normalización definitiva de la secuencia UX.4.6; 586 pruebas en `OK`;
   - [x] R7 — regresiones y auditoría de coherencia código/interfaz/documentación; 598 pruebas en `OK`;
+  - [x] checkpoint pre-R8 — identidad visual oficial, favicon, Social Preview, visibilidad pública y revalidación de seguridad GitHub; 624 pruebas en `OK`;
   - [ ] R8 — prueba funcional manual y automática completa hasta Paso 3 (en validación; corrección de reconsentimiento incorporada);
   - [ ] R9 — cierre técnico, CI, versión, PR y tag.
 - [ ] **UX.4.6f — Paso 4 · Proyección salarial/laboral**
 - [ ] **UX.4.6g — Paso 5 · Escenarios de retiro**
 - [ ] **UX.4.6h — Paso 6 · Resultados y exportación**
+
+La visibilidad pública del repositorio no cambia la etapa funcional: `0.0.24-beta` continúa siendo pre-beta de producto y la aplicación sigue orientada a ejecución local.
 
 Las revisiones UX futuras deben reutilizar los contratos visuales, de navegación, procedencia, privacidad y validación ya consolidados.
 
@@ -166,7 +171,7 @@ Trabajo continuo:
 
 ## 6. Accesibilidad y calidad
 
-Antes de una publicación amplia:
+Antes de una publicación amplia de la aplicación:
 
 - auditoría WCAG 2.2 más completa;
 - pruebas con lector de pantalla;
@@ -186,7 +191,8 @@ La familia `0.1.0-beta.1` solo podrá evaluarse cuando:
 - [x] la suite y CI de gobierno estén en verde;
 - [x] no existan discrepancias conocidas entre versión, código y documentación de GOV.1;
 - [x] las limitaciones materiales estén declaradas;
+- [x] repositorio, metadata, identidad y controles de seguridad pública básicos estén configurados;
 - [ ] se complete/revise el alcance funcional restante de UX.4.6e–h;
-- [ ] se complete la revisión jurídica externa prevista antes de publicación pública/comercial;
+- [ ] se complete la revisión jurídica externa prevista antes de la primera beta pública de producto;
 - [ ] se cierre la auditoría ampliada de accesibilidad y cualquier gate de despliegue aplicable;
 - [ ] se decida expresamente qué funciones quedan dentro de la primera beta pública.

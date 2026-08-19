@@ -3,6 +3,7 @@
 **Proyecto:** Mi Retiro Proyectado
 **Estado:** vigente desde GOV.1.2
 **Fecha de adopción:** 2026-08-17
+**Aclaración de visibilidad:** 2026-08-19
 
 ## 1. Objetivo
 
@@ -25,7 +26,7 @@ No se deben introducir versiones independientes en plantillas, JavaScript, motor
 
 La política toma como referencia SemVer para ordenar versiones, con una convención pre-1.0 propia del proyecto.
 
-### 3.1. Desarrollo interno pre-beta
+### 3.1. Desarrollo pre-beta
 
 Mientras el producto siga antes de su primera beta pública:
 
@@ -35,9 +36,11 @@ Mientras el producto siga antes de su primera beta pública:
 
 Cada incremento de `N` representa un hito funcional, técnico, normativo, de seguridad, gobierno o UX cerrado y verificable. Un commit menor de documentación o una corrección preparatoria dentro del mismo hito no obliga por sí sola a incrementar la versión.
 
+La **visibilidad pública del repositorio de código no cambia por sí sola esta etapa de versionado**. Un repositorio público no equivale a una beta pública de la aplicación, a un despliegue de producción ni a un release de la familia `0.1.0-beta.*`.
+
 ### 3.2. Primera beta pública y posteriores
 
-Cuando se cumplan los criterios de publicación:
+Cuando se cumplan los criterios de publicación de producto:
 
 ```text
 0.1.0-beta.1
@@ -99,7 +102,9 @@ No deben confundirse:
 - **versión de normativa:** metadatos de `normativa/*.json`;
 - **versión jurídica de privacidad/términos:** identificador propio del documento legal;
 - **versión de esquema de logs:** se definirá en GOV.1.4;
-- **versión de esquema de datos:** se definirá cuando exista una necesidad de migración persistente.
+- **versión de esquema de datos:** se definirá cuando exista una necesidad de migración persistente;
+- **visibilidad del repositorio:** configuración de GitHub independiente de `VERSION`;
+- **estado de despliegue:** decisión operativa independiente de la visibilidad del código.
 
 Un cambio en una de estas categorías no implica automáticamente que las demás adopten el mismo número.
 
@@ -109,9 +114,9 @@ Antes de cambiar `VERSION` se debe responder:
 
 - ¿el hito anterior está cerrado y trazable?;
 - ¿el cambio altera comportamiento, contrato, gobierno, seguridad, normativa o UX de forma auditable?;
-- ¿código, pruebas y documentación coinciden?;
+- ¿código, pruebas y documentación coinciden?
 
-Si la respuesta es sí, se asigna el siguiente número aplicable. Durante GOV.1 se utilizará la secuencia `0.0.N-beta`.
+Si la respuesta es sí, se asigna el siguiente número aplicable. Durante GOV.1 se utilizó la secuencia `0.0.N-beta`; mientras continúe la etapa pre-beta se mantiene la convención aplicable hasta el siguiente hito formal.
 
 ## 9. Prohibiciones
 
@@ -122,3 +127,4 @@ Si la respuesta es sí, se asigna el siguiente número aplicable. Durante GOV.1 
 - No modificar tags publicados para ocultar cambios posteriores.
 - La única sustitución histórica autorizada fue la reemisión firmada de `v0.0.22-beta` y `v0.0.23-beta` documentada en `docs/MIGRACION_FIRMAS_GIT_2026-08-17.md`; fue ejecutada el 2026-08-17 y no puede repetirse.
 - No usar la versión de aplicación como sustituto de la versión normativa o jurídica.
+- No inferir una beta pública de producto únicamente porque el repositorio sea público.

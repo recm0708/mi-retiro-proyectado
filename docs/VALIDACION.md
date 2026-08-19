@@ -3,7 +3,7 @@
 **Estado:** Vigente
 **Versión de aplicación revisada:** `0.0.24-beta`
 **Base documental histórica:** GOV.1.3 R4 — 2026-08-17
-**Revisión transversal:** GOV.1.8 — 2026-08-18
+**Revisión transversal:** identidad visual y repositorio público pre-R8 — 2026-08-19
 **Clasificación:** Técnica / Calidad
 
 La estrategia combina pruebas automatizadas, CI, casos sintéticos/anonimizados y validación manual cuando una propiedad no puede demostrarse suficientemente con código.
@@ -64,7 +64,11 @@ UX.4.6e R5 cerró con **576 pruebas en `OK`**, YAML/Python/JavaScript válidos y
 
 UX.4.6e R6 cerró con **586 pruebas en `OK`**, compilación Python, sintaxis JavaScript y `git diff --check` limpios. R7 añade **12 regresiones de auditoría transversal** sobre secuencia documental vigente, docstrings, comentarios de runtime, namespace Web Storage, superficie visible post-GOV, enlaces Markdown, higiene textual/JSON y continuidad ADR. El objetivo de R7 es **598 pruebas en `OK`**, sin cambio de `VERSION`.
 
-UX.4.6e R7 cerró con **598 pruebas en `OK`**. Durante R8, la primera prueba manual detectó que el borrado integral podía dejar al navegador sin volver a presentar los términos al regresar a Simular. La corrección de R8 purga claves vigentes y residuos pre-beta exclusivamente durante el borrado, fuerza una nueva presentación de condiciones desde Inicio y añade **6 regresiones** ejecutables de reconsentimiento. El objetivo intermedio pasa a **604 pruebas en `OK`**, sin cambio de `VERSION`.
+UX.4.6e R7 cerró con **598 pruebas en `OK`**. Durante R8, la primera prueba manual detectó que el borrado integral podía dejar al navegador sin volver a presentar los términos al regresar a Simular. La corrección de R8 purga claves vigentes y residuos pre-beta exclusivamente durante el borrado, fuerza una nueva presentación de condiciones desde Inicio y añade **6 regresiones** ejecutables de reconsentimiento. El objetivo intermedio pasó a **604 pruebas en `OK`**, sin cambio de `VERSION`.
+
+El checkpoint de identidad visual y publicación del repositorio previo a continuar R8 añadió **20 regresiones**: 10 para estructura/dimensiones de activos, favicon, navbar, temas y Social Preview; y 10 para coherencia pública de README, seguridad, soporte, versionado, identidad, auditoría y transparencia. La suite integrada fue ejecutada con **624 pruebas en `OK`**. `git diff --check` permaneció limpio y la validación visual confirmó el logo oficial en la navbar y el Social Preview. `VERSION` continúa en `0.0.24-beta`.
+
+La revalidación manual del repositorio público del 2026-08-19 confirmó Dependency graph, Dependabot alerts/security updates, CodeQL Default setup, Secret Protection, Push protection y Private vulnerability reporting habilitados, con **0 alertas abiertas** en Code scanning, Secret scanning y Dependabot en ese momento. Esta evidencia no sustituye revisión periódica ni auditoría externa.
 
 ## 2. Comandos obligatorios
 
@@ -110,6 +114,8 @@ python -m pip check
 - `tests/test_gov17_licencia.py`
 - `tests/test_gov18_cierre_gobierno.py`
 - `tests/test_identidad_interfaz.py`
+- `tests/test_identidad_visual_pre_r8.py`
+- `tests/test_identidad_publica_github_pre_r8.py`
 - `tests/test_indemnizacion_vejez.py`
 - `tests/test_linea_tiempo.py`
 - `tests/test_mantenimiento_tecnico.py`
@@ -164,6 +170,11 @@ python -m pip check
 - `tests/test_ux46d_revision9_reactividad_privacidad.py`
 - `tests/test_ux46e_proyeccion_salarial.py`
 - `tests/test_ux46e_almacenamiento_comentarios_js.py`
+- `tests/test_ux46e_auditoria_coherencia.py`
+- `tests/test_ux46e_estandar_runtime.py`
+- `tests/test_ux46e_preparacion_publica.py`
+- `tests/test_ux46e_r8_reconsentimiento_borrado.py`
+- `tests/test_ux46e_renumeracion_documental.py`
 - `tests/test_ux4_remate_visual.py`
 
 ## 4. Categorías
@@ -218,14 +229,3 @@ Sigue siendo necesaria para:
 ## 10. CI
 
 La CI debe permanecer verde antes de considerar cerrado un hito formal.
-
-Los Pull Requests hacia `main` deben superar los checks requeridos `Python 3.13`, `Python 3.14` y `Auditoría de gobernanza`. El tercer check fue promovido al ruleset después de su primera ejecución exitosa. La rama debe estar actualizada respecto de `main` antes de integrar.
-
-## 11. Evidencia histórica
-
-- `docs/historico/ux/`;
-- `docs/historico/tecnico/`;
-- `docs/historico/normativa_privacidad/`;
-- Git.
-
-Este documento describe la estrategia vigente, no un diario completo de cada revisión.

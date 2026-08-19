@@ -2,9 +2,9 @@
 
 **Proyecto:** Mi Retiro Proyectado
 **Estado:** vigente
-**Fecha:** 2026-08-18
+**Fecha:** 2026-08-19
 
-Este documento indica qué canal utilizar según el tipo de necesidad. El proyecto se encuentra en desarrollo interno pre-beta y no ofrece un SLA contractual ni asesoría jurídica, financiera o previsional individual.
+Este documento indica qué canal utilizar según el tipo de necesidad. El proyecto se encuentra en desarrollo pre-beta y no ofrece un SLA contractual ni asesoría jurídica, financiera o previsional individual.
 
 ## 1. Antes de reportar
 
@@ -31,7 +31,7 @@ Utiliza el formulario **Consulta / soporte** de GitHub Issues. Para problemas de
 
 ## 5. Vulnerabilidad de seguridad
 
-**No publiques detalles explotables en un issue.** Sigue [`SECURITY.md`](SECURITY.md) y utiliza el canal privado allí indicado.
+**No publiques detalles explotables en un issue.** Sigue [`SECURITY.md`](SECURITY.md). Utiliza preferentemente **GitHub Private vulnerability reporting** y, si no estuviera disponible para tu caso, el canal privado alternativo documentado allí.
 
 ## 6. Privacidad y derechos sobre datos personales
 

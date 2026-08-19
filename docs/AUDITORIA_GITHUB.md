@@ -1,8 +1,9 @@
 # Auditoría de GitHub y controles de repositorio
 
-**Estado:** Vigente — GOV.1.6 cerrado / revalidado en GOV.1.8
+**Estado:** Vigente — GOV.1.6 cerrado / revalidado en GOV.1.8 y publicación del repositorio
 **Versión de aplicación revisada:** `0.0.24-beta`
-**Fecha:** 2026-08-18
+**Fecha base:** 2026-08-18
+**Revalidación:** 2026-08-19
 **Clasificación:** Gobierno / GitHub / CI / Auditoría
 
 ## 1. Controles versionados
@@ -58,11 +59,22 @@ El flujo ordinario es rama → PR → checks → `Squash and merge`. Merge commi
 - no usar `pull_request_target` para ejecutar código no confiable de un PR;
 - no imprimir secretos ni datos personales en logs.
 
-## 6. Dependencias y alertas
+## 6. Dependencias, análisis y secretos
 
-Controles adoptados: Dependency graph, Dependabot alerts, Dependabot security updates y revisión humana sin auto-merge.
+Controles actualmente habilitados en el repositorio público:
 
-La disponibilidad de code scanning, secret scanning u otras funciones depende del plan/visibilidad. No se declaran controles que GitHub no tenga habilitados.
+- Dependency graph;
+- Dependabot alerts;
+- Dependabot security updates;
+- CodeQL con **Default setup**;
+- Secret Protection / secret scanning;
+- Push protection;
+- Private vulnerability reporting;
+- Copilot Autofix para hallazgos CodeQL.
+
+La revisión manual del 2026-08-19 registró **0 alertas abiertas** en Code scanning, Secret scanning y Dependabot.
+
+Automatic dependency submission, Grouped security updates y AI findings (Preview) permanecen deshabilitados de forma deliberada. Dependabot malware alerts no se activa para el ecosistema actual.
 
 ## 7. Auditoría automática GOV.1.6
 
@@ -70,13 +82,17 @@ La disponibilidad de code scanning, secret scanning u otras funciones depende de
 
 ## 8. Revisión manual periódica
 
-Antes de una beta pública y cuando cambie la configuración, revisar rulesets, métodos de merge, permisos de Actions, checks requeridos, Dependabot, visibilidad, opciones de seguridad, CODEOWNERS y canal de vulnerabilidades.
+Antes de una beta pública de producto y cuando cambie la configuración, revisar rulesets, métodos de merge, permisos de Actions, checks requeridos, Dependabot, visibilidad, opciones de seguridad, CODEOWNERS, Social Preview y canal de vulnerabilidades.
 
-## 9. Evidencia de cierre GOV.1
+La guía operativa vigente de metadata, topics, labels, Social Preview, visibilidad y seguridad pública se mantiene en `PREPARACION_PUBLICA_GITHUB.md`.
+
+## 9. Evidencia histórica de cierre GOV.1
+
+Esta sección conserva el estado observado durante el cierre GOV.1 y **no describe la visibilidad actual**.
 
 Evidencia remota de cierre y auditoría post-GOV.1:
 
-- repositorio privado;
+- repositorio privado en el momento del cierre GOV.1;
 - `main` como única rama remota persistente después de limpieza;
 - `Squash and merge` habilitado;
 - merge commit, rebase merge y auto-merge deshabilitados;
@@ -88,26 +104,44 @@ Evidencia remota de cierre y auditoría post-GOV.1:
 - 24/24 tags verificados localmente con firma SSH válida en la auditoría post-GOV.1;
 - cero Pull Requests abiertos al inicio de GOV.1.8 y sin PR abiertos al realizar la auditoría post-GOV.1.
 
-Los settings internos del ruleset que no expone el conector se consideran evidencia manual del mantenedor y deben revisarse nuevamente antes de una beta pública.
+Los settings internos del ruleset que no expone el conector se consideran evidencia manual del mantenedor.
 
-## 10. Metadatos y funciones del repositorio
-
-La normalización post-GOV.1 y UX.4.6e R5 adoptan estas decisiones:
+## 10. Metadatos y funciones vigentes del repositorio
 
 - nombre: `mi-retiro-proyectado`;
 - descripción: “Aplicación web independiente y no oficial para estimar, explicar y comparar escenarios de retiro de la CSS de Panamá (SEBD, Mixto y SUCGS).”;
-- visibilidad actual: privada, con metadata y documentación preparadas para una publicación futura;
+- visibilidad actual: **pública**;
 - Issues: habilitado;
 - Wiki: deshabilitado para evitar una segunda fuente documental fuera de `docs/`;
 - Projects: deshabilitado mientras no exista un tablero de trabajo utilizado;
 - Discussions: deshabilitado mientras Issues/Support cubran el flujo real;
-- topics: lista aprobada y documentada en `PREPARACION_PUBLICA_GITHUB.md`;
-- labels: taxonomía aprobada para Issues/PR y formularios preparados para etiquetado inicial;
-- README: badges de CI/gobernanza y metadata técnica visibles;
-- social preview: pendiente de cargar antes de la publicación amplia.
+- topics: 20/20, con `sebd-panama`;
+- labels: 21;
+- README: badges de CI/gobernanza, versión, Python, licencia y logo oficial;
+- Social Preview: configurado y conservado en `assets/social/github-social-preview.png`;
+- identidad oficial: versionada bajo `assets/brand/` y documentada en `IDENTIDAD_VISUAL.md`.
 
-El cambio de nombre conserva la historia del repositorio; los clones locales deben usar el URL actual. Las referencias históricas que documentan nombres de artefactos reales anteriores al rename no se reescriben. La guía operativa de metadata pública se mantiene en `PREPARACION_PUBLICA_GITHUB.md`.
+El cambio de nombre conserva la historia del repositorio; los clones locales deben usar el URL actual. Las referencias históricas que documentan nombres de artefactos reales anteriores al rename no se reescriben.
 
-## 11. Límite de afirmación
+La guía operativa y de mantenimiento de estos metadatos se conserva en `PREPARACION_PUBLICA_GITHUB.md`.
 
-Los archivos versionados no pueden imponer por sí solos settings alojados en GitHub. Los cambios de ruleset/settings requieren verificación en GitHub antes de declarar el hito cerrado.
+## 11. Revalidación pública del 2026-08-19
+
+Después de cambiar la visibilidad a pública se confirmó manualmente:
+
+- CodeQL Default setup operativo;
+- Secret Protection habilitado;
+- Push protection habilitado;
+- Private vulnerability reporting habilitado;
+- Dependabot/Dependency graph activos;
+- cero alertas abiertas en los tres paneles revisados;
+- Social Preview oficial cargado;
+- configuración de merge sin cambios respecto al modelo protegido.
+
+La visibilidad pública del repositorio **no equivale a una beta pública de la aplicación ni a un despliegue remoto aprobado**.
+
+## 12. Límite de afirmación
+
+Los archivos versionados no pueden imponer por sí solos settings alojados en GitHub. Los cambios de ruleset/settings requieren verificación en GitHub antes de declarar un hito cerrado.
+
+Los controles habilitados no prueban invulnerabilidad ni sustituyen una auditoría externa de seguridad.
