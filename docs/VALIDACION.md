@@ -110,6 +110,33 @@ Partiendo de 652 pruebas, R9.1 alcanzó **660 pruebas en `OK`** el 2026-08-19. L
 Con este gate local cumplido, R9.2 puede comenzar: commits firmados, PR, CI requerida, squash, validación post-merge y tag firmado.
 
 
+## Gate R9.2 — cierre formal UX.4.6e
+
+Evidencia remota del cierre principal:
+
+- PR #21 integrado por `Squash and merge`;
+- head validado: `a064bf745f4fb5e55e70f6ae3fd9b2bb80af8148`;
+- checks requeridos previos al merge:
+  - `Python 3.13` — `success`;
+  - `Python 3.14` — `success`;
+  - `Auditoría de gobernanza` — `success`;
+- commit integrado en `main`: `18e81e4ff58a1ad9622d366f7add10b7674f6e44`;
+- verificación criptográfica del commit de squash: válida;
+- árbol Git del head y del squash: `e0c4f314c5365a89178bd0fadb8a950286abb6ff`.
+
+La igualdad del árbol demuestra que el contenido integrado en `main` es exactamente el contenido que pasó el gate local de **660 pruebas en `OK`** y los checks del PR.
+
+Este cierre documental no modifica motores, cálculos, normativa ni contratos de runtime. El gate final antes de crear `v0.0.25-beta` continúa siendo:
+
+- suite completa: **660 pruebas en `OK`**;
+- compilación Python correcta;
+- sintaxis JavaScript correcta;
+- `git diff --check` limpio;
+- commit de cierre documental firmado;
+- CI requerida verde después de integrar el cierre;
+- tag `v0.0.25-beta` anotado y firmado, creado después del merge final y validado antes de iniciar UX.4.6f.
+
+
 ## 2. Comandos obligatorios
 
 ```powershell

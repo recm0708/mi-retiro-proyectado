@@ -65,27 +65,22 @@ class TestUx46eR8CierreFuncional(unittest.TestCase):
     def test_roadmap_y_readme_marcan_r8_cerrada_y_r9_en_cierre(self):
         texto = (DOCS / "ROADMAP.md").read_text(encoding="utf-8")
         self.assertIn("- [x] R8 — prueba funcional", texto)
-        self.assertIn("- [ ] R9 — cierre técnico y publicación del hito;", texto)
+        self.assertIn("- [x] R9 — cierre técnico y publicación del hito;", texto)
         self.assertIn(
             "[x] R9.1 — candidato local `0.0.25-beta` validado con 660 pruebas en `OK`",
             texto,
         )
         self.assertIn(
-            "[ ] R9.2 — commits firmados, PR, CI, squash",
+            "[x] R9.2 — PR #21 integrado por squash",
             texto,
         )
         self.assertIn("procedencia editable", texto)
 
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
-        self.assertIn("R8 cerrada", readme)
-        self.assertIn(
-            "R9.1 validada localmente con 660 pruebas en `OK`",
-            readme,
-        )
-        self.assertIn(
-            "R9.2 queda pendiente de commits firmados, PR, CI, squash",
-            readme,
-        )
+        self.assertIn("UX.4.6e:** cerrada en `0.0.25-beta`", readme)
+        self.assertIn("660 pruebas en `OK`", readme)
+        self.assertIn("PR #21 integrado por squash", readme)
+        self.assertIn("**Bloque activo:** UX.4.6f", readme)
 
     def test_validacion_define_gate_documental_652_y_preserva_base_r8(self):
         texto = (DOCS / "VALIDACION.md").read_text(encoding="utf-8")

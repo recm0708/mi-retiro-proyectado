@@ -20,17 +20,17 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 
 ## Estado del proyecto
 
-- **Versión candidata de cierre:** `0.0.25-beta`
+- **Versión formal vigente:** `0.0.25-beta`
 - **Etapa:** desarrollo pre-beta; repositorio de código público y ejecución de aplicación orientada actualmente a entorno local
 - **Programa GOV.1:** cerrado — Auditoría, Gobierno y Trazabilidad Pre-Beta
-- **Bloque en cierre:** UX.4.6e — R9 · cierre técnico, versión y publicación del hito
+- **Bloque activo:** UX.4.6f — Paso 4 · Proyección salarial/laboral
 - **GOV.1.4:** Observabilidad y Developer Diagnostics cerrado
 - **GOV.1.5:** Seguridad, privacidad y transparencia cerrado internamente
 - **GOV.1.6:** Controles GitHub y auditoría automática cerrado
 - **GOV.1.7:** Licencia propietaria pre-beta y avisos de terceros cerrado
 - **GOV.1.8:** auditoría final y cierre pre-beta de gobierno cerrado
-- **UX.4.6e:** R8 cerrada; R9.1 validada localmente con 660 pruebas en `OK`; R9.2 queda pendiente de commits firmados, PR, CI, squash, validación post-merge y tag
-- **Próximo bloque habilitado después de R9:** UX.4.6f — Paso 4 · Proyección salarial/laboral
+- **UX.4.6e:** cerrada en `0.0.25-beta`; PR #21 integrado por squash, 660 pruebas en `OK`, checks requeridos verdes y cierre formal asociado a `v0.0.25-beta`
+- **Siguiente bloque funcional:** UX.4.6f — Paso 4 · Proyección salarial/laboral
 - **Preparación pública del repositorio:** 21 labels y 20/20 topics configurados; `sebd-panama` adoptado como topic SEBD; Social Preview e identidad visual oficial configurados
 - **Seguridad del repositorio público:** Dependency graph, Dependabot, CodeQL Default setup, Secret Protection, Push protection y Private vulnerability reporting habilitados; revisión manual del 2026-08-19 sin alertas abiertas
 - **Primera beta pública objetivo de la aplicación:** familia `0.1.0-beta.1`
@@ -134,7 +134,7 @@ v0.0.24-beta
 
 `0.0.24-beta` **no es la primera beta pública de la aplicación**. El repositorio de código ya es público, pero la familia de producto objetivo para la primera beta continúa siendo `0.1.0-beta.1`.
 
-`0.0.25-beta` es el candidato de cierre de UX.4.6e. R9.1 quedó validada localmente con **660 pruebas en `OK`**; el tag formal `v0.0.25-beta` solo se creará en R9.2 después de integrar el PR, confirmar CI y repetir la validación post-merge.
+`0.0.25-beta` cierra UX.4.6e después de la validación funcional R8, el gate local de **660 pruebas en `OK`** y la integración por squash del PR #21. Su tag formal asociado es `v0.0.25-beta`; UX.4.6f queda habilitada como siguiente bloque funcional.
 
 Consultar:
 

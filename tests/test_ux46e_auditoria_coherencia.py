@@ -26,24 +26,19 @@ class TestUX46eAuditoriaCoherencia(unittest.TestCase):
         self.assertIn("598 pruebas en `OK`", texto)
         self.assertIn("[x] R8 — prueba funcional manual y automática", texto)
         self.assertIn("644 pruebas en `OK`", texto)
-        self.assertIn("[ ] R9 — cierre técnico y publicación del hito;", texto)
+        self.assertIn("[x] R9 — cierre técnico y publicación del hito;", texto)
         self.assertIn("[x] R9.1 — candidato local `0.0.25-beta`", texto)
-        self.assertIn("[ ] R9.2 — commits firmados, PR, CI, squash", texto)
+        self.assertIn("[x] R9.2 — PR #21 integrado por squash", texto)
 
     def test_readme_refleja_r8_cerrada_y_r9_sin_adelantar_paso4(self):
         texto = (ROOT / "README.md").read_text(encoding="utf-8")
-        self.assertIn("**UX.4.6e:** R8 cerrada;", texto)
-        self.assertIn(
-            "R9.1 validada localmente con 660 pruebas en `OK`",
-            texto,
-        )
-        self.assertIn(
-            "R9.2 queda pendiente de commits firmados, PR, CI, squash",
-            texto,
-        )
+        self.assertIn("**UX.4.6e:** cerrada en `0.0.25-beta`", texto)
+        self.assertIn("PR #21 integrado por squash", texto)
+        self.assertIn("PR #21 integrado por squash", texto)
+        self.assertIn("**Bloque activo:** UX.4.6f", texto)
         self.assertIn("21 labels y 20/20 topics", texto)
         self.assertIn(
-            "Próximo bloque habilitado después de R9:",
+            "**Siguiente bloque funcional:** UX.4.6f — Paso 4 · Proyección salarial/laboral",
             texto,
         )
         self.assertNotIn("**Bloque activo:** UX.4.6e — Paso 4", texto)

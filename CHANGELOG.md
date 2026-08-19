@@ -16,7 +16,10 @@ Sin cambios posteriores al candidato `0.0.25-beta`.
 - R8 queda cerrada funcionalmente con 652 pruebas después del cierre documental;
 - desacopladas regresiones históricas de `0.0.24-beta` para permitir que la versión canónica avance sin reescribir la evidencia de GOV.1, R4, identidad pre-R8 o R8;
 - actualizado README y soporte de seguridad para la nueva línea pre-beta;
-- R9.1 cerró localmente con **660 pruebas en `OK`**, compilación/sintaxis y `git diff --check` limpios; R9.2 queda reservado a commits firmados, PR, CI, squash, validación post-merge y tag firmado `v0.0.25-beta`;
+- R9.1 cerró localmente con **660 pruebas en `OK`**, compilación/sintaxis y `git diff --check` limpios;
+- R9.2 integró el PR #21 por squash en `18e81e4ff58a1ad9622d366f7add10b7674f6e44`, con commit verificado y los checks `Python 3.13`, `Python 3.14` y `Auditoría de gobernanza` en verde;
+- el árbol Git integrado `e0c4f314c5365a89178bd0fadb8a950286abb6ff` coincide exactamente con el árbol del head validado `a064bf745f4fb5e55e70f6ae3fd9b2bb80af8148`;
+- cerrado UX.4.6e y asociado el hito al tag formal `v0.0.25-beta`; UX.4.6f — Paso 4 queda como siguiente bloque funcional;
 - la primera beta pública continúa siendo futura y el siguiente bloque funcional será UX.4.6f — Paso 4.
 
 ### Checkpoint pre-R8 — identidad visual y repositorio público
