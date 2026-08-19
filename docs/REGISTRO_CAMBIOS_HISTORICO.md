@@ -85,11 +85,11 @@ Tag formal asociado:
 v0.0.23-beta
 ```
 
-## 5. Migración criptográfica Git — preparada
+## 5. Migración criptográfica Git — completada
 
 Después del cierre de `0.0.23-beta` se adoptó firma SSH para nuevos commits y tags.
 
-Los tags retrospectivos conservan fecha real de materialización y describen por separado la fecha histórica del hito. `v0.0.22-beta` y `v0.0.23-beta` conservan sus commits objetivo; solo sus objetos tag sin firma pueden sustituirse una vez.
+Los tags retrospectivos conservan fecha real de materialización y describen por separado la fecha histórica del hito. `v0.0.22-beta` y `v0.0.23-beta` conservaron sus commits objetivo durante la reemisión firmada única. Esa excepción ya fue consumida y los tags publicados son inmutables.
 
 Consultar `MIGRACION_FIRMAS_GIT_2026-08-17.md`.
 
@@ -115,9 +115,32 @@ Es normal que estos documentos contengan estados intermedios contradictorios con
 - GOV.1.7 — licencia;
 - GOV.1.8 — auditoría final y cierre.
 
-Los hitos posteriores a `0.0.23-beta` se incorporarán a este registro únicamente cuando se cierren formalmente.
+GOV.1.4 a GOV.1.8 quedaron cerrados formalmente el 2026-08-18 y se materializaron conjuntamente en `0.0.24-beta`.
 
-## 8. Fuentes de auditoría
+## 8. Tercera versión formal
+
+### `0.0.24-beta` — 2026-08-18
+
+Esta versión cerró integralmente GOV.1 e incorporó, desde la base `0.0.23-beta`:
+
+- firma e integridad Git/GitHub;
+- Developer Diagnostics;
+- seguridad, privacidad, threat model y procedimientos;
+- controles GitHub y auditoría automática;
+- licencia propietaria pre-beta y avisos de terceros;
+- auditoría final GOV.1.8 y reanudación de UX.4.6e.
+
+La validación final registró **540 pruebas automatizadas en `OK`**, compilación Python correcta, sintaxis JavaScript correcta, `git diff --check` limpio y los checks remotos requeridos en verde.
+
+Tag formal asociado:
+
+```text
+v0.0.24-beta
+```
+
+El tag es anotado y firmado y apunta al commit de cierre `653900cebd84019fbbaa3ff3cfd91536ccab76eb`. La auditoría post-GOV.1 verificó 24/24 tags con firma SSH válida sin reescribir commits históricos.
+
+## 9. Fuentes de auditoría
 
 Orden recomendado:
 

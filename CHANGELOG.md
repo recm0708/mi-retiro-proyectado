@@ -6,7 +6,16 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ## [Unreleased]
 
-Sin cambios registrados después del candidato de cierre GOV.1.
+### Mantenimiento de repositorio post-GOV.1
+
+- auditado el repositorio local y remoto después del cierre GOV.1;
+- preparado el cambio de nombre del repositorio a `mi-retiro-proyectado`;
+- normalizada documentación que conservaba estados transitorios de GOV.1.5–GOV.1.8;
+- añadidos `CODE_OF_CONDUCT.md`, `SUPPORT.md` y formulario estructurado de consulta/soporte;
+- documentada la política de conservar los commits históricos no firmados sin reescribir la historia;
+- confirmados 24/24 tags con firma SSH válida, incluido `v0.0.24-beta`;
+- reforzada la exclusión de carpetas temporales de auditoría local;
+- `VERSION` permanece en `0.0.24-beta` y el tag publicado `v0.0.24-beta` no se mueve.
 
 ## [0.0.24-beta] — 2026-08-18
 
@@ -18,7 +27,7 @@ Sin cambios registrados después del candidato de cierre GOV.1.
 - reanudado UX.4.6e como siguiente bloque activo;
 - añadidas 10 regresiones específicas de cierre GOV.1;
 - desacopladas las regresiones históricas GOV.1.3/GOV.1.5/GOV.1.7 de la versión canónica futura, preservando `0.0.23-beta` como versión base de aquellas revisiones;
-- documentado el tag firmado `v0.0.24-beta`, a crear únicamente después de merge y CI remota verde;
+- creado y publicado el tag anotado y firmado `v0.0.24-beta` después de merge, validación post-merge y CI remota verde;
 - se mantiene `0.1.0-beta.1` como futura primera beta pública, no como consecuencia automática del cierre de GOV.1;
 - permanecen como gates pre-publicación la revisión jurídica externa, cualquier hardening de despliegue remoto aplicable, la decisión final sobre Bootstrap local/tercero, la auditoría ampliada de accesibilidad y el alcance funcional de UX.4.6e–g.
 
@@ -42,7 +51,7 @@ Sin cambios registrados después del candidato de cierre GOV.1.
 - añadido `docs/AUDITORIA_GITHUB.md` con inventario de controles y revisión periódica;
 - añadido workflow `Auditoría de gobernanza` con permisos de solo lectura y acciones oficiales `@v7`;
 - añadidas 10 regresiones específicas de gobierno/repositorio;
-- documentado el gate para promover el nuevo check a requerido después de su primera ejecución exitosa;
+- promovido `Auditoría de gobernanza` al conjunto de checks requeridos de `main` después de su primera ejecución exitosa;
 - `VERSION` permanece en `0.0.23-beta`.
 
 ### GOV.1.5 — Seguridad, privacidad y transparencia

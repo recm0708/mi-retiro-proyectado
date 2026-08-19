@@ -142,17 +142,12 @@ Las actualizaciones de `pypdf` requieren revisión explícita de importadores.
 
 ## 12. Pendientes pre-beta
 
-- threat model formal;
-- procedimiento de incidentes;
-- procedimiento de derechos del titular;
-- revisión de logs bajo el threat model;
-- evaluación de despliegue/TLS;
-- servir dependencias críticas localmente cuando sea viable;
-- revisión de proveedores/terceros;
-- revisión jurídica de textos;
-- configuración endurecida de producción.
+GOV.1.5 completó internamente el threat model, los procedimientos de derechos/incidentes, la revisión de logs y la evaluación de terceros/TLS. Permanecen pendientes, según el alcance final de publicación:
 
-El threat model, los procedimientos de derechos/incidentes, la revisión de logs y la evaluación de terceros/TLS fueron completados internamente en GOV.1.5. Permanecen pendientes la revisión jurídica externa, el hardening de un despliegue remoto concreto, servir dependencias críticas localmente cuando corresponda y las tareas de gobierno posteriores.
+- servir dependencias críticas localmente cuando corresponda;
+- revisión jurídica externa de textos, privacidad, licencia y publicación;
+- hardening y configuración de producción para un despliegue remoto concreto;
+- auditoría de seguridad adicional si cambia la arquitectura, persistencia, red o modelo multiusuario.
 
 ## 12.1. Cierre interno GOV.1.5
 

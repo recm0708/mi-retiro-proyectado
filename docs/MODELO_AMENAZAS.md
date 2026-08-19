@@ -311,20 +311,19 @@ La prioridad considera impacto y probabilidad dentro del escenario actual.
 
 La clasificación es una herramienta interna de priorización, no una puntuación certificada.
 
-## 13. Pendientes para R2/R3 de GOV.1.5
+## 13. Cierre de R2/R3 de GOV.1.5
 
-R2 debe formalizar:
+Las revisiones posteriores completaron los elementos que este modelo había dejado abiertos:
 
 - procedimiento de incidentes;
 - procedimiento para derechos del titular;
-- registro mínimo de solicitudes sin almacenar información innecesaria.
-
-R3 debe completar:
-
+- registro mínimo de solicitudes sin almacenamiento innecesario;
 - revisión de terceros;
 - criterios TLS/despliegue;
 - revisión de Developer Diagnostics desde seguridad;
 - frontera de revisión jurídica;
 - actualización transversal de seguridad, privacidad, transparencia, cumplimiento, roadmap y validación.
 
-`VERSION` permanece en `0.0.23-beta`.
+Los documentos vigentes relacionados se enumeran en `INDICE.md`. La revisión jurídica externa y cualquier hardening de un despliegue remoto concreto permanecen como gates pre-publicación.
+
+La versión base de esta revisión técnica es `0.0.23-beta`; el cierre integral posterior de GOV.1 se materializó en `0.0.24-beta`.

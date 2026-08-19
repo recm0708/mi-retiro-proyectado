@@ -59,7 +59,8 @@ class TestUX46DRevision7PrivacidadConsulta(unittest.TestCase):
     def test_fuentes_usa_etiqueta_de_repositorio_solicitada(self):
         self.assertIn('Repositorio:', self.metodologia)
         self.assertIn('>GitHub del proyecto</a>', self.metodologia)
-        self.assertNotIn('Proyecto: <a href="https://github.com/recm0708/calculadora-pension-css"', self.metodologia)
+        self.assertIn('href="https://github.com/recm0708/mi-retiro-proyectado"', self.metodologia)
+        self.assertNotIn('https://github.com/recm0708/calculadora-pension-css', self.metodologia)
 
     def test_opciones_destructivas_siguen_fuera_de_barra_inferior(self):
         superior = self.simulacion.split('id="wizard-sticky-nav"', 1)[1].split(

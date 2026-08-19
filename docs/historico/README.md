@@ -46,3 +46,9 @@ Git sigue siendo la evidencia primaria del historial:
 - contenido exacto de cada commit.
 
 Los documentos históricos son una capa de lectura y contexto; no reemplazan esa evidencia.
+
+## Enlaces históricos
+
+Los snapshots y bitácoras conservan rutas, nombres de repositorio y enlaces relativos que podían ser correctos en el momento de su captura. No se mantienen como navegación viva ni se reescriben masivamente después de reorganizaciones o renombres, porque hacerlo alteraría la evidencia histórica.
+
+Para navegación vigente utiliza `../INDICE.md`. Si un enlace histórico ya no resuelve desde su ubicación archivada, consulta Git o el documento vigente equivalente antes de concluir que la fuente original desapareció.

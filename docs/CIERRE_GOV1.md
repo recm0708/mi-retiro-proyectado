@@ -1,15 +1,15 @@
 # Cierre GOV.1 — Auditoría, Gobierno y Trazabilidad Pre-Beta
 
-**Estado:** Candidato de cierre GOV.1.8
+**Estado:** Cerrado
 **Versión formal:** `0.0.24-beta`
-**Fecha:** 2026-08-18
+**Fecha de cierre:** 2026-08-18
 **Clasificación:** Gobierno / Auditoría final / Pre-beta
 
 ## 1. Objetivo
 
-GOV.1 se creó para detener temporalmente la evolución UX y revisar de forma transversal el historial, versionado, documentación, integridad Git/GitHub, observabilidad, seguridad, privacidad, terceros, licencia y proceso de release antes de continuar el desarrollo pre-beta.
+GOV.1 se creó para detener temporalmente la evolución UX y revisar de forma transversal historial, versionado, documentación, integridad Git/GitHub, observabilidad, seguridad, privacidad, terceros, licencia y proceso de release antes de continuar el desarrollo pre-beta.
 
-Este documento consolida la decisión de cierre. No sustituye Git, CI, los ADR, las fuentes normativas ni los documentos especializados.
+Este documento consolida la evidencia definitiva de cierre. No sustituye Git, CI, los ADR, las fuentes normativas ni los documentos especializados.
 
 ## 2. Resultado por bloque
 
@@ -18,14 +18,14 @@ Este documento consolida la decisión de cierre. No sustituye Git, CI, los ADR, 
 | GOV.1.1 | reconstrucción histórica y clasificación de 80 commits completada |
 | GOV.1.2 | gobierno, versionado y fuente canónica `VERSION` completados |
 | GOV.1.3 | reorganización documental, normativa, privacidad y auditoría completadas |
-| Prebloque firma/integridad | commits/tags firmados, 23/23 tags auditados y rulesets completados |
+| Prebloque firma/integridad | firma SSH adoptada, 23/23 tags iniciales auditados y rulesets completados |
 | GOV.1.4 | Developer Diagnostics local y estructurado completado |
 | GOV.1.5 | seguridad, privacidad, threat model y procedimientos completados internamente |
 | GOV.1.6 | controles GitHub, `SECURITY.md`, templates y auditoría automática completados |
 | GOV.1.7 | licencia propietaria pre-beta y terceros completados |
-| GOV.1.8 | auditoría final, versión `0.0.24-beta` y decisión de reanudar UX.4.6e |
+| GOV.1.8 | auditoría final, versión `0.0.24-beta`, cierre GOV.1 y reanudación de UX.4.6e completados |
 
-## 3. Evidencia técnica
+## 3. Evidencia técnica final
 
 Línea base previa a GOV.1.8:
 
@@ -34,37 +34,41 @@ Línea base previa a GOV.1.8:
 OK
 ```
 
-GOV.1.8 añade 10 regresiones de cierre:
+GOV.1.8 añadió 10 regresiones de cierre. La validación final integrada fue:
 
 ```text
-540 pruebas esperadas
+540 pruebas
+OK
 ```
 
-El cierre exige además:
+También quedaron confirmados:
 
-- `python -m compileall app`;
-- `node --check` para JavaScript;
-- `git diff --check`;
+- `python -m compileall app`: correcto;
+- validación sintáctica JavaScript mediante `node --check`: correcta;
+- `git diff --check`: limpio;
 - commit de rama firmado;
-- Pull Request hacia `main`;
-- checks `Python 3.13`, `Python 3.14` y `Auditoría de gobernanza`;
-- squash `Verified`;
-- validación post-merge;
-- tag anotado y firmado `v0.0.24-beta`.
+- Pull Request #17 hacia `main`;
+- checks `Python 3.13`, `Python 3.14` y `Auditoría de gobernanza`: `success`;
+- integración mediante `Squash and merge`;
+- commit final de `main`: `653900cebd84019fbbaa3ff3cfd91536ccab76eb`;
+- validación post-merge: 540/540 en `OK`;
+- tag anotado y firmado `v0.0.24-beta`;
+- objeto tag: `3cdf6f84804c1bb4bdda9e449eb0932528557aa3`.
 
-## 4. Evidencia Git/GitHub previa al candidato
+## 4. Evidencia Git/GitHub de cierre
 
-Antes de GOV.1.8 se verificó:
+Se verificó:
 
 - PR #15 fusionado para GOV.1.6/GOV.1.7;
 - PR #16 fusionado para el hotfix documental de licencia;
-- ambos squash verificados por GitHub;
-- los tres workflows/checks relevantes en `success`;
-- cero PR abiertos;
-- solo `main` como rama remota persistente después de limpieza;
-- métodos de merge configurados para squash como flujo ordinario.
+- PR #17 fusionado para GOV.1.8 y cierre integral GOV.1;
+- checks requeridos en verde en el flujo de cierre;
+- `main` como rama remota persistente después de la limpieza de ramas de trabajo;
+- flujo ordinario configurado mediante Pull Request y squash;
+- tags publicados protegidos por la política de integridad documentada;
+- `v0.0.24-beta` verificado localmente con firma SSH válida.
 
-Los detalles del ruleset que no expone el conector permanecen sujetos a la verificación manual documentada en `AUDITORIA_GITHUB.md`.
+La auditoría post-GOV.1 posterior confirmó **24/24 tags con firma SSH válida**. Esa auditoría no reescribe el tag de cierre ni cambia `VERSION`; se documenta por separado en `AUDITORIA_REPOSITORIO_2026-08-18.md`.
 
 ## 5. Versión de cierre
 
@@ -75,7 +79,7 @@ Representa el cierre auditable de GOV.1 y no debe confundirse con:
 - la primera beta pública;
 - una certificación de la CSS;
 - una aprobación jurídica externa;
-- una declaración de Internet-ready.
+- una declaración de aptitud automática para Internet.
 
 La primera familia pública prevista continúa siendo:
 
@@ -85,11 +89,13 @@ La primera familia pública prevista continúa siendo:
 
 ## 6. Regla de versiones históricas
 
-Los documentos que registran revisiones GOV.1.3, GOV.1.5 y GOV.1.7 pueden conservar `0.0.23-beta` como **versión base de revisión** cuando no fueron materialmente modificados por GOV.1.8.
+Los documentos que registran revisiones GOV.1.3, GOV.1.5 y GOV.1.7 pueden conservar `0.0.23-beta` como **versión base de revisión** cuando ese valor describe el hito que originó el documento.
 
-GOV.1.8 deja de exigir que una regresión histórica reescriba esos documentos únicamente porque `VERSION` avance. La versión canónica actual continúa validándose de forma independiente contra runtime, README, ROADMAP y RELEASES.
+GOV.1.8 dejó de exigir que una regresión histórica reescriba esos documentos únicamente porque `VERSION` avance. La versión canónica actual se valida de forma independiente contra runtime, README, ROADMAP y RELEASES.
 
-## 7. Gates que NO quedan cerrados
+Los snapshots bajo `docs/historico/` preservan su contexto original y no se corrigen retroactivamente para aparentar el estado actual.
+
+## 7. Gates que no quedaron cerrados
 
 Cerrar GOV.1 no significa que la beta pública esté lista. Permanecen, según aplique:
 
@@ -101,14 +107,14 @@ Cerrar GOV.1 no significa que la beta pública esté lista. Permanecen, según a
 - definición final del alcance de la primera beta;
 - inventario de licencias/NOTICE del artefacto real cuando exista empaquetado.
 
-## 8. Decisión
+## 8. Decisión final
 
-Si la suite de 540 pruebas, compilación, JavaScript, `git diff --check`, CI y revisión del PR permanecen verdes:
+Con todos los gates de cierre ejecutados satisfactoriamente:
 
-1. GOV.1.8 se considera cerrado;
-2. GOV.1 completo se considera cerrado;
-3. `0.0.24-beta` pasa a ser la versión formal vigente;
-4. se crea y publica el tag firmado `v0.0.24-beta`;
-5. UX.4.6e queda oficialmente reanudada como siguiente bloque activo.
+1. GOV.1.8 queda cerrado;
+2. GOV.1 completo queda cerrado;
+3. `0.0.24-beta` es la versión formal vigente de ese cierre;
+4. `v0.0.24-beta` permanece publicado e inmutable;
+5. UX.4.6e queda reanudada como bloque funcional activo.
 
-Si cualquier gate falla, no se crea el tag y GOV.1.8 vuelve a estado de corrección.
+El saneamiento documental/repositorio posterior al tag se registra en `[Unreleased]` y **no modifica retroactivamente el contenido criptográficamente identificado por `v0.0.24-beta`**.

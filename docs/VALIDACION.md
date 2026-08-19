@@ -46,9 +46,11 @@ GOV.1.6 añadió **10 regresiones específicas** sobre `SECURITY.md`, issue form
 
 GOV.1.7 añadió **8 regresiones específicas** sobre `LICENSE`, avisos de terceros, decisión de distribución, proceso de release y transición del roadmap a GOV.1.8. Después del hotfix de saltos de línea, la suite integrada quedó en **530 pruebas en `OK`** y la regresión de licencia rechaza secuencias `\n` literales.
 
-GOV.1.8 añade **10 regresiones específicas de cierre**. La suite candidata pasa a **540 pruebas**. Estas regresiones verifican `0.0.24-beta`, cierre completo GOV.1, reanudación UX.4.6e, release/tag previsto, tres checks de GitHub, soporte de seguridad, gates restantes y separación entre versión canónica actual y versiones base de auditorías históricas.
+GOV.1.8 añadió **10 regresiones específicas de cierre**. La suite integrada alcanzó **540 pruebas en `OK`**. Estas regresiones verifican `0.0.24-beta`, cierre completo GOV.1, reanudación UX.4.6e, release/tag firmado, tres checks de GitHub, soporte de seguridad, gates restantes y separación entre versión canónica actual y versiones base de auditorías históricas.
 
 A partir de GOV.1.8, las regresiones históricas de GOV.1.3, GOV.1.5 y GOV.1.7 **no obligan a reescribir sus documentos cada vez que cambia `VERSION`**. Conservan `0.0.23-beta` como versión base de la revisión que originó esos contratos; la coherencia de la versión canónica actual se valida en GOV.1.2/GOV.1.8.
+
+La auditoría post-GOV.1 del 2026-08-18 confirmó 24/24 tags con firma SSH válida, integridad Git sin corrupción, archivos textuales vigentes sin BOM/CRLF/caracteres de control/whitespace final, JSON/YAML válidos y enlaces Markdown internos vigentes sin roturas detectadas. El detalle se conserva en `AUDITORIA_REPOSITORIO_2026-08-18.md`.
 
 ## 2. Comandos obligatorios
 
@@ -201,7 +203,7 @@ Sigue siendo necesaria para:
 
 La CI debe permanecer verde antes de considerar cerrado un hito formal.
 
-Los Pull Requests hacia `main` deben superar los checks requeridos `Python 3.13` y `Python 3.14`. GOV.1.6 añade `Auditoría de gobernanza`; después de su primera ejecución exitosa debe promoverse a check requerido. La rama debe estar actualizada respecto de `main` antes de integrar.
+Los Pull Requests hacia `main` deben superar los checks requeridos `Python 3.13`, `Python 3.14` y `Auditoría de gobernanza`. El tercer check fue promovido al ruleset después de su primera ejecución exitosa. La rama debe estar actualizada respecto de `main` antes de integrar.
 
 ## 11. Evidencia histórica
 

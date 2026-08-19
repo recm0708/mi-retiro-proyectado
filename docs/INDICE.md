@@ -2,7 +2,7 @@
 
 **Estado:** vigente
 **Versión de aplicación revisada:** `0.0.24-beta`
-**Última actualización transversal:** GOV.1.8 — 2026-08-18
+**Última actualización transversal:** saneamiento de repositorio post-GOV.1 — 2026-08-18
 
 Este archivo es el punto de entrada para la documentación técnica, funcional, normativa, de privacidad, validación y auditoría de Mi Retiro Proyectado.
 
@@ -20,9 +20,13 @@ Este archivo es el punto de entrada para la documentación técnica, funcional, 
 - [`../RELEASES.md`](../RELEASES.md) — versiones, tags y reconstrucción histórica.
 - [`../CHANGELOG.md`](../CHANGELOG.md) — cambios notables por versión.
 - [`../CONTRIBUTING.md`](../CONTRIBUTING.md) — flujo de contribución.
+- [`../CODE_OF_CONDUCT.md`](../CODE_OF_CONDUCT.md) — normas de participación.
+- [`../SUPPORT.md`](../SUPPORT.md) — canales de soporte, privacidad y seguridad.
 - [`MIGRACION_FIRMAS_GIT_2026-08-17.md`](MIGRACION_FIRMAS_GIT_2026-08-17.md) — firma SSH y migración histórica controlada.
 - [`../.github/allowed_signers`](../.github/allowed_signers) — claves públicas autorizadas.
 - [`AUDITORIA_GITHUB.md`](AUDITORIA_GITHUB.md) — controles GitHub y auditoría automática.
+- [`AUDITORIA_REPOSITORIO_2026-08-18.md`](AUDITORIA_REPOSITORIO_2026-08-18.md) — auditoría integral local/remota post-GOV.1.
+- [`CIERRE_GOV1.md`](CIERRE_GOV1.md) — evidencia definitiva del cierre GOV.1.
 - [`../LICENSE`](../LICENSE) — licencia propietaria de materiales originales.
 - [`LICENCIA_Y_DISTRIBUCION.md`](LICENCIA_Y_DISTRIBUCION.md) — evaluación y decisión de licencia.
 - [`../THIRD_PARTY_NOTICES.md`](../THIRD_PARTY_NOTICES.md) — avisos de componentes de terceros.
@@ -96,6 +100,8 @@ GOV.1.5 completa los procedimientos internos; la revisión jurídica externa y c
 ## 11. Desarrollo y contribución
 
 - [`../CONTRIBUTING.md`](../CONTRIBUTING.md) — flujo principal.
+- [`../CODE_OF_CONDUCT.md`](../CODE_OF_CONDUCT.md) — reglas de convivencia y colaboración.
+- [`../SUPPORT.md`](../SUPPORT.md) — rutas de consulta y reporte.
 - [`GUIA_INTERNA_DESARROLLO.md`](GUIA_INTERNA_DESARROLLO.md) — convenciones internas.
 - [`../.editorconfig`](../.editorconfig) — formato.
 - [`../.gitattributes`](../.gitattributes) — normalización Git.

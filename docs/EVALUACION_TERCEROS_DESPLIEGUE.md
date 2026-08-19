@@ -49,7 +49,7 @@ Decisión pre-beta:
 - riesgo aceptado temporalmente para desarrollo local;
 - mantener SRI, versión fija y CSP;
 - servir Bootstrap localmente sigue siendo la opción preferida antes de una publicación amplia;
-- GOV.1.8 deberá verificar que la decisión vigente siga siendo aceptable o que el recurso ya sea local.
+- GOV.1.8 revalidó esta excepción temporal; servir Bootstrap localmente sigue siendo la opción preferida antes de una publicación amplia y debe reevaluarse en el gate de beta/despliegue.
 
 ### Infraestructura oficial CSS para fecha de referencia
 

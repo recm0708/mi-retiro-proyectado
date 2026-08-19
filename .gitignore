@@ -81,3 +81,6 @@ Desktop.ini
 *.zip
 *.7z
 *.rar
+
+# Paquetes temporales de auditoría local
+_auditoria_repo_*/

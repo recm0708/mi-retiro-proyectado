@@ -39,4 +39,4 @@ jsDelivr, GitHub y la infraestructura CSS documentada en `docs/EVALUACION_TERCER
 
 ## Regla de distribución
 
-La decisión propietaria sobre materiales originales no elimina obligaciones de terceros. GOV.1.8 debe comprobar el inventario real de cualquier artefacto candidato a beta pública.
+La decisión propietaria sobre materiales originales no elimina obligaciones de terceros. Antes de cualquier beta, publicación o distribución, el proceso de release debe comprobar el inventario real del artefacto y las obligaciones upstream aplicables.

@@ -97,7 +97,7 @@ git log --show-signature -1
 
 La CI remota debe permanecer en verde.
 
-GOV.1.6 añade `.github/workflows/auditoria-gobernanza.yml`. El job **Auditoría de gobernanza** usa permisos de solo lectura y no reemplaza los checks funcionales `Python 3.13` y `Python 3.14`. Después de su primera ejecución exitosa debe añadirse al ruleset de `main` como check requerido, sin retirar los checks existentes.
+GOV.1.6 añadió `.github/workflows/auditoria-gobernanza.yml`. El job **Auditoría de gobernanza** usa permisos de solo lectura y no reemplaza los checks funcionales `Python 3.13` y `Python 3.14`. Tras su primera ejecución exitosa fue incorporado al ruleset de `main`; el conjunto requerido vigente contiene los tres checks.
 
 Desde el 2026-08-17 la rama predeterminada está protegida mediante un ruleset activo que exige Pull Request, commits verificados, historial lineal, resolución de conversaciones, checks `Python 3.13` y `Python 3.14`, rama actualizada antes de integrar y bloqueo de eliminación y force push.
 
@@ -115,7 +115,7 @@ La política aplicable está en `VERSIONING.md`.
 - Los tags formales empiezan con `v`.
 - `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas documentalmente y posteriormente materializadas como tags retrospectivos firmados sin aparentar existencia histórica.
 - `v0.0.22-beta` y `v0.0.23-beta` fueron reemitidos una sola vez como objetos firmados sin cambiar sus commits objetivo; esa excepción ya fue consumida.
-- Después de la migración, todo commit nuevo y todo tag nuevo deben estar firmados.
+- Después de la migración, todo commit nuevo y todo tag nuevo deben estar firmados. `v0.0.24-beta` fue creado ya bajo esta política y verificó correctamente.
 - La clave privada nunca se versiona.
 
 ## 8. Propiedad y revisión de áreas críticas
@@ -149,7 +149,7 @@ La revisión jurídica externa previa a publicación pública/comercial continú
 
 El repositorio mantiene Dependency graph, Dependabot alerts y Dependabot security updates activos. Dependabot no sustituye revisión humana, pruebas de regresión ni la decisión explícita del mantenedor.
 
-Las plantillas `.github/ISSUE_TEMPLATE/` separan errores ordinarios y solicitudes de mejora; `.github/pull_request_template.md` estandariza el contexto mínimo de integración. `docs/AUDITORIA_GITHUB.md` registra los controles versionados y los settings que requieren verificación periódica en GitHub.
+Las plantillas `.github/ISSUE_TEMPLATE/` separan errores ordinarios, solicitudes de mejora y consultas de soporte; `.github/pull_request_template.md` estandariza el contexto mínimo de integración. `CODE_OF_CONDUCT.md` define las normas de participación y `SUPPORT.md` enruta soporte, privacidad y seguridad. `docs/AUDITORIA_GITHUB.md` registra los controles versionados y los settings que requieren verificación periódica en GitHub.
 
 ## 11. Cambios a este documento
 

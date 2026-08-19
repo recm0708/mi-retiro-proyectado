@@ -26,6 +26,8 @@ git switch -c <tipo>/<descripcion>
 
 No aplicar un paquete de cambios sobre modificaciones locales no revisadas.
 
+Toda participación en issues, Pull Requests o revisiones debe respetar [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md). Para dudas de uso, reportes, privacidad o seguridad, consultar primero [`SUPPORT.md`](SUPPORT.md).
+
 ## 2. Principios obligatorios
 
 - Las fórmulas previsionales principales viven en Python.
@@ -119,6 +121,8 @@ Mapa general:
 - `docs/DECISIONES.md` — ADR;
 - `docs/VALIDACION.md` — estrategia/evidencia de pruebas;
 - `docs/historico/` — evidencia histórica que no describe el estado vigente.
+- `CODE_OF_CONDUCT.md` — normas de participación;
+- `SUPPORT.md` — canales y límites de soporte.
 
 No añadir una nueva revisión cronológica al final de un documento vigente cuando el cambio puede integrarse en su estructura actual.
 
@@ -258,3 +262,5 @@ Consultar:
 - [`.github/CODEOWNERS`](.github/CODEOWNERS);
 - [`docs/DECISIONES.md`](docs/DECISIONES.md);
 - [`docs/INDICE.md`](docs/INDICE.md).
+- [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md);
+- [`SUPPORT.md`](SUPPORT.md).
