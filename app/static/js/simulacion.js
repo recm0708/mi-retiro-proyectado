@@ -17,7 +17,7 @@
 // Configuración general
 // ============================================================
 
-const CLAVE_SIMULACION = "calculadoraPensionCSS.simulacion";
+const CLAVE_SIMULACION = "miRetiroProyectado.simulacion";
 
 // El año se obtiene dinámicamente del equipo del Asegurado(a).
 const ANIO_ACTUAL = new Date().getFullYear();
@@ -276,7 +276,7 @@ function mostrarPaso(numeroPaso) {
 
 
 // ============================================================
-// Procedencia visible de datos — contrato transversal UX.4.6d R18
+// Procedencia visible de datos importados y editados
 // ============================================================
 
 function codigoProcedenciaDesdeOrigen(origen) {
@@ -655,9 +655,9 @@ function actualizarOrigenCamposCuotas(simulacion) {
     ...(simulacion.origen_campos_cuotas || {}),
   };
 
-  // Compatibilidad con simulaciones creadas antes de UX.4.6c: cuando ya
-  // existe una referencia confirmada, se reconstruye el origen de los
-  // campos que el propio comprobante sí aportó.
+  // Si el estado serializado no incluye procedencia por campo pero sí una
+  // referencia confirmada, reconstruye esa metadata desde los datos que
+  // el propio comprobante aportó.
   if (importacionConfirmada && simulacion.referencia_mi_retiro_seguro) {
     const referencia = simulacion.referencia_mi_retiro_seguro;
 

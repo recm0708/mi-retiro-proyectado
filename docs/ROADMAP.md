@@ -122,11 +122,21 @@ Este roadmap describe **estado actual y trabajo futuro**. La evolución detallad
 
 ## 3. UX.4.6 — trabajo reanudado después de GOV.1
 
-**Bloque activo:** UX.4.6e — Paso 4 · Proyección salarial/laboral.
+**Bloque activo:** UX.4.6e — Estandarización técnica, comentarios y coherencia de interfaz post-GOV.1.
 
-- [ ] **UX.4.6e — Paso 4 · Proyección salarial/laboral**
-- [ ] **UX.4.6f — Paso 5 · Escenarios de retiro**
-- [ ] **UX.4.6g — Paso 6 · Resultados y exportación**
+- [ ] **UX.4.6e — Estandarización técnica, comentarios y coherencia de interfaz post-GOV.1**
+  - [x] R1 — auditoría integral del código y definición del patrón documental por tecnología;
+  - [x] R2 — normalización Python/tests y corrección de precisión detectada durante la auditoría; 550 pruebas en `OK`;
+  - [x] R3 — normalización JavaScript y cambio definitivo de almacenamiento a `miRetiroProyectado.*`; 558 pruebas en `OK`;
+  - [x] R4 — normalización Python restante, HTML/Jinja/CSS y pruebas históricas sin alterar contratos funcionales ni la cascada; 566 pruebas en `OK`;
+  - [x] R5 — coherencia GOV → interfaz visible y preparación pública del repositorio; 576 pruebas en `OK`;
+  - [x] R6 — documentación transversal y normalización definitiva de la secuencia UX.4.6; 586 pruebas en `OK`;
+  - [x] R7 — regresiones y auditoría de coherencia código/interfaz/documentación; 598 pruebas en `OK`;
+  - [ ] R8 — prueba funcional manual y automática completa hasta Paso 3 (en validación; corrección de reconsentimiento incorporada);
+  - [ ] R9 — cierre técnico, CI, versión, PR y tag.
+- [ ] **UX.4.6f — Paso 4 · Proyección salarial/laboral**
+- [ ] **UX.4.6g — Paso 5 · Escenarios de retiro**
+- [ ] **UX.4.6h — Paso 6 · Resultados y exportación**
 
 Las revisiones UX futuras deben reutilizar los contratos visuales, de navegación, procedencia, privacidad y validación ya consolidados.
 
@@ -176,7 +186,7 @@ La familia `0.1.0-beta.1` solo podrá evaluarse cuando:
 - [x] la suite y CI de gobierno estén en verde;
 - [x] no existan discrepancias conocidas entre versión, código y documentación de GOV.1;
 - [x] las limitaciones materiales estén declaradas;
-- [ ] se complete/revise el alcance funcional restante de UX.4.6e–g;
+- [ ] se complete/revise el alcance funcional restante de UX.4.6e–h;
 - [ ] se complete la revisión jurídica externa prevista antes de publicación pública/comercial;
 - [ ] se cierre la auditoría ampliada de accesibilidad y cualquier gate de despliegue aplicable;
 - [ ] se decida expresamente qué funciones quedan dentro de la primera beta pública.

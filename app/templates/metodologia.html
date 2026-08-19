@@ -115,6 +115,49 @@
     </div>
   </section>
 
+  <section class="methodology-section" id="ayuda-contacto" aria-labelledby="metodologia-ayuda-contacto">
+    <h2 id="metodologia-ayuda-contacto" class="h3">Ayuda, contacto y proyecto</h2>
+    <p class="text-secondary">
+      Estos canales sirven para dudas sobre el uso de la herramienta, documentación y seguimiento del proyecto.
+      No envíes cédulas, números de Seguro Social, documentos personales ni historiales salariales reales por correo o por GitHub.
+    </p>
+
+    <div class="row g-3">
+      <div class="col-12 col-lg-4">
+        <article class="methodology-source-card h-100">
+          <span class="badge text-bg-light border mb-2">Ayuda</span>
+          <h3 class="h5">Uso de la aplicación</h3>
+          <p>Para consultas generales sobre funcionamiento, documentación o alcance de Mi Retiro Proyectado.</p>
+          <a class="btn btn-sm btn-outline-primary btn-center-content" href="mailto:ruben.canizares@outlook.com">
+            Contactar sobre la aplicación
+          </a>
+        </article>
+      </div>
+
+      <div class="col-12 col-lg-4">
+        <article class="methodology-source-card h-100">
+          <span class="badge text-bg-light border mb-2">Proyecto</span>
+          <h3 class="h5">Código y documentación técnica</h3>
+          <p>El repositorio reúne el código fuente, la documentación versionada, el historial de cambios y los canales de colaboración del proyecto.</p>
+          <a class="btn btn-sm btn-outline-primary btn-center-content" href="https://github.com/recm0708/mi-retiro-proyectado" target="_blank" rel="noopener noreferrer">
+            Abrir repositorio del proyecto
+          </a>
+        </article>
+      </div>
+
+      <div class="col-12 col-lg-4">
+        <article class="methodology-source-card h-100">
+          <span class="badge text-bg-light border mb-2">Verificación</span>
+          <h3 class="h5">Información individual oficial</h3>
+          <p>Los datos y derechos individuales deben verificarse en los canales oficiales de la Caja de Seguro Social de Panamá.</p>
+          <a class="btn btn-sm btn-outline-primary btn-center-content" href="#metodologia-recursos">
+            Ver recursos oficiales
+          </a>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <section class="methodology-section" id="privacidad-datos" aria-labelledby="metodologia-privacidad">
     <h2 id="metodologia-privacidad" class="h3">Privacidad y protección de datos personales</h2>
     <p class="text-secondary">
@@ -134,7 +177,8 @@
       </ul>
       <p class="mb-2">
         Contacto sobre privacidad: <a href="mailto:ruben.canizares@outlook.com">ruben.canizares@outlook.com</a>.
-        Repositorio: <a href="https://github.com/recm0708/mi-retiro-proyectado" target="_blank" rel="noopener noreferrer">GitHub del proyecto</a>.
+        Para ayuda general y seguimiento técnico, consulta la sección
+        <a href="#ayuda-contacto">Ayuda, contacto y proyecto</a>.
       </p>
       <div class="d-flex flex-wrap gap-2">
         <button class="btn btn-sm btn-outline-primary btn-center-content" type="button" data-privacy-action="review">
@@ -186,7 +230,7 @@
           <h3 class="h5">{{ recurso.titulo }}</h3>
           <p>{{ recurso.descripcion }}</p>
           <a class="btn btn-sm btn-outline-primary btn-center-content" href="{{ recurso.url }}" target="_blank" rel="noopener noreferrer">
-            Abrir recurso oficial
+            Abrir fuente oficial
           </a>
         </article>
       </div>

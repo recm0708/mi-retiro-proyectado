@@ -1,5 +1,6 @@
 name: Reporte de error
 description: Reporta un comportamiento reproducible de Mi Retiro Proyectado.
+labels: ["bug", "needs-triage"]
 title: "[BUG] "
 body:
   - type: markdown

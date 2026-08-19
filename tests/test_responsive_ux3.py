@@ -19,8 +19,8 @@ class TestResponsiveUX3(unittest.TestCase):
         css = CSS.read_text(encoding="utf-8")
         moderno = DESIGN.read_text(encoding="utf-8")
 
-        self.assertIn("UX.3 — responsive real y navegación móvil", css)
-        self.assertIn("UX.4.6b — Paso 1 y navegación común del asistente", moderno)
+        self.assertIn("Responsive y navegación móvil", css)
+        self.assertIn("Paso 1 y navegación común del asistente", moderno)
         self.assertIn(".wizard-navigation-bar-top", moderno)
         self.assertIn("position: sticky;", moderno)
         self.assertIn(".wizard-navigation-bar-bottom", moderno)
@@ -62,7 +62,8 @@ class TestResponsiveUX3(unittest.TestCase):
         metodologia = METODOLOGIA.read_text(encoding="utf-8")
 
         self.assertIn("Recursos oficiales para verificar información individual", metodologia)
-        self.assertIn("Abrir recurso oficial", metodologia)
+        self.assertIn("Abrir fuente oficial", metodologia)
+        self.assertNotIn("Abrir recurso oficial", metodologia)
         self.assertIn("recurso.url", metodologia)
         self.assertIn(
             "btn btn-sm btn-outline-primary btn-center-content",

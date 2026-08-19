@@ -103,7 +103,7 @@ GOV.1.4 y GOV.1.5 están cerrados internamente. GOV.1.5 incorpora threat model, 
 - hardening específico si se decide un despliegue remoto;
 - controles GitHub/documentación de GOV.1.6 completados; la configuración alojada exclusivamente en GitHub requiere verificación periódica;
 - GOV.1.7 adopta una licencia propietaria pre-beta; la revisión jurídica externa de publicación/distribución continúa pendiente;
-- cierre funcional de UX.4.6e–g y demás gates de primera beta;
+- cierre de UX.4.6e y del alcance funcional UX.4.6f–h, además de los demás gates de primera beta;
 - declaración de aptitud para despliegue público.
 
 ## 10. Regla de transparencia

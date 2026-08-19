@@ -27,12 +27,16 @@ from app.modelos.trazabilidad import (
 
 
 def _moneda(valor: float | int | Decimal | None) -> str:
+    """Formatea un importe para la explicación humana de trazabilidad."""
+
     if valor is None:
         return "No aplica"
     return f"B/.{float(valor):,.2f}"
 
 
 def _numero(valor: float | int | Decimal | None, decimales: int = 2) -> str:
+    """Formatea un número técnico sin ceros decimales innecesarios."""
+
     if valor is None:
         return "No aplica"
     numero = float(valor)
@@ -43,6 +47,8 @@ def _numero(valor: float | int | Decimal | None, decimales: int = 2) -> str:
 
 
 def _porcentaje(valor: float | int | Decimal | None) -> str:
+    """Formatea un porcentaje para una sustitución explicativa."""
+
     if valor is None:
         return "No aplica"
     return f"{float(valor):.2f} %"
@@ -56,6 +62,8 @@ def _fuente(
     articulos: list[str],
     nota: str | None = None,
 ) -> FuenteTrazabilidad:
+    """Construye una referencia normativa normalizada para la trazabilidad."""
+
     return FuenteTrazabilidad(
         id=identificador,
         titulo=titulo,
@@ -67,6 +75,8 @@ def _fuente(
 
 
 def _fuentes_comunes(urls: dict) -> list[FuenteTrazabilidad]:
+    """Construye las fuentes legales transversales compartidas por los motores."""
+
     return [
         _fuente(
             "texto_unico",

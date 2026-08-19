@@ -1,3 +1,5 @@
+"""Regresiones del bloque unificado de información personal del Paso 1."""
+
 import unittest
 from pathlib import Path
 

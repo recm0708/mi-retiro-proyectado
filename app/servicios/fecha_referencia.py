@@ -34,6 +34,8 @@ _CACHE_SEGUNDOS = 300.0
 
 @dataclass(frozen=True)
 class FechaReferencia:
+    """Fecha externa y evidencia mínima de confianza para controles de vigencia."""
+
     fecha: date | None
     confiable: bool
     fuente: str
@@ -82,6 +84,8 @@ def _consultar_fecha_http(url: str) -> date | None:
 
 
 def _consultar_fuentes() -> FechaReferencia:
+    """Consulta en paralelo las fuentes oficiales y reconcilia sus fechas."""
+
     inicio = monotonic()
     fechas: list[tuple[str, date]] = []
 

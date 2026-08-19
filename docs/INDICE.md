@@ -2,7 +2,7 @@
 
 **Estado:** vigente
 **Versión de aplicación revisada:** `0.0.24-beta`
-**Última actualización transversal:** saneamiento de repositorio post-GOV.1 — 2026-08-18
+**Última actualización transversal:** UX.4.6e R7 — auditoría de coherencia — 2026-08-18
 
 Este archivo es el punto de entrada para la documentación técnica, funcional, normativa, de privacidad, validación y auditoría de Mi Retiro Proyectado.
 
@@ -25,7 +25,9 @@ Este archivo es el punto de entrada para la documentación técnica, funcional, 
 - [`MIGRACION_FIRMAS_GIT_2026-08-17.md`](MIGRACION_FIRMAS_GIT_2026-08-17.md) — firma SSH y migración histórica controlada.
 - [`../.github/allowed_signers`](../.github/allowed_signers) — claves públicas autorizadas.
 - [`AUDITORIA_GITHUB.md`](AUDITORIA_GITHUB.md) — controles GitHub y auditoría automática.
+- [`PREPARACION_PUBLICA_GITHUB.md`](PREPARACION_PUBLICA_GITHUB.md) — metadata, topics, labels, badges y checklist pre-publicación.
 - [`AUDITORIA_REPOSITORIO_2026-08-18.md`](AUDITORIA_REPOSITORIO_2026-08-18.md) — auditoría integral local/remota post-GOV.1.
+- [`AUDITORIA_UX46E_R7_2026-08-18.md`](AUDITORIA_UX46E_R7_2026-08-18.md) — auditoría transversal de coherencia código/interfaz/documentación de UX.4.6e.
 - [`CIERRE_GOV1.md`](CIERRE_GOV1.md) — evidencia definitiva del cierre GOV.1.
 - [`../LICENSE`](../LICENSE) — licencia propietaria de materiales originales.
 - [`LICENCIA_Y_DISTRIBUCION.md`](LICENCIA_Y_DISTRIBUCION.md) — evaluación y decisión de licencia.
@@ -103,6 +105,7 @@ GOV.1.5 completa los procedimientos internos; la revisión jurídica externa y c
 - [`../CODE_OF_CONDUCT.md`](../CODE_OF_CONDUCT.md) — reglas de convivencia y colaboración.
 - [`../SUPPORT.md`](../SUPPORT.md) — rutas de consulta y reporte.
 - [`GUIA_INTERNA_DESARROLLO.md`](GUIA_INTERNA_DESARROLLO.md) — convenciones internas.
+- [`ESTANDAR_CODIGO_Y_COMENTARIOS.md`](ESTANDAR_CODIGO_Y_COMENTARIOS.md) — patrón permanente de comentarios y docstrings por tecnología.
 - [`../.editorconfig`](../.editorconfig) — formato.
 - [`../.gitattributes`](../.gitattributes) — normalización Git.
 - [`../.gitignore`](../.gitignore) — exclusiones y protección de datos locales.

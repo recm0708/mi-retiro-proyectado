@@ -6,6 +6,12 @@
    Referencia opcional importada desde Mi Retiro Seguro
    ============================================================ */
 
+/*
+ * Presenta una referencia individual extraída del comprobante y permite
+ * contrastarla con el resultado calculado por la aplicación. La referencia
+ * nunca calibra los motores ni sustituye las entradas confirmadas del usuario.
+ */
+
 function ocultarErrorReferenciaMiRetiro() {
   const alerta = document.getElementById("error-referencia-mi-retiro");
   if (!alerta) {
@@ -40,6 +46,12 @@ function formatearFechaIsoReferencia(valor) {
 }
 
 
+/**
+ * Compara la referencia importada con los datos personales ya confirmados.
+ *
+ * @param {Object} referencia Datos extraídos del comprobante.
+ * @returns {string[]} Diferencias que deben mostrarse al usuario.
+ */
 function obtenerInconsistenciasReferencia(referencia) {
   const simulacion = obtenerSimulacion();
   const persona = simulacion.persona || {};
@@ -153,6 +165,12 @@ function mostrarReferenciaMiRetiro(referencia) {
 }
 
 
+/**
+ * Envía el comprobante seleccionado al importador del backend.
+ *
+ * El archivo no se serializa dentro de la simulación; solo se conserva el
+ * resumen confirmado que devuelve el servicio.
+ */
 async function analizarReferenciaMiRetiro() {
   ocultarErrorReferenciaMiRetiro();
 
@@ -296,6 +314,11 @@ function obtenerResumenAcreditadoReferenciaGuardado() {
 }
 
 
+/**
+ * Presenta el contraste entre la referencia externa y el resultado actual.
+ *
+ * @param {Object} resumenActual Resultado calculado por la aplicación.
+ */
 function mostrarComparacionReferenciaMiRetiroSeguro(resumenActual) {
   const contenedor = document.getElementById(
     "resultado-comparacion-referencia",

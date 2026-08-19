@@ -324,7 +324,7 @@ class RegistroReferenciaMiRetiroSeguro(BaseModel):
 class ResumenReferenciaMiRetiroSeguro(BaseModel):
     """Datos confirmables extraídos de un comprobante personal en PDF.
 
-    UX.4.6b permite devolver identificadores opcionales cuando el documento
+    El importador puede devolver identificadores opcionales cuando el documento
     los etiqueta de forma inequívoca. Se usan solo en la sesión local y no
     intervienen en los motores de cálculo.
     """
@@ -681,7 +681,7 @@ class DatosRetiro(BaseModel):
 
     # Las cuotas reales pueden provenir de un reporte cuyo último mes
     # acreditado sea anterior al momento en que se realiza la simulación.
-    # UX.3 permite expresar ese dato como YYYY-MM y conserva la fecha
+    # La interfaz expresa ese dato como YYYY-MM y conserva la fecha
     # exacta de corte para compatibilidad y trazabilidad interna.
     ultimo_mes_cuotas: str | None = Field(
         default=None,

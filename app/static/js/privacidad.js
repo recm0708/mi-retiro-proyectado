@@ -1,19 +1,43 @@
 "use strict";
 
 /* ============================================================
-   UX.4.6d R7 — Consentimiento y consulta no disruptiva
+   Consentimiento, consulta y borrado de datos de privacidad
    ============================================================ */
 
-const CLAVE_PRIVACIDAD = "calculadoraPensionCSS.privacidadConsentimiento";
+/*
+ * Este módulo mantiene separado el consentimiento persistente de la
+ * autorización de la pestaña actual. No almacena la simulación en
+ * localStorage y coordina el modal de privacidad sin duplicar lógica
+ * previsional ni de navegación.
+ */
+
+const CLAVE_PRIVACIDAD = "miRetiroProyectado.privacidadConsentimiento";
 const VERSION_PRIVACIDAD = "2026-08-16.1";
-const CLAVE_SIMULACION_PRIVACIDAD = "calculadoraPensionCSS.simulacion";
-const CLAVE_PRIVACIDAD_SESION = "calculadoraPensionCSS.privacidadConsentimientoSesion";
+const CLAVE_SIMULACION_PRIVACIDAD = "miRetiroProyectado.simulacion";
+const CLAVE_PRIVACIDAD_SESION = "miRetiroProyectado.privacidadConsentimientoSesion";
 const MARGEN_FINAL_LECTURA = 18;
+
+// Las claves pre-beta solo se purgan. Nunca se consultan para recuperar
+// consentimiento, simulaciones ni preferencias antiguas.
+const CLAVES_PRIVACIDAD_LEGACY_SESION = [
+  "calculadoraPensionCSS.simulacion",
+  "calculadoraPensionCSS.privacidadConsentimientoSesion",
+];
+
+const CLAVES_PRIVACIDAD_LEGACY_LOCAL = [
+  "calculadoraPensionCSS.privacidadConsentimiento",
+];
 
 let modoPrivacidadActual = "consentimiento";
 let contextoPrivacidadActual = "simulacion";
 
 
+/**
+ * Devuelve el consentimiento vigente solo cuando también está autorizado
+ * para la pestaña actual.
+ *
+ * @returns {Object|null} Consentimiento válido o null.
+ */
 function obtenerConsentimientoPrivacidad() {
   try {
     const texto = window.localStorage.getItem(CLAVE_PRIVACIDAD);
@@ -40,6 +64,9 @@ function obtenerConsentimientoPrivacidad() {
 }
 
 
+/**
+ * Registra la aceptación versionada y habilita la sesión actual.
+ */
 function guardarConsentimientoPrivacidad() {
   window.localStorage.setItem(
     CLAVE_PRIVACIDAD,
@@ -57,10 +84,20 @@ function guardarConsentimientoPrivacidad() {
 }
 
 
+/**
+ * Elimina simulación y consentimiento sin limpiar almacenamiento ajeno.
+ */
 function borrarDatosSimulacionPorPrivacidad() {
-  window.sessionStorage.removeItem(CLAVE_SIMULACION_PRIVACIDAD);
-  window.sessionStorage.removeItem(CLAVE_PRIVACIDAD_SESION);
-  window.localStorage.removeItem(CLAVE_PRIVACIDAD);
+  [
+    CLAVE_SIMULACION_PRIVACIDAD,
+    CLAVE_PRIVACIDAD_SESION,
+    ...CLAVES_PRIVACIDAD_LEGACY_SESION,
+  ].forEach((clave) => window.sessionStorage.removeItem(clave));
+
+  [
+    CLAVE_PRIVACIDAD,
+    ...CLAVES_PRIVACIDAD_LEGACY_LOCAL,
+  ].forEach((clave) => window.localStorage.removeItem(clave));
 }
 
 
@@ -179,6 +216,12 @@ function configurarModoPrivacidad(modo) {
 }
 
 
+/**
+ * Abre las condiciones en modo consentimiento o consulta.
+ *
+ * @param {string} modo Modalidad de apertura.
+ * @param {string} contexto Superficie que solicita la apertura.
+ */
 function abrirCondicionesPrivacidad(modo = "consentimiento", contexto = "simulacion") {
   const modal = obtenerModalPrivacidad();
   if (!modal) return;
@@ -198,7 +241,7 @@ function abrirCondicionesPrivacidad(modo = "consentimiento", contexto = "simulac
 
 
 function rechazarPrivacidad() {
-  if (contextoPrivacidadActual === "fuentes") {
+  if (contextoPrivacidadActual !== "simulacion") {
     obtenerModalPrivacidad()?.hide();
     return;
   }
@@ -209,7 +252,7 @@ function rechazarPrivacidad() {
 
 
 function cerrarModalPrivacidad() {
-  if (modoPrivacidadActual === "revision" || contextoPrivacidadActual === "fuentes") {
+  if (modoPrivacidadActual === "revision" || contextoPrivacidadActual !== "simulacion") {
     obtenerModalPrivacidad()?.hide();
     return;
   }
@@ -299,7 +342,7 @@ document.addEventListener("DOMContentLoaded", () => {
   } else if (debeForzarVistaPrivacidad()) {
     abrirCondicionesPrivacidad(
       consentimiento ? "revision" : "consentimiento",
-      "fuentes",
+      esRutaSimulacion() ? "simulacion" : "inicio",
     );
     limpiarParametroPrivacidad();
   }

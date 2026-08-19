@@ -6,9 +6,21 @@
    Comparador transversal de escenarios
    ============================================================ */
 
-const CLAVE_SIMULACION_COMPARADOR = "calculadoraPensionCSS.simulacion";
+/*
+ * Lee el estado temporal ya validado por el asistente, construye una solicitud
+ * de comparación y presenta diferencias entre escenarios sin recalcular las
+ * fórmulas previsionales en JavaScript. Los resultados provienen siempre del
+ * backend y este módulo se limita a selección, formato y representación.
+ */
+
+const CLAVE_SIMULACION_COMPARADOR = "miRetiroProyectado.simulacion";
 
 
+/**
+ * Recupera la simulación temporal que sirve de contexto al comparador.
+ *
+ * @returns {Object|null} Estado serializado o null si no existe/es inválido.
+ */
 function obtenerSimulacionComparador() {
   const texto = sessionStorage.getItem(CLAVE_SIMULACION_COMPARADOR);
 
@@ -313,6 +325,12 @@ function valoresSeleccionados(nombre) {
 }
 
 
+/**
+ * Construye la solicitud que el backend utilizará para comparar escenarios.
+ *
+ * @param {Object} simulacion Estado validado del asistente.
+ * @returns {Object} Contrato de comparación listo para serializar.
+ */
 function construirSolicitudComparador(simulacion) {
   const solicitud = construirDatosIntegradosComparador(simulacion);
 
@@ -535,6 +553,11 @@ function mostrarResultadoComparador(respuesta) {
 }
 
 
+/**
+ * Envía la comparación al backend y presenta el resultado normalizado.
+ *
+ * Las fórmulas permanecen en Python; esta función solo orquesta la solicitud.
+ */
 async function ejecutarComparacion() {
   ocultarErrorComparador();
   const simulacion = obtenerSimulacionComparador();
@@ -589,6 +612,9 @@ async function ejecutarComparacion() {
 }
 
 
+/**
+ * Inicializa controles y opciones a partir de la simulación disponible.
+ */
 function prepararComparador() {
   const simulacion = obtenerSimulacionComparador();
   const sinSimulacion = document.getElementById("comparador-sin-simulacion");

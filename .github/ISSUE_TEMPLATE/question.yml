@@ -1,5 +1,6 @@
 name: Consulta / soporte
 description: Solicita ayuda de uso, instalación, documentación o desarrollo sin exponer datos sensibles.
+labels: ["question", "needs-triage"]
 title: "[CONSULTA] "
 body:
   - type: markdown

@@ -92,17 +92,21 @@ Los settings internos del ruleset que no expone el conector se consideran eviden
 
 ## 10. Metadatos y funciones del repositorio
 
-La normalización post-GOV.1 adopta estas decisiones mientras el repositorio permanezca privado:
+La normalización post-GOV.1 y UX.4.6e R5 adoptan estas decisiones:
 
-- nombre objetivo: `mi-retiro-proyectado`;
+- nombre: `mi-retiro-proyectado`;
 - descripción: “Aplicación web independiente y no oficial para estimar, explicar y comparar escenarios de retiro de la CSS de Panamá (SEBD, Mixto y SUCGS).”;
+- visibilidad actual: privada, con metadata y documentación preparadas para una publicación futura;
 - Issues: habilitado;
 - Wiki: deshabilitado para evitar una segunda fuente documental fuera de `docs/`;
 - Projects: deshabilitado mientras no exista un tablero de trabajo utilizado;
-- Discussions: deshabilitado por ahora;
-- topics: sin publicar mientras no exista decisión expresa, porque los nombres de topics son públicos incluso en repositorios privados.
+- Discussions: deshabilitado mientras Issues/Support cubran el flujo real;
+- topics: lista aprobada y documentada en `PREPARACION_PUBLICA_GITHUB.md`;
+- labels: taxonomía aprobada para Issues/PR y formularios preparados para etiquetado inicial;
+- README: badges de CI/gobernanza y metadata técnica visibles;
+- social preview: pendiente de cargar antes de la publicación amplia.
 
-El cambio de nombre conserva la historia del repositorio; los clones locales deben actualizar `origin` al nuevo URL. Las referencias históricas que documentan nombres de artefactos reales anteriores al rename no se reescriben.
+El cambio de nombre conserva la historia del repositorio; los clones locales deben usar el URL actual. Las referencias históricas que documentan nombres de artefactos reales anteriores al rename no se reescriben. La guía operativa de metadata pública se mantiene en `PREPARACION_PUBLICA_GITHUB.md`.
 
 ## 11. Límite de afirmación
 

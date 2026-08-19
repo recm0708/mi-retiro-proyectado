@@ -130,7 +130,7 @@ La interfaz implementa:
 - reiniciar simulación;
 - borrar datos de la aplicación en este navegador.
 
-El borrado integral elimina únicamente claves propiedad de Mi Retiro Proyectado. Los logs diagnósticos, cuando se han activado explícitamente, son archivos locales de desarrollo y se gestionan por separado.
+El borrado integral elimina únicamente claves propiedad de Mi Retiro Proyectado. Puede reconocer identificadores pre-beta conocidos exclusivamente para purgarlos, sin leerlos ni migrarlos. Al eliminar la constancia de consentimiento, la interfaz vuelve a presentar las condiciones desde Inicio y Simular sigue bloqueado mientras no exista una aceptación vigente. Los logs diagnósticos, cuando se han activado explícitamente, son archivos locales de desarrollo y se gestionan por separado.
 
 ## 11. CI y dependencias
 

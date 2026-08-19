@@ -1,17 +1,42 @@
 "use strict";
 
 /* ============================================================
-   UX.4.6d R6 — Gestión y eliminación controlada de datos
+   Gestión e invalidación controlada de datos locales
    ============================================================ */
 
-const CLAVE_GESTION_SIMULACION = "calculadoraPensionCSS.simulacion";
-const CLAVE_GESTION_PRIVACIDAD = "calculadoraPensionCSS.privacidadConsentimiento";
-const CLAVE_GESTION_PRIVACIDAD_SESION = "calculadoraPensionCSS.privacidadConsentimientoSesion";
-const CLAVE_GESTION_TEMA = "mi-retiro-proyectado-tema";
+/*
+ * Centraliza las acciones destructivas del asistente: limpiar un paso,
+ * reiniciar la simulación y borrar exclusivamente las claves propias de
+ * Mi Retiro Proyectado. La invalidación conserva las dependencias previas
+ * que siguen siendo válidas y elimina los resultados descendientes.
+ */
+
+const CLAVE_GESTION_SIMULACION = "miRetiroProyectado.simulacion";
+const CLAVE_GESTION_PRIVACIDAD = "miRetiroProyectado.privacidadConsentimiento";
+const CLAVE_GESTION_PRIVACIDAD_SESION = "miRetiroProyectado.privacidadConsentimientoSesion";
+const CLAVE_GESTION_TEMA = "miRetiroProyectado.tema";
+
+// Identificadores pre-beta que solo se reconocen durante el borrado integral.
+// No se leen ni migran para restaurar estado antiguo.
+const CLAVES_GESTION_LEGACY_SESION = [
+  "calculadoraPensionCSS.simulacion",
+  "calculadoraPensionCSS.privacidadConsentimientoSesion",
+];
+
+const CLAVES_GESTION_LEGACY_LOCAL = [
+  "calculadoraPensionCSS.privacidadConsentimiento",
+  "mi-retiro-proyectado-tema",
+];
 
 let accionGestionDatosPendiente = null;
 
 
+/**
+ * Obtiene el estado actual usando la API del asistente o el almacenamiento
+ * como respaldo cuando la función principal no está disponible.
+ *
+ * @returns {Object|null} Estado de simulación utilizable.
+ */
 function estadoSimulacionParaGestion() {
   if (typeof obtenerSimulacion === "function") {
     return obtenerSimulacion();
@@ -48,6 +73,14 @@ function objetoTieneDatos(valor) {
 }
 
 
+/**
+ * Determina si un paso contiene información que requiere confirmación antes
+ * de una operación destructiva.
+ *
+ * @param {number} numeroPaso Paso evaluado.
+ * @param {Object|null} simulacion Estado actual.
+ * @returns {boolean} true cuando existen datos relevantes.
+ */
 function pasoTieneDatos(numeroPaso, simulacion) {
   if (!simulacion) return false;
 
@@ -176,6 +209,12 @@ function limpiarDesdePaso2(simulacion) {
 }
 
 
+/**
+ * Limpia el paso indicado e invalida sus dependencias posteriores.
+ *
+ * @param {number} numeroPaso Paso que se reinicia.
+ * @param {Object} simulacion Estado mutable del asistente.
+ */
 function limpiarPasoEnEstado(numeroPaso, simulacion) {
   if (numeroPaso === 1) {
     const vacia = typeof crearSimulacionVacia === "function"
@@ -302,13 +341,36 @@ function solicitarReiniciarSimulacion() {
 }
 
 
+/**
+ * Elimina exclusivamente claves propias de Mi Retiro Proyectado.
+ *
+ * Incluye identificadores pre-beta únicamente para garantizar que el botón
+ * de borrado integral no deje una aceptación antigua que pueda reactivar una
+ * sesión. No existe lectura, restauración ni migración desde esas claves.
+ */
+function borrarAlmacenamientoPropioAplicacion() {
+  [
+    CLAVE_GESTION_SIMULACION,
+    CLAVE_GESTION_PRIVACIDAD_SESION,
+    ...CLAVES_GESTION_LEGACY_SESION,
+  ].forEach((clave) => window.sessionStorage.removeItem(clave));
+
+  [
+    CLAVE_GESTION_PRIVACIDAD,
+    CLAVE_GESTION_TEMA,
+    ...CLAVES_GESTION_LEGACY_LOCAL,
+  ].forEach((clave) => window.localStorage.removeItem(clave));
+}
+
+
 function solicitarBorrarDatosAplicacion() {
   configurarModalGestion({
     titulo: "Borrar datos de la aplicación en este navegador",
     mensaje: (
       "Se eliminarán la simulación en curso, la constancia local de aceptación de términos, "
       + "las preferencias de apariencia y demás estados guardados por Mi Retiro Proyectado en este navegador. "
-      + "Después volverás a Inicio. Esta acción no se puede deshacer."
+      + "Después volverás a Inicio y se abrirán nuevamente los términos para que puedas decidir si deseas aceptarlos otra vez. "
+      + "Esta acción no se puede deshacer."
     ),
     confirmar: "Borrar datos",
     tipo: "browser",
@@ -316,6 +378,9 @@ function solicitarBorrarDatosAplicacion() {
 }
 
 
+/**
+ * Ejecuta la acción destructiva previamente confirmada en el modal.
+ */
 function ejecutarGestionDatosConfirmada() {
   if (accionGestionDatosPendiente === "step") {
     const simulacion = estadoSimulacionParaGestion();
@@ -336,11 +401,8 @@ function ejecutarGestionDatosConfirmada() {
   }
 
   if (accionGestionDatosPendiente === "browser") {
-    window.sessionStorage.removeItem(CLAVE_GESTION_SIMULACION);
-    window.sessionStorage.removeItem(CLAVE_GESTION_PRIVACIDAD_SESION);
-    window.localStorage.removeItem(CLAVE_GESTION_PRIVACIDAD);
-    window.localStorage.removeItem(CLAVE_GESTION_TEMA);
-    window.location.replace("/");
+    borrarAlmacenamientoPropioAplicacion();
+    window.location.replace("/?privacidad=1");
   }
 }
 

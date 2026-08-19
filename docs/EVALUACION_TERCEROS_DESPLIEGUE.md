@@ -102,6 +102,25 @@ No deben subirse a GitHub:
 - evidencia sensible de incidentes;
 - logs diagnósticos reales con contenido sensible.
 
+
+### Shields.io — badges del README
+
+Uso actual:
+
+- badges estáticos de versión, Python y licencia en `README.md`;
+- solo afecta a la presentación del repositorio;
+- no forma parte del runtime de la simulación.
+
+No se envía intencionalmente:
+
+- PDF;
+- identidad;
+- salario;
+- cuotas;
+- resultado previsional.
+
+Riesgo residual: disponibilidad y metadata ordinaria asociada a la carga del recurso documental. El estado de CI y gobernanza usa badges propios de GitHub Actions.
+
 ## 3. TLS
 
 ### Localhost

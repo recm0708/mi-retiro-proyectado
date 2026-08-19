@@ -16,12 +16,12 @@ class TestGov18CierreGobierno(unittest.TestCase):
         self.assertEqual("0.0.24-beta", version)
         self.assertEqual(version, APP_VERSION)
 
-    def test_readme_declara_gov1_cerrado_y_ux46e_activo(self):
+    def test_readme_declara_gov1_cerrado_y_ux46e_estandarizacion_activa(self):
         texto = (ROOT / "README.md").read_text(encoding="utf-8")
         self.assertIn("**Versión formal vigente:** `0.0.24-beta`", texto)
         self.assertIn("**Programa GOV.1:** cerrado", texto)
         self.assertIn(
-            "**Bloque activo:** UX.4.6e — Paso 4 · Proyección salarial/laboral",
+            "**Bloque activo:** UX.4.6e — Estandarización técnica, comentarios y coherencia de interfaz post-GOV.1",
             texto,
         )
         self.assertIn("**GOV.1.8:**", texto)

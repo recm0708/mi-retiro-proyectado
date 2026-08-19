@@ -93,10 +93,17 @@ class TestUX46DGestionDatos(unittest.TestCase):
 
     def test_borrado_integral_elimina_solo_claves_de_la_aplicacion(self):
         bloque = self.gestion.split('accionGestionDatosPendiente === "browser"', 1)[1]
-        self.assertIn("CLAVE_GESTION_SIMULACION", bloque)
-        self.assertIn("CLAVE_GESTION_PRIVACIDAD_SESION", bloque)
-        self.assertIn("CLAVE_GESTION_PRIVACIDAD", bloque)
-        self.assertIn("CLAVE_GESTION_TEMA", bloque)
+        self.assertIn("borrarAlmacenamientoPropioAplicacion();", bloque)
+        helper = self.gestion.split("function borrarAlmacenamientoPropioAplicacion", 1)[1].split(
+            "function solicitarBorrarDatosAplicacion", 1
+        )[0]
+        self.assertIn("CLAVE_GESTION_SIMULACION", helper)
+        self.assertIn("CLAVE_GESTION_PRIVACIDAD_SESION", helper)
+        self.assertIn("CLAVE_GESTION_PRIVACIDAD", helper)
+        self.assertIn("CLAVE_GESTION_TEMA", helper)
+        self.assertIn("CLAVES_GESTION_LEGACY_SESION", helper)
+        self.assertIn("CLAVES_GESTION_LEGACY_LOCAL", helper)
+        self.assertIn('window.location.replace("/?privacidad=1")', bloque)
         self.assertNotIn("localStorage.clear", self.gestion)
         self.assertNotIn("sessionStorage.clear", self.gestion)
 

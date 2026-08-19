@@ -52,6 +52,20 @@ A partir de GOV.1.8, las regresiones históricas de GOV.1.3, GOV.1.5 y GOV.1.7 *
 
 La auditoría post-GOV.1 del 2026-08-18 confirmó 24/24 tags con firma SSH válida, integridad Git sin corrupción, archivos textuales vigentes sin BOM/CRLF/caracteres de control/whitespace final, JSON/YAML válidos y enlaces Markdown internos vigentes sin roturas detectadas. El detalle se conserva en `AUDITORIA_REPOSITORIO_2026-08-18.md`.
 
+UX.4.6e R3 añadió **8 regresiones** de namespace Web Storage y estándar documental, llevando la suite a **558 pruebas en `OK`**. R4 añade **8 regresiones** de documentación permanente del runtime: cobertura de docstrings en `app/`, módulos de pruebas documentados y ausencia de identificadores cronológicos `UX.*`/`GOV.*` en Python, Jinja/HTML y CSS vigentes.
+
+UX.4.6e R2 incorporó **10 regresiones específicas** surgidas de la auditoría técnica del contrato salarial existente: cuatro modalidades de proyección, crecimiento/descenso compuesto, salario futuro conocido, límites temporales, deduplicación de escenarios y separación del año actual frente al futuro por densidad de cuotas. La revisión cerró con **550 pruebas en `OK`**, compilación Python, sintaxis JavaScript y `git diff --check` limpios. La corrección protege una pieza ya implementada y **no adelanta UX.4.6f**, reservado al Paso 4 · Proyección salarial/laboral. La regresión histórica de firma Git conserva ADR-001..ADR-159 como evidencia y permite ADR posteriores únicamente si toda la numeración permanece consecutiva.
+
+UX.4.6e R3 añade **8 regresiones específicas** de mantenibilidad y almacenamiento: namespace `miRetiroProyectado.*`, ausencia de claves pre-beta en runtime vigente, coherencia entre módulos de borrado/privacidad/tema, ausencia de identificadores cronológicos en comentarios JavaScript de producción y presencia del estándar documental canónico. Sobre la línea base de 550 pruebas, el objetivo de R3 es **558 pruebas en `OK`**.
+
+UX.4.6e R4 cerró con **566 pruebas en `OK`** después de añadir 8 regresiones de documentación permanente del runtime. R5 añade **10 regresiones** sobre ayuda/contacto visible, repositorio, footer, botones de fuentes, badges, topics/labels documentados, Issue Forms y terceros de presentación. El objetivo de R5 es **576 pruebas en `OK`**, sin cambio de `VERSION`.
+
+UX.4.6e R5 cerró con **576 pruebas en `OK`**, YAML/Python/JavaScript válidos y `git diff --check` limpio. R6 añade **10 regresiones** de renumeración y metadata: secuencia vigente UX.4.6e–h, preservación de evidencia histórica, topics prioritariamente en español, alternativa controlada para SEBD y taxonomía de 21 labels. El objetivo de R6 es **586 pruebas en `OK`**, sin cambio de `VERSION`.
+
+UX.4.6e R6 cerró con **586 pruebas en `OK`**, compilación Python, sintaxis JavaScript y `git diff --check` limpios. R7 añade **12 regresiones de auditoría transversal** sobre secuencia documental vigente, docstrings, comentarios de runtime, namespace Web Storage, superficie visible post-GOV, enlaces Markdown, higiene textual/JSON y continuidad ADR. El objetivo de R7 es **598 pruebas en `OK`**, sin cambio de `VERSION`.
+
+UX.4.6e R7 cerró con **598 pruebas en `OK`**. Durante R8, la primera prueba manual detectó que el borrado integral podía dejar al navegador sin volver a presentar los términos al regresar a Simular. La corrección de R8 purga claves vigentes y residuos pre-beta exclusivamente durante el borrado, fuerza una nueva presentación de condiciones desde Inicio y añade **6 regresiones** ejecutables de reconsentimiento. El objetivo intermedio pasa a **604 pruebas en `OK`**, sin cambio de `VERSION`.
+
 ## 2. Comandos obligatorios
 
 ```powershell
@@ -148,6 +162,8 @@ python -m pip check
 - `tests/test_ux46d_revision7_privacidad_consulta.py`
 - `tests/test_ux46d_revision8_tablas.py`
 - `tests/test_ux46d_revision9_reactividad_privacidad.py`
+- `tests/test_ux46e_proyeccion_salarial.py`
+- `tests/test_ux46e_almacenamiento_comentarios_js.py`
 - `tests/test_ux4_remate_visual.py`
 
 ## 4. Categorías

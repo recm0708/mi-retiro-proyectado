@@ -6,6 +6,63 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ## [Unreleased]
 
+### UX.4.6e R8 — validación funcional hasta Paso 3
+
+- cerrada R7 con **598 pruebas en `OK`** y auditoría transversal limpia;
+- detectada durante la prueba manual una regresión de reconsentimiento: después de **Borrar datos de esta aplicación en este navegador**, el siguiente acceso a Simular podía no volver a presentar los términos;
+- reforzado el borrado integral para purgar tanto el namespace vigente como identificadores pre-beta residuales, exclusivamente con finalidad destructiva y sin restauración/migración;
+- el borrado vuelve a Inicio con solicitud explícita de mostrar nuevamente las condiciones y Simular continúa exigiendo consentimiento cuando este no existe;
+- añadidas regresiones ejecutables sobre almacenamiento y reapertura del consentimiento;
+- `VERSION` permanece en `0.0.24-beta` mientras continúa R8.
+
+### UX.4.6e R7 — auditoría transversal de coherencia
+
+- validada R6 con **586 pruebas en `OK`**, compilación Python, sintaxis JavaScript y `git diff --check` limpios;
+- auditada la coherencia entre código runtime, interfaz visible, documentación vigente, pruebas y metadata manual de GitHub;
+- confirmada cobertura de docstrings en `app/`, ausencia de identificadores cronológicos en comentarios de producción y ausencia de claves Web Storage pre-beta en runtime;
+- confirmados enlaces Markdown relativos vigentes, JSON válido, ausencia de BOM/whitespace final en archivos versionables y política canónica LF mediante `.gitattributes`, sin depender del EOL físico del checkout de Windows;
+- preservada la conclusión histórica de la auditoría post-GOV.1 con una nota posterior que remite a la secuencia UX.4.6e–h vigente;
+- añadida auditoría R7 y 12 regresiones transversales;
+- `VERSION` permanece en `0.0.24-beta` hasta el cierre integral de UX.4.6e.
+
+### UX.4.6e R6 — renumeración documental y metadata GitHub en español
+
+- validada R5 con 576 pruebas en `OK`, YAML/Python/JavaScript correctos y `git diff --check` limpio;
+- normalizada la secuencia vigente para reservar UX.4.6e a la estandarización transversal y desplazar Paso 4/5/6 a UX.4.6f/UX.4.6g/UX.4.6h;
+- preservadas sin reescritura las referencias históricas que documentan la numeración prospectiva vigente antes de R6;
+- adoptada una política de topics prioritariamente en español, manteniendo nombres tecnológicos canónicos como `python` y `fastapi`;
+- ampliada la taxonomía a 21 labels, conservando en inglés las convenciones GitHub `duplicate`, `good first issue`, `help wanted`, `invalid` y `wontfix`;
+- documentado `sebd` como topic preferido y `sebd-panama` como alternativa únicamente si la interfaz de GitHub impide crear el identificador exacto;
+- `VERSION` permanece en `0.0.24-beta` hasta el cierre integral de UX.4.6e.
+
+### UX.4.6e R5 — coherencia visible y preparación pública de GitHub
+
+- incorporada una sección visible de ayuda, contacto y proyecto dentro de Metodología y fuentes;
+- añadido acceso a Ayuda y contacto desde el footer sin exponer controles internos de gobierno al Asegurado(a);
+- unificada la acción de recursos individuales bajo la etiqueta `Abrir fuente oficial`;
+- preparado el README con badges de CI, auditoría, versión, Python y licencia;
+- documentados topics, labels, social preview y checklist de publicación en `docs/PREPARACION_PUBLICA_GITHUB.md`;
+- preparados los Issue Forms para aplicar labels iniciales cuando la taxonomía exista en GitHub;
+- documentado Shields.io como tercero exclusivo de presentación del README, fuera del runtime;
+- la visibilidad continúa privada y `VERSION` permanece en `0.0.24-beta` hasta el cierre formal de UX.4.6e.
+
+### UX.4.6e — Estandarización técnica, comentarios y coherencia de interfaz post-GOV.1
+
+- iniciada R2 de normalización técnica; durante la auditoría del backend se corrigió una deriva de precisión preexistente en la proyección de salario futuro conocido, sin adelantar el trabajo visual del Paso 4 reservado a UX.4.6f;
+- la modalidad de salario futuro conocido deriva su tasa compuesta equivalente íntegramente con `Decimal`;
+- se conserva la separación entre año actual acreditado/proyectado y años futuros completamente proyectados;
+- añadidas 10 regresiones específicas para las cuatro modalidades salariales, validaciones de horizonte y línea temporal;
+- desacoplada la regresión histórica de ADR-159 del límite total de ADR, preservando íntegra la evidencia ADR-001..ADR-159 y exigiendo numeración consecutiva para decisiones posteriores;
+- R2 cerró localmente con **550 pruebas en `OK`**, compilación Python, sintaxis JavaScript y `git diff --check` limpios;
+- iniciada R3 con un estándar canónico de comentarios/docstrings por tecnología;
+- normalizadas las claves de Web Storage a `miRetiroProyectado.*`, incluida la preferencia de tema, sin compatibilidad con identificadores pre-beta por decisión expresa del mantenedor;
+- retiradas referencias cronológicas `UX.*`/`GOV.*` de comentarios JavaScript de runtime y sustituidas por explicaciones funcionales permanentes;
+- iniciada R4 de normalización permanente del runtime: Python, Jinja/HTML y CSS dejan de incrustar identificadores cronológicos de fase en comentarios/docstrings;
+- completada la cobertura de docstrings en funciones y clases de `app/`, con énfasis en observabilidad, fecha externa, parsers y trazabilidad;
+- todos los módulos de pruebas cuentan con docstring de módulo y los comentarios CSS se normalizan sin reordenar reglas ni alterar la cascada;
+- reforzada documentación de módulos JavaScript que coordinan almacenamiento, privacidad, importaciones, comparación, gestión destructiva y accesibilidad;
+- `VERSION` permanece en `0.0.24-beta` hasta el cierre integral de UX.4.6e.
+
 ### Mantenimiento de repositorio post-GOV.1
 
 - auditado el repositorio local y remoto después del cierre GOV.1;

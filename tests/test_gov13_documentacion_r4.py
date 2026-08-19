@@ -1,3 +1,5 @@
+"""Regresiones de auditoría documental y trazabilidad de GOV.1.3 R4."""
+
 from pathlib import Path
 import re
 import unittest

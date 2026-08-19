@@ -1,8 +1,8 @@
 """Extracción segura de referencias desde comprobantes PDF de Mi Retiro Seguro.
 
 El servicio procesa el archivo en memoria y devuelve los datos que el Asegurado(a)
-puede revisar antes de importarlos. No persiste el PDF. Desde UX.4.6b puede exponer
-identificadores opcionales cuando aparecen con una etiqueta inequívoca.
+puede revisar antes de importarlos. No persiste el PDF y solo expone identificadores
+opcionales cuando aparecen con una etiqueta inequívoca.
 """
 
 from __future__ import annotations
@@ -25,6 +25,8 @@ MARCADOR_DOCUMENTO = (
 
 
 def _buscar(patron: str, texto: str, flags: int = re.IGNORECASE) -> str | None:
+    """Devuelve el primer grupo capturado por una búsqueda regular opcional."""
+
     coincidencia = re.search(patron, texto, flags)
     if not coincidencia:
         return None
@@ -113,12 +115,16 @@ def _buscar_identificador(
 
 
 def _monto(valor: str | None) -> float | None:
+    """Convierte un importe textual del comprobante en un valor numérico."""
+
     if not valor:
         return None
     return float(valor.replace(",", ""))
 
 
 def _fecha_ddmmyyyy(valor: str | None):
+    """Convierte una fecha DD/MM/YYYY válida o devuelve ``None``."""
+
     if not valor:
         return None
     try:
@@ -128,6 +134,8 @@ def _fecha_ddmmyyyy(valor: str | None):
 
 
 def _normalizar_sistema(texto: str) -> tuple[str, str]:
+    """Mapea el nombre textual del sistema a su código y etiqueta canónicos."""
+
     texto_mayus = texto.upper()
 
     if "SUBSISTEMA EXCLUSIVO DE BENEFICIO DEFINIDO" in texto_mayus or "SEBD" in texto_mayus:
@@ -147,6 +155,8 @@ def _normalizar_sistema(texto: str) -> tuple[str, str]:
 
 
 def _normalizar_naturaleza(prestacion: str | None) -> str:
+    """Clasifica la prestación detectada como mensual, pago único o desconocida."""
+
     texto = (prestacion or "").upper()
 
     if "PENSIÓN" in texto or "PENSION" in texto:
@@ -159,6 +169,8 @@ def _normalizar_naturaleza(prestacion: str | None) -> str:
 
 
 def _extraer_registros(texto: str) -> list[RegistroReferenciaMiRetiroSeguro]:
+    """Extrae filas anuales preservando su clasificación histórica/proyectada."""
+
     registros: list[RegistroReferenciaMiRetiroSeguro] = []
 
     patron = re.compile(
@@ -273,8 +285,8 @@ def extraer_referencia_desde_texto(texto: str) -> ResumenReferenciaMiRetiroSegur
             )
 
     # Se priorizan componentes etiquetados explícitamente. Si el comprobante
-    # solo ofrece un nombre completo, UX.4.6b R2 aplica una descomposición
-    # conservadora que el Asegurado(a) puede revisar antes de importar.
+    # solo ofrece un nombre completo, se aplica una descomposición conservadora
+    # que el Asegurado(a) puede revisar antes de importar.
     primer_nombre = _texto_opcional(_buscar(r"Primer\s+Nombre:\s*([^\n\r]+)", texto))
     segundo_nombre = _texto_opcional(_buscar(r"Segundo\s+Nombre:\s*([^\n\r]+)", texto))
     primer_apellido = _texto_opcional(_buscar(r"Primer\s+Apellido:\s*([^\n\r]+)", texto))

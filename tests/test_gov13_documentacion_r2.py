@@ -1,3 +1,5 @@
+"""Regresiones de coherencia documental consolidadas en GOV.1.3 R2."""
+
 from pathlib import Path
 import re
 import unittest

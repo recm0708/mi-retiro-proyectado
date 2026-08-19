@@ -163,7 +163,7 @@ def _proyectar_por_porcentaje(
     salario_base: float,
     anio_inicio: int,
     anio_fin: int,
-    porcentaje_anual: float,
+    porcentaje_anual: float | Decimal,
 ) -> list[ProyeccionSalarioAnual]:
     """Genera una serie salarial mediante crecimiento compuesto.
 
@@ -219,12 +219,13 @@ def _calcular_tasa_hasta_salario_futuro(
     salario_actual: float,
     salario_futuro: float,
     cantidad_anios: int,
-) -> float:
-    """Calcula la tasa anual compuesta necesaria para llegar a un salario.
+) -> Decimal:
+    """Calcula con ``Decimal`` la tasa anual compuesta equivalente.
 
-    Esta modalidad evita inventar aumentos intermedios arbitrarios.
-    Se calcula una tasa anual equivalente que conecta el salario
-    actual con el salario futuro indicado por el Asegurado(a).
+    La modalidad conecta exactamente dos datos aportados por el
+    Asegurado(a): el salario mensual base y un salario mensual futuro.
+    La tasa equivalente se conserva con precisión decimal para que la
+    trayectoria intermedia no introduzca artefactos binarios de ``float``.
     """
 
     if cantidad_anios <= 0:
@@ -233,16 +234,33 @@ def _calcular_tasa_hasta_salario_futuro(
             "a un año posterior al año inicial."
         )
 
-    tasa_decimal = (
-        (salario_futuro / salario_actual)
-        ** (1 / cantidad_anios)
-    ) - 1
+    salario_actual_decimal = a_decimal(
+        salario_actual
+    )
+    salario_futuro_decimal = a_decimal(
+        salario_futuro
+    )
 
-    return tasa_decimal * 100
+    factor_objetivo = (
+        salario_futuro_decimal
+        / salario_actual_decimal
+    )
+    exponente_anual = (
+        Decimal("1")
+        / Decimal(cantidad_anios)
+    )
+    factor_anual = (
+        factor_objetivo
+        ** exponente_anual
+    )
+
+    return (
+        factor_anual - Decimal("1")
+    ) * Decimal("100")
 
 
 def _validar_porcentaje(
-    porcentaje: float,
+    porcentaje: float | Decimal,
 ) -> None:
     """Evita porcentajes que produzcan salarios nulos o negativos."""
 

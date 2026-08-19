@@ -107,6 +107,8 @@ Cerrar GOV.1 no significa que la beta pública esté lista. Permanecen, según a
 - definición final del alcance de la primera beta;
 - inventario de licencias/NOTICE del artefacto real cuando exista empaquetado.
 
+> **Nota posterior — UX.4.6e R6:** al cerrar GOV.1, la secuencia prospectiva reservaba UX.4.6e/UX.4.6f/UX.4.6g para los Pasos 4/5/6. Durante la estandarización post-GOV.1 se reasignó UX.4.6e al bloque transversal actual y esos pasos pasaron a UX.4.6f/UX.4.6g/UX.4.6h. Las referencias anteriores se conservan como evidencia histórica y no se reinterpretan retroactivamente.
+
 ## 8. Decisión final
 
 Con todos los gates de cierre ejecutados satisfactoriamente:

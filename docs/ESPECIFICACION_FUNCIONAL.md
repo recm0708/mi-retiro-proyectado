@@ -123,7 +123,7 @@ Debe existir:
 - reiniciar simulación;
 - borrar datos locales de la aplicación.
 
-Toda acción destructiva requiere confirmación cuando existen datos.
+Toda acción destructiva requiere confirmación cuando existen datos. El borrado integral debe invalidar la aceptación local de privacidad y provocar una nueva presentación de las condiciones; si no se aceptan, el siguiente ingreso a Simular debe continuar bloqueado hasta obtener una aceptación vigente. Los identificadores pre-beta solo pueden reconocerse para su eliminación defensiva, nunca para restaurar o migrar estado.
 
 La invalidación es descendente salvo las reconciliaciones controladas del año actual descritas anteriormente.
 
