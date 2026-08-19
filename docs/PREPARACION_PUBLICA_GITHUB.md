@@ -37,9 +37,9 @@ Los topics priorizan vocabulario en español y se mantienen en minúsculas, sin 
 - `seguridad-social-panama`
 - `sistema-mixto`
 - `sucgs`
-- `sebd`
+- `sebd-panama`
 
-La evidencia manual de R6 confirmó **19/20 topics** configurados. `sebd` quedó pendiente porque la interfaz mostró una coincidencia distinta durante la captura. GitHub permite continuar escribiendo para crear un topic nuevo; debe intentarse el texto exacto `sebd` y confirmar la creación sin seleccionar otra sugerencia. Si la interfaz sigue impidiendo el alta exacta, se admite `sebd-panama` como alternativa específica y se documentará el valor final configurado. Nunca deben coexistir `sebd` y `sebd-panama`, para no exceder ni duplicar semántica.
+La evidencia manual posterior confirmó **20/20 topics** configurados. La interfaz de GitHub no permitió crear el identificador exacto `sebd`, por lo que se adoptó de forma definitiva `sebd-panama` como topic específico para el Subsistema Exclusivamente de Beneficio Definido. `sebd` no forma parte de la taxonomía final y no debe coexistir con `sebd-panama`, para evitar duplicidad semántica.
 
 Los nombres de topics son metadata pública de GitHub incluso cuando el repositorio es privado. La decisión de utilizarlos queda aceptada expresamente durante UX.4.6e.
 
@@ -133,4 +133,4 @@ Antes de hacer público el repositorio se debe revisar nuevamente:
 
 ## 9. Evidencia manual
 
-Topics, labels, social preview, visibilidad y algunos settings no son impuestos por archivos del repositorio. La evidencia manual de R6 confirma 21 labels y 19 topics configurados; falta resolver el topic SEBD y, más adelante, el social preview. Todo debe comprobarse directamente en GitHub antes de declarar completada la preparación pública.
+Topics, labels, social preview, visibilidad y algunos settings no son impuestos por archivos del repositorio. La evidencia manual confirma 21 labels y 20 topics configurados, incluido `sebd-panama`. El social preview continúa pendiente y deberá comprobarse directamente en GitHub antes de declarar completada la preparación pública.

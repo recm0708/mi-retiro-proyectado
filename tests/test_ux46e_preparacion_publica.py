@@ -53,6 +53,8 @@ class TestUX46ePreparacionPublica(unittest.TestCase):
         self.assertIn("Python-3.13%20%7C%203.14", self.readme)
         self.assertIn("licencia-propietaria", self.readme)
         self.assertIn("UX.4.6e — Estandarización técnica", self.readme)
+        self.assertIn("21 labels y 20/20 topics configurados", self.readme)
+        self.assertIn("`sebd-panama` adoptado", self.readme)
 
     def test_documento_publicacion_define_topics_aprobados(self):
         for topic in (
@@ -61,10 +63,9 @@ class TestUX46ePreparacionPublica(unittest.TestCase):
             "pension", "pensiones-panama", "planificacion-retiro",
             "prevision-social", "proyeccion-retiro", "proyeccion-salarial",
             "python", "retiro", "seguridad-social",
-            "seguridad-social-panama", "sistema-mixto", "sucgs", "sebd",
+            "seguridad-social-panama", "sistema-mixto", "sucgs", "sebd-panama",
         ):
             self.assertIn(f"`{topic}`", self.publicacion)
-        self.assertIn("`sebd-panama`", self.publicacion)
 
     def test_documento_publicacion_define_labels_y_aclara_commits(self):
         for label in (

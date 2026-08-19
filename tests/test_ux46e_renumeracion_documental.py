@@ -66,11 +66,11 @@ class TestUX46eRenumeracionDocumental(unittest.TestCase):
         for eliminado in ("`retirement`", "`retirement-planning`", "`social-security`"):
             self.assertNotIn(eliminado, self.publicacion)
 
-    def test_topic_sebd_tiene_alternativa_controlada(self):
-        self.assertIn("`sebd`", self.publicacion)
+    def test_topic_sebd_panama_es_el_valor_final_configurado(self):
         self.assertIn("`sebd-panama`", self.publicacion)
-        self.assertIn("19/20 topics", self.publicacion)
-        self.assertIn("Nunca deben coexistir", self.publicacion)
+        self.assertIn("20/20 topics", self.publicacion)
+        self.assertIn("no forma parte de la taxonomía final", self.publicacion)
+        self.assertNotIn("- `sebd`\n", self.publicacion)
 
     def test_taxonomia_declara_21_labels_y_convenciones_github(self):
         self.assertIn("21 labels", self.publicacion)

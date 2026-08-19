@@ -23,7 +23,7 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 - **GOV.1.7:** Licencia propietaria pre-beta y avisos de terceros cerrado
 - **GOV.1.8:** auditoría final y cierre pre-beta de gobierno cerrado
 - **UX.4.6e:** R7 cerrada con 598 pruebas en `OK`; R8 en validación funcional hasta Paso 3
-- **Preparación pública del repositorio:** 21 labels y 19/20 topics configurados; topic SEBD y social preview pendientes
+- **Preparación pública del repositorio:** 21 labels y 20/20 topics configurados; `sebd-panama` adoptado como topic SEBD; social preview pendiente
 - **Primera beta pública objetivo:** familia `0.1.0-beta.1`
 
 La versión se obtiene exclusivamente del archivo [`VERSION`](VERSION). La política completa se documenta en [`VERSIONING.md`](VERSIONING.md).

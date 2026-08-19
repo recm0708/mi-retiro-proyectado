@@ -30,7 +30,7 @@ class TestUX46eAuditoriaCoherencia(unittest.TestCase):
         texto = (ROOT / "README.md").read_text(encoding="utf-8")
         self.assertIn("UX.4.6e:** R7 cerrada con 598 pruebas", texto)
         self.assertIn("R8 en validación funcional", texto)
-        self.assertIn("21 labels y 19/20 topics", texto)
+        self.assertIn("21 labels y 20/20 topics", texto)
         self.assertNotIn("**Bloque activo:** UX.4.6e — Paso 4", texto)
 
     def test_auditoria_r7_existe_y_declara_linea_base_y_objetivo(self):
