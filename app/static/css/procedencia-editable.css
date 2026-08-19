@@ -1,0 +1,197 @@
+/* ==========================================================
+   Mi Retiro Proyectado
+   Procedencia editable de datos importados
+   ========================================================== */
+
+/*
+ * Los datos documentales conservan una señal de origen aunque puedan ser
+ * ajustados. Editado/completado/excluido describen la decisión del usuario,
+ * no una modificación del documento original.
+ */
+
+.imported-adjustment-warning {
+  margin: 1rem 0;
+}
+
+.data-provenance-note.excluded,
+.data-provenance-badge.excluded,
+.field-origin-note.excluded {
+  color: var(--bs-warning-text-emphasis);
+}
+
+.data-provenance-badge.excluded {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  padding: 0.2rem 0.55rem;
+  border: 1px solid var(--bs-warning-border-subtle);
+  border-radius: 999px;
+  background: var(--bs-warning-bg-subtle);
+  font-weight: 700;
+}
+
+.detail-field-imported-editable,
+.history-field-imported:not([readonly]) {
+  cursor: text;
+}
+
+select.detail-field-imported-editable {
+  cursor: pointer;
+}
+
+.detail-row-excluded {
+  opacity: 0.78;
+}
+
+.detail-row-excluded .detalle-salario-input {
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
+}
+
+.detail-row-excluded .detalle-total-mes {
+  color: var(--bs-warning-text-emphasis);
+}
+
+html[data-bs-theme="dark"] .data-provenance-badge.excluded {
+  border-color: rgba(255, 193, 7, 0.65);
+}
+
+html[data-app-theme="contrast"] .data-provenance-badge.excluded {
+  border: 2px solid currentColor;
+  background: transparent;
+}
+
+html[data-app-theme="contrast"] .detail-row-excluded {
+  opacity: 1;
+  outline: 2px dashed currentColor;
+  outline-offset: -2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .detail-row-excluded,
+  .data-provenance-badge.excluded {
+    transition: none;
+  }
+}
+
+/* ----------------------------------------------------------
+   Checkboxes documentales editables
+   ---------------------------------------------------------- */
+
+/*
+ * El contrato anterior pintaba el gancho únicamente mientras el checkbox
+ * importado permanecía bloqueado. R8 permite cambiar su inclusión; por eso
+ * el estado :checked debe seguir siendo perceptible aun cuando el control
+ * esté habilitado.
+ */
+.preview-ficha-cuota.form-check-input:checked,
+.detail-field-imported-editable.form-check-input:checked {
+  background-color: var(--app-primary) !important;
+  border-color: var(--app-primary) !important;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2.6' d='M3 8l3 3 7-7'/%3e%3c/svg%3e") !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: 0.9rem 0.9rem !important;
+}
+
+.preview-ficha-cuota.form-check-input:not(:checked),
+.detail-field-imported-editable.form-check-input:not(:checked) {
+  background-image: none !important;
+}
+
+.preview-ficha-cuota.form-check-input:not(:disabled),
+.detail-field-imported-editable.form-check-input:not(:disabled) {
+  cursor: pointer !important;
+}
+
+.preview-ficha-cuota.form-check-input:disabled {
+  opacity: 1 !important;
+  cursor: default !important;
+}
+
+html[data-app-theme="contrast"] .preview-ficha-cuota.form-check-input:checked,
+html[data-app-theme="contrast"] .detail-field-imported-editable.form-check-input:checked {
+  background-color: #ffffff !important;
+  border-color: #ffffff !important;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23000' stroke-linecap='round' stroke-linejoin='round' stroke-width='2.6' d='M3 8l3 3 7-7'/%3e%3c/svg%3e") !important;
+}
+
+html[data-app-theme="contrast"] .preview-ficha-cuota.form-check-input:not(:checked),
+html[data-app-theme="contrast"] .detail-field-imported-editable.form-check-input:not(:checked) {
+  background-color: #000000 !important;
+  border-color: #ffffff !important;
+  background-image: none !important;
+}
+
+/* ----------------------------------------------------------
+   Iconografía uniforme de procedencia
+   ---------------------------------------------------------- */
+
+.import-field-status,
+.field-origin-note,
+.data-provenance-note,
+.data-provenance-badge,
+.detail-row-provenance {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.38rem;
+}
+
+.import-field-status::before,
+.field-origin-note::before,
+.data-provenance-note::before,
+.data-provenance-badge::before,
+.detail-row-provenance::before {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 1.05rem;
+  width: 1.05rem;
+  min-width: 1.05rem;
+  font-weight: 850;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.import-field-status.detected::before,
+.field-origin-note.detected::before,
+.data-provenance-note.detected::before,
+.data-provenance-badge.detected::before,
+.detail-row-provenance.detected::before {
+  content: "●" !important;
+}
+
+.import-field-status.edited::before,
+.field-origin-note.edited::before,
+.data-provenance-note.edited::before,
+.data-provenance-badge.edited::before,
+.detail-row-provenance.edited::before,
+.import-field-status.manual::before,
+.field-origin-note.manual::before,
+.data-provenance-note.manual::before,
+.data-provenance-badge.manual::before,
+.detail-row-provenance.manual::before {
+  content: "✎" !important;
+}
+
+.import-field-status.excluded::before,
+.field-origin-note.excluded::before,
+.data-provenance-note.excluded::before,
+.data-provenance-badge.excluded::before,
+.detail-row-provenance.excluded::before {
+  content: "⊘" !important;
+}
+
+.import-field-status.missing::before,
+.field-origin-note.missing::before,
+.data-provenance-note.missing::before,
+.data-provenance-badge.missing::before,
+.detail-row-provenance.missing::before {
+  content: "!" !important;
+}
+
+/* El aviso solo ocupa espacio cuando existe un ajuste activo. */
+.imported-adjustment-warning.d-none {
+  display: none !important;
+}
+
