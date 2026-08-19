@@ -1,0 +1,61 @@
+/* ==========================================================
+   Mi Retiro Proyectado
+   Identidad gráfica oficial del runtime
+   ========================================================== */
+
+/*
+ * Esta capa contiene únicamente reglas de marca. Se carga después de las
+ * hojas transversales para sustituir el marcador tipográfico histórico por
+ * el símbolo oficial sin alterar componentes, temas ni lógica de negocio.
+ */
+
+.app-brand-mark {
+  width: 2.75rem;
+  height: 2.75rem;
+  flex: 0 0 2.75rem;
+  padding: 0;
+  overflow: hidden;
+  border-radius: 50%;
+  background: transparent;
+  box-shadow: none;
+  color: inherit;
+  font-size: 0;
+  line-height: 0;
+}
+
+.app-brand-mark-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+.app-brand:hover .app-brand-mark-image,
+.app-brand:focus-visible .app-brand-mark-image {
+  transform: none;
+}
+
+html[data-bs-theme="dark"] .app-brand-mark {
+  filter: drop-shadow(0 0.3rem 0.8rem rgba(0, 0, 0, 0.28));
+}
+
+html[data-app-theme="contrast"] .app-brand-mark {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+  filter: none;
+}
+
+@media (max-width: 575.98px) {
+  .app-brand-mark {
+    width: 2.5rem;
+    height: 2.5rem;
+    flex-basis: 2.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-brand-mark-image {
+    transition: none;
+  }
+}

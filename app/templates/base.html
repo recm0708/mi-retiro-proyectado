@@ -19,6 +19,30 @@
     {% endblock %}
   </title>
 
+  <!-- Identidad gráfica del navegador. -->
+  <link
+    rel="icon"
+    href="{{ url_for('static', path='/img/brand/favicon.ico') }}"
+    sizes="any"
+  >
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="32x32"
+    href="{{ url_for('static', path='/img/brand/favicon-32x32.png') }}"
+  >
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="16x16"
+    href="{{ url_for('static', path='/img/brand/favicon-16x16.png') }}"
+  >
+  <link
+    rel="apple-touch-icon"
+    sizes="180x180"
+    href="{{ url_for('static', path='/img/brand/apple-touch-icon.png') }}"
+  >
+
   <!-- Se aplica antes de los estilos para reducir cambios visuales al cargar. -->
   <script src="{{ url_for('static', path='/js/tema.js') }}"></script>
 
@@ -29,7 +53,7 @@
     crossorigin="anonymous"
   >
 
-  <!-- Capas visuales: base, sistema de diseño y ajustes de accesibilidad. -->
+  <!-- Capas visuales: base, sistema de diseño, accesibilidad e identidad. -->
   <link
     rel="stylesheet"
     href="{{ url_for('static', path='/css/style.css') }}"
@@ -41,6 +65,10 @@
   <link
     rel="stylesheet"
     href="{{ url_for('static', path='/css/accesibilidad.css') }}"
+  >
+  <link
+    rel="stylesheet"
+    href="{{ url_for('static', path='/css/brand.css') }}"
   >
 
   {% block head %}{% endblock %}
@@ -57,7 +85,15 @@
   >
     <div class="container app-navbar-inner">
       <a class="navbar-brand app-brand" href="/" aria-label="{{ app_name }}, inicio">
-        <span class="app-brand-mark" aria-hidden="true">MR</span>
+        <span class="app-brand-mark" aria-hidden="true">
+          <img
+            class="app-brand-mark-image"
+            src="{{ url_for('static', path='/img/brand/logo-mark-128.png') }}"
+            alt=""
+            width="128"
+            height="128"
+          >
+        </span>
         <span class="app-brand-copy">
           <strong>{{ app_name }}</strong>
           <small>Planificación previsional</small>
