@@ -6,6 +6,20 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ## [Unreleased]
 
+### Checkpoint pre-R8 — identidad visual y repositorio público
+
+- adoptado como logo oficial el símbolo circular propio de Mi Retiro Proyectado y versionada su fuente canónica, familia de iconos, derivados de runtime y Social Preview;
+- sustituido el marcador textual `MR` de la barra superior por el logo oficial, con favicons reales y Apple Touch icon;
+- añadida una capa `brand.css` dedicada para conservar separación entre identidad gráfica y sistema visual transversal;
+- configurado y versionado el Social Preview de GitHub en `assets/social/github-social-preview.png`;
+- cambiado el repositorio a visibilidad **pública** sin promover la aplicación a primera beta pública ni alterar `VERSION`;
+- revalidada la seguridad del repositorio público con Dependency graph, Dependabot, CodeQL Default setup, Secret Protection, Push protection y Private vulnerability reporting habilitados;
+- revisión manual de Code scanning, Secret scanning y Dependabot con **0 alertas abiertas** al 2026-08-19;
+- documentada la identidad oficial en `docs/IDENTIDAD_VISUAL.md` y actualizados README, seguridad, soporte, versionado, transparencia, auditoría GitHub y preparación pública;
+- añadidas 20 regresiones de identidad/publicación sobre la línea base de 604 pruebas;
+- validación integrada del checkpoint: **624 pruebas en `OK`** y `git diff --check` limpio;
+- `VERSION` permanece en `0.0.24-beta`; R8 funcional hasta Paso 3 continúa pendiente.
+
 ### UX.4.6e R8 — validación funcional hasta Paso 3
 
 - cerrada R7 con **598 pruebas en `OK`** y auditoría transversal limpia;

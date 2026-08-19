@@ -91,7 +91,7 @@ class TestGov18CierreGobierno(unittest.TestCase):
     def test_security_soporta_version_actual(self):
         texto = (ROOT / "SECURITY.md").read_text(encoding="utf-8")
         self.assertIn(
-            "| `0.0.24-beta` | Soportada durante el desarrollo interno vigente |",
+            "| `0.0.24-beta` | Soportada durante el desarrollo pre-beta vigente |",
             texto,
         )
         self.assertIn("`0.0.23-beta` y anteriores", texto)

@@ -1,11 +1,12 @@
 # Seguridad y privacidad
 
 **Estado:** Vigente
-**Versión de aplicación revisada:** `0.0.23-beta`
+**Versión de aplicación revisada:** `0.0.24-beta`
+**Versión base histórica preservada:** `0.0.23-beta`
 **Base documental preservada:** GOV.1.3 R3 — 2026-08-17
-**Revisión transversal vigente:** GOV.1.5 R3 — 2026-08-18
+**Revisión transversal vigente:** repositorio público y controles GitHub — 2026-08-19
 **Clasificación:** Seguridad / Privacidad / Técnica
-**Revisión externa:** Pendiente antes de beta pública
+**Revisión externa:** Pendiente antes de beta pública de producto
 
 Este documento describe controles técnicos existentes. No constituye una auditoría de seguridad externa.
 
@@ -18,7 +19,7 @@ La aplicación está diseñada actualmente para ejecución local.
 - no existe base de datos permanente de simulaciones;
 - no existen cuentas de usuario.
 
-Un despliegue remoto cambia el modelo de amenazas y requiere revisión específica.
+La visibilidad pública del repositorio no cambia este modelo de ejecución. Un despliegue remoto cambia el modelo de amenazas y requiere revisión específica.
 
 ## 2. Datos en Web Storage
 
@@ -132,7 +133,7 @@ La interfaz implementa:
 
 El borrado integral elimina únicamente claves propiedad de Mi Retiro Proyectado. Puede reconocer identificadores pre-beta conocidos exclusivamente para purgarlos, sin leerlos ni migrarlos. Al eliminar la constancia de consentimiento, la interfaz vuelve a presentar las condiciones desde Inicio y Simular sigue bloqueado mientras no exista una aceptación vigente. Los logs diagnósticos, cuando se han activado explícitamente, son archivos locales de desarrollo y se gestionan por separado.
 
-## 11. CI y dependencias
+## 11. CI, dependencias y seguridad del repositorio público
 
 CI ejecuta instalación/validación, `compileall`, sintaxis JavaScript y suite `unittest`.
 
@@ -140,12 +141,24 @@ Dependabot propone actualizaciones; no existe auto-merge.
 
 Las actualizaciones de `pypdf` requieren revisión explícita de importadores.
 
+Después de convertir el repositorio en público se confirmaron:
+
+- Dependency graph;
+- Dependabot alerts;
+- Dependabot security updates;
+- CodeQL con Default setup;
+- Secret Protection / secret scanning;
+- Push protection;
+- Private vulnerability reporting.
+
+La revisión manual del 2026-08-19 mostró cero alertas abiertas en Code scanning, Secret scanning y Dependabot. Este resultado es una evidencia puntual, no una garantía permanente; los paneles deben seguir revisándose.
+
 ## 12. Pendientes pre-beta
 
-GOV.1.5 completó internamente el threat model, los procedimientos de derechos/incidentes, la revisión de logs y la evaluación de terceros/TLS. Permanecen pendientes, según el alcance final de publicación:
+GOV.1.5 completó internamente el threat model, los procedimientos de derechos/incidentes, la revisión de logs y la evaluación de terceros/TLS. Permanecen pendientes, según el alcance final de publicación de producto:
 
 - servir dependencias críticas localmente cuando corresponda;
-- revisión jurídica externa de textos, privacidad, licencia y publicación;
+- revisión jurídica externa de textos, privacidad, licencia y publicación de producto;
 - hardening y configuración de producción para un despliegue remoto concreto;
 - auditoría de seguridad adicional si cambia la arquitectura, persistencia, red o modelo multiusuario.
 

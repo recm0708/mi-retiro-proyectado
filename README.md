@@ -1,5 +1,12 @@
-# Mi Retiro Proyectado
+<p align="center">
+  <img
+    src="assets/brand/logos/logo-mark-512.png"
+    alt="Logo de Mi Retiro Proyectado"
+    width="132"
+  >
+</p>
 
+# Mi Retiro Proyectado
 
 [![Validación continua](https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/ci.yml)
 [![Auditoría de gobernanza](https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/auditoria-gobernanza.yml/badge.svg?branch=main)](https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/auditoria-gobernanza.yml)
@@ -14,7 +21,7 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 ## Estado del proyecto
 
 - **Versión formal vigente:** `0.0.24-beta`
-- **Etapa:** desarrollo interno pre-beta
+- **Etapa:** desarrollo pre-beta; repositorio de código público y ejecución de aplicación orientada actualmente a entorno local
 - **Programa GOV.1:** cerrado — Auditoría, Gobierno y Trazabilidad Pre-Beta
 - **Bloque activo:** UX.4.6e — Estandarización técnica, comentarios y coherencia de interfaz post-GOV.1
 - **GOV.1.4:** Observabilidad y Developer Diagnostics cerrado
@@ -23,8 +30,11 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 - **GOV.1.7:** Licencia propietaria pre-beta y avisos de terceros cerrado
 - **GOV.1.8:** auditoría final y cierre pre-beta de gobierno cerrado
 - **UX.4.6e:** R7 cerrada con 598 pruebas en `OK`; R8 en validación funcional hasta Paso 3
-- **Preparación pública del repositorio:** 21 labels y 20/20 topics configurados; `sebd-panama` adoptado como topic SEBD; social preview pendiente
-- **Primera beta pública objetivo:** familia `0.1.0-beta.1`
+- **Preparación pública del repositorio:** 21 labels y 20/20 topics configurados; `sebd-panama` adoptado como topic SEBD; Social Preview e identidad visual oficial configurados
+- **Seguridad del repositorio público:** Dependency graph, Dependabot, CodeQL Default setup, Secret Protection, Push protection y Private vulnerability reporting habilitados; revisión manual del 2026-08-19 sin alertas abiertas
+- **Primera beta pública objetivo de la aplicación:** familia `0.1.0-beta.1`
+
+La visibilidad pública del repositorio **no convierte `0.0.24-beta` en una beta pública de la aplicación, no constituye un despliegue de producción y no modifica la licencia propietaria vigente**.
 
 La versión se obtiene exclusivamente del archivo [`VERSION`](VERSION). La política completa se documenta en [`VERSIONING.md`](VERSIONING.md).
 
@@ -47,7 +57,7 @@ Los tres motores generales principales implementados son:
 
 El alcance jurídico y matemático exacto de cada motor se encuentra en la documentación normativa y técnica. No debe asumirse que el motor general cubre regímenes especiales no documentados.
 
-La aplicación dispone además de **Developer Diagnostics** para desarrollo interno. Está desactivado por defecto y solo se activa mediante `MRP_DEV_MODE=1`; no constituye telemetría de producto ni envía logs automáticamente a terceros.
+La aplicación dispone además de **Developer Diagnostics** para desarrollo. Está desactivado por defecto y solo se activa mediante `MRP_DEV_MODE=1`; no constituye telemetría de producto ni envía logs automáticamente a terceros.
 
 ## Principios de diseño
 
@@ -75,6 +85,7 @@ Documentos principales:
 - [`docs/MOTOR_DE_CALCULO.md`](docs/MOTOR_DE_CALCULO.md) — flujo técnico de cálculo;
 - [`docs/NORMATIVA.md`](docs/NORMATIVA.md) — interpretación y aplicación normativa;
 - [`docs/FUENTES_NORMATIVAS.md`](docs/FUENTES_NORMATIVAS.md) — fuentes oficiales;
+- [`docs/IDENTIDAD_VISUAL.md`](docs/IDENTIDAD_VISUAL.md) — logo oficial, derivados, favicons y Social Preview;
 - [`docs/OBSERVABILIDAD_LOGS.md`](docs/OBSERVABILIDAD_LOGS.md) — Developer Diagnostics, esquema y privacidad de logs;
 - [`docs/VALIDACION.md`](docs/VALIDACION.md) — estrategia y evidencia de pruebas;
 - [`docs/SEGURIDAD_PRIVACIDAD.md`](docs/SEGURIDAD_PRIVACIDAD.md) — controles técnicos de seguridad y privacidad;
@@ -84,7 +95,7 @@ Documentos principales:
 - [`docs/EVALUACION_TERCEROS_DESPLIEGUE.md`](docs/EVALUACION_TERCEROS_DESPLIEGUE.md) — terceros, TLS y gates de despliegue;
 - [`SECURITY.md`](SECURITY.md) — reporte responsable de vulnerabilidades;
 - [`docs/AUDITORIA_GITHUB.md`](docs/AUDITORIA_GITHUB.md) — controles GitHub y auditoría automática;
-- [`docs/PREPARACION_PUBLICA_GITHUB.md`](docs/PREPARACION_PUBLICA_GITHUB.md) — metadata, topics, labels, badges y checklist de preparación pública;
+- [`docs/PREPARACION_PUBLICA_GITHUB.md`](docs/PREPARACION_PUBLICA_GITHUB.md) — metadata, topics, labels, badges, seguridad y mantenimiento del repositorio público;
 - [`docs/AUDITORIA_REPOSITORIO_2026-08-18.md`](docs/AUDITORIA_REPOSITORIO_2026-08-18.md) — auditoría integral post-GOV.1 del repositorio;
 - [`docs/AUDITORIA_UX46E_R7_2026-08-18.md`](docs/AUDITORIA_UX46E_R7_2026-08-18.md) — auditoría transversal de coherencia de UX.4.6e;
 - [`docs/CIERRE_GOV1.md`](docs/CIERRE_GOV1.md) — auditoría final y decisión de cierre de GOV.1;
@@ -92,7 +103,7 @@ Documentos principales:
 - [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) — avisos y obligaciones de terceros;
 - [`docs/ROADMAP.md`](docs/ROADMAP.md) — estado actual y próximos hitos;
 - [`docs/DECISIONES.md`](docs/DECISIONES.md) — decisiones ADR;
-- [`docs/REGISTRO_CAMBIOS_HISTORICO.md`](docs/REGISTRO_CAMBIOS_HISTORICO.md) — mapa histórico de evolución.
+- [`docs/REGISTRO_CAMBIOS_HISTORICO.md`](docs/REGISTRO_CAMBIOS_HISTORICO.md) — mapa histórico de evolución;
 - [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md) — reglas de participación y convivencia;
 - [`SUPPORT.md`](SUPPORT.md) — canales para soporte, errores, mejoras, privacidad y seguridad.
 
@@ -114,13 +125,13 @@ v0.0.22-beta
 v0.0.23-beta
 ```
 
-GOV.1.4 a GOV.1.7 se desarrollaron sobre `0.0.23-beta` porque fueron revisiones internas acumulativas. El cierre integral de GOV.1 se materializa como `0.0.24-beta` y dispone del tag formal:
+GOV.1.4 a GOV.1.7 se desarrollaron sobre `0.0.23-beta` porque fueron revisiones acumulativas. El cierre integral de GOV.1 se materializa como `0.0.24-beta` y dispone del tag formal:
 
 ```text
 v0.0.24-beta
 ```
 
-`0.0.24-beta` **no es la primera beta pública**. GOV.1 queda cerrado y se reanuda UX.4.6e; la familia pública objetivo continúa siendo `0.1.0-beta.1`.
+`0.0.24-beta` **no es la primera beta pública de la aplicación**. El repositorio de código ya es público, pero la familia de producto objetivo para la primera beta continúa siendo `0.1.0-beta.1`.
 
 Consultar:
 
@@ -142,6 +153,9 @@ mi-retiro-proyectado/
 │   ├── static/
 │   ├── templates/
 │   └── main.py
+├── assets/
+│   ├── brand/
+│   └── social/
 ├── data/
 ├── docs/
 │   └── historico/
@@ -225,7 +239,7 @@ La CI del repositorio ejecuta validaciones equivalentes sobre las versiones de P
 
 ## Privacidad y datos personales
 
-La versión actual no dispone de cuentas de usuario ni de una base de datos permanente de simulaciones. Los documentos seleccionados para importación se procesan bajo los controles documentados y los originales personales no deben incorporarse al repositorio.
+La versión actual no dispone de cuentas de usuario ni de una base de datos permanente de simulaciones. Los documentos seleccionados para importación se procesan bajo los controles documentados y los originales personales no deben incorporarse al repositorio público.
 
 Developer Diagnostics no debe registrar cuerpos HTTP, contenido PDF, identidad, salarios, cuotas detalladas, montos de pensión, cookies, tokens ni mensajes de excepción potencialmente sensibles. Los logs son locales, rotan y están excluidos de Git.
 
@@ -245,13 +259,13 @@ Consultar:
 - [`CONTRIBUTING.md`](CONTRIBUTING.md) — flujo de trabajo;
 - [`VERSIONING.md`](VERSIONING.md) — versionado;
 - [`.github/CODEOWNERS`](.github/CODEOWNERS) — propiedad de revisión;
-- [`docs/DECISIONES.md`](docs/DECISIONES.md) — ADR.
+- [`docs/DECISIONES.md`](docs/DECISIONES.md) — ADR;
 - [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md) — normas de participación;
 - [`SUPPORT.md`](SUPPORT.md) — rutas de soporte y reporte.
 
 ## Licencia
 
-Los materiales originales de Mi Retiro Proyectado se mantienen bajo una **licencia propietaria pre-beta / todos los derechos reservados**. La disponibilidad del código no concede por sí sola permiso para copiar, modificar, redistribuir, sublicenciar, explotar comercialmente o crear obras derivadas.
+Los materiales originales de Mi Retiro Proyectado se mantienen bajo una **licencia propietaria pre-beta / todos los derechos reservados**. La disponibilidad pública del código fuente **no concede por sí sola permiso** para copiar, modificar, redistribuir, sublicenciar, explotar comercialmente o crear obras derivadas.
 
 Consultar:
 
