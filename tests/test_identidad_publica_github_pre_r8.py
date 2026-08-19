@@ -9,7 +9,7 @@ DOCS = ROOT / "docs"
 
 
 class TestIdentidadPublicaGithubPreR8(unittest.TestCase):
-    """Protege marca, visibilidad pública y controles documentados de GitHub."""
+    """Protege marca y publicación sin congelar la versión posterior."""
 
     @classmethod
     def setUpClass(cls):
@@ -29,15 +29,16 @@ class TestIdentidadPublicaGithubPreR8(unittest.TestCase):
         cls.roadmap = (DOCS / "ROADMAP.md").read_text(encoding="utf-8")
         cls.validation = (DOCS / "VALIDACION.md").read_text(encoding="utf-8")
 
-    def test_readme_usa_logo_y_declara_estado_publico_sin_promover_version(self):
+    def test_readme_usa_logo_y_checkpoint_no_promovio_beta_publica(self):
         self.assertIn("assets/brand/logos/logo-mark-512.png", self.readme)
         self.assertIn("repositorio de código público", self.readme)
         self.assertIn("Social Preview e identidad visual oficial configurados", self.readme)
         self.assertIn("0.1.0-beta.1", self.readme)
-        self.assertEqual(
-            (ROOT / "VERSION").read_text(encoding="utf-8").strip(),
-            "0.0.24-beta",
+        self.assertIn(
+            "Checkpoint pre-R8 — identidad visual y repositorio público",
+            self.changelog,
         )
+        self.assertIn("0.0.24-beta", self.changelog)
 
     def test_identidad_visual_define_fuente_derivados_runtime_y_social(self):
         for esperado in (

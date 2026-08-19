@@ -6,6 +6,19 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ## [Unreleased]
 
+Sin cambios posteriores al candidato `0.0.25-beta`.
+
+## [0.0.25-beta] — 2026-08-19
+
+### UX.4.6e R9.1 — candidato local de cierre
+
+- promovida la fuente canónica de versión a `0.0.25-beta` como candidato del cierre de UX.4.6e;
+- R8 queda cerrada funcionalmente con 652 pruebas después del cierre documental;
+- desacopladas regresiones históricas de `0.0.24-beta` para permitir que la versión canónica avance sin reescribir la evidencia de GOV.1, R4, identidad pre-R8 o R8;
+- actualizado README y soporte de seguridad para la nueva línea pre-beta;
+- R9.1 cerró localmente con **660 pruebas en `OK`**, compilación/sintaxis y `git diff --check` limpios; R9.2 queda reservado a commits firmados, PR, CI, squash, validación post-merge y tag firmado `v0.0.25-beta`;
+- la primera beta pública continúa siendo futura y el siguiente bloque funcional será UX.4.6f — Paso 4.
+
 ### Checkpoint pre-R8 — identidad visual y repositorio público
 
 - adoptado como logo oficial el símbolo circular propio de Mi Retiro Proyectado y versionada su fuente canónica, familia de iconos, derivados de runtime y Social Preview;
@@ -23,11 +36,18 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 ### UX.4.6e R8 — validación funcional hasta Paso 3
 
 - cerrada R7 con **598 pruebas en `OK`** y auditoría transversal limpia;
-- detectada durante la prueba manual una regresión de reconsentimiento: después de **Borrar datos de esta aplicación en este navegador**, el siguiente acceso a Simular podía no volver a presentar los términos;
-- reforzado el borrado integral para purgar tanto el namespace vigente como identificadores pre-beta residuales, exclusivamente con finalidad destructiva y sin restauración/migración;
-- el borrado vuelve a Inicio con solicitud explícita de mostrar nuevamente las condiciones y Simular continúa exigiendo consentimiento cuando este no existe;
-- añadidas regresiones ejecutables sobre almacenamiento y reapertura del consentimiento;
-- `VERSION` permanece en `0.0.24-beta` mientras continúa R8.
+- detectada y corregida una regresión de reconsentimiento después de **Borrar datos de esta aplicación en este navegador**;
+- reforzado el borrado integral para purgar namespace vigente y residuos pre-beta exclusivamente con finalidad destructiva, sin restauración/migración;
+- validado el caso femenino mediante Mi Retiro Seguro + Ficha Digital hasta junio, con reconciliación 282/6 y exclusión explícita 281/5;
+- sustituido el bloqueo obligatorio de datos importados por un contrato editable que preserva fotografía original y copia de trabajo;
+- añadidos estados dinámicos `Detectado`, `Editado por ti`, `Completado manualmente`, `Excluido por ti` y `No detectado`;
+- la exclusión de junio conserva B/.1,562.37 como referencia documental, pero lo retira de cuota/salario utilizado; enero–mayo reales suman B/.7,321.13;
+- la reinclusión restaura 282 cuotas, 6 cuotas 2026 y B/.8,883.50;
+- sincronizada la edición posterior de campos personales con **Revisar importación**, conservando por separado el valor original del PDF;
+- corregidos dos defectos de la nueva capa: bucle de `MutationObserver` al importar y gancho invisible de checkboxes documentales editables;
+- normalizada la iconografía de procedencia y hechos reactivos los avisos de ajustes;
+- R8.2 cerró funcionalmente con **644 pruebas en `OK`**, compilación/sintaxis y validación manual satisfactoria;
+- ADR-167 formaliza el nuevo contrato; `VERSION` permanece en `0.0.24-beta` hasta R9.
 
 ### UX.4.6e R7 — auditoría transversal de coherencia
 

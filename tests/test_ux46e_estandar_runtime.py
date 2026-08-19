@@ -72,8 +72,16 @@ class TestUX46eEstandarRuntime(unittest.TestCase):
             texto,
         )
 
-    def test_r4_no_cambia_version_canonica(self):
-        self.assertEqual("0.0.24-beta", (ROOT / "VERSION").read_text(encoding="utf-8").strip())
+    def test_r4_preserva_0_0_24_como_evidencia_del_checkpoint(self):
+        texto = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
+        self.assertIn(
+            "iniciada R4 de normalización permanente del runtime",
+            texto,
+        )
+        self.assertIn(
+            "`VERSION` permanece en `0.0.24-beta` hasta el cierre integral de UX.4.6e",
+            texto,
+        )
 
 
 if __name__ == "__main__":
