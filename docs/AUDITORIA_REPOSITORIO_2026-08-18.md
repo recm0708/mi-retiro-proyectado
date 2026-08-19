@@ -166,3 +166,5 @@ La eliminación de la rama local solo debe ejecutarse si Git confirma que está 
 El saneamiento post-GOV.1 es mantenimiento de repositorio y documentación. Debe integrarse mediante un nuevo commit firmado y Pull Request. Se registra en `[Unreleased]` porque ocurre **después** del tag `v0.0.24-beta`.
 
 Una vez integrado y validado, el trabajo funcional puede continuar en **UX.4.6e — Paso 4 · Proyección salarial/laboral**.
+
+> **Nota posterior — UX.4.6e R7:** la recomendación final de esta auditoría conserva la numeración prospectiva vigente en el momento en que se emitió. La secuencia actual reserva **UX.4.6e** para la estandarización transversal y desplaza **Paso 4 / Paso 5 / Paso 6** a **UX.4.6f / UX.4.6g / UX.4.6h**. El texto original se preserva como evidencia histórica y no se reescribe retroactivamente.

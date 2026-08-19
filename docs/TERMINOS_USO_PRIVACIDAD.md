@@ -69,7 +69,7 @@ Existen tres niveles:
 - **Reiniciar simulación**;
 - **Borrar datos de esta aplicación en este navegador**.
 
-Cada uno tiene el alcance descrito en `GESTION_DATOS_SIMULACION.md`.
+Cada uno tiene el alcance descrito en `GESTION_DATOS_SIMULACION.md`. El borrado integral invalida la aceptación local y vuelve a presentar las condiciones desde Inicio; si se cierran sin aceptar, el siguiente ingreso a Simular debe solicitarlas nuevamente antes de habilitar el asistente.
 
 ## 9. Documentos originales
 

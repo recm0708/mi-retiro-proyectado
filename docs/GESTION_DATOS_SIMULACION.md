@@ -1,8 +1,9 @@
 # Gestión de datos de la simulación
 
 **Estado:** Vigente
-**Versión de aplicación revisada:** `0.0.23-beta`
-**Revisión documental:** GOV.1.3 R2 — 2026-08-17
+**Versión base documental:** `0.0.23-beta`
+**Revisión documental base:** GOV.1.3 R2 — 2026-08-17
+**Actualización vigente:** UX.4.6e R8 — 2026-08-19
 **Clasificación:** Técnica / Privacidad
 
 Este documento describe el ciclo de vida actual del estado local del asistente.
@@ -13,15 +14,20 @@ La simulación en curso utiliza `sessionStorage`.
 
 Claves relevantes del frontend:
 
-- `calculadoraPensionCSS.simulacion`;
-- `calculadoraPensionCSS.privacidadConsentimientoSesion`.
+- `miRetiroProyectado.simulacion`;
+- `miRetiroProyectado.privacidadConsentimientoSesion`.
 
 `localStorage` conserva estados que deben sobrevivir a una pestaña/sesión:
 
-- `calculadoraPensionCSS.privacidadConsentimiento`;
-- `mi-retiro-proyectado-tema`.
+- `miRetiroProyectado.privacidadConsentimiento`;
+- `miRetiroProyectado.tema`.
 
 No existe una base de datos permanente de simulaciones en la versión actual.
+
+Las claves usan el namespace `miRetiroProyectado.*` como contrato técnico único.
+La transición desde identificadores pre-beta anteriores es deliberadamente
+disruptiva: no existe fallback ni migración porque el cambio se ejecuta antes de
+la beta pública y se aceptó descartar el estado local de pruebas existente.
 
 ## 2. Limpiar un paso
 
@@ -57,7 +63,9 @@ La acción de borrado integral elimina las claves propias de:
 - consentimiento local;
 - apariencia.
 
-Después navega a Inicio.
+También purga identificadores pre-beta conocidos exclusivamente durante esta operación destructiva. Esas claves antiguas **no se leen, restauran ni migran**: se reconocen solo para impedir que una aceptación o estado residual sobreviva al borrado solicitado por el usuario.
+
+Después navega a Inicio con una solicitud explícita de volver a mostrar los términos. Si el usuario cierra esa consulta sin aceptar y luego entra a Simular, la ausencia de consentimiento obliga a abrir nuevamente el modal antes de habilitar el asistente.
 
 No ejecuta una limpieza global del almacenamiento del dominio ni borra datos ajenos a Mi Retiro Proyectado.
 

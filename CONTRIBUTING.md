@@ -39,6 +39,7 @@ Toda participación en issues, Pull Requests o revisiones debe respetar [`CODE_O
 - Toda interpretación normativa relevante debe ser trazable a una fuente y, cuando corresponda, a un ADR.
 - Los documentos personales reales no se versionan.
 - Código, pruebas y documentación se actualizan dentro de la misma unidad de trabajo.
+- Comentarios y docstrings siguen [`docs/ESTANDAR_CODIGO_Y_COMENTARIOS.md`](docs/ESTANDAR_CODIGO_Y_COMENTARIOS.md); explican intención y contratos, no la sintaxis obvia.
 
 ## 3. Fuente de versión
 
@@ -123,6 +124,7 @@ Mapa general:
 - `docs/historico/` — evidencia histórica que no describe el estado vigente.
 - `CODE_OF_CONDUCT.md` — normas de participación;
 - `SUPPORT.md` — canales y límites de soporte.
+- `docs/ESTANDAR_CODIGO_Y_COMENTARIOS.md` — patrón de comentarios, docstrings y documentación de runtime.
 
 No añadir una nueva revisión cronológica al final de un documento vigente cuando el cambio puede integrarse en su estructura actual.
 

@@ -1,5 +1,6 @@
 name: Solicitud de mejora
 description: Propón una mejora funcional, técnica, documental o de UX.
+labels: ["enhancement", "needs-triage"]
 title: "[MEJORA] "
 body:
   - type: markdown

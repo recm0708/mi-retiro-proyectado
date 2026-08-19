@@ -149,6 +149,8 @@ El usuario dispone de:
 - reiniciar simulación;
 - borrar datos de esta aplicación en este navegador.
 
+El borrado integral elimina también la constancia local de aceptación y vuelve a presentar las condiciones desde Inicio. Cerrar esa consulta no crea una nueva aceptación; un ingreso posterior a Simular sin consentimiento vigente vuelve a bloquear el asistente hasta que el usuario decida aceptarlo.
+
 Los controles locales no sustituyen un procedimiento formal de derechos si en el futuro existe tratamiento remoto/persistente.
 
 ## 14. Derechos

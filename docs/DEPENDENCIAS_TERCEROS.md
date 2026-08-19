@@ -78,6 +78,18 @@ GitHub Actions utiliza actualmente:
 
 Estas herramientas son de desarrollo/CI, no runtime del usuario final.
 
+
+## 5.1. Shields.io
+
+El README utiliza Shields.io para renderizar badges estáticos de versión, versiones Python y licencia.
+
+- no forma parte del runtime de Mi Retiro Proyectado;
+- no interviene en cálculos, importaciones ni tratamiento de datos;
+- la relación existe únicamente al visualizar la documentación del repositorio;
+- no se envía intencionalmente información de la simulación.
+
+Los badges de estado de CI y gobernanza se sirven directamente desde GitHub Actions.
+
 ## 6. Node.js
 
 Node 24 se usa en CI para `node --check`.

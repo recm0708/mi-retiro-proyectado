@@ -91,7 +91,9 @@ Modalidades vigentes:
 - salario futuro conocido;
 - múltiples escenarios porcentuales.
 
-La proyección compuesta conserva precisión interna y permanece separada del historial.
+La proyección compuesta conserva precisión interna y permanece separada del historial. En la modalidad de salario futuro conocido, la tasa anual equivalente se deriva con `Decimal` a partir del salario base, el salario objetivo y la cantidad de años; el valor no se convierte a `float` para efectuar la trayectoria.
+
+El año calendario actual no se sustituye por un salario anual proyectado completo. La línea temporal conserva la parte histórica/acreditada y agrega únicamente la porción futura compatible con las cuotas esperadas al cierre. Los años posteriores escalan el salario proyectado según la cantidad de cuotas futuras esperadas.
 
 ## 7. Línea temporal
 

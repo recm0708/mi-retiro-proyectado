@@ -4,8 +4,9 @@
 **Versión de aplicación revisada:** `0.0.23-beta`
 **Revisión documental:** GOV.1.3 R4 — 2026-08-17
 **Última actualización de gobierno:** Firma Git / ADR-159 — 2026-08-17
+**Última actualización técnica:** UX.4.6e R8 / ADR-166 — 2026-08-19
 **Clasificación:** Técnica / Gobierno / Auditoría
-**ADR indexadas:** 159 (`ADR-001` a `ADR-159`)
+**ADR indexadas:** 166 (`ADR-001` a `ADR-166`)
 
 Este registro conserva decisiones de arquitectura, modelado, UX, precisión, seguridad y aplicación normativa. Una ADR explica por qué el proyecto adoptó una decisión; no crea una norma jurídica.
 
@@ -189,6 +190,13 @@ R4 **no inventa un estado retroactivo** para esas decisiones. El índice las mar
 | ADR-157 | VERSION es la fuente canónica de versión de aplicación | vigente. |
 | ADR-158 | Reconstrucción histórica sin tags retroactivos | Parcialmente sustituida por ADR-159 para la materialización criptográfica de tags. |
 | ADR-159 | Firma SSH obligatoria y materialización controlada de tags históricos | vigente. |
+| ADR-160 | Salario futuro conocido conserva precisión decimal en toda la trayectoria | Aceptada para UX.4.6e R2. |
+| ADR-161 | Web Storage usa un namespace único de producto sin compatibilidad pre-beta | Aceptada para UX.4.6e R3. |
+| ADR-162 | Los comentarios de runtime son semánticos y no cronológicos | Aceptada para UX.4.6e R4. |
+| ADR-163 | La preparación pública separa información útil al usuario de gobierno interno | Aceptada para UX.4.6e R5. |
+| ADR-164 | La renumeración vigente no reescribe la historia UX anterior | Aceptada para UX.4.6e R6. |
+| ADR-165 | La auditoría transversal es un gate antes de la validación funcional manual | Aceptada para UX.4.6e R7. |
+| ADR-166 | El borrado integral invalida también residuos pre-beta y fuerza reconsentimiento | Aceptada para UX.4.6e R8. |
 
 ## 4. Registro íntegro de ADR
 
@@ -1633,3 +1641,90 @@ Se autoriza además una migración histórica controlada: `v0.0.1-beta` a `v0.0.
 **Motivo:** añadir autenticidad criptográfica y una cadena verificable de releases sin reescribir commits históricos, sin falsificar fechas y sin ocultar que los primeros 21 tags fueron materializados posteriormente.
 
 **Consecuencia:** ADR-158 sigue vigente en su prohibición de reescribir Git o aparentar existencia histórica de los tags, pero queda parcialmente sustituida respecto de no crear ningún tag retrospectivo. La materialización autorizada fue ejecutada el 2026-08-17; la excepción para reemitir `v0.0.22-beta` y `v0.0.23-beta` quedó consumida y vuelve a regir la inmutabilidad estricta.
+
+## ADR-160 — Salario futuro conocido conserva precisión decimal en toda la trayectoria
+
+**Estado:** Aceptada para UX.4.6e R2.
+
+**Decisión:** la modalidad `FUTURO_CONOCIDO` deriva la tasa anual compuesta equivalente mediante `Decimal` desde el salario mensual actual, el salario mensual futuro y la cantidad de años. La trayectoria reutiliza esa tasa sin convertirla a aritmética binaria de `float`; el redondeo monetario continúa ocurriendo únicamente al materializar cada registro visible.
+
+**Motivo:** el Paso 4 sirve como entrada a la línea temporal y posteriormente a escenarios previsionales. Una conversión innecesaria a `float` contradice el contrato general de precisión monetaria y puede introducir pequeñas derivas acumulativas sin aportar información adicional.
+
+**Alcance:** la corrección fue detectada durante la estandarización técnica UX.4.6e R2. No constituye el rediseño funcional/visual del Paso 4, que queda reservado a UX.4.6f.
+
+## ADR-161 — Web Storage usa un namespace único de producto sin compatibilidad pre-beta
+
+**Estado:** Aceptada para UX.4.6e R3.
+
+**Decisión:** todas las claves propias de Web Storage se normalizan bajo
+`miRetiroProyectado.*`: simulación, consentimiento persistente, autorización de
+sesión y apariencia. Se eliminan los identificadores pre-beta
+`calculadoraPensionCSS.*` y `mi-retiro-proyectado-tema` sin fallback ni migración.
+
+**Motivo:** la aplicación ya adoptó formalmente la identidad Mi Retiro Proyectado
+y todavía no existe una beta pública cuyos datos locales deban preservarse. El
+mantenedor confirmó el borrado de los estados de prueba existentes y autorizó una
+ruptura limpia para evitar arrastrar indefinidamente nombres técnicos anteriores.
+
+**Consecuencia:** después de aplicar esta revisión, un navegador que conserve datos
+bajo claves anteriores no los recuperará automáticamente. Cualquier cambio futuro
+de namespace se tratará como una migración de esquema y deberá decidir de forma
+explícita cómo conservar o descartar estado.
+
+## ADR-162 — Los comentarios de runtime son semánticos y no cronológicos
+
+**Estado:** Aceptada para UX.4.6e R4.
+
+**Decisión:** el código vigente de `app/` describe responsabilidades, contratos,
+límites y motivos sin conservar identificadores de fase `UX.*`/`GOV.*` en
+comentarios o docstrings. La historia de una revisión permanece en ADR, pruebas,
+`CHANGELOG.md`, `RELEASES.md` y documentación histórica. Las funciones y clases
+del runtime mantienen docstrings suficientes para que otro desarrollador pueda
+identificar fronteras de privacidad, parsing, red, trazabilidad y efectos
+secundarios sin narrar línea por línea.
+
+**Motivo:** un número de revisión envejece como comentario de implementación y no
+explica qué responsabilidad conserva el bloque. Los comentarios semánticos son
+más útiles para mantenimiento, revisión de seguridad y evolución del producto.
+
+**Consecuencia:** las pruebas pueden conservar identificadores históricos cuando
+forman parte de la trazabilidad de una regresión. La normalización de CSS no
+reordena reglas ni cambia la cascada; esta decisión es documental y de
+mantenibilidad, no un rediseño visual.
+
+## ADR-163 — La preparación pública separa información útil al usuario de gobierno interno
+
+**Estado:** Aceptada para UX.4.6e R5.
+
+**Decisión:** la interfaz puede mostrar ayuda, contacto, repositorio del proyecto, privacidad, fuentes oficiales, versión y carácter independiente. No expone como contenido de producto CODEOWNERS, rulesets, firmas Git, Dependabot, nombres de jobs CI, ADR internos ni otros controles de gobierno que no ayudan al Asegurado(a). La metadata de comunidad de GitHub —topics, labels, badges, Issue Forms y social preview— se prepara de forma separada en el repositorio.
+
+**Motivo:** preparar un repositorio para publicación no implica trasladar sus mecanismos internos de ingeniería a la interfaz de usuario. La aplicación debe conservar transparencia sobre lo que afecta a uso, datos, fuentes y soporte, mientras GitHub conserva la información de contribución, mantenimiento y auditoría.
+
+**Consecuencia:** el enlace al repositorio puede existir desde la interfaz sin afirmar que el acceso sea público en todas las etapas. Las labels se aplican a Issues/PR, no a commits; el README puede mostrar badges de estado del repositorio sin convertir esos controles en elementos del asistente previsional.
+## ADR-164 — La renumeración vigente no reescribe la historia UX anterior
+
+**Estado:** Aceptada para UX.4.6e R6.
+
+**Decisión:** UX.4.6e queda reservado al bloque transversal de estandarización técnica, comentarios, coherencia de interfaz y preparación del repositorio. El trabajo funcional posterior se identifica como UX.4.6f — Paso 4, UX.4.6g — Paso 5 y UX.4.6h — Paso 6. Los documentos vigentes deben usar esta secuencia. Los releases, auditorías, snapshots y bitácoras que registraron la numeración prospectiva anterior conservan sus identificadores originales y, cuando sea necesario para evitar ambigüedad, reciben una nota posterior explícita en vez de reescribirse.
+
+**Motivo:** la trazabilidad exige distinguir entre el plan que existía en un momento histórico y la planificación vigente. Renumerar retrospectivamente evidencias antiguas haría parecer que decisiones posteriores ya existían en revisiones anteriores.
+
+**Consecuencia:** pruebas documentales deben comprobar tanto la secuencia actual como la preservación histórica. La reasignación no modifica los números visibles del asistente: Paso 4, Paso 5 y Paso 6 continúan siendo los mismos pasos funcionales para el Asegurado(a).
+
+## ADR-165 — La auditoría transversal es un gate antes de la validación funcional manual
+
+**Estado:** Aceptada para UX.4.6e R7.
+
+**Decisión:** antes de iniciar la prueba funcional manual/automática de cierre hasta el Paso 3, UX.4.6e ejecuta una auditoría transversal que comprueba coherencia entre código runtime, comentarios/docstrings, interfaz visible, documentación vigente, regresiones automatizadas y metadata manual de GitHub. Los snapshots históricos no se reinterpretan; cuando una referencia antigua pueda inducir a error, se añade una nota posterior explícita.
+
+**Motivo:** la fase modifica de forma simultánea mantenibilidad, almacenamiento local, documentación, presentación al usuario y preparación del repositorio. Un gate transversal reduce el riesgo de que cada cambio pase sus pruebas aisladas pero el conjunto quede documental o semánticamente incoherente. La auditoría no sustituye la prueba funcional de R8 ni la validación remota de CI del cierre.
+
+## ADR-166 — El borrado integral invalida también residuos pre-beta y fuerza reconsentimiento
+
+**Estado:** Aceptada para UX.4.6e R8.
+
+**Decisión:** **Borrar datos de esta aplicación en este navegador** elimina las claves vigentes `miRetiroProyectado.*` y, únicamente durante esa operación destructiva, purga identificadores pre-beta conocidos que puedan permanecer en Web Storage. Las claves antiguas no se consultan para recuperar, restaurar ni migrar datos. Después del borrado, la aplicación vuelve a Inicio solicitando una nueva presentación de términos; si el usuario cierra esa consulta sin aceptar, un acceso posterior a Simular vuelve a exigir consentimiento antes de habilitar el asistente.
+
+**Motivo:** la validación manual de R8 evidenció que un navegador podía conservar estado pre-beta o una combinación de recursos en caché suficiente para que el borrado nominal no provocara el reconsentimiento esperado. Un botón que declara eliminar la aceptación debe garantizar ese efecto incluso en instalaciones de prueba anteriores al namespace vigente.
+
+**Consecuencia:** ADR-161 continúa vigente: no existe compatibilidad, fallback ni migración desde claves pre-beta. La única excepción es su reconocimiento para borrado defensivo. No se usa `localStorage.clear()` ni `sessionStorage.clear()`, por lo que no se eliminan claves ajenas a la aplicación dentro del mismo origen. La versión material de privacidad permanece `2026-08-16.1` porque la finalidad, categorías de datos, destinatarios y conservación no cambian; se corrige el cumplimiento técnico de un control ya informado.
