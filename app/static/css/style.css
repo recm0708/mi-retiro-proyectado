@@ -2269,7 +2269,7 @@ html[data-app-theme="contrast"] .trace-badge {
 }
 
 /* ==========================================================
-   UX.2.1 — estabilización visual transversal
+   Estabilización visual transversal
    ========================================================== */
 
 /*
@@ -3021,7 +3021,7 @@ html[data-app-theme="contrast"] .btn-primary {
   }
 }
 
-/* Sobrescribe reglas específicas heredadas de UX.2 con los tokens UX.2.1. */
+/* Sobrescribe reglas específicas antiguas mediante los tokens visuales vigentes. */
 html[data-bs-theme="dark"] .app-navbar,
 html[data-app-theme="contrast"] .app-navbar {
   background-color: var(--app-navbar-bg);
@@ -3059,7 +3059,7 @@ html[data-bs-theme="dark"] .results-origin-projected {
 
 
 /* ==========================================================
-   UX.2.1 — remate final de alineación y footer
+   Alineación transversal y pie de página
    ========================================================== */
 
 /*
@@ -3092,12 +3092,12 @@ html[data-bs-theme="dark"] .results-origin-projected {
 }
 
 /* ==========================================================
-   UX.3 — responsive real y navegación móvil
+   Responsive y navegación móvil
    ========================================================== */
 
 /*
- * Los breakpoints siguen la estructura de Bootstrap, pero las reglas de UX.3
- * priorizan legibilidad, acciones táctiles y desplazamiento horizontal solo
+ * Los breakpoints siguen la estructura de Bootstrap y priorizan legibilidad,
+ * acciones táctiles y desplazamiento horizontal solo
  * donde el contenido tabular realmente lo necesita.
  */
 
@@ -3584,7 +3584,7 @@ main,
 }
 
 /* ==========================================================
-   UX.4.1 — remate visual y microinteracciones
+   Microinteracciones y estados de interacción
    ========================================================== */
 
 /* La fila completa de un escenario futuro funciona como área de selección. */
@@ -3614,7 +3614,7 @@ main,
 
 
 /* ==========================================================
-   UX.4.2 — estados activos y selección perceptible
+   Estados activos y selección perceptible
    ========================================================== */
 
 /*
@@ -3731,7 +3731,7 @@ html[data-bs-theme="light"] .wizard-step.active span {
 }
 
 /* ============================================================
-   UX.4.4 — Importación revisable de documentos oficiales
+   Importación revisable de documentos oficiales
    ============================================================ */
 
 .official-import-section {

@@ -181,15 +181,21 @@ def contexto_correlacion(
 
 
 def _clave_sensible(clave: str) -> bool:
+    """Indica si el nombre de una clave puede identificar metadata sensible."""
+
     normalizada = clave.casefold().replace("-", "_")
     return any(fragmento in normalizada for fragmento in _SENSITIVE_KEY_PARTS)
 
 
 def _texto_potencialmente_sensible(texto: str) -> bool:
+    """Detecta patrones textuales que no deben persistirse en diagnóstico."""
+
     return any(patron.search(texto) for patron in _SENSITIVE_TEXT_PATTERNS)
 
 
 def _sanitizar_valor(clave: str, valor: Any) -> Any:
+    """Redacta y limita recursivamente un valor antes de escribirlo en JSONL."""
+
     if _clave_sensible(clave):
         return "[REDACTED]"
 
@@ -234,6 +240,8 @@ def sanitizar_metadata(
 
 
 def _rotar_si_corresponde(ruta: Path, bytes_entrantes: int) -> None:
+    """Rota el log cuando la siguiente escritura superaría el límite local."""
+
     if not ruta.exists():
         return
     if ruta.stat().st_size + bytes_entrantes <= _MAX_BYTES:

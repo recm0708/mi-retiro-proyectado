@@ -1,6 +1,6 @@
 /* ==========================================================
-   Mi Retiro Proyectado — UX.4.6a
-   Sistema visual moderno y capa de presentación transversal
+   Mi Retiro Proyectado
+   Sistema visual y capa de presentación transversal
    ========================================================== */
 
 /*
@@ -162,8 +162,8 @@ html[data-bs-theme="dark"] {
   --bs-link-hover-color: #b6d5ff;
 }
 
-/* Alto contraste conserva su paleta estricta del sistema anterior. Solo se
- * incorporan tokens nuevos para que los componentes UX.4.6a la respeten. */
+/* Alto contraste conserva una paleta estricta y reutiliza los mismos tokens
+ * semánticos para que todos los componentes mantengan su significado visual. */
 html[data-app-theme="contrast"] {
   --app-primary: #35b9ff;
   --app-primary-hover: #74d0ff;
@@ -1663,7 +1663,7 @@ html[data-app-theme="contrast"] .home-preview-bars span {
 }
 
 /* ==========================================================
-   Responsive — conserva UX.3 y ajusta los componentes nuevos
+   Adaptación responsive de componentes y composición
    ========================================================== */
 
 @media (max-width: 1199.98px) {
@@ -1815,7 +1815,7 @@ html[data-app-theme="contrast"] .home-preview-bars span {
 }
 
 /* ==========================================================
-   UX.4.6b — Paso 1 y navegación común del asistente
+   Paso 1 y navegación común del asistente
    ========================================================== */
 
 /* La barra conserva el contrato funcional anterior, pero deja de ser
@@ -2047,7 +2047,7 @@ html[data-app-theme="contrast"] .wizard-sticky-nav.wizard-navigation-bar {
 
 
 /* ==========================================================
-   UX.4.6b R2 — Privacidad, formularios e importación refinada
+   Privacidad, formularios e importación revisable
    ========================================================== */
 
 .required-marker {
@@ -2244,7 +2244,7 @@ html[data-app-theme="contrast"] .methodology-privacy-card {
 }
 
 /* ==========================================================
-   UX.4.6b R3 — navegación dual y lectura informada
+   Navegación dual y lectura informada
    ========================================================== */
 
 /* La tarjeta de simulación permite que las ayudas contextuales se proyecten
@@ -2389,7 +2389,7 @@ html[data-app-theme="contrast"] .methodology-privacy-card {
 }
 
 /* ==========================================================
-   UX.4.6c — Paso 2, origen de cuotas y selector de apariencia
+   Paso 2, procedencia de cuotas y selector de apariencia
    ========================================================== */
 
 .theme-trigger-icon,
@@ -2573,7 +2573,7 @@ html[data-app-theme="contrast"] .form-state-note {
 }
 
 /* ==========================================================
-   UX.4.6d — Paso 3 · Historial
+   Paso 3 · Historial salarial y detalle actual
    ========================================================== */
 
 .step3-subsection {
@@ -2745,8 +2745,8 @@ html[data-app-theme="contrast"] .detail-field-imported {
   }
 }
 
-/* UX.4.6d R4 — la procedencia documental usa la paleta primaria, no
- * el verde semántico de éxito. Así se distingue origen de validación. */
+/* La procedencia documental usa la paleta primaria, no el verde semántico
+ * de éxito. Así se distingue el origen de un dato de su validación. */
 .table tbody tr.data-row-imported > *,
 .data-table tbody tr.data-row-imported > * {
   background: var(--app-selected-bg);
@@ -2771,8 +2771,8 @@ html[data-app-theme="contrast"] .detail-field-imported {
   background: color-mix(in srgb, var(--app-primary) 8%, var(--app-surface));
 }
 
-/* UX.4.6d R17 — bloqueo documental no significa necesariamente "marcado".
- * Las casillas importadas conservan opacidad y bloqueo, pero el gancho solo
+/* El bloqueo documental no significa necesariamente "marcado". Las casillas
+ * importadas conservan opacidad y bloqueo, pero el gancho solo
  * se fuerza cuando el valor booleano real está checked. Esto permite que
  * clasificaciones como PROYECTADO/HISTORICO_PROYECTADO permanezcan visibles
  * como excluidas del historial aunque su checkbox esté bloqueado. */
@@ -2824,7 +2824,7 @@ html[data-app-theme="contrast"] .form-check-input.detail-field-imported:disabled
 }
 
 /* ============================================================
-   UX.4.6d R6 — Gestión de datos del asistente
+   Gestión local de datos del asistente
    ============================================================ */
 
 .wizard-data-options .dropdown-toggle {
@@ -2858,7 +2858,7 @@ html[data-app-theme="contrast"] .form-check-input.detail-field-imported:disabled
   }
 }
 
-/* UX.4.6d R7 — consulta de términos y navegación destructiva */
+/* Consulta de términos y navegación asociada a acciones destructivas. */
 .privacy-consent-header {
   position: relative;
   padding-right: 4.5rem;
@@ -2905,7 +2905,7 @@ html[data-app-theme="contrast"] .form-check-input.detail-field-imported:disabled
 }
 
 /* ============================================================
-   UX.4.6d R10 — contrato visual transversal para tablas
+   Contrato visual transversal para tablas
    ============================================================ */
 
 /*
@@ -3002,7 +3002,7 @@ html[data-app-theme="contrast"] .app-table-shell > .table thead th {
 }
 
 /* ============================================================
-   UX.4.6d R11 — scrollbars contenidos y carga de archivos simétrica
+   Scrollbars contenidos y carga de archivos simétrica
    ============================================================ */
 
 /*
@@ -3124,7 +3124,7 @@ html[data-app-theme="contrast"] .app-table-shell::-webkit-scrollbar-thumb {
 }
 
 /* ============================================================
-   UX.4.6d R12 — scrollbars globales, tablas más compactas y carga estable
+   Scrollbars globales, tablas compactas y carga estable
    ============================================================ */
 
 /*
@@ -3334,7 +3334,7 @@ html[data-app-theme="contrast"] input[type="file"].form-control {
 
 
 /* ============================================================
-   UX.4.6d R13 — selector de archivo estable frente al hover del input
+   Selector de archivo estable frente al hover del input
    ============================================================ */
 
 /*
@@ -3365,7 +3365,7 @@ input[type="file"].form-control:not(:disabled):not([readonly]):focus::-webkit-fi
 
 
 /* ============================================================
-   UX.4.6d R15 — campos editables frente a campos no editables
+   Campos editables frente a campos no editables
    ============================================================ */
 
 /*
@@ -3406,7 +3406,7 @@ html[data-app-theme="contrast"] .field-imported-readonly {
 }
 
 /* ============================================================
-   UX.4.6d R18 — procedencia visible y documento importado persistente
+   Procedencia visible y continuidad de la importación confirmada
    ============================================================ */
 
 .import-field-status.manual,

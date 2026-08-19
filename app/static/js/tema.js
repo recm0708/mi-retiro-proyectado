@@ -1,14 +1,15 @@
 /**
  * Gestión de apariencia de Mi Retiro Proyectado.
  *
- * UX.4.6a conserva los cuatro modos existentes, pero presenta Claro/Oscuro
- * como opciones principales y Alto contraste como preferencia secundaria de
- * accesibilidad. La preferencia se guarda solo en localStorage.
+ * Ofrece Sistema, Claro, Oscuro y Alto contraste. Claro/Oscuro se presentan
+ * como opciones principales y Alto contraste permanece como preferencia de
+ * accesibilidad. La preferencia visual se guarda de forma independiente en
+ * localStorage y no forma parte de la simulación previsional.
  */
 (() => {
   "use strict";
 
-  const STORAGE_KEY = "mi-retiro-proyectado-tema";
+  const STORAGE_KEY = "miRetiroProyectado.tema";
   const VALID_THEMES = new Set(["system", "light", "dark", "contrast"]);
   const mediaDark = window.matchMedia("(prefers-color-scheme: dark)");
 

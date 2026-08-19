@@ -47,7 +47,8 @@ class TestUX46DRevision9ReactividadPrivacidad(unittest.TestCase):
         self.assertIn('evento.key !== "Escape"', self.privacidad_js)
         self.assertIn("evento.stopImmediatePropagation();", self.privacidad_js)
         self.assertIn("cerrarModalPrivacidad();", self.privacidad_js)
-        self.assertIn('contextoPrivacidadActual === "fuentes"', self.privacidad_js)
+        self.assertIn('contextoPrivacidadActual !== "simulacion"', self.privacidad_js)
+        self.assertIn('"fuentes"', self.privacidad_js)
 
     def test_texto_legal_explica_aceptacion_desde_fuentes_y_cierre_sin_consentimiento(self):
         self.assertIn("Si todavía no existe una aceptación", self.terminos)

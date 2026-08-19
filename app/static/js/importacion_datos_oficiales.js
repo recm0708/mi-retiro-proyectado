@@ -5,6 +5,13 @@
    Importación revisable de documentos oficiales
    ============================================================ */
 
+/*
+ * Coordina Mi Retiro Seguro y Ficha Digital desde la selección del archivo
+ * hasta la vista previa editable y la confirmación explícita. El navegador
+ * conserva solo datos confirmados y metadata de procedencia; el archivo
+ * original se procesa en memoria por el backend y no se persiste aquí.
+ */
+
 let borradorImportacionComprobante = null;
 let edicionPreviewComprobanteHabilitada = false;
 let previewComprobanteFueEditado = false;
@@ -276,7 +283,7 @@ function invalidarResultadosPorImportacion(simulacion) {
 
 
 // ============================================================
-// UX.4.6b — Modalidad de datos personales
+// Modalidad y procedencia de datos personales
 // ============================================================
 
 function actualizarApellidoCasada() {
@@ -1235,10 +1242,9 @@ async function confirmarFichaDigitalImportacion() {
   simulacion.origen_campos_detalle_anio_actual = {};
 
   if (actuales.length > 0) {
-    // UX.4.6d R23: la Ficha Digital aporta el detalle mensual y puede
-    // ampliar la referencia del Paso 2 cuando confirma más cuotas del
-    // año actual que la fotografía previa. Nunca reduce automáticamente
-    // una referencia superior del Paso 2.
+    // La Ficha Digital aporta el detalle mensual y puede ampliar la
+    // referencia del Paso 2 cuando confirma más cuotas del año actual.
+    // Una referencia superior se conserva hasta una corrección explícita.
     const cuotasReferenciaPaso2 = Number(
       simulacion.cuotas?.cuotas_anio_actual || 0,
     );

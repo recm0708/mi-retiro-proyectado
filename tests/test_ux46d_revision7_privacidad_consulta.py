@@ -43,7 +43,8 @@ class TestUX46DRevision7PrivacidadConsulta(unittest.TestCase):
         self.assertIn('aria-label="Cerrar términos y privacidad"', self.terminos)
         self.assertIn('function cerrarModalPrivacidad()', self.privacidad)
         self.assertIn('modoPrivacidadActual === "revision"', self.privacidad)
-        self.assertIn('contextoPrivacidadActual === "fuentes"', self.privacidad)
+        self.assertIn('contextoPrivacidadActual !== "simulacion"', self.privacidad)
+        self.assertIn('"fuentes"', self.privacidad)
         self.assertIn('rechazarPrivacidad();', self.privacidad)
         self.assertIn('.privacy-modal-close', self.design)
 
@@ -56,9 +57,9 @@ class TestUX46DRevision7PrivacidadConsulta(unittest.TestCase):
         self.assertIn('Si ya existe una aceptación válida', self.terminos)
         self.assertIn('no exige aceptarlos de nuevo', self.terminos)
 
-    def test_fuentes_usa_etiqueta_de_repositorio_solicitada(self):
-        self.assertIn('Repositorio:', self.metodologia)
-        self.assertIn('>GitHub del proyecto</a>', self.metodologia)
+    def test_fuentes_mantiene_repositorio_en_area_de_ayuda(self):
+        self.assertIn('id="ayuda-contacto"', self.metodologia)
+        self.assertIn('Abrir repositorio del proyecto', self.metodologia)
         self.assertIn('href="https://github.com/recm0708/mi-retiro-proyectado"', self.metodologia)
         self.assertNotIn('https://github.com/recm0708/calculadora-pension-css', self.metodologia)
 

@@ -52,7 +52,9 @@ class TestUX46DRevision17AuditoriaDatos(unittest.TestCase):
         ).read_text(encoding="utf-8")
 
     def test_checkbox_bloqueado_solo_pinta_gancho_si_valor_real_esta_checked(self):
-        bloque = self.css.split("UX.4.6d R17", 1)[1]
+        bloque = self.css.split(
+            "El bloqueo documental no significa", 1
+        )[1].split("Gestión local de datos del asistente", 1)[0]
         self.assertIn('[data-imported-locked="true"]:checked', bloque)
         self.assertIn('[data-imported-locked="true"]:not(:checked)', bloque)
         self.assertIn("background-image: none !important", bloque)

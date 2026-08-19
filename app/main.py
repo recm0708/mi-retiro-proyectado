@@ -465,8 +465,8 @@ async def analizar_referencia_mi_retiro_seguro(
 ):
     """Extrae una referencia variable desde un comprobante PDF personal.
 
-    El archivo se procesa en memoria y no se persiste. UX.4.6b permite
-    devolver identificadores opcionales cuando el PDF los etiqueta de forma
+    El archivo se procesa en memoria y no se persiste. La respuesta puede
+    incluir identificadores opcionales cuando el PDF los etiqueta de forma
     inequívoca; el navegador solo los conserva durante la simulación actual.
     """
 

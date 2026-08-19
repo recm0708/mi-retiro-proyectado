@@ -242,7 +242,9 @@ class TestUX46DHistorial(unittest.TestCase):
         self.assertIn(".step3-summary", self.css)
 
     def test_revision4_origen_importado_usa_paleta_primaria_y_no_verde_exito(self):
-        bloque = self.css.split("UX.4.6d R4", 1)[1]
+        bloque = self.css.split(
+            "La procedencia documental usa la paleta primaria", 1
+        )[1].split("El bloqueo documental no significa", 1)[0]
         self.assertIn("var(--app-selected-bg)", bloque)
         self.assertIn("var(--app-selected-border)", bloque)
         self.assertNotIn("var(--app-success-bg)", bloque)
@@ -288,7 +290,9 @@ class TestUX46DHistorial(unittest.TestCase):
         self.assertIn('cuota.setAttribute("checked", "checked")', self.importacion_js)
 
     def test_revision17_css_distingue_bloqueado_de_marcado(self):
-        bloque = self.css.split("UX.4.6d R17", 1)[1]
+        bloque = self.css.split(
+            "El bloqueo documental no significa", 1
+        )[1].split("Gestión local de datos del asistente", 1)[0]
         self.assertIn('.form-check-input[data-imported-locked="true"]:checked', bloque)
         self.assertIn('.form-check-input[data-imported-locked="true"]:not(:checked)', bloque)
         self.assertIn("background-image: none !important", bloque)

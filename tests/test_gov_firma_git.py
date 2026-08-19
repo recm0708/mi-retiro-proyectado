@@ -1,3 +1,5 @@
+"""Regresiones de firma Git, tags y evidencia de la migración criptográfica."""
+
 from pathlib import Path
 import re
 import unittest
@@ -100,7 +102,12 @@ class TestGovFirmaGit(unittest.TestCase):
         self.assertIn("## ADR-159 —", texto)
         self.assertIn("Parcialmente sustituida por ADR-159", texto)
         ids = [int(x) for x in re.findall(r"(?m)^## ADR-(\d{3})\s+—", texto)]
-        self.assertEqual(list(range(1, 160)), ids)
+        # ADR-001..ADR-159 constituyen la evidencia histórica de la migración.
+        # Las ADR posteriores pueden crecer sin invalidar esta regresión, pero la
+        # numeración completa debe seguir siendo única y estrictamente consecutiva.
+        self.assertGreaterEqual(len(ids), 159)
+        self.assertEqual(list(range(1, max(ids) + 1)), ids)
+        self.assertEqual(list(range(1, 160)), ids[:159])
 
     def test_roadmap_declara_version_canonica_y_prebloque_firma(self):
         texto = (DOCS / "ROADMAP.md").read_text(encoding="utf-8")

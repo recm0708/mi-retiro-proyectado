@@ -29,7 +29,7 @@
     crossorigin="anonymous"
   >
 
-  <!-- Base histórica + capa visual UX.4.6a + remates de accesibilidad. -->
+  <!-- Capas visuales: base, sistema de diseño y ajustes de accesibilidad. -->
   <link
     rel="stylesheet"
     href="{{ url_for('static', path='/css/style.css') }}"
@@ -208,8 +208,10 @@
         resoluciones o certificaciones.
       </p>
 
-      <div class="footer-bottom" aria-label="Fuentes, autoría y derechos">
+      <div class="footer-bottom" aria-label="Fuentes, ayuda, privacidad, autoría y derechos">
         <a class="footer-link" href="/metodologia">Fuentes oficiales</a>
+        <span aria-hidden="true">·</span>
+        <a class="footer-link" href="/metodologia#ayuda-contacto">Ayuda y contacto</a>
         <span aria-hidden="true">·</span>
         <a class="footer-link" href="/metodologia#privacidad-datos">Privacidad</a>
         <span aria-hidden="true">·</span>

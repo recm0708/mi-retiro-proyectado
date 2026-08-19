@@ -1,8 +1,15 @@
 "use strict";
 
 /* ============================================================
-   UX.4.1 — Accesibilidad semántica y ayudas contextuales
+   Accesibilidad semántica, validación y ayudas contextuales
    ============================================================ */
+
+/*
+ * Complementa el HTML con descripciones, mensajes de validación, foco,
+ * semántica del asistente y ayudas contextuales. Las mutaciones deben ser
+ * idempotentes porque este módulo también observa contenido creado de forma
+ * dinámica por otros scripts.
+ */
 
 const AYUDAS_CONTEXTUALES = {
   sistema: {
@@ -97,7 +104,7 @@ let ultimoPanelWizardVisible = null;
 let focoInvalidoProgramado = false;
 
 
-// UX.4.6c R2: pistas breves dentro de campos editables. El placeholder
+// Las pistas breves viven dentro de campos editables. El placeholder
 // desaparece de forma nativa cuando existe un valor manual o importado.
 const PISTAS_CAMPOS = {
   primer_nombre: "Ej.: Nombre",
@@ -498,7 +505,7 @@ function prepararValidacionAccesible() {
     formulario.addEventListener("invalid", (evento) => {
       const control = evento.target;
 
-      // UX.4.3: la retroalimentación visual se controla de forma local para
+      // La retroalimentación visual se controla de forma local para
       // evitar depender de globos nativos inconsistentes entre navegadores.
       evento.preventDefault();
 

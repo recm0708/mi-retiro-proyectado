@@ -1,3 +1,5 @@
+"""Regresiones de normativa, seguridad y privacidad de GOV.1.3 R3."""
+
 from pathlib import Path
 import json
 import re

@@ -35,6 +35,8 @@ MESES = {
 
 
 def _normalizar(texto: str) -> str:
+    """Elimina marcas diacríticas para comparar texto extraído con estabilidad."""
+
     return "".join(
         caracter
         for caracter in unicodedata.normalize("NFD", texto)

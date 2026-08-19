@@ -47,12 +47,14 @@ class TestAccesibilidadTemas(unittest.TestCase):
         self.assertIn("Herramienta independiente de estimación previsional", respuesta.text)
         self.assertIn("No sustituye la determinación oficial", respuesta.text)
         self.assertIn("Fuentes oficiales", respuesta.text)
+        self.assertIn("Ayuda y contacto", respuesta.text)
+        self.assertIn('href="/metodologia#ayuda-contacto"', respuesta.text)
         self.assertNotIn("Abrir Mi Caja Digital", respuesta.text)
 
     def test_tema_persiste_en_localstorage_y_sigue_preferencia_del_sistema(self):
         contenido = (ROOT / "app/static/js/tema.js").read_text(encoding="utf-8")
 
-        self.assertIn("mi-retiro-proyectado-tema", contenido)
+        self.assertIn("miRetiroProyectado.tema", contenido)
         self.assertIn("localStorage", contenido)
         self.assertIn("prefers-color-scheme: dark", contenido)
         self.assertIn('data-bs-theme', contenido)
