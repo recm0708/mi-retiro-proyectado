@@ -131,7 +131,7 @@ Este roadmap describe **estado actual y trabajo futuro**. La evolución detallad
 
 ## 3. UX.4.6 — trabajo funcional
 
-**Estado:** UX.4.6e cerrado; UX.4.6f es el siguiente bloque funcional, temporalmente precedido por PLAN.1.
+**Estado:** UX.4.6e y PLAN.1 cerrados; UX.4.6f — Paso 4 es el bloque funcional activo.
 
 - [x] **UX.4.6e — Estandarización técnica, comentarios y coherencia de interfaz post-GOV.1**
   - [x] R1 — auditoría integral del código y definición del patrón documental por tecnología;
@@ -147,6 +147,8 @@ Este roadmap describe **estado actual y trabajo futuro**. La evolución detallad
     - [x] R9.1 — candidato local `0.0.25-beta` validado con 660 pruebas en `OK`, documentación coherente y `git diff --check` limpio;
     - [x] R9.2 — PR #21 integrado por squash; PR #22 completó el cierre documental; `main` final `7affa00e2530aeede066c10ecfee8c6dbd49b10b`; tag firmado `v0.0.25-beta`.
 - [ ] **UX.4.6f — Paso 4 · Proyección salarial/laboral**
+  - [ ] R1 — consistencia transversal de procedencia, decisiones explícitas y procesamiento accesible de adjuntos; gate automático 734/734 superado y validación manual detectó ajustes de bloqueo.
+  - [ ] R1.1 — restaurar bloqueo documental en vista principal, franja visual de solo lectura, iconos semánticos y selección explícita de disponibilidad del historial; candidato en validación.
 - [ ] **UX.4.6g — Paso 5 · Escenarios de retiro**
 - [ ] **UX.4.6h — Paso 6 · Resultados y exportación**
 - [ ] **UX.4.6i — Cómo se calcula**
@@ -244,7 +246,7 @@ Solo podrá materializarse cuando:
 - [x] seguridad y privacidad tengan procedimientos internos base;
 - [x] repositorio, metadata, identidad y controles de seguridad pública básicos estén configurados;
 - [x] UX.4.6e esté cerrado;
-- [ ] PLAN.1 esté cerrado;
+- [x] PLAN.1 esté cerrado;
 - [ ] UX.4.6f–UX.4.6i estén cerrados;
 - [ ] DEV.2 esté cerrado;
 - [ ] SEC.2 esté cerrado;

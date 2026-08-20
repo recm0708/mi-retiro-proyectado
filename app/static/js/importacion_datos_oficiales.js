@@ -742,8 +742,12 @@ async function analizarComprobanteImportacion() {
   }
 
   const boton = document.getElementById("btn-analizar-comprobante-importacion");
-  boton.disabled = true;
-  boton.textContent = "Analizando…";
+  const procesamiento = window.ProcesamientoAdjuntos.iniciar({
+    boton,
+    input,
+    estado: document.getElementById("estado-comprobante-importacion"),
+  });
+  if (!procesamiento) return;
 
   try {
     const datos = new FormData();
@@ -766,8 +770,7 @@ async function analizarComprobanteImportacion() {
   } catch {
     mostrarEstadoImportacion("estado-comprobante-importacion", "No fue posible comunicarse con el servidor.", "danger");
   } finally {
-    boton.disabled = false;
-    boton.textContent = "Analizar documento";
+    window.ProcesamientoAdjuntos.finalizar(procesamiento);
   }
 }
 
@@ -883,7 +886,12 @@ function confirmarComprobanteImportacion() {
   simulacion.origen_campos_historial = {};
   if (reales.length > 0) {
     const anioInicio = Math.min(...reales.map((registro) => registro.anio));
-    simulacion.modo_historial = "MANUAL";
+    // La existencia de registros importados no responde por el usuario la
+    // pregunta "Disponibilidad del historial". Se conserva la información,
+    // pero el selector permanece en "Seleccione una opción" hasta una
+    // decisión explícita.
+    simulacion.modo_historial = "";
+    simulacion.modo_historial_confirmado_usuario = false;
     reales.forEach((registro) => {
       const base = `historial:${registro.anio_origen}`;
       simulacion.origen_campos_historial[String(registro.anio)] = {
@@ -896,6 +904,7 @@ function confirmarComprobanteImportacion() {
       };
     });
     simulacion.historial_anio_inicio_temporal = anioInicio;
+    simulacion.origen_historial_anio_inicio = "CALCULADO_AUTOMATICAMENTE";
     simulacion.historial = {
       anio_inicio: anioInicio,
       anio_fin: ANIO_ACTUAL,
@@ -1165,8 +1174,12 @@ async function analizarFichaDigitalImportacion() {
   }
 
   const boton = document.getElementById("btn-analizar-ficha-digital-importacion");
-  boton.disabled = true;
-  boton.textContent = "Analizando…";
+  const procesamiento = window.ProcesamientoAdjuntos.iniciar({
+    boton,
+    input,
+    estado: document.getElementById("estado-ficha-digital-importacion"),
+  });
+  if (!procesamiento) return;
 
   try {
     const datos = new FormData();
@@ -1194,8 +1207,7 @@ async function analizarFichaDigitalImportacion() {
   } catch {
     mostrarEstadoImportacion("estado-ficha-digital-importacion", "No fue posible comunicarse con el servidor.", "danger");
   } finally {
-    boton.disabled = false;
-    boton.textContent = "Analizar documento";
+    window.ProcesamientoAdjuntos.finalizar(procesamiento);
   }
 }
 
@@ -1355,7 +1367,7 @@ function quitarFichaDigitalImportacion() {
   const simulacion = obtenerSimulacion();
   simulacion.ficha_digital_importada = null;
   simulacion.importacion_ficha_digital_confirmada = false;
-  simulacion.detalle_anio_actual_habilitado = false;
+  simulacion.detalle_anio_actual_habilitado = null;
   simulacion.detalle_anio_actual = null;
   simulacion.resumen_detalle_anio_actual = null;
   simulacion.origen_campos_detalle_anio_actual = {};

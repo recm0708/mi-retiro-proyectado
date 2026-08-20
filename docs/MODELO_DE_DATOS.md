@@ -4,7 +4,7 @@
 **Versión de aplicación revisada:** `0.0.26-beta`
 **Versión base histórica:** `0.0.23-beta`
 **Revisión documental:** GOV.1.3 R2 — 2026-08-17
-**Actualización de estado frontend:** UX.4.6e R8 — procedencia editable — 2026-08-19
+**Actualización de estado frontend:** UX.4.6f R1.1 — bloqueo documental y decisión explícita de historial — 2026-08-20
 **Clasificación:** Técnica / Pública
 
 Los contratos de cálculo se definen con Pydantic. El estado visual y de navegación del navegador se documenta por separado porque no todo campo de `sessionStorage` pertenece al dominio previsional.
@@ -174,7 +174,9 @@ Campos/estructuras de frontend relevantes:
 - `ficha_digital_importada_original`: fotografía original de Ficha Digital;
 - `ficha_digital_importada`: copia de trabajo de la Ficha;
 - `periodos_excluidos_importacion_ficha`: períodos detectados que el usuario decidió no usar;
-- `origen_campos_persona`, `origen_campos_cuotas`, `origen_campos_historial` y `origen_campos_detalle_anio_actual`: metadata de procedencia.
+- `origen_campos_persona`, `origen_campos_cuotas`, `origen_campos_historial` y `origen_campos_detalle_anio_actual`: metadata de procedencia;
+- `origen_historial_anio_inicio` y `origen_proyeccion_anio_fin`: procedencia de valores derivados/editables;
+- `modo_historial`, `detalle_anio_actual_habilitado` y `origen_salario_proyeccion` conservan ausencia de decisión (`""`/`null`) hasta que exista una selección explícita o una derivación documental válida.
 
 Estos campos no cambian el documento fuente ni los modelos Pydantic recibidos desde la API. Son estado de interfaz serializable de la simulación.
 
@@ -273,3 +275,10 @@ La procedencia no altera por sí sola una fórmula previsional.
 La versión acumulativa anterior se conserva en:
 
 `docs/historico/tecnico/MODELO_DE_DATOS_PRE_GOV1_3_R2.md`
+
+
+### UX.4.6f R1.1 — decisión explícita de disponibilidad del historial
+
+El estado frontend incorpora `modo_historial_confirmado_usuario: bool`. Su valor inicial es `false`; solo cambia a `true` cuando el Asegurado(a) selecciona explícitamente una opción de **Disponibilidad del historial** o confirma el flujo equivalente. Importar registros desde Mi Retiro Seguro no establece este indicador y no responde el selector por el usuario.
+
+El bloqueo de un campo documental en la vista principal se decide comparando contra `referencia_mi_retiro_seguro_original` o `ficha_digital_importada_original`. La procedencia vigente puede cambiar, pero la fotografía original determina si el dato fue detectado y, por tanto, si debe permanecer bloqueado fuera del modal de revisión.

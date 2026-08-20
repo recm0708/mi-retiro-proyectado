@@ -340,7 +340,7 @@ Nueva simulación | {{ app_name }}
                   </div>
 
                   <div id="cuotas-importadas-acciones" class="imported-data-actions d-none mt-3">
-                    <span class="imported-data-status-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 2.5 2.5L16 9"></path></svg></span>
+                    <span class="imported-data-status-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="m7 12 3 3 7-7"></path></svg></span>
                     <span id="cuotas-importadas-estado">Los datos confirmados desde la importación se mantienen sin cambios en este paso.</span>
                     <button type="button" id="btn-revisar-cuotas-importadas" class="btn btn-sm btn-outline-primary">
                       Revisar importación
@@ -414,6 +414,10 @@ Nueva simulación | {{ app_name }}
                         required
                       >
                     </div>
+                  </div>
+
+                  <div id="cuotas-sugerencia-continuidad" class="form-state-note d-none mt-3" role="status" aria-live="polite">
+                    Al indicar que continuarás cotizando, se sugieren inicialmente 12 cuotas al cierre del año y 12 por cada año futuro. Son valores editables: ajústalos si tu situación prevista es distinta.
                   </div>
 
                   <div id="cuotas-sin-continuidad" class="form-state-note d-none mt-3" role="status">
@@ -534,8 +538,9 @@ Nueva simulación | {{ app_name }}
                       <label for="origen_salario_proyeccion" class="form-label fw-semibold">
                         Base para proyectar salarios futuros
                       </label>
-                      <select id="origen_salario_proyeccion" class="form-select form-select-lg">
-                        <option value="MANUAL" selected>Indicar el salario manualmente</option>
+                      <select id="origen_salario_proyeccion" class="form-select form-select-lg" required>
+                        <option value="" selected disabled>Seleccione una opción</option>
+                        <option value="MANUAL">Indicar el salario manualmente</option>
                         <option value="ULTIMO_MES_COMPLETO" disabled>Último mes completo disponible</option>
                         <option value="PROMEDIO_ANIO_ACTUAL" disabled>Promedio de meses completos del año actual</option>
                         <option value="PROMEDIO_3_MESES" disabled>Promedio de los últimos 3 meses completos</option>
@@ -726,8 +731,8 @@ Nueva simulación | {{ app_name }}
                       readonly
                     >
 
-                    <div class="form-text">
-                      Corresponde al año calendario actual.
+                    <div id="origen-proyeccion-anio-inicio" class="field-origin-note automatic">
+                      Calculado automáticamente a partir del año calendario actual.
                     </div>
 
                   </div>
@@ -752,9 +757,8 @@ Nueva simulación | {{ app_name }}
                       required
                     >
 
-                    <div class="form-text">
-                      Podrás modificar posteriormente este período
-                      según la edad de retiro que quieras comparar.
+                    <div id="origen-proyeccion-anio-fin" class="field-origin-note automatic" aria-live="polite">
+                      Calculado automáticamente: horizonte inicial sugerido de 5 años. Puedes modificarlo según la edad de retiro que quieras comparar.
                     </div>
 
                   </div>

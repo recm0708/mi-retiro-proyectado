@@ -77,13 +77,16 @@ Toda importación debe:
 - presentar vista previa revisable;
 - aplicar datos únicamente tras confirmación;
 - conservar procedencia por campo cuando sea relevante;
-- invalidar resultados dependientes.
+- invalidar resultados dependientes;
+- reutilizar `procesamiento_adjuntos.js` para mostrar estado ocupado accesible, bloquear dobles ejecuciones y restaurar los controles al finalizar.
 
 No versionar PDFs personales ni capturas identificativas.
 
 ## 9. Procedencia de datos
 
-Un campo puede ser detectado, editado, completado manualmente o no detectado.
+Un campo puede ser `Detectado`, `Editado por ti`, `Completado manualmente`, `Excluido por ti`, `No detectado` o `Calculado automáticamente`, según corresponda.
+
+Una decisión del usuario no debe almacenarse mediante una opción predeterminada silenciosa. Los valores derivados deben exponer su procedencia y cambiar a `Editado por ti` cuando se modifiquen.
 
 La procedencia es metadata de interfaz, no una fórmula.
 
@@ -184,3 +187,13 @@ Dependabot no implica auto-merge.
 La guía acumulativa anterior se conserva en:
 
 `docs/historico/tecnico/GUIA_INTERNA_DESARROLLO_PRE_GOV1_3_R2.md`
+
+
+### Regla R1.1 para datos documentales
+
+- En vistas principales, un valor presente en la referencia documental original debe renderizarse con `readonly`/`disabled` y semántica visual de campo bloqueado.
+- No habilitar edición directa de un dato detectado para simplificar una pantalla: la corrección se hace en **Revisar importación** y **Editar campos**.
+- Un campo originalmente no detectado sí puede permanecer editable en la vista principal.
+- Reutilizar `aplicarBloqueoVistaPrincipalPorProcedencia` o el helper equivalente y excluir explícitamente los modales de revisión.
+- Mantener la misma franja de no edición y la misma iconografía de procedencia en Claro, Oscuro y Alto contraste.
+- Los selectores que representan una decisión del usuario no deben inferirse de la existencia de datos importados salvo contrato documental explícito y trazado.

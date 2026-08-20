@@ -87,6 +87,8 @@ Revisiones internas:
 
 ### 2. UX.4.6f — Paso 4 · Proyección salarial/laboral
 
+- **R1 activo:** unificar procedencia visual, decisiones explícitas sin predeterminados silenciosos, trazabilidad de valores automáticos y estado accesible de procesamiento para todos los adjuntos;
+- **R1.1 en validación:** restaurar el bloqueo de datos documentales detectados en la vista principal y concentrar su edición en la revisión modal, manteniendo editables los campos originalmente no detectados;
 - validar lógica y precisión;
 - revisar UX y accesibilidad;
 - distinguir información acreditada, datos reales recientes y proyección;

@@ -192,8 +192,13 @@ async function analizarReferenciaMiRetiro() {
   }
 
   const boton = document.getElementById("btn-analizar-referencia-mi-retiro");
-  boton.disabled = true;
-  boton.textContent = "Analizando…";
+  const procesamiento = window.ProcesamientoAdjuntos.iniciar({
+    boton,
+    input,
+    estado: document.getElementById("estado-procesamiento-referencia-mi-retiro"),
+    textoBoton: "Analizando…",
+  });
+  if (!procesamiento) return;
 
   try {
     const formulario = new FormData();
@@ -239,8 +244,7 @@ async function analizarReferenciaMiRetiro() {
       "No fue posible comunicarse con el servidor para analizar el documento.",
     );
   } finally {
-    boton.disabled = false;
-    boton.textContent = "Analizar comprobante";
+    window.ProcesamientoAdjuntos.finalizar(procesamiento);
   }
 }
 

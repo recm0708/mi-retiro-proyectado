@@ -26,7 +26,8 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 - **Programa PLAN.1:** cerrado — Alineación maestra hacia la primera versión oficial
 - **PLAN.1:** cerrado en `0.0.26-beta`; PR #23 y PR #24 integrados, **720 pruebas en `OK`** en el gate final y tag firmado `v0.0.26-beta` publicado
 - **Bloque activo:** UX.4.6f — Paso 4 · Proyección salarial/laboral
-- **Siguiente bloque funcional:** UX.4.6f — Paso 4 · Proyección salarial/laboral
+- **Revisión activa:** UX.4.6f R1.1 — bloqueo documental en vista principal, procedencia visual y decisiones explícitas
+- **Siguiente bloque funcional posterior:** UX.4.6g — Paso 5 · Escenarios de retiro
 - **GOV.1.4:** Observabilidad y Developer Diagnostics cerrado
 - **GOV.1.5:** Seguridad, privacidad y transparencia cerrado internamente
 - **GOV.1.6:** Controles GitHub y auditoría automática cerrado

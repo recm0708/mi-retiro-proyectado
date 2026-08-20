@@ -30,13 +30,15 @@
   font-weight: 700;
 }
 
-.detail-field-imported-editable,
-.history-field-imported:not([readonly]) {
-  cursor: text;
-}
-
-select.detail-field-imported-editable {
-  cursor: pointer;
+/*
+ * En la vista principal los valores documentales confirmados son de solo
+ * lectura. La edición se concentra en las ventanas de revisión; los campos
+ * que el documento no detectó permanecen disponibles para captura manual.
+ */
+.field-imported-readonly,
+.history-field-imported[readonly],
+.detail-field-imported[readonly] {
+  cursor: default;
 }
 
 .detail-row-excluded {
@@ -75,17 +77,15 @@ html[data-app-theme="contrast"] .detail-row-excluded {
 }
 
 /* ----------------------------------------------------------
-   Checkboxes documentales editables
+   Checkboxes documentales en ventana de revisión
    ---------------------------------------------------------- */
 
 /*
- * El contrato anterior pintaba el gancho únicamente mientras el checkbox
- * importado permanecía bloqueado. R8 permite cambiar su inclusión; por eso
- * el estado :checked debe seguir siendo perceptible aun cuando el control
- * esté habilitado.
+ * La vista previa de Ficha Digital permite editar por decisión explícita.
+ * El detalle principal vuelve a usar controles documentales bloqueados; por
+ * eso esta regla se limita al modal de revisión.
  */
-.preview-ficha-cuota.form-check-input:checked,
-.detail-field-imported-editable.form-check-input:checked {
+.preview-ficha-cuota.form-check-input:checked {
   background-color: var(--app-primary) !important;
   border-color: var(--app-primary) !important;
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2.6' d='M3 8l3 3 7-7'/%3e%3c/svg%3e") !important;
@@ -94,13 +94,11 @@ html[data-app-theme="contrast"] .detail-row-excluded {
   background-size: 0.9rem 0.9rem !important;
 }
 
-.preview-ficha-cuota.form-check-input:not(:checked),
-.detail-field-imported-editable.form-check-input:not(:checked) {
+.preview-ficha-cuota.form-check-input:not(:checked) {
   background-image: none !important;
 }
 
-.preview-ficha-cuota.form-check-input:not(:disabled),
-.detail-field-imported-editable.form-check-input:not(:disabled) {
+.preview-ficha-cuota.form-check-input:not(:disabled) {
   cursor: pointer !important;
 }
 
@@ -109,15 +107,13 @@ html[data-app-theme="contrast"] .detail-row-excluded {
   cursor: default !important;
 }
 
-html[data-app-theme="contrast"] .preview-ficha-cuota.form-check-input:checked,
-html[data-app-theme="contrast"] .detail-field-imported-editable.form-check-input:checked {
+html[data-app-theme="contrast"] .preview-ficha-cuota.form-check-input:checked {
   background-color: #ffffff !important;
   border-color: #ffffff !important;
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23000' stroke-linecap='round' stroke-linejoin='round' stroke-width='2.6' d='M3 8l3 3 7-7'/%3e%3c/svg%3e") !important;
 }
 
-html[data-app-theme="contrast"] .preview-ficha-cuota.form-check-input:not(:checked),
-html[data-app-theme="contrast"] .detail-field-imported-editable.form-check-input:not(:checked) {
+html[data-app-theme="contrast"] .preview-ficha-cuota.form-check-input:not(:checked) {
   background-color: #000000 !important;
   border-color: #ffffff !important;
   background-image: none !important;
@@ -148,6 +144,9 @@ html[data-app-theme="contrast"] .detail-field-imported-editable.form-check-input
   flex: 0 0 1.05rem;
   width: 1.05rem;
   min-width: 1.05rem;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
   font-weight: 850;
   line-height: 1;
   text-decoration: none;
@@ -158,14 +157,17 @@ html[data-app-theme="contrast"] .detail-field-imported-editable.form-check-input
 .data-provenance-note.detected::before,
 .data-provenance-badge.detected::before,
 .detail-row-provenance.detected::before {
-  content: "●" !important;
+  content: "✓" !important;
 }
 
 .import-field-status.edited::before,
 .field-origin-note.edited::before,
 .data-provenance-note.edited::before,
 .data-provenance-badge.edited::before,
-.detail-row-provenance.edited::before,
+.detail-row-provenance.edited::before {
+  content: "✎" !important;
+}
+
 .import-field-status.manual::before,
 .field-origin-note.manual::before,
 .data-provenance-note.manual::before,
@@ -180,6 +182,7 @@ html[data-app-theme="contrast"] .detail-field-imported-editable.form-check-input
 .data-provenance-badge.excluded::before,
 .detail-row-provenance.excluded::before {
   content: "⊘" !important;
+  font-size: 1rem;
 }
 
 .import-field-status.missing::before,
@@ -188,6 +191,14 @@ html[data-app-theme="contrast"] .detail-field-imported-editable.form-check-input
 .data-provenance-badge.missing::before,
 .detail-row-provenance.missing::before {
   content: "!" !important;
+}
+
+.import-field-status.automatic::before,
+.field-origin-note.automatic::before,
+.data-provenance-note.automatic::before,
+.data-provenance-badge.automatic::before,
+.detail-row-provenance.automatic::before {
+  content: "↳" !important;
 }
 
 /* El aviso solo ocupa espacio cuando existe un ajuste activo. */

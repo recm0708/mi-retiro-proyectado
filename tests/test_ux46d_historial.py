@@ -159,7 +159,7 @@ class TestUX46DHistorial(unittest.TestCase):
         self.assertIn("periodicidad.required = true", self.detalle_js)
         self.assertIn("monto.readOnly = true", self.detalle_js)
         self.assertIn("periodicidad.disabled = true", self.detalle_js)
-        self.assertIn("Base calculada automáticamente", self.detalle_js)
+        self.assertIn("Calculado automáticamente a partir del detalle validado.", self.detalle_js)
 
     def test_base_salarial_no_expone_explicacion_interna_de_origen(self):
         self.assertNotIn("La aplicación conservará el origen de la base utilizada", self.simulacion)
@@ -226,7 +226,7 @@ class TestUX46DHistorial(unittest.TestCase):
 
     def test_revision2_detalle_importado_inactivo_se_explica_sin_ocultar_eleccion_manual(self):
         self.assertIn("detalle-importado-inactivo", self.detalle_js)
-        self.assertIn("!importado || habilitado", self.detalle_js)
+        self.assertIn("!importado || decision !== \"false\"", self.detalle_js)
         self.assertIn("Primera y segunda quincena", self.detalle)
         self.assertIn("Total mensual", self.detalle)
 

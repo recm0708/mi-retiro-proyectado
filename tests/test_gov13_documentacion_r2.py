@@ -125,8 +125,11 @@ class TestGov13DocumentacionR2(unittest.TestCase):
         ids_actuales = re.findall(r"\*\*RF-(\d{3})\.\*\*", texto)
         ids_historicos = re.findall(r"\*\*RF-(\d{3})\.\*\*", historico)
 
-        self.assertEqual(ids_historicos, ids_actuales)
-
+        self.assertEqual(
+            ids_historicos,
+            ids_actuales[: len(ids_historicos)],
+            "Los RF históricos deben conservarse como prefijo inmutable del ledger vigente.",
+        )
         for esperado in ("001", "318", "322", "336"):
             with self.subTest(esperado=esperado):
                 self.assertIn(esperado, ids_actuales)

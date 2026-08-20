@@ -26,11 +26,11 @@ const AYUDAS_CONTEXTUALES = {
   },
   cuotas_esperadas_cierre_anio: {
     titulo: "Cierre esperado del año",
-    texto: "Indica cuántas cuotas esperas completar en total durante el año actual, entre 0 y 12. No es una cantidad adicional al total ya informado.",
+    texto: "Indica cuántas cuotas esperas completar en total durante el año actual, entre 0 y 12. Si señalas que continuarás cotizando, la aplicación sugiere inicialmente 12; puedes modificar ese valor según tu situación prevista.",
   },
   cuotas_esperadas_por_anio: {
     titulo: "Densidad futura de cotización",
-    texto: "Representa cuántos meses por año esperas seguir cotizando a partir del próximo año. Usa 12 si prevés cotizar todos los meses.",
+    texto: "Representa cuántos meses por año esperas seguir cotizando a partir del próximo año. Si señalas que continuarás cotizando, la aplicación sugiere inicialmente 12; el valor sigue siendo editable.",
   },
   modo_historial: {
     titulo: "Disponibilidad del historial",
@@ -62,7 +62,7 @@ const AYUDAS_CONTEXTUALES = {
   },
   proyeccion_anio_fin: {
     titulo: "Horizonte de proyección",
-    texto: "El año final debe alcanzar, como mínimo, las fechas de retiro que quieras comparar. Si luego eliges una fecha más lejana, podrás volver y ampliar este horizonte.",
+    texto: "La aplicación propone inicialmente un horizonte de cinco años posteriores al año actual y lo identifica como calculado automáticamente. Puedes cambiar el año final para cubrir las fechas de retiro que quieras comparar.",
   },
   modalidad_proyeccion: {
     titulo: "Método de proyección",

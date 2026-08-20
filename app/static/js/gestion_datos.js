@@ -171,6 +171,7 @@ function limpiarDesdePaso5(simulacion) {
 
 function limpiarDesdePaso4(simulacion) {
   simulacion.proyeccion = {};
+  simulacion.origen_proyeccion_anio_fin = null;
   simulacion.resumen_proyeccion = null;
   simulacion.resumen_linea_tiempo = null;
   limpiarDesdePaso5(simulacion);
@@ -178,22 +179,24 @@ function limpiarDesdePaso4(simulacion) {
 
 
 function limpiarDesdePaso3(simulacion) {
-  simulacion.modo_historial = "MANUAL";
+  simulacion.modo_historial = "";
+  simulacion.modo_historial_confirmado_usuario = false;
   simulacion.historial = null;
   delete simulacion.historial_anio_inicio_temporal;
+  simulacion.origen_historial_anio_inicio = null;
   simulacion.origen_campos_historial = {};
   simulacion.resumen_historial = null;
 
   simulacion.ficha_digital_importada = null;
   simulacion.importacion_ficha_digital_confirmada = false;
   simulacion.campos_editados_importacion_ficha = [];
-  simulacion.detalle_anio_actual_habilitado = false;
+  simulacion.detalle_anio_actual_habilitado = null;
   simulacion.detalle_anio_actual = null;
   simulacion.origen_campos_detalle_anio_actual = {};
   simulacion.resumen_detalle_anio_actual = null;
   simulacion.ultimo_mes_cuotas_derivado = null;
 
-  simulacion.origen_salario_proyeccion = "MANUAL";
+  simulacion.origen_salario_proyeccion = "";
   simulacion.salario = {};
   simulacion.resumen_salario = null;
 

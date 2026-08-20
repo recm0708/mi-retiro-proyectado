@@ -18,9 +18,11 @@ class TestPlan1GobiernoVersionadoOficial(unittest.TestCase):
         texto = (DOCS / "DECISIONES.md").read_text(encoding="utf-8")
         ids = [int(x) for x in re.findall(r"(?m)^## ADR-(\d{3})\s+—", texto)]
         indice = [int(x) for x in re.findall(r"(?m)^\| ADR-(\d{3}) \|", texto)]
-        self.assertEqual(list(range(1, 169)), ids)
+        self.assertGreaterEqual(ids[-1], 168)
+        self.assertEqual(list(range(1, ids[-1] + 1)), ids)
         self.assertEqual(ids, indice)
-        self.assertIn("ADR indexadas:** 168", texto)
+        self.assertIn("ADR-168", texto)
+        self.assertIn(f"ADR indexadas:** {ids[-1]}", texto)
 
     def test_adr_168_define_version_oficial_y_build_independiente(self):
         texto = (DOCS / "DECISIONES.md").read_text(encoding="utf-8")

@@ -51,8 +51,10 @@ function crearSimulacionVacia() {
     origen_campos_cuotas: {},
     resumen_cuotas: null,
 
-    modo_historial: "MANUAL",
+    modo_historial: "",
+    modo_historial_confirmado_usuario: false,
     historial: null,
+    origen_historial_anio_inicio: null,
     origen_campos_historial: {},
     resumen_historial: null,
 
@@ -62,17 +64,18 @@ function crearSimulacionVacia() {
     importacion_ficha_digital_confirmada: false,
     campos_editados_importacion_ficha: [],
 
-    detalle_anio_actual_habilitado: false,
+    detalle_anio_actual_habilitado: null,
     detalle_anio_actual: null,
     origen_campos_detalle_anio_actual: {},
     resumen_detalle_anio_actual: null,
     ultimo_mes_cuotas_derivado: null,
 
-    origen_salario_proyeccion: "MANUAL",
+    origen_salario_proyeccion: "",
     salario: {},
     resumen_salario: null,
 
     proyeccion: {},
+    origen_proyeccion_anio_fin: null,
     resumen_proyeccion: null,
     resumen_linea_tiempo: null,
 
@@ -142,7 +145,7 @@ function obtenerSimulacion() {
         simulacion.origen_campos_cuotas || {},
 
       modo_historial:
-        simulacion.modo_historial || "MANUAL",
+        simulacion.modo_historial ?? "",
 
       historial:
         simulacion.historial || null,
@@ -588,6 +591,9 @@ function actualizarEstadoContinuidad() {
   const notaSinContinuidad = document.getElementById(
     "cuotas-sin-continuidad",
   );
+  const notaSugerencia = document.getElementById(
+    "cuotas-sugerencia-continuidad",
+  );
 
   if (continua === "false") {
     cierre.value = cuotasActuales;
@@ -600,6 +606,7 @@ function actualizarEstadoContinuidad() {
     marcadorCierre?.classList.add("d-none");
     marcadorFuturas?.classList.add("d-none");
     notaSinContinuidad?.classList.remove("d-none");
+    notaSugerencia?.classList.add("d-none");
 
   } else if (continua === "true") {
     cierre.disabled = false;
@@ -609,6 +616,7 @@ function actualizarEstadoContinuidad() {
     marcadorCierre?.classList.remove("d-none");
     marcadorFuturas?.classList.remove("d-none");
     notaSinContinuidad?.classList.add("d-none");
+    notaSugerencia?.classList.remove("d-none");
 
     if (
       !cierre.value ||
@@ -635,6 +643,7 @@ function actualizarEstadoContinuidad() {
     marcadorCierre?.classList.add("d-none");
     marcadorFuturas?.classList.add("d-none");
     notaSinContinuidad?.classList.add("d-none");
+    notaSugerencia?.classList.add("d-none");
   }
 }
 
@@ -1252,12 +1261,13 @@ async function analizarSalario(evento = null) {
     simulacion.resumen_salario = contenido;
     simulacion.origen_salario_proyeccion = (
       document.getElementById("origen_salario_proyeccion")?.value
-      || "MANUAL"
+      || ""
     );
 
     // Una nueva normalización salarial invalida cualquier
     // proyección construida con un salario anterior.
     simulacion.proyeccion = {};
+    simulacion.origen_proyeccion_anio_fin = null;
     simulacion.resumen_proyeccion = null;
     simulacion.resumen_linea_tiempo = null;
     simulacion.retiro = {};
@@ -1302,7 +1312,11 @@ function mostrarResumenSalario(resumen) {
 
 
 function paso3EstaCompleto(simulacion = obtenerSimulacion()) {
-  const modo = simulacion.modo_historial || "MANUAL";
+  const modo = simulacion.modo_historial || "";
+  const modoHistorialValido = ["MANUAL", "SOLO_ACTUAL"].includes(modo);
+  const decisionDetalleValida = (
+    typeof simulacion.detalle_anio_actual_habilitado === "boolean"
+  );
   const historial = simulacion.resumen_historial;
   const historialListo = (
     modo === "SOLO_ACTUAL"
@@ -1322,7 +1336,9 @@ function paso3EstaCompleto(simulacion = obtenerSimulacion()) {
   );
 
   return Boolean(
-    historialListo
+    modoHistorialValido
+    && decisionDetalleValida
+    && historialListo
     && detalleListo
     && simulacion.resumen_salario,
   );
@@ -1367,7 +1383,7 @@ function actualizarResumenPaso3() {
   if (estado && listo) {
     estado.className = "alert alert-success mt-4 mb-0";
     estado.textContent = (
-      (simulacion.modo_historial || "MANUAL") === "SOLO_ACTUAL"
+      (simulacion.modo_historial || "") === "SOLO_ACTUAL"
         ? "Base salarial lista. La simulación continuará con información histórica limitada."
         : "Historial y base salarial listos para continuar."
     );
@@ -1424,6 +1440,29 @@ async function asegurarCuotasAnalizadasParaPaso3() {
 }
 
 
+function validarDecisionesPaso3() {
+  const modoHistorial = document.getElementById("modo_historial");
+  const usarDetalle = document.getElementById("usar_detalle_anio_actual");
+  const modoDetalle = document.getElementById("modo_detalle_anio_actual");
+
+  for (const control of [modoHistorial, usarDetalle]) {
+    if (!control?.value) {
+      control?.reportValidity();
+      control?.focus();
+      return false;
+    }
+  }
+
+  if (usarDetalle.value === "true" && !modoDetalle?.value) {
+    modoDetalle?.reportValidity();
+    modoDetalle?.focus();
+    return false;
+  }
+
+  return true;
+}
+
+
 async function analizarPasoHistorialCompleto() {
   const cuotasListas = await asegurarCuotasAnalizadasParaPaso3();
   if (!cuotasListas) {
@@ -1431,8 +1470,13 @@ async function analizarPasoHistorialCompleto() {
     return false;
   }
 
+  if (!validarDecisionesPaso3()) {
+    enfocarSeccionPaso3("seccion-historial-salarial");
+    return false;
+  }
+
   const simulacionInicial = obtenerSimulacion();
-  const modo = simulacionInicial.modo_historial || "MANUAL";
+  const modo = simulacionInicial.modo_historial || "";
 
   if (simulacionInicial.detalle_anio_actual_habilitado) {
     if (typeof validarDetalleAnioActual !== "function") return false;
@@ -1519,6 +1563,18 @@ function ocultarErrorSalario() {
  *
  * @param {Object} simulacion Estado actual de la simulación.
  */
+function actualizarProcedenciaHorizonteProyeccion(origen) {
+  const nota = document.getElementById("origen-proyeccion-anio-fin");
+  if (!nota) return;
+
+  const editado = origen === "EDITADO_USUARIO";
+  nota.className = `field-origin-note ${editado ? "edited" : "automatic"}`;
+  nota.textContent = editado
+    ? "Editado por ti. Este horizonte sustituye la sugerencia automática inicial."
+    : `Calculado automáticamente: horizonte inicial sugerido de ${ANIOS_PROYECCION_PREDETERMINADOS} años. Puedes modificarlo según la edad de retiro que quieras comparar.`;
+}
+
+
 function prepararPasoProyeccion(simulacion) {
   const resumenSalario =
     simulacion.resumen_salario;
@@ -1539,7 +1595,7 @@ function prepararPasoProyeccion(simulacion) {
   );
 
   if (notaBase) {
-    const origen = simulacion.origen_salario_proyeccion || "MANUAL";
+    const origen = simulacion.origen_salario_proyeccion || "";
     const resumenDetalle = simulacion.resumen_detalle_anio_actual;
 
     notaBase.textContent = (
@@ -1562,15 +1618,33 @@ function prepararPasoProyeccion(simulacion) {
   // Impide seleccionar un año final anterior al actual.
   campoFin.min = ANIO_ACTUAL;
 
-  // Si todavía no existe un valor, se proyectan inicialmente
-  // cinco años futuros.
+  const anioPredeterminado = (
+    ANIO_ACTUAL
+    + ANIOS_PROYECCION_PREDETERMINADOS
+  );
+  const anioGuardado = Number(simulacion.proyeccion?.anio_fin || 0);
+
   if (!campoFin.value) {
     campoFin.value = (
-      ANIO_ACTUAL
-      + ANIOS_PROYECCION_PREDETERMINADOS
+      Number.isInteger(anioGuardado)
+      && anioGuardado >= ANIO_ACTUAL
+        ? anioGuardado
+        : anioPredeterminado
     );
   }
 
+  if (!simulacion.origen_proyeccion_anio_fin) {
+    simulacion.origen_proyeccion_anio_fin = (
+      Number(campoFin.value) === anioPredeterminado
+        ? "CALCULADO_AUTOMATICAMENTE"
+        : "EDITADO_USUARIO"
+    );
+    guardarSimulacion(simulacion);
+  }
+
+  actualizarProcedenciaHorizonteProyeccion(
+    simulacion.origen_proyeccion_anio_fin,
+  );
   actualizarLimitesSalarioFuturo();
 }
 
@@ -2693,6 +2767,10 @@ document.addEventListener(
     ).addEventListener(
       "input",
       () => {
+        const simulacion = obtenerSimulacion();
+        simulacion.origen_proyeccion_anio_fin = "EDITADO_USUARIO";
+        guardarSimulacion(simulacion);
+        actualizarProcedenciaHorizonteProyeccion("EDITADO_USUARIO");
         actualizarLimitesSalarioFuturo();
         invalidarResumenProyeccion();
       },
