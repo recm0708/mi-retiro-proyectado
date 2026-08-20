@@ -2,7 +2,7 @@
 
 **Estado:** vigente
 **Versión de aplicación revisada:** `0.0.26-beta`
-**Última actualización transversal:** PLAN.1 R4.2 — PR #23 integrado, 720 pruebas post-merge y corrección de higiene pre-tag pendiente — 2026-08-20
+**Última actualización transversal:** PLAN.1 R4.2 — cierre formal `0.0.26-beta`, 720 pruebas y tag firmado publicado — 2026-08-20
 **Cierre histórico preservado:** UX.4.6e R9.2 — cierre formal `0.0.25-beta` — 2026-08-19
 
 Este archivo es el punto de entrada para la documentación técnica, funcional, normativa, de privacidad, validación y auditoría de Mi Retiro Proyectado.

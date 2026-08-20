@@ -74,7 +74,7 @@ Objetivo:
 - preservar sin reescritura la documentación histórica;
 - mantener `0.0.N-beta` durante la etapa de desarrollo.
 
-**Estado de PLAN.1:** R1–R3 y R4.1 cerradas; R4.2 integró el PR #23, superó los checks remotos y revalidó `main` con **720 pruebas en `OK`**. El tag permanece bloqueado hasta integrar y revalidar sin `SyntaxWarning` la higiene pre-tag.
+**Estado de PLAN.1:** cerrado. R4.2 integró PR #23 y PR #24, superó los checks remotos, revalidó `main` con **720 pruebas en `OK`** sin `SyntaxWarning` y publicó el tag firmado `v0.0.26-beta` (`bfbb746b177ebcc577f7241fef4d6914f713739a` → `b572796d68ff6fd91ce9944a0c6d1cf7d45753a0`). El siguiente bloque funcional es UX.4.6f.
 
 Revisiones internas:
 

@@ -23,9 +23,9 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 - **Versión formal vigente:** `0.0.26-beta`
 - **Etapa:** desarrollo beta; repositorio de código público y ejecución de aplicación orientada actualmente a entorno local
 - **Programa GOV.1:** cerrado — Auditoría, Gobierno y Trazabilidad Pre-Beta
-- **Bloque transversal activo:** PLAN.1 — Alineación maestra hacia la primera versión oficial
-- **PLAN.1:** R1–R4.1 cerradas; R4.2 integró el PR #23 por squash y superó los checks remotos; el gate post-merge confirmó **720 pruebas en `OK`**, pero el tag permanece bloqueado hasta revalidar sin `SyntaxWarning` la higiene pre-tag
-- **Bloque activo:** UX.4.6f — referencia histórica del cierre de `0.0.25-beta`; su ejecución material queda temporalmente precedida por PLAN.1
+- **Programa PLAN.1:** cerrado — Alineación maestra hacia la primera versión oficial
+- **PLAN.1:** cerrado en `0.0.26-beta`; PR #23 y PR #24 integrados, **720 pruebas en `OK`** en el gate final y tag firmado `v0.0.26-beta` publicado
+- **Bloque activo:** UX.4.6f — Paso 4 · Proyección salarial/laboral
 - **Siguiente bloque funcional:** UX.4.6f — Paso 4 · Proyección salarial/laboral
 - **GOV.1.4:** Observabilidad y Developer Diagnostics cerrado
 - **GOV.1.5:** Seguridad, privacidad y transparencia cerrado internamente
@@ -140,7 +140,7 @@ v0.0.24-beta
 
 `0.0.25-beta` cierra UX.4.6e después de la validación funcional R8, el gate local de **660 pruebas en `OK`** y la integración de los PR #21 y #22. Su tag formal asociado es `v0.0.25-beta`; PLAN.1 se ejecuta antes de reanudar materialmente UX.4.6f.
 
-`0.0.26-beta` ya fue integrado en `main` mediante el PR #23. El commit de rama `7c50d989f5c6d266db26c9625367dd82e9895aba` fue firmado; los checks `Python 3.13`, `Python 3.14` y `Auditoría de gobernanza` quedaron en verde; el squash resultante es `497097f720c98f6e5a7ed689cf91368011a96be1`. La revalidación post-merge alcanzó **720 pruebas en `OK`**, pero expuso un `SyntaxWarning` en una regresión documental. La revisión pre-tag corrige esa advertencia sin cambiar lógica ni conteo; `v0.0.26-beta` sigue sin crearse hasta repetir el gate limpio.
+`0.0.26-beta` cierra PLAN.1. El PR #23 integró la alineación maestra y el PR #24 la higiene pre-tag; el gate final confirmó **720 pruebas en `OK`** sin `SyntaxWarning`. El tag anotado y firmado `v0.0.26-beta` fue publicado sobre `b572796d68ff6fd91ce9944a0c6d1cf7d45753a0`. Su objeto tag es `bfbb746b177ebcc577f7241fef4d6914f713739a` y `v0.0.25-beta` permanece inmutable.
 
 Objetivo de release estable:
 

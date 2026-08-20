@@ -151,7 +151,7 @@ Evidencia de cierre:
 
 No se declara una versión oficial de producto con este hito.
 
-### `0.0.26-beta` — 2026-08-20 — candidato R4.2 en higiene pre-tag
+### `0.0.26-beta` — 2026-08-20 — cierre formal de PLAN.1
 
 Quinta versión formal bajo `VERSIONING.md` y candidato local validado de cierre de PLAN.1.
 
@@ -163,18 +163,20 @@ Evidencia acumulada antes del cierre remoto:
 - la documentación viva se audita contra el candidato sin modificar motores, fórmulas ni normativa JSON;
 - R4.1 fue validada localmente con **720 pruebas en `OK`**, `python -m compileall app`, validación de sintaxis JavaScript y `git diff --check` limpio.
 
-Estado remoto y post-merge:
+Estado remoto y cierre:
 
-- commit de rama firmado: `7c50d989f5c6d266db26c9625367dd82e9895aba`;
-- Pull Request #23: integrado por squash;
+- commit de PLAN.1 firmado: `7c50d989f5c6d266db26c9625367dd82e9895aba`;
+- Pull Request #23: integrado por squash en `497097f720c98f6e5a7ed689cf91368011a96be1`;
+- higiene pre-tag firmada: `d3436db4e06b96cf92bb6e0476c03b56b1e40ca8`;
+- Pull Request #24: integrado por squash en `b572796d68ff6fd91ce9944a0c6d1cf7d45753a0`;
 - checks `Python 3.13`, `Python 3.14` y `Auditoría de gobernanza`: `success`;
-- commit de `main`: `497097f720c98f6e5a7ed689cf91368011a96be1`, verificado por GitHub;
-- revalidación post-merge: **720 pruebas en `OK`**, compilación Python, sintaxis JavaScript y `git diff --check` correctos;
-- incidencia pre-tag: `SyntaxWarning` en una cadena de prueba que contiene `.\VERSION`;
-- corrección: literal convertido a cadena raw, sin cambio funcional ni aumento del inventario;
-- tag `v0.0.26-beta`: **no creado todavía**.
+- gate final post-merge: **720 pruebas en `OK`**, sin `SyntaxWarning`, compilación Python, sintaxis JavaScript y `git diff --check` correctos;
+- tag formal: `v0.0.26-beta`;
+- objeto tag firmado: `bfbb746b177ebcc577f7241fef4d6914f713739a`;
+- target del tag: `b572796d68ff6fd91ce9944a0c6d1cf7d45753a0`;
+- firma SSH local verificada con la clave autorizada del mantenedor.
 
-El tag permanece bloqueado hasta integrar esta higiene pre-tag y repetir el mismo gate de 720 pruebas sobre el `main` resultante sin la advertencia.
+`v0.0.26-beta` es inmutable y no debe moverse ni recrearse. La reconciliación documental posterior se registra en `[Unreleased]` y no altera el contenido del hito etiquetado.
 
 ## 5. Migración criptográfica de tags — materializada
 
