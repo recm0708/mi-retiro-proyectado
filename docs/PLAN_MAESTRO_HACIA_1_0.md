@@ -87,8 +87,8 @@ Revisiones internas:
 
 ### 2. UX.4.6f — Paso 4 · Proyección salarial/laboral
 
-- **R1 activo:** unificar procedencia visual, decisiones explícitas sin predeterminados silenciosos, trazabilidad de valores automáticos y estado accesible de procesamiento para todos los adjuntos;
-- **R1.1 en validación:** restaurar el bloqueo de datos documentales detectados en la vista principal y concentrar su edición en la revisión modal, manteniendo editables los campos originalmente no detectados;
+- **R1/R1.1 cerradas:** procedencia visual uniforme, decisiones explícitas, trazabilidad de valores automáticos, procesamiento accesible de adjuntos y bloqueo de datos documentales detectados en la vista principal; PR #28 integrado tras **743/743 pruebas en `OK`** y validación manual;
+- **R2 activo:** auditar lógica, matemática, casos reales y trazabilidad del Paso 4 antes de avanzar a escenarios de retiro;
 - validar lógica y precisión;
 - revisar UX y accesibilidad;
 - distinguir información acreditada, datos reales recientes y proyección;

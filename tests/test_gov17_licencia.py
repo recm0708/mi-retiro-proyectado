@@ -27,8 +27,8 @@ class TestGov17Licencia(unittest.TestCase):
             "Jinja2 | 3.1.6 | BSD-3-Clause",
             "Pydantic | 2.13.4 | MIT",
             "python-multipart | 0.0.32 | Apache-2.0",
-            "pypdf | 6.15.0 | BSD-3-Clause",
-            "Uvicorn | 0.52.1 | BSD-3-Clause",
+            "pypdf | 6.16.1 | BSD-3-Clause",
+            "Uvicorn | 0.52.3 | BSD-3-Clause",
             "Bootstrap | 5.3.8 | MIT",
         ):
             self.assertIn(esperado, texto)
