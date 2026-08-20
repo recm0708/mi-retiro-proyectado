@@ -6,6 +6,14 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ## [Unreleased]
 
+### Mantenimiento de dependencias post-UX.4.6f R1
+
+- actualizadas las dependencias directas `pypdf` de `6.15.0` a `6.16.1` y `uvicorn` de `0.52.1` a `0.52.3`, manteniendo `VERSION = 0.0.26-beta`;
+- `pypdf 6.16.1` incorpora correcciones upstream de seguridad/robustez y se conserva el contrato de compatibilidad de ambos importadores con PDFs sintéticos;
+- `Uvicorn 0.52.3` incorpora mantenimiento upstream de la ruta HTTP/1.1 sin cambiar la configuración ASGI del proyecto;
+- sincronizados `requirements.txt`, inventario de terceros, avisos de licencia y guards de versiones actuales; las referencias históricas a `pypdf 6.15.0` en hitos ya cerrados permanecen intactas;
+- los PR Dependabot #26 y #27 originaron la revisión, pero la integración queda condicionada al gate completo del proyecto y se mantiene separada de los cambios funcionales de UX.4.6f.
+
 ### UX.4.6f R1.1 — bloqueo documental y restauración visual
 
 - restaurado el bloqueo de solo lectura en la vista principal para datos detectados por Mi Retiro Seguro y Ficha Digital; las correcciones vuelven a concentrarse en **Revisar importación** → **Editar campos**;
@@ -16,6 +24,7 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 - aclarado que las bases salariales automáticas del Paso 3 solo se habilitan después de analizar y validar un detalle del año actual que aporte las métricas necesarias;
 - ADR-171, RF-351 a RF-357 y TR-019 formalizan el contrato corregido tras la validación visual de R1;
 - confirmado durante la revisión manual que el estado global **Analizando documento…** funciona correctamente para Mi Retiro Seguro y Ficha Digital; `VERSION` permanece en `0.0.26-beta`.
+- R1 + R1.1 fueron validados con **743/743 pruebas en `OK`**, compilación Python, sintaxis JavaScript, `git diff --check` y revisión visual manual; PR #28 integrado por squash en `5e93dfc3d4c33b264c61e50f72c1eb0b84b3bc29`, con Python 3.13, Python 3.14 y Auditoría de gobernanza en verde.
 
 ### UX.4.6f R1 — consistencia de procedencia, decisiones y adjuntos
 

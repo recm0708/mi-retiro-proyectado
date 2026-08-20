@@ -5,7 +5,7 @@
 **Versión base histórica:** `0.0.25-beta`
 **Base documental histórica:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal histórica preservada:** UX.4.6e R8 — validación funcional y procedencia editable — 2026-08-19
-**Última revisión transversal:** UX.4.6f R1.1 — bloqueo documental y restauración visual — 2026-08-20
+**Última revisión transversal:** UX.4.6f R1/R1.1 integradas; mantenimiento de dependencias post-R1 — 2026-08-20
 **Clasificación:** Técnica / Calidad
 
 La estrategia combina pruebas automatizadas, CI, casos sintéticos/anonimizados y validación manual cuando una propiedad no puede demostrarse suficientemente con código.
@@ -207,7 +207,15 @@ También se documenta que las bases salariales automáticas del Paso 3 son condi
 
 La suite pasa de **734 a 743 pruebas**. En el entorno aislado de preparación se ejecutaron **742/743 correctamente**; la única no satisfactoria continúa siendo el guard de `pypdf`, porque ese entorno mantiene `5.9.0` mientras `requirements.txt` fija `6.15.0`. Compilación Python, sintaxis de todos los JavaScript y `git diff --check` permanecen limpios.
 
-**Gate pendiente de R1.1 antes de commit/PR:** ejecutar en el `.venv` canónico con `pypdf==6.15.0` y obtener **743 pruebas en `OK`**, seguido de validación manual de Pasos 1–4 en Claro, Oscuro y Alto contraste. La revisión debe confirmar especialmente el bloqueo de los campos detectados, la franja primaria, los iconos `✎`/`⊘` y el selector de disponibilidad del historial en estado inicial.
+El gate canónico de R1.1 se completó en el `.venv` del proyecto con `pypdf==6.15.0`: **743/743 pruebas en `OK`**, compilación Python, sintaxis JavaScript y `git diff --check` limpios. La validación manual de Pasos 1–4 confirmó el bloqueo de los campos detectados, la franja primaria, los iconos `✎`/`⊘`, el selector de disponibilidad del historial sin respuesta silenciosa y el estado de análisis de Mi Retiro Seguro/Ficha Digital.
+
+El PR #28 integró R1 + R1.1 por squash en `5e93dfc3d4c33b264c61e50f72c1eb0b84b3bc29`. Los checks `Python 3.13`, `Python 3.14` y `Auditoría de gobernanza` finalizaron en verde. R1 queda cerrado y UX.4.6f continúa con la auditoría lógica/matemática del Paso 4.
+
+### Mantenimiento de dependencias post-R1
+
+Dependabot propuso `uvicorn 0.52.1 → 0.52.3` (#26) y `pypdf 6.15.0 → 6.16.1` (#27). Los PR aislados no podían superar la suite porque los guards de inventario y compatibilidad fijaban correctamente las versiones vigentes anteriores. La actualización coordinada debe mantener sincronizados `requirements.txt`, `docs/DEPENDENCIAS_TERCEROS.md`, `THIRD_PARTY_NOTICES.md` y las regresiones de versión.
+
+**Gate de aceptación:** instalar el snapshot actualizado, ejecutar `pip check`, `compileall`, sintaxis JavaScript, suite completa y `git diff --check`. La suite conserva **743 pruebas**; `pypdf 6.16.1` debe superar además el roundtrip sintético, rechazo controlado de PDF sin texto y límites de páginas de ambos importadores. `VERSION` permanece en `0.0.26-beta`.
 
 ## 2. Comandos obligatorios
 
@@ -232,7 +240,7 @@ python -m pip check
 
 ## 3. Inventario actual de pruebas
 
-Inventario vigente: **96 módulos**.
+Inventario vigente: **97 módulos**.
 
 - `tests/test_accesibilidad_temas.py`
 - `tests/test_accesibilidad_ux4.py`
@@ -328,6 +336,7 @@ Inventario vigente: **96 módulos**.
 - `tests/test_ux46e_r8_reconsentimiento_borrado.py`
 - `tests/test_ux46e_r91_candidato_cierre.py`
 - `tests/test_ux46e_renumeracion_documental.py`
+- `tests/test_ux46f_r11_bloqueo_documental_vista_principal.py`
 - `tests/test_ux46f_r1_consistencia_procedencia_adjuntos.py`
 - `tests/test_ux4_remate_visual.py`
 

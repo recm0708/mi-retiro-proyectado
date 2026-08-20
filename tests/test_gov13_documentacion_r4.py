@@ -149,8 +149,8 @@ class TestGov13DocumentacionR4(unittest.TestCase):
             "Jinja2": ("3.1.6", "BSD-3-Clause"),
             "pydantic": ("2.13.4", "MIT"),
             "python-multipart": ("0.0.32", "Apache-2.0"),
-            "pypdf": ("6.15.0", "BSD-3-Clause"),
-            "uvicorn": ("0.52.1", "BSD-3-Clause"),
+            "pypdf": ("6.16.1", "BSD-3-Clause"),
+            "uvicorn": ("0.52.3", "BSD-3-Clause"),
         }
         for nombre, (version, licencia) in esperadas.items():
             with self.subTest(nombre=nombre):

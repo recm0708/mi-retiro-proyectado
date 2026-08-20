@@ -147,8 +147,9 @@ Este roadmap describe **estado actual y trabajo futuro**. La evolución detallad
     - [x] R9.1 — candidato local `0.0.25-beta` validado con 660 pruebas en `OK`, documentación coherente y `git diff --check` limpio;
     - [x] R9.2 — PR #21 integrado por squash; PR #22 completó el cierre documental; `main` final `7affa00e2530aeede066c10ecfee8c6dbd49b10b`; tag firmado `v0.0.25-beta`.
 - [ ] **UX.4.6f — Paso 4 · Proyección salarial/laboral**
-  - [ ] R1 — consistencia transversal de procedencia, decisiones explícitas y procesamiento accesible de adjuntos; gate automático 734/734 superado y validación manual detectó ajustes de bloqueo.
-  - [ ] R1.1 — restaurar bloqueo documental en vista principal, franja visual de solo lectura, iconos semánticos y selección explícita de disponibilidad del historial; candidato en validación.
+  - [x] R1 — consistencia transversal de procedencia, decisiones explícitas y procesamiento accesible de adjuntos; gate automático 734/734 superado.
+  - [x] R1.1 — bloqueo documental en vista principal, franja visual de solo lectura, iconos semánticos y selección explícita de disponibilidad del historial; R1 + R1.1 integradas por PR #28 tras **743/743 pruebas en `OK`** y validación visual manual.
+  - [ ] R2 — auditoría lógica, matemática, casos reales y trazabilidad del Paso 4.
 - [ ] **UX.4.6g — Paso 5 · Escenarios de retiro**
 - [ ] **UX.4.6h — Paso 6 · Resultados y exportación**
 - [ ] **UX.4.6i — Cómo se calcula**

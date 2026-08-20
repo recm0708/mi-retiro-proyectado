@@ -37,9 +37,9 @@ class TestUX46eAuditoriaCoherencia(unittest.TestCase):
         self.assertIn("PR #21 integrado por squash", texto)
         self.assertIn("**Bloque activo:** UX.4.6f", texto)
         self.assertIn("21 labels y 20/20 topics", texto)
-        self.assertIn(
-            "**Revisión activa:** UX.4.6f R1",
+        self.assertRegex(
             texto,
+            r"\*\*Revisión activa:\*\* UX\.4\.6f R\d+(?:\.\d+)?",
         )
         self.assertIn(
             "**Siguiente bloque funcional posterior:** UX.4.6g — Paso 5 · Escenarios de retiro",

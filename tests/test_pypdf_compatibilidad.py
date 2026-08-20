@@ -1,4 +1,4 @@
-"""Compatibilidad controlada de los importadores con pypdf 6.15.0."""
+"""Compatibilidad controlada de los importadores con la versión vigente de pypdf."""
 
 from io import BytesIO
 import unittest
@@ -10,7 +10,7 @@ from app.servicios.ficha_digital import analizar_ficha_digital_pdf
 from app.servicios.referencia_mi_retiro_seguro import analizar_comprobante_pdf
 
 
-class TestPypdf615Compatibilidad(unittest.TestCase):
+class TestPypdfCompatibilidad(unittest.TestCase):
     """Protege el contrato PDF usado por los dos importadores vigentes."""
 
     @staticmethod
@@ -22,8 +22,8 @@ class TestPypdf615Compatibilidad(unittest.TestCase):
         escritor.write(salida)
         return salida.getvalue()
 
-    def test_version_pypdf_fijada_en_6_15_0(self):
-        self.assertEqual("6.15.0", pypdf.__version__)
+    def test_version_pypdf_fijada_en_6_16_1(self):
+        self.assertEqual("6.16.1", pypdf.__version__)
 
     def test_roundtrip_pdfreader_pdfwriter_sigue_operativo(self):
         contenido = self._pdf_en_blanco()
@@ -43,7 +43,7 @@ class TestPypdf615Compatibilidad(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, "texto extraíble"):
                     importador(contenido)
 
-    def test_limites_de_paginas_siguen_activos_con_pypdf_6_15_0(self):
+    def test_limites_de_paginas_siguen_activos_con_pypdf_vigente(self):
         with self.assertRaisesRegex(ValueError, "más páginas"):
             analizar_comprobante_pdf(self._pdf_en_blanco(21))
 

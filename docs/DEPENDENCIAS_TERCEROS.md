@@ -6,7 +6,7 @@
 **Versión base histórica:** `0.0.23-beta`
 **Base documental:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal histórica:** GOV.1.5 R3 — 2026-08-18
-**Última revisión documental:** PLAN.1 R3B1 — 2026-08-20
+**Última revisión documental:** mantenimiento post-UX.4.6f R1 — 2026-08-20
 **Clasificación:** Técnica / Terceros / Auditoría
 
 Este inventario distingue dependencias directas, snapshot transitivo, recursos externos y servicios de red. GOV.1.7 adopta una licencia propietaria para materiales originales sin relicenciar dependencias upstream.
@@ -21,8 +21,8 @@ Las versiones corresponden al `requirements.txt` vigente. La estructura document
 | Jinja2 | 3.1.6 | Plantillas HTML | BSD-3-Clause | Render local del servidor | Revisar autoescape/plantillas |
 | Pydantic | 2.13.4 | Validación/modelos | MIT | Validación local de estructuras | Revisar cambios de esquema/core |
 | python-multipart | 0.0.32 | Recepción multipart de archivos | Apache-2.0 | Procesa cargas recibidas por FastAPI | Sensible a frontera de upload |
-| pypdf | 6.15.0 | Extracción y lectura controlada de PDF | BSD-3-Clause | Procesa PDF en memoria; sin red propia | Dependencia crítica de parser; actualización mayor validada con regresiones específicas |
-| Uvicorn | 0.52.1 | Servidor ASGI | BSD-3-Clause | Sirve la aplicación; la red depende del modo de ejecución | Revisar configuración de despliegue |
+| pypdf | 6.16.1 | Extracción y lectura controlada de PDF | BSD-3-Clause | Procesa PDF en memoria; sin red propia | Dependencia crítica de parser; mantener regresiones específicas en cada actualización |
+| Uvicorn | 0.52.3 | Servidor ASGI | BSD-3-Clause | Sirve la aplicación; la red depende del modo de ejecución | Revisar configuración de despliegue |
 
 Fuentes upstream de licencia verificadas documentalmente:
 
@@ -122,12 +122,14 @@ Antes de aceptar una actualización:
 6. revisar importadores si cambia `pypdf`/multipart;
 7. actualizar este documento si cambia versión, licencia, función, riesgo o conexión.
 
-Para `pypdf 6.15.0` se añadieron regresiones específicas sobre:
+La actualización vigente a `pypdf 6.16.1` conserva las regresiones específicas introducidas con `6.15.0` y las ejecuta contra la versión actualmente fijada. El salto `6.15.0` → `6.16.1` incorpora correcciones upstream de seguridad y robustez relacionadas con ciclos e iteraciones limitadas durante el procesamiento PDF. Se verifica:
 
 - versión instalada;
 - roundtrip `PdfWriter` → `PdfReader`;
 - rechazo controlado de PDFs digitales sin texto por ambos importadores;
 - límites de páginas de Mi Retiro Seguro y Ficha Digital.
+
+La actualización `Uvicorn 0.52.1` → `0.52.3` se clasifica como mantenimiento minor/patch del servidor ASGI. Según las notas upstream recibidas por Dependabot, actualiza su ruta de procesamiento HTTP/1.1 y corrige recepciones de solicitudes sin cuerpo; no cambia la configuración de despliegue de Mi Retiro Proyectado.
 
 ## 8. Licencia del proyecto
 
