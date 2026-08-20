@@ -1,4 +1,4 @@
-"""PLAN.1 R4.2 — cierre remoto, evidencia post-merge e higiene pre-tag."""
+"""PLAN.1 R4.2 — cierre formal post-tag de PLAN.1."""
 
 from pathlib import Path
 import re
@@ -13,7 +13,7 @@ DOCS = ROOT / "docs"
 
 
 class TestPlan1R4CandidatoCierre(unittest.TestCase):
-    """Protege la evidencia remota real y mantiene bloqueado el tag hasta un gate limpio."""
+    """Protege el cierre formal sin mover ni recrear el tag publicado."""
 
     def setUp(self):
         self.version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
@@ -26,9 +26,9 @@ class TestPlan1R4CandidatoCierre(unittest.TestCase):
     def test_readme_muestra_candidato_validado_y_preserva_0_0_25(self):
         texto = (ROOT / "README.md").read_text(encoding="utf-8")
         self.assertIn("**Versión formal vigente:** `0.0.26-beta`", texto)
-        self.assertIn("R4.2 integró el PR #23 por squash", texto)
+        self.assertIn("PLAN.1:** cerrado en `0.0.26-beta`", texto)
         self.assertIn("**720 pruebas en `OK`**", texto)
-        self.assertIn("`SyntaxWarning`", texto)
+        self.assertIn("tag firmado `v0.0.26-beta` publicado", texto)
         self.assertIn("**UX.4.6e:** cerrada en `0.0.25-beta`", texto)
         self.assertIn("v0.0.25-beta", texto)
 
@@ -47,15 +47,19 @@ class TestPlan1R4CandidatoCierre(unittest.TestCase):
         self.assertIn("PR #23", texto)
         self.assertIn("497097f720c98f6e5a7ed689cf91368011a96be1", texto)
         self.assertIn("`SyntaxWarning`", texto)
-        self.assertIn("`v0.0.26-beta` continúa sin crearse", texto)
+        self.assertIn("tag formal asociado: `v0.0.26-beta`", texto)
+        self.assertIn("bfbb746b177ebcc577f7241fef4d6914f713739a", texto)
+        self.assertIn("b572796d68ff6fd91ce9944a0c6d1cf7d45753a0", texto)
 
     def test_releases_registra_candidato_sin_tag_anticipado(self):
         texto = (ROOT / "RELEASES.md").read_text(encoding="utf-8")
-        self.assertIn("### `0.0.26-beta` — 2026-08-20 — candidato R4.2 en higiene pre-tag", texto)
+        self.assertIn("### `0.0.26-beta` — 2026-08-20 — cierre formal de PLAN.1", texto)
         self.assertIn("**720 pruebas en `OK`**", texto)
-        self.assertIn("tag `v0.0.26-beta`: **no creado todavía**", texto)
         self.assertIn("Pull Request #23", texto)
-        self.assertIn("`success`", texto)
+        self.assertIn("Pull Request #24", texto)
+        self.assertIn("tag formal: `v0.0.26-beta`", texto)
+        self.assertIn("bfbb746b177ebcc577f7241fef4d6914f713739a", texto)
+        self.assertIn("b572796d68ff6fd91ce9944a0c6d1cf7d45753a0", texto)
         self.assertIn("v0.0.25-beta", texto)
         self.assertIn("7affa00e2530aeede066c10ecfee8c6dbd49b10b", texto)
 
@@ -64,30 +68,34 @@ class TestPlan1R4CandidatoCierre(unittest.TestCase):
         plan = (DOCS / "PLAN_MAESTRO_HACIA_1_0.md").read_text(encoding="utf-8")
         self.assertIn("[x] R4.1 — candidato local `0.0.26-beta` validado", roadmap)
         self.assertIn("**720 pruebas en `OK`**", roadmap)
-        self.assertIn("[ ] R4.2 — cierre remoto y tag firmado", roadmap)
+        self.assertIn("[x] R4.2 — cierre remoto y tag firmado", roadmap)
         self.assertIn("[x] PR #23 integrado por squash", roadmap)
-        self.assertIn("[ ] corregir y revalidar sin `SyntaxWarning`", roadmap)
+        self.assertIn("[x] corregir y revalidar sin `SyntaxWarning`", roadmap)
+        self.assertIn("[x] crear y verificar el tag firmado `v0.0.26-beta`", roadmap)
         self.assertIn("**Versión candidata de cierre de PLAN.1:** `0.0.26-beta`", plan)
-        self.assertIn("R4.2 integró el PR #23", plan)
-        self.assertIn("tag permanece bloqueado", plan)
+        self.assertIn("**Estado de PLAN.1:** cerrado", plan)
+        self.assertIn("PR #23 y PR #24", plan)
+        self.assertIn("`v0.0.26-beta`", plan)
 
-    def test_validacion_registra_postmerge_y_higiene_pretag(self):
+    def test_validacion_registra_cierre_posttag(self):
         texto = (DOCS / "VALIDACION.md").read_text(encoding="utf-8")
         self.assertIn("cerró con **710 pruebas en `OK`**", texto)
         self.assertIn("cerró localmente con **720 pruebas en `OK`**", texto)
-        self.assertIn("PR #23", texto)
-        self.assertIn("497097f720c98f6e5a7ed689cf91368011a96be1", texto)
-        self.assertIn("`SyntaxWarning`", texto)
-        self.assertIn("repetir el mismo gate de **720 pruebas en `OK`** sin la advertencia", texto)
+        self.assertIn("PR #24", texto)
+        self.assertIn("b572796d68ff6fd91ce9944a0c6d1cf7d45753a0", texto)
+        self.assertIn("**720 pruebas en `OK`** sin `SyntaxWarning`", texto)
+        self.assertIn("`v0.0.26-beta`", texto)
+        self.assertIn("bfbb746b177ebcc577f7241fef4d6914f713739a", texto)
 
     def test_auditoria_r4_documenta_frontera_local_y_remota(self):
         texto = (DOCS / "AUDITORIA_PLAN1_R4_2026-08-20.md").read_text(encoding="utf-8")
-        self.assertIn("**Estado:** R4.2 — PR #23 integrado; higiene pre-tag pendiente", texto)
+        self.assertIn("**Estado:** Cerrada — PLAN.1 completado en `0.0.26-beta`", texto)
         self.assertIn("R3B2 | 710 pruebas en `OK`", texto)
         self.assertIn("Ran 720 tests", texto)
-        self.assertIn("gate post-merge: **720 pruebas en `OK`**", texto)
-        self.assertIn("`SyntaxWarning`", texto)
-        self.assertIn("tag firmado `v0.0.26-beta`", texto)
+        self.assertIn("**720 pruebas en `OK`** sin `SyntaxWarning`", texto)
+        self.assertIn("`v0.0.26-beta`", texto)
+        self.assertIn("bfbb746b177ebcc577f7241fef4d6914f713739a", texto)
+        self.assertIn("b572796d68ff6fd91ce9944a0c6d1cf7d45753a0", texto)
         self.assertIn("## 6. Gate remoto R4.2", texto)
 
     def test_documentacion_viva_revisada_con_version_candidata(self):

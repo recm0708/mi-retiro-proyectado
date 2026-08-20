@@ -6,7 +6,12 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ## [Unreleased]
 
-Sin cambios posteriores al candidato local `0.0.26-beta`.
+### Documentación post-release
+
+- reconciliado el estado documental después de publicar el tag firmado `v0.0.26-beta`;
+- objeto tag remoto `bfbb746b177ebcc577f7241fef4d6914f713739a` → target `b572796d68ff6fd91ce9944a0c6d1cf7d45753a0`;
+- PLAN.1 queda cerrado y UX.4.6f vuelve a ser el bloque funcional activo;
+- no se modifica `VERSION`, runtime, motores, normativa, fórmulas ni el tag publicado.
 
 ## [0.0.26-beta] — 2026-08-20
 
@@ -28,7 +33,9 @@ Sin cambios posteriores al candidato local `0.0.26-beta`.
 - R4.1 promovió `VERSION` a `0.0.26-beta`, actualizó la documentación viva y cerró localmente con **720 pruebas en `OK`**, compilación Python, sintaxis JavaScript y `git diff --check` limpio;
 - R4.2 integró el PR #23 por squash en `497097f720c98f6e5a7ed689cf91368011a96be1`, después de que el head firmado `7c50d989f5c6d266db26c9625367dd82e9895aba` superara `Python 3.13`, `Python 3.14` y `Auditoría de gobernanza`;
 - la revalidación post-merge repitió **720 pruebas en `OK`**, compilación Python, sintaxis JavaScript y `git diff --check` limpios, pero detectó un `SyntaxWarning` por una secuencia de escape inválida en `test_plan1_documentacion_transversal.py`; la higiene pre-tag convierte ese literal en cadena raw sin alterar el contrato ni el número de pruebas;
-- `v0.0.25-beta` permanece inmutable; `v0.0.26-beta` continúa sin crearse hasta revalidar esta corrección, integrarla por PR y verificar nuevamente `main`.
+- la higiene pre-tag fue integrada posteriormente mediante PR #24; el gate final post-merge repitió **720 pruebas en `OK`** sin `SyntaxWarning`;
+- tag formal asociado: `v0.0.26-beta`; objeto tag `bfbb746b177ebcc577f7241fef4d6914f713739a`; target `b572796d68ff6fd91ce9944a0c6d1cf7d45753a0`;
+- `v0.0.25-beta` permanece inmutable.
 
 ## [0.0.25-beta] — 2026-08-19
 

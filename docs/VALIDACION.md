@@ -5,7 +5,7 @@
 **Versión base histórica:** `0.0.25-beta`
 **Base documental histórica:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal histórica preservada:** UX.4.6e R8 — validación funcional y procedencia editable — 2026-08-19
-**Última revisión transversal:** PLAN.1 R4.2 — higiene pre-tag después del PR #23 — 2026-08-20
+**Última revisión transversal:** PLAN.1 R4.2 — cierre formal post-tag — 2026-08-20
 **Clasificación:** Técnica / Calidad
 
 La estrategia combina pruebas automatizadas, CI, casos sintéticos/anonimizados y validación manual cuando una propiedad no puede demostrarse suficientemente con código.
@@ -164,7 +164,9 @@ R4.1 promovió `VERSION` a `0.0.26-beta`, actualizó metadata de documentación 
 
 R4.2 materializó el commit de rama firmado `7c50d989f5c6d266db26c9625367dd82e9895aba`, abrió el PR #23 y obtuvo `success` en `Python 3.13`, `Python 3.14` y `Auditoría de gobernanza`. El PR fue integrado por squash y `main` quedó en `497097f720c98f6e5a7ed689cf91368011a96be1`, verificado por GitHub.
 
-La revalidación local posterior sobre ese `main` repitió **720 pruebas en `OK`**, compilación Python correcta, sintaxis JavaScript correcta, `git diff --check` limpio y working tree limpio. Durante la importación de la suite apareció, sin convertir ninguna prueba en fallo, un `SyntaxWarning` en `tests/test_plan1_documentacion_transversal.py` por la secuencia `.\VERSION`. El tag se mantiene bloqueado: esta revisión pre-tag convierte ese literal a cadena raw y exige repetir el mismo gate de **720 pruebas en `OK`** sin la advertencia antes de crear `v0.0.26-beta`.
+La primera revalidación post-merge repitió **720 pruebas en `OK`** y detectó un `SyntaxWarning` documental. El PR #24 integró la corrección sin cambiar runtime, VERSION ni el inventario de pruebas. Después de sincronizar `main` en `b572796d68ff6fd91ce9944a0c6d1cf7d45753a0`, el gate final volvió a ejecutar **720 pruebas en `OK`** sin `SyntaxWarning`, con compilación Python, sintaxis JavaScript, `git diff --check` y working tree limpios.
+
+Se creó y publicó el tag anotado y firmado `v0.0.26-beta`. Objeto tag: `bfbb746b177ebcc577f7241fef4d6914f713739a`. Target: `b572796d68ff6fd91ce9944a0c6d1cf7d45753a0`. La firma SSH fue verificada con la clave autorizada del mantenedor. PLAN.1 queda cerrado; esta reconciliación documental posterior no mueve el tag ni cambia `VERSION`.
 
 La política vigente conserva las referencias históricas a `0.1.0-beta.1` cuando documentan decisiones o planes anteriores, pero exige que los documentos de planificación actual identifiquen `1.0.0.0` como primera versión oficial objetivo y mantengan Build separado de `VERSION`.
 

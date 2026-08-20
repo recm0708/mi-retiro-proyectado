@@ -1,6 +1,6 @@
 # Auditoría integral PLAN.1 R4
 
-**Estado:** R4.2 — PR #23 integrado; higiene pre-tag pendiente
+**Estado:** Cerrada — PLAN.1 completado en `0.0.26-beta`
 **Versión candidata:** `0.0.26-beta`
 **Versión base del programa:** `0.0.25-beta`
 **Fecha:** 2026-08-20
@@ -89,16 +89,19 @@ Evidencia ya materializada:
 
 La suite post-merge produjo un `SyntaxWarning` en una regresión documental por usar `.\VERSION` dentro de una cadena normal de Python. La advertencia no cambió el resultado de las 720 pruebas, pero viola el criterio de cierre limpio adoptado para el tag.
 
-Higiene pre-tag:
+Higiene pre-tag y cierre:
 
-- convertir el literal a cadena raw sin alterar el texto esperado;
-- mantener exactamente 720 pruebas;
-- integrar la corrección mediante PR y CI requerida;
-- sincronizar el nuevo `main`;
-- repetir el gate sin `SyntaxWarning`;
-- solo entonces crear y verificar el tag firmado `v0.0.26-beta`.
+- el literal se convirtió a cadena raw sin alterar el texto esperado;
+- el inventario permaneció en exactamente 720 pruebas;
+- PR #24 integró la corrección con los tres checks requeridos en `success`;
+- `main` quedó en `b572796d68ff6fd91ce9944a0c6d1cf7d45753a0`;
+- el gate final repitió **720 pruebas en `OK`** sin `SyntaxWarning`;
+- se creó y publicó el tag anotado y firmado `v0.0.26-beta`;
+- objeto tag: `bfbb746b177ebcc577f7241fef4d6914f713739a`;
+- target: `b572796d68ff6fd91ce9944a0c6d1cf7d45753a0`;
+- la firma SSH fue verificada con la clave autorizada del mantenedor.
 
-Hasta completar esos puntos PLAN.1 permanece en R4.2.
+PLAN.1 queda cerrado. El tag publicado es inmutable y la documentación post-tag se registra posteriormente sin moverlo.
 
 ## 7. Siguiente bloque
 
