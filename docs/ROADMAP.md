@@ -153,7 +153,7 @@ Este roadmap describe **estado actual y trabajo futuro**. La evolución detallad
 
 ## 4. PLAN.1 y secuencia hacia 1.0
 
-**Bloque transversal activo:** PLAN.1 — R4.2, cierre remoto del candidato local `0.0.26-beta` después de R4.1 validada con **720 pruebas en `OK`**.
+**Bloque transversal activo:** PLAN.1 — R4.2, higiene pre-tag de `0.0.26-beta` después del PR #23, checks remotos verdes y gate post-merge de **720 pruebas en `OK`**.
 
 La secuencia completa y sus criterios se documentan en `PLAN_MAESTRO_HACIA_1_0.md`.
 
@@ -164,7 +164,14 @@ Estado interno de PLAN.1:
 - [x] R3 — terminología beta/oficial, privacidad/licencia y guard de referencias históricas;
 - [ ] R4 — auditoría final y publicación del hito;
   - [x] R4.1 — candidato local `0.0.26-beta` validado con **720 pruebas en `OK`**, compilación Python, sintaxis JavaScript y `git diff --check` limpio;
-  - [ ] R4.2 — commit firmado, PR, CI remota, cierre documental y tag firmado `v0.0.26-beta`.
+  - [ ] R4.2 — cierre remoto y tag firmado `v0.0.26-beta`:
+    - [x] commit de rama firmado `7c50d989f5c6d266db26c9625367dd82e9895aba`;
+    - [x] PR #23 integrado por squash;
+    - [x] `Python 3.13`, `Python 3.14` y `Auditoría de gobernanza` en `success`;
+    - [x] `main` integrado en `497097f720c98f6e5a7ed689cf91368011a96be1`;
+    - [x] gate post-merge con **720 pruebas en `OK`**;
+    - [ ] corregir y revalidar sin `SyntaxWarning` la higiene pre-tag;
+    - [ ] crear y verificar el tag firmado `v0.0.26-beta`.
 
 Resumen:
 

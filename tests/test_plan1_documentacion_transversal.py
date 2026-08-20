@@ -34,7 +34,7 @@ class TestPlan1DocumentacionTransversal(unittest.TestCase):
 
     def test_proceso_release_deriva_tag_desde_version(self):
         texto = (DOCS / "PROCESO_RELEASE.md").read_text(encoding="utf-8")
-        self.assertIn('$version = (Get-Content .\VERSION).Trim()', texto)
+        self.assertIn(r'$version = (Get-Content .\VERSION).Trim()', texto)
         self.assertIn('git tag -s "v$version"', texto)
         self.assertIn('git tag -v "v$version"', texto)
         self.assertIn("v1.0.0.0", texto)

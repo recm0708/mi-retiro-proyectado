@@ -26,7 +26,9 @@ Sin cambios posteriores al candidato local `0.0.26-beta`.
 - R3B1 alineó licencia, dependencias, política de privacidad, términos y matriz Ley 81, preservó `2026-08-16.1` y cerró con **702 pruebas en `OK`**;
 - R3B2 actualizó threat model y procedimientos GOV.1.5, incorporó el guard automático de referencias históricas y cerró con **710 pruebas en `OK`**;
 - R4.1 promovió `VERSION` a `0.0.26-beta`, actualizó la documentación viva y cerró localmente con **720 pruebas en `OK`**, compilación Python, sintaxis JavaScript y `git diff --check` limpio;
-- `v0.0.25-beta` permanece inmutable; `v0.0.26-beta` no se crea hasta completar PR, CI y R4.2.
+- R4.2 integró el PR #23 por squash en `497097f720c98f6e5a7ed689cf91368011a96be1`, después de que el head firmado `7c50d989f5c6d266db26c9625367dd82e9895aba` superara `Python 3.13`, `Python 3.14` y `Auditoría de gobernanza`;
+- la revalidación post-merge repitió **720 pruebas en `OK`**, compilación Python, sintaxis JavaScript y `git diff --check` limpios, pero detectó un `SyntaxWarning` por una secuencia de escape inválida en `test_plan1_documentacion_transversal.py`; la higiene pre-tag convierte ese literal en cadena raw sin alterar el contrato ni el número de pruebas;
+- `v0.0.25-beta` permanece inmutable; `v0.0.26-beta` continúa sin crearse hasta revalidar esta corrección, integrarla por PR y verificar nuevamente `main`.
 
 ## [0.0.25-beta] — 2026-08-19
 
