@@ -38,9 +38,13 @@ function inicializarHistorialSalarial() {
     "modo_historial",
   );
 
-  if (simulacion.modo_historial) {
-    selectorModo.value =
-      simulacion.modo_historial;
+  if (
+    simulacion.modo_historial_confirmado_usuario === true
+    && simulacion.modo_historial
+  ) {
+    selectorModo.value = simulacion.modo_historial;
+  } else {
+    selectorModo.value = "";
   }
 
   actualizarModoHistorial();
@@ -63,6 +67,18 @@ function inicializarHistorialSalarial() {
  * Sincroniza el período histórico con los datos actuales del
  * Paso 1 y del Paso 2 antes de mostrar o regenerar la tabla.
  */
+function actualizarProcedenciaAnioInicioHistorial(origen) {
+  const nota = document.getElementById("origen-historial-anio-inicio");
+  if (!nota) return;
+
+  const editado = origen === "EDITADO_USUARIO";
+  nota.className = `field-origin-note ${editado ? "edited" : "automatic"}`;
+  nota.textContent = editado
+    ? "Editado por ti."
+    : "Calculado automáticamente a partir de la información disponible del historial o de tu fecha de ingreso a la CSS. Puedes corregirlo.";
+}
+
+
 function sincronizarHistorialConDatosActuales() {
   const simulacion = obtenerSimulacion();
 
@@ -112,8 +128,16 @@ function sincronizarHistorialConDatosActuales() {
       ANIO_HISTORIAL_ACTUAL;
   }
 
+  if (!simulacion.origen_historial_anio_inicio) {
+    simulacion.origen_historial_anio_inicio = "CALCULADO_AUTOMATICAMENTE";
+    guardarSimulacion(simulacion);
+  }
+
   campoInicio.value =
     anioInicio;
+  actualizarProcedenciaAnioInicioHistorial(
+    simulacion.origen_historial_anio_inicio,
+  );
 
   if (
     document.getElementById(
@@ -158,7 +182,7 @@ function actualizarModoHistorial() {
   );
 
   const simulacion = obtenerSimulacion();
-  const modoAnterior = simulacion.modo_historial || "MANUAL";
+  const modoAnterior = simulacion.modo_historial ?? "";
 
   simulacion.modo_historial = modo;
 
@@ -185,6 +209,7 @@ function confirmarModoSoloActual() {
   const simulacion = obtenerSimulacion();
 
   simulacion.modo_historial = "SOLO_ACTUAL";
+  simulacion.modo_historial_confirmado_usuario = true;
   simulacion.historial = null;
   simulacion.resumen_historial = null;
   simulacion.resumen_proyeccion = null;
@@ -1027,6 +1052,7 @@ async function analizarHistorialSalarial() {
 
     simulacion.modo_historial =
       "MANUAL";
+    simulacion.modo_historial_confirmado_usuario = true;
 
     simulacion.historial =
       datos;
@@ -1221,6 +1247,9 @@ document.addEventListener(
     ).addEventListener(
       "change",
       () => {
+        const simulacion = obtenerSimulacion();
+        simulacion.modo_historial_confirmado_usuario = true;
+        guardarSimulacion(simulacion);
         actualizarModoHistorial();
 
         if (
@@ -1246,8 +1275,10 @@ document.addEventListener(
             "historial_anio_inicio",
           ).value,
         );
+        simulacion.origen_historial_anio_inicio = "EDITADO_USUARIO";
 
         guardarSimulacion(simulacion);
+        actualizarProcedenciaAnioInicioHistorial("EDITADO_USUARIO");
 
         generarTablaHistorial();
         invalidarHistorial();

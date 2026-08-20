@@ -154,9 +154,11 @@ La fotografía original no se reescribe cuando el usuario cambia la copia de tra
 - lo que el usuario completó o modificó;
 - lo que la simulación utiliza finalmente.
 
-Los estados visibles son `Detectado`, `Editado por ti`, `Completado manualmente`, `Excluido por ti` y `No detectado`.
+Los estados visibles son `Detectado`, `Editado por ti`, `Completado manualmente`, `Excluido por ti`, `No detectado` y, para valores derivados por una regla de interfaz, `Calculado automáticamente`.
 
-Un aviso de ajuste solo permanece visible mientras exista al menos una modificación, complemento o exclusión activa en el bloque correspondiente. Revertir todos los cambios de ese bloque oculta el aviso.
+Un aviso de ajuste solo permanece visible mientras exista al menos una modificación, complemento o exclusión activa en el bloque correspondiente. El texto enumera únicamente las categorías realmente activas; revertir todos los cambios de ese bloque oculta el aviso.
+
+Los controles que exigen una decisión del Asegurado(a) mantienen `""` o `null` mientras no exista selección. No se usa una alternativa visualmente preseleccionada para completar silenciosamente el estado. Una importación confirmada puede derivar una decisión únicamente cuando el origen sea inequívoco y trazable.
 
 ## 9. Ficha Digital y vigencia
 
@@ -177,6 +179,8 @@ Los archivos PDF se leen para su análisis y no se guardan como parte del estado
 
 El navegador solo conserva los datos confirmados y metadata necesaria para continuidad de interfaz.
 
+El indicador global de análisis de adjuntos es estado efímero de interfaz: deshabilita temporalmente los controles, evita ejecuciones duplicadas y no añade persistencia del archivo.
+
 ## 11. Resultados por fotografía
 
 Paso 6 puede conservar por separado resultados:
@@ -191,3 +195,10 @@ Una invalidación de datos de origen elimina ambas fotografías dependientes.
 La versión anterior se conserva en:
 
 `docs/historico/tecnico/GESTION_DATOS_SIMULACION_PRE_GOV1_3_R2.md`
+
+
+### Decisiones de historial en R1.1
+
+`modo_historial_confirmado_usuario` evita inferir una decisión a partir de la mera existencia de registros importados. Mi Retiro Seguro puede poblar `historial`, `origen_campos_historial` y el año inicial temporal sin establecer `modo_historial`; el selector permanece vacío hasta una acción explícita. Al limpiar desde Paso 3, tanto `modo_historial` como el indicador de confirmación vuelven a su estado vacío.
+
+La edición de valores originalmente detectados se realiza dentro del modal y actualiza la copia de trabajo, mientras la referencia `*_original` continúa determinando procedencia y bloqueo en la vista principal.

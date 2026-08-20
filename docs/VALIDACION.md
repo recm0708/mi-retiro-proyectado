@@ -5,7 +5,7 @@
 **Versión base histórica:** `0.0.25-beta`
 **Base documental histórica:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal histórica preservada:** UX.4.6e R8 — validación funcional y procedencia editable — 2026-08-19
-**Última revisión transversal:** PLAN.1 R4.2 — cierre formal post-tag — 2026-08-20
+**Última revisión transversal:** UX.4.6f R1.1 — bloqueo documental y restauración visual — 2026-08-20
 **Clasificación:** Técnica / Calidad
 
 La estrategia combina pruebas automatizadas, CI, casos sintéticos/anonimizados y validación manual cuando una propiedad no puede demostrarse suficientemente con código.
@@ -170,6 +170,45 @@ Se creó y publicó el tag anotado y firmado `v0.0.26-beta`. Objeto tag: `bfbb74
 
 La política vigente conserva las referencias históricas a `0.1.0-beta.1` cuando documentan decisiones o planes anteriores, pero exige que los documentos de planificación actual identifiquen `1.0.0.0` como primera versión oficial objetivo y mantengan Build separado de `VERSION`.
 
+## UX.4.6f R1 — consistencia de procedencia, decisiones y adjuntos
+
+R1 se ejecuta sobre `0.0.26-beta` y no modifica `VERSION`, motores de pensión, normativa ni dependencias. El alcance corrige inconsistencias transversales observadas durante la revisión de los Pasos 1–4 antes de profundizar el cierre funcional del Paso 4.
+
+La revisión añade **14 regresiones específicas** para proteger:
+
+- seis estados de procedencia coherentes, incluido `Calculado automáticamente`;
+- iconografía sin círculos decorativos y alineación uniforme de estados;
+- avisos contextuales que describen únicamente las acciones realmente realizadas por el usuario;
+- sugerencia editable de 12 cuotas cuando se confirma continuidad de cotización;
+- cuatro decisiones del Paso 3 con estado inicial real `Seleccione una opción`, sin persistir una respuesta silenciosa;
+- procedencia automática/editada del año inicial del historial;
+- procedencia automática/editada del horizonte inicial de cinco años del Paso 4;
+- contrato global de procesamiento para los tres campos de adjuntos vigentes, con indicador visible, `aria-live`, `aria-busy`, bloqueo de doble ejecución y restauración del estado previo;
+- corrección del listener de **Revisar importación** del detalle salarial del año actual;
+- trazabilidad ADR-169/ADR-170, RF-337..RF-350, matriz, CHANGELOG y roadmap.
+
+Partiendo de la línea base de **720 pruebas**, R1 eleva el inventario esperado a **734 pruebas**. En el entorno aislado de preparación se ejecutaron **733/734 pruebas correctamente**; la única prueba no satisfactoria fue el guard de compatibilidad de `pypdf`, porque ese entorno contiene `pypdf 5.9.0` mientras el proyecto fija correctamente `pypdf==6.15.0` en `requirements.txt`. No fue posible instalar la versión fijada allí por ausencia de acceso a PyPI. Este resultado se clasifica como **limitación del entorno de preparación, no como fallo funcional del cambio**.
+
+En ese mismo entorno quedaron correctos:
+
+- `python -m compileall -q app`;
+- validación `node --check` de todos los archivos `app/static/js/*.js`;
+- `git diff --check`;
+- las **14/14 regresiones específicas de R1**;
+- las regresiones históricas reconciliadas que protegen procedencia, historial y continuidad documental.
+
+El gate canónico de R1 fue ejecutado posteriormente en el `.venv` del proyecto con `pypdf==6.15.0` y obtuvo **734/734 pruebas en `OK`**, compilación Python, sintaxis JavaScript y `git diff --check` limpios. La validación manual posterior confirmó el estado global de procesamiento de adjuntos, pero detectó que los datos documentales se habían vuelto editables en las vistas principales, que la señal visual de solo lectura había desaparecido y que la iconografía de complemento/exclusión no coincidía con el patrón esperado. Esos hallazgos originan R1.1 antes de cerrar R1.
+
+### UX.4.6f R1.1 — bloqueo documental y restauración visual
+
+R1.1 añade **9 regresiones** y formaliza ADR-171, RF-351..RF-357 y TR-019. El alcance protege que los datos originalmente detectados se bloqueen en la vista principal, que los no detectados sigan completables, que la edición documental ocurra en la revisión modal, que la franja visual de solo lectura funcione en los tres temas y que `Disponibilidad del historial` no se responda automáticamente al importar registros.
+
+También se documenta que las bases salariales automáticas del Paso 3 son condicionales: permanecen deshabilitadas hasta que el detalle salarial del año actual haya sido analizado y validado y exista la métrica positiva correspondiente. La opción manual continúa disponible.
+
+La suite pasa de **734 a 743 pruebas**. En el entorno aislado de preparación se ejecutaron **742/743 correctamente**; la única no satisfactoria continúa siendo el guard de `pypdf`, porque ese entorno mantiene `5.9.0` mientras `requirements.txt` fija `6.15.0`. Compilación Python, sintaxis de todos los JavaScript y `git diff --check` permanecen limpios.
+
+**Gate pendiente de R1.1 antes de commit/PR:** ejecutar en el `.venv` canónico con `pypdf==6.15.0` y obtener **743 pruebas en `OK`**, seguido de validación manual de Pasos 1–4 en Claro, Oscuro y Alto contraste. La revisión debe confirmar especialmente el bloqueo de los campos detectados, la franja primaria, los iconos `✎`/`⊘` y el selector de disponibilidad del historial en estado inicial.
+
 ## 2. Comandos obligatorios
 
 ```powershell
@@ -193,6 +232,8 @@ python -m pip check
 
 ## 3. Inventario actual de pruebas
 
+Inventario vigente: **96 módulos**.
+
 - `tests/test_accesibilidad_temas.py`
 - `tests/test_accesibilidad_ux4.py`
 - `tests/test_comparador.py`
@@ -204,23 +245,32 @@ python -m pip check
 - `tests/test_gov13_documentacion_r2.py`
 - `tests/test_gov13_documentacion_r3.py`
 - `tests/test_gov13_documentacion_r4.py`
-- `tests/test_gov_firma_git.py`
 - `tests/test_gov14_observabilidad.py`
 - `tests/test_gov14_observabilidad_integracion.py`
+- `tests/test_gov15_cierre_seguridad_privacidad.py`
 - `tests/test_gov15_modelo_amenazas.py`
 - `tests/test_gov15_procedimientos_privacidad.py`
-- `tests/test_gov15_cierre_seguridad_privacidad.py`
 - `tests/test_gov16_controles_github.py`
 - `tests/test_gov17_licencia.py`
 - `tests/test_gov18_cierre_gobierno.py`
+- `tests/test_gov_firma_git.py`
 - `tests/test_identidad_interfaz.py`
-- `tests/test_identidad_visual_pre_r8.py`
 - `tests/test_identidad_publica_github_pre_r8.py`
+- `tests/test_identidad_visual_pre_r8.py`
 - `tests/test_indemnizacion_vejez.py`
 - `tests/test_linea_tiempo.py`
 - `tests/test_mantenimiento_tecnico.py`
 - `tests/test_mixto.py`
 - `tests/test_mixto_prestaciones_cap.py`
+- `tests/test_plan1_documentacion_primaria.py`
+- `tests/test_plan1_documentacion_transversal.py`
+- `tests/test_plan1_gobierno_versionado_oficial.py`
+- `tests/test_plan1_guard_referencias_historicas.py`
+- `tests/test_plan1_licencia_privacidad_viva.py`
+- `tests/test_plan1_r4_candidato_cierre.py`
+- `tests/test_plan1_saneamiento_metadata.py`
+- `tests/test_plan1_terminologia_seguridad.py`
+- `tests/test_plan1_versionado_oficial.py`
 - `tests/test_prebeta_e2e_hardening.py`
 - `tests/test_proyeccion_salarios.py`
 - `tests/test_pypdf_compatibilidad.py`
@@ -268,13 +318,17 @@ python -m pip check
 - `tests/test_ux46d_revision7_privacidad_consulta.py`
 - `tests/test_ux46d_revision8_tablas.py`
 - `tests/test_ux46d_revision9_reactividad_privacidad.py`
-- `tests/test_ux46e_proyeccion_salarial.py`
 - `tests/test_ux46e_almacenamiento_comentarios_js.py`
 - `tests/test_ux46e_auditoria_coherencia.py`
 - `tests/test_ux46e_estandar_runtime.py`
 - `tests/test_ux46e_preparacion_publica.py`
+- `tests/test_ux46e_proyeccion_salarial.py`
+- `tests/test_ux46e_r81_procedencia_editable.py`
+- `tests/test_ux46e_r8_cierre_funcional.py`
 - `tests/test_ux46e_r8_reconsentimiento_borrado.py`
+- `tests/test_ux46e_r91_candidato_cierre.py`
 - `tests/test_ux46e_renumeracion_documental.py`
+- `tests/test_ux46f_r1_consistencia_procedencia_adjuntos.py`
 - `tests/test_ux4_remate_visual.py`
 
 ## 4. Categorías

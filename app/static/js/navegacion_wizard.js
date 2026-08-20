@@ -64,8 +64,10 @@ function puedeAccederDirectamenteAPaso(
     typeof paso3EstaCompleto === "function"
       ? paso3EstaCompleto(simulacion)
       : (
-          ((simulacion.modo_historial || "MANUAL") !== "MANUAL"
-            || Boolean(simulacion.resumen_historial))
+          (["MANUAL", "SOLO_ACTUAL"].includes(simulacion.modo_historial || "")
+            && ((simulacion.modo_historial || "") !== "MANUAL"
+              || Boolean(simulacion.resumen_historial)))
+          && typeof simulacion.detalle_anio_actual_habilitado === "boolean"
           && Boolean(simulacion.resumen_salario)
         )
   );

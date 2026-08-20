@@ -24,8 +24,9 @@
       <label for="usar_detalle_anio_actual" class="form-label fw-semibold">
         ¿Deseas detallar el año actual?
       </label>
-      <select id="usar_detalle_anio_actual" class="form-select form-select-lg">
-        <option value="false" selected>No — usar el total anual del historial</option>
+      <select id="usar_detalle_anio_actual" class="form-select form-select-lg" required>
+        <option value="" selected disabled>Seleccione una opción</option>
+        <option value="false">No — usar el total anual del historial</option>
         <option value="true">Sí — registrar salarios por período</option>
       </select>
     </div>
@@ -34,8 +35,9 @@
       <label for="modo_detalle_anio_actual" class="form-label fw-semibold">
         Forma de captura
       </label>
-      <select id="modo_detalle_anio_actual" class="form-select form-select-lg" disabled>
-        <option value="MENSUAL" selected>Total mensual</option>
+      <select id="modo_detalle_anio_actual" class="form-select form-select-lg" required disabled>
+        <option value="" selected disabled>Seleccione una opción</option>
+        <option value="MENSUAL">Total mensual</option>
         <option value="QUINCENAL">Primera y segunda quincena</option>
       </select>
       <div id="origen-modo-detalle" class="field-origin-note d-none"></div>
@@ -52,7 +54,7 @@
   <div id="detalle-anio-actual-contenido" class="d-none">
     <div id="detalle-importado-estado" class="imported-data-actions d-none mb-4">
       <span class="imported-data-status-icon" aria-hidden="true">
-        <svg viewBox="0 0 24 24" focusable="false"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 2.5 2.5L16 9"></path></svg>
+        <svg viewBox="0 0 24 24" focusable="false"><path d="m7 12 3 3 7-7"></path></svg>
       </span>
       <span>Los meses confirmados desde Ficha Digital se mantienen sin cambios; puedes completar la información que falte.</span>
       <button type="button" id="btn-revisar-detalle-importado" class="btn btn-sm btn-outline-primary">Revisar importación</button>

@@ -1061,7 +1061,11 @@ function descripcionOrigenBaseSalarial(origen, resumen) {
     return "Promedio del salario acreditado por cuota del año actual";
   }
 
-  return "Salario indicado manualmente";
+  if (origen === "MANUAL") {
+    return "Salario indicado manualmente";
+  }
+
+  return "Base salarial definida en el Paso 3";
 }
 
 
@@ -1086,23 +1090,31 @@ function actualizarOpcionesBaseSalarial(aplicarSugerencia) {
     ).disabled = !(Number(disponible) > 0);
   });
 
-  if (
-    simulacion.origen_salario_proyeccion
-    && !selector.querySelector(
-      `option[value="${simulacion.origen_salario_proyeccion}"]`,
-    )?.disabled
-  ) {
-    selector.value = simulacion.origen_salario_proyeccion;
-  } else if (
-    aplicarSugerencia
-    && Number(resumen?.salario_ultimo_mes_completo) > 0
-  ) {
-    selector.value = "ULTIMO_MES_COMPLETO";
-  } else if (selector.selectedOptions[0]?.disabled) {
-    selector.value = "MANUAL";
-  }
+  const origenGuardado = simulacion.origen_salario_proyeccion || "";
+  const opcionGuardada = origenGuardado
+    ? selector.querySelector(`option[value="${origenGuardado}"]`)
+    : null;
+
+  selector.value = (
+    opcionGuardada && !opcionGuardada.disabled
+      ? origenGuardado
+      : ""
+  );
 
   aplicarOrigenBaseSalarial(false);
+
+  if (
+    aplicarSugerencia
+    && !selector.value
+    && Number(resumen?.salario_ultimo_mes_completo) > 0
+  ) {
+    document.getElementById(
+      "origen-salario-proyeccion-ayuda",
+    ).textContent = (
+      "Hay bases automáticas disponibles a partir del detalle validado. "
+      + "Selecciona la que represente mejor tu situación; ninguna se aplicará sin tu decisión."
+    );
+  }
 }
 
 
@@ -1125,7 +1137,31 @@ function aplicarOrigenBaseSalarial(invalidar = true) {
   const origenMonto = document.getElementById("origen-monto-salario");
   const origenPeriodicidad = document.getElementById("origen-periodicidad-salario");
 
-  if (origen === "MANUAL") {
+  if (!origen) {
+    monto.disabled = true;
+    monto.readOnly = false;
+    monto.required = false;
+    periodicidad.disabled = true;
+    periodicidad.required = false;
+    requiredMonto?.classList.add("d-none");
+    requiredPeriodicidad?.classList.add("d-none");
+    requiredNote?.classList.remove("d-none");
+    origenMonto?.classList.add("d-none");
+    origenPeriodicidad?.classList.add("d-none");
+    const hayBaseAutomatica = Boolean(
+      Number(resumen?.salario_ultimo_mes_completo) > 0
+      || Number(resumen?.promedio_meses_completos) > 0
+      || Number(resumen?.promedio_ultimos_3_meses_completos) > 0
+      || Number(resumen?.promedio_por_cuota_acreditada) > 0
+    );
+    ayuda.textContent = hayBaseAutomatica
+      ? "Selecciona primero la base salarial. La aplicación no elegirá una opción por ti."
+      : (
+        "Las bases automáticas se habilitan después de analizar y validar el detalle salarial del año actual. "
+        + "Mientras tanto, puedes indicar el salario manualmente."
+      );
+  } else if (origen === "MANUAL") {
+    monto.disabled = false;
     monto.readOnly = false;
     periodicidad.disabled = false;
     monto.required = true;
@@ -1140,11 +1176,12 @@ function aplicarOrigenBaseSalarial(invalidar = true) {
     const valor = obtenerValorBaseSalarial(origen, resumen);
 
     if (!(Number(valor) > 0)) {
-      selector.value = "MANUAL";
+      selector.value = "";
       aplicarOrigenBaseSalarial(invalidar);
       return;
     }
 
+    monto.disabled = false;
     monto.value = formatearNumeroMonetario(valor);
     monto.readOnly = true;
     monto.required = false;
@@ -1156,16 +1193,16 @@ function aplicarOrigenBaseSalarial(invalidar = true) {
     requiredNote?.classList.add("d-none");
     ayuda.textContent = `${descripcionOrigenBaseSalarial(origen, resumen)}: ${formatearMoneda(valor)}.`;
     if (origenMonto) {
-      origenMonto.textContent = "Base calculada automáticamente.";
-      origenMonto.className = "field-origin-note imported";
+      origenMonto.textContent = "Calculado automáticamente a partir del detalle validado.";
+      origenMonto.className = "field-origin-note automatic";
     }
     if (origenPeriodicidad) {
-      origenPeriodicidad.textContent = "Periodicidad mensual aplicada automáticamente.";
-      origenPeriodicidad.className = "field-origin-note imported";
+      origenPeriodicidad.textContent = "Calculado automáticamente: periodicidad mensual.";
+      origenPeriodicidad.className = "field-origin-note automatic";
     }
   }
 
-  simulacion.origen_salario_proyeccion = selector.value;
+  simulacion.origen_salario_proyeccion = origen;
   guardarSimulacion(simulacion);
 
   if (invalidar && typeof invalidarResumenSalario === "function") {
@@ -1179,7 +1216,10 @@ function aplicarOrigenBaseSalarial(invalidar = true) {
 // ============================================================
 
 function actualizarEstadoDetalleAnioActual() {
-  const habilitado = estaHabilitadoDetalleAnioActual();
+  const selectorDecision = document.getElementById("usar_detalle_anio_actual");
+  const decision = selectorDecision.value;
+  const decisionTomada = decision === "true" || decision === "false";
+  const habilitado = decision === "true";
   const simulacion = obtenerSimulacion();
   const importado = Boolean(
     simulacion.importacion_ficha_digital_confirmada
@@ -1200,36 +1240,49 @@ function actualizarEstadoDetalleAnioActual() {
     });
   }
 
+  const modo = document.getElementById("modo_detalle_anio_actual");
+  if (importado && habilitado) {
+    modo.value = "MENSUAL";
+  } else if (!habilitado) {
+    modo.value = "";
+  }
+  modo.disabled = !habilitado || importado;
+
+  const modoSeleccionado = (
+    importado
+    || ["MENSUAL", "QUINCENAL"].includes(modo.value)
+  );
+  const mostrarContenido = habilitado && modoSeleccionado;
+
   document.getElementById(
     "detalle-anio-actual-contenido",
-  ).classList.toggle("d-none", !habilitado);
-
-  const modo = document.getElementById("modo_detalle_anio_actual");
-  if (importado) modo.value = "MENSUAL";
-  modo.disabled = !habilitado || importado;
+  ).classList.toggle("d-none", !mostrarContenido);
 
   const origenModo = document.getElementById("origen-modo-detalle");
   if (origenModo) {
     const mostrarOrigen = importado && habilitado;
     origenModo.textContent = mostrarOrigen
-      ? "Forma mensual definida por la Ficha Digital importada."
+      ? "Calculado automáticamente: la Ficha Digital utiliza captura mensual."
       : "";
     origenModo.className = mostrarOrigen
-      ? "field-origin-note imported"
+      ? "field-origin-note automatic"
       : "field-origin-note d-none";
   }
 
   document.getElementById("detalle-importado-estado")?.classList.toggle(
     "d-none",
-    !importado || !habilitado,
+    !importado || !mostrarContenido,
   );
   document.getElementById("detalle-importado-inactivo")?.classList.toggle(
     "d-none",
-    !importado || habilitado,
+    !importado || decision !== "false",
   );
-  simulacion.detalle_anio_actual_habilitado = habilitado;
 
-  if (!habilitado) {
+  simulacion.detalle_anio_actual_habilitado = (
+    decisionTomada ? habilitado : null
+  );
+
+  if (!mostrarContenido) {
     document.getElementById("detalle-cuotas-sincronizadas")?.classList.add("d-none");
     document.getElementById("detalle-resumen-visible")?.classList.add("d-none");
     simulacion.resumen_detalle_anio_actual = null;
@@ -1247,16 +1300,23 @@ function actualizarEstadoDetalleAnioActual() {
 
 function restaurarDetalleAnioActual() {
   const simulacion = obtenerSimulacion();
-  const habilitado = Boolean(
-    simulacion.detalle_anio_actual_habilitado
-    || simulacion.importacion_ficha_digital_confirmada,
+  const importado = Boolean(
+    simulacion.importacion_ficha_digital_confirmada
+    && simulacion.ficha_digital_importada,
   );
+  const decisionGuardada = simulacion.detalle_anio_actual_habilitado;
+  const valorDecision = importado
+    ? "true"
+    : (typeof decisionGuardada === "boolean" ? String(decisionGuardada) : "");
 
   document.getElementById(
     "usar_detalle_anio_actual",
-  ).value = String(habilitado);
+  ).value = valorDecision;
 
-  if (simulacion.detalle_anio_actual?.modo_captura) {
+  if (
+    valorDecision === "true"
+    && simulacion.detalle_anio_actual?.modo_captura
+  ) {
     document.getElementById(
       "modo_detalle_anio_actual",
     ).value = simulacion.detalle_anio_actual.modo_captura;
@@ -1264,7 +1324,10 @@ function restaurarDetalleAnioActual() {
 
   actualizarEstadoDetalleAnioActual();
 
-  if (habilitado && simulacion.resumen_detalle_anio_actual) {
+  if (
+    valorDecision === "true"
+    && simulacion.resumen_detalle_anio_actual
+  ) {
     mostrarResumenDetalleAnioActual(
       simulacion.resumen_detalle_anio_actual,
     );

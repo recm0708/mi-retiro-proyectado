@@ -85,6 +85,7 @@ Mi Retiro Proyectado es una aplicación web local basada en FastAPI, Jinja2 y Ja
 - `app/static/js/moneda.js`
 - `app/static/js/navegacion_wizard.js`
 - `app/static/js/privacidad.js`
+- `app/static/js/procesamiento_adjuntos.js` — estado global accesible y exclusión de dobles ejecuciones durante análisis de archivos
 - `app/static/js/referencia_mi_retiro_seguro.js`
 - `app/static/js/resultados.js`
 - `app/static/js/retiro.js`
@@ -283,3 +284,10 @@ La versión acumulativa anterior a GOV.1.3 R2 se conserva en:
 `docs/historico/tecnico/ARQUITECTURA_PRE_GOV1_3_R2.md`
 
 Este documento describe el estado técnico vigente después de GOV.1.4.
+
+
+## UX.4.6f R1.1 — bloqueo documental en superficies principales
+
+`procedencia_editable.js` separa tres conceptos: **fotografía documental original**, **copia de trabajo** y **capacidad de edición de la superficie actual**. En los paneles principales, un control cuyo valor existía en la fotografía original se aplica mediante `readonly` o `disabled` y la clase visual `field-imported-readonly`; los modales de revisión quedan excluidos de este helper para permitir el ciclo explícito **Editar campos → confirmar**.
+
+El patrón se reutiliza en datos personales, cuotas, historial anual y detalle del año actual. La franja primaria del sistema visual funciona en Claro, Oscuro y Alto contraste y acompaña, pero no reemplaza, la semántica nativa de bloqueo. Los valores automáticos derivados no se confunden con datos documentales y mantienen sus reglas específicas de edición.

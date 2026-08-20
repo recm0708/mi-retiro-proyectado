@@ -6,6 +6,29 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ## [Unreleased]
 
+### UX.4.6f R1.1 — bloqueo documental y restauración visual
+
+- restaurado el bloqueo de solo lectura en la vista principal para datos detectados por Mi Retiro Seguro y Ficha Digital; las correcciones vuelven a concentrarse en **Revisar importación** → **Editar campos**;
+- los campos originalmente no detectados permanecen editables para captura manual, diferenciando ausencia documental de un dato confirmado;
+- restaurada la franja primaria de campos no editables en temas Claro, Oscuro y Alto contraste mediante el contrato transversal existente;
+- `Completado manualmente` vuelve a usar el icono de lápiz y `Excluido por ti` recupera el símbolo `⊘`, manteniendo alineación común y sin adornos circulares adicionales;
+- `Disponibilidad del historial` deja de ser respondida automáticamente por una importación de Mi Retiro Seguro y permanece en `Seleccione una opción` hasta una elección explícita;
+- aclarado que las bases salariales automáticas del Paso 3 solo se habilitan después de analizar y validar un detalle del año actual que aporte las métricas necesarias;
+- ADR-171, RF-351 a RF-357 y TR-019 formalizan el contrato corregido tras la validación visual de R1;
+- confirmado durante la revisión manual que el estado global **Analizando documento…** funciona correctamente para Mi Retiro Seguro y Ficha Digital; `VERSION` permanece en `0.0.26-beta`.
+
+### UX.4.6f R1 — consistencia de procedencia, decisiones y adjuntos
+
+- unificados los estados de procedencia `Detectado`, `Editado por ti`, `Completado manualmente`, `Excluido por ti`, `No detectado` y `Calculado automáticamente`, eliminando círculos decorativos inconsistentes y corrigiendo la alineación de sus iconos;
+- convertidos los avisos amarillos de ajustes documentales en mensajes contextuales que mencionan únicamente ediciones, complementos y/o exclusiones realmente activas;
+- mantenida la sugerencia editable de 12 cuotas cuando el Asegurado(a) confirma que continuará cotizando, ahora con explicación visible y accesible;
+- los cuatro selectores decisionales señalados del Paso 3 comienzan en `Seleccione una opción` y dejan de persistir elecciones silenciosas antes de una decisión real;
+- el año inicial del historial y el horizonte inicial de cinco años del Paso 4 exponen procedencia automática y cambian a `Editado por ti` cuando el usuario los modifica;
+- incorporada `procesamiento_adjuntos.js` como contrato global para comunicar `Analizando documento… Esto puede tardar unos segundos.`, bloquear dobles ejecuciones y exponer estado accesible durante los tres análisis de archivo existentes;
+- corregido el registro defectuoso del listener de **Revisar importación** del detalle anual que podía interrumpir la inicialización de controles posteriores del Paso 3;
+- ADR-169 y ADR-170 formalizan los contratos de decisiones/procedencia y procesamiento de adjuntos; RF-337 a RF-350 y TR-017/TR-018 incorporan su trazabilidad;
+- `VERSION` permanece en `0.0.26-beta`; R1 no modifica motores previsionales, normativa, parsers ni dependencias.
+
 ### Documentación post-release
 
 - reconciliado el estado documental después de publicar el tag firmado `v0.0.26-beta`;

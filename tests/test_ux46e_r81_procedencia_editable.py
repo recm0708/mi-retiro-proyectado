@@ -39,30 +39,30 @@ class TestUx46eR81ProcedenciaEditable(unittest.TestCase):
         self.assertIn("ficha_digital_importada_original", self.js)
         self.assertIn("structuredClone", self.js)
 
-    def test_datos_personales_importados_dejan_de_bloquearse(self):
+    def test_datos_personales_importados_conservan_revision_editable_y_bloqueo_principal(self):
         self.assertIn("window.bloquearFormularioPersonal", self.js)
-        self.assertIn("control.readOnly = false", self.js)
-        self.assertIn("control.disabled = false", self.js)
+        self.assertIn("aplicarBloqueoVistaPrincipal", self.js)
+        self.assertIn('control.closest(".modal")', self.js)
 
     def test_estado_personal_reacciona_a_dato_no_detectado_completado(self):
         self.assertIn("MI_RETIRO_SEGURO_COMPLETADO_MANUAL", self.js)
         self.assertIn("actualizarProcedenciaPersonalDesdeControl", self.js)
         self.assertIn("mostrarProcedenciaCampo(control, origen)", self.js)
 
-    def test_cuotas_importadas_son_editables_con_procedencia(self):
+    def test_cuotas_importadas_se_corrigen_desde_revision(self):
         self.assertIn("window.actualizarOrigenCamposCuotas", self.js)
-        self.assertIn("Los valores importados pueden ajustarse", self.js)
+        self.assertIn("Los valores detectados se consultan en modo de solo lectura", self.js)
         self.assertIn("MI_RETIRO_SEGURO_EDITADO", self.js)
 
-    def test_historial_importado_es_editable_y_reversible(self):
+    def test_historial_importado_bloquea_detectados_y_deja_pendientes_editables(self):
         self.assertIn("window.aplicarOrigenCampoHistorial", self.js)
-        self.assertIn("actualizarOrigenHistorialDesdeControl", self.js)
-        self.assertIn("MI_RETIRO_SEGURO_DETECTADO", self.js)
+        self.assertIn("detectadoOriginalmente", self.js)
+        self.assertIn("Campo no detectado por el documento", self.js)
 
-    def test_detalle_importado_no_usa_imported_locked(self):
+    def test_detalle_importado_recupera_bloqueo_en_vista_principal(self):
         self.assertIn("window.marcarCampoDetalleImportado", self.js)
-        self.assertIn('removeAttribute("data-imported-locked")', self.js)
-        self.assertIn("detail-field-imported-editable", self.js)
+        self.assertIn('control.dataset.importedLocked = "true"', self.js)
+        self.assertIn('control.classList.remove("detail-field-imported-editable")', self.js)
 
     def test_excluir_periodo_anula_cuota_y_salario_en_payload(self):
         self.assertIn("periodos_excluidos_importacion_ficha", self.js)
@@ -92,12 +92,12 @@ class TestUx46eR81ProcedenciaEditable(unittest.TestCase):
         self.assertIn('html[data-app-theme="contrast"]', self.css)
         self.assertIn(".detail-row-excluded", self.css)
 
-    def test_checkbox_importado_editable_conserva_gancho_visible(self):
+    def test_checkbox_importado_editable_se_limita_a_la_revision(self):
         self.assertIn(
             ".preview-ficha-cuota.form-check-input:checked",
             self.css,
         )
-        self.assertIn(
+        self.assertNotIn(
             ".detail-field-imported-editable.form-check-input:checked",
             self.css,
         )
@@ -116,7 +116,7 @@ class TestUx46eR81ProcedenciaEditable(unittest.TestCase):
             "periodos_excluidos_importacion_ficha || []).length > 0",
             self.js,
         )
-        self.assertIn("fichaActiva", self.js)
+        self.assertIn("accionesFicha", self.js)
         self.assertIn(
             '"aviso-ajustes-ficha"',
             self.js,
@@ -133,13 +133,16 @@ class TestUx46eR81ProcedenciaEditable(unittest.TestCase):
         )
 
     def test_iconografia_de_procedencia_es_uniforme(self):
-        for icono in ('content: "●"', 'content: "✎"', 'content: "⊘"', 'content: "!"'):
+        for icono in ('content: "✓"', 'content: "✎"', 'content: "⊘"',
+                      'content: "!"', 'content: "↳"'):
             with self.subTest(icono=icono):
                 self.assertIn(icono, self.css)
         for clase in (".detected::before", ".edited::before", ".manual::before",
-                      ".excluded::before", ".missing::before"):
+                      ".excluded::before", ".missing::before", ".automatic::before"):
             with self.subTest(clase=clase):
                 self.assertIn(clase, self.css)
+        self.assertIn("border-radius: 0 !important", self.css)
+        self.assertNotIn('content: "●"', self.css)
 
     def test_r8_preserva_0_0_24_como_version_base_historica(self):
         texto = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")

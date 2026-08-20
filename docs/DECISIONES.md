@@ -6,9 +6,9 @@
 **Base documental histórica:** `0.0.23-beta` — GOV.1.3 R4 — 2026-08-17
 **Revisión documental:** GOV.1.3 R4 — 2026-08-17
 **Última actualización de gobierno:** PLAN.1 / ADR-168 — 2026-08-20
-**Última actualización técnica:** UX.4.6e R8 / ADR-167 — 2026-08-19
+**Última actualización técnica:** UX.4.6f R1.1 / ADR-171 — 2026-08-20
 **Clasificación:** Técnica / Gobierno / Auditoría
-**ADR indexadas:** 168 (`ADR-001` a `ADR-168`)
+**ADR indexadas:** 171 (`ADR-001` a `ADR-171`)
 
 Este registro conserva decisiones de arquitectura, modelado, UX, precisión, seguridad y aplicación normativa. Una ADR explica por qué el proyecto adoptó una decisión; no crea una norma jurídica.
 
@@ -199,8 +199,11 @@ R4 **no inventa un estado retroactivo** para esas decisiones. El índice las mar
 | ADR-164 | La renumeración vigente no reescribe la historia UX anterior | Aceptada para UX.4.6e R6. |
 | ADR-165 | La auditoría transversal es un gate antes de la validación funcional manual | Aceptada para UX.4.6e R7. |
 | ADR-166 | El borrado integral invalida también residuos pre-beta y fuerza reconsentimiento | Aceptada para UX.4.6e R8. |
-| ADR-167 | Los datos documentales confirmados son editables sin perder la referencia original | Aceptada para cierre funcional UX.4.6e R8. |
+| ADR-167 | Los datos documentales confirmados son editables sin perder la referencia original | Sustituida parcialmente por ADR-171: la edición de datos detectados se concentra en la ventana de revisión; se preservan referencia original y copia de trabajo |
 | ADR-168 | La etapa `0.0.N-beta` conduce directamente a la versión oficial `1.0.0.x` con Build independiente | Aceptada para PLAN.1. |
+| ADR-169 | Las decisiones explícitas no usan valores predeterminados silenciosos y los valores derivados muestran procedencia automática | Aceptada para UX.4.6f R1. |
+| ADR-170 | Todo análisis de adjuntos usa un estado de procesamiento global, accesible y no duplicable | Aceptada para UX.4.6f R1. |
+| ADR-171 | Los datos documentales detectados se editan en la ventana de revisión y quedan bloqueados en la vista principal | Aceptada para UX.4.6f R1.1. |
 
 ## 4. Registro íntegro de ADR
 
@@ -1800,3 +1803,55 @@ La planificación anterior que reservaba `0.1.0-beta.1` como futura primera beta
 **Consecuencia:** `VERSIONING.md`, el validador canónico de versión, el proceso de release, el plan maestro, la documentación vigente y sus regresiones deben aceptar la línea oficial de cuatro componentes sin modificar retroactivamente `v0.0.25-beta` ni otros tags publicados. No existe una promoción automática a `1.0.0.0`: el cambio solo puede ocurrir después de cerrar la secuencia de catorce bloques y REL.1.
 
 La fuente canónica del Build y el mecanismo exacto para asignarlo, reproducirlo, firmarlo y asociarlo con hashes de artefactos se definirán en REL.1. Hasta entonces no se versiona ni se muestra un Build ficticio.
+
+## ADR-169 — Las decisiones explícitas no usan valores predeterminados silenciosos y los valores derivados muestran procedencia automática
+
+**Estado:** Aceptada para UX.4.6f R1.
+**Fecha:** 2026-08-20.
+
+**Decisión:** los controles que representan una decisión del Asegurado(a) deben comenzar sin una elección almacenada cuando todavía no existe una acción explícita ni una fuente confirmada que permita derivarla. La interfaz muestra `Seleccione una opción` y el estado serializado conserva la ausencia de decisión mediante cadena vacía o `null`, según el tipo del campo.
+
+Cuando la aplicación deriva un valor a partir de una regla transparente o de información ya confirmada, la procedencia visible es `Calculado automáticamente`. Si el Asegurado(a) modifica después ese valor, la procedencia pasa a `Editado por ti`. Este contrato se aplica inicialmente al año inicial del historial y al horizonte salarial sugerido, y puede reutilizarse en valores derivados equivalentes.
+
+Marcar explícitamente que se continuará cotizando puede sugerir 12 cuotas al cierre del año y 12 cuotas por año futuro. La sugerencia se explica en la interfaz y continúa editable. Del mismo modo, el horizonte del Paso 4 puede iniciar en cinco años posteriores al año calendario actual; no se presenta como una elección hecha por el usuario.
+
+Una fuente documental confirmada puede determinar una selección cuando exista una relación inequívoca y trazable. Por ejemplo, una Ficha Digital confirmada puede habilitar el detalle del año actual y establecer captura mensual. Esa excepción es un valor derivado de la importación, no un predeterminado silencioso.
+
+**Motivo:** una opción preseleccionada y persistida antes de cualquier decisión puede atribuir al usuario una elección que nunca realizó. A la vez, ocultar que un año o una densidad inicial fueron calculados por la aplicación dificulta auditar la simulación.
+
+**Consecuencia:** Paso 3 exige decisiones explícitas antes de considerarse completo; limpiar datos descendentes vuelve a los estados sin decisión; los valores automáticos tienen una procedencia diferenciada y editable. Esta ADR no altera fórmulas previsionales, normativa ni motores de cálculo.
+
+## ADR-170 — Todo análisis de adjuntos usa un estado de procesamiento global, accesible y no duplicable
+
+**Estado:** Aceptada para UX.4.6f R1.
+**Fecha:** 2026-08-20.
+
+**Decisión:** todo control actual o futuro que analice un archivo adjunto debe reutilizar una capa transversal de estado de procesamiento. Al comenzar el análisis debe aparecer inmediatamente el mensaje `Analizando documento… Esto puede tardar unos segundos.`, acompañado de un indicador de actividad; el botón y el selector de archivo quedan temporalmente bloqueados y exponen `aria-busy`. La región de estado usa `role=status`, `aria-live=polite` y `aria-atomic=true`.
+
+Mientras un análisis está activo, una segunda ejecución desde el mismo control se rechaza en el cliente. Al finalizar, los estados habilitado/deshabilitado originales se restauran. Un error específico producido por el importador no debe ser borrado por la limpieza del indicador temporal.
+
+El contrato cubre inicialmente los tres selectores de archivo existentes: importación de Mi Retiro Seguro, importación de Ficha Digital y comprobante de referencia de Mi Retiro Seguro. Cualquier adjunto futuro debe integrarse mediante la misma capa en vez de implementar un indicador ad hoc.
+
+**Motivo:** el análisis de PDFs puede introducir una latencia perceptible. Cambiar solo el texto de un botón no comunica suficientemente que el proceso continúa, favorece dobles clics y ofrece una señal limitada a tecnologías de apoyo.
+
+**Consecuencia:** `procesamiento_adjuntos.js` se carga de forma global antes de los scripts específicos de cada página. El cambio es exclusivamente de coordinación de interfaz: no modifica validación HTTP, parsers, persistencia de archivos, límites de seguridad ni política de privacidad.
+
+
+## ADR-171 — Los datos documentales detectados se editan en la ventana de revisión y quedan bloqueados en la vista principal
+
+**Estado:** Aceptada para UX.4.6f R1.1.
+**Fecha:** 2026-08-20.
+
+**Decisión:** cuando Mi Retiro Seguro o Ficha Digital aportan un valor identificable, la vista principal de los Pasos 1–6 —y cualquier paso futuro que reutilice este contrato— debe presentarlo como dato documental de solo lectura. La corrección, exclusión o reinclusión de un valor detectado se realiza desde **Revisar importación** y requiere activar explícitamente **Editar campos** antes de confirmar nuevamente la copia de trabajo.
+
+Los campos que el documento **no detectó originalmente** permanecen editables en la vista principal para permitir completar información faltante. La condición de edición depende de la fotografía documental original, no solo de la etiqueta de procedencia vigente: un dato originalmente ausente puede seguir siendo completado manualmente, mientras que un dato originalmente detectado continúa bloqueado aunque haya sido corregido dentro del modal y su estado visible sea `Editado por ti`.
+
+La vista principal conserva la semántica visual transversal de campos no editables: superficie diferenciada y una franja primaria en el borde izquierdo, perceptible en temas Claro, Oscuro y Alto contraste. La señal no depende únicamente del color ni sustituye `readonly`/`disabled`.
+
+La iconografía de procedencia recupera símbolos diferenciados sin círculos decorativos añadidos: `✓` para **Detectado**, `✎` para **Editado por ti** y **Completado manualmente**, `⊘` para **Excluido por ti**, `!` para **No detectado** y `↳` para **Calculado automáticamente**. El símbolo de exclusión forma parte del propio glifo semántico y debe permanecer centrado respecto a la etiqueta.
+
+La importación de registros históricos no responde automáticamente la pregunta **Disponibilidad del historial**. Los registros pueden conservarse en el estado temporal, pero el selector permanece en `Seleccione una opción` hasta que el Asegurado(a) realice una elección explícita. La derivación documental de otros controles solo se mantiene cuando la relación sea inequívoca y esté documentada.
+
+**Motivo:** la revisión manual de R1 mostró que permitir editar en las superficies principales hacía visualmente indistinguible un dato documental confirmado de un dato manual y eliminaba la señal de bloqueo que ya utilizaban los tres temas. También permitía alterar accidentalmente información detectada sin pasar por el flujo de revisión que conserva contexto y procedencia.
+
+**Consecuencia:** ADR-167 queda sustituida parcialmente en su permiso de edición directa desde la vista principal, pero se mantienen vigentes la fotografía original, la copia de trabajo, los estados de procedencia y la capacidad de corregir/excluir/reincluir dentro del modal. ADR-088, ADR-103, ADR-104, ADR-105 y ADR-106 recuperan su criterio de bloqueo visual/funcional en las superficies principales en la medida compatible con esta ADR. Los valores `Calculado automáticamente` —por ejemplo el año inicial del historial o el horizonte salarial— no se consideran datos documentales detectados y conservan su contrato específico de edición cuando corresponda.

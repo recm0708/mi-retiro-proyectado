@@ -28,7 +28,8 @@
         <span class="visually-hidden"> (obligatorio)</span>
       </label>
       <select id="modo_historial" class="form-select form-select-lg" required>
-        <option value="MANUAL" selected>Registrar o completar historial anual</option>
+        <option value="" selected disabled>Seleccione una opción</option>
+        <option value="MANUAL">Registrar o completar historial anual</option>
         <option value="SOLO_ACTUAL">Solo conozco información salarial reciente</option>
       </select>
     </div>
@@ -36,7 +37,7 @@
 
   <div id="historial-importado-acciones" class="imported-data-actions d-none mb-4">
     <span class="imported-data-status-icon" aria-hidden="true">
-      <svg viewBox="0 0 24 24" focusable="false"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 2.5 2.5L16 9"></path></svg>
+      <svg viewBox="0 0 24 24" focusable="false"><path d="m7 12 3 3 7-7"></path></svg>
     </span>
     <span>Los registros confirmados desde la importación se mantienen sin cambios; puedes completar los años o campos pendientes.</span>
     <button type="button" id="btn-revisar-historial-importado" class="btn btn-sm btn-outline-primary">
@@ -62,6 +63,9 @@
             id="historial_anio_inicio"
             required
           >
+          <div id="origen-historial-anio-inicio" class="field-origin-note automatic" aria-live="polite">
+            Calculado automáticamente a partir de la información disponible. Puedes corregirlo.
+          </div>
         </div>
         <div class="col-md-6 col-lg-8">
           <div class="history-period-summary" aria-live="polite">

@@ -1056,3 +1056,51 @@ Quedan para fases posteriores:
 **RF-335.** La reconciliación defensiva de **Analizar historial** debe reconocer tanto cuotas manuales confirmadas como cuotas documentales bloqueadas de una Ficha Digital cuando estas amplían la referencia del Paso 2.
 
 **RF-336.** Al sincronizar cuotas desde el detalle, `detalle_anio_actual.cuotas_anio_actual_referencia` debe actualizarse junto con Paso 2 para que F5/restauración no reintroduzca una referencia obsoleta.
+
+
+### UX.4.6f — Revisión 1 · consistencia de procedencia, decisiones y adjuntos
+
+**RF-337.** La procedencia visible debe usar un contrato común para `Detectado`, `Editado por ti`, `Completado manualmente`, `Excluido por ti`, `No detectado` y `Calculado automáticamente` en las superficies donde esos estados apliquen.
+
+**RF-338.** La iconografía de procedencia no debe introducir círculos decorativos inconsistentes ni depender únicamente del color; cada estado debe conservar alineación y geometría equivalentes en formularios, tablas y vistas de revisión.
+
+**RF-339.** Los avisos de ajustes documentales deben describir únicamente las acciones realmente activas —edición, complemento manual y/o exclusión— y ocultarse cuando todas esas diferencias se reviertan.
+
+**RF-340.** Seleccionar explícitamente que se continuará cotizando puede sugerir 12 cuotas al cierre del año actual y 12 por cada año futuro, pero ambos valores deben permanecer editables y la interfaz debe explicar que son sugerencias automáticas.
+
+**RF-341.** `Disponibilidad del historial`, `¿Deseas detallar el año actual?`, `Forma de captura` y `Base para proyectar salarios futuros` deben ofrecer `Seleccione una opción` antes de que exista una decisión explícita o una derivación documental válida.
+
+**RF-342.** El estado de simulación no debe persistir `MANUAL`, `No` u otra alternativa como elección del usuario mientras el control de RF-341 continúe sin decisión. Una importación confirmada puede establecer una opción únicamente cuando la relación sea inequívoca y trazable.
+
+**RF-343.** El año inicial del historial derivado desde fecha de ingreso o registros disponibles debe identificarse como `Calculado automáticamente`; una modificación posterior debe cambiar su procedencia a `Editado por ti`.
+
+**RF-344.** El año final de la proyección salarial puede sugerirse inicialmente como año calendario actual + 5. La interfaz debe explicar el horizonte sugerido, identificarlo como `Calculado automáticamente` y cambiar a `Editado por ti` cuando el usuario lo modifique.
+
+**RF-345.** Todo análisis de un archivo adjunto debe mostrar inmediatamente `Analizando documento… Esto puede tardar unos segundos.` mientras la operación permanece activa.
+
+**RF-346.** El estado de análisis de adjuntos debe incorporar una señal visible de actividad y semántica accesible mediante `role=status`, `aria-live=polite`, `aria-atomic=true` y `aria-busy` en los controles ocupados.
+
+**RF-347.** Mientras un adjunto se procesa, la aplicación debe impedir una segunda ejecución desde el mismo control y restaurar al finalizar el estado habilitado/deshabilitado que existía antes del análisis, preservando los mensajes de error específicos.
+
+**RF-348.** Los tres selectores de archivo existentes y cualquier adjunto futuro deben reutilizar el mismo contrato global de procesamiento en lugar de implementar estados de espera independientes.
+
+**RF-349.** El flujo del Paso 3 debe registrar correctamente los listeners de acciones de revisión y no permitir que un error de inicialización de un control interrumpa la configuración de los controles posteriores; R1 no altera parsers, fórmulas previsionales, motores, normativa ni la política de no persistencia del PDF.
+
+**RF-350.** El cierre de R1 debe combinar regresiones automáticas con revisión manual de los estados afectados en tema Claro, Oscuro y Alto contraste, incluyendo procedencia, selección, avisos y procesamiento de adjuntos.
+
+
+### UX.4.6f — Revisión 1.1 · bloqueo documental en vista principal
+
+**RF-351.** Todo valor detectado originalmente por Mi Retiro Seguro o Ficha Digital debe quedar en modo de solo lectura/deshabilitado en la vista principal, aunque su procedencia vigente sea `Detectado` o `Editado por ti`; la corrección de datos documentales se realiza desde **Revisar importación** → **Editar campos**.
+
+**RF-352.** Un campo que el documento no detectó originalmente debe permanecer editable en la vista principal para permitir captura manual. La decisión de bloqueo debe basarse en la fotografía documental original y no únicamente en el texto de procedencia actual.
+
+**RF-353.** Los controles documentales bloqueados deben conservar una señal visual transversal de no edición —incluida una franja primaria en el borde izquierdo para controles de formulario— en temas Claro, Oscuro y Alto contraste, sin depender solo del color.
+
+**RF-354.** La iconografía común de procedencia debe usar `✓` para `Detectado`, `✎` para `Editado por ti` y `Completado manualmente`, `⊘` para `Excluido por ti`, `!` para `No detectado` y `↳` para `Calculado automáticamente`, con alineación equivalente y sin círculos decorativos adicionales.
+
+**RF-355.** Importar registros históricos desde Mi Retiro Seguro no debe seleccionar automáticamente **Registrar o completar historial anual**. `Disponibilidad del historial` debe permanecer en `Seleccione una opción` hasta una decisión explícita del Asegurado(a), aunque los registros importados se conserven temporalmente.
+
+**RF-356.** Las bases automáticas para proyectar salarios futuros solo deben habilitarse cuando `resumen_detalle_anio_actual` contenga la métrica correspondiente con valor positivo. Mientras no exista un detalle analizado y validado suficiente, la opción manual permanece disponible y la ayuda debe explicar por qué las demás opciones están deshabilitadas.
+
+**RF-357.** El contrato de bloqueo documental de RF-351 a RF-353 debe ser reutilizable en Pasos 1–6 y en superficies futuras; los modales de revisión quedan explícitamente fuera de ese bloqueo mientras el usuario haya activado el modo **Editar campos**.

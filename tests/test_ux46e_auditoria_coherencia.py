@@ -38,7 +38,11 @@ class TestUX46eAuditoriaCoherencia(unittest.TestCase):
         self.assertIn("**Bloque activo:** UX.4.6f", texto)
         self.assertIn("21 labels y 20/20 topics", texto)
         self.assertIn(
-            "**Siguiente bloque funcional:** UX.4.6f — Paso 4 · Proyección salarial/laboral",
+            "**Revisión activa:** UX.4.6f R1",
+            texto,
+        )
+        self.assertIn(
+            "**Siguiente bloque funcional posterior:** UX.4.6g — Paso 5 · Escenarios de retiro",
             texto,
         )
         self.assertNotIn("**Bloque activo:** UX.4.6e — Paso 4", texto)

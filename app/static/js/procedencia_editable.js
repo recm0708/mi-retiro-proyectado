@@ -66,9 +66,8 @@
     },
   };
 
-  const MENSAJE_AJUSTE = (
-    "Has ajustado, completado o excluido información asociada a un documento. "
-    + "El documento original se conserva como referencia; Mi Retiro Proyectado "
+  const MENSAJE_REFERENCIA_ORIGINAL = (
+    "El documento original se conserva como referencia; Mi Retiro Proyectado "
     + "utilizará estos cambios únicamente para esta simulación y los "
     + "identificará por su procedencia."
   );
@@ -115,6 +114,7 @@
   function codigoDesdeOrigenEditable(origen) {
     const valor = String(origen || "").toUpperCase();
     if (!valor) return null;
+    if (valor.includes("CALCULADO_AUTOMATIC")) return "CALCULADO_AUTOMATICAMENTE";
     if (valor.includes("EXCLUIDO")) return "EXCLUIDO_USUARIO";
     if (valor.includes("NO_DETECTADO")) return "NO_DETECTADO";
     if (valor.includes("COMPLETADO_MANUAL")) return "COMPLETADO_MANUAL";
@@ -142,6 +142,7 @@
       COMPLETADO_MANUAL: "Completado manualmente",
       EXCLUIDO_USUARIO: "Excluido por ti",
       NO_DETECTADO: "No detectado",
+      CALCULADO_AUTOMATICAMENTE: "Calculado automáticamente",
     };
     return textos[codigo] || "";
   };
@@ -153,15 +154,45 @@
       COMPLETADO_MANUAL: "manual",
       EXCLUIDO_USUARIO: "excluded",
       NO_DETECTADO: "missing",
+      CALCULADO_AUTOMATICAMENTE: "automatic",
     };
     return clases[codigo] || "";
   };
 
   /*
-   * Un origen documental ya no vuelve el control de solo lectura. La
-   * procedencia continúa visible y la referencia original se conserva.
+   * Contrato de vista principal: un valor que el documento sí detectó se
+   * consulta como solo lectura fuera de la ventana de revisión. Los campos
+   * originalmente ausentes siguen editables para captura manual. La edición
+   * de un dato detectado se concentra en "Revisar importación" -> "Editar
+   * campos", donde la referencia documental original permanece intacta.
    */
-  window.origenBloqueaCampo = () => false;
+  window.origenBloqueaCampo = (origen) => (
+    typeof origenBloqueaCampoBase === "function"
+      ? origenBloqueaCampoBase(origen)
+      : ["DETECTADO", "EDITADO_USUARIO"].includes(
+        window.codigoProcedenciaDesdeOrigen(origen),
+      )
+  );
+
+  function aplicarBloqueoVistaPrincipal(control, bloqueado) {
+    if (!control || control.closest(".modal")) return;
+
+    const esSeleccion = control.tagName === "SELECT" || control.type === "checkbox";
+    if (esSeleccion) {
+      control.disabled = Boolean(bloqueado);
+      control.toggleAttribute("aria-disabled", Boolean(bloqueado));
+    } else {
+      control.readOnly = Boolean(bloqueado);
+      control.toggleAttribute("aria-readonly", Boolean(bloqueado));
+    }
+
+    const usaMarcaBloqueada = control.matches(".form-control, .form-select");
+    if (usaMarcaBloqueada) {
+      control.classList.toggle("field-imported-readonly", Boolean(bloqueado));
+    }
+  }
+
+  window.aplicarBloqueoVistaPrincipalPorProcedencia = aplicarBloqueoVistaPrincipal;
 
   function asegurarEstructuraProcedencia(simulacion) {
     if (!simulacion.origen_campos_persona) {
@@ -233,6 +264,31 @@
     simulacion.resultado_sucgs_acreditado = null;
   }
 
+  function mensajeAjusteContextual(acciones) {
+    const activas = new Set(acciones || []);
+    let inicio = "";
+
+    if (activas.size === 1 && activas.has("completado")) {
+      inicio = "Completaste manualmente información que el documento no detectó.";
+    } else if (activas.size === 1 && activas.has("editado")) {
+      inicio = "Editaste información importada para esta simulación.";
+    } else if (activas.size === 1 && activas.has("excluido")) {
+      inicio = "Excluiste información importada de esta simulación.";
+    } else {
+      const cambios = [];
+      if (activas.has("editado")) cambios.push("editaste información importada");
+      if (activas.has("completado")) cambios.push("completaste manualmente información no detectada");
+      if (activas.has("excluido")) cambios.push("excluiste información importada");
+      const ultimo = cambios.pop();
+      const detalle = cambios.length
+        ? `${cambios.join(", ")} y ${ultimo}`
+        : (ultimo || "realizaste cambios en información documental");
+      inicio = `Realizaste estos cambios: ${detalle}.`;
+    }
+
+    return `${inicio} ${MENSAJE_REFERENCIA_ORIGINAL}`;
+  }
+
   function insertarAviso(id, ancla) {
     let aviso = document.getElementById(id);
     if (aviso) return aviso;
@@ -243,20 +299,19 @@
     aviso.className = "alert alert-warning imported-adjustment-warning d-none";
     aviso.setAttribute("role", "status");
     aviso.setAttribute("aria-live", "polite");
-    aviso.textContent = MENSAJE_AJUSTE;
 
     ancla.parentElement.insertBefore(aviso, ancla);
     return aviso;
   }
 
-  function actualizarAviso(id, ancla, activo) {
+  function actualizarAviso(id, ancla, acciones) {
     const aviso = insertarAviso(id, ancla);
     if (!aviso) return;
-    aviso.classList.toggle("d-none", !activo);
-  }
 
-  function mostrarAviso(id, ancla) {
-    actualizarAviso(id, ancla, true);
+    const activas = Array.from(new Set(acciones || []));
+    const activo = activas.length > 0;
+    aviso.classList.toggle("d-none", !activo);
+    aviso.textContent = activo ? mensajeAjusteContextual(activas) : "";
   }
 
   function actualizarLista(lista, clave, activo) {
@@ -318,27 +373,31 @@
   }
 
   /*
-   * Datos personales: todo campo queda editable y la procedencia cambia
-   * inmediatamente al escribir, seleccionar o volver al valor original.
+   * Datos personales: la vista principal bloquea únicamente lo que el PDF
+   * detectó originalmente. Los campos ausentes siguen disponibles para que
+   * el Asegurado(a) los complete sin regresar al modal.
    */
   window.bloquearFormularioPersonal = (
     bloqueado,
     simulacion = obtenerSimulacion(),
   ) => {
-    if (typeof bloquearFormularioPersonalBase === "function") {
-      bloquearFormularioPersonalBase(false, simulacion);
-    }
+    preservarReferenciasOriginales(simulacion);
+    const referenciaOriginal = referenciaComprobanteOriginal(simulacion);
 
     document
       .querySelectorAll("#bloque-datos-personales input, #bloque-datos-personales select")
       .forEach((control) => {
-        if (control.tagName === "SELECT") {
-          control.disabled = false;
-        } else {
-          control.readOnly = false;
-        }
-        control.classList.remove("field-imported-readonly");
-        control.removeAttribute("aria-readonly");
+        const definicion = CAMPOS_PERSONA[control.id];
+        const original = definicion
+          ? referenciaOriginal?.[definicion.referencia]
+          : null;
+        const detectadoOriginalmente = Boolean(
+          bloqueado
+          && simulacion.importacion_comprobante_confirmada
+          && definicion
+          && valorDetectado(original)
+        );
+        aplicarBloqueoVistaPrincipal(control, detectadoOriginalmente);
       });
 
     if (typeof actualizarProcedenciaDatosPersonales === "function") {
@@ -410,8 +469,8 @@
   }
 
   /*
-   * Cuotas del Paso 2: los valores detectados siguen identificados, pero
-   * pueden corregirse directamente sin regresar al modal de importación.
+   * Cuotas del Paso 2: los valores detectados quedan de solo lectura en la
+   * vista principal; los no detectados continúan disponibles para captura.
    */
   window.actualizarOrigenCamposCuotas = (
     simulacion = obtenerSimulacion(),
@@ -420,16 +479,15 @@
     const importacionConfirmada = Boolean(
       simulacion.importacion_comprobante_confirmada,
     );
+    const referencia = referenciaComprobanteOriginal(simulacion);
+    const originales = {
+      cuotas_totales: referencia?.cuotas_historicas ?? null,
+      cuotas_anio_actual: valorOriginalCuotasAnioActual(referencia || {}),
+    };
 
     const campos = [
-      {
-        id: "cuotas_totales",
-        notaId: "origen-cuotas-totales",
-      },
-      {
-        id: "cuotas_anio_actual",
-        notaId: "origen-cuotas-anio-actual",
-      },
+      { id: "cuotas_totales", notaId: "origen-cuotas-totales" },
+      { id: "cuotas_anio_actual", notaId: "origen-cuotas-anio-actual" },
     ];
 
     campos.forEach(({ id, notaId }) => {
@@ -437,9 +495,12 @@
       const nota = document.getElementById(notaId);
       if (!control || !nota) return;
 
-      control.readOnly = false;
-      control.classList.remove("field-imported-readonly");
-      control.removeAttribute("aria-readonly");
+      const detectadoOriginalmente = Boolean(
+        importacionConfirmada
+        && originales[id] !== null
+        && originales[id] !== undefined
+      );
+      aplicarBloqueoVistaPrincipal(control, detectadoOriginalmente);
 
       const origen = simulacion.origen_campos_cuotas?.[id] || null;
       const codigo = window.codigoProcedenciaDesdeOrigen(origen);
@@ -455,9 +516,11 @@
       } else if (importacionConfirmada) {
         nota.textContent = "No detectado";
         nota.className = "field-origin-note data-provenance-note missing";
+        control.dataset.provenance = "NO_DETECTADO";
       } else {
         nota.textContent = "";
         nota.className = "field-origin-note d-none";
+        control.removeAttribute("data-provenance");
       }
     });
 
@@ -466,8 +529,8 @@
     const estado = document.getElementById("cuotas-importadas-estado");
     if (estado && importacionConfirmada) {
       estado.textContent = (
-        "Los valores importados pueden ajustarse. "
-        + "La procedencia original se conserva y cualquier cambio se identifica."
+        "Los valores detectados se consultan en modo de solo lectura. "
+        + "Usa Revisar importación si necesitas corregirlos; los campos no detectados permanecen editables."
       );
     }
   };
@@ -512,39 +575,52 @@
   }
 
   /*
-   * Historial anual: la fila conserva su señal documental, pero cuotas y
-   * salario dejan de estar bloqueados. Revertir al valor original devuelve
-   * el estado Detectado.
+   * Historial anual: las celdas detectadas por Mi Retiro Seguro quedan
+   * bloqueadas en la tabla principal. Solo los valores ausentes del documento
+   * pueden completarse allí; cualquier corrección documental se realiza desde
+   * la ventana de revisión.
    */
   window.aplicarOrigenCampoHistorial = (control, anio, campo) => {
     if (!control) return;
 
     if (control.dataset.sincronizadoDetalle === "true") {
-      control.readOnly = true;
+      aplicarBloqueoVistaPrincipal(control, true);
+      control.classList.add("history-field-imported");
       return;
     }
 
+    const simulacion = preservarReferenciasOriginales(obtenerSimulacion());
     const origen = typeof origenCampoHistorial === "function"
       ? origenCampoHistorial(anio, campo)
       : null;
+    const referencia = referenciaComprobanteOriginal(simulacion);
+    const original = (referencia.registros || []).find(
+      (registro) => (
+        Number(registro.anio) === Number(anio)
+        && registro.tipo !== "PROYECTADO"
+      ),
+    );
+    const valorOriginal = campo === "cuotas"
+      ? original?.cuotas
+      : original?.salario_anual;
+    const detectadoOriginalmente = valorDetectado(valorOriginal);
 
-    control.readOnly = false;
-    control.removeAttribute("aria-readonly");
-    control.classList.toggle("history-field-imported", Boolean(origen));
+    aplicarBloqueoVistaPrincipal(control, detectadoOriginalmente);
+    control.classList.toggle("history-field-imported", detectadoOriginalmente);
 
     if (!origen) {
       control.dataset.provenance = control.value.trim()
         ? "COMPLETADO_MANUAL"
         : "NO_DETECTADO";
+      control.title = "Campo no detectado por el documento; puedes completarlo manualmente.";
       return;
     }
 
     const codigo = window.codigoProcedenciaDesdeOrigen(origen) || "DETECTADO";
     control.dataset.provenance = codigo;
-    control.title = (
-      `${window.textoProcedenciaDato(codigo)}. `
-      + "Puedes ajustar el valor; la referencia original se conservará."
-    );
+    control.title = detectadoOriginalmente
+      ? `${window.textoProcedenciaDato(codigo)}. Usa Revisar importación si necesitas corregirlo.`
+      : "Campo no detectado originalmente; puedes completarlo manualmente.";
   };
 
   function actualizarOrigenHistorialDesdeControl(control, fila) {
@@ -605,7 +681,7 @@
     const control = evento.target.closest(
       ".history-input-cuotas, .history-input-salario",
     );
-    if (!control) return;
+    if (!control || control.readOnly || control.disabled) return;
 
     const fila = control.closest("tr");
     if (!fila) return;
@@ -621,14 +697,21 @@
   };
 
   /*
-   * Ficha Digital confirmada: los controles importados se mantienen
-   * editables. Desmarcar una cuota detectada excluye el período completo de
-   * la simulación, pero conserva sus valores originales como referencia.
+   * Ficha Digital confirmada: los campos que existían en el documento quedan
+   * bloqueados en el detalle principal. La exclusión, corrección o reinclusión
+   * de un período documental se realiza desde Revisar importación. Los meses o
+   * valores no detectados continúan disponibles para captura manual.
    */
   window.marcarCampoDetalleImportado = (control, mes, campo) => {
     if (!control) return;
 
     const simulacion = preservarReferenciasOriginales(obtenerSimulacion());
+    const anio = Number(
+      simulacion.detalle_anio_actual?.anio
+      || simulacion.ficha_digital_importada?.anio_mas_reciente
+      || ANIO_ACTUAL,
+    );
+    const original = registroFichaOriginal(simulacion, anio, Number(mes));
     const origenMes = (
       simulacion.origen_campos_detalle_anio_actual?.[String(mes)] || {}
     );
@@ -638,37 +721,50 @@
         : null
     );
 
-    if (!origen) {
+    if (!origen && !original) {
       if (typeof marcarCampoDetalleImportadoBase === "function") {
-        // El control manual conserva el comportamiento existente.
-        return;
+        marcarCampoDetalleImportadoBase(control, mes, campo);
       }
       return;
     }
 
-    control.readOnly = false;
-    control.disabled = false;
-    control.removeAttribute("aria-readonly");
-    control.removeAttribute("disabled");
-    control.removeAttribute("data-imported-locked");
-    delete control.dataset.importedLocked;
-    control.dataset.importedOriginally = "true";
+    let detectadoOriginalmente = false;
+    if (control.type === "checkbox") {
+      detectadoOriginalmente = Boolean(
+        original
+        && (original.salario != null || valorDetectado(original.estado))
+      );
+    } else if (campo === "salario_mensual") {
+      detectadoOriginalmente = Boolean(original && original.salario != null);
+    } else if (campo === "estado") {
+      detectadoOriginalmente = Boolean(original && valorDetectado(original.estado));
+    }
+
+    aplicarBloqueoVistaPrincipal(control, detectadoOriginalmente);
+    control.classList.toggle("detail-field-imported", detectadoOriginalmente);
+    control.classList.remove("detail-field-imported-editable");
+    control.dataset.importedOriginally = detectadoOriginalmente ? "true" : "false";
     control.dataset.importedField = campo;
     control.dataset.importedMonth = String(mes);
-    control.classList.add("detail-field-imported", "detail-field-imported-editable");
 
     if (control.type === "checkbox") {
-      control.title = (
-        "Dato detectado desde Ficha Digital. "
-        + "Desmarca para excluir este período de la simulación; "
-        + "el documento original se conservará como referencia."
-      );
-    } else {
-      control.title = (
-        "Dato detectado desde Ficha Digital. "
-        + "Puedes editarlo y la aplicación identificará el ajuste."
-      );
+      const excluido = periodoExcluido(simulacion, anio, Number(mes));
+      if (detectadoOriginalmente) {
+        control.checked = !excluido;
+        control.defaultChecked = !excluido;
+        control.setAttribute("aria-checked", String(!excluido));
+        if (!excluido) {
+          control.dataset.importedLocked = "true";
+        } else {
+          control.removeAttribute("data-imported-locked");
+          delete control.dataset.importedLocked;
+        }
+      }
     }
+
+    control.title = detectadoOriginalmente
+      ? "Dato confirmado desde Ficha Digital. Usa Revisar importación si necesitas corregirlo o excluirlo."
+      : "Dato no detectado por Ficha Digital; puedes completarlo manualmente.";
   };
 
   function actualizarOrigenDetalleDesdeControl(control, fila) {
@@ -829,28 +925,25 @@
       actualizarColumnasModoDetalleBase();
     }
 
-    const modo = typeof obtenerModoDetalleAnioActual === "function"
-      ? obtenerModoDetalleAnioActual()
-      : "MENSUAL";
-
     document
       .querySelectorAll("#detalle-anio-actual-body tr")
       .forEach((fila) => {
-        fila.querySelectorAll(".detalle-cuota-acreditada, .detalle-salario-input")
-          .forEach((control) => {
-            if (control.dataset.importedOriginally === "true") {
-              control.disabled = false;
-              control.readOnly = false;
-            }
-          });
-
-        const estado = fila.querySelector(".detalle-estado-salario");
-        if (
-          estado?.dataset.importedOriginally === "true"
-          && modo === "MENSUAL"
-        ) {
-          estado.disabled = false;
-        }
+        const mes = Number(fila.dataset.mes || 0);
+        window.marcarCampoDetalleImportado(
+          fila.querySelector(".detalle-cuota-acreditada"),
+          mes,
+          "cuota_acreditada",
+        );
+        window.marcarCampoDetalleImportado(
+          fila.querySelector(".detalle-col-mensual .detalle-salario-input"),
+          mes,
+          "salario_mensual",
+        );
+        window.marcarCampoDetalleImportado(
+          fila.querySelector(".detalle-estado-salario"),
+          mes,
+          "estado",
+        );
       });
   };
 
@@ -967,7 +1060,7 @@
         simulacion.referencia_mi_retiro_seguro_original = original;
       }
       guardarSimulacion(simulacion);
-      window.bloquearFormularioPersonal(false, simulacion);
+      window.bloquearFormularioPersonal(true, simulacion);
       return resultado;
     };
   }
@@ -1072,68 +1165,77 @@
       });
   }
 
-  function origenRepresentaAjuste(origen) {
-    const valor = String(origen || "");
-    return (
-      valor.includes("EDITADO")
-      || valor.includes("COMPLETADO_MANUAL")
-      || valor.includes("EXCLUIDO")
-    );
+  function accionDesdeOrigen(origen) {
+    const valor = String(origen || "").toUpperCase();
+    if (valor.includes("EXCLUIDO")) return "excluido";
+    if (valor.includes("COMPLETADO_MANUAL")) return "completado";
+    if (valor.includes("EDITADO")) return "editado";
+    return null;
+  }
+
+  function accionesDesdeOrigenes(origenes) {
+    const acciones = new Set();
+    origenes.forEach((origen) => {
+      const accion = accionDesdeOrigen(origen);
+      if (accion) acciones.add(accion);
+    });
+    return acciones;
   }
 
   function actualizarAvisosAjustes(
     simulacion = preservarReferenciasOriginales(obtenerSimulacion()),
   ) {
-    const personaActiva = Object.values(
-      simulacion.origen_campos_persona || {},
-    ).some(origenRepresentaAjuste);
-
-    const cuotasActivas = Object.values(
-      simulacion.origen_campos_cuotas || {},
-    ).some(origenRepresentaAjuste);
-
-    const historialActivo = Object.values(
-      simulacion.origen_campos_historial || {},
-    ).some((campos) => Object.values(campos || {}).some(
-      origenRepresentaAjuste,
-    ));
-
-    const fichaActiva = (
-      (simulacion.periodos_excluidos_importacion_ficha || []).length > 0
-      || Object.values(
-        simulacion.origen_campos_detalle_anio_actual || {},
-      ).some((campos) => Object.values(campos || {}).some(
-        origenRepresentaAjuste,
-      ))
+    const accionesPersona = accionesDesdeOrigenes(
+      Object.values(simulacion.origen_campos_persona || {}),
     );
+
+    const accionesCuotas = accionesDesdeOrigenes(
+      Object.values(simulacion.origen_campos_cuotas || {}),
+    );
+
+    const accionesHistorial = accionesDesdeOrigenes(
+      Object.values(simulacion.origen_campos_historial || {})
+        .flatMap((campos) => Object.values(campos || {})),
+    );
+
+    const accionesFicha = accionesDesdeOrigenes(
+      Object.values(simulacion.origen_campos_detalle_anio_actual || {})
+        .flatMap((campos) => Object.values(campos || {})),
+    );
+    if ((simulacion.periodos_excluidos_importacion_ficha || []).length > 0) {
+      accionesFicha.add("excluido");
+    }
 
     actualizarAviso(
       "aviso-ajustes-datos-personales",
       document.getElementById("form-datos-personales"),
-      personaActiva,
+      accionesPersona,
     );
     actualizarAviso(
       "aviso-ajustes-cuotas",
       document.getElementById("cuotas-importadas-acciones"),
-      cuotasActivas,
+      accionesCuotas,
     );
     actualizarAviso(
       "aviso-ajustes-historial",
       document.getElementById("historial-importado-acciones"),
-      historialActivo,
+      accionesHistorial,
     );
     actualizarAviso(
       "aviso-ajustes-ficha",
       document.getElementById("acciones-ficha-digital-importada"),
-      fichaActiva,
+      accionesFicha,
     );
   }
 
-  function prepararControlesImportadosEditables() {
+  function prepararControlesImportadosVistaPrincipal() {
     const simulacion = preservarReferenciasOriginales(obtenerSimulacion());
     guardarSimulacion(simulacion);
 
-    window.bloquearFormularioPersonal(false, simulacion);
+    window.bloquearFormularioPersonal(
+      Boolean(simulacion.importacion_comprobante_confirmada),
+      simulacion,
+    );
     window.actualizarOrigenCamposCuotas(simulacion);
 
     document
@@ -1274,7 +1376,7 @@
     if (!hayFilasNuevas) return;
 
     queueMicrotask(() => {
-      prepararControlesImportadosEditables();
+      prepararControlesImportadosVistaPrincipal();
     });
   });
 
@@ -1282,7 +1384,7 @@
     const simulacion = preservarReferenciasOriginales(obtenerSimulacion());
     guardarSimulacion(simulacion);
 
-    prepararControlesImportadosEditables();
+    prepararControlesImportadosVistaPrincipal();
 
     [
       document.getElementById("historial-tabla-body"),
