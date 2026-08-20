@@ -2,7 +2,8 @@
 
 **Proyecto:** Mi Retiro Proyectado
 **Estado:** vigente desde GOV.1.2
-**Fecha:** 2026-08-18
+**Fecha de adopción:** 2026-08-18
+**Última revisión:** PLAN.1 / ADR-168 — 2026-08-20
 
 ## 1. Propósito
 
@@ -25,6 +26,7 @@ El mantenedor y responsable de revisión actual del repositorio es:
 5. **Reproducibilidad:** una afirmación técnica importante debe poder verificarse mediante código, prueba, fuente o procedimiento documentado.
 6. **Historia preservada:** una decisión sustituida se marca como tal; no se elimina para aparentar que nunca existió.
 7. **Independencia institucional:** el proyecto no debe presentarse como producto oficial de la CSS.
+8. **Sincronización transversal:** cuando evoluciona un contrato compartido, se revisan conjuntamente código, pruebas, interfaz, normativa, documentación y evidencia de release que dependan de él.
 
 ## 4. Tipos de cambio
 
@@ -113,9 +115,15 @@ La política aplicable está en `VERSIONING.md`.
 
 - `VERSION` es la fuente canónica.
 - Los tags formales empiezan con `v`.
+- Durante la etapa beta, la familia vigente es `0.0.N-beta`.
+- La primera versión oficial objetivo es `1.0.0.0`, después de cerrar todos los gates del plan maestro.
+- Las versiones oficiales usan `MAYOR.MENOR.PARCHE.REVISIÓN`; la cuarta posición identifica una revisión/hotfix.
+- El Build es un identificador independiente de seis dígitos para artefactos oficiales reproducibles; no forma parte de `VERSION` ni del tag y no se incrementa por commit.
+- La planificación histórica `0.1.0-beta.1` deja de ser un objetivo vigente; las evidencias históricas que la mencionan se preservan.
 - `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas documentalmente y posteriormente materializadas como tags retrospectivos firmados sin aparentar existencia histórica.
 - `v0.0.22-beta` y `v0.0.23-beta` fueron reemitidos una sola vez como objetos firmados sin cambiar sus commits objetivo; esa excepción ya fue consumida.
-- Después de la migración, todo commit nuevo y todo tag nuevo deben estar firmados. `v0.0.24-beta` fue creado ya bajo esta política y verificó correctamente.
+- Después de la migración, todo commit nuevo y todo tag nuevo deben estar firmados. `v0.0.24-beta` y `v0.0.25-beta` fueron creados bajo esta política y se verificaron correctamente.
+- La fuente canónica y asignación del Build se definirán en REL.1; hasta entonces no se publica un Build ficticio.
 - La clave privada nunca se versiona.
 
 ## 8. Propiedad y revisión de áreas críticas
@@ -134,6 +142,8 @@ Cuando existan nuevos mantenedores, CODEOWNERS deberá granularizar estas respon
 ## 9. Licencia
 
 GOV.1.7 adopta una **licencia propietaria pre-beta / todos los derechos reservados** para los materiales originales del proyecto.
+
+La denominación histórica de esa decisión de licencia se conserva. PLAN.1 no cambia la licencia: la etapa funcional actual se identifica como beta y cualquier relicencia sigue requiriendo una decisión separada.
 
 - `LICENSE` define el alcance de esos materiales;
 - `THIRD_PARTY_NOTICES.md` separa componentes upstream;

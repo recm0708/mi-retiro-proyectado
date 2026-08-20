@@ -1,10 +1,11 @@
 # Transparencia del producto
 
 **Estado:** Vigente
-**Versión de aplicación revisada:** `0.0.24-beta`
+**Versión de aplicación revisada:** `0.0.26-beta`
+**Versión base histórica:** `0.0.25-beta`
 **Versión base histórica preservada:** `0.0.23-beta`
 **Base documental preservada:** GOV.1.3 R4 — 2026-08-17
-**Revisión transversal vigente:** repositorio público e identidad visual — 2026-08-19
+**Revisión transversal vigente:** PLAN.1 R2B1 — transición futura a versión oficial — 2026-08-20
 **Clasificación:** Pública / Auditoría
 
 Mi Retiro Proyectado es una herramienta independiente de estimación previsional. Este documento delimita qué puede afirmarse sobre el producto y qué debe permanecer explícitamente como aproximación, limitación o pendiente.
@@ -33,7 +34,7 @@ La aplicación:
 - no sustituye una determinación administrativa;
 - no constituye asesoría jurídica individual;
 - no garantiza que un resultado estimado coincida con una futura determinación oficial;
-- no se convierte en una beta pública desplegada únicamente porque su repositorio sea público.
+- no se convierte en una versión oficial ni en un despliegue de producción únicamente porque su repositorio sea público.
 
 ## 3. Datos acreditados y proyectados
 
@@ -60,6 +61,8 @@ Las discrepancias identificadas se documentan; no se armonizan silenciosamente.
 `app/modelos/trazabilidad.py` y `app/servicios/trazabilidad.py` describen datos utilizados, origen, reglas, fórmulas mostrables, sustituciones, resultados intermedios, fuentes y advertencias.
 
 La capa de trazabilidad **no vuelve a calcular** la prestación. Developer Diagnostics tampoco recalcula: observa la operación ya ejecutada.
+
+PLAN.1 reserva UX.4.6i para exponer al Asegurado(a) una guía pública «Cómo se calcula» de SEBD, Mixto y SUCGS. Esa guía describirá la lógica canónica de Python y normativa sin duplicar algoritmos numéricos en HTML o JavaScript.
 
 ## 6. Privacidad
 
@@ -91,7 +94,9 @@ Las pruebas automatizadas demuestran contratos técnicos concretos. No demuestra
 - exactitud de datos personales externos;
 - equivalencia universal con cálculos oficiales.
 
-GOV.1.4 dispone de regresiones específicas para observabilidad y GOV.1.5 completó internamente el threat model formal. La revisión jurídica externa continúa pendiente antes de una beta pública de producto.
+GOV.1.4 dispone de regresiones específicas para observabilidad y GOV.1.5 completó internamente el threat model formal.
+
+La redacción histórica indicaba que la revisión jurídica externa continuaba pendiente antes de una beta pública de producto. PLAN.1 sustituye ese hito de publicación: la revisión externa permanece pendiente como gate previo a la primera versión oficial.
 
 ## 8. Trazabilidad documental
 
@@ -99,26 +104,30 @@ La matriz `MATRIZ_TRAZABILIDAD.md` relaciona contratos críticos con fuente o cr
 
 La matriz **no afirma todavía cobertura individual completa de todos los RF históricos**.
 
-## 9. Estado pre-beta y repositorio público
+## 9. Estado beta y repositorio público
 
-El producto permanece en **desarrollo pre-beta**.
+El producto permanece en **desarrollo beta** bajo la línea `0.0.N-beta`.
 
 El repositorio de código es público desde el 2026-08-19. Esa decisión:
 
 - mejora la transparencia técnica y permite colaboración bajo las reglas del repositorio;
-- no cambia `VERSION`;
+- no cambia por sí sola `VERSION`;
 - no modifica la licencia propietaria;
 - no constituye un despliegue remoto de la aplicación;
-- no declara completada la primera beta pública de producto;
-- no elimina los gates jurídicos, funcionales, de accesibilidad ni de despliegue pendientes.
+- no declara una versión oficial de producto;
+- no elimina los gates jurídicos, funcionales, de accesibilidad, seguridad ni despliegue pendientes.
 
-GOV.1.4 y GOV.1.5 están cerrados internamente. Continúan pendientes:
+Como evidencia del checkpoint anterior se conserva la formulación: **no declara completada la primera beta pública de producto**. PLAN.1 sustituyó posteriormente esa meta por la transición directa desde la línea beta `0.0.N-beta` hacia `1.0.0.0`.
 
-- revisión jurídica externa antes de beta pública de producto;
+La revisión documental anterior mantenía pendiente el **cierre de UX.4.6e y del alcance funcional UX.4.6f–h**. UX.4.6e ya cerró en `0.0.25-beta`; UX.4.6f–h permanecen pendientes y se añadieron UX.4.6i, DEV.2, SEC.2, DOC.2, PERSIST.1, REP.1, A11Y.2, REV.1, QA.1 y REL.1 conforme al plan maestro.
+
+Continúan pendientes, según corresponda:
+
+- PLAN.1 y los bloques posteriores definidos en `PLAN_MAESTRO_HACIA_1_0.md`;
+- revisión jurídica externa previa a la primera versión oficial;
 - hardening específico si se decide un despliegue remoto;
 - verificación periódica de configuración y alertas de GitHub;
-- cierre de UX.4.6e y del alcance funcional UX.4.6f–h, además de los demás gates de primera beta;
-- declaración de aptitud para despliegue público.
+- declaración explícita de aptitud para distribución oficial.
 
 ## 10. Identidad
 

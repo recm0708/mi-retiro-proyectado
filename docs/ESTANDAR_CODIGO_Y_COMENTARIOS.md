@@ -1,7 +1,8 @@
 # Estándar de código y comentarios
 
 **Estado:** Vigente
-**Versión de aplicación revisada:** `0.0.24-beta`
+**Versión de aplicación revisada:** `0.0.26-beta`
+**Versión base histórica:** `0.0.24-beta`
 **Revisión documental:** UX.4.6e R4 — 2026-08-18
 **Clasificación:** Técnica / Mantenibilidad
 

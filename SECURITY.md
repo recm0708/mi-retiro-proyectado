@@ -2,12 +2,14 @@
 
 ## Versiones soportadas
 
-Mi Retiro Proyectado se encuentra en desarrollo pre-beta. El repositorio de código es público, pero la aplicación no se declara todavía como beta pública desplegada.
+Mi Retiro Proyectado se encuentra en **desarrollo beta** bajo la línea `0.0.N-beta`. El repositorio de código es público, pero la aplicación no se declara todavía como versión oficial ni como despliegue de producción.
 
 | Línea | Soporte de seguridad |
 |---|---|
-| `0.0.25-beta` | Soportada durante el desarrollo pre-beta vigente |
-| `0.0.24-beta` y anteriores | Históricas; no reciben correcciones independientes |
+| `0.0.26-beta` | Soportada durante la etapa beta vigente |
+| `0.0.25-beta` y anteriores | Históricas; no reciben correcciones independientes |
+
+La primera versión oficial objetivo es `1.0.0.0` y solo podrá considerarse soportada cuando se materialice formalmente después de los gates definidos por el plan maestro.
 
 ## Reportar una vulnerabilidad
 

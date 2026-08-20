@@ -1,14 +1,19 @@
 # Licencia y estrategia de distribución
 
 **Estado:** Vigente — GOV.1.7
-**Versión de aplicación revisada:** `0.0.23-beta`
-**Fecha:** 2026-08-18
+**Versión de aplicación revisada:** `0.0.26-beta`
+**Versión base histórica:** `0.0.25-beta`
+**Versión base histórica:** `0.0.23-beta`
+**Fecha de decisión original:** 2026-08-18
+**Última revisión documental:** PLAN.1 R3B1 — 2026-08-20
 **Clasificación:** Gobierno / Licencia / Distribución
-**Revisión jurídica externa:** Pendiente antes de publicación pública/comercial
+**Revisión jurídica externa:** Pendiente antes de una distribución oficial/comercial o de una eventual relicencia
 
 ## 1. Objetivo evaluado
 
-El proyecto contempla una beta futura, pero no existe una decisión expresa del titular de convertir el código en open source, autorizar uso comercial por terceros, permitir redistribución sin control o exigir copyleft. GOV.1.7 adopta una opción conservadora que no añade una concesión amplia de derechos en esta etapa.
+El proyecto se encuentra actualmente en **etapa beta** y su repositorio de código es público. Esa visibilidad no convierte el código en open source ni concede por sí sola derechos de uso, copia, modificación, redistribución o explotación comercial.
+
+No existe una decisión expresa del titular de convertir el proyecto en open source, autorizar uso comercial por terceros, permitir redistribución sin control o exigir copyleft. GOV.1.7 adoptó una opción conservadora que sigue vigente durante la etapa beta.
 
 ## 2. Alternativas revisadas
 
@@ -30,9 +35,11 @@ Preserva el control del titular y no concede públicamente derechos de copia, mo
 
 ## 3. Decisión GOV.1.7
 
-Se adopta para la etapa pre-beta una **licencia propietaria / todos los derechos reservados** sobre materiales originales. Se añaden `LICENSE` y `THIRD_PARTY_NOTICES.md`.
+GOV.1.7 adoptó, durante la etapa entonces denominada pre-beta, una **licencia propietaria / todos los derechos reservados** sobre materiales originales y añadió `LICENSE` y `THIRD_PARTY_NOTICES.md`.
 
-La decisión es deliberadamente conservadora y puede revisarse para versiones futuras si el titular decide abrir el proyecto y dispone de los derechos necesarios.
+PLAN.1 no cambia esa decisión de licencia. La aplicación está ahora documentada como beta `0.0.N-beta`, mientras la licencia propietaria continúa vigente hasta que exista una decisión expresa diferente.
+
+La decisión puede revisarse para versiones futuras si el titular decide abrir el proyecto y dispone de los derechos necesarios.
 
 ## 4. Terceros
 
@@ -40,11 +47,15 @@ La decisión es deliberadamente conservadora y puede revisarse para versiones fu
 
 ## 5. Compatibilidad de dependencias
 
-Las dependencias directas actualmente documentadas usan licencias MIT, BSD-3-Clause o Apache-2.0. El proyecto puede mantener condiciones distintas sobre su material original siempre que cumpla las obligaciones upstream de componentes que use o redistribuya. Esta conclusión de ingeniería/documentación **no sustituye una revisión jurídica externa**.
+Las dependencias directas actualmente documentadas usan licencias MIT, BSD-3-Clause o Apache-2.0. El proyecto puede mantener condiciones distintas sobre su material original siempre que cumpla las obligaciones upstream de componentes que use o redistribuya.
+
+Esta conclusión de ingeniería/documentación **no sustituye una revisión jurídica externa**.
 
 ## 6. Empaquetado
 
-Un instalador, ejecutable autocontenido o contenedor futuro debe generar un inventario real de componentes y adjuntar licencias/NOTICE exigidos antes de publicarse.
+Un instalador, ejecutable autocontenido, contenedor o ZIP oficial debe generar un inventario real de componentes y adjuntar licencias/NOTICE exigidos antes de distribuirse.
+
+REL.1 deberá relacionar el inventario real del artefacto con `VERSION`, Build, tag, hashes y avisos de terceros.
 
 ## 7. Contribuciones futuras
 
@@ -52,11 +63,13 @@ Antes de aceptar contribuciones externas materiales debe definirse cómo se gest
 
 ## 8. Cambio futuro de licencia
 
-El titular puede adoptar condiciones distintas para versiones futuras o materiales sobre los que conserve derechos suficientes. Una concesión open source ya otorgada sobre una versión no debe tratarse retroactivamente como si nunca hubiera existido.
+El titular puede adoptar condiciones distintas para versiones futuras o materiales sobre los que conserve derechos suficientes.
+
+Una concesión open source ya otorgada sobre una versión no debe tratarse retroactivamente como si nunca hubiera existido.
 
 ## 9. Referencias de decisión
 
 - GitHub Docs — Licensing a repository.
 - Choose a License — MIT, Apache-2.0 y catálogo de licencias/copyleft.
 
-Estas referencias ayudan a comparar modelos de licencia; la revisión jurídica profesional continúa como gate antes de publicación pública/comercial.
+Estas referencias ayudan a comparar modelos de licencia. La revisión jurídica profesional continúa como gate antes de una eventual relicencia o de una distribución oficial/comercial que requiera validación jurídica adicional.

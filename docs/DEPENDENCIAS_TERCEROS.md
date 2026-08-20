@@ -1,16 +1,19 @@
 # Dependencias y terceros
 
 **Estado:** Vigente
-**Versión de aplicación revisada:** `0.0.23-beta`
+**Versión de aplicación revisada:** `0.0.26-beta`
+**Versión base histórica:** `0.0.25-beta`
+**Versión base histórica:** `0.0.23-beta`
 **Base documental:** GOV.1.3 R4 — 2026-08-17
-**Revisión transversal:** GOV.1.5 R3 — 2026-08-18
+**Revisión transversal histórica:** GOV.1.5 R3 — 2026-08-18
+**Última revisión documental:** PLAN.1 R3B1 — 2026-08-20
 **Clasificación:** Técnica / Terceros / Auditoría
 
 Este inventario distingue dependencias directas, snapshot transitivo, recursos externos y servicios de red. GOV.1.7 adopta una licencia propietaria para materiales originales sin relicenciar dependencias upstream.
 
 ## 1. Dependencias Python directas
 
-Las versiones corresponden al `requirements.txt` vigente. La estructura documental se originó en GOV.1.3 R4 y se mantiene actualizada durante el mantenimiento pre-beta.
+Las versiones corresponden al `requirements.txt` vigente. La estructura documental se originó en GOV.1.3 R4 y se mantiene actualizada durante la etapa beta.
 
 | Dependencia | Versión | Finalidad en el proyecto | Licencia upstream verificada | Conexión/datos en el uso actual | Riesgo/revisión |
 |---|---:|---|---|---|---|
@@ -50,7 +53,7 @@ La interfaz usa **Bootstrap 5.3.8**.
 - el navegador realiza una solicitud al CDN;
 - la solicitud de recurso no incluye intencionalmente el contenido de la simulación.
 
-Servir Bootstrap localmente continúa como objetivo pre-beta para reducir dependencia de terceros.
+Servir Bootstrap localmente continúa como objetivo antes de la primera versión oficial para reducir dependencia de terceros, salvo que SEC.2/REL.1 documenten y acepten expresamente una estrategia diferente.
 
 ## 4. Servicio oficial CSS para fecha
 
@@ -68,7 +71,7 @@ No es una dependencia de software; se registra como **servicio externo operativo
 
 ## 5. GitHub
 
-GitHub aloja el repositorio privado y ejecuta CI/Dependabot.
+GitHub aloja el repositorio público y ejecuta CI/Dependabot.
 
 GitHub Actions utiliza actualmente:
 
@@ -77,7 +80,6 @@ GitHub Actions utiliza actualmente:
 - `actions/setup-node@v7`.
 
 Estas herramientas son de desarrollo/CI, no runtime del usuario final.
-
 
 ## 5.1. Shields.io
 
@@ -106,7 +108,7 @@ La revisión de seguridad/privacidad clasifica:
 
 La evaluación completa y los gates de despliegue se documentan en `EVALUACION_TERCEROS_DESPLIEGUE.md`.
 
-Servir Bootstrap localmente sigue siendo la opción preferida antes de una publicación amplia o deberá existir una excepción explícita y revisada en el gate pre-beta.
+Servir Bootstrap localmente sigue siendo la opción preferida antes de `1.0.0.0`, salvo que exista una excepción explícita, revisada y documentada en SEC.2/REL.1.
 
 ## 7. Política de actualización
 
@@ -129,7 +131,7 @@ Para `pypdf 6.15.0` se añadieron regresiones específicas sobre:
 
 ## 8. Licencia del proyecto
 
-GOV.1.7 selecciona una **licencia propietaria pre-beta / todos los derechos reservados** para los materiales originales de Mi Retiro Proyectado.
+La denominación histórica de GOV.1.7 es **licencia propietaria pre-beta / todos los derechos reservados**. PLAN.1 no modifica sus términos: la licencia propietaria continúa vigente durante la etapa beta actual.
 
 Las dependencias directas documentadas son MIT, BSD-3-Clause o Apache-2.0 y no se relicencian. Una distribución debe conservar los avisos y textos upstream exigidos por los componentes efectivamente incluidos.
 

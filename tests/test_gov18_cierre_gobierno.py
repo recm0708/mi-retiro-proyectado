@@ -89,11 +89,22 @@ class TestGov18CierreGobierno(unittest.TestCase):
     def test_security_soporta_version_candidata(self):
         texto = (ROOT / "SECURITY.md").read_text(encoding="utf-8")
         version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
-        self.assertIn(
-            f"| `{version}` | Soportada durante el desarrollo pre-beta vigente |",
-            texto,
+
+        # GOV.1.8 protege que la versión canónica figure como soportada.
+        # PLAN.1 puede evolucionar el nombre de la etapa sin invalidar ese cierre.
+        fila = next(
+            (
+                linea
+                for linea in texto.splitlines()
+                if linea.startswith(f"| `{version}` |")
+            ),
+            None,
         )
-        self.assertIn("`0.0.24-beta` y anteriores", texto)
+        self.assertIsNotNone(fila)
+        self.assertIn("Soportada", fila)
+        self.assertIn("beta vigente", fila)
+        self.assertNotIn("pre-beta vigente", fila)
+        self.assertIn("Históricas; no reciben correcciones independientes", texto)
 
     def test_regresiones_historicas_declaran_version_base(self):
         casos = (

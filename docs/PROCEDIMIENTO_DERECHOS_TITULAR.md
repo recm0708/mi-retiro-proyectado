@@ -1,14 +1,17 @@
 # Procedimiento de derechos del titular
 
-**Estado:** GOV.1.5 R2 — vigente como procedimiento interno pre-beta
-**Versión de aplicación revisada:** `0.0.23-beta`
-**Fecha:** 2026-08-18
+**Estado:** GOV.1.5 R2 — vigente como procedimiento interno
+**Versión de aplicación revisada:** `0.0.26-beta`
+**Versión base histórica:** `0.0.25-beta`
+**Versión base histórica:** `0.0.23-beta`
+**Fecha de cierre original:** 2026-08-18
+**Última revisión documental:** PLAN.1 R3B2 — 2026-08-20
 **Clasificación:** Privacidad / Procedimiento / Interna
-**Revisión jurídica externa:** Pendiente antes de beta pública
+**Revisión jurídica externa:** Pendiente antes de la primera versión oficial o de un cambio material del tratamiento/despliegue
 
 Este procedimiento define cómo debe atender Mi Retiro Proyectado una solicitud de ejercicio de derechos sobre datos personales cuando el proyecto sea responsable de un tratamiento alcanzado por la normativa aplicable.
 
-No constituye asesoría jurídica ni sustituye la revisión profesional pendiente antes de una publicación pública o despliegue remoto.
+No constituye asesoría jurídica ni sustituye la revisión profesional prevista en REV.1 ni la evaluación que corresponda ante un despliegue remoto.
 
 ## 1. Marco de referencia
 
@@ -252,3 +255,7 @@ No afirma:
 - que todo caso pueda resolverse sin asesoría jurídica;
 - que la ausencia de base de datos elimine todos los tratamientos de datos personales;
 - que los plazos internos sustituyan el texto legal o criterios posteriores de la autoridad.
+
+## 16. Historia
+
+El contrato funcional de este procedimiento se cerró originalmente en GOV.1.5 R2 sobre `0.0.23-beta`. PLAN.1 actualiza únicamente su metadata viva y el gate futuro; no reescribe los plazos, derechos ni controles históricos validados.

@@ -1,16 +1,19 @@
 # Modelo de amenazas
 
 **Estado:** GOV.1.5 R1 — vigente como modelo técnico interno
-**Versión de aplicación revisada:** `0.0.23-beta`
-**Fecha:** 2026-08-17
+**Versión de aplicación revisada:** `0.0.26-beta`
+**Versión base histórica:** `0.0.25-beta`
+**Versión base histórica:** `0.0.23-beta`
+**Fecha de cierre original:** 2026-08-17
+**Última revisión documental:** PLAN.1 R3B2 — 2026-08-20
 **Clasificación:** Seguridad / Privacidad / Riesgo
-**Revisión externa:** Pendiente antes de beta pública
+**Revisión externa:** Pendiente antes de la primera versión oficial o de cualquier despliegue remoto que cambie el modelo de riesgo
 
 Este documento modela amenazas observables para la arquitectura actual de Mi Retiro Proyectado. No constituye auditoría de penetración, certificación de seguridad, dictamen jurídico ni garantía de riesgo cero.
 
 ## 1. Alcance actual
 
-El modelo cubre la aplicación en su modo previsto de desarrollo/pre-beta:
+El modelo cubre la aplicación en su **etapa beta y modo local soportado**:
 
 - aplicación web servida por FastAPI;
 - uso principal en `localhost`;
@@ -167,7 +170,7 @@ Controles actuales:
 | T-02 | Divulgación de datos por logging | Developer Diagnostics | Alto | Baja con modo apagado | Medio | `MRP_DEV_MODE=1`, sanitización, no bodies, no mensajes de excepción | revisar esquema cada vez que se añada metadata |
 | T-03 | Exposición accidental al ejecutar fuera de localhost | Servidor ASGI | Alto | Baja en uso actual | Medio | diseño local documentado | cualquier bind público exige TLS, autenticación/controles y nuevo threat model |
 | T-04 | XSS o inyección en contenido renderizado | Navegador/plantillas | Alto | Baja/Media | Medio | Jinja2, CSP, validación, sin HTML dinámico arbitrario previsto | revisar cambios que introduzcan HTML no confiable |
-| T-05 | Dependencia/CDN comprometida o indisponible | Bootstrap/jsDelivr | Medio/Alto | Baja | Medio | SRI + CSP | servir recursos críticos localmente antes de beta cuando sea viable |
+| T-05 | Dependencia/CDN comprometida o indisponible | Bootstrap/jsDelivr | Medio/Alto | Baja | Medio | SRI + CSP | servir recursos críticos localmente antes de `1.0.0.0`, salvo excepción revisada en SEC.2/REL.1 |
 | T-06 | Alteración de normativa/código | Repositorio | Alto | Baja | Medio | firma, rulesets, PR, CI, historial | mantener revisión humana de cambios normativos |
 | T-07 | Robo/lectura del estado del navegador por software local o extensión | Web Storage | Alto | Dependiente del equipo | Medio | `sessionStorage`, minimización, limpieza | el proyecto no controla un equipo ya comprometido |
 | T-08 | Fuga de PDF por persistencia accidental | Importador | Alto | Baja | Medio | procesamiento en memoria; no persistencia del binario | reevaluar si se añade persistencia/exportación |
@@ -324,6 +327,8 @@ Las revisiones posteriores completaron los elementos que este modelo había deja
 - frontera de revisión jurídica;
 - actualización transversal de seguridad, privacidad, transparencia, cumplimiento, roadmap y validación.
 
-Los documentos vigentes relacionados se enumeran en `INDICE.md`. La revisión jurídica externa y cualquier hardening de un despliegue remoto concreto permanecen como gates pre-publicación.
+Los documentos vigentes relacionados se enumeran en `INDICE.md`. La revisión jurídica externa y cualquier hardening de un despliegue remoto concreto permanecen como gates previos a la primera versión oficial o al despliegue que los requiera.
 
 La versión base de esta revisión técnica es `0.0.23-beta`; el cierre integral posterior de GOV.1 se materializó en `0.0.24-beta`.
+
+> **Nota posterior — PLAN.1 R3B2 / 2026-08-20:** el estado vivo se revisó sobre `0.0.25-beta`. La terminología histórica de GOV.1.5 no se interpreta como una etapa actual “pre-beta”; el producto se encuentra en la línea beta `0.0.N-beta`.

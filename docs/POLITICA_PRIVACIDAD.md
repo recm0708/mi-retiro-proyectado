@@ -3,10 +3,13 @@
 **Producto:** Mi Retiro Proyectado
 **Versión del texto:** `2026-08-16.1`
 **Estado:** Vigente en la aplicación
-**Versión de aplicación revisada:** `0.0.23-beta`
+**Versión de aplicación revisada:** `0.0.26-beta`
+**Versión base histórica:** `0.0.25-beta`
+**Versión base histórica:** `0.0.23-beta`
 **Base documental:** GOV.1.3 R3 — 2026-08-17
-**Revisión transversal:** GOV.1.5 R3 — 2026-08-18
-**Revisión jurídica externa:** Pendiente antes de publicación pública/comercial
+**Revisión transversal histórica:** GOV.1.5 R3 — 2026-08-18
+**Última revisión documental:** PLAN.1 R3B1 — 2026-08-20
+**Revisión jurídica externa:** Pendiente antes de la primera versión oficial o de un despliegue remoto que cambie el tratamiento
 
 Esta política describe el tratamiento implementado actualmente. No constituye certificación jurídica.
 
@@ -161,7 +164,7 @@ Canal inicial del proyecto:
 
 `ruben.canizares@outlook.com`
 
-El procedimiento interno se documenta en `PROCEDIMIENTO_DERECHOS_TITULAR.md`. La revisión jurídica externa continúa pendiente antes de una beta pública.
+El procedimiento interno se documenta en `PROCEDIMIENTO_DERECHOS_TITULAR.md`. La revisión jurídica externa continúa pendiente antes de la primera versión oficial o de un cambio material del tratamiento.
 
 ## 15. Seguridad
 
@@ -208,7 +211,7 @@ debe provocar revisión de esta política y evaluación de incremento de versió
 
 ## 18. Revisión jurídica
 
-Antes de una publicación pública, comercial o un despliegue remoto con tratamiento persistente se requiere revisión jurídica formal.
+Antes de la primera versión oficial, o antes de un despliegue remoto con tratamiento persistente o un cambio material de finalidad/destinatarios, se requiere la revisión jurídica definida por REV.1.
 
 ## 19. Historia
 

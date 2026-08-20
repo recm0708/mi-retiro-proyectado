@@ -1,12 +1,14 @@
 # Registro de decisiones técnicas
 
 **Estado:** Vigente
-**Versión de aplicación revisada:** `0.0.23-beta`
+**Versión de aplicación revisada:** `0.0.26-beta`
+**Versión base histórica:** `0.0.25-beta`
+**Base documental histórica:** `0.0.23-beta` — GOV.1.3 R4 — 2026-08-17
 **Revisión documental:** GOV.1.3 R4 — 2026-08-17
-**Última actualización de gobierno:** Firma Git / ADR-159 — 2026-08-17
+**Última actualización de gobierno:** PLAN.1 / ADR-168 — 2026-08-20
 **Última actualización técnica:** UX.4.6e R8 / ADR-167 — 2026-08-19
 **Clasificación:** Técnica / Gobierno / Auditoría
-**ADR indexadas:** 167 (`ADR-001` a `ADR-167`)
+**ADR indexadas:** 168 (`ADR-001` a `ADR-168`)
 
 Este registro conserva decisiones de arquitectura, modelado, UX, precisión, seguridad y aplicación normativa. Una ADR explica por qué el proyecto adoptó una decisión; no crea una norma jurídica.
 
@@ -198,6 +200,7 @@ R4 **no inventa un estado retroactivo** para esas decisiones. El índice las mar
 | ADR-165 | La auditoría transversal es un gate antes de la validación funcional manual | Aceptada para UX.4.6e R7. |
 | ADR-166 | El borrado integral invalida también residuos pre-beta y fuerza reconsentimiento | Aceptada para UX.4.6e R8. |
 | ADR-167 | Los datos documentales confirmados son editables sin perder la referencia original | Aceptada para cierre funcional UX.4.6e R8. |
+| ADR-168 | La etapa `0.0.N-beta` conduce directamente a la versión oficial `1.0.0.x` con Build independiente | Aceptada para PLAN.1. |
 
 ## 4. Registro íntegro de ADR
 
@@ -1758,3 +1761,42 @@ La aplicación mantiene como referencias de frontend, entre otras:
 - mapas de `origen_campos_*`.
 
 Estas estructuras forman parte del estado temporal de la simulación, no de los modelos jurídicos de la CSS.
+
+## ADR-168 — La etapa `0.0.N-beta` conduce directamente a la versión oficial `1.0.0.x` con Build independiente
+
+**Estado:** Aceptada para PLAN.1.
+**Fecha:** 2026-08-20.
+
+**Decisión:** Mi Retiro Proyectado conserva `0.0.N-beta` como familia de versiones durante la etapa beta de desarrollo. Cuando se cierren todos los gates funcionales, normativos, de seguridad, privacidad, accesibilidad, calidad y release definidos por el plan maestro, la transición prevista será directamente a la primera versión oficial `1.0.0.0`.
+
+Las versiones oficiales utilizan cuatro componentes propios del producto:
+
+```text
+MAYOR.MENOR.PARCHE.REVISIÓN
+```
+
+La cuarta posición representa revisiones/hotfix de una versión oficial ya publicada. Esta convención de cuatro componentes es propia de Mi Retiro Proyectado y no se presenta como SemVer estricto.
+
+Los artefactos oficiales incorporarán además un identificador **Build** independiente, de seis dígitos, monotónico y no reutilizable:
+
+```text
+Build 000001
+```
+
+El Build:
+
+- no forma parte de `VERSION`;
+- no forma parte del tag Git;
+- no se incrementa por cada commit;
+- identifica un artefacto reproducible concreto;
+- solo se materializa cuando exista el proceso formal de empaquetado definido en REL.1.
+
+Los tags continúan derivándose de la versión canónica: `v0.0.N-beta` durante la etapa beta y, para versiones oficiales, valores como `v1.0.0.0`.
+
+La planificación anterior que reservaba `0.1.0-beta.1` como futura primera beta pública queda sustituida como **objetivo vigente**. Las menciones conservadas en releases, cierres, snapshots o regresiones históricas no se borran ni se reinterpretan: permanecen como evidencia del plan que existía en ese momento y pueden acompañarse de una nota posterior que documente su sustitución.
+
+**Motivo:** el proyecto ya venía publicando hitos formales con sufijo `-beta`. Introducir después otra familia denominada “primera beta” produciría una distinción artificial entre betas ya existentes y una beta posterior, además de complicar la trazabilidad sin aportar una diferencia funcional real. La transición directa a `1.0.0.0` permite que la salida de beta represente un gate explícito de producto completo.
+
+**Consecuencia:** `VERSIONING.md`, el validador canónico de versión, el proceso de release, el plan maestro, la documentación vigente y sus regresiones deben aceptar la línea oficial de cuatro componentes sin modificar retroactivamente `v0.0.25-beta` ni otros tags publicados. No existe una promoción automática a `1.0.0.0`: el cambio solo puede ocurrir después de cerrar la secuencia de catorce bloques y REL.1.
+
+La fuente canónica del Build y el mecanismo exacto para asignarlo, reproducirlo, firmarlo y asociarlo con hashes de artefactos se definirán en REL.1. Hasta entonces no se versiona ni se muestra un Build ficticio.

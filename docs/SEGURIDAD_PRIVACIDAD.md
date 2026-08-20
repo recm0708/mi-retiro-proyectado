@@ -1,12 +1,14 @@
 # Seguridad y privacidad
 
 **Estado:** Vigente
-**Versión de aplicación revisada:** `0.0.24-beta`
+**Versión de aplicación revisada:** `0.0.26-beta`
+**Versión base histórica:** `0.0.25-beta`
 **Versión base histórica preservada:** `0.0.23-beta`
 **Base documental preservada:** GOV.1.3 R3 — 2026-08-17
-**Revisión transversal vigente:** repositorio público y controles GitHub — 2026-08-19
+**Revisión transversal histórica:** repositorio público y controles GitHub — 2026-08-19
+**Última revisión documental:** PLAN.1 R3A — 2026-08-20
 **Clasificación:** Seguridad / Privacidad / Técnica
-**Revisión externa:** Pendiente antes de beta pública de producto
+**Revisión externa:** Pendiente antes de la primera versión oficial o de cualquier despliegue remoto que cambie el modelo de riesgo
 
 Este documento describe controles técnicos existentes. No constituye una auditoría de seguridad externa.
 
@@ -72,7 +74,7 @@ Bootstrap 5.3.8 se carga actualmente desde **cdn.jsdelivr.net** con Subresource 
 
 Esto produce una conexión técnica del navegador al CDN y puede revelar metadatos ordinarios de red.
 
-Servir dependencias críticas localmente continúa como objetivo pre-beta.
+Servir dependencias críticas localmente continúa como objetivo antes de la primera versión oficial y se revisará específicamente en SEC.2/REL.1.
 
 ## 7. Verificación externa de fecha
 
@@ -153,14 +155,15 @@ Después de convertir el repositorio en público se confirmaron:
 
 La revisión manual del 2026-08-19 mostró cero alertas abiertas en Code scanning, Secret scanning y Dependabot. Este resultado es una evidencia puntual, no una garantía permanente; los paneles deben seguir revisándose.
 
-## 12. Pendientes pre-beta
+## 12. Pendientes antes de la primera versión oficial
 
-GOV.1.5 completó internamente el threat model, los procedimientos de derechos/incidentes, la revisión de logs y la evaluación de terceros/TLS. Permanecen pendientes, según el alcance final de publicación de producto:
+GOV.1.5 completó internamente el threat model, los procedimientos de derechos/incidentes, la revisión de logs y la evaluación de terceros/TLS. Permanecen pendientes, según el alcance final de producto:
 
 - servir dependencias críticas localmente cuando corresponda;
 - revisión jurídica externa de textos, privacidad, licencia y publicación de producto;
 - hardening y configuración de producción para un despliegue remoto concreto;
-- auditoría de seguridad adicional si cambia la arquitectura, persistencia, red o modelo multiusuario.
+- auditoría de seguridad adicional si cambia la arquitectura, persistencia, red o modelo multiusuario;
+- cierre de SEC.2 y REV.1 en los términos definidos por el plan maestro.
 
 ## 12.1. Cierre interno GOV.1.5
 
@@ -188,5 +191,7 @@ No afirma:
 - idoneidad automática para Internet.
 
 ## 14. Historia
+
+La revisión de GOV.1.5 se originó sobre `0.0.23-beta`. La posterior apertura pública del repositorio y PLAN.1 no reescriben ese cierre; actualizan únicamente el estado vivo y los gates futuros.
 
 `docs/historico/normativa_privacidad/SEGURIDAD_PRIVACIDAD_PRE_GOV1_3_R3.md`

@@ -1,15 +1,15 @@
 # Roadmap
 
 **Estado:** vigente
-**Versión de aplicación:** `0.0.25-beta`
-**Fecha de revisión:** 2026-08-19
+**Versión de aplicación:** `0.0.26-beta`
+**Fecha de revisión:** 2026-08-20
 
 Este roadmap describe **estado actual y trabajo futuro**. La evolución detallada ya completada se conserva en `RELEASES.md`, `CHANGELOG.md` y `docs/historico/`.
 
 ## 1. Programa GOV.1 — Auditoría, Gobierno y Trazabilidad Pre-Beta
 
 **Estado general:** cerrado el 2026-08-18.
-**Decisión de cierre:** UX.4.6e queda descongelada y pasa a ser el siguiente bloque activo.
+**Decisión de cierre:** como formulación histórica del cierre GOV.1, **UX.4.6e queda descongelada**; posteriormente fue cerrada en `0.0.25-beta`.
 
 - [x] **GOV.1.1 — Inventario y reconstrucción histórica**
   - inventario del repositorio;
@@ -89,7 +89,7 @@ Este roadmap describe **estado actual y trabajo futuro**. La evolución detallad
   - [x] tag anotado y firmado `v0.0.24-beta` creado después de merge, validación post-merge y CI verde;
   - [x] auditoría de GitHub con `Python 3.13`, `Python 3.14` y `Auditoría de gobernanza`;
   - [x] decisión de reanudar UX.4.6e;
-  - [x] gates pre-publicación preservados sin declarar la beta pública lista.
+  - [x] gates de publicación preservados sin declarar una versión oficial lista.
 
 ## 2. Estado funcional del producto
 
@@ -114,18 +114,24 @@ Este roadmap describe **estado actual y trabajo futuro**. La evolución detallad
 
 ### Pendiente o incompleto
 
+- Paso 4 — proyección salarial/laboral;
+- Paso 5 — escenarios de retiro;
+- Paso 6 — resultados/exportación;
+- sección pública «Cómo se calcula» para SEBD, Mixto y SUCGS;
+- Centro de desarrollo sobre Developer Diagnostics;
+- hardening integral;
+- reconstrucción detallada del CHANGELOG `0.0.1-beta`–`0.0.21-beta`;
 - persistencia voluntaria;
 - informes PDF;
 - exportación final seleccionable;
 - auditoría WCAG 2.2 ampliada con tecnologías de apoyo/dispositivos;
-- revisión jurídica externa previa a primera beta pública de producto;
-- diseño/hardening específico si se decide un despliegue remoto;
-- revisión jurídica externa de la estrategia de publicación/licencia antes de beta pública/comercial;
+- revisión jurídica externa previa a la primera versión oficial;
+- revisión jurídica externa de estrategia de publicación/licencia;
 - parámetros oficiales que la documentación identifica como no disponibles o no reconstruibles con fidelidad.
 
-## 3. UX.4.6 — trabajo reanudado después de GOV.1
+## 3. UX.4.6 — trabajo funcional
 
-**Bloque activo:** UX.4.6f — Paso 4 · Proyección salarial/laboral.
+**Estado:** UX.4.6e cerrado; UX.4.6f es el siguiente bloque funcional, temporalmente precedido por PLAN.1.
 
 - [x] **UX.4.6e — Estandarización técnica, comentarios y coherencia de interfaz post-GOV.1**
   - [x] R1 — auditoría integral del código y definición del patrón documental por tecnología;
@@ -136,19 +142,48 @@ Este roadmap describe **estado actual y trabajo futuro**. La evolución detallad
   - [x] R6 — documentación transversal y normalización definitiva de la secuencia UX.4.6; 586 pruebas en `OK`;
   - [x] R7 — regresiones y auditoría de coherencia código/interfaz/documentación; 598 pruebas en `OK`;
   - [x] checkpoint pre-R8 — identidad visual oficial, favicon, Social Preview, visibilidad pública y revalidación de seguridad GitHub; 624 pruebas en `OK`;
-  - [x] R8 — prueba funcional manual y automática completa hasta Paso 3; reconsentimiento, procedencia editable y exclusión/reinclusión documental validados; 644 pruebas en `OK` antes del cierre documental;
+  - [x] R8 — prueba funcional manual y automática completa hasta Paso 3; reconsentimiento, procedencia editable y exclusión/reinclusión documental validados; R8.2 cerró con 644 pruebas en `OK`;
   - [x] R9 — cierre técnico y publicación del hito;
     - [x] R9.1 — candidato local `0.0.25-beta` validado con 660 pruebas en `OK`, documentación coherente y `git diff --check` limpio;
-    - [x] R9.2 — PR #21 integrado por squash en `18e81e4f`, checks requeridos verdes, contenido post-merge idéntico al head validado y tag formal `v0.0.25-beta` asociado.
+    - [x] R9.2 — PR #21 integrado por squash; PR #22 completó el cierre documental; `main` final `7affa00e2530aeede066c10ecfee8c6dbd49b10b`; tag firmado `v0.0.25-beta`.
 - [ ] **UX.4.6f — Paso 4 · Proyección salarial/laboral**
 - [ ] **UX.4.6g — Paso 5 · Escenarios de retiro**
 - [ ] **UX.4.6h — Paso 6 · Resultados y exportación**
+- [ ] **UX.4.6i — Cómo se calcula**
 
-La visibilidad pública del repositorio no cambia la etapa funcional: `0.0.25-beta` continúa siendo pre-beta de producto y la aplicación sigue orientada a ejecución local.
+## 4. PLAN.1 y secuencia hacia 1.0
 
-Las revisiones UX futuras deben reutilizar los contratos visuales, de navegación, procedencia, privacidad y validación ya consolidados.
+**Bloque transversal activo:** PLAN.1 — R4.2, cierre remoto del candidato local `0.0.26-beta` después de R4.1 validada con **720 pruebas en `OK`**.
 
-## 4. Persistencia e informes
+La secuencia completa y sus criterios se documentan en `PLAN_MAESTRO_HACIA_1_0.md`.
+
+Estado interno de PLAN.1:
+
+- [x] R1 — política de versionado oficial futuro, validador y plan maestro;
+- [x] R2 — documentación primaria/transversal, ADR-168 y saneamiento de metadata viva;
+- [x] R3 — terminología beta/oficial, privacidad/licencia y guard de referencias históricas;
+- [ ] R4 — auditoría final y publicación del hito;
+  - [x] R4.1 — candidato local `0.0.26-beta` validado con **720 pruebas en `OK`**, compilación Python, sintaxis JavaScript y `git diff --check` limpio;
+  - [ ] R4.2 — commit firmado, PR, CI remota, cierre documental y tag firmado `v0.0.26-beta`.
+
+Resumen:
+
+1. PLAN.1 — alineación maestra;
+2. UX.4.6f — Paso 4;
+3. UX.4.6g — Paso 5;
+4. UX.4.6h — Paso 6;
+5. UX.4.6i — Cómo se calcula;
+6. DEV.2 — Centro de desarrollo;
+7. SEC.2 — Hardening integral;
+8. DOC.2 — CHANGELOG histórico detallado;
+9. PERSIST.1 — Persistencia voluntaria y segura;
+10. REP.1 — Informes y exportaciones;
+11. A11Y.2 — WCAG 2.2 ampliada;
+12. REV.1 — revisión normativa/jurídica/privacidad/seguridad;
+13. QA.1 — auditoría integral de cierre beta;
+14. REL.1 — preparación de la primera versión oficial.
+
+## 5. Persistencia e informes
 
 Fase futura:
 
@@ -162,7 +197,7 @@ Fase futura:
 
 Cualquier persistencia modifica el análisis de privacidad y exige revisión antes de implementarse.
 
-## 5. Normativa y motores
+## 6. Normativa y motores
 
 Trabajo continuo:
 
@@ -172,9 +207,9 @@ Trabajo continuo:
 - no reconstruir saldos/bonos actuariales sin fuente suficiente;
 - mantener visibles las limitaciones del modelo.
 
-## 6. Accesibilidad y calidad
+## 7. Accesibilidad y calidad
 
-Antes de una publicación amplia de la aplicación:
+Antes de una publicación oficial amplia de la aplicación:
 
 - auditoría WCAG 2.2 más completa;
 - pruebas con lector de pantalla;
@@ -183,19 +218,36 @@ Antes de una publicación amplia de la aplicación:
 - pruebas de teclado completas;
 - revisión de exportaciones e informes accesibles.
 
-## 7. Criterio para primera beta pública
+## 8. Criterio para primera versión oficial
 
-La familia `0.1.0-beta.1` solo podrá evaluarse cuando:
+La primera versión oficial objetivo será:
+
+```text
+Versión 1.0.0.0
+Build 000001
+Tag v1.0.0.0
+```
+
+Solo podrá materializarse cuando:
 
 - [x] GOV.1 esté cerrado;
-- [x] exista una licencia decidida;
-- [x] seguridad y privacidad tengan procedimientos pre-beta suficientes;
-- [x] la documentación pública pre-beta esté coherente al cierre GOV.1;
-- [x] la suite y CI de gobierno estén en verde;
-- [x] no existan discrepancias conocidas entre versión, código y documentación de GOV.1;
-- [x] las limitaciones materiales estén declaradas;
+- [x] exista una licencia decidida para la etapa actual;
+- [x] seguridad y privacidad tengan procedimientos internos base;
 - [x] repositorio, metadata, identidad y controles de seguridad pública básicos estén configurados;
-- [ ] se complete/revise el alcance funcional restante de UX.4.6e–h;
-- [ ] se complete la revisión jurídica externa prevista antes de la primera beta pública de producto;
-- [ ] se cierre la auditoría ampliada de accesibilidad y cualquier gate de despliegue aplicable;
-- [ ] se decida expresamente qué funciones quedan dentro de la primera beta pública.
+- [x] UX.4.6e esté cerrado;
+- [ ] PLAN.1 esté cerrado;
+- [ ] UX.4.6f–UX.4.6i estén cerrados;
+- [ ] DEV.2 esté cerrado;
+- [ ] SEC.2 esté cerrado;
+- [ ] DOC.2 esté cerrado;
+- [ ] PERSIST.1 esté cerrado si forma parte del alcance 1.0;
+- [ ] REP.1 esté cerrado si forma parte del alcance 1.0;
+- [ ] A11Y.2 esté cerrado;
+- [ ] REV.1 esté cerrado;
+- [ ] QA.1 esté cerrado;
+- [ ] REL.1 complete build reproducible, hashes, firma, documentación y empaquetado;
+- [ ] se decida expresamente el alcance definitivo de `1.0.0.0`.
+
+La línea `0.0.N-beta` continúa durante el desarrollo. No existe una familia futura vigente `0.1.0-beta.1`.
+
+La visibilidad pública del repositorio no cambia la etapa funcional ni convierte una beta de desarrollo en versión oficial.

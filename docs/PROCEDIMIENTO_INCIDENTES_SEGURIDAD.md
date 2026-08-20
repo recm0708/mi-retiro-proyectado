@@ -1,10 +1,13 @@
 # Procedimiento de respuesta a incidentes de seguridad y privacidad
 
-**Estado:** GOV.1.5 R2 — vigente como procedimiento interno pre-beta
-**Versión de aplicación revisada:** `0.0.23-beta`
-**Fecha:** 2026-08-18
+**Estado:** GOV.1.5 R2 — vigente como procedimiento interno
+**Versión de aplicación revisada:** `0.0.26-beta`
+**Versión base histórica:** `0.0.25-beta`
+**Versión base histórica:** `0.0.23-beta`
+**Fecha de cierre original:** 2026-08-18
+**Última revisión documental:** PLAN.1 R3B2 — 2026-08-20
 **Clasificación:** Seguridad / Privacidad / Procedimiento
-**Revisión jurídica externa:** Pendiente antes de beta pública
+**Revisión jurídica externa:** Pendiente antes de la primera versión oficial o cuando un incidente real requiera evaluación jurídica
 
 Este procedimiento define la respuesta interna ante eventos que puedan comprometer confidencialidad, integridad, disponibilidad o tratamiento legítimo de datos personales en Mi Retiro Proyectado.
 
@@ -21,7 +24,7 @@ No constituye un plan certificado de respuesta a incidentes ni sustituye la eval
 - ANTAI — preguntas frecuentes:
   `https://antai.gob.pa/preguntas-frecuentes-de-proteccion-de-datos-personales/`.
 
-ANTAI ha reiterado públicamente el deber de confidencialidad y la necesidad de reportar con inmediatez vulneraciones al principio de seguridad e informar al titular cuando sus datos hayan sido violados.
+ANTAI ha reiterado públicamente el deber de confidencialidad y la necesidad de reportar **con inmediatez** vulneraciones al principio de seguridad e informar al titular cuando sus datos hayan sido violados.
 
 ## 2. Qué se considera incidente
 
@@ -330,3 +333,7 @@ Este procedimiento no afirma que:
 - el proyecto cuente ya con un SOC/CSIRT;
 - se haya realizado una auditoría forense externa;
 - la revisión jurídica esté completada.
+
+## 16. Historia
+
+El contrato funcional de este procedimiento se cerró originalmente en GOV.1.5 R2 sobre `0.0.23-beta`. PLAN.1 actualiza únicamente su metadata viva y el gate futuro; no cambia el flujo de respuesta ni convierte una meta interna en plazo legal.
