@@ -74,7 +74,7 @@ Objetivo:
 - preservar sin reescritura la documentación histórica;
 - mantener `0.0.N-beta` durante la etapa de desarrollo.
 
-**Estado de PLAN.1:** R1–R3 cerradas; R4.1 validada localmente sobre `0.0.26-beta` con **720 pruebas en `OK`**. PLAN.1 no se considera cerrado hasta completar R4.2.
+**Estado de PLAN.1:** R1–R3 y R4.1 cerradas; R4.2 integró el PR #23, superó los checks remotos y revalidó `main` con **720 pruebas en `OK`**. El tag permanece bloqueado hasta integrar y revalidar sin `SyntaxWarning` la higiene pre-tag.
 
 Revisiones internas:
 

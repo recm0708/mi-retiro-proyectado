@@ -5,7 +5,7 @@
 **Versión base histórica:** `0.0.25-beta`
 **Base documental histórica:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal histórica preservada:** UX.4.6e R8 — validación funcional y procedencia editable — 2026-08-19
-**Última revisión transversal:** PLAN.1 R4.1 — candidato local validado `0.0.26-beta` — 2026-08-20
+**Última revisión transversal:** PLAN.1 R4.2 — higiene pre-tag después del PR #23 — 2026-08-20
 **Clasificación:** Técnica / Calidad
 
 La estrategia combina pruebas automatizadas, CI, casos sintéticos/anonimizados y validación manual cuando una propiedad no puede demostrarse suficientemente con código.
@@ -162,7 +162,9 @@ R3B2 añadió **8 regresiones específicas** para threat model, procedimientos G
 
 R4.1 promovió `VERSION` a `0.0.26-beta`, actualizó metadata de documentación viva, incorporó la auditoría integral de PLAN.1 y añadió **10 regresiones específicas** de cierre. La revisión fue ejecutada y cerró localmente con **720 pruebas en `OK`**, compilación Python correcta, validación de sintaxis JavaScript correcta y `git diff --check` limpio.
 
-R4.2 no añade todavía una nueva regresión ni cambia el conteo. Antes de crear el commit de cierre se debe repetir el mismo gate de **720 pruebas en `OK`** sobre esta documentación ya actualizada. Commit, PR, CI remota y tag formal `v0.0.26-beta` pertenecen exclusivamente a R4.2.
+R4.2 materializó el commit de rama firmado `7c50d989f5c6d266db26c9625367dd82e9895aba`, abrió el PR #23 y obtuvo `success` en `Python 3.13`, `Python 3.14` y `Auditoría de gobernanza`. El PR fue integrado por squash y `main` quedó en `497097f720c98f6e5a7ed689cf91368011a96be1`, verificado por GitHub.
+
+La revalidación local posterior sobre ese `main` repitió **720 pruebas en `OK`**, compilación Python correcta, sintaxis JavaScript correcta, `git diff --check` limpio y working tree limpio. Durante la importación de la suite apareció, sin convertir ninguna prueba en fallo, un `SyntaxWarning` en `tests/test_plan1_documentacion_transversal.py` por la secuencia `.\VERSION`. El tag se mantiene bloqueado: esta revisión pre-tag convierte ese literal a cadena raw y exige repetir el mismo gate de **720 pruebas en `OK`** sin la advertencia antes de crear `v0.0.26-beta`.
 
 La política vigente conserva las referencias históricas a `0.1.0-beta.1` cuando documentan decisiones o planes anteriores, pero exige que los documentos de planificación actual identifiquen `1.0.0.0` como primera versión oficial objetivo y mantengan Build separado de `VERSION`.
 

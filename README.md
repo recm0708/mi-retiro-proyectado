@@ -24,7 +24,7 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 - **Etapa:** desarrollo beta; repositorio de código público y ejecución de aplicación orientada actualmente a entorno local
 - **Programa GOV.1:** cerrado — Auditoría, Gobierno y Trazabilidad Pre-Beta
 - **Bloque transversal activo:** PLAN.1 — Alineación maestra hacia la primera versión oficial
-- **PLAN.1:** R1–R3 cerradas; R4.1 validada localmente con **720 pruebas en `OK`**; R4.2 queda pendiente de commit firmado, PR, CI remota y tag formal
+- **PLAN.1:** R1–R4.1 cerradas; R4.2 integró el PR #23 por squash y superó los checks remotos; el gate post-merge confirmó **720 pruebas en `OK`**, pero el tag permanece bloqueado hasta revalidar sin `SyntaxWarning` la higiene pre-tag
 - **Bloque activo:** UX.4.6f — referencia histórica del cierre de `0.0.25-beta`; su ejecución material queda temporalmente precedida por PLAN.1
 - **Siguiente bloque funcional:** UX.4.6f — Paso 4 · Proyección salarial/laboral
 - **GOV.1.4:** Observabilidad y Developer Diagnostics cerrado
@@ -140,7 +140,7 @@ v0.0.24-beta
 
 `0.0.25-beta` cierra UX.4.6e después de la validación funcional R8, el gate local de **660 pruebas en `OK`** y la integración de los PR #21 y #22. Su tag formal asociado es `v0.0.25-beta`; PLAN.1 se ejecuta antes de reanudar materialmente UX.4.6f.
 
-`0.0.26-beta` es el candidato local validado de cierre de PLAN.1. R4.1 confirmó **720 pruebas en `OK`**, compilación Python, sintaxis JavaScript y `git diff --check` limpio. Esta validación local **no implica que el tag `v0.0.26-beta` ya exista**: commit firmado, PR, CI remota y tag firmado pertenecen a R4.2.
+`0.0.26-beta` ya fue integrado en `main` mediante el PR #23. El commit de rama `7c50d989f5c6d266db26c9625367dd82e9895aba` fue firmado; los checks `Python 3.13`, `Python 3.14` y `Auditoría de gobernanza` quedaron en verde; el squash resultante es `497097f720c98f6e5a7ed689cf91368011a96be1`. La revalidación post-merge alcanzó **720 pruebas en `OK`**, pero expuso un `SyntaxWarning` en una regresión documental. La revisión pre-tag corrige esa advertencia sin cambiar lógica ni conteo; `v0.0.26-beta` sigue sin crearse hasta repetir el gate limpio.
 
 Objetivo de release estable:
 

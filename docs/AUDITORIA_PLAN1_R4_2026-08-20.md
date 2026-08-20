@@ -1,6 +1,6 @@
 # Auditoría integral PLAN.1 R4
 
-**Estado:** R4.1 validada localmente — R4.2 pendiente
+**Estado:** R4.2 — PR #23 integrado; higiene pre-tag pendiente
 **Versión candidata:** `0.0.26-beta`
 **Versión base del programa:** `0.0.25-beta`
 **Fecha:** 2026-08-20
@@ -77,18 +77,28 @@ La ejecución local confirmó **720 pruebas en `OK`**, compilación Python, sint
 
 ## 6. Gate remoto R4.2
 
-PLAN.1 solo se declarará cerrado después de:
+Evidencia ya materializada:
 
-1. commit de cierre firmado;
-2. Pull Request hacia `main`;
-3. checks requeridos `Python 3.13`, `Python 3.14` y `Auditoría de gobernanza` en `success`;
+1. commit de rama firmado: `7c50d989f5c6d266db26c9625367dd82e9895aba`;
+2. PR #23 abierto contra `main`;
+3. `Python 3.13`, `Python 3.14` y `Auditoría de gobernanza` en `success`;
 4. integración por squash;
-5. sincronización de `main`;
-6. cierre documental con evidencia real;
-7. CI sobre el SHA final de `main`;
-8. creación y verificación del tag firmado `v0.0.26-beta`.
+5. `main` resultante: `497097f720c98f6e5a7ed689cf91368011a96be1`, verificado por GitHub;
+6. sincronización local de `main`;
+7. gate post-merge: **720 pruebas en `OK`**, compilación Python, sintaxis JavaScript y `git diff --check` correctos.
 
-Hasta entonces PLAN.1 permanece en R4.
+La suite post-merge produjo un `SyntaxWarning` en una regresión documental por usar `.\VERSION` dentro de una cadena normal de Python. La advertencia no cambió el resultado de las 720 pruebas, pero viola el criterio de cierre limpio adoptado para el tag.
+
+Higiene pre-tag:
+
+- convertir el literal a cadena raw sin alterar el texto esperado;
+- mantener exactamente 720 pruebas;
+- integrar la corrección mediante PR y CI requerida;
+- sincronizar el nuevo `main`;
+- repetir el gate sin `SyntaxWarning`;
+- solo entonces crear y verificar el tag firmado `v0.0.26-beta`.
+
+Hasta completar esos puntos PLAN.1 permanece en R4.2.
 
 ## 7. Siguiente bloque
 

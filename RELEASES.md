@@ -151,7 +151,7 @@ Evidencia de cierre:
 
 No se declara una versión oficial de producto con este hito.
 
-### `0.0.26-beta` — 2026-08-20 — candidato local validado PLAN.1 R4.1
+### `0.0.26-beta` — 2026-08-20 — candidato R4.2 en higiene pre-tag
 
 Quinta versión formal bajo `VERSIONING.md` y candidato local validado de cierre de PLAN.1.
 
@@ -163,13 +163,18 @@ Evidencia acumulada antes del cierre remoto:
 - la documentación viva se audita contra el candidato sin modificar motores, fórmulas ni normativa JSON;
 - R4.1 fue validada localmente con **720 pruebas en `OK`**, `python -m compileall app`, validación de sintaxis JavaScript y `git diff --check` limpio.
 
-Estado remoto del candidato:
+Estado remoto y post-merge:
 
-- Pull Request: pendiente;
-- checks `Python 3.13`, `Python 3.14` y `Auditoría de gobernanza`: pendientes;
+- commit de rama firmado: `7c50d989f5c6d266db26c9625367dd82e9895aba`;
+- Pull Request #23: integrado por squash;
+- checks `Python 3.13`, `Python 3.14` y `Auditoría de gobernanza`: `success`;
+- commit de `main`: `497097f720c98f6e5a7ed689cf91368011a96be1`, verificado por GitHub;
+- revalidación post-merge: **720 pruebas en `OK`**, compilación Python, sintaxis JavaScript y `git diff --check` correctos;
+- incidencia pre-tag: `SyntaxWarning` en una cadena de prueba que contiene `.\VERSION`;
+- corrección: literal convertido a cadena raw, sin cambio funcional ni aumento del inventario;
 - tag `v0.0.26-beta`: **no creado todavía**.
 
-El tag solo podrá crearse después de integrar el cierre R4.2, sincronizar `main` y confirmar CI remota verde.
+El tag permanece bloqueado hasta integrar esta higiene pre-tag y repetir el mismo gate de 720 pruebas sobre el `main` resultante sin la advertencia.
 
 ## 5. Migración criptográfica de tags — materializada
 

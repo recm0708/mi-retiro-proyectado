@@ -1,8 +1,9 @@
-"""PLAN.1 R4.1 — candidato local validado y promoción a 0.0.26-beta."""
+"""PLAN.1 R4.2 — cierre remoto, evidencia post-merge e higiene pre-tag."""
 
 from pathlib import Path
 import re
 import unittest
+import warnings
 
 from app.core.config import APP_VERSION
 from app.core.version import version_valida
@@ -12,7 +13,7 @@ DOCS = ROOT / "docs"
 
 
 class TestPlan1R4CandidatoCierre(unittest.TestCase):
-    """Protege el cierre local de R4.1 sin adelantar PR, CI o tag."""
+    """Protege la evidencia remota real y mantiene bloqueado el tag hasta un gate limpio."""
 
     def setUp(self):
         self.version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
@@ -25,8 +26,9 @@ class TestPlan1R4CandidatoCierre(unittest.TestCase):
     def test_readme_muestra_candidato_validado_y_preserva_0_0_25(self):
         texto = (ROOT / "README.md").read_text(encoding="utf-8")
         self.assertIn("**Versión formal vigente:** `0.0.26-beta`", texto)
-        self.assertIn("R4.1 validada localmente", texto)
+        self.assertIn("R4.2 integró el PR #23 por squash", texto)
         self.assertIn("**720 pruebas en `OK`**", texto)
+        self.assertIn("`SyntaxWarning`", texto)
         self.assertIn("**UX.4.6e:** cerrada en `0.0.25-beta`", texto)
         self.assertIn("v0.0.25-beta", texto)
 
@@ -35,20 +37,25 @@ class TestPlan1R4CandidatoCierre(unittest.TestCase):
         self.assertIn("| `0.0.26-beta` | Soportada durante la etapa beta vigente |", texto)
         self.assertIn("| `0.0.25-beta` y anteriores | Históricas", texto)
 
-    def test_changelog_registra_r4_1_real_sin_fingir_tag(self):
+    def test_changelog_registra_r4_2_real_sin_fingir_tag(self):
         texto = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
         self.assertIn("## [0.0.26-beta] — 2026-08-20", texto)
         self.assertIn("R3B2", texto)
         self.assertIn("**710 pruebas en `OK`**", texto)
         self.assertIn("R4.1 promovió `VERSION` a `0.0.26-beta`", texto)
         self.assertIn("**720 pruebas en `OK`**", texto)
-        self.assertIn("`v0.0.26-beta` no se crea hasta completar PR, CI y R4.2", texto)
+        self.assertIn("PR #23", texto)
+        self.assertIn("497097f720c98f6e5a7ed689cf91368011a96be1", texto)
+        self.assertIn("`SyntaxWarning`", texto)
+        self.assertIn("`v0.0.26-beta` continúa sin crearse", texto)
 
     def test_releases_registra_candidato_sin_tag_anticipado(self):
         texto = (ROOT / "RELEASES.md").read_text(encoding="utf-8")
-        self.assertIn("### `0.0.26-beta` — 2026-08-20 — candidato local validado PLAN.1 R4.1", texto)
+        self.assertIn("### `0.0.26-beta` — 2026-08-20 — candidato R4.2 en higiene pre-tag", texto)
         self.assertIn("**720 pruebas en `OK`**", texto)
         self.assertIn("tag `v0.0.26-beta`: **no creado todavía**", texto)
+        self.assertIn("Pull Request #23", texto)
+        self.assertIn("`success`", texto)
         self.assertIn("v0.0.25-beta", texto)
         self.assertIn("7affa00e2530aeede066c10ecfee8c6dbd49b10b", texto)
 
@@ -57,23 +64,30 @@ class TestPlan1R4CandidatoCierre(unittest.TestCase):
         plan = (DOCS / "PLAN_MAESTRO_HACIA_1_0.md").read_text(encoding="utf-8")
         self.assertIn("[x] R4.1 — candidato local `0.0.26-beta` validado", roadmap)
         self.assertIn("**720 pruebas en `OK`**", roadmap)
-        self.assertIn("[ ] R4.2 — commit firmado, PR, CI remota", roadmap)
+        self.assertIn("[ ] R4.2 — cierre remoto y tag firmado", roadmap)
+        self.assertIn("[x] PR #23 integrado por squash", roadmap)
+        self.assertIn("[ ] corregir y revalidar sin `SyntaxWarning`", roadmap)
         self.assertIn("**Versión candidata de cierre de PLAN.1:** `0.0.26-beta`", plan)
-        self.assertIn("PLAN.1 no se considera cerrado hasta completar R4.2", plan)
+        self.assertIn("R4.2 integró el PR #23", plan)
+        self.assertIn("tag permanece bloqueado", plan)
 
-    def test_validacion_registra_r4_1_con_720_como_evidencia(self):
+    def test_validacion_registra_postmerge_y_higiene_pretag(self):
         texto = (DOCS / "VALIDACION.md").read_text(encoding="utf-8")
         self.assertIn("cerró con **710 pruebas en `OK`**", texto)
         self.assertIn("cerró localmente con **720 pruebas en `OK`**", texto)
-        self.assertIn("R4.2 no añade todavía una nueva regresión", texto)
-        self.assertNotIn("El valor 720 es un **objetivo de validación**", texto)
+        self.assertIn("PR #23", texto)
+        self.assertIn("497097f720c98f6e5a7ed689cf91368011a96be1", texto)
+        self.assertIn("`SyntaxWarning`", texto)
+        self.assertIn("repetir el mismo gate de **720 pruebas en `OK`** sin la advertencia", texto)
 
     def test_auditoria_r4_documenta_frontera_local_y_remota(self):
         texto = (DOCS / "AUDITORIA_PLAN1_R4_2026-08-20.md").read_text(encoding="utf-8")
-        self.assertIn("**Estado:** R4.1 validada localmente — R4.2 pendiente", texto)
+        self.assertIn("**Estado:** R4.2 — PR #23 integrado; higiene pre-tag pendiente", texto)
         self.assertIn("R3B2 | 710 pruebas en `OK`", texto)
         self.assertIn("Ran 720 tests", texto)
-        self.assertIn("`v0.0.26-beta` tampoco se crea en R4.1", texto)
+        self.assertIn("gate post-merge: **720 pruebas en `OK`**", texto)
+        self.assertIn("`SyntaxWarning`", texto)
+        self.assertIn("tag firmado `v0.0.26-beta`", texto)
         self.assertIn("## 6. Gate remoto R4.2", texto)
 
     def test_documentacion_viva_revisada_con_version_candidata(self):
@@ -97,6 +111,12 @@ class TestPlan1R4CandidatoCierre(unittest.TestCase):
             if match and match.group(1) != self.version:
                 errores.append(f"{path.name}:{match.group(1)}")
         self.assertEqual([], errores)
+
+        transversal_path = ROOT / "tests/test_plan1_documentacion_transversal.py"
+        transversal = transversal_path.read_text(encoding="utf-8")
+        with warnings.catch_warnings():
+            warnings.simplefilter("error", SyntaxWarning)
+            compile(transversal, str(transversal_path), "exec")
 
     def test_indice_enlaza_auditoria_y_preserva_cierre_ux(self):
         texto = (DOCS / "INDICE.md").read_text(encoding="utf-8")
