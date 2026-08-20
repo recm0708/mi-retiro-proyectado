@@ -1,9 +1,12 @@
 # Limitaciones conocidas
 
 **Estado:** Vigente
-**Versión de aplicación revisada:** `0.0.23-beta`
+**Versión de aplicación revisada:** `0.0.26-beta`
+**Versión base histórica:** `0.0.25-beta`
+**Versión base histórica:** `0.0.23-beta`
 **Base documental preservada:** GOV.1.3 R4 — 2026-08-17
-**Revisión transversal vigente:** GOV.1.5 R3 — 2026-08-18
+**Revisión transversal histórica:** GOV.1.5 R3 — 2026-08-18
+**Última revisión documental:** PLAN.1 R2C — 2026-08-20
 **Clasificación:** Pública / Técnica / Riesgo
 
 Este registro enumera limitaciones conocidas que deben permanecer visibles hasta que una fase posterior las elimine o sustituya.
@@ -51,12 +54,14 @@ Developer Diagnostics solo registra estado de cache, cantidades, outcome y durac
 
 ## 5. Privacidad y seguridad
 
-Pendientes antes de beta pública:
+Pendientes antes de la primera versión oficial:
 
 - revisión jurídica externa;
-- revisión jurídica externa;
 - hardening y pruebas de un despliegue remoto concreto si se decide implementarlo;
-- decisión final pre-beta sobre servir Bootstrap localmente o aceptar explícitamente el tercero.
+- decisión final sobre servir Bootstrap localmente o aceptar explícitamente el tercero;
+- cierre de SEC.2 y revisión de los controles de seguridad que dependan del alcance final.
+
+La revisión jurídica externa continúa como un único gate; no se duplica por aparecer en más de un documento de gobierno.
 
 ## 6. Dependencias y red
 
@@ -64,7 +69,7 @@ Bootstrap se obtiene actualmente de jsDelivr, por lo que el navegador realiza un
 
 El backend puede consultar infraestructura CSS para fecha de referencia.
 
-Las dependencias críticas deberán reevaluarse antes del empaquetado público.
+Las dependencias críticas deberán reevaluarse antes del empaquetado de la primera versión oficial.
 
 ## 7. Observabilidad
 
@@ -91,7 +96,8 @@ No se debe interpretar el número de RF preservados como igual al número de req
 - Los commits y tags nuevos del mantenedor están sujetos a la política de firma SSH y los tags publicados son inmutables bajo ruleset.
 - `LICENSE` adopta una política propietaria pre-beta; una publicación pública/comercial mantiene pendiente revisión jurídica externa y verificación de avisos de terceros.
 - `SECURITY.md` define el canal y la política de divulgación responsable; la disponibilidad de funciones avanzadas de GitHub depende del plan/visibilidad del repositorio.
-- No existe aún una beta pública declarada.
+- La aplicación permanece en la línea beta `0.0.N-beta`; **no existe todavía una versión oficial declarada**.
+- La visibilidad pública del repositorio no equivale a un despliegue productivo ni a la liberación de `1.0.0.0`.
 
 ## 10. Cierre de una limitación
 

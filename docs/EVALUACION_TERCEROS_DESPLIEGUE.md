@@ -1,16 +1,19 @@
 # Evaluación de terceros, despliegue y revisión pre-publicación
 
 **Estado:** Vigente — GOV.1.5 R3
-**Versión de aplicación revisada:** `0.0.23-beta`
-**Fecha:** 2026-08-18
+**Versión de aplicación revisada:** `0.0.26-beta`
+**Versión base histórica:** `0.0.25-beta`
+**Versión base histórica:** `0.0.23-beta`
+**Fecha de cierre interno original:** 2026-08-18
+**Última revisión documental:** PLAN.1 R3A — 2026-08-20
 **Clasificación:** Seguridad / Privacidad / Terceros / Despliegue
-**Revisión jurídica externa:** Pendiente antes de beta pública
+**Revisión jurídica externa:** Pendiente antes de la primera versión oficial o de un despliegue remoto
 
-Este documento cierra la evaluación interna de terceros y despliegue de GOV.1.5. No declara que Mi Retiro Proyectado sea apto para exposición pública en Internet ni sustituye una revisión jurídica, de infraestructura o de seguridad externa.
+Este documento conserva la evaluación interna de terceros y despliegue cerrada en GOV.1.5 y actualiza su frontera futura. No declara que Mi Retiro Proyectado sea apto para exposición pública en Internet ni sustituye una revisión jurídica, de infraestructura o de seguridad externa.
 
 ## 1. Escenario soportado actualmente
 
-El escenario soportado por el proyecto pre-beta es:
+El escenario soportado por la etapa beta actual es:
 
 ```text
 navegador local → http://127.0.0.1:8000 → FastAPI/Uvicorn local
@@ -44,12 +47,12 @@ Riesgo residual:
 - metadata ordinaria de red/navegador;
 - dependencia de cadena de suministro.
 
-Decisión pre-beta:
+Decisión histórica de GOV.1.5/GOV.1.8:
 
 - riesgo aceptado temporalmente para desarrollo local;
 - mantener SRI, versión fija y CSP;
-- servir Bootstrap localmente sigue siendo la opción preferida antes de una publicación amplia;
-- GOV.1.8 revalidó esta excepción temporal; servir Bootstrap localmente sigue siendo la opción preferida antes de una publicación amplia y debe reevaluarse en el gate de beta/despliegue.
+- servir Bootstrap localmente sigue siendo la opción preferida antes de una distribución oficial amplia;
+- SEC.2/REL.1 deben reevaluar esta excepción antes de `1.0.0.0`.
 
 ### Infraestructura oficial CSS para fecha de referencia
 
@@ -101,7 +104,6 @@ No deben subirse a GitHub:
 - solicitudes de derechos reales;
 - evidencia sensible de incidentes;
 - logs diagnósticos reales con contenido sensible.
-
 
 ### Shields.io — badges del README
 
@@ -229,7 +231,7 @@ Por ello, toda ampliación del esquema de logs reabre revisión de seguridad.
 
 GOV.1.5 completa la **preparación interna**, no la revisión jurídica profesional.
 
-Antes de una beta pública o despliegue remoto deben entregarse para revisión, como mínimo:
+Antes de la primera versión oficial o de soportar un despliegue remoto deben entregarse para revisión, como mínimo:
 
 - `POLITICA_PRIVACIDAD.md`;
 - `TERMINOS_USO_PRIVACIDAD.md`;
@@ -284,7 +286,7 @@ No declarar un despliegue remoto como soportado hasta completar y evidenciar:
 
 ## 12. Cierre interno de GOV.1.5
 
-Con R1, R2 y R3 quedan documentados internamente:
+Con R1, R2 y R3 quedaron documentados internamente:
 
 - threat model;
 - derechos del titular;
@@ -294,4 +296,6 @@ Con R1, R2 y R3 quedan documentados internamente:
 - criterios TLS/despliegue;
 - frontera de revisión jurídica.
 
-La revisión jurídica externa y la preparación de un despliegue remoto siguen siendo **gates pre-publicación**, no tareas que se declaren realizadas sin evidencia.
+La revisión jurídica externa y la preparación de un despliegue remoto siguen siendo **gates pendientes**, no tareas que se declaren realizadas sin evidencia.
+
+> **Nota posterior — PLAN.1 R3A:** la expresión histórica “beta pública” deja de utilizarse como gate futuro vigente. El proyecto ya se encuentra en etapa beta `0.0.N-beta`; la frontera futura de producto es `1.0.0.0`. Esta aclaración no reescribe el cierre GOV.1.5.

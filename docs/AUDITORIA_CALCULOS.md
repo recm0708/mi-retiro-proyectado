@@ -1,7 +1,8 @@
 # Auditoría de cálculos
 
 **Estado:** Vigente
-**Versión de aplicación revisada:** `0.0.23-beta`
+**Versión de aplicación revisada:** `0.0.26-beta`
+**Versión base histórica:** `0.0.23-beta`
 **Revisión documental:** GOV.1.3 R4 — 2026-08-17
 **Clasificación:** Técnica / Auditoría
 

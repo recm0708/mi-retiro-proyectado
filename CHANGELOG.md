@@ -6,7 +6,27 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ## [Unreleased]
 
-Sin cambios posteriores al candidato `0.0.25-beta`.
+Sin cambios posteriores al candidato local `0.0.26-beta`.
+
+## [0.0.26-beta] — 2026-08-20
+
+### PLAN.1 — alineación hacia la primera versión oficial
+
+- mantenida `0.0.N-beta` como línea de desarrollo beta y sustituido `0.1.0-beta.1` como objetivo futuro vigente;
+- definida `1.0.0.0` como primera versión oficial objetivo, condicionada al cierre de todos los gates del plan maestro;
+- adoptada la convención oficial `MAYOR.MENOR.PARCHE.REVISIÓN`, propia del producto y distinta de SemVer estricto;
+- definido Build independiente de seis dígitos para artefactos oficiales reproducibles, sin incorporarlo a `VERSION`, tags ni commits individuales;
+- preparado `app/core/version.py` para validar tanto la familia beta vigente como la futura familia oficial de cuatro componentes sin modificar `VERSION`;
+- creado `docs/PLAN_MAESTRO_HACIA_1_0.md` con la secuencia de 14 bloques hasta REL.1;
+- alineados README, RELEASES, ROADMAP, cierre GOV.1, índice, transparencia y proceso de release, preservando las formulaciones históricas que describen planes anteriores;
+- ADR-168 registra la transición directa desde la etapa beta a la versión oficial y difiere la fuente canónica del Build hasta REL.1;
+- R1 fue validada localmente con **665 pruebas en `OK`**; R2A con **670 pruebas en `OK`**; R2B1 con **676 pruebas en `OK`**; R2B2 cerró con **684 pruebas en `OK`**;
+- R2C saneó metadata viva de Observabilidad, Limitaciones y Preparación pública, distinguió versión base histórica de versión revisada y cerró con **689 pruebas en `OK`**;
+- R3A alineó seguridad, soporte y despliegue con la etapa beta vigente, preservó las bases históricas GOV.1.5 y cerró con **695 pruebas en `OK`**;
+- R3B1 alineó licencia, dependencias, política de privacidad, términos y matriz Ley 81, preservó `2026-08-16.1` y cerró con **702 pruebas en `OK`**;
+- R3B2 actualizó threat model y procedimientos GOV.1.5, incorporó el guard automático de referencias históricas y cerró con **710 pruebas en `OK`**;
+- R4.1 promovió `VERSION` a `0.0.26-beta`, actualizó la documentación viva y cerró localmente con **720 pruebas en `OK`**, compilación Python, sintaxis JavaScript y `git diff --check` limpio;
+- `v0.0.25-beta` permanece inmutable; `v0.0.26-beta` no se crea hasta completar PR, CI y R4.2.
 
 ## [0.0.25-beta] — 2026-08-19
 

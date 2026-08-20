@@ -14,14 +14,15 @@ DOCS = ROOT / "docs"
 class TestUx46eR91CandidatoCierre(unittest.TestCase):
     """Protege el candidato antes del PR, CI y tag formal."""
 
-    def test_version_canonica_es_0_0_25_y_app_version_coincide(self):
+    def test_version_canonica_actual_coincide_y_0_0_25_queda_historica(self):
         version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
-        self.assertEqual("0.0.25-beta", version)
         self.assertEqual(version, APP_VERSION)
+        self.assertIn("0.0.25-beta", (ROOT / "RELEASES.md").read_text(encoding="utf-8"))
 
     def test_readme_declara_cierre_y_siguiente_bloque_sin_beta_publica(self):
         texto = (ROOT / "README.md").read_text(encoding="utf-8")
-        self.assertIn("**Versión formal vigente:** `0.0.25-beta`", texto)
+        version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
+        self.assertIn(f"**Versión formal vigente:** `{version}`", texto)
         self.assertIn("**UX.4.6e:** cerrada en `0.0.25-beta`", texto)
         self.assertIn("PR #21 integrado por squash", texto)
         self.assertIn("**Bloque activo:** UX.4.6f", texto)
@@ -29,16 +30,17 @@ class TestUx46eR91CandidatoCierre(unittest.TestCase):
         self.assertIn("0.1.0-beta.1", texto)
         indice = (DOCS / "INDICE.md").read_text(encoding="utf-8")
         self.assertIn(
-            "**Versión de aplicación revisada:** `0.0.25-beta`",
+            f"**Versión de aplicación revisada:** `{version}`",
             indice,
         )
         self.assertIn("UX.4.6e R9.2", indice)
         self.assertIn("cierre formal `0.0.25-beta`", indice)
 
-    def test_security_soporta_nueva_linea_y_archiva_anterior(self):
+    def test_security_soporta_linea_actual_y_archiva_anteriores(self):
         texto = (ROOT / "SECURITY.md").read_text(encoding="utf-8")
-        self.assertIn("| `0.0.25-beta` | Soportada", texto)
-        self.assertIn("| `0.0.24-beta` y anteriores | Históricas", texto)
+        version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
+        self.assertIn(f"| `{version}` | Soportada", texto)
+        self.assertIn("Históricas; no reciben correcciones independientes", texto)
 
     def test_changelog_promueve_acumulado_a_0_0_25(self):
         texto = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")

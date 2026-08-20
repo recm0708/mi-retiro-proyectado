@@ -2,6 +2,7 @@
 
 **Fecha de reconstrucción histórica:** 2026-08-17
 **Fuente:** historial Git de `recm0708/mi-retiro-proyectado`
+**Revisión de planificación hacia 1.0:** 2026-08-20
 
 ## 1. Naturaleza del registro
 
@@ -126,7 +127,7 @@ v0.0.24-beta
 
 El tag fue creado **después** de integrar el PR #17, sincronizar `main`, repetir la validación y confirmar CI remota verde. El objeto tag anotado y firmado `3cdf6f84804c1bb4bdda9e449eb0932528557aa3` apunta al commit `653900cebd84019fbbaa3ff3cfd91536ccab76eb`.
 
-`0.0.24-beta` no es una beta pública. El cierre GOV.1 habilita la reanudación de UX.4.6e.
+`0.0.24-beta` conserva el contexto histórico con el que se cerró GOV.1 y **no es una beta pública** según la terminología empleada en ese cierre.
 
 ### `0.0.25-beta` — 2026-08-19
 
@@ -139,13 +140,36 @@ Evidencia de cierre:
 - PR #21: `feat(ux): cerrar UX.4.6e y preparar 0.0.25-beta`;
 - head validado: `a064bf745f4fb5e55e70f6ae3fd9b2bb80af8148`;
 - checks requeridos del PR: `Python 3.13`, `Python 3.14` y `Auditoría de gobernanza` en `success`;
-- squash integrado en `main`: `18e81e4ff58a1ad9622d366f7add10b7674f6e44`;
-- commit de squash verificado por GitHub;
-- árbol del head y del squash: `e0c4f314c5365a89178bd0fadb8a950286abb6ff`, confirmando identidad exacta del contenido validado e integrado;
-- tag formal asociado: `v0.0.25-beta`, creado sobre el commit final de cierre después de integrar la documentación de R9.2 y confirmar el gate;
-- no se declara una GitHub Release ni una beta pública de la aplicación.
+- squash funcional integrado en `main`: `18e81e4ff58a1ad9622d366f7add10b7674f6e44`;
+- PR #22 cerró la documentación final de release;
+- commit final de `main`: `7affa00e2530aeede066c10ecfee8c6dbd49b10b`;
+- validación local post-merge: **660 pruebas en `OK`**, compilación Python y sintaxis JavaScript correctas, `git diff --check` y working tree limpios;
+- tag formal `v0.0.25-beta` con firma SSH válida;
+- tag formal asociado: `v0.0.25-beta`;
+- objeto tag remoto `303d4fe58b200a2c65120758ebe9d991e85b03c5`;
+- el tag resuelve al commit final `7affa00e2530aeede066c10ecfee8c6dbd49b10b`.
 
-La primera beta pública continúa reservada a la familia `0.1.0-beta.1`.
+No se declara una versión oficial de producto con este hito.
+
+### `0.0.26-beta` — 2026-08-20 — candidato local validado PLAN.1 R4.1
+
+Quinta versión formal bajo `VERSIONING.md` y candidato local validado de cierre de PLAN.1.
+
+Evidencia acumulada antes del cierre remoto:
+
+- `v0.0.25-beta` permanece inmutable y continúa apuntando a `7affa00e2530aeede066c10ecfee8c6dbd49b10b`;
+- R1–R3 de PLAN.1 cerraron progresivamente con 665, 670, 676, 684, 689, 695, 702 y finalmente **710 pruebas en `OK`**;
+- R4.1 promueve `VERSION` y `APP_VERSION` a `0.0.26-beta`;
+- la documentación viva se audita contra el candidato sin modificar motores, fórmulas ni normativa JSON;
+- R4.1 fue validada localmente con **720 pruebas en `OK`**, `python -m compileall app`, validación de sintaxis JavaScript y `git diff --check` limpio.
+
+Estado remoto del candidato:
+
+- Pull Request: pendiente;
+- checks `Python 3.13`, `Python 3.14` y `Auditoría de gobernanza`: pendientes;
+- tag `v0.0.26-beta`: **no creado todavía**.
+
+El tag solo podrá crearse después de integrar el cierre R4.2, sincronizar `main` y confirmar CI remota verde.
 
 ## 5. Migración criptográfica de tags — materializada
 
@@ -163,14 +187,24 @@ Resultado de auditoría Git:
 
 La materialización criptográfica está completada. Desde entonces los tags publicados son inmutables.
 
-El tag posterior `v0.0.24-beta` fue creado ya bajo esta política y eleva el inventario vigente a **24/24 tags con firma SSH válida**.
+El tag posterior `v0.0.24-beta` fue creado ya bajo esta política y elevó el inventario a 24 tags firmados. `v0.0.25-beta` es el siguiente tag formal firmado y eleva el inventario formal vigente a 25 tags.
 
-## 6. Próxima línea pública prevista
+## 6. Línea oficial futura prevista
 
-La primera beta pública objetivo mantiene la familia:
+La etapa beta continúa con la convención:
 
 ```text
-0.1.0-beta.1
+0.0.N-beta
 ```
 
-Su publicación **no se deriva automáticamente por terminar GOV.1**. Depende del alcance funcional de UX.4.6e–g, los gates pre-publicación documentados, la revisión jurídica externa cuando corresponda, accesibilidad y validación final de la beta.
+Cuando todos los gates de producto estén cerrados, la primera versión oficial objetivo será:
+
+```text
+Versión 1.0.0.0
+Build 000001
+Tag v1.0.0.0
+```
+
+La planificación anterior que reservaba `0.1.0-beta.1` como futura primera beta pública queda sustituida por PLAN.1. Este cambio de planificación no reescribe la evidencia histórica de los documentos y versiones que la mencionaron mientras estaba vigente.
+
+La transición a `1.0.0.0` no ocurre automáticamente por terminar un bloque concreto. Depende del cierre de la secuencia definida en `docs/PLAN_MAESTRO_HACIA_1_0.md`, incluidos los gates funcionales, de seguridad, accesibilidad, revisión y release.

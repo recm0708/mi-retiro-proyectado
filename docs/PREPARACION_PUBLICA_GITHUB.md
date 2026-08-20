@@ -1,12 +1,17 @@
 # Preparación pública de GitHub
 
 **Estado:** Completada para visibilidad pública — mantenimiento vigente
-**Versión de aplicación revisada:** `0.0.24-beta`
+**Versión de aplicación revisada:** `0.0.26-beta`
+**Versión base histórica:** `0.0.25-beta`
+**Versión base del checkpoint público:** `0.0.24-beta`
 **Fecha de preparación original:** 2026-08-18
 **Revalidación pública:** 2026-08-19
+**Última revisión documental:** PLAN.1 R2C — 2026-08-20
 **Clasificación:** GitHub / Comunidad / Publicación
 
-Este documento conserva la preparación realizada antes del cambio de visibilidad y registra el estado vigente después de convertir el repositorio en público. La publicación del **repositorio de código** no equivale a declarar una beta pública de la aplicación ni sustituye los gates jurídicos, de accesibilidad, alcance funcional o despliegue de producto.
+Este documento conserva la preparación realizada antes del cambio de visibilidad y registra el estado vigente después de convertir el repositorio en público. La publicación del **repositorio de código** no equivale a declarar una versión oficial de la aplicación, ni constituye por sí sola un despliegue de producción, ni sustituye los gates jurídicos, de accesibilidad, alcance funcional o seguridad.
+
+> **Nota histórica:** el checkpoint pre-R8 se documentó originalmente como una publicación del repositorio que **no equivalía a declarar una beta pública de la aplicación**. PLAN.1 aclara posteriormente que la línea `0.0.N-beta` ya constituye la etapa beta de desarrollo; la frontera futura relevante es la primera versión oficial `1.0.0.0`.
 
 ## 1. Metadata About
 
@@ -162,4 +167,6 @@ Topics, labels, Social Preview, visibilidad y parte de los settings de seguridad
 - controles de seguridad del apartado 8 habilitados;
 - cero alertas abiertas durante la revalidación del 2026-08-19.
 
-Estos valores deben revisarse nuevamente cuando cambie la configuración del repositorio o antes de una release pública de producto.
+Estos valores deben revisarse nuevamente cuando cambie la configuración del repositorio o antes de la primera versión oficial.
+
+La apertura pública del repositorio permanece separada de la decisión futura de empaquetar, distribuir o desplegar `1.0.0.0`.

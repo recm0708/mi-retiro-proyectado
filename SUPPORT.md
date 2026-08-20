@@ -2,9 +2,9 @@
 
 **Proyecto:** Mi Retiro Proyectado
 **Estado:** vigente
-**Fecha:** 2026-08-19
+**Fecha de revisión:** 2026-08-20
 
-Este documento indica qué canal utilizar según el tipo de necesidad. El proyecto se encuentra en desarrollo pre-beta y no ofrece un SLA contractual ni asesoría jurídica, financiera o previsional individual.
+Este documento indica qué canal utilizar según el tipo de necesidad. El proyecto se encuentra en **desarrollo beta** y no ofrece un SLA contractual ni asesoría jurídica, financiera o previsional individual.
 
 ## 1. Antes de reportar
 
@@ -45,7 +45,8 @@ El soporte del repositorio no:
 - sustituye una resolución o certificación de la CSS;
 - garantiza un monto de pensión;
 - sustituye asesoría jurídica, actuarial o financiera profesional;
-- acepta documentos personales reales como material de demostración público.
+- acepta documentos personales reales como material de demostración público;
+- implica que la aplicación haya alcanzado `1.0.0.0` ni que exista un despliegue oficial.
 
 ## 8. Conducta
 

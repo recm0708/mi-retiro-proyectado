@@ -3,9 +3,12 @@
 **Producto:** Mi Retiro Proyectado
 **Versión del texto:** `2026-08-16.1`
 **Estado:** Vigente en la aplicación
-**Versión de aplicación revisada:** `0.0.23-beta`
-**Revisión documental:** GOV.1.3 R3 — 2026-08-17
-**Revisión jurídica externa:** Pendiente antes de publicación pública/comercial
+**Versión de aplicación revisada:** `0.0.26-beta`
+**Versión base histórica:** `0.0.25-beta`
+**Versión base histórica:** `0.0.23-beta`
+**Revisión documental base:** GOV.1.3 R3 — 2026-08-17
+**Última revisión documental:** PLAN.1 R3B1 — 2026-08-20
+**Revisión jurídica externa:** Pendiente antes de la primera versión oficial o de un cambio material del tratamiento/despliegue
 
 Este documento describe las condiciones funcionales actualmente implementadas. No constituye una certificación jurídica ni una resolución de la CSS.
 
@@ -111,7 +114,9 @@ Mi Retiro Proyectado no implementa cookies propias de publicidad, analítica, se
 
 El proyecto toma como referencia los derechos reconocidos por la Ley 81 y las orientaciones de ANTAI.
 
-Hasta que exista un procedimiento formal pre-beta, el canal de contacto es:
+El procedimiento formal interno ya se documenta en `PROCEDIMIENTO_DERECHOS_TITULAR.md`.
+
+Canal de contacto:
 
 `ruben.canizares@outlook.com`
 
@@ -125,7 +130,7 @@ No debe cargar documentación de otra persona sin autorización aplicable.
 
 Se aplican controles técnicos documentados, pero no se garantiza riesgo cero.
 
-Un despliegue público requiere endurecimiento y evaluación adicional.
+Un despliegue remoto requiere endurecimiento y evaluación adicional antes de considerarse soportado.
 
 ## 17. Cambios
 
@@ -139,7 +144,7 @@ Los cambios materiales en tratamiento de datos exigen revisar la versión de pri
 
 ## 19. Revisión externa
 
-Estos términos requieren revisión jurídica formal antes de una publicación pública/comercial.
+Estos términos requieren revisión jurídica formal en REV.1 antes de la primera versión oficial y deben revisarse nuevamente si cambia materialmente el tratamiento o el modelo de despliegue.
 
 ## 20. Historia
 

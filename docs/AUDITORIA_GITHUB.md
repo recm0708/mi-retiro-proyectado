@@ -1,7 +1,8 @@
 # Auditoría de GitHub y controles de repositorio
 
 **Estado:** Vigente — GOV.1.6 cerrado / revalidado en GOV.1.8 y publicación del repositorio
-**Versión de aplicación revisada:** `0.0.24-beta`
+**Versión de aplicación revisada:** `0.0.26-beta`
+**Versión base histórica:** `0.0.24-beta`
 **Fecha base:** 2026-08-18
 **Revalidación:** 2026-08-19
 **Clasificación:** Gobierno / GitHub / CI / Auditoría

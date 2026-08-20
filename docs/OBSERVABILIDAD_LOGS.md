@@ -1,8 +1,11 @@
 # Observabilidad y Developer Diagnostics
 
 **Estado:** Vigente — GOV.1.4 cerrado
-**Versión de aplicación revisada:** `0.0.23-beta`
-**Fecha:** 2026-08-17
+**Versión de aplicación revisada:** `0.0.26-beta`
+**Versión base histórica:** `0.0.25-beta`
+**Versión base histórica:** `0.0.23-beta`
+**Fecha de cierre original:** 2026-08-17
+**Última revisión documental:** PLAN.1 R2C — 2026-08-20
 **Clasificación:** Técnica / Desarrollo / Privacidad
 
 Mi Retiro Proyectado incorpora un mecanismo de diagnóstico **exclusivo de desarrollo**, desactivado por defecto. Su objetivo es depurar fallos, tiempos y dependencias técnicas sin convertir el log en una segunda base de datos de simulaciones.
@@ -196,7 +199,7 @@ R1/R2 incorporan trece pruebas específicas:
 - cache/consulta externa;
 - protección por `.gitignore` y contrato documental.
 
-Con una línea base previa de 474 pruebas, la suite esperada después de R2 es:
+Con una línea base previa de 474 pruebas, la suite esperada después de R2 fue:
 
 ```text
 Ran 487 tests
@@ -217,7 +220,7 @@ Toda ampliación del esquema debe reevaluar redacción, finalidad y riesgo.
 
 ## 11. Cierre GOV.1.4
 
-GOV.1.4 queda cerrado después de validar:
+GOV.1.4 quedó cerrado después de validar:
 
 - 7/7 regresiones del núcleo de observabilidad;
 - 6/6 regresiones de integración;
@@ -227,6 +230,8 @@ GOV.1.4 queda cerrado después de validar:
 - `git diff --check`;
 - coherencia de README, Arquitectura, Índice, Seguridad/Privacidad, Transparencia, Limitaciones, Validación, Roadmap y Guía interna.
 
-El siguiente bloque de gobierno es GOV.1.5 — Seguridad, privacidad y transparencia.
+Históricamente, el siguiente bloque de gobierno fue GOV.1.5 — Seguridad, privacidad y transparencia.
 
-GOV.1.4 no modifica fórmulas previsionales ni `VERSION`; la aplicación permanece en `0.0.23-beta`.
+GOV.1.4 no modificó fórmulas previsionales ni `VERSION`; en su cierre original la aplicación permanecía en `0.0.23-beta`.
+
+> **Nota posterior — PLAN.1 R2C / 2026-08-20:** este documento fue revalidado sobre `0.0.25-beta` sin cambiar el contrato runtime de Developer Diagnostics. DEV.2 queda reservado para la futura interfaz de Centro de desarrollo y SEC.2 para el hardening asociado. La versión `0.0.23-beta` se conserva arriba únicamente como base histórica del cierre GOV.1.4.

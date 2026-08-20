@@ -10,7 +10,7 @@
 
 [![Validación continua](https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/ci.yml)
 [![Auditoría de gobernanza](https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/auditoria-gobernanza.yml/badge.svg?branch=main)](https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/auditoria-gobernanza.yml)
-![Versión](https://img.shields.io/badge/versi%C3%B3n-0.0.25--beta-2563eb)
+![Versión](https://img.shields.io/badge/versi%C3%B3n-0.0.26--beta-2563eb)
 ![Python](https://img.shields.io/badge/Python-3.13%20%7C%203.14-3776AB?logo=python&logoColor=white)
 ![Licencia](https://img.shields.io/badge/licencia-propietaria-6B7280)
 
@@ -20,24 +20,26 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 
 ## Estado del proyecto
 
-- **Versión formal vigente:** `0.0.25-beta`
-- **Etapa:** desarrollo pre-beta; repositorio de código público y ejecución de aplicación orientada actualmente a entorno local
+- **Versión formal vigente:** `0.0.26-beta`
+- **Etapa:** desarrollo beta; repositorio de código público y ejecución de aplicación orientada actualmente a entorno local
 - **Programa GOV.1:** cerrado — Auditoría, Gobierno y Trazabilidad Pre-Beta
-- **Bloque activo:** UX.4.6f — Paso 4 · Proyección salarial/laboral
+- **Bloque transversal activo:** PLAN.1 — Alineación maestra hacia la primera versión oficial
+- **PLAN.1:** R1–R3 cerradas; R4.1 validada localmente con **720 pruebas en `OK`**; R4.2 queda pendiente de commit firmado, PR, CI remota y tag formal
+- **Bloque activo:** UX.4.6f — referencia histórica del cierre de `0.0.25-beta`; su ejecución material queda temporalmente precedida por PLAN.1
+- **Siguiente bloque funcional:** UX.4.6f — Paso 4 · Proyección salarial/laboral
 - **GOV.1.4:** Observabilidad y Developer Diagnostics cerrado
 - **GOV.1.5:** Seguridad, privacidad y transparencia cerrado internamente
 - **GOV.1.6:** Controles GitHub y auditoría automática cerrado
 - **GOV.1.7:** Licencia propietaria pre-beta y avisos de terceros cerrado
 - **GOV.1.8:** auditoría final y cierre pre-beta de gobierno cerrado
 - **UX.4.6e:** cerrada en `0.0.25-beta`; PR #21 integrado por squash, 660 pruebas en `OK`, checks requeridos verdes y cierre formal asociado a `v0.0.25-beta`
-- **Siguiente bloque funcional:** UX.4.6f — Paso 4 · Proyección salarial/laboral
 - **Preparación pública del repositorio:** 21 labels y 20/20 topics configurados; `sebd-panama` adoptado como topic SEBD; Social Preview e identidad visual oficial configurados
 - **Seguridad del repositorio público:** Dependency graph, Dependabot, CodeQL Default setup, Secret Protection, Push protection y Private vulnerability reporting habilitados; revisión manual del 2026-08-19 sin alertas abiertas
-- **Primera beta pública objetivo de la aplicación:** familia `0.1.0-beta.1`
+- **Primera versión oficial objetivo:** `1.0.0.0` con `Build 000001`, únicamente después de cerrar todos los gates definidos en el plan maestro
 
-La visibilidad pública del repositorio **no convierte `0.0.25-beta` en una beta pública de la aplicación, no constituye un despliegue de producción y no modifica la licencia propietaria vigente**.
+La visibilidad pública del repositorio **no convierte una beta de desarrollo `0.0.N-beta` en versión oficial, no constituye un despliegue de producción y no modifica por sí sola la licencia vigente**.
 
-La versión se obtiene exclusivamente del archivo [`VERSION`](VERSION). La política completa se documenta en [`VERSIONING.md`](VERSIONING.md).
+La versión se obtiene exclusivamente del archivo [`VERSION`](VERSION). La política completa se documenta en [`VERSIONING.md`](VERSIONING.md), y la secuencia restante hacia 1.0 se mantiene en [`docs/PLAN_MAESTRO_HACIA_1_0.md`](docs/PLAN_MAESTRO_HACIA_1_0.md).
 
 ## Capacidades implementadas
 
@@ -72,7 +74,8 @@ El proyecto aplica estos criterios:
 - procesamiento local y minimización de datos personales;
 - observabilidad de desarrollo sin logging de PII ni valores financieros;
 - pruebas automatizadas y CI antes de cerrar hitos;
-- documentación como parte obligatoria de cada cambio.
+- documentación como parte obligatoria de cada cambio;
+- sincronización de código, pruebas, interfaz, normativa y documentación cuando un cambio altera contratos compartidos.
 
 ## Documentación
 
@@ -103,6 +106,7 @@ Documentos principales:
 - [`docs/LICENCIA_Y_DISTRIBUCION.md`](docs/LICENCIA_Y_DISTRIBUCION.md) — decisión de licencia y estrategia de distribución;
 - [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) — avisos y obligaciones de terceros;
 - [`docs/ROADMAP.md`](docs/ROADMAP.md) — estado actual y próximos hitos;
+- [`docs/PLAN_MAESTRO_HACIA_1_0.md`](docs/PLAN_MAESTRO_HACIA_1_0.md) — secuencia de 14 bloques hasta la primera versión oficial;
 - [`docs/DECISIONES.md`](docs/DECISIONES.md) — decisiones ADR;
 - [`docs/REGISTRO_CAMBIOS_HISTORICO.md`](docs/REGISTRO_CAMBIOS_HISTORICO.md) — mapa histórico de evolución;
 - [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md) — reglas de participación y convivencia;
@@ -132,9 +136,19 @@ GOV.1.4 a GOV.1.7 se desarrollaron sobre `0.0.23-beta` porque fueron revisiones 
 v0.0.24-beta
 ```
 
-`0.0.24-beta` **no es la primera beta pública de la aplicación**. El repositorio de código ya es público, pero la familia de producto objetivo para la primera beta continúa siendo `0.1.0-beta.1`.
+`0.0.24-beta` permanece como un hito histórico de la etapa beta. La planificación antigua que reservaba `0.1.0-beta.1` como futura primera beta pública fue sustituida por PLAN.1: la línea `0.0.N-beta` continúa durante el desarrollo y la transición futura será directamente a la primera versión oficial cuando se cierren todos sus gates.
 
-`0.0.25-beta` cierra UX.4.6e después de la validación funcional R8, el gate local de **660 pruebas en `OK`** y la integración por squash del PR #21. Su tag formal asociado es `v0.0.25-beta`; UX.4.6f queda habilitada como siguiente bloque funcional.
+`0.0.25-beta` cierra UX.4.6e después de la validación funcional R8, el gate local de **660 pruebas en `OK`** y la integración de los PR #21 y #22. Su tag formal asociado es `v0.0.25-beta`; PLAN.1 se ejecuta antes de reanudar materialmente UX.4.6f.
+
+`0.0.26-beta` es el candidato local validado de cierre de PLAN.1. R4.1 confirmó **720 pruebas en `OK`**, compilación Python, sintaxis JavaScript y `git diff --check` limpio. Esta validación local **no implica que el tag `v0.0.26-beta` ya exista**: commit firmado, PR, CI remota y tag firmado pertenecen a R4.2.
+
+Objetivo de release estable:
+
+```text
+Versión 1.0.0.0
+Build 000001
+Tag v1.0.0.0
+```
 
 Consultar:
 

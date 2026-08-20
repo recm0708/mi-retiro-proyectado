@@ -1,10 +1,13 @@
 # Matriz interna de alineación con Ley 81 de 2019
 
 **Estado:** Vigente como control interno
-**Versión de aplicación revisada:** `0.0.23-beta`
+**Versión de aplicación revisada:** `0.0.26-beta`
+**Versión base histórica:** `0.0.25-beta`
+**Versión base histórica:** `0.0.23-beta`
 **Versión de privacidad revisada:** `2026-08-16.1`
 **Base documental:** GOV.1.3 R3 — 2026-08-17
-**Revisión transversal:** GOV.1.5 R3 — 2026-08-18
+**Revisión transversal histórica:** GOV.1.5 R3 — 2026-08-18
+**Última revisión documental:** PLAN.1 R3B1 — 2026-08-20
 **Clasificación:** Privacidad / Cumplimiento interno
 **Alcance:** No constituye certificación jurídica
 
@@ -40,7 +43,7 @@ Fuentes: `FUENTES_NORMATIVAS.md`.
 | Incidentes | Procedimiento interno documentado | Implementado documental GOV.1.5 |
 | Logging/observabilidad | Contrato seguro + revisión threat model | Implementado base GOV.1.4/GOV.1.5 |
 | TLS remoto | Obligatorio si existe despliegue remoto | Gate documentado; no aplica al localhost actual |
-| Revisión jurídica | Revisión profesional | Pendiente antes de publicación |
+| Revisión jurídica | Revisión profesional | Pendiente antes de publicación de la primera versión oficial o de un cambio material del despliegue/tratamiento |
 
 ## 3. Inventario de necesidad
 
@@ -92,11 +95,11 @@ GOV.1.5 documenta el procedimiento interno, la verificación proporcional y el r
 
 Los controles locales de borrado **no se presentan como sustituto** de ese procedimiento si en el futuro existe tratamiento remoto/persistente.
 
-## 7. Pendientes obligatorios pre-beta pública
+## 7. Pendientes obligatorios antes de la primera versión oficial
 
-- revisión jurídica externa;
+- revisión jurídica externa en REV.1;
 - hardening y validación de un despliegue remoto concreto si se implementa;
-- reevaluación de terceros antes de beta pública;
+- reevaluación de terceros antes de `1.0.0.0`;
 - reevaluación si se incorporan cuentas, nube, telemetría o analítica.
 
 ## 8. Criterio de cambio de versión de privacidad

@@ -1,9 +1,11 @@
 # Validación
 
 **Estado:** Vigente
-**Versión candidata revisada:** `0.0.25-beta`
+**Versión candidata revisada:** `0.0.26-beta`
+**Versión base histórica:** `0.0.25-beta`
 **Base documental histórica:** GOV.1.3 R4 — 2026-08-17
-**Revisión transversal:** UX.4.6e R8 — validación funcional y procedencia editable — 2026-08-19
+**Revisión transversal histórica preservada:** UX.4.6e R8 — validación funcional y procedencia editable — 2026-08-19
+**Última revisión transversal:** PLAN.1 R4.1 — candidato local validado `0.0.26-beta` — 2026-08-20
 **Clasificación:** Técnica / Calidad
 
 La estrategia combina pruebas automatizadas, CI, casos sintéticos/anonimizados y validación manual cuando una propiedad no puede demostrarse suficientemente con código.
@@ -136,6 +138,33 @@ Este cierre documental no modifica motores, cálculos, normativa ni contratos de
 - CI requerida verde después de integrar el cierre;
 - tag `v0.0.25-beta` anotado y firmado, creado después del merge final y validado antes de iniciar UX.4.6f.
 
+
+## PLAN.1 — alineación hacia la primera versión oficial
+
+PLAN.1 se ejecuta sobre `0.0.25-beta` sin mover ni recrear `v0.0.25-beta`.
+
+Evidencia local ya ejecutada:
+
+- R1 — política de versionado, soporte técnico futuro y plan maestro: **665 pruebas en `OK`**;
+- R2A — documentación primaria y preservación histórica: **670 pruebas en `OK`**;
+- R2B1 — índice, transparencia y proceso de release: **676 pruebas en `OK`**;
+- en los tres gates anteriores `git diff --check` permaneció limpio y `VERSION` continuó en `0.0.25-beta`.
+
+R2B2 añadió **8 regresiones específicas** para ADR-168, gobierno, CHANGELOG, evidencia de validación, continuidad histórica y permanencia de la versión canónica. La revisión fue ejecutada y cerró con **684 pruebas en `OK`**, `git diff --check` limpio y `VERSION` todavía en `0.0.25-beta`.
+
+R2C añadió **5 regresiones específicas** para saneamiento de metadata viva, preservación de versiones base históricas, terminología beta/oficial y eliminación de duplicaciones documentales. La revisión fue ejecutada y cerró con **689 pruebas en `OK`**, `git diff --check` limpio y `VERSION` todavía en `0.0.25-beta`.
+
+R3A añadió **6 regresiones específicas** para terminología vigente de seguridad, soporte y despliegue. La revisión fue ejecutada y cerró con **695 pruebas en `OK`**, `git diff --check` limpio y `VERSION` todavía en `0.0.25-beta`.
+
+R3B1 añadió **7 regresiones específicas** para licencia, dependencias, privacidad, términos, matriz Ley 81 y preservación de bases históricas. La revisión fue ejecutada y cerró con **702 pruebas en `OK`**, `git diff --check` limpio y `VERSION` todavía en `0.0.25-beta`.
+
+R3B2 añadió **8 regresiones específicas** para threat model, procedimientos GOV.1.5, política del guard histórico, documentos operativos y continuidad de evidencias. La revisión fue ejecutada y cerró con **710 pruebas en `OK`**, `git diff --check` limpio y `VERSION` todavía en `0.0.25-beta`.
+
+R4.1 promovió `VERSION` a `0.0.26-beta`, actualizó metadata de documentación viva, incorporó la auditoría integral de PLAN.1 y añadió **10 regresiones específicas** de cierre. La revisión fue ejecutada y cerró localmente con **720 pruebas en `OK`**, compilación Python correcta, validación de sintaxis JavaScript correcta y `git diff --check` limpio.
+
+R4.2 no añade todavía una nueva regresión ni cambia el conteo. Antes de crear el commit de cierre se debe repetir el mismo gate de **720 pruebas en `OK`** sobre esta documentación ya actualizada. Commit, PR, CI remota y tag formal `v0.0.26-beta` pertenecen exclusivamente a R4.2.
+
+La política vigente conserva las referencias históricas a `0.1.0-beta.1` cuando documentan decisiones o planes anteriores, pero exige que los documentos de planificación actual identifiquen `1.0.0.0` como primera versión oficial objetivo y mantengan Build separado de `VERSION`.
 
 ## 2. Comandos obligatorios
 

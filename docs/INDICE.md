@@ -1,8 +1,9 @@
 # Índice de documentación
 
 **Estado:** vigente
-**Versión de aplicación revisada:** `0.0.25-beta`
-**Última actualización transversal:** UX.4.6e R9.2 — cierre formal `0.0.25-beta` — 2026-08-19
+**Versión de aplicación revisada:** `0.0.26-beta`
+**Última actualización transversal:** PLAN.1 R4.1 — candidato local `0.0.26-beta` validado con 720 pruebas; R4.2 pendiente — 2026-08-20
+**Cierre histórico preservado:** UX.4.6e R9.2 — cierre formal `0.0.25-beta` — 2026-08-19
 
 Este archivo es el punto de entrada para la documentación técnica, funcional, normativa, de privacidad, validación y auditoría de Mi Retiro Proyectado.
 
@@ -11,24 +12,27 @@ Este archivo es el punto de entrada para la documentación técnica, funcional, 
 - [`../README.md`](../README.md) — presentación, alcance, instalación y estado general.
 - [`ESPECIFICACION_FUNCIONAL.md`](ESPECIFICACION_FUNCIONAL.md) — requisitos funcionales.
 - [`ROADMAP.md`](ROADMAP.md) — estado actual y próximos hitos.
+- [`PLAN_MAESTRO_HACIA_1_0.md`](PLAN_MAESTRO_HACIA_1_0.md) — secuencia transversal de 14 bloques hasta la primera versión oficial.
 - [`IDENTIDAD_VISUAL.md`](IDENTIDAD_VISUAL.md) — logo oficial, activos canónicos, favicons y Social Preview.
 
 ## 2. Gobierno y versionado
 
 - [`../GOVERNANCE.md`](../GOVERNANCE.md) — gobierno del proyecto.
-- [`../VERSIONING.md`](../VERSIONING.md) — política de versiones y diferencia entre repositorio público y beta pública de producto.
-- [`../VERSION`](../VERSION) — fuente canónica de versión.
+- [`../VERSIONING.md`](../VERSIONING.md) — política de la línea `0.0.N-beta`, versiones oficiales de cuatro componentes y Build independiente.
+- [`../VERSION`](../VERSION) — fuente canónica de versión de aplicación.
 - [`../RELEASES.md`](../RELEASES.md) — versiones, tags y reconstrucción histórica.
 - [`../CHANGELOG.md`](../CHANGELOG.md) — cambios notables por versión.
 - [`../CONTRIBUTING.md`](../CONTRIBUTING.md) — flujo de contribución.
 - [`../CODE_OF_CONDUCT.md`](../CODE_OF_CONDUCT.md) — normas de participación.
 - [`../SUPPORT.md`](../SUPPORT.md) — canales de soporte, privacidad y seguridad.
+- [`PLAN_MAESTRO_HACIA_1_0.md`](PLAN_MAESTRO_HACIA_1_0.md) — dependencias y gates previos a `1.0.0.0`.
 - [`MIGRACION_FIRMAS_GIT_2026-08-17.md`](MIGRACION_FIRMAS_GIT_2026-08-17.md) — firma SSH y migración histórica controlada.
 - [`../.github/allowed_signers`](../.github/allowed_signers) — claves públicas autorizadas.
 - [`AUDITORIA_GITHUB.md`](AUDITORIA_GITHUB.md) — controles GitHub, seguridad y auditoría automática.
 - [`PREPARACION_PUBLICA_GITHUB.md`](PREPARACION_PUBLICA_GITHUB.md) — estado y mantenimiento de metadata, topics, labels, badges, Social Preview y seguridad del repositorio público.
 - [`AUDITORIA_REPOSITORIO_2026-08-18.md`](AUDITORIA_REPOSITORIO_2026-08-18.md) — auditoría integral local/remota post-GOV.1.
 - [`AUDITORIA_UX46E_R7_2026-08-18.md`](AUDITORIA_UX46E_R7_2026-08-18.md) — auditoría transversal de coherencia código/interfaz/documentación de UX.4.6e.
+- [`AUDITORIA_PLAN1_R4_2026-08-20.md`](AUDITORIA_PLAN1_R4_2026-08-20.md) — auditoría integral y gate de cierre de PLAN.1.
 - [`CIERRE_GOV1.md`](CIERRE_GOV1.md) — evidencia definitiva del cierre GOV.1.
 - [`../LICENSE`](../LICENSE) — licencia propietaria de materiales originales.
 - [`LICENCIA_Y_DISTRIBUCION.md`](LICENCIA_Y_DISTRIBUCION.md) — evaluación y decisión de licencia.
@@ -89,7 +93,7 @@ GOV.1.5 completa los procedimientos internos. La publicación del repositorio no
 - [`AUDITORIA_CALCULOS.md`](AUDITORIA_CALCULOS.md) — reproducibilidad y revisión de resultados.
 - [`LIMITACIONES_CONOCIDAS.md`](LIMITACIONES_CONOCIDAS.md) — límites técnicos, normativos y de despliegue.
 - [`DEPENDENCIAS_TERCEROS.md`](DEPENDENCIAS_TERCEROS.md) — dependencias, licencias upstream, conexiones y riesgos.
-- [`PROCESO_RELEASE.md`](PROCESO_RELEASE.md) — gates de cierre, versión, CI y tags.
+- [`PROCESO_RELEASE.md`](PROCESO_RELEASE.md) — gates de cierre, versión, Build, CI y tags.
 
 ## 10. Validación y calidad
 
@@ -129,6 +133,7 @@ Los archivos históricos documentan lo que se pensó, probó o decidió en un mo
 - [`../RELEASES.md`](../RELEASES.md) — registro formal y retrospectivo.
 - [`../CHANGELOG.md`](../CHANGELOG.md) — cambios notables.
 - [`../VERSIONING.md`](../VERSIONING.md) — reglas de incremento y tags.
+- [`PLAN_MAESTRO_HACIA_1_0.md`](PLAN_MAESTRO_HACIA_1_0.md) — gates de transición desde beta hasta la primera versión oficial.
 
 ## Clasificación documental
 

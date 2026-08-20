@@ -16,9 +16,17 @@ class TestUx46eR8CierreFuncional(unittest.TestCase):
         texto = (DOCS / "DECISIONES.md").read_text(encoding="utf-8")
         ids = [int(x) for x in re.findall(r"(?m)^## ADR-(\d{3})\s+—", texto)]
         indice = [int(x) for x in re.findall(r"(?m)^\| ADR-(\d{3}) \|", texto)]
-        self.assertEqual(list(range(1, 168)), ids)
+        # ADR-001..ADR-167 son la evidencia histórica del cierre R8.
+        # Las decisiones posteriores pueden crecer sin invalidar ese hito,
+        # siempre que la numeración total siga siendo estrictamente consecutiva.
+        self.assertGreaterEqual(len(ids), 167)
+        self.assertEqual(list(range(1, max(ids) + 1)), ids)
         self.assertEqual(ids, indice)
-        self.assertIn("ADR indexadas:** 167", texto)
+        self.assertEqual(list(range(1, 168)), ids[:167])
+        self.assertIn(
+            "## ADR-167 — Los datos documentales confirmados son editables",
+            texto,
+        )
 
     def test_adr_167_sustituye_bloqueo_sin_anular_no_reduccion_silenciosa(self):
         texto = (DOCS / "DECISIONES.md").read_text(encoding="utf-8")
