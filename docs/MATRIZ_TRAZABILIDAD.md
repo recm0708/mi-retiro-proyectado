@@ -51,6 +51,8 @@ Esta matriz conecta contratos críticos del producto con su fuente, decisión, i
 
 | TR-025 | Alineación y densidad visual de períodos y resumen de retiro | N/A — UX/responsive | ADR-177 | `app/templates/partials/historial_salarial.html`, `app/templates/simulacion.html`, `app/templates/partials/retiro.html`, `app/static/css/design-system.css` | `tests/test_ux46g_r1_escenarios_retiro.py` | Candidato UX.4.6g R1.4.3 |
 
+| TR-026 | La guía pública explica cómo se transforman los datos de los Pasos 1–6 y los tres sistemas con parámetros versionados, fórmula general + sustitución numérica y términos definidos en contexto, sin duplicar motores; navbar, Metodología y Paso 6 enlazan sin transportar datos personales | N/A — transparencia/UX; normativa versionada existente | ADR-178 | `app/servicios/como_se_calcula.py`, `app/templates/como_se_calcula.html`, `app/static/css/como-se-calcula.css`, `app/templates/base.html`, `app/static/js/resultados_orquestacion.js`, `app/templates/metodologia.html` | `tests/test_ux46i_r1_como_se_calcula.py` | Cerrado UX.4.6i R1–R1.4 |
+
 ## 3. Cobertura de RF
 
 `ESPECIFICACION_FUNCIONAL.md` conserva el ledger RF histórico. R4 **no declara** que cada RF individual tenga ya una fila única requisito → ADR → archivo → test.

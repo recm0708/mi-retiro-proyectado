@@ -25,14 +25,15 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 - **Programa GOV.1:** cerrado — Auditoría, Gobierno y Trazabilidad Pre-Beta
 - **Programa PLAN.1:** cerrado — Alineación maestra hacia la primera versión oficial
 - **PLAN.1:** cerrado en `0.0.26-beta`; PR #23 y PR #24 integrados, **720 pruebas en `OK`** en el gate final y tag firmado `v0.0.26-beta` publicado
-- **Bloque activo:** UX.4.6i — Cómo se calcula
+- **Bloque activo:** DEV.2 — Centro de desarrollo
 
 - **UX.4.6f:** cerrado — R1/R1.1 integradas mediante PR #28 y R2 integrada mediante PR #30; el cierre lógico/matemático del Paso 4 alcanzó **756 pruebas en `OK`** en CI, con Python 3.13, Python 3.14 y Auditoría de gobernanza en verde
 - **Mantenimiento post-R1:** `pypdf 6.16.1` y `Uvicorn 0.52.3` integrados mediante PR #29; PR Dependabot #26/#27 cerrados como sustituidos, con los tres checks requeridos en verde
 - **UX.4.6g:** cerrado — R1 integrado mediante PR #32; selección contextual desde Paso 4, retiro anticipado explícito, +4 años, cobertura de fechas personalizadas, controles de fecha transversales y alineación visual final; **784 pruebas en `OK`** y CI verde en Python 3.13, Python 3.14 y Auditoría de gobernanza
 - **UX.4.6h:** cerrado — R1/R1.1/R1.2/R1.3 consolidan resultados explícitos, invalidación de salidas obsoletas, transición Mixto→SUCGS guiada, referencias SUCGS correctamente rotuladas, jerarquía visual depurada y un informe A4 imprimible independiente de la página web; gate de cierre **812 pruebas**
-- **Revisión activa:** UX.4.6i — Cómo se calcula
-- **Siguiente bloque funcional posterior:** DEV.2 — Centro de desarrollo
+- **UX.4.6i:** cerrado — R1/R1.1/R1.2/R1.3/R1.4 consolidan la guía pública `/como-se-calcula`, el recorrido de datos de los Pasos 1–6, SEBD/Mixto/SUCGS con parámetros versionados, fórmula general + ejemplo sustituido, terminología contextual, navegación directa y vínculo desde Paso 6; gate de cierre **841 pruebas**
+- **Revisión activa:** DEV.2 — Centro de desarrollo
+- **Siguiente bloque funcional posterior:** SEC.2 — Seguridad y privacidad
 - **GOV.1.4:** Observabilidad y Developer Diagnostics cerrado
 - **GOV.1.5:** Seguridad, privacidad y transparencia cerrado internamente
 - **GOV.1.6:** Controles GitHub y auditoría automática cerrado
@@ -93,6 +94,7 @@ Documentos principales:
 - [`docs/ARQUITECTURA.md`](docs/ARQUITECTURA.md) — arquitectura y componentes;
 - [`docs/MODELO_DE_DATOS.md`](docs/MODELO_DE_DATOS.md) — contratos y estructuras;
 - [`docs/MOTOR_DE_CALCULO.md`](docs/MOTOR_DE_CALCULO.md) — flujo técnico de cálculo;
+- [`docs/COMO_SE_CALCULA.md`](docs/COMO_SE_CALCULA.md) — contrato de transparencia de la guía pública de cálculo;
 - [`docs/NORMATIVA.md`](docs/NORMATIVA.md) — interpretación y aplicación normativa;
 - [`docs/FUENTES_NORMATIVAS.md`](docs/FUENTES_NORMATIVAS.md) — fuentes oficiales;
 - [`docs/IDENTIDAD_VISUAL.md`](docs/IDENTIDAD_VISUAL.md) — logo oficial, derivados, favicons y Social Preview;

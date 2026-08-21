@@ -131,7 +131,7 @@ Este roadmap describe **estado actual y trabajo futuro**. La evolución detallad
 
 ## 3. UX.4.6 — trabajo funcional
 
-**Estado:** UX.4.6e, PLAN.1, UX.4.6f, UX.4.6g y UX.4.6h cerrados; UX.4.6i — Cómo se calcula es el bloque funcional activo.
+**Estado:** UX.4.6e, PLAN.1 y UX.4.6f–UX.4.6i cerrados; DEV.2 — Centro de desarrollo es el bloque funcional activo.
 
 - [x] **UX.4.6e — Estandarización técnica, comentarios y coherencia de interfaz post-GOV.1**
   - [x] R1 — auditoría integral del código y definición del patrón documental por tecnología;
@@ -156,13 +156,17 @@ Este roadmap describe **estado actual y trabajo futuro**. La evolución detallad
   - [x] R1/R1.1 — selección salarial explícita, invalidación completa de salidas obsoletas, transición Mixto→SUCGS guiada, referencias SUCGS rotuladas y sincronización documental.
   - [x] R1.2 — claridad, jerarquía visual, comparación acreditado/proyectado, referencia personal y reducción de información redundante.
   - [x] R1.3 — informe A4 independiente para impresión; la generación/descarga directa de PDF permanece reservada a REP.1; gate de cierre **812 pruebas**.
-- [ ] **UX.4.6i — Cómo se calcula**
+- [x] **UX.4.6i — Cómo se calcula**
+  - [ ] R1 — ruta pública con procedimiento SEBD/Mixto/SUCGS, parámetros versionados, ejemplos, fuentes y vínculo contextual desde Paso 6.
+  - [ ] R1.2 — acceso desde navbar, recorrido detallado de los Pasos 1–6, formato monetario con miles y dos decimales, tablas actuariales más compactas y refuerzo visual transversal.
+  - [x] R1/R1.1/R1.2/R1.3 — guía pública, recorrido Pasos 1–6, SEBD/Mixto/SUCGS, navegación, términos en contexto, ejemplos sustituidos y refinamiento visual.
+  - [x] R1.4 — etiqueta visible simplificada a **Ejemplo** y cierre con **841 pruebas**.
 
 ## 4. PLAN.1 y secuencia hacia 1.0
 
 **Último bloque transversal cerrado:** PLAN.1 — cerrado formalmente en `0.0.26-beta` con **720 pruebas en `OK`** y tag firmado `v0.0.26-beta`.
 
-**Bloque funcional activo:** UX.4.6i — Cómo se calcula.
+**Bloque funcional activo:** DEV.2 — Centro de desarrollo.
 
 La secuencia completa y sus criterios se documentan en `PLAN_MAESTRO_HACIA_1_0.md`.
 

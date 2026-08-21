@@ -4,6 +4,7 @@
 **Versión de aplicación revisada:** `0.0.26-beta`
 **Versión base histórica:** `0.0.23-beta`
 **Revisión documental:** GOV.1.4 — 2026-08-17
+**Última actualización técnica:** UX.4.6i R1 — guía pública de cálculo — 2026-08-21
 **Clasificación:** Técnica / Pública
 
 Mi Retiro Proyectado es una aplicación web local basada en FastAPI, Jinja2 y JavaScript del navegador. La arquitectura separa presentación, contratos de datos, servicios de integración, motores previsionales, parámetros normativos y observabilidad de desarrollo.
@@ -56,6 +57,7 @@ Mi Retiro Proyectado es una aplicación web local basada en FastAPI, Jinja2 y Ja
 ### Servicios principales
 
 - `app/servicios/comparador.py`
+- `app/servicios/como_se_calcula.py` — estructura parámetros normativos para la guía pública sin ejecutar motores
 - `app/servicios/detalle_anio_actual.py`
 - `app/servicios/fecha_referencia.py`
 - `app/servicios/ficha_digital.py`
@@ -88,6 +90,7 @@ Mi Retiro Proyectado es una aplicación web local basada en FastAPI, Jinja2 y Ja
 - `app/static/js/procesamiento_adjuntos.js` — estado global accesible y exclusión de dobles ejecuciones durante análisis de archivos
 - `app/static/js/referencia_mi_retiro_seguro.js`
 - `app/static/js/resultados.js`
+- `app/static/js/resultados_orquestacion.js` — decisiones de Paso 6, enlace contextual e impresión sin duplicar fórmulas
 - `app/static/js/retiro.js`
 - `app/static/js/simulacion.js`
 - `app/static/js/tema.js`
@@ -122,7 +125,7 @@ La metadata puramente visual y diagnóstica no se convierte automáticamente en 
 
 ### 3.3. Servicios (`app/servicios/`)
 
-Los servicios normalizan, integran y coordinan cuotas, historial, detalle actual, proyección, retiro, importaciones, resultados, comparación y fecha externa.
+Los servicios normalizan, integran y coordinan cuotas, historial, detalle actual, proyección, retiro, importaciones, resultados, comparación y fecha externa. `como_se_calcula.py` es una capa de presentación: lee parámetros versionados para explicar el procedimiento, pero no importa ni ejecuta motores previsionales.
 
 `fecha_referencia.py` puede emitir eventos agregados de cache/consulta cuando Developer Diagnostics está activo. Esos eventos no incluyen URL, fecha recibida ni datos de simulación.
 
@@ -142,7 +145,7 @@ No leen PDFs, `sessionStorage`, controles HTML ni logs. Developer Diagnostics no
 
 ### 3.5. Presentación (`app/templates/`, `app/static/`)
 
-Jinja2 genera las páginas y parciales. JavaScript administra el asistente, estado temporal, importaciones, procedencia, invalidación, llamadas HTTP y representación de resultados.
+Jinja2 genera las páginas y parciales. JavaScript administra el asistente, estado temporal, importaciones, procedencia, invalidación, llamadas HTTP y representación de resultados. La ruta pública `/como-se-calcula` usa `como_se_calcula.html` y `como-se-calcula.css` para explicar el procedimiento general sin convertir la página en una calculadora paralela.
 
 JavaScript no implementa fórmulas previsionales principales ni un segundo sistema de logging de datos de negocio.
 
@@ -235,6 +238,7 @@ El siguiente inventario se deriva de los decoradores vigentes en `app/main.py`. 
 | `/api/simulacion/sucgs` |
 | `/api/sistema/fecha-referencia` |
 | `/comparar` |
+| `/como-se-calcula` |
 | `/favicon.ico` |
 | `/metodologia` |
 | `/salud` |
@@ -300,3 +304,11 @@ Paso 5 mantiene dos capas separadas: `app/static/js/retiro.js` propone y conserv
 ### Contrato transversal de fechas
 
 `app/static/js/accesibilidad.js` aplica de forma idempotente validación y clase visual a todos los `input[type=date]`, incluidos controles dinámicos. `app/static/css/accesibilidad.css` define la geometría compacta común. Las superficies pueden declarar límites `min`/`max` más restrictivos; la capa transversal solo aporta valores por defecto cuando faltan. Paso 5 consume este contrato y añade exclusivamente la explicación de cobertura contra el horizonte salarial.
+
+## 14. Guía pública de cálculo
+
+`/como-se-calcula` es una superficie pública de transparencia. `app/servicios/como_se_calcula.py` lee parámetros de `normativa/*.json` y los entrega a `app/templates/como_se_calcula.html`; no ejecuta `app/motores/` ni construye resultados individuales.
+
+El Paso 6 enlaza a la sección del sistema correspondiente mediante anclas públicas (`#sebd`, `#mixto`, `#sucgs`) sin transportar datos personales, salarios, cuotas ni montos en la URL. Las sustituciones numéricas del caso individual permanecen en la trazabilidad de resultados.
+
+La guía reutiliza el catálogo de fuentes de `app/servicios/fuentes_normativas.py`. Por tanto, una modificación normativa o de fórmula exige revisar en conjunto motor, JSON versionado, trazabilidad, guía pública y pruebas relacionadas.

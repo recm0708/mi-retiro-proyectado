@@ -1,0 +1,594 @@
+{% extends "base.html" %}
+
+{% block title %}Cómo se calcula | {{ app_name }}{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', path='/css/como-se-calcula.css') }}">
+{% endblock %}
+
+{% block content %}
+<section class="container py-4 py-lg-5 calculation-guide-page">
+  <header class="calculation-guide-hero">
+    <div>
+      <span class="calculation-guide-kicker">Transparencia del cálculo</span>
+      <h1>Cómo se calcula una estimación de retiro</h1>
+      <p class="lead mb-0">
+        Esta guía explica, en el mismo orden que usa la aplicación, qué datos intervienen,
+        qué regla se aplica y cómo se llega al resultado en SEBD, Subsistema Mixto y SUCGS.
+      </p>
+    </div>
+    <div class="calculation-guide-version" role="note">
+      <strong>Normativa versionada</strong>
+      <span>Gaceta Oficial {{ guia.gaceta_oficial }} · {{ guia.fecha_gaceta_visible }}</span>
+    </div>
+  </header>
+
+  <div class="alert alert-primary calculation-guide-note" role="note">
+    <strong>Esta página explica el procedimiento sin modificar tu simulación.</strong>
+    Aquí puedes seguir cómo se transforman cuotas, salarios, fechas y demás variables.
+    Si llegaste desde el Paso 6, tus cifras exactas continúan disponibles en
+    <strong>Ver cálculo completo</strong>.
+  </div>
+
+  <nav class="calculation-guide-system-nav" aria-label="Contenido de Cómo se calcula">
+    <a href="#flujo-general" class="calculation-guide-system-link">
+      <span>Pasos 1–6</span>
+      <strong>Tus datos hasta el resultado</strong>
+      <small>Cómo se transforman cuotas, salarios, proyecciones y fecha de retiro.</small>
+    </a>
+    <a href="#sebd" class="calculation-guide-system-link">
+      <span>SEBD</span>
+      <strong>Beneficio Definido</strong>
+      <small>Pensión normal, anticipada, proporcional e indemnización.</small>
+    </a>
+    <a href="#mixto" class="calculation-guide-system-link">
+      <span>Mixto</span>
+      <strong>BD + CAP</strong>
+      <small>Componente definido, ahorro personal y transición.</small>
+    </a>
+    <a href="#sucgs" class="calculation-guide-system-link">
+      <span>SUCGS</span>
+      <strong>Capitalización + garantías</strong>
+      <small>Componente contributivo, capa solidaria y reemplazo mínimo.</small>
+    </a>
+  </nav>
+
+  <section id="flujo-general" class="calculation-guide-section" aria-labelledby="flujo-general-titulo">
+    <div class="calculation-guide-heading">
+      <span>Primero</span>
+      <h2 id="flujo-general-titulo">Cómo se transforman tus datos de los Pasos 1 al 6</h2>
+      <p>El resultado no nace de una sola fórmula. Cada paso prepara y valida información que utiliza el siguiente.</p>
+    </div>
+
+    <ol class="calculation-guide-flow">
+      <li><strong>Datos personales</strong><span>Define edad, sexo y sistema que corresponde evaluar.</span></li>
+      <li><strong>Cuotas</strong><span>Separa lo acreditado de lo que todavía sería futuro.</span></li>
+      <li><strong>Historial salarial</strong><span>Ordena cuotas y salarios cotizados por año.</span></li>
+      <li><strong>Proyección</strong><span>Construye salarios y cotizaciones futuras sin mezclarlos con lo acreditado.</span></li>
+      <li><strong>Retiro</strong><span>Calcula la fecha, edad y cuotas estimadas de cada escenario.</span></li>
+      <li><strong>Resultado</strong><span>Clasifica la modalidad y aplica las reglas del sistema seleccionado.</span></li>
+    </ol>
+
+    <div class="calculation-guide-reference-grid">
+      <div>
+        <span>Edad de referencia general</span>
+        <strong>{{ guia.edades_referencia["FEMENINO"] }} años · femenino</strong>
+      </div>
+      <div>
+        <span>Edad de referencia general</span>
+        <strong>{{ guia.edades_referencia["MASCULINO"] }} años · masculino</strong>
+      </div>
+      <div>
+        <span>Lectura del resultado</span>
+        <strong>Dato → regla → fórmula → sustitución → resultado</strong>
+      </div>
+    </div>
+
+    <div class="calculation-guide-terms" aria-labelledby="terminos-generales-titulo">
+      <h3 id="terminos-generales-titulo">Términos que conviene distinguir</h3>
+      <dl class="calculation-guide-term-grid">
+        <div><dt>Cuota acreditada</dt><dd>Cotización que ya figura reconocida en la información utilizada por la simulación.</dd></div>
+        <div><dt>Cuota proyectada</dt><dd>Cotización futura que el escenario supone; todavía no está acreditada.</dd></div>
+        <div><dt>Salario cotizado</dt><dd>Salario reportado para cotización a la CSS. No equivale necesariamente al dinero neto recibido.</dd></div>
+        <div><dt>Fecha de corte</dt><dd>Fecha hasta la que se considera la información acreditada antes de añadir proyecciones.</dd></div>
+      </dl>
+    </div>
+
+    <h3 class="calculation-guide-subtitle">Qué hace la aplicación con la información de cada paso</h3>
+    <div class="calculation-guide-data-flow-grid">
+      <article id="paso-datos-personales" class="calculation-guide-data-card">
+        <div class="calculation-guide-step-label"><span>1</span><strong>Datos personales</strong></div>
+        <p>La fecha de nacimiento permite calcular la edad cumplida en la fecha evaluada. El sexo determina la edad de referencia general y el sistema informado decide qué reglas se consultarán al final.</p>
+        <div class="calculation-guide-formula compact">
+          <code>edad = años transcurridos desde el nacimiento, ajustados si aún no llegó el cumpleaños</code>
+          <span class="calculation-guide-example-label">Ejemplo</span>
+          <code class="calculation-guide-numeric-example">21/08/2026 − 16/11/1974 = 51 años, porque el cumpleaños de 2026 todavía no ocurrió</code>
+          <code>fecha de referencia = fecha de nacimiento + edad de referencia</code>
+          <span class="calculation-guide-example-label">Ejemplo</span>
+          <code class="calculation-guide-numeric-example">16/11/1974 + 57 años = 16/11/2031</code>
+        </div>
+        <p class="calculation-guide-data-output"><strong>Entrega al siguiente paso:</strong> edad, fecha de referencia y sistema que debe evaluarse.</p>
+      </article>
+
+      <article id="paso-cuotas" class="calculation-guide-data-card">
+        <div class="calculation-guide-step-label"><span>2</span><strong>Cuotas acreditadas y futuras</strong></div>
+        <p>El total acreditado nunca se sustituye por una proyección. Si continuarás cotizando, solo se agregan las cuotas que faltan para completar el cierre que indicaste para el año actual.</p>
+        <div class="calculation-guide-formula compact">
+          <code>cuotas restantes del año = máximo(0, cierre esperado − cuotas acreditadas del año)</code>
+          <span class="calculation-guide-example-label">Ejemplo</span>
+          <code class="calculation-guide-numeric-example">máximo(0, 12 − 5) = 7 cuotas restantes</code>
+          <code>cuotas proyectadas al cierre = cuotas acreditadas totales + cuotas restantes del año</code>
+          <span class="calculation-guide-example-label">Ejemplo</span>
+          <code class="calculation-guide-numeric-example">210 + 7 = 217 cuotas proyectadas al cierre</code>
+          <code>cuotas faltantes = máximo(0, umbral − cuotas proyectadas al cierre)</code>
+          <span class="calculation-guide-example-label">Ejemplo</span>
+          <code class="calculation-guide-numeric-example">máximo(0, 240 − 217) = 23 cuotas faltantes</code>
+        </div>
+        <p class="calculation-guide-data-output"><strong>Entrega al siguiente paso:</strong> fotografía acreditada, cierre esperado y ritmo de cotización futura.</p>
+      </article>
+
+      <article id="paso-historial" class="calculation-guide-data-card">
+        <div class="calculation-guide-step-label"><span>3</span><strong>Historial y salario actual</strong></div>
+        <p>El historial conserva por año las cuotas y el salario realmente cotizado. La aplicación comprueba que no existan años duplicados y que la suma de cuotas coincida con el total acreditado del Paso 2.</p>
+        <div class="calculation-guide-formula compact">
+          <code>salario anual = mensual × 12 = quincenal × 24 = semanal × 52</code>
+          <span class="calculation-guide-example-label">Ejemplo</span>
+          <code class="calculation-guide-numeric-example">B/.1,500.00 × 12 = B/.18,000.00 al año</code>
+          <code>salario mensual equivalente = salario anual ÷ 12</code>
+          <span class="calculation-guide-example-label">Ejemplo</span>
+          <code class="calculation-guide-numeric-example">B/.18,000.00 ÷ 12 = B/.1,500.00 mensuales</code>
+          <code>cuotas del historial = suma de cuotas de todos los años registrados</code>
+          <span class="calculation-guide-example-label">Ejemplo</span>
+          <code class="calculation-guide-numeric-example">12 + 12 + 10 = 34 cuotas registradas en esos tres años</code>
+        </div>
+        <p class="calculation-guide-data-output"><strong>Entrega al siguiente paso:</strong> años completos/parciales, salarios cotizados y salario mensual normalizado.</p>
+      </article>
+
+      <article id="paso-proyeccion" class="calculation-guide-data-card">
+        <div class="calculation-guide-step-label"><span>4</span><strong>Proyección salarial y línea temporal</strong></div>
+        <p>El escenario que eliges produce una trayectoria de salario mensual y luego la convierte en salario cotizado según las cuotas que realmente proyectas para cada año.</p>
+        <div class="calculation-guide-formula compact">
+          <code>salario futuro = salario base × (1 + porcentaje ÷ 100) ^ años transcurridos</code>
+          <span class="calculation-guide-example-label">Ejemplo</span>
+          <code class="calculation-guide-numeric-example">B/.1,500.00 × (1 + 3 ÷ 100)² = B/.1,591.35 mensuales después de 2 años</code>
+          <code>salario cotizado proyectado = salario anual proyectado × cuotas esperadas ÷ 12</code>
+          <span class="calculation-guide-example-label">Ejemplo</span>
+          <code class="calculation-guide-numeric-example">B/.19,096.20 × 10 ÷ 12 = B/.15,913.50 cotizados en un año con 10 cuotas</code>
+          <code>año actual = salario ya cotizado + salario mensual actual × cuotas restantes</code>
+          <span class="calculation-guide-example-label">Ejemplo</span>
+          <code class="calculation-guide-numeric-example">B/.7,500.00 + (B/.1,500.00 × 7) = B/.18,000.00 al cierre proyectado</code>
+          <code>tasa equivalente = ((salario futuro ÷ salario actual) ^ (1 ÷ años)) − 1</code>
+          <span class="calculation-guide-example-label">Ejemplo</span>
+          <code class="calculation-guide-numeric-example">((B/.1,800.00 ÷ B/.1,500.00) ^ (1 ÷ 3)) − 1 = 6.2659 % anual equivalente</code>
+        </div>
+        <p class="small text-secondary">Si indicas un salario futuro conocido, la aplicación calcula esta tasa equivalente hasta ese año y no inventa una nueva tasa para años posteriores.</p>
+        <p class="calculation-guide-data-output"><strong>Entrega al siguiente paso:</strong> una línea temporal que distingue Histórico, Histórico + proyectado y Proyectado.</p>
+      </article>
+
+      <article id="paso-retiro" class="calculation-guide-data-card">
+        <div class="calculation-guide-step-label"><span>5</span><strong>Escenario de retiro</strong></div>
+        <p>Cada fecha seleccionada se compara con la fecha de corte de las cuotas. El año actual respeta primero tu cierre esperado y los años siguientes utilizan las cuotas esperadas por año.</p>
+        <div class="calculation-guide-formula compact">
+          <code>cuotas adicionales = cierre pendiente del año actual + años futuros completos + parte del año de retiro</code>
+          <span class="calculation-guide-example-label">Ejemplo</span>
+          <code class="calculation-guide-numeric-example">7 del año actual + 24 de dos años completos + 6 del año de retiro = 37 cuotas adicionales</code>
+          <code>cuotas de una fracción de año = parte entera(meses completos × cuotas esperadas por año ÷ 12)</code>
+          <span class="calculation-guide-example-label">Ejemplo</span>
+          <code class="calculation-guide-numeric-example">parte entera(6 × 12 ÷ 12) = 6 cuotas para seis meses completos</code>
+          <code>cuotas estimadas al retiro = cuotas acreditadas + cuotas adicionales estimadas</code>
+          <span class="calculation-guide-example-label">Ejemplo</span>
+          <code class="calculation-guide-numeric-example">217 + 37 = 254 cuotas estimadas al retiro</code>
+        </div>
+        <p class="calculation-guide-data-output"><strong>Entrega al Paso 6:</strong> fecha de retiro, edad exacta y cuotas estimadas para cada alternativa.</p>
+      </article>
+
+      <article id="paso-resultado" class="calculation-guide-data-card">
+        <div class="calculation-guide-step-label"><span>6</span><strong>Clasificación y prestación</strong></div>
+        <p>El Paso 6 toma el escenario salarial elegido del Paso 4 y la fecha seleccionada del Paso 5. Primero determina qué modalidad puede evaluarse y después aplica las reglas propias de SEBD, Mixto o SUCGS.</p>
+        <div class="calculation-guide-formula compact">
+          <code>datos acreditados + proyección seleccionada + fecha de retiro → modalidad → cálculo del sistema</code>
+          <span class="calculation-guide-example-label">Ejemplo</span>
+          <code class="calculation-guide-numeric-example">217 cuotas acreditadas + 37 proyectadas → 254 cuotas al retiro → se clasifica la modalidad → se aplica SEBD, Mixto o SUCGS</code>
+        </div>
+        <p class="calculation-guide-data-output"><strong>Resultado visible:</strong> monto mensual o pago único, desglose, comparación, advertencias, fuentes y cálculo completo.</p>
+      </article>
+    </div>
+
+    <div class="alert alert-info calculation-guide-connection-note mb-0 mt-3" role="note">
+      <strong>Así se relacionan los pasos:</strong> una proyección nunca reemplaza lo acreditado y una fecha de retiro seleccionada no crea por sí sola un derecho. El sistema previsional se evalúa al final con la información preparada y validada en los pasos anteriores.
+    </div>
+  </section>
+
+  <section id="sebd" class="calculation-guide-section calculation-guide-system-section" aria-labelledby="sebd-titulo">
+    <div class="calculation-guide-heading">
+      <span>Sistema 1</span>
+      <h2 id="sebd-titulo">SEBD — Subsistema Exclusivamente de Beneficio Definido</h2>
+      <p>El motor primero clasifica la modalidad y después forma salario base, tasa y monto.</p>
+    </div>
+
+    <div class="calculation-guide-facts">
+      <div><span>Cuotas de referencia</span><strong>{{ guia.sebd.cuotas_referencia }}</strong></div>
+      <div><span>Mínimo para pensión proporcional</span><strong>{{ guia.sebd.cuotas_minimas_proporcional }}</strong></div>
+      <div><span>Tasa base</span><strong>{{ "%.2f"|format(guia.sebd.tasa_base_pct) }} %</strong></div>
+      <div><span>Base ordinaria</span><strong>{{ guia.sebd.mejores_anios_base }} mejores años</strong></div>
+    </div>
+
+    <div class="calculation-guide-terms" aria-labelledby="terminos-sebd-titulo">
+      <h3 id="terminos-sebd-titulo">Qué significan los términos de SEBD</h3>
+      <dl class="calculation-guide-term-grid">
+        <div><dt>SEBD</dt><dd>Subsistema Exclusivamente de Beneficio Definido. La prestación se determina con reglas de salario, cuotas, edad y modalidad; no parte de una cuenta individual CAP.</dd></div>
+        <div><dt>Modalidad</dt><dd>Tipo de prestación que corresponde evaluar según edad, fecha y cuotas: normal, anticipada, proporcional, proporcional anticipada o indemnización.</dd></div>
+        <div><dt>Salario base</dt><dd>Promedio obtenido con los mejores años exigidos por el nivel aplicable. No es necesariamente el salario actual.</dd></div>
+        <div><dt>Tasa de reemplazo</dt><dd>Porcentaje que se aplica al salario base después de incorporar los incrementos por bloques completos de cuotas que correspondan.</dd></div>
+        <div><dt>Factor de reducción</dt><dd>Multiplicador menor que 1 que reduce una prestación anticipada según el momento exacto del retiro.</dd></div>
+      </dl>
+    </div>
+
+    <div class="row g-3 mt-1">
+      <div class="col-12 col-xl-6">
+        <article class="calculation-guide-card h-100">
+          <h3>1. Formar el salario base</h3>
+          <p>Se seleccionan los mejores años requeridos por el nivel de máximo aplicable.</p>
+          <div class="calculation-guide-formula">
+            <span>Base ordinaria de 10 años</span>
+            <code>salario base = total de salarios seleccionados ÷ 120 meses</code>
+            <span class="calculation-guide-example-label">Ejemplo</span>
+            <code class="calculation-guide-numeric-example">B/.180,000.00 ÷ 120 = B/.1,500.00 de salario base mensual</code>
+          </div>
+          <p class="small text-secondary mb-0">
+            Los niveles ampliados pueden exigir 15 o 20 mejores años; por eso la aplicación
+            determina primero el nivel que corresponde y no fija siempre 120 meses.
+          </p>
+        </article>
+      </div>
+      <div class="col-12 col-xl-6">
+        <article class="calculation-guide-card h-100">
+          <h3>2. Construir la tasa de reemplazo</h3>
+          <div class="calculation-guide-formula">
+            <code>tasa = {{ "%.2f"|format(guia.sebd.tasa_base_pct) }} % + incrementos por bloques completos de 12 cuotas</code>
+            <span class="calculation-guide-example-label">Ejemplo</span>
+            <code class="calculation-guide-numeric-example">60.00 % + (2 bloques × 1.25 %) = 62.50 %</code>
+          </div>
+          <ul class="mb-0">
+            <li>Antes de la edad de referencia: +{{ "%.2f"|format(guia.sebd.incremento_antes_pct) }} % por bloque.</li>
+            <li>Después de la edad de referencia: +{{ "%.2f"|format(guia.sebd.incremento_despues_pct) }} % por bloque.</li>
+            <li>Las fracciones de un bloque de 12 cuotas no generan un incremento completo.</li>
+          </ul>
+        </article>
+      </div>
+      <div class="col-12 col-xl-6">
+        <article class="calculation-guide-card h-100">
+          <h3>3. Calcular el monto inicial</h3>
+          <div class="calculation-guide-formula">
+            <code>monto inicial = salario base × tasa de reemplazo</code>
+            <span class="calculation-guide-example-label">Ejemplo</span>
+            <code class="calculation-guide-numeric-example">B/.1,500.00 × 62.50 % = B/.937.50</code>
+          </div>
+          <p class="mb-0">
+            Después se contrasta el resultado con el máximo legal que corresponda al nivel
+            de cuotas, promedio y mejores años utilizados.
+          </p>
+        </article>
+      </div>
+      <div class="col-12 col-xl-6">
+        <article class="calculation-guide-card h-100">
+          <h3>4. Aplicar factores de modalidad</h3>
+          <p>Solo se aplican cuando la modalidad los necesita.</p>
+          <div class="calculation-guide-formula">
+            <code>proporcional = monto previo × (cuotas ÷ {{ guia.sebd.cuotas_referencia }})</code>
+            <span class="calculation-guide-example-label">Ejemplo</span>
+            <code class="calculation-guide-numeric-example">B/.937.50 × (210 ÷ 240) = B/.820.31</code>
+            <code>anticipada = monto aplicable × factor de reducción por edad/mes</code>
+            <span class="calculation-guide-example-label">Ejemplo</span>
+            <code class="calculation-guide-numeric-example">B/.937.50 × 0.9128 = B/.855.75</code>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <h3 class="h5 calculation-guide-table-title">Cómo se clasifica la modalidad</h3>
+    <div class="table-responsive app-table-shell calculation-guide-table">
+      <table class="table mb-0 align-middle">
+        <thead><tr><th>Modalidad</th><th>Edad/fecha</th><th>Cuotas</th><th>Qué ocurre</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Normal</strong></td><td>Edad de referencia o superior</td><td>{{ guia.sebd.cuotas_referencia }} o más</td><td>Pensión mensual sin factor proporcional ni reducción anticipada.</td></tr>
+          <tr><td><strong>Anticipada</strong></td><td>Dentro de los {{ guia.sebd.maximo_meses_anticipacion }} meses previos</td><td>{{ guia.sebd.cuotas_referencia }} o más</td><td>Aplica el factor de reducción correspondiente al momento del retiro.</td></tr>
+          <tr><td><strong>Proporcional</strong></td><td>Edad de referencia o superior</td><td>{{ guia.sebd.cuotas_minimas_proporcional }}–{{ guia.sebd.cuotas_referencia - 1 }}</td><td>Aplica la relación cuotas/{{ guia.sebd.cuotas_referencia }}.</td></tr>
+          <tr><td><strong>Proporcional anticipada</strong></td><td>Dentro de la banda anticipada</td><td>{{ guia.sebd.cuotas_minimas_proporcional }}–{{ guia.sebd.cuotas_referencia - 1 }}</td><td>Combina proporcionalidad por cuotas y reducción por anticipación.</td></tr>
+          <tr><td><strong>Indemnización por Vejez</strong></td><td>Edad de referencia o superior</td><td>Menos de {{ guia.sebd.cuotas_minimas_proporcional }}</td><td>Pago único mientras el régimen modelado lo permita; no es pensión mensual.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="row g-3 mt-2">
+      <div class="col-12 col-xl-7">
+        <article class="calculation-guide-card h-100">
+          <h3>Máximos SEBD versionados</h3>
+          <div class="table-responsive calculation-guide-inner-table">
+            <table class="table table-sm mb-0">
+              <thead><tr><th>Nivel</th><th>Cuotas mín.</th><th>Promedio mín.</th><th>Mejores años</th><th>Máximo</th></tr></thead>
+              <tbody>
+                {% for nivel in guia.sebd.maximos %}
+                <tr>
+                  <td>{{ nivel.nivel }}</td>
+                  <td>{{ nivel.cuotas_minimas if nivel.cuotas_minimas is not none else "—" }}</td>
+                  <td>{% if nivel.promedio_minimo is not none %}{{ nivel.promedio_minimo_visible }}{% else %}—{% endif %}</td>
+                  <td>{{ nivel.mejores_anios }}</td>
+                  <td>{{ nivel.monto_maximo_visible }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </article>
+      </div>
+      <div class="col-12 col-xl-5">
+        <article class="calculation-guide-card h-100">
+          <h3>Indemnización por Vejez</h3>
+          <p>El motor calcula primero una mensualidad hipotética conforme al reglamento.</p>
+          <div class="calculation-guide-formula">
+            <code>factor = meses cotizados ÷ {{ guia.sebd.indemnizacion_divisor }}</code>
+            <span class="calculation-guide-example-label">Ejemplo</span>
+            <code class="calculation-guide-numeric-example">60 meses ÷ 6 = factor 10</code>
+            <code>pago único = mensualidad hipotética × factor</code>
+            <span class="calculation-guide-example-label">Ejemplo</span>
+            <code class="calculation-guide-numeric-example">B/.300.00 × 10 = B/.3,000.00 de pago único ilustrativo</code>
+          </div>
+          <p class="small text-secondary mb-0">El régimen implementado termina el {{ guia.sebd.indemnizacion_fin_visible }} y después la evaluación se remite al SUCGS.</p>
+        </article>
+      </div>
+    </div>
+
+    <details class="calculation-guide-details mt-3">
+      <summary>Ver tabla mensual de reducción anticipada (24 factores)</summary>
+      <p class="small text-secondary mt-3">
+        El índice indica meses completos transcurridos desde el límite inferior de la banda anticipada.
+      </p>
+      <div class="calculation-guide-factor-grid calculation-guide-factor-grid-anticipada">
+        {% for fila in guia.sebd.factores_anticipacion %}
+        <div><span>Mes {{ fila.mes_desde_limite }}</span><strong>{{ "%.4f"|format(fila.factor) }}</strong></div>
+        {% endfor %}
+      </div>
+    </details>
+
+    <article class="calculation-guide-example mt-3">
+      <span>Ejemplo ilustrativo</span>
+      <h3>SEBD normal con dos bloques adicionales antes de referencia</h3>
+      <p>Supón salario base B/.1,200.00, 264 cuotas y 24 cuotas excedentes antes de la referencia.</p>
+      <code>tasa = 60.00 % + (2 × 1.25 %) = 62.50 %</code>
+      <code>pensión inicial = B/.1,200.00 × 62.50 % = B/.750.00</code>
+      <p class="small calculation-guide-example-note mb-0">El ejemplo solo enseña el orden de operaciones. La elegibilidad, el máximo y cualquier otra regla dependen del caso real.</p>
+    </article>
+
+    {% for grupo in catalogo.grupos %}{% if grupo.id == "sebd" %}
+    <div class="calculation-guide-sources">
+      <strong>Fuentes usadas por este sistema:</strong>
+      <span>{{ grupo.articulos|join(", ") }}</span>
+      <a href="/metodologia#metodologia-sistemas">Ver fuentes oficiales y alcance</a>
+    </div>
+    {% endif %}{% endfor %}
+  </section>
+
+  <section id="mixto" class="calculation-guide-section calculation-guide-system-section" aria-labelledby="mixto-titulo">
+    <div class="calculation-guide-heading">
+      <span>Sistema 2</span>
+      <h2 id="mixto-titulo">Subsistema Mixto</h2>
+      <p>La prestación mantiene separados el Componente de Beneficio Definido y el Componente de Ahorro Personal (CAP).</p>
+    </div>
+
+    <div class="calculation-guide-equation-banner" aria-label="Estructura del Subsistema Mixto">
+      <span>Componente BD</span><b>+</b><span>Componente CAP</span><b>=</b><strong>Prestación Mixto</strong>
+    </div>
+
+    <div class="calculation-guide-terms" aria-labelledby="terminos-mixto-titulo">
+      <h3 id="terminos-mixto-titulo">Qué significan los términos del Subsistema Mixto</h3>
+      <dl class="calculation-guide-term-grid">
+        <div><dt>Componente</dt><dd>Parte del cálculo que se determina por separado antes de combinarse con otras partes de la prestación.</dd></div>
+        <div><dt>BD</dt><dd>Beneficio Definido. Es la parte mensual calculada con salario base, tasa resultante y reglas propias del Mixto.</dd></div>
+        <div><dt>CAP</dt><dd>Componente de Ahorro Personal. Es la parte asociada al ahorro individual reconocido para el asegurado.</dd></div>
+        <div><dt>Saldo CAP</dt><dd>Monto acumulado reconocido en el CAP. Es un dato individual y no se reconstruye a partir del historial anual de salarios.</dd></div>
+        <div><dt>Tasa resultante</dt><dd>Porcentaje final del componente BD después de aplicar la tasa base y los incrementos completos que correspondan.</dd></div>
+        <div><dt>Pensión programada CAP</dt><dd>Monto mensual obtenido al convertir el saldo CAP y, cuando corresponda, el bono reconocido mediante el valor actuarial oficial.</dd></div>
+        <div><dt>Bono de reconocimiento</dt><dd>Monto oficial que puede incorporarse al CAP cuando existe y ha sido confirmado para el caso.</dd></div>
+        <div><dt>Valor actuarial</dt><dd>Divisor técnico oficial utilizado para transformar saldo en una renta mensual. No se inventa ni se toma de SUCGS.</dd></div>
+        <div><dt>Prestación Mixto</dt><dd>Resultado conjunto de los componentes mensuales BD y CAP cuando corresponde sumarlos; los pagos únicos se mantienen separados.</dd></div>
+      </dl>
+    </div>
+
+    <div class="row g-3 mt-1">
+      <div class="col-12 col-xl-6">
+        <article class="calculation-guide-card h-100">
+          <h3>1. Componente de Beneficio Definido</h3>
+          <p>Reutiliza la lógica de clasificación del beneficio definido con parámetros propios del Mixto.</p>
+          <ul>
+            <li>Tramo salarial máximo participante: <strong>{{ guia.mixto.tope_salarial_bd_visible }}</strong> mensuales.</li>
+            <li>Base: {{ guia.mixto.mejores_anios_bd }} mejores años.</li>
+            <li>Tasa base: {{ "%.2f"|format(guia.mixto.tasa_base_pct) }} %.</li>
+            <li>Máximo mensual del componente: {{ guia.mixto.monto_maximo_bd_visible }}.</li>
+          </ul>
+          <div class="calculation-guide-formula">
+            <code>BD = salario base BD × tasa resultante</code>
+            <span class="calculation-guide-example-label">Ejemplo</span>
+            <code class="calculation-guide-numeric-example">B/.500.00 × 60.00 % = B/.300.00 mensuales de BD</code>
+          </div>
+        </article>
+      </div>
+      <div class="col-12 col-xl-6">
+        <article class="calculation-guide-card h-100">
+          <h3>2. Componente de Ahorro Personal</h3>
+          <p>El saldo CAP, el bono aplicable y el divisor actuarial son datos individualizados; la aplicación no los inventa desde salarios anuales.</p>
+          <div class="calculation-guide-formula">
+            <code>CAP mensual = (saldo CAP + bono aplicable) ÷ valor actuarial</code>
+            <span class="calculation-guide-example-label">Ejemplo</span>
+            <code class="calculation-guide-numeric-example">(B/.24,000.00 + B/.1,000.00) ÷ 250.0000 = B/.100.00 mensuales de CAP</code>
+          </div>
+          <p class="small text-secondary mb-0">El valor actuarial debe ser el oficial aplicable. Los factores del SUCGS no se reutilizan en el Mixto.</p>
+        </article>
+      </div>
+      <div class="col-12 col-xl-6">
+        <article class="calculation-guide-card h-100">
+          <h3>3. Sumar o devolver según corresponda</h3>
+          <div class="calculation-guide-formula">
+            <code>pensión Mixto = pensión BD + pensión programada CAP</code>
+            <span class="calculation-guide-example-label">Ejemplo</span>
+            <code class="calculation-guide-numeric-example">B/.300.00 + B/.100.00 = B/.400.00 mensuales</code>
+          </div>
+          <p>Si el artículo 187 habilita devolución total, la aplicación exige una decisión explícita y mantiene el pago único separado de la pensión mensual.</p>
+        </article>
+      </div>
+      <div class="col-12 col-xl-6">
+        <article class="calculation-guide-card h-100">
+          <h3>4. Revisar la transición</h3>
+          <p>La regla operativa versionada usa:</p>
+          <ul class="mb-0">
+            <li>Fin del cálculo bajo Mixto: <strong>{{ guia.mixto.fecha_fin_mixto_visible }}</strong>.</li>
+            <li>Inicio del cálculo bajo SUCGS: <strong>{{ guia.mixto.fecha_inicio_sucgs_visible }}</strong>.</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+
+    <article class="calculation-guide-example mt-3">
+      <span>Ejemplo ilustrativo</span>
+      <h3>Cómo se combinan BD y CAP</h3>
+      <p>Supón B/.300.00 mensuales de BD, saldo CAP B/.24,000.00, bono B/.1,000.00 y divisor actuarial 250.0000.</p>
+      <code>CAP = (B/.24,000.00 + B/.1,000.00) ÷ 250.0000 = B/.100.00</code>
+      <code>pensión Mixto = B/.300.00 + B/.100.00 = B/.400.00</code>
+      <p class="small calculation-guide-example-note mb-0">El divisor 250.0000 es únicamente ilustrativo; no representa un parámetro actuarial oficial vigente.</p>
+    </article>
+
+    <div class="alert alert-warning mt-3 mb-0" role="note">
+      <strong>Dato que no se puede deducir con seguridad:</strong>
+      saldo CAP, bono de reconocimiento y valor actuarial deben venir de información individual/oficial cuando sean necesarios.
+    </div>
+
+    {% for grupo in catalogo.grupos %}{% if grupo.id == "mixto" %}
+    <div class="calculation-guide-sources">
+      <strong>Fuentes usadas por este sistema:</strong>
+      <span>{{ grupo.articulos|join(", ") }}</span>
+      <a href="/metodologia#metodologia-sistemas">Ver fuentes oficiales y alcance</a>
+    </div>
+    {% endif %}{% endfor %}
+  </section>
+
+  <section id="sucgs" class="calculation-guide-section calculation-guide-system-section" aria-labelledby="sucgs-titulo">
+    <div class="calculation-guide-heading">
+      <span>Sistema 3</span>
+      <h2 id="sucgs-titulo">SUCGS — Sistema Único de Capitalización con Garantía Solidaria</h2>
+      <p>El cálculo se desarrolla por capas: componente contributivo, componente solidario y garantía de reemplazo cuando puede evaluarse.</p>
+    </div>
+
+    <div class="calculation-guide-layer-flow">
+      <div><span>1</span><strong>Contributivo</strong><small>Saldo × factor actuarial.</small></div>
+      <div><span>2</span><strong>Solidario</strong><small>Se revisan mínimos y PGS.</small></div>
+      <div><span>3</span><strong>Reemplazo mínimo</strong><small>Artículo 197, si sus condiciones pueden cerrarse.</small></div>
+    </div>
+
+    <div class="calculation-guide-terms" aria-labelledby="terminos-sucgs-titulo">
+      <h3 id="terminos-sucgs-titulo">Qué significan los términos de SUCGS</h3>
+      <dl class="calculation-guide-term-grid">
+        <div><dt>Capitalización Solidaria</dt><dd>Esquema en el que el resultado combina un componente contributivo basado en saldo con mecanismos solidarios y garantías cuando aplican.</dd></div>
+        <div><dt>Saldo</dt><dd>Monto individual reconocido que sirve de base para calcular el componente contributivo.</dd></div>
+        <div><dt>Componente contributivo</dt><dd>Parte de la pensión calculada con el saldo, el divisor normativo y el factor actuarial correspondiente a la edad.</dd></div>
+        <div><dt>Factor actuarial</dt><dd>Factor técnico de la tabla del artículo 196 que varía con la edad y participa en la conversión del saldo a monto mensual.</dd></div>
+        <div><dt>Capa solidaria</dt><dd>Evaluación adicional de referencias mínimas y de la Pensión Garantizada Solidaria cuando sus condiciones corresponden.</dd></div>
+        <div><dt>PGS</dt><dd>Pensión Garantizada Solidaria. Es una referencia solidaria cuya aplicación depende de las condiciones normativas del caso.</dd></div>
+        <div><dt>Garantía de reemplazo mínimo</dt><dd>Evaluación del artículo 197 que compara un objetivo de reemplazo con las demás capas cuando todas sus condiciones pueden comprobarse.</dd></div>
+        <div><dt>Salario promedio base</dt><dd>Promedio salarial utilizado para formar el objetivo de reemplazo del artículo 197; no debe confundirse automáticamente con el salario actual.</dd></div>
+        <div><dt>Valor mínimo universal</dt><dd>Referencia monetaria versionada usada en la capa solidaria cuando resulte aplicable y esté confirmada para la fecha de cálculo.</dd></div>
+      </dl>
+    </div>
+
+    <div class="row g-3 mt-1">
+      <div class="col-12 col-xl-6">
+        <article class="calculation-guide-card h-100">
+          <h3>1. Componente contributivo</h3>
+          <div class="calculation-guide-formula">
+            <code>pensión contributiva = saldo ÷ {{ guia.sucgs.divisor }} × factor actuarial por edad</code>
+            <span class="calculation-guide-example-label">Ejemplo</span>
+            <code class="calculation-guide-numeric-example">B/.100,000.00 ÷ 1000 × 5.15 = B/.515.00 mensuales</code>
+          </div>
+          <p>El factor proviene de la tabla versionada del artículo 196 y debe actualizarse al menos con la periodicidad normativa prevista.</p>
+        </article>
+      </div>
+      <div class="col-12 col-xl-6">
+        <article class="calculation-guide-card h-100">
+          <h3>2. Capa solidaria</h3>
+          <ul>
+            <li>Cuotas de referencia: {{ guia.sucgs.cuotas_referencia }}.</li>
+            <li>Edad de referencia del componente solidario modelado: {{ guia.sucgs.edad_solidaria }} años.</li>
+            <li>Valor mínimo universal de referencia: {{ guia.sucgs.minimo_universal_referencia_visible }}.</li>
+            <li>Pensión Garantizada Solidaria de referencia: {{ guia.sucgs.pgs_referencia_visible }}.</li>
+          </ul>
+          <p class="small text-secondary mb-0">Los importes indexables se confirman para la fecha real de cálculo; no se presentan como valores eternamente vigentes.</p>
+        </article>
+      </div>
+      <div class="col-12">
+        <article class="calculation-guide-card">
+          <h3>3. Garantía de reemplazo mínimo del artículo 197</h3>
+          <div class="calculation-guide-formula">
+            <code>objetivo = salario promedio base × tasa mínima aplicable</code>
+            <span class="calculation-guide-example-label">Ejemplo</span>
+            <code class="calculation-guide-numeric-example">B/.1,200.00 × 60.00 % = B/.720.00 de objetivo de reemplazo</code>
+          </div>
+          <div class="calculation-guide-condition-grid">
+            <div><span>Tasa base de referencia</span><strong>{{ "%.2f"|format(guia.sucgs.tasa_reemplazo_minima_pct) }} %</strong></div>
+            <div><span>Mínimo para pensión proporcional</span><strong>{{ guia.sucgs.cuotas_minimas_garantia_proporcional }} cuotas</strong></div>
+            <div><span>Cuotas mínimas por año activo</span><strong>{{ guia.sucgs.cuotas_minimas_por_anio_activo }}</strong></div>
+            <div><span>Máximo de años sin cotización</span><strong>{{ guia.sucgs.max_anios_sin_cotizacion }}</strong></div>
+            <div><span>Máximo consecutivo sin cotización</span><strong>{{ guia.sucgs.max_anios_sin_cotizacion_consecutivos }}</strong></div>
+            <div><span>Distribución inicial evaluada</span><strong>{{ guia.sucgs.primeros_anios_distribucion }} años · {{ "%.0f"|format(guia.sucgs.proporcion_minima_por_tramo * 100) }} % / {{ "%.0f"|format(guia.sucgs.proporcion_minima_por_tramo * 100) }} %</strong></div>
+          </div>
+          <div class="alert alert-warning mb-0 mt-3">
+            La condición de estabilidad salarial no se presume automáticamente. La versión actual exige confirmación explícita cuando esa regla es necesaria para cerrar el artículo 197.
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <details class="calculation-guide-details mt-3">
+      <summary>Ver factores actuariales SUCGS por edad (35 a 80+)</summary>
+      <p class="small text-secondary mt-3">Tabla versionada utilizada por el componente contributivo.</p>
+      <div class="calculation-guide-factor-grid calculation-guide-factor-grid-sucgs">
+        {% for fila in guia.sucgs.factores %}
+        <div><span>{{ fila.edad }} años</span><strong>{{ "%.2f"|format(fila.factor) }}</strong></div>
+        {% endfor %}
+      </div>
+    </details>
+
+    <article class="calculation-guide-example mt-3">
+      <span>Ejemplo ilustrativo</span>
+      <h3>Componente contributivo a los 62 años</h3>
+      <p>Supón un saldo de Capitalización Solidaria de B/.100,000.00. La tabla versionada asigna factor 5.15 a los 62 años.</p>
+      <code>contributivo = B/.100,000.00 ÷ 1000 × 5.15 = B/.515.00</code>
+      <p class="small calculation-guide-example-note mb-0">Después de este paso todavía deben evaluarse, cuando correspondan, la capa solidaria y la garantía de reemplazo. El ejemplo no afirma elegibilidad.</p>
+    </article>
+
+    {% for grupo in catalogo.grupos %}{% if grupo.id == "sucgs" %}
+    <div class="calculation-guide-sources">
+      <strong>Fuentes usadas por este sistema:</strong>
+      <span>{{ grupo.articulos|join(", ") }}</span>
+      <a href="/metodologia#metodologia-sistemas">Ver fuentes oficiales y alcance</a>
+    </div>
+    {% endif %}{% endfor %}
+  </section>
+
+  <section class="calculation-guide-section" aria-labelledby="redondeos-limitaciones">
+    <div class="calculation-guide-heading">
+      <span>Lectura correcta</span>
+      <h2 id="redondeos-limitaciones">Redondeos, datos faltantes y límites</h2>
+    </div>
+
+    <div class="row g-3">
+      <div class="col-12 col-lg-4"><article class="calculation-guide-card h-100"><h3>Redondeo</h3><p class="mb-0">Los importes monetarios finales se presentan con dos decimales. Los factores técnicos pueden conservar más precisión durante el cálculo.</p></article></div>
+      <div class="col-12 col-lg-4"><article class="calculation-guide-card h-100"><h3>Dato faltante</h3><p class="mb-0">Si un saldo, bono, divisor o confirmación indispensable no puede inferirse con seguridad, el resultado queda pendiente o incompleto en lugar de inventar un valor.</p></article></div>
+      <div class="col-12 col-lg-4"><article class="calculation-guide-card h-100"><h3>Resultado oficial</h3><p class="mb-0">La estimación no sustituye la determinación de la CSS ni cubre automáticamente regímenes especiales no implementados.</p></article></div>
+    </div>
+
+    <div class="calculation-guide-next-actions">
+      <a class="btn btn-primary btn-center-content" href="/simulacion">Volver a la simulación</a>
+      <a class="btn btn-outline-primary btn-center-content" href="/metodologia">Consultar metodología y fuentes</a>
+    </div>
+  </section>
+</section>
+{% endblock %}

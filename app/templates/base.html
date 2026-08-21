@@ -143,6 +143,14 @@
           </a>
 
           <a
+            class="nav-link {% if pagina_activa == 'como_se_calcula' %}active{% endif %}"
+            href="/como-se-calcula"
+            {% if pagina_activa == 'como_se_calcula' %}aria-current="page"{% endif %}
+          >
+            Cómo se calcula
+          </a>
+
+          <a
             class="nav-link {% if pagina_activa == 'metodologia' %}active{% endif %}"
             href="/metodologia"
             {% if pagina_activa == 'metodologia' %}aria-current="page"{% endif %}

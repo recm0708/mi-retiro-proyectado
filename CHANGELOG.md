@@ -6,6 +6,45 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ## [Unreleased]
 
+### UX.4.6i — cierre de Cómo se calcula
+
+- R1.4 simplifica la etiqueta visible de sustitución numérica de **Ejemplo con números** a **Ejemplo** sin alterar fórmulas ni valores;
+- consolida R1/R1.1/R1.2/R1.3/R1.4 como cierre de la guía pública de cálculo;
+- la validación manual confirmó navegación, recorrido Pasos 1–6, SEBD, Mixto, SUCGS, tablas compactas, terminología contextual, ejemplos sustituidos y jerarquía visual;
+- el gate de cierre queda fijado en **841 pruebas** y el siguiente bloque pasa a DEV.2 — Centro de desarrollo.
+
+
+### UX.4.6i R1.3 — ejemplos sustituidos, términos y respiración visual
+
+- añade ejemplos numéricos inmediatamente después de las fórmulas descriptivas de los Pasos 1–6 y de SEBD, Mixto y SUCGS, sin sustituir la fórmula general ni ejecutar un segundo motor;
+- incorpora definiciones contextuales de cuotas, salario cotizado, modalidad, salario base, tasa de reemplazo, BD, CAP, saldo CAP, pensión programada CAP, factor actuarial, PGS y demás términos necesarios para leer la guía;
+- documenta también la tasa anual equivalente de un salario futuro conocido y la estimación de cuotas de una fracción de año;
+- aumenta el espacio entre títulos/tablas, fórmulas/notas y la franja de fuentes de cada sistema;
+- mantiene los refinamientos mediante tokens semánticos para Claro, Oscuro y Alto contraste;
+- añade ocho regresiones específicas; gate objetivo **840 pruebas**.
+
+### UX.4.6i R1.2 — recorrido de datos y densidad visual
+
+- añade **Cómo se calcula** como destino directo de la navegación principal y lo marca como página activa independiente de Fuentes;
+- amplía el recorrido general para explicar cómo los datos de los Pasos 1–5 se transforman en edad, cuotas, historial, salario normalizado, proyección, línea temporal y escenario de retiro antes del cálculo del Paso 6;
+- incorpora las fórmulas descriptivas ya implementadas para normalización salarial, cuotas restantes, crecimiento compuesto, prorrateo por cuotas y estimación de cuotas a la fecha de retiro, sin crear un motor alternativo;
+- presenta importes de la guía con separador de miles y dos decimales;
+- compacta la tabla mensual SEBD a 8 columnas en escritorio y los factores actuariales SUCGS a 10 columnas, con degradación responsive;
+- reduce lenguaje de implementación visible y refuerza foco, temas y jerarquía visual;
+- añade seis regresiones específicas; gate objetivo **832 pruebas**.
+
+
+
+### UX.4.6i R1 — guía pública Cómo se calcula
+
+- incorpora `/como-se-calcula` como sección pública de transparencia para SEBD, Subsistema Mixto y SUCGS;
+- explica datos, clasificación, orden de operaciones, fórmulas descriptivas, factores, límites, redondeos, ejemplos y limitaciones sin ejecutar un segundo cálculo;
+- `como_se_calcula.py` expone parámetros canónicos desde `normativa/` y no importa motores previsionales;
+- Paso 6 añade **Ver cómo se obtuvo este cálculo** y dirige al sistema correspondiente sin transportar datos personales en la URL;
+- Metodología y fuentes enlaza a la guía y la nueva página reutiliza el catálogo oficial versionado;
+- ADR-178, RF-383 a RF-389 y TR-026 formalizan el contrato; se añaden 14 regresiones específicas y el gate objetivo asciende a **826 pruebas**.
+
+
 
 ### UX.4.6h — cierre del Paso 6 · Resultados y exportación
 

@@ -2,7 +2,7 @@
 
 **Estado:** vigente
 **Versión de aplicación revisada:** `0.0.26-beta`
-**Última actualización transversal:** UX.4.6f R1/R1.1 — cierre integrado por PR #28; mantenimiento de dependencias post-R1 — 2026-08-20
+**Última actualización transversal:** UX.4.6i R1 — guía pública de cálculo candidata — 2026-08-21
 **Cierre histórico preservado:** UX.4.6e R9.2 — cierre formal `0.0.25-beta` — 2026-08-19
 
 Este archivo es el punto de entrada para la documentación técnica, funcional, normativa, de privacidad, validación y auditoría de Mi Retiro Proyectado.
@@ -14,6 +14,7 @@ Este archivo es el punto de entrada para la documentación técnica, funcional, 
 - [`ROADMAP.md`](ROADMAP.md) — estado actual y próximos hitos.
 - [`PLAN_MAESTRO_HACIA_1_0.md`](PLAN_MAESTRO_HACIA_1_0.md) — secuencia transversal de 14 bloques hasta la primera versión oficial.
 - [`IDENTIDAD_VISUAL.md`](IDENTIDAD_VISUAL.md) — logo oficial, activos canónicos, favicons y Social Preview.
+- [`COMO_SE_CALCULA.md`](COMO_SE_CALCULA.md) — contrato público de explicación de SEBD, Mixto y SUCGS sin duplicar motores.
 
 ## 2. Gobierno y versionado
 
@@ -94,6 +95,7 @@ GOV.1.5 completa los procedimientos internos. La publicación del repositorio no
 - [`LIMITACIONES_CONOCIDAS.md`](LIMITACIONES_CONOCIDAS.md) — límites técnicos, normativos y de despliegue.
 - [`DEPENDENCIAS_TERCEROS.md`](DEPENDENCIAS_TERCEROS.md) — dependencias, licencias upstream, conexiones y riesgos.
 - [`PROCESO_RELEASE.md`](PROCESO_RELEASE.md) — gates de cierre, versión, Build, CI y tags.
+- [`UX46I_R1_AUDITORIA_COMO_SE_CALCULA.md`](UX46I_R1_AUDITORIA_COMO_SE_CALCULA.md) — auditoría del contrato público de explicación y sus regresiones.
 
 ## 10. Validación y calidad
 
