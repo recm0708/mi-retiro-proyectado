@@ -1104,3 +1104,21 @@ Quedan para fases posteriores:
 **RF-356.** Las bases automáticas para proyectar salarios futuros solo deben habilitarse cuando `resumen_detalle_anio_actual` contenga la métrica correspondiente con valor positivo. Mientras no exista un detalle analizado y validado suficiente, la opción manual permanece disponible y la ayuda debe explicar por qué las demás opciones están deshabilitadas.
 
 **RF-357.** El contrato de bloqueo documental de RF-351 a RF-353 debe ser reutilizable en Pasos 1–6 y en superficies futuras; los modales de revisión quedan explícitamente fuera de ese bloqueo mientras el usuario haya activado el modo **Editar campos**.
+
+### UX.4.6f — Revisión 2 · auditoría lógica, matemática y trazabilidad del Paso 4
+
+**RF-358.** La línea temporal integrada del Paso 4 debe rechazar un historial que no cubra todos los años declarados, cuya suma de cuotas no coincida con su referencia o cuya referencia no coincida con `cuotas_totales` del Paso 2.
+
+**RF-359.** Las cuotas de la fila histórica del año actual deben coincidir con `cuotas_anio_actual` del Paso 2 antes de calcular cuotas restantes, salario proyectado del año vigente o cierre estimado.
+
+**RF-360.** Cada registro futuro de línea temporal debe transportar el salario mensual del escenario mediante `salario_mensual_proyectado`; la interfaz no debe reconstruirlo a partir del salario cotizado prorrateado.
+
+**RF-361.** Si la proyección salarial cubre años futuros pero el Asegurado(a) indicó que no continuará cotizando, esos años deben mostrar cero cuotas, cero salario cotizado proyectado y un estado explícito **Sin cotización proyectada**, sin eliminar la trayectoria salarial hipotética.
+
+**RF-362.** En `PORCENTAJE`, la variación anual se aplica de forma compuesta: el año inicial conserva la base y cada año posterior aplica el porcentaje al salario proyectado del año anterior.
+
+**RF-363.** En `FUTURO_CONOCIDO`, la aplicación debe derivar una tasa anual compuesta hasta el año objetivo, materializar exactamente el monto indicado y mantenerlo constante en años posteriores del horizonte salvo que el usuario elija otra modalidad o supuesto.
+
+**RF-364.** En `ESCENARIOS`, cada porcentaje se calcula de forma compuesta e independiente desde la misma base salarial; eliminar duplicados u ordenar tasas no puede mezclar resultados entre escenarios. El campo debe iniciar vacío y la API no debe aportar una lista predeterminada: los porcentajes comparados deben provenir de una decisión explícita del Asegurado(a).
+
+**RF-365.** Cuando Paso 5 amplíe el horizonte salarial para cubrir un retiro más lejano, Paso 4 debe conservar el nuevo año como borrador, marcar su procedencia como ajuste automático desde retiro e invalidar los resultados salariales anteriores hasta una nueva generación. Una edición posterior del usuario sustituye esa procedencia por `Editado por ti`.

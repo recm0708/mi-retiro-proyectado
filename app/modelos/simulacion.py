@@ -506,12 +506,7 @@ class DatosProyeccionSalario(BaseModel):
     )
 
     escenarios_porcentajes: list[float] = Field(
-        default_factory=lambda: [
-            0.0,
-            1.0,
-            2.0,
-            3.0,
-        ],
+        default_factory=list,
     )
 
     _validar_salario_mensual_actual = field_validator(
@@ -589,6 +584,7 @@ EstadoLineaTiempo = Literal[
     "HISTORICO_PARCIAL",
     "MIXTO",
     "PROYECTADO",
+    "PROYECTADO_SIN_COTIZACION",
     "PENDIENTE",
 ]
 
@@ -605,6 +601,7 @@ class RegistroLineaTiempo(BaseModel):
     # Información todavía estimada.
     cuotas_proyectadas: int
     salario_proyectado: float
+    salario_mensual_proyectado: float | None = None
 
     # Valores esperados al cierre del año.
     cuotas_cierre: int

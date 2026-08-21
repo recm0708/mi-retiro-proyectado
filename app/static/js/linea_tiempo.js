@@ -485,7 +485,13 @@ function crearTablaProyeccionLineaTiempo(
 
   const tasa = document.createElement("span");
   tasa.className = "projection-rate";
-  tasa.textContent = `Tasa anual: ${formatearPorcentaje(escenario.tasa_anual_pct)}`;
+  const tasaEsObjetivo = escenario.nombre.startsWith(
+    "Proyección hasta salario conocido",
+  );
+  tasa.textContent = (
+    `${tasaEsObjetivo ? "Tasa equivalente al objetivo" : "Tasa anual"}: `
+    + formatearPorcentaje(escenario.tasa_anual_pct)
+  );
 
   encabezado.append(
     titulo,
@@ -509,10 +515,18 @@ function crearTablaProyeccionLineaTiempo(
   registros.forEach((registro) => {
     const fila = document.createElement("tr");
 
+    const salarioMensualDirecto = Number(
+      registro.salario_mensual_proyectado,
+    );
     const salarioMensual = (
-      registro.cuotas_proyectadas > 0
-        ? registro.salario_proyectado / registro.cuotas_proyectadas
-        : 0
+      Number.isFinite(salarioMensualDirecto)
+      && registro.salario_mensual_proyectado !== null
+        ? salarioMensualDirecto
+        : (
+          registro.cuotas_proyectadas > 0
+            ? registro.salario_proyectado / registro.cuotas_proyectadas
+            : 0
+        )
     );
 
     agregarCelda(fila, registro.anio);
@@ -640,6 +654,10 @@ function agregarCeldaEstado(fila, estado) {
     HISTORICO_PARCIAL: ["Histórico parcial", "timeline-status-partial"],
     MIXTO: ["Real + proyectado", "timeline-status-mixed"],
     PROYECTADO: ["Proyectado", "timeline-status-projected"],
+    PROYECTADO_SIN_COTIZACION: [
+      "Sin cotización proyectada",
+      "timeline-status-none",
+    ],
     PENDIENTE: ["Pendiente", "timeline-status-pending"],
   };
 

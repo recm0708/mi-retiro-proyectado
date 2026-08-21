@@ -156,7 +156,7 @@ Paso 2 — Cuotas
 Paso 3 — Historial + detalle actual + base salarial
         ↓
 Paso 4 — Proyección salarial + línea temporal
-        ↓
+        ↓  valida coherencia de cuotas/historial y conserva referencia mensual proyectada
 Paso 5 — Escenarios de retiro
         ↓
 Paso 6 — Resultado del sistema
@@ -165,6 +165,8 @@ Comparación + trazabilidad + resumen unificado
 ```
 
 Developer Diagnostics es transversal a las operaciones HTTP, no forma parte de este flujo de negocio y no altera sus resultados.
+
+La frontera `linea_tiempo.py` vuelve a validar la coherencia entre el historial confirmado y las cuotas de Paso 2 antes de materializar el año actual o el futuro. Los modelos separan la referencia mensual proyectada del salario cotizado prorrateado y permiten distinguir años futuros sin cotización prevista. Paso 5 puede solicitar una ampliación del horizonte; esa acción vuelve a Paso 4 con procedencia explícita y resultados anteriores invalidados.
 
 ## 5. Estado temporal del navegador
 

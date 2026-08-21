@@ -92,7 +92,9 @@ Modalidades vigentes:
 - salario futuro conocido;
 - múltiples escenarios porcentuales.
 
-La proyección compuesta conserva precisión interna y permanece separada del historial.
+La proyección compuesta conserva precisión interna y permanece separada del historial. El año inicial conserva la base; `PORCENTAJE` y cada tasa de `ESCENARIOS` se aplican sobre el salario proyectado del año anterior. `ESCENARIOS` no incorpora porcentajes predeterminados: si el usuario no proporciona al menos una tasa, el motor rechaza esa modalidad.
+
+En `FUTURO_CONOCIDO` se calcula la tasa anual compuesta equivalente entre la base y el monto/año objetivo. El año objetivo materializa exactamente el monto indicado. Si el horizonte continúa después, ese monto se mantiene constante: no se prolonga automáticamente la tasa inferida más allá del dato aportado.
 
 ## 7. Línea temporal
 
@@ -102,7 +104,9 @@ La proyección compuesta conserva precisión interna y permanece separada del hi
 - año actual;
 - futuro proyectado.
 
-Cuando un período futuro contiene menos de doce cuotas, el salario proyectado considerado se limita al período correspondiente.
+Antes de combinar etapas, `linea_tiempo.py` exige historial completo, total de cuotas coherente con Paso 2 y coincidencia de las cuotas del año actual. Así evita sumar cuotas restantes a una fotografía histórica distinta.
+
+Cuando un período futuro contiene menos de doce cuotas, el salario cotizado proyectado se limita al período correspondiente. La referencia mensual del escenario viaja separada mediante `salario_mensual_proyectado`. Si no se proyectan cuotas, el salario cotizado es cero y el estado se identifica como `PROYECTADO_SIN_COTIZACION`.
 
 ## 8. Retiro
 

@@ -213,9 +213,17 @@ El PR #28 integró R1 + R1.1 por squash en `5e93dfc3d4c33b264c61e50f72c1eb0b84b3
 
 ### Mantenimiento de dependencias post-R1
 
-Dependabot propuso `uvicorn 0.52.1 → 0.52.3` (#26) y `pypdf 6.15.0 → 6.16.1` (#27). Los PR aislados no podían superar la suite porque los guards de inventario y compatibilidad fijaban correctamente las versiones vigentes anteriores. La actualización coordinada debe mantener sincronizados `requirements.txt`, `docs/DEPENDENCIAS_TERCEROS.md`, `THIRD_PARTY_NOTICES.md` y las regresiones de versión.
+Dependabot propuso `uvicorn 0.52.1 → 0.52.3` (#26) y `pypdf 6.15.0 → 6.16.1` (#27). Los PR aislados no podían superar la suite porque los guards de inventario y compatibilidad fijaban correctamente las versiones vigentes anteriores. La actualización coordinada sincronizó `requirements.txt`, `docs/DEPENDENCIAS_TERCEROS.md`, `THIRD_PARTY_NOTICES.md` y las regresiones de versión.
 
-**Gate de aceptación:** instalar el snapshot actualizado, ejecutar `pip check`, `compileall`, sintaxis JavaScript, suite completa y `git diff --check`. La suite conserva **743 pruebas**; `pypdf 6.16.1` debe superar además el roundtrip sintético, rechazo controlado de PDF sin texto y límites de páginas de ambos importadores. `VERSION` permanece en `0.0.26-beta`.
+El gate local completó `pip check`, `compileall`, sintaxis JavaScript, **743/743 pruebas en `OK`** y `git diff --check`; `pypdf 6.16.1` superó el roundtrip sintético, rechazo controlado de PDF sin texto y límites de páginas de ambos importadores. PR #29 fue integrado por squash en `2b4aa0401fe9cc2eef545d335492863bca675e5c` después de Python 3.13, Python 3.14 y Auditoría de gobernanza en verde. #26 y #27 quedaron cerrados como sustituidos. `VERSION` permanece en `0.0.26-beta`.
+
+### UX.4.6f R2 — candidato de auditoría del Paso 4
+
+R2 añade **13 regresiones** sobre la base de 743 para proteger: cierre del caso visible de 2026; proyección constante futura; rechazo de totales/cuotas del año actual desincronizados; rechazo de historial incompleto; transporte explícito del salario mensual proyectado; estado sin cotización futura; comportamiento conservador de `FUTURO_CONOCIDO`; copy de composición anual; ausencia de porcentajes predeterminados en `ESCENARIOS`; rechazo de esa modalidad sin tasas explícitas; procedencia del horizonte ampliado desde retiro; y trazabilidad ADR/RF/TR.
+
+El inventario objetivo del candidato es **756 pruebas**. En el entorno aislado de preparación se ejecutaron **755/756**; la única prueba no satisfactoria fue el guard de versión instalada porque ese entorno conserva `pypdf 5.9.0` mientras el proyecto fija `pypdf==6.16.1`. Las 13 regresiones específicas de R2 y el frente de proyección/línea temporal pasaron correctamente.
+
+El cierre requiere el gate canónico del `.venv` del proyecto con `pypdf 6.16.1`, además de `compileall`, sintaxis de todos los JavaScript, `git diff --check` y validación manual del Paso 4 con el caso usado durante Pasos 1–3. Hasta completar ese gate, R2 permanece **candidato en validación** y no se marca como cerrado.
 
 ## 2. Comandos obligatorios
 

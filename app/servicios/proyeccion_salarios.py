@@ -408,15 +408,49 @@ def proyectar_salario(
         registros = _proyectar_por_porcentaje(
             salario_base=datos.salario_mensual_actual,
             anio_inicio=datos.anio_inicio,
-            anio_fin=datos.anio_fin,
+            anio_fin=datos.anio_salario_futuro,
             porcentaje_anual=tasa_equivalente,
         )
+
+        # El dato aportado para el año objetivo es conocido; se materializa
+        # exactamente y, si el horizonte continúa después, se conserva como
+        # salario constante. La aplicación no inventa una segunda tasa para
+        # años posteriores al punto conocido.
+        salario_futuro_decimal = a_decimal(
+            datos.salario_mensual_futuro
+        )
+        registros[-1] = _crear_registro_anual(
+            anio=datos.anio_salario_futuro,
+            salario_mensual=salario_futuro_decimal,
+            salario_base=a_decimal(
+                datos.salario_mensual_actual
+            ),
+        )
+
+        for anio in range(
+            datos.anio_salario_futuro + 1,
+            datos.anio_fin + 1,
+        ):
+            registros.append(
+                _crear_registro_anual(
+                    anio=anio,
+                    salario_mensual=salario_futuro_decimal,
+                    salario_base=a_decimal(
+                        datos.salario_mensual_actual
+                    ),
+                )
+            )
 
         escenarios.append(
             EscenarioProyeccionSalario(
                 nombre=(
                     "Proyección hasta salario conocido "
                     f"en {datos.anio_salario_futuro}"
+                    + (
+                        " y constante después"
+                        if datos.anio_fin > datos.anio_salario_futuro
+                        else ""
+                    )
                 ),
                 tasa_anual_pct=round(
                     tasa_equivalente,

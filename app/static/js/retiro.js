@@ -1083,7 +1083,17 @@ function ajustarHorizonteProyeccionDesdeRetiro() {
 
   campoAnioFin.value = anioMaximo;
 
+  simulacion.proyeccion = {
+    ...(simulacion.proyeccion || {}),
+    anio_fin: anioMaximo,
+  };
+  simulacion.origen_proyeccion_anio_fin = "AJUSTADO_DESDE_RETIRO";
+  guardarSimulacion(simulacion);
+
   invalidarResumenProyeccion();
+  actualizarProcedenciaHorizonteProyeccion(
+    "AJUSTADO_DESDE_RETIRO",
+  );
   actualizarLimitesSalarioFuturo();
   mostrarPaso(4);
 

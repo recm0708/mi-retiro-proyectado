@@ -846,7 +846,7 @@ Nueva simulación | {{ app_name }}
                       </div>
 
                       <div class="form-text">
-                        Puede ser positiva o negativa.
+                        Puede ser positiva o negativa. Se aplica de forma compuesta: cada año parte del salario proyectado del año anterior.
                       </div>
 
                     </div>
@@ -892,6 +892,10 @@ Nueva simulación | {{ app_name }}
 
                       </div>
 
+                      <div class="form-text">
+                        La aplicación calculará la tasa anual compuesta necesaria para llegar a este monto en el año indicado.
+                      </div>
+
                     </div>
 
 
@@ -912,6 +916,10 @@ Nueva simulación | {{ app_name }}
                         class="form-control form-control-lg"
                         id="anio_salario_futuro"
                       >
+
+                      <div class="form-text">
+                        Si el horizonte continúa después de este año, el salario conocido se mantendrá constante; no se inventará otra tasa de crecimiento.
+                      </div>
 
                     </div>
 
@@ -944,12 +952,11 @@ Nueva simulación | {{ app_name }}
                         type="text"
                         class="form-control form-control-lg"
                         id="escenarios_porcentajes"
-                        value="0, 1, 2, 3"
+                        placeholder="Escribe los porcentajes a comparar"
                       >
 
                       <div class="form-text">
-                        Separa cada porcentaje con una coma.
-                        Ejemplo: 0, 1, 2, 3
+                        Separa cada porcentaje con una coma. Cada escenario se calcula de forma compuesta desde la misma base salarial. Ejemplo: 0, 1, 2, 3
                       </div>
 
                     </div>

@@ -6,13 +6,24 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ## [Unreleased]
 
+### UX.4.6f R2 — auditoría lógica, matemática y trazabilidad del Paso 4
+
+- reforzada `construir_linea_tiempo()` para rechazar historial incompleto, totales de cuotas desincronizados entre Pasos 2–3 y discrepancias en las cuotas del año actual antes de combinar realidad y proyección;
+- `RegistroLineaTiempo` transporta `salario_mensual_proyectado` directamente desde el motor salarial y la interfaz deja de reconstruirlo a partir de un importe cotizado prorrateado;
+- los años futuros con decisión explícita de no continuar cotizando se distinguen como **Sin cotización proyectada**, manteniendo separada la trayectoria salarial hipotética de las cuotas/salario cotizado;
+- `PORCENTAJE` y `ESCENARIOS` explican su composición anual; `ESCENARIOS` deja de precargar `0, 1, 2, 3` y exige porcentajes elegidos explícitamente por el Asegurado(a); `FUTURO_CONOCIDO` deriva CAGR hasta el año objetivo, materializa exactamente ese salario y lo mantiene constante después del objetivo para evitar extrapolación silenciosa;
+- cuando Paso 5 amplía el horizonte para cubrir un retiro más lejano, Paso 4 conserva el nuevo año como borrador y registra procedencia `AJUSTADO_DESDE_RETIRO`; una edición posterior pasa a `EDITADO_USUARIO`;
+- el caso visible del año actual con 5 cuotas, B/.7,321.13 históricos y B/.1,500.00 mensuales queda protegido para cerrar en 12 cuotas y B/.17,821.13, con B/.18,000.00 por año futuro en modalidad constante;
+- ADR-172/ADR-173, RF-358 a RF-365 y TR-020/TR-021 formalizan el contrato auditado; se añaden 13 regresiones específicas y `VERSION` permanece en `0.0.26-beta`;
+- R2 queda como candidato pendiente del gate canónico y de validación manual del Paso 4 antes de declararse cerrado.
+
 ### Mantenimiento de dependencias post-UX.4.6f R1
 
 - actualizadas las dependencias directas `pypdf` de `6.15.0` a `6.16.1` y `uvicorn` de `0.52.1` a `0.52.3`, manteniendo `VERSION = 0.0.26-beta`;
 - `pypdf 6.16.1` incorpora correcciones upstream de seguridad/robustez y se conserva el contrato de compatibilidad de ambos importadores con PDFs sintéticos;
 - `Uvicorn 0.52.3` incorpora mantenimiento upstream de la ruta HTTP/1.1 sin cambiar la configuración ASGI del proyecto;
 - sincronizados `requirements.txt`, inventario de terceros, avisos de licencia y guards de versiones actuales; las referencias históricas a `pypdf 6.15.0` en hitos ya cerrados permanecen intactas;
-- los PR Dependabot #26 y #27 originaron la revisión, pero la integración queda condicionada al gate completo del proyecto y se mantiene separada de los cambios funcionales de UX.4.6f.
+- los PR Dependabot #26 y #27 originaron la revisión y fueron cerrados como sustituidos; la actualización coordinada se integró mediante PR #29 tras superar Python 3.13, Python 3.14 y Auditoría de gobernanza, sin cambios funcionales de UX.4.6f.
 
 ### UX.4.6f R1.1 — bloqueo documental y restauración visual
 
