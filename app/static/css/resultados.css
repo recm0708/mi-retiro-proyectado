@@ -1,0 +1,414 @@
+/* ==========================================================
+   Paso 6 — Orquestación, transición e impresión
+   ========================================================== */
+
+.results-transition-card,
+.results-export-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  padding: 1rem 1.15rem;
+  border: 1px solid var(--app-info-border);
+  border-radius: 0.9rem;
+  background: var(--app-info-bg);
+  color: var(--app-info-text);
+}
+
+.results-transition-card p,
+.results-export-card p {
+  max-width: 58rem;
+}
+
+.results-transition-card .btn,
+.results-export-card .btn {
+  flex: 0 0 auto;
+}
+
+.results-print-header {
+  display: none;
+}
+
+html[data-app-theme="contrast"] .results-transition-card,
+html[data-app-theme="contrast"] .results-export-card {
+  border-width: 2px;
+}
+
+@media (max-width: 767.98px) {
+  .results-transition-card,
+  .results-export-card {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .results-transition-card .btn,
+  .results-export-card .btn {
+    width: 100%;
+  }
+}
+
+
+/* ==========================================================
+   Copia imprimible del resultado
+   ========================================================== */
+
+@page {
+  size: A4 portrait;
+  margin: 12mm 13mm 14mm;
+}
+
+.print-report-document {
+  display: none;
+}
+
+@media print {
+  html,
+  body {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+    color: #111111 !important;
+    font-family: Arial, Helvetica, sans-serif !important;
+  }
+
+  body > *:not(#resultado-print-document) {
+    display: none !important;
+  }
+
+  #resultado-print-document {
+    display: block !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    color: #111111 !important;
+    background: #ffffff !important;
+    font-size: 8.7pt;
+    line-height: 1.35;
+  }
+
+  #resultado-print-document *,
+  #resultado-print-document *::before,
+  #resultado-print-document *::after {
+    box-sizing: border-box !important;
+  }
+
+  .print-report-cover {
+    padding-bottom: 6mm;
+    border-bottom: 1.5pt solid #1f4b7a;
+    break-after: avoid-page;
+  }
+
+  .print-report-brand-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8mm;
+    margin-bottom: 7mm;
+  }
+
+  .print-report-brand {
+    display: flex;
+    align-items: center;
+    gap: 3mm;
+  }
+
+  .print-report-brand img {
+    width: 14mm;
+    height: 14mm;
+    object-fit: contain;
+  }
+
+  .print-report-brand strong {
+    display: block;
+    font-size: 11pt;
+    color: #173b63 !important;
+  }
+
+  .print-report-brand span,
+  .print-report-version {
+    display: block;
+    color: #555555 !important;
+    font-size: 7.8pt;
+  }
+
+  .print-report-title-block {
+    margin-bottom: 5mm;
+  }
+
+  .print-report-kicker {
+    margin: 0 0 1mm !important;
+    color: #1f5f9e !important;
+    font-size: 8pt !important;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .print-report-title-block h1 {
+    margin: 0 0 2mm !important;
+    color: #173b63 !important;
+    font-size: 19pt !important;
+    line-height: 1.1 !important;
+  }
+
+  .print-report-title-block > p:not(.print-report-kicker) {
+    max-width: 155mm;
+    margin: 0 !important;
+    color: #444444 !important;
+    font-size: 8.8pt !important;
+  }
+
+  .print-report-meta {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 3mm 5mm;
+    margin: 0;
+    padding: 4mm;
+    border: 0.7pt solid #9fb3c8;
+    border-radius: 2mm;
+    background: #f7f9fb !important;
+  }
+
+  .print-report-meta div {
+    min-width: 0;
+  }
+
+  .print-report-meta dt {
+    margin: 0 0 0.7mm;
+    color: #5b6673 !important;
+    font-size: 7.2pt;
+    font-weight: 700;
+  }
+
+  .print-report-meta dd {
+    margin: 0;
+    color: #111111 !important;
+    font-size: 8.5pt;
+    font-weight: 600;
+  }
+
+  .print-report-notice {
+    margin-top: 4mm;
+    padding: 2.5mm 3mm;
+    border-left: 2.5pt solid #1f5f9e;
+    background: #eef5fb !important;
+    color: #24384c !important;
+    font-size: 8pt;
+  }
+
+  .print-report-section {
+    margin-top: 6mm;
+    padding-top: 0;
+  }
+
+  .print-report-section + .print-report-section {
+    border-top: 0.5pt solid #c7d0d9;
+    padding-top: 5mm;
+  }
+
+  .print-report-section h2,
+  .print-report-section h3,
+  .print-report-section h4,
+  .print-report-section h5 {
+    margin-top: 0 !important;
+    margin-bottom: 2mm !important;
+    color: #173b63 !important;
+    line-height: 1.15 !important;
+    break-after: avoid-page;
+  }
+
+  .print-report-section h2 { font-size: 13pt !important; }
+  .print-report-section h3 { font-size: 11.2pt !important; }
+  .print-report-section h4,
+  .print-report-section h5 { font-size: 9.5pt !important; }
+
+  .print-report-section p,
+  .print-report-section li,
+  .print-report-section span,
+  .print-report-section small,
+  .print-report-section div {
+    color: #222222 !important;
+  }
+
+  .print-report-section p {
+    margin-top: 0 !important;
+    margin-bottom: 2mm !important;
+  }
+
+  .print-report-section hr {
+    display: none !important;
+  }
+
+  .print-report-section .text-primary {
+    color: #1f5f9e !important;
+  }
+
+  .print-report-section .text-secondary,
+  .print-report-section .form-text {
+    color: #555555 !important;
+  }
+
+  .print-report-section .row,
+  .print-report-section [class*="col-"] {
+    display: block !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .print-report-section .results-summary-grid,
+  .print-report-section .results-context-card .row,
+  .print-report-section .reference-result-comparison .row,
+  .print-report-section .results-detail-grid {
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 2.5mm !important;
+  }
+
+  .print-report-reference .reference-result-comparison .row {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+
+  .print-report-section .results-summary-card,
+  .print-report-section .results-detail-card,
+  .print-report-section .results-context-card,
+  .print-report-section .results-modality-card,
+  .print-report-section .results-section,
+  .print-report-section .result-data-origin-comparison,
+  .print-report-section .reference-result-comparison,
+  .print-report-section .trace-step,
+  .print-report-section .trace-data-card,
+  .print-report-section .trace-source-card,
+  .print-report-section .trace-final-result,
+  .print-report-section .alert {
+    margin: 0 0 3mm !important;
+    padding: 3mm !important;
+    border: 0.6pt solid #b7c3cf !important;
+    border-radius: 1.5mm !important;
+    background: #ffffff !important;
+    box-shadow: none !important;
+    break-inside: avoid-page;
+  }
+
+  .print-report-section .results-summary-card > strong,
+  .print-report-section .trace-final-result strong {
+    color: #173b63 !important;
+    font-size: 12pt !important;
+    line-height: 1.15 !important;
+  }
+
+  .print-report-section .results-summary-card > span,
+  .print-report-section .results-summary-card > small,
+  .print-report-section .results-detail-card span {
+    font-size: 7.5pt !important;
+  }
+
+  .print-report-section .table-responsive,
+  .print-report-section .results-table-wrapper,
+  .print-report-section .result-origin-table-wrap {
+    overflow: visible !important;
+    max-height: none !important;
+  }
+
+  .print-report-section table {
+    width: 100% !important;
+    min-width: 0 !important;
+    border-collapse: collapse !important;
+    font-size: 7.7pt !important;
+    break-inside: auto;
+  }
+
+  .print-report-section thead {
+    display: table-header-group;
+  }
+
+  .print-report-section tr {
+    break-inside: avoid;
+  }
+
+  .print-report-section th {
+    padding: 1.7mm 2mm !important;
+    border-bottom: 0.8pt solid #7f94aa !important;
+    background: #edf3f8 !important;
+    color: #23384d !important;
+    font-size: 7.2pt !important;
+    text-align: left;
+  }
+
+  .print-report-section td {
+    padding: 1.6mm 2mm !important;
+    border-bottom: 0.45pt solid #d7dee5 !important;
+    background: #ffffff !important;
+    color: #111111 !important;
+    white-space: normal !important;
+  }
+
+  .print-report-section .results-origin-mixed,
+  .print-report-section .badge,
+  .print-report-section [class*="badge"] {
+    display: inline-block !important;
+    padding: 0.7mm 1.5mm !important;
+    border: 0.5pt solid #9aa8b5 !important;
+    border-radius: 8mm !important;
+    background: #f4f6f8 !important;
+    color: #222222 !important;
+    font-size: 7pt !important;
+  }
+
+  .print-report-trace {
+    break-before: page;
+  }
+
+  .print-report-trace .collapse,
+  .print-report-trace [class*="collapse"] {
+    display: block !important;
+    height: auto !important;
+    visibility: visible !important;
+  }
+
+  .print-report-trace .trace-step {
+    padding: 2.5mm 3mm !important;
+    margin-bottom: 2.5mm !important;
+  }
+
+  .print-report-trace .trace-step p,
+  .print-report-trace .trace-step div,
+  .print-report-trace .trace-step span {
+    font-size: 7.8pt !important;
+  }
+
+  .print-report-section a {
+    color: #173b63 !important;
+    text-decoration: none !important;
+  }
+
+  .print-report-footer {
+    margin-top: 7mm;
+    padding-top: 3mm;
+    border-top: 0.6pt solid #9ba9b7;
+    color: #5a6570 !important;
+    font-size: 7.2pt;
+    line-height: 1.35;
+  }
+}
+
+/* ==========================================================
+   Legibilidad del resumen y procedencia combinada
+   ========================================================== */
+
+#resultado-unificado-estado,
+#resultado-unificado-naturaleza {
+  font-size: clamp(1.2rem, 1.35vw, 1.5rem);
+  line-height: 1.25;
+}
+
+.results-origin-mixed {
+  background-color: var(--app-selected-bg);
+  color: var(--app-primary);
+  border: 1px solid var(--app-selected-border);
+}
+
+html[data-app-theme="contrast"] .results-origin-mixed {
+  border-width: 2px;
+}

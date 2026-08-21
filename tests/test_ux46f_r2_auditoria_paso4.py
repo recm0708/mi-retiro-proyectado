@@ -297,10 +297,12 @@ class TestUX46fR2AuditoriaPaso4(unittest.TestCase):
         plan = (ROOT / "docs/PLAN_MAESTRO_HACIA_1_0.md").read_text(encoding="utf-8")
         changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
 
-        self.assertIn("**Bloque activo:** UX.4.6g", readme)
+        self.assertIn("**UX.4.6f:** cerrado", readme)
         self.assertIn("[x] **UX.4.6f — Paso 4", roadmap)
-        self.assertIn("**Bloque funcional activo:** UX.4.6g", roadmap)
-        self.assertIn("**Estado:** cerrado. El siguiente bloque funcional activo es UX.4.6g", plan)
+        self.assertIn(
+            "Después de su cierre se habilitó UX.4.6g",
+            plan,
+        )
         self.assertIn("PR #30 se integró por squash", changelog)
         self.assertNotIn("Paso 4 — proyección salarial/laboral;", roadmap.split("### Pendiente o incompleto", 1)[1].split("## 3.", 1)[0])
 
