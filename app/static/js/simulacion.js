@@ -1567,11 +1567,20 @@ function actualizarProcedenciaHorizonteProyeccion(origen) {
   const nota = document.getElementById("origen-proyeccion-anio-fin");
   if (!nota) return;
 
-  const editado = origen === "EDITADO_USUARIO";
-  nota.className = `field-origin-note ${editado ? "edited" : "automatic"}`;
-  nota.textContent = editado
-    ? "Editado por ti. Este horizonte sustituye la sugerencia automática inicial."
-    : `Calculado automáticamente: horizonte inicial sugerido de ${ANIOS_PROYECCION_PREDETERMINADOS} años. Puedes modificarlo según la edad de retiro que quieras comparar.`;
+  if (origen === "EDITADO_USUARIO") {
+    nota.className = "field-origin-note edited";
+    nota.textContent = (
+      "Editado por ti. Este horizonte sustituye la sugerencia automática inicial."
+    );
+    return;
+  }
+
+  nota.className = "field-origin-note automatic";
+  nota.textContent = (
+    origen === "AJUSTADO_DESDE_RETIRO"
+      ? "Calculado automáticamente para cubrir el escenario de retiro más lejano que seleccionaste en el Paso 5. Puedes modificarlo."
+      : `Calculado automáticamente: horizonte inicial sugerido de ${ANIOS_PROYECCION_PREDETERMINADOS} años. Puedes modificarlo según la edad de retiro que quieras comparar.`
+  );
 }
 
 
@@ -2000,12 +2009,7 @@ async function analizarProyeccion(evento) {
       "modalidad_proyeccion",
     ).value;
 
-  let escenariosPorcentajes = [
-    0,
-    1,
-    2,
-    3,
-  ];
+  let escenariosPorcentajes = [];
 
   if (modalidad === "ESCENARIOS") {
     try {
@@ -2233,8 +2237,11 @@ function crearTablaEscenario(escenario) {
   tasa.className =
     "projection-rate";
 
+  const tasaEsObjetivo = escenario.nombre.startsWith(
+    "Proyección hasta salario conocido",
+  );
   tasa.textContent = (
-    `Tasa anual: ${
+    `${tasaEsObjetivo ? "Tasa equivalente al objetivo" : "Tasa anual"}: ${
       formatearPorcentaje(
         escenario.tasa_anual_pct,
       )
@@ -2768,7 +2775,18 @@ document.addEventListener(
       "input",
       () => {
         const simulacion = obtenerSimulacion();
+        const anioFin = Number(
+          document.getElementById("proyeccion_anio_fin").value,
+        );
+
         simulacion.origen_proyeccion_anio_fin = "EDITADO_USUARIO";
+        if (Number.isInteger(anioFin)) {
+          simulacion.proyeccion = {
+            ...(simulacion.proyeccion || {}),
+            anio_inicio: ANIO_ACTUAL,
+            anio_fin: anioFin,
+          };
+        }
         guardarSimulacion(simulacion);
         actualizarProcedenciaHorizonteProyeccion("EDITADO_USUARIO");
         actualizarLimitesSalarioFuturo();

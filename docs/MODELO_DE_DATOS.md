@@ -202,11 +202,11 @@ Modalidades:
 - `FUTURO_CONOCIDO`;
 - `ESCENARIOS`.
 
-La proyección no reescribe el historial real.
+La proyección no reescribe el historial real. `PORCENTAJE` y `ESCENARIOS` aplican composición anual. `escenarios_porcentajes` inicia como lista vacía: la aplicación no inventa tasas de comparación y exige que el Asegurado(a) las indique cuando selecciona `ESCENARIOS`. En `FUTURO_CONOCIDO`, la tasa equivalente se deriva únicamente hasta el año objetivo; si el horizonte continúa, el salario objetivo se mantiene constante para no inferir una tasa posterior no declarada.
 
 ## 9. Línea temporal y retiro
 
-Los modelos de línea temporal combinan historia y proyección conservando su origen.
+Los modelos de línea temporal combinan historia y proyección conservando su origen. `RegistroLineaTiempo.salario_mensual_proyectado` transporta la referencia mensual del escenario sin reconstruirla desde el salario cotizado prorrateado; es opcional para conservar compatibilidad con registros históricos que no contienen proyección. El estado `PROYECTADO_SIN_COTIZACION` distingue un año futuro cubierto por la trayectoria salarial pero con cero cuotas previstas.
 
 `DatosRetiro` y `ResumenRetiro` manejan escenarios temporales, cuotas y cobertura salarial. El flujo visible usa `ultimo_mes_cuotas` como dato mensual preferente y conserva la fecha técnica derivada cuando corresponde.
 

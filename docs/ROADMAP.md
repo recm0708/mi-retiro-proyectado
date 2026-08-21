@@ -149,7 +149,7 @@ Este roadmap describe **estado actual y trabajo futuro**. La evolución detallad
 - [ ] **UX.4.6f — Paso 4 · Proyección salarial/laboral**
   - [x] R1 — consistencia transversal de procedencia, decisiones explícitas y procesamiento accesible de adjuntos; gate automático 734/734 superado.
   - [x] R1.1 — bloqueo documental en vista principal, franja visual de solo lectura, iconos semánticos y selección explícita de disponibilidad del historial; R1 + R1.1 integradas por PR #28 tras **743/743 pruebas en `OK`** y validación visual manual.
-  - [ ] R2 — auditoría lógica, matemática, casos reales y trazabilidad del Paso 4.
+  - [ ] R2 — auditoría lógica, matemática, casos reales y trazabilidad del Paso 4; candidato preparado con validaciones de coherencia Pasos 2–4, trazabilidad salarial directa, supuestos compuestos explícitos sin porcentajes predeterminados y procedencia del horizonte; pendiente de gate local y revisión manual.
 - [ ] **UX.4.6g — Paso 5 · Escenarios de retiro**
 - [ ] **UX.4.6h — Paso 6 · Resultados y exportación**
 - [ ] **UX.4.6i — Cómo se calcula**

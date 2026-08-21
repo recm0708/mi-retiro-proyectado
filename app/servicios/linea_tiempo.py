@@ -102,6 +102,45 @@ def construir_linea_tiempo(
         in resumen_historial.registros
     }
 
+    if not resumen_historial.historial_completo:
+        raise ValueError(
+            "El historial debe cubrir todos los años declarados "
+            "antes de construir la línea temporal."
+        )
+
+    if (
+        resumen_historial.cuotas_totales_referencia
+        != datos.cuotas.cuotas_totales
+    ):
+        raise ValueError(
+            "El total de cuotas de referencia del historial no coincide "
+            "con el total acreditado del Paso 2."
+        )
+
+    if not resumen_historial.cuotas_coinciden:
+        raise ValueError(
+            "La suma de cuotas del historial debe coincidir con "
+            "el total acreditado del Paso 2."
+        )
+
+    registro_actual_validacion = historial_por_anio.get(
+        anio_actual
+    )
+    if registro_actual_validacion is None:
+        raise ValueError(
+            "El historial debe incluir el año actual antes de "
+            "construir la línea temporal."
+        )
+
+    if (
+        registro_actual_validacion.cuotas
+        != datos.cuotas.cuotas_anio_actual
+    ):
+        raise ValueError(
+            "Las cuotas del año actual del historial no coinciden "
+            "con las cuotas acreditadas del año actual del Paso 2."
+        )
+
 
     # --------------------------------------------------------
     # Cuotas pendientes del año actual
@@ -268,6 +307,11 @@ def construir_linea_tiempo(
                 salario_proyectado=(
                     salario_restante_actual
                 ),
+                salario_mensual_proyectado=(
+                    resumen_salario.salario_mensual
+                    if cuotas_restantes_actual > 0
+                    else None
+                ),
                 cuotas_cierre=(
                     cuotas_historicas_actual
                     + cuotas_restantes_actual
@@ -333,13 +377,20 @@ def construir_linea_tiempo(
                     salario_proyectado=(
                         salario_proyectado
                     ),
+                    salario_mensual_proyectado=(
+                        registro_proyectado.salario_mensual
+                    ),
                     cuotas_cierre=(
                         cuotas_proyectadas
                     ),
                     salario_cierre=(
                         salario_proyectado
                     ),
-                    estado="PROYECTADO",
+                    estado=(
+                        "PROYECTADO"
+                        if cuotas_proyectadas > 0
+                        else "PROYECTADO_SIN_COTIZACION"
+                    ),
                 )
             )
 

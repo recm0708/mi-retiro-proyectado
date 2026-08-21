@@ -27,7 +27,8 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 - **PLAN.1:** cerrado en `0.0.26-beta`; PR #23 y PR #24 integrados, **720 pruebas en `OK`** en el gate final y tag firmado `v0.0.26-beta` publicado
 - **Bloque activo:** UX.4.6f — Paso 4 · Proyección salarial/laboral
 - **UX.4.6f R1/R1.1:** cerradas e integradas mediante PR #28, con **743 pruebas en `OK`** y checks requeridos en verde
-- **Revisión activa:** UX.4.6f R2 — auditoría lógica, matemática, casos reales y trazabilidad del Paso 4
+- **Mantenimiento post-R1:** `pypdf 6.16.1` y `Uvicorn 0.52.3` integrados mediante PR #29; PR Dependabot #26/#27 cerrados como sustituidos, con los tres checks requeridos en verde
+- **Revisión activa:** UX.4.6f R2 — candidato de auditoría lógica, matemática, casos reales y trazabilidad del Paso 4; pendiente de gate local y validación manual antes del cierre
 - **Siguiente bloque funcional posterior:** UX.4.6g — Paso 5 · Escenarios de retiro
 - **GOV.1.4:** Observabilidad y Developer Diagnostics cerrado
 - **GOV.1.5:** Seguridad, privacidad y transparencia cerrado internamente

@@ -6,9 +6,9 @@
 **Base documental histórica:** `0.0.23-beta` — GOV.1.3 R4 — 2026-08-17
 **Revisión documental:** GOV.1.3 R4 — 2026-08-17
 **Última actualización de gobierno:** PLAN.1 / ADR-168 — 2026-08-20
-**Última actualización técnica:** UX.4.6f R1.1 / ADR-171 — 2026-08-20
+**Última actualización técnica:** UX.4.6f R2 / ADR-173 — 2026-08-20
 **Clasificación:** Técnica / Gobierno / Auditoría
-**ADR indexadas:** 171 (`ADR-001` a `ADR-171`)
+**ADR indexadas:** 173 (`ADR-001` a `ADR-173`)
 
 Este registro conserva decisiones de arquitectura, modelado, UX, precisión, seguridad y aplicación normativa. Una ADR explica por qué el proyecto adoptó una decisión; no crea una norma jurídica.
 
@@ -192,7 +192,7 @@ R4 **no inventa un estado retroactivo** para esas decisiones. El índice las mar
 | ADR-157 | VERSION es la fuente canónica de versión de aplicación | vigente. |
 | ADR-158 | Reconstrucción histórica sin tags retroactivos | Parcialmente sustituida por ADR-159 para la materialización criptográfica de tags. |
 | ADR-159 | Firma SSH obligatoria y materialización controlada de tags históricos | vigente. |
-| ADR-160 | Salario futuro conocido conserva precisión decimal en toda la trayectoria | Aceptada para UX.4.6e R2. |
+| ADR-160 | Salario futuro conocido conserva precisión decimal en toda la trayectoria | Sustituida parcialmente por ADR-173: se conserva precisión decimal, pero la tasa inferida solo se aplica hasta el año objetivo. |
 | ADR-161 | Web Storage usa un namespace único de producto sin compatibilidad pre-beta | Aceptada para UX.4.6e R3. |
 | ADR-162 | Los comentarios de runtime son semánticos y no cronológicos | Aceptada para UX.4.6e R4. |
 | ADR-163 | La preparación pública separa información útil al usuario de gobierno interno | Aceptada para UX.4.6e R5. |
@@ -204,6 +204,8 @@ R4 **no inventa un estado retroactivo** para esas decisiones. El índice las mar
 | ADR-169 | Las decisiones explícitas no usan valores predeterminados silenciosos y los valores derivados muestran procedencia automática | Aceptada para UX.4.6f R1. |
 | ADR-170 | Todo análisis de adjuntos usa un estado de procesamiento global, accesible y no duplicable | Aceptada para UX.4.6f R1. |
 | ADR-171 | Los datos documentales detectados se editan en la ventana de revisión y quedan bloqueados en la vista principal | Aceptada para UX.4.6f R1.1. |
+| ADR-172 | La línea temporal del Paso 4 exige coherencia entre historial y cuotas y transporta el salario mensual proyectado | Aceptada para UX.4.6f R2. |
+| ADR-173 | El Paso 4 no extrapola silenciosamente un salario futuro conocido y registra el origen del horizonte | Aceptada para UX.4.6f R2. |
 
 ## 4. Registro íntegro de ADR
 
@@ -1651,9 +1653,11 @@ Se autoriza además una migración histórica controlada: `v0.0.1-beta` a `v0.0.
 
 ## ADR-160 — Salario futuro conocido conserva precisión decimal en toda la trayectoria
 
-**Estado:** Aceptada para UX.4.6e R2.
+**Estado:** Sustituida parcialmente por ADR-173; se conserva íntegramente el criterio de precisión decimal y se limita la reutilización de la tasa inferida al año objetivo.
 
 **Decisión:** la modalidad `FUTURO_CONOCIDO` deriva la tasa anual compuesta equivalente mediante `Decimal` desde el salario mensual actual, el salario mensual futuro y la cantidad de años. La trayectoria reutiliza esa tasa sin convertirla a aritmética binaria de `float`; el redondeo monetario continúa ocurriendo únicamente al materializar cada registro visible.
+
+**Nota posterior UX.4.6f R2:** ADR-173 mantiene esta precisión durante el tramo base → objetivo, pero deja de reutilizar la tasa después del año conocido; el salario objetivo se mantiene constante salvo que exista otro supuesto explícito.
 
 **Motivo:** el Paso 4 sirve como entrada a la línea temporal y posteriormente a escenarios previsionales. Una conversión innecesaria a `float` contradice el contrato general de precisión monetaria y puede introducir pequeñas derivas acumulativas sin aportar información adicional.
 
@@ -1855,3 +1859,33 @@ La importación de registros históricos no responde automáticamente la pregunt
 **Motivo:** la revisión manual de R1 mostró que permitir editar en las superficies principales hacía visualmente indistinguible un dato documental confirmado de un dato manual y eliminaba la señal de bloqueo que ya utilizaban los tres temas. También permitía alterar accidentalmente información detectada sin pasar por el flujo de revisión que conserva contexto y procedencia.
 
 **Consecuencia:** ADR-167 queda sustituida parcialmente en su permiso de edición directa desde la vista principal, pero se mantienen vigentes la fotografía original, la copia de trabajo, los estados de procedencia y la capacidad de corregir/excluir/reincluir dentro del modal. ADR-088, ADR-103, ADR-104, ADR-105 y ADR-106 recuperan su criterio de bloqueo visual/funcional en las superficies principales en la medida compatible con esta ADR. Los valores `Calculado automáticamente` —por ejemplo el año inicial del historial o el horizonte salarial— no se consideran datos documentales detectados y conservan su contrato específico de edición cuando corresponda.
+
+## ADR-172 — La línea temporal del Paso 4 exige coherencia entre historial y cuotas y transporta el salario mensual proyectado
+
+**Estado:** Aceptada para UX.4.6f R2.
+**Fecha:** 2026-08-20.
+
+**Decisión:** `construir_linea_tiempo()` solo puede materializar una línea temporal integrada cuando el historial anual cubre todo el período declarado, la suma de cuotas coincide con la referencia histórica, esa referencia coincide con `cuotas_totales` del Paso 2 y las cuotas de la fila del año actual coinciden con `cuotas_anio_actual`. Una discrepancia se rechaza antes de combinar información real con proyecciones.
+
+Los registros futuros transportan explícitamente `salario_mensual_proyectado` desde el motor salarial. La interfaz utiliza ese valor como referencia mensual y no lo reconstruye dividiendo un salario cotizado ya prorrateado por la cantidad de cuotas. `salario_proyectado` continúa representando el salario cotizado estimado del período y se prorratea por la densidad de cuotas conforme a ADR-015.
+
+Cuando existen años futuros dentro del horizonte pero `continua_cotizando` es falso, la trayectoria salarial puede seguir existiendo como escenario, pero la línea temporal registra cero cuotas y cero salario cotizado con estado `PROYECTADO_SIN_COTIZACION`. Esto evita presentar como “Proyectado” un período que, según la propia decisión del Asegurado(a), no contiene cotización prevista.
+
+**Motivo:** la auditoría de R2 detectó que una solicitud desincronizada podía combinar las cuotas restantes calculadas desde Paso 2 con una fila anual distinta y producir cierres internamente imposibles. También detectó que la interfaz reconstruía el salario mensual desde un importe ya prorrateado, perdiendo trazabilidad directa respecto al escenario salarial original.
+
+**Consecuencia:** la API de línea temporal se vuelve una frontera de coherencia y no depende únicamente de que el navegador haya ejecutado validaciones previas. `RegistroLineaTiempo` incorpora un campo mensual opcional para conservar compatibilidad con fotografías históricas y objetos de pruebas anteriores. No se modifican las fórmulas previsionales de SEBD, Mixto o SUCGS.
+
+## ADR-173 — El Paso 4 no extrapola silenciosamente un salario futuro conocido y registra el origen del horizonte
+
+**Estado:** Aceptada para UX.4.6f R2.
+**Fecha:** 2026-08-20.
+
+**Decisión:** la modalidad `FUTURO_CONOCIDO` deriva una tasa anual compuesta únicamente entre el salario base y el año/monto futuro aportado por el Asegurado(a). El monto del año objetivo se materializa exactamente; si el horizonte de Paso 4 continúa después, ese salario se mantiene constante hasta el final del horizonte en lugar de prolongar silenciosamente la tasa inferida.
+
+Las modalidades `PORCENTAJE` y `ESCENARIOS` siguen siendo compuestas: cada año posterior parte del salario proyectado del año anterior. La interfaz debe explicarlo junto al control correspondiente. En `ESCENARIOS` no se precargan tasas sugeridas: el campo inicia vacío y el contrato de datos usa una lista vacía hasta que el Asegurado(a) indique explícitamente qué porcentajes desea comparar.
+
+Cuando Paso 5 detecta que un escenario de retiro queda fuera de la proyección y el Asegurado(a) utiliza la acción para ampliar el horizonte, Paso 4 registra `AJUSTADO_DESDE_RETIRO`, conserva el nuevo año final como borrador y muestra una procedencia específica. Si el usuario modifica después el año, la procedencia pasa a `EDITADO_USUARIO`.
+
+**Motivo:** ADR-018 prohíbe extrapolar salarios silenciosamente fuera de un horizonte confirmado. Extender indefinidamente la CAGR inferida desde un único salario futuro añadía una hipótesis que el usuario no había proporcionado. Del mismo modo, etiquetar un horizonte ampliado desde Paso 5 como si siguiera siendo la sugerencia inicial de cinco años ocultaba la causa real del valor.
+
+**Consecuencia:** conocer un salario futuro no equivale a declarar una tasa permanente después de ese año. Quien desee crecimiento posterior puede usar `PORCENTAJE` o `ESCENARIOS`, o ajustar explícitamente sus supuestos. La procedencia del horizonte permanece auditable durante la navegación entre Pasos 4 y 5.
