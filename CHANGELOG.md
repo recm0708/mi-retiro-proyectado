@@ -6,6 +6,55 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ## [Unreleased]
 
+
+### UX.4.6h — cierre del Paso 6 · Resultados y exportación
+
+- consolida R1/R1.1/R1.2/R1.3 como cierre funcional del Paso 6 sin modificar las fórmulas previsionales de SEBD, Mixto o SUCGS;
+- la validación manual del caso SEBD confirmó contexto de retiro, escenario salarial, comparación acreditada/proyectada, modalidad, salario base, tasa, cuotas, trazabilidad y referencia personal de Mi Retiro Seguro;
+- la salida imprimible deja de ser una copia de la página web y pasa a un informe A4 independiente, compacto y orientado a lectura;
+- la acción provisional continúa dependiendo de la impresión nativa del navegador; la generación y descarga directa de PDF por la aplicación, sus metadatos y formatos finales permanecen en REP.1;
+- la suite de cierre queda fijada en **812 pruebas** y el bloque siguiente pasa a UX.4.6i — Cómo se calcula.
+
+
+### UX.4.6h R1.3 — informe imprimible compacto
+
+- sustituye la impresión directa del Paso 6 por un documento A4 independiente de la interfaz web;
+- elimina controles, navegación, skip-link y tarjetas sobredimensionadas de la salida impresa;
+- organiza identificación, resumen, comparación acreditado/proyectado, referencia personal, resultado del sistema y trazabilidad en una estructura compacta;
+- conserva la impresión nativa del navegador como mecanismo provisional y reserva la generación PDF formal para REP.1;
+- añade seis regresiones específicas; gate objetivo **812 pruebas**.
+
+
+### UX.4.6h R1.2 — claridad y jerarquía visual del resultado
+
+- simplifica la explicación de información acreditada vs. proyección para centrarla en el efecto de las cotizaciones futuras;
+- corrige la comparación no compatible con Mi Retiro Seguro para explicar de forma gramatical y específica la diferencia de edad u otros motivos;
+- sustituye la alerta SEBD redundante por un estado de cálculo útil y deja la modalidad exacta en su tarjeta dedicada;
+- oculta Factores de la modalidad cuando la pensión es Normal y esos factores no intervienen;
+- distingue años con información acreditada y proyección futura como **Histórico + proyectado**;
+- elimina el scrollbar vertical de la comparación corta, la ayuda salarial duplicada y el botón Anterior local redundante;
+- muestra la fecha de retiro de la trazabilidad en formato visible `DD/MM/YYYY` y reduce la jerarquía tipográfica de estados textuales frente al monto principal;
+- añade 6 regresiones específicas; gate candidato: **806 pruebas**.
+
+### UX.4.6h R1.1 — corrección del gate y sincronización documental
+
+- elimina del comentario runtime de carga del Paso 6 el identificador cronológico `UX.4.6h`, respetando el contrato permanente de ADR-162;
+- desacopla la regresión histórica de UX.4.6f del bloque funcional que esté activo en el futuro;
+- alinea `ROADMAP.md` y `PLAN_MAESTRO_HACIA_1_0.md` con el cierre de UX.4.6g mediante PR #32 y el inicio de UX.4.6h;
+- mantiene el gate objetivo de UX.4.6h R1 en **800 pruebas**, sin modificar motores previsionales ni fórmulas.
+
+### UX.4.6h R1 — resultados explícitos y copia imprimible
+
+- UX.4.6g queda cerrado tras la integración del PR #32, con 784 pruebas en `OK` y los checks de Python 3.13, Python 3.14 y Auditoría de gobernanza en verde;
+- cuando el Paso 4 contiene varios escenarios salariales, el Paso 6 deja de escoger silenciosamente el primero y exige una elección explícita; si existe uno solo, se identifica como única alternativa disponible;
+- cualquier cambio en la configuración del Paso 6 invalida también el resumen unificado, las comparaciones, la trazabilidad y la acción de impresión para impedir que permanezcan resultados obsoletos visibles;
+- la transición del Subsistema Mixto al SUCGS ofrece una ruta explícita para preparar el cálculo SUCGS del mismo escenario sin reescribir silenciosamente el sistema informado en el Paso 1;
+- los valores B/.144.00 y B/.265.00 del SUCGS se presentan como referencias legales versionadas al 22/05/2025 y solo se tratan como valores oficiales aplicables cuando el usuario lo confirma;
+- B/.0.00 en el bono de reconocimiento del Mixto se explica como ausencia de bono incorporado al cálculo, evitando que parezca un dato oficial inferido;
+- el resumen unificado sustituye lenguaje interno por una explicación orientada al Asegurado(a);
+- se prepara una copia imprimible mediante la función nativa del navegador (**Imprimir / Guardar como PDF**) con identificación de versión, sistema, escenario y fecha de generación, dejando explícito que no es un documento oficial de la CSS; el informe formal y los formatos finales continúan reservados para REP.1;
+- la orquestación se encapsula en `resultados_orquestacion.js` para no duplicar fórmulas de los motores existentes y se añaden 16 regresiones específicas; gate candidato: **800 pruebas**.
+
 ### UX.4.6g R1.4.3 — alineación visual final
 
 - alinea Año inicial/Período del historial y Año inicial/Proyectar hasta el año;

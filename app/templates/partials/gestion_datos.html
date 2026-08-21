@@ -16,3 +16,12 @@
     </div>
   </div>
 </div>
+
+<!--
+  La orquestación del Paso 6 se registra antes de los scripts
+  específicos de la simulación y se activa únicamente si el DOM contiene
+  el panel de resultados. Fuera de /simulacion el módulo termina sin cambios.
+-->
+{% if pagina_activa == "simulacion" %}
+<script src="{{ url_for('static', path='/js/resultados_orquestacion.js') }}"></script>
+{% endif %}

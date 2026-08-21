@@ -3,7 +3,7 @@
 **Estado:** vigente
 **Versión base al iniciar el plan:** `0.0.25-beta`
 **Versión candidata de cierre de PLAN.1:** `0.0.26-beta`
-**Fecha:** 2026-08-19
+**Fecha:** 2026-08-21
 **Clasificación:** Producto / Arquitectura / QA / Release
 
 ## 1. Propósito
@@ -87,7 +87,7 @@ Revisiones internas:
 
 ### 2. UX.4.6f — Paso 4 · Proyección salarial/laboral
 
-**Estado:** cerrado. El siguiente bloque funcional activo es UX.4.6g — Paso 5 · Escenarios de retiro.
+**Estado:** cerrado. Después de su cierre se habilitó UX.4.6g — Paso 5 · Escenarios de retiro.
 
 - **R1/R1.1 cerradas:** procedencia visual uniforme, decisiones explícitas, trazabilidad de valores automáticos, procesamiento accesible de adjuntos y bloqueo de datos documentales detectados en la vista principal; PR #28 integrado tras **743/743 pruebas en `OK`** y validación manual;
 - **R2 cerrada:** auditadas la coherencia Pasos 2–4, la matemática de las cuatro modalidades, la trazabilidad mensual y la procedencia del horizonte; PR #30 integrado por squash en `9634ae4b1a0a07cc14682d315b6cdb9c1b37eb4d` tras validación manual, **756/756 pruebas en `OK`** en CI y los tres checks requeridos en verde;
@@ -101,7 +101,7 @@ Revisiones internas:
 
 ### 3. UX.4.6g — Paso 5 · Escenarios de retiro
 
-**R1 activo:** selección contextual derivada de Paso 4, retiro anticipado explícito, fecha de evaluación dentro de banda y coherencia visual/temporal de escenarios.
+**Estado:** cerrado. R1 fue integrado mediante PR #32 con **784 pruebas en `OK`** y los checks requeridos en verde. El bloque funcional siguiente es UX.4.6h.
 
 - escenarios de edad/fecha;
 - continuación de cotización;
@@ -112,6 +112,10 @@ Revisiones internas:
 
 ### 4. UX.4.6h — Paso 6 · Resultados y exportación
 
+**Estado:** cerrado. R1/R1.1/R1.2/R1.3 consolidan el Paso 6 con gate de cierre de **812 pruebas**. El siguiente bloque funcional activo es UX.4.6i — Cómo se calcula.
+
+El cierre incorpora selección salarial explícita, invalidación de resultados obsoletos, transición Mixto→SUCGS guiada, presentación depurada del resultado y un informe A4 imprimible independiente. La generación y descarga directa de PDF por la aplicación permanece reservada a REP.1.
+
 - resultados finales;
 - comparación;
 - trazabilidad;
@@ -121,6 +125,8 @@ Revisiones internas:
 - accesibilidad del resultado.
 
 ### 5. UX.4.6i — Cómo se calcula
+
+**Estado:** activo.
 
 Nueva sección pública para que el asegurado pueda reproducir manualmente los
 procedimientos implementados.
