@@ -5,7 +5,7 @@
 **Versión base histórica:** `0.0.25-beta`
 **Versión base histórica preservada:** `0.0.23-beta`
 **Base documental preservada:** GOV.1.3 R4 — 2026-08-17
-**Revisión transversal vigente:** PLAN.1 R2B1 — transición futura a versión oficial — 2026-08-20
+**Revisión transversal vigente:** UX.4.6i — cierre de guía pública de cálculo — 2026-08-21
 **Clasificación:** Pública / Auditoría
 
 Mi Retiro Proyectado es una herramienta independiente de estimación previsional. Este documento delimita qué puede afirmarse sobre el producto y qué debe permanecer explícitamente como aproximación, limitación o pendiente.
@@ -62,7 +62,7 @@ Las discrepancias identificadas se documentan; no se armonizan silenciosamente.
 
 La capa de trazabilidad **no vuelve a calcular** la prestación. Developer Diagnostics tampoco recalcula: observa la operación ya ejecutada.
 
-PLAN.1 reserva UX.4.6i para exponer al Asegurado(a) una guía pública «Cómo se calcula» de SEBD, Mixto y SUCGS. Esa guía describirá la lógica canónica de Python y normativa sin duplicar algoritmos numéricos en HTML o JavaScript.
+La ruta pública `/como-se-calcula` explica el orden de operaciones de SEBD, Mixto y SUCGS con parámetros leídos desde `normativa/*.json`. La guía no ejecuta motores ni reconstruye el resultado personal: la sustitución con cifras del Asegurado(a) permanece en la trazabilidad del Paso 6. Los ejemplos son ilustrativos y cualquier parámetro hipotético se identifica como no oficial.
 
 ## 6. Privacidad
 
@@ -119,11 +119,13 @@ El repositorio de código es público desde el 2026-08-19. Esa decisión:
 
 Como evidencia del checkpoint anterior se conserva la formulación: **no declara completada la primera beta pública de producto**. PLAN.1 sustituyó posteriormente esa meta por la transición directa desde la línea beta `0.0.N-beta` hacia `1.0.0.0`.
 
-La revisión documental anterior mantenía pendiente el **cierre de UX.4.6e y del alcance funcional UX.4.6f–h**. UX.4.6e ya cerró en `0.0.25-beta`; UX.4.6f–h permanecen pendientes y se añadieron UX.4.6i, DEV.2, SEC.2, DOC.2, PERSIST.1, REP.1, A11Y.2, REV.1, QA.1 y REL.1 conforme al plan maestro.
+Como evidencia histórica también se conserva la formulación **“cierre de UX.4.6e y del alcance funcional UX.4.6f–h”**, que en aquella revisión describía trabajo todavía pendiente. Esa frase se mantiene únicamente para preservar la trazabilidad documental y **ya no representa el estado vigente**.
+
+UX.4.6e cerró en `0.0.25-beta`; UX.4.6f, UX.4.6g, UX.4.6h y UX.4.6i están cerrados sobre `0.0.26-beta`. El bloque funcional activo es DEV.2 — Centro de desarrollo; después continúan SEC.2, DOC.2, PERSIST.1, REP.1, A11Y.2, REV.1, QA.1 y REL.1 conforme al plan maestro.
 
 Continúan pendientes, según corresponda:
 
-- PLAN.1 y los bloques posteriores definidos en `PLAN_MAESTRO_HACIA_1_0.md`;
+- DEV.2 y los bloques posteriores definidos en `PLAN_MAESTRO_HACIA_1_0.md`;
 - revisión jurídica externa previa a la primera versión oficial;
 - hardening específico si se decide un despliegue remoto;
 - verificación periódica de configuración y alertas de GitHub;

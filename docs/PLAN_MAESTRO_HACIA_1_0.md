@@ -126,10 +126,16 @@ El cierre incorpora selección salarial explícita, invalidación de resultados 
 
 ### 5. UX.4.6i — Cómo se calcula
 
-**Estado:** activo.
+**Estado:** cerrado. R1/R1.1/R1.2/R1.3/R1.4 consolidan la guía pública integral con gate de cierre de **841 pruebas**. El siguiente bloque funcional activo es DEV.2 — Centro de desarrollo.
 
 Nueva sección pública para que el asegurado pueda reproducir manualmente los
-procedimientos implementados.
+procedimientos implementados. R1 obtiene parámetros desde `normativa/`, reutiliza
+el catálogo de fuentes y enlaza el sistema calculado desde Paso 6 sin transportar
+datos personales. R1.2 incorpora acceso desde la navegación principal y explica
+cómo cuotas, historial, salario normalizado, proyección, línea temporal y fecha de
+retiro se transforman progresivamente antes de aplicar el sistema en Paso 6.
+
+R1.3 conserva las fórmulas generales y añade sustituciones numéricas inmediatamente debajo, define la terminología previsional dentro de cada sistema y ajusta la respiración visual de tablas, notas y fuentes. Las definiciones no se replican todavía en los Pasos 1–6 del asistente; su reutilización contextual se evaluará como capa transversal posterior para evitar duplicación de textos.
 
 Debe cubrir:
 
@@ -151,6 +157,8 @@ Debe cubrir:
 La explicación no duplicará motores de cálculo en JavaScript.
 
 ### 6. DEV.2 — Centro de desarrollo
+
+**Estado:** activo.
 
 Evolución visible y controlada de Developer Diagnostics:
 

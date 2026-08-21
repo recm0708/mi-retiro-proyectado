@@ -6,9 +6,9 @@
 **Base documental histórica:** `0.0.23-beta` — GOV.1.3 R4 — 2026-08-17
 **Revisión documental:** GOV.1.3 R4 — 2026-08-17
 **Última actualización de gobierno:** PLAN.1 / ADR-168 — 2026-08-20
-**Última actualización técnica:** UX.4.6g R1.4.3 / ADR-177 — 2026-08-21
+**Última actualización técnica:** UX.4.6i R1.4 / ADR-178 — 2026-08-21
 **Clasificación:** Técnica / Gobierno / Auditoría
-**ADR indexadas:** 177 (`ADR-001` a `ADR-177`)
+**ADR indexadas:** 178 (`ADR-001` a `ADR-178`)
 
 Este registro conserva decisiones de arquitectura, modelado, UX, precisión, seguridad y aplicación normativa. Una ADR explica por qué el proyecto adoptó una decisión; no crea una norma jurídica.
 
@@ -210,6 +210,7 @@ R4 **no inventa un estado retroactivo** para esas decisiones. El índice las mar
 | ADR-175 | El retiro anticipado se compara solo por decisión explícita y las fechas transcurridas no son acciones futuras | Aceptada para UX.4.6g R1 |
 | ADR-176 | Los campos de fecha usan validación calendárica transversal y ancho compacto | Aceptada para UX.4.6g R1 |
 | ADR-177 | Los bloques comparables conservan alineación y densidad visual en escritorio | Aceptada para UX.4.6g R1.4.3 |
+| ADR-178 | La guía pública explica parámetros versionados sin convertirse en un segundo motor | Aceptada para UX.4.6i R1–R1.4 |
 
 ## 4. Registro íntegro de ADR
 
@@ -1944,3 +1945,20 @@ En Paso 5, la fecha personalizada informa de forma visible si queda cubierta por
 **Motivo:** la validación manual mostró desalineaciones entre controles equivalentes y un salto de línea evitable en el resumen de retiro, pese a existir ancho horizontal disponible. La geometría debe facilitar comparación rápida sin aumentar altura ni alterar contenido funcional.
 
 **Consecuencia:** este ajuste es exclusivamente de presentación; no modifica estados, fórmulas, normativa ni resultados previsionales.
+
+## ADR-178 — La guía pública explica parámetros versionados sin convertirse en un segundo motor
+
+**Estado:** Aceptada para UX.4.6i R1–R1.4.
+**Fecha:** 2026-08-21.
+
+**Decisión:** la sección pública `/como-se-calcula` describe el orden de operaciones de SEBD, Subsistema Mixto y SUCGS, pero no ejecuta prestaciones. `app/servicios/como_se_calcula.py` puede leer y estructurar parámetros de `normativa/*.json`; no importa motores previsionales ni reconstruye resultados personales. Las fórmulas ejecutables permanecen en Python dentro de los motores existentes y la sustitución con cifras de una simulación continúa en la trazabilidad del Paso 6.
+
+La guía reutiliza `construir_catalogo_metodologia()` para las fuentes oficiales y el Paso 6 enlaza únicamente mediante el identificador público del sistema (`#sebd`, `#mixto`, `#sucgs`). No se serializan datos personales, salarios, cuotas ni montos de la simulación en la URL.
+
+**Motivo:** la transparencia exige que una persona pueda comprender y reproducir el procedimiento general, pero duplicar lógica normativa en JavaScript o en una segunda calculadora introduciría riesgo de divergencia entre explicación y motor. La vinculación por sistema permite contextualizar la ayuda sin ampliar la superficie de datos personales.
+
+**Consecuencia:** cualquier cambio futuro en reglas, parámetros, trazabilidad o fuentes debe revisar también la guía pública. Los ejemplos permanecen ilustrativos y cualquier parámetro hipotético debe identificarse expresamente como no oficial.
+
+**Refinamiento R1.2:** la guía se incorpora también a la navegación principal con estado activo propio y hace explícita la transformación de datos entre los Pasos 1–6. Las tablas extensas de factores se compactan únicamente mediante CSS responsive y los importes de esta guía usan separador de miles y dos decimales; estos cambios no modifican parámetros, fórmulas ni resultados.
+
+**Refinamiento R1.3:** la explicación conserva cada fórmula general y añade debajo una sustitución numérica marcada como ejemplo. Los términos previsionales se definen dentro de la sección donde se utilizan, evitando un glosario aislado y evitando también replicarlos todavía por todo el asistente. El espaciado de tablas, notas y fuentes se ajusta con tokens semánticos; no se modifica ningún motor ni parámetro normativo.

@@ -420,3 +420,23 @@ Se añade una regresión para impedir que la normalización global de accesibili
 ### UX.4.6g R1.4.3 — alineación visual final
 
 Se añaden tres regresiones para la alineación del período del historial, la alineación de los dos años del Paso 4 y la distribución responsive del resumen de retiro. El gate objetivo pasa a **784 pruebas en `OK`**. La validación manual debe confirmar estas tres geometrías en escritorio y que el apilado móvil no se degrade.
+
+### UX.4.6i R1 — guía pública Cómo se calcula
+
+La revisión añade **14 regresiones específicas** en `tests/test_ux46i_r1_como_se_calcula.py`. Partiendo del cierre de UX.4.6h con 812 pruebas, el gate objetivo del candidato es **826 pruebas en `OK`**, además de `pip check`, compilación Python, sintaxis JavaScript y `git diff --check`.
+
+La validación automática cubre ruta pública, lectura de parámetros normativos, ausencia de motores en la capa explicativa, contenido SEBD/Mixto/SUCGS, enlaces desde resultados y Metodología, estructura accesible/responsive, ADR/RF/TR y documentación. La validación manual debe comprobar temas Claro, Oscuro y Alto contraste, navegación por anclas, tablas desplegables y legibilidad en escritorio/móvil.
+
+### UX.4.6i R1.2 — recorrido completo y refinamiento visual
+
+La primera validación visual de R1 confirmó la estructura general y detectó cuatro mejoras necesarias: acceso directo desde la navbar, explicación más profunda de la transformación de datos entre Pasos 1–6, separador de miles en importes de la guía y menor altura de las tablas de factores.
+
+R1.2 añade **6 regresiones** sobre la línea de 826 pruebas: navegación activa, recorrido de transformación de datos, ausencia de lenguaje interno en la copia principal, formato monetario, densidad de factores SEBD/SUCGS y uso de tokens/tema. El gate objetivo pasa a **832 pruebas en `OK`**.
+
+La validación manual debe confirmar Claro, Oscuro y Alto contraste; navbar activa; tablas SEBD en 3 filas y SUCGS en aproximadamente 5 filas en escritorio amplio; legibilidad responsive; y correspondencia de las explicaciones de Pasos 1–6 con la simulación real.
+### UX.4.6i R1.3 — sustituciones numéricas y terminología contextual
+
+R1.3 añade **8 regresiones** sobre la línea de 832 pruebas. Protegen la presencia simultánea de fórmula general y ejemplo sustituido, la terminología contextual de SEBD/Mixto/SUCGS, las fórmulas adicionales de tasa equivalente y fracción de año, el espaciado de tabla/nota/fuentes y el uso exclusivo de tokens semánticos en la nueva capa visual. El gate objetivo pasa a **840 pruebas en `OK`**.
+### UX.4.6i R1.4 — cierre de guía pública
+
+R1.4 simplifica la etiqueta visible de cada sustitución numérica a **Ejemplo** y añade una regresión para impedir que reaparezca la coletilla anterior. La validación manual acumulada confirmó estructura, navegación, recorrido de datos Pasos 1–6, fórmulas con sustitución, definiciones contextuales, tablas SEBD/SUCGS compactas, espaciado y presentación de los tres sistemas. El gate de cierre queda en **841 pruebas en `OK`**.

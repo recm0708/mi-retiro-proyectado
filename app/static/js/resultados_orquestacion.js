@@ -1225,6 +1225,29 @@
   }
 
 
+  function actualizarEnlaceComoSeCalcula(resumen) {
+    const enlace = document.getElementById(
+      "resultado-ver-como-se-calcula",
+    );
+
+    if (!enlace) {
+      return;
+    }
+
+    const sistema = String(resumen?.sistema || "").toUpperCase();
+    const anclas = {
+      SEBD: "sebd",
+      MIXTO: "mixto",
+      SUCGS: "sucgs",
+    };
+    const ancla = anclas[sistema];
+
+    enlace.href = ancla
+      ? `/como-se-calcula#${ancla}`
+      : "/como-se-calcula";
+  }
+
+
   function crearAccionesExportacion() {
     if (document.getElementById("resultado-exportacion")) {
       return;
@@ -1264,13 +1287,22 @@
           disponibles. No es un documento oficial de la CSS.
         </p>
       </div>
-      <button
-        type="button"
-        id="btn-imprimir-resultado"
-        class="btn btn-primary btn-center-content"
-      >
-        Preparar informe para imprimir
-      </button>
+      <div class="d-grid gap-2 flex-shrink-0">
+        <a
+          id="resultado-ver-como-se-calcula"
+          class="btn btn-outline-primary btn-center-content"
+          href="/como-se-calcula"
+        >
+          Ver cómo se obtuvo este cálculo
+        </a>
+        <button
+          type="button"
+          id="btn-imprimir-resultado"
+          class="btn btn-primary btn-center-content"
+        >
+          Preparar informe para imprimir
+        </button>
+      </div>
     `;
 
     resumen.insertAdjacentElement("afterend", bloque);
@@ -1336,6 +1368,7 @@
         document.getElementById(
           "resultado-exportacion",
         )?.classList.toggle("d-none", !resumen);
+        actualizarEnlaceComoSeCalcula(resumen);
         prepararCabeceraImpresion();
         return respuesta;
       };

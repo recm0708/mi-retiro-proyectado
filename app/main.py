@@ -139,6 +139,7 @@ BASE_DIR = Path(__file__).resolve().parent
 # Configuración de FastAPI
 # ============================================================
 from app.servicios.fuentes_normativas import construir_catalogo_metodologia
+from app.servicios.como_se_calcula import construir_guia_calculo
 
 
 app = FastAPI(
@@ -373,6 +374,27 @@ async def metodologia(
             "pagina_activa": "metodologia",
             "version": APP_VERSION,
             "catalogo": construir_catalogo_metodologia(),
+        },
+    )
+
+
+@app.get(
+    "/como-se-calcula",
+    response_class=HTMLResponse,
+)
+async def como_se_calcula(
+    request: Request,
+):
+    """Explica públicamente el procedimiento implementado por los motores."""
+
+    return templates.TemplateResponse(
+        request=request,
+        name="como_se_calcula.html",
+        context={
+            "pagina_activa": "como_se_calcula",
+            "version": APP_VERSION,
+            "catalogo": construir_catalogo_metodologia(),
+            "guia": construir_guia_calculo(),
         },
     )
 

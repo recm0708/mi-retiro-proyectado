@@ -1162,3 +1162,19 @@ Quedan para fases posteriores:
 **RF-381.** Los controles Año inicial y Proyectar hasta el año del Paso 4 deben conservar alineación vertical aunque uno de ellos incorpore ayuda contextual.
 
 **RF-382.** El resumen contextual del Paso 5 debe asignar ancho suficiente a Cierre esperado este año para evitar saltos de línea cuando exista espacio horizontal disponible, compensándolo con campos de contenido breve como Sexo.
+
+### UX.4.6i — Revisión 1 · transparencia pública del cálculo
+
+**RF-383.** La aplicación debe ofrecer una ruta pública `/como-se-calcula` que explique el procedimiento general de SEBD, Subsistema Mixto y SUCGS sin requerir una simulación activa.
+
+**RF-384.** La guía debe cubrir la transformación de datos desde los Pasos 1–6 —edad, cuotas, historial, normalización salarial, proyección, línea temporal, fecha de retiro y resultado— además de clasificación o requisitos, fórmulas descriptivas, sustituciones numéricas ilustrativas, variables, orden de operaciones, factores o límites aplicables, redondeos, términos previsionales definidos en contexto, fuentes y limitaciones de cada sistema dentro del alcance implementado.
+
+**RF-385.** Los parámetros numéricos versionables mostrados por la guía deben obtenerse desde `normativa/` mediante una capa de presentación; la guía no debe introducir valores productivos independientes de los parámetros canónicos.
+
+**RF-386.** La guía pública no debe importar ni ejecutar motores de pensión, construir solicitudes personales ni duplicar fórmulas ejecutables en JavaScript. El detalle con sustitución de cifras individuales permanece en la trazabilidad del Paso 6.
+
+**RF-387.** Paso 6 debe ofrecer una acción **Ver cómo se obtuvo este cálculo** después de existir un resumen válido y dirigir al apartado SEBD, Mixto o SUCGS correspondiente sin incluir datos personales o financieros en la URL.
+
+**RF-388.** La navegación principal y la página Metodología y fuentes deben ofrecer una entrada visible a **Cómo se calcula**. La guía debe poseer estado activo propio y reutilizar el catálogo oficial existente para evitar URLs normativas duplicadas en la plantilla.
+
+**RF-389.** Los ejemplos públicos deben usar datos ilustrativos y advertir cualquier parámetro hipotético; no pueden presentarse como determinación oficial ni como prueba de elegibilidad individual. Cuando una fórmula general se acompaña de sustitución numérica, ambas deben permanecer visibles y claramente diferenciadas.
