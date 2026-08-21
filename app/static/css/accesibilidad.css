@@ -179,3 +179,39 @@ html[data-app-theme="contrast"] .context-help-panel {
     display: none !important;
   }
 }
+
+
+/* ==========================================================
+   Controles de fecha — contrato transversal
+   ========================================================== */
+
+.app-date-input.form-control {
+  width: min(100%, 20rem);
+  max-width: 20rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.retirement-date-coverage {
+  max-width: 42rem;
+  margin-top: 0.5rem;
+  font-weight: 600;
+}
+
+.retirement-date-coverage-ok {
+  color: var(--app-info-text);
+}
+
+.retirement-date-coverage-warning {
+  color: var(--app-warning-text);
+}
+
+html[data-app-theme="contrast"] .retirement-date-coverage {
+  font-weight: 750;
+}
+
+@media (max-width: 575.98px) {
+  .app-date-input.form-control {
+    width: 100%;
+    max-width: 100%;
+  }
+}

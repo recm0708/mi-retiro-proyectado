@@ -293,3 +293,10 @@ Este documento describe el estado técnico vigente después de GOV.1.4.
 `procedencia_editable.js` separa tres conceptos: **fotografía documental original**, **copia de trabajo** y **capacidad de edición de la superficie actual**. En los paneles principales, un control cuyo valor existía en la fotografía original se aplica mediante `readonly` o `disabled` y la clase visual `field-imported-readonly`; los modales de revisión quedan excluidos de este helper para permitir el ciclo explícito **Editar campos → confirmar**.
 
 El patrón se reutiliza en datos personales, cuotas, historial anual y detalle del año actual. La franja primaria del sistema visual funciona en Claro, Oscuro y Alto contraste y acompaña, pero no reemplaza, la semántica nativa de bloqueo. Los valores automáticos derivados no se confunden con datos documentales y mantienen sus reglas específicas de edición.
+
+### UX.4.6g R1 — frontera de escenarios de retiro
+
+Paso 5 mantiene dos capas separadas: `app/static/js/retiro.js` propone y conserva la selección visible, mientras `app/servicios/retiro.py` construye fechas/cuotas sin decidir elegibilidad. Las sugerencias posteriores se derivan de la cobertura de Paso 4; las elecciones anticipadas requieren acción explícita. `app/motores/elegibilidad.py` y los motores de prestaciones continúan siendo la frontera jurídica para determinar modalidad y factores.
+### Contrato transversal de fechas
+
+`app/static/js/accesibilidad.js` aplica de forma idempotente validación y clase visual a todos los `input[type=date]`, incluidos controles dinámicos. `app/static/css/accesibilidad.css` define la geometría compacta común. Las superficies pueden declarar límites `min`/`max` más restrictivos; la capa transversal solo aporta valores por defecto cuando faltan. Paso 5 consume este contrato y añade exclusivamente la explicación de cobertura contra el horizonte salarial.

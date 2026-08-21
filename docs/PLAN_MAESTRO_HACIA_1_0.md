@@ -101,6 +101,8 @@ Revisiones internas:
 
 ### 3. UX.4.6g — Paso 5 · Escenarios de retiro
 
+**R1 activo:** selección contextual derivada de Paso 4, retiro anticipado explícito, fecha de evaluación dentro de banda y coherencia visual/temporal de escenarios.
+
 - escenarios de edad/fecha;
 - continuación de cotización;
 - cuotas adicionales;

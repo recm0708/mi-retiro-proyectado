@@ -51,7 +51,7 @@
             </strong>
           </div>
 
-          <div class="col-md-4 col-xl-2">
+          <div class="col-md-4 col-xl-1">
             <span class="retirement-context-label">
               Sexo
             </span>
@@ -75,7 +75,7 @@
             </strong>
           </div>
 
-          <div class="col-md-4 col-xl-2">
+          <div class="col-md-4 col-xl-3">
             <span class="retirement-context-label">
               Cierre esperado este año
             </span>
@@ -197,53 +197,61 @@
         </div>
 
 
-        <!-- Escenarios predefinidos. -->
+        <!-- Escenarios de retiro en una cuadrícula compacta. -->
 
         <div class="mb-4">
 
-          <label class="form-label fw-semibold d-block mb-3">
-            Escenarios que deseas comparar
-          </label>
+          <div class="mb-3">
+            <label class="form-label fw-semibold d-block mb-1">
+              Escenarios que deseas comparar
+            </label>
+            <p class="text-secondary mb-0">
+              La edad de referencia se incluye siempre. Los años posteriores
+              cubiertos por tu proyección salarial se marcan como punto de
+              partida. Los anticipados son opcionales y pueden aplicar una
+              reducción si cumplen los requisitos correspondientes.
+            </p>
+          </div>
 
           <div class="retirement-option-grid">
 
             <label class="retirement-option" for="retiro-anticipado-2">
               <span class="form-check">
                 <input
-                  class="form-check-input retiro-adicional"
+                  class="form-check-input retiro-adicional retiro-anticipado"
                   type="checkbox"
                   value="-2"
                   id="retiro-anticipado-2"
-                  checked
                 >
                 <span class="form-check-label fw-semibold">
                   -2 años
                 </span>
               </span>
               <small class="text-secondary">
-                Límite inferior de la banda anticipada estándar.
+                Dos años antes de la edad de referencia; puede aplicar una reducción.
               </small>
+              <span class="retirement-option-meta" data-retiro-estado>—</span>
             </label>
 
             <label class="retirement-option" for="retiro-anticipado-1">
               <span class="form-check">
                 <input
-                  class="form-check-input retiro-adicional"
+                  class="form-check-input retiro-adicional retiro-anticipado"
                   type="checkbox"
                   value="-1"
                   id="retiro-anticipado-1"
-                  checked
                 >
                 <span class="form-check-label fw-semibold">
                   -1 año
                 </span>
               </span>
               <small class="text-secondary">
-                Un año antes de la edad de referencia.
+                Un año antes de la edad de referencia; puede aplicar una reducción.
               </small>
+              <span class="retirement-option-meta" data-retiro-estado>—</span>
             </label>
 
-            <div class="retirement-option retirement-option-fixed">
+            <div class="retirement-option retirement-option-fixed retirement-option-selected">
               <div class="form-check">
                 <input
                   class="form-check-input"
@@ -262,6 +270,10 @@
               <small class="text-secondary">
                 Se incluye siempre como punto de comparación.
               </small>
+              <span
+                id="retiro-fecha-referencia-opcion"
+                class="retirement-option-meta"
+              >—</span>
             </div>
 
             <label class="retirement-option" for="retiro-adicional-1">
@@ -271,7 +283,6 @@
                   type="checkbox"
                   value="1"
                   id="retiro-adicional-1"
-                  checked
                 >
                 <span class="form-check-label fw-semibold">
                   +1 año
@@ -280,6 +291,7 @@
               <small class="text-secondary">
                 Un año después de la edad de referencia.
               </small>
+              <span class="retirement-option-meta" data-retiro-estado>—</span>
             </label>
 
             <label class="retirement-option" for="retiro-adicional-2">
@@ -289,7 +301,6 @@
                   type="checkbox"
                   value="2"
                   id="retiro-adicional-2"
-                  checked
                 >
                 <span class="form-check-label fw-semibold">
                   +2 años
@@ -298,6 +309,7 @@
               <small class="text-secondary">
                 Dos años después de la edad de referencia.
               </small>
+              <span class="retirement-option-meta" data-retiro-estado>—</span>
             </label>
 
             <label class="retirement-option" for="retiro-adicional-3">
@@ -307,7 +319,6 @@
                   type="checkbox"
                   value="3"
                   id="retiro-adicional-3"
-                  checked
                 >
                 <span class="form-check-label fw-semibold">
                   +3 años
@@ -316,6 +327,25 @@
               <small class="text-secondary">
                 Tres años después de la edad de referencia.
               </small>
+              <span class="retirement-option-meta" data-retiro-estado>—</span>
+            </label>
+
+            <label class="retirement-option" for="retiro-adicional-4">
+              <span class="form-check">
+                <input
+                  class="form-check-input retiro-adicional"
+                  type="checkbox"
+                  value="4"
+                  id="retiro-adicional-4"
+                >
+                <span class="form-check-label fw-semibold">
+                  +4 años
+                </span>
+              </span>
+              <small class="text-secondary">
+                Cuatro años después de la edad de referencia.
+              </small>
+              <span class="retirement-option-meta" data-retiro-estado>—</span>
             </label>
 
             <label class="retirement-option" for="retiro-adicional-5">
@@ -325,7 +355,6 @@
                   type="checkbox"
                   value="5"
                   id="retiro-adicional-5"
-                  checked
                 >
                 <span class="form-check-label fw-semibold">
                   +5 años
@@ -334,6 +363,32 @@
               <small class="text-secondary">
                 Cinco años después de la edad de referencia.
               </small>
+              <span class="retirement-option-meta" data-retiro-estado>—</span>
+            </label>
+
+            <label
+              class="retirement-option d-none"
+              id="opcion-retiro-fecha-evaluacion"
+              for="retiro-fecha-evaluacion"
+            >
+              <span class="form-check">
+                <input
+                  class="form-check-input retiro-evaluacion"
+                  type="checkbox"
+                  id="retiro-fecha-evaluacion"
+                >
+                <span class="form-check-label fw-semibold">
+                  Retirarme en la fecha de evaluación
+                </span>
+              </span>
+              <small class="text-secondary">
+                Compara el retiro en la fecha de evaluación cuando todavía
+                estás dentro de la banda anticipada; puede aplicar una reducción.
+              </small>
+              <span
+                id="estado-retiro-fecha-evaluacion"
+                class="retirement-option-meta"
+              >—</span>
             </label>
 
           </div>
@@ -379,7 +434,15 @@
                   type="date"
                   class="form-control form-control-lg"
                   id="fecha_retiro_personalizada"
+                  aria-describedby="estado-cobertura-fecha-personalizada"
                 >
+
+                <div
+                  id="estado-cobertura-fecha-personalizada"
+                  class="form-text retirement-date-coverage d-none"
+                  role="status"
+                  aria-live="polite"
+                ></div>
 
               </div>
             </div>
@@ -511,7 +574,7 @@
           <button
             type="button"
             id="btn-ajustar-proyeccion-retiro"
-            class="btn btn-sm btn-outline-dark mt-3 d-none"
+            class="btn btn-sm btn-primary mt-3 d-none"
           >
             Ajustar horizonte en el Paso 4
           </button>
@@ -520,7 +583,9 @@
 
         <!-- Tabla de escenarios. -->
 
-        <div class="table-responsive retirement-table-wrapper app-table-shell">
+        <div
+          class="table-responsive retirement-table-wrapper table-scroll-compact app-table-shell"
+        >
 
           <table class="table table-hover align-middle retirement-table">
 

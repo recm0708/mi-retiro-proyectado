@@ -6,6 +6,26 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ## [Unreleased]
 
+### UX.4.6g R1.4.3 — alineación visual final
+
+- alinea Año inicial/Período del historial y Año inicial/Proyectar hasta el año;
+- redistribuye el resumen del Paso 5 para evitar el salto de línea de Cierre esperado este año en escritorio;
+- añade regresiones y trazabilidad ADR-177 / RF-380–RF-382 / TR-025.
+
+### UX.4.6g R1 — escenarios de retiro derivados y anticipados explícitos
+
+- eliminada la selección fija de `-2`, `-1`, `+1`, `+2`, `+3` y `+5` del HTML; la edad de referencia queda como único escenario seguro por defecto también en la API;
+- los años posteriores se sugieren desde el horizonte realmente cubierto por Paso 4 y la selección conserva procedencia `SUGERIDO_PASO4` o `EDITADO_USUARIO`, evitando pisar decisiones manuales;
+- añadido `+4 años`, completando la secuencia `+1` a `+5`;
+- los escenarios anticipados permanecen sin marcar hasta una decisión explícita, muestran su fecha exacta y se deshabilitan cuando esa fecha ya transcurrió;
+- cuando la fecha de evaluación está dentro de la banda anticipada estándar se ofrece explícitamente **Retirarme en la fecha de evaluación**, sin afirmar por sí sola elegibilidad legal;
+- el backend admite ese escenario de evaluación únicamente dentro de la banda anticipada versionada y conserva la clasificación legal para el Paso 6;
+- la tabla del Paso 5 elimina el scroll vertical interno en tablas cortas y conserva desplazamiento horizontal cuando el viewport lo requiere;
+- ADR-174/ADR-175, RF-366 a RF-374 y TR-022/TR-023 formalizan el contrato; se añaden 13 regresiones específicas y `VERSION` permanece en `0.0.26-beta`.
+- R1.2/R1.3 recuperan la cuadrícula compacta del Paso 5, conservan `+4 años` y corrigen la visibilidad de **Ajustar horizonte en el Paso 4** en Claro, Oscuro y Alto contraste sin alterar la lógica previsional.
+- R1.4 normaliza abreviaturas de sexo (`F`/`M`) para calcular la referencia en frontend, hace visible **Retirarme en la fecha de evaluación** cuando corresponde, informa si una fecha personalizada está cubierta por el horizonte salarial y adopta un contrato transversal para todos los `input[type=date]`: año de cuatro dígitos, rango 1900–2200, validación calendárica y ancho compacto adaptable. ADR-176, RF-375 a RF-379 y TR-024 amplían la trazabilidad; el gate candidato asciende a 780 pruebas.
+- R1.4.2 endurece la inicialización dinámica de accesibilidad para impedir ciclos de `MutationObserver` durante recargas completas; la preparación de controles de fecha pasa a ser idempotente y el observador se suspende mientras aplica sus propias mutaciones. El gate candidato asciende a 781 pruebas.
+
 ### UX.4.6f R2 — auditoría lógica, matemática y trazabilidad del Paso 4
 
 - reforzada `construir_linea_tiempo()` para rechazar historial incompleto, totales de cuotas desincronizados entre Pasos 2–3 y discrepancias en las cuotas del año actual antes de combinar realidad y proyección;

@@ -112,6 +112,376 @@ function convertirMesCuotasAFechaCorte(
 }
 
 
+
+
+// ============================================================
+// Selección contextual de escenarios
+// ============================================================
+
+const RETIRO_ORIGEN_SUGERIDO = "SUGERIDO_PASO4";
+const RETIRO_ORIGEN_USUARIO = "EDITADO_USUARIO";
+const RETIRO_SELECCION_LEGACY = [-2, -1, 0, 1, 2, 3, 5];
+const RETIRO_MAXIMO_ANTICIPACION_ESTANDAR = 2;
+
+
+/** Suma años a una fecha ISO preservando mes y el último día válido. */
+function sumarAniosFechaIso(fechaIso, cantidad) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(fechaIso || "")) {
+    return "";
+  }
+
+  const [anio, mes, dia] = fechaIso.split("-").map(Number);
+  const nuevoAnio = anio + Number(cantidad);
+  const ultimoDia = new Date(nuevoAnio, mes, 0).getDate();
+  const nuevoDia = Math.min(dia, ultimoDia);
+
+  return [
+    nuevoAnio,
+    String(mes).padStart(2, "0"),
+    String(nuevoDia).padStart(2, "0"),
+  ].join("-");
+}
+
+
+/** Devuelve la fecha exacta de la edad de referencia usada por el Paso 5. */
+function obtenerFechaReferenciaInterfaz(persona) {
+  if (!persona?.fecha_nacimiento || !persona?.sexo) {
+    return "";
+  }
+
+  const sexo = String(persona.sexo || "")
+    .trim()
+    .toUpperCase();
+
+  const edadReferencia = ["F", "FEMENINO", "MUJER"].includes(sexo)
+    ? 57
+    : ["M", "MASCULINO", "HOMBRE"].includes(sexo)
+      ? 62
+      : null;
+
+  if (edadReferencia === null) {
+    return "";
+  }
+
+  return sumarAniosFechaIso(
+    persona.fecha_nacimiento,
+    edadReferencia,
+  );
+}
+
+
+/** Obtiene el año realmente cubierto por la proyección del Paso 4. */
+function obtenerAnioFinProyeccionRetiro(simulacion) {
+  const valor = (
+    simulacion.resumen_proyeccion?.anio_fin
+    ?? simulacion.proyeccion?.anio_fin
+    ?? null
+  );
+
+  const anio = Number(valor);
+  return Number.isInteger(anio) ? anio : null;
+}
+
+
+function esSeleccionRetiroLegacy(anios) {
+  if (!Array.isArray(anios)) {
+    return false;
+  }
+
+  const normalizados = [...new Set(anios.map(Number))].sort((a, b) => a - b);
+  return JSON.stringify(normalizados) === JSON.stringify(RETIRO_SELECCION_LEGACY);
+}
+
+
+/** Lee preferencias R1 o migra una selección previa que no era el default fijo legado. */
+function obtenerPreferenciasEscenariosRetiro(simulacion) {
+  const preferencias = simulacion.preferencias_retiro;
+
+  if (
+    preferencias
+    && Array.isArray(preferencias.anios_adicionales)
+    && [RETIRO_ORIGEN_SUGERIDO, RETIRO_ORIGEN_USUARIO].includes(
+      preferencias.origen,
+    )
+  ) {
+    return preferencias;
+  }
+
+  const retiro = simulacion.retiro || {};
+
+  if (
+    Array.isArray(retiro.anios_adicionales)
+    && !esSeleccionRetiroLegacy(retiro.anios_adicionales)
+  ) {
+    return {
+      anios_adicionales: retiro.anios_adicionales.map(Number),
+      incluir_fecha_evaluacion: Boolean(
+        retiro.incluir_fecha_evaluacion_como_retiro,
+      ),
+      origen: RETIRO_ORIGEN_USUARIO,
+      anio_fin_proyeccion_origen: null,
+    };
+  }
+
+  return null;
+}
+
+
+/** Devuelve la selección visible, incluyendo siempre la referencia 0. */
+function obtenerSeleccionEscenariosRetiroInterfaz() {
+  const anios = [0];
+
+  document
+    .querySelectorAll(".retiro-adicional:checked")
+    .forEach((elemento) => {
+      if (!elemento.disabled) {
+        anios.push(Number(elemento.value));
+      }
+    });
+
+  return [...new Set(anios)].sort((a, b) => a - b);
+}
+
+
+function guardarPreferenciasEscenariosRetiro(origen) {
+  const simulacion = obtenerSimulacion();
+  const evaluacion = document.getElementById("retiro-fecha-evaluacion");
+
+  simulacion.preferencias_retiro = {
+    anios_adicionales: obtenerSeleccionEscenariosRetiroInterfaz(),
+    incluir_fecha_evaluacion: Boolean(
+      evaluacion?.checked && !evaluacion.disabled,
+    ),
+    origen,
+    anio_fin_proyeccion_origen: obtenerAnioFinProyeccionRetiro(simulacion),
+  };
+
+  guardarSimulacion(simulacion);
+}
+
+
+function actualizarClasesOpcionesRetiro() {
+  document.querySelectorAll(".retirement-option").forEach((opcion) => {
+    const control = opcion.querySelector("input[type='checkbox']");
+    opcion.classList.toggle(
+      "retirement-option-selected",
+      Boolean(control?.checked),
+    );
+  });
+}
+
+
+/** Actualiza fechas visibles y bloquea alternativas cuya fecha ya transcurrió. */
+function actualizarDisponibilidadEscenariosRetiro() {
+  const simulacion = obtenerSimulacion();
+  const persona = simulacion.persona || {};
+  const fechaReferencia = obtenerFechaReferenciaInterfaz(persona);
+  const fechaEvaluacion = document.getElementById("fecha_corte_retiro").value;
+
+  if (!fechaReferencia || !fechaEvaluacion) {
+    return;
+  }
+
+  const referenciaVisible = document.getElementById(
+    "retiro-fecha-referencia-opcion",
+  );
+  if (referenciaVisible) {
+    referenciaVisible.textContent = formatearFechaRetiro(fechaReferencia);
+  }
+
+  document.querySelectorAll(".retiro-adicional").forEach((elemento) => {
+    const adicional = Number(elemento.value);
+    const fechaEscenario = sumarAniosFechaIso(fechaReferencia, adicional);
+    const transcurrida = fechaEscenario < fechaEvaluacion;
+    const opcion = elemento.closest(".retirement-option");
+    const estado = opcion?.querySelector("[data-retiro-estado]");
+
+    elemento.disabled = transcurrida;
+    if (transcurrida) {
+      elemento.checked = false;
+    }
+
+    opcion?.classList.toggle("retirement-option-unavailable", transcurrida);
+
+    if (estado) {
+      estado.textContent = (
+        `${formatearFechaRetiro(fechaEscenario)} · `
+        + (transcurrida ? "Fecha ya transcurrida" : "Disponible para comparar")
+      );
+    }
+  });
+
+  const fechaMinimaAnticipada = sumarAniosFechaIso(
+    fechaReferencia,
+    -RETIRO_MAXIMO_ANTICIPACION_ESTANDAR,
+  );
+  const dentroBandaAnticipada = (
+    fechaEvaluacion >= fechaMinimaAnticipada
+    && fechaEvaluacion < fechaReferencia
+  );
+
+  const opcionEvaluacion = document.getElementById(
+    "opcion-retiro-fecha-evaluacion",
+  );
+  const controlEvaluacion = document.getElementById(
+    "retiro-fecha-evaluacion",
+  );
+  const estadoEvaluacion = document.getElementById(
+    "estado-retiro-fecha-evaluacion",
+  );
+
+  opcionEvaluacion?.classList.toggle("d-none", !dentroBandaAnticipada);
+
+  if (controlEvaluacion) {
+    controlEvaluacion.disabled = !dentroBandaAnticipada;
+    if (!dentroBandaAnticipada) {
+      controlEvaluacion.checked = false;
+    }
+  }
+
+  if (estadoEvaluacion && dentroBandaAnticipada) {
+    estadoEvaluacion.textContent = (
+      `${formatearFechaRetiro(fechaEvaluacion)} · `
+      + "Dentro de la banda anticipada estándar"
+    );
+  }
+
+  actualizarClasesOpcionesRetiro();
+}
+
+
+function actualizarMensajeSugerenciaRetiro(preferencias) {
+  const simulacion = obtenerSimulacion();
+  const nota = document.getElementById("retiro-sugerencia-proyeccion");
+  const anioFin = obtenerAnioFinProyeccionRetiro(simulacion);
+
+  if (!nota) {
+    return;
+  }
+
+  if (preferencias?.origen === RETIRO_ORIGEN_USUARIO) {
+    nota.textContent = (
+      `Selección modificada por ti. La proyección salarial llega hasta ${anioFin ?? "—"}; `
+      + "tus escenarios no se cambiarán automáticamente."
+    );
+    return;
+  }
+
+  const positivos = document.querySelectorAll(
+    ".retiro-adicional:checked:not(.retiro-anticipado)",
+  );
+  const etiquetas = [...positivos].map(
+    (elemento) => `+${elemento.value}`,
+  );
+
+  if (etiquetas.length === 0) {
+    nota.textContent = (
+      `Sugerencia automática desde el Paso 4: la proyección llega hasta ${anioFin ?? "—"} `
+      + "y no añade años posteriores disponibles. Puedes elegir otros escenarios manualmente."
+    );
+    return;
+  }
+
+  nota.textContent = (
+    `Sugerencia automática desde el Paso 4: la proyección salarial llega hasta ${anioFin}; `
+    + `por eso se marcaron ${etiquetas.join(", ")}. Puedes modificar esta selección.`
+  );
+}
+
+
+function aplicarPreferenciasEscenariosRetiro(preferencias) {
+  const seleccion = new Set(
+    (preferencias?.anios_adicionales || [0]).map(Number),
+  );
+
+  document.querySelectorAll(".retiro-adicional").forEach((elemento) => {
+    elemento.checked = seleccion.has(Number(elemento.value));
+  });
+
+  const evaluacion = document.getElementById("retiro-fecha-evaluacion");
+  if (evaluacion) {
+    evaluacion.checked = Boolean(preferencias?.incluir_fecha_evaluacion);
+  }
+
+  actualizarDisponibilidadEscenariosRetiro();
+  actualizarMensajeSugerenciaRetiro(preferencias);
+}
+
+
+/** Aplica solo años posteriores cubiertos por el horizonte real del Paso 4. */
+function aplicarSugerenciaEscenariosDesdePaso4() {
+  const simulacion = obtenerSimulacion();
+  const persona = simulacion.persona || {};
+  const fechaReferencia = obtenerFechaReferenciaInterfaz(persona);
+  const fechaEvaluacion = document.getElementById("fecha_corte_retiro").value;
+  const anioFin = obtenerAnioFinProyeccionRetiro(simulacion);
+
+  document.querySelectorAll(".retiro-adicional").forEach((elemento) => {
+    elemento.checked = false;
+  });
+
+  const evaluacion = document.getElementById("retiro-fecha-evaluacion");
+  if (evaluacion) {
+    evaluacion.checked = false;
+  }
+
+  actualizarDisponibilidadEscenariosRetiro();
+
+  if (fechaReferencia && fechaEvaluacion && anioFin !== null) {
+    document
+      .querySelectorAll(".retiro-adicional:not(.retiro-anticipado)")
+      .forEach((elemento) => {
+        const adicional = Number(elemento.value);
+        const fechaEscenario = sumarAniosFechaIso(fechaReferencia, adicional);
+        elemento.checked = (
+          !elemento.disabled
+          && Number(fechaEscenario.slice(0, 4)) <= anioFin
+        );
+      });
+  }
+
+  guardarPreferenciasEscenariosRetiro(RETIRO_ORIGEN_SUGERIDO);
+  const actualizado = obtenerSimulacion().preferencias_retiro;
+  actualizarDisponibilidadEscenariosRetiro();
+  actualizarMensajeSugerenciaRetiro(actualizado);
+}
+
+
+/** Sincroniza Paso 5 sin pisar decisiones que el usuario ya modificó. */
+function sincronizarEscenariosRetiroConContexto() {
+  const simulacion = obtenerSimulacion();
+  const preferencias = obtenerPreferenciasEscenariosRetiro(simulacion);
+  const anioFin = obtenerAnioFinProyeccionRetiro(simulacion);
+
+  if (
+    preferencias?.origen === RETIRO_ORIGEN_USUARIO
+  ) {
+    aplicarPreferenciasEscenariosRetiro(preferencias);
+    return;
+  }
+
+  if (
+    preferencias?.origen === RETIRO_ORIGEN_SUGERIDO
+    && preferencias.anio_fin_proyeccion_origen === anioFin
+  ) {
+    aplicarPreferenciasEscenariosRetiro(preferencias);
+    return;
+  }
+
+  aplicarSugerenciaEscenariosDesdePaso4();
+}
+
+
+function registrarEdicionEscenariosRetiro() {
+  actualizarDisponibilidadEscenariosRetiro();
+  guardarPreferenciasEscenariosRetiro(RETIRO_ORIGEN_USUARIO);
+  actualizarMensajeSugerenciaRetiro(
+    obtenerSimulacion().preferencias_retiro,
+  );
+  invalidarResumenRetiro();
+}
+
+
 // ============================================================
 // Preparación y restauración
 // ============================================================
@@ -254,27 +624,6 @@ function restaurarDatosRetiro() {
     );
   }
 
-  if (Array.isArray(retiro.anios_adicionales)) {
-    const adicionales = new Set(
-      retiro.anios_adicionales.map(Number),
-    );
-
-    document.getElementById(
-      "btn-ajustar-proyeccion-retiro",
-    ).addEventListener(
-      "click",
-      ajustarHorizonteProyeccionDesdeRetiro,
-    );
-
-    document
-      .querySelectorAll(".retiro-adicional")
-      .forEach((elemento) => {
-        elemento.checked = adicionales.has(
-          Number(elemento.value),
-        );
-      });
-  }
-
   const usaPersonalizada = Boolean(
     retiro.fecha_retiro_personalizada,
   );
@@ -290,6 +639,7 @@ function restaurarDatosRetiro() {
   aplicarUltimoMesCuotasDerivado();
   actualizarEstadoFechaPersonalizada();
   actualizarLimiteUltimoMesCuotas();
+  sincronizarEscenariosRetiroConContexto();
 
   if (simulacion.resumen_retiro) {
     mostrarResumenRetiro(
@@ -335,6 +685,65 @@ function actualizarLimiteUltimoMesCuotas() {
 /**
  * Muestra u oculta el campo de fecha de retiro personalizada.
  */
+function actualizarCoberturaFechaPersonalizada() {
+  const simulacion = obtenerSimulacion();
+  const activada = document.getElementById(
+    "usar_fecha_retiro_personalizada",
+  ).checked;
+  const campo = document.getElementById(
+    "fecha_retiro_personalizada",
+  );
+  const estado = document.getElementById(
+    "estado-cobertura-fecha-personalizada",
+  );
+
+  if (!estado) {
+    return;
+  }
+
+  const fecha = campo.value;
+  const anioFin = obtenerAnioFinProyeccionRetiro(simulacion);
+
+  estado.classList.remove(
+    "retirement-date-coverage-ok",
+    "retirement-date-coverage-warning",
+  );
+
+  if (!activada || !fecha || !/^\d{4}-\d{2}-\d{2}$/.test(fecha)) {
+    estado.textContent = "";
+    estado.classList.add("d-none");
+    return;
+  }
+
+  const anioFecha = Number(fecha.slice(0, 4));
+
+  if (!Number.isInteger(anioFin)) {
+    estado.textContent = (
+      "Primero genera la proyección salarial del Paso 4 para verificar "
+      + "si esta fecha queda cubierta."
+    );
+    estado.classList.add("retirement-date-coverage-warning");
+    estado.classList.remove("d-none");
+    return;
+  }
+
+  if (anioFecha <= anioFin) {
+    estado.textContent = (
+      `Esta fecha está cubierta por tu proyección salarial vigente hasta ${anioFin}.`
+    );
+    estado.classList.add("retirement-date-coverage-ok");
+  } else {
+    estado.textContent = (
+      `Esta fecha supera tu proyección salarial actual, que llega hasta ${anioFin}. `
+      + "Al analizar podrás ajustar el horizonte en el Paso 4."
+    );
+    estado.classList.add("retirement-date-coverage-warning");
+  }
+
+  estado.classList.remove("d-none");
+}
+
+
 function actualizarEstadoFechaPersonalizada() {
   const activada = document.getElementById(
     "usar_fecha_retiro_personalizada",
@@ -358,6 +767,8 @@ function actualizarEstadoFechaPersonalizada() {
   if (!activada) {
     campo.value = "";
   }
+
+  actualizarCoberturaFechaPersonalizada();
 }
 
 
@@ -537,6 +948,9 @@ function construirDatosRetiro() {
       ?? simulacion.proyeccion?.anio_fin
       ?? null,
     anios_adicionales: obtenerAniosAdicionalesRetiro(),
+    incluir_fecha_evaluacion_como_retiro: Boolean(
+      document.getElementById("retiro-fecha-evaluacion")?.checked,
+    ),
     fecha_retiro_personalizada: fechaPersonalizada,
   };
 }
@@ -1162,6 +1576,7 @@ document.addEventListener(
         }
 
         prepararPasoRetiro();
+        sincronizarEscenariosRetiroConContexto();
         mostrarPaso(5);
       },
     );
@@ -1188,6 +1603,18 @@ document.addEventListener(
       "change",
       () => {
         actualizarLimiteUltimoMesCuotas();
+
+        const preferencias = obtenerSimulacion().preferencias_retiro;
+        if (preferencias?.origen === RETIRO_ORIGEN_USUARIO) {
+          actualizarDisponibilidadEscenariosRetiro();
+          guardarPreferenciasEscenariosRetiro(RETIRO_ORIGEN_USUARIO);
+          actualizarMensajeSugerenciaRetiro(
+            obtenerSimulacion().preferencias_retiro,
+          );
+        } else {
+          aplicarSugerenciaEscenariosDesdePaso4();
+        }
+
         invalidarResumenRetiro();
       },
     );
@@ -1213,16 +1640,28 @@ document.addEventListener(
       "fecha_retiro_personalizada",
     ).addEventListener(
       "change",
-      invalidarResumenRetiro,
+      () => {
+        actualizarCoberturaFechaPersonalizada();
+        invalidarResumenRetiro();
+      },
     );
 
     document
-      .querySelectorAll(".retiro-adicional")
+      .querySelectorAll(
+        ".retiro-adicional, #retiro-fecha-evaluacion",
+      )
       .forEach((elemento) => {
         elemento.addEventListener(
           "change",
-          invalidarResumenRetiro,
+          registrarEdicionEscenariosRetiro,
         );
       });
+
+    document.getElementById(
+      "btn-ajustar-proyeccion-retiro",
+    ).addEventListener(
+      "click",
+      ajustarHorizonteProyeccionDesdeRetiro,
+    );
   },
 );

@@ -226,3 +226,7 @@ No se sustituyen por constantes personales de un caso de prueba.
 La versión anterior se conserva en:
 
 `docs/historico/tecnico/MOTOR_DE_CALCULO_PRE_GOV1_3_R2.md`
+
+### UX.4.6g R1 — preanálisis de fechas de retiro
+
+El servicio de Paso 5 construye fechas y cuotas estimadas, pero no decide elegibilidad. Los desplazamientos `-2`, `-1`, `0` y `+N` solo se materializan cuando llegan en `DatosRetiro`. `anios_adicionales` usa `[0]` por defecto. La opción `incluir_fecha_evaluacion_como_retiro` solo se acepta si la fecha de evaluación está dentro de la banda anticipada estándar versionada; la clasificación de pensión anticipada, proporcional anticipada, normal u otra prestación continúa en los motores del Paso 6.
