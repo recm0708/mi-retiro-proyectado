@@ -207,3 +207,10 @@ La guía acumulativa anterior se conserva en:
 - Reutilizar `aplicarBloqueoVistaPrincipalPorProcedencia` o el helper equivalente y excluir explícitamente los modales de revisión.
 - Mantener la misma franja de no edición y la misma iconografía de procedencia en Claro, Oscuro y Alto contraste.
 - Los selectores que representan una decisión del usuario no deben inferirse de la existencia de datos importados salvo contrato documental explícito y trazado.
+### Campos de fecha
+
+Los nuevos controles `input[type=date]` no deben implementar validadores o anchos particulares salvo una necesidad funcional demostrada. `app/static/js/accesibilidad.js` aplica el contrato transversal de año de cuatro dígitos, calendario válido y límites técnicos por defecto; `app/static/css/accesibilidad.css` aplica la geometría compacta responsive. Si una superficie necesita un rango más estricto, debe declarar `min`/`max` en el propio control y la capa global lo conservará.
+
+### Observadores del DOM
+
+Toda normalización ejecutada desde un `MutationObserver` debe ser idempotente. Si la propia normalización modifica atributos incluidos en el filtro observado —por ejemplo `class`—, el observador debe suspenderse durante esa operación y reanudarse al finalizar para evitar ciclos de callbacks.

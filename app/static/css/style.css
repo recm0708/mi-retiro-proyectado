@@ -1091,6 +1091,57 @@ html[data-app-theme="contrast"] .reference-result-comparison {
   cursor: default;
 }
 
+.retirement-scenario-section {
+  padding: 1rem;
+  background-color: var(--app-surface-subtle);
+  border: 1px solid var(--app-border);
+  border-radius: 0.9rem;
+}
+
+.retirement-section-heading {
+  margin-bottom: 0.9rem;
+}
+
+.retirement-option-grid-reference {
+  grid-template-columns: minmax(240px, 1fr);
+  max-width: 360px;
+}
+
+.retirement-option-selected {
+  border-color: var(--app-primary);
+  background-color: var(--app-selected-bg);
+}
+
+.retirement-option-unavailable {
+  border-style: dashed;
+  cursor: not-allowed;
+  opacity: 0.72;
+}
+
+.retirement-option-unavailable:hover {
+  border-color: var(--app-border);
+}
+
+.retirement-option-meta {
+  margin-top: auto;
+  color: var(--app-muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.retirement-suggestion-note {
+  padding: 0.65rem 0.75rem;
+  color: var(--app-info-text);
+  background-color: var(--app-info-bg);
+  border: 1px solid var(--app-info-border);
+  border-radius: 0.65rem;
+}
+
+html[data-app-theme="contrast"] .retirement-option-selected,
+html[data-app-theme="contrast"] .retirement-scenario-section {
+  border-width: 2px;
+}
+
 .retirement-custom-card {
   padding: 1.15rem 1.25rem;
 

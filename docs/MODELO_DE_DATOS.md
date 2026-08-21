@@ -282,3 +282,9 @@ La versión acumulativa anterior se conserva en:
 El estado frontend incorpora `modo_historial_confirmado_usuario: bool`. Su valor inicial es `false`; solo cambia a `true` cuando el Asegurado(a) selecciona explícitamente una opción de **Disponibilidad del historial** o confirma el flujo equivalente. Importar registros desde Mi Retiro Seguro no establece este indicador y no responde el selector por el usuario.
 
 El bloqueo de un campo documental en la vista principal se decide comparando contra `referencia_mi_retiro_seguro_original` o `ficha_digital_importada_original`. La procedencia vigente puede cambiar, pero la fotografía original determina si el dato fue detectado y, por tanto, si debe permanecer bloqueado fuera del modal de revisión.
+
+### UX.4.6g R1 — selección contextual de retiro
+
+`DatosRetiro.anios_adicionales` ya no presupone una banda completa de escenarios: su valor por defecto es `[0]`, correspondiente a la edad de referencia. El frontend conserva de forma temporal `preferencias_retiro` con `anios_adicionales`, `incluir_fecha_evaluacion`, `origen` (`SUGERIDO_PASO4` o `EDITADO_USUARIO`) y `anio_fin_proyeccion_origen`.
+
+`incluir_fecha_evaluacion_como_retiro` pertenece a la solicitud del Paso 5 y solo materializa un escenario `EVALUACION` cuando la fecha de evaluación está dentro de la banda anticipada estándar. La preferencia visual no sustituye la clasificación legal que realiza el Paso 6.

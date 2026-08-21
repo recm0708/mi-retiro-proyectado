@@ -649,6 +649,7 @@ TipoEscenarioRetiro = Literal[
     "ANTICIPADO",
     "REFERENCIA",
     "ADICIONAL",
+    "EVALUACION",
     "PERSONALIZADO",
 ]
 
@@ -739,15 +740,20 @@ class DatosRetiro(BaseModel):
     )
 
     anios_adicionales: list[int] = Field(
-        default_factory=lambda: [
-            -2,
-            -1,
-            0,
-            1,
-            2,
-            3,
-            5,
-        ],
+        default_factory=lambda: [0],
+        description=(
+            "Desplazamientos enteros respecto a la edad de referencia. "
+            "La API no presume escenarios anticipados ni años extra: "
+            "la referencia es el único valor seguro por defecto."
+        ),
+    )
+
+    incluir_fecha_evaluacion_como_retiro: bool = Field(
+        default=False,
+        description=(
+            "Incluye la propia fecha de evaluación como escenario explícito "
+            "cuando se encuentra dentro de la banda anticipada estándar."
+        ),
     )
 
     fecha_retiro_personalizada: date | None = None

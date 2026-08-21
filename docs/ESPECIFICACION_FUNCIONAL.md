@@ -1122,3 +1122,43 @@ Quedan para fases posteriores:
 **RF-364.** En `ESCENARIOS`, cada porcentaje se calcula de forma compuesta e independiente desde la misma base salarial; eliminar duplicados u ordenar tasas no puede mezclar resultados entre escenarios. El campo debe iniciar vacío y la API no debe aportar una lista predeterminada: los porcentajes comparados deben provenir de una decisión explícita del Asegurado(a).
 
 **RF-365.** Cuando Paso 5 amplíe el horizonte salarial para cubrir un retiro más lejano, Paso 4 debe conservar el nuevo año como borrador, marcar su procedencia como ajuste automático desde retiro e invalidar los resultados salariales anteriores hasta una nueva generación. Una edición posterior del usuario sustituye esa procedencia por `Editado por ti`.
+
+### UX.4.6g — Revisión 1 · escenarios de retiro derivados y anticipados explícitos
+
+**RF-366.** La edad de referencia debe ser el único escenario de retiro incluido por defecto cuando no existe una decisión previa ni una sugerencia contextual derivada de otro paso.
+
+**RF-367.** Los escenarios posteriores a la edad de referencia deben sugerirse únicamente cuando su fecha quede dentro del año final realmente cubierto por la proyección salarial vigente del Paso 4; una selección modificada por el usuario no debe ser sobrescrita por cambios posteriores automáticos.
+
+**RF-368.** La interfaz debe distinguir una selección `SUGERIDO_PASO4` de una `EDITADO_USUARIO` y explicar de forma visible el origen de los años posteriores marcados.
+
+**RF-369.** Los escenarios anticipados estándar de uno y dos años no se seleccionan automáticamente. Deben mostrar su fecha exacta y quedar deshabilitados cuando esa fecha sea anterior a la fecha de evaluación.
+
+**RF-370.** Cuando la fecha de evaluación se encuentre dentro de la banda anticipada estándar, Paso 5 debe ofrecer de forma explícita y opcional usar esa misma fecha como escenario; el backend debe rechazar esa opción fuera de la banda.
+
+**RF-371.** Generar un escenario anticipado en Paso 5 no constituye una declaración de elegibilidad. El Paso 6 conserva la responsabilidad de clasificar modalidad y aplicar los factores normativos correspondientes según sistema, edad y cuotas.
+
+**RF-372.** La secuencia posterior estándar debe incluir `+1`, `+2`, `+3`, `+4` y `+5` años; ningún desplazamiento puede omitirse sin una regla funcional explícita.
+
+**RF-373.** La API de `DatosRetiro` no debe inyectar escenarios anticipados ni años adicionales cuando el cliente omite `anios_adicionales`; el valor seguro por defecto es `[0]`.
+
+**RF-374.** Las tablas cortas de escenarios de retiro no deben reservar scroll vertical interno; el desplazamiento horizontal se conserva cuando sea necesario por ancho de contenido.
+
+### UX.4.6g — Revisión 1.4 · fechas y cobertura visible
+
+**RF-375.** La lógica de referencia del Paso 5 debe aceptar las representaciones de sexo vigentes en el estado de simulación (`F`, `M`, `FEMENINO`, `MASCULINO`) sin alterar el dato original; una representación compatible no puede ocultar una opción contextual válida.
+
+**RF-376.** Cuando una fecha personalizada de retiro esté activa, la interfaz debe indicar de forma explícita si su año está cubierto por el horizonte salarial vigente del Paso 4 o si lo supera; la ausencia de una advertencia no debe ser la única forma de inferir cobertura.
+
+**RF-377.** Todo `input[type=date]` actual o futuro debe recibir validación transversal de año de cuatro dígitos y fecha calendárica válida. Si el control no define límites propios, la interfaz aplica el rango técnico 1900-01-01 a 2200-12-31.
+
+**RF-378.** Los campos de fecha deben usar un ancho compacto en escritorio y recuperar ancho completo en pantallas pequeñas, sin depender del tema visual.
+
+**RF-379.** El contrato transversal de fechas debe aplicarse también a controles incorporados dinámicamente y debe conservar cualquier `min`/`max` más restrictivo definido por la superficie funcional.
+
+### UX.4.6g — Revisión 1.4.3 · alineación y densidad visual
+
+**RF-380.** El control Año inicial del historial y el resumen Período del historial deben comenzar a la misma altura visual en escritorio, sin introducir desplazamiento adicional en móvil.
+
+**RF-381.** Los controles Año inicial y Proyectar hasta el año del Paso 4 deben conservar alineación vertical aunque uno de ellos incorpore ayuda contextual.
+
+**RF-382.** El resumen contextual del Paso 5 debe asignar ancho suficiente a Cierre esperado este año para evitar saltos de línea cuando exista espacio horizontal disponible, compensándolo con campos de contenido breve como Sexo.

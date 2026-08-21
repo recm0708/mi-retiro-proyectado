@@ -167,6 +167,112 @@ function prepararPistasCampos() {
     .forEach(aplicarPistaAControl);
 }
 
+
+const FECHA_MINIMA_GLOBAL = "1900-01-01";
+const FECHA_MAXIMA_GLOBAL = "2200-12-31";
+
+
+function validarCampoFechaEstricto(control, limpiarExceso = false) {
+  if (!control || control.type !== "date") {
+    return;
+  }
+
+  control.setCustomValidity("");
+
+  if (control.validity?.badInput) {
+    if (limpiarExceso) {
+      control.value = "";
+    }
+    control.setCustomValidity(
+      "Introduce una fecha válida con día, mes y un año de cuatro dígitos.",
+    );
+    return;
+  }
+
+  const valor = control.value;
+  if (!valor) {
+    return;
+  }
+
+  const coincidencia = valor.match(/^(\d+)-(\d{2})-(\d{2})$/);
+  if (!coincidencia || coincidencia[1].length !== 4) {
+    if (limpiarExceso) {
+      control.value = "";
+    }
+    control.setCustomValidity(
+      "El año debe contener exactamente cuatro dígitos.",
+    );
+    return;
+  }
+
+  const anio = Number(coincidencia[1]);
+  const mes = Number(coincidencia[2]);
+  const dia = Number(coincidencia[3]);
+  const fecha = new Date(Date.UTC(anio, mes - 1, dia));
+
+  const calendarioValido = (
+    fecha.getUTCFullYear() === anio
+    && fecha.getUTCMonth() === mes - 1
+    && fecha.getUTCDate() === dia
+  );
+
+  if (!calendarioValido) {
+    if (limpiarExceso) {
+      control.value = "";
+    }
+    control.setCustomValidity(
+      "Introduce una fecha válida del calendario.",
+    );
+  }
+}
+
+
+function prepararCampoFecha(control) {
+  if (!control || control.type !== "date") {
+    return;
+  }
+
+  if (!control.classList.contains("app-date-input")) {
+    control.classList.add("app-date-input");
+  }
+
+  if (!control.min) {
+    control.min = FECHA_MINIMA_GLOBAL;
+  }
+
+  if (!control.max) {
+    control.max = FECHA_MAXIMA_GLOBAL;
+  }
+
+  if (control.dataset.appDateValidated === "true") {
+    validarCampoFechaEstricto(control);
+    return;
+  }
+
+  control.dataset.appDateValidated = "true";
+
+  control.addEventListener("input", () => {
+    const valor = control.value;
+    const anio = valor ? valor.split("-")[0] : "";
+    validarCampoFechaEstricto(control, anio.length > 4);
+  });
+
+  control.addEventListener("change", () => {
+    validarCampoFechaEstricto(control, true);
+  });
+
+  control.addEventListener("blur", () => {
+    validarCampoFechaEstricto(control, true);
+  });
+}
+
+
+function prepararCamposFecha() {
+  document
+    .querySelectorAll('input[type="date"]')
+    .forEach(prepararCampoFecha);
+}
+
 function obtenerEtiquetaControl(control) {
   const etiqueta = document.querySelector(`label[for="${control.id}"]`);
   if (etiqueta) {
@@ -653,6 +759,7 @@ function prepararEnlacesExternos() {
 
 function sincronizarAccesibilidadDinamica() {
   prepararPistasCampos();
+  prepararCamposFecha();
   vincularAyudasDeFormulario();
   prepararAyudasContextuales();
   prepararMensajesDinamicos();
@@ -666,23 +773,34 @@ document.addEventListener("DOMContentLoaded", () => {
   prepararValidacionAccesible();
   prepararSemanticaWizard(false);
 
+  const opcionesObservacion = {
+    childList: true,
+    subtree: true,
+    attributes: true,
+    attributeFilter: ["class"],
+  };
+
   const observador = new MutationObserver((cambios) => {
     const cambioPanel = cambios.some((cambio) => (
       cambio.type === "attributes"
       && cambio.target.classList?.contains("wizard-panel")
     ));
 
-    sincronizarAccesibilidadDinamica();
-    prepararValidacionAccesible();
-    prepararSemanticaWizard(cambioPanel);
+    // La propia normalización de accesibilidad puede añadir o retirar
+    // clases. Se suspende el observador durante ese trabajo para impedir
+    // que observe sus propias mutaciones y genere ciclos de callbacks.
+    observador.disconnect();
+
+    try {
+      sincronizarAccesibilidadDinamica();
+      prepararValidacionAccesible();
+      prepararSemanticaWizard(cambioPanel);
+    } finally {
+      observador.observe(document.body, opcionesObservacion);
+    }
   });
 
-  observador.observe(document.body, {
-    childList: true,
-    subtree: true,
-    attributes: true,
-    attributeFilter: ["class"],
-  });
+  observador.observe(document.body, opcionesObservacion);
 
   document.addEventListener("pointerdown", (evento) => {
     if (!evento.target.closest(".context-help-heading")) {

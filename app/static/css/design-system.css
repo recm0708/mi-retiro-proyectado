@@ -3525,3 +3525,24 @@ html[data-app-theme="contrast"] .official-import-persisted-recency.warning {
   text-decoration: underline;
   text-underline-offset: 0.12em;
 }
+
+/* Alineación transversal de períodos comparables */
+.history-period-row {
+  align-items: flex-start;
+}
+
+.history-period-summary-column {
+  padding-top: 2.3rem;
+}
+
+.projection-period-label {
+  display: flex;
+  align-items: center;
+  min-height: 1.8rem;
+}
+
+@media (max-width: 767.98px) {
+  .history-period-summary-column {
+    padding-top: 0;
+  }
+}

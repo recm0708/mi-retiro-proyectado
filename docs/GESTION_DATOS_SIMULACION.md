@@ -202,3 +202,7 @@ La versión anterior se conserva en:
 `modo_historial_confirmado_usuario` evita inferir una decisión a partir de la mera existencia de registros importados. Mi Retiro Seguro puede poblar `historial`, `origen_campos_historial` y el año inicial temporal sin establecer `modo_historial`; el selector permanece vacío hasta una acción explícita. Al limpiar desde Paso 3, tanto `modo_historial` como el indicador de confirmación vuelven a su estado vacío.
 
 La edición de valores originalmente detectados se realiza dentro del modal y actualiza la copia de trabajo, mientras la referencia `*_original` continúa determinando procedencia y bloqueo en la vista principal.
+
+### UX.4.6g R1 — preferencias temporales de retiro
+
+`preferencias_retiro` conserva exclusivamente en el estado temporal del navegador la selección visible del Paso 5: `anios_adicionales`, `incluir_fecha_evaluacion`, `origen` y `anio_fin_proyeccion_origen`. `SUGERIDO_PASO4` identifica una propuesta derivada del horizonte salarial; `EDITADO_USUARIO` impide que sincronizaciones automáticas posteriores pisen una selección manual. Esta estructura no es un dato oficial de la CSS ni sustituye `retiro`, que contiene la solicitud efectivamente analizada por el backend.

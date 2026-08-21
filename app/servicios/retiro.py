@@ -18,6 +18,7 @@ from calendar import monthrange
 from datetime import date
 
 from app.core.normativa import (
+    cargar_parametros_sebd,
     obtener_edad_referencia,
 )
 from app.modelos.simulacion import (
@@ -458,6 +459,46 @@ def analizar_retiro(
             )
         )
 
+    if datos.incluir_fecha_evaluacion_como_retiro:
+        maximo_anticipacion = int(
+            cargar_parametros_sebd()["pension_vejez"]
+            ["retiro_anticipado"]["maximo_anios_anticipacion"]
+        )
+        fecha_minima_anticipada = _sumar_anios(
+            fecha_referencia,
+            -maximo_anticipacion,
+        )
+
+        if not (
+            fecha_minima_anticipada
+            <= fecha_corte
+            < fecha_referencia
+        ):
+            raise ValueError(
+                "La fecha de evaluación solo puede usarse como escenario "
+                "anticipado cuando está dentro de la banda previa a la "
+                "edad de referencia."
+            )
+
+        if not any(
+            escenario.fecha_retiro == fecha_corte
+            for escenario in escenarios
+        ):
+            escenarios.append(
+                _crear_escenario(
+                    datos=datos,
+                    fecha_corte=fecha_corte,
+                    fecha_corte_cuotas=fecha_corte_cuotas,
+                    fecha_retiro=fecha_corte,
+                    tipo="EVALUACION",
+                    nombre="Retiro en la fecha de evaluación",
+                    edad_retiro=_calcular_edad(
+                        datos.fecha_nacimiento,
+                        fecha_corte,
+                    ),
+                )
+            )
+
     if (
         datos.fecha_retiro_personalizada
         is not None
@@ -489,6 +530,13 @@ def analizar_retiro(
                 ),
             )
         )
+
+    escenarios.sort(
+        key=lambda escenario: (
+            escenario.fecha_retiro,
+            escenario.nombre,
+        )
+    )
 
     advertencias: list[str] = []
 

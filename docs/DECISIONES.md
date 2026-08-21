@@ -6,9 +6,9 @@
 **Base documental histórica:** `0.0.23-beta` — GOV.1.3 R4 — 2026-08-17
 **Revisión documental:** GOV.1.3 R4 — 2026-08-17
 **Última actualización de gobierno:** PLAN.1 / ADR-168 — 2026-08-20
-**Última actualización técnica:** UX.4.6f R2 / ADR-173 — 2026-08-20
+**Última actualización técnica:** UX.4.6g R1.4.3 / ADR-177 — 2026-08-21
 **Clasificación:** Técnica / Gobierno / Auditoría
-**ADR indexadas:** 173 (`ADR-001` a `ADR-173`)
+**ADR indexadas:** 177 (`ADR-001` a `ADR-177`)
 
 Este registro conserva decisiones de arquitectura, modelado, UX, precisión, seguridad y aplicación normativa. Una ADR explica por qué el proyecto adoptó una decisión; no crea una norma jurídica.
 
@@ -206,6 +206,10 @@ R4 **no inventa un estado retroactivo** para esas decisiones. El índice las mar
 | ADR-171 | Los datos documentales detectados se editan en la ventana de revisión y quedan bloqueados en la vista principal | Aceptada para UX.4.6f R1.1. |
 | ADR-172 | La línea temporal del Paso 4 exige coherencia entre historial y cuotas y transporta el salario mensual proyectado | Aceptada para UX.4.6f R2. |
 | ADR-173 | El Paso 4 no extrapola silenciosamente un salario futuro conocido y registra el origen del horizonte | Aceptada para UX.4.6f R2. |
+| ADR-174 | Paso 5 deriva sugerencias posteriores desde Paso 4 sin convertirlas en decisiones del usuario | Aceptada para UX.4.6g R1 |
+| ADR-175 | El retiro anticipado se compara solo por decisión explícita y las fechas transcurridas no son acciones futuras | Aceptada para UX.4.6g R1 |
+| ADR-176 | Los campos de fecha usan validación calendárica transversal y ancho compacto | Aceptada para UX.4.6g R1 |
+| ADR-177 | Los bloques comparables conservan alineación y densidad visual en escritorio | Aceptada para UX.4.6g R1.4.3 |
 
 ## 4. Registro íntegro de ADR
 
@@ -1889,3 +1893,54 @@ Cuando Paso 5 detecta que un escenario de retiro queda fuera de la proyección y
 **Motivo:** ADR-018 prohíbe extrapolar salarios silenciosamente fuera de un horizonte confirmado. Extender indefinidamente la CAGR inferida desde un único salario futuro añadía una hipótesis que el usuario no había proporcionado. Del mismo modo, etiquetar un horizonte ampliado desde Paso 5 como si siguiera siendo la sugerencia inicial de cinco años ocultaba la causa real del valor.
 
 **Consecuencia:** conocer un salario futuro no equivale a declarar una tasa permanente después de ese año. Quien desee crecimiento posterior puede usar `PORCENTAJE` o `ESCENARIOS`, o ajustar explícitamente sus supuestos. La procedencia del horizonte permanece auditable durante la navegación entre Pasos 4 y 5.
+
+## ADR-174 — Paso 5 deriva sugerencias posteriores desde Paso 4 sin convertirlas en decisiones del usuario
+
+**Estado:** Aceptada para UX.4.6g R1.
+**Fecha:** 2026-08-20.
+
+**Decisión:** la edad de referencia es el único escenario seguro por defecto. Los escenarios `+1` a `+5` se marcan automáticamente solo cuando la fecha correspondiente queda cubierta por el año final realmente generado en Paso 4. La interfaz identifica esa selección como `SUGERIDO_PASO4`. Si el Asegurado(a) marca o desmarca una alternativa, la procedencia cambia a `EDITADO_USUARIO` y futuras sincronizaciones no sobrescriben esa decisión.
+
+La omisión histórica de `+4` se corrige para que la secuencia posterior sea continua. El modelo HTTP tampoco conserva la antigua lista fija de escenarios: `DatosRetiro.anios_adicionales` usa `[0]` como valor seguro cuando el cliente no envía una selección.
+
+**Motivo:** una casilla marcada por HTML no demuestra intención del usuario. Paso 4 sí aporta un contexto útil —el horizonte salarial confirmado—, pero ese contexto debe presentarse como sugerencia explicada y reversible, no como una decisión atribuida al Asegurado(a).
+
+**Consecuencia:** la selección contextual vive en estado temporal separado del resultado legal y puede ser auditada como sugerencia o edición. Si el usuario mantiene una selección que rebasa Paso 4, la advertencia de cobertura existente continúa siendo la barrera de coherencia.
+
+## ADR-175 — El retiro anticipado se compara solo por decisión explícita y las fechas transcurridas no son acciones futuras
+
+**Estado:** Aceptada para UX.4.6g R1.
+**Fecha:** 2026-08-20.
+
+**Decisión:** los escenarios estándar `-2` y `-1` años permanecen desmarcados hasta una acción explícita. Paso 5 calcula sus fechas exactas y deshabilita cualquier alternativa cuya fecha sea anterior a la fecha de evaluación. Cuando la fecha de evaluación está dentro de la banda anticipada estándar versionada, la interfaz puede ofrecer **Retirarme en la fecha de evaluación** como escenario adicional opcional.
+
+El backend valida esa opción contra `maximo_anios_anticipacion` de `normativa/sebd.json`; fuera de la banda se rechaza. Generar el escenario no afirma elegibilidad: el Paso 6 y los motores legales conservan la clasificación de modalidad, cuotas y factores de reducción. Para SUCGS u otros contextos en los que la modalidad no corresponda, la existencia de una fecha comparativa no crea un derecho.
+
+**Motivo:** disponibilidad normativa y decisión del usuario son conceptos distintos. Además, presentar 2024 o 2025 como una decisión futura en una evaluación de 2026 induce a error aunque la fecha pueda conservar valor histórico o comparativo.
+
+**Consecuencia:** la interfaz distingue opción futura, fecha transcurrida y fecha de evaluación dentro de banda. La fecha personalizada permanece disponible para comparaciones específicas y la clasificación jurídica sigue centralizada en los motores del Paso 6.
+## ADR-176 — Los campos de fecha usan validación calendárica transversal y ancho compacto
+
+**Estado:** Aceptada para UX.4.6g R1.
+**Fecha:** 2026-08-21.
+
+**Decisión:** todos los controles actuales y futuros `input[type=date]` se integran mediante una regla transversal en `accesibilidad.js`. Cuando el control no declara límites más específicos, la interfaz aplica `1900-01-01` como mínimo y `2200-12-31` como máximo, exige un año de exactamente cuatro dígitos y verifica que día/mes/año materialicen una fecha real del calendario. Un valor con año de más de cuatro dígitos o una entrada nativa inválida no puede conservarse como fecha válida.
+
+Los mismos controles reciben la clase `app-date-input`, que limita su ancho en escritorio y recupera ancho completo en pantallas pequeñas. La regla se aplica también a controles de fecha incorporados dinámicamente, por lo que futuros pasos no deben implementar validadores o anchos ad hoc salvo que exista una necesidad funcional más restrictiva.
+
+En Paso 5, la fecha personalizada informa de forma visible si queda cubierta por el horizonte salarial vigente o si lo supera. La detección de la edad de referencia en frontend reconoce tanto las formas largas `FEMENINO`/`MASCULINO` como las abreviaturas persistidas `F`/`M`; esta normalización no modifica el sexo almacenado ni las reglas de los motores.
+
+**Motivo:** los controles nativos de fecha pueden permitir introducir manualmente años con más de cuatro dígitos según navegador/locale y un campo innecesariamente ancho dificulta la lectura de formularios. Además, la revisión manual de UX.4.6g mostró que una abreviatura `F` impedía mostrar la opción de retiro en la fecha de evaluación aunque el caso estuviera dentro de la banda anticipada.
+
+**Consecuencia:** la validación de fechas pasa a ser una responsabilidad transversal de interfaz, con semántica y geometría comunes. Los límites específicos que ya existan en un campo conservan prioridad; la validación jurídica y previsional continúa en backend.
+
+## ADR-177 — Los bloques comparables conservan alineación y densidad visual en escritorio
+
+**Estado:** Aceptada para UX.4.6g R1.4.3.
+**Fecha:** 2026-08-21.
+
+**Decisión:** los pares visuales Año inicial/Período del historial y Año inicial/Proyectar hasta el año deben alinear sus superficies de captura o resumen en la misma línea visual. El resumen contextual del Paso 5 distribuye el ancho de escritorio según la longitud real de sus etiquetas: Sexo usa una columna más estrecha y Cierre esperado este año recibe espacio adicional para evitar saltos de línea innecesarios. En móvil se conserva el apilado responsive.
+
+**Motivo:** la validación manual mostró desalineaciones entre controles equivalentes y un salto de línea evitable en el resumen de retiro, pese a existir ancho horizontal disponible. La geometría debe facilitar comparación rápida sin aumentar altura ni alterar contenido funcional.
+
+**Consecuencia:** este ajuste es exclusivamente de presentación; no modifica estados, fórmulas, normativa ni resultados previsionales.

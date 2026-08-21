@@ -254,7 +254,7 @@ python -m pip check
 
 ## 3. Inventario actual de pruebas
 
-Inventario vigente: **98 módulos**.
+Inventario vigente: **99 módulos**.
 
 - `tests/test_accesibilidad_temas.py`
 - `tests/test_accesibilidad_ux4.py`
@@ -353,6 +353,7 @@ Inventario vigente: **98 módulos**.
 - `tests/test_ux46e_renumeracion_documental.py`
 - `tests/test_ux46f_r11_bloqueo_documental_vista_principal.py`
 - `tests/test_ux46f_r1_consistencia_procedencia_adjuntos.py`
+- `tests/test_ux46g_r1_escenarios_retiro.py`
 - `tests/test_ux4_remate_visual.py`
 
 ## 4. Categorías
@@ -407,3 +408,15 @@ Sigue siendo necesaria para:
 ## 10. CI
 
 La CI debe permanecer verde antes de considerar cerrado un hito formal.
+
+### UX.4.6g R1 — gate candidato
+
+La revisión acumula 18 regresiones en `tests/test_ux46g_r1_escenarios_retiro.py`. Partiendo del cierre de UX.4.6f con 762 pruebas, el gate objetivo del candidato es **780 pruebas en `OK`**, además de `pip check`, `compileall`, sintaxis JavaScript y `git diff --check`. La validación manual debe cubrir: sugerencia `+1…+N` desde Paso 4, preservación de una edición manual, ausencia de selección anticipada automática, fechas anticipadas transcurridas deshabilitadas, disponibilidad de la fecha de evaluación dentro de banda para sexo `F`/`M`, presencia de `+4`, tabla corta sin scroll vertical interno, mensaje explícito de cobertura de fecha personalizada y controles de fecha compactos/validados en Claro, Oscuro y Alto contraste.
+
+### UX.4.6g R1.4.2 — robustez de inicialización
+
+Se añade una regresión para impedir que la normalización global de accesibilidad observe recursivamente sus propias mutaciones de clase. El gate objetivo pasa a **781 pruebas**. La validación manual debe incluir recarga normal y recarga completa (`Ctrl+F5`) sin bloqueo del navegador ni pérdida aparente del estado de la simulación.
+
+### UX.4.6g R1.4.3 — alineación visual final
+
+Se añaden tres regresiones para la alineación del período del historial, la alineación de los dos años del Paso 4 y la distribución responsive del resumen de retiro. El gate objetivo pasa a **784 pruebas en `OK`**. La validación manual debe confirmar estas tres geometrías en escritorio y que el apilado móvil no se degrade.

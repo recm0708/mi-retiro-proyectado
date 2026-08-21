@@ -151,6 +151,7 @@ Este roadmap describe **estado actual y trabajo futuro**. La evolución detallad
   - [x] R1.1 — bloqueo documental en vista principal, franja visual de solo lectura, iconos semánticos y selección explícita de disponibilidad del historial; R1 + R1.1 integradas por PR #28 tras **743/743 pruebas en `OK`** y validación visual manual.
   - [x] R2 — auditoría lógica, matemática, casos reales y trazabilidad del Paso 4; PR #30 integrado por squash en `9634ae4b1a0a07cc14682d315b6cdb9c1b37eb4d` tras validación manual, **756/756 pruebas en `OK`** en CI, Python 3.13/3.14 y Auditoría de gobernanza en verde.
 - [ ] **UX.4.6g — Paso 5 · Escenarios de retiro**
+  - [ ] R1 — selección contextual desde Paso 4, retiro anticipado explícito, +4 años, fechas pasadas no accionables, fecha de evaluación opcional, cobertura visible de fechas personalizadas, contrato transversal de fechas y alineación visual final; candidato en validación manual con gate objetivo de 784 pruebas.
 - [ ] **UX.4.6h — Paso 6 · Resultados y exportación**
 - [ ] **UX.4.6i — Cómo se calcula**
 
