@@ -85,7 +85,18 @@ Cuando `main` exige firmas verificadas, el PR que se integre mediante squash deb
 
 ## 5. Validación mínima
 
-Ejecutar antes de cerrar un bloque:
+El repositorio incluye un gate `pre-commit` versionado. Debe activarse **una sola vez por cada clon local**:
+
+```powershell
+.\scripts\configurar_hooks_git.ps1
+git config --local --get core.hooksPath
+```
+
+Con el hook activo, `git commit` se cancela automáticamente si se intenta confirmar directamente en `main`, si existen cambios rastreados sin preparar o archivos no rastreados, si falla `git diff --cached --check`, `pip check`, la compilación Python, la sintaxis JavaScript o cualquier prueba de la suite completa. El objetivo es que las pruebas se ejecuten contra el mismo árbol que se pretende confirmar.
+
+`git commit --no-verify` no forma parte del flujo ordinario del proyecto y no debe usarse para eludir un gate fallido. Una excepción de recuperación requeriría justificación explícita y validación equivalente antes de publicar la rama.
+
+Ejecutar además antes de cerrar un bloque:
 
 ```powershell
 python -m compileall app
@@ -241,6 +252,8 @@ git log --show-signature -1
 ```
 
 No confirmar cambios si la firma exigida no puede verificarse.
+
+El hook local es una barrera adicional y no sustituye los checks requeridos del Pull Request. Si el hook falla, Git debe dejar el commit sin crear; primero se corrige la causa y después se vuelve a ejecutar `git commit`.
 
 ## 15. Cierre y publicación
 

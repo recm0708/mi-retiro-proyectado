@@ -30,22 +30,12 @@ class TestUX46eAuditoriaCoherencia(unittest.TestCase):
         self.assertIn("[x] R9.1 — candidato local `0.0.25-beta`", texto)
         self.assertIn("[x] R9.2 — PR #21 integrado por squash", texto)
 
-    def test_readme_refleja_r8_cerrada_y_r9_sin_adelantar_paso4(self):
+    def test_readme_preserva_cierre_r8_r9_sin_congelar_bloque_activo(self):
         texto = (ROOT / "README.md").read_text(encoding="utf-8")
         self.assertIn("**UX.4.6e:** cerrada en `0.0.25-beta`", texto)
         self.assertIn("PR #21 integrado por squash", texto)
-        self.assertIn("PR #21 integrado por squash", texto)
-        self.assertIn("**Bloque activo:** UX.4.6f", texto)
         self.assertIn("21 labels y 20/20 topics", texto)
-        self.assertRegex(
-            texto,
-            r"\*\*Revisión activa:\*\* UX\.4\.6f R\d+(?:\.\d+)?",
-        )
-        self.assertIn(
-            "**Siguiente bloque funcional posterior:** UX.4.6g — Paso 5 · Escenarios de retiro",
-            texto,
-        )
-        self.assertNotIn("**Bloque activo:** UX.4.6e — Paso 4", texto)
+        self.assertNotIn("**Bloque activo:** UX.4.6e", texto)
 
     def test_auditoria_r7_existe_y_declara_linea_base_y_objetivo(self):
         texto = (DOCS / "AUDITORIA_UX46E_R7_2026-08-18.md").read_text(encoding="utf-8")
@@ -185,9 +175,13 @@ class TestUX46eAuditoriaCoherencia(unittest.TestCase):
         """
 
         errores = []
-        extensiones = {".py", ".js", ".css", ".html", ".md", ".yml", ".yaml", ".json", ".txt"}
+        extensiones = {
+            ".py", ".js", ".css", ".html", ".md", ".yml", ".yaml", ".json",
+            ".txt", ".ps1",
+        }
         nombres_sin_extension = {
-            "VERSION", "LICENSE", ".gitignore", ".gitattributes", ".editorconfig"
+            "VERSION", "LICENSE", ".gitignore", ".gitattributes", ".editorconfig",
+            "pre-commit",
         }
 
         atributos = (ROOT / ".gitattributes").read_text(encoding="utf-8")

@@ -198,7 +198,7 @@ Requisitos principales:
 - Python compatible con el proyecto;
 - Git;
 - PowerShell en los ejemplos de Windows;
-- Node.js LTS es opcional para validación sintáctica de JavaScript y no forma parte del runtime.
+- Node.js LTS para el gate de desarrollo y la validación sintáctica de JavaScript; no forma parte del runtime de la aplicación.
 
 Clonar:
 
@@ -218,6 +218,12 @@ Instalar dependencias:
 
 ```powershell
 python -m pip install -r requirements.txt
+```
+
+Activar una sola vez por clon el gate que protege la creación de commits:
+
+```powershell
+.\scripts\configurar_hooks_git.ps1
 ```
 
 Ejecutar:

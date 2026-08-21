@@ -225,7 +225,9 @@ El inventario objetivo del candidato es **756 pruebas**. En el entorno aislado d
 
 El gate remoto de PR #30 instaló `pypdf 6.16.1`, completó `pip check`, `compileall`, sintaxis JavaScript y ejecutó **756/756 pruebas en `OK`** tanto en Python 3.13 como en Python 3.14; Auditoría de gobernanza también finalizó en verde. La validación manual confirmó el caso femenino, salario constante, crecimiento porcentual compuesto, salario futuro conocido con mantenimiento constante posterior al objetivo y comparación de escenarios sin valores predeterminados. PR #30 fue integrado por squash en `9634ae4b1a0a07cc14682d315b6cdb9c1b37eb4d`.
 
-El cierre documental añade una regresión final para impedir que README, ROADMAP y el plan maestro vuelvan a presentar Paso 4 como pendiente. La suite vigente pasa a **757 pruebas** y la integración de este cierre habilita UX.4.6g — Paso 5 · Escenarios de retiro sin modificar `VERSION`.
+El cierre documental inicial añadió una regresión para impedir que README, ROADMAP y el plan maestro volvieran a presentar Paso 4 como pendiente. Su primera ejecución completa alcanzó 757 pruebas pero detectó **cuatro fallos históricos**: tres módulos de UX.4.6e todavía exigían que UX.4.6f permaneciera activo o pendiente. Esas regresiones se corrigen para preservar la evidencia de UX.4.6e sin congelar el estado futuro del roadmap.
+
+Como endurecimiento permanente, el repositorio incorpora `.githooks/pre-commit`, `scripts/validar_precommit.py` y `scripts/configurar_hooks_git.ps1`. Una vez activado por clon, Git rechaza el commit si se intenta confirmar directamente en `main`, existe un árbol de trabajo que no corresponde al staging, falla `git diff --cached --check`, `pip check`, `compileall`, `node --check` o la suite completa. Cinco regresiones adicionales protegen el contrato; el inventario de cierre pasa a **762 pruebas** sin modificar `VERSION`. Los checks remotos del Pull Request siguen siendo obligatorios y no son sustituidos por el hook local.
 
 ## 2. Comandos obligatorios
 
@@ -241,6 +243,8 @@ python -m unittest discover -s tests -q
 git diff --check
 ```
 
+El mismo conjunto se ejecuta automáticamente antes de cada commit cuando el clon tiene configurado `core.hooksPath=.githooks`. El hook devuelve código no cero ante cualquier fallo, por lo que Git no debe materializar el commit. `--no-verify` no se considera una forma válida de resolver un gate fallido.
+
 Para cambios de dependencias también se exige:
 
 ```powershell
@@ -250,7 +254,7 @@ python -m pip check
 
 ## 3. Inventario actual de pruebas
 
-Inventario vigente: **97 módulos**.
+Inventario vigente: **98 módulos**.
 
 - `tests/test_accesibilidad_temas.py`
 - `tests/test_accesibilidad_ux4.py`
@@ -290,6 +294,7 @@ Inventario vigente: **97 módulos**.
 - `tests/test_plan1_terminologia_seguridad.py`
 - `tests/test_plan1_versionado_oficial.py`
 - `tests/test_prebeta_e2e_hardening.py`
+- `tests/test_precommit_guard.py`
 - `tests/test_proyeccion_salarios.py`
 - `tests/test_pypdf_compatibilidad.py`
 - `tests/test_responsive_ux3.py`

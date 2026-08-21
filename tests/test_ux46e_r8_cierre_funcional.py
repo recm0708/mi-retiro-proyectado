@@ -88,7 +88,7 @@ class TestUx46eR8CierreFuncional(unittest.TestCase):
         self.assertIn("UX.4.6e:** cerrada en `0.0.25-beta`", readme)
         self.assertIn("660 pruebas en `OK`", readme)
         self.assertIn("PR #21 integrado por squash", readme)
-        self.assertIn("**Bloque activo:** UX.4.6f", readme)
+        self.assertNotIn("**Bloque activo:** UX.4.6e", readme)
 
     def test_validacion_define_gate_documental_652_y_preserva_base_r8(self):
         texto = (DOCS / "VALIDACION.md").read_text(encoding="utf-8")

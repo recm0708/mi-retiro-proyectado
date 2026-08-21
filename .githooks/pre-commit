@@ -1,0 +1,20 @@
+#!/usr/bin/env sh
+set -eu
+
+ROOT="$(git rev-parse --show-toplevel)"
+cd "$ROOT"
+
+if command -v python >/dev/null 2>&1; then
+  exec python scripts/validar_precommit.py
+fi
+
+if command -v python3 >/dev/null 2>&1; then
+  exec python3 scripts/validar_precommit.py
+fi
+
+if command -v py >/dev/null 2>&1; then
+  exec py -3 scripts/validar_precommit.py
+fi
+
+echo "ERROR: no se encontró Python para ejecutar el gate pre-commit de Mi Retiro Proyectado." >&2
+exit 1
