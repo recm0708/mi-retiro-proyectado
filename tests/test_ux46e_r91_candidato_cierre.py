@@ -25,8 +25,7 @@ class TestUx46eR91CandidatoCierre(unittest.TestCase):
         self.assertIn(f"**Versión formal vigente:** `{version}`", texto)
         self.assertIn("**UX.4.6e:** cerrada en `0.0.25-beta`", texto)
         self.assertIn("PR #21 integrado por squash", texto)
-        self.assertIn("**Bloque activo:** UX.4.6f", texto)
-        self.assertIn("UX.4.6f — Paso 4 · Proyección salarial/laboral", texto)
+        self.assertNotIn("**Bloque activo:** UX.4.6e", texto)
         self.assertIn("0.1.0-beta.1", texto)
         indice = (DOCS / "INDICE.md").read_text(encoding="utf-8")
         self.assertIn(
@@ -54,7 +53,7 @@ class TestUx46eR91CandidatoCierre(unittest.TestCase):
         self.assertIn("R9.1 — candidato local `0.0.25-beta`", texto)
         self.assertIn("[x] R9.2 — PR #21 integrado por squash", texto)
         self.assertIn("- [x] **UX.4.6e — Estandarización técnica", texto)
-        self.assertIn("- [ ] **UX.4.6f — Paso 4", texto)
+        self.assertRegex(texto, r"- \[[ x]\] \*\*UX\.4\.6f — Paso 4")
 
     def test_validacion_registra_gate_local_de_660_cumplido(self):
         texto = (DOCS / "VALIDACION.md").read_text(encoding="utf-8")

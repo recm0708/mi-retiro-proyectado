@@ -25,11 +25,11 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 - **Programa GOV.1:** cerrado — Auditoría, Gobierno y Trazabilidad Pre-Beta
 - **Programa PLAN.1:** cerrado — Alineación maestra hacia la primera versión oficial
 - **PLAN.1:** cerrado en `0.0.26-beta`; PR #23 y PR #24 integrados, **720 pruebas en `OK`** en el gate final y tag firmado `v0.0.26-beta` publicado
-- **Bloque activo:** UX.4.6f — Paso 4 · Proyección salarial/laboral
-- **UX.4.6f R1/R1.1:** cerradas e integradas mediante PR #28, con **743 pruebas en `OK`** y checks requeridos en verde
+- **Bloque activo:** UX.4.6g — Paso 5 · Escenarios de retiro
+- **UX.4.6f:** cerrado — R1/R1.1 integradas mediante PR #28 y R2 integrada mediante PR #30; el cierre lógico/matemático del Paso 4 alcanzó **756 pruebas en `OK`** en CI, con Python 3.13, Python 3.14 y Auditoría de gobernanza en verde
 - **Mantenimiento post-R1:** `pypdf 6.16.1` y `Uvicorn 0.52.3` integrados mediante PR #29; PR Dependabot #26/#27 cerrados como sustituidos, con los tres checks requeridos en verde
-- **Revisión activa:** UX.4.6f R2 — candidato de auditoría lógica, matemática, casos reales y trazabilidad del Paso 4; pendiente de gate local y validación manual antes del cierre
-- **Siguiente bloque funcional posterior:** UX.4.6g — Paso 5 · Escenarios de retiro
+- **Revisión activa:** UX.4.6g — Paso 5 · Escenarios de retiro
+- **Siguiente bloque funcional posterior:** UX.4.6h — Paso 6 · Resultados y exportación
 - **GOV.1.4:** Observabilidad y Developer Diagnostics cerrado
 - **GOV.1.5:** Seguridad, privacidad y transparencia cerrado internamente
 - **GOV.1.6:** Controles GitHub y auditoría automática cerrado
@@ -198,7 +198,7 @@ Requisitos principales:
 - Python compatible con el proyecto;
 - Git;
 - PowerShell en los ejemplos de Windows;
-- Node.js LTS es opcional para validación sintáctica de JavaScript y no forma parte del runtime.
+- Node.js LTS para el gate de desarrollo y la validación sintáctica de JavaScript; no forma parte del runtime de la aplicación.
 
 Clonar:
 
@@ -218,6 +218,12 @@ Instalar dependencias:
 
 ```powershell
 python -m pip install -r requirements.txt
+```
+
+Activar una sola vez por clon el gate que protege la creación de commits:
+
+```powershell
+.\scripts\configurar_hooks_git.ps1
 ```
 
 Ejecutar:

@@ -96,6 +96,7 @@ Este roadmap describe **estado actual y trabajo futuro**. La evolución detallad
 ### Implementado
 
 - asistente de seis pasos;
+- Paso 4 — proyección salarial/laboral auditado y cerrado en UX.4.6f;
 - motores SEBD, Mixto y SUCGS para el alcance general documentado;
 - comparación de escenarios;
 - trazabilidad de cálculo;
@@ -114,7 +115,6 @@ Este roadmap describe **estado actual y trabajo futuro**. La evolución detallad
 
 ### Pendiente o incompleto
 
-- Paso 4 — proyección salarial/laboral;
 - Paso 5 — escenarios de retiro;
 - Paso 6 — resultados/exportación;
 - sección pública «Cómo se calcula» para SEBD, Mixto y SUCGS;
@@ -131,7 +131,7 @@ Este roadmap describe **estado actual y trabajo futuro**. La evolución detallad
 
 ## 3. UX.4.6 — trabajo funcional
 
-**Estado:** UX.4.6e y PLAN.1 cerrados; UX.4.6f — Paso 4 es el bloque funcional activo.
+**Estado:** UX.4.6e, PLAN.1 y UX.4.6f cerrados; UX.4.6g — Paso 5 es el bloque funcional activo.
 
 - [x] **UX.4.6e — Estandarización técnica, comentarios y coherencia de interfaz post-GOV.1**
   - [x] R1 — auditoría integral del código y definición del patrón documental por tecnología;
@@ -146,10 +146,10 @@ Este roadmap describe **estado actual y trabajo futuro**. La evolución detallad
   - [x] R9 — cierre técnico y publicación del hito;
     - [x] R9.1 — candidato local `0.0.25-beta` validado con 660 pruebas en `OK`, documentación coherente y `git diff --check` limpio;
     - [x] R9.2 — PR #21 integrado por squash; PR #22 completó el cierre documental; `main` final `7affa00e2530aeede066c10ecfee8c6dbd49b10b`; tag firmado `v0.0.25-beta`.
-- [ ] **UX.4.6f — Paso 4 · Proyección salarial/laboral**
+- [x] **UX.4.6f — Paso 4 · Proyección salarial/laboral**
   - [x] R1 — consistencia transversal de procedencia, decisiones explícitas y procesamiento accesible de adjuntos; gate automático 734/734 superado.
   - [x] R1.1 — bloqueo documental en vista principal, franja visual de solo lectura, iconos semánticos y selección explícita de disponibilidad del historial; R1 + R1.1 integradas por PR #28 tras **743/743 pruebas en `OK`** y validación visual manual.
-  - [ ] R2 — auditoría lógica, matemática, casos reales y trazabilidad del Paso 4; candidato preparado con validaciones de coherencia Pasos 2–4, trazabilidad salarial directa, supuestos compuestos explícitos sin porcentajes predeterminados y procedencia del horizonte; pendiente de gate local y revisión manual.
+  - [x] R2 — auditoría lógica, matemática, casos reales y trazabilidad del Paso 4; PR #30 integrado por squash en `9634ae4b1a0a07cc14682d315b6cdb9c1b37eb4d` tras validación manual, **756/756 pruebas en `OK`** en CI, Python 3.13/3.14 y Auditoría de gobernanza en verde.
 - [ ] **UX.4.6g — Paso 5 · Escenarios de retiro**
 - [ ] **UX.4.6h — Paso 6 · Resultados y exportación**
 - [ ] **UX.4.6i — Cómo se calcula**
@@ -158,7 +158,7 @@ Este roadmap describe **estado actual y trabajo futuro**. La evolución detallad
 
 **Último bloque transversal cerrado:** PLAN.1 — cerrado formalmente en `0.0.26-beta` con **720 pruebas en `OK`** y tag firmado `v0.0.26-beta`.
 
-**Bloque funcional activo:** UX.4.6f — Paso 4 · Proyección salarial/laboral.
+**Bloque funcional activo:** UX.4.6g — Paso 5 · Escenarios de retiro.
 
 La secuencia completa y sus criterios se documentan en `PLAN_MAESTRO_HACIA_1_0.md`.
 

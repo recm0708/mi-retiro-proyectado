@@ -87,8 +87,10 @@ Revisiones internas:
 
 ### 2. UX.4.6f — Paso 4 · Proyección salarial/laboral
 
+**Estado:** cerrado. El siguiente bloque funcional activo es UX.4.6g — Paso 5 · Escenarios de retiro.
+
 - **R1/R1.1 cerradas:** procedencia visual uniforme, decisiones explícitas, trazabilidad de valores automáticos, procesamiento accesible de adjuntos y bloqueo de datos documentales detectados en la vista principal; PR #28 integrado tras **743/743 pruebas en `OK`** y validación manual;
-- **R2 candidato en validación:** auditada la coherencia Pasos 2–4, la matemática de las cuatro modalidades, la trazabilidad mensual y la procedencia del horizonte; pendiente de gate local y revisión manual antes del cierre;
+- **R2 cerrada:** auditadas la coherencia Pasos 2–4, la matemática de las cuatro modalidades, la trazabilidad mensual y la procedencia del horizonte; PR #30 integrado por squash en `9634ae4b1a0a07cc14682d315b6cdb9c1b37eb4d` tras validación manual, **756/756 pruebas en `OK`** en CI y los tres checks requeridos en verde;
 - validar lógica y precisión;
 - revisar UX y accesibilidad;
 - distinguir información acreditada, datos reales recientes y proyección;

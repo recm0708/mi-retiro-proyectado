@@ -15,7 +15,8 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 - cuando Paso 5 amplía el horizonte para cubrir un retiro más lejano, Paso 4 conserva el nuevo año como borrador y registra procedencia `AJUSTADO_DESDE_RETIRO`; una edición posterior pasa a `EDITADO_USUARIO`;
 - el caso visible del año actual con 5 cuotas, B/.7,321.13 históricos y B/.1,500.00 mensuales queda protegido para cerrar en 12 cuotas y B/.17,821.13, con B/.18,000.00 por año futuro en modalidad constante;
 - ADR-172/ADR-173, RF-358 a RF-365 y TR-020/TR-021 formalizan el contrato auditado; se añaden 13 regresiones específicas y `VERSION` permanece en `0.0.26-beta`;
-- R2 queda como candidato pendiente del gate canónico y de validación manual del Paso 4 antes de declararse cerrado.
+- R2 fue validada funcionalmente con el caso femenino y las cuatro modalidades salariales; PR #30 se integró por squash en `9634ae4b1a0a07cc14682d315b6cdb9c1b37eb4d` después de **756/756 pruebas en `OK`** en CI para Python 3.13/3.14 y Auditoría de gobernanza en verde; UX.4.6f queda cerrado y el bloque funcional activo pasa a UX.4.6g — Paso 5 · Escenarios de retiro.
+- el primer intento de cierre documental expuso cuatro regresiones históricas que todavía fijaban UX.4.6f como bloque activo; se desacoplan esas pruebas del estado futuro y se incorpora un gate `pre-commit` versionado que bloquea commits locales ante árbol no reproducible, whitespace preparado, dependencias rotas, errores Python/JavaScript o cualquier prueba fallida; cinco regresiones nuevas protegen el mecanismo y elevan la suite de cierre a **762 pruebas** sin modificar `VERSION`.
 
 ### Mantenimiento de dependencias post-UX.4.6f R1
 
