@@ -24,18 +24,18 @@ class TestPlan1R4CandidatoCierre(unittest.TestCase):
         self.assertIn("0.0.26-beta", releases)
         self.assertIn("cierre formal de PLAN.1", releases)
 
-    def test_readme_muestra_version_actual_y_preserva_0_0_25_0_0_26(self):
+    def test_readme_muestra_candidato_y_preserva_0_0_25_0_0_26(self):
         texto = (ROOT / "README.md").read_text(encoding="utf-8")
-        self.assertIn(f"**Versión formal vigente:** `{self.version}`", texto)
+        self.assertIn(f"**Versión candidata de VER.2:** `{self.version}`", texto)
         self.assertIn("PLAN.1:** cerrado en `0.0.26-beta`", texto)
         self.assertIn("**720 pruebas en `OK`**", texto)
         self.assertIn("tag firmado `v0.0.26-beta` publicado", texto)
         self.assertIn("**UX.4.6e:** cerrada en `0.0.25-beta`", texto)
         self.assertIn("v0.0.25-beta", texto)
 
-    def test_security_soporta_version_actual_y_archiva_legacy(self):
+    def test_security_soporta_candidato_y_archiva_legacy(self):
         texto = (ROOT / "SECURITY.md").read_text(encoding="utf-8")
-        self.assertIn(f"| `{self.version}` | Soportada", texto)
+        self.assertIn(f"| `{self.version}` | Candidata vigente de VER.2", texto)
         self.assertIn("`0.0.26-beta`", texto)
         self.assertIn("Históricas", texto)
 
@@ -68,13 +68,10 @@ class TestPlan1R4CandidatoCierre(unittest.TestCase):
     def test_roadmap_y_plan_maestro_preservan_r4_1_r4_2(self):
         roadmap = (DOCS / "ROADMAP.md").read_text(encoding="utf-8")
         plan = (DOCS / "PLAN_MAESTRO_HACIA_1_0.md").read_text(encoding="utf-8")
-        self.assertIn("[x] R4.1 — candidato local `0.0.26-beta` validado", roadmap)
+        self.assertIn("R4.1 — candidato local `0.0.26-beta`", roadmap)
         self.assertIn("**720 pruebas en `OK`**", roadmap)
-        self.assertIn("[x] R4.2 — cierre remoto y tag firmado", roadmap)
-        self.assertIn("[x] PR #23 integrado por squash", roadmap)
-        self.assertIn("[x] corregir y revalidar sin `SyntaxWarning`", roadmap)
-        self.assertIn("[x] crear y verificar el tag firmado `v0.0.26-beta`", roadmap)
-        self.assertIn("**Versión candidata de cierre de PLAN.1:** `0.0.26-beta`", plan)
+        self.assertIn("R4.2 — PR #23/#24", roadmap)
+        self.assertIn("**Cierre histórico de PLAN.1:** `0.0.26-beta`", plan)
         self.assertIn("**Estado de PLAN.1:** cerrado", plan)
         self.assertIn("PR #23 y PR #24", plan)
         self.assertIn("`v0.0.26-beta`", plan)
@@ -115,8 +112,10 @@ class TestPlan1R4CandidatoCierre(unittest.TestCase):
         texto = (DOCS / "INDICE.md").read_text(encoding="utf-8")
         self.assertIn("AUDITORIA_PLAN1_R4_2026-08-20.md", texto)
         self.assertIn("UX.4.6e R9.2", texto)
-        self.assertIn("cierre formal `0.0.25-beta`", texto)
-        self.assertIn(f"**Versión de aplicación revisada:** `{self.version}`", texto)
+        self.assertIn("`v0.0.25-beta`", texto)
+        self.assertIn(f"**Versión candidata de aplicación:** `{self.version}`", texto)
+        self.assertIn("AUDITORIA_VERSIONADO_PRE_1_0.md", texto)
+        self.assertIn("LEDGER_REVISIONES_PRE_1_0.md", texto)
 
 
 if __name__ == "__main__":
