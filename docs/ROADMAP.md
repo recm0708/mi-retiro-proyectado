@@ -1,11 +1,12 @@
 # Roadmap
 
 **Estado:** vigente  
-**Versión candidata:** `0.0.58.01-beta` — VER.2 G058/E01  
+**Versión candidata:** `0.0.71.01-beta` — VER.2 G071/E01  
+**Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i  
 **Último tag formal legacy:** `v0.0.26-beta`  
-**Fecha de revisión:** 2026-08-21
+**Fecha de revisión:** 2026-08-22
 
-Este roadmap describe **estado actual y trabajo futuro**. La evolución detallada ya completada se conserva en `RELEASES.md`, `CHANGELOG.md`, `docs/AUDITORIA_VERSIONADO_PRE_1_0.md`, `docs/LEDGER_REVISIONES_PRE_1_0.md` y `docs/historico/`.
+Este roadmap describe **estado actual y trabajo futuro**. La evolución detallada ya completada se conserva en `RELEASES.md`, `CHANGELOG.md`, `docs/AUDITORIA_VERSIONADO_PRE_1_0.md`, `docs/LEDGER_REVISIONES_PRE_1_0.md`, `docs/MATRIZ_DECISION_REVISIONES_VER2.md`, `data/ledger_revisiones_pre_1_0.json` y `docs/historico/`.
 
 VER.2 es un bloque transversal de reconciliación y **no añade un bloque 15** al plan maestro de producto. DEV.2 sigue siendo el siguiente bloque funcional y comienza únicamente después de cerrar VER.2.
 
@@ -35,14 +36,12 @@ VER.2 es un bloque transversal de reconciliación y **no añade un bloque 15** a
   - versión de cierre: `0.0.23-beta`.
 
 - [x] **Prebloque transversal — Firma e integridad Git/GitHub**
-  - [x] respaldo completo previo a la migración;
-  - [x] clave SSH Ed25519 dedicada y verificación local;
-  - [x] política de firma, allowed signers y workflow;
-  - [x] materialización firmada de `v0.0.1-beta` a `v0.0.21-beta`;
-  - [x] reemisión firmada única de `v0.0.22-beta` y `v0.0.23-beta`;
-  - [x] auditoría local/remota 23/23 tags;
-  - [x] ruleset de tags y protección de `main`;
-  - [x] revisión de Actions, Dependabot y actualización controlada de dependencias.
+  - [x] materialización y auditoría criptográfica de tags;
+  - [x] CI y protecciones GitHub;
+  - [x] corrección PowerShell/control characters;
+  - [x] actualización controlada a `pypdf 6.15.0`;
+  - [x] cierre formal del prebloque;
+  - cinco estados aceptados G027–G031 según la segunda auditoría de VER.2.
 
 - [x] **GOV.1.4 — Observabilidad y Developer Diagnostics**
   - [x] modo exclusivo de desarrollo;
@@ -51,22 +50,16 @@ VER.2 es un bloque transversal de reconciliación y **no añade un bloque 15** a
   - [x] 13 regresiones específicas y suite de 487 pruebas en `OK`.
 
 - [x] **GOV.1.5 — Seguridad, privacidad y transparencia**
-  - [x] threat model;
-  - [x] procedimiento de incidentes y derechos del titular;
-  - [x] terceros, TLS/despliegue y gates de revisión jurídica externa.
+  - [x] R1 — modelo de amenazas;
+  - [x] R2 — derechos del titular e incidentes;
+  - [x] R3 — cierre integral;
+  - tres estados aceptados G033–G035.
 
-- [x] **GOV.1.6 — Controles GitHub y auditoría automática**
-  - [x] plantillas, `SECURITY.md` y auditoría de gobernanza;
-  - [x] checks requeridos Python 3.13/3.14 + Auditoría de gobernanza.
-
-- [x] **GOV.1.7 — Licencia**
-  - [x] licencia propietaria de la etapa beta;
-  - [x] `LICENSE`, `THIRD_PARTY_NOTICES.md` y estrategia de distribución.
-
-- [x] **GOV.1.8 — Auditoría final y cierre de gobierno**
-  - [x] cierre integral GOV.1;
-  - [x] versión `0.0.24-beta` y tag firmado `v0.0.24-beta`;
-  - [x] reanudación posterior de UX.4.6e.
+- [x] **GOV.1.6 — Controles GitHub y auditoría automática** — G036.
+- [x] **GOV.1.7 — Licencia y derechos de distribución** — G037.
+- [x] **Hotfix de formato de licencia** — G038.
+- [x] **GOV.1.8 — Auditoría final y cierre de gobierno** — G039; `v0.0.24-beta`.
+- [x] **Saneamiento post-GOV.1** — G040.
 
 ## 2. Estado funcional del producto
 
@@ -92,7 +85,7 @@ VER.2 es un bloque transversal de reconciliación y **no añade un bloque 15** a
 
 ### Pendiente o incompleto
 
-- VER.2 — cerrar reconciliación revision-aware y promover G058;
+- VER.2 — cerrar reconciliación revision-aware y promover G071 si el gate completo, PR/CI e integración son satisfactorios;
 - DEV.2 — Centro de desarrollo sobre Developer Diagnostics;
 - hardening integral SEC.2;
 - reconstrucción detallada del CHANGELOG `0.0.1-beta`–`0.0.21-beta` en DOC.2;
@@ -107,60 +100,54 @@ VER.2 es un bloque transversal de reconciliación y **no añade un bloque 15** a
 **Estado:** UX.4.6e y UX.4.6f–UX.4.6i cerrados. VER.2 reconcilia ahora su representación en la historia; no reabre sus funcionalidades.
 
 - [x] **UX.4.6e — Estandarización técnica, comentarios y coherencia de interfaz post-GOV.1**
-  - [x] R1 — auditoría integral del código y patrón documental;
-  - [x] R2 — Python/tests; 550 pruebas;
-  - [x] R3 — JavaScript/Web Storage; 558 pruebas;
-  - [x] R4 — runtime/Jinja/CSS; 566 pruebas;
-  - [x] R5 — coherencia visible; 576 pruebas;
-  - [x] R6 — renumeración/metadata; 586 pruebas;
-  - [x] R7 — auditoría transversal; 598 pruebas;
-  - [x] checkpoint pre-R8 — identidad visual/repositorio público; 624 pruebas; preservado como checkpoint intermedio, no como revisión global adicional;
-  - [x] R8 — validación funcional/procedencia editable; cierre documental 652 pruebas;
-  - [x] R9.2 — cierre formal mediante PR #21/#22 y tag `v0.0.25-beta`; R9.1 se conserva como candidato local histórico.
+  - [x] R1–R7 — G041–G047;
+  - [x] checkpoint pre-R8 — identidad visual/repositorio público, PR #20, 624 pruebas; estado material e independiente G048;
+  - [x] R8 — validación funcional/procedencia editable; R8.1 fue intermedia y R8.2/cierre documental materializa G049;
+  - [x] R9.2 — cierre formal mediante PR #21/#22 y tag `v0.0.25-beta`; R9.1 se conserva como candidato local histórico; el cierre se contabiliza una vez como G050.
+
+- [x] **PLAN.1 — alineación maestra hacia 1.0**
+  - [x] R1, R2A, R2B1, R2B2, R2C, R3A, R3B1 y R3B2 — G051–G058;
+  - [x] R4.1 — cierre local aceptado con 720 pruebas, G059;
+  - [x] R4.2 — higiene post-merge y cierre pre-tag, G060; tag `v0.0.26-beta`.
 
 - [x] **UX.4.6f — Paso 4 · Proyección salarial/laboral**
-  - [x] R1/R1.1 — aceptadas conjuntamente por PR #28 tras validación manual y 743 pruebas;
-  - [x] R2 — auditoría lógica/matemática; PR #30 y 756 pruebas;
-  - [x] cierre/hardening — PR #31, gate `pre-commit` y 762 pruebas.
+  - [x] R1/R1.1 — aceptadas conjuntamente por PR #28 tras validación manual y 743 pruebas; G061;
+  - [x] mantenimiento coordinado de dependencias — PR #29, `pypdf 6.16.1` y `uvicorn 0.52.3`; G062;
+  - [x] R2 — auditoría lógica/matemática; PR #30 y 756 pruebas; G063;
+  - [x] cierre/hardening — PR #31, gate `pre-commit`, cinco regresiones nuevas y 762 pruebas; G064.
 
 - [x] **UX.4.6g — Paso 5 · Escenarios de retiro**
-  - [x] cierre PR #32 con 784 pruebas; los refinamientos R1.2/R1.3/R1.4/R1.4.2/R1.4.3 se preservan como evolución interna del mismo cierre.
+  - [x] cierre PR #32 con 784 pruebas; G065. Los refinamientos R1.2/R1.3/R1.4/R1.4.2/R1.4.3 se preservan como evolución interna del mismo estado aceptado.
 
 - [x] **UX.4.6h — Paso 6 · Resultados y exportación**
-  - [x] R1/R1.1 — candidato y corrección de gate preservados como historia;
-  - [x] R1.2 — claridad y jerarquía aceptadas visualmente;
-  - [x] R1.3 — informe A4 independiente y cierre PR #33 con 812 pruebas.
+  - [x] R1 — candidato fallido; no consume Global;
+  - [x] R1.1 — corrección aceptada; G066;
+  - [x] R1.2 — claridad y jerarquía aceptadas; G067;
+  - [x] R1.3 — informe A4 independiente y cierre PR #33 con 812 pruebas; G068.
 
 - [x] **UX.4.6i — Cómo se calcula**
-  - [x] R1 — ruta pública y estructura inicial;
-  - [x] R1.2 — navegación, recorrido Pasos 1–6 y densidad visual;
-  - [x] R1.3 — ejemplos sustituidos, terminología y espaciado;
-  - [x] R1.4 — etiqueta **Ejemplo** y cierre PR #34 con 841 pruebas.
+  - [x] R1 — ruta pública, estructura inicial y gate de 826 pruebas; G069;
+  - [x] R1.2 — navegación, recorrido Pasos 1–6 y densidad visual; refinamiento interno;
+  - [x] R1.3 — ejemplos sustituidos, terminología y espaciado; refinamiento interno;
+  - [x] R1.4 — etiqueta **Ejemplo** y cierre PR #34 con 841 pruebas; G070.
 
 No existe una UX.4.6i R1.1 demostrada por sección, gate o artefacto independiente; las referencias agregadas que la incluían se corrigen en VER.2.
 
 ## 4. PLAN.1, VER.2 y secuencia hacia 1.0
 
-**PLAN.1:** cerrado formalmente en `0.0.26-beta` con **720 pruebas en `OK`** y tag firmado `v0.0.26-beta`.
+**PLAN.1:** cerrado formalmente en `0.0.26-beta` con **720 pruebas en `OK`** y tag firmado `v0.0.26-beta`. La segunda auditoría reconoce diez estados aceptados G051–G060 dentro de su evolución.
 
-**VER.2:** bloque transversal activo. La base anterior al cambio contiene 57 estados aceptados (G001–G057). El candidato `0.0.58.01-beta` representa G058/E01 y solo se acepta después del gate completo y la integración del PR.
+**VER.2:** bloque transversal activo. La base anterior al cambio contiene **70 estados aceptados (G001–G070)**. El candidato `0.0.71.01-beta` representa G071/E01 y solo se acepta después del gate completo, PR/CI e integración.
 
 **Siguiente bloque funcional:** DEV.2 — Centro de desarrollo.
 
 Documentos canónicos de VER.2:
 
 - `AUDITORIA_VERSIONADO_PRE_1_0.md` — criterio contable y exclusiones;
-- `LEDGER_REVISIONES_PRE_1_0.md` — ledger G001–G057 y reserva G058;
-- `../VERSIONING.md` — política de numeración;
-- ADR-179 en `DECISIONES.md` — decisión de gobierno del esquema.
-
-Estado interno de PLAN.1 preservado:
-
-- [x] R1 — política de versión oficial futura, validador y plan maestro;
-- [x] R2A/R2B1/R2B2/R2C — alineación documental progresiva;
-- [x] R3A/R3B1/R3B2 — seguridad, privacidad, licencia y guard histórico;
-- [x] R4.1 — candidato local `0.0.26-beta`, 720 pruebas;
-- [x] R4.2 — PR #23/#24, revalidación sin `SyntaxWarning` y tag firmado `v0.0.26-beta`.
+- `LEDGER_REVISIONES_PRE_1_0.md` — ledger G001–G070 y reserva G071;
+- `MATRIZ_DECISION_REVISIONES_VER2.md` — justificación de la segunda pasada;
+- `../data/ledger_revisiones_pre_1_0.json` — ledger estructurado validable;
+- `../VERSIONING.md` — política de numeración.
 
 Secuencia funcional de 14 bloques hacia 1.0, sin contar VER.2 como bloque adicional:
 
