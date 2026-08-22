@@ -78,7 +78,7 @@ La primera pasada contó GOV.1.5 únicamente como un cierre global de bloque. La
 - `VALIDACION.md` registra 7 regresiones de R1, 8 de R2 y una suite validada de 502 pruebas antes de R3;
 - PR #14 integra R3 y cierra el bloque completo con 512 pruebas.
 
-Por coherencia con GOV.1.3 y con las revisiones explícitas aceptadas de UX.4.6e/PLAN.1, **R1 y R2 son candidatas fuertes a Globals propios**. Este hallazgo invalida el total 57 aun si no apareciera ningún otro ajuste.
+Por coherencia con GOV.1.3 y con las revisiones explícitas aceptadas de UX.4.6e/PLAN.1, **R1 y R2 deben conservar Globals propios** junto con R3/cierre. Este hallazgo invalida el total 57 aun si no apareciera ningún otro ajuste.
 
 La numeración exacta se recalculará solo al terminar todos los bloques para evitar renumerar el ledger varias veces durante la auditoría.
 
@@ -100,7 +100,42 @@ La numeración de PR no representa revisiones de producto. La auditoría confirm
 
 Por tanto, estos PR no consumen Globals. La adopción efectiva posterior de Actions v7, `pypdf` y protecciones GitHub se evalúa por el hito aceptado al que pertenecen, no por el número de Pull Request.
 
-## 9. Criterio uniforme en consolidación
+## 9. UX.4.6e — R1 sí existió; checkpoints pre-R8 no duplican revisiones
+
+La referencia cruzada con las conversaciones confirma que R1 fue el diagnóstico integral y la definición del patrón documental por tecnología. R1 quedó marcada como completada y se avanzó explícitamente a R2. No se recuperó un número de pruebas propio de R1, por lo que su evidencia es de aceptación/progresión y no de gate numérico independiente.
+
+A partir de R2, `VALIDACION.md` aporta gates diferenciados: R2 550, R3 558, R4 566, R5 576, R6 586, R7 598 y cierre documental de R8 652. La cifra 644 corresponde a R8.1/R8.2 funcional antes del cierre documental; 624 corresponde al checkpoint de identidad/publicación previo a continuar R8. Ninguna de esas cifras intermedias crea por sí sola otra revisión adicional.
+
+R9.1 alcanzó 660 pruebas y promovió el candidato `0.0.25-beta`; R9.2 materializó el cierre remoto/documental del mismo estado. Para evitar doble conteo, R9 consume un solo Global de cierre.
+
+Consecuencia provisional: la estructura de nueve estados de UX.4.6e de la primera pasada —R1, R2, R3, R4, R5, R6, R7, R8 y R9/cierre— se mantiene, pero se corrigen las descripciones y evidencias.
+
+## 10. UX.4.6h — la primera pasada omitió R1.1
+
+La referencia cruzada de las conversaciones establece esta secuencia:
+
+- R1 existió como candidato, pero falló al revelar tres regresiones: **no consume Global**;
+- R1.1 fue la corrección que permitió superar ese estado fallido y continuar: **sí es revisión aceptada**;
+- R1.2 quedó aceptada;
+- R1.3 quedó aceptada y cerró el bloque con 812 pruebas.
+
+Por tanto, UX.4.6h debe aportar **tres** estados aceptados —R1.1, R1.2 y R1.3—, no los dos que aparecen en el ledger de primera pasada. R1 fallida permanece documentada solo como evidencia.
+
+## 11. UX.4.6i — corregir la falsa R1.1 y conservar solo aceptación demostrable
+
+La secuencia histórica demostrable es:
+
+```text
+R1 → R1.2 → R1.3 → R1.4
+```
+
+No existe una R1.1 independiente: la referencia a R1.1 corresponde a un hotfix documental de dos fallos históricos durante el gate de R1 y no a una revisión diferenciada de UX.4.6i.
+
+R1 llegó a un gate de 826 pruebas después de corregir esos fallos y constituye un estado aceptado. Para R1.2 y R1.3 la documentación describe cambios y objetivos de 832/840 en el changelog, pero la referencia cruzada de conversaciones no recuperó una aceptación verbal o gate intermedio inequívoco separado. R1.4 sí constituye el cierre demostrado: PR #34, 841/841, compilación Python, sintaxis JavaScript y `git diff --check` correctos, seguido de DEV.2.
+
+Aplicando criterio conservador, la segunda pasada cuenta de momento **R1 y R1.4**, no R1.2/R1.3, salvo que aparezca evidencia adicional de aceptación independiente durante el resto de la auditoría.
+
+## 12. Criterio uniforme en consolidación
 
 La segunda pasada no aceptará reglas diferentes según el bloque. La decisión final deberá responder igual para UX, GOV, PLAN y mantenimiento.
 
@@ -119,22 +154,22 @@ Reglas derivadas hasta ahora:
 - un checkpoint declarado intermedio no cuenta;
 - un PR de documentación, tag, squash o higiene que solamente materializa un estado ya aceptado no cuenta de nuevo;
 - mantenimiento de dependencias/CI no cuenta por el mero hecho de producir un commit o PR; solo podría contar si fue definido y aceptado como hito transversal autónomo del plan;
-- una subfase ya absorbida dentro de un estado retrospectivo no se duplica.
+- una subfase ya absorbida dentro de un estado retrospectivo no se duplica;
+- ante evidencia incompleta se usa el criterio conservador: una revisión nombrada no se cuenta sin aceptación diferenciada demostrable.
 
-## 10. Bloques todavía pendientes antes de fijar el número
+## 13. Bloques todavía pendientes antes de fijar el número
 
 Antes de ratificar el último Global deben revisarse de nuevo, con el mismo criterio:
 
-- cierre de la decisión GOV.1.5 R1/R2/R3 en la secuencia global;
-- prebloque de firma/integridad y sus mantenimientos internos;
-- UX.4.6e R1–R9.2, incluyendo la diferencia 644/652/660;
-- confirmación final de PLAN.1 contra el ledger resultante;
-- UX.4.6f R1/R1.1/R2 y exclusión o no de PR #31;
+- prebloque de firma/integridad y sus mantenimientos internos, para confirmar que solo consume su cierre transversal;
+- confirmación final de GOV.1.5 R1/R2/R3 en la secuencia global;
+- confirmación final de UX.4.6e y PLAN.1 contra el ledger recalculado;
+- UX.4.6f R1/R1.1/R2 y exclusión definitiva de PR #31;
 - UX.4.6g refinamientos posteriores a R1;
-- UX.4.6h R1 fallido, R1.1, R1.2 y R1.3;
-- UX.4.6i R1/R1.2/R1.3/R1.4 y la referencia inconsistente a R1.1.
+- búsqueda residual de evidencia independiente para UX.4.6i R1.2/R1.3;
+- recálculo global completo G001→Gn sin huecos ni duplicados.
 
-## 11. Estado operativo
+## 14. Estado operativo
 
 Este archivo es una bitácora de auditoría de trabajo. Cuando termine la segunda pasada:
 
