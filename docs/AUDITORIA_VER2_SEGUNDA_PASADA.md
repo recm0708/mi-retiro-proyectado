@@ -35,13 +35,17 @@ La segunda pasada confirma que UX.4.6d no es el comienzo del tramo UX.4.6.
 
 | Fase | Evidencia Git/documental | Cierre demostrado | Estado contable |
 |---|---|---|---|
-| UX.2.1 | aparece en changelog/documentación histórica como estabilización visual transversal: Oscuro más profundo, Alto contraste negro/blanco, tokens semánticos y remates visuales | fase histórica real; todavía debe determinarse si posee ancla independiente suficiente para consumir Global | PENDIENTE DE DECISIÓN |
+| UX.2.1 | `tests/test_estabilizacion_visual.py` se incorporó dentro del rango histórico de `0.0.9-beta` y se identifica expresamente como regresión de UX.2.1; ese mismo rango agrupa identidad, temas, accesibilidad y terminología | fase histórica real, pero no existe un snapshot aceptado separado fuera del rango ya asignado a `0.0.9-beta` | **ABSORBIDA EN G009; NO SUMA OTRO GLOBAL** |
 | UX.4.6a | `429201a` → `11aefca`; bitácora `UX_4_6A_REDISENO_VISUAL.md` | PC/laptop aceptado; 198 pruebas; `compileall`, JS y `git diff --check` en verde | CIERRE REAL CONFIRMADO |
 | UX.4.6b | `e6c2310` → `83a67ed`; bitácora `UX_4_6B_PASO1_DATOS_PERSONALES.md` | R4; PC/laptop aceptado; 233 pruebas; CI Python 3.13/3.14 en verde | CIERRE REAL CONFIRMADO |
 | UX.4.6c | `e80d15e` → `2a69fb8`; bitácora `UX_4_6C_PASO2_CUOTAS.md` | R3; PC/laptop aceptado; 253 pruebas | CIERRE REAL CONFIRMADO |
 | UX.4.6d | `05232df` → `7941f58`; bitácora `UX_4_6D_PASO3_HISTORIAL.md` | R23; 396 pruebas; Pasos 1–3 integrados y acceso correcto a Paso 4 | CIERRE REAL CONFIRMADO |
 
 La reconstrucción histórica GOV.1.1 ya asignó `0.0.18-beta`, `0.0.19-beta`, `0.0.20-beta` y `0.0.21-beta` a los cuatro cierres UX.4.6a–d. La auditoría debe evitar contarlos dos veces, pero también debe conservar explícitamente sus nombres, revisiones finales y gates.
+
+### Decisión UX.2.1
+
+UX.2.1 no se elimina ni se oculta. Debe aparecer como subfase histórica de G009. La evidencia Git muestra que sus regresiones se incorporaron en la misma secuencia `376a967` → `74fbd29` → `7ed97ff` → `e6b02dc` ya reconstruida como `0.0.9-beta`. Crear un Global adicional duplicaría un mismo estado retrospectivo.
 
 ## 4. UX.4.6d — interpretación de R1–R23
 
@@ -63,9 +67,40 @@ PR #31, posterior, se titula como cierre formal de UX.4.6f, pero su alcance prin
 - corrección de regresiones históricas que congelaban estados transitorios;
 - 762 pruebas.
 
-La primera pasada creó un Global adicional para PR #31. Esta decisión queda **reabierta**. Bajo un criterio centrado en revisiones de bloque explícitas, PR #31 parece evidencia/hardening posterior del mismo cierre R2 y no una nueva revisión UX.4.6f. Solo se mantendrá como Global independiente si la regla definitiva decide contar hitos técnicos transversales autónomos aun cuando no tengan R nueva.
+La primera pasada creó un Global adicional para PR #31. La evidencia de la segunda pasada favorece **no contarlo como una nueva revisión UX.4.6f**: R2 ya había sido aceptada funcionalmente y declarada cerrada; PR #31 materializa hardening y cierre documental posterior sin crear R nueva. Esta decisión se mantendrá salvo que la auditoría transversal obligue a contar como Global todo hito técnico independiente, criterio que actualmente se descarta por inflar el contador con mantenimiento.
 
-## 6. Criterio que debe quedar uniforme
+## 6. GOV.1.5 — error concreto de la primera pasada
+
+La primera pasada contó GOV.1.5 únicamente como un cierre global de bloque. La documentación vigente demuestra que R1 y R2 no son nombres retrospectivos inventados:
+
+- `MODELO_AMENAZAS.md` declara **GOV.1.5 R1**, con **fecha de cierre original 2026-08-17**;
+- `PROCEDIMIENTO_DERECHOS_TITULAR.md` declara **GOV.1.5 R2**, vigente como procedimiento interno, con **fecha de cierre original 2026-08-18**;
+- `VALIDACION.md` registra 7 regresiones de R1, 8 de R2 y una suite validada de 502 pruebas antes de R3;
+- PR #14 integra R3 y cierra el bloque completo con 512 pruebas.
+
+Por coherencia con GOV.1.3 y con las revisiones explícitas aceptadas de UX.4.6e/PLAN.1, **R1 y R2 son candidatas fuertes a Globals propios**. Este hallazgo invalida el total 57 aun si no apareciera ningún otro ajuste.
+
+La numeración exacta se recalculará solo al terminar todos los bloques para evitar renumerar el ledger varias veces durante la auditoría.
+
+## 7. PLAN.1 — criterio de aceptación confirmado, cierre sin doble conteo
+
+`AUDITORIA_PLAN1_R4_2026-08-20.md` registra gates locales diferenciados para R1, R2A, R2B1, R2B2, R2C, R3A, R3B1 y R3B2: 665, 670, 676, 684, 689, 695, 702 y 710 pruebas respectivamente, con `VERSION` todavía en `0.0.25-beta` hasta R4.
+
+R4.1 promueve el candidato `0.0.26-beta` con 720 pruebas. R4.2 no introduce una nueva revisión funcional de PLAN.1: es el gate remoto/higiene pre-tag que corrige el `SyntaxWarning`, repite las mismas 720 pruebas y permite crear el tag firmado. PR #25 es reconciliación documental post-tag y no suma revisión.
+
+Consecuencia: las subrevisiones explícitas y aceptadas R1–R3B2 pueden conservar identidad propia; el cierre R4 se cuenta una sola vez, no como R4.1 + R4.2 + PR #25.
+
+## 8. Pull Requests #1–#8 y mantenimiento Dependabot temprano
+
+La numeración de PR no representa revisiones de producto. La auditoría confirma que los PR tempranos de Dependabot no deben inflar el ledger:
+
+- #1, #2 y #3 fueron propuestas automáticas de `actions/*` y se cerraron sin merge;
+- la evidencia de validación del prebloque registra que #7 y #8 fueron sustituidos por cambios controlados del mantenedor;
+- #4, #5 y #6 se cerraron sin merge para preservar combinaciones compatibles y el snapshot transitivo reproducible.
+
+Por tanto, estos PR no consumen Globals. La adopción efectiva posterior de Actions v7, `pypdf` y protecciones GitHub se evalúa por el hito aceptado al que pertenecen, no por el número de Pull Request.
+
+## 9. Criterio uniforme en consolidación
 
 La segunda pasada no aceptará reglas diferentes según el bloque. La decisión final deberá responder igual para UX, GOV, PLAN y mantenimiento.
 
@@ -77,23 +112,29 @@ Una entrada candidata a Global deberá demostrar como mínimo:
 4. evidencia de que el proyecto avanzó desde ese estado;
 5. ausencia de duplicación con PR/squash/tag/cierre documental que materialice el mismo estado.
 
-Los candidatos fallidos, checkpoints explícitamente intermedios y cierres puramente documentales no consumen Global por defecto.
+Reglas derivadas hasta ahora:
 
-## 7. Bloques pendientes de reauditoría antes de fijar el número
+- una revisión explícita con cierre/gate propio puede contar aunque posteriormente se integre junto con otras;
+- un candidato fallido no cuenta;
+- un checkpoint declarado intermedio no cuenta;
+- un PR de documentación, tag, squash o higiene que solamente materializa un estado ya aceptado no cuenta de nuevo;
+- mantenimiento de dependencias/CI no cuenta por el mero hecho de producir un commit o PR; solo podría contar si fue definido y aceptado como hito transversal autónomo del plan;
+- una subfase ya absorbida dentro de un estado retrospectivo no se duplica.
+
+## 10. Bloques todavía pendientes antes de fijar el número
 
 Antes de ratificar el último Global deben revisarse de nuevo, con el mismo criterio:
 
-- UX.2.1;
-- GOV.1.3 R1–R4 y la consistencia con el tratamiento de GOV.1.5 R1/R2;
-- prebloque de firma/integridad;
-- UX.4.6e R1–R9.2;
-- PLAN.1 R1–R4.2 y sus subdivisiones R2A/R2B1/R2B2/R2C/R3A/R3B1/R3B2;
-- UX.4.6f R1/R1.1/R2 y PR #31;
+- cierre de la decisión GOV.1.5 R1/R2/R3 en la secuencia global;
+- prebloque de firma/integridad y sus mantenimientos internos;
+- UX.4.6e R1–R9.2, incluyendo la diferencia 644/652/660;
+- confirmación final de PLAN.1 contra el ledger resultante;
+- UX.4.6f R1/R1.1/R2 y exclusión o no de PR #31;
 - UX.4.6g refinamientos posteriores a R1;
 - UX.4.6h R1 fallido, R1.1, R1.2 y R1.3;
 - UX.4.6i R1/R1.2/R1.3/R1.4 y la referencia inconsistente a R1.1.
 
-## 8. Estado operativo
+## 11. Estado operativo
 
 Este archivo es una bitácora de auditoría de trabajo. Cuando termine la segunda pasada:
 
