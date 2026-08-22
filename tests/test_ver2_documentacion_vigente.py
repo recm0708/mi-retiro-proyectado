@@ -9,17 +9,17 @@ from app.core.version import descomponer_version_beta_revision
 
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
-VERSION_CANDIDATA = "0.0.58.01-beta"
+VERSION_CANDIDATA = "0.0.71.01-beta"
 
 
 class TestVer2DocumentacionVigente(unittest.TestCase):
     """Evita que la reconciliación revision-aware vuelva a divergir."""
 
-    def test_version_candidata_es_g058_e01_y_runtime_coincide(self):
+    def test_version_candidata_es_g071_e01_y_runtime_coincide(self):
         version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
         self.assertEqual(VERSION_CANDIDATA, version)
         self.assertEqual(version, APP_VERSION)
-        self.assertEqual((58, 1), descomponer_version_beta_revision(version))
+        self.assertEqual((71, 1), descomponer_version_beta_revision(version))
 
     def test_superficies_de_estado_declaran_candidato_y_legacy(self):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
@@ -66,14 +66,20 @@ class TestVer2DocumentacionVigente(unittest.TestCase):
                 with self.subTest(ruta=ruta.name, patron=patron):
                     self.assertNotIn(patron, texto)
 
-    def test_ledger_y_auditoria_declaran_57_y_reservan_58(self):
+    def test_ledger_y_auditoria_declaran_70_y_reservan_71(self):
         ledger = (DOCS / "LEDGER_REVISIONES_PRE_1_0.md").read_text(encoding="utf-8")
         auditoria = (DOCS / "AUDITORIA_VERSIONADO_PRE_1_0.md").read_text(encoding="utf-8")
-        self.assertIn("**Contador aceptado en la base:** **G057**", ledger)
-        self.assertIn("**57 estados aceptados**", auditoria)
-        self.assertIn("G058", ledger)
+        versioning = (ROOT / "VERSIONING.md").read_text(encoding="utf-8")
+        self.assertIn("**Contador aceptado en la base:** **G070**", ledger)
+        self.assertIn("70", auditoria)
+        self.assertIn("G071", ledger)
         self.assertIn(VERSION_CANDIDATA, ledger)
-        self.assertIn("G058 solo queda consumido", (ROOT / "VERSIONING.md").read_text(encoding="utf-8"))
+        self.assertIn("G071 solo queda consumido", versioning)
+
+    def test_ledger_estructurado_es_superficie_canonicamente_indexada(self):
+        indice = (DOCS / "INDICE.md").read_text(encoding="utf-8")
+        self.assertIn("ledger_revisiones_pre_1_0.json", indice)
+        self.assertIn("version_ledger.py", indice)
 
     def test_tags_legacy_permanecen_historicos_e_inmutables(self):
         versioning = (ROOT / "VERSIONING.md").read_text(encoding="utf-8")
@@ -83,7 +89,7 @@ class TestVer2DocumentacionVigente(unittest.TestCase):
             with self.subTest(tag=tag):
                 self.assertIn(tag, versioning)
                 self.assertIn(tag, releases)
-        self.assertIn("No se crean tags revision-aware retrospectivos", versioning)
+        self.assertIn("No crear tags revision-aware retrospectivos", versioning)
 
 
 if __name__ == "__main__":
