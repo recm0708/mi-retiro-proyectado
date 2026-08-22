@@ -8,15 +8,16 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ### VER.2 — reconciliación revision-aware pre-1.0
 
-- reaudita el historial completo hasta el cierre UX.4.6i y separa estados aceptados, candidatos, commits lógicos, checkpoints y operaciones de mantenimiento;
-- corrige el conteo provisional de 163 revisiones y fija la base `7037addd44253e528c77460b678d2b3ccd540dd5` en **57 estados aceptados (G001–G057)**;
+- reaudita por segunda vez el historial completo hasta el cierre UX.4.6i y separa estados aceptados, candidatos fallidos, refinamientos internos, commits lógicos, checkpoints y mantenimiento independiente;
+- sustituye los conteos provisionales anteriores y fija la base `7037addd44253e528c77460b678d2b3ccd540dd5` en **70 estados aceptados (G001–G070)**;
 - adopta para estados beta nuevos el identificador `0.GG.RR.EE-beta`, manteniendo `0.0.N-beta` como familia legacy histórica;
-- reserva `0.0.58.01-beta` para VER.2 R1; G058 solo se consume después de gate completo, PR/CI e integración;
-- preserva sin mover ni recrear los tags `v0.0.1-beta`–`v0.0.26-beta` y prohíbe tags revision-aware retrospectivos para G001–G057;
+- reserva `0.0.71.01-beta` para VER.2 G071/E01; G071 solo se consume después de ledger/validador, gate completo, PR/CI e integración;
+- preserva sin mover ni recrear los tags `v0.0.1-beta`–`v0.0.26-beta` y prohíbe tags revision-aware retrospectivos para G001–G070;
 - documenta UX.2.1 y las revisiones internas UX.4.6a–d sin volver a contarlas cuando ya están absorbidas por los 21 estados retrospectivos;
+- reconoce como estados independientes cuando la evidencia lo sustenta los hitos de firma/integridad, seguridad/gobierno, mantenimiento, identidad/publicación, PLAN.1 y los cierres posteriores;
 - corrige la secuencia canónica de UX.4.6i a **R1 → R1.2 → R1.3 → R1.4**; no existe evidencia independiente de UX.4.6i R1.1;
 - separa la versión vigente de aplicación de la metadata histórica que indica en qué versión fue revisado un documento de dominio;
-- incorpora `docs/AUDITORIA_VERSIONADO_PRE_1_0.md`, `docs/LEDGER_REVISIONES_PRE_1_0.md`, ADR-179 y regresiones de coherencia;
+- incorpora ledger estructurado en `data/ledger_revisiones_pre_1_0.json`, validador `app/core/version_ledger.py`, matriz de decisión, auditoría y regresiones de coherencia;
 - DEV.2 permanece como siguiente bloque funcional y no comienza hasta cerrar VER.2.
 
 ### UX.4.6i — cierre de Cómo se calcula
@@ -403,10 +404,10 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 - Validación R1: compilación Python, sintaxis JavaScript, git diff --check, 411 pruebas automatizadas en OK y 8/8 regresiones específicas de documentación.
 - GOV.1.3 R2 completada: consolidación de Arquitectura, Modelo de datos, Gestión de datos, Motor, Especificación funcional, Guía interna y Validación.
 - Validación R2: compilación Python, sintaxis JavaScript y `git diff --check` sin errores; 423 pruebas automatizadas en `OK`, incluidas 12/12 regresiones específicas de R2 y 8/8 regresiones documentales de R1.
-- GOV.1.3 R3 completada: consolidación normativa, modalidades, seguridad, privacidad, términos y matriz interna de alineación con Ley 81; se preserva la versión material de privacidad `2026-08-16.1`.
+- GOV.1.3 R3 completada: consolidación normativa, seguridad y privacidad documental;
+- mantenida la versión material de privacidad `2026-08-16.1`.
 - Validación R3: compilación Python, sintaxis JavaScript y `git diff --check` sin errores; 438 pruebas automatizadas en `OK`, incluidas 15/15 regresiones específicas de R3, 12/12 de R2 y 8/8 de R1.
 - La regresión documental de R2 se endureció para preservar su evidencia de cierre en `CHANGELOG.md` sin depender del estado evolutivo de `VALIDACION.md`.
-
 - GOV.1.3 R4 completada: transparencia, matriz de trazabilidad, auditoría de cálculos, limitaciones conocidas, dependencias/terceros, proceso de release e índice auditable de 158 ADR.
 - ADR-086 se conserva como anomalía histórica de metadata sin inventar un estado retroactivo.
 - Validación R4 y cierre GOV.1.3: 458 pruebas automatizadas en `OK`, compilación Python, sintaxis JavaScript y `git diff --check` sin errores.
