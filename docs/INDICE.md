@@ -1,9 +1,10 @@
 # Índice de documentación
 
-**Estado:** vigente
-**Versión de aplicación revisada:** `0.0.26-beta`
-**Última actualización transversal:** UX.4.6i R1 — guía pública de cálculo candidata — 2026-08-21
-**Cierre histórico preservado:** UX.4.6e R9.2 — cierre formal `0.0.25-beta` — 2026-08-19
+**Estado:** vigente  
+**Versión candidata de aplicación:** `0.0.58.01-beta` — VER.2 G058/E01  
+**Último tag formal legacy:** `v0.0.26-beta`  
+**Última actualización transversal:** VER.2 — reconciliación de versionado pre-1.0 — 2026-08-21  
+**Cierres históricos preservados:** UX.4.6i / PR #34 — 841 pruebas; UX.4.6e R9.2 — `v0.0.25-beta`
 
 Este archivo es el punto de entrada para la documentación técnica, funcional, normativa, de privacidad, validación y auditoría de Mi Retiro Proyectado.
 
@@ -19,8 +20,10 @@ Este archivo es el punto de entrada para la documentación técnica, funcional, 
 ## 2. Gobierno y versionado
 
 - [`../GOVERNANCE.md`](../GOVERNANCE.md) — gobierno del proyecto.
-- [`../VERSIONING.md`](../VERSIONING.md) — política de la línea `0.0.N-beta`, versiones oficiales de cuatro componentes y Build independiente.
-- [`../VERSION`](../VERSION) — fuente canónica de versión de aplicación.
+- [`../VERSIONING.md`](../VERSIONING.md) — política legacy, beta revision-aware `0.GG.RR.EE-beta`, versión oficial de cuatro componentes y Build independiente.
+- [`../VERSION`](../VERSION) — fuente canónica de la versión de aplicación.
+- [`AUDITORIA_VERSIONADO_PRE_1_0.md`](AUDITORIA_VERSIONADO_PRE_1_0.md) — segunda auditoría del historial, criterio contable y exclusiones de VER.2.
+- [`LEDGER_REVISIONES_PRE_1_0.md`](LEDGER_REVISIONES_PRE_1_0.md) — ledger global G001–G057 y reserva G058.
 - [`../RELEASES.md`](../RELEASES.md) — versiones, tags y reconstrucción histórica.
 - [`../CHANGELOG.md`](../CHANGELOG.md) — cambios notables por versión.
 - [`../CONTRIBUTING.md`](../CONTRIBUTING.md) — flujo de contribución.
@@ -30,9 +33,9 @@ Este archivo es el punto de entrada para la documentación técnica, funcional, 
 - [`MIGRACION_FIRMAS_GIT_2026-08-17.md`](MIGRACION_FIRMAS_GIT_2026-08-17.md) — firma SSH y migración histórica controlada.
 - [`../.github/allowed_signers`](../.github/allowed_signers) — claves públicas autorizadas.
 - [`AUDITORIA_GITHUB.md`](AUDITORIA_GITHUB.md) — controles GitHub, seguridad y auditoría automática.
-- [`PREPARACION_PUBLICA_GITHUB.md`](PREPARACION_PUBLICA_GITHUB.md) — estado y mantenimiento de metadata, topics, labels, badges, Social Preview y seguridad del repositorio público.
+- [`PREPARACION_PUBLICA_GITHUB.md`](PREPARACION_PUBLICA_GITHUB.md) — metadata, topics, labels, badges, Social Preview y seguridad del repositorio público.
 - [`AUDITORIA_REPOSITORIO_2026-08-18.md`](AUDITORIA_REPOSITORIO_2026-08-18.md) — auditoría integral local/remota post-GOV.1.
-- [`AUDITORIA_UX46E_R7_2026-08-18.md`](AUDITORIA_UX46E_R7_2026-08-18.md) — auditoría transversal de coherencia código/interfaz/documentación de UX.4.6e.
+- [`AUDITORIA_UX46E_R7_2026-08-18.md`](AUDITORIA_UX46E_R7_2026-08-18.md) — auditoría transversal de coherencia de UX.4.6e.
 - [`AUDITORIA_PLAN1_R4_2026-08-20.md`](AUDITORIA_PLAN1_R4_2026-08-20.md) — auditoría integral y gate de cierre de PLAN.1.
 - [`CIERRE_GOV1.md`](CIERRE_GOV1.md) — evidencia definitiva del cierre GOV.1.
 - [`../LICENSE`](../LICENSE) — licencia propietaria de materiales originales.
@@ -68,7 +71,7 @@ Este archivo es el punto de entrada para la documentación técnica, funcional, 
 
 - [`MODELO_DE_DATOS.md`](MODELO_DE_DATOS.md) — contratos y procedencia.
 - [`GESTION_DATOS_SIMULACION.md`](GESTION_DATOS_SIMULACION.md) — ciclo de vida del estado local.
-- [`DECISIONES.md`](DECISIONES.md) — decisiones ADR.
+- [`DECISIONES.md`](DECISIONES.md) — decisiones ADR históricas y vigentes.
 
 ## 8. Seguridad y privacidad
 
@@ -83,9 +86,7 @@ Este archivo es el punto de entrada para la documentación técnica, funcional, 
 - [`OBSERVABILIDAD_LOGS.md`](OBSERVABILIDAD_LOGS.md) — minimización y manejo local de logs diagnósticos.
 - [`../SECURITY.md`](../SECURITY.md) — política y canales privados de reporte responsable de vulnerabilidades.
 
-GOV.1.3 R3 consolidó originalmente el bloque normativo, de seguridad y privacidad; GOV.1.4 actualiza únicamente el contrato de observabilidad.
-
-GOV.1.5 completa los procedimientos internos. La publicación del repositorio no elimina la revisión jurídica externa ni cualquier diseño de seguridad específico que requiera un futuro despliegue remoto de la aplicación.
+La publicación del repositorio no elimina la revisión jurídica externa ni cualquier diseño de seguridad específico que requiera un futuro despliegue remoto de la aplicación.
 
 ## 9. Transparencia, auditoría y trazabilidad
 
@@ -95,7 +96,8 @@ GOV.1.5 completa los procedimientos internos. La publicación del repositorio no
 - [`LIMITACIONES_CONOCIDAS.md`](LIMITACIONES_CONOCIDAS.md) — límites técnicos, normativos y de despliegue.
 - [`DEPENDENCIAS_TERCEROS.md`](DEPENDENCIAS_TERCEROS.md) — dependencias, licencias upstream, conexiones y riesgos.
 - [`PROCESO_RELEASE.md`](PROCESO_RELEASE.md) — gates de cierre, versión, Build, CI y tags.
-- [`UX46I_R1_AUDITORIA_COMO_SE_CALCULA.md`](UX46I_R1_AUDITORIA_COMO_SE_CALCULA.md) — auditoría del contrato público de explicación y sus regresiones.
+- [`UX46I_R1_AUDITORIA_COMO_SE_CALCULA.md`](UX46I_R1_AUDITORIA_COMO_SE_CALCULA.md) — auditoría canónica de UX.4.6i; secuencia demostrada R1 → R1.2 → R1.3 → R1.4.
+- [`AUDITORIA_VERSIONADO_PRE_1_0.md`](AUDITORIA_VERSIONADO_PRE_1_0.md) — evidencia cruzada de la reconciliación de revisiones.
 
 ## 10. Validación y calidad
 
@@ -104,7 +106,7 @@ GOV.1.5 completa los procedimientos internos. La publicación del repositorio no
 - `../.github/workflows/ci.yml` — CI funcional.
 - `../.github/workflows/auditoria-gobernanza.yml` — auditoría automática de gobierno.
 - `../.github/workflows/verificar-tags.yml` — verificación criptográfica de tags.
-- `.github/dependabot.yml` — mantenimiento de dependencias.
+- `../.github/dependabot.yml` — mantenimiento de dependencias.
 
 ## 11. Desarrollo y contribución
 
@@ -135,7 +137,9 @@ Los archivos históricos documentan lo que se pensó, probó o decidió en un mo
 - [`../RELEASES.md`](../RELEASES.md) — registro formal y retrospectivo.
 - [`../CHANGELOG.md`](../CHANGELOG.md) — cambios notables.
 - [`../VERSIONING.md`](../VERSIONING.md) — reglas de incremento y tags.
-- [`PLAN_MAESTRO_HACIA_1_0.md`](PLAN_MAESTRO_HACIA_1_0.md) — gates de transición desde beta hasta la primera versión oficial.
+- [`AUDITORIA_VERSIONADO_PRE_1_0.md`](AUDITORIA_VERSIONADO_PRE_1_0.md) — reconciliación VER.2.
+- [`LEDGER_REVISIONES_PRE_1_0.md`](LEDGER_REVISIONES_PRE_1_0.md) — contador global.
+- [`PLAN_MAESTRO_HACIA_1_0.md`](PLAN_MAESTRO_HACIA_1_0.md) — gates hasta la primera versión oficial.
 
 ## Clasificación documental
 
@@ -151,3 +155,5 @@ Los documentos vigentes pueden utilizar los estados:
 ## Regla de mantenimiento
 
 Un cambio no obliga a editar todos los `.md`. Sí obliga a revisar todos los documentos que dependan del cambio y mantener coherencia entre código, normativa versionada, pruebas, documentación vigente, fuentes oficiales e historial de decisiones.
+
+La metadata de versión de revisión de un documento de dominio puede conservar su base histórica aunque `VERSION` avance; solo las superficies que declaran el estado vigente deben seguir la versión canónica actual.
