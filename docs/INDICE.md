@@ -1,10 +1,10 @@
 # Índice de documentación
 
 **Estado:** vigente  
-**Versión candidata de aplicación:** `0.0.58.01-beta` — VER.2 G058/E01  
+**Versión candidata de aplicación:** `0.0.71.01-beta` — VER.2 G071/E01  
 **Último tag formal legacy:** `v0.0.26-beta`  
-**Última actualización transversal:** VER.2 — reconciliación de versionado pre-1.0 — 2026-08-21  
-**Cierres históricos preservados:** UX.4.6i / PR #34 — 841 pruebas; UX.4.6e R9.2 — `v0.0.25-beta`
+**Última actualización transversal:** VER.2 — segunda pasada contable y materialización del ledger — 2026-08-22  
+**Cierres históricos preservados:** UX.4.6i / PR #34 — 841 pruebas; UX.4.6e R9 — `v0.0.25-beta`
 
 Este archivo es el punto de entrada para la documentación técnica, funcional, normativa, de privacidad, validación y auditoría de Mi Retiro Proyectado.
 
@@ -21,9 +21,14 @@ Este archivo es el punto de entrada para la documentación técnica, funcional, 
 
 - [`../GOVERNANCE.md`](../GOVERNANCE.md) — gobierno del proyecto.
 - [`../VERSIONING.md`](../VERSIONING.md) — política legacy, beta revision-aware `0.GG.RR.EE-beta`, versión oficial de cuatro componentes y Build independiente.
-- [`../VERSION`](../VERSION) — fuente canónica de la versión de aplicación.
-- [`AUDITORIA_VERSIONADO_PRE_1_0.md`](AUDITORIA_VERSIONADO_PRE_1_0.md) — segunda auditoría del historial, criterio contable y exclusiones de VER.2.
-- [`LEDGER_REVISIONES_PRE_1_0.md`](LEDGER_REVISIONES_PRE_1_0.md) — ledger global G001–G057 y reserva G058.
+- [`../VERSION`](../VERSION) — fuente canónica de la versión candidata de aplicación.
+- [`AUDITORIA_VERSIONADO_PRE_1_0.md`](AUDITORIA_VERSIONADO_PRE_1_0.md) — auditoría del historial, criterio contable y exclusiones de VER.2.
+- [`AUDITORIA_VER2_SEGUNDA_PASADA.md`](AUDITORIA_VER2_SEGUNDA_PASADA.md) — bitácora de la segunda pasada y correcciones sobre la primera reconstrucción.
+- [`AUDITORIA_VER2_CONTEO_PROVISIONAL.md`](AUDITORIA_VER2_CONTEO_PROVISIONAL.md) — cierre del conteo de segunda pasada en G070 antes de VER.2.
+- [`MATRIZ_DECISION_REVISIONES_VER2.md`](MATRIZ_DECISION_REVISIONES_VER2.md) — decisión fila por fila sobre qué consume Global y por qué.
+- [`LEDGER_REVISIONES_PRE_1_0.md`](LEDGER_REVISIONES_PRE_1_0.md) — ledger Markdown G001–G070 y candidato G071.
+- [`../data/ledger_revisiones_pre_1_0.json`](../data/ledger_revisiones_pre_1_0.json) — ledger machine-readable canónico de la reconstrucción.
+- [`../app/core/version_ledger.py`](../app/core/version_ledger.py) — validador de continuidad, unicidad y codificación del ledger estructurado.
 - [`../RELEASES.md`](../RELEASES.md) — versiones, tags y reconstrucción histórica.
 - [`../CHANGELOG.md`](../CHANGELOG.md) — cambios notables por versión.
 - [`../CONTRIBUTING.md`](../CONTRIBUTING.md) — flujo de contribución.
@@ -36,7 +41,7 @@ Este archivo es el punto de entrada para la documentación técnica, funcional, 
 - [`PREPARACION_PUBLICA_GITHUB.md`](PREPARACION_PUBLICA_GITHUB.md) — metadata, topics, labels, badges, Social Preview y seguridad del repositorio público.
 - [`AUDITORIA_REPOSITORIO_2026-08-18.md`](AUDITORIA_REPOSITORIO_2026-08-18.md) — auditoría integral local/remota post-GOV.1.
 - [`AUDITORIA_UX46E_R7_2026-08-18.md`](AUDITORIA_UX46E_R7_2026-08-18.md) — auditoría transversal de coherencia de UX.4.6e.
-- [`AUDITORIA_PLAN1_R4_2026-08-20.md`](AUDITORIA_PLAN1_R4_2026-08-20.md) — auditoría integral y gate de cierre de PLAN.1.
+- [`AUDITORIA_PLAN1_R4_2026-08-20.md`](AUDITORIA_PLAN1_R4_2026-08-20.md) — auditoría integral y gates R4.1/R4.2 de PLAN.1.
 - [`CIERRE_GOV1.md`](CIERRE_GOV1.md) — evidencia definitiva del cierre GOV.1.
 - [`../LICENSE`](../LICENSE) — licencia propietaria de materiales originales.
 - [`LICENCIA_Y_DISTRIBUCION.md`](LICENCIA_Y_DISTRIBUCION.md) — evaluación y decisión de licencia.
@@ -97,11 +102,13 @@ La publicación del repositorio no elimina la revisión jurídica externa ni cua
 - [`DEPENDENCIAS_TERCEROS.md`](DEPENDENCIAS_TERCEROS.md) — dependencias, licencias upstream, conexiones y riesgos.
 - [`PROCESO_RELEASE.md`](PROCESO_RELEASE.md) — gates de cierre, versión, Build, CI y tags.
 - [`UX46I_R1_AUDITORIA_COMO_SE_CALCULA.md`](UX46I_R1_AUDITORIA_COMO_SE_CALCULA.md) — auditoría canónica de UX.4.6i; secuencia demostrada R1 → R1.2 → R1.3 → R1.4.
-- [`AUDITORIA_VERSIONADO_PRE_1_0.md`](AUDITORIA_VERSIONADO_PRE_1_0.md) — evidencia cruzada de la reconciliación de revisiones.
 
 ## 10. Validación y calidad
 
 - [`VALIDACION.md`](VALIDACION.md) — estrategia y evidencias.
+- [`../tests/test_ver2_ledger_estructurado.py`](../tests/test_ver2_ledger_estructurado.py) — regresiones del ledger JSON y sus invariantes.
+- [`../tests/test_ver2_version_revision_aware.py`](../tests/test_ver2_version_revision_aware.py) — regresiones del esquema revision-aware.
+- [`../tests/test_ver2_documentacion_vigente.py`](../tests/test_ver2_documentacion_vigente.py) — coherencia de superficies vigentes durante VER.2.
 - [`../tests/casos_validacion/README.md`](../tests/casos_validacion/README.md) — reglas de casos sintéticos/anonimizados.
 - `../.github/workflows/ci.yml` — CI funcional.
 - `../.github/workflows/auditoria-gobernanza.yml` — auditoría automática de gobierno.
@@ -139,6 +146,7 @@ Los archivos históricos documentan lo que se pensó, probó o decidió en un mo
 - [`../VERSIONING.md`](../VERSIONING.md) — reglas de incremento y tags.
 - [`AUDITORIA_VERSIONADO_PRE_1_0.md`](AUDITORIA_VERSIONADO_PRE_1_0.md) — reconciliación VER.2.
 - [`LEDGER_REVISIONES_PRE_1_0.md`](LEDGER_REVISIONES_PRE_1_0.md) — contador global.
+- [`../data/ledger_revisiones_pre_1_0.json`](../data/ledger_revisiones_pre_1_0.json) — representación estructurada del contador.
 - [`PLAN_MAESTRO_HACIA_1_0.md`](PLAN_MAESTRO_HACIA_1_0.md) — gates hasta la primera versión oficial.
 
 ## Clasificación documental
