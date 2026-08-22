@@ -1,69 +1,116 @@
-# VER.2 — Conteo provisional de segunda pasada
+# VER.2 — Conteo de segunda pasada
 
-**Estado:** documento de trabajo; no sustituye todavía al ledger canónico.  
+**Estado:** segunda pasada contable cerrada; pendiente materialización técnica del ledger.  
 **Base:** `main` en `7037addd44253e528c77460b678d2b3ccd540dd5`.  
-**Criterio:** solo estados reales, diferenciados y aceptados; candidatos fallidos, checkpoints intermedios, commits por categoría, PR documentales y materializaciones del mismo estado no consumen Global adicional.
+**Fuente de decisión:** `MATRIZ_DECISION_REVISIONES_VER2.md`.
 
-## 1. Punto de partida descartado
+## 1. Conteos anteriores superados
 
-La primera pasada proponía **G057** como último estado aceptado. La segunda pasada demuestra que ese total no es estable.
+La primera pasada propuso G057. Una corrección intermedia llevó provisionalmente a G060. Ambos quedan superados porque todavía comprimían estados técnicos y de gobierno materialmente distintos.
 
-## 2. Ajustes confirmados respecto de la primera pasada
+La segunda pasada cruzó:
 
-| Ajuste | Delta |
-|---|---:|
-| GOV.1.5: R1 y R2 tienen cierre original propio antes de R3/cierre; la primera pasada había contado todo el bloque como una sola fila | +2 |
-| UX.4.6f: PR #31 es hardening/cierre documental posterior a R2 ya aceptada y cerrada; no es revisión nueva | -1 |
-| UX.4.6h: R1 falló; R1.1, R1.2 y R1.3 fueron aceptadas. La primera pasada solo había contado R1.2/R1.3 | +1 |
-| UX.4.6i: R1 llegó a gate aceptado de 826 después de un hotfix documental no independiente; R1.4 es el cierre de 841. La primera pasada solo había contado R1.4 | +1 |
-| UX.2.1: fase real absorbida en el estado retrospectivo G009, sin duplicación | 0 |
-| UX.4.6e: se mantienen nueve estados R1–R9/cierre; checkpoints 604/624 y R8.1/R8.2 no crean filas extra | 0 |
-| PLAN.1: se mantienen R1–R3B2 y un único cierre R4; R4.1/R4.2/PR #25 no triplican el cierre | 0 |
-| UX.4.6g: un único cierre formal R1 con 784 pruebas; R1.2/R1.3/R1.4.3 son refinamientos del mismo cierre y no estados aceptados independientes | 0 |
+- historia Git;
+- releases y changelog;
+- bitácoras históricas UX;
+- Pull Requests integrados;
+- gates de pruebas;
+- documentación de cierre;
+- conversaciones de desarrollo recuperadas.
 
-**Delta neto confirmado hasta este punto: +3.**
+## 2. Resultado
 
-Por tanto, el contador de trabajo pasa provisionalmente de **G057 a G060**.
-
-## 3. Secuencia provisional desde GOV.1.5
-
-La renumeración de trabajo, todavía no canónica, queda así:
-
-| Global provisional | Estado |
-|---:|---|
-| G029 | GOV.1.5 R1 — modelo de amenazas |
-| G030 | GOV.1.5 R2 — derechos/incidentes y procedimientos |
-| G031 | GOV.1.5 R3 — cierre seguridad/privacidad/transparencia |
-| G032 | GOV.1.6 — controles GitHub |
-| G033 | GOV.1.7 — licencia/distribución |
-| G034 | GOV.1.8 — cierre GOV.1 |
-| G035–G043 | UX.4.6e — R1, R2, R3, R4, R5, R6, R7, R8 y R9/cierre |
-| G044–G052 | PLAN.1 — R1, R2A, R2B1, R2B2, R2C, R3A, R3B1, R3B2 y R4/cierre |
-| G053 | UX.4.6f R1/R1.1 — aceptación conjunta |
-| G054 | UX.4.6f R2 — cierre lógico/funcional del Paso 4 |
-| — | PR #31 — hardening/documentación; no consume Global |
-| G055 | UX.4.6g R1 — cierre Paso 5 |
-| G056 | UX.4.6h R1.1 — corrección aceptada del candidato fallido R1 |
-| G057 | UX.4.6h R1.2 — revisión aceptada |
-| G058 | UX.4.6h R1.3 — cierre Paso 6, 812 pruebas |
-| G059 | UX.4.6i R1 — estado aceptado tras gate 826 |
-| G060 | UX.4.6i R1.4 — cierre Cómo se calcula, 841 pruebas |
-
-## 4. Exclusiones tardías confirmadas
-
-- UX.4.6h R1: candidato fallido, no consume.
-- UX.4.6i R1.1: no existe como revisión independiente; fue un hotfix documental durante el gate de R1.
-- UX.4.6i R1.2/R1.3: existen como nombres de refinamiento, pero todavía no hay evidencia suficiente de aceptación diferenciada para consumir Global bajo criterio conservador.
-- UX.4.6g R1.2/R1.3/R1.4.3: refinamientos internos del único cierre formal R1; no consumen Global.
-- PR #31 y PR #25: materialización/hardening/documentación del estado ya aceptado; no consumen Global.
-- PR Dependabot #1–#8 cerrados o sustituidos: no consumen Global.
-
-## 5. Consecuencia provisional para VER.2
-
-Si la revisión residual no aporta ni elimina otro estado aceptado, el siguiente Global disponible para el cierre real de VER.2 sería:
+El último estado aceptado antes de VER.2 es:
 
 ```text
-G061
+G070
 ```
 
-El identificador revision-aware exacto **no se promueve todavía** y `VERSION` no debe modificarse hasta regenerar el ledger completo, materializar el JSON machine-readable, corregir regresiones históricas y obtener gate/CI verde.
+Distribución:
+
+| Tramo | Cantidad |
+|---|---:|
+| Estados legado `0.0.1-beta`–`0.0.21-beta` | 21 |
+| GOV.1.2 | 1 |
+| GOV.1.3 R1–R4 | 4 |
+| Prebloque firma/integridad Git/GitHub | 5 |
+| GOV.1.4 | 1 |
+| GOV.1.5 R1–R3 | 3 |
+| GOV.1.6 | 1 |
+| GOV.1.7 | 1 |
+| Hotfix de licencia | 1 |
+| GOV.1.8 | 1 |
+| Saneamiento post-GOV.1 | 1 |
+| UX.4.6e | 10 |
+| PLAN.1 | 10 |
+| UX.4.6f | 4 |
+| UX.4.6g | 1 |
+| UX.4.6h | 3 |
+| UX.4.6i | 2 |
+| **TOTAL** | **70** |
+
+## 3. Correcciones que explican la diferencia frente a G057
+
+La diferencia neta es **+13**:
+
+- prebloque firma/integridad: cinco estados reales en lugar de uno → `+4`;
+- GOV.1.5 R1/R2/R3 en lugar de un único cierre → `+2`;
+- hotfix de formato de licencia integrado y validado → `+1`;
+- saneamiento post-GOV.1 integrado y validado → `+1`;
+- identidad visual/publicación pre-R8 como hito transversal separado → `+1`;
+- PLAN.1 R4.1 y R4.2 fueron dos revisiones aceptadas sucesivas → `+1`;
+- mantenimiento de dependencias post-UX.4.6f R1 → `+1`;
+- UX.4.6h R1.1 omitida en primera pasada → `+1`;
+- UX.4.6i R1 aceptada antes de R1.4 → `+1`.
+
+No se resta PR #31: aunque R2 ya había cerrado funcionalmente el Paso 4, PR #31 añadió un `pre-commit` reproducible, cinco regresiones y un estado técnico nuevo con 762 pruebas; por tanto sí consume revisión.
+
+## 4. Exclusiones relevantes
+
+No consumen Global adicional:
+
+- UX.2.1: real, pero absorbida dentro del snapshot legado de `0.0.9-beta`;
+- revisiones internas no aceptadas de UX.4.6a–d;
+- UX.4.6d R1–R22, cuya validación integral seguía pendiente hasta R23;
+- PR #19 como checkpoint que consolida estados UX.4.6e ya contabilizados y deja R8 pendiente;
+- UX.4.6e R8.1, corregida antes de la aceptación de R8.2;
+- PR #22 y PR #25 como materializaciones documentales de estados ya contabilizados;
+- UX.4.6f R1 por separado: R1/R1.1 se aceptaron conjuntamente;
+- UX.4.6g R1.2/R1.3/R1.4/R1.4.2/R1.4.3 sin evidencia de aceptación diferenciada;
+- UX.4.6h R1 fallida;
+- UX.4.6i R1.1 inexistente como revisión independiente;
+- UX.4.6i R1.2/R1.3 sin evidencia de aceptación diferenciada;
+- PR Dependabot cerrados/sustituidos que no llegaron a constituir el estado aceptado final.
+
+## 5. Secuencia provisional final antes de materializar el ledger
+
+Desde G022:
+
+```text
+G022      GOV.1.2
+G023-026  GOV.1.3 R1-R4
+G027-031  Prebloque firma/integridad
+G032      GOV.1.4
+G033-035  GOV.1.5 R1-R3
+G036      GOV.1.6
+G037      GOV.1.7
+G038      Hotfix licencia
+G039      GOV.1.8
+G040      Saneamiento post-GOV.1
+G041-050  UX.4.6e
+G051-060  PLAN.1
+G061-064  UX.4.6f
+G065      UX.4.6g
+G066-068  UX.4.6h
+G069-070  UX.4.6i
+```
+
+## 6. Consecuencia para VER.2
+
+Si el ledger estructurado, su validador, las regresiones y el gate completo no revelan otra contradicción, el cierre real de VER.2 consumirá:
+
+```text
+G071
+```
+
+El candidato revision-aware correspondiente se decidirá al materializar G071. Hasta entonces `VERSION` no debe darse por promovida y el PR #35 permanece en draft.
