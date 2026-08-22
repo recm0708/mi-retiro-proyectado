@@ -1,14 +1,15 @@
 # Proceso de release
 
 **Estado:** Vigente  
-**Versión candidata de aplicación:** `0.0.58.01-beta` — VER.2 G058/E01  
+**Versión candidata de aplicación:** `0.0.71.01-beta` — VER.2 G071/E01  
+**Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i  
 **Último tag formal legacy:** `v0.0.26-beta`  
 **Versión base histórica preservada:** `0.0.23-beta`  
 **Base documental:** GOV.1.3 R4 — 2026-08-17  
-**Revisión transversal:** VER.2 — versionado revision-aware — 2026-08-21  
+**Revisión transversal:** VER.2 — versionado revision-aware — 2026-08-22  
 **Clasificación:** Gobierno / Release / Auditoría
 
-Este procedimiento complementa `VERSIONING.md`, `RELEASES.md`, `CHANGELOG.md`, `GOVERNANCE.md`, `LICENSE`, `THIRD_PARTY_NOTICES.md`, `docs/LICENCIA_Y_DISTRIBUCION.md`, `docs/AUDITORIA_VERSIONADO_PRE_1_0.md`, `docs/LEDGER_REVISIONES_PRE_1_0.md` y `docs/PLAN_MAESTRO_HACIA_1_0.md`.
+Este procedimiento complementa `VERSIONING.md`, `RELEASES.md`, `CHANGELOG.md`, `GOVERNANCE.md`, `LICENSE`, `THIRD_PARTY_NOTICES.md`, `docs/LICENCIA_Y_DISTRIBUCION.md`, `docs/AUDITORIA_VERSIONADO_PRE_1_0.md`, `docs/LEDGER_REVISIONES_PRE_1_0.md`, `docs/MATRIZ_DECISION_REVISIONES_VER2.md`, `data/ledger_revisiones_pre_1_0.json` y `docs/PLAN_MAESTRO_HACIA_1_0.md`.
 
 ## 1. Principio
 
@@ -40,7 +41,9 @@ No consumen un nuevo `G` por sí solos:
 - candidatos todavía pendientes de validación manual o automática;
 - un intento que falla su gate;
 - el PR, squash, CI o tag que únicamente materializa el mismo estado;
-- mantenimiento absorbido por un bloque sin declaración de checkpoint independiente.
+- un checkpoint que solo consolida estados ya contabilizados y deja pendiente la siguiente revisión funcional.
+
+Sí puede consumir un nuevo `G` un estado de mantenimiento, seguridad, gobierno, dependencias o documentación cuando sea materialmente independiente, tenga evidencia propia de aceptación y constituya una configuración auditable distinta.
 
 El candidato reserva el siguiente número global, pero ese número solo queda consumido después del cierre satisfactorio. Si falla, se corrige conservando el mismo identificador reservado.
 
@@ -104,8 +107,9 @@ Después de preparar `VERSION`:
 - ejecutar `python -m pip check`;
 - repetir `git diff --check`;
 - comprobar `VERSION`, `APP_VERSION`, FastAPI y footer;
-- comprobar que el ledger codifique correctamente el candidato y preserve la secuencia aceptada anterior;
-- comprobar README, ROADMAP, SECURITY, CHANGELOG y RELEASES;
+- ejecutar el validador del ledger estructurado y comprobar que preserve G001–G070 sin huecos ni duplicados;
+- comprobar que `0.0.71.01-beta` siga identificado como candidato reservado mientras VER.2 no esté integrado;
+- comprobar README, ROADMAP, SECURITY, CHANGELOG, RELEASES y proceso de release;
 - comprobar que un candidato no se presente como tag/release ya publicado;
 - revisar que no existan logs, PDFs personales o secretos preparados para commit;
 - comprobar avisos/licencias de terceros cuando corresponda;
@@ -174,13 +178,13 @@ git push origin "v$version"
 Ejemplos:
 
 ```text
-v0.0.26-beta       # legacy histórico
-v0.0.58.01-beta    # primer candidato revision-aware, solo tras cierre
+v0.0.26-beta       # último tag legacy histórico
+v0.0.71.01-beta    # candidato VER.2, solo si corresponde etiquetarlo tras cierre
 v1.0.0.0
 v1.0.0.1
 ```
 
-No se crean tags revision-aware retrospectivos para G001–G057.
+No se crean tags revision-aware retrospectivos para G001–G070.
 
 El tag debe apuntar al commit validado y usar una clave autorizada por la política vigente. `.github/workflows/verificar-tags.yml` permite verificar tags futuros y auditar la colección.
 
