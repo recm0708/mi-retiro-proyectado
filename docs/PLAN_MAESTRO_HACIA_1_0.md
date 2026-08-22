@@ -3,8 +3,8 @@
 **Estado:** vigente  
 **Versión base al iniciar el plan:** `0.0.25-beta`  
 **Cierre histórico de PLAN.1:** `0.0.26-beta` / `v0.0.26-beta`  
-**Versión candidata transversal VER.2:** `0.0.58.01-beta` — G058/E01  
-**Fecha:** 2026-08-21  
+**Versión candidata transversal VER.2:** `0.0.71.01-beta` — G071/E01  
+**Fecha:** 2026-08-22  
 **Clasificación:** Producto / Arquitectura / QA / Release
 
 ## 1. Propósito
@@ -66,23 +66,25 @@ Base auditada:
 
 ```text
 main = 7037addd44253e528c77460b678d2b3ccd540dd5
-G057 / E01 = cierre UX.4.6i
+G070 / E02 = cierre UX.4.6i
 ```
 
 Candidato:
 
 ```text
-G058 / E01 = 0.0.58.01-beta
+G071 / E01 = 0.0.71.01-beta
 ```
 
-G058 solo se considera aceptado después de gate completo, PR/CI e integración. Un candidato fallido no consume el número.
+G071 solo se considera aceptado después de gate completo, PR/CI e integración. Un candidato fallido no consume el número.
 
 Fuentes canónicas:
 
 - `VERSIONING.md`;
 - `docs/AUDITORIA_VERSIONADO_PRE_1_0.md`;
 - `docs/LEDGER_REVISIONES_PRE_1_0.md`;
-- ADR-179.
+- `docs/MATRIZ_DECISION_REVISIONES_VER2.md`;
+- `data/ledger_revisiones_pre_1_0.json`;
+- ADR de gobierno correspondiente.
 
 Mientras VER.2 permanezca abierto, **DEV.2 es el siguiente bloque funcional, no el bloque funcional iniciado**.
 
@@ -115,6 +117,7 @@ Revisiones internas preservadas:
 **Estado:** cerrado.
 
 - **R1/R1.1 aceptadas conjuntamente:** PR #28, validación manual y **743 pruebas**;
+- **mantenimiento técnico post-R1:** PR #29, actualización coordinada de `pypdf`/`uvicorn`, mismo gate funcional y estado técnico aceptado independiente;
 - **R2 cerrada:** PR #30, validación manual y **756 pruebas**;
 - **cierre/hardening final:** PR #31, gate `pre-commit` y **762 pruebas**;
 - lógica y precisión de las cuatro modalidades salariales auditadas;
@@ -142,8 +145,8 @@ Los refinamientos R1.2/R1.3/R1.4/R1.4.2/R1.4.3 permanecen documentados como evol
 
 **Estado:** cerrado mediante PR #33 con **812 pruebas**.
 
-- R1 fue un primer candidato y falló tres regresiones de gobierno/documentación;
-- R1.1 corrigió ese mismo candidato;
+- R1 fue un primer candidato y falló tres regresiones de gobierno/documentación; no consume revisión global aceptada;
+- R1.1 corrigió el candidato y constituye el primer estado aceptado del bloque;
 - R1.2 fue aceptada visualmente y depuró claridad/jerarquía;
 - R1.3 creó el informe A4 imprimible independiente y cerró el bloque.
 
@@ -155,10 +158,10 @@ El cierre incorpora selección salarial explícita, invalidación de resultados 
 
 La secuencia demostrada por la auditoría canónica es:
 
-- **R1:** ruta pública, procedimientos SEBD/Mixto/SUCGS, parámetros y fuentes;
-- **R1.2:** navegación, recorrido Pasos 1–6, formato monetario y densidad de tablas;
-- **R1.3:** ejemplos sustituidos, terminología contextual y espaciado;
-- **R1.4:** etiqueta visible **Ejemplo** y cierre.
+- **R1:** ruta pública, procedimientos SEBD/Mixto/SUCGS, parámetros y fuentes; estado aceptado G069;
+- **R1.2:** navegación, recorrido Pasos 1–6, formato monetario y densidad de tablas; refinamiento interno sin aceptación independiente recuperada;
+- **R1.3:** ejemplos sustituidos, terminología contextual y espaciado; refinamiento interno sin aceptación independiente recuperada;
+- **R1.4:** etiqueta visible **Ejemplo** y cierre aceptado G070.
 
 No existe una sección, gate ni artefacto independiente que sustente una UX.4.6i R1.1; VER.2 corrige las referencias agregadas que la incluyeron por error.
 
