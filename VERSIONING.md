@@ -4,7 +4,7 @@
 **Estado:** vigente desde GOV.1.2; revisada por PLAN.1 y VER.2  
 **Fecha de adopción:** 2026-08-17  
 **Revisión de transición a versión oficial:** 2026-08-19  
-**Revisión revision-aware:** 2026-08-21
+**Revisión revision-aware:** 2026-08-22
 
 ## 1. Objetivo
 
@@ -21,8 +21,9 @@ La fuente canónica de la versión de aplicación es el archivo raíz `VERSION`.
 - `app/core/config.py` importa `APP_VERSION`; no mantiene una copia literal.
 - FastAPI usa `APP_VERSION` como versión de la aplicación.
 - Jinja2 recibe `app_version` y el footer muestra el mismo valor.
-- El contador y la procedencia de revisiones aceptadas se auditan en `docs/LEDGER_REVISIONES_PRE_1_0.md`.
-- La regla que determina qué cuenta y qué no cuenta se documenta en `docs/AUDITORIA_VERSIONADO_PRE_1_0.md`.
+- El contador y la procedencia de revisiones aceptadas se auditan en `docs/LEDGER_REVISIONES_PRE_1_0.md` y `data/ledger_revisiones_pre_1_0.json`.
+- `app/core/version_ledger.py` valida continuidad, unicidad y codificación del ledger estructurado.
+- La regla que determina qué cuenta y qué no cuenta se documenta en `docs/MATRIZ_DECISION_REVISIONES_VER2.md` y `docs/AUDITORIA_VERSIONADO_PRE_1_0.md`.
 - README, CHANGELOG, RELEASES, ROADMAP y el ledger deben corresponder al estado vigente cuando lo describan como actual.
 - Los documentos de dominio pueden conservar la versión en la que fueron revisados; esa metadata es histórica de revisión documental y no una segunda fuente de la versión vigente.
 - La numeración de **Build** es independiente de `VERSION` y solo se materializa cuando exista un proceso reproducible de generación de artefactos oficiales.
@@ -55,7 +56,7 @@ Después del cierre de VER.2, **los estados beta nuevos no continúan incrementa
 
 ### 3.2. Familia beta revision-aware
 
-Los estados nuevos aceptados después de VER.2 usan:
+Los candidatos y estados nuevos gobernados por VER.2 usan:
 
 ```text
 0.GG.RR.EE-beta
@@ -72,13 +73,13 @@ Ejemplos:
 
 ```text
 G001 / E01 -> 0.0.01.01-beta
-G057 / E01 -> 0.0.57.01-beta
-G058 / E01 -> 0.0.58.01-beta
+G070 / E02 -> 0.0.70.02-beta
+G071 / E01 -> 0.0.71.01-beta
 G100 / E03 -> 0.1.00.03-beta
 G425 / E12 -> 0.4.25.12-beta
 ```
 
-Los identificadores revision-aware usados en el ledger para G001–G057 son **identificadores de reconstrucción/auditoría**. No existieron como versiones publicadas y no autorizan tags retroactivos.
+Los identificadores revision-aware usados en el ledger para G001–G070 son **identificadores de reconstrucción/auditoría**. No existieron como versiones publicadas y no autorizan tags retroactivos.
 
 ### 3.3. Versiones oficiales
 
@@ -111,38 +112,38 @@ Reglas:
 
 1. los 21 estados retrospectivos GOV.1.1 cuentan una vez cada uno;
 2. una revisión interna cuenta cuando queda documentada como cerrada, completada o validada y el proyecto avanza desde ese estado;
-3. un candidato pendiente de validación, PR, CI, tag o revisión manual no cuenta;
-4. un intento que falla el gate no consume número;
+3. un candidato pendiente de validación, PR, CI, tag o revisión manual no cuenta todavía como estado aceptado;
+4. un intento que falla el gate no consume un Global nuevo;
 5. los commits `feat/test/docs` de la misma revisión no se cuentan por separado;
-6. PR, squash, CI y tag son evidencia de un estado, no revisiones adicionales;
-7. mantenimiento absorbido dentro de un bloque no suma otro estado salvo declaración explícita de checkpoint/hito independiente;
+6. PR, squash, CI y tag son evidencia de un estado y no generan otra revisión cuando solo materializan el mismo estado;
+7. un mantenimiento técnico, de seguridad, gobierno, dependencias o documentación puede contar si crea un estado materialmente distinto, validado y aceptado; un checkpoint que solo agrupa estados ya contabilizados no cuenta de nuevo;
 8. no se inventan retrospectivamente revisiones que nunca existieron.
 
-La aplicación concreta de estas reglas está auditada en `docs/AUDITORIA_VERSIONADO_PRE_1_0.md`.
+La aplicación concreta de estas reglas está auditada en `docs/MATRIZ_DECISION_REVISIONES_VER2.md`.
 
 ## 5. Contador global reconstruido
 
-La base `main` en `7037addd44253e528c77460b678d2b3ccd540dd5`, correspondiente al cierre de UX.4.6i, contiene:
+La base `main` en `7037addd44253e528c77460b678d2b3ccd540dd5`, correspondiente al cierre de UX.4.6i, contiene según la segunda pasada:
 
 ```text
-57 estados aceptados
+70 estados aceptados
 ```
 
-Conceptualmente:
+Conceptualmente, el último estado de esa base es:
 
 ```text
-G057 / E01 -> 0.0.57.01-beta
+G070 / E02 -> 0.0.70.02-beta
 ```
 
 Ese identificador **no reemplaza** el valor histórico que el árbol todavía mostraba (`0.0.26-beta`) ni crea un tag retrospectivo.
 
-VER.2 R1 reserva el siguiente estado:
+VER.2 R1 usa como candidato el siguiente estado:
 
 ```text
-G058 / E01 -> 0.0.58.01-beta
+G071 / E01 -> 0.0.71.01-beta
 ```
 
-G058 solo queda consumido cuando VER.2 supera su gate completo y se integra. Si el candidato falla, se corrige manteniendo el mismo identificador reservado.
+G071 solo queda consumido como estado aceptado cuando VER.2 supera su ledger estructurado, validador, gate completo, PR/CI e integración. Si el candidato falla, se corrige manteniendo el mismo identificador candidato mientras no se acepte un estado distinto.
 
 ## 6. Reconstrucción histórica
 
@@ -158,7 +159,7 @@ Durante la migración criptográfica del 2026-08-17 esos estados fueron material
 
 El antiguo valor `0.1.0` continúa clasificado como marcador histórico de desarrollo no publicado.
 
-La reconstrucción revision-aware de G001–G057 es exclusivamente documental. No se crean tags `v0.GG.RR.EE-beta` para estados anteriores a VER.2.
+La reconstrucción revision-aware de G001–G070 es exclusivamente documental. No se crean tags `v0.GG.RR.EE-beta` para estados anteriores a VER.2.
 
 ## 7. Versiones formales legacy
 
@@ -174,7 +175,7 @@ v0.0.25-beta
 v0.0.26-beta
 ```
 
-Todos permanecen inmutables. Las fases UX.4.6f–UX.4.6i se desarrollaron históricamente manteniendo `VERSION = 0.0.26-beta`; VER.2 no falsea tags retroactivos para ellas. Su posición se conserva en el ledger mediante G051–G057.
+Todos permanecen inmutables. Las fases UX.4.6f–UX.4.6i se desarrollaron históricamente manteniendo `VERSION = 0.0.26-beta`; VER.2 no falsea tags retroactivos para ellas. Su posición se conserva en el ledger mediante G061–G070.
 
 ## 8. Tags nuevos
 
@@ -183,7 +184,7 @@ Los tags formales usan el prefijo `v`.
 Ejemplos:
 
 ```text
-v0.0.58.01-beta
+v0.0.71.01-beta
 v1.0.0.0
 v1.0.0.1
 ```
@@ -195,7 +196,7 @@ Después de la adopción de firma SSH:
 - se verifica la firma antes de declarar el hito cerrado;
 - `.github/allowed_signers` contiene las claves públicas autorizadas.
 
-Los tags publicados son inmutables.
+Los tags publicados son inmutables. No se crea `v0.0.71.01-beta` mientras VER.2 sea candidato/draft y no haya completado su gate post-integración.
 
 ## 9. Build oficial
 
@@ -230,7 +231,7 @@ Build 000001
 
 VER.2 separa dos conceptos que antes se confundían:
 
-- **versión vigente de la aplicación:** únicamente `VERSION` y las superficies de estado actual;
+- **versión vigente/candidata de la aplicación:** únicamente `VERSION` y las superficies de estado actual;
 - **versión en la que un documento fue revisado:** metadata histórica válida del propio documento.
 
 Por tanto, un documento técnico que diga `Versión de aplicación revisada: 0.0.26-beta` puede conservar esa línea si realmente documenta la base sobre la que fue revisado. No tiene que reescribirse en cada incremento global si su contenido no cambió.
@@ -260,8 +261,9 @@ Antes de aceptar una nueva beta revision-aware se debe comprobar:
 - que el estado anterior esté cerrado y trazable;
 - que la revisión nueva cumpla la definición contable de estado aceptado;
 - que código, pruebas y documentación dependiente coincidan;
-- que el ledger tenga secuencia continua sin duplicados;
-- que `VERSION` codifique exactamente la última fila aceptada/candidata según el gate;
+- que el ledger Markdown y JSON tengan secuencia continua sin duplicados;
+- que el validador estructurado acepte el ledger;
+- que `VERSION` codifique exactamente el candidato que se está validando;
 - que se ejecuten los gates exigidos para la etapa;
 - que cualquier tag se cree únicamente después de integración y revalidación.
 
@@ -298,7 +300,7 @@ Antes de materializarla deben estar cerrados, como mínimo:
 - No reutilizar un número global ya aceptado para otro estado.
 - No consumir un número global por un candidato fallido.
 - No contar commits `feat/test/docs` como revisiones distintas del mismo estado.
-- No crear tags revision-aware retrospectivos para G001–G057.
+- No crear tags revision-aware retrospectivos para G001–G070.
 - No reescribir commits históricos para añadir firmas.
 - No falsear fechas de creación de tags retrospectivos.
 - No presentar un tag retrospectivo como si hubiera sido publicado en la fecha histórica.
