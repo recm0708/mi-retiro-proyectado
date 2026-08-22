@@ -56,7 +56,7 @@ VER.2 es un bloque transversal de reconciliación y **no añade un bloque 15** a
   - tres estados aceptados G033–G035.
 
 - [x] **GOV.1.6 — Controles GitHub y auditoría automática** — G036.
-- [x] **GOV.1.7 — Licencia y derechos de distribución** — G037.
+- [x] **GOV.1.7 — Licencia** — derechos de distribución — G037.
 - [x] **Hotfix de formato de licencia** — G038.
 - [x] **GOV.1.8 — Auditoría final y cierre de gobierno** — G039; `v0.0.24-beta`.
 - [x] **Saneamiento post-GOV.1** — G040.
