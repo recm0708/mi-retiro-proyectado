@@ -3,7 +3,7 @@
 **Fecha de reconstrucción histórica:** 2026-08-17  
 **Fuente:** historial Git de `recm0708/mi-retiro-proyectado`  
 **Revisión de planificación hacia 1.0:** 2026-08-20  
-**Reconciliación revision-aware:** 2026-08-21
+**Reconciliación revision-aware:** 2026-08-22
 
 ## 1. Naturaleza del registro
 
@@ -13,7 +13,7 @@ Git conserva la evidencia primaria: hashes, fechas, autores, mensajes y contenid
 
 El commit raíz real es `a0a9e09` (`tipo: descripción del cambio`). Su mensaje es una anomalía histórica previa a la convención posterior y se conserva sin modificar.
 
-VER.2 añade una segunda capa de auditoría: `docs/LEDGER_REVISIONES_PRE_1_0.md` reconstruye los **estados aceptados** como G001–G057 sobre la base `7037addd`. Esos identificadores revision-aware no sustituyen versiones/tags históricos ni autorizan tags retroactivos.
+VER.2 añade una segunda capa de auditoría: `docs/LEDGER_REVISIONES_PRE_1_0.md` y `data/ledger_revisiones_pre_1_0.json` reconstruyen los **estados aceptados** como G001–G070 sobre la base `7037addd44253e528c77460b678d2b3ccd540dd5`. Esos identificadores revision-aware no sustituyen versiones/tags históricos ni autorizan tags retroactivos. `0.0.71.01-beta` es únicamente el candidato de VER.2 mientras no complete gate, PR/CI e integración.
 
 ## 2. Estados retrospectivos
 
@@ -153,32 +153,36 @@ Evidencia acumulada:
 
 `v0.0.26-beta` es inmutable y no debe moverse ni recrearse.
 
+La segunda pasada de VER.2 reconoce dentro de PLAN.1 diez estados aceptados G051–G060: R1, R2A, R2B1, R2B2, R2C, R3A, R3B1, R3B2, R4.1 y R4.2. Esta granularidad revision-aware no crea ni mueve tags históricos.
+
 ## 5. Estado posterior a `v0.0.26-beta` y candidato VER.2
 
-UX.4.6f, UX.4.6g, UX.4.6h y UX.4.6i se desarrollaron y cerraron históricamente **sin publicar un tag adicional y manteniendo `VERSION = 0.0.26-beta`**. VER.2 no inventa releases retroactivas para esos bloques; su posición se reconstruye en el ledger como G051–G057.
+UX.4.6f, UX.4.6g, UX.4.6h y UX.4.6i se desarrollaron y cerraron históricamente **sin publicar un tag adicional y manteniendo `VERSION = 0.0.26-beta`**. VER.2 no inventa releases retroactivas para esos bloques; su posición se reconstruye en el ledger como G061–G070.
 
 La base inmediatamente anterior a VER.2 es:
 
 ```text
 7037addd44253e528c77460b678d2b3ccd540dd5
-G057 / E01 — cierre UX.4.6i — 841 pruebas
+G070 / E02 — cierre UX.4.6i — 841 pruebas
 ```
 
-VER.2 R1 usa como **candidato**, no como release publicada:
+VER.2 usa como **candidato**, no como release publicada:
 
 ```text
-0.0.58.01-beta
-G058 / E01
+0.0.71.01-beta
+G071 / E01
 ```
 
 Mientras el PR de VER.2 no supere el gate completo y se integre:
 
-- G058 permanece reservado, no aceptado;
-- no existe tag `v0.0.58.01-beta`;
+- G071 permanece reservado, no aceptado;
+- no existe tag `v0.0.71.01-beta`;
 - `v0.0.26-beta` continúa siendo el último tag formal legacy;
-- no se crean tags revision-aware retrospectivos para G001–G057.
+- no se crean tags revision-aware retrospectivos para G001–G070.
 
-Si VER.2 se integra satisfactoriamente, `0.0.58.01-beta` pasa a ser el primer estado nuevo gobernado por la familia revision-aware. La creación de su tag, si corresponde al cierre, se realizará únicamente después de merge y revalidación.
+Si VER.2 se integra satisfactoriamente, `0.0.71.01-beta` pasa a ser el primer estado nuevo gobernado por la familia revision-aware. La creación de su tag, si corresponde al cierre, se realizará únicamente después de merge y revalidación.
+
+La distribución del contador aceptado hasta G070 se conserva de forma auditable en `docs/MATRIZ_DECISION_REVISIONES_VER2.md`, `docs/LEDGER_REVISIONES_PRE_1_0.md` y `data/ledger_revisiones_pre_1_0.json`; los intentos fallidos, refinamientos sin aceptación independiente y checkpoints absorbidos se preservan como evidencia sin consumir un `G` adicional.
 
 ## 6. Migración criptográfica de tags — materializada
 
