@@ -1,0 +1,114 @@
+# Ledger de revisiones aceptadas pre-1.0
+
+**Proyecto:** Mi Retiro Proyectado  
+**Base auditada:** `7037addd44253e528c77460b678d2b3ccd540dd5`  
+**Contador aceptado en la base:** **G057**  
+**Siguiente identificador reservado al cierre de VER.2 R1:** **G058**
+
+Este ledger es el registro canónico del contador global de revisiones aceptadas durante la etapa beta. La regla contable y las exclusiones se documentan en `AUDITORIA_VERSIONADO_PRE_1_0.md`.
+
+Los identificadores de la columna **ID revision-aware** son una reconstrucción de auditoría. No existieron históricamente y **no autorizan mover, recrear ni renombrar tags publicados**.
+
+## Convención
+
+```text
+0.GG.RR.EE-beta
+```
+
+- `G = GG × 100 + RR`;
+- `RR` usa dos dígitos (`00`–`99`);
+- `EE` es el ordinal de estado aceptado dentro del bloque, con dos dígitos;
+- un candidato fallido no consume `G`;
+- un PR/commit/tag no suma otra fila si materializa el mismo estado.
+
+## Ledger
+
+| Global | ID revision-aware | Bloque / estado aceptado | Ancla histórica | Evidencia resumida |
+|---:|---|---|---|---|
+| G001 | `0.0.01.01-beta` | Estado retrospectivo 01 — base técnica | `0.0.1-beta` | GOV.1.1 / `RELEASES.md` |
+| G002 | `0.0.02.01-beta` | Estado retrospectivo 02 — historial/proyección | `0.0.2-beta` | GOV.1.1 / `RELEASES.md` |
+| G003 | `0.0.03.01-beta` | Estado retrospectivo 03 — retiro/precisión | `0.0.3-beta` | GOV.1.1 / `RELEASES.md` |
+| G004 | `0.0.04.01-beta` | Estado retrospectivo 04 — SEBD/modalidades | `0.0.4-beta` | GOV.1.1 / `RELEASES.md` |
+| G005 | `0.0.05.01-beta` | Estado retrospectivo 05 — Mixto/SUCGS | `0.0.5-beta` | GOV.1.1 / `RELEASES.md` |
+| G006 | `0.0.06.01-beta` | Estado retrospectivo 06 — organización/normativa | `0.0.6-beta` | GOV.1.1 / `RELEASES.md` |
+| G007 | `0.0.07.01-beta` | Estado retrospectivo 07 — comparador/trazabilidad | `0.0.7-beta` | GOV.1.1 / `RELEASES.md` |
+| G008 | `0.0.08.01-beta` | UX.3 — responsive/corte mensual | `0.0.8-beta` | cierre retrospectivo |
+| G009 | `0.0.09.01-beta` | Identidad/temas/accesibilidad base | `0.0.9-beta` | cierre retrospectivo |
+| G010 | `0.0.10.01-beta` | Mantenimiento técnico estructural | `0.0.10-beta` | cierre retrospectivo |
+| G011 | `0.0.11.01-beta` | UX.4.1 — accesibilidad contextual | `0.0.11-beta` | cierre retrospectivo |
+| G012 | `0.0.12.01-beta` | UX.4.2 — estados/selección visual | `0.0.12-beta` | cierre retrospectivo |
+| G013 | `0.0.13.01-beta` | UX.4.3 — validación/teclado/estabilidad | `0.0.13-beta` | cierre retrospectivo |
+| G014 | `0.0.14.01-beta` | UX.4.4 — edad/detalle/importación | `0.0.14-beta` | cierre retrospectivo |
+| G015 | `0.0.15.01-beta` | UX.4.5 — acreditado vs. proyectado | `0.0.15-beta` | cierre retrospectivo |
+| G016 | `0.0.16.01-beta` | Hardening PDF/privacidad/E2E/CI | `0.0.16-beta` | cierre retrospectivo |
+| G017 | `0.0.17.01-beta` | Dependencias reproducibles | `0.0.17-beta` | cierre retrospectivo |
+| G018 | `0.0.18.01-beta` | UX.4.6a — cierre rediseño visual | `0.0.18-beta` | 198 pruebas / cierre PC-laptop |
+| G019 | `0.0.19.01-beta` | UX.4.6b — cierre Paso 1 | `0.0.19-beta` | R4 / 233 pruebas |
+| G020 | `0.0.20.01-beta` | UX.4.6c — cierre Paso 2 | `0.0.20-beta` | R3 / 253 pruebas |
+| G021 | `0.0.21.01-beta` | UX.4.6d — cierre Paso 3 | `0.0.21-beta` | R23 / 396 pruebas |
+| G022 | `0.0.22.01-beta` | GOV.1.2 — gobierno y versionado formal | `v0.0.22-beta` | 403 pruebas |
+| G023 | `0.0.23.01-beta` | GOV.1.3 R1 — estructura/histórico | base `0.0.22-beta` | 411 pruebas / cierre R1 |
+| G024 | `0.0.24.02-beta` | GOV.1.3 R2 — documentación técnica | base `0.0.22-beta` | 423 pruebas / cierre R2 |
+| G025 | `0.0.25.03-beta` | GOV.1.3 R3 — normativa/privacidad | base `0.0.22-beta` | 438 pruebas / cierre R3 |
+| G026 | `0.0.26.04-beta` | GOV.1.3 R4 — auditoría documental | `v0.0.23-beta` | 458 pruebas / cierre GOV.1.3 |
+| G027 | `0.0.27.01-beta` | Prebloque firma e integridad Git/GitHub | base `0.0.23-beta` | 23/23 tags + cierre transversal |
+| G028 | `0.0.28.01-beta` | GOV.1.4 — Developer Diagnostics | base `0.0.23-beta` | 487 pruebas / cierre formal |
+| G029 | `0.0.29.01-beta` | GOV.1.5 — seguridad/privacidad/transparencia | base `0.0.23-beta` | PR #14 / 512 pruebas |
+| G030 | `0.0.30.01-beta` | GOV.1.6 — controles GitHub | base `0.0.23-beta` | 522 pruebas / cierre |
+| G031 | `0.0.31.01-beta` | GOV.1.7 — licencia/distribución | base `0.0.23-beta` | 530 pruebas / cierre con hotfix absorbido |
+| G032 | `0.0.32.01-beta` | GOV.1.8 — cierre integral GOV.1 | `v0.0.24-beta` | PR #17 / 540 pruebas |
+| G033 | `0.0.33.01-beta` | UX.4.6e R1 — auditoría/patrón documental | base `0.0.24-beta` | revisión completada |
+| G034 | `0.0.34.02-beta` | UX.4.6e R2 — Python/tests | base `0.0.24-beta` | 550 pruebas |
+| G035 | `0.0.35.03-beta` | UX.4.6e R3 — JS/Web Storage | base `0.0.24-beta` | 558 pruebas |
+| G036 | `0.0.36.04-beta` | UX.4.6e R4 — runtime/Jinja/CSS | base `0.0.24-beta` | 566 pruebas |
+| G037 | `0.0.37.05-beta` | UX.4.6e R5 — coherencia visible | base `0.0.24-beta` | 576 pruebas |
+| G038 | `0.0.38.06-beta` | UX.4.6e R6 — renumeración/metadata | base `0.0.24-beta` | 586 pruebas |
+| G039 | `0.0.39.07-beta` | UX.4.6e R7 — auditoría transversal | base `0.0.24-beta` | 598 pruebas |
+| G040 | `0.0.40.08-beta` | UX.4.6e R8 — validación funcional/procedencia | base `0.0.24-beta` | cierre documental 652 pruebas |
+| G041 | `0.0.41.09-beta` | UX.4.6e R9.2 — cierre formal | `v0.0.25-beta` | PR #21/#22 / 660 pruebas |
+| G042 | `0.0.42.01-beta` | PLAN.1 R1 — política/plan maestro | base `0.0.25-beta` | 665 pruebas |
+| G043 | `0.0.43.02-beta` | PLAN.1 R2A | base `0.0.25-beta` | 670 pruebas |
+| G044 | `0.0.44.03-beta` | PLAN.1 R2B1 | base `0.0.25-beta` | 676 pruebas |
+| G045 | `0.0.45.04-beta` | PLAN.1 R2B2 | base `0.0.25-beta` | 684 pruebas |
+| G046 | `0.0.46.05-beta` | PLAN.1 R2C | base `0.0.25-beta` | 689 pruebas |
+| G047 | `0.0.47.06-beta` | PLAN.1 R3A | base `0.0.25-beta` | 695 pruebas |
+| G048 | `0.0.48.07-beta` | PLAN.1 R3B1 | base `0.0.25-beta` | 702 pruebas |
+| G049 | `0.0.49.08-beta` | PLAN.1 R3B2 | base `0.0.25-beta` | 710 pruebas |
+| G050 | `0.0.50.09-beta` | PLAN.1 R4.2 — cierre formal | `v0.0.26-beta` | PR #23/#24 / 720 pruebas |
+| G051 | `0.0.51.01-beta` | UX.4.6f R1/R1.1 — checkpoint aceptado conjunto | base `0.0.26-beta` | PR #28 / 743 pruebas |
+| G052 | `0.0.52.02-beta` | UX.4.6f R2 — cierre lógico/matemático | base `0.0.26-beta` | PR #30 / 756 pruebas |
+| G053 | `0.0.53.03-beta` | UX.4.6f — cierre/hardening final | base `0.0.26-beta` | PR #31 / 762 pruebas |
+| G054 | `0.0.54.01-beta` | UX.4.6g R1 — cierre Paso 5 | base `0.0.26-beta` | PR #32 / 784 pruebas |
+| G055 | `0.0.55.01-beta` | UX.4.6h R1.2 — claridad aceptada | base `0.0.26-beta` | 806 pruebas objetivo + aceptación visual |
+| G056 | `0.0.56.02-beta` | UX.4.6h R1.3 — informe A4/cierre | base `0.0.26-beta` | PR #33 / 812 pruebas |
+| G057 | `0.0.57.01-beta` | UX.4.6i R1.4 — cierre Cómo se calcula | base `0.0.26-beta` | PR #34 / 841 pruebas |
+
+## Estados documentados que no consumen Global
+
+Se preservan como evidencia, pero no agregan fila:
+
+- UX.2.1 como subfase visual real absorbida por la reconstrucción histórica;
+- revisiones intermedias de UX.4.6a–d ya representadas por G018–G021;
+- GOV.1.1 como proceso de reconstrucción de G001–G021;
+- operaciones internas del prebloque de firma/integridad;
+- GOV.1.5 R1/R2 antes del cierre R3;
+- hotfix de formato de licencia;
+- mantenimiento post-GOV.1;
+- checkpoint identidad pública pre-R8;
+- UX.4.6e R8.1 y R9.1 candidato local;
+- PLAN.1 R4.1 candidato local y PR #25 documental post-tag;
+- UX.4.6f R1 antes del cierre conjunto R1/R1.1 y mantenimiento PR #29;
+- UX.4.6g R1.2/R1.3/R1.4/R1.4.2/R1.4.3 como refinamientos del cierre único G054;
+- UX.4.6h R1 fallido y R1.1 como corrección del mismo candidato;
+- UX.4.6i R1/R1.2/R1.3 como refinamientos previos a G057;
+- cualquier referencia a UX.4.6i R1.1 mientras no exista evidencia independiente que la sustente.
+
+## Próximo estado
+
+VER.2 no consume un número por existir como rama o candidato. Solo si su gate completo y su integración son satisfactorios se añade:
+
+| Global | ID revision-aware | Bloque | Condición |
+|---:|---|---|---|
+| G058 | `0.0.58.01-beta` | VER.2 R1 — reconciliación revision-aware | gate completo + PR/CI verde + integración |
+
+Después de aceptar G058, DEV.2 puede volver a ser el bloque funcional activo.
