@@ -6,6 +6,14 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ## [Unreleased]
 
+### MANT.1 R3 — encabezados YAML de GitHub
+
+- documenta los YAML de GitHub antes de SEC.2 sin modificar triggers, jobs, permisos, formularios, labels ni cadencias;
+- no cambia `VERSION`, `APP_VERSION`, motores previsionales, normativa ni ledger VER.2;
+- agrega encabezados semánticos a Dependabot, workflows e Issue Forms para explicar propósito, límites y privacidad operacional;
+- sincroniza `docs/ESTANDAR_CODIGO_Y_COMENTARIOS.md`, `docs/VALIDACION.md`, `docs/ARQUITECTURA.md` y `docs/ROADMAP.md`;
+- agrega regresión documental para proteger que `.github/` conserve encabezados MANT.1 R3 y que MANT.1 R1/R2/R3 queden visibles en la documentación transversal.
+
 ### MANT.1 R2 — documentación de scripts y hooks
 
 - materializa los primeros cambios de mantenimiento técnico derivados de MANT.1 R1, sin cambiar `VERSION`, `APP_VERSION`, motores previsionales ni normativa;

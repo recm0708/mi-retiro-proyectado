@@ -1,3 +1,7 @@
+# MANT.1 R3 — workflow de auditoría de gobernanza.
+# Propósito: ejecutar regresiones GOV.1.6 y verificación de whitespace en push/PR.
+# No modifica triggers, permisos, jobs, actions ni comandos del workflow.
+
 name: Auditoría de gobernanza
 
 on:

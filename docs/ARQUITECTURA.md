@@ -5,14 +5,15 @@
 **Versión base histórica:** `0.0.23-beta`
 **Revisión documental:** GOV.1.4 — 2026-08-17
 **Última actualización técnica:** DEV.2 R4 — cierre final documental — 2026-08-23
-**Última actualización de mantenimiento:** MANT.1 R2 — scripts y hooks — 2026-08-23
+**Última actualización de mantenimiento:** MANT.1 R3 — YAML de GitHub — 2026-08-23
 **Clasificación:** Técnica / Pública
 
 Mi Retiro Proyectado es una aplicación web local basada en FastAPI, Jinja2 y JavaScript del navegador. La arquitectura separa presentación, contratos de datos, servicios de integración, motores previsionales, parámetros normativos y observabilidad de desarrollo.
 
-MANT.1 R1 dejó la auditoría inicial de mantenibilidad y MANT.1 R2 documenta
+MANT.1 R1 dejó la auditoría inicial de mantenibilidad, MANT.1 R2 documenta
 la infraestructura local de scripts/hooks que protege commits reproducibles antes
-de los checks remotos. Este mantenimiento no introduce nuevas capas de producto.
+de los checks remotos y MANT.1 R3 documenta los YAML de GitHub sin cambiar CI,
+Issue Forms ni Dependabot. Este mantenimiento no introduce nuevas capas de producto.
 
 [Índice](INDICE.md) · [Modelo de datos](MODELO_DE_DATOS.md) · [Motor](MOTOR_DE_CALCULO.md) · [Normativa](NORMATIVA.md) · [Observabilidad](OBSERVABILIDAD_LOGS.md)
 

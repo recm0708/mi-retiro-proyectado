@@ -1,3 +1,7 @@
+# MANT.1 R3 — plantilla de consulta y soporte.
+# Propósito: recibir preguntas de uso, instalación, documentación o desarrollo sin datos sensibles.
+# No modifica labels, campos obligatorios ni controles de privacidad.
+
 name: Consulta / soporte
 description: Solicita ayuda de uso, instalación, documentación o desarrollo sin exponer datos sensibles.
 labels: ["question", "needs-triage"]

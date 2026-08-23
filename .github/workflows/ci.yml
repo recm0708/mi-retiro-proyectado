@@ -1,3 +1,7 @@
+# MANT.1 R3 — workflow de validación continua.
+# Propósito: validar dependencias, compilación, JavaScript y pruebas en Python 3.13/3.14.
+# No modifica matriz, triggers, permisos, actions ni comandos del workflow.
+
 name: Validación continua
 
 on:
