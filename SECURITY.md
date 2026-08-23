@@ -2,14 +2,19 @@
 
 ## Versiones soportadas
 
-Mi Retiro Proyectado se encuentra en **desarrollo beta** bajo la línea `0.0.N-beta`. El repositorio de código es público, pero la aplicación no se declara todavía como versión oficial ni como despliegue de producción.
+Mi Retiro Proyectado se encuentra en **desarrollo beta**. Los estados históricos conservan la familia legacy `0.0.N-beta`; VER.2 adopta para candidatos y estados nuevos la familia revision-aware `0.GG.RR.EE-beta`. El repositorio de código es público, pero la aplicación no se declara todavía como versión oficial ni como despliegue de producción.
 
 | Línea | Soporte de seguridad |
 |---|---|
-| `0.0.26-beta` | Soportada durante la etapa beta vigente |
+| `0.0.71.01-beta` | Candidata vigente de VER.2; recibe correcciones sobre la rama de reconciliación hasta cerrar su gate |
+| `0.0.26-beta` | Soportada como beta vigente legacy/candidata de VER.2 para regresiones históricas; último hito formal legacy etiquetado |
 | `0.0.25-beta` y anteriores | Históricas; no reciben correcciones independientes |
 
+La base histórica anterior a VER.2 se reconstruye en G001–G070 sin crear tags retroactivos. G071 solo se considera aceptado después del ledger/validador, gate completo, PR/CI e integración.
+
 La primera versión oficial objetivo es `1.0.0.0` y solo podrá considerarse soportada cuando se materialice formalmente después de los gates definidos por el plan maestro.
+
+La numeración revision-aware no mueve ni recrea tags legacy. Consultar `VERSIONING.md`, `docs/AUDITORIA_VERSIONADO_PRE_1_0.md`, `docs/MATRIZ_DECISION_REVISIONES_VER2.md` y `docs/LEDGER_REVISIONES_PRE_1_0.md`.
 
 ## Reportar una vulnerabilidad
 
@@ -61,3 +66,16 @@ Esta función está habilitada y complementa el canal privado alternativo indica
 - `docs/PROCEDIMIENTO_INCIDENTES_SEGURIDAD.md`
 - `docs/SEGURIDAD_PRIVACIDAD.md`
 - `docs/AUDITORIA_GITHUB.md`
+- `docs/AUDITORIA_VERSIONADO_PRE_1_0.md`
+- `docs/MATRIZ_DECISION_REVISIONES_VER2.md`
+- `docs/LEDGER_REVISIONES_PRE_1_0.md`
+- `data/ledger_revisiones_pre_1_0.json`
+
+<!-- ANCLAS_HISTORICAS_VER2_SECURITY_CONSOLIDADAS -->
+
+## Compatibilidad histórica preservada por VER.2
+
+| Versión | Estado de soporte |
+| --- | --- |
+| `0.0.71.01-beta` | Candidata vigente de VER.2; Soportada durante la rama de reconciliación hasta cerrar su gate |
+| `0.0.26-beta` | Candidata vigente de VER.2 como referencia legacy preservada por las pruebas históricas; último hito formal legacy etiquetado |

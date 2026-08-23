@@ -18,17 +18,14 @@ DOCS = ROOT / "docs"
 class TestUX46eAuditoriaCoherencia(unittest.TestCase):
     """Protege el gate transversal y su evolución posterior sin reescribir R7."""
 
-    def test_roadmap_registra_cierre_r7_r8_y_estado_r9(self):
+    def test_roadmap_preserva_r7_r8_r9_y_cierre_ux46e(self):
         texto = (DOCS / "ROADMAP.md").read_text(encoding="utf-8")
-        self.assertIn("[x] R6 — documentación transversal", texto)
-        self.assertIn("586 pruebas en `OK`", texto)
-        self.assertIn("[x] R7 — regresiones y auditoría", texto)
-        self.assertIn("598 pruebas en `OK`", texto)
-        self.assertIn("[x] R8 — prueba funcional manual y automática", texto)
-        self.assertIn("644 pruebas en `OK`", texto)
-        self.assertIn("[x] R9 — cierre técnico y publicación del hito;", texto)
-        self.assertIn("[x] R9.1 — candidato local `0.0.25-beta`", texto)
-        self.assertIn("[x] R9.2 — PR #21 integrado por squash", texto)
+        self.assertIn("R6 — renumeración/metadata; 586 pruebas", texto)
+        self.assertIn("R7 — auditoría transversal; 598 pruebas", texto)
+        self.assertIn("R8 — validación funcional/procedencia editable", texto)
+        self.assertIn("R9.2 — cierre formal mediante PR #21/#22", texto)
+        self.assertIn("R9.1 se conserva como candidato local histórico", texto)
+        self.assertIn("[x] **UX.4.6e — Estandarización técnica", texto)
 
     def test_readme_preserva_cierre_r8_r9_sin_congelar_bloque_activo(self):
         texto = (ROOT / "README.md").read_text(encoding="utf-8")
@@ -36,6 +33,7 @@ class TestUX46eAuditoriaCoherencia(unittest.TestCase):
         self.assertIn("PR #21 integrado por squash", texto)
         self.assertIn("21 labels y 20/20 topics", texto)
         self.assertNotIn("**Bloque activo:** UX.4.6e", texto)
+        self.assertIn("**Bloque transversal activo:** VER.2", texto)
 
     def test_auditoria_r7_existe_y_declara_linea_base_y_objetivo(self):
         texto = (DOCS / "AUDITORIA_UX46E_R7_2026-08-18.md").read_text(encoding="utf-8")
@@ -44,7 +42,7 @@ class TestUX46eAuditoriaCoherencia(unittest.TestCase):
         self.assertIn("598 pruebas", texto)
         self.assertIn("R8 — prueba funcional manual + automática", texto)
 
-    def test_documentos_primarios_usan_secuencia_vigente_e_a_h(self):
+    def test_documentos_primarios_usan_secuencia_vigente_f_a_i(self):
         rutas = (
             ROOT / "README.md",
             DOCS / "ROADMAP.md",
@@ -54,9 +52,10 @@ class TestUX46eAuditoriaCoherencia(unittest.TestCase):
             DOCS / "INDICE.md",
         )
         combinados = "\n".join(p.read_text(encoding="utf-8") for p in rutas)
-        self.assertIn("UX.4.6f — Paso 4", combinados)
-        self.assertIn("UX.4.6g — Paso 5", combinados)
-        self.assertIn("UX.4.6h — Paso 6", combinados)
+        self.assertIn("UX.4.6f", combinados)
+        self.assertIn("UX.4.6g", combinados)
+        self.assertIn("UX.4.6h", combinados)
+        self.assertIn("UX.4.6i", combinados)
         self.assertNotIn("UX.4.6e — Paso 4 · Proyección salarial/laboral", combinados)
 
     def test_auditoria_historica_preserva_texto_y_agrega_nota_posterior(self):
@@ -165,14 +164,7 @@ class TestUX46eAuditoriaCoherencia(unittest.TestCase):
         self.assertEqual([], rotos)
 
     def test_higiene_textual_y_json_versionado(self):
-        """Audita solo archivos versionables y la política canónica de EOL.
-
-        En Windows, el checkout puede materializar CRLF por configuración local
-        aunque Git normalice el contenido versionado a LF. Por eso este gate no
-        inspecciona `.venv` ni exige el byte físico LF en el working tree: valida
-        la política `eol=lf` de `.gitattributes`, BOM/whitespace y JSON sobre los
-        archivos que Git rastrea o que serían añadidos al repositorio.
-        """
+        """Audita solo archivos versionables y la política canónica de EOL."""
 
         errores = []
         extensiones = {
@@ -237,16 +229,19 @@ class TestUX46eAuditoriaCoherencia(unittest.TestCase):
 
         self.assertEqual([], errores)
 
-    def test_adr165_documenta_gate_y_numeracion_sigue_consecutiva(self):
+    def test_adr165_historico_y_adr179_revision_aware_estan_trazados(self):
         texto = (DOCS / "DECISIONES.md").read_text(encoding="utf-8")
         self.assertIn("## ADR-165 — La auditoría transversal es un gate", texto)
         ids = [int(x) for x in re.findall(r"(?m)^## ADR-(\d{3})\s+—", texto)]
-        self.assertGreaterEqual(max(ids), 165)
+        self.assertGreaterEqual(max(ids), 178)
         self.assertEqual(list(range(1, max(ids) + 1)), ids)
         self.assertIn(
             f"**ADR indexadas:** {max(ids)} (`ADR-001` a `ADR-{max(ids):03d}`)",
             texto,
         )
+        adr179 = (DOCS / "ADR_179_VERSIONADO_REVISION_AWARE.md").read_text(encoding="utf-8")
+        self.assertIn("# ADR-179 —", adr179)
+        self.assertIn("0.GG.RR.EE-beta", adr179)
 
 
 if __name__ == "__main__":
