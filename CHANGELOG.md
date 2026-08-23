@@ -6,6 +6,14 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ## [Unreleased]
 
+### MANT.1 R5C — comentarios internos en JavaScript complejo
+
+- agrega comentarios internos de intención en JavaScript de alto impacto: comparador, simulación, resultados, orquestación del Paso 6, gestión de datos, privacidad, procesamiento de adjuntos e importación de documentos oficiales;
+- documenta flujos de storage, invalidación descendente, borradores revisables, transición Mixto/SUCGS, comparación acreditado/proyectado y estado accesible de adjuntos;
+- mantiene comentarios de `app/static/js/` libres de identificadores de revisión, PR o bloques históricos;
+- agrega regresión para proteger comentarios funcionales en los ocho módulos revisados sin cambiar claves de storage, selectores, ids, clases, textos visibles ni lógica;
+- no cambia `VERSION`, `APP_VERSION`, motores previsionales, normativa, contratos JSON, rutas públicas ni SEC.2.
+
 ### MANT.1 R5B — comentarios internos en CSS y plantilla Cómo se calcula
 
 - agrega comentarios estructurales en `app/static/css/como-se-calcula.css` para delimitar hero, navegación, secciones, fórmulas, tablas, factores, accesibilidad y responsive;

@@ -6,10 +6,30 @@
 **Base documental histórica:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal histórica preservada:** UX.4.6e R8 — validación funcional y procedencia editable — 2026-08-19
 **Última revisión transversal:** UX.4.6f R2 integrada y cierre del Paso 4 — 2026-08-20
-**Revisión de mantenimiento:** MANT.1 R5B — comentarios internos en CSS y plantilla Cómo se calcula — 2026-08-23
+**Revisión de mantenimiento:** MANT.1 R5C — comentarios internos en JavaScript complejo — 2026-08-23
 **Clasificación:** Técnica / Calidad
 
 La estrategia combina pruebas automatizadas, CI, casos sintéticos/anonimizados y validación manual cuando una propiedad no puede demostrarse suficientemente con código.
+
+## Validación MANT.1 R5C — comentarios internos en JavaScript complejo
+
+MANT.1 R5C valida que los módulos JavaScript revisados tengan comentarios
+internos de intención para almacenamiento, invalidación, borradores revisables,
+privacidad, adjuntos, comparación y resultados, sin cambiar claves, selectores,
+ids, clases, textos visibles ni lógica funcional.
+
+Comandos usados:
+
+```powershell
+python -m pytest tests\test_mant1_r5c_comentarios_js_app.py -q
+python -m pytest tests\test_mant1_r5a_comentarios_servicios_app.py tests\test_mant1_r5b_comentarios_presentacion_app.py tests\test_mant1_r5c_comentarios_js_app.py -q
+python -m pytest tests\test_ux46e_almacenamiento_comentarios_js.py tests\test_ux46e_auditoria_coherencia.py -q
+git diff --check
+python -m pytest -q
+```
+
+La revisión no cambia `VERSION`, `APP_VERSION`, motores previsionales,
+normativa, rutas públicas, contratos JSON, claves de almacenamiento ni SEC.2.
 
 ## Validación MANT.1 R5B — comentarios internos en CSS y plantilla Cómo se calcula
 
@@ -20,9 +40,9 @@ visibles, rutas ni lógica Jinja.
 Comandos usados:
 
 ```powershell
-python -m pytest tests	est_mant1_r5b_comentarios_presentacion_app.py -q
-python -m pytest tests	est_mant1_r5a_comentarios_servicios_app.py tests	est_mant1_r5b_comentarios_presentacion_app.py -q
-python -m pytest tests	est_ux46e_almacenamiento_comentarios_js.py tests	est_ux46e_auditoria_coherencia.py -q
+python -m pytest tests\test_mant1_r5b_comentarios_presentacion_app.py -q
+python -m pytest tests\test_mant1_r5a_comentarios_servicios_app.py tests\test_mant1_r5b_comentarios_presentacion_app.py -q
+python -m pytest tests\test_ux46e_almacenamiento_comentarios_js.py tests\test_ux46e_auditoria_coherencia.py -q
 git diff --check
 python -m pytest -q
 ```

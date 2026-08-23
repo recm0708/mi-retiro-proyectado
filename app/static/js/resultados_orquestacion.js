@@ -28,6 +28,8 @@
     document.head.appendChild(enlace);
   }
 
+  // Estos contenedores dependen del último cálculo válido y deben ocultarse
+  // juntos cuando cambia una decisión transversal del Paso 6.
   const IDS_SALIDA_DEPENDIENTE = [
     "resultado-resumen-unificado",
     "resultado-comparacion-origen-datos",
@@ -123,6 +125,8 @@
 
 
   function aplicarSeleccionSalarialExplicita({
+    // La selección explícita impide que un placeholder o una opción removida
+    // mantenga resultados previos con un escenario salarial distinto.
     selectId,
     ayudaId,
     guardado,
@@ -281,6 +285,8 @@
 
 
   function construirSolicitudSUCGSConTransicion() {
+    // La transición Mixto -> SUCGS reutiliza datos del escenario seleccionado,
+    // pero marca el origen para que el backend aplique el contrato correcto.
     const simulacion = obtenerSimulacion();
     const persona = simulacion.persona || {};
     const seleccionado = simulacion.escenario_retiro_seleccionado;
@@ -445,6 +451,8 @@
 
 
   function crearInterfazTransicion() {
+    // La interfaz se crea de forma idempotente para poder inicializar la página
+    // varias veces sin duplicar controles ni listeners.
     if (document.getElementById("resultado-mixto-transicion-sucgs")) {
       return;
     }

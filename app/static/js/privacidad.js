@@ -39,6 +39,8 @@ let contextoPrivacidadActual = "simulacion";
  * @returns {Object|null} Consentimiento válido o null.
  */
 function obtenerConsentimientoPrivacidad() {
+  // El consentimiento persistente solo es válido si la pestaña actual también
+  // registró autorización para esta versión del aviso.
   try {
     const texto = window.localStorage.getItem(CLAVE_PRIVACIDAD);
     if (!texto) return null;
@@ -88,6 +90,8 @@ function guardarConsentimientoPrivacidad() {
  * Elimina simulación y consentimiento sin limpiar almacenamiento ajeno.
  */
 function borrarDatosSimulacionPorPrivacidad() {
+  // Rechazar privacidad borra la simulación temporal y claves propias, pero no
+  // intenta interpretar ni migrar datos antiguos.
   [
     CLAVE_SIMULACION_PRIVACIDAD,
     CLAVE_PRIVACIDAD_SESION,
@@ -146,6 +150,8 @@ function lecturaPrivacidadCompletada() {
 
 
 function actualizarEstadoLecturaPrivacidad() {
+  // La aceptación se habilita cuando el usuario alcanza el final del contenido
+  // desplazable o cuando el bloque no requiere desplazamiento.
   if (modoPrivacidadActual !== "consentimiento") return;
 
   const check = document.getElementById("aceptar-privacidad-check");
@@ -223,6 +229,8 @@ function configurarModoPrivacidad(modo) {
  * @param {string} contexto Superficie que solicita la apertura.
  */
 function abrirCondicionesPrivacidad(modo = "consentimiento", contexto = "simulacion") {
+  // El mismo modal funciona para lectura informativa y consentimiento obligatorio;
+  // el modo controla botones, textos auxiliares y cierre permitido.
   const modal = obtenerModalPrivacidad();
   if (!modal) return;
 

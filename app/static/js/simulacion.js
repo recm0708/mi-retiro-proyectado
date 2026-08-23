@@ -26,6 +26,8 @@ const ANIO_ACTUAL = new Date().getFullYear();
 // inicialmente cinco años futuros además del año actual.
 const ANIOS_PROYECCION_PREDETERMINADOS = 5;
 
+// pasoActual solo controla la navegación visual; la fuente persistida del
+// asistente continúa siendo el objeto serializado en sessionStorage.
 let pasoActual = 1;
 
 
@@ -183,6 +185,8 @@ function obtenerSimulacion() {
  * @param {Object} simulacion Estado que debe conservarse.
  */
 function guardarSimulacion(simulacion) {
+  // Guardar el estado dispara actualizaciones laterales de navegación y gestión
+  // para que otros módulos no tengan que escuchar directamente a sessionStorage.
   sessionStorage.setItem(
     CLAVE_SIMULACION,
     JSON.stringify(simulacion),
@@ -564,6 +568,8 @@ function restaurarDatosPersonales(simulacion) {
  * la decisión del Asegurado(a) de continuar o no cotizando.
  */
 function actualizarEstadoContinuidad() {
+  // La decisión de no continuar cotizando convierte las cuotas futuras en cero
+  // y fija el cierre anual para evitar proyecciones implícitas.
   const continua = document.getElementById(
     "continua_cotizando",
   ).value;
@@ -895,6 +901,8 @@ function invalidarResumenCuotas() {
  * @param {SubmitEvent} evento Evento submit del formulario.
  */
 async function analizarCuotas(evento = null, opciones = {}) {
+  // Esta validación puede ejecutarse en segundo plano desde pasos posteriores;
+  // por eso permite silenciar mensajes y reportes nativos de formulario.
   evento?.preventDefault();
 
   const mostrarMensajes = opciones.mostrarMensajes !== false;
@@ -1407,6 +1415,8 @@ function enfocarSeccionPaso3(id) {
  * @returns {Promise<boolean>} true si existe un resumen de cuotas vigente.
  */
 async function asegurarCuotasAnalizadasParaPaso3() {
+  // Paso 3 depende del resumen normalizado de cuotas, pero la recuperación
+  // automática evita obligar al usuario a retroceder cuando los datos siguen válidos.
   const simulacion = obtenerSimulacion();
 
   if (simulacion.resumen_cuotas) {
@@ -1464,6 +1474,8 @@ function validarDecisionesPaso3() {
 
 
 async function analizarPasoHistorialCompleto() {
+  // El Paso 3 consolida decisiones de historial, detalle del año actual y base
+  // salarial antes de permitir que la proyección del Paso 4 use esos datos.
   const cuotasListas = await asegurarCuotasAnalizadasParaPaso3();
   if (!cuotasListas) {
     enfocarSeccionPaso3("seccion-historial-salarial");

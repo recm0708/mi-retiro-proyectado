@@ -4,7 +4,7 @@
 **Versión de aplicación revisada:** `0.0.26-beta`
 **Versión base histórica:** `0.0.24-beta`
 **Revisión documental:** UX.4.6e R4 — 2026-08-18
-**Revisión de mantenimiento:** MANT.1 R5B — comentarios internos en CSS y plantilla Cómo se calcula — 2026-08-23
+**Revisión de mantenimiento:** MANT.1 R5C — comentarios internos en JavaScript complejo — 2026-08-23
 **Clasificación:** Técnica / Mantenibilidad
 
 Este documento define el patrón permanente para documentar código en Mi Retiro
@@ -17,8 +17,9 @@ primera mejora documental sobre scripts, hooks y automatización local,
 MANT.1 R3 documenta los YAML de GitHub sin modificar su comportamiento,
 MANT.1 R4 limpia encabezados operativos para que la trazabilidad histórica quede
 fuera de código/configuración, MANT.1 R5A inicia comentarios internos de
-intención en servicios Python de aplicación y MANT.1 R5B extiende el criterio a CSS
-y plantillas grandes. Las revisiones posteriores deben
+intención en servicios Python de aplicación, MANT.1 R5B extiende el criterio a CSS
+y plantillas grandes, y MANT.1 R5C cubre JavaScript complejo de interacción,
+almacenamiento, importación y resultados. Las revisiones posteriores deben
 conservar esta misma trazabilidad incremental.
 
 ## 1. Principio general
@@ -143,6 +144,15 @@ function operacion(datos) {
 
 Los motores previsionales no se duplican en JavaScript. Los comentarios deben
 dejar claro cuándo el frontend únicamente recopila, presenta u orquesta datos.
+
+En módulos con `sessionStorage`, `localStorage`, importación de documentos,
+orquestación de resultados o acciones destructivas, el comentario debe explicar:
+
+- qué estado se conserva o se invalida;
+- qué operación queda delegada al backend;
+- qué datos son borradores hasta confirmación explícita;
+- qué selectores o claves no deben cambiarse sin revisar dependencias;
+- por qué una acción se ejecuta de forma defensiva o idempotente.
 
 ## 5. HTML / Jinja
 

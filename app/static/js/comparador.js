@@ -245,6 +245,8 @@ function prepararOpcionesComparador(simulacion) {
 }
 
 
+// El comparador arma un contrato único para que Python combine retiro y salario;
+// no replica reglas de elegibilidad ni fórmulas de pensión en el navegador.
 function construirDatosIntegradosComparador(simulacion) {
   const persona = simulacion.persona;
   const base = obtenerEscenarioBase(simulacion);
@@ -318,6 +320,8 @@ function construirDatosIntegradosComparador(simulacion) {
 }
 
 
+// Las opciones deshabilitadas también se envían cuando representan decisiones
+// obligatorias ya fijadas por el estado de la simulación.
 function valoresSeleccionados(nombre) {
   return Array.from(document.querySelectorAll(`input[name="${nombre}"]`))
     .filter((input) => input.checked || input.disabled)
@@ -419,6 +423,8 @@ function textoModalidadFila(fila) {
 }
 
 
+// Cada fila destaca base, mejor pensión y decisiones pendientes sin alterar
+// el orden ni los montos que ya fueron normalizados por el backend.
 function renderizarFilaComparador(fila, respuesta) {
   const tr = document.createElement("tr");
 
@@ -505,6 +511,8 @@ function mostrarResumenComparador(respuesta) {
 }
 
 
+// Las advertencias globales y por combinación se deduplican para no ocultar
+// riesgos relevantes cuando varios escenarios comparten la misma condición.
 function mostrarAdvertenciasComparador(respuesta) {
   const contenedor = document.getElementById("comparador-advertencias");
   const lista = document.getElementById("comparador-lista-advertencias");
