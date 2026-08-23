@@ -5,7 +5,7 @@ import unittest
 from fastapi.testclient import TestClient
 
 from app.main import app
-from app.servicios.fuentes_normativas import construir_catalogo_metodologia
+from app.services.fuentes_normativas import construir_catalogo_metodologia
 
 
 class TestFuentesNormativas(unittest.TestCase):

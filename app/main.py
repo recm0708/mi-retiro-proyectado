@@ -32,7 +32,7 @@ from fastapi.responses import HTMLResponse, Response
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
-from app.modelos.simulacion import (
+from app.models.simulacion import (
     DatosCuotas,
     DatosHistorialSalarial,
     DatosDetalleAnioActual,
@@ -51,33 +51,33 @@ from app.modelos.simulacion import (
     DatosRetiro,
     ResumenRetiro,
 )
-from app.servicios.historial_salarios import (
+from app.services.historial_salarios import (
     analizar_historial_salarial,
 )
-from app.servicios.detalle_anio_actual import (
+from app.services.detalle_anio_actual import (
     analizar_detalle_anio_actual,
 )
-from app.servicios.linea_tiempo import (
+from app.services.linea_tiempo import (
     construir_linea_tiempo,
 )
-from app.servicios.referencia_mi_retiro_seguro import (
+from app.services.referencia_mi_retiro_seguro import (
     analizar_comprobante_pdf,
 )
-from app.servicios.ficha_digital import (
+from app.services.ficha_digital import (
     analizar_ficha_digital_pdf,
 )
-from app.servicios.fecha_referencia import (
+from app.services.fecha_referencia import (
     obtener_fecha_referencia_confiable,
 )
-from app.servicios.proyeccion_cuotas import analizar_cuotas
-from app.servicios.proyeccion_salarios import (
+from app.services.proyeccion_cuotas import analizar_cuotas
+from app.services.proyeccion_salarios import (
     normalizar_salario,
     proyectar_salario,
 )
-from app.servicios.retiro import (
+from app.services.retiro import (
     analizar_retiro,
 )
-from app.modelos.pension import (
+from app.models.pension import (
     DatosCalculoSEBD,
     DatosCalculoSEBDNormal,
     DatosResultadoSEBD,
@@ -95,35 +95,35 @@ from app.modelos.pension import (
     ResumenCalculoSUCGS,
     ResumenResultadoSUCGS,
 )
-from app.motores.sebd import (
+from app.engines.sebd import (
     calcular_sebd_normal,
 )
-from app.motores.sebd_modalidades import (
+from app.engines.sebd_modalidades import (
     calcular_sebd,
 )
-from app.motores.mixto import (
+from app.engines.mixto import (
     calcular_mixto,
 )
-from app.motores.sucgs import (
+from app.engines.sucgs import (
     calcular_sucgs,
 )
-from app.servicios.resultados import (
+from app.services.resultados import (
     calcular_resultado_sebd_normal,
 )
-from app.servicios.resultados_sebd import (
+from app.services.resultados_sebd import (
     calcular_resultado_sebd,
 )
-from app.servicios.resultados_mixto import (
+from app.services.resultados_mixto import (
     calcular_resultado_mixto,
 )
-from app.servicios.resultados_sucgs import (
+from app.services.resultados_sucgs import (
     calcular_resultado_sucgs,
 )
-from app.modelos.comparacion import (
+from app.models.comparacion import (
     DatosComparacionEscenarios,
     ResumenComparacionEscenarios,
 )
-from app.servicios.comparador import (
+from app.services.comparador import (
     comparar_escenarios,
 )
 
@@ -138,9 +138,9 @@ BASE_DIR = Path(__file__).resolve().parent
 # ============================================================
 # Configuración de FastAPI
 # ============================================================
-from app.servicios.fuentes_normativas import construir_catalogo_metodologia
-from app.servicios.como_se_calcula import construir_guia_calculo
-from app.servicios.centro_desarrollo import construir_estado_centro_desarrollo
+from app.services.fuentes_normativas import construir_catalogo_metodologia
+from app.services.como_se_calcula import construir_guia_calculo
+from app.services.centro_desarrollo import construir_estado_centro_desarrollo
 
 
 app = FastAPI(

@@ -70,8 +70,8 @@ class TestGov13DocumentacionR4(unittest.TestCase):
         self.assertTrue(
             (
                 DOCS
-                / "historico"
-                / "gobierno"
+                / "archive"
+                / "governance"
                 / "DECISIONES_PRE_GOV1_3_R4.md"
             ).is_file()
         )
@@ -103,12 +103,12 @@ class TestGov13DocumentacionR4(unittest.TestCase):
     def test_matriz_referencia_archivos_criticos_existentes(self):
         texto = (DOCS / "MATRIZ_TRAZABILIDAD.md").read_text(encoding="utf-8")
         rutas = (
-            "app/modelos/trazabilidad.py",
-            "app/servicios/trazabilidad.py",
+            "app/models/trazabilidad.py",
+            "app/services/trazabilidad.py",
             "app/core/archivos_pdf.py",
-            "app/motores/sebd.py",
-            "app/motores/mixto.py",
-            "app/motores/sucgs.py",
+            "app/engines/sebd.py",
+            "app/engines/mixto.py",
+            "app/engines/sucgs.py",
             "tests/test_trazabilidad.py",
         )
         for rel in rutas:
@@ -121,7 +121,7 @@ class TestGov13DocumentacionR4(unittest.TestCase):
         self.assertIn("No recalcula fórmulas", texto)
         self.assertIn("version_metodologia", texto)
         self.assertIn("SHA del commit", texto)
-        self.assertIn("normativa/*.json", texto)
+        self.assertIn("regulations/*.json", texto)
 
     def test_auditoria_declara_limite_objeto_trazabilidad(self):
         texto = (DOCS / "AUDITORIA_CALCULOS.md").read_text(encoding="utf-8")

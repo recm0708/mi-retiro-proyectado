@@ -15,7 +15,7 @@ Antes de esta revisión la aplicación ya disponía de:
 - motores Python separados para SEBD, Mixto y SUCGS;
 - trazabilidad individual en Paso 6 con dato, regla, fórmula, sustitución y resultado;
 - catálogo público de metodología y fuentes oficiales;
-- parámetros versionados en `normativa/`;
+- parámetros versionados en `regulations/`;
 - documentación técnica de modalidades y limitaciones.
 
 La información estaba distribuida y no existía una página pública única orientada a reproducir el procedimiento.
@@ -23,7 +23,7 @@ La información estaba distribuida y no existía una página pública única ori
 ## Decisiones de R1
 
 1. Se incorpora la ruta pública `/como-se-calcula`.
-2. `app/servicios/como_se_calcula.py` únicamente expone parámetros versionados; no calcula prestaciones.
+2. `app/services/como_se_calcula.py` únicamente expone parámetros versionados; no calcula prestaciones.
 3. La plantilla explica flujo, variables, modalidades, fórmulas descriptivas, tablas versionadas, ejemplos y limitaciones.
 4. La página reutiliza el catálogo de fuentes oficial existente.
 5. El Paso 6 enlaza al sistema correspondiente mediante fragmento `#sebd`, `#mixto` o `#sucgs`; no incluye datos personales en la URL.
@@ -71,7 +71,7 @@ R1 no modifica motores ni normativa. Tampoco intenta reproducir un resultado per
 Automática:
 
 - ruta y renderizado;
-- fuente de parámetros desde `normativa/`;
+- fuente de parámetros desde `regulations/`;
 - ausencia de imports de motores en el servicio explicativo;
 - cobertura de los tres sistemas;
 - vínculo desde Paso 6 y desde Metodología;

@@ -4,7 +4,7 @@
 **Versión de aplicación revisada:** `0.0.26-beta`
 **Versión base histórica:** `0.0.24-beta`
 **Revisión documental:** UX.4.6e R4 — 2026-08-18
-**Revisión de mantenimiento:** MANT.1 R5D — política, plantillas y uniformidad por extensión — 2026-08-23
+**Revisión de mantenimiento:** MANT.1 R5E — estandarización de nombres de carpetas — 2026-08-23
 **Clasificación:** Técnica / Mantenibilidad
 
 Este documento define el patrón permanente para documentar código en Mi Retiro
@@ -19,7 +19,7 @@ MANT.1 R4 limpia encabezados operativos para que la trazabilidad histórica qued
 fuera de código/configuración, MANT.1 R5A inicia comentarios internos de
 intención en servicios Python de aplicación, MANT.1 R5B extiende el criterio a CSS
 y plantillas grandes, y MANT.1 R5C cubre JavaScript complejo de interacción,
-almacenamiento, importación y resultados. MANT.1 R5D formaliza política y plantillas por extensión, y uniforma encabezados de JavaScript/CSS operativo. Las revisiones posteriores deben
+almacenamiento, importación y resultados. MANT.1 R5D formaliza política y plantillas por extensión, uniforma encabezados de JavaScript/CSS operativo y MANT.1 R5E estandariza carpetas técnicas en inglés sin renombrar archivos. Las revisiones posteriores deben
 conservar esta misma trazabilidad incremental.
 
 ## 1. Principio general
@@ -63,11 +63,21 @@ La trazabilidad de revisión se registra en `CHANGELOG.md`, `docs/ROADMAP.md`,
 `docs/VALIDACION.md` y documentación técnica equivalente, no en encabezados de
 archivos operativos.
 
+### Nombres de carpetas técnicas
+
+Las carpetas técnicas se nombran en inglés para evitar mezclas entre paquetes,
+documentación, scripts, parámetros y pruebas. Los nombres vigentes de mayor
+impacto son `app/models/`, `app/engines/`, `app/services/`, `regulations/`,
+`tests/validation_cases/` y `docs/archive/`.
+
+Un cambio de carpeta no se considera completo hasta actualizar imports,
+hipervínculos, rutas de pruebas, documentación y configuración relacionada.
+
 ## 3. Python
 
 ### Comentarios internos en servicios de aplicación
 
-Los servicios propios de `app/servicios/` deben explicar decisiones de flujo cuando
+Los servicios propios de `app/services/` deben explicar decisiones de flujo cuando
 normalizan datos, separan totales, construyen matrices, agregan advertencias,
 leen documentos o transforman resultados en salidas para la interfaz. Estos
 comentarios deben describir intención y límites de negocio, no registrar el nombre

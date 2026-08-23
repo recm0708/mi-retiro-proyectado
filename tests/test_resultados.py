@@ -3,8 +3,8 @@
 import unittest
 from datetime import date
 
-from app.modelos.pension import DatosResultadoSEBDNormal
-from app.modelos.simulacion import (
+from app.models.pension import DatosResultadoSEBDNormal
+from app.models.simulacion import (
     DatosHistorialSalarial,
     EscenarioLineaTiempo,
     EscenarioRetiro,
@@ -13,7 +13,7 @@ from app.modelos.simulacion import (
     ResumenLineaTiempo,
     ResumenRetiro,
 )
-from app.servicios.resultados import calcular_resultado_sebd_normal
+from app.services.resultados import calcular_resultado_sebd_normal
 
 
 class TestResultadosSEBDNormal(unittest.TestCase):

@@ -42,7 +42,7 @@ class TestUX46eRenumeracionDocumental(unittest.TestCase):
         self.assertIn("UX.4.6f/UX.4.6g/UX.4.6h", self.cierre)
 
     def test_snapshots_historicos_no_se_reescriben(self):
-        historico = (DOCS / "historico/ROADMAP_PRE_GOV1_3.md").read_text(encoding="utf-8")
+        historico = (DOCS / "archive/ROADMAP_PRE_GOV1_3.md").read_text(encoding="utf-8")
         self.assertIn("UX.4.6e — Paso 4 · Proyección salarial/laboral", historico)
         auditoria = (DOCS / "AUDITORIA_REPOSITORIO_2026-08-18.md").read_text(encoding="utf-8")
         self.assertIn("UX.4.6e — Paso 4 · Proyección salarial/laboral", auditoria)

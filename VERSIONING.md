@@ -245,7 +245,7 @@ No deben confundirse:
 - versión de aplicación: `VERSION`;
 - contador global/local pre-1.0: ledger revision-aware;
 - Build oficial: artefacto reproducible;
-- versión de normativa: `normativa/*.json`;
+- versión de normativa: `regulations/*.json`;
 - versión jurídica de privacidad/términos: identificador propio del documento legal;
 - versión de esquema de logs: Developer Diagnostics;
 - versión de esquema de datos: futura persistencia migrable;
@@ -316,7 +316,7 @@ PLAN.1 y VER.2 distinguen entre evidencia histórica legítima y planificación 
 
 Las expresiones antiguas (`0.1.0-beta.1`, beta pública, `0.0.N-beta`, identificadores de revisiones anteriores) pueden conservarse cuando forman parte de:
 
-- snapshots bajo `docs/historico/`;
+- snapshots bajo `docs/archive/`;
 - auditorías/cierres/releases/ADR que describen un estado anterior;
 - el ledger y la auditoría VER.2;
 - pruebas históricas cuyo contrato sea precisamente preservar esa evidencia.

@@ -68,8 +68,8 @@ Es una referencia **operativa temporal**, verificada documentalmente el 2026-08-
 
 ## 10. Fuentes
 
-Consultar `FUENTES_NORMATIVAS.md` y `normativa/mixto.json`.
+Consultar `FUENTES_NORMATIVAS.md` y `regulations/mixto.json`.
 
 ## 11. Historia
 
-`docs/historico/normativa_privacidad/MODALIDADES_MIXTO_PRE_GOV1_3_R3.md`
+`docs/archive/regulatory-privacy/MODALIDADES_MIXTO_PRE_GOV1_3_R3.md`

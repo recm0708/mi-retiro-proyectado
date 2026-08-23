@@ -369,7 +369,7 @@ El análisis debe mantener separado el total histórico de la proyección futura
 
 **RF-054.** Calcular el componente contributivo mediante saldo, divisor legal y factor actuarial por edad.
 
-**RF-055.** Mantener la tabla actuarial fuera de la interfaz y versionada en `normativa/sucgs.json`.
+**RF-055.** Mantener la tabla actuarial fuera de la interfaz y versionada en `regulations/sucgs.json`.
 
 **RF-056.** Evaluar la capa solidaria del artículo 194.
 
@@ -455,7 +455,7 @@ La comparación debe reutilizar los motores existentes, conservar un escenario b
 
 **RF-091.** La página de Inicio debe funcionar como portada del producto: explicar propósito, sistemas contemplados, capacidades principales, proceso de seis pasos y acciones para iniciar una simulación o consultar metodología.
 
-**RF-092.** La interfaz no debe mostrar detalles de implementación como rutas `normativa/*.json`, nombres de endpoints, backend, repositorio o mecanismos internos de carga de fuentes.
+**RF-092.** La interfaz no debe mostrar detalles de implementación como rutas `regulations/*.json`, nombres de endpoints, backend, repositorio o mecanismos internos de carga de fuentes.
 
 **RF-093.** Las tarjetas equivalentes de métricas, metodología y recursos deben mantener alineación vertical y ubicación de acciones consistente dentro de una misma fila visual.
 
@@ -1169,7 +1169,7 @@ Quedan para fases posteriores:
 
 **RF-384.** La guía debe cubrir la transformación de datos desde los Pasos 1–6 —edad, cuotas, historial, normalización salarial, proyección, línea temporal, fecha de retiro y resultado— además de clasificación o requisitos, fórmulas descriptivas, sustituciones numéricas ilustrativas, variables, orden de operaciones, factores o límites aplicables, redondeos, términos previsionales definidos en contexto, fuentes y limitaciones de cada sistema dentro del alcance implementado.
 
-**RF-385.** Los parámetros numéricos versionables mostrados por la guía deben obtenerse desde `normativa/` mediante una capa de presentación; la guía no debe introducir valores productivos independientes de los parámetros canónicos.
+**RF-385.** Los parámetros numéricos versionables mostrados por la guía deben obtenerse desde `regulations/` mediante una capa de presentación; la guía no debe introducir valores productivos independientes de los parámetros canónicos.
 
 **RF-386.** La guía pública no debe importar ni ejecutar motores de pensión, construir solicitudes personales ni duplicar fórmulas ejecutables en JavaScript. El detalle con sustitución de cifras individuales permanece en la trazabilidad del Paso 6.
 

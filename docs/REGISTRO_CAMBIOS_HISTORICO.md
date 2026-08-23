@@ -97,10 +97,10 @@ Consultar `MIGRACION_FIRMAS_GIT_2026-08-17.md`.
 
 La evolución detallada de UX.4.6 se conserva en:
 
-- `historico/ux/UX_4_6A_REDISENO_VISUAL.md`;
-- `historico/ux/UX_4_6B_PASO1_DATOS_PERSONALES.md`;
-- `historico/ux/UX_4_6C_PASO2_CUOTAS.md`;
-- `historico/ux/UX_4_6D_PASO3_HISTORIAL.md`.
+- `archive/ux/UX_4_6A_REDISENO_VISUAL.md`;
+- `archive/ux/UX_4_6B_PASO1_DATOS_PERSONALES.md`;
+- `archive/ux/UX_4_6C_PASO2_CUOTAS.md`;
+- `archive/ux/UX_4_6D_PASO3_HISTORIAL.md`.
 
 Es normal que estos documentos contengan estados intermedios contradictorios con el estado final: esa contradicción forma parte de la secuencia histórica.
 
@@ -149,5 +149,5 @@ Orden recomendado:
 3. `CHANGELOG.md`;
 4. `docs/DECISIONES.md`;
 5. este registro;
-6. `docs/historico/`;
+6. `docs/archive/`;
 7. pruebas y resultados de CI asociados a cada cierre.

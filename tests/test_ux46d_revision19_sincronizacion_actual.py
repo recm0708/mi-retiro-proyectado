@@ -3,8 +3,8 @@
 import unittest
 from pathlib import Path
 
-from app.modelos.simulacion import DatosDetalleAnioActual, RegistroDetalleAnioActual
-from app.servicios.detalle_anio_actual import analizar_detalle_anio_actual
+from app.models.simulacion import DatosDetalleAnioActual, RegistroDetalleAnioActual
+from app.services.detalle_anio_actual import analizar_detalle_anio_actual
 
 ROOT = Path(__file__).resolve().parents[1]
 

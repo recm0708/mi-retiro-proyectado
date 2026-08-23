@@ -50,7 +50,7 @@ Una referencia de Mi Retiro Seguro no calibra ni corrige automáticamente los mo
 
 ## 4. Normativa
 
-Los parámetros legales se versionan en `normativa/*.json` y se relacionan con `NORMATIVA.md` y `FUENTES_NORMATIVAS.md`.
+Los parámetros legales se versionan en `regulations/*.json` y se relacionan con `NORMATIVA.md` y `FUENTES_NORMATIVAS.md`.
 
 Los JSON son configuración auditable de la implementación, no una reproducción con fuerza jurídica propia.
 
@@ -58,11 +58,11 @@ Las discrepancias identificadas se documentan; no se armonizan silenciosamente.
 
 ## 5. Explicabilidad del cálculo
 
-`app/modelos/trazabilidad.py` y `app/servicios/trazabilidad.py` describen datos utilizados, origen, reglas, fórmulas mostrables, sustituciones, resultados intermedios, fuentes y advertencias.
+`app/models/trazabilidad.py` y `app/services/trazabilidad.py` describen datos utilizados, origen, reglas, fórmulas mostrables, sustituciones, resultados intermedios, fuentes y advertencias.
 
 La capa de trazabilidad **no vuelve a calcular** la prestación. Developer Diagnostics tampoco recalcula: observa la operación ya ejecutada.
 
-La ruta pública `/como-se-calcula` explica el orden de operaciones de SEBD, Mixto y SUCGS con parámetros leídos desde `normativa/*.json`. La guía no ejecuta motores ni reconstruye el resultado personal: la sustitución con cifras del Asegurado(a) permanece en la trazabilidad del Paso 6. Los ejemplos son ilustrativos y cualquier parámetro hipotético se identifica como no oficial.
+La ruta pública `/como-se-calcula` explica el orden de operaciones de SEBD, Mixto y SUCGS con parámetros leídos desde `regulations/*.json`. La guía no ejecuta motores ni reconstruye el resultado personal: la sustitución con cifras del Asegurado(a) permanece en la trazabilidad del Paso 6. Los ejemplos son ilustrativos y cualquier parámetro hipotético se identifica como no oficial.
 
 ## 6. Privacidad
 

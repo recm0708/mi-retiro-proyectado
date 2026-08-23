@@ -45,7 +45,7 @@ Todo cambio de fórmula, parámetro, fecha, tabla o interpretación previsional 
 
 - fuente oficial identificable;
 - prueba de regresión;
-- actualización de `normativa/` cuando corresponda;
+- actualización de `regulations/` cuando corresponda;
 - documentación técnica/normativa;
 - ADR cuando exista interpretación o decisión no trivial.
 
@@ -130,8 +130,8 @@ La política aplicable está en `VERSIONING.md`.
 
 Mientras exista un único mantenedor, `@recm0708` revisa todo el repositorio. Se consideran especialmente críticas:
 
-- `normativa/`;
-- `app/motores/`;
+- `regulations/`;
+- `app/engines/`;
 - `app/core/`;
 - documentación de seguridad, privacidad, normativa y auditoría;
 - `.github/`;

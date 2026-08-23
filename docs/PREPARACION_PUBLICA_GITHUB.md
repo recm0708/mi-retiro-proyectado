@@ -64,7 +64,7 @@ Las labels clasifican Issues y Pull Requests; no se asignan a commits. Los commi
 | `github-actions` | `000000` | Workflows y automatización GitHub |
 | `ui` | `7057ff` | Interfaz y experiencia de usuario |
 | `backend` | `0e8a16` | API, servicios y motores |
-| `normativa` | `fbca04` | Normativa y fuentes oficiales |
+| `regulations` | `fbca04` | Normativa y fuentes oficiales |
 | `privacy` | `b60205` | Privacidad y tratamiento de datos |
 | `security` | `8b0000` | Seguridad y vulnerabilidades |
 | `accessibility` | `5319e7` | Accesibilidad |

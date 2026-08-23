@@ -57,7 +57,7 @@ Servir Bootstrap localmente continúa como objetivo antes de la primera versión
 
 ## 4. Servicio oficial CSS para fecha
 
-`app/servicios/fecha_referencia.py` puede consultar infraestructura oficial de la CSS mediante HTTPS para obtener el encabezado `Date`.
+`app/services/fecha_referencia.py` puede consultar infraestructura oficial de la CSS mediante HTTPS para obtener el encabezado `Date`.
 
 No se envía:
 

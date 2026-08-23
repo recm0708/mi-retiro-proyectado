@@ -15,7 +15,7 @@ from fastapi.testclient import TestClient
 from app import main as main_module
 from app.core.observabilidad import contexto_correlacion, ruta_log_actual
 from app.main import app
-from app.servicios import fecha_referencia
+from app.services import fecha_referencia
 
 
 ROOT = Path(__file__).resolve().parents[1]

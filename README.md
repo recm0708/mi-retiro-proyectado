@@ -72,7 +72,7 @@ La aplicación dispone además de **Developer Diagnostics** para desarrollo. Est
 El proyecto aplica estos criterios:
 
 - fórmulas previsionales en Python, no duplicadas en JavaScript;
-- parámetros normativos versionados en `normativa/`;
+- parámetros normativos versionados en `regulations/`;
 - separación explícita entre datos acreditados y proyectados;
 - trazabilidad de fuentes, decisiones e hipótesis;
 - datos faltantes explícitos en vez de parámetros inventados;
@@ -122,7 +122,7 @@ Documentos principales:
 - [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md) — reglas de participación y convivencia;
 - [`SUPPORT.md`](SUPPORT.md) — rutas de soporte y reporte.
 
-Los documentos de UX que funcionaban como bitácoras de revisión se conservan bajo `docs/historico/ux/`. Las rutas anteriores permanecen como índices de compatibilidad para no romper referencias existentes.
+Los documentos de UX que funcionaban como bitácoras de revisión se conservan bajo `docs/archive/ux/`. Las rutas anteriores permanecen como índices de compatibilidad para no romper referencias existentes.
 
 ## Versiones e historia
 
@@ -171,8 +171,8 @@ mi-retiro-proyectado/
 │   └── social/
 ├── data/
 ├── docs/
-│   └── historico/
-├── normativa/
+│   └── archive/
+├── regulations/
 ├── tests/
 ├── .github/
 ├── CHANGELOG.md
@@ -270,7 +270,7 @@ Consultar:
 - [`docs/TERMINOS_USO_PRIVACIDAD.md`](docs/TERMINOS_USO_PRIVACIDAD.md);
 - [`docs/CUMPLIMIENTO_LEY_81.md`](docs/CUMPLIMIENTO_LEY_81.md);
 - [`docs/OBSERVABILIDAD_LOGS.md`](docs/OBSERVABILIDAD_LOGS.md);
-- [`tests/casos_validacion/README.md`](tests/casos_validacion/README.md).
+- [`tests/validation_cases/README.md`](tests/validation_cases/README.md).
 
 ## Gobierno y contribución
 

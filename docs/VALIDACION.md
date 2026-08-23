@@ -11,6 +11,24 @@
 
 La estrategia combina pruebas automatizadas, CI, casos sintéticos/anonimizados y validación manual cuando una propiedad no puede demostrarse suficientemente con código.
 
+## Validación MANT.1 R5E — nombres de carpetas técnicas
+
+MANT.1 R5E valida que las carpetas técnicas en español hayan sido renombradas a
+inglés y que las referencias internas queden sincronizadas.
+
+Comandos mínimos para el cierre local:
+
+```powershell
+python -m pytest tests\test_mant1_r5e_nombres_carpetas.py -q
+python -m pytest tests\test_mant1_r5d_politica_extensiones.py tests\test_mant1_r5e_nombres_carpetas.py -q
+git diff --check
+python -m pytest -q
+python -m unittest discover -s tests -q
+```
+
+La revisión no cambia `VERSION`, `APP_VERSION`, fórmulas previsionales, valores
+JSON, rutas públicas, ids, clases, selectores ni `_entregas/`.
+
 ## Validación MANT.1 R5D — política, plantillas y uniformidad por extensión
 
 MANT.1 R5D valida que exista una política formal por extensión, que las

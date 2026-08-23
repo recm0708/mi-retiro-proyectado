@@ -25,7 +25,7 @@ class TestGov13Documentacion(unittest.TestCase):
             "docs/INDICE.md",
             "docs/ROADMAP.md",
             "docs/REGISTRO_CAMBIOS_HISTORICO.md",
-            "docs/historico/README.md",
+            "docs/archive/README.md",
         ]
         for relativo in requeridos:
             with self.subTest(relativo=relativo):
@@ -40,7 +40,7 @@ class TestGov13Documentacion(unittest.TestCase):
         ]
         for nombre in nombres:
             with self.subTest(nombre=nombre):
-                historico = ROOT / "docs" / "historico" / "ux" / nombre
+                historico = ROOT / "docs" / "archive" / "ux" / nombre
                 compat = ROOT / "docs" / nombre
                 self.assertTrue(historico.is_file())
                 self.assertTrue(compat.is_file())
@@ -63,7 +63,7 @@ class TestGov13Documentacion(unittest.TestCase):
     def test_indice_separa_documentacion_historica(self):
         texto = (ROOT / "docs" / "INDICE.md").read_text(encoding="utf-8")
         self.assertIn("## 12. Historial de evolución", texto)
-        self.assertIn("historico/ux/", texto)
+        self.assertIn("archive/ux/", texto)
         self.assertIn("## 13. Releases", texto)
 
     def test_editorconfig_exige_limpieza_markdown(self):
@@ -80,7 +80,7 @@ class TestGov13Documentacion(unittest.TestCase):
             ROOT / "docs" / "INDICE.md",
             ROOT / "docs" / "ROADMAP.md",
             ROOT / "docs" / "REGISTRO_CAMBIOS_HISTORICO.md",
-            ROOT / "docs" / "historico" / "README.md",
+            ROOT / "docs" / "archive" / "README.md",
         ]
         errores = []
         for archivo in archivos:

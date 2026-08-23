@@ -1,7 +1,7 @@
 """Configuración general y de identidad de la aplicación.
 
 Los parámetros jurídicos y actuariales no se almacenan aquí. Se mantienen
-versionados en ``normativa/`` para conservar la separación entre identidad,
+versionados en ``regulations/`` para conservar la separación entre identidad,
 configuración técnica y reglas previsionales.
 """
 

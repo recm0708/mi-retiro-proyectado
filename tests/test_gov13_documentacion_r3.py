@@ -43,8 +43,8 @@ class TestGov13DocumentacionR3(unittest.TestCase):
         for nombre in R3_DOCS:
             snapshot = (
                 DOCS
-                / "historico"
-                / "normativa_privacidad"
+                / "archive"
+                / "regulatory-privacy"
                 / nombre.replace(".md", "_PRE_GOV1_3_R3.md")
             )
             with self.subTest(nombre=nombre):
@@ -82,7 +82,7 @@ class TestGov13DocumentacionR3(unittest.TestCase):
 
     def test_normativa_refleja_metadata_json_base(self):
         params = json.loads(
-            (ROOT / "normativa/parametros_generales.json").read_text(encoding="utf-8")
+            (ROOT / "regulations/parametros_generales.json").read_text(encoding="utf-8")
         )
         texto = (DOCS / "NORMATIVA.md").read_text(encoding="utf-8")
         self.assertIn(params["gaceta_oficial"], texto)
@@ -141,7 +141,7 @@ class TestGov13DocumentacionR3(unittest.TestCase):
 
     def test_indice_registra_historico_r3(self):
         texto = (DOCS / "INDICE.md").read_text(encoding="utf-8")
-        self.assertIn("historico/normativa_privacidad/", texto)
+        self.assertIn("archive/regulatory-privacy/", texto)
         self.assertIn("GOV.1.3 R3", texto)
 
     def test_validacion_registra_baseline_y_objetivo_r3(self):

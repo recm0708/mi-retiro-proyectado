@@ -59,7 +59,7 @@ El objeto de trazabilidad actual **no incorpora por sí mismo**:
 
 - versión de aplicación;
 - SHA del commit;
-- hash criptográfico de `normativa/*.json`;
+- hash criptográfico de `regulations/*.json`;
 - identificador persistente del cálculo.
 
 Por tanto, la reproducibilidad completa exige relacionar la respuesta con el estado del repositorio/ejecución.

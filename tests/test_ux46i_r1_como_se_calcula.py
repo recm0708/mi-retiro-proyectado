@@ -12,7 +12,7 @@ from app.core.normativa import (
     cargar_parametros_sucgs,
 )
 from app.main import app
-from app.servicios.como_se_calcula import construir_guia_calculo
+from app.services.como_se_calcula import construir_guia_calculo
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -26,7 +26,7 @@ class TestUX46iR1ComoSeCalcula(unittest.TestCase):
         cls.cliente = TestClient(app)
         cls.respuesta = cls.cliente.get("/como-se-calcula")
         cls.html = cls.respuesta.text
-        cls.servicio = (ROOT / "app/servicios/como_se_calcula.py").read_text(
+        cls.servicio = (ROOT / "app/services/como_se_calcula.py").read_text(
             encoding="utf-8"
         )
         cls.plantilla = (ROOT / "app/templates/como_se_calcula.html").read_text(
@@ -76,7 +76,7 @@ class TestUX46iR1ComoSeCalcula(unittest.TestCase):
         self.assertEqual(24, len(guia["sebd"]["factores_anticipacion"]))
 
     def test_04_capa_explicativa_no_importa_ni_ejecuta_motores(self):
-        self.assertNotIn("app.motores", self.servicio)
+        self.assertNotIn("app.engines", self.servicio)
         self.assertNotIn("calcular_sebd", self.servicio)
         self.assertNotIn("calcular_mixto", self.servicio)
         self.assertNotIn("calcular_sucgs", self.servicio)
@@ -219,7 +219,7 @@ class TestUX46iR1ComoSeCalcula(unittest.TestCase):
     def test_17_guia_no_expone_lenguaje_de_implementacion_en_alerta_principal(self):
         self.assertNotIn("motores Python", self.html)
         self.assertNotIn("sessionStorage", self.html)
-        self.assertNotIn("app/servicios", self.html)
+        self.assertNotIn("app/services", self.html)
         self.assertIn("Ver cálculo completo", self.html)
 
     def test_18_importes_visibles_usan_separador_de_miles_y_dos_decimales(self):

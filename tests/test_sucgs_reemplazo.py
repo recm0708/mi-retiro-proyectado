@@ -3,9 +3,9 @@
 import unittest
 from datetime import date
 
-from app.modelos.pension import DatosCalculoSUCGS
-from app.modelos.simulacion import RegistroHistorialSalarial
-from app.motores.sucgs import calcular_sucgs
+from app.models.pension import DatosCalculoSUCGS
+from app.models.simulacion import RegistroHistorialSalarial
+from app.engines.sucgs import calcular_sucgs
 
 
 def _registro(anio: int, cuotas: int, salario_mensual: float = 1000.0):

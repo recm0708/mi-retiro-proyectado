@@ -88,7 +88,7 @@ class TestEstabilizacionVisual(unittest.TestCase):
             for path in TEMPLATES.rglob("*.html")
         )
         prohibidos = [
-            "normativa/*.json",
+            "regulations/*.json",
             "metadatos versionados",
             "Documentación técnica del proyecto",
             "Paso 6F.",

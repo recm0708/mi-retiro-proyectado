@@ -78,7 +78,7 @@ Poder reconstruir decisiones técnicas y fallos sin crear una segunda base de da
 | Estado de consentimiento | Media | `localStorage` + `sessionStorage` | Integridad |
 | Preferencias visuales | Baja | `localStorage` | Disponibilidad/UX |
 | Logs Developer Diagnostics | Media | `logs/diagnostico/` solo si se activa | Confidencialidad |
-| Parámetros `normativa/*.json` | Alta para exactitud | Repositorio / runtime | Integridad |
+| Parámetros `regulations/*.json` | Alta para exactitud | Repositorio / runtime | Integridad |
 | Código de motores y servicios | Alta para exactitud | Repositorio / runtime | Integridad |
 | Dependencias Python/Bootstrap | Alta para cadena de suministro | Entorno / CDN | Integridad |
 | Historial Git, tags y CI | Alta para auditoría | GitHub/local | Integridad y trazabilidad |

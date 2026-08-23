@@ -3,13 +3,13 @@
 import unittest
 from datetime import date
 
-from app.modelos.comparacion import DatosComparacionEscenarios
-from app.modelos.pension import (
+from app.models.comparacion import DatosComparacionEscenarios
+from app.models.pension import (
     DatosResultadoMixto,
     DatosResultadoSEBD,
     DatosResultadoSUCGS,
 )
-from app.modelos.simulacion import (
+from app.models.simulacion import (
     DatosHistorialSalarial,
     EscenarioLineaTiempo,
     EscenarioRetiro,
@@ -18,7 +18,7 @@ from app.modelos.simulacion import (
     ResumenLineaTiempo,
     ResumenRetiro,
 )
-from app.servicios.comparador import comparar_escenarios
+from app.services.comparador import comparar_escenarios
 
 
 class TestComparadorEscenarios(unittest.TestCase):

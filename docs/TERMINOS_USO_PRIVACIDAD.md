@@ -150,6 +150,6 @@ Estos términos requieren revisión jurídica formal en REV.1 antes de la primer
 
 El documento acumulativo previo, incluidas revisiones UX, se conserva en:
 
-`docs/historico/normativa_privacidad/TERMINOS_USO_PRIVACIDAD_PRE_GOV1_3_R3.md`
+`docs/archive/regulatory-privacy/TERMINOS_USO_PRIVACIDAD_PRE_GOV1_3_R3.md`
 
 La reorganización R3 no modifica por sí sola la versión material `2026-08-16.1`.

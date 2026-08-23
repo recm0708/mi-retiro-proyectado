@@ -50,6 +50,7 @@ Este archivo es el punto de entrada para la documentación técnica, funcional, 
 ## 3. Arquitectura
 
 - [`ARQUITECTURA.md`](ARQUITECTURA.md) — capas, módulos, endpoints y flujo.
+- [`AUDITORIA_CARPETAS_R5E.md`](AUDITORIA_CARPETAS_R5E.md) — auditoría de nombres de carpetas técnicas y rutas sincronizadas.
 - [`MODELO_DE_DATOS.md`](MODELO_DE_DATOS.md) — modelos y contratos.
 - [`GESTION_DATOS_SIMULACION.md`](GESTION_DATOS_SIMULACION.md) — estado local, limpieza, restauración e invalidación.
 - [`OBSERVABILIDAD_LOGS.md`](OBSERVABILIDAD_LOGS.md) — Developer Diagnostics, esquema JSONL, correlación, redacción, retención y exportación.
@@ -70,7 +71,7 @@ Este archivo es el punto de entrada para la documentación técnica, funcional, 
 
 - [`NORMATIVA.md`](NORMATIVA.md) — interpretación y aplicación normativa.
 - [`FUENTES_NORMATIVAS.md`](FUENTES_NORMATIVAS.md) — catálogo de fuentes oficiales.
-- `../normativa/*.json` — parámetros legales versionados.
+- `../regulations/*.json` — parámetros legales versionados.
 
 ## 7. Datos y trazabilidad
 
@@ -109,7 +110,7 @@ La publicación del repositorio no elimina la revisión jurídica externa ni cua
 - [`../tests/test_ver2_ledger_estructurado.py`](../tests/test_ver2_ledger_estructurado.py) — regresiones del ledger JSON y sus invariantes.
 - [`../tests/test_ver2_version_revision_aware.py`](../tests/test_ver2_version_revision_aware.py) — regresiones del esquema revision-aware.
 - [`../tests/test_ver2_documentacion_vigente.py`](../tests/test_ver2_documentacion_vigente.py) — coherencia de superficies vigentes durante VER.2.
-- [`../tests/casos_validacion/README.md`](../tests/casos_validacion/README.md) — reglas de casos sintéticos/anonimizados.
+- [`../tests/validation_cases/README.md`](../tests/validation_cases/README.md) — reglas de casos sintéticos/anonimizados.
 - `../.github/workflows/ci.yml` — CI funcional.
 - `../.github/workflows/auditoria-gobernanza.yml` — auditoría automática de gobierno.
 - `../.github/workflows/verificar-tags.yml` — verificación criptográfica de tags.
@@ -129,13 +130,13 @@ La publicación del repositorio no elimina la revisión jurídica externa ni cua
 ## 12. Historial de evolución
 
 - [`REGISTRO_CAMBIOS_HISTORICO.md`](REGISTRO_CAMBIOS_HISTORICO.md) — mapa cronológico.
-- [`historico/README.md`](historico/README.md) — reglas del archivo histórico.
-- [`historico/ux/`](historico/ux/) — bitácoras completas de UX.4.6a–d.
-- [`historico/tecnico/`](historico/tecnico/) — snapshots técnicos previos.
-- [`historico/normativa_privacidad/`](historico/normativa_privacidad/) — snapshots normativos/privacidad previos.
-- [`historico/gobierno/`](historico/gobierno/) — snapshots de decisiones/gobierno.
-- [`historico/CHANGELOG_PRE_GOV1_3.md`](historico/CHANGELOG_PRE_GOV1_3.md) — snapshot del changelog acumulativo anterior a GOV.1.3.
-- [`historico/ROADMAP_PRE_GOV1_3.md`](historico/ROADMAP_PRE_GOV1_3.md) — snapshot del roadmap anterior a GOV.1.3.
+- [`archive/README.md`](archive/README.md) — reglas del archivo histórico.
+- [`archive/ux/`](archive/ux/) — bitácoras completas de UX.4.6a–d.
+- [`archive/technical/`](archive/technical/) — snapshots técnicos previos.
+- [`archive/regulatory-privacy/`](archive/regulatory-privacy/) — snapshots normativos/privacidad previos.
+- [`archive/governance/`](archive/governance/) — snapshots de decisiones/gobierno.
+- [`archive/CHANGELOG_PRE_GOV1_3.md`](archive/CHANGELOG_PRE_GOV1_3.md) — snapshot del changelog acumulativo anterior a GOV.1.3.
+- [`archive/ROADMAP_PRE_GOV1_3.md`](archive/ROADMAP_PRE_GOV1_3.md) — snapshot del roadmap anterior a GOV.1.3.
 
 Los archivos históricos documentan lo que se pensó, probó o decidió en un momento determinado. No deben interpretarse como contrato vigente si contradicen un documento actual.
 
@@ -175,4 +176,4 @@ La metadata de versión de revisión de un documento de dominio puede conservar 
 - La familia `0.0.N-beta` permanece como línea legacy histórica hasta `v0.0.26-beta`.
 - **Versión candidata de aplicación:** `0.0.26-beta` — referencia legacy preservada para las regresiones históricas de PLAN.1.
 - El contrato histórico mantiene versiones oficiales de cuatro componentes para la línea estable futura.
-- GOV.1.3 R3 preservó el snapshot historico/normativa_privacidad/ como evidencia histórica normativa y de privacidad.
+- GOV.1.3 R3 preservó el snapshot archive/regulatory-privacy/ como evidencia histórica normativa y de privacidad.

@@ -7,7 +7,7 @@ from pathlib import Path
 from fastapi.testclient import TestClient
 
 from app.main import app
-from app.servicios.referencia_mi_retiro_seguro import (
+from app.services.referencia_mi_retiro_seguro import (
     extraer_referencia_desde_texto,
 )
 
@@ -150,7 +150,7 @@ class TestUX44ReferenciaPDF(unittest.TestCase):
             ROOT / "app/static/js/referencia_mi_retiro_seguro.js",
             ROOT / "app/templates/partials/resultados.html",
             ROOT / "app/templates/partials/importacion_datos_oficiales.html",
-            ROOT / "app/servicios/referencia_mi_retiro_seguro.py",
+            ROOT / "app/services/referencia_mi_retiro_seguro.py",
         ]
         contenido = "\n".join(ruta.read_text(encoding="utf-8") for ruta in rutas)
 

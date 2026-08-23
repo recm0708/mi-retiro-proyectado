@@ -36,8 +36,8 @@ dist/
 data/personales/
 data/importaciones/
 data/documentos_personales/
-tests/casos_validacion/originales/
-tests/casos_validacion/**/*.pdf
+tests/validation_cases/originals/
+tests/validation_cases/**/*.pdf
 uploads/
 
 # Salidas locales, temporales y logs

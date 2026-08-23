@@ -5,7 +5,7 @@
 
 La bitácora completa se conserva en:
 
-[`historico/ux/UX_4_6D_PASO3_HISTORIAL.md`](historico/ux/UX_4_6D_PASO3_HISTORIAL.md)
+[`archive/ux/UX_4_6D_PASO3_HISTORIAL.md`](archive/ux/UX_4_6D_PASO3_HISTORIAL.md)
 
 Este archivo permanece únicamente como ruta de compatibilidad para enlaces históricos. No describe por sí solo el estado vigente de la aplicación.
 

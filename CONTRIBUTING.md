@@ -32,7 +32,7 @@ Toda participación en issues, Pull Requests o revisiones debe respetar [`CODE_O
 
 - Las fórmulas previsionales principales viven en Python.
 - JavaScript no debe duplicar motores legales.
-- Los parámetros normativos modificables deben residir en `normativa/` o estar aislados y documentados.
+- Los parámetros normativos modificables deben residir en `regulations/` o estar aislados y documentados.
 - Datos acreditados y proyectados permanecen diferenciados.
 - Pagos únicos y pensiones mensuales permanecen separados.
 - Un dato oficial desconocido no se inventa.
@@ -132,7 +132,7 @@ Mapa general:
 - `docs/NORMATIVA.md` y `docs/FUENTES_NORMATIVAS.md` — reglas y fuentes;
 - `docs/DECISIONES.md` — ADR;
 - `docs/VALIDACION.md` — estrategia/evidencia de pruebas;
-- `docs/historico/` — evidencia histórica que no describe el estado vigente.
+- `docs/archive/` — evidencia histórica que no describe el estado vigente.
 - `CODE_OF_CONDUCT.md` — normas de participación;
 - `SUPPORT.md` — canales y límites de soporte.
 - `docs/ESTANDAR_CODIGO_Y_COMENTARIOS.md` — patrón de comentarios, docstrings y documentación de runtime.
@@ -156,7 +156,7 @@ Todo cambio de fórmula, parámetro legal, tabla actuarial, fecha de transición
 
 1. fuente oficial verificable;
 2. fecha o versión de la fuente;
-3. actualización de `normativa/*.json`;
+3. actualización de `regulations/*.json`;
 4. actualización de `docs/NORMATIVA.md`;
 5. actualización de `docs/FUENTES_NORMATIVAS.md`;
 6. pruebas;
@@ -180,7 +180,7 @@ No incorporar:
 - códigos únicos o QR personales;
 - cuerpos de solicitudes o logs con datos previsionales sensibles.
 
-Los originales de validación permanecen fuera de Git. Consultar [`tests/casos_validacion/README.md`](tests/casos_validacion/README.md).
+Los originales de validación permanecen fuera de Git. Consultar [`tests/validation_cases/README.md`](tests/validation_cases/README.md).
 
 ## 10. Importaciones documentales
 

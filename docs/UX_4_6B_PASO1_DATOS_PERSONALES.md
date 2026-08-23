@@ -5,7 +5,7 @@
 
 La bitácora completa se conserva en:
 
-[`historico/ux/UX_4_6B_PASO1_DATOS_PERSONALES.md`](historico/ux/UX_4_6B_PASO1_DATOS_PERSONALES.md)
+[`archive/ux/UX_4_6B_PASO1_DATOS_PERSONALES.md`](archive/ux/UX_4_6B_PASO1_DATOS_PERSONALES.md)
 
 Este archivo permanece únicamente como ruta de compatibilidad para enlaces históricos. No describe por sí solo el estado vigente de la aplicación.
 

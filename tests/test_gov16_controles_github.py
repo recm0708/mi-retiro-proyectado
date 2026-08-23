@@ -25,7 +25,7 @@ class TestGov16ControlesGithub(unittest.TestCase):
             t=(GH/'workflows'/n).read_text(encoding='utf-8'); self.assertIn('permissions:',t); self.assertIn('contents: read',t); self.assertNotIn('contents: write',t)
     def test_codeowners_cubre_areas_criticas(self):
         t=(GH/'CODEOWNERS').read_text(encoding='utf-8')
-        for e in ('* @recm0708','/app/core/ @recm0708','/app/motores/ @recm0708','/normativa/ @recm0708','/docs/ @recm0708','/.github/ @recm0708'): self.assertIn(e,t)
+        for e in ('* @recm0708','/app/core/ @recm0708','/app/engines/ @recm0708','/regulations/ @recm0708','/docs/ @recm0708','/.github/ @recm0708'): self.assertIn(e,t)
     def test_documento_auditoria_registra_controles(self):
         t=(DOCS/'AUDITORIA_GITHUB.md').read_text(encoding='utf-8')
         for e in ('Pull Request obligatorio','Python 3.13','Python 3.14','Auditoría de gobernanza','force push','Dependency graph','Dependabot alerts','PR #17','24/24 tags','mi-retiro-proyectado'): self.assertIn(e,t)

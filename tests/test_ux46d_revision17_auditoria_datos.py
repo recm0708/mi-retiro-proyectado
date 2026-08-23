@@ -3,7 +3,7 @@
 import unittest
 from pathlib import Path
 
-from app.servicios.referencia_mi_retiro_seguro import extraer_referencia_desde_texto
+from app.services.referencia_mi_retiro_seguro import extraer_referencia_desde_texto
 
 
 ROOT = Path(__file__).resolve().parents[1]

@@ -4,8 +4,8 @@ from datetime import date
 from pathlib import Path
 import unittest
 
-from app.modelos.simulacion import DatosRetiro
-from app.servicios.retiro import analizar_retiro
+from app.models.simulacion import DatosRetiro
+from app.services.retiro import analizar_retiro
 
 ROOT = Path(__file__).resolve().parents[1]
 

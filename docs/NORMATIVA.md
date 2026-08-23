@@ -41,10 +41,10 @@ Fuentes oficiales:
 
 | Archivo | Alcance |
 |---|---|
-| `normativa/parametros_generales.json` | Edades de referencia y metadatos generales. |
-| `normativa/sebd.json` | SEBD, anticipación, mínimos/máximos e indemnización. |
-| `normativa/mixto.json` | BD, CAP, transición y fuentes del Mixto. |
-| `normativa/sucgs.json` | SUCGS, factores y garantías modeladas. |
+| `regulations/parametros_generales.json` | Edades de referencia y metadatos generales. |
+| `regulations/sebd.json` | SEBD, anticipación, mínimos/máximos e indemnización. |
+| `regulations/mixto.json` | BD, CAP, transición y fuentes del Mixto. |
+| `regulations/sucgs.json` | SUCGS, factores y garantías modeladas. |
 
 Los JSON son parámetros de implementación, no sustitutos de la fuente oficial.
 
@@ -90,7 +90,7 @@ El CAP requiere saldo y parámetros individualizados cuando no puedan reconstrui
 
 ### 6.1. Transición
 
-`normativa/mixto.json` conserva:
+`regulations/mixto.json` conserva:
 
 - fin del cálculo operativo Mixto: 29/02/2032;
 - inicio operativo SUCGS: 01/03/2032;
@@ -124,7 +124,7 @@ El modelo separa:
 - Pensión Garantizada Solidaria;
 - garantía de reemplazo modelada.
 
-Los factores actuariales se cargan desde `normativa/sucgs.json`. La propia metadata normativa indica que requieren actualización periódica.
+Los factores actuariales se cargan desde `regulations/sucgs.json`. La propia metadata normativa indica que requieren actualización periódica.
 
 Los valores de referencia indexables no se presentan como vigentes para siempre.
 
@@ -169,7 +169,7 @@ Ante un cambio normativo o reglamentario:
 
 1. verificar fuente oficial y vigencia;
 2. conservar trazabilidad de la versión anterior cuando sea necesaria;
-3. actualizar `normativa/*.json`;
+3. actualizar `regulations/*.json`;
 4. actualizar motores/servicios afectados;
 5. actualizar pruebas;
 6. actualizar `FUENTES_NORMATIVAS.md`;
@@ -186,4 +186,4 @@ La revisión jurídica formal se mantiene planificada para GOV.1.5 antes de una 
 
 La versión acumulativa previa se conserva en:
 
-`docs/historico/normativa_privacidad/NORMATIVA_PRE_GOV1_3_R3.md`
+`docs/archive/regulatory-privacy/NORMATIVA_PRE_GOV1_3_R3.md`

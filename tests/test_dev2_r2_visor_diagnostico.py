@@ -13,7 +13,7 @@ from fastapi.testclient import TestClient
 
 from app.core.observabilidad import registrar_evento, ruta_log_actual
 from app.main import app
-from app.servicios.centro_desarrollo import (
+from app.services.centro_desarrollo import (
     construir_estado_centro_desarrollo,
     exportar_zip_diagnostico_sanitizado,
 )
