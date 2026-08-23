@@ -40,6 +40,8 @@
   }
 
   function iniciar({
+    // El token conserva el estado original de botón/input para restaurarlo
+    // exactamente cuando termina la petición, incluso si hubo error.
     boton,
     input = null,
     estado = null,
@@ -74,6 +76,8 @@
   }
 
   function finalizar(token) {
+    // Finalizar limpia la marca de procesamiento y devuelve accesibilidad visual
+    // al mismo estado previo al análisis.
     if (!token?.boton) return;
 
     const {

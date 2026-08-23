@@ -57,6 +57,8 @@ function anioFichaDigital(resumen) {
 
 
 function evaluarVigenciaFichaDigital(resumen) {
+  // La vigencia compara el período más reciente del documento contra la fecha
+  // de referencia extraída; si falta una pieza, se exige decisión explícita.
   const anio = Number(resumen?.anio_mas_reciente);
   const mes = Number(resumen?.mes_mas_reciente);
   const referencia = descomponerFechaReferenciaFicha(resumen);
@@ -263,6 +265,8 @@ function naturalezaPrestacionImportada(texto) {
 
 
 function invalidarResultadosPorImportacion(simulacion) {
+  // Confirmar datos importados invalida resultados descendientes porque cambia
+  // la procedencia o el contenido base de los pasos iniciales.
   simulacion.resumen_cuotas = null;
   simulacion.resumen_historial = null;
   simulacion.resumen_detalle_anio_actual = null;
@@ -299,6 +303,8 @@ function actualizarApellidoCasada() {
 }
 
 function bloquearFormularioPersonal(bloqueado, simulacion = obtenerSimulacion()) {
+  // Los campos detectados se bloquean hasta que el usuario habilita edición;
+  // los campos manuales conservan su comportamiento normal.
   let origenes = simulacion.origen_campos_persona || {};
   if (bloqueado && Object.keys(origenes).length === 0 && typeof actualizarProcedenciaDatosPersonales === "function") {
     origenes = actualizarProcedenciaDatosPersonales(simulacion) || {};
@@ -386,6 +392,8 @@ function valorFueDetectado(valor) {
 
 
 function marcarEstadoDeteccion(idControl, valor, editado = false, origenExplicito = null) {
+  // La etiqueta de procedencia distingue dato detectado, editado o no hallado
+  // sin confiar ciegamente en que el PDF contenga todos los campos.
   const estado = document.getElementById(`estado-${idControl}`);
   const control = document.getElementById(idControl);
   if (!estado) return;
@@ -732,6 +740,8 @@ function renderizarPreviewComprobante(
 }
 
 async function analizarComprobanteImportacion() {
+  // El análisis produce un borrador revisable; nada se confirma en la simulación
+  // hasta que el usuario acepte explícitamente la vista previa.
   ocultarEstadoImportacion("estado-comprobante-importacion");
   const input = document.getElementById("import-comprobante-pdf");
   const archivo = input.files?.[0];
@@ -1164,6 +1174,8 @@ function renderizarPreviewFichaDigital(resumen, camposEditados = []) {
 
 
 async function analizarFichaDigitalImportacion() {
+  // La ficha digital sigue el mismo patrón de borrador: procesar, revisar,
+  // resolver vigencia y confirmar antes de escribir en sessionStorage.
   ocultarEstadoImportacion("estado-ficha-digital-importacion");
   const input = document.getElementById("import-ficha-digital-pdf");
   const archivo = input.files?.[0];

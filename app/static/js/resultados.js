@@ -423,6 +423,8 @@ function prepararConfiguracionSUCGS(simulacion) {
  * @returns {Promise<Object|null>} Resultado acreditado o null si no pudo cerrarse.
  */
 async function solicitarResultadoSoloAcreditado(endpoint, datos) {
+  // La comparación acreditado/proyectado usa el mismo endpoint con una bandera
+  // explícita para que la diferencia provenga del backend y no de ajustes locales.
   const respuesta = await fetch(
     endpoint,
     {
@@ -457,6 +459,8 @@ async function solicitarResultadoSoloAcreditado(endpoint, datos) {
  * @returns {Object} Solicitud lista para FastAPI.
  */
 function construirSolicitudResultadoSEBD() {
+  // La solicitud SEBD recoge las decisiones ya confirmadas en Pasos 1–5; si falta
+  // una dependencia, se detiene antes de invocar el motor.
   const simulacion = obtenerSimulacion();
   const persona = simulacion.persona || {};
   const seleccionado = simulacion.escenario_retiro_seleccionado;
@@ -658,6 +662,8 @@ function leerMontoOpcionalResultados(id) {
  * @returns {Object} Solicitud lista para FastAPI.
  */
 function construirSolicitudResultadoMixto() {
+  // El Mixto combina pensión de beneficio definido con parámetros CAP opcionales;
+  // los campos vacíos viajan como null salvo reglas que exigen cero explícito.
   const simulacion = obtenerSimulacion();
   const persona = simulacion.persona || {};
   const seleccionado = simulacion.escenario_retiro_seleccionado;
@@ -872,6 +878,8 @@ function leerEstabilidadSUCGS() {
  * @returns {Object} Solicitud lista para FastAPI.
  */
 function construirSolicitudResultadoSUCGS() {
+  // SUCGS requiere separar saldo, PGS y mínimo universal para que el backend
+  // determine garantía, ahorro personal y decisiones pendientes.
   const simulacion = obtenerSimulacion();
   const persona = simulacion.persona || {};
   const seleccionado = simulacion.escenario_retiro_seleccionado;
@@ -3032,6 +3040,8 @@ function mostrarAdvertenciasResultadoSUCGS(resultado) {
  * Invalida el cálculo al cambiar el escenario salarial.
  */
 function invalidarResultadoSEBD() {
+  // Cambiar el escenario salarial invalida únicamente salidas dependientes para
+  // conservar los datos de entrada y obligar a recalcular el resultado mostrado.
   const simulacion = obtenerSimulacion();
 
   simulacion.escenario_salarial_seleccionado = (

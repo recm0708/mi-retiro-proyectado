@@ -52,6 +52,8 @@ function estadoSimulacionParaGestion() {
 
 
 function guardarEstadoGestion(simulacion) {
+  // El módulo usa la función global cuando existe para conservar los efectos
+  // laterales normales; el acceso directo es solo respaldo defensivo.
   if (typeof guardarSimulacion === "function") {
     guardarSimulacion(simulacion);
     return;
@@ -149,6 +151,8 @@ function pasoTieneDatos(numeroPaso, simulacion) {
 
 
 function limpiarResultadosPaso6(simulacion) {
+  // Paso 6 es siempre descendiente: cualquier cambio anterior debe borrar
+  // resultados, trazabilidad y comparaciones calculadas con datos previos.
   simulacion.escenario_salarial_seleccionado = null;
   simulacion.resultado_sebd_normal = null;
   simulacion.resultado_sebd_acreditado = null;
@@ -219,6 +223,8 @@ function limpiarDesdePaso2(simulacion) {
  * @param {Object} simulacion Estado mutable del asistente.
  */
 function limpiarPasoEnEstado(numeroPaso, simulacion) {
+  // Cada limpieza parte del estado actual y solo reemplaza el tramo afectado,
+  // evitando borrar decisiones previas que aún sirven como contexto válido.
   if (numeroPaso === 1) {
     const vacia = typeof crearSimulacionVacia === "function"
       ? crearSimulacionVacia()
@@ -352,6 +358,8 @@ function solicitarReiniciarSimulacion() {
  * sesión. No existe lectura, restauración ni migración desde esas claves.
  */
 function borrarAlmacenamientoPropioAplicacion() {
+  // El borrado integral se limita a claves propias conocidas para no afectar
+  // datos de otros sitios, extensiones o aplicaciones en el mismo navegador.
   [
     CLAVE_GESTION_SIMULACION,
     CLAVE_GESTION_PRIVACIDAD_SESION,

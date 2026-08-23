@@ -5,7 +5,7 @@
 **Versión base histórica:** `0.0.23-beta`
 **Revisión documental:** GOV.1.4 — 2026-08-17
 **Última actualización técnica:** DEV.2 R4 — cierre final documental — 2026-08-23
-**Última actualización de mantenimiento:** MANT.1 R5B — comentarios internos en CSS y plantilla Cómo se calcula — 2026-08-23
+**Última actualización de mantenimiento:** MANT.1 R5C — comentarios internos en JavaScript complejo — 2026-08-23
 **Clasificación:** Técnica / Pública
 
 Mi Retiro Proyectado es una aplicación web local basada en FastAPI, Jinja2 y JavaScript del navegador. La arquitectura separa presentación, contratos de datos, servicios de integración, motores previsionales, parámetros normativos y observabilidad de desarrollo.
@@ -15,8 +15,10 @@ la infraestructura local de scripts/hooks que protege commits reproducibles ante
 de los checks remotos y MANT.1 R3 documenta los YAML de GitHub sin cambiar CI,
 Issue Forms ni Dependabot. MANT.1 R4 limpia encabezados operativos para separar
 comentarios permanentes de trazabilidad histórica. MANT.1 R5A inicia la revisión
-de comentarios internos en servicios Python de aplicación sin alterar lógica ni
-contratos de datos. Este mantenimiento no introduce nuevas capas de producto.
+de comentarios internos en servicios Python de aplicación, MANT.1 R5B cubre CSS
+y plantilla de la guía pública, y MANT.1 R5C documenta JavaScript complejo sin
+alterar lógica, storage, selectores ni contratos de datos. Este mantenimiento no
+introduce nuevas capas de producto.
 
 [Índice](INDICE.md) · [Modelo de datos](MODELO_DE_DATOS.md) · [Motor](MOTOR_DE_CALCULO.md) · [Normativa](NORMATIVA.md) · [Observabilidad](OBSERVABILIDAD_LOGS.md)
 
@@ -92,21 +94,21 @@ contratos de datos. Este mantenimiento no introduce nuevas capas de producto.
 ### Presentación JavaScript crítica
 
 - `app/static/js/accesibilidad.js`
-- `app/static/js/comparador.js`
+- `app/static/js/comparador.js` — matriz retiro × salario, advertencias y diferencias sin recalcular pensiones.
 - `app/static/js/detalle_anio_actual.js`
-- `app/static/js/gestion_datos.js`
+- `app/static/js/gestion_datos.js` — limpieza controlada de pasos, invalidación descendente y borrado limitado a claves propias.
 - `app/static/js/historial_salarios.js`
-- `app/static/js/importacion_datos_oficiales.js`
+- `app/static/js/importacion_datos_oficiales.js` — borradores revisables de Mi Retiro Seguro/Ficha Digital, vigencia y confirmación explícita.
 - `app/static/js/linea_tiempo.js`
 - `app/static/js/moneda.js`
 - `app/static/js/navegacion_wizard.js`
-- `app/static/js/privacidad.js`
-- `app/static/js/procesamiento_adjuntos.js` — estado global accesible y exclusión de dobles ejecuciones durante análisis de archivos
+- `app/static/js/privacidad.js` — consentimiento versionado, sesión autorizada y borrado defensivo de datos propios.
+- `app/static/js/procesamiento_adjuntos.js` — estado global accesible y exclusión de dobles ejecuciones durante análisis de archivos.
 - `app/static/js/referencia_mi_retiro_seguro.js`
-- `app/static/js/resultados.js`
-- `app/static/js/resultados_orquestacion.js` — decisiones de Paso 6, enlace contextual e impresión sin duplicar fórmulas
+- `app/static/js/resultados.js` — contratos de cálculo, comparación acreditado/proyectado, trazabilidad y salida por sistema.
+- `app/static/js/resultados_orquestacion.js` — decisiones de Paso 6, transición Mixto/SUCGS, enlace contextual e impresión sin duplicar fórmulas.
 - `app/static/js/retiro.js`
-- `app/static/js/simulacion.js`
+- `app/static/js/simulacion.js` — estado temporal, navegación de pasos, validación progresiva y dependencias entre módulos.
 - `app/static/js/tema.js`
 
 ## 3. Capas
