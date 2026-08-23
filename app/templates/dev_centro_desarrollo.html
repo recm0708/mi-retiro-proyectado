@@ -9,7 +9,10 @@ Centro de desarrollo · {{ app_name }}
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-lg-10 col-xl-9">
-        <span class="badge text-bg-dark mb-3">{{ estado_dev.bloque }}</span>
+        <div class="d-flex flex-wrap gap-2 mb-3">
+          <span class="badge text-bg-dark">{{ estado_dev.bloque }}</span>
+          <span class="badge text-bg-primary">{{ estado_dev.revision_actual }}</span>
+        </div>
         <h1 class="display-6 fw-bold mb-3">{{ estado_dev.titulo }}</h1>
         <p class="lead mb-0">{{ estado_dev.descripcion }}</p>
       </div>
@@ -67,6 +70,67 @@ Centro de desarrollo · {{ app_name }}
   </div>
 </section>
 
+<section class="py-4" aria-labelledby="resumen-eventos-dev-title">
+  <div class="container">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h2 id="resumen-eventos-dev-title" class="h5 mb-3">Resumen del visor diagnóstico</h2>
+        <div class="row g-3">
+          <div class="col-sm-6 col-lg-3"><div class="border rounded p-3 h-100"><p class="text-muted small mb-1">Eventos visibles</p><p class="fs-4 fw-bold mb-0">{{ estado_dev.total_eventos_visibles }}</p></div></div>
+          <div class="col-sm-6 col-lg-3"><div class="border rounded p-3 h-100"><p class="text-muted small mb-1">INFO</p><p class="fs-4 fw-bold mb-0">{{ estado_dev.resumen_eventos.INFO }}</p></div></div>
+          <div class="col-sm-6 col-lg-3"><div class="border rounded p-3 h-100"><p class="text-muted small mb-1">WARNING</p><p class="fs-4 fw-bold mb-0">{{ estado_dev.resumen_eventos.WARNING }}</p></div></div>
+          <div class="col-sm-6 col-lg-3"><div class="border rounded p-3 h-100"><p class="text-muted small mb-1">ERROR</p><p class="fs-4 fw-bold mb-0">{{ estado_dev.resumen_eventos.ERROR }}</p></div></div>
+        </div>
+        {% if estado_dev.total_eventos_invalidos %}
+          <p class="small text-warning-emphasis mt-3 mb-0">{{ estado_dev.total_eventos_invalidos }} línea(s) JSONL no pudieron normalizarse para el visor.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-4" aria-labelledby="eventos-dev-title">
+  <div class="container">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h2 id="eventos-dev-title" class="h5 mb-3">Eventos recientes</h2>
+        {% if estado_dev.eventos_recientes %}
+          <div class="table-responsive">
+            <table class="table align-middle">
+              <thead>
+                <tr>
+                  <th scope="col">Fecha UTC</th>
+                  <th scope="col">Nivel</th>
+                  <th scope="col">Evento</th>
+                  <th scope="col">Componente</th>
+                  <th scope="col">Resultado</th>
+                  <th scope="col">Operación</th>
+                  <th scope="col">Correlación</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for evento in estado_dev.eventos_recientes %}
+                  <tr>
+                    <td><code>{{ evento.timestamp or "No disponible" }}</code></td>
+                    <td><span class="badge text-bg-secondary">{{ evento.level }}</span></td>
+                    <td>{{ evento.event or "No disponible" }}</td>
+                    <td>{{ evento.component or "No disponible" }}</td>
+                    <td>{{ evento.outcome or "No disponible" }}</td>
+                    <td><code>{{ evento.metadata.operation or "No disponible" }}</code></td>
+                    <td><code>{{ evento.correlation_id or "No disponible" }}</code></td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        {% else %}
+          <p class="mb-0">Todavía no hay eventos JSONL visibles para el visor.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="py-4" aria-labelledby="archivos-dev-title">
   <div class="container">
     <div class="card shadow-sm">
@@ -74,14 +138,7 @@ Centro de desarrollo · {{ app_name }}
         <h2 id="archivos-dev-title" class="h5 mb-3">Archivos diagnósticos conocidos</h2>
         <div class="table-responsive">
           <table class="table align-middle">
-            <thead>
-              <tr>
-                <th scope="col">Archivo</th>
-                <th scope="col">Existe</th>
-                <th scope="col">Tamaño</th>
-                <th scope="col">Actualizado UTC</th>
-              </tr>
-            </thead>
+            <thead><tr><th scope="col">Archivo</th><th scope="col">Existe</th><th scope="col">Tamaño</th><th scope="col">Actualizado UTC</th></tr></thead>
             <tbody>
               {% for archivo in estado_dev.archivos_diagnostico %}
                 <tr>
@@ -102,30 +159,8 @@ Centro de desarrollo · {{ app_name }}
 <section class="py-4" aria-labelledby="privacidad-dev-title">
   <div class="container">
     <div class="row g-4">
-      <div class="col-lg-6">
-        <article class="card h-100 border-warning shadow-sm">
-          <div class="card-body">
-            <h2 id="privacidad-dev-title" class="h5">Advertencias</h2>
-            <ul class="mb-0">
-              {% for advertencia in estado_dev.advertencias %}
-                <li>{{ advertencia }}</li>
-              {% endfor %}
-            </ul>
-          </div>
-        </article>
-      </div>
-      <div class="col-lg-6">
-        <article class="card h-100 shadow-sm">
-          <div class="card-body">
-            <h2 class="h5">Controles de privacidad</h2>
-            <ul class="mb-0">
-              {% for control in estado_dev.controles_privacidad %}
-                <li>{{ control }}</li>
-              {% endfor %}
-            </ul>
-          </div>
-        </article>
-      </div>
+      <div class="col-lg-6"><article class="card h-100 border-warning shadow-sm"><div class="card-body"><h2 id="privacidad-dev-title" class="h5">Advertencias</h2><ul class="mb-0">{% for advertencia in estado_dev.advertencias %}<li>{{ advertencia }}</li>{% endfor %}</ul></div></article></div>
+      <div class="col-lg-6"><article class="card h-100 shadow-sm"><div class="card-body"><h2 class="h5">Controles de privacidad</h2><ul class="mb-0">{% for control in estado_dev.controles_privacidad %}<li>{{ control }}</li>{% endfor %}</ul></div></article></div>
     </div>
   </div>
 </section>

@@ -1,8 +1,10 @@
-# DEV.2 R1 — Centro de desarrollo
+# DEV.2 R1/R2 — Centro de desarrollo
 
 **Estado:** R1 integrado en `main` mediante PR #37.
 
-DEV.2 R1 abre una superficie interna y local para revisar el estado técnico de
+**Estado R2:** en desarrollo sobre la rama `dev/dev2-r2-visor-diagnostico`.
+
+DEV.2 abre una superficie interna y local para revisar el estado técnico de
 Developer Diagnostics sin alterar los cálculos previsionales, sin leer datos de
 simulación y sin exponer información personal o financiera.
 
@@ -10,8 +12,8 @@ simulación y sin exponer información personal o financiera.
 
 Crear una página de Centro de desarrollo que permita confirmar, durante el
 desarrollo local, si Developer Diagnostics está activo, qué esquema JSONL se usa,
-cuál es el archivo diagnóstico esperado y si existe material suficiente para una
-exportación ZIP sanitizada.
+cuál es el archivo diagnóstico esperado, qué eventos recientes son visibles de
+forma segura y si existe material suficiente para una exportación ZIP sanitizada.
 
 ## Activación
 
@@ -48,19 +50,48 @@ No incluye:
 - no cambia cálculos previsionales ni resultados;
 - no cambia VERSION al abrir el bloque.
 
+## Alcance de R2
+
+DEV.2 R2 añade un visor diagnóstico seguro y un servicio interno de exportación
+ZIP controlada sobre los archivos JSONL ya conocidos por Developer Diagnostics.
+
+Incluye:
+
+- lectura acotada del archivo `mrp-diagnostics.jsonl` y sus rotaciones esperadas;
+- normalización de eventos recientes para la interfaz local;
+- conteo visible de eventos por nivel operacional;
+- exposición de `correlation_id` solo cuando existe y sin derivarlo de datos del usuario;
+- metadata limitada a operación, método HTTP, código de estado y tipo de excepción;
+- conteo de líneas JSONL inválidas sin mostrar su contenido;
+- servicio `exportar_zip_diagnostico_sanitizado()` para generar el ZIP permitido;
+- regresiones específicas para visor, privacidad y exportación.
+
+No incluye todavía:
+
+- autenticación administrativa fuerte;
+- sesiones administrativas;
+- panel de filtros interactivos avanzados;
+- descarga HTTP directa desde la interfaz;
+- autodiagnóstico completo de componentes;
+- cambios de CSP, CORS, CSRF, secretos o cifrado.
+
+Esos puntos quedan reservados para revisiones posteriores de DEV.2 o para SEC.2,
+según corresponda.
+
 ## Versionado
 
-DEV.2 R1 **no cambia VERSION** ni `APP_VERSION`. La versión visible permanece en
-`0.0.26-beta` después del cierre parcial de R1.
+DEV.2 R1/R2 **no cambia VERSION** ni `APP_VERSION`. La versión visible permanece
+en `0.0.26-beta` durante este tramo.
 
-El cierre documental de R1 no crea tag ni promueve una versión revision-aware.
-La promoción a una versión `0.GG.RR.EE-beta` queda reservada para un cierre
-aceptado que explícitamente lo requiera conforme a la política vigente.
+El cierre documental de R1 no creó tag ni promovió una versión revision-aware. La
+promoción a una versión `0.GG.RR.EE-beta` queda reservada para el cierre posterior
+de VER.2, cuando el ledger y la documentación de versionado se alineen de forma
+sincrónica.
 
 ## Relación con GOV.1.4
 
 GOV.1.4 ya implementó el núcleo de observabilidad y Developer Diagnostics. DEV.2
-R1 no reescribe esa capa: solamente agrega una interfaz interna y pruebas de
+no reescribe esa capa: agrega una interfaz interna, visor seguro y pruebas de
 seguridad sobre la capacidad existente.
 
 ## Nota de cierre DEV.2 R1
@@ -78,4 +109,14 @@ python -m pytest tests\test_dev2_centro_desarrollo.py -q
 
 python -m pytest -q
 868 passed, 695 subtests passed
+```
+
+## Validación esperada de DEV.2 R2
+
+```text
+python -m pytest tests\test_dev2_r2_visor_diagnostico.py -q
+4 passed
+
+python -m pytest -q
+874 passed, 695 subtests passed
 ```
