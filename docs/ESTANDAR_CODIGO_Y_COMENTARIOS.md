@@ -4,7 +4,7 @@
 **Versión de aplicación revisada:** `0.0.26-beta`
 **Versión base histórica:** `0.0.24-beta`
 **Revisión documental:** UX.4.6e R4 — 2026-08-18
-**Revisión de mantenimiento:** MANT.1 R3 — YAML de GitHub — 2026-08-23
+**Revisión de mantenimiento:** MANT.1 R4 — encabezados operativos limpios — 2026-08-23
 **Clasificación:** Técnica / Mantenibilidad
 
 Este documento define el patrón permanente para documentar código en Mi Retiro
@@ -14,7 +14,7 @@ por línea.
 
 MANT.1 R1 registró la auditoría inicial de cobertura, MANT.1 R2 aplica la
 primera mejora documental sobre scripts, hooks y automatización local, y
-MANT.1 R3 documenta los YAML de GitHub sin modificar su comportamiento. Las
+MANT.1 R3 documenta los YAML de GitHub sin modificar su comportamiento y MANT.1 R4 limpia encabezados operativos para que la trazabilidad histórica quede fuera de código/configuración. Las
 revisiones posteriores deben conservar esta misma trazabilidad incremental.
 
 ## 1. Principio general
@@ -40,6 +40,23 @@ históricos. El código de runtime usa comentarios semánticos que sigan siendo
 
 Las pruebas sí pueden conservar un identificador histórico cuando este explica
 el origen de una regresión.
+
+### Encabezados operativos permanentes
+
+Los encabezados de archivos operativos deben describir el propósito permanente
+del archivo. No deben usar la primera línea para declarar `MANT.*`, `DEV.*`,
+`UX.*`, `VER.*`, números de PR ni el bloque que originó el cambio.
+
+En archivos YAML, hooks, scripts y README técnicos de carpetas operativas, el
+encabezado debe indicar:
+
+- **qué hace el archivo**;
+- **qué alcance conserva**;
+- **qué límites protege** cuando exista riesgo de modificar comportamiento.
+
+La trazabilidad de revisión se registra en `CHANGELOG.md`, `docs/ROADMAP.md`,
+`docs/VALIDACION.md` y documentación técnica equivalente, no en encabezados de
+archivos operativos.
 
 ## 3. Python
 

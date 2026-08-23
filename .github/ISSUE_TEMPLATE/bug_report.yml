@@ -1,6 +1,6 @@
-# MANT.1 R3 — plantilla de reporte de error.
+# Plantilla de reporte de error.
 # Propósito: capturar fallos reproducibles sin exponer datos personales ni secretos.
-# No modifica labels, campos obligatorios ni controles de privacidad.
+# Alcance: conserva labels, campos obligatorios y controles de privacidad.
 
 name: Reporte de error
 description: Reporta un comportamiento reproducible de Mi Retiro Proyectado.

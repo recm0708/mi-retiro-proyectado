@@ -1,6 +1,6 @@
-# MANT.1 R3 — workflow de verificación de firmas Git.
+# Workflow de verificación de firmas Git.
 # Propósito: verificar tags publicados y auditar manualmente todos los tags versionados.
-# No modifica triggers, permisos, jobs, confianza SSH ni comandos de verificación.
+# Alcance: conserva triggers, permisos, jobs, confianza SSH y comandos de verificación.
 
 name: Verificar firmas Git
 

@@ -1,6 +1,6 @@
-# MANT.1 R3 — plantilla de solicitud de mejora.
+# Plantilla de solicitud de mejora.
 # Propósito: separar necesidades funcionales, técnicas, documentales o de UX.
-# No modifica labels, campos obligatorios ni advertencias de privacidad/normativa.
+# Alcance: conserva labels, campos obligatorios y advertencias de privacidad/normativa.
 
 name: Solicitud de mejora
 description: Propón una mejora funcional, técnica, documental o de UX.

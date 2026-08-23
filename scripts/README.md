@@ -1,10 +1,7 @@
 # Scripts del repositorio
 
 **Estado:** vigente
-**Bloque:** MANT.1 R2 — documentación de scripts y hooks
 **Clasificación:** técnica / mantenimiento local
-
-**Origen:** MANT.1 R1 definió la auditoría inicial; MANT.1 R2 materializa esta documentación.
 
 Esta carpeta contiene automatizaciones versionadas para operar el repositorio de
 forma reproducible. Los scripts aquí ubicados no implementan reglas previsionales,

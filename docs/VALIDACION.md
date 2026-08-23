@@ -6,10 +6,30 @@
 **Base documental histórica:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal histórica preservada:** UX.4.6e R8 — validación funcional y procedencia editable — 2026-08-19
 **Última revisión transversal:** UX.4.6f R2 integrada y cierre del Paso 4 — 2026-08-20
-**Revisión de mantenimiento:** MANT.1 R3 — encabezados YAML de GitHub — 2026-08-23
+**Revisión de mantenimiento:** MANT.1 R4 — encabezados operativos limpios — 2026-08-23
 **Clasificación:** Técnica / Calidad
 
 La estrategia combina pruebas automatizadas, CI, casos sintéticos/anonimizados y validación manual cuando una propiedad no puede demostrarse suficientemente con código.
+
+## Validación MANT.1 R4 — encabezados operativos limpios
+
+MANT.1 R4 corrige la ubicación de trazabilidad histórica en archivos operativos.
+La validación esperada debe confirmar que YAML, hooks y README técnicos conserven
+encabezados funcionales, sin declarar MANT.1 en sus primeras líneas.
+
+Comandos mínimos para el cierre local:
+
+```text
+python -m pytest tests\test_mant1_r4_encabezados_operativos_limpios.py -q
+python -m pytest tests\test_mant1_r3_yaml_github_documentados.py tests\test_mant1_r4_encabezados_operativos_limpios.py -q
+python -m pytest tests\test_mant1_scripts_hooks_documentados.py tests\test_mant1_r3_yaml_github_documentados.py tests\test_mant1_r4_encabezados_operativos_limpios.py -q
+git diff --check
+python -m pytest -q
+```
+
+Esta revisión no cambia workflows, formularios, Dependabot, motores, normativa,
+`VERSION`, `APP_VERSION` ni SEC.2.
+
 
 ## 1. Línea base
 

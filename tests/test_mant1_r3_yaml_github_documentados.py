@@ -9,58 +9,58 @@ ROOT = Path(__file__).resolve().parents[1]
 
 YAML_GITHUB = {
     ".github/dependabot.yml": (
-        "MANT.1 R3",
+        "# Configuración de mantenimiento automatizado de dependencias.",
         "Propósito:",
-        "No modifica",
+        "Alcance:",
         "package-ecosystem: pip",
         "package-ecosystem: github-actions",
     ),
     ".github/ISSUE_TEMPLATE/bug_report.yml": (
-        "MANT.1 R3",
+        "# Plantilla de reporte de error.",
         "Propósito:",
-        "No modifica",
+        "Alcance:",
         'labels: ["bug", "needs-triage"]',
         "Confirmo que no he incluido datos personales reales ni secretos.",
     ),
     ".github/ISSUE_TEMPLATE/config.yml": (
-        "MANT.1 R3",
+        "# Configuración de entrada para issues.",
         "Propósito:",
-        "No modifica",
+        "Alcance:",
         "blank_issues_enabled: false",
         "security/policy",
     ),
     ".github/ISSUE_TEMPLATE/feature_request.yml": (
-        "MANT.1 R3",
+        "# Plantilla de solicitud de mejora.",
         "Propósito:",
-        "No modifica",
+        "Alcance:",
         'labels: ["enhancement", "needs-triage"]',
         "Entiendo que una propuesta normativa necesita una fuente oficial verificable.",
     ),
     ".github/ISSUE_TEMPLATE/question.yml": (
-        "MANT.1 R3",
+        "# Plantilla de consulta y soporte.",
         "Propósito:",
-        "No modifica",
+        "Alcance:",
         'labels: ["question", "needs-triage"]',
         "Confirmo que esta consulta no contiene una vulnerabilidad",
     ),
     ".github/workflows/auditoria-gobernanza.yml": (
-        "MANT.1 R3",
+        "# Workflow de auditoría de gobernanza.",
         "Propósito:",
-        "No modifica",
+        "Alcance:",
         "pull_request:",
         "python -m unittest tests.test_gov16_controles_github -v",
     ),
     ".github/workflows/ci.yml": (
-        "MANT.1 R3",
+        "# Workflow de validación continua.",
         "Propósito:",
-        "No modifica",
+        "Alcance:",
         'python-version: ["3.13", "3.14"]',
         "python -m unittest discover -s tests -v",
     ),
     ".github/workflows/verificar-tags.yml": (
-        "MANT.1 R3",
+        "# Workflow de verificación de firmas Git.",
         "Propósito:",
-        "No modifica",
+        "Alcance:",
         'tags:',
         'git tag -v "$GITHUB_REF_NAME"',
     ),
@@ -73,14 +73,15 @@ class TestMant1R3YamlGithubDocumentados(unittest.TestCase):
     def _leer(self, ruta):
         return (ROOT / ruta).read_text(encoding="utf-8")
 
-    def test_yaml_github_declara_encabezado_mant1_r3(self):
+    def test_yaml_github_declara_encabezado_funcional(self):
         """Cada YAML de GitHub inicia con comentario de propósito y límites."""
 
         for ruta, patrones in YAML_GITHUB.items():
             texto = self._leer(ruta)
             primeras_lineas = "\n".join(texto.splitlines()[:4])
             with self.subTest(ruta=ruta):
-                self.assertTrue(texto.startswith("# MANT.1 R3"))
+                self.assertTrue(texto.startswith(patrones[0]))
+                self.assertNotIn("MANT.1", primeras_lineas)
                 for patron in patrones[:3]:
                     self.assertIn(patron, primeras_lineas)
 
