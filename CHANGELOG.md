@@ -6,7 +6,13 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ## [Unreleased]
 
-### MANT.1 R5F
+### MANT.1 R5G
+
+- Agrega auditoría documental R5G para revisar índice, enlaces internos y coherencia documental vigente.
+- Actualiza `docs/INDICE.md` para incluir documentos raíz que existían en `docs/` pero no estaban listados.
+- Conserva expresiones de dominio como normativa/privacidad, normativa/código y normativa/jurídica porque no son rutas obsoletas.
+- Mantiene sin cambios la lógica de cálculo, valores normativos, `VERSION`, `APP_VERSION`, `SEC.2` y `_entregas/`.
+## MANT.1 R5F
 
 - Normaliza nombres de archivos técnicos en `scripts`, `data`, `regulations` y pruebas seleccionadas.
 - Actualiza referencias documentales, hooks, rutas internas y pruebas relacionadas.
