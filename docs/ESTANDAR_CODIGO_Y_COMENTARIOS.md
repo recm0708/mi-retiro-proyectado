@@ -4,7 +4,7 @@
 **Versión de aplicación revisada:** `0.0.26-beta`
 **Versión base histórica:** `0.0.24-beta`
 **Revisión documental:** UX.4.6e R4 — 2026-08-18
-**Revisión de mantenimiento:** MANT.1 R2 — scripts y hooks — 2026-08-23
+**Revisión de mantenimiento:** MANT.1 R3 — YAML de GitHub — 2026-08-23
 **Clasificación:** Técnica / Mantenibilidad
 
 Este documento define el patrón permanente para documentar código en Mi Retiro
@@ -12,8 +12,9 @@ Proyectado. Su objetivo es permitir que otro desarrollador entienda intención,
 contratos, límites y dependencias sin convertir el código en una narración línea
 por línea.
 
-MANT.1 R1 registró la auditoría inicial de cobertura y MANT.1 R2 aplica la
-primera mejora documental sobre scripts, hooks y automatización local. Las
+MANT.1 R1 registró la auditoría inicial de cobertura, MANT.1 R2 aplica la
+primera mejora documental sobre scripts, hooks y automatización local, y
+MANT.1 R3 documenta los YAML de GitHub sin modificar su comportamiento. Las
 revisiones posteriores deben conservar esta misma trazabilidad incremental.
 
 ## 1. Principio general
@@ -161,6 +162,12 @@ en motores si ya existe una fuente versionada.
 Los comentarios son aceptables únicamente cuando aclaran permisos, triggers,
 restricciones o una decisión operacional. No duplican el nombre evidente de una
 clave.
+
+MANT.1 R3 fija que los YAML versionados de GitHub pueden iniciar con un
+encabezado breve cuando ese encabezado documenta propósito, alcance y límites
+operativos. En workflows no debe alterar `on`, `permissions`, `concurrency`,
+`jobs`, matriz, actions ni comandos; en Issue Forms no debe cambiar `labels`,
+campos requeridos, opciones ni advertencias de privacidad.
 
 
 ## 9.1. Scripts, hooks y automatización local

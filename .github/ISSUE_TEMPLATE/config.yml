@@ -1,3 +1,7 @@
+# MANT.1 R3 — configuración de entrada para issues.
+# Propósito: deshabilitar issues en blanco y dirigir vulnerabilidades al canal privado.
+# No modifica enlaces, política de seguridad ni comportamiento de triage.
+
 blank_issues_enabled: false
 contact_links:
   - name: Vulnerabilidad de seguridad

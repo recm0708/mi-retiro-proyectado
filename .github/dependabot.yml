@@ -1,3 +1,7 @@
+# MANT.1 R3 — configuración de mantenimiento automatizado de dependencias.
+# Propósito: agrupar y limitar actualizaciones de runtime Python y GitHub Actions.
+# No modifica dependencias fijadas, cadencia semanal ni límites de Pull Requests.
+
 version: 2
 updates:
   - package-ecosystem: pip
