@@ -30,7 +30,7 @@ No se deben ocultar conflictos entre fuentes ni convertir una comunicación oper
 
 | Archivo | Alcance |
 |---|---|
-| `regulations/parametros_generales.json` | Edades de referencia y metadatos generales. |
+| `regulations/general_parameters.json` | Edades de referencia y metadatos generales. |
 | `regulations/sebd.json` | Reglas SEBD, factores anticipados, límites e indemnización. |
 | `regulations/mixto.json` | Componente BD, CAP, devolución, seguros y transición. |
 | `regulations/sucgs.json` | Tabla actuarial, capa solidaria y garantía de reemplazo. |

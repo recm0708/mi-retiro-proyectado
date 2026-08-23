@@ -4,7 +4,7 @@
 # Responsabilidad:
 # - ubicarse en la raíz del repositorio;
 # - localizar un intérprete Python disponible en el clon local;
-# - delegar todas las reglas del gate en scripts/validar_precommit.py.
+# - delegar todas las reglas del gate en scripts/validate_precommit.py.
 #
 # Este hook no contiene reglas de negocio, no modifica archivos y no reemplaza
 # la CI remota. Su único contrato es impedir que Git cree un commit local si el
@@ -16,15 +16,15 @@ ROOT="$(git rev-parse --show-toplevel)"
 cd "$ROOT"
 
 if command -v python >/dev/null 2>&1; then
-  exec python scripts/validar_precommit.py
+  exec python scripts/validate_precommit.py
 fi
 
 if command -v python3 >/dev/null 2>&1; then
-  exec python3 scripts/validar_precommit.py
+  exec python3 scripts/validate_precommit.py
 fi
 
 if command -v py >/dev/null 2>&1; then
-  exec py -3 scripts/validar_precommit.py
+  exec py -3 scripts/validate_precommit.py
 fi
 
 echo "ERROR: no se encontró Python para ejecutar el gate pre-commit de Mi Retiro Proyectado." >&2

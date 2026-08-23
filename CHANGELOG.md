@@ -6,7 +6,14 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ## [Unreleased]
 
-### MANT.1 R5E — estandarización de nombres de carpetas
+### MANT.1 R5F
+
+- Normaliza nombres de archivos técnicos en `scripts`, `data`, `regulations` y pruebas seleccionadas.
+- Actualiza referencias documentales, hooks, rutas internas y pruebas relacionadas.
+- Agrega `docs/AUDITORIA_ARCHIVOS_R5F.md` y `tests/test_mant1_r5f_nombres_archivos.py` para documentar y proteger el cambio.
+- Mantiene sin renombrar archivos de dominio como `mixto.json`, `sebd.json` y `sucgs.json`, y preserva archivos históricos con trazabilidad `UX46`, `VER2` o `revision-aware`.
+
+## MANT.1 R5E — estandarización de nombres de carpetas
 
 - renombra carpetas técnicas en español a rutas en inglés: `app/models/`, `app/engines/`, `app/services/`, `regulations/`, `tests/validation_cases/` y `docs/archive/`;
 - actualiza imports Python, rutas de pruebas, enlaces documentales, CODEOWNERS, `.gitignore` y referencias a parámetros JSON;
@@ -65,7 +72,7 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 ### MANT.1 R2 — documentación de scripts y hooks
 
 - materializa los primeros cambios de mantenimiento técnico derivados de MANT.1 R1, sin cambiar `VERSION`, `APP_VERSION`, motores previsionales ni normativa;
-- documenta `.githooks/pre-commit`, `scripts/configurar_hooks_git.ps1` y `scripts/validar_precommit.py`;
+- documenta `.githooks/pre-commit`, `scripts/configure_git_hooks.ps1` y `scripts/validate_precommit.py`;
 - agrega `scripts/README.md` y `.githooks/README.md` para explicar propósito, alcance, límites y relación con CI;
 - sincroniza `docs/ESTANDAR_CODIGO_Y_COMENTARIOS.md`, `docs/VALIDACION.md`, `docs/ARQUITECTURA.md` y `docs/ROADMAP.md`;
 - agrega regresión documental para proteger el contrato de scripts y hooks;
@@ -97,7 +104,7 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 - reconoce como estados independientes cuando la evidencia lo sustenta los hitos de firma/integridad, seguridad/gobierno, mantenimiento, identidad/publicación, PLAN.1 y los cierres posteriores;
 - corrige la secuencia canónica de UX.4.6i a **R1 → R1.2 → R1.3 → R1.4**; no existe evidencia independiente de una revisión intermedia no demostrada entre UX.4.6i R1 y R1.2;
 - separa la versión vigente de aplicación de la metadata histórica que indica en qué versión fue revisado un documento de dominio;
-- incorpora ledger estructurado en `data/ledger_revisiones_pre_1_0.json`, validador `app/core/version_ledger.py`, matriz de decisión, auditoría y regresiones de coherencia;
+- incorpora ledger estructurado en `data/revision_ledger_pre_1_0.json`, validador `app/core/version_ledger.py`, matriz de decisión, auditoría y regresiones de coherencia;
 - DEV.2 queda cerrado como bloque funcional independiente antes del cierre final de VER.2, sin consumir promoción revision-aware ni cambiar VERSION, APP_VERSION o tags.
 
 ### UX.4.6i — cierre de Cómo se calcula

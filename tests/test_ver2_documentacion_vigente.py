@@ -22,7 +22,7 @@ class TestVer2DocumentacionVigente(unittest.TestCase):
         self.assertEqual(version, APP_VERSION)
         self.assertIsNone(descomponer_version_beta_revision(version))
 
-        ledger = (ROOT / "data" / "ledger_revisiones_pre_1_0.json").read_text(encoding="utf-8")
+        ledger = (ROOT / "data" / "revision_ledger_pre_1_0.json").read_text(encoding="utf-8")
         self.assertIn(VERSION_CANDIDATA, ledger)
         self.assertEqual((71, 1), descomponer_version_beta_revision(VERSION_CANDIDATA))
 
@@ -83,7 +83,7 @@ class TestVer2DocumentacionVigente(unittest.TestCase):
 
     def test_ledger_estructurado_es_superficie_canonicamente_indexada(self):
         indice = (DOCS / "INDICE.md").read_text(encoding="utf-8")
-        self.assertIn("ledger_revisiones_pre_1_0.json", indice)
+        self.assertIn("revision_ledger_pre_1_0.json", indice)
         self.assertIn("version_ledger.py", indice)
 
     def test_tags_legacy_permanecen_historicos_e_inmutables(self):

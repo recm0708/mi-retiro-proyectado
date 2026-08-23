@@ -19,7 +19,7 @@ if ($LASTEXITCODE -ne 0 -or [string]::IsNullOrWhiteSpace($repoRoot)) {
 Set-Location $repoRoot
 
 $hook = Join-Path $repoRoot ".githooks\pre-commit"
-$guard = Join-Path $repoRoot "scripts\validar_precommit.py"
+$guard = Join-Path $repoRoot "scripts\validate_precommit.py"
 
 # El hook y el validador son archivos versionados; si faltan, el clon está
 # incompleto o no está en una rama compatible con el gate local.
@@ -28,7 +28,7 @@ if (-not (Test-Path -LiteralPath $hook -PathType Leaf)) {
 }
 
 if (-not (Test-Path -LiteralPath $guard -PathType Leaf)) {
-    throw "Falta el validador versionado: scripts/validar_precommit.py"
+    throw "Falta el validador versionado: scripts/validate_precommit.py"
 }
 
 # La configuración es local al clon para no alterar la configuración global de

@@ -41,7 +41,7 @@ Fuentes oficiales:
 
 | Archivo | Alcance |
 |---|---|
-| `regulations/parametros_generales.json` | Edades de referencia y metadatos generales. |
+| `regulations/general_parameters.json` | Edades de referencia y metadatos generales. |
 | `regulations/sebd.json` | SEBD, anticipación, mínimos/máximos e indemnización. |
 | `regulations/mixto.json` | BD, CAP, transición y fuentes del Mixto. |
 | `regulations/sucgs.json` | SUCGS, factores y garantías modeladas. |

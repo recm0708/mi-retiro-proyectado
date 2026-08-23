@@ -13,4 +13,4 @@ set -eu
 REPO_ROOT="$(git rev-parse --show-toplevel)"
 cd "$REPO_ROOT"
 
-python scripts/validar_precommit.py
+python scripts/validate_precommit.py

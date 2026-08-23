@@ -109,7 +109,7 @@ class TestGov13DocumentacionR4(unittest.TestCase):
             "app/engines/sebd.py",
             "app/engines/mixto.py",
             "app/engines/sucgs.py",
-            "tests/test_trazabilidad.py",
+            "tests/test_traceability.py",
         )
         for rel in rutas:
             with self.subTest(rel=rel):

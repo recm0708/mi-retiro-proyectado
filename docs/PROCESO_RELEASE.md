@@ -9,7 +9,7 @@
 **Revisión transversal:** VER.2 — versionado revision-aware — 2026-08-22
 **Clasificación:** Gobierno / Release / Auditoría
 
-Este procedimiento complementa `VERSIONING.md`, `RELEASES.md`, `CHANGELOG.md`, `GOVERNANCE.md`, `LICENSE`, `THIRD_PARTY_NOTICES.md`, `docs/LICENCIA_Y_DISTRIBUCION.md`, `docs/AUDITORIA_VERSIONADO_PRE_1_0.md`, `docs/LEDGER_REVISIONES_PRE_1_0.md`, `docs/MATRIZ_DECISION_REVISIONES_VER2.md`, `data/ledger_revisiones_pre_1_0.json` y `docs/PLAN_MAESTRO_HACIA_1_0.md`.
+Este procedimiento complementa `VERSIONING.md`, `RELEASES.md`, `CHANGELOG.md`, `GOVERNANCE.md`, `LICENSE`, `THIRD_PARTY_NOTICES.md`, `docs/LICENCIA_Y_DISTRIBUCION.md`, `docs/AUDITORIA_VERSIONADO_PRE_1_0.md`, `docs/LEDGER_REVISIONES_PRE_1_0.md`, `docs/MATRIZ_DECISION_REVISIONES_VER2.md`, `data/revision_ledger_pre_1_0.json` y `docs/PLAN_MAESTRO_HACIA_1_0.md`.
 
 ## 1. Principio
 

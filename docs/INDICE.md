@@ -27,7 +27,7 @@ Este archivo es el punto de entrada para la documentación técnica, funcional, 
 - [`AUDITORIA_VER2_CONTEO_PROVISIONAL.md`](AUDITORIA_VER2_CONTEO_PROVISIONAL.md) — cierre del conteo de segunda pasada en G070 antes de VER.2.
 - [`MATRIZ_DECISION_REVISIONES_VER2.md`](MATRIZ_DECISION_REVISIONES_VER2.md) — decisión fila por fila sobre qué consume Global y por qué.
 - [`LEDGER_REVISIONES_PRE_1_0.md`](LEDGER_REVISIONES_PRE_1_0.md) — ledger Markdown G001–G070 y candidato G071.
-- [`../data/ledger_revisiones_pre_1_0.json`](../data/ledger_revisiones_pre_1_0.json) — ledger machine-readable canónico de la reconstrucción.
+- [`../data/revision_ledger_pre_1_0.json`](../data/revision_ledger_pre_1_0.json) — ledger machine-readable canónico de la reconstrucción.
 - [`../app/core/version_ledger.py`](../app/core/version_ledger.py) — validador de continuidad, unicidad y codificación del ledger estructurado.
 - [`../RELEASES.md`](../RELEASES.md) — versiones, tags y reconstrucción histórica.
 - [`../CHANGELOG.md`](../CHANGELOG.md) — cambios notables por versión.
@@ -51,6 +51,7 @@ Este archivo es el punto de entrada para la documentación técnica, funcional, 
 
 - [`ARQUITECTURA.md`](ARQUITECTURA.md) — capas, módulos, endpoints y flujo.
 - [`AUDITORIA_CARPETAS_R5E.md`](AUDITORIA_CARPETAS_R5E.md) — auditoría de nombres de carpetas técnicas y rutas sincronizadas.
+- [Auditoría de nombres de archivos R5F](AUDITORIA_ARCHIVOS_R5F.md)
 - [`MODELO_DE_DATOS.md`](MODELO_DE_DATOS.md) — modelos y contratos.
 - [`GESTION_DATOS_SIMULACION.md`](GESTION_DATOS_SIMULACION.md) — estado local, limpieza, restauración e invalidación.
 - [`OBSERVABILIDAD_LOGS.md`](OBSERVABILIDAD_LOGS.md) — Developer Diagnostics, esquema JSONL, correlación, redacción, retención y exportación.
@@ -147,7 +148,7 @@ Los archivos históricos documentan lo que se pensó, probó o decidió en un mo
 - [`../VERSIONING.md`](../VERSIONING.md) — reglas de incremento y tags.
 - [`AUDITORIA_VERSIONADO_PRE_1_0.md`](AUDITORIA_VERSIONADO_PRE_1_0.md) — reconciliación VER.2.
 - [`LEDGER_REVISIONES_PRE_1_0.md`](LEDGER_REVISIONES_PRE_1_0.md) — contador global.
-- [`../data/ledger_revisiones_pre_1_0.json`](../data/ledger_revisiones_pre_1_0.json) — representación estructurada del contador.
+- [`../data/revision_ledger_pre_1_0.json`](../data/revision_ledger_pre_1_0.json) — representación estructurada del contador.
 - [`PLAN_MAESTRO_HACIA_1_0.md`](PLAN_MAESTRO_HACIA_1_0.md) — gates hasta la primera versión oficial.
 
 ## Clasificación documental

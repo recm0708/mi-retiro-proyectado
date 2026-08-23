@@ -69,7 +69,7 @@ Esta función está habilitada y complementa el canal privado alternativo indica
 - `docs/AUDITORIA_VERSIONADO_PRE_1_0.md`
 - `docs/MATRIZ_DECISION_REVISIONES_VER2.md`
 - `docs/LEDGER_REVISIONES_PRE_1_0.md`
-- `data/ledger_revisiones_pre_1_0.json`
+- `data/revision_ledger_pre_1_0.json`
 
 <!-- ANCLAS_HISTORICAS_VER2_SECURITY_CONSOLIDADAS -->
 

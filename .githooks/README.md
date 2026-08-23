@@ -11,14 +11,14 @@ manuales dentro de `.git/hooks/`.
 
 | Hook | Momento de ejecución | Propósito |
 |---|---|---|
-| `pre-commit` | Antes de crear un commit | Delegar en `scripts/validar_precommit.py` el gate local del repositorio. |
+| `pre-commit` | Antes de crear un commit | Delegar en `scripts/validate_precommit.py` el gate local del repositorio. |
 
 ## Activación
 
 Los hooks versionados se activan por clon mediante:
 
 ```powershell
-.\scripts\configurar_hooks_git.ps1
+.\scripts\configure_git_hooks.ps1
 ```
 
 Ese comando configura:

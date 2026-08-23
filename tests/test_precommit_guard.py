@@ -13,13 +13,13 @@ class TestPrecommitGuard(unittest.TestCase):
     def test_hook_versionado_delega_en_validador_python(self):
         hook = (ROOT / ".githooks/pre-commit").read_text(encoding="utf-8")
         self.assertIn("#!/usr/bin/env sh", hook)
-        self.assertIn("scripts/validar_precommit.py", hook)
+        self.assertIn("scripts/validate_precommit.py", hook)
         self.assertIn("exec python", hook)
         self.assertIn("exec python3", hook)
         self.assertIn("exec py -3", hook)
 
     def test_validador_bloquea_main_y_arbol_no_reproducible(self):
-        guard = (ROOT / "scripts/validar_precommit.py").read_text(encoding="utf-8")
+        guard = (ROOT / "scripts/validate_precommit.py").read_text(encoding="utf-8")
         self.assertIn('if rama == "main"', guard)
         self.assertIn('"diff", "--name-only"', guard)
         self.assertIn('"ls-files",', guard)
@@ -28,7 +28,7 @@ class TestPrecommitGuard(unittest.TestCase):
         self.assertIn('"diff", "--cached", "--check"', guard)
 
     def test_validador_ejecuta_gate_tecnico_completo(self):
-        guard = (ROOT / "scripts/validar_precommit.py").read_text(encoding="utf-8")
+        guard = (ROOT / "scripts/validate_precommit.py").read_text(encoding="utf-8")
         self.assertIn('"pip", "check"', guard)
         self.assertIn('"compileall", "-q", "app"', guard)
         self.assertIn('shutil.which("node")', guard)
@@ -36,7 +36,7 @@ class TestPrecommitGuard(unittest.TestCase):
         self.assertIn('"unittest", "discover", "-s", "tests", "-q"', guard)
 
     def test_instalador_configura_hooks_path_solo_en_el_clon(self):
-        instalador = (ROOT / "scripts/configurar_hooks_git.ps1").read_text(
+        instalador = (ROOT / "scripts/configure_git_hooks.ps1").read_text(
             encoding="utf-8"
         )
         self.assertIn("git config --local core.hooksPath .githooks", instalador)
