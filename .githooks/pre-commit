@@ -1,4 +1,15 @@
 #!/usr/bin/env sh
+# Hook versionado de Mi Retiro Proyectado.
+#
+# Responsabilidad:
+# - ubicarse en la raíz del repositorio;
+# - localizar un intérprete Python disponible en el clon local;
+# - delegar todas las reglas del gate en scripts/validar_precommit.py.
+#
+# Este hook no contiene reglas de negocio, no modifica archivos y no reemplaza
+# la CI remota. Su único contrato es impedir que Git cree un commit local si el
+# validador versionado detecta un estado no reproducible o una validación rota.
+
 set -eu
 
 ROOT="$(git rev-parse --show-toplevel)"

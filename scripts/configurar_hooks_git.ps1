@@ -1,5 +1,16 @@
+# Configura el hook local versionado de Mi Retiro Proyectado.
+#
+# Propósito:
+# - resolver la raíz real del repositorio;
+# - verificar que existan el hook y el validador versionados;
+# - configurar core.hooksPath=.githooks únicamente para el clon actual.
+#
+# Este script no cambia código fuente, no ejecuta pruebas y no instala
+# dependencias. Su alcance termina al dejar Git apuntando a .githooks/.
+
 $ErrorActionPreference = "Stop"
 
+# La raíz se obtiene desde Git para evitar rutas absolutas del equipo local.
 $repoRoot = (& git rev-parse --show-toplevel).Trim()
 if ($LASTEXITCODE -ne 0 -or [string]::IsNullOrWhiteSpace($repoRoot)) {
     throw "No se pudo determinar la raíz del repositorio Git."
@@ -10,6 +21,8 @@ Set-Location $repoRoot
 $hook = Join-Path $repoRoot ".githooks\pre-commit"
 $guard = Join-Path $repoRoot "scripts\validar_precommit.py"
 
+# El hook y el validador son archivos versionados; si faltan, el clon está
+# incompleto o no está en una rama compatible con el gate local.
 if (-not (Test-Path -LiteralPath $hook -PathType Leaf)) {
     throw "Falta el hook versionado: .githooks/pre-commit"
 }
@@ -18,6 +31,8 @@ if (-not (Test-Path -LiteralPath $guard -PathType Leaf)) {
     throw "Falta el validador versionado: scripts/validar_precommit.py"
 }
 
+# La configuración es local al clon para no alterar la configuración global de
+# Git ni otros repositorios del equipo.
 & git config --local core.hooksPath .githooks
 if ($LASTEXITCODE -ne 0) {
     throw "No se pudo configurar core.hooksPath."

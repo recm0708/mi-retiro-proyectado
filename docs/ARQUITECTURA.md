@@ -5,9 +5,14 @@
 **Versión base histórica:** `0.0.23-beta`
 **Revisión documental:** GOV.1.4 — 2026-08-17
 **Última actualización técnica:** DEV.2 R4 — cierre final documental — 2026-08-23
+**Última actualización de mantenimiento:** MANT.1 R2 — scripts y hooks — 2026-08-23
 **Clasificación:** Técnica / Pública
 
 Mi Retiro Proyectado es una aplicación web local basada en FastAPI, Jinja2 y JavaScript del navegador. La arquitectura separa presentación, contratos de datos, servicios de integración, motores previsionales, parámetros normativos y observabilidad de desarrollo.
+
+MANT.1 R1 dejó la auditoría inicial de mantenibilidad y MANT.1 R2 documenta
+la infraestructura local de scripts/hooks que protege commits reproducibles antes
+de los checks remotos. Este mantenimiento no introduce nuevas capas de producto.
 
 [Índice](INDICE.md) · [Modelo de datos](MODELO_DE_DATOS.md) · [Motor](MOTOR_DE_CALCULO.md) · [Normativa](NORMATIVA.md) · [Observabilidad](OBSERVABILIDAD_LOGS.md)
 
@@ -243,6 +248,21 @@ El siguiente inventario se deriva de los decoradores vigentes en `app/main.py`. 
 | `/metodologia` |
 | `/salud` |
 | `/simulacion` |
+
+
+## 7.2. Automatización local de calidad
+
+La raíz del repositorio contiene automatización local de calidad separada del
+runtime de la aplicación:
+
+- `.githooks/pre-commit` actúa como delegador Git antes de cada commit;
+- `scripts/configurar_hooks_git.ps1` activa los hooks versionados por clon;
+- `scripts/validar_precommit.py` ejecuta el gate local reproducible.
+
+Esta capa no participa en el flujo HTTP, no modifica cálculos previsionales, no
+lee datos personales de simulación y no reemplaza GitHub Actions. Su objetivo es
+impedir commits locales cuando el árbol preparado no corresponde a un estado
+validado del repositorio.
 
 ## 8. Cabeceras defensivas
 

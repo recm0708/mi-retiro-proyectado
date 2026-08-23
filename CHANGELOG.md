@@ -6,6 +6,22 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ## [Unreleased]
 
+### MANT.1 R2 — documentación de scripts y hooks
+
+- materializa los primeros cambios de mantenimiento técnico derivados de MANT.1 R1, sin cambiar `VERSION`, `APP_VERSION`, motores previsionales ni normativa;
+- documenta `.githooks/pre-commit`, `scripts/configurar_hooks_git.ps1` y `scripts/validar_precommit.py`;
+- agrega `scripts/README.md` y `.githooks/README.md` para explicar propósito, alcance, límites y relación con CI;
+- sincroniza `docs/ESTANDAR_CODIGO_Y_COMENTARIOS.md`, `docs/VALIDACION.md`, `docs/ARQUITECTURA.md` y `docs/ROADMAP.md`;
+- agrega regresión documental para proteger el contrato de scripts y hooks;
+- absorbe la corrección de higiene textual detectada durante la validación local previa al commit.
+
+### MANT.1 R1 — auditoría inicial y plan de mantenimiento
+
+- inicia MANT.1 como mantenimiento técnico previo a SEC.2;
+- clasifica el inventario rastreado de código, configuración, hooks y pruebas en `.githooks`, `.github`, `app`, `scripts` y `tests`;
+- identifica archivos sin encabezado inicial en YAML, JavaScript, plantillas principales, CSS específico y PowerShell;
+- define una ejecución incremental por revisiones para evitar cambios masivos y preservar la sincronización entre código, pruebas y documentación.
+
 ### DEV.2 — cierre del Centro de desarrollo
 
 - cierra documentalmente DEV.2 después de integrar PR #37, PR #38, PR #39 y PR #40;

@@ -4,12 +4,17 @@
 **Versión de aplicación revisada:** `0.0.26-beta`
 **Versión base histórica:** `0.0.24-beta`
 **Revisión documental:** UX.4.6e R4 — 2026-08-18
+**Revisión de mantenimiento:** MANT.1 R2 — scripts y hooks — 2026-08-23
 **Clasificación:** Técnica / Mantenibilidad
 
 Este documento define el patrón permanente para documentar código en Mi Retiro
 Proyectado. Su objetivo es permitir que otro desarrollador entienda intención,
 contratos, límites y dependencias sin convertir el código en una narración línea
 por línea.
+
+MANT.1 R1 registró la auditoría inicial de cobertura y MANT.1 R2 aplica la
+primera mejora documental sobre scripts, hooks y automatización local. Las
+revisiones posteriores deben conservar esta misma trazabilidad incremental.
 
 ## 1. Principio general
 
@@ -156,6 +161,25 @@ en motores si ya existe una fuente versionada.
 Los comentarios son aceptables únicamente cuando aclaran permisos, triggers,
 restricciones o una decisión operacional. No duplican el nombre evidente de una
 clave.
+
+
+## 9.1. Scripts, hooks y automatización local
+
+Los scripts operativos del repositorio deben documentar al inicio:
+
+- **propósito**: qué tarea automatizan;
+- **alcance**: qué archivos o configuración pueden leer o modificar;
+- **límites**: qué no hacen y qué validaciones no sustituyen;
+- **dependencias**: intérpretes, herramientas externas o configuración Git requerida;
+- **modo de fallo**: cuándo deben terminar con código distinto de cero.
+
+Los hooks versionados bajo `.githooks/` deben mantenerse como delegadores
+pequeños. La lógica de validación vive en `scripts/` para que pueda probarse,
+documentarse y ejecutarse manualmente sin depender del ciclo interno de Git.
+
+Cada carpeta operativa versionada, como `scripts/` o `.githooks/`, debe tener un
+`README.md` breve cuando su contenido afecte commits, CI, publicación,
+seguridad, privacidad o reproducibilidad del proyecto.
 
 ## 10. Web Storage
 

@@ -1,4 +1,16 @@
-"""Gate local que impide confirmar cambios si el repositorio no está validado."""
+"""Gate local que impide confirmar cambios si el repositorio no está validado.
+
+Responsabilidad:
+- proteger el árbol de trabajo antes de crear commits locales;
+- impedir commits directos en ``main``;
+- exigir que el contenido preparado sea reproducible;
+- ejecutar validaciones técnicas mínimas de Python, JavaScript y pruebas.
+
+Límites:
+- no corrige archivos automáticamente;
+- no reemplaza los checks remotos de GitHub Actions;
+- no contiene reglas previsionales ni modifica motores de cálculo.
+"""
 
 from __future__ import annotations
 

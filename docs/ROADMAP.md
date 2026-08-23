@@ -5,10 +5,11 @@
 **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
 **Último tag formal legacy:** `v0.0.26-beta`
 **Fecha de revisión:** 2026-08-22
+**Mantenimiento técnico en curso:** MANT.1 R2 — documentación de scripts y hooks antes de SEC.2; MANT.1 R1 conserva la auditoría inicial del alcance
 
 Este roadmap describe **estado actual y trabajo futuro**. La evolución detallada ya completada se conserva en `RELEASES.md`, `CHANGELOG.md`, `docs/AUDITORIA_VERSIONADO_PRE_1_0.md`, `docs/LEDGER_REVISIONES_PRE_1_0.md`, `docs/MATRIZ_DECISION_REVISIONES_VER2.md`, `data/ledger_revisiones_pre_1_0.json` y `docs/historico/`.
 
-VER.2 es un bloque transversal de reconciliación y **no añade un bloque 15** al plan maestro de producto. DEV.2 sigue siendo el siguiente bloque funcional y comienza únicamente después de cerrar VER.2.
+VER.2 es un bloque transversal de reconciliación y **no añade un bloque 15** al plan maestro de producto. DEV.2 ya quedó cerrado documentalmente en R4. MANT.1 se trata como checkpoint técnico de mantenibilidad antes de SEC.2 y tampoco añade un bloque funcional de producto. MANT.1 R1 queda como auditoría inicial de alcance y MANT.1 R2 materializa los primeros cambios documentales en scripts y hooks.
 
 ## 1. Programa GOV.1 — Auditoría, Gobierno y Trazabilidad Pre-Beta
 
@@ -81,12 +82,13 @@ VER.2 es un bloque transversal de reconciliación y **no añade un bloque 15** a
 - identidad visual oficial, favicons y Social Preview;
 - repositorio público con metadata, topics, labels e Issue Forms;
 - Dependency graph, Dependabot, CodeQL, Secret Protection, Push protection y Private vulnerability reporting;
-- CI y auditoría automática de gobernanza.
+- CI y auditoría automática de gobernanza;
+- DEV.2 — Centro de desarrollo sobre Developer Diagnostics cerrado documentalmente en R4.
 
 ### Pendiente o incompleto
 
 - VER.2 — cerrar reconciliación revision-aware y promover G071 si el gate completo, PR/CI e integración son satisfactorios;
-- DEV.2 — Centro de desarrollo sobre Developer Diagnostics;
+- MANT.1 — documentación y mantenibilidad de scripts, hooks y encabezados antes de SEC.2;
 - hardening integral SEC.2;
 - reconstrucción detallada del CHANGELOG `0.0.1-beta`–`0.0.21-beta` en DOC.2;
 - persistencia voluntaria si permanece dentro del alcance 1.0;
@@ -139,7 +141,7 @@ No existe una una revisión intermedia no demostrada entre UX.4.6i R1 y R1.2 dem
 
 **VER.2:** bloque transversal activo. La base anterior al cambio contiene **70 estados aceptados (G001–G070)**. El candidato `0.0.71.01-beta` representa G071/E01 y solo se acepta después del gate completo, PR/CI e integración.
 
-**Siguiente bloque funcional:** DEV.2 — Centro de desarrollo.
+**Checkpoint técnico actual:** MANT.1 — documentación y mantenibilidad antes de SEC.2.
 
 Documentos canónicos de VER.2:
 
@@ -156,7 +158,8 @@ Secuencia funcional de 14 bloques hacia 1.0, sin contar VER.2 como bloque adicio
 3. UX.4.6g — Paso 5 — **cerrado**;
 4. UX.4.6h — Paso 6 — **cerrado**;
 5. UX.4.6i — Cómo se calcula — **cerrado**;
-6. DEV.2 — Centro de desarrollo — **siguiente**;
+6. DEV.2 — Centro de desarrollo — **cerrado**;
+   - Checkpoint técnico intermedio: MANT.1 documenta scripts, hooks y mantenibilidad antes de SEC.2, sin añadir un bloque funcional de producto.
 7. SEC.2 — Hardening integral;
 8. DOC.2 — CHANGELOG histórico detallado;
 9. PERSIST.1 — Persistencia voluntaria y segura;

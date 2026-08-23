@@ -6,6 +6,7 @@
 **Base documental histórica:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal histórica preservada:** UX.4.6e R8 — validación funcional y procedencia editable — 2026-08-19
 **Última revisión transversal:** UX.4.6f R2 integrada y cierre del Paso 4 — 2026-08-20
+**Revisión de mantenimiento:** MANT.1 R2 — documentación de scripts y hooks — 2026-08-23
 **Clasificación:** Técnica / Calidad
 
 La estrategia combina pruebas automatizadas, CI, casos sintéticos/anonimizados y validación manual cuando una propiedad no puede demostrarse suficientemente con código.
@@ -228,6 +229,29 @@ El gate remoto de PR #30 instaló `pypdf 6.16.1`, completó `pip check`, `compil
 El cierre documental inicial añadió una regresión para impedir que README, ROADMAP y el plan maestro volvieran a presentar Paso 4 como pendiente. Su primera ejecución completa alcanzó 757 pruebas pero detectó **cuatro fallos históricos**: tres módulos de UX.4.6e todavía exigían que UX.4.6f permaneciera activo o pendiente. Esas regresiones se corrigen para preservar la evidencia de UX.4.6e sin congelar el estado futuro del roadmap.
 
 Como endurecimiento permanente, el repositorio incorpora `.githooks/pre-commit`, `scripts/validar_precommit.py` y `scripts/configurar_hooks_git.ps1`. Una vez activado por clon, Git rechaza el commit si se intenta confirmar directamente en `main`, existe un árbol de trabajo que no corresponde al staging, falla `git diff --cached --check`, `pip check`, `compileall`, `node --check` o la suite completa. Cinco regresiones adicionales protegen el contrato; el inventario de cierre pasa a **762 pruebas** sin modificar `VERSION`. Los checks remotos del Pull Request siguen siendo obligatorios y no son sustituidos por el hook local.
+
+
+### MANT.1 R2 — documentación de scripts y hooks
+
+
+MANT.1 R1 queda como auditoría inicial: inventario de archivos de código/configuración,
+clasificación de superficies por carpeta y decisión de ejecutar el mantenimiento por
+revisiones pequeñas antes de SEC.2. No modificó runtime, versión, motores ni normativa.
+
+MANT.1 R2 documenta la infraestructura local del gate pre-commit sin cambiar su
+comportamiento funcional. La revisión cubre:
+
+- `.githooks/pre-commit`;
+- `scripts/configurar_hooks_git.ps1`;
+- `scripts/validar_precommit.py`;
+- `scripts/README.md`;
+- `.githooks/README.md`;
+- regresión `tests/test_mant1_scripts_hooks_documentados.py`.
+
+El alcance de validación de MANT.1 R2 exige que los scripts y hooks expliquen su
+propósito, límites, dependencias y relación con la CI. El gate local sigue
+ejecutando `pip check`, compilación Python, `node --check`, suite completa y
+verificación de whitespace preparada antes de permitir commits.
 
 ## 2. Comandos obligatorios
 
