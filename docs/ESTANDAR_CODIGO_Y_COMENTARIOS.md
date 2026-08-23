@@ -4,7 +4,7 @@
 **Versión de aplicación revisada:** `0.0.26-beta`
 **Versión base histórica:** `0.0.24-beta`
 **Revisión documental:** UX.4.6e R4 — 2026-08-18
-**Revisión de mantenimiento:** MANT.1 R4 — encabezados operativos limpios — 2026-08-23
+**Revisión de mantenimiento:** MANT.1 R5A — comentarios internos en servicios Python — 2026-08-23
 **Clasificación:** Técnica / Mantenibilidad
 
 Este documento define el patrón permanente para documentar código en Mi Retiro
@@ -13,9 +13,12 @@ contratos, límites y dependencias sin convertir el código en una narración l�
 por línea.
 
 MANT.1 R1 registró la auditoría inicial de cobertura, MANT.1 R2 aplica la
-primera mejora documental sobre scripts, hooks y automatización local, y
-MANT.1 R3 documenta los YAML de GitHub sin modificar su comportamiento y MANT.1 R4 limpia encabezados operativos para que la trazabilidad histórica quede fuera de código/configuración. Las
-revisiones posteriores deben conservar esta misma trazabilidad incremental.
+primera mejora documental sobre scripts, hooks y automatización local,
+MANT.1 R3 documenta los YAML de GitHub sin modificar su comportamiento,
+MANT.1 R4 limpia encabezados operativos para que la trazabilidad histórica quede
+fuera de código/configuración y MANT.1 R5A inicia comentarios internos de
+intención en servicios Python de aplicación. Las revisiones posteriores deben
+conservar esta misma trazabilidad incremental.
 
 ## 1. Principio general
 
@@ -59,6 +62,19 @@ La trazabilidad de revisión se registra en `CHANGELOG.md`, `docs/ROADMAP.md`,
 archivos operativos.
 
 ## 3. Python
+
+### Comentarios internos en servicios de aplicación
+
+Los servicios propios de `app/servicios/` deben explicar decisiones de flujo cuando
+normalizan datos, separan totales, construyen matrices, agregan advertencias,
+leen documentos o transforman resultados en salidas para la interfaz. Estos
+comentarios deben describir intención y límites de negocio, no registrar el nombre
+de la revisión, el PR que los agregó ni la historia del bloque.
+
+En servicios de cálculo o integración no se comentan líneas evidentes. Se comenta
+la razón por la que una rama evita mutación, por qué se omite una fecha, por qué
+se conserva una advertencia o por qué una fuente se consulta en una capa concreta.
+
 
 Todo módulo de aplicación debe comenzar con un docstring que describa su
 responsabilidad. Clases, servicios y funciones del runtime deben tener un docstring breve cuando

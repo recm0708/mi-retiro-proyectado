@@ -57,11 +57,15 @@ def extraer_ficha_digital_desde_texto(
     """
 
     texto_normalizado = _normalizar(texto)
+    # La marca de sección evita aceptar PDFs genéricos o textos pegados que
+    # contengan salarios, pero no provengan de la Ficha Digital esperada.
     if "SALARIOS DEL ULTIMO ANO" not in texto_normalizado.upper():
         raise ValueError(
             "El archivo no parece contener la sección 'Salarios del último año' de la Ficha Digital."
         )
 
+    # El patrón solo captura año, mes y salario; otros datos personales del
+    # documento se ignoran para minimizar la superficie de tratamiento.
     patron = re.compile(
         r"(?P<anio>20\d{2})\s*[-–—]\s*"
         r"(?P<mes>Enero|Febrero|Marzo|Abril|Mayo|Junio|Julio|Agosto|Septiembre|Setiembre|Octubre|Noviembre|Diciembre)"
@@ -76,6 +80,8 @@ def extraer_ficha_digital_desde_texto(
             "Puedes continuar con captura manual."
         )
 
+    # Cuando no hay año externo, se toma el año más reciente del documento;
+    # la vigencia real se decide fuera de este extractor.
     anio_objetivo = (
         anio_actual
         if anio_actual is not None
@@ -95,6 +101,8 @@ def extraer_ficha_digital_desde_texto(
         salario = float(coincidencia.group("salario").replace(",", ""))
 
         clave = (anio, mes)
+        # Si el PDF repite un período, se conserva el último valor leído y se
+        # entrega advertencia para revisión manual antes de confirmar.
         if clave in por_periodo:
             advertencias.append(
                 f"Se detectó más de un valor para {anio}-{mes:02d}; se conservará el último encontrado."
@@ -145,6 +153,8 @@ def analizar_ficha_digital_pdf(contenido: bytes) -> ResumenFichaDigital:
         raise ValueError("No fue posible abrir la Ficha Digital en PDF.") from error
 
     if lector.is_encrypted:
+        # Se intenta únicamente contraseña vacía; no se fuerza ni se solicita
+        # credenciales porque el importador debe operar de forma segura.
         try:
             desbloqueado = lector.decrypt("")
         except Exception as error:
@@ -163,6 +173,8 @@ def analizar_ficha_digital_pdf(contenido: bytes) -> ResumenFichaDigital:
 
     partes: list[str] = []
     total_caracteres = 0
+    # El límite de texto protege al proceso local de PDFs anómalos o demasiado
+    # grandes sin persistir el contenido extraído.
     try:
         for pagina in lector.pages:
             texto_pagina = pagina.extract_text() or ""

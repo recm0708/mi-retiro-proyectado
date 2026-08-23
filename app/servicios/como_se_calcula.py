@@ -30,6 +30,8 @@ def _formatear_moneda(valor: float | int) -> str:
 def construir_guia_calculo() -> dict:
     """Devuelve parámetros normativos necesarios para la guía explicativa."""
 
+    # La guía se alimenta de los JSON versionados una sola vez para evitar
+    # lecturas parciales o divergentes entre secciones de la misma página.
     generales = cargar_parametros_generales()
     sebd = cargar_parametros_sebd()
     mixto = cargar_parametros_mixto()
@@ -42,6 +44,8 @@ def construir_guia_calculo() -> dict:
     sucgs_garantias = sucgs["garantias"]
     reemplazo = sucgs_garantias["reemplazo_minimo_art197"]
 
+    # La tabla de retiro anticipado se ordena por mes límite para que la
+    # plantilla muestre una progresión legal legible, no el orden crudo del JSON.
     factores_anticipacion = [
         {
             "mes_desde_limite": int(mes),
@@ -54,6 +58,8 @@ def construir_guia_calculo() -> dict:
         )
     ]
 
+    # Los factores SUCGS se convierten a una lista serializable porque Jinja
+    # recorre filas homogéneas y no debe conocer la estructura interna normativa.
     factores_sucgs = [
         {
             "edad": edad.replace("_mas", "+"),
@@ -66,6 +72,8 @@ def construir_guia_calculo() -> dict:
 
     maximos = sebd_vejez["montos_maximos_sebd"]
 
+    # El diccionario final separa datos por sistema para mantener la plantilla
+    # descriptiva; aquí no se calculan pensiones ni se decide elegibilidad.
     return {
         "version_normativa": generales["version"],
         "fuente_general": generales["fuente"],

@@ -47,6 +47,8 @@ def _normalizar_mensual(registro):
 
     salario = a_decimal(registro.salario_mensual or 0)
 
+    # Un mes sin información debe quedar realmente en cero para no mezclar
+    # salarios visibles con cuotas todavía no confirmadas.
     if registro.estado == "SIN_INFORMACION":
         if salario != Decimal("0"):
             raise ValueError(
@@ -69,6 +71,8 @@ def _normalizar_quincenal(registro):
 
     primera = a_decimal(registro.primera_quincena or 0)
     segunda = a_decimal(registro.segunda_quincena or 0)
+    # La captura quincenal permite registrar meses parciales sin completar la
+    # cuota por inferencia; cada quincena se valida por separado.
 
     if primera < 0 or segunda < 0:
         raise ValueError(
@@ -114,6 +118,8 @@ def analizar_detalle_anio_actual(
             "El detalle del año actual contiene meses duplicados."
         )
 
+    # El orden mensual se normaliza antes de acumular totales para que los
+    # últimos meses completos y promedios sean cronológicos, no de captura.
     registros_ordenados = sorted(
         datos.registros,
         key=lambda registro: registro.mes,
@@ -129,6 +135,8 @@ def analizar_detalle_anio_actual(
     ultimo_mes_acreditado: int | None = None
 
     for registro in registros_ordenados:
+        # La normalización convierte ambas modalidades de entrada al mismo
+        # contrato de salida: estado, salario total y quincenas opcionales.
         if datos.modo_captura == "MENSUAL":
             estado, salario, primera, segunda = _normalizar_mensual(
                 registro
@@ -139,6 +147,8 @@ def analizar_detalle_anio_actual(
             )
 
         if registro.cuota_acreditada:
+            # Solo una cuota marcada como acreditada alimenta el total usado
+            # para promedio por cuota; el salario visible sigue en otro total.
             cuotas_identificadas += 1
             ultimo_mes_acreditado = registro.mes
 
@@ -166,6 +176,8 @@ def analizar_detalle_anio_actual(
             )
         )
 
+    # Las bases sugeridas se calculan con meses completos para no proyectar
+    # ingresos desde un mes parcial o sin segunda quincena.
     salario_ultimo = (
         completos[-1][1]
         if completos
