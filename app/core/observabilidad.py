@@ -85,6 +85,7 @@ _OPERACIONES_HTTP = {
     "/simulacion": "ui.simulacion",
     "/comparar": "ui.comparar",
     "/metodologia": "ui.metodologia",
+    "/dev/centro-desarrollo": "dev.centro_desarrollo",
     "/salud": "system.health",
     "/api/sistema/fecha-referencia": "system.date_reference",
     "/api/simulacion/cuotas": "simulation.cuotas",

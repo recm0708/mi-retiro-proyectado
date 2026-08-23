@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+
+{% block title %}
+Centro de desarrollo · {{ app_name }}
+{% endblock %}
+
+{% block content %}
+<section class="hero-section py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10 col-xl-9">
+        <span class="badge text-bg-dark mb-3">{{ estado_dev.bloque }}</span>
+        <h1 class="display-6 fw-bold mb-3">{{ estado_dev.titulo }}</h1>
+        <p class="lead mb-0">{{ estado_dev.descripcion }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-4" aria-labelledby="estado-dev-title">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <article class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h2 id="estado-dev-title" class="h5">Estado del modo desarrollador</h2>
+            <p class="mb-2"><strong>Variable:</strong> <code>{{ estado_dev.dev_mode_env }}</code></p>
+            <p class="mb-2">
+              <strong>Estado:</strong>
+              {% if estado_dev.dev_mode_activo %}
+                <span class="badge text-bg-success">Activo</span>
+              {% else %}
+                <span class="badge text-bg-secondary">Desactivado</span>
+              {% endif %}
+            </p>
+            <p class="mb-0"><strong>Versión de app:</strong> <code>{{ estado_dev.app_version }}</code></p>
+          </div>
+        </article>
+      </div>
+      <div class="col-lg-4">
+        <article class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h2 class="h5">Diagnóstico local</h2>
+            <p class="mb-2"><strong>Esquema JSONL:</strong> <code>{{ estado_dev.schema_version }}</code></p>
+            <p class="mb-2"><strong>Directorio:</strong> <code>{{ estado_dev.directorio_diagnostico }}</code></p>
+            <p class="mb-0"><strong>Archivo vigente:</strong> <code>{{ estado_dev.archivo_log_actual }}</code></p>
+          </div>
+        </article>
+      </div>
+      <div class="col-lg-4">
+        <article class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h2 class="h5">Exportación sanitizada</h2>
+            <p class="mb-2">
+              <strong>ZIP diagnóstico:</strong>
+              {% if estado_dev.exportacion_zip_disponible %}
+                <span class="badge text-bg-success">Disponible</span>
+              {% else %}
+                <span class="badge text-bg-secondary">No disponible</span>
+              {% endif %}
+            </p>
+            <p class="mb-0">{{ estado_dev.total_archivos_existentes }} archivo(s), {{ estado_dev.total_bytes }} byte(s) detectados.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-4" aria-labelledby="archivos-dev-title">
+  <div class="container">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h2 id="archivos-dev-title" class="h5 mb-3">Archivos diagnósticos conocidos</h2>
+        <div class="table-responsive">
+          <table class="table align-middle">
+            <thead>
+              <tr>
+                <th scope="col">Archivo</th>
+                <th scope="col">Existe</th>
+                <th scope="col">Tamaño</th>
+                <th scope="col">Actualizado UTC</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for archivo in estado_dev.archivos_diagnostico %}
+                <tr>
+                  <th scope="row"><code>{{ archivo.nombre }}</code></th>
+                  <td>{{ "Sí" if archivo.existe else "No" }}</td>
+                  <td>{{ archivo.tamano_bytes }} byte(s)</td>
+                  <td>{{ archivo.actualizado_utc or "No disponible" }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-4" aria-labelledby="privacidad-dev-title">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-6">
+        <article class="card h-100 border-warning shadow-sm">
+          <div class="card-body">
+            <h2 id="privacidad-dev-title" class="h5">Advertencias</h2>
+            <ul class="mb-0">
+              {% for advertencia in estado_dev.advertencias %}
+                <li>{{ advertencia }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        </article>
+      </div>
+      <div class="col-lg-6">
+        <article class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h2 class="h5">Controles de privacidad</h2>
+            <ul class="mb-0">
+              {% for control in estado_dev.controles_privacidad %}
+                <li>{{ control }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

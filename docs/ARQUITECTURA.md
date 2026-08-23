@@ -312,3 +312,9 @@ Paso 5 mantiene dos capas separadas: `app/static/js/retiro.js` propone y conserv
 El Paso 6 enlaza a la sección del sistema correspondiente mediante anclas públicas (`#sebd`, `#mixto`, `#sucgs`) sin transportar datos personales, salarios, cuotas ni montos en la URL. Las sustituciones numéricas del caso individual permanecen en la trazabilidad de resultados.
 
 La guía reutiliza el catálogo de fuentes de `app/servicios/fuentes_normativas.py`. Por tanto, una modificación normativa o de fórmula exige revisar en conjunto motor, JSON versionado, trazabilidad, guía pública y pruebas relacionadas.
+
+## DEV.2 — Centro de desarrollo
+
+La ruta interna `/dev/centro-desarrollo` muestra una superficie local de desarrollo para revisar el estado técnico de Developer Diagnostics. Esta vista no ejecuta cálculos previsionales, no lee cuerpos HTTP, no procesa PDFs, no muestra rutas absolutas del equipo y no expone identidad, salarios, cuotas ni montos de pensión.
+
+La ruta usa `MRP_DEV_MODE` solo como indicador de activación diagnóstica y conserva `0.0.26-beta` como versión visible mientras DEV.2 R1 permanezca en desarrollo.
