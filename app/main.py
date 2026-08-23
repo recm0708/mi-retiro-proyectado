@@ -140,6 +140,7 @@ BASE_DIR = Path(__file__).resolve().parent
 # ============================================================
 from app.servicios.fuentes_normativas import construir_catalogo_metodologia
 from app.servicios.como_se_calcula import construir_guia_calculo
+from app.servicios.centro_desarrollo import construir_estado_centro_desarrollo
 
 
 app = FastAPI(
@@ -395,6 +396,26 @@ async def como_se_calcula(
             "version": APP_VERSION,
             "catalogo": construir_catalogo_metodologia(),
             "guia": construir_guia_calculo(),
+        },
+    )
+
+
+@app.get(
+    "/dev/centro-desarrollo",
+    response_class=HTMLResponse,
+)
+async def centro_desarrollo(
+    request: Request,
+):
+    """Muestra el Centro de desarrollo de DEV.2 sin exponer datos sensibles."""
+
+    return templates.TemplateResponse(
+        request=request,
+        name="dev_centro_desarrollo.html",
+        context={
+            "pagina_activa": "centro_desarrollo",
+            "version": APP_VERSION,
+            "estado_dev": construir_estado_centro_desarrollo(),
         },
     )
 
