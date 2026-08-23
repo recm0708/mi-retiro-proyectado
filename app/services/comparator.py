@@ -9,7 +9,7 @@ from __future__ import annotations
 
 from datetime import date
 
-from app.core.dinero import redondear_moneda
+from app.core.money import redondear_moneda
 from app.models.comparacion import (
     DatosComparacionEscenarios,
     FilaComparacionEscenario,
@@ -20,9 +20,9 @@ from app.models.pension import (
     DatosResultadoSEBD,
     DatosResultadoSUCGS,
 )
-from app.services.resultados_mixto import calcular_resultado_mixto
-from app.services.resultados_sebd import calcular_resultado_sebd
-from app.services.resultados_sucgs import calcular_resultado_sucgs
+from app.services.mixto_results import calcular_resultado_mixto
+from app.services.sebd_results import calcular_resultado_sebd
+from app.services.sucgs_results import calcular_resultado_sucgs
 
 
 NOMBRES_SISTEMA = {

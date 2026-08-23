@@ -5,6 +5,7 @@ Este archivo registra **cambios notables por versión**. No sustituye el histori
 Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamente en GOV.1.1 a partir del historial real. `0.0.22-beta` es la primera versión formal adoptada bajo la política de GOV.1.2.
 
 ## [Unreleased]
+- MANT.1 R5H: se completa la auditoría de nombres técnicos restantes, con normalización de módulos, assets, plantillas, workflow y pruebas, sin cambios en cálculo, normativa ni versión.
 
 ### MANT.1 R5G
 
@@ -192,7 +193,7 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 - B/.0.00 en el bono de reconocimiento del Mixto se explica como ausencia de bono incorporado al cálculo, evitando que parezca un dato oficial inferido;
 - el resumen unificado sustituye lenguaje interno por una explicación orientada al Asegurado(a);
 - se prepara una copia imprimible mediante la función nativa del navegador (**Imprimir / Guardar como PDF**) con identificación de versión, sistema, escenario y fecha de generación, dejando explícito que no es un documento oficial de la CSS; el informe formal y los formatos finales continúan reservados para REP.1;
-- la orquestación se encapsula en `resultados_orquestacion.js` para no duplicar fórmulas de los motores existentes y se añaden 16 regresiones específicas; gate candidato: **800 pruebas**.
+- la orquestación se encapsula en `results_orchestration.js` para no duplicar fórmulas de los motores existentes y se añaden 16 regresiones específicas; gate candidato: **800 pruebas**.
 
 ### UX.4.6g R1.4.3 — alineación visual final
 
@@ -253,7 +254,7 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 - mantenida la sugerencia editable de 12 cuotas cuando el Asegurado(a) confirma que continuará cotizando, ahora con explicación visible y accesible;
 - los cuatro selectores decisionales señalados del Paso 3 comienzan en `Seleccione una opción` y dejan de persistir elecciones silenciosas antes de una decisión real;
 - el año inicial del historial y el horizonte inicial de cinco años del Paso 4 exponen procedencia automática y cambian a `Editado por ti` cuando el usuario los modifica;
-- incorporada `procesamiento_adjuntos.js` como contrato global para comunicar `Analizando documento… Esto puede tardar unos segundos.`, bloquear dobles ejecuciones y exponer estado accesible durante los tres análisis de archivo existentes;
+- incorporada `attachment_processing.js` como contrato global para comunicar `Analizando documento… Esto puede tardar unos segundos.`, bloquear dobles ejecuciones y exponer estado accesible durante los tres análisis de archivo existentes;
 - corregido el registro defectuoso del listener de **Revisar importación** del detalle anual que podía interrumpir la inicialización de controles posteriores del Paso 3;
 - ADR-169 y ADR-170 formalizan los contratos de decisiones/procedencia y procesamiento de adjuntos; RF-337 a RF-350 y TR-017/TR-018 incorporan su trazabilidad;
 - `VERSION` permanece en `0.0.26-beta`; R1 no modifica motores previsionales, normativa, parsers ni dependencias.

@@ -95,7 +95,7 @@ La primera revisión manual confirmó que R1 renderiza la guía y sus tres siste
 3. los importes de la guía no mostraban separador de miles;
 4. las tablas desplegables de factores podían usar mejor el ancho disponible.
 
-R1.2 corrige esas cuatro brechas. La explicación del flujo se contrastó con `proyeccion_cuotas.py`, `historial_salarios.py`, `proyeccion_salarios.py`, `linea_tiempo.py` y `retiro.py`; por ello muestra operaciones que ya ejecuta el producto: cuotas restantes del año, normalización salarial, crecimiento compuesto, prorrateo salarial según cuotas y estimación de cuotas hasta la fecha de retiro.
+R1.2 corrige esas cuatro brechas. La explicación del flujo se contrastó con `contribution_projection.py`, `salary_history.py`, `salary_projection.py`, `timeline.py` y `retirement.py`; por ello muestra operaciones que ya ejecuta el producto: cuotas restantes del año, normalización salarial, crecimiento compuesto, prorrateo salarial según cuotas y estimación de cuotas hasta la fecha de retiro.
 
 La tabla SEBD pasa a ocho columnas en escritorio —24 factores en tres filas— y SUCGS a diez columnas —46 factores en cinco filas aproximadas—. Las reglas responsive reducen columnas progresivamente. La capa visual sigue usando tokens semánticos y agrega foco visible para no depender del tema Oscuro observado en las capturas.
 

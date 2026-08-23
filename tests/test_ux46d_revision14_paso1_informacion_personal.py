@@ -9,8 +9,8 @@ ROOT = Path(__file__).resolve().parents[1]
 class TestUX46dRevision14Paso1InformacionPersonal(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.simulacion = (ROOT / "app/templates/simulacion.html").read_text(encoding="utf-8")
-        cls.importacion_js = (ROOT / "app/static/js/importacion_datos_oficiales.js").read_text(encoding="utf-8")
+        cls.simulacion = (ROOT / "app/templates/simulation.html").read_text(encoding="utf-8")
+        cls.importacion_js = (ROOT / "app/static/js/official_data_import.js").read_text(encoding="utf-8")
 
     def test_paso_uno_unifica_identificacion_y_prevision_en_informacion_personal(self):
         panel = self.simulacion.split('data-panel="1"', 1)[1].split('data-panel="2"', 1)[0]

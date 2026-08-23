@@ -9,7 +9,7 @@ from datetime import date
 from typing import Literal
 from pydantic import BaseModel, Field, field_validator
 
-from app.core.dinero import (
+from app.core.money import (
     tiene_maximo_dos_decimales,
 )
 

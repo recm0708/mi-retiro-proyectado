@@ -191,7 +191,7 @@ Nueva simulación | {{ app_name }}
                 </div>
               </div>
 
-              {% include "partials/importacion_datos_oficiales.html" %}
+              {% include "partials/official_data_import.html" %}
 
               <form id="form-datos-personales">
                 <div id="bloque-datos-personales" class="personal-data-form">
@@ -511,7 +511,7 @@ Nueva simulación | {{ app_name }}
                 </p>
               </div>
 
-              {% include "partials/historial_salarial.html" %}
+              {% include "partials/salary_history.html" %}
 
               {% include "partials/detalle_anio_actual.html" %}
 
@@ -1071,12 +1071,12 @@ Nueva simulación | {{ app_name }}
 
         <!-- Paso 5 modularizado para evitar aumentar este archivo. -->
 
-        {% include "partials/retiro.html" %}
+        {% include "partials/retirement.html" %}
 
 
         <!-- Paso 6 modularizado: resultados y cálculo de pensión. -->
 
-        {% include "partials/resultados.html" %}
+        {% include "partials/results.html" %}
 
 
 
@@ -1111,21 +1111,21 @@ Nueva simulación | {{ app_name }}
 
 <!-- Utilidades de entrada y formato monetario. -->
 <script
-  src="{{ url_for('static', path='/js/moneda.js') }}"
+  src="{{ url_for('static', path='/js/currency.js') }}"
 ></script>
 
 
 <!-- JavaScript principal del asistente. -->
 
 <script
-  src="{{ url_for('static', path='/js/simulacion.js') }}"
+  src="{{ url_for('static', path='/js/simulation.js') }}"
 ></script>
 
 
 <!-- Gestión específica del historial salarial. -->
 
 <script
-  src="{{ url_for('static', path='/js/historial_salarios.js') }}"
+  src="{{ url_for('static', path='/js/salary_history.js') }}"
 ></script>
 
 
@@ -1137,7 +1137,7 @@ Nueva simulación | {{ app_name }}
 
 <!-- Importación revisable: Mi Retiro Seguro en Paso 1 y Ficha Digital en Paso 3. -->
 <script
-  src="{{ url_for('static', path='/js/importacion_datos_oficiales.js') }}"
+  src="{{ url_for('static', path='/js/official_data_import.js') }}"
 ></script>
 
 
@@ -1150,26 +1150,26 @@ Nueva simulación | {{ app_name }}
 <!-- Presentación integrada de historial y proyección. -->
 
 <script
-  src="{{ url_for('static', path='/js/linea_tiempo.js') }}"
+  src="{{ url_for('static', path='/js/timeline.js') }}"
 ></script>
 
 
 <!-- Gestión específica de fechas y escenarios de retiro. -->
 
 <script
-  src="{{ url_for('static', path='/js/retiro.js') }}"
+  src="{{ url_for('static', path='/js/retirement.js') }}"
 ></script>
 
 
 <!-- Integración de los motores legales con el Paso 6. -->
 <script
-  src="{{ url_for('static', path='/js/resultados.js') }}"
+  src="{{ url_for('static', path='/js/results.js') }}"
 ></script>
 
 
 <!-- Navegación común del asistente al final del paso activo. -->
 <script
-  src="{{ url_for('static', path='/js/navegacion_wizard.js') }}"
+  src="{{ url_for('static', path='/js/wizard_navigation.js') }}"
 ></script>
 
 {% endblock %}

@@ -10,7 +10,7 @@ from unittest.mock import patch
 
 from fastapi.testclient import TestClient
 
-from app.core.observabilidad import ruta_log_actual
+from app.core.observability import ruta_log_actual
 from app.main import app
 from app.services.centro_desarrollo import construir_estado_centro_desarrollo
 

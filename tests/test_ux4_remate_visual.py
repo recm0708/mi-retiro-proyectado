@@ -12,16 +12,16 @@ class TestRemateUX41(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.simulacion = (ROOT / "app/templates/simulacion.html").read_text(
+        cls.simulacion = (ROOT / "app/templates/simulation.html").read_text(
             encoding="utf-8",
         )
         cls.historial = (
-            ROOT / "app/templates/partials/historial_salarial.html"
+            ROOT / "app/templates/partials/salary_history.html"
         ).read_text(encoding="utf-8")
         cls.resultados = (
-            ROOT / "app/templates/partials/resultados.html"
+            ROOT / "app/templates/partials/results.html"
         ).read_text(encoding="utf-8")
-        cls.retiro_js = (ROOT / "app/static/js/retiro.js").read_text(
+        cls.retiro_js = (ROOT / "app/static/js/retirement.js").read_text(
             encoding="utf-8",
         )
         cls.estilos = (ROOT / "app/static/css/style.css").read_text(
@@ -58,10 +58,10 @@ class TestRemateUX41(unittest.TestCase):
         self.assertIn("padding-top: 2rem", self.estilos)
 
     def test_ayuda_contextual_es_hover_focus_y_no_solo_click(self):
-        js = (ROOT / "app/static/js/accesibilidad.js").read_text(
+        js = (ROOT / "app/static/js/accessibility.js").read_text(
             encoding="utf-8",
         )
-        css = (ROOT / "app/static/css/accesibilidad.css").read_text(
+        css = (ROOT / "app/static/css/accessibility.css").read_text(
             encoding="utf-8",
         )
 

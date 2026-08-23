@@ -4,7 +4,7 @@ import unittest
 from datetime import date
 
 from app.models.pension import DatosCalculoSUCGS
-from app.models.simulacion import RegistroHistorialSalarial
+from app.models.simulation import RegistroHistorialSalarial
 from app.engines.sucgs import calcular_sucgs
 
 

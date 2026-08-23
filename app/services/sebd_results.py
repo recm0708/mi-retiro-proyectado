@@ -1,20 +1,18 @@
-"""Integración del asistente con el motor del Subsistema Mixto.
+"""Integración general del asistente con las modalidades SEBD.
 
-Este servicio reutiliza la construcción cronológica validada para SEBD y
-agrega únicamente los datos específicos del Componente de Ahorro Personal.
-No contiene fórmulas legales nuevas: prepara una entrada coherente para el
-motor ``mixto.py`` y conserva la trazabilidad de años proyectados.
+Reutiliza la construcción cronológica ya validada en ``results.py`` y
+entrega la entrada consolidada al clasificador/motor general SEBD.
 """
 
 from app.models.pension import (
-    DatosCalculoMixto,
-    DatosResultadoMixto,
-    ResumenResultadoMixto,
+    DatosCalculoSEBD,
+    DatosResultadoSEBD,
+    ResumenResultadoSEBD,
 )
-from app.engines.mixto import calcular_mixto
-from app.services.trazabilidad import construir_trazabilidad_mixto
-from app.services.resultado_unificado import construir_resumen_unificado_mixto
-from app.services.resultados import (
+from app.engines.sebd_modalidades import calcular_sebd
+from app.services.traceability import construir_trazabilidad_sebd
+from app.services.unified_result import construir_resumen_unificado_sebd
+from app.services.results import (
     _buscar_escenario_referencia,
     _buscar_escenario_retiro,
     _buscar_escenario_salarial,
@@ -24,10 +22,10 @@ from app.services.resultados import (
 )
 
 
-def calcular_resultado_mixto(
-    datos: DatosResultadoMixto,
-) -> ResumenResultadoMixto:
-    """Calcula el Mixto usando el escenario seleccionado en los Pasos 1–5."""
+def calcular_resultado_sebd(
+    datos: DatosResultadoSEBD,
+) -> ResumenResultadoSEBD:
+    """Clasifica y calcula la prestación SEBD del escenario elegido."""
 
     if not datos.linea_tiempo.escenarios:
         raise ValueError(
@@ -69,25 +67,17 @@ def calcular_resultado_mixto(
         escenario_referencia=escenario_referencia,
     )
 
-    calculo = calcular_mixto(
-        DatosCalculoMixto(
+    calculo = calcular_sebd(
+        DatosCalculoSEBD(
             fecha_nacimiento=datos.fecha_nacimiento,
             sexo=datos.sexo,
             fecha_retiro=escenario_retiro.fecha_retiro,
-            cuotas_totales=escenario_retiro.cuotas_estimadas_totales,
+            cuotas_totales=(
+                escenario_retiro.cuotas_estimadas_totales
+            ),
             cuotas_exceso_antes_referencia=exceso_antes,
             cuotas_exceso_despues_referencia=exceso_despues,
             registros=registros,
-            sistema_seleccionado="MIXTO",
-            saldo_ahorro_personal=datos.saldo_ahorro_personal,
-            bono_reconocimiento=datos.bono_reconocimiento,
-            bono_reconocimiento_confirmado_oficialmente=(
-                datos.bono_reconocimiento_confirmado_oficialmente
-            ),
-            valor_actuarial_expectativa_vida=(
-                datos.valor_actuarial_expectativa_vida
-            ),
-            opcion_prestacion_cap=datos.opcion_prestacion_cap,
         )
     )
 
@@ -95,14 +85,14 @@ def calcular_resultado_mixto(
 
     if datos.modo_integracion == "SOLO_ACREDITADO":
         advertencias.append(
-            "La comparación acreditada conserva el saldo CAP y demás datos "
-            "específicos introducidos en el Paso 6, pero no añade salarios ni "
-            "cuotas futuras al historial."
+            "Este cálculo conserva la fecha de retiro seleccionada, pero usa "
+            "solo cuotas y salarios ya acreditados en el historial actual; "
+            "no incorpora nuevas cotizaciones futuras."
         )
 
     if anios_proyectados:
         advertencias.append(
-            "El cálculo Mixto incorpora salarios proyectados de los años: "
+            "El cálculo incorpora salarios proyectados de los años: "
             + ", ".join(str(anio) for anio in anios_proyectados)
             + "."
         )
@@ -113,14 +103,14 @@ def calcular_resultado_mixto(
             "ocurre antes de consumir todas las cuotas previstas de ese año."
         )
 
-    resumen = ResumenResultadoMixto(
+    resumen = ResumenResultadoSEBD(
         modo_integracion=datos.modo_integracion,
         escenario_retiro=escenario_retiro,
-        escenario_salarial_nombre=escenario_salarial.nombre,
+        escenario_salarial_nombre=datos.escenario_salarial_nombre,
         anios_proyectados_incluidos=anios_proyectados,
         advertencias_integracion=advertencias,
         calculo=calculo,
     )
-    resumen.trazabilidad = construir_trazabilidad_mixto(resumen)
-    resumen.resumen_unificado = construir_resumen_unificado_mixto(resumen)
+    resumen.trazabilidad = construir_trazabilidad_sebd(resumen)
+    resumen.resumen_unificado = construir_resumen_unificado_sebd(resumen)
     return resumen

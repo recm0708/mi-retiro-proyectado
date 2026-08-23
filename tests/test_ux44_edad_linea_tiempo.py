@@ -17,7 +17,7 @@ class TestUX44EdadLineaTiempo(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.cliente = TestClient(app)
-        cls.linea_tiempo = (ROOT / "app/static/js/linea_tiempo.js").read_text(
+        cls.linea_tiempo = (ROOT / "app/static/js/timeline.js").read_text(
             encoding="utf-8"
         )
         cls.css = (ROOT / "app/static/css/style.css").read_text(encoding="utf-8")
@@ -43,7 +43,7 @@ class TestUX44EdadLineaTiempo(unittest.TestCase):
         self.assertIn(".timeline-table {\n  min-width: 900px;", self.css)
         respuesta = self.cliente.get("/simulacion")
         self.assertEqual(respuesta.status_code, 200)
-        self.assertIn("linea_tiempo.js", respuesta.text)
+        self.assertIn("timeline.js", respuesta.text)
 
 
 if __name__ == "__main__":

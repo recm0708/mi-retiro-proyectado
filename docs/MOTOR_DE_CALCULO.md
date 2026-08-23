@@ -30,7 +30,7 @@ JavaScript no implementa una segunda copia de las fórmulas principales.
 
 ## 2. Precisión monetaria
 
-La lógica sensible usa `Decimal` y utilidades de `app/core/dinero.py`.
+La lógica sensible usa `Decimal` y utilidades de `app/core/money.py`.
 
 Criterios:
 
@@ -98,19 +98,19 @@ En `FUTURO_CONOCIDO` se calcula la tasa anual compuesta equivalente entre la bas
 
 ## 7. Línea temporal
 
-`linea_tiempo.py` combina:
+`timeline.py` combina:
 
 - historia real;
 - año actual;
 - futuro proyectado.
 
-Antes de combinar etapas, `linea_tiempo.py` exige historial completo, total de cuotas coherente con Paso 2 y coincidencia de las cuotas del año actual. Así evita sumar cuotas restantes a una fotografía histórica distinta.
+Antes de combinar etapas, `timeline.py` exige historial completo, total de cuotas coherente con Paso 2 y coincidencia de las cuotas del año actual. Así evita sumar cuotas restantes a una fotografía histórica distinta.
 
 Cuando un período futuro contiene menos de doce cuotas, el salario cotizado proyectado se limita al período correspondiente. La referencia mensual del escenario viaja separada mediante `salario_mensual_proyectado`. Si no se proyectan cuotas, el salario cotizado es cero y el estado se identifica como `PROYECTADO_SIN_COTIZACION`.
 
 ## 8. Retiro
 
-`retiro.py` construye escenarios de retiro a partir de:
+`retirement.py` construye escenarios de retiro a partir de:
 
 - fecha de nacimiento/sexo;
 - fecha de evaluación;
@@ -183,13 +183,13 @@ Ambos reutilizan los mismos motores; no existen fórmulas duplicadas para la fot
 
 ## 13. Comparador
 
-`comparador.py` ejecuta los servicios existentes para diferentes escenarios y normaliza salidas comparables.
+`comparator.py` ejecuta los servicios existentes para diferentes escenarios y normaliza salidas comparables.
 
 No suma pagos únicos con pensiones mensuales ni crea una cuarta fórmula previsional.
 
 ## 14. Trazabilidad
 
-`trazabilidad.py` transforma resultados emitidos por los motores en una secuencia explicativa:
+`traceability.py` transforma resultados emitidos por los motores en una secuencia explicativa:
 
 ```text
 dato
@@ -205,7 +205,7 @@ La trazabilidad explica; no recalcula el monto jurídico.
 
 ## 15. Resultado unificado
 
-`resultado_unificado.py` adapta el resultado específico a un contrato transversal común para interfaz/comparación.
+`unified_result.py` adapta el resultado específico a un contrato transversal común para interfaz/comparación.
 
 `calculo` continúa siendo el detalle específico del motor.
 

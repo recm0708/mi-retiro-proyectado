@@ -103,9 +103,9 @@ class TestGov13DocumentacionR4(unittest.TestCase):
     def test_matriz_referencia_archivos_criticos_existentes(self):
         texto = (DOCS / "MATRIZ_TRAZABILIDAD.md").read_text(encoding="utf-8")
         rutas = (
-            "app/models/trazabilidad.py",
-            "app/services/trazabilidad.py",
-            "app/core/archivos_pdf.py",
+            "app/models/traceability.py",
+            "app/services/traceability.py",
+            "app/core/pdf_files.py",
             "app/engines/sebd.py",
             "app/engines/mixto.py",
             "app/engines/sucgs.py",

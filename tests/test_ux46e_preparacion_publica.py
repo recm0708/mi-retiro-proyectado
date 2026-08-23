@@ -15,7 +15,7 @@ class TestUX46ePreparacionPublica(unittest.TestCase):
     def setUpClass(cls):
         cls.base = (ROOT / "app/templates/base.html").read_text(encoding="utf-8")
         cls.metodologia = (ROOT / "app/templates/metodologia.html").read_text(encoding="utf-8")
-        cls.terminos = (ROOT / "app/templates/partials/privacidad_consentimiento.html").read_text(encoding="utf-8")
+        cls.terminos = (ROOT / "app/templates/partials/privacy_consent.html").read_text(encoding="utf-8")
         cls.readme = (ROOT / "README.md").read_text(encoding="utf-8")
         cls.publicacion = (ROOT / "docs/PREPARACION_PUBLICA_GITHUB.md").read_text(encoding="utf-8")
         cls.version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
@@ -49,7 +49,7 @@ class TestUX46ePreparacionPublica(unittest.TestCase):
 
     def test_readme_muestra_badges_reales_y_estado_actual(self):
         self.assertIn("actions/workflows/ci.yml/badge.svg?branch=main", self.readme)
-        self.assertIn("actions/workflows/auditoria-gobernanza.yml/badge.svg?branch=main", self.readme)
+        self.assertIn("actions/workflows/governance-audit.yml/badge.svg?branch=main", self.readme)
         badge_version = self.version.replace("-", "--")
         self.assertIn(
             f"img.shields.io/badge/versi%C3%B3n-{badge_version}",

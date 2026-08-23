@@ -13,9 +13,11 @@ from unittest.mock import patch
 from fastapi.testclient import TestClient
 
 from app import main as main_module
-from app.core.observabilidad import contexto_correlacion, ruta_log_actual
+from app.core.observability import contexto_correlacion, ruta_log_actual
 from app.main import app
-from app.services import fecha_referencia
+from app.services import reference_date
+
+fecha_referencia = reference_date
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -45,8 +47,8 @@ class TestGov14ObservabilidadIntegracion(unittest.TestCase):
         )
 
     def setUp(self):
-        fecha_referencia._cache_resultado = None
-        fecha_referencia._cache_instante = 0.0
+        reference_date._cache_resultado = None
+        reference_date._cache_instante = 0.0
 
     def test_middleware_apagado_no_agrega_header_ni_log(self):
         with TemporaryDirectory() as temp:
@@ -155,10 +157,10 @@ class TestGov14ObservabilidadIntegracion(unittest.TestCase):
                         "_consultar_fecha_http",
                         return_value=date(2026, 8, 17),
                     ) as consulta:
-                        primera = fecha_referencia.obtener_fecha_referencia_confiable(
+                        primera = reference_date.obtener_fecha_referencia_confiable(
                             forzar=True
                         )
-                        segunda = fecha_referencia.obtener_fecha_referencia_confiable()
+                        segunda = reference_date.obtener_fecha_referencia_confiable()
 
                 self.assertTrue(primera.confiable)
                 self.assertEqual(primera, segunda)

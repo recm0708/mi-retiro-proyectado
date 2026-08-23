@@ -11,6 +11,34 @@
 
 La estrategia combina pruebas automatizadas, CI, casos sintéticos/anonimizados y validación manual cuando una propiedad no puede demostrarse suficientemente con código.
 
+## Validación MANT.1 R5H — nombres técnicos restantes
+
+MANT.1 R5H completa una segunda pasada sobre nombres técnicos restantes,
+sincronizando imports, rutas de assets, referencias de plantillas,
+documentación viva y pruebas automatizadas.
+
+Comandos ejecutados para el cierre local:
+
+```powershell
+python -m compileall app tests -q
+python -m pytest -q --tb=short
+python -m unittest discover -s tests -q
+git diff --check
+```
+
+Resultado observado:
+
+```text
+924 passed, 4749 subtests passed
+Ran 924 tests
+OK
+git diff --check: OK
+```
+
+La revisión no cambia `VERSION`, `APP_VERSION`, motores previsionales,
+parámetros normativos, contratos JSON regulatorios, rutas públicas
+funcionales, claves de almacenamiento, ids, clases ni `_entregas/`.
+
 ## Validación MANT.1 R5E — nombres de carpetas técnicas
 
 MANT.1 R5E valida que las carpetas técnicas en español hayan sido renombradas a
@@ -410,18 +438,18 @@ python -m pip check
 
 Inventario vigente: **99 módulos**.
 
-- `tests/test_accesibilidad_temas.py`
-- `tests/test_accesibilidad_ux4.py`
+- `tests/test_accessibility_themes.py`
+- `tests/test_accessibility_ux4.py`
 - `tests/test_comparator.py`
-- `tests/test_dinero.py`
-- `tests/test_estabilizacion_visual.py`
+- `tests/test_money.py`
+- `tests/test_visual_stabilization.py`
 - `tests/test_regulatory_sources.py`
 - `tests/test_gov12_versionado.py`
 - `tests/test_gov13_documentacion.py`
 - `tests/test_gov13_documentacion_r2.py`
 - `tests/test_gov13_documentacion_r3.py`
 - `tests/test_gov13_documentacion_r4.py`
-- `tests/test_gov14_observabilidad.py`
+- `tests/test_gov14_observability.py`
 - `tests/test_gov14_observabilidad_integracion.py`
 - `tests/test_gov15_cierre_seguridad_privacidad.py`
 - `tests/test_gov15_modelo_amenazas.py`
@@ -432,9 +460,9 @@ Inventario vigente: **99 módulos**.
 - `tests/test_gov_firma_git.py`
 - `tests/test_identidad_interfaz.py`
 - `tests/test_identidad_publica_github_pre_r8.py`
-- `tests/test_identidad_visual_pre_r8.py`
+- `tests/test_visual_identity_pre_r8.py`
 - `tests/test_indemnizacion_vejez.py`
-- `tests/test_linea_tiempo.py`
+- `tests/test_timeline.py`
 - `tests/test_mantenimiento_tecnico.py`
 - `tests/test_mixto.py`
 - `tests/test_mixto_prestaciones_cap.py`
@@ -452,7 +480,7 @@ Inventario vigente: **99 módulos**.
 - `tests/test_salary_projection.py`
 - `tests/test_pypdf_compatibilidad.py`
 - `tests/test_responsive_ux3.py`
-- `tests/test_resultado_unificado.py`
+- `tests/test_unified_result.py`
 - `tests/test_results.py`
 - `tests/test_mixto_results.py`
 - `tests/test_modality_results.py`
@@ -467,7 +495,7 @@ Inventario vigente: **99 módulos**.
 - `tests/test_ux42_estados_visuales.py`
 - `tests/test_ux43_formularios_teclado.py`
 - `tests/test_ux44_detalle_anio_actual.py`
-- `tests/test_ux44_edad_linea_tiempo.py`
+- `tests/test_ux44_edad_timeline.py`
 - `tests/test_ux44_importacion_oficial.py`
 - `tests/test_ux44_referencia_pdf.py`
 - `tests/test_ux45_cierre_resultados_accesibilidad.py`
@@ -507,7 +535,7 @@ Inventario vigente: **99 módulos**.
 - `tests/test_ux46e_renumeracion_documental.py`
 - `tests/test_ux46f_r11_bloqueo_documental_vista_principal.py`
 - `tests/test_ux46f_r1_consistencia_procedencia_adjuntos.py`
-- `tests/test_ux46g_r1_escenarios_retiro.py`
+- `tests/test_ux46g_r1_escenarios_retirement.py`
 - `tests/test_ux4_remate_visual.py`
 
 ## 4. Categorías
@@ -565,7 +593,7 @@ La CI debe permanecer verde antes de considerar cerrado un hito formal.
 
 ### UX.4.6g R1 — gate candidato
 
-La revisión acumula 18 regresiones en `tests/test_ux46g_r1_escenarios_retiro.py`. Partiendo del cierre de UX.4.6f con 762 pruebas, el gate objetivo del candidato es **780 pruebas en `OK`**, además de `pip check`, `compileall`, sintaxis JavaScript y `git diff --check`. La validación manual debe cubrir: sugerencia `+1…+N` desde Paso 4, preservación de una edición manual, ausencia de selección anticipada automática, fechas anticipadas transcurridas deshabilitadas, disponibilidad de la fecha de evaluación dentro de banda para sexo `F`/`M`, presencia de `+4`, tabla corta sin scroll vertical interno, mensaje explícito de cobertura de fecha personalizada y controles de fecha compactos/validados en Claro, Oscuro y Alto contraste.
+La revisión acumula 18 regresiones en `tests/test_ux46g_r1_escenarios_retirement.py`. Partiendo del cierre de UX.4.6f con 762 pruebas, el gate objetivo del candidato es **780 pruebas en `OK`**, además de `pip check`, `compileall`, sintaxis JavaScript y `git diff --check`. La validación manual debe cubrir: sugerencia `+1…+N` desde Paso 4, preservación de una edición manual, ausencia de selección anticipada automática, fechas anticipadas transcurridas deshabilitadas, disponibilidad de la fecha de evaluación dentro de banda para sexo `F`/`M`, presencia de `+4`, tabla corta sin scroll vertical interno, mensaje explícito de cobertura de fecha personalizada y controles de fecha compactos/validados en Claro, Oscuro y Alto contraste.
 
 ### UX.4.6g R1.4.2 — robustez de inicialización
 

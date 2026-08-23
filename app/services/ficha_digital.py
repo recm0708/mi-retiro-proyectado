@@ -14,7 +14,7 @@ import unicodedata
 
 from pypdf import PdfReader
 
-from app.models.simulacion import RegistroFichaDigital, ResumenFichaDigital
+from app.models.simulation import RegistroFichaDigital, ResumenFichaDigital
 
 
 MESES = {

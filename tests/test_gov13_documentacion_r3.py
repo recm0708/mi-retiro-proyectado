@@ -51,7 +51,7 @@ class TestGov13DocumentacionR3(unittest.TestCase):
                 self.assertTrue(snapshot.is_file(), str(snapshot))
 
     def test_version_privacidad_coincide_con_frontend(self):
-        js = (ROOT / "app/static/js/privacidad.js").read_text(encoding="utf-8")
+        js = (ROOT / "app/static/js/privacy.js").read_text(encoding="utf-8")
         match = re.search(r'VERSION_PRIVACIDAD\s*=\s*"([^"]+)"', js)
         self.assertIsNotNone(match)
         version = match.group(1)

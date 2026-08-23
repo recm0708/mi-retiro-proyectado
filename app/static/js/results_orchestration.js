@@ -19,7 +19,7 @@
 
     const enlace = document.createElement("link");
     enlace.rel = "stylesheet";
-    enlace.href = "/static/css/resultados.css";
+    enlace.href = "/static/css/results.css";
     enlace.dataset.resultadosOrquestacionCss = "1";
     document.head.appendChild(enlace);
   }

@@ -117,7 +117,7 @@ La publicación del repositorio no elimina la revisión jurídica externa ni cua
 - [`../tests/test_ver2_documentacion_vigente.py`](../tests/test_ver2_documentacion_vigente.py) — coherencia de superficies vigentes durante VER.2.
 - [`../tests/validation_cases/README.md`](../tests/validation_cases/README.md) — reglas de casos sintéticos/anonimizados.
 - `../.github/workflows/ci.yml` — CI funcional.
-- `../.github/workflows/auditoria-gobernanza.yml` — auditoría automática de gobierno.
+- `../.github/workflows/governance-audit.yml` — auditoría automática de gobierno.
 - `../.github/workflows/verificar-tags.yml` — verificación criptográfica de tags.
 - `../.github/dependabot.yml` — mantenimiento de dependencias.
 
@@ -188,3 +188,5 @@ La metadata de versión de revisión de un documento de dominio puede conservar 
 - **Versión candidata de aplicación:** `0.0.26-beta` — referencia legacy preservada para las regresiones históricas de PLAN.1.
 - El contrato histórico mantiene versiones oficiales de cuatro componentes para la línea estable futura.
 - GOV.1.3 R3 preservó el snapshot archive/regulatory-privacy/ como evidencia histórica normativa y de privacidad.
+
+- [AUDITORIA_NOMBRES_RESTANTES_R5H.md](AUDITORIA_NOMBRES_RESTANTES_R5H.md) — Auditoría MANT.1 R5H de nombres técnicos restantes.

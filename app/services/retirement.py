@@ -21,7 +21,7 @@ from app.core.normativa import (
     cargar_parametros_sebd,
     obtener_edad_referencia,
 )
-from app.models.simulacion import (
+from app.models.simulation import (
     DatosRetiro,
     EscenarioRetiro,
     ResumenRetiro,

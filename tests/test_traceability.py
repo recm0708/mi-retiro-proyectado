@@ -4,7 +4,7 @@ import unittest
 from datetime import date
 from types import SimpleNamespace
 
-from app.services.trazabilidad import (
+from app.services.traceability import (
     construir_trazabilidad_mixto,
     construir_trazabilidad_sebd,
     construir_trazabilidad_sucgs,

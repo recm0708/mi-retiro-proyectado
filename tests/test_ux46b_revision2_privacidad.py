@@ -35,15 +35,15 @@ class TestUX46bRevision2Privacidad(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.client = TestClient(app)
-        cls.simulacion = (ROOT / "app/templates/simulacion.html").read_text(encoding="utf-8")
+        cls.simulacion = (ROOT / "app/templates/simulation.html").read_text(encoding="utf-8")
         cls.importacion = (
-            ROOT / "app/templates/partials/importacion_datos_oficiales.html"
+            ROOT / "app/templates/partials/official_data_import.html"
         ).read_text(encoding="utf-8")
         cls.privacidad_html = (
-            ROOT / "app/templates/partials/privacidad_consentimiento.html"
+            ROOT / "app/templates/partials/privacy_consent.html"
         ).read_text(encoding="utf-8")
-        cls.privacidad_js = (ROOT / "app/static/js/privacidad.js").read_text(encoding="utf-8")
-        cls.accesibilidad_js = (ROOT / "app/static/js/accesibilidad.js").read_text(encoding="utf-8")
+        cls.privacidad_js = (ROOT / "app/static/js/privacy.js").read_text(encoding="utf-8")
+        cls.accesibilidad_js = (ROOT / "app/static/js/accessibility.js").read_text(encoding="utf-8")
         cls.design = (ROOT / "app/static/css/design-system.css").read_text(encoding="utf-8")
         cls.metodologia = (ROOT / "app/templates/metodologia.html").read_text(encoding="utf-8")
         cls.base = (ROOT / "app/templates/base.html").read_text(encoding="utf-8")

@@ -43,7 +43,7 @@ YAML_GITHUB = {
         'labels: ["question", "needs-triage"]',
         "Confirmo que esta consulta no contiene una vulnerabilidad",
     ),
-    ".github/workflows/auditoria-gobernanza.yml": (
+    ".github/workflows/governance-audit.yml": (
         "# Workflow de auditoría de gobernanza.",
         "Propósito:",
         "Alcance:",

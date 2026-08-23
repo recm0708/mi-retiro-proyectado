@@ -65,7 +65,7 @@ class TestGov15CierreSeguridadPrivacidad(unittest.TestCase):
 
     def test_privacidad_conserva_version_material_y_documenta_procedimientos(self):
         texto = (DOCS / "POLITICA_PRIVACIDAD.md").read_text(encoding="utf-8")
-        js = (ROOT / "app/static/js/privacidad.js").read_text(encoding="utf-8")
+        js = (ROOT / "app/static/js/privacy.js").read_text(encoding="utf-8")
         match = re.search(r'VERSION_PRIVACIDAD\s*=\s*"([^"]+)"', js)
         self.assertIsNotNone(match)
         version = match.group(1)

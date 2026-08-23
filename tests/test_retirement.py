@@ -3,10 +3,10 @@
 import unittest
 from datetime import date
 
-from app.models.simulacion import (
+from app.models.simulation import (
     DatosRetiro,
 )
-from app.services.retiro import (
+from app.services.retirement import (
     analizar_retiro,
 )
 

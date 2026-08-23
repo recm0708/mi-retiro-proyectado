@@ -24,7 +24,7 @@ class TestUX46aRedisenioIntegral(unittest.TestCase):
     def test_capa_visual_se_carga_entre_base_y_accesibilidad(self):
         style_pos = self.base.index("path='/css/style.css'")
         design_pos = self.base.index("path='/css/design-system.css'")
-        a11y_pos = self.base.index("path='/css/accesibilidad.css'")
+        a11y_pos = self.base.index("path='/css/accessibility.css'")
 
         self.assertLess(style_pos, design_pos)
         self.assertLess(design_pos, a11y_pos)

@@ -4,8 +4,8 @@ from datetime import date
 from pathlib import Path
 import unittest
 
-from app.models.simulacion import DatosRetiro
-from app.services.retiro import analizar_retiro
+from app.models.simulation import DatosRetiro
+from app.services.retirement import analizar_retiro
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -88,7 +88,7 @@ class UX46GR1EscenariosRetiroTests(unittest.TestCase):
 
     def test_template_no_precarga_anticipados_ni_posteriores(self):
         html = (
-            ROOT / "app/templates/partials/retiro.html"
+            ROOT / "app/templates/partials/retirement.html"
         ).read_text(encoding="utf-8")
         for identificador in (
             "retiro-anticipado-2",
@@ -106,7 +106,7 @@ class UX46GR1EscenariosRetiroTests(unittest.TestCase):
 
     def test_template_conserva_referencia_fija_y_agrega_mas_cuatro(self):
         html = (
-            ROOT / "app/templates/partials/retiro.html"
+            ROOT / "app/templates/partials/retirement.html"
         ).read_text(encoding="utf-8")
         self.assertIn('id="retiro-referencia"', html)
         ref = html.split(
@@ -118,7 +118,7 @@ class UX46GR1EscenariosRetiroTests(unittest.TestCase):
 
     def test_template_incluye_fecha_evaluacion_anticipada_opcional(self):
         html = (
-            ROOT / "app/templates/partials/retiro.html"
+            ROOT / "app/templates/partials/retirement.html"
         ).read_text(encoding="utf-8")
         self.assertIn('id="retiro-fecha-evaluacion"', html)
         self.assertIn("Retirarme en la fecha de evaluación", html)
@@ -126,7 +126,7 @@ class UX46GR1EscenariosRetiroTests(unittest.TestCase):
 
     def test_js_distingue_sugerencia_y_edicion_usuario(self):
         js = (
-            ROOT / "app/static/js/retiro.js"
+            ROOT / "app/static/js/retirement.js"
         ).read_text(encoding="utf-8")
         self.assertIn('"SUGERIDO_PASO4"', js)
         self.assertIn('"EDITADO_USUARIO"', js)
@@ -135,7 +135,7 @@ class UX46GR1EscenariosRetiroTests(unittest.TestCase):
 
     def test_js_bloquea_fechas_transcurridas_y_no_autoelige_anticipados(self):
         js = (
-            ROOT / "app/static/js/retiro.js"
+            ROOT / "app/static/js/retirement.js"
         ).read_text(encoding="utf-8")
         self.assertIn("elemento.disabled = transcurrida", js)
         self.assertIn(
@@ -146,7 +146,7 @@ class UX46GR1EscenariosRetiroTests(unittest.TestCase):
 
     def test_template_recupera_cuadricula_compacta_y_tabla_comun(self):
         html = (
-            ROOT / "app/templates/partials/retiro.html"
+            ROOT / "app/templates/partials/retirement.html"
         ).read_text(encoding="utf-8")
         self.assertEqual(html.count('class="retirement-option-grid"'), 1)
         self.assertNotIn("retirement-scenario-section", html)
@@ -186,20 +186,20 @@ class UX46GR1EscenariosRetiroTests(unittest.TestCase):
         self.assertIn("TR-023", matriz)
 
     def test_js_reconoce_sexo_abreviado_para_referencia_contextual(self):
-        js = (ROOT / "app/static/js/retiro.js").read_text(encoding="utf-8")
+        js = (ROOT / "app/static/js/retirement.js").read_text(encoding="utf-8")
         self.assertIn('["F", "FEMENINO", "MUJER"]', js)
         self.assertIn('["M", "MASCULINO", "HOMBRE"]', js)
         self.assertIn("opcion-retiro-fecha-evaluacion", js)
 
     def test_fecha_personalizada_explica_cobertura_del_paso4(self):
-        html = (ROOT / "app/templates/partials/retiro.html").read_text(encoding="utf-8")
-        js = (ROOT / "app/static/js/retiro.js").read_text(encoding="utf-8")
+        html = (ROOT / "app/templates/partials/retirement.html").read_text(encoding="utf-8")
+        js = (ROOT / "app/static/js/retirement.js").read_text(encoding="utf-8")
         self.assertIn('id="estado-cobertura-fecha-personalizada"', html)
         self.assertIn("Esta fecha está cubierta por tu proyección salarial vigente", js)
         self.assertIn("Esta fecha supera tu proyección salarial actual", js)
 
     def test_fechas_usan_contrato_transversal_estricto(self):
-        js = (ROOT / "app/static/js/accesibilidad.js").read_text(encoding="utf-8")
+        js = (ROOT / "app/static/js/accessibility.js").read_text(encoding="utf-8")
         self.assertIn('FECHA_MINIMA_GLOBAL = "1900-01-01"', js)
         self.assertIn('FECHA_MAXIMA_GLOBAL = "2200-12-31"', js)
         self.assertIn("validarCampoFechaEstricto", js)
@@ -208,13 +208,13 @@ class UX46GR1EscenariosRetiroTests(unittest.TestCase):
         self.assertIn("prepararCamposFecha();", js)
 
     def test_observador_accesibilidad_no_observa_sus_propias_mutaciones(self):
-        js = (ROOT / "app/static/js/accesibilidad.js").read_text(encoding="utf-8")
+        js = (ROOT / "app/static/js/accessibility.js").read_text(encoding="utf-8")
         self.assertIn('if (!control.classList.contains("app-date-input"))', js)
         self.assertIn("observador.disconnect();", js)
         self.assertIn("observador.observe(document.body, opcionesObservacion);", js)
 
     def test_fechas_tienen_ancho_compacto_y_responsive(self):
-        css = (ROOT / "app/static/css/accesibilidad.css").read_text(encoding="utf-8")
+        css = (ROOT / "app/static/css/accessibility.css").read_text(encoding="utf-8")
         self.assertIn(".app-date-input.form-control", css)
         self.assertIn("max-width: 20rem", css)
         self.assertIn("max-width: 575.98px", css)
@@ -233,7 +233,7 @@ class UX46GR1EscenariosRetiroTests(unittest.TestCase):
 
 
     def test_r143_alinea_periodo_historial_con_control_anio(self):
-        html = (ROOT / "app/templates/partials/historial_salarial.html").read_text(encoding="utf-8")
+        html = (ROOT / "app/templates/partials/salary_history.html").read_text(encoding="utf-8")
         css = (ROOT / "app/static/css/design-system.css").read_text(encoding="utf-8")
         self.assertIn('class="row g-4 history-period-row"', html)
         self.assertIn("history-period-summary-column", html)
@@ -241,14 +241,14 @@ class UX46GR1EscenariosRetiroTests(unittest.TestCase):
         self.assertIn("padding-top: 2.3rem", css)
 
     def test_r143_alinea_campos_del_periodo_de_proyeccion(self):
-        html = (ROOT / "app/templates/simulacion.html").read_text(encoding="utf-8")
+        html = (ROOT / "app/templates/simulation.html").read_text(encoding="utf-8")
         css = (ROOT / "app/static/css/design-system.css").read_text(encoding="utf-8")
         self.assertGreaterEqual(html.count("projection-period-label"), 2)
         self.assertIn(".projection-period-label", css)
         self.assertIn("min-height: 1.8rem", css)
 
     def test_r143_resumen_retiro_reserva_ancho_para_cierre_esperado(self):
-        html = (ROOT / "app/templates/partials/retiro.html").read_text(encoding="utf-8")
+        html = (ROOT / "app/templates/partials/retirement.html").read_text(encoding="utf-8")
         bloque_sexo = html.split("Sexo", 1)[0].rsplit('<div class="', 1)[1].split('"', 1)[0]
         bloque_cierre = html.split("Cierre esperado este año", 1)[0].rsplit('<div class="', 1)[1].split('"', 1)[0]
         self.assertIn("col-xl-1", bloque_sexo)

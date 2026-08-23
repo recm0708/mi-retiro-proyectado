@@ -23,22 +23,22 @@ class UX46fR1ConsistenciaProcedenciaAdjuntosTests(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls) -> None:
-        cls.simulacion = leer("app/templates/simulacion.html")
-        cls.historial = leer("app/templates/partials/historial_salarial.html")
+        cls.simulacion = leer("app/templates/simulation.html")
+        cls.historial = leer("app/templates/partials/salary_history.html")
         cls.detalle = leer("app/templates/partials/detalle_anio_actual.html")
         cls.referencia = leer("app/templates/partials/referencia_mi_retiro_seguro.html")
         cls.base = leer("app/templates/base.html")
-        cls.simulacion_js = leer("app/static/js/simulacion.js")
-        cls.historial_js = leer("app/static/js/historial_salarios.js")
+        cls.simulacion_js = leer("app/static/js/simulation.js")
+        cls.historial_js = leer("app/static/js/salary_history.js")
         cls.detalle_js = leer("app/static/js/detalle_anio_actual.js")
-        cls.importacion_js = leer("app/static/js/importacion_datos_oficiales.js")
+        cls.importacion_js = leer("app/static/js/official_data_import.js")
         cls.referencia_js = leer("app/static/js/referencia_mi_retiro_seguro.js")
         cls.procedencia_js = leer("app/static/js/procedencia_editable.js")
-        cls.procesamiento_js = leer("app/static/js/procesamiento_adjuntos.js")
-        cls.gestion_js = leer("app/static/js/gestion_datos.js")
+        cls.procesamiento_js = leer("app/static/js/attachment_processing.js")
+        cls.gestion_js = leer("app/static/js/data_management.js")
         cls.css = leer("app/static/css/procedencia-editable.css")
         cls.design_system_css = leer("app/static/css/design-system.css")
-        cls.accesibilidad_js = leer("app/static/js/accesibilidad.js")
+        cls.accesibilidad_js = leer("app/static/js/accessibility.js")
 
     def test_01_cierre_r1_preserva_0_0_26_sin_congelar_version_actual(self):
         version_actual = leer("VERSION").strip()
@@ -145,7 +145,7 @@ class UX46fR1ConsistenciaProcedenciaAdjuntosTests(unittest.TestCase):
         self.assertNotIn("Has ajustado, completado o excluido", self.procedencia_js)
 
     def test_10_helper_global_de_adjuntos_carga_antes_de_scripts_de_pagina(self):
-        helper = self.base.index("/js/procesamiento_adjuntos.js")
+        helper = self.base.index("/js/attachment_processing.js")
         bloque_pagina = self.base.index("{% block scripts %}")
         self.assertLess(helper, bloque_pagina)
 

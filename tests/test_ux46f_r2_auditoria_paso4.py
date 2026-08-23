@@ -3,7 +3,7 @@
 from pathlib import Path
 import unittest
 
-from app.models.simulacion import (
+from app.models.simulation import (
     DatosCuotas,
     DatosHistorialSalarial,
     DatosLineaTiempo,
@@ -11,8 +11,8 @@ from app.models.simulacion import (
     DatosSalario,
     RegistroHistorialSalarial,
 )
-from app.services.linea_tiempo import construir_linea_tiempo
-from app.services.proyeccion_salarios import proyectar_salario
+from app.services.timeline import construir_linea_tiempo
+from app.services.salary_projection import proyectar_salario
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -191,7 +191,7 @@ class TestUX46fR2AuditoriaPaso4(unittest.TestCase):
         self.assertEqual(1650.0, futuro.salario_mensual_proyectado)
         self.assertEqual(9900.0, futuro.salario_proyectado)
 
-        js = (ROOT / "app/static/js/linea_tiempo.js").read_text(encoding="utf-8")
+        js = (ROOT / "app/static/js/timeline.js").read_text(encoding="utf-8")
         self.assertIn("registro.salario_mensual_proyectado", js)
 
     def test_07_sin_cotizacion_futura_tiene_estado_explicito(self):
@@ -228,17 +228,17 @@ class TestUX46fR2AuditoriaPaso4(unittest.TestCase):
         )
 
     def test_09_interfaz_explica_compuesto_y_futuro_conocido(self):
-        plantilla = (ROOT / "app/templates/simulacion.html").read_text(encoding="utf-8")
+        plantilla = (ROOT / "app/templates/simulation.html").read_text(encoding="utf-8")
         self.assertIn("Se aplica de forma compuesta", plantilla)
         self.assertIn("tasa anual compuesta necesaria", plantilla)
         self.assertIn("se mantendrá constante", plantilla)
         self.assertIn("Cada escenario se calcula de forma compuesta", plantilla)
-        simulacion_js = (ROOT / "app/static/js/simulacion.js").read_text(encoding="utf-8")
+        simulacion_js = (ROOT / "app/static/js/simulation.js").read_text(encoding="utf-8")
         self.assertIn("Tasa equivalente al objetivo", simulacion_js)
 
     def test_10_ajuste_desde_retiro_actualiza_procedencia_y_borrador(self):
-        retiro = (ROOT / "app/static/js/retiro.js").read_text(encoding="utf-8")
-        simulacion = (ROOT / "app/static/js/simulacion.js").read_text(encoding="utf-8")
+        retiro = (ROOT / "app/static/js/retirement.js").read_text(encoding="utf-8")
+        simulacion = (ROOT / "app/static/js/simulation.js").read_text(encoding="utf-8")
 
         self.assertIn('simulacion.origen_proyeccion_anio_fin = "AJUSTADO_DESDE_RETIRO"', retiro)
         self.assertIn("anio_fin: anioMaximo", retiro)
@@ -261,8 +261,8 @@ class TestUX46fR2AuditoriaPaso4(unittest.TestCase):
 
 
     def test_12_escenarios_inicia_sin_porcentajes_predeterminados(self):
-        plantilla = (ROOT / "app/templates/simulacion.html").read_text(encoding="utf-8")
-        javascript = (ROOT / "app/static/js/simulacion.js").read_text(encoding="utf-8")
+        plantilla = (ROOT / "app/templates/simulation.html").read_text(encoding="utf-8")
+        javascript = (ROOT / "app/static/js/simulation.js").read_text(encoding="utf-8")
 
         self.assertNotIn('value="0, 1, 2, 3"', plantilla)
         self.assertIn('placeholder="Escribe los porcentajes a comparar"', plantilla)

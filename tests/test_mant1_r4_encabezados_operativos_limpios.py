@@ -13,7 +13,7 @@ ARCHIVOS_OPERATIVOS = (
     ".github/ISSUE_TEMPLATE/config.yml",
     ".github/ISSUE_TEMPLATE/feature_request.yml",
     ".github/ISSUE_TEMPLATE/question.yml",
-    ".github/workflows/auditoria-gobernanza.yml",
+    ".github/workflows/governance-audit.yml",
     ".github/workflows/ci.yml",
     ".github/workflows/verificar-tags.yml",
     ".githooks/README.md",

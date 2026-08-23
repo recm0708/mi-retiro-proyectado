@@ -12,8 +12,8 @@ segunda todavía no había sido incorporada al momento de una consulta previa.
 
 from decimal import Decimal
 
-from app.core.dinero import a_decimal, redondear_moneda
-from app.models.simulacion import (
+from app.core.money import a_decimal, redondear_moneda
+from app.models.simulation import (
     DatosDetalleAnioActual,
     RegistroDetalleAnioActualNormalizado,
     ResumenDetalleAnioActual,

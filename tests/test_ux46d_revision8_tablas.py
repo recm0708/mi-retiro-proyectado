@@ -11,13 +11,13 @@ class TestUX46DRevision8Tablas(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.historial = (
-            ROOT / "app/templates/partials/historial_salarial.html"
+            ROOT / "app/templates/partials/salary_history.html"
         ).read_text(encoding="utf-8")
         cls.historial_js = (
-            ROOT / "app/static/js/historial_salarios.js"
+            ROOT / "app/static/js/salary_history.js"
         ).read_text(encoding="utf-8")
         cls.importacion_js = (
-            ROOT / "app/static/js/importacion_datos_oficiales.js"
+            ROOT / "app/static/js/official_data_import.js"
         ).read_text(encoding="utf-8")
         cls.style = (ROOT / "app/static/css/style.css").read_text(encoding="utf-8")
         cls.design = (

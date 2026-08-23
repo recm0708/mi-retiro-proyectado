@@ -91,7 +91,7 @@ La documentación del producto se mantiene en:
 
 ## 10. Uso por la interfaz
 
-Los enlaces normativos que necesita la aplicación se cargan desde `regulations/*.json` y se transforman en títulos humanos mediante `app/services/fuentes_normativas.py`.
+Los enlaces normativos que necesita la aplicación se cargan desde `regulations/*.json` y se transforman en títulos humanos mediante `app/services/regulatory_sources.py`.
 
 Los IDs internos no deben mostrarse como si fueran nombres de fuentes.
 

@@ -8,11 +8,11 @@ Los datos históricos se mantienen separados de cualquier
 proyección salarial futura.
 """
 
-from app.core.dinero import (
+from app.core.money import (
     a_decimal,
     redondear_moneda,
 )
-from app.models.simulacion import (
+from app.models.simulation import (
     DatosHistorialSalarial,
     RegistroHistorialNormalizado,
     ResumenHistorialSalarial,

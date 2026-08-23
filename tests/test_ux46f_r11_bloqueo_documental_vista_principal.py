@@ -15,10 +15,10 @@ class UX46fR11BloqueoDocumentalTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         cls.procedencia = leer("app/static/js/procedencia_editable.js")
-        cls.importacion = leer("app/static/js/importacion_datos_oficiales.js")
-        cls.historial = leer("app/static/js/historial_salarios.js")
+        cls.importacion = leer("app/static/js/official_data_import.js")
+        cls.historial = leer("app/static/js/salary_history.js")
         cls.detalle = leer("app/static/js/detalle_anio_actual.js")
-        cls.simulacion = leer("app/static/js/simulacion.js")
+        cls.simulacion = leer("app/static/js/simulation.js")
         cls.css = leer("app/static/css/procedencia-editable.css")
         cls.design = leer("app/static/css/design-system.css")
 

@@ -17,15 +17,15 @@ class TestAccesibilidadUX4(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.cliente = TestClient(app)
-        cls.js = (ROOT / "app/static/js/accesibilidad.js").read_text(encoding="utf-8")
-        cls.css = (ROOT / "app/static/css/accesibilidad.css").read_text(encoding="utf-8")
+        cls.js = (ROOT / "app/static/js/accessibility.js").read_text(encoding="utf-8")
+        cls.css = (ROOT / "app/static/css/accessibility.css").read_text(encoding="utf-8")
 
     def test_base_carga_recursos_globales_de_accesibilidad(self):
         respuesta = self.cliente.get("/")
 
         self.assertEqual(respuesta.status_code, 200)
-        self.assertIn("/static/css/accesibilidad.css", respuesta.text)
-        self.assertIn("/static/js/accesibilidad.js", respuesta.text)
+        self.assertIn("/static/css/accessibility.css", respuesta.text)
+        self.assertIn("/static/js/accessibility.js", respuesta.text)
 
     def test_base_define_landmark_estado_y_ayuda_de_tema(self):
         respuesta = self.cliente.get("/metodologia")

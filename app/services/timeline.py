@@ -10,23 +10,23 @@ Todavía no constituye un cálculo de pensión.
 
 from decimal import Decimal
 
-from app.core.dinero import (
+from app.core.money import (
     a_decimal,
     redondear_moneda,
 )
-from app.models.simulacion import (
+from app.models.simulation import (
     DatosLineaTiempo,
     EscenarioLineaTiempo,
     RegistroLineaTiempo,
     ResumenLineaTiempo,
 )
-from app.services.historial_salarios import (
+from app.services.salary_history import (
     analizar_historial_salarial,
 )
-from app.services.proyeccion_cuotas import (
+from app.services.contribution_projection import (
     analizar_cuotas,
 )
-from app.services.proyeccion_salarios import (
+from app.services.salary_projection import (
     normalizar_salario,
     proyectar_salario,
 )

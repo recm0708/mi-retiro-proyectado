@@ -445,7 +445,7 @@ Los escenarios ya transcurridos permanecen visibles para comparación, pero no s
 
 **Estado:** Aceptada
 
-La transformación de historial real, salarios proyectados y cuotas estimadas en una entrada para el motor legal se realizará en Python mediante `app/services/resultados.py`.
+La transformación de historial real, salarios proyectados y cuotas estimadas en una entrada para el motor legal se realizará en Python mediante `app/services/results.py`.
 
 JavaScript enviará el estado validado y presentará la respuesta, pero no decidirá fórmulas legales ni repartirá silenciosamente cuotas excedentes.
 
@@ -929,7 +929,7 @@ Los archivos se procesan en memoria. Los contratos del backend limitan los ident
 
 **Decisión:** la importación de Ficha Digital debe extraer, mostrar y conservar únicamente los salarios cuyo año coincida con el año calendario actual de ejecución. Los meses de años anteriores presentes en la sección “Salarios del último año” no se utilizan como contexto ni se persisten en la simulación.
 
-Las vistas previas monetarias deben utilizar el mismo formato público del resto de la aplicación: coma como separador de miles y dos decimales, manteniendo edición segura mediante la utilidad común `moneda.js`.
+Las vistas previas monetarias deben utilizar el mismo formato público del resto de la aplicación: coma como separador de miles y dos decimales, manteniendo edición segura mediante la utilidad común `currency.js`.
 
 **Motivo:** el objetivo de la Ficha Digital dentro de UX.4.4 es completar el detalle reciente del año actual y separar salario disponible, cuota acreditada y períodos parciales. Conservar meses del año anterior añadía información que no alimentaba ninguna decisión posterior y aumentaba el riesgo de confusión. Un formato monetario uniforme reduce errores de revisión antes de confirmar la importación.
 
@@ -980,7 +980,7 @@ Las respuestas de importación se marcan `Cache-Control: no-store` y la aplicaci
 
 **Estado:** Aceptada
 
-**Decisión:** UX.4.6a incorpora `app/static/css/design-system.css` como capa explícita de presentación cargada después de `style.css` y antes de `accesibilidad.css`. `style.css` conserva la base histórica, reglas funcionales y responsive ya estabilizadas; `design-system.css` concentra los tokens y acabados visuales modernos; `accesibilidad.css` mantiene la última precedencia para ayudas, foco y estados accesibles.
+**Decisión:** UX.4.6a incorpora `app/static/css/design-system.css` como capa explícita de presentación cargada después de `style.css` y antes de `accessibility.css`. `style.css` conserva la base histórica, reglas funcionales y responsive ya estabilizadas; `design-system.css` concentra los tokens y acabados visuales modernos; `accessibility.css` mantiene la última precedencia para ayudas, foco y estados accesibles.
 
 La modernización visual no puede cambiar IDs consumidos por JavaScript, contratos de formularios, rutas, persistencia ni fórmulas previsionales. Una consolidación futura de CSS solo se hará después de estabilizar la beta y deberá conservar las regresiones existentes.
 
@@ -1843,7 +1843,7 @@ El contrato cubre inicialmente los tres selectores de archivo existentes: import
 
 **Motivo:** el análisis de PDFs puede introducir una latencia perceptible. Cambiar solo el texto de un botón no comunica suficientemente que el proceso continúa, favorece dobles clics y ofrece una señal limitada a tecnologías de apoyo.
 
-**Consecuencia:** `procesamiento_adjuntos.js` se carga de forma global antes de los scripts específicos de cada página. El cambio es exclusivamente de coordinación de interfaz: no modifica validación HTTP, parsers, persistencia de archivos, límites de seguridad ni política de privacidad.
+**Consecuencia:** `attachment_processing.js` se carga de forma global antes de los scripts específicos de cada página. El cambio es exclusivamente de coordinación de interfaz: no modifica validación HTTP, parsers, persistencia de archivos, límites de seguridad ni política de privacidad.
 
 
 ## ADR-171 — Los datos documentales detectados se editan en la ventana de revisión y quedan bloqueados en la vista principal
@@ -1925,7 +1925,7 @@ El backend valida esa opción contra `maximo_anios_anticipacion` de `regulations
 **Estado:** Aceptada para UX.4.6g R1.
 **Fecha:** 2026-08-21.
 
-**Decisión:** todos los controles actuales y futuros `input[type=date]` se integran mediante una regla transversal en `accesibilidad.js`. Cuando el control no declara límites más específicos, la interfaz aplica `1900-01-01` como mínimo y `2200-12-31` como máximo, exige un año de exactamente cuatro dígitos y verifica que día/mes/año materialicen una fecha real del calendario. Un valor con año de más de cuatro dígitos o una entrada nativa inválida no puede conservarse como fecha válida.
+**Decisión:** todos los controles actuales y futuros `input[type=date]` se integran mediante una regla transversal en `accessibility.js`. Cuando el control no declara límites más específicos, la interfaz aplica `1900-01-01` como mínimo y `2200-12-31` como máximo, exige un año de exactamente cuatro dígitos y verifica que día/mes/año materialicen una fecha real del calendario. Un valor con año de más de cuatro dígitos o una entrada nativa inválida no puede conservarse como fecha válida.
 
 Los mismos controles reciben la clase `app-date-input`, que limita su ancho en escritorio y recupera ancho completo en pantallas pequeñas. La regla se aplica también a controles de fecha incorporados dinámicamente, por lo que futuros pasos no deben implementar validadores o anchos ad hoc salvo que exista una necesidad funcional más restrictiva.
 

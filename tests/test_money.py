@@ -2,7 +2,7 @@
 
 import unittest
 
-from app.core.dinero import (
+from app.core.money import (
     redondear_moneda,
     tiene_maximo_dos_decimales,
 )

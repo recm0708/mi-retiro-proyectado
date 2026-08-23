@@ -19,7 +19,7 @@ from calendar import monthrange
 from datetime import date
 from decimal import Decimal
 
-from app.core.dinero import a_decimal, redondear_moneda
+from app.core.money import a_decimal, redondear_moneda
 from app.core.normativa import cargar_parametros_mixto, obtener_edad_referencia
 from app.models.pension import (
     AnioSeleccionadoMixtoBD,
@@ -29,7 +29,7 @@ from app.models.pension import (
     ResumenComponenteAhorroPersonalMixto,
     ResumenComponenteBeneficioDefinidoMixto,
 )
-from app.models.simulacion import RegistroHistorialSalarial
+from app.models.simulation import RegistroHistorialSalarial
 from app.engines.sebd_modalidades import calcular_sebd
 
 

@@ -9,9 +9,9 @@ import unittest
 
 
 ROOT = Path(__file__).resolve().parents[1]
-LOADER = ROOT / "app" / "templates" / "partials" / "gestion_datos.html"
-ORQUESTACION = ROOT / "app" / "static" / "js" / "resultados_orquestacion.js"
-ESTILOS = ROOT / "app" / "static" / "css" / "resultados.css"
+LOADER = ROOT / "app" / "templates" / "partials" / "data_management.html"
+ORQUESTACION = ROOT / "app" / "static" / "js" / "results_orchestration.js"
+ESTILOS = ROOT / "app" / "static" / "css" / "results.css"
 
 
 class TestUX46hR1ResultadosExportacion(unittest.TestCase):
@@ -22,12 +22,12 @@ class TestUX46hR1ResultadosExportacion(unittest.TestCase):
         cls.css = ESTILOS.read_text(encoding="utf-8")
 
     def test_01_loader_carga_orquestacion_del_paso_6(self):
-        self.assertIn("/js/resultados_orquestacion.js", self.loader)
+        self.assertIn("/js/results_orchestration.js", self.loader)
         self.assertIn("antes de los scripts", self.loader)
         self.assertIn('pagina_activa == "simulacion"', self.loader)
 
     def test_02_orquestacion_carga_css_solo_al_existir_paso_6(self):
-        self.assertIn("/static/css/resultados.css", self.js)
+        self.assertIn("/static/css/results.css", self.js)
         self.assertIn("cargarEstilosResultados", self.js)
         self.assertIn('.wizard-panel[data-panel="6"]', self.js)
 

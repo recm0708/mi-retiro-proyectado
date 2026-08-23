@@ -10,13 +10,13 @@ ROOT = Path(__file__).resolve().parents[1]
 class TestUX46DRevision9ReactividadPrivacidad(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.historial_js = (ROOT / "app/static/js/historial_salarios.js").read_text(encoding="utf-8")
+        cls.historial_js = (ROOT / "app/static/js/salary_history.js").read_text(encoding="utf-8")
         cls.style = (ROOT / "app/static/css/style.css").read_text(encoding="utf-8")
-        cls.privacidad_js = (ROOT / "app/static/js/privacidad.js").read_text(encoding="utf-8")
+        cls.privacidad_js = (ROOT / "app/static/js/privacy.js").read_text(encoding="utf-8")
         cls.terminos = (
-            ROOT / "app/templates/partials/privacidad_consentimiento.html"
+            ROOT / "app/templates/partials/privacy_consent.html"
         ).read_text(encoding="utf-8")
-        cls.accesibilidad = (ROOT / "app/static/js/accesibilidad.js").read_text(encoding="utf-8")
+        cls.accesibilidad = (ROOT / "app/static/js/accessibility.js").read_text(encoding="utf-8")
 
     def test_historial_usa_delegacion_reactiva_para_filas_regeneradas(self):
         self.assertIn("function configurarEventosDelegadosHistorial", self.historial_js)

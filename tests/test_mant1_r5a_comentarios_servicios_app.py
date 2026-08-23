@@ -9,12 +9,12 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 SERVICIOS_R5A = {
-    "app/services/trazabilidad.py": (
+    "app/services/traceability.py": (
         "resultado ya calculado",
         "pasos se agregan",
         "advertencias del motor",
     ),
-    "app/services/comparador.py": (
+    "app/services/comparator.py": (
         "no mutar",
         "matriz retiro × salario",
         "filas completas",
@@ -24,7 +24,7 @@ SERVICIOS_R5A = {
         "plantilla",
         "no se calculan pensiones",
     ),
-    "app/services/fuentes_normativas.py": (
+    "app/services/regulatory_sources.py": (
         "parámetros versionados",
         "sistemas",
         "contenido metodológico",

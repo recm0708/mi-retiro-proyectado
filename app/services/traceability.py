@@ -18,7 +18,7 @@ from app.models.pension import (
     ResumenResultadoSEBD,
     ResumenResultadoSUCGS,
 )
-from app.models.trazabilidad import (
+from app.models.traceability import (
     DatoTrazabilidad,
     FuenteTrazabilidad,
     PasoTrazabilidad,
@@ -126,7 +126,7 @@ def construir_trazabilidad_sebd(
         DatoTrazabilidad(
             clave="fecha_retiro",
             etiqueta="Fecha de retiro evaluada",
-            valor=calculo.fecha_referencia.isoformat()
+            valor=calculo.reference_date.isoformat()
             if resultado.escenario_retiro.fecha_retiro is None
             else resultado.escenario_retiro.fecha_retiro.isoformat(),
             origen="Paso 5 — escenario de retiro",

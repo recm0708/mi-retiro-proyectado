@@ -19,7 +19,7 @@
 - `.github/pull_request_template.md`;
 - `.github/workflows/ci.yml`;
 - `.github/workflows/verificar-tags.yml`;
-- `.github/workflows/auditoria-gobernanza.yml`;
+- `.github/workflows/governance-audit.yml`;
 - `SECURITY.md`;
 - `CODE_OF_CONDUCT.md`;
 - `SUPPORT.md`.
@@ -79,7 +79,7 @@ Automatic dependency submission, Grouped security updates y AI findings (Preview
 
 ## 7. Auditoría automática GOV.1.6
 
-`.github/workflows/auditoria-gobernanza.yml` ejecuta las regresiones GOV.1.6 y `git diff --check` en Python 3.14 con permisos de solo lectura. No duplica la suite funcional completa de `ci.yml`.
+`.github/workflows/governance-audit.yml` ejecuta las regresiones GOV.1.6 y `git diff --check` en Python 3.14 con permisos de solo lectura. No duplica la suite funcional completa de `ci.yml`.
 
 ## 8. Revisión manual periódica
 

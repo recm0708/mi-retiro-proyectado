@@ -10,8 +10,8 @@ import unittest
 from unittest.mock import patch
 from zipfile import ZipFile
 
-import app.core.observabilidad as observabilidad
-from app.core.observabilidad import (
+import app.core.observability as observabilidad
+from app.core.observability import (
     SCHEMA_VERSION,
     contexto_correlacion,
     correlacion_actual,

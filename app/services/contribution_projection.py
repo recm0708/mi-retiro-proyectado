@@ -4,7 +4,7 @@ Este módulo mantiene separadas las cuotas que ya están acreditadas
 de aquellas que solamente forman parte de una proyección futura.
 """
 
-from app.models.simulacion import DatosCuotas, ResumenCuotas
+from app.models.simulation import DatosCuotas, ResumenCuotas
 
 
 # ============================================================

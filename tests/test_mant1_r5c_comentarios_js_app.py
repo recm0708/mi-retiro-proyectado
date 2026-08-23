@@ -7,41 +7,41 @@ import unittest
 ROOT = Path(__file__).resolve().parents[1]
 
 JS_COMENTARIOS_ESPERADOS = {
-    "app/static/js/comparador.js": (
+    "app/static/js/comparator.js": (
         "no replica reglas de elegibilidad ni fórmulas de pensión",
         "obligatorias ya fijadas por el estado de la simulación",
         "advertencias globales y por combinación se deduplican",
     ),
-    "app/static/js/simulacion.js": (
+    "app/static/js/simulation.js": (
         "fuente persistida del",
         "silenciar mensajes y reportes nativos de formulario",
         "Paso 3 consolida decisiones de historial",
     ),
-    "app/static/js/resultados.js": (
+    "app/static/js/results.js": (
         "comparación acreditado/proyectado usa el mismo endpoint",
         "campos vacíos viajan como null",
         "Cambiar el escenario salarial invalida únicamente salidas dependientes",
     ),
-    "app/static/js/resultados_orquestacion.js": (
+    "app/static/js/results_orchestration.js": (
         "contenedores dependen del último cálculo válido",
         "transición Mixto -> SUCGS reutiliza datos",
         "interfaz se crea de forma idempotente",
     ),
-    "app/static/js/gestion_datos.js": (
+    "app/static/js/data_management.js": (
         "laterales normales",
         "Paso 6 es siempre descendiente",
         "borrado integral se limita a claves propias",
     ),
-    "app/static/js/privacidad.js": (
+    "app/static/js/privacy.js": (
         "consentimiento persistente solo es válido",
         "alcanza el final del contenido",
         "mismo modal funciona para lectura informativa",
     ),
-    "app/static/js/procesamiento_adjuntos.js": (
+    "app/static/js/attachment_processing.js": (
         "token conserva el estado original",
         "devuelve accesibilidad visual",
     ),
-    "app/static/js/importacion_datos_oficiales.js": (
+    "app/static/js/official_data_import.js": (
         "vigencia compara el período más reciente",
         "borrador revisable",
         "campos detectados se bloquean",
@@ -96,8 +96,8 @@ class TestMant1R5CComentariosJSApp(unittest.TestCase):
             with self.subTest(clave=clave):
                 self.assertIn(clave, contenido)
 
-        gestion = self._leer("app/static/js/gestion_datos.js")
-        privacidad = self._leer("app/static/js/privacidad.js")
+        gestion = self._leer("app/static/js/data_management.js")
+        privacidad = self._leer("app/static/js/privacy.js")
         self.assertIn("CLAVES_GESTION_LEGACY_SESION", gestion)
         self.assertIn("CLAVES_GESTION_LEGACY_LOCAL", gestion)
         self.assertIn("CLAVES_PRIVACIDAD_LEGACY_SESION", privacidad)

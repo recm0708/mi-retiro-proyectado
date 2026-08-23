@@ -11,7 +11,7 @@ de consumir todas las cuotas previstas para ese año.
 
 from decimal import Decimal
 
-from app.core.dinero import (
+from app.core.money import (
     a_decimal,
     redondear_moneda,
 )
@@ -20,7 +20,7 @@ from app.models.pension import (
     DatosResultadoSEBDNormal,
     ResumenResultadoSEBDNormal,
 )
-from app.models.simulacion import (
+from app.models.simulation import (
     EscenarioLineaTiempo,
     EscenarioRetiro,
     RegistroHistorialSalarial,
