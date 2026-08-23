@@ -1,6 +1,9 @@
-/* ==========================================================
-   Accesibilidad semántica y ayudas contextuales
-   ========================================================== */
+/*
+ * Mi Retiro Proyectado — Accesibilidad semántica y ayudas contextuales.
+ *
+ * Propósito: Presenta ayudas contextuales, mensajes y estados visuales accesibles.
+ * Alcance: No define reglas previsionales ni modifica contratos de datos; solo refuerza lectura y navegación.
+ */
 
 .context-help-heading {
   position: relative;

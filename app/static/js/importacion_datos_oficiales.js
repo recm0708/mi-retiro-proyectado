@@ -1,15 +1,10 @@
 "use strict";
 
-/* ============================================================
-   Mi Retiro Proyectado
-   Importación revisable de documentos oficiales
-   ============================================================ */
-
 /*
- * Coordina Mi Retiro Seguro y Ficha Digital desde la selección del archivo
- * hasta la vista previa editable y la confirmación explícita. El navegador
- * conserva solo datos confirmados y metadata de procedencia; el archivo
- * original se procesa en memoria por el backend y no se persiste aquí.
+ * Mi Retiro Proyectado — Importación revisable de documentos oficiales.
+ *
+ * Propósito: Coordina Mi Retiro Seguro y Ficha Digital desde la selección del archivo hasta la confirmación explícita.
+ * Alcance: El navegador conserva datos confirmados y metadata de procedencia; el archivo original se procesa en memoria por el backend.
  */
 
 let borradorImportacionComprobante = null;

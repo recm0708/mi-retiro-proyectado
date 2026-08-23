@@ -1,14 +1,10 @@
 "use strict";
 
-/* ============================================================
-   Gestión e invalidación controlada de datos locales
-   ============================================================ */
-
 /*
- * Centraliza las acciones destructivas del asistente: limpiar un paso,
- * reiniciar la simulación y borrar exclusivamente las claves propias de
- * Mi Retiro Proyectado. La invalidación conserva las dependencias previas
- * que siguen siendo válidas y elimina los resultados descendientes.
+ * Mi Retiro Proyectado — Gestión e invalidación controlada de datos locales.
+ *
+ * Propósito: Centraliza limpiar un paso, reiniciar la simulación y borrar exclusivamente claves propias de la aplicación.
+ * Alcance: La invalidación conserva dependencias previas válidas y elimina resultados descendientes.
  */
 
 const CLAVE_GESTION_SIMULACION = "miRetiroProyectado.simulacion";

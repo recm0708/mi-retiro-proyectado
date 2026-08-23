@@ -1,0 +1,15 @@
+# ============================================================
+# Mi Retiro Proyectado
+# Exclusiones de ejemplo para control de versiones
+# ============================================================
+
+# Entornos locales
+.venv/
+
+# Cachés
+__pycache__/
+*.pyc
+
+# Salidas generadas
+dist/
+build/

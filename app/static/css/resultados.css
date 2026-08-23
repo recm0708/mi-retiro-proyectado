@@ -1,6 +1,9 @@
-/* ==========================================================
-   Paso 6 — Orquestación, transición e impresión
-   ========================================================== */
+/*
+ * Mi Retiro Proyectado — Paso 6 — Orquestación, transición e impresión.
+ *
+ * Propósito: Presenta tarjetas de transición, exportación e impresión del resultado.
+ * Alcance: No altera cálculos ni decisiones previsionales; solo organiza la salida visual.
+ */
 
 .results-transition-card,
 .results-export-card {

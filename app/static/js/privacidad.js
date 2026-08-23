@@ -1,14 +1,10 @@
 "use strict";
 
-/* ============================================================
-   Consentimiento, consulta y borrado de datos de privacidad
-   ============================================================ */
-
 /*
- * Este módulo mantiene separado el consentimiento persistente de la
- * autorización de la pestaña actual. No almacena la simulación en
- * localStorage y coordina el modal de privacidad sin duplicar lógica
- * previsional ni de navegación.
+ * Mi Retiro Proyectado — Consentimiento, consulta y borrado de datos de privacidad.
+ *
+ * Propósito: Mantiene separado el consentimiento persistente de la autorización temporal de la pestaña actual.
+ * Alcance: No almacena simulaciones en localStorage y coordina el modal de privacidad sin duplicar lógica previsional.
  */
 
 const CLAVE_PRIVACIDAD = "miRetiroProyectado.privacidadConsentimiento";

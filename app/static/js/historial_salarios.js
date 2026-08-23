@@ -1,17 +1,11 @@
 "use strict";
 
-
-/* ============================================================
-   Mi Retiro Proyectado
-   Gestión del historial salarial
-   ============================================================ */
-
 /*
- * Este archivo administra la tabla histórica del Paso 3.
- * La lógica previsional permanece en Python; JavaScript se
- * limita a recopilar, presentar y conservar los datos.
+ * Mi Retiro Proyectado — Gestión del historial salarial.
+ *
+ * Propósito: Administra la tabla histórica del Paso 3 para recopilar, presentar y conservar años salariales.
+ * Alcance: La lógica previsional permanece en Python; este archivo solo mantiene el contrato de interfaz y almacenamiento.
  */
-
 
 // ============================================================
 // Configuración

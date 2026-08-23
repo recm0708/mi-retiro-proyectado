@@ -1,0 +1,16 @@
+#!/usr/bin/env sh
+# Mi Retiro Proyectado — nombre del hook.
+#
+# Propósito:
+# - describir cuándo se ejecuta el hook.
+#
+# Responsabilidad:
+# - describir cuándo se ejecuta el hook;
+# - delegar lógica compleja a scripts versionados.
+
+set -eu
+
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+cd "$REPO_ROOT"
+
+python scripts/validar_precommit.py

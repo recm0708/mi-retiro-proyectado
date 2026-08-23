@@ -1,0 +1,7 @@
+{
+  "nombre": "ejemplo",
+  "proposito": "Describir el contrato de datos sin usar comentarios JSON.",
+  "version": 1,
+  "activo": true,
+  "items": []
+}

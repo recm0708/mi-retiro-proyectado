@@ -1,14 +1,10 @@
 "use strict";
 
-/* ============================================================
-   Mi Retiro Proyectado
-   Estado transversal de procesamiento de archivos adjuntos
-   ============================================================ */
-
 /*
- * Los documentos se procesan en memoria mediante peticiones al backend. Esta
- * capa ofrece una señal inmediata y accesible mientras una petición está en
- * curso, y evita dobles ejecuciones sobre el mismo botón de análisis.
+ * Mi Retiro Proyectado — Estado transversal de procesamiento de archivos adjuntos.
+ *
+ * Propósito: Muestra una señal accesible mientras el backend analiza documentos y evita dobles ejecuciones sobre el mismo botón.
+ * Alcance: Los documentos se procesan en memoria mediante peticiones al backend; este módulo solo coordina estado visual.
  */
 
 (() => {

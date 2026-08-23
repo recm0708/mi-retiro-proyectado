@@ -1,17 +1,11 @@
 "use strict";
 
-
-/* ============================================================
-   Paso 5 — Condiciones y escenarios de retiro
-   ============================================================ */
-
 /*
- * Este módulo conecta los datos personales y de cuotas con el
- * endpoint /api/simulacion/retiro. Mantiene separadas la fecha
- * de evaluación y la fecha hasta la cual las cuotas reales están
- * acreditadas.
+ * Mi Retiro Proyectado — Paso 5 — Condiciones y escenarios de retiro.
+ *
+ * Propósito: Conecta datos personales y cuotas con el endpoint de escenarios de retiro.
+ * Alcance: Mantiene separadas fecha de evaluación y fecha hasta la cual las cuotas reales están acreditadas.
  */
-
 
 // ============================================================
 // Utilidades de fecha

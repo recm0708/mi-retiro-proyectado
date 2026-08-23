@@ -1,12 +1,8 @@
-/* ==========================================================
-   Mi Retiro Proyectado
-   Procedencia editable de datos importados
-   ========================================================== */
-
 /*
- * Los datos documentales conservan una señal de origen aunque puedan ser
- * ajustados. Editado/completado/excluido describen la decisión del usuario,
- * no una modificación del documento original.
+ * Mi Retiro Proyectado — Procedencia editable de datos importados.
+ *
+ * Propósito: Diferencia estados de datos importados, editados, completados o excluidos.
+ * Alcance: Describe decisiones del usuario sin representar modificaciones al documento original.
  */
 
 .imported-adjustment-warning {

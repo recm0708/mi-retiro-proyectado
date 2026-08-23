@@ -1,17 +1,11 @@
 "use strict";
 
-
-/* ============================================================
-   Mi Retiro Proyectado
-   Asistente de simulación
-   ============================================================ */
-
 /*
- * Este archivo controla la navegación entre los pasos del
- * asistente, el almacenamiento temporal en sessionStorage,
- * la comunicación con la API y la presentación de resultados.
+ * Mi Retiro Proyectado — Asistente de simulación.
+ *
+ * Propósito: Controla navegación entre pasos, almacenamiento temporal, comunicación con API y presentación de resultados.
+ * Alcance: Las claves de almacenamiento y contratos de datos son parte del flujo del asistente y no deben cambiarse sin regresión.
  */
-
 
 // ============================================================
 // Configuración general

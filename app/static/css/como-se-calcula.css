@@ -1,6 +1,9 @@
-/* Página pública de guía de cálculo.
-   Organiza la presentación de fórmulas, ejemplos, tablas y fuentes sin alterar
-   la semántica de los datos que entrega el servicio de guía. */
+/*
+ * Mi Retiro Proyectado — Página pública de guía de cálculo.
+ *
+ * Propósito: Organiza fórmulas, ejemplos, tablas y fuentes de la guía pública.
+ * Alcance: Respeta la semántica de los datos entregados por el servicio de guía y solo controla presentación.
+ */
 
 .calculation-guide-page {
   color: var(--app-text);

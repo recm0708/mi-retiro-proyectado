@@ -5,7 +5,7 @@
 **Versión base histórica:** `0.0.23-beta`
 **Revisión documental:** GOV.1.4 — 2026-08-17
 **Última actualización técnica:** DEV.2 R4 — cierre final documental — 2026-08-23
-**Última actualización de mantenimiento:** MANT.1 R5C — comentarios internos en JavaScript complejo — 2026-08-23
+**Última actualización de mantenimiento:** MANT.1 R5D — política, plantillas y uniformidad por extensión — 2026-08-23
 **Clasificación:** Técnica / Pública
 
 Mi Retiro Proyectado es una aplicación web local basada en FastAPI, Jinja2 y JavaScript del navegador. La arquitectura separa presentación, contratos de datos, servicios de integración, motores previsionales, parámetros normativos y observabilidad de desarrollo.
@@ -16,11 +16,11 @@ de los checks remotos y MANT.1 R3 documenta los YAML de GitHub sin cambiar CI,
 Issue Forms ni Dependabot. MANT.1 R4 limpia encabezados operativos para separar
 comentarios permanentes de trazabilidad histórica. MANT.1 R5A inicia la revisión
 de comentarios internos en servicios Python de aplicación, MANT.1 R5B cubre CSS
-y plantilla de la guía pública, y MANT.1 R5C documenta JavaScript complejo sin
-alterar lógica, storage, selectores ni contratos de datos. Este mantenimiento no
+y plantilla de la guía pública, MANT.1 R5C documenta JavaScript complejo sin
+alterar lógica, storage, selectores ni contratos de datos, y MANT.1 R5D formaliza política/plantillas por extensión con uniformidad de encabezados JS/CSS. Este mantenimiento no
 introduce nuevas capas de producto.
 
-[Índice](INDICE.md) · [Modelo de datos](MODELO_DE_DATOS.md) · [Motor](MOTOR_DE_CALCULO.md) · [Normativa](NORMATIVA.md) · [Observabilidad](OBSERVABILIDAD_LOGS.md)
+[Índice](INDICE.md) · [Modelo de datos](MODELO_DE_DATOS.md) · [Motor](MOTOR_DE_CALCULO.md) · [Normativa](NORMATIVA.md) · [Observabilidad](OBSERVABILIDAD_LOGS.md) · [Política de estructura](POLITICA_ESTRUCTURA_ARCHIVOS.md)
 
 ## 1. Principios
 
@@ -351,3 +351,14 @@ La ruta interna `/dev/centro-desarrollo` muestra una superficie local de desarro
 DEV.2 quedó cerrado documentalmente en R4 después de integrar R1, R2 y R3. R1 abrió la ruta interna, R2 añadió el visor diagnóstico seguro y la exportación ZIP sanitizada, R3 añadió el autodiagnóstico técnico local y R4 sincroniza la documentación viva del bloque.
 
 La ruta usa `MRP_DEV_MODE` solo como indicador de activación diagnóstica, conserva `0.0.26-beta` como versión visible, no añade rutas públicas nuevas, no modifica motores previsionales, no crea tags y no adelanta el cierre transversal de VER.2.
+
+## Política de estructura por extensión
+
+La arquitectura documental de mantenibilidad incorpora una política por extensión
+en `docs/POLITICA_ESTRUCTURA_ARCHIVOS.md`. Esa política separa archivos
+operativos, documentación histórica, configuración, datos JSON y activos binarios.
+
+Las plantillas oficiales se ubican en `docs/templates/file-structure/` y
+funcionan como contrato inicial para archivos futuros. Las plantillas no agregan
+capas de ejecución; solo estandarizan encabezados, propósito, alcance y
+comentarios internos cuando el formato lo permite.

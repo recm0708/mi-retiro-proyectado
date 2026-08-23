@@ -6,6 +6,15 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ## [Unreleased]
 
+### MANT.1 R5D — política, plantillas y uniformidad por extensión
+
+- documenta la política formal de estructura por extensión para archivos no Markdown;
+- agrega auditoría de inventario por extensión y hallazgos de uniformidad;
+- incorpora plantillas oficiales por extensión en `docs/templates/file-structure/`;
+- uniforma encabezados de `app/static/js/*.js` y `app/static/css/*.css` con propósito y alcance permanente;
+- agrega regresión para proteger política, plantillas y encabezados de presentación sin cambiar lógica, storage, selectores, rutas ni textos visibles;
+- no cambia `VERSION`, `APP_VERSION`, motores previsionales, normativa, contratos JSON, ledger VER.2 ni SEC.2.
+
 ### MANT.1 R5C — comentarios internos en JavaScript complejo
 
 - agrega comentarios internos de intención en JavaScript de alto impacto: comparador, simulación, resultados, orquestación del Paso 6, gestión de datos, privacidad, procesamiento de adjuntos e importación de documentos oficiales;

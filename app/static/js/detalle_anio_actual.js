@@ -1,17 +1,11 @@
 "use strict";
 
-
-/* ============================================================
-   Mi Retiro Proyectado
-   Detalle salarial del año actual
-   ============================================================ */
-
 /*
- * Este módulo permite registrar información mensual o quincenal
- * disponible en la Ficha Digital sin confundir salario visible,
- * cuota acreditada y períodos todavía parciales.
+ * Mi Retiro Proyectado — Detalle salarial del año actual.
+ *
+ * Propósito: Registra información mensual o quincenal disponible en la Ficha Digital para el año en curso.
+ * Alcance: Mantiene separados salario visible, cuota acreditada y períodos todavía parciales.
  */
-
 
 const MESES_DETALLE_ANIO = [
   "Enero",

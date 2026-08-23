@@ -1,13 +1,13 @@
-/**
- * Gestión de apariencia de Mi Retiro Proyectado.
+"use strict";
+
+/*
+ * Mi Retiro Proyectado — Gestión de apariencia.
  *
- * Ofrece Sistema, Claro, Oscuro y Alto contraste. Claro/Oscuro se presentan
- * como opciones principales y Alto contraste permanece como preferencia de
- * accesibilidad. La preferencia visual se guarda de forma independiente en
- * localStorage y no forma parte de la simulación previsional.
+ * Propósito: Aplica Sistema, Claro, Oscuro y Alto contraste y conserva la preferencia visual independiente de la simulación.
+ * Alcance: La clave de tema en localStorage no forma parte de datos previsionales ni de consentimiento.
  */
+
 (() => {
-  "use strict";
 
   const STORAGE_KEY = "miRetiroProyectado.tema";
   const VALID_THEMES = new Set(["system", "light", "dark", "contrast"]);

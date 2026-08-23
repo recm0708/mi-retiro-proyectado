@@ -4,7 +4,7 @@
 **Versión de aplicación revisada:** `0.0.26-beta`
 **Versión base histórica:** `0.0.24-beta`
 **Revisión documental:** UX.4.6e R4 — 2026-08-18
-**Revisión de mantenimiento:** MANT.1 R5C — comentarios internos en JavaScript complejo — 2026-08-23
+**Revisión de mantenimiento:** MANT.1 R5D — política, plantillas y uniformidad por extensión — 2026-08-23
 **Clasificación:** Técnica / Mantenibilidad
 
 Este documento define el patrón permanente para documentar código en Mi Retiro
@@ -19,7 +19,7 @@ MANT.1 R4 limpia encabezados operativos para que la trazabilidad histórica qued
 fuera de código/configuración, MANT.1 R5A inicia comentarios internos de
 intención en servicios Python de aplicación, MANT.1 R5B extiende el criterio a CSS
 y plantillas grandes, y MANT.1 R5C cubre JavaScript complejo de interacción,
-almacenamiento, importación y resultados. Las revisiones posteriores deben
+almacenamiento, importación y resultados. MANT.1 R5D formaliza política y plantillas por extensión, y uniforma encabezados de JavaScript/CSS operativo. Las revisiones posteriores deben
 conservar esta misma trazabilidad incremental.
 
 ## 1. Principio general
@@ -262,3 +262,22 @@ Actualizar comentarios/docstrings cuando cambie:
 Un comentario obsoleto se considera una deuda funcional de mantenibilidad: puede
 inducir a otro desarrollador a implementar un cambio incorrecto aunque el código
 actual todavía funcione.
+
+## 9. Política por extensión y plantillas oficiales
+
+La política permanente por tipo de archivo queda documentada en
+`docs/POLITICA_ESTRUCTURA_ARCHIVOS.md` y la auditoría aplicada en
+`docs/AUDITORIA_ESTRUCTURA_ARCHIVOS_R5D.md`.
+
+Las plantillas oficiales viven en `docs/templates/file-structure/`. Todo
+archivo nuevo debe partir de la plantilla más cercana cuando exista. Si una
+extensión nueva aparece de forma recurrente, primero debe definirse su política
+mínima antes de multiplicar archivos con estilos distintos.
+
+Criterios obligatorios para archivos operativos nuevos:
+
+- explicar propósito y alcance permanente al inicio cuando el formato lo permita;
+- usar comentarios de sección para bloques complejos, no para cada línea;
+- mantener trazabilidad histórica en documentación, no en encabezados operativos;
+- no cambiar contratos funcionales solo para acomodar comentarios;
+- no inventar comentarios en formatos que no los admiten, como JSON o binarios.

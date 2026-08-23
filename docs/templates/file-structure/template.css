@@ -1,0 +1,16 @@
+/*
+ * Mi Retiro Proyectado — Nombre de la hoja de estilos.
+ *
+ * Propósito: Describir la capa visual o componente que cubre la hoja.
+ * Alcance: Indicar si aplica a layout, componente, tema, impresión o responsive.
+ */
+
+/* Sección principal: agrupa reglas del componente base. */
+.componente-ejemplo {
+  display: block;
+}
+
+/* Estado específico: documentar solo cuando el estado no sea evidente. */
+.componente-ejemplo.is-active {
+  font-weight: 600;
+}

@@ -1,16 +1,10 @@
 "use strict";
 
-
-/* ============================================================
-   Mi Retiro Proyectado
-   Comparador transversal de escenarios
-   ============================================================ */
-
 /*
- * Lee el estado temporal ya validado por el asistente, construye una solicitud
- * de comparación y presenta diferencias entre escenarios sin recalcular las
- * fórmulas previsionales en JavaScript. Los resultados provienen siempre del
- * backend y este módulo se limita a selección, formato y representación.
+ * Mi Retiro Proyectado — Comparador transversal de escenarios.
+ *
+ * Propósito: Lee el estado temporal validado, solicita la comparación al backend y representa diferencias entre escenarios.
+ * Alcance: No recalcula fórmulas previsionales en el navegador; los resultados provienen de los motores del servidor.
  */
 
 const CLAVE_SIMULACION_COMPARADOR = "miRetiroProyectado.simulacion";

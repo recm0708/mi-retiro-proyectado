@@ -1,17 +1,11 @@
 "use strict";
 
-
-/* ============================================================
-   Navegación común del asistente
-   ============================================================ */
-
 /*
- * El asistente dispone de una barra superior y otra inferior con el mismo
- * contrato funcional. La superior puede mantenerse visible en escritorio
- * sin ampliar el ancho del contenido; la inferior ofrece cierre natural del paso.
- * Ambas delegan en los formularios y botones originales para conservar validaciones.
+ * Mi Retiro Proyectado — Navegación común del asistente.
+ *
+ * Propósito: Sincroniza las barras superior e inferior del asistente sin duplicar validaciones de formularios.
+ * Alcance: Ambas barras delegan en los controles originales para conservar el comportamiento de cada paso.
  */
-
 
 const PASOS_NAVEGACION = [
   { numero: 1, nombre: "Datos personales" },

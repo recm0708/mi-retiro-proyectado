@@ -1,0 +1,9 @@
+# Configuración de ejemplo.
+# Propósito: describir el objetivo permanente del archivo YAML.
+# Alcance: indicar qué automatización, formulario o configuración controla.
+
+nombre: ejemplo
+estado: activo
+alcance:
+  - configuracion
+  - documentacion

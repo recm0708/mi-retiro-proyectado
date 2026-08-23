@@ -6,10 +6,30 @@
 **Base documental histórica:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal histórica preservada:** UX.4.6e R8 — validación funcional y procedencia editable — 2026-08-19
 **Última revisión transversal:** UX.4.6f R2 integrada y cierre del Paso 4 — 2026-08-20
-**Revisión de mantenimiento:** MANT.1 R5C — comentarios internos en JavaScript complejo — 2026-08-23
+**Revisión de mantenimiento:** MANT.1 R5D — política, plantillas y uniformidad por extensión — 2026-08-23
 **Clasificación:** Técnica / Calidad
 
 La estrategia combina pruebas automatizadas, CI, casos sintéticos/anonimizados y validación manual cuando una propiedad no puede demostrarse suficientemente con código.
+
+## Validación MANT.1 R5D — política, plantillas y uniformidad por extensión
+
+MANT.1 R5D valida que exista una política formal por extensión, que las
+plantillas oficiales estén presentes con su extensión correspondiente y que los
+encabezados de JavaScript/CSS operativo sigan un patrón uniforme de propósito y
+alcance permanente.
+
+Comandos previstos:
+
+```powershell
+python -m pytest tests\test_mant1_r5d_politica_extensiones.py -q
+python -m pytest tests\test_mant1_r5c_comentarios_js_app.py tests\test_mant1_r5d_politica_extensiones.py -q
+git diff --check
+python -m pytest -q
+```
+
+La revisión no cambia `VERSION`, `APP_VERSION`, motores previsionales,
+normativa, rutas públicas, contratos JSON, claves de almacenamiento, selectores,
+ids, clases, textos visibles ni SEC.2.
 
 ## Validación MANT.1 R5C — comentarios internos en JavaScript complejo
 
