@@ -1,8 +1,9 @@
 """Servicios seguros para DEV.2 — Centro de desarrollo.
 
 El Centro de desarrollo expone metadata técnica, un visor acotado de eventos
-JSONL y una exportación controlada de Developer Diagnostics. No lee documentos
-personales, no inspecciona cuerpos HTTP y no devuelve rutas absolutas locales.
+JSONL, una exportación controlada y un autodiagnóstico local de Developer
+Diagnostics. No lee documentos personales, no inspecciona cuerpos HTTP y no
+devuelve rutas absolutas locales.
 """
 
 from __future__ import annotations
@@ -28,12 +29,14 @@ from app.core.version import APP_VERSION
 _MAX_BACKUPS_VISIBLES = 3
 _MAX_EVENTOS_VISIBLES = 12
 _MAX_TEXTO_EVENTO = 120
+_ARCHIVO_PRUEBA_AUTODIAGNOSTICO = ".mrp-dev-autodiagnostico.tmp"
 _METADATA_VISIBLE = {
     "exception_type",
     "method",
     "operation",
     "status_code",
 }
+_ESTADOS_AUTODIAGNOSTICO = ("OK", "ADVERTENCIA", "BLOQUEADO", "NO_EVALUADO")
 
 
 @dataclass(frozen=True)
@@ -59,6 +62,17 @@ class EventoDiagnostico:
     correlation_id: str | None
     duration_ms: float | None
     metadata: dict[str, Any]
+
+
+@dataclass(frozen=True)
+class ResultadoAutodiagnostico:
+    """Resultado resumido de una comprobación técnica local."""
+
+    codigo: str
+    componente: str
+    estado: str
+    detalle: str
+    accion: str
 
 
 def _timestamp_utc(ruta: Path) -> str | None:
@@ -226,6 +240,305 @@ def exportar_zip_diagnostico_sanitizado() -> Path:
     return exportar_diagnostico()
 
 
+def _resultado_autodiagnostico(
+    *,
+    codigo: str,
+    componente: str,
+    estado: str,
+    detalle: str,
+    accion: str,
+) -> ResultadoAutodiagnostico:
+    """Construye un resultado técnico con estado normalizado."""
+
+    estado_normalizado = estado if estado in _ESTADOS_AUTODIAGNOSTICO else "NO_EVALUADO"
+    return ResultadoAutodiagnostico(
+        codigo=codigo,
+        componente=componente,
+        estado=estado_normalizado,
+        detalle=detalle,
+        accion=accion,
+    )
+
+
+def _diagnosticar_modo_desarrollo(activo: bool) -> ResultadoAutodiagnostico:
+    """Valida la activación explícita del modo de desarrollo."""
+
+    if activo:
+        return _resultado_autodiagnostico(
+            codigo="dev_mode",
+            componente="Modo desarrollador",
+            estado="OK",
+            detalle=f"{ENV_DEV_MODE}=1 está activo para pruebas locales.",
+            accion="Mantenerlo activo solo durante desarrollo y validación.",
+        )
+
+    return _resultado_autodiagnostico(
+        codigo="dev_mode",
+        componente="Modo desarrollador",
+        estado="ADVERTENCIA",
+        detalle=f"{ENV_DEV_MODE} no está activo; el diagnóstico solo muestra estado pasivo.",
+        accion="Activar MRP_DEV_MODE=1 únicamente cuando se necesite observar DEV.2.",
+    )
+
+
+def _diagnosticar_directorio() -> ResultadoAutodiagnostico:
+    """Evalúa el directorio diagnóstico sin mostrar su ruta absoluta."""
+
+    directorio = directorio_diagnostico()
+    if directorio.exists() and directorio.is_dir():
+        return _resultado_autodiagnostico(
+            codigo="directorio_diagnostico",
+            componente="Directorio diagnóstico",
+            estado="OK",
+            detalle=f"{_etiqueta_directorio()} existe como directorio local.",
+            accion="Mantener el directorio fuera de Git y usarlo solo para desarrollo.",
+        )
+
+    if directorio.exists() and not directorio.is_dir():
+        return _resultado_autodiagnostico(
+            codigo="directorio_diagnostico",
+            componente="Directorio diagnóstico",
+            estado="BLOQUEADO",
+            detalle="La ubicación diagnóstica existe, pero no es un directorio.",
+            accion="Corregir la ubicación configurada antes de exportar diagnóstico.",
+        )
+
+    return _resultado_autodiagnostico(
+        codigo="directorio_diagnostico",
+        componente="Directorio diagnóstico",
+        estado="ADVERTENCIA",
+        detalle=f"{_etiqueta_directorio()} todavía no existe.",
+        accion="El directorio se creará automáticamente al registrar eventos en modo DEV.",
+    )
+
+
+def _diagnosticar_permisos(activo: bool) -> ResultadoAutodiagnostico:
+    """Comprueba escritura y lectura con un archivo temporal no sensible."""
+
+    if not activo:
+        return _resultado_autodiagnostico(
+            codigo="permisos_diagnostico",
+            componente="Permisos locales",
+            estado="NO_EVALUADO",
+            detalle="La prueba de lectura/escritura se omite con Developer Diagnostics desactivado.",
+            accion="Activar MRP_DEV_MODE=1 para evaluar permisos locales de diagnóstico.",
+        )
+
+    directorio = directorio_diagnostico()
+    prueba = directorio / _ARCHIVO_PRUEBA_AUTODIAGNOSTICO
+    try:
+        directorio.mkdir(parents=True, exist_ok=True)
+        prueba.write_text("ok", encoding="utf-8")
+        contenido = prueba.read_text(encoding="utf-8")
+        if contenido != "ok":
+            raise OSError("lectura de comprobación no coincide")
+    except OSError:
+        return _resultado_autodiagnostico(
+            codigo="permisos_diagnostico",
+            componente="Permisos locales",
+            estado="BLOQUEADO",
+            detalle="No se pudo completar una prueba controlada de lectura/escritura.",
+            accion="Revisar permisos del directorio diagnóstico local.",
+        )
+    finally:
+        try:
+            if prueba.exists():
+                prueba.unlink()
+        except OSError:
+            pass
+
+    return _resultado_autodiagnostico(
+        codigo="permisos_diagnostico",
+        componente="Permisos locales",
+        estado="OK",
+        detalle="La lectura y escritura controladas funcionan en el directorio diagnóstico.",
+        accion="No se requiere acción mientras el entorno siga siendo local.",
+    )
+
+
+def _diagnosticar_log_vigente(archivos: list[ArchivoDiagnostico]) -> ResultadoAutodiagnostico:
+    """Evalúa si el archivo JSONL vigente existe."""
+
+    actual = archivos[0] if archivos else None
+    if actual and actual.existe:
+        return _resultado_autodiagnostico(
+            codigo="log_vigente",
+            componente="Log vigente",
+            estado="OK",
+            detalle=f"{actual.nombre} existe con {actual.tamano_bytes} byte(s).",
+            accion="Revisar el visor si se necesita confirmar eventos recientes.",
+        )
+
+    return _resultado_autodiagnostico(
+        codigo="log_vigente",
+        componente="Log vigente",
+        estado="ADVERTENCIA",
+        detalle="No existe todavía un archivo JSONL vigente.",
+        accion="Generar tráfico local con MRP_DEV_MODE=1 para crear eventos diagnósticos.",
+    )
+
+
+def _diagnosticar_rotaciones(archivos: list[ArchivoDiagnostico]) -> ResultadoAutodiagnostico:
+    """Resume las rotaciones conocidas sin abrirlas."""
+
+    rotaciones = [archivo for archivo in archivos[1:] if archivo.existe]
+    if rotaciones:
+        nombres = ", ".join(archivo.nombre for archivo in rotaciones)
+        return _resultado_autodiagnostico(
+            codigo="rotaciones",
+            componente="Rotaciones JSONL",
+            estado="OK",
+            detalle=f"Se detectaron {len(rotaciones)} rotación(es): {nombres}.",
+            accion="Confirmar que solo sean archivos JSONL conocidos antes de exportar.",
+        )
+
+    return _resultado_autodiagnostico(
+        codigo="rotaciones",
+        componente="Rotaciones JSONL",
+        estado="OK",
+        detalle="No hay rotaciones diagnósticas conocidas.",
+        accion="No se requiere acción; la ausencia de rotaciones es normal.",
+    )
+
+
+def _diagnosticar_exportacion(
+    *,
+    activo: bool,
+    hay_archivos: bool,
+) -> ResultadoAutodiagnostico:
+    """Evalúa disponibilidad lógica de exportación ZIP."""
+
+    if activo and hay_archivos:
+        return _resultado_autodiagnostico(
+            codigo="exportacion_zip",
+            componente="Exportación ZIP",
+            estado="OK",
+            detalle="La exportación ZIP sanitizada está disponible.",
+            accion="Exportar solo cuando se necesite compartir diagnóstico técnico.",
+        )
+
+    if not activo:
+        return _resultado_autodiagnostico(
+            codigo="exportacion_zip",
+            componente="Exportación ZIP",
+            estado="BLOQUEADO",
+            detalle="La exportación está bloqueada porque Developer Diagnostics está desactivado.",
+            accion="Activar MRP_DEV_MODE=1 solo durante desarrollo si se necesita exportar.",
+        )
+
+    return _resultado_autodiagnostico(
+        codigo="exportacion_zip",
+        componente="Exportación ZIP",
+        estado="ADVERTENCIA",
+        detalle="La exportación no tiene archivos JSONL disponibles.",
+        accion="Generar eventos locales antes de intentar exportar.",
+    )
+
+
+def _diagnosticar_visor(
+    *,
+    eventos: list[EventoDiagnostico],
+    invalidos: int,
+) -> ResultadoAutodiagnostico:
+    """Evalúa el estado del visor diagnóstico seguro."""
+
+    if invalidos:
+        return _resultado_autodiagnostico(
+            codigo="visor_eventos",
+            componente="Visor diagnóstico",
+            estado="ADVERTENCIA",
+            detalle=f"El visor cargó {len(eventos)} evento(s) y omitió {invalidos} línea(s) inválida(s).",
+            accion="Revisar si el JSONL fue editado manualmente o quedó truncado.",
+        )
+
+    if eventos:
+        return _resultado_autodiagnostico(
+            codigo="visor_eventos",
+            componente="Visor diagnóstico",
+            estado="OK",
+            detalle=f"El visor tiene {len(eventos)} evento(s) normalizado(s).",
+            accion="Usar el visor para revisar metadata operacional permitida.",
+        )
+
+    return _resultado_autodiagnostico(
+        codigo="visor_eventos",
+        componente="Visor diagnóstico",
+        estado="ADVERTENCIA",
+        detalle="El visor no tiene eventos recientes para mostrar.",
+        accion="Generar actividad local con Developer Diagnostics activo.",
+    )
+
+
+def _diagnosticar_privacidad() -> ResultadoAutodiagnostico:
+    """Declara las barreras de privacidad aplicadas por DEV.2."""
+
+    return _resultado_autodiagnostico(
+        codigo="privacidad",
+        componente="Privacidad del diagnóstico",
+        estado="OK",
+        detalle="El visor y el ZIP se limitan a metadata operacional y archivos JSONL conocidos.",
+        accion="Mantener fuera del diagnóstico cuerpos HTTP, PDFs, secretos y valores financieros.",
+    )
+
+
+def ejecutar_autodiagnostico(
+    *,
+    activo: bool | None = None,
+    archivos: list[ArchivoDiagnostico] | None = None,
+    eventos: list[EventoDiagnostico] | None = None,
+    invalidos: int = 0,
+) -> list[ResultadoAutodiagnostico]:
+    """Ejecuta comprobaciones técnicas locales sin exponer rutas absolutas."""
+
+    activo_resuelto = modo_desarrollo_activo() if activo is None else activo
+    archivos_resueltos = archivos if archivos is not None else archivos_diagnostico_conocidos()
+    eventos_resueltos = eventos if eventos is not None else leer_eventos_diagnostico()[0]
+    hay_archivos = any(archivo.existe for archivo in archivos_resueltos)
+
+    return [
+        _diagnosticar_modo_desarrollo(activo_resuelto),
+        _diagnosticar_directorio(),
+        _diagnosticar_permisos(activo_resuelto),
+        _diagnosticar_log_vigente(archivos_resueltos),
+        _diagnosticar_rotaciones(archivos_resueltos),
+        _diagnosticar_exportacion(
+            activo=activo_resuelto,
+            hay_archivos=hay_archivos,
+        ),
+        _diagnosticar_visor(
+            eventos=eventos_resueltos,
+            invalidos=invalidos,
+        ),
+        _diagnosticar_privacidad(),
+    ]
+
+
+def resumir_autodiagnostico(
+    resultados: list[ResultadoAutodiagnostico],
+) -> dict[str, Any]:
+    """Resume el autodiagnóstico para la interfaz."""
+
+    conteos = {estado: 0 for estado in _ESTADOS_AUTODIAGNOSTICO}
+    for resultado in resultados:
+        conteos[resultado.estado] = conteos.get(resultado.estado, 0) + 1
+
+    if conteos["BLOQUEADO"]:
+        estado_global = "BLOQUEADO"
+    elif conteos["ADVERTENCIA"] or conteos["NO_EVALUADO"]:
+        estado_global = "ADVERTENCIA"
+    else:
+        estado_global = "OK"
+
+    return {
+        "estado_global": estado_global,
+        "total": len(resultados),
+        "OK": conteos["OK"],
+        "ADVERTENCIA": conteos["ADVERTENCIA"],
+        "BLOQUEADO": conteos["BLOQUEADO"],
+        "NO_EVALUADO": conteos["NO_EVALUADO"],
+    }
+
+
 def construir_estado_centro_desarrollo() -> dict[str, Any]:
     """Construye el estado seguro mostrado por la interfaz DEV.2."""
 
@@ -233,6 +546,12 @@ def construir_estado_centro_desarrollo() -> dict[str, Any]:
     archivos = archivos_diagnostico_conocidos()
     archivos_existentes = [archivo for archivo in archivos if archivo.existe]
     eventos, invalidos = leer_eventos_diagnostico()
+    autodiagnostico = ejecutar_autodiagnostico(
+        activo=activo,
+        archivos=archivos,
+        eventos=eventos,
+        invalidos=invalidos,
+    )
 
     advertencias = [
         "No usar con datos personales reales, PDFs reales ni información financiera real.",
@@ -247,6 +566,7 @@ def construir_estado_centro_desarrollo() -> dict[str, Any]:
     return {
         "bloque": "DEV.2 R1",
         "revision_actual": "DEV.2 R2",
+        "revision_autodiagnostico": "DEV.2 R3",
         "titulo": "Centro de desarrollo",
         "descripcion": (
             "Superficie interna para revisar el estado técnico de Developer Diagnostics "
@@ -267,6 +587,8 @@ def construir_estado_centro_desarrollo() -> dict[str, Any]:
         "total_eventos_visibles": len(eventos),
         "total_eventos_invalidos": invalidos,
         "resumen_eventos": _resumen_por_nivel(eventos),
+        "autodiagnostico": [resultado.__dict__ for resultado in autodiagnostico],
+        "resumen_autodiagnostico": resumir_autodiagnostico(autodiagnostico),
         "advertencias": advertencias,
         "controles_privacidad": [
             "No lee cuerpos HTTP ni contenido de formularios.",
@@ -275,5 +597,6 @@ def construir_estado_centro_desarrollo() -> dict[str, Any]:
             "No incluye identidad, ingresos, aportes ni importes de beneficio.",
             "El ZIP diagnóstico permitido se limita a archivos mrp-diagnostics.jsonl conocidos.",
             "El visor muestra solo metadata operacional permitida.",
+            "El autodiagnóstico no muestra rutas absolutas ni contenido de archivos.",
         ],
     }
