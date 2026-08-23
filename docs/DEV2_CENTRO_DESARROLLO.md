@@ -1,6 +1,6 @@
 # DEV.2 R1 — Centro de desarrollo
 
-**Estado:** En desarrollo.
+**Estado:** R1 integrado en `main` mediante PR #37.
 
 DEV.2 R1 abre una superficie interna y local para revisar el estado técnico de
 Developer Diagnostics sin alterar los cálculos previsionales, sin leer datos de
@@ -50,15 +50,32 @@ No incluye:
 
 ## Versionado
 
-DEV.2 R1 **no cambia VERSION** ni `APP_VERSION` al abrir el bloque. La versión
-visible permanece en `0.0.26-beta` hasta que exista un cierre aceptado y se decida
-la promoción conforme a la política revision-aware de VER.2.
+DEV.2 R1 **no cambia VERSION** ni `APP_VERSION`. La versión visible permanece en
+`0.0.26-beta` después del cierre parcial de R1.
 
-Si el cierre de DEV.2 R1 queda aceptado, el candidato esperado bajo la nueva
-política sería `G072 / E01 → 0.0.72.01-beta`, sin crear tags retroactivos.
+El cierre documental de R1 no crea tag ni promueve una versión revision-aware.
+La promoción a una versión `0.GG.RR.EE-beta` queda reservada para un cierre
+aceptado que explícitamente lo requiera conforme a la política vigente.
 
 ## Relación con GOV.1.4
 
 GOV.1.4 ya implementó el núcleo de observabilidad y Developer Diagnostics. DEV.2
 R1 no reescribe esa capa: solamente agrega una interfaz interna y pruebas de
 seguridad sobre la capacidad existente.
+
+## Nota de cierre DEV.2 R1
+
+DEV.2 R1 fue integrado mediante PR #37 sobre `main` con el commit de squash
+`06e2821`. El cierre abre la ruta interna `/dev/centro-desarrollo`, mantiene
+`VERSION` y `APP_VERSION` en `0.0.26-beta`, no crea tag, no cambia motores
+previsionales y deja como siguiente trabajo DEV.2 R2.
+
+La validación local de cierre quedó en:
+
+```text
+python -m pytest tests\test_dev2_centro_desarrollo.py -q
+4 passed
+
+python -m pytest -q
+868 passed, 695 subtests passed
+```
