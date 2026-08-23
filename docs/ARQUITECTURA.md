@@ -4,7 +4,7 @@
 **Versión de aplicación revisada:** `0.0.26-beta`
 **Versión base histórica:** `0.0.23-beta`
 **Revisión documental:** GOV.1.4 — 2026-08-17
-**Última actualización técnica:** UX.4.6i R1 — guía pública de cálculo — 2026-08-21
+**Última actualización técnica:** DEV.2 R4 — cierre final documental — 2026-08-23
 **Clasificación:** Técnica / Pública
 
 Mi Retiro Proyectado es una aplicación web local basada en FastAPI, Jinja2 y JavaScript del navegador. La arquitectura separa presentación, contratos de datos, servicios de integración, motores previsionales, parámetros normativos y observabilidad de desarrollo.
@@ -317,4 +317,6 @@ La guía reutiliza el catálogo de fuentes de `app/servicios/fuentes_normativas.
 
 La ruta interna `/dev/centro-desarrollo` muestra una superficie local de desarrollo para revisar el estado técnico de Developer Diagnostics. Esta vista no ejecuta cálculos previsionales, no lee cuerpos HTTP, no procesa PDFs, no muestra rutas absolutas del equipo y no expone identidad, salarios, cuotas ni montos de pensión.
 
-La ruta usa `MRP_DEV_MODE` solo como indicador de activación diagnóstica y conserva `0.0.26-beta` como versión visible mientras DEV.2 R1 permanezca en desarrollo.
+DEV.2 quedó cerrado documentalmente en R4 después de integrar R1, R2 y R3. R1 abrió la ruta interna, R2 añadió el visor diagnóstico seguro y la exportación ZIP sanitizada, R3 añadió el autodiagnóstico técnico local y R4 sincroniza la documentación viva del bloque.
+
+La ruta usa `MRP_DEV_MODE` solo como indicador de activación diagnóstica, conserva `0.0.26-beta` como versión visible, no añade rutas públicas nuevas, no modifica motores previsionales, no crea tags y no adelanta el cierre transversal de VER.2.
