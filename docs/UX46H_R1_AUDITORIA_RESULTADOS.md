@@ -32,7 +32,7 @@ Cuando el motor devuelve una transición válida, la interfaz ofrece **Preparar 
 
 ### 4. Referencias legales del SUCGS
 
-`normativa/sucgs.json`, versión `2025-05-22`, conserva B/.144.00 como `valor_minimo_universal_referencia` y B/.265.00 como `pension_garantizada_solidaria_base`. La propia normativa versionada indica que, si no se suministran valores vigentes confirmados, la aplicación utiliza esas referencias legales.
+`regulations/sucgs.json`, versión `2025-05-22`, conserva B/.144.00 como `valor_minimo_universal_referencia` y B/.265.00 como `pension_garantizada_solidaria_base`. La propia normativa versionada indica que, si no se suministran valores vigentes confirmados, la aplicación utiliza esas referencias legales.
 
 Por tanto R1 deja de rotular ambos campos como “vigente” de manera categórica. Se muestran como **referencias legales versionadas al 22/05/2025** y la confirmación oficial sigue siendo una decisión explícita.
 

@@ -19,7 +19,7 @@ Este registro conserva decisiones de arquitectura, modelado, UX, precisión, seg
 - Una decisión sustituida no se elimina.
 - Las relaciones de sustitución se conservan en el texto de las ADR implicadas.
 - Una ADR normativa debe leerse junto con la fuente oficial correspondiente.
-- El snapshot pre-R4 se conserva en `docs/historico/gobierno/DECISIONES_PRE_GOV1_3_R4.md`.
+- El snapshot pre-R4 se conserva en `docs/archive/governance/DECISIONES_PRE_GOV1_3_R4.md`.
 
 ## 2. Anomalías históricas de metadata
 
@@ -252,7 +252,7 @@ Existirán motores separados para:
 
 Los parámetros legales que puedan modificarse no deberán quedar dispersos o codificados directamente dentro de los algoritmos.
 
-Se mantendrán archivos de configuración versionados en el directorio `normativa/`.
+Se mantendrán archivos de configuración versionados en el directorio `regulations/`.
 
 ---
 
@@ -445,7 +445,7 @@ Los escenarios ya transcurridos permanecen visibles para comparación, pero no s
 
 **Estado:** Aceptada
 
-La transformación de historial real, salarios proyectados y cuotas estimadas en una entrada para el motor legal se realizará en Python mediante `app/servicios/resultados.py`.
+La transformación de historial real, salarios proyectados y cuotas estimadas en una entrada para el motor legal se realizará en Python mediante `app/services/resultados.py`.
 
 JavaScript enviará el estado validado y presentará la respuesta, pero no decidirá fórmulas legales ni repartirá silenciosamente cuotas excedentes.
 
@@ -516,7 +516,7 @@ El Componente de Beneficio Definido del Subsistema Mixto reutilizará el clasifi
 
 Para determinar si un retiro continúa calculándose bajo el Subsistema Mixto, la aplicación utilizará 01/03/2032 como inicio de la transición a SUCGS, conforme al artículo 188 y al Reglamento de Incorporación al Componente Contributivo de Capitalización Solidaria.
 
-El artículo 153 del Texto Único contiene una referencia a 01/03/2036 para asegurados del Subsistema Mixto. La aplicación no oculta ni corrige silenciosamente esa diferencia: la conserva en `normativa/mixto.json` y en `docs/NORMATIVA.md`.
+El artículo 153 del Texto Único contiene una referencia a 01/03/2036 para asegurados del Subsistema Mixto. La aplicación no oculta ni corrige silenciosamente esa diferencia: la conserva en `regulations/mixto.json` y en `docs/NORMATIVA.md`.
 
 **Motivo:** la lógica operativa del retiro debe seguir la disposición específica de cálculo y el reglamento aplicable, dejando trazabilidad de la inconsistencia textual para revisión jurídica futura.
 
@@ -602,7 +602,7 @@ El salto directo reutiliza las funciones existentes de preparación de Historial
 
 **Estado:** Aceptada
 
-**Decisión:** B/.144.00 y B/.265.00 se conservan en `normativa/sucgs.json` como referencias legales al 22/05/2025. El motor permite suministrar valores vigentes confirmados y advierte cuando utiliza las referencias base.
+**Decisión:** B/.144.00 y B/.265.00 se conservan en `regulations/sucgs.json` como referencias legales al 22/05/2025. El motor permite suministrar valores vigentes confirmados y advierte cuando utiliza las referencias base.
 
 **Motivo:** el artículo 194 somete sus prestaciones a indexación y el artículo 195 establece la Pensión Garantizada Solidaria como un monto de al menos B/.265.00. Tratar esos importes como eternamente fijos produciría resultados desactualizados.
 
@@ -650,7 +650,7 @@ Para Mixto y SUCGS, cuando se evalúe una fecha alternativa se reutilizarán exp
 
 **Decisión:** `Ver cálculo completo` se construye en backend a partir del resultado ya emitido por cada motor. La capa transversal puede presentar datos, reglas, fórmulas, sustituciones, redondeos y fuentes, pero no vuelve a ejecutar ni replica la lógica jurídica del motor.
 
-Los enlaces oficiales provienen de `normativa/*.json`; JavaScript solo renderiza la estructura recibida.
+Los enlaces oficiales provienen de `regulations/*.json`; JavaScript solo renderiza la estructura recibida.
 
 **Motivo:** evita inconsistencias entre la cifra mostrada y su explicación, permite reutilizar una misma estructura en SEBD, Mixto y SUCGS y permite reutilizar la metodología y los futuros informes sin crear una cuarta implementación de las fórmulas previsionales.
 
@@ -660,7 +660,7 @@ Los enlaces oficiales provienen de `normativa/*.json`; JavaScript solo renderiza
 
 **Decisión:** los identificadores internos como `texto_unico`, `ley_462` o `reglamento_cccs` no se mostrarán literalmente al Asegurado(a). La interfaz resolverá cada identificador contra el catálogo de fuentes recibido del backend y presentará el título humano y, cuando exista, un enlace oficial.
 
-La página `/metodologia` reutiliza las URLs versionadas de `normativa/*.json` y las agrupa por SEBD, Mixto y SUCGS. La capa de presentación puede añadir etiquetas y alcance, pero no sustituye la fuente normativa ni introduce reglas de cálculo.
+La página `/metodologia` reutiliza las URLs versionadas de `regulations/*.json` y las agrupa por SEBD, Mixto y SUCGS. La capa de presentación puede añadir etiquetas y alcance, pero no sustituye la fuente normativa ni introduce reglas de cálculo.
 
 **Motivo:** los IDs internos son adecuados para integrar servicios, pero no son una referencia jurídica legible. Mantener títulos humanos y enlaces oficiales mejora la auditabilidad sin duplicar URLs ni fórmulas en JavaScript.
 
@@ -758,7 +758,7 @@ El resumen transversal se construye después de ejecutar el motor y la trazabili
 
 **Estado:** Aceptada
 
-**Decisión:** expresiones sobre metadatos, rutas `normativa/*.json`, backend, endpoints, estructura del repositorio y mecanismos internos de carga no deben mostrarse al Asegurado(a). Cuando sea útil explicar una fuente, se presenta únicamente su nombre humano, alcance y enlace oficial.
+**Decisión:** expresiones sobre metadatos, rutas `regulations/*.json`, backend, endpoints, estructura del repositorio y mecanismos internos de carga no deben mostrarse al Asegurado(a). Cuando sea útil explicar una fuente, se presenta únicamente su nombre humano, alcance y enlace oficial.
 
 **Motivo:** la trazabilidad jurídica es contenido del producto; el mecanismo técnico con el que se obtiene esa trazabilidad pertenece a mantenimiento y desarrollo.
 
@@ -1915,7 +1915,7 @@ La omisión histórica de `+4` se corrige para que la secuencia posterior sea co
 
 **Decisión:** los escenarios estándar `-2` y `-1` años permanecen desmarcados hasta una acción explícita. Paso 5 calcula sus fechas exactas y deshabilita cualquier alternativa cuya fecha sea anterior a la fecha de evaluación. Cuando la fecha de evaluación está dentro de la banda anticipada estándar versionada, la interfaz puede ofrecer **Retirarme en la fecha de evaluación** como escenario adicional opcional.
 
-El backend valida esa opción contra `maximo_anios_anticipacion` de `normativa/sebd.json`; fuera de la banda se rechaza. Generar el escenario no afirma elegibilidad: el Paso 6 y los motores legales conservan la clasificación de modalidad, cuotas y factores de reducción. Para SUCGS u otros contextos en los que la modalidad no corresponda, la existencia de una fecha comparativa no crea un derecho.
+El backend valida esa opción contra `maximo_anios_anticipacion` de `regulations/sebd.json`; fuera de la banda se rechaza. Generar el escenario no afirma elegibilidad: el Paso 6 y los motores legales conservan la clasificación de modalidad, cuotas y factores de reducción. Para SUCGS u otros contextos en los que la modalidad no corresponda, la existencia de una fecha comparativa no crea un derecho.
 
 **Motivo:** disponibilidad normativa y decisión del usuario son conceptos distintos. Además, presentar 2024 o 2025 como una decisión futura en una evaluación de 2026 induce a error aunque la fecha pueda conservar valor histórico o comparativo.
 
@@ -1951,7 +1951,7 @@ En Paso 5, la fecha personalizada informa de forma visible si queda cubierta por
 **Estado:** Aceptada para UX.4.6i R1–R1.4.
 **Fecha:** 2026-08-21.
 
-**Decisión:** la sección pública `/como-se-calcula` describe el orden de operaciones de SEBD, Subsistema Mixto y SUCGS, pero no ejecuta prestaciones. `app/servicios/como_se_calcula.py` puede leer y estructurar parámetros de `normativa/*.json`; no importa motores previsionales ni reconstruye resultados personales. Las fórmulas ejecutables permanecen en Python dentro de los motores existentes y la sustitución con cifras de una simulación continúa en la trazabilidad del Paso 6.
+**Decisión:** la sección pública `/como-se-calcula` describe el orden de operaciones de SEBD, Subsistema Mixto y SUCGS, pero no ejecuta prestaciones. `app/services/como_se_calcula.py` puede leer y estructurar parámetros de `regulations/*.json`; no importa motores previsionales ni reconstruye resultados personales. Las fórmulas ejecutables permanecen en Python dentro de los motores existentes y la sustitución con cifras de una simulación continúa en la trazabilidad del Paso 6.
 
 La guía reutiliza `construir_catalogo_metodologia()` para las fuentes oficiales y el Paso 6 enlaza únicamente mediante el identificador público del sistema (`#sebd`, `#mixto`, `#sucgs`). No se serializan datos personales, salarios, cuotas ni montos de la simulación en la URL.
 

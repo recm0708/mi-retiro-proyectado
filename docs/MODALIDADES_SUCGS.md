@@ -29,7 +29,7 @@ El saldo se suministra explícitamente cuando no puede reconstruirse con fidelid
 
 ## 3. Factores
 
-`normativa/sucgs.json` contiene la tabla de factores y su metadata de actualización.
+`regulations/sucgs.json` contiene la tabla de factores y su metadata de actualización.
 
 No deben utilizarse fuera de su versión como si fueran permanentes.
 
@@ -49,10 +49,10 @@ No se fabrica un saldo solidario real desde datos insuficientes.
 
 ## 7. Fuentes
 
-Consultar `FUENTES_NORMATIVAS.md` y `normativa/sucgs.json`.
+Consultar `FUENTES_NORMATIVAS.md` y `regulations/sucgs.json`.
 
 Artículos principales documentados: 152, 153, 194, 195, 196, 197 y 198.
 
 ## 8. Historia
 
-`docs/historico/normativa_privacidad/MODALIDADES_SUCGS_PRE_GOV1_3_R3.md`
+`docs/archive/regulatory-privacy/MODALIDADES_SUCGS_PRE_GOV1_3_R3.md`

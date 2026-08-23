@@ -42,7 +42,7 @@ R4.1 comprueba de forma conjunta:
 - guard de referencias históricas;
 - preservación de `v0.0.25-beta` y de evidencia GOV.1/UX.4.6e.
 
-No se modifica el algoritmo previsional, los motores SEBD/Mixto/SUCGS ni los valores de `normativa/*.json`.
+No se modifica el algoritmo previsional, los motores SEBD/Mixto/SUCGS ni los valores de `regulations/*.json`.
 
 ## 4. Promoción de candidato
 

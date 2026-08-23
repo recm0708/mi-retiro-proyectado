@@ -13,11 +13,11 @@ Los contratos de cálculo se definen con Pydantic. El estado visual y de navegac
 
 ## 1. Módulos de modelos
 
-- `app/modelos/simulacion.py` — datos de Pasos 1–5 e importaciones.
-- `app/modelos/pension.py` — motores y resultados por sistema.
-- `app/modelos/comparacion.py` — comparación transversal.
-- `app/modelos/trazabilidad.py` — trazabilidad de cálculo.
-- `app/modelos/resultado_unificado.py` — resumen transversal.
+- `app/models/simulacion.py` — datos de Pasos 1–5 e importaciones.
+- `app/models/pension.py` — motores y resultados por sistema.
+- `app/models/comparacion.py` — comparación transversal.
+- `app/models/trazabilidad.py` — trazabilidad de cálculo.
+- `app/models/resultado_unificado.py` — resumen transversal.
 
 ## 2. Convenciones
 
@@ -212,7 +212,7 @@ Los modelos de línea temporal combinan historia y proyección conservando su or
 
 ## 10. Modelos previsionales
 
-`app/modelos/pension.py` contiene entradas y salidas para:
+`app/models/pension.py` contiene entradas y salidas para:
 
 - SEBD normal y clasificador general;
 - Subsistema Mixto;
@@ -274,7 +274,7 @@ La procedencia no altera por sí sola una fórmula previsional.
 
 La versión acumulativa anterior se conserva en:
 
-`docs/historico/tecnico/MODELO_DE_DATOS_PRE_GOV1_3_R2.md`
+`docs/archive/technical/MODELO_DE_DATOS_PRE_GOV1_3_R2.md`
 
 
 ### UX.4.6f R1.1 — decisión explícita de disponibilidad del historial

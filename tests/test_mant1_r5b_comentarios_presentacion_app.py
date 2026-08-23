@@ -82,7 +82,7 @@ class TestMant1R5BComentariosPresentacionApp(unittest.TestCase):
         self.assertIn("no cambia `VERSION`", changelog)
         self.assertIn("`APP_VERSION`", changelog)
         self.assertIn("motores previsionales", changelog)
-        self.assertIn("normativa", changelog)
+        self.assertIn("regulations", changelog)
         self.assertIn("SEC.2", changelog)
 
 

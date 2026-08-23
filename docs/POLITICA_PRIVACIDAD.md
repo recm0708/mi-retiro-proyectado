@@ -217,6 +217,6 @@ Antes de la primera versión oficial, o antes de un despliegue remoto con tratam
 
 La evolución R6–R21 se conserva en:
 
-`docs/historico/normativa_privacidad/POLITICA_PRIVACIDAD_PRE_GOV1_3_R3.md`
+`docs/archive/regulatory-privacy/POLITICA_PRIVACIDAD_PRE_GOV1_3_R3.md`
 
 La reorganización R3 no cambia por sí sola la versión material `2026-08-16.1`.

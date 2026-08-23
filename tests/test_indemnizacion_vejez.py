@@ -3,11 +3,11 @@
 import unittest
 from datetime import date
 
-from app.modelos.pension import (
+from app.models.pension import (
     DatosCalculoSEBD,
     DatosResultadoSEBD,
 )
-from app.modelos.simulacion import (
+from app.models.simulacion import (
     DatosHistorialSalarial,
     EscenarioLineaTiempo,
     EscenarioRetiro,
@@ -16,9 +16,9 @@ from app.modelos.simulacion import (
     ResumenLineaTiempo,
     ResumenRetiro,
 )
-from app.motores.elegibilidad import clasificar_modalidad_sebd
-from app.motores.sebd_modalidades import calcular_sebd
-from app.servicios.resultados_sebd import calcular_resultado_sebd
+from app.engines.elegibilidad import clasificar_modalidad_sebd
+from app.engines.sebd_modalidades import calcular_sebd
+from app.services.resultados_sebd import calcular_resultado_sebd
 
 
 class TestIndemnizacionVejezSEBD(unittest.TestCase):

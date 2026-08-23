@@ -6,7 +6,7 @@ from pathlib import Path
 from fastapi.testclient import TestClient
 
 from app.main import app
-from app.servicios.ficha_digital import extraer_ficha_digital_desde_texto
+from app.services.ficha_digital import extraer_ficha_digital_desde_texto
 
 
 ROOT = Path(__file__).resolve().parents[1]

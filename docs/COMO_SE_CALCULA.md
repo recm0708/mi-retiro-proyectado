@@ -9,7 +9,7 @@
 
 La sección pública **Cómo se calcula** permite comprender y reproducir manualmente el orden general de las reglas implementadas para SEBD, Subsistema Mixto y SUCGS.
 
-No constituye un motor alternativo. Las fórmulas ejecutables continúan exclusivamente en Python; la vista pública describe el procedimiento y lee parámetros versionados desde `normativa/` por medio de `app/servicios/como_se_calcula.py`.
+No constituye un motor alternativo. Las fórmulas ejecutables continúan exclusivamente en Python; la vista pública describe el procedimiento y lee parámetros versionados desde `regulations/` por medio de `app/services/como_se_calcula.py`.
 
 ## 2. Contrato común
 
@@ -93,7 +93,7 @@ El componente contributivo se explica como:
 saldo ÷ 1,000 × factor actuarial por edad
 ```
 
-La tabla actuarial mostrada proviene de `normativa/sucgs.json`. Los valores monetarios solidarios son referencias versionadas y no se describen como vigentes indefinidamente.
+La tabla actuarial mostrada proviene de `regulations/sucgs.json`. Los valores monetarios solidarios son referencias versionadas y no se describen como vigentes indefinidamente.
 
 La garantía del artículo 197 conserva sus condiciones evaluables y la estabilidad salarial sigue requiriendo confirmación explícita cuando corresponde.
 
@@ -126,7 +126,7 @@ En escritorio amplio, la tabla SEBD de 24 factores usa ocho columnas para ocupar
 Un cambio en fórmula, factor, umbral, clasificación o fuente normativa debe revisar conjuntamente:
 
 - motor Python;
-- `normativa/*.json`;
+- `regulations/*.json`;
 - trazabilidad;
 - sección pública Cómo se calcula;
 - pruebas;

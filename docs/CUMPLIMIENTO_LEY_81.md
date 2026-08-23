@@ -117,4 +117,4 @@ La reorganización editorial de R3 no cambia por sí sola `2026-08-16.1`.
 
 ## 9. Historia
 
-`docs/historico/normativa_privacidad/CUMPLIMIENTO_LEY_81_PRE_GOV1_3_R3.md`
+`docs/archive/regulatory-privacy/CUMPLIMIENTO_LEY_81_PRE_GOV1_3_R3.md`

@@ -95,7 +95,7 @@ Los documentos que registran revisiones GOV.1.3, GOV.1.5 y GOV.1.7 pueden conser
 
 GOV.1.8 dejó de exigir que una regresión histórica reescriba esos documentos únicamente porque `VERSION` avance. La versión canónica actual se valida de forma independiente contra runtime, README, ROADMAP y RELEASES.
 
-Los snapshots bajo `docs/historico/` preservan su contexto original y no se corrigen retroactivamente para aparentar el estado actual.
+Los snapshots bajo `docs/archive/` preservan su contexto original y no se corrigen retroactivamente para aparentar el estado actual.
 
 ## 7. Gates que no quedaron cerrados
 

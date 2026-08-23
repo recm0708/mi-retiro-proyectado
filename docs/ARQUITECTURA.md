@@ -5,7 +5,7 @@
 **Versión base histórica:** `0.0.23-beta`
 **Revisión documental:** GOV.1.4 — 2026-08-17
 **Última actualización técnica:** DEV.2 R4 — cierre final documental — 2026-08-23
-**Última actualización de mantenimiento:** MANT.1 R5D — política, plantillas y uniformidad por extensión — 2026-08-23
+**Última actualización de mantenimiento:** MANT.1 R5E — estandarización de nombres de carpetas — 2026-08-23
 **Clasificación:** Técnica / Pública
 
 Mi Retiro Proyectado es una aplicación web local basada en FastAPI, Jinja2 y JavaScript del navegador. La arquitectura separa presentación, contratos de datos, servicios de integración, motores previsionales, parámetros normativos y observabilidad de desarrollo.
@@ -17,15 +17,15 @@ Issue Forms ni Dependabot. MANT.1 R4 limpia encabezados operativos para separar
 comentarios permanentes de trazabilidad histórica. MANT.1 R5A inicia la revisión
 de comentarios internos en servicios Python de aplicación, MANT.1 R5B cubre CSS
 y plantilla de la guía pública, MANT.1 R5C documenta JavaScript complejo sin
-alterar lógica, storage, selectores ni contratos de datos, y MANT.1 R5D formaliza política/plantillas por extensión con uniformidad de encabezados JS/CSS. Este mantenimiento no
+alterar lógica, storage, selectores ni contratos de datos, MANT.1 R5D formaliza política/plantillas por extensión con uniformidad de encabezados JS/CSS y MANT.1 R5E estandariza nombres de carpetas técnicas en inglés sin cambiar contratos funcionales. Este mantenimiento no
 introduce nuevas capas de producto.
 
-[Índice](INDICE.md) · [Modelo de datos](MODELO_DE_DATOS.md) · [Motor](MOTOR_DE_CALCULO.md) · [Normativa](NORMATIVA.md) · [Observabilidad](OBSERVABILIDAD_LOGS.md) · [Política de estructura](POLITICA_ESTRUCTURA_ARCHIVOS.md)
+[Índice](INDICE.md) · [Modelo de datos](MODELO_DE_DATOS.md) · [Motor](MOTOR_DE_CALCULO.md) · [Normativa](NORMATIVA.md) · [Observabilidad](OBSERVABILIDAD_LOGS.md) · [Política de estructura](POLITICA_ESTRUCTURA_ARCHIVOS.md) · [Auditoría de carpetas](AUDITORIA_CARPETAS_R5E.md)
 
 ## 1. Principios
 
 1. **Fuente única del cálculo:** las fórmulas previsionales principales viven en Python.
-2. **Normativa separada:** parámetros legales modificables se mantienen en `normativa/`.
+2. **Normativa separada:** parámetros legales modificables se mantienen en `regulations/`.
 3. **Histórico y proyección separados:** una estimación futura no sustituye silenciosamente información acreditada.
 4. **Datos faltantes explícitos:** un parámetro que no puede determinarse no se inventa.
 5. **Trazabilidad:** motores y servicios exponen advertencias, fuentes y resultados intermedios cuando corresponde.
@@ -35,7 +35,7 @@ introduce nuevas capas de producto.
 9. **Interfaz desacoplada:** JavaScript administra experiencia, estado temporal y comunicación HTTP; no constituye una segunda implementación de los motores.
 10. **Observabilidad lateral:** Developer Diagnostics observa operaciones ya ejecutadas; no vuelve a invocar motores ni replica fórmulas.
 11. **Minimización de logs:** los eventos técnicos no contienen cuerpos HTTP, documentos, identificadores ni valores financieros.
-12. **Historia preservada:** la documentación vigente describe el contrato actual; bitácoras anteriores se conservan en `docs/historico/`.
+12. **Historia preservada:** la documentación vigente describe el contrato actual; bitácoras anteriores se conservan en `docs/archive/`.
 
 ## 2. Inventario relevante del paquete `app`
 
@@ -51,40 +51,40 @@ introduce nuevas capas de producto.
 
 ### Modelos
 
-- `app/modelos/comparacion.py`
-- `app/modelos/pension.py`
-- `app/modelos/resultado_unificado.py`
-- `app/modelos/simulacion.py`
-- `app/modelos/trazabilidad.py`
+- `app/models/comparacion.py`
+- `app/models/pension.py`
+- `app/models/resultado_unificado.py`
+- `app/models/simulacion.py`
+- `app/models/trazabilidad.py`
 
 ### Motores
 
-- `app/motores/elegibilidad.py`
-- `app/motores/mixto.py`
-- `app/motores/sebd.py`
-- `app/motores/sebd_modalidades.py`
-- `app/motores/sucgs.py`
+- `app/engines/elegibilidad.py`
+- `app/engines/mixto.py`
+- `app/engines/sebd.py`
+- `app/engines/sebd_modalidades.py`
+- `app/engines/sucgs.py`
 
 ### Servicios principales
 
-- `app/servicios/comparador.py` — construye matrices retiro × salario sin recalcular fórmulas fuera de los servicios integrados
-- `app/servicios/como_se_calcula.py` — estructura parámetros normativos para la guía pública sin ejecutar motores
-- `app/servicios/detalle_anio_actual.py` — normaliza salarios mensuales/quincenales y separa salario visible de cuota acreditada
-- `app/servicios/fecha_referencia.py`
-- `app/servicios/ficha_digital.py` — extrae salarios recientes desde PDF en memoria con límites de seguridad y minimización
-- `app/servicios/fuentes_normativas.py` — arma catálogo metodológico de fuentes oficiales desde parámetros versionados
-- `app/servicios/historial_salarios.py`
-- `app/servicios/linea_tiempo.py`
-- `app/servicios/proyeccion_cuotas.py`
-- `app/servicios/proyeccion_salarios.py`
-- `app/servicios/referencia_mi_retiro_seguro.py`
-- `app/servicios/resultado_unificado.py`
-- `app/servicios/resultados.py`
-- `app/servicios/resultados_mixto.py`
-- `app/servicios/resultados_sebd.py`
-- `app/servicios/resultados_sucgs.py`
-- `app/servicios/retiro.py`
-- `app/servicios/trazabilidad.py` — transforma resultados ya calculados en pasos explicables y fuentes auditables
+- `app/services/comparador.py` — construye matrices retiro × salario sin recalcular fórmulas fuera de los servicios integrados
+- `app/services/como_se_calcula.py` — estructura parámetros normativos para la guía pública sin ejecutar motores
+- `app/services/detalle_anio_actual.py` — normaliza salarios mensuales/quincenales y separa salario visible de cuota acreditada
+- `app/services/fecha_referencia.py`
+- `app/services/ficha_digital.py` — extrae salarios recientes desde PDF en memoria con límites de seguridad y minimización
+- `app/services/fuentes_normativas.py` — arma catálogo metodológico de fuentes oficiales desde parámetros versionados
+- `app/services/historial_salarios.py`
+- `app/services/linea_tiempo.py`
+- `app/services/proyeccion_cuotas.py`
+- `app/services/proyeccion_salarios.py`
+- `app/services/referencia_mi_retiro_seguro.py`
+- `app/services/resultado_unificado.py`
+- `app/services/resultados.py`
+- `app/services/resultados_mixto.py`
+- `app/services/resultados_sebd.py`
+- `app/services/resultados_sucgs.py`
+- `app/services/retiro.py`
+- `app/services/trazabilidad.py` — transforma resultados ya calculados en pasos explicables y fuentes auditables
 
 ### Presentación CSS y plantillas documentadas
 
@@ -127,7 +127,7 @@ Responsabilidades:
 
 `app/core/observabilidad.py` implementa el esquema JSONL, correlación aleatoria, redacción, rotación, retención y exportación controlada. El módulo no conoce modelos previsionales ni ejecuta cálculos.
 
-### 3.2. Modelos (`app/modelos/`)
+### 3.2. Modelos (`app/models/`)
 
 Pydantic define contratos HTTP y de dominio:
 
@@ -139,7 +139,7 @@ Pydantic define contratos HTTP y de dominio:
 
 La metadata puramente visual y diagnóstica no se convierte automáticamente en modelo Pydantic de negocio.
 
-### 3.3. Servicios (`app/servicios/`)
+### 3.3. Servicios (`app/services/`)
 
 Los servicios normalizan, integran y coordinan cuotas, historial, detalle actual, proyección, retiro, importaciones, resultados, comparación y fecha externa. `como_se_calcula.py` es una capa de presentación: lee parámetros versionados para explicar el procedimiento, pero no importa ni ejecuta motores previsionales.
 
@@ -147,7 +147,7 @@ Los servicios normalizan, integran y coordinan cuotas, historial, detalle actual
 
 Los parsers documentales son **capas de entrada**, no motores previsionales.
 
-### 3.4. Motores (`app/motores/`)
+### 3.4. Motores (`app/engines/`)
 
 Los motores aplican las reglas previsionales ya modeladas:
 
@@ -199,15 +199,15 @@ Consultar [GESTION_DATOS_SIMULACION.md](GESTION_DATOS_SIMULACION.md).
 
 ### Mi Retiro Seguro
 
-`app/servicios/referencia_mi_retiro_seguro.py` extrae una referencia personal revisable. El archivo original no se persiste.
+`app/services/referencia_mi_retiro_seguro.py` extrae una referencia personal revisable. El archivo original no se persiste.
 
 ### Ficha Digital
 
-`app/servicios/ficha_digital.py` devuelve únicamente los registros del año más reciente detectado en la sección salarial del documento.
+`app/services/ficha_digital.py` devuelve únicamente los registros del año más reciente detectado en la sección salarial del documento.
 
 ### Fecha de referencia
 
-`app/servicios/fecha_referencia.py` intenta obtener el encabezado HTTP `Date` mediante HTTPS desde fuentes CSS configuradas. Si no obtiene una fecha consistente, devuelve un resultado no confiable.
+`app/services/fecha_referencia.py` intenta obtener el encabezado HTTP `Date` mediante HTTPS desde fuentes CSS configuradas. Si no obtiene una fecha consistente, devuelve un resultado no confiable.
 
 La observabilidad asociada registra solo cantidades, estado de cache, outcome y duración.
 
@@ -318,7 +318,7 @@ Developer Diagnostics no debe utilizarse como sustituto de persistencia de simul
 
 La versión acumulativa anterior a GOV.1.3 R2 se conserva en:
 
-`docs/historico/tecnico/ARQUITECTURA_PRE_GOV1_3_R2.md`
+`docs/archive/technical/ARQUITECTURA_PRE_GOV1_3_R2.md`
 
 Este documento describe el estado técnico vigente después de GOV.1.4.
 
@@ -331,18 +331,18 @@ El patrón se reutiliza en datos personales, cuotas, historial anual y detalle d
 
 ### UX.4.6g R1 — frontera de escenarios de retiro
 
-Paso 5 mantiene dos capas separadas: `app/static/js/retiro.js` propone y conserva la selección visible, mientras `app/servicios/retiro.py` construye fechas/cuotas sin decidir elegibilidad. Las sugerencias posteriores se derivan de la cobertura de Paso 4; las elecciones anticipadas requieren acción explícita. `app/motores/elegibilidad.py` y los motores de prestaciones continúan siendo la frontera jurídica para determinar modalidad y factores.
+Paso 5 mantiene dos capas separadas: `app/static/js/retiro.js` propone y conserva la selección visible, mientras `app/services/retiro.py` construye fechas/cuotas sin decidir elegibilidad. Las sugerencias posteriores se derivan de la cobertura de Paso 4; las elecciones anticipadas requieren acción explícita. `app/engines/elegibilidad.py` y los motores de prestaciones continúan siendo la frontera jurídica para determinar modalidad y factores.
 ### Contrato transversal de fechas
 
 `app/static/js/accesibilidad.js` aplica de forma idempotente validación y clase visual a todos los `input[type=date]`, incluidos controles dinámicos. `app/static/css/accesibilidad.css` define la geometría compacta común. Las superficies pueden declarar límites `min`/`max` más restrictivos; la capa transversal solo aporta valores por defecto cuando faltan. Paso 5 consume este contrato y añade exclusivamente la explicación de cobertura contra el horizonte salarial.
 
 ## 14. Guía pública de cálculo
 
-`/como-se-calcula` es una superficie pública de transparencia. `app/servicios/como_se_calcula.py` lee parámetros de `normativa/*.json` y los entrega a `app/templates/como_se_calcula.html`; no ejecuta `app/motores/` ni construye resultados individuales.
+`/como-se-calcula` es una superficie pública de transparencia. `app/services/como_se_calcula.py` lee parámetros de `regulations/*.json` y los entrega a `app/templates/como_se_calcula.html`; no ejecuta `app/engines/` ni construye resultados individuales.
 
 El Paso 6 enlaza a la sección del sistema correspondiente mediante anclas públicas (`#sebd`, `#mixto`, `#sucgs`) sin transportar datos personales, salarios, cuotas ni montos en la URL. Las sustituciones numéricas del caso individual permanecen en la trazabilidad de resultados.
 
-La guía reutiliza el catálogo de fuentes de `app/servicios/fuentes_normativas.py`. Por tanto, una modificación normativa o de fórmula exige revisar en conjunto motor, JSON versionado, trazabilidad, guía pública y pruebas relacionadas.
+La guía reutiliza el catálogo de fuentes de `app/services/fuentes_normativas.py`. Por tanto, una modificación normativa o de fórmula exige revisar en conjunto motor, JSON versionado, trazabilidad, guía pública y pruebas relacionadas.
 
 ## DEV.2 — Centro de desarrollo
 

@@ -91,7 +91,7 @@ El saneamiento reemplaza formulaciones de “candidato”, “pendiente” o “
 
 ## 7. Archivo histórico
 
-`docs/historico/` se conserva como snapshot. No se corrigen masivamente sus rutas antiguas ni nombres de repositorio, porque hacerlo falsearía el contexto en que fueron capturados. `docs/historico/README.md` aclara esta regla.
+`docs/archive/` se conserva como snapshot. No se corrigen masivamente sus rutas antiguas ni nombres de repositorio, porque hacerlo falsearía el contexto en que fueron capturados. `docs/archive/README.md` aclara esta regla.
 
 También se conserva el nombre histórico del bundle `calculadora-pension-css_pre_firma_2026-08-17.bundle` mencionado en la documentación de migración, porque identifica un artefacto real de aquella operación.
 

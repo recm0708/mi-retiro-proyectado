@@ -1,10 +1,18 @@
 # Changelog
 
-Este archivo registra **cambios notables por versión**. No sustituye el historial Git, `RELEASES.md` ni las bitácoras históricas conservadas en `docs/historico/`.
+Este archivo registra **cambios notables por versión**. No sustituye el historial Git, `RELEASES.md` ni las bitácoras históricas conservadas en `docs/archive/`.
 
 Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamente en GOV.1.1 a partir del historial real. `0.0.22-beta` es la primera versión formal adoptada bajo la política de GOV.1.2.
 
 ## [Unreleased]
+
+### MANT.1 R5E — estandarización de nombres de carpetas
+
+- renombra carpetas técnicas en español a rutas en inglés: `app/models/`, `app/engines/`, `app/services/`, `regulations/`, `tests/validation_cases/` y `docs/archive/`;
+- actualiza imports Python, rutas de pruebas, enlaces documentales, CODEOWNERS, `.gitignore` y referencias a parámetros JSON;
+- documenta la auditoría de carpetas en `docs/AUDITORIA_CARPETAS_R5E.md`;
+- agrega regresión para impedir que reaparezcan carpetas técnicas antiguas o referencias a rutas obsoletas;
+- mantiene sin cambios `_entregas/`, carpetas convencionales con punto inicial, `VERSION`, `APP_VERSION`, motores previsionales, valores JSON, rutas públicas, selectores y SEC.2.
 
 ### MANT.1 R5D — política, plantillas y uniformidad por extensión
 
@@ -34,7 +42,7 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 ### MANT.1 R5A — comentarios internos en servicios Python de aplicación
 
 - agrega comentarios internos de intención en servicios Python de alto tamaño: trazabilidad, comparador, guía de cálculo, fuentes normativas, detalle del año actual y Ficha Digital;
-- mantiene los comentarios dentro de `app/servicios/` libres de identificadores de revisión, PR o bloques históricos;
+- mantiene los comentarios dentro de `app/services/` libres de identificadores de revisión, PR o bloques históricos;
 - agrega regresión para exigir comentarios internos útiles en los servicios revisados sin cambiar lógica funcional;
 - no cambia `VERSION`, `APP_VERSION`, motores previsionales, normativa, contratos JSON, rutas públicas ni SEC.2.
 
@@ -122,7 +130,7 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 - incorpora `/como-se-calcula` como sección pública de transparencia para SEBD, Subsistema Mixto y SUCGS;
 - explica datos, clasificación, orden de operaciones, fórmulas descriptivas, factores, límites, redondeos, ejemplos y limitaciones sin ejecutar un segundo cálculo;
-- `como_se_calcula.py` expone parámetros canónicos desde `normativa/` y no importa motores previsionales;
+- `como_se_calcula.py` expone parámetros canónicos desde `regulations/` y no importa motores previsionales;
 - Paso 6 añade **Ver cómo se obtuvo este cálculo** y dirige al sistema correspondiente sin transportar datos personales en la URL;
 - Metodología y fuentes enlaza a la guía y la nueva página reutiliza el catálogo oficial versionado;
 - ADR-178, RF-383 a RF-389 y TR-026 formalizan el contrato; se añaden 14 regresiones específicas y el gate objetivo asciende a **826 pruebas**.
@@ -471,7 +479,7 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 - Reorganización del índice documental.
 - Simplificación de README y CONTRIBUTING.
 - Conversión del roadmap en un documento de presente/futuro.
-- Conservación de bitácoras UX bajo `docs/historico/ux/`.
+- Conservación de bitácoras UX bajo `docs/archive/ux/`.
 - Incorporación de regresiones para proteger la estructura documental.
 - Validación R1: compilación Python, sintaxis JavaScript, git diff --check, 411 pruebas automatizadas en OK y 8/8 regresiones específicas de documentación.
 - GOV.1.3 R2 completada: consolidación de Arquitectura, Modelo de datos, Gestión de datos, Motor, Especificación funcional, Guía interna y Validación.
@@ -601,6 +609,6 @@ Para una auditoría completa consultar, en este orden:
 
 1. `RELEASES.md` — rangos Git y clasificación de versiones;
 2. `docs/REGISTRO_CAMBIOS_HISTORICO.md` — mapa cronológico;
-3. `docs/historico/` — bitácoras y snapshots anteriores;
+3. `docs/archive/` — bitácoras y snapshots anteriores;
 4. `docs/DECISIONES.md` y ADR independientes posteriores — decisiones;
 5. historial Git — evidencia primaria e inmutable de cada cambio versionado.

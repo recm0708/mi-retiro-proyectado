@@ -30,7 +30,7 @@ class TestGov13DocumentacionR2(unittest.TestCase):
 
     def test_snapshots_tecnicos_existen(self):
         for nombre in R2_DOCS:
-            snapshot = DOCS / "historico" / "tecnico" / nombre.replace(
+            snapshot = DOCS / "archive" / "technical" / nombre.replace(
                 ".md", "_PRE_GOV1_3_R2.md"
             )
             with self.subTest(nombre=nombre):
@@ -41,9 +41,9 @@ class TestGov13DocumentacionR2(unittest.TestCase):
         for esperado in (
             "app/core/archivos_pdf.py",
             "app/core/version.py",
-            "app/servicios/fecha_referencia.py",
-            "app/servicios/ficha_digital.py",
-            "app/servicios/detalle_anio_actual.py",
+            "app/services/fecha_referencia.py",
+            "app/services/ficha_digital.py",
+            "app/services/detalle_anio_actual.py",
             "app/static/js/gestion_datos.js",
         ):
             with self.subTest(esperado=esperado):
@@ -101,7 +101,7 @@ class TestGov13DocumentacionR2(unittest.TestCase):
             encoding="utf-8"
         )
         self.assertNotRegex(texto, r"(?m)^##\s+UX\.")
-        self.assertIn("docs/historico/", texto)
+        self.assertIn("docs/archive/", texto)
 
     def test_changelog_preserva_cierre_r2(self):
         texto = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
@@ -117,8 +117,8 @@ class TestGov13DocumentacionR2(unittest.TestCase):
         )
         historico = (
             DOCS
-            / "historico"
-            / "tecnico"
+            / "archive"
+            / "technical"
             / "ESPECIFICACION_FUNCIONAL_PRE_GOV1_3_R2.md"
         ).read_text(encoding="utf-8")
 

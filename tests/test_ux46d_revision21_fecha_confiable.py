@@ -5,8 +5,8 @@ from datetime import date
 from pathlib import Path
 from unittest.mock import patch
 
-from app.servicios import fecha_referencia
-from app.servicios.ficha_digital import extraer_ficha_digital_desde_texto
+from app.services import fecha_referencia
+from app.services.ficha_digital import extraer_ficha_digital_desde_texto
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -26,8 +26,8 @@ class TestUX46DRevision21FechaConfiable(unittest.TestCase):
             ROOT / "app/static/js/importacion_datos_oficiales.js"
         ).read_text(encoding="utf-8")
         cls.main_py = (ROOT / "app/main.py").read_text(encoding="utf-8")
-        cls.modelo = (ROOT / "app/modelos/simulacion.py").read_text(encoding="utf-8")
-        cls.servicio = (ROOT / "app/servicios/fecha_referencia.py").read_text(encoding="utf-8")
+        cls.modelo = (ROOT / "app/models/simulacion.py").read_text(encoding="utf-8")
+        cls.servicio = (ROOT / "app/services/fecha_referencia.py").read_text(encoding="utf-8")
         cls.privacidad_js = (ROOT / "app/static/js/privacidad.js").read_text(encoding="utf-8")
         cls.privacidad_html = (ROOT / "app/templates/partials/privacidad_consentimiento.html").read_text(encoding="utf-8")
 

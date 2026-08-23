@@ -166,7 +166,7 @@ El motor se organiza por capas:
 4. garantía de reemplazo modelada;
 5. resultado total.
 
-Los factores y valores versionables provienen de `normativa/sucgs.json`.
+Los factores y valores versionables provienen de `regulations/sucgs.json`.
 
 La aplicación no reconstruye un saldo solidario real a partir de datos insuficientes.
 
@@ -225,7 +225,7 @@ No se sustituyen por constantes personales de un caso de prueba.
 
 La versión anterior se conserva en:
 
-`docs/historico/tecnico/MOTOR_DE_CALCULO_PRE_GOV1_3_R2.md`
+`docs/archive/technical/MOTOR_DE_CALCULO_PRE_GOV1_3_R2.md`
 
 ### UX.4.6g R1 — preanálisis de fechas de retiro
 

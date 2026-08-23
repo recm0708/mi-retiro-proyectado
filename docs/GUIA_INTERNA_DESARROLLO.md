@@ -7,7 +7,7 @@
 **Revisión transversal vigente:** GOV.1.4 — 2026-08-17
 **Clasificación:** Técnica / Interna
 
-Esta guía contiene convenciones de ingeniería estables. Las bitácoras de fases anteriores viven en `docs/historico/`.
+Esta guía contiene convenciones de ingeniería estables. Las bitácoras de fases anteriores viven en `docs/archive/`.
 
 ## 1. Identidad
 
@@ -147,7 +147,7 @@ El esquema de logs puede evolucionar independientemente mediante `schema_version
 
 Los documentos vigentes describen estado actual. No añadir un diario de revisiones si la información puede integrarse en la sección correspondiente.
 
-Historia: `CHANGELOG.md`, `RELEASES.md`, `docs/REGISTRO_CAMBIOS_HISTORICO.md`, `docs/historico/` y Git.
+Historia: `CHANGELOG.md`, `RELEASES.md`, `docs/REGISTRO_CAMBIOS_HISTORICO.md`, `docs/archive/` y Git.
 
 ## 16. Validación antes de cierre
 
@@ -196,7 +196,7 @@ Dependabot no implica auto-merge.
 
 La guía acumulativa anterior se conserva en:
 
-`docs/historico/tecnico/GUIA_INTERNA_DESARROLLO_PRE_GOV1_3_R2.md`
+`docs/archive/technical/GUIA_INTERNA_DESARROLLO_PRE_GOV1_3_R2.md`
 
 
 ### Regla R1.1 para datos documentales
@@ -214,3 +214,10 @@ Los nuevos controles `input[type=date]` no deben implementar validadores o ancho
 ### Observadores del DOM
 
 Toda normalización ejecutada desde un `MutationObserver` debe ser idempotente. Si la propia normalización modifica atributos incluidos en el filtro observado —por ejemplo `class`—, el observador debe suspenderse durante esa operación y reanudarse al finalizar para evitar ciclos de callbacks.
+
+## Nombres de carpetas técnicas
+
+Las carpetas técnicas nuevas deben usar nombres en inglés. Las rutas vigentes de
+mayor impacto son `app/models/`, `app/engines/`, `app/services/`,
+`regulations/`, `tests/validation_cases/` y `docs/archive/`. Cualquier renombre
+debe actualizar imports, enlaces, pruebas y documentación antes del commit.

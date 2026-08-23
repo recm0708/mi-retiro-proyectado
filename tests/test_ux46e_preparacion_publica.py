@@ -76,7 +76,7 @@ class TestUX46ePreparacionPublica(unittest.TestCase):
         for label in (
             "bug", "enhancement", "question", "documentation", "tests",
             "maintenance", "dependencies", "github-actions", "ui", "backend",
-            "normativa", "privacy", "security", "accessibility",
+            "regulations", "privacy", "security", "accessibility",
             "needs-triage", "blocked", "duplicate", "good first issue",
             "help wanted", "invalid", "wontfix",
         ):

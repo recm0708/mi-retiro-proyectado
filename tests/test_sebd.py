@@ -3,9 +3,9 @@
 import unittest
 from datetime import date
 
-from app.modelos.pension import DatosCalculoSEBDNormal
-from app.modelos.simulacion import RegistroHistorialSalarial
-from app.motores.sebd import calcular_sebd_normal
+from app.models.pension import DatosCalculoSEBDNormal
+from app.models.simulacion import RegistroHistorialSalarial
+from app.engines.sebd import calcular_sebd_normal
 
 
 class TestSEBDNormal(unittest.TestCase):

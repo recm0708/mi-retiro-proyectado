@@ -2,7 +2,7 @@
 
 import unittest
 
-from app.modelos.simulacion import (
+from app.models.simulacion import (
     DatosCuotas,
     DatosHistorialSalarial,
     DatosLineaTiempo,
@@ -10,7 +10,7 @@ from app.modelos.simulacion import (
     DatosSalario,
     RegistroHistorialSalarial,
 )
-from app.servicios.linea_tiempo import (
+from app.services.linea_tiempo import (
     construir_linea_tiempo,
 )
 

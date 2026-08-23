@@ -63,7 +63,31 @@ con estilos diferentes. Python, YAML, scripts, hooks, JSON y archivos especiales
 quedan cubiertos por la política y las plantillas sin reescritura masiva cuando
 su estructura actual ya cumple su contrato.
 
-## 5. Regla para archivos futuros
+## 5. Política de nombres de carpetas
+
+Las carpetas técnicas del repositorio deben usar nombres en inglés para que otro
+desarrollador pueda ubicar paquetes, assets, pruebas, documentación y parámetros
+sin mezclar convenciones idiomáticas.
+
+Reglas vigentes:
+
+1. Los paquetes Python usan nombres técnicos en inglés: `app/models/`,
+   `app/engines/` y `app/services/`.
+2. Los parámetros normativos versionados viven en `regulations/`.
+3. Los casos de validación viven en `tests/validation_cases/`.
+4. El archivo histórico documental vive en `docs/archive/`.
+5. Las carpetas convencionales externas no se renombran: `.github/`,
+   `.githooks/`, `.venv/`, `.pytest_cache/` y `.git/`.
+6. `_entregas/` se conserva porque contiene entregables/evidencias generadas y
+   puede preservar rutas o nombres asociados a paquetes ya producidos.
+7. Un renombre de carpeta exige actualizar imports, enlaces, rutas de pruebas,
+   documentación, configuración y cualquier referencia textual que abra o apunte
+   a la ruta anterior.
+
+La auditoría aplicada queda documentada en
+[`AUDITORIA_CARPETAS_R5E.md`](AUDITORIA_CARPETAS_R5E.md).
+
+## 6. Regla para archivos futuros
 
 Todo archivo nuevo debe escoger la plantilla más cercana, eliminar texto de
 ejemplo, conservar la estructura de propósito/alcance y documentar solo

@@ -109,7 +109,7 @@ Las etiquetas describen la operación, no sus valores de entrada ni de salida.
 
 ## 6. Consulta externa de fecha
 
-`app/servicios/fecha_referencia.py` registra metadata agregada cuando Developer Diagnostics está activo:
+`app/services/fecha_referencia.py` registra metadata agregada cuando Developer Diagnostics está activo:
 
 - cache `hit` o `miss`;
 - cantidad de fuentes configuradas;

@@ -9,12 +9,12 @@ from fastapi.testclient import TestClient
 from pypdf import PdfWriter
 
 from app.main import app
-from app.modelos.pension import (
+from app.models.pension import (
     DatosResultadoMixto,
     DatosResultadoSEBD,
     DatosResultadoSUCGS,
 )
-from app.modelos.simulacion import (
+from app.models.simulacion import (
     DatosHistorialSalarial,
     EscenarioLineaTiempo,
     EscenarioRetiro,

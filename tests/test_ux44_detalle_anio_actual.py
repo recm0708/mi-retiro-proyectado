@@ -6,11 +6,11 @@ from pathlib import Path
 from fastapi.testclient import TestClient
 
 from app.main import app
-from app.modelos.simulacion import (
+from app.models.simulacion import (
     DatosDetalleAnioActual,
     RegistroDetalleAnioActual,
 )
-from app.servicios.detalle_anio_actual import (
+from app.services.detalle_anio_actual import (
     analizar_detalle_anio_actual,
 )
 

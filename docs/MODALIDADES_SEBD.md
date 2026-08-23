@@ -48,7 +48,7 @@ Con historial anual:
 
 ## 4. Anticipación
 
-Los factores mensuales se encuentran en `normativa/sebd.json`.
+Los factores mensuales se encuentran en `regulations/sebd.json`.
 
 No se interpolan factores reglamentarios inventados.
 
@@ -78,4 +78,4 @@ Consultar `FUENTES_NORMATIVAS.md`. Los artículos principales documentados por e
 
 ## 10. Historia
 
-`docs/historico/normativa_privacidad/MODALIDADES_SEBD_PRE_GOV1_3_R3.md`
+`docs/archive/regulatory-privacy/MODALIDADES_SEBD_PRE_GOV1_3_R3.md`

@@ -25,7 +25,7 @@ RAIZ_PROYECTO = (
 
 DIRECTORIO_NORMATIVA = (
     RAIZ_PROYECTO
-    / "normativa"
+    / "regulations"
 )
 
 
@@ -49,7 +49,7 @@ def cargar_parametros_generales() -> dict:
     if not ruta.exists():
         raise FileNotFoundError(
             "No se encontró el archivo "
-            "normativa/parametros_generales.json."
+            "regulations/parametros_generales.json."
         )
 
     with ruta.open(
@@ -119,7 +119,7 @@ def cargar_parametros_sebd() -> dict:
 
     if not ruta.exists():
         raise FileNotFoundError(
-            "No se encontró el archivo normativa/sebd.json."
+            "No se encontró el archivo regulations/sebd.json."
         )
 
     with ruta.open(
@@ -142,7 +142,7 @@ def cargar_parametros_mixto() -> dict:
 
     if not ruta.exists():
         raise FileNotFoundError(
-            "No se encontró el archivo normativa/mixto.json."
+            "No se encontró el archivo regulations/mixto.json."
         )
 
     with ruta.open(
@@ -163,7 +163,7 @@ def cargar_parametros_sucgs() -> dict:
 
     if not ruta.exists():
         raise FileNotFoundError(
-            "No se encontró el archivo normativa/sucgs.json."
+            "No se encontró el archivo regulations/sucgs.json."
         )
 
     with ruta.open(

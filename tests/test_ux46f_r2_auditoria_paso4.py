@@ -3,7 +3,7 @@
 from pathlib import Path
 import unittest
 
-from app.modelos.simulacion import (
+from app.models.simulacion import (
     DatosCuotas,
     DatosHistorialSalarial,
     DatosLineaTiempo,
@@ -11,8 +11,8 @@ from app.modelos.simulacion import (
     DatosSalario,
     RegistroHistorialSalarial,
 )
-from app.servicios.linea_tiempo import construir_linea_tiempo
-from app.servicios.proyeccion_salarios import proyectar_salario
+from app.services.linea_tiempo import construir_linea_tiempo
+from app.services.proyeccion_salarios import proyectar_salario
 
 
 ROOT = Path(__file__).resolve().parents[1]

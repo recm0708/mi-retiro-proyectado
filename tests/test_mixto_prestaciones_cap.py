@@ -3,9 +3,9 @@
 import unittest
 from datetime import date
 
-from app.modelos.pension import DatosCalculoMixto
-from app.modelos.simulacion import RegistroHistorialSalarial
-from app.motores.mixto import calcular_mixto
+from app.models.pension import DatosCalculoMixto
+from app.models.simulacion import RegistroHistorialSalarial
+from app.engines.mixto import calcular_mixto
 
 
 def _historial_alto(cantidad_anios: int = 10) -> list[RegistroHistorialSalarial]:

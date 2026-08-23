@@ -91,7 +91,7 @@ La documentación del producto se mantiene en:
 
 ## 10. Uso por la interfaz
 
-Los enlaces normativos que necesita la aplicación se cargan desde `normativa/*.json` y se transforman en títulos humanos mediante `app/servicios/fuentes_normativas.py`.
+Los enlaces normativos que necesita la aplicación se cargan desde `regulations/*.json` y se transforman en títulos humanos mediante `app/services/fuentes_normativas.py`.
 
 Los IDs internos no deben mostrarse como si fueran nombres de fuentes.
 
@@ -109,4 +109,4 @@ Cuando cambie una fuente, enlace, monto indexado, tabla o fecha operativa:
 
 Snapshot anterior:
 
-`docs/historico/normativa_privacidad/FUENTES_NORMATIVAS_PRE_GOV1_3_R3.md`
+`docs/archive/regulatory-privacy/FUENTES_NORMATIVAS_PRE_GOV1_3_R3.md`

@@ -21,7 +21,7 @@ Por tanto:
 La segunda pasada utiliza, por orden de autoridad práctica:
 
 1. historial Git y rangos documentados en `RELEASES.md`;
-2. bitácoras preservadas en `docs/historico/ux/`;
+2. bitácoras preservadas en `docs/archive/ux/`;
 3. `CHANGELOG.md`, `docs/REGISTRO_CAMBIOS_HISTORICO.md` y `docs/ROADMAP.md`;
 4. Pull Requests integrados y sus gates;
 5. pruebas y cifras de cierre registradas;

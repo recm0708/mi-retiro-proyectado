@@ -9,32 +9,32 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 SERVICIOS_R5A = {
-    "app/servicios/trazabilidad.py": (
+    "app/services/trazabilidad.py": (
         "resultado ya calculado",
         "pasos se agregan",
         "advertencias del motor",
     ),
-    "app/servicios/comparador.py": (
+    "app/services/comparador.py": (
         "no mutar",
         "matriz retiro × salario",
         "filas completas",
     ),
-    "app/servicios/como_se_calcula.py": (
+    "app/services/como_se_calcula.py": (
         "JSON versionados",
         "plantilla",
         "no se calculan pensiones",
     ),
-    "app/servicios/fuentes_normativas.py": (
+    "app/services/fuentes_normativas.py": (
         "parámetros versionados",
         "sistemas",
         "contenido metodológico",
     ),
-    "app/servicios/detalle_anio_actual.py": (
+    "app/services/detalle_anio_actual.py": (
         "cuotas todavía no confirmadas",
         "contrato de salida",
         "meses completos",
     ),
-    "app/servicios/ficha_digital.py": (
+    "app/services/ficha_digital.py": (
         "Ficha Digital esperada",
         "datos personales",
         "no se fuerza",

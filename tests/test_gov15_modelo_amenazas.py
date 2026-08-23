@@ -40,7 +40,7 @@ class TestGov15ModeloAmenazasR1(unittest.TestCase):
             "Resultados previsionales",
             "PDF seleccionado",
             "Logs Developer Diagnostics",
-            "Parámetros `normativa/*.json`",
+            "Parámetros `regulations/*.json`",
             "Código de motores y servicios",
             "Historial Git, tags y CI",
         ):
@@ -81,7 +81,7 @@ class TestGov15ModeloAmenazasR1(unittest.TestCase):
             "app/core/archivos_pdf.py",
             "app/core/observabilidad.py",
             "app/main.py",
-            "app/servicios/fecha_referencia.py",
+            "app/services/fecha_referencia.py",
             ".github/workflows/ci.yml",
         ):
             with self.subTest(ruta=ruta):

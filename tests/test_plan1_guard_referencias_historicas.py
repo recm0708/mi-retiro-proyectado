@@ -61,7 +61,7 @@ def markdown_vigentes():
     """Devuelve Markdown fuera del archivo histórico físico."""
     for path in ROOT.rglob("*.md"):
         rel = path.relative_to(ROOT).as_posix()
-        if rel.startswith("docs/historico/"):
+        if rel.startswith("docs/archive/"):
             continue
         yield rel, path.read_text(encoding="utf-8")
 

@@ -38,7 +38,7 @@ class TestIdentidadInterfaz(unittest.TestCase):
         self.assertNotIn("Estimador independiente", respuesta.text)
         self.assertNotIn("Documentación técnica del proyecto", respuesta.text)
         self.assertNotIn("docs/FUENTES_NORMATIVAS.md", respuesta.text)
-        self.assertNotIn("normativa/*.json", respuesta.text)
+        self.assertNotIn("regulations/*.json", respuesta.text)
 
     def test_footer_identifica_independencia_sin_duplicar_mi_caja_digital(self):
         respuesta = self.cliente.get("/")

@@ -69,7 +69,7 @@ class TestGov12Versionado(unittest.TestCase):
     def test_codeowners_define_responsable_actual(self):
         contenido = (ROOT / ".github/CODEOWNERS").read_text(encoding="utf-8")
         self.assertIn("* @recm0708", contenido)
-        self.assertIn("/normativa/ @recm0708", contenido)
+        self.assertIn("/regulations/ @recm0708", contenido)
 
 
 if __name__ == "__main__":

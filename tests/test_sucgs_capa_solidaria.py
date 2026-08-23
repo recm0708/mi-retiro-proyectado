@@ -3,8 +3,8 @@
 import unittest
 from datetime import date
 
-from app.modelos.pension import DatosCalculoSUCGS
-from app.motores.sucgs import calcular_sucgs
+from app.models.pension import DatosCalculoSUCGS
+from app.engines.sucgs import calcular_sucgs
 
 
 class TestSUCGSCapaSolidaria(unittest.TestCase):
