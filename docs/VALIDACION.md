@@ -6,10 +6,29 @@
 **Base documental histórica:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal histórica preservada:** UX.4.6e R8 — validación funcional y procedencia editable — 2026-08-19
 **Última revisión transversal:** UX.4.6f R2 integrada y cierre del Paso 4 — 2026-08-20
-**Revisión de mantenimiento:** MANT.1 R5A — comentarios internos en servicios Python — 2026-08-23
+**Revisión de mantenimiento:** MANT.1 R5B — comentarios internos en CSS y plantilla Cómo se calcula — 2026-08-23
 **Clasificación:** Técnica / Calidad
 
 La estrategia combina pruebas automatizadas, CI, casos sintéticos/anonimizados y validación manual cuando una propiedad no puede demostrarse suficientemente con código.
+
+## Validación MANT.1 R5B — comentarios internos en CSS y plantilla Cómo se calcula
+
+MANT.1 R5B valida que la hoja de estilos y la plantilla principal de la guía
+pública tengan comentarios estructurales útiles, sin cambiar clases, ids, textos
+visibles, rutas ni lógica Jinja.
+
+Comandos usados:
+
+```powershell
+python -m pytest tests	est_mant1_r5b_comentarios_presentacion_app.py -q
+python -m pytest tests	est_mant1_r5a_comentarios_servicios_app.py tests	est_mant1_r5b_comentarios_presentacion_app.py -q
+python -m pytest tests	est_ux46e_almacenamiento_comentarios_js.py tests	est_ux46e_auditoria_coherencia.py -q
+git diff --check
+python -m pytest -q
+```
+
+La revisión no cambia `VERSION`, `APP_VERSION`, motores previsionales,
+normativa, rutas públicas, contratos JSON ni SEC.2.
 
 ## Validación MANT.1 R5A — comentarios internos en servicios Python
 
@@ -301,7 +320,7 @@ cadencias ni comandos operativos.
 
 La regresión `tests/test_mant1_r3_yaml_github_documentados.py` protege que:
 
-- los ocho YAML de GitHub comiencen con encabezado `MANT.1 R3`;
+- los ocho YAML de GitHub conserven encabezados funcionales permanentes;
 - los encabezados declaren propósito y límites;
 - las superficies transversales mantengan visibles MANT.1 R1, MANT.1 R2 y MANT.1 R3;
 - los workflows e Issue Forms conserven sus claves funcionales principales.

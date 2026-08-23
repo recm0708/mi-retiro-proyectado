@@ -6,6 +6,14 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ## [Unreleased]
 
+### MANT.1 R5B — comentarios internos en CSS y plantilla Cómo se calcula
+
+- agrega comentarios estructurales en `app/static/css/como-se-calcula.css` para delimitar hero, navegación, secciones, fórmulas, tablas, factores, accesibilidad y responsive;
+- agrega comentarios Jinja en `app/templates/como_se_calcula.html` para ubicar recorrido general, bloques SEBD/Mixto/SUCGS, fuentes y cierre de la guía;
+- mantiene los comentarios de `app/` libres de identificadores de revisión, PR o bloques históricos;
+- agrega regresión para proteger comentarios funcionales en CSS y plantilla sin cambiar clases, ids, textos visibles ni lógica Jinja;
+- no cambia `VERSION`, `APP_VERSION`, motores previsionales, normativa, contratos JSON, rutas públicas ni SEC.2.
+
 ### MANT.1 R5A — comentarios internos en servicios Python de aplicación
 
 - agrega comentarios internos de intención en servicios Python de alto tamaño: trazabilidad, comparador, guía de cálculo, fuentes normativas, detalle del año actual y Ficha Digital;
