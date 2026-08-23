@@ -1,7 +1,6 @@
-"""PLAN.1 R4.2 — cierre formal post-tag de PLAN.1."""
+"""PLAN.1 R4.2 — preservación histórica del cierre formal de PLAN.1."""
 
 from pathlib import Path
-import re
 import unittest
 import warnings
 
@@ -13,31 +12,34 @@ DOCS = ROOT / "docs"
 
 
 class TestPlan1R4CandidatoCierre(unittest.TestCase):
-    """Protege el cierre formal sin mover ni recrear el tag publicado."""
+    """Protege el cierre histórico sin congelar la versión canónica futura."""
 
     def setUp(self):
         self.version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
 
-    def test_version_promovida_a_0_0_26_y_runtime_coincide(self):
-        self.assertEqual("0.0.26-beta", self.version)
+    def test_version_actual_valida_y_preserva_cierre_plan1(self):
         self.assertEqual(self.version, APP_VERSION)
         self.assertTrue(version_valida(self.version))
+        releases = (ROOT / "RELEASES.md").read_text(encoding="utf-8")
+        self.assertIn("0.0.26-beta", releases)
+        self.assertIn("cierre formal de PLAN.1", releases)
 
-    def test_readme_muestra_candidato_validado_y_preserva_0_0_25(self):
+    def test_readme_muestra_candidato_y_preserva_0_0_25_0_0_26(self):
         texto = (ROOT / "README.md").read_text(encoding="utf-8")
-        self.assertIn("**Versión formal vigente:** `0.0.26-beta`", texto)
+        self.assertIn(f"**Versión candidata de VER.2:** `{self.version}`", texto)
         self.assertIn("PLAN.1:** cerrado en `0.0.26-beta`", texto)
         self.assertIn("**720 pruebas en `OK`**", texto)
         self.assertIn("tag firmado `v0.0.26-beta` publicado", texto)
         self.assertIn("**UX.4.6e:** cerrada en `0.0.25-beta`", texto)
         self.assertIn("v0.0.25-beta", texto)
 
-    def test_security_soporta_candidato_y_archiva_previa(self):
+    def test_security_soporta_candidato_y_archiva_legacy(self):
         texto = (ROOT / "SECURITY.md").read_text(encoding="utf-8")
-        self.assertIn("| `0.0.26-beta` | Soportada durante la etapa beta vigente |", texto)
-        self.assertIn("| `0.0.25-beta` y anteriores | Históricas", texto)
+        self.assertIn(f"| `{self.version}` | Candidata vigente de VER.2", texto)
+        self.assertIn("`0.0.26-beta`", texto)
+        self.assertIn("Históricas", texto)
 
-    def test_changelog_registra_r4_2_real_sin_fingir_tag(self):
+    def test_changelog_preserva_r4_2_y_tag_historico(self):
         texto = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
         self.assertIn("## [0.0.26-beta] — 2026-08-20", texto)
         self.assertIn("R3B2", texto)
@@ -51,7 +53,7 @@ class TestPlan1R4CandidatoCierre(unittest.TestCase):
         self.assertIn("bfbb746b177ebcc577f7241fef4d6914f713739a", texto)
         self.assertIn("b572796d68ff6fd91ce9944a0c6d1cf7d45753a0", texto)
 
-    def test_releases_registra_candidato_sin_tag_anticipado(self):
+    def test_releases_preserva_plan1_y_tags_legacy(self):
         texto = (ROOT / "RELEASES.md").read_text(encoding="utf-8")
         self.assertIn("### `0.0.26-beta` — 2026-08-20 — cierre formal de PLAN.1", texto)
         self.assertIn("**720 pruebas en `OK`**", texto)
@@ -63,21 +65,18 @@ class TestPlan1R4CandidatoCierre(unittest.TestCase):
         self.assertIn("v0.0.25-beta", texto)
         self.assertIn("7affa00e2530aeede066c10ecfee8c6dbd49b10b", texto)
 
-    def test_roadmap_y_plan_maestro_separan_r4_1_de_r4_2(self):
+    def test_roadmap_y_plan_maestro_preservan_r4_1_r4_2(self):
         roadmap = (DOCS / "ROADMAP.md").read_text(encoding="utf-8")
         plan = (DOCS / "PLAN_MAESTRO_HACIA_1_0.md").read_text(encoding="utf-8")
-        self.assertIn("[x] R4.1 — candidato local `0.0.26-beta` validado", roadmap)
+        self.assertIn("R4.1 — candidato local `0.0.26-beta`", roadmap)
         self.assertIn("**720 pruebas en `OK`**", roadmap)
-        self.assertIn("[x] R4.2 — cierre remoto y tag firmado", roadmap)
-        self.assertIn("[x] PR #23 integrado por squash", roadmap)
-        self.assertIn("[x] corregir y revalidar sin `SyntaxWarning`", roadmap)
-        self.assertIn("[x] crear y verificar el tag firmado `v0.0.26-beta`", roadmap)
-        self.assertIn("**Versión candidata de cierre de PLAN.1:** `0.0.26-beta`", plan)
+        self.assertIn("R4.2 — PR #23/#24", roadmap)
+        self.assertIn("**Cierre histórico de PLAN.1:** `0.0.26-beta`", plan)
         self.assertIn("**Estado de PLAN.1:** cerrado", plan)
         self.assertIn("PR #23 y PR #24", plan)
         self.assertIn("`v0.0.26-beta`", plan)
 
-    def test_validacion_registra_cierre_posttag(self):
+    def test_validacion_preserva_cierre_posttag(self):
         texto = (DOCS / "VALIDACION.md").read_text(encoding="utf-8")
         self.assertIn("cerró con **710 pruebas en `OK`**", texto)
         self.assertIn("cerró localmente con **720 pruebas en `OK`**", texto)
@@ -98,27 +97,10 @@ class TestPlan1R4CandidatoCierre(unittest.TestCase):
         self.assertIn("b572796d68ff6fd91ce9944a0c6d1cf7d45753a0", texto)
         self.assertIn("## 6. Gate remoto R4.2", texto)
 
-    def test_documentacion_viva_revisada_con_version_candidata(self):
-        excepciones = {
-            "AUDITORIA_UX46E_R7_2026-08-18.md",
-            "AUDITORIA_REPOSITORIO_2026-08-18.md",
-            "CIERRE_GOV1.md",
-            "MIGRACION_FIRMAS_GIT_2026-08-17.md",
-            "PLAN_MAESTRO_HACIA_1_0.md",
-            "REGISTRO_CAMBIOS_HISTORICO.md",
-        }
-        errores = []
-        for path in DOCS.glob("*.md"):
-            if path.name in excepciones or path.name.startswith("UX_4_6"):
-                continue
-            texto = path.read_text(encoding="utf-8")
-            match = re.search(
-                r"\*\*(?:Versión de aplicación revisada|Versión candidata revisada|Versión de aplicación):\*\* `([^`]+)`",
-                texto[:1500],
-            )
-            if match and match.group(1) != self.version:
-                errores.append(f"{path.name}:{match.group(1)}")
-        self.assertEqual([], errores)
+    def test_metadata_de_revision_documental_no_congela_version_actual(self):
+        versioning = (ROOT / "VERSIONING.md").read_text(encoding="utf-8")
+        self.assertIn("Los documentos de dominio pueden conservar la versión en la que fueron revisados", versioning)
+        self.assertIn("versión en la que un documento fue revisado", versioning)
 
         transversal_path = ROOT / "tests/test_plan1_documentacion_transversal.py"
         transversal = transversal_path.read_text(encoding="utf-8")
@@ -126,12 +108,14 @@ class TestPlan1R4CandidatoCierre(unittest.TestCase):
             warnings.simplefilter("error", SyntaxWarning)
             compile(transversal, str(transversal_path), "exec")
 
-    def test_indice_enlaza_auditoria_y_preserva_cierre_ux(self):
+    def test_indice_preserva_auditoria_y_declara_version_actual(self):
         texto = (DOCS / "INDICE.md").read_text(encoding="utf-8")
         self.assertIn("AUDITORIA_PLAN1_R4_2026-08-20.md", texto)
         self.assertIn("UX.4.6e R9.2", texto)
-        self.assertIn("cierre formal `0.0.25-beta`", texto)
-        self.assertIn("**Versión de aplicación revisada:** `0.0.26-beta`", texto)
+        self.assertIn("`v0.0.25-beta`", texto)
+        self.assertIn(f"**Versión candidata de aplicación:** `{self.version}`", texto)
+        self.assertIn("AUDITORIA_VERSIONADO_PRE_1_0.md", texto)
+        self.assertIn("LEDGER_REVISIONES_PRE_1_0.md", texto)
 
 
 if __name__ == "__main__":

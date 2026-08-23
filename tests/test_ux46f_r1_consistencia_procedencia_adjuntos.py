@@ -6,6 +6,8 @@ import re
 import unittest
 from pathlib import Path
 
+from app.core.version import version_valida
+
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -38,8 +40,15 @@ class UX46fR1ConsistenciaProcedenciaAdjuntosTests(unittest.TestCase):
         cls.design_system_css = leer("app/static/css/design-system.css")
         cls.accesibilidad_js = leer("app/static/js/accesibilidad.js")
 
-    def test_01_version_permanece_en_0_0_26_beta(self):
-        self.assertEqual(leer("VERSION").strip(), "0.0.26-beta")
+    def test_01_cierre_r1_preserva_0_0_26_sin_congelar_version_actual(self):
+        version_actual = leer("VERSION").strip()
+        self.assertTrue(version_valida(version_actual))
+        changelog = leer("CHANGELOG.md")
+        self.assertIn(
+            "`VERSION` permanece en `0.0.26-beta`; R1 no modifica motores previsionales",
+            changelog,
+        )
+        self.assertIn("v0.0.26-beta", leer("RELEASES.md"))
 
     def test_02_cuatro_decisiones_del_paso3_comienzan_sin_seleccion(self):
         contratos = (
@@ -215,7 +224,8 @@ class UX46fR1ConsistenciaProcedenciaAdjuntosTests(unittest.TestCase):
                 self.assertIn(f"**RF-{rf}.**", especificacion)
         self.assertIn("| TR-017 |", matriz)
         self.assertIn("| TR-018 |", matriz)
-        self.assertIn("R1 — consistencia transversal de procedencia", roadmap)
+        self.assertIn("UX.4.6f", roadmap)
+        self.assertIn("R1/R1.1", roadmap)
         self.assertIn("### UX.4.6f R1 — consistencia de procedencia", changelog)
 
 

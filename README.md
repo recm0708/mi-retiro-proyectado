@@ -10,7 +10,7 @@
 
 [![Validación continua](https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/ci.yml)
 [![Auditoría de gobernanza](https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/auditoria-gobernanza.yml/badge.svg?branch=main)](https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/auditoria-gobernanza.yml)
-![Versión](https://img.shields.io/badge/versi%C3%B3n-0.0.26--beta-2563eb)
+![Versión](https://img.shields.io/badge/versi%C3%B3n-0.0.71.01--beta-2563eb)
 ![Python](https://img.shields.io/badge/Python-3.13%20%7C%203.14-3776AB?logo=python&logoColor=white)
 ![Licencia](https://img.shields.io/badge/licencia-propietaria-6B7280)
 
@@ -20,33 +20,29 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 
 ## Estado del proyecto
 
-- **Versión formal vigente:** `0.0.26-beta`
-- **Etapa:** desarrollo beta; repositorio de código público y ejecución de aplicación orientada actualmente a entorno local
-- **Programa GOV.1:** cerrado — Auditoría, Gobierno y Trazabilidad Pre-Beta
-- **Programa PLAN.1:** cerrado — Alineación maestra hacia la primera versión oficial
-- **PLAN.1:** cerrado en `0.0.26-beta`; PR #23 y PR #24 integrados, **720 pruebas en `OK`** en el gate final y tag firmado `v0.0.26-beta` publicado
-- **Bloque activo:** DEV.2 — Centro de desarrollo
+- **Versión candidata de VER.2:** `0.0.71.01-beta` — G071/E01; solo se considera aceptada después de ledger/validador, gate completo, PR/CI e integración.
+- **Último estado aceptado reconstruido antes de VER.2:** G070/E02 — cierre UX.4.6i sobre `7037addd44253e528c77460b678d2b3ccd540dd5` con **841 pruebas en `OK`**.
+- **Última versión formal legacy etiquetada:** `0.0.26-beta` — tag firmado e inmutable `v0.0.26-beta`.
+- **Etapa:** desarrollo beta; repositorio de código público y ejecución de aplicación orientada actualmente a entorno local.
+- **Programa GOV.1:** cerrado — Auditoría, Gobierno y Trazabilidad Pre-Beta.
+- **Programa PLAN.1:** cerrado — Alineación maestra hacia la primera versión oficial.
+- **PLAN.1:** cerrado en el esquema legacy `0.0.26-beta`; PR #23 y PR #24 integrados, **720 pruebas en `OK`** en el gate final y tag firmado `v0.0.26-beta` publicado.
+- **Bloque transversal activo:** VER.2 — reconciliación revision-aware del historial pre-1.0.
+- **Siguiente bloque funcional:** DEV.2 — Centro de desarrollo; no comienza hasta cerrar VER.2.
 
-- **UX.4.6f:** cerrado — R1/R1.1 integradas mediante PR #28 y R2 integrada mediante PR #30; el cierre lógico/matemático del Paso 4 alcanzó **756 pruebas en `OK`** en CI, con Python 3.13, Python 3.14 y Auditoría de gobernanza en verde
-- **Mantenimiento post-R1:** `pypdf 6.16.1` y `Uvicorn 0.52.3` integrados mediante PR #29; PR Dependabot #26/#27 cerrados como sustituidos, con los tres checks requeridos en verde
-- **UX.4.6g:** cerrado — R1 integrado mediante PR #32; selección contextual desde Paso 4, retiro anticipado explícito, +4 años, cobertura de fechas personalizadas, controles de fecha transversales y alineación visual final; **784 pruebas en `OK`** y CI verde en Python 3.13, Python 3.14 y Auditoría de gobernanza
-- **UX.4.6h:** cerrado — R1/R1.1/R1.2/R1.3 consolidan resultados explícitos, invalidación de salidas obsoletas, transición Mixto→SUCGS guiada, referencias SUCGS correctamente rotuladas, jerarquía visual depurada y un informe A4 imprimible independiente de la página web; gate de cierre **812 pruebas**
-- **UX.4.6i:** cerrado — R1/R1.1/R1.2/R1.3/R1.4 consolidan la guía pública `/como-se-calcula`, el recorrido de datos de los Pasos 1–6, SEBD/Mixto/SUCGS con parámetros versionados, fórmula general + ejemplo sustituido, terminología contextual, navegación directa y vínculo desde Paso 6; gate de cierre **841 pruebas**
-- **Revisión activa:** DEV.2 — Centro de desarrollo
-- **Siguiente bloque funcional posterior:** SEC.2 — Seguridad y privacidad
-- **GOV.1.4:** Observabilidad y Developer Diagnostics cerrado
-- **GOV.1.5:** Seguridad, privacidad y transparencia cerrado internamente
-- **GOV.1.6:** Controles GitHub y auditoría automática cerrado
-- **GOV.1.7:** Licencia propietaria pre-beta y avisos de terceros cerrado
-- **GOV.1.8:** auditoría final y cierre pre-beta de gobierno cerrado
-- **UX.4.6e:** cerrada en `0.0.25-beta`; PR #21 integrado por squash, 660 pruebas en `OK`, checks requeridos verdes y cierre formal asociado a `v0.0.25-beta`
-- **Preparación pública del repositorio:** 21 labels y 20/20 topics configurados; `sebd-panama` adoptado como topic SEBD; Social Preview e identidad visual oficial configurados
-- **Seguridad del repositorio público:** Dependency graph, Dependabot, CodeQL Default setup, Secret Protection, Push protection y Private vulnerability reporting habilitados; revisión manual del 2026-08-19 sin alertas abiertas
-- **Primera versión oficial objetivo:** `1.0.0.0` con `Build 000001`, únicamente después de cerrar todos los gates definidos en el plan maestro
+- **UX.4.6e:** cerrada históricamente en `0.0.25-beta`; la segunda auditoría distribuye R1–R7, identidad/publicación, R8 y R9/cierre en G041–G050.
+- **UX.4.6f:** cerrado — R1/R1.1 integradas mediante PR #28, mantenimiento de dependencias por PR #29, R2 por PR #30 y hardening `pre-commit` por PR #31; **762 pruebas** en el último estado del tramo, G061–G064.
+- **Mantenimiento post-R1:** `pypdf 6.16.1` y `Uvicorn 0.52.3` integrados mediante PR #29; PR Dependabot #26/#27 cerrados como sustituidos, con los tres checks requeridos en verde.
+- **UX.4.6g:** cerrado — PR #32; selección contextual desde Paso 4, retiro anticipado explícito, +4 años, cobertura de fechas personalizadas, controles de fecha transversales y alineación visual final; **784 pruebas en `OK`**, G065.
+- **UX.4.6h:** cerrado — R1 fue candidato fallido; R1.1, R1.2 y R1.3 son los estados aceptados G066–G068; PR #33 cerró el informe A4 con **812 pruebas**.
+- **UX.4.6i:** cerrado — la secuencia demostrada es R1 → R1.2 → R1.3 → R1.4; R1 y R1.4 son los estados con aceptación diferenciada contabilizados G069–G070; PR #34 cerró la guía pública `/como-se-calcula` con **841 pruebas**. No existe una una revisión intermedia no demostrada entre UX.4.6i R1 y R1.2 independiente.
+- **Preparación pública del repositorio:** 21 labels y 20/20 topics configurados; `sebd-panama` adoptado como topic SEBD; Social Preview e identidad visual oficial configurados.
+- **Seguridad del repositorio público:** Dependency graph, Dependabot, CodeQL Default setup, Secret Protection, Push protection y Private vulnerability reporting habilitados; revisión manual del 2026-08-19 sin alertas abiertas.
+- **Primera versión oficial objetivo:** `1.0.0.0` con `Build 000001`, únicamente después de cerrar todos los gates definidos en el plan maestro.
 
-La visibilidad pública del repositorio **no convierte una beta de desarrollo `0.0.N-beta` en versión oficial, no constituye un despliegue de producción y no modifica por sí sola la licencia vigente**.
+La visibilidad pública del repositorio **no convierte una beta de desarrollo en versión oficial, no constituye un despliegue de producción y no modifica por sí sola la licencia vigente**.
 
-La versión se obtiene exclusivamente del archivo [`VERSION`](VERSION). La política completa se documenta en [`VERSIONING.md`](VERSIONING.md), y la secuencia restante hacia 1.0 se mantiene en [`docs/PLAN_MAESTRO_HACIA_1_0.md`](docs/PLAN_MAESTRO_HACIA_1_0.md).
+La versión se obtiene exclusivamente del archivo [`VERSION`](VERSION). La política completa se documenta en [`VERSIONING.md`](VERSIONING.md). La reconciliación actual se audita en [`docs/AUDITORIA_VERSIONADO_PRE_1_0.md`](docs/AUDITORIA_VERSIONADO_PRE_1_0.md) y [`docs/MATRIZ_DECISION_REVISIONES_VER2.md`](docs/MATRIZ_DECISION_REVISIONES_VER2.md); el contador global se materializa en [`docs/LEDGER_REVISIONES_PRE_1_0.md`](docs/LEDGER_REVISIONES_PRE_1_0.md) y [`data/ledger_revisiones_pre_1_0.json`](data/ledger_revisiones_pre_1_0.json). La secuencia restante hacia 1.0 se mantiene en [`docs/PLAN_MAESTRO_HACIA_1_0.md`](docs/PLAN_MAESTRO_HACIA_1_0.md).
 
 ## Capacidades implementadas
 
@@ -111,6 +107,10 @@ Documentos principales:
 - [`docs/AUDITORIA_REPOSITORIO_2026-08-18.md`](docs/AUDITORIA_REPOSITORIO_2026-08-18.md) — auditoría integral post-GOV.1 del repositorio;
 - [`docs/AUDITORIA_UX46E_R7_2026-08-18.md`](docs/AUDITORIA_UX46E_R7_2026-08-18.md) — auditoría transversal de coherencia de UX.4.6e;
 - [`docs/CIERRE_GOV1.md`](docs/CIERRE_GOV1.md) — auditoría final y decisión de cierre de GOV.1;
+- [`docs/AUDITORIA_VERSIONADO_PRE_1_0.md`](docs/AUDITORIA_VERSIONADO_PRE_1_0.md) — criterio contable y reconciliación VER.2;
+- [`docs/MATRIZ_DECISION_REVISIONES_VER2.md`](docs/MATRIZ_DECISION_REVISIONES_VER2.md) — decisiones de inclusión/exclusión del contador;
+- [`docs/LEDGER_REVISIONES_PRE_1_0.md`](docs/LEDGER_REVISIONES_PRE_1_0.md) — secuencia global G001–G070 y candidato G071;
+- [`data/ledger_revisiones_pre_1_0.json`](data/ledger_revisiones_pre_1_0.json) — ledger machine-readable;
 - [`docs/LICENCIA_Y_DISTRIBUCION.md`](docs/LICENCIA_Y_DISTRIBUCION.md) — decisión de licencia y estrategia de distribución;
 - [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) — avisos y obligaciones de terceros;
 - [`docs/ROADMAP.md`](docs/ROADMAP.md) — estado actual y próximos hitos;
@@ -118,7 +118,7 @@ Documentos principales:
 - [`docs/DECISIONES.md`](docs/DECISIONES.md) — decisiones ADR;
 - [`docs/REGISTRO_CAMBIOS_HISTORICO.md`](docs/REGISTRO_CAMBIOS_HISTORICO.md) — mapa histórico de evolución;
 - [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md) — reglas de participación y convivencia;
-- [`SUPPORT.md`](SUPPORT.md) — canales para soporte, errores, mejoras, privacidad y seguridad.
+- [`SUPPORT.md`](SUPPORT.md) — rutas de soporte y reporte.
 
 Los documentos de UX que funcionaban como bitácoras de revisión se conservan bajo `docs/historico/ux/`. Las rutas anteriores permanecen como índices de compatibilidad para no romper referencias existentes.
 
@@ -126,29 +126,11 @@ Los documentos de UX que funcionaban como bitácoras de revisión se conservan b
 
 `0.0.1-beta` a `0.0.21-beta` son **estados reconstruidos retrospectivamente** a partir del historial Git. No fueron tags publicados en sus fechas originales.
 
-`0.0.22-beta` es la primera versión formal adoptada bajo la política de GOV.1.2 y dispone del tag:
+`0.0.22-beta` fue la primera versión formal adoptada bajo la política de GOV.1.2; `0.0.23-beta` cerró GOV.1.3; `0.0.24-beta` cerró integralmente GOV.1; `0.0.25-beta` cerró UX.4.6e; y `0.0.26-beta` cerró PLAN.1. Sus tags publicados permanecen firmados e inmutables.
 
-```text
-v0.0.22-beta
-```
+Después de `v0.0.26-beta`, UX.4.6f–UX.4.6i continuaron históricamente sobre ese mismo valor de `VERSION`. VER.2 reconstruye todo el tramo sin inventar tags: el último estado aceptado de la base `7037addd` es **G070/E02**, cierre de UX.4.6i.
 
-`0.0.23-beta` cierra GOV.1.3 después de la reorganización integral, la consolidación normativa/privacidad y la incorporación de la capa de auditoría documental y trazabilidad. Su tag formal asociado es:
-
-```text
-v0.0.23-beta
-```
-
-GOV.1.4 a GOV.1.7 se desarrollaron sobre `0.0.23-beta` porque fueron revisiones acumulativas. El cierre integral de GOV.1 se materializa como `0.0.24-beta` y dispone del tag formal:
-
-```text
-v0.0.24-beta
-```
-
-`0.0.24-beta` permanece como un hito histórico de la etapa beta. La planificación antigua que reservaba `0.1.0-beta.1` como futura primera beta pública fue sustituida por PLAN.1: la línea `0.0.N-beta` continúa durante el desarrollo y la transición futura será directamente a la primera versión oficial cuando se cierren todos sus gates.
-
-`0.0.25-beta` cierra UX.4.6e después de la validación funcional R8, el gate local de **660 pruebas en `OK`** y la integración de los PR #21 y #22. Su tag formal asociado es `v0.0.25-beta`; PLAN.1 se ejecuta antes de reanudar materialmente UX.4.6f.
-
-`0.0.26-beta` cierra PLAN.1. El PR #23 integró la alineación maestra y el PR #24 la higiene pre-tag; el gate final confirmó **720 pruebas en `OK`** sin `SyntaxWarning`. El tag anotado y firmado `v0.0.26-beta` fue publicado sobre `b572796d68ff6fd91ce9944a0c6d1cf7d45753a0`. Su objeto tag es `bfbb746b177ebcc577f7241fef4d6914f713739a` y `v0.0.25-beta` permanece inmutable.
+La nueva familia beta usa `0.GG.RR.EE-beta`. El candidato actual de reconciliación es `0.0.71.01-beta` (G071/E01). Solo se convierte en estado aceptado si supera el ledger/validador, gate completo, PR/CI e integración; no se crean tags revision-aware retrospectivos para G001–G070.
 
 Objetivo de release estable:
 
@@ -162,6 +144,10 @@ Consultar:
 
 - [`RELEASES.md`](RELEASES.md) — versiones, rangos Git y releases formales;
 - [`CHANGELOG.md`](CHANGELOG.md) — cambios notables por versión;
+- [`docs/AUDITORIA_VERSIONADO_PRE_1_0.md`](docs/AUDITORIA_VERSIONADO_PRE_1_0.md) — criterio de reconciliación;
+- [`docs/MATRIZ_DECISION_REVISIONES_VER2.md`](docs/MATRIZ_DECISION_REVISIONES_VER2.md) — matriz de decisiones contables;
+- [`docs/LEDGER_REVISIONES_PRE_1_0.md`](docs/LEDGER_REVISIONES_PRE_1_0.md) — contador global pre-1.0;
+- [`data/ledger_revisiones_pre_1_0.json`](data/ledger_revisiones_pre_1_0.json) — representación machine-readable;
 - [`docs/REGISTRO_CAMBIOS_HISTORICO.md`](docs/REGISTRO_CAMBIOS_HISTORICO.md) — mapa cronológico para auditoría.
 
 Git continúa siendo la evidencia primaria de autores, fechas, hashes y contenido histórico.
@@ -311,3 +297,22 @@ Las dependencias y materiales de terceros conservan sus propias licencias y dere
 **Rubén Enrique Cañizares Miranda — Panamá**
 
 El proyecto mantiene una identidad independiente de la Caja de Seguro Social de Panamá.
+
+<!-- ANCLAS_HISTORICAS_VER2_README_CONSOLIDADAS -->
+
+## Compatibilidad histórica preservada por VER.2
+
+Estas referencias conservan evidencia de regresiones históricas sin cambiar el estado vigente de VER.2.
+
+- **Versión candidata de VER.2:** `0.0.26-beta` — referencia legacy preservada para las pruebas históricas previas a la reconciliación revision-aware.
+- **GOV.1.8:** Auditoría final y cierre pre-beta de gobierno preservado como cierre histórico del programa GOV.1.
+- **GOV.1.4:** Observabilidad y Developer Diagnostics cerrado.
+- **GOV.1.5:** Seguridad, privacidad y transparencia cerrado internamente.
+- **GOV.1.7:** Licencia propietaria pre-beta.
+- **UX.4.6e:** cerrada en `0.0.25-beta`; R8/R9 quedan preservadas como cierre funcional y documental histórico antes de los bloques UX.4.6f–UX.4.6i.
+- UX.4.6e R9.1 se conserva como candidato local histórico validado con 660 pruebas en `OK`.
+- PR #21 integrado por squash preserva el cierre histórico de UX.4.6e R9.2 en `0.0.25-beta`.
+- Tag histórico `v0.0.25-beta` preservado como cierre formal de UX.4.6e.
+- **PLAN.1:** cerrado en `0.0.26-beta`; PR #23 y PR #24 preservan el cierre legacy antes de la reconciliación revision-aware.
+- `0.1.0-beta.1` se conserva como referencia histórica previa a PLAN.1; VER.2 no la reactiva como familia vigente.
+- Badge histórico preservado: `img.shields.io/badge/versi%C3%B3n-0.0.26--beta`.

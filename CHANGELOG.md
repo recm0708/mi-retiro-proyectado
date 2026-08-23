@@ -6,13 +6,26 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ## [Unreleased]
 
+### VER.2 — reconciliación revision-aware pre-1.0
+
+- reaudita por segunda vez el historial completo hasta el cierre UX.4.6i y separa estados aceptados, candidatos fallidos, refinamientos internos, commits lógicos, checkpoints y mantenimiento independiente;
+- sustituye los conteos provisionales anteriores y fija la base `7037addd44253e528c77460b678d2b3ccd540dd5` en **70 estados aceptados (G001–G070)**;
+- adopta para estados beta nuevos el identificador `0.GG.RR.EE-beta`, manteniendo `0.0.N-beta` como familia legacy histórica;
+- reserva `0.0.71.01-beta` para VER.2 G071/E01; G071 solo se consume después de ledger/validador, gate completo, PR/CI e integración;
+- preserva sin mover ni recrear los tags `v0.0.1-beta`–`v0.0.26-beta` y prohíbe tags revision-aware retrospectivos para G001–G070;
+- documenta UX.2.1 y las revisiones internas UX.4.6a–d sin volver a contarlas cuando ya están absorbidas por los 21 estados retrospectivos;
+- reconoce como estados independientes cuando la evidencia lo sustenta los hitos de firma/integridad, seguridad/gobierno, mantenimiento, identidad/publicación, PLAN.1 y los cierres posteriores;
+- corrige la secuencia canónica de UX.4.6i a **R1 → R1.2 → R1.3 → R1.4**; no existe evidencia independiente de una revisión intermedia no demostrada entre UX.4.6i R1 y R1.2;
+- separa la versión vigente de aplicación de la metadata histórica que indica en qué versión fue revisado un documento de dominio;
+- incorpora ledger estructurado en `data/ledger_revisiones_pre_1_0.json`, validador `app/core/version_ledger.py`, matriz de decisión, auditoría y regresiones de coherencia;
+- DEV.2 permanece como siguiente bloque funcional y no comienza hasta cerrar VER.2.
+
 ### UX.4.6i — cierre de Cómo se calcula
 
 - R1.4 simplifica la etiqueta visible de sustitución numérica de **Ejemplo con números** a **Ejemplo** sin alterar fórmulas ni valores;
-- consolida R1/R1.1/R1.2/R1.3/R1.4 como cierre de la guía pública de cálculo;
+- consolida R1/R1.2/R1.3/R1.4 como cierre de la guía pública de cálculo;
 - la validación manual confirmó navegación, recorrido Pasos 1–6, SEBD, Mixto, SUCGS, tablas compactas, terminología contextual, ejemplos sustituidos y jerarquía visual;
-- el gate de cierre queda fijado en **841 pruebas** y el siguiente bloque pasa a DEV.2 — Centro de desarrollo.
-
+- el gate de cierre queda fijado en **841 pruebas** y DEV.2 queda como siguiente bloque funcional después de cualquier reconciliación transversal necesaria.
 
 ### UX.4.6i R1.3 — ejemplos sustituidos, términos y respiración visual
 
@@ -33,8 +46,6 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 - reduce lenguaje de implementación visible y refuerza foco, temas y jerarquía visual;
 - añade seis regresiones específicas; gate objetivo **832 pruebas**.
 
-
-
 ### UX.4.6i R1 — guía pública Cómo se calcula
 
 - incorpora `/como-se-calcula` como sección pública de transparencia para SEBD, Subsistema Mixto y SUCGS;
@@ -44,8 +55,6 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 - Metodología y fuentes enlaza a la guía y la nueva página reutiliza el catálogo oficial versionado;
 - ADR-178, RF-383 a RF-389 y TR-026 formalizan el contrato; se añaden 14 regresiones específicas y el gate objetivo asciende a **826 pruebas**.
 
-
-
 ### UX.4.6h — cierre del Paso 6 · Resultados y exportación
 
 - consolida R1/R1.1/R1.2/R1.3 como cierre funcional del Paso 6 sin modificar las fórmulas previsionales de SEBD, Mixto o SUCGS;
@@ -54,7 +63,6 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 - la acción provisional continúa dependiendo de la impresión nativa del navegador; la generación y descarga directa de PDF por la aplicación, sus metadatos y formatos finales permanecen en REP.1;
 - la suite de cierre queda fijada en **812 pruebas** y el bloque siguiente pasa a UX.4.6i — Cómo se calcula.
 
-
 ### UX.4.6h R1.3 — informe imprimible compacto
 
 - sustituye la impresión directa del Paso 6 por un documento A4 independiente de la interfaz web;
@@ -62,7 +70,6 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 - organiza identificación, resumen, comparación acreditado/proyectado, referencia personal, resultado del sistema y trazabilidad en una estructura compacta;
 - conserva la impresión nativa del navegador como mecanismo provisional y reserva la generación PDF formal para REP.1;
 - añade seis regresiones específicas; gate objetivo **812 pruebas**.
-
 
 ### UX.4.6h R1.2 — claridad y jerarquía visual del resultado
 
@@ -354,7 +361,6 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 - sincronizada la documentación transversal y cerrado formalmente GOV.1.4;
 - `VERSION` permanece en `0.0.23-beta`.
 
-
 ### Gobierno e integridad Git
 
 - adoptada firma SSH Ed25519 para commits y tags nuevos;
@@ -398,10 +404,10 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 - Validación R1: compilación Python, sintaxis JavaScript, git diff --check, 411 pruebas automatizadas en OK y 8/8 regresiones específicas de documentación.
 - GOV.1.3 R2 completada: consolidación de Arquitectura, Modelo de datos, Gestión de datos, Motor, Especificación funcional, Guía interna y Validación.
 - Validación R2: compilación Python, sintaxis JavaScript y `git diff --check` sin errores; 423 pruebas automatizadas en `OK`, incluidas 12/12 regresiones específicas de R2 y 8/8 regresiones documentales de R1.
-- GOV.1.3 R3 completada: consolidación normativa, modalidades, seguridad, privacidad, términos y matriz interna de alineación con Ley 81; se preserva la versión material de privacidad `2026-08-16.1`.
+- GOV.1.3 R3 completada: consolidación normativa, seguridad y privacidad documental;
+- mantenida la versión material de privacidad `2026-08-16.1`.
 - Validación R3: compilación Python, sintaxis JavaScript y `git diff --check` sin errores; 438 pruebas automatizadas en `OK`, incluidas 15/15 regresiones específicas de R3, 12/12 de R2 y 8/8 de R1.
 - La regresión documental de R2 se endureció para preservar su evidencia de cierre en `CHANGELOG.md` sin depender del estado evolutivo de `VALIDACION.md`.
-
 - GOV.1.3 R4 completada: transparencia, matriz de trazabilidad, auditoría de cálculos, limitaciones conocidas, dependencias/terceros, proceso de release e índice auditable de 158 ADR.
 - ADR-086 se conserva como anomalía histórica de metadata sin inventar un estado retroactivo.
 - Validación R4 y cierre GOV.1.3: 458 pruebas automatizadas en `OK`, compilación Python, sintaxis JavaScript y `git diff --check` sin errores.
@@ -524,5 +530,5 @@ Para una auditoría completa consultar, en este orden:
 1. `RELEASES.md` — rangos Git y clasificación de versiones;
 2. `docs/REGISTRO_CAMBIOS_HISTORICO.md` — mapa cronológico;
 3. `docs/historico/` — bitácoras y snapshots anteriores;
-4. `docs/DECISIONES.md` — ADR;
+4. `docs/DECISIONES.md` y ADR independientes posteriores — decisiones;
 5. historial Git — evidencia primaria e inmutable de cada cambio versionado.

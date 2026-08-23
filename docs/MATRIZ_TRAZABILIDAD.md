@@ -1,9 +1,10 @@
 # Matriz de trazabilidad
 
 **Estado:** Vigente
-**Versión de aplicación revisada:** `0.0.26-beta`
-**Versión base histórica:** `0.0.23-beta`
-**Revisión documental:** GOV.1.3 R4 — 2026-08-17
+**Versión candidata de aplicación:** `0.0.71.01-beta` — VER.2 G071/E01
+**Último tag formal legacy:** `v0.0.26-beta`
+**Base histórica:** GOV.1.3 R4 — 2026-08-17
+**Revisión transversal:** VER.2 — 2026-08-21
 **Clasificación:** Técnica / Auditoría
 
 Esta matriz conecta contratos críticos del producto con su fuente, decisión, implementación y evidencia de prueba. No sustituye `ESPECIFICACION_FUNCIONAL.md` ni pretende afirmar cobertura granular completa de todos los RF históricos.
@@ -43,19 +44,18 @@ Esta matriz conecta contratos críticos del producto con su fuente, decisión, i
 | TR-017 | Decisiones del Paso 3 y valores derivados distinguen ausencia de decisión, cálculo automático y edición del usuario | N/A — UX/integridad | ADR-169 | `app/static/js/simulacion.js`, `app/static/js/historial_salarios.js`, `app/static/js/detalle_anio_actual.js`, `app/templates/simulacion.html` | `tests/test_ux46f_r1_consistencia_procedencia_adjuntos.py` | Verificado UX.4.6f R1 |
 | TR-018 | El análisis de adjuntos comunica estado ocupado, evita duplicados y reutiliza un contrato global accesible | N/A — UX/accesibilidad | ADR-170 | `app/static/js/procesamiento_adjuntos.js`, `app/static/js/importacion_datos_oficiales.js`, `app/static/js/referencia_mi_retiro_seguro.js` | `tests/test_ux46f_r1_consistencia_procedencia_adjuntos.py` | Verificado UX.4.6f R1 |
 | TR-019 | Los datos documentales detectados quedan bloqueados en la vista principal y se corrigen desde la revisión editable; los no detectados siguen completables | N/A — UX/integridad | ADR-171 | `app/static/js/procedencia_editable.js`, `app/static/css/design-system.css`, `app/static/css/procedencia-editable.css`, `app/static/js/historial_salarios.js` | `tests/test_ux46f_r11_bloqueo_documental_vista_principal.py` | Verificado UX.4.6f R1.1 |
-| TR-020 | La línea temporal valida coherencia Pasos 2–4, conserva salario mensual proyectado y distingue ausencia de cotización futura | N/A — técnico/integridad | ADR-172 | `app/modelos/simulacion.py`, `app/servicios/linea_tiempo.py`, `app/static/js/linea_tiempo.js` | `tests/test_ux46f_r2_auditoria_paso4.py` | Candidato UX.4.6f R2 |
-| TR-021 | Las hipótesis salariales compuestas, la selección explícita de porcentajes, el salario futuro conocido y la procedencia del horizonte son explícitas | N/A — técnico/UX | ADR-173 | `app/modelos/simulacion.py`, `app/servicios/proyeccion_salarios.py`, `app/static/js/simulacion.js`, `app/static/js/retiro.js`, `app/templates/simulacion.html` | `tests/test_ux46f_r2_auditoria_paso4.py` | Candidato UX.4.6f R2 |
-| TR-022 | Paso 5 deriva únicamente los escenarios posteriores cubiertos por Paso 4 y conserva las ediciones del usuario | N/A — técnico/UX | ADR-174 | `app/static/js/retiro.js`, `app/templates/partials/retiro.html`, `app/modelos/simulacion.py` | `tests/test_ux46g_r1_escenarios_retiro.py` | Candidato UX.4.6g R1 |
-| TR-023 | Retiro anticipado se solicita explícitamente, bloquea fechas transcurridas y la fecha de evaluación solo se admite dentro de la banda estándar | Ley 51 / reglamento CSS para componente SEBD aplicable | ADR-175 | `app/servicios/retiro.py`, `app/motores/elegibilidad.py`, `normativa/sebd.json`, `app/static/js/retiro.js` | `tests/test_ux46g_r1_escenarios_retiro.py`, `tests/test_retiro.py` | Candidato UX.4.6g R1 |
-| TR-024 | Los controles de fecha validan año/calendario de forma transversal y Paso 5 muestra cobertura salarial de una fecha personalizada | N/A — técnico/UX | ADR-176 | `app/static/js/accesibilidad.js`, `app/static/css/accesibilidad.css`, `app/static/js/retiro.js`, `app/templates/partials/retiro.html` | `tests/test_ux46g_r1_escenarios_retiro.py` | Candidato UX.4.6g R1 |
-
-| TR-025 | Alineación y densidad visual de períodos y resumen de retiro | N/A — UX/responsive | ADR-177 | `app/templates/partials/historial_salarial.html`, `app/templates/simulacion.html`, `app/templates/partials/retiro.html`, `app/static/css/design-system.css` | `tests/test_ux46g_r1_escenarios_retiro.py` | Candidato UX.4.6g R1.4.3 |
-
-| TR-026 | La guía pública explica cómo se transforman los datos de los Pasos 1–6 y los tres sistemas con parámetros versionados, fórmula general + sustitución numérica y términos definidos en contexto, sin duplicar motores; navbar, Metodología y Paso 6 enlazan sin transportar datos personales | N/A — transparencia/UX; normativa versionada existente | ADR-178 | `app/servicios/como_se_calcula.py`, `app/templates/como_se_calcula.html`, `app/static/css/como-se-calcula.css`, `app/templates/base.html`, `app/static/js/resultados_orquestacion.js`, `app/templates/metodologia.html` | `tests/test_ux46i_r1_como_se_calcula.py` | Cerrado UX.4.6i R1–R1.4 |
+| TR-020 | La línea temporal valida coherencia Pasos 2–4, conserva salario mensual proyectado y distingue ausencia de cotización futura | N/A — técnico/integridad | ADR-172 | `app/modelos/simulacion.py`, `app/servicios/linea_tiempo.py`, `app/static/js/linea_tiempo.js` | `tests/test_ux46f_r2_auditoria_paso4.py` | Verificado UX.4.6f R2 / PR #30 |
+| TR-021 | Las hipótesis salariales compuestas, la selección explícita de porcentajes, el salario futuro conocido y la procedencia del horizonte son explícitas | N/A — técnico/UX | ADR-173 | `app/modelos/simulacion.py`, `app/servicios/proyeccion_salarios.py`, `app/static/js/simulacion.js`, `app/static/js/retiro.js`, `app/templates/simulacion.html` | `tests/test_ux46f_r2_auditoria_paso4.py` | Verificado UX.4.6f R2 / PR #30 |
+| TR-022 | Paso 5 deriva únicamente los escenarios posteriores cubiertos por Paso 4 y conserva las ediciones del usuario | N/A — técnico/UX | ADR-174 | `app/static/js/retiro.js`, `app/templates/partials/retiro.html`, `app/modelos/simulacion.py` | `tests/test_ux46g_r1_escenarios_retiro.py` | Verificado UX.4.6g / PR #32 |
+| TR-023 | Retiro anticipado se solicita explícitamente, bloquea fechas transcurridas y la fecha de evaluación solo se admite dentro de la banda estándar | Ley 51 / reglamento CSS para componente SEBD aplicable | ADR-175 | `app/servicios/retiro.py`, `app/motores/elegibilidad.py`, `normativa/sebd.json`, `app/static/js/retiro.js` | `tests/test_ux46g_r1_escenarios_retiro.py`, `tests/test_retiro.py` | Verificado UX.4.6g / PR #32 |
+| TR-024 | Los controles de fecha validan año/calendario de forma transversal y Paso 5 muestra cobertura salarial de una fecha personalizada | N/A — técnico/UX | ADR-176 | `app/static/js/accesibilidad.js`, `app/static/css/accesibilidad.css`, `app/static/js/retiro.js`, `app/templates/partials/retiro.html` | `tests/test_ux46g_r1_escenarios_retiro.py` | Verificado UX.4.6g / PR #32 |
+| TR-025 | Alineación y densidad visual de períodos y resumen de retiro | N/A — UX/responsive | ADR-177 | `app/templates/partials/historial_salarial.html`, `app/templates/simulacion.html`, `app/templates/partials/retiro.html`, `app/static/css/design-system.css` | `tests/test_ux46g_r1_escenarios_retiro.py` | Verificado UX.4.6g / PR #32 |
+| TR-026 | La guía pública explica cómo se transforman los datos de los Pasos 1–6 y los tres sistemas con parámetros versionados, fórmula general + sustitución numérica y términos definidos en contexto, sin duplicar motores; navbar, Metodología y Paso 6 enlazan sin transportar datos personales | N/A — transparencia/UX; normativa versionada existente | ADR-178 | `app/servicios/como_se_calcula.py`, `app/templates/como_se_calcula.html`, `app/static/css/como-se-calcula.css`, `app/templates/base.html`, `app/static/js/resultados_orquestacion.js`, `app/templates/metodologia.html` | `tests/test_ux46i_r1_como_se_calcula.py` | Verificado UX.4.6i / PR #34 |
+| TR-027 | La beta revision-aware cuenta estados aceptados, preserva tags legacy y mantiene ledger continuo sin convertir commits/candidatos en revisiones | N/A — gobierno/versionado | ADR-179 | `VERSION`, `VERSIONING.md`, `app/core/version.py`, `docs/AUDITORIA_VERSIONADO_PRE_1_0.md`, `docs/LEDGER_REVISIONES_PRE_1_0.md` | `tests/test_ver2_version_revision_aware.py`, `tests/test_ver2_documentacion_vigente.py` | Candidato VER.2 G071/E01 |
 
 ## 3. Cobertura de RF
 
-`ESPECIFICACION_FUNCIONAL.md` conserva el ledger RF histórico. R4 **no declara** que cada RF individual tenga ya una fila única requisito → ADR → archivo → test.
+`ESPECIFICACION_FUNCIONAL.md` conserva el ledger RF histórico. Esta matriz **no declara** que cada RF individual tenga ya una fila única requisito → ADR → archivo → test.
 
 El estado actual es:
 
@@ -70,3 +70,12 @@ Esta declaración evita confundir preservación histórica con cobertura de prue
 Una nueva fila debe usar una fuente normativa solo cuando exista relación real. Para UX, arquitectura, seguridad técnica o gobierno se utiliza `N/A — técnico/UX` o una descripción equivalente.
 
 No se inventan artículos legales para completar la tabla.
+
+Los estados `Candidato` deben promoverse a `Verificado` únicamente después del gate y cierre que corresponda. VER.2 debe actualizar TR-027 al integrar G071.
+
+<!-- ANCLAS_HISTORICAS_VER2_MATRIZ -->
+
+## Anclas históricas preservadas por VER.2
+
+- Base histórica documental preservada: `0.0.23-beta`.
+- VER.2 añade TR-027 sin eliminar la evidencia de GOV.1.3 R4 ni la matriz previa.
