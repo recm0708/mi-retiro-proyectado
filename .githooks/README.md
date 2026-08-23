@@ -1,10 +1,7 @@
 # Hooks Git versionados
 
 **Estado:** vigente
-**Bloque:** MANT.1 R2 — documentación de scripts y hooks
 **Clasificación:** técnica / mantenimiento local
-
-**Origen:** MANT.1 R1 definió la auditoría inicial; MANT.1 R2 materializa esta documentación.
 
 Esta carpeta contiene hooks de Git versionados por el proyecto. Su propósito es
 mantener controles locales reproducibles entre clones sin depender de archivos

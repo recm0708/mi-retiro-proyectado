@@ -5,11 +5,11 @@
 **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
 **Último tag formal legacy:** `v0.0.26-beta`
 **Fecha de revisión:** 2026-08-22
-**Mantenimiento técnico en curso:** MANT.1 R3 — encabezados YAML de GitHub antes de SEC.2; MANT.1 R1 conserva la auditoría inicial y MANT.1 R2 conserva la documentación de scripts y hooks antes de SEC.2
+**Mantenimiento técnico en curso:** MANT.1 R4 — limpieza de trazabilidad en encabezados operativos antes de SEC.2; MANT.1 R1 conserva la auditoría inicial, MANT.1 R2 conserva la documentación de scripts y hooks antes de SEC.2 y MANT.1 R3 conserva encabezados funcionales para YAML de GitHub
 
 Este roadmap describe **estado actual y trabajo futuro**. La evolución detallada ya completada se conserva en `RELEASES.md`, `CHANGELOG.md`, `docs/AUDITORIA_VERSIONADO_PRE_1_0.md`, `docs/LEDGER_REVISIONES_PRE_1_0.md`, `docs/MATRIZ_DECISION_REVISIONES_VER2.md`, `data/ledger_revisiones_pre_1_0.json` y `docs/historico/`.
 
-VER.2 es un bloque transversal de reconciliación y **no añade un bloque 15** al plan maestro de producto. DEV.2 ya quedó cerrado documentalmente en R4. MANT.1 se trata como checkpoint técnico de mantenibilidad antes de SEC.2 y tampoco añade un bloque funcional de producto. MANT.1 R1 queda como auditoría inicial de alcance, MANT.1 R2 materializa los primeros cambios documentales en scripts y hooks, y MANT.1 R3 documenta los YAML de GitHub sin cambiar CI ni formularios.
+VER.2 es un bloque transversal de reconciliación y **no añade un bloque 15** al plan maestro de producto. DEV.2 ya quedó cerrado documentalmente en R4. MANT.1 se trata como checkpoint técnico de mantenibilidad antes de SEC.2 y tampoco añade un bloque funcional de producto. MANT.1 R1 queda como auditoría inicial de alcance, MANT.1 R2 materializa los primeros cambios documentales en scripts y hooks, MANT.1 R3 documenta los YAML de GitHub sin cambiar CI ni formularios y MANT.1 R4 limpia encabezados operativos para que la trazabilidad histórica permanezca en documentación.
 
 ## 1. Programa GOV.1 — Auditoría, Gobierno y Trazabilidad Pre-Beta
 
@@ -141,7 +141,7 @@ No existe una una revisión intermedia no demostrada entre UX.4.6i R1 y R1.2 dem
 
 **VER.2:** bloque transversal activo. La base anterior al cambio contiene **70 estados aceptados (G001–G070)**. El candidato `0.0.71.01-beta` representa G071/E01 y solo se acepta después del gate completo, PR/CI e integración.
 
-**Checkpoint técnico actual:** MANT.1 R3 — encabezados YAML de GitHub antes de SEC.2.
+**Checkpoint técnico actual:** MANT.1 R4 — limpieza de trazabilidad en encabezados operativos antes de SEC.2.
 
 Documentos canónicos de VER.2:
 
@@ -159,7 +159,7 @@ Secuencia funcional de 14 bloques hacia 1.0, sin contar VER.2 como bloque adicio
 4. UX.4.6h — Paso 6 — **cerrado**;
 5. UX.4.6i — Cómo se calcula — **cerrado**;
 6. DEV.2 — Centro de desarrollo — **cerrado**;
-   - Checkpoint técnico intermedio: MANT.1 documenta scripts, hooks, YAML de GitHub y mantenibilidad antes de SEC.2, sin añadir un bloque funcional de producto.
+   - Checkpoint técnico intermedio: MANT.1 documenta scripts, hooks, YAML de GitHub, encabezados operativos y mantenibilidad antes de SEC.2, sin añadir un bloque funcional de producto.
 7. SEC.2 — Hardening integral;
 8. DOC.2 — CHANGELOG histórico detallado;
 9. PERSIST.1 — Persistencia voluntaria y segura;
