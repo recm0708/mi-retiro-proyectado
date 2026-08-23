@@ -1,7 +1,12 @@
+/* Página pública de guía de cálculo.
+   Organiza la presentación de fórmulas, ejemplos, tablas y fuentes sin alterar
+   la semántica de los datos que entrega el servicio de guía. */
+
 .calculation-guide-page {
   color: var(--app-text);
 }
 
+/* Hero y estado normativo: separa el mensaje principal de la ficha de versión. */
 .calculation-guide-hero {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
@@ -57,6 +62,7 @@
   margin: 0 0 1.5rem;
 }
 
+/* Navegación interna: cada tarjeta funciona como ancla hacia una familia de reglas. */
 .calculation-guide-system-nav {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -101,6 +107,7 @@
   line-height: 1.45;
 }
 
+/* Contenedores de sección: aíslan cada bloque explicativo y mejoran el salto por anclas. */
 .calculation-guide-section {
   margin-top: 1.5rem;
   padding: 1.5rem;
@@ -131,6 +138,7 @@
   color: var(--app-text-secondary);
 }
 
+/* Tarjetas de flujo: numeran visualmente los pasos sin depender del texto visible. */
 .calculation-guide-flow {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -224,6 +232,7 @@
 }
 
 .calculation-guide-card,
+/* Fórmulas y ejemplos: destacan sustituciones numéricas sin crear otro motor de cálculo. */
 .calculation-guide-example {
   padding: 1.1rem 1.15rem;
   border: 1px solid var(--app-border);
@@ -281,6 +290,7 @@
 }
 
 .calculation-guide-table,
+/* Tablas internas: compactan límites y clasificaciones sin romper lectura en móviles. */
 .calculation-guide-inner-table {
   border-radius: var(--app-table-radius);
   overflow-x: auto;
@@ -314,6 +324,7 @@
   border-bottom: 1px solid var(--app-border);
 }
 
+/* Factores y capas: reutilizan tarjetas para porcentajes, máximos, tablas de modalidad y garantías. */
 .calculation-guide-factor-grid {
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
@@ -407,6 +418,7 @@
   color: var(--app-text-secondary);
 }
 
+/* Fuentes: mantiene la procedencia normativa al final de cada sistema explicado. */
 .calculation-guide-sources {
   display: flex;
   flex-wrap: wrap;
@@ -433,10 +445,12 @@
 html[data-app-theme="contrast"] .calculation-guide-section,
 html[data-app-theme="contrast"] .calculation-guide-system-link,
 html[data-app-theme="contrast"] .calculation-guide-card,
+/* Variantes de accesibilidad: conserva contraste y foco visible sobre componentes interactivos. */
 html[data-app-theme="contrast"] .calculation-guide-details {
   border-width: 2px;
 }
 
+/* Responsive intermedio: reduce columnas y evita que las fórmulas desborden la pantalla. */
 @media (max-width: 991.98px) {
   .calculation-guide-hero {
     grid-template-columns: 1fr;
@@ -524,6 +538,7 @@ html[data-app-theme="contrast"] .calculation-guide-details {
   font-weight: 800;
 }
 
+/* Recorrido Pasos 1–6: organiza la explicación operacional antes de entrar a cada sistema. */
 .calculation-guide-data-flow-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -566,6 +581,7 @@ html[data-app-theme="contrast"] .calculation-guide-details {
   font-size: 1rem;
 }
 
+/* Fórmulas compactas: usadas dentro de tarjetas densas para mantener lectura secuencial. */
 .calculation-guide-formula.compact {
   margin-block: 0.75rem;
 }
@@ -596,6 +612,7 @@ html[data-app-theme="contrast"] .calculation-guide-details {
   grid-template-columns: repeat(8, minmax(0, 1fr));
 }
 
+/* Factores SUCGS: usa columnas adaptativas por la cantidad mayor de escenarios actuariales. */
 .calculation-guide-factor-grid-sucgs {
   grid-template-columns: repeat(10, minmax(0, 1fr));
 }
@@ -692,6 +709,7 @@ html[data-app-theme="contrast"] .calculation-guide-factor-grid > div {
   padding: 1.15rem 0 0.15rem;
 }
 
+/* Glosarios locales: aclaran términos cerca del sistema donde se usan. */
 .calculation-guide-terms {
   margin: 1.25rem 0 1.35rem;
   padding: 1rem;

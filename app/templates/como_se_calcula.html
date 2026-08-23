@@ -7,7 +7,9 @@
 {% endblock %}
 
 {% block content %}
+{# La guía es informativa: explica el procedimiento sin modificar la simulación ni transportar datos personales. #}
 <section class="container py-4 py-lg-5 calculation-guide-page">
+  {# Encabezado principal: presenta alcance de la página y versión normativa consultada. #}
   <header class="calculation-guide-hero">
     <div>
       <span class="calculation-guide-kicker">Transparencia del cálculo</span>
@@ -30,6 +32,7 @@
     <strong>Ver cálculo completo</strong>.
   </div>
 
+  {# Navegación interna: enlaza pasos generales y sistemas sin depender de JavaScript. #}
   <nav class="calculation-guide-system-nav" aria-label="Contenido de Cómo se calcula">
     <a href="#flujo-general" class="calculation-guide-system-link">
       <span>Pasos 1–6</span>
@@ -53,6 +56,7 @@
     </a>
   </nav>
 
+  {# Recorrido general: traduce los Pasos 1–6 a transformaciones verificables por el usuario. #}
   <section id="flujo-general" class="calculation-guide-section" aria-labelledby="flujo-general-titulo">
     <div class="calculation-guide-heading">
       <span>Primero</span>
@@ -84,6 +88,7 @@
       </div>
     </div>
 
+    {# Glosario general: evita mezclar cuotas reales, proyectadas y salarios cotizados. #}
     <div class="calculation-guide-terms" aria-labelledby="terminos-generales-titulo">
       <h3 id="terminos-generales-titulo">Términos que conviene distinguir</h3>
       <dl class="calculation-guide-term-grid">
@@ -95,6 +100,7 @@
     </div>
 
     <h3 class="calculation-guide-subtitle">Qué hace la aplicación con la información de cada paso</h3>
+    {# Tarjetas de datos: cada artículo declara qué entrega al paso siguiente. #}
     <div class="calculation-guide-data-flow-grid">
       <article id="paso-datos-personales" class="calculation-guide-data-card">
         <div class="calculation-guide-step-label"><span>1</span><strong>Datos personales</strong></div>
@@ -199,6 +205,7 @@
     </div>
   </section>
 
+  {# Bloque SEBD: organiza salario base, tasa, modalidad, máximos e indemnización. #}
   <section id="sebd" class="calculation-guide-section calculation-guide-system-section" aria-labelledby="sebd-titulo">
     <div class="calculation-guide-heading">
       <span>Sistema 1</span>
@@ -308,7 +315,8 @@
             <table class="table table-sm mb-0">
               <thead><tr><th>Nivel</th><th>Cuotas mín.</th><th>Promedio mín.</th><th>Mejores años</th><th>Máximo</th></tr></thead>
               <tbody>
-                {% for nivel in guia.sebd.maximos %}
+                {# Máximos versionados: se renderizan desde la guía preparada por el servicio, no desde literales locales. #}
+      {% for nivel in guia.sebd.maximos %}
                 <tr>
                   <td>{{ nivel.nivel }}</td>
                   <td>{{ nivel.cuotas_minimas if nivel.cuotas_minimas is not none else "—" }}</td>
@@ -360,6 +368,7 @@
       <p class="small calculation-guide-example-note mb-0">El ejemplo solo enseña el orden de operaciones. La elegibilidad, el máximo y cualquier otra regla dependen del caso real.</p>
     </article>
 
+    {# Fuentes SEBD: se muestran junto al sistema al que respaldan. #}
     {% for grupo in catalogo.grupos %}{% if grupo.id == "sebd" %}
     <div class="calculation-guide-sources">
       <strong>Fuentes usadas por este sistema:</strong>
@@ -369,6 +378,7 @@
     {% endif %}{% endfor %}
   </section>
 
+  {# Bloque Mixto: separa BD, CAP y transición para no confundir componentes. #}
   <section id="mixto" class="calculation-guide-section calculation-guide-system-section" aria-labelledby="mixto-titulo">
     <div class="calculation-guide-heading">
       <span>Sistema 2</span>
@@ -462,6 +472,7 @@
       saldo CAP, bono de reconocimiento y valor actuarial deben venir de información individual/oficial cuando sean necesarios.
     </div>
 
+    {# Fuentes Mixto: conserva la procedencia después de las fórmulas del subsistema. #}
     {% for grupo in catalogo.grupos %}{% if grupo.id == "mixto" %}
     <div class="calculation-guide-sources">
       <strong>Fuentes usadas por este sistema:</strong>
@@ -471,6 +482,7 @@
     {% endif %}{% endfor %}
   </section>
 
+  {# Bloque SUCGS: distingue componente contributivo, capa solidaria y garantía mínima. #}
   <section id="sucgs" class="calculation-guide-section calculation-guide-system-section" aria-labelledby="sucgs-titulo">
     <div class="calculation-guide-heading">
       <span>Sistema 3</span>
@@ -550,7 +562,8 @@
       <summary>Ver factores actuariales SUCGS por edad (35 a 80+)</summary>
       <p class="small text-secondary mt-3">Tabla versionada utilizada por el componente contributivo.</p>
       <div class="calculation-guide-factor-grid calculation-guide-factor-grid-sucgs">
-        {% for fila in guia.sucgs.factores %}
+        {# Factores SUCGS: provienen de parámetros versionados y se listan sin recalcularlos aquí. #}
+      {% for fila in guia.sucgs.factores %}
         <div><span>{{ fila.edad }} años</span><strong>{{ "%.2f"|format(fila.factor) }}</strong></div>
         {% endfor %}
       </div>
@@ -564,6 +577,7 @@
       <p class="small calculation-guide-example-note mb-0">Después de este paso todavía deben evaluarse, cuando correspondan, la capa solidaria y la garantía de reemplazo. El ejemplo no afirma elegibilidad.</p>
     </article>
 
+    {# Fuentes SUCGS: mantiene trazabilidad normativa específica para este sistema. #}
     {% for grupo in catalogo.grupos %}{% if grupo.id == "sucgs" %}
     <div class="calculation-guide-sources">
       <strong>Fuentes usadas por este sistema:</strong>
@@ -573,6 +587,7 @@
     {% endif %}{% endfor %}
   </section>
 
+  {# Cierre de la guía: documenta redondeos, limitaciones y acciones siguientes. #}
   <section class="calculation-guide-section" aria-labelledby="redondeos-limitaciones">
     <div class="calculation-guide-heading">
       <span>Lectura correcta</span>

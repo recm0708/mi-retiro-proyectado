@@ -5,7 +5,7 @@
 **Versión base histórica:** `0.0.23-beta`
 **Revisión documental:** GOV.1.4 — 2026-08-17
 **Última actualización técnica:** DEV.2 R4 — cierre final documental — 2026-08-23
-**Última actualización de mantenimiento:** MANT.1 R5A — comentarios internos en servicios Python — 2026-08-23
+**Última actualización de mantenimiento:** MANT.1 R5B — comentarios internos en CSS y plantilla Cómo se calcula — 2026-08-23
 **Clasificación:** Técnica / Pública
 
 Mi Retiro Proyectado es una aplicación web local basada en FastAPI, Jinja2 y JavaScript del navegador. La arquitectura separa presentación, contratos de datos, servicios de integración, motores previsionales, parámetros normativos y observabilidad de desarrollo.
@@ -83,6 +83,11 @@ contratos de datos. Este mantenimiento no introduce nuevas capas de producto.
 - `app/servicios/resultados_sucgs.py`
 - `app/servicios/retiro.py`
 - `app/servicios/trazabilidad.py` — transforma resultados ya calculados en pasos explicables y fuentes auditables
+
+### Presentación CSS y plantillas documentadas
+
+- `app/static/css/como-se-calcula.css` — delimita responsabilidades visuales de la guía pública: hero, navegación, fórmulas, tablas, fuentes, accesibilidad y responsive.
+- `app/templates/como_se_calcula.html` — organiza comentarios Jinja por recorrido general, sistemas previsionales, fuentes y cierre sin modificar el HTML renderizado.
 
 ### Presentación JavaScript crítica
 
