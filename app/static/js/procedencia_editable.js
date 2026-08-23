@@ -1,17 +1,10 @@
 "use strict";
 
-/* ============================================================
-   Mi Retiro Proyectado
-   Procedencia editable y control de datos importados
-   ============================================================ */
-
 /*
- * Los documentos importados son una fuente de referencia, no una jaula de
- * edición. Esta capa permite al Asegurado(a) ajustar datos confirmados sin
- * alterar silenciosamente la fotografía original del documento.
+ * Mi Retiro Proyectado — Procedencia editable y control de datos importados.
  *
- * El módulo se carga después de los scripts específicos de cada vista para
- * ampliar sus contratos sin duplicar la lógica previsional existente.
+ * Propósito: Permite ajustar datos confirmados sin alterar silenciosamente la fotografía original del documento.
+ * Alcance: Se carga después de scripts específicos para ampliar contratos existentes sin duplicar lógica previsional.
  */
 
 (() => {

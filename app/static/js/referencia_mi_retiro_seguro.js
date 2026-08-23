@@ -1,15 +1,10 @@
 "use strict";
 
-
-/* ============================================================
-   Mi Retiro Proyectado
-   Referencia opcional importada desde Mi Retiro Seguro
-   ============================================================ */
-
 /*
- * Presenta una referencia individual extraída del comprobante y permite
- * contrastarla con el resultado calculado por la aplicación. La referencia
- * nunca calibra los motores ni sustituye las entradas confirmadas del usuario.
+ * Mi Retiro Proyectado — Referencia opcional importada desde Mi Retiro Seguro.
+ *
+ * Propósito: Presenta una referencia individual extraída del comprobante para contrastarla con el resultado calculado.
+ * Alcance: La referencia nunca calibra motores ni sustituye entradas confirmadas por el usuario.
  */
 
 function ocultarErrorReferenciaMiRetiro() {

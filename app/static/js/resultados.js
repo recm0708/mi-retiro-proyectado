@@ -1,18 +1,11 @@
 "use strict";
 
-
-/* ============================================================
-   Mi Retiro Proyectado
-   Paso 6 — Resultados
-   ============================================================ */
-
 /*
- * Este módulo conecta los datos validados en los Pasos 1–5 con
- * los motores legales. La integración SEBD clasifica automáticamente
- * la modalidad normal, anticipada, proporcional, proporcional anticipada
- * o la Indemnización por Vejez de pago único.
+ * Mi Retiro Proyectado — Paso 6 — Resultados.
+ *
+ * Propósito: Conecta datos validados en los Pasos 1–5 con los motores legales y presenta el resultado calculado.
+ * Alcance: La integración SEBD clasifica modalidades; JavaScript no implementa fórmulas legales propias.
  */
-
 
 // ============================================================
 // Preparación del paso

@@ -1,0 +1,10 @@
+# ============================================================
+# Normalización de finales de línea y tratamiento de binarios
+# ============================================================
+
+* text=auto
+*.py text eol=lf
+*.js text eol=lf
+*.css text eol=lf
+*.png binary
+*.ico binary

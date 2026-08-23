@@ -1,16 +1,11 @@
 "use strict";
 
-
-/* ============================================================
-   Entrada y formato monetario
-   ============================================================ */
-
 /*
- * Los campos monetarios aceptan punto como separador decimal y
- * muestran coma como separador de miles. La interfaz limita la
- * edición a dos decimales; el backend vuelve a validar la precisión.
+ * Mi Retiro Proyectado — Entrada y formato monetario.
+ *
+ * Propósito: Normaliza campos monetarios aceptando punto decimal y mostrando separadores de miles en la interfaz.
+ * Alcance: El navegador limita la edición visual a dos decimales y el backend vuelve a validar la precisión.
  */
-
 
 /**
  * Elimina separadores visuales y limita la parte decimal.

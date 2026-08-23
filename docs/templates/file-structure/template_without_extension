@@ -1,0 +1,8 @@
+Mi Retiro Proyectado — archivo sin extensión
+
+Propósito:
+Describir el contrato de un archivo cuyo formato no tiene extensión propia.
+
+Alcance:
+Usar solo cuando el nombre del archivo sea el contrato principal, por ejemplo
+VERSION, LICENSE, CODEOWNERS o un marcador especial.

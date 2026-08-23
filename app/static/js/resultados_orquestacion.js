@@ -1,14 +1,10 @@
 "use strict";
 
-/* ============================================================
-   Paso 6 — Orquestación, decisiones y copia imprimible
-   ============================================================ */
-
 /*
- * Complementa resultados.js sin duplicar fórmulas previsionales.
- * Esta capa se ocupa de decisiones explícitas de interfaz, invalidación
- * transversal, transición Mixto -> SUCGS y preparación de una copia
- * imprimible del resultado.
+ * Mi Retiro Proyectado — Paso 6 — Orquestación, decisiones y copia imprimible.
+ *
+ * Propósito: Complementa resultados.js con decisiones explícitas de interfaz, transición entre sistemas e impresión.
+ * Alcance: No duplica fórmulas previsionales; coordina estado, invalidación y salida visual.
  */
 
 (() => {

@@ -1,0 +1,9 @@
+# Mi Retiro Proyectado — archivo textual de ejemplo.
+#
+# Propósito:
+# - describir el uso permanente de esta lista o inventario.
+#
+# Alcance:
+# - indicar si el contenido es obligatorio, referencial o temporal.
+
+item-ejemplo

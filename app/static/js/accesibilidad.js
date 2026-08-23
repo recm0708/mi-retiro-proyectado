@@ -1,14 +1,10 @@
 "use strict";
 
-/* ============================================================
-   Accesibilidad semántica, validación y ayudas contextuales
-   ============================================================ */
-
 /*
- * Complementa el HTML con descripciones, mensajes de validación, foco,
- * semántica del asistente y ayudas contextuales. Las mutaciones deben ser
- * idempotentes porque este módulo también observa contenido creado de forma
- * dinámica por otros scripts.
+ * Mi Retiro Proyectado — Accesibilidad semántica y ayudas contextuales.
+ *
+ * Propósito: Complementa el HTML con descripciones, mensajes de validación, foco, semántica del asistente y ayudas contextuales.
+ * Alcance: Las mutaciones deben ser idempotentes porque también observa contenido creado dinámicamente por otros scripts.
  */
 
 const AYUDAS_CONTEXTUALES = {

@@ -1,17 +1,11 @@
 "use strict";
 
-
-/* ============================================================
-   Mi Retiro Proyectado
-   Línea temporal histórica y proyectada
-   ============================================================ */
-
 /*
- * Este archivo presenta una vista integrada del historial real,
- * el año actual parcialmente cotizado y los escenarios futuros.
- * La construcción matemática se realiza en el backend.
+ * Mi Retiro Proyectado — Línea temporal histórica y proyectada.
+ *
+ * Propósito: Presenta una vista integrada del historial real, el año actual parcialmente cotizado y escenarios futuros.
+ * Alcance: La construcción matemática se realiza en el backend; JavaScript solo organiza la representación visual.
  */
-
 
 // ============================================================
 // Construcción y recuperación
