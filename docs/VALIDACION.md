@@ -595,6 +595,18 @@ R1.3 añade **8 regresiones** sobre la línea de 832 pruebas. Protegen la presen
 
 R1.4 simplifica la etiqueta visible de cada sustitución numérica a **Ejemplo** y añade una regresión para impedir que reaparezca la coletilla anterior. La validación manual acumulada confirmó estructura, navegación, recorrido de datos Pasos 1–6, fórmulas con sustitución, definiciones contextuales, tablas SEBD/SUCGS compactas, espaciado y presentación de los tres sistemas. El gate de cierre queda en **841 pruebas en `OK`**.
 
+### Validación MANT.1 R5G
+
+La revisión documental R5G se valida con:
+
+- `python -m pytest tests\test_mant1_r5g_documentacion.py -q`
+- `python -m pytest tests\test_ver2_documentacion_vigente.py -q`
+- `python -m pytest tests\test_ux46e_estandar_runtime.py -q`
+
+Antes del cierre del Pull Request debe ejecutarse además la suite completa:
+
+- `python -m pytest -q`
+- `python -m unittest discover -s tests -q`
 ### Validación MANT.1 R5F
 
 La revisión de nombres de archivos técnicos se valida con:

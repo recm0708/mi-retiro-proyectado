@@ -23,6 +23,7 @@ Este archivo es el punto de entrada para la documentación técnica, funcional, 
 - [`../VERSIONING.md`](../VERSIONING.md) — política legacy, beta revision-aware `0.GG.RR.EE-beta`, versión oficial de cuatro componentes y Build independiente.
 - [`../VERSION`](../VERSION) — fuente canónica de la versión candidata de aplicación.
 - [`AUDITORIA_VERSIONADO_PRE_1_0.md`](AUDITORIA_VERSIONADO_PRE_1_0.md) — auditoría del historial, criterio contable y exclusiones de VER.2.
+- [`ADR_179_VERSIONADO_REVISION_AWARE.md`](ADR_179_VERSIONADO_REVISION_AWARE.md) — decisión ADR del esquema revision-aware previo a `1.0.0.0`.
 - [`AUDITORIA_VER2_SEGUNDA_PASADA.md`](AUDITORIA_VER2_SEGUNDA_PASADA.md) — bitácora de la segunda pasada y correcciones sobre la primera reconstrucción.
 - [`AUDITORIA_VER2_CONTEO_PROVISIONAL.md`](AUDITORIA_VER2_CONTEO_PROVISIONAL.md) — cierre del conteo de segunda pasada en G070 antes de VER.2.
 - [`MATRIZ_DECISION_REVISIONES_VER2.md`](MATRIZ_DECISION_REVISIONES_VER2.md) — decisión fila por fila sobre qué consume Global y por qué.
@@ -50,8 +51,10 @@ Este archivo es el punto de entrada para la documentación técnica, funcional, 
 ## 3. Arquitectura
 
 - [`ARQUITECTURA.md`](ARQUITECTURA.md) — capas, módulos, endpoints y flujo.
+- [`AUDITORIA_ESTRUCTURA_ARCHIVOS_R5D.md`](AUDITORIA_ESTRUCTURA_ARCHIVOS_R5D.md) — auditoría de política y plantillas por extensión.
 - [`AUDITORIA_CARPETAS_R5E.md`](AUDITORIA_CARPETAS_R5E.md) — auditoría de nombres de carpetas técnicas y rutas sincronizadas.
-- [Auditoría de nombres de archivos R5F](AUDITORIA_ARCHIVOS_R5F.md)
+- [`AUDITORIA_ARCHIVOS_R5F.md`](AUDITORIA_ARCHIVOS_R5F.md) — auditoría de nombres de archivos técnicos y referencias sincronizadas.
+- [`AUDITORIA_DOCUMENTACION_R5G.md`](AUDITORIA_DOCUMENTACION_R5G.md) — auditoría de cobertura documental, índice y referencias internas.
 - [`MODELO_DE_DATOS.md`](MODELO_DE_DATOS.md) — modelos y contratos.
 - [`GESTION_DATOS_SIMULACION.md`](GESTION_DATOS_SIMULACION.md) — estado local, limpieza, restauración e invalidación.
 - [`OBSERVABILIDAD_LOGS.md`](OBSERVABILIDAD_LOGS.md) — Developer Diagnostics, esquema JSONL, correlación, redacción, retención y exportación.
@@ -100,6 +103,7 @@ La publicación del repositorio no elimina la revisión jurídica externa ni cua
 - [`TRANSPARENCIA.md`](TRANSPARENCIA.md) — fronteras de afirmación y transparencia pública.
 - [`MATRIZ_TRAZABILIDAD.md`](MATRIZ_TRAZABILIDAD.md) — requisito/criterio → ADR → implementación → prueba → estado.
 - [`AUDITORIA_CALCULOS.md`](AUDITORIA_CALCULOS.md) — reproducibilidad y revisión de resultados.
+- [`UX46H_R1_AUDITORIA_RESULTADOS.md`](UX46H_R1_AUDITORIA_RESULTADOS.md) — auditoría de resultados y coherencia visual de UX.4.6h.
 - [`LIMITACIONES_CONOCIDAS.md`](LIMITACIONES_CONOCIDAS.md) — límites técnicos, normativos y de despliegue.
 - [`DEPENDENCIAS_TERCEROS.md`](DEPENDENCIAS_TERCEROS.md) — dependencias, licencias upstream, conexiones y riesgos.
 - [`PROCESO_RELEASE.md`](PROCESO_RELEASE.md) — gates de cierre, versión, Build, CI y tags.
@@ -123,6 +127,8 @@ La publicación del repositorio no elimina la revisión jurídica externa ni cua
 - [`../CODE_OF_CONDUCT.md`](../CODE_OF_CONDUCT.md) — reglas de convivencia y colaboración.
 - [`../SUPPORT.md`](../SUPPORT.md) — rutas de consulta y reporte.
 - [`GUIA_INTERNA_DESARROLLO.md`](GUIA_INTERNA_DESARROLLO.md) — convenciones internas.
+- [`DEV2_CENTRO_DESARROLLO.md`](DEV2_CENTRO_DESARROLLO.md) — cierre documental del centro de desarrollo DEV.2.
+- [`POLITICA_ESTRUCTURA_ARCHIVOS.md`](POLITICA_ESTRUCTURA_ARCHIVOS.md) — política vigente de estructura, nombres y ubicación de archivos.
 - [`ESTANDAR_CODIGO_Y_COMENTARIOS.md`](ESTANDAR_CODIGO_Y_COMENTARIOS.md) — patrón permanente de comentarios y docstrings por tecnología.
 - [`../.editorconfig`](../.editorconfig) — formato.
 - [`../.gitattributes`](../.gitattributes) — normalización Git.
@@ -131,6 +137,10 @@ La publicación del repositorio no elimina la revisión jurídica externa ni cua
 ## 12. Historial de evolución
 
 - [`REGISTRO_CAMBIOS_HISTORICO.md`](REGISTRO_CAMBIOS_HISTORICO.md) — mapa cronológico.
+- [`UX_4_6A_REDISENO_VISUAL.md`](UX_4_6A_REDISENO_VISUAL.md) — auditoría histórica de rediseño visual UX.4.6a.
+- [`UX_4_6B_PASO1_DATOS_PERSONALES.md`](UX_4_6B_PASO1_DATOS_PERSONALES.md) — auditoría histórica del Paso 1 de UX.4.6b.
+- [`UX_4_6C_PASO2_CUOTAS.md`](UX_4_6C_PASO2_CUOTAS.md) — auditoría histórica del Paso 2 de UX.4.6c.
+- [`UX_4_6D_PASO3_HISTORIAL.md`](UX_4_6D_PASO3_HISTORIAL.md) — auditoría histórica del Paso 3 de UX.4.6d.
 - [`archive/README.md`](archive/README.md) — reglas del archivo histórico.
 - [`archive/ux/`](archive/ux/) — bitácoras completas de UX.4.6a–d.
 - [`archive/technical/`](archive/technical/) — snapshots técnicos previos.
