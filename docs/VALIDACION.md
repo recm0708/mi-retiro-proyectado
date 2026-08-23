@@ -6,10 +6,29 @@
 **Base documental histórica:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal histórica preservada:** UX.4.6e R8 — validación funcional y procedencia editable — 2026-08-19
 **Última revisión transversal:** UX.4.6f R2 integrada y cierre del Paso 4 — 2026-08-20
-**Revisión de mantenimiento:** MANT.1 R4 — encabezados operativos limpios — 2026-08-23
+**Revisión de mantenimiento:** MANT.1 R5A — comentarios internos en servicios Python — 2026-08-23
 **Clasificación:** Técnica / Calidad
 
 La estrategia combina pruebas automatizadas, CI, casos sintéticos/anonimizados y validación manual cuando una propiedad no puede demostrarse suficientemente con código.
+
+## Validación MANT.1 R5A — comentarios internos en servicios Python
+
+MANT.1 R5A valida que los servicios Python de aplicación revisados contengan
+comentarios internos de intención para flujos complejos, sin introducir
+identificadores de revisión dentro del código operativo.
+
+Comandos mínimos para el cierre local:
+
+```text
+python -m pytest tests\test_mant1_r5a_comentarios_servicios_app.py -q
+python -m pytest tests\test_mant1_r4_encabezados_operativos_limpios.py tests\test_mant1_r5a_comentarios_servicios_app.py -q
+python -m pytest tests\test_ux46e_almacenamiento_comentarios_js.py tests\test_ux46e_auditoria_coherencia.py -q
+git diff --check
+python -m pytest -q
+```
+
+Esta revisión no cambia motores, normativa, contratos JSON, rutas públicas,
+`VERSION`, `APP_VERSION` ni SEC.2.
 
 ## Validación MANT.1 R4 — encabezados operativos limpios
 

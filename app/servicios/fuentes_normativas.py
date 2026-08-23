@@ -36,6 +36,8 @@ def _fuente(
 def construir_catalogo_metodologia() -> dict:
     """Devuelve la metodología transversal y el catálogo oficial versionado."""
 
+    # El catálogo se construye desde parámetros versionados para que las URLs
+    # oficiales se mantengan en normativa y no dentro de plantillas HTML.
     generales = cargar_parametros_generales()
     sebd = cargar_parametros_sebd()
     mixto = cargar_parametros_mixto()
@@ -45,6 +47,8 @@ def construir_catalogo_metodologia() -> dict:
     urls_mixto = mixto["fuentes_oficiales"]
     urls_sucgs = sucgs["fuentes_oficiales"]
 
+    # Fuentes generales: base legal y portales oficiales comunes a más de un
+    # sistema previsional.
     fuentes_generales = [
         _fuente(
             "texto_unico",
@@ -86,6 +90,8 @@ def construir_catalogo_metodologia() -> dict:
         ),
     ]
 
+    # Los grupos separan sistemas para que la vista explique alcance, artículos
+    # y fuentes sin mezclar motores ni sugerir equivalencias jurídicas.
     grupos = [
         {
             "id": "sebd",
@@ -201,6 +207,8 @@ def construir_catalogo_metodologia() -> dict:
         },
     ]
 
+    # Recursos complementarios: enlaces útiles para el usuario, pero no fuentes
+    # que habiliten cálculos automáticos adicionales.
     recursos = [
         {
             "titulo": "Mi Caja Digital",
@@ -214,6 +222,8 @@ def construir_catalogo_metodologia() -> dict:
         },
     ]
 
+    # La salida usa listas simples y textos finales porque se consume como
+    # contenido metodológico, no como parámetros de cálculo.
     return {
         "version": "1.0",
         "fuentes_generales": fuentes_generales,

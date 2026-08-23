@@ -51,6 +51,8 @@ def _resolver_fechas(datos: DatosComparacionEscenarios) -> list[date]:
     """Obtiene las fechas válidas a comparar, preservando orden."""
 
     bloque = _bloque_datos(datos)
+    # Solo se comparan fechas futuras ya generadas por el resumen de retiro;
+    # las fechas vencidas no se reevalúan para evitar matrices engañosas.
     disponibles = [
         escenario.fecha_retiro
         for escenario in bloque.resumen_retiro.escenarios
@@ -61,6 +63,8 @@ def _resolver_fechas(datos: DatosComparacionEscenarios) -> list[date]:
     conjunto_disponible = set(disponibles)
 
     fechas: list[date] = []
+    # Se preserva el orden solicitado por el usuario y se eliminan duplicados
+    # sin alterar la fecha base que alimenta las diferencias.
     for fecha in solicitadas:
         if fecha in conjunto_disponible and fecha not in fechas:
             fechas.append(fecha)
@@ -76,6 +80,8 @@ def _resolver_salarios(datos: DatosComparacionEscenarios) -> list[str]:
     """Obtiene los escenarios salariales válidos a comparar."""
 
     bloque = _bloque_datos(datos)
+    # Los escenarios salariales disponibles provienen de la línea de tiempo ya
+    # calculada; el comparador solo selecciona nombres válidos.
     disponibles = [
         escenario.nombre
         for escenario in bloque.linea_tiempo.escenarios
@@ -120,6 +126,12 @@ def _fila_sebd(
 ) -> FilaComparacionEscenario:
     """Calcula y normaliza una combinación SEBD."""
 
+    # Cada fila se calcula con una copia del contrato original para no mutar
+    # el resultado base que ya fue mostrado en el Paso 6.
+    # La fecha/salario alternativo viaja como copia; los saldos aportados por
+    # el usuario se conservan para advertir cuando no hay proyección actuarial.
+    # SUCGS reutiliza el saldo solidario informado; por eso una fecha distinta
+    # agrega advertencia en vez de simular un saldo no calculado.
     solicitud = datos.model_copy(
         update={
             "fecha_retiro_seleccionada": fecha,
@@ -283,6 +295,8 @@ def _aplicar_diferencias(
 
     base = next((fila for fila in filas if fila.clave == clave_base), None)
 
+    # Sin fila base no existe denominador confiable; en ese caso se devuelven
+    # las filas sin diferencias para que la interfaz muestre la advertencia.
     if base is None:
         return
 
@@ -342,6 +356,8 @@ def comparar_escenarios(
 
     filas: list[FilaComparacionEscenario] = []
 
+    # La matriz retiro × salario se construye de forma exhaustiva y cada
+    # combinación se mantiene independiente para poder comparar o advertir.
     for fecha in fechas:
         for salario in salarios:
             es_base = _clave(fecha, salario) == clave_base
@@ -354,6 +370,8 @@ def comparar_escenarios(
                     es_base=es_base,
                 )
             except ValueError as error:
+                # Un fallo de cálculo en una combinación no invalida toda la
+                # matriz; se conserva la fila incompleta con la causa visible.
                 escenario = next(
                     escenario
                     for escenario in bloque.resumen_retiro.escenarios
@@ -385,6 +403,8 @@ def comparar_escenarios(
 
     _aplicar_diferencias(filas, clave_base)
 
+    # Los destacados se calculan únicamente con filas completas para no
+    # convertir advertencias o pagos no disponibles en recomendaciones.
     completas = [fila for fila in filas if fila.calculo_completo]
     con_mensual = [
         fila

@@ -102,6 +102,8 @@ def construir_trazabilidad_sebd(
     """Convierte un resultado SEBD en una cadena explicativa auditable."""
 
     calculo = resultado.calculo
+    # La trazabilidad toma el resultado ya calculado y solo recupera fuentes
+    # normativas para explicar el origen de cada paso visible.
     parametros = cargar_parametros_sebd()
     urls = parametros["fuentes_oficiales"]
 
@@ -116,6 +118,10 @@ def construir_trazabilidad_sebd(
         )
     )
 
+    # Datos de entrada resumidos: permiten que el usuario identifique de dónde
+    # sale la cadena explicativa sin exponer todo el contrato interno.
+    # Los datos iniciales contextualizan edad, cuotas y saldo sin exponer el
+    # detalle completo de la simulación del usuario.
     datos = [
         DatoTrazabilidad(
             clave="fecha_retiro",
@@ -139,6 +145,8 @@ def construir_trazabilidad_sebd(
         ),
     ]
 
+    # Los pasos se agregan en el mismo orden en que una persona revisaría el
+    # cálculo: elegibilidad, base salarial, tasa, límites y resultado.
     pasos: list[PasoTrazabilidad] = [
         PasoTrazabilidad(
             orden=1,
@@ -154,6 +162,8 @@ def construir_trazabilidad_sebd(
     ]
 
     if calculo.calculo_disponible:
+        # Solo se describen fórmulas cuando el motor declaró cálculo disponible;
+        # en caso contrario la trazabilidad queda como explicación de no cálculo.
         pasos.append(
             PasoTrazabilidad(
                 orden=len(pasos) + 1,
@@ -287,6 +297,8 @@ def construir_trazabilidad_sebd(
         final = "Pendiente / no calculable con los datos actuales"
         tipo = "PENDIENTE"
 
+    # El resumen final queda serializable para la interfaz y mantiene fuentes,
+    # datos y pasos separados para navegación y auditoría humana.
     return ResumenTrazabilidadCalculo(
         sistema="SEBD",
         tipo_prestacion=calculo.tipo_prestacion,
@@ -309,6 +321,8 @@ def construir_trazabilidad_mixto(
     """Construye la explicación separada de los componentes BD y CAP."""
 
     calculo = resultado.calculo
+    # En Mixto se explican dos componentes: beneficio definido y ahorro
+    # personal, sin recalcularlos ni mezclar sus advertencias.
     parametros = cargar_parametros_mixto()
     urls = parametros["fuentes_oficiales"]
     fuentes = _fuentes_comunes(urls)
@@ -475,6 +489,8 @@ def construir_trazabilidad_mixto(
         final = "Pendiente / no calculable con los datos actuales"
         tipo = "PENDIENTE"
 
+    # Mixto devuelve una narrativa compuesta; la interfaz decide cómo agrupar
+    # visualmente los pasos, no este servicio.
     return ResumenTrazabilidadCalculo(
         sistema="MIXTO",
         tipo_prestacion=calculo.tipo_prestacion or calculo.estado_sistema,
@@ -499,6 +515,8 @@ def construir_trazabilidad_sucgs(
     """Construye la cadena contributiva, solidaria y de garantía SUCGS."""
 
     calculo = resultado.calculo
+    # SUCGS combina saldo contributivo, garantías y advertencias solidarias;
+    # la trazabilidad conserva esas capas en pasos separados.
     parametros = cargar_parametros_sucgs()
     urls = parametros["fuentes_oficiales"]
     fuentes = _fuentes_comunes(urls)
@@ -649,6 +667,8 @@ def construir_trazabilidad_sucgs(
         final = "Pendiente / cálculo total no disponible"
         tipo = "PENDIENTE"
 
+    # La salida conserva las advertencias del motor para que la interfaz no
+    # convierta una estimación limitada en dictamen oficial.
     return ResumenTrazabilidadCalculo(
         sistema="SUCGS",
         tipo_prestacion=calculo.tipo_prestacion_solidaria or calculo.tipo_calculo,

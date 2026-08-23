@@ -6,6 +6,13 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ## [Unreleased]
 
+### MANT.1 R5A — comentarios internos en servicios Python de aplicación
+
+- agrega comentarios internos de intención en servicios Python de alto tamaño: trazabilidad, comparador, guía de cálculo, fuentes normativas, detalle del año actual y Ficha Digital;
+- mantiene los comentarios dentro de `app/servicios/` libres de identificadores de revisión, PR o bloques históricos;
+- agrega regresión para exigir comentarios internos útiles en los servicios revisados sin cambiar lógica funcional;
+- no cambia `VERSION`, `APP_VERSION`, motores previsionales, normativa, contratos JSON, rutas públicas ni SEC.2.
+
 ### MANT.1 R4 — limpieza de trazabilidad en encabezados operativos
 
 - limpia encabezados de YAML GitHub para que describan propósito y alcance permanente, sin declarar MANT.1 dentro de archivos operativos;

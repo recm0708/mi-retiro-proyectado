@@ -88,7 +88,7 @@ VER.2 es un bloque transversal de reconciliación y **no añade un bloque 15** a
 ### Pendiente o incompleto
 
 - VER.2 — cerrar reconciliación revision-aware y promover G071 si el gate completo, PR/CI e integración son satisfactorios;
-- MANT.1 — documentación y mantenibilidad de scripts, hooks, YAML de GitHub y encabezados antes de SEC.2;
+- MANT.1 — documentación, encabezados operativos y comentarios internos de mantenibilidad antes de SEC.2;
 - hardening integral SEC.2;
 - reconstrucción detallada del CHANGELOG `0.0.1-beta`–`0.0.21-beta` en DOC.2;
 - persistencia voluntaria si permanece dentro del alcance 1.0;
@@ -141,7 +141,7 @@ No existe una una revisión intermedia no demostrada entre UX.4.6i R1 y R1.2 dem
 
 **VER.2:** bloque transversal activo. La base anterior al cambio contiene **70 estados aceptados (G001–G070)**. El candidato `0.0.71.01-beta` representa G071/E01 y solo se acepta después del gate completo, PR/CI e integración.
 
-**Checkpoint técnico actual:** MANT.1 R4 — limpieza de trazabilidad en encabezados operativos antes de SEC.2.
+**Checkpoint técnico actual:** MANT.1 R5A — comentarios internos en servicios Python antes de SEC.2.
 
 Documentos canónicos de VER.2:
 
