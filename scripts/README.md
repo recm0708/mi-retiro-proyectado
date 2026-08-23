@@ -11,19 +11,19 @@ no calculan pensiones y no modifican normativa.
 
 | Archivo | Propósito | Modifica archivos del proyecto |
 |---|---|---|
-| `configurar_hooks_git.ps1` | Configura `core.hooksPath=.githooks` para que Git use los hooks versionados del proyecto. | No |
-| `validar_precommit.py` | Ejecuta el gate local antes de crear commits: estado Git, whitespace, dependencias, compilación Python, sintaxis JavaScript y pruebas. | No |
+| `configure_git_hooks.ps1` | Configura `core.hooksPath=.githooks` para que Git use los hooks versionados del proyecto. | No |
+| `validate_precommit.py` | Ejecuta el gate local antes de crear commits: estado Git, whitespace, dependencias, compilación Python, sintaxis JavaScript y pruebas. | No |
 
 ## Uso previsto
 
 El script de configuración se ejecuta una vez por clon local:
 
 ```powershell
-.\scripts\configurar_hooks_git.ps1
+.\scripts\configure_git_hooks.ps1
 ```
 
 Después de esa activación, Git ejecuta `.githooks/pre-commit` antes de cada
-commit. El hook delega la validación en `scripts/validar_precommit.py`.
+commit. El hook delega la validación en `scripts/validate_precommit.py`.
 
 ## Contrato de mantenimiento
 

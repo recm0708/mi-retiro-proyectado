@@ -7,7 +7,7 @@
 **Fecha de revisión:** 2026-08-22
 **Mantenimiento técnico en curso:** MANT.1 R5E — estandarización de nombres de carpetas antes de SEC.2; MANT.1 R5D conserva la política, plantillas y uniformidad por extensión; MANT.1 R1 conserva la auditoría inicial, MANT.1 R2 conserva la documentación de scripts y hooks antes de SEC.2, MANT.1 R3 conserva encabezados funcionales para YAML de GitHub, MANT.1 R4 limpia encabezados operativos, MANT.1 R5A documenta servicios Python grandes, MANT.1 R5B comenta CSS/plantilla y MANT.1 R5C comenta JavaScript complejo
 
-Este roadmap describe **estado actual y trabajo futuro**. La evolución detallada ya completada se conserva en `RELEASES.md`, `CHANGELOG.md`, `docs/AUDITORIA_VERSIONADO_PRE_1_0.md`, `docs/LEDGER_REVISIONES_PRE_1_0.md`, `docs/MATRIZ_DECISION_REVISIONES_VER2.md`, `data/ledger_revisiones_pre_1_0.json` y `docs/archive/`.
+Este roadmap describe **estado actual y trabajo futuro**. La evolución detallada ya completada se conserva en `RELEASES.md`, `CHANGELOG.md`, `docs/AUDITORIA_VERSIONADO_PRE_1_0.md`, `docs/LEDGER_REVISIONES_PRE_1_0.md`, `docs/MATRIZ_DECISION_REVISIONES_VER2.md`, `data/revision_ledger_pre_1_0.json` y `docs/archive/`.
 
 VER.2 es un bloque transversal de reconciliación y **no añade un bloque 15** al plan maestro de producto. DEV.2 ya quedó cerrado documentalmente en R4. MANT.1 se trata como checkpoint técnico de mantenibilidad antes de SEC.2 y tampoco añade un bloque funcional de producto. MANT.1 R1 queda como auditoría inicial de alcance, MANT.1 R2 materializa los primeros cambios documentales en scripts y hooks, MANT.1 R3 documenta los YAML de GitHub sin cambiar CI ni formularios y MANT.1 R4 limpia encabezados operativos para que la trazabilidad histórica permanezca en documentación, MANT.1 R5A comenta servicios Python grandes, MANT.1 R5B comenta CSS/plantilla de la guía pública, MANT.1 R5C comenta JavaScript complejo sin cambiar lógica visible y MANT.1 R5D define política/plantillas por extensión con uniformidad de encabezados.
 
@@ -148,7 +148,7 @@ Documentos canónicos de VER.2:
 - `AUDITORIA_VERSIONADO_PRE_1_0.md` — criterio contable y exclusiones;
 - `LEDGER_REVISIONES_PRE_1_0.md` — ledger G001–G070 y reserva G071;
 - `MATRIZ_DECISION_REVISIONES_VER2.md` — justificación de la segunda pasada;
-- `../data/ledger_revisiones_pre_1_0.json` — ledger estructurado validable;
+- `../data/revision_ledger_pre_1_0.json` — ledger estructurado validable;
 - `../VERSIONING.md` — política de numeración.
 
 Secuencia funcional de 14 bloques hacia 1.0, sin contar VER.2 como bloque adicional:

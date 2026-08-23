@@ -12,7 +12,7 @@ Reconstruir la secuencia real de estados aceptados del proyecto antes de continu
 
 La auditoría parte de Git como evidencia primaria y cruza `RELEASES.md`, `CHANGELOG.md`, `docs/REGISTRO_CAMBIOS_HISTORICO.md`, bitácoras UX, auditorías de cierre, Pull Requests, gates de pruebas, decisiones ADR y conversaciones de desarrollo recuperadas.
 
-La decisión fila por fila se conserva en `MATRIZ_DECISION_REVISIONES_VER2.md`. El resultado se materializa en `LEDGER_REVISIONES_PRE_1_0.md` y `data/ledger_revisiones_pre_1_0.json`.
+La decisión fila por fila se conserva en `MATRIZ_DECISION_REVISIONES_VER2.md`. El resultado se materializa en `LEDGER_REVISIONES_PRE_1_0.md` y `data/revision_ledger_pre_1_0.json`.
 
 ## 2. Problema detectado
 
@@ -64,7 +64,7 @@ La base `7037addd` contiene **70 estados aceptados** según la regla anterior.
 | G069–G070 | UX.4.6i — R1 y R1.4/cierre | 2 |
 | **Total** |  | **70** |
 
-El detalle fila por fila se conserva en `docs/LEDGER_REVISIONES_PRE_1_0.md` y `data/ledger_revisiones_pre_1_0.json`.
+El detalle fila por fila se conserva en `docs/LEDGER_REVISIONES_PRE_1_0.md` y `data/revision_ledger_pre_1_0.json`.
 
 ## 5. Decisiones históricas relevantes
 
@@ -204,7 +204,7 @@ Un intento fallido de VER.2 no convierte G071 en estado aceptado. La aceptación
 VER.2 materializa la reconstrucción en:
 
 ```text
-data/ledger_revisiones_pre_1_0.json
+data/revision_ledger_pre_1_0.json
 ```
 
 El archivo declara:

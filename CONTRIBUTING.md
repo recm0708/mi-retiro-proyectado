@@ -88,7 +88,7 @@ Cuando `main` exige firmas verificadas, el PR que se integre mediante squash deb
 El repositorio incluye un gate `pre-commit` versionado. Debe activarse **una sola vez por cada clon local**:
 
 ```powershell
-.\scripts\configurar_hooks_git.ps1
+.\scripts\configure_git_hooks.ps1
 git config --local --get core.hooksPath
 ```
 

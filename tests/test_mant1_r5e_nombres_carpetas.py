@@ -67,7 +67,7 @@ class TestMant1R5ENombresCarpetas(unittest.TestCase):
             "tests\\casos_validacion",
             "casos_validacion",
             "normativa/*.json",
-            "normativa/parametros_generales.json",
+            "normativa/general_parameters.json",
             "normativa/sebd.json",
             "normativa/mixto.json",
             "normativa/sucgs.json",

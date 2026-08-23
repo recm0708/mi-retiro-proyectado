@@ -154,10 +154,10 @@ Historia: `CHANGELOG.md`, `RELEASES.md`, `docs/REGISTRO_CAMBIOS_HISTORICO.md`, `
 Cada clon de desarrollo debe activar una vez el gate de Git versionado:
 
 ```powershell
-.\scripts\configurar_hooks_git.ps1
+.\scripts\configure_git_hooks.ps1
 ```
 
-`.githooks/pre-commit` delega en `scripts/validar_precommit.py`. Antes de permitir un commit comprueba que no se confirme directamente en `main`, que no existan cambios sin preparar ni archivos no rastreados y que pasen `git diff --cached --check`, `pip check`, compilación Python, sintaxis JavaScript y la suite completa. Un fallo devuelve código no cero y Git no crea el commit. `--no-verify` no se utiliza como vía normal para saltar este control.
+`.githooks/pre-commit` delega en `scripts/validate_precommit.py`. Antes de permitir un commit comprueba que no se confirme directamente en `main`, que no existan cambios sin preparar ni archivos no rastreados y que pasen `git diff --cached --check`, `pip check`, compilación Python, sintaxis JavaScript y la suite completa. Un fallo devuelve código no cero y Git no crea el commit. `--no-verify` no se utiliza como vía normal para saltar este control.
 
 El gate manual de cierre sigue siendo:
 

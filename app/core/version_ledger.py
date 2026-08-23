@@ -16,7 +16,7 @@ from app.core.version import construir_version_beta_revision
 
 
 ROOT = Path(__file__).resolve().parents[2]
-LEDGER_FILE = ROOT / "data" / "ledger_revisiones_pre_1_0.json"
+LEDGER_FILE = ROOT / "data" / "revision_ledger_pre_1_0.json"
 
 
 class LedgerRevisionError(ValueError):

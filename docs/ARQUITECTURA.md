@@ -267,8 +267,8 @@ La raíz del repositorio contiene automatización local de calidad separada del
 runtime de la aplicación:
 
 - `.githooks/pre-commit` actúa como delegador Git antes de cada commit;
-- `scripts/configurar_hooks_git.ps1` activa los hooks versionados por clon;
-- `scripts/validar_precommit.py` ejecuta el gate local reproducible.
+- `scripts/configure_git_hooks.ps1` activa los hooks versionados por clon;
+- `scripts/validate_precommit.py` ejecuta el gate local reproducible.
 
 Esta capa no participa en el flujo HTTP, no modifica cálculos previsionales, no
 lee datos personales de simulación y no reemplaza GitHub Actions. Su objetivo es

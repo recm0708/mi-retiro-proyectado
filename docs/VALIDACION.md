@@ -344,7 +344,7 @@ El gate remoto de PR #30 instaló `pypdf 6.16.1`, completó `pip check`, `compil
 
 El cierre documental inicial añadió una regresión para impedir que README, ROADMAP y el plan maestro volvieran a presentar Paso 4 como pendiente. Su primera ejecución completa alcanzó 757 pruebas pero detectó **cuatro fallos históricos**: tres módulos de UX.4.6e todavía exigían que UX.4.6f permaneciera activo o pendiente. Esas regresiones se corrigen para preservar la evidencia de UX.4.6e sin congelar el estado futuro del roadmap.
 
-Como endurecimiento permanente, el repositorio incorpora `.githooks/pre-commit`, `scripts/validar_precommit.py` y `scripts/configurar_hooks_git.ps1`. Una vez activado por clon, Git rechaza el commit si se intenta confirmar directamente en `main`, existe un árbol de trabajo que no corresponde al staging, falla `git diff --cached --check`, `pip check`, `compileall`, `node --check` o la suite completa. Cinco regresiones adicionales protegen el contrato; el inventario de cierre pasa a **762 pruebas** sin modificar `VERSION`. Los checks remotos del Pull Request siguen siendo obligatorios y no son sustituidos por el hook local.
+Como endurecimiento permanente, el repositorio incorpora `.githooks/pre-commit`, `scripts/validate_precommit.py` y `scripts/configure_git_hooks.ps1`. Una vez activado por clon, Git rechaza el commit si se intenta confirmar directamente en `main`, existe un árbol de trabajo que no corresponde al staging, falla `git diff --cached --check`, `pip check`, `compileall`, `node --check` o la suite completa. Cinco regresiones adicionales protegen el contrato; el inventario de cierre pasa a **762 pruebas** sin modificar `VERSION`. Los checks remotos del Pull Request siguen siendo obligatorios y no son sustituidos por el hook local.
 
 
 ### MANT.1 R2 — documentación de scripts y hooks
@@ -358,8 +358,8 @@ MANT.1 R2 documenta la infraestructura local del gate pre-commit sin cambiar su
 comportamiento funcional. La revisión cubre:
 
 - `.githooks/pre-commit`;
-- `scripts/configurar_hooks_git.ps1`;
-- `scripts/validar_precommit.py`;
+- `scripts/configure_git_hooks.ps1`;
+- `scripts/validate_precommit.py`;
 - `scripts/README.md`;
 - `.githooks/README.md`;
 - regresión `tests/test_mant1_scripts_hooks_documentados.py`.
@@ -412,10 +412,10 @@ Inventario vigente: **99 módulos**.
 
 - `tests/test_accesibilidad_temas.py`
 - `tests/test_accesibilidad_ux4.py`
-- `tests/test_comparador.py`
+- `tests/test_comparator.py`
 - `tests/test_dinero.py`
 - `tests/test_estabilizacion_visual.py`
-- `tests/test_fuentes_normativas.py`
+- `tests/test_regulatory_sources.py`
 - `tests/test_gov12_versionado.py`
 - `tests/test_gov13_documentacion.py`
 - `tests/test_gov13_documentacion_r2.py`
@@ -449,21 +449,21 @@ Inventario vigente: **99 módulos**.
 - `tests/test_plan1_versionado_oficial.py`
 - `tests/test_prebeta_e2e_hardening.py`
 - `tests/test_precommit_guard.py`
-- `tests/test_proyeccion_salarios.py`
+- `tests/test_salary_projection.py`
 - `tests/test_pypdf_compatibilidad.py`
 - `tests/test_responsive_ux3.py`
 - `tests/test_resultado_unificado.py`
-- `tests/test_resultados.py`
-- `tests/test_resultados_mixto.py`
-- `tests/test_resultados_modalidades.py`
-- `tests/test_resultados_sucgs.py`
-- `tests/test_retiro.py`
+- `tests/test_results.py`
+- `tests/test_mixto_results.py`
+- `tests/test_modality_results.py`
+- `tests/test_sucgs_results.py`
+- `tests/test_retirement.py`
 - `tests/test_sebd.py`
 - `tests/test_sebd_modalidades.py`
 - `tests/test_sucgs.py`
 - `tests/test_sucgs_capa_solidaria.py`
 - `tests/test_sucgs_reemplazo.py`
-- `tests/test_trazabilidad.py`
+- `tests/test_traceability.py`
 - `tests/test_ux42_estados_visuales.py`
 - `tests/test_ux43_formularios_teclado.py`
 - `tests/test_ux44_detalle_anio_actual.py`
@@ -594,3 +594,17 @@ R1.3 añade **8 regresiones** sobre la línea de 832 pruebas. Protegen la presen
 ### UX.4.6i R1.4 — cierre de guía pública
 
 R1.4 simplifica la etiqueta visible de cada sustitución numérica a **Ejemplo** y añade una regresión para impedir que reaparezca la coletilla anterior. La validación manual acumulada confirmó estructura, navegación, recorrido de datos Pasos 1–6, fórmulas con sustitución, definiciones contextuales, tablas SEBD/SUCGS compactas, espaciado y presentación de los tres sistemas. El gate de cierre queda en **841 pruebas en `OK`**.
+
+### Validación MANT.1 R5F
+
+La revisión de nombres de archivos técnicos se valida con:
+
+- `python -m pytest tests\test_mant1_r5f_nombres_archivos.py -q`
+- `python -m pytest tests\test_mant1_scripts_hooks_documentados.py tests\test_precommit_guard.py -q`
+- `python -m pytest tests\test_mant1_r5e_nombres_carpetas.py -q`
+- `python -m compileall app tests -q`
+
+Antes del cierre del Pull Request debe ejecutarse además la suite completa:
+
+- `python -m pytest -q`
+- `python -m unittest discover -s tests -q`

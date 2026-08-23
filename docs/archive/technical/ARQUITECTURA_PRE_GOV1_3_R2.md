@@ -59,7 +59,7 @@ app/
 └── main.py
 
 regulations/
-├── parametros_generales.json
+├── general_parameters.json
 ├── sebd.json
 ├── mixto.json
 └── sucgs.json

@@ -43,26 +43,26 @@ Archivos principales:
 
 ```text
 tests/test_dinero.py
-tests/test_proyeccion_salarios.py
+tests/test_salary_projection.py
 tests/test_linea_tiempo.py
-tests/test_retiro.py
+tests/test_retirement.py
 tests/test_accesibilidad_ux4.py
 tests/test_ux46a_redisenio_integral.py
 
 tests/test_sebd.py
 tests/test_sebd_modalidades.py
 tests/test_indemnizacion_vejez.py
-tests/test_resultados.py
-tests/test_resultados_modalidades.py
+tests/test_results.py
+tests/test_modality_results.py
 
 tests/test_mixto.py
 tests/test_mixto_prestaciones_cap.py
-tests/test_resultados_mixto.py
+tests/test_mixto_results.py
 
 tests/test_sucgs.py
 tests/test_sucgs_capa_solidaria.py
 tests/test_sucgs_reemplazo.py
-tests/test_resultados_sucgs.py
+tests/test_sucgs_results.py
 ```
 
 ## 4. Reglas para casos reales
@@ -303,7 +303,7 @@ Si una corrección responde a un error encontrado manualmente, debe añadirse un
 
 ## Comparador 6F.1
 
-La suite incorpora `tests/test_comparador.py` con tres regresiones transversales:
+La suite incorpora `tests/test_comparator.py` con tres regresiones transversales:
 
 1. SEBD reproduce B/.741.59 como base y B/.765.67 en +1 año, con diferencia de B/.24.08.
 2. Mixto normaliza B/.856.25 como pensión mensual y mantiene separado cualquier pago único.
@@ -314,7 +314,7 @@ Estado después de 6F.1: **60 pruebas automatizadas en OK**.
 
 ## 12. Validación 6F.2
 
-La suite contiene **63 pruebas**. `tests/test_trazabilidad.py` valida tres cadenas explicativas:
+La suite contiene **63 pruebas**. `tests/test_traceability.py` valida tres cadenas explicativas:
 
 1. SEBD normal: salario base, tasa y resultado mensual;
 2. Mixto: separación BD/CAP y suma mensual;
@@ -371,7 +371,7 @@ La suite queda en **96 pruebas automatizadas** después de incorporar las regres
 - selector mensual `ultimo_mes_cuotas`;
 - conservación de la denominación `Abrir recurso oficial` para recursos que no son fuente normativa.
 
-`tests/test_retiro.py` incorpora tres regresiones adicionales:
+`tests/test_retirement.py` incorpora tres regresiones adicionales:
 
 1. un último mes anterior deriva al último día calendario del mes;
 2. el mes actual nunca genera una fecha de corte posterior a la evaluación;

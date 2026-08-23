@@ -44,7 +44,7 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 
 La visibilidad pública del repositorio **no convierte una beta de desarrollo en versión oficial, no constituye un despliegue de producción y no modifica por sí sola la licencia vigente**.
 
-La versión se obtiene exclusivamente del archivo [`VERSION`](VERSION). La política completa se documenta en [`VERSIONING.md`](VERSIONING.md). La reconciliación actual se audita en [`docs/AUDITORIA_VERSIONADO_PRE_1_0.md`](docs/AUDITORIA_VERSIONADO_PRE_1_0.md) y [`docs/MATRIZ_DECISION_REVISIONES_VER2.md`](docs/MATRIZ_DECISION_REVISIONES_VER2.md); el contador global se materializa en [`docs/LEDGER_REVISIONES_PRE_1_0.md`](docs/LEDGER_REVISIONES_PRE_1_0.md) y [`data/ledger_revisiones_pre_1_0.json`](data/ledger_revisiones_pre_1_0.json). La secuencia restante hacia 1.0 se mantiene en [`docs/PLAN_MAESTRO_HACIA_1_0.md`](docs/PLAN_MAESTRO_HACIA_1_0.md).
+La versión se obtiene exclusivamente del archivo [`VERSION`](VERSION). La política completa se documenta en [`VERSIONING.md`](VERSIONING.md). La reconciliación actual se audita en [`docs/AUDITORIA_VERSIONADO_PRE_1_0.md`](docs/AUDITORIA_VERSIONADO_PRE_1_0.md) y [`docs/MATRIZ_DECISION_REVISIONES_VER2.md`](docs/MATRIZ_DECISION_REVISIONES_VER2.md); el contador global se materializa en [`docs/LEDGER_REVISIONES_PRE_1_0.md`](docs/LEDGER_REVISIONES_PRE_1_0.md) y [`data/revision_ledger_pre_1_0.json`](data/revision_ledger_pre_1_0.json). La secuencia restante hacia 1.0 se mantiene en [`docs/PLAN_MAESTRO_HACIA_1_0.md`](docs/PLAN_MAESTRO_HACIA_1_0.md).
 
 ## Capacidades implementadas
 
@@ -112,7 +112,7 @@ Documentos principales:
 - [`docs/AUDITORIA_VERSIONADO_PRE_1_0.md`](docs/AUDITORIA_VERSIONADO_PRE_1_0.md) — criterio contable y reconciliación VER.2;
 - [`docs/MATRIZ_DECISION_REVISIONES_VER2.md`](docs/MATRIZ_DECISION_REVISIONES_VER2.md) — decisiones de inclusión/exclusión del contador;
 - [`docs/LEDGER_REVISIONES_PRE_1_0.md`](docs/LEDGER_REVISIONES_PRE_1_0.md) — secuencia global G001–G070 y candidato G071;
-- [`data/ledger_revisiones_pre_1_0.json`](data/ledger_revisiones_pre_1_0.json) — ledger machine-readable;
+- [`data/revision_ledger_pre_1_0.json`](data/revision_ledger_pre_1_0.json) — ledger machine-readable;
 - [`docs/LICENCIA_Y_DISTRIBUCION.md`](docs/LICENCIA_Y_DISTRIBUCION.md) — decisión de licencia y estrategia de distribución;
 - [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) — avisos y obligaciones de terceros;
 - [`docs/ROADMAP.md`](docs/ROADMAP.md) — estado actual y próximos hitos;
@@ -149,7 +149,7 @@ Consultar:
 - [`docs/AUDITORIA_VERSIONADO_PRE_1_0.md`](docs/AUDITORIA_VERSIONADO_PRE_1_0.md) — criterio de reconciliación;
 - [`docs/MATRIZ_DECISION_REVISIONES_VER2.md`](docs/MATRIZ_DECISION_REVISIONES_VER2.md) — matriz de decisiones contables;
 - [`docs/LEDGER_REVISIONES_PRE_1_0.md`](docs/LEDGER_REVISIONES_PRE_1_0.md) — contador global pre-1.0;
-- [`data/ledger_revisiones_pre_1_0.json`](data/ledger_revisiones_pre_1_0.json) — representación machine-readable;
+- [`data/revision_ledger_pre_1_0.json`](data/revision_ledger_pre_1_0.json) — representación machine-readable;
 - [`docs/REGISTRO_CAMBIOS_HISTORICO.md`](docs/REGISTRO_CAMBIOS_HISTORICO.md) — mapa cronológico para auditoría.
 
 Git continúa siendo la evidencia primaria de autores, fechas, hashes y contenido histórico.
@@ -216,7 +216,7 @@ python -m pip install -r requirements.txt
 Activar una sola vez por clon el gate que protege la creación de commits:
 
 ```powershell
-.\scripts\configurar_hooks_git.ps1
+.\scripts\configure_git_hooks.ps1
 ```
 
 Ejecutar:

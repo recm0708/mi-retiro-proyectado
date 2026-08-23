@@ -83,7 +83,7 @@ Fuentes canónicas:
 - `docs/AUDITORIA_VERSIONADO_PRE_1_0.md`;
 - `docs/LEDGER_REVISIONES_PRE_1_0.md`;
 - `docs/MATRIZ_DECISION_REVISIONES_VER2.md`;
-- `data/ledger_revisiones_pre_1_0.json`;
+- `data/revision_ledger_pre_1_0.json`;
 - ADR de gobierno correspondiente.
 
 Mientras VER.2 permanezca abierto, **DEV.2 es el siguiente bloque funcional, no el bloque funcional iniciado**.

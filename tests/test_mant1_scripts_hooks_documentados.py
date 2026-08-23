@@ -20,21 +20,21 @@ class TestMant1ScriptsHooksDocumentados(unittest.TestCase):
         scripts = self._leer("scripts/README.md")
         hooks = self._leer(".githooks/README.md")
 
-        self.assertIn("configurar_hooks_git.ps1", scripts)
-        self.assertIn("validar_precommit.py", scripts)
+        self.assertIn("configure_git_hooks.ps1", scripts)
+        self.assertIn("validate_precommit.py", scripts)
         self.assertIn("core.hooksPath=.githooks", scripts)
         self.assertIn("no implementan reglas previsionales", scripts)
         self.assertIn("GitHub Actions", scripts)
 
         self.assertIn("pre-commit", hooks)
-        self.assertIn("scripts/validar_precommit.py", hooks)
+        self.assertIn("scripts/validate_precommit.py", hooks)
         self.assertIn("No sustituye la CI remota", hooks)
         self.assertIn("No debe depender de rutas absolutas", hooks)
 
     def test_hook_y_scripts_explican_proposito_y_limites(self):
         hook = self._leer(".githooks/pre-commit")
-        configurar = self._leer("scripts/configurar_hooks_git.ps1")
-        validar = self._leer("scripts/validar_precommit.py")
+        configurar = self._leer("scripts/configure_git_hooks.ps1")
+        validar = self._leer("scripts/validate_precommit.py")
 
         self.assertIn("Hook versionado de Mi Retiro Proyectado", hook)
         self.assertIn("delegar todas las reglas del gate", hook)
