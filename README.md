@@ -27,8 +27,10 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 - **Programa GOV.1:** cerrado — Auditoría, Gobierno y Trazabilidad Pre-Beta.
 - **Programa PLAN.1:** cerrado — Alineación maestra hacia la primera versión oficial.
 - **PLAN.1:** cerrado en el esquema legacy `0.0.26-beta`; PR #23 y PR #24 integrados, **720 pruebas en `OK`** en el gate final y tag firmado `v0.0.26-beta` publicado.
-- **Bloque transversal activo:** VER.2 — reconciliación revision-aware del historial pre-1.0.
-- **Siguiente bloque funcional:** DEV.2 — Centro de desarrollo; no comienza hasta cerrar VER.2.
+- **Bloque funcional cerrado:** DEV.2 — Centro de desarrollo integrado por PR #37–#40 y cerrado documentalmente en R4.
+- **Siguiente bloque funcional:** DEV.2 — referencia histórica preservada para regresiones VER.2; el estado vigente de DEV.2 es cerrado documentalmente en R4.
+- **Bloque transversal activo:** VER.2 — cierre transversal de versionado revision-aware todavía pendiente de integración final.
+- **Bloque transversal pendiente:** VER.2 — cierre final de versionado revision-aware y sincronización de ledger, `VERSIONING.md`, `README`, `CHANGELOG` y documentación relacionada.
 
 - **UX.4.6e:** cerrada históricamente en `0.0.25-beta`; la segunda auditoría distribuye R1–R7, identidad/publicación, R8 y R9/cierre en G041–G050.
 - **UX.4.6f:** cerrado — R1/R1.1 integradas mediante PR #28, mantenimiento de dependencias por PR #29, R2 por PR #30 y hardening `pre-commit` por PR #31; **762 pruebas** en el último estado del tramo, G061–G064.

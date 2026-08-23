@@ -6,6 +6,14 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ## [Unreleased]
 
+### DEV.2 — cierre del Centro de desarrollo
+
+- cierra documentalmente DEV.2 después de integrar PR #37, PR #38, PR #39 y PR #40;
+- deja el Centro de desarrollo con estado interno, visor diagnóstico seguro, exportación ZIP sanitizada y autodiagnóstico técnico local;
+- sincroniza README, CHANGELOG, ARQUITECTURA, ADR-179 y `docs/DEV2_CENTRO_DESARROLLO.md` para eliminar referencias a DEV.2 como bloque no iniciado;
+- conserva `VERSION` y `APP_VERSION` en `0.0.26-beta`, no crea tag y no modifica motores previsionales ni flujos públicos de cálculo;
+- deja VER.2 como siguiente cierre transversal de versionado y documentación revision-aware.
+
 ### VER.2 — reconciliación revision-aware pre-1.0
 
 - reaudita por segunda vez el historial completo hasta el cierre UX.4.6i y separa estados aceptados, candidatos fallidos, refinamientos internos, commits lógicos, checkpoints y mantenimiento independiente;
@@ -18,7 +26,7 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 - corrige la secuencia canónica de UX.4.6i a **R1 → R1.2 → R1.3 → R1.4**; no existe evidencia independiente de una revisión intermedia no demostrada entre UX.4.6i R1 y R1.2;
 - separa la versión vigente de aplicación de la metadata histórica que indica en qué versión fue revisado un documento de dominio;
 - incorpora ledger estructurado en `data/ledger_revisiones_pre_1_0.json`, validador `app/core/version_ledger.py`, matriz de decisión, auditoría y regresiones de coherencia;
-- DEV.2 permanece como siguiente bloque funcional y no comienza hasta cerrar VER.2.
+- DEV.2 queda cerrado como bloque funcional independiente antes del cierre final de VER.2, sin consumir promoción revision-aware ni cambiar VERSION, APP_VERSION o tags.
 
 ### UX.4.6i — cierre de Cómo se calcula
 

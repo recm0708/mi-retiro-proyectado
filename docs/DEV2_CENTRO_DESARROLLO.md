@@ -1,14 +1,21 @@
-# DEV.2 R1/R2/R3 — Centro de desarrollo
+# DEV.2 R1/R2/R3/R4 — Centro de desarrollo
+
+**Estado:** DEV.2 cerrado documentalmente en R4.
 
 **Estado:** R1 integrado en `main` mediante PR #37.
 
+**Estado R1 documental:** integrado en `main` mediante PR #38.
+
 **Estado R2:** integrado en `main` mediante PR #39.
 
-**Estado R3:** en desarrollo sobre la rama `dev/dev2-r3-autodiagnostico`.
+**Estado R3:** integrado en `main` mediante PR #40.
 
-DEV.2 abre una superficie interna y local para revisar el estado técnico de
-Developer Diagnostics sin alterar los cálculos previsionales, sin leer datos de
-simulación y sin exponer información personal o financiera.
+DEV.2 abre y cierra una superficie interna y local para revisar el estado técnico
+de Developer Diagnostics sin alterar los cálculos previsionales, sin leer datos
+de simulación y sin exponer información personal o financiera.
+
+DEV.2 no cambia cálculos, motores previsionales, normativa, resultados ni
+flujos públicos de simulación.
 
 ## Objetivo
 
@@ -16,7 +23,10 @@ Crear una página de Centro de desarrollo que permita confirmar, durante el
 desarrollo local, si Developer Diagnostics está activo, qué esquema JSONL se usa,
 cuál es el archivo diagnóstico esperado, qué eventos recientes son visibles de
 forma segura, si existe material suficiente para una exportación ZIP sanitizada y
-qué componentes locales requieren atención antes de cerrar DEV.2.
+qué componentes locales requieren atención.
+
+El cierre R4 consolida la documentación viva del bloque después de integrar R1,
+R2 y R3. No introduce comportamiento funcional nuevo.
 
 ## Activación
 
@@ -50,8 +60,8 @@ No incluye:
 - rutas absolutas locales del equipo;
 - telemetría remota;
 - cambios en los motores de cálculo;
-- no cambia cálculos previsionales ni resultados;
-- no cambia VERSION al abrir el bloque.
+- cambios en cálculos previsionales o resultados;
+- cambio de VERSION al abrir el bloque.
 
 ## Alcance de R2
 
@@ -89,33 +99,62 @@ Incluye:
 - tabla de resultados por componente con estado, detalle y acción sugerida;
 - regresiones específicas para privacidad, permisos controlados y renderizado.
 
-No incluye todavía:
+## Alcance de R4
 
+DEV.2 R4 cierra documentalmente el bloque funcional y sincroniza las superficies
+vivas que todavía podían presentar DEV.2 como pendiente o no iniciado.
+
+Incluye:
+
+- cierre consolidado de `docs/DEV2_CENTRO_DESARROLLO.md`;
+- sincronización de `README.md`;
+- sincronización de `CHANGELOG.md`;
+- sincronización de `docs/ARQUITECTURA.md`;
+- sincronización de `docs/ADR_179_VERSIONADO_REVISION_AWARE.md`;
+- regresión documental `tests/test_dev2_r4_cierre_final.py`;
+- conservación explícita de VER.2 como cierre transversal posterior.
+
+No incluye:
+
+- rutas públicas nuevas;
 - autenticación administrativa fuerte;
 - sesiones administrativas;
 - descarga HTTP directa desde la interfaz;
 - cambios de CSP, CORS, CSRF, secretos o cifrado;
 - almacenamiento persistente de diagnósticos;
-- integración con cuentas, usuarios o roles.
+- integración con cuentas, usuarios o roles;
+- cambios en motores previsionales;
+- cambios en fórmulas, normativa o resultados;
+- creación o movimiento de tags.
 
-Esos puntos quedan reservados para revisiones posteriores de DEV.2 o para SEC.2,
-según corresponda.
+Esos puntos quedan reservados para revisiones posteriores de seguridad,
+despliegue o release, según corresponda.
 
 ## Versionado
 
-DEV.2 R1/R2/R3 **no cambia VERSION** ni `APP_VERSION`. La versión visible permanece
-en `0.0.26-beta` durante este tramo.
+DEV.2 R1/R2/R3/R4 **no cambia VERSION** ni `APP_VERSION`. La versión visible
+permanece en `0.0.26-beta` durante este tramo.
 
-El cierre documental de R1 no creó tag ni promovió una versión revision-aware. La
-promoción a una versión `0.GG.RR.EE-beta` queda reservada para el cierre posterior
-de VER.2, cuando el ledger y la documentación de versionado se alineen de forma
-sincrónica.
+DEV.2 R4 no cambia VERSION. DEV.2 R4 no crea tag.
+
+DEV.2 R4 no cambia `APP_VERSION`, no promueve `0.GG.RR.EE-beta`, no consume
+una revisión revision-aware y no adelanta `1.0.0.0` ni `Build 000001`.
+
+La promoción a una versión `0.GG.RR.EE-beta` queda reservada para el cierre
+posterior de VER.2, cuando el ledger y la documentación de versionado se alineen
+de forma sincrónica.
 
 ## Relación con GOV.1.4
 
 GOV.1.4 ya implementó el núcleo de observabilidad y Developer Diagnostics. DEV.2
 no reescribe esa capa: agrega una interfaz interna, visor seguro, autodiagnóstico
 local y pruebas de seguridad sobre la capacidad existente.
+
+## Relación con VER.2
+
+DEV.2 queda cerrado como bloque funcional independiente. VER.2 permanece como el
+cierre transversal pendiente de versionado revision-aware, ledger, documentación
+contable y promoción de versión cuando corresponda.
 
 ## Nota de cierre DEV.2 R1
 
@@ -150,7 +189,13 @@ python -m pytest -q
 874 passed, 695 subtests passed
 ```
 
-## Validación esperada de DEV.2 R3
+## Nota de integración DEV.2 R3
+
+DEV.2 R3 fue integrado mediante PR #40 sobre `main` con el commit de squash
+`9fb86af`. El cierre agregó autodiagnóstico técnico local, manteniendo `VERSION`
+y `APP_VERSION` en `0.0.26-beta`.
+
+La validación local de cierre quedó en:
 
 ```text
 python -m pytest tests\test_dev2_r3_autodiagnostico.py -q
@@ -161,4 +206,17 @@ python -m pytest tests\test_dev2_centro_desarrollo.py tests\test_dev2_r1_cierre_
 
 python -m pytest -q
 878 passed, 695 subtests passed
+```
+
+## Validación esperada de DEV.2 R4
+
+```text
+python -m pytest tests\test_dev2_r4_cierre_final.py -q
+4 passed
+
+python -m pytest tests\test_dev2_centro_desarrollo.py tests\test_dev2_r1_cierre_documental.py tests\test_dev2_r2_visor_diagnostico.py tests\test_dev2_r3_autodiagnostico.py tests\test_dev2_r4_cierre_final.py -q
+18 passed
+
+python -m pytest -q
+882 passed, 695 subtests passed
 ```

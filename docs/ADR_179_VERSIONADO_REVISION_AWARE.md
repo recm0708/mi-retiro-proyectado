@@ -1,6 +1,6 @@
 # ADR-179 — El versionado beta usa un ledger de estados aceptados y no cuenta commits como revisiones
 
-**Estado:** Aceptada para el candidato VER.2 R1; efectiva únicamente si G058 supera el gate y se integra.
+**Estado:** Aceptada; actualizada documentalmente por DEV.2 R4 sin promover versión ni tag.
 **Fecha:** 2026-08-21
 **Ámbito:** Gobierno / Versionado / Release / Trazabilidad
 
@@ -58,7 +58,7 @@ Por tanto, un incremento de `VERSION` no obliga a modificar todos los `.md`; obl
 - `docs/AUDITORIA_VERSIONADO_PRE_1_0.md` conserva el razonamiento, inclusiones y exclusiones;
 - los tags históricos no se reescriben;
 - el contador global no puede derivarse solo del número de commits;
-- DEV.2 no comienza hasta cerrar VER.2;
+- DEV.2 puede cerrarse como bloque funcional independiente antes del cierre final de VER.2, siempre que no promueva versión revision-aware, no cree tag y documente la separación entre avance funcional y cierre contable;
 - una futura discrepancia entre ledger, `VERSION` y documentación vigente debe fallar mediante regresiones automáticas.
 
 ## Alternativas descartadas
