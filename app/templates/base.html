@@ -64,7 +64,7 @@
   >
   <link
     rel="stylesheet"
-    href="{{ url_for('static', path='/css/accesibilidad.css') }}"
+    href="{{ url_for('static', path='/css/accessibility.css') }}"
   >
   <link
     rel="stylesheet"
@@ -240,8 +240,8 @@
     aria-atomic="true"
   ></div>
 
-  {% include "partials/gestion_datos.html" %}
-  {% include "partials/privacidad_consentimiento.html" %}
+  {% include "partials/data_management.html" %}
+  {% include "partials/privacy_consent.html" %}
 
   <footer class="footer" aria-label="Información legal">
     <div class="container footer-modern">
@@ -275,10 +275,10 @@
     integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
     crossorigin="anonymous"
   ></script>
-  <script src="{{ url_for('static', path='/js/accesibilidad.js') }}"></script>
-  <script src="{{ url_for('static', path='/js/gestion_datos.js') }}"></script>
-  <script src="{{ url_for('static', path='/js/privacidad.js') }}"></script>
-  <script src="{{ url_for('static', path='/js/procesamiento_adjuntos.js') }}"></script>
+  <script src="{{ url_for('static', path='/js/accessibility.js') }}"></script>
+  <script src="{{ url_for('static', path='/js/data_management.js') }}"></script>
+  <script src="{{ url_for('static', path='/js/privacy.js') }}"></script>
+  <script src="{{ url_for('static', path='/js/attachment_processing.js') }}"></script>
 
   {% block scripts %}{% endblock %}
 

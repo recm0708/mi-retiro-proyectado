@@ -4,7 +4,7 @@ import unittest
 from datetime import date
 
 from app.models.pension import DatosResultadoSEBD
-from app.models.simulacion import (
+from app.models.simulation import (
     DatosHistorialSalarial,
     EscenarioLineaTiempo,
     EscenarioRetiro,
@@ -13,7 +13,7 @@ from app.models.simulacion import (
     ResumenLineaTiempo,
     ResumenRetiro,
 )
-from app.services.resultados_sebd import calcular_resultado_sebd
+from app.services.sebd_results import calcular_resultado_sebd
 
 
 class TestResultadosModalidadesSEBD(unittest.TestCase):

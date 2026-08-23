@@ -7,7 +7,7 @@ from app.models.pension import (
     DatosCalculoSEBD,
     DatosResultadoSEBD,
 )
-from app.models.simulacion import (
+from app.models.simulation import (
     DatosHistorialSalarial,
     EscenarioLineaTiempo,
     EscenarioRetiro,
@@ -18,7 +18,7 @@ from app.models.simulacion import (
 )
 from app.engines.elegibilidad import clasificar_modalidad_sebd
 from app.engines.sebd_modalidades import calcular_sebd
-from app.services.resultados_sebd import calcular_resultado_sebd
+from app.services.sebd_results import calcular_resultado_sebd
 
 
 class TestIndemnizacionVejezSEBD(unittest.TestCase):

@@ -10,10 +10,10 @@ from typing import Literal
 
 from pydantic import BaseModel, Field
 
-from app.models.trazabilidad import ResumenTrazabilidadCalculo
-from app.models.resultado_unificado import ResumenPrestacionUnificada
+from app.models.traceability import ResumenTrazabilidadCalculo
+from app.models.unified_result import ResumenPrestacionUnificada
 
-from app.models.simulacion import (
+from app.models.simulation import (
     DatosHistorialSalarial,
     EscenarioRetiro,
     RegistroHistorialSalarial,

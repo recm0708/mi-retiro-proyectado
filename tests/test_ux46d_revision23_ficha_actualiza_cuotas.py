@@ -10,7 +10,7 @@ class TestUX46DRevision23FichaActualizaCuotas(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.detalle_js = (ROOT / "app/static/js/detalle_anio_actual.js").read_text(encoding="utf-8")
-        cls.import_js = (ROOT / "app/static/js/importacion_datos_oficiales.js").read_text(encoding="utf-8")
+        cls.import_js = (ROOT / "app/static/js/official_data_import.js").read_text(encoding="utf-8")
 
     def test_ficha_confirmada_puede_ampliar_referencia_del_paso2(self):
         self.assertIn('return "FICHA_DIGITAL";', self.detalle_js)

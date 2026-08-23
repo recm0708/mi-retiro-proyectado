@@ -4,7 +4,7 @@ import unittest
 from datetime import date
 
 from app.models.pension import DatosResultadoMixto
-from app.models.simulacion import (
+from app.models.simulation import (
     DatosHistorialSalarial,
     EscenarioLineaTiempo,
     EscenarioRetiro,
@@ -12,7 +12,7 @@ from app.models.simulacion import (
     ResumenLineaTiempo,
     ResumenRetiro,
 )
-from app.services.resultados_mixto import calcular_resultado_mixto
+from app.services.mixto_results import calcular_resultado_mixto
 
 
 class TestResultadosMixto(unittest.TestCase):

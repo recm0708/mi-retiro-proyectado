@@ -10,7 +10,7 @@ from app.models.pension import (
     ResumenResultadoSEBD,
     ResumenResultadoSUCGS,
 )
-from app.models.resultado_unificado import ResumenPrestacionUnificada
+from app.models.unified_result import ResumenPrestacionUnificada
 
 
 NOMBRES_SISTEMA = {

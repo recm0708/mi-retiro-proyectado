@@ -16,7 +16,7 @@ class TestUX46dRevision16FlujoPaso3(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.simulacion = (ROOT / "app/templates/simulacion.html").read_text(encoding="utf-8")
+        cls.simulacion = (ROOT / "app/templates/simulation.html").read_text(encoding="utf-8")
         cls.detalle = (
             ROOT / "app/templates/partials/detalle_anio_actual.html"
         ).read_text(encoding="utf-8")
@@ -24,16 +24,16 @@ class TestUX46dRevision16FlujoPaso3(unittest.TestCase):
             ROOT / "app/templates/partials/importacion_ficha_digital.html"
         ).read_text(encoding="utf-8")
         cls.simulacion_js = (
-            ROOT / "app/static/js/simulacion.js"
+            ROOT / "app/static/js/simulation.js"
         ).read_text(encoding="utf-8")
         cls.historial_js = (
-            ROOT / "app/static/js/historial_salarios.js"
+            ROOT / "app/static/js/salary_history.js"
         ).read_text(encoding="utf-8")
 
     def test_paso3_agrupa_ficha_digital_dentro_del_detalle_actual(self):
         paso3 = self.simulacion.split('data-panel="3"', 1)[1].split('data-panel="4"', 1)[0]
         self.assertLess(
-            paso3.index('partials/historial_salarial.html'),
+            paso3.index('partials/salary_history.html'),
             paso3.index('partials/detalle_anio_actual.html'),
         )
         self.assertNotIn('partials/importacion_ficha_digital.html', paso3)

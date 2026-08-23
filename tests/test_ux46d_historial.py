@@ -12,9 +12,9 @@ class TestUX46DHistorial(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.simulacion = (ROOT / "app/templates/simulacion.html").read_text(encoding="utf-8")
+        cls.simulacion = (ROOT / "app/templates/simulation.html").read_text(encoding="utf-8")
         cls.historial = (
-            ROOT / "app/templates/partials/historial_salarial.html"
+            ROOT / "app/templates/partials/salary_history.html"
         ).read_text(encoding="utf-8")
         cls.ficha = (
             ROOT / "app/templates/partials/importacion_ficha_digital.html"
@@ -23,22 +23,22 @@ class TestUX46DHistorial(unittest.TestCase):
             ROOT / "app/templates/partials/detalle_anio_actual.html"
         ).read_text(encoding="utf-8")
         cls.retiro = (
-            ROOT / "app/templates/partials/retiro.html"
+            ROOT / "app/templates/partials/retirement.html"
         ).read_text(encoding="utf-8")
         cls.historial_js = (
-            ROOT / "app/static/js/historial_salarios.js"
+            ROOT / "app/static/js/salary_history.js"
         ).read_text(encoding="utf-8")
         cls.detalle_js = (
             ROOT / "app/static/js/detalle_anio_actual.js"
         ).read_text(encoding="utf-8")
         cls.importacion_js = (
-            ROOT / "app/static/js/importacion_datos_oficiales.js"
+            ROOT / "app/static/js/official_data_import.js"
         ).read_text(encoding="utf-8")
         cls.simulacion_js = (
-            ROOT / "app/static/js/simulacion.js"
+            ROOT / "app/static/js/simulation.js"
         ).read_text(encoding="utf-8")
         cls.navegacion_js = (
-            ROOT / "app/static/js/navegacion_wizard.js"
+            ROOT / "app/static/js/wizard_navigation.js"
         ).read_text(encoding="utf-8")
         cls.css = (
             ROOT / "app/static/css/design-system.css"
@@ -114,7 +114,7 @@ class TestUX46DHistorial(unittest.TestCase):
 
     def test_revision_del_comprobante_desde_paso3_es_contextual(self):
         self.assertIn("revisarComprobanteImportado(3)", self.historial_js)
-        preview = (ROOT / "app/templates/partials/importacion_datos_oficiales.html").read_text(encoding="utf-8")
+        preview = (ROOT / "app/templates/partials/official_data_import.html").read_text(encoding="utf-8")
         self.assertIn("Historial anual detectado", preview)
         self.assertIn("(Paso 3)", preview)
         self.assertIn('data-preview-step="3"', preview)

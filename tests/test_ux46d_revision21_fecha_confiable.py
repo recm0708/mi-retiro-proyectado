@@ -5,7 +5,9 @@ from datetime import date
 from pathlib import Path
 from unittest.mock import patch
 
-from app.services import fecha_referencia
+from app.services import reference_date
+
+fecha_referencia = reference_date
 from app.services.ficha_digital import extraer_ficha_digital_desde_texto
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -23,13 +25,13 @@ class TestUX46DRevision21FechaConfiable(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.importacion_js = (
-            ROOT / "app/static/js/importacion_datos_oficiales.js"
+            ROOT / "app/static/js/official_data_import.js"
         ).read_text(encoding="utf-8")
         cls.main_py = (ROOT / "app/main.py").read_text(encoding="utf-8")
-        cls.modelo = (ROOT / "app/models/simulacion.py").read_text(encoding="utf-8")
-        cls.servicio = (ROOT / "app/services/fecha_referencia.py").read_text(encoding="utf-8")
-        cls.privacidad_js = (ROOT / "app/static/js/privacidad.js").read_text(encoding="utf-8")
-        cls.privacidad_html = (ROOT / "app/templates/partials/privacidad_consentimiento.html").read_text(encoding="utf-8")
+        cls.modelo = (ROOT / "app/models/simulation.py").read_text(encoding="utf-8")
+        cls.servicio = (ROOT / "app/services/reference_date.py").read_text(encoding="utf-8")
+        cls.privacidad_js = (ROOT / "app/static/js/privacy.js").read_text(encoding="utf-8")
+        cls.privacidad_html = (ROOT / "app/templates/partials/privacy_consent.html").read_text(encoding="utf-8")
 
     def test_cualquier_mes_anterior_requiere_revision(self):
         self.assertIn("diferenciaMeses > 0", self.importacion_js)
@@ -63,7 +65,7 @@ class TestUX46DRevision21FechaConfiable(unittest.TestCase):
             "_consultar_fecha_http",
             side_effect=[date(2026, 8, 16), date(2026, 8, 16)],
         ):
-            resultado = fecha_referencia._consultar_fuentes()
+            resultado = reference_date._consultar_fuentes()
         self.assertTrue(resultado.confiable)
         self.assertEqual(resultado.fecha, date(2026, 8, 16))
         self.assertIn("CSS", resultado.fuente)

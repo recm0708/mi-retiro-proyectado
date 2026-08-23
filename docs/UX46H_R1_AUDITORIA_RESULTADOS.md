@@ -60,13 +60,13 @@ Quedan reservados para **REP.1**: arquitectura de informes PDF, formatos selecci
 
 ## Arquitectura de R1
 
-La lógica nueva vive en `app/static/js/resultados_orquestacion.js`. Esta capa:
+La lógica nueva vive en `app/static/js/results_orchestration.js`. Esta capa:
 
 - no implementa fórmulas previsionales;
 - envuelve únicamente funciones de preparación/invalidación ya existentes;
 - conserva los contratos de `resultados.js` y de los servicios Python;
 - se activa solo cuando existe el panel del Paso 6;
-- carga `app/static/css/resultados.css` únicamente para la simulación.
+- carga `app/static/css/results.css` únicamente para la simulación.
 
 La carga temprana del módulo permite instalar los contratos antes de la inicialización del Paso 6 sin modificar el archivo grande de integración de motores.
 

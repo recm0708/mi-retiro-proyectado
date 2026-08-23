@@ -14,7 +14,7 @@ from app.models.pension import (
     DatosResultadoSEBD,
     DatosResultadoSUCGS,
 )
-from app.models.simulacion import (
+from app.models.simulation import (
     DatosHistorialSalarial,
     EscenarioLineaTiempo,
     EscenarioRetiro,

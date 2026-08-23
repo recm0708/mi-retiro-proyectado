@@ -11,16 +11,16 @@ class TestUX46bRevision3TerminosNavegacion(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.terminos = (
-            ROOT / "app/templates/partials/privacidad_consentimiento.html"
+            ROOT / "app/templates/partials/privacy_consent.html"
         ).read_text(encoding="utf-8")
         cls.privacidad_js = (
-            ROOT / "app/static/js/privacidad.js"
+            ROOT / "app/static/js/privacy.js"
         ).read_text(encoding="utf-8")
         cls.simulacion = (
-            ROOT / "app/templates/simulacion.html"
+            ROOT / "app/templates/simulation.html"
         ).read_text(encoding="utf-8")
         cls.navegacion_js = (
-            ROOT / "app/static/js/navegacion_wizard.js"
+            ROOT / "app/static/js/wizard_navigation.js"
         ).read_text(encoding="utf-8")
         cls.design = (
             ROOT / "app/static/css/design-system.css"

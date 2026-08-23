@@ -78,10 +78,10 @@ class TestGov15ModeloAmenazasR1(unittest.TestCase):
 
     def test_controles_documentados_corresponden_a_componentes_reales(self):
         for ruta in (
-            "app/core/archivos_pdf.py",
-            "app/core/observabilidad.py",
+            "app/core/pdf_files.py",
+            "app/core/observability.py",
             "app/main.py",
-            "app/services/fecha_referencia.py",
+            "app/services/reference_date.py",
             ".github/workflows/ci.yml",
         ):
             with self.subTest(ruta=ruta):

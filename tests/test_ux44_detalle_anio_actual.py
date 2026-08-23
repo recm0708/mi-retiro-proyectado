@@ -6,7 +6,7 @@ from pathlib import Path
 from fastapi.testclient import TestClient
 
 from app.main import app
-from app.models.simulacion import (
+from app.models.simulation import (
     DatosDetalleAnioActual,
     RegistroDetalleAnioActual,
 )
@@ -27,16 +27,16 @@ class TestUX44DetalleAnioActual(unittest.TestCase):
         cls.parcial = (
             ROOT / "app/templates/partials/detalle_anio_actual.html"
         ).read_text(encoding="utf-8")
-        cls.simulacion = (ROOT / "app/templates/simulacion.html").read_text(
+        cls.simulacion = (ROOT / "app/templates/simulation.html").read_text(
             encoding="utf-8"
         )
         cls.js = (ROOT / "app/static/js/detalle_anio_actual.js").read_text(
             encoding="utf-8"
         )
-        cls.retiro = (ROOT / "app/static/js/retiro.js").read_text(
+        cls.retiro = (ROOT / "app/static/js/retirement.js").read_text(
             encoding="utf-8"
         )
-        cls.historial = (ROOT / "app/static/js/historial_salarios.js").read_text(
+        cls.historial = (ROOT / "app/static/js/salary_history.js").read_text(
             encoding="utf-8"
         )
 
@@ -216,7 +216,7 @@ class TestUX44DetalleAnioActual(unittest.TestCase):
 
     def test_detalle_sincroniza_total_acreditado_con_historial(self):
         self.assertIn("total_salario_acreditado", self.js)
-        simulacion_js = (ROOT / "app/static/js/simulacion.js").read_text(encoding="utf-8")
+        simulacion_js = (ROOT / "app/static/js/simulation.js").read_text(encoding="utf-8")
         self.assertIn("await analizarHistorialSalarial()", simulacion_js)
         self.assertIn("resumen_detalle_anio_actual?.cuotas_coinciden", self.historial)
         self.assertIn("inputSalario.readOnly = true", self.historial)

@@ -8,8 +8,8 @@ y por los servicios de cálculo.
 from pathlib import Path
 from time import monotonic
 
-from app.core.archivos_pdf import leer_pdf_subido
-from app.core.observabilidad import (
+from app.core.pdf_files import leer_pdf_subido
+from app.core.observability import (
     clasificar_operacion_http,
     correlacion_actual,
     establecer_correlacion,
@@ -32,7 +32,7 @@ from fastapi.responses import HTMLResponse, Response
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
-from app.models.simulacion import (
+from app.models.simulation import (
     DatosCuotas,
     DatosHistorialSalarial,
     DatosDetalleAnioActual,
@@ -51,13 +51,13 @@ from app.models.simulacion import (
     DatosRetiro,
     ResumenRetiro,
 )
-from app.services.historial_salarios import (
+from app.services.salary_history import (
     analizar_historial_salarial,
 )
 from app.services.detalle_anio_actual import (
     analizar_detalle_anio_actual,
 )
-from app.services.linea_tiempo import (
+from app.services.timeline import (
     construir_linea_tiempo,
 )
 from app.services.referencia_mi_retiro_seguro import (
@@ -66,15 +66,15 @@ from app.services.referencia_mi_retiro_seguro import (
 from app.services.ficha_digital import (
     analizar_ficha_digital_pdf,
 )
-from app.services.fecha_referencia import (
+from app.services.reference_date import (
     obtener_fecha_referencia_confiable,
 )
-from app.services.proyeccion_cuotas import analizar_cuotas
-from app.services.proyeccion_salarios import (
+from app.services.contribution_projection import analizar_cuotas
+from app.services.salary_projection import (
     normalizar_salario,
     proyectar_salario,
 )
-from app.services.retiro import (
+from app.services.retirement import (
     analizar_retiro,
 )
 from app.models.pension import (
@@ -107,23 +107,23 @@ from app.engines.mixto import (
 from app.engines.sucgs import (
     calcular_sucgs,
 )
-from app.services.resultados import (
+from app.services.results import (
     calcular_resultado_sebd_normal,
 )
-from app.services.resultados_sebd import (
+from app.services.sebd_results import (
     calcular_resultado_sebd,
 )
-from app.services.resultados_mixto import (
+from app.services.mixto_results import (
     calcular_resultado_mixto,
 )
-from app.services.resultados_sucgs import (
+from app.services.sucgs_results import (
     calcular_resultado_sucgs,
 )
 from app.models.comparacion import (
     DatosComparacionEscenarios,
     ResumenComparacionEscenarios,
 )
-from app.services.comparador import (
+from app.services.comparator import (
     comparar_escenarios,
 )
 
@@ -138,7 +138,7 @@ BASE_DIR = Path(__file__).resolve().parent
 # ============================================================
 # Configuración de FastAPI
 # ============================================================
-from app.services.fuentes_normativas import construir_catalogo_metodologia
+from app.services.regulatory_sources import construir_catalogo_metodologia
 from app.services.como_se_calcula import construir_guia_calculo
 from app.services.centro_desarrollo import construir_estado_centro_desarrollo
 
@@ -332,7 +332,7 @@ async def simulacion(
 
     return templates.TemplateResponse(
         request=request,
-        name="simulacion.html",
+        name="simulation.html",
         context={
             "pagina_activa": "simulacion",
             "version": APP_VERSION,

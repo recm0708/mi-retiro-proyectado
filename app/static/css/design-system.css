@@ -2,7 +2,7 @@
  * Mi Retiro Proyectado — Sistema visual y capa de presentación transversal.
  *
  * Propósito: Consolida color, tipografía, superficies, controles y jerarquía visual de la aplicación.
- * Alcance: Se carga después de style.css y antes de accesibilidad.css; no contiene reglas previsionales.
+ * Alcance: Se carga después de style.css y antes de accessibility.css; no contiene reglas previsionales.
  */
 
 :root {

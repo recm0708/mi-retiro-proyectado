@@ -18,7 +18,7 @@ from datetime import date
 from decimal import Decimal
 from math import ceil
 
-from app.core.dinero import a_decimal, redondear_moneda
+from app.core.money import a_decimal, redondear_moneda
 from app.core.normativa import (
     cargar_parametros_sucgs,
     obtener_edad_referencia,

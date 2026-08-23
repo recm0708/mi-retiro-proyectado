@@ -99,7 +99,7 @@ git log --show-signature -1
 
 La CI remota debe permanecer en verde.
 
-GOV.1.6 añadió `.github/workflows/auditoria-gobernanza.yml`. El job **Auditoría de gobernanza** usa permisos de solo lectura y no reemplaza los checks funcionales `Python 3.13` y `Python 3.14`. Tras su primera ejecución exitosa fue incorporado al ruleset de `main`; el conjunto requerido vigente contiene los tres checks.
+GOV.1.6 añadió `.github/workflows/governance-audit.yml`. El job **Auditoría de gobernanza** usa permisos de solo lectura y no reemplaza los checks funcionales `Python 3.13` y `Python 3.14`. Tras su primera ejecución exitosa fue incorporado al ruleset de `main`; el conjunto requerido vigente contiene los tres checks.
 
 Desde el 2026-08-17 la rama predeterminada está protegida mediante un ruleset activo que exige Pull Request, commits verificados, historial lineal, resolución de conversaciones, checks `Python 3.13` y `Python 3.14`, rama actualizada antes de integrar y bloqueo de eliminación y force push.
 

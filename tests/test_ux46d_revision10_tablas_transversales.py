@@ -11,18 +11,18 @@ class TestUX46DRevision10TablasTransversales(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.design = (ROOT / "app/static/css/design-system.css").read_text(encoding="utf-8")
-        cls.accesibilidad = (ROOT / "app/static/js/accesibilidad.js").read_text(encoding="utf-8")
-        cls.simulacion_js = (ROOT / "app/static/js/simulacion.js").read_text(encoding="utf-8")
-        cls.linea_tiempo_js = (ROOT / "app/static/js/linea_tiempo.js").read_text(encoding="utf-8")
+        cls.accesibilidad = (ROOT / "app/static/js/accessibility.js").read_text(encoding="utf-8")
+        cls.simulacion_js = (ROOT / "app/static/js/simulation.js").read_text(encoding="utf-8")
+        cls.linea_tiempo_js = (ROOT / "app/static/js/timeline.js").read_text(encoding="utf-8")
 
     def test_tablas_estaticas_principales_usan_superficie_comun(self):
         rutas = (
-            "app/templates/partials/historial_salarial.html",
+            "app/templates/partials/salary_history.html",
             "app/templates/partials/detalle_anio_actual.html",
-            "app/templates/partials/importacion_datos_oficiales.html",
+            "app/templates/partials/official_data_import.html",
             "app/templates/partials/importacion_ficha_digital.html",
-            "app/templates/partials/retiro.html",
-            "app/templates/partials/resultados.html",
+            "app/templates/partials/retirement.html",
+            "app/templates/partials/results.html",
             "app/templates/comparar.html",
         )
         for ruta in rutas:
@@ -55,7 +55,7 @@ class TestUX46DRevision10TablasTransversales(unittest.TestCase):
         self.assertIn('contenedor.setAttribute("aria-label", "Tabla desplazable horizontalmente")', self.accesibilidad)
 
     def test_contrato_visual_no_reemplaza_semanticas_especificas(self):
-        historial_js = (ROOT / "app/static/js/historial_salarios.js").read_text(encoding="utf-8")
+        historial_js = (ROOT / "app/static/js/salary_history.js").read_text(encoding="utf-8")
         detalle = (ROOT / "app/static/js/detalle_anio_actual.js").read_text(encoding="utf-8")
         self.assertIn("function evaluarEstadoFilaHistorial", historial_js)
         self.assertIn("cuota_acreditada", detalle)

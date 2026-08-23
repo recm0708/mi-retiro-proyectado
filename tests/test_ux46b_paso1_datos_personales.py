@@ -59,9 +59,9 @@ class TestUX46bPaso1DatosPersonales(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.cliente = TestClient(app)
-        cls.simulacion = (ROOT / "app/templates/simulacion.html").read_text(encoding="utf-8")
+        cls.simulacion = (ROOT / "app/templates/simulation.html").read_text(encoding="utf-8")
         cls.comprobante = (
-            ROOT / "app/templates/partials/importacion_datos_oficiales.html"
+            ROOT / "app/templates/partials/official_data_import.html"
         ).read_text(encoding="utf-8")
         cls.ficha = (
             ROOT / "app/templates/partials/importacion_ficha_digital.html"
@@ -69,15 +69,15 @@ class TestUX46bPaso1DatosPersonales(unittest.TestCase):
         cls.detalle = (
             ROOT / "app/templates/partials/detalle_anio_actual.html"
         ).read_text(encoding="utf-8")
-        cls.simulacion_js = (ROOT / "app/static/js/simulacion.js").read_text(encoding="utf-8")
+        cls.simulacion_js = (ROOT / "app/static/js/simulation.js").read_text(encoding="utf-8")
         cls.importacion_js = (
-            ROOT / "app/static/js/importacion_datos_oficiales.js"
+            ROOT / "app/static/js/official_data_import.js"
         ).read_text(encoding="utf-8")
         cls.navegacion_js = (
-            ROOT / "app/static/js/navegacion_wizard.js"
+            ROOT / "app/static/js/wizard_navigation.js"
         ).read_text(encoding="utf-8")
         cls.privacidad = (
-            ROOT / "app/templates/partials/privacidad_consentimiento.html"
+            ROOT / "app/templates/partials/privacy_consent.html"
         ).read_text(encoding="utf-8")
         cls.design = (ROOT / "app/static/css/design-system.css").read_text(encoding="utf-8")
 
@@ -129,7 +129,7 @@ class TestUX46bPaso1DatosPersonales(unittest.TestCase):
         )
         self.assertGreater(
             self.simulacion.index('id="wizard-navigation-bottom"'),
-            self.simulacion.index('partials/resultados.html'),
+            self.simulacion.index('partials/results.html'),
         )
         self.assertIn('data-wizard-nav="top"', self.simulacion)
         self.assertIn('data-wizard-nav="bottom"', self.simulacion)

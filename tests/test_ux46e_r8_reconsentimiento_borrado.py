@@ -16,10 +16,10 @@ class TestUX46eR8ReconsentimientoBorrado(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.gestion = (JS / "gestion_datos.js").read_text(encoding="utf-8")
-        cls.privacidad = (JS / "privacidad.js").read_text(encoding="utf-8")
+        cls.gestion = (JS / "data_management.js").read_text(encoding="utf-8")
+        cls.privacidad = (JS / "privacy.js").read_text(encoding="utf-8")
         cls.terminos = (
-            ROOT / "app/templates/partials/privacidad_consentimiento.html"
+            ROOT / "app/templates/partials/privacy_consent.html"
         ).read_text(encoding="utf-8")
         cls.decisiones = (DOCS / "DECISIONES.md").read_text(encoding="utf-8")
 
@@ -69,7 +69,7 @@ class TestUX46eR8ReconsentimientoBorrado(unittest.TestCase):
         self.assertIn("identificadores pre-beta conocidos exclusivamente para purgarlos", seguridad)
 
     def test_ejecucion_js_borra_claves_y_conserva_almacenamiento_ajeno(self):
-        ruta = json.dumps(str(JS / "gestion_datos.js"))
+        ruta = json.dumps(str(JS / "data_management.js"))
         script = rf'''
 const fs = require("fs");
 const vm = require("vm");

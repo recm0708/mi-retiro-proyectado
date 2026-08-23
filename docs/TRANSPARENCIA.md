@@ -58,7 +58,7 @@ Las discrepancias identificadas se documentan; no se armonizan silenciosamente.
 
 ## 5. Explicabilidad del cálculo
 
-`app/models/trazabilidad.py` y `app/services/trazabilidad.py` describen datos utilizados, origen, reglas, fórmulas mostrables, sustituciones, resultados intermedios, fuentes y advertencias.
+`app/models/traceability.py` y `app/services/traceability.py` describen datos utilizados, origen, reglas, fórmulas mostrables, sustituciones, resultados intermedios, fuentes y advertencias.
 
 La capa de trazabilidad **no vuelve a calcular** la prestación. Developer Diagnostics tampoco recalcula: observa la operación ya ejecutada.
 

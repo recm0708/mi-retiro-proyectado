@@ -13,11 +13,11 @@ Los contratos de cálculo se definen con Pydantic. El estado visual y de navegac
 
 ## 1. Módulos de modelos
 
-- `app/models/simulacion.py` — datos de Pasos 1–5 e importaciones.
+- `app/models/simulation.py` — datos de Pasos 1–5 e importaciones.
 - `app/models/pension.py` — motores y resultados por sistema.
 - `app/models/comparacion.py` — comparación transversal.
-- `app/models/trazabilidad.py` — trazabilidad de cálculo.
-- `app/models/resultado_unificado.py` — resumen transversal.
+- `app/models/traceability.py` — trazabilidad de cálculo.
+- `app/models/unified_result.py` — resumen transversal.
 
 ## 2. Convenciones
 

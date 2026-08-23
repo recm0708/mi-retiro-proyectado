@@ -9,7 +9,7 @@ ROOT = Path(__file__).resolve().parents[1]
 class TestUX46DRevision20VigenciaResumen(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.importacion_js = (ROOT / "app/static/js/importacion_datos_oficiales.js").read_text(encoding="utf-8")
+        cls.importacion_js = (ROOT / "app/static/js/official_data_import.js").read_text(encoding="utf-8")
         cls.detalle_js = (ROOT / "app/static/js/detalle_anio_actual.js").read_text(encoding="utf-8")
         cls.ficha_html = (ROOT / "app/templates/partials/importacion_ficha_digital.html").read_text(encoding="utf-8")
         cls.detalle_html = (ROOT / "app/templates/partials/detalle_anio_actual.html").read_text(encoding="utf-8")

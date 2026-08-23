@@ -2,10 +2,10 @@
 
 import unittest
 
-from app.models.simulacion import (
+from app.models.simulation import (
     DatosProyeccionSalario,
 )
-from app.services.proyeccion_salarios import (
+from app.services.salary_projection import (
     proyectar_salario,
 )
 

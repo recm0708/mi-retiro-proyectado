@@ -55,9 +55,9 @@ class TestEstabilizacionVisual(unittest.TestCase):
     def test_botones_identificados_conservan_centrado(self):
         css = CSS.read_text(encoding="utf-8")
         index = INDEX.read_text(encoding="utf-8")
-        simulacion = (TEMPLATES / "simulacion.html").read_text(encoding="utf-8")
+        simulacion = (TEMPLATES / "simulation.html").read_text(encoding="utf-8")
         metodologia = (TEMPLATES / "metodologia.html").read_text(encoding="utf-8")
-        resultados_js = (ROOT / "app/static/js/resultados.js").read_text(encoding="utf-8")
+        resultados_js = (ROOT / "app/static/js/results.js").read_text(encoding="utf-8")
 
         self.assertIn(".btn-center-content {", css)
         self.assertIn("align-items: center;", css)

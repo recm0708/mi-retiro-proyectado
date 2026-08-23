@@ -4,7 +4,7 @@ import unittest
 from datetime import date
 
 from app.models.pension import DatosResultadoSUCGS
-from app.models.simulacion import (
+from app.models.simulation import (
     DatosHistorialSalarial,
     EscenarioLineaTiempo,
     EscenarioRetiro,
@@ -13,7 +13,7 @@ from app.models.simulacion import (
     ResumenLineaTiempo,
     ResumenRetiro,
 )
-from app.services.resultados_sucgs import calcular_resultado_sucgs
+from app.services.sucgs_results import calcular_resultado_sucgs
 
 
 class TestResultadosSUCGS(unittest.TestCase):

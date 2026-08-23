@@ -12,20 +12,20 @@ class TestUX46DGestionDatos(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.simulacion = (ROOT / "app/templates/simulacion.html").read_text(encoding="utf-8")
+        cls.simulacion = (ROOT / "app/templates/simulation.html").read_text(encoding="utf-8")
         cls.base = (ROOT / "app/templates/base.html").read_text(encoding="utf-8")
         cls.metodologia = (ROOT / "app/templates/metodologia.html").read_text(encoding="utf-8")
         cls.modal = (
-            ROOT / "app/templates/partials/gestion_datos.html"
+            ROOT / "app/templates/partials/data_management.html"
         ).read_text(encoding="utf-8")
         cls.terminos = (
-            ROOT / "app/templates/partials/privacidad_consentimiento.html"
+            ROOT / "app/templates/partials/privacy_consent.html"
         ).read_text(encoding="utf-8")
         cls.gestion = (
-            ROOT / "app/static/js/gestion_datos.js"
+            ROOT / "app/static/js/data_management.js"
         ).read_text(encoding="utf-8")
         cls.privacidad = (
-            ROOT / "app/static/js/privacidad.js"
+            ROOT / "app/static/js/privacy.js"
         ).read_text(encoding="utf-8")
         cls.css = (
             ROOT / "app/static/css/design-system.css"
@@ -45,14 +45,14 @@ class TestUX46DGestionDatos(unittest.TestCase):
     def test_limpiar_paso_se_deshabilita_si_no_hay_datos(self):
         self.assertIn("function actualizarDisponibilidadGestionDatos", self.gestion)
         self.assertIn("control.disabled = !disponible", self.gestion)
-        simulacion_js = (ROOT / "app/static/js/simulacion.js").read_text(encoding="utf-8")
+        simulacion_js = (ROOT / "app/static/js/simulation.js").read_text(encoding="utf-8")
         self.assertIn("actualizarDisponibilidadGestionDatos", simulacion_js)
 
     def test_modal_destructivo_es_unico_y_reutilizable(self):
         self.assertIn('id="modal-gestion-datos"', self.modal)
         self.assertIn('id="gestion-datos-mensaje"', self.modal)
         self.assertIn('id="btn-gestion-datos-confirmar"', self.modal)
-        self.assertIn('partials/gestion_datos.html', self.base)
+        self.assertIn('partials/data_management.html', self.base)
 
     def test_limpiar_paso_respeta_jerarquia_descendente(self):
         self.assertIn("function limpiarDesdePaso2", self.gestion)

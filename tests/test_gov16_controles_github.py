@@ -17,7 +17,7 @@ class TestGov16ControlesGithub(unittest.TestCase):
         t=(GH/'pull_request_template.md').read_text(encoding='utf-8')
         for e in ('python -m compileall app','git diff --check','Documentación','Seguridad y privacidad','VERSION','commit está firmado'): self.assertIn(e,t)
     def test_workflow_auditoria_permisos_minimos_y_v7(self):
-        t=(GH/'workflows/auditoria-gobernanza.yml').read_text(encoding='utf-8')
+        t=(GH/'workflows/governance-audit.yml').read_text(encoding='utf-8')
         for e in ('name: Auditoría de gobernanza','contents: read','actions/checkout@v7','actions/setup-python@v7','tests.test_gov16_controles_github','git diff --check'): self.assertIn(e,t)
         self.assertNotIn('pull_request_target',t); self.assertNotIn('contents: write',t)
     def test_workflows_existentes_siguen_solo_lectura(self):
@@ -35,7 +35,7 @@ class TestGov16ControlesGithub(unittest.TestCase):
     def test_roadmap_cierra_gov16_sin_congelar_gov17(self):
         t=(DOCS/'ROADMAP.md').read_text(encoding='utf-8'); self.assertIn('- [x] **GOV.1.6 — Controles GitHub y auditoría automática**',t); self.assertIn('**GOV.1.7 — Licencia**',t)
     def test_archivos_nuevos_limpios(self):
-        ps=[ROOT/'SECURITY.md',ROOT/'CODE_OF_CONDUCT.md',ROOT/'SUPPORT.md',DOCS/'AUDITORIA_GITHUB.md',DOCS/'AUDITORIA_REPOSITORIO_2026-08-18.md',GH/'ISSUE_TEMPLATE/bug_report.yml',GH/'ISSUE_TEMPLATE/feature_request.yml',GH/'ISSUE_TEMPLATE/question.yml',GH/'ISSUE_TEMPLATE/config.yml',GH/'pull_request_template.md',GH/'workflows/auditoria-gobernanza.yml']
+        ps=[ROOT/'SECURITY.md',ROOT/'CODE_OF_CONDUCT.md',ROOT/'SUPPORT.md',DOCS/'AUDITORIA_GITHUB.md',DOCS/'AUDITORIA_REPOSITORIO_2026-08-18.md',GH/'ISSUE_TEMPLATE/bug_report.yml',GH/'ISSUE_TEMPLATE/feature_request.yml',GH/'ISSUE_TEMPLATE/question.yml',GH/'ISSUE_TEMPLATE/config.yml',GH/'pull_request_template.md',GH/'workflows/governance-audit.yml']
         for p in ps:
             t=p.read_text(encoding='utf-8'); self.assertFalse(any(ord(c)<32 and c not in '\n\r\t' for c in t)); self.assertFalse(any(l.endswith((' ','\t')) for l in t.splitlines()))
 

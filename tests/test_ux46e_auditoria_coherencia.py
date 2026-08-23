@@ -110,14 +110,14 @@ class TestUX46eAuditoriaCoherencia(unittest.TestCase):
             self.assertIn(clave, runtime)
 
         for nombre, contenido in archivos.items():
-            if nombre in {"gestion_datos.js", "privacidad.js"}:
+            if nombre in {"data_management.js", "privacy.js"}:
                 continue
             with self.subTest(nombre=nombre):
                 self.assertNotIn("calculadoraPensionCSS", contenido)
                 self.assertNotIn("mi-retiro-proyectado-tema", contenido)
 
-        self.assertIn("CLAVES_GESTION_LEGACY", archivos["gestion_datos.js"])
-        self.assertIn("CLAVES_PRIVACIDAD_LEGACY", archivos["privacidad.js"])
+        self.assertIn("CLAVES_GESTION_LEGACY", archivos["data_management.js"])
+        self.assertIn("CLAVES_PRIVACIDAD_LEGACY", archivos["privacy.js"])
 
     def test_interfaz_muestra_ayuda_y_no_expone_gobierno_interno(self):
         plantillas = "\n".join(

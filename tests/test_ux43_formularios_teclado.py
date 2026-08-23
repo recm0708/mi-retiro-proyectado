@@ -17,9 +17,9 @@ class TestUX43FormulariosTeclado(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.cliente = TestClient(app)
-        cls.a11y = (ROOT / "app/static/js/accesibilidad.js").read_text(encoding="utf-8")
-        cls.retiro = (ROOT / "app/static/js/retiro.js").read_text(encoding="utf-8")
-        cls.css = (ROOT / "app/static/css/accesibilidad.css").read_text(encoding="utf-8")
+        cls.a11y = (ROOT / "app/static/js/accessibility.js").read_text(encoding="utf-8")
+        cls.retiro = (ROOT / "app/static/js/retirement.js").read_text(encoding="utf-8")
+        cls.css = (ROOT / "app/static/css/accessibility.css").read_text(encoding="utf-8")
 
     def test_error_nativo_crea_mensaje_asociado_al_control(self):
         self.assertIn("a11y-error-${control.id}", self.a11y)

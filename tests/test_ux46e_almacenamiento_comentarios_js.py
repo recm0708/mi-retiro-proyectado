@@ -34,14 +34,14 @@ class TestUX46eAlmacenamientoComentariosJS(unittest.TestCase):
             for p in JS.glob("*.js")
         }
         for nombre, contenido in archivos.items():
-            if nombre in {"gestion_datos.js", "privacidad.js"}:
+            if nombre in {"data_management.js", "privacy.js"}:
                 continue
             with self.subTest(nombre=nombre):
                 self.assertNotIn("calculadoraPensionCSS.", contenido)
                 self.assertNotIn("mi-retiro-proyectado-tema", contenido)
 
-        gestion = archivos["gestion_datos.js"]
-        privacidad = archivos["privacidad.js"]
+        gestion = archivos["data_management.js"]
+        privacidad = archivos["privacy.js"]
         self.assertIn("CLAVES_GESTION_LEGACY_SESION", gestion)
         self.assertIn("CLAVES_GESTION_LEGACY_LOCAL", gestion)
         self.assertIn("CLAVES_PRIVACIDAD_LEGACY_SESION", privacidad)
@@ -52,7 +52,7 @@ class TestUX46eAlmacenamientoComentariosJS(unittest.TestCase):
 
     def test_tema_y_borrado_integral_comparten_clave(self):
         tema = (JS / "tema.js").read_text(encoding="utf-8")
-        gestion = (JS / "gestion_datos.js").read_text(encoding="utf-8")
+        gestion = (JS / "data_management.js").read_text(encoding="utf-8")
         self.assertIn('const STORAGE_KEY = "miRetiroProyectado.tema";', tema)
         self.assertIn('const CLAVE_GESTION_TEMA = "miRetiroProyectado.tema";', gestion)
 
@@ -60,19 +60,19 @@ class TestUX46eAlmacenamientoComentariosJS(unittest.TestCase):
         archivos = {
             nombre: (JS / nombre).read_text(encoding="utf-8")
             for nombre in (
-                "simulacion.js",
-                "comparador.js",
-                "privacidad.js",
-                "gestion_datos.js",
+                "simulation.js",
+                "comparator.js",
+                "privacy.js",
+                "data_management.js",
             )
         }
         for nombre, contenido in archivos.items():
             with self.subTest(nombre=nombre):
                 self.assertIn("miRetiroProyectado.", contenido)
-        self.assertIn("miRetiroProyectado.simulacion", archivos["simulacion.js"])
-        self.assertIn("miRetiroProyectado.simulacion", archivos["comparador.js"])
-        self.assertIn("miRetiroProyectado.simulacion", archivos["privacidad.js"])
-        self.assertIn("miRetiroProyectado.simulacion", archivos["gestion_datos.js"])
+        self.assertIn("miRetiroProyectado.simulacion", archivos["simulation.js"])
+        self.assertIn("miRetiroProyectado.simulacion", archivos["comparator.js"])
+        self.assertIn("miRetiroProyectado.simulacion", archivos["privacy.js"])
+        self.assertIn("miRetiroProyectado.simulacion", archivos["data_management.js"])
 
     def test_javascript_runtime_no_usa_identificadores_cronologicos_en_comentarios(self):
         patron = re.compile(r"(?:UX\.\d|GOV\.\d)")

@@ -649,7 +649,7 @@ Quedan para fases posteriores:
 
 **RF-161.** La modernización visual debe ser transversal a Inicio, Simulación, Comparador y Fuentes sin modificar fórmulas, contratos previsionales, rutas ni datos persistidos.
 
-**RF-162.** La presentación debe cargar `style.css` como base histórica, `design-system.css` como capa de sistema visual y `accesibilidad.css` como remate accesible con precedencia final.
+**RF-162.** La presentación debe cargar `style.css` como base histórica, `design-system.css` como capa de sistema visual y `accessibility.css` como remate accesible con precedencia final.
 
 **RF-163.** El control de apariencia debe ofrecer **Automático**, **Claro** y **Oscuro** como opciones principales, mantener **Alto contraste** dentro de Accesibilidad y conservar la preferencia exclusivamente en `localStorage`.
 

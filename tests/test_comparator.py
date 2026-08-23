@@ -9,7 +9,7 @@ from app.models.pension import (
     DatosResultadoSEBD,
     DatosResultadoSUCGS,
 )
-from app.models.simulacion import (
+from app.models.simulation import (
     DatosHistorialSalarial,
     EscenarioLineaTiempo,
     EscenarioRetiro,
@@ -18,7 +18,7 @@ from app.models.simulacion import (
     ResumenLineaTiempo,
     ResumenRetiro,
 )
-from app.services.comparador import comparar_escenarios
+from app.services.comparator import comparar_escenarios
 
 
 class TestComparadorEscenarios(unittest.TestCase):

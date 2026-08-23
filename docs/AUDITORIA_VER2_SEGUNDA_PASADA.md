@@ -35,7 +35,7 @@ La segunda pasada confirma que UX.4.6d no es el comienzo del tramo UX.4.6.
 
 | Fase | Evidencia Git/documental | Cierre demostrado | Estado contable |
 |---|---|---|---|
-| UX.2.1 | `tests/test_estabilizacion_visual.py` se incorporó dentro del rango histórico de `0.0.9-beta` y se identifica expresamente como regresión de UX.2.1; ese mismo rango agrupa identidad, temas, accesibilidad y terminología | fase histórica real, pero no existe un snapshot aceptado separado fuera del rango ya asignado a `0.0.9-beta` | **ABSORBIDA EN G009; NO SUMA OTRO GLOBAL** |
+| UX.2.1 | `tests/test_visual_stabilization.py` se incorporó dentro del rango histórico de `0.0.9-beta` y se identifica expresamente como regresión de UX.2.1; ese mismo rango agrupa identidad, temas, accesibilidad y terminología | fase histórica real, pero no existe un snapshot aceptado separado fuera del rango ya asignado a `0.0.9-beta` | **ABSORBIDA EN G009; NO SUMA OTRO GLOBAL** |
 | UX.4.6a | `429201a` → `11aefca`; bitácora `UX_4_6A_REDISENO_VISUAL.md` | PC/laptop aceptado; 198 pruebas; `compileall`, JS y `git diff --check` en verde | CIERRE REAL CONFIRMADO |
 | UX.4.6b | `e6c2310` → `83a67ed`; bitácora `UX_4_6B_PASO1_DATOS_PERSONALES.md` | R4; PC/laptop aceptado; 233 pruebas; CI Python 3.13/3.14 en verde | CIERRE REAL CONFIRMADO |
 | UX.4.6c | `e80d15e` → `2a69fb8`; bitácora `UX_4_6C_PASO2_CUOTAS.md` | R3; PC/laptop aceptado; 253 pruebas | CIERRE REAL CONFIRMADO |

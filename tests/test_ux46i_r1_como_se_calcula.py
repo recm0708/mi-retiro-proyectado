@@ -36,7 +36,7 @@ class TestUX46iR1ComoSeCalcula(unittest.TestCase):
             encoding="utf-8"
         )
         cls.resultados = (
-            ROOT / "app/static/js/resultados_orquestacion.js"
+            ROOT / "app/static/js/results_orchestration.js"
         ).read_text(encoding="utf-8")
         cls.metodologia = (ROOT / "app/templates/metodologia.html").read_text(
             encoding="utf-8"

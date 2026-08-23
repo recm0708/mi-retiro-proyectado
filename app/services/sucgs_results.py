@@ -11,9 +11,9 @@ from app.models.pension import (
     ResumenResultadoSUCGS,
 )
 from app.engines.sucgs import calcular_sucgs
-from app.services.trazabilidad import construir_trazabilidad_sucgs
-from app.services.resultado_unificado import construir_resumen_unificado_sucgs
-from app.services.resultados import (
+from app.services.traceability import construir_trazabilidad_sucgs
+from app.services.unified_result import construir_resumen_unificado_sucgs
+from app.services.results import (
     _buscar_escenario_retiro,
     _buscar_escenario_salarial,
     _ajustar_escenario_solo_acreditado,

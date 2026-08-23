@@ -36,9 +36,9 @@ class TestUX44ImportacionOficial(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.cliente = TestClient(app)
-        cls.simulacion = (ROOT / "app/templates/simulacion.html").read_text(encoding="utf-8")
+        cls.simulacion = (ROOT / "app/templates/simulation.html").read_text(encoding="utf-8")
         cls.parcial_comprobante = (
-            ROOT / "app/templates/partials/importacion_datos_oficiales.html"
+            ROOT / "app/templates/partials/official_data_import.html"
         ).read_text(encoding="utf-8")
         cls.parcial_ficha = (
             ROOT / "app/templates/partials/importacion_ficha_digital.html"
@@ -48,7 +48,7 @@ class TestUX44ImportacionOficial(unittest.TestCase):
         ).read_text(encoding="utf-8")
         cls.parcial = cls.parcial_comprobante + "\n" + cls.parcial_ficha
         cls.js = (
-            ROOT / "app/static/js/importacion_datos_oficiales.js"
+            ROOT / "app/static/js/official_data_import.js"
         ).read_text(encoding="utf-8")
         cls.css = (ROOT / "app/static/css/style.css").read_text(encoding="utf-8")
         cls.main = (ROOT / "app/main.py").read_text(encoding="utf-8")
@@ -80,7 +80,7 @@ class TestUX44ImportacionOficial(unittest.TestCase):
 
     def test_comprobante_esta_en_paso_uno_y_ficha_digital_en_paso_tres(self):
         posicion_paso_1 = self.simulacion.index('data-panel="1"')
-        posicion_comprobante = self.simulacion.index('partials/importacion_datos_oficiales.html')
+        posicion_comprobante = self.simulacion.index('partials/official_data_import.html')
         posicion_paso_2 = self.simulacion.index('data-panel="2"')
         posicion_paso_3 = self.simulacion.index('data-panel="3"')
         posicion_detalle = self.simulacion.index('partials/detalle_anio_actual.html')
@@ -174,7 +174,7 @@ class TestUX44ImportacionOficial(unittest.TestCase):
     def test_simulacion_carga_modulo_y_backend_expone_ficha(self):
         respuesta = self.cliente.get("/simulacion")
         self.assertEqual(respuesta.status_code, 200)
-        self.assertIn("importacion_datos_oficiales.js", respuesta.text)
+        self.assertIn("official_data_import.js", respuesta.text)
         self.assertIn("Importar información desde Mi Retiro Seguro", respuesta.text)
         self.assertIn("Importar salarios recientes desde Ficha Digital", respuesta.text)
         self.assertIn('/api/simulacion/ficha-digital', self.main)

@@ -33,7 +33,7 @@ Capas CSS:
 
 1. `style.css`;
 2. `design-system.css`;
-3. `accesibilidad.css`.
+3. `accessibility.css`.
 
 Usar tokens semánticos existentes antes de introducir colores literales.
 
@@ -59,7 +59,7 @@ Criterios mínimos:
 
 ## 6. Validación de formularios
 
-`accesibilidad.js` administra la capa común de errores.
+`accessibility.js` administra la capa común de errores.
 
 Las funciones llamadas por `MutationObserver` deben ser idempotentes y no duplicar estados.
 
@@ -78,7 +78,7 @@ Toda importación debe:
 - aplicar datos únicamente tras confirmación;
 - conservar procedencia por campo cuando sea relevante;
 - invalidar resultados dependientes;
-- reutilizar `procesamiento_adjuntos.js` para mostrar estado ocupado accesible, bloquear dobles ejecuciones y restaurar los controles al finalizar.
+- reutilizar `attachment_processing.js` para mostrar estado ocupado accesible, bloquear dobles ejecuciones y restaurar los controles al finalizar.
 
 No versionar PDFs personales ni capturas identificativas.
 
@@ -115,7 +115,7 @@ No introducir sin revisión:
 - exportación automática de datos personales;
 - sistemas paralelos de logging.
 
-Developer Diagnostics está definido en `app/core/observabilidad.py` y `OBSERVABILIDAD_LOGS.md`.
+Developer Diagnostics está definido en `app/core/observability.py` y `OBSERVABILIDAD_LOGS.md`.
 
 Reglas obligatorias:
 
@@ -209,7 +209,7 @@ La guía acumulativa anterior se conserva en:
 - Los selectores que representan una decisión del usuario no deben inferirse de la existencia de datos importados salvo contrato documental explícito y trazado.
 ### Campos de fecha
 
-Los nuevos controles `input[type=date]` no deben implementar validadores o anchos particulares salvo una necesidad funcional demostrada. `app/static/js/accesibilidad.js` aplica el contrato transversal de año de cuatro dígitos, calendario válido y límites técnicos por defecto; `app/static/css/accesibilidad.css` aplica la geometría compacta responsive. Si una superficie necesita un rango más estricto, debe declarar `min`/`max` en el propio control y la capa global lo conservará.
+Los nuevos controles `input[type=date]` no deben implementar validadores o anchos particulares salvo una necesidad funcional demostrada. `app/static/js/accessibility.js` aplica el contrato transversal de año de cuatro dígitos, calendario válido y límites técnicos por defecto; `app/static/css/accessibility.css` aplica la geometría compacta responsive. Si una superficie necesita un rango más estricto, debe declarar `min`/`max` en el propio control y la capa global lo conservará.
 
 ### Observadores del DOM
 

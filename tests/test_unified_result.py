@@ -4,7 +4,7 @@ import unittest
 from datetime import date
 from types import SimpleNamespace
 
-from app.services.resultado_unificado import (
+from app.services.unified_result import (
     construir_resumen_unificado_mixto,
     construir_resumen_unificado_sebd,
     construir_resumen_unificado_sucgs,

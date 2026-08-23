@@ -14,7 +14,7 @@ import json
 from pathlib import Path
 from typing import Any, Mapping
 
-from app.core.observabilidad import (
+from app.core.observability import (
     ENV_DEV_MODE,
     ENV_DIAGNOSTIC_DIR,
     SCHEMA_VERSION,

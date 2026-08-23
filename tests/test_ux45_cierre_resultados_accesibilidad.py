@@ -5,7 +5,7 @@ from datetime import date
 from pathlib import Path
 
 from app.models.pension import DatosResultadoSEBD
-from app.models.simulacion import (
+from app.models.simulation import (
     DatosHistorialSalarial,
     EscenarioLineaTiempo,
     EscenarioRetiro,
@@ -14,7 +14,7 @@ from app.models.simulacion import (
     ResumenLineaTiempo,
     ResumenRetiro,
 )
-from app.services.resultados_sebd import calcular_resultado_sebd
+from app.services.sebd_results import calcular_resultado_sebd
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -25,20 +25,20 @@ class TestUX45CierreResultadosAccesibilidad(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.resultados_js = (ROOT / "app/static/js/resultados.js").read_text(
+        cls.resultados_js = (ROOT / "app/static/js/results.js").read_text(
             encoding="utf-8"
         )
-        cls.simulacion_js = (ROOT / "app/static/js/simulacion.js").read_text(
+        cls.simulacion_js = (ROOT / "app/static/js/simulation.js").read_text(
             encoding="utf-8"
         )
         cls.referencia_js = (
             ROOT / "app/static/js/referencia_mi_retiro_seguro.js"
         ).read_text(encoding="utf-8")
         cls.resultados_html = (
-            ROOT / "app/templates/partials/resultados.html"
+            ROOT / "app/templates/partials/results.html"
         ).read_text(encoding="utf-8")
         cls.importacion_html = "\n".join([
-            (ROOT / "app/templates/partials/importacion_datos_oficiales.html").read_text(encoding="utf-8"),
+            (ROOT / "app/templates/partials/official_data_import.html").read_text(encoding="utf-8"),
             (ROOT / "app/templates/partials/importacion_ficha_digital.html").read_text(encoding="utf-8"),
         ])
         cls.css = (ROOT / "app/static/css/style.css").read_text(encoding="utf-8")

@@ -4,11 +4,11 @@ import unittest
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-SIMULACION = ROOT / "app/templates/simulacion.html"
+SIMULACION = ROOT / "app/templates/simulation.html"
 BASE = ROOT / "app/templates/base.html"
-SIMULACION_JS = ROOT / "app/static/js/simulacion.js"
-IMPORTACION_JS = ROOT / "app/static/js/importacion_datos_oficiales.js"
-NAVEGACION_JS = ROOT / "app/static/js/navegacion_wizard.js"
+SIMULACION_JS = ROOT / "app/static/js/simulation.js"
+IMPORTACION_JS = ROOT / "app/static/js/official_data_import.js"
+NAVEGACION_JS = ROOT / "app/static/js/wizard_navigation.js"
 DESIGN = ROOT / "app/static/css/design-system.css"
 
 
@@ -119,7 +119,7 @@ class TestUX46CCuotas(unittest.TestCase):
 
     def test_campos_editables_usan_pistas_que_desaparecen_con_el_valor(self):
         html = SIMULACION.read_text(encoding="utf-8")
-        accesibilidad = (ROOT / "app/static/js/accesibilidad.js").read_text(encoding="utf-8")
+        accesibilidad = (ROOT / "app/static/js/accessibility.js").read_text(encoding="utf-8")
         self.assertIn('placeholder="Ej.: 281"', html)
         self.assertIn('placeholder="Ej.: 5"', html)
         self.assertIn('placeholder="Ej.: 12"', html)
@@ -128,7 +128,7 @@ class TestUX46CCuotas(unittest.TestCase):
         self.assertNotIn("Usa 12 si esperas cotizar todos los meses del año.", html)
 
     def test_ayuda_contextual_es_solo_icono_sin_palabra_info(self):
-        accesibilidad = (ROOT / "app/static/js/accesibilidad.js").read_text(encoding="utf-8")
+        accesibilidad = (ROOT / "app/static/js/accessibility.js").read_text(encoding="utf-8")
         self.assertIn('class="context-help-icon"', accesibilidad)
         self.assertNotIn('<span aria-hidden="true">Info</span>', accesibilidad)
         self.assertIn("Más información sobre", accesibilidad)
@@ -142,7 +142,7 @@ class TestUX46CCuotas(unittest.TestCase):
 
     def test_revision_importada_filtra_secciones_por_paso(self):
         parcial = (
-            ROOT / "app/templates/partials/importacion_datos_oficiales.html"
+            ROOT / "app/templates/partials/official_data_import.html"
         ).read_text(encoding="utf-8")
         js = IMPORTACION_JS.read_text(encoding="utf-8")
         simulacion_js = SIMULACION_JS.read_text(encoding="utf-8")
@@ -157,7 +157,7 @@ class TestUX46CCuotas(unittest.TestCase):
 
     def test_vista_previa_nombra_grupos_por_etapa(self):
         parcial = (
-            ROOT / "app/templates/partials/importacion_datos_oficiales.html"
+            ROOT / "app/templates/partials/official_data_import.html"
         ).read_text(encoding="utf-8")
 
         self.assertIn("Datos personales", parcial)
@@ -173,7 +173,7 @@ class TestUX46CCuotas(unittest.TestCase):
 
     def test_paso2_revisa_total_y_cuotas_del_anio_actual(self):
         parcial = (
-            ROOT / "app/templates/partials/importacion_datos_oficiales.html"
+            ROOT / "app/templates/partials/official_data_import.html"
         ).read_text(encoding="utf-8")
         js = IMPORTACION_JS.read_text(encoding="utf-8")
 
@@ -183,7 +183,7 @@ class TestUX46CCuotas(unittest.TestCase):
         self.assertIn("cuotas_anio_actual: leerNumeroOpcionalPreview", js)
 
     def test_ayuda_contextual_no_dibuja_doble_circulo(self):
-        css = (ROOT / "app/static/css/accesibilidad.css").read_text(encoding="utf-8")
+        css = (ROOT / "app/static/css/accessibility.css").read_text(encoding="utf-8")
         bloque = css.split(".context-help-trigger {", 1)[1].split("}", 1)[0]
         self.assertIn("border: 0;", bloque)
         self.assertIn(".context-help-icon", css)

@@ -12,7 +12,7 @@ máximos del artículo 193 cuando corresponden.
 
 from decimal import Decimal
 
-from app.core.dinero import (
+from app.core.money import (
     a_decimal,
     redondear_moneda,
 )

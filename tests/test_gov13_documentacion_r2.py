@@ -39,12 +39,12 @@ class TestGov13DocumentacionR2(unittest.TestCase):
     def test_arquitectura_documenta_modulos_criticos(self):
         texto = (DOCS / "ARQUITECTURA.md").read_text(encoding="utf-8")
         for esperado in (
-            "app/core/archivos_pdf.py",
+            "app/core/pdf_files.py",
             "app/core/version.py",
-            "app/services/fecha_referencia.py",
+            "app/services/reference_date.py",
             "app/services/ficha_digital.py",
             "app/services/detalle_anio_actual.py",
-            "app/static/js/gestion_datos.js",
+            "app/static/js/data_management.js",
         ):
             with self.subTest(esperado=esperado):
                 self.assertIn(esperado, texto)

@@ -10,11 +10,11 @@ posteriormente utilizarán los motores previsionales.
 
 from decimal import Decimal
 
-from app.core.dinero import (
+from app.core.money import (
     a_decimal,
     redondear_moneda,
 )
-from app.models.simulacion import (
+from app.models.simulation import (
     DatosProyeccionSalario,
     DatosSalario,
     EscenarioProyeccionSalario,

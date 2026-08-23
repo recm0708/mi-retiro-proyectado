@@ -8,7 +8,7 @@ de las pensiones mensuales porque constituye una prestación de pago único.
 
 from decimal import Decimal
 
-from app.core.dinero import a_decimal, redondear_moneda
+from app.core.money import a_decimal, redondear_moneda
 from app.core.normativa import cargar_parametros_sebd
 from app.models.pension import (
     AnioSeleccionadoSEBD,

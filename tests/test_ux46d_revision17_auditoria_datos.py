@@ -39,7 +39,7 @@ class TestUX46DRevision17AuditoriaDatos(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.importacion_js = (
-            ROOT / "app/static/js/importacion_datos_oficiales.js"
+            ROOT / "app/static/js/official_data_import.js"
         ).read_text(encoding="utf-8")
         cls.detalle_js = (
             ROOT / "app/static/js/detalle_anio_actual.js"
@@ -48,7 +48,7 @@ class TestUX46DRevision17AuditoriaDatos(unittest.TestCase):
             ROOT / "app/static/css/design-system.css"
         ).read_text(encoding="utf-8")
         cls.parcial = (
-            ROOT / "app/templates/partials/importacion_datos_oficiales.html"
+            ROOT / "app/templates/partials/official_data_import.html"
         ).read_text(encoding="utf-8")
 
     def test_checkbox_bloqueado_solo_pinta_gancho_si_valor_real_esta_checked(self):

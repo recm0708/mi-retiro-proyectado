@@ -11,19 +11,19 @@ class TestUX46DRevision7PrivacidadConsulta(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.base = (ROOT / "app/templates/base.html").read_text(encoding="utf-8")
-        cls.simulacion = (ROOT / "app/templates/simulacion.html").read_text(encoding="utf-8")
+        cls.simulacion = (ROOT / "app/templates/simulation.html").read_text(encoding="utf-8")
         cls.metodologia = (ROOT / "app/templates/metodologia.html").read_text(encoding="utf-8")
         cls.terminos = (
-            ROOT / "app/templates/partials/privacidad_consentimiento.html"
+            ROOT / "app/templates/partials/privacy_consent.html"
         ).read_text(encoding="utf-8")
-        cls.privacidad = (ROOT / "app/static/js/privacidad.js").read_text(encoding="utf-8")
+        cls.privacidad = (ROOT / "app/static/js/privacy.js").read_text(encoding="utf-8")
         cls.design = (ROOT / "app/static/css/design-system.css").read_text(encoding="utf-8")
 
     def test_modal_y_controlador_de_privacidad_son_globales_y_unicos(self):
-        self.assertEqual(self.base.count('partials/privacidad_consentimiento.html'), 1)
-        self.assertEqual(self.base.count("/js/privacidad.js"), 1)
-        self.assertNotIn('partials/privacidad_consentimiento.html', self.simulacion)
-        self.assertNotIn("/js/privacidad.js", self.simulacion)
+        self.assertEqual(self.base.count('partials/privacy_consent.html'), 1)
+        self.assertEqual(self.base.count("/js/privacy.js"), 1)
+        self.assertNotIn('partials/privacy_consent.html', self.simulacion)
+        self.assertNotIn("/js/privacy.js", self.simulacion)
 
     def test_fuentes_abre_revision_en_la_misma_pagina(self):
         self.assertIn('data-privacy-action="review"', self.metodologia)

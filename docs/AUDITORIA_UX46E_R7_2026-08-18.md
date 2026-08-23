@@ -39,7 +39,7 @@ miRetiroProyectado.privacidadConsentimientoSesion
 miRetiroProyectado.tema
 ```
 
-Al cierre original de R7, las claves pre-beta `calculadoraPensionCSS.*` y `mi-retiro-proyectado-tema` no formaban parte del flujo operativo. Durante R8 se autorizó una excepción estrictamente destructiva: `gestion_datos.js` y `privacidad.js` pueden reconocer esos identificadores únicamente para purgarlos cuando el usuario solicita el borrado integral. No existe lectura, restauración ni migración desde ellos; ADR-166 documenta esta precisión posterior sin alterar la conclusión de R7 sobre el namespace operativo vigente.
+Al cierre original de R7, las claves pre-beta `calculadoraPensionCSS.*` y `mi-retiro-proyectado-tema` no formaban parte del flujo operativo. Durante R8 se autorizó una excepción estrictamente destructiva: `data_management.js` y `privacy.js` pueden reconocer esos identificadores únicamente para purgarlos cuando el usuario solicita el borrado integral. No existe lectura, restauración ni migración desde ellos; ADR-166 documenta esta precisión posterior sin alterar la conclusión de R7 sobre el namespace operativo vigente.
 
 ## 4. Interfaz visible post-GOV
 

@@ -4,7 +4,7 @@ import unittest
 from datetime import date
 
 from app.models.pension import DatosCalculoSEBD
-from app.models.simulacion import RegistroHistorialSalarial
+from app.models.simulation import RegistroHistorialSalarial
 from app.engines.elegibilidad import clasificar_modalidad_sebd
 from app.engines.sebd_modalidades import calcular_sebd
 

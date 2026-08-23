@@ -20,7 +20,7 @@ from threading import Lock
 from time import monotonic
 from urllib.request import Request, urlopen
 
-from app.core.observabilidad import registrar_evento
+from app.core.observability import registrar_evento
 
 
 PANAMA_TZ = timezone(timedelta(hours=-5))
