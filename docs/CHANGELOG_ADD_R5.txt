@@ -1,0 +1,5 @@
+### VER.2 R5 — estabilización post-release G071/E01
+
+- inicia la fase de estabilización posterior a la promoción controlada;
+- mantiene `0.0.71.01-beta` como versión vigente;
+- prepara futuras revisiones beta revision-aware.

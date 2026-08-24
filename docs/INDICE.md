@@ -223,3 +223,7 @@ La metadata de versión de revisión de un documento de dominio puede conservar 
 ## VER.2 R4 — Promoción controlada G071/E01
 
 - [Promoción controlada VER.2 R4 G071/E01](VER2_R4_PROMOCION_G071_E01.md)
+
+## VER.2 R5 — Estabilización post-release
+
+- [Estabilización post-release VER.2 R5](VER2_R5_ESTABILIZACION_POST_RELEASE.md)
