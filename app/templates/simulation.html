@@ -513,7 +513,7 @@ Nueva simulación | {{ app_name }}
 
               {% include "partials/salary_history.html" %}
 
-              {% include "partials/detalle_anio_actual.html" %}
+              {% include "partials/current_year_detail.html" %}
 
               <section class="step3-subsection mt-5" aria-labelledby="base-salarial-titulo">
                 <hr class="mb-4">
@@ -1131,7 +1131,7 @@ Nueva simulación | {{ app_name }}
 
 <!-- Referencia personal opcional de Mi Retiro Seguro. -->
 <script
-  src="{{ url_for('static', path='/js/referencia_mi_retiro_seguro.js') }}"
+  src="{{ url_for('static', path='/js/mi_retiro_seguro_reference.js') }}"
 ></script>
 
 
@@ -1143,7 +1143,7 @@ Nueva simulación | {{ app_name }}
 
 <!-- Detalle mensual/quincenal del año actual. -->
 <script
-  src="{{ url_for('static', path='/js/detalle_anio_actual.js') }}"
+  src="{{ url_for('static', path='/js/current_year_detail.js') }}"
 ></script>
 
 

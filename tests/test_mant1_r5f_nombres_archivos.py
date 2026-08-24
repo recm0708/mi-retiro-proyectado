@@ -38,7 +38,7 @@ class TestMant1R5FNombresArchivos(unittest.TestCase):
             "scripts/configure_git_hooks.ps1",
             "scripts/validate_precommit.py",
             "data/revision_ledger_pre_1_0.json",
-            "regulations/general_parameters.json",
+            "regulations/general-parameters.json",
             "tests/test_comparator.py",
             "tests/test_regulatory_sources.py",
             "tests/test_salary_projection.py",

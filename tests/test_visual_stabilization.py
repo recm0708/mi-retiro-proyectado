@@ -6,7 +6,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 CSS = ROOT / "app/static/css/style.css"
 DESIGN = ROOT / "app/static/css/design-system.css"
-TEMA = ROOT / "app/static/js/tema.js"
+TEMA = ROOT / "app/static/js/theme.js"
 INDEX = ROOT / "app/templates/index.html"
 BASE = ROOT / "app/templates/base.html"
 TEMPLATES = ROOT / "app/templates"
@@ -56,7 +56,7 @@ class TestEstabilizacionVisual(unittest.TestCase):
         css = CSS.read_text(encoding="utf-8")
         index = INDEX.read_text(encoding="utf-8")
         simulacion = (TEMPLATES / "simulation.html").read_text(encoding="utf-8")
-        metodologia = (TEMPLATES / "metodologia.html").read_text(encoding="utf-8")
+        metodologia = (TEMPLATES / "methodology.html").read_text(encoding="utf-8")
         resultados_js = (ROOT / "app/static/js/results.js").read_text(encoding="utf-8")
 
         self.assertIn(".btn-center-content {", css)

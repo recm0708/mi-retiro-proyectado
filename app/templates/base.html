@@ -44,7 +44,7 @@
   >
 
   <!-- Se aplica antes de los estilos para reducir cambios visuales al cargar. -->
-  <script src="{{ url_for('static', path='/js/tema.js') }}"></script>
+  <script src="{{ url_for('static', path='/js/theme.js') }}"></script>
 
   <link
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
@@ -72,7 +72,7 @@
   >
   <link
     rel="stylesheet"
-    href="{{ url_for('static', path='/css/procedencia-editable.css') }}"
+    href="{{ url_for('static', path='/css/editable-provenance.css') }}"
   >
 
   {% block head %}{% endblock %}
@@ -283,7 +283,7 @@
   {% block scripts %}{% endblock %}
 
   <!-- La capa de procedencia editable se carga después de los módulos de cada vista. -->
-  <script src="{{ url_for('static', path='/js/procedencia_editable.js') }}"></script>
+  <script src="{{ url_for('static', path='/js/editable_provenance.js') }}"></script>
 </body>
 
 </html>

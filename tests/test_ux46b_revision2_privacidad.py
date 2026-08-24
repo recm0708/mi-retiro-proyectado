@@ -6,7 +6,7 @@ from pathlib import Path
 from fastapi.testclient import TestClient
 
 from app.main import app
-from app.services.referencia_mi_retiro_seguro import extraer_referencia_desde_texto
+from app.services.mi_retiro_seguro_reference import extraer_referencia_desde_texto
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -45,7 +45,7 @@ class TestUX46bRevision2Privacidad(unittest.TestCase):
         cls.privacidad_js = (ROOT / "app/static/js/privacy.js").read_text(encoding="utf-8")
         cls.accesibilidad_js = (ROOT / "app/static/js/accessibility.js").read_text(encoding="utf-8")
         cls.design = (ROOT / "app/static/css/design-system.css").read_text(encoding="utf-8")
-        cls.metodologia = (ROOT / "app/templates/metodologia.html").read_text(encoding="utf-8")
+        cls.metodologia = (ROOT / "app/templates/methodology.html").read_text(encoding="utf-8")
         cls.base = (ROOT / "app/templates/base.html").read_text(encoding="utf-8")
 
     def test_campos_obligatorios_tienen_asterisco_y_ayuda_semantica(self):

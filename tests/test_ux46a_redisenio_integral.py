@@ -8,7 +8,7 @@ ROOT = Path(__file__).resolve().parents[1]
 BASE = ROOT / "app/templates/base.html"
 INDEX = ROOT / "app/templates/index.html"
 DESIGN = ROOT / "app/static/css/design-system.css"
-TEMA = ROOT / "app/static/js/tema.js"
+TEMA = ROOT / "app/static/js/theme.js"
 
 
 class TestUX46aRedisenioIntegral(unittest.TestCase):

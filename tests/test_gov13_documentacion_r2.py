@@ -43,7 +43,7 @@ class TestGov13DocumentacionR2(unittest.TestCase):
             "app/core/version.py",
             "app/services/reference_date.py",
             "app/services/ficha_digital.py",
-            "app/services/detalle_anio_actual.py",
+            "app/services/current_year_detail.py",
             "app/static/js/data_management.js",
         ):
             with self.subTest(esperado=esperado):

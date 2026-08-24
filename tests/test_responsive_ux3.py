@@ -8,7 +8,7 @@ CSS = ROOT / "app/static/css/style.css"
 DESIGN = ROOT / "app/static/css/design-system.css"
 SIMULACION = ROOT / "app/templates/simulation.html"
 RETIRO = ROOT / "app/templates/partials/retirement.html"
-METODOLOGIA = ROOT / "app/templates/metodologia.html"
+METODOLOGIA = ROOT / "app/templates/methodology.html"
 RETIRO_JS = ROOT / "app/static/js/retirement.js"
 
 

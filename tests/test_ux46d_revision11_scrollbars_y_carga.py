@@ -11,7 +11,7 @@ class TestUX46DRevision11ScrollbarsYCarga(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.design = (ROOT / "app/static/css/design-system.css").read_text(encoding="utf-8")
-        cls.ficha = (ROOT / "app/templates/partials/importacion_ficha_digital.html").read_text(encoding="utf-8")
+        cls.ficha = (ROOT / "app/templates/partials/ficha_digital_import.html").read_text(encoding="utf-8")
         cls.oficial = (ROOT / "app/templates/partials/official_data_import.html").read_text(encoding="utf-8")
 
     def test_scrollbar_tabular_elimina_flechas_nativas(self):

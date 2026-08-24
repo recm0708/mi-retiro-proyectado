@@ -6,8 +6,8 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = ROOT / "app/templates/base.html"
-JS = ROOT / "app/static/js/procedencia_editable.js"
-CSS = ROOT / "app/static/css/procedencia-editable.css"
+JS = ROOT / "app/static/js/editable_provenance.js"
+CSS = ROOT / "app/static/css/editable-provenance.css"
 
 
 class TestUx46eR81ProcedenciaEditable(unittest.TestCase):
@@ -20,11 +20,11 @@ class TestUx46eR81ProcedenciaEditable(unittest.TestCase):
         cls.css = CSS.read_text(encoding="utf-8")
 
     def test_base_carga_capa_css_de_procedencia(self):
-        self.assertIn("/css/procedencia-editable.css", self.base)
+        self.assertIn("/css/editable-provenance.css", self.base)
 
     def test_script_se_carga_despues_de_scripts_especificos(self):
         bloque = self.base.index("{% block scripts %}")
-        capa = self.base.index("/js/procedencia_editable.js")
+        capa = self.base.index("/js/editable_provenance.js")
         self.assertGreater(capa, bloque)
         self.assertIn("subtree: false", self.js)
         self.assertIn("hayFilasNuevas", self.js)

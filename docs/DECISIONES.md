@@ -1965,7 +1965,7 @@ En Paso 5, la fecha personalizada informa de forma visible si queda cubierta por
 **Estado:** Aceptada para UX.4.6i R1–R1.4.
 **Fecha:** 2026-08-21.
 
-**Decisión:** la sección pública `/como-se-calcula` describe el orden de operaciones de SEBD, Subsistema Mixto y SUCGS, pero no ejecuta prestaciones. `app/services/como_se_calcula.py` puede leer y estructurar parámetros de `regulations/*.json`; no importa motores previsionales ni reconstruye resultados personales. Las fórmulas ejecutables permanecen en Python dentro de los motores existentes y la sustitución con cifras de una simulación continúa en la trazabilidad del Paso 6.
+**Decisión:** la sección pública `/como-se-calcula` describe el orden de operaciones de SEBD, Subsistema Mixto y SUCGS, pero no ejecuta prestaciones. `app/services/calculation_guide.py` puede leer y estructurar parámetros de `regulations/*.json`; no importa motores previsionales ni reconstruye resultados personales. Las fórmulas ejecutables permanecen en Python dentro de los motores existentes y la sustitución con cifras de una simulación continúa en la trazabilidad del Paso 6.
 
 La guía reutiliza `construir_catalogo_metodologia()` para las fuentes oficiales y el Paso 6 enlaza únicamente mediante el identificador público del sistema (`#sebd`, `#mixto`, `#sucgs`). No se serializan datos personales, salarios, cuotas ni montos de la simulación en la URL.
 

@@ -8,8 +8,8 @@ import unittest
 
 
 ROOT = Path(__file__).resolve().parents[1]
-CSS = ROOT / "app" / "static" / "css" / "como-se-calcula.css"
-TEMPLATE = ROOT / "app" / "templates" / "como_se_calcula.html"
+CSS = ROOT / "app" / "static" / "css" / "calculation-guide.css"
+TEMPLATE = ROOT / "app" / "templates" / "calculation_guide.html"
 DOCS = (
     ROOT / "CHANGELOG.md",
     ROOT / "docs" / "ESTANDAR_CODIGO_Y_COMENTARIOS.md",

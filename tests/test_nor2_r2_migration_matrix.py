@@ -40,17 +40,27 @@ class TestNOR2R2MigrationMatrix(unittest.TestCase):
             "79",
             "28",
             "data/revision_ledger_pre_1_0.json",
-            "regulations/general_parameters.json",
+            "regulations/general-parameters.json",
             "assets/",
             "_entregas/",
             "README.md",
         ):
             self.assertIn(valor, texto)
 
-    def test_readme_declara_estado_actual(self):
+    def test_r2_preserva_evidencia_y_readme_declara_estado_actual(self):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        matriz_r2 = (
+            ROOT
+            / "docs"
+            / "audits"
+            / "repository"
+            / "repository-normalization-migration-matrix-nor2-r2.md"
+        ).read_text(encoding="utf-8")
+
+        self.assertIn("NOR.2 R2", matriz_r2)
         self.assertIn("NOR.1:** cerrado", readme)
-        self.assertIn("NOR.2 R2:** activo", readme)
+        self.assertIn("NOR.2 R3:** activo", readme)
+        self.assertNotIn("NOR.2 R2:** activo", readme)
         self.assertIn("DOC.1 R1:** cerrado", readme)
         self.assertIn("v0.0.71.01-beta", readme)
         self.assertNotIn("Bloque documental activo:** DOC.1 R1", readme)

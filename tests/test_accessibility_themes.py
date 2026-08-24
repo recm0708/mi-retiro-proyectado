@@ -28,7 +28,7 @@ class TestAccesibilidadTemas(unittest.TestCase):
         self.assertIn('data-theme-choice="dark"', respuesta.text)
         self.assertIn('data-theme-choice="contrast"', respuesta.text)
         self.assertIn("Accesibilidad", respuesta.text)
-        self.assertIn('/static/js/tema.js', respuesta.text)
+        self.assertIn('/static/js/theme.js', respuesta.text)
 
     def test_navegacion_incluye_salto_al_contenido_y_aria_current(self):
         respuesta = self.cliente.get("/metodologia")
@@ -52,7 +52,7 @@ class TestAccesibilidadTemas(unittest.TestCase):
         self.assertNotIn("Abrir Mi Caja Digital", respuesta.text)
 
     def test_tema_persiste_en_localstorage_y_sigue_preferencia_del_sistema(self):
-        contenido = (ROOT / "app/static/js/tema.js").read_text(encoding="utf-8")
+        contenido = (ROOT / "app/static/js/theme.js").read_text(encoding="utf-8")
 
         self.assertIn("miRetiroProyectado.tema", contenido)
         self.assertIn("localStorage", contenido)

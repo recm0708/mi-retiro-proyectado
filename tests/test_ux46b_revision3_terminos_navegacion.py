@@ -26,7 +26,7 @@ class TestUX46bRevision3TerminosNavegacion(unittest.TestCase):
             ROOT / "app/static/css/design-system.css"
         ).read_text(encoding="utf-8")
         cls.metodologia = (
-            ROOT / "app/templates/metodologia.html"
+            ROOT / "app/templates/methodology.html"
         ).read_text(encoding="utf-8")
 
     def test_terminos_ampliados_cubren_apartados_juridicos_y_operativos(self):

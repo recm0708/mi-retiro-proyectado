@@ -82,7 +82,7 @@ class TestGov13DocumentacionR3(unittest.TestCase):
 
     def test_normativa_refleja_metadata_json_base(self):
         params = json.loads(
-            (ROOT / "regulations/general_parameters.json").read_text(encoding="utf-8")
+            (ROOT / "regulations/general-parameters.json").read_text(encoding="utf-8")
         )
         texto = (DOCS / "NORMATIVA.md").read_text(encoding="utf-8")
         self.assertIn(params["gaceta_oficial"], texto)

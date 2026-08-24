@@ -26,7 +26,7 @@ class TestGov18CierreGobierno(unittest.TestCase):
         cierre = (DOCS / "CIERRE_GOV1.md").read_text(encoding="utf-8")
 
         self.assertIn("**GOV.1:** cerrado.", readme)
-        self.assertIn("**NOR.2 R2:** activo", readme)
+        self.assertIn("**NOR.2 R3:** activo", readme)
         self.assertIn("GOV.1.8", cierre)
         self.assertIn("0.1.0-beta.1", cierre)
 

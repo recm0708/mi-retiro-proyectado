@@ -41,10 +41,10 @@ class TestUX44ImportacionOficial(unittest.TestCase):
             ROOT / "app/templates/partials/official_data_import.html"
         ).read_text(encoding="utf-8")
         cls.parcial_ficha = (
-            ROOT / "app/templates/partials/importacion_ficha_digital.html"
+            ROOT / "app/templates/partials/ficha_digital_import.html"
         ).read_text(encoding="utf-8")
         cls.parcial_detalle = (
-            ROOT / "app/templates/partials/detalle_anio_actual.html"
+            ROOT / "app/templates/partials/current_year_detail.html"
         ).read_text(encoding="utf-8")
         cls.parcial = cls.parcial_comprobante + "\n" + cls.parcial_ficha
         cls.js = (
@@ -83,8 +83,8 @@ class TestUX44ImportacionOficial(unittest.TestCase):
         posicion_comprobante = self.simulacion.index('partials/official_data_import.html')
         posicion_paso_2 = self.simulacion.index('data-panel="2"')
         posicion_paso_3 = self.simulacion.index('data-panel="3"')
-        posicion_detalle = self.simulacion.index('partials/detalle_anio_actual.html')
-        posicion_ficha_en_detalle = self.parcial_detalle.index('partials/importacion_ficha_digital.html')
+        posicion_detalle = self.simulacion.index('partials/current_year_detail.html')
+        posicion_ficha_en_detalle = self.parcial_detalle.index('partials/ficha_digital_import.html')
 
         self.assertLess(posicion_paso_1, posicion_comprobante)
         self.assertLess(posicion_comprobante, posicion_paso_2)

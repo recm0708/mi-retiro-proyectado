@@ -44,13 +44,32 @@ registra NOR.2 R1 y que la evidencia de auditoría permanece bajo `docs/audits/`
 <!-- NOR2-R2-VALIDATION:START -->
 ## Validación NOR.2 R2
 
-R2 protege la matriz de migración y el estado público del repositorio. La
-validación exige que `README.md` no marque DOC.1 como activo, reconozca NOR.1
-como cerrado, NOR.2 R2 como activo y represente las carpetas reales
-`engines/`, `models/` y `services/`.
+R2 protegió la matriz de migración y el estado público del repositorio. En ese
+cierre, la validación exigió que `README.md` no marcara DOC.1 como activo,
+reconociera NOR.1 como cerrado, declarara NOR.2 R2 como activo en ese momento y
+representara las carpetas reales `engines/`, `models/` y `services/`.
 
 La versión de aplicación no cambia.
 <!-- NOR2-R2-VALIDATION:END -->
+
+
+<!-- NOR2-R3-VALIDATION:START -->
+## Validación NOR.2 R3
+
+R3 valida los 28 movimientos técnicos, ausencia de las rutas antiguas,
+existencia de las rutas nuevas, imports de servicios, estabilidad de URL
+públicas, excepción Ficha Digital y versión canónica sin cambios.
+
+Evidencia local observada en R3:
+
+- gate focal NOR.2: `28 passed, 32 subtests passed`;
+- regresiones corregidas: `56 passed, 37 subtests passed`;
+- suite completa: `956 tests` en `OK`;
+- compilación Python sin errores;
+- validación sintáctica de todos los JavaScript sin errores;
+- `git diff --check` limpio;
+- gate `pre-commit` completo superado.
+<!-- NOR2-R3-VALIDATION:END -->
 
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado de validación post-MANT.1
@@ -495,20 +514,23 @@ python -m pip check
 
 ## 3. Inventario actual de pruebas
 
-Inventario vigente: **99 módulos**.
+Inventario vigente: **133 módulos**.
 
 - `tests/test_accessibility_themes.py`
 - `tests/test_accessibility_ux4.py`
 - `tests/test_comparator.py`
-- `tests/test_money.py`
-- `tests/test_visual_stabilization.py`
-- `tests/test_regulatory_sources.py`
+- `tests/test_dev2_development_center.py`
+- `tests/test_dev2_r1_cierre_documental.py`
+- `tests/test_dev2_r2_visor_diagnostico.py`
+- `tests/test_dev2_r3_autodiagnostico.py`
+- `tests/test_dev2_r4_cierre_final.py`
+- `tests/test_doc1_r1_auditoria_markdown_post_mant1.py`
 - `tests/test_gov12_versionado.py`
 - `tests/test_gov13_documentacion.py`
 - `tests/test_gov13_documentacion_r2.py`
 - `tests/test_gov13_documentacion_r3.py`
 - `tests/test_gov13_documentacion_r4.py`
-- `tests/test_gov14_observability.py`
+- `tests/test_gov14_observabilidad.py`
 - `tests/test_gov14_observabilidad_integracion.py`
 - `tests/test_gov15_cierre_seguridad_privacidad.py`
 - `tests/test_gov15_modelo_amenazas.py`
@@ -519,12 +541,30 @@ Inventario vigente: **99 módulos**.
 - `tests/test_gov_firma_git.py`
 - `tests/test_identidad_interfaz.py`
 - `tests/test_identidad_publica_github_pre_r8.py`
-- `tests/test_visual_identity_pre_r8.py`
 - `tests/test_indemnizacion_vejez.py`
-- `tests/test_timeline.py`
+- `tests/test_mant1_r3_yaml_github_documentados.py`
+- `tests/test_mant1_r4_encabezados_operativos_limpios.py`
+- `tests/test_mant1_r5a_comentarios_servicios_app.py`
+- `tests/test_mant1_r5b_comentarios_presentacion_app.py`
+- `tests/test_mant1_r5c_comentarios_js_app.py`
+- `tests/test_mant1_r5d_politica_extensiones.py`
+- `tests/test_mant1_r5e_nombres_carpetas.py`
+- `tests/test_mant1_r5f_nombres_archivos.py`
+- `tests/test_mant1_r5g_documentacion.py`
+- `tests/test_mant1_r5h_auditoria_nombres_restantes.py`
+- `tests/test_mant1_r6_auditoria_funcional_post_renombres.py`
+- `tests/test_mant1_r7_cierre_operativo_post_auditoria.py`
+- `tests/test_mant1_scripts_hooks_documentados.py`
 - `tests/test_mantenimiento_tecnico.py`
 - `tests/test_mixto.py`
 - `tests/test_mixto_prestaciones_cap.py`
+- `tests/test_mixto_results.py`
+- `tests/test_modality_results.py`
+- `tests/test_money.py`
+- `tests/test_nor1_repository_standards.py`
+- `tests/test_nor2_r2_migration_matrix.py`
+- `tests/test_nor2_r3_runtime_migration.py`
+- `tests/test_nor2_repository_normalization.py`
 - `tests/test_plan1_documentacion_primaria.py`
 - `tests/test_plan1_documentacion_transversal.py`
 - `tests/test_plan1_gobierno_versionado_oficial.py`
@@ -536,27 +576,27 @@ Inventario vigente: **99 módulos**.
 - `tests/test_plan1_versionado_oficial.py`
 - `tests/test_prebeta_e2e_hardening.py`
 - `tests/test_precommit_guard.py`
-- `tests/test_salary_projection.py`
 - `tests/test_pypdf_compatibilidad.py`
+- `tests/test_regulatory_sources.py`
 - `tests/test_responsive_ux3.py`
-- `tests/test_unified_result.py`
 - `tests/test_results.py`
-- `tests/test_mixto_results.py`
-- `tests/test_modality_results.py`
-- `tests/test_sucgs_results.py`
 - `tests/test_retirement.py`
+- `tests/test_salary_projection.py`
 - `tests/test_sebd.py`
 - `tests/test_sebd_modalidades.py`
 - `tests/test_sucgs.py`
 - `tests/test_sucgs_capa_solidaria.py`
 - `tests/test_sucgs_reemplazo.py`
+- `tests/test_sucgs_results.py`
+- `tests/test_timeline.py`
 - `tests/test_traceability.py`
+- `tests/test_unified_result.py`
 - `tests/test_ux42_estados_visuales.py`
 - `tests/test_ux43_formularios_teclado.py`
-- `tests/test_ux44_detalle_anio_actual.py`
-- `tests/test_ux44_edad_timeline.py`
+- `tests/test_ux44_current_year_detail.py`
+- `tests/test_ux44_edad_linea_tiempo.py`
 - `tests/test_ux44_importacion_oficial.py`
-- `tests/test_ux44_referencia_pdf.py`
+- `tests/test_ux44_pdf_reference.py`
 - `tests/test_ux45_cierre_resultados_accesibilidad.py`
 - `tests/test_ux46a_redisenio_integral.py`
 - `tests/test_ux46b_paso1_datos_personales.py`
@@ -573,12 +613,12 @@ Inventario vigente: **99 módulos**.
 - `tests/test_ux46d_revision15_campos_importacion_y_limpieza.py`
 - `tests/test_ux46d_revision16_flujo_paso3.py`
 - `tests/test_ux46d_revision17_auditoria_datos.py`
-- `tests/test_ux46d_revision18_procedencia_persistencia.py`
-- `tests/test_ux46d_revision19_sincronizacion_actual.py`
+- `tests/test_ux46d_revision18_provenance_persistence.py`
+- `tests/test_ux46d_revision19_current_sync.py`
 - `tests/test_ux46d_revision20_vigencia_resumen.py`
 - `tests/test_ux46d_revision21_fecha_confiable.py`
 - `tests/test_ux46d_revision22_cierre_paso3.py`
-- `tests/test_ux46d_revision23_ficha_actualiza_cuotas.py`
+- `tests/test_ux46d_revision23_ficha_updates_contributions.py`
 - `tests/test_ux46d_revision7_privacidad_consulta.py`
 - `tests/test_ux46d_revision8_tablas.py`
 - `tests/test_ux46d_revision9_reactividad_privacidad.py`
@@ -587,15 +627,28 @@ Inventario vigente: **99 módulos**.
 - `tests/test_ux46e_estandar_runtime.py`
 - `tests/test_ux46e_preparacion_publica.py`
 - `tests/test_ux46e_proyeccion_salarial.py`
-- `tests/test_ux46e_r81_procedencia_editable.py`
+- `tests/test_ux46e_r81_editable_provenance.py`
 - `tests/test_ux46e_r8_cierre_funcional.py`
 - `tests/test_ux46e_r8_reconsentimiento_borrado.py`
 - `tests/test_ux46e_r91_candidato_cierre.py`
 - `tests/test_ux46e_renumeracion_documental.py`
 - `tests/test_ux46f_r11_bloqueo_documental_vista_principal.py`
-- `tests/test_ux46f_r1_consistencia_procedencia_adjuntos.py`
-- `tests/test_ux46g_r1_escenarios_retirement.py`
+- `tests/test_ux46f_r1_attachment_provenance_consistency.py`
+- `tests/test_ux46f_r2_auditoria_paso4.py`
+- `tests/test_ux46g_r1_retirement_scenarios.py`
+- `tests/test_ux46h_r1_resultados_exportacion.py`
+- `tests/test_ux46i_r1_calculation_guide.py`
 - `tests/test_ux4_remate_visual.py`
+- `tests/test_ver2_documentacion_vigente.py`
+- `tests/test_ver2_ledger_estructurado.py`
+- `tests/test_ver2_r1_reconciliacion_post_doc1.py`
+- `tests/test_ver2_r2_documentacion_viva_post_r1.py`
+- `tests/test_ver2_r3_decision_version_candidata_post_r2.py`
+- `tests/test_ver2_r4_promocion_g071_e01.py`
+- `tests/test_ver2_r5_estabilizacion_post_release.py`
+- `tests/test_ver2_version_revision_aware.py`
+- `tests/test_visual_identity_pre_r8.py`
+- `tests/test_visual_stabilization.py`
 
 ## 4. Categorías
 
@@ -652,7 +705,7 @@ La CI debe permanecer verde antes de considerar cerrado un hito formal.
 
 ### UX.4.6g R1 — gate candidato
 
-La revisión acumula 18 regresiones en `tests/test_ux46g_r1_escenarios_retirement.py`. Partiendo del cierre de UX.4.6f con 762 pruebas, el gate objetivo del candidato es **780 pruebas en `OK`**, además de `pip check`, `compileall`, sintaxis JavaScript y `git diff --check`. La validación manual debe cubrir: sugerencia `+1…+N` desde Paso 4, preservación de una edición manual, ausencia de selección anticipada automática, fechas anticipadas transcurridas deshabilitadas, disponibilidad de la fecha de evaluación dentro de banda para sexo `F`/`M`, presencia de `+4`, tabla corta sin scroll vertical interno, mensaje explícito de cobertura de fecha personalizada y controles de fecha compactos/validados en Claro, Oscuro y Alto contraste.
+La revisión acumula 18 regresiones en `tests/test_ux46g_r1_retirement_scenarios.py`. Partiendo del cierre de UX.4.6f con 762 pruebas, el gate objetivo del candidato es **780 pruebas en `OK`**, además de `pip check`, `compileall`, sintaxis JavaScript y `git diff --check`. La validación manual debe cubrir: sugerencia `+1…+N` desde Paso 4, preservación de una edición manual, ausencia de selección anticipada automática, fechas anticipadas transcurridas deshabilitadas, disponibilidad de la fecha de evaluación dentro de banda para sexo `F`/`M`, presencia de `+4`, tabla corta sin scroll vertical interno, mensaje explícito de cobertura de fecha personalizada y controles de fecha compactos/validados en Claro, Oscuro y Alto contraste.
 
 ### UX.4.6g R1.4.2 — robustez de inicialización
 
@@ -664,7 +717,7 @@ Se añaden tres regresiones para la alineación del período del historial, la a
 
 ### UX.4.6i R1 — guía pública Cómo se calcula
 
-La revisión añade **14 regresiones específicas** en `tests/test_ux46i_r1_como_se_calcula.py`. Partiendo del cierre de UX.4.6h con 812 pruebas, el gate objetivo del candidato es **826 pruebas en `OK`**, además de `pip check`, compilación Python, sintaxis JavaScript y `git diff --check`.
+La revisión añade **14 regresiones específicas** en `tests/test_ux46i_r1_calculation_guide.py`. Partiendo del cierre de UX.4.6h con 812 pruebas, el gate objetivo del candidato es **826 pruebas en `OK`**, además de `pip check`, compilación Python, sintaxis JavaScript y `git diff --check`.
 
 La validación automática cubre ruta pública, lectura de parámetros normativos, ausencia de motores en la capa explicativa, contenido SEBD/Mixto/SUCGS, enlaces desde resultados y Metodología, estructura accesible/responsive, ADR/RF/TR y documentación. La validación manual debe comprobar temas Claro, Oscuro y Alto contraste, navegación por anclas, tablas desplegables y legibilidad en escritorio/móvil.
 

@@ -44,6 +44,15 @@ La historia se conserva mediante Git y archivo justificado; el árbol vigente no
 mantendrá copias sustituidas únicamente por compatibilidad documental.
 <!-- NOR2-R2-STATUS:END -->
 
+
+<!-- NOR2-R3-STATUS:START -->
+## NOR.2 R3 — runtime/configuración
+
+R3 materializa la normalización técnica de bajo/medio impacto aprobada por R2.
+La siguiente revisión R4 migrará la documentación viva y sus enlaces hacia la
+estructura canónica. SEC.2 continúa pausado.
+<!-- NOR2-R3-STATUS:END -->
+
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado post-MANT.1
 

@@ -345,7 +345,7 @@ def test_r6_payloads_indirectos_conservan_campos_requeridos():
     """Cubre payloads compuestos mediante funciones antes de JSON.stringify."""
 
     comparator = _texto("app/static/js/comparator.js")
-    detalle = _texto("app/static/js/detalle_anio_actual.js")
+    detalle = _texto("app/static/js/current_year_detail.js")
     results = _texto("app/static/js/results.js")
     retirement = _texto("app/static/js/retirement.js")
 
@@ -400,7 +400,7 @@ def test_r6_payloads_indirectos_conservan_campos_requeridos():
 def test_r6_como_se_calcula_anclas_dinamicas_existen():
     """La URL dinámica /como-se-calcula#${ancla} debe apuntar a ids reales."""
 
-    html = _texto("app/templates/como_se_calcula.html")
+    html = _texto("app/templates/calculation_guide.html")
     js = _texto("app/static/js/results_orchestration.js")
 
     assert "/como-se-calcula#${ancla}" in js

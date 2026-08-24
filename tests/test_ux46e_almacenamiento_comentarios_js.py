@@ -51,7 +51,7 @@ class TestUX46eAlmacenamientoComentariosJS(unittest.TestCase):
         self.assertNotIn("setItem(CLAVES_PRIVACIDAD_LEGACY", privacidad)
 
     def test_tema_y_borrado_integral_comparten_clave(self):
-        tema = (JS / "tema.js").read_text(encoding="utf-8")
+        tema = (JS / "theme.js").read_text(encoding="utf-8")
         gestion = (JS / "data_management.js").read_text(encoding="utf-8")
         self.assertIn('const STORAGE_KEY = "miRetiroProyectado.tema";', tema)
         self.assertIn('const CLAVE_GESTION_TEMA = "miRetiroProyectado.tema";', gestion)

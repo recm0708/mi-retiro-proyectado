@@ -7,7 +7,7 @@ import pypdf
 from pypdf import PdfReader, PdfWriter
 
 from app.services.ficha_digital import analizar_ficha_digital_pdf
-from app.services.referencia_mi_retiro_seguro import analizar_comprobante_pdf
+from app.services.mi_retiro_seguro_reference import analizar_comprobante_pdf
 
 
 class TestPypdfCompatibilidad(unittest.TestCase):

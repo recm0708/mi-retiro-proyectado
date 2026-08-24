@@ -4,7 +4,7 @@ import unittest
 from pathlib import Path
 
 from app.models.simulation import DatosDetalleAnioActual, RegistroDetalleAnioActual
-from app.services.detalle_anio_actual import analizar_detalle_anio_actual
+from app.services.current_year_detail import analizar_detalle_anio_actual
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -12,9 +12,9 @@ ROOT = Path(__file__).resolve().parents[1]
 class TestUX46DRevision19SincronizacionActual(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.detalle_js = (ROOT / "app/static/js/detalle_anio_actual.js").read_text(encoding="utf-8")
+        cls.detalle_js = (ROOT / "app/static/js/current_year_detail.js").read_text(encoding="utf-8")
         cls.historial_js = (ROOT / "app/static/js/salary_history.js").read_text(encoding="utf-8")
-        cls.detalle_html = (ROOT / "app/templates/partials/detalle_anio_actual.html").read_text(encoding="utf-8")
+        cls.detalle_html = (ROOT / "app/templates/partials/current_year_detail.html").read_text(encoding="utf-8")
 
     def test_seis_meses_acreditados_calculan_totales_y_promedio_correctos(self):
         salarios = [1486.88, 1555.51, 1381.01, 1565.83, 1331.90, 1562.37]

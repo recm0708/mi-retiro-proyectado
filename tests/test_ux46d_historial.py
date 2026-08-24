@@ -17,10 +17,10 @@ class TestUX46DHistorial(unittest.TestCase):
             ROOT / "app/templates/partials/salary_history.html"
         ).read_text(encoding="utf-8")
         cls.ficha = (
-            ROOT / "app/templates/partials/importacion_ficha_digital.html"
+            ROOT / "app/templates/partials/ficha_digital_import.html"
         ).read_text(encoding="utf-8")
         cls.detalle = (
-            ROOT / "app/templates/partials/detalle_anio_actual.html"
+            ROOT / "app/templates/partials/current_year_detail.html"
         ).read_text(encoding="utf-8")
         cls.retiro = (
             ROOT / "app/templates/partials/retirement.html"
@@ -29,7 +29,7 @@ class TestUX46DHistorial(unittest.TestCase):
             ROOT / "app/static/js/salary_history.js"
         ).read_text(encoding="utf-8")
         cls.detalle_js = (
-            ROOT / "app/static/js/detalle_anio_actual.js"
+            ROOT / "app/static/js/current_year_detail.js"
         ).read_text(encoding="utf-8")
         cls.importacion_js = (
             ROOT / "app/static/js/official_data_import.js"

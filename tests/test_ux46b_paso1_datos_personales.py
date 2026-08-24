@@ -6,7 +6,7 @@ from pathlib import Path
 from fastapi.testclient import TestClient
 
 from app.main import app
-from app.services.referencia_mi_retiro_seguro import extraer_referencia_desde_texto
+from app.services.mi_retiro_seguro_reference import extraer_referencia_desde_texto
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -64,10 +64,10 @@ class TestUX46bPaso1DatosPersonales(unittest.TestCase):
             ROOT / "app/templates/partials/official_data_import.html"
         ).read_text(encoding="utf-8")
         cls.ficha = (
-            ROOT / "app/templates/partials/importacion_ficha_digital.html"
+            ROOT / "app/templates/partials/ficha_digital_import.html"
         ).read_text(encoding="utf-8")
         cls.detalle = (
-            ROOT / "app/templates/partials/detalle_anio_actual.html"
+            ROOT / "app/templates/partials/current_year_detail.html"
         ).read_text(encoding="utf-8")
         cls.simulacion_js = (ROOT / "app/static/js/simulation.js").read_text(encoding="utf-8")
         cls.importacion_js = (
@@ -118,8 +118,8 @@ class TestUX46bPaso1DatosPersonales(unittest.TestCase):
         paso1 = self.simulacion.split('data-panel="1"', 1)[1].split('data-panel="2"', 1)[0]
         paso3 = self.simulacion.split('data-panel="3"', 1)[1].split('data-panel="4"', 1)[0]
         self.assertNotIn('importacion_ficha_digital.html', paso1)
-        self.assertIn('detalle_anio_actual.html', paso3)
-        self.assertIn('importacion_ficha_digital.html', self.detalle)
+        self.assertIn('current_year_detail.html', paso3)
+        self.assertIn('ficha_digital_import.html', self.detalle)
         self.assertIn("Importar salarios recientes desde Ficha Digital", self.ficha)
 
     def test_navegacion_comun_tiene_barra_superior_e_inferior(self):
