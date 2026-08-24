@@ -4,9 +4,26 @@
 **Versión candidata:** `0.0.71.01-beta` — VER.2 G071/E01
 **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
 **Último tag formal legacy:** `v0.0.26-beta`
-**Fecha de revisión:** 2026-08-22
-**Mantenimiento técnico en curso:** MANT.1 R5E — estandarización de nombres de carpetas antes de SEC.2; MANT.1 R5D conserva la política, plantillas y uniformidad por extensión; MANT.1 R1 conserva la auditoría inicial, MANT.1 R2 conserva la documentación de scripts y hooks antes de SEC.2, MANT.1 R3 conserva encabezados funcionales para YAML de GitHub, MANT.1 R4 limpia encabezados operativos, MANT.1 R5A documenta servicios Python grandes, MANT.1 R5B comenta CSS/plantilla y MANT.1 R5C comenta JavaScript complejo
+**Fecha de revisión:** 2026-08-24
+**Normalización previa a SEC.2:** NOR.1 cierra en R7 como fase de definición de estándares; NOR.2 es la siguiente fase y aplicará esos estándares al repositorio existente antes de reanudar SEC.2.
 
+
+<!-- NOR1-R7-CLOSURE:START -->
+## Estado NOR.1 / NOR.2
+
+NOR.1 queda preparado para cierre en R7 después de consolidar los estándares de
+estructura, nombres, documentación, archivos, evidencias, raíz y artefactos
+locales.
+
+La secuencia operativa previa a SEC.2 queda:
+
+1. **NOR.1** — definición y auditoría preparatoria — cierre R7;
+2. **NOR.2** — normalización integral del repositorio — siguiente fase;
+3. **SEC.2** — hardening integral — permanece pausado hasta cerrar NOR.2.
+
+NOR.2 ejecutará los movimientos, renombrados, consolidaciones y retiros que
+NOR.1 deliberadamente no realizó.
+<!-- NOR1-R7-CLOSURE:END -->
 
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado post-MANT.1
@@ -25,7 +42,7 @@ Estado vigente:
 
 Este roadmap describe **estado actual y trabajo futuro**. La evolución detallada ya completada se conserva en `RELEASES.md`, `CHANGELOG.md`, `docs/AUDITORIA_VERSIONADO_PRE_1_0.md`, `docs/LEDGER_REVISIONES_PRE_1_0.md`, `docs/MATRIZ_DECISION_REVISIONES_VER2.md`, `data/revision_ledger_pre_1_0.json` y `docs/archive/`.
 
-VER.2 es un bloque transversal de reconciliación y **no añade un bloque 15** al plan maestro de producto. DEV.2 ya quedó cerrado documentalmente en R4. MANT.1 se trata como checkpoint técnico de mantenibilidad antes de SEC.2 y tampoco añade un bloque funcional de producto. MANT.1 R1 queda como auditoría inicial de alcance, MANT.1 R2 materializa los primeros cambios documentales en scripts y hooks, MANT.1 R3 documenta los YAML de GitHub sin cambiar CI ni formularios y MANT.1 R4 limpia encabezados operativos para que la trazabilidad histórica permanezca en documentación, MANT.1 R5A comenta servicios Python grandes, MANT.1 R5B comenta CSS/plantilla de la guía pública, MANT.1 R5C comenta JavaScript complejo sin cambiar lógica visible y MANT.1 R5D define política/plantillas por extensión con uniformidad de encabezados.
+VER.2 es un bloque transversal de reconciliación y **no añade un bloque 15** al plan maestro de producto. DEV.2 ya quedó cerrado documentalmente en R4. MANT.1 se trata como checkpoint técnico de mantenibilidad antes de SEC.2 y tampoco añade un bloque funcional de producto. MANT.1 R1 queda como auditoría inicial de alcance, MANT.1 R2 conserva la documentación de scripts y hooks antes de SEC.2, MANT.1 R3 documenta los YAML de GitHub sin cambiar CI ni formularios y MANT.1 R4 limpia encabezados operativos para que la trazabilidad histórica permanezca en documentación, MANT.1 R5A comenta servicios Python grandes, MANT.1 R5B comenta CSS/plantilla de la guía pública, MANT.1 R5C comenta JavaScript complejo sin cambiar lógica visible y MANT.1 R5D define política/plantillas por extensión con uniformidad de encabezados.
 
 ## 1. Programa GOV.1 — Auditoría, Gobierno y Trazabilidad Pre-Beta
 
@@ -104,7 +121,7 @@ VER.2 es un bloque transversal de reconciliación y **no añade un bloque 15** a
 ### Pendiente o incompleto
 
 - VER.2 — cerrar reconciliación revision-aware y promover G071 si el gate completo, PR/CI e integración son satisfactorios;
-- MANT.1 — documentación, encabezados operativos y comentarios internos de mantenibilidad en Python, CSS, plantillas y JavaScript antes de SEC.2;
+- NOR.2 — auditoría y normalización integral del repositorio contra los estándares cerrados por NOR.1 antes de SEC.2;
 - hardening integral SEC.2;
 - reconstrucción detallada del CHANGELOG `0.0.1-beta`–`0.0.21-beta` en DOC.2;
 - persistencia voluntaria si permanece dentro del alcance 1.0;

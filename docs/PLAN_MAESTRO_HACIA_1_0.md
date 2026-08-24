@@ -4,9 +4,23 @@
 **Versión base al iniciar el plan:** `0.0.25-beta`
 **Cierre histórico de PLAN.1:** `0.0.26-beta` / `v0.0.26-beta`
 **Versión candidata transversal VER.2:** `0.0.71.01-beta` — G071/E01
-**Fecha:** 2026-08-22
+**Fecha:** 2026-08-24
 **Clasificación:** Producto / Arquitectura / QA / Release
 
+
+<!-- NOR1-R7-CLOSURE:START -->
+## Checkpoint de normalización previo a SEC.2
+
+NOR.1 y NOR.2 son checkpoints técnicos transversales y no agregan bloques
+funcionales al plan de 14 bloques.
+
+- **NOR.1:** define y audita los estándares; cierre previsto en R7.
+- **NOR.2:** aplica los estándares al repositorio completo; siguiente fase.
+- **SEC.2:** no se reanuda hasta cerrar NOR.2.
+
+La separación evita que SEC.2 cree nuevas rutas, archivos o estructuras sobre
+una base cuya nomenclatura y documentación todavía no hayan sido normalizadas.
+<!-- NOR1-R7-CLOSURE:END -->
 
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado post-MANT.1

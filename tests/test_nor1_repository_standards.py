@@ -49,6 +49,35 @@ class TestNOR1Standards(unittest.TestCase):
         self.assertIn("_deliverables/", gitignore)
         self.assertIn("_entregas/", gitignore)
 
+    def test_evidencia_de_cierre_nor1_existe(self):
+        cierre = (
+            ROOT
+            / "docs"
+            / "audits"
+            / "repository"
+            / "repository-standards-closure-nor1-r7.md"
+        )
+        self.assertTrue(cierre.exists())
+
+        contenido = cierre.read_text(encoding="utf-8")
+        self.assertIn("NOR.1 R7", contenido)
+        self.assertIn("NOR.2", contenido)
+        self.assertIn("SEC.2 permanece pausado", contenido)
+
+    def test_documentacion_transversal_declara_transicion_nor1_nor2(self):
+        documentos = [
+            ROOT / "CHANGELOG.md",
+            ROOT / "docs" / "INDICE.md",
+            ROOT / "docs" / "ROADMAP.md",
+            ROOT / "docs" / "VALIDACION.md",
+            ROOT / "docs" / "PLAN_MAESTRO_HACIA_1_0.md",
+        ]
+
+        for documento in documentos:
+            contenido = documento.read_text(encoding="utf-8")
+            self.assertIn("NOR.1", contenido, str(documento))
+            self.assertIn("NOR.2", contenido, str(documento))
+
 
 if __name__ == "__main__":
     unittest.main()
