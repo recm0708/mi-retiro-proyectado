@@ -172,9 +172,11 @@ Evidencia acumulada:
 
 La segunda pasada de VER.2 reconoce dentro de PLAN.1 diez estados aceptados G051–G060: R1, R2A, R2B1, R2B2, R2C, R3A, R3B1, R3B2, R4.1 y R4.2. Esta granularidad revision-aware no crea ni mueve tags históricos.
 
-## 5. Estado posterior a `v0.0.26-beta` y candidato VER.2
+## 5. Estado posterior a `v0.0.26-beta` y candidato VER.2 no publicado
 
 UX.4.6f, UX.4.6g, UX.4.6h y UX.4.6i se desarrollaron y cerraron históricamente **sin publicar un tag adicional y manteniendo `VERSION = 0.0.26-beta`**. VER.2 no inventa releases retroactivas para esos bloques; su posición se reconstruye en el ledger como G061–G070.
+
+`0.0.71.01-beta` permanece como candidato VER.2 G071/E01 no publicado; no sustituye `VERSION = 0.0.26-beta`, no crea un tag formal y solo podría aceptarse después de ledger, validador, gate completo, PR/CI e integración.
 
 La base inmediatamente anterior a VER.2 es:
 
