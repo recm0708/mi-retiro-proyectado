@@ -8,6 +8,20 @@
 **Última revisión documental:** PLAN.1 R2C — 2026-08-20
 **Clasificación:** Técnica / Desarrollo / Privacidad
 
+
+<!-- DOC1-R1-REVISION-MANUAL:START -->
+## Nota de lectura post-MANT.1
+
+La observabilidad de desarrollo conserva su alcance técnico después de MANT.1.
+
+Estado vigente:
+
+- Developer Diagnostics continúa como herramienta local de desarrollo.
+- MANT.1 quedó cerrado operativamente en R7.
+- DOC.1 R1 no cambia telemetría, logging, rutas ni comportamiento de ejecución.
+- Las referencias a bloques siguientes deben leerse desde el estado documental vigente post-MANT.1.
+<!-- DOC1-R1-REVISION-MANUAL:END -->
+
 Mi Retiro Proyectado incorpora un mecanismo de diagnóstico **exclusivo de desarrollo**, desactivado por defecto. Su objetivo es depurar fallos, tiempos y dependencias técnicas sin convertir el log en una segunda base de datos de simulaciones.
 
 ## 1. Activación

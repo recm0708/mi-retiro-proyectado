@@ -5,6 +5,20 @@
 **Rama:** `chore/ver2-revision-ledger`
 **Estado:** SEGUNDA PASADA RESUELTA EN LO CONTABLE; pendiente materialización del ledger y gates.
 
+
+<!-- DOC1-R1-REVISION-MANUAL:START -->
+## Nota de lectura post-MANT.1
+
+Esta matriz sigue siendo evidencia de decisión para VER.2. DOC.1 R1 no cambia sus criterios contables ni convierte candidatos en versiones publicadas.
+
+Estado vigente:
+
+- VER.2 permanece pendiente como reconciliación revision-aware.
+- `0.0.71.01-beta` se mantiene como candidato.
+- `0.0.26-beta` se mantiene como versión canónica.
+- MANT.1 quedó cerrado operativamente en R7.
+<!-- DOC1-R1-REVISION-MANUAL:END -->
+
 ## 1. Regla de decisión
 
 Una revisión consume contador global cuando existe evidencia suficiente de un **estado materialmente distinto y aceptado**. La aceptación puede demostrarse mediante gate técnico satisfactorio, validación manual explícita, integración controlada o combinación de esas señales.

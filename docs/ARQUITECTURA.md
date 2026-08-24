@@ -8,6 +8,24 @@
 **Última actualización de mantenimiento:** MANT.1 R5E — estandarización de nombres de carpetas — 2026-08-23
 **Clasificación:** Técnica / Pública
 
+
+<!-- DOC1-R1-POST-MANT1:START -->
+## Estado arquitectónico post-MANT.1
+
+La arquitectura vigente conserva el mismo alcance funcional y normativo. MANT.1 no cambió fórmulas, motores previsionales, rutas públicas, selectores funcionales, parámetros de `regulations/`, datos ni entregables.
+
+Cierre técnico relevante:
+
+- R5E consolidó nombres de carpetas técnicas.
+- R5F consolidó nombres de archivos técnicos.
+- R5G reforzó la documentación base.
+- R5H auditó nombres técnicos restantes.
+- R6 validó funcionalmente el repositorio después de los renombres.
+- R7 cerró operativamente MANT.1 sobre `main`.
+
+La documentación arquitectónica debe leerse desde esta base: MANT.1 está cerrado y DOC.1 R1 actualiza documentación vigente sin modificar arquitectura de ejecución.
+<!-- DOC1-R1-POST-MANT1:END -->
+
 Mi Retiro Proyectado es una aplicación web local basada en FastAPI, Jinja2 y JavaScript del navegador. La arquitectura separa presentación, contratos de datos, servicios de integración, motores previsionales, parámetros normativos y observabilidad de desarrollo.
 
 MANT.1 R1 dejó la auditoría inicial de mantenibilidad, MANT.1 R2 documenta

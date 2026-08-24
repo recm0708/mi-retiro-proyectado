@@ -9,6 +9,23 @@
 **Revisión transversal:** VER.2 — versionado revision-aware — 2026-08-22
 **Clasificación:** Gobierno / Release / Auditoría
 
+
+<!-- DOC1-R1-POST-MANT1:START -->
+## Estado post-MANT.1
+
+El cierre de MANT.1 R7 no constituye release formal ni cambia la versión canónica.
+
+Para una release posterior se mantiene el criterio vigente:
+
+- `VERSION` debe ser la fuente única.
+- El candidato `0.0.71.01-beta` no debe tratarse como publicado mientras no exista cierre formal de VER.2.
+- El último tag formal vigente sigue siendo `v0.0.26-beta`.
+- MANT.1 se considera cerrado como mantenimiento técnico/documental.
+- DOC.1 R1 actualiza documentación Markdown, pero no habilita por sí solo una release.
+
+Todo release futuro requiere gate completo, PR/CI, actualización documental coherente, tag y evidencia reproducible.
+<!-- DOC1-R1-POST-MANT1:END -->
+
 Este procedimiento complementa `VERSIONING.md`, `RELEASES.md`, `CHANGELOG.md`, `GOVERNANCE.md`, `LICENSE`, `THIRD_PARTY_NOTICES.md`, `docs/LICENCIA_Y_DISTRIBUCION.md`, `docs/AUDITORIA_VERSIONADO_PRE_1_0.md`, `docs/LEDGER_REVISIONES_PRE_1_0.md`, `docs/MATRIZ_DECISION_REVISIONES_VER2.md`, `data/revision_ledger_pre_1_0.json` y `docs/PLAN_MAESTRO_HACIA_1_0.md`.
 
 ## 1. Principio
@@ -38,7 +55,7 @@ Antes de preparar una nueva beta revision-aware debe verificarse que el cambio r
 No consumen un nuevo `G` por sí solos:
 
 - commits separados de implementación, pruebas y documentación del mismo estado;
-- candidatos todavía pendientes de validación manual o automática;
+- candidatos sujetos a validación manual o automática;
 - un intento que falla su gate;
 - el PR, squash, CI o tag que únicamente materializa el mismo estado;
 - un checkpoint que solo consolida estados ya contabilizados y deja pendiente la siguiente revisión funcional.

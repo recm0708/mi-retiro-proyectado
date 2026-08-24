@@ -7,6 +7,24 @@
 **Revisión transversal:** VER.2 — 2026-08-21
 **Clasificación:** Técnica / Auditoría
 
+
+<!-- DOC1-R1-POST-MANT1:START -->
+## Estado post-MANT.1
+
+La trazabilidad vigente incorpora el cierre operativo de MANT.1 R7 y la apertura de DOC.1 R1.
+
+Estado documental actual:
+
+- MANT.1 R5H auditó nombres técnicos restantes.
+- MANT.1 R6 validó funcionalmente el repositorio después de renombres.
+- MANT.1 R7 cerró operativamente el bloque en `main`.
+- DOC.1 R1 audita todos los Markdown y actualiza solo documentación vigente desalineada.
+- `VERSION` no cambia y permanece en `0.0.26-beta`.
+- VER.2 permanece como reconciliación/candidato pendiente, no como versión publicada.
+
+Esta matriz debe distinguir trazabilidad histórica de estado vigente.
+<!-- DOC1-R1-POST-MANT1:END -->
+
 Esta matriz conecta contratos críticos del producto con su fuente, decisión, implementación y evidencia de prueba. No sustituye `ESPECIFICACION_FUNCIONAL.md` ni pretende afirmar cobertura granular completa de todos los RF históricos.
 
 ## 1. Convención

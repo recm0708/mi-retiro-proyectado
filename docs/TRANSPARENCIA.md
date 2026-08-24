@@ -8,6 +8,20 @@
 **Revisión transversal vigente:** UX.4.6i — cierre de guía pública de cálculo — 2026-08-21
 **Clasificación:** Pública / Auditoría
 
+
+<!-- DOC1-R1-REVISION-MANUAL:START -->
+## Nota de lectura post-MANT.1
+
+La transparencia del producto se interpreta desde el cierre operativo de MANT.1 R7 y la auditoría documental DOC.1 R1.
+
+Estado vigente:
+
+- MANT.1 está cerrado.
+- DOC.1 R1 actualiza documentación Markdown vigente.
+- VER.2 sigue pendiente como reconciliación/candidato, no como versión publicada.
+- `VERSION` permanece en `0.0.26-beta`.
+<!-- DOC1-R1-REVISION-MANUAL:END -->
+
 Mi Retiro Proyectado es una herramienta independiente de estimación previsional. Este documento delimita qué puede afirmarse sobre el producto y qué debe permanecer explícitamente como aproximación, limitación o pendiente.
 
 ## 1. Qué es

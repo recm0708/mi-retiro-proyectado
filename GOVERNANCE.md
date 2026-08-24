@@ -5,6 +5,22 @@
 **Fecha de adopción:** 2026-08-18
 **Última revisión:** PLAN.1 / ADR-168 — 2026-08-20
 
+
+<!-- DOC1-R1-POST-MANT1:START -->
+## Estado de gobierno post-MANT.1
+
+El gobierno vigente conserva la separación entre estado canónico, evidencia histórica y candidatos pendientes.
+
+Estado vigente:
+
+- `VERSION` sigue siendo la fuente única de versión.
+- `0.0.26-beta` sigue siendo la versión canónica vigente.
+- `v0.0.26-beta` sigue siendo el último tag formal.
+- `0.0.71.01-beta` sigue siendo candidato VER.2, no versión publicada.
+- MANT.1 quedó cerrado operativamente en R7.
+- DOC.1 R1 queda activo como auditoría documental Markdown post-MANT.1.
+<!-- DOC1-R1-POST-MANT1:END -->
+
 ## 1. Propósito
 
 Este documento define quién mantiene el proyecto, cómo se adoptan decisiones y qué controles mínimos deben cumplirse antes de integrar cambios. Su finalidad es facilitar mantenimiento, revisión independiente y auditoría.

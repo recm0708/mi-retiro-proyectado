@@ -7,6 +7,22 @@
 **Fecha de revisión:** 2026-08-22
 **Mantenimiento técnico en curso:** MANT.1 R5E — estandarización de nombres de carpetas antes de SEC.2; MANT.1 R5D conserva la política, plantillas y uniformidad por extensión; MANT.1 R1 conserva la auditoría inicial, MANT.1 R2 conserva la documentación de scripts y hooks antes de SEC.2, MANT.1 R3 conserva encabezados funcionales para YAML de GitHub, MANT.1 R4 limpia encabezados operativos, MANT.1 R5A documenta servicios Python grandes, MANT.1 R5B comenta CSS/plantilla y MANT.1 R5C comenta JavaScript complejo
 
+
+<!-- DOC1-R1-POST-MANT1:START -->
+## Estado post-MANT.1
+
+MANT.1 quedó cerrado operativamente en R7 mediante PR #55 y commit squash `57078f2`.
+
+Estado vigente:
+
+- `VERSION` continúa en `0.0.26-beta`.
+- `v0.0.26-beta` continúa siendo el tag formal vigente.
+- `0.0.71.01-beta` continúa reservado como candidato de reconciliación VER.2; no es versión publicada ni tag formal.
+- MANT.1 queda cerrado después de R5H, R6 y R7.
+- DOC.1 R1 queda activo para auditar y actualizar la documentación Markdown vigente posterior a MANT.1.
+- La primera versión oficial objetivo sigue siendo `1.0.0.0` con `Build 000001`, sujeta a los gates del plan maestro.
+<!-- DOC1-R1-POST-MANT1:END -->
+
 Este roadmap describe **estado actual y trabajo futuro**. La evolución detallada ya completada se conserva en `RELEASES.md`, `CHANGELOG.md`, `docs/AUDITORIA_VERSIONADO_PRE_1_0.md`, `docs/LEDGER_REVISIONES_PRE_1_0.md`, `docs/MATRIZ_DECISION_REVISIONES_VER2.md`, `data/revision_ledger_pre_1_0.json` y `docs/archive/`.
 
 VER.2 es un bloque transversal de reconciliación y **no añade un bloque 15** al plan maestro de producto. DEV.2 ya quedó cerrado documentalmente en R4. MANT.1 se trata como checkpoint técnico de mantenibilidad antes de SEC.2 y tampoco añade un bloque funcional de producto. MANT.1 R1 queda como auditoría inicial de alcance, MANT.1 R2 materializa los primeros cambios documentales en scripts y hooks, MANT.1 R3 documenta los YAML de GitHub sin cambiar CI ni formularios y MANT.1 R4 limpia encabezados operativos para que la trazabilidad histórica permanezca en documentación, MANT.1 R5A comenta servicios Python grandes, MANT.1 R5B comenta CSS/plantilla de la guía pública, MANT.1 R5C comenta JavaScript complejo sin cambiar lógica visible y MANT.1 R5D define política/plantillas por extensión con uniformidad de encabezados.
@@ -139,7 +155,7 @@ No existe una una revisión intermedia no demostrada entre UX.4.6i R1 y R1.2 dem
 
 **PLAN.1:** cerrado formalmente en `0.0.26-beta` con **720 pruebas en `OK`** y tag firmado `v0.0.26-beta`. La segunda auditoría reconoce diez estados aceptados G051–G060 dentro de su evolución.
 
-**VER.2:** bloque transversal activo. La base anterior al cambio contiene **70 estados aceptados (G001–G070)**. El candidato `0.0.71.01-beta` representa G071/E01 y solo se acepta después del gate completo, PR/CI e integración.
+**VER.2:** bloque transversal en reconciliación pendiente. La base anterior al cambio contiene **70 estados aceptados (G001–G070)**. El candidato `0.0.71.01-beta` representa G071/E01 y solo se acepta después del gate completo, PR/CI e integración.
 
 **Checkpoint técnico actual:** MANT.1 R5D — política, plantillas y uniformidad por extensión antes de SEC.2.
 

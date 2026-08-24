@@ -7,6 +7,20 @@
 **Revisión de mantenimiento:** MANT.1 R5E — estandarización de nombres de carpetas — 2026-08-23
 **Clasificación:** Técnica / Mantenibilidad
 
+
+<!-- DOC1-R1-REVISION-MANUAL:START -->
+## Nota de lectura post-MANT.1
+
+Este estándar queda vigente después del cierre de MANT.1. Las referencias a MANT.1 explican su origen técnico y no implican que el bloque siga abierto.
+
+Estado vigente:
+
+- MANT.1 está cerrado.
+- Los criterios de comentarios, encabezados, estructura y trazabilidad siguen aplicando.
+- DOC.1 R1 solo actualiza documentación Markdown vigente.
+- No se modifican reglas de cálculo, normativa ni versión.
+<!-- DOC1-R1-REVISION-MANUAL:END -->
+
 Este documento define el patrón permanente para documentar código en Mi Retiro
 Proyectado. Su objetivo es permitir que otro desarrollador entienda intención,
 contratos, límites y dependencias sin convertir el código en una narración línea

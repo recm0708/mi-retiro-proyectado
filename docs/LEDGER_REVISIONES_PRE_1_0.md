@@ -5,6 +5,20 @@
 **Contador aceptado en la base:** **G070**
 **Siguiente Global disponible si VER.2 supera su gate:** **G071**
 
+
+<!-- DOC1-R1-REVISION-MANUAL:START -->
+## Nota de lectura post-MANT.1
+
+Este ledger conserva la reconciliación pre-1.0 y la relación entre estados aceptados, candidatos y evidencia histórica.
+
+Estado vigente:
+
+- `0.0.71.01-beta` sigue siendo candidato VER.2, no versión publicada.
+- `0.0.26-beta` sigue siendo la versión canónica en `VERSION`.
+- MANT.1 R7 quedó integrado en `main` como cierre operativo posterior.
+- DOC.1 R1 no modifica el contador de versión; solo sincroniza documentación Markdown.
+<!-- DOC1-R1-REVISION-MANUAL:END -->
+
 Este ledger registra los estados aceptados reconstruidos durante VER.2. La regla contable y las exclusiones se documentan en `MATRIZ_DECISION_REVISIONES_VER2.md` y `AUDITORIA_VERSIONADO_PRE_1_0.md`.
 
 Los identificadores revision-aware son una reconstrucción de auditoría. **No existieron históricamente y no autorizan mover, recrear ni renombrar los tags `v0.0.1-beta`–`v0.0.26-beta`.**

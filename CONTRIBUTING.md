@@ -1,5 +1,20 @@
 # Guía de contribución
 
+
+<!-- DOC1-R1-POST-MANT1:START -->
+## Estado de contribución post-MANT.1
+
+La contribución al proyecto debe leerse desde la línea base documental posterior a MANT.1 R7.
+
+Estado vigente:
+
+- MANT.1 quedó cerrado operativamente en R7.
+- DOC.1 R1 está activo para sincronizar documentación Markdown vigente.
+- `VERSION` permanece en `0.0.26-beta`.
+- VER.2 permanece como reconciliación/candidato pendiente, no como versión publicada.
+- Todo cambio debe mantener sincronizados código, pruebas, documentación y evidencia aplicable.
+<!-- DOC1-R1-POST-MANT1:END -->
+
 Este documento define el flujo mínimo para modificar Mi Retiro Proyectado sin perder trazabilidad técnica, normativa, documental o de pruebas.
 
 ## 1. Antes de comenzar
