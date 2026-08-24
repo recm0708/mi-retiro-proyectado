@@ -109,10 +109,10 @@ class TestMant1R5CComentariosJSApp(unittest.TestCase):
     def test_documentacion_transversal_registra_r5c_sin_promover_version(self):
         documentos = (
             "CHANGELOG.md",
-            "docs/ESTANDAR_CODIGO_Y_COMENTARIOS.md",
-            "docs/VALIDACION.md",
-            "docs/ARQUITECTURA.md",
-            "docs/ROADMAP.md",
+            "docs/standards/code-and-comments.md",
+            "docs/operations/validation.md",
+            "docs/architecture/system-architecture.md",
+            "docs/governance/roadmap.md",
         )
 
         for ruta in documentos:

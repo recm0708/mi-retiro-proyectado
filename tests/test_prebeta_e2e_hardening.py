@@ -372,7 +372,7 @@ class TestPreBetaE2EHardening(unittest.TestCase):
         self.assertIn('- patch', config)
 
     def test_documentacion_de_seguridad_y_privacidad_esta_versionada(self):
-        documento = ROOT / "docs/SEGURIDAD_PRIVACIDAD.md"
+        documento = ROOT / "docs/security/security-and-privacy.md"
         self.assertTrue(documento.exists())
         texto = documento.read_text(encoding="utf-8")
         self.assertIn("se leen en memoria", texto)

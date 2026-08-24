@@ -31,7 +31,7 @@ class TestUx46eR91CandidatoCierre(unittest.TestCase):
         self.assertIn("**Bloque transversal activo:** VER.2", texto)
         self.assertIn("**Siguiente bloque funcional:** DEV.2", texto)
 
-        indice = (DOCS / "INDICE.md").read_text(encoding="utf-8")
+        indice = (DOCS / "README.md").read_text(encoding="utf-8")
         self.assertIn(f"**Versión de aplicación:** `{version}`", indice)
         self.assertIn("UX.4.6e R9.2", indice)
         self.assertIn("`v0.0.25-beta`", indice)
@@ -50,14 +50,14 @@ class TestUx46eR91CandidatoCierre(unittest.TestCase):
         self.assertIn("## [0.0.24-beta] — 2026-08-18", texto)
 
     def test_roadmap_preserva_r9_y_declara_cierre_ux46e(self):
-        texto = (DOCS / "ROADMAP.md").read_text(encoding="utf-8")
+        texto = (DOCS / "governance/roadmap.md").read_text(encoding="utf-8")
         self.assertIn("R9.1 se conserva como candidato local histórico", texto)
         self.assertIn("R9.2 — cierre formal mediante PR #21/#22", texto)
         self.assertIn("[x] **UX.4.6e — Estandarización técnica", texto)
         self.assertIn("DEV.2 — Centro de desarrollo", texto)
 
     def test_validacion_registra_gate_local_de_660_cumplido(self):
-        texto = (DOCS / "VALIDACION.md").read_text(encoding="utf-8")
+        texto = (DOCS / "operations/validation.md").read_text(encoding="utf-8")
         self.assertIn("Gate R9.1 — candidato `0.0.25-beta`", texto)
         self.assertIn("**652 pruebas en `OK`**", texto)
         self.assertIn("**8 regresiones específicas**", texto)

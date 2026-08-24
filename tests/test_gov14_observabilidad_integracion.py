@@ -191,7 +191,7 @@ class TestGov14ObservabilidadIntegracion(unittest.TestCase):
 
     def test_gitignore_y_documentacion_protegen_logs_locales(self):
         gitignore = (ROOT / ".gitignore").read_text(encoding="utf-8")
-        documento = (ROOT / "docs/OBSERVABILIDAD_LOGS.md").read_text(
+        documento = (ROOT / "docs/operations/observability-and-logs.md").read_text(
             encoding="utf-8"
         )
         self.assertIn("logs/", gitignore)
@@ -202,18 +202,18 @@ class TestGov14ObservabilidadIntegracion(unittest.TestCase):
         self.assertIn("**Estado:** Vigente — GOV.1.4 cerrado", documento)
         self.assertIn("487/487", documento)
 
-        roadmap = (ROOT / "docs/ROADMAP.md").read_text(encoding="utf-8")
-        indice = (ROOT / "docs/INDICE.md").read_text(encoding="utf-8")
-        seguridad = (ROOT / "docs/SEGURIDAD_PRIVACIDAD.md").read_text(
+        roadmap = (ROOT / "docs/governance/roadmap.md").read_text(encoding="utf-8")
+        indice = (ROOT / "docs/README.md").read_text(encoding="utf-8")
+        seguridad = (ROOT / "docs/security/security-and-privacy.md").read_text(
             encoding="utf-8"
         )
-        transparencia = (ROOT / "docs/TRANSPARENCIA.md").read_text(
+        transparencia = (ROOT / "docs/product/transparency.md").read_text(
             encoding="utf-8"
         )
-        limitaciones = (ROOT / "docs/LIMITACIONES_CONOCIDAS.md").read_text(
+        limitaciones = (ROOT / "docs/product/known-limitations.md").read_text(
             encoding="utf-8"
         )
-        validacion = (ROOT / "docs/VALIDACION.md").read_text(
+        validacion = (ROOT / "docs/operations/validation.md").read_text(
             encoding="utf-8"
         )
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
@@ -222,7 +222,7 @@ class TestGov14ObservabilidadIntegracion(unittest.TestCase):
             "- [x] **GOV.1.4 — Observabilidad y Developer Diagnostics**",
             roadmap,
         )
-        self.assertIn("(OBSERVABILIDAD_LOGS.md)", indice)
+        self.assertIn("(operations/observability-and-logs.md)", indice)
         self.assertIn("Developer Diagnostics", seguridad)
         self.assertIn("no es analítica de producto", transparencia)
         self.assertNotIn(

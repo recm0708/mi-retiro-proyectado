@@ -70,7 +70,7 @@ class TestGovFirmaGit(unittest.TestCase):
         self.assertIn("git verify-commit", con)
 
     def test_proceso_release_verifica_commit_y_tag_firmados(self):
-        texto = (DOCS / "PROCESO_RELEASE.md").read_text(encoding="utf-8")
+        texto = (DOCS / "operations/release-process.md").read_text(encoding="utf-8")
         self.assertIn("git verify-commit", texto)
         self.assertIn("git tag -s", texto)
         self.assertIn("git tag -v", texto)
@@ -98,7 +98,7 @@ class TestGovFirmaGit(unittest.TestCase):
         self.assertIn("23/23 targets remotos", texto)
 
     def test_adr159_documenta_migracion_y_adr158_sustitucion_parcial(self):
-        texto = (DOCS / "DECISIONES.md").read_text(encoding="utf-8")
+        texto = (DOCS / "decisions/README.md").read_text(encoding="utf-8")
         self.assertIn("## ADR-159 —", texto)
         self.assertIn("Parcialmente sustituida por ADR-159", texto)
         ids = [int(x) for x in re.findall(r"(?m)^## ADR-(\d{3})\s+—", texto)]
@@ -110,7 +110,7 @@ class TestGovFirmaGit(unittest.TestCase):
         self.assertEqual(list(range(1, 160)), ids[:159])
 
     def test_roadmap_declara_version_canonica_y_prebloque_firma(self):
-        texto = (DOCS / "ROADMAP.md").read_text(encoding="utf-8")
+        texto = (DOCS / "governance/roadmap.md").read_text(encoding="utf-8")
         self.assertIn(f"**Versión de aplicación:** `{self.version}`", texto)
         self.assertIn("Firma e integridad Git/GitHub", texto)
         self.assertIn("- [x] primer commit nuevo firmado y verificado por GitHub;", texto)
@@ -129,9 +129,9 @@ class TestGovFirmaGit(unittest.TestCase):
         self.assertIn("0 Pull Requests abiertos", migracion)
 
     def test_indice_changelog_y_validacion_registran_firma(self):
-        indice = (DOCS / "INDICE.md").read_text(encoding="utf-8")
+        indice = (DOCS / "README.md").read_text(encoding="utf-8")
         changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
-        validacion = (DOCS / "VALIDACION.md").read_text(encoding="utf-8")
+        validacion = (DOCS / "operations/validation.md").read_text(encoding="utf-8")
         self.assertIn("MIGRACION_FIRMAS_GIT_2026-08-17.md", indice)
         self.assertIn(".github/allowed_signers", indice)
         self.assertIn("firma SSH", changelog)
@@ -144,8 +144,8 @@ class TestGovFirmaGit(unittest.TestCase):
 
         for ruta in (
             ROOT / "CONTRIBUTING.md",
-            DOCS / "PROCESO_RELEASE.md",
-            DOCS / "VALIDACION.md",
+            DOCS / "operations/release-process.md",
+            DOCS / "operations/validation.md",
         ):
             contenido = ruta.read_text(encoding="utf-8")
             controles = [

@@ -10,7 +10,7 @@ DOCS = ROOT / "docs"
 TESTS = ROOT / "tests"
 
 DOCUMENTO_R7 = DOCS / "CIERRE_OPERATIVO_POST_AUDITORIA_R7.md"
-INDICE = DOCS / "INDICE.md"
+INDICE = DOCS / "README.md"
 
 
 def _leer(ruta: Path) -> str:

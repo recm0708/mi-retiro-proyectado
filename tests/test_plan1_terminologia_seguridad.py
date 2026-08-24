@@ -28,14 +28,14 @@ class TestPlan1TerminologiaSeguridad(unittest.TestCase):
         self.assertIn("no ofrece un SLA contractual", texto)
 
     def test_seguridad_privacidad_distingue_revision_actual_y_base_historica(self):
-        texto = (DOCS / "SEGURIDAD_PRIVACIDAD.md").read_text(encoding="utf-8")
+        texto = (DOCS / "security/security-and-privacy.md").read_text(encoding="utf-8")
         self.assertIn(f"**Versión de aplicación revisada:** `{self.version}`", texto)
         self.assertIn("**Versión base histórica preservada:** `0.0.23-beta`", texto)
         self.assertIn("Pendiente antes de la primera versión oficial", texto)
         self.assertNotIn("Pendiente antes de beta pública de producto", texto)
 
     def test_evaluacion_terceros_actualiza_gate_sin_borrar_gov15(self):
-        texto = (DOCS / "EVALUACION_TERCEROS_DESPLIEGUE.md").read_text(
+        texto = (DOCS / "security/third-party-deployment-assessment.md").read_text(
             encoding="utf-8"
         )
         self.assertIn(f"**Versión de aplicación revisada:** `{self.version}`", texto)
@@ -48,13 +48,13 @@ class TestPlan1TerminologiaSeguridad(unittest.TestCase):
         for ruta in (
             ROOT / "SECURITY.md",
             ROOT / "SUPPORT.md",
-            DOCS / "SEGURIDAD_PRIVACIDAD.md",
+            DOCS / "security/security-and-privacy.md",
         ):
             with self.subTest(ruta=ruta.name):
                 texto = ruta.read_text(encoding="utf-8").casefold()
                 self.assertNotIn("beta pública", texto)
 
-        evaluacion = (DOCS / "EVALUACION_TERCEROS_DESPLIEGUE.md").read_text(
+        evaluacion = (DOCS / "security/third-party-deployment-assessment.md").read_text(
             encoding="utf-8"
         )
         self.assertIn(
@@ -63,7 +63,7 @@ class TestPlan1TerminologiaSeguridad(unittest.TestCase):
         )
 
     def test_validacion_conserva_cierre_r3a(self):
-        texto = (DOCS / "VALIDACION.md").read_text(encoding="utf-8")
+        texto = (DOCS / "operations/validation.md").read_text(encoding="utf-8")
         self.assertIn("cerró con **689 pruebas en `OK`**", texto)
         self.assertIn("cerró con **695 pruebas en `OK`**", texto)
         self.assertTrue(self.version)

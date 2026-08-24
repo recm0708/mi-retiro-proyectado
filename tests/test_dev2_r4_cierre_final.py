@@ -17,7 +17,7 @@ class TestDev2R4CierreFinal(unittest.TestCase):
         return (ROOT / ruta).read_text(encoding="utf-8")
 
     def test_dev2_queda_cerrado_sin_promover_version(self):
-        documento = self._leer("docs/DEV2_CENTRO_DESARROLLO.md")
+        documento = self._leer("docs/architecture/development-center.md")
 
         self.assertIn("**Estado:** DEV.2 cerrado documentalmente en R4.", documento)
         self.assertIn("**Estado:** R1 integrado en `main` mediante PR #37.", documento)
@@ -36,9 +36,9 @@ class TestDev2R4CierreFinal(unittest.TestCase):
         superficies = {
             "README.md": self._leer("README.md"),
             "CHANGELOG.md": self._leer("CHANGELOG.md"),
-            "docs/ARQUITECTURA.md": self._leer("docs/ARQUITECTURA.md"),
-            "docs/ADR_179_VERSIONADO_REVISION_AWARE.md": self._leer(
-                "docs/ADR_179_VERSIONADO_REVISION_AWARE.md"
+            "docs/architecture/system-architecture.md": self._leer("docs/architecture/system-architecture.md"),
+            "docs/decisions/adr-179-revision-aware-versioning.md": self._leer(
+                "docs/decisions/adr-179-revision-aware-versioning.md"
             ),
         }
         combinado = "\n".join(superficies.values())
@@ -54,11 +54,11 @@ class TestDev2R4CierreFinal(unittest.TestCase):
 
     def test_readme_refleja_dev2_cerrado_y_evidencia_preserva_su_historia(self):
         readme = self._leer("README.md")
-        documento = self._leer("docs/DEV2_CENTRO_DESARROLLO.md")
+        documento = self._leer("docs/architecture/development-center.md")
         changelog = self._leer("CHANGELOG.md")
 
         self.assertIn("**DEV.2:** cerrado.", readme)
-        self.assertIn("**NOR.2 R3:** activo", readme)
+        self.assertIn("**NOR.2 R4:** activo", readme)
         self.assertIn("**SEC.2:** pausado", readme)
         self.assertIn("DEV.2 cerrado documentalmente en R4", documento)
         self.assertIn("### DEV.2 — cierre del Centro de desarrollo", changelog)
@@ -66,7 +66,7 @@ class TestDev2R4CierreFinal(unittest.TestCase):
         self.assertIn("deja VER.2 como siguiente cierre transversal", changelog)
 
     def test_arquitectura_conserva_alcance_tecnico_sin_rutas_publicas_nuevas(self):
-        arquitectura = self._leer("docs/ARQUITECTURA.md")
+        arquitectura = self._leer("docs/architecture/system-architecture.md")
 
         self.assertIn("**Última actualización técnica:** DEV.2 R4", arquitectura)
         self.assertIn("/dev/centro-desarrollo", arquitectura)

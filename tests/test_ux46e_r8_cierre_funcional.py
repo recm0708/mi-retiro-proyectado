@@ -13,7 +13,7 @@ class TestUx46eR8CierreFuncional(unittest.TestCase):
     """Protege el contrato aceptado tras la validación manual de Pasos 1–3."""
 
     def test_adr_167_es_consecutiva_y_esta_indexada(self):
-        texto = (DOCS / "DECISIONES.md").read_text(encoding="utf-8")
+        texto = (DOCS / "decisions/README.md").read_text(encoding="utf-8")
         ids = [int(x) for x in re.findall(r"(?m)^## ADR-(\d{3})\s+—", texto)]
         indice = [int(x) for x in re.findall(r"(?m)^\| ADR-(\d{3}) \|", texto)]
         # ADR-001..ADR-167 son la evidencia histórica del cierre R8.
@@ -29,27 +29,27 @@ class TestUx46eR8CierreFuncional(unittest.TestCase):
         )
 
     def test_adr_167_sustituye_bloqueo_sin_anular_no_reduccion_silenciosa(self):
-        texto = (DOCS / "DECISIONES.md").read_text(encoding="utf-8")
+        texto = (DOCS / "decisions/README.md").read_text(encoding="utf-8")
         self.assertIn("## ADR-167 — Los datos documentales confirmados son editables", texto)
         self.assertIn("ADR-088, ADR-103, ADR-105 y ADR-106", texto)
         self.assertIn("ADR-156 continúa vigente", texto)
         self.assertIn("no reduce silenciosamente", texto)
 
     def test_especificacion_permite_editar_excluir_y_reincluir(self):
-        texto = (DOCS / "ESPECIFICACION_FUNCIONAL.md").read_text(encoding="utf-8")
+        texto = (DOCS / "product/functional-specification.md").read_text(encoding="utf-8")
         self.assertIn("la fotografía original permanecen separadas", texto)
         self.assertIn("excluir o reincluir explícitamente un período detectado", texto)
         self.assertIn("Excluido por ti", texto)
 
     def test_gestion_datos_preserva_original_y_copia_de_trabajo(self):
-        texto = (DOCS / "GESTION_DATOS_SIMULACION.md").read_text(encoding="utf-8")
+        texto = (DOCS / "product/simulation-data-management.md").read_text(encoding="utf-8")
         self.assertIn("Procedencia editable y referencias documentales", texto)
         self.assertIn("fotografía original", texto)
         self.assertIn("copia de trabajo", texto)
         self.assertIn("Excluido por ti", texto)
 
     def test_modelo_documenta_metadata_frontend_sin_cambiar_pydantic(self):
-        texto = (DOCS / "MODELO_DE_DATOS.md").read_text(encoding="utf-8")
+        texto = (DOCS / "architecture/data-model.md").read_text(encoding="utf-8")
         for esperado in (
             "referencia_mi_retiro_seguro_original",
             "ficha_digital_importada_original",
@@ -71,7 +71,7 @@ class TestUx46eR8CierreFuncional(unittest.TestCase):
             self.assertIn(esperado, texto)
 
     def test_roadmap_y_readme_marcan_r8_cerrada_y_r9_en_cierre(self):
-        texto = (DOCS / "ROADMAP.md").read_text(encoding="utf-8")
+        texto = (DOCS / "governance/roadmap.md").read_text(encoding="utf-8")
         self.assertIn("- [x] R8 — prueba funcional", texto)
         self.assertIn("- [x] R9 — cierre técnico y publicación del hito;", texto)
         self.assertIn(
@@ -91,7 +91,7 @@ class TestUx46eR8CierreFuncional(unittest.TestCase):
         self.assertNotIn("**Bloque activo:** UX.4.6e", readme)
 
     def test_validacion_define_gate_documental_652_y_preserva_base_r8(self):
-        texto = (DOCS / "VALIDACION.md").read_text(encoding="utf-8")
+        texto = (DOCS / "operations/validation.md").read_text(encoding="utf-8")
         self.assertIn("**644 pruebas en `OK`**", texto)
         self.assertIn("**8 regresiones adicionales**", texto)
         self.assertIn("**652 pruebas en `OK`**", texto)

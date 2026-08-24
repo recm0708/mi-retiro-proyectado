@@ -5,7 +5,7 @@ import unittest
 
 
 ROOT = Path(__file__).resolve().parents[1]
-DOC = ROOT / "docs" / "MODELO_AMENAZAS.md"
+DOC = ROOT / "docs" / "security/threat-model.md"
 
 
 class TestGov15ModeloAmenazasR1(unittest.TestCase):

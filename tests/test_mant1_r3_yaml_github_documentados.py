@@ -99,10 +99,10 @@ class TestMant1R3YamlGithubDocumentados(unittest.TestCase):
 
         rutas = (
             "CHANGELOG.md",
-            "docs/ESTANDAR_CODIGO_Y_COMENTARIOS.md",
-            "docs/VALIDACION.md",
-            "docs/ARQUITECTURA.md",
-            "docs/ROADMAP.md",
+            "docs/standards/code-and-comments.md",
+            "docs/operations/validation.md",
+            "docs/architecture/system-architecture.md",
+            "docs/governance/roadmap.md",
         )
         for ruta in rutas:
             texto = self._leer(ruta)
@@ -119,7 +119,7 @@ class TestMant1R3YamlGithubDocumentados(unittest.TestCase):
         self.assertEqual("0.0.71.01-beta", version)
 
         changelog = self._leer("CHANGELOG.md")
-        roadmap = self._leer("docs/ROADMAP.md")
+        roadmap = self._leer("docs/governance/roadmap.md")
         seccion_r3 = changelog.split("### MANT.1 R3", 1)[1].split("### MANT.1 R2", 1)[0]
 
         self.assertIn("antes de SEC.2", seccion_r3)

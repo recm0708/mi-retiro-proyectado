@@ -12,10 +12,10 @@ CSS = ROOT / "app" / "static" / "css" / "calculation-guide.css"
 TEMPLATE = ROOT / "app" / "templates" / "calculation_guide.html"
 DOCS = (
     ROOT / "CHANGELOG.md",
-    ROOT / "docs" / "ESTANDAR_CODIGO_Y_COMENTARIOS.md",
-    ROOT / "docs" / "VALIDACION.md",
-    ROOT / "docs" / "ARQUITECTURA.md",
-    ROOT / "docs" / "ROADMAP.md",
+    ROOT / "docs" / "standards/code-and-comments.md",
+    ROOT / "docs" / "operations/validation.md",
+    ROOT / "docs" / "architecture/system-architecture.md",
+    ROOT / "docs" / "governance/roadmap.md",
 )
 
 

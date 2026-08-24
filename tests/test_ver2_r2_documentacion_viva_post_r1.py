@@ -9,10 +9,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
-ARQUITECTURA = ROOT / "docs" / "ARQUITECTURA.md"
+ARQUITECTURA = ROOT / "docs" / "architecture/system-architecture.md"
 RELEASES = ROOT / "RELEASES.md"
 README = ROOT / "README.md"
-INDICE = ROOT / "docs" / "INDICE.md"
+INDICE = ROOT / "docs" / "README.md"
 ANALISIS = ROOT / "docs" / "VER2_R2_ANALISIS_CONTRADICCIONES_POST_R1.md"
 PROPUESTA = ROOT / "docs" / "VER2_R2_PROPUESTA_CORRECCION_DOCUMENTACION_VIVA.md"
 CIERRE = ROOT / "docs" / "VER2_R2_CIERRE_DOCUMENTACION_VIVA_POST_R1.md"

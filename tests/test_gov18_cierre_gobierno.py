@@ -26,12 +26,12 @@ class TestGov18CierreGobierno(unittest.TestCase):
         cierre = (DOCS / "CIERRE_GOV1.md").read_text(encoding="utf-8")
 
         self.assertIn("**GOV.1:** cerrado.", readme)
-        self.assertIn("**NOR.2 R3:** activo", readme)
+        self.assertIn("**NOR.2 R4:** activo", readme)
         self.assertIn("GOV.1.8", cierre)
         self.assertIn("0.1.0-beta.1", cierre)
 
     def test_roadmap_cierra_gov18_y_preserva_reanudacion_ux46e(self):
-        texto = (DOCS / "ROADMAP.md").read_text(encoding="utf-8")
+        texto = (DOCS / "governance/roadmap.md").read_text(encoding="utf-8")
         for bloque in range(1, 9):
             self.assertIn(f"**GOV.1.{bloque}", texto)
         self.assertIn(
@@ -135,14 +135,14 @@ class TestGov18CierreGobierno(unittest.TestCase):
             ROOT / "CHANGELOG.md",
             ROOT / "RELEASES.md",
             ROOT / "SECURITY.md",
-            DOCS / "ROADMAP.md",
-            DOCS / "VALIDACION.md",
-            DOCS / "INDICE.md",
+            DOCS / "governance/roadmap.md",
+            DOCS / "operations/validation.md",
+            DOCS / "README.md",
             DOCS / "AUDITORIA_GITHUB.md",
             DOCS / "CIERRE_GOV1.md",
             ROOT / "LICENSE",
             ROOT / "THIRD_PARTY_NOTICES.md",
-            DOCS / "LICENCIA_Y_DISTRIBUCION.md",
+            DOCS / "governance/licensing-and-distribution.md",
         )
         for path in archivos:
             texto = path.read_text(encoding="utf-8")
@@ -156,7 +156,7 @@ class TestGov18CierreGobierno(unittest.TestCase):
         for path in (
             ROOT / "LICENSE",
             ROOT / "THIRD_PARTY_NOTICES.md",
-            DOCS / "LICENCIA_Y_DISTRIBUCION.md",
+            DOCS / "governance/licensing-and-distribution.md",
         ):
             self.assertNotIn(r"\n", path.read_text(encoding="utf-8"))
 

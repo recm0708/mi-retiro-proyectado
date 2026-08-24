@@ -66,8 +66,8 @@ class TestPlan1R4CandidatoCierre(unittest.TestCase):
         self.assertIn("7affa00e2530aeede066c10ecfee8c6dbd49b10b", texto)
 
     def test_roadmap_y_plan_maestro_preservan_r4_1_r4_2(self):
-        roadmap = (DOCS / "ROADMAP.md").read_text(encoding="utf-8")
-        plan = (DOCS / "PLAN_MAESTRO_HACIA_1_0.md").read_text(encoding="utf-8")
+        roadmap = (DOCS / "governance/roadmap.md").read_text(encoding="utf-8")
+        plan = (DOCS / "governance/master-plan-to-1-0.md").read_text(encoding="utf-8")
         self.assertIn("R4.1 — candidato local `0.0.26-beta`", roadmap)
         self.assertIn("**720 pruebas en `OK`**", roadmap)
         self.assertIn("R4.2 — PR #23/#24", roadmap)
@@ -77,7 +77,7 @@ class TestPlan1R4CandidatoCierre(unittest.TestCase):
         self.assertIn("`v0.0.26-beta`", plan)
 
     def test_validacion_preserva_cierre_posttag(self):
-        texto = (DOCS / "VALIDACION.md").read_text(encoding="utf-8")
+        texto = (DOCS / "operations/validation.md").read_text(encoding="utf-8")
         self.assertIn("cerró con **710 pruebas en `OK`**", texto)
         self.assertIn("cerró localmente con **720 pruebas en `OK`**", texto)
         self.assertIn("PR #24", texto)
@@ -109,13 +109,13 @@ class TestPlan1R4CandidatoCierre(unittest.TestCase):
             compile(transversal, str(transversal_path), "exec")
 
     def test_indice_preserva_auditoria_y_declara_version_actual(self):
-        texto = (DOCS / "INDICE.md").read_text(encoding="utf-8")
+        texto = (DOCS / "README.md").read_text(encoding="utf-8")
         self.assertIn("AUDITORIA_PLAN1_R4_2026-08-20.md", texto)
         self.assertIn("UX.4.6e R9.2", texto)
         self.assertIn("`v0.0.25-beta`", texto)
         self.assertIn(f"**Versión de aplicación:** `{self.version}`", texto)
         self.assertIn("AUDITORIA_VERSIONADO_PRE_1_0.md", texto)
-        self.assertIn("LEDGER_REVISIONES_PRE_1_0.md", texto)
+        self.assertIn("governance/pre-1-0-revision-ledger.md", texto)
 
 
 if __name__ == "__main__":

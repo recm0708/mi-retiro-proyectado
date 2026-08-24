@@ -65,19 +65,28 @@ class TestNOR1Standards(unittest.TestCase):
         self.assertIn("SEC.2 permanece pausado", contenido)
 
     def test_documentacion_transversal_declara_transicion_nor1_nor2(self):
+        cierre = (
+            ROOT
+            / "docs"
+            / "audits"
+            / "repository"
+            / "repository-standards-closure-nor1-r7.md"
+        ).read_text(encoding="utf-8")
+
+        self.assertIn("NOR.1", cierre)
+        self.assertIn("NOR.2", cierre)
+
         documentos = [
             ROOT / "CHANGELOG.md",
-            ROOT / "docs" / "INDICE.md",
-            ROOT / "docs" / "ROADMAP.md",
-            ROOT / "docs" / "VALIDACION.md",
-            ROOT / "docs" / "PLAN_MAESTRO_HACIA_1_0.md",
+            ROOT / "docs" / "README.md",
+            ROOT / "docs" / "governance" / "roadmap.md",
+            ROOT / "docs" / "operations" / "validation.md",
+            ROOT / "docs" / "governance" / "master-plan-to-1-0.md",
         ]
 
         for documento in documentos:
             contenido = documento.read_text(encoding="utf-8")
-            self.assertIn("NOR.1", contenido, str(documento))
-            self.assertIn("NOR.2", contenido, str(documento))
-
+            self.assertIn("NOR.2 R4", contenido, str(documento))
 
 if __name__ == "__main__":
     unittest.main()

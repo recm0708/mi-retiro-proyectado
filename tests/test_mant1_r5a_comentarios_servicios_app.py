@@ -88,10 +88,10 @@ class TestMant1R5AComentariosServiciosApp(unittest.TestCase):
     def test_documentacion_transversal_registra_mant1_r5a(self):
         for ruta in (
             "CHANGELOG.md",
-            "docs/ESTANDAR_CODIGO_Y_COMENTARIOS.md",
-            "docs/VALIDACION.md",
-            "docs/ARQUITECTURA.md",
-            "docs/ROADMAP.md",
+            "docs/standards/code-and-comments.md",
+            "docs/operations/validation.md",
+            "docs/architecture/system-architecture.md",
+            "docs/governance/roadmap.md",
         ):
             texto = self._leer(ruta)
             with self.subTest(ruta=ruta):

@@ -33,7 +33,7 @@ class TestGov16ControlesGithub(unittest.TestCase):
     def test_governance_enlaza_security_y_auditoria(self):
         t=(ROOT/'GOVERNANCE.md').read_text(encoding='utf-8'); self.assertIn('SECURITY.md',t); self.assertIn('Auditoría de gobernanza',t); self.assertIn('git verify-commit',t)
     def test_roadmap_cierra_gov16_sin_congelar_gov17(self):
-        t=(DOCS/'ROADMAP.md').read_text(encoding='utf-8'); self.assertIn('- [x] **GOV.1.6 — Controles GitHub y auditoría automática**',t); self.assertIn('**GOV.1.7 — Licencia**',t)
+        t=(DOCS/'governance/roadmap.md').read_text(encoding='utf-8'); self.assertIn('- [x] **GOV.1.6 — Controles GitHub y auditoría automática**',t); self.assertIn('**GOV.1.7 — Licencia**',t)
     def test_archivos_nuevos_limpios(self):
         ps=[ROOT/'SECURITY.md',ROOT/'CODE_OF_CONDUCT.md',ROOT/'SUPPORT.md',DOCS/'AUDITORIA_GITHUB.md',DOCS/'AUDITORIA_REPOSITORIO_2026-08-18.md',GH/'ISSUE_TEMPLATE/bug_report.yml',GH/'ISSUE_TEMPLATE/feature_request.yml',GH/'ISSUE_TEMPLATE/question.yml',GH/'ISSUE_TEMPLATE/config.yml',GH/'pull_request_template.md',GH/'workflows/governance-audit.yml']
         for p in ps:

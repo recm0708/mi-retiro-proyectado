@@ -129,17 +129,17 @@ class TestUX46DGestionDatos(unittest.TestCase):
 
     def test_documentacion_transversal_esta_versionada(self):
         for relativo in (
-            "docs/GESTION_DATOS_SIMULACION.md",
-            "docs/POLITICA_PRIVACIDAD.md",
-            "docs/TERMINOS_USO_PRIVACIDAD.md",
-            "docs/CUMPLIMIENTO_LEY_81.md",
-            "docs/SEGURIDAD_PRIVACIDAD.md",
+            "docs/product/simulation-data-management.md",
+            "docs/security/privacy-policy.md",
+            "docs/security/terms-and-privacy.md",
+            "docs/regulatory/law-81-compliance.md",
+            "docs/security/security-and-privacy.md",
         ):
             contenido = (ROOT / relativo).read_text(encoding="utf-8")
             self.assertTrue(contenido.strip())
         self.assertIn(
             "2026-08-16.1",
-            (ROOT / "docs/POLITICA_PRIVACIDAD.md").read_text(encoding="utf-8"),
+            (ROOT / "docs/security/privacy-policy.md").read_text(encoding="utf-8"),
         )
 
 

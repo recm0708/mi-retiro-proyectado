@@ -9,21 +9,34 @@ import unittest
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
 R3_DOCS = [
-    "NORMATIVA.md",
-    "FUENTES_NORMATIVAS.md",
-    "MODALIDADES_SEBD.md",
-    "MODALIDADES_MIXTO.md",
-    "MODALIDADES_SUCGS.md",
-    "SEGURIDAD_PRIVACIDAD.md",
-    "POLITICA_PRIVACIDAD.md",
-    "TERMINOS_USO_PRIVACIDAD.md",
-    "CUMPLIMIENTO_LEY_81.md",
+    "regulatory/regulatory-framework.md",
+    "regulatory/regulatory-sources.md",
+    "regulatory/sebd-modalities.md",
+    "regulatory/mixto-modalities.md",
+    "regulatory/sucgs-modalities.md",
+    "security/security-and-privacy.md",
+    "security/privacy-policy.md",
+    "security/terms-and-privacy.md",
+    "regulatory/law-81-compliance.md",
 ]
+
+R3_SNAPSHOTS = {
+    "regulatory/regulatory-framework.md": "NORMATIVA_PRE_GOV1_3_R3.md",
+    "regulatory/regulatory-sources.md": "FUENTES_NORMATIVAS_PRE_GOV1_3_R3.md",
+    "regulatory/sebd-modalities.md": "MODALIDADES_SEBD_PRE_GOV1_3_R3.md",
+    "regulatory/mixto-modalities.md": "MODALIDADES_MIXTO_PRE_GOV1_3_R3.md",
+    "regulatory/sucgs-modalities.md": "MODALIDADES_SUCGS_PRE_GOV1_3_R3.md",
+    "security/security-and-privacy.md": "SEGURIDAD_PRIVACIDAD_PRE_GOV1_3_R3.md",
+    "security/privacy-policy.md": "POLITICA_PRIVACIDAD_PRE_GOV1_3_R3.md",
+    "security/terms-and-privacy.md": "TERMINOS_USO_PRIVACIDAD_PRE_GOV1_3_R3.md",
+    "regulatory/law-81-compliance.md": "CUMPLIMIENTO_LEY_81_PRE_GOV1_3_R3.md",
+}
+
 PRIVACY_DOCS = [
-    "SEGURIDAD_PRIVACIDAD.md",
-    "POLITICA_PRIVACIDAD.md",
-    "TERMINOS_USO_PRIVACIDAD.md",
-    "CUMPLIMIENTO_LEY_81.md",
+    "security/security-and-privacy.md",
+    "security/privacy-policy.md",
+    "security/terms-and-privacy.md",
+    "regulatory/law-81-compliance.md",
 ]
 
 
@@ -45,7 +58,7 @@ class TestGov13DocumentacionR3(unittest.TestCase):
                 DOCS
                 / "archive"
                 / "regulatory-privacy"
-                / nombre.replace(".md", "_PRE_GOV1_3_R3.md")
+                / R3_SNAPSHOTS[nombre]
             )
             with self.subTest(nombre=nombre):
                 self.assertTrue(snapshot.is_file(), str(snapshot))
@@ -56,7 +69,7 @@ class TestGov13DocumentacionR3(unittest.TestCase):
         self.assertIsNotNone(match)
         version = match.group(1)
 
-        for nombre in ("POLITICA_PRIVACIDAD.md", "TERMINOS_USO_PRIVACIDAD.md"):
+        for nombre in ("security/privacy-policy.md", "security/terms-and-privacy.md"):
             with self.subTest(nombre=nombre):
                 texto = (DOCS / nombre).read_text(encoding="utf-8")
                 self.assertIn(f"`{version}`", texto)
@@ -75,7 +88,7 @@ class TestGov13DocumentacionR3(unittest.TestCase):
                 self.assertIsNone(patron.search(texto))
 
     def test_fuentes_declaran_verificacion_actual(self):
-        texto = (DOCS / "FUENTES_NORMATIVAS.md").read_text(encoding="utf-8")
+        texto = (DOCS / "regulatory/regulatory-sources.md").read_text(encoding="utf-8")
         self.assertIn("2026-08-17", texto)
         self.assertIn("https://www.css.gob.pa/normativas-ley-organica/", texto)
         self.assertIn("https://antai.gob.pa/", texto)
@@ -84,33 +97,33 @@ class TestGov13DocumentacionR3(unittest.TestCase):
         params = json.loads(
             (ROOT / "regulations/general-parameters.json").read_text(encoding="utf-8")
         )
-        texto = (DOCS / "NORMATIVA.md").read_text(encoding="utf-8")
+        texto = (DOCS / "regulatory/regulatory-framework.md").read_text(encoding="utf-8")
         self.assertIn(params["gaceta_oficial"], texto)
         self.assertIn(params["fecha_gaceta"], texto)
         self.assertIn(str(params["edades_referencia"]["FEMENINO"]), texto)
         self.assertIn(str(params["edades_referencia"]["MASCULINO"]), texto)
 
     def test_fecha_operativa_2026_se_trata_como_temporal(self):
-        for nombre in ("NORMATIVA.md", "FUENTES_NORMATIVAS.md", "MODALIDADES_MIXTO.md"):
+        for nombre in ("regulatory/regulatory-framework.md", "regulatory/regulatory-sources.md", "regulatory/mixto-modalities.md"):
             with self.subTest(nombre=nombre):
                 texto = (DOCS / nombre).read_text(encoding="utf-8")
                 self.assertIn("18/08/2026", texto)
                 self.assertRegex(texto.lower(), r"temporal")
 
     def test_seguridad_documenta_conexiones_y_no_store(self):
-        texto = (DOCS / "SEGURIDAD_PRIVACIDAD.md").read_text(encoding="utf-8")
+        texto = (DOCS / "security/security-and-privacy.md").read_text(encoding="utf-8")
         self.assertIn("cdn.jsdelivr.net", texto)
         self.assertIn("encabezado HTTP `Date`", texto)
         self.assertIn("Cache-Control: no-store", texto)
 
     def test_politica_documenta_local_y_session_storage(self):
-        texto = (DOCS / "POLITICA_PRIVACIDAD.md").read_text(encoding="utf-8")
+        texto = (DOCS / "security/privacy-policy.md").read_text(encoding="utf-8")
         self.assertIn("almacenamiento local", texto.lower())
         self.assertIn("sesión", texto.lower())
         self.assertIn("2026-08-16.1", texto)
 
     def test_matriz_declara_no_certificacion_y_pendientes(self):
-        texto = (DOCS / "CUMPLIMIENTO_LEY_81.md").read_text(encoding="utf-8")
+        texto = (DOCS / "regulatory/law-81-compliance.md").read_text(encoding="utf-8")
         self.assertIn("No constituye certificación jurídica", texto)
         self.assertIn("Revisión jurídica", texto)
         self.assertIn("Pendiente antes de publicación", texto)
@@ -118,9 +131,9 @@ class TestGov13DocumentacionR3(unittest.TestCase):
 
     def test_modalidades_tienen_sistema_y_metadata(self):
         casos = {
-            "MODALIDADES_SEBD.md": "SEBD",
-            "MODALIDADES_MIXTO.md": "Mixto",
-            "MODALIDADES_SUCGS.md": "SUCGS",
+            "regulatory/sebd-modalities.md": "SEBD",
+            "regulatory/mixto-modalities.md": "Mixto",
+            "regulatory/sucgs-modalities.md": "SUCGS",
         }
         for nombre, sistema in casos.items():
             with self.subTest(nombre=nombre):
@@ -140,12 +153,12 @@ class TestGov13DocumentacionR3(unittest.TestCase):
         self.assertEqual([], errores, "Espacios finales: " + ", ".join(errores))
 
     def test_indice_registra_historico_r3(self):
-        texto = (DOCS / "INDICE.md").read_text(encoding="utf-8")
+        texto = (DOCS / "README.md").read_text(encoding="utf-8")
         self.assertIn("archive/regulatory-privacy/", texto)
         self.assertIn("GOV.1.3 R3", texto)
 
     def test_validacion_registra_baseline_y_objetivo_r3(self):
-        texto = (DOCS / "VALIDACION.md").read_text(encoding="utf-8")
+        texto = (DOCS / "operations/validation.md").read_text(encoding="utf-8")
         self.assertIn("Ran 423 tests", texto)
         self.assertIn("438 pruebas", texto)
         self.assertIn("15 regresiones documentales", texto)

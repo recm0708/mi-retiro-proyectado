@@ -48,12 +48,12 @@ class TestMant1R5GDocumentacion(unittest.TestCase):
                 self.assertIn(expresion, texto)
 
     def test_documentos_raiz_de_docs_estan_indexados(self):
-        indice = (DOCS / "INDICE.md").read_text(encoding="utf-8")
+        indice = (DOCS / "README.md").read_text(encoding="utf-8")
 
         faltantes = []
 
         for ruta in sorted(DOCS.glob("*.md")):
-            if ruta.name == "INDICE.md":
+            if ruta.name == "README.md":
                 continue
 
             if ruta.name not in indice:
@@ -62,21 +62,21 @@ class TestMant1R5GDocumentacion(unittest.TestCase):
         self.assertEqual([], faltantes)
 
     def test_indice_incluye_documentos_relevantes_de_r5g(self):
-        indice = (DOCS / "INDICE.md").read_text(encoding="utf-8")
+        indice = (DOCS / "README.md").read_text(encoding="utf-8")
 
         documentos = (
-            "ADR_179_VERSIONADO_REVISION_AWARE.md",
+            "decisions/adr-179-revision-aware-versioning.md",
             "AUDITORIA_ESTRUCTURA_ARCHIVOS_R5D.md",
             "AUDITORIA_CARPETAS_R5E.md",
             "AUDITORIA_ARCHIVOS_R5F.md",
             "AUDITORIA_DOCUMENTACION_R5G.md",
-            "DEV2_CENTRO_DESARROLLO.md",
-            "POLITICA_ESTRUCTURA_ARCHIVOS.md",
+            "architecture/development-center.md",
+            "standards/file-structure-by-extension.md",
             "UX46H_R1_AUDITORIA_RESULTADOS.md",
-            "UX_4_6A_REDISENO_VISUAL.md",
-            "UX_4_6B_PASO1_DATOS_PERSONALES.md",
-            "UX_4_6C_PASO2_CUOTAS.md",
-            "UX_4_6D_PASO3_HISTORIAL.md",
+            "product/user-interface.md",
+            "product/workflow-step-1-personal-data.md",
+            "product/workflow-step-2-contributions.md",
+            "product/workflow-step-3-salary-history.md",
         )
 
         for documento in documentos:
@@ -86,7 +86,7 @@ class TestMant1R5GDocumentacion(unittest.TestCase):
     def test_changelog_y_validacion_declaran_r5g(self):
         superficies = (
             ROOT / "CHANGELOG.md",
-            DOCS / "VALIDACION.md",
+            DOCS / "operations/validation.md",
         )
 
         for ruta in superficies:

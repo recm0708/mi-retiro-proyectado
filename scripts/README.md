@@ -34,7 +34,7 @@ Los scripts de esta carpeta deben cumplir estas reglas:
 - no modificar archivos fuente durante una validación;
 - cancelar con código distinto de cero cuando una comprobación falla;
 - explicar en comentarios el propósito, el alcance y los límites de cada script;
-- mantenerse sincronizados con `docs/VALIDACION.md` y `docs/ESTANDAR_CODIGO_Y_COMENTARIOS.md`.
+- mantenerse sincronizados con `docs/operations/validation.md` y `docs/standards/code-and-comments.md`.
 
 ## Relación con CI
 

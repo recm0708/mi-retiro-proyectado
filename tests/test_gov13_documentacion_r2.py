@@ -9,14 +9,24 @@ ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
 BASE_VERSION = "0.0.23-beta"
 R2_DOCS = [
-    "ARQUITECTURA.md",
-    "MODELO_DE_DATOS.md",
-    "GESTION_DATOS_SIMULACION.md",
-    "MOTOR_DE_CALCULO.md",
-    "ESPECIFICACION_FUNCIONAL.md",
-    "GUIA_INTERNA_DESARROLLO.md",
-    "VALIDACION.md",
+    "architecture/system-architecture.md",
+    "architecture/data-model.md",
+    "product/simulation-data-management.md",
+    "architecture/calculation-engine.md",
+    "product/functional-specification.md",
+    "operations/development-guide.md",
+    "operations/validation.md",
 ]
+
+R2_SNAPSHOTS = {
+    "architecture/system-architecture.md": "ARQUITECTURA_PRE_GOV1_3_R2.md",
+    "architecture/data-model.md": "MODELO_DE_DATOS_PRE_GOV1_3_R2.md",
+    "product/simulation-data-management.md": "GESTION_DATOS_SIMULACION_PRE_GOV1_3_R2.md",
+    "architecture/calculation-engine.md": "MOTOR_DE_CALCULO_PRE_GOV1_3_R2.md",
+    "product/functional-specification.md": "ESPECIFICACION_FUNCIONAL_PRE_GOV1_3_R2.md",
+    "operations/development-guide.md": "GUIA_INTERNA_DESARROLLO_PRE_GOV1_3_R2.md",
+    "operations/validation.md": "VALIDACION_PRE_GOV1_3_R2.md",
+}
 
 
 class TestGov13DocumentacionR2(unittest.TestCase):
@@ -30,14 +40,12 @@ class TestGov13DocumentacionR2(unittest.TestCase):
 
     def test_snapshots_tecnicos_existen(self):
         for nombre in R2_DOCS:
-            snapshot = DOCS / "archive" / "technical" / nombre.replace(
-                ".md", "_PRE_GOV1_3_R2.md"
-            )
+            snapshot = DOCS / "archive" / "technical" / R2_SNAPSHOTS[nombre]
             with self.subTest(nombre=nombre):
                 self.assertTrue(snapshot.is_file(), str(snapshot))
 
     def test_arquitectura_documenta_modulos_criticos(self):
-        texto = (DOCS / "ARQUITECTURA.md").read_text(encoding="utf-8")
+        texto = (DOCS / "architecture/system-architecture.md").read_text(encoding="utf-8")
         for esperado in (
             "app/core/pdf_files.py",
             "app/core/version.py",
@@ -59,14 +67,14 @@ class TestGov13DocumentacionR2(unittest.TestCase):
                 flags=re.S,
             )
         }
-        arquitectura = (DOCS / "ARQUITECTURA.md").read_text(encoding="utf-8")
+        arquitectura = (DOCS / "architecture/system-architecture.md").read_text(encoding="utf-8")
         faltantes = sorted(
             ruta for ruta in rutas if f"`{ruta}`" not in arquitectura
         )
         self.assertEqual([], faltantes)
 
     def test_modelo_documenta_contratos_transversales(self):
-        texto = (DOCS / "MODELO_DE_DATOS.md").read_text(encoding="utf-8")
+        texto = (DOCS / "architecture/data-model.md").read_text(encoding="utf-8")
         for esperado in (
             "DatosDetalleAnioActual",
             "ResumenFichaDigital",
@@ -79,12 +87,12 @@ class TestGov13DocumentacionR2(unittest.TestCase):
                 self.assertIn(esperado, texto)
 
     def test_modelo_aclara_ficha_sin_cuota_en_parser(self):
-        texto = (DOCS / "MODELO_DE_DATOS.md").read_text(encoding="utf-8")
+        texto = (DOCS / "architecture/data-model.md").read_text(encoding="utf-8")
         self.assertIn("No contiene `cuota_acreditada`", texto)
         self.assertIn("RegistroDetalleAnioActual", texto)
 
     def test_gestion_documenta_reconciliacion_ascendente_vigente(self):
-        texto = (DOCS / "GESTION_DATOS_SIMULACION.md").read_text(
+        texto = (DOCS / "product/simulation-data-management.md").read_text(
             encoding="utf-8"
         )
         self.assertIn("Reconciliación ascendente controlada", texto)
@@ -92,12 +100,12 @@ class TestGov13DocumentacionR2(unittest.TestCase):
         self.assertIn("no reduce automáticamente", texto)
 
     def test_motor_declara_importadores_fuera_del_motor(self):
-        texto = (DOCS / "MOTOR_DE_CALCULO.md").read_text(encoding="utf-8")
+        texto = (DOCS / "architecture/calculation-engine.md").read_text(encoding="utf-8")
         self.assertIn("capas de entrada", texto)
         self.assertIn("no se calibra", texto)
 
     def test_guia_no_contiene_diario_de_fases_ux(self):
-        texto = (DOCS / "GUIA_INTERNA_DESARROLLO.md").read_text(
+        texto = (DOCS / "operations/development-guide.md").read_text(
             encoding="utf-8"
         )
         self.assertNotRegex(texto, r"(?m)^##\s+UX\.")
@@ -112,7 +120,7 @@ class TestGov13DocumentacionR2(unittest.TestCase):
         self.assertIn("8/8 regresiones documentales de R1", texto)
 
     def test_especificacion_preserva_rf_y_marca_sustitucion(self):
-        texto = (DOCS / "ESPECIFICACION_FUNCIONAL.md").read_text(
+        texto = (DOCS / "product/functional-specification.md").read_text(
             encoding="utf-8"
         )
         historico = (

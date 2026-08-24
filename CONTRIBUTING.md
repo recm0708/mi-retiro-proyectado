@@ -54,7 +54,7 @@ Toda participación en issues, Pull Requests o revisiones debe respetar [`CODE_O
 - Toda interpretación normativa relevante debe ser trazable a una fuente y, cuando corresponda, a un ADR.
 - Los documentos personales reales no se versionan.
 - Código, pruebas y documentación se actualizan dentro de la misma unidad de trabajo.
-- Comentarios y docstrings siguen [`docs/ESTANDAR_CODIGO_Y_COMENTARIOS.md`](docs/ESTANDAR_CODIGO_Y_COMENTARIOS.md); explican intención y contratos, no la sintaxis obvia.
+- Comentarios y docstrings siguen [`docs/standards/code-and-comments.md`](docs/standards/code-and-comments.md); explican intención y contratos, no la sintaxis obvia.
 
 ## 3. Fuente de versión
 
@@ -138,19 +138,19 @@ Mapa general:
 - `README.md` — presentación y estado general;
 - `CHANGELOG.md` — cambios notables por versión;
 - `RELEASES.md` — releases, tags y reconstrucción de versiones;
-- `docs/INDICE.md` — mapa documental;
-- `docs/ROADMAP.md` — presente y futuro;
-- `docs/ESPECIFICACION_FUNCIONAL.md` — requisitos vigentes y su estado;
-- `docs/ARQUITECTURA.md` — arquitectura real;
-- `docs/MODELO_DE_DATOS.md` — contratos;
-- `docs/MOTOR_DE_CALCULO.md` — flujo matemático;
-- `docs/NORMATIVA.md` y `docs/FUENTES_NORMATIVAS.md` — reglas y fuentes;
-- `docs/DECISIONES.md` — ADR;
-- `docs/VALIDACION.md` — estrategia/evidencia de pruebas;
+- `docs/README.md` — mapa documental;
+- `docs/governance/roadmap.md` — presente y futuro;
+- `docs/product/functional-specification.md` — requisitos vigentes y su estado;
+- `docs/architecture/system-architecture.md` — arquitectura real;
+- `docs/architecture/data-model.md` — contratos;
+- `docs/architecture/calculation-engine.md` — flujo matemático;
+- `docs/regulatory/regulatory-framework.md` y `docs/regulatory/regulatory-sources.md` — reglas y fuentes;
+- `docs/decisions/README.md` — ADR;
+- `docs/operations/validation.md` — estrategia/evidencia de pruebas;
 - `docs/archive/` — evidencia histórica que no describe el estado vigente.
 - `CODE_OF_CONDUCT.md` — normas de participación;
 - `SUPPORT.md` — canales y límites de soporte.
-- `docs/ESTANDAR_CODIGO_Y_COMENTARIOS.md` — patrón de comentarios, docstrings y documentación de runtime.
+- `docs/standards/code-and-comments.md` — patrón de comentarios, docstrings y documentación de runtime.
 
 No añadir una nueva revisión cronológica al final de un documento vigente cuando el cambio puede integrarse en su estructura actual.
 
@@ -172,8 +172,8 @@ Todo cambio de fórmula, parámetro legal, tabla actuarial, fecha de transición
 1. fuente oficial verificable;
 2. fecha o versión de la fuente;
 3. actualización de `regulations/*.json`;
-4. actualización de `docs/NORMATIVA.md`;
-5. actualización de `docs/FUENTES_NORMATIVAS.md`;
+4. actualización de `docs/regulatory/regulatory-framework.md`;
+5. actualización de `docs/regulatory/regulatory-sources.md`;
 6. pruebas;
 7. ADR cuando exista interpretación, ambigüedad o conflicto;
 8. entrada de changelog/release cuando corresponda.
@@ -290,7 +290,7 @@ Consultar:
 - [`GOVERNANCE.md`](GOVERNANCE.md);
 - [`VERSIONING.md`](VERSIONING.md);
 - [`.github/CODEOWNERS`](.github/CODEOWNERS);
-- [`docs/DECISIONES.md`](docs/DECISIONES.md);
-- [`docs/INDICE.md`](docs/INDICE.md).
+- [`docs/decisions/README.md`](docs/decisions/README.md);
+- [`docs/README.md`](docs/README.md).
 - [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md);
 - [`SUPPORT.md`](SUPPORT.md).

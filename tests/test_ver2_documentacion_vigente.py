@@ -23,10 +23,10 @@ class TestVer2DocumentacionVigente(unittest.TestCase):
 
     def test_documentos_vivos_declaran_promocion_vigente(self):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
-        roadmap = (DOCS / "ROADMAP.md").read_text(encoding="utf-8")
-        plan = (DOCS / "PLAN_MAESTRO_HACIA_1_0.md").read_text(encoding="utf-8")
+        roadmap = (DOCS / "governance/roadmap.md").read_text(encoding="utf-8")
+        plan = (DOCS / "governance/master-plan-to-1-0.md").read_text(encoding="utf-8")
         security = (ROOT / "SECURITY.md").read_text(encoding="utf-8")
-        indice = (DOCS / "INDICE.md").read_text(encoding="utf-8")
+        indice = (DOCS / "README.md").read_text(encoding="utf-8")
 
         self.assertIn("**Versión canónica vigente:** `0.0.71.01-beta`", readme)
         self.assertIn("G071/E01 promovido en `VERSION`", readme)
@@ -38,7 +38,7 @@ class TestVer2DocumentacionVigente(unittest.TestCase):
     def test_tag_legacy_permanece_y_tag_g071_no_se_crea_en_pr(self):
         versioning = (ROOT / "VERSIONING.md").read_text(encoding="utf-8")
         releases = (ROOT / "RELEASES.md").read_text(encoding="utf-8")
-        proceso = (DOCS / "PROCESO_RELEASE.md").read_text(encoding="utf-8")
+        proceso = (DOCS / "operations/release-process.md").read_text(encoding="utf-8")
 
         self.assertIn(ULTIMO_TAG_LEGACY, versioning)
         self.assertIn("`v0.0.71.01-beta` no se crea dentro del PR de promoción", versioning)
@@ -46,10 +46,10 @@ class TestVer2DocumentacionVigente(unittest.TestCase):
         self.assertIn("hasta crear y verificar `v0.0.71.01-beta`", proceso)
 
     def test_ledger_y_auditoria_siguen_reconociendo_g071(self):
-        ledger = (DOCS / "LEDGER_REVISIONES_PRE_1_0.md").read_text(encoding="utf-8")
+        ledger = (DOCS / "governance/pre-1-0-revision-ledger.md").read_text(encoding="utf-8")
         auditoria = (DOCS / "AUDITORIA_VERSIONADO_PRE_1_0.md").read_text(encoding="utf-8")
         versioning = (ROOT / "VERSIONING.md").read_text(encoding="utf-8")
-        indice = (DOCS / "INDICE.md").read_text(encoding="utf-8")
+        indice = (DOCS / "README.md").read_text(encoding="utf-8")
 
         self.assertIn("G071", ledger)
         self.assertIn(VERSION_CANONICA, ledger)

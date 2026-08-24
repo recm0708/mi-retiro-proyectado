@@ -15,7 +15,7 @@ class TestPlan1GobiernoVersionadoOficial(unittest.TestCase):
     """Protege ADR-168 y la alineación de gobierno sin cambiar la beta actual."""
 
     def test_adr_168_es_consecutiva_y_esta_indexada(self):
-        texto = (DOCS / "DECISIONES.md").read_text(encoding="utf-8")
+        texto = (DOCS / "decisions/README.md").read_text(encoding="utf-8")
         ids = [int(x) for x in re.findall(r"(?m)^## ADR-(\d{3})\s+—", texto)]
         indice = [int(x) for x in re.findall(r"(?m)^\| ADR-(\d{3}) \|", texto)]
         self.assertGreaterEqual(ids[-1], 168)
@@ -25,7 +25,7 @@ class TestPlan1GobiernoVersionadoOficial(unittest.TestCase):
         self.assertIn(f"ADR indexadas:** {ids[-1]}", texto)
 
     def test_adr_168_define_version_oficial_y_build_independiente(self):
-        texto = (DOCS / "DECISIONES.md").read_text(encoding="utf-8")
+        texto = (DOCS / "decisions/README.md").read_text(encoding="utf-8")
         for esperado in (
             "## ADR-168 — La etapa `0.0.N-beta`",
             "`1.0.0.0`",
@@ -39,7 +39,7 @@ class TestPlan1GobiernoVersionadoOficial(unittest.TestCase):
                 self.assertIn(esperado, texto)
 
     def test_adr_168_sustituye_plan_actual_sin_reescribir_historia(self):
-        texto = (DOCS / "DECISIONES.md").read_text(encoding="utf-8")
+        texto = (DOCS / "decisions/README.md").read_text(encoding="utf-8")
         self.assertIn("`0.1.0-beta.1`", texto)
         self.assertIn("queda sustituida como **objetivo vigente**", texto)
         self.assertIn(
@@ -72,7 +72,7 @@ class TestPlan1GobiernoVersionadoOficial(unittest.TestCase):
         )
 
     def test_validacion_conserva_evidencia_acumulada_plan1(self):
-        texto = (DOCS / "VALIDACION.md").read_text(encoding="utf-8")
+        texto = (DOCS / "operations/validation.md").read_text(encoding="utf-8")
         for esperado in (
             "R1 — política de versionado",
             "**665 pruebas en `OK`**",

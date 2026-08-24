@@ -19,7 +19,7 @@ class TestUX46eAuditoriaCoherencia(unittest.TestCase):
     """Protege el gate transversal y su evolución posterior sin reescribir R7."""
 
     def test_roadmap_preserva_r7_r8_r9_y_cierre_ux46e(self):
-        texto = (DOCS / "ROADMAP.md").read_text(encoding="utf-8")
+        texto = (DOCS / "governance/roadmap.md").read_text(encoding="utf-8")
         self.assertIn("R6 — renumeración/metadata; 586 pruebas", texto)
         self.assertIn("R7 — auditoría transversal; 598 pruebas", texto)
         self.assertIn("R8 — validación funcional/procedencia editable", texto)
@@ -45,11 +45,11 @@ class TestUX46eAuditoriaCoherencia(unittest.TestCase):
     def test_documentos_primarios_usan_secuencia_vigente_f_a_i(self):
         rutas = (
             ROOT / "README.md",
-            DOCS / "ROADMAP.md",
-            DOCS / "TRANSPARENCIA.md",
-            DOCS / "VALIDACION.md",
-            DOCS / "PREPARACION_PUBLICA_GITHUB.md",
-            DOCS / "INDICE.md",
+            DOCS / "governance/roadmap.md",
+            DOCS / "product/transparency.md",
+            DOCS / "operations/validation.md",
+            DOCS / "operations/github-public-repository.md",
+            DOCS / "README.md",
         )
         combinados = "\n".join(p.read_text(encoding="utf-8") for p in rutas)
         self.assertIn("UX.4.6f", combinados)
@@ -230,7 +230,7 @@ class TestUX46eAuditoriaCoherencia(unittest.TestCase):
         self.assertEqual([], errores)
 
     def test_adr165_historico_y_adr179_revision_aware_estan_trazados(self):
-        texto = (DOCS / "DECISIONES.md").read_text(encoding="utf-8")
+        texto = (DOCS / "decisions/README.md").read_text(encoding="utf-8")
         self.assertIn("## ADR-165 — La auditoría transversal es un gate", texto)
         ids = [int(x) for x in re.findall(r"(?m)^## ADR-(\d{3})\s+—", texto)]
         self.assertGreaterEqual(max(ids), 178)
@@ -239,7 +239,7 @@ class TestUX46eAuditoriaCoherencia(unittest.TestCase):
             f"**ADR indexadas:** {max(ids)} (`ADR-001` a `ADR-{max(ids):03d}`)",
             texto,
         )
-        adr179 = (DOCS / "ADR_179_VERSIONADO_REVISION_AWARE.md").read_text(encoding="utf-8")
+        adr179 = (DOCS / "decisions/adr-179-revision-aware-versioning.md").read_text(encoding="utf-8")
         self.assertIn("# ADR-179 —", adr179)
         self.assertIn("0.GG.RR.EE-beta", adr179)
 

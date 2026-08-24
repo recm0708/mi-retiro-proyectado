@@ -12,7 +12,7 @@ from app.core.version import (
 
 
 ROOT = Path(__file__).resolve().parents[1]
-LEDGER = ROOT / "docs" / "LEDGER_REVISIONES_PRE_1_0.md"
+LEDGER = ROOT / "docs" / "governance/pre-1-0-revision-ledger.md"
 AUDITORIA = ROOT / "docs" / "AUDITORIA_VERSIONADO_PRE_1_0.md"
 
 

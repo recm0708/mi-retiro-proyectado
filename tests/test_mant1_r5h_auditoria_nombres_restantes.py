@@ -87,7 +87,7 @@ class TestMant1R5HAuditoriaNombresRestantes(unittest.TestCase):
 
     def test_auditoria_r5h_queda_documentada_e_indexada(self):
         audit = ROOT / "docs" / "AUDITORIA_NOMBRES_RESTANTES_R5H.md"
-        index = ROOT / "docs" / "INDICE.md"
+        index = ROOT / "docs" / "README.md"
 
         self.assertTrue(audit.is_file())
         self.assertIn(
@@ -96,7 +96,7 @@ class TestMant1R5HAuditoriaNombresRestantes(unittest.TestCase):
         )
 
     def test_validacion_documenta_gate_r5h(self):
-        validation = (ROOT / "docs" / "VALIDACION.md").read_text(
+        validation = (ROOT / "docs" / "operations/validation.md").read_text(
             encoding="utf-8"
         )
 

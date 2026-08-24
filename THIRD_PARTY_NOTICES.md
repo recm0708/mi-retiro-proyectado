@@ -38,7 +38,7 @@ Los workflows usan actualmente `actions/checkout@v7`, `actions/setup-python@v7` 
 
 Shields.io se utiliza únicamente para badges estáticos del README (versión, Python y licencia); no forma parte del runtime ni recibe intencionalmente datos de la simulación.
 
-jsDelivr, GitHub y la infraestructura CSS documentada en `docs/EVALUACION_TERCEROS_DESPLIEGUE.md` son terceros operativos. Este archivo no concede derechos sobre sus marcas, servicios o contenidos.
+jsDelivr, GitHub y la infraestructura CSS documentada en `docs/security/third-party-deployment-assessment.md` son terceros operativos. Este archivo no concede derechos sobre sus marcas, servicios o contenidos.
 
 ## Regla de distribución
 
