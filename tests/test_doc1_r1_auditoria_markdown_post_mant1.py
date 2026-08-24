@@ -65,35 +65,36 @@ def test_linea_base_documental_post_mant1_define_estado_canonico():
     assert "MANT.1 R7" in text
     assert "#55" in text
     assert "`57078f2`" in text
-    assert "`0.0.71.01-beta` se conserva como candidato" in text
+    assert "`0.0.71.01-beta`" in text
+    assert "candidato" in text
     assert "`939 passed`" in text
     assert "`928 tests OK`" in text
 
 
 def test_version_file_permanece_en_0_0_26_beta():
-    assert read("VERSION").strip() == "0.0.26-beta"
+    assert read("VERSION").strip() == "0.0.71.01-beta"
 
 
 def test_readme_expone_estado_post_mant1_sin_promover_ver2():
     text = read("README.md")
 
-    assert "**Versión canónica vigente:** `0.0.26-beta`" in text
+    assert "**Versión canónica vigente:** `0.0.71.01-beta`" in text
     assert "MANT.1 R7" in text
     assert "commit squash `57078f2`" in text
     assert "**Estado de MANT.1:** cerrado operativamente" in text
-    assert "`0.0.71.01-beta` se conserva como candidato" in text
-    assert "no como versión publicada ni tag formal" in text
+    assert "G071/E01 promovido en `VERSION`" in text
+    assert "tag formal `v0.0.71.01-beta` queda pendiente" in text
     assert "DOC.1 R1" in text
-    assert "0.0.71.01--beta" not in text
+    assert "img.shields.io/badge/versi%C3%B3n-0.0.71.01--beta" in text
 
 
 def test_security_declara_estado_vigente_post_mant1_y_preserva_anclas():
     text = read("SECURITY.md")
 
     assert "## Estado de seguridad post-MANT.1" in text
-    assert "La versión canónica permanece en `0.0.26-beta`." in text
-    assert "`0.0.71.01-beta` continúa como candidato VER.2 pendiente." in text
-    assert "referencia legacy histórica preservada por pruebas de regresión" in text
+    assert "La versión canónica vigente es `0.0.71.01-beta`." in text
+    assert "`0.0.71.01-beta` corresponde a VER.2 G071/E01 promovido en R4" in text
+    assert "Referencia legacy histórica preservada por pruebas de regresión" in text
 
 
 def test_docs_vigentes_no_conservan_frases_de_estado_obsoleto():

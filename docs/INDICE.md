@@ -1,7 +1,7 @@
 # Índice de documentación
 
 **Estado:** vigente
-**Versión candidata de aplicación:** `0.0.71.01-beta` — VER.2 G071/E01
+**Versión de aplicación:** `0.0.71.01-beta` — VER.2 G071/E01 promovida en R4
 **Último tag formal legacy:** `v0.0.26-beta`
 **Última actualización transversal:** VER.2 — segunda pasada contable y materialización del ledger — 2026-08-22
 **Cierres históricos preservados:** UX.4.6i / PR #34 — 841 pruebas; UX.4.6e R9 — `v0.0.25-beta`
@@ -220,3 +220,6 @@ La metadata de versión de revisión de un documento de dominio puede conservar 
 ## VER.2 R3 — Decisión de versión candidata post-R2
 
 - [Decisión de versión candidata VER.2 R3](VER2_R3_DECISION_VERSION_CANDIDATA_POST_R2.md)
+## VER.2 R4 — Promoción controlada G071/E01
+
+- [Promoción controlada VER.2 R4 G071/E01](VER2_R4_PROMOCION_G071_E01.md)

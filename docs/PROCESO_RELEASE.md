@@ -1,7 +1,7 @@
 # Proceso de release
 
 **Estado:** Vigente
-**Versión candidata de aplicación:** `0.0.71.01-beta` — VER.2 G071/E01
+**Versión de aplicación:** `0.0.71.01-beta` — VER.2 G071/E01 promovida en R4
 **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
 **Último tag formal legacy:** `v0.0.26-beta`
 **Versión base histórica preservada:** `0.0.23-beta`
@@ -18,8 +18,8 @@ El cierre de MANT.1 R7 no constituye release formal ni cambia la versión canón
 Para una release posterior se mantiene el criterio vigente:
 
 - `VERSION` debe ser la fuente única.
-- El candidato `0.0.71.01-beta` no debe tratarse como publicado mientras no exista cierre formal de VER.2.
-- El último tag formal vigente sigue siendo `v0.0.26-beta`.
+- `0.0.71.01-beta` queda promovido en `VERSION` durante R4, pero no debe tratarse como tag publicado mientras no exista cierre formal post-merge.
+- El último tag formal vigente sigue siendo `v0.0.26-beta` hasta crear y verificar `v0.0.71.01-beta`.
 - MANT.1 se considera cerrado como mantenimiento técnico/documental.
 - DOC.1 R1 actualiza documentación Markdown, pero no habilita por sí solo una release.
 

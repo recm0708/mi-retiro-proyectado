@@ -29,8 +29,8 @@ class TestDev2R4CierreFinal(unittest.TestCase):
         self.assertIn("882 passed, 695 subtests passed", documento)
 
         version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
-        self.assertEqual("0.0.26-beta", version)
-        self.assertEqual("0.0.26-beta", APP_VERSION)
+        self.assertEqual("0.0.71.01-beta", version)
+        self.assertEqual("0.0.71.01-beta", APP_VERSION)
 
     def test_superficies_principales_no_presentan_dev2_como_no_iniciado(self):
         superficies = {

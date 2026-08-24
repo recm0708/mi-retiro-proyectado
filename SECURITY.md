@@ -8,9 +8,9 @@ El cierre de MANT.1 R7 no cambia la política de seguridad ni convierte candidat
 
 Estado vigente:
 
-- La versión canónica permanece en `0.0.26-beta`.
-- `v0.0.26-beta` continúa como último tag formal.
-- `0.0.71.01-beta` continúa como candidato VER.2 pendiente.
+- La versión canónica vigente es `0.0.71.01-beta`.
+- `v0.0.26-beta` continúa como último tag formal legacy hasta el cierre firmado post-merge de G071/E01.
+- `0.0.71.01-beta` corresponde a VER.2 G071/E01 promovido en R4; su tag formal queda pendiente.
 - DOC.1 R1 solo actualiza documentación Markdown vigente.
 - Las rutas de reporte responsable y revisión de vulnerabilidades se mantienen sin cambio material.
 <!-- DOC1-R1-POST-MANT1:END -->
@@ -21,7 +21,7 @@ Mi Retiro Proyectado se encuentra en **desarrollo beta**. Los estados histórico
 
 | Línea | Soporte de seguridad |
 |---|---|
-| `0.0.71.01-beta` | Candidata vigente de VER.2; recibe correcciones sobre la rama de reconciliación hasta cerrar su gate |
+| `0.0.71.01-beta` | Versión vigente promovida en VER.2 R4; Soportada como beta vigente durante cierre, revalidación y tag firmado post-merge |
 | `0.0.26-beta` | Soportada como beta vigente legacy; último hito formal legacy etiquetado y referencia estable para regresiones históricas |
 | `0.0.25-beta` y anteriores | Históricas; no reciben correcciones independientes |
 
@@ -92,5 +92,5 @@ Esta función está habilitada y complementa el canal privado alternativo indica
 
 | Versión | Estado de soporte |
 | --- | --- |
-| `0.0.71.01-beta` | Candidata vigente de VER.2; Soportada durante la rama de reconciliación hasta cerrar su gate |
-| `0.0.26-beta` | Candidata vigente de VER.2 como referencia legacy histórica preservada por pruebas de regresión; Soportada como hito formal legacy etiquetado |
+| `0.0.71.01-beta` | Versión vigente promovida en VER.2 R4; Soportada como beta vigente durante cierre, revalidación y tag firmado post-merge |
+| `0.0.26-beta` | Referencia legacy histórica preservada por pruebas de regresión; soportada como hito formal legacy etiquetado |

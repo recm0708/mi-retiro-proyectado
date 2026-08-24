@@ -17,7 +17,7 @@ class TestGov18CierreGobierno(unittest.TestCase):
     def test_version_actual_sigue_sincronizada_y_cierre_gov1_preserva_0_0_24(self):
         version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
         self.assertEqual(version, APP_VERSION)
-        self.assertRegex(version, r"^0\.0\.\d+-beta$")
+        self.assertRegex(version, r"^0\.0\.\d+(?:\.\d+)?-beta$")
         cierre = (DOCS / "CIERRE_GOV1.md").read_text(encoding="utf-8")
         self.assertIn("0.0.24-beta", cierre)
 

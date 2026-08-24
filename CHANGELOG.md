@@ -270,6 +270,13 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 - PLAN.1 queda cerrado y UX.4.6f vuelve a ser el bloque funcional activo;
 - no se modifica `VERSION`, runtime, motores, normativa, fórmulas ni el tag publicado.
 
+## [0.0.71.01-beta] — 2026-08-24
+
+- promueve `VERSION`/`APP_VERSION` a `0.0.71.01-beta` como VER.2 G071/E01 después de cerrar R1, R2 y R3;
+- mantiene `v0.0.26-beta` como último tag formal legacy hasta crear el tag firmado `v0.0.71.01-beta` después de merge y revalidación post-merge;
+- no crea tags revision-aware retrospectivos para G001–G070;
+- no modifica motores previsionales, normativa, datos protegidos ni `_entregas/`.
+
 ## [0.0.26-beta] — 2026-08-20
 
 ### PLAN.1 — alineación hacia la primera versión oficial

@@ -1,7 +1,7 @@
 # Matriz de trazabilidad
 
 **Estado:** Vigente
-**Versión candidata de aplicación:** `0.0.71.01-beta` — VER.2 G071/E01
+**Versión de aplicación:** `0.0.71.01-beta` — VER.2 G071/E01 promovida en R4
 **Último tag formal legacy:** `v0.0.26-beta`
 **Base histórica:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal:** VER.2 — 2026-08-21
@@ -19,7 +19,7 @@ Estado documental actual:
 - MANT.1 R6 validó funcionalmente el repositorio después de renombres.
 - MANT.1 R7 cerró operativamente el bloque en `main`.
 - DOC.1 R1 audita todos los Markdown y actualiza solo documentación vigente desalineada.
-- `VERSION` no cambia y permanece en `0.0.26-beta`.
+- `VERSION` se promueve en R4 a `0.0.71.01-beta` como VER.2 G071/E01.
 - VER.2 permanece como reconciliación/candidato pendiente, no como versión publicada.
 
 Esta matriz debe distinguir trazabilidad histórica de estado vigente.
@@ -69,7 +69,7 @@ Esta matriz conecta contratos críticos del producto con su fuente, decisión, i
 | TR-024 | Los controles de fecha validan año/calendario de forma transversal y Paso 5 muestra cobertura salarial de una fecha personalizada | N/A — técnico/UX | ADR-176 | `app/static/js/accessibility.js`, `app/static/css/accessibility.css`, `app/static/js/retirement.js`, `app/templates/partials/retirement.html` | `tests/test_ux46g_r1_escenarios_retirement.py` | Verificado UX.4.6g / PR #32 |
 | TR-025 | Alineación y densidad visual de períodos y resumen de retiro | N/A — UX/responsive | ADR-177 | `app/templates/partials/salary_history.html`, `app/templates/simulation.html`, `app/templates/partials/retirement.html`, `app/static/css/design-system.css` | `tests/test_ux46g_r1_escenarios_retirement.py` | Verificado UX.4.6g / PR #32 |
 | TR-026 | La guía pública explica cómo se transforman los datos de los Pasos 1–6 y los tres sistemas con parámetros versionados, fórmula general + sustitución numérica y términos definidos en contexto, sin duplicar motores; navbar, Metodología y Paso 6 enlazan sin transportar datos personales | N/A — transparencia/UX; normativa versionada existente | ADR-178 | `app/services/como_se_calcula.py`, `app/templates/como_se_calcula.html`, `app/static/css/como-se-calcula.css`, `app/templates/base.html`, `app/static/js/results_orchestration.js`, `app/templates/metodologia.html` | `tests/test_ux46i_r1_como_se_calcula.py` | Verificado UX.4.6i / PR #34 |
-| TR-027 | La beta revision-aware cuenta estados aceptados, preserva tags legacy y mantiene ledger continuo sin convertir commits/candidatos en revisiones | N/A — gobierno/versionado | ADR-179 | `VERSION`, `VERSIONING.md`, `app/core/version.py`, `docs/AUDITORIA_VERSIONADO_PRE_1_0.md`, `docs/LEDGER_REVISIONES_PRE_1_0.md` | `tests/test_ver2_version_revision_aware.py`, `tests/test_ver2_documentacion_vigente.py` | Candidato VER.2 G071/E01 |
+| TR-027 | La beta revision-aware cuenta estados aceptados, preserva tags legacy y mantiene ledger continuo sin convertir commits/candidatos en revisiones | N/A — gobierno/versionado | ADR-179 | `VERSION`, `VERSIONING.md`, `app/core/version.py`, `docs/AUDITORIA_VERSIONADO_PRE_1_0.md`, `docs/LEDGER_REVISIONES_PRE_1_0.md` | `tests/test_ver2_version_revision_aware.py`, `tests/test_ver2_documentacion_vigente.py` | Verificado VER.2 G071/E01 en R4 |
 
 ## 3. Cobertura de RF
 

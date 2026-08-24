@@ -28,7 +28,7 @@ class TestGov12Versionado(unittest.TestCase):
         self.assertTrue(version)
         self.assertRegex(
             version,
-            re.compile(r"^[0-9]+\.[0-9]+\.[0-9]+(?:-[0-9A-Za-z.-]+)?$"),
+            re.compile(r"^[0-9]+\.[0-9]+\.[0-9]+(?:\.[0-9]+)?(?:-[0-9A-Za-z.-]+)?$"),
         )
         self.assertEqual(APP_VERSION, version)
 

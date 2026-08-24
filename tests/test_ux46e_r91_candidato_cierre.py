@@ -24,7 +24,7 @@ class TestUx46eR91CandidatoCierre(unittest.TestCase):
     def test_readme_declara_cierre_historico_y_estado_ver2(self):
         texto = (ROOT / "README.md").read_text(encoding="utf-8")
         version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
-        self.assertIn(f"**Versión candidata de VER.2:** `{version}`", texto)
+        self.assertIn(f"**Versión canónica vigente:** `{version}`", texto)
         self.assertIn("**UX.4.6e:** cerrada en `0.0.25-beta`", texto)
         self.assertIn("PR #21 integrado por squash", texto)
         self.assertNotIn("**Bloque activo:** UX.4.6e", texto)
@@ -32,14 +32,14 @@ class TestUx46eR91CandidatoCierre(unittest.TestCase):
         self.assertIn("**Siguiente bloque funcional:** DEV.2", texto)
 
         indice = (DOCS / "INDICE.md").read_text(encoding="utf-8")
-        self.assertIn(f"**Versión candidata de aplicación:** `{version}`", indice)
+        self.assertIn(f"**Versión de aplicación:** `{version}`", indice)
         self.assertIn("UX.4.6e R9.2", indice)
         self.assertIn("`v0.0.25-beta`", indice)
 
     def test_security_distingue_candidato_y_lineas_historicas(self):
         texto = (ROOT / "SECURITY.md").read_text(encoding="utf-8")
         version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
-        self.assertIn(f"| `{version}` | Candidata vigente de VER.2", texto)
+        self.assertIn(f"| `{version}` | Versión vigente promovida en VER.2 R4", texto)
         self.assertIn("Históricas; no reciben correcciones independientes", texto)
 
     def test_changelog_preserva_hito_0_0_25(self):

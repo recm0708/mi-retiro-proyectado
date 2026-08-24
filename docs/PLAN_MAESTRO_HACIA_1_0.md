@@ -15,8 +15,8 @@ El plan maestro se interpreta desde la línea base documental posterior a MANT.1
 
 Estado vigente:
 
-- `VERSION` continúa en `0.0.26-beta`.
-- `v0.0.26-beta` sigue siendo el tag formal vigente.
+- `VERSION` se promueve en R4 a `0.0.71.01-beta`.
+- `v0.0.26-beta` sigue siendo el tag formal legacy vigente hasta el cierre firmado post-merge de G071/E01.
 - VER.2 sigue pendiente como reconciliación revision-aware antes de cualquier promoción formal.
 - MANT.1 está cerrado operativamente.
 - DOC.1 R1 está activo para actualizar documentación Markdown vigente y separar evidencia histórica de estado actual.
