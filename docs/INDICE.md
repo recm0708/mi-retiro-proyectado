@@ -190,3 +190,7 @@ La metadata de versión de revisión de un documento de dominio puede conservar 
 - GOV.1.3 R3 preservó el snapshot archive/regulatory-privacy/ como evidencia histórica normativa y de privacidad.
 
 - [AUDITORIA_NOMBRES_RESTANTES_R5H.md](AUDITORIA_NOMBRES_RESTANTES_R5H.md) — Auditoría MANT.1 R5H de nombres técnicos restantes.
+
+## MANT.1 R6 — Auditoría funcional post-renombres
+
+- `AUDITORIA_FUNCIONAL_POST_RENOMBRES_R6.md`: auditoría funcional posterior a los renombres técnicos de MANT.1 R5. Verifica rutas, plantillas, assets, contratos frontend/backend, formularios, cargas de archivo y estructura HTML renderizada.
