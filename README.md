@@ -164,7 +164,18 @@ mi-retiro-proyectado/
 │   └── social/
 ├── data/
 ├── docs/
-│   └── archive/
+│   ├── README.md
+│   ├── architecture/
+│   ├── decisions/
+│   ├── governance/
+│   ├── operations/
+│   ├── product/
+│   ├── regulatory/
+│   ├── security/
+│   ├── standards/
+│   ├── audits/
+│   ├── archive/
+│   └── templates/
 ├── regulations/
 ├── tests/
 ├── .github/

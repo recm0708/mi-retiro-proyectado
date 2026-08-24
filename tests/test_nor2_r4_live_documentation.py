@@ -58,6 +58,22 @@ class TestNOR2R4LiveDocumentation(unittest.TestCase):
             text = (ROOT / rel).read_text(encoding="utf-8")
             self.assertIn("NOR.2 R4", text, rel)
 
+        docs_index = (ROOT / "docs/README.md").read_text(encoding="utf-8")
+        self.assertIn(
+            "**Última actualización transversal:** NOR.2 R4",
+            docs_index,
+        )
+
+        root_readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        self.assertIn(
+            "├── docs/\n│   ├── README.md\n│   ├── architecture/",
+            root_readme,
+        )
+        self.assertIn(
+            "│   └── templates/\n├── regulations/",
+            root_readme,
+        )
+
     def test_evidencia_r4_existe(self):
         path = ROOT / "docs/audits/repository/repository-normalization-live-docs-nor2-r4.md"
         self.assertTrue(path.is_file())
