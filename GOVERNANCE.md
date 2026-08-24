@@ -14,9 +14,9 @@ El gobierno vigente conserva la separación entre estado canónico, evidencia hi
 Estado vigente:
 
 - `VERSION` sigue siendo la fuente única de versión.
-- `0.0.26-beta` sigue siendo la versión canónica vigente.
-- `v0.0.26-beta` sigue siendo el último tag formal.
-- `0.0.71.01-beta` sigue siendo candidato VER.2, no versión publicada.
+- `0.0.71.01-beta` es la versión canónica vigente en `VERSION`.
+- `v0.0.26-beta` sigue siendo el último tag formal legacy hasta el cierre firmado post-merge de G071/E01.
+- `0.0.71.01-beta` corresponde a VER.2 G071/E01 promovido en R4; su tag formal todavía no se crea dentro del PR.
 - MANT.1 quedó cerrado operativamente en R7.
 - DOC.1 R1 queda activo como auditoría documental Markdown post-MANT.1.
 <!-- DOC1-R1-POST-MANT1:END -->

@@ -15,9 +15,9 @@ MANT.1 quedó cerrado operativamente en R7 mediante PR #55 y commit squash `5707
 
 Estado vigente:
 
-- `VERSION` continúa en `0.0.26-beta`.
-- `v0.0.26-beta` continúa siendo el tag formal vigente.
-- `0.0.71.01-beta` continúa reservado como candidato de reconciliación VER.2; no es versión publicada ni tag formal.
+- `VERSION` se promueve en R4 a `0.0.71.01-beta`.
+- `v0.0.26-beta` continúa siendo el tag formal legacy vigente hasta el cierre firmado post-merge de G071/E01.
+- `0.0.71.01-beta` representa VER.2 G071/E01 promovido en árbol; todavía no es tag formal publicado dentro del PR.
 - MANT.1 queda cerrado después de R5H, R6 y R7.
 - DOC.1 R1 queda activo para auditar y actualizar la documentación Markdown vigente posterior a MANT.1.
 - La primera versión oficial objetivo sigue siendo `1.0.0.0` con `Build 000001`, sujeta a los gates del plan maestro.
@@ -261,7 +261,7 @@ La visibilidad pública del repositorio no cambia la etapa funcional ni conviert
 
 Estas referencias preservan contratos documentales de regresión histórica sin reabrir funcionalidades cerradas ni convertir referencias legacy en estado vigente.
 
-**Versión de aplicación:** `0.0.26-beta`
+**Versión de aplicación:** `0.0.71.01-beta`
 
 - [x] **GOV.1.5 — Seguridad, privacidad y transparencia**
 - [x] **GOV.1.8 — Auditoría final y cierre pre-beta de gobierno**

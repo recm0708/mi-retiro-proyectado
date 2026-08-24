@@ -1,7 +1,7 @@
 # Licencia y estrategia de distribución
 
 **Estado:** Vigente — GOV.1.7
-**Versión de aplicación revisada:** `0.0.26-beta`
+**Versión de aplicación revisada:** `0.0.71.01-beta`
 **Versión base histórica:** `0.0.25-beta`
 **Versión base histórica:** `0.0.23-beta`
 **Fecha de decisión original:** 2026-08-18

@@ -14,9 +14,9 @@ La fuente canónica de versión continúa siendo `VERSION`.
 
 Estado vigente:
 
-- `VERSION` conserva `0.0.26-beta`.
-- `v0.0.26-beta` continúa siendo el último tag formal vigente.
-- `0.0.71.01-beta` se conserva como candidato de reconciliación VER.2, no como versión publicada.
+- `VERSION` contiene `0.0.71.01-beta`.
+- `v0.0.26-beta` continúa siendo el último tag formal legacy hasta crear el tag firmado de G071/E01.
+- `0.0.71.01-beta` queda promovida por VER.2 R4 como versión revision-aware en árbol; su tag formal se crea únicamente después de merge y revalidación post-merge.
 - MANT.1 quedó cerrado operativamente en R7 mediante PR #55 y commit squash `57078f2`.
 - DOC.1 R1 no modifica la política de versionado; solo sincroniza documentación Markdown vigente después de MANT.1.
 
@@ -213,7 +213,7 @@ Después de la adopción de firma SSH:
 - se verifica la firma antes de declarar el hito cerrado;
 - `.github/allowed_signers` contiene las claves públicas autorizadas.
 
-Los tags publicados son inmutables. No se crea `v0.0.71.01-beta` mientras VER.2 sea candidato/draft y no haya completado su gate post-integración.
+Los tags publicados son inmutables. `v0.0.71.01-beta` no se crea dentro del PR de promoción; se crea únicamente después de merge, revalidación post-merge y verificación de firma.
 
 ## 9. Build oficial
 

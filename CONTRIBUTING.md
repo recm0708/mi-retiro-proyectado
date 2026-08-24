@@ -10,7 +10,7 @@ Estado vigente:
 
 - MANT.1 quedó cerrado operativamente en R7.
 - DOC.1 R1 está activo para sincronizar documentación Markdown vigente.
-- `VERSION` permanece en `0.0.26-beta`.
+- `VERSION` permanece sincronizado con la versión canónica vigente del árbol; en VER.2 R4 se promueve a `0.0.71.01-beta`.
 - VER.2 permanece como reconciliación/candidato pendiente, no como versión publicada.
 - Todo cambio debe mantener sincronizados código, pruebas, documentación y evidencia aplicable.
 <!-- DOC1-R1-POST-MANT1:END -->

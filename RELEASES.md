@@ -14,8 +14,8 @@ Después de `v0.0.26-beta`, el repositorio integró trabajo funcional, técnico 
 Estado vigente:
 
 - Último tag formal: `v0.0.26-beta`.
-- Versión canónica en `VERSION`: `0.0.26-beta`.
-- Candidato revision-aware VER.2: `0.0.71.01-beta`, pendiente y no publicado.
+- Versión canónica en `VERSION`: `0.0.71.01-beta`.
+- Estado revision-aware VER.2: G071/E01 promovido en R4; tag formal pendiente post-merge.
 - MANT.1 quedó cerrado mediante PR #55 como mantenimiento técnico/documental posterior a R5H/R6/R7.
 - DOC.1 R1 queda activo para reconciliar documentación Markdown vigente post-MANT.1.
 
@@ -176,7 +176,7 @@ La segunda pasada de VER.2 reconoce dentro de PLAN.1 diez estados aceptados G051
 
 UX.4.6f, UX.4.6g, UX.4.6h y UX.4.6i se desarrollaron y cerraron históricamente **sin publicar un tag adicional y manteniendo `VERSION = 0.0.26-beta`**. VER.2 no inventa releases retroactivas para esos bloques; su posición se reconstruye en el ledger como G061–G070.
 
-`0.0.71.01-beta` permanece como candidato VER.2 G071/E01 no publicado; no sustituye `VERSION = 0.0.26-beta`, no crea un tag formal y solo podría aceptarse después de ledger, validador, gate completo, PR/CI e integración.
+`0.0.71.01-beta` queda promovido en `VERSION` como VER.2 G071/E01 durante R4; no mueve `v0.0.26-beta`, no crea tag dentro del PR y requiere merge, revalidación post-merge y firma antes de declarar publicado `v0.0.71.01-beta`.
 
 La base inmediatamente anterior a VER.2 es:
 
@@ -194,9 +194,9 @@ G071 / E01
 
 Mientras el PR de VER.2 no supere el gate completo y se integre:
 
-- G071 permanece reservado, no aceptado;
-- no existe tag `v0.0.71.01-beta`;
-- `v0.0.26-beta` continúa siendo el último tag formal legacy;
+- G071 queda promovido en `VERSION` durante R4;
+- no existe tag `v0.0.71.01-beta` hasta completar merge, revalidación post-merge y firma;
+- `v0.0.26-beta` continúa siendo el último tag formal legacy hasta ese cierre;
 - no se crean tags revision-aware retrospectivos para G001–G070.
 
 Si VER.2 se integra satisfactoriamente, `0.0.71.01-beta` pasa a ser el primer estado nuevo gobernado por la familia revision-aware. La creación de su tag, si corresponde al cierre, se realizará únicamente después de merge y revalidación.

@@ -1,7 +1,7 @@
 # Validación
 
 **Estado:** Vigente
-**Versión candidata revisada:** `0.0.26-beta`
+**Versión candidata revisada:** `0.0.71.01-beta`
 **Versión base histórica:** `0.0.25-beta`
 **Base documental histórica:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal histórica preservada:** UX.4.6e R8 — validación funcional y procedencia editable — 2026-08-19

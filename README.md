@@ -10,7 +10,7 @@
 
 [![Validación continua](https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/ci.yml)
 [![Auditoría de gobernanza](https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/governance-audit.yml/badge.svg?branch=main)](https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/governance-audit.yml)
-![Versión](https://img.shields.io/badge/versi%C3%B3n-0.0.26--beta-2563eb)
+![Versión](https://img.shields.io/badge/versi%C3%B3n-0.0.71.01--beta-2563eb)
 ![Python](https://img.shields.io/badge/Python-3.13%20%7C%203.14-3776AB?logo=python&logoColor=white)
 ![Licencia](https://img.shields.io/badge/licencia-propietaria-6B7280)
 
@@ -20,10 +20,10 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 
 ## Estado del proyecto
 
-- **Versión canónica vigente:** `0.0.26-beta`, obtenida exclusivamente desde [`VERSION`](VERSION).
+- **Versión canónica vigente:** `0.0.71.01-beta`, obtenida exclusivamente desde [`VERSION`](VERSION).
 - **Último cierre integrado en `main`:** MANT.1 R7 — cierre operativo post-auditoría, PR #55, commit squash `57078f2`.
 - **Estado de MANT.1:** cerrado operativamente después de R5H, R6 y R7. El cierre confirma documentación de auditoría, pruebas focalizadas, suite completa local y ausencia de cambios en archivos protegidos.
-- **Estado de VER.2:** reconciliación revision-aware pendiente. El candidato `0.0.71.01-beta` se conserva como candidato documental/contable, no como versión publicada ni tag formal.
+- **Estado de VER.2:** G071/E01 promovido en `VERSION` como `0.0.71.01-beta`; el tag formal `v0.0.71.01-beta` queda pendiente de creación firmada post-merge.
 - **Última versión formal legacy etiquetada:** `0.0.26-beta` — tag firmado e inmutable `v0.0.26-beta`.
 - **Etapa:** desarrollo beta; repositorio público y ejecución orientada actualmente a entorno local.
 - **Programa GOV.1:** cerrado — Auditoría, Gobierno y Trazabilidad Pre-Beta.
@@ -123,7 +123,7 @@ Los documentos de UX que funcionaban como bitácoras de revisión se conservan b
 
 Después de `v0.0.26-beta`, UX.4.6f–UX.4.6i continuaron históricamente sobre ese mismo valor de `VERSION`. VER.2 reconstruye todo el tramo sin inventar tags: el último estado aceptado de la base `7037addd` es **G070/E02**, cierre de UX.4.6i.
 
-La nueva familia beta usa `0.GG.RR.EE-beta`. El candidato actual de reconciliación es `0.0.71.01-beta` (G071/E01). Solo se convierte en estado aceptado si supera el ledger/validador, gate completo, PR/CI e integración; no se crean tags revision-aware retrospectivos para G001–G070.
+La nueva familia beta usa `0.GG.RR.EE-beta`. VER.2 R4 promueve `0.0.71.01-beta` (G071/E01) en `VERSION` después de R1, R2 y R3; el tag formal `v0.0.71.01-beta` queda reservado para el cierre firmado post-merge. No se crean tags revision-aware retrospectivos para G001–G070.
 
 Objetivo de release estable:
 
@@ -305,7 +305,7 @@ Las siguientes líneas se conservan como compatibilidad histórica de pruebas an
 - **841 pruebas** — evidencia histórica UX.4.6i / DEV.2.
 - **UX.4.6f:** cerrado — evidencia histórica del cierre funcional UX.4.6f.
 - R1 → R1.2 → R1.3 → R1.4 — secuencia histórica UX.4.6i.
-- **Versión candidata de VER.2:** `0.0.71.01-beta` — ancla histórica de candidato revision-aware; no reemplaza `VERSION` ni crea tag formal.
+- **Versión VER.2 G071/E01:** `0.0.71.01-beta` — promovida en `VERSION`; el tag formal queda pendiente de firma post-merge.
 - `sebd-panama` adoptado.
 - tag firmado `v0.0.26-beta` publicado.
 - Social Preview e identidad visual oficial configurados.

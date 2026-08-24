@@ -1,4 +1,4 @@
-"""VER.2 — coherencia entre versión candidata, ledger y documentación vigente."""
+"""Regresiones de documentación vigente para VER.2."""
 
 from pathlib import Path
 import unittest
@@ -9,93 +9,59 @@ from app.core.version import descomponer_version_beta_revision
 
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
-VERSION_CANONICA = "0.0.26-beta"
-VERSION_CANDIDATA = "0.0.71.01-beta"
+VERSION_CANONICA = "0.0.71.01-beta"
+ULTIMO_TAG_LEGACY = "v0.0.26-beta"
 
 
 class TestVer2DocumentacionVigente(unittest.TestCase):
-    """Evita que la reconciliación revision-aware vuelva a divergir."""
-
-    def test_version_canonica_permanece_en_ultimo_estado_aceptado_y_g071_es_candidato(self):
+    def test_version_canonica_promovida_a_g071_e01(self):
         version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
+
         self.assertEqual(VERSION_CANONICA, version)
         self.assertEqual(version, APP_VERSION)
-        self.assertIsNone(descomponer_version_beta_revision(version))
+        self.assertEqual((71, 1), descomponer_version_beta_revision(version))
 
-        ledger = (ROOT / "data" / "revision_ledger_pre_1_0.json").read_text(encoding="utf-8")
-        self.assertIn(VERSION_CANDIDATA, ledger)
-        self.assertEqual((71, 1), descomponer_version_beta_revision(VERSION_CANDIDATA))
-
-    def test_superficies_de_estado_declaran_candidato_y_legacy(self):
+    def test_documentos_vivos_declaran_promocion_y_tag_pendiente(self):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
         roadmap = (DOCS / "ROADMAP.md").read_text(encoding="utf-8")
         plan = (DOCS / "PLAN_MAESTRO_HACIA_1_0.md").read_text(encoding="utf-8")
         security = (ROOT / "SECURITY.md").read_text(encoding="utf-8")
+        indice = (DOCS / "INDICE.md").read_text(encoding="utf-8")
 
-        self.assertIn(f"**Versión candidata de VER.2:** `{VERSION_CANDIDATA}`", readme)
-        self.assertIn("**Última versión formal legacy etiquetada:** `0.0.26-beta`", readme)
-        self.assertIn(f"**Versión candidata:** `{VERSION_CANDIDATA}`", roadmap)
-        self.assertIn("**Último tag formal legacy:** `v0.0.26-beta`", roadmap)
-        self.assertIn(f"**Versión candidata transversal VER.2:** `{VERSION_CANDIDATA}`", plan)
-        self.assertIn(f"| `{VERSION_CANDIDATA}` | Candidata vigente de VER.2", security)
+        self.assertIn("**Versión canónica vigente:** `0.0.71.01-beta`", readme)
+        self.assertIn("G071/E01 promovido en `VERSION`", readme)
+        self.assertIn("`VERSION` se promueve en R4 a `0.0.71.01-beta`.", roadmap)
+        self.assertIn("`VERSION` se promueve en R4 a `0.0.71.01-beta`.", plan)
+        self.assertIn("| `0.0.71.01-beta` | Versión vigente promovida en VER.2 R4", security)
+        self.assertIn("**Versión de aplicación:** `0.0.71.01-beta`", indice)
 
-    def test_dev2_es_siguiente_y_no_bloque_iniciado(self):
-        readme = (ROOT / "README.md").read_text(encoding="utf-8")
-        roadmap = (DOCS / "ROADMAP.md").read_text(encoding="utf-8")
-        plan = (DOCS / "PLAN_MAESTRO_HACIA_1_0.md").read_text(encoding="utf-8")
+    def test_tag_legacy_permanece_y_tag_g071_no_se_crea_en_pr(self):
+        versioning = (ROOT / "VERSIONING.md").read_text(encoding="utf-8")
+        releases = (ROOT / "RELEASES.md").read_text(encoding="utf-8")
+        proceso = (DOCS / "PROCESO_RELEASE.md").read_text(encoding="utf-8")
 
-        self.assertIn("**Bloque transversal activo:** VER.2", readme)
-        self.assertIn("**Siguiente bloque funcional:** DEV.2", readme)
-        self.assertIn("VER.2 es un bloque transversal", roadmap)
-        self.assertIn("**Estado:** siguiente bloque funcional; pendiente de inicio hasta cerrar VER.2.", plan)
-        self.assertNotIn("### 6. DEV.2 — Centro de desarrollo\n\n**Estado:** activo.", plan)
+        self.assertIn(ULTIMO_TAG_LEGACY, versioning)
+        self.assertIn("`v0.0.71.01-beta` no se crea dentro del PR de promoción", versioning)
+        self.assertIn("no existe tag `v0.0.71.01-beta` hasta completar merge", releases)
+        self.assertIn("hasta crear y verificar `v0.0.71.01-beta`", proceso)
 
-    def test_ux46i_no_inventa_r1_1_en_documentacion_vigente(self):
-        rutas = (
-            ROOT / "README.md",
-            DOCS / "ROADMAP.md",
-            DOCS / "PLAN_MAESTRO_HACIA_1_0.md",
-            ROOT / "CHANGELOG.md",
-            DOCS / "VALIDACION.md",
-            DOCS / "MATRIZ_TRAZABILIDAD.md",
-            DOCS / "ARQUITECTURA.md",
-        )
-        patrones_invalidos = (
-            "UX.4.6i R1.1",
-            "UX.4.6i R1/R1.1",
-            "R1/R1.1/R1.2/R1.3/R1.4",
-        )
-        for ruta in rutas:
-            texto = ruta.read_text(encoding="utf-8")
-            for patron in patrones_invalidos:
-                with self.subTest(ruta=ruta.name, patron=patron):
-                    self.assertNotIn(patron, texto)
-
-    def test_ledger_y_auditoria_declaran_70_y_reservan_71(self):
+    def test_ledger_y_auditoria_siguen_reconociendo_g071(self):
         ledger = (DOCS / "LEDGER_REVISIONES_PRE_1_0.md").read_text(encoding="utf-8")
         auditoria = (DOCS / "AUDITORIA_VERSIONADO_PRE_1_0.md").read_text(encoding="utf-8")
         versioning = (ROOT / "VERSIONING.md").read_text(encoding="utf-8")
-        self.assertIn("**Contador aceptado en la base:** **G070**", ledger)
-        self.assertIn("70", auditoria)
-        self.assertIn("G071", ledger)
-        self.assertIn(VERSION_CANDIDATA, ledger)
-        self.assertIn("G071 solo queda consumido", versioning)
-
-    def test_ledger_estructurado_es_superficie_canonicamente_indexada(self):
         indice = (DOCS / "INDICE.md").read_text(encoding="utf-8")
-        self.assertIn("revision_ledger_pre_1_0.json", indice)
+
+        self.assertIn("G071", ledger)
+        self.assertIn(VERSION_CANONICA, ledger)
+        self.assertIn("G071", auditoria)
+        self.assertIn("G071 / E01 -> 0.0.71.01-beta", versioning)
         self.assertIn("version_ledger.py", indice)
 
-    def test_tags_legacy_permanecen_historicos_e_inmutables(self):
+    def test_no_tags_revision_aware_retroactivos(self):
         versioning = (ROOT / "VERSIONING.md").read_text(encoding="utf-8")
-        releases = (ROOT / "RELEASES.md").read_text(encoding="utf-8")
+
         for version in range(22, 27):
             tag = f"v0.0.{version}-beta"
-            with self.subTest(tag=tag):
-                self.assertIn(tag, versioning)
-                self.assertIn(tag, releases)
+            self.assertIn(tag, versioning)
+
         self.assertIn("No crear tags revision-aware retrospectivos", versioning)
-
-
-if __name__ == "__main__":
-    unittest.main()

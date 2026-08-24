@@ -1,7 +1,7 @@
 # Limitaciones conocidas
 
 **Estado:** Vigente
-**Versión de aplicación revisada:** `0.0.26-beta`
+**Versión de aplicación revisada:** `0.0.71.01-beta`
 **Versión base histórica:** `0.0.25-beta`
 **Versión base histórica:** `0.0.23-beta`
 **Base documental preservada:** GOV.1.3 R4 — 2026-08-17

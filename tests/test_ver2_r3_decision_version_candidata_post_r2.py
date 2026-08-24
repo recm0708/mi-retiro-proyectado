@@ -38,7 +38,7 @@ def test_ver2_r3_preserva_version_real_actual():
     texto = leer(DECISION)
     version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
 
-    assert version == "0.0.26-beta"
+    assert version == "0.0.71.01-beta"
     assert "`VERSION` permanece en `0.0.26-beta`." in texto
     assert "`v0.0.26-beta` permanece como último tag formal." in texto
 
