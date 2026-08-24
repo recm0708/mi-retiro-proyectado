@@ -1,15 +1,16 @@
 # Estándares del repositorio
 
 **Proyecto:** Mi Retiro Proyectado
-**Fase:** NOR.1 R1 — Definición de estándares del repositorio
+**Fase:** NOR.1 — Definición de estándares del repositorio
 
 ## Propósito
 
-Esta carpeta contiene los documentos oficiales que establecen las reglas de
+Esta carpeta contiene los documentos canónicos que establecen las reglas de
 organización, nomenclatura y mantenimiento del repositorio.
 
 El objetivo es que cualquier archivo, carpeta, documento, componente de código,
-prueba o evidencia creada en el futuro siga una estructura uniforme.
+prueba o evidencia creada en el futuro siga una estructura uniforme y que NOR.2
+pueda auditar el árbol existente contra reglas determinísticas.
 
 ## Alcance
 
@@ -23,7 +24,22 @@ Los estándares definidos aquí aplican a:
 - datos;
 - pruebas;
 - evidencias;
+- raíz del repositorio;
+- artefactos locales no versionados;
 - procesos de reemplazo y migración.
+
+## Documentos canónicos
+
+- `repository-structure.md` — estructura y responsabilidades.
+- `naming-conventions.md` — reglas determinísticas de nombres.
+- `file-standards.md` — requisitos mínimos por tipo de archivo.
+- `documentation-standards.md` — documentación viva, histórica y referencias.
+- `artifact-lifecycle.md` — creación, sustitución, archivo y eliminación.
+- `root-and-local-artifacts.md` — raíz, evidencias y artefactos locales.
+
+Cuando una política técnica anterior contradiga estos documentos, prevalece el
+estándar NOR.1 más reciente. Las reglas especializadas no contradictorias
+continúan vigentes.
 
 ## Idioma de la documentación
 
@@ -36,7 +52,9 @@ framework y runtime.
 Los nombres técnicos de archivos, carpetas y rutas mantienen la convención
 definida por este estándar.
 
-## Aplicación futura
+## Aplicación
 
-Todas las fases posteriores, incluyendo SEC.2, deberán aplicar estas reglas
-antes de crear nuevos archivos o estructuras dentro del repositorio.
+NOR.1 define las reglas.
+
+NOR.2 auditará y normalizará el repositorio existente contra estas reglas antes
+de reanudar la creación estructural profunda de SEC.2.

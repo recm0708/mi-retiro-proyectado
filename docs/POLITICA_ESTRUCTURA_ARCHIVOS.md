@@ -5,6 +5,10 @@
 **Checkpoint técnico:** Mantenibilidad previa a SEC.2
 **Clasificación:** Técnica / Mantenibilidad
 
+> Desde NOR.1, esta política conserva las reglas especializadas por extensión,
+> pero la estructura, nomenclatura, raíz y ciclo de vida se subordinan a los
+> estándares canónicos de `docs/standards/`.
+
 Esta política define cómo deben estructurarse los archivos del proyecto según su
 extensión. Su objetivo es que los archivos actuales y futuros mantengan una forma
 predecible, revisable y homogénea sin convertir el código operativo en una
@@ -50,41 +54,43 @@ propósito, contrato, flujo, dependencias o riesgos técnicos permanentes.
 
 ## 3. Plantillas oficiales
 
-Las plantillas viven en `docs/templates/file-structure/`. Cada plantilla
-usa la extensión que representa cuando el formato lo permite. Para archivos
-binarios se incluyen ejemplos mínimos válidos y su uso se explica en el README de
+Las plantillas viven en `docs/templates/file-structure/`. Cada plantilla usa la
+extensión que representa cuando el formato lo permite. Para archivos binarios se
+incluyen ejemplos mínimos válidos y su uso se explica en el README de
 plantillas.
 
 ## 4. Aplicación en archivos actuales
 
-El primer ajuste de uniformidad se concentra en JavaScript y CSS de
+El primer ajuste de uniformidad se concentró en JavaScript y CSS de
 `app/static/`, porque ahí existían encabezados funcionalmente equivalentes pero
 con estilos diferentes. Python, YAML, scripts, hooks, JSON y archivos especiales
 quedan cubiertos por la política y las plantillas sin reescritura masiva cuando
 su estructura actual ya cumple su contrato.
 
+NOR.2 revisará los nombres y ubicaciones existentes contra las reglas
+determinísticas de NOR.1.
+
 ## 5. Política de nombres de carpetas
 
-Las carpetas técnicas del repositorio deben usar nombres en inglés para que otro
-desarrollador pueda ubicar paquetes, assets, pruebas, documentación y parámetros
-sin mezclar convenciones idiomáticas.
+Las reglas canónicas de nombres se definen en
+`docs/standards/naming-conventions.md`.
 
-Reglas vigentes:
+Se mantienen como principios:
 
-1. Los paquetes Python usan nombres técnicos en inglés: `app/models/`,
-   `app/engines/` y `app/services/`.
+1. Los paquetes Python usan nombres técnicos en inglés.
 2. Los parámetros normativos versionados viven en `regulations/`.
 3. Los casos de validación viven en `tests/validation_cases/`.
 4. El archivo histórico documental vive en `docs/archive/`.
-5. Las carpetas convencionales externas no se renombran: `.github/`,
-   `.githooks/`, `.venv/`, `.pytest_cache/` y `.git/`.
-6. `_entregas/` se conserva porque contiene entregables/evidencias generadas y
-   puede preservar rutas o nombres asociados a paquetes ya producidos.
-7. Un renombre de carpeta exige actualizar imports, enlaces, rutas de pruebas,
-   documentación, configuración y cualquier referencia textual que abra o apunte
-   a la ruta anterior.
+5. Las carpetas convencionales externas no se renombran cuando pertenecen al
+   ecosistema.
+6. `_entregas/` es un directorio local heredado, no una ubicación canónica
+   versionada. Mientras exista, debe permanecer ignorado por Git.
+7. Para nuevos entregables locales se utiliza preferentemente `_deliverables/`.
+8. Un renombre de carpeta exige actualizar imports, enlaces, rutas de pruebas,
+   documentación, configuración y cualquier referencia textual que apunte a la
+   ruta anterior.
 
-La auditoría aplicada queda documentada en
+La auditoría histórica aplicada queda documentada en
 [`AUDITORIA_CARPETAS_R5E.md`](AUDITORIA_CARPETAS_R5E.md).
 
 ## 6. Regla para archivos futuros
@@ -93,3 +99,6 @@ Todo archivo nuevo debe escoger la plantilla más cercana, eliminar texto de
 ejemplo, conservar la estructura de propósito/alcance y documentar solo
 decisiones permanentes. Si una extensión nueva no tiene plantilla, primero se
 debe registrar su política antes de agregar muchos archivos con ese formato.
+
+La ubicación, nomenclatura y ciclo de vida se validan además contra
+`docs/standards/`.
