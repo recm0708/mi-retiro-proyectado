@@ -14,7 +14,7 @@ class TestUX46DGestionDatos(unittest.TestCase):
     def setUpClass(cls):
         cls.simulacion = (ROOT / "app/templates/simulation.html").read_text(encoding="utf-8")
         cls.base = (ROOT / "app/templates/base.html").read_text(encoding="utf-8")
-        cls.metodologia = (ROOT / "app/templates/metodologia.html").read_text(encoding="utf-8")
+        cls.metodologia = (ROOT / "app/templates/methodology.html").read_text(encoding="utf-8")
         cls.modal = (
             ROOT / "app/templates/partials/data_management.html"
         ).read_text(encoding="utf-8")

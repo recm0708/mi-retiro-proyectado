@@ -54,13 +54,13 @@ from app.models.simulation import (
 from app.services.salary_history import (
     analizar_historial_salarial,
 )
-from app.services.detalle_anio_actual import (
+from app.services.current_year_detail import (
     analizar_detalle_anio_actual,
 )
 from app.services.timeline import (
     construir_linea_tiempo,
 )
-from app.services.referencia_mi_retiro_seguro import (
+from app.services.mi_retiro_seguro_reference import (
     analizar_comprobante_pdf,
 )
 from app.services.ficha_digital import (
@@ -139,8 +139,8 @@ BASE_DIR = Path(__file__).resolve().parent
 # Configuración de FastAPI
 # ============================================================
 from app.services.regulatory_sources import construir_catalogo_metodologia
-from app.services.como_se_calcula import construir_guia_calculo
-from app.services.centro_desarrollo import construir_estado_centro_desarrollo
+from app.services.calculation_guide import construir_guia_calculo
+from app.services.development_center import construir_estado_centro_desarrollo
 
 
 app = FastAPI(
@@ -351,7 +351,7 @@ async def comparar(
 
     return templates.TemplateResponse(
         request=request,
-        name="comparar.html",
+        name="comparison.html",
         context={
             "pagina_activa": "comparar",
             "version": APP_VERSION,
@@ -370,7 +370,7 @@ async def metodologia(
 
     return templates.TemplateResponse(
         request=request,
-        name="metodologia.html",
+        name="methodology.html",
         context={
             "pagina_activa": "metodologia",
             "version": APP_VERSION,
@@ -390,7 +390,7 @@ async def como_se_calcula(
 
     return templates.TemplateResponse(
         request=request,
-        name="como_se_calcula.html",
+        name="calculation_guide.html",
         context={
             "pagina_activa": "como_se_calcula",
             "version": APP_VERSION,
@@ -411,7 +411,7 @@ async def centro_desarrollo(
 
     return templates.TemplateResponse(
         request=request,
-        name="dev_centro_desarrollo.html",
+        name="dev_development_center.html",
         context={
             "pagina_activa": "centro_desarrollo",
             "version": APP_VERSION,

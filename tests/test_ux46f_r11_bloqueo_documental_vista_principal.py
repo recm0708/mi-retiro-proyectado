@@ -14,12 +14,12 @@ def leer(ruta: str) -> str:
 class UX46fR11BloqueoDocumentalTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        cls.procedencia = leer("app/static/js/procedencia_editable.js")
+        cls.procedencia = leer("app/static/js/editable_provenance.js")
         cls.importacion = leer("app/static/js/official_data_import.js")
         cls.historial = leer("app/static/js/salary_history.js")
-        cls.detalle = leer("app/static/js/detalle_anio_actual.js")
+        cls.detalle = leer("app/static/js/current_year_detail.js")
         cls.simulacion = leer("app/static/js/simulation.js")
-        cls.css = leer("app/static/css/procedencia-editable.css")
+        cls.css = leer("app/static/css/editable-provenance.css")
         cls.design = leer("app/static/css/design-system.css")
 
     def test_01_detectados_se_bloquean_fuera_del_modal(self):

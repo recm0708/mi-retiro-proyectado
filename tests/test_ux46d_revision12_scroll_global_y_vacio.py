@@ -13,7 +13,7 @@ class TestUX46DRevision12ScrollGlobalYVacio(unittest.TestCase):
         cls.design = (ROOT / "app/static/css/design-system.css").read_text(encoding="utf-8")
         cls.historial = (ROOT / "app/templates/partials/salary_history.html").read_text(encoding="utf-8")
         cls.historial_js = (ROOT / "app/static/js/salary_history.js").read_text(encoding="utf-8")
-        cls.comparar = (ROOT / "app/templates/comparar.html").read_text(encoding="utf-8")
+        cls.comparar = (ROOT / "app/templates/comparison.html").read_text(encoding="utf-8")
 
     def test_scrollbar_tematico_se_extiende_a_terminos_modales_y_pagina(self):
         for selector in (

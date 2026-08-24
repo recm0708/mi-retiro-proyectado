@@ -12,7 +12,7 @@ from fastapi.testclient import TestClient
 
 from app.core.observability import registrar_evento, ruta_log_actual
 from app.main import app
-from app.services.centro_desarrollo import (
+from app.services.development_center import (
     construir_estado_centro_desarrollo,
     ejecutar_autodiagnostico,
 )

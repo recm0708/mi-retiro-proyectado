@@ -7,7 +7,7 @@ from pathlib import Path
 from fastapi.testclient import TestClient
 
 from app.main import app
-from app.services.referencia_mi_retiro_seguro import (
+from app.services.mi_retiro_seguro_reference import (
     extraer_referencia_desde_texto,
 )
 
@@ -80,7 +80,7 @@ class TestUX44ReferenciaPDF(unittest.TestCase):
             ROOT / "app/templates/partials/results.html"
         ).read_text(encoding="utf-8")
         cls.referencia_js = (
-            ROOT / "app/static/js/referencia_mi_retiro_seguro.js"
+            ROOT / "app/static/js/mi_retiro_seguro_reference.js"
         ).read_text(encoding="utf-8")
         cls.resultados_js = (
             ROOT / "app/static/js/results.js"
@@ -134,7 +134,7 @@ class TestUX44ReferenciaPDF(unittest.TestCase):
         self.assertIn("Vista previa del documento", self.parcial)
         self.assertIn("Editar campos", self.parcial)
         self.assertIn("No existe un monto predeterminado", self.resultados_html)
-        self.assertIn("referencia_mi_retiro_seguro.js", self.simulacion)
+        self.assertIn("mi_retiro_seguro_reference.js", self.simulacion)
         self.assertIn("resultado-comparacion-referencia", self.resultados_html)
 
     def test_comparacion_usa_monto_extraido_y_resultado_actual(self):
@@ -147,10 +147,10 @@ class TestUX44ReferenciaPDF(unittest.TestCase):
 
     def test_produccion_no_hardcodea_montos_de_los_dos_comprobantes(self):
         rutas = [
-            ROOT / "app/static/js/referencia_mi_retiro_seguro.js",
+            ROOT / "app/static/js/mi_retiro_seguro_reference.js",
             ROOT / "app/templates/partials/results.html",
             ROOT / "app/templates/partials/official_data_import.html",
-            ROOT / "app/services/referencia_mi_retiro_seguro.py",
+            ROOT / "app/services/mi_retiro_seguro_reference.py",
         ]
         contenido = "\n".join(ruta.read_text(encoding="utf-8") for ruta in rutas)
 

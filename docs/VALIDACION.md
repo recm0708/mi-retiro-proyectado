@@ -52,6 +52,15 @@ como cerrado, NOR.2 R2 como activo y represente las carpetas reales
 La versión de aplicación no cambia.
 <!-- NOR2-R2-VALIDATION:END -->
 
+
+<!-- NOR2-R3-VALIDATION:START -->
+## Validación NOR.2 R3
+
+R3 valida los 28 movimientos técnicos, ausencia de las rutas antiguas,
+existencia de las rutas nuevas, imports de servicios, estabilidad de URL
+públicas, excepción Ficha Digital y versión canónica sin cambios.
+<!-- NOR2-R3-VALIDATION:END -->
+
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado de validación post-MANT.1
 
@@ -553,10 +562,10 @@ Inventario vigente: **99 módulos**.
 - `tests/test_traceability.py`
 - `tests/test_ux42_estados_visuales.py`
 - `tests/test_ux43_formularios_teclado.py`
-- `tests/test_ux44_detalle_anio_actual.py`
+- `tests/test_ux44_current_year_detail.py`
 - `tests/test_ux44_edad_timeline.py`
 - `tests/test_ux44_importacion_oficial.py`
-- `tests/test_ux44_referencia_pdf.py`
+- `tests/test_ux44_pdf_reference.py`
 - `tests/test_ux45_cierre_resultados_accesibilidad.py`
 - `tests/test_ux46a_redisenio_integral.py`
 - `tests/test_ux46b_paso1_datos_personales.py`
@@ -573,12 +582,12 @@ Inventario vigente: **99 módulos**.
 - `tests/test_ux46d_revision15_campos_importacion_y_limpieza.py`
 - `tests/test_ux46d_revision16_flujo_paso3.py`
 - `tests/test_ux46d_revision17_auditoria_datos.py`
-- `tests/test_ux46d_revision18_procedencia_persistencia.py`
-- `tests/test_ux46d_revision19_sincronizacion_actual.py`
+- `tests/test_ux46d_revision18_provenance_persistence.py`
+- `tests/test_ux46d_revision19_current_sync.py`
 - `tests/test_ux46d_revision20_vigencia_resumen.py`
 - `tests/test_ux46d_revision21_fecha_confiable.py`
 - `tests/test_ux46d_revision22_cierre_paso3.py`
-- `tests/test_ux46d_revision23_ficha_actualiza_cuotas.py`
+- `tests/test_ux46d_revision23_ficha_updates_contributions.py`
 - `tests/test_ux46d_revision7_privacidad_consulta.py`
 - `tests/test_ux46d_revision8_tablas.py`
 - `tests/test_ux46d_revision9_reactividad_privacidad.py`
@@ -587,13 +596,13 @@ Inventario vigente: **99 módulos**.
 - `tests/test_ux46e_estandar_runtime.py`
 - `tests/test_ux46e_preparacion_publica.py`
 - `tests/test_ux46e_proyeccion_salarial.py`
-- `tests/test_ux46e_r81_procedencia_editable.py`
+- `tests/test_ux46e_r81_editable_provenance.py`
 - `tests/test_ux46e_r8_cierre_funcional.py`
 - `tests/test_ux46e_r8_reconsentimiento_borrado.py`
 - `tests/test_ux46e_r91_candidato_cierre.py`
 - `tests/test_ux46e_renumeracion_documental.py`
 - `tests/test_ux46f_r11_bloqueo_documental_vista_principal.py`
-- `tests/test_ux46f_r1_consistencia_procedencia_adjuntos.py`
+- `tests/test_ux46f_r1_attachment_provenance_consistency.py`
 - `tests/test_ux46g_r1_escenarios_retirement.py`
 - `tests/test_ux4_remate_visual.py`
 
@@ -664,7 +673,7 @@ Se añaden tres regresiones para la alineación del período del historial, la a
 
 ### UX.4.6i R1 — guía pública Cómo se calcula
 
-La revisión añade **14 regresiones específicas** en `tests/test_ux46i_r1_como_se_calcula.py`. Partiendo del cierre de UX.4.6h con 812 pruebas, el gate objetivo del candidato es **826 pruebas en `OK`**, además de `pip check`, compilación Python, sintaxis JavaScript y `git diff --check`.
+La revisión añade **14 regresiones específicas** en `tests/test_ux46i_r1_calculation_guide.py`. Partiendo del cierre de UX.4.6h con 812 pruebas, el gate objetivo del candidato es **826 pruebas en `OK`**, además de `pip check`, compilación Python, sintaxis JavaScript y `git diff --check`.
 
 La validación automática cubre ruta pública, lectura de parámetros normativos, ausencia de motores en la capa explicativa, contenido SEBD/Mixto/SUCGS, enlaces desde resultados y Metodología, estructura accesible/responsive, ADR/RF/TR y documentación. La validación manual debe comprobar temas Claro, Oscuro y Alto contraste, navegación por anclas, tablas desplegables y legibilidad en escritorio/móvil.
 

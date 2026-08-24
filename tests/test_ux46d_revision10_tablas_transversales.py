@@ -18,12 +18,12 @@ class TestUX46DRevision10TablasTransversales(unittest.TestCase):
     def test_tablas_estaticas_principales_usan_superficie_comun(self):
         rutas = (
             "app/templates/partials/salary_history.html",
-            "app/templates/partials/detalle_anio_actual.html",
+            "app/templates/partials/current_year_detail.html",
             "app/templates/partials/official_data_import.html",
-            "app/templates/partials/importacion_ficha_digital.html",
+            "app/templates/partials/ficha_digital_import.html",
             "app/templates/partials/retirement.html",
             "app/templates/partials/results.html",
-            "app/templates/comparar.html",
+            "app/templates/comparison.html",
         )
         for ruta in rutas:
             contenido = (ROOT / ruta).read_text(encoding="utf-8")
@@ -56,7 +56,7 @@ class TestUX46DRevision10TablasTransversales(unittest.TestCase):
 
     def test_contrato_visual_no_reemplaza_semanticas_especificas(self):
         historial_js = (ROOT / "app/static/js/salary_history.js").read_text(encoding="utf-8")
-        detalle = (ROOT / "app/static/js/detalle_anio_actual.js").read_text(encoding="utf-8")
+        detalle = (ROOT / "app/static/js/current_year_detail.js").read_text(encoding="utf-8")
         self.assertIn("function evaluarEstadoFilaHistorial", historial_js)
         self.assertIn("cuota_acreditada", detalle)
         self.assertIn("data-row-imported", self.design)

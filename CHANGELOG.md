@@ -5,6 +5,7 @@ Este archivo registra **cambios notables por versión**. No sustituye el histori
 Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamente en GOV.1.1 a partir del historial real. `0.0.22-beta` es la primera versión formal adoptada bajo la política de GOV.1.2.
 
 ## [Unreleased]
+- NOR.2 R3: migra 28 rutas técnicas de runtime, plantillas, pruebas y configuración; mantiene estables las URL públicas y preserva Ficha Digital como excepción de dominio.
 - NOR.2 R2: clasifica la migración integral, corrige el estado público del `README.md` y define que el árbol vigente no conservará rutas/documentos obsoletos salvo evidencia histórica justificada.
 - NOR.2 R1: inicia la auditoría integral de normalización contra los estándares cerrados por NOR.1, sin ejecutar todavía renombres ni movimientos.
 - NOR.1 R7: cierra la fase de definición de estándares del repositorio y deja NOR.2 como siguiente fase de normalización previa a SEC.2.

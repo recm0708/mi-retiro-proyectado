@@ -86,8 +86,8 @@ introduce nuevas capas de producto.
 ### Servicios principales
 
 - `app/services/comparator.py` — construye matrices retiro × salario sin recalcular fórmulas fuera de los servicios integrados
-- `app/services/como_se_calcula.py` — estructura parámetros normativos para la guía pública sin ejecutar motores
-- `app/services/detalle_anio_actual.py` — normaliza salarios mensuales/quincenales y separa salario visible de cuota acreditada
+- `app/services/calculation_guide.py` — estructura parámetros normativos para la guía pública sin ejecutar motores
+- `app/services/current_year_detail.py` — normaliza salarios mensuales/quincenales y separa salario visible de cuota acreditada
 - `app/services/reference_date.py`
 - `app/services/ficha_digital.py` — extrae salarios recientes desde PDF en memoria con límites de seguridad y minimización
 - `app/services/regulatory_sources.py` — arma catálogo metodológico de fuentes oficiales desde parámetros versionados
@@ -95,7 +95,7 @@ introduce nuevas capas de producto.
 - `app/services/timeline.py`
 - `app/services/contribution_projection.py`
 - `app/services/salary_projection.py`
-- `app/services/referencia_mi_retiro_seguro.py`
+- `app/services/mi_retiro_seguro_reference.py`
 - `app/services/unified_result.py`
 - `app/services/results.py`
 - `app/services/mixto_results.py`
@@ -106,14 +106,14 @@ introduce nuevas capas de producto.
 
 ### Presentación CSS y plantillas documentadas
 
-- `app/static/css/como-se-calcula.css` — delimita responsabilidades visuales de la guía pública: hero, navegación, fórmulas, tablas, fuentes, accesibilidad y responsive.
-- `app/templates/como_se_calcula.html` — organiza comentarios Jinja por recorrido general, sistemas previsionales, fuentes y cierre sin modificar el HTML renderizado.
+- `app/static/css/calculation-guide.css` — delimita responsabilidades visuales de la guía pública: hero, navegación, fórmulas, tablas, fuentes, accesibilidad y responsive.
+- `app/templates/calculation_guide.html` — organiza comentarios Jinja por recorrido general, sistemas previsionales, fuentes y cierre sin modificar el HTML renderizado.
 
 ### Presentación JavaScript crítica
 
 - `app/static/js/accessibility.js`
 - `app/static/js/comparator.js` — matriz retiro × salario, advertencias y diferencias sin recalcular pensiones.
-- `app/static/js/detalle_anio_actual.js`
+- `app/static/js/current_year_detail.js`
 - `app/static/js/data_management.js` — limpieza controlada de pasos, invalidación descendente y borrado limitado a claves propias.
 - `app/static/js/salary_history.js`
 - `app/static/js/official_data_import.js` — borradores revisables de Mi Retiro Seguro/Ficha Digital, vigencia y confirmación explícita.
@@ -122,12 +122,12 @@ introduce nuevas capas de producto.
 - `app/static/js/wizard_navigation.js`
 - `app/static/js/privacy.js` — consentimiento versionado, sesión autorizada y borrado defensivo de datos propios.
 - `app/static/js/attachment_processing.js` — estado global accesible y exclusión de dobles ejecuciones durante análisis de archivos.
-- `app/static/js/referencia_mi_retiro_seguro.js`
+- `app/static/js/mi_retiro_seguro_reference.js`
 - `app/static/js/results.js` — contratos de cálculo, comparación acreditado/proyectado, trazabilidad y salida por sistema.
 - `app/static/js/results_orchestration.js` — decisiones de Paso 6, transición Mixto/SUCGS, enlace contextual e impresión sin duplicar fórmulas.
 - `app/static/js/retirement.js`
 - `app/static/js/simulation.js` — estado temporal, navegación de pasos, validación progresiva y dependencias entre módulos.
-- `app/static/js/tema.js`
+- `app/static/js/theme.js`
 
 ## 3. Capas
 
@@ -159,7 +159,7 @@ La metadata puramente visual y diagnóstica no se convierte automáticamente en 
 
 ### 3.3. Servicios (`app/services/`)
 
-Los servicios normalizan, integran y coordinan cuotas, historial, detalle actual, proyección, retiro, importaciones, resultados, comparación y fecha externa. `como_se_calcula.py` es una capa de presentación: lee parámetros versionados para explicar el procedimiento, pero no importa ni ejecuta motores previsionales.
+Los servicios normalizan, integran y coordinan cuotas, historial, detalle actual, proyección, retiro, importaciones, resultados, comparación y fecha externa. `calculation_guide.py` es una capa de presentación: lee parámetros versionados para explicar el procedimiento, pero no importa ni ejecuta motores previsionales.
 
 `reference_date.py` puede emitir eventos agregados de cache/consulta cuando Developer Diagnostics está activo. Esos eventos no incluyen URL, fecha recibida ni datos de simulación.
 
@@ -179,7 +179,7 @@ No leen PDFs, `sessionStorage`, controles HTML ni logs. Developer Diagnostics no
 
 ### 3.5. Presentación (`app/templates/`, `app/static/`)
 
-Jinja2 genera las páginas y parciales. JavaScript administra el asistente, estado temporal, importaciones, procedencia, invalidación, llamadas HTTP y representación de resultados. La ruta pública `/como-se-calcula` usa `como_se_calcula.html` y `como-se-calcula.css` para explicar el procedimiento general sin convertir la página en una calculadora paralela.
+Jinja2 genera las páginas y parciales. JavaScript administra el asistente, estado temporal, importaciones, procedencia, invalidación, llamadas HTTP y representación de resultados. La ruta pública `/como-se-calcula` usa `calculation_guide.html` y `calculation-guide.css` para explicar el procedimiento general sin convertir la página en una calculadora paralela.
 
 JavaScript no implementa fórmulas previsionales principales ni un segundo sistema de logging de datos de negocio.
 
@@ -217,7 +217,7 @@ Consultar [GESTION_DATOS_SIMULACION.md](GESTION_DATOS_SIMULACION.md).
 
 ### Mi Retiro Seguro
 
-`app/services/referencia_mi_retiro_seguro.py` extrae una referencia personal revisable. El archivo original no se persiste.
+`app/services/mi_retiro_seguro_reference.py` extrae una referencia personal revisable. El archivo original no se persiste.
 
 ### Ficha Digital
 
@@ -343,7 +343,7 @@ Este documento describe el estado técnico vigente después de GOV.1.4.
 
 ## UX.4.6f R1.1 — bloqueo documental en superficies principales
 
-`procedencia_editable.js` separa tres conceptos: **fotografía documental original**, **copia de trabajo** y **capacidad de edición de la superficie actual**. En los paneles principales, un control cuyo valor existía en la fotografía original se aplica mediante `readonly` o `disabled` y la clase visual `field-imported-readonly`; los modales de revisión quedan excluidos de este helper para permitir el ciclo explícito **Editar campos → confirmar**.
+`editable_provenance.js` separa tres conceptos: **fotografía documental original**, **copia de trabajo** y **capacidad de edición de la superficie actual**. En los paneles principales, un control cuyo valor existía en la fotografía original se aplica mediante `readonly` o `disabled` y la clase visual `field-imported-readonly`; los modales de revisión quedan excluidos de este helper para permitir el ciclo explícito **Editar campos → confirmar**.
 
 El patrón se reutiliza en datos personales, cuotas, historial anual y detalle del año actual. La franja primaria del sistema visual funciona en Claro, Oscuro y Alto contraste y acompaña, pero no reemplaza, la semántica nativa de bloqueo. Los valores automáticos derivados no se confunden con datos documentales y mantienen sus reglas específicas de edición.
 
@@ -356,7 +356,7 @@ Paso 5 mantiene dos capas separadas: `app/static/js/retirement.js` propone y con
 
 ## 14. Guía pública de cálculo
 
-`/como-se-calcula` es una superficie pública de transparencia. `app/services/como_se_calcula.py` lee parámetros de `regulations/*.json` y los entrega a `app/templates/como_se_calcula.html`; no ejecuta `app/engines/` ni construye resultados individuales.
+`/como-se-calcula` es una superficie pública de transparencia. `app/services/calculation_guide.py` lee parámetros de `regulations/*.json` y los entrega a `app/templates/calculation_guide.html`; no ejecuta `app/engines/` ni construye resultados individuales.
 
 El Paso 6 enlaza a la sección del sistema correspondiente mediante anclas públicas (`#sebd`, `#mixto`, `#sucgs`) sin transportar datos personales, salarios, cuotas ni montos en la URL. Las sustituciones numéricas del caso individual permanecen en la trazabilidad de resultados.
 

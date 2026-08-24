@@ -70,7 +70,7 @@ class TestUx46eR91CandidatoCierre(unittest.TestCase):
             ROOT / "tests/test_gov18_cierre_gobierno.py",
             ROOT / "tests/test_identidad_publica_github_pre_r8.py",
             ROOT / "tests/test_ux46e_estandar_runtime.py",
-            ROOT / "tests/test_ux46e_r81_procedencia_editable.py",
+            ROOT / "tests/test_ux46e_r81_editable_provenance.py",
             ROOT / "tests/test_ux46e_r8_cierre_funcional.py",
         )
         patron = re.compile(

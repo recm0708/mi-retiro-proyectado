@@ -9,7 +9,7 @@
 
 La sección pública **Cómo se calcula** permite comprender y reproducir manualmente el orden general de las reglas implementadas para SEBD, Subsistema Mixto y SUCGS.
 
-No constituye un motor alternativo. Las fórmulas ejecutables continúan exclusivamente en Python; la vista pública describe el procedimiento y lee parámetros versionados desde `regulations/` por medio de `app/services/como_se_calcula.py`.
+No constituye un motor alternativo. Las fórmulas ejecutables continúan exclusivamente en Python; la vista pública describe el procedimiento y lee parámetros versionados desde `regulations/` por medio de `app/services/calculation_guide.py`.
 
 ## 2. Contrato común
 

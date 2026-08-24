@@ -64,10 +64,10 @@ EXPECTED_PATHS = [
 
 PRESERVED_PATHS = [
     "app/core/normativa.py",
-    "app/services/centro_desarrollo.py",
-    "app/services/referencia_mi_retiro_seguro.py",
-    "app/templates/dev_centro_desarrollo.html",
-    "app/templates/partials/referencia_mi_retiro_seguro.html",
+    "app/services/development_center.py",
+    "app/services/mi_retiro_seguro_reference.py",
+    "app/templates/dev_development_center.html",
+    "app/templates/partials/mi_retiro_seguro_reference.html",
     "regulations/mixto.json",
     "regulations/sebd.json",
     "regulations/sucgs.json",

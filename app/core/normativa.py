@@ -43,13 +43,13 @@ def cargar_parametros_generales() -> dict:
 
     ruta = (
         DIRECTORIO_NORMATIVA
-        / "general_parameters.json"
+        / "general-parameters.json"
     )
 
     if not ruta.exists():
         raise FileNotFoundError(
             "No se encontró el archivo "
-            "regulations/general_parameters.json."
+            "regulations/general-parameters.json."
         )
 
     with ruta.open(

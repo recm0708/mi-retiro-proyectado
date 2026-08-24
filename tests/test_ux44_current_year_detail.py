@@ -10,7 +10,7 @@ from app.models.simulation import (
     DatosDetalleAnioActual,
     RegistroDetalleAnioActual,
 )
-from app.services.detalle_anio_actual import (
+from app.services.current_year_detail import (
     analizar_detalle_anio_actual,
 )
 
@@ -25,12 +25,12 @@ class TestUX44DetalleAnioActual(unittest.TestCase):
     def setUpClass(cls):
         cls.cliente = TestClient(app)
         cls.parcial = (
-            ROOT / "app/templates/partials/detalle_anio_actual.html"
+            ROOT / "app/templates/partials/current_year_detail.html"
         ).read_text(encoding="utf-8")
         cls.simulacion = (ROOT / "app/templates/simulation.html").read_text(
             encoding="utf-8"
         )
-        cls.js = (ROOT / "app/static/js/detalle_anio_actual.js").read_text(
+        cls.js = (ROOT / "app/static/js/current_year_detail.js").read_text(
             encoding="utf-8"
         )
         cls.retiro = (ROOT / "app/static/js/retirement.js").read_text(
@@ -196,7 +196,7 @@ class TestUX44DetalleAnioActual(unittest.TestCase):
 
     def test_interfaz_ofrece_detalle_manual_y_deja_ficha_en_su_bloque(self):
         ficha = (
-            ROOT / "app/templates/partials/importacion_ficha_digital.html"
+            ROOT / "app/templates/partials/ficha_digital_import.html"
         ).read_text(encoding="utf-8")
         self.assertIn("Abrir Mi Caja Digital", ficha)
         self.assertNotIn("Abrir Mi Caja Digital", self.parcial)
@@ -230,7 +230,7 @@ class TestUX44DetalleAnioActual(unittest.TestCase):
     def test_simulacion_carga_modulo_de_detalle(self):
         respuesta = self.cliente.get("/simulacion")
         self.assertEqual(respuesta.status_code, 200)
-        self.assertIn("detalle_anio_actual.js", respuesta.text)
+        self.assertIn("current_year_detail.js", respuesta.text)
         self.assertIn("Detalle salarial del año actual", respuesta.text)
 
 

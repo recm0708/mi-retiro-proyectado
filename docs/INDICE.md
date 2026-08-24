@@ -17,6 +17,10 @@ Este archivo es el punto de entrada para la documentación técnica, funcional, 
 
 - [`audits/repository/repository-normalization-migration-matrix-nor2-r2.md`](audits/repository/repository-normalization-migration-matrix-nor2-r2.md) — clasificación de documentos, runtime, datos y artefactos locales, con orden R3–R8.
 
+### NOR.2 R3 — migración técnica
+
+- [`audits/repository/repository-normalization-runtime-migration-nor2-r3.md`](audits/repository/repository-normalization-runtime-migration-nor2-r3.md) — 28 movimientos de runtime/configuración, referencias sincronizadas y URL públicas preservadas.
+
 - [`audits/repository/repository-normalization-baseline-nor2-r1.md`](audits/repository/repository-normalization-baseline-nor2-r1.md) — hallazgos, riesgos y transición a la matriz de migración.
 - [`audits/repository/repository-normalization-inventory-nor2-r1.txt`](audits/repository/repository-normalization-inventory-nor2-r1.txt) — inventario reproducible del árbol versionado.
 

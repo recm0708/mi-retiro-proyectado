@@ -12,7 +12,7 @@ class TestUX46DRevision7PrivacidadConsulta(unittest.TestCase):
     def setUpClass(cls):
         cls.base = (ROOT / "app/templates/base.html").read_text(encoding="utf-8")
         cls.simulacion = (ROOT / "app/templates/simulation.html").read_text(encoding="utf-8")
-        cls.metodologia = (ROOT / "app/templates/metodologia.html").read_text(encoding="utf-8")
+        cls.metodologia = (ROOT / "app/templates/methodology.html").read_text(encoding="utf-8")
         cls.terminos = (
             ROOT / "app/templates/partials/privacy_consent.html"
         ).read_text(encoding="utf-8")

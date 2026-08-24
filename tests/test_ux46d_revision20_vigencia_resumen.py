@@ -10,9 +10,9 @@ class TestUX46DRevision20VigenciaResumen(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.importacion_js = (ROOT / "app/static/js/official_data_import.js").read_text(encoding="utf-8")
-        cls.detalle_js = (ROOT / "app/static/js/detalle_anio_actual.js").read_text(encoding="utf-8")
-        cls.ficha_html = (ROOT / "app/templates/partials/importacion_ficha_digital.html").read_text(encoding="utf-8")
-        cls.detalle_html = (ROOT / "app/templates/partials/detalle_anio_actual.html").read_text(encoding="utf-8")
+        cls.detalle_js = (ROOT / "app/static/js/current_year_detail.js").read_text(encoding="utf-8")
+        cls.ficha_html = (ROOT / "app/templates/partials/ficha_digital_import.html").read_text(encoding="utf-8")
+        cls.detalle_html = (ROOT / "app/templates/partials/current_year_detail.html").read_text(encoding="utf-8")
         cls.css = (ROOT / "app/static/css/design-system.css").read_text(encoding="utf-8")
 
     def test_ficha_digital_evalua_vigencia_con_fecha_de_referencia(self):

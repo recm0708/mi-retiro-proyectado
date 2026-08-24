@@ -12,7 +12,7 @@ from app.core.normativa import (
     cargar_parametros_sucgs,
 )
 from app.main import app
-from app.services.como_se_calcula import construir_guia_calculo
+from app.services.calculation_guide import construir_guia_calculo
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -26,19 +26,19 @@ class TestUX46iR1ComoSeCalcula(unittest.TestCase):
         cls.cliente = TestClient(app)
         cls.respuesta = cls.cliente.get("/como-se-calcula")
         cls.html = cls.respuesta.text
-        cls.servicio = (ROOT / "app/services/como_se_calcula.py").read_text(
+        cls.servicio = (ROOT / "app/services/calculation_guide.py").read_text(
             encoding="utf-8"
         )
-        cls.plantilla = (ROOT / "app/templates/como_se_calcula.html").read_text(
+        cls.plantilla = (ROOT / "app/templates/calculation_guide.html").read_text(
             encoding="utf-8"
         )
-        cls.css = (ROOT / "app/static/css/como-se-calcula.css").read_text(
+        cls.css = (ROOT / "app/static/css/calculation-guide.css").read_text(
             encoding="utf-8"
         )
         cls.resultados = (
             ROOT / "app/static/js/results_orchestration.js"
         ).read_text(encoding="utf-8")
-        cls.metodologia = (ROOT / "app/templates/metodologia.html").read_text(
+        cls.metodologia = (ROOT / "app/templates/methodology.html").read_text(
             encoding="utf-8"
         )
 
@@ -330,7 +330,7 @@ class TestUX46iR1ComoSeCalcula(unittest.TestCase):
         guia = (ROOT / "docs/COMO_SE_CALCULA.md").read_text(encoding="utf-8")
 
         self.assertIn("**DEV.2:** cerrado.", readme)
-        self.assertIn("**NOR.2 R2:** activo", readme)
+        self.assertIn("**NOR.2 R3:** activo", readme)
         for revision in (
             "R1 — ruta pública",
             "R1.2 — navegación",

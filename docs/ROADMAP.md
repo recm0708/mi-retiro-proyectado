@@ -48,6 +48,17 @@ auditar en el cierre.
 SEC.2 permanece pausado.
 <!-- NOR2-R2-MATRIX:END -->
 
+
+<!-- NOR2-R3-RUNTIME:START -->
+## NOR.2 R3 — migración técnica
+
+R3 ejecuta los movimientos de runtime/configuración aprobados en R2 y actualiza
+imports, plantillas, assets y pruebas de manera atómica. Las URL públicas
+permanecen estables. R4 normalizará la documentación viva.
+
+SEC.2 permanece pausado.
+<!-- NOR2-R3-RUNTIME:END -->
+
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado post-MANT.1
 

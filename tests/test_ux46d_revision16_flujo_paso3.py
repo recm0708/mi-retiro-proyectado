@@ -18,10 +18,10 @@ class TestUX46dRevision16FlujoPaso3(unittest.TestCase):
     def setUpClass(cls):
         cls.simulacion = (ROOT / "app/templates/simulation.html").read_text(encoding="utf-8")
         cls.detalle = (
-            ROOT / "app/templates/partials/detalle_anio_actual.html"
+            ROOT / "app/templates/partials/current_year_detail.html"
         ).read_text(encoding="utf-8")
         cls.ficha = (
-            ROOT / "app/templates/partials/importacion_ficha_digital.html"
+            ROOT / "app/templates/partials/ficha_digital_import.html"
         ).read_text(encoding="utf-8")
         cls.simulacion_js = (
             ROOT / "app/static/js/simulation.js"
@@ -34,12 +34,12 @@ class TestUX46dRevision16FlujoPaso3(unittest.TestCase):
         paso3 = self.simulacion.split('data-panel="3"', 1)[1].split('data-panel="4"', 1)[0]
         self.assertLess(
             paso3.index('partials/salary_history.html'),
-            paso3.index('partials/detalle_anio_actual.html'),
+            paso3.index('partials/current_year_detail.html'),
         )
-        self.assertNotIn('partials/importacion_ficha_digital.html', paso3)
-        self.assertIn('partials/importacion_ficha_digital.html', self.detalle)
+        self.assertNotIn('partials/ficha_digital_import.html', paso3)
+        self.assertIn('partials/ficha_digital_import.html', self.detalle)
         self.assertLess(
-            self.detalle.index('partials/importacion_ficha_digital.html'),
+            self.detalle.index('partials/ficha_digital_import.html'),
             self.detalle.index('id="detalle-anio-actual-contenido"'),
         )
 

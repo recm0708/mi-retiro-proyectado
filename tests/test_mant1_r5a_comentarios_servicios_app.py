@@ -19,7 +19,7 @@ SERVICIOS_R5A = {
         "matriz retiro × salario",
         "filas completas",
     ),
-    "app/services/como_se_calcula.py": (
+    "app/services/calculation_guide.py": (
         "JSON versionados",
         "plantilla",
         "no se calculan pensiones",
@@ -29,7 +29,7 @@ SERVICIOS_R5A = {
         "sistemas",
         "contenido metodológico",
     ),
-    "app/services/detalle_anio_actual.py": (
+    "app/services/current_year_detail.py": (
         "cuotas todavía no confirmadas",
         "contrato de salida",
         "meses completos",
