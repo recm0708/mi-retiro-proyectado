@@ -6,8 +6,8 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
-DERECHOS = DOCS / "PROCEDIMIENTO_DERECHOS_TITULAR.md"
-INCIDENTES = DOCS / "PROCEDIMIENTO_INCIDENTES_SEGURIDAD.md"
+DERECHOS = DOCS / "security/data-subject-rights-procedure.md"
+INCIDENTES = DOCS / "security/security-incident-procedure.md"
 
 
 class TestGov15ProcedimientosR2(unittest.TestCase):

@@ -17,7 +17,7 @@ class TestUX46ePreparacionPublica(unittest.TestCase):
         cls.metodologia = (ROOT / "app/templates/methodology.html").read_text(encoding="utf-8")
         cls.terminos = (ROOT / "app/templates/partials/privacy_consent.html").read_text(encoding="utf-8")
         cls.readme = (ROOT / "README.md").read_text(encoding="utf-8")
-        cls.publicacion = (ROOT / "docs/PREPARACION_PUBLICA_GITHUB.md").read_text(encoding="utf-8")
+        cls.publicacion = (ROOT / "docs/operations/github-public-repository.md").read_text(encoding="utf-8")
         cls.version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
 
     def test_footer_enlaza_ayuda_sin_exponer_gobierno_interno(self):
@@ -96,18 +96,18 @@ class TestUX46ePreparacionPublica(unittest.TestCase):
 
     def test_terceros_documentan_shields_fuera_del_runtime(self):
         notices = (ROOT / "THIRD_PARTY_NOTICES.md").read_text(encoding="utf-8")
-        deps = (ROOT / "docs/DEPENDENCIAS_TERCEROS.md").read_text(encoding="utf-8")
-        eval_terceros = (ROOT / "docs/EVALUACION_TERCEROS_DESPLIEGUE.md").read_text(encoding="utf-8")
+        deps = (ROOT / "docs/operations/third-party-dependencies.md").read_text(encoding="utf-8")
+        eval_terceros = (ROOT / "docs/security/third-party-deployment-assessment.md").read_text(encoding="utf-8")
         for texto in (notices, deps, eval_terceros):
             self.assertIn("Shields.io", texto)
             self.assertIn("runtime", texto)
 
     def test_adr163_y_documentacion_enlazan_preparacion_publica(self):
-        decisiones = (ROOT / "docs/DECISIONES.md").read_text(encoding="utf-8")
-        indice = (ROOT / "docs/INDICE.md").read_text(encoding="utf-8")
+        decisiones = (ROOT / "docs/decisions/README.md").read_text(encoding="utf-8")
+        indice = (ROOT / "docs/README.md").read_text(encoding="utf-8")
         auditoria = (ROOT / "docs/AUDITORIA_GITHUB.md").read_text(encoding="utf-8")
         self.assertIn("## ADR-163 —", decisiones)
-        self.assertIn("PREPARACION_PUBLICA_GITHUB.md", indice)
+        self.assertIn("operations/github-public-repository.md", indice)
         self.assertIn("PREPARACION_PUBLICA_GITHUB.md", auditoria)
 
 

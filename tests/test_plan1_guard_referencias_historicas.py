@@ -15,33 +15,33 @@ LEGACY_CONTEXT_FILES = {
     "RELEASES.md",
     "VERSIONING.md",
     "GOVERNANCE.md",
-    "docs/ROADMAP.md",
-    "docs/VALIDACION.md",
+    "docs/governance/roadmap.md",
+    "docs/operations/validation.md",
     "docs/CIERRE_GOV1.md",
-    "docs/TRANSPARENCIA.md",
-    "docs/DECISIONES.md",
-    "docs/PROCESO_RELEASE.md",
-    "docs/PLAN_MAESTRO_HACIA_1_0.md",
+    "docs/product/transparency.md",
+    "docs/decisions/README.md",
+    "docs/operations/release-process.md",
+    "docs/governance/master-plan-to-1-0.md",
     "docs/AUDITORIA_GITHUB.md",
     "docs/AUDITORIA_REPOSITORIO_2026-08-18.md",
-    "docs/PREPARACION_PUBLICA_GITHUB.md",
-    "docs/EVALUACION_TERCEROS_DESPLIEGUE.md",
-    "docs/GESTION_DATOS_SIMULACION.md",
+    "docs/operations/github-public-repository.md",
+    "docs/security/third-party-deployment-assessment.md",
+    "docs/product/simulation-data-management.md",
 }
 
 OPERATIVE_DOCS = (
     "SECURITY.md",
     "SUPPORT.md",
-    "docs/MODELO_AMENAZAS.md",
-    "docs/PROCEDIMIENTO_DERECHOS_TITULAR.md",
-    "docs/PROCEDIMIENTO_INCIDENTES_SEGURIDAD.md",
-    "docs/SEGURIDAD_PRIVACIDAD.md",
-    "docs/POLITICA_PRIVACIDAD.md",
-    "docs/TERMINOS_USO_PRIVACIDAD.md",
-    "docs/CUMPLIMIENTO_LEY_81.md",
-    "docs/DEPENDENCIAS_TERCEROS.md",
-    "docs/LICENCIA_Y_DISTRIBUCION.md",
-    "docs/LIMITACIONES_CONOCIDAS.md",
+    "docs/security/threat-model.md",
+    "docs/security/data-subject-rights-procedure.md",
+    "docs/security/security-incident-procedure.md",
+    "docs/security/security-and-privacy.md",
+    "docs/security/privacy-policy.md",
+    "docs/security/terms-and-privacy.md",
+    "docs/regulatory/law-81-compliance.md",
+    "docs/operations/third-party-dependencies.md",
+    "docs/governance/licensing-and-distribution.md",
+    "docs/product/known-limitations.md",
 )
 
 STALE_PROSPECTIVE_PHRASES = (
@@ -118,7 +118,7 @@ class TestPlan1GuardReferenciasHistoricas(unittest.TestCase):
                 )
 
     def test_modelo_amenazas_declara_revision_actual_y_base_historica(self):
-        texto = (DOCS / "MODELO_AMENAZAS.md").read_text(encoding="utf-8")
+        texto = (DOCS / "security/threat-model.md").read_text(encoding="utf-8")
         self.assertIn(f"**Versión de aplicación revisada:** `{self.version}`", texto)
         self.assertIn("**Versión base histórica:** `0.0.23-beta`", texto)
         self.assertIn("GOV.1.5 R1", texto)
@@ -126,8 +126,8 @@ class TestPlan1GuardReferenciasHistoricas(unittest.TestCase):
 
     def test_procedimientos_gov15_declaran_revision_actual_y_base_historica(self):
         for nombre in (
-            "PROCEDIMIENTO_DERECHOS_TITULAR.md",
-            "PROCEDIMIENTO_INCIDENTES_SEGURIDAD.md",
+            "security/data-subject-rights-procedure.md",
+            "security/security-incident-procedure.md",
         ):
             texto = (DOCS / nombre).read_text(encoding="utf-8")
             with self.subTest(nombre=nombre):
@@ -144,7 +144,7 @@ class TestPlan1GuardReferenciasHistoricas(unittest.TestCase):
         self.assertIn("tests/test_plan1_guard_referencias_historicas.py", texto)
 
     def test_validacion_conserva_cierre_r3b2(self):
-        texto = (DOCS / "VALIDACION.md").read_text(encoding="utf-8")
+        texto = (DOCS / "operations/validation.md").read_text(encoding="utf-8")
         self.assertIn("cerró con **702 pruebas en `OK`**", texto)
         self.assertIn("cerró con **710 pruebas en `OK`**", texto)
         self.assertTrue(self.version)

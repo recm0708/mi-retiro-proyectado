@@ -169,14 +169,14 @@ class TestUX46iR1ComoSeCalcula(unittest.TestCase):
         self.assertIn("var(--app-surface)", self.css)
 
     def test_14_documentacion_traza_adr_rf_tr_y_estado_r1(self):
-        decisiones = (ROOT / "docs/DECISIONES.md").read_text(encoding="utf-8")
-        especificacion = (ROOT / "docs/ESPECIFICACION_FUNCIONAL.md").read_text(
+        decisiones = (ROOT / "docs/decisions/README.md").read_text(encoding="utf-8")
+        especificacion = (ROOT / "docs/product/functional-specification.md").read_text(
             encoding="utf-8"
         )
-        matriz = (ROOT / "docs/MATRIZ_TRAZABILIDAD.md").read_text(encoding="utf-8")
+        matriz = (ROOT / "docs/product/traceability-matrix.md").read_text(encoding="utf-8")
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
-        roadmap = (ROOT / "docs/ROADMAP.md").read_text(encoding="utf-8")
-        plan = (ROOT / "docs/PLAN_MAESTRO_HACIA_1_0.md").read_text(encoding="utf-8")
+        roadmap = (ROOT / "docs/governance/roadmap.md").read_text(encoding="utf-8")
+        plan = (ROOT / "docs/governance/master-plan-to-1-0.md").read_text(encoding="utf-8")
         changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
 
         self.assertIn("## ADR-178 —", decisiones)
@@ -193,7 +193,7 @@ class TestUX46iR1ComoSeCalcula(unittest.TestCase):
         self.assertNotIn("UX.4.6i R1.1", plan)
         self.assertIn("### UX.4.6i R1 —", changelog)
         self.assertIn("### UX.4.6i — cierre de Cómo se calcula", changelog)
-        self.assertTrue((ROOT / "docs/COMO_SE_CALCULA.md").exists())
+        self.assertTrue((ROOT / "docs/product/calculation-guide.md").exists())
         self.assertTrue((ROOT / "docs/UX46I_R1_AUDITORIA_COMO_SE_CALCULA.md").exists())
 
     def test_15_navbar_ofrece_acceso_directo_y_estado_activo(self):
@@ -324,13 +324,13 @@ class TestUX46iR1ComoSeCalcula(unittest.TestCase):
 
     def test_28_documentacion_registra_cierre_r14_y_gate_841(self):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
-        roadmap = (ROOT / "docs/ROADMAP.md").read_text(encoding="utf-8")
-        plan = (ROOT / "docs/PLAN_MAESTRO_HACIA_1_0.md").read_text(encoding="utf-8")
-        validacion = (ROOT / "docs/VALIDACION.md").read_text(encoding="utf-8")
-        guia = (ROOT / "docs/COMO_SE_CALCULA.md").read_text(encoding="utf-8")
+        roadmap = (ROOT / "docs/governance/roadmap.md").read_text(encoding="utf-8")
+        plan = (ROOT / "docs/governance/master-plan-to-1-0.md").read_text(encoding="utf-8")
+        validacion = (ROOT / "docs/operations/validation.md").read_text(encoding="utf-8")
+        guia = (ROOT / "docs/product/calculation-guide.md").read_text(encoding="utf-8")
 
         self.assertIn("**DEV.2:** cerrado.", readme)
-        self.assertIn("**NOR.2 R3:** activo", readme)
+        self.assertIn("**NOR.2 R4:** activo", readme)
         for revision in (
             "R1 — ruta pública",
             "R1.2 — navegación",

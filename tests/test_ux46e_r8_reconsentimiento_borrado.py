@@ -21,7 +21,7 @@ class TestUX46eR8ReconsentimientoBorrado(unittest.TestCase):
         cls.terminos = (
             ROOT / "app/templates/partials/privacy_consent.html"
         ).read_text(encoding="utf-8")
-        cls.decisiones = (DOCS / "DECISIONES.md").read_text(encoding="utf-8")
+        cls.decisiones = (DOCS / "decisions/README.md").read_text(encoding="utf-8")
 
     def test_borrado_integral_fuerza_presentacion_desde_inicio(self):
         self.assertIn('window.location.replace("/?privacidad=1")', self.gestion)
@@ -58,10 +58,10 @@ class TestUX46eR8ReconsentimientoBorrado(unittest.TestCase):
         self.assertIn("volverá a solicitarlas", self.terminos)
 
     def test_documentacion_tecnica_refleja_el_flujo(self):
-        gestion_doc = (DOCS / "GESTION_DATOS_SIMULACION.md").read_text(encoding="utf-8")
-        politica = (DOCS / "POLITICA_PRIVACIDAD.md").read_text(encoding="utf-8")
-        especificacion = (DOCS / "ESPECIFICACION_FUNCIONAL.md").read_text(encoding="utf-8")
-        seguridad = (DOCS / "SEGURIDAD_PRIVACIDAD.md").read_text(encoding="utf-8")
+        gestion_doc = (DOCS / "product/simulation-data-management.md").read_text(encoding="utf-8")
+        politica = (DOCS / "security/privacy-policy.md").read_text(encoding="utf-8")
+        especificacion = (DOCS / "product/functional-specification.md").read_text(encoding="utf-8")
+        seguridad = (DOCS / "security/security-and-privacy.md").read_text(encoding="utf-8")
         self.assertIn("purga identificadores pre-beta", gestion_doc)
         self.assertIn("no se leen, restauran ni migran", gestion_doc)
         self.assertIn("vuelve a presentar las condiciones desde Inicio", politica)

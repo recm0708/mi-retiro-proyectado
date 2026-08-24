@@ -70,9 +70,9 @@ class UX46fR11BloqueoDocumentalTests(unittest.TestCase):
         self.assertIn("promedio_ultimos_3_meses_completos", self.detalle)
 
     def test_09_documentacion_registra_r11_y_adr171(self):
-        decisiones = leer("docs/DECISIONES.md")
-        especificacion = leer("docs/ESPECIFICACION_FUNCIONAL.md")
-        matriz = leer("docs/MATRIZ_TRAZABILIDAD.md")
+        decisiones = leer("docs/decisions/README.md")
+        especificacion = leer("docs/product/functional-specification.md")
+        matriz = leer("docs/product/traceability-matrix.md")
         changelog = leer("CHANGELOG.md")
         self.assertIn("## ADR-171 —", decisiones)
         for rf in range(351, 358):

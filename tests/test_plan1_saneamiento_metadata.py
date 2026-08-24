@@ -15,14 +15,14 @@ class TestPlan1SaneamientoMetadata(unittest.TestCase):
         self.version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
 
     def test_observabilidad_declara_revision_actual_y_base_historica(self):
-        texto = (DOCS / "OBSERVABILIDAD_LOGS.md").read_text(encoding="utf-8")
+        texto = (DOCS / "operations/observability-and-logs.md").read_text(encoding="utf-8")
         self.assertIn(f"**Versión de aplicación revisada:** `{self.version}`", texto)
         self.assertIn("**Versión base histórica:** `0.0.23-beta`", texto)
         self.assertIn("GOV.1.4 no modificó fórmulas previsionales", texto)
         self.assertIn("DEV.2", texto)
 
     def test_limitaciones_no_duplica_revision_juridica_y_usa_gate_oficial(self):
-        texto = (DOCS / "LIMITACIONES_CONOCIDAS.md").read_text(encoding="utf-8")
+        texto = (DOCS / "product/known-limitations.md").read_text(encoding="utf-8")
         self.assertIn(f"**Versión de aplicación revisada:** `{self.version}`", texto)
         self.assertIn("**Versión base histórica:** `0.0.23-beta`", texto)
         self.assertIn("Pendientes antes de la primera versión oficial", texto)
@@ -33,7 +33,7 @@ class TestPlan1SaneamientoMetadata(unittest.TestCase):
         self.assertEqual(2, bloque.lower().count("revisión jurídica externa"))
 
     def test_preparacion_publica_separa_repo_publico_de_version_oficial(self):
-        texto = (DOCS / "PREPARACION_PUBLICA_GITHUB.md").read_text(
+        texto = (DOCS / "operations/github-public-repository.md").read_text(
             encoding="utf-8"
         )
         self.assertIn(f"**Versión de aplicación revisada:** `{self.version}`", texto)
@@ -49,7 +49,7 @@ class TestPlan1SaneamientoMetadata(unittest.TestCase):
         self.assertIn("**689 pruebas en `OK`**", texto)
 
     def test_validacion_registra_r2c_como_evidencia_cerrada(self):
-        texto = (DOCS / "VALIDACION.md").read_text(encoding="utf-8")
+        texto = (DOCS / "operations/validation.md").read_text(encoding="utf-8")
         self.assertIn("cerró con **684 pruebas en `OK`**", texto)
         self.assertIn("cerró con **689 pruebas en `OK`**", texto)
         self.assertNotIn(

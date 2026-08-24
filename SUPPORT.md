@@ -11,7 +11,7 @@ Este documento indica qué canal utilizar según el tipo de necesidad. El proyec
 - comprueba la versión indicada en el pie de la aplicación o en `VERSION`;
 - evita compartir datos personales reales;
 - utiliza ejemplos sintéticos o anonimizados;
-- revisa `README.md`, `docs/INDICE.md` y la documentación relacionada con el área afectada.
+- revisa `README.md`, `docs/README.md` y la documentación relacionada con el área afectada.
 
 ## 2. Error reproducible
 
@@ -35,7 +35,7 @@ Utiliza el formulario **Consulta / soporte** de GitHub Issues. Para problemas de
 
 ## 6. Privacidad y derechos sobre datos personales
 
-Para consultas de privacidad o ejercicio de derechos, consulta [`docs/PROCEDIMIENTO_DERECHOS_TITULAR.md`](docs/PROCEDIMIENTO_DERECHOS_TITULAR.md). Evita enviar información adicional que no sea necesaria para identificar y atender la solicitud.
+Para consultas de privacidad o ejercicio de derechos, consulta [`docs/security/data-subject-rights-procedure.md`](docs/security/data-subject-rights-procedure.md). Evita enviar información adicional que no sea necesaria para identificar y atender la solicitud.
 
 ## 7. Qué no ofrece este canal
 

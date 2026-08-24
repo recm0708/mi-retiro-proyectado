@@ -29,7 +29,7 @@ La base histórica anterior a VER.2 se reconstruye en G001–G070 sin crear tags
 
 La primera versión oficial objetivo es `1.0.0.0` y solo podrá considerarse soportada cuando se materialice formalmente después de los gates definidos por el plan maestro.
 
-La numeración revision-aware no mueve ni recrea tags legacy. Consultar `VERSIONING.md`, `docs/AUDITORIA_VERSIONADO_PRE_1_0.md`, `docs/MATRIZ_DECISION_REVISIONES_VER2.md` y `docs/LEDGER_REVISIONES_PRE_1_0.md`.
+La numeración revision-aware no mueve ni recrea tags legacy. Consultar `VERSIONING.md`, `docs/AUDITORIA_VERSIONADO_PRE_1_0.md`, `docs/MATRIZ_DECISION_REVISIONES_VER2.md` y `docs/governance/pre-1-0-revision-ledger.md`.
 
 ## Reportar una vulnerabilidad
 
@@ -63,7 +63,7 @@ Estos controles reducen riesgo y facilitan detección/reporte; no constituyen un
 
 ## Tratamiento del reporte
 
-El mantenedor confirma recepción cuando sea razonablemente posible, clasifica el evento, contiene exposiciones activas, preserva evidencia mínima, corrige y añade regresiones cuando proceda, y evalúa comunicaciones/notificaciones conforme a `docs/PROCEDIMIENTO_INCIDENTES_SEGURIDAD.md`.
+El mantenedor confirma recepción cuando sea razonablemente posible, clasifica el evento, contiene exposiciones activas, preserva evidencia mínima, corrige y añade regresiones cuando proceda, y evalúa comunicaciones/notificaciones conforme a `docs/security/security-incident-procedure.md`.
 
 No existe un SLA contractual de respuesta.
 
@@ -77,13 +77,13 @@ Esta función está habilitada y complementa el canal privado alternativo indica
 
 ## Documentos relacionados
 
-- `docs/MODELO_AMENAZAS.md`
-- `docs/PROCEDIMIENTO_INCIDENTES_SEGURIDAD.md`
-- `docs/SEGURIDAD_PRIVACIDAD.md`
+- `docs/security/threat-model.md`
+- `docs/security/security-incident-procedure.md`
+- `docs/security/security-and-privacy.md`
 - `docs/AUDITORIA_GITHUB.md`
 - `docs/AUDITORIA_VERSIONADO_PRE_1_0.md`
 - `docs/MATRIZ_DECISION_REVISIONES_VER2.md`
-- `docs/LEDGER_REVISIONES_PRE_1_0.md`
+- `docs/governance/pre-1-0-revision-ledger.md`
 - `data/revision_ledger_pre_1_0.json`
 
 <!-- ANCLAS_HISTORICAS_VER2_SECURITY_CONSOLIDADAS -->

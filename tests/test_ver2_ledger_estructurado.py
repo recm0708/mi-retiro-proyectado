@@ -14,7 +14,7 @@ from app.core.version_ledger import (
 
 
 ROOT = Path(__file__).resolve().parents[1]
-LEDGER_MD = ROOT / "docs" / "LEDGER_REVISIONES_PRE_1_0.md"
+LEDGER_MD = ROOT / "docs" / "governance/pre-1-0-revision-ledger.md"
 MATRIZ = ROOT / "docs" / "MATRIZ_DECISION_REVISIONES_VER2.md"
 
 

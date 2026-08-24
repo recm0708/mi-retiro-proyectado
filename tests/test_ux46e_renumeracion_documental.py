@@ -14,11 +14,11 @@ class TestUX46eRenumeracionDocumental(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.roadmap = (DOCS / "ROADMAP.md").read_text(encoding="utf-8")
-        cls.publicacion = (DOCS / "PREPARACION_PUBLICA_GITHUB.md").read_text(encoding="utf-8")
-        cls.decisiones = (DOCS / "DECISIONES.md").read_text(encoding="utf-8")
+        cls.roadmap = (DOCS / "governance/roadmap.md").read_text(encoding="utf-8")
+        cls.publicacion = (DOCS / "operations/github-public-repository.md").read_text(encoding="utf-8")
+        cls.decisiones = (DOCS / "decisions/README.md").read_text(encoding="utf-8")
         cls.cierre = (DOCS / "CIERRE_GOV1.md").read_text(encoding="utf-8")
-        cls.transparencia = (DOCS / "TRANSPARENCIA.md").read_text(encoding="utf-8")
+        cls.transparencia = (DOCS / "product/transparency.md").read_text(encoding="utf-8")
 
     def test_secuencia_vigente_reserva_e_para_estandarizacion(self):
         self.assertIn("UX.4.6e — Estandarización técnica", self.roadmap)

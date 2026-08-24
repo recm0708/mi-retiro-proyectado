@@ -87,7 +87,7 @@ class TestUX46eAlmacenamientoComentariosJS(unittest.TestCase):
         self.assertEqual([], hallazgos)
 
     def test_estandar_documental_define_patron_por_tecnologia(self):
-        ruta = DOCS / "ESTANDAR_CODIGO_Y_COMENTARIOS.md"
+        ruta = DOCS / "standards/code-and-comments.md"
         self.assertTrue(ruta.is_file())
         texto = ruta.read_text(encoding="utf-8")
         for esperado in (
@@ -104,14 +104,14 @@ class TestUX46eAlmacenamientoComentariosJS(unittest.TestCase):
                 self.assertIn(esperado, texto)
 
     def test_indice_y_contributing_enlazan_estandar(self):
-        indice = (DOCS / "INDICE.md").read_text(encoding="utf-8")
+        indice = (DOCS / "README.md").read_text(encoding="utf-8")
         contributing = (ROOT / "CONTRIBUTING.md").read_text(encoding="utf-8")
-        self.assertIn("ESTANDAR_CODIGO_Y_COMENTARIOS.md", indice)
-        self.assertIn("docs/ESTANDAR_CODIGO_Y_COMENTARIOS.md", contributing)
+        self.assertIn("standards/code-and-comments.md", indice)
+        self.assertIn("docs/standards/code-and-comments.md", contributing)
 
     def test_adr161_documenta_ruptura_pre_beta_sin_fallback(self):
-        decisiones = (DOCS / "DECISIONES.md").read_text(encoding="utf-8")
-        gestion = (DOCS / "GESTION_DATOS_SIMULACION.md").read_text(encoding="utf-8")
+        decisiones = (DOCS / "decisions/README.md").read_text(encoding="utf-8")
+        gestion = (DOCS / "product/simulation-data-management.md").read_text(encoding="utf-8")
         self.assertIn("## ADR-161 —", decisiones)
         self.assertIn("sin fallback ni migración", decisiones)
         self.assertIn("miRetiroProyectado.simulacion", gestion)

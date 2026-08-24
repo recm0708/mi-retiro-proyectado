@@ -13,7 +13,7 @@ Describe qué cambia y por qué.
 ## Documentación
 
 - [ ] Revisé y actualicé la documentación dependiente.
-- [ ] `README.md`, `CHANGELOG.md`, `ROADMAP.md` y `VALIDACION.md` están coherentes cuando corresponde.
+- [ ] `README.md`, `CHANGELOG.md`, `roadmap.md` y `validation.md` están coherentes cuando corresponde.
 - [ ] No convertí un estado histórico transitorio en una regla permanente.
 
 ## Seguridad y privacidad

@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 class TestDev2R1CierreDocumental(unittest.TestCase):
     def test_documento_dev2_refleja_cierre_r1(self):
-        documento = (ROOT / "docs/DEV2_CENTRO_DESARROLLO.md").read_text(
+        documento = (ROOT / "docs/architecture/development-center.md").read_text(
             encoding="utf-8"
         )
 

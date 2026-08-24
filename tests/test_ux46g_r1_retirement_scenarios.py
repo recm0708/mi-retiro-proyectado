@@ -170,13 +170,13 @@ class UX46GR1EscenariosRetiroTests(unittest.TestCase):
 
     def test_documentacion_traza_r1(self):
         decisiones = (
-            ROOT / "docs/DECISIONES.md"
+            ROOT / "docs/decisions/README.md"
         ).read_text(encoding="utf-8")
         especificacion = (
-            ROOT / "docs/ESPECIFICACION_FUNCIONAL.md"
+            ROOT / "docs/product/functional-specification.md"
         ).read_text(encoding="utf-8")
         matriz = (
-            ROOT / "docs/MATRIZ_TRAZABILIDAD.md"
+            ROOT / "docs/product/traceability-matrix.md"
         ).read_text(encoding="utf-8")
         self.assertIn("ADR-174", decisiones)
         self.assertIn("ADR-175", decisiones)
@@ -221,10 +221,10 @@ class UX46GR1EscenariosRetiroTests(unittest.TestCase):
         self.assertIn("max-width: 100%", css)
 
     def test_documentacion_incorpora_contrato_fecha_r14(self):
-        decisiones = (ROOT / "docs/DECISIONES.md").read_text(encoding="utf-8")
-        especificacion = (ROOT / "docs/ESPECIFICACION_FUNCIONAL.md").read_text(encoding="utf-8")
-        matriz = (ROOT / "docs/MATRIZ_TRAZABILIDAD.md").read_text(encoding="utf-8")
-        validacion = (ROOT / "docs/VALIDACION.md").read_text(encoding="utf-8")
+        decisiones = (ROOT / "docs/decisions/README.md").read_text(encoding="utf-8")
+        especificacion = (ROOT / "docs/product/functional-specification.md").read_text(encoding="utf-8")
+        matriz = (ROOT / "docs/product/traceability-matrix.md").read_text(encoding="utf-8")
+        validacion = (ROOT / "docs/operations/validation.md").read_text(encoding="utf-8")
         self.assertIn("ADR-176", decisiones)
         self.assertIn("RF-375", especificacion)
         self.assertIn("RF-379", especificacion)

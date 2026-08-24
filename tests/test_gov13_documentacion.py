@@ -22,8 +22,8 @@ class TestGov13Documentacion(unittest.TestCase):
             "GOVERNANCE.md",
             "RELEASES.md",
             "VERSIONING.md",
-            "docs/INDICE.md",
-            "docs/ROADMAP.md",
+            "docs/README.md",
+            "docs/governance/roadmap.md",
             "docs/REGISTRO_CAMBIOS_HISTORICO.md",
             "docs/archive/README.md",
         ]
@@ -31,20 +31,19 @@ class TestGov13Documentacion(unittest.TestCase):
             with self.subTest(relativo=relativo):
                 self.assertTrue((ROOT / relativo).is_file(), relativo)
 
-    def test_bitacoras_ux_tienen_copia_historica(self):
-        nombres = [
-            "UX_4_6A_REDISENO_VISUAL.md",
-            "UX_4_6B_PASO1_DATOS_PERSONALES.md",
-            "UX_4_6C_PASO2_CUOTAS.md",
-            "UX_4_6D_PASO3_HISTORIAL.md",
-        ]
-        for nombre in nombres:
-            with self.subTest(nombre=nombre):
-                historico = ROOT / "docs" / "archive" / "ux" / nombre
-                compat = ROOT / "docs" / nombre
+    def test_bitacoras_ux_preservan_snapshot_y_documento_vivo_r4(self):
+        casos = {
+            "product/user-interface.md": "UX_4_6A_REDISENO_VISUAL.md",
+            "product/workflow-step-1-personal-data.md": "UX_4_6B_PASO1_DATOS_PERSONALES.md",
+            "product/workflow-step-2-contributions.md": "UX_4_6C_PASO2_CUOTAS.md",
+            "product/workflow-step-3-salary-history.md": "UX_4_6D_PASO3_HISTORIAL.md",
+        }
+        for vivo, historico_nombre in casos.items():
+            with self.subTest(vivo=vivo):
+                historico = ROOT / "docs" / "archive" / "ux" / historico_nombre
+                actual = ROOT / "docs" / vivo
                 self.assertTrue(historico.is_file())
-                self.assertTrue(compat.is_file())
-                self.assertIn("Histórico", compat.read_text(encoding="utf-8"))
+                self.assertTrue(actual.is_file())
 
     def test_changelog_tiene_estructura_por_version(self):
         texto = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
@@ -54,14 +53,14 @@ class TestGov13Documentacion(unittest.TestCase):
         self.assertIn(f"## [{version}]", texto)
 
     def test_roadmap_declara_gov13_en_ejecucion(self):
-        texto = (ROOT / "docs" / "ROADMAP.md").read_text(encoding="utf-8")
+        texto = (ROOT / "docs" / "governance/roadmap.md").read_text(encoding="utf-8")
         self.assertIn("GOV.1.3", texto)
         self.assertIn("R1 — documentos de entrada", texto)
         self.assertIn("GOV.1.4", texto)
         self.assertIn("GOV.1.7", texto)
 
     def test_indice_separa_documentacion_historica(self):
-        texto = (ROOT / "docs" / "INDICE.md").read_text(encoding="utf-8")
+        texto = (ROOT / "docs" / "README.md").read_text(encoding="utf-8")
         self.assertIn("## 12. Historial de evolución", texto)
         self.assertIn("archive/ux/", texto)
         self.assertIn("## 13. Releases", texto)
@@ -77,8 +76,8 @@ class TestGov13Documentacion(unittest.TestCase):
             ROOT / "README.md",
             ROOT / "CHANGELOG.md",
             ROOT / "CONTRIBUTING.md",
-            ROOT / "docs" / "INDICE.md",
-            ROOT / "docs" / "ROADMAP.md",
+            ROOT / "docs" / "README.md",
+            ROOT / "docs" / "governance/roadmap.md",
             ROOT / "docs" / "REGISTRO_CAMBIOS_HISTORICO.md",
             ROOT / "docs" / "archive" / "README.md",
         ]

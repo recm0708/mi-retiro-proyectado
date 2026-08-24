@@ -83,7 +83,7 @@ Cambios en versionado, licencia, gobernanza, CI o proceso de publicación deben 
 
 ## 5. Decisiones
 
-Las decisiones relevantes se documentan mediante ADR consecutivos en `docs/DECISIONES.md`.
+Las decisiones relevantes se documentan mediante ADR consecutivos en `docs/decisions/README.md`.
 
 Un ADR puede estar:
 
@@ -163,7 +163,7 @@ La denominación histórica de esa decisión de licencia se conserva. PLAN.1 no 
 
 - `LICENSE` define el alcance de esos materiales;
 - `THIRD_PARTY_NOTICES.md` separa componentes upstream;
-- `docs/LICENCIA_Y_DISTRIBUCION.md` registra alternativas y motivo de la decisión;
+- `docs/governance/licensing-and-distribution.md` registra alternativas y motivo de la decisión;
 - la disponibilidad del código no concede derechos de reutilización o explotación comercial;
 - una futura relicencia abierta requiere decisión expresa y derechos suficientes sobre contribuciones incorporadas.
 

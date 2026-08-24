@@ -63,7 +63,7 @@ class TestPlan1VersionadoOficial(unittest.TestCase):
 
     def test_plan_maestro_contiene_los_catorce_bloques(self):
         texto = (
-            ROOT / "docs" / "PLAN_MAESTRO_HACIA_1_0.md"
+            ROOT / "docs" / "governance/master-plan-to-1-0.md"
         ).read_text(encoding="utf-8")
         esperados = (
             "### 1. PLAN.1",

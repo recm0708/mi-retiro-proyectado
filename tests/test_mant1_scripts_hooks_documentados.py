@@ -50,10 +50,10 @@ class TestMant1ScriptsHooksDocumentados(unittest.TestCase):
 
     def test_documentacion_transversal_registra_mant1_r1_y_r2(self):
         changelog = self._leer("CHANGELOG.md")
-        estandar = self._leer("docs/ESTANDAR_CODIGO_Y_COMENTARIOS.md")
-        validacion = self._leer("docs/VALIDACION.md")
-        arquitectura = self._leer("docs/ARQUITECTURA.md")
-        roadmap = self._leer("docs/ROADMAP.md")
+        estandar = self._leer("docs/standards/code-and-comments.md")
+        validacion = self._leer("docs/operations/validation.md")
+        arquitectura = self._leer("docs/architecture/system-architecture.md")
+        roadmap = self._leer("docs/governance/roadmap.md")
 
         for texto in (changelog, estandar, validacion, arquitectura, roadmap):
             self.assertIn("MANT.1 R2", texto)

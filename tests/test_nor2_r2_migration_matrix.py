@@ -59,14 +59,21 @@ class TestNOR2R2MigrationMatrix(unittest.TestCase):
 
         self.assertIn("NOR.2 R2", matriz_r2)
         self.assertIn("NOR.1:** cerrado", readme)
-        self.assertIn("NOR.2 R3:** activo", readme)
+        self.assertIn("NOR.2 R4:** activo", readme)
         self.assertNotIn("NOR.2 R2:** activo", readme)
+        self.assertNotIn("NOR.2 R3:** activo", readme)
         self.assertIn("DOC.1 R1:** cerrado", readme)
         self.assertIn("v0.0.71.01-beta", readme)
         self.assertNotIn("Bloque documental activo:** DOC.1 R1", readme)
-        self.assertNotIn("tag formal `v0.0.71.01-beta` queda pendiente", readme)
+        self.assertNotIn(
+            "tag formal `v0.0.71.01-beta` queda pendiente",
+            readme,
+        )
         self.assertNotIn("tag formal queda pendiente", readme)
-        self.assertNotIn("queda reservado para el cierre firmado post-merge", readme)
+        self.assertNotIn(
+            "queda reservado para el cierre firmado post-merge",
+            readme,
+        )
 
     def test_readme_usa_directorios_runtime_actuales(self):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
@@ -76,16 +83,26 @@ class TestNOR2R2MigrationMatrix(unittest.TestCase):
             self.assertNotIn(carpeta, readme)
 
     def test_documentacion_transversal_registra_r2(self):
+        matriz_r2 = (
+            ROOT
+            / "docs"
+            / "audits"
+            / "repository"
+            / "repository-normalization-migration-matrix-nor2-r2.md"
+        ).read_text(encoding="utf-8")
+
+        self.assertIn("NOR.2 R2", matriz_r2)
+
         for ruta in (
             "CHANGELOG.md",
             "README.md",
-            "docs/INDICE.md",
-            "docs/ROADMAP.md",
-            "docs/VALIDACION.md",
-            "docs/PLAN_MAESTRO_HACIA_1_0.md",
+            "docs/README.md",
+            "docs/governance/roadmap.md",
+            "docs/operations/validation.md",
+            "docs/governance/master-plan-to-1-0.md",
         ):
             texto = (ROOT / ruta).read_text(encoding="utf-8")
-            self.assertIn("NOR.2 R2", texto, ruta)
+            self.assertIn("NOR.2 R4", texto, ruta)
 
     def test_version_no_cambia(self):
         version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()

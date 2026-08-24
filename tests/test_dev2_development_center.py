@@ -88,7 +88,7 @@ class TestDev2CentroDesarrolloR1(unittest.TestCase):
     def test_documentacion_dev2_existe_y_preserva_alcance(self):
         from pathlib import Path
 
-        documento = Path("docs/DEV2_CENTRO_DESARROLLO.md").read_text(
+        documento = Path("docs/architecture/development-center.md").read_text(
             encoding="utf-8"
         )
         self.assertIn("DEV.2 R1", documento)

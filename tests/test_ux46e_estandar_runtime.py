@@ -55,13 +55,13 @@ class TestUX46eEstandarRuntime(unittest.TestCase):
                 self.assertIsNone(FASE_RE.search(ruta.read_text(encoding="utf-8")))
 
     def test_estandar_separa_historia_de_documentacion_permanente(self):
-        texto = (DOCS / "ESTANDAR_CODIGO_Y_COMENTARIOS.md").read_text(encoding="utf-8")
+        texto = (DOCS / "standards/code-and-comments.md").read_text(encoding="utf-8")
         self.assertIn("Historia frente a documentación permanente", texto)
         self.assertIn("El código de runtime usa comentarios semánticos", texto)
         self.assertIn("La revisión transversal actual deja documentadas todas", texto)
 
     def test_adr162_registra_decision_sin_reescribir_historia(self):
-        texto = (DOCS / "DECISIONES.md").read_text(encoding="utf-8")
+        texto = (DOCS / "decisions/README.md").read_text(encoding="utf-8")
         self.assertIn("## ADR-162 — Los comentarios de runtime son semánticos", texto)
         self.assertRegex(texto, r"las pruebas pueden\s+conservar identificadores históricos")
         ids = [int(x) for x in re.findall(r"(?m)^## ADR-(\d{3})\s+—", texto)]

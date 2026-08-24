@@ -71,10 +71,10 @@ class TestMant1R4EncabezadosOperativosLimpios(unittest.TestCase):
 
         rutas = (
             "CHANGELOG.md",
-            "docs/ESTANDAR_CODIGO_Y_COMENTARIOS.md",
-            "docs/VALIDACION.md",
-            "docs/ARQUITECTURA.md",
-            "docs/ROADMAP.md",
+            "docs/standards/code-and-comments.md",
+            "docs/operations/validation.md",
+            "docs/architecture/system-architecture.md",
+            "docs/governance/roadmap.md",
         )
         for ruta in rutas:
             texto = self._leer(ruta)

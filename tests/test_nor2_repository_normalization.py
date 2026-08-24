@@ -32,16 +32,25 @@ class TestNOR2RepositoryNormalization(unittest.TestCase):
         self.assertIn("SEC.2", texto)
 
     def test_documentacion_transversal_registra_nor2_r1(self):
-        rutas = (
+        evidencia = (
+            ROOT
+            / "docs"
+            / "audits"
+            / "repository"
+            / "repository-normalization-baseline-nor2-r1.md"
+        ).read_text(encoding="utf-8")
+
+        self.assertIn("NOR.2 R1", evidencia)
+
+        for ruta in (
             "CHANGELOG.md",
-            "docs/INDICE.md",
-            "docs/ROADMAP.md",
-            "docs/VALIDACION.md",
-            "docs/PLAN_MAESTRO_HACIA_1_0.md",
-        )
-        for ruta in rutas:
+            "docs/README.md",
+            "docs/governance/roadmap.md",
+            "docs/operations/validation.md",
+            "docs/governance/master-plan-to-1-0.md",
+        ):
             texto = (ROOT / ruta).read_text(encoding="utf-8")
-            self.assertIn("NOR.2 R1", texto, ruta)
+            self.assertIn("NOR.2 R4", texto, ruta)
 
     def test_version_permanece_sin_cambios(self):
         version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()

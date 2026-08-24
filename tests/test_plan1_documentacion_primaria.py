@@ -21,7 +21,7 @@ class TestPlan1DocumentacionPrimaria(unittest.TestCase):
         self.assertNotIn("Primera beta pública objetivo de la aplicación", texto)
 
     def test_roadmap_registra_plan_de_catorce_bloques(self):
-        texto = (DOCS / "ROADMAP.md").read_text(encoding="utf-8")
+        texto = (DOCS / "governance/roadmap.md").read_text(encoding="utf-8")
         self.assertIn("## 4. PLAN.1 y secuencia hacia 1.0", texto)
         self.assertIn("14. REL.1 — preparación de la primera versión oficial", texto)
         self.assertIn("## 8. Criterio para primera versión oficial", texto)

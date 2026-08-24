@@ -42,7 +42,7 @@ class TestPrecommitGuard(unittest.TestCase):
         self.assertIn("git config --local core.hooksPath .githooks", instalador)
         self.assertIn("git config --local --get core.hooksPath", instalador)
         self.assertNotIn("--global core.hooksPath", instalador)
-        validacion = (ROOT / "docs/VALIDACION.md").read_text(encoding="utf-8")
+        validacion = (ROOT / "docs/operations/validation.md").read_text(encoding="utf-8")
         self.assertIn("tests/test_precommit_guard.py", validacion)
 
     def test_regresiones_historicas_no_congelan_ux46f_como_bloque_activo(self):

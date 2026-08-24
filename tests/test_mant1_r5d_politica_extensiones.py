@@ -17,9 +17,9 @@ class TestMant1R5DPoliticaExtensiones(unittest.TestCase):
     """Protege política, plantillas y encabezados uniformes por extensión."""
 
     def test_documentacion_base_existe_y_declara_alcance(self):
-        politica = RAIZ / "docs" / "POLITICA_ESTRUCTURA_ARCHIVOS.md"
+        politica = RAIZ / "docs" / "standards/file-structure-by-extension.md"
         auditoria = RAIZ / "docs" / "AUDITORIA_ESTRUCTURA_ARCHIVOS_R5D.md"
-        estandar = RAIZ / "docs" / "ESTANDAR_CODIGO_Y_COMENTARIOS.md"
+        estandar = RAIZ / "docs" / "standards/code-and-comments.md"
 
         for ruta in (politica, auditoria, estandar):
             with self.subTest(ruta=ruta.as_posix()):

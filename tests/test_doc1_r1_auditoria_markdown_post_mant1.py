@@ -22,22 +22,22 @@ DOCS_VIGENTES_REVISADOS = [
     "RELEASES.md",
     "SECURITY.md",
     "VERSIONING.md",
-    "docs/ARQUITECTURA.md",
-    "docs/DECISIONES.md",
-    "docs/DEV2_CENTRO_DESARROLLO.md",
-    "docs/ESPECIFICACION_FUNCIONAL.md",
-    "docs/ESTANDAR_CODIGO_Y_COMENTARIOS.md",
-    "docs/INDICE.md",
-    "docs/LEDGER_REVISIONES_PRE_1_0.md",
+    "docs/architecture/system-architecture.md",
+    "docs/decisions/README.md",
+    "docs/architecture/development-center.md",
+    "docs/product/functional-specification.md",
+    "docs/standards/code-and-comments.md",
+    "docs/README.md",
+    "docs/governance/pre-1-0-revision-ledger.md",
     "docs/MATRIZ_DECISION_REVISIONES_VER2.md",
-    "docs/MATRIZ_TRAZABILIDAD.md",
-    "docs/OBSERVABILIDAD_LOGS.md",
-    "docs/PLAN_MAESTRO_HACIA_1_0.md",
-    "docs/POLITICA_PRIVACIDAD.md",
-    "docs/PROCESO_RELEASE.md",
-    "docs/ROADMAP.md",
-    "docs/TRANSPARENCIA.md",
-    "docs/VALIDACION.md",
+    "docs/product/traceability-matrix.md",
+    "docs/operations/observability-and-logs.md",
+    "docs/governance/master-plan-to-1-0.md",
+    "docs/security/privacy-policy.md",
+    "docs/operations/release-process.md",
+    "docs/governance/roadmap.md",
+    "docs/product/transparency.md",
+    "docs/operations/validation.md",
 ]
 
 FRASES_DESACTUALIZADAS = [
@@ -115,7 +115,7 @@ def test_docs_vigentes_no_conservan_frases_de_estado_obsoleto():
                     continue
 
                 # TRANSPARENCIA conserva una formulación explícitamente histórica.
-                if rel == "docs/TRANSPARENCIA.md" and "evidencia histórica" in linea.lower():
+                if rel == "docs/product/transparency.md" and "evidencia histórica" in linea.lower():
                     continue
 
                 # README conserva anclas históricas exigidas por pruebas previas.
@@ -124,7 +124,7 @@ def test_docs_vigentes_no_conservan_frases_de_estado_obsoleto():
 
                 # El Plan Maestro conserva una ancla exacta heredada de VER.2.
                 if (
-                    rel == "docs/PLAN_MAESTRO_HACIA_1_0.md"
+                    rel == "docs/governance/master-plan-to-1-0.md"
                     and "ancla histórica preservada" in linea.lower()
                 ):
                     continue
@@ -139,7 +139,7 @@ def test_docs_vigentes_no_conservan_frases_de_estado_obsoleto():
 
 
 def test_indice_lista_evidencia_doc1_r1():
-    text = read("docs/INDICE.md")
+    text = read("docs/README.md")
 
     for rel in DOC1_EVIDENCE:
         nombre = Path(rel).name

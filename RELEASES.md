@@ -30,7 +30,7 @@ Git conserva la evidencia primaria: hashes, fechas, autores, mensajes y contenid
 
 El commit raíz real es `a0a9e09` (`tipo: descripción del cambio`). Su mensaje es una anomalía histórica previa a la convención posterior y se conserva sin modificar.
 
-VER.2 añade una segunda capa de auditoría: `docs/LEDGER_REVISIONES_PRE_1_0.md` y `data/revision_ledger_pre_1_0.json` reconstruyen los **estados aceptados** como G001–G070 sobre la base `7037addd44253e528c77460b678d2b3ccd540dd5`. Esos identificadores revision-aware no sustituyen versiones/tags históricos ni autorizan tags retroactivos. `0.0.71.01-beta` es únicamente el candidato de VER.2 mientras no complete gate, PR/CI e integración.
+VER.2 añade una segunda capa de auditoría: `docs/governance/pre-1-0-revision-ledger.md` y `data/revision_ledger_pre_1_0.json` reconstruyen los **estados aceptados** como G001–G070 sobre la base `7037addd44253e528c77460b678d2b3ccd540dd5`. Esos identificadores revision-aware no sustituyen versiones/tags históricos ni autorizan tags retroactivos. `0.0.71.01-beta` es únicamente el candidato de VER.2 mientras no complete gate, PR/CI e integración.
 
 ## 2. Estados retrospectivos
 
@@ -95,7 +95,7 @@ Alcance del hito:
 - R2: consolidación de documentación técnica vigente;
 - R3: consolidación normativa, seguridad y privacidad documental;
 - R4: transparencia, matriz de trazabilidad, auditoría de cálculos, limitaciones conocidas, dependencias/terceros y proceso de release;
-- `DECISIONES.md` indexado sin reescribir sus 158 ADR;
+- `README.md` indexado sin reescribir sus 158 ADR;
 - ADR-086 registrada como anomalía histórica de metadata;
 - regresiones antiguas de gobierno/documentación endurecidas para seguir la versión canónica.
 
@@ -201,7 +201,7 @@ Mientras el PR de VER.2 no supere el gate completo y se integre:
 
 Si VER.2 se integra satisfactoriamente, `0.0.71.01-beta` pasa a ser el primer estado nuevo gobernado por la familia revision-aware. La creación de su tag, si corresponde al cierre, se realizará únicamente después de merge y revalidación.
 
-La distribución del contador aceptado hasta G070 se conserva de forma auditable en `docs/MATRIZ_DECISION_REVISIONES_VER2.md`, `docs/LEDGER_REVISIONES_PRE_1_0.md` y `data/revision_ledger_pre_1_0.json`; los intentos fallidos, refinamientos sin aceptación independiente y checkpoints absorbidos se preservan como evidencia sin consumir un `G` adicional.
+La distribución del contador aceptado hasta G070 se conserva de forma auditable en `docs/MATRIZ_DECISION_REVISIONES_VER2.md`, `docs/governance/pre-1-0-revision-ledger.md` y `data/revision_ledger_pre_1_0.json`; los intentos fallidos, refinamientos sin aceptación independiente y checkpoints absorbidos se preservan como evidencia sin consumir un `G` adicional.
 
 ## 6. Migración criptográfica de tags — materializada
 
@@ -239,7 +239,7 @@ Tag v1.0.0.0
 
 La planificación anterior que reservaba `0.1.0-beta.1` como futura primera beta pública queda sustituida. Ese cambio no reescribe la evidencia histórica de los documentos y versiones que la mencionaron mientras estaba vigente.
 
-La transición a `1.0.0.0` depende del cierre de la secuencia definida en `docs/PLAN_MAESTRO_HACIA_1_0.md`, incluidos gates funcionales, de seguridad, accesibilidad, revisión y release.
+La transición a `1.0.0.0` depende del cierre de la secuencia definida en `docs/governance/master-plan-to-1-0.md`, incluidos gates funcionales, de seguridad, accesibilidad, revisión y release.
 
 <!-- ANCLAS_HISTORICAS_VER2_RELEASES_CONSOLIDADAS -->
 

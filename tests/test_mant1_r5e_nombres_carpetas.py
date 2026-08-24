@@ -108,8 +108,8 @@ class TestMant1R5ENombresCarpetas(unittest.TestCase):
 
     def test_documentacion_de_auditoria_declara_alcance_y_exclusiones(self):
         auditoria = ROOT / "docs" / "AUDITORIA_CARPETAS_R5E.md"
-        politica = ROOT / "docs" / "POLITICA_ESTRUCTURA_ARCHIVOS.md"
-        indice = ROOT / "docs" / "INDICE.md"
+        politica = ROOT / "docs" / "standards/file-structure-by-extension.md"
+        indice = ROOT / "docs" / "README.md"
 
         for ruta in (auditoria, politica, indice):
             with self.subTest(ruta=ruta.as_posix()):

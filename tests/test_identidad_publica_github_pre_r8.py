@@ -17,17 +17,17 @@ class TestIdentidadPublicaGithubPreR8(unittest.TestCase):
         cls.security = (ROOT / "SECURITY.md").read_text(encoding="utf-8")
         cls.support = (ROOT / "SUPPORT.md").read_text(encoding="utf-8")
         cls.versioning = (ROOT / "VERSIONING.md").read_text(encoding="utf-8")
-        cls.identity = (DOCS / "IDENTIDAD_VISUAL.md").read_text(encoding="utf-8")
-        cls.prep = (DOCS / "PREPARACION_PUBLICA_GITHUB.md").read_text(encoding="utf-8")
+        cls.identity = (DOCS / "product/visual-identity.md").read_text(encoding="utf-8")
+        cls.prep = (DOCS / "operations/github-public-repository.md").read_text(encoding="utf-8")
         cls.audit = (DOCS / "AUDITORIA_GITHUB.md").read_text(encoding="utf-8")
-        cls.transparency = (DOCS / "TRANSPARENCIA.md").read_text(encoding="utf-8")
-        cls.security_privacy = (DOCS / "SEGURIDAD_PRIVACIDAD.md").read_text(
+        cls.transparency = (DOCS / "product/transparency.md").read_text(encoding="utf-8")
+        cls.security_privacy = (DOCS / "security/security-and-privacy.md").read_text(
             encoding="utf-8"
         )
-        cls.index = (DOCS / "INDICE.md").read_text(encoding="utf-8")
+        cls.index = (DOCS / "README.md").read_text(encoding="utf-8")
         cls.changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
-        cls.roadmap = (DOCS / "ROADMAP.md").read_text(encoding="utf-8")
-        cls.validation = (DOCS / "VALIDACION.md").read_text(encoding="utf-8")
+        cls.roadmap = (DOCS / "governance/roadmap.md").read_text(encoding="utf-8")
+        cls.validation = (DOCS / "operations/validation.md").read_text(encoding="utf-8")
 
     def test_readme_usa_logo_y_checkpoint_no_promovio_beta_publica(self):
         self.assertIn("assets/brand/logos/logo-mark-512.png", self.readme)
@@ -106,7 +106,7 @@ class TestIdentidadPublicaGithubPreR8(unittest.TestCase):
             self.assertIn(esperado, self.security_privacy)
 
     def test_indice_y_cierre_documental_son_coherentes(self):
-        self.assertIn("IDENTIDAD_VISUAL.md", self.index)
+        self.assertIn("product/visual-identity.md", self.index)
         self.assertIn("repositorio público", self.index)
         self.assertIn("Social Preview", self.index)
         self.assertIn("Checkpoint pre-R8 — identidad visual y repositorio público", self.changelog)

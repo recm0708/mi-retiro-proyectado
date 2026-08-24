@@ -18,7 +18,7 @@ class TestGov15CierreSeguridadPrivacidad(unittest.TestCase):
         self.version_base = "0.0.23-beta"
 
     def test_evaluacion_terceros_declara_escenario_local_y_no_internet_ready(self):
-        texto = (DOCS / "EVALUACION_TERCEROS_DESPLIEGUE.md").read_text(
+        texto = (DOCS / "security/third-party-deployment-assessment.md").read_text(
             encoding="utf-8"
         )
         for esperado in (
@@ -36,10 +36,10 @@ class TestGov15CierreSeguridadPrivacidad(unittest.TestCase):
 
     def test_documentos_gov15_existen_y_siguen_version_canonica(self):
         for nombre in (
-            "MODELO_AMENAZAS.md",
-            "PROCEDIMIENTO_DERECHOS_TITULAR.md",
-            "PROCEDIMIENTO_INCIDENTES_SEGURIDAD.md",
-            "EVALUACION_TERCEROS_DESPLIEGUE.md",
+            "security/threat-model.md",
+            "security/data-subject-rights-procedure.md",
+            "security/security-incident-procedure.md",
+            "security/third-party-deployment-assessment.md",
         ):
             with self.subTest(nombre=nombre):
                 texto = (DOCS / nombre).read_text(encoding="utf-8")
@@ -47,7 +47,7 @@ class TestGov15CierreSeguridadPrivacidad(unittest.TestCase):
                 self.assertIn("GOV.1.5", texto)
 
     def test_roadmap_conserva_cierre_gov15_sin_congelar_estado_futuro(self):
-        texto = (DOCS / "ROADMAP.md").read_text(encoding="utf-8")
+        texto = (DOCS / "governance/roadmap.md").read_text(encoding="utf-8")
         self.assertIn(
             "- [x] **GOV.1.5 — Seguridad, privacidad y transparencia**",
             texto,
@@ -61,21 +61,21 @@ class TestGov15CierreSeguridadPrivacidad(unittest.TestCase):
             "**GOV.1.5:** Seguridad, privacidad y transparencia cerrado internamente",
             texto,
         )
-        self.assertIn("(docs/MODELO_AMENAZAS.md)", texto)
+        self.assertIn("(docs/security/threat-model.md)", texto)
 
     def test_privacidad_conserva_version_material_y_documenta_procedimientos(self):
-        texto = (DOCS / "POLITICA_PRIVACIDAD.md").read_text(encoding="utf-8")
+        texto = (DOCS / "security/privacy-policy.md").read_text(encoding="utf-8")
         js = (ROOT / "app/static/js/privacy.js").read_text(encoding="utf-8")
         match = re.search(r'VERSION_PRIVACIDAD\s*=\s*"([^"]+)"', js)
         self.assertIsNotNone(match)
         version = match.group(1)
         self.assertEqual("2026-08-16.1", version)
         self.assertIn(f"`{version}`", texto)
-        self.assertIn("PROCEDIMIENTO_DERECHOS_TITULAR.md", texto)
-        self.assertIn("PROCEDIMIENTO_INCIDENTES_SEGURIDAD.md", texto)
+        self.assertIn("data-subject-rights-procedure.md", texto)
+        self.assertIn("security-incident-procedure.md", texto)
 
     def test_matriz_cumplimiento_actualiza_controles_sin_certificar(self):
-        texto = (DOCS / "CUMPLIMIENTO_LEY_81.md").read_text(
+        texto = (DOCS / "regulatory/law-81-compliance.md").read_text(
             encoding="utf-8"
         )
         for esperado in (
@@ -105,10 +105,10 @@ class TestGov15CierreSeguridadPrivacidad(unittest.TestCase):
         self.assertIn('respuesta.headers["Cache-Control"] = "no-store"', main)
 
     def test_terceros_y_logs_tienen_riesgo_residual_visible(self):
-        terceros = (DOCS / "DEPENDENCIAS_TERCEROS.md").read_text(
+        terceros = (DOCS / "operations/third-party-dependencies.md").read_text(
             encoding="utf-8"
         )
-        logs = (DOCS / "OBSERVABILIDAD_LOGS.md").read_text(
+        logs = (DOCS / "operations/observability-and-logs.md").read_text(
             encoding="utf-8"
         )
         self.assertIn("riesgo residual", terceros.casefold())
@@ -117,17 +117,17 @@ class TestGov15CierreSeguridadPrivacidad(unittest.TestCase):
 
     def test_documentos_cierre_sin_espacios_finales(self):
         nombres = (
-            "EVALUACION_TERCEROS_DESPLIEGUE.md",
-            "SEGURIDAD_PRIVACIDAD.md",
-            "POLITICA_PRIVACIDAD.md",
-            "CUMPLIMIENTO_LEY_81.md",
-            "DEPENDENCIAS_TERCEROS.md",
-            "TRANSPARENCIA.md",
-            "LIMITACIONES_CONOCIDAS.md",
-            "OBSERVABILIDAD_LOGS.md",
-            "INDICE.md",
-            "ROADMAP.md",
-            "VALIDACION.md",
+            "security/third-party-deployment-assessment.md",
+            "security/security-and-privacy.md",
+            "security/privacy-policy.md",
+            "regulatory/law-81-compliance.md",
+            "operations/third-party-dependencies.md",
+            "product/transparency.md",
+            "product/known-limitations.md",
+            "operations/observability-and-logs.md",
+            "README.md",
+            "governance/roadmap.md",
+            "operations/validation.md",
         )
         errores = []
         for nombre in nombres:

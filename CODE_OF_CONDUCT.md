@@ -49,7 +49,7 @@ Los reportes de conducta se distinguen de:
 
 - vulnerabilidades técnicas: [`SECURITY.md`](SECURITY.md);
 - soporte, errores o mejoras: [`SUPPORT.md`](SUPPORT.md);
-- ejercicio de derechos sobre datos personales: [`docs/PROCEDIMIENTO_DERECHOS_TITULAR.md`](docs/PROCEDIMIENTO_DERECHOS_TITULAR.md).
+- ejercicio de derechos sobre datos personales: [`docs/security/data-subject-rights-procedure.md`](docs/security/data-subject-rights-procedure.md).
 
 ## 7. Revisión
 

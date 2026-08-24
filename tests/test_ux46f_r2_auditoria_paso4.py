@@ -246,10 +246,10 @@ class TestUX46fR2AuditoriaPaso4(unittest.TestCase):
         self.assertIn("cubrir el escenario de retiro más lejano", simulacion)
 
     def test_11_documentacion_traza_r2(self):
-        decisiones = (ROOT / "docs/DECISIONES.md").read_text(encoding="utf-8")
-        especificacion = (ROOT / "docs/ESPECIFICACION_FUNCIONAL.md").read_text(encoding="utf-8")
-        matriz = (ROOT / "docs/MATRIZ_TRAZABILIDAD.md").read_text(encoding="utf-8")
-        validacion = (ROOT / "docs/VALIDACION.md").read_text(encoding="utf-8")
+        decisiones = (ROOT / "docs/decisions/README.md").read_text(encoding="utf-8")
+        especificacion = (ROOT / "docs/product/functional-specification.md").read_text(encoding="utf-8")
+        matriz = (ROOT / "docs/product/traceability-matrix.md").read_text(encoding="utf-8")
+        validacion = (ROOT / "docs/operations/validation.md").read_text(encoding="utf-8")
 
         self.assertIn("## ADR-172 —", decisiones)
         self.assertIn("## ADR-173 —", decisiones)
@@ -293,8 +293,8 @@ class TestUX46fR2AuditoriaPaso4(unittest.TestCase):
 
     def test_14_cierre_documental_habilita_paso5(self):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
-        roadmap = (ROOT / "docs/ROADMAP.md").read_text(encoding="utf-8")
-        plan = (ROOT / "docs/PLAN_MAESTRO_HACIA_1_0.md").read_text(encoding="utf-8")
+        roadmap = (ROOT / "docs/governance/roadmap.md").read_text(encoding="utf-8")
+        plan = (ROOT / "docs/governance/master-plan-to-1-0.md").read_text(encoding="utf-8")
         changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
 
         self.assertIn("**UX.4.6f:** cerrado", readme)

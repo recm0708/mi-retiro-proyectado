@@ -34,7 +34,7 @@ class TestGov17Licencia(unittest.TestCase):
             self.assertIn(esperado, texto)
 
     def test_decision_documenta_alternativas_y_no_relicencia(self):
-        texto = (DOCS / "LICENCIA_Y_DISTRIBUCION.md").read_text(
+        texto = (DOCS / "governance/licensing-and-distribution.md").read_text(
             encoding="utf-8"
         )
         for esperado in (
@@ -56,7 +56,7 @@ class TestGov17Licencia(unittest.TestCase):
         self.assertIn("(THIRD_PARTY_NOTICES.md)", texto)
 
     def test_roadmap_preserva_cierre_gov17(self):
-        texto = (DOCS / "ROADMAP.md").read_text(encoding="utf-8")
+        texto = (DOCS / "governance/roadmap.md").read_text(encoding="utf-8")
         self.assertIn("- [x] **GOV.1.7 — Licencia**", texto)
         self.assertIn("**GOV.1.8 — Auditoría final y cierre pre-beta de gobierno**", texto)
 
@@ -67,20 +67,20 @@ class TestGov17Licencia(unittest.TestCase):
         self.assertIn("relicencia", texto)
 
     def test_release_exige_avisos_de_terceros(self):
-        texto = (DOCS / "PROCESO_RELEASE.md").read_text(encoding="utf-8")
+        texto = (DOCS / "operations/release-process.md").read_text(encoding="utf-8")
         self.assertIn("THIRD_PARTY_NOTICES.md", texto)
         self.assertIn("inventario exacto del artefacto", texto)
         self.assertIn("licencias/NOTICE upstream", texto)
 
     def test_version_no_cambia_y_archivos_limpios(self):
-        licencia_doc = (DOCS / "LICENCIA_Y_DISTRIBUCION.md").read_text(
+        licencia_doc = (DOCS / "governance/licensing-and-distribution.md").read_text(
             encoding="utf-8"
         )
         self.assertIn("`0.0.23-beta`", licencia_doc)
         for path in (
             ROOT / "LICENSE",
             ROOT / "THIRD_PARTY_NOTICES.md",
-            DOCS / "LICENCIA_Y_DISTRIBUCION.md",
+            DOCS / "governance/licensing-and-distribution.md",
         ):
             texto = path.read_text(encoding="utf-8")
             with self.subTest(path=path.name):
