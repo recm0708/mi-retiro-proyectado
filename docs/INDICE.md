@@ -194,3 +194,7 @@ La metadata de versión de revisión de un documento de dominio puede conservar 
 ## MANT.1 R6 — Auditoría funcional post-renombres
 
 - `AUDITORIA_FUNCIONAL_POST_RENOMBRES_R6.md`: auditoría funcional posterior a los renombres técnicos de MANT.1 R5. Verifica rutas, plantillas, assets, contratos frontend/backend, formularios, cargas de archivo y estructura HTML renderizada.
+
+## MANT.1 R7 — Cierre operativo post-auditoría
+
+- `CIERRE_OPERATIVO_POST_AUDITORIA_R7.md`: cierre operativo posterior a R5H/R6. Verifica estado de ramas, evidencias documentales, pruebas focalizadas y protección de archivos sensibles.
