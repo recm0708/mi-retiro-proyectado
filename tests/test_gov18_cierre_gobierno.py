@@ -21,11 +21,14 @@ class TestGov18CierreGobierno(unittest.TestCase):
         cierre = (DOCS / "CIERRE_GOV1.md").read_text(encoding="utf-8")
         self.assertIn("0.0.24-beta", cierre)
 
-    def test_readme_declara_gov1_cerrado_sin_congelar_version(self):
-        texto = (ROOT / "README.md").read_text(encoding="utf-8")
-        self.assertIn("**Programa GOV.1:** cerrado", texto)
-        self.assertIn("**GOV.1.8:**", texto)
-        self.assertIn("0.1.0-beta.1", texto)
+    def test_readme_declara_gov1_cerrado_y_evidencia_preserva_historia(self):
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        cierre = (DOCS / "CIERRE_GOV1.md").read_text(encoding="utf-8")
+
+        self.assertIn("**GOV.1:** cerrado.", readme)
+        self.assertIn("**NOR.2 R2:** activo", readme)
+        self.assertIn("GOV.1.8", cierre)
+        self.assertIn("0.1.0-beta.1", cierre)
 
     def test_roadmap_cierra_gov18_y_preserva_reanudacion_ux46e(self):
         texto = (DOCS / "ROADMAP.md").read_text(encoding="utf-8")

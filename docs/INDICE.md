@@ -13,6 +13,10 @@ Este archivo es el punto de entrada para la documentación técnica, funcional, 
 
 **Revisión activa:** NOR.2 R1 — línea base de normalización.
 
+**Siguiente revisión activa:** NOR.2 R2 — matriz de decisión de migración y saneamiento del estado público en `README.md`.
+
+- [`audits/repository/repository-normalization-migration-matrix-nor2-r2.md`](audits/repository/repository-normalization-migration-matrix-nor2-r2.md) — clasificación de documentos, runtime, datos y artefactos locales, con orden R3–R8.
+
 - [`audits/repository/repository-normalization-baseline-nor2-r1.md`](audits/repository/repository-normalization-baseline-nor2-r1.md) — hallazgos, riesgos y transición a la matriz de migración.
 - [`audits/repository/repository-normalization-inventory-nor2-r1.txt`](audits/repository/repository-normalization-inventory-nor2-r1.txt) — inventario reproducible del árbol versionado.
 

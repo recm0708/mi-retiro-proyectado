@@ -75,17 +75,23 @@ def test_version_file_permanece_en_0_0_26_beta():
     assert read("VERSION").strip() == "0.0.71.01-beta"
 
 
-def test_readme_expone_estado_post_mant1_sin_promover_ver2():
-    text = read("README.md")
+def test_readme_expone_estado_vigente_y_doc1_preserva_su_cierre():
+    readme = read("README.md")
+    cierre = read("docs/CIERRE_DOCUMENTAL_MARKDOWN_DOC1_R1.md")
 
-    assert "**Versión canónica vigente:** `0.0.71.01-beta`" in text
-    assert "MANT.1 R7" in text
-    assert "commit squash `57078f2`" in text
-    assert "**Estado de MANT.1:** cerrado operativamente" in text
-    assert "G071/E01 promovido en `VERSION`" in text
-    assert "tag formal `v0.0.71.01-beta` queda pendiente" in text
-    assert "DOC.1 R1" in text
-    assert "img.shields.io/badge/versi%C3%B3n-0.0.71.01--beta" in text
+    assert "**Versión canónica vigente:** `0.0.71.01-beta`" in readme
+    assert "G071/E01 promovido en `VERSION`" in readme
+    assert "tag `v0.0.71.01-beta` publicado" in readme
+    assert "**DOC.1 R1:** cerrado" in readme
+    assert "**NOR.1:** cerrado" in readme
+    assert "**NOR.2 R2:** activo" in readme
+    assert "img.shields.io/badge/versi%C3%B3n-0.0.71.01--beta" in readme
+
+    # Los detalles post-MANT.1 pertenecen a la evidencia histórica de DOC.1,
+    # no al estado operativo actual de README.
+    assert "MANT.1 queda cerrado operativamente" in cierre
+    assert "DOC.1 R1 queda cerrado" in cierre
+    assert "`0.0.71.01-beta` permanece como candidato VER.2" in cierre
 
 
 def test_security_declara_estado_vigente_post_mant1_y_preserva_anclas():
