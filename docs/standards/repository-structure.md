@@ -27,34 +27,30 @@ tests/
 .github/
 ```
 
-Cada carpeta representa una responsabilidad específica.
+## Estructura documental
 
-## Carpeta app
-
-Contiene el código fuente de la aplicación.
-
-Ejemplo:
+La carpeta `docs/` contiene documentación del proyecto y se organiza por
+responsabilidad:
 
 ```text
-app/
-  core/
-  engines/
-  models/
-  services/
-  static/
-  templates/
+docs/
+├── standards/
+├── audits/
+└── archive/
 ```
 
-## Carpeta docs
+### standards
 
-Contiene documentación vigente del proyecto.
+Contiene políticas, estándares y reglas vigentes del repositorio.
 
-La documentación histórica o sustituida no debe mantenerse como documentación
-actual si ya existe un documento oficial que la reemplaza.
+### audits
 
-## Carpeta tests
+Contiene evidencias y análisis de auditorías realizadas sobre el proyecto.
 
-Contiene pruebas automatizadas y validaciones del proyecto.
+### archive
+
+Contiene documentación histórica sustituida que ya no representa el estado
+vigente.
 
 ## Historial
 

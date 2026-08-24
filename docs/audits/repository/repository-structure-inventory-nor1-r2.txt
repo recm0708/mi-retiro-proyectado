@@ -1,0 +1,4008 @@
+Listado de rutas de carpetas para el volumen OS
+El n�mero de serie del volumen es 000000B0 CC03:656E
+C:.
+|   .editorconfig
+|   .gitattributes
+|   .gitignore
+|   CHANGELOG.md
+|   CODE_OF_CONDUCT.md
+|   CONTRIBUTING.md
+|   GOVERNANCE.md
+|   LICENSE
+|   nor1_r2_estructura_actual.txt
+|   README.md
+|   RELEASES.md
+|   requirements.txt
+|   SECURITY.md
+|   SUPPORT.md
+|   THIRD_PARTY_NOTICES.md
+|   VERSION
+|   VERSIONING.md
+|
++---.githooks
+|       pre-commit
+|       README.md
+|
++---.github
+|   |   allowed_signers
+|   |   CODEOWNERS
+|   |   dependabot.yml
+|   |   pull_request_template.md
+|   |
+|   +---ISSUE_TEMPLATE
+|   |       bug_report.yml
+|   |       config.yml
+|   |       feature_request.yml
+|   |       question.yml
+|   |
+|   \---workflows
+|           ci.yml
+|           governance-audit.yml
+|           verificar-tags.yml
+|
++---.pytest_cache
+|   |   .gitignore
+|   |   CACHEDIR.TAG
+|   |   README.md
+|   |
+|   \---v
+|       \---cache
+|               lastfailed
+|               nodeids
+|
++---.venv
+|   |   .gitignore
+|   |   pyvenv.cfg
+|   |
+|   +---Include
+|   +---Lib
+|   |   \---site-packages
+|   |       |   py.py
+|   |       |   typing_extensions.py
+|   |       |
+|   |       +---annotated_doc
+|   |       |   |   main.py
+|   |       |   |   py.typed
+|   |       |   |   __init__.py
+|   |       |   |
+|   |       |   \---__pycache__
+|   |       |           main.cpython-314.pyc
+|   |       |           __init__.cpython-314.pyc
+|   |       |
+|   |       +---annotated_doc-0.0.5.dist-info
+|   |       |   |   entry_points.txt
+|   |       |   |   INSTALLER
+|   |       |   |   METADATA
+|   |       |   |   RECORD
+|   |       |   |   WHEEL
+|   |       |   |
+|   |       |   \---licenses
+|   |       |           LICENSE
+|   |       |
+|   |       +---annotated_types
+|   |       |   |   py.typed
+|   |       |   |   test_cases.py
+|   |       |   |   __init__.py
+|   |       |   |
+|   |       |   \---__pycache__
+|   |       |           __init__.cpython-314.pyc
+|   |       |
+|   |       +---annotated_types-0.8.0.dist-info
+|   |       |   |   INSTALLER
+|   |       |   |   METADATA
+|   |       |   |   RECORD
+|   |       |   |   WHEEL
+|   |       |   |
+|   |       |   \---licenses
+|   |       |           LICENSE
+|   |       |
+|   |       +---anyio
+|   |       |   |   from_thread.py
+|   |       |   |   functools.py
+|   |       |   |   itertools.py
+|   |       |   |   lowlevel.py
+|   |       |   |   py.typed
+|   |       |   |   pytest_plugin.py
+|   |       |   |   to_interpreter.py
+|   |       |   |   to_process.py
+|   |       |   |   to_thread.py
+|   |       |   |   __init__.py
+|   |       |   |
+|   |       |   +---abc
+|   |       |   |   |   _eventloop.py
+|   |       |   |   |   _resources.py
+|   |       |   |   |   _sockets.py
+|   |       |   |   |   _streams.py
+|   |       |   |   |   _subprocesses.py
+|   |       |   |   |   _tasks.py
+|   |       |   |   |   _testing.py
+|   |       |   |   |   __init__.py
+|   |       |   |   |
+|   |       |   |   \---__pycache__
+|   |       |   |           _eventloop.cpython-314-pytest-9.1.1.pyc
+|   |       |   |           _eventloop.cpython-314.pyc
+|   |       |   |           _resources.cpython-314-pytest-9.1.1.pyc
+|   |       |   |           _resources.cpython-314.pyc
+|   |       |   |           _sockets.cpython-314-pytest-9.1.1.pyc
+|   |       |   |           _sockets.cpython-314.pyc
+|   |       |   |           _streams.cpython-314-pytest-9.1.1.pyc
+|   |       |   |           _streams.cpython-314.pyc
+|   |       |   |           _subprocesses.cpython-314-pytest-9.1.1.pyc
+|   |       |   |           _subprocesses.cpython-314.pyc
+|   |       |   |           _tasks.cpython-314-pytest-9.1.1.pyc
+|   |       |   |           _tasks.cpython-314.pyc
+|   |       |   |           _testing.cpython-314-pytest-9.1.1.pyc
+|   |       |   |           _testing.cpython-314.pyc
+|   |       |   |           __init__.cpython-314-pytest-9.1.1.pyc
+|   |       |   |           __init__.cpython-314.pyc
+|   |       |   |
+|   |       |   +---streams
+|   |       |   |   |   buffered.py
+|   |       |   |   |   file.py
+|   |       |   |   |   memory.py
+|   |       |   |   |   stapled.py
+|   |       |   |   |   text.py
+|   |       |   |   |   tls.py
+|   |       |   |   |   __init__.py
+|   |       |   |   |
+|   |       |   |   \---__pycache__
+|   |       |   |           memory.cpython-314-pytest-9.1.1.pyc
+|   |       |   |           memory.cpython-314.pyc
+|   |       |   |           stapled.cpython-314-pytest-9.1.1.pyc
+|   |       |   |           stapled.cpython-314.pyc
+|   |       |   |           tls.cpython-314-pytest-9.1.1.pyc
+|   |       |   |           tls.cpython-314.pyc
+|   |       |   |           __init__.cpython-314-pytest-9.1.1.pyc
+|   |       |   |           __init__.cpython-314.pyc
+|   |       |   |
+|   |       |   +---_backends
+|   |       |   |   |   _asyncio.py
+|   |       |   |   |   _trio.py
+|   |       |   |   |   __init__.py
+|   |       |   |   |
+|   |       |   |   \---__pycache__
+|   |       |   |           _asyncio.cpython-314-pytest-9.1.1.pyc
+|   |       |   |           _asyncio.cpython-314.pyc
+|   |       |   |           _trio.cpython-314-pytest-9.1.1.pyc
+|   |       |   |           __init__.cpython-314-pytest-9.1.1.pyc
+|   |       |   |           __init__.cpython-314.pyc
+|   |       |   |
+|   |       |   +---_core
+|   |       |   |   |   _asyncio_selector_thread.py
+|   |       |   |   |   _contextmanagers.py
+|   |       |   |   |   _eventloop.py
+|   |       |   |   |   _exceptions.py
+|   |       |   |   |   _fileio.py
+|   |       |   |   |   _resources.py
+|   |       |   |   |   _signals.py
+|   |       |   |   |   _sockets.py
+|   |       |   |   |   _streams.py
+|   |       |   |   |   _subprocesses.py
+|   |       |   |   |   _synchronization.py
+|   |       |   |   |   _tasks.py
+|   |       |   |   |   _tempfile.py
+|   |       |   |   |   _testing.py
+|   |       |   |   |   _typedattr.py
+|   |       |   |   |   __init__.py
+|   |       |   |   |
+|   |       |   |   \---__pycache__
+|   |       |   |           _contextmanagers.cpython-314-pytest-9.1.1.pyc
+|   |       |   |           _contextmanagers.cpython-314.pyc
+|   |       |   |           _eventloop.cpython-314-pytest-9.1.1.pyc
+|   |       |   |           _eventloop.cpython-314.pyc
+|   |       |   |           _exceptions.cpython-314-pytest-9.1.1.pyc
+|   |       |   |           _exceptions.cpython-314.pyc
+|   |       |   |           _fileio.cpython-314-pytest-9.1.1.pyc
+|   |       |   |           _fileio.cpython-314.pyc
+|   |       |   |           _resources.cpython-314-pytest-9.1.1.pyc
+|   |       |   |           _resources.cpython-314.pyc
+|   |       |   |           _signals.cpython-314-pytest-9.1.1.pyc
+|   |       |   |           _signals.cpython-314.pyc
+|   |       |   |           _sockets.cpython-314-pytest-9.1.1.pyc
+|   |       |   |           _sockets.cpython-314.pyc
+|   |       |   |           _streams.cpython-314-pytest-9.1.1.pyc
+|   |       |   |           _streams.cpython-314.pyc
+|   |       |   |           _subprocesses.cpython-314-pytest-9.1.1.pyc
+|   |       |   |           _subprocesses.cpython-314.pyc
+|   |       |   |           _synchronization.cpython-314-pytest-9.1.1.pyc
+|   |       |   |           _synchronization.cpython-314.pyc
+|   |       |   |           _tasks.cpython-314-pytest-9.1.1.pyc
+|   |       |   |           _tasks.cpython-314.pyc
+|   |       |   |           _tempfile.cpython-314-pytest-9.1.1.pyc
+|   |       |   |           _tempfile.cpython-314.pyc
+|   |       |   |           _testing.cpython-314-pytest-9.1.1.pyc
+|   |       |   |           _testing.cpython-314.pyc
+|   |       |   |           _typedattr.cpython-314-pytest-9.1.1.pyc
+|   |       |   |           _typedattr.cpython-314.pyc
+|   |       |   |           __init__.cpython-314-pytest-9.1.1.pyc
+|   |       |   |           __init__.cpython-314.pyc
+|   |       |   |
+|   |       |   \---__pycache__
+|   |       |           from_thread.cpython-314-pytest-9.1.1.pyc
+|   |       |           from_thread.cpython-314.pyc
+|   |       |           lowlevel.cpython-314-pytest-9.1.1.pyc
+|   |       |           lowlevel.cpython-314.pyc
+|   |       |           pytest_plugin.cpython-314-pytest-9.1.1.pyc
+|   |       |           to_thread.cpython-314-pytest-9.1.1.pyc
+|   |       |           to_thread.cpython-314.pyc
+|   |       |           __init__.cpython-314-pytest-9.1.1.pyc
+|   |       |           __init__.cpython-314.pyc
+|   |       |
+|   |       +---anyio-4.14.2.dist-info
+|   |       |   |   entry_points.txt
+|   |       |   |   INSTALLER
+|   |       |   |   METADATA
+|   |       |   |   RECORD
+|   |       |   |   scm_file_list.json
+|   |       |   |   scm_version.json
+|   |       |   |   top_level.txt
+|   |       |   |   WHEEL
+|   |       |   |
+|   |       |   \---licenses
+|   |       |           LICENSE
+|   |       |
+|   |       +---click
+|   |       |   |   core.py
+|   |       |   |   decorators.py
+|   |       |   |   exceptions.py
+|   |       |   |   formatting.py
+|   |       |   |   globals.py
+|   |       |   |   parser.py
+|   |       |   |   py.typed
+|   |       |   |   shell_completion.py
+|   |       |   |   termui.py
+|   |       |   |   testing.py
+|   |       |   |   types.py
+|   |       |   |   utils.py
+|   |       |   |   _compat.py
+|   |       |   |   _termui_impl.py
+|   |       |   |   _textwrap.py
+|   |       |   |   _utils.py
+|   |       |   |   _winconsole.py
+|   |       |   |   __init__.py
+|   |       |   |
+|   |       |   \---__pycache__
+|   |       |           core.cpython-314.pyc
+|   |       |           decorators.cpython-314.pyc
+|   |       |           exceptions.cpython-314.pyc
+|   |       |           formatting.cpython-314.pyc
+|   |       |           globals.cpython-314.pyc
+|   |       |           parser.cpython-314.pyc
+|   |       |           termui.cpython-314.pyc
+|   |       |           types.cpython-314.pyc
+|   |       |           utils.cpython-314.pyc
+|   |       |           _compat.cpython-314.pyc
+|   |       |           _utils.cpython-314.pyc
+|   |       |           _winconsole.cpython-314.pyc
+|   |       |           __init__.cpython-314.pyc
+|   |       |
+|   |       +---click-8.4.2.dist-info
+|   |       |   |   INSTALLER
+|   |       |   |   METADATA
+|   |       |   |   RECORD
+|   |       |   |   WHEEL
+|   |       |   |
+|   |       |   \---licenses
+|   |       |           LICENSE.txt
+|   |       |
+|   |       +---colorama
+|   |       |   |   ansi.py
+|   |       |   |   ansitowin32.py
+|   |       |   |   initialise.py
+|   |       |   |   win32.py
+|   |       |   |   winterm.py
+|   |       |   |   __init__.py
+|   |       |   |
+|   |       |   +---tests
+|   |       |   |       ansitowin32_test.py
+|   |       |   |       ansi_test.py
+|   |       |   |       initialise_test.py
+|   |       |   |       isatty_test.py
+|   |       |   |       utils.py
+|   |       |   |       winterm_test.py
+|   |       |   |       __init__.py
+|   |       |   |
+|   |       |   \---__pycache__
+|   |       |           ansi.cpython-314.pyc
+|   |       |           ansitowin32.cpython-314.pyc
+|   |       |           initialise.cpython-314.pyc
+|   |       |           win32.cpython-314.pyc
+|   |       |           winterm.cpython-314.pyc
+|   |       |           __init__.cpython-314.pyc
+|   |       |
+|   |       +---colorama-0.4.6.dist-info
+|   |       |   |   INSTALLER
+|   |       |   |   METADATA
+|   |       |   |   RECORD
+|   |       |   |   WHEEL
+|   |       |   |
+|   |       |   \---licenses
+|   |       |           LICENSE.txt
+|   |       |
+|   |       +---dotenv
+|   |       |       cli.py
+|   |       |       ipython.py
+|   |       |       main.py
+|   |       |       parser.py
+|   |       |       py.typed
+|   |       |       variables.py
+|   |       |       version.py
+|   |       |       __init__.py
+|   |       |       __main__.py
+|   |       |
+|   |       +---fastapi
+|   |       |   |   applications.py
+|   |       |   |   background.py
+|   |       |   |   cli.py
+|   |       |   |   concurrency.py
+|   |       |   |   datastructures.py
+|   |       |   |   encoders.py
+|   |       |   |   exceptions.py
+|   |       |   |   exception_handlers.py
+|   |       |   |   logger.py
+|   |       |   |   params.py
+|   |       |   |   param_functions.py
+|   |       |   |   py.typed
+|   |       |   |   requests.py
+|   |       |   |   responses.py
+|   |       |   |   routing.py
+|   |       |   |   sse.py
+|   |       |   |   staticfiles.py
+|   |       |   |   templating.py
+|   |       |   |   testclient.py
+|   |       |   |   types.py
+|   |       |   |   utils.py
+|   |       |   |   websockets.py
+|   |       |   |   __init__.py
+|   |       |   |   __main__.py
+|   |       |   |
+|   |       |   +---.agents
+|   |       |   |   \---skills
+|   |       |   |       \---fastapi
+|   |       |   |           |   SKILL.md
+|   |       |   |           |
+|   |       |   |           \---references
+|   |       |   |                   dependencies.md
+|   |       |   |                   other-tools.md
+|   |       |   |                   path-operations.md
+|   |       |   |                   pydantic.md
+|   |       |   |                   responses.md
+|   |       |   |                   streaming.md
+|   |       |   |
+|   |       |   +---dependencies
+|   |       |   |   |   models.py
+|   |       |   |   |   utils.py
+|   |       |   |   |   __init__.py
+|   |       |   |   |
+|   |       |   |   \---__pycache__
+|   |       |   |           models.cpython-314.pyc
+|   |       |   |           utils.cpython-314.pyc
+|   |       |   |           __init__.cpython-314.pyc
+|   |       |   |
+|   |       |   +---middleware
+|   |       |   |   |   asyncexitstack.py
+|   |       |   |   |   cors.py
+|   |       |   |   |   gzip.py
+|   |       |   |   |   httpsredirect.py
+|   |       |   |   |   trustedhost.py
+|   |       |   |   |   wsgi.py
+|   |       |   |   |   __init__.py
+|   |       |   |   |
+|   |       |   |   \---__pycache__
+|   |       |   |           asyncexitstack.cpython-314.pyc
+|   |       |   |           __init__.cpython-314.pyc
+|   |       |   |
+|   |       |   +---openapi
+|   |       |   |   |   constants.py
+|   |       |   |   |   docs.py
+|   |       |   |   |   models.py
+|   |       |   |   |   utils.py
+|   |       |   |   |   __init__.py
+|   |       |   |   |
+|   |       |   |   \---__pycache__
+|   |       |   |           constants.cpython-314.pyc
+|   |       |   |           docs.cpython-314.pyc
+|   |       |   |           models.cpython-314.pyc
+|   |       |   |           utils.cpython-314.pyc
+|   |       |   |           __init__.cpython-314.pyc
+|   |       |   |
+|   |       |   +---security
+|   |       |   |   |   api_key.py
+|   |       |   |   |   base.py
+|   |       |   |   |   http.py
+|   |       |   |   |   oauth2.py
+|   |       |   |   |   open_id_connect_url.py
+|   |       |   |   |   utils.py
+|   |       |   |   |   __init__.py
+|   |       |   |   |
+|   |       |   |   \---__pycache__
+|   |       |   |           api_key.cpython-314.pyc
+|   |       |   |           base.cpython-314.pyc
+|   |       |   |           http.cpython-314.pyc
+|   |       |   |           oauth2.cpython-314.pyc
+|   |       |   |           open_id_connect_url.cpython-314.pyc
+|   |       |   |           utils.cpython-314.pyc
+|   |       |   |           __init__.cpython-314.pyc
+|   |       |   |
+|   |       |   +---_compat
+|   |       |   |   |   shared.py
+|   |       |   |   |   v2.py
+|   |       |   |   |   __init__.py
+|   |       |   |   |
+|   |       |   |   \---__pycache__
+|   |       |   |           shared.cpython-314.pyc
+|   |       |   |           v2.cpython-314.pyc
+|   |       |   |           __init__.cpython-314.pyc
+|   |       |   |
+|   |       |   \---__pycache__
+|   |       |           applications.cpython-314.pyc
+|   |       |           background.cpython-314.pyc
+|   |       |           concurrency.cpython-314.pyc
+|   |       |           datastructures.cpython-314.pyc
+|   |       |           encoders.cpython-314.pyc
+|   |       |           exceptions.cpython-314.pyc
+|   |       |           exception_handlers.cpython-314.pyc
+|   |       |           logger.cpython-314.pyc
+|   |       |           params.cpython-314.pyc
+|   |       |           param_functions.cpython-314.pyc
+|   |       |           requests.cpython-314.pyc
+|   |       |           responses.cpython-314.pyc
+|   |       |           routing.cpython-314.pyc
+|   |       |           sse.cpython-314.pyc
+|   |       |           staticfiles.cpython-314.pyc
+|   |       |           templating.cpython-314.pyc
+|   |       |           testclient.cpython-314.pyc
+|   |       |           types.cpython-314.pyc
+|   |       |           utils.cpython-314.pyc
+|   |       |           websockets.cpython-314.pyc
+|   |       |           __init__.cpython-314.pyc
+|   |       |
+|   |       +---fastapi-0.141.1.dist-info
+|   |       |   |   entry_points.txt
+|   |       |   |   INSTALLER
+|   |       |   |   METADATA
+|   |       |   |   RECORD
+|   |       |   |   REQUESTED
+|   |       |   |   WHEEL
+|   |       |   |
+|   |       |   \---licenses
+|   |       |           LICENSE
+|   |       |
+|   |       +---h11
+|   |       |       py.typed
+|   |       |       _abnf.py
+|   |       |       _connection.py
+|   |       |       _events.py
+|   |       |       _headers.py
+|   |       |       _readers.py
+|   |       |       _receivebuffer.py
+|   |       |       _state.py
+|   |       |       _util.py
+|   |       |       _version.py
+|   |       |       _writers.py
+|   |       |       __init__.py
+|   |       |
+|   |       +---h11-0.16.0.dist-info
+|   |       |   |   INSTALLER
+|   |       |   |   METADATA
+|   |       |   |   RECORD
+|   |       |   |   top_level.txt
+|   |       |   |   WHEEL
+|   |       |   |
+|   |       |   \---licenses
+|   |       |           LICENSE.txt
+|   |       |
+|   |       +---httpcore2
+|   |       |   |   py.typed
+|   |       |   |   _api.py
+|   |       |   |   _exceptions.py
+|   |       |   |   _models.py
+|   |       |   |   _ssl.py
+|   |       |   |   _synchronization.py
+|   |       |   |   _trace.py
+|   |       |   |   _utils.py
+|   |       |   |   __init__.py
+|   |       |   |
+|   |       |   +---_async
+|   |       |   |       connection.py
+|   |       |   |       connection_pool.py
+|   |       |   |       http11.py
+|   |       |   |       http2.py
+|   |       |   |       http_proxy.py
+|   |       |   |       interfaces.py
+|   |       |   |       socks_proxy.py
+|   |       |   |       __init__.py
+|   |       |   |
+|   |       |   +---_backends
+|   |       |   |       anyio.py
+|   |       |   |       auto.py
+|   |       |   |       base.py
+|   |       |   |       mock.py
+|   |       |   |       sync.py
+|   |       |   |       trio.py
+|   |       |   |       __init__.py
+|   |       |   |
+|   |       |   \---_sync
+|   |       |           connection.py
+|   |       |           connection_pool.py
+|   |       |           http11.py
+|   |       |           http2.py
+|   |       |           http_proxy.py
+|   |       |           interfaces.py
+|   |       |           socks_proxy.py
+|   |       |           __init__.py
+|   |       |
+|   |       +---httpcore2-2.7.0.dist-info
+|   |       |   |   INSTALLER
+|   |       |   |   METADATA
+|   |       |   |   RECORD
+|   |       |   |   WHEEL
+|   |       |   |
+|   |       |   \---licenses
+|   |       |           LICENSE.md
+|   |       |
+|   |       +---httptools
+|   |       |   |   py.typed
+|   |       |   |   _version.py
+|   |       |   |   __init__.py
+|   |       |   |
+|   |       |   +---parser
+|   |       |   |   |   cparser.pxd
+|   |       |   |   |   errors.py
+|   |       |   |   |   parser.cp314-win_amd64.pyd
+|   |       |   |   |   parser.pyi
+|   |       |   |   |   parser.pyx
+|   |       |   |   |   protocol.py
+|   |       |   |   |   python.pxd
+|   |       |   |   |   url_cparser.pxd
+|   |       |   |   |   url_parser.cp314-win_amd64.pyd
+|   |       |   |   |   url_parser.pyi
+|   |       |   |   |   url_parser.pyx
+|   |       |   |   |   __init__.py
+|   |       |   |   |
+|   |       |   |   \---__pycache__
+|   |       |   |           errors.cpython-314.pyc
+|   |       |   |           protocol.cpython-314.pyc
+|   |       |   |           __init__.cpython-314.pyc
+|   |       |   |
+|   |       |   \---__pycache__
+|   |       |           _version.cpython-314.pyc
+|   |       |           __init__.cpython-314.pyc
+|   |       |
+|   |       +---httptools-0.8.0.dist-info
+|   |       |   |   INSTALLER
+|   |       |   |   METADATA
+|   |       |   |   RECORD
+|   |       |   |   top_level.txt
+|   |       |   |   WHEEL
+|   |       |   |
+|   |       |   \---licenses
+|   |       |       |   LICENSE
+|   |       |       |
+|   |       |       \---vendor
+|   |       |           +---http-parser
+|   |       |           |       LICENSE-MIT
+|   |       |           |
+|   |       |           \---llhttp
+|   |       |                   LICENSE
+|   |       |
+|   |       +---httpx2
+|   |       |   |   py.typed
+|   |       |   |   _api.py
+|   |       |   |   _auth.py
+|   |       |   |   _client.py
+|   |       |   |   _config.py
+|   |       |   |   _content.py
+|   |       |   |   _decoders.py
+|   |       |   |   _exceptions.py
+|   |       |   |   _main.py
+|   |       |   |   _models.py
+|   |       |   |   _multipart.py
+|   |       |   |   _sse.py
+|   |       |   |   _status_codes.py
+|   |       |   |   _types.py
+|   |       |   |   _urlparse.py
+|   |       |   |   _urls.py
+|   |       |   |   _utils.py
+|   |       |   |   __init__.py
+|   |       |   |   __version__.py
+|   |       |   |
+|   |       |   +---websockets
+|   |       |   |       _api.py
+|   |       |   |       _exceptions.py
+|   |       |   |       _ping.py
+|   |       |   |       _transport.py
+|   |       |   |       __init__.py
+|   |       |   |
+|   |       |   +---_transports
+|   |       |   |   |   asgi.py
+|   |       |   |   |   base.py
+|   |       |   |   |   default.py
+|   |       |   |   |   mock.py
+|   |       |   |   |   wsgi.py
+|   |       |   |   |   __init__.py
+|   |       |   |   |
+|   |       |   |   \---__pycache__
+|   |       |   |           asgi.cpython-314.pyc
+|   |       |   |           base.cpython-314.pyc
+|   |       |   |           default.cpython-314.pyc
+|   |       |   |           mock.cpython-314.pyc
+|   |       |   |           wsgi.cpython-314.pyc
+|   |       |   |           __init__.cpython-314.pyc
+|   |       |   |
+|   |       |   \---__pycache__
+|   |       |           _api.cpython-314.pyc
+|   |       |           _auth.cpython-314.pyc
+|   |       |           _client.cpython-314.pyc
+|   |       |           _config.cpython-314.pyc
+|   |       |           _content.cpython-314.pyc
+|   |       |           _decoders.cpython-314.pyc
+|   |       |           _exceptions.cpython-314.pyc
+|   |       |           _models.cpython-314.pyc
+|   |       |           _multipart.cpython-314.pyc
+|   |       |           _sse.cpython-314.pyc
+|   |       |           _status_codes.cpython-314.pyc
+|   |       |           _types.cpython-314.pyc
+|   |       |           _urlparse.cpython-314.pyc
+|   |       |           _urls.cpython-314.pyc
+|   |       |           _utils.cpython-314.pyc
+|   |       |           __init__.cpython-314.pyc
+|   |       |           __version__.cpython-314.pyc
+|   |       |
+|   |       +---httpx2-2.7.0.dist-info
+|   |       |   |   entry_points.txt
+|   |       |   |   INSTALLER
+|   |       |   |   METADATA
+|   |       |   |   RECORD
+|   |       |   |   REQUESTED
+|   |       |   |   WHEEL
+|   |       |   |
+|   |       |   \---licenses
+|   |       |           LICENSE.md
+|   |       |
+|   |       +---idna
+|   |       |   |   cli.py
+|   |       |   |   codec.py
+|   |       |   |   compat.py
+|   |       |   |   core.py
+|   |       |   |   idnadata.py
+|   |       |   |   intranges.py
+|   |       |   |   package_data.py
+|   |       |   |   py.typed
+|   |       |   |   uts46data.py
+|   |       |   |   __init__.py
+|   |       |   |   __main__.py
+|   |       |   |
+|   |       |   \---__pycache__
+|   |       |           core.cpython-314.pyc
+|   |       |           idnadata.cpython-314.pyc
+|   |       |           intranges.cpython-314.pyc
+|   |       |           package_data.cpython-314.pyc
+|   |       |           __init__.cpython-314.pyc
+|   |       |
+|   |       +---idna-3.18.dist-info
+|   |       |   |   entry_points.txt
+|   |       |   |   INSTALLER
+|   |       |   |   METADATA
+|   |       |   |   RECORD
+|   |       |   |   WHEEL
+|   |       |   |
+|   |       |   \---licenses
+|   |       |           LICENSE.md
+|   |       |
+|   |       +---iniconfig
+|   |       |   |   exceptions.py
+|   |       |   |   py.typed
+|   |       |   |   _parse.py
+|   |       |   |   _version.py
+|   |       |   |   __init__.py
+|   |       |   |
+|   |       |   \---__pycache__
+|   |       |           exceptions.cpython-314.pyc
+|   |       |           _parse.cpython-314.pyc
+|   |       |           __init__.cpython-314.pyc
+|   |       |
+|   |       +---iniconfig-2.3.0.dist-info
+|   |       |   |   INSTALLER
+|   |       |   |   METADATA
+|   |       |   |   RECORD
+|   |       |   |   top_level.txt
+|   |       |   |   WHEEL
+|   |       |   |
+|   |       |   \---licenses
+|   |       |           LICENSE
+|   |       |
+|   |       +---jinja2
+|   |       |   |   async_utils.py
+|   |       |   |   bccache.py
+|   |       |   |   compiler.py
+|   |       |   |   constants.py
+|   |       |   |   debug.py
+|   |       |   |   defaults.py
+|   |       |   |   environment.py
+|   |       |   |   exceptions.py
+|   |       |   |   ext.py
+|   |       |   |   filters.py
+|   |       |   |   idtracking.py
+|   |       |   |   lexer.py
+|   |       |   |   loaders.py
+|   |       |   |   meta.py
+|   |       |   |   nativetypes.py
+|   |       |   |   nodes.py
+|   |       |   |   optimizer.py
+|   |       |   |   parser.py
+|   |       |   |   py.typed
+|   |       |   |   runtime.py
+|   |       |   |   sandbox.py
+|   |       |   |   tests.py
+|   |       |   |   utils.py
+|   |       |   |   visitor.py
+|   |       |   |   _identifier.py
+|   |       |   |   __init__.py
+|   |       |   |
+|   |       |   \---__pycache__
+|   |       |           async_utils.cpython-314.pyc
+|   |       |           bccache.cpython-314.pyc
+|   |       |           compiler.cpython-314.pyc
+|   |       |           defaults.cpython-314.pyc
+|   |       |           environment.cpython-314.pyc
+|   |       |           exceptions.cpython-314.pyc
+|   |       |           filters.cpython-314.pyc
+|   |       |           idtracking.cpython-314.pyc
+|   |       |           lexer.cpython-314.pyc
+|   |       |           loaders.cpython-314.pyc
+|   |       |           nodes.cpython-314.pyc
+|   |       |           optimizer.cpython-314.pyc
+|   |       |           parser.cpython-314.pyc
+|   |       |           runtime.cpython-314.pyc
+|   |       |           tests.cpython-314.pyc
+|   |       |           utils.cpython-314.pyc
+|   |       |           visitor.cpython-314.pyc
+|   |       |           _identifier.cpython-314.pyc
+|   |       |           __init__.cpython-314.pyc
+|   |       |
+|   |       +---jinja2-3.1.6.dist-info
+|   |       |   |   entry_points.txt
+|   |       |   |   INSTALLER
+|   |       |   |   METADATA
+|   |       |   |   RECORD
+|   |       |   |   REQUESTED
+|   |       |   |   WHEEL
+|   |       |   |
+|   |       |   \---licenses
+|   |       |           LICENSE.txt
+|   |       |
+|   |       +---markupsafe
+|   |       |   |   py.typed
+|   |       |   |   _native.py
+|   |       |   |   _speedups.c
+|   |       |   |   _speedups.cp314-win_amd64.pyd
+|   |       |   |   _speedups.pyi
+|   |       |   |   __init__.py
+|   |       |   |
+|   |       |   \---__pycache__
+|   |       |           __init__.cpython-314.pyc
+|   |       |
+|   |       +---markupsafe-3.0.3.dist-info
+|   |       |   |   INSTALLER
+|   |       |   |   METADATA
+|   |       |   |   RECORD
+|   |       |   |   top_level.txt
+|   |       |   |   WHEEL
+|   |       |   |
+|   |       |   \---licenses
+|   |       |           LICENSE.txt
+|   |       |
+|   |       +---multipart
+|   |       |       decoders.py
+|   |       |       exceptions.py
+|   |       |       multipart.py
+|   |       |       __init__.py
+|   |       |
+|   |       +---packaging
+|   |       |   |   dependency_groups.py
+|   |       |   |   direct_url.py
+|   |       |   |   errors.py
+|   |       |   |   markers.py
+|   |       |   |   metadata.py
+|   |       |   |   py.typed
+|   |       |   |   pylock.py
+|   |       |   |   ranges.py
+|   |       |   |   requirements.py
+|   |       |   |   specifiers.py
+|   |       |   |   tags.py
+|   |       |   |   utils.py
+|   |       |   |   version.py
+|   |       |   |   _elffile.py
+|   |       |   |   _manylinux.py
+|   |       |   |   _musllinux.py
+|   |       |   |   _parser.py
+|   |       |   |   _ranges.py
+|   |       |   |   _structures.py
+|   |       |   |   _tokenizer.py
+|   |       |   |   __init__.py
+|   |       |   |
+|   |       |   \---licenses
+|   |       |           _spdx.py
+|   |       |           __init__.py
+|   |       |
+|   |       +---packaging-26.3.dist-info
+|   |       |   |   INSTALLER
+|   |       |   |   METADATA
+|   |       |   |   RECORD
+|   |       |   |   WHEEL
+|   |       |   |
+|   |       |   \---licenses
+|   |       |           LICENSE
+|   |       |           LICENSE.APACHE
+|   |       |           LICENSE.BSD
+|   |       |
+|   |       +---pip
+|   |       |   |   py.typed
+|   |       |   |   __init__.py
+|   |       |   |   __main__.py
+|   |       |   |   __pip-runner__.py
+|   |       |   |
+|   |       |   +---_internal
+|   |       |   |   |   cache.py
+|   |       |   |   |   configuration.py
+|   |       |   |   |   exceptions.py
+|   |       |   |   |   main.py
+|   |       |   |   |   pyproject.py
+|   |       |   |   |   self_outdated_check.py
+|   |       |   |   |   wheel_builder.py
+|   |       |   |   |   __init__.py
+|   |       |   |   |
+|   |       |   |   +---build_env
+|   |       |   |   |   |   base.py
+|   |       |   |   |   |   installer.py
+|   |       |   |   |   |   noop.py
+|   |       |   |   |   |   venv.py
+|   |       |   |   |   |   virtual.py
+|   |       |   |   |   |   __init__.py
+|   |       |   |   |   |
+|   |       |   |   |   \---__pycache__
+|   |       |   |   |           base.cpython-314.pyc
+|   |       |   |   |           installer.cpython-314.pyc
+|   |       |   |   |           noop.cpython-314.pyc
+|   |       |   |   |           venv.cpython-314.pyc
+|   |       |   |   |           virtual.cpython-314.pyc
+|   |       |   |   |           __init__.cpython-314.pyc
+|   |       |   |   |
+|   |       |   |   +---cli
+|   |       |   |   |   |   autocompletion.py
+|   |       |   |   |   |   base_command.py
+|   |       |   |   |   |   cmdoptions.py
+|   |       |   |   |   |   command_context.py
+|   |       |   |   |   |   index_command.py
+|   |       |   |   |   |   main.py
+|   |       |   |   |   |   main_parser.py
+|   |       |   |   |   |   parser.py
+|   |       |   |   |   |   progress_bars.py
+|   |       |   |   |   |   req_command.py
+|   |       |   |   |   |   spinners.py
+|   |       |   |   |   |   status_codes.py
+|   |       |   |   |   |   __init__.py
+|   |       |   |   |   |
+|   |       |   |   |   \---__pycache__
+|   |       |   |   |           autocompletion.cpython-314.pyc
+|   |       |   |   |           base_command.cpython-314.pyc
+|   |       |   |   |           cmdoptions.cpython-314.pyc
+|   |       |   |   |           command_context.cpython-314.pyc
+|   |       |   |   |           main.cpython-314.pyc
+|   |       |   |   |           main_parser.cpython-314.pyc
+|   |       |   |   |           parser.cpython-314.pyc
+|   |       |   |   |           progress_bars.cpython-314.pyc
+|   |       |   |   |           spinners.cpython-314.pyc
+|   |       |   |   |           status_codes.cpython-314.pyc
+|   |       |   |   |           __init__.cpython-314.pyc
+|   |       |   |   |
+|   |       |   |   +---commands
+|   |       |   |   |   |   cache.py
+|   |       |   |   |   |   check.py
+|   |       |   |   |   |   completion.py
+|   |       |   |   |   |   configuration.py
+|   |       |   |   |   |   debug.py
+|   |       |   |   |   |   download.py
+|   |       |   |   |   |   freeze.py
+|   |       |   |   |   |   hash.py
+|   |       |   |   |   |   help.py
+|   |       |   |   |   |   index.py
+|   |       |   |   |   |   inspect.py
+|   |       |   |   |   |   install.py
+|   |       |   |   |   |   list.py
+|   |       |   |   |   |   lock.py
+|   |       |   |   |   |   search.py
+|   |       |   |   |   |   show.py
+|   |       |   |   |   |   uninstall.py
+|   |       |   |   |   |   wheel.py
+|   |       |   |   |   |   __init__.py
+|   |       |   |   |   |
+|   |       |   |   |   \---__pycache__
+|   |       |   |   |           check.cpython-314.pyc
+|   |       |   |   |           __init__.cpython-314.pyc
+|   |       |   |   |
+|   |       |   |   +---distributions
+|   |       |   |   |   |   base.py
+|   |       |   |   |   |   installed.py
+|   |       |   |   |   |   sdist.py
+|   |       |   |   |   |   wheel.py
+|   |       |   |   |   |   __init__.py
+|   |       |   |   |   |
+|   |       |   |   |   \---__pycache__
+|   |       |   |   |           base.cpython-314.pyc
+|   |       |   |   |           sdist.cpython-314.pyc
+|   |       |   |   |           wheel.cpython-314.pyc
+|   |       |   |   |           __init__.cpython-314.pyc
+|   |       |   |   |
+|   |       |   |   +---index
+|   |       |   |   |       collector.py
+|   |       |   |   |       package_finder.py
+|   |       |   |   |       sources.py
+|   |       |   |   |       __init__.py
+|   |       |   |   |
+|   |       |   |   +---locations
+|   |       |   |   |   |   base.py
+|   |       |   |   |   |   _distutils.py
+|   |       |   |   |   |   _sysconfig.py
+|   |       |   |   |   |   __init__.py
+|   |       |   |   |   |
+|   |       |   |   |   \---__pycache__
+|   |       |   |   |           base.cpython-314.pyc
+|   |       |   |   |           _sysconfig.cpython-314.pyc
+|   |       |   |   |           __init__.cpython-314.pyc
+|   |       |   |   |
+|   |       |   |   +---metadata
+|   |       |   |   |   |   base.py
+|   |       |   |   |   |   pkg_resources.py
+|   |       |   |   |   |   _json.py
+|   |       |   |   |   |   __init__.py
+|   |       |   |   |   |
+|   |       |   |   |   +---importlib
+|   |       |   |   |   |   |   _compat.py
+|   |       |   |   |   |   |   _dists.py
+|   |       |   |   |   |   |   _envs.py
+|   |       |   |   |   |   |   __init__.py
+|   |       |   |   |   |   |
+|   |       |   |   |   |   \---__pycache__
+|   |       |   |   |   |           _compat.cpython-314.pyc
+|   |       |   |   |   |           _dists.cpython-314.pyc
+|   |       |   |   |   |           _envs.cpython-314.pyc
+|   |       |   |   |   |           __init__.cpython-314.pyc
+|   |       |   |   |   |
+|   |       |   |   |   \---__pycache__
+|   |       |   |   |           base.cpython-314.pyc
+|   |       |   |   |           _json.cpython-314.pyc
+|   |       |   |   |           __init__.cpython-314.pyc
+|   |       |   |   |
+|   |       |   |   +---models
+|   |       |   |   |   |   candidate.py
+|   |       |   |   |   |   direct_url.py
+|   |       |   |   |   |   format_control.py
+|   |       |   |   |   |   index.py
+|   |       |   |   |   |   installation_report.py
+|   |       |   |   |   |   link.py
+|   |       |   |   |   |   release_control.py
+|   |       |   |   |   |   scheme.py
+|   |       |   |   |   |   search_scope.py
+|   |       |   |   |   |   selection_prefs.py
+|   |       |   |   |   |   target_python.py
+|   |       |   |   |   |   wheel.py
+|   |       |   |   |   |   __init__.py
+|   |       |   |   |   |
+|   |       |   |   |   \---__pycache__
+|   |       |   |   |           direct_url.cpython-314.pyc
+|   |       |   |   |           format_control.cpython-314.pyc
+|   |       |   |   |           index.cpython-314.pyc
+|   |       |   |   |           link.cpython-314.pyc
+|   |       |   |   |           release_control.cpython-314.pyc
+|   |       |   |   |           scheme.cpython-314.pyc
+|   |       |   |   |           search_scope.cpython-314.pyc
+|   |       |   |   |           target_python.cpython-314.pyc
+|   |       |   |   |           __init__.cpython-314.pyc
+|   |       |   |   |
+|   |       |   |   +---network
+|   |       |   |   |       auth.py
+|   |       |   |   |       cache.py
+|   |       |   |   |       download.py
+|   |       |   |   |       lazy_wheel.py
+|   |       |   |   |       session.py
+|   |       |   |   |       utils.py
+|   |       |   |   |       xmlrpc.py
+|   |       |   |   |       __init__.py
+|   |       |   |   |
+|   |       |   |   +---operations
+|   |       |   |   |   |   check.py
+|   |       |   |   |   |   freeze.py
+|   |       |   |   |   |   prepare.py
+|   |       |   |   |   |   __init__.py
+|   |       |   |   |   |
+|   |       |   |   |   +---build
+|   |       |   |   |   |   |   build_tracker.py
+|   |       |   |   |   |   |   metadata.py
+|   |       |   |   |   |   |   metadata_editable.py
+|   |       |   |   |   |   |   wheel.py
+|   |       |   |   |   |   |   wheel_editable.py
+|   |       |   |   |   |   |   __init__.py
+|   |       |   |   |   |   |
+|   |       |   |   |   |   \---__pycache__
+|   |       |   |   |   |           metadata.cpython-314.pyc
+|   |       |   |   |   |           metadata_editable.cpython-314.pyc
+|   |       |   |   |   |           __init__.cpython-314.pyc
+|   |       |   |   |   |
+|   |       |   |   |   +---install
+|   |       |   |   |   |       wheel.py
+|   |       |   |   |   |       __init__.py
+|   |       |   |   |   |
+|   |       |   |   |   \---__pycache__
+|   |       |   |   |           check.cpython-314.pyc
+|   |       |   |   |           __init__.cpython-314.pyc
+|   |       |   |   |
+|   |       |   |   +---req
+|   |       |   |   |   |   constructors.py
+|   |       |   |   |   |   pep723.py
+|   |       |   |   |   |   req_dependency_group.py
+|   |       |   |   |   |   req_file.py
+|   |       |   |   |   |   req_install.py
+|   |       |   |   |   |   req_set.py
+|   |       |   |   |   |   req_uninstall.py
+|   |       |   |   |   |   __init__.py
+|   |       |   |   |   |
+|   |       |   |   |   \---__pycache__
+|   |       |   |   |           req_file.cpython-314.pyc
+|   |       |   |   |           req_install.cpython-314.pyc
+|   |       |   |   |           req_set.cpython-314.pyc
+|   |       |   |   |           req_uninstall.cpython-314.pyc
+|   |       |   |   |           __init__.cpython-314.pyc
+|   |       |   |   |
+|   |       |   |   +---resolution
+|   |       |   |   |   |   base.py
+|   |       |   |   |   |   __init__.py
+|   |       |   |   |   |
+|   |       |   |   |   +---legacy
+|   |       |   |   |   |       resolver.py
+|   |       |   |   |   |       __init__.py
+|   |       |   |   |   |
+|   |       |   |   |   \---resolvelib
+|   |       |   |   |           base.py
+|   |       |   |   |           candidates.py
+|   |       |   |   |           factory.py
+|   |       |   |   |           found_candidates.py
+|   |       |   |   |           provider.py
+|   |       |   |   |           reporter.py
+|   |       |   |   |           requirements.py
+|   |       |   |   |           resolver.py
+|   |       |   |   |           __init__.py
+|   |       |   |   |
+|   |       |   |   +---utils
+|   |       |   |   |   |   appdirs.py
+|   |       |   |   |   |   compat.py
+|   |       |   |   |   |   compatibility_tags.py
+|   |       |   |   |   |   datetime.py
+|   |       |   |   |   |   deprecation.py
+|   |       |   |   |   |   direct_url_helpers.py
+|   |       |   |   |   |   egg_link.py
+|   |       |   |   |   |   entrypoints.py
+|   |       |   |   |   |   filesystem.py
+|   |       |   |   |   |   filetypes.py
+|   |       |   |   |   |   glibc.py
+|   |       |   |   |   |   hashes.py
+|   |       |   |   |   |   logging.py
+|   |       |   |   |   |   misc.py
+|   |       |   |   |   |   packaging.py
+|   |       |   |   |   |   pylock.py
+|   |       |   |   |   |   retry.py
+|   |       |   |   |   |   subprocess.py
+|   |       |   |   |   |   temp_dir.py
+|   |       |   |   |   |   unpacking.py
+|   |       |   |   |   |   urls.py
+|   |       |   |   |   |   virtualenv.py
+|   |       |   |   |   |   wheel.py
+|   |       |   |   |   |   _jaraco_text.py
+|   |       |   |   |   |   _log.py
+|   |       |   |   |   |   __init__.py
+|   |       |   |   |   |
+|   |       |   |   |   \---__pycache__
+|   |       |   |   |           appdirs.cpython-314.pyc
+|   |       |   |   |           compat.cpython-314.pyc
+|   |       |   |   |           compatibility_tags.cpython-314.pyc
+|   |       |   |   |           datetime.cpython-314.pyc
+|   |       |   |   |           deprecation.cpython-314.pyc
+|   |       |   |   |           egg_link.cpython-314.pyc
+|   |       |   |   |           filesystem.cpython-314.pyc
+|   |       |   |   |           filetypes.cpython-314.pyc
+|   |       |   |   |           hashes.cpython-314.pyc
+|   |       |   |   |           logging.cpython-314.pyc
+|   |       |   |   |           misc.cpython-314.pyc
+|   |       |   |   |           packaging.cpython-314.pyc
+|   |       |   |   |           retry.cpython-314.pyc
+|   |       |   |   |           subprocess.cpython-314.pyc
+|   |       |   |   |           temp_dir.cpython-314.pyc
+|   |       |   |   |           unpacking.cpython-314.pyc
+|   |       |   |   |           urls.cpython-314.pyc
+|   |       |   |   |           virtualenv.cpython-314.pyc
+|   |       |   |   |           wheel.cpython-314.pyc
+|   |       |   |   |           _log.cpython-314.pyc
+|   |       |   |   |           __init__.cpython-314.pyc
+|   |       |   |   |
+|   |       |   |   +---vcs
+|   |       |   |   |   |   bazaar.py
+|   |       |   |   |   |   git.py
+|   |       |   |   |   |   mercurial.py
+|   |       |   |   |   |   subversion.py
+|   |       |   |   |   |   versioncontrol.py
+|   |       |   |   |   |   __init__.py
+|   |       |   |   |   |
+|   |       |   |   |   \---__pycache__
+|   |       |   |   |           bazaar.cpython-314.pyc
+|   |       |   |   |           git.cpython-314.pyc
+|   |       |   |   |           mercurial.cpython-314.pyc
+|   |       |   |   |           subversion.cpython-314.pyc
+|   |       |   |   |           versioncontrol.cpython-314.pyc
+|   |       |   |   |           __init__.cpython-314.pyc
+|   |       |   |   |
+|   |       |   |   \---__pycache__
+|   |       |   |           configuration.cpython-314.pyc
+|   |       |   |           exceptions.cpython-314.pyc
+|   |       |   |           pyproject.cpython-314.pyc
+|   |       |   |           __init__.cpython-314.pyc
+|   |       |   |
+|   |       |   +---_vendor
+|   |       |   |   |   bom.cdx.json
+|   |       |   |   |   README.rst
+|   |       |   |   |   vendor.txt
+|   |       |   |   |   __init__.py
+|   |       |   |   |
+|   |       |   |   +---cachecontrol
+|   |       |   |   |   |   adapter.py
+|   |       |   |   |   |   cache.py
+|   |       |   |   |   |   controller.py
+|   |       |   |   |   |   filewrapper.py
+|   |       |   |   |   |   heuristics.py
+|   |       |   |   |   |   LICENSE.txt
+|   |       |   |   |   |   py.typed
+|   |       |   |   |   |   serialize.py
+|   |       |   |   |   |   wrapper.py
+|   |       |   |   |   |   _cmd.py
+|   |       |   |   |   |   __init__.py
+|   |       |   |   |   |
+|   |       |   |   |   \---caches
+|   |       |   |   |           file_cache.py
+|   |       |   |   |           redis_cache.py
+|   |       |   |   |           __init__.py
+|   |       |   |   |
+|   |       |   |   +---certifi
+|   |       |   |   |       cacert.pem
+|   |       |   |   |       core.py
+|   |       |   |   |       LICENSE
+|   |       |   |   |       py.typed
+|   |       |   |   |       __init__.py
+|   |       |   |   |       __main__.py
+|   |       |   |   |
+|   |       |   |   +---distlib
+|   |       |   |   |       compat.py
+|   |       |   |   |       LICENSE.txt
+|   |       |   |   |       resources.py
+|   |       |   |   |       scripts.py
+|   |       |   |   |       t32.exe
+|   |       |   |   |       t64-arm.exe
+|   |       |   |   |       t64.exe
+|   |       |   |   |       util.py
+|   |       |   |   |       w32.exe
+|   |       |   |   |       w64-arm.exe
+|   |       |   |   |       w64.exe
+|   |       |   |   |       __init__.py
+|   |       |   |   |
+|   |       |   |   +---distro
+|   |       |   |   |       distro.py
+|   |       |   |   |       LICENSE
+|   |       |   |   |       py.typed
+|   |       |   |   |       __init__.py
+|   |       |   |   |       __main__.py
+|   |       |   |   |
+|   |       |   |   +---idna
+|   |       |   |   |       cli.py
+|   |       |   |   |       codec.py
+|   |       |   |   |       compat.py
+|   |       |   |   |       core.py
+|   |       |   |   |       idnadata.py
+|   |       |   |   |       intranges.py
+|   |       |   |   |       LICENSE.md
+|   |       |   |   |       package_data.py
+|   |       |   |   |       py.typed
+|   |       |   |   |       uts46data.py
+|   |       |   |   |       __init__.py
+|   |       |   |   |       __main__.py
+|   |       |   |   |
+|   |       |   |   +---msgpack
+|   |       |   |   |       COPYING
+|   |       |   |   |       exceptions.py
+|   |       |   |   |       ext.py
+|   |       |   |   |       fallback.py
+|   |       |   |   |       __init__.py
+|   |       |   |   |
+|   |       |   |   +---packaging
+|   |       |   |   |   |   dependency_groups.py
+|   |       |   |   |   |   direct_url.py
+|   |       |   |   |   |   errors.py
+|   |       |   |   |   |   LICENSE
+|   |       |   |   |   |   LICENSE.APACHE
+|   |       |   |   |   |   LICENSE.BSD
+|   |       |   |   |   |   markers.py
+|   |       |   |   |   |   metadata.py
+|   |       |   |   |   |   py.typed
+|   |       |   |   |   |   pylock.py
+|   |       |   |   |   |   requirements.py
+|   |       |   |   |   |   specifiers.py
+|   |       |   |   |   |   tags.py
+|   |       |   |   |   |   utils.py
+|   |       |   |   |   |   version.py
+|   |       |   |   |   |   _elffile.py
+|   |       |   |   |   |   _manylinux.py
+|   |       |   |   |   |   _musllinux.py
+|   |       |   |   |   |   _parser.py
+|   |       |   |   |   |   _structures.py
+|   |       |   |   |   |   _tokenizer.py
+|   |       |   |   |   |   __init__.py
+|   |       |   |   |   |
+|   |       |   |   |   +---licenses
+|   |       |   |   |   |       _spdx.py
+|   |       |   |   |   |       __init__.py
+|   |       |   |   |   |
+|   |       |   |   |   \---__pycache__
+|   |       |   |   |           direct_url.cpython-314.pyc
+|   |       |   |   |           markers.cpython-314.pyc
+|   |       |   |   |           requirements.cpython-314.pyc
+|   |       |   |   |           specifiers.cpython-314.pyc
+|   |       |   |   |           tags.cpython-314.pyc
+|   |       |   |   |           utils.cpython-314.pyc
+|   |       |   |   |           version.cpython-314.pyc
+|   |       |   |   |           _elffile.cpython-314.pyc
+|   |       |   |   |           _manylinux.cpython-314.pyc
+|   |       |   |   |           _musllinux.cpython-314.pyc
+|   |       |   |   |           _parser.cpython-314.pyc
+|   |       |   |   |           _tokenizer.cpython-314.pyc
+|   |       |   |   |           __init__.cpython-314.pyc
+|   |       |   |   |
+|   |       |   |   +---pkg_resources
+|   |       |   |   |       LICENSE
+|   |       |   |   |       __init__.py
+|   |       |   |   |
+|   |       |   |   +---platformdirs
+|   |       |   |   |   |   android.py
+|   |       |   |   |   |   api.py
+|   |       |   |   |   |   LICENSE
+|   |       |   |   |   |   macos.py
+|   |       |   |   |   |   py.typed
+|   |       |   |   |   |   unix.py
+|   |       |   |   |   |   version.py
+|   |       |   |   |   |   windows.py
+|   |       |   |   |   |   _xdg.py
+|   |       |   |   |   |   __init__.py
+|   |       |   |   |   |   __main__.py
+|   |       |   |   |   |
+|   |       |   |   |   \---__pycache__
+|   |       |   |   |           api.cpython-314.pyc
+|   |       |   |   |           version.cpython-314.pyc
+|   |       |   |   |           windows.cpython-314.pyc
+|   |       |   |   |           __init__.cpython-314.pyc
+|   |       |   |   |
+|   |       |   |   +---pygments
+|   |       |   |   |   |   console.py
+|   |       |   |   |   |   filter.py
+|   |       |   |   |   |   formatter.py
+|   |       |   |   |   |   lexer.py
+|   |       |   |   |   |   LICENSE
+|   |       |   |   |   |   modeline.py
+|   |       |   |   |   |   plugin.py
+|   |       |   |   |   |   regexopt.py
+|   |       |   |   |   |   scanner.py
+|   |       |   |   |   |   sphinxext.py
+|   |       |   |   |   |   style.py
+|   |       |   |   |   |   token.py
+|   |       |   |   |   |   unistring.py
+|   |       |   |   |   |   util.py
+|   |       |   |   |   |   __init__.py
+|   |       |   |   |   |   __main__.py
+|   |       |   |   |   |
+|   |       |   |   |   +---filters
+|   |       |   |   |   |   |   __init__.py
+|   |       |   |   |   |   |
+|   |       |   |   |   |   \---__pycache__
+|   |       |   |   |   |           __init__.cpython-314.pyc
+|   |       |   |   |   |
+|   |       |   |   |   +---formatters
+|   |       |   |   |   |       _mapping.py
+|   |       |   |   |   |       __init__.py
+|   |       |   |   |   |
+|   |       |   |   |   +---lexers
+|   |       |   |   |   |   |   python.py
+|   |       |   |   |   |   |   _mapping.py
+|   |       |   |   |   |   |   __init__.py
+|   |       |   |   |   |   |
+|   |       |   |   |   |   \---__pycache__
+|   |       |   |   |   |           _mapping.cpython-314.pyc
+|   |       |   |   |   |           __init__.cpython-314.pyc
+|   |       |   |   |   |
+|   |       |   |   |   +---styles
+|   |       |   |   |   |   |   _mapping.py
+|   |       |   |   |   |   |   __init__.py
+|   |       |   |   |   |   |
+|   |       |   |   |   |   \---__pycache__
+|   |       |   |   |   |           _mapping.cpython-314.pyc
+|   |       |   |   |   |           __init__.cpython-314.pyc
+|   |       |   |   |   |
+|   |       |   |   |   \---__pycache__
+|   |       |   |   |           filter.cpython-314.pyc
+|   |       |   |   |           lexer.cpython-314.pyc
+|   |       |   |   |           modeline.cpython-314.pyc
+|   |       |   |   |           plugin.cpython-314.pyc
+|   |       |   |   |           regexopt.cpython-314.pyc
+|   |       |   |   |           style.cpython-314.pyc
+|   |       |   |   |           token.cpython-314.pyc
+|   |       |   |   |           util.cpython-314.pyc
+|   |       |   |   |           __init__.cpython-314.pyc
+|   |       |   |   |
+|   |       |   |   +---pyproject_hooks
+|   |       |   |   |   |   LICENSE
+|   |       |   |   |   |   py.typed
+|   |       |   |   |   |   _impl.py
+|   |       |   |   |   |   __init__.py
+|   |       |   |   |   |
+|   |       |   |   |   +---_in_process
+|   |       |   |   |   |   |   _in_process.py
+|   |       |   |   |   |   |   __init__.py
+|   |       |   |   |   |   |
+|   |       |   |   |   |   \---__pycache__
+|   |       |   |   |   |           __init__.cpython-314.pyc
+|   |       |   |   |   |
+|   |       |   |   |   \---__pycache__
+|   |       |   |   |           _impl.cpython-314.pyc
+|   |       |   |   |           __init__.cpython-314.pyc
+|   |       |   |   |
+|   |       |   |   +---requests
+|   |       |   |   |       adapters.py
+|   |       |   |   |       api.py
+|   |       |   |   |       auth.py
+|   |       |   |   |       certs.py
+|   |       |   |   |       compat.py
+|   |       |   |   |       cookies.py
+|   |       |   |   |       exceptions.py
+|   |       |   |   |       help.py
+|   |       |   |   |       hooks.py
+|   |       |   |   |       LICENSE
+|   |       |   |   |       models.py
+|   |       |   |   |       packages.py
+|   |       |   |   |       py.typed
+|   |       |   |   |       sessions.py
+|   |       |   |   |       status_codes.py
+|   |       |   |   |       structures.py
+|   |       |   |   |       utils.py
+|   |       |   |   |       _internal_utils.py
+|   |       |   |   |       _types.py
+|   |       |   |   |       __init__.py
+|   |       |   |   |       __version__.py
+|   |       |   |   |
+|   |       |   |   +---resolvelib
+|   |       |   |   |   |   LICENSE
+|   |       |   |   |   |   providers.py
+|   |       |   |   |   |   py.typed
+|   |       |   |   |   |   reporters.py
+|   |       |   |   |   |   structs.py
+|   |       |   |   |   |   __init__.py
+|   |       |   |   |   |
+|   |       |   |   |   \---resolvers
+|   |       |   |   |           abstract.py
+|   |       |   |   |           criterion.py
+|   |       |   |   |           exceptions.py
+|   |       |   |   |           resolution.py
+|   |       |   |   |           __init__.py
+|   |       |   |   |
+|   |       |   |   +---rich
+|   |       |   |   |   |   abc.py
+|   |       |   |   |   |   align.py
+|   |       |   |   |   |   ansi.py
+|   |       |   |   |   |   bar.py
+|   |       |   |   |   |   box.py
+|   |       |   |   |   |   cells.py
+|   |       |   |   |   |   color.py
+|   |       |   |   |   |   color_triplet.py
+|   |       |   |   |   |   columns.py
+|   |       |   |   |   |   console.py
+|   |       |   |   |   |   constrain.py
+|   |       |   |   |   |   containers.py
+|   |       |   |   |   |   control.py
+|   |       |   |   |   |   default_styles.py
+|   |       |   |   |   |   diagnose.py
+|   |       |   |   |   |   emoji.py
+|   |       |   |   |   |   errors.py
+|   |       |   |   |   |   filesize.py
+|   |       |   |   |   |   file_proxy.py
+|   |       |   |   |   |   highlighter.py
+|   |       |   |   |   |   json.py
+|   |       |   |   |   |   jupyter.py
+|   |       |   |   |   |   layout.py
+|   |       |   |   |   |   LICENSE
+|   |       |   |   |   |   live.py
+|   |       |   |   |   |   live_render.py
+|   |       |   |   |   |   logging.py
+|   |       |   |   |   |   markup.py
+|   |       |   |   |   |   measure.py
+|   |       |   |   |   |   padding.py
+|   |       |   |   |   |   pager.py
+|   |       |   |   |   |   palette.py
+|   |       |   |   |   |   panel.py
+|   |       |   |   |   |   pretty.py
+|   |       |   |   |   |   progress.py
+|   |       |   |   |   |   progress_bar.py
+|   |       |   |   |   |   prompt.py
+|   |       |   |   |   |   protocol.py
+|   |       |   |   |   |   py.typed
+|   |       |   |   |   |   region.py
+|   |       |   |   |   |   repr.py
+|   |       |   |   |   |   rule.py
+|   |       |   |   |   |   scope.py
+|   |       |   |   |   |   screen.py
+|   |       |   |   |   |   segment.py
+|   |       |   |   |   |   spinner.py
+|   |       |   |   |   |   status.py
+|   |       |   |   |   |   style.py
+|   |       |   |   |   |   styled.py
+|   |       |   |   |   |   syntax.py
+|   |       |   |   |   |   table.py
+|   |       |   |   |   |   terminal_theme.py
+|   |       |   |   |   |   text.py
+|   |       |   |   |   |   theme.py
+|   |       |   |   |   |   themes.py
+|   |       |   |   |   |   traceback.py
+|   |       |   |   |   |   tree.py
+|   |       |   |   |   |   _cell_widths.py
+|   |       |   |   |   |   _emoji_codes.py
+|   |       |   |   |   |   _emoji_replace.py
+|   |       |   |   |   |   _export_format.py
+|   |       |   |   |   |   _extension.py
+|   |       |   |   |   |   _fileno.py
+|   |       |   |   |   |   _inspect.py
+|   |       |   |   |   |   _log_render.py
+|   |       |   |   |   |   _loop.py
+|   |       |   |   |   |   _null_file.py
+|   |       |   |   |   |   _palettes.py
+|   |       |   |   |   |   _pick.py
+|   |       |   |   |   |   _ratio.py
+|   |       |   |   |   |   _spinners.py
+|   |       |   |   |   |   _stack.py
+|   |       |   |   |   |   _timer.py
+|   |       |   |   |   |   _win32_console.py
+|   |       |   |   |   |   _windows.py
+|   |       |   |   |   |   _windows_renderer.py
+|   |       |   |   |   |   _wrap.py
+|   |       |   |   |   |   __init__.py
+|   |       |   |   |   |   __main__.py
+|   |       |   |   |   |
+|   |       |   |   |   \---__pycache__
+|   |       |   |   |           abc.cpython-314.pyc
+|   |       |   |   |           align.cpython-314.pyc
+|   |       |   |   |           ansi.cpython-314.pyc
+|   |       |   |   |           box.cpython-314.pyc
+|   |       |   |   |           cells.cpython-314.pyc
+|   |       |   |   |           color.cpython-314.pyc
+|   |       |   |   |           color_triplet.cpython-314.pyc
+|   |       |   |   |           columns.cpython-314.pyc
+|   |       |   |   |           console.cpython-314.pyc
+|   |       |   |   |           constrain.cpython-314.pyc
+|   |       |   |   |           containers.cpython-314.pyc
+|   |       |   |   |           control.cpython-314.pyc
+|   |       |   |   |           default_styles.cpython-314.pyc
+|   |       |   |   |           emoji.cpython-314.pyc
+|   |       |   |   |           errors.cpython-314.pyc
+|   |       |   |   |           filesize.cpython-314.pyc
+|   |       |   |   |           file_proxy.cpython-314.pyc
+|   |       |   |   |           highlighter.cpython-314.pyc
+|   |       |   |   |           jupyter.cpython-314.pyc
+|   |       |   |   |           live.cpython-314.pyc
+|   |       |   |   |           live_render.cpython-314.pyc
+|   |       |   |   |           logging.cpython-314.pyc
+|   |       |   |   |           markup.cpython-314.pyc
+|   |       |   |   |           measure.cpython-314.pyc
+|   |       |   |   |           padding.cpython-314.pyc
+|   |       |   |   |           pager.cpython-314.pyc
+|   |       |   |   |           palette.cpython-314.pyc
+|   |       |   |   |           panel.cpython-314.pyc
+|   |       |   |   |           pretty.cpython-314.pyc
+|   |       |   |   |           progress.cpython-314.pyc
+|   |       |   |   |           progress_bar.cpython-314.pyc
+|   |       |   |   |           protocol.cpython-314.pyc
+|   |       |   |   |           region.cpython-314.pyc
+|   |       |   |   |           repr.cpython-314.pyc
+|   |       |   |   |           scope.cpython-314.pyc
+|   |       |   |   |           screen.cpython-314.pyc
+|   |       |   |   |           segment.cpython-314.pyc
+|   |       |   |   |           spinner.cpython-314.pyc
+|   |       |   |   |           style.cpython-314.pyc
+|   |       |   |   |           styled.cpython-314.pyc
+|   |       |   |   |           syntax.cpython-314.pyc
+|   |       |   |   |           table.cpython-314.pyc
+|   |       |   |   |           terminal_theme.cpython-314.pyc
+|   |       |   |   |           text.cpython-314.pyc
+|   |       |   |   |           theme.cpython-314.pyc
+|   |       |   |   |           themes.cpython-314.pyc
+|   |       |   |   |           traceback.cpython-314.pyc
+|   |       |   |   |           _cell_widths.cpython-314.pyc
+|   |       |   |   |           _emoji_codes.cpython-314.pyc
+|   |       |   |   |           _emoji_replace.cpython-314.pyc
+|   |       |   |   |           _export_format.cpython-314.pyc
+|   |       |   |   |           _extension.cpython-314.pyc
+|   |       |   |   |           _fileno.cpython-314.pyc
+|   |       |   |   |           _log_render.cpython-314.pyc
+|   |       |   |   |           _loop.cpython-314.pyc
+|   |       |   |   |           _null_file.cpython-314.pyc
+|   |       |   |   |           _palettes.cpython-314.pyc
+|   |       |   |   |           _pick.cpython-314.pyc
+|   |       |   |   |           _ratio.cpython-314.pyc
+|   |       |   |   |           _spinners.cpython-314.pyc
+|   |       |   |   |           _win32_console.cpython-314.pyc
+|   |       |   |   |           _windows.cpython-314.pyc
+|   |       |   |   |           _wrap.cpython-314.pyc
+|   |       |   |   |           __init__.cpython-314.pyc
+|   |       |   |   |
+|   |       |   |   +---tomli
+|   |       |   |   |       LICENSE
+|   |       |   |   |       py.typed
+|   |       |   |   |       _parser.py
+|   |       |   |   |       _re.py
+|   |       |   |   |       _types.py
+|   |       |   |   |       __init__.py
+|   |       |   |   |
+|   |       |   |   +---tomli_w
+|   |       |   |   |       LICENSE
+|   |       |   |   |       py.typed
+|   |       |   |   |       _writer.py
+|   |       |   |   |       __init__.py
+|   |       |   |   |
+|   |       |   |   +---truststore
+|   |       |   |   |       LICENSE
+|   |       |   |   |       py.typed
+|   |       |   |   |       _api.py
+|   |       |   |   |       _macos.py
+|   |       |   |   |       _openssl.py
+|   |       |   |   |       _ssl_constants.py
+|   |       |   |   |       _windows.py
+|   |       |   |   |       __init__.py
+|   |       |   |   |
+|   |       |   |   +---urllib3
+|   |       |   |   |   |   connection.py
+|   |       |   |   |   |   connectionpool.py
+|   |       |   |   |   |   exceptions.py
+|   |       |   |   |   |   fields.py
+|   |       |   |   |   |   filepost.py
+|   |       |   |   |   |   LICENSE.txt
+|   |       |   |   |   |   poolmanager.py
+|   |       |   |   |   |   py.typed
+|   |       |   |   |   |   response.py
+|   |       |   |   |   |   _base_connection.py
+|   |       |   |   |   |   _collections.py
+|   |       |   |   |   |   _request_methods.py
+|   |       |   |   |   |   _version.py
+|   |       |   |   |   |   __init__.py
+|   |       |   |   |   |
+|   |       |   |   |   +---contrib
+|   |       |   |   |   |   |   pyopenssl.py
+|   |       |   |   |   |   |   socks.py
+|   |       |   |   |   |   |   __init__.py
+|   |       |   |   |   |   |
+|   |       |   |   |   |   \---emscripten
+|   |       |   |   |   |           connection.py
+|   |       |   |   |   |           emscripten_fetch_worker.js
+|   |       |   |   |   |           fetch.py
+|   |       |   |   |   |           request.py
+|   |       |   |   |   |           response.py
+|   |       |   |   |   |           __init__.py
+|   |       |   |   |   |
+|   |       |   |   |   +---http2
+|   |       |   |   |   |       connection.py
+|   |       |   |   |   |       probe.py
+|   |       |   |   |   |       __init__.py
+|   |       |   |   |   |
+|   |       |   |   |   \---util
+|   |       |   |   |           connection.py
+|   |       |   |   |           proxy.py
+|   |       |   |   |           request.py
+|   |       |   |   |           response.py
+|   |       |   |   |           retry.py
+|   |       |   |   |           ssltransport.py
+|   |       |   |   |           ssl_.py
+|   |       |   |   |           ssl_match_hostname.py
+|   |       |   |   |           timeout.py
+|   |       |   |   |           url.py
+|   |       |   |   |           util.py
+|   |       |   |   |           wait.py
+|   |       |   |   |           __init__.py
+|   |       |   |   |
+|   |       |   |   \---__pycache__
+|   |       |   |           __init__.cpython-314.pyc
+|   |       |   |
+|   |       |   \---__pycache__
+|   |       |           __init__.cpython-314.pyc
+|   |       |           __main__.cpython-314.pyc
+|   |       |
+|   |       +---pip-26.2.1.dist-info
+|   |       |   |   entry_points.txt
+|   |       |   |   INSTALLER
+|   |       |   |   METADATA
+|   |       |   |   RECORD
+|   |       |   |   REQUESTED
+|   |       |   |   WHEEL
+|   |       |   |
+|   |       |   \---licenses
+|   |       |       |   AUTHORS.txt
+|   |       |       |   LICENSE.txt
+|   |       |       |
+|   |       |       \---src
+|   |       |           \---pip
+|   |       |               \---_vendor
+|   |       |                   +---cachecontrol
+|   |       |                   |       LICENSE.txt
+|   |       |                   |
+|   |       |                   +---certifi
+|   |       |                   |       LICENSE
+|   |       |                   |
+|   |       |                   +---distlib
+|   |       |                   |       LICENSE.txt
+|   |       |                   |
+|   |       |                   +---distro
+|   |       |                   |       LICENSE
+|   |       |                   |
+|   |       |                   +---idna
+|   |       |                   |       LICENSE.md
+|   |       |                   |
+|   |       |                   +---msgpack
+|   |       |                   |       COPYING
+|   |       |                   |
+|   |       |                   +---packaging
+|   |       |                   |       LICENSE
+|   |       |                   |       LICENSE.APACHE
+|   |       |                   |       LICENSE.BSD
+|   |       |                   |
+|   |       |                   +---pkg_resources
+|   |       |                   |       LICENSE
+|   |       |                   |
+|   |       |                   +---platformdirs
+|   |       |                   |       LICENSE
+|   |       |                   |
+|   |       |                   +---pygments
+|   |       |                   |       LICENSE
+|   |       |                   |
+|   |       |                   +---pyproject_hooks
+|   |       |                   |       LICENSE
+|   |       |                   |
+|   |       |                   +---requests
+|   |       |                   |       LICENSE
+|   |       |                   |
+|   |       |                   +---resolvelib
+|   |       |                   |       LICENSE
+|   |       |                   |
+|   |       |                   +---rich
+|   |       |                   |       LICENSE
+|   |       |                   |
+|   |       |                   +---tomli
+|   |       |                   |       LICENSE
+|   |       |                   |
+|   |       |                   +---tomli_w
+|   |       |                   |       LICENSE
+|   |       |                   |
+|   |       |                   +---truststore
+|   |       |                   |       LICENSE
+|   |       |                   |
+|   |       |                   \---urllib3
+|   |       |                           LICENSE.txt
+|   |       |
+|   |       +---pluggy
+|   |       |   |   py.typed
+|   |       |   |   _callers.py
+|   |       |   |   _hooks.py
+|   |       |   |   _manager.py
+|   |       |   |   _result.py
+|   |       |   |   _tracing.py
+|   |       |   |   _version.py
+|   |       |   |   _warnings.py
+|   |       |   |   __init__.py
+|   |       |   |
+|   |       |   \---__pycache__
+|   |       |           _callers.cpython-314.pyc
+|   |       |           _hooks.cpython-314.pyc
+|   |       |           _manager.cpython-314.pyc
+|   |       |           _result.cpython-314.pyc
+|   |       |           _tracing.cpython-314.pyc
+|   |       |           _version.cpython-314.pyc
+|   |       |           _warnings.cpython-314.pyc
+|   |       |           __init__.cpython-314.pyc
+|   |       |
+|   |       +---pluggy-1.6.0.dist-info
+|   |       |   |   INSTALLER
+|   |       |   |   METADATA
+|   |       |   |   RECORD
+|   |       |   |   top_level.txt
+|   |       |   |   WHEEL
+|   |       |   |
+|   |       |   \---licenses
+|   |       |           LICENSE
+|   |       |
+|   |       +---pydantic
+|   |       |   |   aliases.py
+|   |       |   |   alias_generators.py
+|   |       |   |   annotated_handlers.py
+|   |       |   |   class_validators.py
+|   |       |   |   color.py
+|   |       |   |   config.py
+|   |       |   |   dataclasses.py
+|   |       |   |   datetime_parse.py
+|   |       |   |   decorator.py
+|   |       |   |   env_settings.py
+|   |       |   |   errors.py
+|   |       |   |   error_wrappers.py
+|   |       |   |   fields.py
+|   |       |   |   functional_serializers.py
+|   |       |   |   functional_validators.py
+|   |       |   |   generics.py
+|   |       |   |   json.py
+|   |       |   |   json_schema.py
+|   |       |   |   main.py
+|   |       |   |   mypy.py
+|   |       |   |   networks.py
+|   |       |   |   parse.py
+|   |       |   |   py.typed
+|   |       |   |   root_model.py
+|   |       |   |   schema.py
+|   |       |   |   tools.py
+|   |       |   |   types.py
+|   |       |   |   type_adapter.py
+|   |       |   |   typing.py
+|   |       |   |   utils.py
+|   |       |   |   validate_call_decorator.py
+|   |       |   |   validators.py
+|   |       |   |   version.py
+|   |       |   |   warnings.py
+|   |       |   |   _migration.py
+|   |       |   |   __init__.py
+|   |       |   |
+|   |       |   +---deprecated
+|   |       |   |       class_validators.py
+|   |       |   |       config.py
+|   |       |   |       copy_internals.py
+|   |       |   |       decorator.py
+|   |       |   |       json.py
+|   |       |   |       parse.py
+|   |       |   |       tools.py
+|   |       |   |       __init__.py
+|   |       |   |
+|   |       |   +---experimental
+|   |       |   |       arguments_schema.py
+|   |       |   |       missing_sentinel.py
+|   |       |   |       pipeline.py
+|   |       |   |       __init__.py
+|   |       |   |
+|   |       |   +---plugin
+|   |       |   |   |   _loader.py
+|   |       |   |   |   _schema_validator.py
+|   |       |   |   |   __init__.py
+|   |       |   |   |
+|   |       |   |   \---__pycache__
+|   |       |   |           _loader.cpython-314.pyc
+|   |       |   |           _schema_validator.cpython-314.pyc
+|   |       |   |           __init__.cpython-314.pyc
+|   |       |   |
+|   |       |   +---v1
+|   |       |   |   |   annotated_types.py
+|   |       |   |   |   class_validators.py
+|   |       |   |   |   color.py
+|   |       |   |   |   config.py
+|   |       |   |   |   dataclasses.py
+|   |       |   |   |   datetime_parse.py
+|   |       |   |   |   decorator.py
+|   |       |   |   |   env_settings.py
+|   |       |   |   |   errors.py
+|   |       |   |   |   error_wrappers.py
+|   |       |   |   |   fields.py
+|   |       |   |   |   generics.py
+|   |       |   |   |   json.py
+|   |       |   |   |   main.py
+|   |       |   |   |   mypy.py
+|   |       |   |   |   networks.py
+|   |       |   |   |   parse.py
+|   |       |   |   |   py.typed
+|   |       |   |   |   schema.py
+|   |       |   |   |   tools.py
+|   |       |   |   |   types.py
+|   |       |   |   |   typing.py
+|   |       |   |   |   utils.py
+|   |       |   |   |   validators.py
+|   |       |   |   |   version.py
+|   |       |   |   |   _hypothesis_plugin.py
+|   |       |   |   |   __init__.py
+|   |       |   |   |
+|   |       |   |   \---__pycache__
+|   |       |   |           annotated_types.cpython-314.pyc
+|   |       |   |           class_validators.cpython-314.pyc
+|   |       |   |           color.cpython-314.pyc
+|   |       |   |           config.cpython-314.pyc
+|   |       |   |           dataclasses.cpython-314.pyc
+|   |       |   |           datetime_parse.cpython-314.pyc
+|   |       |   |           decorator.cpython-314.pyc
+|   |       |   |           env_settings.cpython-314.pyc
+|   |       |   |           errors.cpython-314.pyc
+|   |       |   |           error_wrappers.cpython-314.pyc
+|   |       |   |           fields.cpython-314.pyc
+|   |       |   |           json.cpython-314.pyc
+|   |       |   |           main.cpython-314.pyc
+|   |       |   |           networks.cpython-314.pyc
+|   |       |   |           parse.cpython-314.pyc
+|   |       |   |           schema.cpython-314.pyc
+|   |       |   |           tools.cpython-314.pyc
+|   |       |   |           types.cpython-314.pyc
+|   |       |   |           typing.cpython-314.pyc
+|   |       |   |           utils.cpython-314.pyc
+|   |       |   |           validators.cpython-314.pyc
+|   |       |   |           version.cpython-314.pyc
+|   |       |   |           __init__.cpython-314.pyc
+|   |       |   |
+|   |       |   +---_internal
+|   |       |   |   |   _config.py
+|   |       |   |   |   _core_metadata.py
+|   |       |   |   |   _core_utils.py
+|   |       |   |   |   _dataclasses.py
+|   |       |   |   |   _decorators.py
+|   |       |   |   |   _decorators_v1.py
+|   |       |   |   |   _discriminated_union.py
+|   |       |   |   |   _docs_extraction.py
+|   |       |   |   |   _fields.py
+|   |       |   |   |   _forward_ref.py
+|   |       |   |   |   _generate_schema.py
+|   |       |   |   |   _generics.py
+|   |       |   |   |   _git.py
+|   |       |   |   |   _import_utils.py
+|   |       |   |   |   _internal_dataclass.py
+|   |       |   |   |   _known_annotated_metadata.py
+|   |       |   |   |   _mock_val_ser.py
+|   |       |   |   |   _model_construction.py
+|   |       |   |   |   _namespace_utils.py
+|   |       |   |   |   _repr.py
+|   |       |   |   |   _schema_gather.py
+|   |       |   |   |   _schema_generation_shared.py
+|   |       |   |   |   _serializers.py
+|   |       |   |   |   _signature.py
+|   |       |   |   |   _typing_extra.py
+|   |       |   |   |   _utils.py
+|   |       |   |   |   _validate_call.py
+|   |       |   |   |   _validators.py
+|   |       |   |   |   __init__.py
+|   |       |   |   |
+|   |       |   |   \---__pycache__
+|   |       |   |           _config.cpython-314.pyc
+|   |       |   |           _core_metadata.cpython-314.pyc
+|   |       |   |           _core_utils.cpython-314.pyc
+|   |       |   |           _decorators.cpython-314.pyc
+|   |       |   |           _discriminated_union.cpython-314.pyc
+|   |       |   |           _docs_extraction.cpython-314.pyc
+|   |       |   |           _fields.cpython-314.pyc
+|   |       |   |           _forward_ref.cpython-314.pyc
+|   |       |   |           _generate_schema.cpython-314.pyc
+|   |       |   |           _generics.cpython-314.pyc
+|   |       |   |           _import_utils.cpython-314.pyc
+|   |       |   |           _internal_dataclass.cpython-314.pyc
+|   |       |   |           _known_annotated_metadata.cpython-314.pyc
+|   |       |   |           _mock_val_ser.cpython-314.pyc
+|   |       |   |           _model_construction.cpython-314.pyc
+|   |       |   |           _namespace_utils.cpython-314.pyc
+|   |       |   |           _repr.cpython-314.pyc
+|   |       |   |           _schema_gather.cpython-314.pyc
+|   |       |   |           _schema_generation_shared.cpython-314.pyc
+|   |       |   |           _signature.cpython-314.pyc
+|   |       |   |           _typing_extra.cpython-314.pyc
+|   |       |   |           _utils.cpython-314.pyc
+|   |       |   |           _validators.cpython-314.pyc
+|   |       |   |           __init__.cpython-314.pyc
+|   |       |   |
+|   |       |   \---__pycache__
+|   |       |           aliases.cpython-314.pyc
+|   |       |           annotated_handlers.cpython-314.pyc
+|   |       |           color.cpython-314.pyc
+|   |       |           config.cpython-314.pyc
+|   |       |           errors.cpython-314.pyc
+|   |       |           fields.cpython-314.pyc
+|   |       |           functional_validators.cpython-314.pyc
+|   |       |           json_schema.cpython-314.pyc
+|   |       |           main.cpython-314.pyc
+|   |       |           networks.cpython-314.pyc
+|   |       |           types.cpython-314.pyc
+|   |       |           type_adapter.cpython-314.pyc
+|   |       |           version.cpython-314.pyc
+|   |       |           warnings.cpython-314.pyc
+|   |       |           _migration.cpython-314.pyc
+|   |       |           __init__.cpython-314.pyc
+|   |       |
+|   |       +---pydantic-2.13.4.dist-info
+|   |       |   |   INSTALLER
+|   |       |   |   METADATA
+|   |       |   |   RECORD
+|   |       |   |   WHEEL
+|   |       |   |
+|   |       |   \---licenses
+|   |       |           LICENSE
+|   |       |
+|   |       +---pydantic_core
+|   |       |   |   core_schema.py
+|   |       |   |   py.typed
+|   |       |   |   _pydantic_core.cp314-win_amd64.pyd
+|   |       |   |   _pydantic_core.pyi
+|   |       |   |   __init__.py
+|   |       |   |
+|   |       |   \---__pycache__
+|   |       |           core_schema.cpython-314.pyc
+|   |       |           __init__.cpython-314.pyc
+|   |       |
+|   |       +---pydantic_core-2.46.4.dist-info
+|   |       |   |   INSTALLER
+|   |       |   |   METADATA
+|   |       |   |   RECORD
+|   |       |   |   WHEEL
+|   |       |   |
+|   |       |   +---licenses
+|   |       |   |       LICENSE
+|   |       |   |
+|   |       |   \---sboms
+|   |       |           pydantic-core.cyclonedx.json
+|   |       |
+|   |       +---pygments
+|   |       |   |   cmdline.py
+|   |       |   |   console.py
+|   |       |   |   filter.py
+|   |       |   |   formatter.py
+|   |       |   |   lexer.py
+|   |       |   |   modeline.py
+|   |       |   |   plugin.py
+|   |       |   |   regexopt.py
+|   |       |   |   scanner.py
+|   |       |   |   sphinxext.py
+|   |       |   |   style.py
+|   |       |   |   token.py
+|   |       |   |   unistring.py
+|   |       |   |   util.py
+|   |       |   |   __init__.py
+|   |       |   |   __main__.py
+|   |       |   |
+|   |       |   +---filters
+|   |       |   |   |   __init__.py
+|   |       |   |   |
+|   |       |   |   \---__pycache__
+|   |       |   |           __init__.cpython-314.pyc
+|   |       |   |
+|   |       |   +---formatters
+|   |       |   |   |   bbcode.py
+|   |       |   |   |   groff.py
+|   |       |   |   |   html.py
+|   |       |   |   |   img.py
+|   |       |   |   |   irc.py
+|   |       |   |   |   latex.py
+|   |       |   |   |   other.py
+|   |       |   |   |   pangomarkup.py
+|   |       |   |   |   rtf.py
+|   |       |   |   |   svg.py
+|   |       |   |   |   terminal.py
+|   |       |   |   |   terminal256.py
+|   |       |   |   |   _mapping.py
+|   |       |   |   |   __init__.py
+|   |       |   |   |
+|   |       |   |   \---__pycache__
+|   |       |   |           terminal.cpython-314.pyc
+|   |       |   |           _mapping.cpython-314.pyc
+|   |       |   |           __init__.cpython-314.pyc
+|   |       |   |
+|   |       |   +---lexers
+|   |       |   |   |   actionscript.py
+|   |       |   |   |   ada.py
+|   |       |   |   |   agile.py
+|   |       |   |   |   algebra.py
+|   |       |   |   |   ambient.py
+|   |       |   |   |   amdgpu.py
+|   |       |   |   |   ampl.py
+|   |       |   |   |   apdlexer.py
+|   |       |   |   |   apl.py
+|   |       |   |   |   archetype.py
+|   |       |   |   |   arrow.py
+|   |       |   |   |   arturo.py
+|   |       |   |   |   asc.py
+|   |       |   |   |   asm.py
+|   |       |   |   |   asn1.py
+|   |       |   |   |   automation.py
+|   |       |   |   |   bare.py
+|   |       |   |   |   basic.py
+|   |       |   |   |   bdd.py
+|   |       |   |   |   berry.py
+|   |       |   |   |   bibtex.py
+|   |       |   |   |   bitbake.py
+|   |       |   |   |   blueprint.py
+|   |       |   |   |   boa.py
+|   |       |   |   |   bqn.py
+|   |       |   |   |   business.py
+|   |       |   |   |   capnproto.py
+|   |       |   |   |   carbon.py
+|   |       |   |   |   cddl.py
+|   |       |   |   |   cel.py
+|   |       |   |   |   chapel.py
+|   |       |   |   |   clean.py
+|   |       |   |   |   codeql.py
+|   |       |   |   |   comal.py
+|   |       |   |   |   compiled.py
+|   |       |   |   |   configs.py
+|   |       |   |   |   console.py
+|   |       |   |   |   cplint.py
+|   |       |   |   |   crystal.py
+|   |       |   |   |   csound.py
+|   |       |   |   |   css.py
+|   |       |   |   |   c_cpp.py
+|   |       |   |   |   c_like.py
+|   |       |   |   |   d.py
+|   |       |   |   |   dalvik.py
+|   |       |   |   |   data.py
+|   |       |   |   |   dax.py
+|   |       |   |   |   devicetree.py
+|   |       |   |   |   diff.py
+|   |       |   |   |   dns.py
+|   |       |   |   |   dotnet.py
+|   |       |   |   |   dsls.py
+|   |       |   |   |   dylan.py
+|   |       |   |   |   ecl.py
+|   |       |   |   |   eiffel.py
+|   |       |   |   |   elm.py
+|   |       |   |   |   elpi.py
+|   |       |   |   |   email.py
+|   |       |   |   |   erlang.py
+|   |       |   |   |   esoteric.py
+|   |       |   |   |   ezhil.py
+|   |       |   |   |   factor.py
+|   |       |   |   |   fantom.py
+|   |       |   |   |   felix.py
+|   |       |   |   |   fift.py
+|   |       |   |   |   floscript.py
+|   |       |   |   |   forth.py
+|   |       |   |   |   fortran.py
+|   |       |   |   |   foxpro.py
+|   |       |   |   |   freefem.py
+|   |       |   |   |   func.py
+|   |       |   |   |   functional.py
+|   |       |   |   |   futhark.py
+|   |       |   |   |   gcodelexer.py
+|   |       |   |   |   gdscript.py
+|   |       |   |   |   gleam.py
+|   |       |   |   |   go.py
+|   |       |   |   |   grammar_notation.py
+|   |       |   |   |   graph.py
+|   |       |   |   |   graphics.py
+|   |       |   |   |   graphql.py
+|   |       |   |   |   graphviz.py
+|   |       |   |   |   gsql.py
+|   |       |   |   |   hare.py
+|   |       |   |   |   haskell.py
+|   |       |   |   |   haxe.py
+|   |       |   |   |   hdl.py
+|   |       |   |   |   hexdump.py
+|   |       |   |   |   html.py
+|   |       |   |   |   idl.py
+|   |       |   |   |   igor.py
+|   |       |   |   |   inferno.py
+|   |       |   |   |   installers.py
+|   |       |   |   |   int_fiction.py
+|   |       |   |   |   iolang.py
+|   |       |   |   |   j.py
+|   |       |   |   |   javascript.py
+|   |       |   |   |   jmespath.py
+|   |       |   |   |   jslt.py
+|   |       |   |   |   json5.py
+|   |       |   |   |   jsonnet.py
+|   |       |   |   |   jsx.py
+|   |       |   |   |   julia.py
+|   |       |   |   |   jvm.py
+|   |       |   |   |   kuin.py
+|   |       |   |   |   kusto.py
+|   |       |   |   |   ldap.py
+|   |       |   |   |   lean.py
+|   |       |   |   |   lilypond.py
+|   |       |   |   |   lisp.py
+|   |       |   |   |   macaulay2.py
+|   |       |   |   |   make.py
+|   |       |   |   |   maple.py
+|   |       |   |   |   markup.py
+|   |       |   |   |   math.py
+|   |       |   |   |   matlab.py
+|   |       |   |   |   maxima.py
+|   |       |   |   |   meson.py
+|   |       |   |   |   mime.py
+|   |       |   |   |   minecraft.py
+|   |       |   |   |   mips.py
+|   |       |   |   |   ml.py
+|   |       |   |   |   modeling.py
+|   |       |   |   |   modula2.py
+|   |       |   |   |   mojo.py
+|   |       |   |   |   monte.py
+|   |       |   |   |   mosel.py
+|   |       |   |   |   ncl.py
+|   |       |   |   |   nimrod.py
+|   |       |   |   |   nit.py
+|   |       |   |   |   nix.py
+|   |       |   |   |   numbair.py
+|   |       |   |   |   oberon.py
+|   |       |   |   |   objective.py
+|   |       |   |   |   ooc.py
+|   |       |   |   |   openscad.py
+|   |       |   |   |   other.py
+|   |       |   |   |   parasail.py
+|   |       |   |   |   parsers.py
+|   |       |   |   |   pascal.py
+|   |       |   |   |   pawn.py
+|   |       |   |   |   pddl.py
+|   |       |   |   |   perl.py
+|   |       |   |   |   phix.py
+|   |       |   |   |   php.py
+|   |       |   |   |   pointless.py
+|   |       |   |   |   pony.py
+|   |       |   |   |   praat.py
+|   |       |   |   |   procfile.py
+|   |       |   |   |   prolog.py
+|   |       |   |   |   promql.py
+|   |       |   |   |   prql.py
+|   |       |   |   |   ptx.py
+|   |       |   |   |   purescript.py
+|   |       |   |   |   python.py
+|   |       |   |   |   q.py
+|   |       |   |   |   qlik.py
+|   |       |   |   |   qvt.py
+|   |       |   |   |   r.py
+|   |       |   |   |   rdf.py
+|   |       |   |   |   rebol.py
+|   |       |   |   |   rego.py
+|   |       |   |   |   rell.py
+|   |       |   |   |   resource.py
+|   |       |   |   |   ride.py
+|   |       |   |   |   rita.py
+|   |       |   |   |   rnc.py
+|   |       |   |   |   roboconf.py
+|   |       |   |   |   robotframework.py
+|   |       |   |   |   ruby.py
+|   |       |   |   |   rust.py
+|   |       |   |   |   sas.py
+|   |       |   |   |   savi.py
+|   |       |   |   |   scdoc.py
+|   |       |   |   |   scripting.py
+|   |       |   |   |   sgf.py
+|   |       |   |   |   shell.py
+|   |       |   |   |   sieve.py
+|   |       |   |   |   slash.py
+|   |       |   |   |   smalltalk.py
+|   |       |   |   |   smithy.py
+|   |       |   |   |   smv.py
+|   |       |   |   |   snobol.py
+|   |       |   |   |   solidity.py
+|   |       |   |   |   soong.py
+|   |       |   |   |   sophia.py
+|   |       |   |   |   special.py
+|   |       |   |   |   spice.py
+|   |       |   |   |   sql.py
+|   |       |   |   |   srcinfo.py
+|   |       |   |   |   stata.py
+|   |       |   |   |   supercollider.py
+|   |       |   |   |   tablegen.py
+|   |       |   |   |   tact.py
+|   |       |   |   |   tal.py
+|   |       |   |   |   tcl.py
+|   |       |   |   |   teal.py
+|   |       |   |   |   templates.py
+|   |       |   |   |   teraterm.py
+|   |       |   |   |   testing.py
+|   |       |   |   |   text.py
+|   |       |   |   |   textedit.py
+|   |       |   |   |   textfmts.py
+|   |       |   |   |   theorem.py
+|   |       |   |   |   thingsdb.py
+|   |       |   |   |   tlb.py
+|   |       |   |   |   tls.py
+|   |       |   |   |   tnt.py
+|   |       |   |   |   trafficscript.py
+|   |       |   |   |   typoscript.py
+|   |       |   |   |   typst.py
+|   |       |   |   |   ul4.py
+|   |       |   |   |   unicon.py
+|   |       |   |   |   urbi.py
+|   |       |   |   |   usd.py
+|   |       |   |   |   varnish.py
+|   |       |   |   |   verification.py
+|   |       |   |   |   verifpal.py
+|   |       |   |   |   vip.py
+|   |       |   |   |   vyper.py
+|   |       |   |   |   web.py
+|   |       |   |   |   webassembly.py
+|   |       |   |   |   webidl.py
+|   |       |   |   |   webmisc.py
+|   |       |   |   |   wgsl.py
+|   |       |   |   |   whiley.py
+|   |       |   |   |   wowtoc.py
+|   |       |   |   |   wren.py
+|   |       |   |   |   x10.py
+|   |       |   |   |   xorg.py
+|   |       |   |   |   yang.py
+|   |       |   |   |   yara.py
+|   |       |   |   |   zig.py
+|   |       |   |   |   _ada_builtins.py
+|   |       |   |   |   _asy_builtins.py
+|   |       |   |   |   _cl_builtins.py
+|   |       |   |   |   _cocoa_builtins.py
+|   |       |   |   |   _csound_builtins.py
+|   |       |   |   |   _css_builtins.py
+|   |       |   |   |   _googlesql_builtins.py
+|   |       |   |   |   _julia_builtins.py
+|   |       |   |   |   _lasso_builtins.py
+|   |       |   |   |   _lilypond_builtins.py
+|   |       |   |   |   _luau_builtins.py
+|   |       |   |   |   _lua_builtins.py
+|   |       |   |   |   _mapping.py
+|   |       |   |   |   _mql_builtins.py
+|   |       |   |   |   _mysql_builtins.py
+|   |       |   |   |   _openedge_builtins.py
+|   |       |   |   |   _php_builtins.py
+|   |       |   |   |   _postgres_builtins.py
+|   |       |   |   |   _qlik_builtins.py
+|   |       |   |   |   _scheme_builtins.py
+|   |       |   |   |   _scilab_builtins.py
+|   |       |   |   |   _sourcemod_builtins.py
+|   |       |   |   |   _sql_builtins.py
+|   |       |   |   |   _stan_builtins.py
+|   |       |   |   |   _stata_builtins.py
+|   |       |   |   |   _tsql_builtins.py
+|   |       |   |   |   _usd_builtins.py
+|   |       |   |   |   _vbscript_builtins.py
+|   |       |   |   |   _vim_builtins.py
+|   |       |   |   |   __init__.py
+|   |       |   |   |
+|   |       |   |   \---__pycache__
+|   |       |   |           diff.cpython-314.pyc
+|   |       |   |           python.cpython-314.pyc
+|   |       |   |           _mapping.cpython-314.pyc
+|   |       |   |           __init__.cpython-314.pyc
+|   |       |   |
+|   |       |   +---styles
+|   |       |   |   |   abap.py
+|   |       |   |   |   algol.py
+|   |       |   |   |   algol_nu.py
+|   |       |   |   |   arduino.py
+|   |       |   |   |   autumn.py
+|   |       |   |   |   borland.py
+|   |       |   |   |   bw.py
+|   |       |   |   |   coffee.py
+|   |       |   |   |   colorful.py
+|   |       |   |   |   default.py
+|   |       |   |   |   dracula.py
+|   |       |   |   |   emacs.py
+|   |       |   |   |   friendly.py
+|   |       |   |   |   friendly_grayscale.py
+|   |       |   |   |   fruity.py
+|   |       |   |   |   gh_dark.py
+|   |       |   |   |   gruvbox.py
+|   |       |   |   |   igor.py
+|   |       |   |   |   inkpot.py
+|   |       |   |   |   lightbulb.py
+|   |       |   |   |   lilypond.py
+|   |       |   |   |   lovelace.py
+|   |       |   |   |   manni.py
+|   |       |   |   |   material.py
+|   |       |   |   |   monokai.py
+|   |       |   |   |   murphy.py
+|   |       |   |   |   native.py
+|   |       |   |   |   night_owl.py
+|   |       |   |   |   nord.py
+|   |       |   |   |   onedark.py
+|   |       |   |   |   paraiso_dark.py
+|   |       |   |   |   paraiso_light.py
+|   |       |   |   |   pastie.py
+|   |       |   |   |   perldoc.py
+|   |       |   |   |   rainbow_dash.py
+|   |       |   |   |   rrt.py
+|   |       |   |   |   sas.py
+|   |       |   |   |   solarized.py
+|   |       |   |   |   staroffice.py
+|   |       |   |   |   stata_dark.py
+|   |       |   |   |   stata_light.py
+|   |       |   |   |   tango.py
+|   |       |   |   |   trac.py
+|   |       |   |   |   vim.py
+|   |       |   |   |   vs.py
+|   |       |   |   |   xcode.py
+|   |       |   |   |   zenburn.py
+|   |       |   |   |   _mapping.py
+|   |       |   |   |   __init__.py
+|   |       |   |   |
+|   |       |   |   \---__pycache__
+|   |       |   |           _mapping.cpython-314.pyc
+|   |       |   |           __init__.cpython-314.pyc
+|   |       |   |
+|   |       |   \---__pycache__
+|   |       |           console.cpython-314.pyc
+|   |       |           filter.cpython-314.pyc
+|   |       |           formatter.cpython-314.pyc
+|   |       |           lexer.cpython-314.pyc
+|   |       |           modeline.cpython-314.pyc
+|   |       |           plugin.cpython-314.pyc
+|   |       |           regexopt.cpython-314.pyc
+|   |       |           token.cpython-314.pyc
+|   |       |           unistring.cpython-314.pyc
+|   |       |           util.cpython-314.pyc
+|   |       |           __init__.cpython-314.pyc
+|   |       |
+|   |       +---pygments-2.21.0.dist-info
+|   |       |   |   entry_points.txt
+|   |       |   |   INSTALLER
+|   |       |   |   METADATA
+|   |       |   |   RECORD
+|   |       |   |   WHEEL
+|   |       |   |
+|   |       |   \---licenses
+|   |       |           AUTHORS
+|   |       |           LICENSE
+|   |       |
+|   |       +---pypdf
+|   |       |   |   constants.py
+|   |       |   |   errors.py
+|   |       |   |   filters.py
+|   |       |   |   pagerange.py
+|   |       |   |   papersizes.py
+|   |       |   |   py.typed
+|   |       |   |   types.py
+|   |       |   |   xmp.py
+|   |       |   |   _cmap.py
+|   |       |   |   _doc_common.py
+|   |       |   |   _encryption.py
+|   |       |   |   _font.py
+|   |       |   |   _page.py
+|   |       |   |   _page_labels.py
+|   |       |   |   _protocols.py
+|   |       |   |   _reader.py
+|   |       |   |   _utils.py
+|   |       |   |   _version.py
+|   |       |   |   _writer.py
+|   |       |   |   __init__.py
+|   |       |   |
+|   |       |   +---actions
+|   |       |   |   |   _actions.py
+|   |       |   |   |   __init__.py
+|   |       |   |   |
+|   |       |   |   \---__pycache__
+|   |       |   |           _actions.cpython-314.pyc
+|   |       |   |           __init__.cpython-314.pyc
+|   |       |   |
+|   |       |   +---annotations
+|   |       |   |       _base.py
+|   |       |   |       _markup_annotations.py
+|   |       |   |       _non_markup_annotations.py
+|   |       |   |       __init__.py
+|   |       |   |
+|   |       |   +---generic
+|   |       |   |   |   _appearance_stream.py
+|   |       |   |   |   _base.py
+|   |       |   |   |   _data_structures.py
+|   |       |   |   |   _files.py
+|   |       |   |   |   _fit.py
+|   |       |   |   |   _image_inline.py
+|   |       |   |   |   _image_xobject.py
+|   |       |   |   |   _link.py
+|   |       |   |   |   _outline.py
+|   |       |   |   |   _rectangle.py
+|   |       |   |   |   _utils.py
+|   |       |   |   |   _viewerpref.py
+|   |       |   |   |   __init__.py
+|   |       |   |   |
+|   |       |   |   \---__pycache__
+|   |       |   |           _appearance_stream.cpython-314.pyc
+|   |       |   |           _base.cpython-314.pyc
+|   |       |   |           _data_structures.cpython-314.pyc
+|   |       |   |           _files.cpython-314.pyc
+|   |       |   |           _fit.cpython-314.pyc
+|   |       |   |           _image_inline.cpython-314.pyc
+|   |       |   |           _link.cpython-314.pyc
+|   |       |   |           _outline.cpython-314.pyc
+|   |       |   |           _rectangle.cpython-314.pyc
+|   |       |   |           _utils.cpython-314.pyc
+|   |       |   |           _viewerpref.cpython-314.pyc
+|   |       |   |           __init__.cpython-314.pyc
+|   |       |   |
+|   |       |   +---_codecs
+|   |       |   |   |   adobe_glyphs.py
+|   |       |   |   |   core_font_metrics.py
+|   |       |   |   |   pdfdoc.py
+|   |       |   |   |   std.py
+|   |       |   |   |   symbol.py
+|   |       |   |   |   zapfding.py
+|   |       |   |   |   _codecs.py
+|   |       |   |   |   __init__.py
+|   |       |   |   |
+|   |       |   |   \---__pycache__
+|   |       |   |           adobe_glyphs.cpython-314.pyc
+|   |       |   |           core_font_metrics.cpython-314.pyc
+|   |       |   |           pdfdoc.cpython-314.pyc
+|   |       |   |           std.cpython-314.pyc
+|   |       |   |           symbol.cpython-314.pyc
+|   |       |   |           zapfding.cpython-314.pyc
+|   |       |   |           _codecs.cpython-314.pyc
+|   |       |   |           __init__.cpython-314.pyc
+|   |       |   |
+|   |       |   +---_crypt_providers
+|   |       |   |   |   _base.py
+|   |       |   |   |   _cryptography.py
+|   |       |   |   |   _fallback.py
+|   |       |   |   |   _pycryptodome.py
+|   |       |   |   |   __init__.py
+|   |       |   |   |
+|   |       |   |   \---__pycache__
+|   |       |   |           _base.cpython-314.pyc
+|   |       |   |           _cryptography.cpython-314.pyc
+|   |       |   |           _fallback.cpython-314.pyc
+|   |       |   |           _pycryptodome.cpython-314.pyc
+|   |       |   |           __init__.cpython-314.pyc
+|   |       |   |
+|   |       |   +---_text_extraction
+|   |       |   |   |   _text_extractor.py
+|   |       |   |   |   __init__.py
+|   |       |   |   |
+|   |       |   |   +---_layout_mode
+|   |       |   |   |   |   _fixed_width_page.py
+|   |       |   |   |   |   _text_state_manager.py
+|   |       |   |   |   |   _text_state_params.py
+|   |       |   |   |   |   __init__.py
+|   |       |   |   |   |
+|   |       |   |   |   \---__pycache__
+|   |       |   |   |           _fixed_width_page.cpython-314.pyc
+|   |       |   |   |           _text_state_manager.cpython-314.pyc
+|   |       |   |   |           _text_state_params.cpython-314.pyc
+|   |       |   |   |           __init__.cpython-314.pyc
+|   |       |   |   |
+|   |       |   |   \---__pycache__
+|   |       |   |           _text_extractor.cpython-314.pyc
+|   |       |   |           __init__.cpython-314.pyc
+|   |       |   |
+|   |       |   \---__pycache__
+|   |       |           constants.cpython-314.pyc
+|   |       |           errors.cpython-314.pyc
+|   |       |           filters.cpython-314.pyc
+|   |       |           pagerange.cpython-314.pyc
+|   |       |           papersizes.cpython-314.pyc
+|   |       |           types.cpython-314.pyc
+|   |       |           xmp.cpython-314.pyc
+|   |       |           _cmap.cpython-314.pyc
+|   |       |           _doc_common.cpython-314.pyc
+|   |       |           _encryption.cpython-314.pyc
+|   |       |           _font.cpython-314.pyc
+|   |       |           _page.cpython-314.pyc
+|   |       |           _page_labels.cpython-314.pyc
+|   |       |           _protocols.cpython-314.pyc
+|   |       |           _reader.cpython-314.pyc
+|   |       |           _utils.cpython-314.pyc
+|   |       |           _version.cpython-314.pyc
+|   |       |           _writer.cpython-314.pyc
+|   |       |           __init__.cpython-314.pyc
+|   |       |
+|   |       +---pypdf-6.16.1.dist-info
+|   |       |   |   INSTALLER
+|   |       |   |   METADATA
+|   |       |   |   RECORD
+|   |       |   |   REQUESTED
+|   |       |   |   WHEEL
+|   |       |   |
+|   |       |   \---licenses
+|   |       |           LICENSE
+|   |       |
+|   |       +---pytest
+|   |       |   |   py.typed
+|   |       |   |   __init__.py
+|   |       |   |   __main__.py
+|   |       |   |
+|   |       |   \---__pycache__
+|   |       |           __init__.cpython-314.pyc
+|   |       |           __main__.cpython-314.pyc
+|   |       |
+|   |       +---pytest-9.1.1.dist-info
+|   |       |   |   entry_points.txt
+|   |       |   |   INSTALLER
+|   |       |   |   METADATA
+|   |       |   |   RECORD
+|   |       |   |   REQUESTED
+|   |       |   |   top_level.txt
+|   |       |   |   WHEEL
+|   |       |   |
+|   |       |   \---licenses
+|   |       |           LICENSE
+|   |       |
+|   |       +---python_dotenv-1.2.2.dist-info
+|   |       |   |   entry_points.txt
+|   |       |   |   INSTALLER
+|   |       |   |   METADATA
+|   |       |   |   RECORD
+|   |       |   |   top_level.txt
+|   |       |   |   WHEEL
+|   |       |   |
+|   |       |   \---licenses
+|   |       |           LICENSE
+|   |       |
+|   |       +---python_multipart
+|   |       |   |   decoders.py
+|   |       |   |   exceptions.py
+|   |       |   |   multipart.py
+|   |       |   |   py.typed
+|   |       |   |   __init__.py
+|   |       |   |
+|   |       |   \---__pycache__
+|   |       |           decoders.cpython-314.pyc
+|   |       |           exceptions.cpython-314.pyc
+|   |       |           multipart.cpython-314.pyc
+|   |       |           __init__.cpython-314.pyc
+|   |       |
+|   |       +---python_multipart-0.0.32.dist-info
+|   |       |   |   INSTALLER
+|   |       |   |   METADATA
+|   |       |   |   RECORD
+|   |       |   |   REQUESTED
+|   |       |   |   WHEEL
+|   |       |   |
+|   |       |   \---licenses
+|   |       |           LICENSE.txt
+|   |       |
+|   |       +---pyyaml-6.0.3.dist-info
+|   |       |   |   INSTALLER
+|   |       |   |   METADATA
+|   |       |   |   RECORD
+|   |       |   |   top_level.txt
+|   |       |   |   WHEEL
+|   |       |   |
+|   |       |   \---licenses
+|   |       |           LICENSE
+|   |       |
+|   |       +---starlette
+|   |       |   |   applications.py
+|   |       |   |   authentication.py
+|   |       |   |   background.py
+|   |       |   |   concurrency.py
+|   |       |   |   config.py
+|   |       |   |   convertors.py
+|   |       |   |   datastructures.py
+|   |       |   |   endpoints.py
+|   |       |   |   exceptions.py
+|   |       |   |   formparsers.py
+|   |       |   |   py.typed
+|   |       |   |   requests.py
+|   |       |   |   responses.py
+|   |       |   |   routing.py
+|   |       |   |   schemas.py
+|   |       |   |   staticfiles.py
+|   |       |   |   status.py
+|   |       |   |   templating.py
+|   |       |   |   testclient.py
+|   |       |   |   types.py
+|   |       |   |   websockets.py
+|   |       |   |   _exception_handler.py
+|   |       |   |   _utils.py
+|   |       |   |   __init__.py
+|   |       |   |
+|   |       |   +---middleware
+|   |       |   |   |   authentication.py
+|   |       |   |   |   base.py
+|   |       |   |   |   body_limit.py
+|   |       |   |   |   cors.py
+|   |       |   |   |   errors.py
+|   |       |   |   |   exceptions.py
+|   |       |   |   |   gzip.py
+|   |       |   |   |   httpsredirect.py
+|   |       |   |   |   sessions.py
+|   |       |   |   |   trustedhost.py
+|   |       |   |   |   wsgi.py
+|   |       |   |   |   __init__.py
+|   |       |   |   |
+|   |       |   |   \---__pycache__
+|   |       |   |           base.cpython-314.pyc
+|   |       |   |           body_limit.cpython-314.pyc
+|   |       |   |           errors.cpython-314.pyc
+|   |       |   |           exceptions.cpython-314.pyc
+|   |       |   |           __init__.cpython-314.pyc
+|   |       |   |
+|   |       |   \---__pycache__
+|   |       |           applications.cpython-314.pyc
+|   |       |           background.cpython-314.pyc
+|   |       |           concurrency.cpython-314.pyc
+|   |       |           convertors.cpython-314.pyc
+|   |       |           datastructures.cpython-314.pyc
+|   |       |           exceptions.cpython-314.pyc
+|   |       |           formparsers.cpython-314.pyc
+|   |       |           requests.cpython-314.pyc
+|   |       |           responses.cpython-314.pyc
+|   |       |           routing.cpython-314.pyc
+|   |       |           staticfiles.cpython-314.pyc
+|   |       |           status.cpython-314.pyc
+|   |       |           templating.cpython-314.pyc
+|   |       |           testclient.cpython-314.pyc
+|   |       |           types.cpython-314.pyc
+|   |       |           websockets.cpython-314.pyc
+|   |       |           _exception_handler.cpython-314.pyc
+|   |       |           _utils.cpython-314.pyc
+|   |       |           __init__.cpython-314.pyc
+|   |       |
+|   |       +---starlette-1.6.0.dist-info
+|   |       |   |   INSTALLER
+|   |       |   |   METADATA
+|   |       |   |   RECORD
+|   |       |   |   WHEEL
+|   |       |   |
+|   |       |   \---licenses
+|   |       |           LICENSE.md
+|   |       |
+|   |       +---truststore
+|   |       |       py.typed
+|   |       |       _api.py
+|   |       |       _macos.py
+|   |       |       _openssl.py
+|   |       |       _ssl_constants.py
+|   |       |       _windows.py
+|   |       |       __init__.py
+|   |       |
+|   |       +---truststore-0.10.4.dist-info
+|   |       |   |   INSTALLER
+|   |       |   |   METADATA
+|   |       |   |   RECORD
+|   |       |   |   WHEEL
+|   |       |   |
+|   |       |   \---licenses
+|   |       |           LICENSE
+|   |       |
+|   |       +---typing_extensions-4.16.0.dist-info
+|   |       |   |   INSTALLER
+|   |       |   |   METADATA
+|   |       |   |   RECORD
+|   |       |   |   WHEEL
+|   |       |   |
+|   |       |   \---licenses
+|   |       |           LICENSE
+|   |       |
+|   |       +---typing_inspection
+|   |       |   |   introspection.py
+|   |       |   |   py.typed
+|   |       |   |   typing_objects.py
+|   |       |   |   typing_objects.pyi
+|   |       |   |   __init__.py
+|   |       |   |
+|   |       |   \---__pycache__
+|   |       |           introspection.cpython-314.pyc
+|   |       |           typing_objects.cpython-314.pyc
+|   |       |           __init__.cpython-314.pyc
+|   |       |
+|   |       +---typing_inspection-0.4.3.dist-info
+|   |       |   |   INSTALLER
+|   |       |   |   METADATA
+|   |       |   |   RECORD
+|   |       |   |   WHEEL
+|   |       |   |
+|   |       |   \---licenses
+|   |       |           LICENSE
+|   |       |
+|   |       +---uvicorn
+|   |       |   |   config.py
+|   |       |   |   importer.py
+|   |       |   |   logging.py
+|   |       |   |   main.py
+|   |       |   |   py.typed
+|   |       |   |   server.py
+|   |       |   |   workers.py
+|   |       |   |   _ansi.py
+|   |       |   |   _compat.py
+|   |       |   |   _subprocess.py
+|   |       |   |   _types.py
+|   |       |   |   __init__.py
+|   |       |   |   __main__.py
+|   |       |   |
+|   |       |   +---lifespan
+|   |       |   |   |   off.py
+|   |       |   |   |   on.py
+|   |       |   |   |   __init__.py
+|   |       |   |   |
+|   |       |   |   \---__pycache__
+|   |       |   |           on.cpython-314.pyc
+|   |       |   |           __init__.cpython-314.pyc
+|   |       |   |
+|   |       |   +---loops
+|   |       |   |   |   asyncio.py
+|   |       |   |   |   auto.py
+|   |       |   |   |   uvloop.py
+|   |       |   |   |   __init__.py
+|   |       |   |   |
+|   |       |   |   \---__pycache__
+|   |       |   |           asyncio.cpython-314.pyc
+|   |       |   |           auto.cpython-314.pyc
+|   |       |   |           __init__.cpython-314.pyc
+|   |       |   |
+|   |       |   +---middleware
+|   |       |   |   |   asgi2.py
+|   |       |   |   |   message_logger.py
+|   |       |   |   |   proxy_headers.py
+|   |       |   |   |   wsgi.py
+|   |       |   |   |   __init__.py
+|   |       |   |   |
+|   |       |   |   \---__pycache__
+|   |       |   |           asgi2.cpython-314.pyc
+|   |       |   |           message_logger.cpython-314.pyc
+|   |       |   |           proxy_headers.cpython-314.pyc
+|   |       |   |           wsgi.cpython-314.pyc
+|   |       |   |           __init__.cpython-314.pyc
+|   |       |   |
+|   |       |   +---protocols
+|   |       |   |   |   utils.py
+|   |       |   |   |   __init__.py
+|   |       |   |   |
+|   |       |   |   +---http
+|   |       |   |   |   |   auto.py
+|   |       |   |   |   |   flow_control.py
+|   |       |   |   |   |   h11_impl.py
+|   |       |   |   |   |   httptools_impl.py
+|   |       |   |   |   |   zttp_impl.py
+|   |       |   |   |   |   __init__.py
+|   |       |   |   |   |
+|   |       |   |   |   \---__pycache__
+|   |       |   |   |           auto.cpython-314.pyc
+|   |       |   |   |           flow_control.cpython-314.pyc
+|   |       |   |   |           httptools_impl.cpython-314.pyc
+|   |       |   |   |           __init__.cpython-314.pyc
+|   |       |   |   |
+|   |       |   |   +---websockets
+|   |       |   |   |   |   auto.py
+|   |       |   |   |   |   websockets_impl.py
+|   |       |   |   |   |   websockets_sansio_impl.py
+|   |       |   |   |   |   wsproto_impl.py
+|   |       |   |   |   |   __init__.py
+|   |       |   |   |   |
+|   |       |   |   |   \---__pycache__
+|   |       |   |   |           auto.cpython-314.pyc
+|   |       |   |   |           websockets_sansio_impl.cpython-314.pyc
+|   |       |   |   |           __init__.cpython-314.pyc
+|   |       |   |   |
+|   |       |   |   \---__pycache__
+|   |       |   |           utils.cpython-314.pyc
+|   |       |   |           __init__.cpython-314.pyc
+|   |       |   |
+|   |       |   +---supervisors
+|   |       |   |   |   basereload.py
+|   |       |   |   |   multiprocess.py
+|   |       |   |   |   statreload.py
+|   |       |   |   |   watchfilesreload.py
+|   |       |   |   |   __init__.py
+|   |       |   |   |
+|   |       |   |   \---__pycache__
+|   |       |   |           basereload.cpython-314.pyc
+|   |       |   |           multiprocess.cpython-314.pyc
+|   |       |   |           watchfilesreload.cpython-314.pyc
+|   |       |   |           __init__.cpython-314.pyc
+|   |       |   |
+|   |       |   \---__pycache__
+|   |       |           config.cpython-314.pyc
+|   |       |           importer.cpython-314.pyc
+|   |       |           logging.cpython-314.pyc
+|   |       |           main.cpython-314.pyc
+|   |       |           server.cpython-314.pyc
+|   |       |           _ansi.cpython-314.pyc
+|   |       |           _compat.cpython-314.pyc
+|   |       |           _subprocess.cpython-314.pyc
+|   |       |           _types.cpython-314.pyc
+|   |       |           __init__.cpython-314.pyc
+|   |       |           __main__.cpython-314.pyc
+|   |       |
+|   |       +---uvicorn-0.52.3.dist-info
+|   |       |   |   entry_points.txt
+|   |       |   |   INSTALLER
+|   |       |   |   METADATA
+|   |       |   |   RECORD
+|   |       |   |   REQUESTED
+|   |       |   |   WHEEL
+|   |       |   |
+|   |       |   \---licenses
+|   |       |           LICENSE.md
+|   |       |
+|   |       +---watchfiles
+|   |       |   |   cli.py
+|   |       |   |   filters.py
+|   |       |   |   main.py
+|   |       |   |   py.typed
+|   |       |   |   run.py
+|   |       |   |   version.py
+|   |       |   |   _rust_notify.cp314-win_amd64.pyd
+|   |       |   |   _rust_notify.pyi
+|   |       |   |   __init__.py
+|   |       |   |   __main__.py
+|   |       |   |
+|   |       |   \---__pycache__
+|   |       |           filters.cpython-314.pyc
+|   |       |           main.cpython-314.pyc
+|   |       |           run.cpython-314.pyc
+|   |       |           version.cpython-314.pyc
+|   |       |           __init__.cpython-314.pyc
+|   |       |
+|   |       +---watchfiles-1.2.0.dist-info
+|   |       |   |   entry_points.txt
+|   |       |   |   INSTALLER
+|   |       |   |   METADATA
+|   |       |   |   RECORD
+|   |       |   |   WHEEL
+|   |       |   |
+|   |       |   +---licenses
+|   |       |   |       LICENSE
+|   |       |   |
+|   |       |   \---sboms
+|   |       |           watchfiles_rust_notify.cyclonedx.json
+|   |       |
+|   |       +---websockets
+|   |       |   |   auth.py
+|   |       |   |   cli.py
+|   |       |   |   client.py
+|   |       |   |   connection.py
+|   |       |   |   datastructures.py
+|   |       |   |   exceptions.py
+|   |       |   |   frames.py
+|   |       |   |   headers.py
+|   |       |   |   http11.py
+|   |       |   |   imports.py
+|   |       |   |   protocol.py
+|   |       |   |   proxy.py
+|   |       |   |   py.typed
+|   |       |   |   server.py
+|   |       |   |   speedups.c
+|   |       |   |   speedups.cp314-win_amd64.pyd
+|   |       |   |   speedups.pyi
+|   |       |   |   streams.py
+|   |       |   |   typing.py
+|   |       |   |   uri.py
+|   |       |   |   utils.py
+|   |       |   |   version.py
+|   |       |   |   __init__.py
+|   |       |   |   __main__.py
+|   |       |   |
+|   |       |   +---asyncio
+|   |       |   |       client.py
+|   |       |   |       connection.py
+|   |       |   |       messages.py
+|   |       |   |       router.py
+|   |       |   |       server.py
+|   |       |   |       __init__.py
+|   |       |   |
+|   |       |   +---extensions
+|   |       |   |   |   base.py
+|   |       |   |   |   permessage_deflate.py
+|   |       |   |   |   __init__.py
+|   |       |   |   |
+|   |       |   |   \---__pycache__
+|   |       |   |           base.cpython-314.pyc
+|   |       |   |           permessage_deflate.cpython-314.pyc
+|   |       |   |           __init__.cpython-314.pyc
+|   |       |   |
+|   |       |   +---legacy
+|   |       |   |       auth.py
+|   |       |   |       client.py
+|   |       |   |       exceptions.py
+|   |       |   |       framing.py
+|   |       |   |       handshake.py
+|   |       |   |       http.py
+|   |       |   |       protocol.py
+|   |       |   |       server.py
+|   |       |   |       __init__.py
+|   |       |   |
+|   |       |   +---sync
+|   |       |   |       client.py
+|   |       |   |       connection.py
+|   |       |   |       messages.py
+|   |       |   |       router.py
+|   |       |   |       server.py
+|   |       |   |       utils.py
+|   |       |   |       __init__.py
+|   |       |   |
+|   |       |   +---trio
+|   |       |   |       client.py
+|   |       |   |       connection.py
+|   |       |   |       messages.py
+|   |       |   |       router.py
+|   |       |   |       server.py
+|   |       |   |       utils.py
+|   |       |   |       __init__.py
+|   |       |   |
+|   |       |   \---__pycache__
+|   |       |           datastructures.cpython-314.pyc
+|   |       |           exceptions.cpython-314.pyc
+|   |       |           frames.cpython-314.pyc
+|   |       |           headers.cpython-314.pyc
+|   |       |           http11.cpython-314.pyc
+|   |       |           imports.cpython-314.pyc
+|   |       |           protocol.cpython-314.pyc
+|   |       |           server.cpython-314.pyc
+|   |       |           streams.cpython-314.pyc
+|   |       |           typing.cpython-314.pyc
+|   |       |           utils.cpython-314.pyc
+|   |       |           version.cpython-314.pyc
+|   |       |           __init__.cpython-314.pyc
+|   |       |
+|   |       +---websockets-17.0.1.dist-info
+|   |       |   |   entry_points.txt
+|   |       |   |   INSTALLER
+|   |       |   |   METADATA
+|   |       |   |   RECORD
+|   |       |   |   top_level.txt
+|   |       |   |   WHEEL
+|   |       |   |
+|   |       |   \---licenses
+|   |       |           LICENSE
+|   |       |
+|   |       +---yaml
+|   |       |   |   composer.py
+|   |       |   |   constructor.py
+|   |       |   |   cyaml.py
+|   |       |   |   dumper.py
+|   |       |   |   emitter.py
+|   |       |   |   error.py
+|   |       |   |   events.py
+|   |       |   |   loader.py
+|   |       |   |   nodes.py
+|   |       |   |   parser.py
+|   |       |   |   reader.py
+|   |       |   |   representer.py
+|   |       |   |   resolver.py
+|   |       |   |   scanner.py
+|   |       |   |   serializer.py
+|   |       |   |   tokens.py
+|   |       |   |   _yaml.cp314-win_amd64.pyd
+|   |       |   |   __init__.py
+|   |       |   |
+|   |       |   \---__pycache__
+|   |       |           composer.cpython-314.pyc
+|   |       |           constructor.cpython-314.pyc
+|   |       |           cyaml.cpython-314.pyc
+|   |       |           dumper.cpython-314.pyc
+|   |       |           emitter.cpython-314.pyc
+|   |       |           error.cpython-314.pyc
+|   |       |           events.cpython-314.pyc
+|   |       |           loader.cpython-314.pyc
+|   |       |           nodes.cpython-314.pyc
+|   |       |           parser.cpython-314.pyc
+|   |       |           reader.cpython-314.pyc
+|   |       |           representer.cpython-314.pyc
+|   |       |           resolver.cpython-314.pyc
+|   |       |           scanner.cpython-314.pyc
+|   |       |           serializer.cpython-314.pyc
+|   |       |           tokens.cpython-314.pyc
+|   |       |           __init__.cpython-314.pyc
+|   |       |
+|   |       +---_pytest
+|   |       |   |   cacheprovider.py
+|   |       |   |   capture.py
+|   |       |   |   compat.py
+|   |       |   |   debugging.py
+|   |       |   |   deprecated.py
+|   |       |   |   doctest.py
+|   |       |   |   faulthandler.py
+|   |       |   |   fixtures.py
+|   |       |   |   freeze_support.py
+|   |       |   |   helpconfig.py
+|   |       |   |   hookspec.py
+|   |       |   |   junitxml.py
+|   |       |   |   legacypath.py
+|   |       |   |   logging.py
+|   |       |   |   main.py
+|   |       |   |   monkeypatch.py
+|   |       |   |   nodes.py
+|   |       |   |   outcomes.py
+|   |       |   |   pastebin.py
+|   |       |   |   pathlib.py
+|   |       |   |   py.typed
+|   |       |   |   pytester.py
+|   |       |   |   pytester_assertions.py
+|   |       |   |   python.py
+|   |       |   |   python_api.py
+|   |       |   |   raises.py
+|   |       |   |   recwarn.py
+|   |       |   |   reports.py
+|   |       |   |   runner.py
+|   |       |   |   scope.py
+|   |       |   |   setuponly.py
+|   |       |   |   setupplan.py
+|   |       |   |   skipping.py
+|   |       |   |   stash.py
+|   |       |   |   stepwise.py
+|   |       |   |   subtests.py
+|   |       |   |   terminal.py
+|   |       |   |   terminalprogress.py
+|   |       |   |   threadexception.py
+|   |       |   |   timing.py
+|   |       |   |   tmpdir.py
+|   |       |   |   tracemalloc.py
+|   |       |   |   unittest.py
+|   |       |   |   unraisableexception.py
+|   |       |   |   warnings.py
+|   |       |   |   warning_types.py
+|   |       |   |   _argcomplete.py
+|   |       |   |   _version.py
+|   |       |   |   __init__.py
+|   |       |   |
+|   |       |   +---assertion
+|   |       |   |   |   compare_text.py
+|   |       |   |   |   highlight.py
+|   |       |   |   |   rewrite.py
+|   |       |   |   |   truncate.py
+|   |       |   |   |   util.py
+|   |       |   |   |   _compare_any.py
+|   |       |   |   |   _compare_mapping.py
+|   |       |   |   |   _compare_sequence.py
+|   |       |   |   |   _compare_set.py
+|   |       |   |   |   _guards.py
+|   |       |   |   |   _typing.py
+|   |       |   |   |   __init__.py
+|   |       |   |   |
+|   |       |   |   \---__pycache__
+|   |       |   |           compare_text.cpython-314.pyc
+|   |       |   |           highlight.cpython-314.pyc
+|   |       |   |           rewrite.cpython-314.pyc
+|   |       |   |           truncate.cpython-314.pyc
+|   |       |   |           util.cpython-314.pyc
+|   |       |   |           _compare_any.cpython-314.pyc
+|   |       |   |           _compare_mapping.cpython-314.pyc
+|   |       |   |           _compare_sequence.cpython-314.pyc
+|   |       |   |           _compare_set.cpython-314.pyc
+|   |       |   |           _guards.cpython-314.pyc
+|   |       |   |           _typing.cpython-314.pyc
+|   |       |   |           __init__.cpython-314.pyc
+|   |       |   |
+|   |       |   +---config
+|   |       |   |   |   argparsing.py
+|   |       |   |   |   exceptions.py
+|   |       |   |   |   findpaths.py
+|   |       |   |   |   __init__.py
+|   |       |   |   |
+|   |       |   |   \---__pycache__
+|   |       |   |           argparsing.cpython-314.pyc
+|   |       |   |           exceptions.cpython-314.pyc
+|   |       |   |           findpaths.cpython-314.pyc
+|   |       |   |           __init__.cpython-314.pyc
+|   |       |   |
+|   |       |   +---mark
+|   |       |   |   |   expression.py
+|   |       |   |   |   structures.py
+|   |       |   |   |   __init__.py
+|   |       |   |   |
+|   |       |   |   \---__pycache__
+|   |       |   |           expression.cpython-314.pyc
+|   |       |   |           structures.cpython-314.pyc
+|   |       |   |           __init__.cpython-314.pyc
+|   |       |   |
+|   |       |   +---_code
+|   |       |   |   |   code.py
+|   |       |   |   |   source.py
+|   |       |   |   |   __init__.py
+|   |       |   |   |
+|   |       |   |   \---__pycache__
+|   |       |   |           code.cpython-314.pyc
+|   |       |   |           source.cpython-314.pyc
+|   |       |   |           __init__.cpython-314.pyc
+|   |       |   |
+|   |       |   +---_io
+|   |       |   |   |   pprint.py
+|   |       |   |   |   saferepr.py
+|   |       |   |   |   terminalwriter.py
+|   |       |   |   |   wcwidth.py
+|   |       |   |   |   __init__.py
+|   |       |   |   |
+|   |       |   |   \---__pycache__
+|   |       |   |           pprint.cpython-314.pyc
+|   |       |   |           saferepr.cpython-314.pyc
+|   |       |   |           terminalwriter.cpython-314.pyc
+|   |       |   |           wcwidth.cpython-314.pyc
+|   |       |   |           __init__.cpython-314.pyc
+|   |       |   |
+|   |       |   +---_py
+|   |       |   |   |   error.py
+|   |       |   |   |   path.py
+|   |       |   |   |   __init__.py
+|   |       |   |   |
+|   |       |   |   \---__pycache__
+|   |       |   |           error.cpython-314.pyc
+|   |       |   |           path.cpython-314.pyc
+|   |       |   |           __init__.cpython-314.pyc
+|   |       |   |
+|   |       |   \---__pycache__
+|   |       |           cacheprovider.cpython-314.pyc
+|   |       |           capture.cpython-314.pyc
+|   |       |           compat.cpython-314.pyc
+|   |       |           debugging.cpython-314.pyc
+|   |       |           deprecated.cpython-314.pyc
+|   |       |           doctest.cpython-314.pyc
+|   |       |           faulthandler.cpython-314.pyc
+|   |       |           fixtures.cpython-314.pyc
+|   |       |           freeze_support.cpython-314.pyc
+|   |       |           helpconfig.cpython-314.pyc
+|   |       |           hookspec.cpython-314.pyc
+|   |       |           junitxml.cpython-314.pyc
+|   |       |           legacypath.cpython-314.pyc
+|   |       |           logging.cpython-314.pyc
+|   |       |           main.cpython-314.pyc
+|   |       |           monkeypatch.cpython-314.pyc
+|   |       |           nodes.cpython-314.pyc
+|   |       |           outcomes.cpython-314.pyc
+|   |       |           pastebin.cpython-314.pyc
+|   |       |           pathlib.cpython-314.pyc
+|   |       |           pytester.cpython-314.pyc
+|   |       |           python.cpython-314.pyc
+|   |       |           python_api.cpython-314.pyc
+|   |       |           raises.cpython-314.pyc
+|   |       |           recwarn.cpython-314.pyc
+|   |       |           reports.cpython-314.pyc
+|   |       |           runner.cpython-314.pyc
+|   |       |           scope.cpython-314.pyc
+|   |       |           setuponly.cpython-314.pyc
+|   |       |           setupplan.cpython-314.pyc
+|   |       |           skipping.cpython-314.pyc
+|   |       |           stash.cpython-314.pyc
+|   |       |           stepwise.cpython-314.pyc
+|   |       |           subtests.cpython-314.pyc
+|   |       |           terminal.cpython-314.pyc
+|   |       |           terminalprogress.cpython-314-pytest-9.1.1.pyc
+|   |       |           threadexception.cpython-314.pyc
+|   |       |           timing.cpython-314.pyc
+|   |       |           tmpdir.cpython-314.pyc
+|   |       |           tracemalloc.cpython-314.pyc
+|   |       |           unittest.cpython-314.pyc
+|   |       |           unraisableexception.cpython-314.pyc
+|   |       |           warnings.cpython-314.pyc
+|   |       |           warning_types.cpython-314.pyc
+|   |       |           _argcomplete.cpython-314.pyc
+|   |       |           _version.cpython-314.pyc
+|   |       |           __init__.cpython-314.pyc
+|   |       |
+|   |       +---_yaml
+|   |       |       __init__.py
+|   |       |
+|   |       \---__pycache__
+|   |               py.cpython-314.pyc
+|   |               typing_extensions.cpython-314.pyc
+|   |
+|   \---Scripts
+|           activate
+|           activate.bat
+|           activate.fish
+|           Activate.ps1
+|           deactivate.bat
+|           dotenv.exe
+|           fastapi.exe
+|           httpx2.exe
+|           idna.exe
+|           pip.exe
+|           pip3.14.exe
+|           pip3.exe
+|           py.test.exe
+|           pygmentize.exe
+|           pytest.exe
+|           python.exe
+|           pythonw.exe
+|           uvicorn.exe
+|           watchfiles.exe
+|           websockets.exe
+|
++---app
+|   |   main.py
+|   |   __init__.py
+|   |
+|   +---core
+|   |   |   config.py
+|   |   |   constants.py
+|   |   |   money.py
+|   |   |   normativa.py
+|   |   |   observability.py
+|   |   |   pdf_files.py
+|   |   |   version.py
+|   |   |   version_ledger.py
+|   |   |   __init__.py
+|   |   |
+|   |   \---__pycache__
+|   |           archivos_pdf.cpython-314.pyc
+|   |           config.cpython-314.pyc
+|   |           constants.cpython-314.pyc
+|   |           dinero.cpython-314.pyc
+|   |           money.cpython-314.pyc
+|   |           normativa.cpython-314.pyc
+|   |           observabilidad.cpython-314.pyc
+|   |           observability.cpython-314.pyc
+|   |           pdf_files.cpython-314.pyc
+|   |           version.cpython-314.pyc
+|   |           version_ledger.cpython-314.pyc
+|   |           __init__.cpython-314.pyc
+|   |
+|   +---engines
+|   |   |   elegibilidad.py
+|   |   |   mixto.py
+|   |   |   sebd.py
+|   |   |   sebd_modalidades.py
+|   |   |   sucgs.py
+|   |   |   __init__.py
+|   |   |
+|   |   \---__pycache__
+|   |           elegibilidad.cpython-314.pyc
+|   |           mixto.cpython-314.pyc
+|   |           sebd.cpython-314.pyc
+|   |           sebd_modalidades.cpython-314.pyc
+|   |           sucgs.cpython-314.pyc
+|   |           __init__.cpython-314.pyc
+|   |
+|   +---models
+|   |   |   comparacion.py
+|   |   |   pension.py
+|   |   |   simulation.py
+|   |   |   traceability.py
+|   |   |   unified_result.py
+|   |   |   __init__.py
+|   |   |
+|   |   \---__pycache__
+|   |           comparacion.cpython-314.pyc
+|   |           pension.cpython-314.pyc
+|   |           resultado_unificado.cpython-314.pyc
+|   |           simulacion.cpython-314.pyc
+|   |           simulation.cpython-314.pyc
+|   |           traceability.cpython-314.pyc
+|   |           trazabilidad.cpython-314.pyc
+|   |           unified_result.cpython-314.pyc
+|   |           __init__.cpython-314.pyc
+|   |
+|   +---services
+|   |   |   centro_desarrollo.py
+|   |   |   como_se_calcula.py
+|   |   |   comparator.py
+|   |   |   contribution_projection.py
+|   |   |   detalle_anio_actual.py
+|   |   |   ficha_digital.py
+|   |   |   mixto_results.py
+|   |   |   reference_date.py
+|   |   |   referencia_mi_retiro_seguro.py
+|   |   |   regulatory_sources.py
+|   |   |   results.py
+|   |   |   retirement.py
+|   |   |   salary_history.py
+|   |   |   salary_projection.py
+|   |   |   sebd_results.py
+|   |   |   sucgs_results.py
+|   |   |   timeline.py
+|   |   |   traceability.py
+|   |   |   unified_result.py
+|   |   |   __init__.py
+|   |   |
+|   |   \---__pycache__
+|   |           centro_desarrollo.cpython-314.pyc
+|   |           como_se_calcula.cpython-314.pyc
+|   |           comparador.cpython-314.pyc
+|   |           comparator.cpython-314.pyc
+|   |           contribution_projection.cpython-314.pyc
+|   |           detalle_anio_actual.cpython-314.pyc
+|   |           fecha_referencia.cpython-314.pyc
+|   |           ficha_digital.cpython-314.pyc
+|   |           fuentes_normativas.cpython-314.pyc
+|   |           historial_salarios.cpython-314.pyc
+|   |           linea_tiempo.cpython-314.pyc
+|   |           mixto_results.cpython-314.pyc
+|   |           proyeccion_cuotas.cpython-314.pyc
+|   |           proyeccion_salarios.cpython-314.pyc
+|   |           reference_date.cpython-314.pyc
+|   |           referencia_mi_retiro_seguro.cpython-314.pyc
+|   |           regulatory_sources.cpython-314.pyc
+|   |           resultados.cpython-314.pyc
+|   |           resultados_mixto.cpython-314.pyc
+|   |           resultados_sebd.cpython-314.pyc
+|   |           resultados_sucgs.cpython-314.pyc
+|   |           resultado_unificado.cpython-314.pyc
+|   |           results.cpython-314.pyc
+|   |           retirement.cpython-314.pyc
+|   |           retiro.cpython-314.pyc
+|   |           salary_history.cpython-314.pyc
+|   |           salary_projection.cpython-314.pyc
+|   |           sebd_results.cpython-314.pyc
+|   |           sucgs_results.cpython-314.pyc
+|   |           timeline.cpython-314.pyc
+|   |           traceability.cpython-314.pyc
+|   |           trazabilidad.cpython-314.pyc
+|   |           unified_result.cpython-314.pyc
+|   |           __init__.cpython-314.pyc
+|   |
+|   +---static
+|   |   +---css
+|   |   |       accessibility.css
+|   |   |       brand.css
+|   |   |       como-se-calcula.css
+|   |   |       design-system.css
+|   |   |       procedencia-editable.css
+|   |   |       results.css
+|   |   |       style.css
+|   |   |
+|   |   +---img
+|   |   |   \---brand
+|   |   |           app-icon-192.png
+|   |   |           app-icon-512.png
+|   |   |           apple-touch-icon.png
+|   |   |           favicon-16x16.png
+|   |   |           favicon-32x32.png
+|   |   |           favicon-48x48.png
+|   |   |           favicon.ico
+|   |   |           logo-mark-128.png
+|   |   |
+|   |   \---js
+|   |           accessibility.js
+|   |           attachment_processing.js
+|   |           comparator.js
+|   |           currency.js
+|   |           data_management.js
+|   |           detalle_anio_actual.js
+|   |           official_data_import.js
+|   |           privacy.js
+|   |           procedencia_editable.js
+|   |           referencia_mi_retiro_seguro.js
+|   |           results.js
+|   |           results_orchestration.js
+|   |           retirement.js
+|   |           salary_history.js
+|   |           simulation.js
+|   |           tema.js
+|   |           timeline.js
+|   |           wizard_navigation.js
+|   |
+|   +---templates
+|   |   |   base.html
+|   |   |   como_se_calcula.html
+|   |   |   comparar.html
+|   |   |   dev_centro_desarrollo.html
+|   |   |   index.html
+|   |   |   metodologia.html
+|   |   |   simulation.html
+|   |   |
+|   |   \---partials
+|   |           data_management.html
+|   |           detalle_anio_actual.html
+|   |           importacion_ficha_digital.html
+|   |           official_data_import.html
+|   |           privacy_consent.html
+|   |           referencia_mi_retiro_seguro.html
+|   |           results.html
+|   |           retirement.html
+|   |           salary_history.html
+|   |
+|   \---__pycache__
+|           main.cpython-314.pyc
+|           __init__.cpython-314.pyc
+|
++---assets
+|   +---brand
+|   |   +---icons
+|   |   |       icon-1024.png
+|   |   |       icon-128.png
+|   |   |       icon-16.png
+|   |   |       icon-180.png
+|   |   |       icon-192.png
+|   |   |       icon-256.png
+|   |   |       icon-32.png
+|   |   |       icon-48.png
+|   |   |       icon-512.png
+|   |   |       icon-64.png
+|   |   |
+|   |   +---logos
+|   |   |       logo-mark-1024.png
+|   |   |       logo-mark-512.png
+|   |   |
+|   |   \---source
+|   |           icono-simple-1024.png
+|   |           icono-simple-master-1254.png
+|   |
+|   \---social
+|           github-social-preview.png
+|
++---data
+|       .gitkeep
+|       revision_ledger_pre_1_0.json
+|
++---docs
+|   |   ADR_179_VERSIONADO_REVISION_AWARE.md
+|   |   ARQUITECTURA.md
+|   |   AUDITORIA_ARCHIVOS_R5F.md
+|   |   AUDITORIA_CALCULOS.md
+|   |   AUDITORIA_CARPETAS_R5E.md
+|   |   AUDITORIA_DOCUMENTACION_R5G.md
+|   |   AUDITORIA_ESTRUCTURA_ARCHIVOS_R5D.md
+|   |   AUDITORIA_FUNCIONAL_POST_RENOMBRES_R6.md
+|   |   AUDITORIA_GITHUB.md
+|   |   AUDITORIA_MARKDOWN_POST_MANT1_DOC1_R1.md
+|   |   AUDITORIA_NOMBRES_RESTANTES_R5H.md
+|   |   AUDITORIA_PLAN1_R4_2026-08-20.md
+|   |   AUDITORIA_REPOSITORIO_2026-08-18.md
+|   |   AUDITORIA_UX46E_R7_2026-08-18.md
+|   |   AUDITORIA_VER2_CONTEO_PROVISIONAL.md
+|   |   AUDITORIA_VER2_SEGUNDA_PASADA.md
+|   |   AUDITORIA_VERSIONADO_PRE_1_0.md
+|   |   CHANGELOG_ADD_R5.txt
+|   |   CIERRE_DOCUMENTAL_MARKDOWN_DOC1_R1.md
+|   |   CIERRE_GOV1.md
+|   |   CIERRE_OPERATIVO_POST_AUDITORIA_R7.md
+|   |   COMO_SE_CALCULA.md
+|   |   CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md
+|   |   CUMPLIMIENTO_LEY_81.md
+|   |   DECISIONES.md
+|   |   DEPENDENCIAS_TERCEROS.md
+|   |   DEV2_CENTRO_DESARROLLO.md
+|   |   ESPECIFICACION_FUNCIONAL.md
+|   |   ESTANDAR_CODIGO_Y_COMENTARIOS.md
+|   |   EVALUACION_TERCEROS_DESPLIEGUE.md
+|   |   FUENTES_NORMATIVAS.md
+|   |   GESTION_DATOS_SIMULACION.md
+|   |   GUIA_INTERNA_DESARROLLO.md
+|   |   IDENTIDAD_VISUAL.md
+|   |   INDICE.md
+|   |   INDICE_ADD_R5.txt
+|   |   LEDGER_REVISIONES_PRE_1_0.md
+|   |   LICENCIA_Y_DISTRIBUCION.md
+|   |   LIMITACIONES_CONOCIDAS.md
+|   |   LINEA_BASE_DOCUMENTAL_POST_MANT1_DOC1_R1.md
+|   |   MATRIZ_DECISION_MARKDOWN_DOC1_R1.md
+|   |   MATRIZ_DECISION_REVISIONES_VER2.md
+|   |   MATRIZ_TRAZABILIDAD.md
+|   |   MIGRACION_FIRMAS_GIT_2026-08-17.md
+|   |   MODALIDADES_MIXTO.md
+|   |   MODALIDADES_SEBD.md
+|   |   MODALIDADES_SUCGS.md
+|   |   MODELO_AMENAZAS.md
+|   |   MODELO_DE_DATOS.md
+|   |   MOTOR_DE_CALCULO.md
+|   |   NORMATIVA.md
+|   |   OBSERVABILIDAD_LOGS.md
+|   |   PLAN_MAESTRO_HACIA_1_0.md
+|   |   POLITICA_ESTRUCTURA_ARCHIVOS.md
+|   |   POLITICA_PRIVACIDAD.md
+|   |   PREPARACION_PUBLICA_GITHUB.md
+|   |   PROCEDIMIENTO_DERECHOS_TITULAR.md
+|   |   PROCEDIMIENTO_INCIDENTES_SEGURIDAD.md
+|   |   PROCESO_RELEASE.md
+|   |   REGISTRO_CAMBIOS_HISTORICO.md
+|   |   REVISION_SOLO_SI_APLICA_DOC1_R1.md
+|   |   ROADMAP.md
+|   |   SEGURIDAD_PRIVACIDAD.md
+|   |   TERMINOS_USO_PRIVACIDAD.md
+|   |   TRANSPARENCIA.md
+|   |   UX46H_R1_AUDITORIA_RESULTADOS.md
+|   |   UX46I_R1_AUDITORIA_COMO_SE_CALCULA.md
+|   |   UX_4_6A_REDISENO_VISUAL.md
+|   |   UX_4_6B_PASO1_DATOS_PERSONALES.md
+|   |   UX_4_6C_PASO2_CUOTAS.md
+|   |   UX_4_6D_PASO3_HISTORIAL.md
+|   |   VALIDACION.md
+|   |   VER2_R1_AUDITORIA_RECONCILIACION_POST_DOC1.md
+|   |   VER2_R1_DECISION_OPERATIVA_POST_DOC1.md
+|   |   VER2_R1_MATRIZ_DECISION_RECONCILIACION_POST_DOC1.md
+|   |   VER2_R2_ANALISIS_CONTRADICCIONES_POST_R1.md
+|   |   VER2_R2_CIERRE_DOCUMENTACION_VIVA_POST_R1.md
+|   |   VER2_R2_PROPUESTA_CORRECCION_DOCUMENTACION_VIVA.md
+|   |   VER2_R3_DECISION_VERSION_CANDIDATA_POST_R2.md
+|   |   VER2_R4_PROMOCION_G071_E01.md
+|   |   VER2_R5_ESTABILIZACION_POST_RELEASE.md
+|   |
+|   +---archive
+|   |   |   CHANGELOG_PRE_GOV1_3.md
+|   |   |   README.md
+|   |   |   ROADMAP_PRE_GOV1_3.md
+|   |   |
+|   |   +---governance
+|   |   |       DECISIONES_PRE_GOV1_3_R4.md
+|   |   |       README.md
+|   |   |
+|   |   +---regulatory-privacy
+|   |   |       CUMPLIMIENTO_LEY_81_PRE_GOV1_3_R3.md
+|   |   |       FUENTES_NORMATIVAS_PRE_GOV1_3_R3.md
+|   |   |       MODALIDADES_MIXTO_PRE_GOV1_3_R3.md
+|   |   |       MODALIDADES_SEBD_PRE_GOV1_3_R3.md
+|   |   |       MODALIDADES_SUCGS_PRE_GOV1_3_R3.md
+|   |   |       NORMATIVA_PRE_GOV1_3_R3.md
+|   |   |       POLITICA_PRIVACIDAD_PRE_GOV1_3_R3.md
+|   |   |       README.md
+|   |   |       SEGURIDAD_PRIVACIDAD_PRE_GOV1_3_R3.md
+|   |   |       TERMINOS_USO_PRIVACIDAD_PRE_GOV1_3_R3.md
+|   |   |
+|   |   +---technical
+|   |   |       ARQUITECTURA_PRE_GOV1_3_R2.md
+|   |   |       ESPECIFICACION_FUNCIONAL_PRE_GOV1_3_R2.md
+|   |   |       GESTION_DATOS_SIMULACION_PRE_GOV1_3_R2.md
+|   |   |       GUIA_INTERNA_DESARROLLO_PRE_GOV1_3_R2.md
+|   |   |       MODELO_DE_DATOS_PRE_GOV1_3_R2.md
+|   |   |       MOTOR_DE_CALCULO_PRE_GOV1_3_R2.md
+|   |   |       README.md
+|   |   |       VALIDACION_PRE_GOV1_3_R2.md
+|   |   |
+|   |   \---ux
+|   |           UX_4_6A_REDISENO_VISUAL.md
+|   |           UX_4_6B_PASO1_DATOS_PERSONALES.md
+|   |           UX_4_6C_PASO2_CUOTAS.md
+|   |           UX_4_6D_PASO3_HISTORIAL.md
+|   |
+|   +---standards
+|   |       artifact-lifecycle.md
+|   |       documentation-standards.md
+|   |       file-standards.md
+|   |       naming-conventions.md
+|   |       README.md
+|   |       repository-structure.md
+|   |
+|   \---templates
+|       \---file-structure
+|               README.md
+|               template.css
+|               template.editorconfig
+|               template.gitattributes
+|               template.githook
+|               template.gitignore
+|               template.html
+|               template.ico
+|               template.js
+|               template.json
+|               template.png
+|               template.ps1
+|               template.py
+|               template.txt
+|               template.yaml
+|               template.yml
+|               template_without_extension
+|
++---regulations
+|       general_parameters.json
+|       mixto.json
+|       sebd.json
+|       sucgs.json
+|
++---scripts
+|       configure_git_hooks.ps1
+|       README.md
+|       validate_precommit.py
+|
++---tests
+|   |   test_accessibility_themes.py
+|   |   test_accessibility_ux4.py
+|   |   test_comparator.py
+|   |   test_dev2_centro_desarrollo.py
+|   |   test_dev2_r1_cierre_documental.py
+|   |   test_dev2_r2_visor_diagnostico.py
+|   |   test_dev2_r3_autodiagnostico.py
+|   |   test_dev2_r4_cierre_final.py
+|   |   test_doc1_r1_auditoria_markdown_post_mant1.py
+|   |   test_gov12_versionado.py
+|   |   test_gov13_documentacion.py
+|   |   test_gov13_documentacion_r2.py
+|   |   test_gov13_documentacion_r3.py
+|   |   test_gov13_documentacion_r4.py
+|   |   test_gov14_observabilidad.py
+|   |   test_gov14_observabilidad_integracion.py
+|   |   test_gov15_cierre_seguridad_privacidad.py
+|   |   test_gov15_modelo_amenazas.py
+|   |   test_gov15_procedimientos_privacidad.py
+|   |   test_gov16_controles_github.py
+|   |   test_gov17_licencia.py
+|   |   test_gov18_cierre_gobierno.py
+|   |   test_gov_firma_git.py
+|   |   test_identidad_interfaz.py
+|   |   test_identidad_publica_github_pre_r8.py
+|   |   test_indemnizacion_vejez.py
+|   |   test_mant1_r3_yaml_github_documentados.py
+|   |   test_mant1_r4_encabezados_operativos_limpios.py
+|   |   test_mant1_r5a_comentarios_servicios_app.py
+|   |   test_mant1_r5b_comentarios_presentacion_app.py
+|   |   test_mant1_r5c_comentarios_js_app.py
+|   |   test_mant1_r5d_politica_extensiones.py
+|   |   test_mant1_r5e_nombres_carpetas.py
+|   |   test_mant1_r5f_nombres_archivos.py
+|   |   test_mant1_r5g_documentacion.py
+|   |   test_mant1_r5h_auditoria_nombres_restantes.py
+|   |   test_mant1_r6_auditoria_funcional_post_renombres.py
+|   |   test_mant1_r7_cierre_operativo_post_auditoria.py
+|   |   test_mant1_scripts_hooks_documentados.py
+|   |   test_mantenimiento_tecnico.py
+|   |   test_mixto.py
+|   |   test_mixto_prestaciones_cap.py
+|   |   test_mixto_results.py
+|   |   test_modality_results.py
+|   |   test_money.py
+|   |   test_nor1_repository_standards.py
+|   |   test_plan1_documentacion_primaria.py
+|   |   test_plan1_documentacion_transversal.py
+|   |   test_plan1_gobierno_versionado_oficial.py
+|   |   test_plan1_guard_referencias_historicas.py
+|   |   test_plan1_licencia_privacidad_viva.py
+|   |   test_plan1_r4_candidato_cierre.py
+|   |   test_plan1_saneamiento_metadata.py
+|   |   test_plan1_terminologia_seguridad.py
+|   |   test_plan1_versionado_oficial.py
+|   |   test_prebeta_e2e_hardening.py
+|   |   test_precommit_guard.py
+|   |   test_pypdf_compatibilidad.py
+|   |   test_regulatory_sources.py
+|   |   test_responsive_ux3.py
+|   |   test_results.py
+|   |   test_retirement.py
+|   |   test_salary_projection.py
+|   |   test_sebd.py
+|   |   test_sebd_modalidades.py
+|   |   test_sucgs.py
+|   |   test_sucgs_capa_solidaria.py
+|   |   test_sucgs_reemplazo.py
+|   |   test_sucgs_results.py
+|   |   test_timeline.py
+|   |   test_traceability.py
+|   |   test_unified_result.py
+|   |   test_ux42_estados_visuales.py
+|   |   test_ux43_formularios_teclado.py
+|   |   test_ux44_detalle_anio_actual.py
+|   |   test_ux44_edad_linea_tiempo.py
+|   |   test_ux44_importacion_oficial.py
+|   |   test_ux44_referencia_pdf.py
+|   |   test_ux45_cierre_resultados_accesibilidad.py
+|   |   test_ux46a_redisenio_integral.py
+|   |   test_ux46b_paso1_datos_personales.py
+|   |   test_ux46b_revision2_privacidad.py
+|   |   test_ux46b_revision3_terminos_navegacion.py
+|   |   test_ux46c_cuotas.py
+|   |   test_ux46d_gestion_datos.py
+|   |   test_ux46d_historial.py
+|   |   test_ux46d_revision10_tablas_transversales.py
+|   |   test_ux46d_revision11_scrollbars_y_carga.py
+|   |   test_ux46d_revision12_scroll_global_y_vacio.py
+|   |   test_ux46d_revision13_selector_archivo.py
+|   |   test_ux46d_revision14_paso1_informacion_personal.py
+|   |   test_ux46d_revision15_campos_importacion_y_limpieza.py
+|   |   test_ux46d_revision16_flujo_paso3.py
+|   |   test_ux46d_revision17_auditoria_datos.py
+|   |   test_ux46d_revision18_procedencia_persistencia.py
+|   |   test_ux46d_revision19_sincronizacion_actual.py
+|   |   test_ux46d_revision20_vigencia_resumen.py
+|   |   test_ux46d_revision21_fecha_confiable.py
+|   |   test_ux46d_revision22_cierre_paso3.py
+|   |   test_ux46d_revision23_ficha_actualiza_cuotas.py
+|   |   test_ux46d_revision7_privacidad_consulta.py
+|   |   test_ux46d_revision8_tablas.py
+|   |   test_ux46d_revision9_reactividad_privacidad.py
+|   |   test_ux46e_almacenamiento_comentarios_js.py
+|   |   test_ux46e_auditoria_coherencia.py
+|   |   test_ux46e_estandar_runtime.py
+|   |   test_ux46e_preparacion_publica.py
+|   |   test_ux46e_proyeccion_salarial.py
+|   |   test_ux46e_r81_procedencia_editable.py
+|   |   test_ux46e_r8_cierre_funcional.py
+|   |   test_ux46e_r8_reconsentimiento_borrado.py
+|   |   test_ux46e_r91_candidato_cierre.py
+|   |   test_ux46e_renumeracion_documental.py
+|   |   test_ux46f_r11_bloqueo_documental_vista_principal.py
+|   |   test_ux46f_r1_consistencia_procedencia_adjuntos.py
+|   |   test_ux46f_r2_auditoria_paso4.py
+|   |   test_ux46g_r1_escenarios_retiro.py
+|   |   test_ux46h_r1_resultados_exportacion.py
+|   |   test_ux46i_r1_como_se_calcula.py
+|   |   test_ux4_remate_visual.py
+|   |   test_ver2_documentacion_vigente.py
+|   |   test_ver2_ledger_estructurado.py
+|   |   test_ver2_r1_reconciliacion_post_doc1.py
+|   |   test_ver2_r2_documentacion_viva_post_r1.py
+|   |   test_ver2_r3_decision_version_candidata_post_r2.py
+|   |   test_ver2_r4_promocion_g071_e01.py
+|   |   test_ver2_r5_estabilizacion_post_release.py
+|   |   test_ver2_version_revision_aware.py
+|   |   test_visual_identity_pre_r8.py
+|   |   test_visual_stabilization.py
+|   |
+|   +---validation_cases
+|   |       README.md
+|   |
+|   \---__pycache__
+|           test_accesibilidad_temas.cpython-314-pytest-9.1.1.pyc
+|           test_accesibilidad_temas.cpython-314.pyc
+|           test_accesibilidad_ux4.cpython-314-pytest-9.1.1.pyc
+|           test_accesibilidad_ux4.cpython-314.pyc
+|           test_accessibility_themes.cpython-314-pytest-9.1.1.pyc
+|           test_accessibility_themes.cpython-314.pyc
+|           test_accessibility_ux4.cpython-314-pytest-9.1.1.pyc
+|           test_accessibility_ux4.cpython-314.pyc
+|           test_comparator.cpython-314-pytest-9.1.1.pyc
+|           test_comparator.cpython-314.pyc
+|           test_dev2_centro_desarrollo.cpython-314-pytest-9.1.1.pyc
+|           test_dev2_centro_desarrollo.cpython-314.pyc
+|           test_dev2_r1_cierre_documental.cpython-314-pytest-9.1.1.pyc
+|           test_dev2_r1_cierre_documental.cpython-314.pyc
+|           test_dev2_r2_visor_diagnostico.cpython-314-pytest-9.1.1.pyc
+|           test_dev2_r2_visor_diagnostico.cpython-314.pyc
+|           test_dev2_r3_autodiagnostico.cpython-314-pytest-9.1.1.pyc
+|           test_dev2_r3_autodiagnostico.cpython-314.pyc
+|           test_dev2_r4_cierre_final.cpython-314-pytest-9.1.1.pyc
+|           test_dev2_r4_cierre_final.cpython-314.pyc
+|           test_dinero.cpython-314-pytest-9.1.1.pyc
+|           test_dinero.cpython-314.pyc
+|           test_doc1_r1_auditoria_markdown_post_mant1.cpython-314-pytest-9.1.1.pyc
+|           test_doc1_r1_auditoria_markdown_post_mant1.cpython-314.pyc
+|           test_estabilizacion_visual.cpython-314-pytest-9.1.1.pyc
+|           test_estabilizacion_visual.cpython-314.pyc
+|           test_gov12_versionado.cpython-314-pytest-9.1.1.pyc
+|           test_gov12_versionado.cpython-314.pyc
+|           test_gov13_documentacion.cpython-314-pytest-9.1.1.pyc
+|           test_gov13_documentacion.cpython-314.pyc
+|           test_gov13_documentacion_r2.cpython-314-pytest-9.1.1.pyc
+|           test_gov13_documentacion_r2.cpython-314.pyc
+|           test_gov13_documentacion_r3.cpython-314-pytest-9.1.1.pyc
+|           test_gov13_documentacion_r3.cpython-314.pyc
+|           test_gov13_documentacion_r4.cpython-314-pytest-9.1.1.pyc
+|           test_gov13_documentacion_r4.cpython-314.pyc
+|           test_gov14_observabilidad.cpython-314-pytest-9.1.1.pyc
+|           test_gov14_observabilidad.cpython-314.pyc
+|           test_gov14_observabilidad_integracion.cpython-314-pytest-9.1.1.pyc
+|           test_gov14_observabilidad_integracion.cpython-314.pyc
+|           test_gov15_cierre_seguridad_privacidad.cpython-314-pytest-9.1.1.pyc
+|           test_gov15_cierre_seguridad_privacidad.cpython-314.pyc
+|           test_gov15_modelo_amenazas.cpython-314-pytest-9.1.1.pyc
+|           test_gov15_modelo_amenazas.cpython-314.pyc
+|           test_gov15_procedimientos_privacidad.cpython-314-pytest-9.1.1.pyc
+|           test_gov15_procedimientos_privacidad.cpython-314.pyc
+|           test_gov16_controles_github.cpython-314-pytest-9.1.1.pyc
+|           test_gov16_controles_github.cpython-314.pyc
+|           test_gov17_licencia.cpython-314-pytest-9.1.1.pyc
+|           test_gov17_licencia.cpython-314.pyc
+|           test_gov18_cierre_gobierno.cpython-314-pytest-9.1.1.pyc
+|           test_gov18_cierre_gobierno.cpython-314.pyc
+|           test_gov_firma_git.cpython-314-pytest-9.1.1.pyc
+|           test_gov_firma_git.cpython-314.pyc
+|           test_identidad_interfaz.cpython-314-pytest-9.1.1.pyc
+|           test_identidad_interfaz.cpython-314.pyc
+|           test_identidad_publica_github_pre_r8.cpython-314-pytest-9.1.1.pyc
+|           test_identidad_publica_github_pre_r8.cpython-314.pyc
+|           test_identidad_visual_pre_r8.cpython-314-pytest-9.1.1.pyc
+|           test_identidad_visual_pre_r8.cpython-314.pyc
+|           test_indemnizacion_vejez.cpython-314-pytest-9.1.1.pyc
+|           test_indemnizacion_vejez.cpython-314.pyc
+|           test_linea_tiempo.cpython-314-pytest-9.1.1.pyc
+|           test_linea_tiempo.cpython-314.pyc
+|           test_mant1_r3_yaml_github_documentados.cpython-314-pytest-9.1.1.pyc
+|           test_mant1_r3_yaml_github_documentados.cpython-314.pyc
+|           test_mant1_r4_encabezados_operativos_limpios.cpython-314-pytest-9.1.1.pyc
+|           test_mant1_r4_encabezados_operativos_limpios.cpython-314.pyc
+|           test_mant1_r5a_comentarios_servicios_app.cpython-314-pytest-9.1.1.pyc
+|           test_mant1_r5a_comentarios_servicios_app.cpython-314.pyc
+|           test_mant1_r5b_comentarios_presentacion_app.cpython-314-pytest-9.1.1.pyc
+|           test_mant1_r5b_comentarios_presentacion_app.cpython-314.pyc
+|           test_mant1_r5c_comentarios_js_app.cpython-314-pytest-9.1.1.pyc
+|           test_mant1_r5c_comentarios_js_app.cpython-314.pyc
+|           test_mant1_r5d_politica_extensiones.cpython-314-pytest-9.1.1.pyc
+|           test_mant1_r5d_politica_extensiones.cpython-314.pyc
+|           test_mant1_r5e_nombres_carpetas.cpython-314-pytest-9.1.1.pyc
+|           test_mant1_r5e_nombres_carpetas.cpython-314.pyc
+|           test_mant1_r5f_nombres_archivos.cpython-314-pytest-9.1.1.pyc
+|           test_mant1_r5f_nombres_archivos.cpython-314.pyc
+|           test_mant1_r5g_documentacion.cpython-314-pytest-9.1.1.pyc
+|           test_mant1_r5g_documentacion.cpython-314.pyc
+|           test_mant1_r5h_auditoria_nombres_restantes.cpython-314-pytest-9.1.1.pyc
+|           test_mant1_r5h_auditoria_nombres_restantes.cpython-314.pyc
+|           test_mant1_r6_auditoria_funcional_post_renombres.cpython-314-pytest-9.1.1.pyc
+|           test_mant1_r6_auditoria_funcional_post_renombres.cpython-314.pyc
+|           test_mant1_r7_cierre_operativo_post_auditoria.cpython-314-pytest-9.1.1.pyc
+|           test_mant1_r7_cierre_operativo_post_auditoria.cpython-314.pyc
+|           test_mant1_scripts_hooks_documentados.cpython-314-pytest-9.1.1.pyc
+|           test_mant1_scripts_hooks_documentados.cpython-314.pyc
+|           test_mantenimiento_tecnico.cpython-314-pytest-9.1.1.pyc
+|           test_mantenimiento_tecnico.cpython-314.pyc
+|           test_mixto.cpython-314-pytest-9.1.1.pyc
+|           test_mixto.cpython-314.pyc
+|           test_mixto_prestaciones_cap.cpython-314-pytest-9.1.1.pyc
+|           test_mixto_prestaciones_cap.cpython-314.pyc
+|           test_mixto_results.cpython-314-pytest-9.1.1.pyc
+|           test_mixto_results.cpython-314.pyc
+|           test_modality_results.cpython-314-pytest-9.1.1.pyc
+|           test_modality_results.cpython-314.pyc
+|           test_money.cpython-314-pytest-9.1.1.pyc
+|           test_money.cpython-314.pyc
+|           test_nor1_repository_standards.cpython-314-pytest-9.1.1.pyc
+|           test_nor1_repository_standards.cpython-314.pyc
+|           test_plan1_documentacion_primaria.cpython-314-pytest-9.1.1.pyc
+|           test_plan1_documentacion_primaria.cpython-314.pyc
+|           test_plan1_documentacion_transversal.cpython-314-pytest-9.1.1.pyc
+|           test_plan1_documentacion_transversal.cpython-314.pyc
+|           test_plan1_gobierno_versionado_oficial.cpython-314-pytest-9.1.1.pyc
+|           test_plan1_gobierno_versionado_oficial.cpython-314.pyc
+|           test_plan1_guard_referencias_historicas.cpython-314-pytest-9.1.1.pyc
+|           test_plan1_guard_referencias_historicas.cpython-314.pyc
+|           test_plan1_licencia_privacidad_viva.cpython-314-pytest-9.1.1.pyc
+|           test_plan1_licencia_privacidad_viva.cpython-314.pyc
+|           test_plan1_r4_candidato_cierre.cpython-314-pytest-9.1.1.pyc
+|           test_plan1_r4_candidato_cierre.cpython-314.pyc
+|           test_plan1_saneamiento_metadata.cpython-314-pytest-9.1.1.pyc
+|           test_plan1_saneamiento_metadata.cpython-314.pyc
+|           test_plan1_terminologia_seguridad.cpython-314-pytest-9.1.1.pyc
+|           test_plan1_terminologia_seguridad.cpython-314.pyc
+|           test_plan1_versionado_oficial.cpython-314-pytest-9.1.1.pyc
+|           test_plan1_versionado_oficial.cpython-314.pyc
+|           test_prebeta_e2e_hardening.cpython-314-pytest-9.1.1.pyc
+|           test_prebeta_e2e_hardening.cpython-314.pyc
+|           test_precommit_guard.cpython-314-pytest-9.1.1.pyc
+|           test_precommit_guard.cpython-314.pyc
+|           test_pypdf_compatibilidad.cpython-314-pytest-9.1.1.pyc
+|           test_pypdf_compatibilidad.cpython-314.pyc
+|           test_regulatory_sources.cpython-314-pytest-9.1.1.pyc
+|           test_regulatory_sources.cpython-314.pyc
+|           test_responsive_ux3.cpython-314-pytest-9.1.1.pyc
+|           test_responsive_ux3.cpython-314.pyc
+|           test_resultado_unificado.cpython-314-pytest-9.1.1.pyc
+|           test_resultado_unificado.cpython-314.pyc
+|           test_results.cpython-314-pytest-9.1.1.pyc
+|           test_results.cpython-314.pyc
+|           test_retirement.cpython-314-pytest-9.1.1.pyc
+|           test_retirement.cpython-314.pyc
+|           test_salary_projection.cpython-314-pytest-9.1.1.pyc
+|           test_salary_projection.cpython-314.pyc
+|           test_sebd.cpython-314-pytest-9.1.1.pyc
+|           test_sebd.cpython-314.pyc
+|           test_sebd_modalidades.cpython-314-pytest-9.1.1.pyc
+|           test_sebd_modalidades.cpython-314.pyc
+|           test_sucgs.cpython-314-pytest-9.1.1.pyc
+|           test_sucgs.cpython-314.pyc
+|           test_sucgs_capa_solidaria.cpython-314-pytest-9.1.1.pyc
+|           test_sucgs_capa_solidaria.cpython-314.pyc
+|           test_sucgs_reemplazo.cpython-314-pytest-9.1.1.pyc
+|           test_sucgs_reemplazo.cpython-314.pyc
+|           test_sucgs_results.cpython-314-pytest-9.1.1.pyc
+|           test_sucgs_results.cpython-314.pyc
+|           test_timeline.cpython-314-pytest-9.1.1.pyc
+|           test_timeline.cpython-314.pyc
+|           test_traceability.cpython-314-pytest-9.1.1.pyc
+|           test_traceability.cpython-314.pyc
+|           test_unified_result.cpython-314-pytest-9.1.1.pyc
+|           test_unified_result.cpython-314.pyc
+|           test_ux42_estados_visuales.cpython-314-pytest-9.1.1.pyc
+|           test_ux42_estados_visuales.cpython-314.pyc
+|           test_ux43_formularios_teclado.cpython-314-pytest-9.1.1.pyc
+|           test_ux43_formularios_teclado.cpython-314.pyc
+|           test_ux44_detalle_anio_actual.cpython-314-pytest-9.1.1.pyc
+|           test_ux44_detalle_anio_actual.cpython-314.pyc
+|           test_ux44_edad_linea_tiempo.cpython-314-pytest-9.1.1.pyc
+|           test_ux44_edad_linea_tiempo.cpython-314.pyc
+|           test_ux44_importacion_oficial.cpython-314-pytest-9.1.1.pyc
+|           test_ux44_importacion_oficial.cpython-314.pyc
+|           test_ux44_referencia_pdf.cpython-314-pytest-9.1.1.pyc
+|           test_ux44_referencia_pdf.cpython-314.pyc
+|           test_ux45_cierre_resultados_accesibilidad.cpython-314-pytest-9.1.1.pyc
+|           test_ux45_cierre_resultados_accesibilidad.cpython-314.pyc
+|           test_ux46a_redisenio_integral.cpython-314-pytest-9.1.1.pyc
+|           test_ux46a_redisenio_integral.cpython-314.pyc
+|           test_ux46b_paso1_datos_personales.cpython-314-pytest-9.1.1.pyc
+|           test_ux46b_paso1_datos_personales.cpython-314.pyc
+|           test_ux46b_revision2_privacidad.cpython-314-pytest-9.1.1.pyc
+|           test_ux46b_revision2_privacidad.cpython-314.pyc
+|           test_ux46b_revision3_terminos_navegacion.cpython-314-pytest-9.1.1.pyc
+|           test_ux46b_revision3_terminos_navegacion.cpython-314.pyc
+|           test_ux46c_cuotas.cpython-314-pytest-9.1.1.pyc
+|           test_ux46c_cuotas.cpython-314.pyc
+|           test_ux46d_gestion_datos.cpython-314-pytest-9.1.1.pyc
+|           test_ux46d_gestion_datos.cpython-314.pyc
+|           test_ux46d_historial.cpython-314-pytest-9.1.1.pyc
+|           test_ux46d_historial.cpython-314.pyc
+|           test_ux46d_revision10_tablas_transversales.cpython-314-pytest-9.1.1.pyc
+|           test_ux46d_revision10_tablas_transversales.cpython-314.pyc
+|           test_ux46d_revision11_scrollbars_y_carga.cpython-314-pytest-9.1.1.pyc
+|           test_ux46d_revision11_scrollbars_y_carga.cpython-314.pyc
+|           test_ux46d_revision12_scroll_global_y_vacio.cpython-314-pytest-9.1.1.pyc
+|           test_ux46d_revision12_scroll_global_y_vacio.cpython-314.pyc
+|           test_ux46d_revision13_selector_archivo.cpython-314-pytest-9.1.1.pyc
+|           test_ux46d_revision13_selector_archivo.cpython-314.pyc
+|           test_ux46d_revision14_paso1_informacion_personal.cpython-314-pytest-9.1.1.pyc
+|           test_ux46d_revision14_paso1_informacion_personal.cpython-314.pyc
+|           test_ux46d_revision15_campos_importacion_y_limpieza.cpython-314-pytest-9.1.1.pyc
+|           test_ux46d_revision15_campos_importacion_y_limpieza.cpython-314.pyc
+|           test_ux46d_revision16_flujo_paso3.cpython-314-pytest-9.1.1.pyc
+|           test_ux46d_revision16_flujo_paso3.cpython-314.pyc
+|           test_ux46d_revision17_auditoria_datos.cpython-314-pytest-9.1.1.pyc
+|           test_ux46d_revision17_auditoria_datos.cpython-314.pyc
+|           test_ux46d_revision18_procedencia_persistencia.cpython-314-pytest-9.1.1.pyc
+|           test_ux46d_revision18_procedencia_persistencia.cpython-314.pyc
+|           test_ux46d_revision19_sincronizacion_actual.cpython-314-pytest-9.1.1.pyc
+|           test_ux46d_revision19_sincronizacion_actual.cpython-314.pyc
+|           test_ux46d_revision20_vigencia_resumen.cpython-314-pytest-9.1.1.pyc
+|           test_ux46d_revision20_vigencia_resumen.cpython-314.pyc
+|           test_ux46d_revision21_fecha_confiable.cpython-314-pytest-9.1.1.pyc
+|           test_ux46d_revision21_fecha_confiable.cpython-314.pyc
+|           test_ux46d_revision22_cierre_paso3.cpython-314-pytest-9.1.1.pyc
+|           test_ux46d_revision22_cierre_paso3.cpython-314.pyc
+|           test_ux46d_revision23_ficha_actualiza_cuotas.cpython-314-pytest-9.1.1.pyc
+|           test_ux46d_revision23_ficha_actualiza_cuotas.cpython-314.pyc
+|           test_ux46d_revision7_privacidad_consulta.cpython-314-pytest-9.1.1.pyc
+|           test_ux46d_revision7_privacidad_consulta.cpython-314.pyc
+|           test_ux46d_revision8_tablas.cpython-314-pytest-9.1.1.pyc
+|           test_ux46d_revision8_tablas.cpython-314.pyc
+|           test_ux46d_revision9_reactividad_privacidad.cpython-314-pytest-9.1.1.pyc
+|           test_ux46d_revision9_reactividad_privacidad.cpython-314.pyc
+|           test_ux46e_almacenamiento_comentarios_js.cpython-314-pytest-9.1.1.pyc
+|           test_ux46e_almacenamiento_comentarios_js.cpython-314.pyc
+|           test_ux46e_auditoria_coherencia.cpython-314-pytest-9.1.1.pyc
+|           test_ux46e_auditoria_coherencia.cpython-314.pyc
+|           test_ux46e_estandar_runtime.cpython-314-pytest-9.1.1.pyc
+|           test_ux46e_estandar_runtime.cpython-314.pyc
+|           test_ux46e_preparacion_publica.cpython-314-pytest-9.1.1.pyc
+|           test_ux46e_preparacion_publica.cpython-314.pyc
+|           test_ux46e_proyeccion_salarial.cpython-314-pytest-9.1.1.pyc
+|           test_ux46e_proyeccion_salarial.cpython-314.pyc
+|           test_ux46e_r81_procedencia_editable.cpython-314-pytest-9.1.1.pyc
+|           test_ux46e_r81_procedencia_editable.cpython-314.pyc
+|           test_ux46e_r8_cierre_funcional.cpython-314-pytest-9.1.1.pyc
+|           test_ux46e_r8_cierre_funcional.cpython-314.pyc
+|           test_ux46e_r8_reconsentimiento_borrado.cpython-314-pytest-9.1.1.pyc
+|           test_ux46e_r8_reconsentimiento_borrado.cpython-314.pyc
+|           test_ux46e_r91_candidato_cierre.cpython-314-pytest-9.1.1.pyc
+|           test_ux46e_r91_candidato_cierre.cpython-314.pyc
+|           test_ux46e_renumeracion_documental.cpython-314-pytest-9.1.1.pyc
+|           test_ux46e_renumeracion_documental.cpython-314.pyc
+|           test_ux46f_r11_bloqueo_documental_vista_principal.cpython-314-pytest-9.1.1.pyc
+|           test_ux46f_r11_bloqueo_documental_vista_principal.cpython-314.pyc
+|           test_ux46f_r1_consistencia_procedencia_adjuntos.cpython-314-pytest-9.1.1.pyc
+|           test_ux46f_r1_consistencia_procedencia_adjuntos.cpython-314.pyc
+|           test_ux46f_r2_auditoria_paso4.cpython-314-pytest-9.1.1.pyc
+|           test_ux46f_r2_auditoria_paso4.cpython-314.pyc
+|           test_ux46g_r1_escenarios_retiro.cpython-314-pytest-9.1.1.pyc
+|           test_ux46g_r1_escenarios_retiro.cpython-314.pyc
+|           test_ux46h_r1_resultados_exportacion.cpython-314-pytest-9.1.1.pyc
+|           test_ux46h_r1_resultados_exportacion.cpython-314.pyc
+|           test_ux46i_r1_como_se_calcula.cpython-314-pytest-9.1.1.pyc
+|           test_ux46i_r1_como_se_calcula.cpython-314.pyc
+|           test_ux4_remate_visual.cpython-314-pytest-9.1.1.pyc
+|           test_ux4_remate_visual.cpython-314.pyc
+|           test_ver2_documentacion_vigente.cpython-314-pytest-9.1.1.pyc
+|           test_ver2_documentacion_vigente.cpython-314.pyc
+|           test_ver2_ledger_estructurado.cpython-314-pytest-9.1.1.pyc
+|           test_ver2_ledger_estructurado.cpython-314.pyc
+|           test_ver2_r1_reconciliacion_post_doc1.cpython-314-pytest-9.1.1.pyc
+|           test_ver2_r1_reconciliacion_post_doc1.cpython-314.pyc
+|           test_ver2_r2_documentacion_viva_post_r1.cpython-314-pytest-9.1.1.pyc
+|           test_ver2_r2_documentacion_viva_post_r1.cpython-314.pyc
+|           test_ver2_r3_decision_version_candidata_post_r2.cpython-314-pytest-9.1.1.pyc
+|           test_ver2_r3_decision_version_candidata_post_r2.cpython-314.pyc
+|           test_ver2_r4_promocion_g071_e01.cpython-314-pytest-9.1.1.pyc
+|           test_ver2_r4_promocion_g071_e01.cpython-314.pyc
+|           test_ver2_r5_estabilizacion_post_release.cpython-314-pytest-9.1.1.pyc
+|           test_ver2_r5_estabilizacion_post_release.cpython-314.pyc
+|           test_ver2_version_revision_aware.cpython-314-pytest-9.1.1.pyc
+|           test_ver2_version_revision_aware.cpython-314.pyc
+|           test_visual_identity_pre_r8.cpython-314-pytest-9.1.1.pyc
+|           test_visual_identity_pre_r8.cpython-314.pyc
+|           test_visual_stabilization.cpython-314-pytest-9.1.1.pyc
+|           test_visual_stabilization.cpython-314.pyc
+|
+\---_entregas
+        main_log_antes_limpieza_dev2.txt
+        ramas_locales_antes_limpieza_dev2.txt
+        VER2_G071_R2_antes_anclas_historicas.patch
+        VER2_G071_R2_antes_anclas_historicas.status.txt
+        VER2_G071_R2_antes_anclas_suite_completa.patch
+        VER2_G071_R2_antes_anclas_suite_completa.status.txt
+        VER2_G071_R2_antes_cirugia.patch
+        VER2_G071_R2_antes_cirugia.status.txt
+        VER2_G071_R2_antes_consolidar_anclas.patch
+        VER2_G071_R2_antes_consolidar_anclas.status.txt
+        VER2_G071_R2_estado_verde_pre_limpieza.diffstat.txt
+        VER2_G071_R2_estado_verde_pre_limpieza.name-status.txt
+        VER2_G071_R2_estado_verde_pre_limpieza.patch
+        VER2_G071_R2_estado_verde_pre_limpieza.status.txt
+        VER2_G071_R2_final_completo_pre_commit.diffstat.txt
+        VER2_G071_R2_final_completo_pre_commit.name-status.txt
+        VER2_G071_R2_final_completo_pre_commit.patch
+        VER2_G071_R2_final_completo_pre_commit.status.txt
+        VER2_G071_R2_final_pre_commit.diffstat.txt
+        VER2_G071_R2_final_pre_commit.name-status.txt
+        VER2_G071_R2_final_pre_commit.patch
+        VER2_G071_R2_final_pre_commit.status.txt
+        VER2_G071_R2_post_consolidacion.status.txt
+        VER2_G071_R2_post_consolidacion_tracked.diffstat.txt
+        VER2_G071_R2_post_consolidacion_tracked.patch
+        VER2_G071_R2_untracked_pre_limpieza.txt
+        VER2_PR35_NETO_929628d.zip
+        VER2_PR35_NETO_929628d_R2.files.txt
+        VER2_PR35_NETO_929628d_R2.name-status.txt

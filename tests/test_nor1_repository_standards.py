@@ -22,5 +22,11 @@ class TestNOR1Standards(unittest.TestCase):
         for archivo in archivos:
             self.assertTrue((docs / archivo).exists())
 
+    def test_estructura_documental_estandar_existe(self):
+        docs = ROOT / "docs"
+        for carpeta in ["standards", "audits", "archive"]:
+            self.assertTrue((docs / carpeta).exists())
+
+
 if __name__ == "__main__":
     unittest.main()
