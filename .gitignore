@@ -82,5 +82,9 @@ Desktop.ini
 *.7z
 *.rar
 
+# Entregables y evidencias locales no versionadas
+_deliverables/
+_entregas/
+
 # Paquetes temporales de auditoría local
 _auditoria_repo_*/
