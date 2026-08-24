@@ -1,0 +1,998 @@
+# VER.2 R1 — Auditoría de reconciliación post-DOC.1 R1
+
+- Fecha local de generación: 2026-08-23T21:47:31
+- Rama: `ver/ver2-r1-reconciliacion-post-doc1`
+- HEAD: `d991890`
+- Commit base: `d991890 DOC.1 R1 — auditoría Markdown post-MANT.1 (#56)`
+- VERSION canónica actual: `0.0.26-beta`
+
+## 1. Objetivo
+
+Inventariar referencias relacionadas con VER.2, el candidato `0.0.71.01-beta`, el tag formal `v0.0.26-beta`, DOC.1 R1 y MANT.1 antes de modificar documentación o versionado.
+
+## 2. Alcance
+
+- Esta auditoría no modifica `VERSION`.
+- Esta auditoría no modifica `app/core/version.py`.
+- Esta auditoría no modifica `app/core/config.py`.
+- Esta auditoría no modifica `regulations/`, `data/` ni `_entregas/`.
+- Esta auditoría solo crea este documento de trabajo en `docs/`.
+
+## 3. Conteo por patrón
+
+| Patrón | Coincidencias |
+|---|---:|
+| `0.0.71.01-beta` | 100 |
+| `0.0.26-beta` | 375 |
+| `v0.0.26-beta` | 129 |
+| `VER.2` | 381 |
+| `versión candidata` | 51 |
+| `candidata vigente` | 15 |
+| `tag formal` | 63 |
+| `versión publicada` | 12 |
+| `revision-aware` | 139 |
+| `DOC.1 R1` | 72 |
+| `MANT.1` | 428 |
+
+## 4. Coincidencias detalladas
+
+### 4.x `0.0.71.01-beta`
+
+- `CHANGELOG.md:112` — - reserva `0.0.71.01-beta` para VER.2 G071/E01; G071 solo se consume después de ledger/validador, gate completo, PR/CI e integración;
+- `data/revision_ledger_pre_1_0.json:7` — "next_candidate": "0.0.71.01-beta",
+- `docs/AUDITORIA_VERSIONADO_PRE_1_0.md:187` — G071, E01 -> 0.0.71.01-beta
+- `docs/AUDITORIA_VERSIONADO_PRE_1_0.md:197` — G071 / E01 -> 0.0.71.01-beta
+- `docs/AUDITORIA_VERSIONADO_PRE_1_0.md:215` — - candidato `0.0.71.01-beta`;
+- `docs/CIERRE_DOCUMENTAL_MARKDOWN_DOC1_R1.md:44` — - `0.0.71.01-beta` permanece como candidato VER.2, no como versión publicada.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:676` — 0004: **Versión candidata de aplicación:** `0.0.71.01-beta` — VER.2 G071/E01
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:770` — 0004: **Versión candidata de aplicación:** `0.0.71.01-beta` — VER.2 G071/E01
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:777` — 0004: **Versión candidata de aplicación:** `0.0.71.01-beta` — VER.2 G071/E01
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:784` — 0004: **Versión candidata de aplicación:** `0.0.71.01-beta` — VER.2 G071/E01
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:920` — 0004: **Versión candidata de aplicación:** `0.0.71.01-beta` — VER.2 G071/E01
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1005` — 0004: **Versión candidata de aplicación:** `0.0.71.01-beta` — VER.2 G071/E01
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1012` — 0004: **Versión candidata de aplicación:** `0.0.71.01-beta` — VER.2 G071/E01
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1069` — 0006: **Versión candidata transversal VER.2:** `0.0.71.01-beta` — G071/E01
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1138` — 0075: G071 / E01 = 0.0.71.01-beta
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1162` — 0006: **Versión candidata transversal VER.2:** `0.0.71.01-beta` — G071/E01
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1169` — 0006: **Versión candidata transversal VER.2:** `0.0.71.01-beta` — G071/E01
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1209` — 0075: G071 / E01 = 0.0.71.01-beta
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1312` — 0004: **Versión candidata de aplicación:** `0.0.71.01-beta` — VER.2 G071/E01
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1406` — 0004: **Versión candidata de aplicación:** `0.0.71.01-beta` — VER.2 G071/E01
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1413` — 0004: **Versión candidata de aplicación:** `0.0.71.01-beta` — VER.2 G071/E01
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1420` — 0004: **Versión candidata de aplicación:** `0.0.71.01-beta` — VER.2 G071/E01
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1454` — 0111: - comprobar que `0.0.71.01-beta` siga identificado como candidato reservado mientras VER.2 no esté integrado;
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1463` — 0182: v0.0.71.01-beta    # candidato VER.2, solo si corresponde etiquetarlo tras cierre
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1470` — 0182: v0.0.71.01-beta    # candidato VER.2, solo si corresponde etiquetarlo tras cierre
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1502` — 0004: **Versión candidata:** `0.0.71.01-beta` — VER.2 G071/E01
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1596` — 0004: **Versión candidata:** `0.0.71.01-beta` — VER.2 G071/E01
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1603` — 0004: **Versión candidata:** `0.0.71.01-beta` — VER.2 G071/E01
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1610` — 0004: **Versión candidata:** `0.0.71.01-beta` — VER.2 G071/E01
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1710` — 0142: **VER.2:** bloque transversal activo. La base anterior al cambio contiene **70 estados aceptados (G001–G070)**. El candidato `0.0.71.01-beta` representa G071/E01 y solo se acepta después del gate completo, PR/CI e integración.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1716` — 0142: **VER.2:** bloque transversal activo. La base anterior al cambio contiene **70 estados aceptados (G001–G070)**. El candidato `0.0.71.01-beta` representa G071/E01 y solo se acepta después del gate completo, PR/CI e integración.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1722` — 0142: **VER.2:** bloque transversal activo. La base anterior al cambio contiene **70 estados aceptados (G001–G070)**. El candidato `0.0.71.01-beta` representa G071/E01 y solo se acepta después del gate completo, PR/CI e integración.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2117` — 0023: - **Versión candidata de VER.2:** `0.0.71.01-beta` — G071/E01; solo se considera aceptada después de ledger/validador, gate completo, PR/CI e integración.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2194` — 0023: - **Versión candidata de VER.2:** `0.0.71.01-beta` — G071/E01; solo se considera aceptada después de ledger/validador, gate completo, PR/CI e integración.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2200` — 0023: - **Versión candidata de VER.2:** `0.0.71.01-beta` — G071/E01; solo se considera aceptada después de ledger/validador, gate completo, PR/CI e integración.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2207` — 0023: - **Versión candidata de VER.2:** `0.0.71.01-beta` — G071/E01; solo se considera aceptada después de ledger/validador, gate completo, PR/CI e integración.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2214` — 0023: - **Versión candidata de VER.2:** `0.0.71.01-beta` — G071/E01; solo se considera aceptada después de ledger/validador, gate completo, PR/CI e integración.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2298` — 0135: La nueva familia beta usa `0.GG.RR.EE-beta`. El candidato actual de reconciliación es `0.0.71.01-beta` (G071/E01). Solo se convierte en estado aceptado si supera el ledger/validador, gate completo, PR/CI e integración; no se crean tags revision-aware retrospectivos para G001–G070.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2304` — 0135: La nueva familia beta usa `0.GG.RR.EE-beta`. El candidato actual de reconciliación es `0.0.71.01-beta` (G071/E01). Solo se convierte en estado aceptado si supera el ledger/validador, gate completo, PR/CI e integración; no se crean tags revision-aware retrospectivos para G001–G070.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2356` — 0016: VER.2 añade una segunda capa de auditoría: `docs/LEDGER_REVISIONES_PRE_1_0.md` y `data/revision_ledger_pre_1_0.json` reconstruyen los **estados aceptados** como G001–G070 sobre la base `7037addd44253e528c77460b678d2b3ccd540dd5`. Esos identificadores revision-aware no sustituyen versiones/tags históricos ni autorizan tags retroactivos. `0.0.71.01-beta` es únicamente el candidato de VER.2 mientras no complete gate, PR/CI e integración.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2438` — 0016: VER.2 añade una segunda capa de auditoría: `docs/LEDGER_REVISIONES_PRE_1_0.md` y `data/revision_ledger_pre_1_0.json` reconstruyen los **estados aceptados** como G001–G070 sobre la base `7037addd44253e528c77460b678d2b3ccd540dd5`. Esos identificadores revision-aware no sustituyen versiones/tags históricos ni autorizan tags retroactivos. `0.0.71.01-beta` es únicamente el candidato de VER.2 mientras no complete gate, PR/CI e integración.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2526` — 0172: 0.0.71.01-beta
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2542` — 0179: - no existe tag `v0.0.71.01-beta`;
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2549` — 0179: - no existe tag `v0.0.71.01-beta`;
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2558` — 0183: Si VER.2 se integra satisfactoriamente, `0.0.71.01-beta` pasa a ser el primer estado nuevo gobernado por la familia revision-aware. La creación de su tag, si corresponde al cierre, se realizará únicamente después de merge y revalidación.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2595` — 0009: | `0.0.71.01-beta` | Candidata vigente de VER.2; recibe correcciones sobre la rama de reconciliación hasta cerrar su gate |
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2666` — 0080: | `0.0.71.01-beta` | Candidata vigente de VER.2; Soportada durante la rama de reconciliación hasta cerrar su gate |
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2683` — 0009: | `0.0.71.01-beta` | Candidata vigente de VER.2; recibe correcciones sobre la rama de reconciliación hasta cerrar su gate |
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2690` — 0009: | `0.0.71.01-beta` | Candidata vigente de VER.2; recibe correcciones sobre la rama de reconciliación hasta cerrar su gate |
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2715` — 0080: | `0.0.71.01-beta` | Candidata vigente de VER.2; Soportada durante la rama de reconciliación hasta cerrar su gate |
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2721` — 0080: | `0.0.71.01-beta` | Candidata vigente de VER.2; Soportada durante la rama de reconciliación hasta cerrar su gate |
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2809` — 0077: G071 / E01 -> 0.0.71.01-beta
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2878` — 0077: G071 / E01 -> 0.0.71.01-beta
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2902` — 0143: G071 / E01 -> 0.0.71.01-beta
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2942` — 0187: v0.0.71.01-beta
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2950` — 0199: Los tags publicados son inmutables. No se crea `v0.0.71.01-beta` mientras VER.2 sea candidato/draft y no haya completado su gate post-integración.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:3785` — 0124: | G071 | `0.0.71.01-beta` | VER.2 R1 — reconciliación revision-aware | ledger + validador + gate completo + PR/CI verde + integración |
+- `docs/INDICE.md:4` — **Versión candidata de aplicación:** `0.0.71.01-beta` — VER.2 G071/E01
+- `docs/LEDGER_REVISIONES_PRE_1_0.md:16` — - `0.0.71.01-beta` sigue siendo candidato VER.2, no versión publicada.
+- `docs/LEDGER_REVISIONES_PRE_1_0.md:138` — | G071 | `0.0.71.01-beta` | VER.2 R1 — reconciliación revision-aware | ledger + validador + gate completo + PR/CI verde + integración |
+- `docs/LINEA_BASE_DOCUMENTAL_POST_MANT1_DOC1_R1.md:17` — - Estado de VER.2: reconciliación revision-aware pendiente; `0.0.71.01-beta` se conserva como candidato, no como versión publicada.
+- `docs/MATRIZ_DECISION_REVISIONES_VER2.md:17` — - `0.0.71.01-beta` se mantiene como candidato.
+- `docs/MATRIZ_TRAZABILIDAD.md:4` — **Versión candidata de aplicación:** `0.0.71.01-beta` — VER.2 G071/E01
+- `docs/PLAN_MAESTRO_HACIA_1_0.md:6` — **Versión candidata transversal VER.2:** `0.0.71.01-beta` — G071/E01
+- `docs/PLAN_MAESTRO_HACIA_1_0.md:93` — G071 / E01 = 0.0.71.01-beta
+- `docs/PROCESO_RELEASE.md:4` — **Versión candidata de aplicación:** `0.0.71.01-beta` — VER.2 G071/E01
+- `docs/PROCESO_RELEASE.md:21` — - El candidato `0.0.71.01-beta` no debe tratarse como publicado mientras no exista cierre formal de VER.2.
+- `docs/PROCESO_RELEASE.md:128` — - comprobar que `0.0.71.01-beta` siga identificado como candidato reservado mientras VER.2 no esté integrado;
+- `docs/PROCESO_RELEASE.md:199` — v0.0.71.01-beta    # candidato VER.2, solo si corresponde etiquetarlo tras cierre
+- `docs/ROADMAP.md:4` — **Versión candidata:** `0.0.71.01-beta` — VER.2 G071/E01
+- `docs/ROADMAP.md:20` — - `0.0.71.01-beta` continúa reservado como candidato de reconciliación VER.2; no es versión publicada ni tag formal.
+- `docs/ROADMAP.md:158` — **VER.2:** bloque transversal en reconciliación pendiente. La base anterior al cambio contiene **70 estados aceptados (G001–G070)**. El candidato `0.0.71.01-beta` representa G071/E01 y solo se acepta después del gate completo, PR/CI e integración.
+- `GOVERNANCE.md:19` — - `0.0.71.01-beta` sigue siendo candidato VER.2, no versión publicada.
+- `README.md:26` — - **Estado de VER.2:** reconciliación revision-aware pendiente. El candidato `0.0.71.01-beta` se conserva como candidato documental/contable, no como versión publicada ni tag formal.
+- `README.md:126` — La nueva familia beta usa `0.GG.RR.EE-beta`. El candidato actual de reconciliación es `0.0.71.01-beta` (G071/E01). Solo se convierte en estado aceptado si supera el ledger/validador, gate completo, PR/CI e integración; no se crean tags revision-aware retrospectivos para G001–G070.
+- `README.md:308` — - **Versión candidata de VER.2:** `0.0.71.01-beta` — ancla histórica de candidato revision-aware; no reemplaza `VERSION` ni crea tag formal.
+- `RELEASES.md:18` — - Candidato revision-aware VER.2: `0.0.71.01-beta`, pendiente y no publicado.
+- `RELEASES.md:33` — VER.2 añade una segunda capa de auditoría: `docs/LEDGER_REVISIONES_PRE_1_0.md` y `data/revision_ledger_pre_1_0.json` reconstruyen los **estados aceptados** como G001–G070 sobre la base `7037addd44253e528c77460b678d2b3ccd540dd5`. Esos identificadores revision-aware no sustituyen versiones/tags históricos ni autorizan tags retroactivos. `0.0.71.01-beta` es únicamente el candidato de VER.2 mientras no complete gate, PR/CI e integración.
+- `RELEASES.md:189` — 0.0.71.01-beta
+- `RELEASES.md:196` — - no existe tag `v0.0.71.01-beta`;
+- `RELEASES.md:200` — Si VER.2 se integra satisfactoriamente, `0.0.71.01-beta` pasa a ser el primer estado nuevo gobernado por la familia revision-aware. La creación de su tag, si corresponde al cierre, se realizará únicamente después de merge y revalidación.
+- `SECURITY.md:13` — - `0.0.71.01-beta` continúa como candidato VER.2 pendiente.
+- `SECURITY.md:24` — | `0.0.71.01-beta` | Candidata vigente de VER.2; recibe correcciones sobre la rama de reconciliación hasta cerrar su gate |
+- `SECURITY.md:95` — | `0.0.71.01-beta` | Candidata vigente de VER.2; Soportada durante la rama de reconciliación hasta cerrar su gate |
+- `tests/test_doc1_r1_auditoria_markdown_post_mant1.py:68` — assert "`0.0.71.01-beta` se conserva como candidato" in text
+- `tests/test_doc1_r1_auditoria_markdown_post_mant1.py:84` — assert "`0.0.71.01-beta` se conserva como candidato" in text
+- `tests/test_doc1_r1_auditoria_markdown_post_mant1.py:95` — assert "`0.0.71.01-beta` continúa como candidato VER.2 pendiente." in text
+- `tests/test_doc1_r1_auditoria_markdown_post_mant1.py:149` — assert "`0.0.71.01-beta` permanece como candidato VER.2" in text
+- `tests/test_ver2_documentacion_vigente.py:13` — VERSION_CANDIDATA = "0.0.71.01-beta"
+- `tests/test_ver2_ledger_estructurado.py:33` — self.assertEqual("0.0.71.01-beta", self.ledger["next_candidate"])
+- `tests/test_ver2_ledger_estructurado.py:47` — self.assertIn("`0.0.71.01-beta`", ledger_md)
+- `tests/test_ver2_version_revision_aware.py:25` — self.assertEqual("0.0.71.01-beta", construir_version_beta_revision(71, 1))
+- `tests/test_ver2_version_revision_aware.py:39` — self.assertEqual((71, 1), descomponer_version_beta_revision("0.0.71.01-beta"))
+- `tests/test_ver2_version_revision_aware.py:46` — self.assertTrue(version_valida("0.0.71.01-beta"))
+- `tests/test_ver2_version_revision_aware.py:94` — self.assertIn("`0.0.71.01-beta`", ledger)
+- `VERSIONING.md:19` — - `0.0.71.01-beta` se conserva como candidato de reconciliación VER.2, no como versión publicada.
+- `VERSIONING.md:94` — G071 / E01 -> 0.0.71.01-beta
+- `VERSIONING.md:160` — G071 / E01 -> 0.0.71.01-beta
+- `VERSIONING.md:204` — v0.0.71.01-beta
+- `VERSIONING.md:216` — Los tags publicados son inmutables. No se crea `v0.0.71.01-beta` mientras VER.2 sea candidato/draft y no haya completado su gate post-integración.
+
+### 4.x `0.0.26-beta`
+
+- `_entregas/main_log_antes_limpieza_dev2.txt:10` — b572796 (tag: v0.0.26-beta) fix(tests): eliminar SyntaxWarning antes de 0.0.26-beta (#24)
+- `_entregas/main_log_antes_limpieza_dev2.txt:11` — 497097f chore(plan): cerrar PLAN.1 en 0.0.26-beta (#23)
+- `_entregas/ramas_locales_antes_limpieza_dev2.txt:6` — fix/plan1-r4-syntaxwarning-pretag             d3436db [origin/fix/plan1-r4-syntaxwarning-pretag: gone] fix(tests): eliminar SyntaxWarning antes de 0.0.26-beta
+- `_entregas/ramas_locales_antes_limpieza_dev2.txt:8` — plan/alineacion-version-oficial-1x            7c50d98 [origin/plan/alineacion-version-oficial-1x: gone] chore(plan): cerrar PLAN.1 en 0.0.26-beta
+- `app/core/version_ledger.py:120` — if tags != {"from": "v0.0.1-beta", "to": "v0.0.26-beta"}:
+- `app/core/version_ledger.py:122` — "El rango de tags históricos inmutables debe permanecer v0.0.1-beta–v0.0.26-beta."
+- `CHANGELOG.md:104` — - conserva `VERSION` y `APP_VERSION` en `0.0.26-beta`, no crea tag y no modifica motores previsionales ni flujos públicos de cálculo;
+- `CHANGELOG.md:113` — - preserva sin mover ni recrear los tags `v0.0.1-beta`–`v0.0.26-beta` y prohíbe tags revision-aware retrospectivos para G001–G070;
+- `CHANGELOG.md:217` — - ADR-174/ADR-175, RF-366 a RF-374 y TR-022/TR-023 formalizan el contrato; se añaden 13 regresiones específicas y `VERSION` permanece en `0.0.26-beta`.
+- `CHANGELOG.md:230` — - ADR-172/ADR-173, RF-358 a RF-365 y TR-020/TR-021 formalizan el contrato auditado; se añaden 13 regresiones específicas y `VERSION` permanece en `0.0.26-beta`;
+- `CHANGELOG.md:236` — - actualizadas las dependencias directas `pypdf` de `6.15.0` a `6.16.1` y `uvicorn` de `0.52.1` a `0.52.3`, manteniendo `VERSION = 0.0.26-beta`;
+- `CHANGELOG.md:251` — - confirmado durante la revisión manual que el estado global **Analizando documento…** funciona correctamente para Mi Retiro Seguro y Ficha Digital; `VERSION` permanece en `0.0.26-beta`.
+- `CHANGELOG.md:264` — - `VERSION` permanece en `0.0.26-beta`; R1 no modifica motores previsionales, normativa, parsers ni dependencias.
+- `CHANGELOG.md:268` — - reconciliado el estado documental después de publicar el tag firmado `v0.0.26-beta`;
+- `CHANGELOG.md:273` — ## [0.0.26-beta] — 2026-08-20
+- `CHANGELOG.md:290` — - R4.1 promovió `VERSION` a `0.0.26-beta`, actualizó la documentación viva y cerró localmente con **720 pruebas en `OK`**, compilación Python, sintaxis JavaScript y `git diff --check` limpio;
+- `CHANGELOG.md:294` — - tag formal asociado: `v0.0.26-beta`; objeto tag `bfbb746b177ebcc577f7241fef4d6914f713739a`; target `b572796d68ff6fd91ce9944a0c6d1cf7d45753a0`;
+- `CONTRIBUTING.md:13` — - `VERSION` permanece en `0.0.26-beta`.
+- `data/revision_ledger_pre_1_0.json:10` — "to": "v0.0.26-beta"
+- `data/revision_ledger_pre_1_0.json:72` — {"global_revision":60,"block":"PLAN.1","ordinal":10,"revision_aware":"0.0.60.10-beta","state":"R4.2 — higiene y cierre formal","anchor":"v0.0.26-beta","evidence":"PR #24; 720 sin SyntaxWarning"},
+- `data/revision_ledger_pre_1_0.json:73` — {"global_revision":61,"block":"UX.4.6f","ordinal":1,"revision_aware":"0.0.61.01-beta","state":"R1/R1.1 — aceptación conjunta","anchor":"0.0.26-beta","evidence":"PR #28; 743 pruebas"},
+- `data/revision_ledger_pre_1_0.json:74` — {"global_revision":62,"block":"UX.4.6f","ordinal":2,"revision_aware":"0.0.62.02-beta","state":"mantenimiento dependencias post-R1","anchor":"0.0.26-beta","evidence":"PR #29; 743 pruebas"},
+- `data/revision_ledger_pre_1_0.json:75` — {"global_revision":63,"block":"UX.4.6f","ordinal":3,"revision_aware":"0.0.63.03-beta","state":"R2 — auditoría lógica/matemática","anchor":"0.0.26-beta","evidence":"PR #30; 756 pruebas"},
+- `data/revision_ledger_pre_1_0.json:76` — {"global_revision":64,"block":"UX.4.6f","ordinal":4,"revision_aware":"0.0.64.04-beta","state":"hardening pre-commit y cierre documental","anchor":"0.0.26-beta","evidence":"PR #31; 762 pruebas"},
+- `data/revision_ledger_pre_1_0.json:77` — {"global_revision":65,"block":"UX.4.6g","ordinal":1,"revision_aware":"0.0.65.01-beta","state":"R1 — cierre Paso 5","anchor":"0.0.26-beta","evidence":"PR #32; 784 pruebas"},
+- `data/revision_ledger_pre_1_0.json:78` — {"global_revision":66,"block":"UX.4.6h","ordinal":1,"revision_aware":"0.0.66.01-beta","state":"R1.1 — corrección aceptada","anchor":"0.0.26-beta","evidence":"R1 fallida excluida"},
+- `data/revision_ledger_pre_1_0.json:79` — {"global_revision":67,"block":"UX.4.6h","ordinal":2,"revision_aware":"0.0.67.02-beta","state":"R1.2 — claridad/jerarquía","anchor":"0.0.26-beta","evidence":"revisión aceptada"},
+- `data/revision_ledger_pre_1_0.json:80` — {"global_revision":68,"block":"UX.4.6h","ordinal":3,"revision_aware":"0.0.68.03-beta","state":"R1.3 — informe A4 y cierre","anchor":"0.0.26-beta","evidence":"PR #33; 812 pruebas"},
+- `data/revision_ledger_pre_1_0.json:81` — {"global_revision":69,"block":"UX.4.6i","ordinal":1,"revision_aware":"0.0.69.01-beta","state":"R1 — guía pública de cálculo","anchor":"0.0.26-beta","evidence":"826 pruebas"},
+- `data/revision_ledger_pre_1_0.json:82` — {"global_revision":70,"block":"UX.4.6i","ordinal":2,"revision_aware":"0.0.70.02-beta","state":"R1.4 — cierre Cómo se calcula","anchor":"0.0.26-beta","evidence":"PR #34; 841 pruebas"}
+- `docs/ADR_179_VERSIONADO_REVISION_AWARE.md:9` — La familia histórica `0.0.N-beta` permitió identificar hitos formales, pero después de `v0.0.26-beta` varias fases completas continuaron sobre el mismo valor de `VERSION`. Un primer intento de reconciliación pretendió avanzar a `0.0.30-beta`; una auditoría posterior calculó 163 revisiones al usar en algunos tramos commits `feat/test/docs` y checkpoints todavía no aceptados como sustitutos de revisiones reales.
+- `docs/ADR_179_VERSIONADO_REVISION_AWARE.md:40` — Los identificadores revision-aware de G001–G057 son de auditoría. Los tags legacy `v0.0.1-beta`–`v0.0.26-beta` permanecen firmados e inmutables; no se crean tags revision-aware retrospectivos.
+- `docs/ADR_179_VERSIONADO_REVISION_AWARE.md:68` — Descartada porque vuelve a ocultar las revisiones aceptadas entre hitos y no resuelve la trazabilidad posterior a `v0.0.26-beta`.
+- `docs/ARQUITECTURA.md:4` — **Versión de aplicación revisada:** `0.0.26-beta`
+- `docs/ARQUITECTURA.md:371` — La ruta usa `MRP_DEV_MODE` solo como indicador de activación diagnóstica, conserva `0.0.26-beta` como versión visible, no añade rutas públicas nuevas, no modifica motores previsionales, no crea tags y no adelanta el cierre transversal de VER.2.
+- `docs/AUDITORIA_CALCULOS.md:4` — **Versión de aplicación revisada:** `0.0.26-beta`
+- `docs/AUDITORIA_CARPETAS_R5E.md:4` — **Aplicación revisada:** `0.0.26-beta`
+- `docs/AUDITORIA_ESTRUCTURA_ARCHIVOS_R5D.md:4` — **Aplicación revisada:** `0.0.26-beta`
+- `docs/AUDITORIA_GITHUB.md:4` — **Versión de aplicación revisada:** `0.0.26-beta`
+- `docs/AUDITORIA_PLAN1_R4_2026-08-20.md:3` — **Estado:** Cerrada — PLAN.1 completado en `0.0.26-beta`
+- `docs/AUDITORIA_PLAN1_R4_2026-08-20.md:4` — **Versión candidata:** `0.0.26-beta`
+- `docs/AUDITORIA_PLAN1_R4_2026-08-20.md:52` — VERSION = 0.0.26-beta
+- `docs/AUDITORIA_PLAN1_R4_2026-08-20.md:57` — `v0.0.26-beta` tampoco se crea en R4.1. Un tag publicado antes de PR y CI violaría el proceso de release vigente.
+- `docs/AUDITORIA_PLAN1_R4_2026-08-20.md:99` — - se creó y publicó el tag anotado y firmado `v0.0.26-beta`;
+- `docs/AUDITORIA_VER2_SEGUNDA_PASADA.md:17` — - los tags históricos `v0.0.1-beta`–`v0.0.26-beta` permanecen inmutables.
+- `docs/AUDITORIA_VER2_SEGUNDA_PASADA.md:56` — ## 5. Inconsistencia detectada después de `0.0.26-beta`
+- `docs/AUDITORIA_VER2_SEGUNDA_PASADA.md:89` — R4.1 promueve el candidato `0.0.26-beta` con 720 pruebas. R4.2 no introduce una nueva revisión funcional de PLAN.1: es el gate remoto/higiene pre-tag que corrige el `SyntaxWarning`, repite las mismas 720 pruebas y permite crear el tag firmado. PR #25 es reconciliación documental post-tag y no suma revisión.
+- `docs/AUDITORIA_VERSIONADO_PRE_1_0.md:216` — - rango de tags legacy inmutables `v0.0.1-beta`–`v0.0.26-beta`;
+- `docs/CIERRE_DOCUMENTAL_MARKDOWN_DOC1_R1.md:42` — - `VERSION` permanece en `0.0.26-beta`.
+- `docs/CIERRE_DOCUMENTAL_MARKDOWN_DOC1_R1.md:43` — - `v0.0.26-beta` permanece como último tag formal vigente.
+- `docs/CIERRE_DOCUMENTAL_MARKDOWN_DOC1_R1.md:72` — - `VERSION` permanezca en `0.0.26-beta`;
+- `docs/CIERRE_DOCUMENTAL_MARKDOWN_DOC1_R1.md:74` — - `SECURITY.md` no clasifique `0.0.26-beta` como candidata VER.2;
+- `docs/COMO_SE_CALCULA.md:4` — **Versión de aplicación:** `0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:368` — 0004: **Versión de aplicación revisada:** `0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:462` — 0004: **Versión de aplicación revisada:** `0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:534` — 0353: La ruta usa `MRP_DEV_MODE` solo como indicador de activación diagnóstica, conserva `0.0.26-beta` como versión visible, no añade rutas públicas nuevas, no modifica motores previsionales, no crea tags y no adelanta el cierre transversal de VER.2.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:550` — 0004: **Versión de aplicación revisada:** `0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:644` — 0004: **Versión de aplicación revisada:** `0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:677` — 0005: **Último tag formal legacy:** `v0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:771` — 0005: **Último tag formal legacy:** `v0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:778` — 0005: **Último tag formal legacy:** `v0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:785` — 0005: **Último tag formal legacy:** `v0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:792` — 0005: **Último tag formal legacy:** `v0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:858` — 0187: - La familia `0.0.N-beta` permanece como línea legacy histórica hasta `v0.0.26-beta`.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:859` — 0188: - **Versión candidata de aplicación:** `0.0.26-beta` — referencia legacy preservada para las regresiones históricas de PLAN.1.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:865` — 0187: - La familia `0.0.N-beta` permanece como línea legacy histórica hasta `v0.0.26-beta`.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:866` — 0188: - **Versión candidata de aplicación:** `0.0.26-beta` — referencia legacy preservada para las regresiones históricas de PLAN.1.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:921` — 0005: **Último tag formal legacy:** `v0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1006` — 0005: **Último tag formal legacy:** `v0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1013` — 0005: **Último tag formal legacy:** `v0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1019` — 0005: **Último tag formal legacy:** `v0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1068` — 0005: **Cierre histórico de PLAN.1:** `0.0.26-beta` / `v0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1161` — 0005: **Cierre histórico de PLAN.1:** `0.0.26-beta` / `v0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1168` — 0005: **Cierre histórico de PLAN.1:** `0.0.26-beta` / `v0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1225` — 0105: **Estado de PLAN.1:** cerrado. R4.2 integró PR #23 y PR #24, superó los checks remotos, revalidó `main` con **720 pruebas en `OK`** sin `SyntaxWarning` y publicó el tag firmado `v0.0.26-beta` (`bfbb746b177ebcc577f7241fef4d6914f713739a` → `b572796d68ff6fd91ce9944a0c6d1cf7d45753a0`).
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1233` — 0112: - **R4.1:** candidato local `0.0.26-beta`;
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1281` — 0334: - R4.1 — candidato local `0.0.26-beta`.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1282` — 0335: - R4.2 integró el cierre de PLAN.1 mediante PR protegido y preservó `v0.0.26-beta`.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1283` — 0336: - R4.2 — PR #23/#24 preservan la integración y saneamiento final de PLAN.1 antes del tag `v0.0.26-beta`.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1288` — 0334: - R4.1 — candidato local `0.0.26-beta`.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1289` — 0335: - R4.2 integró el cierre de PLAN.1 mediante PR protegido y preservó `v0.0.26-beta`.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1290` — 0336: - R4.2 — PR #23/#24 preservan la integración y saneamiento final de PLAN.1 antes del tag `v0.0.26-beta`.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1295` — 0334: - R4.1 — candidato local `0.0.26-beta`.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1296` — 0335: - R4.2 integró el cierre de PLAN.1 mediante PR protegido y preservó `v0.0.26-beta`.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1297` — 0336: - R4.2 — PR #23/#24 preservan la integración y saneamiento final de PLAN.1 antes del tag `v0.0.26-beta`.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1314` — 0006: **Último tag formal legacy:** `v0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1408` — 0006: **Último tag formal legacy:** `v0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1415` — 0006: **Último tag formal legacy:** `v0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1422` — 0006: **Último tag formal legacy:** `v0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1462` — 0181: v0.0.26-beta       # último tag legacy histórico
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1469` — 0181: v0.0.26-beta       # último tag legacy histórico
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1486` — 0264: - La política de tags conserva la inmutabilidad de `v0.0.25-beta` y `v0.0.26-beta`.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1504` — 0006: **Último tag formal legacy:** `v0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1598` — 0006: **Último tag formal legacy:** `v0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1605` — 0006: **Último tag formal legacy:** `v0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1612` — 0006: **Último tag formal legacy:** `v0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1618` — 0006: **Último tag formal legacy:** `v0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1676` — 0113:   - [x] R4.2 — higiene post-merge y cierre pre-tag, G060; tag `v0.0.26-beta`.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1702` — 0140: **PLAN.1:** cerrado formalmente en `0.0.26-beta` con **720 pruebas en `OK`** y tag firmado `v0.0.26-beta`. La segunda auditoría reconoce diez estados aceptados G051–G060 dentro de su evolución.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1708` — 0140: **PLAN.1:** cerrado formalmente en `0.0.26-beta` con **720 pruebas en `OK`** y tag firmado `v0.0.26-beta`. La segunda auditoría reconoce diez estados aceptados G051–G060 dentro de su evolución.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1714` — 0140: **PLAN.1:** cerrado formalmente en `0.0.26-beta` con **720 pruebas en `OK`** y tag firmado `v0.0.26-beta`. La segunda auditoría reconoce diez estados aceptados G051–G060 dentro de su evolución.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1748` — 0004: **Versión candidata revisada:** `0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1842` — 0004: **Versión candidata revisada:** `0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2119` — 0025: - **Última versión formal legacy etiquetada:** `0.0.26-beta` — tag firmado e inmutable `v0.0.26-beta`.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2123` — 0029: - **PLAN.1:** cerrado en el esquema legacy `0.0.26-beta`; PR #23 y PR #24 integrados, **720 pruebas en `OK`** en el gate final y tag firmado `v0.0.26-beta` publicado.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2202` — 0025: - **Última versión formal legacy etiquetada:** `0.0.26-beta` — tag firmado e inmutable `v0.0.26-beta`.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2209` — 0025: - **Última versión formal legacy etiquetada:** `0.0.26-beta` — tag firmado e inmutable `v0.0.26-beta`.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2216` — 0025: - **Última versión formal legacy etiquetada:** `0.0.26-beta` — tag firmado e inmutable `v0.0.26-beta`.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2224` — 0029: - **PLAN.1:** cerrado en el esquema legacy `0.0.26-beta`; PR #23 y PR #24 integrados, **720 pruebas en `OK`** en el gate final y tag firmado `v0.0.26-beta` publicado.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2230` — 0029: - **PLAN.1:** cerrado en el esquema legacy `0.0.26-beta`; PR #23 y PR #24 integrados, **720 pruebas en `OK`** en el gate final y tag firmado `v0.0.26-beta` publicado.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2288` — 0131: `0.0.22-beta` fue la primera versión formal adoptada bajo la política de GOV.1.2; `0.0.23-beta` cerró GOV.1.3; `0.0.24-beta` cerró integralmente GOV.1; `0.0.25-beta` cerró UX.4.6e; y `0.0.26-beta` cerró PLAN.1. Sus tags publicados permanecen firmados e inmutables.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2290` — 0133: Después de `v0.0.26-beta`, UX.4.6f–UX.4.6i continuaron históricamente sobre ese mismo valor de `VERSION`. VER.2 reconstruye todo el tramo sin inventar tags: el último estado aceptado de la base `7037addd` es **G070/E02**, cierre de UX.4.6i.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2294` — 0131: `0.0.22-beta` fue la primera versión formal adoptada bajo la política de GOV.1.2; `0.0.23-beta` cerró GOV.1.3; `0.0.24-beta` cerró integralmente GOV.1; `0.0.25-beta` cerró UX.4.6e; y `0.0.26-beta` cerró PLAN.1. Sus tags publicados permanecen firmados e inmutables.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2296` — 0133: Después de `v0.0.26-beta`, UX.4.6f–UX.4.6i continuaron históricamente sobre ese mismo valor de `VERSION`. VER.2 reconstruye todo el tramo sin inventar tags: el último estado aceptado de la base `7037addd` es **G070/E02**, cierre de UX.4.6i.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2302` — 0133: Después de `v0.0.26-beta`, UX.4.6f–UX.4.6i continuaron históricamente sobre ese mismo valor de `VERSION`. VER.2 reconstruye todo el tramo sin inventar tags: el último estado aceptado de la base `7037addd` es **G070/E02**, cierre de UX.4.6i.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2322` — 0309: - **Versión candidata de VER.2:** `0.0.26-beta` — referencia legacy preservada para las pruebas históricas previas a la reconciliación revision-aware.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2328` — 0309: - **Versión candidata de VER.2:** `0.0.26-beta` — referencia legacy preservada para las pruebas históricas previas a la reconciliación revision-aware.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2446` — 0135: ### `0.0.26-beta` — 2026-08-20 — cierre formal de PLAN.1
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2454` — 0143: - R4.1 promovió `VERSION`/`APP_VERSION` a `0.0.26-beta` y cerró localmente con **720 pruebas**;
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2462` — 0150: - tag formal: `v0.0.26-beta`;
+- Coincidencias adicionales omitidas en esta vista: 255
+
+### 4.x `v0.0.26-beta`
+
+- `_entregas/main_log_antes_limpieza_dev2.txt:10` — b572796 (tag: v0.0.26-beta) fix(tests): eliminar SyntaxWarning antes de 0.0.26-beta (#24)
+- `app/core/version_ledger.py:120` — if tags != {"from": "v0.0.1-beta", "to": "v0.0.26-beta"}:
+- `app/core/version_ledger.py:122` — "El rango de tags históricos inmutables debe permanecer v0.0.1-beta–v0.0.26-beta."
+- `CHANGELOG.md:113` — - preserva sin mover ni recrear los tags `v0.0.1-beta`–`v0.0.26-beta` y prohíbe tags revision-aware retrospectivos para G001–G070;
+- `CHANGELOG.md:268` — - reconciliado el estado documental después de publicar el tag firmado `v0.0.26-beta`;
+- `CHANGELOG.md:294` — - tag formal asociado: `v0.0.26-beta`; objeto tag `bfbb746b177ebcc577f7241fef4d6914f713739a`; target `b572796d68ff6fd91ce9944a0c6d1cf7d45753a0`;
+- `data/revision_ledger_pre_1_0.json:10` — "to": "v0.0.26-beta"
+- `data/revision_ledger_pre_1_0.json:72` — {"global_revision":60,"block":"PLAN.1","ordinal":10,"revision_aware":"0.0.60.10-beta","state":"R4.2 — higiene y cierre formal","anchor":"v0.0.26-beta","evidence":"PR #24; 720 sin SyntaxWarning"},
+- `docs/ADR_179_VERSIONADO_REVISION_AWARE.md:9` — La familia histórica `0.0.N-beta` permitió identificar hitos formales, pero después de `v0.0.26-beta` varias fases completas continuaron sobre el mismo valor de `VERSION`. Un primer intento de reconciliación pretendió avanzar a `0.0.30-beta`; una auditoría posterior calculó 163 revisiones al usar en algunos tramos commits `feat/test/docs` y checkpoints todavía no aceptados como sustitutos de revisiones reales.
+- `docs/ADR_179_VERSIONADO_REVISION_AWARE.md:40` — Los identificadores revision-aware de G001–G057 son de auditoría. Los tags legacy `v0.0.1-beta`–`v0.0.26-beta` permanecen firmados e inmutables; no se crean tags revision-aware retrospectivos.
+- `docs/ADR_179_VERSIONADO_REVISION_AWARE.md:68` — Descartada porque vuelve a ocultar las revisiones aceptadas entre hitos y no resuelve la trazabilidad posterior a `v0.0.26-beta`.
+- `docs/AUDITORIA_PLAN1_R4_2026-08-20.md:57` — `v0.0.26-beta` tampoco se crea en R4.1. Un tag publicado antes de PR y CI violaría el proceso de release vigente.
+- `docs/AUDITORIA_PLAN1_R4_2026-08-20.md:99` — - se creó y publicó el tag anotado y firmado `v0.0.26-beta`;
+- `docs/AUDITORIA_VER2_SEGUNDA_PASADA.md:17` — - los tags históricos `v0.0.1-beta`–`v0.0.26-beta` permanecen inmutables.
+- `docs/AUDITORIA_VERSIONADO_PRE_1_0.md:216` — - rango de tags legacy inmutables `v0.0.1-beta`–`v0.0.26-beta`;
+- `docs/CIERRE_DOCUMENTAL_MARKDOWN_DOC1_R1.md:43` — - `v0.0.26-beta` permanece como último tag formal vigente.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:677` — 0005: **Último tag formal legacy:** `v0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:771` — 0005: **Último tag formal legacy:** `v0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:778` — 0005: **Último tag formal legacy:** `v0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:785` — 0005: **Último tag formal legacy:** `v0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:792` — 0005: **Último tag formal legacy:** `v0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:858` — 0187: - La familia `0.0.N-beta` permanece como línea legacy histórica hasta `v0.0.26-beta`.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:865` — 0187: - La familia `0.0.N-beta` permanece como línea legacy histórica hasta `v0.0.26-beta`.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:921` — 0005: **Último tag formal legacy:** `v0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1006` — 0005: **Último tag formal legacy:** `v0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1013` — 0005: **Último tag formal legacy:** `v0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1019` — 0005: **Último tag formal legacy:** `v0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1068` — 0005: **Cierre histórico de PLAN.1:** `0.0.26-beta` / `v0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1161` — 0005: **Cierre histórico de PLAN.1:** `0.0.26-beta` / `v0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1168` — 0005: **Cierre histórico de PLAN.1:** `0.0.26-beta` / `v0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1225` — 0105: **Estado de PLAN.1:** cerrado. R4.2 integró PR #23 y PR #24, superó los checks remotos, revalidó `main` con **720 pruebas en `OK`** sin `SyntaxWarning` y publicó el tag firmado `v0.0.26-beta` (`bfbb746b177ebcc577f7241fef4d6914f713739a` → `b572796d68ff6fd91ce9944a0c6d1cf7d45753a0`).
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1282` — 0335: - R4.2 integró el cierre de PLAN.1 mediante PR protegido y preservó `v0.0.26-beta`.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1283` — 0336: - R4.2 — PR #23/#24 preservan la integración y saneamiento final de PLAN.1 antes del tag `v0.0.26-beta`.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1289` — 0335: - R4.2 integró el cierre de PLAN.1 mediante PR protegido y preservó `v0.0.26-beta`.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1290` — 0336: - R4.2 — PR #23/#24 preservan la integración y saneamiento final de PLAN.1 antes del tag `v0.0.26-beta`.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1296` — 0335: - R4.2 integró el cierre de PLAN.1 mediante PR protegido y preservó `v0.0.26-beta`.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1297` — 0336: - R4.2 — PR #23/#24 preservan la integración y saneamiento final de PLAN.1 antes del tag `v0.0.26-beta`.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1314` — 0006: **Último tag formal legacy:** `v0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1408` — 0006: **Último tag formal legacy:** `v0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1415` — 0006: **Último tag formal legacy:** `v0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1422` — 0006: **Último tag formal legacy:** `v0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1462` — 0181: v0.0.26-beta       # último tag legacy histórico
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1469` — 0181: v0.0.26-beta       # último tag legacy histórico
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1486` — 0264: - La política de tags conserva la inmutabilidad de `v0.0.25-beta` y `v0.0.26-beta`.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1504` — 0006: **Último tag formal legacy:** `v0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1598` — 0006: **Último tag formal legacy:** `v0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1605` — 0006: **Último tag formal legacy:** `v0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1612` — 0006: **Último tag formal legacy:** `v0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1618` — 0006: **Último tag formal legacy:** `v0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1676` — 0113:   - [x] R4.2 — higiene post-merge y cierre pre-tag, G060; tag `v0.0.26-beta`.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1702` — 0140: **PLAN.1:** cerrado formalmente en `0.0.26-beta` con **720 pruebas en `OK`** y tag firmado `v0.0.26-beta`. La segunda auditoría reconoce diez estados aceptados G051–G060 dentro de su evolución.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1708` — 0140: **PLAN.1:** cerrado formalmente en `0.0.26-beta` con **720 pruebas en `OK`** y tag firmado `v0.0.26-beta`. La segunda auditoría reconoce diez estados aceptados G051–G060 dentro de su evolución.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1714` — 0140: **PLAN.1:** cerrado formalmente en `0.0.26-beta` con **720 pruebas en `OK`** y tag firmado `v0.0.26-beta`. La segunda auditoría reconoce diez estados aceptados G051–G060 dentro de su evolución.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2119` — 0025: - **Última versión formal legacy etiquetada:** `0.0.26-beta` — tag firmado e inmutable `v0.0.26-beta`.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2123` — 0029: - **PLAN.1:** cerrado en el esquema legacy `0.0.26-beta`; PR #23 y PR #24 integrados, **720 pruebas en `OK`** en el gate final y tag firmado `v0.0.26-beta` publicado.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2202` — 0025: - **Última versión formal legacy etiquetada:** `0.0.26-beta` — tag firmado e inmutable `v0.0.26-beta`.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2209` — 0025: - **Última versión formal legacy etiquetada:** `0.0.26-beta` — tag firmado e inmutable `v0.0.26-beta`.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2216` — 0025: - **Última versión formal legacy etiquetada:** `0.0.26-beta` — tag firmado e inmutable `v0.0.26-beta`.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2224` — 0029: - **PLAN.1:** cerrado en el esquema legacy `0.0.26-beta`; PR #23 y PR #24 integrados, **720 pruebas en `OK`** en el gate final y tag firmado `v0.0.26-beta` publicado.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2230` — 0029: - **PLAN.1:** cerrado en el esquema legacy `0.0.26-beta`; PR #23 y PR #24 integrados, **720 pruebas en `OK`** en el gate final y tag firmado `v0.0.26-beta` publicado.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2290` — 0133: Después de `v0.0.26-beta`, UX.4.6f–UX.4.6i continuaron históricamente sobre ese mismo valor de `VERSION`. VER.2 reconstruye todo el tramo sin inventar tags: el último estado aceptado de la base `7037addd` es **G070/E02**, cierre de UX.4.6i.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2296` — 0133: Después de `v0.0.26-beta`, UX.4.6f–UX.4.6i continuaron históricamente sobre ese mismo valor de `VERSION`. VER.2 reconstruye todo el tramo sin inventar tags: el último estado aceptado de la base `7037addd` es **G070/E02**, cierre de UX.4.6i.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2302` — 0133: Después de `v0.0.26-beta`, UX.4.6f–UX.4.6i continuaron históricamente sobre ese mismo valor de `VERSION`. VER.2 reconstruye todo el tramo sin inventar tags: el último estado aceptado de la base `7037addd` es **G070/E02**, cierre de UX.4.6i.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2462` — 0150: - tag formal: `v0.0.26-beta`;
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2470` — 0154: `v0.0.26-beta` es inmutable y no debe moverse ni recrearse.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2476` — 0154: `v0.0.26-beta` es inmutable y no debe moverse ni recrearse.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2480` — 0158: ## 5. Estado posterior a `v0.0.26-beta` y candidato VER.2
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2486` — 0158: ## 5. Estado posterior a `v0.0.26-beta` y candidato VER.2
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2492` — 0158: ## 5. Estado posterior a `v0.0.26-beta` y candidato VER.2
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2543` — 0180: - `v0.0.26-beta` continúa siendo el último tag formal legacy;
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2550` — 0180: - `v0.0.26-beta` continúa siendo el último tag formal legacy;
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2568` — 0201: Desde entonces los tags publicados son inmutables. `v0.0.24-beta`, `v0.0.25-beta` y `v0.0.26-beta` fueron creados posteriormente bajo la política formal y elevan el inventario a 26 tags firmados legacy/retrospectivos.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2574` — 0201: Desde entonces los tags publicados son inmutables. `v0.0.24-beta`, `v0.0.25-beta` y `v0.0.26-beta` fueron creados posteriormente bajo la política formal y elevan el inventario a 26 tags firmados legacy/retrospectivos.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2785` — 0053: Esta familia sigue siendo válida para leer y auditar estados históricos. Los tags `v0.0.1-beta` a `v0.0.26-beta` no se renombran ni se mueven.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2854` — 0053: Esta familia sigue siendo válida para leer y auditar estados históricos. Los tags `v0.0.1-beta` a `v0.0.26-beta` no se renombran ni se mueven.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2860` — 0053: Esta familia sigue siendo válida para leer y auditar estados históricos. Los tags `v0.0.1-beta` a `v0.0.26-beta` no se renombran ni se mueven.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2926` — 0175: v0.0.26-beta
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:3561` — 0010: Los identificadores revision-aware son una reconstrucción de auditoría. **No existieron históricamente y no autorizan mover, recrear ni renombrar los tags `v0.0.1-beta`–`v0.0.26-beta`.**
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:3639` — 0088: | G060 | `0.0.60.10-beta` | PLAN.1 R4.2 — higiene y cierre formal | `v0.0.26-beta` | PR #24 / 720 sin `SyntaxWarning` |
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:3659` — 0010: Los identificadores revision-aware son una reconstrucción de auditoría. **No existieron históricamente y no autorizan mover, recrear ni renombrar los tags `v0.0.1-beta`–`v0.0.26-beta`.**
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:3665` — 0010: Los identificadores revision-aware son una reconstrucción de auditoría. **No existieron históricamente y no autorizan mover, recrear ni renombrar los tags `v0.0.1-beta`–`v0.0.26-beta`.**
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:3689` — 0088: | G060 | `0.0.60.10-beta` | PLAN.1 R4.2 — higiene y cierre formal | `v0.0.26-beta` | PR #24 / 720 sin `SyntaxWarning` |
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:3696` — 0088: | G060 | `0.0.60.10-beta` | PLAN.1 R4.2 — higiene y cierre formal | `v0.0.26-beta` | PR #24 / 720 sin `SyntaxWarning` |
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:3703` — 0088: | G060 | `0.0.60.10-beta` | PLAN.1 R4.2 — higiene y cierre formal | `v0.0.26-beta` | PR #24 / 720 sin `SyntaxWarning` |
+- `docs/INDICE.md:5` — **Último tag formal legacy:** `v0.0.26-beta`
+- `docs/INDICE.md:187` — - La familia `0.0.N-beta` permanece como línea legacy histórica hasta `v0.0.26-beta`.
+- `docs/LEDGER_REVISIONES_PRE_1_0.md:24` — Los identificadores revision-aware son una reconstrucción de auditoría. **No existieron históricamente y no autorizan mover, recrear ni renombrar los tags `v0.0.1-beta`–`v0.0.26-beta`.**
+- `docs/LEDGER_REVISIONES_PRE_1_0.md:102` — | G060 | `0.0.60.10-beta` | PLAN.1 R4.2 — higiene y cierre formal | `v0.0.26-beta` | PR #24 / 720 sin `SyntaxWarning` |
+- `docs/LINEA_BASE_DOCUMENTAL_POST_MANT1_DOC1_R1.md:18` — - Tag formal vigente: `v0.0.26-beta`.
+- `docs/MATRIZ_TRAZABILIDAD.md:5` — **Último tag formal legacy:** `v0.0.26-beta`
+- `docs/PLAN_MAESTRO_HACIA_1_0.md:5` — **Cierre histórico de PLAN.1:** `0.0.26-beta` / `v0.0.26-beta`
+- `docs/PLAN_MAESTRO_HACIA_1_0.md:19` — - `v0.0.26-beta` sigue siendo el tag formal vigente.
+- `docs/PLAN_MAESTRO_HACIA_1_0.md:123` — **Estado de PLAN.1:** cerrado. R4.2 integró PR #23 y PR #24, superó los checks remotos, revalidó `main` con **720 pruebas en `OK`** sin `SyntaxWarning` y publicó el tag firmado `v0.0.26-beta` (`bfbb746b177ebcc577f7241fef4d6914f713739a` → `b572796d68ff6fd91ce9944a0c6d1cf7d45753a0`).
+- `docs/PLAN_MAESTRO_HACIA_1_0.md:355` — - R4.2 integró el cierre de PLAN.1 mediante PR protegido y preservó `v0.0.26-beta`.
+- `docs/PLAN_MAESTRO_HACIA_1_0.md:356` — - R4.2 — PR #23/#24 preservan la integración y saneamiento final de PLAN.1 antes del tag `v0.0.26-beta`.
+- `docs/PROCESO_RELEASE.md:6` — **Último tag formal legacy:** `v0.0.26-beta`
+- `docs/PROCESO_RELEASE.md:22` — - El último tag formal vigente sigue siendo `v0.0.26-beta`.
+- `docs/PROCESO_RELEASE.md:198` — v0.0.26-beta       # último tag legacy histórico
+- `docs/PROCESO_RELEASE.md:281` — - La política de tags conserva la inmutabilidad de `v0.0.25-beta` y `v0.0.26-beta`.
+- `docs/ROADMAP.md:6` — **Último tag formal legacy:** `v0.0.26-beta`
+- `docs/ROADMAP.md:19` — - `v0.0.26-beta` continúa siendo el tag formal vigente.
+- `docs/ROADMAP.md:129` — - [x] R4.2 — higiene post-merge y cierre pre-tag, G060; tag `v0.0.26-beta`.
+- `docs/ROADMAP.md:156` — **PLAN.1:** cerrado formalmente en `0.0.26-beta` con **720 pruebas en `OK`** y tag firmado `v0.0.26-beta`. La segunda auditoría reconoce diez estados aceptados G051–G060 dentro de su evolución.
+- `docs/ROADMAP.md:293` — - R4.2 — PR #23/#24 preservan el cierre de PLAN.1 y el tag `v0.0.26-beta`.
+- `docs/VALIDACION.md:331` — Se creó y publicó el tag anotado y firmado `v0.0.26-beta`. Objeto tag: `bfbb746b177ebcc577f7241fef4d6914f713739a`. Target: `b572796d68ff6fd91ce9944a0c6d1cf7d45753a0`. La firma SSH fue verificada con la clave autorizada del mantenedor. PLAN.1 queda cerrado; esta reconciliación documental posterior no mueve el tag ni cambia `VERSION`.
+- `GOVERNANCE.md:18` — - `v0.0.26-beta` sigue siendo el último tag formal.
+- `README.md:27` — - **Última versión formal legacy etiquetada:** `0.0.26-beta` — tag firmado e inmutable `v0.0.26-beta`.
+- `README.md:124` — Después de `v0.0.26-beta`, UX.4.6f–UX.4.6i continuaron históricamente sobre ese mismo valor de `VERSION`. VER.2 reconstruye todo el tramo sin inventar tags: el último estado aceptado de la base `7037addd` es **G070/E02**, cierre de UX.4.6i.
+- `README.md:310` — - tag firmado `v0.0.26-beta` publicado.
+- `RELEASES.md:12` — Después de `v0.0.26-beta`, el repositorio integró trabajo funcional, técnico y documental sin publicar un nuevo tag formal.
+- `RELEASES.md:16` — - Último tag formal: `v0.0.26-beta`.
+- `RELEASES.md:167` — - tag formal: `v0.0.26-beta`;
+- `RELEASES.md:171` — `v0.0.26-beta` es inmutable y no debe moverse ni recrearse.
+- `RELEASES.md:175` — ## 5. Estado posterior a `v0.0.26-beta` y candidato VER.2
+- `RELEASES.md:197` — - `v0.0.26-beta` continúa siendo el último tag formal legacy;
+- `RELEASES.md:218` — Desde entonces los tags publicados son inmutables. `v0.0.24-beta`, `v0.0.25-beta` y `v0.0.26-beta` fueron creados posteriormente bajo la política formal y elevan el inventario a 26 tags firmados legacy/retrospectivos.
+- `RELEASES.md:246` — - PLAN.1 preserva evidencia del Pull Request #23 y del cierre posterior con `v0.0.26-beta`.
+- `SECURITY.md:12` — - `v0.0.26-beta` continúa como último tag formal.
+- `tests/test_plan1_r4_candidato_cierre.py:32` — self.assertIn("tag firmado `v0.0.26-beta` publicado", texto)
+- `tests/test_plan1_r4_candidato_cierre.py:52` — self.assertIn("tag formal asociado: `v0.0.26-beta`", texto)
+- Coincidencias adicionales omitidas en esta vista: 9
+
+### 4.x `VER.2`
+
+- `_entregas/main_log_antes_limpieza_dev2.txt:1` — b225206 (HEAD -> main, origin/main, origin/HEAD) Reconcilia versionado VER.2 revision-aware (#36)
+- `_entregas/ramas_locales_antes_limpieza_dev2.txt:7` — * main                                          b225206 [origin/main] Reconcilia versionado VER.2 revision-aware (#36)
+- `_entregas/ramas_locales_antes_limpieza_dev2.txt:14` — work/ver2-g071-local-r2                       6aad2b9 [origin/work/ver2-g071-local-r2] Reconcilia versionado VER.2 revision-aware
+- `app/core/version.py:7` — La historia conserva la familia legacy ``0.0.N-beta``. VER.2 incorpora una
+- `app/core/version_ledger.py:1` — """Carga y valida el ledger revision-aware materializado por VER.2.
+- `CHANGELOG.md:42` — - no cambia `VERSION`, `APP_VERSION`, motores previsionales, normativa, contratos JSON, ledger VER.2 ni SEC.2.
+- `CHANGELOG.md:78` — - no cambia `VERSION`, `APP_VERSION`, motores previsionales, normativa ni ledger VER.2;
+- `CHANGELOG.md:105` — - deja VER.2 como siguiente cierre transversal de versionado y documentación revision-aware.
+- `CHANGELOG.md:107` — ### VER.2 — reconciliación revision-aware pre-1.0
+- `CHANGELOG.md:112` — - reserva `0.0.71.01-beta` para VER.2 G071/E01; G071 solo se consume después de ledger/validador, gate completo, PR/CI e integración;
+- `CHANGELOG.md:119` — - DEV.2 queda cerrado como bloque funcional independiente antes del cierre final de VER.2, sin consumir promoción revision-aware ni cambiar VERSION, APP_VERSION o tags.
+- `CONTRIBUTING.md:14` — - VER.2 permanece como reconciliación/candidato pendiente, no como versión publicada.
+- `docs/ADR_179_VERSIONADO_REVISION_AWARE.md:38` — La base `7037addd44253e528c77460b678d2b3ccd540dd5` queda auditada en **G057**. VER.2 R1 reserva **G058/E01**, es decir `0.0.58.01-beta`, y solo lo consume después del gate completo e integración.
+- `docs/ADR_179_VERSIONADO_REVISION_AWARE.md:61` — - DEV.2 puede cerrarse como bloque funcional independiente antes del cierre final de VER.2, siempre que no promueva versión revision-aware, no cree tag y documente la separación entre avance funcional y cierre contable;
+- `docs/ADR_179_VERSIONADO_REVISION_AWARE.md:90` — - PR #35 de VER.2.
+- `docs/ARQUITECTURA.md:371` — La ruta usa `MRP_DEV_MODE` solo como indicador de activación diagnóstica, conserva `0.0.26-beta` como versión visible, no añade rutas públicas nuevas, no modifica motores previsionales, no crea tags y no adelanta el cierre transversal de VER.2.
+- `docs/AUDITORIA_MARKDOWN_POST_MANT1_DOC1_R1.md:63` — | `docs_vigente` | `docs/AUDITORIA_VER2_CONTEO_PROVISIONAL.md` | # VER.2 — Conteo de segunda pasada | VER\.2, UX\.4\.6e, UX\.4\.6f, UX\.4\.6g, UX\.4\.6h, UX\.4\.6i, pendiente, Pendiente |
+- `docs/AUDITORIA_MARKDOWN_POST_MANT1_DOC1_R1.md:64` — | `docs_vigente` | `docs/AUDITORIA_VER2_SEGUNDA_PASADA.md` | # VER.2 — Segunda pasada de auditoría cruzada | VER\.2, R6, R7, 0\.0\.26-beta, UX\.4\.6e, UX\.4\.6f, UX\.4\.6g, UX\.4\.6h, UX\.4\.6i, pendiente |
+- `docs/AUDITORIA_MARKDOWN_POST_MANT1_DOC1_R1.md:84` — | `docs_vigente` | `docs/MATRIZ_DECISION_REVISIONES_VER2.md` | # VER.2 — Matriz de decisión de revisiones aceptadas | VER\.2, R6, R7, UX\.4\.6e, UX\.4\.6f, UX\.4\.6g, UX\.4\.6h, UX\.4\.6i, pendiente, Pendiente |
+- `docs/AUDITORIA_VER2_CONTEO_PROVISIONAL.md:1` — # VER.2 — Conteo de segunda pasada
+- `docs/AUDITORIA_VER2_CONTEO_PROVISIONAL.md:23` — El último estado aceptado antes de VER.2 es:
+- `docs/AUDITORIA_VER2_CONTEO_PROVISIONAL.md:108` — ## 6. Consecuencia para VER.2
+- `docs/AUDITORIA_VER2_CONTEO_PROVISIONAL.md:110` — Si el ledger estructurado, su validador, las regresiones y el gate completo no revelan otra contradicción, el cierre real de VER.2 consumirá:
+- `docs/AUDITORIA_VER2_SEGUNDA_PASADA.md:1` — # VER.2 — Segunda pasada de auditoría cruzada
+- `docs/AUDITORIA_VER2_SEGUNDA_PASADA.md:10` — La primera pasada de VER.2 reconstruyó un ledger G001–G057 y reservó G058 para el cierre de VER.2. La segunda revisión detectó que esa cifra todavía mezcla criterios contables distintos: en algunos bloques se cuentan revisiones internas aceptadas, en otros se cuenta únicamente el cierre del bloque y en al menos un caso se cuenta además un cierre documental/hardening posterior a un cierre funcional ya aceptado.
+- `docs/AUDITORIA_VERSIONADO_PRE_1_0.md:4` — **Bloque:** VER.2 — reconciliación de revisiones pre-1.0
+- `docs/AUDITORIA_VERSIONADO_PRE_1_0.md:7` — **Estado:** auditoría contable cerrada en G070; materialización técnica y gate de VER.2 en curso
+- `docs/AUDITORIA_VERSIONADO_PRE_1_0.md:21` — La primera pasada de VER.2 corrigió ese exceso pero comprimió demasiado el historial y propuso G057. Una segunda corrección provisional llevó a G060. Ambos conteos quedaron superados al aplicar de manera uniforme la misma regla a mantenimiento técnico, seguridad, gobierno, dependencias, checkpoints y cierres post-tag.
+- `docs/AUDITORIA_VERSIONADO_PRE_1_0.md:23` — El resultado de la segunda pasada es **G070 como último estado aceptado antes de VER.2**.
+- `docs/AUDITORIA_VERSIONADO_PRE_1_0.md:194` — La base `7037addd` corresponde conceptualmente a G070/E02. VER.2 R1 usa como candidato:
+- `docs/AUDITORIA_VERSIONADO_PRE_1_0.md:200` — Un intento fallido de VER.2 no convierte G071 en estado aceptado. La aceptación exige ledger estructurado válido, gate completo, PR/CI e integración.
+- `docs/AUDITORIA_VERSIONADO_PRE_1_0.md:204` — VER.2 materializa la reconstrucción en:
+- `docs/AUDITORIA_VERSIONADO_PRE_1_0.md:232` — ## 9. Criterio de cierre de VER.2
+- `docs/CIERRE_DOCUMENTAL_MARKDOWN_DOC1_R1.md:36` — - candidato VER.2 no publicado;
+- `docs/CIERRE_DOCUMENTAL_MARKDOWN_DOC1_R1.md:44` — - `0.0.71.01-beta` permanece como candidato VER.2, no como versión publicada.
+- `docs/CIERRE_DOCUMENTAL_MARKDOWN_DOC1_R1.md:73` — - `README.md` no promueva VER.2 como versión publicada;
+- `docs/CIERRE_DOCUMENTAL_MARKDOWN_DOC1_R1.md:74` — - `SECURITY.md` no clasifique `0.0.26-beta` como candidata VER.2;
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:52` — 0038: - no cambia `VERSION`, `APP_VERSION`, motores previsionales, normativa, contratos JSON, ledger VER.2 ni SEC.2.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:88` — 0074: - no cambia `VERSION`, `APP_VERSION`, motores previsionales, normativa ni ledger VER.2;
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:152` — 0038: - no cambia `VERSION`, `APP_VERSION`, motores previsionales, normativa, contratos JSON, ledger VER.2 ni SEC.2.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:158` — 0038: - no cambia `VERSION`, `APP_VERSION`, motores previsionales, normativa, contratos JSON, ledger VER.2 ni SEC.2.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:224` — 0074: - no cambia `VERSION`, `APP_VERSION`, motores previsionales, normativa ni ledger VER.2;
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:534` — 0353: La ruta usa `MRP_DEV_MODE` solo como indicador de activación diagnóstica, conserva `0.0.26-beta` como versión visible, no añade rutas públicas nuevas, no modifica motores previsionales, no crea tags y no adelanta el cierre transversal de VER.2.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:676` — 0004: **Versión candidata de aplicación:** `0.0.71.01-beta` — VER.2 G071/E01
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:678` — 0006: **Última actualización transversal:** VER.2 — segunda pasada contable y materialización del ledger — 2026-08-22
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:697` — 0025: - `AUDITORIA_VERSIONADO_PRE_1_0.md` -> AUDITORIA_VERSIONADO_PRE_1_0.md — auditoría del historial, criterio contable y exclusiones de VER.2.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:700` — 0028: - `AUDITORIA_VER2_CONTEO_PROVISIONAL.md` -> AUDITORIA_VER2_CONTEO_PROVISIONAL.md — cierre del conteo de segunda pasada en G070 antes de VER.2.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:770` — 0004: **Versión candidata de aplicación:** `0.0.71.01-beta` — VER.2 G071/E01
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:772` — 0006: **Última actualización transversal:** VER.2 — segunda pasada contable y materialización del ledger — 2026-08-22
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:777` — 0004: **Versión candidata de aplicación:** `0.0.71.01-beta` — VER.2 G071/E01
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:779` — 0006: **Última actualización transversal:** VER.2 — segunda pasada contable y materialización del ledger — 2026-08-22
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:784` — 0004: **Versión candidata de aplicación:** `0.0.71.01-beta` — VER.2 G071/E01
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:786` — 0006: **Última actualización transversal:** VER.2 — segunda pasada contable y materialización del ledger — 2026-08-22
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:793` — 0006: **Última actualización transversal:** VER.2 — segunda pasada contable y materialización del ledger — 2026-08-22
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:803` — 0025: - `AUDITORIA_VERSIONADO_PRE_1_0.md` -> AUDITORIA_VERSIONADO_PRE_1_0.md — auditoría del historial, criterio contable y exclusiones de VER.2.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:810` — 0025: - `AUDITORIA_VERSIONADO_PRE_1_0.md` -> AUDITORIA_VERSIONADO_PRE_1_0.md — auditoría del historial, criterio contable y exclusiones de VER.2.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:818` — 0028: - `AUDITORIA_VER2_CONTEO_PROVISIONAL.md` -> AUDITORIA_VER2_CONTEO_PROVISIONAL.md — cierre del conteo de segunda pasada en G070 antes de VER.2.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:834` — 0117: - `../tests/test_ver2_documentacion_vigente.py` -> ../tests/test_ver2_documentacion_vigente.py — coherencia de superficies vigentes durante VER.2.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:842` — 0159: - `AUDITORIA_VERSIONADO_PRE_1_0.md` -> AUDITORIA_VERSIONADO_PRE_1_0.md — reconciliación VER.2.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:850` — 0183: ## Compatibilidad histórica preservada por VER.2
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:920` — 0004: **Versión candidata de aplicación:** `0.0.71.01-beta` — VER.2 G071/E01
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:923` — 0007: **Revisión transversal:** VER.2 — 2026-08-21
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:970` — 0054: | TR-027 | La beta revision-aware cuenta estados aceptados, preserva tags legacy y mantiene ledger continuo sin convertir commits/candidatos en revisiones | N/A — gobierno/versionado | ADR-179 | `VERSION`, `VERSIONING.md`, `app/core/version.py`, `docs/AUDITORIA_VERSIONADO_PRE_1_0.md`, `docs/LEDGER_REVISIONES_PRE_1_0.md` | `tests/test_ver2_version_revision_aware.py`, `tests/test_ver2_documentacion_vigente.py` | Candidato VER.2 G071/E01 |
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:990` — 0074: Los estados `Candidato` deben promoverse a `Verificado` únicamente después del gate y cierre que corresponda. VER.2 debe actualizar TR-027 al integrar G071.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:994` — 0078: ## Anclas históricas preservadas por VER.2
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:997` — 0081: - VER.2 añade TR-027 sin eliminar la evidencia de GOV.1.3 R4 ni la matriz previa.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1005` — 0004: **Versión candidata de aplicación:** `0.0.71.01-beta` — VER.2 G071/E01
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1012` — 0004: **Versión candidata de aplicación:** `0.0.71.01-beta` — VER.2 G071/E01
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1015` — 0007: **Revisión transversal:** VER.2 — 2026-08-21
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1021` — 0007: **Revisión transversal:** VER.2 — 2026-08-21
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1029` — 0054: | TR-027 | La beta revision-aware cuenta estados aceptados, preserva tags legacy y mantiene ledger continuo sin convertir commits/candidatos en revisiones | N/A — gobierno/versionado | ADR-179 | `VERSION`, `VERSIONING.md`, `app/core/version.py`, `docs/AUDITORIA_VERSIONADO_PRE_1_0.md`, `docs/LEDGER_REVISIONES_PRE_1_0.md` | `tests/test_ver2_version_revision_aware.py`, `tests/test_ver2_documentacion_vigente.py` | Candidato VER.2 G071/E01 |
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1037` — 0074: Los estados `Candidato` deben promoverse a `Verificado` únicamente después del gate y cierre que corresponda. VER.2 debe actualizar TR-027 al integrar G071.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1045` — 0078: ## Anclas históricas preservadas por VER.2
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1053` — 0081: - VER.2 añade TR-027 sin eliminar la evidencia de GOV.1.3 R4 ni la matriz previa.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1069` — 0006: **Versión candidata transversal VER.2:** `0.0.71.01-beta` — G071/E01
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1077` — 0014: PLAN.1 adoptó originalmente la familia beta legacy `0.0.N-beta`. VER.2, ejecutado después de UX.4.6i, conserva esa familia como historia publicada y adopta para **estados nuevos** el formato revision-aware:
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1124` — 0061: ## 3. Prerrequisito transversal VER.2
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1126` — 0063: VER.2 — Reconciliación revision-aware del historial pre-1.0 — **no es un bloque 15**. Es una corrección de gobierno necesaria antes de continuar el bloque 6, DEV.2.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1152` — 0089: Mientras VER.2 permanezca abierto, **DEV.2 es el siguiente bloque funcional, no el bloque funcional iniciado**.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1162` — 0006: **Versión candidata transversal VER.2:** `0.0.71.01-beta` — G071/E01
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1169` — 0006: **Versión candidata transversal VER.2:** `0.0.71.01-beta` — G071/E01
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1177` — 0014: PLAN.1 adoptó originalmente la familia beta legacy `0.0.N-beta`. VER.2, ejecutado después de UX.4.6i, conserva esa familia como historia publicada y adopta para **estados nuevos** el formato revision-aware:
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1187` — 0061: ## 3. Prerrequisito transversal VER.2
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1193` — 0061: ## 3. Prerrequisito transversal VER.2
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1195` — 0063: VER.2 — Reconciliación revision-aware del historial pre-1.0 — **no es un bloque 15**. Es una corrección de gobierno necesaria antes de continuar el bloque 6, DEV.2.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1199` — 0061: ## 3. Prerrequisito transversal VER.2
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1201` — 0063: VER.2 — Reconciliación revision-aware del historial pre-1.0 — **no es un bloque 15**. Es una corrección de gobierno necesaria antes de continuar el bloque 6, DEV.2.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1217` — 0089: Mientras VER.2 permanezca abierto, **DEV.2 es el siguiente bloque funcional, no el bloque funcional iniciado**.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1249` — 0166: No existe una sección, gate ni artefacto independiente que sustente una una revisión intermedia no demostrada entre UX.4.6i R1 y R1.2; VER.2 corrige las referencias agregadas que la incluyeron por error.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1257` — 0172: **Estado:** siguiente bloque funcional; pendiente de inicio hasta cerrar VER.2.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1265` — 0327: VER.2 no invalida ese cierre: corrige únicamente la granularidad y trazabilidad de la etapa beta posterior.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1273` — 0331: ## Compatibilidad histórica preservada por VER.2
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1312` — 0004: **Versión candidata de aplicación:** `0.0.71.01-beta` — VER.2 G071/E01
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1313` — 0005: **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1317` — 0009: **Revisión transversal:** VER.2 — versionado revision-aware — 2026-08-22
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1332` — 0024: Los estados beta nuevos posteriores a VER.2 usan:
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1406` — 0004: **Versión candidata de aplicación:** `0.0.71.01-beta` — VER.2 G071/E01
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1407` — 0005: **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1413` — 0004: **Versión candidata de aplicación:** `0.0.71.01-beta` — VER.2 G071/E01
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1414` — 0005: **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1420` — 0004: **Versión candidata de aplicación:** `0.0.71.01-beta` — VER.2 G071/E01
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1421` — 0005: **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1430` — 0009: **Revisión transversal:** VER.2 — versionado revision-aware — 2026-08-22
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1438` — 0024: Los estados beta nuevos posteriores a VER.2 usan:
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1454` — 0111: - comprobar que `0.0.71.01-beta` siga identificado como candidato reservado mientras VER.2 no esté integrado;
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1463` — 0182: v0.0.71.01-beta    # candidato VER.2, solo si corresponde etiquetarlo tras cierre
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1470` — 0182: v0.0.71.01-beta    # candidato VER.2, solo si corresponde etiquetarlo tras cierre
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1478` — 0261: ## Compatibilidad histórica preservada por VER.2
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1502` — 0004: **Versión candidata:** `0.0.71.01-beta` — VER.2 G071/E01
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1503` — 0005: **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1510` — 0012: VER.2 es un bloque transversal de reconciliación y **no añade un bloque 15** al plan maestro de producto. DEV.2 ya quedó cerrado documentalmente en R4. MANT.1 se trata como checkpoint técnico de mantenibilidad antes de SEC.2 y tampoco añade un bloque funcional de producto. MANT.1 R1 queda como auditoría inicial de alcance, MANT.1 R2 materializa los primeros cambios documentales en scripts y hooks, MANT.1 R3 documenta los YAML de GitHub sin cambiar CI ni formularios y MANT.1 R4 limpia encabezados operativos para que la trazabilidad histórica permanezca en documentación, MANT.1 R5A comenta servicios Python grandes, MANT.1 R5B comenta CSS/plantilla de la guía pública, MANT.1 R5C comenta JavaScript complejo sin cambiar lógica visible y MANT.1 R5D define política/plantillas por extensión con uniformidad de encabezados.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1543` — 0045:   - cinco estados aceptados G027–G031 según la segunda auditoría de VER.2.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1588` — 0090: - VER.2 — cerrar reconciliación revision-aware y promover G071 si el gate completo, PR/CI e integración son satisfactorios;
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1596` — 0004: **Versión candidata:** `0.0.71.01-beta` — VER.2 G071/E01
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1597` — 0005: **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1603` — 0004: **Versión candidata:** `0.0.71.01-beta` — VER.2 G071/E01
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1604` — 0005: **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1610` — 0004: **Versión candidata:** `0.0.71.01-beta` — VER.2 G071/E01
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1611` — 0005: **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1628` — 0012: VER.2 es un bloque transversal de reconciliación y **no añade un bloque 15** al plan maestro de producto. DEV.2 ya quedó cerrado documentalmente en R4. MANT.1 se trata como checkpoint técnico de mantenibilidad antes de SEC.2 y tampoco añade un bloque funcional de producto. MANT.1 R1 queda como auditoría inicial de alcance, MANT.1 R2 materializa los primeros cambios documentales en scripts y hooks, MANT.1 R3 documenta los YAML de GitHub sin cambiar CI ni formularios y MANT.1 R4 limpia encabezados operativos para que la trazabilidad histórica permanezca en documentación, MANT.1 R5A comenta servicios Python grandes, MANT.1 R5B comenta CSS/plantilla de la guía pública, MANT.1 R5C comenta JavaScript complejo sin cambiar lógica visible y MANT.1 R5D define política/plantillas por extensión con uniformidad de encabezados.
+- Coincidencias adicionales omitidas en esta vista: 261
+
+### 4.x `versión candidata`
+
+- `docs/AUDITORIA_PLAN1_R4_2026-08-20.md:4` — **Versión candidata:** `0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:676` — 0004: **Versión candidata de aplicación:** `0.0.71.01-beta` — VER.2 G071/E01
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:696` — 0024: - `../VERSION` -> ../VERSION — fuente canónica de la versión candidata de aplicación.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:770` — 0004: **Versión candidata de aplicación:** `0.0.71.01-beta` — VER.2 G071/E01
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:777` — 0004: **Versión candidata de aplicación:** `0.0.71.01-beta` — VER.2 G071/E01
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:784` — 0004: **Versión candidata de aplicación:** `0.0.71.01-beta` — VER.2 G071/E01
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:802` — 0024: - `../VERSION` -> ../VERSION — fuente canónica de la versión candidata de aplicación.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:809` — 0024: - `../VERSION` -> ../VERSION — fuente canónica de la versión candidata de aplicación.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:859` — 0188: - **Versión candidata de aplicación:** `0.0.26-beta` — referencia legacy preservada para las regresiones históricas de PLAN.1.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:866` — 0188: - **Versión candidata de aplicación:** `0.0.26-beta` — referencia legacy preservada para las regresiones históricas de PLAN.1.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:920` — 0004: **Versión candidata de aplicación:** `0.0.71.01-beta` — VER.2 G071/E01
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1005` — 0004: **Versión candidata de aplicación:** `0.0.71.01-beta` — VER.2 G071/E01
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1012` — 0004: **Versión candidata de aplicación:** `0.0.71.01-beta` — VER.2 G071/E01
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1069` — 0006: **Versión candidata transversal VER.2:** `0.0.71.01-beta` — G071/E01
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1162` — 0006: **Versión candidata transversal VER.2:** `0.0.71.01-beta` — G071/E01
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1169` — 0006: **Versión candidata transversal VER.2:** `0.0.71.01-beta` — G071/E01
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1312` — 0004: **Versión candidata de aplicación:** `0.0.71.01-beta` — VER.2 G071/E01
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1406` — 0004: **Versión candidata de aplicación:** `0.0.71.01-beta` — VER.2 G071/E01
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1413` — 0004: **Versión candidata de aplicación:** `0.0.71.01-beta` — VER.2 G071/E01
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1420` — 0004: **Versión candidata de aplicación:** `0.0.71.01-beta` — VER.2 G071/E01
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1502` — 0004: **Versión candidata:** `0.0.71.01-beta` — VER.2 G071/E01
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1596` — 0004: **Versión candidata:** `0.0.71.01-beta` — VER.2 G071/E01
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1603` — 0004: **Versión candidata:** `0.0.71.01-beta` — VER.2 G071/E01
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1610` — 0004: **Versión candidata:** `0.0.71.01-beta` — VER.2 G071/E01
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1748` — 0004: **Versión candidata revisada:** `0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1842` — 0004: **Versión candidata revisada:** `0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2117` — 0023: - **Versión candidata de VER.2:** `0.0.71.01-beta` — G071/E01; solo se considera aceptada después de ledger/validador, gate completo, PR/CI e integración.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2194` — 0023: - **Versión candidata de VER.2:** `0.0.71.01-beta` — G071/E01; solo se considera aceptada después de ledger/validador, gate completo, PR/CI e integración.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2200` — 0023: - **Versión candidata de VER.2:** `0.0.71.01-beta` — G071/E01; solo se considera aceptada después de ledger/validador, gate completo, PR/CI e integración.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2207` — 0023: - **Versión candidata de VER.2:** `0.0.71.01-beta` — G071/E01; solo se considera aceptada después de ledger/validador, gate completo, PR/CI e integración.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2214` — 0023: - **Versión candidata de VER.2:** `0.0.71.01-beta` — G071/E01; solo se considera aceptada después de ledger/validador, gate completo, PR/CI e integración.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2322` — 0309: - **Versión candidata de VER.2:** `0.0.26-beta` — referencia legacy preservada para las pruebas históricas previas a la reconciliación revision-aware.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2328` — 0309: - **Versión candidata de VER.2:** `0.0.26-beta` — referencia legacy preservada para las pruebas históricas previas a la reconciliación revision-aware.
+- `docs/INDICE.md:4` — **Versión candidata de aplicación:** `0.0.71.01-beta` — VER.2 G071/E01
+- `docs/INDICE.md:24` — - `../VERSION` -> `../VERSION` — fuente canónica de la versión candidata de aplicación.
+- `docs/INDICE.md:188` — - **Versión candidata de aplicación:** `0.0.26-beta` — referencia legacy preservada para las regresiones históricas de PLAN.1.
+- `docs/MATRIZ_TRAZABILIDAD.md:4` — **Versión candidata de aplicación:** `0.0.71.01-beta` — VER.2 G071/E01
+- `docs/PLAN_MAESTRO_HACIA_1_0.md:6` — **Versión candidata transversal VER.2:** `0.0.71.01-beta` — G071/E01
+- `docs/PROCESO_RELEASE.md:4` — **Versión candidata de aplicación:** `0.0.71.01-beta` — VER.2 G071/E01
+- `docs/ROADMAP.md:4` — **Versión candidata:** `0.0.71.01-beta` — VER.2 G071/E01
+- `docs/VALIDACION.md:4` — **Versión candidata revisada:** `0.0.26-beta`
+- `README.md:308` — - **Versión candidata de VER.2:** `0.0.71.01-beta` — ancla histórica de candidato revision-aware; no reemplaza `VERSION` ni crea tag formal.
+- `README.md:320` — - **Versión candidata de VER.2:** `0.0.26-beta` — referencia legacy preservada para las pruebas históricas previas a la reconciliación revision-aware.
+- `tests/test_plan1_r4_candidato_cierre.py:29` — self.assertIn(f"**Versión candidata de VER.2:** `{self.version}`", texto)
+- `tests/test_plan1_r4_candidato_cierre.py:116` — self.assertIn(f"**Versión candidata de aplicación:** `{self.version}`", texto)
+- `tests/test_ux46e_r91_candidato_cierre.py:27` — self.assertIn(f"**Versión candidata de VER.2:** `{version}`", texto)
+- `tests/test_ux46e_r91_candidato_cierre.py:35` — self.assertIn(f"**Versión candidata de aplicación:** `{version}`", indice)
+- `tests/test_ver2_documentacion_vigente.py:1` — """VER.2 — coherencia entre versión candidata, ledger y documentación vigente."""
+- `tests/test_ver2_documentacion_vigente.py:35` — self.assertIn(f"**Versión candidata de VER.2:** `{VERSION_CANDIDATA}`", readme)
+- `tests/test_ver2_documentacion_vigente.py:37` — self.assertIn(f"**Versión candidata:** `{VERSION_CANDIDATA}`", roadmap)
+- `tests/test_ver2_documentacion_vigente.py:39` — self.assertIn(f"**Versión candidata transversal VER.2:** `{VERSION_CANDIDATA}`", plan)
+
+### 4.x `candidata vigente`
+
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2595` — 0009: | `0.0.71.01-beta` | Candidata vigente de VER.2; recibe correcciones sobre la rama de reconciliación hasta cerrar su gate |
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2666` — 0080: | `0.0.71.01-beta` | Candidata vigente de VER.2; Soportada durante la rama de reconciliación hasta cerrar su gate |
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2667` — 0081: | `0.0.26-beta` | Candidata vigente de VER.2 como referencia legacy preservada por las pruebas históricas; último hito formal legacy etiquetado |
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2683` — 0009: | `0.0.71.01-beta` | Candidata vigente de VER.2; recibe correcciones sobre la rama de reconciliación hasta cerrar su gate |
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2690` — 0009: | `0.0.71.01-beta` | Candidata vigente de VER.2; recibe correcciones sobre la rama de reconciliación hasta cerrar su gate |
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2715` — 0080: | `0.0.71.01-beta` | Candidata vigente de VER.2; Soportada durante la rama de reconciliación hasta cerrar su gate |
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2716` — 0081: | `0.0.26-beta` | Candidata vigente de VER.2 como referencia legacy preservada por las pruebas históricas; último hito formal legacy etiquetado |
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2721` — 0080: | `0.0.71.01-beta` | Candidata vigente de VER.2; Soportada durante la rama de reconciliación hasta cerrar su gate |
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2722` — 0081: | `0.0.26-beta` | Candidata vigente de VER.2 como referencia legacy preservada por las pruebas históricas; último hito formal legacy etiquetado |
+- `SECURITY.md:24` — | `0.0.71.01-beta` | Candidata vigente de VER.2; recibe correcciones sobre la rama de reconciliación hasta cerrar su gate |
+- `SECURITY.md:95` — | `0.0.71.01-beta` | Candidata vigente de VER.2; Soportada durante la rama de reconciliación hasta cerrar su gate |
+- `SECURITY.md:96` — | `0.0.26-beta` | Candidata vigente de VER.2 como referencia legacy histórica preservada por pruebas de regresión; Soportada como hito formal legacy etiquetado |
+- `tests/test_plan1_r4_candidato_cierre.py:38` — self.assertIn(f"| `{self.version}` | Candidata vigente de VER.2", texto)
+- `tests/test_ux46e_r91_candidato_cierre.py:42` — self.assertIn(f"| `{version}` | Candidata vigente de VER.2", texto)
+- `tests/test_ver2_documentacion_vigente.py:40` — self.assertIn(f"| `{VERSION_CANDIDATA}` | Candidata vigente de VER.2", security)
+
+### 4.x `tag formal`
+
+- `CHANGELOG.md:294` — - tag formal asociado: `v0.0.26-beta`; objeto tag `bfbb746b177ebcc577f7241fef4d6914f713739a`; target `b572796d68ff6fd91ce9944a0c6d1cf7d45753a0`;
+- `CHANGELOG.md:308` — - cerrado UX.4.6e y asociado el hito al tag formal `v0.0.25-beta`; UX.4.6f — Paso 4 quedó documentado en ese momento como bloque funcional posterior;
+- `CHANGELOG.md:534` — - tag formal `v0.0.22-beta`.
+- `docs/CIERRE_DOCUMENTAL_MARKDOWN_DOC1_R1.md:43` — - `v0.0.26-beta` permanece como último tag formal vigente.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:677` — 0005: **Último tag formal legacy:** `v0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:771` — 0005: **Último tag formal legacy:** `v0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:778` — 0005: **Último tag formal legacy:** `v0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:785` — 0005: **Último tag formal legacy:** `v0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:792` — 0005: **Último tag formal legacy:** `v0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:921` — 0005: **Último tag formal legacy:** `v0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1006` — 0005: **Último tag formal legacy:** `v0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1013` — 0005: **Último tag formal legacy:** `v0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1019` — 0005: **Último tag formal legacy:** `v0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1314` — 0006: **Último tag formal legacy:** `v0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1324` — 0016: Un tag formal identifica un estado **cerrado, reproducible y validado**. No se etiqueta un árbol que todavía está pendiente de validación.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1408` — 0006: **Último tag formal legacy:** `v0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1415` — 0006: **Último tag formal legacy:** `v0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1422` — 0006: **Último tag formal legacy:** `v0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1504` — 0006: **Último tag formal legacy:** `v0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1598` — 0006: **Último tag formal legacy:** `v0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1605` — 0006: **Último tag formal legacy:** `v0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1612` — 0006: **Último tag formal legacy:** `v0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1618` — 0006: **Último tag formal legacy:** `v0.0.26-beta`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2409` — 0069: El tag formal asociado es `v0.0.22-beta`.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2462` — 0150: - tag formal: `v0.0.26-beta`;
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2543` — 0180: - `v0.0.26-beta` continúa siendo el último tag formal legacy;
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2550` — 0180: - `v0.0.26-beta` continúa siendo el último tag formal legacy;
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:3830` — 0033: | GOV.1.2 — gobierno/versionado formal | SÍ | `0.0.22-beta`, 403 pruebas y tag formal. Los commits de implementación/documentación son una misma revisión. |
+- `docs/INDICE.md:5` — **Último tag formal legacy:** `v0.0.26-beta`
+- `docs/LINEA_BASE_DOCUMENTAL_POST_MANT1_DOC1_R1.md:18` — - Tag formal vigente: `v0.0.26-beta`.
+- `docs/MATRIZ_DECISION_REVISIONES_VER2.md:47` — | GOV.1.2 — gobierno/versionado formal | SÍ | `0.0.22-beta`, 403 pruebas y tag formal. Los commits de implementación/documentación son una misma revisión. |
+- `docs/MATRIZ_TRAZABILIDAD.md:5` — **Último tag formal legacy:** `v0.0.26-beta`
+- `docs/PLAN_MAESTRO_HACIA_1_0.md:19` — - `v0.0.26-beta` sigue siendo el tag formal vigente.
+- `docs/PROCESO_RELEASE.md:6` — **Último tag formal legacy:** `v0.0.26-beta`
+- `docs/PROCESO_RELEASE.md:22` — - El último tag formal vigente sigue siendo `v0.0.26-beta`.
+- `docs/PROCESO_RELEASE.md:33` — Un tag formal identifica un estado **cerrado, reproducible y validado**. No se etiqueta un árbol que todavía está pendiente de validación.
+- `docs/PROCESO_RELEASE.md:182` — ## 9. Tag formal
+- `docs/PROCESO_RELEASE.md:239` — Durante la etapa beta puede existir únicamente un tag formal si el hito no distribuye un artefacto.
+- `docs/REGISTRO_CAMBIOS_HISTORICO.md:82` — Tag formal asociado:
+- `docs/REGISTRO_CAMBIOS_HISTORICO.md:135` — Tag formal asociado:
+- `docs/ROADMAP.md:6` — **Último tag formal legacy:** `v0.0.26-beta`
+- `docs/ROADMAP.md:19` — - `v0.0.26-beta` continúa siendo el tag formal vigente.
+- `docs/ROADMAP.md:20` — - `0.0.71.01-beta` continúa reservado como candidato de reconciliación VER.2; no es versión publicada ni tag formal.
+- `GOVERNANCE.md:18` — - `v0.0.26-beta` sigue siendo el último tag formal.
+- `README.md:26` — - **Estado de VER.2:** reconciliación revision-aware pendiente. El candidato `0.0.71.01-beta` se conserva como candidato documental/contable, no como versión publicada ni tag formal.
+- `README.md:308` — - **Versión candidata de VER.2:** `0.0.71.01-beta` — ancla histórica de candidato revision-aware; no reemplaza `VERSION` ni crea tag formal.
+- `RELEASES.md:12` — Después de `v0.0.26-beta`, el repositorio integró trabajo funcional, técnico y documental sin publicar un nuevo tag formal.
+- `RELEASES.md:16` — - Último tag formal: `v0.0.26-beta`.
+- `RELEASES.md:86` — El tag formal asociado es `v0.0.22-beta`.
+- `RELEASES.md:109` — Tag formal asociado: `v0.0.23-beta`.
+- `RELEASES.md:133` — Tag formal: `v0.0.24-beta`. El objeto tag anotado y firmado `3cdf6f84804c1bb4bdda9e449eb0932528557aa3` apunta al commit `653900cebd84019fbbaa3ff3cfd91536ccab76eb`.
+- `RELEASES.md:167` — - tag formal: `v0.0.26-beta`;
+- `RELEASES.md:197` — - `v0.0.26-beta` continúa siendo el último tag formal legacy;
+- `SECURITY.md:12` — - `v0.0.26-beta` continúa como último tag formal.
+- `tests/test_doc1_r1_auditoria_markdown_post_mant1.py:85` — assert "no como versión publicada ni tag formal" in text
+- `tests/test_gov_firma_git.py:61` — self.assertIn("Todo tag formal nuevo", texto)
+- `tests/test_plan1_r4_candidato_cierre.py:52` — self.assertIn("tag formal asociado: `v0.0.26-beta`", texto)
+- `tests/test_plan1_r4_candidato_cierre.py:62` — self.assertIn("tag formal: `v0.0.26-beta`", texto)
+- `tests/test_ver2_documentacion_vigente.py:38` — self.assertIn("**Último tag formal legacy:** `v0.0.26-beta`", roadmap)
+- `VERSIONING.md:18` — - `v0.0.26-beta` continúa siendo el último tag formal vigente.
+- `VERSIONING.md:212` — - todo tag formal nuevo debe estar firmado;
+- `VERSIONING.md:351` — - Todo tag formal nuevo debe estar firmado conforme a la política vigente.
+- `VERSIONING.md:352` — - Todo tag formal nuevo se crea con `git tag -s` y debe verificarse antes de declarar cerrado el hito.
+
+### 4.x `versión publicada`
+
+- `CONTRIBUTING.md:14` — - VER.2 permanece como reconciliación/candidato pendiente, no como versión publicada.
+- `docs/CIERRE_DOCUMENTAL_MARKDOWN_DOC1_R1.md:44` — - `0.0.71.01-beta` permanece como candidato VER.2, no como versión publicada.
+- `docs/CIERRE_DOCUMENTAL_MARKDOWN_DOC1_R1.md:73` — - `README.md` no promueva VER.2 como versión publicada;
+- `docs/LEDGER_REVISIONES_PRE_1_0.md:16` — - `0.0.71.01-beta` sigue siendo candidato VER.2, no versión publicada.
+- `docs/LINEA_BASE_DOCUMENTAL_POST_MANT1_DOC1_R1.md:17` — - Estado de VER.2: reconciliación revision-aware pendiente; `0.0.71.01-beta` se conserva como candidato, no como versión publicada.
+- `docs/MATRIZ_TRAZABILIDAD.md:23` — - VER.2 permanece como reconciliación/candidato pendiente, no como versión publicada.
+- `docs/ROADMAP.md:20` — - `0.0.71.01-beta` continúa reservado como candidato de reconciliación VER.2; no es versión publicada ni tag formal.
+- `docs/TRANSPARENCIA.md:21` — - VER.2 sigue pendiente como reconciliación/candidato, no como versión publicada.
+- `GOVERNANCE.md:19` — - `0.0.71.01-beta` sigue siendo candidato VER.2, no versión publicada.
+- `README.md:26` — - **Estado de VER.2:** reconciliación revision-aware pendiente. El candidato `0.0.71.01-beta` se conserva como candidato documental/contable, no como versión publicada ni tag formal.
+- `tests/test_doc1_r1_auditoria_markdown_post_mant1.py:85` — assert "no como versión publicada ni tag formal" in text
+- `VERSIONING.md:19` — - `0.0.71.01-beta` se conserva como candidato de reconciliación VER.2, no como versión publicada.
+
+### 4.x `revision-aware`
+
+- `_entregas/main_log_antes_limpieza_dev2.txt:1` — b225206 (HEAD -> main, origin/main, origin/HEAD) Reconcilia versionado VER.2 revision-aware (#36)
+- `_entregas/ramas_locales_antes_limpieza_dev2.txt:7` — * main                                          b225206 [origin/main] Reconcilia versionado VER.2 revision-aware (#36)
+- `_entregas/ramas_locales_antes_limpieza_dev2.txt:14` — work/ver2-g071-local-r2                       6aad2b9 [origin/work/ver2-g071-local-r2] Reconcilia versionado VER.2 revision-aware
+- `app/core/version.py:8` — familia beta revision-aware ``0.GG.RR.EE-beta`` para estados nuevos, donde
+- `app/core/version.py:32` — ``None`` indica que ``version`` no pertenece a la familia revision-aware o
+- `app/core/version.py:56` — """Construye una versión beta revision-aware canónica.
+- `app/core/version_ledger.py:1` — """Carga y valida el ledger revision-aware materializado por VER.2.
+- `app/core/version_ledger.py:6` — codifique cada Global con la convención revision-aware vigente.
+- `app/core/version_ledger.py:41` — """Valida continuidad, unicidad y codificación revision-aware del ledger."""
+- `app/core/version_ledger.py:104` — raise LedgerRevisionError("El ledger contiene IDs revision-aware duplicados.")
+- `CHANGELOG.md:25` — - Mantiene sin renombrar archivos de dominio como `mixto.json`, `sebd.json` y `sucgs.json`, y preserva archivos históricos con trazabilidad `UX46`, `VER2` o `revision-aware`.
+- `CHANGELOG.md:105` — - deja VER.2 como siguiente cierre transversal de versionado y documentación revision-aware.
+- `CHANGELOG.md:107` — ### VER.2 — reconciliación revision-aware pre-1.0
+- `CHANGELOG.md:113` — - preserva sin mover ni recrear los tags `v0.0.1-beta`–`v0.0.26-beta` y prohíbe tags revision-aware retrospectivos para G001–G070;
+- `CHANGELOG.md:119` — - DEV.2 queda cerrado como bloque funcional independiente antes del cierre final de VER.2, sin consumir promoción revision-aware ni cambiar VERSION, APP_VERSION o tags.
+- `docs/ADR_179_VERSIONADO_REVISION_AWARE.md:40` — Los identificadores revision-aware de G001–G057 son de auditoría. Los tags legacy `v0.0.1-beta`–`v0.0.26-beta` permanecen firmados e inmutables; no se crean tags revision-aware retrospectivos.
+- `docs/ADR_179_VERSIONADO_REVISION_AWARE.md:55` — - `VERSIONING.md` acepta la familia legacy, la revision-aware y la futura versión oficial;
+- `docs/ADR_179_VERSIONADO_REVISION_AWARE.md:56` — - `app/core/version.py` construye y descompone la familia revision-aware;
+- `docs/ADR_179_VERSIONADO_REVISION_AWARE.md:61` — - DEV.2 puede cerrarse como bloque funcional independiente antes del cierre final de VER.2, siempre que no promueva versión revision-aware, no cree tag y documente la separación entre avance funcional y cierre contable;
+- `docs/AUDITORIA_ARCHIVOS_R5F.md:33` — Tampoco se renombraron archivos históricos con patrones como `UX46`, `VER2`, `revision` o `revision-aware`, porque preservan trazabilidad documental y se revisarán, si aplica, en una fase documental posterior.
+- `docs/AUDITORIA_VER2_CONTEO_PROVISIONAL.md:116` — El candidato revision-aware correspondiente se decidirá al materializar G071. Hasta entonces `VERSION` no debe darse por promovida y el PR #35 permanece en draft.
+- `docs/AUDITORIA_VER2_SEGUNDA_PASADA.md:16` — - no debe promocionarse `VERSION` ni crearse un tag revision-aware hasta cerrar esta auditoría;
+- `docs/AUDITORIA_VER2_SEGUNDA_PASADA.md:181` — - recién entonces se fijará el siguiente identificador revision-aware.
+- `docs/AUDITORIA_VERSIONADO_PRE_1_0.md:167` — ## 6. Identificador revision-aware
+- `docs/AUDITORIA_VERSIONADO_PRE_1_0.md:236` — - `VERSIONING.md` revision-aware;
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:35` — 0021: - Mantiene sin renombrar archivos de dominio como `mixto.json`, `sebd.json` y `sucgs.json`, y preserva archivos históricos con trazabilidad `UX46`, `VER2` o `revision-aware`.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:134` — 0021: - Mantiene sin renombrar archivos de dominio como `mixto.json`, `sebd.json` y `sucgs.json`, y preserva archivos históricos con trazabilidad `UX46`, `VER2` o `revision-aware`.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:695` — 0023: - `../VERSIONING.md` -> ../VERSIONING.md — política legacy, beta revision-aware `0.GG.RR.EE-beta`, versión oficial de cuatro componentes y Build independiente.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:698` — 0026: - `ADR_179_VERSIONADO_REVISION_AWARE.md` -> ADR_179_VERSIONADO_REVISION_AWARE.md — decisión ADR del esquema revision-aware previo a `1.0.0.0`.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:801` — 0023: - `../VERSIONING.md` -> ../VERSIONING.md — política legacy, beta revision-aware `0.GG.RR.EE-beta`, versión oficial de cuatro componentes y Build independiente.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:804` — 0026: - `ADR_179_VERSIONADO_REVISION_AWARE.md` -> ADR_179_VERSIONADO_REVISION_AWARE.md — decisión ADR del esquema revision-aware previo a `1.0.0.0`.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:808` — 0023: - `../VERSIONING.md` -> ../VERSIONING.md — política legacy, beta revision-aware `0.GG.RR.EE-beta`, versión oficial de cuatro componentes y Build independiente.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:811` — 0026: - `ADR_179_VERSIONADO_REVISION_AWARE.md` -> ADR_179_VERSIONADO_REVISION_AWARE.md — decisión ADR del esquema revision-aware previo a `1.0.0.0`.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:816` — 0026: - `ADR_179_VERSIONADO_REVISION_AWARE.md` -> ADR_179_VERSIONADO_REVISION_AWARE.md — decisión ADR del esquema revision-aware previo a `1.0.0.0`.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:833` — 0116: - `../tests/test_ver2_version_revision_aware.py` -> ../tests/test_ver2_version_revision_aware.py — regresiones del esquema revision-aware.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:970` — 0054: | TR-027 | La beta revision-aware cuenta estados aceptados, preserva tags legacy y mantiene ledger continuo sin convertir commits/candidatos en revisiones | N/A — gobierno/versionado | ADR-179 | `VERSION`, `VERSIONING.md`, `app/core/version.py`, `docs/AUDITORIA_VERSIONADO_PRE_1_0.md`, `docs/LEDGER_REVISIONES_PRE_1_0.md` | `tests/test_ver2_version_revision_aware.py`, `tests/test_ver2_documentacion_vigente.py` | Candidato VER.2 G071/E01 |
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1029` — 0054: | TR-027 | La beta revision-aware cuenta estados aceptados, preserva tags legacy y mantiene ledger continuo sin convertir commits/candidatos en revisiones | N/A — gobierno/versionado | ADR-179 | `VERSION`, `VERSIONING.md`, `app/core/version.py`, `docs/AUDITORIA_VERSIONADO_PRE_1_0.md`, `docs/LEDGER_REVISIONES_PRE_1_0.md` | `tests/test_ver2_version_revision_aware.py`, `tests/test_ver2_documentacion_vigente.py` | Candidato VER.2 G071/E01 |
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1077` — 0014: PLAN.1 adoptó originalmente la familia beta legacy `0.0.N-beta`. VER.2, ejecutado después de UX.4.6i, conserva esa familia como historia publicada y adopta para **estados nuevos** el formato revision-aware:
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1126` — 0063: VER.2 — Reconciliación revision-aware del historial pre-1.0 — **no es un bloque 15**. Es una corrección de gobierno necesaria antes de continuar el bloque 6, DEV.2.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1177` — 0014: PLAN.1 adoptó originalmente la familia beta legacy `0.0.N-beta`. VER.2, ejecutado después de UX.4.6i, conserva esa familia como historia publicada y adopta para **estados nuevos** el formato revision-aware:
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1195` — 0063: VER.2 — Reconciliación revision-aware del historial pre-1.0 — **no es un bloque 15**. Es una corrección de gobierno necesaria antes de continuar el bloque 6, DEV.2.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1201` — 0063: VER.2 — Reconciliación revision-aware del historial pre-1.0 — **no es un bloque 15**. Es una corrección de gobierno necesaria antes de continuar el bloque 6, DEV.2.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1317` — 0009: **Revisión transversal:** VER.2 — versionado revision-aware — 2026-08-22
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1344` — 0036: Antes de preparar una nueva beta revision-aware debe verificarse que el cambio representa un **estado aceptado** según `VERSIONING.md` y el ledger.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1430` — 0009: **Revisión transversal:** VER.2 — versionado revision-aware — 2026-08-22
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1588` — 0090: - VER.2 — cerrar reconciliación revision-aware y promover G071 si el gate completo, PR/CI e integración son satisfactorios;
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1644` — 0090: - VER.2 — cerrar reconciliación revision-aware y promover G071 si el gate completo, PR/CI e integración son satisfactorios;
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1651` — 0090: - VER.2 — cerrar reconciliación revision-aware y promover G071 si el gate completo, PR/CI e integración son satisfactorios;
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2126` — 0032: - **Bloque transversal activo:** VER.2 — cierre transversal de versionado revision-aware todavía pendiente de integración final.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2127` — 0033: - **Bloque transversal pendiente:** VER.2 — cierre final de versionado revision-aware y sincronización de ledger, `VERSIONING.md`, `README`, `CHANGELOG` y documentación relacionada.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2233` — 0032: - **Bloque transversal activo:** VER.2 — cierre transversal de versionado revision-aware todavía pendiente de integración final.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2234` — 0033: - **Bloque transversal pendiente:** VER.2 — cierre final de versionado revision-aware y sincronización de ledger, `VERSIONING.md`, `README`, `CHANGELOG` y documentación relacionada.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2240` — 0032: - **Bloque transversal activo:** VER.2 — cierre transversal de versionado revision-aware todavía pendiente de integración final.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2241` — 0033: - **Bloque transversal pendiente:** VER.2 — cierre final de versionado revision-aware y sincronización de ledger, `VERSIONING.md`, `README`, `CHANGELOG` y documentación relacionada.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2247` — 0032: - **Bloque transversal activo:** VER.2 — cierre transversal de versionado revision-aware todavía pendiente de integración final.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2248` — 0033: - **Bloque transversal pendiente:** VER.2 — cierre final de versionado revision-aware y sincronización de ledger, `VERSIONING.md`, `README`, `CHANGELOG` y documentación relacionada.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2254` — 0033: - **Bloque transversal pendiente:** VER.2 — cierre final de versionado revision-aware y sincronización de ledger, `VERSIONING.md`, `README`, `CHANGELOG` y documentación relacionada.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2298` — 0135: La nueva familia beta usa `0.GG.RR.EE-beta`. El candidato actual de reconciliación es `0.0.71.01-beta` (G071/E01). Solo se convierte en estado aceptado si supera el ledger/validador, gate completo, PR/CI e integración; no se crean tags revision-aware retrospectivos para G001–G070.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2304` — 0135: La nueva familia beta usa `0.GG.RR.EE-beta`. El candidato actual de reconciliación es `0.0.71.01-beta` (G071/E01). Solo se convierte en estado aceptado si supera el ledger/validador, gate completo, PR/CI e integración; no se crean tags revision-aware retrospectivos para G001–G070.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2322` — 0309: - **Versión candidata de VER.2:** `0.0.26-beta` — referencia legacy preservada para las pruebas históricas previas a la reconciliación revision-aware.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2328` — 0309: - **Versión candidata de VER.2:** `0.0.26-beta` — referencia legacy preservada para las pruebas históricas previas a la reconciliación revision-aware.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2346` — 0006: **Reconciliación revision-aware:** 2026-08-22
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2356` — 0016: VER.2 añade una segunda capa de auditoría: `docs/LEDGER_REVISIONES_PRE_1_0.md` y `data/revision_ledger_pre_1_0.json` reconstruyen los **estados aceptados** como G001–G070 sobre la base `7037addd44253e528c77460b678d2b3ccd540dd5`. Esos identificadores revision-aware no sustituyen versiones/tags históricos ni autorizan tags retroactivos. `0.0.71.01-beta` es únicamente el candidato de VER.2 mientras no complete gate, PR/CI e integración.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2438` — 0016: VER.2 añade una segunda capa de auditoría: `docs/LEDGER_REVISIONES_PRE_1_0.md` y `data/revision_ledger_pre_1_0.json` reconstruyen los **estados aceptados** como G001–G070 sobre la base `7037addd44253e528c77460b678d2b3ccd540dd5`. Esos identificadores revision-aware no sustituyen versiones/tags históricos ni autorizan tags retroactivos. `0.0.71.01-beta` es únicamente el candidato de VER.2 mientras no complete gate, PR/CI e integración.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2472` — 0156: La segunda pasada de VER.2 reconoce dentro de PLAN.1 diez estados aceptados G051–G060: R1, R2A, R2B1, R2B2, R2C, R3A, R3B1, R3B2, R4.1 y R4.2. Esta granularidad revision-aware no crea ni mueve tags históricos.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2478` — 0156: La segunda pasada de VER.2 reconoce dentro de PLAN.1 diez estados aceptados G051–G060: R1, R2A, R2B1, R2B2, R2C, R3A, R3B1, R3B2, R4.1 y R4.2. Esta granularidad revision-aware no crea ni mueve tags históricos.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2484` — 0156: La segunda pasada de VER.2 reconoce dentro de PLAN.1 diez estados aceptados G051–G060: R1, R2A, R2B1, R2B2, R2C, R3A, R3B1, R3B2, R4.1 y R4.2. Esta granularidad revision-aware no crea ni mueve tags históricos.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2544` — 0181: - no se crean tags revision-aware retrospectivos para G001–G070.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2551` — 0181: - no se crean tags revision-aware retrospectivos para G001–G070.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2556` — 0181: - no se crean tags revision-aware retrospectivos para G001–G070.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2558` — 0183: Si VER.2 se integra satisfactoriamente, `0.0.71.01-beta` pasa a ser el primer estado nuevo gobernado por la familia revision-aware. La creación de su tag, si corresponde al cierre, se realizará únicamente después de merge y revalidación.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2576` — 0203: ## 7. Línea beta revision-aware y versión oficial futura
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2591` — 0005: Mi Retiro Proyectado se encuentra en **desarrollo beta**. Los estados históricos conservan la familia legacy `0.0.N-beta`; VER.2 adopta para candidatos y estados nuevos la familia revision-aware `0.GG.RR.EE-beta`. El repositorio de código es público, pero la aplicación no se declara todavía como versión oficial ni como despliegue de producción.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2603` — 0017: La numeración revision-aware no mueve ni recrea tags legacy. Consultar `VERSIONING.md`, `docs/AUDITORIA_VERSIONADO_PRE_1_0.md`, `docs/MATRIZ_DECISION_REVISIONES_VER2.md` y `docs/LEDGER_REVISIONES_PRE_1_0.md`.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2675` — 0005: Mi Retiro Proyectado se encuentra en **desarrollo beta**. Los estados históricos conservan la familia legacy `0.0.N-beta`; VER.2 adopta para candidatos y estados nuevos la familia revision-aware `0.GG.RR.EE-beta`. El repositorio de código es público, pero la aplicación no se declara todavía como versión oficial ni como despliegue de producción.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2739` — 0007: **Revisión revision-aware:** 2026-08-22
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2789` — 0057: ### 3.2. Familia beta revision-aware
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2814` — 0082: Los identificadores revision-aware usados en el ledger para G001–G070 son **identificadores de reconstrucción/auditoría**. No existieron como versiones publicadas y no autorizan tags retroactivos.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2864` — 0057: ### 3.2. Familia beta revision-aware
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2868` — 0057: ### 3.2. Familia beta revision-aware
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2918` — 0162: La reconstrucción revision-aware de G001–G070 es exclusivamente documental. No se crean tags `v0.GG.RR.EE-beta` para estados anteriores a VER.2.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:3334` — 0156: cierre transversal pendiente de versionado revision-aware, ledger, documentación
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:3561` — 0010: Los identificadores revision-aware son una reconstrucción de auditoría. **No existieron históricamente y no autorizan mover, recrear ni renombrar los tags `v0.0.1-beta`–`v0.0.26-beta`.**
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:3578` — 0027: | Global | ID revision-aware | Bloque / estado aceptado | Ancla histórica | Evidencia resumida |
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:3659` — 0010: Los identificadores revision-aware son una reconstrucción de auditoría. **No existieron históricamente y no autorizan mover, recrear ni renombrar los tags `v0.0.1-beta`–`v0.0.26-beta`.**
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:3665` — 0010: Los identificadores revision-aware son una reconstrucción de auditoría. **No existieron históricamente y no autorizan mover, recrear ni renombrar los tags `v0.0.1-beta`–`v0.0.26-beta`.**
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:3779` — 0122: | Global | ID revision-aware candidato | Bloque | Condición |
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:3783` — 0122: | Global | ID revision-aware candidato | Bloque | Condición |
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:3785` — 0124: | G071 | `0.0.71.01-beta` | VER.2 R1 — reconciliación revision-aware | ledger + validador + gate completo + PR/CI verde + integración |
+- `docs/DEV2_CENTRO_DESARROLLO.md:155` — una revisión revision-aware y no adelanta `1.0.0.0` ni `Build 000001`.
+- `docs/DEV2_CENTRO_DESARROLLO.md:170` — cierre transversal pendiente de versionado revision-aware, ledger, documentación
+- `docs/INDICE.md:23` — - `../VERSIONING.md` -> `../VERSIONING.md` — política legacy, beta revision-aware `0.GG.RR.EE-beta`, versión oficial de cuatro componentes y Build independiente.
+- `docs/INDICE.md:26` — - `ADR_179_VERSIONADO_REVISION_AWARE.md` -> `ADR_179_VERSIONADO_REVISION_AWARE.md` — decisión ADR del esquema revision-aware previo a `1.0.0.0`.
+- `docs/INDICE.md:116` — - `../tests/test_ver2_version_revision_aware.py` -> `../tests/test_ver2_version_revision_aware.py` — regresiones del esquema revision-aware.
+- `docs/LEDGER_REVISIONES_PRE_1_0.md:24` — Los identificadores revision-aware son una reconstrucción de auditoría. **No existieron históricamente y no autorizan mover, recrear ni renombrar los tags `v0.0.1-beta`–`v0.0.26-beta`.**
+- `docs/LEDGER_REVISIONES_PRE_1_0.md:41` — | Global | ID revision-aware | Bloque / estado aceptado | Ancla histórica | Evidencia resumida |
+- `docs/LEDGER_REVISIONES_PRE_1_0.md:136` — | Global | ID revision-aware candidato | Bloque | Condición |
+- `docs/LEDGER_REVISIONES_PRE_1_0.md:138` — | G071 | `0.0.71.01-beta` | VER.2 R1 — reconciliación revision-aware | ledger + validador + gate completo + PR/CI verde + integración |
+- `docs/LINEA_BASE_DOCUMENTAL_POST_MANT1_DOC1_R1.md:17` — - Estado de VER.2: reconciliación revision-aware pendiente; `0.0.71.01-beta` se conserva como candidato, no como versión publicada.
+- `docs/MATRIZ_DECISION_REVISIONES_VER2.md:16` — - VER.2 permanece pendiente como reconciliación revision-aware.
+- `docs/MATRIZ_TRAZABILIDAD.md:72` — | TR-027 | La beta revision-aware cuenta estados aceptados, preserva tags legacy y mantiene ledger continuo sin convertir commits/candidatos en revisiones | N/A — gobierno/versionado | ADR-179 | `VERSION`, `VERSIONING.md`, `app/core/version.py`, `docs/AUDITORIA_VERSIONADO_PRE_1_0.md`, `docs/LEDGER_REVISIONES_PRE_1_0.md` | `tests/test_ver2_version_revision_aware.py`, `tests/test_ver2_documentacion_vigente.py` | Candidato VER.2 G071/E01 |
+- `docs/PLAN_MAESTRO_HACIA_1_0.md:20` — - VER.2 sigue pendiente como reconciliación revision-aware antes de cualquier promoción formal.
+- `docs/PLAN_MAESTRO_HACIA_1_0.md:32` — PLAN.1 adoptó originalmente la familia beta legacy `0.0.N-beta`. VER.2, ejecutado después de UX.4.6i, conserva esa familia como historia publicada y adopta para **estados nuevos** el formato revision-aware:
+- `docs/PLAN_MAESTRO_HACIA_1_0.md:81` — VER.2 — Reconciliación revision-aware del historial pre-1.0 — **no es un bloque 15**. Es una corrección de gobierno necesaria antes de continuar el bloque 6, DEV.2.
+- `docs/PLAN_MAESTRO_HACIA_1_0.md:296` — Mientras este bloque no cierre, la aplicación permanece en la familia beta revision-aware `0.GG.RR.EE-beta`.
+- `docs/PROCESO_RELEASE.md:9` — **Revisión transversal:** VER.2 — versionado revision-aware — 2026-08-22
+- `docs/PROCESO_RELEASE.md:53` — Antes de preparar una nueva beta revision-aware debe verificarse que el cambio representa un **estado aceptado** según `VERSIONING.md` y el ledger.
+- `docs/PROCESO_RELEASE.md:204` — No se crean tags revision-aware retrospectivos para G001–G070.
+- `docs/ROADMAP.md:106` — - VER.2 — cerrar reconciliación revision-aware y promover G071 si el gate completo, PR/CI e integración son satisfactorios;
+- `docs/ROADMAP.md:242` — - [ ] VER.2 esté cerrado como prerrequisito transversal para continuar el ledger revision-aware;
+- `docs/ROADMAP.md:254` — Los estados nuevos durante beta usan la familia revision-aware `0.GG.RR.EE-beta`. La familia legacy `0.0.N-beta` permanece como historia publicada y no se extiende después de VER.2. No existe una familia futura vigente `0.1.0 beta 1`.
+- `README.md:26` — - **Estado de VER.2:** reconciliación revision-aware pendiente. El candidato `0.0.71.01-beta` se conserva como candidato documental/contable, no como versión publicada ni tag formal.
+- `README.md:38` — La versión se obtiene exclusivamente del archivo `VERSION` -> `VERSION`. La política completa se documenta en `VERSIONING.md` -> `VERSIONING.md`. La reconciliación revision-aware pendiente se audita en `docs/AUDITORIA_VERSIONADO_PRE_1_0.md` -> `docs/AUDITORIA_VERSIONADO_PRE_1_0.md`, `docs/MATRIZ_DECISION_REVISIONES_VER2.md` -> `docs/MATRIZ_DECISION_REVISIONES_VER2.md`, `docs/LEDGER_REVISIONES_PRE_1_0.md` -> `docs/LEDGER_REVISIONES_PRE_1_0.md` y `data/revision_ledger_pre_1_0.json` -> `data/revision_ledger_pre_1_0.json`. El estado documental post-MANT.1 se consolida en `docs/LINEA_BASE_DOCUMENTAL_POST_MANT1_DOC1_R1.md` -> `docs/LINEA_BASE_DOCUMENTAL_POST_MANT1_DOC1_R1.md`.
+- `README.md:126` — La nueva familia beta usa `0.GG.RR.EE-beta`. El candidato actual de reconciliación es `0.0.71.01-beta` (G071/E01). Solo se convierte en estado aceptado si supera el ledger/validador, gate completo, PR/CI e integración; no se crean tags revision-aware retrospectivos para G001–G070.
+- `README.md:308` — - **Versión candidata de VER.2:** `0.0.71.01-beta` — ancla histórica de candidato revision-aware; no reemplaza `VERSION` ni crea tag formal.
+- `README.md:320` — - **Versión candidata de VER.2:** `0.0.26-beta` — referencia legacy preservada para las pruebas históricas previas a la reconciliación revision-aware.
+- `README.md:329` — - **PLAN.1:** cerrado en `0.0.26-beta`; PR #23 y PR #24 preservan el cierre legacy antes de la reconciliación revision-aware.
+- `RELEASES.md:6` — **Reconciliación revision-aware:** 2026-08-22
+- `RELEASES.md:18` — - Candidato revision-aware VER.2: `0.0.71.01-beta`, pendiente y no publicado.
+- `RELEASES.md:33` — VER.2 añade una segunda capa de auditoría: `docs/LEDGER_REVISIONES_PRE_1_0.md` y `data/revision_ledger_pre_1_0.json` reconstruyen los **estados aceptados** como G001–G070 sobre la base `7037addd44253e528c77460b678d2b3ccd540dd5`. Esos identificadores revision-aware no sustituyen versiones/tags históricos ni autorizan tags retroactivos. `0.0.71.01-beta` es únicamente el candidato de VER.2 mientras no complete gate, PR/CI e integración.
+- Coincidencias adicionales omitidas en esta vista: 19
+
+### 4.x `DOC.1 R1`
+
+- `CHANGELOG.md:8` — - DOC.1 R1: inicia la auditoría integral de todos los archivos Markdown post-MANT.1, con inventario, matriz de decisión, contexto de actualización y línea base documental.
+- `CHANGELOG.md:9` — - DOC.1 R1: cierra la auditoría documental Markdown post-MANT.1, documenta alcance, evidencia, límites respetados y agrega regresión documental.
+- `CONTRIBUTING.md:12` — - DOC.1 R1 está activo para sincronizar documentación Markdown vigente.
+- `docs/ARQUITECTURA.md:26` — La documentación arquitectónica debe leerse desde esta base: MANT.1 está cerrado y DOC.1 R1 actualiza documentación vigente sin modificar arquitectura de ejecución.
+- `docs/AUDITORIA_MARKDOWN_POST_MANT1_DOC1_R1.md:1` — # DOC.1 R1 — Inventario Markdown post-MANT.1
+- `docs/CIERRE_DOCUMENTAL_MARKDOWN_DOC1_R1.md:1` — # DOC.1 R1 — Cierre documental de auditoría Markdown post-MANT.1
+- `docs/CIERRE_DOCUMENTAL_MARKDOWN_DOC1_R1.md:5` — DOC.1 R1 queda cerrado como auditoría integral de documentación Markdown posterior al cierre operativo de MANT.1 R7.
+- `docs/CIERRE_DOCUMENTAL_MARKDOWN_DOC1_R1.md:46` — - DOC.1 R1 queda cerrado como auditoría documental Markdown post-MANT.1.
+- `docs/CIERRE_DOCUMENTAL_MARKDOWN_DOC1_R1.md:50` — DOC.1 R1 no modifica:
+- `docs/CIERRE_DOCUMENTAL_MARKDOWN_DOC1_R1.md:62` — ## Validación DOC.1 R1
+- `docs/CIERRE_DOCUMENTAL_MARKDOWN_DOC1_R1.md:70` — - exista la evidencia documental DOC.1 R1;
+- `docs/CIERRE_DOCUMENTAL_MARKDOWN_DOC1_R1.md:76` — - `docs/INDICE.md` liste la evidencia DOC.1 R1.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1` — # DOC.1 R1 — Contexto de actualización Markdown post-MANT.1
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:9` — - Categoría DOC.1 R1: `ACTUALIZAR`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:255` — - Categoría DOC.1 R1: `ACTUALIZAR`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:359` — - Categoría DOC.1 R1: `ACTUALIZAR`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:541` — - Categoría DOC.1 R1: `ACTUALIZAR`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:667` — - Categoría DOC.1 R1: `ACTUALIZAR`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:911` — - Categoría DOC.1 R1: `ACTUALIZAR`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1058` — - Categoría DOC.1 R1: `ACTUALIZAR`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1303` — - Categoría DOC.1 R1: `ACTUALIZAR`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1493` — - Categoría DOC.1 R1: `ACTUALIZAR`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1739` — - Categoría DOC.1 R1: `ACTUALIZAR`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1985` — - Categoría DOC.1 R1: `ACTUALIZAR`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2089` — - Categoría DOC.1 R1: `ACTUALIZAR`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2335` — - Categoría DOC.1 R1: `ACTUALIZAR`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2581` — - Categoría DOC.1 R1: `ACTUALIZAR`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2727` — - Categoría DOC.1 R1: `ACTUALIZAR`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:2976` — - Categoría DOC.1 R1: `REVISAR_MANUALMENTE`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:3198` — - Categoría DOC.1 R1: `REVISAR_MANUALMENTE`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:3364` — - Categoría DOC.1 R1: `REVISAR_MANUALMENTE`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:3546` — - Categoría DOC.1 R1: `REVISAR_MANUALMENTE`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:3792` — - Categoría DOC.1 R1: `REVISAR_MANUALMENTE`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:3980` — - Categoría DOC.1 R1: `REVISAR_MANUALMENTE`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:4098` — - Categoría DOC.1 R1: `REVISAR_MANUALMENTE`
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:4216` — - Categoría DOC.1 R1: `REVISAR_MANUALMENTE`
+- `docs/DECISIONES.md:22` — - DOC.1 R1 queda activo para sincronizar documentación Markdown vigente.
+- `docs/DECISIONES.md:23` — - Las decisiones históricas no se reescriben como si hubieran sido tomadas en DOC.1 R1.
+- `docs/DEV2_CENTRO_DESARROLLO.md:23` — - DOC.1 R1 es el bloque documental activo para actualización Markdown post-MANT.1.
+- `docs/ESPECIFICACION_FUNCIONAL.md:23` — - DOC.1 R1 queda activo únicamente para corregir documentación Markdown vigente desalineada después de MANT.1.
+- `docs/ESTANDAR_CODIGO_Y_COMENTARIOS.md:20` — - DOC.1 R1 solo actualiza documentación Markdown vigente.
+- `docs/INDICE.md:202` — ## DOC.1 R1 — Auditoría integral Markdown post-MANT.1
+- `docs/INDICE.md:209` — - `CIERRE_DOCUMENTAL_MARKDOWN_DOC1_R1.md`: cierre formal de DOC.1 R1 con alcance revisado, evidencia generada, límites respetados y validación documental.
+- `docs/LEDGER_REVISIONES_PRE_1_0.md:19` — - DOC.1 R1 no modifica el contador de versión; solo sincroniza documentación Markdown.
+- `docs/LINEA_BASE_DOCUMENTAL_POST_MANT1_DOC1_R1.md:1` — # DOC.1 R1 — Línea base documental post-MANT.1
+- `docs/LINEA_BASE_DOCUMENTAL_POST_MANT1_DOC1_R1.md:7` — DOC.1 R1 existe para revisar todos los archivos Markdown del repositorio, distinguir documentación vigente de evidencia histórica y actualizar únicamente los documentos que quedaron desalineados después de MANT.1.
+- `docs/LINEA_BASE_DOCUMENTAL_POST_MANT1_DOC1_R1.md:19` — - Próximo trabajo documental: DOC.1 R1, auditoría integral de Markdown post-MANT.1.
+- `docs/MATRIZ_DECISION_MARKDOWN_DOC1_R1.md:1` — # DOC.1 R1 — Matriz de decisión Markdown post-MANT.1
+- `docs/MATRIZ_DECISION_MARKDOWN_DOC1_R1.md:68` — | `PRESERVAR_AUDITORIA_CERRADA` | `docs/AUDITORIA_MARKDOWN_POST_MANT1_DOC1_R1.md` | # DOC.1 R1 — Inventario Markdown post-MANT.1 | Siguiente bloque, VER\.2, MANT\.1, R5H, R6, R7 | Documento de auditoría/cierre; preservar como evidencia del momento. |
+- `docs/MATRIZ_DECISION_REVISIONES_VER2.md:12` — Esta matriz sigue siendo evidencia de decisión para VER.2. DOC.1 R1 no cambia sus criterios contables ni convierte candidatos en versiones publicadas.
+- `docs/MATRIZ_TRAZABILIDAD.md:14` — La trazabilidad vigente incorpora el cierre operativo de MANT.1 R7 y la apertura de DOC.1 R1.
+- `docs/MATRIZ_TRAZABILIDAD.md:21` — - DOC.1 R1 audita todos los Markdown y actualiza solo documentación vigente desalineada.
+- `docs/OBSERVABILIDAD_LOGS.md:21` — - DOC.1 R1 no cambia telemetría, logging, rutas ni comportamiento de ejecución.
+- `docs/PLAN_MAESTRO_HACIA_1_0.md:22` — - DOC.1 R1 está activo para actualizar documentación Markdown vigente y separar evidencia histórica de estado actual.
+- `docs/PLAN_MAESTRO_HACIA_1_0.md:107` — Mientras VER.2 permanezca abierto, **DOC.1 R1 es el bloque documental activo** para sincronizar la documentación Markdown vigente posterior a MANT.1; DEV.2 queda preservado como bloque funcional cerrado.
+- `docs/POLITICA_PRIVACIDAD.md:23` — - DOC.1 R1 no cambia el tratamiento de datos ni la política material.
+- `docs/PROCESO_RELEASE.md:24` — - DOC.1 R1 actualiza documentación Markdown, pero no habilita por sí solo una release.
+- `docs/REVISION_SOLO_SI_APLICA_DOC1_R1.md:1` — # DOC.1 R1 — Revisión de documentos `REVISAR_SOLO_SI_APLICA`
+- `docs/ROADMAP.md:22` — - DOC.1 R1 queda activo para auditar y actualizar la documentación Markdown vigente posterior a MANT.1.
+- `docs/TRANSPARENCIA.md:15` — La transparencia del producto se interpreta desde el cierre operativo de MANT.1 R7 y la auditoría documental DOC.1 R1.
+- `docs/TRANSPARENCIA.md:20` — - DOC.1 R1 actualiza documentación Markdown vigente.
+- `docs/VALIDACION.md:26` — DOC.1 R1 no cambia el contrato funcional ni los motores previsionales. Su validación se limita a coherencia documental, referencias Markdown y preservación del estado canónico post-MANT.1.
+- `GOVERNANCE.md:21` — - DOC.1 R1 queda activo como auditoría documental Markdown post-MANT.1.
+- `README.md:33` — - **Bloque documental activo:** DOC.1 R1 — auditoría integral de documentación Markdown post-MANT.1.
+- `README.md:298` — - **Bloque transversal activo:** VER.2 — ancla histórica previa a DOC.1 R1; el estado vigente actual lo define la línea base post-MANT.1.
+- `README.md:299` — - **Bloque transversal pendiente:** VER.2 — ancla histórica previa al cierre post-MANT.1; el estado vigente lo define DOC.1 R1 y la línea base documental.
+- `RELEASES.md:20` — - DOC.1 R1 queda activo para reconciliar documentación Markdown vigente post-MANT.1.
+- `SECURITY.md:14` — - DOC.1 R1 solo actualiza documentación Markdown vigente.
+- `tests/test_doc1_r1_auditoria_markdown_post_mant1.py:1` — """Regresión documental de DOC.1 R1 post-MANT.1."""
+- `tests/test_doc1_r1_auditoria_markdown_post_mant1.py:86` — assert "DOC.1 R1" in text
+- `tests/test_doc1_r1_auditoria_markdown_post_mant1.py:150` — assert "DOC.1 R1 queda cerrado" in text
+- `VERSIONING.md:21` — - DOC.1 R1 no modifica la política de versionado; solo sincroniza documentación Markdown vigente después de MANT.1.
+
+### 4.x `MANT.1`
+
+- `CHANGELOG.md:8` — - DOC.1 R1: inicia la auditoría integral de todos los archivos Markdown post-MANT.1, con inventario, matriz de decisión, contexto de actualización y línea base documental.
+- `CHANGELOG.md:9` — - DOC.1 R1: cierra la auditoría documental Markdown post-MANT.1, documenta alcance, evidencia, límites respetados y agrega regresión documental.
+- `CHANGELOG.md:10` — - MANT.1 R7: cierra operativamente la auditoría post-renombres mediante PR #55, dejando `main` alineado con R5H/R6/R7 y sin cambios en archivos protegidos.
+- `CHANGELOG.md:11` — - MANT.1 R6: valida funcionalmente el repositorio después de los renombres técnicos, con pruebas focalizadas y documentación de cierre.
+- `CHANGELOG.md:12` — - MANT.1 R5H: se completa la auditoría de nombres técnicos restantes, con normalización de módulos, assets, plantillas, workflow y pruebas, sin cambios en cálculo, normativa ni versión.
+- `CHANGELOG.md:14` — ### MANT.1 R5G
+- `CHANGELOG.md:20` — ## MANT.1 R5F
+- `CHANGELOG.md:27` — ## MANT.1 R5E — estandarización de nombres de carpetas
+- `CHANGELOG.md:35` — ### MANT.1 R5D — política, plantillas y uniformidad por extensión
+- `CHANGELOG.md:44` — ### MANT.1 R5C — comentarios internos en JavaScript complejo
+- `CHANGELOG.md:52` — ### MANT.1 R5B — comentarios internos en CSS y plantilla Cómo se calcula
+- `CHANGELOG.md:60` — ### MANT.1 R5A — comentarios internos en servicios Python de aplicación
+- `CHANGELOG.md:67` — ### MANT.1 R4 — limpieza de trazabilidad en encabezados operativos
+- `CHANGELOG.md:69` — - limpia encabezados de YAML GitHub para que describan propósito y alcance permanente, sin declarar MANT.1 dentro de archivos operativos;
+- `CHANGELOG.md:71` — - ajusta la regresión de MANT.1 R3 para exigir encabezados funcionales en YAML, no encabezados con nombre de revisión;
+- `CHANGELOG.md:72` — - agrega regresión MANT.1 R4 para impedir trazabilidad de revisión en encabezados operativos;
+- `CHANGELOG.md:75` — ### MANT.1 R3 — encabezados YAML de GitHub
+- `CHANGELOG.md:81` — - agrega regresión documental para proteger encabezados funcionales en `.github/` y que MANT.1 R1/R2/R3 queden visibles en la documentación transversal.
+- `CHANGELOG.md:83` — ### MANT.1 R2 — documentación de scripts y hooks
+- `CHANGELOG.md:85` — - materializa los primeros cambios de mantenimiento técnico derivados de MANT.1 R1, sin cambiar `VERSION`, `APP_VERSION`, motores previsionales ni normativa;
+- `CHANGELOG.md:92` — ### MANT.1 R1 — auditoría inicial y plan de mantenimiento
+- `CHANGELOG.md:94` — - inicia MANT.1 como mantenimiento técnico previo a SEC.2;
+- `CONTRIBUTING.md:5` — ## Estado de contribución post-MANT.1
+- `CONTRIBUTING.md:7` — La contribución al proyecto debe leerse desde la línea base documental posterior a MANT.1 R7.
+- `CONTRIBUTING.md:11` — - MANT.1 quedó cerrado operativamente en R7.
+- `docs/ARQUITECTURA.md:8` — **Última actualización de mantenimiento:** MANT.1 R5E — estandarización de nombres de carpetas — 2026-08-23
+- `docs/ARQUITECTURA.md:13` — ## Estado arquitectónico post-MANT.1
+- `docs/ARQUITECTURA.md:15` — La arquitectura vigente conserva el mismo alcance funcional y normativo. MANT.1 no cambió fórmulas, motores previsionales, rutas públicas, selectores funcionales, parámetros de `regulations/`, datos ni entregables.
+- `docs/ARQUITECTURA.md:24` — - R7 cerró operativamente MANT.1 sobre `main`.
+- `docs/ARQUITECTURA.md:26` — La documentación arquitectónica debe leerse desde esta base: MANT.1 está cerrado y DOC.1 R1 actualiza documentación vigente sin modificar arquitectura de ejecución.
+- `docs/ARQUITECTURA.md:31` — MANT.1 R1 dejó la auditoría inicial de mantenibilidad, MANT.1 R2 documenta
+- `docs/ARQUITECTURA.md:33` — de los checks remotos y MANT.1 R3 documenta los YAML de GitHub sin cambiar CI,
+- `docs/ARQUITECTURA.md:34` — Issue Forms ni Dependabot. MANT.1 R4 limpia encabezados operativos para separar
+- `docs/ARQUITECTURA.md:35` — comentarios permanentes de trazabilidad histórica. MANT.1 R5A inicia la revisión
+- `docs/ARQUITECTURA.md:36` — de comentarios internos en servicios Python de aplicación, MANT.1 R5B cubre CSS
+- `docs/ARQUITECTURA.md:37` — y plantilla de la guía pública, MANT.1 R5C documenta JavaScript complejo sin
+- `docs/ARQUITECTURA.md:38` — alterar lógica, storage, selectores ni contratos de datos, MANT.1 R5D formaliza política/plantillas por extensión con uniformidad de encabezados JS/CSS y MANT.1 R5E estandariza nombres de carpetas técnicas en inglés sin cambiar contratos funcionales. Este mantenimiento no
+- `docs/AUDITORIA_ARCHIVOS_R5F.md:1` — # Auditoría MANT.1 R5F — nombres de archivos
+- `docs/AUDITORIA_ARCHIVOS_R5F.md:5` — Esta auditoría documenta la revisión **MANT.1 R5F**, enfocada en normalizar nombres de archivos técnicos hacia una convención más clara y consistente en inglés, sin modificar la lógica funcional del cálculo de pensión ni los valores normativos.
+- `docs/AUDITORIA_CARPETAS_R5E.md:1` — # Auditoría de nombres de carpetas — MANT.1 R5E
+- `docs/AUDITORIA_CARPETAS_R5E.md:5` — **Checkpoint técnico:** MANT.1 R5E — estandarización de nombres de carpetas
+- `docs/AUDITORIA_CARPETAS_R5E.md:84` — - `MANT.1 R5F` — renombre controlado de archivos en `tests/`, `scripts/`,
+- `docs/AUDITORIA_CARPETAS_R5E.md:86` — - `MANT.1 R5G` — reordenamiento o renombre documental en `docs/`, evaluando
+- `docs/AUDITORIA_DOCUMENTACION_R5G.md:1` — # Auditoría MANT.1 R5G — documentación vigente
+- `docs/AUDITORIA_DOCUMENTACION_R5G.md:5` — Esta auditoría documenta la revisión **MANT.1 R5G**, enfocada en coherencia documental, referencias internas, cobertura del índice y preparación del cierre de mantenimiento antes de **SEC.2**.
+- `docs/AUDITORIA_DOCUMENTACION_R5G.md:37` — R5G deja la documentación base más navegable antes de la fase de seguridad. El cierre transversal de MANT.1 debe consolidarse en una revisión posterior antes de iniciar **SEC.2**.
+- `docs/AUDITORIA_FUNCIONAL_POST_RENOMBRES_R6.md:1` — # MANT.1 R6 — Auditoría funcional post-renombres
+- `docs/AUDITORIA_FUNCIONAL_POST_RENOMBRES_R6.md:5` — Esta auditoría valida que los renombres técnicos aplicados en MANT.1 R5 no dejaron referencias funcionales rotas en la aplicación.
+- `docs/AUDITORIA_FUNCIONAL_POST_RENOMBRES_R6.md:62` — MANT.1 R6 confirma que la aplicación mantiene coherencia funcional después de los renombres técnicos de MANT.1 R5. Las rutas, plantillas, assets, contratos de API, formularios y estructura HTML renderizada permanecen alineados.
+- `docs/AUDITORIA_MARKDOWN_POST_MANT1_DOC1_R1.md:1` — # DOC.1 R1 — Inventario Markdown post-MANT.1
+- `docs/AUDITORIA_MARKDOWN_POST_MANT1_DOC1_R1.md:52` — | `docs_vigente` | `docs/AUDITORIA_ARCHIVOS_R5F.md` | # Auditoría MANT.1 R5F — nombres de archivos | MANT\.1 |
+- `docs/AUDITORIA_MARKDOWN_POST_MANT1_DOC1_R1.md:54` — | `docs_vigente` | `docs/AUDITORIA_CARPETAS_R5E.md` | # Auditoría de nombres de carpetas — MANT.1 R5E | MANT\.1, 0\.0\.26-beta |
+- `docs/AUDITORIA_MARKDOWN_POST_MANT1_DOC1_R1.md:55` — | `docs_vigente` | `docs/AUDITORIA_DOCUMENTACION_R5G.md` | # Auditoría MANT.1 R5G — documentación vigente | MANT\.1 |
+- `docs/AUDITORIA_MARKDOWN_POST_MANT1_DOC1_R1.md:57` — | `docs_vigente` | `docs/AUDITORIA_FUNCIONAL_POST_RENOMBRES_R6.md` | # MANT.1 R6 — Auditoría funcional post-renombres | MANT\.1, R6 |
+- `docs/AUDITORIA_MARKDOWN_POST_MANT1_DOC1_R1.md:59` — | `docs_vigente` | `docs/AUDITORIA_NOMBRES_RESTANTES_R5H.md` | # Auditoría MANT.1 R5H — nombres técnicos restantes | MANT\.1, R5H |
+- `docs/AUDITORIA_MARKDOWN_POST_MANT1_DOC1_R1.md:67` — | `docs_vigente` | `docs/CIERRE_OPERATIVO_POST_AUDITORIA_R7.md` | # MANT.1 R7 — Cierre operativo post-auditoría | MANT\.1, R5H, R6, R7, pendiente, Pendiente |
+- `docs/AUDITORIA_NOMBRES_RESTANTES_R5H.md:1` — # Auditoría MANT.1 R5H — nombres técnicos restantes
+- `docs/AUDITORIA_NOMBRES_RESTANTES_R5H.md:10` — después de MANT.1 R5E, R5F y R5G. El criterio aplicado no fue traducir todo
+- `docs/CIERRE_DOCUMENTAL_MARKDOWN_DOC1_R1.md:1` — # DOC.1 R1 — Cierre documental de auditoría Markdown post-MANT.1
+- `docs/CIERRE_DOCUMENTAL_MARKDOWN_DOC1_R1.md:5` — DOC.1 R1 queda cerrado como auditoría integral de documentación Markdown posterior al cierre operativo de MANT.1 R7.
+- `docs/CIERRE_DOCUMENTAL_MARKDOWN_DOC1_R1.md:34` — - estado vigente posterior a MANT.1;
+- `docs/CIERRE_DOCUMENTAL_MARKDOWN_DOC1_R1.md:45` — - MANT.1 queda cerrado operativamente después de R5H, R6 y R7.
+- `docs/CIERRE_DOCUMENTAL_MARKDOWN_DOC1_R1.md:46` — - DOC.1 R1 queda cerrado como auditoría documental Markdown post-MANT.1.
+- `docs/CIERRE_DOCUMENTAL_MARKDOWN_DOC1_R1.md:71` — - la línea base post-MANT.1 preserve el estado canónico;
+- `docs/CIERRE_OPERATIVO_POST_AUDITORIA_R7.md:1` — # MANT.1 R7 — Cierre operativo post-auditoría
+- `docs/CIERRE_OPERATIVO_POST_AUDITORIA_R7.md:5` — Este cierre operativo valida que el repositorio quedó estable después de MANT.1 R5H y MANT.1 R6.
+- `docs/CIERRE_OPERATIVO_POST_AUDITORIA_R7.md:13` — - PR anterior: `#54 — MANT.1 R6 — auditoría funcional post-renombres`
+- `docs/CIERRE_OPERATIVO_POST_AUDITORIA_R7.md:20` — 1. `main` local y `origin/main` apuntan al cierre de MANT.1 R6.
+- `docs/CIERRE_OPERATIVO_POST_AUDITORIA_R7.md:62` — MANT.1 R7 confirma que el repositorio quedó operativamente estable después del cierre de R5H y R6. La documentación, las pruebas de auditoría y el estado de ramas locales quedan alineados con `main`.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:1` — # DOC.1 R1 — Contexto de actualización Markdown post-MANT.1
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:22` — 0008: - MANT.1 R5H: se completa la auditoría de nombres técnicos restantes, con normalización de módulos, assets, plantillas, workflow y pruebas, sin cambios en cálculo, normativa ni versión.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:24` — 0010: ### MANT.1 R5G
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:30` — 0016: ## MANT.1 R5F
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:37` — 0023: ## MANT.1 R5E — estandarización de nombres de carpetas
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:45` — 0031: ### MANT.1 R5D — política, plantillas y uniformidad por extensión
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:54` — 0040: ### MANT.1 R5C — comentarios internos en JavaScript complejo
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:62` — 0048: ### MANT.1 R5B — comentarios internos en CSS y plantilla Cómo se calcula
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:70` — 0056: ### MANT.1 R5A — comentarios internos en servicios Python de aplicación
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:77` — 0063: ### MANT.1 R4 — limpieza de trazabilidad en encabezados operativos
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:79` — 0065: - limpia encabezados de YAML GitHub para que describan propósito y alcance permanente, sin declarar MANT.1 dentro de archivos operativos;
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:81` — 0067: - ajusta la regresión de MANT.1 R3 para exigir encabezados funcionales en YAML, no encabezados con nombre de revisión;
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:82` — 0068: - agrega regresión MANT.1 R4 para impedir trazabilidad de revisión en encabezados operativos;
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:85` — 0071: ### MANT.1 R3 — encabezados YAML de GitHub
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:91` — 0077: - agrega regresión documental para proteger encabezados funcionales en `.github/` y que MANT.1 R1/R2/R3 queden visibles en la documentación transversal.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:93` — 0079: ### MANT.1 R2 — documentación de scripts y hooks
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:95` — 0081: - materializa los primeros cambios de mantenimiento técnico derivados de MANT.1 R1, sin cambiar `VERSION`, `APP_VERSION`, motores previsionales ni normativa;
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:102` — 0088: ### MANT.1 R1 — auditoría inicial y plan de mantenimiento
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:104` — 0090: - inicia MANT.1 como mantenimiento técnico previo a SEC.2;
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:112` — 0008: - MANT.1 R5H: se completa la auditoría de nombres técnicos restantes, con normalización de módulos, assets, plantillas, workflow y pruebas, sin cambios en cálculo, normativa ni versión.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:114` — 0010: ### MANT.1 R5G
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:118` — 0008: - MANT.1 R5H: se completa la auditoría de nombres técnicos restantes, con normalización de módulos, assets, plantillas, workflow y pruebas, sin cambios en cálculo, normativa ni versión.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:120` — 0010: ### MANT.1 R5G
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:128` — 0016: ## MANT.1 R5F
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:136` — 0023: ## MANT.1 R5E — estandarización de nombres de carpetas
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:144` — 0031: ### MANT.1 R5D — política, plantillas y uniformidad por extensión
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:154` — 0040: ### MANT.1 R5C — comentarios internos en JavaScript complejo
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:160` — 0040: ### MANT.1 R5C — comentarios internos en JavaScript complejo
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:168` — 0048: ### MANT.1 R5B — comentarios internos en CSS y plantilla Cómo se calcula
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:176` — 0056: ### MANT.1 R5A — comentarios internos en servicios Python de aplicación
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:184` — 0063: ### MANT.1 R4 — limpieza de trazabilidad en encabezados operativos
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:186` — 0065: - limpia encabezados de YAML GitHub para que describan propósito y alcance permanente, sin declarar MANT.1 dentro de archivos operativos;
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:190` — 0063: ### MANT.1 R4 — limpieza de trazabilidad en encabezados operativos
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:192` — 0065: - limpia encabezados de YAML GitHub para que describan propósito y alcance permanente, sin declarar MANT.1 dentro de archivos operativos;
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:194` — 0067: - ajusta la regresión de MANT.1 R3 para exigir encabezados funcionales en YAML, no encabezados con nombre de revisión;
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:198` — 0065: - limpia encabezados de YAML GitHub para que describan propósito y alcance permanente, sin declarar MANT.1 dentro de archivos operativos;
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:200` — 0067: - ajusta la regresión de MANT.1 R3 para exigir encabezados funcionales en YAML, no encabezados con nombre de revisión;
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:201` — 0068: - agrega regresión MANT.1 R4 para impedir trazabilidad de revisión en encabezados operativos;
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:207` — 0067: - ajusta la regresión de MANT.1 R3 para exigir encabezados funcionales en YAML, no encabezados con nombre de revisión;
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:208` — 0068: - agrega regresión MANT.1 R4 para impedir trazabilidad de revisión en encabezados operativos;
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:216` — 0071: ### MANT.1 R3 — encabezados YAML de GitHub
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:232` — 0077: - agrega regresión documental para proteger encabezados funcionales en `.github/` y que MANT.1 R1/R2/R3 queden visibles en la documentación transversal.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:234` — 0079: ### MANT.1 R2 — documentación de scripts y hooks
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:238` — 0077: - agrega regresión documental para proteger encabezados funcionales en `.github/` y que MANT.1 R1/R2/R3 queden visibles en la documentación transversal.
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:240` — 0079: ### MANT.1 R2 — documentación de scripts y hooks
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:242` — 0081: - materializa los primeros cambios de mantenimiento técnico derivados de MANT.1 R1, sin cambiar `VERSION`, `APP_VERSION`, motores previsionales ni normativa;
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:246` — 0079: ### MANT.1 R2 — documentación de scripts y hooks
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:248` — 0081: - materializa los primeros cambios de mantenimiento técnico derivados de MANT.1 R1, sin cambiar `VERSION`, `APP_VERSION`, motores previsionales ni normativa;
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:372` — 0008: **Última actualización de mantenimiento:** MANT.1 R5E — estandarización de nombres de carpetas — 2026-08-23
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:377` — 0013: MANT.1 R1 dejó la auditoría inicial de mantenibilidad, MANT.1 R2 documenta
+- `docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md:379` — 0015: de los checks remotos y MANT.1 R3 documenta los YAML de GitHub sin cambiar CI,
+- Coincidencias adicionales omitidas en esta vista: 308
+
+## 5. Decisión pendiente
+
+VER.2 R1 debe decidir cuáles referencias son:
+
+- estado vigente,
+- ancla histórica preservada,
+- candidato no publicado,
+- documentación obsoleta que requiere actualización,
+- evidencia cerrada que no debe tocarse.
