@@ -5,6 +5,23 @@
 **Revisión de planificación hacia 1.0:** 2026-08-20
 **Reconciliación revision-aware:** 2026-08-22
 
+
+<!-- DOC1-R1-POST-MANT1:START -->
+## Estado post-MANT.1
+
+Después de `v0.0.26-beta`, el repositorio integró trabajo funcional, técnico y documental sin publicar un nuevo tag formal.
+
+Estado vigente:
+
+- Último tag formal: `v0.0.26-beta`.
+- Versión canónica en `VERSION`: `0.0.26-beta`.
+- Candidato revision-aware VER.2: `0.0.71.01-beta`, pendiente y no publicado.
+- MANT.1 quedó cerrado mediante PR #55 como mantenimiento técnico/documental posterior a R5H/R6/R7.
+- DOC.1 R1 queda activo para reconciliar documentación Markdown vigente post-MANT.1.
+
+Este documento no crea una release nueva; solo aclara el estado posterior al cierre operativo de MANT.1.
+<!-- DOC1-R1-POST-MANT1:END -->
+
 ## 1. Naturaleza del registro
 
 Las versiones `0.0.1-beta` a `0.0.21-beta` fueron asignadas retrospectivamente en GOV.1.1 para organizar estados funcionales que ya existían en Git. No fueron tags ni GitHub Releases publicados en sus fechas originales. La migración criptográfica del 2026-08-17 permitió materializarlas posteriormente como tags firmados, conservando explícitamente esa naturaleza retrospectiva.

@@ -1,5 +1,20 @@
 # Política de seguridad
 
+
+<!-- DOC1-R1-POST-MANT1:START -->
+## Estado de seguridad post-MANT.1
+
+El cierre de MANT.1 R7 no cambia la política de seguridad ni convierte candidatos de versión en releases publicadas.
+
+Estado vigente:
+
+- La versión canónica permanece en `0.0.26-beta`.
+- `v0.0.26-beta` continúa como último tag formal.
+- `0.0.71.01-beta` continúa como candidato VER.2 pendiente.
+- DOC.1 R1 solo actualiza documentación Markdown vigente.
+- Las rutas de reporte responsable y revisión de vulnerabilidades se mantienen sin cambio material.
+<!-- DOC1-R1-POST-MANT1:END -->
+
 ## Versiones soportadas
 
 Mi Retiro Proyectado se encuentra en **desarrollo beta**. Los estados históricos conservan la familia legacy `0.0.N-beta`; VER.2 adopta para candidatos y estados nuevos la familia revision-aware `0.GG.RR.EE-beta`. El repositorio de código es público, pero la aplicación no se declara todavía como versión oficial ni como despliegue de producción.
@@ -7,7 +22,7 @@ Mi Retiro Proyectado se encuentra en **desarrollo beta**. Los estados histórico
 | Línea | Soporte de seguridad |
 |---|---|
 | `0.0.71.01-beta` | Candidata vigente de VER.2; recibe correcciones sobre la rama de reconciliación hasta cerrar su gate |
-| `0.0.26-beta` | Soportada como beta vigente legacy/candidata de VER.2 para regresiones históricas; último hito formal legacy etiquetado |
+| `0.0.26-beta` | Soportada como beta vigente legacy; último hito formal legacy etiquetado y referencia estable para regresiones históricas |
 | `0.0.25-beta` y anteriores | Históricas; no reciben correcciones independientes |
 
 La base histórica anterior a VER.2 se reconstruye en G001–G070 sin crear tags retroactivos. G071 solo se considera aceptado después del ledger/validador, gate completo, PR/CI e integración.
@@ -78,4 +93,4 @@ Esta función está habilitada y complementa el canal privado alternativo indica
 | Versión | Estado de soporte |
 | --- | --- |
 | `0.0.71.01-beta` | Candidata vigente de VER.2; Soportada durante la rama de reconciliación hasta cerrar su gate |
-| `0.0.26-beta` | Candidata vigente de VER.2 como referencia legacy preservada por las pruebas históricas; último hito formal legacy etiquetado |
+| `0.0.26-beta` | Candidata vigente de VER.2 como referencia legacy histórica preservada por pruebas de regresión; Soportada como hito formal legacy etiquetado |

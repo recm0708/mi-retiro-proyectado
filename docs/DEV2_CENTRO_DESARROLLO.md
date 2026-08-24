@@ -10,6 +10,20 @@
 
 **Estado R3:** integrado en `main` mediante PR #40.
 
+
+<!-- DOC1-R1-REVISION-MANUAL:START -->
+## Nota de lectura post-MANT.1
+
+DEV.2 queda preservado como bloque funcional cerrado. Sus referencias a VER.2 o a bloques posteriores se conservan como trazabilidad del momento en que fue documentado.
+
+Estado vigente:
+
+- DEV.2 no es el bloque activo actual.
+- MANT.1 quedó cerrado operativamente en R7.
+- DOC.1 R1 es el bloque documental activo para actualización Markdown post-MANT.1.
+- `VERSION` permanece en `0.0.26-beta`.
+<!-- DOC1-R1-REVISION-MANUAL:END -->
+
 DEV.2 abre y cierra una superficie interna y local para revisar el estado técnico
 de Developer Diagnostics sin alterar los cálculos previsionales, sin leer datos
 de simulación y sin exponer información personal o financiera.

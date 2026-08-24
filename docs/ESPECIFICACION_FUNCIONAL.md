@@ -7,6 +7,24 @@
 **Actualización funcional vigente:** UX.4.6e R8 — procedencia editable — 2026-08-19
 **Clasificación:** Funcional / Auditoría
 
+
+<!-- DOC1-R1-POST-MANT1:START -->
+## Estado funcional post-MANT.1
+
+El cierre MANT.1 R7 no altera el alcance funcional de la aplicación. La especificación funcional conserva los mismos motores, flujos y criterios de cálculo existentes antes del cierre operativo.
+
+Estado vigente:
+
+- No se modifican fórmulas previsionales.
+- No se modifican parámetros normativos.
+- No se modifica `VERSION`.
+- No se modifican datos ni entregables.
+- MANT.1 queda cerrado como bloque técnico/documental.
+- DOC.1 R1 queda activo únicamente para corregir documentación Markdown vigente desalineada después de MANT.1.
+
+Las referencias históricas dentro de auditorías, ADR o archivos archivados no deben reinterpretarse como estado vigente.
+<!-- DOC1-R1-POST-MANT1:END -->
+
 Este documento tiene dos capas:
 
 1. **Contrato funcional vigente consolidado**, que describe el comportamiento actual.

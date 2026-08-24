@@ -9,6 +9,23 @@
 **Revisión de mantenimiento:** MANT.1 R5D — política, plantillas y uniformidad por extensión — 2026-08-23
 **Clasificación:** Técnica / Calidad
 
+
+<!-- DOC1-R1-POST-MANT1:START -->
+## Estado de validación post-MANT.1
+
+La validación documental vigente queda alineada con el cierre operativo de MANT.1 R7.
+
+Evidencia observada:
+
+- Suite completa local post-R7: `939 passed`.
+- Gate `pre-commit` observado durante R7: `928 tests OK`.
+- Pruebas focalizadas R5H/R6/R7 ejecutadas correctamente antes del cierre.
+- `git diff --check` no reportó errores antes del commit R7.
+- Archivos protegidos verificados sin cambios: `VERSION`, `app/core/version.py`, `app/core/config.py`, `regulations/`, `data/` y `_entregas/`.
+
+DOC.1 R1 no cambia el contrato funcional ni los motores previsionales. Su validación se limita a coherencia documental, referencias Markdown y preservación del estado canónico post-MANT.1.
+<!-- DOC1-R1-POST-MANT1:END -->
+
 La estrategia combina pruebas automatizadas, CI, casos sintéticos/anonimizados y validación manual cuando una propiedad no puede demostrarse suficientemente con código.
 
 ## Validación MANT.1 R5H — nombres técnicos restantes

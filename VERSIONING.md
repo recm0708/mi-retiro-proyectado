@@ -6,6 +6,23 @@
 **Revisión de transición a versión oficial:** 2026-08-19
 **Revisión revision-aware:** 2026-08-22
 
+
+<!-- DOC1-R1-POST-MANT1:START -->
+## Estado post-MANT.1
+
+La fuente canónica de versión continúa siendo `VERSION`.
+
+Estado vigente:
+
+- `VERSION` conserva `0.0.26-beta`.
+- `v0.0.26-beta` continúa siendo el último tag formal vigente.
+- `0.0.71.01-beta` se conserva como candidato de reconciliación VER.2, no como versión publicada.
+- MANT.1 quedó cerrado operativamente en R7 mediante PR #55 y commit squash `57078f2`.
+- DOC.1 R1 no modifica la política de versionado; solo sincroniza documentación Markdown vigente después de MANT.1.
+
+Cualquier promoción futura de versión debe seguir el proceso formal de release, validación, PR/CI, tag y evidencia documental correspondiente.
+<!-- DOC1-R1-POST-MANT1:END -->
+
 ## 1. Objetivo
 
 Esta política identifica de forma auditable cada estado aceptado de Mi Retiro Proyectado y evita que versión visible, API, documentación, artefactos y Git describan estados diferentes.

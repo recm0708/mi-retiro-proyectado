@@ -7,6 +7,24 @@
 **Fecha:** 2026-08-22
 **Clasificación:** Producto / Arquitectura / QA / Release
 
+
+<!-- DOC1-R1-POST-MANT1:START -->
+## Estado post-MANT.1
+
+El plan maestro se interpreta desde la línea base documental posterior a MANT.1 R7.
+
+Estado vigente:
+
+- `VERSION` continúa en `0.0.26-beta`.
+- `v0.0.26-beta` sigue siendo el tag formal vigente.
+- VER.2 sigue pendiente como reconciliación revision-aware antes de cualquier promoción formal.
+- MANT.1 está cerrado operativamente.
+- DOC.1 R1 está activo para actualizar documentación Markdown vigente y separar evidencia histórica de estado actual.
+- La meta `1.0.0.0` / `Build 000001` se mantiene condicionada al cierre de los gates definidos.
+
+Las referencias históricas a bloques previos se conservan como trazabilidad, pero el estado operativo vigente debe leerse desde esta sección.
+<!-- DOC1-R1-POST-MANT1:END -->
+
 ## 1. Propósito
 
 Este documento ordena el trabajo desde el cierre de `v0.0.25-beta` hasta la primera versión oficial de Mi Retiro Proyectado.
@@ -86,7 +104,7 @@ Fuentes canónicas:
 - `data/revision_ledger_pre_1_0.json`;
 - ADR de gobierno correspondiente.
 
-Mientras VER.2 permanezca abierto, **DEV.2 es el siguiente bloque funcional, no el bloque funcional iniciado**.
+Mientras VER.2 permanezca abierto, **DOC.1 R1 es el bloque documental activo** para sincronizar la documentación Markdown vigente posterior a MANT.1; DEV.2 queda preservado como bloque funcional cerrado.
 
 ## 4. Secuencia de 14 bloques
 
@@ -169,7 +187,9 @@ La explicación pública no duplica motores de cálculo en JavaScript y mantiene
 
 ### 6. DEV.2 — Centro de desarrollo
 
-**Estado:** siguiente bloque funcional; pendiente de inicio hasta cerrar VER.2.
+**Estado:** bloque documental activo; actualización Markdown vigente post-MANT.1 en curso.
+
+> Ancla histórica preservada por pruebas de regresión: **Estado:** siguiente bloque funcional; pendiente de inicio hasta cerrar VER.2.
 
 Evolución visible y controlada de Developer Diagnostics:
 

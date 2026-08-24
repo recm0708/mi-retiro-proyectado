@@ -10,6 +10,20 @@
 **Clasificación:** Técnica / Gobierno / Auditoría
 **ADR indexadas:** 178 (`ADR-001` a `ADR-178`)
 
+
+<!-- DOC1-R1-REVISION-MANUAL:START -->
+## Nota de lectura post-MANT.1
+
+Este registro conserva decisiones técnicas históricas y vigentes. Las menciones a R6, R7, UX.4.6 o bloques anteriores deben leerse según el contexto de cada ADR.
+
+Estado vigente para lectura transversal:
+
+- MANT.1 quedó cerrado operativamente en R7.
+- DOC.1 R1 queda activo para sincronizar documentación Markdown vigente.
+- Las decisiones históricas no se reescriben como si hubieran sido tomadas en DOC.1 R1.
+- `VERSION` permanece en `0.0.26-beta`.
+<!-- DOC1-R1-REVISION-MANUAL:END -->
+
 Este registro conserva decisiones de arquitectura, modelado, UX, precisión, seguridad y aplicación normativa. Una ADR explica por qué el proyecto adoptó una decisión; no crea una norma jurídica.
 
 ## 1. Reglas de lectura

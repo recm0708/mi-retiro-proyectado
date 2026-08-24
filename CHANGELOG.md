@@ -5,6 +5,10 @@ Este archivo registra **cambios notables por versión**. No sustituye el histori
 Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamente en GOV.1.1 a partir del historial real. `0.0.22-beta` es la primera versión formal adoptada bajo la política de GOV.1.2.
 
 ## [Unreleased]
+- DOC.1 R1: inicia la auditoría integral de todos los archivos Markdown post-MANT.1, con inventario, matriz de decisión, contexto de actualización y línea base documental.
+- DOC.1 R1: cierra la auditoría documental Markdown post-MANT.1, documenta alcance, evidencia, límites respetados y agrega regresión documental.
+- MANT.1 R7: cierra operativamente la auditoría post-renombres mediante PR #55, dejando `main` alineado con R5H/R6/R7 y sin cambios en archivos protegidos.
+- MANT.1 R6: valida funcionalmente el repositorio después de los renombres técnicos, con pruebas focalizadas y documentación de cierre.
 - MANT.1 R5H: se completa la auditoría de nombres técnicos restantes, con normalización de módulos, assets, plantillas, workflow y pruebas, sin cambios en cálculo, normativa ni versión.
 
 ### MANT.1 R5G
@@ -119,7 +123,7 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 - R1.4 simplifica la etiqueta visible de sustitución numérica de **Ejemplo con números** a **Ejemplo** sin alterar fórmulas ni valores;
 - consolida R1/R1.2/R1.3/R1.4 como cierre de la guía pública de cálculo;
 - la validación manual confirmó navegación, recorrido Pasos 1–6, SEBD, Mixto, SUCGS, tablas compactas, terminología contextual, ejemplos sustituidos y jerarquía visual;
-- el gate de cierre queda fijado en **841 pruebas** y DEV.2 queda como siguiente bloque funcional después de cualquier reconciliación transversal necesaria.
+- el gate de cierre quedó fijado en **841 pruebas** y DEV.2 quedó documentado en ese momento como bloque funcional posterior a cualquier reconciliación transversal necesaria.
 
 ### UX.4.6i R1.3 — ejemplos sustituidos, términos y respiración visual
 
@@ -301,8 +305,8 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 - R9.1 cerró localmente con **660 pruebas en `OK`**, compilación/sintaxis y `git diff --check` limpios;
 - R9.2 integró el PR #21 por squash en `18e81e4ff58a1ad9622d366f7add10b7674f6e44`, con commit verificado y los checks `Python 3.13`, `Python 3.14` y `Auditoría de gobernanza` en verde;
 - el árbol Git integrado `e0c4f314c5365a89178bd0fadb8a950286abb6ff` coincide exactamente con el árbol del head validado `a064bf745f4fb5e55e70f6ae3fd9b2bb80af8148`;
-- cerrado UX.4.6e y asociado el hito al tag formal `v0.0.25-beta`; UX.4.6f — Paso 4 queda como siguiente bloque funcional;
-- la primera beta pública continúa siendo futura y el siguiente bloque funcional será UX.4.6f — Paso 4.
+- cerrado UX.4.6e y asociado el hito al tag formal `v0.0.25-beta`; UX.4.6f — Paso 4 quedó documentado en ese momento como bloque funcional posterior;
+- la primera beta pública continuaba siendo futura y UX.4.6f — Paso 4 quedó documentado en ese momento como bloque funcional posterior.
 
 ### Checkpoint pre-R8 — identidad visual y repositorio público
 

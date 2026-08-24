@@ -198,3 +198,12 @@ La metadata de versión de revisión de un documento de dominio puede conservar 
 ## MANT.1 R7 — Cierre operativo post-auditoría
 
 - `CIERRE_OPERATIVO_POST_AUDITORIA_R7.md`: cierre operativo posterior a R5H/R6. Verifica estado de ramas, evidencias documentales, pruebas focalizadas y protección de archivos sensibles.
+
+## DOC.1 R1 — Auditoría integral Markdown post-MANT.1
+
+- `AUDITORIA_MARKDOWN_POST_MANT1_DOC1_R1.md`: inventario integral de archivos Markdown posterior al cierre de MANT.1.
+- `MATRIZ_DECISION_MARKDOWN_DOC1_R1.md`: clasificación de Markdown en actualizar, revisar, preservar histórico, preservar auditoría cerrada o sin cambio inicial.
+- `CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md`: extracción de contexto para documentos candidatos antes de actualizarlos.
+- `LINEA_BASE_DOCUMENTAL_POST_MANT1_DOC1_R1.md`: línea base documental vigente para sincronizar README, roadmap, validación, versionado y demás documentos vivos post-MANT.1.
+- `REVISION_SOLO_SI_APLICA_DOC1_R1.md`: revisión de documentos de soporte o política general marcados como actualizar solo si aplica; no requirieron cambios materiales.
+- `CIERRE_DOCUMENTAL_MARKDOWN_DOC1_R1.md`: cierre formal de DOC.1 R1 con alcance revisado, evidencia generada, límites respetados y validación documental.

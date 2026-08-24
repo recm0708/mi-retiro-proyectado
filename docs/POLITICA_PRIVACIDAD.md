@@ -11,6 +11,20 @@
 **Última revisión documental:** PLAN.1 R3B1 — 2026-08-20
 **Revisión jurídica externa:** Pendiente antes de la primera versión oficial o de un despliegue remoto que cambie el tratamiento
 
+
+<!-- DOC1-R1-REVISION-MANUAL:START -->
+## Nota de lectura post-MANT.1
+
+La política de privacidad mantiene su alcance vigente. Las menciones a R6 u otros bloques anteriores corresponden a trazabilidad histórica de cambios.
+
+Estado vigente:
+
+- MANT.1 quedó cerrado operativamente en R7.
+- DOC.1 R1 no cambia el tratamiento de datos ni la política material.
+- `VERSION` permanece en `0.0.26-beta`.
+- La aplicación sigue siendo independiente y no oficial.
+<!-- DOC1-R1-REVISION-MANUAL:END -->
+
 Esta política describe el tratamiento implementado actualmente. No constituye certificación jurídica.
 
 ## 1. Responsable
