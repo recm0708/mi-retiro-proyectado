@@ -217,3 +217,6 @@ La metadata de versión de revisión de un documento de dominio puede conservar 
 - [Análisis de contradicciones VER.2 R2](VER2_R2_ANALISIS_CONTRADICCIONES_POST_R1.md)
 - [Propuesta de corrección de documentación viva VER.2 R2](VER2_R2_PROPUESTA_CORRECCION_DOCUMENTACION_VIVA.md)
 - [Cierre de documentación viva VER.2 R2](VER2_R2_CIERRE_DOCUMENTACION_VIVA_POST_R1.md)
+## VER.2 R3 — Decisión de versión candidata post-R2
+
+- [Decisión de versión candidata VER.2 R3](VER2_R3_DECISION_VERSION_CANDIDATA_POST_R2.md)
