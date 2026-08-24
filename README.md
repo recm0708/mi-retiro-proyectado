@@ -21,21 +21,23 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 ## Estado del proyecto
 
 - **Versión canónica vigente:** `0.0.71.01-beta`, obtenida exclusivamente desde [`VERSION`](VERSION).
-- **Último cierre integrado en `main`:** MANT.1 R7 — cierre operativo post-auditoría, PR #55, commit squash `57078f2`.
-- **Estado de MANT.1:** cerrado operativamente después de R5H, R6 y R7. El cierre confirma documentación de auditoría, pruebas focalizadas, suite completa local y ausencia de cambios en archivos protegidos.
-- **Estado de VER.2:** G071/E01 promovido en `VERSION` como `0.0.71.01-beta`; el tag formal `v0.0.71.01-beta` queda pendiente de creación firmada post-merge.
-- **Última versión formal legacy etiquetada:** `0.0.26-beta` — tag firmado e inmutable `v0.0.26-beta`.
+- **Último cierre integrado en `main`:** NOR.2 R1 — línea base de normalización, PR #67, commit squash `c0e06ca`.
+- **Estado de VER.2:** cerrado; G071/E01 promovido en `VERSION` como `0.0.71.01-beta` y tag `v0.0.71.01-beta` publicado.
+- **Última versión formal legacy:** `0.0.26-beta` — tag firmado e inmutable `v0.0.26-beta`.
 - **Etapa:** desarrollo beta; repositorio público y ejecución orientada actualmente a entorno local.
-- **Programa GOV.1:** cerrado — Auditoría, Gobierno y Trazabilidad Pre-Beta.
-- **Programa PLAN.1:** cerrado — Alineación maestra hacia la primera versión oficial.
-- **Bloque funcional cerrado:** DEV.2 — Centro de desarrollo integrado por PR #37–#40 y cerrado documentalmente en R4.
-- **Bloque técnico cerrado:** MANT.1 — mantenimiento técnico, nomenclatura, comentarios, estructura, auditoría funcional post-renombres y cierre operativo.
-- **Bloque documental activo:** DOC.1 R1 — auditoría integral de documentación Markdown post-MANT.1.
+- **GOV.1:** cerrado.
+- **PLAN.1:** cerrado.
+- **DEV.2:** cerrado.
+- **MANT.1:** cerrado.
+- **DOC.1 R1:** cerrado como auditoría documental post-MANT.1.
+- **NOR.1:** cerrado en R7; estándares determinísticos establecidos.
+- **NOR.2 R2:** activo; matriz de decisión de migración y normalización integral previa a SEC.2.
+- **SEC.2:** pausado hasta completar NOR.2.
 - **Primera versión oficial objetivo:** `1.0.0.0` con `Build 000001`, únicamente después de cerrar todos los gates definidos en el plan maestro.
 
 La visibilidad pública del repositorio **no convierte una beta de desarrollo en versión oficial, no constituye un despliegue de producción y no modifica por sí sola la licencia vigente**.
 
-La versión se obtiene exclusivamente del archivo [`VERSION`](VERSION). La política completa se documenta en [`VERSIONING.md`](VERSIONING.md). La reconciliación revision-aware pendiente se audita en [`docs/AUDITORIA_VERSIONADO_PRE_1_0.md`](docs/AUDITORIA_VERSIONADO_PRE_1_0.md), [`docs/MATRIZ_DECISION_REVISIONES_VER2.md`](docs/MATRIZ_DECISION_REVISIONES_VER2.md), [`docs/LEDGER_REVISIONES_PRE_1_0.md`](docs/LEDGER_REVISIONES_PRE_1_0.md) y [`data/revision_ledger_pre_1_0.json`](data/revision_ledger_pre_1_0.json). El estado documental post-MANT.1 se consolida en [`docs/LINEA_BASE_DOCUMENTAL_POST_MANT1_DOC1_R1.md`](docs/LINEA_BASE_DOCUMENTAL_POST_MANT1_DOC1_R1.md).
+La versión se obtiene exclusivamente del archivo [`VERSION`](VERSION). La política completa se documenta en [`VERSIONING.md`](VERSIONING.md). VER.2 ya completó la promoción G071/E01 y publicó `v0.0.71.01-beta`; su evidencia histórica será reorganizada por NOR.2 sin perder trazabilidad. Los estándares vigentes del repositorio están en [`docs/standards/`](docs/standards/) y la normalización activa se documenta en [`docs/audits/repository/`](docs/audits/repository/).
 
 ## Capacidades implementadas
 
@@ -113,7 +115,7 @@ Documentos principales:
 - [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md) — reglas de participación y convivencia;
 - [`SUPPORT.md`](SUPPORT.md) — rutas de soporte y reporte.
 
-Los documentos de UX que funcionaban como bitácoras de revisión se conservan bajo `docs/archive/ux/`. Las rutas anteriores permanecen como índices de compatibilidad para no romper referencias existentes.
+La documentación vigente debe apuntar únicamente a rutas canónicas actuales. Las fases cerradas se preservan mediante Git y, cuando conservan valor documental independiente, bajo `docs/archive/`; NOR.2 no mantendrá stubs permanentes de rutas antiguas solo por compatibilidad documental.
 
 ## Versiones e historia
 
@@ -123,7 +125,7 @@ Los documentos de UX que funcionaban como bitácoras de revisión se conservan b
 
 Después de `v0.0.26-beta`, UX.4.6f–UX.4.6i continuaron históricamente sobre ese mismo valor de `VERSION`. VER.2 reconstruye todo el tramo sin inventar tags: el último estado aceptado de la base `7037addd` es **G070/E02**, cierre de UX.4.6i.
 
-La nueva familia beta usa `0.GG.RR.EE-beta`. VER.2 R4 promueve `0.0.71.01-beta` (G071/E01) en `VERSION` después de R1, R2 y R3; el tag formal `v0.0.71.01-beta` queda reservado para el cierre firmado post-merge. No se crean tags revision-aware retrospectivos para G001–G070.
+La nueva familia beta usa `0.GG.RR.EE-beta`. VER.2 R4 promovió `0.0.71.01-beta` (G071/E01) en `VERSION` después de R1, R2 y R3, y el tag firmado `v0.0.71.01-beta` quedó publicado durante el cierre post-release. No se crean tags revision-aware retrospectivos para G001–G070.
 
 Objetivo de release estable:
 
@@ -151,9 +153,9 @@ Git continúa siendo la evidencia primaria de autores, fechas, hashes y contenid
 mi-retiro-proyectado/
 ├── app/
 │   ├── core/
-│   ├── modelos/
-│   ├── motores/
-│   ├── servicios/
+│   ├── engines/
+│   ├── models/
+│   ├── services/
 │   ├── static/
 │   ├── templates/
 │   └── main.py
@@ -305,7 +307,7 @@ Las siguientes líneas se conservan como compatibilidad histórica de pruebas an
 - **841 pruebas** — evidencia histórica UX.4.6i / DEV.2.
 - **UX.4.6f:** cerrado — evidencia histórica del cierre funcional UX.4.6f.
 - R1 → R1.2 → R1.3 → R1.4 — secuencia histórica UX.4.6i.
-- **Versión VER.2 G071/E01:** `0.0.71.01-beta` — promovida en `VERSION`; el tag formal queda pendiente de firma post-merge.
+- **Versión VER.2 G071/E01:** `0.0.71.01-beta` — promovida en `VERSION`; el tag firmado `v0.0.71.01-beta` está publicado.
 - `sebd-panama` adoptado.
 - tag firmado `v0.0.26-beta` publicado.
 - Social Preview e identidad visual oficial configurados.

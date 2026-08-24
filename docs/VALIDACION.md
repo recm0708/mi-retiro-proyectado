@@ -40,6 +40,18 @@ rutas públicas. El gate debe demostrar además que la documentación transversa
 registra NOR.2 R1 y que la evidencia de auditoría permanece bajo `docs/audits/`.
 <!-- NOR2-R1-VALIDATION:END -->
 
+
+<!-- NOR2-R2-VALIDATION:START -->
+## Validación NOR.2 R2
+
+R2 protege la matriz de migración y el estado público del repositorio. La
+validación exige que `README.md` no marque DOC.1 como activo, reconozca NOR.1
+como cerrado, NOR.2 R2 como activo y represente las carpetas reales
+`engines/`, `models/` y `services/`.
+
+La versión de aplicación no cambia.
+<!-- NOR2-R2-VALIDATION:END -->
+
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado de validación post-MANT.1
 

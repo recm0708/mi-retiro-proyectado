@@ -36,6 +36,18 @@ matriz de migración por impacto antes de modificar rutas críticas.
 SEC.2 permanece pausado durante NOR.2.
 <!-- NOR2-R1-BASELINE:END -->
 
+
+<!-- NOR2-R2-MATRIX:START -->
+## NOR.2 R2 — matriz de migración
+
+R2 clasifica los hallazgos de R1 y fija el orden R3–R8. El árbol operativo
+quedará con rutas y documentación vigentes; Git y `docs/archive/` preservarán
+la historia cuando corresponda. `README.md` se corrige desde R2 y se vuelve a
+auditar en el cierre.
+
+SEC.2 permanece pausado.
+<!-- NOR2-R2-MATRIX:END -->
+
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado post-MANT.1
 

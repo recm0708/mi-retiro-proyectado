@@ -52,15 +52,15 @@ class TestDev2R4CierreFinal(unittest.TestCase):
         ):
             self.assertNotIn(prohibido, combinado)
 
-    def test_readme_y_changelog_marcan_dev2_cerrado_y_ver2_pendiente(self):
+    def test_readme_refleja_dev2_cerrado_y_evidencia_preserva_su_historia(self):
         readme = self._leer("README.md")
+        documento = self._leer("docs/DEV2_CENTRO_DESARROLLO.md")
         changelog = self._leer("CHANGELOG.md")
 
-        self.assertIn("**Bloque funcional cerrado:** DEV.2", readme)
-        self.assertIn("**Siguiente bloque funcional:** DEV.2", readme)
-        self.assertIn("referencia histórica preservada", readme)
-        self.assertIn("cerrado documentalmente en R4", readme)
-        self.assertIn("**Bloque transversal pendiente:** VER.2", readme)
+        self.assertIn("**DEV.2:** cerrado.", readme)
+        self.assertIn("**NOR.2 R2:** activo", readme)
+        self.assertIn("**SEC.2:** pausado", readme)
+        self.assertIn("DEV.2 cerrado documentalmente en R4", documento)
         self.assertIn("### DEV.2 — cierre del Centro de desarrollo", changelog)
         self.assertIn("cierra documentalmente DEV.2", changelog)
         self.assertIn("deja VER.2 como siguiente cierre transversal", changelog)

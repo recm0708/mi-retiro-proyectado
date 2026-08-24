@@ -21,7 +21,7 @@ class TestVer2DocumentacionVigente(unittest.TestCase):
         self.assertEqual(version, APP_VERSION)
         self.assertEqual((71, 1), descomponer_version_beta_revision(version))
 
-    def test_documentos_vivos_declaran_promocion_y_tag_pendiente(self):
+    def test_documentos_vivos_declaran_promocion_vigente(self):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
         roadmap = (DOCS / "ROADMAP.md").read_text(encoding="utf-8")
         plan = (DOCS / "PLAN_MAESTRO_HACIA_1_0.md").read_text(encoding="utf-8")

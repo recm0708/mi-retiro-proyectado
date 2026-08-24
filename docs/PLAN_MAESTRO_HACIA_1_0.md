@@ -32,6 +32,18 @@ impacto. NOR.2 sigue siendo un checkpoint transversal y no agrega un bloque
 funcional al plan de 14 bloques.
 <!-- NOR2-R1-STATUS:END -->
 
+
+<!-- NOR2-R2-STATUS:START -->
+## NOR.2 R2 — decisión de migración
+
+R2 convierte la línea base en un plan R3–R8 y adopta como gate de cierre la
+sincronización completa de README, índice documental, roadmap, plan maestro,
+validación, arquitectura, enlaces, imports y estado de fases.
+
+La historia se conserva mediante Git y archivo justificado; el árbol vigente no
+mantendrá copias sustituidas únicamente por compatibilidad documental.
+<!-- NOR2-R2-STATUS:END -->
+
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado post-MANT.1
 

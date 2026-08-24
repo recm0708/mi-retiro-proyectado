@@ -328,13 +328,22 @@ class TestUX46iR1ComoSeCalcula(unittest.TestCase):
         plan = (ROOT / "docs/PLAN_MAESTRO_HACIA_1_0.md").read_text(encoding="utf-8")
         validacion = (ROOT / "docs/VALIDACION.md").read_text(encoding="utf-8")
         guia = (ROOT / "docs/COMO_SE_CALCULA.md").read_text(encoding="utf-8")
-        self.assertIn("R1 → R1.2 → R1.3 → R1.4", readme)
-        self.assertIn("DEV.2 — Centro de desarrollo", readme)
+
+        self.assertIn("**DEV.2:** cerrado.", readme)
+        self.assertIn("**NOR.2 R2:** activo", readme)
+        for revision in (
+            "R1 — ruta pública",
+            "R1.2 — navegación",
+            "R1.3 — ejemplos sustituidos",
+            "R1.4 — etiqueta **Ejemplo**",
+        ):
+            self.assertIn(revision, roadmap)
         self.assertIn("R1.4", roadmap)
         self.assertIn("841 pruebas", roadmap)
         self.assertIn("R1.2", plan)
         self.assertIn("R1.3", plan)
         self.assertIn("R1.4", plan)
+        self.assertIn("DEV.2 — Centro de desarrollo", plan)
         self.assertNotIn("UX.4.6i R1.1", plan)
         self.assertIn("841 pruebas en `OK`", validacion)
         self.assertIn("## Cierre de UX.4.6i", guia)
