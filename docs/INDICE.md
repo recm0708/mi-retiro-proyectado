@@ -212,3 +212,8 @@ La metadata de versión de revisión de un documento de dominio puede conservar 
 - [Auditoría de reconciliación VER.2 R1](VER2_R1_AUDITORIA_RECONCILIACION_POST_DOC1.md)
 - [Matriz de decisión VER.2 R1](VER2_R1_MATRIZ_DECISION_RECONCILIACION_POST_DOC1.md)
 - [Decisión operativa VER.2 R1](VER2_R1_DECISION_OPERATIVA_POST_DOC1.md)
+## VER.2 R2 — Documentación viva post-R1
+
+- [Análisis de contradicciones VER.2 R2](VER2_R2_ANALISIS_CONTRADICCIONES_POST_R1.md)
+- [Propuesta de corrección de documentación viva VER.2 R2](VER2_R2_PROPUESTA_CORRECCION_DOCUMENTACION_VIVA.md)
+- [Cierre de documentación viva VER.2 R2](VER2_R2_CIERRE_DOCUMENTACION_VIVA_POST_R1.md)
