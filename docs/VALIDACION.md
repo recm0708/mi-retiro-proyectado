@@ -6,9 +6,27 @@
 **Base documental histórica:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal histórica preservada:** UX.4.6e R8 — validación funcional y procedencia editable — 2026-08-19
 **Última revisión transversal:** UX.4.6f R2 integrada y cierre del Paso 4 — 2026-08-20
-**Revisión de mantenimiento:** MANT.1 R5D — política, plantillas y uniformidad por extensión — 2026-08-23
+**Revisión de normalización:** NOR.1 R7 — cierre de estándares y preparación de NOR.2 — 2026-08-24
 **Clasificación:** Técnica / Calidad
 
+
+<!-- NOR1-R7-VALIDATION:START -->
+## Validación NOR.1
+
+NOR.1 R7 cierra la fase de definición de estándares y prepara la transición a
+NOR.2.
+
+Línea base observada antes de R7:
+
+- NOR.1 R6: `5 passed` en las pruebas específicas de estándares;
+- NOR.1 + MANT.1 R5E: `9 passed, 19 subtests passed`;
+- gate `pre-commit` de R6: `933 tests OK`;
+- workflows de **Validación continua** y **Auditoría de gobernanza** en verde;
+- PR #65 integrado por squash.
+
+El cierre formal de R7 exige repetir pruebas focales, gate completo, CI y merge.
+NOR.2 no debe iniciarse desde una rama que no haya cumplido estos gates.
+<!-- NOR1-R7-VALIDATION:END -->
 
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado de validación post-MANT.1

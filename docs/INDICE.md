@@ -3,10 +3,19 @@
 **Estado:** vigente
 **Versión de aplicación:** `0.0.71.01-beta` — VER.2 G071/E01 promovida en R4
 **Último tag formal legacy:** `v0.0.26-beta`
-**Última actualización transversal:** VER.2 — segunda pasada contable y materialización del ledger — 2026-08-22
+**Última actualización transversal:** NOR.1 R7 — cierre de estándares y preparación de NOR.2 — 2026-08-24
 **Cierres históricos preservados:** UX.4.6i / PR #34 — 841 pruebas; UX.4.6e R9 — `v0.0.25-beta`
 
 Este archivo es el punto de entrada para la documentación técnica, funcional, normativa, de privacidad, validación y auditoría de Mi Retiro Proyectado.
+
+
+## Estado de normalización del repositorio
+
+- **NOR.1:** cierre en R7; define el contrato estructural y de nomenclatura.
+- **NOR.2:** siguiente fase; aplicará esos estándares al árbol existente.
+- **SEC.2:** permanece pausado hasta completar NOR.2.
+- [`standards/README.md`](standards/README.md) — índice de estándares canónicos.
+- [`audits/repository/repository-standards-closure-nor1-r7.md`](audits/repository/repository-standards-closure-nor1-r7.md) — evidencia y gate de transición NOR.1 → NOR.2.
 
 ## 1. Producto y alcance
 
