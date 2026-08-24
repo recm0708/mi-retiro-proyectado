@@ -207,3 +207,8 @@ La metadata de versión de revisión de un documento de dominio puede conservar 
 - `LINEA_BASE_DOCUMENTAL_POST_MANT1_DOC1_R1.md`: línea base documental vigente para sincronizar README, roadmap, validación, versionado y demás documentos vivos post-MANT.1.
 - `REVISION_SOLO_SI_APLICA_DOC1_R1.md`: revisión de documentos de soporte o política general marcados como actualizar solo si aplica; no requirieron cambios materiales.
 - `CIERRE_DOCUMENTAL_MARKDOWN_DOC1_R1.md`: cierre formal de DOC.1 R1 con alcance revisado, evidencia generada, límites respetados y validación documental.
+## VER.2 R1 — Reconciliación post-DOC.1
+
+- [Auditoría de reconciliación VER.2 R1](VER2_R1_AUDITORIA_RECONCILIACION_POST_DOC1.md)
+- [Matriz de decisión VER.2 R1](VER2_R1_MATRIZ_DECISION_RECONCILIACION_POST_DOC1.md)
+- [Decisión operativa VER.2 R1](VER2_R1_DECISION_OPERATIVA_POST_DOC1.md)
