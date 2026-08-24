@@ -11,6 +11,12 @@ Este archivo es el punto de entrada para la documentación técnica, funcional, 
 
 ## Estado de normalización del repositorio
 
+**Revisión activa:** NOR.2 R1 — línea base de normalización.
+
+- [`audits/repository/repository-normalization-baseline-nor2-r1.md`](audits/repository/repository-normalization-baseline-nor2-r1.md) — hallazgos, riesgos y transición a la matriz de migración.
+- [`audits/repository/repository-normalization-inventory-nor2-r1.txt`](audits/repository/repository-normalization-inventory-nor2-r1.txt) — inventario reproducible del árbol versionado.
+
+
 - **NOR.1:** cierre en R7; define el contrato estructural y de nomenclatura.
 - **NOR.2:** siguiente fase; aplicará esos estándares al árbol existente.
 - **SEC.2:** permanece pausado hasta completar NOR.2.

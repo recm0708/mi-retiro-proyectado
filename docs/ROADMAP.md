@@ -25,6 +25,17 @@ NOR.2 ejecutará los movimientos, renombrados, consolidaciones y retiros que
 NOR.1 deliberadamente no realizó.
 <!-- NOR1-R7-CLOSURE:END -->
 
+
+<!-- NOR2-R1-BASELINE:START -->
+## NOR.2 R1 — línea base de normalización
+
+NOR.2 está activo. R1 audita el árbol versionado contra los estándares de NOR.1
+sin ejecutar todavía renombres ni movimientos. El resultado alimentará una
+matriz de migración por impacto antes de modificar rutas críticas.
+
+SEC.2 permanece pausado durante NOR.2.
+<!-- NOR2-R1-BASELINE:END -->
+
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado post-MANT.1
 

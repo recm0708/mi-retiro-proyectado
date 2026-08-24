@@ -1,0 +1,205 @@
+NOR.2 R1 — Inventario de normalización del repositorio
+branch=nor/nor2-r1-baseline-audit
+head=5100c7f
+tracked_files=416
+
+[TOP_LEVEL_COUNTS]
+.editorconfig	1
+.gitattributes	1
+.githooks	2
+.github	11
+.gitignore	1
+CHANGELOG.md	1
+CODE_OF_CONDUCT.md	1
+CONTRIBUTING.md	1
+GOVERNANCE.md	1
+LICENSE	1
+README.md	1
+RELEASES.md	1
+SECURITY.md	1
+SUPPORT.md	1
+THIRD_PARTY_NOTICES.md	1
+VERSION	1
+VERSIONING.md	1
+app	92
+assets	15
+data	2
+docs	140
+regulations	4
+requirements.txt	1
+scripts	3
+tests	131
+
+[EXTENSION_COUNTS]
+.css	8
+.editorconfig	1
+.gitattributes	1
+.githook	1
+.gitignore	1
+.html	17
+.ico	2
+.js	19
+.json	6
+.md	132
+.png	23
+.ps1	2
+.py	175
+.txt	8
+.yaml	1
+.yml	9
+<sin extensión>	10
+
+[EXTRA_ROOT_DIRECTORIES]
+assets
+
+[EXTRA_ROOT_FILES]
+<none>
+
+[PYTHON_NAME_CANDIDATES]
+<none>
+
+[JAVASCRIPT_NAME_CANDIDATES]
+<none>
+
+[HTML_NAME_CANDIDATES]
+<none>
+
+[CSS_NAME_CANDIDATES]
+<none>
+
+[JSON_YAML_NAME_CANDIDATES]
+data/revision_ledger_pre_1_0.json
+regulations/general_parameters.json
+
+[DOCS_ROOT_MARKDOWN_CLASSIFICATION_CANDIDATES]
+docs/ADR_179_VERSIONADO_REVISION_AWARE.md
+docs/ARQUITECTURA.md
+docs/AUDITORIA_ARCHIVOS_R5F.md
+docs/AUDITORIA_CALCULOS.md
+docs/AUDITORIA_CARPETAS_R5E.md
+docs/AUDITORIA_DOCUMENTACION_R5G.md
+docs/AUDITORIA_ESTRUCTURA_ARCHIVOS_R5D.md
+docs/AUDITORIA_FUNCIONAL_POST_RENOMBRES_R6.md
+docs/AUDITORIA_GITHUB.md
+docs/AUDITORIA_MARKDOWN_POST_MANT1_DOC1_R1.md
+docs/AUDITORIA_NOMBRES_RESTANTES_R5H.md
+docs/AUDITORIA_PLAN1_R4_2026-08-20.md
+docs/AUDITORIA_REPOSITORIO_2026-08-18.md
+docs/AUDITORIA_UX46E_R7_2026-08-18.md
+docs/AUDITORIA_VER2_CONTEO_PROVISIONAL.md
+docs/AUDITORIA_VER2_SEGUNDA_PASADA.md
+docs/AUDITORIA_VERSIONADO_PRE_1_0.md
+docs/CIERRE_DOCUMENTAL_MARKDOWN_DOC1_R1.md
+docs/CIERRE_GOV1.md
+docs/CIERRE_OPERATIVO_POST_AUDITORIA_R7.md
+docs/COMO_SE_CALCULA.md
+docs/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md
+docs/CUMPLIMIENTO_LEY_81.md
+docs/DECISIONES.md
+docs/DEPENDENCIAS_TERCEROS.md
+docs/DEV2_CENTRO_DESARROLLO.md
+docs/ESPECIFICACION_FUNCIONAL.md
+docs/ESTANDAR_CODIGO_Y_COMENTARIOS.md
+docs/EVALUACION_TERCEROS_DESPLIEGUE.md
+docs/FUENTES_NORMATIVAS.md
+docs/GESTION_DATOS_SIMULACION.md
+docs/GUIA_INTERNA_DESARROLLO.md
+docs/IDENTIDAD_VISUAL.md
+docs/INDICE.md
+docs/LEDGER_REVISIONES_PRE_1_0.md
+docs/LICENCIA_Y_DISTRIBUCION.md
+docs/LIMITACIONES_CONOCIDAS.md
+docs/LINEA_BASE_DOCUMENTAL_POST_MANT1_DOC1_R1.md
+docs/MATRIZ_DECISION_MARKDOWN_DOC1_R1.md
+docs/MATRIZ_DECISION_REVISIONES_VER2.md
+docs/MATRIZ_TRAZABILIDAD.md
+docs/MIGRACION_FIRMAS_GIT_2026-08-17.md
+docs/MODALIDADES_MIXTO.md
+docs/MODALIDADES_SEBD.md
+docs/MODALIDADES_SUCGS.md
+docs/MODELO_AMENAZAS.md
+docs/MODELO_DE_DATOS.md
+docs/MOTOR_DE_CALCULO.md
+docs/NORMATIVA.md
+docs/OBSERVABILIDAD_LOGS.md
+docs/PLAN_MAESTRO_HACIA_1_0.md
+docs/POLITICA_ESTRUCTURA_ARCHIVOS.md
+docs/POLITICA_PRIVACIDAD.md
+docs/PREPARACION_PUBLICA_GITHUB.md
+docs/PROCEDIMIENTO_DERECHOS_TITULAR.md
+docs/PROCEDIMIENTO_INCIDENTES_SEGURIDAD.md
+docs/PROCESO_RELEASE.md
+docs/REGISTRO_CAMBIOS_HISTORICO.md
+docs/REVISION_SOLO_SI_APLICA_DOC1_R1.md
+docs/ROADMAP.md
+docs/SEGURIDAD_PRIVACIDAD.md
+docs/TERMINOS_USO_PRIVACIDAD.md
+docs/TRANSPARENCIA.md
+docs/UX46H_R1_AUDITORIA_RESULTADOS.md
+docs/UX46I_R1_AUDITORIA_COMO_SE_CALCULA.md
+docs/UX_4_6A_REDISENO_VISUAL.md
+docs/UX_4_6B_PASO1_DATOS_PERSONALES.md
+docs/UX_4_6C_PASO2_CUOTAS.md
+docs/UX_4_6D_PASO3_HISTORIAL.md
+docs/VALIDACION.md
+docs/VER2_R1_AUDITORIA_RECONCILIACION_POST_DOC1.md
+docs/VER2_R1_DECISION_OPERATIVA_POST_DOC1.md
+docs/VER2_R1_MATRIZ_DECISION_RECONCILIACION_POST_DOC1.md
+docs/VER2_R2_ANALISIS_CONTRADICCIONES_POST_R1.md
+docs/VER2_R2_CIERRE_DOCUMENTACION_VIVA_POST_R1.md
+docs/VER2_R2_PROPUESTA_CORRECCION_DOCUMENTACION_VIVA.md
+docs/VER2_R3_DECISION_VERSION_CANDIDATA_POST_R2.md
+docs/VER2_R4_PROMOCION_G071_E01.md
+docs/VER2_R5_ESTABILIZACION_POST_RELEASE.md
+
+[LANGUAGE_REVIEW_CANDIDATES]
+app/services/centro_desarrollo.py
+app/services/como_se_calcula.py
+app/services/detalle_anio_actual.py
+app/services/ficha_digital.py
+app/services/referencia_mi_retiro_seguro.py
+app/static/css/como-se-calcula.css
+app/static/css/procedencia-editable.css
+app/static/js/detalle_anio_actual.js
+app/static/js/procedencia_editable.js
+app/static/js/referencia_mi_retiro_seguro.js
+app/static/js/tema.js
+app/templates/como_se_calcula.html
+app/templates/comparar.html
+app/templates/dev_centro_desarrollo.html
+app/templates/metodologia.html
+app/templates/partials/detalle_anio_actual.html
+app/templates/partials/importacion_ficha_digital.html
+app/templates/partials/referencia_mi_retiro_seguro.html
+tests/test_dev2_centro_desarrollo.py
+tests/test_ux44_detalle_anio_actual.py
+tests/test_ux44_referencia_pdf.py
+tests/test_ux46d_revision18_procedencia_persistencia.py
+tests/test_ux46d_revision19_sincronizacion_actual.py
+tests/test_ux46d_revision23_ficha_actualiza_cuotas.py
+tests/test_ux46e_r81_procedencia_editable.py
+tests/test_ux46f_r1_consistencia_procedencia_adjuntos.py
+tests/test_ux46g_r1_escenarios_retiro.py
+tests/test_ux46i_r1_como_se_calcula.py
+
+[CRITICAL_REFERENCE_COUNTS]
+app/services/centro_desarrollo.py	2
+app/services/como_se_calcula.py	11
+app/services/detalle_anio_actual.py	5
+app/services/ficha_digital.py	7
+app/services/referencia_mi_retiro_seguro.py	7
+app/static/css/como-se-calcula.css	8
+app/static/css/procedencia-editable.css	5
+app/static/js/detalle_anio_actual.js	15
+app/static/js/procedencia_editable.js	5
+app/static/js/referencia_mi_retiro_seguro.js	8
+app/static/js/tema.js	6
+app/templates/como_se_calcula.html	9
+app/templates/comparar.html	2
+app/templates/dev_centro_desarrollo.html	2
+app/templates/metodologia.html	10
+data/revision_ledger_pre_1_0.json	78
+
+[LOCAL_ARTIFACT_DIRECTORIES]
+_entregas	exists=True	files=29	bytes=9874828
+_deliverables	exists=False	files=0	bytes=0

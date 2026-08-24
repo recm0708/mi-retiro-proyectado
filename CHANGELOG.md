@@ -5,6 +5,7 @@ Este archivo registra **cambios notables por versión**. No sustituye el histori
 Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamente en GOV.1.1 a partir del historial real. `0.0.22-beta` es la primera versión formal adoptada bajo la política de GOV.1.2.
 
 ## [Unreleased]
+- NOR.2 R1: inicia la auditoría integral de normalización contra los estándares cerrados por NOR.1, sin ejecutar todavía renombres ni movimientos.
 - NOR.1 R7: cierra la fase de definición de estándares del repositorio y deja NOR.2 como siguiente fase de normalización previa a SEC.2.
 - NOR.1 R1–R6: establece estructura, nomenclatura determinística, ciclo de vida, política de raíz/artefactos locales y auditorías de estructura, documentación y dependencias.
 - DOC.1 R1: inicia la auditoría integral de todos los archivos Markdown post-MANT.1, con inventario, matriz de decisión, contexto de actualización y línea base documental.
