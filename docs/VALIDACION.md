@@ -28,6 +28,18 @@ El cierre formal de R7 exige repetir pruebas focales, gate completo, CI y merge.
 NOR.2 no debe iniciarse desde una rama que no haya cumplido estos gates.
 <!-- NOR1-R7-VALIDATION:END -->
 
+
+<!-- NOR2-R1-VALIDATION:START -->
+## Validación NOR.2 R1
+
+R1 es una auditoría de línea base. La evidencia se genera desde `git ls-files` y
+los conteos de referencias críticas se obtienen con `git grep`.
+
+R1 no modifica código funcional, motores previsionales, normativa, `VERSION` ni
+rutas públicas. El gate debe demostrar además que la documentación transversal
+registra NOR.2 R1 y que la evidencia de auditoría permanece bajo `docs/audits/`.
+<!-- NOR2-R1-VALIDATION:END -->
+
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado de validación post-MANT.1
 

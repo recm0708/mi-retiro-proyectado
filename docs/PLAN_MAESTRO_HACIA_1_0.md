@@ -22,6 +22,16 @@ La separación evita que SEC.2 cree nuevas rutas, archivos o estructuras sobre
 una base cuya nomenclatura y documentación todavía no hayan sido normalizadas.
 <!-- NOR1-R7-CLOSURE:END -->
 
+
+<!-- NOR2-R1-STATUS:START -->
+## Estado operativo de NOR.2 R1
+
+NOR.2 se encuentra activo en R1. Esta revisión establece la línea base; las
+migraciones reales se ejecutarán en revisiones posteriores según una matriz de
+impacto. NOR.2 sigue siendo un checkpoint transversal y no agrega un bloque
+funcional al plan de 14 bloques.
+<!-- NOR2-R1-STATUS:END -->
+
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado post-MANT.1
 
