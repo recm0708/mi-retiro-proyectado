@@ -272,6 +272,8 @@ El siguiente inventario se deriva de los decoradores vigentes en `app/main.py`. 
 | `/api/simulacion/sucgs` |
 | `/api/sistema/fecha-referencia` |
 | `/comparar` |
+| `/dev/login` |
+| `/dev/logout` |
 | `/como-se-calcula` |
 | `/favicon.ico` |
 | `/metodologia` |

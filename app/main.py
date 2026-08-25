@@ -27,8 +27,8 @@ from app.core.config import (
     MI_CAJA_DIGITAL_URL,
 )
 
-from fastapi import FastAPI, File, HTTPException, Request, UploadFile
-from fastapi.responses import HTMLResponse, Response
+from fastapi import FastAPI, File, Form, HTTPException, Request, UploadFile
+from fastapi.responses import HTMLResponse, Response, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
@@ -141,7 +141,17 @@ BASE_DIR = Path(__file__).resolve().parent
 from app.services.regulatory_sources import construir_catalogo_metodologia
 from app.services.calculation_guide import construir_guia_calculo
 from app.services.development_center import construir_estado_centro_desarrollo
-from app.core.admin_security import requerir_administrador
+from app.core.admin_security import (
+    requerir_administrador,
+    validar_token_administrativo,
+    administracion_activa,
+    autenticacion_admin_habilitada,
+)
+from app.core.admin_session import (
+    crear_sesion_admin,
+    validar_sesion_admin,
+    eliminar_sesion_admin,
+)
 
 
 app = FastAPI(
@@ -402,6 +412,95 @@ async def como_se_calcula(
 
 
 @app.get(
+    "/dev/login",
+    response_class=HTMLResponse,
+)
+async def login_administrativo(request: Request):
+    """Muestra el acceso administrativo web."""
+
+    if not administracion_activa():
+        raise HTTPException(
+            status_code=403,
+            detail="Superficie administrativa no disponible.",
+        )
+
+    return templates.TemplateResponse(
+        request=request,
+        name="dev_login.html",
+        context={
+            "pagina_activa": "centro_desarrollo",
+            "version": APP_VERSION,
+            "error": None,
+        },
+    )
+
+
+@app.post(
+    "/dev/login",
+)
+async def procesar_login_administrativo(
+    request: Request,
+    token: str = Form(...),
+):
+    """Valida credenciales y crea sesión administrativa."""
+
+    if not autenticacion_admin_habilitada():
+        raise HTTPException(
+            status_code=403,
+            detail="Autenticación administrativa no configurada.",
+        )
+
+    if not validar_token_administrativo(token):
+        return templates.TemplateResponse(
+            request=request,
+            name="dev_login.html",
+            context={
+                "pagina_activa": "centro_desarrollo",
+                "version": APP_VERSION,
+                "error": "Credencial administrativa incorrecta.",
+            },
+            status_code=401,
+        )
+
+    respuesta = RedirectResponse(
+        url="/dev/centro-desarrollo",
+        status_code=303,
+    )
+
+    respuesta.set_cookie(
+        key="mrp_admin_session",
+        value=crear_sesion_admin(),
+        httponly=True,
+        samesite="lax",
+        secure=False,
+        max_age=1800,
+    )
+
+    return respuesta
+
+
+@app.get("/dev/logout")
+async def logout_administrativo(request: Request):
+    """Cierra la sesión administrativa web activa."""
+
+    sesion = request.cookies.get("mrp_admin_session")
+
+    if sesion:
+        eliminar_sesion_admin(sesion)
+
+    respuesta = RedirectResponse(
+        url="/dev/login",
+        status_code=303,
+    )
+
+    respuesta.delete_cookie(
+        key="mrp_admin_session",
+    )
+
+    return respuesta
+
+
+@app.get(
     "/dev/centro-desarrollo",
     response_class=HTMLResponse,
 )
@@ -410,7 +509,28 @@ async def centro_desarrollo(
 ):
     """Muestra el Centro de desarrollo protegido administrativamente."""
 
-    requerir_administrador(request)
+    try:
+        requerir_administrador(request)
+    except HTTPException as error:
+        sesion = request.cookies.get("mrp_admin_session")
+
+        if not (
+            sesion
+            and error.status_code in (401, 403)
+            and validar_sesion_admin(sesion)
+        ):
+            acepta_html = "text/html" in request.headers.get(
+                "accept",
+                "",
+            ).lower()
+
+            if acepta_html:
+                return RedirectResponse(
+                    url="/dev/login",
+                    status_code=303,
+                )
+
+            raise error
 
     return templates.TemplateResponse(
         request=request,
