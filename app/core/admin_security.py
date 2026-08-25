@@ -7,6 +7,7 @@ import secrets
 from typing import Optional
 
 from fastapi import HTTPException, Request
+from app.core.observability import registrar_evento
 
 
 def obtener_secreto_admin() -> str:
@@ -75,19 +76,43 @@ def extraer_token_bearer(request: Request) -> Optional[str]:
 
 
 def requerir_administrador(request: Request) -> None:
-    """Exige autenticación administrativa válida para un endpoint.
+    """Exige autenticación administrativa válida y audita el acceso.
 
-    Genera errores HTTP controlados cuando la superficie administrativa
-    no está habilitada o cuando las credenciales no son válidas.
+    Registra intentos administrativos permitidos o bloqueados sin almacenar
+    credenciales, tokens ni información sensible.
     """
 
+    endpoint = request.url.path
+
     if not administracion_activa():
+        registrar_evento(
+            level="WARNING",
+            event="admin.access.blocked",
+            component="security.admin",
+            outcome="blocked",
+            metadata={
+                "reason": "administration_disabled",
+                "endpoint": endpoint,
+            },
+        )
+
         raise HTTPException(
             status_code=403,
             detail="Superficie administrativa no disponible.",
         )
 
     if not autenticacion_admin_habilitada():
+        registrar_evento(
+            level="WARNING",
+            event="admin.access.blocked",
+            component="security.admin",
+            outcome="blocked",
+            metadata={
+                "reason": "authentication_not_configured",
+                "endpoint": endpoint,
+            },
+        )
+
         raise HTTPException(
             status_code=403,
             detail="Autenticación administrativa no configurada.",
@@ -96,10 +121,35 @@ def requerir_administrador(request: Request) -> None:
     token = extraer_token_bearer(request)
 
     if not validar_token_administrativo(token):
+        registrar_evento(
+            level="WARNING",
+            event="admin.access.denied",
+            component="security.admin",
+            outcome="denied",
+            metadata={
+                "reason": (
+                    "missing_token"
+                    if token is None
+                    else "invalid_token"
+                ),
+                "endpoint": endpoint,
+            },
+        )
+
         raise HTTPException(
             status_code=401 if token is None else 403,
             detail="Autenticación administrativa requerida.",
         )
+
+    registrar_evento(
+        level="INFO",
+        event="admin.access.granted",
+        component="security.admin",
+        outcome="allowed",
+        metadata={
+            "endpoint": endpoint,
+        },
+    )
 
 
 # Compatibilidad con versiones anteriores
