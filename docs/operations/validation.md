@@ -1024,5 +1024,5 @@ Checkpoint local confirmado:
 - pre-commit integral: **1003 tests — OK**;
 - `VERSION`: **`0.0.71.01-beta`**, sin promoción.
 
-Permanecen pendientes PR, CI, CodeQL, integración y verificación post-merge.
+SEC.2 R1 completó PR, CI, CodeQL, integración y verificación post-merge.
 <!-- SEC2-R1-VALIDATION:END -->

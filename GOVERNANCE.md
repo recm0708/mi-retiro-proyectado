@@ -23,7 +23,7 @@ Estado vigente:
 - NOR.1 está cerrado.
 - NOR.2 está cerrado después de completar R1–R8.
 - DOC.1 R2 está cerrado como auditoría integral Markdown post-NOR.2.
-- SEC.2 está activo en R1 como bloque vigente de hardening.
+- SEC.2 R1 quedó cerrado como bloque inicial de hardening.
 <!-- DOC1-R1-POST-MANT1:END -->
 
 ## 1. Propósito

@@ -11,7 +11,7 @@ Este archivo es el punto de entrada para la documentación técnica, funcional, 
 
 ## Estado de normalización del repositorio
 
-**Estado actual:** NOR.2 y DOC.1 R2 están cerrados. SEC.2 está activo en R1 con hardening CodeQL y normalización técnica de workflows.
+**Estado actual:** NOR.2, DOC.1 R2 y SEC.2 R1 están cerrados. SEC.2 continuará con siguientes controles de hardening según planificación.
 
 Estado de la fase:
 
@@ -25,7 +25,7 @@ Estado de la fase:
 - **NOR.2 R7:** cerrado; artefactos locales heredados migrados y depurados.
 - **NOR.2 R8:** cerrado; auditoría integral y cierre formal integrados mediante PR #74.
 - **DOC.1 R2:** cerrado; auditoría integral Markdown post-NOR.2 y controles permanentes incorporados.
-- **SEC.2 R1:** en ejecución; hardening CodeQL y normalización técnica de workflows.
+- **SEC.2 R1:** cerrado; hardening CodeQL y normalización técnica de workflows completados.
 
 Evidencia:
 

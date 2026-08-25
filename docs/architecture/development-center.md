@@ -24,7 +24,7 @@ Estado vigente:
 - NOR.1 y NOR.2 están cerrados.
 - DOC.1 R2 está cerrado como revisión documental integral posterior a NOR.2.
 - `VERSION` permanece en `0.0.71.01-beta`.
-- SEC.2 está activo en R1 con hardening de seguridad y controles de GitHub.
+- SEC.2 R1 quedó cerrado con hardening de seguridad y controles de GitHub.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 
 DEV.2 abre y cierra una superficie interna y local para revisar el estado técnico
