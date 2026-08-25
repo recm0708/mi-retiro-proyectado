@@ -39,7 +39,7 @@ class TestPlan1TerminologiaSeguridad(unittest.TestCase):
             encoding="utf-8"
         )
         self.assertIn(f"**Versión de aplicación revisada:** `{self.version}`", texto)
-        self.assertIn("**Versión base histórica:** `0.0.23-beta`", texto)
+        self.assertIn("**Versión base histórica preservada:** `0.0.23-beta`", texto)
         self.assertIn("GOV.1.5", texto)
         self.assertIn("Antes de la primera versión oficial", texto)
         self.assertIn("PLAN.1 R3A", texto)

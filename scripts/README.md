@@ -12,7 +12,8 @@ no calculan pensiones y no modifican normativa.
 | Archivo | Propósito | Modifica archivos del proyecto |
 |---|---|---|
 | `configure_git_hooks.ps1` | Configura `core.hooksPath=.githooks` para que Git use los hooks versionados del proyecto. | No |
-| `validate_precommit.py` | Ejecuta el gate local antes de crear commits: estado Git, whitespace, dependencias, compilación Python, sintaxis JavaScript y pruebas. | No |
+| `audit_markdown.py` | Audita la documentación Markdown versionada: formato, metadata, versión vigente, idioma, enlaces locales y stubs de compatibilidad. | No |
+| `validate_precommit.py` | Ejecuta el gate local antes de crear commits: estado Git, whitespace, auditoría Markdown, dependencias, compilación Python, sintaxis JavaScript y pruebas. | No |
 
 ## Uso previsto
 
@@ -24,6 +25,15 @@ El script de configuración se ejecuta una vez por clon local:
 
 Después de esa activación, Git ejecuta `.githooks/pre-commit` antes de cada
 commit. El hook delega la validación en `scripts/validate_precommit.py`.
+
+El auditor documental también puede ejecutarse directamente:
+
+```powershell
+python scripts/audit_markdown.py
+```
+
+El mismo auditor forma parte del gate local, por lo que una infracción Markdown
+bloqueante impide crear el commit.
 
 ## Contrato de mantenimiento
 

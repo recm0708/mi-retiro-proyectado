@@ -1,7 +1,7 @@
 # Estándar de código y comentarios
 
 **Estado:** Vigente
-**Versión de aplicación revisada:** `0.0.26-beta`
+**Versión de aplicación revisada:** `0.0.71.01-beta`
 **Versión base histórica:** `0.0.24-beta`
 **Revisión documental:** UX.4.6e R4 — 2026-08-18
 **Revisión de mantenimiento:** MANT.1 R5E — estandarización de nombres de carpetas — 2026-08-23
@@ -16,9 +16,12 @@ Este estándar queda vigente después del cierre de MANT.1. Las referencias a MA
 Estado vigente:
 
 - MANT.1 está cerrado.
+- DOC.1 R1 está cerrado.
+- NOR.1 y NOR.2 están cerrados.
 - Los criterios de comentarios, encabezados, estructura y trazabilidad siguen aplicando.
-- DOC.1 R1 solo actualiza documentación Markdown vigente.
-- No se modifican reglas de cálculo, normativa ni versión.
+- DOC.1 R2 está cerrado como auditoría de la documentación Markdown vigente posterior a NOR.2.
+- SEC.2 queda habilitado para reanudación, pero todavía no se ha iniciado formalmente.
+- No se modifican reglas de cálculo ni normativa.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 
 Este documento define el patrón permanente para documentar código en Mi Retiro

@@ -1,10 +1,10 @@
 # VER.2 R2 — Propuesta de corrección de documentación viva
 
-- Fecha local de generación: 2026-08-23T22:16:02
+- **Fecha local de generación:** 2026-08-23T22:16:02
 - Rama: `ver/ver2-r2-documentacion-viva-post-r1`
 - HEAD: `b34d0bf`
 - Base: `b34d0bf VER.2 R1 — auditoría de reconciliación post-DOC.1 (#57)`
-- Fuente: `docs/VER2_R2_ANALISIS_CONTRADICCIONES_POST_R1.md`
+- **Fuente:** `docs/VER2_R2_ANALISIS_CONTRADICCIONES_POST_R1.md`
 
 ## 1. Hallazgos manuales detectados
 

@@ -17,7 +17,7 @@ class TestDev2R1CierreDocumental(unittest.TestCase):
             encoding="utf-8"
         )
 
-        self.assertIn("**Estado:** R1 integrado en `main` mediante PR #37.", documento)
+        self.assertIn("**Estado R1:** integrado en `main` mediante PR #37.", documento)
         self.assertIn("/dev/centro-desarrollo", documento)
         self.assertIn("PR #37", documento)
         self.assertIn("06e2821", documento)

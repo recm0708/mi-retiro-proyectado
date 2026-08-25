@@ -120,7 +120,7 @@ class TestPlan1GuardReferenciasHistoricas(unittest.TestCase):
     def test_modelo_amenazas_declara_revision_actual_y_base_historica(self):
         texto = (DOCS / "security/threat-model.md").read_text(encoding="utf-8")
         self.assertIn(f"**Versión de aplicación revisada:** `{self.version}`", texto)
-        self.assertIn("**Versión base histórica:** `0.0.23-beta`", texto)
+        self.assertIn("**Versión base histórica preservada:** `0.0.23-beta`", texto)
         self.assertIn("GOV.1.5 R1", texto)
         self.assertIn("antes de `1.0.0.0`", texto)
 
@@ -132,7 +132,7 @@ class TestPlan1GuardReferenciasHistoricas(unittest.TestCase):
             texto = (DOCS / nombre).read_text(encoding="utf-8")
             with self.subTest(nombre=nombre):
                 self.assertIn(f"**Versión de aplicación revisada:** `{self.version}`", texto)
-                self.assertIn("**Versión base histórica:** `0.0.23-beta`", texto)
+                self.assertIn("**Versión base histórica preservada:** `0.0.23-beta`", texto)
                 self.assertIn("GOV.1.5 R2", texto)
                 self.assertNotIn("procedimiento interno pre-beta", texto)
 

@@ -1,6 +1,6 @@
 # VER.2 R1 — Matriz de decisión de reconciliación post-DOC.1 R1
 
-- Fecha local de generación: 2026-08-23T21:52:55
+- **Fecha local de generación:** 2026-08-23T21:52:55
 - Rama: `ver/ver2-r1-reconciliacion-post-doc1`
 - HEAD: `d991890`
 - Base: `d991890 DOC.1 R1 — auditoría Markdown post-MANT.1 (#56)`

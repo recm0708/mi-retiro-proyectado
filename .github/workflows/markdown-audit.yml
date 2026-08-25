@@ -1,0 +1,49 @@
+name: Markdown Audit
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "**/*.md"
+      - "VERSION"
+      - "scripts/audit_markdown.py"
+      - "scripts/validate_precommit.py"
+      - "tests/test_markdown_audit.py"
+      - ".github/workflows/markdown-audit.yml"
+
+  push:
+    branches:
+      - main
+    paths:
+      - "**/*.md"
+      - "VERSION"
+      - "scripts/audit_markdown.py"
+      - "scripts/validate_precommit.py"
+      - "tests/test_markdown_audit.py"
+      - ".github/workflows/markdown-audit.yml"
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  markdown-audit:
+    name: Auditar documentación Markdown
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Obtener repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+
+      - name: Ejecutar auditoría Markdown
+        run: python scripts/audit_markdown.py
+
+      - name: Ejecutar regresiones del auditor
+        run: python -m unittest tests.test_markdown_audit -v

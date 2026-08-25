@@ -18,10 +18,12 @@ El cierre de MANT.1 R7 no constituye release formal ni cambia la versión canón
 Para una release posterior se mantiene el criterio vigente:
 
 - `VERSION` debe ser la fuente única.
-- `0.0.71.01-beta` queda promovido en `VERSION` durante R4, pero no debe tratarse como tag publicado mientras no exista cierre formal post-merge.
-- El último tag formal vigente sigue siendo `v0.0.26-beta` hasta crear y verificar `v0.0.71.01-beta`.
-- MANT.1 se considera cerrado como mantenimiento técnico/documental.
-- DOC.1 R1 actualiza documentación Markdown, pero no habilita por sí solo una release.
+- `0.0.71.01-beta` es la versión canónica vigente.
+- `v0.0.71.01-beta` es el tag formal publicado correspondiente a VER.2 G071/E01.
+- `v0.0.26-beta` permanece como tag legacy histórico e inmutable.
+- VER.2, MANT.1, DOC.1 R1, NOR.1 y NOR.2 están cerrados.
+- DOC.1 R2 está cerrado como auditoría Markdown posterior a NOR.2 y no crea por sí solo una release.
+- SEC.2 queda habilitado para reanudación, pero todavía no se ha iniciado formalmente.
 
 Todo release futuro requiere gate completo, PR/CI, actualización documental coherente, tag y evidencia reproducible.
 <!-- DOC1-R1-POST-MANT1:END -->

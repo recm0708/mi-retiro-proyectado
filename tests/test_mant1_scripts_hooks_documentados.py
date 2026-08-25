@@ -21,7 +21,9 @@ class TestMant1ScriptsHooksDocumentados(unittest.TestCase):
         hooks = self._leer(".githooks/README.md")
 
         self.assertIn("configure_git_hooks.ps1", scripts)
+        self.assertIn("audit_markdown.py", scripts)
         self.assertIn("validate_precommit.py", scripts)
+        self.assertIn("auditoría Markdown", scripts)
         self.assertIn("core.hooksPath=.githooks", scripts)
         self.assertIn("no implementan reglas previsionales", scripts)
         self.assertIn("GitHub Actions", scripts)

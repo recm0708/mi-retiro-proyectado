@@ -43,7 +43,7 @@ class TestVer2DocumentacionVigente(unittest.TestCase):
         self.assertIn(ULTIMO_TAG_LEGACY, versioning)
         self.assertIn("`v0.0.71.01-beta` no se crea dentro del PR de promoción", versioning)
         self.assertIn("no existe tag `v0.0.71.01-beta` hasta completar merge", releases)
-        self.assertIn("hasta crear y verificar `v0.0.71.01-beta`", proceso)
+        self.assertIn("`v0.0.71.01-beta` es el tag formal publicado correspondiente a VER.2 G071/E01.", proceso)
 
     def test_ledger_y_auditoria_siguen_reconociendo_g071(self):
         ledger = (DOCS / "governance/pre-1-0-revision-ledger.md").read_text(encoding="utf-8")

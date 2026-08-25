@@ -31,19 +31,19 @@ class TestGov13Documentacion(unittest.TestCase):
             with self.subTest(relativo=relativo):
                 self.assertTrue((ROOT / relativo).is_file(), relativo)
 
-    def test_bitacoras_ux_preservan_snapshot_y_documento_vivo_r4(self):
+    def test_bitacoras_ux_preservan_snapshot_sin_stub_de_compatibilidad(self):
         casos = {
             "product/user-interface.md": "UX_4_6A_REDISENO_VISUAL.md",
             "product/workflow-step-1-personal-data.md": "UX_4_6B_PASO1_DATOS_PERSONALES.md",
             "product/workflow-step-2-contributions.md": "UX_4_6C_PASO2_CUOTAS.md",
             "product/workflow-step-3-salary-history.md": "UX_4_6D_PASO3_HISTORIAL.md",
         }
-        for vivo, historico_nombre in casos.items():
-            with self.subTest(vivo=vivo):
+        for stub, historico_nombre in casos.items():
+            with self.subTest(stub=stub):
                 historico = ROOT / "docs" / "archive" / "ux" / historico_nombre
-                actual = ROOT / "docs" / vivo
+                compatibilidad = ROOT / "docs" / stub
                 self.assertTrue(historico.is_file())
-                self.assertTrue(actual.is_file())
+                self.assertFalse(compatibilidad.exists())
 
     def test_changelog_tiene_estructura_por_version(self):
         texto = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")

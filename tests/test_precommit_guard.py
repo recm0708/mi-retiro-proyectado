@@ -30,6 +30,7 @@ class TestPrecommitGuard(unittest.TestCase):
     def test_validador_ejecuta_gate_tecnico_completo(self):
         guard = (ROOT / "scripts/validate_precommit.py").read_text(encoding="utf-8")
         self.assertIn('"pip", "check"', guard)
+        self.assertIn('"scripts/audit_markdown.py"', guard)
         self.assertIn('"compileall", "-q", "app"', guard)
         self.assertIn('shutil.which("node")', guard)
         self.assertIn('"--check", str(archivo)', guard)

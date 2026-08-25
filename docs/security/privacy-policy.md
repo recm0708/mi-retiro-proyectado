@@ -5,23 +5,28 @@
 **Estado:** Vigente en la aplicación
 **Versión de aplicación revisada:** `0.0.71.01-beta`
 **Versión base histórica:** `0.0.25-beta`
-**Versión base histórica:** `0.0.23-beta`
+**Versión base histórica preservada:** `0.0.23-beta`
 **Base documental:** GOV.1.3 R3 — 2026-08-17
 **Revisión transversal histórica:** GOV.1.5 R3 — 2026-08-18
-**Última revisión documental:** PLAN.1 R3B1 — 2026-08-20
+**Última revisión documental previa:** PLAN.1 R3B1 — 2026-08-20
+**Última revisión documental:** DOC.1 R2 — 2026-08-24
 **Revisión jurídica externa:** Pendiente antes de la primera versión oficial o de un despliegue remoto que cambie el tratamiento
 
 
 <!-- DOC1-R1-REVISION-MANUAL:START -->
-## Nota de lectura post-MANT.1
+## Nota de lectura vigente
 
-La política de privacidad mantiene su alcance vigente. Las menciones a R6 u otros bloques anteriores corresponden a trazabilidad histórica de cambios.
+La política de privacidad mantiene su alcance material. Las menciones a R6, GOV.1, PLAN.1 y otros bloques anteriores corresponden a trazabilidad histórica de cambios.
 
 Estado vigente:
 
-- MANT.1 quedó cerrado operativamente en R7.
-- DOC.1 R1 no cambia el tratamiento de datos ni la política material.
-- `VERSION` permanece en `0.0.26-beta`.
+- MANT.1 está cerrado.
+- DOC.1 R1 está cerrado.
+- VER.2 está cerrado y `v0.0.71.01-beta` fue publicado.
+- NOR.1 y NOR.2 están cerrados.
+- DOC.1 R2 está cerrado tras auditar la documentación Markdown posterior a NOR.2 sin modificar por sí solo el tratamiento material de datos.
+- `VERSION` permanece en `0.0.71.01-beta`.
+- SEC.2 queda habilitado para reanudación, pero todavía no se ha iniciado formalmente.
 - La aplicación sigue siendo independiente y no oficial.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 

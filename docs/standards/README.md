@@ -54,10 +54,15 @@ definida por este estándar.
 
 ## Aplicación
 
-NOR.1 define las reglas.
+NOR.1 definió las reglas y quedó cerrado en R7.
 
-NOR.2 auditará y normalizará el repositorio existente contra estas reglas antes
-de reanudar la creación estructural profunda de SEC.2.
+NOR.2 auditó y normalizó el repositorio existente contra estas reglas y quedó
+cerrado después de completar R1–R8. SEC.2 queda habilitado para reanudación,
+pero todavía no se ha iniciado formalmente.
+
+DOC.1 R2, ya cerrado, incorpora `scripts/audit_markdown.py` como control permanente para
+verificar automáticamente parte de estos estándares en el gate local y en
+GitHub Actions.
 
 
 ## Estándares especializados consolidados en NOR.2 R4

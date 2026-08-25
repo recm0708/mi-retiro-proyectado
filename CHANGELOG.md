@@ -5,6 +5,7 @@ Este archivo registra **cambios notables por versión**. No sustituye el histori
 Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamente en GOV.1.1 a partir del historial real. `0.0.22-beta` es la primera versión formal adoptada bajo la política de GOV.1.2.
 
 ## [Unreleased]
+- DOC.1 R2: completa la auditoría integral Markdown post-NOR.2, normaliza metadata y estados vigentes, retira cuatro stubs documentales residuales, preserva la verdad histórica e incorpora auditoría Markdown permanente en pre-commit y GitHub Actions.
 - NOR.2 R8: ejecuta la auditoría integral de cierre, retira dos fragmentos transitorios de `docs/`, corrige estados vivos obsoletos, revalida estructura, artefactos locales, versión y ledger, y agrega regresión final de normalización.
 - NOR.2 R7: migra la evidencia local heredada desde `_entregas/` hacia `_deliverables/`, conserva 20 artefactos únicos, retira 8 duplicados SHA-256 exactos y elimina un ZIP reproducible íntegramente desde Git.
 - NOR.2 R6: normaliza el ledger estructurado a `data/pre-1-0-revision-ledger.json`, preserva íntegramente G001–G070 y actualiza consumidores vivos sin reescribir evidencia histórica.

@@ -1,6 +1,6 @@
 # VER.2 R1 — Decisión operativa post-DOC.1 R1
 
-- Fecha local de generación: 2026-08-23T21:55:30
+- **Fecha local de generación:** 2026-08-23T21:55:30
 - Rama: `ver/ver2-r1-reconciliacion-post-doc1`
 - HEAD: `d991890`
 - Base: `d991890 DOC.1 R1 — auditoría Markdown post-MANT.1 (#56)`

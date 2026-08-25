@@ -1,6 +1,6 @@
 # VER.2 R2 — Cierre de documentación viva post-R1
 
-- Fecha local de generación: 2026-08-23T22:18:13
+- **Fecha local de generación:** 2026-08-23T22:18:13
 - Rama: `ver/ver2-r2-documentacion-viva-post-r1`
 - HEAD base: `b34d0bf`
 - Base: `b34d0bf VER.2 R1 — auditoría de reconciliación post-DOC.1 (#57)`

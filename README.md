@@ -21,7 +21,7 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 ## Estado del proyecto
 
 - **Versión canónica vigente:** `0.0.71.01-beta`, obtenida exclusivamente desde [`VERSION`](VERSION).
-- **Último cierre integrado en `main`:** NOR.2 R8 — auditoría integral y cierre formal, PR #74, commit squash `b4df9b7`.
+- **Último cierre integrado en `main`:** DOC.1 R2 — auditoría integral Markdown post-NOR.2 y controles permanentes de regresión.
 - **Estado de VER.2:** cerrado; G071/E01 promovido en `VERSION` como `0.0.71.01-beta` y tag `v0.0.71.01-beta` publicado.
 - **Última versión formal legacy:** `0.0.26-beta` — tag firmado e inmutable `v0.0.26-beta`.
 - **Etapa:** desarrollo beta; repositorio público y ejecución orientada actualmente a entorno local.
@@ -30,6 +30,7 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 - **DEV.2:** cerrado.
 - **MANT.1:** cerrado.
 - **DOC.1 R1:** cerrado como auditoría documental post-MANT.1.
+- **DOC.1 R2:** cerrado como auditoría integral Markdown post-NOR.2.
 - **NOR.1:** cerrado en R7; estándares determinísticos establecidos.
 - **NOR.2:** cerrado después de completar R1–R8 e integrar la auditoría final mediante PR #74.
 - **NOR.2 R4:** cerrado; documentación viva migrada a áreas canónicas.
@@ -37,7 +38,7 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 - **NOR.2 R6:** cerrado; ledger y datos de alto impacto normalizados.
 - **NOR.2 R7:** cerrado; artefactos locales heredados migrados y depurados.
 - **NOR.2 R8:** cerrado; auditoría integral y cierre formal integrados en `main`.
-- **SEC.2:** pausado; NOR.2 ya cerró y SEC.2 queda habilitado para reanudación cuando se inicie formalmente.
+- **SEC.2:** siguiente bloque; habilitado para reanudación, aún no iniciado formalmente.
 - **Primera versión oficial objetivo:** `1.0.0.0` con `Build 000001`, únicamente después de cerrar todos los gates definidos en el plan maestro.
 
 La visibilidad pública del repositorio **no convierte una beta de desarrollo en versión oficial, no constituye un despliegue de producción y no modifica por sí sola la licencia vigente**.

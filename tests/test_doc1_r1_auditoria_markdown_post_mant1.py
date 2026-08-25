@@ -102,7 +102,7 @@ def test_security_declara_estado_vigente_post_mant1_y_preserva_anclas():
 
     assert "## Estado de seguridad post-MANT.1" in text
     assert "La versión canónica vigente es `0.0.71.01-beta`." in text
-    assert "`0.0.71.01-beta` corresponde a VER.2 G071/E01 promovido en R4" in text
+    assert "`v0.0.71.01-beta` es el tag formal publicado correspondiente a VER.2 G071/E01." in text
     assert "Referencia legacy histórica preservada por pruebas de regresión" in text
 
 

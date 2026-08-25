@@ -1,9 +1,9 @@
 # VER.2 R4 — Promoción controlada G071/E01
 
-- Fecha local de generación: 2026-08-23T23:52:45
+- **Fecha local de generación:** 2026-08-23T23:52:45
 - Versión anterior en `VERSION`: `0.0.26-beta`
 - Versión promovida en `VERSION`: `0.0.71.01-beta`
-- Último tag formal legacy antes del cierre: `v0.0.26-beta`
+- **Último tag formal legacy antes del cierre:** `v0.0.26-beta`
 - Tag formal pendiente post-merge: `v0.0.71.01-beta`
 
 ## 1. Decisión

@@ -19,8 +19,8 @@ class TestDev2R4CierreFinal(unittest.TestCase):
     def test_dev2_queda_cerrado_sin_promover_version(self):
         documento = self._leer("docs/architecture/development-center.md")
 
-        self.assertIn("**Estado:** DEV.2 cerrado documentalmente en R4.", documento)
-        self.assertIn("**Estado:** R1 integrado en `main` mediante PR #37.", documento)
+        self.assertIn("**Estado general:** DEV.2 cerrado documentalmente en R4.", documento)
+        self.assertIn("**Estado R1:** integrado en `main` mediante PR #37.", documento)
         self.assertIn("**Estado R2:** integrado en `main` mediante PR #39.", documento)
         self.assertIn("**Estado R3:** integrado en `main` mediante PR #40.", documento)
         self.assertIn("DEV.2 R4 no crea tag", documento)
@@ -62,7 +62,7 @@ class TestDev2R4CierreFinal(unittest.TestCase):
         self.assertIn("**NOR.2 R5:** cerrado", readme)
         self.assertIn("**NOR.2 R6:** cerrado", readme)
         self.assertIn("**NOR.2 R7:** cerrado", readme)
-        self.assertIn("**SEC.2:** pausado", readme)
+        self.assertIn("**SEC.2:** siguiente bloque; habilitado para reanudación, aún no iniciado formalmente.", readme)
         self.assertIn("DEV.2 cerrado documentalmente en R4", documento)
         self.assertIn("### DEV.2 — cierre del Centro de desarrollo", changelog)
         self.assertIn("cierra documentalmente DEV.2", changelog)

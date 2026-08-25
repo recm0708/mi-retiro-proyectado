@@ -9,16 +9,21 @@
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado de gobierno post-MANT.1
 
-El gobierno vigente conserva la separación entre estado canónico, evidencia histórica y candidatos pendientes.
+El gobierno vigente conserva la separación entre estado canónico, evidencia histórica y revisiones en curso.
 
 Estado vigente:
 
 - `VERSION` sigue siendo la fuente única de versión.
 - `0.0.71.01-beta` es la versión canónica vigente en `VERSION`.
-- `v0.0.26-beta` sigue siendo el último tag formal legacy hasta el cierre firmado post-merge de G071/E01.
-- `0.0.71.01-beta` corresponde a VER.2 G071/E01 promovido en R4; su tag formal todavía no se crea dentro del PR.
+- `v0.0.71.01-beta` es el tag formal publicado por VER.2.
+- `v0.0.26-beta` permanece como tag legacy histórico e inmutable.
+- VER.2 está cerrado.
 - MANT.1 quedó cerrado operativamente en R7.
-- DOC.1 R1 queda activo como auditoría documental Markdown post-MANT.1.
+- DOC.1 R1 está cerrado.
+- NOR.1 está cerrado.
+- NOR.2 está cerrado después de completar R1–R8.
+- DOC.1 R2 está cerrado como auditoría integral Markdown post-NOR.2.
+- SEC.2 queda habilitado para reanudación, pero todavía no se ha iniciado formalmente.
 <!-- DOC1-R1-POST-MANT1:END -->
 
 ## 1. Propósito

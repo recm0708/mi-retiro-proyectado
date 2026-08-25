@@ -950,3 +950,54 @@ El gate integral local quedó completo: **1034 pruebas + 4905 subtests** en
 R8 permanece activo hasta completar dichos gates e integrarse en `main`.
 SEC.2 permanece pausado hasta el cierre formal de NOR.2.
 <!-- NOR2-R8-VALIDATION:END -->
+
+## Validación DOC.1 R2
+
+DOC.1 R2 ejecuta la auditoría integral de la documentación Markdown posterior al
+cierre de NOR.2. La revisión no modifica motores previsionales, normativa,
+contratos funcionales ni la versión de la aplicación.
+
+Resultados documentales confirmados durante la revisión:
+
+- inventario inicial auditado: **141 archivos Markdown**;
+- inventario posterior al retiro de cuatro stubs: **137 archivos Markdown
+  versionados antes de incorporar la evidencia final de R2**;
+- stubs documentales de compatibilidad restantes: **0**;
+- problemas Markdown bloqueantes después de las correcciones: **0**;
+- `VERSION`: **`0.0.71.01-beta`**;
+- SEC.2 permanece sin inicio formal durante esta revisión.
+
+Controles permanentes incorporados:
+
+- `scripts/audit_markdown.py`;
+- integración del auditor en `scripts/validate_precommit.py`;
+- regresiones específicas en `tests/test_markdown_audit.py`;
+- documentación operativa en `scripts/README.md`;
+- reglas canónicas en `docs/standards/documentation-standards.md`;
+- workflow `.github/workflows/markdown-audit.yml`.
+
+Validaciones focales ya confirmadas:
+
+- `tests/test_markdown_audit.py`:
+  **7 pruebas + 12 subtests — OK**;
+- `tests/test_mant1_scripts_hooks_documentados.py`:
+  **4 pruebas — OK**;
+- gate focal conjunto de auditor, pre-commit y documentación de scripts:
+  **15 pruebas + 8 subtests — OK** en el checkpoint previo a la incorporación
+  del workflow;
+- `python scripts/audit_markdown.py`: **OK**;
+- `git diff --check`: **OK**.
+
+Gate integral local confirmado hasta este checkpoint:
+
+- suite completa `pytest`: **1041 pruebas + 4876 subtests — OK**;
+- `python scripts/audit_markdown.py`: **OK**;
+- `git diff --check`: **OK**.
+
+El pre-commit integral quedó superado después de validar dependencias, auditoría
+Markdown, compilación Python, sintaxis de los 18 archivos JavaScript y la suite
+`unittest`, con **1001 tests — OK**.
+
+Permanecen como gates remotos el PR, CI, integración y verificación post-merge
+antes de iniciar formalmente SEC.2.
+<!-- DOC1-R2-VALIDATION:END -->
