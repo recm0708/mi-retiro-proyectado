@@ -15,11 +15,11 @@ NOR.1 y NOR.2 son checkpoints técnicos transversales y no agregan bloques
 funcionales al plan de 14 bloques.
 
 - **NOR.1:** cerrado en R7; estándares determinísticos establecidos.
-- **NOR.2:** activo en R8; auditoría integral y cierre formal en curso.
-- **SEC.2:** permanece pausado hasta cerrar NOR.2 R8.
+- **NOR.2:** cerrado en R8 mediante PR #74; normalización integral completada.
+- **SEC.2:** siguiente bloque; habilitado para reanudación, aún no iniciado formalmente.
 
 La separación evita que SEC.2 cree nuevas rutas, archivos o estructuras sobre
-una base cuya nomenclatura y documentación todavía no hayan sido normalizadas.
+una base cuya nomenclatura y documentación no hayan sido normalizadas.
 <!-- NOR1-R7-CLOSURE:END -->
 
 
@@ -65,6 +65,8 @@ Estado vigente:
 - VER.2 está cerrado; G071/E01 fue promovido y publicado como `v0.0.71.01-beta`.
 - MANT.1 está cerrado operativamente.
 - DOC.1 R1 está cerrado; la documentación Markdown vigente quedó actualizada y separada de la evidencia histórica.
+- NOR.1 y NOR.2 están cerrados; R8 quedó integrado mediante PR #74.
+- SEC.2 es el siguiente bloque habilitado para reanudación y aún no se ha iniciado formalmente.
 - La meta `1.0.0.0` / `Build 000001` se mantiene condicionada al cierre de los gates definidos.
 
 Las referencias históricas a bloques previos se conservan como trazabilidad, pero el estado operativo vigente debe leerse desde esta sección.
@@ -149,7 +151,7 @@ Fuentes canónicas:
 - `data/pre-1-0-revision-ledger.json`;
 - ADR de gobierno correspondiente.
 
-Mientras VER.2 permanezca abierto, **DOC.1 R1 es el bloque documental activo** para sincronizar la documentación Markdown vigente posterior a MANT.1; DEV.2 queda preservado como bloque funcional cerrado.
+Durante VER.2, DOC.1 R1 fue el bloque documental utilizado para sincronizar la documentación Markdown vigente posterior a MANT.1. VER.2 y DOC.1 R1 están cerrados, y DEV.2 permanece como bloque funcional cerrado.
 
 ## 4. Secuencia de 14 bloques
 
@@ -232,7 +234,7 @@ La explicación pública no duplica motores de cálculo en JavaScript y mantiene
 
 ### 6. DEV.2 — Centro de desarrollo
 
-**Estado:** bloque documental activo; actualización Markdown vigente post-MANT.1 en curso.
+**Estado:** cerrado documentalmente en R4.
 
 > Ancla histórica preservada por pruebas de regresión: **Estado:** siguiente bloque funcional; pendiente de inicio hasta cerrar VER.2.
 
@@ -251,6 +253,8 @@ Evolución visible y controlada de Developer Diagnostics:
 - ausencia de PII y valores financieros sensibles.
 
 ### 7. SEC.2 — Hardening integral
+
+**Estado:** siguiente bloque; habilitado para reanudación, aún no iniciado formalmente.
 
 - autenticación y sesiones administrativas;
 - gestión de secretos;
@@ -485,21 +489,20 @@ SEC.2 permanece pausado hasta completar R8.
 
 R8 constituye el gate final de normalización antes de SEC.2.
 
-La auditoría integral confirma localmente:
+La auditoría integral confirma:
 
 - raíz y estructura documental canónicas;
 - ausencia de residuos técnicos de las migraciones R3–R7;
 - retiro de dos artefactos transitorios directos de `docs/`;
 - artefactos locales preservados fuera de Git;
 - documentación viva sincronizada con VER.2 cerrado, NOR.1 cerrado,
-  NOR.2 R7 cerrado y R8 activo;
+  NOR.2 R7 cerrado y R8 cerrado;
 - versión `0.0.71.01-beta` preservada;
 - ledger G001–G070 preservado;
-- regresiones específicas de normalización en `OK`.
+- regresiones específicas de normalización en `OK`;
+- CI remota y auditoría de gobernanza en verde después de hacer reproducible el guard de artefactos locales.
 
-El gate integral local de R8 quedó completado. El cierre de NOR.2 queda
-condicionado a pre-commit, PR, CI, auditoría de gobernanza, squash merge y
-verificación post-merge.
+R8 quedó integrado mediante PR #74 y commit squash `b4df9b7`. Con esa integración, **NOR.2 queda formalmente cerrado**.
 
-SEC.2 no se reanuda antes de completar esa integración.
+SEC.2 queda habilitado para reanudación como siguiente bloque, aunque aún no se ha iniciado formalmente.
 <!-- NOR2-R8-FINAL-AUDIT:END -->

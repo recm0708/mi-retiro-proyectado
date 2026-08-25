@@ -11,8 +11,7 @@
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado post-MANT.1
 
-La trazabilidad vigente incorpora los cierres de MANT.1, DOC.1 y VER.2, junto
-con la normalización activa NOR.2.
+La trazabilidad vigente incorpora los cierres de MANT.1, DOC.1, VER.2 y NOR.2.
 
 Estado documental actual:
 
@@ -22,8 +21,9 @@ Estado documental actual:
 - DOC.1 R1 está cerrado y su documentación viva quedó consolidada.
 - VER.2 G071/E01 está cerrado y publicado como `v0.0.71.01-beta`.
 - NOR.2 R7 está cerrado.
-- NOR.2 R8 permanece activo como auditoría integral y cierre formal de NOR.2.
-- SEC.2 permanece pausado hasta completar NOR.2.
+- NOR.2 R8 está cerrado e integrado mediante PR #74.
+- NOR.2 está cerrado después de completar R1–R8.
+- SEC.2 es el siguiente bloque habilitado para reanudación y aún no iniciado formalmente.
 
 Esta matriz debe distinguir trazabilidad histórica de estado vigente.
 <!-- DOC1-R1-POST-MANT1:END -->
@@ -92,7 +92,7 @@ Una nueva fila debe usar una fuente normativa solo cuando exista relación real.
 
 No se inventan artículos legales para completar la tabla.
 
-Los estados `Candidato` deben promoverse a `Verificado` únicamente después del gate y cierre que corresponda. VER.2 debe actualizar TR-027 al integrar G071.
+Los estados `Candidato` deben promoverse a `Verificado` únicamente después del gate y cierre que corresponda. TR-027 fue actualizado al integrar G071.
 
 <!-- ANCLAS_HISTORICAS_VER2_MATRIZ -->
 
@@ -141,9 +141,9 @@ Los estados `Candidato` deben promoverse a `Verificado` únicamente después del
 | --- | --- | --- |
 | Re-auditar la raíz contra la estructura canónica | gate estructural R8 | `tests/test_nor2_r8_final_audit.py` |
 | Retirar residuos transitorios directos de `docs/` | `CHANGELOG_ADD_R5.txt` e `INDICE_ADD_R5.txt` retirados | `test_docs_raiz_queda_solo_con_readme` |
-| Mantener artefactos locales fuera de Git | `_deliverables/`: 20 locales / 0 trackeados | `test_artefactos_locales_quedan_fuera_de_git` |
+| Mantener artefactos locales fuera de Git | auditoría local: 20 artefactos preservados; Git: 0 trackeados | `test_artefactos_locales_quedan_fuera_de_git` |
 | Preservar la versión G071/E01 | `VERSION` + `APP_VERSION` | `test_version_permanece_en_g071_e01` |
 | Preservar ledger G001–G070 y ruta canónica | `data/pre-1-0-revision-ledger.json` | `test_ledger_permanece_canonico_e_inmutable` |
-| Sincronizar estado vivo de NOR.2 | R7 cerrado / R8 activo / SEC.2 pausado | `test_estado_documental_vigente_es_r8` |
+| Sincronizar estado vivo de NOR.2 | R7 cerrado / R8 cerrado / NOR.2 cerrado / SEC.2 habilitado para reanudación | `test_estado_documental_vigente_es_r8` |
 | Eliminar contradicciones vigentes de VER.2/NOR.1/NOR.2 | barrido post-corrección: 0 hallazgos | `test_ver2_no_figura_como_pendiente_en_estado_vivo` |
 <!-- NOR2-R8-TRACEABILITY:END -->

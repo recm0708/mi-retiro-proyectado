@@ -5,7 +5,7 @@
 **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
 **Último tag formal legacy:** `v0.0.26-beta`
 **Fecha de revisión:** 2026-08-24
-**Normalización previa a SEC.2:** NOR.1 está cerrado; NOR.2 permanece activo en R8, que ejecuta la auditoría integral y el cierre formal antes de reanudar SEC.2.
+**Normalización previa a SEC.2:** NOR.1 y NOR.2 están cerrados; R8 quedó integrado mediante PR #74 y SEC.2 es el siguiente bloque habilitado para reanudación, aún no iniciado formalmente.
 
 
 <!-- NOR1-R7-CLOSURE:START -->
@@ -18,10 +18,10 @@ locales.
 La secuencia operativa previa a SEC.2 queda:
 
 1. **NOR.1** — definición y auditoría preparatoria — cerrado en R7;
-2. **NOR.2** — normalización integral del repositorio — activo en R8;
-3. **SEC.2** — hardening integral — permanece pausado hasta cerrar NOR.2 R8.
+2. **NOR.2** — normalización integral del repositorio — cerrado en R8 mediante PR #74;
+3. **SEC.2** — hardening integral — siguiente bloque, habilitado para reanudación y aún no iniciado.
 
-NOR.2 ejecutará los movimientos, renombrados, consolidaciones y retiros que
+NOR.2 ejecutó los movimientos, renombrados, consolidaciones y retiros que
 NOR.1 deliberadamente no realizó.
 <!-- NOR1-R7-CLOSURE:END -->
 
@@ -150,11 +150,11 @@ VER.2 es un bloque transversal de reconciliación y **no añade un bloque 15** a
 - repositorio público con metadata, topics, labels e Issue Forms;
 - Dependency graph, Dependabot, CodeQL, Secret Protection, Push protection y Private vulnerability reporting;
 - CI y auditoría automática de gobernanza;
-- DEV.2 — Centro de desarrollo sobre Developer Diagnostics cerrado documentalmente en R4.
+- DEV.2 — Centro de desarrollo sobre Developer Diagnostics cerrado documentalmente en R4;
+- NOR.2 — normalización integral del repositorio cerrada en R8 mediante PR #74.
 
 ### Pendiente o incompleto
 
-- NOR.2 — auditoría y normalización integral del repositorio contra los estándares cerrados por NOR.1 antes de SEC.2;
 - hardening integral SEC.2;
 - reconstrucción detallada del CHANGELOG `0.0.1-beta`–`0.0.21-beta` en DOC.2;
 - persistencia voluntaria si permanece dentro del alcance 1.0;
@@ -207,7 +207,7 @@ No existe una una revisión intermedia no demostrada entre UX.4.6i R1 y R1.2 dem
 
 **VER.2:** bloque transversal cerrado. La base anterior al cambio contiene **70 estados aceptados (G001–G070)** y G071/E01 fue promovido, integrado y publicado como `0.0.71.01-beta` mediante el tag `v0.0.71.01-beta`.
 
-**Checkpoint técnico actual:** NOR.2 R8 — auditoría integral y cierre formal de la normalización antes de SEC.2.
+**Checkpoint técnico actual:** NOR.2 está cerrado en R8; SEC.2 es el siguiente bloque habilitado para reanudación y aún no iniciado.
 
 Documentos canónicos de VER.2:
 
@@ -289,8 +289,9 @@ Solo podrá materializarse cuando:
 - [x] UX.4.6e esté cerrado;
 - [x] PLAN.1 esté cerrado;
 - [x] UX.4.6f–UX.4.6i estén cerrados;
-- [ ] VER.2 esté cerrado como prerrequisito transversal para continuar el ledger revision-aware;
-- [ ] DEV.2 esté cerrado;
+- [x] VER.2 esté cerrado como prerrequisito transversal para continuar el ledger revision-aware;
+- [x] DEV.2 esté cerrado;
+- [x] NOR.1 y NOR.2 estén cerrados como normalización previa a SEC.2;
 - [ ] SEC.2 esté cerrado;
 - [ ] DOC.2 esté cerrado;
 - [ ] PERSIST.1 esté cerrado si forma parte del alcance 1.0;
@@ -441,8 +442,7 @@ El gate local confirmó:
 - ledger G001–G070 preservado;
 - regresión específica R8 y suite NOR.2 en `OK`.
 
-El gate integral local de R8 quedó completado. R8 permanece activo únicamente mientras se completan pre-commit, PR, CI, merge y la verificación post-merge.
+El gate integral local de R8 quedó completado y la CI remota pasó en verde después de hacer reproducible el guard de artefactos locales.
 
-La integración satisfactoria de R8 cerrará formalmente NOR.2 y habilitará la
-reanudación de **SEC.2**.
+R8 quedó integrado mediante PR #74 y commit squash `b4df9b7`. Con esa integración, **NOR.2 queda formalmente cerrado** y **SEC.2 queda habilitado para reanudación**, aunque todavía no se ha iniciado.
 <!-- NOR2-R8-FINAL-AUDIT:END -->

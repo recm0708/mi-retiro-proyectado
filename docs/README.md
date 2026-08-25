@@ -3,7 +3,7 @@
 **Estado:** vigente
 **Versión de aplicación:** `0.0.71.01-beta` — VER.2 G071/E01 promovida en R4
 **Último tag formal legacy:** `v0.0.26-beta`
-**Última actualización transversal:** NOR.2 R8 — auditoría integral y cierre formal — 2026-08-24
+**Última actualización transversal:** NOR.2 R8 — cierre integrado mediante PR #74 — 2026-08-24
 **Cierres históricos preservados:** UX.4.6i / PR #34 — 841 pruebas; UX.4.6e R9 — `v0.0.25-beta`
 
 Este archivo es el punto de entrada para la documentación técnica, funcional, normativa, de privacidad, validación y auditoría de Mi Retiro Proyectado.
@@ -11,7 +11,7 @@ Este archivo es el punto de entrada para la documentación técnica, funcional, 
 
 ## Estado de normalización del repositorio
 
-**Revisión activa:** NOR.2 R8 — auditoría integral y cierre formal.
+**Estado actual:** NOR.2 cerrado después de completar R1–R8. SEC.2 queda habilitado para reanudación, pero aún no se ha iniciado formalmente.
 
 Estado de la fase:
 
@@ -23,8 +23,8 @@ Estado de la fase:
 - **NOR.2 R5:** cerrado; 36 documentos históricos consolidados en `docs/archive/`.
 - **NOR.2 R6:** cerrado; ledger y datos de alto impacto normalizados.
 - **NOR.2 R7:** cerrado; artefactos locales heredados migrados y depurados.
-- **NOR.2 R8:** activo; auditoría integral y cierre formal de NOR.2.
-- **SEC.2:** permanece pausado hasta completar NOR.2.
+- **NOR.2 R8:** cerrado; auditoría integral y cierre formal integrados mediante PR #74.
+- **SEC.2:** siguiente bloque; habilitado para reanudación, aún no iniciado.
 
 Evidencia:
 

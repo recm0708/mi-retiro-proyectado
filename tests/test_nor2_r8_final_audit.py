@@ -205,7 +205,12 @@ class TestNOR2R8FinalAudit(unittest.TestCase):
         )
 
         self.assertIn(
-            "**NOR.2 R8:** activo",
+            "**NOR.2 R8:** cerrado",
+            readme,
+        )
+
+        self.assertIn(
+            "**NOR.2:** cerrado",
             readme,
         )
 
@@ -215,12 +220,17 @@ class TestNOR2R8FinalAudit(unittest.TestCase):
         )
 
         self.assertIn(
-            "NOR.2 R8 — auditoría integral",
+            "**NOR.2 R8:** cerrado",
             docs,
         )
 
         self.assertIn(
-            "NOR.2 R8 permanece activo",
+            "NOR.2 R8 está cerrado",
+            traceability,
+        )
+
+        self.assertIn(
+            "SEC.2 es el siguiente bloque",
             traceability,
         )
 
@@ -245,6 +255,7 @@ class TestNOR2R8FinalAudit(unittest.TestCase):
             "bloque transversal en reconciliación pendiente",
             "es únicamente el candidato de VER.2",
             "NOR.2 R7:** activo",
+            "NOR.2 R8:** activo",
             "NOR.2 R8:** siguiente revisión",
             "NOR.1 queda preparado para cierre",
             "tag formal legacy vigente hasta el cierre",
