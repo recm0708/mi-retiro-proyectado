@@ -3,7 +3,7 @@
 **Estado:** vigente
 **Versión de aplicación:** `0.0.71.01-beta` — VER.2 G071/E01 promovida en R4
 **Último tag formal legacy:** `v0.0.26-beta`
-**Última actualización transversal:** NOR.2 R6 — migración del ledger y datos de alto impacto — 2026-08-25
+**Última actualización transversal:** NOR.2 R7 — migración y depuración de artefactos locales — 2026-08-24
 **Cierres históricos preservados:** UX.4.6i / PR #34 — 841 pruebas; UX.4.6e R9 — `v0.0.25-beta`
 
 Este archivo es el punto de entrada para la documentación técnica, funcional, normativa, de privacidad, validación y auditoría de Mi Retiro Proyectado.
@@ -11,7 +11,7 @@ Este archivo es el punto de entrada para la documentación técnica, funcional, 
 
 ## Estado de normalización del repositorio
 
-**Revisión activa:** NOR.2 R6 — migración del ledger y datos de alto impacto.
+**Revisión activa:** NOR.2 R7 — migración y depuración de artefactos locales.
 
 Estado de la fase:
 
@@ -21,8 +21,9 @@ Estado de la fase:
 - **NOR.2 R3:** cerrado; runtime y configuración técnica normalizados.
 - **NOR.2 R4:** cerrado; documentación viva migrada a áreas canónicas.
 - **NOR.2 R5:** cerrado; 36 documentos históricos consolidados en `docs/archive/`.
-- **NOR.2 R6:** activo; migración del ledger y datos de alto impacto.
-- **NOR.2 R7:** siguiente revisión; artefactos locales `_entregas/`.
+- **NOR.2 R6:** cerrado; ledger y datos de alto impacto normalizados.
+- **NOR.2 R7:** activo; artefactos locales heredados migrados y depurados.
+- **NOR.2 R8:** siguiente revisión; auditoría integral y cierre de NOR.2.
 - **SEC.2:** permanece pausado hasta completar NOR.2.
 
 Evidencia:
@@ -31,6 +32,9 @@ Evidencia:
 - [`audits/repository/repository-normalization-migration-matrix-nor2-r2.md`](audits/repository/repository-normalization-migration-matrix-nor2-r2.md) — matriz de migración R2.
 - [`audits/repository/repository-normalization-runtime-migration-nor2-r3.md`](audits/repository/repository-normalization-runtime-migration-nor2-r3.md) — migración técnica R3.
 - [`audits/repository/repository-normalization-live-docs-nor2-r4.md`](audits/repository/repository-normalization-live-docs-nor2-r4.md) — migración documental viva R4.
+- [`audits/repository/repository-normalization-historical-docs-nor2-r5.md`](audits/repository/repository-normalization-historical-docs-nor2-r5.md) — consolidación de documentación histórica R5.
+- [`audits/repository/repository-normalization-ledger-data-nor2-r6.md`](audits/repository/repository-normalization-ledger-data-nor2-r6.md) — normalización del ledger y datos de alto impacto R6.
+- [`audits/repository/repository-normalization-local-artifacts-nor2-r7.md`](audits/repository/repository-normalization-local-artifacts-nor2-r7.md) — migración y depuración de artefactos locales R7.
 - [`standards/README.md`](standards/README.md) — estándares canónicos del repositorio.
 ## 1. Producto y alcance
 

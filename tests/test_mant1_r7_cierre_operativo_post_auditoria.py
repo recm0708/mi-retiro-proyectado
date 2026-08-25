@@ -9,7 +9,9 @@ ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
 TESTS = ROOT / "tests"
 
-DOCUMENTO_R7 = DOCS / "CIERRE_OPERATIVO_POST_AUDITORIA_R7.md"
+DOCUMENTO_R7 = (
+    DOCS / "archive" / "technical" / "CIERRE_OPERATIVO_POST_AUDITORIA_R7.md"
+)
 INDICE = DOCS / "README.md"
 
 
@@ -54,8 +56,8 @@ def test_r7_evidencias_r5h_y_r6_permanecen_disponibles():
     """El cierre operativo depende de que R5H y R6 sigan materializados."""
 
     evidencias = [
-        DOCS / "AUDITORIA_NOMBRES_RESTANTES_R5H.md",
-        DOCS / "AUDITORIA_FUNCIONAL_POST_RENOMBRES_R6.md",
+        DOCS / "archive" / "technical" / "AUDITORIA_NOMBRES_RESTANTES_R5H.md",
+        DOCS / "archive" / "technical" / "AUDITORIA_FUNCIONAL_POST_RENOMBRES_R6.md",
         TESTS / "test_mant1_r5h_auditoria_nombres_restantes.py",
         TESTS / "test_mant1_r6_auditoria_funcional_post_renombres.py",
     ]

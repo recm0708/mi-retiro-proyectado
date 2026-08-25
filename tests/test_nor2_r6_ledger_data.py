@@ -98,7 +98,8 @@ class TestNOR2R6LedgerData(unittest.TestCase):
         docs = (ROOT / "docs/README.md").read_text(encoding="utf-8")
 
         self.assertIn("**NOR.2 R5:** cerrado", readme)
-        self.assertIn("**NOR.2 R6:** activo", readme)
+        self.assertIn("**NOR.2 R6:** cerrado", readme)
+        self.assertIn("**NOR.2 R7:** activo", readme)
         self.assertIn("NOR.2 R6", docs)
         self.assertIn("NOR.2 R7", docs)
         self.assertIn("**SEC.2:** pausado", readme)

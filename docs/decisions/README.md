@@ -19,7 +19,7 @@ Este registro conserva decisiones técnicas históricas y vigentes. Las mencione
 Estado vigente para lectura transversal:
 
 - MANT.1 quedó cerrado operativamente en R7.
-- DOC.1 R1 queda activo para sincronizar documentación Markdown vigente.
+- DOC.1 R1 está cerrado; la documentación Markdown vigente quedó sincronizada.
 - Las decisiones históricas no se reescriben como si hubieran sido tomadas en DOC.1 R1.
 - `VERSION` permanece en `0.0.26-beta`.
 <!-- DOC1-R1-REVISION-MANUAL:END -->

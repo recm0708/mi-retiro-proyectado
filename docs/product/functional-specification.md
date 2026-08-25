@@ -20,7 +20,7 @@ Estado vigente:
 - No se modifica `VERSION`.
 - No se modifican datos ni entregables.
 - MANT.1 queda cerrado como bloque técnico/documental.
-- DOC.1 R1 queda activo únicamente para corregir documentación Markdown vigente desalineada después de MANT.1.
+- DOC.1 R1 está cerrado; la documentación Markdown vigente desalineada después de MANT.1 quedó corregida.
 
 Las referencias históricas dentro de auditorías, ADR o archivos archivados no deben reinterpretarse como estado vigente.
 <!-- DOC1-R1-POST-MANT1:END -->

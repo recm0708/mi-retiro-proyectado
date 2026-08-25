@@ -4,7 +4,13 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-DECISION = ROOT / "docs" / "VER2_R3_DECISION_VERSION_CANDIDATA_POST_R2.md"
+DECISION = (
+    ROOT
+    / "docs"
+    / "archive"
+    / "governance"
+    / "VER2_R3_DECISION_VERSION_CANDIDATA_POST_R2.md"
+)
 INDICE = ROOT / "docs" / "README.md"
 
 

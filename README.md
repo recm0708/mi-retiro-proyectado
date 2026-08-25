@@ -21,7 +21,7 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 ## Estado del proyecto
 
 - **Versión canónica vigente:** `0.0.71.01-beta`, obtenida exclusivamente desde [`VERSION`](VERSION).
-- **Último cierre integrado en `main`:** NOR.2 R5 — archivo y consolidación de documentación histórica, PR #71, commit squash `ad9b3f3`.
+- **Último cierre integrado en `main`:** NOR.2 R6 — normalización del ledger y datos de alto impacto, PR #72, commit squash `365ba5b`.
 - **Estado de VER.2:** cerrado; G071/E01 promovido en `VERSION` como `0.0.71.01-beta` y tag `v0.0.71.01-beta` publicado.
 - **Última versión formal legacy:** `0.0.26-beta` — tag firmado e inmutable `v0.0.26-beta`.
 - **Etapa:** desarrollo beta; repositorio público y ejecución orientada actualmente a entorno local.
@@ -33,7 +33,9 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 - **NOR.1:** cerrado en R7; estándares determinísticos establecidos.
 - **NOR.2 R4:** cerrado; documentación viva migrada a áreas canónicas.
 - **NOR.2 R5:** cerrado; documentación histórica consolidada en `docs/archive/`.
-- **NOR.2 R6:** activo; migración del ledger y datos de alto impacto.
+- **NOR.2 R6:** cerrado; ledger y datos de alto impacto normalizados.
+- **NOR.2 R7:** activo; migración y depuración de artefactos locales.
+- **NOR.2 R8:** siguiente revisión; auditoría integral y cierre de NOR.2.
 - **SEC.2:** pausado hasta completar NOR.2.
 - **Primera versión oficial objetivo:** `1.0.0.0` con `Build 000001`, únicamente después de cerrar todos los gates definidos en el plan maestro.
 

@@ -14,9 +14,9 @@
 NOR.1 y NOR.2 son checkpoints técnicos transversales y no agregan bloques
 funcionales al plan de 14 bloques.
 
-- **NOR.1:** define y audita los estándares; cierre previsto en R7.
-- **NOR.2:** aplica los estándares al repositorio completo; siguiente fase.
-- **SEC.2:** no se reanuda hasta cerrar NOR.2.
+- **NOR.1:** cerrado en R7; estándares determinísticos establecidos.
+- **NOR.2:** activo en R7; artefactos locales en normalización y R8 como cierre final.
+- **SEC.2:** permanece pausado hasta cerrar NOR.2 R8.
 
 La separación evita que SEC.2 cree nuevas rutas, archivos o estructuras sobre
 una base cuya nomenclatura y documentación todavía no hayan sido normalizadas.
@@ -431,6 +431,50 @@ El consumidor de runtime y la documentación viva utilizan
 La evidencia histórica conserva los nombres que existían cuando fue generada.
 No se crean stubs ni copias de compatibilidad.
 
-R7 revisará `_entregas/`; R8 ejecutará el cierre integral de NOR.2 antes de
-reanudar SEC.2.
+R6 quedó integrado en `main` mediante PR #72 y commit squash `365ba5b`.
+
+R7 queda como revisión activa para resolver los artefactos locales heredados.
+R8 ejecutará el cierre integral de NOR.2 antes de reanudar SEC.2.
 <!-- NOR2-R6-LEDGER:END -->
+
+
+<!-- NOR2-R7-LOCAL-ARTIFACTS:START -->
+## Actualización NOR.2 R7
+
+NOR.2 R7 resuelve la excepción transitoria de artefactos locales heredados bajo
+`_entregas/`.
+
+La línea base comprobada fue de **29 archivos y 9,874,828 bytes**.
+
+La migración local conserva como invariantes:
+
+- la evidencia local útil no se incorpora al árbol Git;
+- `_deliverables/` pasa a ser la ubicación local canónica;
+- **20 evidencias únicas** permanecen conservadas;
+- **2** corresponden a DEV.2;
+- **18** corresponden a VER.2 R2;
+- **8 duplicados SHA-256 exactos** se retiran conservando una copia;
+- `_entregas/` deja de existir como ubicación activa;
+- `_deliverables/` y `_entregas/` permanecen ignorados por Git.
+
+El paquete `VER2_PR35_NETO_929628d.zip`, de **8,412,675 bytes**, se retiró
+únicamente después de comprobar que era completamente reproducible desde el
+commit Git `929628df38d4750fb103ffc79bdb81f8405535bb`.
+
+La comparación verificó:
+
+- archivos Git: **329**;
+- archivos ZIP: **329**;
+- archivos comunes: **329**;
+- solo Git: **0**;
+- solo ZIP: **0**;
+- diferencias de contenido: **0**.
+
+La historia y evidencia versionada permanecen preservadas mediante Git. El
+manifest detallado de los artefactos locales se mantiene fuera del repositorio.
+
+R7 permanece activo hasta completar sus gates, PR, CI e integración en `main`.
+
+Después de R7 solo queda **NOR.2 R8 — auditoría integral y cierre formal**.
+SEC.2 permanece pausado hasta completar R8.
+<!-- NOR2-R7-LOCAL-ARTIFACTS:END -->

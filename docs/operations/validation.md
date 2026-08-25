@@ -832,5 +832,75 @@ El gate local final de R6 verificó:
 - **70 entradas G001–G070** preservadas;
 - `VERSION` permanece en `0.0.71.01-beta`.
 
-R6 permanece activo hasta su integración en `main`.
+R6 quedó integrado en `main` mediante PR #72 y commit squash `365ba5b`.
 <!-- NOR2-R6-VALIDATION:END -->
+
+
+<!-- NOR2-R7-VALIDATION:START -->
+## Validación NOR.2 R7
+
+R7 audita y normaliza los artefactos locales heredados sin incorporarlos al
+árbol Git canónico.
+
+La línea base verificada fue:
+
+- **29 archivos**;
+- **9,874,828 bytes**;
+- **20 `.txt`**;
+- **8 `.patch`**;
+- **1 `.zip`**;
+- `_deliverables/` inicialmente vacío.
+
+La migración local verificó:
+
+- **20 evidencias únicas preservadas**;
+- **2 archivos** en `_deliverables/dev2/`;
+- **18 archivos** en `_deliverables/ver2-r2/`;
+- **8 duplicados SHA-256 exactos retirados**;
+- **1 ZIP reproducible retirado**;
+- `_entregas/` retirado;
+- `_deliverables/` permanece ignorado por Git.
+
+El ZIP `VER2_PR35_NETO_929628d.zip`, de **8,412,675 bytes**, fue comparado
+directamente contra el commit
+`929628df38d4750fb103ffc79bdb81f8405535bb`.
+
+Resultado de reproducibilidad:
+
+- archivos Git: **329**;
+- archivos ZIP: **329**;
+- comunes: **329**;
+- solo Git: **0**;
+- solo ZIP: **0**;
+- contenido diferente: **0**.
+
+Después de la migración, `git status` permaneció limpio porque los artefactos
+locales están excluidos mediante `.gitignore`.
+
+El gate local final de R7 quedó completado satisfactoriamente.
+
+Resultados observados:
+
+- regresión específica `tests/test_nor2_r7_local_artifacts.py`: **7 pruebas — OK**;
+- gate focal NOR.2/documental inicial: **71 pruebas + 77 subtests — OK**;
+- regresiones heredadas corregidas y revalidadas: **37 pruebas + 19 subtests — OK**;
+- `python -m pytest -q`: **1024 pruebas + 4902 subtests — OK**;
+- `python -m unittest discover -s tests -q`: **984 tests — OK**;
+- `python -m pip check`: **OK**;
+- `python -m compileall -q app tests`: **OK**;
+- Node.js: **v24.19.0**;
+- `node --check`: **18 archivos JavaScript — OK**;
+- `git diff --check`: **OK**;
+- estados vivos potencialmente obsoletos auditados: **0 hallazgos**;
+- fecha `2026-08-25` en documentación viva: **0 hallazgos**;
+- `_entregas/`: **inexistente**;
+- `_deliverables/`: **20 archivos locales**, **0 trackeados por Git**;
+- `VERSION`: **`0.0.71.01-beta`**;
+- `APP_VERSION`: **`0.0.71.01-beta`**.
+
+R7 permanece activo únicamente hasta completar commit, Pull Request, CI,
+integración en `main` y verificación post-merge.
+
+Después de R7 continúa **NOR.2 R8 — auditoría integral y cierre formal**.
+SEC.2 permanece pausado hasta completar R8.
+<!-- NOR2-R7-VALIDATION:END -->
