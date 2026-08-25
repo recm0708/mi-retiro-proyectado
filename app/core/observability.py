@@ -68,6 +68,13 @@ _SENSITIVE_KEY_PARTS = {
     "telefono",
     "teléfono",
     "token",
+    "authorization",
+    "bearer",
+    "credential",
+    "password",
+    "secret",
+    "apikey",
+    "api_key",
 }
 
 _SENSITIVE_TEXT_PATTERNS = (
