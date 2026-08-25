@@ -13,7 +13,7 @@ Estado vigente:
 - `v0.0.26-beta` permanece como tag legacy histórico e inmutable.
 - VER.2, DOC.1 R1, NOR.1 y NOR.2 están cerrados.
 - DOC.1 R2 quedó cerrado tras auditar integralmente la documentación Markdown posterior a NOR.2.
-- SEC.2 R1 cerrado con hardening CodeQL y revisión de controles GitHub Actions.
+- SEC.2 está cerrado después de R1–R6. AUD.SEC2 R1 corrige la semántica del kill switch administrativo y refuerza las regresiones de sesión sin modificar motores previsionales.
 - Las rutas de reporte responsable y revisión de vulnerabilidades se mantienen sin cambio material.
 <!-- DOC1-R1-POST-MANT1:END -->
 
@@ -96,3 +96,13 @@ Esta función está habilitada y complementa el canal privado alternativo indica
 | --- | --- |
 | `0.0.71.01-beta` | Versión vigente promovida en VER.2 R4; Soportada como beta vigente durante cierre, revalidación y tag firmado post-merge |
 | `0.0.26-beta` | Referencia legacy histórica preservada por pruebas de regresión; soportada como hito formal legacy etiquetado |
+
+## Superficie administrativa post-SEC.2
+
+La superficie `/dev/` está deshabilitada salvo que `MRP_ADMIN_ENABLED=1` y
+exista un secreto administrativo configurado fuera del repositorio. No existe
+una clave predeterminada. El login web usa una cookie técnica `HttpOnly` y el
+logout es una operación POST. Una sesión no puede sobreponerse al kill switch ni
+a un estado de autenticación no configurada. Para HTTPS interno debe activarse
+`MRP_ADMIN_COOKIE_SECURE=1`; una exposición remota pública continúa fuera del
+escenario soportado hasta su revisión específica.

@@ -24,7 +24,7 @@ Estado vigente:
 - NOR.1 y NOR.2 están cerrados.
 - DOC.1 R2 está cerrado como revisión documental integral posterior a NOR.2.
 - `VERSION` permanece en `0.0.71.01-beta`.
-- SEC.2 R1 quedó cerrado con hardening de seguridad y controles de GitHub.
+- SEC.2 quedó cerrado después de R1–R6; AUD.SEC2 R1 corrige el kill switch y el contrato de sesión web sin reabrir DEV.2.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 
 DEV.2 abre y cierra una superficie interna y local para revisar el estado técnico
@@ -242,3 +242,19 @@ python -m pytest -q
 ## SEC.2 R6 — Sesión administrativa web endurecida
 
 El Centro de desarrollo utiliza una sesión administrativa temporal posterior a la validación inicial. La sesión usa cookie HttpOnly configurable, expiración por inactividad y controles preparados para despliegue HTTPS interno.
+
+## Estado vigente post-SEC.2
+
+El Centro de desarrollo usa `/dev/login` para acceso web y
+`/dev/centro-desarrollo` como superficie protegida. `MRP_ADMIN_ENABLED=1` es un
+kill switch obligatorio y `MRP_ADMIN_SECRET` se define fuera del repositorio;
+no existe contraseña predeterminada. El login crea una sesión temporal en
+memoria con cookie `mrp_admin_session` `HttpOnly`, expiración por inactividad y
+límite absoluto. El logout usa `POST /dev/logout` y las respuestas `/dev/`
+marcan `Cache-Control: no-store`.
+
+Una cookie válida solo sustituye la ausencia de Bearer (`401`) cuando la
+administración está habilitada y el secreto sigue configurado. Nunca sustituye
+un `403` causado por administración deshabilitada o configuración incompleta.
+Para HTTPS interno se activa `MRP_ADMIN_COOKIE_SECURE=1`; multi-instancia exige
+un backend compartido de sesiones antes de considerarse soportado.

@@ -14,7 +14,7 @@ Estado vigente:
 - NOR.1 y NOR.2 están cerrados; NOR.2 completó R1–R8.
 - DOC.1 R2 está cerrado como auditoría integral Markdown posterior al cierre de NOR.2.
 - `VERSION` permanece sincronizado con la versión canónica vigente `0.0.71.01-beta`.
-- SEC.2 R1 quedó cerrado tras el hardening CodeQL y la normalización de GitHub Actions.
+- SEC.2 quedó cerrado después de R1–R6. Los cambios post-cierre que afecten autenticación, sesiones, cookies, secretos o endpoints administrativos requieren regresión de seguridad y sincronización documental antes de promover una nueva revisión.
 - Todo cambio debe mantener sincronizados código, pruebas, documentación y evidencia aplicable.
 <!-- DOC1-R1-POST-MANT1:END -->
 

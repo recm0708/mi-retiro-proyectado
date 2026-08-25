@@ -1,9 +1,9 @@
 # Índice de documentación
 
 **Estado:** vigente
-**Versión de aplicación:** `0.0.71.01-beta` — VER.2 G071/E01 promovida en R4
+**Versión de aplicación:** `0.0.71.01-beta` — tag publicado preservado; ledger vivo reconciliado hasta G108
 **Último tag formal legacy:** `v0.0.26-beta`
-**Última actualización transversal:** SEC.2 R6 — cierre de hardening administrativo y preparación HTTPS interno — 2026-08-25
+**Última actualización transversal:** AUD.SEC2 R1 — auditoría integral post-SEC.2 y reconciliación G071–G108 — 2026-08-25
 **Cierres históricos preservados:** UX.4.6i / PR #34 — 841 pruebas; UX.4.6e R9 — `v0.0.25-beta`
 
 Este archivo es el punto de entrada para la documentación técnica, funcional, normativa, de privacidad, validación y auditoría de Mi Retiro Proyectado.
@@ -11,7 +11,7 @@ Este archivo es el punto de entrada para la documentación técnica, funcional, 
 
 ## Estado de normalización del repositorio
 
-**Estado actual:** NOR.2, DOC.1 R2 y SEC.2 R1 están cerrados. SEC.2 quedó cerrado después de completar R1-R6. Los controles futuros de despliegue productivo se gestionarán bajo el bloque correspondiente.
+**Estado actual:** NOR.2 y DOC.1 R2 están cerrados; SEC.2 está cerrado después de R1–R6. AUD.SEC2 R1 ejecuta el saneamiento post-cierre y la reconciliación revision-aware antes de iniciar DOC.2.
 
 Estado de la fase:
 
@@ -25,11 +25,13 @@ Estado de la fase:
 - **NOR.2 R7:** cerrado; artefactos locales heredados migrados y depurados.
 - **NOR.2 R8:** cerrado; auditoría integral y cierre formal integrados mediante PR #74.
 - **DOC.1 R2:** cerrado; auditoría integral Markdown post-NOR.2 y controles permanentes incorporados.
-- **SEC.2 R1:** cerrado; hardening CodeQL y normalización técnica de workflows completados.
+- **SEC.2 R1–R6:** cerrados; CodeQL, autenticación, protección de endpoints, auditoría, sesión web y hardening configurable completados. AUD.SEC2 R1 corrige el kill switch y alinea documentación/ledger antes de la próxima promoción.
 
 Evidencia:
 
 - [`audits/security/sec2-r1-codeql-workflow-hardening.md`](audits/security/sec2-r1-codeql-workflow-hardening.md) — hardening CodeQL y normalización de workflows SEC.2 R1.
+- [`audits/security/sec2-final-closure.md`](audits/security/sec2-final-closure.md) — cierre integral SEC.2 R1–R6 y matriz de controles.
+- [`audits/documentation/documentation-audit-post-sec2.md`](audits/documentation/documentation-audit-post-sec2.md) — auditoría individual de los 140 Markdown del snapshot post-SEC.2.
 
 - [`audits/repository/repository-normalization-baseline-nor2-r1.md`](audits/repository/repository-normalization-baseline-nor2-r1.md) — línea base R1.
 - [`audits/repository/repository-normalization-migration-matrix-nor2-r2.md`](audits/repository/repository-normalization-migration-matrix-nor2-r2.md) — matriz de migración R2.
@@ -60,7 +62,9 @@ Evidencia:
 - [`AUDITORIA_VER2_SEGUNDA_PASADA.md`](archive/governance/AUDITORIA_VER2_SEGUNDA_PASADA.md) — bitácora de la segunda pasada y correcciones sobre la primera reconstrucción.
 - [`AUDITORIA_VER2_CONTEO_PROVISIONAL.md`](archive/governance/AUDITORIA_VER2_CONTEO_PROVISIONAL.md) — cierre del conteo de segunda pasada en G070 antes de VER.2.
 - [`MATRIZ_DECISION_REVISIONES_VER2.md`](archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md) — decisión fila por fila sobre qué consume Global y por qué.
-- [`pre-1-0-revision-ledger.md`](governance/pre-1-0-revision-ledger.md) — ledger Markdown G001–G070 y candidato G071.
+- [`pre-1-0-revision-ledger.md`](governance/pre-1-0-revision-ledger.md) — ledger Markdown reconciliado G001–G108 y próximo candidato G109.
+- [`post-g070-revision-reconciliation.md`](audits/governance/post-g070-revision-reconciliation.md) — auditoría de reconstrucción G071–G108.
+- [`pre-1-0-revision-ledger-g070.json`](archive/governance/pre-1-0-revision-ledger-g070.json) — snapshot histórico exacto G070.
 - [`../data/pre-1-0-revision-ledger.json`](../data/pre-1-0-revision-ledger.json) — ledger machine-readable canónico de la reconstrucción.
 - [`../app/core/version_ledger.py`](../app/core/version_ledger.py) — validador de continuidad, unicidad y codificación del ledger estructurado.
 - [`../RELEASES.md`](../RELEASES.md) — versiones, tags y reconstrucción histórica.

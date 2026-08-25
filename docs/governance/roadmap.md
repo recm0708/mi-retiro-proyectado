@@ -1,11 +1,11 @@
 # Roadmap
 
 **Estado:** vigente
-**Versión vigente:** `0.0.71.01-beta` — VER.2 G071/E01
+**Versión vigente:** `0.0.71.01-beta` — tag publicado preservado; reconciliación viva G108
 **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
 **Último tag formal legacy:** `v0.0.26-beta`
 **Fecha de revisión:** 2026-08-25
-**Estado previo y actual de SEC.2:** NOR.1, NOR.2, DOC.1 R2 y SEC.2 R1 están cerrados; SEC.2 continuará con siguientes actividades de hardening.
+**Estado actual:** SEC.2 está cerrado después de R1–R6. AUD.SEC2 R1 corrige hallazgos post-cierre y reconcilia G071–G108; después continúa DOC.2.
 
 
 <!-- NOR1-R7-CLOSURE:START -->
@@ -19,7 +19,9 @@ La secuencia operativa previa a SEC.2 queda:
 
 1. **NOR.1** — definición y auditoría preparatoria — cerrado en R7;
 2. **NOR.2** — normalización integral del repositorio — cerrado en R8 mediante PR #74;
-3. **SEC.2** — hardening integral — R1 cerrado.
+3. **SEC.2** — hardening integral — cerrado después de R1–R6;
+4. **AUD.SEC2 R1** — saneamiento post-cierre y reconciliación revision-aware — candidato G109/E01;
+5. **DOC.2** — siguiente bloque funcional después de aceptar el saneamiento.
 
 NOR.2 ejecutó los movimientos, renombrados, consolidaciones y retiros que
 NOR.1 deliberadamente no realizó.
@@ -27,9 +29,9 @@ NOR.1 deliberadamente no realizó.
 
 
 <!-- NOR2-R1-BASELINE:START -->
-## NOR.2 R1 — línea base de normalización
+## Registro histórico NOR.2 R1 — línea base de normalización
 
-NOR.2 está activo. R1 audita el árbol versionado contra los estándares de NOR.1
+En ese checkpoint, NOR.2 estaba activo y R1 auditaba el árbol versionado contra los estándares de NOR.1
 sin ejecutar todavía renombres ni movimientos. El resultado alimentará una
 matriz de migración por impacto antes de modificar rutas críticas.
 
@@ -38,9 +40,9 @@ SEC.2 quedó cerrado tras completar sus controles planificados durante NOR.2.
 
 
 <!-- NOR2-R2-MATRIX:START -->
-## NOR.2 R2 — matriz de migración
+## Registro histórico NOR.2 R2 — matriz de migración
 
-R2 clasifica los hallazgos de R1 y fija el orden R3–R8. El árbol operativo
+En ese checkpoint, R2 clasificaba los hallazgos de R1 y fija el orden R3–R8. El árbol operativo
 quedará con rutas y documentación vigentes; Git y `docs/archive/` preservarán
 la historia cuando corresponda. `README.md` se corrige desde R2 y se vuelve a
 auditar en el cierre.
@@ -50,9 +52,9 @@ SEC.2 quedó cerrado tras completar sus controles planificados.
 
 
 <!-- NOR2-R3-RUNTIME:START -->
-## NOR.2 R3 — migración técnica
+## Registro histórico NOR.2 R3 — migración técnica
 
-R3 ejecuta los movimientos de runtime/configuración aprobados en R2 y actualiza
+En ese checkpoint, R3 ejecutaba los movimientos de runtime/configuración aprobados en R2 y actualiza
 imports, plantillas, assets y pruebas de manera atómica. Las URL públicas
 permanecen estables. R4 normalizará la documentación viva.
 
@@ -205,14 +207,14 @@ No existe una una revisión intermedia no demostrada entre UX.4.6i R1 y R1.2 dem
 
 **PLAN.1:** cerrado formalmente en `0.0.26-beta` con **720 pruebas en `OK`** y tag firmado `v0.0.26-beta`. La segunda auditoría reconoce diez estados aceptados G051–G060 dentro de su evolución.
 
-**VER.2:** bloque transversal cerrado. La base anterior al cambio contiene **70 estados aceptados (G001–G070)** y G071/E01 fue promovido, integrado y publicado como `0.0.71.01-beta` mediante el tag `v0.0.71.01-beta`.
+**VER.2:** bloque transversal cerrado. La primera promoción se publicó como `0.0.71.01-beta`; AUD.SEC2 R1 documenta que el ledger usado entonces terminaba en G070 y que la reconstrucción completa sitúa ese estado en G087 sin modificar el tag inmutable.
 
-**Checkpoint técnico actual:** NOR.2, DOC.1 R2 y SEC.2 R1 están cerrados; el hardening restante continúa según planificación.
+**Checkpoint técnico actual:** el árbol `4bd7d8d` está reconciliado como G108, SEC.2 cerró R1–R6 y AUD.SEC2 R1 reserva G109/E01 antes de DOC.2.
 
 Documentos canónicos de VER.2:
 
 - `AUDITORIA_VERSIONADO_PRE_1_0.md` — criterio contable y exclusiones;
-- `pre-1-0-revision-ledger.md` — ledger G001–G070 y reserva G071;
+- `pre-1-0-revision-ledger.md` — ledger reconciliado G001–G108 y reserva G109;
 - `MATRIZ_DECISION_REVISIONES_VER2.md` — justificación de la segunda pasada;
 - `../data/pre-1-0-revision-ledger.json` — ledger estructurado validable;
 - `../VERSIONING.md` — política de numeración.
@@ -444,8 +446,21 @@ El gate local confirmó:
 
 El gate integral local de R8 quedó completado y la CI remota pasó en verde después de hacer reproducible el guard de artefactos locales.
 
-R8 quedó integrado mediante PR #74 y commit squash `b4df9b7`. Con esa integración, **NOR.2 queda formalmente cerrado** y **SEC.2 queda habilitado para reanudación**, aunque todavía no se ha iniciado.
+R8 quedó integrado mediante PR #74 y commit squash `b4df9b7`. Esa frase describe el checkpoint histórico previo al inicio de SEC.2; el estado vigente es que **SEC.2 cerró después de R1–R6** y AUD.SEC2 R1 ejecuta el saneamiento post-cierre.
 <!-- NOR2-R8-FINAL-AUDIT:END -->
 
 
 **SEC.2 R6 cerrado:** hardening de sesión administrativa web y preparación para HTTPS interno completados.
+
+## AUD.SEC2 R1 — saneamiento post-cierre
+
+**Estado:** candidato; no consume G109 hasta integrar.
+
+Alcance:
+
+- corregir el kill switch y el contrato de sesión administrativa;
+- auditar individualmente los 140 Markdown del snapshot `4bd7d8d`;
+- reconciliar el ledger desde G070 hasta G108;
+- preservar `v0.0.71.01-beta` como anomalía histórica inmutable;
+- dejar G109/E01 (`0.1.09.01-beta`) reservado para esta unidad de trabajo;
+- habilitar DOC.2 únicamente después de gate, PR/CI y merge.

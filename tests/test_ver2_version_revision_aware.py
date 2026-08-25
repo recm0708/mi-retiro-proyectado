@@ -60,17 +60,17 @@ class TestVer2VersionRevisionAware(unittest.TestCase):
             with self.subTest(version=version):
                 self.assertFalse(version_valida(version))
 
-    def test_ledger_contiene_g001_a_g070_sin_huecos_ni_duplicados(self):
+    def test_ledger_contiene_g001_a_g108_sin_huecos_ni_duplicados(self):
         texto = LEDGER.read_text(encoding="utf-8")
         globales = [
             int(valor)
             for valor in re.findall(r"^\| G(\d{3}) \| `0\.", texto, flags=re.MULTILINE)
         ]
-        # La tabla del ledger contiene G001–G070; la fila candidata G071 se
-        # mantiene separada en la sección Próximo estado.
-        self.assertEqual(list(range(1, 71)), globales[:70])
-        self.assertEqual(70, len(globales[:70]))
-        self.assertEqual(len(globales[:70]), len(set(globales[:70])))
+        # El prefijo G001–G070 sigue intacto y la reconciliación post-G070
+        # extiende el ledger hasta el último estado aceptado auditado.
+        self.assertEqual(list(range(1, 109)), globales[:108])
+        self.assertEqual(108, len(globales[:108]))
+        self.assertEqual(len(globales[:108]), len(set(globales[:108])))
 
     def test_ids_del_ledger_codifican_su_global(self):
         texto = LEDGER.read_text(encoding="utf-8")
@@ -79,24 +79,22 @@ class TestVer2VersionRevisionAware(unittest.TestCase):
             texto,
             flags=re.MULTILINE,
         )
-        aceptadas = filas[:70]
-        self.assertEqual(70, len(aceptadas))
+        aceptadas = filas[:108]
+        self.assertEqual(108, len(aceptadas))
         for global_texto, version in aceptadas:
             with self.subTest(global_texto=global_texto, version=version):
                 descompuesta = descomponer_version_beta_revision(version)
                 self.assertIsNotNone(descompuesta)
                 self.assertEqual(int(global_texto), descompuesta[0])
 
-    def test_g071_permanece_condicionado_al_cierre_ver2(self):
+    def test_g071_historico_y_anomalia_de_promocion_quedan_documentados(self):
         ledger = LEDGER.read_text(encoding="utf-8")
         auditoria = AUDITORIA.read_text(encoding="utf-8")
         self.assertIn("G071", ledger)
-        self.assertIn("`0.0.71.01-beta`", ledger)
+        self.assertIn("v0.0.71.01-beta", ledger)
         self.assertIn("VER.2", auditoria)
-        self.assertNotRegex(
-            ledger,
-            r"^\| G071 \| `0\.0\.71\.01-beta` \| VER\.2 R1.*aceptado",
-        )
+        self.assertIn("G087", ledger)
+        self.assertIn("anomalía", ledger.lower())
 
 
 if __name__ == "__main__":

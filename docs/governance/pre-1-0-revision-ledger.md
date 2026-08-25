@@ -2,24 +2,38 @@
 
 **Proyecto:** Mi Retiro Proyectado
 **Base auditada:** `7037addd44253e528c77460b678d2b3ccd540dd5`
-**Contador aceptado en la base:** **G070**
-**Siguiente Global disponible si VER.2 supera su gate:** **G071**
+**Contador histórico en la base `7037addd`:** **G070**
+**Contador aceptado reconciliado al commit `4bd7d8d`:** **G108**
+**Siguiente Global disponible:** **G109**
+**Siguiente candidato reservado para auditoría/remediación post-SEC.2:** `0.1.09.01-beta`
 
 
 <!-- DOC1-R1-REVISION-MANUAL:START -->
-## Nota de lectura post-MANT.1
+## Nota de lectura vigente — reconciliación post-SEC.2
 
-Este ledger conserva la reconciliación pre-1.0 y la relación entre estados aceptados, candidatos y evidencia histórica.
+La segunda pasada de VER.2 reconstruyó correctamente G001–G070 sobre la base
+`7037addd`, pero el ledger dejó de incorporar estados aceptados posteriores a esa
+base. La auditoría integral post-SEC.2 del 2026-08-25 reconstruye esa franja sin
+reescribir los primeros 70 estados.
 
-Estado vigente:
+Estado vigente de la contabilidad:
 
-- `0.0.71.01-beta` sigue siendo candidato VER.2, no versión publicada.
-- `0.0.26-beta` sigue siendo la versión canónica en `VERSION`.
-- MANT.1 R7 quedó integrado en `main` como cierre operativo posterior.
-- DOC.1 R1 no modifica el contador de versión; solo sincroniza documentación Markdown.
+- G001–G070 permanecen exactamente como reconstrucción histórica de VER.2.
+- G071–G108 registran estados materialmente distintos aceptados después de
+  `7037addd`, desde DEV.2 hasta SEC.2 R6.
+- El tag publicado `v0.0.71.01-beta` se conserva inmutable. Su cadena de versión
+  fue promovida antes de contabilizar los estados DEV.2, MANT.1 y DOC.1 R1 que
+  ya existían después de `7037addd`; por eso queda documentada como una
+  **anomalía histórica de numeración**, no como el identificador revision-aware
+  correcto del estado global G071.
+- La versión de `VERSION` permanece temporalmente en `0.0.71.01-beta` hasta que
+  la remediación post-SEC.2 sea aceptada y se ejecute la promoción de
+  reconciliación correspondiente.
+- El siguiente candidato reservado es G109/E01: `0.1.09.01-beta`, bajo el
+  checkpoint transversal `AUD.SEC2`.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 
-Este ledger registra los estados aceptados reconstruidos durante VER.2. La regla contable y las exclusiones se documentan en `MATRIZ_DECISION_REVISIONES_VER2.md` y `AUDITORIA_VERSIONADO_PRE_1_0.md`.
+Este ledger registra los estados aceptados reconstruidos durante VER.2 y su reconciliación posterior. La regla contable histórica y las exclusiones originales se conservan en `docs/archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md` y `docs/archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md`; la ampliación post-G070 se justifica en `docs/audits/governance/post-g070-revision-reconciliation.md`.
 
 Los identificadores revision-aware son una reconstrucción de auditoría. **No existieron históricamente y no autorizan mover, recrear ni renombrar los tags `v0.0.1-beta`–`v0.0.26-beta`.**
 
@@ -111,6 +125,61 @@ Los identificadores revision-aware son una reconstrucción de auditoría. **No e
 | G069 | `0.0.69.01-beta` | UX.4.6i R1 — guía pública de cálculo | base `0.0.26-beta` | gate aceptado 826 pruebas |
 | G070 | `0.0.70.02-beta` | UX.4.6i R1.4 — cierre Cómo se calcula | base `0.0.26-beta` | PR #34 / 841 pruebas |
 
+## Reconciliación G071–G108
+
+Estos estados se reconstruyen cronológicamente desde el árbol posterior a `7037addd`.
+El detalle de inclusión/exclusión está en `docs/audits/governance/post-g070-revision-reconciliation.md`.
+
+| Global | ID revision-aware | Bloque / estado aceptado | Ancla histórica | Evidencia resumida |
+|---:|---|---|---|---|
+| G071 | `0.0.71.01-beta` | DEV.2 R1 — Centro de desarrollo y estado interno | `0.0.26-beta` | commit 06e2821 / PR #37; apertura funcional DEV.2 |
+| G072 | `0.0.72.02-beta` | DEV.2 R2 — visor diagnóstico seguro | `0.0.26-beta` | commit 5451d18 / PR #39; visor y exportación diagnóstica |
+| G073 | `0.0.73.03-beta` | DEV.2 R3 — autodiagnóstico técnico local | `0.0.26-beta` | commit 9fb86af / PR #40; autodiagnóstico y regresiones |
+| G074 | `0.0.74.01-beta` | MANT.1 R2 — documentación de scripts y hooks | `0.0.26-beta` | commit 8fdc389 / PR #42; R1 queda como auditoría inicial absorbida |
+| G075 | `0.0.75.02-beta` | MANT.1 R3 — encabezados YAML de GitHub | `0.0.26-beta` | commit 9013aa3; regresión YAML |
+| G076 | `0.0.76.03-beta` | MANT.1 R4 — limpieza de trazabilidad en encabezados operativos | `0.0.26-beta` | commit e894bcc; regresión de encabezados |
+| G077 | `0.0.77.04-beta` | MANT.1 R5A — comentarios internos en servicios Python | `0.0.26-beta` | commit 46e51d5; regresión de comentarios Python |
+| G078 | `0.0.78.05-beta` | MANT.1 R5B — comentarios en CSS y plantilla | `0.0.26-beta` | commit 97b4984; regresión de comentarios CSS/Jinja |
+| G079 | `0.0.79.06-beta` | MANT.1 R5C — comentarios en JavaScript complejo | `0.0.26-beta` | commit 0b349ce; regresión de comentarios JavaScript |
+| G080 | `0.0.80.07-beta` | MANT.1 R5D — política y plantillas por extensión | `0.0.26-beta` | commit 77b413e; política y regresiones por extensión |
+| G081 | `0.0.81.08-beta` | MANT.1 R5E — estandarización de nombres de carpetas | `0.0.26-beta` | commit 42c2cea; migración de carpetas y regresiones |
+| G082 | `0.0.82.09-beta` | MANT.1 R5F — normalización de nombres de archivos | `0.0.26-beta` | commit ba6995e; migración de archivos y regresiones |
+| G083 | `0.0.83.10-beta` | MANT.1 R5G — auditoría y consolidación documental | `0.0.26-beta` | commit 9a8a795; índice/enlaces y regresión documental |
+| G084 | `0.0.84.11-beta` | MANT.1 R5H — auditoría de nombres técnicos restantes | `0.0.26-beta` | commit ab92677 / PR #53; normalización y regresiones |
+| G085 | `0.0.85.12-beta` | MANT.1 R6 — auditoría funcional post-renombres | `0.0.26-beta` | commit 9ac55ca / PR #54; validación funcional focalizada |
+| G086 | `0.0.86.01-beta` | DOC.1 R1 — auditoría Markdown post-MANT.1 | `0.0.26-beta` | commit d991890 / PR #56; auditoría y línea base documental |
+| G087 | `0.0.87.01-beta` | VER.2 R4 — promoción controlada publicada como 0.0.71.01-beta | `v0.0.71.01-beta` | PR #60; commit cb1dc24; tag firmado v0.0.71.01-beta |
+| G088 | `0.0.88.01-beta` | NOR.1 R1 — estándares de estructura y nomenclatura | `0.0.71.01-beta` | commit firmado 67aae43 dentro de PR #62 |
+| G089 | `0.0.89.02-beta` | NOR.1 R1.1 — estructura documental para auditorías e históricos | `0.0.71.01-beta` | commit firmado 10e195d dentro de PR #62 |
+| G090 | `0.0.90.03-beta` | NOR.1 R3 — clasificación documental inicial | `0.0.71.01-beta` | commit firmado 8c26c60; squash f1489ef / PR #62 |
+| G091 | `0.0.91.04-beta` | NOR.1 R4 — auditoría de nomenclatura | `0.0.71.01-beta` | commit fc4b1ef / PR #63 |
+| G092 | `0.0.92.05-beta` | NOR.1 R5 — auditoría de dependencias documentales | `0.0.71.01-beta` | commit 4cf6b3d; evidencia documental |
+| G093 | `0.0.93.06-beta` | NOR.1 R6 — estándares determinísticos consolidados | `0.0.71.01-beta` | commit e33f594; gate previo a cierre |
+| G094 | `0.0.94.01-beta` | NOR.2 R1 — línea base de normalización | `0.0.71.01-beta` | commit c0e06ca / PR #67 |
+| G095 | `0.0.95.02-beta` | NOR.2 R2 — matriz de migración | `0.0.71.01-beta` | commit 4d4e56f; matriz aprobada |
+| G096 | `0.0.96.03-beta` | NOR.2 R3 — migración de runtime y configuración | `0.0.71.01-beta` | commit b037518; migración técnica |
+| G097 | `0.0.97.04-beta` | NOR.2 R4 — normalización de documentación viva | `0.0.71.01-beta` | commit 65b8fd9 / PR #70 |
+| G098 | `0.0.98.05-beta` | NOR.2 R5 — archivo de documentación histórica | `0.0.71.01-beta` | commit ad9b3f3 / PR #71 |
+| G099 | `0.0.99.06-beta` | NOR.2 R6 — normalización de ledger y datos | `0.0.71.01-beta` | commit 365ba5b / PR #72 |
+| G100 | `0.1.00.07-beta` | NOR.2 R7 — depuración de artefactos locales | `0.0.71.01-beta` | commit b8ffd39 / PR #73 |
+| G101 | `0.1.01.08-beta` | NOR.2 R8 — auditoría integral de cierre | `0.0.71.01-beta` | commit b4df9b7 / PR #74 |
+| G102 | `0.1.02.02-beta` | DOC.1 R2 — auditoría integral Markdown post-NOR.2 | `0.0.71.01-beta` | commit 46ca30e / PR #76 |
+| G103 | `0.1.03.01-beta` | SEC.2 R1 — hardening CodeQL y workflows | `0.0.71.01-beta` | commit e946af7 / PR #77 |
+| G104 | `0.1.04.02-beta` | SEC.2 R2 — autenticación administrativa | `0.0.71.01-beta` | commits firmados 92b1e8e y 287ff81 dentro de PR #79 |
+| G105 | `0.1.05.03-beta` | SEC.2 R3 — protección centralizada de endpoints | `0.0.71.01-beta` | commit firmado 771015d dentro de PR #79 |
+| G106 | `0.1.06.04-beta` | SEC.2 R4 — auditoría y observabilidad administrativa | `0.0.71.01-beta` | commit firmado 5006e28; squash d7a3b54 / PR #79 |
+| G107 | `0.1.07.05-beta` | SEC.2 R5 — sesión administrativa web | `0.0.71.01-beta` | commit 0966cd2 / PR #80 |
+| G108 | `0.1.08.06-beta` | SEC.2 R6 — hardening de sesiones administrativas | `0.0.71.01-beta` | commit 38da72f / PR #81 |
+
+### Anomalía histórica del tag `v0.0.71.01-beta`
+
+La publicación de `v0.0.71.01-beta` ocurrió durante VER.2 R4. La decisión VER.2 R3
+establece que R1, R2 y R3 son correcciones internas del mismo candidato y no
+consumen G072 ni incrementan EE. Al reconstruir además los estados materiales
+posteriores a G070, la aceptación final de VER.2 R4 corresponde a **G087/E01**.
+El tag no se mueve, elimina ni recrea: se conserva como evidencia publicada y la
+discrepancia se corrige únicamente hacia adelante.
+
 ## Estados preservados que no consumen Global
 
 El ledger estructurado conserva también estas exclusiones para no perder historia:
@@ -131,10 +200,12 @@ El ledger estructurado conserva también estas exclusiones para no perder histor
 
 ## Próximo estado
 
-VER.2 no consume G071 por existir como rama o PR draft. Solo si su ledger, validador, documentación, pruebas y CI quedan aceptados se incorpora:
+La auditoría post-SEC.2 reserva el siguiente estado únicamente como candidato:
 
 | Global | ID revision-aware candidato | Bloque | Condición |
 |---:|---|---|---|
-| G071 | `0.0.71.01-beta` | VER.2 R1 — reconciliación revision-aware | ledger + validador + gate completo + PR/CI verde + integración |
+| G109 | `0.1.09.01-beta` | AUD.SEC2 R1 — auditoría y remediación post-SEC.2 | correcciones + auditoría documental integral + gate completo + PR/CI verde + integración |
 
-Después de aceptar G071, DEV.2 puede volver a ser el bloque funcional activo.
+G109 no queda consumido por existir en una rama de trabajo. Después de su
+integración deberá ejecutarse la sincronización post-merge del ledger y la
+promoción de `VERSION` sin reescribir el tag histórico `v0.0.71.01-beta`.

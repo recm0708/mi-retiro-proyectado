@@ -141,7 +141,8 @@ class TestNOR2R7LocalArtifacts(unittest.TestCase):
 
         self.assertIn("NOR.2 R7", docs)
         self.assertIn("NOR.2 R8", docs)
-        self.assertIn("SEC.2 R1:** cerrado; hardening CodeQL y normalización técnica de workflows completados.", docs)
+        self.assertIn("SEC.2 R1–R6", docs)
+        self.assertIn("AUD.SEC2 R1", docs)
 
         version = (
             ROOT / "VERSION"

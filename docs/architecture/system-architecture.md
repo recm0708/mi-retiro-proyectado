@@ -4,7 +4,7 @@
 **Versión de aplicación revisada:** `0.0.71.01-beta`
 **Versión base histórica:** `0.0.23-beta`
 **Revisión documental:** GOV.1.4 — 2026-08-17
-**Última actualización técnica:** DEV.2 R4 — cierre final documental — 2026-08-23
+**Última actualización técnica:** AUD.SEC2 R1 — sesión administrativa y kill switch — 2026-08-25
 **Última actualización de mantenimiento:** MANT.1 R5E — estandarización de nombres de carpetas — 2026-08-23
 **Clasificación:** Técnica / Pública
 
@@ -23,7 +23,7 @@ Cierre técnico relevante:
 - R6 validó funcionalmente el repositorio después de los renombres.
 - R7 cerró operativamente MANT.1 sobre `main`.
 
-La documentación arquitectónica debe leerse desde esta base: MANT.1, DOC.1 R1, NOR.1 y NOR.2 están cerrados. DOC.1 R2 quedó cerrado tras auditar la documentación vigente posterior a NOR.2 sin modificar la arquitectura de ejecución; SEC.2 R1 quedó cerrado con hardening CodeQL y normalización de controles GitHub Actions.
+La documentación arquitectónica debe leerse desde esta base: MANT.1, DOC.1, NOR.1 y NOR.2 están cerrados; SEC.2 cerró R1–R6. AUD.SEC2 R1 corrige la prioridad del kill switch administrativo, el fallback de sesión y logout sin modificar la arquitectura previsional.
 <!-- DOC1-R1-POST-MANT1:END -->
 
 Mi Retiro Proyectado es una aplicación web local basada en FastAPI, Jinja2 y JavaScript del navegador. La arquitectura separa presentación, contratos de datos, servicios de integración, motores previsionales, parámetros normativos y observabilidad de desarrollo.
@@ -387,3 +387,15 @@ comentarios internos cuando el formato lo permite.
 ## SEC.2 R6 — Control de sesión administrativa
 
 La autenticación administrativa separa la validación inicial mediante secreto del mantenimiento de sesión web temporal. La sesión no almacena datos personales y se invalida por expiración o revocación.
+
+## Reconciliación de la superficie administrativa post-SEC.2
+
+La arquitectura administrativa mantiene dos formas de acceso sobre la misma
+credencial externa: Bearer para clientes técnicos y login web que materializa
+una sesión temporal en memoria. `MRP_ADMIN_ENABLED` conserva prioridad sobre
+ambas. La sesión web no es una cuenta de usuario ni una persistencia de
+simulaciones y sus cookies nunca forman parte de Developer Diagnostics.
+
+AUD.SEC2 R1 corrige la ruta POST de login para respetar el kill switch, limita
+el fallback de sesión a errores 401, convierte logout en POST y extiende
+`Cache-Control: no-store` a `/dev/`.

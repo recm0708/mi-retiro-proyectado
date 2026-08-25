@@ -7,7 +7,7 @@
 **Versión base histórica:** `0.0.25-beta`
 **Versión base histórica preservada:** `0.0.23-beta`
 **Revisión documental base:** GOV.1.3 R3 — 2026-08-17
-**Última revisión documental:** PLAN.1 R3B1 — 2026-08-20
+**Última revisión documental:** AUD.SEC2 R1 — 2026-08-25
 **Revisión jurídica externa:** Pendiente antes de la primera versión oficial o de un cambio material del tratamiento/despliegue
 
 Este documento describe las condiciones funcionales actualmente implementadas. No constituye una certificación jurídica ni una resolución de la CSS.
@@ -108,7 +108,7 @@ Estas conexiones se describen en `privacy-policy.md` y `security-and-privacy.md`
 
 ## 13. Cookies y seguimiento
 
-Mi Retiro Proyectado no implementa cookies propias de publicidad, analítica, seguimiento o perfilado.
+Mi Retiro Proyectado no implementa cookies propias de publicidad, analítica, seguimiento o perfilado. La superficie administrativa puede crear `mrp_admin_session`, una cookie técnica `HttpOnly` de autenticación temporal que no se utiliza para la simulación ni para seguimiento comercial.
 
 ## 14. Derechos
 

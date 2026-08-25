@@ -5,7 +5,7 @@
 **Versión base histórica:** `0.0.25-beta`
 **Versión base histórica preservada:** `0.0.23-beta`
 **Fecha de cierre original:** 2026-08-17
-**Última revisión documental:** PLAN.1 R3B2 — 2026-08-20
+**Última revisión documental:** AUD.SEC2 R1 — 2026-08-25
 **Clasificación:** Seguridad / Privacidad / Riesgo
 **Revisión externa:** Pendiente antes de la primera versión oficial o de cualquier despliegue remoto que cambie el modelo de riesgo
 
@@ -18,7 +18,8 @@ El modelo cubre la aplicación en su **etapa beta y modo local soportado**:
 - aplicación web servida por FastAPI;
 - uso principal en `localhost`;
 - navegador como contenedor del estado temporal de simulación;
-- ausencia de cuentas de usuario;
+- ausencia de cuentas de usuario final;
+- sesión administrativa web temporal en memoria, habilitada solo mediante configuración explícita;
 - ausencia de base de datos permanente de simulaciones;
 - importación voluntaria de documentos PDF procesados en memoria;
 - Developer Diagnostics local y apagado por defecto;
@@ -82,6 +83,7 @@ Poder reconstruir decisiones técnicas y fallos sin crear una segunda base de da
 | Código de motores y servicios | Alta para exactitud | Repositorio / runtime | Integridad |
 | Dependencias Python/Bootstrap | Alta para cadena de suministro | Entorno / CDN | Integridad |
 | Historial Git, tags y CI | Alta para auditoría | GitHub/local | Integridad y trazabilidad |
+| Secreto y sesión administrativa | Alta | variable de entorno + memoria del proceso / cookie HttpOnly | Confidencialidad e integridad |
 
 ## 4. Fronteras de confianza
 
@@ -95,7 +97,7 @@ Controles actuales:
 - validación de entrada;
 - `Cache-Control: no-store` en API de simulación;
 - `Content-Security-Policy` (CSP) y cabeceras defensivas;
-- ausencia de cookies de autenticación;
+- la simulación pública no usa cookie de autenticación; la superficie `/dev/` usa la cookie técnica administrativa `mrp_admin_session`, `HttpOnly`;
 - sin persistencia automática de requests/responses.
 
 ### F2 — Archivo elegido ↔ Parser PDF
@@ -176,7 +178,7 @@ Controles actuales:
 | T-08 | Fuga de PDF por persistencia accidental | Importador | Alto | Baja | Medio | procesamiento en memoria; no persistencia del binario | reevaluar si se añade persistencia/exportación |
 | T-09 | Fuente CSS caída, inconsistente o manipulada | Fecha externa | Medio | Media | Medio | HTTPS, comparación de respuestas, estado no confiable | no declarar vigencia cuando la referencia no es confiable |
 | T-10 | Denegación de servicio por entradas excesivas | Upload/API | Medio | Media | Medio | límites de upload, páginas y texto | despliegue remoto requerirá límites adicionales/proxy |
-| T-11 | CSRF contra operación con estado servidor | API | Bajo hoy | Baja | Bajo | no hay cuenta, cookie de sesión ni persistencia servidor | reevaluar inmediatamente si aparece autenticación o estado remoto |
+| T-11 | CSRF contra sesión administrativa | `/dev/` | Medio | Baja en localhost | Bajo/Medio | `SameSite` configurable, logout POST, superficie deshabilitada por defecto y sin CORS permisivo | exigir revisión específica si se usa `SameSite=None` o despliegue remoto |
 | T-12 | Clickjacking | UI | Medio | Baja | Bajo | `X-Frame-Options: DENY`, CSP `frame-ancestors 'none'` | mantener regresiones |
 | T-13 | Exposición mediante caché HTTP | API de simulación | Alto | Baja | Bajo/Medio | `Cache-Control: no-store` | revisar nuevas rutas sensibles |
 | T-14 | Manipulación de resultados en JavaScript | Presentación | Alto | Baja | Medio | fórmulas principales solo en Python, motores separados | no duplicar fórmulas de dominio en frontend |
@@ -332,3 +334,20 @@ Los documentos vigentes relacionados se enumeran en `README.md`. La revisión ju
 La versión base de esta revisión técnica es `0.0.23-beta`; el cierre integral posterior de GOV.1 se materializó en `0.0.24-beta`.
 
 > **Nota posterior — PLAN.1 R3B2 / 2026-08-20:** el estado vivo se revisó sobre `0.0.25-beta`. La terminología histórica de GOV.1.5 no se interpreta como una etapa actual “pre-beta”; el producto se encuentra en la línea beta `0.0.N-beta`.
+
+## Revisión de amenaza administrativa post-SEC.2
+
+SEC.2 R5/R6 introdujo una sesión administrativa temporal que no existía cuando
+se redactó el modelo original. AUD.SEC2 R1 incorpora explícitamente:
+
+- **T-16 — bypass del kill switch:** mitigado exigiendo `MRP_ADMIN_ENABLED=1`
+  tanto en GET/POST de login como al aceptar cookie de sesión;
+- **T-17 — robo/reutilización de sesión administrativa:** mitigado mediante ID
+  aleatorio, `HttpOnly`, expiración por inactividad, vida absoluta, límite de
+  sesiones y `Secure` configurable para HTTPS;
+- **T-18 — inconsistencia multi-worker:** las sesiones viven en memoria del
+  proceso; un despliegue multi-instancia requiere backend compartido y nueva
+  revisión antes de declararse soportado.
+
+La cookie administrativa no convierte la aplicación en un sistema de cuentas de
+usuarios ni crea persistencia de simulaciones.

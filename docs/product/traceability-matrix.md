@@ -1,7 +1,7 @@
 # Matriz de trazabilidad
 
 **Estado:** Vigente
-**Versión de aplicación:** `0.0.71.01-beta` — VER.2 G071/E01 promovida en R4
+**Versión de aplicación:** `0.0.71.01-beta` — tag publicado preservado; reconciliación viva hasta G108
 **Último tag formal legacy:** `v0.0.26-beta`
 **Base histórica:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal:** NOR.2 R8 — 2026-08-24
@@ -26,7 +26,7 @@ Estado documental actual:
 - NOR.2 R7 está cerrado.
 - NOR.2 R8 está cerrado e integrado mediante PR #74.
 - NOR.2 está cerrado después de completar R1–R8.
-- SEC.2 R1 quedó cerrado con hardening CodeQL y normalización técnica de workflows.
+- SEC.2 quedó cerrado después de R1–R6; AUD.SEC2 R1 corrige el kill switch y reconcilia documentación/ledger antes de la siguiente promoción.
 
 Esta matriz debe distinguir trazabilidad histórica de estado vigente.
 <!-- DOC1-R1-POST-MANT1:END -->
@@ -147,7 +147,7 @@ Los estados `Candidato` deben promoverse a `Verificado` únicamente después del
 | Mantener artefactos locales fuera de Git | auditoría local: 20 artefactos preservados; Git: 0 trackeados | `test_artefactos_locales_quedan_fuera_de_git` |
 | Preservar la versión G071/E01 | `VERSION` + `APP_VERSION` | `test_version_permanece_en_g071_e01` |
 | Preservar ledger G001–G070 y ruta canónica | `data/pre-1-0-revision-ledger.json` | `test_ledger_permanece_canonico_e_inmutable` |
-| Sincronizar estado vivo de NOR.2 | R7 cerrado / R8 cerrado / NOR.2 cerrado / SEC.2 habilitado para reanudación | `test_estado_documental_vigente_es_r8` |
+| Sincronizar el checkpoint histórico de NOR.2 | R7/R8 cerrados; en ese momento SEC.2 quedaba habilitado para reanudación | `test_estado_documental_vigente_es_r8` |
 | Eliminar contradicciones vigentes de VER.2/NOR.1/NOR.2 | barrido post-corrección: 0 hallazgos | `test_ver2_no_figura_como_pendiente_en_estado_vivo` |
 <!-- NOR2-R8-TRACEABILITY:END -->
 
@@ -178,3 +178,16 @@ Los estados `Candidato` deben promoverse a `Verificado` únicamente después del
 | Preservar comportamiento de exportación | pruebas UX.4.6h | `test_ux46h_r1_resultados_exportacion.py` |
 | Mantener versión sin promoción | `VERSION = 0.0.71.01-beta` | gate integral |
 | Confirmar corrección remota | CodeQL del PR integrado | Verificado SEC.2 R1 |
+
+## Trazabilidad SEC.2 R2–R6 y AUD.SEC2 R1
+
+| Control | Implementación | Regresión/evidencia | Estado |
+|---|---|---|---|
+| Secreto fuera del repositorio y kill switch explícito | `app/core/admin_security.py`, `app/main.py` | `test_sec2_r2_admin_security.py`, `test_sec2_postclosure_hardening.py` | Verificado |
+| Protección centralizada de endpoints administrativos | `requerir_administrador()` | `test_sec2_r3_admin_protection.py` | Verificado |
+| Auditoría sin secretos | `app/core/observability.py`, `admin.access.*` | `test_sec2_r4_admin_audit.py` | Verificado |
+| Login web y sesión temporal | `app/core/admin_session.py`, `/dev/login` | `test_sec2_r5_admin_web_session.py` | Verificado |
+| Expiración/límite y cookies configurables | `app/core/config.py`, `admin_session.py` | `test_sec2_r6_admin_session_security.py` | Verificado |
+| Kill switch no sustituible por cookie | `app/main.py` | `test_sec2_postclosure_hardening.py` | Verificado post-cierre |
+| Logout mutante solo por POST | `/dev/logout` | `test_sec2_postclosure_hardening.py` | Verificado post-cierre |
+| Ledger reconciliado | `data/pre-1-0-revision-ledger.json` | pruebas VER.2/NOR.2 + auditoría post-G070 | G108 reconciliado; G109 reservado |

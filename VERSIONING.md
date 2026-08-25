@@ -14,11 +14,11 @@ La fuente canónica de versión continúa siendo `VERSION`.
 
 Estado vigente:
 
-- `VERSION` contiene `0.0.71.01-beta`.
-- `v0.0.26-beta` continúa siendo el último tag formal legacy hasta crear el tag firmado de G071/E01.
-- `0.0.71.01-beta` queda promovida por VER.2 R4 como versión revision-aware en árbol; su tag formal se crea únicamente después de merge y revalidación post-merge.
-- MANT.1 quedó cerrado operativamente en R7 mediante PR #55 y commit squash `57078f2`.
-- DOC.1 R1 no modifica la política de versionado; solo sincroniza documentación Markdown vigente después de MANT.1.
+- `VERSION` contiene `0.0.71.01-beta` y sigue siendo la fuente canónica visible mientras AUD.SEC2 R1 permanece sin aceptar.
+- `v0.0.71.01-beta` está publicado y es inmutable; `v0.0.26-beta` permanece como último tag de la familia legacy.
+- La reconciliación post-G070 reconstruye **G071–G108** y determina que el estado materializado por el tag `v0.0.71.01-beta` corresponde cronológicamente a **G087**. La anomalía no autoriza mover, borrar ni recrear el tag.
+- `4bd7d8d` es el árbol reconciliado como **G108**; **G109/E01** (`0.1.09.01-beta`) queda reservado para AUD.SEC2 R1 y solo se consumirá después de gate, commit firmado, PR/CI e integración.
+- Los cierres y sincronizaciones que no crean un estado materialmente distinto no consumen `G` por sí solos.
 
 Cualquier promoción futura de versión debe seguir el proceso formal de release, validación, PR/CI, tag y evidencia documental correspondiente.
 <!-- DOC1-R1-POST-MANT1:END -->
@@ -361,3 +361,17 @@ Esta sección preserva la separación histórica entre visibilidad pública del 
 ## 12. Guard de referencias históricas
 
 El guard de referencias históricas preserva menciones legacy necesarias para no borrar evidencia de cierres anteriores durante una reconciliación transversal.
+
+## Reconciliación extraordinaria post-G070
+
+La primera promoción revision-aware partió de un ledger cuya base auditada
+terminaba en `7037addd` (G070). Antes de la promoción de VER.2 ya existían
+estados aceptados posteriores —DEV.2, MANT.1 y DOC.1— que no habían sido
+incorporados al contador. La auditoría de 2026-08-25 reconstruye la secuencia
+completa hasta SEC.2 R6 y la fija en G108.
+
+Esta corrección es **prospectiva y documental**: preserva los tags publicados y
+no genera tags retroactivos para G071–G108. El snapshot exacto del ledger G070
+se conserva en `docs/archive/governance/pre-1-0-revision-ledger-g070.json` y la
+matriz de reconciliación vive en
+`docs/audits/governance/post-g070-revision-reconciliation.md`.

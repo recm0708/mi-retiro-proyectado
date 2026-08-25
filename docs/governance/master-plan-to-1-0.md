@@ -3,7 +3,7 @@
 **Estado:** vigente
 **Versión base al iniciar el plan:** `0.0.25-beta`
 **Cierre histórico de PLAN.1:** `0.0.26-beta` / `v0.0.26-beta`
-**Versión transversal vigente:** `0.0.71.01-beta` — VER.2 G071/E01
+**Versión transversal vigente:** `0.0.71.01-beta` — tag publicado preservado; reconciliación viva G108
 **Fecha:** 2026-08-25
 **Clasificación:** Producto / Arquitectura / QA / Release
 
@@ -17,7 +17,7 @@ funcionales al plan de 14 bloques.
 - **NOR.1:** cerrado en R7; estándares determinísticos establecidos.
 - **NOR.2:** cerrado en R8 mediante PR #74; normalización integral completada.
 - **DOC.1 R2:** auditoría integral Markdown post-NOR.2 cerrada; documentación vigente, evidencia histórica y controles permanentes quedaron reconciliados.
-- **SEC.2 R1:** cerrado; completó la corrección de findings CodeQL y la normalización de workflows.
+- **SEC.2 R1–R6:** cerrados; hardening CodeQL, autenticación/protección administrativa, auditoría, sesión web y hardening de sesión completados. AUD.SEC2 R1 ejecuta el saneamiento post-cierre antes de DOC.2.
 
 La separación evita que SEC.2 cree nuevas rutas, archivos o estructuras sobre
 una base cuya nomenclatura y documentación no hayan sido normalizadas.
@@ -25,9 +25,9 @@ una base cuya nomenclatura y documentación no hayan sido normalizadas.
 
 
 <!-- NOR2-R1-STATUS:START -->
-## Estado operativo de NOR.2 R1
+## Registro histórico de NOR.2 R1
 
-NOR.2 se encuentra activo en R1. Esta revisión establece la línea base; las
+En ese checkpoint, NOR.2 se encontraba activo en R1. Esta revisión establece la línea base; las
 migraciones reales se ejecutarán en revisiones posteriores según una matriz de
 impacto. NOR.2 sigue siendo un checkpoint transversal y no agrega un bloque
 funcional al plan de 14 bloques.
@@ -35,9 +35,9 @@ funcional al plan de 14 bloques.
 
 
 <!-- NOR2-R2-STATUS:START -->
-## NOR.2 R2 — decisión de migración
+## Registro histórico NOR.2 R2 — decisión de migración
 
-R2 convierte la línea base en un plan R3–R8 y adopta como gate de cierre la
+En ese checkpoint, R2 convierte la línea base en un plan R3–R8 y adopta como gate de cierre la
 sincronización completa de README, índice documental, roadmap, plan maestro,
 validación, arquitectura, enlaces, imports y estado de fases.
 
@@ -47,11 +47,11 @@ mantendrá copias sustituidas únicamente por compatibilidad documental.
 
 
 <!-- NOR2-R3-STATUS:START -->
-## NOR.2 R3 — runtime/configuración
+## Registro histórico NOR.2 R3 — runtime/configuración
 
-R3 materializa la normalización técnica de bajo/medio impacto aprobada por R2.
-La siguiente revisión R4 migrará la documentación viva y sus enlaces hacia la
-estructura canónica. SEC.2 continúa pausado.
+En ese checkpoint, R3 materializa la normalización técnica de bajo/medio impacto aprobada por R2.
+La siguiente revisión R4 debía migrar la documentación viva y sus enlaces hacia la
+estructura canónica. SEC.2 estaba pausado en ese momento; posteriormente cerró R1–R6.
 <!-- NOR2-R3-STATUS:END -->
 
 <!-- DOC1-R1-POST-MANT1:START -->
@@ -68,7 +68,7 @@ Estado vigente:
 - DOC.1 R1 está cerrado.
 - DOC.1 R2 queda cerrado como auditoría integral Markdown post-NOR.2, con controles locales y remotos permanentes.
 - NOR.1 y NOR.2 están cerrados; R8 quedó integrado mediante PR #74.
-- SEC.2 R1 quedó cerrado con hardening CodeQL y normalización técnica de GitHub Actions.
+- SEC.2 quedó cerrado después de R1–R6; AUD.SEC2 R1 es el checkpoint actual previo a DOC.2.
 - La meta `1.0.0.0` / `Build 000001` se mantiene condicionada al cierre de los gates definidos.
 
 Las referencias históricas a bloques previos se conservan como trazabilidad, pero el estado operativo vigente debe leerse desde esta sección.
@@ -408,19 +408,19 @@ VER.2 no invalida ese cierre: corrige únicamente la granularidad y trazabilidad
 - Después de su cierre se habilitó UX.4.6g.
 
 
-## NOR.2 R4 — normalización documental viva
+## Registro histórico NOR.2 R4 — normalización documental viva
 
 La documentación vigente queda distribuida entre `architecture/`, `decisions/`, `governance/`, `operations/`, `product/`, `regulatory/`, `security/` y `standards/`. R5 archivará o retirará del árbol vivo los documentos históricos definidos por R2.
 
-## NOR.2 R5 — archivo documental histórico
+## Registro histórico NOR.2 R5 — archivo documental histórico
 
 NOR.2 R5 separa evidencia histórica de documentación viva mediante 36
-movimientos hacia `docs/archive/`. `VERSION` no cambia y SEC.2 continúa pausado
-hasta completar NOR.2.
+movimientos hacia `docs/archive/`. `VERSION` no cambiaba y SEC.2 permanecía pausado
+en ese checkpoint hasta completar NOR.2.
 
 
 <!-- NOR2-R6-LEDGER:START -->
-## Actualización NOR.2 R6
+## Registro histórico — actualización NOR.2 R6
 
 La normalización del ledger de alto impacto conserva como invariantes:
 
@@ -487,7 +487,7 @@ SEC.2 quedó cerrado tras completar sus controles planificados hasta completar R
 
 
 <!-- NOR2-R8-FINAL-AUDIT:START -->
-## Actualización NOR.2 R8
+## Registro histórico — actualización NOR.2 R8
 
 R8 constituye el gate final de normalización antes de SEC.2.
 
@@ -506,8 +506,19 @@ La auditoría integral confirma:
 
 R8 quedó integrado mediante PR #74 y commit squash `b4df9b7`. Con esa integración, **NOR.2 queda formalmente cerrado**.
 
-SEC.2 queda habilitado para reanudación como siguiente bloque, aunque aún no se ha iniciado formalmente.
+En ese checkpoint, SEC.2 quedaba habilitado para reanudación y todavía no se había iniciado formalmente. El estado vigente posterior es su cierre R1–R6.
 <!-- NOR2-R8-FINAL-AUDIT:END -->
 
 
 **SEC.2 R6:** endurecimiento de sesión administrativa web y controles configurables de despliegue.
+
+## Estado transversal vigente después de SEC.2
+
+SEC.2 está cerrado después de R1–R6. Antes de abrir DOC.2, AUD.SEC2 R1 ejecuta
+una auditoría integral post-cierre porque el snapshot `4bd7d8d` reveló una
+regresión del kill switch administrativo y un ledger revision-aware incompleto.
+
+La reconciliación preserva G001–G070, reconstruye G071–G108 y reserva G109/E01
+(`0.1.09.01-beta`) para AUD.SEC2 R1. El tag `v0.0.71.01-beta` se conserva
+inmutable aunque su estado corresponda cronológicamente a G087. Tras aceptar
+AUD.SEC2 R1, el siguiente bloque del plan vuelve a ser **DOC.2**.

@@ -75,7 +75,7 @@ class TestSec2AdminWebSession(unittest.TestCase):
                     data={"token": "test-admin-secret"},
                 )
 
-                respuesta = cliente.get(
+                respuesta = cliente.post(
                     "/dev/logout",
                     follow_redirects=False,
                 )

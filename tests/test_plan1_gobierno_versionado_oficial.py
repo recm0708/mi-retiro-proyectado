@@ -50,7 +50,8 @@ class TestPlan1GobiernoVersionadoOficial(unittest.TestCase):
 
     def test_governance_adopta_linea_beta_y_objetivo_oficial(self):
         texto = (ROOT / "GOVERNANCE.md").read_text(encoding="utf-8")
-        self.assertIn("Durante la etapa beta, la familia vigente es `0.0.N-beta`", texto)
+        self.assertIn("familia `0.0.N-beta` es legacy histórica", texto)
+        self.assertIn("estados beta nuevos usan `0.GG.RR.EE-beta`", texto)
         self.assertIn("primera versión oficial objetivo es `1.0.0.0`", texto)
         self.assertIn("MAYOR.MENOR.PARCHE.REVISIÓN", texto)
 

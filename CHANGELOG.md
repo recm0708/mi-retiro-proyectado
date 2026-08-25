@@ -5,6 +5,11 @@ Este archivo registra **cambios notables por versión**. No sustituye el histori
 Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamente en GOV.1.1 a partir del historial real. `0.0.22-beta` es la primera versión formal adoptada bajo la política de GOV.1.2.
 
 ## [Unreleased]
+- AUD.SEC2 R1: audita integralmente el snapshot post-SEC.2, corrige el kill switch administrativo, impide que una sesión web sustituya errores 403 de administración deshabilitada/no configurada, cambia el logout a POST y extiende `Cache-Control: no-store` a `/dev/`.
+- AUD.SEC2 R1: reconcilia el ledger posterior a G070 hasta G108, preserva el snapshot histórico G070 por SHA-256 y documenta que `v0.0.71.01-beta` es un tag inmutable cuyo estado corresponde cronológicamente a G087.
+- AUD.SEC2 R1: audita los 140 Markdown del snapshot `4bd7d8d`, actualiza únicamente documentación viva materialmente afectada y mueve la evidencia de cierre SEC.2 a `docs/audits/security/`.
+- SEC.2 R2–R6: autenticación administrativa, protección centralizada, auditoría de accesos, sesión web temporal y endurecimiento configurable para despliegue interno HTTPS.
+- SEC.2: cierre formal de R1–R6 integrado en `main`; no constituye por sí solo una nueva release ni autoriza retagging.
 - SEC.2 R1: inicia el hardening integral, elimina dos sinks DOM dinámicos detectados por CodeQL en el informe imprimible y normaliza los nombres técnicos de workflows GitHub Actions.
 - DOC.1 R2: completa la auditoría integral Markdown post-NOR.2, normaliza metadata y estados vigentes, retira cuatro stubs documentales residuales, preserva la verdad histórica e incorpora auditoría Markdown permanente en pre-commit y GitHub Actions.
 - NOR.2 R8: ejecuta la auditoría integral de cierre, retira dos fragmentos transitorios de `docs/`, corrige estados vivos obsoletos, revalida estructura, artefactos locales, versión y ledger, y agrega regresión final de normalización.

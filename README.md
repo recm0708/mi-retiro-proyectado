@@ -20,26 +20,17 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 
 ## Estado del proyecto
 
-- **Versión canónica vigente:** `0.0.71.01-beta`, obtenida exclusivamente desde [`VERSION`](VERSION).
-- **Último cierre integrado en `main`:** DOC.1 R2 — auditoría integral Markdown post-NOR.2 y controles permanentes de regresión.
-- **Estado de VER.2:** cerrado; G071/E01 promovido en `VERSION` como `0.0.71.01-beta` y tag `v0.0.71.01-beta` publicado.
+- **Versión canónica vigente:** `0.0.71.01-beta`, obtenida exclusivamente desde [`VERSION`](VERSION). Esta versión publicada se conserva sin retaggear mientras se completa la reconciliación revision-aware posterior a G070.
+- **Último cierre integrado en `main`:** SEC.2 — cierre formal de R1–R6 en `4bd7d8d`.
+- **Estado de SEC.2:** cerrado después de R1–R6; la auditoría post-cierre detectó y corrige antes de la siguiente promoción una regresión del kill switch administrativo y desalineaciones documentales.
+- **Estado revision-aware reconciliado:** G108 aceptado sobre el árbol `4bd7d8d`; G109/E01 (`0.1.09.01-beta`) queda reservado para el saneamiento AUD.SEC2 R1 y solo se consumirá tras gate, commit firmado, PR/CI y merge.
+- **Tag `v0.0.71.01-beta`:** publicado e inmutable. La auditoría post-G070 determinó que el estado etiquetado corresponde cronológicamente a G087; la anomalía histórica se documenta sin mover ni recrear el tag.
 - **Última versión formal legacy:** `0.0.26-beta` — tag firmado e inmutable `v0.0.26-beta`.
 - **Etapa:** desarrollo beta; repositorio público y ejecución orientada actualmente a entorno local.
-- **GOV.1:** cerrado.
-- **PLAN.1:** cerrado.
-- **DEV.2:** cerrado.
-- **MANT.1:** cerrado.
-- **DOC.1 R1:** cerrado como auditoría documental post-MANT.1.
-- **DOC.1 R2:** cerrado como auditoría integral Markdown post-NOR.2.
-- **NOR.1:** cerrado en R7; estándares determinísticos establecidos.
-- **NOR.2:** cerrado después de completar R1–R8 e integrar la auditoría final mediante PR #74.
-- **NOR.2 R4:** cerrado; documentación viva migrada a áreas canónicas.
-- **NOR.2 R5:** cerrado; documentación histórica consolidada en `docs/archive/`.
-- **NOR.2 R6:** cerrado; ledger y datos de alto impacto normalizados.
-- **NOR.2 R7:** cerrado; artefactos locales heredados migrados y depurados.
-- **NOR.2 R8:** cerrado; auditoría integral y cierre formal integrados en `main`.
-- **SEC.2:** R1 cerrado; hardening CodeQL del informe imprimible y normalización técnica de GitHub Actions completados.
-- **SEC.2 R4:** seguridad administrativa, protección de endpoints administrativos, auditoría de accesos y documentación transversal completados.
+- **GOV.1, PLAN.1, DEV.2, MANT.1, DOC.1 R1, NOR.1, NOR.2 y DOC.1 R2:** cerrados.
+- **NOR.2:** cerrado después de R1–R8; sus evidencias históricas permanecen preservadas.
+- **SEC.2:** R1–R6 cerrados: hardening CodeQL, autenticación administrativa, protección centralizada, auditoría, sesión web y endurecimiento configurable para HTTPS interno.
+- **Siguiente bloque funcional tras el saneamiento AUD.SEC2 R1:** DOC.2.
 - **Primera versión oficial objetivo:** `1.0.0.0` con `Build 000001`, únicamente después de cerrar todos los gates definidos en el plan maestro.
 
 La visibilidad pública del repositorio **no convierte una beta de desarrollo en versión oficial, no constituye un despliegue de producción y no modifica por sí sola la licencia vigente**.
@@ -111,7 +102,7 @@ Documentos principales:
 - [`docs/archive/governance/CIERRE_GOV1.md`](docs/archive/governance/CIERRE_GOV1.md) — auditoría final y decisión de cierre de GOV.1;
 - [`docs/archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md`](docs/archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md) — criterio contable y reconciliación VER.2;
 - [`docs/archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md`](docs/archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md) — decisiones de inclusión/exclusión del contador;
-- [`docs/governance/pre-1-0-revision-ledger.md`](docs/governance/pre-1-0-revision-ledger.md) — secuencia global G001–G070 y candidato G071;
+- [`docs/governance/pre-1-0-revision-ledger.md`](docs/governance/pre-1-0-revision-ledger.md) — secuencia reconciliada G001–G108 y próximo candidato G109;
 - [`data/pre-1-0-revision-ledger.json`](data/pre-1-0-revision-ledger.json) — ledger machine-readable;
 - [`docs/governance/licensing-and-distribution.md`](docs/governance/licensing-and-distribution.md) — decisión de licencia y estrategia de distribución;
 - [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) — avisos y obligaciones de terceros;
@@ -315,6 +306,23 @@ El proyecto mantiene una identidad independiente de la Caja de Seguro Social de 
 
 Las siguientes líneas se conservan como compatibilidad histórica de pruebas anteriores. No reemplazan el estado vigente declarado en la sección **Estado del proyecto**.
 
+
+- **DOC.1 R1:** cerrado — auditoría Markdown post-MANT.1 preservada como hito histórico.
+- **DOC.1 R2:** cerrado — auditoría integral Markdown post-NOR.2 preservada como hito histórico.
+- **GOV.1:** cerrado.
+- **PLAN.1:** cerrado.
+- **DEV.2:** cerrado.
+- **NOR.1:** cerrado en R7; referencia histórica del cierre de estándares.
+- **NOR.2 R2:** cerrado; referencia histórica de la matriz de migración.
+- **NOR.2 R3:** cerrado; referencia histórica de la migración técnica.
+- **NOR.2 R4:** cerrado; referencia histórica de la migración documental viva.
+- **NOR.2 R5:** cerrado; referencia histórica del archivo documental.
+- **NOR.2 R6:** cerrado; referencia histórica del checkpoint de ledger G070.
+- **NOR.2 R7:** cerrado; referencia histórica de artefactos locales.
+- **NOR.2 R8:** cerrado; referencia histórica del cierre integral.
+- **SEC.2:** R1 cerrado; hardening CodeQL del informe imprimible y normalización técnica de GitHub Actions completados. Esta línea es una ancla histórica; el estado vigente es SEC.2 R1–R6 cerrado.
+- **G071/E01 promovido en `VERSION`:** declaración histórica de VER.2 R4; AUD.SEC2 R1 documenta la reconciliación posterior que sitúa ese estado en G087 sin alterar el tag publicado.
+
 - **Bloque transversal activo:** VER.2 — ancla histórica previa a DOC.1 R1; el estado vigente actual lo define la línea base post-MANT.1.
 - **Bloque transversal pendiente:** VER.2 — ancla histórica previa al cierre post-MANT.1; el estado vigente lo define DOC.1 R1 y la línea base documental.
 - **Siguiente bloque funcional:** DEV.2 — ancla histórica de cierre DEV.2; DEV.2 queda preservado como bloque funcional cerrado.
@@ -368,17 +376,34 @@ Acceso local:
 http://127.0.0.1:8000
 ```
 
-Activación temporal de diagnósticos:
+Activación temporal de diagnósticos y de la superficie administrativa:
 
 ```powershell
 $env:MRP_DEV_MODE = "1"
+$env:MRP_ADMIN_ENABLED = "1"
+$env:MRP_ADMIN_SECRET = "<define-tu-secreto-local-no-versionado>"
 python -m uvicorn app.main:app --reload
 ```
 
-La activación de Developer Diagnostics no habilita automáticamente funciones
-administrativas. Las superficies administrativas requieren su configuración
-específica de seguridad.
+No existe una clave administrativa predeterminada en el repositorio. El valor
+que el operador asigne a `MRP_ADMIN_SECRET` es la credencial de ese entorno y
+**no debe publicarse, compartirse ni versionarse**. `MRP_ADMIN_ENABLED` actúa
+como kill switch: si no vale `1`, el login y el Centro de desarrollo quedan
+bloqueados aunque exista un secreto o una sesión anterior.
 
-SEC.2 añadió protección centralizada para endpoints administrativos mediante
-autenticación administrativa, validación de credenciales, eventos de auditoría
-locales y controles para evitar registrar información sensible.
+Accesos locales:
+
+- aplicación: <http://127.0.0.1:8000>;
+- login administrativo: <http://127.0.0.1:8000/dev/login>;
+- Centro de desarrollo: <http://127.0.0.1:8000/dev/centro-desarrollo>.
+
+El login del navegador crea una sesión administrativa temporal mediante la
+cookie técnica `mrp_admin_session`, `HttpOnly`, con `SameSite` configurable,
+expiración por inactividad y límite absoluto. Para un despliegue interno HTTPS
+debe configurarse `MRP_ADMIN_COOKIE_SECURE=1`. El cierre de sesión se realiza
+mediante `POST /dev/logout`.
+
+La activación de Developer Diagnostics no habilita por sí sola funciones
+administrativas. SEC.2 mantiene además autenticación Bearer para clientes
+técnicos, eventos de auditoría locales y prohibiciones de registrar secretos,
+cookies o información sensible.

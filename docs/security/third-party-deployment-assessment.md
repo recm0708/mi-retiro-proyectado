@@ -5,7 +5,7 @@
 **Versión base histórica:** `0.0.25-beta`
 **Versión base histórica preservada:** `0.0.23-beta`
 **Fecha de cierre interno original:** 2026-08-18
-**Última revisión documental:** PLAN.1 R3A — 2026-08-20
+**Última revisión documental:** AUD.SEC2 R1 — 2026-08-25
 **Clasificación:** Seguridad / Privacidad / Terceros / Despliegue
 **Revisión jurídica externa:** Pendiente antes de la primera versión oficial o de un despliegue remoto
 
@@ -166,9 +166,9 @@ Confiar encabezados reenviados de clientes no confiables permite falsificar info
 
 ## 6. Host, CORS y CSRF
 
-El diseño local actual no incorpora cuentas, cookies de autenticación ni estado persistente de servidor.
+El diseño local no incorpora cuentas de usuario ni persistencia de simulaciones, pero SEC.2 sí añadió una sesión administrativa temporal en memoria y la cookie técnica `mrp_admin_session`.
 
-Si aparece cualquiera de estos elementos:
+AUD.SEC2 R1 confirma que `MRP_ADMIN_ENABLED` conserva prioridad, que el logout usa POST y que la cookie no sustituye estados 403. Si se amplía cualquiera de estos elementos:
 
 - exposición remota;
 - autenticación;
@@ -199,7 +199,7 @@ El middleware vigente mantiene:
 - `Referrer-Policy: no-referrer`;
 - `Permissions-Policy` restrictiva;
 - `Content-Security-Policy`;
-- `Cache-Control: no-store` en `/api/simulacion/`.
+- `Cache-Control: no-store` en `/api/simulacion/` y `/dev/`.
 
 Estas cabeceras son defensa en profundidad. No reemplazan TLS, autenticación ni controles de infraestructura cuando exista un despliegue remoto.
 

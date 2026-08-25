@@ -1,11 +1,11 @@
 # Observabilidad y Developer Diagnostics
 
-**Estado:** Vigente — GOV.1.4 cerrado / SEC.2 integrado
+**Estado:** Vigente — GOV.1.4 cerrado / SEC.2 R1–R6 integrado
 **Versión de aplicación revisada:** `0.0.71.01-beta`
 **Versión base histórica:** `0.0.25-beta`
 **Versión base histórica preservada:** `0.0.23-beta`
 **Fecha de cierre original:** 2026-08-17
-**Última revisión documental:** SEC.2 R4 — 2026-08-25
+**Última revisión documental:** AUD.SEC2 R1 — 2026-08-25
 **Clasificación:** Técnica / Desarrollo / Privacidad
 
 ## Nota de lectura post-MANT.1
@@ -121,3 +121,11 @@ SEC.2 queda integrado con:
 - documentación transversal actualizada.
 
 El alcance continúa limitado al escenario beta local soportado.
+
+## Sesiones administrativas y observabilidad post-SEC.2
+
+Los eventos `admin.access.*` y `admin.session.revoked` pueden registrar endpoint,
+outcome y motivo técnico controlado. Nunca registran el valor de
+`MRP_ADMIN_SECRET`, cabeceras Authorization completas, Bearer, identificadores
+de sesión ni cookies. AUD.SEC2 R1 extiende `Cache-Control: no-store` a `/dev/`
+y mantiene esta superficie separada de la telemetría de producto.

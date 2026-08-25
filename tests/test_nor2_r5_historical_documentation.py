@@ -105,6 +105,7 @@ class TestNOR2R5HistoricalDocumentation(unittest.TestCase):
         self.assertIn("NOR.2 R5", docs)
         self.assertIn("NOR.2 R6", docs)
         self.assertIn("**SEC.2:** R1 cerrado; hardening CodeQL del informe imprimible y normalización técnica de GitHub Actions completados.", readme)
+        self.assertIn("**Estado de SEC.2:** cerrado después de R1–R6", readme)
 
     def test_evidencia_r5_existe(self):
         path = ROOT / (
