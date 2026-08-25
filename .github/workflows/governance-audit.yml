@@ -2,7 +2,7 @@
 # Propósito: ejecutar regresiones GOV.1.6 y verificación de whitespace en push/PR.
 # Alcance: conserva triggers, permisos, jobs, actions y comandos del workflow.
 
-name: Auditoría de gobernanza
+name: Repository Governance Audit
 
 on:
   push:

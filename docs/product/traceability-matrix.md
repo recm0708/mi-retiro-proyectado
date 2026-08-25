@@ -26,7 +26,7 @@ Estado documental actual:
 - NOR.2 R7 está cerrado.
 - NOR.2 R8 está cerrado e integrado mediante PR #74.
 - NOR.2 está cerrado después de completar R1–R8.
-- SEC.2 es el siguiente bloque habilitado para reanudación y aún no iniciado formalmente.
+- SEC.2 está activo en R1 con hardening CodeQL y normalización técnica de workflows.
 
 Esta matriz debe distinguir trazabilidad histórica de estado vigente.
 <!-- DOC1-R1-POST-MANT1:END -->
@@ -166,3 +166,15 @@ Los estados `Candidato` deben promoverse a `Verificado` únicamente después del
 | Ejecutar auditoría remota | `.github/workflows/markdown-audit.yml` | `tests/test_markdown_audit.py` |
 | Mantener versión sin promoción | `VERSION = 0.0.71.01-beta` | auditor Markdown + gate integral |
 | Mantener SEC.2 sin inicio prematuro | roadmap, plan maestro y documentación transversal | barrido documental final |
+
+## Trazabilidad SEC.2 R1
+
+| Control | Evidencia | Regresión |
+|---|---|---|
+| Retirar sinks DOM dinámicos reportados por CodeQL | `results_orchestration.js` | `test_sec2_r1_codeql_workflow_hardening.py` |
+| Construir texto dinámico sin reinterpretarlo como HTML | DOM API + `textContent` + `createTextNode` | regresión SEC.2 R1 |
+| Preservar `innerHTML` únicamente donde el contenido es estático | revisión manual de los tres usos restantes | análisis SEC.2 R1 |
+| Normalizar nombres de GitHub Actions | cuatro workflows técnicos en inglés | regresión SEC.2 R1 |
+| Preservar comportamiento de exportación | pruebas UX.4.6h | `test_ux46h_r1_resultados_exportacion.py` |
+| Mantener versión sin promoción | `VERSION = 0.0.71.01-beta` | gate integral |
+| Confirmar corrección remota | CodeQL del PR | pendiente |

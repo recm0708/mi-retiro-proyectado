@@ -5,7 +5,7 @@
 **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
 **Último tag formal legacy:** `v0.0.26-beta`
 **Fecha de revisión:** 2026-08-24
-**Normalización previa a SEC.2:** NOR.1 y NOR.2 están cerrados; DOC.1 R2 completa la auditoría integral Markdown post-NOR.2 y SEC.2 queda como el siguiente bloque habilitado, aún no iniciado formalmente.
+**Estado previo y actual de SEC.2:** NOR.1, NOR.2 y DOC.1 R2 están cerrados; SEC.2 está activo en R1 con hardening CodeQL y normalización técnica de workflows.
 
 
 <!-- NOR1-R7-CLOSURE:START -->
@@ -19,7 +19,7 @@ La secuencia operativa previa a SEC.2 queda:
 
 1. **NOR.1** — definición y auditoría preparatoria — cerrado en R7;
 2. **NOR.2** — normalización integral del repositorio — cerrado en R8 mediante PR #74;
-3. **SEC.2** — hardening integral — siguiente bloque, habilitado para reanudación y aún no iniciado.
+3. **SEC.2** — hardening integral — activo en R1.
 
 NOR.2 ejecutó los movimientos, renombrados, consolidaciones y retiros que
 NOR.1 deliberadamente no realizó.
@@ -207,7 +207,7 @@ No existe una una revisión intermedia no demostrada entre UX.4.6i R1 y R1.2 dem
 
 **VER.2:** bloque transversal cerrado. La base anterior al cambio contiene **70 estados aceptados (G001–G070)** y G071/E01 fue promovido, integrado y publicado como `0.0.71.01-beta` mediante el tag `v0.0.71.01-beta`.
 
-**Checkpoint técnico actual:** NOR.2 está cerrado en R8 y DOC.1 R2 queda cerrado como auditoría Markdown post-NOR.2; SEC.2 es el siguiente bloque habilitado y aún no iniciado formalmente.
+**Checkpoint técnico actual:** NOR.2 y DOC.1 R2 están cerrados; SEC.2 está activo en R1 con hardening CodeQL y normalización de workflows.
 
 Documentos canónicos de VER.2:
 

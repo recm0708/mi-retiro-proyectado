@@ -23,7 +23,7 @@ Para una release posterior se mantiene el criterio vigente:
 - `v0.0.26-beta` permanece como tag legacy histórico e inmutable.
 - VER.2, MANT.1, DOC.1 R1, NOR.1 y NOR.2 están cerrados.
 - DOC.1 R2 está cerrado como auditoría Markdown posterior a NOR.2 y no crea por sí solo una release.
-- SEC.2 queda habilitado para reanudación, pero todavía no se ha iniciado formalmente.
+- SEC.2 está activo en R1; su trabajo actual no promueve versión ni crea release.
 
 Todo release futuro requiere gate completo, PR/CI, actualización documental coherente, tag y evidencia reproducible.
 <!-- DOC1-R1-POST-MANT1:END -->

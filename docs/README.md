@@ -11,7 +11,7 @@ Este archivo es el punto de entrada para la documentación técnica, funcional, 
 
 ## Estado de normalización del repositorio
 
-**Estado actual:** NOR.2 y DOC.1 R2 están cerrados. SEC.2 queda habilitado como siguiente bloque, pero aún no se ha iniciado formalmente.
+**Estado actual:** NOR.2 y DOC.1 R2 están cerrados. SEC.2 está activo en R1 con hardening CodeQL y normalización técnica de workflows.
 
 Estado de la fase:
 
@@ -25,9 +25,11 @@ Estado de la fase:
 - **NOR.2 R7:** cerrado; artefactos locales heredados migrados y depurados.
 - **NOR.2 R8:** cerrado; auditoría integral y cierre formal integrados mediante PR #74.
 - **DOC.1 R2:** cerrado; auditoría integral Markdown post-NOR.2 y controles permanentes incorporados.
-- **SEC.2:** siguiente bloque; habilitado para reanudación, aún no iniciado.
+- **SEC.2 R1:** en ejecución; hardening CodeQL y normalización técnica de workflows.
 
 Evidencia:
+
+- [`audits/security/sec2-r1-codeql-workflow-hardening.md`](audits/security/sec2-r1-codeql-workflow-hardening.md) — hardening CodeQL y normalización de workflows SEC.2 R1.
 
 - [`audits/repository/repository-normalization-baseline-nor2-r1.md`](audits/repository/repository-normalization-baseline-nor2-r1.md) — línea base R1.
 - [`audits/repository/repository-normalization-migration-matrix-nor2-r2.md`](audits/repository/repository-normalization-migration-matrix-nor2-r2.md) — matriz de migración R2.

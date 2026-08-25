@@ -1001,3 +1001,28 @@ Markdown, compilación Python, sintaxis de los 18 archivos JavaScript y la suite
 Permanecen como gates remotos el PR, CI, integración y verificación post-merge
 antes de iniciar formalmente SEC.2.
 <!-- DOC1-R2-VALIDATION:END -->
+
+## Validación SEC.2 R1
+
+SEC.2 R1 inicia el hardening de seguridad con la corrección de dos hallazgos
+CodeQL `DOM text reinterpreted as HTML` del informe imprimible.
+
+Checkpoint local confirmado:
+
+- dos sinks dinámicos `innerHTML` retirados;
+- DOM dinámico reconstruido con `createElement`, `textContent` y
+  `createTextNode`;
+- tres usos restantes de `innerHTML` revisados como contenido estático;
+- workflows normalizados a nombres técnicos en inglés;
+- regresión específica SEC.2 R1 incorporada;
+- pruebas focales: **30 pruebas + 4 subtests — OK**;
+- regresión transversal: **37 pruebas + 62 subtests — OK**;
+- `node --check`: **OK**;
+- auditor Markdown: **OK**;
+- `git diff --check`: **OK**;
+- suite completa `pytest`: **1043 pruebas + 4922 subtests — OK**;
+- `VERSION`: **`0.0.71.01-beta`**, sin promoción.
+
+Permanecen pendientes suite integral, pre-commit, PR, CI, CodeQL,
+integración y verificación post-merge.
+<!-- SEC2-R1-VALIDATION:END -->
