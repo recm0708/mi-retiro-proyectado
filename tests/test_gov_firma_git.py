@@ -76,12 +76,12 @@ class TestGovFirmaGit(unittest.TestCase):
         self.assertIn("git tag -v", texto)
 
     def test_documento_migracion_contiene_23_tags(self):
-        texto = (DOCS / "MIGRACION_FIRMAS_GIT_2026-08-17.md").read_text(encoding="utf-8")
+        texto = (DOCS / "archive/governance/MIGRACION_FIRMAS_GIT_2026-08-17.md").read_text(encoding="utf-8")
         tags = set(re.findall(r"`v0\.0\.(\d+)-beta`", texto))
         self.assertEqual({str(i) for i in range(1, 24)}, tags)
 
     def test_documento_migracion_preserva_objetos_y_targets_originales(self):
-        texto = (DOCS / "MIGRACION_FIRMAS_GIT_2026-08-17.md").read_text(encoding="utf-8")
+        texto = (DOCS / "archive/governance/MIGRACION_FIRMAS_GIT_2026-08-17.md").read_text(encoding="utf-8")
         for valor in (
             "31accfc9a6014367179c97cfe54c5a223be8988f",
             "609edf4bfed33c64770c88fab401002cd90f8e66",
@@ -122,7 +122,7 @@ class TestGovFirmaGit(unittest.TestCase):
         self.assertIn("- [x] **Prebloque transversal — Firma e integridad Git/GitHub**", texto)
         self.assertIn("- [x] revisión de configuración GitHub y PR de Dependabot.", texto)
 
-        migracion = (DOCS / "MIGRACION_FIRMAS_GIT_2026-08-17.md").read_text(
+        migracion = (DOCS / "archive/governance/MIGRACION_FIRMAS_GIT_2026-08-17.md").read_text(
             encoding="utf-8"
         )
         self.assertIn("Firma e integridad Git/GitHub queda cerrado", migracion)
@@ -132,7 +132,7 @@ class TestGovFirmaGit(unittest.TestCase):
         indice = (DOCS / "README.md").read_text(encoding="utf-8")
         changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
         validacion = (DOCS / "operations/validation.md").read_text(encoding="utf-8")
-        self.assertIn("MIGRACION_FIRMAS_GIT_2026-08-17.md", indice)
+        self.assertIn("archive/governance/MIGRACION_FIRMAS_GIT_2026-08-17.md", indice)
         self.assertIn(".github/allowed_signers", indice)
         self.assertIn("firma SSH", changelog)
         self.assertIn("23/23", changelog)

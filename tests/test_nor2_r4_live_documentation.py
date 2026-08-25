@@ -60,7 +60,7 @@ class TestNOR2R4LiveDocumentation(unittest.TestCase):
 
         docs_index = (ROOT / "docs/README.md").read_text(encoding="utf-8")
         self.assertIn(
-            "**Última actualización transversal:** NOR.2 R4",
+            "**NOR.2 R4:** cerrado",
             docs_index,
         )
 

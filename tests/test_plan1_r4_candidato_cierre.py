@@ -87,7 +87,7 @@ class TestPlan1R4CandidatoCierre(unittest.TestCase):
         self.assertIn("bfbb746b177ebcc577f7241fef4d6914f713739a", texto)
 
     def test_auditoria_r4_documenta_frontera_local_y_remota(self):
-        texto = (DOCS / "AUDITORIA_PLAN1_R4_2026-08-20.md").read_text(encoding="utf-8")
+        texto = (DOCS / "archive/governance/AUDITORIA_PLAN1_R4_2026-08-20.md").read_text(encoding="utf-8")
         self.assertIn("**Estado:** Cerrada — PLAN.1 completado en `0.0.26-beta`", texto)
         self.assertIn("R3B2 | 710 pruebas en `OK`", texto)
         self.assertIn("Ran 720 tests", texto)
@@ -110,7 +110,7 @@ class TestPlan1R4CandidatoCierre(unittest.TestCase):
 
     def test_indice_preserva_auditoria_y_declara_version_actual(self):
         texto = (DOCS / "README.md").read_text(encoding="utf-8")
-        self.assertIn("AUDITORIA_PLAN1_R4_2026-08-20.md", texto)
+        self.assertIn("archive/governance/AUDITORIA_PLAN1_R4_2026-08-20.md", texto)
         self.assertIn("UX.4.6e R9.2", texto)
         self.assertIn("`v0.0.25-beta`", texto)
         self.assertIn(f"**Versión de aplicación:** `{self.version}`", texto)

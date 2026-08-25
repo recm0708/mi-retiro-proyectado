@@ -91,7 +91,7 @@ Se mantienen como principios:
    ruta anterior.
 
 La auditoría histórica aplicada queda documentada en
-[`AUDITORIA_CARPETAS_R5E.md`](../AUDITORIA_CARPETAS_R5E.md).
+[`AUDITORIA_CARPETAS_R5E.md`](../archive/technical/AUDITORIA_CARPETAS_R5E.md).
 
 ## 6. Regla para archivos futuros
 

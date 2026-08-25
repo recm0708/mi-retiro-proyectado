@@ -74,7 +74,7 @@ Estado vigente:
 - La primera versión oficial objetivo sigue siendo `1.0.0.0` con `Build 000001`, sujeta a los gates del plan maestro.
 <!-- DOC1-R1-POST-MANT1:END -->
 
-Este roadmap describe **estado actual y trabajo futuro**. La evolución detallada ya completada se conserva en `RELEASES.md`, `CHANGELOG.md`, `docs/AUDITORIA_VERSIONADO_PRE_1_0.md`, `docs/governance/pre-1-0-revision-ledger.md`, `docs/MATRIZ_DECISION_REVISIONES_VER2.md`, `data/revision_ledger_pre_1_0.json` y `docs/archive/`.
+Este roadmap describe **estado actual y trabajo futuro**. La evolución detallada ya completada se conserva en `RELEASES.md`, `CHANGELOG.md`, `docs/archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md`, `docs/governance/pre-1-0-revision-ledger.md`, `docs/archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md`, `data/revision_ledger_pre_1_0.json` y `docs/archive/`.
 
 VER.2 es un bloque transversal de reconciliación y **no añade un bloque 15** al plan maestro de producto. DEV.2 ya quedó cerrado documentalmente en R4. MANT.1 se trata como checkpoint técnico de mantenibilidad antes de SEC.2 y tampoco añade un bloque funcional de producto. MANT.1 R1 queda como auditoría inicial de alcance, MANT.1 R2 conserva la documentación de scripts y hooks antes de SEC.2, MANT.1 R3 documenta los YAML de GitHub sin cambiar CI ni formularios y MANT.1 R4 limpia encabezados operativos para que la trazabilidad histórica permanezca en documentación, MANT.1 R5A comenta servicios Python grandes, MANT.1 R5B comenta CSS/plantilla de la guía pública, MANT.1 R5C comenta JavaScript complejo sin cambiar lógica visible y MANT.1 R5D define política/plantillas por extensión con uniformidad de encabezados.
 
@@ -352,3 +352,11 @@ Esta referencia conserva el encabezado histórico esperado por las regresiones d
 ## NOR.2 R4 — documentación viva canónica
 
 R4 migra 41 documentos vivos y consolida 2 estándares heredados dentro de la estructura documental canónica. R5 tratará exclusivamente auditorías, cierres y evidencia histórica aún ubicada en la raíz de `docs/`. SEC.2 permanece pausado.
+
+## NOR.2 R5 — archivo y consolidación histórica
+
+**Estado:** activo.
+
+R5 retira de la raíz de `docs/` los 36 documentos cerrados clasificados por R2
+y los conserva en `docs/archive/` sin reescribir su contenido histórico. R6
+queda como siguiente revisión de NOR.2.

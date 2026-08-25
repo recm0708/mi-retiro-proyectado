@@ -781,3 +781,21 @@ Resultados observados después de completar la migración y sanear las regresion
 
 Este resultado valida localmente la rama R4 antes del commit y del gate remoto. R4
 permanece activo hasta su integración en `main`; R5 es la siguiente revisión.
+
+## NOR.2 R5 — validación de archivo histórico
+
+El gate de R5 verificó que las 36 rutas raíz clasificadas como `ARCHIVAR`
+desaparecieron, sus destinos históricos existen y `docs/` conserva únicamente
+su `README.md` como Markdown de primer nivel.
+
+Resultados observados antes del commit:
+
+- **971 pruebas ejecutadas — OK**;
+- **8 pruebas + 40 subtests** del contrato específico NOR.2 R5 — OK;
+- `python -m compileall -q app` — OK;
+- validación sintáctica de JavaScript mediante `node --check` — OK;
+- `git diff --check` — OK;
+- **36 rutas antiguas inspeccionadas** y **0 referencias vivas obsoletas**;
+- **124 Markdown inspeccionados** y **0 grupos con contenido idéntico**.
+
+`VERSION` permanece en `0.0.71.01-beta`.

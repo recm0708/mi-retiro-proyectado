@@ -17,7 +17,7 @@ class TestUX46eRenumeracionDocumental(unittest.TestCase):
         cls.roadmap = (DOCS / "governance/roadmap.md").read_text(encoding="utf-8")
         cls.publicacion = (DOCS / "operations/github-public-repository.md").read_text(encoding="utf-8")
         cls.decisiones = (DOCS / "decisions/README.md").read_text(encoding="utf-8")
-        cls.cierre = (DOCS / "CIERRE_GOV1.md").read_text(encoding="utf-8")
+        cls.cierre = (DOCS / "archive/governance/CIERRE_GOV1.md").read_text(encoding="utf-8")
         cls.transparencia = (DOCS / "product/transparency.md").read_text(encoding="utf-8")
 
     def test_secuencia_vigente_reserva_e_para_estandarizacion(self):
@@ -44,7 +44,7 @@ class TestUX46eRenumeracionDocumental(unittest.TestCase):
     def test_snapshots_historicos_no_se_reescriben(self):
         historico = (DOCS / "archive/ROADMAP_PRE_GOV1_3.md").read_text(encoding="utf-8")
         self.assertIn("UX.4.6e — Paso 4 · Proyección salarial/laboral", historico)
-        auditoria = (DOCS / "AUDITORIA_REPOSITORIO_2026-08-18.md").read_text(encoding="utf-8")
+        auditoria = (DOCS / "archive" / "governance" / "AUDITORIA_REPOSITORIO_2026-08-18.md").read_text(encoding="utf-8")
         self.assertIn("UX.4.6e — Paso 4 · Proyección salarial/laboral", auditoria)
 
     def test_adr164_documenta_regla_de_no_reescritura(self):

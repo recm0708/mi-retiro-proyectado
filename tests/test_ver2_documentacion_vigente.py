@@ -47,7 +47,7 @@ class TestVer2DocumentacionVigente(unittest.TestCase):
 
     def test_ledger_y_auditoria_siguen_reconociendo_g071(self):
         ledger = (DOCS / "governance/pre-1-0-revision-ledger.md").read_text(encoding="utf-8")
-        auditoria = (DOCS / "AUDITORIA_VERSIONADO_PRE_1_0.md").read_text(encoding="utf-8")
+        auditoria = (DOCS / "archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md").read_text(encoding="utf-8")
         versioning = (ROOT / "VERSIONING.md").read_text(encoding="utf-8")
         indice = (DOCS / "README.md").read_text(encoding="utf-8")
 

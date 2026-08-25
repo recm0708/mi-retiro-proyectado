@@ -201,7 +201,7 @@ Mientras el PR de VER.2 no supere el gate completo y se integre:
 
 Si VER.2 se integra satisfactoriamente, `0.0.71.01-beta` pasa a ser el primer estado nuevo gobernado por la familia revision-aware. La creación de su tag, si corresponde al cierre, se realizará únicamente después de merge y revalidación.
 
-La distribución del contador aceptado hasta G070 se conserva de forma auditable en `docs/MATRIZ_DECISION_REVISIONES_VER2.md`, `docs/governance/pre-1-0-revision-ledger.md` y `data/revision_ledger_pre_1_0.json`; los intentos fallidos, refinamientos sin aceptación independiente y checkpoints absorbidos se preservan como evidencia sin consumir un `G` adicional.
+La distribución del contador aceptado hasta G070 se conserva de forma auditable en `docs/archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md`, `docs/governance/pre-1-0-revision-ledger.md` y `data/revision_ledger_pre_1_0.json`; los intentos fallidos, refinamientos sin aceptación independiente y checkpoints absorbidos se preservan como evidencia sin consumir un `G` adicional.
 
 ## 6. Migración criptográfica de tags — materializada
 

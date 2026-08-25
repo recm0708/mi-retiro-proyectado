@@ -1,18 +1,12 @@
-# Histórico técnico pre-GOV.1.3 R2
+# Histórico técnico
 
-**Clasificación:** Histórico
-**Snapshot:** estado de `main` inmediatamente antes de GOV.1.3 R2.
+**Estado:** Histórico
+**Índice vigente:** [`../../README.md`](../../README.md)
 
-Este directorio conserva las versiones acumulativas de los documentos técnicos que R2 convirtió en contratos de estado vigente.
+Este directorio conserva snapshots técnicos previos y evidencia de auditorías
+técnicas cerradas. NOR.2 R5 incorpora aquí **8 documentos** clasificados como
+`ARCHIVAR` por la matriz R2.
 
-Los snapshots pueden contener:
-
-- conteos antiguos de pruebas;
-- estados “pendiente” posteriormente cerrados;
-- reglas refinadas o sustituidas;
-- bitácoras UX incrustadas;
-- estructuras de archivos anteriores.
-
-No deben utilizarse como autoridad del comportamiento actual.
-
-Documentos vigentes: volver a `docs/INDICE.md`.
+Los archivos pueden contener conteos antiguos de pruebas, estructuras previas,
+estados posteriormente cerrados o reglas ya sustituidas. No deben utilizarse
+como autoridad del comportamiento actual.

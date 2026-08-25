@@ -143,9 +143,9 @@ G071 solo se considera aceptado después de gate completo, PR/CI e integración.
 Fuentes canónicas:
 
 - `VERSIONING.md`;
-- `docs/AUDITORIA_VERSIONADO_PRE_1_0.md`;
+- `docs/archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md`;
 - `docs/governance/pre-1-0-revision-ledger.md`;
-- `docs/MATRIZ_DECISION_REVISIONES_VER2.md`;
+- `docs/archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md`;
 - `data/revision_ledger_pre_1_0.json`;
 - ADR de gobierno correspondiente.
 
@@ -272,7 +272,7 @@ Reconstrucción basada exclusivamente en evidencia:
 
 - rangos Git de `RELEASES.md`;
 - commits reales;
-- `docs/REGISTRO_CAMBIOS_HISTORICO.md`;
+- `docs/archive/governance/REGISTRO_CAMBIOS_HISTORICO.md`;
 - documentación histórica;
 - ADR;
 - pruebas disponibles.
@@ -405,3 +405,9 @@ VER.2 no invalida ese cierre: corrige únicamente la granularidad y trazabilidad
 ## NOR.2 R4 — normalización documental viva
 
 La documentación vigente queda distribuida entre `architecture/`, `decisions/`, `governance/`, `operations/`, `product/`, `regulatory/`, `security/` y `standards/`. R5 archivará o retirará del árbol vivo los documentos históricos definidos por R2.
+
+## NOR.2 R5 — archivo documental histórico
+
+NOR.2 R5 separa evidencia histórica de documentación viva mediante 36
+movimientos hacia `docs/archive/`. `VERSION` no cambia y SEC.2 continúa pausado
+hasta completar NOR.2.

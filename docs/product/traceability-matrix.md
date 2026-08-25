@@ -69,7 +69,7 @@ Esta matriz conecta contratos críticos del producto con su fuente, decisión, i
 | TR-024 | Los controles de fecha validan año/calendario de forma transversal y Paso 5 muestra cobertura salarial de una fecha personalizada | N/A — técnico/UX | ADR-176 | `app/static/js/accessibility.js`, `app/static/css/accessibility.css`, `app/static/js/retirement.js`, `app/templates/partials/retirement.html` | `tests/test_ux46g_r1_retirement_scenarios.py` | Verificado UX.4.6g / PR #32 |
 | TR-025 | Alineación y densidad visual de períodos y resumen de retiro | N/A — UX/responsive | ADR-177 | `app/templates/partials/salary_history.html`, `app/templates/simulation.html`, `app/templates/partials/retirement.html`, `app/static/css/design-system.css` | `tests/test_ux46g_r1_retirement_scenarios.py` | Verificado UX.4.6g / PR #32 |
 | TR-026 | La guía pública explica cómo se transforman los datos de los Pasos 1–6 y los tres sistemas con parámetros versionados, fórmula general + sustitución numérica y términos definidos en contexto, sin duplicar motores; navbar, Metodología y Paso 6 enlazan sin transportar datos personales | N/A — transparencia/UX; normativa versionada existente | ADR-178 | `app/services/calculation_guide.py`, `app/templates/calculation_guide.html`, `app/static/css/calculation-guide.css`, `app/templates/base.html`, `app/static/js/results_orchestration.js`, `app/templates/methodology.html` | `tests/test_ux46i_r1_calculation_guide.py` | Verificado UX.4.6i / PR #34 |
-| TR-027 | La beta revision-aware cuenta estados aceptados, preserva tags legacy y mantiene ledger continuo sin convertir commits/candidatos en revisiones | N/A — gobierno/versionado | ADR-179 | `VERSION`, `VERSIONING.md`, `app/core/version.py`, `docs/AUDITORIA_VERSIONADO_PRE_1_0.md`, `docs/governance/pre-1-0-revision-ledger.md` | `tests/test_ver2_version_revision_aware.py`, `tests/test_ver2_documentacion_vigente.py` | Verificado VER.2 G071/E01 en R4 |
+| TR-027 | La beta revision-aware cuenta estados aceptados, preserva tags legacy y mantiene ledger continuo sin convertir commits/candidatos en revisiones | N/A — gobierno/versionado | ADR-179 | `VERSION`, `VERSIONING.md`, `app/core/version.py`, `docs/archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md`, `docs/governance/pre-1-0-revision-ledger.md` | `tests/test_ver2_version_revision_aware.py`, `tests/test_ver2_documentacion_vigente.py` | Verificado VER.2 G071/E01 en R4 |
 
 ## 3. Cobertura de RF
 
@@ -97,3 +97,11 @@ Los estados `Candidato` deben promoverse a `Verificado` únicamente después del
 
 - Base histórica documental preservada: `0.0.23-beta`.
 - VER.2 añade TR-027 sin eliminar la evidencia de GOV.1.3 R4 ni la matriz previa.
+
+## Trazabilidad NOR.2 R5
+
+| Criterio | Evidencia | Regresión |
+| --- | --- | --- |
+| Separar documentación viva de evidencia cerrada | `docs/archive/` + evidencia R5 | `tests/test_nor2_r5_historical_documentation.py` |
+| Preservar 36 documentos clasificados por R2 | movimientos Git R5 | `test_36_documentos_archivados` |
+| Mantener `VERSION` y SEC.2 sin promoción | `VERSION` + estado documental | `test_version_y_estado_transversal` |

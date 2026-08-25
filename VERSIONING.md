@@ -40,7 +40,7 @@ La fuente canónica de la versión de aplicación es el archivo raíz `VERSION`.
 - Jinja2 recibe `app_version` y el footer muestra el mismo valor.
 - El contador y la procedencia de revisiones aceptadas se auditan en `docs/governance/pre-1-0-revision-ledger.md` y `data/revision_ledger_pre_1_0.json`.
 - `app/core/version_ledger.py` valida continuidad, unicidad y codificación del ledger estructurado.
-- La regla que determina qué cuenta y qué no cuenta se documenta en `docs/MATRIZ_DECISION_REVISIONES_VER2.md` y `docs/AUDITORIA_VERSIONADO_PRE_1_0.md`.
+- La regla que determina qué cuenta y qué no cuenta se documenta en `docs/archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md` y `docs/archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md`.
 - README, CHANGELOG, RELEASES, ROADMAP y el ledger deben corresponder al estado vigente cuando lo describan como actual.
 - Los documentos de dominio pueden conservar la versión en la que fueron revisados; esa metadata es histórica de revisión documental y no una segunda fuente de la versión vigente.
 - La numeración de **Build** es independiente de `VERSION` y solo se materializa cuando exista un proceso reproducible de generación de artefactos oficiales.
@@ -136,7 +136,7 @@ Reglas:
 7. un mantenimiento técnico, de seguridad, gobierno, dependencias o documentación puede contar si crea un estado materialmente distinto, validado y aceptado; un checkpoint que solo agrupa estados ya contabilizados no cuenta de nuevo;
 8. no se inventan retrospectivamente revisiones que nunca existieron.
 
-La aplicación concreta de estas reglas está auditada en `docs/MATRIZ_DECISION_REVISIONES_VER2.md`.
+La aplicación concreta de estas reglas está auditada en `docs/archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md`.
 
 ## 5. Contador global reconstruido
 

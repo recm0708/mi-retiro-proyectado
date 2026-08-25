@@ -11,7 +11,7 @@ DOCS = ROOT / "docs"
 
 class TestMant1R5GDocumentacion(unittest.TestCase):
     def test_auditoria_r5g_existe_y_declara_alcance(self):
-        ruta = DOCS / "AUDITORIA_DOCUMENTACION_R5G.md"
+        ruta = DOCS / "archive" / "technical" / "AUDITORIA_DOCUMENTACION_R5G.md"
 
         self.assertTrue(ruta.is_file())
 
@@ -33,7 +33,7 @@ class TestMant1R5GDocumentacion(unittest.TestCase):
                 self.assertIn(esperado, texto)
 
     def test_auditoria_r5g_documenta_excepciones_semanticas(self):
-        texto = (DOCS / "AUDITORIA_DOCUMENTACION_R5G.md").read_text(encoding="utf-8")
+        texto = (DOCS / "archive" / "technical" / "AUDITORIA_DOCUMENTACION_R5G.md").read_text(encoding="utf-8")
 
         expresiones = (
             "normativa/privacidad",

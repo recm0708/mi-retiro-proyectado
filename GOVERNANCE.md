@@ -175,7 +175,7 @@ La revisión jurídica externa previa a publicación pública/comercial continú
 
 El repositorio mantiene Dependency graph, Dependabot alerts y Dependabot security updates activos. Dependabot no sustituye revisión humana, pruebas de regresión ni la decisión explícita del mantenedor.
 
-Las plantillas `.github/ISSUE_TEMPLATE/` separan errores ordinarios, solicitudes de mejora y consultas de soporte; `.github/pull_request_template.md` estandariza el contexto mínimo de integración. `CODE_OF_CONDUCT.md` define las normas de participación y `SUPPORT.md` enruta soporte, privacidad y seguridad. `docs/AUDITORIA_GITHUB.md` registra los controles versionados y los settings que requieren verificación periódica en GitHub.
+Las plantillas `.github/ISSUE_TEMPLATE/` separan errores ordinarios, solicitudes de mejora y consultas de soporte; `.github/pull_request_template.md` estandariza el contexto mínimo de integración. `CODE_OF_CONDUCT.md` define las normas de participación y `SUPPORT.md` enruta soporte, privacidad y seguridad. `docs/archive/governance/AUDITORIA_GITHUB.md` registra los controles versionados y los settings que requieren verificación periódica en GitHub.
 
 ## 11. Cambios a este documento
 

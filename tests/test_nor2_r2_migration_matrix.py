@@ -59,7 +59,8 @@ class TestNOR2R2MigrationMatrix(unittest.TestCase):
 
         self.assertIn("NOR.2 R2", matriz_r2)
         self.assertIn("NOR.1:** cerrado", readme)
-        self.assertIn("NOR.2 R4:** activo", readme)
+        self.assertIn("NOR.2 R4:** cerrado", readme)
+        self.assertIn("NOR.2 R5:** activo", readme)
         self.assertNotIn("NOR.2 R2:** activo", readme)
         self.assertNotIn("NOR.2 R3:** activo", readme)
         self.assertIn("DOC.1 R1:** cerrado", readme)

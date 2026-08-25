@@ -105,7 +105,7 @@ class TestUX46ePreparacionPublica(unittest.TestCase):
     def test_adr163_y_documentacion_enlazan_preparacion_publica(self):
         decisiones = (ROOT / "docs/decisions/README.md").read_text(encoding="utf-8")
         indice = (ROOT / "docs/README.md").read_text(encoding="utf-8")
-        auditoria = (ROOT / "docs/AUDITORIA_GITHUB.md").read_text(encoding="utf-8")
+        auditoria = (ROOT / "docs/archive/governance/AUDITORIA_GITHUB.md").read_text(encoding="utf-8")
         self.assertIn("## ADR-163 —", decisiones)
         self.assertIn("operations/github-public-repository.md", indice)
         self.assertIn("PREPARACION_PUBLICA_GITHUB.md", auditoria)
