@@ -39,6 +39,7 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 - **NOR.2 R7:** cerrado; artefactos locales heredados migrados y depurados.
 - **NOR.2 R8:** cerrado; auditoría integral y cierre formal integrados en `main`.
 - **SEC.2:** R1 cerrado; hardening CodeQL del informe imprimible y normalización técnica de GitHub Actions completados.
+- **SEC.2 R4:** seguridad administrativa, protección de endpoints administrativos, auditoría de accesos y documentación transversal completados.
 - **Primera versión oficial objetivo:** `1.0.0.0` con `Build 000001`, únicamente después de cerrar todos los gates definidos en el plan maestro.
 
 La visibilidad pública del repositorio **no convierte una beta de desarrollo en versión oficial, no constituye un despliegue de producción y no modifica por sí sola la licencia vigente**.
@@ -348,3 +349,36 @@ Estas referencias conservan evidencia de regresiones históricas sin cambiar el 
 - **PLAN.1:** cerrado en `0.0.26-beta`; PR #23 y PR #24 preservan el cierre legacy antes de la reconciliación revision-aware.
 - `0.1.0-beta.1` se conserva como referencia histórica previa a PLAN.1; VER.2 no la reactiva como familia vigente.
 - Badge histórico preservado: `img.shields.io/badge/versi%C3%B3n-0.0.26--beta`.
+
+
+## Developer Diagnostics y acceso al portal de desarrollo
+
+Developer Diagnostics es una capacidad exclusiva de desarrollo local. Permanece
+desactivada por defecto y no forma parte de una telemetría de usuarios.
+
+Inicio normal de la aplicación:
+
+```powershell
+python -m uvicorn app.main:app --reload
+```
+
+Acceso local:
+
+```text
+http://127.0.0.1:8000
+```
+
+Activación temporal de diagnósticos:
+
+```powershell
+$env:MRP_DEV_MODE = "1"
+python -m uvicorn app.main:app --reload
+```
+
+La activación de Developer Diagnostics no habilita automáticamente funciones
+administrativas. Las superficies administrativas requieren su configuración
+específica de seguridad.
+
+SEC.2 añadió protección centralizada para endpoints administrativos mediante
+autenticación administrativa, validación de credenciales, eventos de auditoría
+locales y controles para evitar registrar información sensible.

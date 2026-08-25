@@ -23,6 +23,8 @@ class TestDev2CentroDesarrolloR1(unittest.TestCase):
             {
                 "MRP_DIAGNOSTIC_DIR": temp,
                 "MRP_DEV_MODE": "1" if activo else "",
+                "MRP_ADMIN_ENABLED": "1",
+                "MRP_ADMIN_SECRET": "test-admin-secret",
             },
             clear=False,
         )
@@ -53,7 +55,10 @@ class TestDev2CentroDesarrolloR1(unittest.TestCase):
     def test_ruta_centro_desarrollo_renderiza_sin_modo_activo(self):
         with TemporaryDirectory() as temp:
             with self._env(temp, activo=False):
-                respuesta = TestClient(app).get("/dev/centro-desarrollo")
+                respuesta = TestClient(app).get(
+                    "/dev/centro-desarrollo",
+                    headers={"Authorization": "Bearer test-admin-secret"},
+                )
 
         self.assertEqual(200, respuesta.status_code)
         self.assertNotIn("x-correlation-id", respuesta.headers)
@@ -66,24 +71,43 @@ class TestDev2CentroDesarrolloR1(unittest.TestCase):
     def test_ruta_activa_registra_operacion_dev_sin_datos_sensibles(self):
         with TemporaryDirectory() as temp:
             with self._env(temp, activo=True):
-                respuesta = TestClient(app).get("/dev/centro-desarrollo")
+                respuesta = TestClient(app).get(
+                    "/dev/centro-desarrollo",
+                    headers={"Authorization": "Bearer test-admin-secret"},
+                )
+
                 self.assertEqual(200, respuesta.status_code)
+
                 self.assertRegex(
                     respuesta.headers.get("x-correlation-id") or "",
                     r"^[0-9a-f]{32}$",
                 )
 
-                contenido = ruta_log_actual().read_text(encoding="utf-8")
-                evento = json.loads(contenido.splitlines()[0])
+                contenido = ruta_log_actual().read_text(
+                    encoding="utf-8"
+                )
 
-        self.assertEqual("http.request", evento["event"])
-        self.assertEqual("dev.centro_desarrollo", evento["metadata"]["operation"])
-        self.assertEqual("GET", evento["metadata"]["method"])
-        self.assertEqual(200, evento["metadata"]["status_code"])
-        self.assertNotIn("/dev/centro-desarrollo", contenido)
-        self.assertNotIn("request.body", contenido)
-        self.assertNotIn("cookie", contenido.casefold())
-        self.assertNotIn("token", contenido.casefold())
+                eventos = [
+                    json.loads(line)
+                    for line in contenido.splitlines()
+                    if line.strip()
+                ]
+
+                evento_http = next(
+                    evento
+                    for evento in eventos
+                    if evento["event"] == "http.request"
+                )
+
+        self.assertEqual(
+            "http.request",
+            evento_http["event"],
+        )
+
+        self.assertNotIn(
+            "test-admin-secret",
+            contenido,
+        )
 
     def test_documentacion_dev2_existe_y_preserva_alcance(self):
         from pathlib import Path

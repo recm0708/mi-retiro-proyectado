@@ -141,6 +141,7 @@ BASE_DIR = Path(__file__).resolve().parent
 from app.services.regulatory_sources import construir_catalogo_metodologia
 from app.services.calculation_guide import construir_guia_calculo
 from app.services.development_center import construir_estado_centro_desarrollo
+from app.core.admin_security import requerir_administrador
 
 
 app = FastAPI(
@@ -407,7 +408,9 @@ async def como_se_calcula(
 async def centro_desarrollo(
     request: Request,
 ):
-    """Muestra el Centro de desarrollo de DEV.2 sin exponer datos sensibles."""
+    """Muestra el Centro de desarrollo protegido administrativamente."""
+
+    requerir_administrador(request)
 
     return templates.TemplateResponse(
         request=request,

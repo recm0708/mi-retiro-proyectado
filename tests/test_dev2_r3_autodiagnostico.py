@@ -26,6 +26,8 @@ class TestDev2R3Autodiagnostico(unittest.TestCase):
             {
                 "MRP_DIAGNOSTIC_DIR": temp,
                 "MRP_DEV_MODE": "1" if activo else "",
+                "MRP_ADMIN_ENABLED": "1",
+                "MRP_ADMIN_SECRET": "test-admin-secret",
             },
             clear=False,
         )
@@ -119,7 +121,10 @@ class TestDev2R3Autodiagnostico(unittest.TestCase):
                         "status_code": 200,
                     },
                 )
-                respuesta = TestClient(app).get("/dev/centro-desarrollo")
+                respuesta = TestClient(app).get(
+                    "/dev/centro-desarrollo",
+                    headers={"Authorization": "Bearer test-admin-secret"},
+                )
 
         self.assertEqual(200, respuesta.status_code)
         self.assertIn("DEV.2 R2", respuesta.text)
