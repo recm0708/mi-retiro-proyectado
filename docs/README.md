@@ -3,7 +3,7 @@
 **Estado:** vigente
 **Versión de aplicación:** `0.0.71.01-beta` — VER.2 G071/E01 promovida en R4
 **Último tag formal legacy:** `v0.0.26-beta`
-**Última actualización transversal:** NOR.2 R7 — migración y depuración de artefactos locales — 2026-08-24
+**Última actualización transversal:** NOR.2 R8 — auditoría integral y cierre formal — 2026-08-24
 **Cierres históricos preservados:** UX.4.6i / PR #34 — 841 pruebas; UX.4.6e R9 — `v0.0.25-beta`
 
 Este archivo es el punto de entrada para la documentación técnica, funcional, normativa, de privacidad, validación y auditoría de Mi Retiro Proyectado.
@@ -11,7 +11,7 @@ Este archivo es el punto de entrada para la documentación técnica, funcional, 
 
 ## Estado de normalización del repositorio
 
-**Revisión activa:** NOR.2 R7 — migración y depuración de artefactos locales.
+**Revisión activa:** NOR.2 R8 — auditoría integral y cierre formal.
 
 Estado de la fase:
 
@@ -22,8 +22,8 @@ Estado de la fase:
 - **NOR.2 R4:** cerrado; documentación viva migrada a áreas canónicas.
 - **NOR.2 R5:** cerrado; 36 documentos históricos consolidados en `docs/archive/`.
 - **NOR.2 R6:** cerrado; ledger y datos de alto impacto normalizados.
-- **NOR.2 R7:** activo; artefactos locales heredados migrados y depurados.
-- **NOR.2 R8:** siguiente revisión; auditoría integral y cierre de NOR.2.
+- **NOR.2 R7:** cerrado; artefactos locales heredados migrados y depurados.
+- **NOR.2 R8:** activo; auditoría integral y cierre formal de NOR.2.
 - **SEC.2:** permanece pausado hasta completar NOR.2.
 
 Evidencia:
@@ -35,6 +35,7 @@ Evidencia:
 - [`audits/repository/repository-normalization-historical-docs-nor2-r5.md`](audits/repository/repository-normalization-historical-docs-nor2-r5.md) — consolidación de documentación histórica R5.
 - [`audits/repository/repository-normalization-ledger-data-nor2-r6.md`](audits/repository/repository-normalization-ledger-data-nor2-r6.md) — normalización del ledger y datos de alto impacto R6.
 - [`audits/repository/repository-normalization-local-artifacts-nor2-r7.md`](audits/repository/repository-normalization-local-artifacts-nor2-r7.md) — migración y depuración de artefactos locales R7.
+- [`audits/repository/repository-normalization-final-audit-nor2-r8.md`](audits/repository/repository-normalization-final-audit-nor2-r8.md) — auditoría integral y gate de cierre R8.
 - [`standards/README.md`](standards/README.md) — estándares canónicos del repositorio.
 ## 1. Producto y alcance
 

@@ -101,7 +101,7 @@ class TestNOR2R5HistoricalDocumentation(unittest.TestCase):
         self.assertIn("**NOR.2 R4:** cerrado", readme)
         self.assertIn("**NOR.2 R5:** cerrado", readme)
         self.assertIn("**NOR.2 R6:** cerrado", readme)
-        self.assertIn("**NOR.2 R7:** activo", readme)
+        self.assertIn("**NOR.2 R7:** cerrado", readme)
         self.assertIn("NOR.2 R5", docs)
         self.assertIn("NOR.2 R6", docs)
         self.assertIn("**SEC.2:** pausado", readme)

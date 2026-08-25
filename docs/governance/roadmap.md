@@ -1,25 +1,25 @@
 # Roadmap
 
 **Estado:** vigente
-**Versión candidata:** `0.0.71.01-beta` — VER.2 G071/E01
+**Versión vigente:** `0.0.71.01-beta` — VER.2 G071/E01
 **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
 **Último tag formal legacy:** `v0.0.26-beta`
 **Fecha de revisión:** 2026-08-24
-**Normalización previa a SEC.2:** NOR.1 está cerrado; NOR.2 permanece activo en R7 y R8 ejecutará la auditoría integral y el cierre formal antes de reanudar SEC.2.
+**Normalización previa a SEC.2:** NOR.1 está cerrado; NOR.2 permanece activo en R8, que ejecuta la auditoría integral y el cierre formal antes de reanudar SEC.2.
 
 
 <!-- NOR1-R7-CLOSURE:START -->
 ## Estado NOR.1 / NOR.2
 
-NOR.1 queda preparado para cierre en R7 después de consolidar los estándares de
+NOR.1 quedó cerrado en R7 después de consolidar los estándares de
 estructura, nombres, documentación, archivos, evidencias, raíz y artefactos
 locales.
 
 La secuencia operativa previa a SEC.2 queda:
 
-1. **NOR.1** — definición y auditoría preparatoria — cierre R7;
-2. **NOR.2** — normalización integral del repositorio — siguiente fase;
-3. **SEC.2** — hardening integral — permanece pausado hasta cerrar NOR.2.
+1. **NOR.1** — definición y auditoría preparatoria — cerrado en R7;
+2. **NOR.2** — normalización integral del repositorio — activo en R8;
+3. **SEC.2** — hardening integral — permanece pausado hasta cerrar NOR.2 R8.
 
 NOR.2 ejecutará los movimientos, renombrados, consolidaciones y retiros que
 NOR.1 deliberadamente no realizó.
@@ -154,7 +154,6 @@ VER.2 es un bloque transversal de reconciliación y **no añade un bloque 15** a
 
 ### Pendiente o incompleto
 
-- VER.2 — cerrar reconciliación revision-aware y promover G071 si el gate completo, PR/CI e integración son satisfactorios;
 - NOR.2 — auditoría y normalización integral del repositorio contra los estándares cerrados por NOR.1 antes de SEC.2;
 - hardening integral SEC.2;
 - reconstrucción detallada del CHANGELOG `0.0.1-beta`–`0.0.21-beta` en DOC.2;
@@ -166,7 +165,7 @@ VER.2 es un bloque transversal de reconciliación y **no añade un bloque 15** a
 
 ## 3. UX.4.6 — trabajo funcional cerrado
 
-**Estado:** UX.4.6e y UX.4.6f–UX.4.6i cerrados. VER.2 reconcilia ahora su representación en la historia; no reabre sus funcionalidades.
+**Estado:** UX.4.6e y UX.4.6f–UX.4.6i cerrados. VER.2 ya reconcilió su representación en la historia y permanece cerrado; no reabre sus funcionalidades.
 
 - [x] **UX.4.6e — Estandarización técnica, comentarios y coherencia de interfaz post-GOV.1**
   - [x] R1–R7 — G041–G047;
@@ -206,9 +205,9 @@ No existe una una revisión intermedia no demostrada entre UX.4.6i R1 y R1.2 dem
 
 **PLAN.1:** cerrado formalmente en `0.0.26-beta` con **720 pruebas en `OK`** y tag firmado `v0.0.26-beta`. La segunda auditoría reconoce diez estados aceptados G051–G060 dentro de su evolución.
 
-**VER.2:** bloque transversal en reconciliación pendiente. La base anterior al cambio contiene **70 estados aceptados (G001–G070)**. El candidato `0.0.71.01-beta` representa G071/E01 y solo se acepta después del gate completo, PR/CI e integración.
+**VER.2:** bloque transversal cerrado. La base anterior al cambio contiene **70 estados aceptados (G001–G070)** y G071/E01 fue promovido, integrado y publicado como `0.0.71.01-beta` mediante el tag `v0.0.71.01-beta`.
 
-**Checkpoint técnico actual:** MANT.1 R5D — política, plantillas y uniformidad por extensión antes de SEC.2.
+**Checkpoint técnico actual:** NOR.2 R8 — auditoría integral y cierre formal de la normalización antes de SEC.2.
 
 Documentos canónicos de VER.2:
 
@@ -419,3 +418,31 @@ R7 permanece activo hasta su integración en `main`.
 Después continúa **NOR.2 R8 — auditoría integral y cierre formal de NOR.2**.
 SEC.2 permanece pausado hasta completar dicho cierre.
 <!-- NOR2-R7-LOCAL-ARTIFACTS:END -->
+
+
+<!-- NOR2-R8-FINAL-AUDIT:START -->
+## NOR.2 R8 — auditoría integral y cierre formal
+
+NOR.2 R7 quedó integrado mediante PR #73 y commit squash `b8ffd39`.
+
+R8 re-audita el resultado completo de R3–R7 contra los estándares de NOR.1.
+
+El gate local confirmó:
+
+- estructura raíz canónica;
+- `docs/` raíz reducido a `README.md`;
+- retiro de dos fragmentos transitorios heredados;
+- `_entregas/` inexistente;
+- `_deliverables/` con 20 evidencias locales y 0 archivos trackeados;
+- 115 decisiones R2 re-auditadas sin incumplimientos reales;
+- 0 consumidores operativos vivos de rutas retiradas;
+- 11 contradicciones de estado vivo corregidas hasta dejar 0;
+- `VERSION` y `APP_VERSION` en `0.0.71.01-beta`;
+- ledger G001–G070 preservado;
+- regresión específica R8 y suite NOR.2 en `OK`.
+
+El gate integral local de R8 quedó completado. R8 permanece activo únicamente mientras se completan pre-commit, PR, CI, merge y la verificación post-merge.
+
+La integración satisfactoria de R8 cerrará formalmente NOR.2 y habilitará la
+reanudación de **SEC.2**.
+<!-- NOR2-R8-FINAL-AUDIT:END -->

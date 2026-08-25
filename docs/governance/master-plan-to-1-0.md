@@ -3,7 +3,7 @@
 **Estado:** vigente
 **Versión base al iniciar el plan:** `0.0.25-beta`
 **Cierre histórico de PLAN.1:** `0.0.26-beta` / `v0.0.26-beta`
-**Versión candidata transversal VER.2:** `0.0.71.01-beta` — G071/E01
+**Versión transversal vigente:** `0.0.71.01-beta` — VER.2 G071/E01
 **Fecha:** 2026-08-24
 **Clasificación:** Producto / Arquitectura / QA / Release
 
@@ -15,7 +15,7 @@ NOR.1 y NOR.2 son checkpoints técnicos transversales y no agregan bloques
 funcionales al plan de 14 bloques.
 
 - **NOR.1:** cerrado en R7; estándares determinísticos establecidos.
-- **NOR.2:** activo en R7; artefactos locales en normalización y R8 como cierre final.
+- **NOR.2:** activo en R8; auditoría integral y cierre formal en curso.
 - **SEC.2:** permanece pausado hasta cerrar NOR.2 R8.
 
 La separación evita que SEC.2 cree nuevas rutas, archivos o estructuras sobre
@@ -61,10 +61,10 @@ El plan maestro se interpreta desde la línea base documental posterior a MANT.1
 Estado vigente:
 
 - `VERSION` se promueve en R4 a `0.0.71.01-beta`.
-- `v0.0.26-beta` sigue siendo el tag formal legacy vigente hasta el cierre firmado post-merge de G071/E01.
-- VER.2 sigue pendiente como reconciliación revision-aware antes de cualquier promoción formal.
+- `v0.0.26-beta` permanece como tag legacy histórico e inmutable; VER.2 publicó formalmente `v0.0.71.01-beta`.
+- VER.2 está cerrado; G071/E01 fue promovido y publicado como `v0.0.71.01-beta`.
 - MANT.1 está cerrado operativamente.
-- DOC.1 R1 está activo para actualizar documentación Markdown vigente y separar evidencia histórica de estado actual.
+- DOC.1 R1 está cerrado; la documentación Markdown vigente quedó actualizada y separada de la evidencia histórica.
 - La meta `1.0.0.0` / `Build 000001` se mantiene condicionada al cierre de los gates definidos.
 
 Las referencias históricas a bloques previos se conservan como trazabilidad, pero el estado operativo vigente debe leerse desde esta sección.
@@ -478,3 +478,28 @@ R7 permanece activo hasta completar sus gates, PR, CI e integración en `main`.
 Después de R7 solo queda **NOR.2 R8 — auditoría integral y cierre formal**.
 SEC.2 permanece pausado hasta completar R8.
 <!-- NOR2-R7-LOCAL-ARTIFACTS:END -->
+
+
+<!-- NOR2-R8-FINAL-AUDIT:START -->
+## Actualización NOR.2 R8
+
+R8 constituye el gate final de normalización antes de SEC.2.
+
+La auditoría integral confirma localmente:
+
+- raíz y estructura documental canónicas;
+- ausencia de residuos técnicos de las migraciones R3–R7;
+- retiro de dos artefactos transitorios directos de `docs/`;
+- artefactos locales preservados fuera de Git;
+- documentación viva sincronizada con VER.2 cerrado, NOR.1 cerrado,
+  NOR.2 R7 cerrado y R8 activo;
+- versión `0.0.71.01-beta` preservada;
+- ledger G001–G070 preservado;
+- regresiones específicas de normalización en `OK`.
+
+El gate integral local de R8 quedó completado. El cierre de NOR.2 queda
+condicionado a pre-commit, PR, CI, auditoría de gobernanza, squash merge y
+verificación post-merge.
+
+SEC.2 no se reanuda antes de completar esa integración.
+<!-- NOR2-R8-FINAL-AUDIT:END -->

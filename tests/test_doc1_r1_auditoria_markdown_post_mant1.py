@@ -87,7 +87,7 @@ def test_readme_expone_estado_vigente_y_doc1_preserva_su_cierre():
     assert "**NOR.2 R4:** cerrado" in readme
     assert "**NOR.2 R5:** cerrado" in readme
     assert "**NOR.2 R6:** cerrado" in readme
-    assert "**NOR.2 R7:** activo" in readme
+    assert "**NOR.2 R7:** cerrado" in readme
     assert "img.shields.io/badge/versi%C3%B3n-0.0.71.01--beta" in readme
 
     # Los detalles post-MANT.1 pertenecen a la evidencia histórica de DOC.1,

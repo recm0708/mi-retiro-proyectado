@@ -58,6 +58,7 @@ class TestNOR2R6LedgerData(unittest.TestCase):
             "tests/test_mant1_r5f_nombres_archivos.py",
             "tests/test_nor2_r2_migration_matrix.py",
             "tests/test_nor2_r6_ledger_data.py",
+            "tests/test_nor2_r8_final_audit.py",
         }
 
         result = subprocess.run(
@@ -99,7 +100,7 @@ class TestNOR2R6LedgerData(unittest.TestCase):
 
         self.assertIn("**NOR.2 R5:** cerrado", readme)
         self.assertIn("**NOR.2 R6:** cerrado", readme)
-        self.assertIn("**NOR.2 R7:** activo", readme)
+        self.assertIn("**NOR.2 R7:** cerrado", readme)
         self.assertIn("NOR.2 R6", docs)
         self.assertIn("NOR.2 R7", docs)
         self.assertIn("**SEC.2:** pausado", readme)

@@ -1,1 +1,0 @@
-- [VER2_R5_ESTABILIZACION_POST_RELEASE.md](VER2_R5_ESTABILIZACION_POST_RELEASE.md) — estabilización posterior a la promoción beta revision-aware G071/E01.
