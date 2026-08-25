@@ -1093,45 +1093,147 @@
     documento.className = "print-report-document";
     documento.setAttribute("aria-hidden", "true");
 
-    documento.innerHTML = `
-      <header class="print-report-cover">
-        <div class="print-report-brand-row">
-          <div class="print-report-brand">
-            <img src="/static/img/brand/logo-mark-128.png" alt="">
-            <div>
-              <strong>Mi Retiro Proyectado</strong>
-              <span>Planificación previsional independiente</span>
-            </div>
-          </div>
-          <span class="print-report-version">${version}</span>
-        </div>
-        <div class="print-report-title-block">
-          <p class="print-report-kicker">Informe de simulación</p>
-          <h1>Proyección de jubilación</h1>
-          <p>
-            Resumen de la simulación realizada con los datos confirmados
-            y los supuestos seleccionados en la aplicación.
-          </p>
-        </div>
-        <dl class="print-report-meta">
-          <div><dt>Sistema previsional</dt><dd>${sistema}</dd></div>
-          <div><dt>Escenario de retiro</dt><dd>${escenario}</dd></div>
-          <div><dt>Fecha y edad</dt><dd>${fechaEdad}</dd></div>
-          <div><dt>Cuotas estimadas</dt><dd>${cuotas}</dd></div>
-          <div><dt>Escenario salarial</dt><dd>${
-            simulacion.escenario_salarial_seleccionado
-            || simulacion.configuracion_mixto_resultados?.escenario_salarial_nombre
-            || simulacion.configuracion_sucgs_resultados?.escenario_salarial_nombre
-            || "—"
-          }</dd></div>
-          <div><dt>Generado</dt><dd>${generado}</dd></div>
-        </dl>
-        <div class="print-report-notice">
-          <strong>Resultado estimado.</strong> Este informe no es una resolución,
-          certificación ni documento oficial de la Caja de Seguro Social.
-        </div>
-      </header>
-    `;
+    const crearElementoInforme = (tag, clase = "", texto = null) => {
+      const elemento = document.createElement(tag);
+
+      if (clase) {
+        elemento.className = clase;
+      }
+
+      if (texto !== null && texto !== undefined) {
+        elemento.textContent = String(texto);
+      }
+
+      return elemento;
+    };
+
+    const crearFilaMetaInforme = (etiqueta, valor) => {
+      const fila = document.createElement("div");
+      const termino = crearElementoInforme("dt", "", etiqueta);
+      const dato = crearElementoInforme("dd", "", valor ?? "—");
+
+      fila.append(termino, dato);
+      return fila;
+    };
+
+    const portada = crearElementoInforme(
+      "header",
+      "print-report-cover",
+    );
+
+    const filaMarca = crearElementoInforme(
+      "div",
+      "print-report-brand-row",
+    );
+
+    const marca = crearElementoInforme(
+      "div",
+      "print-report-brand",
+    );
+
+    const logo = document.createElement("img");
+    logo.src = "/static/img/brand/logo-mark-128.png";
+    logo.alt = "";
+
+    const textoMarca = document.createElement("div");
+    textoMarca.append(
+      crearElementoInforme(
+        "strong",
+        "",
+        "Mi Retiro Proyectado",
+      ),
+      crearElementoInforme(
+        "span",
+        "",
+        "Planificación previsional independiente",
+      ),
+    );
+
+    marca.append(logo, textoMarca);
+
+    const versionInforme = crearElementoInforme(
+      "span",
+      "print-report-version",
+      version,
+    );
+
+    filaMarca.append(marca, versionInforme);
+
+    const bloqueTitulo = crearElementoInforme(
+      "div",
+      "print-report-title-block",
+    );
+
+    bloqueTitulo.append(
+      crearElementoInforme(
+        "p",
+        "print-report-kicker",
+        "Informe de simulación",
+      ),
+      crearElementoInforme(
+        "h1",
+        "",
+        "Proyección de jubilación",
+      ),
+      crearElementoInforme(
+        "p",
+        "",
+        "Resumen de la simulación realizada con los datos confirmados "
+          + "y los supuestos seleccionados en la aplicación.",
+      ),
+    );
+
+    const escenarioSalarial = (
+      simulacion.escenario_salarial_seleccionado
+      || simulacion.configuracion_mixto_resultados
+        ?.escenario_salarial_nombre
+      || simulacion.configuracion_sucgs_resultados
+        ?.escenario_salarial_nombre
+      || "—"
+    );
+
+    const meta = crearElementoInforme(
+      "dl",
+      "print-report-meta",
+    );
+
+    meta.append(
+      crearFilaMetaInforme("Sistema previsional", sistema),
+      crearFilaMetaInforme("Escenario de retiro", escenario),
+      crearFilaMetaInforme("Fecha y edad", fechaEdad),
+      crearFilaMetaInforme("Cuotas estimadas", cuotas),
+      crearFilaMetaInforme(
+        "Escenario salarial",
+        escenarioSalarial,
+      ),
+      crearFilaMetaInforme("Generado", generado),
+    );
+
+    const aviso = crearElementoInforme(
+      "div",
+      "print-report-notice",
+    );
+
+    aviso.append(
+      crearElementoInforme(
+        "strong",
+        "",
+        "Resultado estimado.",
+      ),
+      document.createTextNode(
+        " Este informe no es una resolución, certificación "
+          + "ni documento oficial de la Caja de Seguro Social.",
+      ),
+    );
+
+    portada.append(
+      filaMarca,
+      bloqueTitulo,
+      meta,
+      aviso,
+    );
+
+    documento.appendChild(portada);
 
     agregarSeccionInforme(
       documento,
@@ -1164,11 +1266,21 @@
 
     const pie = document.createElement("footer");
     pie.className = "print-report-footer";
-    pie.innerHTML = `
-      <strong>Mi Retiro Proyectado</strong> · ${version}<br>
-      Cálculo independiente sujeto a los datos suministrados, a las reglas
-      implementadas y a la normativa aplicable al momento de tramitar la prestación.
-    `;
+    const marcaPie = document.createElement("strong");
+    marcaPie.textContent = "Mi Retiro Proyectado";
+
+    pie.append(
+      marcaPie,
+      document.createTextNode(
+        " · " + String(version ?? ""),
+      ),
+      document.createElement("br"),
+      document.createTextNode(
+        "Cálculo independiente sujeto a los datos suministrados, "
+          + "a las reglas implementadas y a la normativa aplicable "
+          + "al momento de tramitar la prestación.",
+      ),
+    );
     documento.appendChild(pie);
 
     document.body.appendChild(documento);

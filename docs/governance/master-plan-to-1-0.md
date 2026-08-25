@@ -4,7 +4,7 @@
 **Versión base al iniciar el plan:** `0.0.25-beta`
 **Cierre histórico de PLAN.1:** `0.0.26-beta` / `v0.0.26-beta`
 **Versión transversal vigente:** `0.0.71.01-beta` — VER.2 G071/E01
-**Fecha:** 2026-08-24
+**Fecha:** 2026-08-25
 **Clasificación:** Producto / Arquitectura / QA / Release
 
 
@@ -17,7 +17,7 @@ funcionales al plan de 14 bloques.
 - **NOR.1:** cerrado en R7; estándares determinísticos establecidos.
 - **NOR.2:** cerrado en R8 mediante PR #74; normalización integral completada.
 - **DOC.1 R2:** auditoría integral Markdown post-NOR.2 cerrada; documentación vigente, evidencia histórica y controles permanentes quedaron reconciliados.
-- **SEC.2:** siguiente bloque; habilitado para reanudación, aún no iniciado formalmente.
+- **SEC.2 R1:** en ejecución; inicia el hardening integral con corrección de findings CodeQL y normalización de workflows.
 
 La separación evita que SEC.2 cree nuevas rutas, archivos o estructuras sobre
 una base cuya nomenclatura y documentación no hayan sido normalizadas.
@@ -68,7 +68,7 @@ Estado vigente:
 - DOC.1 R1 está cerrado.
 - DOC.1 R2 queda cerrado como auditoría integral Markdown post-NOR.2, con controles locales y remotos permanentes.
 - NOR.1 y NOR.2 están cerrados; R8 quedó integrado mediante PR #74.
-- SEC.2 es el siguiente bloque habilitado para reanudación y aún no se ha iniciado formalmente.
+- SEC.2 está activo en R1 con hardening CodeQL y normalización técnica de GitHub Actions.
 - La meta `1.0.0.0` / `Build 000001` se mantiene condicionada al cierre de los gates definidos.
 
 Las referencias históricas a bloques previos se conservan como trazabilidad, pero el estado operativo vigente debe leerse desde esta sección.

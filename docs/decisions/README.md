@@ -25,7 +25,7 @@ Estado vigente para lectura transversal:
 - DOC.1 R2 está cerrado como auditoría de la documentación Markdown vigente posterior a NOR.2.
 - Las decisiones históricas no se reescriben como si hubieran sido tomadas en una revisión posterior.
 - `VERSION` permanece en `0.0.71.01-beta`; `v0.0.26-beta` se conserva como referencia legacy histórica.
-- SEC.2 queda habilitado para reanudación, pero todavía no se ha iniciado formalmente.
+- SEC.2 está activo en R1.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 
 Este registro conserva decisiones de arquitectura, modelado, UX, precisión, seguridad y aplicación normativa. Una ADR explica por qué el proyecto adoptó una decisión; no crea una norma jurídica.

@@ -215,7 +215,7 @@ class TestNOR2R8FinalAudit(unittest.TestCase):
         )
 
         self.assertIn(
-            "**SEC.2:** siguiente bloque; habilitado para reanudación, aún no iniciado formalmente.",
+            "**SEC.2:** activo en R1; hardening CodeQL del informe imprimible y normalización técnica de GitHub Actions.",
             readme,
         )
 
@@ -230,7 +230,7 @@ class TestNOR2R8FinalAudit(unittest.TestCase):
         )
 
         self.assertIn(
-            "SEC.2 es el siguiente bloque",
+            "SEC.2 está activo en R1",
             traceability,
         )
 

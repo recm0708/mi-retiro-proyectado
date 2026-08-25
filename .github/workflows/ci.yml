@@ -2,7 +2,7 @@
 # Propósito: validar dependencias, compilación, JavaScript y pruebas en Python 3.13/3.14.
 # Alcance: conserva matriz, triggers, permisos, actions y comandos del workflow.
 
-name: Validación continua
+name: Continuous Integration
 
 on:
   push:

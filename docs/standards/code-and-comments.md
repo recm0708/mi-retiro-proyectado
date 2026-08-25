@@ -20,7 +20,7 @@ Estado vigente:
 - NOR.1 y NOR.2 están cerrados.
 - Los criterios de comentarios, encabezados, estructura y trazabilidad siguen aplicando.
 - DOC.1 R2 está cerrado como auditoría de la documentación Markdown vigente posterior a NOR.2.
-- SEC.2 queda habilitado para reanudación, pero todavía no se ha iniciado formalmente.
+- SEC.2 está activo en R1.
 - No se modifican reglas de cálculo ni normativa.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 
