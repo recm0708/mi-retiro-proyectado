@@ -331,7 +331,8 @@ class TestUX46iR1ComoSeCalcula(unittest.TestCase):
 
         self.assertIn("**DEV.2:** cerrado.", readme)
         self.assertIn("**NOR.2 R4:** cerrado", readme)
-        self.assertIn("**NOR.2 R5:** activo", readme)
+        self.assertIn("**NOR.2 R5:** cerrado", readme)
+        self.assertIn("**NOR.2 R6:** activo", readme)
         for revision in (
             "R1 — ruta pública",
             "R1.2 — navegación",

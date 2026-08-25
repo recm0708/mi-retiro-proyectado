@@ -3,7 +3,7 @@
 **Estado:** vigente
 **Versión de aplicación:** `0.0.71.01-beta` — VER.2 G071/E01 promovida en R4
 **Último tag formal legacy:** `v0.0.26-beta`
-**Última actualización transversal:** NOR.2 R5 — archivo y consolidación histórica — 2026-08-24
+**Última actualización transversal:** NOR.2 R6 — migración del ledger y datos de alto impacto — 2026-08-25
 **Cierres históricos preservados:** UX.4.6i / PR #34 — 841 pruebas; UX.4.6e R9 — `v0.0.25-beta`
 
 Este archivo es el punto de entrada para la documentación técnica, funcional, normativa, de privacidad, validación y auditoría de Mi Retiro Proyectado.
@@ -11,7 +11,7 @@ Este archivo es el punto de entrada para la documentación técnica, funcional, 
 
 ## Estado de normalización del repositorio
 
-**Revisión activa:** NOR.2 R5 — archivo y consolidación de documentación histórica.
+**Revisión activa:** NOR.2 R6 — migración del ledger y datos de alto impacto.
 
 Estado de la fase:
 
@@ -20,8 +20,9 @@ Estado de la fase:
 - **NOR.2 R2:** cerrado; matriz de decisión de migración.
 - **NOR.2 R3:** cerrado; runtime y configuración técnica normalizados.
 - **NOR.2 R4:** cerrado; documentación viva migrada a áreas canónicas.
-- **NOR.2 R5:** activo; 36 documentos históricos se trasladan a `docs/archive/`.
-- **NOR.2 R6:** siguiente revisión; migración del ledger y datos de alto impacto.
+- **NOR.2 R5:** cerrado; 36 documentos históricos consolidados en `docs/archive/`.
+- **NOR.2 R6:** activo; migración del ledger y datos de alto impacto.
+- **NOR.2 R7:** siguiente revisión; artefactos locales `_entregas/`.
 - **SEC.2:** permanece pausado hasta completar NOR.2.
 
 Evidencia:
@@ -51,7 +52,7 @@ Evidencia:
 - [`AUDITORIA_VER2_CONTEO_PROVISIONAL.md`](archive/governance/AUDITORIA_VER2_CONTEO_PROVISIONAL.md) — cierre del conteo de segunda pasada en G070 antes de VER.2.
 - [`MATRIZ_DECISION_REVISIONES_VER2.md`](archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md) — decisión fila por fila sobre qué consume Global y por qué.
 - [`pre-1-0-revision-ledger.md`](governance/pre-1-0-revision-ledger.md) — ledger Markdown G001–G070 y candidato G071.
-- [`../data/revision_ledger_pre_1_0.json`](../data/revision_ledger_pre_1_0.json) — ledger machine-readable canónico de la reconstrucción.
+- [`../data/pre-1-0-revision-ledger.json`](../data/pre-1-0-revision-ledger.json) — ledger machine-readable canónico de la reconstrucción.
 - [`../app/core/version_ledger.py`](../app/core/version_ledger.py) — validador de continuidad, unicidad y codificación del ledger estructurado.
 - [`../RELEASES.md`](../RELEASES.md) — versiones, tags y reconstrucción histórica.
 - [`../CHANGELOG.md`](../CHANGELOG.md) — cambios notables por versión.
@@ -181,7 +182,7 @@ Los archivos históricos documentan lo que se pensó, probó o decidió en un mo
 - [`../VERSIONING.md`](../VERSIONING.md) — reglas de incremento y tags.
 - [`AUDITORIA_VERSIONADO_PRE_1_0.md`](archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md) — reconciliación VER.2.
 - [`pre-1-0-revision-ledger.md`](governance/pre-1-0-revision-ledger.md) — contador global.
-- [`../data/revision_ledger_pre_1_0.json`](../data/revision_ledger_pre_1_0.json) — representación estructurada del contador.
+- [`../data/pre-1-0-revision-ledger.json`](../data/pre-1-0-revision-ledger.json) — representación estructurada del contador.
 - [`master-plan-to-1-0.md`](governance/master-plan-to-1-0.md) — gates hasta la primera versión oficial.
 
 ## Clasificación documental

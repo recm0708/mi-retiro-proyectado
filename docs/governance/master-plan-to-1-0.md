@@ -146,7 +146,7 @@ Fuentes canónicas:
 - `docs/archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md`;
 - `docs/governance/pre-1-0-revision-ledger.md`;
 - `docs/archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md`;
-- `data/revision_ledger_pre_1_0.json`;
+- `data/pre-1-0-revision-ledger.json`;
 - ADR de gobierno correspondiente.
 
 Mientras VER.2 permanezca abierto, **DOC.1 R1 es el bloque documental activo** para sincronizar la documentación Markdown vigente posterior a MANT.1; DEV.2 queda preservado como bloque funcional cerrado.
@@ -411,3 +411,26 @@ La documentación vigente queda distribuida entre `architecture/`, `decisions/`,
 NOR.2 R5 separa evidencia histórica de documentación viva mediante 36
 movimientos hacia `docs/archive/`. `VERSION` no cambia y SEC.2 continúa pausado
 hasta completar NOR.2.
+
+
+<!-- NOR2-R6-LEDGER:START -->
+## Actualización NOR.2 R6
+
+La normalización del ledger de alto impacto conserva como invariantes:
+
+- `schema_version = 1`;
+- 70 entradas continuas G001–G070;
+- siguiente Global 71;
+- candidato `0.0.71.01-beta`;
+- SHA-256
+  `f5e0020643b324119855693588469eb8c98a0abafdb8f6108d60d5fb03a2288e`.
+
+El consumidor de runtime y la documentación viva utilizan
+`data/pre-1-0-revision-ledger.json`.
+
+La evidencia histórica conserva los nombres que existían cuando fue generada.
+No se crean stubs ni copias de compatibilidad.
+
+R7 revisará `_entregas/`; R8 ejecutará el cierre integral de NOR.2 antes de
+reanudar SEC.2.
+<!-- NOR2-R6-LEDGER:END -->

@@ -84,7 +84,7 @@ Esta función está habilitada y complementa el canal privado alternativo indica
 - `docs/archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md`
 - `docs/archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md`
 - `docs/governance/pre-1-0-revision-ledger.md`
-- `data/revision_ledger_pre_1_0.json`
+- `data/pre-1-0-revision-ledger.json`
 
 <!-- ANCLAS_HISTORICAS_VER2_SECURITY_CONSOLIDADAS -->
 

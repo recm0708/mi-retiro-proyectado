@@ -799,3 +799,38 @@ Resultados observados antes del commit:
 - **124 Markdown inspeccionados** y **0 grupos con contenido idéntico**.
 
 `VERSION` permanece en `0.0.71.01-beta`.
+
+<!-- NOR2-R6-VALIDATION:START -->
+## Validación NOR.2 R6
+
+R6 normaliza el ledger estructurado en
+`data/pre-1-0-revision-ledger.json`, preservando sin cambios el contenido
+del archivo de origen identificado durante NOR.2 R2.
+
+El contenido del JSON permanece inalterado. El preflight verificó:
+
+- SHA-256:
+  `f5e0020643b324119855693588469eb8c98a0abafdb8f6108d60d5fb03a2288e`;
+- **70 entradas** continuas G001–G070;
+- `schema_version = 1`;
+- siguiente Global **71**;
+- siguiente candidato `0.0.71.01-beta`;
+- **22 archivos** con referencias al nombre anterior, clasificados entre
+  referencias vivas y evidencia histórica.
+
+El gate local final de R6 verificó:
+
+- **46 pruebas + 3890 subtests** en el gate focal;
+- **977 pruebas** en la suite completa — `OK`;
+- `python -m pip check` — `OK`;
+- `python -m compileall -q app tests` — `OK`;
+- sintaxis de JavaScript mediante `node --check` — `OK`;
+- `git diff --check` — `OK`;
+- **0 referencias obsoletas no justificadas**;
+- SHA-256 del ledger preservado:
+  `f5e0020643b324119855693588469eb8c98a0abafdb8f6108d60d5fb03a2288e`;
+- **70 entradas G001–G070** preservadas;
+- `VERSION` permanece en `0.0.71.01-beta`.
+
+R6 permanece activo hasta su integración en `main`.
+<!-- NOR2-R6-VALIDATION:END -->

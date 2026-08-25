@@ -14,6 +14,7 @@ class TestMant1R5FNombresArchivos(unittest.TestCase):
             "scripts/configurar_hooks_git.ps1",
             "scripts/validar_precommit.py",
             "data/ledger_revisiones_pre_1_0.json",
+            "data/revision_ledger_pre_1_0.json",
             "regulations/parametros_generales.json",
             "tests/test_comparador.py",
             "tests/test_fuentes_normativas.py",
@@ -37,7 +38,7 @@ class TestMant1R5FNombresArchivos(unittest.TestCase):
         nuevos = (
             "scripts/configure_git_hooks.ps1",
             "scripts/validate_precommit.py",
-            "data/revision_ledger_pre_1_0.json",
+            "data/pre-1-0-revision-ledger.json",
             "regulations/general-parameters.json",
             "tests/test_comparator.py",
             "tests/test_regulatory_sources.py",
@@ -62,6 +63,7 @@ class TestMant1R5FNombresArchivos(unittest.TestCase):
             "scripts/configurar_hooks_git.ps1",
             "scripts/validar_precommit.py",
             "data/ledger_revisiones_pre_1_0.json",
+            "data/revision_ledger_pre_1_0.json",
             "regulations/parametros_generales.json",
             "test_comparador.py",
             "test_fuentes_normativas.py",
@@ -78,6 +80,8 @@ class TestMant1R5FNombresArchivos(unittest.TestCase):
         excluir = {
             "docs/archive/technical/AUDITORIA_ARCHIVOS_R5F.md",
             "tests/test_mant1_r5f_nombres_archivos.py",
+            "tests/test_nor2_r2_migration_matrix.py",
+            "tests/test_nor2_r6_ledger_data.py",
         }
 
         resultado = subprocess.run(
@@ -89,7 +93,11 @@ class TestMant1R5FNombresArchivos(unittest.TestCase):
         )
 
         for relativa in resultado.stdout.splitlines():
-            if relativa.startswith("_entregas/"):
+            if (
+                relativa.startswith("_entregas/")
+                or relativa.startswith("docs/archive/")
+                or relativa.startswith("docs/audits/")
+            ):
                 continue
 
             if relativa in excluir:
