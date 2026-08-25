@@ -260,3 +260,6 @@ La metadata de versión de revisión de un documento de dominio puede conservar 
 ## VER.2 R5 — Estabilización post-release
 
 - [Estabilización post-release VER.2 R5](archive/governance/VER2_R5_ESTABILIZACION_POST_RELEASE.md)
+
+
+**SEC.2 R6:** hardening de sesión administrativa web preparado para despliegue interno controlado.

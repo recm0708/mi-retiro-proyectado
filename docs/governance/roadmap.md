@@ -446,3 +446,6 @@ El gate integral local de R8 quedó completado y la CI remota pasó en verde des
 
 R8 quedó integrado mediante PR #74 y commit squash `b4df9b7`. Con esa integración, **NOR.2 queda formalmente cerrado** y **SEC.2 queda habilitado para reanudación**, aunque todavía no se ha iniciado.
 <!-- NOR2-R8-FINAL-AUDIT:END -->
+
+
+**SEC.2 R6 en ejecución:** hardening de sesión administrativa web y preparación para HTTPS interno.

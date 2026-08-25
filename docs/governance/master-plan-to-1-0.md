@@ -508,3 +508,6 @@ R8 quedó integrado mediante PR #74 y commit squash `b4df9b7`. Con esa integraci
 
 SEC.2 queda habilitado para reanudación como siguiente bloque, aunque aún no se ha iniciado formalmente.
 <!-- NOR2-R8-FINAL-AUDIT:END -->
+
+
+**SEC.2 R6:** endurecimiento de sesión administrativa web y controles configurables de despliegue.

@@ -25,6 +25,9 @@ from app.core.config import (
     APP_SUBTITLE,
     APP_VERSION,
     MI_CAJA_DIGITAL_URL,
+    ADMIN_COOKIE_SECURE,
+    ADMIN_COOKIE_SAMESITE,
+    ADMIN_SESSION_MINUTES,
 )
 
 from fastapi import FastAPI, File, Form, HTTPException, Request, UploadFile
@@ -471,9 +474,10 @@ async def procesar_login_administrativo(
         key="mrp_admin_session",
         value=crear_sesion_admin(),
         httponly=True,
-        samesite="lax",
-        secure=False,
-        max_age=1800,
+        samesite=ADMIN_COOKIE_SAMESITE,
+        secure=ADMIN_COOKIE_SECURE,
+        max_age=ADMIN_SESSION_MINUTES * 60,
+        path="/",
     )
 
     return respuesta
@@ -487,6 +491,16 @@ async def logout_administrativo(request: Request):
 
     if sesion:
         eliminar_sesion_admin(sesion)
+
+        registrar_evento(
+            level="INFO",
+            event="admin.session.revoked",
+            component="security.admin",
+            outcome="success",
+            metadata={
+                "endpoint": request.url.path,
+            },
+        )
 
     respuesta = RedirectResponse(
         url="/dev/login",
