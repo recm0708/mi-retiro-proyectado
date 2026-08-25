@@ -237,3 +237,8 @@ python -m pytest tests\test_dev2_development_center.py tests\test_dev2_r1_cierre
 python -m pytest -q
 882 passed, 695 subtests passed
 ```
+
+
+## SEC.2 R6 — Sesión administrativa web endurecida
+
+El Centro de desarrollo utiliza una sesión administrativa temporal posterior a la validación inicial. La sesión usa cookie HttpOnly configurable, expiración por inactividad y controles preparados para despliegue HTTPS interno.

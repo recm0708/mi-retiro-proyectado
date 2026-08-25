@@ -382,3 +382,8 @@ Las plantillas oficiales se ubican en `docs/templates/file-structure/` y
 funcionan como contrato inicial para archivos futuros. Las plantillas no agregan
 capas de ejecución; solo estandarizan encabezados, propósito, alcance y
 comentarios internos cuando el formato lo permite.
+
+
+## SEC.2 R6 — Control de sesión administrativa
+
+La autenticación administrativa separa la validación inicial mediante secreto del mantenimiento de sesión web temporal. La sesión no almacena datos personales y se invalida por expiración o revocación.
