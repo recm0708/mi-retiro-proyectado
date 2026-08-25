@@ -135,13 +135,13 @@ class TestNOR2R7LocalArtifacts(unittest.TestCase):
             readme,
         )
         self.assertIn(
-            "**SEC.2:** activo en R1; hardening CodeQL del informe imprimible y normalización técnica de GitHub Actions.",
+            "**SEC.2:** R1 cerrado; hardening CodeQL del informe imprimible y normalización técnica de GitHub Actions completados.",
             readme,
         )
 
         self.assertIn("NOR.2 R7", docs)
         self.assertIn("NOR.2 R8", docs)
-        self.assertIn("SEC.2 R1:** en ejecución; hardening CodeQL y normalización técnica de workflows.", docs)
+        self.assertIn("SEC.2 R1:** cerrado; hardening CodeQL y normalización técnica de workflows completados.", docs)
 
         version = (
             ROOT / "VERSION"

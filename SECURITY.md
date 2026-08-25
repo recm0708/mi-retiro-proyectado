@@ -13,7 +13,7 @@ Estado vigente:
 - `v0.0.26-beta` permanece como tag legacy histórico e inmutable.
 - VER.2, DOC.1 R1, NOR.1 y NOR.2 están cerrados.
 - DOC.1 R2 quedó cerrado tras auditar integralmente la documentación Markdown posterior a NOR.2.
-- SEC.2 está activo en R1 con hardening CodeQL y revisión de controles GitHub Actions.
+- SEC.2 R1 cerrado con hardening CodeQL y revisión de controles GitHub Actions.
 - Las rutas de reporte responsable y revisión de vulnerabilidades se mantienen sin cambio material.
 <!-- DOC1-R1-POST-MANT1:END -->
 

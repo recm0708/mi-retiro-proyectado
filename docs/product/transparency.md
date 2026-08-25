@@ -22,7 +22,7 @@ Estado vigente:
 - NOR.1 y NOR.2 están cerrados.
 - DOC.1 R2 está cerrado tras auditar integralmente la documentación Markdown posterior a NOR.2.
 - `VERSION` permanece en `0.0.71.01-beta`.
-- SEC.2 está activo en R1 con hardening técnico sin cambiar las reglas previsionales.
+- SEC.2 R1 quedó cerrado con hardening técnico sin cambiar las reglas previsionales.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 
 Mi Retiro Proyectado es una herramienta independiente de estimación previsional. Este documento delimita qué puede afirmarse sobre el producto y qué debe permanecer explícitamente como aproximación, limitación o pendiente.

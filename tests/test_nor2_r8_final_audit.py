@@ -215,7 +215,7 @@ class TestNOR2R8FinalAudit(unittest.TestCase):
         )
 
         self.assertIn(
-            "**SEC.2:** activo en R1; hardening CodeQL del informe imprimible y normalización técnica de GitHub Actions.",
+            "**SEC.2:** R1 cerrado; hardening CodeQL del informe imprimible y normalización técnica de GitHub Actions completados.",
             readme,
         )
 
@@ -230,7 +230,7 @@ class TestNOR2R8FinalAudit(unittest.TestCase):
         )
 
         self.assertIn(
-            "SEC.2 está activo en R1",
+            "SEC.2 R1 quedó cerrado",
             traceability,
         )
 

@@ -23,7 +23,7 @@ Cierre técnico relevante:
 - R6 validó funcionalmente el repositorio después de los renombres.
 - R7 cerró operativamente MANT.1 sobre `main`.
 
-La documentación arquitectónica debe leerse desde esta base: MANT.1, DOC.1 R1, NOR.1 y NOR.2 están cerrados. DOC.1 R2 quedó cerrado tras auditar la documentación vigente posterior a NOR.2 sin modificar la arquitectura de ejecución; SEC.2 está activo en R1 con hardening CodeQL y normalización de controles GitHub Actions.
+La documentación arquitectónica debe leerse desde esta base: MANT.1, DOC.1 R1, NOR.1 y NOR.2 están cerrados. DOC.1 R2 quedó cerrado tras auditar la documentación vigente posterior a NOR.2 sin modificar la arquitectura de ejecución; SEC.2 R1 quedó cerrado con hardening CodeQL y normalización de controles GitHub Actions.
 <!-- DOC1-R1-POST-MANT1:END -->
 
 Mi Retiro Proyectado es una aplicación web local basada en FastAPI, Jinja2 y JavaScript del navegador. La arquitectura separa presentación, contratos de datos, servicios de integración, motores previsionales, parámetros normativos y observabilidad de desarrollo.

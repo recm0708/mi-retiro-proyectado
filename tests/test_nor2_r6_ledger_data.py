@@ -103,7 +103,7 @@ class TestNOR2R6LedgerData(unittest.TestCase):
         self.assertIn("**NOR.2 R7:** cerrado", readme)
         self.assertIn("NOR.2 R6", docs)
         self.assertIn("NOR.2 R7", docs)
-        self.assertIn("**SEC.2:** activo en R1; hardening CodeQL del informe imprimible y normalización técnica de GitHub Actions.", readme)
+        self.assertIn("**SEC.2:** R1 cerrado; hardening CodeQL del informe imprimible y normalización técnica de GitHub Actions completados.", readme)
 
     def test_version_no_cambia(self):
         self.assertEqual(

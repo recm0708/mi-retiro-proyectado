@@ -38,7 +38,7 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 - **NOR.2 R6:** cerrado; ledger y datos de alto impacto normalizados.
 - **NOR.2 R7:** cerrado; artefactos locales heredados migrados y depurados.
 - **NOR.2 R8:** cerrado; auditoría integral y cierre formal integrados en `main`.
-- **SEC.2:** activo en R1; hardening CodeQL del informe imprimible y normalización técnica de GitHub Actions.
+- **SEC.2:** R1 cerrado; hardening CodeQL del informe imprimible y normalización técnica de GitHub Actions completados.
 - **Primera versión oficial objetivo:** `1.0.0.0` con `Build 000001`, únicamente después de cerrar todos los gates definidos en el plan maestro.
 
 La visibilidad pública del repositorio **no convierte una beta de desarrollo en versión oficial, no constituye un despliegue de producción y no modifica por sí sola la licencia vigente**.

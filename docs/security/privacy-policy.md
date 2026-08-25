@@ -26,7 +26,7 @@ Estado vigente:
 - NOR.1 y NOR.2 están cerrados.
 - DOC.1 R2 está cerrado tras auditar la documentación Markdown posterior a NOR.2 sin modificar por sí solo el tratamiento material de datos.
 - `VERSION` permanece en `0.0.71.01-beta`.
-- SEC.2 está activo en R1; esta revisión no modifica por sí sola el tratamiento material de datos.
+- SEC.2 R1 quedó cerrado; esta revisión no modificó el tratamiento material de datos.
 - La aplicación sigue siendo independiente y no oficial.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 

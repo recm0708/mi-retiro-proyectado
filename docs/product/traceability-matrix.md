@@ -26,7 +26,7 @@ Estado documental actual:
 - NOR.2 R7 está cerrado.
 - NOR.2 R8 está cerrado e integrado mediante PR #74.
 - NOR.2 está cerrado después de completar R1–R8.
-- SEC.2 está activo en R1 con hardening CodeQL y normalización técnica de workflows.
+- SEC.2 R1 quedó cerrado con hardening CodeQL y normalización técnica de workflows.
 
 Esta matriz debe distinguir trazabilidad histórica de estado vigente.
 <!-- DOC1-R1-POST-MANT1:END -->
@@ -177,4 +177,4 @@ Los estados `Candidato` deben promoverse a `Verificado` únicamente después del
 | Normalizar nombres de GitHub Actions | cuatro workflows técnicos en inglés | regresión SEC.2 R1 |
 | Preservar comportamiento de exportación | pruebas UX.4.6h | `test_ux46h_r1_resultados_exportacion.py` |
 | Mantener versión sin promoción | `VERSION = 0.0.71.01-beta` | gate integral |
-| Confirmar corrección remota | CodeQL del PR | pendiente |
+| Confirmar corrección remota | CodeQL del PR integrado | Verificado SEC.2 R1 |
