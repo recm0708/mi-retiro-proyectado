@@ -127,7 +127,11 @@ class TestNOR2R7LocalArtifacts(unittest.TestCase):
             readme,
         )
         self.assertIn(
-            "**NOR.2 R8:** activo",
+            "**NOR.2 R8:** cerrado",
+            readme,
+        )
+        self.assertIn(
+            "**NOR.2:** cerrado",
             readme,
         )
         self.assertIn(
@@ -137,6 +141,7 @@ class TestNOR2R7LocalArtifacts(unittest.TestCase):
 
         self.assertIn("NOR.2 R7", docs)
         self.assertIn("NOR.2 R8", docs)
+        self.assertIn("SEC.2 queda habilitado para reanudación", docs)
 
         version = (
             ROOT / "VERSION"
