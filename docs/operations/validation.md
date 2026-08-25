@@ -898,11 +898,10 @@ Resultados observados:
 - `VERSION`: **`0.0.71.01-beta`**;
 - `APP_VERSION`: **`0.0.71.01-beta`**.
 
-R7 permanece activo únicamente hasta completar commit, Pull Request, CI,
+En ese checkpoint, R7 permanecía activo únicamente hasta completar commit, Pull Request, CI,
 integración en `main` y verificación post-merge.
 
-Después de R7 continúa **NOR.2 R8 — auditoría integral y cierre formal**.
-SEC.2 permanece pausado hasta completar R8.
+Después de R7 continuaba **NOR.2 R8 — auditoría integral y cierre formal** y SEC.2 permanecía pausado hasta completar R8. Ambos estados son históricos; NOR.2 y SEC.2 están cerrados en el estado vigente.
 <!-- NOR2-R7-VALIDATION:END -->
 
 
@@ -947,8 +946,7 @@ Regresiones ejecutadas hasta este checkpoint:
 El gate integral local quedó completo: **1034 pruebas + 4905 subtests** en
 `pytest`, **994 tests** en `unittest`, `pip check`, `compileall`, los **18 archivos JavaScript** y `git diff --check` quedaron en **OK**. Permanecen pendientes pre-commit, PR, CI, integración y verificación post-merge.
 
-R8 permanece activo hasta completar dichos gates e integrarse en `main`.
-SEC.2 permanece pausado hasta el cierre formal de NOR.2.
+En ese checkpoint, R8 permanecía activo hasta completar dichos gates e integrarse en `main`, y SEC.2 permanecía pausado hasta el cierre formal de NOR.2. El estado vigente posterior registra ambos bloques como cerrados.
 <!-- NOR2-R8-VALIDATION:END -->
 
 ## Validación DOC.1 R2
@@ -1026,3 +1024,21 @@ Checkpoint local confirmado:
 
 SEC.2 R1 completó PR, CI, CodeQL, integración y verificación post-merge.
 <!-- SEC2-R1-VALIDATION:END -->
+
+## AUD.SEC2 R1 — validación post-cierre
+
+La auditoría del snapshot `4bd7d8d` añadió regresiones para:
+
+- exigir que `MRP_ADMIN_ENABLED` bloquee GET/POST del login y no pueda ser
+  sustituido por una sesión previa;
+- permitir fallback de cookie únicamente ante ausencia de Bearer (`401`), nunca
+  ante un `403` de política;
+- usar POST para logout;
+- aplicar `Cache-Control: no-store` a `/dev/`;
+- proteger la reconciliación G001–G108, el snapshot G070 y el candidato G109;
+- verificar el inventario de 140 Markdown auditados individualmente.
+
+La suite focal SEC.2 del paquete fue ejecutada con **33 pruebas en OK**. La suite
+integral del entorno de auditoría quedó limitada por una discrepancia externa de
+`pypdf` (entorno 5.9.0 frente al pin del proyecto 6.16.1); por ello el gate final
+debe ejecutarse en el `.venv` del repositorio antes del commit firmado.

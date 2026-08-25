@@ -6,7 +6,7 @@
 **Versión base histórica preservada:** `0.0.23-beta`
 **Base documental preservada:** GOV.1.3 R3 — 2026-08-17
 **Revisión transversal histórica:** repositorio público y controles GitHub — 2026-08-19
-**Última revisión documental:** PLAN.1 R3A — 2026-08-20
+**Última revisión documental:** AUD.SEC2 R1 — 2026-08-25
 **Clasificación:** Seguridad / Privacidad / Técnica
 **Revisión externa:** Pendiente antes de la primera versión oficial o de cualquier despliegue remoto que cambie el modelo de riesgo
 
@@ -95,6 +95,8 @@ Developer Diagnostics registra únicamente metadata agregada de cache, cantidad 
 
 La aplicación no implementa cookies propias de publicidad, analítica, seguimiento ni perfilado.
 
+La superficie administrativa sí utiliza `mrp_admin_session`, una cookie técnica `HttpOnly` de sesión temporal cuando `MRP_ADMIN_ENABLED=1`. No transporta información previsional; `SameSite` es configurable y `Secure` debe activarse en HTTPS interno.
+
 Tampoco incorpora herramientas de analítica o telemetría de producto.
 
 Developer Diagnostics es una herramienta local de desarrollo y no un mecanismo de seguimiento de usuarios.
@@ -163,7 +165,7 @@ GOV.1.5 completó internamente el threat model, los procedimientos de derechos/i
 - revisión jurídica externa de textos, privacidad, licencia y publicación de producto;
 - hardening y configuración de producción para un despliegue remoto concreto;
 - auditoría de seguridad adicional si cambia la arquitectura, persistencia, red o modelo multiusuario;
-- cierre de SEC.2 y REV.1 en los términos definidos por el plan maestro.
+- REV.1 y la revisión jurídica/seguridad final en los términos definidos por el plan maestro; SEC.2 ya está cerrado después de R1–R6.
 
 ## 12.1. Cierre interno GOV.1.5
 
@@ -195,3 +197,11 @@ No afirma:
 La revisión de GOV.1.5 se originó sobre `0.0.23-beta`. La posterior apertura pública del repositorio y PLAN.1 no reescriben ese cierre; actualizan únicamente el estado vivo y los gates futuros.
 
 `docs/archive/regulatory-privacy/SEGURIDAD_PRIVACIDAD_PRE_GOV1_3_R3.md`
+
+## Controles administrativos post-SEC.2
+
+`MRP_ADMIN_ENABLED` es la condición primaria de disponibilidad de la superficie
+administrativa. El secreto se obtiene de `MRP_ADMIN_SECRET` (o compatibilidad
+`MRP_ADMIN_TOKEN`) y nunca se versiona. AUD.SEC2 R1 garantiza que el login POST
+y las sesiones existentes respeten el kill switch, que el logout sea POST y que
+`/dev/` use `Cache-Control: no-store`.

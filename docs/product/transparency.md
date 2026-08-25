@@ -22,7 +22,7 @@ Estado vigente:
 - NOR.1 y NOR.2 están cerrados.
 - DOC.1 R2 está cerrado tras auditar integralmente la documentación Markdown posterior a NOR.2.
 - `VERSION` permanece en `0.0.71.01-beta`.
-- SEC.2 R1 quedó cerrado con hardening técnico sin cambiar las reglas previsionales.
+- SEC.2 quedó cerrado después de R1–R6 sin cambiar reglas previsionales; AUD.SEC2 R1 corrige seguridad administrativa y trazabilidad sin alterar motores.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 
 Mi Retiro Proyectado es una herramienta independiente de estimación previsional. Este documento delimita qué puede afirmarse sobre el producto y qué debe permanecer explícitamente como aproximación, limitación o pendiente.
@@ -138,7 +138,7 @@ Como evidencia del checkpoint anterior se conserva la formulación: **no declara
 
 Como evidencia histórica también se conserva la formulación **“cierre de UX.4.6e y del alcance funcional UX.4.6f–h”**, que en aquella revisión describía trabajo todavía pendiente. Esa frase se mantiene únicamente para preservar la trazabilidad documental y **ya no representa el estado vigente**.
 
-UX.4.6e cerró en `0.0.25-beta`; UX.4.6f, UX.4.6g, UX.4.6h y UX.4.6i están cerrados sobre `0.0.26-beta`. El bloque funcional activo es DEV.2 — Centro de desarrollo; después continúan SEC.2, DOC.2, PERSIST.1, REP.1, A11Y.2, REV.1, QA.1 y REL.1 conforme al plan maestro.
+UX.4.6e–UX.4.6i y DEV.2 están cerrados; SEC.2 cerró después de R1–R6. AUD.SEC2 R1 es el checkpoint transversal actual y, una vez aceptado, continúan DOC.2, PERSIST.1, REP.1, A11Y.2, REV.1, QA.1 y REL.1 conforme al plan maestro.
 
 Continúan pendientes, según corresponda:
 

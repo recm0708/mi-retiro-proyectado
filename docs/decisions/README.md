@@ -6,9 +6,9 @@
 **Base documental histórica:** `0.0.23-beta` — GOV.1.3 R4 — 2026-08-17
 **Revisión documental:** GOV.1.3 R4 — 2026-08-17
 **Última actualización de gobierno:** PLAN.1 / ADR-168 — 2026-08-20
-**Última actualización técnica:** UX.4.6i R1.4 / ADR-178 — 2026-08-21
+**Última actualización técnica:** VER.2 / ADR-179; reconciliación AUD.SEC2 R1 — 2026-08-25
 **Clasificación:** Técnica / Gobierno / Auditoría
-**ADR indexadas:** 178 (`ADR-001` a `ADR-178`)
+**ADR indexadas:** 179 (`ADR-001` a `ADR-179`)
 
 
 <!-- DOC1-R1-REVISION-MANUAL:START -->
@@ -25,7 +25,7 @@ Estado vigente para lectura transversal:
 - DOC.1 R2 está cerrado como auditoría de la documentación Markdown vigente posterior a NOR.2.
 - Las decisiones históricas no se reescriben como si hubieran sido tomadas en una revisión posterior.
 - `VERSION` permanece en `0.0.71.01-beta`; `v0.0.26-beta` se conserva como referencia legacy histórica.
-- SEC.2 R1 quedó cerrado.
+- SEC.2 quedó cerrado después de R1–R6; AUD.SEC2 R1 reconcilia la trazabilidad revision-aware sin reescribir decisiones históricas.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 
 Este registro conserva decisiones de arquitectura, modelado, UX, precisión, seguridad y aplicación normativa. Una ADR explica por qué el proyecto adoptó una decisión; no crea una norma jurídica.
@@ -229,6 +229,7 @@ R4 **no inventa un estado retroactivo** para esas decisiones. El índice las mar
 | ADR-176 | Los campos de fecha usan validación calendárica transversal y ancho compacto | Aceptada para UX.4.6g R1 |
 | ADR-177 | Los bloques comparables conservan alineación y densidad visual en escritorio | Aceptada para UX.4.6g R1.4.3 |
 | ADR-178 | La guía pública explica parámetros versionados sin convertirse en un segundo motor | Aceptada para UX.4.6i R1–R1.4 |
+| ADR-179 | El versionado beta usa un ledger de estados aceptados y no cuenta commits como revisiones | Aceptada; reconciliada post-G070 en AUD.SEC2 R1 |
 
 ## 4. Registro íntegro de ADR
 
@@ -1980,3 +1981,15 @@ La guía reutiliza `construir_catalogo_metodologia()` para las fuentes oficiales
 **Refinamiento R1.2:** la guía se incorpora también a la navegación principal con estado activo propio y hace explícita la transformación de datos entre los Pasos 1–6. Las tablas extensas de factores se compactan únicamente mediante CSS responsive y los importes de esta guía usan separador de miles y dos decimales; estos cambios no modifican parámetros, fórmulas ni resultados.
 
 **Refinamiento R1.3:** la explicación conserva cada fórmula general y añade debajo una sustitución numérica marcada como ejemplo. Los términos previsionales se definen dentro de la sección donde se utilizan, evitando un glosario aislado y evitando también replicarlos todavía por todo el asistente. El espaciado de tablas, notas y fuentes se ajusta con tokens semánticos; no se modifica ningún motor ni parámetro normativo.
+
+
+## ADR-179 — El versionado beta usa un ledger de estados aceptados y no cuenta commits como revisiones
+
+**Estado:** Aceptada; reconciliada documentalmente por AUD.SEC2 R1.
+**Fecha:** 2026-08-21; reconciliación 2026-08-25.
+
+**Decisión:** durante la etapa beta, los estados nuevos usan `0.GG.RR.EE-beta` y el contador global consume únicamente estados materialmente distintos y aceptados. Commits, PR, squash, CI y tags son evidencia del estado, no revisiones adicionales por sí solos.
+
+La segunda pasada de VER.2 fijó G070 sobre `7037addd`. AUD.SEC2 R1 reconstruye los estados posteriores hasta G108, preserva `v0.0.71.01-beta` como tag publicado e inmutable con anomalía histórica de numeración y reserva G109/E01 (`0.1.09.01-beta`) para el saneamiento post-SEC.2.
+
+El detalle, alternativas y evidencia completa permanecen en [`adr-179-revision-aware-versioning.md`](adr-179-revision-aware-versioning.md).

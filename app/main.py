@@ -260,7 +260,10 @@ async def agregar_cabeceras_defensivas(request: Request, call_next):
 
     # Las respuestas del asistente pueden contener datos personales, salariales
     # o previsionales. Se evita su reutilización desde la caché HTTP.
-    if request.url.path.startswith("/api/simulacion/"):
+    if (
+        request.url.path.startswith("/api/simulacion/")
+        or request.url.path.startswith("/dev/")
+    ):
         respuesta.headers["Cache-Control"] = "no-store"
 
     return respuesta
@@ -419,12 +422,18 @@ async def como_se_calcula(
     response_class=HTMLResponse,
 )
 async def login_administrativo(request: Request):
-    """Muestra el acceso administrativo web."""
+    """Muestra el acceso administrativo web cuando está habilitado."""
 
     if not administracion_activa():
         raise HTTPException(
             status_code=403,
             detail="Superficie administrativa no disponible.",
+        )
+
+    if not autenticacion_admin_habilitada():
+        raise HTTPException(
+            status_code=403,
+            detail="Autenticación administrativa no configurada.",
         )
 
     return templates.TemplateResponse(
@@ -446,6 +455,12 @@ async def procesar_login_administrativo(
     token: str = Form(...),
 ):
     """Valida credenciales y crea sesión administrativa."""
+
+    if not administracion_activa():
+        raise HTTPException(
+            status_code=403,
+            detail="Superficie administrativa no disponible.",
+        )
 
     if not autenticacion_admin_habilitada():
         raise HTTPException(
@@ -483,7 +498,7 @@ async def procesar_login_administrativo(
     return respuesta
 
 
-@app.get("/dev/logout")
+@app.post("/dev/logout")
 async def logout_administrativo(request: Request):
     """Cierra la sesión administrativa web activa."""
 
@@ -528,17 +543,21 @@ async def centro_desarrollo(
     except HTTPException as error:
         sesion = request.cookies.get("mrp_admin_session")
 
-        if not (
+        sesion_web_valida = (
             sesion
-            and error.status_code in (401, 403)
+            and error.status_code == 401
+            and administracion_activa()
+            and autenticacion_admin_habilitada()
             and validar_sesion_admin(sesion)
-        ):
+        )
+
+        if not sesion_web_valida:
             acepta_html = "text/html" in request.headers.get(
                 "accept",
                 "",
             ).lower()
 
-            if acepta_html:
+            if acepta_html and error.status_code == 401:
                 return RedirectResponse(
                     url="/dev/login",
                     status_code=303,

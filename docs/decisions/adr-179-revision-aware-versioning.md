@@ -1,6 +1,6 @@
 # ADR-179 — El versionado beta usa un ledger de estados aceptados y no cuenta commits como revisiones
 
-**Estado:** Aceptada; actualizada documentalmente por DEV.2 R4 sin promover versión ni tag.
+**Estado:** Aceptada; reconciliada documentalmente por AUD.SEC2 R1 sin reescribir tags publicados.
 **Fecha:** 2026-08-21
 **Ámbito:** Gobierno / Versionado / Release / Trazabilidad
 
@@ -35,9 +35,9 @@ Donde:
 - los commits `feat/test/docs` de la misma revisión no consumen números adicionales;
 - PR, squash, CI y tag son evidencia de aceptación, no revisiones por sí mismos.
 
-La base `7037addd44253e528c77460b678d2b3ccd540dd5` queda auditada en **G057**. VER.2 R1 reserva **G058/E01**, es decir `0.0.58.01-beta`, y solo lo consume después del gate completo e integración.
+La formulación inicial de esta ADR situó provisionalmente `7037addd44253e528c77460b678d2b3ccd540dd5` en **G057** y reservó G058/E01. La segunda pasada de VER.2 corrigió posteriormente esa base a **G070**; AUD.SEC2 R1 mantiene ambas evidencias y reconcilia los estados aceptados posteriores hasta **G108**.
 
-Los identificadores revision-aware de G001–G057 son de auditoría. Los tags legacy `v0.0.1-beta`–`v0.0.26-beta` permanecen firmados e inmutables; no se crean tags revision-aware retrospectivos.
+Los identificadores revision-aware reconstruidos son de auditoría y no autorizan tags retroactivos. Los tags legacy `v0.0.1-beta`–`v0.0.26-beta` permanecen firmados e inmutables; no se crean tags revision-aware retrospectivos.
 
 La primera versión oficial continúa siendo `1.0.0.0` con `Build 000001` después de los gates del plan maestro.
 
@@ -88,3 +88,21 @@ Descartada porque falsearía la publicación histórica y rompería la política
 - `docs/archive/governance/REGISTRO_CAMBIOS_HISTORICO.md`;
 - bitácoras y auditorías UX/GOV/PLAN conservadas;
 - PR #35 de VER.2.
+
+## Reconciliación 2026-08-25 — AUD.SEC2 R1
+
+La promoción `v0.0.71.01-beta` se realizó sobre un ledger cuya base canónica
+terminaba en G070 y que no había incorporado estados aceptados de DEV.2,
+MANT.1 y DOC.1 ya existentes antes de VER.2. La reconstrucción completa,
+extendida después a NOR.1, NOR.2, DOC.1 R2 y SEC.2, fija el árbol `4bd7d8d` en
+**G108**.
+
+El estado promovido históricamente como `0.0.71.01-beta` corresponde por orden
+cronológico a **G087**. El tag publicado permanece inmutable: no se mueve, no se
+borra y no se sustituye. La corrección se aplica al ledger y a la numeración
+futura. G109/E01 (`0.1.09.01-beta`) queda reservado para AUD.SEC2 R1 y no se
+considera aceptado hasta superar su gate e integración.
+
+Evidencia: `docs/audits/governance/post-g070-revision-reconciliation.md` y el
+snapshot G070 preservado en
+`docs/archive/governance/pre-1-0-revision-ledger-g070.json`.

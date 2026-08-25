@@ -3,7 +3,7 @@
 **Proyecto:** Mi Retiro Proyectado
 **Estado:** vigente desde GOV.1.2
 **Fecha de adopción:** 2026-08-18
-**Última revisión:** PLAN.1 / ADR-168 — 2026-08-20
+**Última revisión:** AUD.SEC2 R1 — reconciliación post-SEC.2 — 2026-08-25
 
 
 <!-- DOC1-R1-POST-MANT1:START -->
@@ -23,7 +23,7 @@ Estado vigente:
 - NOR.1 está cerrado.
 - NOR.2 está cerrado después de completar R1–R8.
 - DOC.1 R2 está cerrado como auditoría integral Markdown post-NOR.2.
-- SEC.2 R1 quedó cerrado como bloque inicial de hardening.
+- SEC.2 quedó cerrado después de R1–R6; AUD.SEC2 R1 reconcilia el estado post-cierre, corrige el kill switch administrativo y preserva la trazabilidad de la anomalía de numeración del tag `v0.0.71.01-beta`.
 <!-- DOC1-R1-POST-MANT1:END -->
 
 ## 1. Propósito
@@ -136,7 +136,7 @@ La política aplicable está en `VERSIONING.md`.
 
 - `VERSION` es la fuente canónica.
 - Los tags formales empiezan con `v`.
-- Durante la etapa beta, la familia vigente es `0.0.N-beta`.
+- La familia `0.0.N-beta` es legacy histórica; los estados beta nuevos usan `0.GG.RR.EE-beta` conforme a VER.2 y al ledger reconciliado.
 - La primera versión oficial objetivo es `1.0.0.0`, después de cerrar todos los gates del plan maestro.
 - Las versiones oficiales usan `MAYOR.MENOR.PARCHE.REVISIÓN`; la cuarta posición identifica una revisión/hotfix.
 - El Build es un identificador independiente de seis dígitos para artefactos oficiales reproducibles; no forma parte de `VERSION` ni del tag y no se incrementa por commit.

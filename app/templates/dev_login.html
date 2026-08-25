@@ -5,7 +5,8 @@
 <h1>Acceso administrativo</h1>
 {% if error %}<p>{{ error }}</p>{% endif %}
 <form method="post" action="/dev/login">
-<input type="password" name="token">
+<label for="admin-token">Credencial administrativa</label>
+<input id="admin-token" type="password" name="token" autocomplete="current-password" required>
 <button type="submit">Ingresar</button>
 </form>
 </body>

@@ -25,25 +25,27 @@ class TestVer2LedgerEstructurado(unittest.TestCase):
     def setUpClass(cls):
         cls.ledger = cargar_ledger()
 
-    def test_json_es_valido_y_declara_setenta_estados_aceptados(self):
+    def test_json_es_valido_y_declara_reconciliacion_post_g070(self):
         self.assertTrue(LEDGER_FILE.is_file())
-        self.assertEqual(70, self.ledger["accepted_count"])
-        self.assertEqual(70, len(self.ledger["entries"]))
-        self.assertEqual(71, self.ledger["next_global_if_ver2_accepted"])
-        self.assertEqual("0.0.71.01-beta", self.ledger["next_candidate"])
+        self.assertEqual(108, self.ledger["accepted_count"])
+        self.assertEqual(108, len(self.ledger["entries"]))
+        self.assertEqual(109, self.ledger["next_global_if_ver2_accepted"])
+        self.assertEqual("0.1.09.01-beta", self.ledger["next_candidate"])
 
     def test_globales_son_contiguos_y_ids_coinciden(self):
         globales = [entry["global_revision"] for entry in self.ledger["entries"]]
-        self.assertEqual(list(range(1, 71)), globales)
-        self.assertEqual("0.0.70.02-beta", self.ledger["entries"][-1]["revision_aware"])
+        self.assertEqual(list(range(1, 109)), globales)
+        self.assertEqual("0.1.08.06-beta", self.ledger["entries"][-1]["revision_aware"])
 
-    def test_markdown_y_matriz_declaran_g070(self):
+    def test_markdown_preserva_g070_y_documenta_reconciliacion(self):
         ledger_md = LEDGER_MD.read_text(encoding="utf-8")
         matriz = MATRIZ.read_text(encoding="utf-8")
         self.assertIn("**G070**", ledger_md)
         self.assertIn("G070 | `0.0.70.02-beta`", ledger_md)
         self.assertIn("**Total aceptado antes de VER.2** | **70**", matriz)
-        self.assertIn("**G071**", ledger_md)
+        self.assertIn("G071–G108", ledger_md)
+        self.assertIn("**G109**", ledger_md)
+        self.assertIn("`0.1.09.01-beta`", ledger_md)
         self.assertIn("`0.0.71.01-beta`", ledger_md)
 
     def test_exclusiones_clave_se_preservan(self):
@@ -75,7 +77,7 @@ class TestVer2LedgerEstructurado(unittest.TestCase):
 
     def test_validador_rechaza_siguiente_global_incorrecto(self):
         alterado = deepcopy(self.ledger)
-        alterado["next_global_if_ver2_accepted"] = 72
+        alterado["next_global_if_ver2_accepted"] = 999
         with self.assertRaises(LedgerRevisionError):
             validar_ledger(alterado)
 

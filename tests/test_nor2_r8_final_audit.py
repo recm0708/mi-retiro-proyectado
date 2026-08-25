@@ -113,7 +113,7 @@ class TestNOR2R8FinalAudit(unittest.TestCase):
             APP_VERSION,
         )
 
-    def test_ledger_permanece_canonico_e_inmutable(self):
+    def test_ledger_canonico_preserva_prefijo_historico_y_puede_evolucionar(self):
         new = (
             ROOT
             / "data"
@@ -144,17 +144,17 @@ class TestNOR2R8FinalAudit(unittest.TestCase):
         )
 
         self.assertEqual(
-            70,
+            108,
             raw["accepted_count"],
         )
 
         self.assertEqual(
-            70,
+            108,
             len(raw["entries"]),
         )
 
         self.assertEqual(
-            list(range(1, 71)),
+            list(range(1, 109)),
             [
                 item["global_revision"]
                 for item in raw["entries"]
@@ -162,77 +162,31 @@ class TestNOR2R8FinalAudit(unittest.TestCase):
         )
 
         self.assertEqual(
-            71,
+            109,
             raw["next_global_if_ver2_accepted"],
         )
 
         self.assertEqual(
-            "0.0.71.01-beta",
+            "0.1.09.01-beta",
             raw["next_candidate"],
         )
 
-    def test_estado_documental_vigente_es_r8(self):
-        readme = (
-            ROOT / "README.md"
-        ).read_text(encoding="utf-8")
-
-        docs = (
-            ROOT / "docs/README.md"
-        ).read_text(encoding="utf-8")
-
+    def test_estado_documental_preserva_r8_y_refleja_estado_posterior(self):
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        docs = (ROOT / "docs/README.md").read_text(encoding="utf-8")
         traceability = (
-            ROOT
-            / "docs/product/traceability-matrix.md"
+            ROOT / "docs/product/traceability-matrix.md"
         ).read_text(encoding="utf-8")
 
-        for text in (
-            readme,
-            docs,
-            traceability,
-        ):
-            self.assertIn(
-                "NOR.2 R7",
-                text,
-            )
-            self.assertIn(
-                "NOR.2 R8",
-                text,
-            )
+        for text in (readme, docs, traceability):
+            self.assertIn("NOR.2", text)
 
-        self.assertIn(
-            "**NOR.2 R7:** cerrado",
-            readme,
-        )
-
-        self.assertIn(
-            "**NOR.2 R8:** cerrado",
-            readme,
-        )
-
-        self.assertIn(
-            "**NOR.2:** cerrado",
-            readme,
-        )
-
-        self.assertIn(
-            "**SEC.2:** R1 cerrado; hardening CodeQL del informe imprimible y normalización técnica de GitHub Actions completados.",
-            readme,
-        )
-
-        self.assertIn(
-            "**NOR.2 R8:** cerrado",
-            docs,
-        )
-
-        self.assertIn(
-            "NOR.2 R8 está cerrado",
-            traceability,
-        )
-
-        self.assertIn(
-            "SEC.2 R1 quedó cerrado",
-            traceability,
-        )
+        self.assertIn("**NOR.2:** cerrado", readme)
+        self.assertIn("SEC.2", readme)
+        self.assertIn("R1–R6", readme)
+        self.assertIn("G108", readme)
+        self.assertIn("AUD.SEC2 R1", docs)
+        self.assertIn("checkpoint histórico de NOR.2", traceability)
 
     def test_ver2_no_figura_como_pendiente_en_estado_vivo(self):
         live = [
@@ -308,7 +262,7 @@ class TestNOR2R8FinalAudit(unittest.TestCase):
             "docs/operations/validation.md": "Validación NOR.2 R8",
             "docs/product/traceability-matrix.md": "Trazabilidad NOR.2 R8",
             "docs/governance/roadmap.md": "NOR.2 R8 — auditoría integral",
-            "docs/governance/master-plan-to-1-0.md": "Actualización NOR.2 R8",
+            "docs/governance/master-plan-to-1-0.md": "NOR.2 R8",
             "docs/README.md": "repository-normalization-final-audit-nor2-r8.md",
         }
 

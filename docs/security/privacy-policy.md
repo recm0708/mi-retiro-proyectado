@@ -9,7 +9,7 @@
 **Base documental:** GOV.1.3 R3 — 2026-08-17
 **Revisión transversal histórica:** GOV.1.5 R3 — 2026-08-18
 **Última revisión documental previa:** PLAN.1 R3B1 — 2026-08-20
-**Última revisión documental:** DOC.1 R2 — 2026-08-24
+**Última revisión documental:** AUD.SEC2 R1 — 2026-08-25
 **Revisión jurídica externa:** Pendiente antes de la primera versión oficial o de un despliegue remoto que cambie el tratamiento
 
 
@@ -26,7 +26,7 @@ Estado vigente:
 - NOR.1 y NOR.2 están cerrados.
 - DOC.1 R2 está cerrado tras auditar la documentación Markdown posterior a NOR.2 sin modificar por sí solo el tratamiento material de datos.
 - `VERSION` permanece en `0.0.71.01-beta`.
-- SEC.2 R1 quedó cerrado; esta revisión no modificó el tratamiento material de datos.
+- SEC.2 quedó cerrado después de R1–R6. La sesión administrativa usa una cookie técnica de seguridad y no modifica la finalidad material de la simulación.
 - La aplicación sigue siendo independiente y no oficial.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 
@@ -159,6 +159,8 @@ No se envían identidad, salarios, cuotas, resultados ni PDF.
 ## 12. Cookies, analítica y publicidad
 
 La aplicación no implementa cookies propias de publicidad, analítica, seguimiento o perfilado.
+
+Cuando la superficie administrativa está habilitada, el login web crea la cookie técnica `mrp_admin_session` para autenticar temporalmente el Centro de desarrollo. Es `HttpOnly`, no contiene datos de simulación ni se usa para publicidad o perfilado; `SameSite` y `Secure` se configuran según el entorno.
 
 No incorpora actualmente telemetría de producto.
 

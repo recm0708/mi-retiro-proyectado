@@ -57,8 +57,8 @@ definida por este estándar.
 NOR.1 definió las reglas y quedó cerrado en R7.
 
 NOR.2 auditó y normalizó el repositorio existente contra estas reglas y quedó
-cerrado después de completar R1–R8. SEC.2 queda habilitado para reanudación,
-pero todavía no se ha iniciado formalmente.
+cerrado después de completar R1–R8. SEC.2 quedó cerrado después de R1–R6;
+AUD.SEC2 R1 aplica nuevamente estos estándares al saneamiento post-cierre.
 
 DOC.1 R2, ya cerrado, incorpora `scripts/audit_markdown.py` como control permanente para
 verificar automáticamente parte de estos estándares en el gate local y en

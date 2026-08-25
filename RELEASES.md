@@ -21,7 +21,7 @@ Estado vigente:
 - DOC.1 R1 está cerrado.
 - NOR.1 y NOR.2 están cerrados.
 - DOC.1 R2 está cerrado como auditoría integral Markdown post-NOR.2.
-- SEC.2 R1 cerrado; esta revisión no constituye una release nueva.
+- SEC.2 quedó cerrado después de R1–R6. La auditoría post-cierre reconcilia el historial G071–G108 y reserva G109 sin declarar una release nueva.
 
 Este documento no crea una release nueva; registra el estado formal ya alcanzado por el repositorio.
 <!-- DOC1-R1-POST-MANT1:END -->
@@ -262,3 +262,13 @@ La transición a `1.0.0.0` depende del cierre de la secuencia definida en `docs/
 
 La línea oficial futura prevista permanece orientada a `1.0.0.0` con Build independiente. Las betas legacy y revision-aware no son la primera versión oficial.
 - `0.0.24-beta` no es una beta pública; conserva el cierre interno de GOV.1 antes de los hitos UX y PLAN posteriores.
+
+## Reconciliación post-G070 — 2026-08-25
+
+La auditoría integral posterior a SEC.2 determinó que el ledger publicado con
+VER.2 se detuvo materialmente en G070 antes de contabilizar estados aceptados de
+DEV.2, MANT.1, DOC.1, NOR.1, NOR.2 y SEC.2. La reconstrucción basada en commits,
+PR y gates reales sitúa `4bd7d8d` en **G108** y reserva **G109/E01** para
+AUD.SEC2 R1. El tag `v0.0.71.01-beta` permanece publicado e inmutable; su número
+no se reescribe aunque el estado que materializó se corresponda cronológicamente
+con G087.

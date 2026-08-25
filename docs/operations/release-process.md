@@ -23,7 +23,7 @@ Para una release posterior se mantiene el criterio vigente:
 - `v0.0.26-beta` permanece como tag legacy histórico e inmutable.
 - VER.2, MANT.1, DOC.1 R1, NOR.1 y NOR.2 están cerrados.
 - DOC.1 R2 está cerrado como auditoría Markdown posterior a NOR.2 y no crea por sí solo una release.
-- SEC.2 R1 quedó cerrado; esta revisión no promovió versión ni creó release.
+- SEC.2 quedó cerrado después de R1–R6. AUD.SEC2 R1 reconcilia G071–G108 y reserva G109; no se promueve versión ni se crea tag hasta aceptar ese estado.
 
 Todo release futuro requiere gate completo, PR/CI, actualización documental coherente, tag y evidencia reproducible.
 <!-- DOC1-R1-POST-MANT1:END -->
@@ -283,3 +283,11 @@ Si un problema se descubre después de publicar un tag, no se reescribe ese tag.
 - La política de tags conserva la inmutabilidad de `v0.0.25-beta` y `v0.0.26-beta`.
 - Todo release con artefacto distribuible debe conservar inventario exacto del artefacto, avisos de terceros y correspondencia entre versión, Build, tag, hashes y contenido publicado.
 - Los releases con artefactos distribuibles deben revisar licencias/NOTICE upstream antes de publicar.
+
+## Reconciliación revision-aware antes de la próxima promoción
+
+Antes de promover el siguiente candidato debe validarse que el ledger vivo
+contenga G001–G108, que G109 sea el siguiente Global y que el snapshot histórico
+G070 conserve su SHA-256. `v0.0.71.01-beta` no se mueve para corregir su
+numeración histórica. AUD.SEC2 R1 solo podrá convertirse en
+`0.1.09.01-beta` después de integración y revalidación del SHA de `main`.

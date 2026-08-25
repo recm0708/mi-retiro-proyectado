@@ -63,6 +63,7 @@ class TestDev2R4CierreFinal(unittest.TestCase):
         self.assertIn("**NOR.2 R6:** cerrado", readme)
         self.assertIn("**NOR.2 R7:** cerrado", readme)
         self.assertIn("**SEC.2:** R1 cerrado; hardening CodeQL del informe imprimible y normalización técnica de GitHub Actions completados.", readme)
+        self.assertIn("**Estado de SEC.2:** cerrado después de R1–R6", readme)
         self.assertIn("DEV.2 cerrado documentalmente en R4", documento)
         self.assertIn("### DEV.2 — cierre del Centro de desarrollo", changelog)
         self.assertIn("cierra documentalmente DEV.2", changelog)
@@ -71,7 +72,7 @@ class TestDev2R4CierreFinal(unittest.TestCase):
     def test_arquitectura_conserva_alcance_tecnico_sin_rutas_publicas_nuevas(self):
         arquitectura = self._leer("docs/architecture/system-architecture.md")
 
-        self.assertIn("**Última actualización técnica:** DEV.2 R4", arquitectura)
+        self.assertIn("**Última actualización técnica:** AUD.SEC2 R1", arquitectura)
         self.assertIn("/dev/centro-desarrollo", arquitectura)
         self.assertIn("no añade rutas públicas nuevas", arquitectura)
         self.assertIn("no modifica motores previsionales", arquitectura)
