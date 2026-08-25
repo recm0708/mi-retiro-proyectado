@@ -21,7 +21,7 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 ## Estado del proyecto
 
 - **Versión canónica vigente:** `0.0.71.01-beta`, obtenida exclusivamente desde [`VERSION`](VERSION).
-- **Último cierre integrado en `main`:** NOR.2 R7 — normalización de artefactos locales, PR #73, commit squash `b8ffd39`.
+- **Último cierre integrado en `main`:** NOR.2 R8 — auditoría integral y cierre formal, PR #74, commit squash `b4df9b7`.
 - **Estado de VER.2:** cerrado; G071/E01 promovido en `VERSION` como `0.0.71.01-beta` y tag `v0.0.71.01-beta` publicado.
 - **Última versión formal legacy:** `0.0.26-beta` — tag firmado e inmutable `v0.0.26-beta`.
 - **Etapa:** desarrollo beta; repositorio público y ejecución orientada actualmente a entorno local.
@@ -31,17 +31,18 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 - **MANT.1:** cerrado.
 - **DOC.1 R1:** cerrado como auditoría documental post-MANT.1.
 - **NOR.1:** cerrado en R7; estándares determinísticos establecidos.
+- **NOR.2:** cerrado después de completar R1–R8 e integrar la auditoría final mediante PR #74.
 - **NOR.2 R4:** cerrado; documentación viva migrada a áreas canónicas.
 - **NOR.2 R5:** cerrado; documentación histórica consolidada en `docs/archive/`.
 - **NOR.2 R6:** cerrado; ledger y datos de alto impacto normalizados.
 - **NOR.2 R7:** cerrado; artefactos locales heredados migrados y depurados.
-- **NOR.2 R8:** activo; auditoría integral y cierre formal de NOR.2.
-- **SEC.2:** pausado hasta completar NOR.2.
+- **NOR.2 R8:** cerrado; auditoría integral y cierre formal integrados en `main`.
+- **SEC.2:** pausado; NOR.2 ya cerró y SEC.2 queda habilitado para reanudación cuando se inicie formalmente.
 - **Primera versión oficial objetivo:** `1.0.0.0` con `Build 000001`, únicamente después de cerrar todos los gates definidos en el plan maestro.
 
 La visibilidad pública del repositorio **no convierte una beta de desarrollo en versión oficial, no constituye un despliegue de producción y no modifica por sí sola la licencia vigente**.
 
-La versión se obtiene exclusivamente del archivo [`VERSION`](VERSION). La política completa se documenta en [`VERSIONING.md`](VERSIONING.md). VER.2 ya completó la promoción G071/E01 y publicó `v0.0.71.01-beta`; su evidencia histórica quedó reorganizada y preservada por NOR.2 sin perder trazabilidad. Los estándares vigentes del repositorio están en [`docs/standards/`](docs/standards) y la normalización activa se documenta en [`docs/audits/repository/`](docs/audits/repository).
+La versión se obtiene exclusivamente del archivo [`VERSION`](VERSION). La política completa se documenta en [`VERSIONING.md`](VERSIONING.md). VER.2 ya completó la promoción G071/E01 y publicó `v0.0.71.01-beta`; su evidencia histórica quedó reorganizada y preservada por NOR.2 sin perder trazabilidad. Los estándares vigentes del repositorio están en [`docs/standards/`](docs/standards) y el cierre de la normalización se documenta en [`docs/audits/repository/`](docs/audits/repository).
 
 ## Capacidades implementadas
 
@@ -102,7 +103,7 @@ Documentos principales:
 - [`docs/security/third-party-deployment-assessment.md`](docs/security/third-party-deployment-assessment.md) — terceros, TLS y gates de despliegue;
 - [`SECURITY.md`](SECURITY.md) — reporte responsable de vulnerabilidades;
 - [`docs/archive/governance/AUDITORIA_GITHUB.md`](docs/archive/governance/AUDITORIA_GITHUB.md) — controles GitHub y auditoría automática;
-- [`docs/operations/github-public-repository.md`](docs/operations/github-public-repository.md) — metadata, topics, labels, badges, seguridad y mantenimiento del repositorio público;
+- [`docs/operations/github-public-repository.md`](docs/operations/github-public-repository.md) — metadata, topics, labels, badges, Social Preview y seguridad del repositorio público;
 - [`docs/archive/governance/AUDITORIA_REPOSITORIO_2026-08-18.md`](docs/archive/governance/AUDITORIA_REPOSITORIO_2026-08-18.md) — auditoría integral post-GOV.1 del repositorio;
 - [`docs/archive/ux/AUDITORIA_UX46E_R7_2026-08-18.md`](docs/archive/ux/AUDITORIA_UX46E_R7_2026-08-18.md) — auditoría transversal de coherencia de UX.4.6e;
 - [`docs/archive/governance/CIERRE_GOV1.md`](docs/archive/governance/CIERRE_GOV1.md) — auditoría final y decisión de cierre de GOV.1;
@@ -288,7 +289,7 @@ Consultar:
 - [`.github/CODEOWNERS`](.github/CODEOWNERS) — propiedad de revisión;
 - [`docs/decisions/README.md`](docs/decisions/README.md) — ADR;
 - [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md) — normas de participación;
-- [`SUPPORT.md`](SUPPORT.md) — rutas de soporte y reporte.
+- [`SUPPORT.md`](SUPPORT.md) — rutas de consulta y reporte.
 
 ## Licencia
 
