@@ -1,8 +1,8 @@
 # DEV.2 R1/R2/R3/R4 — Centro de desarrollo
 
-**Estado:** DEV.2 cerrado documentalmente en R4.
+**Estado general:** DEV.2 cerrado documentalmente en R4.
 
-**Estado:** R1 integrado en `main` mediante PR #37.
+**Estado R1:** integrado en `main` mediante PR #37.
 
 **Estado R1 documental:** integrado en `main` mediante PR #38.
 
@@ -18,10 +18,13 @@ DEV.2 queda preservado como bloque funcional cerrado. Sus referencias a VER.2 o 
 
 Estado vigente:
 
-- DEV.2 no es el bloque activo actual.
+- DEV.2 está cerrado y no es el bloque activo actual.
 - MANT.1 quedó cerrado operativamente en R7.
-- DOC.1 R1 es el bloque documental activo para actualización Markdown post-MANT.1.
-- `VERSION` permanece en `0.0.26-beta`.
+- DOC.1 R1 está cerrado.
+- NOR.1 y NOR.2 están cerrados.
+- DOC.1 R2 está cerrado como revisión documental integral posterior a NOR.2.
+- `VERSION` permanece en `0.0.71.01-beta`.
+- SEC.2 queda habilitado para reanudación, pero todavía no se ha iniciado formalmente.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 
 DEV.2 abre y cierra una superficie interna y local para revisar el estado técnico

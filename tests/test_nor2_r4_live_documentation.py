@@ -25,15 +25,41 @@ def parse_moves():
 
 MOVES = parse_moves()
 
+RETIRED_COMPATIBILITY_STUBS = {
+    "docs/product/user-interface.md":
+        "docs/archive/ux/UX_4_6A_REDISENO_VISUAL.md",
+    "docs/product/workflow-step-1-personal-data.md":
+        "docs/archive/ux/UX_4_6B_PASO1_DATOS_PERSONALES.md",
+    "docs/product/workflow-step-2-contributions.md":
+        "docs/archive/ux/UX_4_6C_PASO2_CUOTAS.md",
+    "docs/product/workflow-step-3-salary-history.md":
+        "docs/archive/ux/UX_4_6D_PASO3_HISTORIAL.md",
+}
+
 
 class TestNOR2R4LiveDocumentation(unittest.TestCase):
 
-    def test_43_rutas_migradas(self):
+    def test_43_rutas_migradas_y_estado_posterior_preservado(self):
         self.assertEqual(43, len(MOVES))
+        self.assertEqual(4, len(RETIRED_COMPATIBILITY_STUBS))
+
         for old, new in MOVES.items():
             with self.subTest(old=old, new=new):
                 self.assertFalse((ROOT / old).exists(), old)
-                self.assertTrue((ROOT / new).is_file(), new)
+
+                if new in RETIRED_COMPATIBILITY_STUBS:
+                    historico = RETIRED_COMPATIBILITY_STUBS[new]
+
+                    self.assertFalse(
+                        (ROOT / new).exists(),
+                        f"stub de compatibilidad todavía presente: {new}",
+                    )
+                    self.assertTrue(
+                        (ROOT / historico).is_file(),
+                        f"snapshot histórico ausente: {historico}",
+                    )
+                else:
+                    self.assertTrue((ROOT / new).is_file(), new)
 
     def test_areas_documentales_canonicas_existen(self):
         docs = ROOT / "docs"

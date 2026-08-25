@@ -11,7 +11,8 @@
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado post-MANT.1
 
-La trazabilidad vigente incorpora los cierres de MANT.1, DOC.1, VER.2 y NOR.2.
+La trazabilidad vigente incorpora los cierres de MANT.1, DOC.1 R1, DOC.1 R2,
+VER.2 y NOR.2.
 
 Estado documental actual:
 
@@ -19,6 +20,8 @@ Estado documental actual:
 - MANT.1 R6 validó funcionalmente el repositorio después de renombres.
 - MANT.1 R7 cerró operativamente el bloque en `main`.
 - DOC.1 R1 está cerrado y su documentación viva quedó consolidada.
+- DOC.1 R2 está cerrado como auditoría integral Markdown post-NOR.2 y deja
+  controles permanentes locales y remotos.
 - VER.2 G071/E01 está cerrado y publicado como `v0.0.71.01-beta`.
 - NOR.2 R7 está cerrado.
 - NOR.2 R8 está cerrado e integrado mediante PR #74.
@@ -147,3 +150,19 @@ Los estados `Candidato` deben promoverse a `Verificado` únicamente después del
 | Sincronizar estado vivo de NOR.2 | R7 cerrado / R8 cerrado / NOR.2 cerrado / SEC.2 habilitado para reanudación | `test_estado_documental_vigente_es_r8` |
 | Eliminar contradicciones vigentes de VER.2/NOR.1/NOR.2 | barrido post-corrección: 0 hallazgos | `test_ver2_no_figura_como_pendiente_en_estado_vivo` |
 <!-- NOR2-R8-TRACEABILITY:END -->
+
+## Trazabilidad DOC.1 R2
+
+| Objetivo / control | Evidencia | Regresión o validación |
+|---|---|---|
+| Auditar integralmente el Markdown post-NOR.2 | `docs/audits/documentation/documentation-markdown-audit-doc1-r2.md` | `scripts/audit_markdown.py` |
+| Normalizar metadata de documentación vigente | documentos vivos revisados contra `VERSION` | `tests/test_markdown_audit.py` |
+| Preservar verdad histórica | `docs/archive/` y `docs/audits/` mantienen versiones, rutas y estados históricos válidos | `tests/test_markdown_audit.py` |
+| Retirar stubs documentales sin consumidor externo | cuatro rutas de `docs/product/` retiradas | `tests/test_gov13_documentacion.py`, `tests/test_nor2_r4_live_documentation.py` |
+| Proteger enlaces locales vigentes | auditor permanente según clasificación documental | `scripts/audit_markdown.py` |
+| Evitar bloques Markdown sin cerrar | regla `BLOQUE_CODIGO_SIN_CERRAR` | `tests/test_markdown_audit.py` |
+| Integrar auditoría al gate local | `scripts/validate_precommit.py` | `tests/test_precommit_guard.py` |
+| Mantener documentación de scripts sincronizada | `scripts/README.md` | `tests/test_mant1_scripts_hooks_documentados.py` |
+| Ejecutar auditoría remota | `.github/workflows/markdown-audit.yml` | `tests/test_markdown_audit.py` |
+| Mantener versión sin promoción | `VERSION = 0.0.71.01-beta` | auditor Markdown + gate integral |
+| Mantener SEC.2 sin inicio prematuro | roadmap, plan maestro y documentación transversal | barrido documental final |

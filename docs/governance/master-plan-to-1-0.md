@@ -16,6 +16,7 @@ funcionales al plan de 14 bloques.
 
 - **NOR.1:** cerrado en R7; estándares determinísticos establecidos.
 - **NOR.2:** cerrado en R8 mediante PR #74; normalización integral completada.
+- **DOC.1 R2:** auditoría integral Markdown post-NOR.2 cerrada; documentación vigente, evidencia histórica y controles permanentes quedaron reconciliados.
 - **SEC.2:** siguiente bloque; habilitado para reanudación, aún no iniciado formalmente.
 
 La separación evita que SEC.2 cree nuevas rutas, archivos o estructuras sobre
@@ -64,7 +65,8 @@ Estado vigente:
 - `v0.0.26-beta` permanece como tag legacy histórico e inmutable; VER.2 publicó formalmente `v0.0.71.01-beta`.
 - VER.2 está cerrado; G071/E01 fue promovido y publicado como `v0.0.71.01-beta`.
 - MANT.1 está cerrado operativamente.
-- DOC.1 R1 está cerrado; la documentación Markdown vigente quedó actualizada y separada de la evidencia histórica.
+- DOC.1 R1 está cerrado.
+- DOC.1 R2 queda cerrado como auditoría integral Markdown post-NOR.2, con controles locales y remotos permanentes.
 - NOR.1 y NOR.2 están cerrados; R8 quedó integrado mediante PR #74.
 - SEC.2 es el siguiente bloque habilitado para reanudación y aún no se ha iniciado formalmente.
 - La meta `1.0.0.0` / `Build 000001` se mantiene condicionada al cierre de los gates definidos.
@@ -151,7 +153,7 @@ Fuentes canónicas:
 - `data/pre-1-0-revision-ledger.json`;
 - ADR de gobierno correspondiente.
 
-Durante VER.2, DOC.1 R1 fue el bloque documental utilizado para sincronizar la documentación Markdown vigente posterior a MANT.1. VER.2 y DOC.1 R1 están cerrados, y DEV.2 permanece como bloque funcional cerrado.
+Durante VER.2, DOC.1 R1 fue el bloque documental utilizado para sincronizar la documentación Markdown vigente posterior a MANT.1. Después de NOR.2, DOC.1 R2 ejecutó la auditoría integral Markdown y estableció controles permanentes de regresión. VER.2, DOC.1 R1 y DOC.1 R2 están cerrados, y DEV.2 permanece como bloque funcional cerrado.
 
 ## 4. Secuencia de 14 bloques
 

@@ -17,14 +17,14 @@ class TestPlan1SaneamientoMetadata(unittest.TestCase):
     def test_observabilidad_declara_revision_actual_y_base_historica(self):
         texto = (DOCS / "operations/observability-and-logs.md").read_text(encoding="utf-8")
         self.assertIn(f"**Versión de aplicación revisada:** `{self.version}`", texto)
-        self.assertIn("**Versión base histórica:** `0.0.23-beta`", texto)
+        self.assertIn("**Versión base histórica preservada:** `0.0.23-beta`", texto)
         self.assertIn("GOV.1.4 no modificó fórmulas previsionales", texto)
         self.assertIn("DEV.2", texto)
 
     def test_limitaciones_no_duplica_revision_juridica_y_usa_gate_oficial(self):
         texto = (DOCS / "product/known-limitations.md").read_text(encoding="utf-8")
         self.assertIn(f"**Versión de aplicación revisada:** `{self.version}`", texto)
-        self.assertIn("**Versión base histórica:** `0.0.23-beta`", texto)
+        self.assertIn("**Versión base histórica preservada:** `0.0.23-beta`", texto)
         self.assertIn("Pendientes antes de la primera versión oficial", texto)
         self.assertNotIn("Pendientes antes de beta pública", texto)
         bloque = texto.split("## 5. Privacidad y seguridad", 1)[1].split(

@@ -9,17 +9,21 @@
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado post-MANT.1
 
-Después de `v0.0.26-beta`, el repositorio integró trabajo funcional, técnico y documental sin publicar un nuevo tag formal.
+Después de `v0.0.26-beta`, el repositorio integró trabajo funcional, técnico, documental y de gobierno hasta completar VER.2 y NOR.2.
 
 Estado vigente:
 
-- Último tag formal: `v0.0.26-beta`.
+- Último tag formal: `v0.0.71.01-beta`.
+- Último tag formal legacy: `v0.0.26-beta`.
 - Versión canónica en `VERSION`: `0.0.71.01-beta`.
-- Estado revision-aware VER.2: G071/E01 promovido en R4; tag formal pendiente post-merge.
-- MANT.1 quedó cerrado mediante PR #55 como mantenimiento técnico/documental posterior a R5H/R6/R7.
-- DOC.1 R1 queda activo para reconciliar documentación Markdown vigente post-MANT.1.
+- VER.2 G071/E01 está cerrado y publicado como `v0.0.71.01-beta`.
+- MANT.1 está cerrado.
+- DOC.1 R1 está cerrado.
+- NOR.1 y NOR.2 están cerrados.
+- DOC.1 R2 está cerrado como auditoría integral Markdown post-NOR.2.
+- SEC.2 queda habilitado para reanudación, pero todavía no se ha iniciado formalmente.
 
-Este documento no crea una release nueva; solo aclara el estado posterior al cierre operativo de MANT.1.
+Este documento no crea una release nueva; registra el estado formal ya alcanzado por el repositorio.
 <!-- DOC1-R1-POST-MANT1:END -->
 
 ## 1. Naturaleza del registro
@@ -172,7 +176,13 @@ Evidencia acumulada:
 
 La segunda pasada de VER.2 reconoce dentro de PLAN.1 diez estados aceptados G051–G060: R1, R2A, R2B1, R2B2, R2C, R3A, R3B1, R3B2, R4.1 y R4.2. Esta granularidad revision-aware no crea ni mueve tags históricos.
 
-## 5. Estado posterior a `v0.0.26-beta` y candidato VER.2 no publicado
+## 5. Reconstrucción histórica del estado posterior a `v0.0.26-beta` y del candidato VER.2
+
+> **Contexto histórico:** este apartado conserva el estado de VER.2 antes de su cierre
+> formal. Las referencias siguientes a candidato, tag pendiente, merge futuro o
+> revalidación pendiente describen aquel momento y no el estado actual. VER.2 fue
+> posteriormente integrado y `v0.0.71.01-beta` quedó publicado como tag formal.
+
 
 UX.4.6f, UX.4.6g, UX.4.6h y UX.4.6i se desarrollaron y cerraron históricamente **sin publicar un tag adicional y manteniendo `VERSION = 0.0.26-beta`**. VER.2 no inventa releases retroactivas para esos bloques; su posición se reconstruye en el ledger como G061–G070.
 

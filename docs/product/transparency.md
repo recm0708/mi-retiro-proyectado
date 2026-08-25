@@ -1,7 +1,7 @@
 # Transparencia del producto
 
 **Estado:** Vigente
-**Versión de aplicación revisada:** `0.0.26-beta`
+**Versión de aplicación revisada:** `0.0.71.01-beta`
 **Versión base histórica:** `0.0.25-beta`
 **Versión base histórica preservada:** `0.0.23-beta`
 **Base documental preservada:** GOV.1.3 R4 — 2026-08-17
@@ -17,9 +17,12 @@ La transparencia del producto se interpreta desde el cierre operativo de MANT.1 
 Estado vigente:
 
 - MANT.1 está cerrado.
-- DOC.1 R1 actualiza documentación Markdown vigente.
-- VER.2 sigue pendiente como reconciliación/candidato, no como versión publicada.
-- `VERSION` permanece en `0.0.26-beta`.
+- DOC.1 R1 está cerrado.
+- VER.2 está cerrado y `v0.0.71.01-beta` fue publicado.
+- NOR.1 y NOR.2 están cerrados.
+- DOC.1 R2 está cerrado tras auditar integralmente la documentación Markdown posterior a NOR.2.
+- `VERSION` permanece en `0.0.71.01-beta`.
+- SEC.2 queda habilitado para reanudación, pero todavía no se ha iniciado formalmente.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 
 Mi Retiro Proyectado es una herramienta independiente de estimación previsional. Este documento delimita qué puede afirmarse sobre el producto y qué debe permanecer explícitamente como aproximación, limitación o pendiente.

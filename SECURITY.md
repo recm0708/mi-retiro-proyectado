@@ -9,9 +9,11 @@ El cierre de MANT.1 R7 no cambia la política de seguridad ni convierte candidat
 Estado vigente:
 
 - La versión canónica vigente es `0.0.71.01-beta`.
-- `v0.0.26-beta` continúa como último tag formal legacy hasta el cierre firmado post-merge de G071/E01.
-- `0.0.71.01-beta` corresponde a VER.2 G071/E01 promovido en R4; su tag formal queda pendiente.
-- DOC.1 R1 solo actualiza documentación Markdown vigente.
+- `v0.0.71.01-beta` es el tag formal publicado correspondiente a VER.2 G071/E01.
+- `v0.0.26-beta` permanece como tag legacy histórico e inmutable.
+- VER.2, DOC.1 R1, NOR.1 y NOR.2 están cerrados.
+- DOC.1 R2 quedó cerrado tras auditar integralmente la documentación Markdown posterior a NOR.2.
+- SEC.2 queda habilitado para reanudación, pero todavía no se ha iniciado formalmente.
 - Las rutas de reporte responsable y revisión de vulnerabilidades se mantienen sin cambio material.
 <!-- DOC1-R1-POST-MANT1:END -->
 
@@ -21,8 +23,8 @@ Mi Retiro Proyectado se encuentra en **desarrollo beta**. Los estados histórico
 
 | Línea | Soporte de seguridad |
 |---|---|
-| `0.0.71.01-beta` | Versión vigente promovida en VER.2 R4; Soportada como beta vigente durante cierre, revalidación y tag firmado post-merge |
-| `0.0.26-beta` | Soportada como beta vigente legacy; último hito formal legacy etiquetado y referencia estable para regresiones históricas |
+| `0.0.71.01-beta` | Beta vigente y publicada mediante tag formal `v0.0.71.01-beta` |
+| `0.0.26-beta` | Beta legacy histórica; tag formal inmutable y referencia estable para regresiones históricas |
 | `0.0.25-beta` y anteriores | Históricas; no reciben correcciones independientes |
 
 La base histórica anterior a VER.2 se reconstruye en G001–G070 sin crear tags retroactivos. G071 solo se considera aceptado después del ledger/validador, gate completo, PR/CI e integración.

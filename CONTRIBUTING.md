@@ -9,9 +9,12 @@ La contribución al proyecto debe leerse desde la línea base documental posteri
 Estado vigente:
 
 - MANT.1 quedó cerrado operativamente en R7.
-- DOC.1 R1 está activo para sincronizar documentación Markdown vigente.
-- `VERSION` permanece sincronizado con la versión canónica vigente del árbol; en VER.2 R4 se promueve a `0.0.71.01-beta`.
-- VER.2 permanece como reconciliación/candidato pendiente, no como versión publicada.
+- DOC.1 R1 está cerrado; consolidó la documentación Markdown vigente posterior a MANT.1.
+- VER.2 está cerrado; G071/E01 fue promovido y publicado como `v0.0.71.01-beta`.
+- NOR.1 y NOR.2 están cerrados; NOR.2 completó R1–R8.
+- DOC.1 R2 está cerrado como auditoría integral Markdown posterior al cierre de NOR.2.
+- `VERSION` permanece sincronizado con la versión canónica vigente `0.0.71.01-beta`.
+- SEC.2 queda habilitado para reanudación, pero todavía no se ha iniciado formalmente.
 - Todo cambio debe mantener sincronizados código, pruebas, documentación y evidencia aplicable.
 <!-- DOC1-R1-POST-MANT1:END -->
 

@@ -3,7 +3,7 @@
 **Estado:** Vigente
 **Versión de aplicación revisada:** `0.0.71.01-beta`
 **Versión base histórica:** `0.0.25-beta`
-**Versión base histórica:** `0.0.23-beta`
+**Versión base histórica preservada:** `0.0.23-beta`
 **Base documental preservada:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal histórica:** GOV.1.5 R3 — 2026-08-18
 **Última revisión documental:** PLAN.1 R2C — 2026-08-20

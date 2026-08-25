@@ -3,7 +3,7 @@
 **Estado:** vigente
 **Versión de aplicación:** `0.0.71.01-beta` — VER.2 G071/E01 promovida en R4
 **Último tag formal legacy:** `v0.0.26-beta`
-**Última actualización transversal:** NOR.2 R8 — cierre integrado mediante PR #74 — 2026-08-24
+**Última actualización transversal:** DOC.1 R2 — auditoría integral Markdown post-NOR.2 — 2026-08-24
 **Cierres históricos preservados:** UX.4.6i / PR #34 — 841 pruebas; UX.4.6e R9 — `v0.0.25-beta`
 
 Este archivo es el punto de entrada para la documentación técnica, funcional, normativa, de privacidad, validación y auditoría de Mi Retiro Proyectado.
@@ -11,7 +11,7 @@ Este archivo es el punto de entrada para la documentación técnica, funcional, 
 
 ## Estado de normalización del repositorio
 
-**Estado actual:** NOR.2 cerrado después de completar R1–R8. SEC.2 queda habilitado para reanudación, pero aún no se ha iniciado formalmente.
+**Estado actual:** NOR.2 y DOC.1 R2 están cerrados. SEC.2 queda habilitado como siguiente bloque, pero aún no se ha iniciado formalmente.
 
 Estado de la fase:
 
@@ -24,6 +24,7 @@ Estado de la fase:
 - **NOR.2 R6:** cerrado; ledger y datos de alto impacto normalizados.
 - **NOR.2 R7:** cerrado; artefactos locales heredados migrados y depurados.
 - **NOR.2 R8:** cerrado; auditoría integral y cierre formal integrados mediante PR #74.
+- **DOC.1 R2:** cerrado; auditoría integral Markdown post-NOR.2 y controles permanentes incorporados.
 - **SEC.2:** siguiente bloque; habilitado para reanudación, aún no iniciado.
 
 Evidencia:
@@ -36,6 +37,7 @@ Evidencia:
 - [`audits/repository/repository-normalization-ledger-data-nor2-r6.md`](audits/repository/repository-normalization-ledger-data-nor2-r6.md) — normalización del ledger y datos de alto impacto R6.
 - [`audits/repository/repository-normalization-local-artifacts-nor2-r7.md`](audits/repository/repository-normalization-local-artifacts-nor2-r7.md) — migración y depuración de artefactos locales R7.
 - [`audits/repository/repository-normalization-final-audit-nor2-r8.md`](audits/repository/repository-normalization-final-audit-nor2-r8.md) — auditoría integral y gate de cierre R8.
+- [`audits/documentation/documentation-markdown-audit-doc1-r2.md`](audits/documentation/documentation-markdown-audit-doc1-r2.md) — auditoría integral Markdown post-NOR.2 y controles permanentes de DOC.1 R2.
 - [`standards/README.md`](standards/README.md) — estándares canónicos del repositorio.
 ## 1. Producto y alcance
 
@@ -166,10 +168,10 @@ La publicación del repositorio no elimina la revisión jurídica externa ni cua
 ## 12. Historial de evolución
 
 - [`REGISTRO_CAMBIOS_HISTORICO.md`](archive/governance/REGISTRO_CAMBIOS_HISTORICO.md) — mapa cronológico.
-- [`user-interface.md`](product/user-interface.md) — auditoría histórica de rediseño visual UX.4.6a.
-- [`workflow-step-1-personal-data.md`](product/workflow-step-1-personal-data.md) — auditoría histórica del Paso 1 de UX.4.6b.
-- [`workflow-step-2-contributions.md`](product/workflow-step-2-contributions.md) — auditoría histórica del Paso 2 de UX.4.6c.
-- [`workflow-step-3-salary-history.md`](product/workflow-step-3-salary-history.md) — auditoría histórica del Paso 3 de UX.4.6d.
+- [`UX_4_6A_REDISENO_VISUAL.md`](archive/ux/UX_4_6A_REDISENO_VISUAL.md) — bitácora histórica del rediseño visual UX.4.6a.
+- [`UX_4_6B_PASO1_DATOS_PERSONALES.md`](archive/ux/UX_4_6B_PASO1_DATOS_PERSONALES.md) — bitácora histórica del Paso 1 de UX.4.6b.
+- [`UX_4_6C_PASO2_CUOTAS.md`](archive/ux/UX_4_6C_PASO2_CUOTAS.md) — bitácora histórica del Paso 2 de UX.4.6c.
+- [`UX_4_6D_PASO3_HISTORIAL.md`](archive/ux/UX_4_6D_PASO3_HISTORIAL.md) — bitácora histórica del Paso 3 de UX.4.6d.
 - [`archive/README.md`](archive/README.md) — reglas del archivo histórico.
 - [`archive/ux/`](archive/ux) — bitácoras completas de UX.4.6a–d.
 - [`archive/technical/`](archive/technical) — snapshots técnicos previos.

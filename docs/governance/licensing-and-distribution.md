@@ -3,7 +3,7 @@
 **Estado:** Vigente — GOV.1.7
 **Versión de aplicación revisada:** `0.0.71.01-beta`
 **Versión base histórica:** `0.0.25-beta`
-**Versión base histórica:** `0.0.23-beta`
+**Versión base histórica preservada:** `0.0.23-beta`
 **Fecha de decisión original:** 2026-08-18
 **Última revisión documental:** PLAN.1 R3B1 — 2026-08-20
 **Clasificación:** Gobierno / Licencia / Distribución

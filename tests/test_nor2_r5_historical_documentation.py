@@ -104,7 +104,7 @@ class TestNOR2R5HistoricalDocumentation(unittest.TestCase):
         self.assertIn("**NOR.2 R7:** cerrado", readme)
         self.assertIn("NOR.2 R5", docs)
         self.assertIn("NOR.2 R6", docs)
-        self.assertIn("**SEC.2:** pausado", readme)
+        self.assertIn("**SEC.2:** siguiente bloque; habilitado para reanudación, aún no iniciado formalmente.", readme)
 
     def test_evidencia_r5_existe(self):
         path = ROOT / (

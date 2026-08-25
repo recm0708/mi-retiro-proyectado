@@ -1,7 +1,7 @@
 # Política de estructura de archivos por extensión
 
 **Estado:** Vigente
-**Aplicación revisada:** `0.0.26-beta`
+**Versión de aplicación revisada:** `0.0.71.01-beta`
 **Checkpoint técnico:** Mantenibilidad previa a SEC.2
 **Clasificación:** Técnica / Mantenibilidad
 
@@ -67,8 +67,8 @@ con estilos diferentes. Python, YAML, scripts, hooks, JSON y archivos especiales
 quedan cubiertos por la política y las plantillas sin reescritura masiva cuando
 su estructura actual ya cumple su contrato.
 
-NOR.2 revisará los nombres y ubicaciones existentes contra las reglas
-determinísticas de NOR.1.
+NOR.2 revisó y normalizó los nombres y ubicaciones existentes contra las reglas
+determinísticas de NOR.1 y quedó cerrado después de completar R1–R8.
 
 ## 5. Política de nombres de carpetas
 

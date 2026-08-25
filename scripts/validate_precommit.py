@@ -4,7 +4,7 @@ Responsabilidad:
 - proteger el árbol de trabajo antes de crear commits locales;
 - impedir commits directos en ``main``;
 - exigir que el contenido preparado sea reproducible;
-- ejecutar validaciones técnicas mínimas de Python, JavaScript y pruebas.
+- ejecutar auditoría Markdown y validaciones técnicas de Python, JavaScript y pruebas.
 
 Límites:
 - no corrige archivos automáticamente;
@@ -113,6 +113,11 @@ def _validar_entorno_y_codigo(raiz: Path) -> None:
         [sys.executable, "-m", "pip", "check"],
         raiz=raiz,
         descripcion="verificar dependencias Python",
+    )
+    _ejecutar(
+        [sys.executable, "scripts/audit_markdown.py"],
+        raiz=raiz,
+        descripcion="auditar documentación Markdown",
     )
     _ejecutar(
         [sys.executable, "-m", "compileall", "-q", "app"],

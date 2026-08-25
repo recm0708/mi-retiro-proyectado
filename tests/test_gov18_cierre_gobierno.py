@@ -107,8 +107,8 @@ class TestGov18CierreGobierno(unittest.TestCase):
             None,
         )
         self.assertIsNotNone(fila)
-        self.assertIn("Soportada", fila)
-        self.assertIn("beta vigente", fila)
+        self.assertIn("Beta vigente y publicada", fila)
+        self.assertIn("beta vigente", fila.lower())
         self.assertNotIn("pre-beta vigente", fila)
         self.assertIn("Históricas; no reciben correcciones independientes", texto)
 

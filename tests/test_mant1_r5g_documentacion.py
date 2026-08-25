@@ -73,10 +73,10 @@ class TestMant1R5GDocumentacion(unittest.TestCase):
             "architecture/development-center.md",
             "standards/file-structure-by-extension.md",
             "UX46H_R1_AUDITORIA_RESULTADOS.md",
-            "product/user-interface.md",
-            "product/workflow-step-1-personal-data.md",
-            "product/workflow-step-2-contributions.md",
-            "product/workflow-step-3-salary-history.md",
+            "archive/ux/UX_4_6A_REDISENO_VISUAL.md",
+            "archive/ux/UX_4_6B_PASO1_DATOS_PERSONALES.md",
+            "archive/ux/UX_4_6C_PASO2_CUOTAS.md",
+            "archive/ux/UX_4_6D_PASO3_HISTORIAL.md",
         )
 
         for documento in documentos:

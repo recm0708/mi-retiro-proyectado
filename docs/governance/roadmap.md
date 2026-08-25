@@ -5,7 +5,7 @@
 **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
 **Último tag formal legacy:** `v0.0.26-beta`
 **Fecha de revisión:** 2026-08-24
-**Normalización previa a SEC.2:** NOR.1 y NOR.2 están cerrados; R8 quedó integrado mediante PR #74 y SEC.2 es el siguiente bloque habilitado para reanudación, aún no iniciado formalmente.
+**Normalización previa a SEC.2:** NOR.1 y NOR.2 están cerrados; DOC.1 R2 completa la auditoría integral Markdown post-NOR.2 y SEC.2 queda como el siguiente bloque habilitado, aún no iniciado formalmente.
 
 
 <!-- NOR1-R7-CLOSURE:START -->
@@ -70,7 +70,7 @@ Estado vigente:
 - `v0.0.26-beta` permanece como tag legacy histórico e inmutable; el tag formal publicado de VER.2 es `v0.0.71.01-beta`.
 - `0.0.71.01-beta` representa VER.2 G071/E01 promovido y publicado mediante el tag formal `v0.0.71.01-beta`.
 - MANT.1 queda cerrado después de R5H, R6 y R7.
-- DOC.1 R1 está cerrado; la documentación Markdown vigente posterior a MANT.1 quedó auditada y consolidada.
+- DOC.1 R1 está cerrado; DOC.1 R2 cierra la auditoría integral Markdown post-NOR.2, retira stubs documentales residuales y establece controles permanentes de regresión.
 - La primera versión oficial objetivo sigue siendo `1.0.0.0` con `Build 000001`, sujeta a los gates del plan maestro.
 <!-- DOC1-R1-POST-MANT1:END -->
 
@@ -207,7 +207,7 @@ No existe una una revisión intermedia no demostrada entre UX.4.6i R1 y R1.2 dem
 
 **VER.2:** bloque transversal cerrado. La base anterior al cambio contiene **70 estados aceptados (G001–G070)** y G071/E01 fue promovido, integrado y publicado como `0.0.71.01-beta` mediante el tag `v0.0.71.01-beta`.
 
-**Checkpoint técnico actual:** NOR.2 está cerrado en R8; SEC.2 es el siguiente bloque habilitado para reanudación y aún no iniciado.
+**Checkpoint técnico actual:** NOR.2 está cerrado en R8 y DOC.1 R2 queda cerrado como auditoría Markdown post-NOR.2; SEC.2 es el siguiente bloque habilitado y aún no iniciado formalmente.
 
 Documentos canónicos de VER.2:
 

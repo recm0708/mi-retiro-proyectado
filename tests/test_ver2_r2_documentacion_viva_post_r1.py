@@ -52,7 +52,9 @@ def test_ver2_r2_preserva_readme_como_explicacion_historica():
 def test_ver2_r2_aclara_candidato_no_publicado_en_releases():
     releases = leer(RELEASES)
 
-    assert "candidato VER.2 no publicado" in releases
+    assert "Reconstrucción histórica del estado posterior a `v0.0.26-beta` y del candidato VER.2" in releases
+    assert "no existe tag `v0.0.71.01-beta` hasta completar merge" in releases
+    assert "Último tag formal: `v0.0.71.01-beta`" in releases
     assert "`0.0.71.01-beta` queda promovido en `VERSION` como VER.2 G071/E01 durante R4" in releases
     assert "requiere merge, revalidación post-merge y firma" in releases
     assert "no crea tag dentro del PR" in releases

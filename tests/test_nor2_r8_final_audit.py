@@ -215,7 +215,7 @@ class TestNOR2R8FinalAudit(unittest.TestCase):
         )
 
         self.assertIn(
-            "**SEC.2:** pausado",
+            "**SEC.2:** siguiente bloque; habilitado para reanudación, aún no iniciado formalmente.",
             readme,
         )
 

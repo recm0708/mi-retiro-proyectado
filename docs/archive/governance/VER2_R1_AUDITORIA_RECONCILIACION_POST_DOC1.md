@@ -1,10 +1,10 @@
 # VER.2 R1 — Auditoría de reconciliación post-DOC.1 R1
 
-- Fecha local de generación: 2026-08-23T21:47:31
+- **Fecha local de generación:** 2026-08-23T21:47:31
 - Rama: `ver/ver2-r1-reconciliacion-post-doc1`
 - HEAD: `d991890`
 - Commit base: `d991890 DOC.1 R1 — auditoría Markdown post-MANT.1 (#56)`
-- VERSION canónica actual: `0.0.26-beta`
+- **VERSION canónica actual:** `0.0.26-beta`
 
 ## 1. Objetivo
 

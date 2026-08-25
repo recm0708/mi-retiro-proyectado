@@ -1,6 +1,6 @@
 # VER.2 R3 — Decisión de versión candidata post-R2
 
-- Fecha local de generación: 2026-08-23T23:39:26
+- **Fecha local de generación:** 2026-08-23T23:39:26
 - Rama: `ver/ver2-r3-cierre-post-r2`
 - HEAD base: `5e7e2b9`
 - Base: `5e7e2b9 VER.2 R2 — documentación viva post-R1 (#58)`

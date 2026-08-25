@@ -1,7 +1,7 @@
 # Arquitectura
 
 **Estado:** Vigente
-**Versión de aplicación revisada:** `0.0.26-beta`
+**Versión de aplicación revisada:** `0.0.71.01-beta`
 **Versión base histórica:** `0.0.23-beta`
 **Revisión documental:** GOV.1.4 — 2026-08-17
 **Última actualización técnica:** DEV.2 R4 — cierre final documental — 2026-08-23
@@ -23,7 +23,7 @@ Cierre técnico relevante:
 - R6 validó funcionalmente el repositorio después de los renombres.
 - R7 cerró operativamente MANT.1 sobre `main`.
 
-La documentación arquitectónica debe leerse desde esta base: MANT.1 está cerrado y DOC.1 R1 actualiza documentación vigente sin modificar arquitectura de ejecución.
+La documentación arquitectónica debe leerse desde esta base: MANT.1, DOC.1 R1, NOR.1 y NOR.2 están cerrados. DOC.1 R2 quedó cerrado tras auditar la documentación vigente posterior a NOR.2 sin modificar la arquitectura de ejecución; SEC.2 queda habilitado para reanudación, pero todavía no se ha iniciado formalmente.
 <!-- DOC1-R1-POST-MANT1:END -->
 
 Mi Retiro Proyectado es una aplicación web local basada en FastAPI, Jinja2 y JavaScript del navegador. La arquitectura separa presentación, contratos de datos, servicios de integración, motores previsionales, parámetros normativos y observabilidad de desarrollo.

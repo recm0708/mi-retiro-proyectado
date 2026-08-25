@@ -1,9 +1,11 @@
-# Third-party notices
+# Avisos de terceros
 
 **Proyecto:** Mi Retiro Proyectado
-**Estado:** GOV.1.7 — vigente para el repositorio fuente pre-beta
+**Estado:** Vigente para el repositorio fuente y la beta actual
 **Fecha:** 2026-08-18
 **Última actualización del inventario:** 2026-08-20
+**Versión de aplicación revisada:** `0.0.71.01-beta`
+**Última revisión documental:** DOC.1 R2 — 2026-08-24
 
 La licencia propietaria de Mi Retiro Proyectado **no relicencia** componentes de terceros.
 
@@ -42,4 +44,4 @@ jsDelivr, GitHub y la infraestructura CSS documentada en `docs/security/third-pa
 
 ## Regla de distribución
 
-La decisión propietaria sobre materiales originales no elimina obligaciones de terceros. Antes de cualquier beta, publicación o distribución, el proceso de release debe comprobar el inventario real del artefacto y las obligaciones upstream aplicables.
+La decisión propietaria sobre materiales originales no elimina obligaciones de terceros. Antes de cualquier nueva release, publicación o distribución, el proceso de release debe comprobar el inventario real del artefacto y las obligaciones upstream aplicables.

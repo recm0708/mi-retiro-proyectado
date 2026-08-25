@@ -1,7 +1,7 @@
 # Registro de decisiones técnicas
 
 **Estado:** Vigente
-**Versión de aplicación revisada:** `0.0.26-beta`
+**Versión de aplicación revisada:** `0.0.71.01-beta`
 **Versión base histórica:** `0.0.25-beta`
 **Base documental histórica:** `0.0.23-beta` — GOV.1.3 R4 — 2026-08-17
 **Revisión documental:** GOV.1.3 R4 — 2026-08-17
@@ -19,9 +19,13 @@ Este registro conserva decisiones técnicas históricas y vigentes. Las mencione
 Estado vigente para lectura transversal:
 
 - MANT.1 quedó cerrado operativamente en R7.
-- DOC.1 R1 está cerrado; la documentación Markdown vigente quedó sincronizada.
-- Las decisiones históricas no se reescriben como si hubieran sido tomadas en DOC.1 R1.
+- DOC.1 R1 está cerrado.
+- VER.2 está cerrado y `v0.0.71.01-beta` fue publicado.
+- NOR.1 y NOR.2 están cerrados.
+- DOC.1 R2 está cerrado como auditoría de la documentación Markdown vigente posterior a NOR.2.
+- Las decisiones históricas no se reescriben como si hubieran sido tomadas en una revisión posterior.
 - `VERSION` permanece en `0.0.71.01-beta`; `v0.0.26-beta` se conserva como referencia legacy histórica.
+- SEC.2 queda habilitado para reanudación, pero todavía no se ha iniciado formalmente.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 
 Este registro conserva decisiones de arquitectura, modelado, UX, precisión, seguridad y aplicación normativa. Una ADR explica por qué el proyecto adoptó una decisión; no crea una norma jurídica.

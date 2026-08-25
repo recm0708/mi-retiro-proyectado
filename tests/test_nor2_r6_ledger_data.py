@@ -103,7 +103,7 @@ class TestNOR2R6LedgerData(unittest.TestCase):
         self.assertIn("**NOR.2 R7:** cerrado", readme)
         self.assertIn("NOR.2 R6", docs)
         self.assertIn("NOR.2 R7", docs)
-        self.assertIn("**SEC.2:** pausado", readme)
+        self.assertIn("**SEC.2:** siguiente bloque; habilitado para reanudación, aún no iniciado formalmente.", readme)
 
     def test_version_no_cambia(self):
         self.assertEqual(
