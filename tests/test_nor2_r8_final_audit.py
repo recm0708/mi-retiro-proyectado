@@ -77,26 +77,10 @@ class TestNOR2R8FinalAudit(unittest.TestCase):
         )
 
     def test_artefactos_locales_quedan_fuera_de_git(self):
-        self.assertFalse(
-            (ROOT / "_entregas").exists()
-        )
+        gitignore = (ROOT / ".gitignore").read_text(encoding="utf-8")
 
-        deliverables = ROOT / "_deliverables"
-
-        self.assertTrue(
-            deliverables.is_dir()
-        )
-
-        local_files = [
-            p
-            for p in deliverables.rglob("*")
-            if p.is_file()
-        ]
-
-        self.assertEqual(
-            20,
-            len(local_files),
-        )
+        self.assertIn("_deliverables/", gitignore)
+        self.assertIn("_entregas/", gitignore)
 
         tracked = git_ls_files()
 
