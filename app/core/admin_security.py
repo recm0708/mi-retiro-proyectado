@@ -1,4 +1,4 @@
-"""SEC.2 R2 - Seguridad administrativa."""
+"""SEC.2 R3 - Seguridad administrativa centralizada."""
 
 from __future__ import annotations
 
@@ -15,6 +15,7 @@ def obtener_secreto_admin() -> str:
     Prioriza la variable de entorno MRP_ADMIN_SECRET y mantiene
     compatibilidad con MRP_ADMIN_TOKEN.
     """
+
     return (
         os.getenv("MRP_ADMIN_SECRET", "").strip()
         or os.getenv("MRP_ADMIN_TOKEN", "").strip()
@@ -27,6 +28,7 @@ def autenticacion_admin_habilitada() -> bool:
     Retorna True cuando la aplicación dispone de un secreto válido
     para realizar autenticación administrativa.
     """
+
     return bool(obtener_secreto_admin())
 
 
@@ -35,14 +37,15 @@ def administracion_activa() -> bool:
 
     La activación depende de la variable de entorno MRP_ADMIN_ENABLED.
     """
+
     return os.getenv("MRP_ADMIN_ENABLED", "").strip() == "1"
 
 
-def validar_token_administrativo(token: Optional[str] = None):
-    """
-    Compatible con:
-    - pruebas unitarias: validar_token_administrativo("abc123") -> True/False
-    - endpoint FastAPI actual: recibe token extraído del header -> True/False
+def validar_token_administrativo(token: Optional[str] = None) -> bool:
+    """Valida un token administrativo contra el secreto configurado.
+
+    Utiliza comparación segura para evitar ataques de comparación
+    temporal.
     """
 
     secreto = obtener_secreto_admin()
@@ -56,23 +59,49 @@ def validar_token_administrativo(token: Optional[str] = None):
     return secrets.compare_digest(str(token), secreto)
 
 
-def validar_request_administrativo(request: Request) -> None:
+def extraer_token_bearer(request: Request) -> Optional[str]:
+    """Extrae el token Bearer enviado en la cabecera Authorization.
+
+    Retorna None cuando la solicitud no contiene una credencial
+    administrativa con formato válido.
     """
-    Validador basado en Request para usos futuros con FastAPI.
-    """
-    if not administracion_activa():
-        return
 
     authorization = request.headers.get("Authorization", "")
 
     if not authorization.startswith("Bearer "):
-        raise HTTPException(status_code=401, detail="Credenciales administrativas requeridas.")
+        return None
 
-    token = authorization.replace("Bearer ", "", 1).strip()
+    return authorization.removeprefix("Bearer ").strip()
+
+
+def requerir_administrador(request: Request) -> None:
+    """Exige autenticación administrativa válida para un endpoint.
+
+    Genera errores HTTP controlados cuando la superficie administrativa
+    no está habilitada o cuando las credenciales no son válidas.
+    """
+
+    if not administracion_activa():
+        raise HTTPException(
+            status_code=403,
+            detail="Superficie administrativa no disponible.",
+        )
+
+    if not autenticacion_admin_habilitada():
+        raise HTTPException(
+            status_code=403,
+            detail="Autenticación administrativa no configurada.",
+        )
+
+    token = extraer_token_bearer(request)
 
     if not validar_token_administrativo(token):
-        raise HTTPException(status_code=401, detail="Credenciales administrativas inválidas.")
+        raise HTTPException(
+            status_code=401 if token is None else 403,
+            detail="Autenticación administrativa requerida.",
+        )
 
 
-# Compatibilidad
+# Compatibilidad con versiones anteriores
 validar_token_admin = validar_token_administrativo
+validar_request_administrativo = requerir_administrador
