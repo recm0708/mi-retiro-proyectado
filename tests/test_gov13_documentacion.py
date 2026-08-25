@@ -24,7 +24,7 @@ class TestGov13Documentacion(unittest.TestCase):
             "VERSIONING.md",
             "docs/README.md",
             "docs/governance/roadmap.md",
-            "docs/REGISTRO_CAMBIOS_HISTORICO.md",
+            "docs/archive/governance/REGISTRO_CAMBIOS_HISTORICO.md",
             "docs/archive/README.md",
         ]
         for relativo in requeridos:

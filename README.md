@@ -21,7 +21,7 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 ## Estado del proyecto
 
 - **Versión canónica vigente:** `0.0.71.01-beta`, obtenida exclusivamente desde [`VERSION`](VERSION).
-- **Último cierre integrado en `main`:** NOR.2 R3 — normalización de runtime/configuración, PR #69, commit squash `b037518`.
+- **Último cierre integrado en `main`:** NOR.2 R4 — documentación viva en áreas canónicas, PR #70, commit squash `65b8fd9`.
 - **Estado de VER.2:** cerrado; G071/E01 promovido en `VERSION` como `0.0.71.01-beta` y tag `v0.0.71.01-beta` publicado.
 - **Última versión formal legacy:** `0.0.26-beta` — tag firmado e inmutable `v0.0.26-beta`.
 - **Etapa:** desarrollo beta; repositorio público y ejecución orientada actualmente a entorno local.
@@ -31,7 +31,8 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 - **MANT.1:** cerrado.
 - **DOC.1 R1:** cerrado como auditoría documental post-MANT.1.
 - **NOR.1:** cerrado en R7; estándares determinísticos establecidos.
-- **NOR.2 R4:** activo; documentación viva migrada a áreas canónicas, con enlaces y referencias en normalización previa a R5.
+- **NOR.2 R4:** cerrado; documentación viva migrada a áreas canónicas.
+- **NOR.2 R5:** activo; archivo y consolidación de documentación histórica.
 - **SEC.2:** pausado hasta completar NOR.2.
 - **Primera versión oficial objetivo:** `1.0.0.0` con `Build 000001`, únicamente después de cerrar todos los gates definidos en el plan maestro.
 
@@ -97,13 +98,13 @@ Documentos principales:
 - [`docs/security/security-incident-procedure.md`](docs/security/security-incident-procedure.md) — respuesta a incidentes;
 - [`docs/security/third-party-deployment-assessment.md`](docs/security/third-party-deployment-assessment.md) — terceros, TLS y gates de despliegue;
 - [`SECURITY.md`](SECURITY.md) — reporte responsable de vulnerabilidades;
-- [`docs/AUDITORIA_GITHUB.md`](docs/AUDITORIA_GITHUB.md) — controles GitHub y auditoría automática;
+- [`docs/archive/governance/AUDITORIA_GITHUB.md`](docs/archive/governance/AUDITORIA_GITHUB.md) — controles GitHub y auditoría automática;
 - [`docs/operations/github-public-repository.md`](docs/operations/github-public-repository.md) — metadata, topics, labels, badges, seguridad y mantenimiento del repositorio público;
-- [`docs/AUDITORIA_REPOSITORIO_2026-08-18.md`](docs/AUDITORIA_REPOSITORIO_2026-08-18.md) — auditoría integral post-GOV.1 del repositorio;
-- [`docs/AUDITORIA_UX46E_R7_2026-08-18.md`](docs/AUDITORIA_UX46E_R7_2026-08-18.md) — auditoría transversal de coherencia de UX.4.6e;
-- [`docs/CIERRE_GOV1.md`](docs/CIERRE_GOV1.md) — auditoría final y decisión de cierre de GOV.1;
-- [`docs/AUDITORIA_VERSIONADO_PRE_1_0.md`](docs/AUDITORIA_VERSIONADO_PRE_1_0.md) — criterio contable y reconciliación VER.2;
-- [`docs/MATRIZ_DECISION_REVISIONES_VER2.md`](docs/MATRIZ_DECISION_REVISIONES_VER2.md) — decisiones de inclusión/exclusión del contador;
+- [`docs/archive/governance/AUDITORIA_REPOSITORIO_2026-08-18.md`](docs/archive/governance/AUDITORIA_REPOSITORIO_2026-08-18.md) — auditoría integral post-GOV.1 del repositorio;
+- [`docs/archive/ux/AUDITORIA_UX46E_R7_2026-08-18.md`](docs/archive/ux/AUDITORIA_UX46E_R7_2026-08-18.md) — auditoría transversal de coherencia de UX.4.6e;
+- [`docs/archive/governance/CIERRE_GOV1.md`](docs/archive/governance/CIERRE_GOV1.md) — auditoría final y decisión de cierre de GOV.1;
+- [`docs/archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md`](docs/archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md) — criterio contable y reconciliación VER.2;
+- [`docs/archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md`](docs/archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md) — decisiones de inclusión/exclusión del contador;
 - [`docs/governance/pre-1-0-revision-ledger.md`](docs/governance/pre-1-0-revision-ledger.md) — secuencia global G001–G070 y candidato G071;
 - [`data/revision_ledger_pre_1_0.json`](data/revision_ledger_pre_1_0.json) — ledger machine-readable;
 - [`docs/governance/licensing-and-distribution.md`](docs/governance/licensing-and-distribution.md) — decisión de licencia y estrategia de distribución;
@@ -111,7 +112,7 @@ Documentos principales:
 - [`docs/governance/roadmap.md`](docs/governance/roadmap.md) — estado actual y próximos hitos;
 - [`docs/governance/master-plan-to-1-0.md`](docs/governance/master-plan-to-1-0.md) — secuencia de 14 bloques hasta la primera versión oficial;
 - [`docs/decisions/README.md`](docs/decisions/README.md) — decisiones ADR;
-- [`docs/REGISTRO_CAMBIOS_HISTORICO.md`](docs/REGISTRO_CAMBIOS_HISTORICO.md) — mapa histórico de evolución;
+- [`docs/archive/governance/REGISTRO_CAMBIOS_HISTORICO.md`](docs/archive/governance/REGISTRO_CAMBIOS_HISTORICO.md) — mapa histórico de evolución;
 - [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md) — reglas de participación y convivencia;
 - [`SUPPORT.md`](SUPPORT.md) — rutas de soporte y reporte.
 
@@ -139,11 +140,11 @@ Consultar:
 
 - [`RELEASES.md`](RELEASES.md) — versiones, rangos Git y releases formales;
 - [`CHANGELOG.md`](CHANGELOG.md) — cambios notables por versión;
-- [`docs/AUDITORIA_VERSIONADO_PRE_1_0.md`](docs/AUDITORIA_VERSIONADO_PRE_1_0.md) — criterio de reconciliación;
-- [`docs/MATRIZ_DECISION_REVISIONES_VER2.md`](docs/MATRIZ_DECISION_REVISIONES_VER2.md) — matriz de decisiones contables;
+- [`docs/archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md`](docs/archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md) — criterio de reconciliación;
+- [`docs/archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md`](docs/archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md) — matriz de decisiones contables;
 - [`docs/governance/pre-1-0-revision-ledger.md`](docs/governance/pre-1-0-revision-ledger.md) — contador global pre-1.0;
 - [`data/revision_ledger_pre_1_0.json`](data/revision_ledger_pre_1_0.json) — representación machine-readable;
-- [`docs/REGISTRO_CAMBIOS_HISTORICO.md`](docs/REGISTRO_CAMBIOS_HISTORICO.md) — mapa cronológico para auditoría.
+- [`docs/archive/governance/REGISTRO_CAMBIOS_HISTORICO.md`](docs/archive/governance/REGISTRO_CAMBIOS_HISTORICO.md) — mapa cronológico para auditoría.
 
 Git continúa siendo la evidencia primaria de autores, fechas, hashes y contenido histórico.
 

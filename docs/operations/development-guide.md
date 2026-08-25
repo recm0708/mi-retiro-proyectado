@@ -147,7 +147,7 @@ El esquema de logs puede evolucionar independientemente mediante `schema_version
 
 Los documentos vigentes describen estado actual. No añadir un diario de revisiones si la información puede integrarse en la sección correspondiente.
 
-Historia: `CHANGELOG.md`, `RELEASES.md`, `docs/REGISTRO_CAMBIOS_HISTORICO.md`, `docs/archive/` y Git.
+Historia: `CHANGELOG.md`, `RELEASES.md`, `docs/archive/governance/REGISTRO_CAMBIOS_HISTORICO.md`, `docs/archive/` y Git.
 
 ## 16. Validación antes de cierre
 

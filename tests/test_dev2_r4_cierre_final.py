@@ -58,7 +58,8 @@ class TestDev2R4CierreFinal(unittest.TestCase):
         changelog = self._leer("CHANGELOG.md")
 
         self.assertIn("**DEV.2:** cerrado.", readme)
-        self.assertIn("**NOR.2 R4:** activo", readme)
+        self.assertIn("**NOR.2 R4:** cerrado", readme)
+        self.assertIn("**NOR.2 R5:** activo", readme)
         self.assertIn("**SEC.2:** pausado", readme)
         self.assertIn("DEV.2 cerrado documentalmente en R4", documento)
         self.assertIn("### DEV.2 — cierre del Centro de desarrollo", changelog)

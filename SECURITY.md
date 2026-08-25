@@ -29,7 +29,7 @@ La base histórica anterior a VER.2 se reconstruye en G001–G070 sin crear tags
 
 La primera versión oficial objetivo es `1.0.0.0` y solo podrá considerarse soportada cuando se materialice formalmente después de los gates definidos por el plan maestro.
 
-La numeración revision-aware no mueve ni recrea tags legacy. Consultar `VERSIONING.md`, `docs/AUDITORIA_VERSIONADO_PRE_1_0.md`, `docs/MATRIZ_DECISION_REVISIONES_VER2.md` y `docs/governance/pre-1-0-revision-ledger.md`.
+La numeración revision-aware no mueve ni recrea tags legacy. Consultar `VERSIONING.md`, `docs/archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md`, `docs/archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md` y `docs/governance/pre-1-0-revision-ledger.md`.
 
 ## Reportar una vulnerabilidad
 
@@ -80,9 +80,9 @@ Esta función está habilitada y complementa el canal privado alternativo indica
 - `docs/security/threat-model.md`
 - `docs/security/security-incident-procedure.md`
 - `docs/security/security-and-privacy.md`
-- `docs/AUDITORIA_GITHUB.md`
-- `docs/AUDITORIA_VERSIONADO_PRE_1_0.md`
-- `docs/MATRIZ_DECISION_REVISIONES_VER2.md`
+- `docs/archive/governance/AUDITORIA_GITHUB.md`
+- `docs/archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md`
+- `docs/archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md`
 - `docs/governance/pre-1-0-revision-ledger.md`
 - `data/revision_ledger_pre_1_0.json`
 

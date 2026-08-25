@@ -86,12 +86,12 @@ class TestMant1R5HAuditoriaNombresRestantes(unittest.TestCase):
                 self.assertTrue((ROOT / path).exists(), path)
 
     def test_auditoria_r5h_queda_documentada_e_indexada(self):
-        audit = ROOT / "docs" / "AUDITORIA_NOMBRES_RESTANTES_R5H.md"
+        audit = ROOT / "docs" / "archive/technical/AUDITORIA_NOMBRES_RESTANTES_R5H.md"
         index = ROOT / "docs" / "README.md"
 
         self.assertTrue(audit.is_file())
         self.assertIn(
-            "AUDITORIA_NOMBRES_RESTANTES_R5H.md",
+            "archive/technical/AUDITORIA_NOMBRES_RESTANTES_R5H.md",
             index.read_text(encoding="utf-8"),
         )
 

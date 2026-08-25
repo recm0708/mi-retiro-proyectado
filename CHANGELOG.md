@@ -5,6 +5,7 @@ Este archivo registra **cambios notables por versión**. No sustituye el histori
 Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamente en GOV.1.1 a partir del historial real. `0.0.22-beta` es la primera versión formal adoptada bajo la política de GOV.1.2.
 
 ## [Unreleased]
+- NOR.2 R5: archiva 36 documentos cerrados en `docs/archive/`, actualiza índices históricos y separa evidencia cerrada de documentación viva.
 - NOR.2 R4: migra 41 documentos vivos a áreas canónicas, consolida 2 estándares heredados y sincroniza enlaces/referencias sin conservar stubs de compatibilidad.
 - NOR.2 R3: migra 28 rutas técnicas de runtime, plantillas, pruebas y configuración; mantiene estables las URL públicas y preserva Ficha Digital como excepción de dominio.
 - NOR.2 R2: clasifica la migración integral, corrige el estado público del `README.md` y define que el árbol vigente no conservará rutas/documentos obsoletos salvo evidencia histórica justificada.
@@ -27,14 +28,14 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 - Normaliza nombres de archivos técnicos en `scripts`, `data`, `regulations` y pruebas seleccionadas.
 - Actualiza referencias documentales, hooks, rutas internas y pruebas relacionadas.
-- Agrega `docs/AUDITORIA_ARCHIVOS_R5F.md` y `tests/test_mant1_r5f_nombres_archivos.py` para documentar y proteger el cambio.
+- Agrega `docs/archive/technical/AUDITORIA_ARCHIVOS_R5F.md` y `tests/test_mant1_r5f_nombres_archivos.py` para documentar y proteger el cambio.
 - Mantiene sin renombrar archivos de dominio como `mixto.json`, `sebd.json` y `sucgs.json`, y preserva archivos históricos con trazabilidad `UX46`, `VER2` o `revision-aware`.
 
 ## MANT.1 R5E — estandarización de nombres de carpetas
 
 - renombra carpetas técnicas en español a rutas en inglés: `app/models/`, `app/engines/`, `app/services/`, `regulations/`, `tests/validation_cases/` y `docs/archive/`;
 - actualiza imports Python, rutas de pruebas, enlaces documentales, CODEOWNERS, `.gitignore` y referencias a parámetros JSON;
-- documenta la auditoría de carpetas en `docs/AUDITORIA_CARPETAS_R5E.md`;
+- documenta la auditoría de carpetas en `docs/archive/technical/AUDITORIA_CARPETAS_R5E.md`;
 - agrega regresión para impedir que reaparezcan carpetas técnicas antiguas o referencias a rutas obsoletas;
 - mantiene sin cambios `_entregas/`, carpetas convencionales con punto inicial, `VERSION`, `APP_VERSION`, motores previsionales, valores JSON, rutas públicas, selectores y SEC.2.
 
@@ -441,7 +442,7 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 - añadidas plantillas estructuradas para reportes de errores y solicitudes de mejora;
 - añadido template común de Pull Request con checklist de pruebas, documentación, privacidad y alcance;
 - añadido `SECURITY.md` con canal privado de reporte y divulgación coordinada;
-- añadido `docs/AUDITORIA_GITHUB.md` con inventario de controles y revisión periódica;
+- añadido `docs/archive/governance/AUDITORIA_GITHUB.md` con inventario de controles y revisión periódica;
 - añadido workflow `Auditoría de gobernanza` con permisos de solo lectura y acciones oficiales `@v7`;
 - añadidas 10 regresiones específicas de gobierno/repositorio;
 - promovido `Auditoría de gobernanza` al conjunto de checks requeridos de `main` después de su primera ejecución exitosa;
@@ -639,7 +640,7 @@ Base técnica, FastAPI, primera interfaz, asistente, cuotas, salario y documenta
 Para una auditoría completa consultar, en este orden:
 
 1. `RELEASES.md` — rangos Git y clasificación de versiones;
-2. `docs/REGISTRO_CAMBIOS_HISTORICO.md` — mapa cronológico;
+2. `docs/archive/governance/REGISTRO_CAMBIOS_HISTORICO.md` — mapa cronológico;
 3. `docs/archive/` — bitácoras y snapshots anteriores;
 4. `docs/DECISIONES.md` y ADR independientes posteriores — decisiones;
 5. historial Git — evidencia primaria e inmutable de cada cambio versionado.

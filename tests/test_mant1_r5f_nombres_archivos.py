@@ -76,7 +76,7 @@ class TestMant1R5FNombresArchivos(unittest.TestCase):
 
         extensiones = {".py", ".ps1", ".md", ".txt", ".yml", ".yaml", ".json", ".githook"}
         excluir = {
-            "docs/AUDITORIA_ARCHIVOS_R5F.md",
+            "docs/archive/technical/AUDITORIA_ARCHIVOS_R5F.md",
             "tests/test_mant1_r5f_nombres_archivos.py",
         }
 

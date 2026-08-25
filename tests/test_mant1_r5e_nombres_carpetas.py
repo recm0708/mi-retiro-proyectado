@@ -88,7 +88,7 @@ class TestMant1R5ENombresCarpetas(unittest.TestCase):
                 or relativa.startswith("_entregas/")
                 or "__pycache__/" in relativa
                 or relativa in {
-                    "docs/AUDITORIA_CARPETAS_R5E.md",
+                    "docs/archive/technical/AUDITORIA_CARPETAS_R5E.md",
                     "tests/test_mant1_r5e_nombres_carpetas.py",
                 }
                 or relativa.endswith((".png", ".ico", ".pdf", ".zip"))
@@ -107,7 +107,7 @@ class TestMant1R5ENombresCarpetas(unittest.TestCase):
         self.assertEqual([], hallazgos)
 
     def test_documentacion_de_auditoria_declara_alcance_y_exclusiones(self):
-        auditoria = ROOT / "docs" / "AUDITORIA_CARPETAS_R5E.md"
+        auditoria = ROOT / "docs" / "archive/technical/AUDITORIA_CARPETAS_R5E.md"
         politica = ROOT / "docs" / "standards/file-structure-by-extension.md"
         indice = ROOT / "docs" / "README.md"
 
@@ -125,7 +125,7 @@ class TestMant1R5ENombresCarpetas(unittest.TestCase):
         self.assertIn("No se renombran archivos", texto)
 
         self.assertIn(
-            "AUDITORIA_CARPETAS_R5E.md",
+            "archive/technical/AUDITORIA_CARPETAS_R5E.md",
             indice.read_text(encoding="utf-8"),
         )
         self.assertIn(

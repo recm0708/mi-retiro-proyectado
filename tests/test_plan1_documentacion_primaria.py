@@ -36,7 +36,7 @@ class TestPlan1DocumentacionPrimaria(unittest.TestCase):
         self.assertIn("Tag v1.0.0.0", texto)
 
     def test_cierre_gov1_preserva_plan_antiguo_pero_declara_sustitucion(self):
-        texto = (DOCS / "CIERRE_GOV1.md").read_text(encoding="utf-8")
+        texto = (DOCS / "archive/governance/CIERRE_GOV1.md").read_text(encoding="utf-8")
         self.assertIn("0.1.0-beta.1", texto)
         self.assertIn("**Nota posterior — PLAN.1 / 2026-08-20:**", texto)
         self.assertIn("esa planificación fue sustituida", texto)
