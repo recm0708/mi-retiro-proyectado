@@ -18,19 +18,19 @@ class TestSec2R2AdminSecurity(unittest.TestCase):
             self.assertFalse(autenticacion_admin_habilitada())
 
     def test_token_configurado_habilita_autenticacion(self):
-        with patch.dict(os.environ, {"MRP_ADMIN_TOKEN": "abc123"}, clear=False):
+        with patch.dict(os.environ, {"MRP_ADMIN_SECRET": "abc123"}, clear=False):
             self.assertTrue(autenticacion_admin_habilitada())
 
     def test_token_correcto_valida(self):
-        with patch.dict(os.environ, {"MRP_ADMIN_TOKEN": "abc123"}, clear=False):
+        with patch.dict(os.environ, {"MRP_ADMIN_SECRET": "abc123"}, clear=False):
             self.assertTrue(validar_token_administrativo("abc123"))
 
     def test_token_incorrecto_no_valida(self):
-        with patch.dict(os.environ, {"MRP_ADMIN_TOKEN": "abc123"}, clear=False):
+        with patch.dict(os.environ, {"MRP_ADMIN_SECRET": "abc123"}, clear=False):
             self.assertFalse(validar_token_administrativo("otro"))
 
     def test_token_vacio_no_valida(self):
-        with patch.dict(os.environ, {"MRP_ADMIN_TOKEN": "abc123"}, clear=False):
+        with patch.dict(os.environ, {"MRP_ADMIN_SECRET": "abc123"}, clear=False):
             self.assertFalse(validar_token_administrativo(None))
 
 
