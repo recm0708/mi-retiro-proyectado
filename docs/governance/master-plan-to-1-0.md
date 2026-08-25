@@ -4,7 +4,7 @@
 **Versión base al iniciar el plan:** `0.0.25-beta`
 **Cierre histórico de PLAN.1:** `0.0.26-beta` / `v0.0.26-beta`
 **Versión transversal vigente:** `0.0.71.01-beta` — VER.2 G071/E01
-**Fecha:** 2026-08-24
+**Fecha:** 2026-08-25
 **Clasificación:** Producto / Arquitectura / QA / Release
 
 

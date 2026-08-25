@@ -4,7 +4,7 @@
 **Versión vigente:** `0.0.71.01-beta` — VER.2 G071/E01
 **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
 **Último tag formal legacy:** `v0.0.26-beta`
-**Fecha de revisión:** 2026-08-24
+**Fecha de revisión:** 2026-08-25
 **Estado previo y actual de SEC.2:** NOR.1, NOR.2 y DOC.1 R2 están cerrados; SEC.2 está activo en R1 con hardening CodeQL y normalización técnica de workflows.
 
 

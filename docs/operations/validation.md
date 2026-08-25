@@ -1021,8 +1021,8 @@ Checkpoint local confirmado:
 - auditor Markdown: **OK**;
 - `git diff --check`: **OK**;
 - suite completa `pytest`: **1043 pruebas + 4922 subtests — OK**;
+- pre-commit integral: **1003 tests — OK**;
 - `VERSION`: **`0.0.71.01-beta`**, sin promoción.
 
-Permanecen pendientes suite integral, pre-commit, PR, CI, CodeQL,
-integración y verificación post-merge.
+Permanecen pendientes PR, CI, CodeQL, integración y verificación post-merge.
 <!-- SEC2-R1-VALIDATION:END -->

@@ -60,7 +60,8 @@ Hasta este checkpoint:
 - `node --check`: **OK**;
 - auditor Markdown: **OK**;
 - `git diff --check`: **OK**;
-- suite completa `pytest`: **1043 pruebas + 4922 subtests — OK**.
+- suite completa `pytest`: **1043 pruebas + 4922 subtests — OK**;
+- pre-commit integral: **1003 tests — OK**.
 
-La revisión permanece abierta hasta completar suite integral, pre-commit,
-PR, CI, CodeQL y verificación post-merge.
+La revisión permanece abierta hasta completar PR, CI, CodeQL, integración
+y verificación post-merge.
