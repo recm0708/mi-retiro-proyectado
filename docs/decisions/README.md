@@ -19,9 +19,9 @@ Este registro conserva decisiones técnicas históricas y vigentes. Las mencione
 Estado vigente para lectura transversal:
 
 - MANT.1 quedó cerrado operativamente en R7.
-- DOC.1 R1 queda activo para sincronizar documentación Markdown vigente.
+- DOC.1 R1 está cerrado; la documentación Markdown vigente quedó sincronizada.
 - Las decisiones históricas no se reescriben como si hubieran sido tomadas en DOC.1 R1.
-- `VERSION` permanece en `0.0.26-beta`.
+- `VERSION` permanece en `0.0.71.01-beta`; `v0.0.26-beta` se conserva como referencia legacy histórica.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 
 Este registro conserva decisiones de arquitectura, modelado, UX, precisión, seguridad y aplicación normativa. Una ADR explica por qué el proyecto adoptó una decisión; no crea una norma jurídica.

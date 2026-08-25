@@ -4,23 +4,25 @@
 **Versión de aplicación:** `0.0.71.01-beta` — VER.2 G071/E01 promovida en R4
 **Último tag formal legacy:** `v0.0.26-beta`
 **Base histórica:** GOV.1.3 R4 — 2026-08-17
-**Revisión transversal:** VER.2 — 2026-08-21
+**Revisión transversal:** NOR.2 R7 — 2026-08-24
 **Clasificación:** Técnica / Auditoría
 
 
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado post-MANT.1
 
-La trazabilidad vigente incorpora el cierre operativo de MANT.1 R7 y la apertura de DOC.1 R1.
+La trazabilidad vigente incorpora los cierres de MANT.1, DOC.1 y VER.2, junto
+con la normalización activa NOR.2.
 
 Estado documental actual:
 
 - MANT.1 R5H auditó nombres técnicos restantes.
 - MANT.1 R6 validó funcionalmente el repositorio después de renombres.
 - MANT.1 R7 cerró operativamente el bloque en `main`.
-- DOC.1 R1 audita todos los Markdown y actualiza solo documentación vigente desalineada.
-- `VERSION` se promueve en R4 a `0.0.71.01-beta` como VER.2 G071/E01.
-- VER.2 permanece como reconciliación/candidato pendiente, no como versión publicada.
+- DOC.1 R1 está cerrado y su documentación viva quedó consolidada.
+- VER.2 G071/E01 está cerrado y publicado como `v0.0.71.01-beta`.
+- NOR.2 R7 permanece activo; R8 será la auditoría integral y cierre de NOR.2.
+- SEC.2 permanece pausado hasta completar NOR.2.
 
 Esta matriz debe distinguir trazabilidad histórica de estado vigente.
 <!-- DOC1-R1-POST-MANT1:END -->
@@ -116,3 +118,16 @@ Los estados `Candidato` deben promoverse a `Verificado` únicamente después del
 | Mantener runtime sobre la ruta canónica | `app/core/version_ledger.py` | `test_ruta_normalizada` |
 | Eliminar consumidores vivos de la ruta anterior | barrido R6: 0 referencias no justificadas | `test_no_quedan_consumidores_vivos_de_ruta_anterior` |
 | Mantener versión y SEC.2 sin promoción | `VERSION` + estado transversal | `test_version_no_cambia`, `test_estado_transversal` |
+
+
+## Trazabilidad NOR.2 R7
+
+| Criterio | Evidencia | Regresión |
+| --- | --- | --- |
+| Retirar `_entregas/` como ubicación local activa | evidencia R7 + estándar de raíz | `tests/test_nor2_r7_local_artifacts.py` |
+| Preservar únicamente evidencia local única | 20 artefactos conservados bajo `_deliverables/` | `test_evidencia_r7_documenta_migracion` |
+| Retirar duplicados solo después de comprobar igualdad SHA-256 | 8 duplicados exactos documentados | `test_evidencia_r7_documenta_deduplicacion` |
+| Retirar el ZIP solo después de demostrar reproducibilidad completa desde Git | comparación 329/329 contra `929628df38d4750fb103ffc79bdb81f8405535bb` | `test_evidencia_r7_documenta_zip_reproducible` |
+| Mantener `_deliverables/` fuera del árbol Git | `.gitignore` + política de artefactos locales | `test_directorios_locales_permanecen_ignorados` |
+| Preservar la decisión histórica de R2 | matriz de migración NOR.2 R2 | `test_matriz_r2_preserva_decision_historica` |
+| Mantener `VERSION` y SEC.2 sin promoción | `VERSION` + documentación transversal | `test_version_y_estado_transversal` |

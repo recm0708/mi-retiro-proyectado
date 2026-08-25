@@ -5,6 +5,7 @@ Este archivo registra **cambios notables por versión**. No sustituye el histori
 Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamente en GOV.1.1 a partir del historial real. `0.0.22-beta` es la primera versión formal adoptada bajo la política de GOV.1.2.
 
 ## [Unreleased]
+- NOR.2 R7: migra la evidencia local heredada desde `_entregas/` hacia `_deliverables/`, conserva 20 artefactos únicos, retira 8 duplicados SHA-256 exactos y elimina un ZIP reproducible íntegramente desde Git.
 - NOR.2 R6: normaliza el ledger estructurado a `data/pre-1-0-revision-ledger.json`, preserva íntegramente G001–G070 y actualiza consumidores vivos sin reescribir evidencia histórica.
 - NOR.2 R5: archiva 36 documentos cerrados en `docs/archive/`, actualiza índices históricos y separa evidencia cerrada de documentación viva.
 - NOR.2 R4: migra 41 documentos vivos a áreas canónicas, consolida 2 estándares heredados y sincroniza enlaces/referencias sin conservar stubs de compatibilidad.

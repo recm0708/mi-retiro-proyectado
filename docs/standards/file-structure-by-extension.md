@@ -83,9 +83,10 @@ Se mantienen como principios:
 4. El archivo histórico documental vive en `docs/archive/`.
 5. Las carpetas convencionales externas no se renombran cuando pertenecen al
    ecosistema.
-6. `_entregas/` es un directorio local heredado, no una ubicación canónica
-   versionada. Mientras exista, debe permanecer ignorado por Git.
-7. Para nuevos entregables locales se utiliza preferentemente `_deliverables/`.
+6. `_entregas/` es un nombre local heredado retirado por NOR.2 R7; permanece
+   en `.gitignore` únicamente como protección contra reaparición accidental.
+7. Los entregables y evidencias locales se ubican en `_deliverables/`, que no
+   forma parte del árbol Git canónico.
 8. Un renombre de carpeta exige actualizar imports, enlaces, rutas de pruebas,
    documentación, configuración y cualquier referencia textual que apunte a la
    ruta anterior.

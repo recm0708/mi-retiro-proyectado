@@ -5,7 +5,7 @@
 **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
 **Último tag formal legacy:** `v0.0.26-beta`
 **Fecha de revisión:** 2026-08-24
-**Normalización previa a SEC.2:** NOR.1 cierra en R7 como fase de definición de estándares; NOR.2 es la siguiente fase y aplicará esos estándares al repositorio existente antes de reanudar SEC.2.
+**Normalización previa a SEC.2:** NOR.1 está cerrado; NOR.2 permanece activo en R7 y R8 ejecutará la auditoría integral y el cierre formal antes de reanudar SEC.2.
 
 
 <!-- NOR1-R7-CLOSURE:START -->
@@ -67,10 +67,10 @@ MANT.1 quedó cerrado operativamente en R7 mediante PR #55 y commit squash `5707
 Estado vigente:
 
 - `VERSION` se promueve en R4 a `0.0.71.01-beta`.
-- `v0.0.26-beta` continúa siendo el tag formal legacy vigente hasta el cierre firmado post-merge de G071/E01.
-- `0.0.71.01-beta` representa VER.2 G071/E01 promovido en árbol; todavía no es tag formal publicado dentro del PR.
+- `v0.0.26-beta` permanece como tag legacy histórico e inmutable; el tag formal publicado de VER.2 es `v0.0.71.01-beta`.
+- `0.0.71.01-beta` representa VER.2 G071/E01 promovido y publicado mediante el tag formal `v0.0.71.01-beta`.
 - MANT.1 queda cerrado después de R5H, R6 y R7.
-- DOC.1 R1 queda activo para auditar y actualizar la documentación Markdown vigente posterior a MANT.1.
+- DOC.1 R1 está cerrado; la documentación Markdown vigente posterior a MANT.1 quedó auditada y consolidada.
 - La primera versión oficial objetivo sigue siendo `1.0.0.0` con `Build 000001`, sujeta a los gates del plan maestro.
 <!-- DOC1-R1-POST-MANT1:END -->
 
@@ -379,6 +379,43 @@ Gate local observado:
 - G001–G070 preservados;
 - `VERSION` permanece en `0.0.71.01-beta`.
 
-R6 permanece activo hasta el merge. Después continúa **NOR.2 R7**, dedicado a
-la revisión controlada de `_entregas/` y demás artefactos locales.
+R6 quedó integrado en `main` mediante PR #72 y commit squash `365ba5b`.
+
+La revisión activa pasa a **NOR.2 R7 — artefactos locales**.
 <!-- NOR2-R6-LEDGER:END -->
+
+
+<!-- NOR2-R7-LOCAL-ARTIFACTS:START -->
+## NOR.2 R7 — artefactos locales
+
+R7 resuelve la excepción transitoria `_entregas/` identificada durante la
+normalización del repositorio.
+
+La línea base auditada fue:
+
+- **29 archivos**;
+- **9,874,828 bytes**;
+- **20 `.txt`**;
+- **8 `.patch`**;
+- **1 `.zip`**.
+
+La depuración local produjo:
+
+- **20 evidencias únicas conservadas** en `_deliverables/`;
+- **2** evidencias bajo `_deliverables/dev2/`;
+- **18** evidencias bajo `_deliverables/ver2-r2/`;
+- **8 duplicados SHA-256 exactos retirados**;
+- **1 ZIP de 8,412,675 bytes retirado** después de demostrarse completamente
+  reproducible desde Git;
+- `_entregas/` retirado como ubicación local activa;
+- `_deliverables/` mantenido fuera del árbol Git canónico.
+
+El ZIP retirado fue comparado contra el commit
+`929628df38d4750fb103ffc79bdb81f8405535bb`: los **329 archivos** coincidieron
+sin faltantes, extras ni diferencias de contenido.
+
+R7 permanece activo hasta su integración en `main`.
+
+Después continúa **NOR.2 R8 — auditoría integral y cierre formal de NOR.2**.
+SEC.2 permanece pausado hasta completar dicho cierre.
+<!-- NOR2-R7-LOCAL-ARTIFACTS:END -->

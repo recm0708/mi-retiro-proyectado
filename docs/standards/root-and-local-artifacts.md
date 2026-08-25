@@ -51,11 +51,19 @@ El directorio local heredado:
 _entregas/
 ```
 
-se considera una excepción de transición. No se crean allí nuevos archivos
-versionados. NOR.2 auditará su contenido y decidirá qué conservar, migrar o
-retirar sin destruir evidencia útil.
+fue auditado y saneado durante NOR.2 R7. La evidencia local útil se migró hacia
+`_deliverables/`, los duplicados exactos se retiraron conservando una copia y
+los paquetes totalmente reproducibles desde Git no se mantienen como copias
+locales permanentes.
 
-Ambos directorios deben permanecer ignorados por Git mientras existan.
+No se crean nuevos artefactos bajo `_entregas/`. La entrada continúa en
+`.gitignore` como protección contra su reaparición accidental.
+
+`_deliverables/` es la ubicación canónica para entregables y evidencias locales
+que deban permanecer dentro del workspace sin formar parte del árbol Git.
+
+Tanto `_deliverables/` como `_entregas/` permanecen en `.gitignore`; el segundo
+nombre se conserva únicamente como protección contra una reaparición accidental.
 
 ## Evidencia temporal externa
 

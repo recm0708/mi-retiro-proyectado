@@ -7,7 +7,13 @@ from app.core.version import descomponer_version_beta_revision, version_valida
 
 
 ROOT = Path(__file__).resolve().parents[1]
-DOC = ROOT / "docs" / "VER2_R4_PROMOCION_G071_E01.md"
+DOC = (
+    ROOT
+    / "docs"
+    / "archive"
+    / "governance"
+    / "VER2_R4_PROMOCION_G071_E01.md"
+)
 
 
 def leer(path: Path) -> str:

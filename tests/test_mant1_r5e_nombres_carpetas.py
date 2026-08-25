@@ -86,6 +86,7 @@ class TestMant1R5ENombresCarpetas(unittest.TestCase):
                 relativa.startswith(".git/")
                 or relativa.startswith(".venv/")
                 or relativa.startswith("_entregas/")
+                or relativa.startswith("_deliverables/")
                 or "__pycache__/" in relativa
                 or relativa in {
                     "docs/archive/technical/AUDITORIA_CARPETAS_R5E.md",
