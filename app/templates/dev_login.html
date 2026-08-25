@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="es">
+<head><meta charset="utf-8"><title>Acceso administrativo</title></head>
+<body>
+<h1>Acceso administrativo</h1>
+{% if error %}<p>{{ error }}</p>{% endif %}
+<form method="post" action="/dev/login">
+<input type="password" name="token">
+<button type="submit">Ingresar</button>
+</form>
+</body>
+</html>
