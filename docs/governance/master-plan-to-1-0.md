@@ -256,7 +256,7 @@ Evolución visible y controlada de Developer Diagnostics:
 
 ### 7. SEC.2 — Hardening integral
 
-**Estado:** bloque activo posterior a SEC.2 R1; siguientes controles de hardening permanecen planificados.
+**Estado:** cerrado después de completar R1-R6.
 
 - autenticación y sesiones administrativas;
 - gestión de secretos;
@@ -482,7 +482,7 @@ manifest detallado de los artefactos locales se mantiene fuera del repositorio.
 R7 permanece activo hasta completar sus gates, PR, CI e integración en `main`.
 
 Después de R7 solo queda **NOR.2 R8 — auditoría integral y cierre formal**.
-SEC.2 permanece pausado hasta completar R8.
+SEC.2 quedó cerrado tras completar sus controles planificados hasta completar R8.
 <!-- NOR2-R7-LOCAL-ARTIFACTS:END -->
 
 

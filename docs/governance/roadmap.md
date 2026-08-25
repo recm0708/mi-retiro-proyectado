@@ -33,7 +33,7 @@ NOR.2 está activo. R1 audita el árbol versionado contra los estándares de NOR
 sin ejecutar todavía renombres ni movimientos. El resultado alimentará una
 matriz de migración por impacto antes de modificar rutas críticas.
 
-SEC.2 permanece pausado durante NOR.2.
+SEC.2 quedó cerrado tras completar sus controles planificados durante NOR.2.
 <!-- NOR2-R1-BASELINE:END -->
 
 
@@ -45,7 +45,7 @@ quedará con rutas y documentación vigentes; Git y `docs/archive/` preservarán
 la historia cuando corresponda. `README.md` se corrige desde R2 y se vuelve a
 auditar en el cierre.
 
-SEC.2 permanece pausado.
+SEC.2 quedó cerrado tras completar sus controles planificados.
 <!-- NOR2-R2-MATRIX:END -->
 
 
@@ -56,7 +56,7 @@ R3 ejecuta los movimientos de runtime/configuración aprobados en R2 y actualiza
 imports, plantillas, assets y pruebas de manera atómica. Las URL públicas
 permanecen estables. R4 normalizará la documentación viva.
 
-SEC.2 permanece pausado.
+SEC.2 quedó cerrado tras completar sus controles planificados.
 <!-- NOR2-R3-RUNTIME:END -->
 
 <!-- DOC1-R1-POST-MANT1:START -->
@@ -351,7 +351,7 @@ Esta referencia conserva el encabezado histórico esperado por las regresiones d
 
 ## NOR.2 R4 — documentación viva canónica
 
-R4 migra 41 documentos vivos y consolida 2 estándares heredados dentro de la estructura documental canónica. R5 tratará exclusivamente auditorías, cierres y evidencia histórica aún ubicada en la raíz de `docs/`. SEC.2 permanece pausado.
+R4 migra 41 documentos vivos y consolida 2 estándares heredados dentro de la estructura documental canónica. R5 tratará exclusivamente auditorías, cierres y evidencia histórica aún ubicada en la raíz de `docs/`. SEC.2 quedó cerrado tras completar sus controles planificados.
 
 ## NOR.2 R5 — archivo y consolidación histórica
 
@@ -417,7 +417,7 @@ sin faltantes, extras ni diferencias de contenido.
 R7 permanece activo hasta su integración en `main`.
 
 Después continúa **NOR.2 R8 — auditoría integral y cierre formal de NOR.2**.
-SEC.2 permanece pausado hasta completar dicho cierre.
+SEC.2 quedó cerrado tras completar sus controles planificados hasta completar dicho cierre.
 <!-- NOR2-R7-LOCAL-ARTIFACTS:END -->
 
 
@@ -448,4 +448,4 @@ R8 quedó integrado mediante PR #74 y commit squash `b4df9b7`. Con esa integraci
 <!-- NOR2-R8-FINAL-AUDIT:END -->
 
 
-**SEC.2 R6 en ejecución:** hardening de sesión administrativa web y preparación para HTTPS interno.
+**SEC.2 R6 cerrado:** hardening de sesión administrativa web y preparación para HTTPS interno completados.

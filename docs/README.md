@@ -3,7 +3,7 @@
 **Estado:** vigente
 **Versión de aplicación:** `0.0.71.01-beta` — VER.2 G071/E01 promovida en R4
 **Último tag formal legacy:** `v0.0.26-beta`
-**Última actualización transversal:** SEC.2 R1 — hardening CodeQL y normalización de workflows — 2026-08-25
+**Última actualización transversal:** SEC.2 R6 — cierre de hardening administrativo y preparación HTTPS interno — 2026-08-25
 **Cierres históricos preservados:** UX.4.6i / PR #34 — 841 pruebas; UX.4.6e R9 — `v0.0.25-beta`
 
 Este archivo es el punto de entrada para la documentación técnica, funcional, normativa, de privacidad, validación y auditoría de Mi Retiro Proyectado.
@@ -11,7 +11,7 @@ Este archivo es el punto de entrada para la documentación técnica, funcional, 
 
 ## Estado de normalización del repositorio
 
-**Estado actual:** NOR.2, DOC.1 R2 y SEC.2 R1 están cerrados. SEC.2 continuará con siguientes controles de hardening según planificación.
+**Estado actual:** NOR.2, DOC.1 R2 y SEC.2 R1 están cerrados. SEC.2 quedó cerrado después de completar R1-R6. Los controles futuros de despliegue productivo se gestionarán bajo el bloque correspondiente.
 
 Estado de la fase:
 
