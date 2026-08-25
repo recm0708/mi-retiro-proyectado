@@ -21,7 +21,7 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 ## Estado del proyecto
 
 - **Versión canónica vigente:** `0.0.71.01-beta`, obtenida exclusivamente desde [`VERSION`](VERSION).
-- **Último cierre integrado en `main`:** NOR.2 R4 — documentación viva en áreas canónicas, PR #70, commit squash `65b8fd9`.
+- **Último cierre integrado en `main`:** NOR.2 R5 — archivo y consolidación de documentación histórica, PR #71, commit squash `ad9b3f3`.
 - **Estado de VER.2:** cerrado; G071/E01 promovido en `VERSION` como `0.0.71.01-beta` y tag `v0.0.71.01-beta` publicado.
 - **Última versión formal legacy:** `0.0.26-beta` — tag firmado e inmutable `v0.0.26-beta`.
 - **Etapa:** desarrollo beta; repositorio público y ejecución orientada actualmente a entorno local.
@@ -32,7 +32,8 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 - **DOC.1 R1:** cerrado como auditoría documental post-MANT.1.
 - **NOR.1:** cerrado en R7; estándares determinísticos establecidos.
 - **NOR.2 R4:** cerrado; documentación viva migrada a áreas canónicas.
-- **NOR.2 R5:** activo; archivo y consolidación de documentación histórica.
+- **NOR.2 R5:** cerrado; documentación histórica consolidada en `docs/archive/`.
+- **NOR.2 R6:** activo; migración del ledger y datos de alto impacto.
 - **SEC.2:** pausado hasta completar NOR.2.
 - **Primera versión oficial objetivo:** `1.0.0.0` con `Build 000001`, únicamente después de cerrar todos los gates definidos en el plan maestro.
 
@@ -106,7 +107,7 @@ Documentos principales:
 - [`docs/archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md`](docs/archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md) — criterio contable y reconciliación VER.2;
 - [`docs/archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md`](docs/archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md) — decisiones de inclusión/exclusión del contador;
 - [`docs/governance/pre-1-0-revision-ledger.md`](docs/governance/pre-1-0-revision-ledger.md) — secuencia global G001–G070 y candidato G071;
-- [`data/revision_ledger_pre_1_0.json`](data/revision_ledger_pre_1_0.json) — ledger machine-readable;
+- [`data/pre-1-0-revision-ledger.json`](data/pre-1-0-revision-ledger.json) — ledger machine-readable;
 - [`docs/governance/licensing-and-distribution.md`](docs/governance/licensing-and-distribution.md) — decisión de licencia y estrategia de distribución;
 - [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) — avisos y obligaciones de terceros;
 - [`docs/governance/roadmap.md`](docs/governance/roadmap.md) — estado actual y próximos hitos;
@@ -143,7 +144,7 @@ Consultar:
 - [`docs/archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md`](docs/archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md) — criterio de reconciliación;
 - [`docs/archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md`](docs/archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md) — matriz de decisiones contables;
 - [`docs/governance/pre-1-0-revision-ledger.md`](docs/governance/pre-1-0-revision-ledger.md) — contador global pre-1.0;
-- [`data/revision_ledger_pre_1_0.json`](data/revision_ledger_pre_1_0.json) — representación machine-readable;
+- [`data/pre-1-0-revision-ledger.json`](data/pre-1-0-revision-ledger.json) — representación machine-readable;
 - [`docs/archive/governance/REGISTRO_CAMBIOS_HISTORICO.md`](docs/archive/governance/REGISTRO_CAMBIOS_HISTORICO.md) — mapa cronológico para auditoría.
 
 Git continúa siendo la evidencia primaria de autores, fechas, hashes y contenido histórico.

@@ -105,3 +105,14 @@ Los estados `Candidato` deben promoverse a `Verificado` únicamente después del
 | Separar documentación viva de evidencia cerrada | `docs/archive/` + evidencia R5 | `tests/test_nor2_r5_historical_documentation.py` |
 | Preservar 36 documentos clasificados por R2 | movimientos Git R5 | `test_36_documentos_archivados` |
 | Mantener `VERSION` y SEC.2 sin promoción | `VERSION` + estado documental | `test_version_y_estado_transversal` |
+
+
+## Trazabilidad NOR.2 R6
+
+| Criterio | Evidencia | Regresión |
+| --- | --- | --- |
+| Normalizar el nombre del ledger estructurado | `data/pre-1-0-revision-ledger.json` + evidencia R6 | `tests/test_nor2_r6_ledger_data.py` |
+| Preservar exactamente el contenido G001–G070 | SHA-256 R6 + validador canónico | `test_contenido_permanece_identico`, `test_invariantes_del_ledger` |
+| Mantener runtime sobre la ruta canónica | `app/core/version_ledger.py` | `test_ruta_normalizada` |
+| Eliminar consumidores vivos de la ruta anterior | barrido R6: 0 referencias no justificadas | `test_no_quedan_consumidores_vivos_de_ruta_anterior` |
+| Mantener versión y SEC.2 sin promoción | `VERSION` + estado transversal | `test_version_no_cambia`, `test_estado_transversal` |

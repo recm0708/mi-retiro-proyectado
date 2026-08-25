@@ -74,7 +74,7 @@ Estado vigente:
 - La primera versión oficial objetivo sigue siendo `1.0.0.0` con `Build 000001`, sujeta a los gates del plan maestro.
 <!-- DOC1-R1-POST-MANT1:END -->
 
-Este roadmap describe **estado actual y trabajo futuro**. La evolución detallada ya completada se conserva en `RELEASES.md`, `CHANGELOG.md`, `docs/archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md`, `docs/governance/pre-1-0-revision-ledger.md`, `docs/archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md`, `data/revision_ledger_pre_1_0.json` y `docs/archive/`.
+Este roadmap describe **estado actual y trabajo futuro**. La evolución detallada ya completada se conserva en `RELEASES.md`, `CHANGELOG.md`, `docs/archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md`, `docs/governance/pre-1-0-revision-ledger.md`, `docs/archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md`, `data/pre-1-0-revision-ledger.json` y `docs/archive/`.
 
 VER.2 es un bloque transversal de reconciliación y **no añade un bloque 15** al plan maestro de producto. DEV.2 ya quedó cerrado documentalmente en R4. MANT.1 se trata como checkpoint técnico de mantenibilidad antes de SEC.2 y tampoco añade un bloque funcional de producto. MANT.1 R1 queda como auditoría inicial de alcance, MANT.1 R2 conserva la documentación de scripts y hooks antes de SEC.2, MANT.1 R3 documenta los YAML de GitHub sin cambiar CI ni formularios y MANT.1 R4 limpia encabezados operativos para que la trazabilidad histórica permanezca en documentación, MANT.1 R5A comenta servicios Python grandes, MANT.1 R5B comenta CSS/plantilla de la guía pública, MANT.1 R5C comenta JavaScript complejo sin cambiar lógica visible y MANT.1 R5D define política/plantillas por extensión con uniformidad de encabezados.
 
@@ -215,7 +215,7 @@ Documentos canónicos de VER.2:
 - `AUDITORIA_VERSIONADO_PRE_1_0.md` — criterio contable y exclusiones;
 - `pre-1-0-revision-ledger.md` — ledger G001–G070 y reserva G071;
 - `MATRIZ_DECISION_REVISIONES_VER2.md` — justificación de la segunda pasada;
-- `../data/revision_ledger_pre_1_0.json` — ledger estructurado validable;
+- `../data/pre-1-0-revision-ledger.json` — ledger estructurado validable;
 - `../VERSIONING.md` — política de numeración.
 
 Secuencia funcional de 14 bloques hacia 1.0, sin contar VER.2 como bloque adicional:
@@ -360,3 +360,25 @@ R4 migra 41 documentos vivos y consolida 2 estándares heredados dentro de la es
 R5 retira de la raíz de `docs/` los 36 documentos cerrados clasificados por R2
 y los conserva en `docs/archive/` sin reescribir su contenido histórico. R6
 queda como siguiente revisión de NOR.2.
+
+
+<!-- NOR2-R6-LEDGER:START -->
+## NOR.2 R6 — ledger y datos de alto impacto
+
+R5 queda cerrado después de integrar el archivo histórico en PR #71.
+
+R6 normaliza el ledger machine-readable a
+`data/pre-1-0-revision-ledger.json` sin modificar su contenido, numeración,
+esquema ni versión de aplicación.
+
+Gate local observado:
+
+- **977 pruebas — OK**;
+- **0 referencias obsoletas no justificadas**;
+- integridad SHA-256 preservada;
+- G001–G070 preservados;
+- `VERSION` permanece en `0.0.71.01-beta`.
+
+R6 permanece activo hasta el merge. Después continúa **NOR.2 R7**, dedicado a
+la revisión controlada de `_entregas/` y demás artefactos locales.
+<!-- NOR2-R6-LEDGER:END -->

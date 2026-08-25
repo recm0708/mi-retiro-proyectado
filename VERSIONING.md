@@ -38,7 +38,7 @@ La fuente canónica de la versión de aplicación es el archivo raíz `VERSION`.
 - `app/core/config.py` importa `APP_VERSION`; no mantiene una copia literal.
 - FastAPI usa `APP_VERSION` como versión de la aplicación.
 - Jinja2 recibe `app_version` y el footer muestra el mismo valor.
-- El contador y la procedencia de revisiones aceptadas se auditan en `docs/governance/pre-1-0-revision-ledger.md` y `data/revision_ledger_pre_1_0.json`.
+- El contador y la procedencia de revisiones aceptadas se auditan en `docs/governance/pre-1-0-revision-ledger.md` y `data/pre-1-0-revision-ledger.json`.
 - `app/core/version_ledger.py` valida continuidad, unicidad y codificación del ledger estructurado.
 - La regla que determina qué cuenta y qué no cuenta se documenta en `docs/archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md` y `docs/archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md`.
 - README, CHANGELOG, RELEASES, ROADMAP y el ledger deben corresponder al estado vigente cuando lo describan como actual.
