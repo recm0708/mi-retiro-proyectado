@@ -21,7 +21,7 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 ## Estado del proyecto
 
 - **Versión canónica vigente:** `0.0.71.01-beta`, obtenida exclusivamente desde [`VERSION`](VERSION).
-- **Último cierre integrado en `main`:** NOR.2 R6 — normalización del ledger y datos de alto impacto, PR #72, commit squash `365ba5b`.
+- **Último cierre integrado en `main`:** NOR.2 R7 — normalización de artefactos locales, PR #73, commit squash `b8ffd39`.
 - **Estado de VER.2:** cerrado; G071/E01 promovido en `VERSION` como `0.0.71.01-beta` y tag `v0.0.71.01-beta` publicado.
 - **Última versión formal legacy:** `0.0.26-beta` — tag firmado e inmutable `v0.0.26-beta`.
 - **Etapa:** desarrollo beta; repositorio público y ejecución orientada actualmente a entorno local.
@@ -34,14 +34,14 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 - **NOR.2 R4:** cerrado; documentación viva migrada a áreas canónicas.
 - **NOR.2 R5:** cerrado; documentación histórica consolidada en `docs/archive/`.
 - **NOR.2 R6:** cerrado; ledger y datos de alto impacto normalizados.
-- **NOR.2 R7:** activo; migración y depuración de artefactos locales.
-- **NOR.2 R8:** siguiente revisión; auditoría integral y cierre de NOR.2.
+- **NOR.2 R7:** cerrado; artefactos locales heredados migrados y depurados.
+- **NOR.2 R8:** activo; auditoría integral y cierre formal de NOR.2.
 - **SEC.2:** pausado hasta completar NOR.2.
 - **Primera versión oficial objetivo:** `1.0.0.0` con `Build 000001`, únicamente después de cerrar todos los gates definidos en el plan maestro.
 
 La visibilidad pública del repositorio **no convierte una beta de desarrollo en versión oficial, no constituye un despliegue de producción y no modifica por sí sola la licencia vigente**.
 
-La versión se obtiene exclusivamente del archivo [`VERSION`](VERSION). La política completa se documenta en [`VERSIONING.md`](VERSIONING.md). VER.2 ya completó la promoción G071/E01 y publicó `v0.0.71.01-beta`; su evidencia histórica será reorganizada por NOR.2 sin perder trazabilidad. Los estándares vigentes del repositorio están en [`docs/standards/`](docs/standards) y la normalización activa se documenta en [`docs/audits/repository/`](docs/audits/repository).
+La versión se obtiene exclusivamente del archivo [`VERSION`](VERSION). La política completa se documenta en [`VERSIONING.md`](VERSIONING.md). VER.2 ya completó la promoción G071/E01 y publicó `v0.0.71.01-beta`; su evidencia histórica quedó reorganizada y preservada por NOR.2 sin perder trazabilidad. Los estándares vigentes del repositorio están en [`docs/standards/`](docs/standards) y la normalización activa se documenta en [`docs/audits/repository/`](docs/audits/repository).
 
 ## Capacidades implementadas
 

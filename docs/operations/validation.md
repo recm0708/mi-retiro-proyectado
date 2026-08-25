@@ -904,3 +904,49 @@ integración en `main` y verificación post-merge.
 Después de R7 continúa **NOR.2 R8 — auditoría integral y cierre formal**.
 SEC.2 permanece pausado hasta completar R8.
 <!-- NOR2-R7-VALIDATION:END -->
+
+
+<!-- NOR2-R8-VALIDATION:START -->
+## Validación NOR.2 R8
+
+R8 ejecuta la segunda auditoría integral del repositorio después de las
+migraciones R3–R7.
+
+Hallazgos y correcciones locales:
+
+- `docs/CHANGELOG_ADD_R5.txt` retirado como fragmento transitorio;
+- `docs/INDICE_ADD_R5.txt` retirado como fragmento transitorio;
+- `docs/` raíz queda únicamente con `README.md`;
+- 115 decisiones de la matriz R2 re-auditadas;
+- 3 alertas mecánicas clasificadas como falsos positivos semánticos;
+- consumidores operativos vivos de rutas heredadas: **0**;
+- estados vivos obsoletos antes de la corrección: **11**;
+- estados vivos obsoletos después de la corrección: **0**.
+
+Gate estructural:
+
+- estructura raíz canónica: **OK**;
+- `_entregas/`: inexistente;
+- `_deliverables/`: **20 archivos locales**;
+- artefactos locales trackeados: **0**;
+- `VERSION`: **`0.0.71.01-beta`**;
+- `APP_VERSION`: **`0.0.71.01-beta`**;
+- ledger canónico: **70 entradas G001–G070 continuas**;
+- ruta antigua del ledger: inexistente.
+
+Regresiones ejecutadas hasta este checkpoint:
+
+- `tests/test_nor2_r8_final_audit.py`:
+  **10 pruebas + 17 subtests — OK**;
+- suite completa `test_nor2_*.py`:
+  **59 pruebas + 143 subtests — OK**;
+- regresiones transversales DEV.2/GOV.1/UX.4.6i:
+  **43 pruebas + 37 subtests — OK**;
+- `git diff --check`: **OK**.
+
+El gate integral local quedó completo: **1034 pruebas + 4905 subtests** en
+`pytest`, **994 tests** en `unittest`, `pip check`, `compileall`, los **18 archivos JavaScript** y `git diff --check` quedaron en **OK**. Permanecen pendientes pre-commit, PR, CI, integración y verificación post-merge.
+
+R8 permanece activo hasta completar dichos gates e integrarse en `main`.
+SEC.2 permanece pausado hasta el cierre formal de NOR.2.
+<!-- NOR2-R8-VALIDATION:END -->

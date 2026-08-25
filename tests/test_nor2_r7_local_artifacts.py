@@ -123,11 +123,11 @@ class TestNOR2R7LocalArtifacts(unittest.TestCase):
             readme,
         )
         self.assertIn(
-            "**NOR.2 R7:** activo",
+            "**NOR.2 R7:** cerrado",
             readme,
         )
         self.assertIn(
-            "**NOR.2 R8:** siguiente revisión",
+            "**NOR.2 R8:** activo",
             readme,
         )
         self.assertIn(

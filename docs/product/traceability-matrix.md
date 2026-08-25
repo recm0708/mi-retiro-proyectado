@@ -4,7 +4,7 @@
 **Versión de aplicación:** `0.0.71.01-beta` — VER.2 G071/E01 promovida en R4
 **Último tag formal legacy:** `v0.0.26-beta`
 **Base histórica:** GOV.1.3 R4 — 2026-08-17
-**Revisión transversal:** NOR.2 R7 — 2026-08-24
+**Revisión transversal:** NOR.2 R8 — 2026-08-24
 **Clasificación:** Técnica / Auditoría
 
 
@@ -21,7 +21,8 @@ Estado documental actual:
 - MANT.1 R7 cerró operativamente el bloque en `main`.
 - DOC.1 R1 está cerrado y su documentación viva quedó consolidada.
 - VER.2 G071/E01 está cerrado y publicado como `v0.0.71.01-beta`.
-- NOR.2 R7 permanece activo; R8 será la auditoría integral y cierre de NOR.2.
+- NOR.2 R7 está cerrado.
+- NOR.2 R8 permanece activo como auditoría integral y cierre formal de NOR.2.
 - SEC.2 permanece pausado hasta completar NOR.2.
 
 Esta matriz debe distinguir trazabilidad histórica de estado vigente.
@@ -131,3 +132,18 @@ Los estados `Candidato` deben promoverse a `Verificado` únicamente después del
 | Mantener `_deliverables/` fuera del árbol Git | `.gitignore` + política de artefactos locales | `test_directorios_locales_permanecen_ignorados` |
 | Preservar la decisión histórica de R2 | matriz de migración NOR.2 R2 | `test_matriz_r2_preserva_decision_historica` |
 | Mantener `VERSION` y SEC.2 sin promoción | `VERSION` + documentación transversal | `test_version_y_estado_transversal` |
+
+
+<!-- NOR2-R8-TRACEABILITY:START -->
+## Trazabilidad NOR.2 R8
+
+| Criterio | Evidencia | Regresión |
+| --- | --- | --- |
+| Re-auditar la raíz contra la estructura canónica | gate estructural R8 | `tests/test_nor2_r8_final_audit.py` |
+| Retirar residuos transitorios directos de `docs/` | `CHANGELOG_ADD_R5.txt` e `INDICE_ADD_R5.txt` retirados | `test_docs_raiz_queda_solo_con_readme` |
+| Mantener artefactos locales fuera de Git | `_deliverables/`: 20 locales / 0 trackeados | `test_artefactos_locales_quedan_fuera_de_git` |
+| Preservar la versión G071/E01 | `VERSION` + `APP_VERSION` | `test_version_permanece_en_g071_e01` |
+| Preservar ledger G001–G070 y ruta canónica | `data/pre-1-0-revision-ledger.json` | `test_ledger_permanece_canonico_e_inmutable` |
+| Sincronizar estado vivo de NOR.2 | R7 cerrado / R8 activo / SEC.2 pausado | `test_estado_documental_vigente_es_r8` |
+| Eliminar contradicciones vigentes de VER.2/NOR.1/NOR.2 | barrido post-corrección: 0 hallazgos | `test_ver2_no_figura_como_pendiente_en_estado_vivo` |
+<!-- NOR2-R8-TRACEABILITY:END -->
