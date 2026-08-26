@@ -77,7 +77,7 @@ Contrato técnico vigente:
 
 El historial anual puede introducir aproximaciones frente a un detalle mensual oficial. Esa limitación debe permanecer visible.
 
-Consultar [sebd-modalities.md](sebd-modalities.md).
+Consultar [Modalidades de retiro por vejez — SEBD](sebd-modalities.md).
 
 ## 6. Subsistema Mixto
 
@@ -111,7 +111,7 @@ Fuentes:
 
 Última verificación: **2026-08-17**.
 
-Consultar [mixto-modalities.md](mixto-modalities.md).
+Consultar [Subsistema Mixto — diseño y alcance del motor](mixto-modalities.md).
 
 ## 7. SUCGS
 
@@ -128,7 +128,7 @@ Los factores actuariales se cargan desde `regulations/sucgs.json`. La propia met
 
 Los valores de referencia indexables no se presentan como vigentes para siempre.
 
-Consultar [sucgs-modalities.md](sucgs-modalities.md).
+Consultar [Sistema Único de Capitalización con Garantía Solidaria (SUCGS)](sucgs-modalities.md).
 
 ## 8. Datos individualizados no inferibles
 

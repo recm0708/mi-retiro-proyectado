@@ -6,6 +6,10 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ## [Unreleased]
 
+- DOC.1 R3 (candidato G113/E03): normaliza 11 referencias navegables inequívocas y formaliza etiquetas humanas para documentos y rutas técnicas clicables en inventarios vigentes.
+- DOC.1 R3 preserva CHANGELOG, validaciones históricas, matrices de trazabilidad, auditorías, archivos archivados, bloques de código, HTML y literales protegidos; no resuelve nombres ambiguos por `basename`.
+- El candidato mantiene `VERSION` en `0.1.12.07-beta`, accepted_count 112 y G113/E03 reservado hasta la promoción post-merge.
+
 
 ## [0.1.12.07-beta]
 - G112/E07: NOR.1 R8 queda aceptado después de PR #89 / merge `cc6695b` y la corrección revision-aware PR #90 / merge `2de10b5`.
