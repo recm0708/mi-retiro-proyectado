@@ -46,7 +46,7 @@ Estado vigente:
 - `v0.0.71.01-beta` fue publicado originalmente bajo la denominación VER.2 G071/E01; la reconciliación post-G070 sitúa ese estado cronológicamente en **G087/E01** sin alterar el tag.
 - MANT.1 está cerrado.
 - DOC.1 R1 está cerrado.
-- NOR.1 y NOR.2 están cerrados.
+- NOR.1 conserva su cierre aceptado en R7 y está reabierto como candidato R8 sin consumir G112; NOR.2 permanece cerrado.
 - DOC.1 R2 está cerrado como auditoría integral Markdown post-NOR.2.
 - SEC.2 quedó cerrado después de R1–R6. AUD.SEC2 R1 fue aceptado por PR #83 como G109/E01; la promoción post-merge actualizó `VERSION` a `0.1.09.01-beta` y publicó el tag/Release `v0.1.09.01-beta`. REL.GOV.1 quedó aceptado como G110/E01 mediante PR #85. DOC.2 R1 quedó aceptado/publicado como G111/E01; G112 queda reservado para NOR.1 R8 antes de PERSIST.1.
 
