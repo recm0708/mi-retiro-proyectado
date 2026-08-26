@@ -98,3 +98,8 @@ sustituye REV.1 ni REL.1.
 La reconciliación revision-aware sitúa el snapshot de cierre `4bd7d8d` en G108.
 G109/E01 (`0.1.09.01-beta`) queda reservado para AUD.SEC2 R1 y solo será aceptado
 después de gate, commit firmado, PR/CI e integración.
+
+
+## Addendum de aceptación AUD.SEC2 R1
+
+La remediación post-cierre fue aceptada mediante PR #83 y merge `ec1842dac10a5395fb594223d31092fdee3cdfc1`. AUD.SEC2 R1 queda materializado como G109/E01 (`0.1.09.01-beta`) sin reabrir SEC.2. G110/E01 queda disponible para DOC.2.

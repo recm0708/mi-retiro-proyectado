@@ -17,7 +17,7 @@ class TestGov18CierreGobierno(unittest.TestCase):
     def test_version_actual_sigue_sincronizada_y_cierre_gov1_preserva_0_0_24(self):
         version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
         self.assertEqual(version, APP_VERSION)
-        self.assertRegex(version, r"^0\.0\.\d+(?:\.\d+)?-beta$")
+        self.assertRegex(version, r"^0\.(?:0|[1-9][0-9]*)\.[0-9]{2}\.[0-9]{2}-beta$")
         cierre = (DOCS / "archive/governance/CIERRE_GOV1.md").read_text(encoding="utf-8")
         self.assertIn("0.0.24-beta", cierre)
 
@@ -107,7 +107,7 @@ class TestGov18CierreGobierno(unittest.TestCase):
             None,
         )
         self.assertIsNotNone(fila)
-        self.assertIn("Beta vigente y publicada", fila)
+        self.assertIn("Beta vigente", fila)
         self.assertIn("beta vigente", fila.lower())
         self.assertNotIn("pre-beta vigente", fila)
         self.assertIn("Históricas; no reciben correcciones independientes", texto)

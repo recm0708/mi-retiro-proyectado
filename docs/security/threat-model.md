@@ -1,7 +1,7 @@
 # Modelo de amenazas
 
 **Estado:** GOV.1.5 R1 — vigente como modelo técnico interno
-**Versión de aplicación revisada:** `0.0.71.01-beta`
+**Versión de aplicación revisada:** `0.1.09.01-beta`
 **Versión base histórica:** `0.0.25-beta`
 **Versión base histórica preservada:** `0.0.23-beta`
 **Fecha de cierre original:** 2026-08-17

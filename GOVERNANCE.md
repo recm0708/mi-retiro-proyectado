@@ -14,7 +14,7 @@ El gobierno vigente conserva la separación entre estado canónico, evidencia hi
 Estado vigente:
 
 - `VERSION` sigue siendo la fuente única de versión.
-- `0.0.71.01-beta` es la versión canónica vigente en `VERSION`.
+- `0.1.09.01-beta` es la versión canónica vigente en `VERSION` y materializa G109/E01.
 - `v0.0.71.01-beta` es el tag formal publicado por VER.2.
 - `v0.0.26-beta` permanece como tag legacy histórico e inmutable.
 - VER.2 está cerrado.
@@ -23,7 +23,7 @@ Estado vigente:
 - NOR.1 está cerrado.
 - NOR.2 está cerrado después de completar R1–R8.
 - DOC.1 R2 está cerrado como auditoría integral Markdown post-NOR.2.
-- SEC.2 quedó cerrado después de R1–R6; AUD.SEC2 R1 reconcilia el estado post-cierre, corrige el kill switch administrativo y preserva la trazabilidad de la anomalía de numeración del tag `v0.0.71.01-beta`.
+- SEC.2 quedó cerrado después de R1–R6; AUD.SEC2 R1 fue aceptado mediante PR #83 como G109/E01, corrige el kill switch administrativo y preserva la trazabilidad de la anomalía histórica de `v0.0.71.01-beta`.
 <!-- DOC1-R1-POST-MANT1:END -->
 
 ## 1. Propósito

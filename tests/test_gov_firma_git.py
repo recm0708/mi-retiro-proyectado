@@ -111,7 +111,7 @@ class TestGovFirmaGit(unittest.TestCase):
 
     def test_roadmap_declara_version_canonica_y_prebloque_firma(self):
         texto = (DOCS / "governance/roadmap.md").read_text(encoding="utf-8")
-        self.assertIn(f"**Versión de aplicación:** `{self.version}`", texto)
+        self.assertIn(f"**Versión vigente:** `{self.version}`", texto)
         self.assertIn("Firma e integridad Git/GitHub", texto)
         self.assertIn("- [x] primer commit nuevo firmado y verificado por GitHub;", texto)
         self.assertIn("- [x] materialización firmada de `v0.0.1-beta` a `v0.0.21-beta`;", texto)

@@ -61,7 +61,7 @@ class TestMarkdownAudit(unittest.TestCase):
             issues = audit_markdown.audit_file(
                 root,
                 rel,
-                "0.0.71.01-beta",
+                "0.1.09.01-beta",
             )
 
             codes = {issue.code for issue in issues}
@@ -90,7 +90,7 @@ class TestMarkdownAudit(unittest.TestCase):
             issues = audit_markdown.audit_file(
                 root,
                 rel,
-                "0.0.71.01-beta",
+                "0.1.09.01-beta",
             )
 
             codes = {issue.code for issue in issues}
@@ -116,7 +116,7 @@ class TestMarkdownAudit(unittest.TestCase):
             issues = audit_markdown.audit_file(
                 root,
                 rel,
-                "0.0.71.01-beta",
+                "0.1.09.01-beta",
             )
 
             self.assertIn(
@@ -142,7 +142,7 @@ class TestMarkdownAudit(unittest.TestCase):
             issues = audit_markdown.audit_file(
                 root,
                 rel,
-                "0.0.71.01-beta",
+                "0.1.09.01-beta",
             )
 
             self.assertIn(

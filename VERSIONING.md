@@ -14,10 +14,10 @@ La fuente canónica de versión continúa siendo `VERSION`.
 
 Estado vigente:
 
-- `VERSION` contiene `0.0.71.01-beta` y sigue siendo la fuente canónica visible mientras AUD.SEC2 R1 permanece sin aceptar.
+- `VERSION` contiene `0.1.09.01-beta` y materializa G109/E01, ya aceptado mediante PR #83.
 - `v0.0.71.01-beta` está publicado y es inmutable; `v0.0.26-beta` permanece como último tag de la familia legacy.
 - La reconciliación post-G070 reconstruye **G071–G108** y determina que el estado materializado por el tag `v0.0.71.01-beta` corresponde cronológicamente a **G087**. La anomalía no autoriza mover, borrar ni recrear el tag.
-- `4bd7d8d` es el árbol reconciliado como **G108**; **G109/E01** (`0.1.09.01-beta`) queda reservado para AUD.SEC2 R1 y solo se consumirá después de gate, commit firmado, PR/CI e integración.
+- `4bd7d8d` permanece como snapshot reconciliado G108; AUD.SEC2 R1 fue aceptado sobre `ec1842d` como **G109/E01** (`0.1.09.01-beta`). **G110/E01** (`0.1.10.01-beta`) es el siguiente candidato disponible para DOC.2.
 - Los cierres y sincronizaciones que no crean un estado materialmente distinto no consumen `G` por sí solos.
 
 Cualquier promoción futura de versión debe seguir el proceso formal de release, validación, PR/CI, tag y evidencia documental correspondiente.
@@ -368,7 +368,7 @@ La primera promoción revision-aware partió de un ledger cuya base auditada
 terminaba en `7037addd` (G070). Antes de la promoción de VER.2 ya existían
 estados aceptados posteriores —DEV.2, MANT.1 y DOC.1— que no habían sido
 incorporados al contador. La auditoría de 2026-08-25 reconstruye la secuencia
-completa hasta SEC.2 R6 y la fija en G108.
+completa hasta SEC.2 R6 y la fija en G108. AUD.SEC2 R1 queda aceptado posteriormente como G109/E01 mediante PR #83 y merge `ec1842d`.
 
 Esta corrección es **prospectiva y documental**: preserva los tags publicados y
 no genera tags retroactivos para G071–G108. El snapshot exacto del ledger G070

@@ -10,7 +10,7 @@
 
 [![Validación continua](https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/ci.yml)
 [![Auditoría de gobernanza](https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/governance-audit.yml/badge.svg?branch=main)](https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/governance-audit.yml)
-![Versión](https://img.shields.io/badge/versi%C3%B3n-0.0.71.01--beta-2563eb)
+![Versión](https://img.shields.io/badge/versi%C3%B3n-0.1.09.01--beta-2563eb)
 ![Python](https://img.shields.io/badge/Python-3.13%20%7C%203.14-3776AB?logo=python&logoColor=white)
 ![Licencia](https://img.shields.io/badge/licencia-propietaria-6B7280)
 
@@ -20,17 +20,17 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 
 ## Estado del proyecto
 
-- **Versión canónica vigente:** `0.0.71.01-beta`, obtenida exclusivamente desde [`VERSION`](VERSION). Esta versión publicada se conserva sin retaggear mientras se completa la reconciliación revision-aware posterior a G070.
-- **Último cierre integrado en `main`:** SEC.2 — cierre formal de R1–R6 en `4bd7d8d`.
-- **Estado de SEC.2:** cerrado después de R1–R6; la auditoría post-cierre detectó y corrige antes de la siguiente promoción una regresión del kill switch administrativo y desalineaciones documentales.
-- **Estado revision-aware reconciliado:** G108 aceptado sobre el árbol `4bd7d8d`; G109/E01 (`0.1.09.01-beta`) queda reservado para el saneamiento AUD.SEC2 R1 y solo se consumirá tras gate, commit firmado, PR/CI y merge.
-- **Tag `v0.0.71.01-beta`:** publicado e inmutable. La auditoría post-G070 determinó que el estado etiquetado corresponde cronológicamente a G087; la anomalía histórica se documenta sin mover ni recrear el tag.
+- **Versión canónica vigente:** `0.1.09.01-beta`, obtenida exclusivamente desde [`VERSION`](VERSION). Materializa G109/E01 después de la aceptación de AUD.SEC2 R1 mediante PR #83; el tag formal de esta versión queda pendiente del paso post-merge.
+- **Último cierre integrado en `main`:** AUD.SEC2 R1 — saneamiento post-SEC.2 y reconciliación revision-aware en `ec1842d` (PR #83).
+- **Estado de SEC.2:** cerrado después de R1–R6; AUD.SEC2 R1 corrigió la regresión del kill switch administrativo, alineó documentación/ledger y quedó aceptado como G109.
+- **Estado revision-aware reconciliado:** G109/E01 (`0.1.09.01-beta`) aceptado sobre `ec1842d`; G110/E01 (`0.1.10.01-beta`) es el siguiente candidato disponible para DOC.2.
+- **Último tag revision-aware publicado:** `v0.0.71.01-beta`, preservado e inmutable. La auditoría post-G070 determinó que ese estado corresponde cronológicamente a G087; la promoción G109 no mueve ni recrea ese tag y su nuevo tag formal se crea únicamente después de revalidar `main`.
 - **Última versión formal legacy:** `0.0.26-beta` — tag firmado e inmutable `v0.0.26-beta`.
 - **Etapa:** desarrollo beta; repositorio público y ejecución orientada actualmente a entorno local.
 - **GOV.1, PLAN.1, DEV.2, MANT.1, DOC.1 R1, NOR.1, NOR.2 y DOC.1 R2:** cerrados.
 - **NOR.2:** cerrado después de R1–R8; sus evidencias históricas permanecen preservadas.
 - **SEC.2:** R1–R6 cerrados: hardening CodeQL, autenticación administrativa, protección centralizada, auditoría, sesión web y endurecimiento configurable para HTTPS interno.
-- **Siguiente bloque funcional tras el saneamiento AUD.SEC2 R1:** DOC.2.
+- **Siguiente bloque funcional:** DOC.2, con G110/E01 (`0.1.10.01-beta`) como siguiente candidato disponible cuando se abra su primera unidad aceptable.
 - **Primera versión oficial objetivo:** `1.0.0.0` con `Build 000001`, únicamente después de cerrar todos los gates definidos en el plan maestro.
 
 La visibilidad pública del repositorio **no convierte una beta de desarrollo en versión oficial, no constituye un despliegue de producción y no modifica por sí sola la licencia vigente**.
@@ -102,7 +102,7 @@ Documentos principales:
 - [`docs/archive/governance/CIERRE_GOV1.md`](docs/archive/governance/CIERRE_GOV1.md) — auditoría final y decisión de cierre de GOV.1;
 - [`docs/archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md`](docs/archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md) — criterio contable y reconciliación VER.2;
 - [`docs/archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md`](docs/archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md) — decisiones de inclusión/exclusión del contador;
-- [`docs/governance/pre-1-0-revision-ledger.md`](docs/governance/pre-1-0-revision-ledger.md) — secuencia reconciliada G001–G108 y próximo candidato G109;
+- [`docs/governance/pre-1-0-revision-ledger.md`](docs/governance/pre-1-0-revision-ledger.md) — secuencia reconciliada G001–G109 y próximo candidato G110;
 - [`data/pre-1-0-revision-ledger.json`](data/pre-1-0-revision-ledger.json) — ledger machine-readable;
 - [`docs/governance/licensing-and-distribution.md`](docs/governance/licensing-and-distribution.md) — decisión de licencia y estrategia de distribución;
 - [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) — avisos y obligaciones de terceros;

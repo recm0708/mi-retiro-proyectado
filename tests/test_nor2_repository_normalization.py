@@ -54,7 +54,7 @@ class TestNOR2RepositoryNormalization(unittest.TestCase):
 
     def test_version_permanece_sin_cambios(self):
         version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
-        self.assertEqual("0.0.71.01-beta", version)
+        self.assertEqual("0.1.09.01-beta", version)
 
     def test_aplicador_temporal_no_forma_parte_del_arbol_final(self):
         self.assertFalse((ROOT / "apply_nor2_r1.py").exists())

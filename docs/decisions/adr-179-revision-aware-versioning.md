@@ -1,6 +1,6 @@
 # ADR-179 — El versionado beta usa un ledger de estados aceptados y no cuenta commits como revisiones
 
-**Estado:** Aceptada; reconciliada documentalmente por AUD.SEC2 R1 sin reescribir tags publicados.
+**Estado:** Aceptada; reconciliada por AUD.SEC2 R1 y materializada hasta G109/E01 sin reescribir tags publicados.
 **Fecha:** 2026-08-21
 **Ámbito:** Gobierno / Versionado / Release / Trazabilidad
 
@@ -35,7 +35,7 @@ Donde:
 - los commits `feat/test/docs` de la misma revisión no consumen números adicionales;
 - PR, squash, CI y tag son evidencia de aceptación, no revisiones por sí mismos.
 
-La formulación inicial de esta ADR situó provisionalmente `7037addd44253e528c77460b678d2b3ccd540dd5` en **G057** y reservó G058/E01. La segunda pasada de VER.2 corrigió posteriormente esa base a **G070**; AUD.SEC2 R1 mantiene ambas evidencias y reconcilia los estados aceptados posteriores hasta **G108**.
+La formulación inicial de esta ADR situó provisionalmente `7037addd44253e528c77460b678d2b3ccd540dd5` en **G057** y reservó G058/E01. La segunda pasada de VER.2 corrigió posteriormente esa base a **G070**; AUD.SEC2 R1 mantiene ambas evidencias, reconcilia los estados aceptados posteriores hasta **G108** y queda aceptado a su vez como **G109/E01** mediante PR #83.
 
 Los identificadores revision-aware reconstruidos son de auditoría y no autorizan tags retroactivos. Los tags legacy `v0.0.1-beta`–`v0.0.26-beta` permanecen firmados e inmutables; no se crean tags revision-aware retrospectivos.
 
@@ -100,8 +100,7 @@ extendida después a NOR.1, NOR.2, DOC.1 R2 y SEC.2, fija el árbol `4bd7d8d` en
 El estado promovido históricamente como `0.0.71.01-beta` corresponde por orden
 cronológico a **G087**. El tag publicado permanece inmutable: no se mueve, no se
 borra y no se sustituye. La corrección se aplica al ledger y a la numeración
-futura. G109/E01 (`0.1.09.01-beta`) queda reservado para AUD.SEC2 R1 y no se
-considera aceptado hasta superar su gate e integración.
+futura. G109/E01 (`0.1.09.01-beta`) quedó aceptado para AUD.SEC2 R1 mediante PR #83 y merge `ec1842d`; la sincronización post-merge materializa ese mismo estado en `VERSION` y no consume G110.
 
 Evidencia: `docs/audits/governance/post-g070-revision-reconciliation.md` y el
 snapshot G070 preservado en

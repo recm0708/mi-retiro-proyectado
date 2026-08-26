@@ -1,11 +1,11 @@
 # Roadmap
 
 **Estado:** vigente
-**Versión vigente:** `0.0.71.01-beta` — tag publicado preservado; reconciliación viva G108
+**Versión vigente:** `0.1.09.01-beta` — G109/E01 aceptado; tag formal G109 pendiente post-merge
 **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
 **Último tag formal legacy:** `v0.0.26-beta`
 **Fecha de revisión:** 2026-08-25
-**Estado actual:** SEC.2 está cerrado después de R1–R6. AUD.SEC2 R1 corrige hallazgos post-cierre y reconcilia G071–G108; después continúa DOC.2.
+**Estado actual:** SEC.2 está cerrado después de R1–R6 y AUD.SEC2 R1 quedó aceptado como G109/E01 mediante PR #83. DOC.2 es el siguiente bloque; G110/E01 (`0.1.10.01-beta`) es el siguiente candidato disponible.
 
 
 <!-- NOR1-R7-CLOSURE:START -->
@@ -20,8 +20,8 @@ La secuencia operativa previa a SEC.2 queda:
 1. **NOR.1** — definición y auditoría preparatoria — cerrado en R7;
 2. **NOR.2** — normalización integral del repositorio — cerrado en R8 mediante PR #74;
 3. **SEC.2** — hardening integral — cerrado después de R1–R6;
-4. **AUD.SEC2 R1** — saneamiento post-cierre y reconciliación revision-aware — candidato G109/E01;
-5. **DOC.2** — siguiente bloque funcional después de aceptar el saneamiento.
+4. **AUD.SEC2 R1** — saneamiento post-cierre y reconciliación revision-aware — cerrado/aceptado como G109/E01 mediante PR #83;
+5. **DOC.2** — siguiente bloque funcional; G110/E01 disponible para su primera revisión aceptable.
 
 NOR.2 ejecutó los movimientos, renombrados, consolidaciones y retiros que
 NOR.1 deliberadamente no realizó.
@@ -209,12 +209,12 @@ No existe una una revisión intermedia no demostrada entre UX.4.6i R1 y R1.2 dem
 
 **VER.2:** bloque transversal cerrado. La primera promoción se publicó como `0.0.71.01-beta`; AUD.SEC2 R1 documenta que el ledger usado entonces terminaba en G070 y que la reconstrucción completa sitúa ese estado en G087 sin modificar el tag inmutable.
 
-**Checkpoint técnico actual:** el árbol `4bd7d8d` está reconciliado como G108, SEC.2 cerró R1–R6 y AUD.SEC2 R1 reserva G109/E01 antes de DOC.2.
+**Checkpoint técnico actual:** `4bd7d8d` permanece como G108; AUD.SEC2 R1 fue aceptado en `ec1842d` como G109/E01 y DOC.2 queda como siguiente bloque con G110/E01 disponible.
 
 Documentos canónicos de VER.2:
 
 - `AUDITORIA_VERSIONADO_PRE_1_0.md` — criterio contable y exclusiones;
-- `pre-1-0-revision-ledger.md` — ledger reconciliado G001–G108 y reserva G109;
+- `pre-1-0-revision-ledger.md` — ledger reconciliado G001–G109 y siguiente Global G110;
 - `MATRIZ_DECISION_REVISIONES_VER2.md` — justificación de la segunda pasada;
 - `../data/pre-1-0-revision-ledger.json` — ledger estructurado validable;
 - `../VERSIONING.md` — política de numeración.
@@ -454,7 +454,7 @@ R8 quedó integrado mediante PR #74 y commit squash `b4df9b7`. Esa frase describ
 
 ## AUD.SEC2 R1 — saneamiento post-cierre
 
-**Estado:** candidato; no consume G109 hasta integrar.
+**Estado:** cerrado; G109 consumido por aceptación de PR #83 y merge `ec1842d`.
 
 Alcance:
 
@@ -462,5 +462,6 @@ Alcance:
 - auditar individualmente los 140 Markdown del snapshot `4bd7d8d`;
 - reconciliar el ledger desde G070 hasta G108;
 - preservar `v0.0.71.01-beta` como anomalía histórica inmutable;
-- dejar G109/E01 (`0.1.09.01-beta`) reservado para esta unidad de trabajo;
+- aceptar G109/E01 (`0.1.09.01-beta`) mediante PR #83 y sincronizar `VERSION` post-merge;
+- dejar G110/E01 (`0.1.10.01-beta`) disponible para DOC.2;
 - habilitar DOC.2 únicamente después de gate, PR/CI y merge.

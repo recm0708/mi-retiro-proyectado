@@ -104,7 +104,7 @@ class TestNOR2R8FinalAudit(unittest.TestCase):
         ).strip()
 
         self.assertEqual(
-            "0.0.71.01-beta",
+            "0.1.09.01-beta",
             version,
         )
 
@@ -144,17 +144,17 @@ class TestNOR2R8FinalAudit(unittest.TestCase):
         )
 
         self.assertEqual(
-            108,
+            109,
             raw["accepted_count"],
         )
 
         self.assertEqual(
-            108,
+            109,
             len(raw["entries"]),
         )
 
         self.assertEqual(
-            list(range(1, 109)),
+            list(range(1, 110)),
             [
                 item["global_revision"]
                 for item in raw["entries"]
@@ -162,12 +162,12 @@ class TestNOR2R8FinalAudit(unittest.TestCase):
         )
 
         self.assertEqual(
-            109,
+            110,
             raw["next_global_if_ver2_accepted"],
         )
 
         self.assertEqual(
-            "0.1.09.01-beta",
+            "0.1.10.01-beta",
             raw["next_candidate"],
         )
 
@@ -184,7 +184,7 @@ class TestNOR2R8FinalAudit(unittest.TestCase):
         self.assertIn("**NOR.2:** cerrado", readme)
         self.assertIn("SEC.2", readme)
         self.assertIn("R1–R6", readme)
-        self.assertIn("G108", readme)
+        self.assertIn("G109", readme)
         self.assertIn("AUD.SEC2 R1", docs)
         self.assertIn("checkpoint histórico de NOR.2", traceability)
 

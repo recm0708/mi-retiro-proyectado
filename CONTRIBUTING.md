@@ -13,8 +13,8 @@ Estado vigente:
 - VER.2 está cerrado; G071/E01 fue promovido y publicado como `v0.0.71.01-beta`.
 - NOR.1 y NOR.2 están cerrados; NOR.2 completó R1–R8.
 - DOC.1 R2 está cerrado como auditoría integral Markdown posterior al cierre de NOR.2.
-- `VERSION` permanece sincronizado con la versión canónica vigente `0.0.71.01-beta`.
-- SEC.2 quedó cerrado después de R1–R6. Los cambios post-cierre que afecten autenticación, sesiones, cookies, secretos o endpoints administrativos requieren regresión de seguridad y sincronización documental antes de promover una nueva revisión.
+- `VERSION` permanece sincronizado con la versión canónica vigente `0.1.09.01-beta` (G109/E01).
+- SEC.2 quedó cerrado después de R1–R6 y AUD.SEC2 R1 quedó aceptado como G109/E01. Los cambios posteriores que afecten autenticación, sesiones, cookies, secretos o endpoints administrativos requieren regresión de seguridad y sincronización documental antes de promover una nueva revisión.
 - Todo cambio debe mantener sincronizados código, pruebas, documentación y evidencia aplicable.
 <!-- DOC1-R1-POST-MANT1:END -->
 

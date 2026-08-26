@@ -3,7 +3,7 @@
 **Estado:** vigente
 **Versión base al iniciar el plan:** `0.0.25-beta`
 **Cierre histórico de PLAN.1:** `0.0.26-beta` / `v0.0.26-beta`
-**Versión transversal vigente:** `0.0.71.01-beta` — tag publicado preservado; reconciliación viva G108
+**Versión transversal vigente:** `0.1.09.01-beta` — G109/E01 aceptado; tag formal G109 pendiente post-merge
 **Fecha:** 2026-08-25
 **Clasificación:** Producto / Arquitectura / QA / Release
 
@@ -17,7 +17,7 @@ funcionales al plan de 14 bloques.
 - **NOR.1:** cerrado en R7; estándares determinísticos establecidos.
 - **NOR.2:** cerrado en R8 mediante PR #74; normalización integral completada.
 - **DOC.1 R2:** auditoría integral Markdown post-NOR.2 cerrada; documentación vigente, evidencia histórica y controles permanentes quedaron reconciliados.
-- **SEC.2 R1–R6:** cerrados; hardening CodeQL, autenticación/protección administrativa, auditoría, sesión web y hardening de sesión completados. AUD.SEC2 R1 ejecuta el saneamiento post-cierre antes de DOC.2.
+- **SEC.2 R1–R6:** cerrados; hardening CodeQL, autenticación/protección administrativa, auditoría, sesión web y hardening de sesión completados. AUD.SEC2 R1 quedó aceptado como G109/E01 mediante PR #83; DOC.2 es el siguiente bloque.
 
 La separación evita que SEC.2 cree nuevas rutas, archivos o estructuras sobre
 una base cuya nomenclatura y documentación no hayan sido normalizadas.
@@ -518,7 +518,7 @@ SEC.2 está cerrado después de R1–R6. Antes de abrir DOC.2, AUD.SEC2 R1 ejecu
 una auditoría integral post-cierre porque el snapshot `4bd7d8d` reveló una
 regresión del kill switch administrativo y un ledger revision-aware incompleto.
 
-La reconciliación preserva G001–G070, reconstruye G071–G108 y reserva G109/E01
-(`0.1.09.01-beta`) para AUD.SEC2 R1. El tag `v0.0.71.01-beta` se conserva
+La reconciliación preserva G001–G070, reconstruye G071–G108 y AUD.SEC2 R1 queda aceptado como G109/E01
+(`0.1.09.01-beta`) mediante PR #83. G110/E01 (`0.1.10.01-beta`) queda disponible para DOC.2. El tag `v0.0.71.01-beta` se conserva
 inmutable aunque su estado corresponda cronológicamente a G087. Tras aceptar
 AUD.SEC2 R1, el siguiente bloque del plan vuelve a ser **DOC.2**.

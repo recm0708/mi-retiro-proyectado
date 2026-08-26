@@ -147,7 +147,7 @@ class TestNOR2R3RuntimeMigration(unittest.TestCase):
 
     def test_version_no_cambia(self):
         self.assertEqual(
-            "0.0.71.01-beta",
+            "0.1.09.01-beta",
             (ROOT / "VERSION").read_text(encoding="utf-8").strip(),
         )
 

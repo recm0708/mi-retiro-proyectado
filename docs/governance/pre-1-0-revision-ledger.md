@@ -3,9 +3,9 @@
 **Proyecto:** Mi Retiro Proyectado
 **Base auditada:** `7037addd44253e528c77460b678d2b3ccd540dd5`
 **Contador histórico en la base `7037addd`:** **G070**
-**Contador aceptado reconciliado al commit `4bd7d8d`:** **G108**
-**Siguiente Global disponible:** **G109**
-**Siguiente candidato reservado para auditoría/remediación post-SEC.2:** `0.1.09.01-beta`
+**Contador aceptado reconciliado al commit `ec1842d`:** **G109**
+**Siguiente Global disponible:** **G110**
+**Siguiente candidato disponible para DOC.2:** `0.1.10.01-beta`
 
 
 <!-- DOC1-R1-REVISION-MANUAL:START -->
@@ -21,16 +21,14 @@ Estado vigente de la contabilidad:
 - G001–G070 permanecen exactamente como reconstrucción histórica de VER.2.
 - G071–G108 registran estados materialmente distintos aceptados después de
   `7037addd`, desde DEV.2 hasta SEC.2 R6.
+- G109 registra AUD.SEC2 R1 ya aceptado mediante PR #83 y merge `ec1842d`.
 - El tag publicado `v0.0.71.01-beta` se conserva inmutable. Su cadena de versión
   fue promovida antes de contabilizar los estados DEV.2, MANT.1 y DOC.1 R1 que
   ya existían después de `7037addd`; por eso queda documentada como una
   **anomalía histórica de numeración**, no como el identificador revision-aware
   correcto del estado global G071.
-- La versión de `VERSION` permanece temporalmente en `0.0.71.01-beta` hasta que
-  la remediación post-SEC.2 sea aceptada y se ejecute la promoción de
-  reconciliación correspondiente.
-- El siguiente candidato reservado es G109/E01: `0.1.09.01-beta`, bajo el
-  checkpoint transversal `AUD.SEC2`.
+- `VERSION` se sincroniza a `0.1.09.01-beta` después de la aceptación de AUD.SEC2 R1 como G109/E01.
+- El siguiente Global disponible es G110/E01: `0.1.10.01-beta`, reservado para DOC.2 únicamente cuando se prepare su primera unidad candidata.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 
 Este ledger registra los estados aceptados reconstruidos durante VER.2 y su reconciliación posterior. La regla contable histórica y las exclusiones originales se conservan en `docs/archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md` y `docs/archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md`; la ampliación post-G070 se justifica en `docs/audits/governance/post-g070-revision-reconciliation.md`.
@@ -170,6 +168,7 @@ El detalle de inclusión/exclusión está en `docs/audits/governance/post-g070-r
 | G106 | `0.1.06.04-beta` | SEC.2 R4 — auditoría y observabilidad administrativa | `0.0.71.01-beta` | commit firmado 5006e28; squash d7a3b54 / PR #79 |
 | G107 | `0.1.07.05-beta` | SEC.2 R5 — sesión administrativa web | `0.0.71.01-beta` | commit 0966cd2 / PR #80 |
 | G108 | `0.1.08.06-beta` | SEC.2 R6 — hardening de sesiones administrativas | `0.0.71.01-beta` | commit 38da72f / PR #81 |
+| G109 | `0.1.09.01-beta` | AUD.SEC2 R1 — auditoría y remediación integral post-SEC.2 | `0.1.09.01-beta` | PR #83 / merge `ec1842d`; 1040 pruebas; CI Python 3.13/3.14 + Markdown/gobernanza en success |
 
 ### Anomalía histórica del tag `v0.0.71.01-beta`
 
@@ -200,12 +199,14 @@ El ledger estructurado conserva también estas exclusiones para no perder histor
 
 ## Próximo estado
 
-La auditoría post-SEC.2 reserva el siguiente estado únicamente como candidato:
+AUD.SEC2 R1 superó gate local, PR #83, CI remota e integración y queda aceptado
+como G109/E01. La sincronización post-merge materializa ese mismo estado en
+`VERSION`; **no consume G110**.
 
 | Global | ID revision-aware candidato | Bloque | Condición |
 |---:|---|---|---|
-| G109 | `0.1.09.01-beta` | AUD.SEC2 R1 — auditoría y remediación post-SEC.2 | correcciones + auditoría documental integral + gate completo + PR/CI verde + integración |
+| G110 | `0.1.10.01-beta` | DOC.2 — primera unidad candidata | definir alcance DOC.2 + gate completo + commit firmado + PR/CI + integración |
 
-G109 no queda consumido por existir en una rama de trabajo. Después de su
-integración deberá ejecutarse la sincronización post-merge del ledger y la
-promoción de `VERSION` sin reescribir el tag histórico `v0.0.71.01-beta`.
+El tag histórico `v0.0.71.01-beta` permanece inmutable. El tag
+`v0.1.09.01-beta` solo se crea de forma firmada después de integrar y revalidar
+la promoción G109/E01.

@@ -39,7 +39,7 @@ class TestUx46eR91CandidatoCierre(unittest.TestCase):
     def test_security_distingue_candidato_y_lineas_historicas(self):
         texto = (ROOT / "SECURITY.md").read_text(encoding="utf-8")
         version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
-        self.assertIn(f"| `{version}` | Versión vigente promovida en VER.2 R4", texto)
+        self.assertIn(f"| `{version}` | Beta vigente promovida en `VERSION` como G109/E01", texto)
         self.assertIn("Históricas; no reciben correcciones independientes", texto)
 
     def test_changelog_preserva_hito_0_0_25(self):
