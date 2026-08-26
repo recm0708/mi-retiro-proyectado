@@ -55,19 +55,56 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
 
     def test_g112_acepta_nor1_r8_y_reserva_doc1_r3(self):
         ledger = cargar_ledger()
-        self.assertEqual("0.1.12.07-beta", (ROOT / "VERSION").read_text(encoding="utf-8").strip())
-        self.assertEqual(112, ledger["accepted_count"]); self.assertEqual(113, ledger["next_global"]); self.assertEqual("0.1.13.03-beta", ledger["next_candidate"]); self.assertEqual("DOC.1", ledger["next_candidate_block"])
-        entry = ledger["entries"][-1]; self.assertEqual(112, entry["global_revision"]); self.assertEqual("NOR.1", entry["block"]); self.assertEqual(7, entry["ordinal"])
-        candidate=self.data["current_candidate"]; self.assertEqual(113,candidate["global_revision"]); self.assertEqual("DOC.1",candidate["block"]); self.assertEqual("R3",candidate["revision"]); self.assertEqual("reserved_not_accepted",candidate["state"]); self.assertEqual("PERSIST.1",candidate["next_functional_block_if_accepted"])
+        version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
+
+        self.assertEqual("0.1.12.07-beta", version)
+        self.assertEqual(112, ledger["accepted_count"])
+        self.assertEqual(113, ledger["next_global"])
+        self.assertEqual("0.1.13.03-beta", ledger["next_candidate"])
+        self.assertEqual("DOC.1", ledger["next_candidate_block"])
+
+        entry = ledger["entries"][-1]
+        self.assertEqual(112, entry["global_revision"])
+        self.assertEqual("NOR.1", entry["block"])
+        self.assertEqual(7, entry["ordinal"])
+
+        candidate = self.data["current_candidate"]
+        self.assertEqual(113, candidate["global_revision"])
+        self.assertEqual("DOC.1", candidate["block"])
+        self.assertEqual("R3", candidate["revision"])
+        self.assertEqual("reserved_not_accepted", candidate["state"])
+        self.assertEqual(
+            "PERSIST.1",
+            candidate["next_functional_block_if_accepted"],
+        )
 
     def test_candidato_reabierto_continua_ordinal_del_bloque(self):
-        ledger=cargar_ledger(); ords=[e["ordinal"] for e in ledger["entries"] if e["block"]=="NOR.1"]; self.assertEqual([1,2,3,4,5,6,7],ords)
-        candidato=copy.deepcopy(ledger); candidato["next_candidate_block"]="NOR.1"; candidato["next_candidate"]="0.1.13.08-beta"; validar_ledger(candidato)
-        invalido=copy.deepcopy(ledger); invalido["next_candidate_block"]="NOR.1"; invalido["next_candidate"]="0.1.13.01-beta"
-        with self.assertRaises(LedgerRevisionError): validar_ledger(invalido)
+        ledger = cargar_ledger()
+        ordinales = [
+            entry["ordinal"]
+            for entry in ledger["entries"]
+            if entry["block"] == "NOR.1"
+        ]
+        self.assertEqual([1, 2, 3, 4, 5, 6, 7], ordinales)
+
+        candidato = copy.deepcopy(ledger)
+        candidato["next_candidate_block"] = "NOR.1"
+        candidato["next_candidate"] = "0.1.13.08-beta"
+        validar_ledger(candidato)
+
+        invalido = copy.deepcopy(ledger)
+        invalido["next_candidate_block"] = "NOR.1"
+        invalido["next_candidate"] = "0.1.13.01-beta"
+        with self.assertRaises(LedgerRevisionError):
+            validar_ledger(invalido)
 
     def test_bloque_nuevo_comienza_en_e01(self):
-        ledger=cargar_ledger(); c=copy.deepcopy(ledger); c["next_candidate_block"]="PERSIST.1"; c["next_candidate"]="0.1.13.01-beta"; validar_ledger(c)
+        ledger = cargar_ledger()
+        candidato = copy.deepcopy(ledger)
+        candidato["next_candidate_block"] = "PERSIST.1"
+        candidato["next_candidate"] = "0.1.13.01-beta"
+
+        validar_ledger(candidato)
 
     def test_politica_y_auditoria_estan_indexadas(self):
         standards = (
@@ -86,9 +123,21 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
         self.assertNotIn("DOC.exists", self.data["non_block_tokens"])
 
     def test_documentacion_viva_declara_g112_aceptado_y_doc1_r3(self):
-        for rel in ("VERSIONING.md","GOVERNANCE.md","CONTRIBUTING.md","SECURITY.md","docs/README.md","docs/governance/master-plan-to-1-0.md","docs/governance/roadmap.md","docs/governance/pre-1-0-revision-ledger.md"):
-            content=(ROOT/rel).read_text(encoding="utf-8")
-            with self.subTest(rel=rel): self.assertIn("G112",content); self.assertIn("NOR.1 R8",content); self.assertIn("DOC.1 R3",content)
+        for rel in (
+            "VERSIONING.md",
+            "GOVERNANCE.md",
+            "CONTRIBUTING.md",
+            "SECURITY.md",
+            "docs/README.md",
+            "docs/governance/master-plan-to-1-0.md",
+            "docs/governance/roadmap.md",
+            "docs/governance/pre-1-0-revision-ledger.md",
+        ):
+            content = (ROOT / rel).read_text(encoding="utf-8")
+            with self.subTest(rel=rel):
+                self.assertIn("G112", content)
+                self.assertIn("NOR.1 R8", content)
+                self.assertIn("DOC.1 R3", content)
 
     def test_auditor_automatico_queda_limpio(self):
         proc = subprocess.run(
