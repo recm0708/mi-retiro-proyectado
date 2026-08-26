@@ -1,7 +1,7 @@
 # Proceso de release
 
 **Estado:** Vigente
-**Versión de aplicación:** `0.0.71.01-beta` — VER.2 G071/E01 promovida en R4
+**Versión de aplicación:** `0.1.09.01-beta` — AUD.SEC2 R1 / G109-E01 promovida post-merge
 **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
 **Último tag formal legacy:** `v0.0.26-beta`
 **Versión base histórica preservada:** `0.0.23-beta`
@@ -18,12 +18,12 @@ El cierre de MANT.1 R7 no constituye release formal ni cambia la versión canón
 Para una release posterior se mantiene el criterio vigente:
 
 - `VERSION` debe ser la fuente única.
-- `0.0.71.01-beta` es la versión canónica vigente.
+- `0.1.09.01-beta` es la versión canónica vigente y materializa G109/E01.
 - `v0.0.71.01-beta` es el tag formal publicado correspondiente a VER.2 G071/E01.
 - `v0.0.26-beta` permanece como tag legacy histórico e inmutable.
 - VER.2, MANT.1, DOC.1 R1, NOR.1 y NOR.2 están cerrados.
 - DOC.1 R2 está cerrado como auditoría Markdown posterior a NOR.2 y no crea por sí solo una release.
-- SEC.2 quedó cerrado después de R1–R6. AUD.SEC2 R1 reconcilia G071–G108 y reserva G109; no se promueve versión ni se crea tag hasta aceptar ese estado.
+- SEC.2 quedó cerrado después de R1–R6. AUD.SEC2 R1 fue aceptado mediante PR #83 como G109/E01 y la sincronización post-merge promueve `VERSION` a `0.1.09.01-beta`; G110 queda disponible para DOC.2.
 
 Todo release futuro requiere gate completo, PR/CI, actualización documental coherente, tag y evidencia reproducible.
 <!-- DOC1-R1-POST-MANT1:END -->
@@ -287,7 +287,7 @@ Si un problema se descubre después de publicar un tag, no se reescribe ese tag.
 ## Reconciliación revision-aware antes de la próxima promoción
 
 Antes de promover el siguiente candidato debe validarse que el ledger vivo
-contenga G001–G108, que G109 sea el siguiente Global y que el snapshot histórico
+contenga G001–G109, que G110 sea el siguiente Global y que el snapshot histórico
 G070 conserve su SHA-256. `v0.0.71.01-beta` no se mueve para corregir su
-numeración histórica. AUD.SEC2 R1 solo podrá convertirse en
-`0.1.09.01-beta` después de integración y revalidación del SHA de `main`.
+numeración histórica. AUD.SEC2 R1 quedó aceptado en `ec1842d` y se materializa
+como `0.1.09.01-beta`; la promoción post-merge no consume G110.

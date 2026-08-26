@@ -7,6 +7,15 @@
 
 
 <!-- DOC1-R1-POST-MANT1:START -->
+## Promoción G109/E01 — post-merge de AUD.SEC2 R1
+
+- Estado aceptado: G109/E01 (`0.1.09.01-beta`).
+- Evidencia de aceptación: PR #83, merge `ec1842d`, 1040 pruebas locales y checks remotos requeridos en `success`.
+- Esta sincronización materializa el G109 ya aceptado y **no consume G110**.
+- Siguiente Global disponible: G110/E01 (`0.1.10.01-beta`) para DOC.2 cuando corresponda.
+- Tag formal `v0.1.09.01-beta`: pendiente hasta integrar/revalidar la promoción; no se mueve `v0.0.71.01-beta`.
+
+
 ## Estado post-MANT.1
 
 Después de `v0.0.26-beta`, el repositorio integró trabajo funcional, técnico, documental y de gobierno hasta completar VER.2 y NOR.2.
@@ -15,13 +24,13 @@ Estado vigente:
 
 - Último tag formal: `v0.0.71.01-beta`.
 - Último tag formal legacy: `v0.0.26-beta`.
-- Versión canónica en `VERSION`: `0.0.71.01-beta`.
+- Versión canónica en `VERSION`: `0.1.09.01-beta` (G109/E01).
 - VER.2 G071/E01 está cerrado y publicado como `v0.0.71.01-beta`.
 - MANT.1 está cerrado.
 - DOC.1 R1 está cerrado.
 - NOR.1 y NOR.2 están cerrados.
 - DOC.1 R2 está cerrado como auditoría integral Markdown post-NOR.2.
-- SEC.2 quedó cerrado después de R1–R6. La auditoría post-cierre reconcilia el historial G071–G108 y reserva G109 sin declarar una release nueva.
+- SEC.2 quedó cerrado después de R1–R6. AUD.SEC2 R1 fue aceptado por PR #83 como G109/E01; la promoción post-merge actualiza `VERSION` a `0.1.09.01-beta` sin consumir G110. El tag `v0.1.09.01-beta` se materializa únicamente después de integrar y revalidar este paso.
 
 Este documento no crea una release nueva; registra el estado formal ya alcanzado por el repositorio.
 <!-- DOC1-R1-POST-MANT1:END -->
@@ -268,7 +277,8 @@ La línea oficial futura prevista permanece orientada a `1.0.0.0` con Build inde
 La auditoría integral posterior a SEC.2 determinó que el ledger publicado con
 VER.2 se detuvo materialmente en G070 antes de contabilizar estados aceptados de
 DEV.2, MANT.1, DOC.1, NOR.1, NOR.2 y SEC.2. La reconstrucción basada en commits,
-PR y gates reales sitúa `4bd7d8d` en **G108** y reserva **G109/E01** para
-AUD.SEC2 R1. El tag `v0.0.71.01-beta` permanece publicado e inmutable; su número
+PR y gates reales sitúa `4bd7d8d` en **G108**. AUD.SEC2 R1 fue aceptado después
+mediante PR #83 y merge `ec1842d` como **G109/E01**; G110/E01 queda disponible
+para DOC.2. El tag `v0.0.71.01-beta` permanece publicado e inmutable; su número
 no se reescribe aunque el estado que materializó se corresponda cronológicamente
 con G087.

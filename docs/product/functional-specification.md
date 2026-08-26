@@ -1,7 +1,7 @@
 # Especificación funcional
 
 **Estado:** Vigente con registro RF histórico integrado
-**Versión de aplicación revisada:** `0.0.71.01-beta`
+**Versión de aplicación revisada:** `0.1.09.01-beta`
 **Versión base histórica:** `0.0.23-beta`
 **Revisión documental:** GOV.1.3 R2 — 2026-08-17
 **Actualización funcional vigente:** UX.4.6e R8 — procedencia editable — 2026-08-19

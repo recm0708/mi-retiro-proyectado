@@ -1,9 +1,9 @@
 # Índice de documentación
 
 **Estado:** vigente
-**Versión de aplicación:** `0.0.71.01-beta` — tag publicado preservado; ledger vivo reconciliado hasta G108
+**Versión de aplicación:** `0.1.09.01-beta` — G109/E01 aceptado; tag formal G109 pendiente post-merge; ledger vivo hasta G109
 **Último tag formal legacy:** `v0.0.26-beta`
-**Última actualización transversal:** AUD.SEC2 R1 — auditoría integral post-SEC.2 y reconciliación G071–G108 — 2026-08-25
+**Última actualización transversal:** promoción post-merge G109/E01 de AUD.SEC2 R1 — 2026-08-25
 **Cierres históricos preservados:** UX.4.6i / PR #34 — 841 pruebas; UX.4.6e R9 — `v0.0.25-beta`
 
 Este archivo es el punto de entrada para la documentación técnica, funcional, normativa, de privacidad, validación y auditoría de Mi Retiro Proyectado.
@@ -11,7 +11,7 @@ Este archivo es el punto de entrada para la documentación técnica, funcional, 
 
 ## Estado de normalización del repositorio
 
-**Estado actual:** NOR.2 y DOC.1 R2 están cerrados; SEC.2 está cerrado después de R1–R6. AUD.SEC2 R1 ejecuta el saneamiento post-cierre y la reconciliación revision-aware antes de iniciar DOC.2.
+**Estado actual:** NOR.2, DOC.1 R2 y SEC.2 están cerrados. AUD.SEC2 R1 quedó aceptado como G109/E01 y `VERSION` se sincroniza a `0.1.09.01-beta`; DOC.2 es el siguiente bloque.
 
 Estado de la fase:
 
@@ -25,7 +25,7 @@ Estado de la fase:
 - **NOR.2 R7:** cerrado; artefactos locales heredados migrados y depurados.
 - **NOR.2 R8:** cerrado; auditoría integral y cierre formal integrados mediante PR #74.
 - **DOC.1 R2:** cerrado; auditoría integral Markdown post-NOR.2 y controles permanentes incorporados.
-- **SEC.2 R1–R6:** cerrados; CodeQL, autenticación, protección de endpoints, auditoría, sesión web y hardening configurable completados. AUD.SEC2 R1 corrige el kill switch y alinea documentación/ledger antes de la próxima promoción.
+- **SEC.2 R1–R6:** cerrados; CodeQL, autenticación, protección de endpoints, auditoría, sesión web y hardening configurable completados. AUD.SEC2 R1 corrigió el kill switch, alineó documentación/ledger y quedó aceptado como G109/E01.
 
 Evidencia:
 
@@ -62,7 +62,7 @@ Evidencia:
 - [`AUDITORIA_VER2_SEGUNDA_PASADA.md`](archive/governance/AUDITORIA_VER2_SEGUNDA_PASADA.md) — bitácora de la segunda pasada y correcciones sobre la primera reconstrucción.
 - [`AUDITORIA_VER2_CONTEO_PROVISIONAL.md`](archive/governance/AUDITORIA_VER2_CONTEO_PROVISIONAL.md) — cierre del conteo de segunda pasada en G070 antes de VER.2.
 - [`MATRIZ_DECISION_REVISIONES_VER2.md`](archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md) — decisión fila por fila sobre qué consume Global y por qué.
-- [`pre-1-0-revision-ledger.md`](governance/pre-1-0-revision-ledger.md) — ledger Markdown reconciliado G001–G108 y próximo candidato G109.
+- [`pre-1-0-revision-ledger.md`](governance/pre-1-0-revision-ledger.md) — ledger Markdown reconciliado G001–G109 y próximo candidato G110.
 - [`post-g070-revision-reconciliation.md`](audits/governance/post-g070-revision-reconciliation.md) — auditoría de reconstrucción G071–G108.
 - [`pre-1-0-revision-ledger-g070.json`](archive/governance/pre-1-0-revision-ledger-g070.json) — snapshot histórico exacto G070.
 - [`../data/pre-1-0-revision-ledger.json`](../data/pre-1-0-revision-ledger.json) — ledger machine-readable canónico de la reconstrucción.

@@ -1,7 +1,7 @@
 # Validación
 
 **Estado:** Vigente
-**Versión candidata revisada:** `0.0.71.01-beta`
+**Versión candidata revisada:** `0.1.09.01-beta` — G109/E01 promovida post-merge
 **Versión base histórica:** `0.0.25-beta`
 **Base documental histórica:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal histórica preservada:** UX.4.6e R8 — validación funcional y procedencia editable — 2026-08-19
@@ -1042,3 +1042,14 @@ La suite focal SEC.2 del paquete fue ejecutada con **33 pruebas en OK**. La suit
 integral del entorno de auditoría quedó limitada por una discrepancia externa de
 `pypdf` (entorno 5.9.0 frente al pin del proyecto 6.16.1); por ello el gate final
 debe ejecutarse en el `.venv` del repositorio antes del commit firmado.
+
+
+## Validación de promoción G109/E01
+
+AUD.SEC2 R1 fue aceptado mediante PR #83 y merge `ec1842d`. La promoción post-merge:
+
+- sincroniza `VERSION` y `APP_VERSION` en `0.1.09.01-beta`;
+- actualiza el ledger a 109 estados aceptados y deja G110/E01 (`0.1.10.01-beta`) disponible;
+- conserva intacto el snapshot histórico G070 y el tag `v0.0.71.01-beta`;
+- no consume G110 por ser sincronización del estado G109 ya aceptado;
+- requiere `pip check`, auditoría Markdown, compilación Python, sintaxis JavaScript, suite completa y `git diff --check` antes del commit firmado.

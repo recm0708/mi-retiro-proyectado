@@ -5,6 +5,12 @@ Este archivo registra **cambios notables por versión**. No sustituye el histori
 Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamente en GOV.1.1 a partir del historial real. `0.0.22-beta` es la primera versión formal adoptada bajo la política de GOV.1.2.
 
 ## [Unreleased]
+
+## [0.1.09.01-beta]
+- G109/E01: promoción post-merge de AUD.SEC2 R1 después de PR #83, 1040 pruebas locales y CI remota en Python 3.13/3.14 + auditorías de Markdown/gobernanza en `success`; la sincronización no consume G110.
+- Ledger: G109 queda aceptado sobre `ec1842d`; G110/E01 (`0.1.10.01-beta`) pasa a ser el siguiente candidato disponible para DOC.2.
+- Tag: `v0.1.09.01-beta` queda pendiente de creación firmada después de integrar y revalidar la promoción; `v0.0.71.01-beta` permanece inmutable.
+
 - AUD.SEC2 R1: audita integralmente el snapshot post-SEC.2, corrige el kill switch administrativo, impide que una sesión web sustituya errores 403 de administración deshabilitada/no configurada, cambia el logout a POST y extiende `Cache-Control: no-store` a `/dev/`.
 - AUD.SEC2 R1: reconcilia el ledger posterior a G070 hasta G108, preserva el snapshot histórico G070 por SHA-256 y documenta que `v0.0.71.01-beta` es un tag inmutable cuyo estado corresponde cronológicamente a G087.
 - AUD.SEC2 R1: audita los 140 Markdown del snapshot `4bd7d8d`, actualiza únicamente documentación viva materialmente afectada y mueve la evidencia de cierre SEC.2 a `docs/audits/security/`.

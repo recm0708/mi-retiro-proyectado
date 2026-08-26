@@ -23,7 +23,7 @@ Estado vigente:
 - DOC.1 R1 está cerrado.
 - NOR.1 y NOR.2 están cerrados.
 - DOC.1 R2 está cerrado como revisión documental integral posterior a NOR.2.
-- `VERSION` permanece en `0.0.71.01-beta`.
+- `VERSION` está sincronizado en `0.1.09.01-beta` después de aceptar AUD.SEC2 R1 como G109/E01.
 - SEC.2 quedó cerrado después de R1–R6; AUD.SEC2 R1 corrige el kill switch y el contrato de sesión web sin reabrir DEV.2.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 

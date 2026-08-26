@@ -121,3 +121,14 @@ La reconstrucción usa:
 
 No se cuenta un estado solo porque exista un commit. Tampoco se inventa una
 revisión ausente para rellenar numeración de fase.
+
+
+## 7. Addendum post-merge G109
+
+AUD.SEC2 R1 fue aceptado mediante PR #83 y merge `ec1842dac10a5395fb594223d31092fdee3cdfc1` después de 1040 pruebas locales y checks remotos requeridos en `success`. Por tanto:
+
+- G109/E01 queda aceptado como `0.1.09.01-beta`;
+- `VERSION` se sincroniza a `0.1.09.01-beta`;
+- G110/E01 (`0.1.10.01-beta`) queda como siguiente Global disponible para DOC.2;
+- esta sincronización no consume G110;
+- `v0.0.71.01-beta` permanece inmutable y el tag `v0.1.09.01-beta` solo se crea después de integrar/revalidar la promoción.

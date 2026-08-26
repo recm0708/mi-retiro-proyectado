@@ -8,12 +8,12 @@ El cierre de MANT.1 R7 no cambia la política de seguridad ni convierte candidat
 
 Estado vigente:
 
-- La versión canónica vigente es `0.0.71.01-beta`.
+- La versión canónica vigente es `0.1.09.01-beta` (G109/E01).
 - `v0.0.71.01-beta` es el tag formal publicado correspondiente a VER.2 G071/E01.
 - `v0.0.26-beta` permanece como tag legacy histórico e inmutable.
 - VER.2, DOC.1 R1, NOR.1 y NOR.2 están cerrados.
 - DOC.1 R2 quedó cerrado tras auditar integralmente la documentación Markdown posterior a NOR.2.
-- SEC.2 está cerrado después de R1–R6. AUD.SEC2 R1 corrige la semántica del kill switch administrativo y refuerza las regresiones de sesión sin modificar motores previsionales.
+- SEC.2 está cerrado después de R1–R6. AUD.SEC2 R1 fue aceptado como G109/E01 y corrige la semántica del kill switch administrativo y las regresiones de sesión sin modificar motores previsionales.
 - Las rutas de reporte responsable y revisión de vulnerabilidades se mantienen sin cambio material.
 <!-- DOC1-R1-POST-MANT1:END -->
 
@@ -23,7 +23,8 @@ Mi Retiro Proyectado se encuentra en **desarrollo beta**. Los estados histórico
 
 | Línea | Soporte de seguridad |
 |---|---|
-| `0.0.71.01-beta` | Beta vigente y publicada mediante tag formal `v0.0.71.01-beta` |
+| `0.1.09.01-beta` | Beta vigente promovida en `VERSION` como G109/E01; tag formal pendiente del paso post-merge |
+| `0.0.71.01-beta` | Beta revision-aware publicada previa; tag formal `v0.0.71.01-beta` preservado e inmutable |
 | `0.0.26-beta` | Beta legacy histórica; tag formal inmutable y referencia estable para regresiones históricas |
 | `0.0.25-beta` y anteriores | Históricas; no reciben correcciones independientes |
 
@@ -94,7 +95,7 @@ Esta función está habilitada y complementa el canal privado alternativo indica
 
 | Versión | Estado de soporte |
 | --- | --- |
-| `0.0.71.01-beta` | Versión vigente promovida en VER.2 R4; Soportada como beta vigente durante cierre, revalidación y tag firmado post-merge |
+| `0.0.71.01-beta` | Versión promovida históricamente en VER.2 R4; tag formal preservado como referencia revision-aware publicada previa |
 | `0.0.26-beta` | Referencia legacy histórica preservada por pruebas de regresión; soportada como hito formal legacy etiquetado |
 
 ## Superficie administrativa post-SEC.2
