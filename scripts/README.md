@@ -66,3 +66,7 @@ Los scripts de esta carpeta deben cumplir estas reglas:
 El gate local reduce errores antes del commit, pero no reemplaza GitHub Actions.
 La integración de un Pull Request sigue dependiendo de los checks remotos
 obligatorios del repositorio.
+
+## `audit_block_identifiers.py`
+
+Valida `data/work-block-registry.json` y detecta identificadores de familias conocidas que no estén registrados por NOR.1 R8. No modifica archivos.

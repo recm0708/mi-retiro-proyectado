@@ -11,9 +11,9 @@ Estado vigente:
 - La versión canónica vigente es `0.1.11.01-beta` (G111/E01).
 - `v0.0.71.01-beta` es un tag formal histórico publicado originalmente como VER.2 G071/E01 y reconciliado posteriormente como G087/E01 sin alterar el objeto firmado.
 - `v0.0.26-beta` permanece como tag legacy histórico e inmutable.
-- VER.2, DOC.1 R1, NOR.1 y NOR.2 están cerrados.
+- VER.2 y DOC.1 R1 están cerrados. NOR.1 conserva el cierre histórico R7 y está reabierto únicamente como candidato R8; NOR.2 permanece cerrado.
 - DOC.1 R2 quedó cerrado tras auditar integralmente la documentación Markdown posterior a NOR.2.
-- DOC.2 R1 quedó aceptado como G111/E01 mediante PR #87 y merge `1041b59`; G112/E01 queda disponible para PERSIST.1.
+- DOC.2 quedó aceptado/publicado como G111/E01; G112/E01 queda reservado para NOR.1 R8 sin consumirse y PERSIST.1 permanece como siguiente bloque funcional.
 - SEC.2 está cerrado después de R1–R6. AUD.SEC2 R1 fue aceptado como G109/E01 y corrige la semántica del kill switch administrativo y las regresiones de sesión sin modificar motores previsionales.
 - Las rutas de reporte responsable y revisión de vulnerabilidades se mantienen sin cambio material.
 <!-- DOC1-R1-POST-MANT1:END -->
@@ -24,7 +24,7 @@ Mi Retiro Proyectado se encuentra en **desarrollo beta**. Los estados histórico
 
 | Línea | Soporte de seguridad |
 |---|---|
-| `0.1.11.01-beta` | Beta vigente G111/E01; tag/Release pendientes hasta integrar y revalidar la promoción post-merge |
+| `0.1.11.01-beta` | Beta vigente G111/E01 publicada; tag firmado y GitHub Release prerelease preservados |
 | `0.1.10.01-beta` | Beta G110/E01 publicada; tag firmado y GitHub Release prerelease preservados |
 | `0.1.09.01-beta` | Beta G109/E01 publicada; tag firmado y GitHub Release prerelease preservados |
 | `0.0.71.01-beta` | Beta revision-aware publicada previa; tag formal `v0.0.71.01-beta` preservado e inmutable |

@@ -32,11 +32,11 @@ class TestG110PromotionPostMerge(unittest.TestCase):
         self.assertIn("PR #86", releases)
         self.assertIn("29 tags", releases)
 
-    def test_g111_es_doc2_y_g112_queda_para_persist1(self):
+    def test_g111_es_doc2_y_g112_permanece_sin_consumirse(self):
         ledger = cargar_ledger()
         self.assertEqual(111, ledger["accepted_count"])
         self.assertEqual(112, ledger["next_global"])
-        self.assertEqual("PERSIST.1", ledger["next_candidate_block"])
+        self.assertEqual("DOC.2", ledger["entries"][-1]["block"])
 
 
 if __name__ == "__main__":

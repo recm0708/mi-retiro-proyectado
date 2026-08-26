@@ -90,26 +90,33 @@ class TestDOC2R1ChangelogReconstruction(unittest.TestCase):
         self.assertEqual("tipo: descripción del cambio", first["subject"])
         self.assertIn("anomalía histórica", self.changelog)
 
-    def test_doc2_aceptado_como_g111_y_deja_g112_para_persist1(self):
+    def test_doc2_preserva_g111_y_deja_g112_sin_consumir(self):
         self.assertEqual("0.1.11.01-beta", (ROOT / "VERSION").read_text(encoding="utf-8").strip())
         ledger = cargar_ledger()
         self.assertEqual(111, ledger["accepted_count"])
         self.assertEqual(112, ledger["next_global"])
         self.assertEqual("0.1.12.01-beta", ledger["next_candidate"])
-        self.assertEqual("PERSIST.1", ledger["next_candidate_block"])
+        self.assertEqual("NOR.1", ledger["next_candidate_block"])
         self.assertTrue(self.data["reserved_candidate"]["consumed"])
         self.assertEqual(87, self.data["accepted_state"]["pull_request"])
 
-    def test_documentacion_sincroniza_g110_y_29_releases(self):
+    def test_doc2_preserva_contexto_g110_y_29_releases(self):
+        audit = (
+            ROOT
+            / "docs/audits/documentation/changelog-reconstruction-doc2-r1.md"
+        ).read_text(encoding="utf-8")
+        self.assertIn("0.1.10.01-beta", audit)
+        self.assertIn("G110/E01", audit)
+        self.assertIn("29 tags formales", audit)
+        self.assertIn("29 GitHub Releases", audit)
+
+    def test_documentacion_viva_avanza_a_g111_y_30_releases(self):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
         releases = (ROOT / "RELEASES.md").read_text(encoding="utf-8")
-        for text in (readme, releases):
-            self.assertIn("v0.1.10.01-beta", text)
-            self.assertIn("29", text)
-            self.assertIn("GitHub Release", text)
-        self.assertIn("PR #86", readme)
-        self.assertIn("29 tags", releases)
-        self.assertIn("29 Releases", releases)
+        for current in (readme, releases):
+            self.assertIn("v0.1.11.01-beta", current)
+        self.assertIn("30 tags formales", readme)
+        self.assertIn("30 GitHub Releases", readme)
 
     def test_auditoria_doc2_existe_y_esta_indexada(self):
         audit_rel = "audits/documentation/changelog-reconstruction-doc2-r1.md"

@@ -5,7 +5,7 @@
 **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
 **Último tag formal legacy:** `v0.0.26-beta`
 **Fecha de revisión:** 2026-08-25
-**Estado actual:** SEC.2, AUD.SEC2 R1 y REL.GOV.1 están cerrados. DOC.2 R1 quedó aceptado mediante PR #87 y merge `1041b59`; G111/E01 se materializa como `0.1.11.01-beta` y G112/E01 (`0.1.12.01-beta`) queda disponible para PERSIST.1.
+**Estado actual:** SEC.2, AUD.SEC2 R1 y REL.GOV.1 están cerrados. DOC.2 R1 quedó aceptado mediante PR #87 y merge `1041b59`; G111/E01 se materializa como `0.1.11.01-beta` y G112/E01 (`0.1.12.01-beta`) queda reservado para NOR.1 R8 antes de PERSIST.1.
 
 
 <!-- NOR1-R7-CLOSURE:START -->
@@ -23,6 +23,7 @@ La secuencia operativa previa a SEC.2 queda:
 4. **AUD.SEC2 R1** — saneamiento post-cierre y reconciliación revision-aware — cerrado/aceptado como G109/E01 mediante PR #83;
 5. **REL.GOV.1** — preflight transversal de gobierno de Releases; cerrado/aceptado como G110/E01 mediante PR #85; no agrega un bloque funcional al plan de 14 bloques.
 6. **DOC.2** — cerrado en R1; reconstrucción auditable del CHANGELOG `0.0.1-beta`–`0.0.21-beta`, aceptada como G111/E01 mediante PR #87.
+7. **NOR.1 R8** — candidato transversal de gobierno de identificadores; reserva G112/E01 sin añadir un bloque funcional al plan.
 
 NOR.2 ejecutó los movimientos, renombrados, consolidaciones y retiros que
 NOR.1 deliberadamente no realizó.
@@ -158,8 +159,6 @@ VER.2 es un bloque transversal de reconciliación y **no añade un bloque 15** a
 
 ### Pendiente o incompleto
 
-- hardening integral SEC.2;
-- reconstrucción detallada del CHANGELOG `0.0.1-beta`–`0.0.21-beta` en DOC.2;
 - persistencia voluntaria si permanece dentro del alcance 1.0;
 - informes PDF y exportación final seleccionable;
 - auditoría WCAG 2.2 ampliada con tecnologías de apoyo/dispositivos;
@@ -210,7 +209,7 @@ No existe una una revisión intermedia no demostrada entre UX.4.6i R1 y R1.2 dem
 
 **VER.2:** bloque transversal cerrado. La primera promoción se publicó como `0.0.71.01-beta`; AUD.SEC2 R1 documenta que el ledger usado entonces terminaba en G070 y que la reconstrucción completa sitúa ese estado en G087 sin modificar el tag inmutable.
 
-**Checkpoint técnico actual:** G111/E01 (`0.1.11.01-beta`) está aceptado después de DOC.2 R1 / PR #87 y revalidación post-merge; G112/E01 (`0.1.12.01-beta`) queda disponible para PERSIST.1.
+**Checkpoint técnico actual:** G111/E01 (`0.1.11.01-beta`) está aceptado después de DOC.2 R1 / PR #87 y revalidación post-merge; G112/E01 (`0.1.12.01-beta`) queda reservado para NOR.1 R8 antes de PERSIST.1.
 
 Documentos canónicos de VER.2:
 

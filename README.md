@@ -20,17 +20,17 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 
 ## Estado del proyecto
 
-- **Versión canónica vigente:** `0.1.11.01-beta`, obtenida exclusivamente desde [`VERSION`](VERSION). Materializa G111/E01 después de aceptar DOC.2 R1 mediante PR #87 y merge `1041b59`; su tag/Release se publican únicamente después de integrar y revalidar esta promoción.
-- **Último cierre integrado en `main`:** DOC.2 R1 en `1041b59` (PR #87), posterior a la promoción G110/E01 en `cef373a` (PR #86).
+- **Versión canónica vigente:** `0.1.11.01-beta`, obtenida exclusivamente desde [`VERSION`](VERSION). Materializa G111/E01 después de DOC.2 R1 y está publicada mediante el tag firmado/GitHub Release `v0.1.11.01-beta`.
+- **Última promoción integrada en `main`:** G111/E01 en `7e81034` (PR #88), posterior al cierre DOC.2 R1 en `1041b59` (PR #87).
 - **Estado de SEC.2:** cerrado después de R1–R6; AUD.SEC2 R1 corrigió la regresión del kill switch administrativo, alineó documentación/ledger y quedó aceptado como G109.
-- **Estado revision-aware reconciliado:** G111/E01 (`0.1.11.01-beta`) aceptado para DOC.2; G112/E01 (`0.1.12.01-beta`) queda disponible para PERSIST.1.
-- **Último tag revision-aware publicado:** `v0.1.10.01-beta` (G110/E01), firmado, verificado y asociado a GitHub Release prerelease; `v0.1.09.01-beta` y `v0.0.71.01-beta` permanecen preservados.
+- **Estado revision-aware reconciliado:** G111/E01 (`0.1.11.01-beta`) aceptado para DOC.2; G112/E01 (`0.1.12.01-beta`) queda reservado para NOR.1 R8 como checkpoint transversal previo a PERSIST.1.
+- **Último tag revision-aware publicado:** `v0.1.11.01-beta` (G111/E01), firmado, verificado y asociado a GitHub Release prerelease; los tags anteriores permanecen preservados.
 - **Última versión formal legacy:** `0.0.26-beta` — tag firmado e inmutable `v0.0.26-beta`.
 - **Etapa:** desarrollo beta; repositorio público y ejecución orientada actualmente a entorno local.
 - **GOV.1, PLAN.1, DEV.2, MANT.1, DOC.1 R1, NOR.1, NOR.2 y DOC.1 R2:** cerrados.
 - **NOR.2:** cerrado después de R1–R8; sus evidencias históricas permanecen preservadas.
 - **SEC.2:** R1–R6 cerrados: hardening CodeQL, autenticación administrativa, protección centralizada, auditoría, sesión web y endurecimiento configurable para HTTPS interno.
-- **DOC.2:** cerrado en R1 y aceptado como G111/E01 mediante PR #87; la promoción post-merge materializa `0.1.11.01-beta` sin consumir G112. El siguiente bloque es PERSIST.1.
+- **DOC.2:** cerrado en R1 y aceptado como G111/E01 mediante PR #87; la promoción post-merge materializa `0.1.11.01-beta` sin consumir G112. Antes de PERSIST.1 se ejecuta NOR.1 R8; G112 queda reservado para ese checkpoint sin consumirse durante el candidato.
 - **Primera versión oficial objetivo:** `1.0.0.0` con `Build 000001`, únicamente después de cerrar todos los gates definidos en el plan maestro.
 
 La visibilidad pública del repositorio **no convierte una beta de desarrollo en versión oficial, no constituye un despliegue de producción y no modifica por sí sola la licencia vigente**.
@@ -104,6 +104,8 @@ Documentos principales:
 - [`docs/archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md`](docs/archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md) — decisiones de inclusión/exclusión del contador;
 - [`docs/governance/pre-1-0-revision-ledger.md`](docs/governance/pre-1-0-revision-ledger.md) — secuencia reconciliada G001–G111 y próximo candidato G112;
 - [`data/pre-1-0-revision-ledger.json`](data/pre-1-0-revision-ledger.json) — ledger machine-readable;
+- [`docs/standards/work-block-identifiers.md`](docs/standards/work-block-identifiers.md) — política canónica de identificadores de bloques;
+- [`data/work-block-registry.json`](data/work-block-registry.json) — registro machine-readable de identificadores históricos, cerrados y planificados;
 - [`docs/governance/licensing-and-distribution.md`](docs/governance/licensing-and-distribution.md) — decisión de licencia y estrategia de distribución;
 - [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) — avisos y obligaciones de terceros;
 - [`docs/governance/roadmap.md`](docs/governance/roadmap.md) — estado actual y próximos hitos;
@@ -121,7 +123,7 @@ La documentación vigente debe apuntar únicamente a rutas canónicas actuales. 
 
 `0.0.22-beta` fue la primera versión formal adoptada bajo la política de GOV.1.2; `0.0.23-beta` cerró GOV.1.3; `0.0.24-beta` cerró integralmente GOV.1; `0.0.25-beta` cerró UX.4.6e; y `0.0.26-beta` cerró PLAN.1. Sus tags publicados permanecen firmados e inmutables.
 
-El 2026-08-26 se completó el backfill administrativo de GitHub Releases: los **29 tags formales reales** del repositorio cuentan con **29 GitHub Releases**. Los Releases de `v0.0.1-beta`–`v0.0.26-beta` creados retrospectivamente no cambian la fecha histórica, firma ni commit objetivo de sus tags.
+El 2026-08-26 se completó el backfill administrativo de GitHub Releases: los **30 tags formales reales** del repositorio cuentan con **30 GitHub Releases**. Los Releases de `v0.0.1-beta`–`v0.0.26-beta` creados retrospectivamente no cambian la fecha histórica, firma ni commit objetivo de sus tags.
 
 Después de `v0.0.26-beta`, UX.4.6f–UX.4.6i continuaron históricamente sobre ese mismo valor de `VERSION`. VER.2 reconstruye todo el tramo sin inventar tags: el último estado aceptado de la base `7037addd` es **G070/E02**, cierre de UX.4.6i.
 

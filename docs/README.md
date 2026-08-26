@@ -1,9 +1,9 @@
 # Índice de documentación
 
 **Estado:** vigente
-**Versión de aplicación:** `0.1.11.01-beta` — G111/E01 aceptado para DOC.2; G112/E01 disponible para PERSIST.1; ledger vivo hasta G111
+**Versión de aplicación:** `0.1.11.01-beta` — G111/E01 aceptado/publicado para DOC.2; G112/E01 reservado para NOR.1 R8; ledger aceptado hasta G111
 **Último tag formal legacy:** `v0.0.26-beta`
-**Última actualización transversal:** DOC.2 R1 — reconstrucción auditable del CHANGELOG legacy y sincronización de Releases — 2026-08-26
+**Última actualización transversal:** NOR.1 R8 — gobierno de identificadores de bloques, candidato G112/E01 — 2026-08-26
 **Cierres históricos preservados:** UX.4.6i / PR #34 — 841 pruebas; UX.4.6e R9 — `v0.0.25-beta`
 
 Este archivo es el punto de entrada para la documentación técnica, funcional, normativa, de privacidad, validación y auditoría de Mi Retiro Proyectado.
@@ -11,11 +11,11 @@ Este archivo es el punto de entrada para la documentación técnica, funcional, 
 
 ## Estado de normalización del repositorio
 
-**Estado actual:** NOR.2, DOC.1 R2, SEC.2, AUD.SEC2 R1 y REL.GOV.1 están cerrados. G111/E01 queda materializado como `0.1.11.01-beta` tras aceptar DOC.2 R1; G112/E01 queda disponible para PERSIST.1.
+**Estado actual:** NOR.2, DOC.1 R2, SEC.2, AUD.SEC2 R1, REL.GOV.1 y DOC.2 están cerrados/publicados según corresponda. G111/E01 está materializado como `0.1.11.01-beta`; NOR.1 R8 es candidato transversal y reserva G112/E01 sin consumirlo antes de PERSIST.1.
 
 Estado de la fase:
 
-- **NOR.1:** cerrado en R7; estándares determinísticos establecidos.
+- **NOR.1:** cierre histórico R7 preservado; R8 está activo únicamente como candidato transversal de gobierno de identificadores, con G112 reservado y no aceptado.
 - **NOR.2 R1:** cerrado; línea base integral del repositorio.
 - **NOR.2 R2:** cerrado; matriz de decisión de migración.
 - **NOR.2 R3:** cerrado; runtime y configuración técnica normalizados.
@@ -268,3 +268,8 @@ La metadata de versión de revisión de un documento de dominio puede conservar 
 
 
 **SEC.2 R6:** hardening de sesión administrativa web preparado para despliegue interno controlado.
+
+## NOR.1 R8 — Identificadores de bloques
+
+- [`work-block-identifiers.md`](standards/work-block-identifiers.md) — política canónica de familias, bloques y revisiones.
+- [`work-block-identifier-audit-nor1-r8.md`](audits/repository/work-block-identifier-audit-nor1-r8.md) — auditoría que justifica NOR.1 R8 y la reserva de G112.
