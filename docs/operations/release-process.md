@@ -1,7 +1,7 @@
 # Proceso de release
 
 **Estado:** Vigente
-**Versión de aplicación:** `0.1.13.03-beta` — DOC.1 R3 / G113-E03 en promoción post-merge
+**Versión de aplicación:** `0.1.14.01-beta` — DOC.1 R3 / G113-E03 en promoción post-merge
 **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
 **Último tag formal legacy:** `v0.0.26-beta`
 **Versión base histórica preservada:** `0.0.23-beta`
@@ -402,3 +402,18 @@ comandos y un archivo de notas cuando la herramienta esté disponible.
 
 La matriz viva de trabajo pendiente está en
 `docs/governance/pre-1-0-pending-matrix.md`.
+
+
+## Promoción G114/E01 — PLAN.2 R1
+
+PLAN.2 R1 fue integrado mediante PR #94 / merge `7ded70c` y revalidado con
+1103 pruebas, 148 Markdown y los checks remotos requeridos en `success`.
+
+La promoción materializa `0.1.14.01-beta` como G114/E01. Mientras esta
+promoción no esté integrada y revalidada, `v0.1.13.03-beta` permanece como
+último tag revision-aware publicado. Después del cierre, el tag
+`v0.1.14.01-beta` se crea y verifica localmente antes de publicar su GitHub
+Release prerelease.
+
+El siguiente candidato queda reservado como DOC.1 R4:
+G115/E04 (`0.1.15.04-beta`).

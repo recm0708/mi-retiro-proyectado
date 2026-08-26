@@ -14,12 +14,12 @@ La fuente canónica de versión continúa siendo `VERSION`.
 
 Estado vigente:
 
-- `VERSION` contiene `0.1.13.03-beta` y materializa G113/E03 (DOC.1 R3), aceptado mediante PR #92 / merge `40ae5c0`. G112/E07 permanece preservado como NOR.1 R8.
+- `VERSION` contiene `0.1.14.01-beta` y materializa G114/E01 (PLAN.2 R1), aceptado mediante PR #94 / merge `7ded70c`. G113/E03 permanece preservado como DOC.1 R3.
 - `v0.1.13.03-beta` está publicado, firmado y verificado; `v0.0.26-beta` permanece como último tag de la familia legacy.
 - La reconciliación post-G070 reconstruye G071–G108 y conserva `v0.0.71.01-beta` como evidencia histórica de G087/E01 sin mover el tag.
-- AUD.SEC2 R1 fue aceptado como G109/E01, REL.GOV.1 como G110/E01, DOC.2 como G111/E01, NOR.1 R8 como G112/E07 y DOC.1 R3 como G113/E03.
-- G114/E01 (`0.1.14.01-beta`) queda reservado para PLAN.2 R1, bloque nuevo que comienza en E01. La asignación de Globales posteriores se difiere a la matriz maestra para no adelantar numeración de estados aún no aceptados.
-- PERSIST.1 permanece planificado en la matriz maestra como una etapa posterior; no tiene un Global preasignado mientras PLAN.2 R1 continúe como candidato.
+- AUD.SEC2 R1 fue aceptado como G109/E01, REL.GOV.1 como G110/E01, DOC.2 como G111/E01, NOR.1 R8 como G112/E07, DOC.1 R3 como G113/E03 y PLAN.2 R1 como G114/E01.
+- G114/E01 (`0.1.14.01-beta`) queda aceptado para PLAN.2 R1. G115/E04 (`0.1.15.04-beta`) queda reservado para DOC.1 R4, reapertura que continúa el ordinal del bloque después de E03.
+- PERSIST.1 permanece planificado en la matriz maestra como una etapa posterior; no tiene un Global preasignado mientras se ejecutan DOC.1 R4, REL.GOV.1 R2 y los frentes Developer/UX previos.
 - Los cierres y sincronizaciones que no crean un estado materialmente distinto no consumen `G` por sí solos.
 
 Cualquier promoción futura de versión debe seguir el proceso formal de release, validación, PR/CI, tag y evidencia documental correspondiente.

@@ -6,9 +6,13 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ## [Unreleased]
 
-- PLAN.2 R1 (candidato G114/E01): incorpora la matriz maestra viva de pendientes hacia `1.0.0.0`, registra PLAN.2/UX.5 y reordena el trabajo previo a PERSIST.1 sin cambiar `VERSION`.
-- Documentación post-G113: corrige estados vivos desactualizados, publicación de `v0.1.13.03-beta`, limitaciones y referencias del siguiente candidato; la historia cerrada permanece intacta.
-- Gobierno: `accepted_count` permanece en 113; G114/E01 (`0.1.14.01-beta`) queda reservado para PLAN.2 R1 y no se considera aceptado hasta superar gate, PR/CI e integración.
+
+## [0.1.14.01-beta]
+- G114/E01: PLAN.2 R1 queda aceptado mediante PR #94 / merge `7ded70c` después de formalizar la matriz maestra viva hacia `1.0.0.0`.
+- Planificación: registra PLAN.2/UX.5, incorpora DEV.2 R5/R6, UX.5 R1–R6, SEC.2 R7, DOC.1 R5 y los gates finales; PERSIST.1/REP.1 permanecen en la secuencia posterior.
+- Gate: 1103 pruebas post-merge en `OK`, Markdown 148/148, `pip check`, compilación Python, sintaxis JavaScript, auditor de identificadores y `git diff --check` limpios; checks remotos requeridos en `success`.
+- Ledger: G114 queda aceptado; G115/E04 (`0.1.15.04-beta`) queda reservado para DOC.1 R4.
+- Tag/Release: `v0.1.14.01-beta` queda pendiente hasta integrar y revalidar esta promoción; `v0.1.13.03-beta` permanece como último tag revision-aware publicado.
 
 
 ## [0.1.13.03-beta]

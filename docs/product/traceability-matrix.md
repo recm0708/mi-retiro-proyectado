@@ -1,7 +1,7 @@
 # Matriz de trazabilidad
 
 **Estado:** Vigente
-**Versión de aplicación:** `0.1.13.03-beta` — G113/E03 aceptado; reconciliación viva hasta G113
+**Versión de aplicación:** `0.1.14.01-beta` — G114/E01 aceptado; reconciliación viva hasta G114
 **Último tag formal legacy:** `v0.0.26-beta`
 **Base histórica:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal:** NOR.2 R8 — 2026-08-24
@@ -27,6 +27,7 @@ Estado documental actual:
 - NOR.2 R8 está cerrado e integrado mediante PR #74.
 - NOR.2 está cerrado después de completar R1–R8.
 - SEC.2 quedó cerrado después de R1–R6; AUD.SEC2 R1 corrigió el kill switch, reconcilió documentación/ledger y quedó aceptado como G109/E01 mediante PR #83.
+- PLAN.2 R1 quedó aceptado como G114/E01 mediante PR #94 / merge `7ded70c`; G115/E04 (`0.1.15.04-beta`) queda reservado para DOC.1 R4 como siguiente checkpoint.
 
 Esta matriz debe distinguir trazabilidad histórica de estado vigente.
 <!-- DOC1-R1-POST-MANT1:END -->
@@ -191,4 +192,4 @@ Los estados `Candidato` deben promoverse a `Verificado` únicamente después del
 | Expiración/límite y cookies configurables | `app/core/config.py`, `admin_session.py` | `test_sec2_r6_admin_session_security.py` | Verificado |
 | Kill switch no sustituible por cookie | `app/main.py` | `test_sec2_postclosure_hardening.py` | Verificado post-cierre |
 | Logout mutante solo por POST | `/dev/logout` | `test_sec2_postclosure_hardening.py` | Verificado post-cierre |
-| Ledger reconciliado | `data/pre-1-0-revision-ledger.json` | pruebas VER.2/NOR.2 + auditoría post-G070 | G113/E03 aceptado para DOC.1 R3; G114/E01 reservado para PLAN.2 R1; PERSIST.1 permanece planificado posteriormente; REP.1 bloque funcional posterior |
+| Ledger reconciliado | `data/pre-1-0-revision-ledger.json` | pruebas VER.2/NOR.2 + auditoría post-G070 | G113/E03 permanece preservado para DOC.1 R3; G114/E01 aceptado para PLAN.2 R1; G115/E04 reservado para DOC.1 R4; PERSIST.1 permanece planificado posteriormente; REP.1 bloque funcional posterior |

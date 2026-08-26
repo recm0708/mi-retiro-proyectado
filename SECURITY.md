@@ -8,13 +8,13 @@ El cierre de MANT.1 R7 no cambia la política de seguridad ni convierte candidat
 
 Estado vigente:
 
-- La versión canónica vigente es `0.1.13.03-beta` (G113/E03).
+- La versión canónica vigente es `0.1.14.01-beta` (G114/E01).
 - `v0.1.13.03-beta` es el último tag revision-aware publicado y verificado.
 - `v0.0.71.01-beta` es un tag formal histórico publicado originalmente como VER.2 G071/E01 y reconciliado posteriormente como G087/E01 sin alterar el objeto firmado.
 - `v0.0.26-beta` permanece como tag legacy histórico e inmutable.
-- VER.2, NOR.1 R8, NOR.2 y DOC.1 R1–R3 están cerrados.
+- VER.2, NOR.1 R8, NOR.2, DOC.1 R1–R3 y PLAN.2 R1 están cerrados.
 - DOC.2 permanece aceptado/publicado como G111/E01; NOR.1 R8 queda aceptado como G112/E07 y DOC.1 R3 como G113/E03.
-- G114/E01 se reserva para PLAN.2 R1; PERSIST.1 permanece en la matriz posterior y SEC.2 R7 queda previsto para revalidar las nuevas superficies antes del cierre beta.
+- PLAN.2 R1 queda aceptado como G114/E01; G115/E04 se reserva para DOC.1 R4. PERSIST.1 permanece en la matriz posterior y SEC.2 R7 queda previsto para revalidar las nuevas superficies antes del cierre beta.
 - SEC.2 está cerrado después de R1–R6. AUD.SEC2 R1 fue aceptado como G109/E01 y corrige la semántica del kill switch administrativo y las regresiones de sesión sin modificar motores previsionales.
 - Las rutas de reporte responsable y revisión de vulnerabilidades se mantienen sin cambio material.
 <!-- DOC1-R1-POST-MANT1:END -->
@@ -25,6 +25,7 @@ Mi Retiro Proyectado se encuentra en **desarrollo beta**. Los estados histórico
 
 | Línea | Soporte de seguridad |
 |---|---|
+| `0.1.14.01-beta` | Beta vigente G114/E01; tag y GitHub Release pendientes hasta integrar/revalidar la promoción |
 | `0.1.13.03-beta` | Beta vigente G113/E03 publicada; tag firmado y GitHub Release prerelease verificados |
 | `0.1.12.07-beta` | Beta G112/E07 publicada; tag firmado y GitHub Release prerelease preservados |
 | `0.1.11.01-beta` | Beta vigente G111/E01 publicada; tag firmado y GitHub Release prerelease preservados |

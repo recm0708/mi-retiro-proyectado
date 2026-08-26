@@ -1,4 +1,4 @@
-"""Regresiones de PLAN.2 R1 para la matriz maestra hacia 1.0."""
+"""Regresiones de PLAN.2 R1 después de su promoción G114/E01."""
 
 from __future__ import annotations
 
@@ -12,36 +12,39 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class TestPLAN2R1MasterPendingMatrix(unittest.TestCase):
-    def test_version_permanece_en_g113_mientras_plan2_es_candidato(self):
+    def test_plan2_materializa_g114_y_doc1_r4_es_candidato(self):
         self.assertEqual(
-            "0.1.13.03-beta",
+            "0.1.14.01-beta",
             (ROOT / "VERSION").read_text(encoding="utf-8").strip(),
         )
         ledger = cargar_ledger()
-        self.assertEqual(113, ledger["accepted_count"])
-        self.assertEqual(114, ledger["next_global"])
-        self.assertEqual("0.1.14.01-beta", ledger["next_candidate"])
-        self.assertEqual("PLAN.2", ledger["next_candidate_block"])
+        self.assertEqual(114, ledger["accepted_count"])
+        self.assertEqual(115, ledger["next_global"])
+        self.assertEqual("0.1.15.04-beta", ledger["next_candidate"])
+        self.assertEqual("DOC.1", ledger["next_candidate_block"])
+        entry = ledger["entries"][-1]
+        self.assertEqual(114, entry["global_revision"])
+        self.assertEqual("PLAN.2", entry["block"])
+        self.assertEqual(1, entry["ordinal"])
+        self.assertIn("PR #94", entry["evidence"])
 
-    def test_registro_reserva_plan2_y_ux5(self):
+    def test_registro_cierra_plan2_y_reabre_doc1_r4(self):
         data = json.loads(
             (ROOT / "data/work-block-registry.json").read_text(
                 encoding="utf-8"
             )
         )
         ids = {item["identifier"]: item for item in data["identifiers"]}
-        for ident in ("PLAN.2", "UX.5"):
-            self.assertIn(ident, ids)
-            self.assertEqual("planned_reserved", ids[ident]["status"])
-            self.assertFalse(ids[ident]["reusable_for_different_scope"])
+        self.assertEqual("closed", ids["PLAN.2"]["status"])
+        self.assertIn("G114", ids["PLAN.2"]["global_refs"])
+        self.assertEqual("planned_reserved", ids["UX.5"]["status"])
 
         candidate = data["current_candidate"]
-        self.assertEqual("PLAN.2", candidate["block"])
-        self.assertEqual(114, candidate["global_revision"])
-        self.assertEqual(1, candidate["edition"])
-        self.assertIsNone(
-            candidate["next_functional_global_if_accepted"]
-        )
+        self.assertEqual("DOC.1", candidate["block"])
+        self.assertEqual("R4", candidate["revision"])
+        self.assertEqual(115, candidate["global_revision"])
+        self.assertEqual(4, candidate["edition"])
+        self.assertEqual("reserved_not_accepted", candidate["state"])
 
     def test_matriz_contiene_frentes_obligatorios(self):
         matrix = (
@@ -67,6 +70,8 @@ class TestPLAN2R1MasterPendingMatrix(unittest.TestCase):
         ):
             with self.subTest(token=token):
                 self.assertIn(token, matrix)
+        self.assertIn("Cerrado/aceptado G114/E01", matrix)
+        self.assertIn("Candidato G115/E04", matrix)
 
     def test_matriz_documenta_developer_y_modalidades(self):
         matrix = (
@@ -88,13 +93,10 @@ class TestPLAN2R1MasterPendingMatrix(unittest.TestCase):
         ).read_text(encoding="utf-8")
         self.assertNotIn("cierre de SEC.2", text)
         self.assertIn("SEC.2 R1–R6 ya está cerrado", text)
-        self.assertNotIn(
-            "permanece en la línea beta `0.0.N-beta`",
-            text,
-        )
         self.assertIn("`0.GG.RR.EE-beta`", text)
+        self.assertIn("0.1.14.01-beta", text)
 
-    def test_publicacion_g113_esta_reflejada(self):
+    def test_publicacion_g113_permanece_preservada(self):
         for rel in (
             "README.md",
             "SECURITY.md",

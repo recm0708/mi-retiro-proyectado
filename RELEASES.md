@@ -7,6 +7,14 @@
 
 
 <!-- DOC1-R1-POST-MANT1:START -->
+## Promoción G114/E01 — post-merge de PLAN.2 R1
+
+- Estado aceptado: G114/E01 (`0.1.14.01-beta`).
+- Evidencia de aceptación: PR #94 / merge `7ded70c`, 1103 pruebas post-merge, Markdown 148/148, auditor de identificadores en `OK` y checks remotos requeridos en `success`.
+- Esta sincronización materializa G114 ya aceptado y **no consume G115**.
+- G115/E04 (`0.1.15.04-beta`) queda reservado para DOC.1 R4; REL.GOV.1 R2 y los frentes Developer/UX continúan posteriormente conforme a la matriz maestra.
+- Tag y GitHub Release `v0.1.14.01-beta`: pendientes hasta integrar/revalidar esta promoción; `v0.1.13.03-beta` permanece publicado e inmutable.
+
 ## Promoción G113/E03 — post-merge de DOC.1 R3
 
 - Estado aceptado: G113/E03 (`0.1.13.03-beta`).
