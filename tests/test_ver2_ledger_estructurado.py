@@ -51,6 +51,7 @@ class TestVer2LedgerEstructurado(unittest.TestCase):
         self.assertIn("G110 | `0.1.10.01-beta`", ledger_md)
         self.assertIn("G111 | `0.1.11.01-beta`", ledger_md)
         self.assertIn("G112 | `0.1.12.07-beta`", ledger_md)
+        self.assertIn("G113 | `0.1.13.03-beta`", ledger_md)
         self.assertIn("`0.0.71.01-beta`", ledger_md)
 
     def test_exclusiones_clave_se_preservan(self):

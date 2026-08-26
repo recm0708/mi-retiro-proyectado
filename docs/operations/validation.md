@@ -1,7 +1,7 @@
 # Validación
 
 **Estado:** Vigente
-**Versión revisada:** `0.1.12.07-beta` — G112/E07 en promoción post-merge; G113/E03 reservado para DOC.1 R3
+**Versión revisada:** `0.1.13.03-beta` — G112/E07 en promoción post-merge; G113/E03 reservado para DOC.1 R3
 **Versión base histórica:** `0.0.25-beta`
 **Base documental histórica:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal histórica preservada:** UX.4.6e R8 — validación funcional y procedencia editable — 2026-08-19
@@ -1127,4 +1127,15 @@ Estado aceptado: G112/E07 (`0.1.12.07-beta`) después de PR #89 / merge `cc6695b
 
 ## DOC.1 R3 — auditoría de etiquetas visibles de enlaces Markdown
 
-Checkpoint transversal posterior a NOR.1 R8 y previo a PERSIST.1. Debe auditar documentación viva, preservar historia en `docs/archive/`, justificar excepciones donde el path sea semánticamente necesario y añadir regresión automática contra etiquetas crudas no justificadas.
+Estado aceptado: G113/E03 (`0.1.13.03-beta`) mediante PR #92 / merge `40ae5c0`, después de revalidación post-merge de 1092 pruebas, Markdown 146/146, auditor de identificadores en `OK` y checks remotos requeridos en `success`.
+
+- `VERSION=0.1.13.03-beta`;
+- `accepted_count=113`;
+- `next_global=114`;
+- `next_candidate=0.1.14.01-beta`;
+- `next_candidate_block = PERSIST.1`;
+- la evidencia histórica del candidato conserva que G113/E03 estaba reservado durante la auditoría.
+
+## PERSIST.1 R1 — siguiente bloque funcional
+
+Candidato revision-aware reservado: G114/E01 (`0.1.14.01-beta`). Debe incorporar persistencia voluntaria y segura, modelo versionado, migraciones, borrado, controles de privacidad y gate completo antes de aceptación.

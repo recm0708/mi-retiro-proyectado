@@ -4,8 +4,8 @@
 **Estado:** Vigente para el repositorio fuente y la beta actual
 **Fecha:** 2026-08-18
 **Última actualización del inventario:** 2026-08-20
-**Versión de aplicación revisada:** `0.1.12.07-beta`
-**Última revisión documental:** DOC.1 R2 — 2026-08-24
+**Versión de aplicación revisada:** `0.1.13.03-beta`
+**Última revisión documental:** DOC.1 R3 — 2026-08-26
 
 La licencia propietaria de Mi Retiro Proyectado **no relicencia** componentes de terceros.
 

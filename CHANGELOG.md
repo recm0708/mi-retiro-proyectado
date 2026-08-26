@@ -6,10 +6,13 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ## [Unreleased]
 
-- DOC.1 R3 (candidato G113/E03): normaliza 11 referencias navegables inequívocas y formaliza etiquetas humanas para documentos y rutas técnicas clicables en inventarios vigentes.
-- DOC.1 R3 preserva CHANGELOG, validaciones históricas, matrices de trazabilidad, auditorías, archivos archivados, bloques de código, HTML y literales protegidos; no resuelve nombres ambiguos por `basename`.
-- El candidato mantiene `VERSION` en `0.1.12.07-beta`, accepted_count 112 y G113/E03 reservado hasta la promoción post-merge.
 
+## [0.1.13.03-beta]
+- G113/E03: DOC.1 R3 queda aceptado mediante PR #92 / merge `40ae5c0` después de la auditoría conservadora de referencias navegables.
+- Documentación: normaliza 11 referencias inequívocas, formaliza etiquetas humanas para documentos y rutas técnicas clicables, y preserva historia, matrices contractuales, HTML y literales protegidos.
+- Gate: 1092 pruebas post-merge en `OK`, Markdown 146/146, `pip check`, auditor de identificadores y `git diff --check` limpios; checks remotos requeridos en `success`.
+- Ledger: G113 queda aceptado; G114/E01 (`0.1.14.01-beta`) queda reservado para PERSIST.1.
+- Tag/Release: `v0.1.13.03-beta` queda pendiente hasta integrar y revalidar esta promoción; `v0.1.12.07-beta` permanece como último tag publicado.
 
 ## [0.1.12.07-beta]
 - G112/E07: NOR.1 R8 queda aceptado después de PR #89 / merge `cc6695b` y la corrección revision-aware PR #90 / merge `2de10b5`.

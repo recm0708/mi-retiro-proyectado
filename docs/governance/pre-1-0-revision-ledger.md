@@ -3,9 +3,9 @@
 **Proyecto:** Mi Retiro Proyectado
 **Base auditada:** `7037addd44253e528c77460b678d2b3ccd540dd5`
 **Contador histórico en la base `7037addd`:** **G070**
-**Contador aceptado reconciliado al commit `2de10b5`:** **G112**
-**Siguiente Global disponible:** **G113**
-**Siguiente candidato disponible:** `0.1.13.03-beta` — DOC.1 R3 (auditoría Markdown transversal previa a PERSIST.1)
+**Contador aceptado reconciliado al commit `40ae5c0`:** **G113**
+**Siguiente Global disponible:** **G114**
+**Siguiente candidato disponible:** `0.1.14.01-beta` — PERSIST.1 R1 (persistencia voluntaria y segura)
 
 
 <!-- DOC1-R1-REVISION-MANUAL:START -->
@@ -29,7 +29,7 @@ Estado vigente de la contabilidad:
   materializado por ese tag en G087/E01 sin modificar la evidencia publicada.
 - `VERSION` se sincroniza a `0.1.09.01-beta` después de la aceptación de AUD.SEC2 R1 como G109/E01.
 - G110/E01 (`0.1.10.01-beta`) quedó aceptado para REL.GOV.1 mediante PR #85 y merge `5cd1cea`.
-- G111/E01 (`0.1.11.01-beta`) permanece aceptado para DOC.2. G112/E07 (`0.1.12.07-beta`) queda aceptado para NOR.1 R8 después de PR #89 / PR #90; G113/E03 (`0.1.13.03-beta`) queda reservado para DOC.1 R3 antes de PERSIST.1.
+- G111/E01 (`0.1.11.01-beta`) permanece aceptado para DOC.2. G112/E07 (`0.1.12.07-beta`) queda aceptado para NOR.1 R8 después de PR #89 / PR #90; G113/E03 (`0.1.13.03-beta`) queda aceptado para DOC.1 R3 mediante PR #92 / merge `40ae5c0`; G114/E01 (`0.1.14.01-beta`) queda reservado para PERSIST.1.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 
 Este ledger registra los estados aceptados reconstruidos durante VER.2 y su reconciliación posterior. La regla contable histórica y las exclusiones originales se conservan en `docs/archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md` y `docs/archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md`; la ampliación post-G070 se justifica en `docs/audits/governance/post-g070-revision-reconciliation.md`.
@@ -173,6 +173,7 @@ El detalle de inclusión/exclusión está en `docs/audits/governance/post-g070-r
 | G110 | `0.1.10.01-beta` | REL.GOV.1 R1 — gobierno y normalización de GitHub Releases | `0.1.10.01-beta` | PR #85 / merge `5cd1cea`; 1054 pruebas; CI Python 3.13/3.14 + Markdown/gobernanza en success |
 | G111 | `0.1.11.01-beta` | DOC.2 R1 — reconstrucción auditable del CHANGELOG histórico | `0.1.11.01-beta` | PR #87 / merge `1041b59`; 1066 pruebas; Markdown 143/143; CI Python 3.13/3.14 + Markdown/gobernanza en success |
 | G112 | `0.1.12.07-beta` | NOR.1 R8 — gobierno de identificadores de bloques de trabajo | `0.1.12.07-beta` | PR #89 / merge `cc6695b`; PR #90 / merge `2de10b5`; 1081 pruebas; Markdown 145/145; CI en success |
+| G113 | `0.1.13.03-beta` | DOC.1 R3 — referencias navegables Markdown y política de presentación | `0.1.13.03-beta` | PR #92 / merge `40ae5c0`; 1092 pruebas; Markdown 146/146; CI Python 3.13/3.14 + Markdown/gobernanza en success |
 
 ### Anomalía histórica del tag `v0.0.71.01-beta`
 
@@ -203,13 +204,13 @@ El ledger estructurado conserva también estas exclusiones para no perder histor
 
 ## Próximo estado
 
-NOR.1 R8 superó implementación, PR #89, corrección revision-aware PR #90, CI remota e integración, y fue revalidado con 1081 pruebas; queda aceptado como G112/E07. Esta promoción materializa ese mismo estado en `VERSION` y **no consume G113**.
+DOC.1 R3 superó auditoría conservadora, gate local, PR #92, validación remota e integración, y fue revalidado post-merge con 1092 pruebas; queda aceptado como G113/E03. Esta promoción materializa ese mismo estado en `VERSION` y **no consume G114**.
 
 | Global | ID revision-aware candidato | Bloque | Condición |
 |---:|---|---|---|
-| G113 | `0.1.13.03-beta` | DOC.1 R3 — auditoría de etiquetas visibles de enlaces Markdown | auditoría viva + excepciones justificadas + regresión + gate + commit firmado + PR/CI + integración |
+| G114 | `0.1.14.01-beta` | PERSIST.1 R1 — persistencia voluntaria y segura | diseño de persistencia + privacidad + migraciones + gate + commit firmado + PR/CI + integración |
 
-G113 permanece disponible y no se considera aceptado hasta completar DOC.1 R3. PERSIST.1 permanece como siguiente bloque funcional después de este checkpoint documental.
+G114 permanece disponible y no se considera aceptado hasta completar PERSIST.1. REP.1 permanece como siguiente bloque funcional posterior.
 
 Los tags `v0.0.71.01-beta` y `v0.1.09.01-beta` permanecen publicados e inmutables.
 El primero conserva su denominación histórica original y el segundo materializa G109/E01.

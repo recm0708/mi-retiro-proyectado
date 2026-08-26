@@ -9,11 +9,10 @@ La contribución al proyecto debe leerse desde la línea base documental posteri
 Estado vigente:
 
 - MANT.1 quedó cerrado operativamente en R7.
-- DOC.1 R1 está cerrado; consolidó la documentación Markdown vigente posterior a MANT.1.
+- DOC.1 R1 y DOC.1 R2 están cerrados; DOC.1 R3 quedó aceptado como G113/E03 después de la auditoría conservadora de referencias navegables.
 - VER.2 está cerrado; `v0.0.71.01-beta` fue publicado originalmente como G071/E01 y reconciliado posteriormente como G087/E01 sin mover el tag.
-- NOR.1 está cerrado en R8 como G112/E07; NOR.2 permanece cerrado después de R1–R8.
-- DOC.1 R2 está cerrado; DOC.1 R3 queda como siguiente candidato transversal para auditar etiquetas visibles de enlaces Markdown.
-- `VERSION` queda sincronizado con `0.1.12.07-beta` (G112/E07), promoción de NOR.1 R8; G113/E03 queda reservado para DOC.1 R3 antes de PERSIST.1.
+- NOR.1 R8 está cerrado como G112/E07; NOR.2 permanece cerrado después de R1–R8.
+- `VERSION` queda sincronizado con `0.1.13.03-beta` (G113/E03); G114/E01 queda reservado para PERSIST.1.
 - SEC.2 quedó cerrado después de R1–R6 y AUD.SEC2 R1 quedó aceptado como G109/E01. Los cambios posteriores que afecten autenticación, sesiones, cookies, secretos o endpoints administrativos requieren regresión de seguridad y sincronización documental antes de promover una nueva revisión.
 - Todo cambio debe mantener sincronizados código, pruebas, documentación y evidencia aplicable.
 <!-- DOC1-R1-POST-MANT1:END -->

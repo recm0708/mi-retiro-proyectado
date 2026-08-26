@@ -1,11 +1,11 @@
 # Roadmap
 
 **Estado:** vigente
-**Versión vigente:** `0.1.12.07-beta` — G112/E07 aceptado para NOR.1 R8
+**Versión vigente:** `0.1.13.03-beta` — G113/E03 aceptado para DOC.1 R3
 **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
 **Último tag formal legacy:** `v0.0.26-beta`
 **Fecha de revisión:** 2026-08-25
-**Estado actual:** SEC.2, AUD.SEC2 R1, REL.GOV.1, DOC.2 y NOR.1 R8 están cerrados/aceptados. G112/E07 se materializa como `0.1.12.07-beta`; G113/E03 (`0.1.13.03-beta`) queda reservado para DOC.1 R3 antes de PERSIST.1.
+**Estado actual:** SEC.2, AUD.SEC2 R1, REL.GOV.1, DOC.2, NOR.1 R8 y DOC.1 R3 están cerrados/aceptados. G113/E03 se materializa como `0.1.13.03-beta`; G114/E01 (`0.1.14.01-beta`) queda reservado para PERSIST.1.
 
 
 <!-- NOR1-R7-CLOSURE:START -->
@@ -24,7 +24,8 @@ La secuencia operativa previa a SEC.2 queda:
 5. **REL.GOV.1** — preflight transversal de gobierno de Releases; cerrado/aceptado como G110/E01 mediante PR #85; no agrega un bloque funcional al plan de 14 bloques.
 6. **DOC.2** — cerrado en R1; reconstrucción auditable del CHANGELOG `0.0.1-beta`–`0.0.21-beta`, aceptada como G111/E01 mediante PR #87.
 7. **NOR.1 R8** — cerrado/aceptado como G112/E07; gobierno canónico de identificadores vigente.
-8. **DOC.1 R3** — candidato transversal G113/E03 para auditar etiquetas visibles de enlaces Markdown antes de PERSIST.1.
+8. **DOC.1 R3** — cerrado/aceptado como G113/E03; referencias navegables y política documental consolidadas.
+9. **PERSIST.1** — siguiente bloque funcional, candidato G114/E01 (`0.1.14.01-beta`).
 
 NOR.2 ejecutó los movimientos, renombrados, consolidaciones y retiros que
 NOR.1 deliberadamente no realizó.
@@ -210,12 +211,12 @@ No existe una una revisión intermedia no demostrada entre UX.4.6i R1 y R1.2 dem
 
 **VER.2:** bloque transversal cerrado. La primera promoción se publicó como `0.0.71.01-beta`; AUD.SEC2 R1 documenta que el ledger usado entonces terminaba en G070 y que la reconstrucción completa sitúa ese estado en G087 sin modificar el tag inmutable.
 
-**Checkpoint técnico actual:** G111/E01 (`0.1.11.01-beta`) está aceptado después de DOC.2 R1 / PR #87 y revalidación post-merge; G112/E07 (`0.1.12.07-beta`) queda aceptado para NOR.1 R8; G113/E03 (`0.1.13.03-beta`) queda reservado para DOC.1 R3 antes de PERSIST.1.
+**Checkpoint técnico actual:** G112/E07 (`0.1.12.07-beta`) permanece aceptado para NOR.1 R8; G113/E03 (`0.1.13.03-beta`) queda aceptado para DOC.1 R3; G114/E01 (`0.1.14.01-beta`) queda reservado para PERSIST.1.
 
 Documentos canónicos de VER.2:
 
 - `AUDITORIA_VERSIONADO_PRE_1_0.md` — criterio contable y exclusiones;
-- `pre-1-0-revision-ledger.md` — ledger reconciliado G001–G111 y siguiente Global G112;
+- `pre-1-0-revision-ledger.md` — ledger reconciliado G001–G113 y siguiente Global G114;
 - `MATRIZ_DECISION_REVISIONES_VER2.md` — justificación de la segunda pasada;
 - `../data/pre-1-0-revision-ledger.json` — ledger estructurado validable;
 - `../VERSIONING.md` — política de numeración.

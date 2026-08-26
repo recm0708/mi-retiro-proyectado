@@ -14,10 +14,11 @@ La fuente canónica de versión continúa siendo `VERSION`.
 
 Estado vigente:
 
-- `VERSION` contiene `0.1.12.07-beta` y materializa G112/E07 (NOR.1 R8), aceptado tras PR #89 / merge `cc6695b` y corrección PR #90 / merge `2de10b5`. G111/E01 permanece preservado como DOC.2.
-- `v0.0.71.01-beta` está publicado y es inmutable; `v0.0.26-beta` permanece como último tag de la familia legacy.
-- La reconciliación post-G070 reconstruye **G071–G108** y determina que el estado materializado por el tag `v0.0.71.01-beta` corresponde cronológicamente a **G087**. La anomalía no autoriza mover, borrar ni recrear el tag.
-- `4bd7d8d` permanece como snapshot reconciliado G108; AUD.SEC2 R1 fue aceptado como **G109/E01**, REL.GOV.1 como **G110/E01** y DOC.2 como **G111/E01**. **G112/E07** (`0.1.12.07-beta`) queda aceptado como NOR.1 R8; **G113/E03** (`0.1.13.03-beta`) queda reservado para DOC.1 R3 antes de PERSIST.1.
+- `VERSION` contiene `0.1.13.03-beta` y materializa G113/E03 (DOC.1 R3), aceptado mediante PR #92 / merge `40ae5c0`. G112/E07 permanece preservado como NOR.1 R8.
+- `v0.1.12.07-beta` está publicado, firmado y verificado; `v0.0.26-beta` permanece como último tag de la familia legacy.
+- La reconciliación post-G070 reconstruye G071–G108 y conserva `v0.0.71.01-beta` como evidencia histórica de G087/E01 sin mover el tag.
+- AUD.SEC2 R1 fue aceptado como G109/E01, REL.GOV.1 como G110/E01, DOC.2 como G111/E01, NOR.1 R8 como G112/E07 y DOC.1 R3 como G113/E03.
+- G114/E01 (`0.1.14.01-beta`) queda reservado para PERSIST.1, bloque nuevo que comienza en E01.
 - Los cierres y sincronizaciones que no crean un estado materialmente distinto no consumen `G` por sí solos.
 
 Cualquier promoción futura de versión debe seguir el proceso formal de release, validación, PR/CI, tag y evidencia documental correspondiente.

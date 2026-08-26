@@ -2,9 +2,9 @@
   "schema_version": 1,
   "project": "Mi Retiro Proyectado",
   "base_commit": "7037addd44253e528c77460b678d2b3ccd540dd5",
-  "accepted_count": 112,
-  "next_global_if_ver2_accepted": 113,
-  "next_candidate": "0.1.13.03-beta",
+  "accepted_count": 113,
+  "next_global_if_ver2_accepted": 114,
+  "next_candidate": "0.1.14.01-beta",
   "historical_tags_immutable": {
     "from": "v0.0.1-beta",
     "to": "v0.0.26-beta"
@@ -1017,6 +1017,15 @@
       "state": "R8 — gobierno de identificadores de bloques de trabajo",
       "anchor": "0.1.12.07-beta",
       "evidence": "PR #89 / merge cc6695b; corrección ordinal PR #90 / merge 2de10b5; 1081 pruebas post-merge; Markdown 145/145; CI Python 3.13/3.14 + Markdown/gobernanza en success"
+    },
+    {
+      "global_revision": 113,
+      "block": "DOC.1",
+      "ordinal": 3,
+      "revision_aware": "0.1.13.03-beta",
+      "state": "R3 — referencias navegables Markdown y política de presentación",
+      "anchor": "0.1.13.03-beta",
+      "evidence": "PR #92 / merge 40ae5c0; 1092 pruebas post-merge; Markdown 146/146; auditor de identificadores OK; CI Python 3.13/3.14 + Markdown/gobernanza en success"
     }
   ],
   "excluded": [
@@ -1093,8 +1102,8 @@
       "reason": "La decisión VER.2 R3 establece expresamente que R1, R2 y R3 son correcciones internas del mismo candidato G071/E01; no consumen G072 ni incrementan EE. R4 materializa la aceptación única del candidato."
     }
   ],
-  "reconciled_through_commit": "2de10b5ecfa7763ffe5c03b6644aa908858d279f",
+  "reconciled_through_commit": "40ae5c067923699ac8be0c8a3baa79ae6ad5d3d0",
   "reconciliation_date": "2026-08-26",
-  "next_global": 113,
-  "next_candidate_block": "DOC.1"
+  "next_global": 114,
+  "next_candidate_block": "PERSIST.1"
 }

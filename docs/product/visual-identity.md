@@ -1,7 +1,7 @@
 # Identidad visual de Mi Retiro Proyectado
 
 **Estado:** Vigente
-**Versión de aplicación revisada:** `0.1.12.07-beta`
+**Versión de aplicación revisada:** `0.1.13.03-beta`
 **Versión base histórica:** `0.0.24-beta`
 **Fecha:** 2026-08-19
 **Clasificación:** Producto / UX / Marca / GitHub

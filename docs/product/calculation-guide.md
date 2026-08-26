@@ -1,7 +1,7 @@
 # Cómo se calcula — contrato de transparencia
 
 **Estado:** vigente
-**Versión de aplicación revisada:** `0.1.12.07-beta`
+**Versión de aplicación revisada:** `0.1.13.03-beta`
 **Sección pública:** `/como-se-calcula`
 **Clasificación:** Producto / Transparencia / Normativa
 

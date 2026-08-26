@@ -113,15 +113,14 @@ class TestDOC1R3MarkdownLinks(unittest.TestCase):
             audit.read_text(encoding="utf-8"),
         )
 
-    def test_candidato_no_promueve_g113(self):
-        version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
+    def test_doc1_r3_queda_preservado_como_g113(self):
         ledger = cargar_ledger()
-
-        self.assertEqual("0.1.12.07-beta", version)
-        self.assertEqual(112, ledger["accepted_count"])
-        self.assertEqual(113, ledger["next_global"])
-        self.assertEqual("0.1.13.03-beta", ledger["next_candidate"])
-        self.assertEqual("DOC.1", ledger["next_candidate_block"])
+        entry = next(x for x in ledger["entries"] if x["global_revision"] == 113)
+        self.assertEqual("DOC.1", entry["block"])
+        self.assertEqual(3, entry["ordinal"])
+        self.assertEqual("0.1.13.03-beta", entry["revision_aware"])
+        self.assertIn("PR #92", entry["evidence"])
+        self.assertIn("40ae5c0", entry["evidence"])
 
 
 if __name__ == "__main__":

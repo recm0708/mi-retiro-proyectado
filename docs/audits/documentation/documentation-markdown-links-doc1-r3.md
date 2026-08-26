@@ -1,6 +1,6 @@
 # Auditoría de referencias navegables Markdown — DOC.1 R3
 
-**Estado:** candidato
+**Estado:** aceptado
 **Versión de aplicación revisada:** `0.1.12.07-beta`
 **Bloque:** DOC.1 R3
 **Candidato revision-aware:** G113/E03 — `0.1.13.03-beta`
@@ -102,3 +102,9 @@ Antes de confirmar DOC.1 R3 debe superar:
 - CI remota del Pull Request.
 
 G113/E03 solo se materializa mediante la promoción post-merge correspondiente.
+
+## 8. Resultado de aceptación
+
+DOC.1 R3 fue integrado mediante PR #92 y squash merge `40ae5c067923699ac8be0c8a3baa79ae6ad5d3d0`. La revalidación post-merge cerró con **1092 pruebas en `OK`**, Markdown **146/146**, `pip check`, auditor de identificadores y `git diff --check` limpios. Los checks remotos requeridos `Python 3.13`, `Python 3.14` y `Auditoría de gobernanza` quedaron en `success`; Markdown Audit también quedó en `success`.
+
+La promoción formal materializa G113/E03 (`0.1.13.03-beta`) y reserva G114/E01 (`0.1.14.01-beta`) para PERSIST.1. La versión `0.1.12.07-beta` declarada al inicio de esta auditoría se conserva como baseline histórico del candidato.
