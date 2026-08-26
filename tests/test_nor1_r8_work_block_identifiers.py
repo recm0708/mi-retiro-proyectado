@@ -2,13 +2,18 @@
 
 from __future__ import annotations
 
+import copy
 import json
 from pathlib import Path
 import subprocess
 import sys
 import unittest
 
-from app.core.version_ledger import cargar_ledger
+from app.core.version_ledger import (
+    LedgerRevisionError,
+    cargar_ledger,
+    validar_ledger,
+)
 
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / "data/work-block-registry.json"
@@ -56,7 +61,7 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
         )
         self.assertEqual(111, ledger["accepted_count"])
         self.assertEqual(112, ledger["next_global"])
-        self.assertEqual("0.1.12.01-beta", ledger["next_candidate"])
+        self.assertEqual("0.1.12.07-beta", ledger["next_candidate"])
         self.assertEqual("NOR.1", ledger["next_candidate_block"])
 
         candidate = self.data["current_candidate"]
@@ -68,6 +73,28 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
             "PERSIST.1",
             candidate["next_functional_block_if_accepted"],
         )
+
+    def test_candidato_reabierto_continua_ordinal_del_bloque(self):
+        ledger = cargar_ledger()
+        ordinales_nor1 = [
+            entry["ordinal"]
+            for entry in ledger["entries"]
+            if entry["block"] == "NOR.1"
+        ]
+        self.assertEqual([1, 2, 3, 4, 5, 6], ordinales_nor1)
+        self.assertEqual("0.1.12.07-beta", ledger["next_candidate"])
+
+        invalido = copy.deepcopy(ledger)
+        invalido["next_candidate"] = "0.1.12.01-beta"
+        with self.assertRaises(LedgerRevisionError):
+            validar_ledger(invalido)
+
+    def test_bloque_nuevo_comienza_en_e01(self):
+        ledger = cargar_ledger()
+        candidato_persist = copy.deepcopy(ledger)
+        candidato_persist["next_candidate_block"] = "PERSIST.1"
+        candidato_persist["next_candidate"] = "0.1.12.01-beta"
+        validar_ledger(candidato_persist)
 
     def test_politica_y_auditoria_estan_indexadas(self):
         standards = (

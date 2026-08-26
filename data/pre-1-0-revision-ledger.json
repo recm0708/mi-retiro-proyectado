@@ -4,7 +4,7 @@
   "base_commit": "7037addd44253e528c77460b678d2b3ccd540dd5",
   "accepted_count": 111,
   "next_global_if_ver2_accepted": 112,
-  "next_candidate": "0.1.12.01-beta",
+  "next_candidate": "0.1.12.07-beta",
   "historical_tags_immutable": {
     "from": "v0.0.1-beta",
     "to": "v0.0.26-beta"

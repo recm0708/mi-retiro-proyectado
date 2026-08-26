@@ -109,11 +109,26 @@ def validar_ledger(ledger: dict[str, Any]) -> None:
             "next_global_if_ver2_accepted debe ser accepted_count + 1."
         )
 
+    next_candidate_block = ledger.get("next_candidate_block")
+    if not isinstance(next_candidate_block, str) or not next_candidate_block.strip():
+        raise LedgerRevisionError("next_candidate_block debe ser un texto no vacío.")
+
+    ordinales_del_bloque = [
+        entry["ordinal"]
+        for entry in entries
+        if entry["block"] == next_candidate_block
+    ]
+    siguiente_ordinal = max(ordinales_del_bloque, default=0) + 1
+
     next_candidate = ledger.get("next_candidate")
-    candidato_esperado = construir_version_beta_revision(next_global, 1)
+    candidato_esperado = construir_version_beta_revision(
+        next_global,
+        siguiente_ordinal,
+    )
     if next_candidate != candidato_esperado:
         raise LedgerRevisionError(
-            f"next_candidate debe ser {candidato_esperado!r}."
+            f"next_candidate debe ser {candidato_esperado!r} para "
+            f"{next_candidate_block} E{siguiente_ordinal:02d}."
         )
 
     tags = ledger.get("historical_tags_immutable")

@@ -95,7 +95,6 @@ class TestDOC2R1ChangelogReconstruction(unittest.TestCase):
         ledger = cargar_ledger()
         self.assertEqual(111, ledger["accepted_count"])
         self.assertEqual(112, ledger["next_global"])
-        self.assertEqual("0.1.12.01-beta", ledger["next_candidate"])
         self.assertEqual("NOR.1", ledger["next_candidate_block"])
         self.assertTrue(self.data["reserved_candidate"]["consumed"])
         self.assertEqual(87, self.data["accepted_state"]["pull_request"])

@@ -57,7 +57,7 @@ class TestReleaseGovernanceContract(unittest.TestCase):
     def test_tag_debe_coincidir_con_version(self):
         ok = self.run_contract("--check-tag", "v0.1.11.01-beta")
         self.assertEqual(0, ok.returncode, ok.stdout + ok.stderr)
-        bad = self.run_contract("--check-tag", "v0.1.12.01-beta")
+        bad = self.run_contract("--check-tag", "v0.1.12.07-beta")
         self.assertNotEqual(0, bad.returncode)
         self.assertIn("Tag inválido", bad.stdout)
 
@@ -140,7 +140,7 @@ class TestReleaseGovernanceContract(unittest.TestCase):
         )
         self.assertEqual(111, ledger["accepted_count"])
         self.assertEqual(112, ledger["next_global"])
-        self.assertEqual("0.1.12.01-beta", ledger["next_candidate"])
+        self.assertEqual("0.1.12.07-beta", ledger["next_candidate"])
         self.assertEqual("NOR.1", ledger["next_candidate_block"])
         self.assertEqual(
             "0.1.11.01-beta",

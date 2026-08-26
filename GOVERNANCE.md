@@ -3,7 +3,7 @@
 **Proyecto:** Mi Retiro Proyectado
 **Estado:** vigente desde GOV.1.2
 **Fecha de adopción:** 2026-08-18
-**Última revisión:** NOR.1 R8 — gobierno de identificadores de bloques, candidato G112/E01 — 2026-08-26
+**Última revisión:** NOR.1 R8 — gobierno de identificadores de bloques, candidato G112/E07 — 2026-08-26
 
 
 <!-- DOC1-R1-POST-MANT1:START -->
@@ -14,7 +14,7 @@ El gobierno vigente conserva la separación entre estado canónico, evidencia hi
 Estado vigente:
 
 - `VERSION` sigue siendo la fuente única de versión.
-- `0.1.11.01-beta` es la versión canónica vigente en `VERSION` y materializa G111/E01 (DOC.2); G112/E01 queda reservado para NOR.1 R8 sin consumirse y PERSIST.1 permanece como siguiente bloque funcional.
+- `0.1.11.01-beta` es la versión canónica vigente en `VERSION` y materializa G111/E01 (DOC.2); G112/E07 queda reservado para NOR.1 R8 sin consumirse y PERSIST.1 permanece como siguiente bloque funcional.
 - `v0.0.71.01-beta` es el tag formal publicado por VER.2.
 - `v0.0.26-beta` permanece como tag legacy histórico e inmutable.
 - VER.2 está cerrado.
