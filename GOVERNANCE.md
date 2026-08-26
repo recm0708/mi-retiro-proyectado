@@ -14,7 +14,7 @@ El gobierno vigente conserva la separación entre estado canónico, evidencia hi
 Estado vigente:
 
 - `VERSION` sigue siendo la fuente única de versión.
-- `0.1.09.01-beta` es la versión canónica vigente en `VERSION` y materializa G109/E01.
+- `0.1.10.01-beta` es la versión canónica vigente en `VERSION` y materializa G110/E01 (REL.GOV.1).
 - `v0.0.71.01-beta` es el tag formal publicado por VER.2.
 - `v0.0.26-beta` permanece como tag legacy histórico e inmutable.
 - VER.2 está cerrado.

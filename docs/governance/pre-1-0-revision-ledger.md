@@ -3,9 +3,9 @@
 **Proyecto:** Mi Retiro Proyectado
 **Base auditada:** `7037addd44253e528c77460b678d2b3ccd540dd5`
 **Contador histórico en la base `7037addd`:** **G070**
-**Contador aceptado reconciliado al commit `ec1842d`:** **G109**
-**Siguiente Global disponible:** **G110**
-**Siguiente candidato reservado:** `0.1.10.01-beta` — REL.GOV.1
+**Contador aceptado reconciliado al commit `5cd1cea`:** **G110**
+**Siguiente Global disponible:** **G111**
+**Siguiente candidato disponible:** `0.1.11.01-beta` — DOC.2
 
 
 <!-- DOC1-R1-REVISION-MANUAL:START -->
@@ -28,7 +28,7 @@ Estado vigente de la contabilidad:
   **anomalía histórica de numeración**. La reconciliación vigente sitúa el estado
   materializado por ese tag en G087/E01 sin modificar la evidencia publicada.
 - `VERSION` se sincroniza a `0.1.09.01-beta` después de la aceptación de AUD.SEC2 R1 como G109/E01.
-- El siguiente Global disponible es G110/E01: `0.1.10.01-beta`, reservado para REL.GOV.1, saneamiento transversal del contrato de GitHub Releases previo a DOC.2.
+- G110/E01 (`0.1.10.01-beta`) quedó aceptado para REL.GOV.1 mediante PR #85 y merge `5cd1cea`. G111/E01 (`0.1.11.01-beta`) queda disponible para DOC.2.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 
 Este ledger registra los estados aceptados reconstruidos durante VER.2 y su reconciliación posterior. La regla contable histórica y las exclusiones originales se conservan en `docs/archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md` y `docs/archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md`; la ampliación post-G070 se justifica en `docs/audits/governance/post-g070-revision-reconciliation.md`.
@@ -169,6 +169,7 @@ El detalle de inclusión/exclusión está en `docs/audits/governance/post-g070-r
 | G107 | `0.1.07.05-beta` | SEC.2 R5 — sesión administrativa web | `0.0.71.01-beta` | commit 0966cd2 / PR #80 |
 | G108 | `0.1.08.06-beta` | SEC.2 R6 — hardening de sesiones administrativas | `0.0.71.01-beta` | commit 38da72f / PR #81 |
 | G109 | `0.1.09.01-beta` | AUD.SEC2 R1 — auditoría y remediación integral post-SEC.2 | `0.1.09.01-beta` | PR #83 / merge `ec1842d`; 1040 pruebas; CI Python 3.13/3.14 + Markdown/gobernanza en success |
+| G110 | `0.1.10.01-beta` | REL.GOV.1 R1 — gobierno y normalización de GitHub Releases | `0.1.10.01-beta` | PR #85 / merge `5cd1cea`; 1054 pruebas; CI Python 3.13/3.14 + Markdown/gobernanza en success |
 
 ### Anomalía histórica del tag `v0.0.71.01-beta`
 
@@ -199,15 +200,13 @@ El ledger estructurado conserva también estas exclusiones para no perder histor
 
 ## Próximo estado
 
-AUD.SEC2 R1 superó gate local, PR #83, CI remota e integración y queda aceptado
-como G109/E01. La sincronización post-merge materializa ese mismo estado en
-`VERSION`; **no consume G110**.
+REL.GOV.1 R1 superó gate local, PR #85, CI remota e integración y queda aceptado como G110/E01. La sincronización post-merge materializa ese mismo estado en `VERSION`; **no consume G111**.
 
 | Global | ID revision-aware candidato | Bloque | Condición |
 |---:|---|---|---|
-| G110 | `0.1.10.01-beta` | REL.GOV.1 — gobierno de GitHub Releases | política + plantilla/categorización + validación de contrato + saneamiento G071→G087 + gate completo + commit firmado + PR/CI + integración |
+| G111 | `0.1.11.01-beta` | DOC.2 — CHANGELOG histórico detallado | reconstrucción basada exclusivamente en evidencia + gate + commit firmado + PR/CI + integración |
 
-Si G110 es aceptado, DOC.2 continuará con G111/E01 (`0.1.11.01-beta`); no se preasigna como aceptado antes del gate.
+G111 permanece disponible y no se considera aceptado hasta completar el gate propio de DOC.2.
 
 Los tags `v0.0.71.01-beta` y `v0.1.09.01-beta` permanecen publicados e inmutables.
 El primero conserva su denominación histórica original y el segundo materializa G109/E01.

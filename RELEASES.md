@@ -7,6 +7,14 @@
 
 
 <!-- DOC1-R1-POST-MANT1:START -->
+## Promoción G110/E01 — post-merge de REL.GOV.1 R1
+
+- Estado aceptado: G110/E01 (`0.1.10.01-beta`).
+- Evidencia de aceptación: PR #85, merge `5cd1cea`, 1054 pruebas locales y checks remotos Python 3.13/3.14 + Markdown/gobernanza en `success`.
+- Esta sincronización materializa el G110 ya aceptado y **no consume G111**.
+- Siguiente Global disponible: G111/E01 (`0.1.11.01-beta`) para DOC.2.
+- Tag y GitHub Release `v0.1.10.01-beta`: pendientes hasta integrar/revalidar esta promoción; `v0.1.09.01-beta` y `v0.0.71.01-beta` permanecen inmutables.
+
 ## Promoción G109/E01 — post-merge de AUD.SEC2 R1
 
 - Estado aceptado: G109/E01 (`0.1.09.01-beta`).
@@ -23,15 +31,15 @@ Después de `v0.0.26-beta`, el repositorio integró trabajo funcional, técnico,
 
 Estado vigente:
 
-- Último tag formal: `v0.1.09.01-beta`.
+- Último tag formal publicado: `v0.1.09.01-beta`; `v0.1.10.01-beta` queda pendiente de publicación post-promoción.
 - Último tag formal legacy: `v0.0.26-beta`.
-- Versión canónica en `VERSION`: `0.1.09.01-beta` (G109/E01).
+- Versión canónica en `VERSION`: `0.1.10.01-beta` (G110/E01).
 - `v0.0.71.01-beta` fue publicado originalmente bajo la denominación VER.2 G071/E01; la reconciliación post-G070 sitúa ese estado cronológicamente en **G087/E01** sin alterar el tag.
 - MANT.1 está cerrado.
 - DOC.1 R1 está cerrado.
 - NOR.1 y NOR.2 están cerrados.
 - DOC.1 R2 está cerrado como auditoría integral Markdown post-NOR.2.
-- SEC.2 quedó cerrado después de R1–R6. AUD.SEC2 R1 fue aceptado por PR #83 como G109/E01; la promoción post-merge actualizó `VERSION` a `0.1.09.01-beta` y publicó el tag/Release `v0.1.09.01-beta`. G110 queda reservado para REL.GOV.1 antes de DOC.2.
+- SEC.2 quedó cerrado después de R1–R6. AUD.SEC2 R1 fue aceptado por PR #83 como G109/E01; la promoción post-merge actualizó `VERSION` a `0.1.09.01-beta` y publicó el tag/Release `v0.1.09.01-beta`. REL.GOV.1 quedó aceptado como G110/E01 mediante PR #85; G111 queda disponible para DOC.2.
 
 Este documento no crea una release nueva; registra el estado formal ya alcanzado por el repositorio.
 <!-- DOC1-R1-POST-MANT1:END -->
@@ -279,7 +287,7 @@ La auditoría integral posterior a SEC.2 determinó que el ledger publicado con
 VER.2 se detuvo materialmente en G070 antes de contabilizar estados aceptados de
 DEV.2, MANT.1, DOC.1, NOR.1, NOR.2 y SEC.2. La reconstrucción basada en commits,
 PR y gates reales sitúa `4bd7d8d` en **G108**. AUD.SEC2 R1 fue aceptado después
-mediante PR #83 y merge `ec1842d` como **G109/E01**; G110/E01 queda disponible
+mediante PR #83 y merge `ec1842d` como **G109/E01**; G110/E01 quedó posteriormente consumido por REL.GOV.1 mediante PR #85; G111/E01 queda disponible
 para DOC.2. El tag `v0.0.71.01-beta` permanece publicado e inmutable; su número
 no se reescribe aunque el estado que materializó se corresponda cronológicamente
 con G087.

@@ -28,8 +28,8 @@ class TestDev2R1CierreDocumental(unittest.TestCase):
     def test_cierre_documental_no_cambia_version_visible(self):
         version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
 
-        self.assertEqual("0.1.09.01-beta", version)
-        self.assertEqual("0.1.09.01-beta", APP_VERSION)
+        self.assertEqual("0.1.10.01-beta", version)
+        self.assertEqual("0.1.10.01-beta", APP_VERSION)
 
 
 if __name__ == "__main__":

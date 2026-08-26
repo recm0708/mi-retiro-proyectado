@@ -37,7 +37,7 @@ class TestDev2CentroDesarrolloR1(unittest.TestCase):
         self.assertEqual("DEV.2 R1", estado["bloque"])
         self.assertEqual("Centro de desarrollo", estado["titulo"])
         self.assertFalse(estado["dev_mode_activo"])
-        self.assertEqual("0.1.09.01-beta", estado["app_version"])
+        self.assertEqual("0.1.10.01-beta", estado["app_version"])
         self.assertEqual("mrp-diagnostics.jsonl", estado["archivo_log_actual"])
         self.assertNotIn(temp, json.dumps(estado, ensure_ascii=False))
 
@@ -64,7 +64,7 @@ class TestDev2CentroDesarrolloR1(unittest.TestCase):
         self.assertNotIn("x-correlation-id", respuesta.headers)
         self.assertIn("Centro de desarrollo", respuesta.text)
         self.assertIn("MRP_DEV_MODE", respuesta.text)
-        self.assertIn("0.1.09.01-beta", respuesta.text)
+        self.assertIn("0.1.10.01-beta", respuesta.text)
         self.assertIn("Developer Diagnostics", respuesta.text)
         self.assertIn("Desactivado", respuesta.text)
 

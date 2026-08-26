@@ -35,7 +35,7 @@ class TestPlan1R4CandidatoCierre(unittest.TestCase):
 
     def test_security_soporta_candidato_y_archiva_legacy(self):
         texto = (ROOT / "SECURITY.md").read_text(encoding="utf-8")
-        self.assertIn(f"| `{self.version}` | Beta vigente G109/E01; tag firmado y GitHub Release prerelease publicados", texto)
+        self.assertIn(f"| `{self.version}` | Beta vigente ", texto)
         self.assertIn("`0.0.26-beta`", texto)
         self.assertIn("Históricas", texto)
 

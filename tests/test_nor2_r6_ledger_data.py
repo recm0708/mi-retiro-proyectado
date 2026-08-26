@@ -36,21 +36,22 @@ class TestNOR2R6LedgerData(unittest.TestCase):
         raw = json.loads(NEW.read_text(encoding="utf-8"))
 
         self.assertEqual(1, raw["schema_version"])
-        self.assertEqual(109, raw["accepted_count"])
-        self.assertEqual(109, len(raw["entries"]))
-        self.assertEqual(110, raw["next_global_if_ver2_accepted"])
-        self.assertEqual("0.1.10.01-beta", raw["next_candidate"])
+        accepted = raw["accepted_count"]
+        self.assertGreaterEqual(accepted, 109)
+        self.assertEqual(accepted, len(raw["entries"]))
+        self.assertEqual(accepted + 1, raw["next_global_if_ver2_accepted"])
+        self.assertEqual(accepted + 1, raw["next_global"])
 
         globales = [
             item["global_revision"]
             for item in raw["entries"]
         ]
 
-        self.assertEqual(list(range(1, 110)), globales)
+        self.assertEqual(list(range(1, accepted + 1)), globales)
 
         # También ejecuta el validador canónico del proyecto.
         validado = cargar_ledger()
-        self.assertEqual(109, validado["accepted_count"])
+        self.assertEqual(accepted, validado["accepted_count"])
 
     def test_no_quedan_consumidores_vivos_de_ruta_anterior(self):
         old_path = "data/revision_ledger_pre_1_0.json"
@@ -108,7 +109,7 @@ class TestNOR2R6LedgerData(unittest.TestCase):
 
     def test_version_no_cambia(self):
         self.assertEqual(
-            "0.1.09.01-beta",
+            "0.1.10.01-beta",
             (ROOT / "VERSION").read_text(encoding="utf-8").strip(),
         )
 

@@ -1,9 +1,9 @@
 # Índice de documentación
 
 **Estado:** vigente
-**Versión de aplicación:** `0.1.09.01-beta` — G109/E01 aceptado y publicado; G110/E01 reservado para REL.GOV.1; ledger vivo hasta G109
+**Versión de aplicación:** `0.1.10.01-beta` — G110/E01 aceptado para REL.GOV.1; G111/E01 disponible para DOC.2; ledger vivo hasta G110
 **Último tag formal legacy:** `v0.0.26-beta`
-**Última actualización transversal:** promoción post-merge G109/E01 de AUD.SEC2 R1 — 2026-08-25
+**Última actualización transversal:** promoción post-merge G110/E01 de REL.GOV.1 R1 — 2026-08-25
 **Cierres históricos preservados:** UX.4.6i / PR #34 — 841 pruebas; UX.4.6e R9 — `v0.0.25-beta`
 
 Este archivo es el punto de entrada para la documentación técnica, funcional, normativa, de privacidad, validación y auditoría de Mi Retiro Proyectado.
@@ -11,7 +11,7 @@ Este archivo es el punto de entrada para la documentación técnica, funcional, 
 
 ## Estado de normalización del repositorio
 
-**Estado actual:** NOR.2, DOC.1 R2 y SEC.2 están cerrados. AUD.SEC2 R1 quedó aceptado como G109/E01 y `VERSION` se sincroniza a `0.1.09.01-beta`; DOC.2 es el siguiente bloque.
+**Estado actual:** NOR.2, DOC.1 R2, SEC.2, AUD.SEC2 R1 y REL.GOV.1 están cerrados. G110/E01 se materializa en `VERSION` como `0.1.10.01-beta`; DOC.2 es el siguiente bloque con G111/E01 disponible.
 
 Estado de la fase:
 
@@ -62,7 +62,7 @@ Evidencia:
 - [`AUDITORIA_VER2_SEGUNDA_PASADA.md`](archive/governance/AUDITORIA_VER2_SEGUNDA_PASADA.md) — bitácora de la segunda pasada y correcciones sobre la primera reconstrucción.
 - [`AUDITORIA_VER2_CONTEO_PROVISIONAL.md`](archive/governance/AUDITORIA_VER2_CONTEO_PROVISIONAL.md) — cierre del conteo de segunda pasada en G070 antes de VER.2.
 - [`MATRIZ_DECISION_REVISIONES_VER2.md`](archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md) — decisión fila por fila sobre qué consume Global y por qué.
-- [`pre-1-0-revision-ledger.md`](governance/pre-1-0-revision-ledger.md) — ledger Markdown reconciliado G001–G109 y próximo candidato G110.
+- [`pre-1-0-revision-ledger.md`](governance/pre-1-0-revision-ledger.md) — ledger Markdown reconciliado G001–G110 y próximo candidato G111.
 - [`post-g070-revision-reconciliation.md`](audits/governance/post-g070-revision-reconciliation.md) — auditoría de reconstrucción G071–G108.
 - [`pre-1-0-revision-ledger-g070.json`](archive/governance/pre-1-0-revision-ledger-g070.json) — snapshot histórico exacto G070.
 - [`../data/pre-1-0-revision-ledger.json`](../data/pre-1-0-revision-ledger.json) — ledger machine-readable canónico de la reconstrucción.

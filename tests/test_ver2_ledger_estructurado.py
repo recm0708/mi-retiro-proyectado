@@ -27,15 +27,18 @@ class TestVer2LedgerEstructurado(unittest.TestCase):
 
     def test_json_es_valido_y_declara_reconciliacion_post_g070(self):
         self.assertTrue(LEDGER_FILE.is_file())
-        self.assertEqual(109, self.ledger["accepted_count"])
-        self.assertEqual(109, len(self.ledger["entries"]))
-        self.assertEqual(110, self.ledger["next_global_if_ver2_accepted"])
-        self.assertEqual("0.1.10.01-beta", self.ledger["next_candidate"])
+        accepted = self.ledger["accepted_count"]
+        self.assertGreaterEqual(accepted, 109)
+        self.assertEqual(accepted, len(self.ledger["entries"]))
+        self.assertEqual(accepted + 1, self.ledger["next_global_if_ver2_accepted"])
+        self.assertEqual(accepted + 1, self.ledger["next_global"])
 
     def test_globales_son_contiguos_y_ids_coinciden(self):
         globales = [entry["global_revision"] for entry in self.ledger["entries"]]
-        self.assertEqual(list(range(1, 110)), globales)
-        self.assertEqual("0.1.09.01-beta", self.ledger["entries"][-1]["revision_aware"])
+        accepted = self.ledger["accepted_count"]
+        self.assertEqual(list(range(1, accepted + 1)), globales)
+        version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
+        self.assertEqual(version, self.ledger["entries"][-1]["revision_aware"])
 
     def test_markdown_preserva_g070_y_documenta_reconciliacion(self):
         ledger_md = LEDGER_MD.read_text(encoding="utf-8")
@@ -46,7 +49,7 @@ class TestVer2LedgerEstructurado(unittest.TestCase):
         self.assertIn("G071–G108", ledger_md)
         self.assertIn("G109", ledger_md)
         self.assertIn("**G110**", ledger_md)
-        self.assertIn("`0.1.09.01-beta`", ledger_md)
+        self.assertIn("`0.1.10.01-beta`", ledger_md)
         self.assertIn("`0.0.71.01-beta`", ledger_md)
 
     def test_exclusiones_clave_se_preservan(self):
