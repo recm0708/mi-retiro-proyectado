@@ -1,7 +1,7 @@
 # Transparencia del producto
 
 **Estado:** Vigente
-**Versión de aplicación revisada:** `0.1.10.01-beta`
+**Versión de aplicación revisada:** `0.1.11.01-beta`
 **Versión base histórica:** `0.0.25-beta`
 **Versión base histórica preservada:** `0.0.23-beta`
 **Base documental preservada:** GOV.1.3 R4 — 2026-08-17
@@ -21,7 +21,7 @@ Estado vigente:
 - VER.2 está cerrado y `v0.0.71.01-beta` fue publicado.
 - NOR.1 y NOR.2 están cerrados.
 - DOC.1 R2 está cerrado tras auditar integralmente la documentación Markdown posterior a NOR.2.
-- `VERSION` está sincronizado en `0.1.10.01-beta` (G110/E01).
+- `VERSION` está sincronizado en `0.1.11.01-beta` (G111/E01); G112/E01 queda disponible para PERSIST.1.
 - SEC.2 quedó cerrado después de R1–R6 sin cambiar reglas previsionales; AUD.SEC2 R1 corrige seguridad administrativa y trazabilidad sin alterar motores.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 

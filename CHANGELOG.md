@@ -7,14 +7,13 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 ## [Unreleased]
 
 
-### DOC.2 R1 — reconstrucción auditable del CHANGELOG legacy
+## [0.1.11.01-beta]
+- G111/E01: DOC.2 R1 aceptado mediante PR #87 y merge `1041b59`; reconstruye de forma auditable `0.0.1-beta`–`0.0.21-beta`.
+- Evidencia: 21 estados retrospectivos y 80 commits reales/únicos preservados en `data/doc2-legacy-changelog-evidence.json`.
+- Gate: 1066 pruebas post-merge en `OK`, Markdown 143/143, `pip check`, compilación Python, sintaxis JavaScript y `git diff --check` limpios; CI remota Python 3.13/3.14 + Markdown/gobernanza en `success`.
+- Ledger: G111 queda aceptado; G112/E01 (`0.1.12.01-beta`) pasa a ser el siguiente candidato disponible para PERSIST.1.
+- Tag/Release: `v0.1.11.01-beta` queda pendiente de creación firmada/publicación después de integrar y revalidar esta promoción; tags anteriores permanecen inmutables.
 
-- reconstruye `0.0.1-beta`–`0.0.21-beta` desde 80 commits reales y los rangos canónicos de `RELEASES.md`;
-- preserva el carácter retrospectivo de esos estados y los tags materializados posteriormente;
-- agrega evidencia machine-readable en `data/doc2-legacy-changelog-evidence.json` y auditoría en `docs/audits/documentation/changelog-reconstruction-doc2-r1.md`;
-- sincroniza el cierre real de G110: `v0.1.10.01-beta` y su GitHub Release están publicados;
-- registra el backfill administrativo histórico: 29 tags formales cuentan con 29 GitHub Releases, sin mover ni recrear tags;
-- G111/E01 (`0.1.11.01-beta`) continúa reservado para DOC.2 y no se consume hasta gate, commit firmado, PR/CI y merge.
 ## [0.1.10.01-beta]
 - G110/E01: REL.GOV.1 R1 aceptado mediante PR #85 y merge `5cd1cea`; normaliza el gobierno de GitHub Releases y corrige la interpretación viva de `v0.0.71.01-beta` como G087/E01 sin alterar su tag histórico.
 - Releases: incorpora `.github/release.yml`, `scripts/release_contract.py` y validación de tag en GitHub Actions para estandarizar título, prerelease, cuerpo mínimo, firma y correspondencia VERSION/ledger/tag.

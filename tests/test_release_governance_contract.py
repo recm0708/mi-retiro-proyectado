@@ -35,37 +35,37 @@ class TestReleaseGovernanceContract(unittest.TestCase):
         self.assertEqual(0, result.returncode, result.stdout + result.stderr)
         data = json.loads(result.stdout)
         self.assertEqual(
-            "Mi Retiro Proyectado v0.1.10.01-beta — G110/E01",
+            "Mi Retiro Proyectado v0.1.11.01-beta — G111/E01",
             data["title"],
         )
 
-    def test_contrato_actual_deriva_titulo_g110(self):
+    def test_contrato_actual_deriva_titulo_g111(self):
         result = self.run_contract("--json")
         self.assertEqual(0, result.returncode, result.stdout + result.stderr)
         data = json.loads(result.stdout)
-        self.assertEqual("0.1.10.01-beta", data["version"])
-        self.assertEqual("v0.1.10.01-beta", data["tag"])
-        self.assertEqual(110, data["global_revision"])
+        self.assertEqual("0.1.11.01-beta", data["version"])
+        self.assertEqual("v0.1.11.01-beta", data["tag"])
+        self.assertEqual(111, data["global_revision"])
         self.assertEqual(1, data["edition"])
         self.assertEqual(
-            "Mi Retiro Proyectado v0.1.10.01-beta — G110/E01",
+            "Mi Retiro Proyectado v0.1.11.01-beta — G111/E01",
             data["title"],
         )
         self.assertTrue(data["prerelease"])
-        self.assertEqual("DOC.2", data["next_candidate_block"])
+        self.assertEqual("PERSIST.1", data["next_candidate_block"])
 
     def test_tag_debe_coincidir_con_version(self):
-        ok = self.run_contract("--check-tag", "v0.1.10.01-beta")
+        ok = self.run_contract("--check-tag", "v0.1.11.01-beta")
         self.assertEqual(0, ok.returncode, ok.stdout + ok.stderr)
-        bad = self.run_contract("--check-tag", "v0.1.11.01-beta")
+        bad = self.run_contract("--check-tag", "v0.1.12.01-beta")
         self.assertNotEqual(0, bad.returncode)
         self.assertIn("Tag inválido", bad.stdout)
 
     def test_titulo_debe_ser_canonico(self):
-        title = "Mi Retiro Proyectado v0.1.10.01-beta — G110/E01"
+        title = "Mi Retiro Proyectado v0.1.11.01-beta — G111/E01"
         ok = self.run_contract("--check-title", title)
         self.assertEqual(0, ok.returncode, ok.stdout + ok.stderr)
-        bad = self.run_contract("--check-title", "v0.1.10.01-beta")
+        bad = self.run_contract("--check-title", "v0.1.11.01-beta")
         self.assertNotEqual(0, bad.returncode)
         self.assertIn("Título inválido", bad.stdout)
 
@@ -129,20 +129,20 @@ class TestReleaseGovernanceContract(unittest.TestCase):
         github = (ROOT / "docs/operations/github-public-repository.md").read_text(encoding="utf-8")
         self.assertIn("release_contract.py", scripts)
         self.assertIn("REL.GOV.1 — validación del contrato de GitHub Releases", validation)
-        self.assertIn("next_candidate_block = DOC.2", validation)
+        self.assertIn("next_candidate_block = PERSIST.1", validation)
         self.assertIn("## 7.1. Tags y GitHub Releases", github)
         self.assertIn(".github/release.yml", github)
 
-    def test_g110_aceptado_y_g111_disponible_para_doc2(self):
+    def test_g111_aceptado_y_g112_disponible_para_persist1(self):
         ledger = json.loads(
             (ROOT / "data/pre-1-0-revision-ledger.json").read_text(encoding="utf-8")
         )
-        self.assertEqual(110, ledger["accepted_count"])
-        self.assertEqual(111, ledger["next_global"])
-        self.assertEqual("0.1.11.01-beta", ledger["next_candidate"])
-        self.assertEqual("DOC.2", ledger["next_candidate_block"])
+        self.assertEqual(111, ledger["accepted_count"])
+        self.assertEqual(112, ledger["next_global"])
+        self.assertEqual("0.1.12.01-beta", ledger["next_candidate"])
+        self.assertEqual("PERSIST.1", ledger["next_candidate_block"])
         self.assertEqual(
-            "0.1.10.01-beta",
+            "0.1.11.01-beta",
             (ROOT / "VERSION").read_text(encoding="utf-8").strip(),
         )
 

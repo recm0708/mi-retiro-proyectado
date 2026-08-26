@@ -7,6 +7,15 @@
 
 
 <!-- DOC1-R1-POST-MANT1:START -->
+## Promoción G111/E01 — post-merge de DOC.2 R1
+
+- Estado aceptado: G111/E01 (`0.1.11.01-beta`).
+- Evidencia de aceptación: PR #87, merge `1041b59`, 1066 pruebas post-merge, Markdown 143/143 y checks remotos Python 3.13/3.14 + Markdown/gobernanza en `success`.
+- Esta sincronización materializa el G111 ya aceptado y **no consume G112**.
+- Siguiente Global disponible: G112/E01 (`0.1.12.01-beta`) para PERSIST.1.
+- Tag y GitHub Release `v0.1.11.01-beta`: pendientes hasta integrar/revalidar esta promoción; `v0.1.10.01-beta`, `v0.1.09.01-beta` y `v0.0.71.01-beta` permanecen inmutables.
+
+
 ## Promoción G110/E01 — post-merge de REL.GOV.1 R1
 
 - Estado aceptado: G110/E01 (`0.1.10.01-beta`).
@@ -33,13 +42,13 @@ Estado vigente:
 
 - Último tag formal publicado: `v0.1.10.01-beta` (G110/E01), firmado, verificado y asociado a GitHub Release prerelease.
 - Último tag formal legacy: `v0.0.26-beta`.
-- Versión canónica en `VERSION`: `0.1.10.01-beta` (G110/E01).
+- Versión canónica en `VERSION`: `0.1.11.01-beta` (G111/E01).
 - `v0.0.71.01-beta` fue publicado originalmente bajo la denominación VER.2 G071/E01; la reconciliación post-G070 sitúa ese estado cronológicamente en **G087/E01** sin alterar el tag.
 - MANT.1 está cerrado.
 - DOC.1 R1 está cerrado.
 - NOR.1 y NOR.2 están cerrados.
 - DOC.1 R2 está cerrado como auditoría integral Markdown post-NOR.2.
-- SEC.2 quedó cerrado después de R1–R6. AUD.SEC2 R1 fue aceptado por PR #83 como G109/E01; la promoción post-merge actualizó `VERSION` a `0.1.09.01-beta` y publicó el tag/Release `v0.1.09.01-beta`. REL.GOV.1 quedó aceptado como G110/E01 mediante PR #85; G111 queda disponible para DOC.2.
+- SEC.2 quedó cerrado después de R1–R6. AUD.SEC2 R1 fue aceptado por PR #83 como G109/E01; la promoción post-merge actualizó `VERSION` a `0.1.09.01-beta` y publicó el tag/Release `v0.1.09.01-beta`. REL.GOV.1 quedó aceptado como G110/E01 mediante PR #85. DOC.2 R1 quedó aceptado como G111/E01 mediante PR #87; G112 queda disponible para PERSIST.1.
 
 Este documento no crea una release nueva; registra el estado formal ya alcanzado por el repositorio.
 <!-- DOC1-R1-POST-MANT1:END -->

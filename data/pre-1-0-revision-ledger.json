@@ -2,9 +2,9 @@
   "schema_version": 1,
   "project": "Mi Retiro Proyectado",
   "base_commit": "7037addd44253e528c77460b678d2b3ccd540dd5",
-  "accepted_count": 110,
-  "next_global_if_ver2_accepted": 111,
-  "next_candidate": "0.1.11.01-beta",
+  "accepted_count": 111,
+  "next_global_if_ver2_accepted": 112,
+  "next_candidate": "0.1.12.01-beta",
   "historical_tags_immutable": {
     "from": "v0.0.1-beta",
     "to": "v0.0.26-beta"
@@ -999,6 +999,15 @@
       "state": "R1 — gobierno y normalización de GitHub Releases",
       "anchor": "0.1.10.01-beta",
       "evidence": "PR #85; merge 5cd1cea; 1054 pruebas; Markdown 142/142; CI Python 3.13/3.14 y gobernanza en success"
+    },
+    {
+      "global_revision": 111,
+      "block": "DOC.2",
+      "ordinal": 1,
+      "revision_aware": "0.1.11.01-beta",
+      "state": "R1 — reconstrucción auditable del CHANGELOG histórico",
+      "anchor": "0.1.11.01-beta",
+      "evidence": "PR #87; merge 1041b59; 1066 pruebas; Markdown 143/143; CI Python 3.13/3.14 + Markdown/gobernanza en success"
     }
   ],
   "excluded": [
@@ -1075,8 +1084,8 @@
       "reason": "La decisión VER.2 R3 establece expresamente que R1, R2 y R3 son correcciones internas del mismo candidato G071/E01; no consumen G072 ni incrementan EE. R4 materializa la aceptación única del candidato."
     }
   ],
-  "reconciled_through_commit": "5cd1cea399a6db1cf25ab0d68c789f8c0e66f302",
+  "reconciled_through_commit": "1041b5938607b4616c6af6e6847d6e2fbc8b6ec7",
   "reconciliation_date": "2026-08-25",
-  "next_global": 111,
-  "next_candidate_block": "DOC.2"
+  "next_global": 112,
+  "next_candidate_block": "PERSIST.1"
 }

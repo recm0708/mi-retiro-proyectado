@@ -10,7 +10,7 @@ from app.core.version import descomponer_version_beta_revision
 
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
-VERSION_CANONICA = "0.1.10.01-beta"
+VERSION_CANONICA = "0.1.11.01-beta"
 ULTIMO_TAG_LEGACY = "v0.0.26-beta"
 
 
@@ -35,12 +35,12 @@ class TestVer2DocumentacionVigente(unittest.TestCase):
         security = (ROOT / "SECURITY.md").read_text(encoding="utf-8")
         indice = (DOCS / "README.md").read_text(encoding="utf-8")
 
-        self.assertIn("**Versión canónica vigente:** `0.1.10.01-beta`", readme)
+        self.assertIn("**Versión canónica vigente:** `0.1.11.01-beta`", readme)
         self.assertIn("G071/E01 promovido en `VERSION`", readme)
         self.assertIn("la reconciliación posterior sitúa ese estado en G087/E01", roadmap)
         self.assertIn("la reconciliación posterior sitúa ese estado en G087/E01", plan)
         self.assertIn("| `0.0.71.01-beta` | Versión promovida históricamente en VER.2 R4", security)
-        self.assertIn("**Versión de aplicación:** `0.1.10.01-beta`", indice)
+        self.assertIn("**Versión de aplicación:** `0.1.11.01-beta`", indice)
 
     def test_tag_legacy_permanece_y_tag_g071_no_se_crea_en_pr(self):
         versioning = (ROOT / "VERSIONING.md").read_text(encoding="utf-8")

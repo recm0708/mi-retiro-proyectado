@@ -1,7 +1,7 @@
 # Matriz de trazabilidad
 
 **Estado:** Vigente
-**Versión de aplicación:** `0.1.10.01-beta` — G110/E01 aceptado; reconciliación viva hasta G110
+**Versión de aplicación:** `0.1.11.01-beta` — G111/E01 aceptado; reconciliación viva hasta G111
 **Último tag formal legacy:** `v0.0.26-beta`
 **Base histórica:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal:** NOR.2 R8 — 2026-08-24
@@ -190,4 +190,4 @@ Los estados `Candidato` deben promoverse a `Verificado` únicamente después del
 | Expiración/límite y cookies configurables | `app/core/config.py`, `admin_session.py` | `test_sec2_r6_admin_session_security.py` | Verificado |
 | Kill switch no sustituible por cookie | `app/main.py` | `test_sec2_postclosure_hardening.py` | Verificado post-cierre |
 | Logout mutante solo por POST | `/dev/logout` | `test_sec2_postclosure_hardening.py` | Verificado post-cierre |
-| Ledger reconciliado | `data/pre-1-0-revision-ledger.json` | pruebas VER.2/NOR.2 + auditoría post-G070 | G110 aceptado; G111 disponible para DOC.2 |
+| Ledger reconciliado | `data/pre-1-0-revision-ledger.json` | pruebas VER.2/NOR.2 + auditoría post-G070 | G111 aceptado para DOC.2; G112 disponible para PERSIST.1 |

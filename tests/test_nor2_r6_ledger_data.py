@@ -105,11 +105,13 @@ class TestNOR2R6LedgerData(unittest.TestCase):
         self.assertIn("NOR.2", docs)
         self.assertIn("**SEC.2:** R1–R6 cerrados", readme)
         self.assertIn("G109", readme)
-        self.assertIn("G110", docs)
+        self.assertIn("G111", docs)
+        self.assertIn("G112", docs)
+        self.assertIn("PERSIST.1", docs)
 
     def test_version_no_cambia(self):
         self.assertEqual(
-            "0.1.10.01-beta",
+            "0.1.11.01-beta",
             (ROOT / "VERSION").read_text(encoding="utf-8").strip(),
         )
 

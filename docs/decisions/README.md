@@ -1,7 +1,7 @@
 # Registro de decisiones técnicas
 
 **Estado:** Vigente
-**Versión de aplicación revisada:** `0.1.10.01-beta`
+**Versión de aplicación revisada:** `0.1.11.01-beta`
 **Versión base histórica:** `0.0.25-beta`
 **Base documental histórica:** `0.0.23-beta` — GOV.1.3 R4 — 2026-08-17
 **Revisión documental:** GOV.1.3 R4 — 2026-08-17
@@ -24,7 +24,7 @@ Estado vigente para lectura transversal:
 - NOR.1 y NOR.2 están cerrados.
 - DOC.1 R2 está cerrado como auditoría de la documentación Markdown vigente posterior a NOR.2.
 - Las decisiones históricas no se reescriben como si hubieran sido tomadas en una revisión posterior.
-- `VERSION` está sincronizado en `0.1.10.01-beta` (G110/E01); `v0.0.26-beta` se conserva como referencia legacy histórica.
+- `VERSION` está sincronizado en `0.1.11.01-beta` (G111/E01); `v0.0.26-beta` se conserva como referencia legacy histórica.
 - SEC.2 quedó cerrado después de R1–R6; AUD.SEC2 R1 reconcilia la trazabilidad revision-aware sin reescribir decisiones históricas.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 
@@ -1990,6 +1990,6 @@ La guía reutiliza `construir_catalogo_metodologia()` para las fuentes oficiales
 
 **Decisión:** durante la etapa beta, los estados nuevos usan `0.GG.RR.EE-beta` y el contador global consume únicamente estados materialmente distintos y aceptados. Commits, PR, squash, CI y tags son evidencia del estado, no revisiones adicionales por sí solos.
 
-La segunda pasada de VER.2 fijó G070 sobre `7037addd`. AUD.SEC2 R1 reconstruyó los estados posteriores hasta G108, preservó `v0.0.71.01-beta` como tag publicado e inmutable con anomalía histórica de numeración y quedó aceptado como G109/E01 (`0.1.09.01-beta`) mediante PR #83; G110/E01 quedó aceptado como REL.GOV.1 mediante PR #85 y merge `5cd1cea`; G111/E01 (`0.1.11.01-beta`) queda disponible para DOC.2.
+La segunda pasada de VER.2 fijó G070 sobre `7037addd`. AUD.SEC2 R1 reconstruyó los estados posteriores hasta G108, preservó `v0.0.71.01-beta` como tag publicado e inmutable con anomalía histórica de numeración y quedó aceptado como G109/E01 (`0.1.09.01-beta`) mediante PR #83; G110/E01 quedó aceptado como REL.GOV.1 mediante PR #85 y merge `5cd1cea`; G111/E01 (`0.1.11.01-beta`) quedó aceptado como DOC.2 mediante PR #87 y merge `1041b59`; G112/E01 (`0.1.12.01-beta`) queda disponible para PERSIST.1.
 
 El detalle, alternativas y evidencia completa permanecen en [`adr-179-revision-aware-versioning.md`](adr-179-revision-aware-versioning.md).

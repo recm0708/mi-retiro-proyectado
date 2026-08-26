@@ -1,4 +1,4 @@
-"""Regresiones de la promoción post-merge G110/E01."""
+"""Regresiones históricas de la promoción post-merge G110/E01."""
 
 from __future__ import annotations
 
@@ -13,41 +13,30 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class TestG110PromotionPostMerge(unittest.TestCase):
-    def test_version_y_runtime_materializan_g110(self):
-        version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
-        self.assertEqual("0.1.10.01-beta", version)
-        self.assertEqual(version, APP_VERSION)
-        self.assertEqual((110, 1), descomponer_version_beta_revision(version))
-
-    def test_ledger_acepta_g110_y_deja_g111_para_doc2(self):
+    def test_g110_permanece_preservado_en_ledger(self):
         ledger = cargar_ledger()
-        self.assertEqual(110, ledger["accepted_count"])
-        self.assertEqual(111, ledger["next_global_if_ver2_accepted"])
-        self.assertEqual(111, ledger["next_global"])
-        self.assertEqual("0.1.11.01-beta", ledger["next_candidate"])
-        self.assertEqual("DOC.2", ledger["next_candidate_block"])
-        self.assertEqual("5cd1cea399a6db1cf25ab0d68c789f8c0e66f302", ledger["reconciled_through_commit"])
-        self.assertEqual(110, ledger["entries"][-1]["global_revision"])
-        self.assertEqual("REL.GOV.1", ledger["entries"][-1]["block"])
-        self.assertIn("PR #85", ledger["entries"][-1]["evidence"])
+        entry = next(e for e in ledger["entries"] if e["global_revision"] == 110)
+        self.assertEqual("REL.GOV.1", entry["block"])
+        self.assertEqual("0.1.10.01-beta", entry["revision_aware"])
+        self.assertIn("PR #85", entry["evidence"])
 
-    def test_documentacion_declara_promocion_sin_consumir_g111(self):
-        readme = (ROOT / "README.md").read_text(encoding="utf-8")
-        roadmap = (ROOT / "docs/governance/roadmap.md").read_text(encoding="utf-8")
-        ledger = (ROOT / "docs/governance/pre-1-0-revision-ledger.md").read_text(encoding="utf-8")
-        for text in (readme, roadmap, ledger):
-            self.assertIn("G110", text)
-            self.assertIn("G111", text)
-            self.assertIn("DOC.2", text)
-        self.assertIn("no consume G111", ledger)
+    def test_version_actual_avanza_a_g111_sin_reescribir_g110(self):
+        version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
+        self.assertEqual("0.1.11.01-beta", version)
+        self.assertEqual(version, APP_VERSION)
+        self.assertEqual((111, 1), descomponer_version_beta_revision(version))
 
-    def test_release_g110_esta_publicado_y_preserva_historia(self):
+    def test_release_g110_permanece_publicado(self):
         releases = (ROOT / "RELEASES.md").read_text(encoding="utf-8")
         self.assertIn("v0.1.10.01-beta", releases)
         self.assertIn("PR #86", releases)
         self.assertIn("29 tags", releases)
-        self.assertIn("29 Releases", releases)
-        self.assertIn("v0.1.09.01-beta", releases)
+
+    def test_g111_es_doc2_y_g112_queda_para_persist1(self):
+        ledger = cargar_ledger()
+        self.assertEqual(111, ledger["accepted_count"])
+        self.assertEqual(112, ledger["next_global"])
+        self.assertEqual("PERSIST.1", ledger["next_candidate_block"])
 
 
 if __name__ == "__main__":

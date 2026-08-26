@@ -116,7 +116,7 @@ class TestMant1R3YamlGithubDocumentados(unittest.TestCase):
         """MANT.1 R3 es mantenimiento previo a SEC.2, no cambio funcional."""
 
         version = self._leer("VERSION").strip()
-        self.assertEqual("0.1.10.01-beta", version)
+        self.assertEqual("0.1.11.01-beta", version)
 
         changelog = self._leer("CHANGELOG.md")
         roadmap = self._leer("docs/governance/roadmap.md")

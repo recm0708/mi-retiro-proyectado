@@ -1,7 +1,7 @@
 # Índice de documentación
 
 **Estado:** vigente
-**Versión de aplicación:** `0.1.10.01-beta` — G110/E01 publicado; DOC.2 R1 en ejecución con G111/E01 reservado; ledger vivo hasta G110
+**Versión de aplicación:** `0.1.11.01-beta` — G111/E01 aceptado para DOC.2; G112/E01 disponible para PERSIST.1; ledger vivo hasta G111
 **Último tag formal legacy:** `v0.0.26-beta`
 **Última actualización transversal:** DOC.2 R1 — reconstrucción auditable del CHANGELOG legacy y sincronización de Releases — 2026-08-26
 **Cierres históricos preservados:** UX.4.6i / PR #34 — 841 pruebas; UX.4.6e R9 — `v0.0.25-beta`
@@ -11,7 +11,7 @@ Este archivo es el punto de entrada para la documentación técnica, funcional, 
 
 ## Estado de normalización del repositorio
 
-**Estado actual:** NOR.2, DOC.1 R2, SEC.2, AUD.SEC2 R1 y REL.GOV.1 están cerrados. G110/E01 está publicado como `0.1.10.01-beta`; DOC.2 R1 está en ejecución con G111/E01 reservado y todavía no consumido.
+**Estado actual:** NOR.2, DOC.1 R2, SEC.2, AUD.SEC2 R1 y REL.GOV.1 están cerrados. G111/E01 queda materializado como `0.1.11.01-beta` tras aceptar DOC.2 R1; G112/E01 queda disponible para PERSIST.1.
 
 Estado de la fase:
 
@@ -63,7 +63,7 @@ Evidencia:
 - [`AUDITORIA_VER2_SEGUNDA_PASADA.md`](archive/governance/AUDITORIA_VER2_SEGUNDA_PASADA.md) — bitácora de la segunda pasada y correcciones sobre la primera reconstrucción.
 - [`AUDITORIA_VER2_CONTEO_PROVISIONAL.md`](archive/governance/AUDITORIA_VER2_CONTEO_PROVISIONAL.md) — cierre del conteo de segunda pasada en G070 antes de VER.2.
 - [`MATRIZ_DECISION_REVISIONES_VER2.md`](archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md) — decisión fila por fila sobre qué consume Global y por qué.
-- [`pre-1-0-revision-ledger.md`](governance/pre-1-0-revision-ledger.md) — ledger Markdown reconciliado G001–G110 y próximo candidato G111.
+- [`pre-1-0-revision-ledger.md`](governance/pre-1-0-revision-ledger.md) — ledger Markdown reconciliado G001–G111 y próximo candidato G112.
 - [`post-g070-revision-reconciliation.md`](audits/governance/post-g070-revision-reconciliation.md) — auditoría de reconstrucción G071–G108.
 - [`pre-1-0-revision-ledger-g070.json`](archive/governance/pre-1-0-revision-ledger-g070.json) — snapshot histórico exacto G070.
 - [`../data/pre-1-0-revision-ledger.json`](../data/pre-1-0-revision-ledger.json) — ledger machine-readable canónico de la reconstrucción.

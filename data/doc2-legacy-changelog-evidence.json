@@ -11,7 +11,7 @@
     "edition": 1,
     "revision_aware": "0.1.11.01-beta",
     "block": "DOC.2",
-    "consumed": false
+    "consumed": true
   },
   "source_documents": [
     "RELEASES.md",
@@ -754,5 +754,15 @@
         }
       ]
     }
-  ]
+  ],
+  "accepted_state": {
+    "global_revision": 111,
+    "edition": 1,
+    "revision_aware": "0.1.11.01-beta",
+    "block": "DOC.2",
+    "pull_request": 87,
+    "merge_commit": "1041b5938607b4616c6af6e6847d6e2fbc8b6ec7",
+    "post_merge_tests": 1066,
+    "markdown_files": 143
+  }
 }

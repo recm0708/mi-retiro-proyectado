@@ -1,11 +1,11 @@
 # Roadmap
 
 **Estado:** vigente
-**Versión vigente:** `0.1.10.01-beta` — G110/E01 aceptado para REL.GOV.1
+**Versión vigente:** `0.1.11.01-beta` — G111/E01 aceptado para DOC.2
 **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
 **Último tag formal legacy:** `v0.0.26-beta`
 **Fecha de revisión:** 2026-08-25
-**Estado actual:** SEC.2, AUD.SEC2 R1 y REL.GOV.1 están cerrados. G110/E01 fue promovido por PR #86 y publicado como `v0.1.10.01-beta`; DOC.2 R1 está en ejecución con G111/E01 (`0.1.11.01-beta`) reservado y no consumido.
+**Estado actual:** SEC.2, AUD.SEC2 R1 y REL.GOV.1 están cerrados. DOC.2 R1 quedó aceptado mediante PR #87 y merge `1041b59`; G111/E01 se materializa como `0.1.11.01-beta` y G112/E01 (`0.1.12.01-beta`) queda disponible para PERSIST.1.
 
 
 <!-- NOR1-R7-CLOSURE:START -->
@@ -22,7 +22,7 @@ La secuencia operativa previa a SEC.2 queda:
 3. **SEC.2** — hardening integral — cerrado después de R1–R6;
 4. **AUD.SEC2 R1** — saneamiento post-cierre y reconciliación revision-aware — cerrado/aceptado como G109/E01 mediante PR #83;
 5. **REL.GOV.1** — preflight transversal de gobierno de Releases; cerrado/aceptado como G110/E01 mediante PR #85; no agrega un bloque funcional al plan de 14 bloques.
-6. **DOC.2** — R1 en ejecución: reconstrucción auditable del CHANGELOG `0.0.1-beta`–`0.0.21-beta`; G111/E01 permanece reservado hasta aceptación.
+6. **DOC.2** — cerrado en R1; reconstrucción auditable del CHANGELOG `0.0.1-beta`–`0.0.21-beta`, aceptada como G111/E01 mediante PR #87.
 
 NOR.2 ejecutó los movimientos, renombrados, consolidaciones y retiros que
 NOR.1 deliberadamente no realizó.
@@ -210,12 +210,12 @@ No existe una una revisión intermedia no demostrada entre UX.4.6i R1 y R1.2 dem
 
 **VER.2:** bloque transversal cerrado. La primera promoción se publicó como `0.0.71.01-beta`; AUD.SEC2 R1 documenta que el ledger usado entonces terminaba en G070 y que la reconstrucción completa sitúa ese estado en G087 sin modificar el tag inmutable.
 
-**Checkpoint técnico actual:** G110/E01 (`0.1.10.01-beta`) está publicado después de PR #85/#86. DOC.2 R1 reconstruye 21 estados/80 commits con G111/E01 (`0.1.11.01-beta`) reservado.
+**Checkpoint técnico actual:** G111/E01 (`0.1.11.01-beta`) está aceptado después de DOC.2 R1 / PR #87 y revalidación post-merge; G112/E01 (`0.1.12.01-beta`) queda disponible para PERSIST.1.
 
 Documentos canónicos de VER.2:
 
 - `AUDITORIA_VERSIONADO_PRE_1_0.md` — criterio contable y exclusiones;
-- `pre-1-0-revision-ledger.md` — ledger reconciliado G001–G110 y siguiente Global G111;
+- `pre-1-0-revision-ledger.md` — ledger reconciliado G001–G111 y siguiente Global G112;
 - `MATRIZ_DECISION_REVISIONES_VER2.md` — justificación de la segunda pasada;
 - `../data/pre-1-0-revision-ledger.json` — ledger estructurado validable;
 - `../VERSIONING.md` — política de numeración.
@@ -295,8 +295,8 @@ Solo podrá materializarse cuando:
 - [x] VER.2 esté cerrado como prerrequisito transversal para continuar el ledger revision-aware;
 - [x] DEV.2 esté cerrado;
 - [x] NOR.1 y NOR.2 estén cerrados como normalización previa a SEC.2;
-- [ ] SEC.2 esté cerrado;
-- [ ] DOC.2 esté cerrado;
+- [x] SEC.2 esté cerrado;
+- [x] DOC.2 esté cerrado;
 - [ ] PERSIST.1 esté cerrado si forma parte del alcance 1.0;
 - [ ] REP.1 esté cerrado si forma parte del alcance 1.0;
 - [ ] A11Y.2 esté cerrado;

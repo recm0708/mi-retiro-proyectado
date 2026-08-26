@@ -3,7 +3,7 @@
 **Estado:** vigente
 **Versión base al iniciar el plan:** `0.0.25-beta`
 **Cierre histórico de PLAN.1:** `0.0.26-beta` / `v0.0.26-beta`
-**Versión transversal vigente:** `0.1.10.01-beta` — G110/E01 aceptado para REL.GOV.1
+**Versión transversal vigente:** `0.1.11.01-beta` — G111/E01 aceptado para DOC.2
 **Fecha:** 2026-08-25
 **Clasificación:** Producto / Arquitectura / QA / Release
 
@@ -17,7 +17,7 @@ funcionales al plan de 14 bloques.
 - **NOR.1:** cerrado en R7; estándares determinísticos establecidos.
 - **NOR.2:** cerrado en R8 mediante PR #74; normalización integral completada.
 - **DOC.1 R2:** auditoría integral Markdown post-NOR.2 cerrada; documentación vigente, evidencia histórica y controles permanentes quedaron reconciliados.
-- **SEC.2 R1–R6:** cerrados; hardening CodeQL, autenticación/protección administrativa, auditoría, sesión web y hardening de sesión completados. AUD.SEC2 R1 quedó aceptado/publicado como G109/E01. REL.GOV.1 R1 quedó aceptado como G110/E01 mediante PR #85; DOC.2 es el siguiente bloque con G111/E01 disponible.
+- **SEC.2 R1–R6:** cerrados; hardening CodeQL, autenticación/protección administrativa, auditoría, sesión web y hardening de sesión completados. AUD.SEC2 R1 quedó aceptado/publicado como G109/E01. REL.GOV.1 R1 quedó aceptado como G110/E01. DOC.2 R1 quedó aceptado como G111/E01 mediante PR #87; PERSIST.1 continúa con G112/E01 disponible.
 
 La separación evita que SEC.2 cree nuevas rutas, archivos o estructuras sobre
 una base cuya nomenclatura y documentación no hayan sido normalizadas.
@@ -287,11 +287,11 @@ Objetivo previo a DOC.2:
 - extender el workflow de tags para ejecutar el contrato en todo tag futuro;
 - fijar reglas de edición posterior que preserven firma, commit objetivo y evidencia histórica.
 
-REL.GOV.1 superó gate, PR/CI e integración y consumió G110; la promoción PR #86 publicó `v0.1.10.01-beta`. DOC.2 R1 continúa con G111/E01 (`0.1.11.01-beta`) reservado hasta aceptación.
+REL.GOV.1 superó gate, PR/CI e integración y consumió G110; la promoción PR #86 publicó `v0.1.10.01-beta`. DOC.2 R1 superó gate, PR #87, CI, integración y revalidación post-merge, por lo que G111/E01 (`0.1.11.01-beta`) queda aceptado; G112/E01 (`0.1.12.01-beta`) queda disponible para PERSIST.1.
 
 ### 8. DOC.2 — CHANGELOG detallado `0.0.1-beta`–`0.0.21-beta`
 
-**Estado de trabajo:** R1 en ejecución con G111/E01 (`0.1.11.01-beta`) reservado y todavía no consumido. La implementación reconstruye 21 estados/80 commits, agrega evidencia machine-readable y regresiones, y sincroniza la metadata real de Releases.
+**Estado:** cerrado en R1 como G111/E01 (`0.1.11.01-beta`) mediante PR #87; reconstrucción de 21 estados/80 commits aceptada y revalidada post-merge. PERSIST.1 continúa con G112/E01.
 
 Reconstrucción basada exclusivamente en evidencia:
 

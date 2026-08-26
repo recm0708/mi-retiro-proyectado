@@ -104,7 +104,7 @@ class TestNOR2R8FinalAudit(unittest.TestCase):
         ).strip()
 
         self.assertEqual(
-            "0.1.10.01-beta",
+            "0.1.11.01-beta",
             version,
         )
 
