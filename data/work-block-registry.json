@@ -11,11 +11,11 @@
   "current_candidate": {
     "global_revision": 114,
     "revision_aware": "0.1.14.01-beta",
-    "block": "PERSIST.1",
+    "block": "PLAN.2",
     "revision": "R1",
     "state": "reserved_not_accepted",
-    "next_functional_block_if_accepted": "REP.1",
-    "next_functional_global_if_accepted": 115,
+    "next_functional_block_if_accepted": "DEV.2",
+    "next_functional_global_if_accepted": null,
     "edition": 1
   },
   "families": [
@@ -595,6 +595,26 @@
       "status": "planned_reserved",
       "meaning": "Preparación de la primera versión oficial.",
       "evidence": "docs/governance/master-plan-to-1-0.md",
+      "global_refs": [],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "PLAN.2",
+      "family": "PLAN",
+      "kind": "block",
+      "status": "planned_reserved",
+      "meaning": "Replanificación maestra final hacia 1.0 y matriz viva de pendientes.",
+      "evidence": "docs/governance/pre-1-0-pending-matrix.md",
+      "global_refs": [],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "UX.5",
+      "family": "UX",
+      "kind": "block",
+      "status": "planned_reserved",
+      "meaning": "Rediseño integral de experiencia, sistema visual y flujo Manual/Asistido.",
+      "evidence": "docs/governance/pre-1-0-pending-matrix.md",
       "global_refs": [],
       "reusable_for_different_scope": false
     }

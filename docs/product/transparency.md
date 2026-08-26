@@ -21,7 +21,7 @@ Estado vigente:
 - VER.2 está cerrado y `v0.0.71.01-beta` fue publicado.
 - NOR.1 está cerrado en R8 como G112/E07; NOR.2 permanece cerrado.
 - DOC.1 R2 está cerrado tras auditar integralmente la documentación Markdown posterior a NOR.2.
-- `VERSION` está sincronizado en `0.1.13.03-beta` (G113/E03); DOC.1 R3 queda cerrado y G114/E01 reservado para PERSIST.1.
+- `VERSION` está sincronizado en `0.1.13.03-beta` (G113/E03); DOC.1 R3 queda cerrado y G114/E01 reservado para PLAN.2 R1. PERSIST.1 permanece planificado posteriormente.
 - SEC.2 quedó cerrado después de R1–R6 sin cambiar reglas previsionales; AUD.SEC2 R1 corrige seguridad administrativa y trazabilidad sin alterar motores.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 
@@ -123,7 +123,7 @@ La matriz **no afirma todavía cobertura individual completa de todos los RF his
 
 ## 9. Estado beta y repositorio público
 
-El producto permanece en **desarrollo beta** bajo la línea `0.0.N-beta`.
+El producto permanece en **desarrollo beta** bajo la familia revision-aware `0.GG.RR.EE-beta`; la familia `0.0.N-beta` se conserva únicamente como historia legacy.
 
 El repositorio de código es público desde el 2026-08-19. Esa decisión:
 
@@ -138,11 +138,11 @@ Como evidencia del checkpoint anterior se conserva la formulación: **no declara
 
 Como evidencia histórica también se conserva la formulación **“cierre de UX.4.6e y del alcance funcional UX.4.6f–h”**, que en aquella revisión describía trabajo todavía pendiente. Esa frase se mantiene únicamente para preservar la trazabilidad documental y **ya no representa el estado vigente**.
 
-UX.4.6e–UX.4.6i y DEV.2 están cerrados; SEC.2 cerró después de R1–R6. AUD.SEC2 R1 es el checkpoint transversal actual y, una vez aceptado, continúan DOC.2, PERSIST.1, REP.1, A11Y.2, REV.1, QA.1 y REL.1 conforme al plan maestro.
+UX.4.6e–UX.4.6i, DEV.2, SEC.2 R1–R6, AUD.SEC2 R1, DOC.2, NOR.1 R8 y DOC.1 R3 están cerrados. PLAN.2 R1 es el checkpoint candidato actual y la secuencia posterior se mantiene en la matriz maestra hacia 1.0.
 
 Continúan pendientes, según corresponda:
 
-- DEV.2 y los bloques posteriores definidos en `master-plan-to-1-0.md`;
+- revisiones Developer/UX, persistencia, informes y demás bloques posteriores definidos en `pre-1-0-pending-matrix.md`;
 - revisión jurídica externa previa a la primera versión oficial;
 - hardening específico si se decide un despliegue remoto;
 - verificación periódica de configuración y alertas de GitHub;

@@ -25,7 +25,7 @@ Estado vigente:
 - VER.2 está cerrado y `v0.0.71.01-beta` fue publicado.
 - NOR.1 está cerrado en R8 como G112/E07; NOR.2 permanece cerrado.
 - DOC.1 R2 está cerrado tras auditar la documentación Markdown posterior a NOR.2 sin modificar por sí solo el tratamiento material de datos.
-- `VERSION` está sincronizado en `0.1.13.03-beta` (G113/E03); DOC.1 R3 queda cerrado y G114/E01 reservado para PERSIST.1.
+- `VERSION` está sincronizado en `0.1.13.03-beta` (G113/E03); DOC.1 R3 queda cerrado y G114/E01 reservado para PLAN.2 R1; PERSIST.1 permanece planificado posteriormente.
 - SEC.2 quedó cerrado después de R1–R6. La sesión administrativa usa una cookie técnica de seguridad y no modifica la finalidad material de la simulación.
 - La aplicación sigue siendo independiente y no oficial.
 <!-- DOC1-R1-REVISION-MANUAL:END -->

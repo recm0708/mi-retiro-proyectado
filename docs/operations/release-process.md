@@ -388,3 +388,17 @@ REL.GOV.1 se aplicó también a los tags formales históricos ya existentes:
 - el backfill de metadata no consume un Global.
 
 La regla futura permanece: un nuevo tag formal debe publicarse con su GitHub Release conforme al contrato de esta guía.
+
+## Replanificación operativa PLAN.2 R1
+
+Después de publicar `v0.1.13.03-beta` (G113/E03), G114/E01
+`0.1.14.01-beta` queda reservado para PLAN.2 R1. La versión canónica permanece
+en `0.1.13.03-beta` mientras ese checkpoint no sea aceptado.
+
+La automatización práctica de publicación mediante GitHub CLI se evaluará en
+REL.GOV.1 R2. El tag continúa creándose y verificándose localmente con firma
+del mantenedor; la creación del GitHub Release debe ser reproducible mediante
+comandos y un archivo de notas cuando la herramienta esté disponible.
+
+La matriz viva de trabajo pendiente está en
+`docs/governance/pre-1-0-pending-matrix.md`.

@@ -15,10 +15,11 @@ La fuente canónica de versión continúa siendo `VERSION`.
 Estado vigente:
 
 - `VERSION` contiene `0.1.13.03-beta` y materializa G113/E03 (DOC.1 R3), aceptado mediante PR #92 / merge `40ae5c0`. G112/E07 permanece preservado como NOR.1 R8.
-- `v0.1.12.07-beta` está publicado, firmado y verificado; `v0.0.26-beta` permanece como último tag de la familia legacy.
+- `v0.1.13.03-beta` está publicado, firmado y verificado; `v0.0.26-beta` permanece como último tag de la familia legacy.
 - La reconciliación post-G070 reconstruye G071–G108 y conserva `v0.0.71.01-beta` como evidencia histórica de G087/E01 sin mover el tag.
 - AUD.SEC2 R1 fue aceptado como G109/E01, REL.GOV.1 como G110/E01, DOC.2 como G111/E01, NOR.1 R8 como G112/E07 y DOC.1 R3 como G113/E03.
-- G114/E01 (`0.1.14.01-beta`) queda reservado para PERSIST.1, bloque nuevo que comienza en E01.
+- G114/E01 (`0.1.14.01-beta`) queda reservado para PLAN.2 R1, bloque nuevo que comienza en E01. La asignación de Globales posteriores se difiere a la matriz maestra para no adelantar numeración de estados aún no aceptados.
+- PERSIST.1 permanece planificado en la matriz maestra como una etapa posterior; no tiene un Global preasignado mientras PLAN.2 R1 continúe como candidato.
 - Los cierres y sincronizaciones que no crean un estado materialmente distinto no consumen `G` por sí solos.
 
 Cualquier promoción futura de versión debe seguir el proceso formal de release, validación, PR/CI, tag y evidencia documental correspondiente.
@@ -41,6 +42,7 @@ La fuente canónica de la versión de aplicación es el archivo raíz `VERSION`.
 - Jinja2 recibe `app_version` y el footer muestra el mismo valor.
 - El contador y la procedencia de revisiones aceptadas se auditan en `docs/governance/pre-1-0-revision-ledger.md` y `data/pre-1-0-revision-ledger.json`.
 - `app/core/version_ledger.py` valida continuidad, unicidad y codificación del ledger estructurado.
+- `docs/governance/pre-1-0-pending-matrix.md` ordena el trabajo pendiente hacia 1.0 sin preasignar Globales futuros.
 - La regla que determina qué cuenta y qué no cuenta se documenta en `docs/archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md` y `docs/archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md`.
 - README, CHANGELOG, RELEASES, ROADMAP y el ledger deben corresponder al estado vigente cuando lo describan como actual.
 - Los documentos de dominio pueden conservar la versión en la que fueron revisados; esa metadata es histórica de revisión documental y no una segunda fuente de la versión vigente.

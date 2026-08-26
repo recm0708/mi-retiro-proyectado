@@ -5,7 +5,7 @@
 **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
 **Último tag formal legacy:** `v0.0.26-beta`
 **Fecha de revisión:** 2026-08-25
-**Estado actual:** SEC.2, AUD.SEC2 R1, REL.GOV.1, DOC.2, NOR.1 R8 y DOC.1 R3 están cerrados/aceptados. G113/E03 se materializa como `0.1.13.03-beta`; G114/E01 (`0.1.14.01-beta`) queda reservado para PERSIST.1.
+**Estado actual:** SEC.2, AUD.SEC2 R1, REL.GOV.1, DOC.2, NOR.1 R8 y DOC.1 R3 están cerrados/aceptados. G113/E03 se materializa como `0.1.13.03-beta`; G114/E01 (`0.1.14.01-beta`) queda reservado para PLAN.2 R1. La secuencia posterior se gobierna por la matriz maestra viva.
 
 
 <!-- NOR1-R7-CLOSURE:START -->
@@ -25,7 +25,7 @@ La secuencia operativa previa a SEC.2 queda:
 6. **DOC.2** — cerrado en R1; reconstrucción auditable del CHANGELOG `0.0.1-beta`–`0.0.21-beta`, aceptada como G111/E01 mediante PR #87.
 7. **NOR.1 R8** — cerrado/aceptado como G112/E07; gobierno canónico de identificadores vigente.
 8. **DOC.1 R3** — cerrado/aceptado como G113/E03; referencias navegables y política documental consolidadas.
-9. **PERSIST.1** — siguiente bloque funcional, candidato G114/E01 (`0.1.14.01-beta`).
+9. **PLAN.2 R1** — siguiente checkpoint, candidato G114/E01 (`0.1.14.01-beta`); formaliza la matriz maestra y reordena el trabajo previo a PERSIST.1.
 
 NOR.2 ejecutó los movimientos, renombrados, consolidaciones y retiros que
 NOR.1 deliberadamente no realizó.
@@ -80,7 +80,9 @@ Estado vigente:
 - La primera versión oficial objetivo sigue siendo `1.0.0.0` con `Build 000001`, sujeta a los gates del plan maestro.
 <!-- DOC1-R1-POST-MANT1:END -->
 
-Este roadmap describe **estado actual y trabajo futuro**. La evolución detallada ya completada se conserva en `RELEASES.md`, `CHANGELOG.md`, `docs/archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md`, `docs/governance/pre-1-0-revision-ledger.md`, `docs/archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md`, `data/pre-1-0-revision-ledger.json` y `docs/archive/`.
+Este roadmap describe **estado actual y trabajo futuro**.
+
+La secuencia de pendientes vigente se mantiene en [`pre-1-0-pending-matrix.md`](pre-1-0-pending-matrix.md). Esa matriz es evolutiva y no preasigna Globales futuros más allá del candidato actual. La evolución detallada ya completada se conserva en `RELEASES.md`, `CHANGELOG.md`, `docs/archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md`, `docs/governance/pre-1-0-revision-ledger.md`, `docs/archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md`, `data/pre-1-0-revision-ledger.json` y `docs/archive/`.
 
 VER.2 es un bloque transversal de reconciliación y **no añade un bloque 15** al plan maestro de producto. DEV.2 ya quedó cerrado documentalmente en R4. MANT.1 se trata como checkpoint técnico de mantenibilidad antes de SEC.2 y tampoco añade un bloque funcional de producto. MANT.1 R1 queda como auditoría inicial de alcance, MANT.1 R2 conserva la documentación de scripts y hooks antes de SEC.2, MANT.1 R3 documenta los YAML de GitHub sin cambiar CI ni formularios y MANT.1 R4 limpia encabezados operativos para que la trazabilidad histórica permanezca en documentación, MANT.1 R5A comenta servicios Python grandes, MANT.1 R5B comenta CSS/plantilla de la guía pública, MANT.1 R5C comenta JavaScript complejo sin cambiar lógica visible y MANT.1 R5D define política/plantillas por extensión con uniformidad de encabezados.
 

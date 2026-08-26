@@ -12,8 +12,8 @@
 - Estado aceptado: G113/E03 (`0.1.13.03-beta`).
 - Evidencia de aceptación: PR #92 / merge `40ae5c0`, 1092 pruebas post-merge, Markdown 146/146, auditor de identificadores en `OK` y checks remotos requeridos en `success`.
 - Esta sincronización materializa G113 ya aceptado y **no consume G114**.
-- G114/E01 (`0.1.14.01-beta`) queda reservado para PERSIST.1 como siguiente bloque funcional; REP.1 permanece posterior.
-- Tag y GitHub Release `v0.1.13.03-beta`: pendientes hasta integrar/revalidar esta promoción; `v0.1.12.07-beta` permanece publicado e inmutable.
+- Tras publicar G113/E03, la reserva no consumida G114/E01 (`0.1.14.01-beta`) se reasigna a PLAN.2 R1 para formalizar la replanificación; PERSIST.1 permanece en la matriz posterior.
+- Promoción final: PR #93 / merge `277505a`; tag firmado `v0.1.13.03-beta`, verificación criptográfica y GitHub Release prerelease publicados y preservados.
 
 ## Promoción G112/E07 — post-merge de NOR.1 R8
 
@@ -54,13 +54,13 @@ Después de `v0.0.26-beta`, el repositorio integró trabajo funcional, técnico,
 
 Estado vigente:
 
-- Último tag formal publicado: `v0.1.12.07-beta` (G112/E07), firmado, verificado y asociado a GitHub Release prerelease.
+- Último tag formal publicado: `v0.1.13.03-beta` (G113/E03), firmado, verificado y asociado a GitHub Release prerelease.
 - Último tag formal legacy: `v0.0.26-beta`.
 - Versión canónica en `VERSION`: `0.1.13.03-beta` (G113/E03).
 - `v0.0.71.01-beta` conserva su denominación histórica original y se reconcilia como G087/E01 sin alterar el tag.
 - MANT.1, NOR.1 R8, NOR.2 y DOC.1 R1–R3 están cerrados.
 - DOC.2 permanece aceptado/publicado como G111/E01; NOR.1 R8 como G112/E07 y DOC.1 R3 como G113/E03.
-- G114/E01 queda reservado para PERSIST.1; REP.1 permanece como bloque funcional posterior.
+- G114/E01 queda reservado para PLAN.2 R1; PERSIST.1 y REP.1 permanecen planificados posteriormente según la matriz maestra viva.
 - SEC.2 quedó cerrado después de R1–R6 y AUD.SEC2 R1 permanece aceptado como G109/E01.
 
 Este documento no crea una release nueva; registra el estado formal ya alcanzado por el repositorio.

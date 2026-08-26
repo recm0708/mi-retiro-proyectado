@@ -1139,3 +1139,29 @@ Estado aceptado: G113/E03 (`0.1.13.03-beta`) mediante PR #92 / merge `40ae5c0`, 
 ## PERSIST.1 R1 — siguiente bloque funcional
 
 Candidato revision-aware reservado: G114/E01 (`0.1.14.01-beta`). Debe incorporar persistencia voluntaria y segura, modelo versionado, migraciones, borrado, controles de privacidad y gate completo antes de aceptación.
+
+## PLAN.2 R1 — replanificación maestra final hacia 1.0
+
+Checkpoint candidato posterior a G113/E03 y previo al nuevo ciclo funcional.
+
+Contrato candidato:
+
+- `VERSION = 0.1.13.03-beta` permanece sin cambios mientras PLAN.2 R1 no sea aceptado;
+- `accepted_count = 113`;
+- `next_global = 114`;
+- `next_candidate = 0.1.14.01-beta`;
+- `next_candidate_block = PLAN.2`;
+- PLAN.2 R1 y UX.5 quedan registrados explícitamente;
+- la matriz viva se encuentra en `docs/governance/pre-1-0-pending-matrix.md`;
+- PERSIST.1 deja de ser el candidato inmediato, pero permanece planificado;
+- no se preasignan Globales posteriores.
+
+Gate de PLAN.2 R1:
+
+1. auditoría Markdown completa;
+2. auditor de identificadores limpio;
+3. contrato revision-aware coherente;
+4. regresiones PLAN.2 R1;
+5. suite completa;
+6. documentación viva sin bloqueadores semánticos post-G113;
+7. commit firmado, PR/CI e integración antes de consumir G114.
