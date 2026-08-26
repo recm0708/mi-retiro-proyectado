@@ -3,7 +3,7 @@
 **Estado:** vigente
 **Versión base al iniciar el plan:** `0.0.25-beta`
 **Cierre histórico de PLAN.1:** `0.0.26-beta` / `v0.0.26-beta`
-**Versión transversal vigente:** `0.1.11.01-beta` — G111/E01 aceptado para DOC.2
+**Versión transversal vigente:** `0.1.12.07-beta` — G112/E07 aceptado para NOR.1 R8
 **Fecha:** 2026-08-25
 **Clasificación:** Producto / Arquitectura / QA / Release
 
@@ -17,7 +17,7 @@ funcionales al plan de 14 bloques.
 - **NOR.1:** cerrado en R7; estándares determinísticos establecidos.
 - **NOR.2:** cerrado en R8 mediante PR #74; normalización integral completada.
 - **DOC.1 R2:** auditoría integral Markdown post-NOR.2 cerrada; documentación vigente, evidencia histórica y controles permanentes quedaron reconciliados.
-- **SEC.2 R1–R6:** cerrados; hardening CodeQL, autenticación/protección administrativa, auditoría, sesión web y hardening de sesión completados. AUD.SEC2 R1 quedó aceptado/publicado como G109/E01. REL.GOV.1 R1 quedó aceptado como G110/E01. DOC.2 R1 quedó aceptado/publicado como G111/E01. NOR.1 R8 reserva G112/E07 como checkpoint transversal antes de PERSIST.1.
+- **SEC.2 R1–R6:** cerrados; hardening CodeQL, autenticación/protección administrativa, auditoría, sesión web y hardening de sesión completados. AUD.SEC2 R1 quedó aceptado/publicado como G109/E01. REL.GOV.1 R1 quedó aceptado como G110/E01. DOC.2 R1 quedó aceptado/publicado como G111/E01. NOR.1 R8 quedó aceptado como G112/E07; DOC.1 R3 reserva G113/E03 como auditoría Markdown transversal antes de PERSIST.1.
 
 La separación evita que SEC.2 cree nuevas rutas, archivos o estructuras sobre
 una base cuya nomenclatura y documentación no hayan sido normalizadas.
@@ -287,11 +287,11 @@ Objetivo previo a DOC.2:
 - extender el workflow de tags para ejecutar el contrato en todo tag futuro;
 - fijar reglas de edición posterior que preserven firma, commit objetivo y evidencia histórica.
 
-REL.GOV.1 superó gate, PR/CI e integración y consumió G110; la promoción PR #86 publicó `v0.1.10.01-beta`. DOC.2 R1 superó gate, PR #87, CI, integración y revalidación post-merge, por lo que G111/E01 (`0.1.11.01-beta`) queda aceptado; G112/E07 (`0.1.12.07-beta`) queda reservado para NOR.1 R8 antes de PERSIST.1.
+REL.GOV.1 superó gate, PR/CI e integración y consumió G110; la promoción PR #86 publicó `v0.1.10.01-beta`. DOC.2 R1 superó gate, PR #87, CI, integración y revalidación post-merge, por lo que G111/E01 (`0.1.11.01-beta`) queda aceptado; G112/E07 (`0.1.12.07-beta`) queda aceptado para NOR.1 R8; G113/E03 (`0.1.13.03-beta`) se reserva para DOC.1 R3 antes de PERSIST.1.
 
 ### 8. DOC.2 — CHANGELOG detallado `0.0.1-beta`–`0.0.21-beta`
 
-**Estado:** cerrado en R1 como G111/E01 (`0.1.11.01-beta`) mediante PR #87; reconstrucción de 21 estados/80 commits aceptada y revalidada post-merge. NOR.1 R8 reserva G112/E07 antes de PERSIST.1.
+**Estado:** cerrado en R1 como G111/E01 (`0.1.11.01-beta`) mediante PR #87; NOR.1 R8 quedó aceptado posteriormente como G112/E07 y DOC.1 R3 precede ahora a PERSIST.1.
 
 Reconstrucción basada exclusivamente en evidencia:
 
@@ -306,9 +306,15 @@ No se inventará detalle retrospectivo no sustentado.
 
 #### Checkpoint transversal NOR.1 R8 — Gobierno de identificadores de bloques
 
-**Estado:** candidato; G112/E01 (`0.1.12.01-beta`) reservado y no aceptado.
+**Estado:** cerrado/aceptado como G112/E07 (`0.1.12.07-beta`) después de PR #89 y PR #90.
 
-Amplía NOR.1 sin añadir un bloque funcional al programa de 14 bloques. Define familias, namespaces, revisiones, reservas y un registro machine-readable. PERSIST.1 permanece como siguiente bloque funcional.
+Amplía NOR.1 sin añadir un bloque funcional al programa de 14 bloques. Define familias, namespaces, revisiones, reservas y un registro machine-readable. Antes de PERSIST.1 se ejecuta DOC.1 R3 como auditoría Markdown transversal.
+
+#### Checkpoint transversal DOC.1 R3 — etiquetas visibles de enlaces Markdown
+
+**Estado:** candidato G113/E03 (`0.1.13.03-beta`), posterior a G112/E07 y previo a PERSIST.1.
+
+Audita documentación viva para sustituir etiquetas visibles basadas únicamente en rutas/URLs por nombres humanos legibles cuando el path no sea semánticamente necesario; preserva `docs/archive/` y añade regresión de enlaces.
 
 ### 9. PERSIST.1 — Persistencia voluntaria y segura
 

@@ -33,39 +33,46 @@ class TestReleaseGovernanceContract(unittest.TestCase):
     def test_salida_cli_es_utf8_aun_con_pipe_windows_legacy(self):
         result = self.run_contract("--json", child_encoding="cp1252")
         self.assertEqual(0, result.returncode, result.stdout + result.stderr)
+
         data = json.loads(result.stdout)
         self.assertEqual(
-            "Mi Retiro Proyectado v0.1.11.01-beta — G111/E01",
+            "Mi Retiro Proyectado v0.1.12.07-beta — G112/E07",
             data["title"],
         )
 
-    def test_contrato_actual_deriva_titulo_g111(self):
+    def test_contrato_actual_deriva_titulo_g112(self):
         result = self.run_contract("--json")
         self.assertEqual(0, result.returncode, result.stdout + result.stderr)
+
         data = json.loads(result.stdout)
-        self.assertEqual("0.1.11.01-beta", data["version"])
-        self.assertEqual("v0.1.11.01-beta", data["tag"])
-        self.assertEqual(111, data["global_revision"])
-        self.assertEqual(1, data["edition"])
+        self.assertEqual("0.1.12.07-beta", data["version"])
+        self.assertEqual("v0.1.12.07-beta", data["tag"])
+        self.assertEqual(112, data["global_revision"])
+        self.assertEqual(7, data["edition"])
         self.assertEqual(
-            "Mi Retiro Proyectado v0.1.11.01-beta — G111/E01",
+            "Mi Retiro Proyectado v0.1.12.07-beta — G112/E07",
             data["title"],
         )
         self.assertTrue(data["prerelease"])
-        self.assertEqual("NOR.1", data["next_candidate_block"])
+        self.assertEqual(112, data["accepted_count"])
+        self.assertEqual(113, data["next_global"])
+        self.assertEqual("0.1.13.03-beta", data["next_candidate"])
+        self.assertEqual("DOC.1", data["next_candidate_block"])
 
     def test_tag_debe_coincidir_con_version(self):
-        ok = self.run_contract("--check-tag", "v0.1.11.01-beta")
+        ok = self.run_contract("--check-tag", "v0.1.12.07-beta")
         self.assertEqual(0, ok.returncode, ok.stdout + ok.stderr)
-        bad = self.run_contract("--check-tag", "v0.1.12.07-beta")
+
+        bad = self.run_contract("--check-tag", "v0.1.13.03-beta")
         self.assertNotEqual(0, bad.returncode)
         self.assertIn("Tag inválido", bad.stdout)
 
     def test_titulo_debe_ser_canonico(self):
-        title = "Mi Retiro Proyectado v0.1.11.01-beta — G111/E01"
+        title = "Mi Retiro Proyectado v0.1.12.07-beta — G112/E07"
         ok = self.run_contract("--check-title", title)
         self.assertEqual(0, ok.returncode, ok.stdout + ok.stderr)
-        bad = self.run_contract("--check-title", "v0.1.11.01-beta")
+
+        bad = self.run_contract("--check-title", "v0.1.12.07-beta")
         self.assertNotEqual(0, bad.returncode)
         self.assertIn("Título inválido", bad.stdout)
 
@@ -125,25 +132,36 @@ class TestReleaseGovernanceContract(unittest.TestCase):
 
     def test_documentacion_operativa_cubre_script_y_publicacion(self):
         scripts = (ROOT / "scripts/README.md").read_text(encoding="utf-8")
-        validation = (ROOT / "docs/operations/validation.md").read_text(encoding="utf-8")
-        github = (ROOT / "docs/operations/github-public-repository.md").read_text(encoding="utf-8")
+        validation = (ROOT / "docs/operations/validation.md").read_text(
+            encoding="utf-8"
+        )
+        github = (ROOT / "docs/operations/github-public-repository.md").read_text(
+            encoding="utf-8"
+        )
+
         self.assertIn("release_contract.py", scripts)
-        self.assertIn("REL.GOV.1 — validación del contrato de GitHub Releases", validation)
+        self.assertIn(
+            "REL.GOV.1 — validación del contrato de GitHub Releases",
+            validation,
+        )
         self.assertIn("next_candidate_block = PERSIST.1", validation)
-        self.assertIn("next_candidate_block = NOR.1", validation)
+        self.assertIn("next_candidate_block = DOC.1", validation)
         self.assertIn("## 7.1. Tags y GitHub Releases", github)
         self.assertIn(".github/release.yml", github)
 
-    def test_g111_aceptado_y_g112_reservado_para_nor1_r8(self):
+    def test_g112_aceptado_y_g113_reservado_para_doc1_r3(self):
         ledger = json.loads(
-            (ROOT / "data/pre-1-0-revision-ledger.json").read_text(encoding="utf-8")
+            (ROOT / "data/pre-1-0-revision-ledger.json").read_text(
+                encoding="utf-8"
+            )
         )
-        self.assertEqual(111, ledger["accepted_count"])
-        self.assertEqual(112, ledger["next_global"])
-        self.assertEqual("0.1.12.07-beta", ledger["next_candidate"])
-        self.assertEqual("NOR.1", ledger["next_candidate_block"])
+
+        self.assertEqual(112, ledger["accepted_count"])
+        self.assertEqual(113, ledger["next_global"])
+        self.assertEqual("0.1.13.03-beta", ledger["next_candidate"])
+        self.assertEqual("DOC.1", ledger["next_candidate_block"])
         self.assertEqual(
-            "0.1.11.01-beta",
+            "0.1.12.07-beta",
             (ROOT / "VERSION").read_text(encoding="utf-8").strip(),
         )
 

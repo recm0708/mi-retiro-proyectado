@@ -146,8 +146,9 @@ class TestNOR2R3RuntimeMigration(unittest.TestCase):
         self.assertIn("R4", text)
 
     def test_version_no_cambia(self):
+        from app.core.version import APP_VERSION
         self.assertEqual(
-            "0.1.11.01-beta",
+            APP_VERSION,
             (ROOT / "VERSION").read_text(encoding="utf-8").strip(),
         )
 

@@ -1,9 +1,9 @@
 # Índice de documentación
 
 **Estado:** vigente
-**Versión de aplicación:** `0.1.11.01-beta` — G111/E01 aceptado/publicado para DOC.2; G112/E07 reservado para NOR.1 R8; ledger aceptado hasta G111
+**Versión de aplicación:** `0.1.12.07-beta` — G112/E07 aceptado para NOR.1 R8; G113/E03 reservado para DOC.1 R3; ledger aceptado hasta G112
 **Último tag formal legacy:** `v0.0.26-beta`
-**Última actualización transversal:** NOR.1 R8 — gobierno de identificadores de bloques, candidato G112/E07 — 2026-08-26
+**Última actualización transversal:** promoción NOR.1 R8 — G112/E07 aceptado; DOC.1 R3 próximo candidato — 2026-08-26
 **Cierres históricos preservados:** UX.4.6i / PR #34 — 841 pruebas; UX.4.6e R9 — `v0.0.25-beta`
 
 Este archivo es el punto de entrada para la documentación técnica, funcional, normativa, de privacidad, validación y auditoría de Mi Retiro Proyectado.
@@ -11,11 +11,11 @@ Este archivo es el punto de entrada para la documentación técnica, funcional, 
 
 ## Estado de normalización del repositorio
 
-**Estado actual:** NOR.2, DOC.1 R2, SEC.2, AUD.SEC2 R1, REL.GOV.1 y DOC.2 están cerrados/publicados según corresponda. G111/E01 está materializado como `0.1.11.01-beta`; NOR.1 R8 es candidato transversal y reserva G112/E07 sin consumirlo antes de PERSIST.1.
+**Estado actual:** NOR.1 R8, NOR.2, DOC.1 R2, SEC.2, AUD.SEC2 R1, REL.GOV.1 y DOC.2 están cerrados/aceptados según corresponda. G112/E07 está materializado como `0.1.12.07-beta`; DOC.1 R3 reserva G113/E03 como auditoría transversal previa a PERSIST.1.
 
 Estado de la fase:
 
-- **NOR.1:** cierre histórico R7 preservado; R8 está activo únicamente como candidato transversal de gobierno de identificadores, con G112 reservado y no aceptado.
+- **NOR.1:** cerrado en R8 y aceptado como G112/E07; su política de identificadores queda vigente.
 - **NOR.2 R1:** cerrado; línea base integral del repositorio.
 - **NOR.2 R2:** cerrado; matriz de decisión de migración.
 - **NOR.2 R3:** cerrado; runtime y configuración técnica normalizados.
@@ -25,6 +25,7 @@ Estado de la fase:
 - **NOR.2 R7:** cerrado; artefactos locales heredados migrados y depurados.
 - **NOR.2 R8:** cerrado; auditoría integral y cierre formal integrados mediante PR #74.
 - **DOC.1 R2:** cerrado; auditoría integral Markdown post-NOR.2 y controles permanentes incorporados.
+- **DOC.1 R3:** candidato G113/E03; auditará etiquetas visibles de enlaces Markdown antes de PERSIST.1.
 - **SEC.2 R1–R6:** cerrados; CodeQL, autenticación, protección de endpoints, auditoría, sesión web y hardening configurable completados. AUD.SEC2 R1 corrigió el kill switch, alineó documentación/ledger y quedó aceptado como G109/E01.
 
 Evidencia:

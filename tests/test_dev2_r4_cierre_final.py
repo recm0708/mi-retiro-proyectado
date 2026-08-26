@@ -16,7 +16,7 @@ class TestDev2R4CierreFinal(unittest.TestCase):
     def _leer(ruta: str) -> str:
         return (ROOT / ruta).read_text(encoding="utf-8")
 
-    def test_dev2_queda_cerrado_sin_promover_version(self):
+    def test_dev2_queda_cerrado_y_version_actual_sigue_canonica(self):
         documento = self._leer("docs/architecture/development-center.md")
 
         self.assertIn("**Estado general:** DEV.2 cerrado documentalmente en R4.", documento)
@@ -29,8 +29,7 @@ class TestDev2R4CierreFinal(unittest.TestCase):
         self.assertIn("882 passed, 695 subtests passed", documento)
 
         version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
-        self.assertEqual("0.1.11.01-beta", version)
-        self.assertEqual("0.1.11.01-beta", APP_VERSION)
+        self.assertEqual(APP_VERSION, version)
 
     def test_superficies_principales_no_presentan_dev2_como_no_iniciado(self):
         superficies = {

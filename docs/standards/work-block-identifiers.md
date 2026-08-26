@@ -66,10 +66,11 @@ La auditoría posterior a DOC.2 demostró que:
 - `NOR.1 R8` no estaba usado ni en el árbol G111 ni en mensajes Git;
 - crear un identificador nuevo dentro de NOR, GOV o DOC sin necesidad semántica añadiría una identidad innecesaria.
 
-Por ello G112/E07 (`0.1.12.07-beta`) se reserva para **NOR.1 R8 — gobierno de
-identificadores de bloques**, sin consumirlo mientras el candidato no sea
-aceptado. `PERSIST.1` sigue siendo el siguiente bloque funcional y, si NOR.1 R8
-se acepta como G112, utilizará el siguiente Global disponible.
+G112/E07 (`0.1.12.07-beta`) quedó aceptado para **NOR.1 R8 — gobierno de
+identificadores de bloques** después de PR #89 y la corrección ordinal PR #90.
+La siguiente auditoría transversal se clasifica como **DOC.1 R3**, porque amplía
+el alcance ya registrado de auditoría e integridad Markdown; reserva G113/E03
+(`0.1.13.03-beta`) antes de PERSIST.1.
 
 ## Control automático
 

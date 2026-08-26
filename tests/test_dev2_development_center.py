@@ -11,6 +11,7 @@ from unittest.mock import patch
 from fastapi.testclient import TestClient
 
 from app.core.observability import ruta_log_actual
+from app.core.version import APP_VERSION
 from app.main import app
 from app.services.development_center import construir_estado_centro_desarrollo
 
@@ -37,7 +38,7 @@ class TestDev2CentroDesarrolloR1(unittest.TestCase):
         self.assertEqual("DEV.2 R1", estado["bloque"])
         self.assertEqual("Centro de desarrollo", estado["titulo"])
         self.assertFalse(estado["dev_mode_activo"])
-        self.assertEqual("0.1.11.01-beta", estado["app_version"])
+        self.assertEqual(APP_VERSION, estado["app_version"])
         self.assertEqual("mrp-diagnostics.jsonl", estado["archivo_log_actual"])
         self.assertNotIn(temp, json.dumps(estado, ensure_ascii=False))
 
@@ -64,7 +65,7 @@ class TestDev2CentroDesarrolloR1(unittest.TestCase):
         self.assertNotIn("x-correlation-id", respuesta.headers)
         self.assertIn("Centro de desarrollo", respuesta.text)
         self.assertIn("MRP_DEV_MODE", respuesta.text)
-        self.assertIn("0.1.11.01-beta", respuesta.text)
+        self.assertIn(APP_VERSION, respuesta.text)
         self.assertIn("Developer Diagnostics", respuesta.text)
         self.assertIn("Desactivado", respuesta.text)
 

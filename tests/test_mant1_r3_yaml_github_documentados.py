@@ -115,8 +115,9 @@ class TestMant1R3YamlGithubDocumentados(unittest.TestCase):
     def test_mant1_r3_no_declara_inicio_de_sec2_ni_cambio_de_version(self):
         """MANT.1 R3 es mantenimiento previo a SEC.2, no cambio funcional."""
 
+        from app.core.version import APP_VERSION
         version = self._leer("VERSION").strip()
-        self.assertEqual("0.1.11.01-beta", version)
+        self.assertEqual(APP_VERSION, version)
 
         changelog = self._leer("CHANGELOG.md")
         roadmap = self._leer("docs/governance/roadmap.md")
