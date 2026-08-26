@@ -13,7 +13,7 @@
 - Evidencia de aceptación: PR #85, merge `5cd1cea`, 1054 pruebas locales y checks remotos Python 3.13/3.14 + Markdown/gobernanza en `success`.
 - Esta sincronización materializa el G110 ya aceptado y **no consume G111**.
 - Siguiente Global disponible: G111/E01 (`0.1.11.01-beta`) para DOC.2.
-- Tag y GitHub Release `v0.1.10.01-beta`: pendientes hasta integrar/revalidar esta promoción; `v0.1.09.01-beta` y `v0.0.71.01-beta` permanecen inmutables.
+- Promoción final: PR #86, merge `cef373a`, revalidación post-merge de 1058 pruebas en `OK`; tag firmado `v0.1.10.01-beta` y GitHub Release prerelease publicados.
 
 ## Promoción G109/E01 — post-merge de AUD.SEC2 R1
 
@@ -31,7 +31,7 @@ Después de `v0.0.26-beta`, el repositorio integró trabajo funcional, técnico,
 
 Estado vigente:
 
-- Último tag formal publicado: `v0.1.09.01-beta`; `v0.1.10.01-beta` queda pendiente de publicación post-promoción.
+- Último tag formal publicado: `v0.1.10.01-beta` (G110/E01), firmado, verificado y asociado a GitHub Release prerelease.
 - Último tag formal legacy: `v0.0.26-beta`.
 - Versión canónica en `VERSION`: `0.1.10.01-beta` (G110/E01).
 - `v0.0.71.01-beta` fue publicado originalmente bajo la denominación VER.2 G071/E01; la reconciliación post-G070 sitúa ese estado cronológicamente en **G087/E01** sin alterar el tag.
@@ -81,6 +81,15 @@ VER.2 añade una segunda capa de auditoría: `docs/governance/pre-1-0-revision-l
 | `0.0.21-beta` | 2026-08-17 | `05232df` → `7941f58` | 3 | UX.4.6d: Paso 3, Ficha Digital, sincronización de Pasos 1–3 y cierre integral. |
 
 **Total reconstruido:** 80 commits en 21 estados documentales.
+
+### Backfill administrativo de GitHub Releases — 2026-08-26
+
+- se conservaron exactamente los **29 tags formales reales** del repositorio;
+- se completaron GitHub Releases para los 26 tags legacy `v0.0.1-beta`–`v0.0.26-beta`;
+- junto con `v0.0.71.01-beta`, `v0.1.09.01-beta` y `v0.1.10.01-beta`, el inventario queda en **29 tags ↔ 29 Releases**;
+- los Releases retrospectivos son metadata administrativa: no mueven, borran ni recrean tags y no falsean sus fechas históricas;
+- no se creó `v0.0.0-beta` ni `v0.0.00.00-beta` porque esos tags no existen;
+- esta regularización no consume un Global revision-aware.
 
 ## 3. Marcador histórico `0.1.0`
 

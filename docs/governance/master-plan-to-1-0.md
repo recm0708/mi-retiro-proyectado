@@ -287,9 +287,11 @@ Objetivo previo a DOC.2:
 - extender el workflow de tags para ejecutar el contrato en todo tag futuro;
 - fijar reglas de edición posterior que preserven firma, commit objetivo y evidencia histórica.
 
-REL.GOV.1 superó gate, PR/CI e integración y consumió G110. La promoción post-merge materializa ese estado sin consumir G111. DOC.2 continúa con G111/E01 (`0.1.11.01-beta`).
+REL.GOV.1 superó gate, PR/CI e integración y consumió G110; la promoción PR #86 publicó `v0.1.10.01-beta`. DOC.2 R1 continúa con G111/E01 (`0.1.11.01-beta`) reservado hasta aceptación.
 
 ### 8. DOC.2 — CHANGELOG detallado `0.0.1-beta`–`0.0.21-beta`
+
+**Estado de trabajo:** R1 en ejecución con G111/E01 (`0.1.11.01-beta`) reservado y todavía no consumido. La implementación reconstruye 21 estados/80 commits, agrega evidencia machine-readable y regresiones, y sincroniza la metadata real de Releases.
 
 Reconstrucción basada exclusivamente en evidencia:
 

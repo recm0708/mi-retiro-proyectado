@@ -1,0 +1,758 @@
+{
+  "schema_version": 1,
+  "project": "Mi Retiro Proyectado",
+  "doc2_revision": "DOC.2 R1",
+  "nature": "reconstrucción retrospectiva auditable; no sustituye Git",
+  "generated_from_main": "cef373ad65024517e49b20cde5cbbe7ca9f14fa2",
+  "version_during_candidate": "0.1.10.01-beta",
+  "accepted_global_before_doc2": 110,
+  "reserved_candidate": {
+    "global_revision": 111,
+    "edition": 1,
+    "revision_aware": "0.1.11.01-beta",
+    "block": "DOC.2",
+    "consumed": false
+  },
+  "source_documents": [
+    "RELEASES.md",
+    "docs/archive/governance/REGISTRO_CAMBIOS_HISTORICO.md",
+    "CHANGELOG.md@historical-tags",
+    "Git commit history"
+  ],
+  "state_count": 21,
+  "commit_count": 80,
+  "states": [
+    {
+      "global_revision": 1,
+      "legacy_version": "0.0.1-beta",
+      "tag": "v0.0.1-beta",
+      "historical_close_date": "2026-08-10",
+      "range_start": "a0a9e09e603c95c18dbd48d44d4098ed4b95270e",
+      "range_end": "13ce028448244638eb63e4ff5db9bbe1e6f6205d",
+      "commit_count": 6,
+      "milestone": "Base técnica, FastAPI, primera interfaz, asistente, cuotas, salario y documentación inicial.",
+      "commits": [
+        {
+          "sha": "a0a9e09e603c95c18dbd48d44d4098ed4b95270e",
+          "short_sha": "a0a9e09",
+          "subject": "tipo: descripción del cambio",
+          "category": "Otros cambios"
+        },
+        {
+          "sha": "f329826093903df3b826b9035fa53f20c123a7f2",
+          "short_sha": "f329826",
+          "subject": "chore: inicializar estructura del proyecto",
+          "category": "Mantenimiento técnico"
+        },
+        {
+          "sha": "422bbab2d37e47c49a2072caff701ccfb183ce55",
+          "short_sha": "422bbab",
+          "subject": "feat: agregar interfaz inicial y asistente de simulacion",
+          "category": "Funcionalidad"
+        },
+        {
+          "sha": "47635ee3ebdfac9efea734c4d21a5dafaf4f6726",
+          "short_sha": "47635ee",
+          "subject": "feat: agregar analisis de cuotas y persistencia temporal",
+          "category": "Funcionalidad"
+        },
+        {
+          "sha": "fa67022bfd94b57e143072156186205f6477588f",
+          "short_sha": "fa67022",
+          "subject": "feat: agregar cuotas y salario al asistente de simulacion",
+          "category": "Funcionalidad"
+        },
+        {
+          "sha": "13ce028448244638eb63e4ff5db9bbe1e6f6205d",
+          "short_sha": "13ce028",
+          "subject": "docs: normalizar comentarios y documentacion del codigo",
+          "category": "Documentación"
+        }
+      ]
+    },
+    {
+      "global_revision": 2,
+      "legacy_version": "0.0.2-beta",
+      "tag": "v0.0.2-beta",
+      "historical_close_date": "2026-08-11",
+      "range_start": "ae459435aa96313fd96a0364abc0fdbac4759106",
+      "range_end": "eafe54d1503fe3bdc2064f2789cf98cb63ccc26b",
+      "commit_count": 3,
+      "milestone": "Historial salarial, proyección y línea temporal.",
+      "commits": [
+        {
+          "sha": "ae459435aa96313fd96a0364abc0fdbac4759106",
+          "short_sha": "ae45943",
+          "subject": "feat: integrar historial salarial y linea temporal de proyeccion",
+          "category": "Funcionalidad"
+        },
+        {
+          "sha": "1718194df0d9179818c9658f3260c6d7e95a4749",
+          "short_sha": "1718194",
+          "subject": "docs: actualizar historial y proyeccion salarial",
+          "category": "Documentación"
+        },
+        {
+          "sha": "eafe54d1503fe3bdc2064f2789cf98cb63ccc26b",
+          "short_sha": "eafe54d",
+          "subject": "docs: actualizar guia de contribucion",
+          "category": "Documentación"
+        }
+      ]
+    },
+    {
+      "global_revision": 3,
+      "legacy_version": "0.0.3-beta",
+      "tag": "v0.0.3-beta",
+      "historical_close_date": "2026-08-11",
+      "range_start": "a7e1ed4e0e783131aa1486c1dc0fbf549299fa80",
+      "range_end": "78e5188887f5c6c9fd0b42df56ce4aeea84c7965",
+      "commit_count": 4,
+      "milestone": "Retiro, precisión monetaria, pruebas y protección de datos de validación.",
+      "commits": [
+        {
+          "sha": "a7e1ed4e0e783131aa1486c1dc0fbf549299fa80",
+          "short_sha": "a7e1ed4",
+          "subject": "feat: completar retiro y precision monetaria",
+          "category": "Funcionalidad"
+        },
+        {
+          "sha": "8a0c8fca38042eb705ca854b802f4f0d6163a9ef",
+          "short_sha": "8a0c8fc",
+          "subject": "test: agregar validaciones de precision y retiro",
+          "category": "Pruebas"
+        },
+        {
+          "sha": "204c4792457264b375288dd9c613c11faf445a77",
+          "short_sha": "204c479",
+          "subject": "chore: normalizar archivos y proteger datos de validacion",
+          "category": "Mantenimiento técnico"
+        },
+        {
+          "sha": "78e5188887f5c6c9fd0b42df56ce4aeea84c7965",
+          "short_sha": "78e5188",
+          "subject": "docs: documentar precision retiro y validacion",
+          "category": "Documentación"
+        }
+      ]
+    },
+    {
+      "global_revision": 4,
+      "legacy_version": "0.0.4-beta",
+      "tag": "v0.0.4-beta",
+      "historical_close_date": "2026-08-11",
+      "range_start": "563d6c42e5bc96549490e9e88a6cd7f15d9cbfe0",
+      "range_end": "2d4dfd08a324fee18994e784159366593d6ba31f",
+      "commit_count": 7,
+      "milestone": "Motor SEBD, modalidades e Indemnización por Vejez.",
+      "commits": [
+        {
+          "sha": "563d6c42e5bc96549490e9e88a6cd7f15d9cbfe0",
+          "short_sha": "563d6c4",
+          "subject": "feat: implementar modalidades SEBD y resultados integrados",
+          "category": "Funcionalidad"
+        },
+        {
+          "sha": "3e7c8abe052a75082cf7270c776db06ee82db776",
+          "short_sha": "3e7c8ab",
+          "subject": "test: validar modalidades y escenarios SEBD",
+          "category": "Pruebas"
+        },
+        {
+          "sha": "2567191e0301659ef3b3a4cbe6e7e32c610ec9a1",
+          "short_sha": "2567191",
+          "subject": "docs: documentar modalidades y motor SEBD",
+          "category": "Documentación"
+        },
+        {
+          "sha": "d7d8c719860e20b63b79be98b3de2cd76c199e41",
+          "short_sha": "d7d8c71",
+          "subject": "feat: completar indemnizacion por vejez SEBD",
+          "category": "Funcionalidad"
+        },
+        {
+          "sha": "266cc974213e63c68af3726cf2829c46ba829b8f",
+          "short_sha": "266cc97",
+          "subject": "test: validar indemnizacion por vejez SEBD",
+          "category": "Pruebas"
+        },
+        {
+          "sha": "fb5857da010feeef0340a93d116df3c2def9ef53",
+          "short_sha": "fb5857d",
+          "subject": "docs: documentar indemnizacion por vejez SEBD",
+          "category": "Documentación"
+        },
+        {
+          "sha": "2d4dfd08a324fee18994e784159366593d6ba31f",
+          "short_sha": "2d4dfd0",
+          "subject": "fix: incluir parametros normativos de indemnizacion por vejez",
+          "category": "Correcciones"
+        }
+      ]
+    },
+    {
+      "global_revision": 5,
+      "legacy_version": "0.0.5-beta",
+      "tag": "v0.0.5-beta",
+      "historical_close_date": "2026-08-11",
+      "range_start": "d41682c1241c73c63b0d577accc180dc938ee4a2",
+      "range_end": "8a7e3818d5d533b15cc2ee2d0a0b2921a29185bc",
+      "commit_count": 3,
+      "milestone": "Motores Mixto y SUCGS.",
+      "commits": [
+        {
+          "sha": "d41682c1241c73c63b0d577accc180dc938ee4a2",
+          "short_sha": "d41682c",
+          "subject": "feat: completar motores Mixto y SUCGS",
+          "category": "Funcionalidad"
+        },
+        {
+          "sha": "292e10fa06087110b6ee3839c35e116033bbcb8b",
+          "short_sha": "292e10f",
+          "subject": "test: validar motores Mixto y SUCGS",
+          "category": "Pruebas"
+        },
+        {
+          "sha": "8a7e3818d5d533b15cc2ee2d0a0b2921a29185bc",
+          "short_sha": "8a7e381",
+          "subject": "docs: documentar motores Mixto y SUCGS",
+          "category": "Documentación"
+        }
+      ]
+    },
+    {
+      "global_revision": 6,
+      "legacy_version": "0.0.6-beta",
+      "tag": "v0.0.6-beta",
+      "historical_close_date": "2026-08-11",
+      "range_start": "fa5348fe7bba2bcf119a42a769587533da8455e0",
+      "range_end": "e087d6ef106dfe1d1d975cebd4d21e7453d98990",
+      "commit_count": 4,
+      "milestone": "Organización del repositorio, centralización normativa y casos de validación.",
+      "commits": [
+        {
+          "sha": "fa5348fe7bba2bcf119a42a769587533da8455e0",
+          "short_sha": "fa5348f",
+          "subject": "chore: ordenar configuracion y reglas del repositorio",
+          "category": "Mantenimiento técnico"
+        },
+        {
+          "sha": "7051916e3026c2e6bbbc5ea9b155b1d972c67328",
+          "short_sha": "7051916",
+          "subject": "chore: centralizar fuentes y metadatos normativos",
+          "category": "Mantenimiento técnico"
+        },
+        {
+          "sha": "1ee2b0cad8a60a70283856a94f642561d1dc1233",
+          "short_sha": "1ee2b0c",
+          "subject": "docs: reorganizar documentacion y fuentes normativas",
+          "category": "Documentación"
+        },
+        {
+          "sha": "e087d6ef106dfe1d1d975cebd4d21e7453d98990",
+          "short_sha": "e087d6e",
+          "subject": "docs: actualizar guia de casos de validacion",
+          "category": "Documentación"
+        }
+      ]
+    },
+    {
+      "global_revision": 7,
+      "legacy_version": "0.0.7-beta",
+      "tag": "v0.0.7-beta",
+      "historical_close_date": "2026-08-12",
+      "range_start": "c442ec2550c5ce9b8c769ded13cebf4c79bfbba6",
+      "range_end": "e956ea985b086cc2c3a8d2eced488face7d5de69",
+      "commit_count": 4,
+      "milestone": "Comparador, trazabilidad, resultado unificado y cierre funcional de Fase 6.",
+      "commits": [
+        {
+          "sha": "c442ec2550c5ce9b8c769ded13cebf4c79bfbba6",
+          "short_sha": "c442ec2",
+          "subject": "feat: completar comparador trazabilidad y cierre funcional",
+          "category": "Funcionalidad"
+        },
+        {
+          "sha": "68be9a919996ff84b45abbf6fca3df318b9f9d4a",
+          "short_sha": "68be9a9",
+          "subject": "test: validar comparador trazabilidad y resultado unificado",
+          "category": "Pruebas"
+        },
+        {
+          "sha": "35fbd9f26ba46e3f431fe1a6e4228f25b753beb4",
+          "short_sha": "35fbd9f",
+          "subject": "chore: agregar dependencia para pruebas HTTP",
+          "category": "Mantenimiento técnico"
+        },
+        {
+          "sha": "e956ea985b086cc2c3a8d2eced488face7d5de69",
+          "short_sha": "e956ea9",
+          "subject": "docs: cerrar fase 6 y documentar metodologia y resultados",
+          "category": "Documentación"
+        }
+      ]
+    },
+    {
+      "global_revision": 8,
+      "legacy_version": "0.0.8-beta",
+      "tag": "v0.0.8-beta",
+      "historical_close_date": "2026-08-12",
+      "range_start": "6d4c2d80e8d75b98c05312003fda08ae1b7d7126",
+      "range_end": "d599ee24afd56fe62a6d1a2a2d7d9b54e0a2fe2d",
+      "commit_count": 3,
+      "milestone": "UX.3: responsive y precisión del corte mensual de cuotas.",
+      "commits": [
+        {
+          "sha": "6d4c2d80e8d75b98c05312003fda08ae1b7d7126",
+          "short_sha": "6d4c2d8",
+          "subject": "feat: mejorar UX responsive y precision del corte de cuotas",
+          "category": "Funcionalidad"
+        },
+        {
+          "sha": "54c9762da5e500e18d09d85ae0d795bb27d0eed9",
+          "short_sha": "54c9762",
+          "subject": "test: validar UX responsive y corte mensual de cuotas",
+          "category": "Pruebas"
+        },
+        {
+          "sha": "d599ee24afd56fe62a6d1a2a2d7d9b54e0a2fe2d",
+          "short_sha": "d599ee2",
+          "subject": "docs: documentar UX.3 y corte mensual de cuotas",
+          "category": "Documentación"
+        }
+      ]
+    },
+    {
+      "global_revision": 9,
+      "legacy_version": "0.0.9-beta",
+      "tag": "v0.0.9-beta",
+      "historical_close_date": "2026-08-12",
+      "range_start": "376a9678161638a97a97c341a9b8c995806d24af",
+      "range_end": "e6b02dc86f81356bbbb65ae513b2707c0e947991",
+      "commit_count": 4,
+      "milestone": "Identidad, temas, accesibilidad y terminología pública.",
+      "commits": [
+        {
+          "sha": "376a9678161638a97a97c341a9b8c995806d24af",
+          "short_sha": "376a967",
+          "subject": "feat: consolidar identidad temas y accesibilidad de interfaz",
+          "category": "Funcionalidad"
+        },
+        {
+          "sha": "74fbd29a2959e084b6df3c17eaaa090fa2b20e6f",
+          "short_sha": "74fbd29",
+          "subject": "refactor: alinear terminologia publica y trazabilidad previsional",
+          "category": "Refactorización"
+        },
+        {
+          "sha": "7ed97ff8a1d52b878e8741e0694fcddd7375483e",
+          "short_sha": "7ed97ff",
+          "subject": "test: validar identidad temas accesibilidad y fuentes",
+          "category": "Pruebas"
+        },
+        {
+          "sha": "e6b02dc86f81356bbbb65ae513b2707c0e947991",
+          "short_sha": "e6b02dc",
+          "subject": "docs: actualizar identidad metodologia y fuentes normativas",
+          "category": "Documentación"
+        }
+      ]
+    },
+    {
+      "global_revision": 10,
+      "legacy_version": "0.0.10-beta",
+      "tag": "v0.0.10-beta",
+      "historical_close_date": "2026-08-12",
+      "range_start": "3f2f5d7084d5208416bf3db2daefb533afb492f6",
+      "range_end": "8feb682e9b17def76c67fefe7c94e08669bc5520",
+      "commit_count": 6,
+      "milestone": "Mantenimiento técnico: LF, favicon temporal, estructura y respaldos.",
+      "commits": [
+        {
+          "sha": "3f2f5d7084d5208416bf3db2daefb533afb492f6",
+          "short_sha": "3f2f5d7",
+          "subject": "chore: normalizar finales de linea del repositorio",
+          "category": "Mantenimiento técnico"
+        },
+        {
+          "sha": "a5f4b7bec7101355c8e7807dabfb671dec3ebb85",
+          "short_sha": "a5f4b7b",
+          "subject": "fix: evitar 404 temporal del favicon",
+          "category": "Correcciones"
+        },
+        {
+          "sha": "263a0a8e5e4924330a1861eea774c21d3870be58",
+          "short_sha": "263a0a8",
+          "subject": "test: validar normalizacion LF y favicon temporal",
+          "category": "Pruebas"
+        },
+        {
+          "sha": "6ccda5cca274b050973315c6f8209333dfa9a80d",
+          "short_sha": "6ccda5c",
+          "subject": "docs: documentar mantenimiento tecnico previo a UX.4",
+          "category": "Documentación"
+        },
+        {
+          "sha": "a9d8e5c3b463707c48e94df3f6036bcdfa10a184",
+          "short_sha": "a9d8e5c",
+          "subject": "chore: limpiar marcadores obsoletos de estructura",
+          "category": "Mantenimiento técnico"
+        },
+        {
+          "sha": "8feb682e9b17def76c67fefe7c94e08669bc5520",
+          "short_sha": "8feb682",
+          "subject": "docs: documentar estructura y respaldos externos",
+          "category": "Documentación"
+        }
+      ]
+    },
+    {
+      "global_revision": 11,
+      "legacy_version": "0.0.11-beta",
+      "tag": "v0.0.11-beta",
+      "historical_close_date": "2026-08-12",
+      "range_start": "c2da4942f433206416afbd3790e716b3298f4471",
+      "range_end": "1f350f6411df4da053fa212661d436f848b91292",
+      "commit_count": 3,
+      "milestone": "UX.4.1: accesibilidad y ayudas contextuales.",
+      "commits": [
+        {
+          "sha": "c2da4942f433206416afbd3790e716b3298f4471",
+          "short_sha": "c2da494",
+          "subject": "feat: mejorar accesibilidad y refinamientos de UX.4.1",
+          "category": "Funcionalidad"
+        },
+        {
+          "sha": "4e3434d9334150913775b05b306ff8939d78ebdf",
+          "short_sha": "4e3434d",
+          "subject": "test: validar accesibilidad y remate visual de UX.4.1",
+          "category": "Pruebas"
+        },
+        {
+          "sha": "1f350f6411df4da053fa212661d436f848b91292",
+          "short_sha": "1f350f6",
+          "subject": "docs: documentar UX.4.1 y herramientas de validacion",
+          "category": "Documentación"
+        }
+      ]
+    },
+    {
+      "global_revision": 12,
+      "legacy_version": "0.0.12-beta",
+      "tag": "v0.0.12-beta",
+      "historical_close_date": "2026-08-12",
+      "range_start": "5607cc11dc4f4ed408d3c9d70f94793df0b62237",
+      "range_end": "6e6b33b484a24b9621d738a345107d0fe0b862eb",
+      "commit_count": 3,
+      "milestone": "UX.4.2: estados activos y selección perceptible.",
+      "commits": [
+        {
+          "sha": "5607cc11dc4f4ed408d3c9d70f94793df0b62237",
+          "short_sha": "5607cc1",
+          "subject": "feat: reforzar estados activos y seleccion visual de UX.4.2",
+          "category": "Funcionalidad"
+        },
+        {
+          "sha": "5a01293cf73a657000d3436d4cd2987b822ff115",
+          "short_sha": "5a01293",
+          "subject": "test: validar estados activos y seleccion de UX.4.2",
+          "category": "Pruebas"
+        },
+        {
+          "sha": "6e6b33b484a24b9621d738a345107d0fe0b862eb",
+          "short_sha": "6e6b33b",
+          "subject": "docs: documentar estados visuales de UX.4.2",
+          "category": "Documentación"
+        }
+      ]
+    },
+    {
+      "global_revision": 13,
+      "legacy_version": "0.0.13-beta",
+      "tag": "v0.0.13-beta",
+      "historical_close_date": "2026-08-12",
+      "range_start": "b671c9a6f85e91015730e9b8f2b7d039df32fea8",
+      "range_end": "9f849d0facd37c238db793e2b85ef22173f2aab9",
+      "commit_count": 2,
+      "milestone": "UX.4.3: validación accesible, teclado, errores y estabilidad.",
+      "commits": [
+        {
+          "sha": "b671c9a6f85e91015730e9b8f2b7d039df32fea8",
+          "short_sha": "b671c9a",
+          "subject": "fix: cerrar validacion accesible y estabilidad de UX.4.3",
+          "category": "Correcciones"
+        },
+        {
+          "sha": "9f849d0facd37c238db793e2b85ef22173f2aab9",
+          "short_sha": "9f849d0",
+          "subject": "test: validar formularios teclado y errores de UX.4.3",
+          "category": "Pruebas"
+        }
+      ]
+    },
+    {
+      "global_revision": 14,
+      "legacy_version": "0.0.14-beta",
+      "tag": "v0.0.14-beta",
+      "historical_close_date": "2026-08-13",
+      "range_start": "5ca39ac2cd81ee9e4b2b547d0e91a0059c916706",
+      "range_end": "f4a0d45b37271f005af6eb0b7a3a78f550aa774a",
+      "commit_count": 6,
+      "milestone": "UX.4.4: edad anual, detalle salarial e importación documental.",
+      "commits": [
+        {
+          "sha": "5ca39ac2cd81ee9e4b2b547d0e91a0059c916706",
+          "short_sha": "5ca39ac",
+          "subject": "test: validar edad anual en linea temporal de UX.4.4",
+          "category": "Pruebas"
+        },
+        {
+          "sha": "5be85f8520d34efb01e1d6562c4ed6d7a3bc5a0c",
+          "short_sha": "5be85f8",
+          "subject": "docs: documentar cierre UX.4.3 e inicio UX.4.4",
+          "category": "Documentación"
+        },
+        {
+          "sha": "abb4fad0483a66be30736f07c2e459c00013ae7d",
+          "short_sha": "abb4fad",
+          "subject": "feat: mostrar edad anual en linea temporal de UX.4.4",
+          "category": "Funcionalidad"
+        },
+        {
+          "sha": "10c4e485dc048e154c6d1a54a8c5e5789f87f6ab",
+          "short_sha": "10c4e48",
+          "subject": "feat: completar detalle salarial e importacion oficial de UX.4.4",
+          "category": "Funcionalidad"
+        },
+        {
+          "sha": "be7f711cd06b79fe7083d6de3b1117b1d569fc5f",
+          "short_sha": "be7f711",
+          "subject": "test: validar detalle salarial e importacion oficial de UX.4.4",
+          "category": "Pruebas"
+        },
+        {
+          "sha": "f4a0d45b37271f005af6eb0b7a3a78f550aa774a",
+          "short_sha": "f4a0d45",
+          "subject": "docs: documentar cierre funcional de UX.4.4",
+          "category": "Documentación"
+        }
+      ]
+    },
+    {
+      "global_revision": 15,
+      "legacy_version": "0.0.15-beta",
+      "tag": "v0.0.15-beta",
+      "historical_close_date": "2026-08-13",
+      "range_start": "88a1d14a6b99fb3cd4e051fd3e00cd38dbb3c149",
+      "range_end": "3430f2ed842c4820c207f429c87ca02b80293a5f",
+      "commit_count": 3,
+      "milestone": "UX.4.5: información acreditada frente a proyectada y cierre accesible.",
+      "commits": [
+        {
+          "sha": "88a1d14a6b99fb3cd4e051fd3e00cd38dbb3c149",
+          "short_sha": "88a1d14",
+          "subject": "feat: cerrar resultados acreditados y proyectados de UX.4.5",
+          "category": "Funcionalidad"
+        },
+        {
+          "sha": "b40dc4414059ca5915f48675b90d4a4c23f91a93",
+          "short_sha": "b40dc44",
+          "subject": "test: validar cierre de resultados y accesibilidad de UX.4.5",
+          "category": "Pruebas"
+        },
+        {
+          "sha": "3430f2ed842c4820c207f429c87ca02b80293a5f",
+          "short_sha": "3430f2e",
+          "subject": "docs: documentar cierre funcional de UX.4.5",
+          "category": "Documentación"
+        }
+      ]
+    },
+    {
+      "global_revision": 16,
+      "legacy_version": "0.0.16-beta",
+      "tag": "v0.0.16-beta",
+      "historical_close_date": "2026-08-13",
+      "range_start": "338db37c2a4e0912101767adfea89e3d113e63c4",
+      "range_end": "6f138da7b3ac4d1b76d69f5bddf86055b8e2ec93",
+      "commit_count": 4,
+      "milestone": "Hardening PDF, privacidad, regresión E2E, CI y Dependabot.",
+      "commits": [
+        {
+          "sha": "338db37c2a4e0912101767adfea89e3d113e63c4",
+          "short_sha": "338db37",
+          "subject": "feat: endurecer importacion PDF y privacidad pre-beta",
+          "category": "Funcionalidad"
+        },
+        {
+          "sha": "7443a81a8c58cdbfec1518b3578f8f333e55c09f",
+          "short_sha": "7443a81",
+          "subject": "test: agregar regresion E2E y hardening pre-beta",
+          "category": "Pruebas"
+        },
+        {
+          "sha": "0bd26d3ee68065f5809350767b6daee7fde171f3",
+          "short_sha": "0bd26d3",
+          "subject": "ci: agregar validacion automatica y dependabot",
+          "category": "Mantenimiento técnico"
+        },
+        {
+          "sha": "6f138da7b3ac4d1b76d69f5bddf86055b8e2ec93",
+          "short_sha": "6f138da",
+          "subject": "docs: documentar hardening y preparacion pre-beta",
+          "category": "Documentación"
+        }
+      ]
+    },
+    {
+      "global_revision": 17,
+      "legacy_version": "0.0.17-beta",
+      "tag": "v0.0.17-beta",
+      "historical_close_date": "2026-08-13",
+      "range_start": "488aff584a4ea8456def6446b0996d122e6ca2a8",
+      "range_end": "e55190bd5fc6fac0bb9716cfa271521b6ed9c432",
+      "commit_count": 3,
+      "milestone": "Estrategia reproducible de dependencias pre-beta.",
+      "commits": [
+        {
+          "sha": "488aff584a4ea8456def6446b0996d122e6ca2a8",
+          "short_sha": "488aff5",
+          "subject": "chore: ajustar estrategia de dependencias pre-beta",
+          "category": "Mantenimiento técnico"
+        },
+        {
+          "sha": "b6a02e8159ca9bc003180e6ccc76c49761a5a6f6",
+          "short_sha": "b6a02e8",
+          "subject": "test: desacoplar validaciones de versiones fijas",
+          "category": "Pruebas"
+        },
+        {
+          "sha": "e55190bd5fc6fac0bb9716cfa271521b6ed9c432",
+          "short_sha": "e55190b",
+          "subject": "docs: documentar estrategia de dependencias pre-beta",
+          "category": "Documentación"
+        }
+      ]
+    },
+    {
+      "global_revision": 18,
+      "legacy_version": "0.0.18-beta",
+      "tag": "v0.0.18-beta",
+      "historical_close_date": "2026-08-13",
+      "range_start": "429201a1665c9a4a40f6f6e5c2c9fb4854a61752",
+      "range_end": "11aefca0c7233bea8e6dd8a44e5b6a69b32ecac8",
+      "commit_count": 3,
+      "milestone": "UX.4.6a: rediseño visual integral.",
+      "commits": [
+        {
+          "sha": "429201a1665c9a4a40f6f6e5c2c9fb4854a61752",
+          "short_sha": "429201a",
+          "subject": "feat(ux): completar rediseño visual integral UX.4.6a",
+          "category": "Funcionalidad"
+        },
+        {
+          "sha": "bd2d52ee190ee7fef8b6a68f89d4fb17a6f4a938",
+          "short_sha": "bd2d52e",
+          "subject": "test(ux): cubrir regresiones del rediseño UX.4.6a",
+          "category": "Pruebas"
+        },
+        {
+          "sha": "11aefca0c7233bea8e6dd8a44e5b6a69b32ecac8",
+          "short_sha": "11aefca",
+          "subject": "docs(ux): cerrar documentacion de UX.4.6a",
+          "category": "Documentación"
+        }
+      ]
+    },
+    {
+      "global_revision": 19,
+      "legacy_version": "0.0.19-beta",
+      "tag": "v0.0.19-beta",
+      "historical_close_date": "2026-08-13",
+      "range_start": "e6c2310dd0ebef11b5ba40b4e1fdb1d72716ced5",
+      "range_end": "83a67ed2e418428aa610e2f5d444c15667d5b427",
+      "commit_count": 3,
+      "milestone": "UX.4.6b: Paso 1, datos personales, privacidad e importación.",
+      "commits": [
+        {
+          "sha": "e6c2310dd0ebef11b5ba40b4e1fdb1d72716ced5",
+          "short_sha": "e6c2310",
+          "subject": "feat(ux): redisenar datos personales e importacion en UX.4.6b",
+          "category": "Funcionalidad"
+        },
+        {
+          "sha": "298c1e2f4cac0412213c809e93a6c0c7a7d9de34",
+          "short_sha": "298c1e2",
+          "subject": "test(ux): cubrir privacidad e importacion de UX.4.6b",
+          "category": "Pruebas"
+        },
+        {
+          "sha": "83a67ed2e418428aa610e2f5d444c15667d5b427",
+          "short_sha": "83a67ed",
+          "subject": "docs(ux): cerrar documentacion de UX.4.6b",
+          "category": "Documentación"
+        }
+      ]
+    },
+    {
+      "global_revision": 20,
+      "legacy_version": "0.0.20-beta",
+      "tag": "v0.0.20-beta",
+      "historical_close_date": "2026-08-13",
+      "range_start": "e80d15e5c948a38118f3a755c28a3c8550062e65",
+      "range_end": "2a69fb839abd8dbdec225165be724f35d9d8f674",
+      "commit_count": 3,
+      "milestone": "UX.4.6c: Paso 2, cuotas e importación contextual.",
+      "commits": [
+        {
+          "sha": "e80d15e5c948a38118f3a755c28a3c8550062e65",
+          "short_sha": "e80d15e",
+          "subject": "feat(ux): redisenar cuotas e importacion contextual en UX.4.6c",
+          "category": "Funcionalidad"
+        },
+        {
+          "sha": "8fbe80612e6e3e1f3ccf5d4a50fe4db458cb2c01",
+          "short_sha": "8fbe806",
+          "subject": "test(ux): cubrir cuotas e importacion contextual de UX.4.6c",
+          "category": "Pruebas"
+        },
+        {
+          "sha": "2a69fb839abd8dbdec225165be724f35d9d8f674",
+          "short_sha": "2a69fb8",
+          "subject": "docs(ux): cerrar documentacion de UX.4.6c",
+          "category": "Documentación"
+        }
+      ]
+    },
+    {
+      "global_revision": 21,
+      "legacy_version": "0.0.21-beta",
+      "tag": "v0.0.21-beta",
+      "historical_close_date": "2026-08-17",
+      "range_start": "05232df61f7557d441e5c5789a430f3ab23a8d72",
+      "range_end": "7941f58eac47a27b58c8a8954468ad55eab440b2",
+      "commit_count": 3,
+      "milestone": "UX.4.6d: Paso 3, Ficha Digital, sincronización de Pasos 1–3 y cierre integral.",
+      "commits": [
+        {
+          "sha": "05232df61f7557d441e5c5789a430f3ab23a8d72",
+          "short_sha": "05232df",
+          "subject": "feat(ux): completar UX.4.6d en los pasos 1 a 3",
+          "category": "Funcionalidad"
+        },
+        {
+          "sha": "f0fa70df91513ce079f8d146cb7ab13c3b5619fe",
+          "short_sha": "f0fa70d",
+          "subject": "docs(ux): cerrar documentacion de UX.4.6d",
+          "category": "Documentación"
+        },
+        {
+          "sha": "7941f58eac47a27b58c8a8954468ad55eab440b2",
+          "short_sha": "7941f58",
+          "subject": "docs(ux): consolidar cierre final de UX.4.6d",
+          "category": "Documentación"
+        }
+      ]
+    }
+  ]
+}
