@@ -374,3 +374,17 @@ contenga G001–G110, que G111 sea el siguiente Global y que el snapshot histór
 G070 conserve su SHA-256. `v0.0.71.01-beta` no se mueve para corregir su
 numeración histórica. REL.GOV.1 quedó aceptado como G110/E01 mediante PR #85 y merge `5cd1cea`.
 La promoción post-merge no consume G111; DOC.2 continúa con G111/E01 (`0.1.11.01-beta`).
+
+## Backfill histórico completado el 2026-08-26
+
+REL.GOV.1 se aplicó también a los tags formales históricos ya existentes:
+
+- inventario confirmado: **29 tags formales reales**;
+- inventario final: **29 GitHub Releases**;
+- `v0.0.1-beta`–`v0.0.26-beta` recibieron Releases retrospectivos administrativos;
+- no se crearon tags nuevos para cubrir huecos inexistentes;
+- la fecha del GitHub Release retrospectivo no sustituye la fecha histórica del hito ni del tag;
+- ningún tag fue movido, borrado o recreado;
+- el backfill de metadata no consume un Global.
+
+La regla futura permanece: un nuevo tag formal debe publicarse con su GitHub Release conforme al contrato de esta guía.

@@ -1090,3 +1090,19 @@ REL.GOV.1 R1 fue aceptado mediante PR #85 y merge `5cd1cea`. La promoción post-
 - conserva G109/E01, `v0.1.09.01-beta` y `v0.0.71.01-beta` como evidencia publicada e inmutable;
 - no consume G111 por ser sincronización del estado G110 ya aceptado;
 - requiere `pip check`, auditoría Markdown, compilación Python, sintaxis JavaScript, suite completa, `release_contract.py` y `git diff --check` antes del commit firmado.
+
+## Gate candidato DOC.2 R1 — reconstrucción del CHANGELOG legacy
+
+DOC.2 R1 parte de la línea base G110/E01 publicada y no modifica motores, normativa ni `VERSION`.
+
+Controles específicos:
+
+- `data/doc2-legacy-changelog-evidence.json` contiene exactamente 21 estados y 80 commits únicos;
+- cada tag `v0.0.1-beta`–`v0.0.21-beta` apunta al cierre registrado;
+- `CHANGELOG.md` conserva rango, cantidad de commits, hito y cada sujeto de commit por estado;
+- el commit raíz anómalo se preserva sin reescritura;
+- `VERSION` continúa en `0.1.10.01-beta`;
+- ledger: `accepted_count=110`, G111/E01 reservado para DOC.2;
+- metadata de Releases sincronizada: 29 tags formales ↔ 29 GitHub Releases.
+
+Con las 8 regresiones nuevas de DOC.2 R1, la suite candidata esperada pasa de 1058 a **1066 pruebas**. La aceptación de G111 requiere además `pip check`, auditoría Markdown, compilación Python, sintaxis JavaScript, `git diff --check`, commit firmado y CI remota verde.

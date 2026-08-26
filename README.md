@@ -20,17 +20,17 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 
 ## Estado del proyecto
 
-- **Versión canónica vigente:** `0.1.10.01-beta`, obtenida exclusivamente desde [`VERSION`](VERSION). Materializa G110/E01 después de aceptar REL.GOV.1 mediante PR #85; su tag/Release se publican únicamente después de integrar y revalidar esta promoción.
-- **Último cierre integrado en `main`:** REL.GOV.1 R1 en `5cd1cea` (PR #85), posterior a la promoción G109/E01 en `6de6f32` (PR #84).
+- **Versión canónica vigente:** `0.1.10.01-beta`, obtenida exclusivamente desde [`VERSION`](VERSION). Materializa G110/E01: REL.GOV.1 fue aceptado mediante PR #85 y la promoción final mediante PR #86; el tag firmado `v0.1.10.01-beta` y su GitHub Release prerelease están publicados.
+- **Último cierre integrado en `main`:** promoción G110/E01 en `cef373a` (PR #86), sobre REL.GOV.1 R1 en `5cd1cea` (PR #85).
 - **Estado de SEC.2:** cerrado después de R1–R6; AUD.SEC2 R1 corrigió la regresión del kill switch administrativo, alineó documentación/ledger y quedó aceptado como G109.
 - **Estado revision-aware reconciliado:** G110/E01 (`0.1.10.01-beta`) aceptado para REL.GOV.1; G111/E01 (`0.1.11.01-beta`) queda disponible para DOC.2.
-- **Último tag revision-aware publicado:** `v0.1.09.01-beta` (G109/E01), firmado y asociado a GitHub Release. `v0.1.10.01-beta` queda pendiente hasta integrar/revalidar la promoción G110; `v0.0.71.01-beta` permanece inmutable y reconciliado como G087/E01.
+- **Último tag revision-aware publicado:** `v0.1.10.01-beta` (G110/E01), firmado, verificado y asociado a GitHub Release prerelease; `v0.1.09.01-beta` y `v0.0.71.01-beta` permanecen preservados.
 - **Última versión formal legacy:** `0.0.26-beta` — tag firmado e inmutable `v0.0.26-beta`.
 - **Etapa:** desarrollo beta; repositorio público y ejecución orientada actualmente a entorno local.
 - **GOV.1, PLAN.1, DEV.2, MANT.1, DOC.1 R1, NOR.1, NOR.2 y DOC.1 R2:** cerrados.
 - **NOR.2:** cerrado después de R1–R8; sus evidencias históricas permanecen preservadas.
 - **SEC.2:** R1–R6 cerrados: hardening CodeQL, autenticación administrativa, protección centralizada, auditoría, sesión web y endurecimiento configurable para HTTPS interno.
-- **Preflight antes de DOC.2:** REL.GOV.1 quedó aceptado como G110/E01; DOC.2 es el siguiente bloque y comenzará con G111/E01 (`0.1.11.01-beta`).
+- **DOC.2:** R1 reconstruye el CHANGELOG legacy como candidato de G111/E01 (`0.1.11.01-beta`); G111 permanece reservado y no se consume hasta completar gate, commit firmado, PR/CI y merge.
 - **Primera versión oficial objetivo:** `1.0.0.0` con `Build 000001`, únicamente después de cerrar todos los gates definidos en el plan maestro.
 
 La visibilidad pública del repositorio **no convierte una beta de desarrollo en versión oficial, no constituye un despliegue de producción y no modifica por sí sola la licencia vigente**.
@@ -120,6 +120,8 @@ La documentación vigente debe apuntar únicamente a rutas canónicas actuales. 
 `0.0.1-beta` a `0.0.21-beta` son **estados reconstruidos retrospectivamente** a partir del historial Git. No fueron tags publicados en sus fechas originales.
 
 `0.0.22-beta` fue la primera versión formal adoptada bajo la política de GOV.1.2; `0.0.23-beta` cerró GOV.1.3; `0.0.24-beta` cerró integralmente GOV.1; `0.0.25-beta` cerró UX.4.6e; y `0.0.26-beta` cerró PLAN.1. Sus tags publicados permanecen firmados e inmutables.
+
+El 2026-08-26 se completó el backfill administrativo de GitHub Releases: los **29 tags formales reales** del repositorio cuentan con **29 GitHub Releases**. Los Releases de `v0.0.1-beta`–`v0.0.26-beta` creados retrospectivamente no cambian la fecha histórica, firma ni commit objetivo de sus tags.
 
 Después de `v0.0.26-beta`, UX.4.6f–UX.4.6i continuaron históricamente sobre ese mismo valor de `VERSION`. VER.2 reconstruye todo el tramo sin inventar tags: el último estado aceptado de la base `7037addd` es **G070/E02**, cierre de UX.4.6i.
 

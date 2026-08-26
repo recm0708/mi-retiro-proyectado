@@ -41,10 +41,12 @@ class TestG110PromotionPostMerge(unittest.TestCase):
             self.assertIn("DOC.2", text)
         self.assertIn("no consume G111", ledger)
 
-    def test_release_g110_queda_pendiente_hasta_revalidar_main(self):
+    def test_release_g110_esta_publicado_y_preserva_historia(self):
         releases = (ROOT / "RELEASES.md").read_text(encoding="utf-8")
         self.assertIn("v0.1.10.01-beta", releases)
-        self.assertIn("pendientes hasta integrar/revalidar", releases)
+        self.assertIn("PR #86", releases)
+        self.assertIn("29 tags", releases)
+        self.assertIn("29 Releases", releases)
         self.assertIn("v0.1.09.01-beta", releases)
 
 

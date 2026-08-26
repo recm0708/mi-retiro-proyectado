@@ -6,12 +6,21 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ## [Unreleased]
 
+
+### DOC.2 R1 — reconstrucción auditable del CHANGELOG legacy
+
+- reconstruye `0.0.1-beta`–`0.0.21-beta` desde 80 commits reales y los rangos canónicos de `RELEASES.md`;
+- preserva el carácter retrospectivo de esos estados y los tags materializados posteriormente;
+- agrega evidencia machine-readable en `data/doc2-legacy-changelog-evidence.json` y auditoría en `docs/audits/documentation/changelog-reconstruction-doc2-r1.md`;
+- sincroniza el cierre real de G110: `v0.1.10.01-beta` y su GitHub Release están publicados;
+- registra el backfill administrativo histórico: 29 tags formales cuentan con 29 GitHub Releases, sin mover ni recrear tags;
+- G111/E01 (`0.1.11.01-beta`) continúa reservado para DOC.2 y no se consume hasta gate, commit firmado, PR/CI y merge.
 ## [0.1.10.01-beta]
 - G110/E01: REL.GOV.1 R1 aceptado mediante PR #85 y merge `5cd1cea`; normaliza el gobierno de GitHub Releases y corrige la interpretación viva de `v0.0.71.01-beta` como G087/E01 sin alterar su tag histórico.
 - Releases: incorpora `.github/release.yml`, `scripts/release_contract.py` y validación de tag en GitHub Actions para estandarizar título, prerelease, cuerpo mínimo, firma y correspondencia VERSION/ledger/tag.
-- Gate: 1054 pruebas locales en `OK`, Markdown 142/142, CI Python 3.13/3.14, Markdown Audit y Repository Governance Audit en `success`.
+- Gate REL.GOV.1 R1: 1054 pruebas locales en `OK`, Markdown 142/142, CI Python 3.13/3.14, Markdown Audit y Repository Governance Audit en `success`; la promoción G110/E01 fue revalidada posteriormente con 1058 pruebas en `OK` antes del tag.
 - Ledger: G110 queda aceptado; G111/E01 (`0.1.11.01-beta`) pasa a ser el siguiente candidato disponible para DOC.2.
-- Tag/Release: `v0.1.10.01-beta` queda pendiente de creación firmada/publicación después de integrar y revalidar esta promoción; `v0.1.09.01-beta` y `v0.0.71.01-beta` permanecen inmutables.
+- Tag/Release: `v0.1.10.01-beta` fue creado de forma firmada sobre `cef373a`, pasó Git Tag Signature Verification y cuenta con GitHub Release prerelease; los tags históricos permanecen inmutables.
 
 ## [0.1.09.01-beta]
 - G109/E01: promoción post-merge de AUD.SEC2 R1 después de PR #83, 1040 pruebas locales y CI remota en Python 3.13/3.14 + auditorías de Markdown/gobernanza en `success`; la sincronización no consume G110.
@@ -572,91 +581,455 @@ Primera versión formal gobernada por `VERSIONING.md`.
 
 ## Estados retrospectivos 0.0.1-beta a 0.0.21-beta
 
-> Estos números son una reconstrucción documental. Los rangos exactos de commits están en `RELEASES.md`.
+> Estos estados fueron reconstruidos retrospectivamente. DOC.2 R1 detalla cada rango con los commits reales preservados en Git.
 
 ### [0.0.21-beta] — 2026-08-17
 
-UX.4.6d: cierre del Paso 3, Ficha Digital, reconciliación de cuotas e integración Pasos 1–3.
+> Estado retrospectivo asignado por GOV.1.1 a un rango real del historial. El tag `v0.0.21-beta` fue materializado posteriormente sin alterar esos commits.
+
+**Evidencia Git:** `05232df` → `7941f58` · **3 commits**.
+
+**Hito reconstruido:** UX.4.6d: Paso 3, Ficha Digital, sincronización de Pasos 1–3 y cierre integral.
+
+#### Funcionalidad
+
+- `05232df` — feat(ux): completar UX.4.6d en los pasos 1 a 3
+
+#### Documentación
+
+- `f0fa70d` — docs(ux): cerrar documentacion de UX.4.6d
+- `7941f58` — docs(ux): consolidar cierre final de UX.4.6d
 
 ### [0.0.20-beta] — 2026-08-13
 
-UX.4.6c: cierre del Paso 2, cuotas e importación contextual por campo.
+> Estado retrospectivo asignado por GOV.1.1 a un rango real del historial. El tag `v0.0.20-beta` fue materializado posteriormente sin alterar esos commits.
+
+**Evidencia Git:** `e80d15e` → `2a69fb8` · **3 commits**.
+
+**Hito reconstruido:** UX.4.6c: Paso 2, cuotas e importación contextual.
+
+#### Funcionalidad
+
+- `e80d15e` — feat(ux): redisenar cuotas e importacion contextual en UX.4.6c
+
+#### Pruebas
+
+- `8fbe806` — test(ux): cubrir cuotas e importacion contextual de UX.4.6c
+
+#### Documentación
+
+- `2a69fb8` — docs(ux): cerrar documentacion de UX.4.6c
 
 ### [0.0.19-beta] — 2026-08-13
 
-UX.4.6b: Paso 1, datos personales, consentimiento, privacidad e importación de Mi Retiro Seguro.
+> Estado retrospectivo asignado por GOV.1.1 a un rango real del historial. El tag `v0.0.19-beta` fue materializado posteriormente sin alterar esos commits.
+
+**Evidencia Git:** `e6c2310` → `83a67ed` · **3 commits**.
+
+**Hito reconstruido:** UX.4.6b: Paso 1, datos personales, privacidad e importación.
+
+#### Funcionalidad
+
+- `e6c2310` — feat(ux): redisenar datos personales e importacion en UX.4.6b
+
+#### Pruebas
+
+- `298c1e2` — test(ux): cubrir privacidad e importacion de UX.4.6b
+
+#### Documentación
+
+- `83a67ed` — docs(ux): cerrar documentacion de UX.4.6b
 
 ### [0.0.18-beta] — 2026-08-13
 
-UX.4.6a: rediseño visual integral, nueva página de Inicio y sistema visual transversal.
+> Estado retrospectivo asignado por GOV.1.1 a un rango real del historial. El tag `v0.0.18-beta` fue materializado posteriormente sin alterar esos commits.
+
+**Evidencia Git:** `429201a` → `11aefca` · **3 commits**.
+
+**Hito reconstruido:** UX.4.6a: rediseño visual integral.
+
+#### Funcionalidad
+
+- `429201a` — feat(ux): completar rediseño visual integral UX.4.6a
+
+#### Pruebas
+
+- `bd2d52e` — test(ux): cubrir regresiones del rediseño UX.4.6a
+
+#### Documentación
+
+- `11aefca` — docs(ux): cerrar documentacion de UX.4.6a
 
 ### [0.0.17-beta] — 2026-08-13
 
-Estrategia reproducible de dependencias y mantenimiento pre-beta.
+> Estado retrospectivo asignado por GOV.1.1 a un rango real del historial. El tag `v0.0.17-beta` fue materializado posteriormente sin alterar esos commits.
+
+**Evidencia Git:** `488aff5` → `e55190b` · **3 commits**.
+
+**Hito reconstruido:** Estrategia reproducible de dependencias pre-beta.
+
+#### Pruebas
+
+- `b6a02e8` — test: desacoplar validaciones de versiones fijas
+
+#### Documentación
+
+- `e55190b` — docs: documentar estrategia de dependencias pre-beta
+
+#### Mantenimiento técnico
+
+- `488aff5` — chore: ajustar estrategia de dependencias pre-beta
 
 ### [0.0.16-beta] — 2026-08-13
 
-Hardening de PDFs, privacidad, regresiones E2E, CI y Dependabot.
+> Estado retrospectivo asignado por GOV.1.1 a un rango real del historial. El tag `v0.0.16-beta` fue materializado posteriormente sin alterar esos commits.
+
+**Evidencia Git:** `338db37` → `6f138da` · **4 commits**.
+
+**Hito reconstruido:** Hardening PDF, privacidad, regresión E2E, CI y Dependabot.
+
+#### Funcionalidad
+
+- `338db37` — feat: endurecer importacion PDF y privacidad pre-beta
+
+#### Pruebas
+
+- `7443a81` — test: agregar regresion E2E y hardening pre-beta
+
+#### Documentación
+
+- `6f138da` — docs: documentar hardening y preparacion pre-beta
+
+#### Mantenimiento técnico
+
+- `0bd26d3` — ci: agregar validacion automatica y dependabot
 
 ### [0.0.15-beta] — 2026-08-13
 
-UX.4.5: comparación entre información acreditada y proyección, con cierre accesible.
+> Estado retrospectivo asignado por GOV.1.1 a un rango real del historial. El tag `v0.0.15-beta` fue materializado posteriormente sin alterar esos commits.
+
+**Evidencia Git:** `88a1d14` → `3430f2e` · **3 commits**.
+
+**Hito reconstruido:** UX.4.5: información acreditada frente a proyectada y cierre accesible.
+
+#### Funcionalidad
+
+- `88a1d14` — feat: cerrar resultados acreditados y proyectados de UX.4.5
+
+#### Pruebas
+
+- `b40dc44` — test: validar cierre de resultados y accesibilidad de UX.4.5
+
+#### Documentación
+
+- `3430f2e` — docs: documentar cierre funcional de UX.4.5
 
 ### [0.0.14-beta] — 2026-08-13
 
-UX.4.4: edad anual, detalle salarial del año actual e importación documental revisable.
+> Estado retrospectivo asignado por GOV.1.1 a un rango real del historial. El tag `v0.0.14-beta` fue materializado posteriormente sin alterar esos commits.
+
+**Evidencia Git:** `5ca39ac` → `f4a0d45` · **6 commits**.
+
+**Hito reconstruido:** UX.4.4: edad anual, detalle salarial e importación documental.
+
+#### Funcionalidad
+
+- `abb4fad` — feat: mostrar edad anual en linea temporal de UX.4.4
+- `10c4e48` — feat: completar detalle salarial e importacion oficial de UX.4.4
+
+#### Pruebas
+
+- `5ca39ac` — test: validar edad anual en linea temporal de UX.4.4
+- `be7f711` — test: validar detalle salarial e importacion oficial de UX.4.4
+
+#### Documentación
+
+- `5be85f8` — docs: documentar cierre UX.4.3 e inicio UX.4.4
+- `f4a0d45` — docs: documentar cierre funcional de UX.4.4
 
 ### [0.0.13-beta] — 2026-08-12
 
-UX.4.3: validación accesible, recuperación de foco, teclado y estabilidad del frontend.
+> Estado retrospectivo asignado por GOV.1.1 a un rango real del historial. El tag `v0.0.13-beta` fue materializado posteriormente sin alterar esos commits.
+
+**Evidencia Git:** `b671c9a` → `9f849d0` · **2 commits**.
+
+**Hito reconstruido:** UX.4.3: validación accesible, teclado, errores y estabilidad.
+
+#### Correcciones
+
+- `b671c9a` — fix: cerrar validacion accesible y estabilidad de UX.4.3
+
+#### Pruebas
+
+- `9f849d0` — test: validar formularios teclado y errores de UX.4.3
 
 ### [0.0.12-beta] — 2026-08-12
 
-UX.4.2: estados activos y selección perceptible.
+> Estado retrospectivo asignado por GOV.1.1 a un rango real del historial. El tag `v0.0.12-beta` fue materializado posteriormente sin alterar esos commits.
+
+**Evidencia Git:** `5607cc1` → `6e6b33b` · **3 commits**.
+
+**Hito reconstruido:** UX.4.2: estados activos y selección perceptible.
+
+#### Funcionalidad
+
+- `5607cc1` — feat: reforzar estados activos y seleccion visual de UX.4.2
+
+#### Pruebas
+
+- `5a01293` — test: validar estados activos y seleccion de UX.4.2
+
+#### Documentación
+
+- `6e6b33b` — docs: documentar estados visuales de UX.4.2
 
 ### [0.0.11-beta] — 2026-08-12
 
-UX.4.1: accesibilidad semántica y ayudas contextuales.
+> Estado retrospectivo asignado por GOV.1.1 a un rango real del historial. El tag `v0.0.11-beta` fue materializado posteriormente sin alterar esos commits.
+
+**Evidencia Git:** `c2da494` → `1f350f6` · **3 commits**.
+
+**Hito reconstruido:** UX.4.1: accesibilidad y ayudas contextuales.
+
+#### Funcionalidad
+
+- `c2da494` — feat: mejorar accesibilidad y refinamientos de UX.4.1
+
+#### Pruebas
+
+- `4e3434d` — test: validar accesibilidad y remate visual de UX.4.1
+
+#### Documentación
+
+- `1f350f6` — docs: documentar UX.4.1 y herramientas de validacion
 
 ### [0.0.10-beta] — 2026-08-12
 
-Mantenimiento técnico de finales de línea, estructura, respaldos y favicon temporal.
+> Estado retrospectivo asignado por GOV.1.1 a un rango real del historial. El tag `v0.0.10-beta` fue materializado posteriormente sin alterar esos commits.
+
+**Evidencia Git:** `3f2f5d7` → `8feb682` · **6 commits**.
+
+**Hito reconstruido:** Mantenimiento técnico: LF, favicon temporal, estructura y respaldos.
+
+#### Correcciones
+
+- `a5f4b7b` — fix: evitar 404 temporal del favicon
+
+#### Pruebas
+
+- `263a0a8` — test: validar normalizacion LF y favicon temporal
+
+#### Documentación
+
+- `6ccda5c` — docs: documentar mantenimiento tecnico previo a UX.4
+- `8feb682` — docs: documentar estructura y respaldos externos
+
+#### Mantenimiento técnico
+
+- `3f2f5d7` — chore: normalizar finales de linea del repositorio
+- `a9d8e5c` — chore: limpiar marcadores obsoletos de estructura
 
 ### [0.0.9-beta] — 2026-08-12
 
-Identidad de producto, temas, accesibilidad base y terminología pública.
+> Estado retrospectivo asignado por GOV.1.1 a un rango real del historial. El tag `v0.0.9-beta` fue materializado posteriormente sin alterar esos commits.
+
+**Evidencia Git:** `376a967` → `e6b02dc` · **4 commits**.
+
+**Hito reconstruido:** Identidad, temas, accesibilidad y terminología pública.
+
+#### Funcionalidad
+
+- `376a967` — feat: consolidar identidad temas y accesibilidad de interfaz
+
+#### Pruebas
+
+- `7ed97ff` — test: validar identidad temas accesibilidad y fuentes
+
+#### Documentación
+
+- `e6b02dc` — docs: actualizar identidad metodologia y fuentes normativas
+
+#### Refactorización
+
+- `74fbd29` — refactor: alinear terminologia publica y trazabilidad previsional
 
 ### [0.0.8-beta] — 2026-08-12
 
-UX.3: responsive y precisión del corte mensual de cuotas.
+> Estado retrospectivo asignado por GOV.1.1 a un rango real del historial. El tag `v0.0.8-beta` fue materializado posteriormente sin alterar esos commits.
+
+**Evidencia Git:** `6d4c2d8` → `d599ee2` · **3 commits**.
+
+**Hito reconstruido:** UX.3: responsive y precisión del corte mensual de cuotas.
+
+#### Funcionalidad
+
+- `6d4c2d8` — feat: mejorar UX responsive y precision del corte de cuotas
+
+#### Pruebas
+
+- `54c9762` — test: validar UX responsive y corte mensual de cuotas
+
+#### Documentación
+
+- `d599ee2` — docs: documentar UX.3 y corte mensual de cuotas
 
 ### [0.0.7-beta] — 2026-08-12
 
-Comparador, trazabilidad, resultado unificado y cierre funcional de Fase 6.
+> Estado retrospectivo asignado por GOV.1.1 a un rango real del historial. El tag `v0.0.7-beta` fue materializado posteriormente sin alterar esos commits.
+
+**Evidencia Git:** `c442ec2` → `e956ea9` · **4 commits**.
+
+**Hito reconstruido:** Comparador, trazabilidad, resultado unificado y cierre funcional de Fase 6.
+
+#### Funcionalidad
+
+- `c442ec2` — feat: completar comparador trazabilidad y cierre funcional
+
+#### Pruebas
+
+- `68be9a9` — test: validar comparador trazabilidad y resultado unificado
+
+#### Documentación
+
+- `e956ea9` — docs: cerrar fase 6 y documentar metodologia y resultados
+
+#### Mantenimiento técnico
+
+- `35fbd9f` — chore: agregar dependencia para pruebas HTTP
 
 ### [0.0.6-beta] — 2026-08-11
 
-Organización del repositorio, centralización normativa y casos de validación.
+> Estado retrospectivo asignado por GOV.1.1 a un rango real del historial. El tag `v0.0.6-beta` fue materializado posteriormente sin alterar esos commits.
+
+**Evidencia Git:** `fa5348f` → `e087d6e` · **4 commits**.
+
+**Hito reconstruido:** Organización del repositorio, centralización normativa y casos de validación.
+
+#### Documentación
+
+- `1ee2b0c` — docs: reorganizar documentacion y fuentes normativas
+- `e087d6e` — docs: actualizar guia de casos de validacion
+
+#### Mantenimiento técnico
+
+- `fa5348f` — chore: ordenar configuracion y reglas del repositorio
+- `7051916` — chore: centralizar fuentes y metadatos normativos
 
 ### [0.0.5-beta] — 2026-08-11
 
-Motores del Subsistema Mixto y SUCGS.
+> Estado retrospectivo asignado por GOV.1.1 a un rango real del historial. El tag `v0.0.5-beta` fue materializado posteriormente sin alterar esos commits.
+
+**Evidencia Git:** `d41682c` → `8a7e381` · **3 commits**.
+
+**Hito reconstruido:** Motores Mixto y SUCGS.
+
+#### Funcionalidad
+
+- `d41682c` — feat: completar motores Mixto y SUCGS
+
+#### Pruebas
+
+- `292e10f` — test: validar motores Mixto y SUCGS
+
+#### Documentación
+
+- `8a7e381` — docs: documentar motores Mixto y SUCGS
 
 ### [0.0.4-beta] — 2026-08-11
 
-Motor SEBD, modalidades e Indemnización por Vejez.
+> Estado retrospectivo asignado por GOV.1.1 a un rango real del historial. El tag `v0.0.4-beta` fue materializado posteriormente sin alterar esos commits.
+
+**Evidencia Git:** `563d6c4` → `2d4dfd0` · **7 commits**.
+
+**Hito reconstruido:** Motor SEBD, modalidades e Indemnización por Vejez.
+
+#### Funcionalidad
+
+- `563d6c4` — feat: implementar modalidades SEBD y resultados integrados
+- `d7d8c71` — feat: completar indemnizacion por vejez SEBD
+
+#### Correcciones
+
+- `2d4dfd0` — fix: incluir parametros normativos de indemnizacion por vejez
+
+#### Pruebas
+
+- `3e7c8ab` — test: validar modalidades y escenarios SEBD
+- `266cc97` — test: validar indemnizacion por vejez SEBD
+
+#### Documentación
+
+- `2567191` — docs: documentar modalidades y motor SEBD
+- `fb5857d` — docs: documentar indemnizacion por vejez SEBD
 
 ### [0.0.3-beta] — 2026-08-11
 
-Retiro, precisión monetaria, pruebas y protección de datos de validación.
+> Estado retrospectivo asignado por GOV.1.1 a un rango real del historial. El tag `v0.0.3-beta` fue materializado posteriormente sin alterar esos commits.
+
+**Evidencia Git:** `a7e1ed4` → `78e5188` · **4 commits**.
+
+**Hito reconstruido:** Retiro, precisión monetaria, pruebas y protección de datos de validación.
+
+#### Funcionalidad
+
+- `a7e1ed4` — feat: completar retiro y precision monetaria
+
+#### Pruebas
+
+- `8a0c8fc` — test: agregar validaciones de precision y retiro
+
+#### Documentación
+
+- `78e5188` — docs: documentar precision retiro y validacion
+
+#### Mantenimiento técnico
+
+- `204c479` — chore: normalizar archivos y proteger datos de validacion
 
 ### [0.0.2-beta] — 2026-08-11
 
-Historial salarial, proyección y línea temporal.
+> Estado retrospectivo asignado por GOV.1.1 a un rango real del historial. El tag `v0.0.2-beta` fue materializado posteriormente sin alterar esos commits.
+
+**Evidencia Git:** `ae45943` → `eafe54d` · **3 commits**.
+
+**Hito reconstruido:** Historial salarial, proyección y línea temporal.
+
+#### Funcionalidad
+
+- `ae45943` — feat: integrar historial salarial y linea temporal de proyeccion
+
+#### Documentación
+
+- `1718194` — docs: actualizar historial y proyeccion salarial
+- `eafe54d` — docs: actualizar guia de contribucion
 
 ### [0.0.1-beta] — 2026-08-10
 
-Base técnica, FastAPI, primera interfaz, asistente, cuotas, salario y documentación inicial.
+> Estado retrospectivo asignado por GOV.1.1 a un rango real del historial. El tag `v0.0.1-beta` fue materializado posteriormente sin alterar esos commits.
+
+**Evidencia Git:** `a0a9e09` → `13ce028` · **6 commits**.
+
+**Hito reconstruido:** Base técnica, FastAPI, primera interfaz, asistente, cuotas, salario y documentación inicial.
+
+#### Funcionalidad
+
+- `422bbab` — feat: agregar interfaz inicial y asistente de simulacion
+- `47635ee` — feat: agregar analisis de cuotas y persistencia temporal
+- `fa67022` — feat: agregar cuotas y salario al asistente de simulacion
+
+#### Documentación
+
+- `13ce028` — docs: normalizar comentarios y documentacion del codigo
+
+#### Mantenimiento técnico
+
+- `f329826` — chore: inicializar estructura del proyecto
+
+#### Otros cambios
+
+- `a0a9e09` — tipo: descripción del cambio
+
+**Nota histórica:** el commit raíz `a0a9e09` conserva el mensaje `tipo: descripción del cambio`; DOC.2 lo registra como anomalía histórica y no lo reescribe.
 
 ## Evidencia histórica
 

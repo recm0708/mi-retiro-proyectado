@@ -1,9 +1,9 @@
 # Índice de documentación
 
 **Estado:** vigente
-**Versión de aplicación:** `0.1.10.01-beta` — G110/E01 aceptado para REL.GOV.1; G111/E01 disponible para DOC.2; ledger vivo hasta G110
+**Versión de aplicación:** `0.1.10.01-beta` — G110/E01 publicado; DOC.2 R1 en ejecución con G111/E01 reservado; ledger vivo hasta G110
 **Último tag formal legacy:** `v0.0.26-beta`
-**Última actualización transversal:** promoción post-merge G110/E01 de REL.GOV.1 R1 — 2026-08-25
+**Última actualización transversal:** DOC.2 R1 — reconstrucción auditable del CHANGELOG legacy y sincronización de Releases — 2026-08-26
 **Cierres históricos preservados:** UX.4.6i / PR #34 — 841 pruebas; UX.4.6e R9 — `v0.0.25-beta`
 
 Este archivo es el punto de entrada para la documentación técnica, funcional, normativa, de privacidad, validación y auditoría de Mi Retiro Proyectado.
@@ -11,7 +11,7 @@ Este archivo es el punto de entrada para la documentación técnica, funcional, 
 
 ## Estado de normalización del repositorio
 
-**Estado actual:** NOR.2, DOC.1 R2, SEC.2, AUD.SEC2 R1 y REL.GOV.1 están cerrados. G110/E01 se materializa en `VERSION` como `0.1.10.01-beta`; DOC.2 es el siguiente bloque con G111/E01 disponible.
+**Estado actual:** NOR.2, DOC.1 R2, SEC.2, AUD.SEC2 R1 y REL.GOV.1 están cerrados. G110/E01 está publicado como `0.1.10.01-beta`; DOC.2 R1 está en ejecución con G111/E01 reservado y todavía no consumido.
 
 Estado de la fase:
 
@@ -42,6 +42,7 @@ Evidencia:
 - [`audits/repository/repository-normalization-local-artifacts-nor2-r7.md`](audits/repository/repository-normalization-local-artifacts-nor2-r7.md) — migración y depuración de artefactos locales R7.
 - [`audits/repository/repository-normalization-final-audit-nor2-r8.md`](audits/repository/repository-normalization-final-audit-nor2-r8.md) — auditoría integral y gate de cierre R8.
 - [`audits/documentation/documentation-markdown-audit-doc1-r2.md`](audits/documentation/documentation-markdown-audit-doc1-r2.md) — auditoría integral Markdown post-NOR.2 y controles permanentes de DOC.1 R2.
+- [`audits/documentation/changelog-reconstruction-doc2-r1.md`](audits/documentation/changelog-reconstruction-doc2-r1.md) — reconstrucción auditable DOC.2 R1 de 80 commits en 21 estados legacy.
 - [`standards/README.md`](standards/README.md) — estándares canónicos del repositorio.
 ## 1. Producto y alcance
 

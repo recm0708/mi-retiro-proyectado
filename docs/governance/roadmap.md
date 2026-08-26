@@ -5,7 +5,7 @@
 **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
 **Último tag formal legacy:** `v0.0.26-beta`
 **Fecha de revisión:** 2026-08-25
-**Estado actual:** SEC.2 y AUD.SEC2 R1 están cerrados. REL.GOV.1 R1 quedó aceptado como G110/E01 mediante PR #85 y merge `5cd1cea`; DOC.2 es el siguiente bloque con G111/E01 (`0.1.11.01-beta`) disponible.
+**Estado actual:** SEC.2, AUD.SEC2 R1 y REL.GOV.1 están cerrados. G110/E01 fue promovido por PR #86 y publicado como `v0.1.10.01-beta`; DOC.2 R1 está en ejecución con G111/E01 (`0.1.11.01-beta`) reservado y no consumido.
 
 
 <!-- NOR1-R7-CLOSURE:START -->
@@ -22,7 +22,7 @@ La secuencia operativa previa a SEC.2 queda:
 3. **SEC.2** — hardening integral — cerrado después de R1–R6;
 4. **AUD.SEC2 R1** — saneamiento post-cierre y reconciliación revision-aware — cerrado/aceptado como G109/E01 mediante PR #83;
 5. **REL.GOV.1** — preflight transversal de gobierno de Releases; cerrado/aceptado como G110/E01 mediante PR #85; no agrega un bloque funcional al plan de 14 bloques.
-6. **DOC.2** — siguiente bloque funcional después de REL.GOV.1; comenzará con G111/E01.
+6. **DOC.2** — R1 en ejecución: reconstrucción auditable del CHANGELOG `0.0.1-beta`–`0.0.21-beta`; G111/E01 permanece reservado hasta aceptación.
 
 NOR.2 ejecutó los movimientos, renombrados, consolidaciones y retiros que
 NOR.1 deliberadamente no realizó.
@@ -210,7 +210,7 @@ No existe una una revisión intermedia no demostrada entre UX.4.6i R1 y R1.2 dem
 
 **VER.2:** bloque transversal cerrado. La primera promoción se publicó como `0.0.71.01-beta`; AUD.SEC2 R1 documenta que el ledger usado entonces terminaba en G070 y que la reconstrucción completa sitúa ese estado en G087 sin modificar el tag inmutable.
 
-**Checkpoint técnico actual:** REL.GOV.1 R1 está aceptado como G110/E01 (`0.1.10.01-beta`) mediante PR #85 y merge `5cd1cea`. DOC.2 continúa con G111/E01 (`0.1.11.01-beta`).
+**Checkpoint técnico actual:** G110/E01 (`0.1.10.01-beta`) está publicado después de PR #85/#86. DOC.2 R1 reconstruye 21 estados/80 commits con G111/E01 (`0.1.11.01-beta`) reservado.
 
 Documentos canónicos de VER.2:
 
@@ -483,3 +483,19 @@ Alcance:
 - preservar los dos Releases existentes y sus tags sin reescribir historia criptográfica.
 
 Cierre confirmado: gate local completo, commit firmado, PR #85, CI Python 3.13/3.14 + Markdown/gobernanza en `success` e integración `5cd1cea`. La promoción post-merge materializa G110 sin consumir G111; DOC.2 continúa con G111/E01 (`0.1.11.01-beta`).
+
+## DOC.2 — CHANGELOG histórico detallado
+
+**Estado:** R1 en ejecución; candidato reservado G111/E01 (`0.1.11.01-beta`), todavía no consumido.
+
+R1 materializa la reconstrucción exigida por el plan:
+
+- 21 estados retrospectivos `0.0.1-beta`–`0.0.21-beta`;
+- 80 commits reales, contiguos y únicos;
+- rango Git, fecha, hito y sujetos de commit preservados por versión;
+- evidencia machine-readable en `data/doc2-legacy-changelog-evidence.json`;
+- auditoría en `docs/audits/documentation/changelog-reconstruction-doc2-r1.md`;
+- regresiones para impedir que el CHANGELOG vuelva a degradarse a resúmenes de una sola línea;
+- sincronización del estado real de G110 y del inventario **29 tags ↔ 29 GitHub Releases**.
+
+R1 solo podrá cerrar DOC.2 y consumir G111 después de gate completo, commit firmado, PR/CI, merge y revalidación.
