@@ -30,12 +30,12 @@ class TestG112PromotionPostMerge(unittest.TestCase):
         candidate = data["current_candidate"]
         self.assertEqual("closed", ids["NOR.1"]["status"])
         self.assertIn("G112", ids["NOR.1"]["global_refs"])
-        self.assertEqual("closed", ids["DOC.1"]["status"])
+        self.assertEqual("reopened_candidate_r4", ids["DOC.1"]["status"])
         self.assertIn("G113", ids["DOC.1"]["global_refs"])
-        self.assertEqual(114, candidate["global_revision"])
-        self.assertEqual("PLAN.2", candidate["block"])
-        self.assertEqual("R1", candidate["revision"])
-        self.assertEqual(1, candidate["edition"])
+        self.assertEqual(115, candidate["global_revision"])
+        self.assertEqual("DOC.1", candidate["block"])
+        self.assertEqual("R4", candidate["revision"])
+        self.assertEqual(4, candidate["edition"])
 
     def test_documentacion_viva_no_asocia_nor1_r8_con_e01(self):
         files = (

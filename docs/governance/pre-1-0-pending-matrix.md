@@ -1,8 +1,8 @@
 # Matriz maestra de pendientes hacia 1.0
 
 **Estado:** vigente / documento vivo
-**Versión base:** `0.1.13.03-beta` — G113/E03
-**Checkpoint candidato:** PLAN.2 R1 — G114/E01 (`0.1.14.01-beta`) reservado, no aceptado
+**Versión base:** `0.1.14.01-beta` — G114/E01
+**Checkpoint candidato:** DOC.1 R4 — G115/E04 (`0.1.15.04-beta`) reservado, no aceptado
 **Fecha de adopción propuesta:** 2026-08-26
 **Clasificación:** Planificación / Producto / Arquitectura / Seguridad / QA / Release
 
@@ -17,8 +17,8 @@ candidato fallido no lo consume.
 
 ## 1. Reglas de uso
 
-1. `VERSION` permanece en `0.1.13.03-beta` mientras PLAN.2 R1 sea candidato.
-2. G114/E01 (`0.1.14.01-beta`) queda reservado para PLAN.2 R1.
+1. `VERSION` materializa `0.1.14.01-beta` después de aceptar PLAN.2 R1.
+2. G115/E04 (`0.1.15.04-beta`) queda reservado para DOC.1 R4.
 3. Las etapas posteriores se ordenan por prioridad, no por un `G` futuro supuesto.
 4. Una revisión que amplía un bloque existente conserva su identificador canónico.
 5. `PLAN.2` y `UX.5` deben existir en el registro machine-readable antes de usarse.
@@ -30,8 +30,8 @@ candidato fallido no lo consume.
 
 | Orden | Identificador | Trabajo pendiente | Alcance / criterio de cierre | Estado |
 |---:|---|---|---|---|
-| 1 | **PLAN.2 R1** | Replanificación maestra final hacia 1.0 | Formalizar esta matriz, registrar PLAN.2/UX.5, corregir la reserva G114 y reconciliar documentación viva post-G113. | **Candidato G114/E01** |
-| 2 | **DOC.1 R4** | Saneamiento documental post-G113 | Corregir metadata viva, estados desactualizados y contradicciones actuales sin reescribir evidencia histórica. | Planificado |
+| 1 | **PLAN.2 R1** | Replanificación maestra final hacia 1.0 | Formalizar esta matriz, registrar PLAN.2/UX.5, corregir la reserva G114 y reconciliar documentación viva post-G113. | **Cerrado/aceptado G114/E01** |
+| 2 | **DOC.1 R4** | Saneamiento documental post-G113 | Corregir metadata viva, estados desactualizados y contradicciones actuales sin reescribir evidencia histórica. | **Candidato G115/E04** |
 | 3 | **REL.GOV.1 R2** | Automatización de Releases y checks | Estandarizar release notes, `gh release create`, verificación de tag/firma y lectura correcta de Actions/checks. | Planificado |
 | 4 | **DEV.2 R5** | Portal Developer y acceso | Crear `/dev`; diferenciar sesión administrativa web y acceso técnico Bearer; rediseñar `/dev/login`; no persistir secretos. | Planificado |
 | 5 | **DEV.2 R6** | Rediseño del Centro de desarrollo | Mejorar dashboard, navegación, estados, tablas, responsive, temas y coherencia visual de `/dev/centro-desarrollo`. | Planificado |

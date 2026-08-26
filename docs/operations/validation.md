@@ -1,7 +1,7 @@
 # Validación
 
 **Estado:** Vigente
-**Versión revisada:** `0.1.13.03-beta` — G112/E07 en promoción post-merge; G113/E03 reservado para DOC.1 R3
+**Versión revisada:** `0.1.14.01-beta` — G114/E01 aceptado para PLAN.2 R1; G115/E04 reservado para DOC.1 R4
 **Versión base histórica:** `0.0.25-beta`
 **Base documental histórica:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal histórica preservada:** UX.4.6e R8 — validación funcional y procedencia editable — 2026-08-19
@@ -1136,9 +1136,9 @@ Estado aceptado: G113/E03 (`0.1.13.03-beta`) mediante PR #92 / merge `40ae5c0`, 
 - `next_candidate_block = PERSIST.1`;
 - la evidencia histórica del candidato conserva que G113/E03 estaba reservado durante la auditoría.
 
-## PERSIST.1 R1 — siguiente bloque funcional
+## PERSIST.1 R1 — bloque funcional posterior
 
-Candidato revision-aware reservado: G114/E01 (`0.1.14.01-beta`). Debe incorporar persistencia voluntaria y segura, modelo versionado, migraciones, borrado, controles de privacidad y gate completo antes de aceptación.
+PERSIST.1 permanece planificado para una etapa posterior de la matriz maestra. Debe incorporar persistencia voluntaria y segura, modelo versionado, migraciones, borrado, controles de privacidad y gate completo antes de aceptación; no tiene un Global preasignado en el estado vigente.
 
 ## PLAN.2 R1 — replanificación maestra final hacia 1.0
 
@@ -1165,3 +1165,27 @@ Gate de PLAN.2 R1:
 5. suite completa;
 6. documentación viva sin bloqueadores semánticos post-G113;
 7. commit firmado, PR/CI e integración antes de consumir G114.
+
+
+## G114/E01 — promoción formal de PLAN.2 R1
+
+Contrato de promoción post-merge:
+
+- `VERSION = 0.1.14.01-beta`;
+- `accepted_count = 114`;
+- `next_global = 115`;
+- `next_candidate = 0.1.15.04-beta`;
+- `next_candidate_block = DOC.1`;
+- PLAN.2 R1 queda aceptado con evidencia PR #94 / merge `7ded70c`;
+- G115/E04 (`0.1.15.04-beta`) queda reservado para DOC.1 R4 como siguiente candidato;
+- PERSIST.1 permanece planificado posteriormente.
+
+Gate previo a la promoción:
+
+- 1103 pruebas post-merge en `OK`;
+- Markdown 148/148;
+- 16 familias / 46 identificadores;
+- `pip check`, compilación Python, sintaxis JavaScript y `git diff --check` limpios;
+- CI remota Python 3.13/3.14, Markdown Audit y Repository Governance Audit en `success`.
+
+El tag `v0.1.14.01-beta` se crea únicamente después de integrar y revalidar esta promoción.

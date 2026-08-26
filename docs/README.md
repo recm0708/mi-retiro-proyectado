@@ -1,9 +1,9 @@
 # Índice de documentación
 
 **Estado:** vigente
-**Versión de aplicación:** `0.1.13.03-beta` — G113/E03 aceptado para DOC.1 R3; G114/E01 reservado para PLAN.2 R1; ledger aceptado hasta G113
+**Versión de aplicación:** `0.1.14.01-beta` — G114/E01 aceptado para PLAN.2 R1; G115/E04 reservado para DOC.1 R4; ledger aceptado hasta G114
 **Último tag formal legacy:** `v0.0.26-beta`
-**Última actualización transversal:** PLAN.2 R1 — matriz maestra y replanificación post-G113; G114/E01 candidato — 2026-08-26
+**Última actualización transversal:** promoción PLAN.2 R1 — G114/E01 aceptado; DOC.1 R4 próximo candidato — 2026-08-26
 **Cierres históricos preservados:** UX.4.6i / PR #34 — 841 pruebas; UX.4.6e R9 — `v0.0.25-beta`
 
 Este archivo es el punto de entrada para la documentación técnica, funcional, normativa, de privacidad, validación y auditoría de Mi Retiro Proyectado.
@@ -11,7 +11,7 @@ Este archivo es el punto de entrada para la documentación técnica, funcional, 
 
 ## Estado de normalización del repositorio
 
-**Estado actual:** NOR.1 R8, NOR.2, DOC.1 R2–R3, SEC.2, AUD.SEC2 R1, REL.GOV.1 y DOC.2 están cerrados/aceptados según corresponda. G113/E03 está materializado como `0.1.13.03-beta`; PLAN.2 R1 reserva G114/E01 como siguiente checkpoint. PERSIST.1 permanece planificado en la matriz maestra.
+**Estado actual:** NOR.1 R8, NOR.2, DOC.1 R2–R3, SEC.2, AUD.SEC2 R1, REL.GOV.1, DOC.2 y PLAN.2 R1 están cerrados/aceptados según corresponda. G114/E01 está materializado como `0.1.14.01-beta`; DOC.1 R4 reserva G115/E04 como siguiente checkpoint. PERSIST.1 permanece planificado en la matriz maestra.
 
 Estado de la fase:
 
@@ -27,6 +27,8 @@ Estado de la fase:
 - **DOC.1 R2:** cerrado; auditoría integral Markdown post-NOR.2 y controles permanentes incorporados.
 - **DOC.1 R3:** cerrado/aceptado como G113/E03; normalizó 11 referencias inequívocas, formalizó la política de navegación documental y preservó rutas históricas/contractuales.
 - **DOC.2 R1:** cerrado/aceptado como G111/E01; preserva la reconstrucción auditable del CHANGELOG y su evidencia histórica.
+- **PLAN.2 R1:** cerrado/aceptado como G114/E01; formaliza la matriz maestra viva hacia 1.0.
+- **DOC.1 R4:** reabierto como siguiente candidato G115/E04 para saneamiento documental post-G113.
 - **SEC.2 R1–R6:** cerrados; CodeQL, autenticación, protección de endpoints, auditoría, sesión web y hardening configurable completados. AUD.SEC2 R1 corrigió el kill switch, alineó documentación/ledger y quedó aceptado como G109/E01.
 
 Evidencia:
@@ -68,7 +70,7 @@ Evidencia:
 - [`AUDITORIA_VER2_SEGUNDA_PASADA.md`](archive/governance/AUDITORIA_VER2_SEGUNDA_PASADA.md) — bitácora de la segunda pasada y correcciones sobre la primera reconstrucción.
 - [`AUDITORIA_VER2_CONTEO_PROVISIONAL.md`](archive/governance/AUDITORIA_VER2_CONTEO_PROVISIONAL.md) — cierre del conteo de segunda pasada en G070 antes de VER.2.
 - [`MATRIZ_DECISION_REVISIONES_VER2.md`](archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md) — decisión fila por fila sobre qué consume Global y por qué.
-- [`pre-1-0-revision-ledger.md`](governance/pre-1-0-revision-ledger.md) — ledger Markdown reconciliado G001–G113 y próximo candidato G114.
+- [`pre-1-0-revision-ledger.md`](governance/pre-1-0-revision-ledger.md) — ledger Markdown reconciliado G001–G114 y próximo candidato G115.
 - [`post-g070-revision-reconciliation.md`](audits/governance/post-g070-revision-reconciliation.md) — auditoría de reconstrucción G071–G108.
 - [`pre-1-0-revision-ledger-g070.json`](archive/governance/pre-1-0-revision-ledger-g070.json) — snapshot histórico exacto G070.
 - [`../data/pre-1-0-revision-ledger.json`](../data/pre-1-0-revision-ledger.json) — ledger machine-readable canónico de la reconstrucción.

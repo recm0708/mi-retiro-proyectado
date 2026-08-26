@@ -1,11 +1,11 @@
 # Roadmap
 
 **Estado:** vigente
-**Versión vigente:** `0.1.13.03-beta` — G113/E03 aceptado para DOC.1 R3
+**Versión vigente:** `0.1.14.01-beta` — G114/E01 aceptado para PLAN.2 R1
 **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
 **Último tag formal legacy:** `v0.0.26-beta`
-**Fecha de revisión:** 2026-08-25
-**Estado actual:** SEC.2, AUD.SEC2 R1, REL.GOV.1, DOC.2, NOR.1 R8 y DOC.1 R3 están cerrados/aceptados. G113/E03 se materializa como `0.1.13.03-beta`; G114/E01 (`0.1.14.01-beta`) queda reservado para PLAN.2 R1. La secuencia posterior se gobierna por la matriz maestra viva.
+**Fecha de revisión:** 2026-08-26
+**Estado actual:** SEC.2, AUD.SEC2 R1, REL.GOV.1, DOC.2, NOR.1 R8, DOC.1 R3 y PLAN.2 R1 están cerrados/aceptados. G114/E01 se materializa como `0.1.14.01-beta`; G115/E04 (`0.1.15.04-beta`) queda reservado para DOC.1 R4. La secuencia posterior se gobierna por la matriz maestra viva.
 
 
 <!-- NOR1-R7-CLOSURE:START -->
@@ -25,7 +25,8 @@ La secuencia operativa previa a SEC.2 queda:
 6. **DOC.2** — cerrado en R1; reconstrucción auditable del CHANGELOG `0.0.1-beta`–`0.0.21-beta`, aceptada como G111/E01 mediante PR #87.
 7. **NOR.1 R8** — cerrado/aceptado como G112/E07; gobierno canónico de identificadores vigente.
 8. **DOC.1 R3** — cerrado/aceptado como G113/E03; referencias navegables y política documental consolidadas.
-9. **PLAN.2 R1** — siguiente checkpoint, candidato G114/E01 (`0.1.14.01-beta`); formaliza la matriz maestra y reordena el trabajo previo a PERSIST.1.
+9. **PLAN.2 R1** — cerrado/aceptado como G114/E01 (`0.1.14.01-beta`) mediante PR #94 / merge `7ded70c`; formaliza la matriz maestra.
+10. **DOC.1 R4** — siguiente checkpoint, candidato G115/E04 (`0.1.15.04-beta`), para saneamiento documental post-G113.
 
 NOR.2 ejecutó los movimientos, renombrados, consolidaciones y retiros que
 NOR.1 deliberadamente no realizó.

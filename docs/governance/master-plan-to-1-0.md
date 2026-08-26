@@ -3,7 +3,7 @@
 **Estado:** vigente
 **Versión base al iniciar el plan:** `0.0.25-beta`
 **Cierre histórico de PLAN.1:** `0.0.26-beta` / `v0.0.26-beta`
-**Versión transversal vigente:** `0.1.13.03-beta` — G113/E03 aceptado para DOC.1 R3; PLAN.2 R1 candidato G114/E01
+**Versión transversal vigente:** `0.1.14.01-beta` — G114/E01 aceptado para PLAN.2 R1; DOC.1 R4 candidato G115/E04
 **Fecha:** 2026-08-25
 **Clasificación:** Producto / Arquitectura / QA / Release
 
@@ -17,7 +17,7 @@ funcionales al plan de 14 bloques.
 - **NOR.1:** cerrado en R7; estándares determinísticos establecidos.
 - **NOR.2:** cerrado en R8 mediante PR #74; normalización integral completada.
 - **DOC.1 R2:** auditoría integral Markdown post-NOR.2 cerrada; documentación vigente, evidencia histórica y controles permanentes quedaron reconciliados.
-- **SEC.2 R1–R6:** cerrados; hardening CodeQL, autenticación/protección administrativa, auditoría, sesión web y hardening de sesión completados. AUD.SEC2 R1 quedó aceptado/publicado como G109/E01. REL.GOV.1 R1 quedó aceptado como G110/E01. DOC.2 R1 quedó aceptado/publicado como G111/E01. NOR.1 R8 quedó aceptado como G112/E07 y DOC.1 R3 como G113/E03. PLAN.2 R1 reserva G114/E01 para formalizar la replanificación antes de DEV.2/UX.5/PERSIST.1.
+- **SEC.2 R1–R6:** cerrados; hardening CodeQL, autenticación/protección administrativa, auditoría, sesión web y hardening de sesión completados. AUD.SEC2 R1 quedó aceptado/publicado como G109/E01. REL.GOV.1 R1 quedó aceptado como G110/E01. DOC.2 R1 quedó aceptado/publicado como G111/E01. NOR.1 R8 quedó aceptado como G112/E07, DOC.1 R3 como G113/E03 y PLAN.2 R1 como G114/E01. DOC.1 R4 reserva G115/E04 antes de DEV.2/UX.5/PERSIST.1.
 
 La separación evita que SEC.2 cree nuevas rutas, archivos o estructuras sobre
 una base cuya nomenclatura y documentación no hayan sido normalizadas.
@@ -68,7 +68,7 @@ Estado vigente:
 - DOC.1 R1 está cerrado.
 - DOC.1 R2 queda cerrado como auditoría integral Markdown post-NOR.2, con controles locales y remotos permanentes.
 - NOR.1 y NOR.2 están cerrados; R8 quedó integrado mediante PR #74.
-- SEC.2 quedó cerrado después de R1–R6; AUD.SEC2 R1 fue publicado como G109/E01. REL.GOV.1 quedó aceptado como G110/E01; DOC.2, NOR.1 R8 y DOC.1 R3 también están cerrados. PLAN.2 R1 es el siguiente checkpoint candidato.
+- SEC.2 quedó cerrado después de R1–R6; AUD.SEC2 R1 fue publicado como G109/E01. REL.GOV.1 quedó aceptado como G110/E01; DOC.2, NOR.1 R8, DOC.1 R3 y PLAN.2 R1 también están cerrados. DOC.1 R4 es el siguiente checkpoint candidato.
 - La meta `1.0.0.0` / `Build 000001` se mantiene condicionada al cierre de los gates definidos.
 
 Las referencias históricas a bloques previos se conservan como trazabilidad, pero el estado operativo vigente debe leerse desde esta sección.
@@ -76,7 +76,7 @@ Las referencias históricas a bloques previos se conservan como trazabilidad, pe
 
 ## 1. Propósito
 
-> **Replanificación PLAN.2 R1:** la secuencia futura detallada y evolutiva se mantiene en [`pre-1-0-pending-matrix.md`](pre-1-0-pending-matrix.md). El plan histórico de 14 bloques se preserva como trazabilidad, mientras la matriz incorpora los nuevos frentes Developer/UX, hardening posterior y congelación documental final sin preasignar Globales futuros.
+> **Replanificación PLAN.2 R1:** aceptada como G114/E01. La secuencia futura detallada y evolutiva se mantiene en [`pre-1-0-pending-matrix.md`](pre-1-0-pending-matrix.md). El plan histórico de 14 bloques se preserva como trazabilidad, mientras la matriz incorpora los nuevos frentes Developer/UX, hardening posterior y congelación documental final sin preasignar Globales futuros.
 
 
 Este documento ordena el trabajo desde el cierre de `v0.0.25-beta` hasta la primera versión oficial de Mi Retiro Proyectado.

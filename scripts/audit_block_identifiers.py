@@ -41,7 +41,7 @@ def main() -> int:
         return 1
 
     allowed = set(identifiers)
-    planned = {"PLAN.2", "UX.5", "PERSIST.1", "REP.1", "A11Y.2", "REV.1", "QA.1", "REL.1"}
+    planned = {"UX.5", "PERSIST.1", "REP.1", "A11Y.2", "REV.1", "QA.1", "REL.1"}
     if not planned.issubset(allowed):
         print("ERROR: faltan identificadores futuros reservados.")
         return 1
