@@ -6,10 +6,14 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ## [Unreleased]
 
+- REL.GOV.1: reserva G110/E01 (`0.1.10.01-beta`) para endurecer el contrato de GitHub Releases antes de DOC.2, sin modificar todavía `VERSION`.
+- Releases: normaliza la interpretación viva de `v0.0.71.01-beta` como estado reconciliado G087/E01, preservando su denominación original G071/E01 solo como evidencia histórica.
+- Releases: incorpora `.github/release.yml`, `scripts/release_contract.py` y validación de tag en GitHub Actions para estandarizar título, prerelease, cuerpo mínimo, firma y correspondencia VERSION/ledger/tag.
+
 ## [0.1.09.01-beta]
 - G109/E01: promoción post-merge de AUD.SEC2 R1 después de PR #83, 1040 pruebas locales y CI remota en Python 3.13/3.14 + auditorías de Markdown/gobernanza en `success`; la sincronización no consume G110.
-- Ledger: G109 queda aceptado sobre `ec1842d`; G110/E01 (`0.1.10.01-beta`) pasa a ser el siguiente candidato disponible para DOC.2.
-- Tag: `v0.1.09.01-beta` queda pendiente de creación firmada después de integrar y revalidar la promoción; `v0.0.71.01-beta` permanece inmutable.
+- Ledger: G109 queda aceptado sobre `ec1842d`; G110/E01 (`0.1.10.01-beta`) queda disponible y posteriormente se reserva para REL.GOV.1 antes de DOC.2.
+- Tag/Release: `v0.1.09.01-beta` fue creado de forma firmada y publicado como prerelease después de integrar/revalidar la promoción; `v0.0.71.01-beta` permanece inmutable.
 
 - AUD.SEC2 R1: audita integralmente el snapshot post-SEC.2, corrige el kill switch administrativo, impide que una sesión web sustituya errores 403 de administración deshabilitada/no configurada, cambia el logout a POST y extiende `Cache-Control: no-store` a `/dev/`.
 - AUD.SEC2 R1: reconcilia el ledger posterior a G070 hasta G108, preserva el snapshot histórico G070 por SHA-256 y documenta que `v0.0.71.01-beta` es un tag inmutable cuyo estado corresponde cronológicamente a G087.

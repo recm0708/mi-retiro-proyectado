@@ -30,8 +30,8 @@ class TestVer2DocumentacionVigente(unittest.TestCase):
 
         self.assertIn("**Versión canónica vigente:** `0.1.09.01-beta`", readme)
         self.assertIn("G071/E01 promovido en `VERSION`", readme)
-        self.assertIn("`VERSION` se promueve en R4 a `0.0.71.01-beta`.", roadmap)
-        self.assertIn("`VERSION` se promueve en R4 a `0.0.71.01-beta`.", plan)
+        self.assertIn("la reconciliación posterior sitúa ese estado en G087/E01", roadmap)
+        self.assertIn("la reconciliación posterior sitúa ese estado en G087/E01", plan)
         self.assertIn("| `0.0.71.01-beta` | Versión promovida históricamente en VER.2 R4", security)
         self.assertIn("**Versión de aplicación:** `0.1.09.01-beta`", indice)
 
@@ -41,9 +41,9 @@ class TestVer2DocumentacionVigente(unittest.TestCase):
         proceso = (DOCS / "operations/release-process.md").read_text(encoding="utf-8")
 
         self.assertIn(ULTIMO_TAG_LEGACY, versioning)
-        self.assertIn("`v0.0.71.01-beta` no se crea dentro del PR de promoción", versioning)
+        self.assertIn("Un tag formal nuevo no se crea dentro del PR del candidato", versioning)
         self.assertIn("no existe tag `v0.0.71.01-beta` hasta completar merge", releases)
-        self.assertIn("`v0.0.71.01-beta` es el tag formal publicado correspondiente a VER.2 G071/E01.", proceso)
+        self.assertIn("`v0.0.71.01-beta` fue publicado originalmente bajo la denominación VER.2 G071/E01", proceso)
 
     def test_ledger_y_auditoria_siguen_reconociendo_g071(self):
         ledger = (DOCS / "governance/pre-1-0-revision-ledger.md").read_text(encoding="utf-8")

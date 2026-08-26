@@ -5,7 +5,7 @@
 **Contador histórico en la base `7037addd`:** **G070**
 **Contador aceptado reconciliado al commit `ec1842d`:** **G109**
 **Siguiente Global disponible:** **G110**
-**Siguiente candidato disponible para DOC.2:** `0.1.10.01-beta`
+**Siguiente candidato reservado:** `0.1.10.01-beta` — REL.GOV.1
 
 
 <!-- DOC1-R1-REVISION-MANUAL:START -->
@@ -25,10 +25,10 @@ Estado vigente de la contabilidad:
 - El tag publicado `v0.0.71.01-beta` se conserva inmutable. Su cadena de versión
   fue promovida antes de contabilizar los estados DEV.2, MANT.1 y DOC.1 R1 que
   ya existían después de `7037addd`; por eso queda documentada como una
-  **anomalía histórica de numeración**, no como el identificador revision-aware
-  correcto del estado global G071.
+  **anomalía histórica de numeración**. La reconciliación vigente sitúa el estado
+  materializado por ese tag en G087/E01 sin modificar la evidencia publicada.
 - `VERSION` se sincroniza a `0.1.09.01-beta` después de la aceptación de AUD.SEC2 R1 como G109/E01.
-- El siguiente Global disponible es G110/E01: `0.1.10.01-beta`, reservado para DOC.2 únicamente cuando se prepare su primera unidad candidata.
+- El siguiente Global disponible es G110/E01: `0.1.10.01-beta`, reservado para REL.GOV.1, saneamiento transversal del contrato de GitHub Releases previo a DOC.2.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 
 Este ledger registra los estados aceptados reconstruidos durante VER.2 y su reconciliación posterior. La regla contable histórica y las exclusiones originales se conservan en `docs/archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md` y `docs/archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md`; la ampliación post-G070 se justifica en `docs/audits/governance/post-g070-revision-reconciliation.md`.
@@ -205,8 +205,9 @@ como G109/E01. La sincronización post-merge materializa ese mismo estado en
 
 | Global | ID revision-aware candidato | Bloque | Condición |
 |---:|---|---|---|
-| G110 | `0.1.10.01-beta` | DOC.2 — primera unidad candidata | definir alcance DOC.2 + gate completo + commit firmado + PR/CI + integración |
+| G110 | `0.1.10.01-beta` | REL.GOV.1 — gobierno de GitHub Releases | política + plantilla/categorización + validación de contrato + saneamiento G071→G087 + gate completo + commit firmado + PR/CI + integración |
 
-El tag histórico `v0.0.71.01-beta` permanece inmutable. El tag
-`v0.1.09.01-beta` solo se crea de forma firmada después de integrar y revalidar
-la promoción G109/E01.
+Si G110 es aceptado, DOC.2 continuará con G111/E01 (`0.1.11.01-beta`); no se preasigna como aceptado antes del gate.
+
+Los tags `v0.0.71.01-beta` y `v0.1.09.01-beta` permanecen publicados e inmutables.
+El primero conserva su denominación histórica original y el segundo materializa G109/E01.

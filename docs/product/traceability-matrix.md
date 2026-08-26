@@ -22,7 +22,7 @@ Estado documental actual:
 - DOC.1 R1 está cerrado y su documentación viva quedó consolidada.
 - DOC.1 R2 está cerrado como auditoría integral Markdown post-NOR.2 y deja
   controles permanentes locales y remotos.
-- VER.2 G071/E01 está cerrado y publicado como `v0.0.71.01-beta`.
+- `v0.0.71.01-beta` fue publicado originalmente como VER.2 G071/E01 y reconciliado posteriormente como G087/E01 sin alterar el tag.
 - NOR.2 R7 está cerrado.
 - NOR.2 R8 está cerrado e integrado mediante PR #74.
 - NOR.2 está cerrado después de completar R1–R8.
@@ -75,7 +75,7 @@ Esta matriz conecta contratos críticos del producto con su fuente, decisión, i
 | TR-024 | Los controles de fecha validan año/calendario de forma transversal y Paso 5 muestra cobertura salarial de una fecha personalizada | N/A — técnico/UX | ADR-176 | `app/static/js/accessibility.js`, `app/static/css/accessibility.css`, `app/static/js/retirement.js`, `app/templates/partials/retirement.html` | `tests/test_ux46g_r1_retirement_scenarios.py` | Verificado UX.4.6g / PR #32 |
 | TR-025 | Alineación y densidad visual de períodos y resumen de retiro | N/A — UX/responsive | ADR-177 | `app/templates/partials/salary_history.html`, `app/templates/simulation.html`, `app/templates/partials/retirement.html`, `app/static/css/design-system.css` | `tests/test_ux46g_r1_retirement_scenarios.py` | Verificado UX.4.6g / PR #32 |
 | TR-026 | La guía pública explica cómo se transforman los datos de los Pasos 1–6 y los tres sistemas con parámetros versionados, fórmula general + sustitución numérica y términos definidos en contexto, sin duplicar motores; navbar, Metodología y Paso 6 enlazan sin transportar datos personales | N/A — transparencia/UX; normativa versionada existente | ADR-178 | `app/services/calculation_guide.py`, `app/templates/calculation_guide.html`, `app/static/css/calculation-guide.css`, `app/templates/base.html`, `app/static/js/results_orchestration.js`, `app/templates/methodology.html` | `tests/test_ux46i_r1_calculation_guide.py` | Verificado UX.4.6i / PR #34 |
-| TR-027 | La beta revision-aware cuenta estados aceptados, preserva tags legacy y mantiene ledger continuo sin convertir commits/candidatos en revisiones | N/A — gobierno/versionado | ADR-179 | `VERSION`, `VERSIONING.md`, `app/core/version.py`, `docs/archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md`, `docs/governance/pre-1-0-revision-ledger.md` | `tests/test_ver2_version_revision_aware.py`, `tests/test_ver2_documentacion_vigente.py` | Verificado VER.2 G071/E01 en R4 |
+| TR-027 | La beta revision-aware cuenta estados aceptados, preserva tags históricos y mantiene ledger continuo sin convertir commits/candidatos en revisiones | N/A — gobierno/versionado | ADR-179 | `VERSION`, `VERSIONING.md`, `app/core/version.py`, `docs/archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md`, `docs/governance/pre-1-0-revision-ledger.md` | `tests/test_ver2_version_revision_aware.py`, `tests/test_ver2_documentacion_vigente.py` | VER.2 R4 preservado como denominación original G071/E01; reconciliación vigente G087/E01 |
 
 ## 3. Cobertura de RF
 
@@ -145,7 +145,7 @@ Los estados `Candidato` deben promoverse a `Verificado` únicamente después del
 | Re-auditar la raíz contra la estructura canónica | gate estructural R8 | `tests/test_nor2_r8_final_audit.py` |
 | Retirar residuos transitorios directos de `docs/` | `CHANGELOG_ADD_R5.txt` e `INDICE_ADD_R5.txt` retirados | `test_docs_raiz_queda_solo_con_readme` |
 | Mantener artefactos locales fuera de Git | auditoría local: 20 artefactos preservados; Git: 0 trackeados | `test_artefactos_locales_quedan_fuera_de_git` |
-| Preservar la versión G071/E01 | `VERSION` + `APP_VERSION` | `test_version_permanece_en_g071_e01` |
+| Preservar la evidencia histórica de `v0.0.71.01-beta` y su reconciliación G087/E01 | tag/ledger/documentación | regresiones VER.2 + reconciliación post-G070 |
 | Preservar ledger G001–G070 y ruta canónica | `data/pre-1-0-revision-ledger.json` | `test_ledger_permanece_canonico_e_inmutable` |
 | Sincronizar el checkpoint histórico de NOR.2 | R7/R8 cerrados; en ese momento SEC.2 quedaba habilitado para reanudación | `test_estado_documental_vigente_es_r8` |
 | Eliminar contradicciones vigentes de VER.2/NOR.1/NOR.2 | barrido post-corrección: 0 hallazgos | `test_ver2_no_figura_como_pendiente_en_estado_vivo` |

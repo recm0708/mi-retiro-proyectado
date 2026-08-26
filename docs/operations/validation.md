@@ -1053,3 +1053,29 @@ AUD.SEC2 R1 fue aceptado mediante PR #83 y merge `ec1842d`. La promoción post-m
 - conserva intacto el snapshot histórico G070 y el tag `v0.0.71.01-beta`;
 - no consume G110 por ser sincronización del estado G109 ya aceptado;
 - requiere `pip check`, auditoría Markdown, compilación Python, sintaxis JavaScript, suite completa y `git diff --check` antes del commit firmado.
+
+
+## REL.GOV.1 — validación del contrato de GitHub Releases
+
+REL.GOV.1 se ejecuta como preflight transversal antes de DOC.2. G110/E01 (`0.1.10.01-beta`) queda reservado, pero `VERSION` permanece en `0.1.09.01-beta` hasta que el estado supere gate, commit firmado, PR/CI e integración.
+
+Validaciones específicas:
+
+```powershell
+python scripts\release_contract.py --json
+python scripts\release_contract.py --print-title
+python scripts\release_contract.py --check-tag v0.1.09.01-beta
+```
+
+El gate también debe confirmar:
+
+- `.github/release.yml` versionado y con categoría residual `*`;
+- `.github/workflows/verificar-tags.yml` verificando firma y contrato del tag;
+- título canónico `Mi Retiro Proyectado v<VERSION> — GNNN/ENN`;
+- cuerpo con `Estado publicado`, `Resumen`, `Cambios principales`, `Validación`, `Evidencia` y `Siguiente paso`;
+- `v0.0.71.01-beta` documentado como publicación originalmente G071/E01 y reconciliada G087/E01, sin modificar su tag;
+- ausencia de Releases retroactivos para G088–G108, ya que esos estados no tuvieron tags formales;
+- `accepted_count = 109`, `next_global = 110`, `next_candidate = 0.1.10.01-beta` y `next_candidate_block = REL.GOV.1`;
+- auditoría Markdown, compilación Python, sintaxis JavaScript, suite completa y `git diff --check`.
+
+Si REL.GOV.1 se acepta, una sincronización posterior materializará G110 y dejará DOC.2 en el siguiente Global disponible.

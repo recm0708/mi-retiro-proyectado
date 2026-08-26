@@ -1,7 +1,7 @@
 # Índice de documentación
 
 **Estado:** vigente
-**Versión de aplicación:** `0.1.09.01-beta` — G109/E01 aceptado; tag formal G109 pendiente post-merge; ledger vivo hasta G109
+**Versión de aplicación:** `0.1.09.01-beta` — G109/E01 aceptado y publicado; G110/E01 reservado para REL.GOV.1; ledger vivo hasta G109
 **Último tag formal legacy:** `v0.0.26-beta`
 **Última actualización transversal:** promoción post-merge G109/E01 de AUD.SEC2 R1 — 2026-08-25
 **Cierres históricos preservados:** UX.4.6i / PR #34 — 841 pruebas; UX.4.6e R9 — `v0.0.25-beta`

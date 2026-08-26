@@ -3,7 +3,7 @@
 **Estado:** vigente
 **Versión base al iniciar el plan:** `0.0.25-beta`
 **Cierre histórico de PLAN.1:** `0.0.26-beta` / `v0.0.26-beta`
-**Versión transversal vigente:** `0.1.09.01-beta` — G109/E01 aceptado; tag formal G109 pendiente post-merge
+**Versión transversal vigente:** `0.1.09.01-beta` — G109/E01 aceptado y publicado
 **Fecha:** 2026-08-25
 **Clasificación:** Producto / Arquitectura / QA / Release
 
@@ -17,7 +17,7 @@ funcionales al plan de 14 bloques.
 - **NOR.1:** cerrado en R7; estándares determinísticos establecidos.
 - **NOR.2:** cerrado en R8 mediante PR #74; normalización integral completada.
 - **DOC.1 R2:** auditoría integral Markdown post-NOR.2 cerrada; documentación vigente, evidencia histórica y controles permanentes quedaron reconciliados.
-- **SEC.2 R1–R6:** cerrados; hardening CodeQL, autenticación/protección administrativa, auditoría, sesión web y hardening de sesión completados. AUD.SEC2 R1 quedó aceptado como G109/E01 mediante PR #83; DOC.2 es el siguiente bloque.
+- **SEC.2 R1–R6:** cerrados; hardening CodeQL, autenticación/protección administrativa, auditoría, sesión web y hardening de sesión completados. AUD.SEC2 R1 quedó aceptado/publicado como G109/E01. Antes de DOC.2 se ejecuta REL.GOV.1 como preflight transversal de gobierno de GitHub Releases.
 
 La separación evita que SEC.2 cree nuevas rutas, archivos o estructuras sobre
 una base cuya nomenclatura y documentación no hayan sido normalizadas.
@@ -61,14 +61,14 @@ El plan maestro se interpreta desde la línea base documental posterior a MANT.1
 
 Estado vigente:
 
-- `VERSION` se promueve en R4 a `0.0.71.01-beta`.
+- VER.2 promovió `0.0.71.01-beta` bajo la denominación original G071/E01; la reconciliación posterior sitúa ese estado en G087/E01.
 - `v0.0.26-beta` permanece como tag legacy histórico e inmutable; VER.2 publicó formalmente `v0.0.71.01-beta`.
-- VER.2 está cerrado; G071/E01 fue promovido y publicado como `v0.0.71.01-beta`.
+- VER.2 está cerrado; `v0.0.71.01-beta` fue publicado originalmente como G071/E01 y reconciliado posteriormente como G087/E01 sin mover el tag.
 - MANT.1 está cerrado operativamente.
 - DOC.1 R1 está cerrado.
 - DOC.1 R2 queda cerrado como auditoría integral Markdown post-NOR.2, con controles locales y remotos permanentes.
 - NOR.1 y NOR.2 están cerrados; R8 quedó integrado mediante PR #74.
-- SEC.2 quedó cerrado después de R1–R6; AUD.SEC2 R1 es el checkpoint actual previo a DOC.2.
+- SEC.2 quedó cerrado después de R1–R6; AUD.SEC2 R1 fue publicado como G109/E01. REL.GOV.1 es el checkpoint transversal actual previo a DOC.2.
 - La meta `1.0.0.0` / `Build 000001` se mantiene condicionada al cierre de los gates definidos.
 
 Las referencias históricas a bloques previos se conservan como trazabilidad, pero el estado operativo vigente debe leerse desde esta sección.
@@ -271,6 +271,23 @@ Evolución visible y controlada de Developer Diagnostics:
 - seguridad de persistencia;
 - cifrado donde exista información persistente que lo requiera;
 - evaluación de despliegue remoto si se adopta.
+
+#### Checkpoint transversal REL.GOV.1 — Gobierno de GitHub Releases
+
+**Estado:** candidato G110/E01 (`0.1.10.01-beta`); no añade un bloque funcional al programa de 14 bloques.
+
+Objetivo previo a DOC.2:
+
+- normalizar la interpretación viva de `v0.0.71.01-beta` como G087/E01 sin alterar su tag histórico;
+- exigir un formato canónico para títulos y cuerpos de GitHub Release;
+- distinguir de forma determinística prerelease beta y release estable;
+- prohibir Releases retroactivos para estados aceptados que nunca tuvieron tag;
+- configurar `.github/release.yml` para categorización asistida;
+- validar VERSION, ledger y tag con `scripts/release_contract.py`;
+- extender el workflow de tags para ejecutar el contrato en todo tag futuro;
+- fijar reglas de edición posterior que preserven firma, commit objetivo y evidencia histórica.
+
+Si REL.GOV.1 supera gate, PR/CI e integración, consumirá G110. DOC.2 continuará entonces con G111/E01 (`0.1.11.01-beta`).
 
 ### 8. DOC.2 — CHANGELOG detallado `0.0.1-beta`–`0.0.21-beta`
 
@@ -518,7 +535,4 @@ SEC.2 está cerrado después de R1–R6. Antes de abrir DOC.2, AUD.SEC2 R1 ejecu
 una auditoría integral post-cierre porque el snapshot `4bd7d8d` reveló una
 regresión del kill switch administrativo y un ledger revision-aware incompleto.
 
-La reconciliación preserva G001–G070, reconstruye G071–G108 y AUD.SEC2 R1 queda aceptado como G109/E01
-(`0.1.09.01-beta`) mediante PR #83. G110/E01 (`0.1.10.01-beta`) queda disponible para DOC.2. El tag `v0.0.71.01-beta` se conserva
-inmutable aunque su estado corresponda cronológicamente a G087. Tras aceptar
-AUD.SEC2 R1, el siguiente bloque del plan vuelve a ser **DOC.2**.
+La reconciliación preserva G001–G070, reconstruye G071–G108 y AUD.SEC2 R1 queda aceptado/publicado como G109/E01 (`0.1.09.01-beta`). G110/E01 (`0.1.10.01-beta`) se reserva para REL.GOV.1, preflight transversal de gobierno de GitHub Releases. El tag `v0.0.71.01-beta` se conserva inmutable aunque su estado corresponda cronológicamente a G087. Tras aceptar REL.GOV.1, el plan continúa con **DOC.2** usando el siguiente Global disponible.

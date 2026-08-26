@@ -20,22 +20,22 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 
 ## Estado del proyecto
 
-- **Versión canónica vigente:** `0.1.09.01-beta`, obtenida exclusivamente desde [`VERSION`](VERSION). Materializa G109/E01 después de la aceptación de AUD.SEC2 R1 mediante PR #83; el tag formal de esta versión queda pendiente del paso post-merge.
-- **Último cierre integrado en `main`:** AUD.SEC2 R1 — saneamiento post-SEC.2 y reconciliación revision-aware en `ec1842d` (PR #83).
+- **Versión canónica vigente:** `0.1.09.01-beta`, obtenida exclusivamente desde [`VERSION`](VERSION). Materializa G109/E01; el tag firmado y GitHub Release `v0.1.09.01-beta` están publicados.
+- **Último cierre integrado en `main`:** promoción G109/E01 a `0.1.09.01-beta` en `6de6f32` (PR #84), posterior a AUD.SEC2 R1 en `ec1842d` (PR #83).
 - **Estado de SEC.2:** cerrado después de R1–R6; AUD.SEC2 R1 corrigió la regresión del kill switch administrativo, alineó documentación/ledger y quedó aceptado como G109.
-- **Estado revision-aware reconciliado:** G109/E01 (`0.1.09.01-beta`) aceptado sobre `ec1842d`; G110/E01 (`0.1.10.01-beta`) es el siguiente candidato disponible para DOC.2.
-- **Último tag revision-aware publicado:** `v0.0.71.01-beta`, preservado e inmutable. La auditoría post-G070 determinó que ese estado corresponde cronológicamente a G087; la promoción G109 no mueve ni recrea ese tag y su nuevo tag formal se crea únicamente después de revalidar `main`.
+- **Estado revision-aware reconciliado:** G109/E01 (`0.1.09.01-beta`) aceptado y publicado; G110/E01 (`0.1.10.01-beta`) queda reservado para REL.GOV.1, saneamiento transversal de GitHub Releases previo a DOC.2.
+- **Último tag revision-aware publicado:** `v0.1.09.01-beta` (G109/E01), firmado y asociado a GitHub Release. `v0.0.71.01-beta` permanece inmutable y reconciliado cronológicamente como G087/E01.
 - **Última versión formal legacy:** `0.0.26-beta` — tag firmado e inmutable `v0.0.26-beta`.
 - **Etapa:** desarrollo beta; repositorio público y ejecución orientada actualmente a entorno local.
 - **GOV.1, PLAN.1, DEV.2, MANT.1, DOC.1 R1, NOR.1, NOR.2 y DOC.1 R2:** cerrados.
 - **NOR.2:** cerrado después de R1–R8; sus evidencias históricas permanecen preservadas.
 - **SEC.2:** R1–R6 cerrados: hardening CodeQL, autenticación administrativa, protección centralizada, auditoría, sesión web y endurecimiento configurable para HTTPS interno.
-- **Siguiente bloque funcional:** DOC.2, con G110/E01 (`0.1.10.01-beta`) como siguiente candidato disponible cuando se abra su primera unidad aceptable.
+- **Preflight antes de DOC.2:** REL.GOV.1 endurece el contrato de tags/GitHub Releases bajo el candidato G110/E01; DOC.2 continuará con el siguiente Global disponible si este preflight se acepta.
 - **Primera versión oficial objetivo:** `1.0.0.0` con `Build 000001`, únicamente después de cerrar todos los gates definidos en el plan maestro.
 
 La visibilidad pública del repositorio **no convierte una beta de desarrollo en versión oficial, no constituye un despliegue de producción y no modifica por sí sola la licencia vigente**.
 
-La versión se obtiene exclusivamente del archivo [`VERSION`](VERSION). La política completa se documenta en [`VERSIONING.md`](VERSIONING.md). VER.2 ya completó la promoción G071/E01 y publicó `v0.0.71.01-beta`; su evidencia histórica quedó reorganizada y preservada por NOR.2 sin perder trazabilidad. Los estándares vigentes del repositorio están en [`docs/standards/`](docs/standards) y el cierre de la normalización se documenta en [`docs/audits/repository/`](docs/audits/repository).
+La versión se obtiene exclusivamente del archivo [`VERSION`](VERSION). La política completa se documenta en [`VERSIONING.md`](VERSIONING.md). VER.2 publicó `v0.0.71.01-beta` bajo la denominación original G071/E01; la reconciliación posterior sitúa ese estado en G087/E01 sin alterar el tag, y su evidencia histórica quedó preservada por NOR.2. Los estándares vigentes del repositorio están en [`docs/standards/`](docs/standards) y el cierre de la normalización se documenta en [`docs/audits/repository/`](docs/audits/repository).
 
 ## Capacidades implementadas
 
@@ -123,7 +123,7 @@ La documentación vigente debe apuntar únicamente a rutas canónicas actuales. 
 
 Después de `v0.0.26-beta`, UX.4.6f–UX.4.6i continuaron históricamente sobre ese mismo valor de `VERSION`. VER.2 reconstruye todo el tramo sin inventar tags: el último estado aceptado de la base `7037addd` es **G070/E02**, cierre de UX.4.6i.
 
-La nueva familia beta usa `0.GG.RR.EE-beta`. VER.2 R4 promovió `0.0.71.01-beta` (G071/E01) en `VERSION` después de R1, R2 y R3, y el tag firmado `v0.0.71.01-beta` quedó publicado durante el cierre post-release. No se crean tags revision-aware retrospectivos para G001–G070.
+La nueva familia beta usa `0.GG.RR.EE-beta`. VER.2 R4 promovió `0.0.71.01-beta` bajo la denominación original G071/E01 después de R1, R2 y R3; la reconciliación post-G070 sitúa el estado publicado en G087/E01 y conserva intacto el tag firmado `v0.0.71.01-beta`. No se crean tags revision-aware retrospectivos para G001–G070.
 
 Objetivo de release estable:
 
@@ -333,7 +333,7 @@ Las siguientes líneas se conservan como compatibilidad histórica de pruebas an
 - **841 pruebas** — evidencia histórica UX.4.6i / DEV.2.
 - **UX.4.6f:** cerrado — evidencia histórica del cierre funcional UX.4.6f.
 - R1 → R1.2 → R1.3 → R1.4 — secuencia histórica UX.4.6i.
-- **Versión VER.2 G071/E01:** `0.0.71.01-beta` — promovida en `VERSION`; el tag firmado `v0.0.71.01-beta` está publicado.
+- **Versión histórica VER.2:** `0.0.71.01-beta` — publicada originalmente como G071/E01 y reconciliada posteriormente como G087/E01; el tag firmado `v0.0.71.01-beta` permanece inmutable.
 - `sebd-panama` adoptado.
 - tag firmado `v0.0.26-beta` publicado.
 - Social Preview e identidad visual oficial configurados.

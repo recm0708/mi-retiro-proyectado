@@ -9,7 +9,7 @@ El cierre de MANT.1 R7 no cambia la política de seguridad ni convierte candidat
 Estado vigente:
 
 - La versión canónica vigente es `0.1.09.01-beta` (G109/E01).
-- `v0.0.71.01-beta` es el tag formal publicado correspondiente a VER.2 G071/E01.
+- `v0.0.71.01-beta` es un tag formal histórico publicado originalmente como VER.2 G071/E01 y reconciliado posteriormente como G087/E01 sin alterar el objeto firmado.
 - `v0.0.26-beta` permanece como tag legacy histórico e inmutable.
 - VER.2, DOC.1 R1, NOR.1 y NOR.2 están cerrados.
 - DOC.1 R2 quedó cerrado tras auditar integralmente la documentación Markdown posterior a NOR.2.
@@ -23,12 +23,12 @@ Mi Retiro Proyectado se encuentra en **desarrollo beta**. Los estados histórico
 
 | Línea | Soporte de seguridad |
 |---|---|
-| `0.1.09.01-beta` | Beta vigente promovida en `VERSION` como G109/E01; tag formal pendiente del paso post-merge |
+| `0.1.09.01-beta` | Beta vigente G109/E01; tag firmado y GitHub Release prerelease publicados |
 | `0.0.71.01-beta` | Beta revision-aware publicada previa; tag formal `v0.0.71.01-beta` preservado e inmutable |
 | `0.0.26-beta` | Beta legacy histórica; tag formal inmutable y referencia estable para regresiones históricas |
 | `0.0.25-beta` y anteriores | Históricas; no reciben correcciones independientes |
 
-La base histórica anterior a VER.2 se reconstruye en G001–G070 sin crear tags retroactivos. G071 solo se considera aceptado después del ledger/validador, gate completo, PR/CI e integración.
+La base histórica anterior a VER.2 se reconstruye en G001–G070 sin crear tags retroactivos. La denominación G071/E01 usada originalmente para `v0.0.71.01-beta` se conserva como historia; la reconciliación vigente sitúa ese estado en G087/E01.
 
 La primera versión oficial objetivo es `1.0.0.0` y solo podrá considerarse soportada cuando se materialice formalmente después de los gates definidos por el plan maestro.
 

@@ -6,7 +6,7 @@
 **Último tag formal legacy:** `v0.0.26-beta`
 **Versión base histórica preservada:** `0.0.23-beta`
 **Base documental:** GOV.1.3 R4 — 2026-08-17
-**Revisión transversal:** VER.2 — versionado revision-aware — 2026-08-22
+**Revisión transversal:** REL.GOV.1 — gobierno de GitHub Releases — 2026-08-26
 **Clasificación:** Gobierno / Release / Auditoría
 
 
@@ -19,11 +19,11 @@ Para una release posterior se mantiene el criterio vigente:
 
 - `VERSION` debe ser la fuente única.
 - `0.1.09.01-beta` es la versión canónica vigente y materializa G109/E01.
-- `v0.0.71.01-beta` es el tag formal publicado correspondiente a VER.2 G071/E01.
+- `v0.0.71.01-beta` fue publicado originalmente bajo la denominación VER.2 G071/E01; la reconciliación post-G070 sitúa ese estado cronológicamente en **G087/E01** sin mover el tag.
 - `v0.0.26-beta` permanece como tag legacy histórico e inmutable.
 - VER.2, MANT.1, DOC.1 R1, NOR.1 y NOR.2 están cerrados.
 - DOC.1 R2 está cerrado como auditoría Markdown posterior a NOR.2 y no crea por sí solo una release.
-- SEC.2 quedó cerrado después de R1–R6. AUD.SEC2 R1 fue aceptado mediante PR #83 como G109/E01 y la sincronización post-merge promueve `VERSION` a `0.1.09.01-beta`; G110 queda disponible para DOC.2.
+- SEC.2 quedó cerrado después de R1–R6. AUD.SEC2 R1 fue aceptado mediante PR #83 como G109/E01 y `v0.1.09.01-beta` quedó publicado. Antes de DOC.2 se reserva G110/E01 (`0.1.10.01-beta`) para **REL.GOV.1**, un saneamiento transversal del contrato de GitHub Releases.
 
 Todo release futuro requiere gate completo, PR/CI, actualización documental coherente, tag y evidencia reproducible.
 <!-- DOC1-R1-POST-MANT1:END -->
@@ -127,7 +127,7 @@ Después de preparar `VERSION`:
 - repetir `git diff --check`;
 - comprobar `VERSION`, `APP_VERSION`, FastAPI y footer;
 - ejecutar el validador del ledger estructurado y comprobar que preserve G001–G070 sin huecos ni duplicados;
-- comprobar que `0.0.71.01-beta` siga identificado como candidato reservado mientras VER.2 no esté integrado;
+- comprobar que `VERSION` corresponda al último estado aceptado o al candidato reservado del ledger mediante `python scripts/release_contract.py`;
 - comprobar README, ROADMAP, SECURITY, CHANGELOG, RELEASES y proceso de release;
 - comprobar que un candidato no se presente como tag/release ya publicado;
 - revisar que no existan logs, PDFs personales o secretos preparados para commit;
@@ -198,7 +198,8 @@ Ejemplos:
 
 ```text
 v0.0.26-beta       # último tag legacy histórico
-v0.0.71.01-beta    # candidato VER.2, solo si corresponde etiquetarlo tras cierre
+v0.0.71.01-beta    # tag histórico; reconciliado posteriormente como G087/E01
+v0.1.09.01-beta    # G109/E01, primer release posterior a la reconciliación
 v1.0.0.0
 v1.0.0.1
 ```
@@ -238,11 +239,93 @@ Una corrección posterior recibe un nuevo estado aceptado únicamente cuando sup
 
 ## 12. GitHub Release
 
-Durante la etapa beta puede existir únicamente un tag formal si el hito no distribuye un artefacto.
+Desde REL.GOV.1, **todo tag formal nuevo** publicado después de esta política debe tener un GitHub Release asociado. Los tags históricos anteriores no se rellenan retroactivamente salvo decisión de auditoría explícita y basada en evidencia. Un estado aceptado que nunca tuvo tag no recibe un Release retroactivo por conveniencia: GitHub Release y tag formal se tratan como una unidad publicada.
 
-Antes de la primera versión oficial se decidirá qué tags requieren GitHub Release, notas y artefactos.
+### 12.1. Contrato de título
 
-Si una futura GitHub Release incluye un instalador, ejecutable autocontenido, contenedor, ZIP o artefacto que incorpore físicamente dependencias de terceros, el release debe incluir los textos de licencia, avisos y NOTICE que correspondan al contenido realmente distribuido.
+Para una beta revision-aware el título obligatorio es:
+
+```text
+Mi Retiro Proyectado v<VERSION> — GNNN/ENN
+```
+
+Ejemplo vigente:
+
+```text
+Mi Retiro Proyectado v0.1.09.01-beta — G109/E01
+```
+
+El título se obtiene con:
+
+```powershell
+python scripts\release_contract.py --print-title
+```
+
+La excepción histórica `v0.0.71.01-beta` conserva su tag original, pero sus metadatos de GitHub Release muestran **G087/E01** y explican que fue publicado originalmente como G071/E01.
+
+### 12.2. Secciones obligatorias del cuerpo
+
+Todo Release nuevo debe contener, en este orden lógico, las siguientes secciones:
+
+1. `## Estado publicado`
+2. `## Resumen`
+3. `## Cambios principales`
+4. `## Validación`
+5. `## Evidencia`
+6. `## Siguiente paso`
+
+Dentro de **Estado publicado** se registran como mínimo versión, tag, G/E, commit objetivo y tipo de publicación. **Validación** debe conservar únicamente conteos realmente ejecutados. **Evidencia** debe identificar PR/merge, CI requerida y verificación del tag. **Siguiente paso** describe planificación, no una garantía de que el roadmap no pueda cambiar después.
+
+La estructura de un archivo de notas puede validarse con:
+
+```powershell
+python scripts\release_contract.py --check-notes .\release-notes.md
+```
+
+### 12.3. Prerelease frente a release estable
+
+- una versión terminada en `-beta` se publica con `--prerelease`;
+- una versión oficial estable no se marca como prerelease;
+- no se usa un Release beta como sustituto de una versión oficial;
+- `Build` solo se incorpora cuando REL.1 defina el contrato reproducible correspondiente.
+
+### 12.4. Creación controlada
+
+El tag debe existir, estar firmado, publicado y apuntar al SHA validado **antes** de crear el Release. El flujo recomendado es:
+
+```powershell
+$version = (Get-Content .\VERSION).Trim()
+$title = python scripts\release_contract.py --print-title
+python scripts\release_contract.py --check-tag "v$version"
+python scripts\release_contract.py --check-notes .\release-notes.md
+
+gh release create "v$version" `
+  --repo recm0708/mi-retiro-proyectado `
+  --title "$title" `
+  --prerelease `
+  --verify-tag `
+  --notes-file .\release-notes.md
+```
+
+Para una versión estable se omite `--prerelease`. `.github/release.yml` configura la categorización de **Generate release notes**, pero no sustituye estas secciones ni la evidencia manual obligatoria.
+
+### 12.5. Edición y reconciliación posterior
+
+Los metadatos de un GitHub Release pueden corregirse cuando haya errores de formato, redacción o una reconciliación histórica posterior. En ese caso:
+
+- se usa `gh release edit`;
+- **no** se mueve, elimina ni recrea el tag;
+- no se cambia el commit objetivo del tag;
+- una corrección semántica histórica debe indicar la denominación original y la reconciliada;
+- los conteos de pruebas originales se conservan como evidencia histórica y no se sustituyen por los actuales;
+- una edición puramente descriptiva del objeto GitHub Release no consume por sí sola un nuevo Global;
+- si la corrección requiere cambios versionados en política, workflow, scripts, pruebas o documentación viva, esos cambios siguen la contabilidad revision-aware ordinaria.
+
+### 12.6. Artefactos, privacidad y terceros
+
+Si una futura GitHub Release incluye un instalador, ejecutable autocontenido, contenedor, ZIP o artefacto que incorpore físicamente dependencias de terceros, el Release debe incluir hashes reproducibles cuando correspondan y los textos de licencia, avisos y NOTICE aplicables al contenido realmente distribuido.
+
+Nunca se adjuntan PDFs personales, logs con datos sensibles, secretos, `.env`, tokens, volcados de sesión ni archivos diagnósticos sin sanitizar.
 
 ## 13. Evidencia de cierre
 
@@ -289,5 +372,6 @@ Si un problema se descubre después de publicar un tag, no se reescribe ese tag.
 Antes de promover el siguiente candidato debe validarse que el ledger vivo
 contenga G001–G109, que G110 sea el siguiente Global y que el snapshot histórico
 G070 conserve su SHA-256. `v0.0.71.01-beta` no se mueve para corregir su
-numeración histórica. AUD.SEC2 R1 quedó aceptado en `ec1842d` y se materializa
-como `0.1.09.01-beta`; la promoción post-merge no consume G110.
+numeración histórica. REL.GOV.1 reserva G110/E01 para endurecer el contrato de
+GitHub Releases antes de DOC.2; si se acepta, DOC.2 continuará con el siguiente
+Global disponible.

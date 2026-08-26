@@ -1,0 +1,32 @@
+# Configuración para "Generate release notes" de GitHub.
+# La estructura final y los campos obligatorios se rigen por
+# docs/operations/release-process.md.
+changelog:
+  exclude:
+    labels:
+      - ignore-for-release
+    authors:
+      - dependabot
+  categories:
+    - title: Funcionalidad y UX
+      labels:
+        - enhancement
+        - feature
+    - title: Seguridad y privacidad
+      labels:
+        - security
+    - title: Correcciones
+      labels:
+        - bug
+        - fix
+    - title: Documentación y gobierno
+      labels:
+        - documentation
+        - governance
+    - title: Dependencias y mantenimiento
+      labels:
+        - dependencies
+        - maintenance
+    - title: Otros cambios
+      labels:
+        - "*"
