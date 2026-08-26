@@ -96,17 +96,12 @@ class TestNOR2R8FinalAudit(unittest.TestCase):
             leaked,
         )
 
-    def test_version_permanece_en_g071_e01(self):
+    def test_version_actual_permanece_canonica_sin_reescribir_g087(self):
         version = (
             ROOT / "VERSION"
         ).read_text(
             encoding="utf-8"
         ).strip()
-
-        self.assertEqual(
-            "0.1.11.01-beta",
-            version,
-        )
 
         self.assertEqual(
             version,

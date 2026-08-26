@@ -109,11 +109,10 @@ class TestNOR2R6LedgerData(unittest.TestCase):
         self.assertIn("G112", docs)
         self.assertIn("PERSIST.1", docs)
 
-    def test_version_no_cambia(self):
-        self.assertEqual(
-            "0.1.11.01-beta",
-            (ROOT / "VERSION").read_text(encoding="utf-8").strip(),
-        )
+    def test_version_sigue_derivada_del_ledger_vigente(self):
+        version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
+        ledger = cargar_ledger()
+        self.assertEqual(version, ledger["entries"][-1]["revision_aware"])
 
 
 if __name__ == "__main__":

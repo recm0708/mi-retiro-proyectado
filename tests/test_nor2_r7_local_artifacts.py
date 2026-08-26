@@ -148,8 +148,9 @@ class TestNOR2R7LocalArtifacts(unittest.TestCase):
             ROOT / "VERSION"
         ).read_text(encoding="utf-8").strip()
 
+        from app.core.version import APP_VERSION
         self.assertEqual(
-            "0.1.11.01-beta",
+            APP_VERSION,
             version,
         )
 

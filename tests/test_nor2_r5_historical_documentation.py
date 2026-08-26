@@ -118,8 +118,9 @@ class TestNOR2R5HistoricalDocumentation(unittest.TestCase):
         self.assertIn("NOR.2 R6", text)
 
     def test_version_y_estado_transversal(self):
+        from app.core.version import APP_VERSION
         self.assertEqual(
-            "0.1.11.01-beta",
+            APP_VERSION,
             (ROOT / "VERSION").read_text(encoding="utf-8").strip(),
         )
 

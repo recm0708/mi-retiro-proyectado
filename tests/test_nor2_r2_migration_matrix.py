@@ -108,8 +108,9 @@ class TestNOR2R2MigrationMatrix(unittest.TestCase):
             self.assertIn("NOR.2 R4", texto, ruta)
 
     def test_version_no_cambia(self):
+        from app.core.version import APP_VERSION
         version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
-        self.assertEqual("0.1.11.01-beta", version)
+        self.assertEqual(APP_VERSION, version)
 
     def test_aplicador_temporal_no_queda_en_arbol(self):
         self.assertFalse((ROOT / "apply_nor2_r2.py").exists())

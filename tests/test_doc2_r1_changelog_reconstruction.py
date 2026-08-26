@@ -90,12 +90,11 @@ class TestDOC2R1ChangelogReconstruction(unittest.TestCase):
         self.assertEqual("tipo: descripción del cambio", first["subject"])
         self.assertIn("anomalía histórica", self.changelog)
 
-    def test_doc2_preserva_g111_y_deja_g112_sin_consumir(self):
-        self.assertEqual("0.1.11.01-beta", (ROOT / "VERSION").read_text(encoding="utf-8").strip())
+    def test_doc2_preserva_g111_sin_fijar_estado_actual(self):
         ledger = cargar_ledger()
-        self.assertEqual(111, ledger["accepted_count"])
-        self.assertEqual(112, ledger["next_global"])
-        self.assertEqual("NOR.1", ledger["next_candidate_block"])
+        entry = next(e for e in ledger["entries"] if e["global_revision"] == 111)
+        self.assertEqual("DOC.2", entry["block"])
+        self.assertEqual("0.1.11.01-beta", entry["revision_aware"])
         self.assertTrue(self.data["reserved_candidate"]["consumed"])
         self.assertEqual(87, self.data["accepted_state"]["pull_request"])
 

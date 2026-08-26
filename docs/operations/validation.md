@@ -1,7 +1,7 @@
 # Validación
 
 **Estado:** Vigente
-**Versión revisada:** `0.1.11.01-beta` — G111/E01 promovida post-merge
+**Versión revisada:** `0.1.12.07-beta` — G112/E07 en promoción post-merge; G113/E03 reservado para DOC.1 R3
 **Versión base histórica:** `0.0.25-beta`
 **Base documental histórica:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal histórica preservada:** UX.4.6e R8 — validación funcional y procedencia editable — 2026-08-19
@@ -1116,7 +1116,15 @@ python scripts/audit_block_identifiers.py
 python -m unittest tests.test_nor1_r8_work_block_identifiers -v
 ```
 
-Invariantes del candidato: `VERSION=0.1.11.01-beta`, `accepted_count=111`, G112 reservado para NOR.1 R8 y PERSIST.1 todavía como siguiente bloque funcional.
+Estado aceptado: G112/E07 (`0.1.12.07-beta`) después de PR #89 / merge `cc6695b`, corrección ordinal PR #90 / merge `2de10b5` y revalidación post-merge de 1081 pruebas.
 
-- contrato vivo: `next_candidate=0.1.12.01-beta` y `next_candidate_block = NOR.1`;
-- la sección histórica de DOC.2 conserva `next_candidate_block = PERSIST.1` porque ese era el estado al cerrar G111.
+- `VERSION=0.1.12.07-beta`;
+- `accepted_count=112`;
+- `next_global=113`;
+- `next_candidate=0.1.13.03-beta`;
+- `next_candidate_block = DOC.1`;
+- la sección histórica de DOC.2 conserva `next_candidate_block = PERSIST.1` y `0.1.12.01-beta` porque ese era el estado al cerrar G111.
+
+## DOC.1 R3 — auditoría de etiquetas visibles de enlaces Markdown
+
+Checkpoint transversal posterior a NOR.1 R8 y previo a PERSIST.1. Debe auditar documentación viva, preservar historia en `docs/archive/`, justificar excepciones donde el path sea semánticamente necesario y añadir regresión automática contra etiquetas crudas no justificadas.

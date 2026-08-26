@@ -9,14 +9,14 @@
     "tracked_files": 459
   },
   "current_candidate": {
-    "global_revision": 112,
-    "revision_aware": "0.1.12.07-beta",
-    "block": "NOR.1",
-    "revision": "R8",
+    "global_revision": 113,
+    "revision_aware": "0.1.13.03-beta",
+    "block": "DOC.1",
+    "revision": "R3",
     "state": "reserved_not_accepted",
     "next_functional_block_if_accepted": "PERSIST.1",
-    "next_functional_global_if_accepted": 113,
-    "edition": 7
+    "next_functional_global_if_accepted": 114,
+    "edition": 3
   },
   "families": [
     {
@@ -443,8 +443,8 @@
       "identifier": "DOC.1",
       "family": "DOC",
       "kind": "block",
-      "status": "closed_reopenable_same_scope",
-      "meaning": "Auditoría e integridad Markdown; R1 y R2.",
+      "status": "reopened_candidate_r3",
+      "meaning": "Auditoría e integridad Markdown; R1/R2 cerradas; R3 audita etiquetas visibles y legibles de enlaces.",
       "evidence": "Ledger revision-aware.",
       "global_refs": [
         "G086",
@@ -480,11 +480,12 @@
       "identifier": "NOR.1",
       "family": "NOR",
       "kind": "block",
-      "status": "reopened_candidate_r8",
-      "meaning": "Definición de estándares; R8 incorpora el gobierno de identificadores.",
-      "evidence": "Ledger revision-aware.",
+      "status": "closed",
+      "meaning": "Definición de estándares; R8 cerró el gobierno de identificadores.",
+      "evidence": "Ledger revision-aware; G112 / PR #89 + PR #90.",
       "global_refs": [
-        "G088-G093"
+        "G088-G093",
+        "G112"
       ],
       "reusable_for_different_scope": false
     },

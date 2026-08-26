@@ -22,9 +22,14 @@ class TestG109PromotionPostMerge(unittest.TestCase):
 
     def test_version_actual_puede_avanzar_sin_reescribir_g109(self):
         version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
-        self.assertEqual("0.1.11.01-beta", version)
+        ledger = cargar_ledger()
         self.assertEqual(version, APP_VERSION)
-        self.assertEqual((111, 1), descomponer_version_beta_revision(version))
+        self.assertEqual(
+            (ledger["accepted_count"], ledger["entries"][-1]["ordinal"]),
+            descomponer_version_beta_revision(version),
+        )
+        entry = next(e for e in ledger["entries"] if e["global_revision"] == 109)
+        self.assertEqual("0.1.09.01-beta", entry["revision_aware"])
 
     def test_documentacion_conserva_publicacion_g109(self):
         releases = (ROOT / "RELEASES.md").read_text(encoding="utf-8")

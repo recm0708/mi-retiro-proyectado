@@ -99,8 +99,9 @@ class TestMant1R5AComentariosServiciosApp(unittest.TestCase):
                 self.assertIn("comentarios internos", texto)
 
     def test_r5a_no_promueve_version_ni_sec2(self):
+        from app.core.version import APP_VERSION
         version = self._leer("VERSION").strip()
-        self.assertEqual("0.1.11.01-beta", version)
+        self.assertEqual(APP_VERSION, version)
 
         changelog = self._leer("CHANGELOG.md")
         seccion = changelog.split("### MANT.1 R5A", 1)[1].split("### MANT.1 R4", 1)[0]

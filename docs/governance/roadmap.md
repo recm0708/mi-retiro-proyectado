@@ -1,11 +1,11 @@
 # Roadmap
 
 **Estado:** vigente
-**Versión vigente:** `0.1.11.01-beta` — G111/E01 aceptado para DOC.2
+**Versión vigente:** `0.1.12.07-beta` — G112/E07 aceptado para NOR.1 R8
 **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
 **Último tag formal legacy:** `v0.0.26-beta`
 **Fecha de revisión:** 2026-08-25
-**Estado actual:** SEC.2, AUD.SEC2 R1 y REL.GOV.1 están cerrados. DOC.2 R1 quedó aceptado mediante PR #87 y merge `1041b59`; G111/E01 se materializa como `0.1.11.01-beta` y G112/E07 (`0.1.12.07-beta`) queda reservado para NOR.1 R8 antes de PERSIST.1.
+**Estado actual:** SEC.2, AUD.SEC2 R1, REL.GOV.1, DOC.2 y NOR.1 R8 están cerrados/aceptados. G112/E07 se materializa como `0.1.12.07-beta`; G113/E03 (`0.1.13.03-beta`) queda reservado para DOC.1 R3 antes de PERSIST.1.
 
 
 <!-- NOR1-R7-CLOSURE:START -->
@@ -23,7 +23,8 @@ La secuencia operativa previa a SEC.2 queda:
 4. **AUD.SEC2 R1** — saneamiento post-cierre y reconciliación revision-aware — cerrado/aceptado como G109/E01 mediante PR #83;
 5. **REL.GOV.1** — preflight transversal de gobierno de Releases; cerrado/aceptado como G110/E01 mediante PR #85; no agrega un bloque funcional al plan de 14 bloques.
 6. **DOC.2** — cerrado en R1; reconstrucción auditable del CHANGELOG `0.0.1-beta`–`0.0.21-beta`, aceptada como G111/E01 mediante PR #87.
-7. **NOR.1 R8** — candidato transversal de gobierno de identificadores; reserva G112/E07 sin añadir un bloque funcional al plan.
+7. **NOR.1 R8** — cerrado/aceptado como G112/E07; gobierno canónico de identificadores vigente.
+8. **DOC.1 R3** — candidato transversal G113/E03 para auditar etiquetas visibles de enlaces Markdown antes de PERSIST.1.
 
 NOR.2 ejecutó los movimientos, renombrados, consolidaciones y retiros que
 NOR.1 deliberadamente no realizó.
@@ -209,7 +210,7 @@ No existe una una revisión intermedia no demostrada entre UX.4.6i R1 y R1.2 dem
 
 **VER.2:** bloque transversal cerrado. La primera promoción se publicó como `0.0.71.01-beta`; AUD.SEC2 R1 documenta que el ledger usado entonces terminaba en G070 y que la reconstrucción completa sitúa ese estado en G087 sin modificar el tag inmutable.
 
-**Checkpoint técnico actual:** G111/E01 (`0.1.11.01-beta`) está aceptado después de DOC.2 R1 / PR #87 y revalidación post-merge; G112/E07 (`0.1.12.07-beta`) queda reservado para NOR.1 R8 antes de PERSIST.1.
+**Checkpoint técnico actual:** G111/E01 (`0.1.11.01-beta`) está aceptado después de DOC.2 R1 / PR #87 y revalidación post-merge; G112/E07 (`0.1.12.07-beta`) queda aceptado para NOR.1 R8; G113/E03 (`0.1.13.03-beta`) queda reservado para DOC.1 R3 antes de PERSIST.1.
 
 Documentos canónicos de VER.2:
 

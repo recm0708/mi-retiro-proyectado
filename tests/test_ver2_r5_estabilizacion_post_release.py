@@ -3,6 +3,8 @@
 from pathlib import Path
 import unittest
 
+from app.core.version import APP_VERSION
+
 ROOT = Path(__file__).resolve().parents[1]
 
 
@@ -15,9 +17,9 @@ class TestVer2R5EstabilizacionPostRelease(unittest.TestCase):
         self.assertIn("v0.0.71.01-beta", texto)
         self.assertIn("cb1dc24", texto)
 
-    def test_version_actual(self):
+    def test_version_actual_sigue_fuente_canonica(self):
         version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
-        self.assertEqual(version, "0.1.11.01-beta")
+        self.assertEqual(version, APP_VERSION)
 
 
 if __name__ == "__main__":

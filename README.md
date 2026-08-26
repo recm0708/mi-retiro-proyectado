@@ -10,7 +10,7 @@
 
 [![Validación continua](https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/ci.yml)
 [![Auditoría de gobernanza](https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/governance-audit.yml/badge.svg?branch=main)](https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/governance-audit.yml)
-![Versión](https://img.shields.io/badge/versi%C3%B3n-0.1.11.01--beta-2563eb)
+![Versión](https://img.shields.io/badge/versi%C3%B3n-0.1.12.07--beta-2563eb)
 ![Python](https://img.shields.io/badge/Python-3.13%20%7C%203.14-3776AB?logo=python&logoColor=white)
 ![Licencia](https://img.shields.io/badge/licencia-propietaria-6B7280)
 
@@ -20,17 +20,17 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 
 ## Estado del proyecto
 
-- **Versión canónica vigente:** `0.1.11.01-beta`, obtenida exclusivamente desde [`VERSION`](VERSION). Materializa G111/E01 después de DOC.2 R1 y está publicada mediante el tag firmado/GitHub Release `v0.1.11.01-beta`.
-- **Última promoción integrada en `main`:** G111/E01 en `7e81034` (PR #88), posterior al cierre DOC.2 R1 en `1041b59` (PR #87).
+- **Versión canónica vigente:** `0.1.12.07-beta`, obtenida exclusivamente desde [`VERSION`](VERSION). Materializa G112/E07 después de cerrar NOR.1 R8; su tag/GitHub Release se publican únicamente después de integrar y revalidar esta promoción.
+- **Último cierre integrado en `main`:** NOR.1 R8 mediante PR #89 / merge `cc6695b`, con corrección del ordinal revision-aware mediante PR #90 / merge `2de10b5`; esta promoción materializa G112/E07.
 - **Estado de SEC.2:** cerrado después de R1–R6; AUD.SEC2 R1 corrigió la regresión del kill switch administrativo, alineó documentación/ledger y quedó aceptado como G109.
-- **Estado revision-aware reconciliado:** G111/E01 (`0.1.11.01-beta`) aceptado para DOC.2; G112/E07 (`0.1.12.07-beta`) queda reservado para NOR.1 R8 como checkpoint transversal previo a PERSIST.1.
+- **Estado revision-aware reconciliado:** G112/E07 (`0.1.12.07-beta`) queda aceptado para NOR.1 R8; G113/E03 (`0.1.13.03-beta`) queda reservado para DOC.1 R3, auditoría Markdown transversal previa a PERSIST.1.
 - **Último tag revision-aware publicado:** `v0.1.11.01-beta` (G111/E01), firmado, verificado y asociado a GitHub Release prerelease; los tags anteriores permanecen preservados.
 - **Última versión formal legacy:** `0.0.26-beta` — tag firmado e inmutable `v0.0.26-beta`.
 - **Etapa:** desarrollo beta; repositorio público y ejecución orientada actualmente a entorno local.
-- **GOV.1, PLAN.1, DEV.2, MANT.1, DOC.1 R1, NOR.2 y DOC.1 R2:** cerrados; NOR.1 conserva su cierre aceptado en R7 y está reabierto únicamente como candidato R8, todavía sin aceptar.
+- **GOV.1, PLAN.1, DEV.2, MANT.1, DOC.1 R1, NOR.1 R8, NOR.2 y DOC.1 R2:** cerrados; DOC.1 queda reabierto únicamente como candidato R3 para la auditoría de etiquetas visibles de enlaces Markdown.
 - **NOR.2:** cerrado después de R1–R8; sus evidencias históricas permanecen preservadas.
 - **SEC.2:** R1–R6 cerrados: hardening CodeQL, autenticación administrativa, protección centralizada, auditoría, sesión web y endurecimiento configurable para HTTPS interno.
-- **DOC.2:** cerrado en R1 y aceptado como G111/E01 mediante PR #87; la promoción post-merge materializa `0.1.11.01-beta` sin consumir G112. Antes de PERSIST.1 se ejecuta NOR.1 R8; G112 queda reservado para ese checkpoint sin consumirse durante el candidato.
+- **DOC.2:** cerrado en R1 y preservado como G111/E01. NOR.1 R8 quedó cerrado como G112/E07; antes de PERSIST.1 se ejecutará DOC.1 R3 como auditoría Markdown transversal G113/E03.
 - **Primera versión oficial objetivo:** `1.0.0.0` con `Build 000001`, únicamente después de cerrar todos los gates definidos en el plan maestro.
 
 La visibilidad pública del repositorio **no convierte una beta de desarrollo en versión oficial, no constituye un despliegue de producción y no modifica por sí sola la licencia vigente**.
@@ -102,7 +102,7 @@ Documentos principales:
 - [`docs/archive/governance/CIERRE_GOV1.md`](docs/archive/governance/CIERRE_GOV1.md) — auditoría final y decisión de cierre de GOV.1;
 - [`docs/archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md`](docs/archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md) — criterio contable y reconciliación VER.2;
 - [`docs/archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md`](docs/archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md) — decisiones de inclusión/exclusión del contador;
-- [`docs/governance/pre-1-0-revision-ledger.md`](docs/governance/pre-1-0-revision-ledger.md) — secuencia reconciliada G001–G111 y próximo candidato G112;
+- [`docs/governance/pre-1-0-revision-ledger.md`](docs/governance/pre-1-0-revision-ledger.md) — secuencia reconciliada G001–G112 y próximo candidato G113;
 - [`data/pre-1-0-revision-ledger.json`](data/pre-1-0-revision-ledger.json) — ledger machine-readable;
 - [`docs/standards/work-block-identifiers.md`](docs/standards/work-block-identifiers.md) — política canónica de identificadores de bloques;
 - [`data/work-block-registry.json`](data/work-block-registry.json) — registro machine-readable de identificadores históricos, cerrados y planificados;

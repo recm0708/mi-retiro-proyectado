@@ -6,13 +6,13 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ## [Unreleased]
 
-- NOR.1 R8: corrige el ordinal revision-aware del candidato reabierto; G112 pasa de E01 provisional a E07 conforme a `VERSIONING.md`.
-- Ledger: `next_candidate` queda en `0.1.12.07-beta`; G112 sigue sin consumirse y PERSIST.1 permanece como siguiente bloque funcional.
 
-- NOR.1 R8: audita y gobierna las familias e identificadores de bloques de trabajo.
-- NOR.1 R8: incorpora política, registro machine-readable y auditor automático para impedir reutilizaciones o siglas inventadas.
-- Ledger: reserva G112/E07 (`0.1.12.07-beta`) para NOR.1 R8 antes de PERSIST.1 sin cambiar `VERSION` ni `accepted_count`.
-
+## [0.1.12.07-beta]
+- G112/E07: NOR.1 R8 queda aceptado después de PR #89 / merge `cc6695b` y la corrección revision-aware PR #90 / merge `2de10b5`.
+- Gobierno: incorpora política canónica, registro machine-readable y auditor automático de identificadores; los bloques reabiertos continúan su ordinal `EE` y los bloques nuevos comienzan en E01.
+- Gate: 1081 pruebas post-merge en `OK`, Markdown 145/145, `pip check`, compilación Python, sintaxis JavaScript y `git diff --check` limpios; CI remota en `success`.
+- Ledger: G112 queda aceptado; G113/E03 (`0.1.13.03-beta`) queda reservado para DOC.1 R3 — auditoría de etiquetas visibles de enlaces Markdown — antes de PERSIST.1.
+- Tag/Release: `v0.1.12.07-beta` queda pendiente hasta integrar y revalidar esta promoción; `v0.1.11.01-beta` permanece como último tag publicado.
 
 ## [0.1.11.01-beta]
 - G111/E01: DOC.2 R1 aceptado mediante PR #87 y merge `1041b59`; reconstruye de forma auditable `0.0.1-beta`–`0.0.21-beta`.

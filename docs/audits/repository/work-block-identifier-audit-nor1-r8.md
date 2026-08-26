@@ -50,3 +50,9 @@ disponible.
 - `tests/test_nor1_r8_work_block_identifiers.py`.
 
 No se modifican tags históricos ni `docs/archive/` para reescribir terminología.
+
+## Resultado de aceptación
+
+NOR.1 R8 fue integrado mediante PR #89 y su ordinal revision-aware fue corregido antes de la aceptación mediante PR #90. El gate post-merge cerró con 1081 pruebas en `OK`, Markdown 145/145 y CI remota en `success`. La promoción formal materializa G112/E07 (`0.1.12.07-beta`).
+
+La auditoría Markdown posterior se clasifica bajo la política resultante como **DOC.1 R3**, no como un bloque nuevo: amplía el alcance registrado de auditoría e integridad Markdown. Su candidato es G113/E03 (`0.1.13.03-beta`) y PERSIST.1 permanece como siguiente bloque funcional.

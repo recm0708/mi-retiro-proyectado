@@ -25,11 +25,10 @@ class TestDev2R1CierreDocumental(unittest.TestCase):
         self.assertIn("868 passed, 695 subtests passed", documento)
         self.assertIn("0.0.26-beta", documento)
 
-    def test_cierre_documental_no_cambia_version_visible(self):
+    def test_version_visible_permanece_derivada_de_fuente_canonica(self):
         version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
 
-        self.assertEqual("0.1.11.01-beta", version)
-        self.assertEqual("0.1.11.01-beta", APP_VERSION)
+        self.assertEqual(APP_VERSION, version)
 
 
 if __name__ == "__main__":
