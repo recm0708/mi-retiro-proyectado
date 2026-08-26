@@ -40,10 +40,16 @@ class TestPostSec2IntegralAudit(unittest.TestCase):
         data = json.loads(
             (ROOT / "data/pre-1-0-revision-ledger.json").read_text(encoding="utf-8")
         )
-        self.assertEqual(109, data["accepted_count"])
-        self.assertEqual(110, data["next_global"])
-        self.assertEqual("0.1.10.01-beta", data["next_candidate"])
-        self.assertEqual(list(range(1, 110)), [e["global_revision"] for e in data["entries"]])
+        accepted = data["accepted_count"]
+        self.assertGreaterEqual(accepted, 109)
+        self.assertEqual(accepted + 1, data["next_global"])
+        self.assertEqual(
+            list(range(1, accepted + 1)),
+            [e["global_revision"] for e in data["entries"]],
+        )
+        g109 = next(e for e in data["entries"] if e["global_revision"] == 109)
+        self.assertEqual("AUD.SEC2", g109["block"])
+        self.assertEqual("0.1.09.01-beta", g109["revision_aware"])
 
     def test_auditoria_documental_cubre_snapshot_140_de_140(self):
         texto = (

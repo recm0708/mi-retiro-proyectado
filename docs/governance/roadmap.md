@@ -1,11 +1,11 @@
 # Roadmap
 
 **Estado:** vigente
-**Versión vigente:** `0.1.09.01-beta` — G109/E01 aceptado y publicado
+**Versión vigente:** `0.1.10.01-beta` — G110/E01 aceptado para REL.GOV.1
 **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
 **Último tag formal legacy:** `v0.0.26-beta`
 **Fecha de revisión:** 2026-08-25
-**Estado actual:** SEC.2 está cerrado después de R1–R6 y AUD.SEC2 R1 quedó aceptado/publicado como G109/E01. Antes de DOC.2 se ejecuta REL.GOV.1, saneamiento transversal del contrato de GitHub Releases, con G110/E01 (`0.1.10.01-beta`) reservado.
+**Estado actual:** SEC.2 y AUD.SEC2 R1 están cerrados. REL.GOV.1 R1 quedó aceptado como G110/E01 mediante PR #85 y merge `5cd1cea`; DOC.2 es el siguiente bloque con G111/E01 (`0.1.11.01-beta`) disponible.
 
 
 <!-- NOR1-R7-CLOSURE:START -->
@@ -21,8 +21,8 @@ La secuencia operativa previa a SEC.2 queda:
 2. **NOR.2** — normalización integral del repositorio — cerrado en R8 mediante PR #74;
 3. **SEC.2** — hardening integral — cerrado después de R1–R6;
 4. **AUD.SEC2 R1** — saneamiento post-cierre y reconciliación revision-aware — cerrado/aceptado como G109/E01 mediante PR #83;
-5. **REL.GOV.1** — preflight transversal de gobierno de Releases; G110/E01 reservado; no agrega un bloque funcional al plan de 14 bloques.
-6. **DOC.2** — siguiente bloque funcional después de REL.GOV.1; si G110 se acepta, comenzará con G111/E01.
+5. **REL.GOV.1** — preflight transversal de gobierno de Releases; cerrado/aceptado como G110/E01 mediante PR #85; no agrega un bloque funcional al plan de 14 bloques.
+6. **DOC.2** — siguiente bloque funcional después de REL.GOV.1; comenzará con G111/E01.
 
 NOR.2 ejecutó los movimientos, renombrados, consolidaciones y retiros que
 NOR.1 deliberadamente no realizó.
@@ -210,12 +210,12 @@ No existe una una revisión intermedia no demostrada entre UX.4.6i R1 y R1.2 dem
 
 **VER.2:** bloque transversal cerrado. La primera promoción se publicó como `0.0.71.01-beta`; AUD.SEC2 R1 documenta que el ledger usado entonces terminaba en G070 y que la reconstrucción completa sitúa ese estado en G087 sin modificar el tag inmutable.
 
-**Checkpoint técnico actual:** G109/E01 (`0.1.09.01-beta`) está aceptado y publicado. REL.GOV.1 reserva G110/E01 para normalizar política, plantilla y validaciones de GitHub Releases antes de DOC.2.
+**Checkpoint técnico actual:** REL.GOV.1 R1 está aceptado como G110/E01 (`0.1.10.01-beta`) mediante PR #85 y merge `5cd1cea`. DOC.2 continúa con G111/E01 (`0.1.11.01-beta`).
 
 Documentos canónicos de VER.2:
 
 - `AUDITORIA_VERSIONADO_PRE_1_0.md` — criterio contable y exclusiones;
-- `pre-1-0-revision-ledger.md` — ledger reconciliado G001–G109 y siguiente Global G110;
+- `pre-1-0-revision-ledger.md` — ledger reconciliado G001–G110 y siguiente Global G111;
 - `MATRIZ_DECISION_REVISIONES_VER2.md` — justificación de la segunda pasada;
 - `../data/pre-1-0-revision-ledger.json` — ledger estructurado validable;
 - `../VERSIONING.md` — política de numeración.
@@ -469,7 +469,7 @@ Alcance:
 
 ## REL.GOV.1 — gobierno de GitHub Releases
 
-**Estado:** candidato; G110/E01 (`0.1.10.01-beta`) reservado y no consumido hasta integración.
+**Estado:** cerrado; G110/E01 (`0.1.10.01-beta`) consumido por aceptación de PR #85 y merge `5cd1cea`.
 
 Alcance:
 
@@ -482,4 +482,4 @@ Alcance:
 - extender la verificación de tags para ejecutar el contrato local en tags futuros;
 - preservar los dos Releases existentes y sus tags sin reescribir historia criptográfica.
 
-Condición de cierre: gate local completo, commit firmado, PR/CI verde e integración. Si se acepta, DOC.2 continúa con G111/E01 (`0.1.11.01-beta`).
+Cierre confirmado: gate local completo, commit firmado, PR #85, CI Python 3.13/3.14 + Markdown/gobernanza en `success` e integración `5cd1cea`. La promoción post-merge materializa G110 sin consumir G111; DOC.2 continúa con G111/E01 (`0.1.11.01-beta`).

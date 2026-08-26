@@ -10,7 +10,7 @@
 
 [![Validación continua](https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/ci.yml)
 [![Auditoría de gobernanza](https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/governance-audit.yml/badge.svg?branch=main)](https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/governance-audit.yml)
-![Versión](https://img.shields.io/badge/versi%C3%B3n-0.1.09.01--beta-2563eb)
+![Versión](https://img.shields.io/badge/versi%C3%B3n-0.1.10.01--beta-2563eb)
 ![Python](https://img.shields.io/badge/Python-3.13%20%7C%203.14-3776AB?logo=python&logoColor=white)
 ![Licencia](https://img.shields.io/badge/licencia-propietaria-6B7280)
 
@@ -20,17 +20,17 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 
 ## Estado del proyecto
 
-- **Versión canónica vigente:** `0.1.09.01-beta`, obtenida exclusivamente desde [`VERSION`](VERSION). Materializa G109/E01; el tag firmado y GitHub Release `v0.1.09.01-beta` están publicados.
-- **Último cierre integrado en `main`:** promoción G109/E01 a `0.1.09.01-beta` en `6de6f32` (PR #84), posterior a AUD.SEC2 R1 en `ec1842d` (PR #83).
+- **Versión canónica vigente:** `0.1.10.01-beta`, obtenida exclusivamente desde [`VERSION`](VERSION). Materializa G110/E01 después de aceptar REL.GOV.1 mediante PR #85; su tag/Release se publican únicamente después de integrar y revalidar esta promoción.
+- **Último cierre integrado en `main`:** REL.GOV.1 R1 en `5cd1cea` (PR #85), posterior a la promoción G109/E01 en `6de6f32` (PR #84).
 - **Estado de SEC.2:** cerrado después de R1–R6; AUD.SEC2 R1 corrigió la regresión del kill switch administrativo, alineó documentación/ledger y quedó aceptado como G109.
-- **Estado revision-aware reconciliado:** G109/E01 (`0.1.09.01-beta`) aceptado y publicado; G110/E01 (`0.1.10.01-beta`) queda reservado para REL.GOV.1, saneamiento transversal de GitHub Releases previo a DOC.2.
-- **Último tag revision-aware publicado:** `v0.1.09.01-beta` (G109/E01), firmado y asociado a GitHub Release. `v0.0.71.01-beta` permanece inmutable y reconciliado cronológicamente como G087/E01.
+- **Estado revision-aware reconciliado:** G110/E01 (`0.1.10.01-beta`) aceptado para REL.GOV.1; G111/E01 (`0.1.11.01-beta`) queda disponible para DOC.2.
+- **Último tag revision-aware publicado:** `v0.1.09.01-beta` (G109/E01), firmado y asociado a GitHub Release. `v0.1.10.01-beta` queda pendiente hasta integrar/revalidar la promoción G110; `v0.0.71.01-beta` permanece inmutable y reconciliado como G087/E01.
 - **Última versión formal legacy:** `0.0.26-beta` — tag firmado e inmutable `v0.0.26-beta`.
 - **Etapa:** desarrollo beta; repositorio público y ejecución orientada actualmente a entorno local.
 - **GOV.1, PLAN.1, DEV.2, MANT.1, DOC.1 R1, NOR.1, NOR.2 y DOC.1 R2:** cerrados.
 - **NOR.2:** cerrado después de R1–R8; sus evidencias históricas permanecen preservadas.
 - **SEC.2:** R1–R6 cerrados: hardening CodeQL, autenticación administrativa, protección centralizada, auditoría, sesión web y endurecimiento configurable para HTTPS interno.
-- **Preflight antes de DOC.2:** REL.GOV.1 endurece el contrato de tags/GitHub Releases bajo el candidato G110/E01; DOC.2 continuará con el siguiente Global disponible si este preflight se acepta.
+- **Preflight antes de DOC.2:** REL.GOV.1 quedó aceptado como G110/E01; DOC.2 es el siguiente bloque y comenzará con G111/E01 (`0.1.11.01-beta`).
 - **Primera versión oficial objetivo:** `1.0.0.0` con `Build 000001`, únicamente después de cerrar todos los gates definidos en el plan maestro.
 
 La visibilidad pública del repositorio **no convierte una beta de desarrollo en versión oficial, no constituye un despliegue de producción y no modifica por sí sola la licencia vigente**.
@@ -102,7 +102,7 @@ Documentos principales:
 - [`docs/archive/governance/CIERRE_GOV1.md`](docs/archive/governance/CIERRE_GOV1.md) — auditoría final y decisión de cierre de GOV.1;
 - [`docs/archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md`](docs/archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md) — criterio contable y reconciliación VER.2;
 - [`docs/archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md`](docs/archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md) — decisiones de inclusión/exclusión del contador;
-- [`docs/governance/pre-1-0-revision-ledger.md`](docs/governance/pre-1-0-revision-ledger.md) — secuencia reconciliada G001–G109 y próximo candidato G110;
+- [`docs/governance/pre-1-0-revision-ledger.md`](docs/governance/pre-1-0-revision-ledger.md) — secuencia reconciliada G001–G110 y próximo candidato G111;
 - [`data/pre-1-0-revision-ledger.json`](data/pre-1-0-revision-ledger.json) — ledger machine-readable;
 - [`docs/governance/licensing-and-distribution.md`](docs/governance/licensing-and-distribution.md) — decisión de licencia y estrategia de distribución;
 - [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) — avisos y obligaciones de terceros;

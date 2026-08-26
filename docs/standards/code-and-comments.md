@@ -1,7 +1,7 @@
 # Estándar de código y comentarios
 
 **Estado:** Vigente
-**Versión de aplicación revisada:** `0.1.09.01-beta`
+**Versión de aplicación revisada:** `0.1.10.01-beta`
 **Versión base histórica:** `0.0.24-beta`
 **Revisión documental:** UX.4.6e R4 — 2026-08-18
 **Revisión de mantenimiento:** MANT.1 R5E — estandarización de nombres de carpetas — 2026-08-23

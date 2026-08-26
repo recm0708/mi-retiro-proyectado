@@ -6,9 +6,12 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ## [Unreleased]
 
-- REL.GOV.1: reserva G110/E01 (`0.1.10.01-beta`) para endurecer el contrato de GitHub Releases antes de DOC.2, sin modificar todavía `VERSION`.
-- Releases: normaliza la interpretación viva de `v0.0.71.01-beta` como estado reconciliado G087/E01, preservando su denominación original G071/E01 solo como evidencia histórica.
+## [0.1.10.01-beta]
+- G110/E01: REL.GOV.1 R1 aceptado mediante PR #85 y merge `5cd1cea`; normaliza el gobierno de GitHub Releases y corrige la interpretación viva de `v0.0.71.01-beta` como G087/E01 sin alterar su tag histórico.
 - Releases: incorpora `.github/release.yml`, `scripts/release_contract.py` y validación de tag en GitHub Actions para estandarizar título, prerelease, cuerpo mínimo, firma y correspondencia VERSION/ledger/tag.
+- Gate: 1054 pruebas locales en `OK`, Markdown 142/142, CI Python 3.13/3.14, Markdown Audit y Repository Governance Audit en `success`.
+- Ledger: G110 queda aceptado; G111/E01 (`0.1.11.01-beta`) pasa a ser el siguiente candidato disponible para DOC.2.
+- Tag/Release: `v0.1.10.01-beta` queda pendiente de creación firmada/publicación después de integrar y revalidar esta promoción; `v0.1.09.01-beta` y `v0.0.71.01-beta` permanecen inmutables.
 
 ## [0.1.09.01-beta]
 - G109/E01: promoción post-merge de AUD.SEC2 R1 después de PR #83, 1040 pruebas locales y CI remota en Python 3.13/3.14 + auditorías de Markdown/gobernanza en `success`; la sincronización no consume G110.

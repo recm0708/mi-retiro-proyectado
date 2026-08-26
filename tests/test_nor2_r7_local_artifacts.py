@@ -149,7 +149,7 @@ class TestNOR2R7LocalArtifacts(unittest.TestCase):
         ).read_text(encoding="utf-8").strip()
 
         self.assertEqual(
-            "0.1.09.01-beta",
+            "0.1.10.01-beta",
             version,
         )
 

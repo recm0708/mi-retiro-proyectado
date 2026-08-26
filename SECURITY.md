@@ -8,7 +8,7 @@ El cierre de MANT.1 R7 no cambia la política de seguridad ni convierte candidat
 
 Estado vigente:
 
-- La versión canónica vigente es `0.1.09.01-beta` (G109/E01).
+- La versión canónica vigente es `0.1.10.01-beta` (G110/E01).
 - `v0.0.71.01-beta` es un tag formal histórico publicado originalmente como VER.2 G071/E01 y reconciliado posteriormente como G087/E01 sin alterar el objeto firmado.
 - `v0.0.26-beta` permanece como tag legacy histórico e inmutable.
 - VER.2, DOC.1 R1, NOR.1 y NOR.2 están cerrados.
@@ -23,7 +23,8 @@ Mi Retiro Proyectado se encuentra en **desarrollo beta**. Los estados histórico
 
 | Línea | Soporte de seguridad |
 |---|---|
-| `0.1.09.01-beta` | Beta vigente G109/E01; tag firmado y GitHub Release prerelease publicados |
+| `0.1.10.01-beta` | Beta vigente G110/E01; tag/Release pendientes hasta integrar y revalidar la promoción post-merge |
+| `0.1.09.01-beta` | Beta G109/E01 publicada; tag firmado y GitHub Release prerelease preservados |
 | `0.0.71.01-beta` | Beta revision-aware publicada previa; tag formal `v0.0.71.01-beta` preservado e inmutable |
 | `0.0.26-beta` | Beta legacy histórica; tag formal inmutable y referencia estable para regresiones históricas |
 | `0.0.25-beta` y anteriores | Históricas; no reciben correcciones independientes |

@@ -104,7 +104,7 @@ class TestNOR2R8FinalAudit(unittest.TestCase):
         ).strip()
 
         self.assertEqual(
-            "0.1.09.01-beta",
+            "0.1.10.01-beta",
             version,
         )
 
@@ -143,18 +143,16 @@ class TestNOR2R8FinalAudit(unittest.TestCase):
             raw["schema_version"],
         )
 
-        self.assertEqual(
-            109,
-            raw["accepted_count"],
-        )
+        accepted = raw["accepted_count"]
+        self.assertGreaterEqual(accepted, 109)
 
         self.assertEqual(
-            109,
+            accepted,
             len(raw["entries"]),
         )
 
         self.assertEqual(
-            list(range(1, 110)),
+            list(range(1, accepted + 1)),
             [
                 item["global_revision"]
                 for item in raw["entries"]
@@ -162,13 +160,13 @@ class TestNOR2R8FinalAudit(unittest.TestCase):
         )
 
         self.assertEqual(
-            110,
+            accepted + 1,
             raw["next_global_if_ver2_accepted"],
         )
 
         self.assertEqual(
-            "0.1.10.01-beta",
-            raw["next_candidate"],
+            accepted + 1,
+            raw["next_global"],
         )
 
     def test_estado_documental_preserva_r8_y_refleja_estado_posterior(self):

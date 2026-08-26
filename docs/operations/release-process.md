@@ -1,7 +1,7 @@
 # Proceso de release
 
 **Estado:** Vigente
-**Versión de aplicación:** `0.1.09.01-beta` — AUD.SEC2 R1 / G109-E01 promovida post-merge
+**Versión de aplicación:** `0.1.10.01-beta` — REL.GOV.1 R1 / G110-E01 promovida post-merge
 **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
 **Último tag formal legacy:** `v0.0.26-beta`
 **Versión base histórica preservada:** `0.0.23-beta`
@@ -18,12 +18,12 @@ El cierre de MANT.1 R7 no constituye release formal ni cambia la versión canón
 Para una release posterior se mantiene el criterio vigente:
 
 - `VERSION` debe ser la fuente única.
-- `0.1.09.01-beta` es la versión canónica vigente y materializa G109/E01.
+- `0.1.10.01-beta` es la versión canónica vigente y materializa G110/E01; G109/E01 permanece publicado e inmutable.
 - `v0.0.71.01-beta` fue publicado originalmente bajo la denominación VER.2 G071/E01; la reconciliación post-G070 sitúa ese estado cronológicamente en **G087/E01** sin mover el tag.
 - `v0.0.26-beta` permanece como tag legacy histórico e inmutable.
 - VER.2, MANT.1, DOC.1 R1, NOR.1 y NOR.2 están cerrados.
 - DOC.1 R2 está cerrado como auditoría Markdown posterior a NOR.2 y no crea por sí solo una release.
-- SEC.2 quedó cerrado después de R1–R6. AUD.SEC2 R1 fue aceptado mediante PR #83 como G109/E01 y `v0.1.09.01-beta` quedó publicado. Antes de DOC.2 se reserva G110/E01 (`0.1.10.01-beta`) para **REL.GOV.1**, un saneamiento transversal del contrato de GitHub Releases.
+- SEC.2 quedó cerrado después de R1–R6. AUD.SEC2 R1 fue aceptado mediante PR #83 como G109/E01 y `v0.1.09.01-beta` quedó publicado. REL.GOV.1 quedó aceptado mediante PR #85 como G110/E01 (`0.1.10.01-beta`); DOC.2 continúa con G111/E01 (`0.1.11.01-beta`).
 
 Todo release futuro requiere gate completo, PR/CI, actualización documental coherente, tag y evidencia reproducible.
 <!-- DOC1-R1-POST-MANT1:END -->
@@ -370,8 +370,7 @@ Si un problema se descubre después de publicar un tag, no se reescribe ese tag.
 ## Reconciliación revision-aware antes de la próxima promoción
 
 Antes de promover el siguiente candidato debe validarse que el ledger vivo
-contenga G001–G109, que G110 sea el siguiente Global y que el snapshot histórico
+contenga G001–G110, que G111 sea el siguiente Global y que el snapshot histórico
 G070 conserve su SHA-256. `v0.0.71.01-beta` no se mueve para corregir su
-numeración histórica. REL.GOV.1 reserva G110/E01 para endurecer el contrato de
-GitHub Releases antes de DOC.2; si se acepta, DOC.2 continuará con el siguiente
-Global disponible.
+numeración histórica. REL.GOV.1 quedó aceptado como G110/E01 mediante PR #85 y merge `5cd1cea`.
+La promoción post-merge no consume G111; DOC.2 continúa con G111/E01 (`0.1.11.01-beta`).

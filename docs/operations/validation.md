@@ -1,7 +1,7 @@
 # Validación
 
 **Estado:** Vigente
-**Versión candidata revisada:** `0.1.09.01-beta` — G109/E01 promovida post-merge
+**Versión revisada:** `0.1.10.01-beta` — G110/E01 promovida post-merge
 **Versión base histórica:** `0.0.25-beta`
 **Base documental histórica:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal histórica preservada:** UX.4.6e R8 — validación funcional y procedencia editable — 2026-08-19
@@ -1057,14 +1057,14 @@ AUD.SEC2 R1 fue aceptado mediante PR #83 y merge `ec1842d`. La promoción post-m
 
 ## REL.GOV.1 — validación del contrato de GitHub Releases
 
-REL.GOV.1 se ejecuta como preflight transversal antes de DOC.2. G110/E01 (`0.1.10.01-beta`) queda reservado, pero `VERSION` permanece en `0.1.09.01-beta` hasta que el estado supere gate, commit firmado, PR/CI e integración.
+REL.GOV.1 se ejecutó como preflight transversal antes de DOC.2. G110/E01 (`0.1.10.01-beta`) superó gate, commit firmado, PR #85, CI remota e integración `5cd1cea`; la promoción post-merge materializa el estado sin consumir G111.
 
 Validaciones específicas:
 
 ```powershell
 python scripts\release_contract.py --json
 python scripts\release_contract.py --print-title
-python scripts\release_contract.py --check-tag v0.1.09.01-beta
+python scripts\release_contract.py --check-tag v0.1.10.01-beta
 ```
 
 El gate también debe confirmar:
@@ -1075,7 +1075,18 @@ El gate también debe confirmar:
 - cuerpo con `Estado publicado`, `Resumen`, `Cambios principales`, `Validación`, `Evidencia` y `Siguiente paso`;
 - `v0.0.71.01-beta` documentado como publicación originalmente G071/E01 y reconciliada G087/E01, sin modificar su tag;
 - ausencia de Releases retroactivos para G088–G108, ya que esos estados no tuvieron tags formales;
-- `accepted_count = 109`, `next_global = 110`, `next_candidate = 0.1.10.01-beta` y `next_candidate_block = REL.GOV.1`;
+- post-promoción: `accepted_count = 110`, `next_global = 111`, `next_candidate = 0.1.11.01-beta` y `next_candidate_block = DOC.2`;
 - auditoría Markdown, compilación Python, sintaxis JavaScript, suite completa y `git diff --check`.
 
-Si REL.GOV.1 se acepta, una sincronización posterior materializará G110 y dejará DOC.2 en el siguiente Global disponible.
+REL.GOV.1 quedó aceptado. Esta sincronización materializa G110/E01 y deja G111/E01 disponible para DOC.2.
+
+
+## Validación de promoción G110/E01
+
+REL.GOV.1 R1 fue aceptado mediante PR #85 y merge `5cd1cea`. La promoción post-merge:
+
+- sincroniza `VERSION` y `APP_VERSION` en `0.1.10.01-beta`;
+- actualiza el ledger a 110 estados aceptados y deja G111/E01 (`0.1.11.01-beta`) disponible para DOC.2;
+- conserva G109/E01, `v0.1.09.01-beta` y `v0.0.71.01-beta` como evidencia publicada e inmutable;
+- no consume G111 por ser sincronización del estado G110 ya aceptado;
+- requiere `pip check`, auditoría Markdown, compilación Python, sintaxis JavaScript, suite completa, `release_contract.py` y `git diff --check` antes del commit firmado.
