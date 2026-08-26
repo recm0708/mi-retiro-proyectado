@@ -10,7 +10,7 @@ Estado vigente:
 
 - MANT.1 quedó cerrado operativamente en R7.
 - DOC.1 R1 está cerrado; consolidó la documentación Markdown vigente posterior a MANT.1.
-- VER.2 está cerrado; G071/E01 fue promovido y publicado como `v0.0.71.01-beta`.
+- VER.2 está cerrado; `v0.0.71.01-beta` fue publicado originalmente como G071/E01 y reconciliado posteriormente como G087/E01 sin mover el tag.
 - NOR.1 y NOR.2 están cerrados; NOR.2 completó R1–R8.
 - DOC.1 R2 está cerrado como auditoría integral Markdown posterior al cierre de NOR.2.
 - `VERSION` permanece sincronizado con la versión canónica vigente `0.1.09.01-beta` (G109/E01).
@@ -19,6 +19,8 @@ Estado vigente:
 <!-- DOC1-R1-POST-MANT1:END -->
 
 Este documento define el flujo mínimo para modificar Mi Retiro Proyectado sin perder trazabilidad técnica, normativa, documental o de pruebas.
+
+La creación o edición de tags/GitHub Releases se rige adicionalmente por `docs/operations/release-process.md`. No se improvisan títulos ni cuerpos de Release; para estados revision-aware se usa `scripts/release_contract.py` como validador local.
 
 ## 1. Antes de comenzar
 

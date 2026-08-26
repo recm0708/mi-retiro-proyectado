@@ -1,11 +1,11 @@
 # Roadmap
 
 **Estado:** vigente
-**Versión vigente:** `0.1.09.01-beta` — G109/E01 aceptado; tag formal G109 pendiente post-merge
+**Versión vigente:** `0.1.09.01-beta` — G109/E01 aceptado y publicado
 **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
 **Último tag formal legacy:** `v0.0.26-beta`
 **Fecha de revisión:** 2026-08-25
-**Estado actual:** SEC.2 está cerrado después de R1–R6 y AUD.SEC2 R1 quedó aceptado como G109/E01 mediante PR #83. DOC.2 es el siguiente bloque; G110/E01 (`0.1.10.01-beta`) es el siguiente candidato disponible.
+**Estado actual:** SEC.2 está cerrado después de R1–R6 y AUD.SEC2 R1 quedó aceptado/publicado como G109/E01. Antes de DOC.2 se ejecuta REL.GOV.1, saneamiento transversal del contrato de GitHub Releases, con G110/E01 (`0.1.10.01-beta`) reservado.
 
 
 <!-- NOR1-R7-CLOSURE:START -->
@@ -21,7 +21,8 @@ La secuencia operativa previa a SEC.2 queda:
 2. **NOR.2** — normalización integral del repositorio — cerrado en R8 mediante PR #74;
 3. **SEC.2** — hardening integral — cerrado después de R1–R6;
 4. **AUD.SEC2 R1** — saneamiento post-cierre y reconciliación revision-aware — cerrado/aceptado como G109/E01 mediante PR #83;
-5. **DOC.2** — siguiente bloque funcional; G110/E01 disponible para su primera revisión aceptable.
+5. **REL.GOV.1** — preflight transversal de gobierno de Releases; G110/E01 reservado; no agrega un bloque funcional al plan de 14 bloques.
+6. **DOC.2** — siguiente bloque funcional después de REL.GOV.1; si G110 se acepta, comenzará con G111/E01.
 
 NOR.2 ejecutó los movimientos, renombrados, consolidaciones y retiros que
 NOR.1 deliberadamente no realizó.
@@ -68,9 +69,9 @@ MANT.1 quedó cerrado operativamente en R7 mediante PR #55 y commit squash `5707
 
 Estado vigente:
 
-- `VERSION` se promueve en R4 a `0.0.71.01-beta`.
+- VER.2 promovió `0.0.71.01-beta` bajo la denominación original G071/E01; la reconciliación posterior sitúa ese estado en G087/E01.
 - `v0.0.26-beta` permanece como tag legacy histórico e inmutable; el tag formal publicado de VER.2 es `v0.0.71.01-beta`.
-- `0.0.71.01-beta` representa VER.2 G071/E01 promovido y publicado mediante el tag formal `v0.0.71.01-beta`.
+- `v0.0.71.01-beta` permanece como tag histórico inmutable; fue publicado originalmente como G071/E01 y reconciliado posteriormente como G087/E01.
 - MANT.1 queda cerrado después de R5H, R6 y R7.
 - DOC.1 R1 está cerrado; DOC.1 R2 cierra la auditoría integral Markdown post-NOR.2, retira stubs documentales residuales y establece controles permanentes de regresión.
 - La primera versión oficial objetivo sigue siendo `1.0.0.0` con `Build 000001`, sujeta a los gates del plan maestro.
@@ -209,7 +210,7 @@ No existe una una revisión intermedia no demostrada entre UX.4.6i R1 y R1.2 dem
 
 **VER.2:** bloque transversal cerrado. La primera promoción se publicó como `0.0.71.01-beta`; AUD.SEC2 R1 documenta que el ledger usado entonces terminaba en G070 y que la reconstrucción completa sitúa ese estado en G087 sin modificar el tag inmutable.
 
-**Checkpoint técnico actual:** `4bd7d8d` permanece como G108; AUD.SEC2 R1 fue aceptado en `ec1842d` como G109/E01 y DOC.2 queda como siguiente bloque con G110/E01 disponible.
+**Checkpoint técnico actual:** G109/E01 (`0.1.09.01-beta`) está aceptado y publicado. REL.GOV.1 reserva G110/E01 para normalizar política, plantilla y validaciones de GitHub Releases antes de DOC.2.
 
 Documentos canónicos de VER.2:
 
@@ -463,5 +464,22 @@ Alcance:
 - reconciliar el ledger desde G070 hasta G108;
 - preservar `v0.0.71.01-beta` como anomalía histórica inmutable;
 - aceptar G109/E01 (`0.1.09.01-beta`) mediante PR #83 y sincronizar `VERSION` post-merge;
-- dejar G110/E01 (`0.1.10.01-beta`) disponible para DOC.2;
+- reservar G110/E01 (`0.1.10.01-beta`) para REL.GOV.1 antes de DOC.2;
 - habilitar DOC.2 únicamente después de gate, PR/CI y merge.
+
+## REL.GOV.1 — gobierno de GitHub Releases
+
+**Estado:** candidato; G110/E01 (`0.1.10.01-beta`) reservado y no consumido hasta integración.
+
+Alcance:
+
+- corregir referencias vivas que aún interpretaban `v0.0.71.01-beta` como G071/E01 sin explicar su reconciliación G087/E01;
+- estandarizar título, secciones, prerelease/estable y evidencia de cada GitHub Release futuro;
+- exigir que todo tag formal nuevo posterior a esta política tenga GitHub Release asociado;
+- no crear Releases retroactivos para estados que nunca tuvieron tag formal;
+- añadir `.github/release.yml` para categorización asistida;
+- añadir `scripts/release_contract.py` para validar VERSION/ledger/tag/título/notas;
+- extender la verificación de tags para ejecutar el contrato local en tags futuros;
+- preservar los dos Releases existentes y sus tags sin reescribir historia criptográfica.
+
+Condición de cierre: gate local completo, commit firmado, PR/CI verde e integración. Si se acepta, DOC.2 continúa con G111/E01 (`0.1.11.01-beta`).

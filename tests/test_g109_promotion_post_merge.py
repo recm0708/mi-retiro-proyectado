@@ -26,7 +26,7 @@ class TestG109PromotionPostMerge(unittest.TestCase):
         self.assertEqual(110, ledger["next_global_if_ver2_accepted"])
         self.assertEqual(110, ledger["next_global"])
         self.assertEqual("0.1.10.01-beta", ledger["next_candidate"])
-        self.assertEqual("DOC.2", ledger["next_candidate_block"])
+        self.assertEqual("REL.GOV.1", ledger["next_candidate_block"])
         self.assertEqual(
             "ec1842dac10a5395fb594223d31092fdee3cdfc1",
             ledger["reconciled_through_commit"],
@@ -44,13 +44,15 @@ class TestG109PromotionPostMerge(unittest.TestCase):
             self.assertIn("0.1.09.01-beta", texto)
             self.assertIn("G109", texto)
             self.assertIn("G110", texto)
+        self.assertIn("REL.GOV.1", roadmap)
         self.assertIn("DOC.2", roadmap)
         self.assertIn("no consume G110", ledger)
 
-    def test_tag_historico_permanece_inmutable_y_nuevo_tag_no_se_declara_publicado(self):
+    def test_tags_publicados_y_reconciliacion_historica_quedan_documentados(self):
         releases = (ROOT / "RELEASES.md").read_text(encoding="utf-8")
         self.assertIn("v0.0.71.01-beta", releases)
-        self.assertIn("Tag formal `v0.1.09.01-beta`: pendiente", releases)
+        self.assertIn("Tag y GitHub Release formal `v0.1.09.01-beta`: publicados", releases)
+        self.assertIn("G087/E01", releases)
 
 
 if __name__ == "__main__":

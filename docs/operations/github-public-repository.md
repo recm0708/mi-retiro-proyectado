@@ -6,7 +6,7 @@
 **Versión base del checkpoint público:** `0.0.24-beta`
 **Fecha de preparación original:** 2026-08-18
 **Revalidación pública:** 2026-08-19
-**Última revisión documental:** PLAN.1 R2C — 2026-08-20
+**Última revisión documental:** REL.GOV.1 — gobierno de GitHub Releases — 2026-08-26
 **Clasificación:** GitHub / Comunidad / Publicación
 
 Este documento conserva la preparación realizada antes del cambio de visibilidad y registra el estado vigente después de convertir el repositorio en público. La publicación del **repositorio de código** no equivale a declarar una versión oficial de la aplicación, ni constituye por sí sola un despliegue de producción, ni sustituye los gates jurídicos, de accesibilidad, alcance funcional o seguridad.
@@ -132,6 +132,20 @@ Configuración vigente mientras no exista una necesidad distinta:
 - rebase merge: deshabilitado;
 - auto-merge: deshabilitado;
 - update branch: habilitado.
+
+## 7.1. Tags y GitHub Releases
+
+REL.GOV.1 añade un contrato específico de publicación sin modificar la visibilidad ni la licencia del repositorio:
+
+- todo tag formal nuevo posterior a esta política debe tener GitHub Release asociado;
+- `.github/release.yml` categoriza notas generadas por GitHub, pero no sustituye el cuerpo auditable requerido;
+- `scripts/release_contract.py` valida VERSION, ledger, tag, título y secciones mínimas de las notas;
+- `.github/workflows/verificar-tags.yml` verifica firma y contrato del tag en publicaciones futuras;
+- una beta terminada en `-beta` se marca como prerelease;
+- no se crean GitHub Releases retroactivos para estados que nunca tuvieron tag formal;
+- una edición descriptiva de un Release histórico no autoriza mover, borrar ni recrear su tag.
+
+El formato canónico completo vive en `docs/operations/release-process.md`.
 
 ## 8. Gate de seguridad ejecutado al cambiar a Public
 

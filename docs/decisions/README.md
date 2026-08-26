@@ -1990,6 +1990,6 @@ La guía reutiliza `construir_catalogo_metodologia()` para las fuentes oficiales
 
 **Decisión:** durante la etapa beta, los estados nuevos usan `0.GG.RR.EE-beta` y el contador global consume únicamente estados materialmente distintos y aceptados. Commits, PR, squash, CI y tags son evidencia del estado, no revisiones adicionales por sí solos.
 
-La segunda pasada de VER.2 fijó G070 sobre `7037addd`. AUD.SEC2 R1 reconstruyó los estados posteriores hasta G108, preservó `v0.0.71.01-beta` como tag publicado e inmutable con anomalía histórica de numeración y quedó aceptado como G109/E01 (`0.1.09.01-beta`) mediante PR #83; G110/E01 queda disponible para DOC.2.
+La segunda pasada de VER.2 fijó G070 sobre `7037addd`. AUD.SEC2 R1 reconstruyó los estados posteriores hasta G108, preservó `v0.0.71.01-beta` como tag publicado e inmutable con anomalía histórica de numeración y quedó aceptado como G109/E01 (`0.1.09.01-beta`) mediante PR #83; G110/E01 queda reservado para REL.GOV.1, preflight transversal de gobierno de GitHub Releases previo a DOC.2.
 
 El detalle, alternativas y evidencia completa permanecen en [`adr-179-revision-aware-versioning.md`](adr-179-revision-aware-versioning.md).

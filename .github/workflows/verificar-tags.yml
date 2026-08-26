@@ -40,6 +40,9 @@ jobs:
       - name: Verificar firma del tag
         shell: bash
         run: git tag -v "$GITHUB_REF_NAME"
+      - name: Validar contrato VERSION / ledger / tag
+        shell: bash
+        run: python scripts/release_contract.py --check-tag "$GITHUB_REF_NAME"
 
   auditar-todos-los-tags:
     name: Auditar todos los tags

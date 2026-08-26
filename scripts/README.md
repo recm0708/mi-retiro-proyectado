@@ -14,6 +14,7 @@ no calculan pensiones y no modifican normativa.
 | `configure_git_hooks.ps1` | Configura `core.hooksPath=.githooks` para que Git use los hooks versionados del proyecto. | No |
 | `audit_markdown.py` | Audita la documentación Markdown versionada: formato, metadata, versión vigente, idioma, enlaces locales y stubs de compatibilidad. | No |
 | `validate_precommit.py` | Ejecuta el gate local antes de crear commits: estado Git, whitespace, auditoría Markdown, dependencias, compilación Python, sintaxis JavaScript y pruebas. | No |
+| `release_contract.py` | Valida el contrato revision-aware de VERSION/ledger/tag/título/notas para tags y GitHub Releases futuros. | No |
 
 ## Uso previsto
 
@@ -30,6 +31,20 @@ El auditor documental también puede ejecutarse directamente:
 
 ```powershell
 python scripts/audit_markdown.py
+```
+
+El contrato de publicación puede inspeccionarse antes de crear un tag o Release:
+
+```powershell
+python scripts/release_contract.py --json
+python scripts/release_contract.py --print-title
+python scripts/release_contract.py --check-tag "v$((Get-Content .\VERSION).Trim())"
+```
+
+Para validar un archivo de notas de Release:
+
+```powershell
+python scripts/release_contract.py --check-notes .\release-notes.md
 ```
 
 El mismo auditor forma parte del gate local, por lo que una infracción Markdown

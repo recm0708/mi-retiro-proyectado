@@ -146,6 +146,9 @@ La política aplicable está en `VERSIONING.md`.
 - Después de la migración, todo commit nuevo y todo tag nuevo deben estar firmados. `v0.0.24-beta` y `v0.0.25-beta` fueron creados bajo esta política y se verificaron correctamente.
 - La fuente canónica y asignación del Build se definirán en REL.1; hasta entonces no se publica un Build ficticio.
 - La clave privada nunca se versiona.
+- Desde REL.GOV.1, todo tag formal nuevo debe tener un GitHub Release asociado con título canónico, cuerpo mínimo auditable y estado prerelease/estable coherente con `VERSION`.
+- `docs/operations/release-process.md` es la política canónica de publicación; `.github/release.yml` solo asiste la categorización automática y `scripts/release_contract.py` valida el contrato local de VERSION/ledger/tag/título/notas.
+- La edición de metadatos de un Release histórico puede corregir formato o reconciliación sin mover ni recrear su tag; toda corrección semántica debe conservar la denominación original como evidencia.
 
 ## 8. Propiedad y revisión de áreas críticas
 

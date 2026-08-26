@@ -10,10 +10,11 @@
 ## Promoción G109/E01 — post-merge de AUD.SEC2 R1
 
 - Estado aceptado: G109/E01 (`0.1.09.01-beta`).
-- Evidencia de aceptación: PR #83, merge `ec1842d`, 1040 pruebas locales y checks remotos requeridos en `success`.
-- Esta sincronización materializa el G109 ya aceptado y **no consume G110**.
-- Siguiente Global disponible: G110/E01 (`0.1.10.01-beta`) para DOC.2 cuando corresponda.
-- Tag formal `v0.1.09.01-beta`: pendiente hasta integrar/revalidar la promoción; no se mueve `v0.0.71.01-beta`.
+- Evidencia de aceptación de AUD.SEC2 R1: PR #83, merge `ec1842d`, 1040 pruebas locales y checks remotos requeridos en `success`.
+- Evidencia de promoción: PR #84, merge `6de6f32`, 1044 pruebas locales, CI Python 3.13/3.14 y auditorías Markdown/gobernanza en `success`.
+- Esta sincronización materializó el G109 ya aceptado y **no consumió G110**.
+- G110/E01 (`0.1.10.01-beta`) se reserva para REL.GOV.1, saneamiento transversal del contrato de GitHub Releases previo a DOC.2.
+- Tag y GitHub Release formal `v0.1.09.01-beta`: publicados después de integrar/revalidar la promoción; no se mueve `v0.0.71.01-beta`.
 
 
 ## Estado post-MANT.1
@@ -22,15 +23,15 @@ Después de `v0.0.26-beta`, el repositorio integró trabajo funcional, técnico,
 
 Estado vigente:
 
-- Último tag formal: `v0.0.71.01-beta`.
+- Último tag formal: `v0.1.09.01-beta`.
 - Último tag formal legacy: `v0.0.26-beta`.
 - Versión canónica en `VERSION`: `0.1.09.01-beta` (G109/E01).
-- VER.2 G071/E01 está cerrado y publicado como `v0.0.71.01-beta`.
+- `v0.0.71.01-beta` fue publicado originalmente bajo la denominación VER.2 G071/E01; la reconciliación post-G070 sitúa ese estado cronológicamente en **G087/E01** sin alterar el tag.
 - MANT.1 está cerrado.
 - DOC.1 R1 está cerrado.
 - NOR.1 y NOR.2 están cerrados.
 - DOC.1 R2 está cerrado como auditoría integral Markdown post-NOR.2.
-- SEC.2 quedó cerrado después de R1–R6. AUD.SEC2 R1 fue aceptado por PR #83 como G109/E01; la promoción post-merge actualiza `VERSION` a `0.1.09.01-beta` sin consumir G110. El tag `v0.1.09.01-beta` se materializa únicamente después de integrar y revalidar este paso.
+- SEC.2 quedó cerrado después de R1–R6. AUD.SEC2 R1 fue aceptado por PR #83 como G109/E01; la promoción post-merge actualizó `VERSION` a `0.1.09.01-beta` y publicó el tag/Release `v0.1.09.01-beta`. G110 queda reservado para REL.GOV.1 antes de DOC.2.
 
 Este documento no crea una release nueva; registra el estado formal ya alcanzado por el repositorio.
 <!-- DOC1-R1-POST-MANT1:END -->
@@ -43,7 +44,7 @@ Git conserva la evidencia primaria: hashes, fechas, autores, mensajes y contenid
 
 El commit raíz real es `a0a9e09` (`tipo: descripción del cambio`). Su mensaje es una anomalía histórica previa a la convención posterior y se conserva sin modificar.
 
-VER.2 añade una segunda capa de auditoría: `docs/governance/pre-1-0-revision-ledger.md` y `data/pre-1-0-revision-ledger.json` reconstruyen los **estados aceptados** como G001–G070 sobre la base `7037addd44253e528c77460b678d2b3ccd540dd5`. Esos identificadores revision-aware no sustituyen versiones/tags históricos ni autorizan tags retroactivos. `0.0.71.01-beta` es la versión publicada de VER.2 G071/E01 después de completar gate, PR/CI, integración y publicación del tag `v0.0.71.01-beta`.
+VER.2 añade una segunda capa de auditoría: `docs/governance/pre-1-0-revision-ledger.md` y `data/pre-1-0-revision-ledger.json` reconstruyen los **estados aceptados** como G001–G070 sobre la base `7037addd44253e528c77460b678d2b3ccd540dd5`. Esos identificadores revision-aware no sustituyen versiones/tags históricos ni autorizan tags retroactivos. `0.0.71.01-beta` fue publicada originalmente como VER.2 G071/E01. La reconciliación posterior determinó que su estado corresponde cronológicamente a G087/E01; el tag y su commit objetivo permanecen inmutables.
 
 ## 2. Estados retrospectivos
 
