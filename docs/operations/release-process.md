@@ -1,7 +1,7 @@
 # Proceso de release
 
 **Estado:** Vigente
-**Versión de aplicación:** `0.1.12.07-beta` — NOR.1 R8 / G112-E07 en promoción post-merge
+**Versión de aplicación:** `0.1.13.03-beta` — DOC.1 R3 / G113-E03 en promoción post-merge
 **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
 **Último tag formal legacy:** `v0.0.26-beta`
 **Versión base histórica preservada:** `0.0.23-beta`
@@ -18,12 +18,12 @@ El cierre de MANT.1 R7 no constituye release formal ni cambia la versión canón
 Para una release posterior se mantiene el criterio vigente:
 
 - `VERSION` debe ser la fuente única.
-- `0.1.10.01-beta` es la versión canónica vigente y materializa G110/E01; G109/E01 permanece publicado e inmutable.
+- `0.1.13.03-beta` es la versión canónica vigente y materializa G113/E03; `v0.1.12.07-beta` permanece publicado e inmutable.
 - `v0.0.71.01-beta` fue publicado originalmente bajo la denominación VER.2 G071/E01; la reconciliación post-G070 sitúa ese estado cronológicamente en **G087/E01** sin mover el tag.
 - `v0.0.26-beta` permanece como tag legacy histórico e inmutable.
-- VER.2, MANT.1, DOC.1 R1, NOR.1 y NOR.2 están cerrados.
-- DOC.1 R2 está cerrado como auditoría Markdown posterior a NOR.2 y no crea por sí solo una release.
-- SEC.2 quedó cerrado después de R1–R6. AUD.SEC2 R1 fue aceptado mediante PR #83 como G109/E01 y `v0.1.09.01-beta` quedó publicado. REL.GOV.1 quedó aceptado mediante PR #85 como G110/E01 (`0.1.10.01-beta`); DOC.2 continúa con G111/E01 (`0.1.11.01-beta`).
+- VER.2, MANT.1, DOC.1 R1–R3, NOR.1 y NOR.2 están cerrados.
+- SEC.2 quedó cerrado después de R1–R6. AUD.SEC2 R1 fue aceptado como G109/E01, REL.GOV.1 como G110/E01, DOC.2 como G111/E01, NOR.1 R8 como G112/E07 y DOC.1 R3 como G113/E03.
+- PERSIST.1 queda como siguiente candidato G114/E01 (`0.1.14.01-beta`).
 
 Todo release futuro requiere gate completo, PR/CI, actualización documental coherente, tag y evidencia reproducible.
 <!-- DOC1-R1-POST-MANT1:END -->

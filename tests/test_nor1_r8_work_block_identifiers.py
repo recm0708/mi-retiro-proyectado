@@ -53,30 +53,18 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
         for label in ("LEGACY", "INTEGRIDAD", "POST-GOV"):
             self.assertFalse(labels[label]["reusable_as_family"])
 
-    def test_g112_acepta_nor1_r8_y_reserva_doc1_r3(self):
+    def test_g112_permanece_aceptado_y_persist_es_siguiente(self):
         ledger = cargar_ledger()
-        version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
-
-        self.assertEqual("0.1.12.07-beta", version)
-        self.assertEqual(112, ledger["accepted_count"])
-        self.assertEqual(113, ledger["next_global"])
-        self.assertEqual("0.1.13.03-beta", ledger["next_candidate"])
-        self.assertEqual("DOC.1", ledger["next_candidate_block"])
-
-        entry = ledger["entries"][-1]
-        self.assertEqual(112, entry["global_revision"])
+        entry = next(x for x in ledger["entries"] if x["global_revision"] == 112)
         self.assertEqual("NOR.1", entry["block"])
         self.assertEqual(7, entry["ordinal"])
-
+        self.assertEqual("0.1.12.07-beta", entry["revision_aware"])
         candidate = self.data["current_candidate"]
-        self.assertEqual(113, candidate["global_revision"])
-        self.assertEqual("DOC.1", candidate["block"])
-        self.assertEqual("R3", candidate["revision"])
+        self.assertEqual(114, candidate["global_revision"])
+        self.assertEqual("PERSIST.1", candidate["block"])
+        self.assertEqual("R1", candidate["revision"])
         self.assertEqual("reserved_not_accepted", candidate["state"])
-        self.assertEqual(
-            "PERSIST.1",
-            candidate["next_functional_block_if_accepted"],
-        )
+        self.assertEqual("REP.1", candidate["next_functional_block_if_accepted"])
 
     def test_candidato_reabierto_continua_ordinal_del_bloque(self):
         ledger = cargar_ledger()
@@ -89,12 +77,12 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
 
         candidato = copy.deepcopy(ledger)
         candidato["next_candidate_block"] = "NOR.1"
-        candidato["next_candidate"] = "0.1.13.08-beta"
+        candidato["next_candidate"] = "0.1.14.08-beta"
         validar_ledger(candidato)
 
         invalido = copy.deepcopy(ledger)
         invalido["next_candidate_block"] = "NOR.1"
-        invalido["next_candidate"] = "0.1.13.01-beta"
+        invalido["next_candidate"] = "0.1.14.01-beta"
         with self.assertRaises(LedgerRevisionError):
             validar_ledger(invalido)
 
@@ -102,7 +90,7 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
         ledger = cargar_ledger()
         candidato = copy.deepcopy(ledger)
         candidato["next_candidate_block"] = "PERSIST.1"
-        candidato["next_candidate"] = "0.1.13.01-beta"
+        candidato["next_candidate"] = "0.1.14.01-beta"
 
         validar_ledger(candidato)
 
@@ -122,7 +110,7 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
         self.assertIn(r"\d+[A-Za-z0-9]*", script)
         self.assertNotIn("DOC.exists", self.data["non_block_tokens"])
 
-    def test_documentacion_viva_declara_g112_aceptado_y_doc1_r3(self):
+    def test_documentacion_viva_declara_g113_aceptado_y_persist1(self):
         for rel in (
             "VERSIONING.md",
             "GOVERNANCE.md",
@@ -138,6 +126,8 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
                 self.assertIn("G112", content)
                 self.assertIn("NOR.1 R8", content)
                 self.assertIn("DOC.1 R3", content)
+                self.assertIn("G113", content)
+                self.assertIn("PERSIST.1", content)
 
     def test_auditor_automatico_queda_limpio(self):
         proc = subprocess.run(

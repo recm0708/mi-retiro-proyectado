@@ -108,11 +108,13 @@ class TestDOC2R1ChangelogReconstruction(unittest.TestCase):
         self.assertIn("29 tags formales", audit)
         self.assertIn("29 GitHub Releases", audit)
 
-    def test_documentacion_viva_avanza_a_g111_y_30_releases(self):
+    def test_documentacion_preserva_g111_y_30_releases(self):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
         releases = (ROOT / "RELEASES.md").read_text(encoding="utf-8")
-        for current in (readme, releases):
-            self.assertIn("v0.1.11.01-beta", current)
+
+        self.assertIn("G111/E01", readme)
+        self.assertIn("G111/E01", releases)
+        self.assertIn("v0.1.11.01-beta", releases)
         self.assertIn("30 tags formales", readme)
         self.assertIn("30 GitHub Releases", readme)
 

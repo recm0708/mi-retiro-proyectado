@@ -1,9 +1,9 @@
 # Índice de documentación
 
 **Estado:** vigente
-**Versión de aplicación:** `0.1.12.07-beta` — G112/E07 aceptado para NOR.1 R8; G113/E03 reservado para DOC.1 R3; ledger aceptado hasta G112
+**Versión de aplicación:** `0.1.13.03-beta` — G113/E03 aceptado para DOC.1 R3; G114/E01 reservado para PERSIST.1; ledger aceptado hasta G113
 **Último tag formal legacy:** `v0.0.26-beta`
-**Última actualización transversal:** promoción NOR.1 R8 — G112/E07 aceptado; DOC.1 R3 próximo candidato — 2026-08-26
+**Última actualización transversal:** promoción DOC.1 R3 — G113/E03 aceptado; PERSIST.1 próximo candidato — 2026-08-26
 **Cierres históricos preservados:** UX.4.6i / PR #34 — 841 pruebas; UX.4.6e R9 — `v0.0.25-beta`
 
 Este archivo es el punto de entrada para la documentación técnica, funcional, normativa, de privacidad, validación y auditoría de Mi Retiro Proyectado.
@@ -11,7 +11,7 @@ Este archivo es el punto de entrada para la documentación técnica, funcional, 
 
 ## Estado de normalización del repositorio
 
-**Estado actual:** NOR.1 R8, NOR.2, DOC.1 R2, SEC.2, AUD.SEC2 R1, REL.GOV.1 y DOC.2 están cerrados/aceptados según corresponda. G112/E07 está materializado como `0.1.12.07-beta`; DOC.1 R3 reserva G113/E03 como auditoría transversal previa a PERSIST.1.
+**Estado actual:** NOR.1 R8, NOR.2, DOC.1 R2–R3, SEC.2, AUD.SEC2 R1, REL.GOV.1 y DOC.2 están cerrados/aceptados según corresponda. G113/E03 está materializado como `0.1.13.03-beta`; PERSIST.1 reserva G114/E01 como siguiente bloque funcional.
 
 Estado de la fase:
 
@@ -25,7 +25,7 @@ Estado de la fase:
 - **NOR.2 R7:** cerrado; artefactos locales heredados migrados y depurados.
 - **NOR.2 R8:** cerrado; auditoría integral y cierre formal integrados mediante PR #74.
 - **DOC.1 R2:** cerrado; auditoría integral Markdown post-NOR.2 y controles permanentes incorporados.
-- **DOC.1 R3:** candidato G113/E03; normaliza de forma conservadora 11 referencias inequívocas, formaliza la política de navegación documental y preserva rutas históricas/contractuales antes de PERSIST.1.
+- **DOC.1 R3:** cerrado/aceptado como G113/E03; normalizó 11 referencias inequívocas, formalizó la política de navegación documental y preservó rutas históricas/contractuales.
 - **SEC.2 R1–R6:** cerrados; CodeQL, autenticación, protección de endpoints, auditoría, sesión web y hardening configurable completados. AUD.SEC2 R1 corrigió el kill switch, alineó documentación/ledger y quedó aceptado como G109/E01.
 
 Evidencia:
@@ -43,7 +43,7 @@ Evidencia:
 - [`audits/repository/repository-normalization-local-artifacts-nor2-r7.md`](audits/repository/repository-normalization-local-artifacts-nor2-r7.md) — migración y depuración de artefactos locales R7.
 - [`audits/repository/repository-normalization-final-audit-nor2-r8.md`](audits/repository/repository-normalization-final-audit-nor2-r8.md) — auditoría integral y gate de cierre R8.
 - [`audits/documentation/documentation-markdown-audit-doc1-r2.md`](audits/documentation/documentation-markdown-audit-doc1-r2.md) — auditoría integral Markdown post-NOR.2 y controles permanentes de DOC.1 R2.
-- [`audits/documentation/documentation-markdown-links-doc1-r3.md`](audits/documentation/documentation-markdown-links-doc1-r3.md) — auditoría conservadora de referencias navegables y alcance candidato DOC.1 R3.
+- [`audits/documentation/documentation-markdown-links-doc1-r3.md`](audits/documentation/documentation-markdown-links-doc1-r3.md) — auditoría conservadora de referencias navegables y evidencia de aceptación DOC.1 R3 / G113/E03.
 - [`audits/documentation/changelog-reconstruction-doc2-r1.md`](audits/documentation/changelog-reconstruction-doc2-r1.md) — reconstrucción auditable DOC.2 R1 de 80 commits en 21 estados legacy.
 - [`standards/README.md`](standards/README.md) — estándares canónicos del repositorio.
 ## 1. Producto y alcance

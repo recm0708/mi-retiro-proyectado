@@ -9,14 +9,14 @@
     "tracked_files": 459
   },
   "current_candidate": {
-    "global_revision": 113,
-    "revision_aware": "0.1.13.03-beta",
-    "block": "DOC.1",
-    "revision": "R3",
+    "global_revision": 114,
+    "revision_aware": "0.1.14.01-beta",
+    "block": "PERSIST.1",
+    "revision": "R1",
     "state": "reserved_not_accepted",
-    "next_functional_block_if_accepted": "PERSIST.1",
-    "next_functional_global_if_accepted": 114,
-    "edition": 3
+    "next_functional_block_if_accepted": "REP.1",
+    "next_functional_global_if_accepted": 115,
+    "edition": 1
   },
   "families": [
     {
@@ -443,12 +443,13 @@
       "identifier": "DOC.1",
       "family": "DOC",
       "kind": "block",
-      "status": "reopened_candidate_r3",
-      "meaning": "Auditoría e integridad Markdown; R1/R2 cerradas; R3 audita etiquetas visibles y legibles de enlaces.",
-      "evidence": "Ledger revision-aware.",
+      "status": "closed",
+      "meaning": "Auditoría e integridad Markdown; R1–R3 cerradas, incluida la política de referencias navegables.",
+      "evidence": "Ledger revision-aware; G113 / PR #92.",
       "global_refs": [
         "G086",
-        "G102"
+        "G102",
+        "G113"
       ],
       "reusable_for_different_scope": false
     },

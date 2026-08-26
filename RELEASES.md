@@ -7,30 +7,36 @@
 
 
 <!-- DOC1-R1-POST-MANT1:START -->
+## Promoción G113/E03 — post-merge de DOC.1 R3
+
+- Estado aceptado: G113/E03 (`0.1.13.03-beta`).
+- Evidencia de aceptación: PR #92 / merge `40ae5c0`, 1092 pruebas post-merge, Markdown 146/146, auditor de identificadores en `OK` y checks remotos requeridos en `success`.
+- Esta sincronización materializa G113 ya aceptado y **no consume G114**.
+- G114/E01 (`0.1.14.01-beta`) queda reservado para PERSIST.1 como siguiente bloque funcional; REP.1 permanece posterior.
+- Tag y GitHub Release `v0.1.13.03-beta`: pendientes hasta integrar/revalidar esta promoción; `v0.1.12.07-beta` permanece publicado e inmutable.
+
 ## Promoción G112/E07 — post-merge de NOR.1 R8
 
 - Estado aceptado: G112/E07 (`0.1.12.07-beta`).
 - Evidencia de aceptación: PR #89 / merge `cc6695b`, corrección ordinal PR #90 / merge `2de10b5`, 1081 pruebas post-merge, Markdown 145/145 y checks remotos en `success`.
 - Esta sincronización materializa G112 ya aceptado y **no consume G113**.
-- G113/E03 (`0.1.13.03-beta`) queda reservado para DOC.1 R3 — auditoría de etiquetas visibles de enlaces Markdown — antes de PERSIST.1.
-- Tag y GitHub Release `v0.1.12.07-beta`: pendientes hasta integrar/revalidar esta promoción; `v0.1.11.01-beta` permanece publicado e inmutable.
-
+- G113/E03 (`0.1.13.03-beta`) fue reservado para DOC.1 R3 y quedó aceptado posteriormente mediante PR #92.
+- Promoción final: PR #91 / merge `02c3763`; tag firmado `v0.1.12.07-beta` y GitHub Release prerelease publicados y preservados.
 
 ## Promoción G111/E01 — post-merge de DOC.2 R1
 
 - Estado aceptado: G111/E01 (`0.1.11.01-beta`).
 - Evidencia de aceptación: PR #87, merge `1041b59`, 1066 pruebas post-merge, Markdown 143/143 y checks remotos Python 3.13/3.14 + Markdown/gobernanza en `success`.
 - Esta sincronización materializa el G111 ya aceptado y **no consume G112**.
-- G112/E07 (`0.1.12.07-beta`) queda ahora reservado para NOR.1 R8 como checkpoint transversal previo a PERSIST.1; el candidato aún no está aceptado.
+- G112/E07 (`0.1.12.07-beta`) fue reservado para NOR.1 R8 y quedó aceptado posteriormente.
 - Promoción final: PR #88, merge `7e81034`, revalidación post-merge de 1070 pruebas en `OK`; tag firmado `v0.1.11.01-beta` y GitHub Release prerelease publicados.
-
 
 ## Promoción G110/E01 — post-merge de REL.GOV.1 R1
 
 - Estado aceptado: G110/E01 (`0.1.10.01-beta`).
 - Evidencia de aceptación: PR #85, merge `5cd1cea`, 1054 pruebas locales y checks remotos Python 3.13/3.14 + Markdown/gobernanza en `success`.
 - Esta sincronización materializa el G110 ya aceptado y **no consume G111**.
-- Siguiente Global disponible: G111/E01 (`0.1.11.01-beta`) para DOC.2.
+- Siguiente Global disponible entonces: G111/E01 (`0.1.11.01-beta`) para DOC.2.
 - Promoción final: PR #86, merge `cef373a`, revalidación post-merge de 1058 pruebas en `OK`; tag firmado `v0.1.10.01-beta` y GitHub Release prerelease publicados.
 
 ## Promoción G109/E01 — post-merge de AUD.SEC2 R1
@@ -39,25 +45,23 @@
 - Evidencia de aceptación de AUD.SEC2 R1: PR #83, merge `ec1842d`, 1040 pruebas locales y checks remotos requeridos en `success`.
 - Evidencia de promoción: PR #84, merge `6de6f32`, 1044 pruebas locales, CI Python 3.13/3.14 y auditorías Markdown/gobernanza en `success`.
 - Esta sincronización materializó el G109 ya aceptado y **no consumió G110**.
-- G110/E01 (`0.1.10.01-beta`) se reserva para REL.GOV.1, saneamiento transversal del contrato de GitHub Releases previo a DOC.2.
-- Tag y GitHub Release formal `v0.1.09.01-beta`: publicados después de integrar/revalidar la promoción; no se mueve `v0.0.71.01-beta`.
-
+- G110/E01 (`0.1.10.01-beta`) fue reservado para REL.GOV.1 y quedó aceptado posteriormente.
+- Tag y GitHub Release formal `v0.1.09.01-beta`: publicados y preservados; no se mueve `v0.0.71.01-beta`.
 
 ## Estado post-MANT.1
 
-Después de `v0.0.26-beta`, el repositorio integró trabajo funcional, técnico, documental y de gobierno hasta completar VER.2 y NOR.2.
+Después de `v0.0.26-beta`, el repositorio integró trabajo funcional, técnico, documental y de gobierno hasta completar VER.2, NOR.2 y los checkpoints transversales previos a PERSIST.1.
 
 Estado vigente:
 
-- Último tag formal publicado: `v0.1.11.01-beta` (G111/E01), firmado, verificado y asociado a GitHub Release prerelease.
+- Último tag formal publicado: `v0.1.12.07-beta` (G112/E07), firmado, verificado y asociado a GitHub Release prerelease.
 - Último tag formal legacy: `v0.0.26-beta`.
-- Versión canónica en `VERSION`: `0.1.12.07-beta` (G112/E07).
-- `v0.0.71.01-beta` fue publicado originalmente bajo la denominación VER.2 G071/E01; la reconciliación post-G070 sitúa ese estado cronológicamente en **G087/E01** sin alterar el tag.
-- MANT.1 está cerrado.
-- DOC.1 R1 está cerrado.
-- NOR.1 está cerrado en R8 como G112/E07; NOR.2 permanece cerrado.
-- DOC.1 R2 está cerrado; DOC.1 R3 queda reservado como siguiente auditoría Markdown transversal antes de PERSIST.1.
-- SEC.2 quedó cerrado después de R1–R6. AUD.SEC2 R1 fue aceptado por PR #83 como G109/E01; la promoción post-merge actualizó `VERSION` a `0.1.09.01-beta` y publicó el tag/Release `v0.1.09.01-beta`. REL.GOV.1 quedó aceptado como G110/E01 mediante PR #85. DOC.2 R1 quedó aceptado/publicado como G111/E01; NOR.1 R8 queda aceptado como G112/E07 y G113/E03 se reserva para DOC.1 R3 antes de PERSIST.1.
+- Versión canónica en `VERSION`: `0.1.13.03-beta` (G113/E03).
+- `v0.0.71.01-beta` conserva su denominación histórica original y se reconcilia como G087/E01 sin alterar el tag.
+- MANT.1, NOR.1 R8, NOR.2 y DOC.1 R1–R3 están cerrados.
+- DOC.2 permanece aceptado/publicado como G111/E01; NOR.1 R8 como G112/E07 y DOC.1 R3 como G113/E03.
+- G114/E01 queda reservado para PERSIST.1; REP.1 permanece como bloque funcional posterior.
+- SEC.2 quedó cerrado después de R1–R6 y AUD.SEC2 R1 permanece aceptado como G109/E01.
 
 Este documento no crea una release nueva; registra el estado formal ya alcanzado por el repositorio.
 <!-- DOC1-R1-POST-MANT1:END -->
