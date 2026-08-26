@@ -6,7 +6,7 @@
 **Versión base histórica preservada:** `0.0.23-beta`
 **Base documental preservada:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal histórica:** GOV.1.5 R3 — 2026-08-18
-**Última revisión documental:** PLAN.1 R2C — 2026-08-20
+**Última revisión documental:** PLAN.2 R1 — 2026-08-26
 **Clasificación:** Pública / Técnica / Riesgo
 
 Este registro enumera limitaciones conocidas que deben permanecer visibles hasta que una fase posterior las elimine o sustituya.
@@ -59,7 +59,7 @@ Pendientes antes de la primera versión oficial:
 - revisión jurídica externa;
 - hardening y pruebas de un despliegue remoto concreto si se decide implementarlo;
 - decisión final sobre servir Bootstrap localmente o aceptar explícitamente el tercero;
-- cierre de SEC.2 y revisión de los controles de seguridad que dependan del alcance final.
+- SEC.2 R1–R6 ya está cerrado; queda prevista SEC.2 R7 para revalidar las nuevas superficies Developer, persistencia y exportaciones antes del cierre beta.
 
 La revisión jurídica externa continúa como un único gate; no se duplica por aparecer en más de un documento de gobierno.
 
@@ -96,7 +96,7 @@ No se debe interpretar el número de RF preservados como igual al número de req
 - Los commits y tags nuevos del mantenedor están sujetos a la política de firma SSH y los tags publicados son inmutables bajo ruleset.
 - `LICENSE` adopta una política propietaria pre-beta; una publicación pública/comercial mantiene pendiente revisión jurídica externa y verificación de avisos de terceros.
 - `SECURITY.md` define el canal y la política de divulgación responsable; la disponibilidad de funciones avanzadas de GitHub depende del plan/visibilidad del repositorio.
-- La aplicación permanece en la línea beta `0.0.N-beta`; **no existe todavía una versión oficial declarada**.
+- La aplicación permanece en la familia beta revision-aware `0.GG.RR.EE-beta`; **no existe todavía una versión oficial declarada**.
 - La visibilidad pública del repositorio no equivale a un despliegue productivo ni a la liberación de `1.0.0.0`.
 
 ## 10. Cierre de una limitación

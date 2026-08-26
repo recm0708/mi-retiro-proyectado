@@ -3,7 +3,7 @@
 **Proyecto:** Mi Retiro Proyectado
 **Estado:** vigente desde GOV.1.2
 **Fecha de adopción:** 2026-08-18
-**Última revisión:** DOC.1 R3 — referencias navegables Markdown aceptadas como G113/E03; PERSIST.1 próximo candidato — 2026-08-26
+**Última revisión:** PLAN.2 R1 — replanificación maestra hacia 1.0; G114/E01 reservado como candidato — 2026-08-26
 
 
 <!-- DOC1-R1-POST-MANT1:START -->
@@ -14,15 +14,15 @@ El gobierno vigente conserva la separación entre estado canónico, evidencia hi
 Estado vigente:
 
 - `VERSION` sigue siendo la fuente única de versión.
-- `0.1.13.03-beta` es la versión canónica vigente en `VERSION` y materializa G113/E03 (DOC.1 R3); G114/E01 queda reservado para PERSIST.1.
-- `v0.1.12.07-beta` es el último tag revision-aware publicado y verificado.
+- `0.1.13.03-beta` es la versión canónica vigente en `VERSION` y materializa G113/E03 (DOC.1 R3); G114/E01 queda reservado para PLAN.2 R1 sin consumir todavía el Global.
+- `v0.1.13.03-beta` es el último tag revision-aware publicado y verificado.
 - `v0.0.71.01-beta` conserva su evidencia histórica reconciliada como G087/E01.
 - `v0.0.26-beta` permanece como tag legacy histórico e inmutable.
 - VER.2, MANT.1, NOR.1, NOR.2 y DOC.1 R1–R3 están cerrados.
 - NOR.1 R8 permanece aceptado como G112/E07.
 - DOC.1 R3 queda aceptado como G113/E03 después de PR #92 / merge `40ae5c0`.
 - SEC.2 quedó cerrado después de R1–R6; AUD.SEC2 R1 fue aceptado mediante PR #83 como G109/E01.
-- PERSIST.1 queda como siguiente bloque funcional, candidato G114/E01 (`0.1.14.01-beta`).
+- PLAN.2 R1 queda como siguiente checkpoint, candidato G114/E01 (`0.1.14.01-beta`); PERSIST.1 permanece planificado después de la replanificación y de los frentes Developer/UX definidos en la matriz maestra.
 <!-- DOC1-R1-POST-MANT1:END -->
 
 ## 1. Propósito

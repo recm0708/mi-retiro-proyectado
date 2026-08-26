@@ -12,7 +12,7 @@ Estado vigente:
 - DOC.1 R1 y DOC.1 R2 están cerrados; DOC.1 R3 quedó aceptado como G113/E03 después de la auditoría conservadora de referencias navegables.
 - VER.2 está cerrado; `v0.0.71.01-beta` fue publicado originalmente como G071/E01 y reconciliado posteriormente como G087/E01 sin mover el tag.
 - NOR.1 R8 está cerrado como G112/E07; NOR.2 permanece cerrado después de R1–R8.
-- `VERSION` queda sincronizado con `0.1.13.03-beta` (G113/E03); G114/E01 queda reservado para PERSIST.1.
+- `VERSION` queda sincronizado con `0.1.13.03-beta` (G113/E03); G114/E01 queda reservado para PLAN.2 R1. PERSIST.1 permanece planificado, pero ya no es el candidato inmediato.
 - SEC.2 quedó cerrado después de R1–R6 y AUD.SEC2 R1 quedó aceptado como G109/E01. Los cambios posteriores que afecten autenticación, sesiones, cookies, secretos o endpoints administrativos requieren regresión de seguridad y sincronización documental antes de promover una nueva revisión.
 - Todo cambio debe mantener sincronizados código, pruebas, documentación y evidencia aplicable.
 <!-- DOC1-R1-POST-MANT1:END -->
@@ -147,6 +147,7 @@ Mapa general:
 - `RELEASES.md` — releases, tags y reconstrucción de versiones;
 - `docs/README.md` — mapa documental;
 - `docs/governance/roadmap.md` — presente y futuro;
+- `docs/governance/pre-1-0-pending-matrix.md` — matriz maestra viva de pendientes y orden de trabajo hacia `1.0.0.0`;
 - `docs/product/functional-specification.md` — requisitos vigentes y su estado;
 - `docs/architecture/system-architecture.md` — arquitectura real;
 - `docs/architecture/data-model.md` — contratos;

@@ -39,7 +39,7 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
             self.assertIn(ident, ids)
             self.assertFalse(ids[ident]["reusable_for_different_scope"])
 
-        for ident in ("PERSIST.1", "REP.1", "A11Y.2", "REV.1", "QA.1", "REL.1"):
+        for ident in ("PLAN.2", "UX.5", "PERSIST.1", "REP.1", "A11Y.2", "REV.1", "QA.1", "REL.1"):
             self.assertEqual("planned_reserved", ids[ident]["status"])
 
     def test_revisiones_y_etiquetas_no_son_familias(self):
@@ -53,7 +53,7 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
         for label in ("LEGACY", "INTEGRIDAD", "POST-GOV"):
             self.assertFalse(labels[label]["reusable_as_family"])
 
-    def test_g112_permanece_aceptado_y_persist_es_siguiente(self):
+    def test_g112_permanece_aceptado_y_plan2_es_candidato(self):
         ledger = cargar_ledger()
         entry = next(x for x in ledger["entries"] if x["global_revision"] == 112)
         self.assertEqual("NOR.1", entry["block"])
@@ -61,10 +61,11 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
         self.assertEqual("0.1.12.07-beta", entry["revision_aware"])
         candidate = self.data["current_candidate"]
         self.assertEqual(114, candidate["global_revision"])
-        self.assertEqual("PERSIST.1", candidate["block"])
+        self.assertEqual("PLAN.2", candidate["block"])
         self.assertEqual("R1", candidate["revision"])
         self.assertEqual("reserved_not_accepted", candidate["state"])
-        self.assertEqual("REP.1", candidate["next_functional_block_if_accepted"])
+        self.assertEqual("DEV.2", candidate["next_functional_block_if_accepted"])
+        self.assertIsNone(candidate["next_functional_global_if_accepted"])
 
     def test_candidato_reabierto_continua_ordinal_del_bloque(self):
         ledger = cargar_ledger()
@@ -89,7 +90,7 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
     def test_bloque_nuevo_comienza_en_e01(self):
         ledger = cargar_ledger()
         candidato = copy.deepcopy(ledger)
-        candidato["next_candidate_block"] = "PERSIST.1"
+        candidato["next_candidate_block"] = "PLAN.2"
         candidato["next_candidate"] = "0.1.14.01-beta"
 
         validar_ledger(candidato)
@@ -110,7 +111,7 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
         self.assertIn(r"\d+[A-Za-z0-9]*", script)
         self.assertNotIn("DOC.exists", self.data["non_block_tokens"])
 
-    def test_documentacion_viva_declara_g113_aceptado_y_persist1(self):
+    def test_documentacion_viva_declara_g113_plan2_y_persist1(self):
         for rel in (
             "VERSIONING.md",
             "GOVERNANCE.md",
@@ -127,6 +128,7 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
                 self.assertIn("NOR.1 R8", content)
                 self.assertIn("DOC.1 R3", content)
                 self.assertIn("G113", content)
+                self.assertIn("PLAN.2", content)
                 self.assertIn("PERSIST.1", content)
 
     def test_auditor_automatico_queda_limpio(self):

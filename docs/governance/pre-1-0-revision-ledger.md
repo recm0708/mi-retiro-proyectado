@@ -5,7 +5,7 @@
 **Contador histórico en la base `7037addd`:** **G070**
 **Contador aceptado reconciliado al commit `40ae5c0`:** **G113**
 **Siguiente Global disponible:** **G114**
-**Siguiente candidato disponible:** `0.1.14.01-beta` — PERSIST.1 R1 (persistencia voluntaria y segura)
+**Siguiente candidato disponible:** `0.1.14.01-beta` — PLAN.2 R1 (replanificación maestra final hacia 1.0)
 
 
 <!-- DOC1-R1-REVISION-MANUAL:START -->

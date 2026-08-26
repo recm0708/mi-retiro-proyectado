@@ -69,9 +69,11 @@ La auditoría posterior a DOC.2 demostró que:
 G112/E07 (`0.1.12.07-beta`) quedó aceptado para **NOR.1 R8 — gobierno de
 identificadores de bloques** después de PR #89 y la corrección ordinal PR #90.
 La auditoría transversal **DOC.1 R3** quedó aceptada como G113/E03
-(`0.1.13.03-beta`) mediante PR #92 / merge `40ae5c0`. Al ser **PERSIST.1** un
-bloque nuevo sin revisiones aceptadas, el siguiente candidato comienza en E01:
-G114/E01 (`0.1.14.01-beta`).
+(`0.1.13.03-beta`) mediante PR #92 / merge `40ae5c0`. PLAN.2 R1 y UX.5 se
+registran explícitamente durante la replanificación post-G113. Al ser **PLAN.2**
+un bloque nuevo sin revisiones aceptadas, el siguiente candidato comienza en
+E01: G114/E01 (`0.1.14.01-beta`). PERSIST.1 permanece reservado para una etapa
+posterior y no recibe un Global futuro anticipado.
 
 ## Control automático
 

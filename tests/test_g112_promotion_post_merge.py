@@ -33,7 +33,7 @@ class TestG112PromotionPostMerge(unittest.TestCase):
         self.assertEqual("closed", ids["DOC.1"]["status"])
         self.assertIn("G113", ids["DOC.1"]["global_refs"])
         self.assertEqual(114, candidate["global_revision"])
-        self.assertEqual("PERSIST.1", candidate["block"])
+        self.assertEqual("PLAN.2", candidate["block"])
         self.assertEqual("R1", candidate["revision"])
         self.assertEqual(1, candidate["edition"])
 
