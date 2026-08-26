@@ -1,8 +1,8 @@
 # Reconstrucción del CHANGELOG histórico — DOC.2 R1
 
-**Estado:** candidato local; pendiente de gate, commit firmado, PR/CI y merge
+**Estado:** cerrado y aceptado como G111/E01 mediante PR #87 / merge `1041b59`
 **Versión vigente durante la revisión:** `0.1.10.01-beta` — G110/E01
-**Candidato reservado:** G111/E01 (`0.1.11.01-beta`) — **no consumido**
+**Estado revision-aware aceptado:** G111/E01 (`0.1.11.01-beta`) — **consumido por DOC.2 R1**
 **Clasificación:** Documentación / Auditoría / Historial
 **Fecha:** 2026-08-26
 
@@ -86,7 +86,7 @@ DOC.2 R1 no:
 
 ## Gate de aceptación
 
-Antes de declarar DOC.2 cerrado:
+DOC.2 quedó cerrado después de completar:
 
 1. evidencia estructurada: 21/21 estados y 80/80 commits;
 2. regresiones DOC.2 en `OK`;
@@ -100,4 +100,4 @@ Antes de declarar DOC.2 cerrado:
 10. PR/CI y merge;
 11. revalidación post-merge.
 
-Solo después de esa aceptación podrá G111/E01 materializarse en `VERSION`.
+La aceptación quedó materializada como G111/E01; la promoción no consume G112, que queda disponible para PERSIST.1.

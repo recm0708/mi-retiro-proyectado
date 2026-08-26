@@ -67,7 +67,7 @@ class TestMant1ScriptsHooksDocumentados(unittest.TestCase):
 
     def test_mant1_r2_no_promueve_version_ni_toca_motores(self):
         version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
-        self.assertEqual("0.1.10.01-beta", version)
+        self.assertEqual("0.1.11.01-beta", version)
 
         changelog = self._leer("CHANGELOG.md")
         self.assertIn("sin cambiar `VERSION`, `APP_VERSION`, motores previsionales ni normativa", changelog)

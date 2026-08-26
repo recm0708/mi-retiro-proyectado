@@ -1,7 +1,7 @@
 # Validación
 
 **Estado:** Vigente
-**Versión revisada:** `0.1.10.01-beta` — G110/E01 promovida post-merge
+**Versión revisada:** `0.1.11.01-beta` — G111/E01 promovida post-merge
 **Versión base histórica:** `0.0.25-beta`
 **Base documental histórica:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal histórica preservada:** UX.4.6e R8 — validación funcional y procedencia editable — 2026-08-19
@@ -1091,9 +1091,9 @@ REL.GOV.1 R1 fue aceptado mediante PR #85 y merge `5cd1cea`. La promoción post-
 - no consume G111 por ser sincronización del estado G110 ya aceptado;
 - requiere `pip check`, auditoría Markdown, compilación Python, sintaxis JavaScript, suite completa, `release_contract.py` y `git diff --check` antes del commit firmado.
 
-## Gate candidato DOC.2 R1 — reconstrucción del CHANGELOG legacy
+## Gate de cierre DOC.2 R1 — reconstrucción del CHANGELOG legacy
 
-DOC.2 R1 parte de la línea base G110/E01 publicada y no modifica motores, normativa ni `VERSION`.
+DOC.2 R1 fue aceptado mediante PR #87 y revalidado post-merge con G110/E01 aún en `VERSION`; esta promoción materializa G111/E01 sin modificar motores ni normativa.
 
 Controles específicos:
 
@@ -1101,8 +1101,8 @@ Controles específicos:
 - cada tag `v0.0.1-beta`–`v0.0.21-beta` apunta al cierre registrado;
 - `CHANGELOG.md` conserva rango, cantidad de commits, hito y cada sujeto de commit por estado;
 - el commit raíz anómalo se preserva sin reescritura;
-- `VERSION` continúa en `0.1.10.01-beta`;
-- ledger: `accepted_count=110`, G111/E01 reservado para DOC.2;
+- `VERSION` queda materializado en `0.1.11.01-beta`;
+- ledger: `accepted_count=111`, `next_global=112`, `next_candidate=0.1.12.01-beta` y `next_candidate_block = PERSIST.1`;
 - metadata de Releases sincronizada: 29 tags formales ↔ 29 GitHub Releases.
 
-Con las 8 regresiones nuevas de DOC.2 R1, la suite candidata esperada pasa de 1058 a **1066 pruebas**. La aceptación de G111 requiere además `pip check`, auditoría Markdown, compilación Python, sintaxis JavaScript, `git diff --check`, commit firmado y CI remota verde.
+DOC.2 R1 cerró con **1066 pruebas** post-merge en `OK`. La promoción G111 añade 4 regresiones y eleva la suite esperada a **1070 pruebas**. La promoción G111 requiere además `pip check`, auditoría Markdown, compilación Python, sintaxis JavaScript, `git diff --check`, commit firmado y CI remota verde.

@@ -17,7 +17,7 @@ class TestVer2R5EstabilizacionPostRelease(unittest.TestCase):
 
     def test_version_actual(self):
         version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
-        self.assertEqual(version, "0.1.10.01-beta")
+        self.assertEqual(version, "0.1.11.01-beta")
 
 
 if __name__ == "__main__":

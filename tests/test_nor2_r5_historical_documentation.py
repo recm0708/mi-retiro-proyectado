@@ -119,7 +119,7 @@ class TestNOR2R5HistoricalDocumentation(unittest.TestCase):
 
     def test_version_y_estado_transversal(self):
         self.assertEqual(
-            "0.1.10.01-beta",
+            "0.1.11.01-beta",
             (ROOT / "VERSION").read_text(encoding="utf-8").strip(),
         )
 

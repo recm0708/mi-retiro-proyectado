@@ -1,7 +1,7 @@
 # Proceso de release
 
 **Estado:** Vigente
-**Versión de aplicación:** `0.1.10.01-beta` — REL.GOV.1 R1 / G110-E01 promovida post-merge
+**Versión de aplicación:** `0.1.11.01-beta` — DOC.2 R1 / G111-E01 promovida post-merge
 **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
 **Último tag formal legacy:** `v0.0.26-beta`
 **Versión base histórica preservada:** `0.0.23-beta`

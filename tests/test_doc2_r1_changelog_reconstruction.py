@@ -90,14 +90,15 @@ class TestDOC2R1ChangelogReconstruction(unittest.TestCase):
         self.assertEqual("tipo: descripción del cambio", first["subject"])
         self.assertIn("anomalía histórica", self.changelog)
 
-    def test_doc2_no_consume_g111_antes_de_aceptacion(self):
-        self.assertEqual("0.1.10.01-beta", (ROOT / "VERSION").read_text(encoding="utf-8").strip())
+    def test_doc2_aceptado_como_g111_y_deja_g112_para_persist1(self):
+        self.assertEqual("0.1.11.01-beta", (ROOT / "VERSION").read_text(encoding="utf-8").strip())
         ledger = cargar_ledger()
-        self.assertEqual(110, ledger["accepted_count"])
-        self.assertEqual(111, ledger["next_global"])
-        self.assertEqual("0.1.11.01-beta", ledger["next_candidate"])
-        self.assertEqual("DOC.2", ledger["next_candidate_block"])
-        self.assertFalse(self.data["reserved_candidate"]["consumed"])
+        self.assertEqual(111, ledger["accepted_count"])
+        self.assertEqual(112, ledger["next_global"])
+        self.assertEqual("0.1.12.01-beta", ledger["next_candidate"])
+        self.assertEqual("PERSIST.1", ledger["next_candidate_block"])
+        self.assertTrue(self.data["reserved_candidate"]["consumed"])
+        self.assertEqual(87, self.data["accepted_state"]["pull_request"])
 
     def test_documentacion_sincroniza_g110_y_29_releases(self):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
