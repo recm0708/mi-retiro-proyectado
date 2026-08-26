@@ -25,7 +25,7 @@ Estado de la fase:
 - **NOR.2 R7:** cerrado; artefactos locales heredados migrados y depurados.
 - **NOR.2 R8:** cerrado; auditoría integral y cierre formal integrados mediante PR #74.
 - **DOC.1 R2:** cerrado; auditoría integral Markdown post-NOR.2 y controles permanentes incorporados.
-- **DOC.1 R3:** candidato G113/E03; auditará etiquetas visibles de enlaces Markdown antes de PERSIST.1.
+- **DOC.1 R3:** candidato G113/E03; normaliza de forma conservadora 11 referencias inequívocas, formaliza la política de navegación documental y preserva rutas históricas/contractuales antes de PERSIST.1.
 - **SEC.2 R1–R6:** cerrados; CodeQL, autenticación, protección de endpoints, auditoría, sesión web y hardening configurable completados. AUD.SEC2 R1 corrigió el kill switch, alineó documentación/ledger y quedó aceptado como G109/E01.
 
 Evidencia:
@@ -43,6 +43,7 @@ Evidencia:
 - [`audits/repository/repository-normalization-local-artifacts-nor2-r7.md`](audits/repository/repository-normalization-local-artifacts-nor2-r7.md) — migración y depuración de artefactos locales R7.
 - [`audits/repository/repository-normalization-final-audit-nor2-r8.md`](audits/repository/repository-normalization-final-audit-nor2-r8.md) — auditoría integral y gate de cierre R8.
 - [`audits/documentation/documentation-markdown-audit-doc1-r2.md`](audits/documentation/documentation-markdown-audit-doc1-r2.md) — auditoría integral Markdown post-NOR.2 y controles permanentes de DOC.1 R2.
+- [`audits/documentation/documentation-markdown-links-doc1-r3.md`](audits/documentation/documentation-markdown-links-doc1-r3.md) — auditoría conservadora de referencias navegables y alcance candidato DOC.1 R3.
 - [`audits/documentation/changelog-reconstruction-doc2-r1.md`](audits/documentation/changelog-reconstruction-doc2-r1.md) — reconstrucción auditable DOC.2 R1 de 80 commits en 21 estados legacy.
 - [`standards/README.md`](standards/README.md) — estándares canónicos del repositorio.
 ## 1. Producto y alcance

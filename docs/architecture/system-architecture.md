@@ -61,7 +61,7 @@ introduce nuevas capas de producto.
 
 - `app/core/pdf_files.py`
 - `app/core/config.py`
-- `app/core/constants.py`
+- [`app/core/constants.py`](../../app/core/constants.py)
 - `app/core/money.py`
 - `app/core/normativa.py`
 - `app/core/observability.py`
@@ -69,18 +69,18 @@ introduce nuevas capas de producto.
 
 ### Modelos
 
-- `app/models/comparacion.py`
-- `app/models/pension.py`
+- [`app/models/comparacion.py`](../../app/models/comparacion.py)
+- [`app/models/pension.py`](../../app/models/pension.py)
 - `app/models/unified_result.py`
 - `app/models/simulation.py`
 - `app/models/traceability.py`
 
 ### Motores
 
-- `app/engines/elegibilidad.py`
+- [`app/engines/elegibilidad.py`](../../app/engines/elegibilidad.py)
 - `app/engines/mixto.py`
 - `app/engines/sebd.py`
-- `app/engines/sebd_modalidades.py`
+- [`app/engines/sebd_modalidades.py`](../../app/engines/sebd_modalidades.py)
 - `app/engines/sucgs.py`
 
 ### Servicios principales

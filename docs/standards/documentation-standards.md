@@ -99,6 +99,34 @@ documentado. Esa excepción no se extiende a documentación vigente, estándares
 plantillas ni documentación técnica de soporte, cuyos enlaces locales deben
 resolver contra el árbol actual.
 
+### Presentación de referencias navegables
+
+En documentación vigente, una referencia a un archivo actual se presenta como
+enlace cuando su función principal sea permitir navegación o abrir un artefacto
+desde un inventario, índice o referencia documental inequívoca.
+
+La presentación sigue estas reglas:
+
+- un documento Markdown enlazado utiliza como etiqueta visible un título humano
+  descriptivo, preferentemente el H1 canónico del documento, en vez de mostrar
+  únicamente su nombre de archivo o ruta;
+- un archivo técnico (`.py`, `.js`, `.css`, `.json`, `.yml`, `.html`, etc.)
+  conserva su ruta técnica como texto visible y esa ruta puede convertirse en
+  enlace Markdown cuando el destino sea inequívoco;
+- los destinos internos al repositorio utilizan rutas relativas;
+- una coincidencia de nombre de archivo, por sí sola, no autoriza una
+  transformación automática ni la resolución por `basename`;
+- rutas dentro de `CHANGELOG.md`, bitácoras de validación, matrices de
+  trazabilidad, auditorías, archivos históricos, bloques de código, atributos
+  HTML o literales protegidos por regresiones pueden conservarse como texto
+  cuando la ruta sea parte del dato, del contrato o de la evidencia;
+- la existencia de un archivo actual no implica que cada mención textual deba
+  convertirse en enlace.
+
+Las correcciones automáticas deben ser conservadoras: no se infiere un destino
+cuando existan candidatos ambiguos y no se moderniza evidencia histórica para
+hacerla coincidir con el árbol actual.
+
 ## Compatibilidad
 
 No se conserva un archivo antiguo únicamente como redirect documental para

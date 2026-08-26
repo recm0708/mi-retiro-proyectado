@@ -14,8 +14,8 @@ Los contratos de cálculo se definen con Pydantic. El estado visual y de navegac
 ## 1. Módulos de modelos
 
 - `app/models/simulation.py` — datos de Pasos 1–5 e importaciones.
-- `app/models/pension.py` — motores y resultados por sistema.
-- `app/models/comparacion.py` — comparación transversal.
+- [`app/models/pension.py`](../../app/models/pension.py) — motores y resultados por sistema.
+- [`app/models/comparacion.py`](../../app/models/comparacion.py) — comparación transversal.
 - `app/models/traceability.py` — trazabilidad de cálculo.
 - `app/models/unified_result.py` — resumen transversal.
 
@@ -212,7 +212,7 @@ Los modelos de línea temporal combinan historia y proyección conservando su or
 
 ## 10. Modelos previsionales
 
-`app/models/pension.py` contiene entradas y salidas para:
+[`app/models/pension.py`](../../app/models/pension.py) contiene entradas y salidas para:
 
 - SEBD normal y clasificador general;
 - Subsistema Mixto;
