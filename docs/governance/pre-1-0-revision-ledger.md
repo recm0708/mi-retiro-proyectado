@@ -5,7 +5,7 @@
 **Contador histórico en la base `7037addd`:** **G070**
 **Contador aceptado reconciliado al commit `1041b59`:** **G111**
 **Siguiente Global disponible:** **G112**
-**Siguiente candidato disponible:** `0.1.12.01-beta` — NOR.1 R8 (checkpoint transversal previo a PERSIST.1)
+**Siguiente candidato disponible:** `0.1.12.07-beta` — NOR.1 R8 (checkpoint transversal previo a PERSIST.1)
 
 
 <!-- DOC1-R1-REVISION-MANUAL:START -->
@@ -29,7 +29,7 @@ Estado vigente de la contabilidad:
   materializado por ese tag en G087/E01 sin modificar la evidencia publicada.
 - `VERSION` se sincroniza a `0.1.09.01-beta` después de la aceptación de AUD.SEC2 R1 como G109/E01.
 - G110/E01 (`0.1.10.01-beta`) quedó aceptado para REL.GOV.1 mediante PR #85 y merge `5cd1cea`.
-- G111/E01 (`0.1.11.01-beta`) quedó aceptado para DOC.2 mediante PR #87 y merge `1041b59`. G112/E01 (`0.1.12.01-beta`) queda reservado para NOR.1 R8 sin consumirse todavía; PERSIST.1 permanece como siguiente bloque funcional.
+- G111/E01 (`0.1.11.01-beta`) quedó aceptado para DOC.2 mediante PR #87 y merge `1041b59`. G112/E07 (`0.1.12.07-beta`) queda reservado para NOR.1 R8 sin consumirse todavía; PERSIST.1 permanece como siguiente bloque funcional.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 
 Este ledger registra los estados aceptados reconstruidos durante VER.2 y su reconciliación posterior. La regla contable histórica y las exclusiones originales se conservan en `docs/archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md` y `docs/archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md`; la ampliación post-G070 se justifica en `docs/audits/governance/post-g070-revision-reconciliation.md`.
@@ -206,7 +206,7 @@ DOC.2 R1 superó gate local, commit firmado, PR #87, CI remota, integración y r
 
 | Global | ID revision-aware candidato | Bloque | Condición |
 |---:|---|---|---|
-| G112 | `0.1.12.01-beta` | NOR.1 R8 — gobierno de identificadores de bloques | definición de alcance + implementación aprobada + gate + commit firmado + PR/CI + integración |
+| G112 | `0.1.12.07-beta` | NOR.1 R8 — gobierno de identificadores de bloques | definición de alcance + implementación aprobada + gate + commit firmado + PR/CI + integración |
 
 G112 permanece disponible y no se considera aceptado hasta completar el gate propio de NOR.1 R8. PERSIST.1 usará el siguiente Global disponible si este checkpoint se acepta.
 

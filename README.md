@@ -23,7 +23,7 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 - **Versión canónica vigente:** `0.1.11.01-beta`, obtenida exclusivamente desde [`VERSION`](VERSION). Materializa G111/E01 después de DOC.2 R1 y está publicada mediante el tag firmado/GitHub Release `v0.1.11.01-beta`.
 - **Última promoción integrada en `main`:** G111/E01 en `7e81034` (PR #88), posterior al cierre DOC.2 R1 en `1041b59` (PR #87).
 - **Estado de SEC.2:** cerrado después de R1–R6; AUD.SEC2 R1 corrigió la regresión del kill switch administrativo, alineó documentación/ledger y quedó aceptado como G109.
-- **Estado revision-aware reconciliado:** G111/E01 (`0.1.11.01-beta`) aceptado para DOC.2; G112/E01 (`0.1.12.01-beta`) queda reservado para NOR.1 R8 como checkpoint transversal previo a PERSIST.1.
+- **Estado revision-aware reconciliado:** G111/E01 (`0.1.11.01-beta`) aceptado para DOC.2; G112/E07 (`0.1.12.07-beta`) queda reservado para NOR.1 R8 como checkpoint transversal previo a PERSIST.1.
 - **Último tag revision-aware publicado:** `v0.1.11.01-beta` (G111/E01), firmado, verificado y asociado a GitHub Release prerelease; los tags anteriores permanecen preservados.
 - **Última versión formal legacy:** `0.0.26-beta` — tag firmado e inmutable `v0.0.26-beta`.
 - **Etapa:** desarrollo beta; repositorio público y ejecución orientada actualmente a entorno local.

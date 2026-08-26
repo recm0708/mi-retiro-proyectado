@@ -6,9 +6,12 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ## [Unreleased]
 
+- NOR.1 R8: corrige el ordinal revision-aware del candidato reabierto; G112 pasa de E01 provisional a E07 conforme a `VERSIONING.md`.
+- Ledger: `next_candidate` queda en `0.1.12.07-beta`; G112 sigue sin consumirse y PERSIST.1 permanece como siguiente bloque funcional.
+
 - NOR.1 R8: audita y gobierna las familias e identificadores de bloques de trabajo.
 - NOR.1 R8: incorpora política, registro machine-readable y auditor automático para impedir reutilizaciones o siglas inventadas.
-- Ledger: reserva G112/E01 (`0.1.12.01-beta`) para NOR.1 R8 antes de PERSIST.1 sin cambiar `VERSION` ni `accepted_count`.
+- Ledger: reserva G112/E07 (`0.1.12.07-beta`) para NOR.1 R8 antes de PERSIST.1 sin cambiar `VERSION` ni `accepted_count`.
 
 
 ## [0.1.11.01-beta]

@@ -45,6 +45,7 @@ reconciliación histórica. No son familias disponibles para trabajo futuro.
 3. Si el nuevo trabajo amplía el mismo alcance de un bloque existente, se
    prefiere una nueva revisión de ese bloque. `DOC.1 R2` es el precedente.
 4. Reabrir un bloque exige demostrar el mismo alcance y una revisión no usada.
+   Al materializarse, `EE` continúa el ordinal de estados aceptados del mismo bloque; no se reinicia a E01. Un bloque nuevo sí comienza en E01.
 5. Un bloque nuevo solo se crea cuando ninguna identidad registrada cubre el
    alcance.
 6. Antes de asignar un número nuevo se auditan registro, árbol vigente,
@@ -65,7 +66,7 @@ La auditoría posterior a DOC.2 demostró que:
 - `NOR.1 R8` no estaba usado ni en el árbol G111 ni en mensajes Git;
 - crear un identificador nuevo dentro de NOR, GOV o DOC sin necesidad semántica añadiría una identidad innecesaria.
 
-Por ello G112/E01 (`0.1.12.01-beta`) se reserva para **NOR.1 R8 — gobierno de
+Por ello G112/E07 (`0.1.12.07-beta`) se reserva para **NOR.1 R8 — gobierno de
 identificadores de bloques**, sin consumirlo mientras el candidato no sea
 aceptado. `PERSIST.1` sigue siendo el siguiente bloque funcional y, si NOR.1 R8
 se acepta como G112, utilizará el siguiente Global disponible.

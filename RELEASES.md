@@ -12,7 +12,7 @@
 - Estado aceptado: G111/E01 (`0.1.11.01-beta`).
 - Evidencia de aceptación: PR #87, merge `1041b59`, 1066 pruebas post-merge, Markdown 143/143 y checks remotos Python 3.13/3.14 + Markdown/gobernanza en `success`.
 - Esta sincronización materializa el G111 ya aceptado y **no consume G112**.
-- G112/E01 (`0.1.12.01-beta`) queda ahora reservado para NOR.1 R8 como checkpoint transversal previo a PERSIST.1; el candidato aún no está aceptado.
+- G112/E07 (`0.1.12.07-beta`) queda ahora reservado para NOR.1 R8 como checkpoint transversal previo a PERSIST.1; el candidato aún no está aceptado.
 - Promoción final: PR #88, merge `7e81034`, revalidación post-merge de 1070 pruebas en `OK`; tag firmado `v0.1.11.01-beta` y GitHub Release prerelease publicados.
 
 

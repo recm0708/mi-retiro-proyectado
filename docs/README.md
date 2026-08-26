@@ -1,9 +1,9 @@
 # Índice de documentación
 
 **Estado:** vigente
-**Versión de aplicación:** `0.1.11.01-beta` — G111/E01 aceptado/publicado para DOC.2; G112/E01 reservado para NOR.1 R8; ledger aceptado hasta G111
+**Versión de aplicación:** `0.1.11.01-beta` — G111/E01 aceptado/publicado para DOC.2; G112/E07 reservado para NOR.1 R8; ledger aceptado hasta G111
 **Último tag formal legacy:** `v0.0.26-beta`
-**Última actualización transversal:** NOR.1 R8 — gobierno de identificadores de bloques, candidato G112/E01 — 2026-08-26
+**Última actualización transversal:** NOR.1 R8 — gobierno de identificadores de bloques, candidato G112/E07 — 2026-08-26
 **Cierres históricos preservados:** UX.4.6i / PR #34 — 841 pruebas; UX.4.6e R9 — `v0.0.25-beta`
 
 Este archivo es el punto de entrada para la documentación técnica, funcional, normativa, de privacidad, validación y auditoría de Mi Retiro Proyectado.
@@ -11,7 +11,7 @@ Este archivo es el punto de entrada para la documentación técnica, funcional, 
 
 ## Estado de normalización del repositorio
 
-**Estado actual:** NOR.2, DOC.1 R2, SEC.2, AUD.SEC2 R1, REL.GOV.1 y DOC.2 están cerrados/publicados según corresponda. G111/E01 está materializado como `0.1.11.01-beta`; NOR.1 R8 es candidato transversal y reserva G112/E01 sin consumirlo antes de PERSIST.1.
+**Estado actual:** NOR.2, DOC.1 R2, SEC.2, AUD.SEC2 R1, REL.GOV.1 y DOC.2 están cerrados/publicados según corresponda. G111/E01 está materializado como `0.1.11.01-beta`; NOR.1 R8 es candidato transversal y reserva G112/E07 sin consumirlo antes de PERSIST.1.
 
 Estado de la fase:
 

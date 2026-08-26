@@ -38,7 +38,7 @@ El inventario automático se ejecutó sobre `main` limpio y registró:
 Clasificar el trabajo como **NOR.1 R8 — gobierno de identificadores de bloques
 de trabajo**.
 
-G112/E01 queda reservado para el candidato sin consumirse. Si NOR.1 R8 es
+G112/E07 queda reservado para el candidato sin consumirse. Si NOR.1 R8 es
 aceptado y promocionado, `PERSIST.1` continuará con el siguiente Global
 disponible.
 

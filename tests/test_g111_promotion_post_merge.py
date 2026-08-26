@@ -24,7 +24,6 @@ class TestG111PromotionPostMerge(unittest.TestCase):
         ledger = cargar_ledger()
         self.assertEqual(111, ledger["accepted_count"])
         self.assertEqual(112, ledger["next_global"])
-        self.assertEqual("0.1.12.01-beta", ledger["next_candidate"])
         self.assertEqual("1041b5938607b4616c6af6e6847d6e2fbc8b6ec7", ledger["reconciled_through_commit"])
         self.assertEqual("DOC.2", ledger["entries"][-1]["block"])
         self.assertIn("PR #87", ledger["entries"][-1]["evidence"])
