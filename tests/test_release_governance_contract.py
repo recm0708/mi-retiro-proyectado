@@ -52,7 +52,7 @@ class TestReleaseGovernanceContract(unittest.TestCase):
             data["title"],
         )
         self.assertTrue(data["prerelease"])
-        self.assertEqual("PERSIST.1", data["next_candidate_block"])
+        self.assertEqual("NOR.1", data["next_candidate_block"])
 
     def test_tag_debe_coincidir_con_version(self):
         ok = self.run_contract("--check-tag", "v0.1.11.01-beta")
@@ -130,17 +130,18 @@ class TestReleaseGovernanceContract(unittest.TestCase):
         self.assertIn("release_contract.py", scripts)
         self.assertIn("REL.GOV.1 — validación del contrato de GitHub Releases", validation)
         self.assertIn("next_candidate_block = PERSIST.1", validation)
+        self.assertIn("next_candidate_block = NOR.1", validation)
         self.assertIn("## 7.1. Tags y GitHub Releases", github)
         self.assertIn(".github/release.yml", github)
 
-    def test_g111_aceptado_y_g112_disponible_para_persist1(self):
+    def test_g111_aceptado_y_g112_reservado_para_nor1_r8(self):
         ledger = json.loads(
             (ROOT / "data/pre-1-0-revision-ledger.json").read_text(encoding="utf-8")
         )
         self.assertEqual(111, ledger["accepted_count"])
         self.assertEqual(112, ledger["next_global"])
         self.assertEqual("0.1.12.01-beta", ledger["next_candidate"])
-        self.assertEqual("PERSIST.1", ledger["next_candidate_block"])
+        self.assertEqual("NOR.1", ledger["next_candidate_block"])
         self.assertEqual(
             "0.1.11.01-beta",
             (ROOT / "VERSION").read_text(encoding="utf-8").strip(),

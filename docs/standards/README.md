@@ -36,6 +36,7 @@ Los estándares definidos aquí aplican a:
 - `documentation-standards.md` — documentación viva, histórica y referencias.
 - `artifact-lifecycle.md` — creación, sustitución, archivo y eliminación.
 - `root-and-local-artifacts.md` — raíz, evidencias y artefactos locales.
+- `work-block-identifiers.md` — familias, bloques, revisiones y reglas de asignación.
 
 Cuando una política técnica anterior contradiga estos documentos, prevalece el
 estándar NOR.1 más reciente. Las reglas especializadas no contradictorias

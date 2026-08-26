@@ -1106,3 +1106,17 @@ Controles específicos:
 - metadata de Releases sincronizada: 29 tags formales ↔ 29 GitHub Releases.
 
 DOC.2 R1 cerró con **1066 pruebas** post-merge en `OK`. La promoción G111 añade 4 regresiones y eleva la suite esperada a **1070 pruebas**. La promoción G111 requiere además `pip check`, auditoría Markdown, compilación Python, sintaxis JavaScript, `git diff --check`, commit firmado y CI remota verde.
+
+## NOR.1 R8 — gobierno de identificadores de bloques
+
+Gate focal:
+
+```text
+python scripts/audit_block_identifiers.py
+python -m unittest tests.test_nor1_r8_work_block_identifiers -v
+```
+
+Invariantes del candidato: `VERSION=0.1.11.01-beta`, `accepted_count=111`, G112 reservado para NOR.1 R8 y PERSIST.1 todavía como siguiente bloque funcional.
+
+- contrato vivo: `next_candidate=0.1.12.01-beta` y `next_candidate_block = NOR.1`;
+- la sección histórica de DOC.2 conserva `next_candidate_block = PERSIST.1` porque ese era el estado al cerrar G111.

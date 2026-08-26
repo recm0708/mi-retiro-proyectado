@@ -17,7 +17,7 @@ Estado vigente:
 - `VERSION` contiene `0.1.11.01-beta` y materializa G111/E01 (DOC.2), aceptado mediante PR #87 y merge `1041b59`. G110/E01 permanece preservado como REL.GOV.1.
 - `v0.0.71.01-beta` está publicado y es inmutable; `v0.0.26-beta` permanece como último tag de la familia legacy.
 - La reconciliación post-G070 reconstruye **G071–G108** y determina que el estado materializado por el tag `v0.0.71.01-beta` corresponde cronológicamente a **G087**. La anomalía no autoriza mover, borrar ni recrear el tag.
-- `4bd7d8d` permanece como snapshot reconciliado G108; AUD.SEC2 R1 fue aceptado sobre `ec1842d` como **G109/E01** (`0.1.09.01-beta`) y publicado formalmente. **G110/E01** (`0.1.10.01-beta`) quedó aceptado como REL.GOV.1 mediante PR #85; **G111/E01** (`0.1.11.01-beta`) quedó aceptado como DOC.2 mediante PR #87; **G112/E01** (`0.1.12.01-beta`) queda disponible para PERSIST.1.
+- `4bd7d8d` permanece como snapshot reconciliado G108; AUD.SEC2 R1 fue aceptado sobre `ec1842d` como **G109/E01** (`0.1.09.01-beta`) y publicado formalmente. **G110/E01** (`0.1.10.01-beta`) quedó aceptado como REL.GOV.1 mediante PR #85; **G111/E01** (`0.1.11.01-beta`) quedó aceptado/publicado como DOC.2; **G112/E01** (`0.1.12.01-beta`) queda reservado para NOR.1 R8 sin consumirse, con PERSIST.1 como siguiente bloque funcional.
 - Los cierres y sincronizaciones que no crean un estado materialmente distinto no consumen `G` por sí solos.
 
 Cualquier promoción futura de versión debe seguir el proceso formal de release, validación, PR/CI, tag y evidencia documental correspondiente.

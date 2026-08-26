@@ -3,7 +3,7 @@
 **Proyecto:** Mi Retiro Proyectado
 **Estado:** vigente desde GOV.1.2
 **Fecha de adopción:** 2026-08-18
-**Última revisión:** AUD.SEC2 R1 — reconciliación post-SEC.2 — 2026-08-25
+**Última revisión:** NOR.1 R8 — gobierno de identificadores de bloques, candidato G112/E01 — 2026-08-26
 
 
 <!-- DOC1-R1-POST-MANT1:START -->
@@ -14,13 +14,13 @@ El gobierno vigente conserva la separación entre estado canónico, evidencia hi
 Estado vigente:
 
 - `VERSION` sigue siendo la fuente única de versión.
-- `0.1.11.01-beta` es la versión canónica vigente en `VERSION` y materializa G111/E01 (DOC.2); G112/E01 queda disponible para PERSIST.1.
+- `0.1.11.01-beta` es la versión canónica vigente en `VERSION` y materializa G111/E01 (DOC.2); G112/E01 queda reservado para NOR.1 R8 sin consumirse y PERSIST.1 permanece como siguiente bloque funcional.
 - `v0.0.71.01-beta` es el tag formal publicado por VER.2.
 - `v0.0.26-beta` permanece como tag legacy histórico e inmutable.
 - VER.2 está cerrado.
 - MANT.1 quedó cerrado operativamente en R7.
 - DOC.1 R1 está cerrado.
-- NOR.1 está cerrado.
+- NOR.1 conserva su cierre histórico en R7 y está reabierto únicamente como candidato R8 para gobernar identificadores de bloques; G112 aún no está aceptado.
 - NOR.2 está cerrado después de completar R1–R8.
 - DOC.1 R2 está cerrado como auditoría integral Markdown post-NOR.2.
 - SEC.2 quedó cerrado después de R1–R6; AUD.SEC2 R1 fue aceptado mediante PR #83 como G109/E01, corrige el kill switch administrativo y preserva la trazabilidad de la anomalía histórica de `v0.0.71.01-beta`.
@@ -151,6 +151,9 @@ La política aplicable está en `VERSIONING.md`.
 - La edición de metadatos de un Release histórico puede corregir formato o reconciliación sin mover ni recrear su tag; toda corrección semántica debe conservar la denominación original como evidencia.
 
 ## 8. Propiedad y revisión de áreas críticas
+
+Antes de crear o reutilizar una sigla, fase o bloque se consultan `docs/standards/work-block-identifiers.md` y `data/work-block-registry.json`. Los identificadores históricos o planificados no se reasignan; `R...` identifica revisiones, no bloques.
+
 
 Mientras exista un único mantenedor, `@recm0708` revisa todo el repositorio. Se consideran especialmente críticas:
 

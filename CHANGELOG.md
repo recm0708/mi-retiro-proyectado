@@ -6,6 +6,10 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ## [Unreleased]
 
+- NOR.1 R8: audita y gobierna las familias e identificadores de bloques de trabajo.
+- NOR.1 R8: incorpora política, registro machine-readable y auditor automático para impedir reutilizaciones o siglas inventadas.
+- Ledger: reserva G112/E01 (`0.1.12.01-beta`) para NOR.1 R8 antes de PERSIST.1 sin cambiar `VERSION` ni `accepted_count`.
+
 
 ## [0.1.11.01-beta]
 - G111/E01: DOC.2 R1 aceptado mediante PR #87 y merge `1041b59`; reconstruye de forma auditable `0.0.1-beta`–`0.0.21-beta`.

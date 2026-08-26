@@ -17,7 +17,7 @@ funcionales al plan de 14 bloques.
 - **NOR.1:** cerrado en R7; estándares determinísticos establecidos.
 - **NOR.2:** cerrado en R8 mediante PR #74; normalización integral completada.
 - **DOC.1 R2:** auditoría integral Markdown post-NOR.2 cerrada; documentación vigente, evidencia histórica y controles permanentes quedaron reconciliados.
-- **SEC.2 R1–R6:** cerrados; hardening CodeQL, autenticación/protección administrativa, auditoría, sesión web y hardening de sesión completados. AUD.SEC2 R1 quedó aceptado/publicado como G109/E01. REL.GOV.1 R1 quedó aceptado como G110/E01. DOC.2 R1 quedó aceptado como G111/E01 mediante PR #87; PERSIST.1 continúa con G112/E01 disponible.
+- **SEC.2 R1–R6:** cerrados; hardening CodeQL, autenticación/protección administrativa, auditoría, sesión web y hardening de sesión completados. AUD.SEC2 R1 quedó aceptado/publicado como G109/E01. REL.GOV.1 R1 quedó aceptado como G110/E01. DOC.2 R1 quedó aceptado/publicado como G111/E01. NOR.1 R8 reserva G112/E01 como checkpoint transversal antes de PERSIST.1.
 
 La separación evita que SEC.2 cree nuevas rutas, archivos o estructuras sobre
 una base cuya nomenclatura y documentación no hayan sido normalizadas.
@@ -287,11 +287,11 @@ Objetivo previo a DOC.2:
 - extender el workflow de tags para ejecutar el contrato en todo tag futuro;
 - fijar reglas de edición posterior que preserven firma, commit objetivo y evidencia histórica.
 
-REL.GOV.1 superó gate, PR/CI e integración y consumió G110; la promoción PR #86 publicó `v0.1.10.01-beta`. DOC.2 R1 superó gate, PR #87, CI, integración y revalidación post-merge, por lo que G111/E01 (`0.1.11.01-beta`) queda aceptado; G112/E01 (`0.1.12.01-beta`) queda disponible para PERSIST.1.
+REL.GOV.1 superó gate, PR/CI e integración y consumió G110; la promoción PR #86 publicó `v0.1.10.01-beta`. DOC.2 R1 superó gate, PR #87, CI, integración y revalidación post-merge, por lo que G111/E01 (`0.1.11.01-beta`) queda aceptado; G112/E01 (`0.1.12.01-beta`) queda reservado para NOR.1 R8 antes de PERSIST.1.
 
 ### 8. DOC.2 — CHANGELOG detallado `0.0.1-beta`–`0.0.21-beta`
 
-**Estado:** cerrado en R1 como G111/E01 (`0.1.11.01-beta`) mediante PR #87; reconstrucción de 21 estados/80 commits aceptada y revalidada post-merge. PERSIST.1 continúa con G112/E01.
+**Estado:** cerrado en R1 como G111/E01 (`0.1.11.01-beta`) mediante PR #87; reconstrucción de 21 estados/80 commits aceptada y revalidada post-merge. NOR.1 R8 reserva G112/E01 antes de PERSIST.1.
 
 Reconstrucción basada exclusivamente en evidencia:
 
@@ -303,6 +303,12 @@ Reconstrucción basada exclusivamente en evidencia:
 - pruebas disponibles.
 
 No se inventará detalle retrospectivo no sustentado.
+
+#### Checkpoint transversal NOR.1 R8 — Gobierno de identificadores de bloques
+
+**Estado:** candidato; G112/E01 (`0.1.12.01-beta`) reservado y no aceptado.
+
+Amplía NOR.1 sin añadir un bloque funcional al programa de 14 bloques. Define familias, namespaces, revisiones, reservas y un registro machine-readable. PERSIST.1 permanece como siguiente bloque funcional.
 
 ### 9. PERSIST.1 — Persistencia voluntaria y segura
 
