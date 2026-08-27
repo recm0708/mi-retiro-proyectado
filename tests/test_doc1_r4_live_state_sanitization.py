@@ -1,76 +1,29 @@
-"""Regresiones de saneamiento semántico DOC.1 R4."""
-
+"""Regresiones de saneamiento semántico DOC.1 R4 y su aceptación G115/E04."""
 from __future__ import annotations
-
 import json
 from pathlib import Path
 import unittest
-
+from app.core.version_ledger import cargar_ledger
 ROOT = Path(__file__).resolve().parents[1]
-
-
 class TestDOC1R4LiveStateSanitization(unittest.TestCase):
-    def test_candidato_no_consume_g115(self):
-        self.assertEqual(
-            "0.1.14.01-beta",
-            (ROOT / "VERSION").read_text(encoding="utf-8").strip(),
-        )
-        ledger = json.loads(
-            (ROOT / "data/pre-1-0-revision-ledger.json").read_text(encoding="utf-8")
-        )
-        self.assertEqual(114, ledger["accepted_count"])
-        self.assertEqual(115, ledger["next_global"])
-        self.assertEqual("0.1.15.04-beta", ledger["next_candidate"])
-        self.assertEqual("DOC.1", ledger["next_candidate_block"])
-
-    def test_raiz_declara_g114_publicado(self):
-        readme = (ROOT / "README.md").read_text(encoding="utf-8")
-        governance = (ROOT / "GOVERNANCE.md").read_text(encoding="utf-8")
-        changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
-        releases = (ROOT / "RELEASES.md").read_text(encoding="utf-8")
-        versioning = (ROOT / "VERSIONING.md").read_text(encoding="utf-8")
-
-        self.assertIn("Último tag revision-aware publicado:** `v0.1.14.01-beta`", readme)
-        self.assertIn("`v0.1.14.01-beta` es el último tag revision-aware publicado", governance)
-        self.assertIn("`v0.1.14.01-beta` fue creado como tag anotado y firmado", changelog)
-        self.assertIn("Último tag formal publicado: `v0.1.14.01-beta`", releases)
-        self.assertIn("`v0.1.14.01-beta` está publicado, firmado y verificado", versioning)
-
-    def test_security_solo_marca_g114_como_beta_vigente(self):
-        security = (ROOT / "SECURITY.md").read_text(encoding="utf-8")
-        self.assertIn("| `0.1.14.01-beta` | Beta vigente G114/E01 publicada;", security)
-        self.assertNotIn("Beta vigente G113/E03", security)
-        self.assertNotIn("Beta vigente G111/E01", security)
-
-    def test_release_ledger_y_roadmap_reflejan_g115_doc1(self):
-        release_process = (ROOT / "docs/operations/release-process.md").read_text(encoding="utf-8")
-        ledger_md = (ROOT / "docs/governance/pre-1-0-revision-ledger.md").read_text(encoding="utf-8")
-        roadmap = (ROOT / "docs/governance/roadmap.md").read_text(encoding="utf-8")
-
-        self.assertIn("G114/E01 publicado; DOC.1 R4 candidato G115/E04", release_process)
-        self.assertIn("Git Tag Signature Verification` terminó en `success`", release_process)
-        self.assertIn("| G115 | `0.1.15.04-beta` | DOC.1 R4", ledger_md)
-        self.assertIn("G001–G114 y siguiente Global G115", roadmap)
-
-    def test_estado_vivo_de_dev_y_plan_maestro_no_retrocede(self):
-        dev = (ROOT / "docs/architecture/development-center.md").read_text(encoding="utf-8")
-        plan = (ROOT / "docs/governance/master-plan-to-1-0.md").read_text(encoding="utf-8")
-
-        self.assertIn("`VERSION` está sincronizado en `0.1.14.01-beta`", dev)
-        self.assertIn("DOC.1 R4 es el candidato vigente G115/E04", plan)
-        self.assertIn("PERSIST.1 como etapa posterior", plan)
-
+    def test_g115_acepta_doc1_r4(self):
+        ledger=cargar_ledger(); self.assertGreaterEqual(ledger["accepted_count"],115)
+        entry=next(e for e in ledger["entries"] if e["global_revision"]==115)
+        self.assertEqual("DOC.1",entry["block"]); self.assertEqual(4,entry["ordinal"]); self.assertEqual("0.1.15.04-beta",entry["revision_aware"]); self.assertIn("PR #96",entry["evidence"]); self.assertIn("9f51229",entry["evidence"])
+    def test_registro_preserva_g115_en_doc1(self):
+        data=json.loads((ROOT/"data/work-block-registry.json").read_text(encoding="utf-8")); ids={x["identifier"]:x for x in data["identifiers"]}
+        self.assertIn("G115",ids["DOC.1"]["global_refs"]); self.assertFalse(ids["DOC.1"]["reusable_for_different_scope"])
+    def test_publicacion_g114_permanece_preservada(self):
+        for rel in ("README.md","GOVERNANCE.md","CHANGELOG.md","RELEASES.md","VERSIONING.md","SECURITY.md"):
+            self.assertIn("v0.1.14.01-beta",(ROOT/rel).read_text(encoding="utf-8"))
+    def test_estado_vivo_declara_g115_y_rel_gov_r2(self):
+        for rel in ("README.md","GOVERNANCE.md","SECURITY.md","VERSIONING.md","RELEASES.md","docs/README.md","docs/governance/master-plan-to-1-0.md","docs/governance/roadmap.md","docs/operations/release-process.md"):
+            text=(ROOT/rel).read_text(encoding="utf-8"); self.assertIn("G115",text); self.assertIn("DOC.1 R4",text); self.assertIn("REL.GOV.1 R2",text)
+    def test_ledger_markdown_registra_g115(self):
+        text=(ROOT/"docs/governance/pre-1-0-revision-ledger.md").read_text(encoding="utf-8"); self.assertIn("| G115 | `0.1.15.04-beta` | DOC.1 R4",text)
     def test_historia_y_evidencia_quedan_preservadas(self):
-        changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
-        validation = (ROOT / "docs/operations/validation.md").read_text(encoding="utf-8")
-        releases = (ROOT / "RELEASES.md").read_text(encoding="utf-8")
-        index = (ROOT / "docs/README.md").read_text(encoding="utf-8")
-
-        self.assertIn("`VERSION` permanece en `0.0.26-beta`", changelog)
-        self.assertIn("`VERSION=0.1.13.03-beta`", validation)
-        self.assertIn("Promoción G113/E03", releases)
-        self.assertIn("documentation-live-state-doc1-r4.md", index)
-
-
-if __name__ == "__main__":
-    unittest.main()
+        self.assertIn("`VERSION` permanece en `0.0.26-beta`",(ROOT/"CHANGELOG.md").read_text(encoding="utf-8"))
+        self.assertIn("`VERSION=0.1.13.03-beta`",(ROOT/"docs/operations/validation.md").read_text(encoding="utf-8"))
+        self.assertIn("Promoción G113/E03",(ROOT/"RELEASES.md").read_text(encoding="utf-8"))
+        self.assertIn("documentation-live-state-doc1-r4.md",(ROOT/"docs/README.md").read_text(encoding="utf-8"))
+if __name__ == "__main__": unittest.main()

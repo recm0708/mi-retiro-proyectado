@@ -6,7 +6,14 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ## [Unreleased]
 
-- DOC.1 R4 (candidato G115/E04): sanea estado vivo posterior a la publicación de G114/E01, preserva evidencia histórica y mantiene `VERSION=0.1.14.01-beta` y `accepted_count=114` mientras el candidato no sea aceptado.
+- REL.GOV.1 R2 (candidato G116/E02): automatización de Releases y checks; G116 permanece reservado y no aceptado mientras no supere su gate propio.
+
+## [0.1.15.04-beta]
+- G115/E04: DOC.1 R4 queda aceptado mediante PR #96 / merge `9f51229` después de sanear el estado documental vivo posterior a la publicación de G114/E01 sin reescribir evidencia histórica.
+- Documentación: reconcilia metadata viva, estados actuales, gobierno, seguridad, proceso de release, roadmap y ledger; conserva `docs/archive/`, auditorías históricas y anclas contractuales.
+- Gate: 1114 pruebas post-merge en `OK`, Markdown 149/149, `pip check`, compilación Python, sintaxis JavaScript, auditor de identificadores y `git diff --check` limpios.
+- Ledger: G115 queda aceptado; G116/E02 (`0.1.16.02-beta`) queda reservado para REL.GOV.1 R2.
+- Tag/Release: `v0.1.15.04-beta` queda pendiente hasta integrar y revalidar esta promoción; `v0.1.14.01-beta` permanece como último tag revision-aware publicado.
 
 ## [0.1.14.01-beta]
 - G114/E01: PLAN.2 R1 queda aceptado mediante PR #94 / merge `7ded70c` después de formalizar la matriz maestra viva hacia `1.0.0.0`.

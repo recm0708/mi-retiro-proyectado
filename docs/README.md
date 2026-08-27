@@ -1,9 +1,9 @@
 # Índice de documentación
 
 **Estado:** vigente
-**Versión de aplicación:** `0.1.14.01-beta` — G114/E01 aceptado para PLAN.2 R1; G115/E04 reservado para DOC.1 R4; ledger aceptado hasta G114
+**Versión de aplicación:** `0.1.15.04-beta` — G115/E04 aceptado para DOC.1 R4; G116/E02 reservado para REL.GOV.1 R2; ledger aceptado hasta G115
 **Último tag formal legacy:** `v0.0.26-beta`
-**Última actualización transversal:** DOC.1 R4 — saneamiento semántico post-publicación G114/E01 en curso; candidato G115/E04 no aceptado — 2026-08-26
+**Última actualización transversal:** DOC.1 R4 — saneamiento semántico post-publicación G114/E01 aceptado como G115/E04; REL.GOV.1 R2 candidato G116/E02 — 2026-08-26
 **Cierres históricos preservados:** UX.4.6i / PR #34 — 841 pruebas; UX.4.6e R9 — `v0.0.25-beta`
 
 Este archivo es el punto de entrada para la documentación técnica, funcional, normativa, de privacidad, validación y auditoría de Mi Retiro Proyectado.
@@ -11,7 +11,7 @@ Este archivo es el punto de entrada para la documentación técnica, funcional, 
 
 ## Estado de normalización del repositorio
 
-**Estado actual:** NOR.1 R8, NOR.2, DOC.1 R2–R3, SEC.2, AUD.SEC2 R1, REL.GOV.1, DOC.2 y PLAN.2 R1 están cerrados/aceptados según corresponda. G114/E01 está materializado como `0.1.14.01-beta`; DOC.1 R4 reserva G115/E04 como siguiente checkpoint. PERSIST.1 permanece planificado en la matriz maestra.
+**Estado actual:** NOR.1 R8, NOR.2, DOC.1 R2–R4, SEC.2, AUD.SEC2 R1, REL.GOV.1 R1, DOC.2 y PLAN.2 R1 están cerrados/aceptados según corresponda. G115/E04 está materializado como `0.1.15.04-beta`; REL.GOV.1 R2 reserva G116/E02 como siguiente checkpoint. PERSIST.1 permanece planificado en la matriz maestra.
 
 Estado de la fase:
 
@@ -28,7 +28,8 @@ Estado de la fase:
 - **DOC.1 R3:** cerrado/aceptado como G113/E03; normalizó 11 referencias inequívocas, formalizó la política de navegación documental y preservó rutas históricas/contractuales.
 - **DOC.2 R1:** cerrado/aceptado como G111/E01; preserva la reconstrucción auditable del CHANGELOG y su evidencia histórica.
 - **PLAN.2 R1:** cerrado/aceptado como G114/E01; formaliza la matriz maestra viva hacia 1.0.
-- **DOC.1 R4:** reabierto como siguiente candidato G115/E04 para saneamiento documental post-G113.
+- **DOC.1 R4:** cerrado/aceptado como G115/E04 mediante PR #96 / merge `9f51229`; saneamiento documental post-G113 completado.
+- **REL.GOV.1 R2:** reabierto como siguiente candidato G116/E02 para automatización de Releases y checks.
 - **SEC.2 R1–R6:** cerrados; CodeQL, autenticación, protección de endpoints, auditoría, sesión web y hardening configurable completados. AUD.SEC2 R1 corrigió el kill switch, alineó documentación/ledger y quedó aceptado como G109/E01.
 
 Evidencia:

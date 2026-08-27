@@ -62,10 +62,10 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
         self.assertEqual(7, entry["ordinal"])
         self.assertEqual("0.1.12.07-beta", entry["revision_aware"])
         candidate = self.data["current_candidate"]
-        self.assertEqual(115, candidate["global_revision"])
-        self.assertEqual("DOC.1", candidate["block"])
-        self.assertEqual("R4", candidate["revision"])
-        self.assertEqual(4, candidate["edition"])
+        self.assertEqual(116, candidate["global_revision"])
+        self.assertEqual("REL.GOV.1", candidate["block"])
+        self.assertEqual("R2", candidate["revision"])
+        self.assertEqual(2, candidate["edition"])
         self.assertEqual("reserved_not_accepted", candidate["state"])
         self.assertEqual("DEV.2", candidate["next_functional_block_if_accepted"])
         self.assertIsNone(candidate["next_functional_global_if_accepted"])
@@ -81,12 +81,12 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
 
         candidato = copy.deepcopy(ledger)
         candidato["next_candidate_block"] = "NOR.1"
-        candidato["next_candidate"] = "0.1.15.08-beta"
+        candidato["next_candidate"] = "0.1.16.08-beta"
         validar_ledger(candidato)
 
         invalido = copy.deepcopy(ledger)
         invalido["next_candidate_block"] = "NOR.1"
-        invalido["next_candidate"] = "0.1.15.01-beta"
+        invalido["next_candidate"] = "0.1.16.01-beta"
         with self.assertRaises(LedgerRevisionError):
             validar_ledger(invalido)
 
@@ -94,7 +94,7 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
         ledger = cargar_ledger()
         candidato = copy.deepcopy(ledger)
         candidato["next_candidate_block"] = "UX.5"
-        candidato["next_candidate"] = "0.1.15.01-beta"
+        candidato["next_candidate"] = "0.1.16.01-beta"
 
         validar_ledger(candidato)
 
