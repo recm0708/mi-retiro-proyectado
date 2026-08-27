@@ -9,14 +9,14 @@
     "tracked_files": 459
   },
   "current_candidate": {
-    "global_revision": 116,
-    "revision_aware": "0.1.16.05-beta",
-    "block": "DOC.1",
-    "revision": "R5",
+    "global_revision": 117,
+    "revision_aware": "0.1.17.02-beta",
+    "block": "REL.GOV.1",
+    "revision": "R2",
     "state": "reserved_not_accepted",
-    "next_functional_block_if_accepted": "REL.GOV.1",
+    "next_functional_block_if_accepted": "DEV.2",
     "next_functional_global_if_accepted": null,
-    "edition": 5
+    "edition": 2
   },
   "families": [
     {
@@ -443,14 +443,15 @@
       "identifier": "DOC.1",
       "family": "DOC",
       "kind": "block",
-      "status": "reopened_candidate_r5",
-      "meaning": "R1–R4 cerrados; R5 es el candidato de normalización documental integral post-G115; R6 permanece planificado para la congelación documental final.",
-      "evidence": "Ledger revision-aware; G113 / PR #92; G115 / PR #96; matriz PLAN.2 R1.",
+      "status": "reopened_planned_r6",
+      "meaning": "R1–R5 cerrados; R5 queda aceptado como G116/E05 después de PR #101; R6 permanece planificado para la congelación documental final.",
+      "evidence": "Ledger revision-aware; G113 / PR #92; G115 / PR #96; G116 / PR #101 / merge 6f4266d; matriz PLAN.2 R1.",
       "global_refs": [
         "G086",
         "G102",
         "G113",
-        "G115"
+        "G115",
+        "G116"
       ],
       "reusable_for_different_scope": false
     },
@@ -531,9 +532,9 @@
       "identifier": "REL.GOV.1",
       "family": "REL",
       "kind": "compound_block",
-      "status": "reopened_planned_r2",
-      "meaning": "R1 cerrado/aceptado en G110/E01; R2 permanece planificado para automatización de Releases y checks después de DOC.1 R5, sin Global preasignado.",
-      "evidence": "G110 / PR #85; docs/governance/pre-1-0-pending-matrix.md.",
+      "status": "reopened_candidate_r2",
+      "meaning": "R1 cerrado/aceptado en G110/E01; R2 queda como candidato G117/E02 para automatización de Releases y checks después de DOC.1 R5.",
+      "evidence": "G110 / PR #85; DOC.1 R5 aceptado mediante PR #101; docs/governance/pre-1-0-pending-matrix.md.",
       "global_refs": [
         "G110"
       ],

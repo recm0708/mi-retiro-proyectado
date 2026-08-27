@@ -1,9 +1,9 @@
 # Índice de documentación
 
 **Estado:** vigente
-**Versión de aplicación:** `0.1.15.04-beta` — G115/E04 aceptado/publicado para DOC.1 R4; G116/E05 reservado para DOC.1 R5; ledger aceptado hasta G115
+**Versión de aplicación:** `0.1.16.05-beta` — G116/E05 aceptado para DOC.1 R5; G117/E02 reservado para REL.GOV.1 R2; ledger aceptado hasta G116
 **Último tag formal legacy:** `v0.0.26-beta`
-**Última actualización transversal:** DOC.1 R5 — normalización documental integral post-G115; candidato G116/E05 reservado para DOC.1 R5 — 2026-08-27
+**Última actualización transversal:** promoción formal DOC.1 R5 — G116/E05 aceptado; REL.GOV.1 R2 candidato G117/E02 — 2026-08-27
 **Cierres históricos preservados:** UX.4.6i / PR #34 — 841 pruebas; UX.4.6e R9 — `v0.0.25-beta`
 
 Este archivo es el punto de entrada para la documentación técnica, funcional, normativa, de privacidad, validación y auditoría de Mi Retiro Proyectado.
@@ -11,7 +11,7 @@ Este archivo es el punto de entrada para la documentación técnica, funcional, 
 
 ## Estado de normalización del repositorio
 
-**Estado actual:** NOR.1 R8, NOR.2, DOC.1 R2–R4, SEC.2, AUD.SEC2 R1, REL.GOV.1 R1, DOC.2 y PLAN.2 R1 están cerrados/aceptados según corresponda. G115/E04 está publicado como `0.1.15.04-beta`; DOC.1 R5 reserva G116/E05 como candidato actual. REL.GOV.1 R2 permanece como siguiente checkpoint planificado sin Global preasignado y PERSIST.1 continúa posteriormente en la matriz maestra.
+**Estado actual:** NOR.1 R8, NOR.2, DOC.1 R2–R5, SEC.2, AUD.SEC2 R1, REL.GOV.1 R1, DOC.2 y PLAN.2 R1 están cerrados/aceptados según corresponda. DOC.1 R5 queda aceptado como G116/E05 (`0.1.16.05-beta`); REL.GOV.1 R2 reserva G117/E02 como candidato actual y PERSIST.1 continúa posteriormente en la matriz maestra.
 
 Estado de la fase:
 
@@ -29,8 +29,8 @@ Estado de la fase:
 - **DOC.2 R1:** cerrado/aceptado como G111/E01; preserva la reconstrucción auditable del CHANGELOG y su evidencia histórica.
 - **PLAN.2 R1:** cerrado/aceptado como G114/E01; formaliza la matriz maestra viva hacia 1.0.
 - **DOC.1 R4:** cerrado/aceptado como G115/E04 mediante PR #96 / merge `9f51229`; saneamiento documental post-G113 completado.
-- **DOC.1 R5:** reabierto como candidato G116/E05 para normalización documental integral post-G115.
-- **REL.GOV.1 R2:** permanece como siguiente checkpoint planificado para automatización de Releases y checks, sin Global preasignado mientras G116 no sea aceptado.
+- **DOC.1 R5:** cerrado/aceptado como G116/E05 mediante PR #101 / merge `6f4266d`; normalización documental integral post-G115 completada.
+- **REL.GOV.1 R2:** queda como candidato G117/E02 (`0.1.17.02-beta`) para automatización de Releases y checks.
 - **SEC.2 R1–R6:** cerrados; CodeQL, autenticación, protección de endpoints, auditoría, sesión web y hardening configurable completados. AUD.SEC2 R1 corrigió el kill switch, alineó documentación/ledger y quedó aceptado como G109/E01.
 
 Evidencia:
@@ -75,7 +75,7 @@ Evidencia:
 - **[VER.2 — Segunda pasada de auditoría cruzada](archive/governance/AUDITORIA_VER2_SEGUNDA_PASADA.md)** — bitácora de la segunda pasada y correcciones sobre la primera reconstrucción.
 - **[VER.2 — Conteo de segunda pasada](archive/governance/AUDITORIA_VER2_CONTEO_PROVISIONAL.md)** — cierre del conteo de segunda pasada en G070 antes de VER.2.
 - **[VER.2 — Matriz de decisión de revisiones aceptadas](archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md)** — decisión fila por fila sobre qué consume Global y por qué.
-- **[Ledger de revisiones aceptadas pre-1.0](governance/pre-1-0-revision-ledger.md)** — ledger Markdown reconciliado G001–G115 y candidato reservado G116/E05 para DOC.1 R5.
+- **[Ledger de revisiones aceptadas pre-1.0](governance/pre-1-0-revision-ledger.md)** — ledger Markdown reconciliado G001–G116 y candidato reservado G117/E02 para REL.GOV.1 R2.
 - **[Auditoría de reconciliación revision-aware posterior a G070](audits/governance/post-g070-revision-reconciliation.md)** — auditoría de reconstrucción G071–G108.
 - [`pre-1-0-revision-ledger-g070.json`](archive/governance/pre-1-0-revision-ledger-g070.json) — snapshot histórico exacto G070.
 - [`../data/pre-1-0-revision-ledger.json`](../data/pre-1-0-revision-ledger.json) — ledger machine-readable canónico de la reconstrucción.

@@ -2,9 +2,9 @@
   "schema_version": 1,
   "project": "Mi Retiro Proyectado",
   "base_commit": "7037addd44253e528c77460b678d2b3ccd540dd5",
-  "accepted_count": 115,
-  "next_global_if_ver2_accepted": 116,
-  "next_candidate": "0.1.16.05-beta",
+  "accepted_count": 116,
+  "next_global_if_ver2_accepted": 117,
+  "next_candidate": "0.1.17.02-beta",
   "historical_tags_immutable": {
     "from": "v0.0.1-beta",
     "to": "v0.0.26-beta"
@@ -1044,6 +1044,15 @@
       "state": "R4 — saneamiento documental post-G113 y reconciliación del estado vivo tras G114",
       "anchor": "0.1.15.04-beta",
       "evidence": "PR #96 / merge 9f51229; 1114 pruebas post-merge; Markdown 149/149; auditor de identificadores OK; pip check, compileall, sintaxis JavaScript y git diff --check limpios"
+    },
+    {
+      "global_revision": 116,
+      "block": "DOC.1",
+      "ordinal": 5,
+      "revision_aware": "0.1.16.05-beta",
+      "state": "R5 — normalización documental integral post-G115",
+      "anchor": "0.1.16.05-beta",
+      "evidence": "PR #101 / merge 6f4266d; 1127 pruebas unittest post-merge; pytest 1167 passed / 5587 subtests; Markdown 158/158; auditor de identificadores OK; CI Python 3.13/3.14 + Markdown/gobernanza post-merge en success"
     }
   ],
   "excluded": [
@@ -1120,8 +1129,8 @@
       "reason": "La decisión VER.2 R3 establece expresamente que R1, R2 y R3 son correcciones internas del mismo candidato G071/E01; no consumen G072 ni incrementan EE. R4 materializa la aceptación única del candidato."
     }
   ],
-  "reconciled_through_commit": "87fa8e98688c1e3951cc405eb4b280d558d1c8a6",
-  "reconciliation_date": "2026-08-26",
-  "next_global": 116,
-  "next_candidate_block": "DOC.1"
+  "reconciled_through_commit": "6f4266dee6ac524ef9a9e723497c7d7d620c3a6f",
+  "reconciliation_date": "2026-08-27",
+  "next_global": 117,
+  "next_candidate_block": "REL.GOV.1"
 }

@@ -1,7 +1,7 @@
 # Matriz de trazabilidad
 
 **Estado:** Vigente
-**Versión de aplicación:** `0.1.15.04-beta` — G115/E04 aceptado/publicado; reconciliación viva hasta G115
+**Versión de aplicación:** `0.1.16.05-beta` — G115/E04 aceptado/publicado; reconciliación viva hasta G115
 **Último tag formal legacy:** `v0.0.26-beta`
 **Base histórica:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal:** NOR.2 R8 — 2026-08-24
@@ -27,7 +27,7 @@ Estado documental actual:
 - NOR.2 R8 está cerrado e integrado mediante PR #74.
 - NOR.2 está cerrado después de completar R1–R8.
 - SEC.2 quedó cerrado después de R1–R6; AUD.SEC2 R1 corrigió el kill switch, reconcilió documentación/ledger y quedó aceptado como G109/E01 mediante PR #83.
-- PLAN.2 R1 quedó aceptado como G114/E01 mediante PR #94 / merge `7ded70c`; DOC.1 R4 quedó aceptado/publicado como G115/E04 (`0.1.15.04-beta`); DOC.1 R5 queda reservado como candidato G116/E05 (`0.1.16.05-beta`).
+- PLAN.2 R1 quedó aceptado como G114/E01 mediante PR #94 / merge `7ded70c`; DOC.1 R4 quedó aceptado/publicado como G115/E04 (`0.1.15.04-beta`); DOC.1 R5 queda aceptado como G116/E05 (`0.1.16.05-beta`) mediante PR #101 / merge `6f4266d`; G117/E02 (`0.1.17.02-beta`) queda reservado para REL.GOV.1 R2.
 
 Esta matriz debe distinguir trazabilidad histórica de estado vigente.
 <!-- DOC1-R1-POST-MANT1:END -->

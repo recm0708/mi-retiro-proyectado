@@ -1,7 +1,7 @@
 # Modalidades de retiro por vejez — SEBD
 
 **Estado:** Vigente
-**Versión de aplicación revisada:** `0.1.15.04-beta`
+**Versión de aplicación revisada:** `0.1.16.05-beta`
 **Versión base histórica:** `0.0.23-beta`
 **Revisión documental:** GOV.1.3 R3 — 2026-08-17
 **Clasificación:** Normativa / Motor

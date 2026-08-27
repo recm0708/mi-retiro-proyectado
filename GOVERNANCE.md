@@ -3,7 +3,7 @@
 **Proyecto:** Mi Retiro Proyectado
 **Estado:** vigente desde GOV.1.2
 **Fecha de adopción:** 2026-08-18
-**Última revisión:** DOC.1 R5 — normalización documental en curso como candidato G116/E05 sobre la base publicada G115/E04 — 2026-08-27
+**Última revisión:** promoción formal DOC.1 R5 — G116/E05 aceptado; REL.GOV.1 R2 candidato G117/E02 — 2026-08-27
 
 
 <!-- DOC1-R1-POST-MANT1:START -->
@@ -14,15 +14,15 @@ El gobierno vigente conserva la separación entre estado canónico, evidencia hi
 Estado vigente:
 
 - `VERSION` sigue siendo la fuente única de versión.
-- `0.1.15.04-beta` es la versión canónica vigente en `VERSION` y materializa G115/E04 (DOC.1 R4); G116/E05 queda reservado para DOC.1 R5.
-- `v0.1.15.04-beta` es el último tag revision-aware publicado y verificado; `v0.1.14.01-beta` permanece preservado como publicación anterior.
+- `0.1.16.05-beta` es la versión canónica vigente en `VERSION` y materializa G116/E05 (DOC.1 R5); G117/E02 queda reservado para REL.GOV.1 R2.
+- `v0.1.15.04-beta` permanece como último tag revision-aware publicado y verificado hasta completar la publicación post-merge de `v0.1.16.05-beta`; `v0.1.14.01-beta` permanece preservado.
 - `v0.0.71.01-beta` conserva su evidencia histórica reconciliada como G087/E01.
 - `v0.0.26-beta` permanece como tag legacy histórico e inmutable.
-- VER.2, MANT.1, NOR.1, NOR.2, DOC.1 R1–R4 y PLAN.2 R1 están cerrados.
+- VER.2, MANT.1, NOR.1, NOR.2, DOC.1 R1–R5 y PLAN.2 R1 están cerrados.
 - NOR.1 R8 permanece aceptado como G112/E07.
 - DOC.1 R3 queda aceptado como G113/E03 después de PR #92 / merge `40ae5c0`.
 - SEC.2 quedó cerrado después de R1–R6; AUD.SEC2 R1 fue aceptado mediante PR #83 como G109/E01.
-- PLAN.2 R1 permanece aceptado como G114/E01 (`0.1.14.01-beta`) mediante PR #94 / merge `7ded70c`; DOC.1 R4 queda aceptado y publicado como G115/E04 (`0.1.15.04-beta`), con promoción PR #97 / merge `87fa8e9`; DOC.1 R5 queda como candidato G116/E05 (`0.1.16.05-beta`). REL.GOV.1 R2 permanece planificado a continuación, sin Global preasignado; PERSIST.1 continúa reservado para una etapa posterior conforme a la matriz maestra.
+- PLAN.2 R1 permanece aceptado como G114/E01 (`0.1.14.01-beta`) mediante PR #94 / merge `7ded70c`; DOC.1 R4 queda aceptado/publicado como G115/E04 (`0.1.15.04-beta`); DOC.1 R5 queda aceptado como G116/E05 (`0.1.16.05-beta`) mediante PR #101 / merge `6f4266d`. REL.GOV.1 R2 queda como candidato G117/E02 (`0.1.17.02-beta`); PERSIST.1 continúa reservado para una etapa posterior conforme a la matriz maestra.
 <!-- DOC1-R1-POST-MANT1:END -->
 
 ## 1. Propósito

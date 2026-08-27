@@ -6,7 +6,14 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ## [Unreleased]
 
-- DOC.1 R5 (candidato G116/E05): normalización documental integral post-G115, reconciliación de publicación, enlaces humanos, estándares/plantillas Markdown y controles de regresión. REL.GOV.1 R2 permanece como siguiente checkpoint planificado sin Global preasignado.
+- REL.GOV.1 R2 (candidato G117/E02): automatización de Releases y checks sobre la base aceptada G116/E05; G117 permanece reservado y no aceptado mientras no supere su gate propio.
+
+## [0.1.16.05-beta]
+- G116/E05: DOC.1 R5 queda aceptado mediante PR #101 / merge `6f4266d` después de completar la normalización documental integral post-G115.
+- Documentación: humaniza navegación Markdown, completa plantillas técnicas/semánticas, reconcilia el estado publicado de G115 y endurece el auditor contra etiquetas técnicas y candidatos revision-aware obsoletos.
+- Gate: 1127 pruebas `unittest` post-merge en `OK`, `pytest` 1167 passed / 5587 subtests, Markdown 158/158, `pip check`, compilación Python, sintaxis JavaScript, auditor de identificadores y `git diff --check` limpios; checks remotos de PR y post-merge en `success`.
+- Ledger: G116 queda aceptado; G117/E02 (`0.1.17.02-beta`) queda reservado para REL.GOV.1 R2.
+- Tag/Release: `v0.1.16.05-beta` queda pendiente hasta integrar y revalidar esta promoción; `v0.1.15.04-beta` permanece como último tag revision-aware publicado.
 
 ## [0.1.15.04-beta]
 - G115/E04: DOC.1 R4 queda aceptado mediante PR #96 / merge `9f51229` después de sanear el estado documental vivo posterior a la publicación de G114/E01 sin reescribir evidencia histórica.
