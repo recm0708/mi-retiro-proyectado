@@ -1189,3 +1189,32 @@ Gate previo a la promoción:
 - CI remota Python 3.13/3.14, Markdown Audit y Repository Governance Audit en `success`.
 
 El tag `v0.1.14.01-beta` se crea únicamente después de integrar y revalidar esta promoción.
+
+## DOC.1 R4 — saneamiento semántico post-publicación G114/E01
+
+Base de inicio:
+
+- `main = 5c6d2db1d02e4482dde27cdfaf1503cf7cfe84cd`;
+- `VERSION = 0.1.14.01-beta`;
+- G114/E01 publicado para PLAN.2 R1;
+- G115/E04 (`0.1.15.04-beta`) reservado para DOC.1 R4, todavía no aceptado;
+- `accepted_count = 114`.
+
+Publicación G114 verificada:
+
+- promoción formal PR #95 / merge `5c6d2db`;
+- suite post-merge: 1108 pruebas en `OK`;
+- Markdown: 148/148 antes de añadir la evidencia DOC.1 R4;
+- auditor de identificadores: 16 familias / 46 identificadores;
+- tag anotado y firmado `v0.1.14.01-beta`;
+- objeto de tag `f4e5e31be3398a525814de290b4940ea6931cc08`;
+- GitHub Release prerelease publicado;
+- workflow `Git Tag Signature Verification` en `success`.
+
+Baseline DOC.1 R4:
+
+- inventario semántico amplio: 313 coincidencias revisables;
+- barrido de precisión: 59 candidatos;
+- la clasificación manual separa contradicciones vivas de referencias históricas legítimas;
+- `docs/archive/`, auditorías cerradas, CHANGELOG histórico, gates históricos y ADR no se modernizan mecánicamente;
+- este saneamiento no cambia `VERSION`, no incrementa `accepted_count` y no consume G115.

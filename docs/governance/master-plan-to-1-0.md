@@ -290,11 +290,11 @@ Objetivo previo a DOC.2:
 - extender el workflow de tags para ejecutar el contrato en todo tag futuro;
 - fijar reglas de edición posterior que preserven firma, commit objetivo y evidencia histórica.
 
-REL.GOV.1 superó gate, PR/CI e integración y consumió G110; la promoción PR #86 publicó `v0.1.10.01-beta`. DOC.2 R1 superó gate, PR #87, CI, integración y revalidación post-merge, por lo que G111/E01 (`0.1.11.01-beta`) queda aceptado; G112/E07 (`0.1.12.07-beta`) queda aceptado para NOR.1 R8; G113/E03 (`0.1.13.03-beta`) queda aceptado para DOC.1 R3; G114/E01 (`0.1.14.01-beta`) se reserva para PERSIST.1.
+REL.GOV.1 superó gate, PR/CI e integración y consumió G110; la promoción PR #86 publicó `v0.1.10.01-beta`. DOC.2 R1 superó gate, PR #87, CI, integración y revalidación post-merge, por lo que G111/E01 (`0.1.11.01-beta`) quedó aceptado; G112/E07 (`0.1.12.07-beta`) quedó aceptado para NOR.1 R8 y G113/E03 (`0.1.13.03-beta`) para DOC.1 R3. En aquel plan, G114/E01 se proyectaba para PERSIST.1; PLAN.2 R1 reasignó posteriormente esa reserva y quedó aceptado/publicado como G114/E01. El estado vigente reserva G115/E04 para DOC.1 R4 y mantiene PERSIST.1 como etapa posterior.
 
 ### 8. DOC.2 — CHANGELOG detallado `0.0.1-beta`–`0.0.21-beta`
 
-**Estado:** cerrado en R1 como G111/E01 (`0.1.11.01-beta`) mediante PR #87; NOR.1 R8 quedó aceptado posteriormente como G112/E07 y DOC.1 R3 precede ahora a PERSIST.1.
+**Estado:** cerrado en R1 como G111/E01 (`0.1.11.01-beta`) mediante PR #87; NOR.1 R8 quedó aceptado posteriormente como G112/E07, DOC.1 R3 como G113/E03 y PLAN.2 R1 como G114/E01. DOC.1 R4 es el candidato vigente antes de los frentes posteriores de la matriz maestra.
 
 Reconstrucción basada exclusivamente en evidencia:
 
@@ -311,17 +311,17 @@ No se inventará detalle retrospectivo no sustentado.
 
 **Estado:** cerrado/aceptado como G112/E07 (`0.1.12.07-beta`) después de PR #89 y PR #90.
 
-Amplía NOR.1 sin añadir un bloque funcional al programa de 14 bloques. Define familias, namespaces, revisiones, reservas y un registro machine-readable. Antes de PERSIST.1 se ejecuta DOC.1 R3 como auditoría Markdown transversal.
+Amplía NOR.1 sin añadir un bloque funcional al programa de 14 bloques. Define familias, namespaces, revisiones, reservas y un registro machine-readable. DOC.1 R3 se ejecutó posteriormente como auditoría Markdown transversal; PLAN.2 R1 quedó aceptado después y DOC.1 R4 es ahora el candidato G115/E04.
 
 #### Checkpoint transversal DOC.1 R3 — etiquetas visibles de enlaces Markdown
 
-**Estado:** cerrado/aceptado como G113/E03 (`0.1.13.03-beta`) mediante PR #92 / merge `40ae5c0`, posterior a G112/E07 y previo a PERSIST.1.
+**Estado:** cerrado/aceptado como G113/E03 (`0.1.13.03-beta`) mediante PR #92 / merge `40ae5c0`, posterior a G112/E07; PLAN.2 R1 quedó aceptado después como G114/E01 y DOC.1 R4 es el candidato vigente G115/E04.
 
 Audita documentación viva para sustituir etiquetas visibles basadas únicamente en rutas/URLs por nombres humanos legibles cuando el path no sea semánticamente necesario; preserva `docs/archive/` y añade regresión de enlaces.
 
 ### 9. PERSIST.1 — Persistencia voluntaria y segura
 
-**Estado:** siguiente bloque funcional; candidato G114/E01 (`0.1.14.01-beta`) aún no aceptado.
+**Estado:** etapa funcional posterior de la matriz maestra; sin Global preasignado mientras DOC.1 R4, REL.GOV.1 R2 y los frentes Developer/UX anteriores permanezcan pendientes.
 
 - guardado solo por decisión del asegurado;
 - modelo de datos versionado;

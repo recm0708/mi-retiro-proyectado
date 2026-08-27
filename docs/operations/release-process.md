@@ -1,7 +1,7 @@
 # Proceso de release
 
 **Estado:** Vigente
-**Versión de aplicación:** `0.1.14.01-beta` — DOC.1 R3 / G113-E03 en promoción post-merge
+**Versión de aplicación:** `0.1.14.01-beta` — G114/E01 publicado; DOC.1 R4 candidato G115/E04
 **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
 **Último tag formal legacy:** `v0.0.26-beta`
 **Versión base histórica preservada:** `0.0.23-beta`
@@ -18,12 +18,12 @@ El cierre de MANT.1 R7 no constituye release formal ni cambia la versión canón
 Para una release posterior se mantiene el criterio vigente:
 
 - `VERSION` debe ser la fuente única.
-- `0.1.13.03-beta` es la versión canónica vigente y materializa G113/E03; `v0.1.12.07-beta` permanece publicado e inmutable.
+- `0.1.14.01-beta` es la versión canónica vigente y materializa G114/E01; `v0.1.14.01-beta` está firmado, verificado y asociado a GitHub Release prerelease.
 - `v0.0.71.01-beta` fue publicado originalmente bajo la denominación VER.2 G071/E01; la reconciliación post-G070 sitúa ese estado cronológicamente en **G087/E01** sin mover el tag.
 - `v0.0.26-beta` permanece como tag legacy histórico e inmutable.
-- VER.2, MANT.1, DOC.1 R1–R3, NOR.1 y NOR.2 están cerrados.
-- SEC.2 quedó cerrado después de R1–R6. AUD.SEC2 R1 fue aceptado como G109/E01, REL.GOV.1 como G110/E01, DOC.2 como G111/E01, NOR.1 R8 como G112/E07 y DOC.1 R3 como G113/E03.
-- PERSIST.1 queda como siguiente candidato G114/E01 (`0.1.14.01-beta`).
+- VER.2, MANT.1, DOC.1 R1–R3, NOR.1, NOR.2 y PLAN.2 R1 están cerrados.
+- SEC.2 quedó cerrado después de R1–R6. AUD.SEC2 R1 fue aceptado como G109/E01, REL.GOV.1 como G110/E01, DOC.2 como G111/E01, NOR.1 R8 como G112/E07, DOC.1 R3 como G113/E03 y PLAN.2 R1 como G114/E01.
+- G115/E04 (`0.1.15.04-beta`) queda reservado para DOC.1 R4; PERSIST.1 permanece como etapa posterior sin Global preasignado.
 
 Todo release futuro requiere gate completo, PR/CI, actualización documental coherente, tag y evidencia reproducible.
 <!-- DOC1-R1-POST-MANT1:END -->
@@ -392,8 +392,9 @@ La regla futura permanece: un nuevo tag formal debe publicarse con su GitHub Rel
 ## Replanificación operativa PLAN.2 R1
 
 Después de publicar `v0.1.13.03-beta` (G113/E03), G114/E01
-`0.1.14.01-beta` queda reservado para PLAN.2 R1. La versión canónica permanece
-en `0.1.13.03-beta` mientras ese checkpoint no sea aceptado.
+`0.1.14.01-beta` quedó reservado para PLAN.2 R1. Durante aquel candidato,
+`VERSION` permaneció en `0.1.13.03-beta`. PLAN.2 R1 fue aceptado posteriormente
+y su promoción formal publicó G114/E01.
 
 La automatización práctica de publicación mediante GitHub CLI se evaluará en
 REL.GOV.1 R2. El tag continúa creándose y verificándose localmente con firma
@@ -409,11 +410,12 @@ La matriz viva de trabajo pendiente está en
 PLAN.2 R1 fue integrado mediante PR #94 / merge `7ded70c` y revalidado con
 1103 pruebas, 148 Markdown y los checks remotos requeridos en `success`.
 
-La promoción materializa `0.1.14.01-beta` como G114/E01. Mientras esta
-promoción no esté integrada y revalidada, `v0.1.13.03-beta` permanece como
-último tag revision-aware publicado. Después del cierre, el tag
-`v0.1.14.01-beta` se crea y verifica localmente antes de publicar su GitHub
-Release prerelease.
+La promoción PR #95 / merge `5c6d2db` materializó `0.1.14.01-beta`
+como G114/E01 después de la revalidación post-merge. El tag anotado y firmado
+`v0.1.14.01-beta` fue creado sobre ese commit, verificado localmente y por
+GitHub, y publicado junto con su GitHub Release prerelease. El workflow
+`Git Tag Signature Verification` terminó en `success`; `v0.1.13.03-beta`
+permanece preservado como publicación anterior.
 
 El siguiente candidato queda reservado como DOC.1 R4:
 G115/E04 (`0.1.15.04-beta`).

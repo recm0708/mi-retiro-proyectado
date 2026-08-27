@@ -20,11 +20,11 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 
 ## Estado del proyecto
 
-- **Versión canónica vigente:** `0.1.14.01-beta`, obtenida exclusivamente desde [`VERSION`](VERSION). Materializa G114/E01 después de aceptar PLAN.2 R1; su tag/GitHub Release se publican únicamente después de integrar y revalidar esta promoción.
-- **Último cierre integrado en `main`:** PLAN.2 R1 mediante PR #94 / merge `7ded70c`; esta promoción materializa G114/E01 después de la revalidación post-merge.
+- **Versión canónica vigente:** `0.1.14.01-beta`, obtenida exclusivamente desde [`VERSION`](VERSION). Materializa G114/E01 después de aceptar PLAN.2 R1; su tag firmado y GitHub Release prerelease ya fueron publicados y verificados.
+- **Último cierre integrado en `main`:** promoción formal G114/E01 mediante PR #95 / merge `5c6d2db`; materializa PLAN.2 R1, previamente aceptado mediante PR #94 / merge `7ded70c`.
 - **Estado de SEC.2:** cerrado después de R1–R6; AUD.SEC2 R1 corrigió la regresión del kill switch administrativo, alineó documentación/ledger y quedó aceptado como G109.
 - **Estado revision-aware reconciliado:** G114/E01 (`0.1.14.01-beta`) queda aceptado para PLAN.2 R1; G115/E04 (`0.1.15.04-beta`) queda reservado para DOC.1 R4. PERSIST.1 permanece planificado para una etapa posterior.
-- **Último tag revision-aware publicado:** `v0.1.13.03-beta` (G113/E03), firmado, verificado y asociado a GitHub Release prerelease; los tags anteriores permanecen preservados.
+- **Último tag revision-aware publicado:** `v0.1.14.01-beta` (G114/E01), firmado, verificado y asociado a GitHub Release prerelease; `v0.1.13.03-beta` y los tags anteriores permanecen preservados.
 - **Última versión formal legacy:** `0.0.26-beta` — tag firmado e inmutable `v0.0.26-beta`.
 - **Etapa:** desarrollo beta; repositorio público y ejecución orientada actualmente a entorno local.
 - **GOV.1, PLAN.1, PLAN.2 R1, DEV.2, MANT.1, DOC.1 R1–R3, NOR.1 R8 y NOR.2:** cerrados. DOC.1 R4 queda como siguiente checkpoint candidato; DEV.2, UX.5 y los bloques finales permanecen ordenados en la matriz maestra hacia 1.0.

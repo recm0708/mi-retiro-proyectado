@@ -6,13 +6,14 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ## [Unreleased]
 
+- DOC.1 R4 (candidato G115/E04): sanea estado vivo posterior a la publicación de G114/E01, preserva evidencia histórica y mantiene `VERSION=0.1.14.01-beta` y `accepted_count=114` mientras el candidato no sea aceptado.
 
 ## [0.1.14.01-beta]
 - G114/E01: PLAN.2 R1 queda aceptado mediante PR #94 / merge `7ded70c` después de formalizar la matriz maestra viva hacia `1.0.0.0`.
 - Planificación: registra PLAN.2/UX.5, incorpora DEV.2 R5/R6, UX.5 R1–R6, SEC.2 R7, DOC.1 R5 y los gates finales; PERSIST.1/REP.1 permanecen en la secuencia posterior.
 - Gate: 1103 pruebas post-merge en `OK`, Markdown 148/148, `pip check`, compilación Python, sintaxis JavaScript, auditor de identificadores y `git diff --check` limpios; checks remotos requeridos en `success`.
 - Ledger: G114 queda aceptado; G115/E04 (`0.1.15.04-beta`) queda reservado para DOC.1 R4.
-- Tag/Release: `v0.1.14.01-beta` queda pendiente hasta integrar y revalidar esta promoción; `v0.1.13.03-beta` permanece como último tag revision-aware publicado.
+- Tag/Release: `v0.1.14.01-beta` fue creado como tag anotado y firmado sobre `5c6d2db`, verificado por GitHub y publicado como GitHub Release prerelease; `v0.1.13.03-beta` permanece preservado como publicación anterior.
 
 
 ## [0.1.13.03-beta]
