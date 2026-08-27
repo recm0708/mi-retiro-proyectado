@@ -15,7 +15,7 @@ La fuente canónica de versión continúa siendo `VERSION`.
 Estado vigente:
 
 - `VERSION` contiene `0.1.14.01-beta` y materializa G114/E01 (PLAN.2 R1), aceptado mediante PR #94 / merge `7ded70c`. G113/E03 permanece preservado como DOC.1 R3.
-- `v0.1.13.03-beta` está publicado, firmado y verificado; `v0.0.26-beta` permanece como último tag de la familia legacy.
+- `v0.1.14.01-beta` está publicado, firmado y verificado con GitHub Release prerelease; `v0.1.13.03-beta` permanece preservado como publicación anterior y `v0.0.26-beta` como último tag de la familia legacy.
 - La reconciliación post-G070 reconstruye G071–G108 y conserva `v0.0.71.01-beta` como evidencia histórica de G087/E01 sin mover el tag.
 - AUD.SEC2 R1 fue aceptado como G109/E01, REL.GOV.1 como G110/E01, DOC.2 como G111/E01, NOR.1 R8 como G112/E07, DOC.1 R3 como G113/E03 y PLAN.2 R1 como G114/E01.
 - G114/E01 (`0.1.14.01-beta`) queda aceptado para PLAN.2 R1. G115/E04 (`0.1.15.04-beta`) queda reservado para DOC.1 R4, reapertura que continúa el ordinal del bloque después de E03.

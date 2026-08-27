@@ -214,12 +214,12 @@ No existe una una revisión intermedia no demostrada entre UX.4.6i R1 y R1.2 dem
 
 **VER.2:** bloque transversal cerrado. La primera promoción se publicó como `0.0.71.01-beta`; AUD.SEC2 R1 documenta que el ledger usado entonces terminaba en G070 y que la reconstrucción completa sitúa ese estado en G087 sin modificar el tag inmutable.
 
-**Checkpoint técnico actual:** G112/E07 (`0.1.12.07-beta`) permanece aceptado para NOR.1 R8; G113/E03 (`0.1.13.03-beta`) queda aceptado para DOC.1 R3; G114/E01 (`0.1.14.01-beta`) queda reservado para PERSIST.1.
+**Checkpoint técnico actual:** G112/E07 (`0.1.12.07-beta`) permanece aceptado para NOR.1 R8; G113/E03 (`0.1.13.03-beta`) para DOC.1 R3 y G114/E01 (`0.1.14.01-beta`) para PLAN.2 R1. G115/E04 (`0.1.15.04-beta`) queda reservado para DOC.1 R4; PERSIST.1 permanece en una etapa posterior sin Global preasignado.
 
 Documentos canónicos de VER.2:
 
 - `AUDITORIA_VERSIONADO_PRE_1_0.md` — criterio contable y exclusiones;
-- `pre-1-0-revision-ledger.md` — ledger reconciliado G001–G113 y siguiente Global G114;
+- `pre-1-0-revision-ledger.md` — ledger reconciliado G001–G114 y siguiente Global G115 reservado para DOC.1 R4;
 - `MATRIZ_DECISION_REVISIONES_VER2.md` — justificación de la segunda pasada;
 - `../data/pre-1-0-revision-ledger.json` — ledger estructurado validable;
 - `../VERSIONING.md` — política de numeración.

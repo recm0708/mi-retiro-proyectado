@@ -15,7 +15,7 @@ Estado vigente:
 
 - `VERSION` sigue siendo la fuente única de versión.
 - `0.1.14.01-beta` es la versión canónica vigente en `VERSION` y materializa G114/E01 (PLAN.2 R1); G115/E04 queda reservado para DOC.1 R4.
-- `v0.1.13.03-beta` es el último tag revision-aware publicado y verificado.
+- `v0.1.14.01-beta` es el último tag revision-aware publicado y verificado; `v0.1.13.03-beta` permanece preservado como publicación anterior.
 - `v0.0.71.01-beta` conserva su evidencia histórica reconciliada como G087/E01.
 - `v0.0.26-beta` permanece como tag legacy histórico e inmutable.
 - VER.2, MANT.1, NOR.1, NOR.2, DOC.1 R1–R3 y PLAN.2 R1 están cerrados.

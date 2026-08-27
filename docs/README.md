@@ -3,7 +3,7 @@
 **Estado:** vigente
 **Versión de aplicación:** `0.1.14.01-beta` — G114/E01 aceptado para PLAN.2 R1; G115/E04 reservado para DOC.1 R4; ledger aceptado hasta G114
 **Último tag formal legacy:** `v0.0.26-beta`
-**Última actualización transversal:** promoción PLAN.2 R1 — G114/E01 aceptado; DOC.1 R4 próximo candidato — 2026-08-26
+**Última actualización transversal:** DOC.1 R4 — saneamiento semántico post-publicación G114/E01 en curso; candidato G115/E04 no aceptado — 2026-08-26
 **Cierres históricos preservados:** UX.4.6i / PR #34 — 841 pruebas; UX.4.6e R9 — `v0.0.25-beta`
 
 Este archivo es el punto de entrada para la documentación técnica, funcional, normativa, de privacidad, validación y auditoría de Mi Retiro Proyectado.
@@ -48,6 +48,7 @@ Evidencia:
 - [`audits/documentation/documentation-markdown-audit-doc1-r2.md`](audits/documentation/documentation-markdown-audit-doc1-r2.md) — auditoría integral Markdown post-NOR.2 y controles permanentes de DOC.1 R2.
 - [`audits/documentation/documentation-markdown-links-doc1-r3.md`](audits/documentation/documentation-markdown-links-doc1-r3.md) — auditoría conservadora de referencias navegables y evidencia de aceptación DOC.1 R3 / G113/E03.
 - [`audits/documentation/post-g113-live-documentation-audit-plan2-r1.md`](audits/documentation/post-g113-live-documentation-audit-plan2-r1.md) — auditoría semántica de documentación viva al iniciar PLAN.2 R1.
+- [`audits/documentation/documentation-live-state-doc1-r4.md`](audits/documentation/documentation-live-state-doc1-r4.md) — auditoría DOC.1 R4 de estado vivo posterior a la publicación formal de G114/E01.
 - [`audits/documentation/changelog-reconstruction-doc2-r1.md`](audits/documentation/changelog-reconstruction-doc2-r1.md) — reconstrucción auditable DOC.2 R1 de 80 commits en 21 estados legacy.
 - [`standards/README.md`](standards/README.md) — estándares canónicos del repositorio.
 ## 1. Producto y alcance

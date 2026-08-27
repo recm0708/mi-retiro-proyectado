@@ -27,7 +27,7 @@ Estado vigente de la contabilidad:
   ya existían después de `7037addd`; por eso queda documentada como una
   **anomalía histórica de numeración**. La reconciliación vigente sitúa el estado
   materializado por ese tag en G087/E01 sin modificar la evidencia publicada.
-- `VERSION` se sincroniza a `0.1.09.01-beta` después de la aceptación de AUD.SEC2 R1 como G109/E01.
+- `VERSION` está sincronizado en `0.1.14.01-beta` después de publicar PLAN.2 R1 como G114/E01; G115/E04 (`0.1.15.04-beta`) permanece reservado para DOC.1 R4.
 - G110/E01 (`0.1.10.01-beta`) quedó aceptado para REL.GOV.1 mediante PR #85 y merge `5cd1cea`.
 - G111/E01 (`0.1.11.01-beta`) permanece aceptado para DOC.2. G112/E07 (`0.1.12.07-beta`) queda aceptado para NOR.1 R8 después de PR #89 / PR #90; G113/E03 (`0.1.13.03-beta`) queda aceptado para DOC.1 R3 mediante PR #92 / merge `40ae5c0`; G114/E01 (`0.1.14.01-beta`) queda aceptado para PLAN.2 R1 mediante PR #94 / merge `7ded70c`; G115/E04 (`0.1.15.04-beta`) queda reservado para DOC.1 R4.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
@@ -205,13 +205,14 @@ El ledger estructurado conserva también estas exclusiones para no perder histor
 
 ## Próximo estado
 
-DOC.1 R3 superó auditoría conservadora, gate local, PR #92, validación remota e integración, y fue revalidado post-merge con 1092 pruebas; queda aceptado como G113/E03. Esta promoción materializa ese mismo estado en `VERSION` y **no consume G114**.
+PLAN.2 R1 superó planificación, gate, PR #94, integración y revalidación; la promoción formal PR #95 materializó ese mismo estado como G114/E01 (`0.1.14.01-beta`). El tag anotado y firmado `v0.1.14.01-beta` y su GitHub Release prerelease quedaron publicados y verificados.
 
 | Global | ID revision-aware candidato | Bloque | Condición |
 |---:|---|---|---|
-| G114 | `0.1.14.01-beta` | PERSIST.1 R1 — persistencia voluntaria y segura | diseño de persistencia + privacidad + migraciones + gate + commit firmado + PR/CI + integración |
+| G115 | `0.1.15.04-beta` | DOC.1 R4 — saneamiento documental post-G113 | corregir estado vivo post-publicación G114, preservar historia, gate completo + commit firmado + PR/CI + integración |
 
-G114 permanece disponible y no se considera aceptado hasta completar PERSIST.1. REP.1 permanece como siguiente bloque funcional posterior.
+G115 permanece reservado y **no se considera aceptado** mientras DOC.1 R4 siga siendo candidato. `VERSION` permanece en `0.1.14.01-beta` y `accepted_count` en 114 durante este trabajo.
 
-Los tags `v0.0.71.01-beta` y `v0.1.09.01-beta` permanecen publicados e inmutables.
-El primero conserva su denominación histórica original y el segundo materializa G109/E01.
+PERSIST.1 permanece planificado como etapa posterior de la matriz maestra y no tiene un Global preasignado.
+
+Los tags `v0.0.71.01-beta`, `v0.1.09.01-beta`, `v0.1.13.03-beta` y `v0.1.14.01-beta` permanecen publicados e inmutables conforme a su evidencia.
