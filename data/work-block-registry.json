@@ -9,14 +9,14 @@
     "tracked_files": 459
   },
   "current_candidate": {
-    "global_revision": 115,
-    "revision_aware": "0.1.15.04-beta",
-    "block": "DOC.1",
-    "revision": "R4",
+    "global_revision": 116,
+    "revision_aware": "0.1.16.02-beta",
+    "block": "REL.GOV.1",
+    "revision": "R2",
     "state": "reserved_not_accepted",
     "next_functional_block_if_accepted": "DEV.2",
     "next_functional_global_if_accepted": null,
-    "edition": 4
+    "edition": 2
   },
   "families": [
     {
@@ -443,13 +443,14 @@
       "identifier": "DOC.1",
       "family": "DOC",
       "kind": "block",
-      "status": "reopened_candidate_r4",
-      "meaning": "Auditoría e integridad Markdown; R1–R3 cerradas; R4 sanea documentación viva post-G113 antes de los frentes Developer/UX.",
-      "evidence": "Ledger revision-aware; G113 / PR #92; matriz PLAN.2 R1.",
+      "status": "closed_r4_reopen_planned_r5",
+      "meaning": "Auditoría e integridad Markdown; R1–R4 cerradas. R5 permanece planificada como congelación documental final antes de QA/release estable.",
+      "evidence": "Ledger revision-aware; G113 / PR #92; G115 / PR #96; matriz PLAN.2 R1.",
       "global_refs": [
         "G086",
         "G102",
-        "G113"
+        "G113",
+        "G115"
       ],
       "reusable_for_different_scope": false
     },
@@ -530,9 +531,9 @@
       "identifier": "REL.GOV.1",
       "family": "REL",
       "kind": "compound_block",
-      "status": "closed",
-      "meaning": "Gobierno y normalización de GitHub Releases.",
-      "evidence": "G110 / PR #85.",
+      "status": "reopened_candidate_r2",
+      "meaning": "Gobierno y normalización de GitHub Releases; R1 cerrada en G110 y R2 reabierta para automatización de Releases y lectura/verificación de checks.",
+      "evidence": "G110 / PR #85; docs/governance/pre-1-0-pending-matrix.md.",
       "global_refs": [
         "G110"
       ],

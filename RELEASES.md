@@ -7,6 +7,14 @@
 
 
 <!-- DOC1-R1-POST-MANT1:START -->
+## Promoción G115/E04 — post-merge de DOC.1 R4
+
+- Estado aceptado: G115/E04 (`0.1.15.04-beta`).
+- Evidencia de aceptación: PR #96 / merge `9f51229`, 1114 pruebas post-merge, Markdown 149/149, auditor de identificadores en `OK`, `pip check`, compilación Python, sintaxis JavaScript y `git diff --check` limpios.
+- Esta sincronización materializa G115 ya aceptado y **no consume G116**.
+- G116/E02 (`0.1.16.02-beta`) queda reservado para REL.GOV.1 R2; los frentes Developer/UX continúan posteriormente conforme a la matriz maestra.
+- Tag y GitHub Release `v0.1.15.04-beta`: pendientes hasta integrar/revalidar esta promoción; `v0.1.14.01-beta` permanece publicado e inmutable.
+
 ## Promoción G114/E01 — post-merge de PLAN.2 R1
 
 - Estado aceptado: G114/E01 (`0.1.14.01-beta`).
@@ -64,11 +72,11 @@ Estado vigente:
 
 - Último tag formal publicado: `v0.1.14.01-beta` (G114/E01), firmado, verificado y asociado a GitHub Release prerelease.
 - Último tag formal legacy: `v0.0.26-beta`.
-- Versión canónica en `VERSION`: `0.1.14.01-beta` (G114/E01).
+- Versión canónica en `VERSION`: `0.1.15.04-beta` (G115/E04).
 - `v0.0.71.01-beta` conserva su denominación histórica original y se reconcilia como G087/E01 sin alterar el tag.
-- MANT.1, NOR.1 R8, NOR.2, DOC.1 R1–R3 y PLAN.2 R1 están cerrados.
-- DOC.2 permanece aceptado/publicado como G111/E01; NOR.1 R8 como G112/E07, DOC.1 R3 como G113/E03 y PLAN.2 R1 como G114/E01.
-- G114/E01 queda aceptado/publicado para PLAN.2 R1; G115/E04 (`0.1.15.04-beta`) queda reservado para DOC.1 R4. PERSIST.1 y REP.1 permanecen planificados posteriormente según la matriz maestra viva.
+- MANT.1, NOR.1 R8, NOR.2, DOC.1 R1–R4 y PLAN.2 R1 están cerrados.
+- DOC.2 permanece aceptado/publicado como G111/E01; NOR.1 R8 como G112/E07, DOC.1 R3 como G113/E03, PLAN.2 R1 como G114/E01 y DOC.1 R4 como G115/E04.
+- G114/E01 permanece aceptado/publicado para PLAN.2 R1; G115/E04 (`0.1.15.04-beta`) queda aceptado para DOC.1 R4; G116/E02 (`0.1.16.02-beta`) queda reservado para REL.GOV.1 R2. PERSIST.1 y REP.1 permanecen planificados posteriormente según la matriz maestra viva.
 - SEC.2 quedó cerrado después de R1–R6 y AUD.SEC2 R1 permanece aceptado como G109/E01.
 
 Este documento no crea una release nueva; registra el estado formal ya alcanzado por el repositorio.

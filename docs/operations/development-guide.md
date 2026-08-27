@@ -1,7 +1,7 @@
 # Guía interna de desarrollo
 
 **Estado:** Vigente
-**Versión de aplicación revisada:** `0.1.14.01-beta`
+**Versión de aplicación revisada:** `0.1.15.04-beta`
 **Versión base histórica:** `0.0.23-beta`
 **Base documental preservada:** GOV.1.3 R2 — 2026-08-17
 **Revisión transversal vigente:** GOV.1.4 — 2026-08-17
