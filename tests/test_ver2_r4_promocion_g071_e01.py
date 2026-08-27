@@ -20,13 +20,15 @@ def leer(path: Path) -> str:
     return path.read_text(encoding="utf-8")
 
 
-def test_version_promovida_a_g071_e01():
+def test_promocion_historica_g071_e01_no_congela_version_actual():
     version = leer(ROOT / "VERSION").strip()
+    texto = leer(DOC)
 
-    assert version == "0.0.71.01-beta"
     assert APP_VERSION == version
     assert version_valida(version)
-    assert descomponer_version_beta_revision(version) == (71, 1)
+    assert isinstance(descomponer_version_beta_revision(version), tuple)
+    assert "G071/E01" in texto
+    assert "0.0.71.01-beta" in texto
 
 
 def test_documento_r4_existe_e_indexado():

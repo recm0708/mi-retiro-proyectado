@@ -1,7 +1,7 @@
 # Validación
 
 **Estado:** Vigente
-**Versión revisada:** `0.1.15.04-beta` — G114/E01 aceptado para PLAN.2 R1; G115/E04 reservado para DOC.1 R4
+**Versión revisada:** `0.1.15.04-beta` — G115/E04 aceptado/publicado para DOC.1 R4; G116/E05 reservado para DOC.1 R5
 **Versión base histórica:** `0.0.25-beta`
 **Base documental histórica:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal histórica preservada:** UX.4.6e R8 — validación funcional y procedencia editable — 2026-08-19
@@ -1232,4 +1232,4 @@ La aceptación de DOC.1 R4 quedó integrada mediante PR #96 / merge `9f51229` y 
 - `python scripts/release_contract.py --json` confirmó todavía G114/E01 antes de esta promoción y la reserva G115/E04 para DOC.1 R4;
 - `git diff --check` y `git status --short` → limpios.
 
-La promoción materializa `0.1.15.04-beta` como G115/E04 y reserva `0.1.16.02-beta` como G116/E02 para REL.GOV.1 R2. El tag y GitHub Release de G115 se crean únicamente después de integrar y revalidar la promoción.
+La promoción materializó `0.1.15.04-beta` como G115/E04 y fue publicada mediante el tag firmado `v0.1.15.04-beta` y su GitHub Release prerelease después de integrar y revalidar `main`. DOC.1 R5 reasigna la reserva no consumida G116 como G116/E05 (`0.1.16.05-beta`); REL.GOV.1 R2 permanece planificado a continuación sin Global preasignado.

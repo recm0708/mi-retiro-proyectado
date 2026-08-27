@@ -24,11 +24,9 @@ def test_ver2_r1_documentos_base_existen():
     assert DECISION.exists()
 
 
-def test_ver2_r1_preserva_version_canonica_y_candidato():
-    version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
+def test_ver2_r1_preserva_estado_historico_y_candidato():
     decision = leer(DECISION)
 
-    assert version == "0.0.71.01-beta"
     assert "`VERSION` permanece en `0.0.26-beta`" in decision
     assert "`v0.0.26-beta` permanece como último tag formal" in decision
     assert "`0.0.71.01-beta` permanece como candidato VER.2 G071/E01" in decision

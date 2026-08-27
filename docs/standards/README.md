@@ -68,8 +68,8 @@ GitHub Actions.
 
 ## Estándares especializados consolidados en NOR.2 R4
 
-- [`code-and-comments.md`](code-and-comments.md) — comentarios, docstrings y documentación interna por tipo de código.
-- [`file-structure-by-extension.md`](file-structure-by-extension.md) — estructura interna y comentarios permitidos por extensión.
+- [Estándar de código y comentarios](code-and-comments.md) — comentarios, docstrings y documentación interna por tipo de código.
+- [Política de estructura de archivos por extensión](file-structure-by-extension.md) — estructura interna y comentarios permitidos por extensión.
 
 Estos documentos complementan los estándares determinísticos de NOR.1 y no
 restablecen las rutas heredadas de la raíz de `docs/`.

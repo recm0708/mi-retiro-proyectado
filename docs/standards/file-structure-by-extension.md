@@ -37,6 +37,7 @@ propósito, contrato, flujo, dependencias o riesgos técnicos permanentes.
 
 | Extensión o tipo | Encabezado esperado | Comentarios internos | Observaciones |
 |---|---|---|---|
+| `.md` | H1 único y descriptivo; metadata en negrita cuando aplique. | H2/H3 según la función documental; listas, tablas y bloques de código solo cuando aporten estructura real. | Contenido en español; enlaces a documentos con título humano; historia/auditorías se preservan; aplica `documentation-standards.md` y las plantillas documentales. |
 | `.py` | Docstring de módulo con propósito permanente. | Docstrings en funciones/clases públicas y comentarios antes de lógica no obvia. | No usar encabezados de revisión en módulos operativos. |
 | `.js` | `"use strict";` cuando aplique y bloque inicial con `Mi Retiro Proyectado —`, `Propósito` y `Alcance`. | Secciones para storage, eventos, API, renderizado e invalidación. | JavaScript no replica fórmulas previsionales. |
 | `.css` | Bloque inicial con `Mi Retiro Proyectado —`, `Propósito` y `Alcance`. | Comentarios de sección para componentes, estados, temas y responsive. | No comentar cada regla evidente. |
@@ -54,10 +55,15 @@ propósito, contrato, flujo, dependencias o riesgos técnicos permanentes.
 
 ## 3. Plantillas oficiales
 
-Las plantillas viven en `docs/templates/file-structure/`. Cada plantilla usa la
-extensión que representa cuando el formato lo permite. Para archivos binarios se
-incluyen ejemplos mínimos válidos y su uso se explica en el README de
-plantillas.
+Las plantillas técnicas viven en `docs/templates/file-structure/`. Cada plantilla usa la
+extensión que representa cuando el formato lo permite. Markdown cuenta con
+`template.md` como base técnica. Para archivos binarios se incluyen ejemplos mínimos
+válidos y su uso se explica en el README de plantillas.
+
+Los documentos Markdown requieren además una estructura acorde con su función. Las
+variantes de documento vigente, estándar/política, auditoría/evidencia, registro
+histórico y ADR viven en `docs/templates/documentation/`. La selección y uso de esas
+plantillas se rige por `documentation-standards.md`.
 
 ## 4. Aplicación en archivos actuales
 
@@ -92,7 +98,7 @@ Se mantienen como principios:
    ruta anterior.
 
 La auditoría histórica aplicada queda documentada en
-[`AUDITORIA_CARPETAS_R5E.md`](../archive/technical/AUDITORIA_CARPETAS_R5E.md).
+[Auditoría de nombres de carpetas — MANT.1 R5E](../archive/technical/AUDITORIA_CARPETAS_R5E.md).
 
 ## 6. Regla para archivos futuros
 

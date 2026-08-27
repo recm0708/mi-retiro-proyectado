@@ -1,7 +1,7 @@
 # Proceso de release
 
 **Estado:** Vigente
-**Versión de aplicación:** `0.1.15.04-beta` — G115/E04 aceptado; REL.GOV.1 R2 candidato G116/E02
+**Versión de aplicación:** `0.1.15.04-beta` — G115/E04 aceptado/publicado; DOC.1 R5 candidato G116/E05
 **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
 **Último tag formal legacy:** `v0.0.26-beta`
 **Versión base histórica preservada:** `0.0.23-beta`
@@ -18,12 +18,12 @@ El cierre de MANT.1 R7 no constituye release formal ni cambia la versión canón
 Para una release posterior se mantiene el criterio vigente:
 
 - `VERSION` debe ser la fuente única.
-- `0.1.15.04-beta` es la versión canónica vigente y materializa G115/E04; `v0.1.14.01-beta` permanece como último tag revision-aware publicado hasta completar esta promoción.
+- `0.1.15.04-beta` es la versión canónica vigente y materializa G115/E04; `v0.1.15.04-beta` es el último tag revision-aware publicado, firmado y verificado.
 - `v0.0.71.01-beta` fue publicado originalmente bajo la denominación VER.2 G071/E01; la reconciliación post-G070 sitúa ese estado cronológicamente en **G087/E01** sin mover el tag.
 - `v0.0.26-beta` permanece como tag legacy histórico e inmutable.
 - VER.2, MANT.1, DOC.1 R1–R4, NOR.1, NOR.2 y PLAN.2 R1 están cerrados.
 - SEC.2 quedó cerrado después de R1–R6. AUD.SEC2 R1 fue aceptado como G109/E01, REL.GOV.1 R1 como G110/E01, DOC.2 como G111/E01, NOR.1 R8 como G112/E07, DOC.1 R3 como G113/E03, PLAN.2 R1 como G114/E01 y DOC.1 R4 como G115/E04.
-- G115/E04 (`0.1.15.04-beta`) queda aceptado para DOC.1 R4; G116/E02 (`0.1.16.02-beta`) queda reservado para REL.GOV.1 R2. PERSIST.1 permanece como etapa posterior sin Global preasignado.
+- G115/E04 (`0.1.15.04-beta`) queda aceptado/publicado para DOC.1 R4; G116/E05 (`0.1.16.05-beta`) queda reservado para DOC.1 R5. REL.GOV.1 R2 permanece como siguiente checkpoint planificado sin Global preasignado; PERSIST.1 continúa como etapa posterior.
 
 Todo release futuro requiere gate completo, PR/CI, actualización documental coherente, tag y evidencia reproducible.
 <!-- DOC1-R1-POST-MANT1:END -->

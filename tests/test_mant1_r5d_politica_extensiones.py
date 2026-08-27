@@ -31,6 +31,7 @@ class TestMant1R5DPoliticaExtensiones(unittest.TestCase):
         self.assertIn("La trazabilidad de revisiones", texto_politica)
 
         for extension in (
+            ".md",
             ".py",
             ".js",
             ".css",
@@ -51,6 +52,7 @@ class TestMant1R5DPoliticaExtensiones(unittest.TestCase):
     def test_plantillas_oficiales_por_extension(self):
         esperadas = (
             "README.md",
+            "template.md",
             "template.py",
             "template.js",
             "template.css",

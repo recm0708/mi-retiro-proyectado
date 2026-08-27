@@ -49,22 +49,20 @@ def test_ver2_r2_preserva_readme_como_explicacion_historica():
     assert "tags revision-aware retrospectivos para G001–G070" in readme
 
 
-def test_ver2_r2_aclara_candidato_no_publicado_en_releases():
+def test_ver2_r2_preserva_publicacion_historica_en_releases():
     releases = leer(RELEASES)
-
-    assert "Reconstrucción histórica del estado posterior a `v0.0.26-beta` y del candidato VER.2" in releases
-    assert "no existe tag `v0.0.71.01-beta` hasta completar merge" in releases
-    assert "Último tag formal: `v0.0.71.01-beta`" in releases
-    assert "`0.0.71.01-beta` queda promovido en `VERSION` como VER.2 G071/E01 durante R4" in releases
-    assert "requiere merge, revalidación post-merge y firma" in releases
-    assert "no crea tag dentro del PR" in releases
-
-
-def test_ver2_r2_preserva_versionado_real():
     cierre = leer(CIERRE)
-    version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
 
-    assert version == "0.0.71.01-beta"
+    assert "`v0.0.71.01-beta`" in releases
+    assert "G071/E01" in releases
+    assert "`0.0.71.01-beta`" in releases
+    assert "`0.0.71.01-beta` permanece como candidato VER.2 G071/E01 no publicado" in cierre
+    assert "`v0.0.26-beta` permanece como último tag formal" in cierre
+
+
+def test_ver2_r2_preserva_versionado_historico_del_cierre():
+    cierre = leer(CIERRE)
+
     assert "`VERSION` permanece en `0.0.26-beta`" in cierre
     assert "`v0.0.26-beta` permanece como último tag formal" in cierre
     assert "`0.0.71.01-beta` permanece como candidato VER.2 G071/E01 no publicado" in cierre

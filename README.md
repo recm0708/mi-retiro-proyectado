@@ -20,22 +20,22 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 
 ## Estado del proyecto
 
-- **Versión canónica vigente:** `0.1.15.04-beta`, obtenida exclusivamente desde [`VERSION`](VERSION). Materializa G115/E04 después de aceptar DOC.1 R4; su tag/GitHub Release se publican únicamente después de integrar y revalidar esta promoción.
-- **Último cierre integrado en `main`:** DOC.1 R4 mediante PR #96 / merge `9f51229`; esta promoción materializa G115/E04 después de la revalidación post-merge.
+- **Versión canónica vigente:** `0.1.15.04-beta`, obtenida exclusivamente desde [`VERSION`](VERSION). Materializa G115/E04 después de aceptar DOC.1 R4; el tag firmado `v0.1.15.04-beta` y su GitHub Release prerelease están publicados y verificados.
+- **Última promoción publicada en `main`:** G115/E04 mediante PR #97 / merge `87fa8e9`; DOC.1 R4 fue aceptado previamente mediante PR #96 / merge `9f51229`.
 - **Estado de SEC.2:** cerrado después de R1–R6; AUD.SEC2 R1 corrigió la regresión del kill switch administrativo, alineó documentación/ledger y quedó aceptado como G109.
-- **Estado revision-aware reconciliado:** G115/E04 (`0.1.15.04-beta`) queda aceptado para DOC.1 R4; G116/E02 (`0.1.16.02-beta`) queda reservado para REL.GOV.1 R2. PERSIST.1 permanece planificado para una etapa posterior.
-- **Último tag revision-aware publicado:** `v0.1.14.01-beta` (G114/E01), firmado, verificado y asociado a GitHub Release prerelease; `v0.1.13.03-beta` y los tags anteriores permanecen preservados.
+- **Estado revision-aware reconciliado:** G115/E04 (`0.1.15.04-beta`) está aceptado y publicado para DOC.1 R4; la reserva no consumida G116 se reasigna a DOC.1 R5 como G116/E05 (`0.1.16.05-beta`). REL.GOV.1 R2 permanece como siguiente checkpoint planificado, sin Global preasignado mientras G116 no sea aceptado.
+- **Último tag revision-aware publicado:** `v0.1.15.04-beta` (G115/E04), firmado, verificado y asociado a GitHub Release prerelease; `v0.1.14.01-beta` y los tags anteriores permanecen preservados.
 - **Última versión formal legacy:** `0.0.26-beta` — tag firmado e inmutable `v0.0.26-beta`.
 - **Etapa:** desarrollo beta; repositorio público y ejecución orientada actualmente a entorno local.
-- **GOV.1, PLAN.1, PLAN.2 R1, DEV.2, MANT.1, DOC.1 R1–R4, NOR.1 R8 y NOR.2:** cerrados. REL.GOV.1 R2 queda como siguiente checkpoint candidato; DEV.2, UX.5 y los bloques finales permanecen ordenados en la matriz maestra hacia 1.0.
+- **GOV.1, PLAN.1, PLAN.2 R1, DEV.2, MANT.1, DOC.1 R1–R4, NOR.1 R8 y NOR.2:** cerrados. DOC.1 R5 es el checkpoint candidato G116/E05 para normalización documental integral; REL.GOV.1 R2 permanece como siguiente bloque planificado y los frentes Developer/UX continúan después.
 - **NOR.2:** cerrado después de R1–R8; sus evidencias históricas permanecen preservadas.
 - **SEC.2:** R1–R6 cerrados: hardening CodeQL, autenticación administrativa, protección centralizada, auditoría, sesión web y endurecimiento configurable para HTTPS interno.
-- **DOC.2:** cerrado en R1 y preservado como G111/E01. NOR.1 R8 quedó cerrado como G112/E07, DOC.1 R3 como G113/E03, PLAN.2 R1 como G114/E01 y DOC.1 R4 como G115/E04; G116/E02 se reserva para REL.GOV.1 R2. PERSIST.1 continúa planificado en la matriz maestra.
+- **DOC.2:** cerrado en R1 y preservado como G111/E01. NOR.1 R8 quedó cerrado como G112/E07, DOC.1 R3 como G113/E03, PLAN.2 R1 como G114/E01 y DOC.1 R4 como G115/E04; G116/E05 queda reservado para DOC.1 R5. REL.GOV.1 R2 y PERSIST.1 continúan ordenados posteriormente en la matriz maestra.
 - **Primera versión oficial objetivo:** `1.0.0.0` con `Build 000001`, únicamente después de cerrar todos los gates definidos en el plan maestro.
 
 La visibilidad pública del repositorio **no convierte una beta de desarrollo en versión oficial, no constituye un despliegue de producción y no modifica por sí sola la licencia vigente**.
 
-La versión se obtiene exclusivamente del archivo [`VERSION`](VERSION). La política completa se documenta en [`VERSIONING.md`](VERSIONING.md). VER.2 publicó `v0.0.71.01-beta` bajo la denominación original G071/E01; la reconciliación posterior sitúa ese estado en G087/E01 sin alterar el tag, y su evidencia histórica quedó preservada por NOR.2. Los estándares vigentes del repositorio están en [`docs/standards/`](docs/standards) y el cierre de la normalización se documenta en [`docs/audits/repository/`](docs/audits/repository).
+La versión se obtiene exclusivamente del archivo [`VERSION`](VERSION). La política completa se documenta en [Política de versionado](VERSIONING.md). VER.2 publicó `v0.0.71.01-beta` bajo la denominación original G071/E01; la reconciliación posterior sitúa ese estado en G087/E01 sin alterar el tag, y su evidencia histórica quedó preservada por NOR.2. Los estándares vigentes del repositorio están en [Estándares del repositorio](docs/standards) y el cierre de la normalización se documenta en [Auditorías de normalización del repositorio](docs/audits/repository).
 
 ## Capacidades implementadas
 
@@ -75,46 +75,46 @@ El proyecto aplica estos criterios:
 
 ## Documentación
 
-El punto de entrada de la documentación es [`docs/README.md`](docs/README.md).
+El punto de entrada de la documentación es [Índice de documentación](docs/README.md).
 
 Documentos principales:
 
-- [`docs/product/functional-specification.md`](docs/product/functional-specification.md) — comportamiento funcional;
-- [`docs/architecture/system-architecture.md`](docs/architecture/system-architecture.md) — arquitectura y componentes;
-- [`docs/architecture/data-model.md`](docs/architecture/data-model.md) — contratos y estructuras;
-- [`docs/architecture/calculation-engine.md`](docs/architecture/calculation-engine.md) — flujo técnico de cálculo;
-- [`docs/product/calculation-guide.md`](docs/product/calculation-guide.md) — contrato de transparencia de la guía pública de cálculo;
-- [`docs/regulatory/regulatory-framework.md`](docs/regulatory/regulatory-framework.md) — interpretación y aplicación normativa;
-- [`docs/regulatory/regulatory-sources.md`](docs/regulatory/regulatory-sources.md) — fuentes oficiales;
-- [`docs/product/visual-identity.md`](docs/product/visual-identity.md) — logo oficial, derivados, favicons y Social Preview;
-- [`docs/operations/observability-and-logs.md`](docs/operations/observability-and-logs.md) — Developer Diagnostics, esquema y privacidad de logs;
-- [`docs/operations/validation.md`](docs/operations/validation.md) — estrategia y evidencia de pruebas;
-- [`docs/security/security-and-privacy.md`](docs/security/security-and-privacy.md) — controles técnicos de seguridad y privacidad;
-- [`docs/security/threat-model.md`](docs/security/threat-model.md) — threat model vigente;
-- [`docs/security/data-subject-rights-procedure.md`](docs/security/data-subject-rights-procedure.md) — ejercicio de derechos;
-- [`docs/security/security-incident-procedure.md`](docs/security/security-incident-procedure.md) — respuesta a incidentes;
-- [`docs/security/third-party-deployment-assessment.md`](docs/security/third-party-deployment-assessment.md) — terceros, TLS y gates de despliegue;
-- [`SECURITY.md`](SECURITY.md) — reporte responsable de vulnerabilidades;
-- [`docs/archive/governance/AUDITORIA_GITHUB.md`](docs/archive/governance/AUDITORIA_GITHUB.md) — controles GitHub y auditoría automática;
-- [`docs/operations/github-public-repository.md`](docs/operations/github-public-repository.md) — metadata, topics, labels, badges, Social Preview y seguridad del repositorio público;
-- [`docs/archive/governance/AUDITORIA_REPOSITORIO_2026-08-18.md`](docs/archive/governance/AUDITORIA_REPOSITORIO_2026-08-18.md) — auditoría integral post-GOV.1 del repositorio;
-- [`docs/archive/ux/AUDITORIA_UX46E_R7_2026-08-18.md`](docs/archive/ux/AUDITORIA_UX46E_R7_2026-08-18.md) — auditoría transversal de coherencia de UX.4.6e;
-- [`docs/archive/governance/CIERRE_GOV1.md`](docs/archive/governance/CIERRE_GOV1.md) — auditoría final y decisión de cierre de GOV.1;
-- [`docs/archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md`](docs/archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md) — criterio contable y reconciliación VER.2;
-- [`docs/archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md`](docs/archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md) — decisiones de inclusión/exclusión del contador;
-- [`docs/governance/pre-1-0-revision-ledger.md`](docs/governance/pre-1-0-revision-ledger.md) — secuencia reconciliada G001–G115 y próximo candidato G116;
+- **[Especificación funcional](docs/product/functional-specification.md)** — comportamiento funcional;
+- **[Arquitectura](docs/architecture/system-architecture.md)** — arquitectura y componentes;
+- **[Modelo de datos](docs/architecture/data-model.md)** — contratos y estructuras;
+- **[Motor de cálculo](docs/architecture/calculation-engine.md)** — flujo técnico de cálculo;
+- **[Cómo se calcula — contrato de transparencia](docs/product/calculation-guide.md)** — contrato de transparencia de la guía pública de cálculo;
+- **[Normativa](docs/regulatory/regulatory-framework.md)** — interpretación y aplicación normativa;
+- **[Fuentes normativas y enlaces oficiales](docs/regulatory/regulatory-sources.md)** — fuentes oficiales;
+- **[Identidad visual de Mi Retiro Proyectado](docs/product/visual-identity.md)** — logo oficial, derivados, favicons y Social Preview;
+- **[Observabilidad y Developer Diagnostics](docs/operations/observability-and-logs.md)** — Developer Diagnostics, esquema y privacidad de logs;
+- **[Validación](docs/operations/validation.md)** — estrategia y evidencia de pruebas;
+- **[Seguridad y privacidad](docs/security/security-and-privacy.md)** — controles técnicos de seguridad y privacidad;
+- **[Modelo de amenazas](docs/security/threat-model.md)** — threat model vigente;
+- **[Procedimiento de derechos del titular](docs/security/data-subject-rights-procedure.md)** — ejercicio de derechos;
+- **[Procedimiento de respuesta a incidentes de seguridad y privacidad](docs/security/security-incident-procedure.md)** — respuesta a incidentes;
+- **[Evaluación de terceros, despliegue y revisión pre-publicación](docs/security/third-party-deployment-assessment.md)** — terceros, TLS y gates de despliegue;
+- **[Política de seguridad](SECURITY.md)** — reporte responsable de vulnerabilidades;
+- **[Auditoría de GitHub y controles de repositorio](docs/archive/governance/AUDITORIA_GITHUB.md)** — controles GitHub y auditoría automática;
+- **[Preparación pública de GitHub](docs/operations/github-public-repository.md)** — metadata, topics, labels, badges, Social Preview y seguridad del repositorio público;
+- **[Auditoría integral del repositorio — 2026-08-18](docs/archive/governance/AUDITORIA_REPOSITORIO_2026-08-18.md)** — auditoría integral post-GOV.1 del repositorio;
+- **[Auditoría transversal UX.4.6e R7](docs/archive/ux/AUDITORIA_UX46E_R7_2026-08-18.md)** — auditoría transversal de coherencia de UX.4.6e;
+- **[Cierre GOV.1 — Auditoría, Gobierno y Trazabilidad Pre-Beta](docs/archive/governance/CIERRE_GOV1.md)** — auditoría final y decisión de cierre de GOV.1;
+- **[Auditoría de versionado pre-1.0](docs/archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md)** — criterio contable y reconciliación VER.2;
+- **[VER.2 — Matriz de decisión de revisiones aceptadas](docs/archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md)** — decisiones de inclusión/exclusión del contador;
+- **[Ledger de revisiones aceptadas pre-1.0](docs/governance/pre-1-0-revision-ledger.md)** — secuencia reconciliada G001–G115 y próximo candidato G116;
 - [`data/pre-1-0-revision-ledger.json`](data/pre-1-0-revision-ledger.json) — ledger machine-readable;
-- [`docs/standards/work-block-identifiers.md`](docs/standards/work-block-identifiers.md) — política canónica de identificadores de bloques;
+- **[Identificadores de bloques de trabajo](docs/standards/work-block-identifiers.md)** — política canónica de identificadores de bloques;
 - [`data/work-block-registry.json`](data/work-block-registry.json) — registro machine-readable de identificadores históricos, cerrados y planificados;
-- [`docs/governance/licensing-and-distribution.md`](docs/governance/licensing-and-distribution.md) — decisión de licencia y estrategia de distribución;
-- [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) — avisos y obligaciones de terceros;
-- [`docs/governance/roadmap.md`](docs/governance/roadmap.md) — estado actual y próximos hitos;
-- [`docs/governance/pre-1-0-pending-matrix.md`](docs/governance/pre-1-0-pending-matrix.md) — matriz maestra viva de trabajo pendiente hasta `1.0.0.0`;
-- [`docs/governance/master-plan-to-1-0.md`](docs/governance/master-plan-to-1-0.md) — secuencia de 14 bloques hasta la primera versión oficial;
-- [`docs/decisions/README.md`](docs/decisions/README.md) — decisiones ADR;
-- [`docs/archive/governance/REGISTRO_CAMBIOS_HISTORICO.md`](docs/archive/governance/REGISTRO_CAMBIOS_HISTORICO.md) — mapa histórico de evolución;
-- [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md) — reglas de participación y convivencia;
-- [`SUPPORT.md`](SUPPORT.md) — rutas de soporte y reporte.
+- **[Licencia y estrategia de distribución](docs/governance/licensing-and-distribution.md)** — decisión de licencia y estrategia de distribución;
+- **[Avisos de terceros](THIRD_PARTY_NOTICES.md)** — avisos y obligaciones de terceros;
+- **[Roadmap](docs/governance/roadmap.md)** — estado actual y próximos hitos;
+- **[Matriz maestra de pendientes hacia 1.0](docs/governance/pre-1-0-pending-matrix.md)** — matriz maestra viva de trabajo pendiente hasta `1.0.0.0`;
+- **[Plan maestro hacia Mi Retiro Proyectado 1.0](docs/governance/master-plan-to-1-0.md)** — secuencia de 14 bloques hasta la primera versión oficial;
+- **[Registro de decisiones técnicas](docs/decisions/README.md)** — decisiones ADR;
+- **[Registro histórico de cambios](docs/archive/governance/REGISTRO_CAMBIOS_HISTORICO.md)** — mapa histórico de evolución;
+- **[Código de conducta](CODE_OF_CONDUCT.md)** — reglas de participación y convivencia;
+- **[Soporte](SUPPORT.md)** — rutas de soporte y reporte.
 
 La documentación vigente debe apuntar únicamente a rutas canónicas actuales. Las fases cerradas se preservan mediante Git y, cuando conservan valor documental independiente, bajo `docs/archive/`; NOR.2 no mantendrá stubs permanentes de rutas antiguas solo por compatibilidad documental.
 
@@ -124,7 +124,7 @@ La documentación vigente debe apuntar únicamente a rutas canónicas actuales. 
 
 `0.0.22-beta` fue la primera versión formal adoptada bajo la política de GOV.1.2; `0.0.23-beta` cerró GOV.1.3; `0.0.24-beta` cerró integralmente GOV.1; `0.0.25-beta` cerró UX.4.6e; y `0.0.26-beta` cerró PLAN.1. Sus tags publicados permanecen firmados e inmutables.
 
-El 2026-08-26 se completó el backfill administrativo de GitHub Releases. Tras las publicaciones G111–G113, el repositorio cuenta con **32 tags formales reales** y **32 GitHub Releases**. Los Releases de `v0.0.1-beta`–`v0.0.26-beta` creados retrospectivamente no cambian la fecha histórica, firma ni commit objetivo de sus tags.
+El 2026-08-26 se completó el backfill administrativo de GitHub Releases. Tras las publicaciones G111–G115, el repositorio cuenta con **34 tags formales reales** y **34 GitHub Releases**. Los Releases de `v0.0.1-beta`–`v0.0.26-beta` creados retrospectivamente no cambian la fecha histórica, firma ni commit objetivo de sus tags.
 
 Después de `v0.0.26-beta`, UX.4.6f–UX.4.6i continuaron históricamente sobre ese mismo valor de `VERSION`. VER.2 reconstruye todo el tramo sin inventar tags: el último estado aceptado de la base `7037addd` es **G070/E02**, cierre de UX.4.6i.
 
@@ -140,13 +140,13 @@ Tag v1.0.0.0
 
 Consultar:
 
-- [`RELEASES.md`](RELEASES.md) — versiones, rangos Git y releases formales;
-- [`CHANGELOG.md`](CHANGELOG.md) — cambios notables por versión;
-- [`docs/archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md`](docs/archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md) — criterio de reconciliación;
-- [`docs/archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md`](docs/archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md) — matriz de decisiones contables;
-- [`docs/governance/pre-1-0-revision-ledger.md`](docs/governance/pre-1-0-revision-ledger.md) — contador global pre-1.0;
+- **[Registro de versiones y estados del proyecto](RELEASES.md)** — versiones, rangos Git y releases formales;
+- **[Changelog](CHANGELOG.md)** — cambios notables por versión;
+- **[Auditoría de versionado pre-1.0](docs/archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md)** — criterio de reconciliación;
+- **[VER.2 — Matriz de decisión de revisiones aceptadas](docs/archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md)** — matriz de decisiones contables;
+- **[Ledger de revisiones aceptadas pre-1.0](docs/governance/pre-1-0-revision-ledger.md)** — contador global pre-1.0;
 - [`data/pre-1-0-revision-ledger.json`](data/pre-1-0-revision-ledger.json) — representación machine-readable;
-- [`docs/archive/governance/REGISTRO_CAMBIOS_HISTORICO.md`](docs/archive/governance/REGISTRO_CAMBIOS_HISTORICO.md) — mapa cronológico para auditoría.
+- **[Registro histórico de cambios](docs/archive/governance/REGISTRO_CAMBIOS_HISTORICO.md)** — mapa cronológico para auditoría.
 
 Git continúa siendo la evidencia primaria de autores, fechas, hashes y contenido histórico.
 
@@ -273,21 +273,21 @@ Los casos de validación versionados deben ser sintéticos o estar anonimizados 
 
 Consultar:
 
-- [`docs/security/privacy-policy.md`](docs/security/privacy-policy.md);
-- [`docs/security/terms-and-privacy.md`](docs/security/terms-and-privacy.md);
-- [`docs/regulatory/law-81-compliance.md`](docs/regulatory/law-81-compliance.md);
-- [`docs/operations/observability-and-logs.md`](docs/operations/observability-and-logs.md);
-- [`tests/validation_cases/README.md`](tests/validation_cases/README.md).
+- **[Política de privacidad y tratamiento de datos](docs/security/privacy-policy.md)**;
+- **[Términos de uso, privacidad y tratamiento de datos](docs/security/terms-and-privacy.md)**;
+- **[Matriz interna de alineación con Ley 81 de 2019](docs/regulatory/law-81-compliance.md)**;
+- **[Observabilidad y Developer Diagnostics](docs/operations/observability-and-logs.md)**;
+- **[Casos de validación](tests/validation_cases/README.md)**.
 
 ## Gobierno y contribución
 
-- [`GOVERNANCE.md`](GOVERNANCE.md) — responsabilidades y gobierno;
-- [`CONTRIBUTING.md`](CONTRIBUTING.md) — flujo de trabajo;
-- [`VERSIONING.md`](VERSIONING.md) — versionado;
+- **[Gobierno del proyecto](GOVERNANCE.md)** — responsabilidades y gobierno;
+- **[Guía de contribución](CONTRIBUTING.md)** — flujo de trabajo;
+- **[Política de versionado](VERSIONING.md)** — versionado;
 - [`.github/CODEOWNERS`](.github/CODEOWNERS) — propiedad de revisión;
-- [`docs/decisions/README.md`](docs/decisions/README.md) — ADR;
-- [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md) — normas de participación;
-- [`SUPPORT.md`](SUPPORT.md) — rutas de consulta y reporte.
+- **[Registro de decisiones técnicas](docs/decisions/README.md)** — ADR;
+- **[Código de conducta](CODE_OF_CONDUCT.md)** — normas de participación;
+- **[Soporte](SUPPORT.md)** — rutas de consulta y reporte.
 
 ## Licencia
 
@@ -296,8 +296,8 @@ Los materiales originales de Mi Retiro Proyectado se mantienen bajo una **licenc
 Consultar:
 
 - [`LICENSE`](LICENSE);
-- [`docs/governance/licensing-and-distribution.md`](docs/governance/licensing-and-distribution.md);
-- [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md).
+- **[Licencia y estrategia de distribución](docs/governance/licensing-and-distribution.md)**;
+- **[Avisos de terceros](THIRD_PARTY_NOTICES.md)**.
 
 Las dependencias y materiales de terceros conservan sus propias licencias y derechos.
 
