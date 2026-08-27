@@ -1,11 +1,11 @@
 # Roadmap
 
 **Estado:** vigente
-**Versión vigente:** `0.1.15.04-beta` — G115/E04 aceptado para DOC.1 R4
+**Versión vigente:** `0.1.16.05-beta` — G116/E05 aceptado para DOC.1 R5
 **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
 **Último tag formal legacy:** `v0.0.26-beta`
 **Fecha de revisión:** 2026-08-27
-**Estado actual:** SEC.2, AUD.SEC2 R1, REL.GOV.1 R1, DOC.2, NOR.1 R8, DOC.1 R3, PLAN.2 R1 y DOC.1 R4 están cerrados/aceptados. G115/E04 está publicado como `0.1.15.04-beta`; G116/E05 (`0.1.16.05-beta`) queda reservado para DOC.1 R5. REL.GOV.1 R2 permanece como siguiente checkpoint planificado sin Global preasignado.
+**Estado actual:** SEC.2, AUD.SEC2 R1, REL.GOV.1 R1, DOC.2, NOR.1 R8, DOC.1 R3, PLAN.2 R1, DOC.1 R4 y DOC.1 R5 están cerrados/aceptados. G116/E05 queda materializado como `0.1.16.05-beta`; G117/E02 (`0.1.17.02-beta`) queda reservado para REL.GOV.1 R2.
 
 
 <!-- NOR1-R7-CLOSURE:START -->
@@ -27,8 +27,8 @@ La secuencia operativa previa a SEC.2 queda:
 8. **DOC.1 R3** — cerrado/aceptado como G113/E03; referencias navegables y política documental consolidadas.
 9. **PLAN.2 R1** — cerrado/aceptado como G114/E01 (`0.1.14.01-beta`) mediante PR #94 / merge `7ded70c`; formaliza la matriz maestra.
 10. **DOC.1 R4** — cerrado/aceptado como G115/E04 (`0.1.15.04-beta`) mediante PR #96 / merge `9f51229`; saneamiento documental post-G113 completado.
-11. **DOC.1 R5** — checkpoint candidato G116/E05 (`0.1.16.05-beta`) para normalización documental integral post-G115.
-12. **REL.GOV.1 R2** — siguiente checkpoint planificado, sin Global preasignado mientras G116 no sea aceptado, para automatización de Releases y checks.
+11. **DOC.1 R5** — cerrado/aceptado como G116/E05 (`0.1.16.05-beta`) mediante PR #101 / merge `6f4266d`.
+12. **REL.GOV.1 R2** — checkpoint candidato G117/E02 (`0.1.17.02-beta`) para automatización de Releases y checks.
 
 NOR.2 ejecutó los movimientos, renombrados, consolidaciones y retiros que
 NOR.1 deliberadamente no realizó.
@@ -216,12 +216,12 @@ No existe una una revisión intermedia no demostrada entre UX.4.6i R1 y R1.2 dem
 
 **VER.2:** bloque transversal cerrado. La primera promoción se publicó como `0.0.71.01-beta`; AUD.SEC2 R1 documenta que el ledger usado entonces terminaba en G070 y que la reconstrucción completa sitúa ese estado en G087 sin modificar el tag inmutable.
 
-**Checkpoint técnico actual:** G112/E07 (`0.1.12.07-beta`) permanece aceptado para NOR.1 R8; G113/E03 (`0.1.13.03-beta`) para DOC.1 R3, G114/E01 (`0.1.14.01-beta`) para PLAN.2 R1 y G115/E04 (`0.1.15.04-beta`) para DOC.1 R4. G116/E05 (`0.1.16.05-beta`) queda reservado para DOC.1 R5; REL.GOV.1 R2 permanece como siguiente checkpoint planificado sin Global preasignado y PERSIST.1 continúa en una etapa posterior.
+**Checkpoint técnico actual:** G112/E07 (`0.1.12.07-beta`) permanece aceptado para NOR.1 R8; G113/E03 (`0.1.13.03-beta`) para DOC.1 R3, G114/E01 (`0.1.14.01-beta`) para PLAN.2 R1 y G115/E04 (`0.1.15.04-beta`) para DOC.1 R4. G116/E05 (`0.1.16.05-beta`) queda aceptado para DOC.1 R5; G117/E02 (`0.1.17.02-beta`) queda reservado para REL.GOV.1 R2 como candidato vigente y PERSIST.1 continúa en una etapa posterior.
 
 Documentos canónicos de VER.2:
 
 - `AUDITORIA_VERSIONADO_PRE_1_0.md` — criterio contable y exclusiones;
-- `pre-1-0-revision-ledger.md` — ledger reconciliado G001–G115 y siguiente Global G116 reservado para DOC.1 R4;
+- `pre-1-0-revision-ledger.md` — ledger reconciliado G001–G116 y siguiente Global G117 reservado para REL.GOV.1 R2;
 - `MATRIZ_DECISION_REVISIONES_VER2.md` — justificación de la segunda pasada;
 - `../data/pre-1-0-revision-ledger.json` — ledger estructurado validable;
 - `../VERSIONING.md` — política de numeración.

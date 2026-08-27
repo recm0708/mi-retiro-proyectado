@@ -3,9 +3,9 @@
 **Proyecto:** Mi Retiro Proyectado
 **Base auditada:** `7037addd44253e528c77460b678d2b3ccd540dd5`
 **Contador histórico en la base `7037addd`:** **G070**
-**Contador aceptado reconciliado al commit `87fa8e9`:** **G115**
-**Siguiente Global disponible:** **G116**
-**Siguiente candidato disponible:** `0.1.16.05-beta` — DOC.1 R5 (normalización documental integral post-G115)
+**Contador aceptado reconciliado al commit `6f4266d`:** **G116**
+**Siguiente Global disponible:** **G117**
+**Siguiente candidato disponible:** `0.1.17.02-beta` — REL.GOV.1 R2 (automatización de Releases y checks)
 
 
 <!-- DOC1-R1-REVISION-MANUAL:START -->
@@ -27,9 +27,9 @@ Estado vigente de la contabilidad:
   ya existían después de `7037addd`; por eso queda documentada como una
   **anomalía histórica de numeración**. La reconciliación vigente sitúa el estado
   materializado por ese tag en G087/E01 sin modificar la evidencia publicada.
-- `VERSION` está sincronizado en `0.1.15.04-beta` después de aceptar/publicar DOC.1 R4 como G115/E04; la reserva no consumida G116 se reasigna a DOC.1 R5 como G116/E05 (`0.1.16.05-beta`).
+- `VERSION` está sincronizado en `0.1.16.05-beta` después de aceptar DOC.1 R5 como G116/E05 mediante PR #101 / merge `6f4266d`; G117/E02 (`0.1.17.02-beta`) queda reservado para REL.GOV.1 R2.
 - G110/E01 (`0.1.10.01-beta`) quedó aceptado para REL.GOV.1 mediante PR #85 y merge `5cd1cea`.
-- G111/E01 (`0.1.11.01-beta`) permanece aceptado para DOC.2. G112/E07 (`0.1.12.07-beta`) queda aceptado para NOR.1 R8 después de PR #89 / PR #90; G113/E03 (`0.1.13.03-beta`) queda aceptado para DOC.1 R3 mediante PR #92 / merge `40ae5c0`; G114/E01 (`0.1.14.01-beta`) queda aceptado para PLAN.2 R1 mediante PR #94 / merge `7ded70c`; G115/E04 (`0.1.15.04-beta`) queda aceptado para DOC.1 R4 mediante PR #96 / merge `9f51229` y publicado mediante PR #97 / merge `87fa8e9`; G116/E05 (`0.1.16.05-beta`) queda reservado para DOC.1 R5. REL.GOV.1 R2 permanece a continuación sin Global preasignado.
+- G111/E01 (`0.1.11.01-beta`) permanece aceptado para DOC.2. G112/E07 (`0.1.12.07-beta`) queda aceptado para NOR.1 R8 después de PR #89 / PR #90; G113/E03 (`0.1.13.03-beta`) queda aceptado para DOC.1 R3 mediante PR #92 / merge `40ae5c0`; G114/E01 (`0.1.14.01-beta`) queda aceptado para PLAN.2 R1 mediante PR #94 / merge `7ded70c`; G115/E04 (`0.1.15.04-beta`) queda aceptado para DOC.1 R4 mediante PR #96 / merge `9f51229` y publicado mediante PR #97 / merge `87fa8e9`; G116/E05 (`0.1.16.05-beta`) queda aceptado para DOC.1 R5 mediante PR #101 / merge `6f4266d`. G117/E02 (`0.1.17.02-beta`) queda reservado para REL.GOV.1 R2.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 
 Este ledger registra los estados aceptados reconstruidos durante VER.2 y su reconciliación posterior. La regla contable histórica y las exclusiones originales se conservan en `docs/archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md` y `docs/archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md`; la ampliación post-G070 se justifica en `docs/audits/governance/post-g070-revision-reconciliation.md`.
@@ -176,6 +176,7 @@ El detalle de inclusión/exclusión está en `docs/audits/governance/post-g070-r
 | G113 | `0.1.13.03-beta` | DOC.1 R3 — referencias navegables Markdown y política de presentación | `0.1.13.03-beta` | PR #92 / merge `40ae5c0`; 1092 pruebas; Markdown 146/146; CI Python 3.13/3.14 + Markdown/gobernanza en success |
 | G114 | `0.1.14.01-beta` | PLAN.2 R1 — replanificación maestra final hacia 1.0 | `0.1.14.01-beta` | PR #94 / merge `7ded70c`; 1103 pruebas; Markdown 148/148; CI Python 3.13/3.14 + Markdown/gobernanza en success |
 | G115 | `0.1.15.04-beta` | DOC.1 R4 — saneamiento documental post-G113 y reconciliación del estado vivo tras G114 | `0.1.15.04-beta` | PR #96 / merge `9f51229`; 1114 pruebas; Markdown 149/149; auditor de identificadores OK; validaciones locales limpias |
+| G116 | `0.1.16.05-beta` | DOC.1 R5 — normalización documental integral post-G115 | `0.1.16.05-beta` | PR #101 / merge `6f4266d`; 1127 pruebas unittest; pytest 1167/5587 subtests; Markdown 158/158; checks remotos en success |
 
 ### Anomalía histórica del tag `v0.0.71.01-beta`
 
@@ -206,14 +207,14 @@ El ledger estructurado conserva también estas exclusiones para no perder histor
 
 ## Próximo estado
 
-PLAN.2 R1 superó planificación, gate, PR #94, integración y revalidación; la promoción formal PR #95 materializó ese mismo estado como G114/E01 (`0.1.14.01-beta`). El tag anotado y firmado `v0.1.14.01-beta` y su GitHub Release prerelease quedaron publicados y verificados.
+DOC.1 R5 superó gate local, PR #101, integración y revalidación post-merge; esta promoción materializa ese mismo estado como G116/E05 (`0.1.16.05-beta`) sin consumir un Global adicional.
 
 | Global | ID revision-aware candidato | Bloque | Condición |
 |---:|---|---|---|
-| G115 | `0.1.15.04-beta` | DOC.1 R4 — saneamiento documental post-G113 | corregir estado vivo post-publicación G114, preservar historia, gate completo + commit firmado + PR/CI + integración |
+| G117 | `0.1.17.02-beta` | REL.GOV.1 R2 — automatización de Releases y checks | automatizar release notes/publicación/verificación, gate completo + commit firmado + PR/CI + integración |
 
-G115 permanece reservado y **no se considera aceptado** mientras DOC.1 R4 siga siendo candidato. `VERSION` permanece en `0.1.14.01-beta` y `accepted_count` en 114 durante este trabajo.
+G117 permanece reservado y **no se considera aceptado** mientras REL.GOV.1 R2 siga siendo candidato. `VERSION` queda en `0.1.16.05-beta` y `accepted_count` en 116 durante este trabajo.
 
 PERSIST.1 permanece planificado como etapa posterior de la matriz maestra y no tiene un Global preasignado.
 
-Los tags `v0.0.71.01-beta`, `v0.1.09.01-beta`, `v0.1.13.03-beta` y `v0.1.14.01-beta` permanecen publicados e inmutables conforme a su evidencia.
+Los tags `v0.0.71.01-beta`, `v0.1.09.01-beta`, `v0.1.13.03-beta`, `v0.1.14.01-beta` y `v0.1.15.04-beta` permanecen publicados e inmutables conforme a su evidencia. `v0.1.16.05-beta` se crea únicamente después de integrar y revalidar la promoción.

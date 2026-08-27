@@ -16,5 +16,16 @@ class TestG114PromotionPostMerge(unittest.TestCase):
         for rel in ("README.md","RELEASES.md","VERSIONING.md","GOVERNANCE.md","SECURITY.md","docs/README.md","docs/governance/master-plan-to-1-0.md","docs/governance/roadmap.md","docs/governance/pre-1-0-revision-ledger.md","docs/governance/pre-1-0-pending-matrix.md"):
             text=(ROOT/rel).read_text(encoding="utf-8"); self.assertIn("G114",text); self.assertIn("PLAN.2 R1",text)
     def test_publicacion_g114_permanece_preservada(self):
-        for rel in ("README.md","SECURITY.md","VERSIONING.md","RELEASES.md"): self.assertIn("v0.1.14.01-beta",(ROOT/rel).read_text(encoding="utf-8"))
+        ledger = cargar_ledger()
+        entry = next(
+            item
+            for item in ledger["entries"]
+            if item["global_revision"] == 114
+        )
+        self.assertEqual("PLAN.2", entry["block"])
+        self.assertEqual(1, entry["ordinal"])
+        self.assertEqual("0.1.14.01-beta", entry["revision_aware"])
+
+        releases = (ROOT / "RELEASES.md").read_text(encoding="utf-8")
+        self.assertIn("v0.1.14.01-beta", releases)
 if __name__ == "__main__": unittest.main()

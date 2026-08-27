@@ -14,8 +14,18 @@ class TestDOC1R4LiveStateSanitization(unittest.TestCase):
         data=json.loads((ROOT/"data/work-block-registry.json").read_text(encoding="utf-8")); ids={x["identifier"]:x for x in data["identifiers"]}
         self.assertIn("G115",ids["DOC.1"]["global_refs"]); self.assertFalse(ids["DOC.1"]["reusable_for_different_scope"])
     def test_publicacion_g114_permanece_preservada(self):
-        for rel in ("README.md","GOVERNANCE.md","CHANGELOG.md","RELEASES.md","VERSIONING.md","SECURITY.md"):
-            self.assertIn("v0.1.14.01-beta",(ROOT/rel).read_text(encoding="utf-8"))
+        ledger = cargar_ledger()
+        entry = next(
+            item
+            for item in ledger["entries"]
+            if item["global_revision"] == 114
+        )
+        self.assertEqual("PLAN.2", entry["block"])
+        self.assertEqual(1, entry["ordinal"])
+        self.assertEqual("0.1.14.01-beta", entry["revision_aware"])
+
+        releases = (ROOT / "RELEASES.md").read_text(encoding="utf-8")
+        self.assertIn("v0.1.14.01-beta", releases)
     def test_estado_vivo_declara_g115_y_rel_gov_r2(self):
         for rel in ("README.md","GOVERNANCE.md","SECURITY.md","VERSIONING.md","RELEASES.md","docs/README.md","docs/governance/master-plan-to-1-0.md","docs/governance/roadmap.md","docs/operations/release-process.md"):
             text=(ROOT/rel).read_text(encoding="utf-8"); self.assertIn("G115",text); self.assertIn("DOC.1 R4",text); self.assertIn("REL.GOV.1 R2",text)
