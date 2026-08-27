@@ -49,7 +49,7 @@ git switch -c <tipo>/<descripcion>
 
 No aplicar un paquete de cambios sobre modificaciones locales no revisadas.
 
-Toda participación en issues, Pull Requests o revisiones debe respetar [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md). Para dudas de uso, reportes, privacidad o seguridad, consultar primero [`SUPPORT.md`](SUPPORT.md).
+Toda participación en issues, Pull Requests o revisiones debe respetar [Código de conducta](CODE_OF_CONDUCT.md). Para dudas de uso, reportes, privacidad o seguridad, consultar primero [Soporte](SUPPORT.md).
 
 ## 2. Principios obligatorios
 
@@ -62,7 +62,7 @@ Toda participación en issues, Pull Requests o revisiones debe respetar [`CODE_O
 - Toda interpretación normativa relevante debe ser trazable a una fuente y, cuando corresponda, a un ADR.
 - Los documentos personales reales no se versionan.
 - Código, pruebas y documentación se actualizan dentro de la misma unidad de trabajo.
-- Comentarios y docstrings siguen [`docs/standards/code-and-comments.md`](docs/standards/code-and-comments.md); explican intención y contratos, no la sintaxis obvia.
+- Comentarios y docstrings siguen [Estándar de código y comentarios](docs/standards/code-and-comments.md); explican intención y contratos, no la sintaxis obvia.
 
 ## 3. Fuente de versión
 
@@ -76,7 +76,7 @@ No escribir versiones independientes en:
 - motores;
 - documentación que pretenda definir una segunda fuente.
 
-Consultar [`VERSIONING.md`](VERSIONING.md).
+Consultar [Política de versionado](VERSIONING.md).
 
 ## 4. Flujo de cambios
 
@@ -204,7 +204,7 @@ No incorporar:
 - códigos únicos o QR personales;
 - cuerpos de solicitudes o logs con datos previsionales sensibles.
 
-Los originales de validación permanecen fuera de Git. Consultar [`tests/validation_cases/README.md`](tests/validation_cases/README.md).
+Los originales de validación permanecen fuera de Git. Consultar [Casos de validación](tests/validation_cases/README.md).
 
 ## 10. Importaciones documentales
 
@@ -296,10 +296,10 @@ Los tags publicados no se mueven. La excepción histórica única documentada en
 
 Consultar:
 
-- [`GOVERNANCE.md`](GOVERNANCE.md);
-- [`VERSIONING.md`](VERSIONING.md);
+- [Gobierno del proyecto](GOVERNANCE.md);
+- [Política de versionado](VERSIONING.md);
 - [`.github/CODEOWNERS`](.github/CODEOWNERS);
-- [`docs/decisions/README.md`](docs/decisions/README.md);
-- [`docs/README.md`](docs/README.md).
-- [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md);
-- [`SUPPORT.md`](SUPPORT.md).
+- [Registro de decisiones técnicas](docs/decisions/README.md);
+- [Índice de documentación](docs/README.md).
+- [Código de conducta](CODE_OF_CONDUCT.md);
+- [Soporte](SUPPORT.md).

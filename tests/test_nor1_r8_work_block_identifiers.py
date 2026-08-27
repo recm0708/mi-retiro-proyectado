@@ -55,7 +55,7 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
         for label in ("LEGACY", "INTEGRIDAD", "POST-GOV"):
             self.assertFalse(labels[label]["reusable_as_family"])
 
-    def test_g112_permanece_aceptado_y_doc1_r4_es_candidato(self):
+    def test_g112_permanece_aceptado_y_doc1_r5_es_candidato_actual(self):
         ledger = cargar_ledger()
         entry = next(x for x in ledger["entries"] if x["global_revision"] == 112)
         self.assertEqual("NOR.1", entry["block"])
@@ -63,11 +63,11 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
         self.assertEqual("0.1.12.07-beta", entry["revision_aware"])
         candidate = self.data["current_candidate"]
         self.assertEqual(116, candidate["global_revision"])
-        self.assertEqual("REL.GOV.1", candidate["block"])
-        self.assertEqual("R2", candidate["revision"])
-        self.assertEqual(2, candidate["edition"])
+        self.assertEqual("DOC.1", candidate["block"])
+        self.assertEqual("R5", candidate["revision"])
+        self.assertEqual(5, candidate["edition"])
         self.assertEqual("reserved_not_accepted", candidate["state"])
-        self.assertEqual("DEV.2", candidate["next_functional_block_if_accepted"])
+        self.assertEqual("REL.GOV.1", candidate["next_functional_block_if_accepted"])
         self.assertIsNone(candidate["next_functional_global_if_accepted"])
 
     def test_candidato_reabierto_continua_ordinal_del_bloque(self):

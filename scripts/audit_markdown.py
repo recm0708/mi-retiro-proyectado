@@ -11,6 +11,8 @@ Reglas:
 - metadata de versión vigente sincronizada con VERSION;
 - ausencia de stubs documentales de compatibilidad;
 - enlaces Markdown locales válidos en documentación viva/soporte/plantillas;
+- etiquetas humanas en enlaces Markdown navegables de listas documentales;
+- coherencia de la reserva revision-aware viva con el ledger machine-readable;
 - detección conservadora de prosa inglesa no técnica;
 - detección de VERSION antigua dentro de un contexto explícitamente vigente.
 
@@ -134,6 +136,18 @@ LINK_RX = re.compile(
     r"(?<!!)\[[^\]]*\]\(([^)]+)\)"
 )
 
+LIST_DOCUMENT_LINK_RX = re.compile(
+    r"^\s*[-*]\s+"
+    r"(?:\*\*)?"
+    r"\[([^\]]+)\]\(([^)]+)\)"
+    r"(?:\*\*)?"
+)
+
+CANDIDATE_HISTORY_FILES = {
+    "CHANGELOG.md",
+    "RELEASES.md",
+}
+
 VERSION_RX = re.compile(
     r"\d+\.\d+\.\d+(?:\.\d+)?(?:-[A-Za-z0-9.-]+)?"
 )
@@ -234,6 +248,236 @@ def tracked_markdown(root: Path) -> list[str]:
         for path in result.stdout.splitlines()
         if (root / path).is_file()
     )
+
+
+def strip_link_label_markup(label: str) -> str:
+    """Quita únicamente markup simple alrededor de una etiqueta visible."""
+
+    value = label.strip()
+
+    while len(value) >= 2:
+        changed = False
+
+        if value.startswith("`") and value.endswith("`"):
+            value = value[1:-1].strip()
+            changed = True
+
+        if value.startswith("**") and value.endswith("**"):
+            value = value[2:-2].strip()
+            changed = True
+
+        if value.startswith("__") and value.endswith("__"):
+            value = value[2:-2].strip()
+            changed = True
+
+        if not changed:
+            break
+
+    return value
+
+
+def looks_like_technical_markdown_label(label: str) -> bool:
+    """Detecta nombres/rutas Markdown inequívocamente técnicos."""
+
+    raw = label.strip()
+    value = strip_link_label_markup(raw)
+
+    if not value:
+        return False
+
+    if raw.startswith("`") and raw.endswith("`"):
+        return True
+
+    if value.startswith(("./", "../")):
+        return True
+
+    return value.lower().endswith((".md", ".markdown"))
+
+
+def check_document_link_labels(
+    root: Path,
+    rel: str,
+    lines: list[str],
+) -> list[Issue]:
+    """Exige título humano solo en listas navegables de documentación activa."""
+
+    if classify(rel) not in {
+        "VIVO",
+        "SOPORTE",
+        "PLANTILLA",
+    }:
+        return []
+
+    issues = []
+    source = root / rel
+    in_code = False
+
+    for number, line in enumerate(lines, start=1):
+        stripped = line.strip()
+
+        if stripped.startswith("```"):
+            in_code = not in_code
+            continue
+
+        if in_code:
+            continue
+
+        match = LIST_DOCUMENT_LINK_RX.match(line)
+
+        if not match:
+            continue
+
+        label = match.group(1).strip()
+        raw_target = match.group(2).strip()
+
+        if not looks_like_technical_markdown_label(label):
+            continue
+
+        target = unquote(raw_target)
+        target = target.split("#", 1)[0]
+        target = target.split("?", 1)[0]
+
+        if not target.lower().endswith((".md", ".markdown")):
+            continue
+
+        if target.startswith("/"):
+            resolved = root / target.lstrip("/")
+        else:
+            resolved = source.parent / target
+
+        if not resolved.is_file():
+            continue
+
+        issues.append(
+            Issue(
+                rel,
+                number,
+                "ETIQUETA_DOCUMENTAL_TECNICA",
+                (
+                    f"{label} -> {raw_target}; "
+                    "usar un título humano visible."
+                ),
+            )
+        )
+
+    return issues
+
+
+def check_current_candidate_state(
+    rel: str,
+    lines: list[str],
+    *,
+    next_global: int,
+    next_candidate: str,
+) -> list[Issue]:
+    """Detecta reservas del Global vigente que contradicen el ledger actual."""
+
+    if classify(rel) not in {
+        "VIVO",
+        "SOPORTE",
+        "PLANTILLA",
+    }:
+        return []
+
+    if rel in CANDIDATE_HISTORY_FILES:
+        return []
+
+    issues = []
+
+    expected_match = re.fullmatch(
+        r"0\.\d+\.\d+\.(\d{2})-beta",
+        next_candidate,
+    )
+
+    if not expected_match:
+        return []
+
+    expected_edition = int(expected_match.group(1))
+
+    global_pattern = re.compile(
+        rf"\bG{next_global:03d}/E(\d{{2}})\b"
+    )
+
+    version_prefix = next_candidate.rsplit(".", 1)[0] + "."
+    version_pattern = re.compile(
+        re.escape(version_prefix) + r"(\d{2})-beta"
+    )
+
+    state_words = re.compile(
+        r"\b(?:candidat|reserv|siguiente\s+checkpoint)",
+        re.I,
+    )
+
+    for number, line in enumerate(lines, start=1):
+        if not state_words.search(line):
+            continue
+
+        editions = {
+            int(value)
+            for value in global_pattern.findall(line)
+        }
+
+        editions.update(
+            int(value)
+            for value in version_pattern.findall(line)
+        )
+
+        wrong = sorted(
+            value
+            for value in editions
+            if value != expected_edition
+        )
+
+        if not wrong:
+            continue
+
+        issues.append(
+            Issue(
+                rel,
+                number,
+                "CANDIDATO_REVISION_AWARE_OBSOLETO",
+                (
+                    f"Global G{next_global:03d} usa "
+                    + ", ".join(f"E{value:02d}" for value in wrong)
+                    + f"; candidato actual={next_candidate}"
+                ),
+            )
+        )
+
+    return issues
+
+
+def load_candidate_state(root: Path) -> tuple[int, str]:
+    """Carga el Global siguiente y candidato reservado desde el ledger."""
+
+    import json
+
+    path = root / "data" / "pre-1-0-revision-ledger.json"
+
+    if not path.is_file():
+        raise RuntimeError(
+            "No existe data/pre-1-0-revision-ledger.json."
+        )
+
+    data = json.loads(path.read_text(encoding="utf-8"))
+
+    next_global = data.get(
+        "next_global",
+        data.get("next_global_if_ver2_accepted"),
+    )
+    next_candidate = data.get("next_candidate")
+
+    if not isinstance(next_global, int):
+        raise RuntimeError(
+            "El ledger no declara un siguiente Global válido."
+        )
+
+    if not isinstance(next_candidate, str):
+        raise RuntimeError(
+            "El ledger no declara next_candidate válido."
+        )
+
+    return next_global, next_candidate
 
 
 def clean_prose(line: str) -> str:
@@ -519,6 +763,9 @@ def audit_file(
     root: Path,
     rel: str,
     current_version: str,
+    *,
+    next_global: int | None = None,
+    next_candidate: str | None = None,
 ) -> list[Issue]:
     path = root / rel
     issues = []
@@ -584,6 +831,22 @@ def audit_file(
                 lines,
             )
         )
+        issues.extend(
+            check_document_link_labels(
+                root,
+                rel,
+                lines,
+            )
+        )
+        if next_global is not None and next_candidate is not None:
+            issues.extend(
+                check_current_candidate_state(
+                    rel,
+                    lines,
+                    next_global=next_global,
+                    next_candidate=next_candidate,
+                )
+            )
         issues.extend(
             check_language(
                 rel,
@@ -712,6 +975,24 @@ def audit_file(
     )
 
     issues.extend(
+        check_document_link_labels(
+            root,
+            rel,
+            lines,
+        )
+    )
+
+    if next_global is not None and next_candidate is not None:
+        issues.extend(
+            check_current_candidate_state(
+                rel,
+                lines,
+                next_global=next_global,
+                next_candidate=next_candidate,
+            )
+        )
+
+    issues.extend(
         check_language(
             rel,
             lines,
@@ -744,6 +1025,7 @@ def audit_repository(
     ).strip()
 
     files = tracked_markdown(root)
+    next_global, next_candidate = load_candidate_state(root)
 
     counts = Counter(
         classify(path)
@@ -758,6 +1040,8 @@ def audit_repository(
                 root,
                 rel,
                 current_version,
+                next_global=next_global,
+                next_candidate=next_candidate,
             )
         )
 

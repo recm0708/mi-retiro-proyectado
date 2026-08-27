@@ -4,7 +4,7 @@
   "base_commit": "7037addd44253e528c77460b678d2b3ccd540dd5",
   "accepted_count": 115,
   "next_global_if_ver2_accepted": 116,
-  "next_candidate": "0.1.16.02-beta",
+  "next_candidate": "0.1.16.05-beta",
   "historical_tags_immutable": {
     "from": "v0.0.1-beta",
     "to": "v0.0.26-beta"
@@ -1120,8 +1120,8 @@
       "reason": "La decisión VER.2 R3 establece expresamente que R1, R2 y R3 son correcciones internas del mismo candidato G071/E01; no consumen G072 ni incrementan EE. R4 materializa la aceptación única del candidato."
     }
   ],
-  "reconciled_through_commit": "9f512290cf375128130a136ddb39562bd97616f7",
+  "reconciled_through_commit": "87fa8e98688c1e3951cc405eb4b280d558d1c8a6",
   "reconciliation_date": "2026-08-26",
   "next_global": 116,
-  "next_candidate_block": "REL.GOV.1"
+  "next_candidate_block": "DOC.1"
 }

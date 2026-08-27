@@ -23,9 +23,14 @@ class TestPLAN2R1MasterPendingMatrix(unittest.TestCase):
     def test_limitaciones_vivas_reflejan_version_canonica(self):
         text=(ROOT/"docs/product/known-limitations.md").read_text(encoding="utf-8"); version=(ROOT/"VERSION").read_text(encoding="utf-8").strip()
         self.assertNotIn("cierre de SEC.2",text); self.assertIn("SEC.2 R1–R6 ya está cerrado",text); self.assertIn("`0.GG.RR.EE-beta`",text); self.assertIn(version,text)
-    def test_publicacion_g113_permanece_preservada(self):
-        for rel in ("README.md","SECURITY.md","VERSIONING.md","RELEASES.md"):
-            text=(ROOT/rel).read_text(encoding="utf-8"); self.assertIn("v0.1.13.03-beta",text); self.assertIn("PLAN.2",text)
+    def test_publicacion_g113_permanece_preservada_sin_fijarla_en_todo_documento_vivo(self):
+        ledger=cargar_ledger()
+        entry=next(e for e in ledger["entries"] if e["global_revision"]==113)
+        self.assertEqual("DOC.1",entry["block"])
+        self.assertEqual("0.1.13.03-beta",entry["revision_aware"])
+        releases=(ROOT/"RELEASES.md").read_text(encoding="utf-8")
+        self.assertIn("v0.1.13.03-beta",releases)
+        self.assertIn("PLAN.2",releases)
     def test_matriz_y_auditoria_estan_indexadas(self):
         index=(ROOT/"docs/README.md").read_text(encoding="utf-8"); self.assertIn("governance/pre-1-0-pending-matrix.md",index); self.assertIn("audits/documentation/post-g113-live-documentation-audit-plan2-r1.md",index)
 if __name__ == "__main__": unittest.main()

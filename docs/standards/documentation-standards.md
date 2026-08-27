@@ -39,6 +39,31 @@ Todo documento debe poder clasificarse como uno de estos tipos:
 Una bitácora de fase no se presenta como contrato vigente cuando solo describe
 un estado pasado.
 
+## Estructura por tipo documental
+
+Todos los Markdown comparten una base mínima —H1 descriptivo, jerarquía de
+encabezados coherente, enlaces válidos y metadata en negrita cuando aplique—,
+pero **no deben tener exactamente las mismas secciones**. La estructura se elige
+según la función del documento:
+
+- **Documento vigente:** propósito, estado vigente, alcance, contratos o
+  comportamiento, referencias y reglas de mantenimiento cuando apliquen.
+- **Estándar o política:** propósito, alcance, reglas, excepciones, validación y
+  relación con otros estándares.
+- **Auditoría o evidencia:** objetivo, base auditada, método, hallazgos,
+  decisiones, evidencia reproducible y resultado.
+- **Registro histórico:** contexto, estado documentado, evidencia preservada,
+  relación con el estado vigente y regla de preservación.
+- **ADR:** contexto, decisión, consecuencias, alternativas descartadas y
+  evidencia relacionada; las relaciones de sustitución se declaran cuando
+  existan.
+
+La base técnica de `.md` se conserva en
+`../templates/file-structure/template.md`. Las variantes semánticas se
+documentan en **[Plantillas documentales](../templates/documentation/README.md)**.
+Una plantilla es un punto de partida, no una obligación de conservar secciones
+vacías ni de reescribir documentos históricos para uniformarlos.
+
 ## Metadata documental
 
 Cuando un documento incluya metadata de cabecera, sus etiquetas se escriben en
@@ -153,12 +178,21 @@ El control automático verifica, según la clasificación documental aplicable:
 - metadata de cabecera y ausencia de claves duplicadas;
 - coherencia entre documentación vigente y la versión definida en `VERSION`;
 - enlaces locales de documentación vigente, estándares, plantillas y soporte;
+- etiquetas humanas en enlaces Markdown que encabecen listas navegables;
+- coherencia del candidato revision-aware vivo con el ledger machine-readable;
 - ausencia de stubs conservados únicamente por compatibilidad documental;
 - comprobaciones conservadoras de idioma y de estados vigentes obsoletos.
 
 Las excepciones históricas son deliberadas: auditorías, evidencias y documentos
 archivados pueden conservar versiones, rutas y enlaces correspondientes al
 estado que documentan cuando actualizarlos alteraría la trazabilidad histórica.
+`CHANGELOG.md` y `RELEASES.md` pueden conservar una reserva revision-aware anterior
+cuando la frase la identifique como estado histórico de una publicación previa;
+esa excepción no autoriza presentar la reserva anterior como candidato vigente.
+
+El auditor local no determina por sí solo si un GitHub Release remoto existe o
+cuál es el último tag publicado. Ese contrato requiere consultar el estado remoto
+de GitHub y corresponde al gobierno de Releases.
 
 Una modificación documental no se considera validada únicamente porque el
 archivo renderice correctamente. Debe superar también el auditor, sus pruebas de

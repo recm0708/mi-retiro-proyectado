@@ -71,24 +71,34 @@ def test_linea_base_documental_post_mant1_define_estado_canonico():
     assert "`928 tests OK`" in text
 
 
-def test_version_file_permanece_en_0_0_26_beta():
-    assert read("VERSION").strip() == "0.0.71.01-beta"
+def test_estado_historico_doc1_r1_no_congela_version_actual():
+    linea_base = read(
+        "docs/archive/governance/"
+        "LINEA_BASE_DOCUMENTAL_POST_MANT1_DOC1_R1.md"
+    )
+    cierre = read(
+        "docs/archive/governance/"
+        "CIERRE_DOCUMENTAL_MARKDOWN_DOC1_R1.md"
+    )
+    assert "`0.0.71.01-beta`" in linea_base
+    assert "`VERSION` permanece en `0.0.26-beta`" in cierre
 
 
 def test_readme_expone_estado_vigente_y_doc1_preserva_su_cierre():
     readme = read("README.md")
     cierre = read("docs/archive/governance/CIERRE_DOCUMENTAL_MARKDOWN_DOC1_R1.md")
 
-    assert "**Versión canónica vigente:** `0.0.71.01-beta`" in readme
+    version = read("VERSION").strip()
+    assert f"**Versión canónica vigente:** `{version}`" in readme
     assert "G071/E01 promovido en `VERSION`" in readme
-    assert "tag `v0.0.71.01-beta` publicado" in readme
+    assert "VER.2 publicó `v0.0.71.01-beta`" in readme
     assert "**DOC.1 R1:** cerrado" in readme
     assert "**NOR.1:** cerrado" in readme
     assert "**NOR.2 R4:** cerrado" in readme
     assert "**NOR.2 R5:** cerrado" in readme
     assert "**NOR.2 R6:** cerrado" in readme
     assert "**NOR.2 R7:** cerrado" in readme
-    assert "img.shields.io/badge/versi%C3%B3n-0.0.71.01--beta" in readme
+    assert "img.shields.io/badge/versi%C3%B3n-" in readme
 
     # Los detalles post-MANT.1 pertenecen a la evidencia histórica de DOC.1,
     # no al estado operativo actual de README.
@@ -101,8 +111,10 @@ def test_security_declara_estado_vigente_post_mant1_y_preserva_anclas():
     text = read("SECURITY.md")
 
     assert "## Estado de seguridad post-MANT.1" in text
-    assert "La versión canónica vigente es `0.0.71.01-beta`." in text
-    assert "`v0.0.71.01-beta` fue publicado originalmente bajo la denominación VER.2 G071/E01" in text
+    version = read("VERSION").strip()
+    assert f"La versión canónica vigente es `{version}`" in text
+    assert "`v0.0.71.01-beta`" in text
+    assert "G071/E01" in text
     assert "Referencia legacy histórica preservada por pruebas de regresión" in text
 
 

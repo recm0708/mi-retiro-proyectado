@@ -21,4 +21,4 @@ sucgs_art197_240_cuotas_sintetico.json
 
 ## 3. Documentación
 
-La descripción consolidada de regresiones se mantiene en [`docs/operations/validation.md`](../../docs/operations/validation.md).
+La descripción consolidada de regresiones se mantiene en [Validación](../../docs/operations/validation.md).

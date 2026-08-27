@@ -15,11 +15,11 @@ La fuente canónica de versión continúa siendo `VERSION`.
 Estado vigente:
 
 - `VERSION` contiene `0.1.15.04-beta` y materializa G115/E04 (DOC.1 R4), aceptado mediante PR #96 / merge `9f51229`. G114/E01 permanece preservado como PLAN.2 R1.
-- `v0.1.14.01-beta` está publicado, firmado y verificado con GitHub Release prerelease; `v0.1.13.03-beta` permanece preservado como publicación anterior y `v0.0.26-beta` como último tag de la familia legacy.
+- `v0.1.15.04-beta` está publicado, firmado y verificado con GitHub Release prerelease; `v0.1.14.01-beta` permanece preservado como publicación anterior y `v0.0.26-beta` como último tag de la familia legacy.
 - La reconciliación post-G070 reconstruye G071–G108 y conserva `v0.0.71.01-beta` como evidencia histórica de G087/E01 sin mover el tag.
 - AUD.SEC2 R1 fue aceptado como G109/E01, REL.GOV.1 R1 como G110/E01, DOC.2 como G111/E01, NOR.1 R8 como G112/E07, DOC.1 R3 como G113/E03, PLAN.2 R1 como G114/E01 y DOC.1 R4 como G115/E04.
-- G115/E04 (`0.1.15.04-beta`) queda aceptado para DOC.1 R4, continuando el ordinal del bloque después de E03. G116/E02 (`0.1.16.02-beta`) queda reservado para REL.GOV.1 R2, que continúa el ordinal del bloque después de E01.
-- PERSIST.1 permanece planificado en la matriz maestra como una etapa posterior; no tiene un Global preasignado mientras se ejecutan REL.GOV.1 R2 y los frentes Developer/UX previos.
+- G115/E04 (`0.1.15.04-beta`) queda aceptado para DOC.1 R4, continuando el ordinal del bloque después de E03. La reserva no consumida G116 se reasigna a DOC.1 R5 como G116/E05 (`0.1.16.05-beta`), continuando el ordinal de DOC.1 después de E04; REL.GOV.1 R2 permanece planificado a continuación sin Global preasignado.
+- PERSIST.1 permanece planificado en la matriz maestra como una etapa posterior; no tiene un Global preasignado mientras se completa DOC.1 R5 y posteriormente REL.GOV.1 R2 y los frentes Developer/UX previos.
 - Los cierres y sincronizaciones que no crean un estado materialmente distinto no consumen `G` por sí solos.
 
 Cualquier promoción futura de versión debe seguir el proceso formal de release, validación, PR/CI, tag y evidencia documental correspondiente.

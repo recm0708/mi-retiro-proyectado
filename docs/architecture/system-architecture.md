@@ -211,7 +211,7 @@ La simulación se conserva en `sessionStorage`. La preferencia visual y la acept
 
 La aplicación no intenta restaurar un `File` seleccionado después de recargar. Puede conservar metadata de una importación confirmada —por ejemplo procedencia o nombre visible del archivo—, nunca la ruta local ni el binario.
 
-Consultar [simulation-data-management.md](../product/simulation-data-management.md).
+Consultar [Gestión de datos de la simulación](../product/simulation-data-management.md).
 
 ## 6. Importaciones documentales
 
@@ -314,7 +314,7 @@ Los logs se escriben localmente en `logs/diagnostico/` por defecto, directorio e
 
 No existe envío remoto automático. La exportación diagnóstica empaqueta únicamente los JSONL conocidos y requiere activación explícita de desarrollo.
 
-Consultar [observability-and-logs.md](../operations/observability-and-logs.md).
+Consultar [Observabilidad y Developer Diagnostics](../operations/observability-and-logs.md).
 
 ## 10. Precisión
 

@@ -6,7 +6,7 @@
 **Revisión documental:** GOV.1.3 R2 — 2026-08-17
 **Clasificación:** Técnica / Pública
 
-Este documento describe la arquitectura matemática vigente. Las reglas jurídicas detalladas se mantienen en [regulatory-framework.md](../regulatory/regulatory-framework.md) y las fuentes en [regulatory-sources.md](../regulatory/regulatory-sources.md).
+Este documento describe la arquitectura matemática vigente. Las reglas jurídicas detalladas se mantienen en [Normativa](../regulatory/regulatory-framework.md) y las fuentes en [Fuentes normativas y enlaces oficiales](../regulatory/regulatory-sources.md).
 
 ## 1. Pipeline
 

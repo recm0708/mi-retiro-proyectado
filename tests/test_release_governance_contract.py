@@ -40,7 +40,7 @@ class TestReleaseGovernanceContract(unittest.TestCase):
             data["title"],
         )
 
-    def test_contrato_actual_deriva_titulo_g114(self):
+    def test_contrato_actual_deriva_titulo_g115(self):
         result = self.run_contract("--json")
         self.assertEqual(0, result.returncode, result.stdout + result.stderr)
 
@@ -56,14 +56,14 @@ class TestReleaseGovernanceContract(unittest.TestCase):
         self.assertTrue(data["prerelease"])
         self.assertEqual(115, data["accepted_count"])
         self.assertEqual(116, data["next_global"])
-        self.assertEqual("0.1.16.02-beta", data["next_candidate"])
-        self.assertEqual("REL.GOV.1", data["next_candidate_block"])
+        self.assertEqual("0.1.16.05-beta", data["next_candidate"])
+        self.assertEqual("DOC.1", data["next_candidate_block"])
 
     def test_tag_debe_coincidir_con_version(self):
         ok = self.run_contract("--check-tag", "v0.1.15.04-beta")
         self.assertEqual(0, ok.returncode, ok.stdout + ok.stderr)
 
-        bad = self.run_contract("--check-tag", "v0.1.16.02-beta")
+        bad = self.run_contract("--check-tag", "v0.1.16.05-beta")
         self.assertNotEqual(0, bad.returncode)
         self.assertIn("Tag inválido", bad.stdout)
 
@@ -150,7 +150,7 @@ class TestReleaseGovernanceContract(unittest.TestCase):
         self.assertIn("## 7.1. Tags y GitHub Releases", github)
         self.assertIn(".github/release.yml", github)
 
-    def test_g114_aceptado_y_g115_reservado_para_doc1_r4(self):
+    def test_g115_aceptado_y_g116_reservado_para_doc1_r5(self):
         ledger = json.loads(
             (ROOT / "data/pre-1-0-revision-ledger.json").read_text(
                 encoding="utf-8"
@@ -159,8 +159,8 @@ class TestReleaseGovernanceContract(unittest.TestCase):
 
         self.assertEqual(115, ledger["accepted_count"])
         self.assertEqual(116, ledger["next_global"])
-        self.assertEqual("0.1.16.02-beta", ledger["next_candidate"])
-        self.assertEqual("REL.GOV.1", ledger["next_candidate_block"])
+        self.assertEqual("0.1.16.05-beta", ledger["next_candidate"])
+        self.assertEqual("DOC.1", ledger["next_candidate_block"])
         self.assertEqual(
             "0.1.15.04-beta",
             (ROOT / "VERSION").read_text(encoding="utf-8").strip(),

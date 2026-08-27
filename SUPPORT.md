@@ -31,11 +31,11 @@ Utiliza el formulario **Consulta / soporte** de GitHub Issues. Para problemas de
 
 ## 5. Vulnerabilidad de seguridad
 
-**No publiques detalles explotables en un issue.** Sigue [`SECURITY.md`](SECURITY.md). Utiliza preferentemente **GitHub Private vulnerability reporting** y, si no estuviera disponible para tu caso, el canal privado alternativo documentado allí.
+**No publiques detalles explotables en un issue.** Sigue [Política de seguridad](SECURITY.md). Utiliza preferentemente **GitHub Private vulnerability reporting** y, si no estuviera disponible para tu caso, el canal privado alternativo documentado allí.
 
 ## 6. Privacidad y derechos sobre datos personales
 
-Para consultas de privacidad o ejercicio de derechos, consulta [`docs/security/data-subject-rights-procedure.md`](docs/security/data-subject-rights-procedure.md). Evita enviar información adicional que no sea necesaria para identificar y atender la solicitud.
+Para consultas de privacidad o ejercicio de derechos, consulta [Procedimiento de derechos del titular](docs/security/data-subject-rights-procedure.md). Evita enviar información adicional que no sea necesaria para identificar y atender la solicitud.
 
 ## 7. Qué no ofrece este canal
 
@@ -50,4 +50,4 @@ El soporte del repositorio no:
 
 ## 8. Conducta
 
-Toda interacción de soporte y colaboración está sujeta a [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md).
+Toda interacción de soporte y colaboración está sujeta a [Código de conducta](CODE_OF_CONDUCT.md).

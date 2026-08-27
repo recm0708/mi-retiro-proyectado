@@ -23,7 +23,7 @@ Estado vigente:
 - DOC.1 R1 está cerrado.
 - NOR.1 y NOR.2 están cerrados.
 - DOC.1 R2 está cerrado como revisión documental integral posterior a NOR.2.
-- `VERSION` está sincronizado en `0.1.15.04-beta` después de aceptar DOC.1 R4 como G115/E04; G116/E02 queda reservado para REL.GOV.1 R2 y REL.GOV.1 R1 permanece preservado como G110/E01.
+- `VERSION` está sincronizado en `0.1.15.04-beta` después de aceptar/publicar DOC.1 R4 como G115/E04; G116/E05 queda reservado para DOC.1 R5. REL.GOV.1 R1 permanece preservado como G110/E01 y REL.GOV.1 R2 continúa planificado después del candidato documental.
 - SEC.2 quedó cerrado después de R1–R6; AUD.SEC2 R1 corrige el kill switch y el contrato de sesión web sin reabrir DEV.2.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 

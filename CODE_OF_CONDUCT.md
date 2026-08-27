@@ -33,7 +33,7 @@ No se admite:
 
 ## 4. Privacidad y seguridad
 
-No deben publicarse cédulas, números de Seguro Social, historiales salariales reales, PDFs personales, direcciones, credenciales, tokens ni otra información sensible. Las vulnerabilidades se reportan conforme a [`SECURITY.md`](SECURITY.md); las consultas sobre canales adecuados se describen en [`SUPPORT.md`](SUPPORT.md).
+No deben publicarse cédulas, números de Seguro Social, historiales salariales reales, PDFs personales, direcciones, credenciales, tokens ni otra información sensible. Las vulnerabilidades se reportan conforme a [Política de seguridad](SECURITY.md); las consultas sobre canales adecuados se describen en [Soporte](SUPPORT.md).
 
 ## 5. Aplicación
 
@@ -47,9 +47,9 @@ Los incidentes relacionados con conducta pueden comunicarse de forma privada a `
 
 Los reportes de conducta se distinguen de:
 
-- vulnerabilidades técnicas: [`SECURITY.md`](SECURITY.md);
-- soporte, errores o mejoras: [`SUPPORT.md`](SUPPORT.md);
-- ejercicio de derechos sobre datos personales: [`docs/security/data-subject-rights-procedure.md`](docs/security/data-subject-rights-procedure.md).
+- vulnerabilidades técnicas: [Política de seguridad](SECURITY.md);
+- soporte, errores o mejoras: [Soporte](SUPPORT.md);
+- ejercicio de derechos sobre datos personales: [Procedimiento de derechos del titular](docs/security/data-subject-rights-procedure.md).
 
 ## 7. Revisión
 

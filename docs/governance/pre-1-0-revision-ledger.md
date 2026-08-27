@@ -3,9 +3,9 @@
 **Proyecto:** Mi Retiro Proyectado
 **Base auditada:** `7037addd44253e528c77460b678d2b3ccd540dd5`
 **Contador histórico en la base `7037addd`:** **G070**
-**Contador aceptado reconciliado al commit `9f51229`:** **G115**
+**Contador aceptado reconciliado al commit `87fa8e9`:** **G115**
 **Siguiente Global disponible:** **G116**
-**Siguiente candidato disponible:** `0.1.16.02-beta` — REL.GOV.1 R2 (automatización de Releases y checks)
+**Siguiente candidato disponible:** `0.1.16.05-beta` — DOC.1 R5 (normalización documental integral post-G115)
 
 
 <!-- DOC1-R1-REVISION-MANUAL:START -->
@@ -27,9 +27,9 @@ Estado vigente de la contabilidad:
   ya existían después de `7037addd`; por eso queda documentada como una
   **anomalía histórica de numeración**. La reconciliación vigente sitúa el estado
   materializado por ese tag en G087/E01 sin modificar la evidencia publicada.
-- `VERSION` está sincronizado en `0.1.15.04-beta` después de aceptar DOC.1 R4 como G115/E04; G116/E02 (`0.1.16.02-beta`) permanece reservado para REL.GOV.1 R2.
+- `VERSION` está sincronizado en `0.1.15.04-beta` después de aceptar/publicar DOC.1 R4 como G115/E04; la reserva no consumida G116 se reasigna a DOC.1 R5 como G116/E05 (`0.1.16.05-beta`).
 - G110/E01 (`0.1.10.01-beta`) quedó aceptado para REL.GOV.1 mediante PR #85 y merge `5cd1cea`.
-- G111/E01 (`0.1.11.01-beta`) permanece aceptado para DOC.2. G112/E07 (`0.1.12.07-beta`) queda aceptado para NOR.1 R8 después de PR #89 / PR #90; G113/E03 (`0.1.13.03-beta`) queda aceptado para DOC.1 R3 mediante PR #92 / merge `40ae5c0`; G114/E01 (`0.1.14.01-beta`) queda aceptado para PLAN.2 R1 mediante PR #94 / merge `7ded70c`; G115/E04 (`0.1.15.04-beta`) queda aceptado para DOC.1 R4 mediante PR #96 / merge `9f51229`; G116/E02 (`0.1.16.02-beta`) queda reservado para REL.GOV.1 R2.
+- G111/E01 (`0.1.11.01-beta`) permanece aceptado para DOC.2. G112/E07 (`0.1.12.07-beta`) queda aceptado para NOR.1 R8 después de PR #89 / PR #90; G113/E03 (`0.1.13.03-beta`) queda aceptado para DOC.1 R3 mediante PR #92 / merge `40ae5c0`; G114/E01 (`0.1.14.01-beta`) queda aceptado para PLAN.2 R1 mediante PR #94 / merge `7ded70c`; G115/E04 (`0.1.15.04-beta`) queda aceptado para DOC.1 R4 mediante PR #96 / merge `9f51229` y publicado mediante PR #97 / merge `87fa8e9`; G116/E05 (`0.1.16.05-beta`) queda reservado para DOC.1 R5. REL.GOV.1 R2 permanece a continuación sin Global preasignado.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 
 Este ledger registra los estados aceptados reconstruidos durante VER.2 y su reconciliación posterior. La regla contable histórica y las exclusiones originales se conservan en `docs/archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md` y `docs/archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md`; la ampliación post-G070 se justifica en `docs/audits/governance/post-g070-revision-reconciliation.md`.
