@@ -8,7 +8,7 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 - Normalización documental pre-G118: migra 59 Markdown históricos de `docs/archive/` a nombres técnicos ASCII/minúsculas/kebab-case, actualiza referencias activas y navegación, sincroniza el estado vivo con G117/E02 ya publicado y mantiene G118/E04 reservado exclusivamente para DEV.2 R5; no cambia `VERSION` ni consume G118.
 - Mantenimiento pre-G118: actualiza coordinadamente `pypdf 6.16.1` → `6.16.2` y `Uvicorn 0.52.3` → `0.52.4`, sincroniza inventarios/regresiones, documenta el entorno/toolchain de desarrollo de referencia y mantiene `VERSION` en G117/E02; no consume G118.
-- DEV.2 R5 (candidato G118/E04): Portal Developer y acceso sobre la base aceptada G117/E02; G118 permanece reservado y no aceptado hasta superar su gate propio.
+- DEV.2 R5 (candidato G118/E04): implementa `/dev` como entrada humana canónica, separa sesión web de Bearer, incorpora shell/login Developer independiente de la navegación pública, limita la cookie a `/dev` y reconcilia regresiones/documentación; gate local previo a integración con 1171 `unittest` OK y 1211 `pytest` passed / 5747 subtests passed. G118 permanece reservado y no aceptado hasta integración y revalidación.
 
 ## [0.1.17.02-beta]
 - G117/E02: REL.GOV.1 R2 queda aceptado mediante PR #103 / merge `46c464e` después de completar la automatización gobernada de Releases y checks.

@@ -165,7 +165,7 @@ class TestDev2R2VisorDiagnostico(unittest.TestCase):
                 )
 
         self.assertEqual(200, respuesta.status_code)
-        self.assertIn("DEV.2 R2", respuesta.text)
+        self.assertIn("Portal Developer", respuesta.text)
         self.assertIn("Eventos recientes", respuesta.text)
         self.assertIn("Resumen del visor diagnóstico", respuesta.text)
         self.assertIn("dev.centro_desarrollo", respuesta.text)

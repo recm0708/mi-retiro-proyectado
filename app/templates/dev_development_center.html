@@ -1,21 +1,16 @@
-{% extends "base.html" %}
+{% extends "dev_base.html" %}
 
 {% block title %}
 Centro de desarrollo · {{ app_name }}
 {% endblock %}
 
 {% block content %}
-<section class="hero-section py-5">
+<section id="resumen" class="hero-section py-5">
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-lg-10 col-xl-9">
-        <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
-          <span class="badge text-bg-dark">{{ estado_dev.bloque }}</span>
-          <span class="badge text-bg-primary">{{ estado_dev.revision_actual }}</span>
-          <span class="badge text-bg-info">{{ estado_dev.revision_autodiagnostico }}</span>
-          <form method="post" action="/dev/logout" class="ms-lg-auto">
-            <button type="submit" class="btn btn-outline-secondary btn-sm">Cerrar sesión</button>
-          </form>
+        <div class="mb-3">
+          <span class="dev-kicker">Portal Developer</span>
         </div>
         <h1 class="display-6 fw-bold mb-3">{{ estado_dev.titulo }}</h1>
         <p class="lead mb-0">{{ estado_dev.descripcion }}</p>
@@ -74,7 +69,7 @@ Centro de desarrollo · {{ app_name }}
   </div>
 </section>
 
-<section class="py-4" aria-labelledby="autodiagnostico-dev-title">
+<section id="diagnostico" class="py-4" aria-labelledby="autodiagnostico-dev-title">
   <div class="container">
     <div class="card shadow-sm">
       <div class="card-body">
@@ -138,7 +133,7 @@ Centro de desarrollo · {{ app_name }}
   </div>
 </section>
 
-<section class="py-4" aria-labelledby="resumen-eventos-dev-title">
+<section id="eventos" class="py-4" aria-labelledby="resumen-eventos-dev-title">
   <div class="container">
     <div class="card shadow-sm">
       <div class="card-body">
@@ -199,7 +194,7 @@ Centro de desarrollo · {{ app_name }}
   </div>
 </section>
 
-<section class="py-4" aria-labelledby="archivos-dev-title">
+<section id="archivos" class="py-4" aria-labelledby="archivos-dev-title">
   <div class="container">
     <div class="card shadow-sm">
       <div class="card-body">
@@ -224,7 +219,7 @@ Centro de desarrollo · {{ app_name }}
   </div>
 </section>
 
-<section class="py-4" aria-labelledby="privacidad-dev-title">
+<section id="privacidad" class="py-4" aria-labelledby="privacidad-dev-title">
   <div class="container">
     <div class="row g-4">
       <div class="col-lg-6"><article class="card h-100 border-warning shadow-sm"><div class="card-body"><h2 id="privacidad-dev-title" class="h5">Advertencias</h2><ul class="mb-0">{% for advertencia in estado_dev.advertencias %}<li>{{ advertencia }}</li>{% endfor %}</ul></div></article></div>

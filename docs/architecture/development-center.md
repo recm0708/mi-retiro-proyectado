@@ -1,6 +1,6 @@
-# DEV.2 R1/R2/R3/R4 — Centro de desarrollo
+# DEV.2 R1/R2/R3/R4/R5 — Centro de desarrollo
 
-**Estado general:** DEV.2 R1–R4 cerrados documentalmente; R5 es el siguiente checkpoint candidato G118/E04.
+**Estado general:** DEV.2 R1–R4 cerrados; R5 implementado y validado localmente como candidato G118/E04, pendiente de integración/aceptación.
 
 **Estado R1:** integrado en `main` mediante PR #37.
 
@@ -18,7 +18,7 @@ DEV.2 queda preservado como bloque funcional cerrado. Sus referencias a VER.2 o 
 
 Estado vigente:
 
-- DEV.2 R1–R4 están cerrados; R5 reabre el bloque como siguiente checkpoint candidato G118/E04 para Portal Developer y acceso.
+- DEV.2 R1–R4 están cerrados; R5 está implementado y validado como candidato G118/E04 para Portal Developer y acceso, todavía sin consumir G118 hasta su integración/aceptación.
 - MANT.1 quedó cerrado operativamente en R7.
 - DOC.1 R1 está cerrado.
 - NOR.1 y NOR.2 están cerrados.
@@ -47,16 +47,21 @@ R2 y R3. No introduce comportamiento funcional nuevo.
 
 ## Activación
 
-Developer Diagnostics sigue desactivado por defecto. La activación local requiere:
+Developer Diagnostics y la superficie administrativa siguen desactivados por
+defecto. Para utilizar el Portal Developer en un entorno local se requiere una
+activación explícita:
 
 ```powershell
 $env:MRP_DEV_MODE = "1"
+$env:MRP_ADMIN_ENABLED = "1"
+$env:MRP_ADMIN_SECRET = "<secreto-local-no-versionado>"
 ```
 
-Equivalente conceptual: `MRP_DEV_MODE=1`.
-
-El directorio diagnóstico puede mantenerse por defecto bajo `logs/diagnostico/` o
-configurarse con `MRP_DIAGNOSTIC_DIR` durante pruebas locales.
+`MRP_ADMIN_SECRET` se define fuera del repositorio y no tiene valor
+predeterminado. En configuración equivalente, Developer Diagnostics requiere
+`MRP_DEV_MODE=1`. El directorio diagnóstico puede mantenerse por defecto bajo
+`logs/diagnostico/` o configurarse con `MRP_DIAGNOSTIC_DIR` durante pruebas
+locales.
 
 ## Alcance de R1
 
@@ -146,6 +151,63 @@ No incluye:
 
 Esos puntos quedan reservados para revisiones posteriores de seguridad,
 despliegue o release, según corresponda.
+
+## Alcance de R5
+
+DEV.2 R5 reabre el bloque para separar el acceso humano al Portal Developer del
+contrato técnico Bearer y establecer una entrada canónica independiente de la
+navegación previsional pública.
+
+Incluye:
+
+- `/dev` como entrada humana canónica del Portal Developer;
+- sesión web mediante cookie `mrp_admin_session` `HttpOnly`, acotada a
+  `Path=/dev`;
+- validación directa de la sesión web para superficies HTML, sin provocar
+  primero un rechazo Bearer;
+- conservación de `Authorization: Bearer <token>` para acceso técnico
+  programático autorizado;
+- compatibilidad de `GET /dev/login` mediante redirección a `/dev`;
+- compatibilidad de `/dev/centro-desarrollo`, conservando Bearer para clientes
+  técnicos y dirigiendo el navegador autenticado a `/dev`;
+- shell visual `dev_base.html` separado de la navegación pública, gestión de
+  datos de simulación y consentimiento de privacidad de la aplicación;
+- login integrado con los temas Claro, Oscuro, Automático y Alto contraste;
+- eliminación de identificadores internos de revisión de la interfaz visible;
+- clasificación diagnóstica explícita de `dev.portal`, `dev.login` y
+  `dev.logout`;
+- `Cache-Control: no-store` tanto en `/dev` como en sus subrutas;
+- regresiones específicas de sesión web, compatibilidad Bearer, privacidad,
+  cookie y shell Developer.
+
+R5 no añade todavía páginas Developer independientes para diagnóstico, eventos,
+archivos, mantenimiento o privacidad. Tampoco expone descarga HTTP del ZIP ni
+operaciones destructivas sobre logs. Esas capacidades corresponden al rediseño
+posterior DEV.2 R6 y deberán conservar autenticación administrativa, auditoría y
+confirmación reforzada para acciones destructivas.
+
+La credencial administrativa no se persiste en `localStorage`,
+`sessionStorage`, query string ni documentación visible. El JavaScript del
+Portal Developer solo gestiona interacción visual del formulario.
+
+### Validación del candidato R5
+
+La validación local previa a integración quedó en:
+
+```text
+1171 unittest OK
+1211 pytest passed / 5747 subtests passed
+19 JavaScript con sintaxis válida
+pip check OK
+compileall OK
+Markdown Audit OK
+16 familias / 46 identificadores OK
+git diff --check limpio
+```
+
+`VERSION` permanece en `0.1.17.02-beta` durante el desarrollo. G118/E04
+(`0.1.18.04-beta`) continúa reservado y no se considera aceptado hasta integrar
+y revalidar el candidato.
 
 ## Versionado
 
@@ -243,18 +305,19 @@ python -m pytest -q
 
 El Centro de desarrollo utiliza una sesión administrativa temporal posterior a la validación inicial. La sesión usa cookie HttpOnly configurable, expiración por inactividad y controles preparados para despliegue HTTPS interno.
 
-## Estado vigente post-SEC.2
+## Estado vigente post-SEC.2 / DEV.2 R5
 
-El Centro de desarrollo usa `/dev/login` para acceso web y
-`/dev/centro-desarrollo` como superficie protegida. `MRP_ADMIN_ENABLED=1` es un
-kill switch obligatorio y `MRP_ADMIN_SECRET` se define fuera del repositorio;
-no existe contraseña predeterminada. El login crea una sesión temporal en
-memoria con cookie `mrp_admin_session` `HttpOnly`, expiración por inactividad y
-límite absoluto. El logout usa `POST /dev/logout` y las respuestas `/dev/`
-marcan `Cache-Control: no-store`.
+El acceso humano utiliza `/dev` como entrada canónica y una sesión administrativa
+temporal en memoria. `MRP_ADMIN_ENABLED=1` es un kill switch obligatorio y
+`MRP_ADMIN_SECRET` se define fuera del repositorio; no existe contraseña
+predeterminada. La cookie `mrp_admin_session` es `HttpOnly`, queda limitada a
+`Path=/dev`, expira por inactividad y mantiene un límite absoluto de sesión. El
+logout usa `POST /dev/logout`; `/dev` y sus subrutas reciben
+`Cache-Control: no-store`.
 
-Una cookie válida solo sustituye la ausencia de Bearer (`401`) cuando la
-administración está habilitada y el secreto sigue configurado. Nunca sustituye
-un `403` causado por administración deshabilitada o configuración incompleta.
-Para HTTPS interno se activa `MRP_ADMIN_COOKIE_SECURE=1`; multi-instancia exige
-un backend compartido de sesiones antes de considerarse soportado.
+El contrato Bearer se conserva de forma separada para clientes técnicos
+autorizados. Las páginas HTML no fuerzan un rechazo Bearer antes de validar una
+sesión web existente. Una sesión válida nunca anula el kill switch ni la
+obligación de que el secreto administrativo continúe configurado. Para HTTPS
+interno se activa `MRP_ADMIN_COOKIE_SECURE=1`; multi-instancia exige un backend
+compartido de sesiones antes de considerarse soportado.

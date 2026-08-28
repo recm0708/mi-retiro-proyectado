@@ -4,7 +4,7 @@
 **Versión de aplicación revisada:** `0.1.17.02-beta`
 **Versión base histórica:** `0.0.23-beta`
 **Revisión documental:** GOV.1.4 — 2026-08-17
-**Última actualización técnica:** AUD.SEC2 R1 — sesión administrativa y kill switch — 2026-08-25
+**Última actualización técnica:** DEV.2 R5 — Portal Developer y separación de acceso web/Bearer — 2026-08-28
 **Última actualización de mantenimiento:** MANT.1 R5E — estandarización de nombres de carpetas — 2026-08-23
 **Clasificación:** Técnica / Pública
 
@@ -245,6 +245,19 @@ Cuando está activa:
 
 Los endpoints bajo `/api/simulacion/` continúan recibiendo `Cache-Control: no-store`.
 
+### Portal Developer
+
+DEV.2 R5 establece `/dev` como entrada humana canónica. El navegador utiliza
+una sesión administrativa temporal mediante cookie `HttpOnly` limitada a
+`/dev`; el acceso técnico programático conserva el contrato
+`Authorization: Bearer`. Ambos contratos respetan el kill switch
+`MRP_ADMIN_ENABLED`, el secreto externo `MRP_ADMIN_SECRET` y las respuestas
+Developer con `Cache-Control: no-store`.
+
+`/dev/login` se conserva como compatibilidad de entrada y `/dev/centro-desarrollo`
+mantiene compatibilidad técnica Bearer. El shell Developer no hereda la
+navegación previsional pública ni los módulos de gestión de datos de simulación.
+
 ## 7.1. Inventario de rutas FastAPI
 
 El siguiente inventario se deriva de los decoradores vigentes en `app/main.py`. Se conserva explícitamente para auditoría documental iniciada en GOV.1.3 R2 y actualizada por GOV.1.4.
@@ -272,6 +285,7 @@ El siguiente inventario se deriva de los decoradores vigentes en `app/main.py`. 
 | `/api/simulacion/sucgs` |
 | `/api/sistema/fecha-referencia` |
 | `/comparar` |
+| `/dev` |
 | `/dev/login` |
 | `/dev/logout` |
 | `/como-se-calcula` |

@@ -33,7 +33,8 @@ class TestSec2AdminWebSession(unittest.TestCase):
                 respuesta = TestClient(app).get("/dev/login")
 
         self.assertEqual(200, respuesta.status_code)
-        self.assertIn("Acceso administrativo", respuesta.text)
+        self.assertIn("Acceso restringido", respuesta.text)
+        self.assertIn("Iniciar sesión", respuesta.text)
 
     def test_login_valido_crea_cookie_y_redirecciona(self):
         with TemporaryDirectory() as temp:
@@ -81,7 +82,7 @@ class TestSec2AdminWebSession(unittest.TestCase):
                 )
 
         self.assertEqual(303, respuesta.status_code)
-        self.assertEqual("/dev/login", respuesta.headers["location"])
+        self.assertEqual("/dev", respuesta.headers["location"])
 
 
 if __name__ == "__main__":

@@ -113,7 +113,7 @@ class TestSec2PostClosureHardening(unittest.TestCase):
 
         self.assertEqual(405, get_logout.status_code)
         self.assertEqual(303, post_logout.status_code)
-        self.assertEqual("/dev/login", post_logout.headers["location"])
+        self.assertEqual("/dev", post_logout.headers["location"])
 
     def test_paginas_admin_no_se_guardan_en_cache(self):
         with TemporaryDirectory() as temp:
@@ -132,7 +132,7 @@ class TestSec2PostClosureHardening(unittest.TestCase):
     def test_portal_expone_cierre_de_sesion_post(self):
         plantilla = (
             __import__("pathlib").Path(__file__).resolve().parents[1]
-            / "app/templates/dev_development_center.html"
+            / "app/templates/dev_base.html"
         ).read_text(encoding="utf-8")
 
         self.assertIn('method="post"', plantilla)

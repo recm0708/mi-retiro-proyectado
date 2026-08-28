@@ -1,13 +1,61 @@
-<!DOCTYPE html>
-<html lang="es">
-<head><meta charset="utf-8"><title>Acceso administrativo</title></head>
-<body>
-<h1>Acceso administrativo</h1>
-{% if error %}<p>{{ error }}</p>{% endif %}
-<form method="post" action="/dev/login">
-<label for="admin-token">Credencial administrativa</label>
-<input id="admin-token" type="password" name="token" autocomplete="current-password" required>
-<button type="submit">Ingresar</button>
-</form>
-</body>
-</html>
+{% extends "dev_base.html" %}
+
+{% block title %}Acceso · Portal Developer · {{ app_name }}{% endblock %}
+
+{% block content %}
+<section class="dev-login-section" aria-labelledby="dev-login-title">
+  <div class="container">
+    <div class="dev-login-layout">
+      <div class="dev-login-intro">
+        <span class="dev-kicker">Entorno técnico local</span>
+        <h1 id="dev-login-title">Portal Developer</h1>
+        <p class="dev-login-lead">Acceso restringido a diagnóstico, observabilidad,
+          archivos técnicos y mantenimiento del entorno de desarrollo.</p>
+
+        <div class="dev-login-note" role="note">
+          <div class="dev-login-note-icon" aria-hidden="true">⌁</div>
+          <div>
+            <strong>Herramientas internas de desarrollo</strong>
+            <p>Consulta el estado técnico del entorno y accede a las
+              funciones administrativas habilitadas para esta instancia.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="dev-login-card-wrap">
+        <article class="dev-login-card">
+          <div class="dev-login-card-header">
+            <span class="dev-login-lock" aria-hidden="true">◆</span>
+            <div>
+              <p class="dev-login-eyebrow">Acceso restringido</p>
+              <h2 class="h4 mb-1">Iniciar sesión</h2>
+              <p class="mb-0">Introduce la credencial administrativa configurada para este entorno.</p>
+            </div>
+          </div>
+
+          {% if error %}
+          <div class="alert alert-danger dev-login-alert" role="alert">{{ error }}</div>
+          {% endif %}
+
+          <form method="post" action="/dev" class="dev-login-form" autocomplete="off">
+            <div>
+              <label class="form-label" for="admin-token">Credencial administrativa</label>
+              <div class="input-group dev-secret-group">
+                <input id="admin-token" class="form-control" type="password" name="token" autocomplete="off" autocapitalize="none" spellcheck="false" required autofocus aria-describedby="admin-token-help">
+                <button class="btn btn-outline-secondary" type="button" data-dev-password-toggle aria-controls="admin-token" aria-pressed="false">Mostrar</button>
+              </div>
+              <div id="admin-token-help" class="form-text">La credencial se utiliza únicamente para validar el acceso administrativo.</div>
+            </div>
+            <button class="btn btn-primary dev-login-submit" type="submit">Ingresar al Portal Developer</button>
+          </form>
+
+          <div class="dev-login-card-footer">
+            <span class="dev-status-dot" aria-hidden="true"></span>
+            <span>Superficie administrativa habilitada en este entorno.</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
