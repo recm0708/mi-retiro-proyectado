@@ -6,7 +6,7 @@
 **Versión base histórica preservada:** `0.0.23-beta`
 **Base documental:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal histórica:** GOV.1.5 R3 — 2026-08-18
-**Última revisión documental:** mantenimiento post-UX.4.6f R1 — 2026-08-20
+**Última revisión documental:** mantenimiento pre-G118 — 2026-08-28
 **Clasificación:** Técnica / Terceros / Auditoría
 
 Este inventario distingue dependencias directas, snapshot transitivo, recursos externos y servicios de red. GOV.1.7 adopta una licencia propietaria para materiales originales sin relicenciar dependencias upstream.
@@ -21,8 +21,8 @@ Las versiones corresponden al `requirements.txt` vigente. La estructura document
 | Jinja2 | 3.1.6 | Plantillas HTML | BSD-3-Clause | Render local del servidor | Revisar autoescape/plantillas |
 | Pydantic | 2.13.4 | Validación/modelos | MIT | Validación local de estructuras | Revisar cambios de esquema/core |
 | python-multipart | 0.0.32 | Recepción multipart de archivos | Apache-2.0 | Procesa cargas recibidas por FastAPI | Sensible a frontera de upload |
-| pypdf | 6.16.1 | Extracción y lectura controlada de PDF | BSD-3-Clause | Procesa PDF en memoria; sin red propia | Dependencia crítica de parser; mantener regresiones específicas en cada actualización |
-| Uvicorn | 0.52.3 | Servidor ASGI | BSD-3-Clause | Sirve la aplicación; la red depende del modo de ejecución | Revisar configuración de despliegue |
+| pypdf | 6.16.2 | Extracción y lectura controlada de PDF | BSD-3-Clause | Procesa PDF en memoria; sin red propia | Dependencia crítica de parser; mantener regresiones específicas en cada actualización |
+| Uvicorn | 0.52.4 | Servidor ASGI | BSD-3-Clause | Sirve la aplicación; la red depende del modo de ejecución | Revisar configuración de despliegue |
 
 Fuentes upstream de licencia verificadas documentalmente:
 
@@ -122,14 +122,20 @@ Antes de aceptar una actualización:
 6. revisar importadores si cambia `pypdf`/multipart;
 7. actualizar este documento si cambia versión, licencia, función, riesgo o conexión.
 
-La actualización vigente a `pypdf 6.16.1` conserva las regresiones específicas introducidas con `6.15.0` y las ejecuta contra la versión actualmente fijada. El salto `6.15.0` → `6.16.1` incorpora correcciones upstream de seguridad y robustez relacionadas con ciclos e iteraciones limitadas durante el procesamiento PDF. Se verifica:
+### 7.1. Mantenimiento pre-G118
 
-- versión instalada;
-- roundtrip `PdfWriter` → `PdfReader`;
-- rechazo controlado de PDFs digitales sin texto por ambos importadores;
-- límites de páginas de Mi Retiro Seguro y Ficha Digital.
+El mantenimiento pre-G118 actualiza las dos dependencias directas propuestas por Dependabot sin consumir un Global ni modificar `VERSION`:
 
-La actualización `Uvicorn 0.52.1` → `0.52.3` se clasifica como mantenimiento minor/patch del servidor ASGI. Según las notas upstream recibidas por Dependabot, actualiza su ruta de procesamiento HTTP/1.1 y corrige recepciones de solicitudes sin cuerpo; no cambia la configuración de despliegue de Mi Retiro Proyectado.
+- `pypdf 6.16.1` → `6.16.2`: actualización patch con correcciones upstream de robustez y extracción/transformación PDF. Se conservan las regresiones específicas del proyecto para versión instalada, roundtrip `PdfWriter` → `PdfReader`, rechazo controlado de PDF sin texto y límites de páginas de ambos importadores.
+- `Uvicorn 0.52.3` → `0.52.4`: actualización patch que corrige upstream la duplicación del encabezado `Date` en handshakes WebSocket con `websockets-sansio`; no modifica la configuración de despliegue de Mi Retiro Proyectado.
+
+Los guards de inventario obtienen la versión esperada desde `requirements.txt` y exigen que esta documentación y `THIRD_PARTY_NOTICES.md` permanezcan sincronizados con el pin vigente.
+
+### 7.2. Antecedente histórico G062
+
+La actualización a `pypdf 6.16.1` conservó las regresiones específicas introducidas con `6.15.0`. El salto `6.15.0` → `6.16.1` incorporó correcciones upstream de seguridad y robustez relacionadas con ciclos e iteraciones limitadas durante el procesamiento PDF.
+
+La actualización `Uvicorn 0.52.1` → `0.52.3` se integró como mantenimiento minor/patch del servidor ASGI y quedó preservada como evidencia histórica de G062.
 
 ## 8. Licencia del proyecto
 

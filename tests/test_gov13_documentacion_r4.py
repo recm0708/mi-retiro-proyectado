@@ -144,19 +144,29 @@ class TestGov13DocumentacionR4(unittest.TestCase):
     def test_dependencias_directas_version_y_licencia(self):
         req = (ROOT / "requirements.txt").read_text(encoding="utf-8")
         doc = (DOCS / "operations/third-party-dependencies.md").read_text(encoding="utf-8")
+        pins = {}
+        for linea in req.splitlines():
+            limpia = linea.strip()
+            if limpia and not limpia.startswith("#") and "==" in limpia:
+                nombre, version = limpia.split("==", 1)
+                pins[nombre.casefold()] = version
+
         esperadas = {
-            "fastapi": ("0.141.1", "MIT"),
-            "Jinja2": ("3.1.6", "BSD-3-Clause"),
-            "pydantic": ("2.13.4", "MIT"),
-            "python-multipart": ("0.0.32", "Apache-2.0"),
-            "pypdf": ("6.16.1", "BSD-3-Clause"),
-            "uvicorn": ("0.52.3", "BSD-3-Clause"),
+            "fastapi": "MIT",
+            "Jinja2": "BSD-3-Clause",
+            "pydantic": "MIT",
+            "python-multipart": "Apache-2.0",
+            "pypdf": "BSD-3-Clause",
+            "uvicorn": "BSD-3-Clause",
         }
-        for nombre, (version, licencia) in esperadas.items():
+        for nombre, licencia in esperadas.items():
             with self.subTest(nombre=nombre):
-                self.assertRegex(req, rf"(?mi)^{re.escape(nombre)}=={re.escape(version)}$")
-                self.assertIn(version, doc)
-                self.assertIn(licencia, doc)
+                version = pins.get(nombre.casefold())
+                self.assertIsNotNone(version, f"Falta pin directo para {nombre}")
+                self.assertRegex(
+                    doc,
+                    rf"(?mi)^\|\s*{re.escape(nombre)}\s*\|\s*{re.escape(version)}\s*\|.*\|\s*{re.escape(licencia)}\s*\|",
+                )
 
     def test_dependencias_documentan_bootstrap_y_servicio_css(self):
         texto = (DOCS / "operations/third-party-dependencies.md").read_text(encoding="utf-8")
