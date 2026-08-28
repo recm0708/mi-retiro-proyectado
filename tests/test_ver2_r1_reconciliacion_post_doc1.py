@@ -9,9 +9,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 ARCHIVE = ROOT / "docs" / "archive" / "governance"
-AUDITORIA = ARCHIVE / "VER2_R1_AUDITORIA_RECONCILIACION_POST_DOC1.md"
-MATRIZ = ARCHIVE / "VER2_R1_MATRIZ_DECISION_RECONCILIACION_POST_DOC1.md"
-DECISION = ARCHIVE / "VER2_R1_DECISION_OPERATIVA_POST_DOC1.md"
+AUDITORIA = ARCHIVE / "ver2-r1-post-doc1-reconciliation-audit.md"
+MATRIZ = ARCHIVE / "ver2-r1-post-doc1-reconciliation-decision-matrix.md"
+DECISION = ARCHIVE / "ver2-r1-post-doc1-operational-decision.md"
 
 
 def leer(path: Path) -> str:

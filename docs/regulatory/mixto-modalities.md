@@ -72,4 +72,4 @@ Consultar `regulatory-sources.md` y `regulations/mixto.json`.
 
 ## 11. Historia
 
-`docs/archive/regulatory-privacy/MODALIDADES_MIXTO_PRE_GOV1_3_R3.md`
+`docs/archive/regulatory-privacy/mixto-modalities-pre-gov1-3-r3.md`

@@ -12,7 +12,7 @@ DOC = (
     / "docs"
     / "archive"
     / "governance"
-    / "VER2_R4_PROMOCION_G071_E01.md"
+    / "ver2-r4-g071-e01-promotion.md"
 )
 
 
@@ -35,7 +35,7 @@ def test_documento_r4_existe_e_indexado():
     indice = leer(ROOT / "docs" / "README.md")
 
     assert DOC.exists()
-    assert "VER2_R4_PROMOCION_G071_E01.md" in indice
+    assert "ver2-r4-g071-e01-promotion.md" in indice
 
 
 def test_r4_no_crea_tag_dentro_del_pr():

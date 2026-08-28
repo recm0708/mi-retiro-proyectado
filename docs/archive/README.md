@@ -16,6 +16,8 @@ archivo documental agrega contexto de lectura cuando ese valor histórico es
 
 - [`governance/`](governance/) — cierres, auditorías, decisiones y evidencia de
   gobierno/versionado.
+- [`regulatory-privacy/`](regulatory-privacy/) — snapshots históricos de normativa,
+  seguridad y privacidad preservados desde GOV.1.3.
 - [`technical/`](technical/) — auditorías técnicas cerradas y snapshots previos.
 - [`ux/`](ux/) — auditorías y bitácoras UX históricas.
 

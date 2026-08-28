@@ -18,12 +18,12 @@ class TestGov18CierreGobierno(unittest.TestCase):
         version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
         self.assertEqual(version, APP_VERSION)
         self.assertRegex(version, r"^0\.(?:0|[1-9][0-9]*)\.[0-9]{2}\.[0-9]{2}-beta$")
-        cierre = (DOCS / "archive/governance/CIERRE_GOV1.md").read_text(encoding="utf-8")
+        cierre = (DOCS / "archive/governance/gov1-closeout.md").read_text(encoding="utf-8")
         self.assertIn("0.0.24-beta", cierre)
 
     def test_readme_declara_gov1_cerrado_y_evidencia_preserva_historia(self):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
-        cierre = (DOCS / "archive/governance/CIERRE_GOV1.md").read_text(encoding="utf-8")
+        cierre = (DOCS / "archive/governance/gov1-closeout.md").read_text(encoding="utf-8")
 
         self.assertIn("**GOV.1:** cerrado.", readme)
         self.assertIn("**NOR.2 R4:** cerrado", readme)
@@ -60,7 +60,7 @@ class TestGov18CierreGobierno(unittest.TestCase):
         self.assertIn("v0.0.24-beta", texto)
 
     def test_cierre_gov1_declara_evidencia_y_gates_restantes(self):
-        texto = (DOCS / "archive/governance/CIERRE_GOV1.md").read_text(encoding="utf-8")
+        texto = (DOCS / "archive/governance/gov1-closeout.md").read_text(encoding="utf-8")
         for esperado in (
             "**Estado:** Cerrado",
             "530 pruebas",
@@ -78,7 +78,7 @@ class TestGov18CierreGobierno(unittest.TestCase):
                 self.assertIn(esperado, texto)
 
     def test_auditoria_github_declara_tres_checks_y_evidencia(self):
-        texto = (DOCS / "archive/governance/AUDITORIA_GITHUB.md").read_text(encoding="utf-8")
+        texto = (DOCS / "archive/governance/github-audit.md").read_text(encoding="utf-8")
         for esperado in (
             "`Python 3.13`",
             "`Python 3.14`",
@@ -141,8 +141,8 @@ class TestGov18CierreGobierno(unittest.TestCase):
             DOCS / "governance/roadmap.md",
             DOCS / "operations/validation.md",
             DOCS / "README.md",
-            DOCS / "archive/governance/AUDITORIA_GITHUB.md",
-            DOCS / "archive/governance/CIERRE_GOV1.md",
+            DOCS / "archive/governance/github-audit.md",
+            DOCS / "archive/governance/gov1-closeout.md",
             ROOT / "LICENSE",
             ROOT / "THIRD_PARTY_NOTICES.md",
             DOCS / "governance/licensing-and-distribution.md",

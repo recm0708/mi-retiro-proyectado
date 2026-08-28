@@ -10,7 +10,7 @@ DOCS = ROOT / "docs"
 TESTS = ROOT / "tests"
 
 DOCUMENTO_R7 = (
-    DOCS / "archive" / "technical" / "CIERRE_OPERATIVO_POST_AUDITORIA_R7.md"
+    DOCS / "archive" / "technical" / "operational-closeout-post-audit-r7.md"
 )
 INDICE = DOCS / "README.md"
 
@@ -48,7 +48,7 @@ def test_r7_indice_documental_referencia_cierre_operativo():
 
     indice = _leer(INDICE)
 
-    assert "CIERRE_OPERATIVO_POST_AUDITORIA_R7.md" in indice
+    assert "operational-closeout-post-audit-r7.md" in indice
     assert "MANT.1 R7" in indice
 
 
@@ -56,8 +56,8 @@ def test_r7_evidencias_r5h_y_r6_permanecen_disponibles():
     """El cierre operativo depende de que R5H y R6 sigan materializados."""
 
     evidencias = [
-        DOCS / "archive" / "technical" / "AUDITORIA_NOMBRES_RESTANTES_R5H.md",
-        DOCS / "archive" / "technical" / "AUDITORIA_FUNCIONAL_POST_RENOMBRES_R6.md",
+        DOCS / "archive" / "technical" / "remaining-names-audit-r5h.md",
+        DOCS / "archive" / "technical" / "functional-audit-post-renames-r6.md",
         TESTS / "test_mant1_r5h_auditoria_nombres_restantes.py",
         TESTS / "test_mant1_r6_auditoria_funcional_post_renombres.py",
     ]
@@ -72,8 +72,8 @@ def test_r7_indice_conserva_referencias_r5h_r6_y_r7():
     indice = _leer(INDICE)
 
     for token in [
-        "AUDITORIA_NOMBRES_RESTANTES_R5H.md",
-        "AUDITORIA_FUNCIONAL_POST_RENOMBRES_R6.md",
-        "CIERRE_OPERATIVO_POST_AUDITORIA_R7.md",
+        "remaining-names-audit-r5h.md",
+        "functional-audit-post-renames-r6.md",
+        "operational-closeout-post-audit-r7.md",
     ]:
         assert token in indice

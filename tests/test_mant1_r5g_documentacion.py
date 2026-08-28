@@ -11,7 +11,7 @@ DOCS = ROOT / "docs"
 
 class TestMant1R5GDocumentacion(unittest.TestCase):
     def test_auditoria_r5g_existe_y_declara_alcance(self):
-        ruta = DOCS / "archive" / "technical" / "AUDITORIA_DOCUMENTACION_R5G.md"
+        ruta = DOCS / "archive" / "technical" / "documentation-audit-r5g.md"
 
         self.assertTrue(ruta.is_file())
 
@@ -33,7 +33,7 @@ class TestMant1R5GDocumentacion(unittest.TestCase):
                 self.assertIn(esperado, texto)
 
     def test_auditoria_r5g_documenta_excepciones_semanticas(self):
-        texto = (DOCS / "archive" / "technical" / "AUDITORIA_DOCUMENTACION_R5G.md").read_text(encoding="utf-8")
+        texto = (DOCS / "archive" / "technical" / "documentation-audit-r5g.md").read_text(encoding="utf-8")
 
         expresiones = (
             "normativa/privacidad",
@@ -66,17 +66,17 @@ class TestMant1R5GDocumentacion(unittest.TestCase):
 
         documentos = (
             "decisions/adr-179-revision-aware-versioning.md",
-            "AUDITORIA_ESTRUCTURA_ARCHIVOS_R5D.md",
-            "AUDITORIA_CARPETAS_R5E.md",
-            "AUDITORIA_ARCHIVOS_R5F.md",
-            "AUDITORIA_DOCUMENTACION_R5G.md",
+            "file-structure-audit-r5d.md",
+            "folders-audit-r5e.md",
+            "files-audit-r5f.md",
+            "documentation-audit-r5g.md",
             "architecture/development-center.md",
             "standards/file-structure-by-extension.md",
-            "UX46H_R1_AUDITORIA_RESULTADOS.md",
-            "archive/ux/UX_4_6A_REDISENO_VISUAL.md",
-            "archive/ux/UX_4_6B_PASO1_DATOS_PERSONALES.md",
-            "archive/ux/UX_4_6C_PASO2_CUOTAS.md",
-            "archive/ux/UX_4_6D_PASO3_HISTORIAL.md",
+            "ux46h-r1-results-audit.md",
+            "archive/ux/ux46a-visual-redesign.md",
+            "archive/ux/ux46b-step1-personal-data.md",
+            "archive/ux/ux46c-step2-contributions.md",
+            "archive/ux/ux46d-step3-history.md",
         )
 
         for documento in documentos:

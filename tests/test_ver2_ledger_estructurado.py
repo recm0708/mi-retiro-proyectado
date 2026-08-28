@@ -15,7 +15,7 @@ from app.core.version_ledger import (
 
 ROOT = Path(__file__).resolve().parents[1]
 LEDGER_MD = ROOT / "docs" / "governance/pre-1-0-revision-ledger.md"
-MATRIZ = ROOT / "docs" / "archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md"
+MATRIZ = ROOT / "docs" / "archive/governance/ver2-revision-decision-matrix.md"
 
 
 class TestVer2LedgerEstructurado(unittest.TestCase):

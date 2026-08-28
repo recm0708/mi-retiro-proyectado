@@ -6,6 +6,7 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ## [Unreleased]
 
+- Normalización documental pre-G118: migra 59 Markdown históricos de `docs/archive/` a nombres técnicos ASCII/minúsculas/kebab-case, actualiza referencias activas y navegación, sincroniza el estado vivo con G117/E02 ya publicado y mantiene G118/E04 reservado exclusivamente para DEV.2 R5; no cambia `VERSION` ni consume G118.
 - Mantenimiento pre-G118: actualiza coordinadamente `pypdf 6.16.1` → `6.16.2` y `Uvicorn 0.52.3` → `0.52.4`, sincroniza inventarios/regresiones, documenta el entorno/toolchain de desarrollo de referencia y mantiene `VERSION` en G117/E02; no consume G118.
 - DEV.2 R5 (candidato G118/E04): Portal Developer y acceso sobre la base aceptada G117/E02; G118 permanece reservado y no aceptado hasta superar su gate propio.
 
@@ -14,7 +15,7 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 - Release governance: incorpora manifiesto versionado, renderer determinista, validación del árbol etiquetado, firma/contrato, publicación idempotente y política fail-closed 200/404.
 - Gate: revalidación post-merge del desarrollo con 1157 `unittest` y `pytest` 1197 passed / 5731 subtests; gate final de promoción del 2026-08-28 con **1161 `unittest` OK** y **1201 `pytest` passed / 5721 subtests passed**; Markdown 159/159, 18 JavaScript, 16 familias / 46 identificadores, `pip check`, compilación y `git diff --check` limpios; CI #273, gobernanza #112, Markdown #59 y CodeQL #209 en `success`.
 - Ledger: G117 queda aceptado; G118/E04 (`0.1.18.04-beta`) queda reservado para DEV.2 R5.
-- Contrato de publicación: G117/E02 usa el tag firmado `v0.1.17.02-beta` y su GitHub Release prerelease únicamente después de integrar y revalidar la promoción; G116/E05 permanece preservado e inmutable.
+- Publicación: G117/E02 quedó publicado mediante el tag anotado y firmado `v0.1.17.02-beta`, objeto de tag `d2e493d16a2768ea5e6284c577c21b4f84897fae`, y GitHub Release prerelease automatizado por REL.GOV.1 R2 después de integrar y revalidar la promoción; G116/E05 permanece preservado e inmutable.
 
 ## [0.1.16.05-beta]
 - G116/E05: DOC.1 R5 queda aceptado mediante PR #101 / merge `6f4266d` después de completar la normalización documental integral post-G115.

@@ -78,4 +78,4 @@ Consultar `regulatory-sources.md`. Los artículos principales documentados por e
 
 ## 10. Historia
 
-`docs/archive/regulatory-privacy/MODALIDADES_SEBD_PRE_GOV1_3_R3.md`
+`docs/archive/regulatory-privacy/sebd-modalities-pre-gov1-3-r3.md`

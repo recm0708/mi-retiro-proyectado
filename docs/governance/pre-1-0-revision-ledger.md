@@ -32,7 +32,7 @@ Estado vigente de la contabilidad:
 - G111/E01 (`0.1.11.01-beta`) permanece aceptado para DOC.2. G112/E07 (`0.1.12.07-beta`) queda aceptado para NOR.1 R8 después de PR #89 / PR #90; G113/E03 (`0.1.13.03-beta`) queda aceptado para DOC.1 R3 mediante PR #92 / merge `40ae5c0`; G114/E01 (`0.1.14.01-beta`) queda aceptado para PLAN.2 R1 mediante PR #94 / merge `7ded70c`; G115/E04 (`0.1.15.04-beta`) queda aceptado para DOC.1 R4 mediante PR #96 / merge `9f51229` y publicado mediante PR #97 / merge `87fa8e9`; G116/E05 (`0.1.16.05-beta`) queda aceptado para DOC.1 R5 mediante PR #101 / merge `6f4266d`; G117/E02 (`0.1.17.02-beta`) queda aceptado para REL.GOV.1 R2 mediante PR #103 / merge `46c464e`. G118/E04 (`0.1.18.04-beta`) queda reservado para DEV.2 R5.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 
-Este ledger registra los estados aceptados reconstruidos durante VER.2 y su reconciliación posterior. La regla contable histórica y las exclusiones originales se conservan en `docs/archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md` y `docs/archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md`; la ampliación post-G070 se justifica en `docs/audits/governance/post-g070-revision-reconciliation.md`.
+Este ledger registra los estados aceptados reconstruidos durante VER.2 y su reconciliación posterior. La regla contable histórica y las exclusiones originales se conservan en `docs/archive/governance/ver2-revision-decision-matrix.md` y `docs/archive/governance/pre-1-0-versioning-audit.md`; la ampliación post-G070 se justifica en `docs/audits/governance/post-g070-revision-reconciliation.md`.
 
 Los identificadores revision-aware son una reconstrucción de auditoría. **No existieron históricamente y no autorizan mover, recrear ni renombrar los tags `v0.0.1-beta`–`v0.0.26-beta`.**
 
@@ -218,4 +218,4 @@ G118 permanece reservado y **no se considera aceptado** mientras DEV.2 R5 siga s
 
 PERSIST.1 permanece planificado como etapa posterior de la matriz maestra y no tiene un Global preasignado.
 
-Los tags `v0.0.71.01-beta`, `v0.1.09.01-beta`, `v0.1.13.03-beta`, `v0.1.14.01-beta`, `v0.1.15.04-beta` y `v0.1.16.05-beta` permanecen publicados e inmutables conforme a su evidencia. G117/E02 queda aceptado para REL.GOV.1 R2; su publicación formal usa el tag firmado `v0.1.17.02-beta` y el GitHub Release gobernado únicamente después de integrar y revalidar la promoción. G118/E04 permanece reservado para DEV.2 R5.
+Los tags `v0.0.71.01-beta`, `v0.1.09.01-beta`, `v0.1.13.03-beta`, `v0.1.14.01-beta`, `v0.1.15.04-beta`, `v0.1.16.05-beta` y `v0.1.17.02-beta` permanecen publicados e inmutables conforme a su evidencia. G117/E02 queda aceptado/publicado para REL.GOV.1 R2 mediante el tag firmado `v0.1.17.02-beta` y el GitHub Release gobernado; G118/E04 permanece reservado para DEV.2 R5.

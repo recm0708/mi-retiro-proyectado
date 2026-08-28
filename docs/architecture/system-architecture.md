@@ -38,7 +38,7 @@ y plantilla de la guía pública, MANT.1 R5C documenta JavaScript complejo sin
 alterar lógica, storage, selectores ni contratos de datos, MANT.1 R5D formaliza política/plantillas por extensión con uniformidad de encabezados JS/CSS y MANT.1 R5E estandariza nombres de carpetas técnicas en inglés sin cambiar contratos funcionales. Este mantenimiento no
 introduce nuevas capas de producto.
 
-[Índice](../README.md) · [Modelo de datos](data-model.md) · [Motor](calculation-engine.md) · [Normativa](../regulatory/regulatory-framework.md) · [Observabilidad](../operations/observability-and-logs.md) · [Política de estructura](../standards/file-structure-by-extension.md) · [Auditoría de carpetas](../archive/technical/AUDITORIA_CARPETAS_R5E.md)
+[Índice](../README.md) · [Modelo de datos](data-model.md) · [Motor](calculation-engine.md) · [Normativa](../regulatory/regulatory-framework.md) · [Observabilidad](../operations/observability-and-logs.md) · [Política de estructura](../standards/file-structure-by-extension.md) · [Auditoría de carpetas](../archive/technical/folders-audit-r5e.md)
 
 ## 1. Principios
 
@@ -338,7 +338,7 @@ Developer Diagnostics no debe utilizarse como sustituto de persistencia de simul
 
 La versión acumulativa anterior a GOV.1.3 R2 se conserva en:
 
-`docs/archive/technical/ARQUITECTURA_PRE_GOV1_3_R2.md`
+`docs/archive/technical/architecture-pre-gov1-3-r2.md`
 
 Este documento describe el estado técnico vigente después de GOV.1.4.
 

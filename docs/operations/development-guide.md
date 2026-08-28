@@ -147,7 +147,7 @@ El esquema de logs puede evolucionar independientemente mediante `schema_version
 
 Los documentos vigentes describen estado actual. No añadir un diario de revisiones si la información puede integrarse en la sección correspondiente.
 
-Historia: `CHANGELOG.md`, `RELEASES.md`, `docs/archive/governance/REGISTRO_CAMBIOS_HISTORICO.md`, `docs/archive/` y Git.
+Historia: `CHANGELOG.md`, `RELEASES.md`, `docs/archive/governance/historical-change-registry.md`, `docs/archive/` y Git.
 
 ## 16. Validación antes de cierre
 
@@ -227,7 +227,7 @@ Dependabot no implica auto-merge.
 
 La guía acumulativa anterior se conserva en:
 
-`docs/archive/technical/GUIA_INTERNA_DESARROLLO_PRE_GOV1_3_R2.md`
+`docs/archive/technical/development-guide-pre-gov1-3-r2.md`
 
 
 ### Regla R1.1 para datos documentales

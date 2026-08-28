@@ -9,7 +9,7 @@ El cierre de MANT.1 R7 no cambia la política de seguridad ni convierte candidat
 Estado vigente:
 
 - La versión canónica vigente es `0.1.17.02-beta` (G117/E02).
-- La publicación G116/E05 (`v0.1.16.05-beta`) permanece publicada, firmada e inmutable. La publicación formal de G117/E02 se rige por el tag firmado `v0.1.17.02-beta` y el GitHub Release automatizado de REL.GOV.1 R2.
+- G117/E02 está publicado mediante el tag firmado `v0.1.17.02-beta` y el GitHub Release prerelease automatizado por REL.GOV.1 R2. G116/E05 (`v0.1.16.05-beta`) permanece publicado, firmado e inmutable como estado previo.
 - `v0.0.71.01-beta` conserva su evidencia histórica reconciliada como G087/E01 y `v0.0.26-beta` permanece como tag legacy.
 - REL.GOV.1 R2 queda aceptado como G117/E02 y mantiene la creación/firma del tag fuera de GitHub Actions.
 - G118/E04 se reserva para DEV.2 R5. DEV.2 R6 y UX.5 continúan posteriormente; SEC.2 R7 revalidará las nuevas superficies antes del cierre beta.
@@ -39,7 +39,7 @@ La base histórica anterior a VER.2 se reconstruye en G001–G070 sin crear tags
 
 La primera versión oficial objetivo es `1.0.0.0` y solo podrá considerarse soportada cuando se materialice formalmente después de los gates definidos por el plan maestro.
 
-La numeración revision-aware no mueve ni recrea tags legacy. Consultar `VERSIONING.md`, `docs/archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md`, `docs/archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md` y `docs/governance/pre-1-0-revision-ledger.md`.
+La numeración revision-aware no mueve ni recrea tags legacy. Consultar `VERSIONING.md`, `docs/archive/governance/pre-1-0-versioning-audit.md`, `docs/archive/governance/ver2-revision-decision-matrix.md` y `docs/governance/pre-1-0-revision-ledger.md`.
 
 ## Reportar una vulnerabilidad
 
@@ -90,9 +90,9 @@ Esta función está habilitada y complementa el canal privado alternativo indica
 - `docs/security/threat-model.md`
 - `docs/security/security-incident-procedure.md`
 - `docs/security/security-and-privacy.md`
-- `docs/archive/governance/AUDITORIA_GITHUB.md`
-- `docs/archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md`
-- `docs/archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md`
+- `docs/archive/governance/github-audit.md`
+- `docs/archive/governance/pre-1-0-versioning-audit.md`
+- `docs/archive/governance/ver2-revision-decision-matrix.md`
 - `docs/governance/pre-1-0-revision-ledger.md`
 - `data/pre-1-0-revision-ledger.json`
 

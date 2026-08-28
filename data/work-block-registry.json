@@ -101,7 +101,7 @@
       "kind": "block",
       "status": "closed",
       "meaning": "Reconstrucción histórica.",
-      "evidence": "docs/archive/governance/REGISTRO_CAMBIOS_HISTORICO.md",
+      "evidence": "docs/archive/governance/historical-change-registry.md",
       "global_refs": [
         "G001-G021"
       ],
@@ -113,7 +113,7 @@
       "kind": "block",
       "status": "closed",
       "meaning": "Gobierno y versionado formal.",
-      "evidence": "docs/archive/governance/REGISTRO_CAMBIOS_HISTORICO.md",
+      "evidence": "docs/archive/governance/historical-change-registry.md",
       "global_refs": [
         "G022"
       ],
@@ -125,7 +125,7 @@
       "kind": "block",
       "status": "closed",
       "meaning": "Reorganización y auditoría documental.",
-      "evidence": "docs/archive/governance/REGISTRO_CAMBIOS_HISTORICO.md",
+      "evidence": "docs/archive/governance/historical-change-registry.md",
       "global_refs": [
         "G023-G026"
       ],
@@ -137,7 +137,7 @@
       "kind": "block",
       "status": "closed",
       "meaning": "Observabilidad y Developer Diagnostics.",
-      "evidence": "docs/archive/governance/REGISTRO_CAMBIOS_HISTORICO.md",
+      "evidence": "docs/archive/governance/historical-change-registry.md",
       "global_refs": [
         "G032"
       ],
@@ -149,7 +149,7 @@
       "kind": "block",
       "status": "closed",
       "meaning": "Seguridad, privacidad y transparencia.",
-      "evidence": "docs/archive/governance/REGISTRO_CAMBIOS_HISTORICO.md",
+      "evidence": "docs/archive/governance/historical-change-registry.md",
       "global_refs": [
         "G033-G035"
       ],
@@ -161,7 +161,7 @@
       "kind": "block",
       "status": "closed",
       "meaning": "Controles GitHub.",
-      "evidence": "docs/archive/governance/REGISTRO_CAMBIOS_HISTORICO.md",
+      "evidence": "docs/archive/governance/historical-change-registry.md",
       "global_refs": [
         "G036"
       ],
@@ -173,7 +173,7 @@
       "kind": "block",
       "status": "closed",
       "meaning": "Licencia y distribución.",
-      "evidence": "docs/archive/governance/REGISTRO_CAMBIOS_HISTORICO.md",
+      "evidence": "docs/archive/governance/historical-change-registry.md",
       "global_refs": [
         "G037-G038"
       ],
@@ -185,7 +185,7 @@
       "kind": "block",
       "status": "closed",
       "meaning": "Auditoría final y cierre GOV.1.",
-      "evidence": "docs/archive/governance/REGISTRO_CAMBIOS_HISTORICO.md",
+      "evidence": "docs/archive/governance/historical-change-registry.md",
       "global_refs": [
         "G039"
       ],

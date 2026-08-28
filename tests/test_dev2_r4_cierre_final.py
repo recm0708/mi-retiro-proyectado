@@ -19,7 +19,12 @@ class TestDev2R4CierreFinal(unittest.TestCase):
     def test_dev2_queda_cerrado_y_version_actual_sigue_canonica(self):
         documento = self._leer("docs/architecture/development-center.md")
 
-        self.assertIn("**Estado general:** DEV.2 cerrado documentalmente en R4.", documento)
+        self.assertIn(
+            "**Estado general:** DEV.2 R1–R4 cerrados documentalmente; "
+            "R5 es el siguiente checkpoint candidato G118/E04.",
+            documento,
+        )
+        self.assertIn("DEV.2 R4 cierra documentalmente el bloque funcional", documento)
         self.assertIn("**Estado R1:** integrado en `main` mediante PR #37.", documento)
         self.assertIn("**Estado R2:** integrado en `main` mediante PR #39.", documento)
         self.assertIn("**Estado R3:** integrado en `main` mediante PR #40.", documento)
@@ -71,7 +76,8 @@ class TestDev2R4CierreFinal(unittest.TestCase):
         self.assertIn("**Estado:** SEC.2 cerrado", sec2)
         self.assertIn("**Alcance completado:** SEC.2 R1–R6", sec2)
         self.assertIn("SEC.2 permanece **cerrado en R1–R6**", sec2)
-        self.assertIn("DEV.2 cerrado documentalmente en R4", documento)
+        self.assertIn("DEV.2 R4 cierra documentalmente el bloque funcional", documento)
+        self.assertIn("R5 reabre el bloque como siguiente checkpoint candidato G118/E04", documento)
         self.assertIn("### DEV.2 — cierre del Centro de desarrollo", changelog)
         self.assertIn("cierra documentalmente DEV.2", changelog)
         self.assertIn("deja VER.2 como siguiente cierre transversal", changelog)

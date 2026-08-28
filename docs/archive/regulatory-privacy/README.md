@@ -17,4 +17,4 @@ No son el contrato vigente.
 
 Los blobs originales también permanecen disponibles en el historial Git.
 
-Volver a `docs/INDICE.md`.
+Volver al [índice vigente de documentación](../../README.md).

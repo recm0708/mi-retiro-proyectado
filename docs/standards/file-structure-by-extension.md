@@ -98,7 +98,7 @@ Se mantienen como principios:
    ruta anterior.
 
 La auditoría histórica aplicada queda documentada en
-[Auditoría de nombres de carpetas — MANT.1 R5E](../archive/technical/AUDITORIA_CARPETAS_R5E.md).
+[Auditoría de nombres de carpetas — MANT.1 R5E](../archive/technical/folders-audit-r5e.md).
 
 ## 6. Regla para archivos futuros
 

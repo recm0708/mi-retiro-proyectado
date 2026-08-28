@@ -19,13 +19,13 @@ R2_DOCS = [
 ]
 
 R2_SNAPSHOTS = {
-    "architecture/system-architecture.md": "ARQUITECTURA_PRE_GOV1_3_R2.md",
-    "architecture/data-model.md": "MODELO_DE_DATOS_PRE_GOV1_3_R2.md",
-    "product/simulation-data-management.md": "GESTION_DATOS_SIMULACION_PRE_GOV1_3_R2.md",
-    "architecture/calculation-engine.md": "MOTOR_DE_CALCULO_PRE_GOV1_3_R2.md",
-    "product/functional-specification.md": "ESPECIFICACION_FUNCIONAL_PRE_GOV1_3_R2.md",
-    "operations/development-guide.md": "GUIA_INTERNA_DESARROLLO_PRE_GOV1_3_R2.md",
-    "operations/validation.md": "VALIDACION_PRE_GOV1_3_R2.md",
+    "architecture/system-architecture.md": "architecture-pre-gov1-3-r2.md",
+    "architecture/data-model.md": "data-model-pre-gov1-3-r2.md",
+    "product/simulation-data-management.md": "simulation-data-management-pre-gov1-3-r2.md",
+    "architecture/calculation-engine.md": "calculation-engine-pre-gov1-3-r2.md",
+    "product/functional-specification.md": "functional-specification-pre-gov1-3-r2.md",
+    "operations/development-guide.md": "development-guide-pre-gov1-3-r2.md",
+    "operations/validation.md": "validation-pre-gov1-3-r2.md",
 }
 
 
@@ -127,7 +127,7 @@ class TestGov13DocumentacionR2(unittest.TestCase):
             DOCS
             / "archive"
             / "technical"
-            / "ESPECIFICACION_FUNCIONAL_PRE_GOV1_3_R2.md"
+            / "functional-specification-pre-gov1-3-r2.md"
         ).read_text(encoding="utf-8")
 
         ids_actuales = re.findall(r"\*\*RF-(\d{3})\.\*\*", texto)

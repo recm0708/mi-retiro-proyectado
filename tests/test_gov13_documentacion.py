@@ -24,7 +24,7 @@ class TestGov13Documentacion(unittest.TestCase):
             "VERSIONING.md",
             "docs/README.md",
             "docs/governance/roadmap.md",
-            "docs/archive/governance/REGISTRO_CAMBIOS_HISTORICO.md",
+            "docs/archive/governance/historical-change-registry.md",
             "docs/archive/README.md",
         ]
         for relativo in requeridos:
@@ -33,10 +33,10 @@ class TestGov13Documentacion(unittest.TestCase):
 
     def test_bitacoras_ux_preservan_snapshot_sin_stub_de_compatibilidad(self):
         casos = {
-            "product/user-interface.md": "UX_4_6A_REDISENO_VISUAL.md",
-            "product/workflow-step-1-personal-data.md": "UX_4_6B_PASO1_DATOS_PERSONALES.md",
-            "product/workflow-step-2-contributions.md": "UX_4_6C_PASO2_CUOTAS.md",
-            "product/workflow-step-3-salary-history.md": "UX_4_6D_PASO3_HISTORIAL.md",
+            "product/user-interface.md": "ux46a-visual-redesign.md",
+            "product/workflow-step-1-personal-data.md": "ux46b-step1-personal-data.md",
+            "product/workflow-step-2-contributions.md": "ux46c-step2-contributions.md",
+            "product/workflow-step-3-salary-history.md": "ux46d-step3-history.md",
         }
         for stub, historico_nombre in casos.items():
             with self.subTest(stub=stub):
@@ -78,7 +78,7 @@ class TestGov13Documentacion(unittest.TestCase):
             ROOT / "CONTRIBUTING.md",
             ROOT / "docs" / "README.md",
             ROOT / "docs" / "governance/roadmap.md",
-            ROOT / "docs" / "REGISTRO_CAMBIOS_HISTORICO.md",
+            ROOT / "docs" / "historical-change-registry.md",
             ROOT / "docs" / "archive" / "README.md",
         ]
         errores = []

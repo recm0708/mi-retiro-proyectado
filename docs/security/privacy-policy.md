@@ -25,7 +25,7 @@ Estado vigente:
 - VER.2 está cerrado y `v0.0.71.01-beta` fue publicado.
 - NOR.1 está cerrado en R8 como G112/E07; NOR.2 permanece cerrado.
 - DOC.1 R2 está cerrado tras auditar la documentación Markdown posterior a NOR.2 sin modificar por sí solo el tratamiento material de datos.
-- `VERSION` está sincronizado en `0.1.14.01-beta` (G114/E01); PLAN.2 R1 queda cerrado y G115/E04 reservado para DOC.1 R4; PERSIST.1 permanece planificado posteriormente.
+- `VERSION` está sincronizado en `0.1.17.02-beta` (G117/E02), REL.GOV.1 R2 está aceptado/publicado y G118/E04 (`0.1.18.04-beta`) queda reservado para DEV.2 R5; PERSIST.1 permanece planificado posteriormente.
 - SEC.2 quedó cerrado después de R1–R6. La sesión administrativa usa una cookie técnica de seguridad y no modifica la finalidad material de la simulación.
 - La aplicación sigue siendo independiente y no oficial.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
@@ -238,6 +238,6 @@ Antes de la primera versión oficial, o antes de un despliegue remoto con tratam
 
 La evolución R6–R21 se conserva en:
 
-`docs/archive/regulatory-privacy/POLITICA_PRIVACIDAD_PRE_GOV1_3_R3.md`
+`docs/archive/regulatory-privacy/privacy-policy-pre-gov1-3-r3.md`
 
 La reorganización R3 no cambia por sí sola la versión material `2026-08-16.1`.

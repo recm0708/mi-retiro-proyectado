@@ -275,7 +275,7 @@ GOV.1.8 añadió **10 regresiones específicas de cierre**. La suite integrada a
 
 A partir de GOV.1.8, las regresiones históricas de GOV.1.3, GOV.1.5 y GOV.1.7 **no obligan a reescribir sus documentos cada vez que cambia `VERSION`**. Conservan `0.0.23-beta` como versión base de la revisión que originó esos contratos; la coherencia de la versión canónica actual se valida en GOV.1.2/GOV.1.8.
 
-La auditoría post-GOV.1 del 2026-08-18 confirmó 24/24 tags con firma SSH válida, integridad Git sin corrupción, archivos textuales vigentes sin BOM/CRLF/caracteres de control/whitespace final, JSON/YAML válidos y enlaces Markdown internos vigentes sin roturas detectadas. El detalle se conserva en `AUDITORIA_REPOSITORIO_2026-08-18.md`.
+La auditoría post-GOV.1 del 2026-08-18 confirmó 24/24 tags con firma SSH válida, integridad Git sin corrupción, archivos textuales vigentes sin BOM/CRLF/caracteres de control/whitespace final, JSON/YAML válidos y enlaces Markdown internos vigentes sin roturas detectadas. El detalle se conserva en `repository-audit-2026-08-18.md`.
 
 UX.4.6e R3 añadió **8 regresiones** de namespace Web Storage y estándar documental, llevando la suite a **558 pruebas en `OK`**. R4 añade **8 regresiones** de documentación permanente del runtime: cobertura de docstrings en `app/`, módulos de pruebas documentados y ausencia de identificadores cronológicos `UX.*`/`GOV.*` en Python, Jinja/HTML y CSS vigentes.
 
@@ -1288,9 +1288,10 @@ El desarrollo integrado mediante PR #103 / `main`
 - CI #273, gobernanza #112, Markdown #59 y CodeQL #209: `success`;
 - working tree limpio.
 
-La rama de promoción materializa ahora G117/E02 (`0.1.17.02-beta`) y reserva
-G118/E04 (`0.1.18.04-beta`) para DEV.2 R5. La publicación formal se materializa
-únicamente después de integrar y revalidar esta promoción.
+La promoción materializó G117/E02 (`0.1.17.02-beta`) y reservó G118/E04
+(`0.1.18.04-beta`) para DEV.2 R5. Después de integrar y revalidar la promoción,
+`v0.1.17.02-beta` quedó publicado mediante tag firmado y GitHub Release
+prerelease automatizado por REL.GOV.1 R2.
 
 ### Gate final de promoción — 2026-08-28
 
@@ -1300,3 +1301,42 @@ G118/E04 (`0.1.18.04-beta`) para DEV.2 R5. La publicación formal se materializa
 
 Los conteos anteriores de 1157/1197 corresponden a la revalidación post-merge
 del desarrollo de REL.GOV.1 R2 y se preservan como evidencia histórica.
+
+## Normalización documental pre-G118 — 2026-08-28
+
+Antes de iniciar DEV.2 R5 / G118/E04 se ejecutó una normalización documental
+transversal sobre el estado aceptado y publicado G117/E02
+(`0.1.17.02-beta`).
+
+Alcance del cambio:
+
+- 59 Markdown históricos de `docs/archive/` renombrados a nomenclatura técnica
+  ASCII/minúsculas/kebab-case, sin alterar su contenido histórico;
+- 64 Markdown permanecen clasificados como históricos;
+- 0 nombres Markdown fuera de la política canónica en `docs/archive/`;
+- 59 nombres antiguos auditados y 0 referencias activas inesperadas;
+- referencias vivas, índices, registros y regresiones sincronizados con las
+  nuevas rutas;
+- estado documental vivo reconciliado con G117/E02 ya aceptado y publicado;
+- G118/E04 permanece reservado exclusivamente para DEV.2 R5;
+- `VERSION`, `data/pre-1-0-revision-ledger.json` y
+  `data/release-publication-manifest.json` permanecen sin cambios.
+
+Gate final:
+
+- `python -m pip check`: OK;
+- `python -m compileall -q app scripts tests`: OK;
+- JavaScript: 18 archivos auditados, 0 fallos;
+- Markdown: 159/159 OK;
+- identificadores: 16 familias / 46 identificadores OK;
+- manifiesto de publicación G117/E02: OK;
+- contrato de release: `accepted_count=117`, `next_global=118`,
+  `next_candidate=0.1.18.04-beta`, `next_candidate_block=DEV.2`;
+- regresiones modificadas por la migración: 233 tests OK antes del gate integral;
+- `unittest`: 1161 tests OK;
+- `pytest`: 1201 passed / 5741 subtests passed;
+- `git diff --check`: OK.
+
+Esta normalización es mantenimiento documental sobre G117/E02 y no constituye
+una nueva revisión revision-aware, no crea tag, no crea Release y no consume
+G118.

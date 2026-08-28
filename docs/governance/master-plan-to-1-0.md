@@ -150,9 +150,9 @@ G071 solo se considera aceptado después de gate completo, PR/CI e integración.
 Fuentes canónicas:
 
 - `VERSIONING.md`;
-- `docs/archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md`;
+- `docs/archive/governance/pre-1-0-versioning-audit.md`;
 - `docs/governance/pre-1-0-revision-ledger.md`;
-- `docs/archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md`;
+- `docs/archive/governance/ver2-revision-decision-matrix.md`;
 - `data/pre-1-0-revision-ledger.json`;
 - ADR de gobierno correspondiente.
 
@@ -290,17 +290,17 @@ Objetivo previo a DOC.2:
 - extender el workflow de tags para ejecutar el contrato en todo tag futuro;
 - fijar reglas de edición posterior que preserven firma, commit objetivo y evidencia histórica.
 
-REL.GOV.1 superó gate, PR/CI e integración y consumió G110; la promoción PR #86 publicó `v0.1.10.01-beta`. DOC.2 R1 superó gate, PR #87, CI, integración y revalidación post-merge, por lo que G111/E01 (`0.1.11.01-beta`) quedó aceptado; G112/E07 (`0.1.12.07-beta`) quedó aceptado para NOR.1 R8 y G113/E03 (`0.1.13.03-beta`) para DOC.1 R3. En aquel plan, G114/E01 se proyectaba para PERSIST.1; PLAN.2 R1 reasignó posteriormente esa reserva y quedó aceptado/publicado como G114/E01. El estado vigente reserva G115/E04 para DOC.1 R4 y mantiene PERSIST.1 como etapa posterior.
+REL.GOV.1 superó gate, PR/CI e integración y consumió G110; la promoción PR #86 publicó `v0.1.10.01-beta`. DOC.2 R1 superó gate, PR #87, CI, integración y revalidación post-merge, por lo que G111/E01 (`0.1.11.01-beta`) quedó aceptado; G112/E07 (`0.1.12.07-beta`) quedó aceptado para NOR.1 R8 y G113/E03 (`0.1.13.03-beta`) para DOC.1 R3. En aquel plan, G114/E01 se proyectaba para PERSIST.1; PLAN.2 R1 reasignó posteriormente esa reserva y quedó aceptado/publicado como G114/E01. Después quedaron aceptados/publicados DOC.1 R4 como G115/E04, DOC.1 R5 como G116/E05 y REL.GOV.1 R2 como G117/E02; G118/E04 queda reservado para DEV.2 R5 y PERSIST.1 se mantiene como etapa posterior.
 
 ### 8. DOC.2 — CHANGELOG detallado `0.0.1-beta`–`0.0.21-beta`
 
-**Estado:** cerrado en R1 como G111/E01 (`0.1.11.01-beta`) mediante PR #87; NOR.1 R8 quedó aceptado posteriormente como G112/E07, DOC.1 R3 como G113/E03 y PLAN.2 R1 como G114/E01. DOC.1 R4 es el candidato vigente antes de los frentes posteriores de la matriz maestra.
+**Estado:** cerrado en R1 como G111/E01 (`0.1.11.01-beta`) mediante PR #87; posteriormente quedaron aceptados NOR.1 R8 como G112/E07, DOC.1 R3 como G113/E03, PLAN.2 R1 como G114/E01, DOC.1 R4 como G115/E04, DOC.1 R5 como G116/E05 y REL.GOV.1 R2 como G117/E02. El candidato vigente es DEV.2 R5 como G118/E04.
 
 Reconstrucción basada exclusivamente en evidencia:
 
 - rangos Git de `RELEASES.md`;
 - commits reales;
-- `docs/archive/governance/REGISTRO_CAMBIOS_HISTORICO.md`;
+- `docs/archive/governance/historical-change-registry.md`;
 - documentación histórica;
 - ADR;
 - pruebas disponibles.
@@ -311,17 +311,17 @@ No se inventará detalle retrospectivo no sustentado.
 
 **Estado:** cerrado/aceptado como G112/E07 (`0.1.12.07-beta`) después de PR #89 y PR #90.
 
-Amplía NOR.1 sin añadir un bloque funcional al programa de 14 bloques. Define familias, namespaces, revisiones, reservas y un registro machine-readable. DOC.1 R3 se ejecutó posteriormente como auditoría Markdown transversal; PLAN.2 R1 quedó aceptado después, DOC.1 R4 quedó aceptado/publicado como G115/E04 y DOC.1 R5 quedó aceptado como G116/E05 mediante PR #101 / merge `6f4266d`. REL.GOV.1 R2 queda como candidato G117/E02.
+Amplía NOR.1 sin añadir un bloque funcional al programa de 14 bloques. Define familias, namespaces, revisiones, reservas y un registro machine-readable. DOC.1 R3 se ejecutó posteriormente como auditoría Markdown transversal; PLAN.2 R1 quedó aceptado después, DOC.1 R4 quedó aceptado/publicado como G115/E04, DOC.1 R5 como G116/E05 y REL.GOV.1 R2 como G117/E02. DEV.2 R5 queda como candidato G118/E04.
 
 #### Checkpoint transversal DOC.1 R3 — etiquetas visibles de enlaces Markdown
 
-**Estado:** cerrado/aceptado como G113/E03 (`0.1.13.03-beta`) mediante PR #92 / merge `40ae5c0`, posterior a G112/E07; PLAN.2 R1 quedó aceptado después como G114/E01, DOC.1 R4 como G115/E04 y DOC.1 R5 como G116/E05 mediante PR #101 / merge `6f4266d`. REL.GOV.1 R2 queda como candidato vigente G117/E02.
+**Estado:** cerrado/aceptado como G113/E03 (`0.1.13.03-beta`) mediante PR #92 / merge `40ae5c0`, posterior a G112/E07; después quedaron aceptados PLAN.2 R1 como G114/E01, DOC.1 R4 como G115/E04, DOC.1 R5 como G116/E05 y REL.GOV.1 R2 como G117/E02. DEV.2 R5 queda como candidato vigente G118/E04.
 
 Audita documentación viva para sustituir etiquetas visibles basadas únicamente en rutas/URLs por nombres humanos legibles cuando el path no sea semánticamente necesario; preserva `docs/archive/` y añade regresión de enlaces.
 
 ### 9. PERSIST.1 — Persistencia voluntaria y segura
 
-**Estado:** etapa funcional posterior de la matriz maestra; sin Global preasignado mientras REL.GOV.1 R2 y los frentes Developer/UX anteriores permanezcan pendientes.
+**Estado:** etapa funcional posterior de la matriz maestra y sin Global preasignado; G118/E04 está reservado exclusivamente para DEV.2 R5, seguido de DEV.2 R6 y UX.5 antes de PERSIST.1 conforme a la matriz viva.
 
 - guardado solo por decisión del asegurado;
 - modelo de datos versionado;

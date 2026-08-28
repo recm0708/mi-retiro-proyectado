@@ -55,4 +55,4 @@ Artículos principales documentados: 152, 153, 194, 195, 196, 197 y 198.
 
 ## 8. Historia
 
-`docs/archive/regulatory-privacy/MODALIDADES_SUCGS_PRE_GOV1_3_R3.md`
+`docs/archive/regulatory-privacy/sucgs-modalities-pre-gov1-3-r3.md`

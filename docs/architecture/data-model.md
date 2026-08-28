@@ -274,7 +274,7 @@ La procedencia no altera por sí sola una fórmula previsional.
 
 La versión acumulativa anterior se conserva en:
 
-`docs/archive/technical/MODELO_DE_DATOS_PRE_GOV1_3_R2.md`
+`docs/archive/technical/data-model-pre-gov1-3-r2.md`
 
 
 ### UX.4.6f R1.1 — decisión explícita de disponibilidad del historial

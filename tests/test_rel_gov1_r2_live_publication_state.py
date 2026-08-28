@@ -45,13 +45,19 @@ class TestRelGovR2LivePublicationState(unittest.TestCase):
                     self.assertNotIn("se publicará únicamente", lowered)
                     self.assertIsNone(re.search(r"\breservado\b", lowered))
 
-    def test_readme_declara_publicacion_g116_real(self):
+    def test_readme_declara_publicacion_g117_real_y_preserva_g116(self):
         text = (ROOT / "README.md").read_text(encoding="utf-8")
-        self.assertIn("v0.1.16.05-beta", text)
+        self.assertIn("v0.1.17.02-beta", text)
         self.assertIn(
-            "dfb7dc60cf81951c701c126d6fecbcfdbca7aa7b",
+            "3ab9fefbdfc969c546feb83182e3c0e6879ba771",
             text,
         )
+        self.assertIn(
+            "d2e493d16a2768ea5e6284c577c21b4f84897fae",
+            text,
+        )
+        self.assertIn("v0.1.16.05-beta", text)
+        self.assertIn("publicación previa preservada e inmutable", text)
 
     def test_security_declara_g116_publicada(self):
         text = (ROOT / "SECURITY.md").read_text(encoding="utf-8")

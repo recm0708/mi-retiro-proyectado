@@ -10,7 +10,7 @@ DOCS = ROOT / "docs"
 R4_DOCS = [
     "product/transparency.md",
     "product/traceability-matrix.md",
-    "archive/technical/AUDITORIA_CALCULOS.md",
+    "archive/technical/calculation-audit.md",
     "product/known-limitations.md",
     "operations/third-party-dependencies.md",
     "operations/release-process.md",
@@ -72,7 +72,7 @@ class TestGov13DocumentacionR4(unittest.TestCase):
                 DOCS
                 / "archive"
                 / "governance"
-                / "DECISIONES_PRE_GOV1_3_R4.md"
+                / "decisions-pre-gov1-3-r4.md"
             ).is_file()
         )
 
@@ -117,14 +117,14 @@ class TestGov13DocumentacionR4(unittest.TestCase):
                 self.assertTrue((ROOT / rel).is_file())
 
     def test_auditoria_no_duplica_motor(self):
-        texto = (DOCS / "archive/technical/AUDITORIA_CALCULOS.md").read_text(encoding="utf-8")
+        texto = (DOCS / "archive/technical/calculation-audit.md").read_text(encoding="utf-8")
         self.assertIn("No recalcula fórmulas", texto)
         self.assertIn("version_metodologia", texto)
         self.assertIn("SHA del commit", texto)
         self.assertIn("regulations/*.json", texto)
 
     def test_auditoria_declara_limite_objeto_trazabilidad(self):
-        texto = (DOCS / "archive/technical/AUDITORIA_CALCULOS.md").read_text(encoding="utf-8")
+        texto = (DOCS / "archive/technical/calculation-audit.md").read_text(encoding="utf-8")
         self.assertIn("no incorpora por sí mismo", texto)
         self.assertIn("hash criptográfico", texto)
         self.assertIn("GOV.1.4", texto)

@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 class TestVer2R5EstabilizacionPostRelease(unittest.TestCase):
     def test_documento_r5_existe(self):
-        doc = ROOT / "docs" / "archive/governance/VER2_R5_ESTABILIZACION_POST_RELEASE.md"
+        doc = ROOT / "docs" / "archive/governance/ver2-r5-post-release-stabilization.md"
         self.assertTrue(doc.exists())
         texto = doc.read_text(encoding="utf-8")
         self.assertIn("0.0.71.01-beta", texto)
