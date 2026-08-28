@@ -14,12 +14,12 @@ La fuente canónica de versión continúa siendo `VERSION`.
 
 Estado vigente:
 
-- `VERSION` contiene `0.1.16.05-beta` y materializa G116/E05 (DOC.1 R5), aceptado mediante PR #101 / merge `6f4266d`. G115/E04 permanece preservado como DOC.1 R4.
-- `v0.1.16.05-beta` permanece publicado, firmado y verificado como G116/E05; `v0.1.15.04-beta` y las publicaciones anteriores se preservan inmutables; `v0.0.26-beta` continúa como último tag de la familia legacy.
-- La reconciliación post-G070 reconstruye G071–G108 y conserva `v0.0.71.01-beta` como evidencia histórica de G087/E01 sin mover el tag.
-- AUD.SEC2 R1 fue aceptado como G109/E01, REL.GOV.1 R1 como G110/E01, DOC.2 como G111/E01, NOR.1 R8 como G112/E07, DOC.1 R3 como G113/E03, PLAN.2 R1 como G114/E01, DOC.1 R4 como G115/E04 y DOC.1 R5 como G116/E05.
-- G116/E05 (`0.1.16.05-beta`) queda aceptado para DOC.1 R5, continuando el ordinal del bloque después de E04. G117/E02 (`0.1.17.02-beta`) queda reservado para REL.GOV.1 R2, continuando el ordinal de REL.GOV.1 después de E01.
-- PERSIST.1 permanece planificado en la matriz maestra como una etapa posterior; no tiene un Global preasignado mientras se completa REL.GOV.1 R2 y posteriormente los frentes Developer/UX previos.
+- `VERSION` contiene `0.1.17.02-beta` y materializa G117/E02 (REL.GOV.1 R2), aceptado mediante PR #103 / merge `46c464e`.
+- `v0.1.16.05-beta` permanece publicado, firmado e inmutable como G116/E05. La publicación formal de G117/E02 usa `v0.1.17.02-beta` únicamente después de integrar y revalidar la promoción, conforme a REL.GOV.1 R2.
+- La reconciliación post-G070 permanece inmutable y conserva `v0.0.71.01-beta` como evidencia histórica de G087/E01.
+- G109–G116 permanecen aceptados según el ledger; REL.GOV.1 R2 se incorpora como G117/E02.
+- G118/E04 (`0.1.18.04-beta`) queda reservado para DEV.2 R5. E04 corresponde al cuarto ordinal aceptable del bloque DEV.2, aunque la revisión funcional se denomine R5 porque el cierre R4 no consumió Global independiente.
+- Las etapas posteriores no tienen Global preasignado más allá del candidato vigente.
 - Los cierres y sincronizaciones que no crean un estado materialmente distinto no consumen `G` por sí solos.
 
 Cualquier promoción futura de versión debe seguir el proceso formal de release, validación, PR/CI, tag y evidencia documental correspondiente.

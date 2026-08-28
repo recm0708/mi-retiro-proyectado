@@ -1,8 +1,8 @@
 # REL.GOV.1 R2 — automatización gobernada de Releases
 
-**Estado:** candidato en desarrollo; G117/E02 reservado, no aceptado
-**Versión base:** `0.1.16.05-beta` — G116/E05 publicado
-**Base Git:** `dfb7dc60cf81951c701c126d6fecbcfdbca7aa7b`
+**Estado:** cerrado/aceptado como G117/E02; materialización formal gobernada por promoción post-merge
+**Versión materializada por promoción:** `0.1.17.02-beta` — G117/E02
+**Integración de aceptación:** `46c464ed2dd21f621d80e8dafc199fe56b4af710` — PR #103
 **Clasificación:** Auditoría / Gobierno / Release
 
 ## Objetivo
@@ -27,7 +27,7 @@ La publicación de G116 mostró dos costes operativos: preparación manual de no
 
 ## Estado contable
 
-Esta implementación todavía no consume G117. El Global permanece reservado hasta superar gate completo, commit firmado, PR/CI, integración y aceptación conforme a la política vigente.
+REL.GOV.1 R2 superó gate completo, commit firmado, PR #103, integración y revalidación post-merge. G117/E02 queda aceptado; esta promoción materializa el mismo estado y no consume G118.
 
 ## Gate integral de desarrollo
 
@@ -57,3 +57,34 @@ Este gate demuestra aptitud técnica de la implementación para pasar a commit
 firmado y Pull Request de desarrollo. No constituye aceptación de G117/E02:
 esa contabilidad solo puede avanzar después de integración, revalidación y
 promoción formal conforme al proceso vigente.
+
+## Aceptación post-merge
+
+REL.GOV.1 R2 quedó integrado en `main` mediante PR #103 / squash
+`46c464ed2dd21f621d80e8dafc199fe56b4af710`.
+
+Revalidación:
+
+- `unittest`: **1157 tests OK**;
+- `pytest`: **1197 passed / 5731 subtests passed**;
+- Markdown: **159/159 OK**;
+- JavaScript: **18 archivos OK**;
+- identificadores: **16 familias / 46 identificadores OK**;
+- CI #273, gobernanza #112, Markdown Audit #59 y CodeQL #209: `success`;
+- integración real contra el Release G116 existente: idempotencia `OK`;
+- working tree post-merge: limpio.
+
+La promoción G117/E02 actualiza versión, ledger, manifiesto y documentación.
+La publicación formal usa el tag firmado `v0.1.17.02-beta`, creado localmente
+únicamente después de integrar y revalidar la promoción.
+
+## Gate final de promoción
+
+Validación final ejecutada el 2026-08-28 sobre la rama de promoción:
+
+- `unittest`: **1161 tests OK**;
+- `pytest`: **1201 passed / 5721 subtests passed**;
+- sin fallos en ambas suites.
+
+Estos conteos corresponden al gate final de la promoción y no sustituyen los
+conteos históricos del gate de desarrollo ni de la revalidación post-merge.

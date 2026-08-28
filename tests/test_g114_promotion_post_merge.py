@@ -13,8 +13,25 @@ class TestG114PromotionPostMerge(unittest.TestCase):
         data=json.loads((ROOT/"data/work-block-registry.json").read_text(encoding="utf-8")); ids={x["identifier"]:x for x in data["identifiers"]}
         self.assertEqual("closed",ids["PLAN.2"]["status"]); self.assertIn("G114",ids["PLAN.2"]["global_refs"])
     def test_documentacion_preserva_g114_plan2(self):
-        for rel in ("README.md","RELEASES.md","VERSIONING.md","GOVERNANCE.md","SECURITY.md","docs/README.md","docs/governance/master-plan-to-1-0.md","docs/governance/roadmap.md","docs/governance/pre-1-0-revision-ledger.md","docs/governance/pre-1-0-pending-matrix.md"):
-            text=(ROOT/rel).read_text(encoding="utf-8"); self.assertIn("G114",text); self.assertIn("PLAN.2 R1",text)
+        ledger = cargar_ledger()
+        entry = next(
+            item
+            for item in ledger["entries"]
+            if item["global_revision"] == 114
+        )
+        self.assertEqual("PLAN.2", entry["block"])
+        self.assertEqual(1, entry["ordinal"])
+        self.assertEqual("0.1.14.01-beta", entry["revision_aware"])
+
+        matrix = (
+            ROOT / "docs/governance/pre-1-0-pending-matrix.md"
+        ).read_text(encoding="utf-8")
+        self.assertIn("PLAN.2 R1", matrix)
+        self.assertIn("Cerrado/aceptado G114/E01", matrix)
+
+        releases = (ROOT / "RELEASES.md").read_text(encoding="utf-8")
+        self.assertIn("v0.1.14.01-beta", releases)
+
     def test_publicacion_g114_permanece_preservada(self):
         ledger = cargar_ledger()
         entry = next(

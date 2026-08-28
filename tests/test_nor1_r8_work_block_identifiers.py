@@ -9,6 +9,7 @@ import subprocess
 import sys
 import unittest
 
+from app.core.version import construir_version_beta_revision
 from app.core.version_ledger import (
     LedgerRevisionError,
     cargar_ledger,
@@ -55,20 +56,28 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
         for label in ("LEGACY", "INTEGRIDAD", "POST-GOV"):
             self.assertFalse(labels[label]["reusable_as_family"])
 
-    def test_g112_permanece_aceptado_y_rel_gov_r2_es_candidato_actual(self):
+    def test_g112_permanece_aceptado_y_dev2_r5_es_candidato_actual(self):
         ledger = cargar_ledger()
-        entry = next(x for x in ledger["entries"] if x["global_revision"] == 112)
+        entry = next(
+            x for x in ledger["entries"] if x["global_revision"] == 112
+        )
         self.assertEqual("NOR.1", entry["block"])
         self.assertEqual(7, entry["ordinal"])
         self.assertEqual("0.1.12.07-beta", entry["revision_aware"])
+
         candidate = self.data["current_candidate"]
-        self.assertEqual(117, candidate["global_revision"])
-        self.assertEqual("REL.GOV.1", candidate["block"])
-        self.assertEqual("R2", candidate["revision"])
-        self.assertEqual(2, candidate["edition"])
+        self.assertEqual(118, candidate["global_revision"])
+        self.assertEqual("DEV.2", candidate["block"])
+        self.assertEqual("R5", candidate["revision"])
+        self.assertEqual(4, candidate["edition"])
         self.assertEqual("reserved_not_accepted", candidate["state"])
-        self.assertEqual("DEV.2", candidate["next_functional_block_if_accepted"])
-        self.assertIsNone(candidate["next_functional_global_if_accepted"])
+        self.assertEqual(
+            "DEV.2",
+            candidate["next_functional_block_if_accepted"],
+        )
+        self.assertIsNone(
+            candidate["next_functional_global_if_accepted"]
+        )
 
     def test_candidato_reabierto_continua_ordinal_del_bloque(self):
         ledger = cargar_ledger()
@@ -79,14 +88,22 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
         ]
         self.assertEqual([1, 2, 3, 4, 5, 6, 7], ordinales)
 
+        siguiente_global = ledger["next_global"]
+
         candidato = copy.deepcopy(ledger)
         candidato["next_candidate_block"] = "NOR.1"
-        candidato["next_candidate"] = "0.1.17.08-beta"
+        candidato["next_candidate"] = construir_version_beta_revision(
+            siguiente_global,
+            8,
+        )
         validar_ledger(candidato)
 
         invalido = copy.deepcopy(ledger)
         invalido["next_candidate_block"] = "NOR.1"
-        invalido["next_candidate"] = "0.1.17.01-beta"
+        invalido["next_candidate"] = construir_version_beta_revision(
+            siguiente_global,
+            1,
+        )
         with self.assertRaises(LedgerRevisionError):
             validar_ledger(invalido)
 
@@ -94,7 +111,10 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
         ledger = cargar_ledger()
         candidato = copy.deepcopy(ledger)
         candidato["next_candidate_block"] = "UX.5"
-        candidato["next_candidate"] = "0.1.17.01-beta"
+        candidato["next_candidate"] = construir_version_beta_revision(
+            ledger["next_global"],
+            1,
+        )
 
         validar_ledger(candidato)
 
@@ -114,27 +134,56 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
         self.assertIn(r"\d+[A-Za-z0-9]*", script)
         self.assertNotIn("DOC.exists", self.data["non_block_tokens"])
 
-    def test_documentacion_viva_declara_g114_doc1_r4_y_persist1(self):
-        for rel in (
-            "VERSIONING.md",
-            "GOVERNANCE.md",
-            "CONTRIBUTING.md",
-            "SECURITY.md",
-            "docs/README.md",
-            "docs/governance/master-plan-to-1-0.md",
-            "docs/governance/roadmap.md",
-            "docs/governance/pre-1-0-revision-ledger.md",
+    def test_historia_y_planificacion_se_validan_en_fuentes_canonicas(self):
+        ledger = cargar_ledger()
+        entries = {
+            entry["global_revision"]: entry
+            for entry in ledger["entries"]
+        }
+
+        expected = {
+            112: ("NOR.1", 7, "0.1.12.07-beta"),
+            113: ("DOC.1", 3, "0.1.13.03-beta"),
+            114: ("PLAN.2", 1, "0.1.14.01-beta"),
+            115: ("DOC.1", 4, "0.1.15.04-beta"),
+        }
+        for global_revision, expected_entry in expected.items():
+            entry = entries[global_revision]
+            with self.subTest(global_revision=global_revision):
+                self.assertEqual(expected_entry[0], entry["block"])
+                self.assertEqual(expected_entry[1], entry["ordinal"])
+                self.assertEqual(
+                    expected_entry[2],
+                    entry["revision_aware"],
+                )
+
+        ids = {
+            item["identifier"]: item
+            for item in self.data["identifiers"]
+        }
+        self.assertEqual("closed", ids["NOR.1"]["status"])
+        self.assertEqual("closed", ids["PLAN.2"]["status"])
+        self.assertEqual(
+            "reopened_planned_r6",
+            ids["DOC.1"]["status"],
+        )
+        self.assertEqual(
+            "planned_reserved",
+            ids["PERSIST.1"]["status"],
+        )
+
+        matrix = (
+            ROOT / "docs/governance/pre-1-0-pending-matrix.md"
+        ).read_text(encoding="utf-8")
+        for fragment in (
+            "Cerrado/aceptado G114/E01",
+            "DOC.1 R4",
+            "PERSIST.1 R1",
+            "Candidato G118/E04",
+            "DEV.2 R5",
         ):
-            content = (ROOT / rel).read_text(encoding="utf-8")
-            with self.subTest(rel=rel):
-                self.assertIn("G112", content)
-                self.assertIn("NOR.1 R8", content)
-                self.assertIn("DOC.1 R3", content)
-                self.assertIn("G113", content)
-                self.assertIn("G114", content)
-                self.assertIn("PLAN.2", content)
-                self.assertIn("DOC.1 R4", content)
-                self.assertIn("PERSIST.1", content)
+            with self.subTest(fragment=fragment):
+                self.assertIn(fragment, matrix)
 
     def test_auditor_automatico_queda_limpio(self):
         proc = subprocess.run(

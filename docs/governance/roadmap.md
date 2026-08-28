@@ -1,11 +1,11 @@
 # Roadmap
 
 **Estado:** vigente
-**Versión vigente:** `0.1.16.05-beta` — G116/E05 aceptado para DOC.1 R5
+**Versión vigente:** `0.1.17.02-beta` — G117/E02 aceptado para REL.GOV.1 R2
 **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
 **Último tag formal legacy:** `v0.0.26-beta`
-**Fecha de revisión:** 2026-08-27
-**Estado actual:** SEC.2, AUD.SEC2 R1, REL.GOV.1 R1, DOC.2, NOR.1 R8, DOC.1 R3, PLAN.2 R1, DOC.1 R4 y DOC.1 R5 están cerrados/aceptados. G116/E05 queda materializado como `0.1.16.05-beta`; G117/E02 (`0.1.17.02-beta`) queda reservado para REL.GOV.1 R2.
+**Fecha de revisión:** 2026-08-28
+**Estado actual:** REL.GOV.1 R2 queda cerrado/aceptado como G117/E02 (`0.1.17.02-beta`); DEV.2 R5 queda reservado como candidato G118/E04 (`0.1.18.04-beta`) y continúa la secuencia DEV.2 R6 / UX.5.
 
 
 <!-- NOR1-R7-CLOSURE:START -->
@@ -28,7 +28,8 @@ La secuencia operativa previa a SEC.2 queda:
 9. **PLAN.2 R1** — cerrado/aceptado como G114/E01 (`0.1.14.01-beta`) mediante PR #94 / merge `7ded70c`; formaliza la matriz maestra.
 10. **DOC.1 R4** — cerrado/aceptado como G115/E04 (`0.1.15.04-beta`) mediante PR #96 / merge `9f51229`; saneamiento documental post-G113 completado.
 11. **DOC.1 R5** — cerrado/aceptado como G116/E05 (`0.1.16.05-beta`) mediante PR #101 / merge `6f4266d`.
-12. **REL.GOV.1 R2** — checkpoint candidato G117/E02 (`0.1.17.02-beta`) para automatización de Releases y checks.
+12. **REL.GOV.1 R2** — cerrado/aceptado como G117/E02 (`0.1.17.02-beta`) mediante PR #103 / merge `46c464e`.
+13. **DEV.2 R5** — checkpoint candidato G118/E04 (`0.1.18.04-beta`) para Portal Developer y acceso.
 
 NOR.2 ejecutó los movimientos, renombrados, consolidaciones y retiros que
 NOR.1 deliberadamente no realizó.

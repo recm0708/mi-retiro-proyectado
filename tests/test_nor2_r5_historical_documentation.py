@@ -98,14 +98,25 @@ class TestNOR2R5HistoricalDocumentation(unittest.TestCase):
     def test_estado_transversal_r5(self):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
         docs = (ROOT / "docs/README.md").read_text(encoding="utf-8")
+        sec2 = (
+            ROOT / "docs/audits/security/sec2-final-closure.md"
+        ).read_text(encoding="utf-8")
+
         self.assertIn("**NOR.2 R4:** cerrado", readme)
         self.assertIn("**NOR.2 R5:** cerrado", readme)
         self.assertIn("**NOR.2 R6:** cerrado", readme)
         self.assertIn("**NOR.2 R7:** cerrado", readme)
         self.assertIn("NOR.2 R5", docs)
         self.assertIn("NOR.2 R6", docs)
-        self.assertIn("**SEC.2:** R1 cerrado; hardening CodeQL del informe imprimible y normalización técnica de GitHub Actions completados.", readme)
-        self.assertIn("**Estado de SEC.2:** cerrado después de R1–R6", readme)
+        self.assertIn(
+            "**SEC.2:** R1 cerrado; hardening CodeQL del informe "
+            "imprimible y normalización técnica de GitHub Actions "
+            "completados.",
+            readme,
+        )
+        self.assertIn("**Estado:** SEC.2 cerrado", sec2)
+        self.assertIn("**Alcance completado:** SEC.2 R1–R6", sec2)
+        self.assertIn("SEC.2 permanece **cerrado en R1–R6**", sec2)
 
     def test_evidencia_r5_existe(self):
         path = ROOT / (

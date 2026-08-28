@@ -170,16 +170,32 @@ class TestNOR2R8FinalAudit(unittest.TestCase):
         traceability = (
             ROOT / "docs/product/traceability-matrix.md"
         ).read_text(encoding="utf-8")
+        ledger = json.loads(
+            (ROOT / "data/pre-1-0-revision-ledger.json").read_text(
+                encoding="utf-8"
+            )
+        )
 
         for text in (readme, docs, traceability):
             self.assertIn("NOR.2", text)
 
-        self.assertIn("**NOR.2:** cerrado", readme)
         self.assertIn("SEC.2", readme)
         self.assertIn("R1–R6", readme)
-        self.assertIn("G109", readme)
         self.assertIn("AUD.SEC2 R1", docs)
         self.assertIn("checkpoint histórico de NOR.2", traceability)
+
+        entries = {
+            item["global_revision"]: item
+            for item in ledger["entries"]
+        }
+        self.assertEqual("AUD.SEC2", entries[109]["block"])
+        self.assertEqual(1, entries[109]["ordinal"])
+        self.assertEqual("0.1.09.01-beta", entries[109]["revision_aware"])
+
+        evidence = (
+            ROOT / "docs/audits/repository/repository-normalization-final-audit-nor2-r8.md"
+        ).read_text(encoding="utf-8")
+        self.assertIn("NOR.2 R8", evidence)
 
     def test_ver2_no_figura_como_pendiente_en_estado_vivo(self):
         live = [

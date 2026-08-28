@@ -1,7 +1,7 @@
 # Preparación pública de GitHub
 
 **Estado:** Completada para visibilidad pública — mantenimiento vigente
-**Versión de aplicación revisada:** `0.1.16.05-beta`
+**Versión de aplicación revisada:** `0.1.17.02-beta`
 **Versión base histórica:** `0.0.25-beta`
 **Versión base del checkpoint público:** `0.0.24-beta`
 **Fecha de preparación original:** 2026-08-18

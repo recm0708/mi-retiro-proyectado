@@ -7,6 +7,16 @@
 
 
 <!-- DOC1-R1-POST-MANT1:START -->
+## Promoción G117/E02 — post-merge de REL.GOV.1 R2
+
+- Estado aceptado: G117/E02 (`0.1.17.02-beta`).
+- Evidencia de aceptación: PR #103 / merge `46c464ed2dd21f621d80e8dafc199fe56b4af710`; revalidación post-merge del desarrollo con 1157 `unittest`, `pytest` 1197 passed / 5731 subtests, Markdown 159/159, 18 JavaScript, 16 familias / 46 identificadores, `pip check`, compilación Python y `git diff --check` limpios.
+- Gate final de promoción (2026-08-28): **1161 `unittest` OK** y **1201 `pytest` passed / 5721 subtests passed**; sin fallos.
+- Checks post-merge: Continuous Integration #273, Repository Governance Audit #112, Markdown Audit #59 y CodeQL #209 en `success`.
+- Esta sincronización materializa G117 ya aceptado y **no consume G118**.
+- G118/E04 (`0.1.18.04-beta`) queda reservado para DEV.2 R5; DEV.2 R6 y UX.5 continúan posteriormente conforme a la matriz maestra.
+- Contrato de publicación: G117/E02 se publica formalmente mediante el tag firmado `v0.1.17.02-beta` y su GitHub Release prerelease únicamente después de integrar y revalidar la promoción; G116/E05 permanece preservado e inmutable.
+
 ## Promoción G116/E05 — post-merge de DOC.1 R5
 
 - Estado aceptado: G116/E05 (`0.1.16.05-beta`).

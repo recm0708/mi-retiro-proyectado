@@ -1,9 +1,9 @@
 # Índice de documentación
 
 **Estado:** vigente
-**Versión de aplicación:** `0.1.16.05-beta` — G116/E05 aceptado para DOC.1 R5; G117/E02 reservado para REL.GOV.1 R2; ledger aceptado hasta G116
+**Versión de aplicación:** `0.1.17.02-beta` — G117/E02 aceptado para REL.GOV.1 R2; G118/E04 reservado para DEV.2 R5; ledger aceptado hasta G117
 **Último tag formal legacy:** `v0.0.26-beta`
-**Última actualización transversal:** promoción formal DOC.1 R5 — G116/E05 aceptado; REL.GOV.1 R2 candidato G117/E02 — 2026-08-27
+**Última actualización transversal:** promoción formal REL.GOV.1 R2 — G117/E02 aceptado; DEV.2 R5 candidato G118/E04 — 2026-08-28
 **Cierres históricos preservados:** UX.4.6i / PR #34 — 841 pruebas; UX.4.6e R9 — `v0.0.25-beta`
 
 Este archivo es el punto de entrada para la documentación técnica, funcional, normativa, de privacidad, validación y auditoría de Mi Retiro Proyectado.
@@ -11,7 +11,7 @@ Este archivo es el punto de entrada para la documentación técnica, funcional, 
 
 ## Estado de normalización del repositorio
 
-**Estado actual:** NOR.1 R8, NOR.2, DOC.1 R2–R5, SEC.2, AUD.SEC2 R1, REL.GOV.1 R1, DOC.2 y PLAN.2 R1 están cerrados/aceptados según corresponda. DOC.1 R5 queda aceptado como G116/E05 (`0.1.16.05-beta`); REL.GOV.1 R2 reserva G117/E02 como candidato actual y PERSIST.1 continúa posteriormente en la matriz maestra.
+**Estado actual:** NOR.1 R8, NOR.2, DOC.1 R2–R5, SEC.2, AUD.SEC2 R1, REL.GOV.1 R1–R2, DOC.2 y PLAN.2 R1 están cerrados/aceptados según corresponda. REL.GOV.1 R2 queda aceptado como G117/E02 (`0.1.17.02-beta`); DEV.2 R5 reserva G118/E04 como candidato actual.
 
 Estado de la fase:
 
@@ -30,7 +30,8 @@ Estado de la fase:
 - **PLAN.2 R1:** cerrado/aceptado como G114/E01; formaliza la matriz maestra viva hacia 1.0.
 - **DOC.1 R4:** cerrado/aceptado como G115/E04 mediante PR #96 / merge `9f51229`; saneamiento documental post-G113 completado.
 - **DOC.1 R5:** cerrado/aceptado como G116/E05 mediante PR #101 / merge `6f4266d`; normalización documental integral post-G115 completada.
-- **REL.GOV.1 R2:** queda como candidato G117/E02 (`0.1.17.02-beta`) para automatización de Releases y checks.
+- **REL.GOV.1 R2:** cerrado/aceptado como G117/E02 mediante PR #103 / merge `46c464e`; automatización gobernada de Releases y checks completada.
+- **DEV.2 R5:** candidato G118/E04 (`0.1.18.04-beta`) para Portal Developer y acceso.
 - **SEC.2 R1–R6:** cerrados; CodeQL, autenticación, protección de endpoints, auditoría, sesión web y hardening configurable completados. AUD.SEC2 R1 corrigió el kill switch, alineó documentación/ledger y quedó aceptado como G109/E01.
 
 Evidencia:

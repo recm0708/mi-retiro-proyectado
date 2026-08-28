@@ -10,7 +10,7 @@
 
 [![Validación continua](https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/ci.yml)
 [![Auditoría de gobernanza](https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/governance-audit.yml/badge.svg?branch=main)](https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/governance-audit.yml)
-![Versión](https://img.shields.io/badge/versi%C3%B3n-0.1.16.05--beta-2563eb)
+![Versión](https://img.shields.io/badge/versi%C3%B3n-0.1.17.02--beta-2563eb)
 ![Python](https://img.shields.io/badge/Python-3.13%20%7C%203.14-3776AB?logo=python&logoColor=white)
 ![Licencia](https://img.shields.io/badge/licencia-propietaria-6B7280)
 
@@ -20,17 +20,16 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 
 ## Estado del proyecto
 
-- **Versión canónica vigente:** `0.1.16.05-beta`, obtenida exclusivamente desde [`VERSION`](VERSION). Materializa G116/E05 después de aceptar DOC.1 R5 mediante PR #101 / merge `6f4266d` y de completar su promoción mediante PR #102 / `main` `dfb7dc6`.
-- **Último estado aceptado y publicado:** DOC.1 R5 como G116/E05; promoción PR #102, commit publicado `dfb7dc60cf81951c701c126d6fecbcfdbca7aa7b`, tag firmado `v0.1.16.05-beta` y GitHub Release prerelease.
-- **Estado de SEC.2:** cerrado después de R1–R6; AUD.SEC2 R1 corrigió la regresión del kill switch administrativo, alineó documentación/ledger y quedó aceptado como G109.
-- **Estado revision-aware reconciliado:** G116/E05 (`0.1.16.05-beta`) queda aceptado para DOC.1 R5; G117/E02 (`0.1.17.02-beta`) queda reservado para REL.GOV.1 R2 como siguiente checkpoint.
-- **Último tag revision-aware publicado:** `v0.1.16.05-beta` (G116/E05), anotado y firmado, objeto `4b5902bf7a3d2b94fcad8a426652d7ad8b77a32c`, verificado por GitHub y asociado a GitHub Release prerelease; la publicación anterior `v0.1.15.04-beta` permanece preservada e inmutable.
+- **Versión canónica vigente:** `0.1.17.02-beta`, obtenida exclusivamente desde [`VERSION`](VERSION). Materializa G117/E02 después de aceptar REL.GOV.1 R2 mediante PR #103 / merge `46c464e`.
+- **Último estado aceptado integrado en `main`:** REL.GOV.1 R2 como G117/E02; esta promoción materializa el mismo estado y no consume G118.
+- **Estado revision-aware reconciliado:** G117/E02 (`0.1.17.02-beta`) queda aceptado para REL.GOV.1 R2; G118/E04 (`0.1.18.04-beta`) queda reservado para DEV.2 R5.
+- **Publicación revision-aware anterior preservada:** `v0.1.16.05-beta` (G116/E05), anotado y firmado sobre el commit publicado `dfb7dc60cf81951c701c126d6fecbcfdbca7aa7b`, asociado a GitHub Release prerelease. La publicación formal de G117/E02 usa `v0.1.17.02-beta` únicamente después de integrar y revalidar la promoción, conforme a REL.GOV.1 R2.
 - **Última versión formal legacy:** `0.0.26-beta` — tag firmado e inmutable `v0.0.26-beta`.
 - **Etapa:** desarrollo beta; repositorio público y ejecución orientada actualmente a entorno local.
-- **GOV.1, PLAN.1, PLAN.2 R1, DEV.2, MANT.1, DOC.1 R1–R5, NOR.1 R8 y NOR.2:** cerrados. REL.GOV.1 R2 queda como checkpoint candidato G117/E02; DEV.2, UX.5 y los bloques finales permanecen ordenados en la matriz maestra hacia 1.0.
-- **NOR.2:** cerrado después de R1–R8; sus evidencias históricas permanecen preservadas.
-- **SEC.2:** R1–R6 cerrados: hardening CodeQL, autenticación administrativa, protección centralizada, auditoría, sesión web y endurecimiento configurable para HTTPS interno.
-- **DOC.2:** cerrado en R1 y preservado como G111/E01. NOR.1 R8 quedó cerrado como G112/E07, DOC.1 R3 como G113/E03, PLAN.2 R1 como G114/E01, DOC.1 R4 como G115/E04 y DOC.1 R5 como G116/E05; G117/E02 se reserva para REL.GOV.1 R2. PERSIST.1 continúa posteriormente en la matriz maestra.
+- **REL.GOV.1:** R1 y R2 cerrados/aceptados como G110/E01 y G117/E02. La automatización de Releases queda integrada sin transferir a Actions la creación o firma del tag.
+- **DEV.2:** R1–R3 permanecen aceptados históricamente; R5 reabre el mismo bloque como candidato G118/E04 para Portal Developer y acceso, seguido de R6.
+- **DOC.1:** R1–R5 cerrados; DOC.1 R6 permanece planificado para congelación documental final.
+- **SEC.2:** R1–R6 cerrados; R7 permanece planificado después de las nuevas superficies Developer/UX/persistencia.
 - **Primera versión oficial objetivo:** `1.0.0.0` con `Build 000001`, únicamente después de cerrar todos los gates definidos en el plan maestro.
 
 La visibilidad pública del repositorio **no convierte una beta de desarrollo en versión oficial, no constituye un despliegue de producción y no modifica por sí sola la licencia vigente**.
@@ -102,7 +101,7 @@ Documentos principales:
 - **[Cierre GOV.1 — Auditoría, Gobierno y Trazabilidad Pre-Beta](docs/archive/governance/CIERRE_GOV1.md)** — auditoría final y decisión de cierre de GOV.1;
 - **[Auditoría de versionado pre-1.0](docs/archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md)** — criterio contable y reconciliación VER.2;
 - **[VER.2 — Matriz de decisión de revisiones aceptadas](docs/archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md)** — decisiones de inclusión/exclusión del contador;
-- **[Ledger de revisiones aceptadas pre-1.0](docs/governance/pre-1-0-revision-ledger.md)** — secuencia reconciliada G001–G115 y próximo candidato G116;
+- **[Ledger de revisiones aceptadas pre-1.0](docs/governance/pre-1-0-revision-ledger.md)** — secuencia reconciliada G001–G117 y próximo candidato G118;
 - [`data/pre-1-0-revision-ledger.json`](data/pre-1-0-revision-ledger.json) — ledger machine-readable;
 - **[Identificadores de bloques de trabajo](docs/standards/work-block-identifiers.md)** — política canónica de identificadores de bloques;
 - [`data/work-block-registry.json`](data/work-block-registry.json) — registro machine-readable de identificadores históricos, cerrados y planificados;
