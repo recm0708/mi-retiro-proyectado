@@ -1,7 +1,7 @@
 # Proceso de release
 
 **Estado:** Vigente
-**Versión de aplicación:** `0.1.16.05-beta` — G116/E05 aceptado para DOC.1 R5; REL.GOV.1 R2 candidato G117/E02
+**Versión de aplicación:** `0.1.17.02-beta` — G117/E02 aceptado para REL.GOV.1 R2; DEV.2 R5 candidato G118/E04
 **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
 **Último tag formal legacy:** `v0.0.26-beta`
 **Versión base histórica preservada:** `0.0.23-beta`
@@ -18,12 +18,12 @@ El cierre de MANT.1 R7 no constituye release formal ni cambia la versión canón
 Para una release posterior se mantiene el criterio vigente:
 
 - `VERSION` debe ser la fuente única.
-- `0.1.16.05-beta` es la versión canónica vigente y materializa G116/E05; `v0.1.16.05-beta` está publicado como tag firmado y GitHub Release prerelease. G117/E02 permanece reservado para REL.GOV.1 R2.
-- `v0.0.71.01-beta` fue publicado originalmente bajo la denominación VER.2 G071/E01; la reconciliación post-G070 sitúa ese estado cronológicamente en **G087/E01** sin mover el tag.
-- `v0.0.26-beta` permanece como tag legacy histórico e inmutable.
-- VER.2, MANT.1, DOC.1 R1–R5, NOR.1, NOR.2 y PLAN.2 R1 están cerrados.
-- SEC.2 quedó cerrado después de R1–R6. AUD.SEC2 R1 fue aceptado como G109/E01, REL.GOV.1 R1 como G110/E01, DOC.2 como G111/E01, NOR.1 R8 como G112/E07, DOC.1 R3 como G113/E03, PLAN.2 R1 como G114/E01, DOC.1 R4 como G115/E04 y DOC.1 R5 como G116/E05.
-- G116/E05 (`0.1.16.05-beta`) queda aceptado para DOC.1 R5; G117/E02 (`0.1.17.02-beta`) queda reservado para REL.GOV.1 R2. PERSIST.1 continúa como etapa posterior.
+- `0.1.17.02-beta` es la versión canónica vigente y materializa G117/E02. Su publicación formal usa `v0.1.17.02-beta` únicamente después de integrar y revalidar la promoción; `v0.1.16.05-beta` permanece preservado como publicación G116/E05.
+- `v0.0.71.01-beta` conserva su reconciliación histórica como G087/E01 y `v0.0.26-beta` permanece como tag legacy inmutable.
+- REL.GOV.1 R2 queda aceptado como G117/E02 después de PR #103 / merge `46c464e`.
+- G118/E04 (`0.1.18.04-beta`) queda reservado para DEV.2 R5; las etapas posteriores permanecen sin Global preasignado.
+- La automatización de R2 no crea ni firma tags: valida el tag local firmado, el árbol etiquetado y el contrato antes de publicar.
+- Un Release existente solo se acepta si coincide exactamente; solo HTTP 404 autoriza creación y cualquier estado ambiguo falla cerrado.
 
 Todo release futuro requiere gate completo, PR/CI, actualización documental coherente, tag y evidencia reproducible.
 <!-- DOC1-R1-POST-MANT1:END -->

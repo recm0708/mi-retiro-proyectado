@@ -6,9 +6,14 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ## [Unreleased]
 
-- REL.GOV.1 R2 (candidato G117/E02): automatización de Releases y checks sobre la base aceptada G116/E05; G117 permanece reservado y no aceptado mientras no supere su gate propio.
-- Publicación determinista: añade manifiesto versionado, renderer canónico de notas y validación idempotente/fail-closed de Releases existentes.
-- Workflow de tags: conserva la firma local del mantenedor, verifica firma/contrato/commit en `main` y aísla `contents: write` al job de publicación posterior a la verificación.
+- DEV.2 R5 (candidato G118/E04): Portal Developer y acceso sobre la base aceptada G117/E02; G118 permanece reservado y no aceptado hasta superar su gate propio.
+
+## [0.1.17.02-beta]
+- G117/E02: REL.GOV.1 R2 queda aceptado mediante PR #103 / merge `46c464e` después de completar la automatización gobernada de Releases y checks.
+- Release governance: incorpora manifiesto versionado, renderer determinista, validación del árbol etiquetado, firma/contrato, publicación idempotente y política fail-closed 200/404.
+- Gate: revalidación post-merge del desarrollo con 1157 `unittest` y `pytest` 1197 passed / 5731 subtests; gate final de promoción del 2026-08-28 con **1161 `unittest` OK** y **1201 `pytest` passed / 5721 subtests passed**; Markdown 159/159, 18 JavaScript, 16 familias / 46 identificadores, `pip check`, compilación y `git diff --check` limpios; CI #273, gobernanza #112, Markdown #59 y CodeQL #209 en `success`.
+- Ledger: G117 queda aceptado; G118/E04 (`0.1.18.04-beta`) queda reservado para DEV.2 R5.
+- Contrato de publicación: G117/E02 usa el tag firmado `v0.1.17.02-beta` y su GitHub Release prerelease únicamente después de integrar y revalidar la promoción; G116/E05 permanece preservado e inmutable.
 
 ## [0.1.16.05-beta]
 - G116/E05: DOC.1 R5 queda aceptado mediante PR #101 / merge `6f4266d` después de completar la normalización documental integral post-G115.

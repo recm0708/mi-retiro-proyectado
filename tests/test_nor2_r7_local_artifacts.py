@@ -130,10 +130,8 @@ class TestNOR2R7LocalArtifacts(unittest.TestCase):
             "**NOR.2 R8:** cerrado",
             readme,
         )
-        self.assertIn(
-            "**NOR.2:** cerrado",
-            readme,
-        )
+        # NOR.2 queda preservado por sus cierres revisionados R6-R8.
+        # No se exige una línea genérica redundante en el README vivo.
         self.assertIn(
             "**SEC.2:** R1 cerrado; hardening CodeQL del informe imprimible y normalización técnica de GitHub Actions completados.",
             readme,

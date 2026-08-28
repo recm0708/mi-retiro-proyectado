@@ -26,9 +26,46 @@ class TestDOC1R4LiveStateSanitization(unittest.TestCase):
 
         releases = (ROOT / "RELEASES.md").read_text(encoding="utf-8")
         self.assertIn("v0.1.14.01-beta", releases)
-    def test_estado_vivo_declara_g115_y_rel_gov_r2(self):
-        for rel in ("README.md","GOVERNANCE.md","SECURITY.md","VERSIONING.md","RELEASES.md","docs/README.md","docs/governance/master-plan-to-1-0.md","docs/governance/roadmap.md","docs/operations/release-process.md"):
-            text=(ROOT/rel).read_text(encoding="utf-8"); self.assertIn("G115",text); self.assertIn("DOC.1 R4",text); self.assertIn("REL.GOV.1 R2",text)
+    def test_historia_g115_y_transicion_actual_usan_fuentes_canonicas(self):
+        ledger = cargar_ledger()
+        g115 = next(
+            entry
+            for entry in ledger["entries"]
+            if entry["global_revision"] == 115
+        )
+        g117 = next(
+            entry
+            for entry in ledger["entries"]
+            if entry["global_revision"] == 117
+        )
+
+        self.assertEqual("DOC.1", g115["block"])
+        self.assertEqual(4, g115["ordinal"])
+        self.assertEqual("0.1.15.04-beta", g115["revision_aware"])
+        self.assertEqual("REL.GOV.1", g117["block"])
+        self.assertEqual(2, g117["ordinal"])
+
+        matrix = (
+            ROOT / "docs/governance/pre-1-0-pending-matrix.md"
+        ).read_text(encoding="utf-8")
+        self.assertIn("Cerrado/aceptado G115/E04", matrix)
+        self.assertIn("DOC.1 R4", matrix)
+        self.assertIn("Cerrado/aceptado G117/E02", matrix)
+        self.assertIn("Candidato G118/E04", matrix)
+
+        releases = (ROOT / "RELEASES.md").read_text(encoding="utf-8")
+        self.assertIn("v0.1.15.04-beta", releases)
+
+        registry = json.loads(
+            (ROOT / "data/work-block-registry.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        candidate = registry["current_candidate"]
+        self.assertEqual(118, candidate["global_revision"])
+        self.assertEqual("DEV.2", candidate["block"])
+        self.assertEqual("R5", candidate["revision"])
+
     def test_ledger_markdown_registra_g115(self):
         text=(ROOT/"docs/governance/pre-1-0-revision-ledger.md").read_text(encoding="utf-8"); self.assertIn("| G115 | `0.1.15.04-beta` | DOC.1 R4",text)
     def test_historia_y_evidencia_quedan_preservadas(self):

@@ -100,14 +100,39 @@ class TestNOR2R6LedgerData(unittest.TestCase):
     def test_estado_transversal_evoluciona_sin_perder_nor2(self):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
         docs = (ROOT / "docs/README.md").read_text(encoding="utf-8")
+        ledger = cargar_ledger()
 
-        self.assertIn("**NOR.2:** cerrado", readme)
+        self.assertIn("NOR.2", readme)
         self.assertIn("NOR.2", docs)
         self.assertIn("**SEC.2:** R1–R6 cerrados", readme)
-        self.assertIn("G109", readme)
-        self.assertIn("G111", docs)
-        self.assertIn("G112", docs)
-        self.assertIn("PERSIST.1", docs)
+
+        entries = {
+            item["global_revision"]: item
+            for item in ledger["entries"]
+        }
+        self.assertEqual("AUD.SEC2", entries[109]["block"])
+        self.assertEqual("DOC.2", entries[111]["block"])
+        self.assertEqual("NOR.1", entries[112]["block"])
+        self.assertEqual(7, entries[112]["ordinal"])
+
+        registry = json.loads(
+            (ROOT / "data/work-block-registry.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        ids = {
+            item["identifier"]: item
+            for item in registry["identifiers"]
+        }
+        self.assertEqual(
+            "planned_reserved",
+            ids["PERSIST.1"]["status"],
+        )
+
+        matrix = (
+            ROOT / "docs/governance/pre-1-0-pending-matrix.md"
+        ).read_text(encoding="utf-8")
+        self.assertIn("PERSIST.1 R1", matrix)
 
     def test_version_sigue_derivada_del_ledger_vigente(self):
         version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()

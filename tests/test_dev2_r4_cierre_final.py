@@ -55,14 +55,22 @@ class TestDev2R4CierreFinal(unittest.TestCase):
         readme = self._leer("README.md")
         documento = self._leer("docs/architecture/development-center.md")
         changelog = self._leer("CHANGELOG.md")
+        sec2 = self._leer("docs/audits/security/sec2-final-closure.md")
 
         self.assertIn("**DEV.2:** cerrado.", readme)
         self.assertIn("**NOR.2 R4:** cerrado", readme)
         self.assertIn("**NOR.2 R5:** cerrado", readme)
         self.assertIn("**NOR.2 R6:** cerrado", readme)
         self.assertIn("**NOR.2 R7:** cerrado", readme)
-        self.assertIn("**SEC.2:** R1 cerrado; hardening CodeQL del informe imprimible y normalización técnica de GitHub Actions completados.", readme)
-        self.assertIn("**Estado de SEC.2:** cerrado después de R1–R6", readme)
+        self.assertIn(
+            "**SEC.2:** R1 cerrado; hardening CodeQL del informe "
+            "imprimible y normalización técnica de GitHub Actions "
+            "completados.",
+            readme,
+        )
+        self.assertIn("**Estado:** SEC.2 cerrado", sec2)
+        self.assertIn("**Alcance completado:** SEC.2 R1–R6", sec2)
+        self.assertIn("SEC.2 permanece **cerrado en R1–R6**", sec2)
         self.assertIn("DEV.2 cerrado documentalmente en R4", documento)
         self.assertIn("### DEV.2 — cierre del Centro de desarrollo", changelog)
         self.assertIn("cierra documentalmente DEV.2", changelog)

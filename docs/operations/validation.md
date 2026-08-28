@@ -1,7 +1,7 @@
 # Validación
 
 **Estado:** Vigente
-**Versión revisada:** `0.1.16.05-beta` — G116/E05 aceptado para DOC.1 R5; G117/E02 reservado para REL.GOV.1 R2
+**Versión revisada:** `0.1.17.02-beta` — G117/E02 aceptado para REL.GOV.1 R2; G118/E04 reservado para DEV.2 R5
 **Versión base histórica:** `0.0.25-beta`
 **Base documental histórica:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal histórica preservada:** UX.4.6e R8 — validación funcional y procedencia editable — 2026-08-19
@@ -1272,3 +1272,31 @@ Evidencia ejecutada:
 
 La automatización no creó commits, tags ni Releases durante este gate. La
 creación y firma del tag permanecen fuera de GitHub Actions.
+
+## REL.GOV.1 R2 — revalidación post-merge y promoción G117/E02
+
+El desarrollo integrado mediante PR #103 / `main`
+`46c464ed2dd21f621d80e8dafc199fe56b4af710` superó revalidación post-merge:
+
+- `unittest`: **1157 tests OK**;
+- `pytest`: **1197 passed / 5731 subtests passed**;
+- `pip check`: OK;
+- `compileall app/scripts/tests`: OK;
+- JavaScript: **18 archivos OK**;
+- Markdown: **159/159 OK**;
+- identificadores: **16 familias / 46 identificadores OK**;
+- CI #273, gobernanza #112, Markdown #59 y CodeQL #209: `success`;
+- working tree limpio.
+
+La rama de promoción materializa ahora G117/E02 (`0.1.17.02-beta`) y reserva
+G118/E04 (`0.1.18.04-beta`) para DEV.2 R5. La publicación formal se materializa
+únicamente después de integrar y revalidar esta promoción.
+
+### Gate final de promoción — 2026-08-28
+
+- `unittest`: **1161 tests OK**;
+- `pytest`: **1201 passed / 5721 subtests passed**;
+- ambas suites finalizaron sin fallos.
+
+Los conteos anteriores de 1157/1197 corresponden a la revalidación post-merge
+del desarrollo de REL.GOV.1 R2 y se preservan como evidencia histórica.

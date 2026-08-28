@@ -9,14 +9,14 @@
     "tracked_files": 459
   },
   "current_candidate": {
-    "global_revision": 117,
-    "revision_aware": "0.1.17.02-beta",
-    "block": "REL.GOV.1",
-    "revision": "R2",
+    "global_revision": 118,
+    "revision_aware": "0.1.18.04-beta",
+    "block": "DEV.2",
+    "revision": "R5",
     "state": "reserved_not_accepted",
     "next_functional_block_if_accepted": "DEV.2",
     "next_functional_global_if_accepted": null,
-    "edition": 2
+    "edition": 4
   },
   "families": [
     {
@@ -419,9 +419,9 @@
       "identifier": "DEV.2",
       "family": "DEV",
       "kind": "block",
-      "status": "closed",
-      "meaning": "Centro de desarrollo y diagnóstico.",
-      "evidence": "Ledger revision-aware.",
+      "status": "reopened_candidate_r5",
+      "meaning": "R1–R3 aceptados en G071–G073; R4 fue cierre documental no contabilizado por separado; R5 queda como candidato G118/E04 para Portal Developer y acceso.",
+      "evidence": "Ledger G071–G073; docs/governance/pre-1-0-pending-matrix.md; G118/E04 reservado para DEV.2 R5.",
       "global_refs": [
         "G071-G073"
       ],
@@ -532,11 +532,12 @@
       "identifier": "REL.GOV.1",
       "family": "REL",
       "kind": "compound_block",
-      "status": "reopened_candidate_r2",
-      "meaning": "R1 cerrado/aceptado en G110/E01; R2 queda como candidato G117/E02 para automatización de Releases y checks después de DOC.1 R5.",
-      "evidence": "G110 / PR #85; DOC.1 R5 aceptado mediante PR #101; docs/governance/pre-1-0-pending-matrix.md.",
+      "status": "closed",
+      "meaning": "R1 cerrado/aceptado en G110/E01 y R2 cerrado/aceptado en G117/E02; gobierno de Releases y publicación automatizada con tag firmado como frontera de confianza.",
+      "evidence": "G110 / PR #85; G117 / PR #103 / merge 46c464e; docs/audits/governance/rel-gov1-r2-release-automation.md.",
       "global_refs": [
-        "G110"
+        "G110",
+        "G117"
       ],
       "reusable_for_different_scope": false
     },

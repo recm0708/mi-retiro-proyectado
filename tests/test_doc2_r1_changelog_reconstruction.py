@@ -109,12 +109,25 @@ class TestDOC2R1ChangelogReconstruction(unittest.TestCase):
         self.assertIn("29 GitHub Releases", audit)
 
     def test_documentacion_preserva_g111_sin_fijar_conteo_publicado_actual(self):
-        readme = (ROOT / "README.md").read_text(encoding="utf-8")
-        releases = (ROOT / "RELEASES.md").read_text(encoding="utf-8")
+        ledger = cargar_ledger()
+        entry = next(
+            item
+            for item in ledger["entries"]
+            if item["global_revision"] == 111
+        )
+        self.assertEqual("DOC.2", entry["block"])
+        self.assertEqual(1, entry["ordinal"])
+        self.assertEqual("0.1.11.01-beta", entry["revision_aware"])
 
-        self.assertIn("G111/E01", readme)
+        releases = (ROOT / "RELEASES.md").read_text(encoding="utf-8")
         self.assertIn("G111/E01", releases)
         self.assertIn("v0.1.11.01-beta", releases)
+
+        audit = (
+            ROOT
+            / "docs/audits/documentation/changelog-reconstruction-doc2-r1.md"
+        ).read_text(encoding="utf-8")
+        self.assertIn("G111/E01", audit)
 
     def test_auditoria_doc2_existe_y_esta_indexada(self):
         audit_rel = "audits/documentation/changelog-reconstruction-doc2-r1.md"

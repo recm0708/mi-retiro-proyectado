@@ -8,14 +8,11 @@ El cierre de MANT.1 R7 no cambia la política de seguridad ni convierte candidat
 
 Estado vigente:
 
-- La versión canónica vigente es `0.1.16.05-beta` (G116/E05).
-- `v0.1.16.05-beta` es el último tag revision-aware publicado y verificado; su objeto firmado y GitHub Release prerelease quedan preservados junto con las publicaciones anteriores. `v0.1.15.04-beta` permanece preservado como publicación previa e inmutable.
-- `v0.0.71.01-beta` es un tag formal histórico publicado originalmente como VER.2 G071/E01 y reconciliado posteriormente como G087/E01 sin alterar el objeto firmado.
-- `v0.0.26-beta` permanece como tag legacy histórico e inmutable.
-- VER.2, NOR.1 R8, NOR.2, DOC.1 R1–R5 y PLAN.2 R1 están cerrados.
-- DOC.2 permanece aceptado/publicado como G111/E01; NOR.1 R8 queda aceptado como G112/E07 y DOC.1 R3 como G113/E03.
-- PLAN.2 R1 queda aceptado como G114/E01, DOC.1 R4 como G115/E04 y DOC.1 R5 como G116/E05; G117/E02 se reserva para REL.GOV.1 R2. PERSIST.1 continúa reservado para una etapa posterior y SEC.2 R7 queda previsto para revalidar las nuevas superficies antes del cierre beta.
-- SEC.2 está cerrado después de R1–R6. AUD.SEC2 R1 fue aceptado como G109/E01 y corrige la semántica del kill switch administrativo y las regresiones de sesión sin modificar motores previsionales.
+- La versión canónica vigente es `0.1.17.02-beta` (G117/E02).
+- La publicación G116/E05 (`v0.1.16.05-beta`) permanece publicada, firmada e inmutable. La publicación formal de G117/E02 se rige por el tag firmado `v0.1.17.02-beta` y el GitHub Release automatizado de REL.GOV.1 R2.
+- `v0.0.71.01-beta` conserva su evidencia histórica reconciliada como G087/E01 y `v0.0.26-beta` permanece como tag legacy.
+- REL.GOV.1 R2 queda aceptado como G117/E02 y mantiene la creación/firma del tag fuera de GitHub Actions.
+- G118/E04 se reserva para DEV.2 R5. DEV.2 R6 y UX.5 continúan posteriormente; SEC.2 R7 revalidará las nuevas superficies antes del cierre beta.
 - Las rutas de reporte responsable y revisión de vulnerabilidades se mantienen sin cambio material.
 <!-- DOC1-R1-POST-MANT1:END -->
 
@@ -25,7 +22,8 @@ Mi Retiro Proyectado se encuentra en **desarrollo beta**. Los estados histórico
 
 | Línea | Soporte de seguridad |
 |---|---|
-| `0.1.16.05-beta` | Beta vigente G116/E05 publicada; tag firmado, workflow de verificación y GitHub Release prerelease verificados |
+| `0.1.17.02-beta` | Beta vigente G117/E02 aceptada; publicación formal gobernada por tag firmado localmente y GitHub Release automatizado conforme a REL.GOV.1 R2 |
+| `0.1.16.05-beta` | Beta previa G116/E05 publicada; tag firmado, workflow de verificación y GitHub Release prerelease verificados |
 | `0.1.15.04-beta` | Beta previa G115/E04 publicada; tag firmado, workflow de verificación y GitHub Release prerelease verificados |
 | `0.1.14.01-beta` | Beta previa G114/E01 publicada; tag firmado, workflow de verificación y GitHub Release prerelease verificados |
 | `0.1.13.03-beta` | Beta previa G113/E03 publicada; tag firmado y GitHub Release prerelease preservados |

@@ -40,19 +40,19 @@ class TestG115PromotionPostMerge(unittest.TestCase):
         self.assertIn("DOC.1 R4", matrix)
 
     def test_publicacion_g115_permanece_preservada(self):
-        for rel in (
-            "README.md",
-            "RELEASES.md",
-            "VERSIONING.md",
-            "GOVERNANCE.md",
-            "SECURITY.md",
-        ):
-            with self.subTest(rel=rel):
-                self.assertIn(
-                    "v0.1.15.04-beta",
-                    (ROOT / rel).read_text(encoding="utf-8"),
-                )
+        ledger = cargar_ledger()
+        entry = next(
+            item
+            for item in ledger["entries"]
+            if item["global_revision"] == 115
+        )
+        self.assertEqual("0.1.15.04-beta", entry["revision_aware"])
+        self.assertEqual("DOC.1", entry["block"])
+        self.assertEqual(4, entry["ordinal"])
 
+        releases = (ROOT / "RELEASES.md").read_text(encoding="utf-8")
+        self.assertIn("Promoción G115/E04", releases)
+        self.assertIn("v0.1.15.04-beta", releases)
 
 if __name__ == "__main__":
     unittest.main()
