@@ -1,6 +1,8 @@
 # Workflow de verificación de firmas Git.
-# Propósito: verificar tags publicados y auditar manualmente todos los tags versionados.
-# Alcance: conserva triggers, permisos, jobs, confianza SSH y comandos de verificación.
+# Propósito: verificar tags formales firmados y publicar su GitHub Release solo después de superar el contrato.
+# Alcance: opera sobre pushes `v*` y auditoría manual; la creación y firma del tag permanecen fuera de Actions.
+#
+# La verificación usa solo lectura; la escritura se limita al job de publicación del Release.
 
 name: Git Tag Signature Verification
 
@@ -22,32 +24,184 @@ jobs:
     name: Verificar tag publicado
     if: github.event_name == 'push'
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
-      - name: Descargar main y referencias Git
+      - name: Descargar estado etiquetado y referencias Git
         uses: actions/checkout@v7
         with:
-          ref: main
+          ref: ${{ github.ref }}
           fetch-depth: 0
           fetch-tags: true
+          persist-credentials: false
+
       - name: Configurar confianza SSH
         shell: bash
         run: |
           git config gpg.format ssh
           git config gpg.ssh.allowedSignersFile "$GITHUB_WORKSPACE/.github/allowed_signers"
-      - name: Actualizar tags
+
+      - name: Actualizar referencias necesarias
         shell: bash
-        run: git fetch --tags --force origin
+        run: |
+          git fetch --tags --force origin
+          git fetch origin main:refs/remotes/origin/main
+
       - name: Verificar firma del tag
         shell: bash
         run: git tag -v "$GITHUB_REF_NAME"
+
+      - name: Verificar que HEAD es el commit del tag
+        shell: bash
+        run: |
+          tag_commit="$(git rev-parse "$GITHUB_REF_NAME^{}")"
+          head_commit="$(git rev-parse HEAD)"
+          test "$tag_commit" = "$head_commit"
+          echo "Tag y HEAD coinciden en $head_commit"
+
+      - name: Verificar que el commit publicado pertenece a main
+        shell: bash
+        run: |
+          tag_commit="$(git rev-parse "$GITHUB_REF_NAME^{}")"
+          git merge-base --is-ancestor "$tag_commit" origin/main
+          echo "$tag_commit pertenece al historial de main."
+
       - name: Validar contrato VERSION / ledger / tag
         shell: bash
         run: python scripts/release_contract.py --check-tag "$GITHUB_REF_NAME"
+
+      - name: Validar manifiesto de publicación
+        shell: bash
+        run: python scripts/release_publication.py --check-manifest
+
+  publicar-release:
+    name: Publicar GitHub Release
+    if: github.event_name == 'push'
+    needs:
+      - verificar-tag-publicado
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Descargar estado etiquetado y referencias Git
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ github.ref }}
+          fetch-depth: 0
+          fetch-tags: true
+          persist-credentials: false
+
+      - name: Actualizar tags
+        shell: bash
+        run: git fetch --tags --force origin
+
+      - name: Preparar contrato y notas canónicas
+        id: release
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          version="$(tr -d '\r\n' < VERSION)"
+          tag="v$version"
+          title="$(python scripts/release_contract.py --print-title)"
+          notes="$RUNNER_TEMP/release-notes.md"
+
+          test "$tag" = "$GITHUB_REF_NAME"
+
+          python scripts/release_publication.py --check-manifest
+          python scripts/release_publication.py             --render-notes "$notes"             --tag "$GITHUB_REF_NAME"
+
+          python scripts/release_contract.py             --check-tag "$GITHUB_REF_NAME"
+          python scripts/release_contract.py             --check-title "$title"
+          python scripts/release_contract.py             --check-notes "$notes"
+
+          {
+            echo "version=$version"
+            echo "tag=$tag"
+            echo "title=$title"
+            echo "notes=$notes"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Crear o reconciliar GitHub Release
+        shell: bash
+        env:
+          RELEASE_VERSION: ${{ steps.release.outputs.version }}
+          RELEASE_TAG: ${{ steps.release.outputs.tag }}
+          RELEASE_TITLE: ${{ steps.release.outputs.title }}
+          RELEASE_NOTES: ${{ steps.release.outputs.notes }}
+        run: |
+          set -euo pipefail
+
+          snapshot="$RUNNER_TEMP/release-existing.json"
+          api_probe="$RUNNER_TEMP/release-api-probe.json"
+
+          http_status="$(
+            curl --silent --show-error \
+              --output "$api_probe" \
+              --write-out "%{http_code}" \
+              --header "Authorization: Bearer $GH_TOKEN" \
+              --header "Accept: application/vnd.github+json" \
+              --header "X-GitHub-Api-Version: 2022-11-28" \
+              "https://api.github.com/repos/$GITHUB_REPOSITORY/releases/tags/$RELEASE_TAG"
+          )"
+
+          case "$http_status" in
+            200)
+              gh release view "$RELEASE_TAG" \
+                --repo "$GITHUB_REPOSITORY" \
+                --json tagName,name,isDraft,isPrerelease,body \
+                > "$snapshot"
+
+              python scripts/release_publication.py \
+                --check-release-json "$snapshot" \
+                --notes "$RELEASE_NOTES"
+
+              echo "Release existente correcto; no se modifica."
+              ;;
+
+            404)
+              echo "Release no existente (HTTP 404); se autoriza su creación."
+
+              args=(
+                release create "$RELEASE_TAG"
+                --repo "$GITHUB_REPOSITORY"
+                --title "$RELEASE_TITLE"
+                --notes-file "$RELEASE_NOTES"
+                --verify-tag
+              )
+
+              if [[ "$RELEASE_VERSION" == *-beta ]]; then
+                args+=(--prerelease)
+              fi
+
+              gh "${args[@]}"
+
+              gh release view "$RELEASE_TAG" \
+                --repo "$GITHUB_REPOSITORY" \
+                --json tagName,name,isDraft,isPrerelease,body \
+                > "$snapshot"
+
+              python scripts/release_publication.py \
+                --check-release-json "$snapshot" \
+                --notes "$RELEASE_NOTES"
+              ;;
+
+            *)
+              echo "::error::No se puede determinar de forma segura el estado del Release."
+              echo "::error::GitHub API devolvió HTTP $http_status; no se creará ni modificará ningún Release."
+              cat "$api_probe"
+              exit 1
+              ;;
+          esac
 
   auditar-todos-los-tags:
     name: Auditar todos los tags
     if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: Descargar main y todo el historial
         uses: actions/checkout@v7
@@ -55,14 +209,18 @@ jobs:
           ref: main
           fetch-depth: 0
           fetch-tags: true
+          persist-credentials: false
+
       - name: Configurar confianza SSH
         shell: bash
         run: |
           git config gpg.format ssh
           git config gpg.ssh.allowedSignersFile "$GITHUB_WORKSPACE/.github/allowed_signers"
+
       - name: Actualizar tags
         shell: bash
         run: git fetch --tags --force origin
+
       - name: Verificar todos los tags versionados
         shell: bash
         run: |

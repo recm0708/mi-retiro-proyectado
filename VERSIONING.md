@@ -15,7 +15,7 @@ La fuente canónica de versión continúa siendo `VERSION`.
 Estado vigente:
 
 - `VERSION` contiene `0.1.16.05-beta` y materializa G116/E05 (DOC.1 R5), aceptado mediante PR #101 / merge `6f4266d`. G115/E04 permanece preservado como DOC.1 R4.
-- `v0.1.15.04-beta` permanece publicado, firmado y verificado; `v0.1.16.05-beta` se publicará únicamente después de integrar y revalidar esta promoción; `v0.0.26-beta` continúa como último tag de la familia legacy.
+- `v0.1.16.05-beta` permanece publicado, firmado y verificado como G116/E05; `v0.1.15.04-beta` y las publicaciones anteriores se preservan inmutables; `v0.0.26-beta` continúa como último tag de la familia legacy.
 - La reconciliación post-G070 reconstruye G071–G108 y conserva `v0.0.71.01-beta` como evidencia histórica de G087/E01 sin mover el tag.
 - AUD.SEC2 R1 fue aceptado como G109/E01, REL.GOV.1 R1 como G110/E01, DOC.2 como G111/E01, NOR.1 R8 como G112/E07, DOC.1 R3 como G113/E03, PLAN.2 R1 como G114/E01, DOC.1 R4 como G115/E04 y DOC.1 R5 como G116/E05.
 - G116/E05 (`0.1.16.05-beta`) queda aceptado para DOC.1 R5, continuando el ordinal del bloque después de E04. G117/E02 (`0.1.17.02-beta`) queda reservado para REL.GOV.1 R2, continuando el ordinal de REL.GOV.1 después de E01.

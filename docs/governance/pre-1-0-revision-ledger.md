@@ -217,4 +217,4 @@ G117 permanece reservado y **no se considera aceptado** mientras REL.GOV.1 R2 si
 
 PERSIST.1 permanece planificado como etapa posterior de la matriz maestra y no tiene un Global preasignado.
 
-Los tags `v0.0.71.01-beta`, `v0.1.09.01-beta`, `v0.1.13.03-beta`, `v0.1.14.01-beta` y `v0.1.15.04-beta` permanecen publicados e inmutables conforme a su evidencia. `v0.1.16.05-beta` se crea únicamente después de integrar y revalidar la promoción.
+Los tags `v0.0.71.01-beta`, `v0.1.09.01-beta`, `v0.1.13.03-beta`, `v0.1.14.01-beta`, `v0.1.15.04-beta` y `v0.1.16.05-beta` permanecen publicados e inmutables conforme a su evidencia. G117/E02 continúa reservado para REL.GOV.1 R2 y todavía no representa una publicación.

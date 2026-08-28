@@ -9,7 +9,7 @@ El cierre de MANT.1 R7 no cambia la política de seguridad ni convierte candidat
 Estado vigente:
 
 - La versión canónica vigente es `0.1.16.05-beta` (G116/E05).
-- `v0.1.15.04-beta` permanece como último tag revision-aware publicado y verificado hasta completar la publicación post-merge de `v0.1.16.05-beta`; `v0.1.14.01-beta` permanece preservado.
+- `v0.1.16.05-beta` es el último tag revision-aware publicado y verificado; su objeto firmado y GitHub Release prerelease quedan preservados junto con las publicaciones anteriores. `v0.1.15.04-beta` permanece preservado como publicación previa e inmutable.
 - `v0.0.71.01-beta` es un tag formal histórico publicado originalmente como VER.2 G071/E01 y reconciliado posteriormente como G087/E01 sin alterar el objeto firmado.
 - `v0.0.26-beta` permanece como tag legacy histórico e inmutable.
 - VER.2, NOR.1 R8, NOR.2, DOC.1 R1–R5 y PLAN.2 R1 están cerrados.
@@ -25,7 +25,7 @@ Mi Retiro Proyectado se encuentra en **desarrollo beta**. Los estados histórico
 
 | Línea | Soporte de seguridad |
 |---|---|
-| `0.1.16.05-beta` | Beta vigente G116/E05 aceptada; tag y GitHub Release pendientes hasta integrar/revalidar la promoción |
+| `0.1.16.05-beta` | Beta vigente G116/E05 publicada; tag firmado, workflow de verificación y GitHub Release prerelease verificados |
 | `0.1.15.04-beta` | Beta previa G115/E04 publicada; tag firmado, workflow de verificación y GitHub Release prerelease verificados |
 | `0.1.14.01-beta` | Beta previa G114/E01 publicada; tag firmado, workflow de verificación y GitHub Release prerelease verificados |
 | `0.1.13.03-beta` | Beta previa G113/E03 publicada; tag firmado y GitHub Release prerelease preservados |

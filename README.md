@@ -20,11 +20,11 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 
 ## Estado del proyecto
 
-- **Versión canónica vigente:** `0.1.16.05-beta`, obtenida exclusivamente desde [`VERSION`](VERSION). Materializa G116/E05 después de aceptar DOC.1 R5 mediante PR #101 / merge `6f4266d`; su tag firmado y GitHub Release prerelease se publican únicamente después de integrar y revalidar esta promoción.
-- **Último estado aceptado integrado en `main`:** DOC.1 R5 mediante PR #101 / merge `6f4266d`; esta promoción materializa ese mismo estado como G116/E05 y no consume G117.
+- **Versión canónica vigente:** `0.1.16.05-beta`, obtenida exclusivamente desde [`VERSION`](VERSION). Materializa G116/E05 después de aceptar DOC.1 R5 mediante PR #101 / merge `6f4266d` y de completar su promoción mediante PR #102 / `main` `dfb7dc6`.
+- **Último estado aceptado y publicado:** DOC.1 R5 como G116/E05; promoción PR #102, commit publicado `dfb7dc60cf81951c701c126d6fecbcfdbca7aa7b`, tag firmado `v0.1.16.05-beta` y GitHub Release prerelease.
 - **Estado de SEC.2:** cerrado después de R1–R6; AUD.SEC2 R1 corrigió la regresión del kill switch administrativo, alineó documentación/ledger y quedó aceptado como G109.
 - **Estado revision-aware reconciliado:** G116/E05 (`0.1.16.05-beta`) queda aceptado para DOC.1 R5; G117/E02 (`0.1.17.02-beta`) queda reservado para REL.GOV.1 R2 como siguiente checkpoint.
-- **Último tag revision-aware publicado:** `v0.1.15.04-beta` (G115/E04), firmado, verificado y asociado a GitHub Release prerelease; `v0.1.16.05-beta` se publicará únicamente después de integrar y revalidar esta promoción.
+- **Último tag revision-aware publicado:** `v0.1.16.05-beta` (G116/E05), anotado y firmado, objeto `4b5902bf7a3d2b94fcad8a426652d7ad8b77a32c`, verificado por GitHub y asociado a GitHub Release prerelease; la publicación anterior `v0.1.15.04-beta` permanece preservada e inmutable.
 - **Última versión formal legacy:** `0.0.26-beta` — tag firmado e inmutable `v0.0.26-beta`.
 - **Etapa:** desarrollo beta; repositorio público y ejecución orientada actualmente a entorno local.
 - **GOV.1, PLAN.1, PLAN.2 R1, DEV.2, MANT.1, DOC.1 R1–R5, NOR.1 R8 y NOR.2:** cerrados. REL.GOV.1 R2 queda como checkpoint candidato G117/E02; DEV.2, UX.5 y los bloques finales permanecen ordenados en la matriz maestra hacia 1.0.

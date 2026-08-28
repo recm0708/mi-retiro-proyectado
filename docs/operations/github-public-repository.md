@@ -140,7 +140,8 @@ REL.GOV.1 añade un contrato específico de publicación sin modificar la visibi
 - todo tag formal nuevo posterior a esta política debe tener GitHub Release asociado;
 - `.github/release.yml` categoriza notas generadas por GitHub, pero no sustituye el cuerpo auditable requerido;
 - `scripts/release_contract.py` valida VERSION, ledger, tag, título y secciones mínimas de las notas;
-- `.github/workflows/verificar-tags.yml` verifica firma y contrato del tag en publicaciones futuras;
+- `scripts/release_publication.py` valida el manifiesto versionado, renderiza notas canónicas y comprueba idempotencia/fail-closed frente a un Release existente;
+- `.github/workflows/verificar-tags.yml` conserva la firma local del tag, verifica firma/contrato/commit con permisos de lectura y publica el GitHub Release en un job separado con `contents: write` solo después de superar la verificación;
 - una beta terminada en `-beta` se marca como prerelease;
 - no se crean GitHub Releases retroactivos para estados que nunca tuvieron tag formal;
 - una edición descriptiva de un Release histórico no autoriza mover, borrar ni recrear su tag.
