@@ -1233,3 +1233,42 @@ La aceptación de DOC.1 R4 quedó integrada mediante PR #96 / merge `9f51229` y 
 - `git diff --check` y `git status --short` → limpios.
 
 La promoción materializó `0.1.15.04-beta` como G115/E04 y fue publicada mediante el tag firmado `v0.1.15.04-beta` y su GitHub Release prerelease después de integrar y revalidar `main`. DOC.1 R5 quedó aceptado posteriormente como G116/E05 (`0.1.16.05-beta`) mediante PR #101 / merge `6f4266d`; G117/E02 (`0.1.17.02-beta`) queda reservado para REL.GOV.1 R2.
+
+## G116/E05 — publicación y baseline de REL.GOV.1 R2
+
+DOC.1 R5 fue promovido mediante PR #102 al commit `dfb7dc60cf81951c701c126d6fecbcfdbca7aa7b`. La revalidación post-merge confirmó `pytest` **1172 passed / 5615 subtests**, `pip check`, compilación Python, sintaxis JavaScript, auditoría Markdown 158/158, 16 familias / 46 identificadores y árbol Git limpio.
+
+La publicación formal quedó materializada mediante:
+
+- tag anotado y firmado `v0.1.16.05-beta`;
+- objeto de tag `4b5902bf7a3d2b94fcad8a426652d7ad8b77a32c`;
+- firma SSH reconocida por GitHub como válida;
+- workflow `Git Tag Signature Verification` #14 en `success`;
+- GitHub Release prerelease ID `378095836`.
+
+Este estado constituye el baseline de REL.GOV.1 R2. Durante el desarrollo de R2, `VERSION` permanece en `0.1.16.05-beta`, `accepted_count` en 116 y G117/E02 (`0.1.17.02-beta`) continúa reservado, no aceptado.
+
+REL.GOV.1 R2 introduce un manifiesto versionado de publicación, renderizado determinista de notas, validación idempotente/fail-closed y separación de permisos entre verificación (`contents: read`) y publicación (`contents: write`). La creación y firma del tag permanecen como operación local del mantenedor.
+
+## REL.GOV.1 R2 — gate integral de desarrollo pre-PR
+
+REL.GOV.1 R2 completó su gate integral local de desarrollo manteniendo la base
+publicada G116/E05 (`0.1.16.05-beta`). G117/E02 continúa reservado y no aceptado.
+
+Evidencia ejecutada:
+
+- **1157 tests `unittest` en OK**;
+- **1197 tests `pytest` passed / 5731 subtests passed**;
+- `pip check`: OK;
+- compilación `app/scripts/tests`: OK;
+- sintaxis JavaScript: **18/18 archivos OK**;
+- auditoría Markdown: **159/159 OK**;
+- clasificación: **58 VIVO / 24 AUDITORIA / 64 HISTORICO / 9 PLANTILLA / 4 SOPORTE**;
+- identificadores: **16 familias / 46 identificadores OK**;
+- contrato/manifiesto de publicación: OK;
+- prueba idempotente contra el GitHub Release G116 real: OK;
+- `git diff --cached --check`: OK;
+- índice final: **19 archivos staged**, sin cambios unstaged ni archivos no rastreados.
+
+La automatización no creó commits, tags ni Releases durante este gate. La
+creación y firma del tag permanecen fuera de GitHub Actions.

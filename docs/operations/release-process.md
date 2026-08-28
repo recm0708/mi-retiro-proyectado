@@ -18,7 +18,7 @@ El cierre de MANT.1 R7 no constituye release formal ni cambia la versión canón
 Para una release posterior se mantiene el criterio vigente:
 
 - `VERSION` debe ser la fuente única.
-- `0.1.16.05-beta` es la versión canónica vigente y materializa G116/E05; `v0.1.15.04-beta` permanece como último tag revision-aware publicado hasta completar la publicación post-merge de `v0.1.16.05-beta`.
+- `0.1.16.05-beta` es la versión canónica vigente y materializa G116/E05; `v0.1.16.05-beta` está publicado como tag firmado y GitHub Release prerelease. G117/E02 permanece reservado para REL.GOV.1 R2.
 - `v0.0.71.01-beta` fue publicado originalmente bajo la denominación VER.2 G071/E01; la reconciliación post-G070 sitúa ese estado cronológicamente en **G087/E01** sin mover el tag.
 - `v0.0.26-beta` permanece como tag legacy histórico e inmutable.
 - VER.2, MANT.1, DOC.1 R1–R5, NOR.1, NOR.2 y PLAN.2 R1 están cerrados.
@@ -206,7 +206,7 @@ v1.0.0.1
 
 No se crean tags revision-aware retrospectivos para G001–G070.
 
-El tag debe apuntar al commit validado y usar una clave autorizada por la política vigente. `.github/workflows/verificar-tags.yml` permite verificar tags futuros y auditar la colección.
+El tag debe apuntar al commit validado y usar una clave autorizada por la política vigente. La creación y firma del tag permanecen fuera de GitHub Actions y bajo control del mantenedor. `.github/workflows/verificar-tags.yml` verifica firma, contrato, correspondencia del tag y pertenencia del commit al historial de `main`; REL.GOV.1 R2 añade después un job separado de publicación.
 
 ## 10. Build oficial
 
@@ -291,23 +291,29 @@ python scripts\release_contract.py --check-notes .\release-notes.md
 
 ### 12.4. Creación controlada
 
-El tag debe existir, estar firmado, publicado y apuntar al SHA validado **antes** de crear el Release. El flujo recomendado es:
+REL.GOV.1 R2 mantiene la **creación y firma del tag como operación local del mantenedor**. GitHub Actions no crea ni firma tags.
+
+Antes de la promoción se prepara `data/release-publication-manifest.json` con resumen, cambios, validación, evidencia y siguiente paso sustentados. El manifiesto debe corresponder a `VERSION`, al bloque/ordinal aceptado del ledger y al siguiente candidato real. Su contrato se valida con:
 
 ```powershell
-$version = (Get-Content .\VERSION).Trim()
-$title = python scripts\release_contract.py --print-title
-python scripts\release_contract.py --check-tag "v$version"
-python scripts\release_contract.py --check-notes .\release-notes.md
-
-gh release create "v$version" `
-  --repo recm0708/mi-retiro-proyectado `
-  --title "$title" `
-  --prerelease `
-  --verify-tag `
-  --notes-file .\release-notes.md
+python scripts\release_publication.py --check-manifest
 ```
 
-Para una versión estable se omite `--prerelease`. `.github/release.yml` configura la categorización de **Generate release notes**, pero no sustituye estas secciones ni la evidencia manual obligatoria.
+Después de integrar, revalidar `main`, crear el tag anotado/firmado y ejecutar `git push origin "v$version"`, el workflow `.github/workflows/verificar-tags.yml` aplica dos fronteras de permisos:
+
+1. **Verificar tag publicado** usa `contents: read` y valida firma SSH, `VERSION`, ledger, tag, commit objetivo y pertenencia al historial de `main`.
+2. **Publicar GitHub Release** depende del job anterior y es el único que recibe `contents: write`.
+
+El segundo job deriva del tag el commit publicado y el objeto de tag, renderiza las notas canónicas mediante `scripts/release_publication.py` y aplica semántica idempotente:
+
+- solo un **HTTP 404** de la API de GitHub autoriza interpretar que el Release no existe y crearlo con `gh release create --verify-tag`;
+- si existe (HTTP 200) y coincide exactamente en tag, título, draft/prerelease y cuerpo, termina en `OK` sin modificarlo;
+- si existe pero difiere del contrato, falla cerrado y no lo reescribe automáticamente;
+- errores de autenticación, permisos, rate limit, servidor, red o cualquier estado distinto de 200/404 fallan cerrado y **no** se reinterpretan como ausencia del Release.
+
+Las versiones `-beta` se publican como prerelease; una versión estable omite esa marca. `.github/release.yml` continúa disponible para categorización asistida, pero no sustituye el manifiesto ni las notas auditables.
+
+El flujo automático **no crea commits post-publicación** ni modifica `main` para cambiar frases temporales. La documentación viva evita declarar estados efímeros como “tag pendiente”; la evidencia primaria de publicación reside en Git/tag firmado, GitHub Release y el workflow correspondiente. Un operador puede usar `gh release create` manualmente solo como recuperación controlada si la automatización no está disponible, respetando exactamente el mismo contrato.
 
 ### 12.5. Edición y reconciliación posterior
 

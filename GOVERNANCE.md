@@ -15,7 +15,7 @@ Estado vigente:
 
 - `VERSION` sigue siendo la fuente única de versión.
 - `0.1.16.05-beta` es la versión canónica vigente en `VERSION` y materializa G116/E05 (DOC.1 R5); G117/E02 queda reservado para REL.GOV.1 R2.
-- `v0.1.15.04-beta` permanece como último tag revision-aware publicado y verificado hasta completar la publicación post-merge de `v0.1.16.05-beta`; `v0.1.14.01-beta` permanece preservado.
+- `v0.1.16.05-beta` es el último tag revision-aware publicado y verificado; apunta al commit `dfb7dc6` y su GitHub Release prerelease queda preservado junto con las publicaciones anteriores. `v0.1.15.04-beta` permanece preservado como publicación previa e inmutable.
 - `v0.0.71.01-beta` conserva su evidencia histórica reconciliada como G087/E01.
 - `v0.0.26-beta` permanece como tag legacy histórico e inmutable.
 - VER.2, MANT.1, NOR.1, NOR.2, DOC.1 R1–R5 y PLAN.2 R1 están cerrados.

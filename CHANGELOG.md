@@ -7,13 +7,15 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 ## [Unreleased]
 
 - REL.GOV.1 R2 (candidato G117/E02): automatización de Releases y checks sobre la base aceptada G116/E05; G117 permanece reservado y no aceptado mientras no supere su gate propio.
+- Publicación determinista: añade manifiesto versionado, renderer canónico de notas y validación idempotente/fail-closed de Releases existentes.
+- Workflow de tags: conserva la firma local del mantenedor, verifica firma/contrato/commit en `main` y aísla `contents: write` al job de publicación posterior a la verificación.
 
 ## [0.1.16.05-beta]
 - G116/E05: DOC.1 R5 queda aceptado mediante PR #101 / merge `6f4266d` después de completar la normalización documental integral post-G115.
 - Documentación: humaniza navegación Markdown, completa plantillas técnicas/semánticas, reconcilia el estado publicado de G115 y endurece el auditor contra etiquetas técnicas y candidatos revision-aware obsoletos.
-- Gate: 1127 pruebas `unittest` post-merge en `OK`, `pytest` 1167 passed / 5587 subtests, Markdown 158/158, `pip check`, compilación Python, sintaxis JavaScript, auditor de identificadores y `git diff --check` limpios; checks remotos de PR y post-merge en `success`.
+- Gate: desarrollo DOC.1 R5 con 1127 pruebas `unittest` y `pytest` 1167 passed / 5587 subtests; promoción con 1132 pruebas `unittest`; revalidación post-merge con `pytest` 1172 passed / 5615 subtests, Markdown 158/158, `pip check`, compilación Python, sintaxis JavaScript, auditor de identificadores y `git diff --check` limpios; checks remotos y CodeQL en `success`.
 - Ledger: G116 queda aceptado; G117/E02 (`0.1.17.02-beta`) queda reservado para REL.GOV.1 R2.
-- Tag/Release: `v0.1.16.05-beta` queda pendiente hasta integrar y revalidar esta promoción; `v0.1.15.04-beta` permanece como último tag revision-aware publicado.
+- Tag/Release: promoción PR #102 / `main` `dfb7dc6`; tag anotado y firmado `v0.1.16.05-beta`, objeto `4b5902bf7a3d2b94fcad8a426652d7ad8b77a32c`, firma válida en GitHub, workflow `Git Tag Signature Verification` #14 en `success` y GitHub Release prerelease publicado.
 
 ## [0.1.15.04-beta]
 - G115/E04: DOC.1 R4 queda aceptado mediante PR #96 / merge `9f51229` después de sanear el estado documental vivo posterior a la publicación de G114/E01 sin reescribir evidencia histórica.

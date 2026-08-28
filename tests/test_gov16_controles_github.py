@@ -20,9 +20,27 @@ class TestGov16ControlesGithub(unittest.TestCase):
         t=(GH/'workflows/governance-audit.yml').read_text(encoding='utf-8')
         for e in ('name: Auditoría de gobernanza','contents: read','actions/checkout@v7','actions/setup-python@v7','tests.test_gov16_controles_github','git diff --check'): self.assertIn(e,t)
         self.assertNotIn('pull_request_target',t); self.assertNotIn('contents: write',t)
-    def test_workflows_existentes_siguen_solo_lectura(self):
-        for n in ('ci.yml','verificar-tags.yml'):
-            t=(GH/'workflows'/n).read_text(encoding='utf-8'); self.assertIn('permissions:',t); self.assertIn('contents: read',t); self.assertNotIn('contents: write',t)
+    def test_workflows_mantienen_permisos_minimos(self):
+        ci=(GH/'workflows/ci.yml').read_text(encoding='utf-8')
+        self.assertIn('permissions:',ci)
+        self.assertIn('contents: read',ci)
+        self.assertNotIn('contents: write',ci)
+
+        tags=(GH/'workflows/verificar-tags.yml').read_text(encoding='utf-8')
+        self.assertIn('permissions:\n  contents: read',tags)
+        self.assertIn('publicar-release:',tags)
+        self.assertEqual(1,tags.count('contents: write'))
+        antes=tags.split('  publicar-release:',1)[0]
+        self.assertNotIn('contents: write',antes)
+        publicacion=tags.split('  publicar-release:',1)[1].split(
+            '  auditar-todos-los-tags:',1
+        )[0]
+        self.assertIn('permissions:\n      contents: write',publicacion)
+        self.assertIn(
+            'needs:\n      - verificar-tag-publicado',
+            publicacion,
+        )
+
     def test_codeowners_cubre_areas_criticas(self):
         t=(GH/'CODEOWNERS').read_text(encoding='utf-8')
         for e in ('* @recm0708','/app/core/ @recm0708','/app/engines/ @recm0708','/regulations/ @recm0708','/docs/ @recm0708','/.github/ @recm0708'): self.assertIn(e,t)

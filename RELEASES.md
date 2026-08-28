@@ -10,10 +10,10 @@
 ## Promoción G116/E05 — post-merge de DOC.1 R5
 
 - Estado aceptado: G116/E05 (`0.1.16.05-beta`).
-- Evidencia de aceptación: PR #101 / merge `6f4266d`, 1127 pruebas `unittest` post-merge, `pytest` 1167 passed / 5587 subtests, Markdown 158/158, auditor de identificadores en `OK`, `pip check`, compilación Python, sintaxis JavaScript y `git diff --check` limpios; checks remotos de PR y post-merge en `success`.
+- Evidencia de aceptación: PR #101 / merge `6f4266d`; promoción PR #102 / `main` `dfb7dc60cf81951c701c126d6fecbcfdbca7aa7b`; revalidación post-merge con `pytest` 1172 passed / 5615 subtests, Markdown 158/158, auditor de identificadores, `pip check`, compilación Python, sintaxis JavaScript, `git diff --check`, CI, gobernanza, Markdown Audit y CodeQL en `success`.
 - Esta sincronización materializa G116 ya aceptado y **no consume G117**.
 - G117/E02 (`0.1.17.02-beta`) queda reservado para REL.GOV.1 R2; DEV.2/UX.5 y PERSIST.1 continúan posteriormente conforme a la matriz maestra.
-- Tag y GitHub Release `v0.1.16.05-beta`: pendientes hasta integrar/revalidar esta promoción; `v0.1.15.04-beta` permanece publicado e inmutable.
+- Publicación final: tag anotado y firmado `v0.1.16.05-beta`, objeto `4b5902bf7a3d2b94fcad8a426652d7ad8b77a32c`, firma SSH válida en GitHub, workflow `Git Tag Signature Verification` #14 en `success` y GitHub Release prerelease ID `378095836` publicado; `v0.1.15.04-beta` permanece preservado e inmutable.
 
 ## Promoción G115/E04 — post-merge de DOC.1 R4
 
@@ -78,13 +78,13 @@ Después de `v0.0.26-beta`, el repositorio integró trabajo funcional, técnico,
 
 Estado vigente:
 
-- Último tag formal publicado: `v0.1.15.04-beta` (G115/E04), firmado, verificado y asociado a GitHub Release prerelease.
+- Último tag formal publicado: `v0.1.16.05-beta` (G116/E05), firmado, verificado y asociado a GitHub Release prerelease.
 - Último tag formal legacy: `v0.0.26-beta`.
-- Versión canónica en `VERSION`: `0.1.15.04-beta` (G115/E04).
+- Versión canónica en `VERSION`: `0.1.16.05-beta` (G116/E05).
 - `v0.0.71.01-beta` conserva su denominación histórica original y se reconcilia como G087/E01 sin alterar el tag.
-- MANT.1, NOR.1 R8, NOR.2, DOC.1 R1–R4 y PLAN.2 R1 están cerrados.
-- DOC.2 permanece aceptado/publicado como G111/E01; NOR.1 R8 como G112/E07, DOC.1 R3 como G113/E03, PLAN.2 R1 como G114/E01 y DOC.1 R4 como G115/E04.
-- G114/E01 permanece aceptado/publicado para PLAN.2 R1; G115/E04 (`0.1.15.04-beta`) queda aceptado/publicado para DOC.1 R4; G116/E05 (`0.1.16.05-beta`) queda aceptado para DOC.1 R5; G117/E02 (`0.1.17.02-beta`) queda reservado para REL.GOV.1 R2. REL.GOV.1 R2, PERSIST.1 y REP.1 permanecen planificados posteriormente según la matriz maestra viva.
+- MANT.1, NOR.1 R8, NOR.2, DOC.1 R1–R5 y PLAN.2 R1 están cerrados.
+- DOC.2 permanece aceptado/publicado como G111/E01; NOR.1 R8 como G112/E07, DOC.1 R3 como G113/E03, PLAN.2 R1 como G114/E01, DOC.1 R4 como G115/E04 y DOC.1 R5 como G116/E05.
+- G114/E01 permanece aceptado/publicado para PLAN.2 R1; G115/E04 (`0.1.15.04-beta`) queda aceptado/publicado para DOC.1 R4; G116/E05 (`0.1.16.05-beta`) queda aceptado/publicado para DOC.1 R5; G117/E02 (`0.1.17.02-beta`) queda reservado para REL.GOV.1 R2. REL.GOV.1 R2 continúa como candidato; PERSIST.1 y REP.1 permanecen posteriormente según la matriz maestra viva.
 - SEC.2 quedó cerrado después de R1–R6 y AUD.SEC2 R1 permanece aceptado como G109/E01.
 
 Este documento no crea una release nueva; registra el estado formal ya alcanzado por el repositorio.
