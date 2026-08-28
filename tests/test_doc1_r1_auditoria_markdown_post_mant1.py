@@ -6,12 +6,12 @@ import re
 ROOT = Path(__file__).resolve().parents[1]
 
 DOC1_EVIDENCE = [
-    "docs/archive/governance/AUDITORIA_MARKDOWN_POST_MANT1_DOC1_R1.md",
-    "docs/archive/governance/MATRIZ_DECISION_MARKDOWN_DOC1_R1.md",
-    "docs/archive/governance/CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md",
-    "docs/archive/governance/LINEA_BASE_DOCUMENTAL_POST_MANT1_DOC1_R1.md",
-    "docs/archive/governance/REVISION_SOLO_SI_APLICA_DOC1_R1.md",
-    "docs/archive/governance/CIERRE_DOCUMENTAL_MARKDOWN_DOC1_R1.md",
+    "docs/archive/governance/markdown-audit-post-mant1-doc1-r1.md",
+    "docs/archive/governance/doc1-r1-markdown-decision-matrix.md",
+    "docs/archive/governance/doc1-r1-markdown-update-context.md",
+    "docs/archive/governance/doc1-r1-post-mant1-documentation-baseline.md",
+    "docs/archive/governance/doc1-r1-applicability-only-review.md",
+    "docs/archive/governance/doc1-r1-markdown-documentation-closeout.md",
 ]
 
 DOCS_VIGENTES_REVISADOS = [
@@ -29,7 +29,7 @@ DOCS_VIGENTES_REVISADOS = [
     "docs/standards/code-and-comments.md",
     "docs/README.md",
     "docs/governance/pre-1-0-revision-ledger.md",
-    "docs/archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md",
+    "docs/archive/governance/ver2-revision-decision-matrix.md",
     "docs/product/traceability-matrix.md",
     "docs/operations/observability-and-logs.md",
     "docs/governance/master-plan-to-1-0.md",
@@ -58,7 +58,7 @@ def test_doc1_r1_evidence_files_exist():
 
 
 def test_linea_base_documental_post_mant1_define_estado_canonico():
-    text = read("docs/archive/governance/LINEA_BASE_DOCUMENTAL_POST_MANT1_DOC1_R1.md")
+    text = read("docs/archive/governance/doc1-r1-post-mant1-documentation-baseline.md")
 
     assert "`0.0.26-beta`" in text
     assert "`VERSION`" in text
@@ -74,11 +74,11 @@ def test_linea_base_documental_post_mant1_define_estado_canonico():
 def test_estado_historico_doc1_r1_no_congela_version_actual():
     linea_base = read(
         "docs/archive/governance/"
-        "LINEA_BASE_DOCUMENTAL_POST_MANT1_DOC1_R1.md"
+        "doc1-r1-post-mant1-documentation-baseline.md"
     )
     cierre = read(
         "docs/archive/governance/"
-        "CIERRE_DOCUMENTAL_MARKDOWN_DOC1_R1.md"
+        "doc1-r1-markdown-documentation-closeout.md"
     )
     assert "`0.0.71.01-beta`" in linea_base
     assert "`VERSION` permanece en `0.0.26-beta`" in cierre
@@ -86,7 +86,7 @@ def test_estado_historico_doc1_r1_no_congela_version_actual():
 
 def test_readme_expone_estado_vigente_y_doc1_preserva_su_cierre():
     readme = read("README.md")
-    cierre = read("docs/archive/governance/CIERRE_DOCUMENTAL_MARKDOWN_DOC1_R1.md")
+    cierre = read("docs/archive/governance/doc1-r1-markdown-documentation-closeout.md")
 
     version = read("VERSION").strip()
     assert f"**Versión canónica vigente:** `{version}`" in readme
@@ -161,7 +161,7 @@ def test_indice_lista_evidencia_doc1_r1():
         assert nombre in text
 
 def test_cierre_doc1_r1_resume_alcance_limites_y_validacion():
-    text = read("docs/archive/governance/CIERRE_DOCUMENTAL_MARKDOWN_DOC1_R1.md")
+    text = read("docs/archive/governance/doc1-r1-markdown-documentation-closeout.md")
 
     assert "Total Markdown evaluados: `106`" in text
     assert "Documentos marcados `ACTUALIZAR`: `15`" in text

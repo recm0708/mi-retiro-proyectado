@@ -15,7 +15,7 @@
 - Checks post-merge: Continuous Integration #273, Repository Governance Audit #112, Markdown Audit #59 y CodeQL #209 en `success`.
 - Esta sincronización materializa G117 ya aceptado y **no consume G118**.
 - G118/E04 (`0.1.18.04-beta`) queda reservado para DEV.2 R5; DEV.2 R6 y UX.5 continúan posteriormente conforme a la matriz maestra.
-- Contrato de publicación: G117/E02 se publica formalmente mediante el tag firmado `v0.1.17.02-beta` y su GitHub Release prerelease únicamente después de integrar y revalidar la promoción; G116/E05 permanece preservado e inmutable.
+- Publicación final: tag anotado y firmado `v0.1.17.02-beta`, objeto `d2e493d16a2768ea5e6284c577c21b4f84897fae`, commit publicado `3ab9fefbdfc969c546feb83182e3c0e6879ba771` y GitHub Release prerelease ID `378278328`, creado por la automatización de REL.GOV.1 R2; G116/E05 permanece preservado e inmutable.
 
 ## Promoción G116/E05 — post-merge de DOC.1 R5
 
@@ -88,13 +88,13 @@ Después de `v0.0.26-beta`, el repositorio integró trabajo funcional, técnico,
 
 Estado vigente:
 
-- Último tag formal publicado: `v0.1.16.05-beta` (G116/E05), firmado, verificado y asociado a GitHub Release prerelease.
+- Último tag formal publicado: `v0.1.17.02-beta` (G117/E02), firmado, verificado y asociado a GitHub Release prerelease automatizado por REL.GOV.1 R2.
 - Último tag formal legacy: `v0.0.26-beta`.
-- Versión canónica en `VERSION`: `0.1.16.05-beta` (G116/E05).
+- Versión canónica en `VERSION`: `0.1.17.02-beta` (G117/E02).
 - `v0.0.71.01-beta` conserva su denominación histórica original y se reconcilia como G087/E01 sin alterar el tag.
 - MANT.1, NOR.1 R8, NOR.2, DOC.1 R1–R5 y PLAN.2 R1 están cerrados.
 - DOC.2 permanece aceptado/publicado como G111/E01; NOR.1 R8 como G112/E07, DOC.1 R3 como G113/E03, PLAN.2 R1 como G114/E01, DOC.1 R4 como G115/E04 y DOC.1 R5 como G116/E05.
-- G114/E01 permanece aceptado/publicado para PLAN.2 R1; G115/E04 (`0.1.15.04-beta`) queda aceptado/publicado para DOC.1 R4; G116/E05 (`0.1.16.05-beta`) queda aceptado/publicado para DOC.1 R5; G117/E02 (`0.1.17.02-beta`) queda reservado para REL.GOV.1 R2. REL.GOV.1 R2 continúa como candidato; PERSIST.1 y REP.1 permanecen posteriormente según la matriz maestra viva.
+- G114/E01 permanece aceptado/publicado para PLAN.2 R1; G115/E04 (`0.1.15.04-beta`) queda aceptado/publicado para DOC.1 R4; G116/E05 (`0.1.16.05-beta`) queda aceptado/publicado para DOC.1 R5; G117/E02 (`0.1.17.02-beta`) queda aceptado/publicado para REL.GOV.1 R2. G118/E04 (`0.1.18.04-beta`) queda reservado para DEV.2 R5; PERSIST.1 y REP.1 permanecen posteriormente según la matriz maestra viva.
 - SEC.2 quedó cerrado después de R1–R6 y AUD.SEC2 R1 permanece aceptado como G109/E01.
 
 Este documento no crea una release nueva; registra el estado formal ya alcanzado por el repositorio.
@@ -294,7 +294,7 @@ Mientras el PR de VER.2 no supere el gate completo y se integre:
 
 Si VER.2 se integra satisfactoriamente, `0.0.71.01-beta` pasa a ser el primer estado nuevo gobernado por la familia revision-aware. La creación de su tag, si corresponde al cierre, se realizará únicamente después de merge y revalidación.
 
-La distribución del contador aceptado hasta G070 se conserva de forma auditable en `docs/archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md`, `docs/governance/pre-1-0-revision-ledger.md` y `data/pre-1-0-revision-ledger.json`; los intentos fallidos, refinamientos sin aceptación independiente y checkpoints absorbidos se preservan como evidencia sin consumir un `G` adicional.
+La distribución del contador aceptado hasta G070 se conserva de forma auditable en `docs/archive/governance/ver2-revision-decision-matrix.md`, `docs/governance/pre-1-0-revision-ledger.md` y `data/pre-1-0-revision-ledger.json`; los intentos fallidos, refinamientos sin aceptación independiente y checkpoints absorbidos se preservan como evidencia sin consumir un `G` adicional.
 
 ## 6. Migración criptográfica de tags — materializada
 

@@ -13,7 +13,7 @@ from app.core.version import (
 
 ROOT = Path(__file__).resolve().parents[1]
 LEDGER = ROOT / "docs" / "governance/pre-1-0-revision-ledger.md"
-AUDITORIA = ROOT / "docs" / "archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md"
+AUDITORIA = ROOT / "docs" / "archive/governance/pre-1-0-versioning-audit.md"
 
 
 class TestVer2VersionRevisionAware(unittest.TestCase):

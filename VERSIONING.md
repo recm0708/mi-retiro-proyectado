@@ -15,7 +15,7 @@ La fuente canónica de versión continúa siendo `VERSION`.
 Estado vigente:
 
 - `VERSION` contiene `0.1.17.02-beta` y materializa G117/E02 (REL.GOV.1 R2), aceptado mediante PR #103 / merge `46c464e`.
-- `v0.1.16.05-beta` permanece publicado, firmado e inmutable como G116/E05. La publicación formal de G117/E02 usa `v0.1.17.02-beta` únicamente después de integrar y revalidar la promoción, conforme a REL.GOV.1 R2.
+- `v0.1.17.02-beta` está publicado, firmado y asociado al GitHub Release prerelease automatizado por REL.GOV.1 R2 como materialización formal de G117/E02; `v0.1.16.05-beta` permanece publicado, firmado e inmutable como G116/E05.
 - La reconciliación post-G070 permanece inmutable y conserva `v0.0.71.01-beta` como evidencia histórica de G087/E01.
 - G109–G116 permanecen aceptados según el ledger; REL.GOV.1 R2 se incorpora como G117/E02.
 - G118/E04 (`0.1.18.04-beta`) queda reservado para DEV.2 R5. E04 corresponde al cuarto ordinal aceptable del bloque DEV.2, aunque la revisión funcional se denomine R5 porque el cierre R4 no consumió Global independiente.
@@ -43,7 +43,7 @@ La fuente canónica de la versión de aplicación es el archivo raíz `VERSION`.
 - El contador y la procedencia de revisiones aceptadas se auditan en `docs/governance/pre-1-0-revision-ledger.md` y `data/pre-1-0-revision-ledger.json`.
 - `app/core/version_ledger.py` valida continuidad, unicidad y codificación del ledger estructurado.
 - `docs/governance/pre-1-0-pending-matrix.md` ordena el trabajo pendiente hacia 1.0 sin preasignar Globales futuros.
-- La regla que determina qué cuenta y qué no cuenta se documenta en `docs/archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md` y `docs/archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md`.
+- La regla que determina qué cuenta y qué no cuenta se documenta en `docs/archive/governance/ver2-revision-decision-matrix.md` y `docs/archive/governance/pre-1-0-versioning-audit.md`.
 - README, CHANGELOG, RELEASES, ROADMAP y el ledger deben corresponder al estado vigente cuando lo describan como actual.
 - Los documentos de dominio pueden conservar la versión en la que fueron revisados; esa metadata es histórica de revisión documental y no una segunda fuente de la versión vigente.
 - La numeración de **Build** es independiente de `VERSION` y solo se materializa cuando exista un proceso reproducible de generación de artefactos oficiales.
@@ -139,7 +139,7 @@ Reglas:
 7. un mantenimiento técnico, de seguridad, gobierno, dependencias o documentación puede contar si crea un estado materialmente distinto, validado y aceptado; un checkpoint que solo agrupa estados ya contabilizados no cuenta de nuevo;
 8. no se inventan retrospectivamente revisiones que nunca existieron.
 
-La aplicación concreta de estas reglas está auditada en `docs/archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md`.
+La aplicación concreta de estas reglas está auditada en `docs/archive/governance/ver2-revision-decision-matrix.md`.
 
 ## 5. Contador global reconstruido
 

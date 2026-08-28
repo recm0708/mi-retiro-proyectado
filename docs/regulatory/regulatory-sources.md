@@ -109,4 +109,4 @@ Cuando cambie una fuente, enlace, monto indexado, tabla o fecha operativa:
 
 Snapshot anterior:
 
-`docs/archive/regulatory-privacy/FUENTES_NORMATIVAS_PRE_GOV1_3_R3.md`
+`docs/archive/regulatory-privacy/regulatory-sources-pre-gov1-3-r3.md`

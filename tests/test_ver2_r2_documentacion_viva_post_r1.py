@@ -14,9 +14,9 @@ RELEASES = ROOT / "RELEASES.md"
 README = ROOT / "README.md"
 INDICE = ROOT / "docs" / "README.md"
 ARCHIVE = ROOT / "docs" / "archive" / "governance"
-ANALISIS = ARCHIVE / "VER2_R2_ANALISIS_CONTRADICCIONES_POST_R1.md"
-PROPUESTA = ARCHIVE / "VER2_R2_PROPUESTA_CORRECCION_DOCUMENTACION_VIVA.md"
-CIERRE = ARCHIVE / "VER2_R2_CIERRE_DOCUMENTACION_VIVA_POST_R1.md"
+ANALISIS = ARCHIVE / "ver2-r2-post-r1-contradiction-analysis.md"
+PROPUESTA = ARCHIVE / "ver2-r2-live-documentation-correction-proposal.md"
+CIERRE = ARCHIVE / "ver2-r2-post-r1-live-documentation-closeout.md"
 
 
 def leer(path: Path) -> str:
@@ -29,9 +29,9 @@ def test_ver2_r2_documentos_existen_e_indexan_cierre():
     assert ANALISIS.exists()
     assert PROPUESTA.exists()
     assert CIERRE.exists()
-    assert "VER2_R2_ANALISIS_CONTRADICCIONES_POST_R1.md" in indice
-    assert "VER2_R2_PROPUESTA_CORRECCION_DOCUMENTACION_VIVA.md" in indice
-    assert "VER2_R2_CIERRE_DOCUMENTACION_VIVA_POST_R1.md" in indice
+    assert "ver2-r2-post-r1-contradiction-analysis.md" in indice
+    assert "ver2-r2-live-documentation-correction-proposal.md" in indice
+    assert "ver2-r2-post-r1-live-documentation-closeout.md" in indice
 
 
 def test_ver2_r2_aclara_version_visible_sin_consumir_candidato():

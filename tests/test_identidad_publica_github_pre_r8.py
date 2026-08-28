@@ -19,7 +19,7 @@ class TestIdentidadPublicaGithubPreR8(unittest.TestCase):
         cls.versioning = (ROOT / "VERSIONING.md").read_text(encoding="utf-8")
         cls.identity = (DOCS / "product/visual-identity.md").read_text(encoding="utf-8")
         cls.prep = (DOCS / "operations/github-public-repository.md").read_text(encoding="utf-8")
-        cls.audit = (DOCS / "archive/governance/AUDITORIA_GITHUB.md").read_text(encoding="utf-8")
+        cls.audit = (DOCS / "archive/governance/github-audit.md").read_text(encoding="utf-8")
         cls.transparency = (DOCS / "product/transparency.md").read_text(encoding="utf-8")
         cls.security_privacy = (DOCS / "security/security-and-privacy.md").read_text(
             encoding="utf-8"

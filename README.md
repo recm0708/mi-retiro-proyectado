@@ -23,7 +23,7 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 - **Versión canónica vigente:** `0.1.17.02-beta`, obtenida exclusivamente desde [`VERSION`](VERSION). Materializa G117/E02 después de aceptar REL.GOV.1 R2 mediante PR #103 / merge `46c464e`.
 - **Último estado aceptado integrado en `main`:** REL.GOV.1 R2 como G117/E02; esta promoción materializa el mismo estado y no consume G118.
 - **Estado revision-aware reconciliado:** G117/E02 (`0.1.17.02-beta`) queda aceptado para REL.GOV.1 R2; G118/E04 (`0.1.18.04-beta`) queda reservado para DEV.2 R5.
-- **Publicación revision-aware anterior preservada:** `v0.1.16.05-beta` (G116/E05), anotado y firmado sobre el commit publicado `dfb7dc60cf81951c701c126d6fecbcfdbca7aa7b`, asociado a GitHub Release prerelease. La publicación formal de G117/E02 usa `v0.1.17.02-beta` únicamente después de integrar y revalidar la promoción, conforme a REL.GOV.1 R2.
+- **Publicación revision-aware vigente:** `v0.1.17.02-beta` (G117/E02), anotado y firmado sobre el commit publicado `3ab9fefbdfc969c546feb83182e3c0e6879ba771`, objeto de tag `d2e493d16a2768ea5e6284c577c21b4f84897fae`, verificado y asociado al GitHub Release prerelease automatizado por REL.GOV.1 R2. `v0.1.16.05-beta` (G116/E05) permanece como publicación previa preservada e inmutable.
 - **Última versión formal legacy:** `0.0.26-beta` — tag firmado e inmutable `v0.0.26-beta`.
 - **Etapa:** desarrollo beta; repositorio público y ejecución orientada actualmente a entorno local.
 - **REL.GOV.1:** R1 y R2 cerrados/aceptados como G110/E01 y G117/E02. La automatización de Releases queda integrada sin transferir a Actions la creación o firma del tag.
@@ -94,13 +94,13 @@ Documentos principales:
 - **[Procedimiento de respuesta a incidentes de seguridad y privacidad](docs/security/security-incident-procedure.md)** — respuesta a incidentes;
 - **[Evaluación de terceros, despliegue y revisión pre-publicación](docs/security/third-party-deployment-assessment.md)** — terceros, TLS y gates de despliegue;
 - **[Política de seguridad](SECURITY.md)** — reporte responsable de vulnerabilidades;
-- **[Auditoría de GitHub y controles de repositorio](docs/archive/governance/AUDITORIA_GITHUB.md)** — controles GitHub y auditoría automática;
+- **[Auditoría de GitHub y controles de repositorio](docs/archive/governance/github-audit.md)** — controles GitHub y auditoría automática;
 - **[Preparación pública de GitHub](docs/operations/github-public-repository.md)** — metadata, topics, labels, badges, Social Preview y seguridad del repositorio público;
-- **[Auditoría integral del repositorio — 2026-08-18](docs/archive/governance/AUDITORIA_REPOSITORIO_2026-08-18.md)** — auditoría integral post-GOV.1 del repositorio;
-- **[Auditoría transversal UX.4.6e R7](docs/archive/ux/AUDITORIA_UX46E_R7_2026-08-18.md)** — auditoría transversal de coherencia de UX.4.6e;
-- **[Cierre GOV.1 — Auditoría, Gobierno y Trazabilidad Pre-Beta](docs/archive/governance/CIERRE_GOV1.md)** — auditoría final y decisión de cierre de GOV.1;
-- **[Auditoría de versionado pre-1.0](docs/archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md)** — criterio contable y reconciliación VER.2;
-- **[VER.2 — Matriz de decisión de revisiones aceptadas](docs/archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md)** — decisiones de inclusión/exclusión del contador;
+- **[Auditoría integral del repositorio — 2026-08-18](docs/archive/governance/repository-audit-2026-08-18.md)** — auditoría integral post-GOV.1 del repositorio;
+- **[Auditoría transversal UX.4.6e R7](docs/archive/ux/ux46e-r7-audit-2026-08-18.md)** — auditoría transversal de coherencia de UX.4.6e;
+- **[Cierre GOV.1 — Auditoría, Gobierno y Trazabilidad Pre-Beta](docs/archive/governance/gov1-closeout.md)** — auditoría final y decisión de cierre de GOV.1;
+- **[Auditoría de versionado pre-1.0](docs/archive/governance/pre-1-0-versioning-audit.md)** — criterio contable y reconciliación VER.2;
+- **[VER.2 — Matriz de decisión de revisiones aceptadas](docs/archive/governance/ver2-revision-decision-matrix.md)** — decisiones de inclusión/exclusión del contador;
 - **[Ledger de revisiones aceptadas pre-1.0](docs/governance/pre-1-0-revision-ledger.md)** — secuencia reconciliada G001–G117 y próximo candidato G118;
 - [`data/pre-1-0-revision-ledger.json`](data/pre-1-0-revision-ledger.json) — ledger machine-readable;
 - **[Identificadores de bloques de trabajo](docs/standards/work-block-identifiers.md)** — política canónica de identificadores de bloques;
@@ -111,7 +111,7 @@ Documentos principales:
 - **[Matriz maestra de pendientes hacia 1.0](docs/governance/pre-1-0-pending-matrix.md)** — matriz maestra viva de trabajo pendiente hasta `1.0.0.0`;
 - **[Plan maestro hacia Mi Retiro Proyectado 1.0](docs/governance/master-plan-to-1-0.md)** — secuencia de 14 bloques hasta la primera versión oficial;
 - **[Registro de decisiones técnicas](docs/decisions/README.md)** — decisiones ADR;
-- **[Registro histórico de cambios](docs/archive/governance/REGISTRO_CAMBIOS_HISTORICO.md)** — mapa histórico de evolución;
+- **[Registro histórico de cambios](docs/archive/governance/historical-change-registry.md)** — mapa histórico de evolución;
 - **[Código de conducta](CODE_OF_CONDUCT.md)** — reglas de participación y convivencia;
 - **[Soporte](SUPPORT.md)** — rutas de soporte y reporte.
 
@@ -141,11 +141,11 @@ Consultar:
 
 - **[Registro de versiones y estados del proyecto](RELEASES.md)** — versiones, rangos Git y releases formales;
 - **[Changelog](CHANGELOG.md)** — cambios notables por versión;
-- **[Auditoría de versionado pre-1.0](docs/archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md)** — criterio de reconciliación;
-- **[VER.2 — Matriz de decisión de revisiones aceptadas](docs/archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md)** — matriz de decisiones contables;
+- **[Auditoría de versionado pre-1.0](docs/archive/governance/pre-1-0-versioning-audit.md)** — criterio de reconciliación;
+- **[VER.2 — Matriz de decisión de revisiones aceptadas](docs/archive/governance/ver2-revision-decision-matrix.md)** — matriz de decisiones contables;
 - **[Ledger de revisiones aceptadas pre-1.0](docs/governance/pre-1-0-revision-ledger.md)** — contador global pre-1.0;
 - [`data/pre-1-0-revision-ledger.json`](data/pre-1-0-revision-ledger.json) — representación machine-readable;
-- **[Registro histórico de cambios](docs/archive/governance/REGISTRO_CAMBIOS_HISTORICO.md)** — mapa cronológico para auditoría.
+- **[Registro histórico de cambios](docs/archive/governance/historical-change-registry.md)** — mapa cronológico para auditoría.
 
 Git continúa siendo la evidencia primaria de autores, fechas, hashes y contenido histórico.
 

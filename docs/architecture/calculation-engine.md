@@ -225,7 +225,7 @@ No se sustituyen por constantes personales de un caso de prueba.
 
 La versión anterior se conserva en:
 
-`docs/archive/technical/MOTOR_DE_CALCULO_PRE_GOV1_3_R2.md`
+`docs/archive/technical/calculation-engine-pre-gov1-3-r2.md`
 
 ### UX.4.6g R1 — preanálisis de fechas de retiro
 

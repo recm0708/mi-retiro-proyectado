@@ -21,15 +21,15 @@ R3_DOCS = [
 ]
 
 R3_SNAPSHOTS = {
-    "regulatory/regulatory-framework.md": "NORMATIVA_PRE_GOV1_3_R3.md",
-    "regulatory/regulatory-sources.md": "FUENTES_NORMATIVAS_PRE_GOV1_3_R3.md",
-    "regulatory/sebd-modalities.md": "MODALIDADES_SEBD_PRE_GOV1_3_R3.md",
-    "regulatory/mixto-modalities.md": "MODALIDADES_MIXTO_PRE_GOV1_3_R3.md",
-    "regulatory/sucgs-modalities.md": "MODALIDADES_SUCGS_PRE_GOV1_3_R3.md",
-    "security/security-and-privacy.md": "SEGURIDAD_PRIVACIDAD_PRE_GOV1_3_R3.md",
-    "security/privacy-policy.md": "POLITICA_PRIVACIDAD_PRE_GOV1_3_R3.md",
-    "security/terms-and-privacy.md": "TERMINOS_USO_PRIVACIDAD_PRE_GOV1_3_R3.md",
-    "regulatory/law-81-compliance.md": "CUMPLIMIENTO_LEY_81_PRE_GOV1_3_R3.md",
+    "regulatory/regulatory-framework.md": "regulatory-framework-pre-gov1-3-r3.md",
+    "regulatory/regulatory-sources.md": "regulatory-sources-pre-gov1-3-r3.md",
+    "regulatory/sebd-modalities.md": "sebd-modalities-pre-gov1-3-r3.md",
+    "regulatory/mixto-modalities.md": "mixto-modalities-pre-gov1-3-r3.md",
+    "regulatory/sucgs-modalities.md": "sucgs-modalities-pre-gov1-3-r3.md",
+    "security/security-and-privacy.md": "security-and-privacy-pre-gov1-3-r3.md",
+    "security/privacy-policy.md": "privacy-policy-pre-gov1-3-r3.md",
+    "security/terms-and-privacy.md": "terms-and-privacy-pre-gov1-3-r3.md",
+    "regulatory/law-81-compliance.md": "law-81-compliance-pre-gov1-3-r3.md",
 }
 
 PRIVACY_DOCS = [

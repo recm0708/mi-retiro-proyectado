@@ -194,7 +194,7 @@ Una invalidación de datos de origen elimina ambas fotografías dependientes.
 
 La versión anterior se conserva en:
 
-`docs/archive/technical/GESTION_DATOS_SIMULACION_PRE_GOV1_3_R2.md`
+`docs/archive/technical/simulation-data-management-pre-gov1-3-r2.md`
 
 
 ### Decisiones de historial en R1.1

@@ -196,7 +196,7 @@ No afirma:
 
 La revisión de GOV.1.5 se originó sobre `0.0.23-beta`. La posterior apertura pública del repositorio y PLAN.1 no reescriben ese cierre; actualizan únicamente el estado vivo y los gates futuros.
 
-`docs/archive/regulatory-privacy/SEGURIDAD_PRIVACIDAD_PRE_GOV1_3_R3.md`
+`docs/archive/regulatory-privacy/security-and-privacy-pre-gov1-3-r3.md`
 
 ## Controles administrativos post-SEC.2
 

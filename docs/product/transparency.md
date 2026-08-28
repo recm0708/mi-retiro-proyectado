@@ -21,7 +21,7 @@ Estado vigente:
 - VER.2 está cerrado y `v0.0.71.01-beta` fue publicado.
 - NOR.1 está cerrado en R8 como G112/E07; NOR.2 permanece cerrado.
 - DOC.1 R2 está cerrado tras auditar integralmente la documentación Markdown posterior a NOR.2.
-- `VERSION` está sincronizado en `0.1.14.01-beta` (G114/E01); PLAN.2 R1 queda cerrado y G115/E04 reservado para DOC.1 R4. PERSIST.1 permanece planificado posteriormente.
+- `VERSION` está sincronizado en `0.1.17.02-beta` (G117/E02), REL.GOV.1 R2 está aceptado/publicado y G118/E04 (`0.1.18.04-beta`) queda reservado para DEV.2 R5. PERSIST.1 permanece planificado posteriormente.
 - SEC.2 quedó cerrado después de R1–R6 sin cambiar reglas previsionales; AUD.SEC2 R1 corrige seguridad administrativa y trazabilidad sin alterar motores.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 

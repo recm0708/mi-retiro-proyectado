@@ -15,7 +15,7 @@ Estado vigente:
 
 - `VERSION` sigue siendo la fuente única de versión.
 - `0.1.17.02-beta` es la versión canónica vigente y materializa G117/E02 (REL.GOV.1 R2); G118/E04 queda reservado para DEV.2 R5.
-- La publicación G116/E05 (`v0.1.16.05-beta`) permanece publicada, firmada e inmutable. G117/E02 se publica formalmente mediante `v0.1.17.02-beta` y su GitHub Release únicamente después de integrar y revalidar la promoción, conforme a REL.GOV.1 R2.
+- G117/E02 está publicado mediante el tag anotado y firmado `v0.1.17.02-beta` y su GitHub Release prerelease automatizado por REL.GOV.1 R2 después de integrar y revalidar la promoción. G116/E05 (`v0.1.16.05-beta`) permanece como publicación previa firmada e inmutable.
 - `v0.0.71.01-beta` conserva su evidencia histórica reconciliada como G087/E01 y `v0.0.26-beta` permanece como tag legacy histórico.
 - REL.GOV.1 R1 y R2 quedan cerrados/aceptados como G110/E01 y G117/E02.
 - DOC.1 R1–R5, PLAN.2 R1, NOR.1, NOR.2, SEC.2 R1–R6 y AUD.SEC2 R1 permanecen cerrados/aceptados según su ledger.
@@ -183,7 +183,7 @@ La revisión jurídica externa previa a publicación pública/comercial continú
 
 El repositorio mantiene Dependency graph, Dependabot alerts y Dependabot security updates activos. Dependabot no sustituye revisión humana, pruebas de regresión ni la decisión explícita del mantenedor.
 
-Las plantillas `.github/ISSUE_TEMPLATE/` separan errores ordinarios, solicitudes de mejora y consultas de soporte; `.github/pull_request_template.md` estandariza el contexto mínimo de integración. `CODE_OF_CONDUCT.md` define las normas de participación y `SUPPORT.md` enruta soporte, privacidad y seguridad. `docs/archive/governance/AUDITORIA_GITHUB.md` registra los controles versionados y los settings que requieren verificación periódica en GitHub.
+Las plantillas `.github/ISSUE_TEMPLATE/` separan errores ordinarios, solicitudes de mejora y consultas de soporte; `.github/pull_request_template.md` estandariza el contexto mínimo de integración. `CODE_OF_CONDUCT.md` define las normas de participación y `SUPPORT.md` enruta soporte, privacidad y seguridad. `docs/archive/governance/github-audit.md` registra los controles versionados y los settings que requieren verificación periódica en GitHub.
 
 ## 11. Cambios a este documento
 

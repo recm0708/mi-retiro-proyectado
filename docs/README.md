@@ -71,12 +71,12 @@ Evidencia:
 - **[Gobierno del proyecto](../GOVERNANCE.md)** — gobierno del proyecto.
 - **[Política de versionado](../VERSIONING.md)** — política legacy, beta revision-aware `0.GG.RR.EE-beta`, versión oficial de cuatro componentes y Build independiente.
 - [`../VERSION`](../VERSION) — fuente canónica de la versión candidata de aplicación.
-- **[Auditoría de versionado pre-1.0](archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md)** — auditoría del historial, criterio contable y exclusiones de VER.2.
+- **[Auditoría de versionado pre-1.0](archive/governance/pre-1-0-versioning-audit.md)** — auditoría del historial, criterio contable y exclusiones de VER.2.
 - **[ADR-179 — El versionado beta usa un ledger de estados aceptados y no cuenta commits como revisiones](decisions/adr-179-revision-aware-versioning.md)** — decisión ADR del esquema revision-aware previo a `1.0.0.0`.
-- **[VER.2 — Segunda pasada de auditoría cruzada](archive/governance/AUDITORIA_VER2_SEGUNDA_PASADA.md)** — bitácora de la segunda pasada y correcciones sobre la primera reconstrucción.
-- **[VER.2 — Conteo de segunda pasada](archive/governance/AUDITORIA_VER2_CONTEO_PROVISIONAL.md)** — cierre del conteo de segunda pasada en G070 antes de VER.2.
-- **[VER.2 — Matriz de decisión de revisiones aceptadas](archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md)** — decisión fila por fila sobre qué consume Global y por qué.
-- **[Ledger de revisiones aceptadas pre-1.0](governance/pre-1-0-revision-ledger.md)** — ledger Markdown reconciliado G001–G116 y candidato reservado G117/E02 para REL.GOV.1 R2.
+- **[VER.2 — Segunda pasada de auditoría cruzada](archive/governance/ver2-second-pass-audit.md)** — bitácora de la segunda pasada y correcciones sobre la primera reconstrucción.
+- **[VER.2 — Conteo de segunda pasada](archive/governance/ver2-provisional-count-audit.md)** — cierre del conteo de segunda pasada en G070 antes de VER.2.
+- **[VER.2 — Matriz de decisión de revisiones aceptadas](archive/governance/ver2-revision-decision-matrix.md)** — decisión fila por fila sobre qué consume Global y por qué.
+- **[Ledger de revisiones aceptadas pre-1.0](governance/pre-1-0-revision-ledger.md)** — ledger Markdown reconciliado G001–G117 y siguiente candidato reservado G118/E04 para DEV.2 R5.
 - **[Auditoría de reconciliación revision-aware posterior a G070](audits/governance/post-g070-revision-reconciliation.md)** — auditoría de reconstrucción G071–G108.
 - [`pre-1-0-revision-ledger-g070.json`](archive/governance/pre-1-0-revision-ledger-g070.json) — snapshot histórico exacto G070.
 - [`../data/pre-1-0-revision-ledger.json`](../data/pre-1-0-revision-ledger.json) — ledger machine-readable canónico de la reconstrucción.
@@ -87,14 +87,14 @@ Evidencia:
 - **[Código de conducta](../CODE_OF_CONDUCT.md)** — normas de participación.
 - **[Soporte](../SUPPORT.md)** — canales de soporte, privacidad y seguridad.
 - **[Plan maestro hacia Mi Retiro Proyectado 1.0](governance/master-plan-to-1-0.md)** — dependencias y gates previos a `1.0.0.0`.
-- **[Migración de firma criptográfica Git — 2026-08-17](archive/governance/MIGRACION_FIRMAS_GIT_2026-08-17.md)** — firma SSH y migración histórica controlada.
+- **[Migración de firma criptográfica Git — 2026-08-17](archive/governance/git-signature-migration-2026-08-17.md)** — firma SSH y migración histórica controlada.
 - [`../.github/allowed_signers`](../.github/allowed_signers) — claves públicas autorizadas.
-- **[Auditoría de GitHub y controles de repositorio](archive/governance/AUDITORIA_GITHUB.md)** — controles GitHub, seguridad y auditoría automática.
+- **[Auditoría de GitHub y controles de repositorio](archive/governance/github-audit.md)** — controles GitHub, seguridad y auditoría automática.
 - **[Preparación pública de GitHub](operations/github-public-repository.md)** — metadata, topics, labels, badges, Social Preview y seguridad del repositorio público.
-- **[Auditoría integral del repositorio — 2026-08-18](archive/governance/AUDITORIA_REPOSITORIO_2026-08-18.md)** — auditoría integral local/remota post-GOV.1.
-- **[Auditoría transversal UX.4.6e R7](archive/ux/AUDITORIA_UX46E_R7_2026-08-18.md)** — auditoría transversal de coherencia de UX.4.6e.
-- **[Auditoría integral PLAN.1 R4](archive/governance/AUDITORIA_PLAN1_R4_2026-08-20.md)** — auditoría integral y gates R4.1/R4.2 de PLAN.1.
-- **[Cierre GOV.1 — Auditoría, Gobierno y Trazabilidad Pre-Beta](archive/governance/CIERRE_GOV1.md)** — evidencia definitiva del cierre GOV.1.
+- **[Auditoría integral del repositorio — 2026-08-18](archive/governance/repository-audit-2026-08-18.md)** — auditoría integral local/remota post-GOV.1.
+- **[Auditoría transversal UX.4.6e R7](archive/ux/ux46e-r7-audit-2026-08-18.md)** — auditoría transversal de coherencia de UX.4.6e.
+- **[Auditoría integral PLAN.1 R4](archive/governance/plan1-r4-audit-2026-08-20.md)** — auditoría integral y gates R4.1/R4.2 de PLAN.1.
+- **[Cierre GOV.1 — Auditoría, Gobierno y Trazabilidad Pre-Beta](archive/governance/gov1-closeout.md)** — evidencia definitiva del cierre GOV.1.
 - [`../LICENSE`](../LICENSE) — licencia propietaria de materiales originales.
 - **[Licencia y estrategia de distribución](governance/licensing-and-distribution.md)** — evaluación y decisión de licencia.
 - **[Avisos de terceros](../THIRD_PARTY_NOTICES.md)** — avisos de componentes de terceros.
@@ -102,10 +102,10 @@ Evidencia:
 ## 3. Arquitectura
 
 - **[Arquitectura](architecture/system-architecture.md)** — capas, módulos, endpoints y flujo.
-- **[Auditoría de estructura por extensión](archive/technical/AUDITORIA_ESTRUCTURA_ARCHIVOS_R5D.md)** — auditoría de política y plantillas por extensión.
-- **[Auditoría de nombres de carpetas — MANT.1 R5E](archive/technical/AUDITORIA_CARPETAS_R5E.md)** — auditoría de nombres de carpetas técnicas y rutas sincronizadas.
-- **[Auditoría MANT.1 R5F — nombres de archivos](archive/technical/AUDITORIA_ARCHIVOS_R5F.md)** — auditoría de nombres de archivos técnicos y referencias sincronizadas.
-- **[Auditoría MANT.1 R5G — documentación vigente](archive/technical/AUDITORIA_DOCUMENTACION_R5G.md)** — auditoría de cobertura documental, índice y referencias internas.
+- **[Auditoría de estructura por extensión](archive/technical/file-structure-audit-r5d.md)** — auditoría de política y plantillas por extensión.
+- **[Auditoría de nombres de carpetas — MANT.1 R5E](archive/technical/folders-audit-r5e.md)** — auditoría de nombres de carpetas técnicas y rutas sincronizadas.
+- **[Auditoría MANT.1 R5F — nombres de archivos](archive/technical/files-audit-r5f.md)** — auditoría de nombres de archivos técnicos y referencias sincronizadas.
+- **[Auditoría MANT.1 R5G — documentación vigente](archive/technical/documentation-audit-r5g.md)** — auditoría de cobertura documental, índice y referencias internas.
 - **[Modelo de datos](architecture/data-model.md)** — modelos y contratos.
 - **[Gestión de datos de la simulación](product/simulation-data-management.md)** — estado local, limpieza, restauración e invalidación.
 - **[Observabilidad y Developer Diagnostics](operations/observability-and-logs.md)** — Developer Diagnostics, esquema JSONL, correlación, redacción, retención y exportación.
@@ -153,12 +153,12 @@ La publicación del repositorio no elimina la revisión jurídica externa ni cua
 
 - **[Transparencia del producto](product/transparency.md)** — fronteras de afirmación y transparencia pública.
 - **[Matriz de trazabilidad](product/traceability-matrix.md)** — requisito/criterio → ADR → implementación → prueba → estado.
-- **[Auditoría de cálculos](archive/technical/AUDITORIA_CALCULOS.md)** — reproducibilidad y revisión de resultados.
-- **[UX.4.6h R1 — Auditoría del Paso 6: resultados y exportación](archive/ux/UX46H_R1_AUDITORIA_RESULTADOS.md)** — auditoría de resultados y coherencia visual de UX.4.6h.
+- **[Auditoría de cálculos](archive/technical/calculation-audit.md)** — reproducibilidad y revisión de resultados.
+- **[UX.4.6h R1 — Auditoría del Paso 6: resultados y exportación](archive/ux/ux46h-r1-results-audit.md)** — auditoría de resultados y coherencia visual de UX.4.6h.
 - **[Limitaciones conocidas](product/known-limitations.md)** — límites técnicos, normativos y de despliegue.
 - **[Dependencias y terceros](operations/third-party-dependencies.md)** — dependencias, licencias upstream, conexiones y riesgos.
 - **[Proceso de release](operations/release-process.md)** — gates de cierre, versión, Build, CI y tags.
-- **[Auditoría UX.4.6i R1 — Cómo se calcula](archive/ux/UX46I_R1_AUDITORIA_COMO_SE_CALCULA.md)** — auditoría canónica de UX.4.6i; secuencia demostrada R1 → R1.2 → R1.3 → R1.4.
+- **[Auditoría UX.4.6i R1 — Cómo se calcula](archive/ux/ux46i-r1-calculation-explanation-audit.md)** — auditoría canónica de UX.4.6i; secuencia demostrada R1 → R1.2 → R1.3 → R1.4.
 
 ## 10. Validación y calidad
 
@@ -187,18 +187,18 @@ La publicación del repositorio no elimina la revisión jurídica externa ni cua
 
 ## 12. Historial de evolución
 
-- **[Registro histórico de cambios](archive/governance/REGISTRO_CAMBIOS_HISTORICO.md)** — mapa cronológico.
-- **[UX.4.6a — Rediseño visual integral y nueva página de Inicio](archive/ux/UX_4_6A_REDISENO_VISUAL.md)** — bitácora histórica del rediseño visual UX.4.6a.
-- **[UX.4.6b — Simular / Paso 1 · Datos personales](archive/ux/UX_4_6B_PASO1_DATOS_PERSONALES.md)** — bitácora histórica del Paso 1 de UX.4.6b.
-- **[UX.4.6c — Simular / Paso 2 · Cuotas](archive/ux/UX_4_6C_PASO2_CUOTAS.md)** — bitácora histórica del Paso 2 de UX.4.6c.
-- **[UX.4.6d — Simular / Paso 3 · Historial](archive/ux/UX_4_6D_PASO3_HISTORIAL.md)** — bitácora histórica del Paso 3 de UX.4.6d.
+- **[Registro histórico de cambios](archive/governance/historical-change-registry.md)** — mapa cronológico.
+- **[UX.4.6a — Rediseño visual integral y nueva página de Inicio](archive/ux/ux46a-visual-redesign.md)** — bitácora histórica del rediseño visual UX.4.6a.
+- **[UX.4.6b — Simular / Paso 1 · Datos personales](archive/ux/ux46b-step1-personal-data.md)** — bitácora histórica del Paso 1 de UX.4.6b.
+- **[UX.4.6c — Simular / Paso 2 · Cuotas](archive/ux/ux46c-step2-contributions.md)** — bitácora histórica del Paso 2 de UX.4.6c.
+- **[UX.4.6d — Simular / Paso 3 · Historial](archive/ux/ux46d-step3-history.md)** — bitácora histórica del Paso 3 de UX.4.6d.
 - **[Archivo histórico de documentación](archive/README.md)** — reglas del archivo histórico.
 - [Histórico UX](archive/ux) — bitácoras completas de UX.4.6a–d.
 - [Histórico técnico](archive/technical) — snapshots técnicos previos.
 - [Histórico de normativa, seguridad y privacidad](archive/regulatory-privacy) — snapshots normativos/privacidad previos.
 - [Histórico de gobierno y decisiones](archive/governance) — snapshots de decisiones/gobierno.
-- **[Changelog](archive/CHANGELOG_PRE_GOV1_3.md)** — snapshot del changelog acumulativo anterior a GOV.1.3.
-- **[Roadmap](archive/ROADMAP_PRE_GOV1_3.md)** — snapshot del roadmap anterior a GOV.1.3.
+- **[Changelog](archive/changelog-pre-gov1-3.md)** — snapshot del changelog acumulativo anterior a GOV.1.3.
+- **[Roadmap](archive/roadmap-pre-gov1-3.md)** — snapshot del roadmap anterior a GOV.1.3.
 
 Los archivos históricos documentan lo que se pensó, probó o decidió en un momento determinado. No deben interpretarse como contrato vigente si contradicen un documento actual.
 
@@ -207,7 +207,7 @@ Los archivos históricos documentan lo que se pensó, probó o decidió en un mo
 - **[Registro de versiones y estados del proyecto](../RELEASES.md)** — registro formal y retrospectivo.
 - **[Changelog](../CHANGELOG.md)** — cambios notables.
 - **[Política de versionado](../VERSIONING.md)** — reglas de incremento y tags.
-- **[Auditoría de versionado pre-1.0](archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md)** — reconciliación VER.2.
+- **[Auditoría de versionado pre-1.0](archive/governance/pre-1-0-versioning-audit.md)** — reconciliación VER.2.
 - **[Ledger de revisiones aceptadas pre-1.0](governance/pre-1-0-revision-ledger.md)** — contador global.
 - [`../data/pre-1-0-revision-ledger.json`](../data/pre-1-0-revision-ledger.json) — representación estructurada del contador.
 - **[Plan maestro hacia Mi Retiro Proyectado 1.0](governance/master-plan-to-1-0.md)** — gates hasta la primera versión oficial.
@@ -240,44 +240,44 @@ La metadata de versión de revisión de un documento de dominio puede conservar 
 - El contrato histórico mantiene versiones oficiales de cuatro componentes para la línea estable futura.
 - GOV.1.3 R3 preservó el snapshot archive/regulatory-privacy/ como evidencia histórica normativa y de privacidad.
 
-- **[Auditoría MANT.1 R5H — nombres técnicos restantes](archive/technical/AUDITORIA_NOMBRES_RESTANTES_R5H.md)** — Auditoría MANT.1 R5H de nombres técnicos restantes.
+- **[Auditoría MANT.1 R5H — nombres técnicos restantes](archive/technical/remaining-names-audit-r5h.md)** — Auditoría MANT.1 R5H de nombres técnicos restantes.
 
 ## MANT.1 R6 — Auditoría funcional post-renombres
 
-- `AUDITORIA_FUNCIONAL_POST_RENOMBRES_R6.md`: auditoría funcional posterior a los renombres técnicos de MANT.1 R5. Verifica rutas, plantillas, assets, contratos frontend/backend, formularios, cargas de archivo y estructura HTML renderizada.
+- `functional-audit-post-renames-r6.md`: auditoría funcional posterior a los renombres técnicos de MANT.1 R5. Verifica rutas, plantillas, assets, contratos frontend/backend, formularios, cargas de archivo y estructura HTML renderizada.
 
 ## MANT.1 R7 — Cierre operativo post-auditoría
 
-- `CIERRE_OPERATIVO_POST_AUDITORIA_R7.md`: cierre operativo posterior a R5H/R6. Verifica estado de ramas, evidencias documentales, pruebas focalizadas y protección de archivos sensibles.
+- `operational-closeout-post-audit-r7.md`: cierre operativo posterior a R5H/R6. Verifica estado de ramas, evidencias documentales, pruebas focalizadas y protección de archivos sensibles.
 
 ## DOC.1 R1 — Auditoría integral Markdown post-MANT.1
 
-- `AUDITORIA_MARKDOWN_POST_MANT1_DOC1_R1.md`: inventario integral de archivos Markdown posterior al cierre de MANT.1.
-- `MATRIZ_DECISION_MARKDOWN_DOC1_R1.md`: clasificación de Markdown en actualizar, revisar, preservar histórico, preservar auditoría cerrada o sin cambio inicial.
-- `CONTEXTO_ACTUALIZACION_MARKDOWN_DOC1_R1.md`: extracción de contexto para documentos candidatos antes de actualizarlos.
-- `LINEA_BASE_DOCUMENTAL_POST_MANT1_DOC1_R1.md`: línea base documental vigente para sincronizar README, roadmap, validación, versionado y demás documentos vivos post-MANT.1.
-- `REVISION_SOLO_SI_APLICA_DOC1_R1.md`: revisión de documentos de soporte o política general marcados como actualizar solo si aplica; no requirieron cambios materiales.
-- `CIERRE_DOCUMENTAL_MARKDOWN_DOC1_R1.md`: cierre formal de DOC.1 R1 con alcance revisado, evidencia generada, límites respetados y validación documental.
+- `markdown-audit-post-mant1-doc1-r1.md`: inventario integral de archivos Markdown posterior al cierre de MANT.1.
+- `doc1-r1-markdown-decision-matrix.md`: clasificación de Markdown en actualizar, revisar, preservar histórico, preservar auditoría cerrada o sin cambio inicial.
+- `doc1-r1-markdown-update-context.md`: extracción de contexto para documentos candidatos antes de actualizarlos.
+- `doc1-r1-post-mant1-documentation-baseline.md`: línea base documental vigente para sincronizar README, roadmap, validación, versionado y demás documentos vivos post-MANT.1.
+- `doc1-r1-applicability-only-review.md`: revisión de documentos de soporte o política general marcados como actualizar solo si aplica; no requirieron cambios materiales.
+- `doc1-r1-markdown-documentation-closeout.md`: cierre formal de DOC.1 R1 con alcance revisado, evidencia generada, límites respetados y validación documental.
 ## VER.2 R1 — Reconciliación post-DOC.1
 
-- **[Auditoría de reconciliación VER.2 R1](archive/governance/VER2_R1_AUDITORIA_RECONCILIACION_POST_DOC1.md)**
-- **[Matriz de decisión VER.2 R1](archive/governance/VER2_R1_MATRIZ_DECISION_RECONCILIACION_POST_DOC1.md)**
-- **[Decisión operativa VER.2 R1](archive/governance/VER2_R1_DECISION_OPERATIVA_POST_DOC1.md)**
+- **[Auditoría de reconciliación VER.2 R1](archive/governance/ver2-r1-post-doc1-reconciliation-audit.md)**
+- **[Matriz de decisión VER.2 R1](archive/governance/ver2-r1-post-doc1-reconciliation-decision-matrix.md)**
+- **[Decisión operativa VER.2 R1](archive/governance/ver2-r1-post-doc1-operational-decision.md)**
 ## VER.2 R2 — Documentación viva post-R1
 
-- **[Análisis de contradicciones VER.2 R2](archive/governance/VER2_R2_ANALISIS_CONTRADICCIONES_POST_R1.md)**
-- **[Propuesta de corrección de documentación viva VER.2 R2](archive/governance/VER2_R2_PROPUESTA_CORRECCION_DOCUMENTACION_VIVA.md)**
-- **[Cierre de documentación viva VER.2 R2](archive/governance/VER2_R2_CIERRE_DOCUMENTACION_VIVA_POST_R1.md)**
+- **[Análisis de contradicciones VER.2 R2](archive/governance/ver2-r2-post-r1-contradiction-analysis.md)**
+- **[Propuesta de corrección de documentación viva VER.2 R2](archive/governance/ver2-r2-live-documentation-correction-proposal.md)**
+- **[Cierre de documentación viva VER.2 R2](archive/governance/ver2-r2-post-r1-live-documentation-closeout.md)**
 ## VER.2 R3 — Decisión de versión candidata post-R2
 
-- **[Decisión de versión candidata VER.2 R3](archive/governance/VER2_R3_DECISION_VERSION_CANDIDATA_POST_R2.md)**
+- **[Decisión de versión candidata VER.2 R3](archive/governance/ver2-r3-post-r2-candidate-version-decision.md)**
 ## VER.2 R4 — Promoción controlada G071/E01
 
-- **[Promoción controlada VER.2 R4 G071/E01](archive/governance/VER2_R4_PROMOCION_G071_E01.md)**
+- **[Promoción controlada VER.2 R4 G071/E01](archive/governance/ver2-r4-g071-e01-promotion.md)**
 
 ## VER.2 R5 — Estabilización post-release
 
-- **[Estabilización post-release VER.2 R5](archive/governance/VER2_R5_ESTABILIZACION_POST_RELEASE.md)**
+- **[Estabilización post-release VER.2 R5](archive/governance/ver2-r5-post-release-stabilization.md)**
 
 
 **SEC.2 R6:** hardening de sesión administrativa web preparado para despliegue interno controlado.

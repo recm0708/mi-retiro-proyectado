@@ -194,7 +194,7 @@ class TestUX46iR1ComoSeCalcula(unittest.TestCase):
         self.assertIn("### UX.4.6i R1 —", changelog)
         self.assertIn("### UX.4.6i — cierre de Cómo se calcula", changelog)
         self.assertTrue((ROOT / "docs/product/calculation-guide.md").exists())
-        self.assertTrue((ROOT / "docs/archive/ux/UX46I_R1_AUDITORIA_COMO_SE_CALCULA.md").exists())
+        self.assertTrue((ROOT / "docs/archive/ux/ux46i-r1-calculation-explanation-audit.md").exists())
 
     def test_15_navbar_ofrece_acceso_directo_y_estado_activo(self):
         base = (ROOT / "app/templates/base.html").read_text(encoding="utf-8")

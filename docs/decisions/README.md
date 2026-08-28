@@ -37,7 +37,7 @@ Este registro conserva decisiones de arquitectura, modelado, UX, precisión, seg
 - Una decisión sustituida no se elimina.
 - Las relaciones de sustitución se conservan en el texto de las ADR implicadas.
 - Una ADR normativa debe leerse junto con la fuente oficial correspondiente.
-- El snapshot pre-R4 se conserva en `docs/archive/governance/DECISIONES_PRE_GOV1_3_R4.md`.
+- El snapshot pre-R4 se conserva en `docs/archive/governance/decisions-pre-gov1-3-r4.md`.
 
 ## 2. Anomalías históricas de metadata
 

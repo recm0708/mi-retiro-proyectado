@@ -55,7 +55,7 @@ Por tanto, un incremento de `VERSION` no obliga a modificar todos los `.md`; obl
 - `VERSIONING.md` acepta la familia legacy, la revision-aware y la futura versión oficial;
 - `app/core/version.py` construye y descompone la familia revision-aware;
 - `docs/governance/pre-1-0-revision-ledger.md` se convierte en registro canónico del contador global pre-1.0;
-- `docs/archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md` conserva el razonamiento, inclusiones y exclusiones;
+- `docs/archive/governance/pre-1-0-versioning-audit.md` conserva el razonamiento, inclusiones y exclusiones;
 - los tags históricos no se reescriben;
 - el contador global no puede derivarse solo del número de commits;
 - DEV.2 puede cerrarse como bloque funcional independiente antes del cierre final de VER.2, siempre que no promueva versión revision-aware, no cree tag y documente la separación entre avance funcional y cierre contable;
@@ -82,10 +82,10 @@ Descartada porque falsearía la publicación histórica y rompería la política
 ## Evidencia relacionada
 
 - `VERSIONING.md`;
-- `docs/archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md`;
+- `docs/archive/governance/pre-1-0-versioning-audit.md`;
 - `docs/governance/pre-1-0-revision-ledger.md`;
 - `RELEASES.md`;
-- `docs/archive/governance/REGISTRO_CAMBIOS_HISTORICO.md`;
+- `docs/archive/governance/historical-change-registry.md`;
 - bitácoras y auditorías UX/GOV/PLAN conservadas;
 - PR #35 de VER.2.
 

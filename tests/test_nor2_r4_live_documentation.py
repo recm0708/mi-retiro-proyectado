@@ -27,13 +27,13 @@ MOVES = parse_moves()
 
 RETIRED_COMPATIBILITY_STUBS = {
     "docs/product/user-interface.md":
-        "docs/archive/ux/UX_4_6A_REDISENO_VISUAL.md",
+        "docs/archive/ux/ux46a-visual-redesign.md",
     "docs/product/workflow-step-1-personal-data.md":
-        "docs/archive/ux/UX_4_6B_PASO1_DATOS_PERSONALES.md",
+        "docs/archive/ux/ux46b-step1-personal-data.md",
     "docs/product/workflow-step-2-contributions.md":
-        "docs/archive/ux/UX_4_6C_PASO2_CUOTAS.md",
+        "docs/archive/ux/ux46c-step2-contributions.md",
     "docs/product/workflow-step-3-salary-history.md":
-        "docs/archive/ux/UX_4_6D_PASO3_HISTORIAL.md",
+        "docs/archive/ux/ux46d-step3-history.md",
 }
 
 

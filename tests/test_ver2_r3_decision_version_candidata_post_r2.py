@@ -9,7 +9,7 @@ DECISION = (
     / "docs"
     / "archive"
     / "governance"
-    / "VER2_R3_DECISION_VERSION_CANDIDATA_POST_R2.md"
+    / "ver2-r3-post-r2-candidate-version-decision.md"
 )
 INDICE = ROOT / "docs" / "README.md"
 
@@ -20,7 +20,7 @@ def leer(path: Path) -> str:
 
 def test_ver2_r3_decision_existe_e_indexada():
     assert DECISION.exists()
-    assert "VER2_R3_DECISION_VERSION_CANDIDATA_POST_R2.md" in leer(INDICE)
+    assert "ver2-r3-post-r2-candidate-version-decision.md" in leer(INDICE)
 
 
 def test_ver2_r3_mantiene_candidato_g071_e01():

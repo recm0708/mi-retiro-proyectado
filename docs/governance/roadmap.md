@@ -86,7 +86,7 @@ Estado vigente:
 
 Este roadmap describe **estado actual y trabajo futuro**.
 
-La secuencia de pendientes vigente se mantiene en [Matriz maestra de pendientes hacia 1.0](pre-1-0-pending-matrix.md). Esa matriz es evolutiva y no preasigna Globales futuros más allá del candidato actual. La evolución detallada ya completada se conserva en `RELEASES.md`, `CHANGELOG.md`, `docs/archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md`, `docs/governance/pre-1-0-revision-ledger.md`, `docs/archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md`, `data/pre-1-0-revision-ledger.json` y `docs/archive/`.
+La secuencia de pendientes vigente se mantiene en [Matriz maestra de pendientes hacia 1.0](pre-1-0-pending-matrix.md). Esa matriz es evolutiva y no preasigna Globales futuros más allá del candidato actual. La evolución detallada ya completada se conserva en `RELEASES.md`, `CHANGELOG.md`, `docs/archive/governance/pre-1-0-versioning-audit.md`, `docs/governance/pre-1-0-revision-ledger.md`, `docs/archive/governance/ver2-revision-decision-matrix.md`, `data/pre-1-0-revision-ledger.json` y `docs/archive/`.
 
 VER.2 es un bloque transversal de reconciliación y **no añade un bloque 15** al plan maestro de producto. DEV.2 ya quedó cerrado documentalmente en R4. MANT.1 se trata como checkpoint técnico de mantenibilidad antes de SEC.2 y tampoco añade un bloque funcional de producto. MANT.1 R1 queda como auditoría inicial de alcance, MANT.1 R2 conserva la documentación de scripts y hooks antes de SEC.2, MANT.1 R3 documenta los YAML de GitHub sin cambiar CI ni formularios y MANT.1 R4 limpia encabezados operativos para que la trazabilidad histórica permanezca en documentación, MANT.1 R5A comenta servicios Python grandes, MANT.1 R5B comenta CSS/plantilla de la guía pública, MANT.1 R5C comenta JavaScript complejo sin cambiar lógica visible y MANT.1 R5D define política/plantillas por extensión con uniformidad de encabezados.
 
@@ -217,13 +217,13 @@ No existe una una revisión intermedia no demostrada entre UX.4.6i R1 y R1.2 dem
 
 **VER.2:** bloque transversal cerrado. La primera promoción se publicó como `0.0.71.01-beta`; AUD.SEC2 R1 documenta que el ledger usado entonces terminaba en G070 y que la reconstrucción completa sitúa ese estado en G087 sin modificar el tag inmutable.
 
-**Checkpoint técnico actual:** G112/E07 (`0.1.12.07-beta`) permanece aceptado para NOR.1 R8; G113/E03 (`0.1.13.03-beta`) para DOC.1 R3, G114/E01 (`0.1.14.01-beta`) para PLAN.2 R1 y G115/E04 (`0.1.15.04-beta`) para DOC.1 R4. G116/E05 (`0.1.16.05-beta`) queda aceptado para DOC.1 R5; G117/E02 (`0.1.17.02-beta`) queda reservado para REL.GOV.1 R2 como candidato vigente y PERSIST.1 continúa en una etapa posterior.
+**Checkpoint técnico actual:** G117/E02 (`0.1.17.02-beta`) está aceptado/publicado para REL.GOV.1 R2. G112/E07–G116/E05 permanecen preservados según el ledger; G118/E04 (`0.1.18.04-beta`) queda reservado como candidato para DEV.2 R5 y PERSIST.1 continúa en una etapa posterior.
 
 Documentos canónicos de VER.2:
 
-- `AUDITORIA_VERSIONADO_PRE_1_0.md` — criterio contable y exclusiones;
-- `pre-1-0-revision-ledger.md` — ledger reconciliado G001–G116 y siguiente Global G117 reservado para REL.GOV.1 R2;
-- `MATRIZ_DECISION_REVISIONES_VER2.md` — justificación de la segunda pasada;
+- `pre-1-0-versioning-audit.md` — criterio contable y exclusiones;
+- `pre-1-0-revision-ledger.md` — ledger reconciliado G001–G117 y siguiente Global G118 reservado para DEV.2 R5;
+- `ver2-revision-decision-matrix.md` — justificación de la segunda pasada;
 - `../data/pre-1-0-revision-ledger.json` — ledger estructurado validable;
 - `../VERSIONING.md` — política de numeración.
 

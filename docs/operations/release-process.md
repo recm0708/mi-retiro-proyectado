@@ -18,7 +18,7 @@ El cierre de MANT.1 R7 no constituye release formal ni cambia la versión canón
 Para una release posterior se mantiene el criterio vigente:
 
 - `VERSION` debe ser la fuente única.
-- `0.1.17.02-beta` es la versión canónica vigente y materializa G117/E02. Su publicación formal usa `v0.1.17.02-beta` únicamente después de integrar y revalidar la promoción; `v0.1.16.05-beta` permanece preservado como publicación G116/E05.
+- `0.1.17.02-beta` es la versión canónica vigente y materializa G117/E02. Su publicación formal ya quedó materializada mediante el tag firmado `v0.1.17.02-beta` y el GitHub Release prerelease automatizado por REL.GOV.1 R2; `v0.1.16.05-beta` permanece preservado como publicación G116/E05.
 - `v0.0.71.01-beta` conserva su reconciliación histórica como G087/E01 y `v0.0.26-beta` permanece como tag legacy inmutable.
 - REL.GOV.1 R2 queda aceptado como G117/E02 después de PR #103 / merge `46c464e`.
 - G118/E04 (`0.1.18.04-beta`) queda reservado para DEV.2 R5; las etapas posteriores permanecen sin Global preasignado.
@@ -28,7 +28,7 @@ Para una release posterior se mantiene el criterio vigente:
 Todo release futuro requiere gate completo, PR/CI, actualización documental coherente, tag y evidencia reproducible.
 <!-- DOC1-R1-POST-MANT1:END -->
 
-Este procedimiento complementa `VERSIONING.md`, `RELEASES.md`, `CHANGELOG.md`, `GOVERNANCE.md`, `LICENSE`, `THIRD_PARTY_NOTICES.md`, `docs/governance/licensing-and-distribution.md`, `docs/archive/governance/AUDITORIA_VERSIONADO_PRE_1_0.md`, `docs/governance/pre-1-0-revision-ledger.md`, `docs/archive/governance/MATRIZ_DECISION_REVISIONES_VER2.md`, `data/pre-1-0-revision-ledger.json` y `docs/governance/master-plan-to-1-0.md`.
+Este procedimiento complementa `VERSIONING.md`, `RELEASES.md`, `CHANGELOG.md`, `GOVERNANCE.md`, `LICENSE`, `THIRD_PARTY_NOTICES.md`, `docs/governance/licensing-and-distribution.md`, `docs/archive/governance/pre-1-0-versioning-audit.md`, `docs/governance/pre-1-0-revision-ledger.md`, `docs/archive/governance/ver2-revision-decision-matrix.md`, `data/pre-1-0-revision-ledger.json` y `docs/governance/master-plan-to-1-0.md`.
 
 ## 1. Principio
 

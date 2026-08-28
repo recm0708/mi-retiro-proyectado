@@ -1,6 +1,6 @@
 # DEV.2 R1/R2/R3/R4 — Centro de desarrollo
 
-**Estado general:** DEV.2 cerrado documentalmente en R4.
+**Estado general:** DEV.2 R1–R4 cerrados documentalmente; R5 es el siguiente checkpoint candidato G118/E04.
 
 **Estado R1:** integrado en `main` mediante PR #37.
 
@@ -18,12 +18,12 @@ DEV.2 queda preservado como bloque funcional cerrado. Sus referencias a VER.2 o 
 
 Estado vigente:
 
-- DEV.2 está cerrado y no es el bloque activo actual.
+- DEV.2 R1–R4 están cerrados; R5 reabre el bloque como siguiente checkpoint candidato G118/E04 para Portal Developer y acceso.
 - MANT.1 quedó cerrado operativamente en R7.
 - DOC.1 R1 está cerrado.
 - NOR.1 y NOR.2 están cerrados.
 - DOC.1 R2 está cerrado como revisión documental integral posterior a NOR.2.
-- `VERSION` está sincronizado en `0.1.16.05-beta` después de aceptar DOC.1 R5 como G116/E05 mediante PR #101 / merge `6f4266d`; G117/E02 queda reservado para REL.GOV.1 R2. REL.GOV.1 R1 permanece preservado como G110/E01 y REL.GOV.1 R2 es el candidato vigente.
+- `VERSION` está sincronizado en `0.1.17.02-beta` después de aceptar y publicar REL.GOV.1 R2 como G117/E02; G118/E04 (`0.1.18.04-beta`) queda reservado para DEV.2 R5. REL.GOV.1 R1 permanece preservado como G110/E01.
 - SEC.2 quedó cerrado después de R1–R6; AUD.SEC2 R1 corrige el kill switch y el contrato de sesión web sin reabrir DEV.2.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 

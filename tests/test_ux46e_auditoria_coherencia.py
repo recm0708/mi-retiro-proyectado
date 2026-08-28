@@ -36,7 +36,7 @@ class TestUX46eAuditoriaCoherencia(unittest.TestCase):
         self.assertIn("**Bloque transversal activo:** VER.2", texto)
 
     def test_auditoria_r7_existe_y_declara_linea_base_y_objetivo(self):
-        texto = (DOCS / "archive" / "ux" / "AUDITORIA_UX46E_R7_2026-08-18.md").read_text(encoding="utf-8")
+        texto = (DOCS / "archive" / "ux" / "ux46e-r7-audit-2026-08-18.md").read_text(encoding="utf-8")
         self.assertIn("Ran 586 tests", texto)
         self.assertIn("12 regresiones", texto)
         self.assertIn("598 pruebas", texto)
@@ -59,7 +59,7 @@ class TestUX46eAuditoriaCoherencia(unittest.TestCase):
         self.assertNotIn("UX.4.6e — Paso 4 · Proyección salarial/laboral", combinados)
 
     def test_auditoria_historica_preserva_texto_y_agrega_nota_posterior(self):
-        texto = (DOCS / "archive" / "governance" / "AUDITORIA_REPOSITORIO_2026-08-18.md").read_text(encoding="utf-8")
+        texto = (DOCS / "archive" / "governance" / "repository-audit-2026-08-18.md").read_text(encoding="utf-8")
         self.assertIn("UX.4.6e — Paso 4 · Proyección salarial/laboral", texto)
         self.assertIn("Nota posterior — UX.4.6e R7", texto)
         self.assertIn("UX.4.6f / UX.4.6g / UX.4.6h", texto)

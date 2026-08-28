@@ -186,4 +186,4 @@ La revisión jurídica formal se mantiene planificada para GOV.1.5 antes de una 
 
 La versión acumulativa previa se conserva en:
 
-`docs/archive/regulatory-privacy/NORMATIVA_PRE_GOV1_3_R3.md`
+`docs/archive/regulatory-privacy/regulatory-framework-pre-gov1-3-r3.md`

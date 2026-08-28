@@ -294,7 +294,7 @@ actual todavía funcione.
 
 La política permanente por tipo de archivo queda documentada en
 `docs/standards/file-structure-by-extension.md` y la auditoría aplicada en
-`docs/archive/technical/AUDITORIA_ESTRUCTURA_ARCHIVOS_R5D.md`.
+`docs/archive/technical/file-structure-audit-r5d.md`.
 
 Las plantillas oficiales viven en `docs/templates/file-structure/`. Todo
 archivo nuevo debe partir de la plantilla más cercana cuando exista. Si una
