@@ -47,6 +47,8 @@ Crear una rama específica antes de modificar:
 git switch -c <tipo>/<descripcion>
 ```
 
+El entorno de referencia, las herramientas obligatorias para los gates y las utilidades opcionales usadas durante el desarrollo se documentan en [Guía interna de desarrollo — Entorno y herramientas](docs/operations/development-guide.md#18-entorno-y-herramientas-de-desarrollo). Las versiones observadas allí describen el equipo de mantenimiento y no convierten editores o clientes gráficos en dependencias de ejecución.
+
 No aplicar un paquete de cambios sobre modificaciones locales no revisadas.
 
 Toda participación en issues, Pull Requests o revisiones debe respetar [Código de conducta](CODE_OF_CONDUCT.md). Para dudas de uso, reportes, privacidad o seguridad, consultar primero [Soporte](SUPPORT.md).

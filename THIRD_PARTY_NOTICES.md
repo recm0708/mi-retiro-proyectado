@@ -3,9 +3,9 @@
 **Proyecto:** Mi Retiro Proyectado
 **Estado:** Vigente para el repositorio fuente y la beta actual
 **Fecha:** 2026-08-18
-**Última actualización del inventario:** 2026-08-20
+**Última actualización del inventario:** 2026-08-28
 **Versión de aplicación revisada:** `0.1.17.02-beta`
-**Última revisión documental:** DOC.1 R3 — 2026-08-26
+**Última revisión documental:** mantenimiento pre-G118 — 2026-08-28
 
 La licencia propietaria de Mi Retiro Proyectado **no relicencia** componentes de terceros.
 
@@ -17,8 +17,8 @@ La licencia propietaria de Mi Retiro Proyectado **no relicencia** componentes de
 | Jinja2 | 3.1.6 | BSD-3-Clause |
 | Pydantic | 2.13.4 | MIT |
 | python-multipart | 0.0.32 | Apache-2.0 |
-| pypdf | 6.16.1 | BSD-3-Clause |
-| Uvicorn | 0.52.3 | BSD-3-Clause |
+| pypdf | 6.16.2 | BSD-3-Clause |
+| Uvicorn | 0.52.4 | BSD-3-Clause |
 
 ## Recurso frontend
 

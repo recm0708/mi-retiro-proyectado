@@ -1,6 +1,7 @@
 """Compatibilidad controlada de los importadores con la versión vigente de pypdf."""
 
 from io import BytesIO
+from pathlib import Path
 import unittest
 
 import pypdf
@@ -8,6 +9,9 @@ from pypdf import PdfReader, PdfWriter
 
 from app.services.ficha_digital import analizar_ficha_digital_pdf
 from app.services.mi_retiro_seguro_reference import analizar_comprobante_pdf
+
+
+ROOT = Path(__file__).resolve().parents[1]
 
 
 class TestPypdfCompatibilidad(unittest.TestCase):
@@ -22,8 +26,18 @@ class TestPypdfCompatibilidad(unittest.TestCase):
         escritor.write(salida)
         return salida.getvalue()
 
-    def test_version_pypdf_fijada_en_6_16_1(self):
-        self.assertEqual("6.16.1", pypdf.__version__)
+    def test_version_pypdf_instalada_coincide_con_pin_vigente(self):
+        requirements = (ROOT / "requirements.txt").read_text(encoding="utf-8")
+        pin = next(
+            (
+                linea.split("==", 1)[1].strip()
+                for linea in requirements.splitlines()
+                if linea.strip().casefold().startswith("pypdf==")
+            ),
+            None,
+        )
+        self.assertIsNotNone(pin, "requirements.txt debe fijar pypdf")
+        self.assertEqual(pin, pypdf.__version__)
 
     def test_roundtrip_pdfreader_pdfwriter_sigue_operativo(self):
         contenido = self._pdf_en_blanco()

@@ -6,6 +6,7 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ## [Unreleased]
 
+- Mantenimiento pre-G118: actualiza coordinadamente `pypdf 6.16.1` → `6.16.2` y `Uvicorn 0.52.3` → `0.52.4`, sincroniza inventarios/regresiones, documenta el entorno/toolchain de desarrollo de referencia y mantiene `VERSION` en G117/E02; no consume G118.
 - DEV.2 R5 (candidato G118/E04): Portal Developer y acceso sobre la base aceptada G117/E02; G118 permanece reservado y no aceptado hasta superar su gate propio.
 
 ## [0.1.17.02-beta]

@@ -22,16 +22,29 @@ class TestGov17Licencia(unittest.TestCase):
 
     def test_avisos_terceros_cubren_directas_y_bootstrap(self):
         texto = (ROOT / "THIRD_PARTY_NOTICES.md").read_text(encoding="utf-8")
-        for esperado in (
-            "FastAPI | 0.141.1 | MIT",
-            "Jinja2 | 3.1.6 | BSD-3-Clause",
-            "Pydantic | 2.13.4 | MIT",
-            "python-multipart | 0.0.32 | Apache-2.0",
-            "pypdf | 6.16.1 | BSD-3-Clause",
-            "Uvicorn | 0.52.3 | BSD-3-Clause",
-            "Bootstrap | 5.3.8 | MIT",
-        ):
-            self.assertIn(esperado, texto)
+        req = (ROOT / "requirements.txt").read_text(encoding="utf-8")
+        pins = {}
+        for linea in req.splitlines():
+            limpia = linea.strip()
+            if limpia and not limpia.startswith("#") and "==" in limpia:
+                nombre, version = limpia.split("==", 1)
+                pins[nombre.casefold()] = version
+
+        esperadas = {
+            "FastAPI": "MIT",
+            "Jinja2": "BSD-3-Clause",
+            "Pydantic": "MIT",
+            "python-multipart": "Apache-2.0",
+            "pypdf": "BSD-3-Clause",
+            "Uvicorn": "BSD-3-Clause",
+        }
+        for nombre, licencia in esperadas.items():
+            with self.subTest(nombre=nombre):
+                version = pins.get(nombre.casefold())
+                self.assertIsNotNone(version, f"Falta pin directo para {nombre}")
+                self.assertIn(f"{nombre} | {version} | {licencia}", texto)
+
+        self.assertIn("Bootstrap | 5.3.8 | MIT", texto)
 
     def test_decision_documenta_alternativas_y_no_relicencia(self):
         texto = (DOCS / "governance/licensing-and-distribution.md").read_text(
