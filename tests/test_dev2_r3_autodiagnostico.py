@@ -127,8 +127,7 @@ class TestDev2R3Autodiagnostico(unittest.TestCase):
                 )
 
         self.assertEqual(200, respuesta.status_code)
-        self.assertIn("DEV.2 R2", respuesta.text)
-        self.assertIn("DEV.2 R3", respuesta.text)
+        self.assertIn("Portal Developer", respuesta.text)
         self.assertIn("Autodiagnóstico técnico", respuesta.text)
         self.assertIn("Estado global", respuesta.text)
         self.assertIn("Permisos locales", respuesta.text)

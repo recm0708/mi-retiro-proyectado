@@ -20,10 +20,13 @@ class TestDev2R4CierreFinal(unittest.TestCase):
         documento = self._leer("docs/architecture/development-center.md")
 
         self.assertIn(
-            "**Estado general:** DEV.2 R1–R4 cerrados documentalmente; "
-            "R5 es el siguiente checkpoint candidato G118/E04.",
+            "**Estado general:** DEV.2 R1–R4 cerrados; "
+            "R5 implementado y validado localmente como candidato G118/E04, "
+            "pendiente de integración/aceptación.",
             documento,
         )
+        self.assertIn("## Alcance de R5", documento)
+        self.assertIn("G118/E04", documento)
         self.assertIn("DEV.2 R4 cierra documentalmente el bloque funcional", documento)
         self.assertIn("**Estado R1:** integrado en `main` mediante PR #37.", documento)
         self.assertIn("**Estado R2:** integrado en `main` mediante PR #39.", documento)
@@ -77,7 +80,11 @@ class TestDev2R4CierreFinal(unittest.TestCase):
         self.assertIn("**Alcance completado:** SEC.2 R1–R6", sec2)
         self.assertIn("SEC.2 permanece **cerrado en R1–R6**", sec2)
         self.assertIn("DEV.2 R4 cierra documentalmente el bloque funcional", documento)
-        self.assertIn("R5 reabre el bloque como siguiente checkpoint candidato G118/E04", documento)
+        self.assertIn(
+            "R5 está implementado y validado como candidato G118/E04",
+            documento,
+        )
+        self.assertIn("todavía sin consumir G118", documento)
         self.assertIn("### DEV.2 — cierre del Centro de desarrollo", changelog)
         self.assertIn("cierra documentalmente DEV.2", changelog)
         self.assertIn("deja VER.2 como siguiente cierre transversal", changelog)
@@ -85,7 +92,12 @@ class TestDev2R4CierreFinal(unittest.TestCase):
     def test_arquitectura_conserva_alcance_tecnico_sin_rutas_publicas_nuevas(self):
         arquitectura = self._leer("docs/architecture/system-architecture.md")
 
-        self.assertIn("**Última actualización técnica:** AUD.SEC2 R1", arquitectura)
+        self.assertIn(
+            "**Última actualización técnica:** DEV.2 R5 — Portal Developer "
+            "y separación de acceso web/Bearer — 2026-08-28",
+            arquitectura,
+        )
+        self.assertIn("`/dev` como entrada humana canónica", arquitectura)
         self.assertIn("/dev/centro-desarrollo", arquitectura)
         self.assertIn("no añade rutas públicas nuevas", arquitectura)
         self.assertIn("no modifica motores previsionales", arquitectura)

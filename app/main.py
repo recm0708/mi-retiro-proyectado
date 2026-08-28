@@ -262,6 +262,7 @@ async def agregar_cabeceras_defensivas(request: Request, call_next):
     # o previsionales. Se evita su reutilización desde la caché HTTP.
     if (
         request.url.path.startswith("/api/simulacion/")
+        or request.url.path == "/dev"
         or request.url.path.startswith("/dev/")
     ):
         respuesta.headers["Cache-Control"] = "no-store"
@@ -418,83 +419,82 @@ async def como_se_calcula(
 
 
 @app.get(
-    "/dev/login",
+    "/dev",
     response_class=HTMLResponse,
 )
-async def login_administrativo(request: Request):
-    """Muestra el acceso administrativo web cuando está habilitado."""
+async def portal_developer(request: Request):
+    """Entrada humana canónica del Portal Developer."""
 
-    if not administracion_activa():
-        raise HTTPException(
-            status_code=403,
-            detail="Superficie administrativa no disponible.",
-        )
+    _verificar_superficie_administrativa()
 
-    if not autenticacion_admin_habilitada():
-        raise HTTPException(
-            status_code=403,
-            detail="Autenticación administrativa no configurada.",
-        )
+    if _sesion_web_admin_valida(request):
+        return _render_centro_desarrollo(request)
 
-    return templates.TemplateResponse(
-        request=request,
-        name="dev_login.html",
-        context={
-            "pagina_activa": "centro_desarrollo",
-            "version": APP_VERSION,
-            "error": None,
-        },
+    return _render_login_developer(request)
+
+
+@app.get(
+    "/dev/login",
+    include_in_schema=False,
+)
+async def login_administrativo_legacy():
+    """Conserva compatibilidad y dirige al acceso humano canónico."""
+
+    return RedirectResponse(
+        url="/dev",
+        status_code=303,
     )
 
 
 @app.post(
+    "/dev",
+)
+@app.post(
     "/dev/login",
+    include_in_schema=False,
 )
 async def procesar_login_administrativo(
     request: Request,
     token: str = Form(...),
 ):
-    """Valida credenciales y crea sesión administrativa."""
+    """Valida la credencial local y crea una sesión web administrativa."""
 
-    if not administracion_activa():
-        raise HTTPException(
-            status_code=403,
-            detail="Superficie administrativa no disponible.",
-        )
-
-    if not autenticacion_admin_habilitada():
-        raise HTTPException(
-            status_code=403,
-            detail="Autenticación administrativa no configurada.",
-        )
+    _verificar_superficie_administrativa()
 
     if not validar_token_administrativo(token):
-        return templates.TemplateResponse(
-            request=request,
-            name="dev_login.html",
-            context={
-                "pagina_activa": "centro_desarrollo",
-                "version": APP_VERSION,
-                "error": "Credencial administrativa incorrecta.",
-            },
+        registrar_evento(
+            level="WARNING",
+            event="admin.login.denied",
+            component="security.admin",
+            outcome="denied",
+            metadata={"endpoint": "/dev", "reason": "invalid_credential"},
+        )
+        return _render_login_developer(
+            request,
+            error="Credencial administrativa incorrecta.",
             status_code=401,
         )
 
-    respuesta = RedirectResponse(
-        url="/dev/centro-desarrollo",
-        status_code=303,
+    sesion = crear_sesion_admin()
+
+    registrar_evento(
+        level="INFO",
+        event="admin.login.granted",
+        component="security.admin",
+        outcome="allowed",
+        metadata={"endpoint": "/dev"},
     )
 
+    respuesta = RedirectResponse(url="/dev", status_code=303)
     respuesta.set_cookie(
         key="mrp_admin_session",
-        value=crear_sesion_admin(),
+        value=sesion,
         httponly=True,
         samesite=ADMIN_COOKIE_SAMESITE,
         secure=ADMIN_COOKIE_SECURE,
         max_age=ADMIN_SESSION_MINUTES * 60,
-        path="/",
+        path="/dev",
     )
-
     return respuesta
 
 
@@ -503,29 +503,18 @@ async def logout_administrativo(request: Request):
     """Cierra la sesión administrativa web activa."""
 
     sesion = request.cookies.get("mrp_admin_session")
-
     if sesion:
         eliminar_sesion_admin(sesion)
-
         registrar_evento(
             level="INFO",
             event="admin.session.revoked",
             component="security.admin",
             outcome="success",
-            metadata={
-                "endpoint": request.url.path,
-            },
+            metadata={"endpoint": request.url.path},
         )
 
-    respuesta = RedirectResponse(
-        url="/dev/login",
-        status_code=303,
-    )
-
-    respuesta.delete_cookie(
-        key="mrp_admin_session",
-    )
-
+    respuesta = RedirectResponse(url="/dev", status_code=303)
+    respuesta.delete_cookie(key="mrp_admin_session", path="/dev")
     return respuesta
 
 
@@ -533,48 +522,82 @@ async def logout_administrativo(request: Request):
     "/dev/centro-desarrollo",
     response_class=HTMLResponse,
 )
-async def centro_desarrollo(
-    request: Request,
-):
-    """Muestra el Centro de desarrollo protegido administrativamente."""
+async def centro_desarrollo(request: Request):
+    """Compatibilidad: sesión web dirige a /dev y Bearer conserva acceso técnico."""
 
-    try:
+    _verificar_superficie_administrativa()
+    authorization = request.headers.get("Authorization", "")
+
+    if authorization:
         requerir_administrador(request)
-    except HTTPException as error:
-        sesion = request.cookies.get("mrp_admin_session")
+        return _render_centro_desarrollo(request)
 
-        sesion_web_valida = (
-            sesion
-            and error.status_code == 401
-            and administracion_activa()
-            and autenticacion_admin_habilitada()
-            and validar_sesion_admin(sesion)
-        )
+    if _sesion_web_admin_valida(request):
+        return RedirectResponse(url="/dev", status_code=303)
 
-        if not sesion_web_valida:
-            acepta_html = "text/html" in request.headers.get(
-                "accept",
-                "",
-            ).lower()
+    acepta_html = "text/html" in request.headers.get("accept", "").lower()
+    if acepta_html:
+        return RedirectResponse(url="/dev", status_code=303)
 
-            if acepta_html and error.status_code == 401:
-                return RedirectResponse(
-                    url="/dev/login",
-                    status_code=303,
-                )
+    # Compatibilidad programática: sin sesión web ni Bearer, se conserva 401.
+    requerir_administrador(request)
+    raise AssertionError("requerir_administrador debe interrumpir la solicitud")
 
-            raise error
 
+def _verificar_superficie_administrativa() -> None:
+    """Aplica el kill switch y exige configuración administrativa local."""
+
+    if not administracion_activa():
+        raise HTTPException(status_code=403, detail="Superficie administrativa no disponible.")
+    if not autenticacion_admin_habilitada():
+        raise HTTPException(status_code=403, detail="Autenticación administrativa no configurada.")
+
+
+def _sesion_web_admin_valida(request: Request) -> bool:
+    """Valida exclusivamente la cookie de sesión del navegador."""
+
+    sesion = request.cookies.get("mrp_admin_session")
+    return bool(sesion and validar_sesion_admin(sesion))
+
+
+def _contexto_developer(*, autenticado: bool) -> dict[str, object]:
+    """Contexto visual común del shell Developer."""
+
+    return {
+        "pagina_activa": "portal_developer",
+        "version": APP_VERSION,
+        "dev_autenticado": autenticado,
+    }
+
+
+def _render_login_developer(
+    request: Request,
+    *,
+    error: str | None = None,
+    status_code: int = 200,
+):
+    """Renderiza el acceso del Portal Developer sin persistir credenciales."""
+
+    contexto = _contexto_developer(autenticado=False)
+    contexto["error"] = error
+    return templates.TemplateResponse(
+        request=request,
+        name="dev_login.html",
+        context=contexto,
+        status_code=status_code,
+    )
+
+
+def _render_centro_desarrollo(request: Request):
+    """Renderiza el Centro de desarrollo dentro del shell Developer."""
+
+    contexto = _contexto_developer(autenticado=True)
+    contexto["estado_dev"] = construir_estado_centro_desarrollo()
     return templates.TemplateResponse(
         request=request,
         name="dev_development_center.html",
-        context={
-            "pagina_activa": "centro_desarrollo",
-            "version": APP_VERSION,
-            "estado_dev": construir_estado_centro_desarrollo(),
-        },
+        context=contexto,
     )
-
 
 # ============================================================
 # API — Cuotas
