@@ -1,7 +1,7 @@
 # Validación
 
 **Estado:** Vigente
-**Versión revisada:** `0.1.18.04-beta` — G117/E02 aceptado para REL.GOV.1 R2; G118/E04 reservado para DEV.2 R5
+**Versión revisada:** `0.1.18.04-beta` — G118/E04 aceptado/publicado para DEV.2 R5; G119/E05 reservado para DEV.2 R6
 **Versión base histórica:** `0.0.25-beta`
 **Base documental histórica:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal histórica preservada:** UX.4.6e R8 — validación funcional y procedencia editable — 2026-08-19
@@ -25,6 +25,8 @@ Evidencia previa al gate final de promoción:
 - checks remotos del desarrollo en `success`.
 
 La promoción mueve `VERSION` a `0.1.18.04-beta`, acepta G118/E04 y reserva G119/E05 (`0.1.19.05-beta`) para DEV.2 R6. El gate final de promoción sobre el snapshot preparado queda congelado en **1178 pruebas `unittest` OK** y **1218 pruebas `pytest` passed / 5759 subtests passed**. La auditoría Markdown permanece en 159/159, los 19 JavaScript validan sintaxis y `pip check`, `compileall` y `git diff --cached --check` permanecen limpios.
+
+Después del merge de promoción PR #108, `main` quedó en `290e84aab70a257e8b718d172e37365af49ef048` y se revalidó antes del tag con **1178 pruebas `unittest` OK**, **1218 pruebas `pytest` passed / 5773 subtests passed**, Markdown 159/159, 19 JavaScript, `pip check`, `compileall`, 16 familias / 46 identificadores, contrato de release, manifiesto y `git diff --check` limpios. El tag anotado y firmado `v0.1.18.04-beta` (objeto `1ee2561785d2413ffffd60ea03a69d1e4dae5660`) fue verificado y el workflow `Git Tag Signature Verification` #16 publicó el GitHub Release prerelease ID `378842155`.
 
 ## Validación NOR.1
 

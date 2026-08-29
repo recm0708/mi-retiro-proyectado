@@ -18,7 +18,7 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 - Gate de desarrollo: 1172 `unittest` OK; `pytest` 1211 passed / 5747 subtests; 19 JavaScript; Markdown 159/159; 16 familias / 46 identificadores; `pip check`, compilación y `git diff --check` limpios.
 - Gate final de promoción: **1178 `unittest` OK** y **`pytest` 1218 passed / 5759 subtests passed** sobre el snapshot preparado; Markdown 159/159, 19 JavaScript, dependencias y compilación limpias.
 - Ledger: G118 queda aceptado; G119/E05 (`0.1.19.05-beta`) queda reservado para DEV.2 R6.
-- Publicación: el tag anotado y firmado `v0.1.18.04-beta` se crea únicamente después de integrar y revalidar la promoción; `v0.1.17.02-beta` permanece como publicación anterior.
+- Publicación: G118/E04 quedó publicado mediante el tag anotado y firmado `v0.1.18.04-beta`, objeto `1ee2561785d2413ffffd60ea03a69d1e4dae5660`, commit `290e84aab70a257e8b718d172e37365af49ef048` y GitHub Release prerelease ID `378842155`; `v0.1.17.02-beta` permanece preservado como publicación anterior.
 - Incluye la normalización documental y el mantenimiento de dependencias realizados después de G117 y antes del cierre de G118, sin contarlos como Globales independientes.
 
 ## [0.1.17.02-beta]

@@ -13,7 +13,7 @@ Estado vigente:
 - PLAN.2 R1 quedó aceptado como G114/E01 mediante PR #94 / merge `7ded70c`; DOC.1 R4 y R5 quedaron aceptados posteriormente como G115/E04 y G116/E05.
 - VER.2 está cerrado; `v0.0.71.01-beta` fue publicado originalmente como G071/E01 y reconciliado posteriormente como G087/E01 sin mover el tag.
 - NOR.1 R8 está cerrado como G112/E07; NOR.2 permanece cerrado después de R1–R8.
-- `VERSION` está sincronizado en `0.1.18.04-beta` (G118/E04) para DEV.2 R5; G117/E02 permanece publicado mediante `v0.1.17.02-beta`, y G119/E05 (`0.1.19.05-beta`) queda reservado para DEV.2 R6. PERSIST.1 permanece planificado posteriormente.
+- `VERSION` está sincronizado en `0.1.18.04-beta` (G118/E04) para DEV.2 R5, ya aceptado/publicado mediante `v0.1.18.04-beta`; G117/E02 permanece preservado como publicación anterior y G119/E05 (`0.1.19.05-beta`) queda reservado para DEV.2 R6. PERSIST.1 permanece planificado posteriormente.
 - SEC.2 quedó cerrado después de R1–R6 y AUD.SEC2 R1 quedó aceptado como G109/E01. Los cambios posteriores que afecten autenticación, sesiones, cookies, secretos o endpoints administrativos requieren regresión de seguridad y sincronización documental antes de promover una nueva revisión.
 - Todo cambio debe mantener sincronizados código, pruebas, documentación y evidencia aplicable.
 <!-- DOC1-R1-POST-MANT1:END -->

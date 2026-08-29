@@ -3,7 +3,7 @@
 **Proyecto:** Mi Retiro Proyectado
 **Estado:** vigente desde GOV.1.2
 **Fecha de adopción:** 2026-08-18
-**Última revisión:** promoción formal DEV.2 R5 — G118/E04 aceptado; DEV.2 R6 candidato G119/E05 — 2026-08-28
+**Última revisión:** publicación formal DEV.2 R5 — G118/E04 aceptado/publicado; DEV.2 R6 candidato G119/E05 — 2026-08-28
 
 
 <!-- DOC1-R1-POST-MANT1:START -->
@@ -14,12 +14,12 @@ El gobierno vigente conserva la separación entre estado canónico, evidencia hi
 Estado vigente:
 
 - `VERSION` sigue siendo la fuente única de versión.
-- `0.1.18.04-beta` es la versión canónica vigente y materializa G118/E04 (DEV.2 R5); G119/E05 queda reservado para DEV.2 R6.
+- `0.1.18.04-beta` es la versión canónica vigente y materializa G118/E04 (DEV.2 R5), aceptado/publicado mediante `v0.1.18.04-beta`; G119/E05 queda reservado para DEV.2 R6.
 - G117/E02 está publicado mediante el tag anotado y firmado `v0.1.17.02-beta` y su GitHub Release prerelease automatizado por REL.GOV.1 R2 después de integrar y revalidar la promoción. G116/E05 (`v0.1.16.05-beta`) permanece como publicación previa firmada e inmutable.
 - `v0.0.71.01-beta` conserva su evidencia histórica reconciliada como G087/E01 y `v0.0.26-beta` permanece como tag legacy histórico.
 - REL.GOV.1 R1 y R2 quedan cerrados/aceptados como G110/E01 y G117/E02.
 - DOC.1 R1–R5, PLAN.2 R1, NOR.1, NOR.2, SEC.2 R1–R6 y AUD.SEC2 R1 permanecen cerrados/aceptados según su ledger.
-- DEV.2 R5 queda aceptado como G118/E04 (`0.1.18.04-beta`) después de PR #107 / merge `bc97db0`; DEV.2 R6 queda como candidato G119/E05 (`0.1.19.05-beta`) y UX.5 continúa después conforme a la matriz maestra.
+- DEV.2 R5 queda aceptado/publicado como G118/E04 (`0.1.18.04-beta`) después del desarrollo PR #107 / merge `bc97db0` y de la promoción PR #108 / commit `290e84a`; DEV.2 R6 queda como candidato G119/E05 (`0.1.19.05-beta`) y UX.5 continúa después conforme a la matriz maestra.
 - PERSIST.1 permanece reservado para una etapa posterior.
 <!-- DOC1-R1-POST-MANT1:END -->
 

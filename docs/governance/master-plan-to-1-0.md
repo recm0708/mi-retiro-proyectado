@@ -3,7 +3,7 @@
 **Estado:** vigente
 **Versión base al iniciar el plan:** `0.0.25-beta`
 **Cierre histórico de PLAN.1:** `0.0.26-beta` / `v0.0.26-beta`
-**Versión transversal vigente:** `0.1.18.04-beta` — G117/E02 aceptado para REL.GOV.1 R2; DEV.2 R5 candidato G118/E04
+**Versión transversal vigente:** `0.1.18.04-beta` — G118/E04 aceptado/publicado para DEV.2 R5; DEV.2 R6 candidato G119/E05
 **Fecha:** 2026-08-25
 **Clasificación:** Producto / Arquitectura / QA / Release
 
@@ -17,7 +17,7 @@ funcionales al plan de 14 bloques.
 - **NOR.1:** cerrado en R7; estándares determinísticos establecidos.
 - **NOR.2:** cerrado en R8 mediante PR #74; normalización integral completada.
 - **DOC.1 R2:** auditoría integral Markdown post-NOR.2 cerrada; documentación vigente, evidencia histórica y controles permanentes quedaron reconciliados.
-- **SEC.2 R1–R6:** cerrados; hardening CodeQL, autenticación/protección administrativa, auditoría, sesión web y hardening de sesión completados. AUD.SEC2 R1 quedó aceptado/publicado como G109/E01. REL.GOV.1 R1 quedó aceptado como G110/E01. DOC.2 R1 quedó aceptado/publicado como G111/E01. NOR.1 R8 quedó aceptado como G112/E07, DOC.1 R3 como G113/E03, PLAN.2 R1 como G114/E01, DOC.1 R4 como G115/E04 y DOC.1 R5 como G116/E05. REL.GOV.1 R2 queda aceptado como G117/E02; DEV.2 R5 reserva G118/E04 antes de DEV.2 R6/UX.5/PERSIST.1.
+- **SEC.2 R1–R6:** cerrados; hardening CodeQL, autenticación/protección administrativa, auditoría, sesión web y hardening de sesión completados. AUD.SEC2 R1 quedó aceptado/publicado como G109/E01. REL.GOV.1 R1 quedó aceptado como G110/E01. DOC.2 R1 quedó aceptado/publicado como G111/E01. NOR.1 R8 quedó aceptado como G112/E07, DOC.1 R3 como G113/E03, PLAN.2 R1 como G114/E01, DOC.1 R4 como G115/E04 y DOC.1 R5 como G116/E05. REL.GOV.1 R2 queda aceptado/publicado como G117/E02; DEV.2 R5 queda aceptado/publicado como G118/E04 y DEV.2 R6 reserva G119/E05 antes de UX.5/PERSIST.1.
 
 La separación evita que SEC.2 cree nuevas rutas, archivos o estructuras sobre
 una base cuya nomenclatura y documentación no hayan sido normalizadas.
@@ -68,7 +68,7 @@ Estado vigente:
 - DOC.1 R1 está cerrado.
 - DOC.1 R2 queda cerrado como auditoría integral Markdown post-NOR.2, con controles locales y remotos permanentes.
 - NOR.1 y NOR.2 están cerrados; R8 quedó integrado mediante PR #74.
-- SEC.2 quedó cerrado después de R1–R6; AUD.SEC2 R1 fue publicado como G109/E01. REL.GOV.1 R1 quedó aceptado como G110/E01; DOC.2, NOR.1 R8, DOC.1 R3, PLAN.2 R1, DOC.1 R4 y DOC.1 R5 también están cerrados. REL.GOV.1 R2 queda cerrado/aceptado como G117/E02; DEV.2 R5 queda como checkpoint candidato G118/E04.
+- SEC.2 quedó cerrado después de R1–R6; AUD.SEC2 R1 fue publicado como G109/E01. REL.GOV.1 R1 quedó aceptado como G110/E01; DOC.2, NOR.1 R8, DOC.1 R3, PLAN.2 R1, DOC.1 R4 y DOC.1 R5 también están cerrados. REL.GOV.1 R2 queda cerrado/aceptado/publicado como G117/E02; DEV.2 R5 queda cerrado/aceptado/publicado como G118/E04 y DEV.2 R6 como checkpoint candidato G119/E05.
 - La meta `1.0.0.0` / `Build 000001` se mantiene condicionada al cierre de los gates definidos.
 
 Las referencias históricas a bloques previos se conservan como trazabilidad, pero el estado operativo vigente debe leerse desde esta sección.
@@ -310,17 +310,17 @@ No se inventará detalle retrospectivo no sustentado.
 
 **Estado:** cerrado/aceptado como G112/E07 (`0.1.12.07-beta`) después de PR #89 y PR #90.
 
-Amplía NOR.1 sin añadir un bloque funcional al programa de 14 bloques. Define familias, namespaces, revisiones, reservas y un registro machine-readable. DOC.1 R3 se ejecutó posteriormente como auditoría Markdown transversal; PLAN.2 R1 quedó aceptado después, DOC.1 R4 quedó aceptado/publicado como G115/E04, DOC.1 R5 como G116/E05 y REL.GOV.1 R2 como G117/E02. DEV.2 R5 queda como candidato G118/E04.
+Amplía NOR.1 sin añadir un bloque funcional al programa de 14 bloques. Define familias, namespaces, revisiones, reservas y un registro machine-readable. DOC.1 R3 se ejecutó posteriormente como auditoría Markdown transversal; PLAN.2 R1 quedó aceptado después, DOC.1 R4 quedó aceptado/publicado como G115/E04, DOC.1 R5 como G116/E05 y REL.GOV.1 R2 como G117/E02. DEV.2 R5 queda aceptado/publicado como G118/E04 y DEV.2 R6 como candidato G119/E05.
 
 #### Checkpoint transversal DOC.1 R3 — etiquetas visibles de enlaces Markdown
 
-**Estado:** cerrado/aceptado como G113/E03 (`0.1.13.03-beta`) mediante PR #92 / merge `40ae5c0`, posterior a G112/E07; después quedaron aceptados PLAN.2 R1 como G114/E01, DOC.1 R4 como G115/E04, DOC.1 R5 como G116/E05 y REL.GOV.1 R2 como G117/E02. DEV.2 R5 queda como candidato vigente G118/E04.
+**Estado:** cerrado/aceptado como G113/E03 (`0.1.13.03-beta`) mediante PR #92 / merge `40ae5c0`, posterior a G112/E07; después quedaron aceptados PLAN.2 R1 como G114/E01, DOC.1 R4 como G115/E04, DOC.1 R5 como G116/E05 y REL.GOV.1 R2 como G117/E02. DEV.2 R5 queda aceptado/publicado como G118/E04 y DEV.2 R6 como candidato vigente G119/E05.
 
 Audita documentación viva para sustituir etiquetas visibles basadas únicamente en rutas/URLs por nombres humanos legibles cuando el path no sea semánticamente necesario; preserva `docs/archive/` y añade regresión de enlaces.
 
 ### 9. PERSIST.1 — Persistencia voluntaria y segura
 
-**Estado:** etapa funcional posterior de la matriz maestra y sin Global preasignado; G118/E04 está reservado exclusivamente para DEV.2 R5, seguido de DEV.2 R6 y UX.5 antes de PERSIST.1 conforme a la matriz viva.
+**Estado:** etapa funcional posterior de la matriz maestra y sin Global preasignado; G118/E04 ya fue aceptado/publicado para DEV.2 R5 y G119/E05 queda reservado exclusivamente para DEV.2 R6, seguido de UX.5 antes de PERSIST.1 conforme a la matriz viva.
 
 - guardado solo por decisión del asegurado;
 - modelo de datos versionado;
