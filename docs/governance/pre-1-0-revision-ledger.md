@@ -3,9 +3,9 @@
 **Proyecto:** Mi Retiro Proyectado
 **Base auditada:** `7037addd44253e528c77460b678d2b3ccd540dd5`
 **Contador histórico en la base `7037addd`:** **G070**
-**Contador aceptado reconciliado al commit `46c464e`:** **G117**
-**Siguiente Global disponible:** **G118**
-**Siguiente candidato disponible:** `0.1.18.04-beta` — DEV.2 R5 (Portal Developer y acceso)
+**Contador aceptado reconciliado al commit `bc97db0`:** **G118**
+**Siguiente Global disponible:** **G119**
+**Siguiente candidato disponible:** `0.1.19.05-beta` — DEV.2 R6 (Portal Developer multipágina y mantenimiento)
 
 
 <!-- DOC1-R1-REVISION-MANUAL:START -->
@@ -27,9 +27,9 @@ Estado vigente de la contabilidad:
   ya existían después de `7037addd`; por eso queda documentada como una
   **anomalía histórica de numeración**. La reconciliación vigente sitúa el estado
   materializado por ese tag en G087/E01 sin modificar la evidencia publicada.
-- `VERSION` está sincronizado en `0.1.17.02-beta` después de aceptar REL.GOV.1 R2 como G117/E02 mediante PR #103 / merge `46c464e`; G118/E04 (`0.1.18.04-beta`) queda reservado para DEV.2 R5.
+- `VERSION` está sincronizado en `0.1.18.04-beta` después de aceptar DEV.2 R5 como G118/E04 mediante PR #107 / merge `bc97db0`; G119/E05 (`0.1.19.05-beta`) queda reservado para DEV.2 R6.
 - G110/E01 (`0.1.10.01-beta`) quedó aceptado para REL.GOV.1 mediante PR #85 y merge `5cd1cea`.
-- G111/E01 (`0.1.11.01-beta`) permanece aceptado para DOC.2. G112/E07 (`0.1.12.07-beta`) queda aceptado para NOR.1 R8 después de PR #89 / PR #90; G113/E03 (`0.1.13.03-beta`) queda aceptado para DOC.1 R3 mediante PR #92 / merge `40ae5c0`; G114/E01 (`0.1.14.01-beta`) queda aceptado para PLAN.2 R1 mediante PR #94 / merge `7ded70c`; G115/E04 (`0.1.15.04-beta`) queda aceptado para DOC.1 R4 mediante PR #96 / merge `9f51229` y publicado mediante PR #97 / merge `87fa8e9`; G116/E05 (`0.1.16.05-beta`) queda aceptado para DOC.1 R5 mediante PR #101 / merge `6f4266d`; G117/E02 (`0.1.17.02-beta`) queda aceptado para REL.GOV.1 R2 mediante PR #103 / merge `46c464e`. G118/E04 (`0.1.18.04-beta`) queda reservado para DEV.2 R5.
+- G111/E01 (`0.1.11.01-beta`) permanece aceptado para DOC.2. G112/E07 (`0.1.12.07-beta`) queda aceptado para NOR.1 R8 después de PR #89 / PR #90; G113/E03 (`0.1.13.03-beta`) queda aceptado para DOC.1 R3 mediante PR #92 / merge `40ae5c0`; G114/E01 (`0.1.14.01-beta`) queda aceptado para PLAN.2 R1 mediante PR #94 / merge `7ded70c`; G115/E04 (`0.1.15.04-beta`) queda aceptado para DOC.1 R4 mediante PR #96 / merge `9f51229` y publicado mediante PR #97 / merge `87fa8e9`; G116/E05 (`0.1.16.05-beta`) queda aceptado para DOC.1 R5 mediante PR #101 / merge `6f4266d`; G117/E02 (`0.1.17.02-beta`) queda aceptado para REL.GOV.1 R2 mediante PR #103 / merge `46c464e`. G118/E04 (`0.1.18.04-beta`) queda aceptado para DEV.2 R5 mediante PR #107 / merge `bc97db0`; G119/E05 (`0.1.19.05-beta`) queda reservado para DEV.2 R6.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 
 Este ledger registra los estados aceptados reconstruidos durante VER.2 y su reconciliación posterior. La regla contable histórica y las exclusiones originales se conservan en `docs/archive/governance/ver2-revision-decision-matrix.md` y `docs/archive/governance/pre-1-0-versioning-audit.md`; la ampliación post-G070 se justifica en `docs/audits/governance/post-g070-revision-reconciliation.md`.
@@ -178,6 +178,7 @@ El detalle de inclusión/exclusión está en `docs/audits/governance/post-g070-r
 | G115 | `0.1.15.04-beta` | DOC.1 R4 — saneamiento documental post-G113 y reconciliación del estado vivo tras G114 | `0.1.15.04-beta` | PR #96 / merge `9f51229`; 1114 pruebas; Markdown 149/149; auditor de identificadores OK; validaciones locales limpias |
 | G116 | `0.1.16.05-beta` | DOC.1 R5 — normalización documental integral post-G115 | `0.1.16.05-beta` | PR #101 / merge `6f4266d`; 1127 pruebas unittest; pytest 1167/5587 subtests; Markdown 158/158; checks remotos en success |
 | G117 | `0.1.17.02-beta` | REL.GOV.1 R2 — automatización gobernada de Releases y checks | `0.1.17.02-beta` | PR #103 / merge `46c464e`; 1157 unittest; pytest 1197/5731 subtests; Markdown 159/159; CI #273, gobernanza #112, Markdown #59 y CodeQL #209 en success |
+| G118 | `0.1.18.04-beta` | DEV.2 R5 — Portal Developer y separación de acceso web/Bearer | `0.1.18.04-beta` | PR #107 / merge `bc97db0`; 1172 unittest; pytest 1211/5747 subtests; Markdown 159/159; 19 JavaScript; gate final de promoción: 1178 unittest, pytest 1218/5759 subtests |
 
 ### Anomalía histórica del tag `v0.0.71.01-beta`
 
@@ -208,14 +209,16 @@ El ledger estructurado conserva también estas exclusiones para no perder histor
 
 ## Próximo estado
 
-REL.GOV.1 R2 superó gate local, PR #103, integración y revalidación post-merge; esta promoción materializa ese mismo estado como G117/E02 (`0.1.17.02-beta`) sin consumir un Global adicional.
+DEV.2 R5 superó gate local, PR #107 e integración; esta promoción materializa ese mismo estado como G118/E04 (`0.1.18.04-beta`) sin consumir un Global adicional por el PR o el tag.
+
+La revisión funcional R5 y el ordinal E04 difieren porque DEV.2 R4 fue un cierre documental sin estado material independiente. El siguiente estado aceptado del mismo bloque continúa por tanto en E05.
 
 | Global | ID revision-aware candidato | Bloque | Condición |
 |---:|---|---|---|
-| G118 | `0.1.18.04-beta` | DEV.2 R5 — Portal Developer y acceso | crear `/dev`, diferenciar sesión web/Bearer, rediseñar `/dev/login`, no persistir secretos, gate completo + commit firmado + PR/CI + integración |
+| G119 | `0.1.19.05-beta` | DEV.2 R6 — Portal Developer multipágina y mantenimiento | separar páginas Developer, ZIP diagnóstico real, mantenimiento seguro, gate completo + commit firmado + PR/CI + integración |
 
-G118 permanece reservado y **no se considera aceptado** mientras DEV.2 R5 siga siendo candidato. `VERSION` queda en `0.1.17.02-beta` y `accepted_count` en 117 durante ese trabajo.
+G119 permanece reservado y **no se considera aceptado** mientras DEV.2 R6 siga siendo candidato. `VERSION` queda en `0.1.18.04-beta` y `accepted_count` en 118 durante ese trabajo.
 
 PERSIST.1 permanece planificado como etapa posterior de la matriz maestra y no tiene un Global preasignado.
 
-Los tags `v0.0.71.01-beta`, `v0.1.09.01-beta`, `v0.1.13.03-beta`, `v0.1.14.01-beta`, `v0.1.15.04-beta`, `v0.1.16.05-beta` y `v0.1.17.02-beta` permanecen publicados e inmutables conforme a su evidencia. G117/E02 queda aceptado/publicado para REL.GOV.1 R2 mediante el tag firmado `v0.1.17.02-beta` y el GitHub Release gobernado; G118/E04 permanece reservado para DEV.2 R5.
+Los tags publicados previos permanecen inmutables. G117/E02 continúa publicado para REL.GOV.1 R2 mediante `v0.1.17.02-beta`; la publicación de G118/E04 mediante `v0.1.18.04-beta` se realiza únicamente después del merge y revalidación de la promoción.

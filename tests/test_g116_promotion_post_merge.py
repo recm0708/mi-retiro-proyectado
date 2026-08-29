@@ -40,19 +40,17 @@ class TestG116PromotionPostMerge(unittest.TestCase):
         self.assertIn("Cerrado/aceptado G116/E05", matrix)
         self.assertIn("DOC.1 R5", matrix)
 
-    def test_publicacion_g116_permanece_preservada(self):
-        for rel in (
-            "README.md",
-            "RELEASES.md",
-            "VERSIONING.md",
-            "GOVERNANCE.md",
-            "SECURITY.md",
-        ):
-            with self.subTest(rel=rel):
-                self.assertIn(
-                    "v0.1.16.05-beta",
-                    (ROOT / rel).read_text(encoding="utf-8"),
-                )
+    def test_publicacion_g116_permanece_en_fuentes_canonicas(self):
+        releases = (ROOT / "RELEASES.md").read_text(encoding="utf-8")
+        changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
+        security = (ROOT / "SECURITY.md").read_text(encoding="utf-8")
+
+        self.assertIn("v0.1.16.05-beta", releases)
+        self.assertIn("0.1.16.05-beta", changelog)
+        self.assertIn(
+            "| `0.1.16.05-beta` | Beta previa G116/E05 publicada;",
+            security,
+        )
 
 
 if __name__ == "__main__":

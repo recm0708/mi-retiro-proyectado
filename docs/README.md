@@ -1,9 +1,9 @@
 # Índice de documentación
 
 **Estado:** vigente
-**Versión de aplicación:** `0.1.17.02-beta` — G117/E02 aceptado para REL.GOV.1 R2; G118/E04 reservado para DEV.2 R5; ledger aceptado hasta G117
+**Versión de aplicación:** `0.1.18.04-beta` — G118/E04 aceptado para DEV.2 R5; G119/E05 reservado para DEV.2 R6; ledger aceptado hasta G118
 **Último tag formal legacy:** `v0.0.26-beta`
-**Última actualización transversal:** promoción formal REL.GOV.1 R2 — G117/E02 aceptado; DEV.2 R5 candidato G118/E04 — 2026-08-28
+**Última actualización transversal:** promoción formal DEV.2 R5 — G118/E04 aceptado; DEV.2 R6 candidato G119/E05 — 2026-08-28
 **Cierres históricos preservados:** UX.4.6i / PR #34 — 841 pruebas; UX.4.6e R9 — `v0.0.25-beta`
 
 Este archivo es el punto de entrada para la documentación técnica, funcional, normativa, de privacidad, validación y auditoría de Mi Retiro Proyectado.
@@ -11,7 +11,7 @@ Este archivo es el punto de entrada para la documentación técnica, funcional, 
 
 ## Estado de normalización del repositorio
 
-**Estado actual:** NOR.1 R8, NOR.2, DOC.1 R2–R5, SEC.2, AUD.SEC2 R1, REL.GOV.1 R1–R2, DOC.2 y PLAN.2 R1 están cerrados/aceptados según corresponda. REL.GOV.1 R2 queda aceptado como G117/E02 (`0.1.17.02-beta`); DEV.2 R5 reserva G118/E04 como candidato actual.
+**Estado actual:** NOR.1 R8, NOR.2, DOC.1 R2–R5, SEC.2, AUD.SEC2 R1, REL.GOV.1 R1–R2, DOC.2 y PLAN.2 R1 están cerrados/aceptados según corresponda. DEV.2 R5 queda aceptado como G118/E04 (`0.1.18.04-beta`); DEV.2 R6 reserva G119/E05 como candidato actual.
 
 Estado de la fase:
 
@@ -31,7 +31,8 @@ Estado de la fase:
 - **DOC.1 R4:** cerrado/aceptado como G115/E04 mediante PR #96 / merge `9f51229`; saneamiento documental post-G113 completado.
 - **DOC.1 R5:** cerrado/aceptado como G116/E05 mediante PR #101 / merge `6f4266d`; normalización documental integral post-G115 completada.
 - **REL.GOV.1 R2:** cerrado/aceptado como G117/E02 mediante PR #103 / merge `46c464e`; automatización gobernada de Releases y checks completada.
-- **DEV.2 R5:** candidato G118/E04 (`0.1.18.04-beta`) para Portal Developer y acceso.
+- **DEV.2 R5:** cerrado/aceptado como G118/E04 (`0.1.18.04-beta`) mediante PR #107 / merge `bc97db0`; Portal Developer y separación sesión web/Bearer integrados.
+- **DEV.2 R6:** candidato G119/E05 (`0.1.19.05-beta`) para Portal Developer multipágina, diagnóstico, eventos, archivos y mantenimiento.
 - **SEC.2 R1–R6:** cerrados; CodeQL, autenticación, protección de endpoints, auditoría, sesión web y hardening configurable completados. AUD.SEC2 R1 corrigió el kill switch, alineó documentación/ledger y quedó aceptado como G109/E01.
 
 Evidencia:
@@ -76,7 +77,7 @@ Evidencia:
 - **[VER.2 — Segunda pasada de auditoría cruzada](archive/governance/ver2-second-pass-audit.md)** — bitácora de la segunda pasada y correcciones sobre la primera reconstrucción.
 - **[VER.2 — Conteo de segunda pasada](archive/governance/ver2-provisional-count-audit.md)** — cierre del conteo de segunda pasada en G070 antes de VER.2.
 - **[VER.2 — Matriz de decisión de revisiones aceptadas](archive/governance/ver2-revision-decision-matrix.md)** — decisión fila por fila sobre qué consume Global y por qué.
-- **[Ledger de revisiones aceptadas pre-1.0](governance/pre-1-0-revision-ledger.md)** — ledger Markdown reconciliado G001–G117 y siguiente candidato reservado G118/E04 para DEV.2 R5.
+- **[Ledger de revisiones aceptadas pre-1.0](governance/pre-1-0-revision-ledger.md)** — ledger Markdown reconciliado G001–G118 y siguiente candidato reservado G119/E05 para DEV.2 R6.
 - **[Auditoría de reconciliación revision-aware posterior a G070](audits/governance/post-g070-revision-reconciliation.md)** — auditoría de reconstrucción G071–G108.
 - [`pre-1-0-revision-ledger-g070.json`](archive/governance/pre-1-0-revision-ledger-g070.json) — snapshot histórico exacto G070.
 - [`../data/pre-1-0-revision-ledger.json`](../data/pre-1-0-revision-ledger.json) — ledger machine-readable canónico de la reconstrucción.

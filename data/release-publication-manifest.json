@@ -1,56 +1,48 @@
 {
   "schema_version": 1,
-  "version": "0.1.17.02-beta",
-  "block": "REL.GOV.1",
-  "revision": "R2",
+  "version": "0.1.18.04-beta",
+  "block": "DEV.2",
+  "revision": "R5",
   "summary": [
-    "G117/E02 materializa formalmente REL.GOV.1 R2 después de integrar el desarrollo mediante PR #103 y revalidar el estado resultante en main.",
-    "Esta revisión automatiza la publicación gobernada de GitHub Releases a partir de un tag anotado y firmado creado por el mantenedor, manteniendo GitHub Actions fuera de la creación o firma del tag."
+    "G118/E04 materializa formalmente DEV.2 R5 después de integrar el Portal Developer y la separación de acceso web/Bearer mediante PR #107.",
+    "La revisión establece `/dev` como entrada humana canónica, mantiene Bearer como contrato técnico separado y prepara el rediseño multipágina DEV.2 R6."
   ],
   "changes": [
-    "REL.GOV.1 R2 queda aceptado formalmente como G117/E02.",
-    "`VERSION` avanza a `0.1.17.02-beta`.",
-    "El ledger revision-aware queda en `accepted_count=117`.",
-    "G118/E04 (`0.1.18.04-beta`) queda reservado para DEV.2 R5.",
-    "La publicación usa un manifiesto versionado y notas canónicas deterministas.",
-    "El workflow valida árbol etiquetado, firma, contrato VERSION/ledger y pertenencia a main.",
-    "La verificación conserva `contents: read`; solo el job de publicación recibe `contents: write`.",
-    "Solo HTTP 404 autoriza crear un Release; HTTP 200 exige coincidencia exacta y cualquier otro estado falla cerrado.",
-    "Un Release existente e idéntico es un no-op idempotente; uno incompatible no se reescribe automáticamente.",
-    "`workflow_dispatch` permanece como auditoría manual sin capacidad de publicación.",
-    "La creación y firma del tag permanecen como frontera de confianza local del mantenedor."
+    "DEV.2 R5 queda aceptado formalmente como G118/E04.",
+    "`VERSION` avanza a `0.1.18.04-beta`.",
+    "El ledger revision-aware queda en `accepted_count=118`.",
+    "DEV.2 R5 se registra como revisión funcional R5 con ordinal aceptado E04.",
+    "G119/E05 (`0.1.19.05-beta`) queda reservado para DEV.2 R6.",
+    "`/dev` queda como entrada humana canónica del Portal Developer.",
+    "La sesión web administrativa permanece separada del acceso técnico Bearer.",
+    "La cookie `mrp_admin_session` queda limitada a `Path=/dev` y conserva `HttpOnly`.",
+    "El shell Developer queda separado de la navegación previsional pública.",
+    "La creación y firma del tag permanecen como frontera local del mantenedor."
   ],
   "validation": [
-    "Gate de desarrollo: **1157 tests `unittest` OK**.",
-    "`pytest`: **1197 passed / 5731 subtests passed**.",
-    "Revalidación post-merge: **1157 tests `unittest` OK**.",
-    "Gate final de promoción: **1161 tests `unittest` OK**.",
-    "Gate final de promoción con `pytest`: **1201 passed / 5721 subtests passed**.",
+    "Gate final de desarrollo: **1172 tests `unittest` OK**.",
+    "`pytest` de desarrollo: **1211 passed / 5747 subtests passed**.",
     "`pip check`: OK.",
     "Compilación Python: OK.",
-    "Sintaxis JavaScript: **18 archivos OK**.",
-    "Auditoría Markdown: **159/159 OK**.",
-    "Clasificación Markdown: **58 VIVO / 24 AUDITORIA / 64 HISTORICO / 9 PLANTILLA / 4 SOPORTE**.",
+    "Sintaxis JavaScript: **19 archivos OK**.",
+    "Auditoría Markdown previa: **159/159 OK**.",
     "Auditoría de identificadores: **16 familias / 46 identificadores OK**.",
     "`git diff --check`: OK.",
-    "Continuous Integration post-merge #273: success.",
-    "Repository Governance Audit post-merge #112: success.",
-    "Markdown Audit post-merge #59: success.",
-    "CodeQL post-merge #209: success.",
-    "La publicación queda condicionada a que el workflow verifique correctamente la firma del tag."
+    "Checks remotos post-merge de CI, gobernanza, Markdown Audit y CodeQL: success.",
+    "Gate final de promoción: **1178 tests `unittest` OK**; **1218 `pytest` passed / 5759 subtests passed**."
   ],
   "evidence": [
-    "**REL.GOV.1 R2 desarrollo:** PR #103.",
-    "**Commit de desarrollo firmado:** `283f60f90071de86638927407015e9cf9b0e5494`.",
-    "**Integración de aceptación en `main`:** `46c464ed2dd21f621d80e8dafc199fe56b4af710`.",
-    "Revalidación post-merge local: 1157 `unittest`, 1197 `pytest` / 5731 subtests, 159 Markdown.",
-    "Checks post-merge: CI #273, gobernanza #112, Markdown #59 y CodeQL #209 en `success`.",
-    "Gate final de promoción local (2026-08-28): 1161 `unittest` OK; 1201 `pytest` passed / 5721 subtests passed."
+    "**DEV.2 R5 desarrollo:** PR #107.",
+    "**Commit de desarrollo firmado:** `f0f4cbc17d11155b5869ca6bedd3a751030811cc`.",
+    "**Integración de desarrollo en `main`:** `bc97db04ef0f08d3005882ff08dd68b371aeb61e`.",
+    "Validación del PR: 1172 `unittest`, 1211 `pytest` / 5747 subtests, 159 Markdown y 19 JavaScript.",
+    "La publicación de G118/E04 queda condicionada al merge de esta promoción, revalidación de `main` y tag anotado/firmado local.",
+    "Gate final de promoción local sobre el snapshot preparado: 1178 `unittest` OK; 1218 `pytest` passed / 5759 subtests passed; 159 Markdown; 19 JavaScript; `pip check`, `compileall` y `git diff --cached --check` limpios."
   ],
   "next_step": {
-    "global_revision": 118,
-    "revision_aware": "0.1.18.04-beta",
+    "global_revision": 119,
+    "revision_aware": "0.1.19.05-beta",
     "block": "DEV.2",
-    "description": "El siguiente checkpoint formal es **DEV.2 R5 — Portal Developer y acceso**. Debe crear `/dev`, diferenciar la sesión administrativa web del acceso técnico Bearer, rediseñar `/dev/login` y evitar persistir secretos."
+    "description": "El siguiente checkpoint formal es **DEV.2 R6 — Portal Developer multipágina, diagnóstico, eventos, archivos y mantenimiento**. Debe conservar la separación sesión/Bearer, añadir descarga segura del ZIP diagnóstico y proteger las operaciones destructivas con revalidación y confirmación reforzada."
   }
 }

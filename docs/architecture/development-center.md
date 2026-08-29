@@ -1,6 +1,6 @@
 # DEV.2 R1/R2/R3/R4/R5 — Centro de desarrollo
 
-**Estado general:** DEV.2 R1–R4 cerrados; R5 implementado y validado localmente como candidato G118/E04, pendiente de integración/aceptación.
+**Estado general:** DEV.2 R1–R4 preservados; R5 integrado y aceptado como G118/E04; R6 queda como candidato G119/E05.
 
 **Estado R1:** integrado en `main` mediante PR #37.
 
@@ -18,12 +18,12 @@ DEV.2 queda preservado como bloque funcional cerrado. Sus referencias a VER.2 o 
 
 Estado vigente:
 
-- DEV.2 R1–R4 están cerrados; R5 está implementado y validado como candidato G118/E04 para Portal Developer y acceso, todavía sin consumir G118 hasta su integración/aceptación.
+- DEV.2 R1–R4 quedan preservados; R5 está integrado mediante PR #107 / merge `bc97db0` y aceptado como G118/E04 para Portal Developer y acceso. R6 queda reservado como G119/E05.
 - MANT.1 quedó cerrado operativamente en R7.
 - DOC.1 R1 está cerrado.
 - NOR.1 y NOR.2 están cerrados.
 - DOC.1 R2 está cerrado como revisión documental integral posterior a NOR.2.
-- `VERSION` está sincronizado en `0.1.17.02-beta` después de aceptar y publicar REL.GOV.1 R2 como G117/E02; G118/E04 (`0.1.18.04-beta`) queda reservado para DEV.2 R5. REL.GOV.1 R1 permanece preservado como G110/E01.
+- `VERSION` está sincronizado en `0.1.18.04-beta` después de aceptar DEV.2 R5 como G118/E04; G119/E05 (`0.1.19.05-beta`) queda reservado para DEV.2 R6. REL.GOV.1 R2 permanece preservado/publicado como G117/E02.
 - SEC.2 quedó cerrado después de R1–R6; AUD.SEC2 R1 corrige el kill switch y el contrato de sesión web sin reabrir DEV.2.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 
@@ -190,12 +190,12 @@ La credencial administrativa no se persiste en `localStorage`,
 `sessionStorage`, query string ni documentación visible. El JavaScript del
 Portal Developer solo gestiona interacción visual del formulario.
 
-### Validación del candidato R5
+### Validación y aceptación de R5
 
 La validación local previa a integración quedó en:
 
 ```text
-1171 unittest OK
+1172 unittest OK
 1211 pytest passed / 5747 subtests passed
 19 JavaScript con sintaxis válida
 pip check OK
@@ -205,9 +205,23 @@ Markdown Audit OK
 git diff --check limpio
 ```
 
-`VERSION` permanece en `0.1.17.02-beta` durante el desarrollo. G118/E04
-(`0.1.18.04-beta`) continúa reservado y no se considera aceptado hasta integrar
-y revalidar el candidato.
+Durante el desarrollo, `VERSION` permaneció en `0.1.17.02-beta`. Después de
+PR #107 / merge `bc97db0` y sus validaciones, esta promoción materializa
+G118/E04 como `0.1.18.04-beta`; G119/E05 (`0.1.19.05-beta`) queda reservado
+para DEV.2 R6.
+
+## Próximo alcance: DEV.2 R6
+
+R6 no duplica la aplicación previsional pública. Evoluciona únicamente el Portal Developer a una arquitectura multipágina:
+
+- `/dev` como dashboard compacto;
+- `/dev/diagnostico` con detalle técnico y actualización;
+- `/dev/eventos` con filtros, búsqueda y detalle seguro;
+- `/dev/archivos` con inventario y descarga real del ZIP diagnóstico;
+- `/dev/mantenimiento` con uso de disco, rotaciones, limpieza controlada y revocación de sesiones cuando corresponda;
+- `/dev/privacidad` para controles técnicos de privacidad y seguridad.
+
+Las operaciones destructivas de mantenimiento deberán actuar solo sobre artefactos diagnósticos conocidos, revalidar la sesión administrativa, aplicar protección anti-CSRF cuando corresponda al diseño final, registrar la acción sin secretos/datos previsionales y exigir confirmaciones escalonadas antes de borrar.
 
 ## Versionado
 

@@ -3,7 +3,7 @@
 **Estado:** vigente
 **Versión base al iniciar el plan:** `0.0.25-beta`
 **Cierre histórico de PLAN.1:** `0.0.26-beta` / `v0.0.26-beta`
-**Versión transversal vigente:** `0.1.17.02-beta` — G117/E02 aceptado para REL.GOV.1 R2; DEV.2 R5 candidato G118/E04
+**Versión transversal vigente:** `0.1.18.04-beta` — G117/E02 aceptado para REL.GOV.1 R2; DEV.2 R5 candidato G118/E04
 **Fecha:** 2026-08-25
 **Clasificación:** Producto / Arquitectura / QA / Release
 
@@ -239,23 +239,22 @@ La explicación pública no duplica motores de cálculo en JavaScript y mantiene
 
 ### 6. DEV.2 — Centro de desarrollo
 
-**Estado:** cerrado documentalmente en R4.
+**Estado:** R5 cerrado/aceptado como G118/E04; R6 candidato G119/E05.
 
 > Ancla histórica preservada por pruebas de regresión: **Estado:** siguiente bloque funcional; pendiente de inicio hasta cerrar VER.2.
 
 Evolución visible y controlada de Developer Diagnostics:
 
-- disponible solo en modo de desarrollo;
-- autenticación administrativa local;
-- estado de aplicación;
-- logs estructurados;
-- errores y advertencias;
-- correlation ID;
-- salud de componentes;
-- filtros y consulta;
-- autodiagnóstico;
-- exportación de ZIP diagnóstico sanitizado;
-- ausencia de PII y valores financieros sensibles.
+- R1–R3 quedan preservados como G071–G073;
+- R4 fue un cierre documental y no consumió Global independiente;
+- R5 establece `/dev` como entrada humana canónica;
+- R5 separa sesión administrativa web y acceso técnico Bearer;
+- R5 limita la cookie administrativa a `Path=/dev`;
+- R5 incorpora shell/login Developer independiente de la navegación pública;
+- R5 preserva logs estructurados, correlation ID, autodiagnóstico y ZIP sanitizado en la capa de servicio;
+- R6 debe convertir el portal en superficies independientes de resumen, diagnóstico, eventos, archivos, mantenimiento y privacidad;
+- R6 debe exponer la descarga segura del ZIP diagnóstico y mantenimiento controlado de logs/rotaciones con confirmación reforzada;
+- ninguna superficie Developer debe incorporar PII ni valores financieros sensibles a logs o artefactos diagnósticos.
 
 ### 7. SEC.2 — Hardening integral
 
@@ -290,11 +289,11 @@ Objetivo previo a DOC.2:
 - extender el workflow de tags para ejecutar el contrato en todo tag futuro;
 - fijar reglas de edición posterior que preserven firma, commit objetivo y evidencia histórica.
 
-REL.GOV.1 superó gate, PR/CI e integración y consumió G110; la promoción PR #86 publicó `v0.1.10.01-beta`. DOC.2 R1 superó gate, PR #87, CI, integración y revalidación post-merge, por lo que G111/E01 (`0.1.11.01-beta`) quedó aceptado; G112/E07 (`0.1.12.07-beta`) quedó aceptado para NOR.1 R8 y G113/E03 (`0.1.13.03-beta`) para DOC.1 R3. En aquel plan, G114/E01 se proyectaba para PERSIST.1; PLAN.2 R1 reasignó posteriormente esa reserva y quedó aceptado/publicado como G114/E01. Después quedaron aceptados/publicados DOC.1 R4 como G115/E04, DOC.1 R5 como G116/E05 y REL.GOV.1 R2 como G117/E02; G118/E04 queda reservado para DEV.2 R5 y PERSIST.1 se mantiene como etapa posterior.
+REL.GOV.1 superó gate, PR/CI e integración y consumió G110; la promoción PR #86 publicó `v0.1.10.01-beta`. DOC.2 R1 superó gate, PR #87, CI, integración y revalidación post-merge, por lo que G111/E01 (`0.1.11.01-beta`) quedó aceptado; G112/E07 (`0.1.12.07-beta`) quedó aceptado para NOR.1 R8 y G113/E03 (`0.1.13.03-beta`) para DOC.1 R3. En aquel plan, G114/E01 se proyectaba para PERSIST.1; PLAN.2 R1 reasignó posteriormente esa reserva y quedó aceptado/publicado como G114/E01. Después quedaron aceptados/publicados DOC.1 R4 como G115/E04, DOC.1 R5 como G116/E05 y REL.GOV.1 R2 como G117/E02; DEV.2 R5 queda aceptado como G118/E04 y G119/E05 queda reservado para DEV.2 R6. PERSIST.1 se mantiene como etapa posterior.
 
 ### 8. DOC.2 — CHANGELOG detallado `0.0.1-beta`–`0.0.21-beta`
 
-**Estado:** cerrado en R1 como G111/E01 (`0.1.11.01-beta`) mediante PR #87; posteriormente quedaron aceptados NOR.1 R8 como G112/E07, DOC.1 R3 como G113/E03, PLAN.2 R1 como G114/E01, DOC.1 R4 como G115/E04, DOC.1 R5 como G116/E05 y REL.GOV.1 R2 como G117/E02. El candidato vigente es DEV.2 R5 como G118/E04.
+**Estado:** cerrado en R1 como G111/E01 (`0.1.11.01-beta`) mediante PR #87; posteriormente quedaron aceptados NOR.1 R8 como G112/E07, DOC.1 R3 como G113/E03, PLAN.2 R1 como G114/E01, DOC.1 R4 como G115/E04, DOC.1 R5 como G116/E05 y REL.GOV.1 R2 como G117/E02. DEV.2 R5 queda aceptado como G118/E04 y el candidato vigente es DEV.2 R6 como G119/E05.
 
 Reconstrucción basada exclusivamente en evidencia:
 

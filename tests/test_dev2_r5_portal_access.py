@@ -169,7 +169,7 @@ class TestDev2R5PortalAccess(unittest.TestCase):
         self.assertNotIn("?token", texto)
 
 
-    def test_documentacion_r5_describe_contrato_vigente_sin_promover_g118(self):
+    def test_documentacion_r5_describe_contrato_vigente_promovido_g118(self):
         documentacion = (
             ROOT / "docs/architecture/development-center.md"
         ).read_text(encoding="utf-8")
@@ -179,12 +179,13 @@ class TestDev2R5PortalAccess(unittest.TestCase):
         self.assertIn("Path=/dev", documentacion)
         self.assertIn("Authorization: Bearer <token>", documentacion)
         self.assertIn("DEV.2 R6", documentacion)
-        self.assertIn("1171 unittest OK", documentacion)
+        self.assertIn("1172 unittest OK", documentacion)
         self.assertIn("1211 pytest passed / 5747 subtests passed", documentacion)
         self.assertIn("G118/E04", documentacion)
+        self.assertIn("G119/E05", documentacion)
 
         version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
-        self.assertEqual("0.1.17.02-beta", version)
+        self.assertEqual("0.1.18.04-beta", version)
 
 if __name__ == "__main__":
     unittest.main()

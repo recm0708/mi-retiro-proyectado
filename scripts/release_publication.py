@@ -73,7 +73,10 @@ def validate_manifest(manifest: dict, version: str, ledger: dict) -> list[str]:
             errors.append(
                 "El bloque del manifiesto no coincide con el ledger."
             )
-        expected_revision = f"R{int(entry['ordinal'])}"
+        expected_revision = str(
+            entry.get("functional_revision")
+            or f"R{int(entry['ordinal'])}"
+        )
         if manifest.get("revision") != expected_revision:
             errors.append(
                 f"La revisión esperada es {expected_revision}."

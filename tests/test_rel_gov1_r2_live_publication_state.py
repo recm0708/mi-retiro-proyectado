@@ -1,15 +1,19 @@
-"""Regresiones de estado vivo y documentación para REL.GOV.1 R2."""
+"""Regresiones históricas y de estado vivo para REL.GOV.1 R2."""
+
+from __future__ import annotations
 
 from pathlib import Path
+import re
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
 class TestRelGovR2LivePublicationState(unittest.TestCase):
-    def test_superficies_vivas_no_presentan_g116_como_pendiente(self):
-        import re
-
+    def test_referencias_g116_que_permanezcan_no_lo_presentan_pendiente(self):
+        # Solo superficies de estado vivo. CHANGELOG/RELEASES conservan
+        # deliberadamente afirmaciones históricas como "quedó reservado"
+        # cuando describen el estado que existía en un hito anterior.
         paths = (
             "README.md",
             "GOVERNANCE.md",
@@ -26,47 +30,52 @@ class TestRelGovR2LivePublicationState(unittest.TestCase):
             "v0.1.16.05-beta",
         )
 
+        found = []
         for rel in paths:
             text = (ROOT / rel).read_text(encoding="utf-8")
-            g116_clauses = []
-
             for line in text.splitlines():
                 clauses = re.split(r"(?<=[.;])\s+", line)
                 for clause in clauses:
                     if any(marker in clause for marker in markers):
-                        g116_clauses.append(clause.strip())
+                        found.append((rel, clause.strip()))
 
-            self.assertTrue(g116_clauses, rel)
+        self.assertTrue(found, "No se encontró evidencia viva/histórica de G116.")
 
-            for clause in g116_clauses:
-                lowered = clause.lower()
-                with self.subTest(path=rel, clause=clause):
-                    self.assertNotIn("pendiente", lowered)
-                    self.assertNotIn("se publicará únicamente", lowered)
-                    self.assertIsNone(re.search(r"\breservado\b", lowered))
+        for rel, clause in found:
+            lowered = clause.lower()
+            with self.subTest(path=rel, clause=clause):
+                self.assertNotIn("pendiente", lowered)
+                self.assertNotIn("se publicará únicamente", lowered)
+                self.assertIsNone(re.search(r"\breservado\b", lowered))
 
-    def test_readme_declara_publicacion_g117_real_y_preserva_g116(self):
-        text = (ROOT / "README.md").read_text(encoding="utf-8")
-        self.assertIn("v0.1.17.02-beta", text)
+    def test_publicacion_g117_real_se_preserva_en_release_canonico(self):
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        releases = (ROOT / "RELEASES.md").read_text(encoding="utf-8")
+
+        self.assertIn("v0.1.17.02-beta", readme)
+        self.assertIn("v0.1.17.02-beta", releases)
         self.assertIn(
             "3ab9fefbdfc969c546feb83182e3c0e6879ba771",
-            text,
+            releases,
         )
         self.assertIn(
             "d2e493d16a2768ea5e6284c577c21b4f84897fae",
-            text,
+            releases,
         )
-        self.assertIn("v0.1.16.05-beta", text)
-        self.assertIn("publicación previa preservada e inmutable", text)
+        self.assertIn("v0.1.16.05-beta", releases)
 
-    def test_security_declara_g116_publicada(self):
+    def test_security_preserva_g116_g117_y_declara_g118_vigente(self):
         text = (ROOT / "SECURITY.md").read_text(encoding="utf-8")
         self.assertIn(
             "| `0.1.16.05-beta` | Beta previa G116/E05 publicada;",
             text,
         )
         self.assertIn(
-            "| `0.1.17.02-beta` | Beta vigente G117/E02 aceptada;",
+            "| `0.1.17.02-beta` | Beta previa G117/E02 publicada;",
+            text,
+        )
+        self.assertIn(
+            "| `0.1.18.04-beta` | Beta vigente G118/E04 aceptada para DEV.2 R5;",
             text,
         )
 
@@ -89,7 +98,7 @@ class TestRelGovR2LivePublicationState(unittest.TestCase):
         self.assertIn("release_publication.py", text)
         self.assertIn("--check-manifest", text)
 
-    def test_g117_aceptado_y_g118_reservado(self):
+    def test_g117_historico_g118_aceptado_y_g119_reservado(self):
         docs = (
             (ROOT / "README.md").read_text(encoding="utf-8")
             + (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
@@ -99,8 +108,9 @@ class TestRelGovR2LivePublicationState(unittest.TestCase):
         )
         self.assertIn("G117/E02", docs)
         self.assertIn("G118/E04", docs)
+        self.assertIn("G119/E05", docs)
         self.assertIn("DEV.2 R5", docs)
-        self.assertIn("queda aceptado para REL.GOV.1 R2", docs)
+        self.assertIn("DEV.2 R6", docs)
 
 
 if __name__ == "__main__":

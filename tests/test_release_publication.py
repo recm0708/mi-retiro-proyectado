@@ -41,17 +41,17 @@ class TestReleasePublication(unittest.TestCase):
             result.stdout + result.stderr,
         )
 
-    def test_manifest_actual_es_g117_y_apunta_a_g118(self):
+    def test_manifest_actual_es_g118_y_apunta_a_g119(self):
         data = json.loads(MANIFEST.read_text(encoding="utf-8"))
-        self.assertEqual("0.1.17.02-beta", data["version"])
-        self.assertEqual("REL.GOV.1", data["block"])
-        self.assertEqual("R2", data["revision"])
+        self.assertEqual("0.1.18.04-beta", data["version"])
+        self.assertEqual("DEV.2", data["block"])
+        self.assertEqual("R5", data["revision"])
         self.assertEqual(
-            118,
+            119,
             data["next_step"]["global_revision"],
         )
         self.assertEqual(
-            "0.1.18.04-beta",
+            "0.1.19.05-beta",
             data["next_step"]["revision_aware"],
         )
         self.assertEqual(
@@ -66,7 +66,7 @@ class TestReleasePublication(unittest.TestCase):
             result.returncode,
             result.stdout + result.stderr,
         )
-        self.assertIn("G117/E02 validado", result.stdout)
+        self.assertIn("G118/E04 validado", result.stdout)
 
     def test_renderer_incluye_campos_dinamicos_y_secciones(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -80,28 +80,25 @@ class TestReleasePublication(unittest.TestCase):
             "## Validación",
             "## Evidencia",
             "## Siguiente paso",
-            "G117/E02",
-            "REL.GOV.1 R2",
+            "G118/E04",
+            "DEV.2 R5",
             PUBLISHED_COMMIT,
             TAG_OBJECT,
-            "**G118/E04**",
-            "`0.1.18.04-beta`",
-            "DEV.2 R5",
+            "**G119/E05**",
+            "`0.1.19.05-beta`",
+            "DEV.2 R6",
         ):
             with self.subTest(fragment=fragment):
                 self.assertIn(fragment, text)
 
-    def test_manifiesto_contiene_evidencia_g117(self):
+    def test_manifiesto_contiene_evidencia_g118(self):
         data = json.loads(MANIFEST.read_text(encoding="utf-8"))
         corpus = json.dumps(data, ensure_ascii=False)
         for fragment in (
-            "PR #103",
-            "46c464ed2dd21f621d80e8dafc199fe56b4af710",
-            "1197 passed / 5731 subtests passed",
-            "1161 tests `unittest` OK",
-            "1201 passed / 5721 subtests passed",
-            "Markdown Audit post-merge #59: success.",
-            "CodeQL post-merge #209: success.",
+            "PR #107",
+            "bc97db04ef0f08d3005882ff08dd68b371aeb61e",
+            "1211 passed / 5747 subtests passed",
+            "1172 tests `unittest` OK",
         ):
             with self.subTest(fragment=fragment):
                 self.assertIn(fragment, corpus)
@@ -115,10 +112,10 @@ class TestReleasePublication(unittest.TestCase):
             snapshot.write_text(
                 json.dumps(
                     {
-                        "tagName": "v0.1.17.02-beta",
+                        "tagName": "v0.1.18.04-beta",
                         "name": (
                             "Mi Retiro Proyectado "
-                            "v0.1.17.02-beta — G117/E02"
+                            "v0.1.18.04-beta — G118/E04"
                         ),
                         "isDraft": False,
                         "isPrerelease": True,
@@ -152,7 +149,7 @@ class TestReleasePublication(unittest.TestCase):
             snapshot.write_text(
                 json.dumps(
                     {
-                        "tagName": "v0.1.17.02-beta",
+                        "tagName": "v0.1.18.04-beta",
                         "name": "Título incorrecto",
                         "isDraft": False,
                         "isPrerelease": True,
@@ -182,7 +179,7 @@ class TestReleasePublication(unittest.TestCase):
             data = json.loads(
                 MANIFEST.read_text(encoding="utf-8")
             )
-            data["version"] = "0.1.16.05-beta"
+            data["version"] = "0.1.17.02-beta"
             stale.write_text(
                 json.dumps(
                     data,
