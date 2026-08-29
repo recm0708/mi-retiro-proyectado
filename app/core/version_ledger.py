@@ -92,6 +92,15 @@ def validar_ledger(ledger: dict[str, Any]) -> None:
                     f"G{global_revision:03d} requiere {campo} no vacío."
                 )
 
+        functional_revision = entry.get("functional_revision")
+        if functional_revision is not None and (
+            not isinstance(functional_revision, str)
+            or not functional_revision.strip()
+        ):
+            raise LedgerRevisionError(
+                f"G{global_revision:03d} declara functional_revision inválida."
+            )
+
         globales.append(global_revision)
         versiones.append(version)
 

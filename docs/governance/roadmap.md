@@ -1,11 +1,11 @@
 # Roadmap
 
 **Estado:** vigente
-**Versión vigente:** `0.1.17.02-beta` — G117/E02 aceptado para REL.GOV.1 R2
+**Versión vigente:** `0.1.18.04-beta` — G117/E02 aceptado para REL.GOV.1 R2
 **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
 **Último tag formal legacy:** `v0.0.26-beta`
 **Fecha de revisión:** 2026-08-28
-**Estado actual:** REL.GOV.1 R2 queda cerrado/aceptado como G117/E02 (`0.1.17.02-beta`); DEV.2 R5 queda reservado como candidato G118/E04 (`0.1.18.04-beta`) y continúa la secuencia DEV.2 R6 / UX.5.
+**Estado actual:** DEV.2 R5 queda cerrado/aceptado como G118/E04 (`0.1.18.04-beta`) mediante PR #107 / merge `bc97db0`; DEV.2 R6 queda reservado como candidato G119/E05 (`0.1.19.05-beta`) y continúa la secuencia UX.5.
 
 
 <!-- NOR1-R7-CLOSURE:START -->
@@ -29,7 +29,8 @@ La secuencia operativa previa a SEC.2 queda:
 10. **DOC.1 R4** — cerrado/aceptado como G115/E04 (`0.1.15.04-beta`) mediante PR #96 / merge `9f51229`; saneamiento documental post-G113 completado.
 11. **DOC.1 R5** — cerrado/aceptado como G116/E05 (`0.1.16.05-beta`) mediante PR #101 / merge `6f4266d`.
 12. **REL.GOV.1 R2** — cerrado/aceptado como G117/E02 (`0.1.17.02-beta`) mediante PR #103 / merge `46c464e`.
-13. **DEV.2 R5** — checkpoint candidato G118/E04 (`0.1.18.04-beta`) para Portal Developer y acceso.
+13. **DEV.2 R5** — cerrado/aceptado como G118/E04 (`0.1.18.04-beta`) mediante PR #107 / merge `bc97db0`; Portal Developer y acceso.
+14. **DEV.2 R6** — checkpoint candidato G119/E05 (`0.1.19.05-beta`) para Portal Developer multipágina, diagnóstico, eventos, archivos y mantenimiento.
 
 NOR.2 ejecutó los movimientos, renombrados, consolidaciones y retiros que
 NOR.1 deliberadamente no realizó.
@@ -162,7 +163,7 @@ VER.2 es un bloque transversal de reconciliación y **no añade un bloque 15** a
 - repositorio público con metadata, topics, labels e Issue Forms;
 - Dependency graph, Dependabot, CodeQL, Secret Protection, Push protection y Private vulnerability reporting;
 - CI y auditoría automática de gobernanza;
-- DEV.2 — Centro de desarrollo sobre Developer Diagnostics cerrado documentalmente en R4;
+- DEV.2 — R5 aceptado como G118/E04: Portal Developer con `/dev` canónico, sesión web separada de Bearer y shell técnico independiente; R6 continúa como candidato G119/E05;
 - NOR.2 — normalización integral del repositorio cerrada en R8 mediante PR #74.
 
 ### Pendiente o incompleto

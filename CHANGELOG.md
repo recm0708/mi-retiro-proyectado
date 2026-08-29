@@ -6,9 +6,20 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ## [Unreleased]
 
-- Normalización documental pre-G118: migra 59 Markdown históricos de `docs/archive/` a nombres técnicos ASCII/minúsculas/kebab-case, actualiza referencias activas y navegación, sincroniza el estado vivo con G117/E02 ya publicado y mantiene G118/E04 reservado exclusivamente para DEV.2 R5; no cambia `VERSION` ni consume G118.
-- Mantenimiento pre-G118: actualiza coordinadamente `pypdf 6.16.1` → `6.16.2` y `Uvicorn 0.52.3` → `0.52.4`, sincroniza inventarios/regresiones, documenta el entorno/toolchain de desarrollo de referencia y mantiene `VERSION` en G117/E02; no consume G118.
-- DEV.2 R5 (candidato G118/E04): implementa `/dev` como entrada humana canónica, separa sesión web de Bearer, incorpora shell/login Developer independiente de la navegación pública, limita la cookie a `/dev` y reconcilia regresiones/documentación; gate local previo a integración con 1171 `unittest` OK y 1211 `pytest` passed / 5747 subtests passed. G118 permanece reservado y no aceptado hasta integración y revalidación.
+- DEV.2 R6 (candidato G119/E05): Portal Developer multipágina, diagnóstico, eventos, archivos, mantenimiento y privacidad técnica; G119 permanece reservado y no aceptado.
+
+## [0.1.18.04-beta]
+- G118/E04: DEV.2 R5 queda aceptado después de PR #107 / merge `bc97db0`; `VERSION` avanza a `0.1.18.04-beta`.
+- Portal Developer: `/dev` queda como entrada humana canónica; la sesión web administrativa se separa del contrato técnico Bearer y `/dev/login` queda como compatibilidad de entrada.
+- Seguridad: `mrp_admin_session` queda limitada a `Path=/dev`, mantiene `HttpOnly`, el logout vuelve a `/dev` y las superficies Developer usan `Cache-Control: no-store`.
+- Interfaz: incorpora `dev_base.html`, login profesional y shell independiente de la navegación previsional pública; la preferencia visual puede persistirse, pero la credencial administrativa no.
+- Observabilidad: clasifica explícitamente `dev.portal`, `dev.login` y `dev.logout`.
+- Gobierno: DEV.2 R5 es la revisión funcional R5, mientras E04 es el cuarto estado aceptado del bloque; R4 fue cierre documental sin Global independiente.
+- Gate de desarrollo: 1172 `unittest` OK; `pytest` 1211 passed / 5747 subtests; 19 JavaScript; Markdown 159/159; 16 familias / 46 identificadores; `pip check`, compilación y `git diff --check` limpios.
+- Gate final de promoción: **1178 `unittest` OK** y **`pytest` 1218 passed / 5759 subtests passed** sobre el snapshot preparado; Markdown 159/159, 19 JavaScript, dependencias y compilación limpias.
+- Ledger: G118 queda aceptado; G119/E05 (`0.1.19.05-beta`) queda reservado para DEV.2 R6.
+- Publicación: el tag anotado y firmado `v0.1.18.04-beta` se crea únicamente después de integrar y revalidar la promoción; `v0.1.17.02-beta` permanece como publicación anterior.
+- Incluye la normalización documental y el mantenimiento de dependencias realizados después de G117 y antes del cierre de G118, sin contarlos como Globales independientes.
 
 ## [0.1.17.02-beta]
 - G117/E02: REL.GOV.1 R2 queda aceptado mediante PR #103 / merge `46c464e` después de completar la automatización gobernada de Releases y checks.

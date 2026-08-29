@@ -9,14 +9,14 @@
     "tracked_files": 459
   },
   "current_candidate": {
-    "global_revision": 118,
-    "revision_aware": "0.1.18.04-beta",
+    "global_revision": 119,
+    "revision_aware": "0.1.19.05-beta",
     "block": "DEV.2",
-    "revision": "R5",
+    "revision": "R6",
     "state": "reserved_not_accepted",
-    "next_functional_block_if_accepted": "DEV.2",
+    "next_functional_block_if_accepted": "UX.5",
     "next_functional_global_if_accepted": null,
-    "edition": 4
+    "edition": 5
   },
   "families": [
     {
@@ -419,11 +419,12 @@
       "identifier": "DEV.2",
       "family": "DEV",
       "kind": "block",
-      "status": "reopened_candidate_r5",
-      "meaning": "R1–R3 aceptados en G071–G073; R4 fue cierre documental no contabilizado por separado; R5 queda como candidato G118/E04 para Portal Developer y acceso.",
-      "evidence": "Ledger G071–G073; docs/governance/pre-1-0-pending-matrix.md; G118/E04 reservado para DEV.2 R5.",
+      "status": "reopened_candidate_r6",
+      "meaning": "R1–R3 aceptados en G071–G073; R4 fue cierre documental no contabilizado por separado; R5 queda aceptado como G118/E04 y R6 continúa como candidato G119/E05 para el Portal Developer multipágina, diagnóstico, archivos y mantenimiento.",
+      "evidence": "Ledger G071–G073 y G118; PR #107 / merge bc97db0; docs/governance/pre-1-0-pending-matrix.md; G119/E05 reservado para DEV.2 R6.",
       "global_refs": [
-        "G071-G073"
+        "G071-G073",
+        "G118"
       ],
       "reusable_for_different_scope": false
     },

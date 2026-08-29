@@ -2,9 +2,9 @@
   "schema_version": 1,
   "project": "Mi Retiro Proyectado",
   "base_commit": "7037addd44253e528c77460b678d2b3ccd540dd5",
-  "accepted_count": 117,
-  "next_global_if_ver2_accepted": 118,
-  "next_candidate": "0.1.18.04-beta",
+  "accepted_count": 118,
+  "next_global_if_ver2_accepted": 119,
+  "next_candidate": "0.1.19.05-beta",
   "historical_tags_immutable": {
     "from": "v0.0.1-beta",
     "to": "v0.0.26-beta"
@@ -1062,6 +1062,16 @@
       "state": "R2 — automatización gobernada de Releases y checks",
       "anchor": "0.1.17.02-beta",
       "evidence": "PR #103 / merge 46c464e; commit de desarrollo firmado 283f60f; revalidación post-merge 1157 unittest; pytest 1197 passed / 5731 subtests; Markdown 159/159; 18 JavaScript; 16 familias / 46 identificadores; CI #273, gobernanza #112, Markdown Audit #59 y CodeQL #209 en success"
+    },
+    {
+      "global_revision": 118,
+      "block": "DEV.2",
+      "ordinal": 4,
+      "functional_revision": "R5",
+      "revision_aware": "0.1.18.04-beta",
+      "state": "R5 — Portal Developer y separación de acceso web/Bearer",
+      "anchor": "0.1.18.04-beta",
+      "evidence": "PR #107 / merge bc97db0; commit de desarrollo firmado f0f4cbc; 1172 pruebas unittest en pre-commit final; pytest 1211 passed / 5747 subtests; Markdown 159/159; 19 JavaScript; 16 familias / 46 identificadores; checks remotos de CI, gobernanza, Markdown Audit y CodeQL post-merge en success; gate final de promoción: 1178 unittest OK; pytest 1218 passed / 5759 subtests"
     }
   ],
   "excluded": [
@@ -1138,8 +1148,8 @@
       "reason": "La decisión VER.2 R3 establece expresamente que R1, R2 y R3 son correcciones internas del mismo candidato G071/E01; no consumen G072 ni incrementan EE. R4 materializa la aceptación única del candidato."
     }
   ],
-  "reconciled_through_commit": "46c464ed2dd21f621d80e8dafc199fe56b4af710",
-  "reconciliation_date": "2026-08-27",
-  "next_global": 118,
+  "reconciled_through_commit": "bc97db04ef0f08d3005882ff08dd68b371aeb61e",
+  "reconciliation_date": "2026-08-28",
+  "next_global": 119,
   "next_candidate_block": "DEV.2"
 }

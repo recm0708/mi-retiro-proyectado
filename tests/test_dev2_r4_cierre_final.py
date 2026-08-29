@@ -20,9 +20,9 @@ class TestDev2R4CierreFinal(unittest.TestCase):
         documento = self._leer("docs/architecture/development-center.md")
 
         self.assertIn(
-            "**Estado general:** DEV.2 R1–R4 cerrados; "
-            "R5 implementado y validado localmente como candidato G118/E04, "
-            "pendiente de integración/aceptación.",
+            "**Estado general:** DEV.2 R1–R4 preservados; "
+            "R5 integrado y aceptado como G118/E04; "
+            "R6 queda como candidato G119/E05.",
             documento,
         )
         self.assertIn("## Alcance de R5", documento)
@@ -81,10 +81,11 @@ class TestDev2R4CierreFinal(unittest.TestCase):
         self.assertIn("SEC.2 permanece **cerrado en R1–R6**", sec2)
         self.assertIn("DEV.2 R4 cierra documentalmente el bloque funcional", documento)
         self.assertIn(
-            "R5 está implementado y validado como candidato G118/E04",
+            "R5 está integrado mediante PR #107 / merge `bc97db0`",
             documento,
         )
-        self.assertIn("todavía sin consumir G118", documento)
+        self.assertIn("aceptado como G118/E04", documento)
+        self.assertIn("G119/E05", documento)
         self.assertIn("### DEV.2 — cierre del Centro de desarrollo", changelog)
         self.assertIn("cierra documentalmente DEV.2", changelog)
         self.assertIn("deja VER.2 como siguiente cierre transversal", changelog)

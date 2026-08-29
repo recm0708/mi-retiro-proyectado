@@ -1,7 +1,7 @@
 # Validación
 
 **Estado:** Vigente
-**Versión revisada:** `0.1.17.02-beta` — G117/E02 aceptado para REL.GOV.1 R2; G118/E04 reservado para DEV.2 R5
+**Versión revisada:** `0.1.18.04-beta` — G117/E02 aceptado para REL.GOV.1 R2; G118/E04 reservado para DEV.2 R5
 **Versión base histórica:** `0.0.25-beta`
 **Base documental histórica:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal histórica preservada:** UX.4.6e R8 — validación funcional y procedencia editable — 2026-08-19
@@ -11,6 +11,21 @@
 
 
 <!-- NOR1-R7-VALIDATION:START -->
+## Promoción DEV.2 R5 — G118/E04
+
+Evidencia previa al gate final de promoción:
+
+- desarrollo integrado mediante PR #107 / merge `bc97db0`;
+- commit de desarrollo firmado `f0f4cbc`;
+- 1172 pruebas `unittest` en el pre-commit final;
+- `pytest`: 1211 passed / 5747 subtests;
+- 19 archivos JavaScript con sintaxis válida;
+- Markdown 159/159;
+- 16 familias / 46 identificadores;
+- checks remotos del desarrollo en `success`.
+
+La promoción mueve `VERSION` a `0.1.18.04-beta`, acepta G118/E04 y reserva G119/E05 (`0.1.19.05-beta`) para DEV.2 R6. El gate final de promoción sobre el snapshot preparado queda congelado en **1178 pruebas `unittest` OK** y **1218 pruebas `pytest` passed / 5759 subtests passed**. La auditoría Markdown permanece en 159/159, los 19 JavaScript validan sintaxis y `pip check`, `compileall` y `git diff --cached --check` permanecen limpios.
+
 ## Validación NOR.1
 
 NOR.1 R7 cierra la fase de definición de estándares y prepara la transición a

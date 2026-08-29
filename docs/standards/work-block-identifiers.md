@@ -46,6 +46,7 @@ reconciliación histórica. No son familias disponibles para trabajo futuro.
    prefiere una nueva revisión de ese bloque. `DOC.1 R2` es el precedente.
 4. Reabrir un bloque exige demostrar el mismo alcance y una revisión no usada.
    Al materializarse, `EE` continúa el ordinal de estados aceptados del mismo bloque; no se reinicia a E01. Un bloque nuevo sí comienza en E01.
+   La revisión funcional `R#` no tiene que coincidir numéricamente con `E##`: si una revisión intermedia no consumió Global, `R` puede avanzar sin que lo haga `E`. DEV.2 R5 = G118/E04 es el precedente canónico.
 5. Un bloque nuevo solo se crea cuando ninguna identidad registrada cubre el
    alcance.
 6. Antes de asignar un número nuevo se auditan registro, árbol vigente,

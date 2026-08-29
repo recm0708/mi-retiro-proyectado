@@ -14,11 +14,12 @@ La fuente canónica de versión continúa siendo `VERSION`.
 
 Estado vigente:
 
-- `VERSION` contiene `0.1.17.02-beta` y materializa G117/E02 (REL.GOV.1 R2), aceptado mediante PR #103 / merge `46c464e`.
-- `v0.1.17.02-beta` está publicado, firmado y asociado al GitHub Release prerelease automatizado por REL.GOV.1 R2 como materialización formal de G117/E02; `v0.1.16.05-beta` permanece publicado, firmado e inmutable como G116/E05.
+- `VERSION` contiene `0.1.18.04-beta` y materializa G118/E04 (DEV.2 R5) después de PR #107 / merge `bc97db0` y de esta promoción.
+- `v0.1.17.02-beta` permanece publicado, firmado e inmutable como materialización formal de G117/E02. `v0.1.18.04-beta` se crea únicamente después del merge y la revalidación de la promoción G118.
 - La reconciliación post-G070 permanece inmutable y conserva `v0.0.71.01-beta` como evidencia histórica de G087/E01.
-- G109–G116 permanecen aceptados según el ledger; REL.GOV.1 R2 se incorpora como G117/E02.
-- G118/E04 (`0.1.18.04-beta`) queda reservado para DEV.2 R5. E04 corresponde al cuarto ordinal aceptable del bloque DEV.2, aunque la revisión funcional se denomine R5 porque el cierre R4 no consumió Global independiente.
+- G109–G117 permanecen aceptados según el ledger; DEV.2 R5 se incorpora como G118/E04.
+- G119/E05 (`0.1.19.05-beta`) queda reservado para DEV.2 R6.
+- DEV.2 R5 es la revisión funcional R5 y E04 es el cuarto estado aceptado del bloque: R4 fue cierre documental y no consumió Global independiente.
 - Las etapas posteriores no tienen Global preasignado más allá del candidato vigente.
 - Los cierres y sincronizaciones que no crean un estado materialmente distinto no consumen `G` por sí solos.
 
@@ -88,6 +89,8 @@ Donde:
 - `GG = G // 100`;
 - `RR = G % 100`, siempre con dos dígitos;
 - `EE` es el ordinal aceptado dentro del bloque vigente, siempre con dos dígitos entre `01` y `99`.
+
+La **revisión funcional `R#`** y el **ordinal aceptado `E##`** son conceptos distintos. Normalmente coinciden, pero pueden divergir cuando una revisión intermedia no consume Global. DEV.2 R5 es el caso canónico: R1–R3 consumieron E01–E03, R4 no consumió Global y R5 se acepta como **G118/E04**. El siguiente estado aceptado del mismo bloque, DEV.2 R6, usa por tanto **G119/E05**. El ledger puede declarar `functional_revision` para que la publicación muestre la revisión funcional correcta sin alterar `EE`.
 
 Ejemplos:
 

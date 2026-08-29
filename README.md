@@ -10,7 +10,7 @@
 
 [![Validación continua](https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/ci.yml)
 [![Auditoría de gobernanza](https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/governance-audit.yml/badge.svg?branch=main)](https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/governance-audit.yml)
-![Versión](https://img.shields.io/badge/versi%C3%B3n-0.1.17.02--beta-2563eb)
+![Versión](https://img.shields.io/badge/versi%C3%B3n-0.1.18.04--beta-2563eb)
 ![Python](https://img.shields.io/badge/Python-3.13%20%7C%203.14-3776AB?logo=python&logoColor=white)
 ![Licencia](https://img.shields.io/badge/licencia-propietaria-6B7280)
 
@@ -20,14 +20,14 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 
 ## Estado del proyecto
 
-- **Versión canónica vigente:** `0.1.17.02-beta`, obtenida exclusivamente desde [`VERSION`](VERSION). Materializa G117/E02 después de aceptar REL.GOV.1 R2 mediante PR #103 / merge `46c464e`.
-- **Último estado aceptado integrado en `main`:** REL.GOV.1 R2 como G117/E02; esta promoción materializa el mismo estado y no consume G118.
-- **Estado revision-aware reconciliado:** G117/E02 (`0.1.17.02-beta`) queda aceptado para REL.GOV.1 R2; G118/E04 (`0.1.18.04-beta`) queda reservado para DEV.2 R5.
-- **Publicación revision-aware vigente:** `v0.1.17.02-beta` (G117/E02), anotado y firmado sobre el commit publicado `3ab9fefbdfc969c546feb83182e3c0e6879ba771`, objeto de tag `d2e493d16a2768ea5e6284c577c21b4f84897fae`, verificado y asociado al GitHub Release prerelease automatizado por REL.GOV.1 R2. `v0.1.16.05-beta` (G116/E05) permanece como publicación previa preservada e inmutable.
+- **Versión canónica vigente:** `0.1.18.04-beta`, obtenida exclusivamente desde [`VERSION`](VERSION). Materializa DEV.2 R5 como G118/E04 después de integrar el desarrollo mediante PR #107 / merge `bc97db0` y preparar esta promoción.
+- **Último estado funcional integrado en `main` antes de la promoción:** DEV.2 R5 mediante PR #107 / merge `bc97db04ef0f08d3005882ff08dd68b371aeb61e`.
+- **Estado revision-aware reconciliado:** G118/E04 (`0.1.18.04-beta`) queda aceptado para DEV.2 R5; G119/E05 (`0.1.19.05-beta`) queda reservado para DEV.2 R6.
+- **Publicación revision-aware vigente al preparar esta promoción:** `v0.1.17.02-beta` (G117/E02). El tag `v0.1.18.04-beta` se crea únicamente después del merge y la revalidación de esta promoción.
 - **Última versión formal legacy:** `0.0.26-beta` — tag firmado e inmutable `v0.0.26-beta`.
 - **Etapa:** desarrollo beta; repositorio público y ejecución orientada actualmente a entorno local.
 - **REL.GOV.1:** R1 y R2 cerrados/aceptados como G110/E01 y G117/E02. La automatización de Releases queda integrada sin transferir a Actions la creación o firma del tag.
-- **DEV.2:** R1–R3 permanecen aceptados históricamente; R5 reabre el mismo bloque como candidato G118/E04 para Portal Developer y acceso, seguido de R6.
+- **DEV.2:** R1–R3 permanecen aceptados históricamente; R4 fue un cierre documental sin Global independiente; R5 queda aceptado como G118/E04 y R6 continúa como candidato G119/E05.
 - **DOC.1:** R1–R5 cerrados; DOC.1 R6 permanece planificado para congelación documental final.
 - **SEC.2:** R1–R6 cerrados; R7 permanece planificado después de las nuevas superficies Developer/UX/persistencia.
 - **Primera versión oficial objetivo:** `1.0.0.0` con `Build 000001`, únicamente después de cerrar todos los gates definidos en el plan maestro.
@@ -55,7 +55,7 @@ Los tres motores generales principales implementados son:
 
 El alcance jurídico y matemático exacto de cada motor se encuentra en la documentación normativa y técnica. No debe asumirse que el motor general cubre regímenes especiales no documentados.
 
-La aplicación dispone además de **Developer Diagnostics** para desarrollo. Está desactivado por defecto y solo se activa mediante `MRP_DEV_MODE=1`; no constituye telemetría de producto ni envía logs automáticamente a terceros.
+La aplicación dispone además de **Developer Diagnostics** y de un **Portal Developer** interno. Developer Diagnostics se activa con `MRP_DEV_MODE=1`; el acceso humano al portal usa `/dev` y requiere además la superficie administrativa habilitada y un secreto configurado fuera del repositorio. La sesión web y el acceso técnico Bearer permanecen separados; estas capacidades no constituyen telemetría de producto ni envían logs automáticamente a terceros.
 
 ## Principios de diseño
 
@@ -101,7 +101,7 @@ Documentos principales:
 - **[Cierre GOV.1 — Auditoría, Gobierno y Trazabilidad Pre-Beta](docs/archive/governance/gov1-closeout.md)** — auditoría final y decisión de cierre de GOV.1;
 - **[Auditoría de versionado pre-1.0](docs/archive/governance/pre-1-0-versioning-audit.md)** — criterio contable y reconciliación VER.2;
 - **[VER.2 — Matriz de decisión de revisiones aceptadas](docs/archive/governance/ver2-revision-decision-matrix.md)** — decisiones de inclusión/exclusión del contador;
-- **[Ledger de revisiones aceptadas pre-1.0](docs/governance/pre-1-0-revision-ledger.md)** — secuencia reconciliada G001–G117 y próximo candidato G118;
+- **[Ledger de revisiones aceptadas pre-1.0](docs/governance/pre-1-0-revision-ledger.md)** — secuencia reconciliada G001–G118 y próximo candidato G119/E05 para DEV.2 R6;
 - [`data/pre-1-0-revision-ledger.json`](data/pre-1-0-revision-ledger.json) — ledger machine-readable;
 - **[Identificadores de bloques de trabajo](docs/standards/work-block-identifiers.md)** — política canónica de identificadores de bloques;
 - [`data/work-block-registry.json`](data/work-block-registry.json) — registro machine-readable de identificadores históricos, cerrados y planificados;
@@ -153,6 +153,8 @@ Git continúa siendo la evidencia primaria de autores, fechas, hashes y contenid
 
 ```text
 mi-retiro-proyectado/
+├── .githooks/
+├── .github/
 ├── app/
 │   ├── core/
 │   ├── engines/
@@ -168,6 +170,8 @@ mi-retiro-proyectado/
 ├── docs/
 │   ├── README.md
 │   ├── architecture/
+│   ├── archive/
+│   ├── audits/
 │   ├── decisions/
 │   ├── governance/
 │   ├── operations/
@@ -175,20 +179,25 @@ mi-retiro-proyectado/
 │   ├── regulatory/
 │   ├── security/
 │   ├── standards/
-│   ├── audits/
-│   ├── archive/
 │   └── templates/
 ├── regulations/
+├── scripts/
 ├── tests/
-├── .github/
 ├── CHANGELOG.md
+├── CODE_OF_CONDUCT.md
 ├── CONTRIBUTING.md
 ├── GOVERNANCE.md
+├── LICENSE
 ├── RELEASES.md
+├── SECURITY.md
+├── SUPPORT.md
+├── THIRD_PARTY_NOTICES.md
 ├── VERSION
 ├── VERSIONING.md
 └── requirements.txt
 ```
+
+El árbol anterior representa únicamente rutas **versionadas y canónicas**. Elementos locales como `.venv/`, `_deliverables/`, caches y logs de diagnóstico no forman parte de la arquitectura versionada y no deben añadirse al README.
 
 ## Instalación para desarrollo local
 
@@ -237,11 +246,19 @@ Abrir:
 http://127.0.0.1:8000
 ```
 
-Para activar Developer Diagnostics en una sesión de desarrollo:
+Para activar Developer Diagnostics y el Portal Developer en una sesión local de desarrollo:
 
 ```powershell
 $env:MRP_DEV_MODE = "1"
+$env:MRP_ADMIN_ENABLED = "1"
+$env:MRP_ADMIN_SECRET = "<secreto-local-no-versionado>"
 python -m uvicorn app.main:app --reload
+```
+
+Abrir el Portal Developer en:
+
+```text
+http://127.0.0.1:8000/dev
 ```
 
 No se recomienda mantener `MRP_DEV_MODE=1` como configuración ordinaria de ejecución.

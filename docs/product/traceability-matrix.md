@@ -1,7 +1,7 @@
 # Matriz de trazabilidad
 
 **Estado:** Vigente
-**Versión de aplicación:** `0.1.17.02-beta` — G117/E02 aceptado; reconciliación viva hasta G117
+**Versión de aplicación:** `0.1.18.04-beta` — G117/E02 aceptado; reconciliación viva hasta G117
 **Último tag formal legacy:** `v0.0.26-beta`
 **Base histórica:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal:** NOR.2 R8 — 2026-08-24
@@ -27,7 +27,7 @@ Estado documental actual:
 - NOR.2 R8 está cerrado e integrado mediante PR #74.
 - NOR.2 está cerrado después de completar R1–R8.
 - SEC.2 quedó cerrado después de R1–R6; AUD.SEC2 R1 corrigió el kill switch, reconcilió documentación/ledger y quedó aceptado como G109/E01 mediante PR #83.
-- PLAN.2 R1 quedó aceptado como G114/E01 mediante PR #94 / merge `7ded70c`; DOC.1 R4 quedó aceptado/publicado como G115/E04 (`0.1.15.04-beta`); DOC.1 R5 quedó aceptado como G116/E05 (`0.1.16.05-beta`) mediante PR #101 / merge `6f4266d`; REL.GOV.1 R2 quedó aceptado/publicado como G117/E02 (`0.1.17.02-beta`) y G118/E04 queda reservado para DEV.2 R5.
+- PLAN.2 R1 quedó aceptado como G114/E01 mediante PR #94 / merge `7ded70c`; DOC.1 R4 quedó aceptado/publicado como G115/E04; DOC.1 R5 quedó aceptado como G116/E05; REL.GOV.1 R2 quedó aceptado/publicado como G117/E02; DEV.2 R5 queda aceptado como G118/E04 y G119/E05 queda reservado para DEV.2 R6.
 
 Esta matriz debe distinguir trazabilidad histórica de estado vigente.
 <!-- DOC1-R1-POST-MANT1:END -->
@@ -78,6 +78,8 @@ Esta matriz conecta contratos críticos del producto con su fuente, decisión, i
 | TR-026 | La guía pública explica cómo se transforman los datos de los Pasos 1–6 y los tres sistemas con parámetros versionados, fórmula general + sustitución numérica y términos definidos en contexto, sin duplicar motores; navbar, Metodología y Paso 6 enlazan sin transportar datos personales | N/A — transparencia/UX; normativa versionada existente | ADR-178 | `app/services/calculation_guide.py`, `app/templates/calculation_guide.html`, `app/static/css/calculation-guide.css`, `app/templates/base.html`, `app/static/js/results_orchestration.js`, `app/templates/methodology.html` | `tests/test_ux46i_r1_calculation_guide.py` | Verificado UX.4.6i / PR #34 |
 | TR-027 | La beta revision-aware cuenta estados aceptados, preserva tags históricos y mantiene ledger continuo sin convertir commits/candidatos en revisiones | N/A — gobierno/versionado | ADR-179 | `VERSION`, `VERSIONING.md`, `app/core/version.py`, `docs/archive/governance/pre-1-0-versioning-audit.md`, `docs/governance/pre-1-0-revision-ledger.md` | `tests/test_ver2_version_revision_aware.py`, `tests/test_ver2_documentacion_vigente.py` | VER.2 R4 preservado como denominación original G071/E01; reconciliación vigente G087/E01 |
 | TR-028 | Los identificadores de bloques históricos, cerrados y planificados se registran de forma canónica y no pueden reutilizarse para otro alcance | N/A — gobierno/nomenclatura | N/A — NOR.1 R8 | `data/work-block-registry.json`, `docs/standards/work-block-identifiers.md`, `scripts/audit_block_identifiers.py` | `tests/test_nor1_r8_work_block_identifiers.py` | Verificado; NOR.1 R8 aceptado como G112/E07 |
+
+| TR-029 | Portal Developer separa acceso humano por sesión web del contrato técnico Bearer, limita la cookie administrativa a `/dev`, evita persistir credenciales y conserva `no-store`/observabilidad explícita | N/A — desarrollo/seguridad | N/A — DEV.2 R5 | `app/main.py`, `app/templates/dev_base.html`, `app/templates/dev_login.html`, `app/core/observability.py` | `tests/test_dev2_r5_portal_access.py`, `tests/test_sec2_r5_admin_web_session.py` | Verificado DEV.2 R5 / G118/E04 |
 
 ## 3. Cobertura de RF
 

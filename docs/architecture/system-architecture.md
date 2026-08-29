@@ -1,7 +1,7 @@
 # Arquitectura
 
 **Estado:** Vigente
-**Versión de aplicación revisada:** `0.1.17.02-beta`
+**Versión de aplicación revisada:** `0.1.18.04-beta`
 **Versión base histórica:** `0.0.23-beta`
 **Revisión documental:** GOV.1.4 — 2026-08-17
 **Última actualización técnica:** DEV.2 R5 — Portal Developer y separación de acceso web/Bearer — 2026-08-28
@@ -24,6 +24,7 @@ Cierre técnico relevante:
 - R7 cerró operativamente MANT.1 sobre `main`.
 
 La documentación arquitectónica debe leerse desde esta base: MANT.1, DOC.1, NOR.1 y NOR.2 están cerrados; SEC.2 cerró R1–R6. AUD.SEC2 R1 corrige la prioridad del kill switch administrativo, el fallback de sesión y logout sin modificar la arquitectura previsional.
+DEV.2 R5 queda aceptado como G118/E04: `/dev` es la entrada humana canónica, la sesión web administrativa se mantiene separada del contrato técnico Bearer y el shell Developer no hereda la navegación previsional pública. DEV.2 R6 queda reservado como G119/E05 para la evolución multipágina del portal.
 <!-- DOC1-R1-POST-MANT1:END -->
 
 Mi Retiro Proyectado es una aplicación web local basada en FastAPI, Jinja2 y JavaScript del navegador. La arquitectura separa presentación, contratos de datos, servicios de integración, motores previsionales, parámetros normativos y observabilidad de desarrollo.

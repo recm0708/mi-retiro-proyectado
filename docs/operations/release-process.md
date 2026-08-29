@@ -1,7 +1,7 @@
 # Proceso de release
 
 **Estado:** Vigente
-**Versión de aplicación:** `0.1.17.02-beta` — G117/E02 aceptado para REL.GOV.1 R2; DEV.2 R5 candidato G118/E04
+**Versión de aplicación:** `0.1.18.04-beta` — G118/E04 aceptado para DEV.2 R5; DEV.2 R6 candidato G119/E05
 **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
 **Último tag formal legacy:** `v0.0.26-beta`
 **Versión base histórica preservada:** `0.0.23-beta`
@@ -18,10 +18,10 @@ El cierre de MANT.1 R7 no constituye release formal ni cambia la versión canón
 Para una release posterior se mantiene el criterio vigente:
 
 - `VERSION` debe ser la fuente única.
-- `0.1.17.02-beta` es la versión canónica vigente y materializa G117/E02. Su publicación formal ya quedó materializada mediante el tag firmado `v0.1.17.02-beta` y el GitHub Release prerelease automatizado por REL.GOV.1 R2; `v0.1.16.05-beta` permanece preservado como publicación G116/E05.
+- `0.1.18.04-beta` es la versión canónica vigente y materializa G118/E04 para DEV.2 R5. Su publicación formal se ejecuta después del merge de promoción mediante el tag firmado local `v0.1.18.04-beta`; `v0.1.17.02-beta` permanece preservado/publicado como G117/E02.
 - `v0.0.71.01-beta` conserva su reconciliación histórica como G087/E01 y `v0.0.26-beta` permanece como tag legacy inmutable.
 - REL.GOV.1 R2 queda aceptado como G117/E02 después de PR #103 / merge `46c464e`.
-- G118/E04 (`0.1.18.04-beta`) queda reservado para DEV.2 R5; las etapas posteriores permanecen sin Global preasignado.
+- DEV.2 R5 queda aceptado como G118/E04 (`0.1.18.04-beta`); G119/E05 (`0.1.19.05-beta`) queda reservado para DEV.2 R6 y las etapas posteriores permanecen sin Global preasignado.
 - La automatización de R2 no crea ni firma tags: valida el tag local firmado, el árbol etiquetado y el contrato antes de publicar.
 - Un Release existente solo se acepta si coincide exactamente; solo HTTP 404 autoriza creación y cualquier estado ambiguo falla cerrado.
 
@@ -65,6 +65,8 @@ No consumen un nuevo `G` por sí solos:
 Sí puede consumir un nuevo `G` un estado de mantenimiento, seguridad, gobierno, dependencias o documentación cuando sea materialmente independiente, tenga evidencia propia de aceptación y constituya una configuración auditable distinta.
 
 El candidato reserva el siguiente número global, pero ese número solo queda consumido después del cierre satisfactorio. Si falla, se corrige conservando el mismo identificador reservado.
+
+La revisión funcional (`R#`) y el ordinal aceptado (`E##`) no se consideran equivalentes por definición. Cuando una revisión intermedia no consume Global, el ledger puede declarar `functional_revision`; el manifiesto de publicación usa ese valor para mostrar el nombre funcional correcto. DEV.2 R5 = G118/E04 es el precedente canónico y deja DEV.2 R6 = G119/E05 como siguiente candidato.
 
 ## 3. Precondiciones
 
