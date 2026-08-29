@@ -1,7 +1,7 @@
 # Matriz de trazabilidad
 
 **Estado:** Vigente
-**Versión de aplicación:** `0.1.18.04-beta` — G117/E02 aceptado; reconciliación viva hasta G117
+**Versión de aplicación:** `0.1.18.04-beta` — G118/E04 aceptado/publicado; reconciliación viva hasta G118 y G119/E05 reservado para DEV.2 R6
 **Último tag formal legacy:** `v0.0.26-beta`
 **Base histórica:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal:** NOR.2 R8 — 2026-08-24

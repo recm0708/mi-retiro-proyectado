@@ -1,6 +1,6 @@
 # DEV.2 R1/R2/R3/R4/R5 — Centro de desarrollo
 
-**Estado general:** DEV.2 R1–R4 preservados; R5 integrado y aceptado como G118/E04; R6 queda como candidato G119/E05.
+**Estado general:** DEV.2 R1–R4 preservados; R5 integrado, aceptado y publicado como G118/E04; R6 queda como candidato G119/E05.
 
 **Estado R1:** integrado en `main` mediante PR #37.
 
@@ -18,12 +18,12 @@ DEV.2 queda preservado como bloque funcional cerrado. Sus referencias a VER.2 o 
 
 Estado vigente:
 
-- DEV.2 R1–R4 quedan preservados; R5 está integrado mediante PR #107 / merge `bc97db0` y aceptado como G118/E04 para Portal Developer y acceso. R6 queda reservado como G119/E05.
+- DEV.2 R1–R4 quedan preservados; R5 está integrado mediante PR #107 / merge `bc97db0`, aceptado como G118/E04 y publicado mediante `v0.1.18.04-beta` para Portal Developer y acceso. R6 queda reservado como G119/E05.
 - MANT.1 quedó cerrado operativamente en R7.
 - DOC.1 R1 está cerrado.
 - NOR.1 y NOR.2 están cerrados.
 - DOC.1 R2 está cerrado como revisión documental integral posterior a NOR.2.
-- `VERSION` está sincronizado en `0.1.18.04-beta` después de aceptar DEV.2 R5 como G118/E04; G119/E05 (`0.1.19.05-beta`) queda reservado para DEV.2 R6. REL.GOV.1 R2 permanece preservado/publicado como G117/E02.
+- `VERSION` está sincronizado en `0.1.18.04-beta` después de aceptar y publicar DEV.2 R5 como G118/E04; G119/E05 (`0.1.19.05-beta`) queda reservado para DEV.2 R6. REL.GOV.1 R2 permanece preservado/publicado como G117/E02.
 - SEC.2 quedó cerrado después de R1–R6; AUD.SEC2 R1 corrige el kill switch y el contrato de sesión web sin reabrir DEV.2.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 

@@ -12,7 +12,7 @@ Estado vigente:
 - G117/E02 está publicado mediante el tag firmado `v0.1.17.02-beta` y el GitHub Release prerelease automatizado por REL.GOV.1 R2. G116/E05 (`v0.1.16.05-beta`) permanece publicado, firmado e inmutable como estado previo.
 - `v0.0.71.01-beta` conserva su evidencia histórica reconciliada como G087/E01 y `v0.0.26-beta` permanece como tag legacy.
 - REL.GOV.1 R2 queda aceptado como G117/E02 y mantiene la creación/firma del tag fuera de GitHub Actions.
-- DEV.2 R5 queda aceptado como G118/E04 después de PR #107 / merge `bc97db0`. DEV.2 R6 queda reservado como G119/E05; UX.5 continúa posteriormente y SEC.2 R7 revalidará las nuevas superficies antes del cierre beta.
+- DEV.2 R5 queda aceptado/publicado como G118/E04 después del desarrollo PR #107 / merge `bc97db0` y de la promoción PR #108 / commit `290e84a`. DEV.2 R6 queda reservado como G119/E05; UX.5 continúa posteriormente y SEC.2 R7 revalidará las nuevas superficies antes del cierre beta.
 - Las rutas de reporte responsable y revisión de vulnerabilidades se mantienen sin cambio material.
 <!-- DOC1-R1-POST-MANT1:END -->
 
@@ -22,7 +22,7 @@ Mi Retiro Proyectado se encuentra en **desarrollo beta**. Los estados histórico
 
 | Línea | Soporte de seguridad |
 |---|---|
-| `0.1.18.04-beta` | Beta vigente G118/E04 aceptada para DEV.2 R5; publicación formal pendiente del tag firmado local posterior al merge de promoción |
+| `0.1.18.04-beta` | Beta vigente G118/E04 aceptada/publicada para DEV.2 R5 mediante tag firmado `v0.1.18.04-beta` y GitHub Release prerelease |
 | `0.1.17.02-beta` | Beta previa G117/E02 publicada; tag firmado y GitHub Release prerelease automatizado conforme a REL.GOV.1 R2 |
 | `0.1.16.05-beta` | Beta previa G116/E05 publicada; tag firmado, workflow de verificación y GitHub Release prerelease verificados |
 | `0.1.15.04-beta` | Beta previa G115/E04 publicada; tag firmado, workflow de verificación y GitHub Release prerelease verificados |

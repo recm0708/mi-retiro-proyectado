@@ -7,16 +7,17 @@
 
 
 <!-- DOC1-R1-POST-MANT1:START -->
-## Promoción G118/E04 — post-merge de DEV.2 R5
+## Publicación G118/E04 — DEV.2 R5
 
-- Estado aceptado: G118/E04 (`0.1.18.04-beta`) para DEV.2 R5.
+- Estado aceptado/publicado: G118/E04 (`0.1.18.04-beta`) para DEV.2 R5.
 - Evidencia de aceptación funcional: PR #107 / merge `bc97db04ef0f08d3005882ff08dd68b371aeb61e`; commit de desarrollo firmado `f0f4cbc17d11155b5869ca6bedd3a751030811cc`.
 - Gate de desarrollo: 1172 `unittest` OK; `pytest` 1211 passed / 5747 subtests; Markdown 159/159; 19 JavaScript; 16 familias / 46 identificadores; `pip check`, compilación Python y `git diff --check` limpios.
 - La promoción distingue la revisión funcional **R5** del ordinal revision-aware **E04**; R4 fue cierre documental sin Global independiente.
 - Esta sincronización materializa G118 ya aceptado y **no consume G119**.
 - G119/E05 (`0.1.19.05-beta`) queda reservado para DEV.2 R6.
-- Publicación pendiente: después del merge y revalidación de esta promoción, el mantenedor creará localmente el tag anotado y firmado `v0.1.18.04-beta`; REL.GOV.1 R2 verificará firma, árbol y contrato antes de crear el GitHub Release prerelease.
+- Publicación final: promoción PR #108 / commit `290e84aab70a257e8b718d172e37365af49ef048`; tag anotado y firmado `v0.1.18.04-beta`, objeto `1ee2561785d2413ffffd60ea03a69d1e4dae5660`, firma SSH válida, workflow `Git Tag Signature Verification` #16 en `success` y GitHub Release prerelease ID `378842155` publicado por REL.GOV.1 R2.
 - Gate final de promoción congelado antes del commit firmado: **1178 `unittest` OK**; **`pytest` 1218 passed / 5759 subtests passed**; Markdown 159/159; 19 JavaScript; `pip check`, compilación y `git diff --cached --check` limpios.
+- Revalidación post-merge sobre `main` antes del tag: **1178 `unittest` OK**; **`pytest` 1218 passed / 5773 subtests passed**; Markdown 159/159; 19 JavaScript; `pip check`, `compileall`, 16 familias / 46 identificadores, contrato de release, manifiesto y `git diff --check` limpios.
 
 ## Promoción G117/E02 — post-merge de REL.GOV.1 R2
 
@@ -99,13 +100,13 @@ Después de `v0.0.26-beta`, el repositorio integró trabajo funcional, técnico,
 
 Estado vigente:
 
-- Último tag formal publicado: `v0.1.17.02-beta` (G117/E02), firmado, verificado y asociado a GitHub Release prerelease automatizado por REL.GOV.1 R2.
+- Último tag formal publicado: `v0.1.18.04-beta` (G118/E04), firmado, verificado y asociado al GitHub Release prerelease ID `378842155` automatizado por REL.GOV.1 R2.
 - Último tag formal legacy: `v0.0.26-beta`.
 - Versión canónica en `VERSION`: `0.1.18.04-beta` (G118/E04).
 - `v0.0.71.01-beta` conserva su denominación histórica original y se reconcilia como G087/E01 sin alterar el tag.
 - MANT.1, NOR.1 R8, NOR.2, DOC.1 R1–R5 y PLAN.2 R1 están cerrados.
 - DOC.2 permanece aceptado/publicado como G111/E01; NOR.1 R8 como G112/E07, DOC.1 R3 como G113/E03, PLAN.2 R1 como G114/E01, DOC.1 R4 como G115/E04 y DOC.1 R5 como G116/E05.
-- G114/E01 permanece aceptado/publicado para PLAN.2 R1; G115/E04 (`0.1.15.04-beta`) queda aceptado/publicado para DOC.1 R4; G116/E05 (`0.1.16.05-beta`) queda aceptado/publicado para DOC.1 R5; G117/E02 (`0.1.17.02-beta`) queda aceptado/publicado para REL.GOV.1 R2. G118/E04 (`0.1.18.04-beta`) queda aceptado para DEV.2 R5; G119/E05 (`0.1.19.05-beta`) queda reservado para DEV.2 R6; PERSIST.1 y REP.1 permanecen posteriormente según la matriz maestra viva.
+- G114/E01 permanece aceptado/publicado para PLAN.2 R1; G115/E04 (`0.1.15.04-beta`) queda aceptado/publicado para DOC.1 R4; G116/E05 (`0.1.16.05-beta`) queda aceptado/publicado para DOC.1 R5; G117/E02 (`0.1.17.02-beta`) queda aceptado/publicado para REL.GOV.1 R2. G118/E04 (`0.1.18.04-beta`) queda aceptado/publicado para DEV.2 R5; G119/E05 (`0.1.19.05-beta`) queda reservado para DEV.2 R6; PERSIST.1 y REP.1 permanecen posteriormente según la matriz maestra viva.
 - SEC.2 quedó cerrado después de R1–R6 y AUD.SEC2 R1 permanece aceptado como G109/E01.
 
 Este documento no crea una release nueva; registra el estado formal ya alcanzado por el repositorio.

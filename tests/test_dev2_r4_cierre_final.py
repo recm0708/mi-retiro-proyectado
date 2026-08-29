@@ -21,7 +21,7 @@ class TestDev2R4CierreFinal(unittest.TestCase):
 
         self.assertIn(
             "**Estado general:** DEV.2 R1–R4 preservados; "
-            "R5 integrado y aceptado como G118/E04; "
+            "R5 integrado, aceptado y publicado como G118/E04; "
             "R6 queda como candidato G119/E05.",
             documento,
         )

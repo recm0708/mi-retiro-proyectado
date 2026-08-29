@@ -75,7 +75,7 @@ class TestRelGovR2LivePublicationState(unittest.TestCase):
             text,
         )
         self.assertIn(
-            "| `0.1.18.04-beta` | Beta vigente G118/E04 aceptada para DEV.2 R5;",
+            "| `0.1.18.04-beta` | Beta vigente G118/E04 aceptada/publicada para DEV.2 R5",
             text,
         )
 
@@ -111,6 +111,42 @@ class TestRelGovR2LivePublicationState(unittest.TestCase):
         self.assertIn("G119/E05", docs)
         self.assertIn("DEV.2 R5", docs)
         self.assertIn("DEV.2 R6", docs)
+
+
+
+    def test_publicacion_g118_real_se_refleja_en_estado_vivo(self):
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        releases = (ROOT / "RELEASES.md").read_text(encoding="utf-8")
+        security = (ROOT / "SECURITY.md").read_text(encoding="utf-8")
+        versioning = (ROOT / "VERSIONING.md").read_text(encoding="utf-8")
+
+        for fragment in (
+            "v0.1.18.04-beta",
+            "290e84aab70a257e8b718d172e37365af49ef048",
+            "1ee2561785d2413ffffd60ea03a69d1e4dae5660",
+            "378842155",
+        ):
+            with self.subTest(fragment=fragment):
+                self.assertIn(fragment, readme + releases)
+
+        self.assertIn("aceptada/publicada para DEV.2 R5", security)
+        self.assertIn("G119/E05", versioning)
+
+        live_state = "\n".join((
+            readme,
+            security,
+            versioning,
+            (ROOT / "docs/governance/roadmap.md").read_text(encoding="utf-8"),
+            (ROOT / "docs/governance/master-plan-to-1-0.md").read_text(encoding="utf-8"),
+            (ROOT / "docs/operations/validation.md").read_text(encoding="utf-8"),
+        ))
+        for stale in (
+            "Publicación revision-aware vigente al preparar esta promoción",
+            "G117/E02 aceptado para REL.GOV.1 R2; DEV.2 R5 candidato G118/E04",
+            "G118/E04 reservado para DEV.2 R5",
+        ):
+            with self.subTest(stale=stale):
+                self.assertNotIn(stale, live_state)
 
 
 if __name__ == "__main__":

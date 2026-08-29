@@ -20,14 +20,14 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 
 ## Estado del proyecto
 
-- **Versión canónica vigente:** `0.1.18.04-beta`, obtenida exclusivamente desde [`VERSION`](VERSION). Materializa DEV.2 R5 como G118/E04 después de integrar el desarrollo mediante PR #107 / merge `bc97db0` y preparar esta promoción.
-- **Último estado funcional integrado en `main` antes de la promoción:** DEV.2 R5 mediante PR #107 / merge `bc97db04ef0f08d3005882ff08dd68b371aeb61e`.
-- **Estado revision-aware reconciliado:** G118/E04 (`0.1.18.04-beta`) queda aceptado para DEV.2 R5; G119/E05 (`0.1.19.05-beta`) queda reservado para DEV.2 R6.
-- **Publicación revision-aware vigente al preparar esta promoción:** `v0.1.17.02-beta` (G117/E02). El tag `v0.1.18.04-beta` se crea únicamente después del merge y la revalidación de esta promoción.
+- **Versión canónica vigente:** `0.1.18.04-beta`, obtenida exclusivamente desde [`VERSION`](VERSION). Materializa DEV.2 R5 como G118/E04 después del desarrollo PR #107 / merge `bc97db0` y de la promoción/publicación PR #108 / commit `290e84aab70a257e8b718d172e37365af49ef048`.
+- **Último estado funcional integrado en `main`:** DEV.2 R5 mediante PR #107 / merge `bc97db04ef0f08d3005882ff08dd68b371aeb61e`; la promoción G118/E04 quedó integrada mediante PR #108 / commit `290e84aab70a257e8b718d172e37365af49ef048`.
+- **Estado revision-aware reconciliado:** G118/E04 (`0.1.18.04-beta`) queda aceptado/publicado para DEV.2 R5; G119/E05 (`0.1.19.05-beta`) queda reservado para DEV.2 R6.
+- **Publicación revision-aware vigente:** `v0.1.18.04-beta` (G118/E04), tag anotado y firmado sobre `290e84aab70a257e8b718d172e37365af49ef048`, objeto de tag `1ee2561785d2413ffffd60ea03a69d1e4dae5660` y GitHub Release prerelease ID `378842155`. G117/E02 (`v0.1.17.02-beta`) permanece preservado como publicación anterior.
 - **Última versión formal legacy:** `0.0.26-beta` — tag firmado e inmutable `v0.0.26-beta`.
 - **Etapa:** desarrollo beta; repositorio público y ejecución orientada actualmente a entorno local.
 - **REL.GOV.1:** R1 y R2 cerrados/aceptados como G110/E01 y G117/E02. La automatización de Releases queda integrada sin transferir a Actions la creación o firma del tag.
-- **DEV.2:** R1–R3 permanecen aceptados históricamente; R4 fue un cierre documental sin Global independiente; R5 queda aceptado como G118/E04 y R6 continúa como candidato G119/E05.
+- **DEV.2:** R1–R3 permanecen aceptados históricamente; R4 fue un cierre documental sin Global independiente; R5 queda aceptado/publicado como G118/E04 y R6 continúa como candidato G119/E05.
 - **DOC.1:** R1–R5 cerrados; DOC.1 R6 permanece planificado para congelación documental final.
 - **SEC.2:** R1–R6 cerrados; R7 permanece planificado después de las nuevas superficies Developer/UX/persistencia.
 - **Primera versión oficial objetivo:** `1.0.0.0` con `Build 000001`, únicamente después de cerrar todos los gates definidos en el plan maestro.
@@ -123,7 +123,7 @@ La documentación vigente debe apuntar únicamente a rutas canónicas actuales. 
 
 `0.0.22-beta` fue la primera versión formal adoptada bajo la política de GOV.1.2; `0.0.23-beta` cerró GOV.1.3; `0.0.24-beta` cerró integralmente GOV.1; `0.0.25-beta` cerró UX.4.6e; y `0.0.26-beta` cerró PLAN.1. Sus tags publicados permanecen firmados e inmutables.
 
-El 2026-08-26 se completó el backfill administrativo de GitHub Releases. Tras las publicaciones G111–G115, el repositorio cuenta con **34 tags formales reales** y **34 GitHub Releases**. Los Releases de `v0.0.1-beta`–`v0.0.26-beta` creados retrospectivamente no cambian la fecha histórica, firma ni commit objetivo de sus tags.
+El 2026-08-26 se completó el backfill administrativo de GitHub Releases. Con las publicaciones formales posteriores hasta G118/E04, el repositorio cuenta actualmente con **37 tags formales reales** y **37 GitHub Releases**. Los Releases de `v0.0.1-beta`–`v0.0.26-beta` creados retrospectivamente no cambian la fecha histórica, firma ni commit objetivo de sus tags.
 
 Después de `v0.0.26-beta`, UX.4.6f–UX.4.6i continuaron históricamente sobre ese mismo valor de `VERSION`. VER.2 reconstruye todo el tramo sin inventar tags: el último estado aceptado de la base `7037addd` es **G070/E02**, cierre de UX.4.6i.
 

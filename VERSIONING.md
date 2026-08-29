@@ -14,10 +14,10 @@ La fuente canónica de versión continúa siendo `VERSION`.
 
 Estado vigente:
 
-- `VERSION` contiene `0.1.18.04-beta` y materializa G118/E04 (DEV.2 R5) después de PR #107 / merge `bc97db0` y de esta promoción.
-- `v0.1.17.02-beta` permanece publicado, firmado e inmutable como materialización formal de G117/E02. `v0.1.18.04-beta` se crea únicamente después del merge y la revalidación de la promoción G118.
+- `VERSION` contiene `0.1.18.04-beta` y materializa G118/E04 (DEV.2 R5) después del desarrollo PR #107 / merge `bc97db0`, de la promoción PR #108 / commit `290e84a` y de la publicación formal mediante `v0.1.18.04-beta`.
+- `v0.1.18.04-beta` permanece publicado, firmado e inmutable como materialización formal de G118/E04 sobre `290e84aab70a257e8b718d172e37365af49ef048`; `v0.1.17.02-beta` permanece preservado como publicación anterior G117/E02.
 - La reconciliación post-G070 permanece inmutable y conserva `v0.0.71.01-beta` como evidencia histórica de G087/E01.
-- G109–G117 permanecen aceptados según el ledger; DEV.2 R5 se incorpora como G118/E04.
+- G109–G117 permanecen aceptados según el ledger; DEV.2 R5 queda aceptado/publicado como G118/E04.
 - G119/E05 (`0.1.19.05-beta`) queda reservado para DEV.2 R6.
 - DEV.2 R5 es la revisión funcional R5 y E04 es el cuarto estado aceptado del bloque: R4 fue cierre documental y no consumió Global independiente.
 - Las etapas posteriores no tienen Global preasignado más allá del candidato vigente.
