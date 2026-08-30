@@ -34,7 +34,8 @@ Todo documento debe poder clasificarse como uno de estos tipos:
 - estándar o política;
 - auditoría o evidencia;
 - plantilla;
-- histórico con valor de trazabilidad.
+- histórico con valor de trazabilidad;
+- registro vivo acumulativo.
 
 Una bitácora de fase no se presenta como contrato vigente cuando solo describe
 un estado pasado.
@@ -54,6 +55,12 @@ según la función del documento:
   decisiones, evidencia reproducible y resultado.
 - **Registro histórico:** contexto, estado documentado, evidencia preservada,
   relación con el estado vigente y regla de preservación.
+- **Registro vivo acumulativo:** combina un contrato vigente con una secuencia
+  histórica que forma parte del mismo contrato canónico. La sección vigente
+  debe distinguirse de la evidencia cerrada y esta última no se moderniza.
+  Esta categoría solo se usa cuando separar la historia rompería trazabilidad,
+  referencias o regresiones verificables. Actualmente aplica a
+  `docs/decisions/README.md` y `docs/operations/validation.md`.
 - **ADR:** contexto, decisión, consecuencias, alternativas descartadas y
   evidencia relacionada; las relaciones de sustitución se declaran cuando
   existan.

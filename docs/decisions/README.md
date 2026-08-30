@@ -8,6 +8,7 @@
 **Última actualización de gobierno:** PLAN.1 / ADR-168 — 2026-08-20
 **Última actualización técnica:** VER.2 / ADR-179; reconciliación AUD.SEC2 R1 — 2026-08-25
 **Clasificación:** Técnica / Gobierno / Auditoría
+**Naturaleza documental:** Registro vivo acumulativo — el índice y el cuerpo ADR permanecen juntos como contrato canónico; las decisiones históricas no se extraen ni modernizan si hacerlo altera su trazabilidad o las regresiones que las protegen.
 **ADR indexadas:** 179 (`ADR-001` a `ADR-179`)
 
 
@@ -24,7 +25,7 @@ Estado vigente para lectura transversal:
 - NOR.1 y NOR.2 están cerrados.
 - DOC.1 R2 está cerrado como auditoría de la documentación Markdown vigente posterior a NOR.2.
 - Las decisiones históricas no se reescriben como si hubieran sido tomadas en una revisión posterior.
-- `VERSION` está sincronizado en `0.1.11.01-beta` (G111/E01); `v0.0.26-beta` se conserva como referencia legacy histórica.
+- `VERSION` está sincronizado en `0.1.18.04-beta` (G118/E04), aceptado/publicado para DEV.2 R5; G119/E05 (`0.1.19.05-beta`) queda reservado para DEV.2 R6; `v0.0.26-beta` se conserva como referencia legacy histórica.
 - SEC.2 quedó cerrado después de R1–R6; AUD.SEC2 R1 reconcilia la trazabilidad revision-aware sin reescribir decisiones históricas.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 
