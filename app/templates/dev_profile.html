@@ -8,7 +8,7 @@
     <span class="dev-kicker">Cuenta Developer</span>
     <h1 class="display-6 fw-bold mb-3">Perfil</h1>
     <p class="lead mb-0">
-      Identidad asociada a tu sesión del Portal Developer.
+      Identidad, estado de seguridad y contraseña de tu cuenta Developer.
     </p>
   </div>
 </section>
@@ -79,10 +79,92 @@
       </div>
     </div>
 
-    <div class="alert alert-secondary mt-4 mb-0" role="note">
-      La edición del perfil, avatar y cambio de contraseña se habilitarán
-      mediante operaciones protegidas en una revisión posterior de R6.
-    </div>
+    <article class="card mt-4">
+      <div class="card-body p-4">
+        <div class="row g-4">
+          <div class="col-lg-5">
+            <span class="dev-kicker">Credencial humana</span>
+            <h2 class="h4">Cambiar contraseña</h2>
+
+            <p class="text-muted">
+              La contraseña actual se revalida antes del cambio.
+              Al completar la operación, todas tus sesiones se revocan
+              y deberás iniciar sesión nuevamente.
+            </p>
+
+            <p class="small text-muted mb-0">
+              Política: mínimo 12 caracteres, al menos una mayúscula
+              y un carácter especial.
+            </p>
+          </div>
+
+          <div class="col-lg-7">
+            {% if "profile.edit.self" in dev_permisos %}
+            <form
+              method="post"
+              action="/dev/perfil/password"
+            >
+              <input
+                type="hidden"
+                name="csrf_token"
+                value="{{ dev_csrf_token }}"
+              >
+
+              <div class="mb-3">
+                <label class="form-label" for="dev-current-password">
+                  Contraseña actual
+                </label>
+                <input
+                  class="form-control"
+                  id="dev-current-password"
+                  name="password_actual"
+                  type="password"
+                  autocomplete="current-password"
+                  required
+                >
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label" for="dev-new-password">
+                  Nueva contraseña
+                </label>
+                <input
+                  class="form-control"
+                  id="dev-new-password"
+                  name="nueva_password"
+                  type="password"
+                  autocomplete="new-password"
+                  minlength="12"
+                  maxlength="256"
+                  required
+                >
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label" for="dev-confirm-password">
+                  Confirmar nueva contraseña
+                </label>
+                <input
+                  class="form-control"
+                  id="dev-confirm-password"
+                  name="confirmar_password"
+                  type="password"
+                  autocomplete="new-password"
+                  minlength="12"
+                  maxlength="256"
+                  required
+                >
+              </div>
+
+              <button class="btn btn-primary" type="submit">
+                Cambiar contraseña y cerrar sesiones
+              </button>
+            </form>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </article>
   </div>
 </section>
 {% endblock %}

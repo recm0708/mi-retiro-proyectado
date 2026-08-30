@@ -774,3 +774,72 @@ def rotar_credenciales_propietario(
         )
 
     return actualizado
+
+
+
+def cambiar_password_propio(
+    *,
+    identificador: str,
+    password_hash: str,
+    ruta: str | Path | None = None,
+) -> UsuarioDeveloper:
+    """Cambia la contraseña propia e invalida revisiones de seguridad anteriores."""
+
+    usuario = obtener_usuario_por_id(
+        identificador,
+        ruta,
+    )
+
+    if usuario is None:
+        raise LookupError(
+            "La cuenta Developer no existe."
+        )
+
+    if not usuario.activo:
+        raise PermissionError(
+            "La cuenta Developer no está activa."
+        )
+
+    password_hash = _validar_hash_argon2id(
+        password_hash,
+        "password_hash",
+    )
+
+    ahora = _ahora_utc()
+
+    with _conectar(ruta) as conexion:
+        cursor = conexion.execute(
+            """
+            UPDATE developer_users
+            SET
+                password_hash = ?,
+                must_change_password = 0,
+                security_version = security_version + 1,
+                updated_at = ?
+            WHERE
+                id = ?
+                AND is_active = 1
+            """,
+            (
+                password_hash,
+                ahora,
+                identificador,
+            ),
+        )
+
+        if cursor.rowcount != 1:
+            raise RuntimeError(
+                "No se pudo actualizar la contraseña."
+            )
+
+    actualizado = obtener_usuario_por_id(
+        identificador,
+        ruta,
+    )
+
+    if actualizado is None:
+        raise RuntimeError(
+            "La cuenta actualizada no pudo recuperarse."
+        )
+
+    return actualizado

@@ -333,3 +333,272 @@
   );
 
 })();
+
+/* ==========================================================
+ * R6 sidebar compact persistence
+ * ========================================================== */
+
+(() => {
+  const PARAMETRO = "sidebar";
+  const VALOR_COMPACTO = "compact";
+  const DESKTOP_QUERY = "(min-width: 992px)";
+
+  function urlConEstadoSidebar(
+    href,
+    compacto,
+  ) {
+    const url = new URL(
+      href,
+      window.location.origin,
+    );
+
+    if (compacto) {
+      url.searchParams.set(
+        PARAMETRO,
+        VALOR_COMPACTO,
+      );
+    } else {
+      url.searchParams.delete(
+        PARAMETRO,
+      );
+    }
+
+    return (
+      url.pathname
+      + url.search
+      + url.hash
+    );
+  }
+
+  function estadoCompactoEnUrl() {
+    const url = new URL(
+      window.location.href,
+    );
+
+    return (
+      url.searchParams.get(
+        PARAMETRO,
+      ) === VALOR_COMPACTO
+    );
+  }
+
+  function actualizarUrlActual(
+    compacto,
+  ) {
+    const url = new URL(
+      window.location.href,
+    );
+
+    if (compacto) {
+      url.searchParams.set(
+        PARAMETRO,
+        VALOR_COMPACTO,
+      );
+    } else {
+      url.searchParams.delete(
+        PARAMETRO,
+      );
+    }
+
+    window.history.replaceState(
+      window.history.state,
+      "",
+      (
+        url.pathname
+        + url.search
+        + url.hash
+      ),
+    );
+  }
+
+  function obtenerEtiqueta(
+    enlace,
+  ) {
+    const elementos = enlace.querySelectorAll(
+      "span",
+    );
+
+    if (!elementos.length) {
+      return "";
+    }
+
+    return (
+      elementos[
+        elementos.length - 1
+      ].textContent.trim()
+    );
+  }
+
+  function iniciarPersistenciaSidebar() {
+    const body = document.body;
+
+    const boton = document.querySelector(
+      "[data-dev-sidebar-toggle]",
+    );
+
+    const enlaces = Array.from(
+      document.querySelectorAll(
+        ".dev-sidebar-nav a",
+      ),
+    );
+
+    const desktop = window.matchMedia(
+      DESKTOP_QUERY,
+    );
+
+    if (!body || !boton) {
+      return;
+    }
+
+    function estaCompacto() {
+      return (
+        desktop.matches
+        && body.classList.contains(
+          "dev-sidebar-collapsed",
+        )
+      );
+    }
+
+    function actualizarEnlaces(
+      compacto,
+    ) {
+      enlaces.forEach((enlace) => {
+        const href = enlace.getAttribute(
+          "href",
+        );
+
+        if (
+          !href
+          || !href.startsWith("/dev")
+        ) {
+          return;
+        }
+
+        enlace.setAttribute(
+          "href",
+          urlConEstadoSidebar(
+            href,
+            compacto,
+          ),
+        );
+      });
+    }
+
+    function actualizarAyudas(
+      compacto,
+    ) {
+      enlaces.forEach((enlace) => {
+        const etiqueta = obtenerEtiqueta(
+          enlace,
+        );
+
+        if (!etiqueta) {
+          return;
+        }
+
+        if (compacto) {
+          enlace.setAttribute(
+            "title",
+            etiqueta,
+          );
+        } else {
+          enlace.removeAttribute(
+            "title",
+          );
+        }
+      });
+    }
+
+    function sincronizarPresentacion(
+      compacto,
+    ) {
+      actualizarEnlaces(
+        compacto,
+      );
+
+      actualizarAyudas(
+        compacto,
+      );
+    }
+
+    function aplicarEstadoInicial() {
+      if (!desktop.matches) {
+        body.classList.remove(
+          "dev-sidebar-collapsed",
+        );
+
+        sincronizarPresentacion(
+          false,
+        );
+
+        return;
+      }
+
+      const compacto = (
+        estadoCompactoEnUrl()
+      );
+
+      body.classList.toggle(
+        "dev-sidebar-collapsed",
+        compacto,
+      );
+
+      sincronizarPresentacion(
+        compacto,
+      );
+    }
+
+    /*
+     * El controlador original realiza el toggle visual.
+     * Después sincronizamos la URL actual y todos los enlaces.
+     *
+     * El estado visual se conserva únicamente en la URL.
+     */
+    boton.addEventListener(
+      "click",
+      () => {
+        window.requestAnimationFrame(
+          () => {
+            if (!desktop.matches) {
+              return;
+            }
+
+            const compacto = (
+              estaCompacto()
+            );
+
+            actualizarUrlActual(
+              compacto,
+            );
+
+            sincronizarPresentacion(
+              compacto,
+            );
+          },
+        );
+      },
+    );
+
+    if (
+      typeof desktop.addEventListener
+      === "function"
+    ) {
+      desktop.addEventListener(
+        "change",
+        aplicarEstadoInicial,
+      );
+    }
+
+    window.addEventListener(
+      "pageshow",
+      aplicarEstadoInicial,
+    );
+
+    aplicarEstadoInicial();
+  }
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    iniciarPersistenciaSidebar,
+  );
+})();

@@ -436,3 +436,15 @@ La navegación humana utiliza un sidebar colapsable. El acceso a Perfil y Acceso
 La apariencia visual no mantiene una paleta Developer independiente. `developer-portal.css` consume los tokens semánticos definidos por `design-system.css`, mientras que `theme.js` conserva una única preferencia para Automático, Claro, Oscuro y Alto contraste. De esta forma, los cambios futuros del sistema visual se propagan tanto a la aplicación principal como al Portal Developer.
 
 El endpoint histórico `/dev/centro-desarrollo` permanece temporalmente como superficie de compatibilidad para el contrato técnico Bearer y no forma parte de la navegación humana del Portal Developer.
+
+## Seguridad humana del Portal Developer
+
+Las operaciones humanas con efecto utilizan POST y se autorizan en servidor mediante los permisos atómicos del rol Developer.
+
+- `/dev/mantenimiento/limpiar-sesiones`: operación POST no destructiva que depura sesiones ya expiradas.
+- `/dev/mantenimiento/revocar-sesiones`: operación POST destructiva protegida por RBAC, CSRF, revalidación y confirmación.
+- `/dev/perfil/password`: cambio POST de contraseña propia con revocación de sesiones.
+
+Los formularios autenticados incluyen un token CSRF ligado a la sesión en memoria. Las operaciones críticas requieren además revalidación de la contraseña humana.
+
+El cambio de contraseña propia incrementa `security_version`; las sesiones previas quedan revocadas y la identidad debe autenticarse nuevamente.

@@ -97,6 +97,11 @@
             action="/dev/archivos/exportar"
             class="align-self-lg-center"
           >
+            <input
+              type="hidden"
+              name="csrf_token"
+              value="{{ dev_csrf_token }}"
+            >
             <button
               class="btn btn-primary"
               type="submit"

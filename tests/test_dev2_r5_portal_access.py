@@ -159,7 +159,36 @@ class TestDev2R5PortalAccess(unittest.TestCase):
             with self._env(temp):
                 cliente = TestClient(app)
                 cliente.post("/dev", data=self._login_data())
-                respuesta = cliente.post("/dev/logout", follow_redirects=False)
+
+                pagina = cliente.get("/dev")
+                self.assertEqual(200, pagina.status_code)
+
+                marca_csrf = 'name="csrf_token"'
+                self.assertIn(
+                    marca_csrf,
+                    pagina.text,
+                )
+
+                fragmento_csrf = pagina.text.split(
+                    marca_csrf,
+                    1,
+                )[1]
+
+                csrf_token = fragmento_csrf.split(
+                    'value="',
+                    1,
+                )[1].split(
+                    '"',
+                    1,
+                )[0]
+
+                respuesta = cliente.post(
+                    "/dev/logout",
+                    data={
+                        "csrf_token": csrf_token,
+                    },
+                    follow_redirects=False,
+                )
 
         self.assertEqual(303, respuesta.status_code)
         self.assertEqual("/dev", respuesta.headers["location"])

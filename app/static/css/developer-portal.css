@@ -8,6 +8,7 @@
 .dev-portal-body {
   --dev-topbar-height: 72px;
   --dev-sidebar-width: 258px;
+  --dev-sidebar-collapsed-width: 76px;
 
   --dev-accent: var(--app-primary);
   --dev-accent-hover: var(--app-primary-hover);
@@ -335,6 +336,7 @@
   background: var(--app-surface);
 
   transition:
+    width .22s ease,
     transform .22s ease,
     opacity .18s ease;
 }
@@ -474,16 +476,96 @@
   display: none;
 }
 
-body.dev-sidebar-collapsed
-.dev-shell.is-authenticated {
-  grid-template-columns: 0 minmax(0, 1fr);
-}
+/*
+ * En escritorio, el estado colapsado conserva un rail navegable.
+ * Solo se ocultan visualmente las etiquetas; los iconos y estados
+ * activos continúan disponibles.
+ */
+@media (min-width: 992px) {
+  body.dev-sidebar-collapsed
+  .dev-shell.is-authenticated {
+    grid-template-columns:
+      var(--dev-sidebar-collapsed-width)
+      minmax(0, 1fr);
+  }
 
-body.dev-sidebar-collapsed
-.dev-sidebar {
-  transform: translateX(-100%);
-  opacity: 0;
-  pointer-events: none;
+  body.dev-sidebar-collapsed
+  .dev-sidebar {
+    width: var(--dev-sidebar-collapsed-width);
+    transform: none;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  body.dev-sidebar-collapsed
+  .dev-sidebar-heading {
+    min-height: 58px;
+    padding: 0;
+  }
+
+  body.dev-sidebar-collapsed
+  .dev-sidebar-heading span,
+  body.dev-sidebar-collapsed
+  .dev-sidebar-heading small {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  body.dev-sidebar-collapsed
+  .dev-sidebar-nav {
+    padding: .3rem .6rem;
+  }
+
+  body.dev-sidebar-collapsed
+  .dev-sidebar-nav a {
+    justify-content: center;
+    gap: 0;
+    padding: .65rem;
+  }
+
+  body.dev-sidebar-collapsed
+  .dev-sidebar-nav a > span:not(.dev-sidebar-icon) {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  body.dev-sidebar-collapsed
+  .dev-sidebar-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  body.dev-sidebar-collapsed
+  .dev-sidebar-icon svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  body.dev-sidebar-collapsed
+  .dev-sidebar-meta {
+    min-height: 58px;
+    padding: 0;
+  }
+
+  body.dev-sidebar-collapsed
+  .dev-sidebar-meta span,
+  body.dev-sidebar-collapsed
+  .dev-sidebar-meta small {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
 }
 
 /* ==========================================================
@@ -1091,5 +1173,244 @@ body.dev-sidebar-collapsed
 
   .dev-event-pagination {
     justify-content: space-between;
+  }
+}
+
+/* ==========================================================
+   Seguridad y mantenimiento Developer
+   ========================================================== */
+
+.dev-danger-zone {
+  border-color: var(--app-danger-border) !important;
+}
+
+.dev-danger-zone .dev-kicker {
+  color: var(--app-danger-text);
+}
+
+.dev-sensitive-form {
+  max-width: 620px;
+}
+
+.dev-security-list {
+  display: grid;
+  gap: .7rem;
+  padding-left: 1.2rem;
+}
+
+.dev-security-list li {
+  line-height: 1.55;
+}
+
+/* ==========================================================
+   Movimiento y microinteracciones Developer
+   ========================================================== */
+
+/* Botón del menú */
+
+.dev-menu-button {
+  transition:
+    background-color .18s ease,
+    border-color .18s ease,
+    color .18s ease,
+    transform .16s ease,
+    box-shadow .18s ease;
+}
+
+.dev-menu-button svg {
+  transform-origin: center;
+
+  transition:
+    transform .25s cubic-bezier(.2, .8, .2, 1);
+}
+
+.dev-menu-button:hover {
+  transform: translateY(-1px);
+}
+
+.dev-menu-button:active {
+  transform:
+    translateY(1px)
+    scale(.97);
+}
+
+@media (min-width: 992px) {
+  body.dev-sidebar-collapsed
+  .dev-menu-button svg {
+    transform:
+      rotate(180deg)
+      scale(.92);
+  }
+}
+
+
+/* Rail y navegación */
+
+.dev-sidebar-nav a {
+  transition:
+    background-color .18s ease,
+    border-color .18s ease,
+    color .18s ease,
+    transform .18s ease,
+    box-shadow .18s ease;
+}
+
+.dev-sidebar-icon {
+  transform-origin: center;
+
+  transition:
+    color .18s ease,
+    transform .22s cubic-bezier(.2, .8, .2, 1);
+}
+
+.dev-sidebar-nav a:hover
+.dev-sidebar-icon,
+.dev-sidebar-nav a:focus-visible
+.dev-sidebar-icon {
+  transform:
+    translateX(1px)
+    scale(1.09);
+}
+
+.dev-sidebar-nav a.active
+.dev-sidebar-icon,
+.dev-sidebar-nav a[aria-current="page"]
+.dev-sidebar-icon {
+  animation:
+    dev-nav-icon-selected
+    .34s
+    cubic-bezier(.2, .85, .25, 1)
+    both;
+}
+
+@keyframes dev-nav-icon-selected {
+  0% {
+    transform: scale(.82);
+  }
+
+  58% {
+    transform: scale(1.15);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+
+/* Cambio de página */
+
+.dev-main > section {
+  animation:
+    dev-page-enter
+    .3s
+    cubic-bezier(.2, .8, .2, 1)
+    both;
+}
+
+.dev-main > section:nth-child(2) {
+  animation-delay: .035s;
+}
+
+.dev-main > section:nth-child(3) {
+  animation-delay: .065s;
+}
+
+@keyframes dev-page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(7px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* Tarjetas */
+
+.dev-main .card {
+  transition:
+    border-color .18s ease,
+    box-shadow .18s ease,
+    transform .18s ease;
+}
+
+.dev-main .card:hover {
+  transform: translateY(-1px);
+}
+
+
+/* Botones */
+
+.dev-portal-body .btn,
+.dev-open-app,
+.dev-user-trigger,
+.theme-trigger {
+  transition:
+    background-color .18s ease,
+    border-color .18s ease,
+    color .18s ease,
+    box-shadow .18s ease,
+    transform .14s ease;
+}
+
+.dev-portal-body .btn:hover,
+.dev-open-app:hover {
+  transform: translateY(-1px);
+}
+
+.dev-portal-body .btn:active,
+.dev-open-app:active,
+.dev-user-trigger:active,
+.theme-trigger:active {
+  transform:
+    translateY(1px)
+    scale(.985);
+}
+
+
+/* Menús desplegables */
+
+.dev-user-menu .dropdown-item,
+.theme-menu .dropdown-item {
+  transition:
+    background-color .16s ease,
+    color .16s ease,
+    transform .16s ease;
+}
+
+.dev-user-menu .dropdown-item:hover,
+.theme-menu .dropdown-item:hover {
+  transform: translateX(2px);
+}
+
+
+/* Indicadores y badges */
+
+.dev-portal-body .badge {
+  transition:
+    transform .16s ease,
+    box-shadow .16s ease;
+}
+
+.dev-portal-body .badge:hover {
+  transform: translateY(-1px);
+}
+
+
+/* Accesibilidad */
+
+@media (prefers-reduced-motion: reduce) {
+  .dev-portal-body *,
+  .dev-portal-body *::before,
+  .dev-portal-body *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-delay: 0s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
   }
 }

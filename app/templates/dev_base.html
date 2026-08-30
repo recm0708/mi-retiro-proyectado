@@ -64,7 +64,7 @@
 </head>
 
 <body
-  class="dev-portal-body page-{{ pagina_activa|default('portal_developer') }}"
+  class="dev-portal-body page-{{ pagina_activa|default('portal_developer') }}{% if request.query_params.get('sidebar') == 'compact' %} dev-sidebar-collapsed{% endif %}"
 >
   <a class="skip-link" href="#contenido-principal">
     Saltar al contenido principal
@@ -312,6 +312,11 @@
             <div class="dropdown-divider"></div>
 
             <form method="post" action="/dev/logout">
+              <input
+                type="hidden"
+                name="csrf_token"
+                value="{{ dev_csrf_token }}"
+              >
               <button
                 type="submit"
                 class="dropdown-item dev-user-logout"

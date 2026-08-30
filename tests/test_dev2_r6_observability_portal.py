@@ -187,7 +187,15 @@ class TestDev2R6ObservabilityPortal(unittest.TestCase):
             main,
         )
         self.assertIn(
-            "_obtener_usuario_sesion_web(request)",
+            "_requerir_permiso_developer(",
+            main,
+        )
+        self.assertIn(
+            "PermisoDeveloper.ARCHIVOS_DESCARGAR",
+            main,
+        )
+        self.assertIn(
+            "_validar_csrf_developer(",
             main,
         )
         self.assertIn(

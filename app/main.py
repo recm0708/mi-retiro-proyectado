@@ -144,6 +144,24 @@ BASE_DIR = Path(__file__).resolve().parent
 from app.services.regulatory_sources import construir_catalogo_metodologia
 from app.services.calculation_guide import construir_guia_calculo
 from app.services.development_center import construir_estado_centro_desarrollo
+from app.core.developer_identity import (
+    PermisoDeveloper,
+    hashear_password,
+    permisos_para_rol,
+    rol_tiene_permiso,
+)
+from app.core.developer_store import cambiar_password_propio
+from app.core.developer_web_security import (
+    revalidar_password_usuario,
+    token_csrf_para_sesion,
+    validar_token_csrf_sesion,
+)
+from app.core.admin_session import (
+    limpiar_sesiones_expiradas as limpiar_sesiones_developer_expiradas,
+    obtener_sesiones_activas as obtener_sesiones_developer_activas,
+    revocar_sesiones_usuario,
+    revocar_todas_las_sesiones_admin,
+)
 from app.core.admin_security import (
     requerir_administrador,
     administracion_activa,
@@ -458,6 +476,7 @@ async def diagnostico_developer(request: Request):
         request,
         plantilla="dev_diagnostics.html",
         pagina_activa="diagnostico",
+        permiso=PermisoDeveloper.DIAGNOSTICO_LEER,
     )
 
 
@@ -472,6 +491,7 @@ async def eventos_developer(request: Request):
         request,
         plantilla="dev_events.html",
         pagina_activa="eventos",
+        permiso=PermisoDeveloper.EVENTOS_LEER,
     )
 
 
@@ -486,24 +506,27 @@ async def archivos_developer(request: Request):
         request,
         plantilla="dev_files.html",
         pagina_activa="archivos",
+        permiso=PermisoDeveloper.ARCHIVOS_LEER,
     )
 
 
 @app.post(
     "/dev/archivos/exportar",
 )
-async def exportar_archivos_developer(request: Request):
+async def exportar_archivos_developer(
+    request: Request,
+    csrf_token: str = Form(...),
+):
     """Descarga el ZIP diagnóstico sanitizado desde una sesión humana."""
 
-    _verificar_superficie_administrativa()
-
-    usuario = _obtener_usuario_sesion_web(request)
-
-    if usuario is None:
-        return RedirectResponse(
-            url="/dev",
-            status_code=303,
-        )
+    _requerir_permiso_developer(
+        request,
+        PermisoDeveloper.ARCHIVOS_DESCARGAR,
+    )
+    _validar_csrf_developer(
+        request,
+        csrf_token,
+    )
 
     from fastapi.responses import FileResponse
 
@@ -545,7 +568,109 @@ async def mantenimiento_developer(request: Request):
         request,
         plantilla="dev_maintenance.html",
         pagina_activa="mantenimiento",
+        permiso=PermisoDeveloper.MANTENIMIENTO_LEER,
     )
+
+
+@app.post(
+    "/dev/mantenimiento/limpiar-sesiones",
+)
+async def limpiar_sesiones_developer(
+    request: Request,
+    csrf_token: str = Form(...),
+):
+    """Elimina sesiones ya expiradas sin afectar sesiones vigentes."""
+
+    usuario = _requerir_permiso_developer(
+        request,
+        PermisoDeveloper.MANTENIMIENTO_EJECUTAR,
+    )
+    _validar_csrf_developer(
+        request,
+        csrf_token,
+    )
+
+    antes = len(
+        obtener_sesiones_developer_activas()
+    )
+
+    limpiar_sesiones_developer_expiradas()
+
+    despues = len(
+        obtener_sesiones_developer_activas()
+    )
+
+    registrar_evento(
+        level="INFO",
+        event="dev.maintenance.sessions.cleaned",
+        component="security.developer",
+        outcome="success",
+        metadata={
+            "operation": "maintenance.sessions.clean",
+            "removed": max(0, antes - despues),
+            "actor_role": usuario.rol.value,
+        },
+    )
+
+    return RedirectResponse(
+        url="/dev/mantenimiento?resultado=sesiones-limpiadas",
+        status_code=303,
+    )
+
+
+@app.post(
+    "/dev/mantenimiento/revocar-sesiones",
+)
+async def revocar_sesiones_developer(
+    request: Request,
+    csrf_token: str = Form(...),
+    password_actual: str = Form(...),
+    confirmacion: str = Form(...),
+):
+    """Revoca todas las sesiones tras RBAC, CSRF, revalidación y confirmación."""
+
+    usuario = _requerir_permiso_developer(
+        request,
+        PermisoDeveloper.MANTENIMIENTO_DESTRUCTIVO,
+    )
+    _validar_csrf_developer(
+        request,
+        csrf_token,
+    )
+    _revalidar_operacion_developer(
+        request,
+        usuario,
+        password_actual,
+    )
+
+    if confirmacion.strip() != "REVOCAR SESIONES":
+        raise HTTPException(
+            status_code=400,
+            detail="La confirmación de la operación no coincide.",
+        )
+
+    registrar_evento(
+        level="WARNING",
+        event="dev.maintenance.sessions.revoke_all",
+        component="security.developer",
+        outcome="success",
+        metadata={
+            "operation": "maintenance.sessions.revoke_all",
+            "actor_role": usuario.rol.value,
+        },
+    )
+
+    revocar_todas_las_sesiones_admin()
+
+    respuesta = RedirectResponse(
+        url="/dev",
+        status_code=303,
+    )
+    respuesta.delete_cookie(
+        key="mrp_admin_session",
+        path="/dev",
+    )
+    return respuesta
 
 
 @app.get(
@@ -559,6 +684,7 @@ async def privacidad_developer(request: Request):
         request,
         plantilla="dev_privacy.html",
         pagina_activa="privacidad",
+        permiso=PermisoDeveloper.PRIVACIDAD_LEER,
     )
 
 
@@ -573,7 +699,73 @@ async def perfil_developer(request: Request):
         request,
         plantilla="dev_profile.html",
         pagina_activa="perfil",
+        permiso=PermisoDeveloper.PERFIL_LEER,
     )
+
+
+@app.post(
+    "/dev/perfil/password",
+)
+async def cambiar_password_perfil_developer(
+    request: Request,
+    csrf_token: str = Form(...),
+    password_actual: str = Form(...),
+    nueva_password: str = Form(...),
+    confirmar_password: str = Form(...),
+):
+    """Cambia la contraseña propia y revoca las sesiones anteriores."""
+
+    usuario = _requerir_permiso_developer(
+        request,
+        PermisoDeveloper.PERFIL_EDITAR_PROPIO,
+    )
+    _validar_csrf_developer(
+        request,
+        csrf_token,
+    )
+    _revalidar_operacion_developer(
+        request,
+        usuario,
+        password_actual,
+    )
+
+    if nueva_password != confirmar_password:
+        raise HTTPException(
+            status_code=400,
+            detail="Las contraseñas nuevas no coinciden.",
+        )
+
+    actualizado = cambiar_password_propio(
+        identificador=usuario.identificador,
+        password_hash=hashear_password(
+            nueva_password
+        ),
+    )
+
+    revocar_sesiones_usuario(
+        actualizado.identificador
+    )
+
+    registrar_evento(
+        level="INFO",
+        event="dev.profile.password.changed",
+        component="security.developer",
+        outcome="success",
+        metadata={
+            "operation": "profile.password.change",
+            "actor_role": actualizado.rol.value,
+        },
+    )
+
+    respuesta = RedirectResponse(
+        url="/dev",
+        status_code=303,
+    )
+    respuesta.delete_cookie(
+        key="mrp_admin_session",
+        path="/dev",
+    )
+    return respuesta
 
 
 @app.get(
@@ -587,6 +779,7 @@ async def acceso_tecnico_developer(request: Request):
         request,
         plantilla="dev_technical_access.html",
         pagina_activa="acceso_tecnico",
+        permiso=PermisoDeveloper.TOKENS_LEER,
     )
 
 
@@ -686,8 +879,21 @@ async def procesar_login_administrativo(
 
 
 @app.post("/dev/logout")
-async def logout_administrativo(request: Request):
+async def logout_administrativo(
+    request: Request,
+    csrf_token: str | None = Form(None),
+):
     """Cierra la sesión web Developer activa."""
+
+    usuario = _obtener_usuario_sesion_web(
+        request
+    )
+
+    if usuario is not None:
+        _validar_csrf_developer(
+            request,
+            csrf_token,
+        )
 
     sesion = request.cookies.get(
         "mrp_admin_session"
@@ -912,7 +1118,131 @@ def _revision_assets_developer() -> str:
     return "-".join(revisiones)
 
 
+def _identificador_sesion_developer(
+    request: Request,
+) -> str:
+    """Obtiene la cookie de sesión sin exponerla."""
+
+    return (
+        request.cookies.get(
+            "mrp_admin_session",
+            "",
+        ).strip()
+    )
+
+
+def _token_csrf_developer(
+    request: Request,
+) -> str:
+    """Genera el CSRF correspondiente a la sesión humana actual."""
+
+    return token_csrf_para_sesion(
+        _identificador_sesion_developer(
+            request
+        )
+    )
+
+
+def _validar_csrf_developer(
+    request: Request,
+    token: str | None,
+) -> None:
+    """Exige CSRF válido para operaciones humanas POST."""
+
+    sesion = _identificador_sesion_developer(
+        request
+    )
+
+    if not validar_token_csrf_sesion(
+        sesion,
+        token,
+    ):
+        registrar_evento(
+            level="WARNING",
+            event="dev.csrf.denied",
+            component="security.developer",
+            outcome="denied",
+            metadata={
+                "endpoint": request.url.path,
+            },
+        )
+
+        raise HTTPException(
+            status_code=403,
+            detail="Validación de seguridad requerida.",
+        )
+
+
+def _requerir_permiso_developer(
+    request: Request,
+    permiso: PermisoDeveloper,
+):
+    """Autoriza una operación humana mediante RBAC server-side."""
+
+    _verificar_superficie_administrativa()
+
+    usuario = _obtener_usuario_sesion_web(
+        request
+    )
+
+    if usuario is None:
+        raise HTTPException(
+            status_code=401,
+            detail="Sesión Developer requerida.",
+        )
+
+    if not rol_tiene_permiso(
+        usuario.rol,
+        permiso,
+    ):
+        registrar_evento(
+            level="WARNING",
+            event="dev.authorization.denied",
+            component="security.developer",
+            outcome="denied",
+            metadata={
+                "endpoint": request.url.path,
+                "permission": permiso.value,
+            },
+        )
+
+        raise HTTPException(
+            status_code=403,
+            detail="La cuenta no tiene permiso para esta operación.",
+        )
+
+    return usuario
+
+
+def _revalidar_operacion_developer(
+    request: Request,
+    usuario,
+    password: str | None,
+) -> None:
+    """Exige nuevamente la contraseña humana en operaciones sensibles."""
+
+    if not revalidar_password_usuario(
+        usuario,
+        password,
+    ):
+        registrar_evento(
+            level="WARNING",
+            event="dev.revalidation.denied",
+            component="security.developer",
+            outcome="denied",
+            metadata={
+                "endpoint": request.url.path,
+            },
+        )
+
+        raise HTTPException(
+            status_code=403,
+            detail="Revalidación de identidad incorrecta.",
+        )
+
+
 def _contexto_developer(
+    request: Request,
     *,
     autenticado: bool,
     usuario: UsuarioDeveloper | None = None,
@@ -933,6 +1263,28 @@ def _contexto_developer(
         "app_author": APP_AUTHOR,
         "dev_assets_revision": _revision_assets_developer(),
         "dev_autenticado": autenticado,
+        "dev_csrf_token": (
+            _token_csrf_developer(request)
+            if autenticado
+            else ""
+        ),
+        "dev_permisos": (
+            sorted(
+                permiso.value
+                for permiso in permisos_para_rol(
+                    usuario.rol
+                )
+            )
+            if usuario is not None
+            else []
+        ),
+        "dev_sesiones_activas": (
+            len(
+                obtener_sesiones_developer_activas()
+            )
+            if autenticado
+            else 0
+        ),
         "dev_usuario": usuario,
         "dev_nombre_presentacion": (
             _nombre_presentacion_developer(
@@ -969,6 +1321,7 @@ def _render_pagina_developer(
     """Renderiza una página humana autenticada del Portal Developer."""
 
     contexto = _contexto_developer(
+        request,
         autenticado=True,
         usuario=usuario,
         pagina_activa=pagina_activa,
@@ -989,6 +1342,7 @@ def _render_pagina_developer_autenticada(
     *,
     plantilla: str,
     pagina_activa: str,
+    permiso: PermisoDeveloper | None = None,
 ):
     """Exige sesión humana antes de renderizar una página Developer."""
 
@@ -1002,6 +1356,36 @@ def _render_pagina_developer_autenticada(
         return RedirectResponse(
             url="/dev",
             status_code=303,
+        )
+
+    if (
+        permiso is not None
+        and not rol_tiene_permiso(
+            usuario.rol,
+            permiso,
+        )
+    ):
+        raise HTTPException(
+            status_code=403,
+            detail=(
+                "La cuenta Developer no tiene permiso "
+                "para acceder a esta sección."
+            ),
+        )
+
+    if (
+        permiso is not None
+        and not rol_tiene_permiso(
+            usuario.rol,
+            permiso,
+        )
+    ):
+        raise HTTPException(
+            status_code=403,
+            detail=(
+                "La cuenta Developer no tiene permiso "
+                "para acceder a esta sección."
+            ),
         )
 
     return _render_pagina_developer(
@@ -1021,6 +1405,7 @@ def _render_login_developer(
     """Renderiza el acceso humano sin persistir credenciales."""
 
     contexto = _contexto_developer(
+        request,
         autenticado=False
     )
     contexto["error"] = error
@@ -1041,6 +1426,7 @@ def _render_centro_desarrollo(
     """Renderiza el Centro Developer para sesión humana o Bearer legado."""
 
     contexto = _contexto_developer(
+        request,
         autenticado=usuario is not None,
         usuario=usuario,
     )
