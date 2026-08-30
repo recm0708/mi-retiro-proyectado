@@ -8,6 +8,7 @@
 **Última revisión transversal:** UX.4.6f R2 integrada y cierre del Paso 4 — 2026-08-20
 **Revisión de normalización:** NOR.1 R7 — cierre de estándares y preparación de NOR.2 — 2026-08-24
 **Clasificación:** Técnica / Calidad
+**Naturaleza documental:** Registro vivo acumulativo — mantiene la estrategia vigente y evidencia histórica de gates protegida por regresiones; los resultados históricos no se reescriben como si pertenecieran al estado actual.
 
 
 <!-- NOR1-R7-VALIDATION:START -->
@@ -531,7 +532,7 @@ python -m pip check
 
 ## 3. Inventario actual de pruebas
 
-Inventario vigente: **133 módulos**.
+Inventario vigente: **171 módulos**.
 
 - `tests/test_accessibility_themes.py`
 - `tests/test_accessibility_ux4.py`
@@ -541,7 +542,23 @@ Inventario vigente: **133 módulos**.
 - `tests/test_dev2_r2_visor_diagnostico.py`
 - `tests/test_dev2_r3_autodiagnostico.py`
 - `tests/test_dev2_r4_cierre_final.py`
+- `tests/test_dev2_r5_portal_access.py`
 - `tests/test_doc1_r1_auditoria_markdown_post_mant1.py`
+- `tests/test_doc1_r3_markdown_links.py`
+- `tests/test_doc1_r4_live_state_sanitization.py`
+- `tests/test_doc1_r5_markdown_auditor.py`
+- `tests/test_doc1_r5_markdown_standards.py`
+- `tests/test_doc2_r1_changelog_reconstruction.py`
+- `tests/test_g109_promotion_post_merge.py`
+- `tests/test_g110_promotion_post_merge.py`
+- `tests/test_g111_promotion_post_merge.py`
+- `tests/test_g112_promotion_post_merge.py`
+- `tests/test_g113_promotion_post_merge.py`
+- `tests/test_g114_promotion_post_merge.py`
+- `tests/test_g115_promotion_post_merge.py`
+- `tests/test_g116_promotion_post_merge.py`
+- `tests/test_g117_promotion_post_merge.py`
+- `tests/test_g118_promotion_post_merge.py`
 - `tests/test_gov12_versionado.py`
 - `tests/test_gov13_documentacion.py`
 - `tests/test_gov13_documentacion_r2.py`
@@ -573,14 +590,21 @@ Inventario vigente: **133 módulos**.
 - `tests/test_mant1_r7_cierre_operativo_post_auditoria.py`
 - `tests/test_mant1_scripts_hooks_documentados.py`
 - `tests/test_mantenimiento_tecnico.py`
+- `tests/test_markdown_audit.py`
 - `tests/test_mixto.py`
 - `tests/test_mixto_prestaciones_cap.py`
 - `tests/test_mixto_results.py`
 - `tests/test_modality_results.py`
 - `tests/test_money.py`
+- `tests/test_nor1_r8_work_block_identifiers.py`
 - `tests/test_nor1_repository_standards.py`
 - `tests/test_nor2_r2_migration_matrix.py`
 - `tests/test_nor2_r3_runtime_migration.py`
+- `tests/test_nor2_r4_live_documentation.py`
+- `tests/test_nor2_r5_historical_documentation.py`
+- `tests/test_nor2_r6_ledger_data.py`
+- `tests/test_nor2_r7_local_artifacts.py`
+- `tests/test_nor2_r8_final_audit.py`
 - `tests/test_nor2_repository_normalization.py`
 - `tests/test_plan1_documentacion_primaria.py`
 - `tests/test_plan1_documentacion_transversal.py`
@@ -591,16 +615,31 @@ Inventario vigente: **133 módulos**.
 - `tests/test_plan1_saneamiento_metadata.py`
 - `tests/test_plan1_terminologia_seguridad.py`
 - `tests/test_plan1_versionado_oficial.py`
+- `tests/test_plan2_r1_master_pending_matrix.py`
+- `tests/test_post_sec2_integral_audit.py`
 - `tests/test_prebeta_e2e_hardening.py`
 - `tests/test_precommit_guard.py`
 - `tests/test_pypdf_compatibilidad.py`
 - `tests/test_regulatory_sources.py`
+- `tests/test_rel_gov1_r2_live_publication_state.py`
+- `tests/test_release_governance_contract.py`
+- `tests/test_release_publication.py`
+- `tests/test_release_workflow_automation.py`
 - `tests/test_responsive_ux3.py`
 - `tests/test_results.py`
 - `tests/test_retirement.py`
 - `tests/test_salary_projection.py`
 - `tests/test_sebd.py`
 - `tests/test_sebd_modalidades.py`
+- `tests/test_sec2_postclosure_hardening.py`
+- `tests/test_sec2_r1_codeql_workflow_hardening.py`
+- `tests/test_sec2_r2_admin_endpoint_protection.py`
+- `tests/test_sec2_r2_admin_security.py`
+- `tests/test_sec2_r2_secret_filtering.py`
+- `tests/test_sec2_r3_admin_protection.py`
+- `tests/test_sec2_r4_admin_audit.py`
+- `tests/test_sec2_r5_admin_web_session.py`
+- `tests/test_sec2_r6_admin_session_security.py`
 - `tests/test_sucgs.py`
 - `tests/test_sucgs_capa_solidaria.py`
 - `tests/test_sucgs_reemplazo.py`

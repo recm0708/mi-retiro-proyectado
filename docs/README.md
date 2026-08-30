@@ -179,7 +179,7 @@ La publicación del repositorio no elimina la revisión jurídica externa ni cua
 - **[Código de conducta](../CODE_OF_CONDUCT.md)** — reglas de convivencia y colaboración.
 - **[Soporte](../SUPPORT.md)** — rutas de consulta y reporte.
 - **[Guía interna de desarrollo](operations/development-guide.md)** — convenciones internas.
-- **[DEV.2 R1/R2/R3/R4 — Centro de desarrollo](architecture/development-center.md)** — cierre documental del centro de desarrollo DEV.2.
+- **[DEV.2 R1–R5 — Centro de desarrollo](architecture/development-center.md)** — estado aceptado/publicado de DEV.2 hasta R5; R6 permanece como siguiente candidato funcional.
 - **[Política de estructura de archivos por extensión](standards/file-structure-by-extension.md)** — política vigente de estructura, nombres y ubicación de archivos.
 - **[Estándar de código y comentarios](standards/code-and-comments.md)** — patrón permanente de comentarios y docstrings por tecnología.
 - [`../.editorconfig`](../.editorconfig) — formato.

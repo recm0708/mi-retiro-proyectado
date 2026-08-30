@@ -714,8 +714,11 @@ def check_current_state_version(
     issues = []
 
     pattern = re.compile(
-        r"`VERSION`\s+permanece\s+en\s+"
-        r"`([^`]+)`",
+        r"`VERSION`\s+(?:"
+        r"permanece\s+en|"
+        r"está\s+sincronizado\s+en|"
+        r"esta\s+sincronizado\s+en"
+        r")\s+`([^`]+)`",
         re.I,
     )
 

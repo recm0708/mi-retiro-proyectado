@@ -110,6 +110,42 @@ class TestDoc1R5MarkdownAuditor(unittest.TestCase):
 
         self.assertEqual([], issues)
 
+    def test_version_sincronizada_obsoleta_en_estado_vigente_falla(self):
+        issues = AUDIT.check_current_state_version(
+            "docs/decisions/README.md",
+            [
+                "## Nota de lectura",
+                "",
+                "Estado vigente para lectura transversal:",
+                "",
+                "- `VERSION` está sincronizado en "
+                "`0.1.11.01-beta` (G111/E01).",
+            ],
+            "0.1.18.04-beta",
+        )
+
+        self.assertEqual(1, len(issues))
+        self.assertEqual(
+            "VERSION_ANTIGUA_EN_ESTADO_VIGENTE",
+            issues[0].code,
+        )
+
+    def test_version_sincronizada_actual_en_estado_vigente_es_valida(self):
+        issues = AUDIT.check_current_state_version(
+            "docs/decisions/README.md",
+            [
+                "## Nota de lectura",
+                "",
+                "Estado vigente para lectura transversal:",
+                "",
+                "- `VERSION` está sincronizado en "
+                "`0.1.18.04-beta` (G118/E04).",
+            ],
+            "0.1.18.04-beta",
+        )
+
+        self.assertEqual([], issues)
+
     def test_changelog_y_releases_preservan_contexto_historico(self):
         for rel in ("CHANGELOG.md", "RELEASES.md"):
             with self.subTest(rel=rel):
