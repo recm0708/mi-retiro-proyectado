@@ -425,6 +425,7 @@ Las rutas humanas vigentes son:
 - `/dev/diagnostico`: autodiagnóstico técnico del entorno local.
 - `/dev/eventos`: visor y resumen de eventos de observabilidad.
 - `/dev/archivos`: inventario de archivos diagnósticos conocidos.
+- `/dev/archivos/exportar`: descarga POST del ZIP diagnóstico sanitizado para una sesión humana autenticada.
 - `/dev/mantenimiento`: superficie reservada para operaciones administrativas controladas.
 - `/dev/privacidad`: advertencias y controles de privacidad del entorno Developer.
 - `/dev/perfil`: información no secreta de la cuenta Developer autenticada.

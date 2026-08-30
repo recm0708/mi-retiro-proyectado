@@ -8,7 +8,7 @@
     <span class="dev-kicker">Observabilidad</span>
     <h1 class="display-6 fw-bold mb-3">Eventos</h1>
     <p class="lead mb-0">
-      Resumen y eventos recientes registrados por Developer Diagnostics.
+      Consulta local de metadata operacional normalizada por Developer Diagnostics.
     </p>
   </div>
 </section>
@@ -16,37 +16,135 @@
 <section class="py-4">
   <div class="container">
     <div class="row g-3 mb-4">
-      <div class="col-sm-6 col-lg-3">
-        <div class="card h-100"><div class="card-body">
-          <p class="text-muted small mb-1">Eventos visibles</p>
-          <p class="fs-4 fw-bold mb-0">{{ estado_dev.total_eventos_visibles }}</p>
-        </div></div>
+      <div class="col-sm-6 col-xl-3">
+        <div class="card h-100">
+          <div class="card-body">
+            <p class="text-muted small mb-1">Eventos visibles</p>
+            <p class="fs-4 fw-bold mb-0">
+              {{ estado_dev.total_eventos_visibles }}
+            </p>
+          </div>
+        </div>
       </div>
-      <div class="col-sm-6 col-lg-3">
-        <div class="card h-100"><div class="card-body">
-          <p class="text-muted small mb-1">INFO</p>
-          <p class="fs-4 fw-bold mb-0">{{ estado_dev.resumen_eventos.INFO }}</p>
-        </div></div>
+
+      <div class="col-sm-6 col-xl-3">
+        <div class="card h-100">
+          <div class="card-body">
+            <p class="text-muted small mb-1">INFO</p>
+            <p class="fs-4 fw-bold mb-0">
+              {{ estado_dev.resumen_eventos.INFO }}
+            </p>
+          </div>
+        </div>
       </div>
-      <div class="col-sm-6 col-lg-3">
-        <div class="card h-100"><div class="card-body">
-          <p class="text-muted small mb-1">WARNING</p>
-          <p class="fs-4 fw-bold mb-0">{{ estado_dev.resumen_eventos.WARNING }}</p>
-        </div></div>
+
+      <div class="col-sm-6 col-xl-3">
+        <div class="card h-100">
+          <div class="card-body">
+            <p class="text-muted small mb-1">WARNING</p>
+            <p class="fs-4 fw-bold mb-0">
+              {{ estado_dev.resumen_eventos.WARNING }}
+            </p>
+          </div>
+        </div>
       </div>
-      <div class="col-sm-6 col-lg-3">
-        <div class="card h-100"><div class="card-body">
-          <p class="text-muted small mb-1">ERROR</p>
-          <p class="fs-4 fw-bold mb-0">{{ estado_dev.resumen_eventos.ERROR }}</p>
-        </div></div>
+
+      <div class="col-sm-6 col-xl-3">
+        <div class="card h-100">
+          <div class="card-body">
+            <p class="text-muted small mb-1">ERROR</p>
+            <p class="fs-4 fw-bold mb-0">
+              {{ estado_dev.resumen_eventos.ERROR }}
+            </p>
+          </div>
+        </div>
       </div>
     </div>
 
     <div class="card">
       <div class="card-body">
-        <h2 class="h5 mb-3">Eventos recientes</h2>
+        <div class="d-flex flex-column flex-xl-row justify-content-between gap-3 mb-4">
+          <div>
+            <h2 class="h5 mb-1">Visor de eventos</h2>
+            <p class="text-muted mb-0">
+              Hasta {{ estado_dev.limite_eventos_visibles }} eventos normalizados.
+              La búsqueda opera únicamente sobre los campos seguros mostrados.
+            </p>
+          </div>
+        </div>
 
         {% if estado_dev.eventos_recientes %}
+        <div class="dev-event-toolbar mb-3" data-dev-event-filters>
+          <div class="dev-event-search">
+            <label class="form-label small fw-semibold" for="dev-event-search">
+              Buscar
+            </label>
+            <input
+              class="form-control"
+              id="dev-event-search"
+              type="search"
+              placeholder="Evento, componente, resultado, operación…"
+              autocomplete="off"
+              data-dev-event-search
+            >
+          </div>
+
+          <div>
+            <label class="form-label small fw-semibold" for="dev-event-level">
+              Nivel
+            </label>
+            <select
+              class="form-select"
+              id="dev-event-level"
+              data-dev-event-level
+            >
+              <option value="">Todos</option>
+              <option value="INFO">INFO</option>
+              <option value="WARNING">WARNING</option>
+              <option value="ERROR">ERROR</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="form-label small fw-semibold" for="dev-event-page-size">
+              Por página
+            </label>
+            <select
+              class="form-select"
+              id="dev-event-page-size"
+              data-dev-event-page-size
+            >
+              <option value="10">10</option>
+              <option value="25" selected>25</option>
+              <option value="50">50</option>
+            </select>
+          </div>
+
+          <div class="dev-event-reset-wrap">
+            <button
+              class="btn btn-outline-primary"
+              type="button"
+              data-dev-event-reset
+            >
+              Limpiar filtros
+            </button>
+          </div>
+        </div>
+
+        <div
+          class="d-flex flex-column flex-md-row justify-content-between gap-2 mb-2"
+          aria-live="polite"
+        >
+          <p class="small text-muted mb-0" data-dev-event-summary></p>
+
+          {% if estado_dev.total_eventos_invalidos %}
+          <p class="small text-warning-emphasis mb-0">
+            {{ estado_dev.total_eventos_invalidos }}
+            línea(s) JSONL inválida(s) fueron omitidas.
+          </p>
+          {% endif %}
+        </div>
+
         <div class="table-responsive">
           <table class="table align-middle">
             <thead>
@@ -60,29 +158,96 @@
                 <th scope="col">Correlación</th>
               </tr>
             </thead>
-            <tbody>
+
+            <tbody data-dev-event-body>
               {% for evento in estado_dev.eventos_recientes %}
-              <tr>
-                <td><code>{{ evento.timestamp or "No disponible" }}</code></td>
-                <td><span class="badge text-bg-secondary">{{ evento.level }}</span></td>
+              <tr
+                data-dev-event-row
+                data-level="{{ evento.level|e }}"
+                data-search="{{ (
+                  (evento.event or '') ~ ' ' ~
+                  (evento.component or '') ~ ' ' ~
+                  (evento.outcome or '') ~ ' ' ~
+                  (evento.metadata.operation or '') ~ ' ' ~
+                  (evento.correlation_id or '')
+                )|lower|e }}"
+              >
+                <td>
+                  <code>{{ evento.timestamp or "No disponible" }}</code>
+                </td>
+
+                <td>
+                  {% if evento.level == "ERROR" %}
+                  <span class="badge text-bg-danger">ERROR</span>
+                  {% elif evento.level == "WARNING" %}
+                  <span class="badge text-bg-warning">WARNING</span>
+                  {% elif evento.level == "INFO" %}
+                  <span class="badge text-bg-success">INFO</span>
+                  {% else %}
+                  <span class="badge text-bg-secondary">
+                    {{ evento.level }}
+                  </span>
+                  {% endif %}
+                </td>
+
                 <td>{{ evento.event or "No disponible" }}</td>
                 <td>{{ evento.component or "No disponible" }}</td>
                 <td>{{ evento.outcome or "No disponible" }}</td>
-                <td><code>{{ evento.metadata.operation or "No disponible" }}</code></td>
-                <td><code>{{ evento.correlation_id or "No disponible" }}</code></td>
+                <td>
+                  <code>
+                    {{ evento.metadata.operation or "No disponible" }}
+                  </code>
+                </td>
+                <td>
+                  <code>
+                    {{ evento.correlation_id or "No disponible" }}
+                  </code>
+                </td>
               </tr>
               {% endfor %}
             </tbody>
           </table>
         </div>
-        {% else %}
-        <p class="mb-0">Todavía no hay eventos JSONL visibles para el visor.</p>
-        {% endif %}
 
-        {% if estado_dev.total_eventos_invalidos %}
-        <p class="small text-warning-emphasis mt-3 mb-0">
-          {{ estado_dev.total_eventos_invalidos }} línea(s) JSONL no pudieron normalizarse.
-        </p>
+        <div
+          class="dev-event-empty border rounded p-4 text-center"
+          data-dev-event-empty
+          hidden
+        >
+          <strong>No hay eventos que coincidan.</strong>
+          <p class="text-muted small mb-0 mt-1">
+            Cambie la búsqueda o limpie los filtros.
+          </p>
+        </div>
+
+        <div class="dev-event-pagination mt-3">
+          <button
+            class="btn btn-outline-primary btn-sm"
+            type="button"
+            data-dev-event-prev
+          >
+            Anterior
+          </button>
+
+          <span class="small text-muted" data-dev-event-page></span>
+
+          <button
+            class="btn btn-outline-primary btn-sm"
+            type="button"
+            data-dev-event-next
+          >
+            Siguiente
+          </button>
+        </div>
+
+        {% else %}
+        <div class="border rounded p-4">
+          <h2 class="h5">No hay eventos visibles</h2>
+          <p class="text-muted mb-0">
+            Genere actividad local con Developer Diagnostics activo para
+            comenzar a poblar el visor.
+          </p>
+        </div>
         {% endif %}
       </div>
     </div>

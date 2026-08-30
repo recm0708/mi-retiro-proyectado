@@ -489,6 +489,51 @@ async def archivos_developer(request: Request):
     )
 
 
+@app.post(
+    "/dev/archivos/exportar",
+)
+async def exportar_archivos_developer(request: Request):
+    """Descarga el ZIP diagnóstico sanitizado desde una sesión humana."""
+
+    _verificar_superficie_administrativa()
+
+    usuario = _obtener_usuario_sesion_web(request)
+
+    if usuario is None:
+        return RedirectResponse(
+            url="/dev",
+            status_code=303,
+        )
+
+    from fastapi.responses import FileResponse
+
+    from app.services.development_center import (
+        exportar_zip_diagnostico_sanitizado,
+    )
+
+    try:
+        ruta_zip = exportar_zip_diagnostico_sanitizado()
+    except PermissionError:
+        return RedirectResponse(
+            url="/dev/archivos?exportacion=bloqueada",
+            status_code=303,
+        )
+    except FileNotFoundError:
+        return RedirectResponse(
+            url="/dev/archivos?exportacion=sin-archivos",
+            status_code=303,
+        )
+
+    return FileResponse(
+        path=ruta_zip,
+        filename="mrp-diagnostics-export.zip",
+        media_type="application/zip",
+        headers={
+            "Cache-Control": "no-store",
+        },
+    )
+
+
 @app.get(
     "/dev/mantenimiento",
     response_class=HTMLResponse,

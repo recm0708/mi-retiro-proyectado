@@ -169,4 +169,167 @@
       iniciarSidebar();
     },
   );
+
+  function iniciarVisorEventos() {
+    const filas = Array.from(
+      document.querySelectorAll("[data-dev-event-row]"),
+    );
+
+    if (!filas.length) {
+      return;
+    }
+
+    const buscar = document.querySelector(
+      "[data-dev-event-search]",
+    );
+    const nivel = document.querySelector(
+      "[data-dev-event-level]",
+    );
+    const tamano = document.querySelector(
+      "[data-dev-event-page-size]",
+    );
+    const limpiar = document.querySelector(
+      "[data-dev-event-reset]",
+    );
+    const anterior = document.querySelector(
+      "[data-dev-event-prev]",
+    );
+    const siguiente = document.querySelector(
+      "[data-dev-event-next]",
+    );
+    const resumen = document.querySelector(
+      "[data-dev-event-summary]",
+    );
+    const paginaTexto = document.querySelector(
+      "[data-dev-event-page]",
+    );
+    const vacio = document.querySelector(
+      "[data-dev-event-empty]",
+    );
+
+    let pagina = 1;
+
+    function obtenerFiltradas() {
+      const termino = (buscar?.value || "")
+        .trim()
+        .toLocaleLowerCase();
+
+      const nivelElegido = nivel?.value || "";
+
+      return filas.filter((fila) => {
+        const coincideNivel =
+          !nivelElegido
+          || fila.dataset.level === nivelElegido;
+
+        const coincideTexto =
+          !termino
+          || (fila.dataset.search || "").includes(termino);
+
+        return coincideNivel && coincideTexto;
+      });
+    }
+
+    function renderizar() {
+      const filtradas = obtenerFiltradas();
+      const porPagina = Number.parseInt(
+        tamano?.value || "25",
+        10,
+      );
+
+      const paginas = Math.max(
+        1,
+        Math.ceil(filtradas.length / porPagina),
+      );
+
+      pagina = Math.min(
+        Math.max(1, pagina),
+        paginas,
+      );
+
+      const inicio = (pagina - 1) * porPagina;
+      const fin = inicio + porPagina;
+
+      filas.forEach((fila) => {
+        fila.hidden = true;
+      });
+
+      filtradas
+        .slice(inicio, fin)
+        .forEach((fila) => {
+          fila.hidden = false;
+        });
+
+      if (resumen) {
+        resumen.textContent =
+          `${filtradas.length} de ${filas.length} evento(s)`;
+      }
+
+      if (paginaTexto) {
+        paginaTexto.textContent =
+          `Página ${pagina} de ${paginas}`;
+      }
+
+      if (anterior) {
+        anterior.disabled =
+          pagina <= 1 || filtradas.length === 0;
+      }
+
+      if (siguiente) {
+        siguiente.disabled =
+          pagina >= paginas || filtradas.length === 0;
+      }
+
+      if (vacio) {
+        vacio.hidden = filtradas.length !== 0;
+      }
+    }
+
+    buscar?.addEventListener("input", () => {
+      pagina = 1;
+      renderizar();
+    });
+
+    nivel?.addEventListener("change", () => {
+      pagina = 1;
+      renderizar();
+    });
+
+    tamano?.addEventListener("change", () => {
+      pagina = 1;
+      renderizar();
+    });
+
+    limpiar?.addEventListener("click", () => {
+      if (buscar) {
+        buscar.value = "";
+      }
+
+      if (nivel) {
+        nivel.value = "";
+      }
+
+      pagina = 1;
+      renderizar();
+
+      buscar?.focus();
+    });
+
+    anterior?.addEventListener("click", () => {
+      pagina -= 1;
+      renderizar();
+    });
+
+    siguiente?.addEventListener("click", () => {
+      pagina += 1;
+      renderizar();
+    });
+
+    renderizar();
+  }
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    iniciarVisorEventos,
+  );
+
 })();
