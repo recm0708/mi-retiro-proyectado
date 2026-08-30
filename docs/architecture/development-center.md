@@ -1,6 +1,6 @@
 # DEV.2 R1/R2/R3/R4/R5 — Centro de desarrollo
 
-**Estado general:** DEV.2 R1–R4 preservados; R5 integrado, aceptado y publicado como G118/E04; R6 queda como candidato G119/E05.
+**Estado general:** DEV.2 R1–R4 preservados; R5 integrado, aceptado y publicado como G118/E04; R6 está implementado en la rama candidata G119/E05 y permanece pendiente de PR/CI/integración.
 
 **Estado R1:** integrado en `main` mediante PR #37.
 
@@ -210,7 +210,7 @@ PR #107 / merge `bc97db0` y sus validaciones, esta promoción materializa
 G118/E04 como `0.1.18.04-beta`; G119/E05 (`0.1.19.05-beta`) queda reservado
 para DEV.2 R6.
 
-## Próximo alcance: DEV.2 R6
+## Alcance implementado: DEV.2 R6
 
 R6 no duplica la aplicación previsional pública. Evoluciona únicamente el Portal Developer a una arquitectura multipágina:
 

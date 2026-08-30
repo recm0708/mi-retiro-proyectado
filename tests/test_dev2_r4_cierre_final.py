@@ -22,7 +22,8 @@ class TestDev2R4CierreFinal(unittest.TestCase):
         self.assertIn(
             "**Estado general:** DEV.2 R1–R4 preservados; "
             "R5 integrado, aceptado y publicado como G118/E04; "
-            "R6 queda como candidato G119/E05.",
+            "R6 está implementado en la rama candidata G119/E05 "
+            "y permanece pendiente de PR/CI/integración.",
             documento,
         )
         self.assertIn("## Alcance de R5", documento)
@@ -94,8 +95,9 @@ class TestDev2R4CierreFinal(unittest.TestCase):
         arquitectura = self._leer("docs/architecture/system-architecture.md")
 
         self.assertIn(
-            "**Última actualización técnica:** DEV.2 R5 — Portal Developer "
-            "y separación de acceso web/Bearer — 2026-08-28",
+            "**Última actualización técnica:** DEV.2 R6 — Portal Developer "
+            "multipágina, identidad, observabilidad, mantenimiento, seguridad "
+            "y privacidad — 2026-08-30",
             arquitectura,
         )
         self.assertIn("`/dev` como entrada humana canónica", arquitectura)

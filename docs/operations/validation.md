@@ -736,6 +736,41 @@ Inventario vigente: **182 módulos**.
 
 - `tests/test_dev2_r6_security_maintenance_privacy.py`
 
+### DEV.2 R6.8 — cierre técnico pre-PR
+
+DEV.2 R6 completa su desarrollo funcional sobre la rama
+`feat/dev2-r6-portal-developer` manteniendo G119/E05 como candidato reservado.
+Este cierre no modifica todavía `VERSION`, `accepted_count`, el ledger aceptado
+ni el manifiesto de publicación vigente de G118/E04.
+
+Estado técnico auditado antes del PR:
+
+- último commit funcional firmado: `62e3c4eb800115122cc3d462f5acd76bfd6fe859`;
+- `pytest`: **1309 passed / 6045 subtests passed**;
+- `unittest`: **1269 tests OK**;
+- inventario: **182 módulos de pruebas**;
+- `python -m compileall -q app tests`: OK;
+- `python -m pip check`: sin dependencias rotas;
+- sintaxis de `app/static/js/developer_portal.js`: OK;
+- `git diff --check` y `git diff --cached --check`: limpios en el gate final;
+- RBAC explícito aplicado a diagnóstico, eventos, archivos, mantenimiento,
+  privacidad, perfil y acceso técnico;
+- CSRF, revalidación de contraseña y revocación de sesiones protegen las
+  operaciones sensibles;
+- no se incorporan bases SQLite, backups, ZIP diagnósticos, logs ni secretos.
+
+Estado revision-aware durante este cierre:
+
+- versión canónica publicada: `0.1.18.04-beta` — G118/E04;
+- `accepted_count = 118`;
+- siguiente Global reservado: G119;
+- candidato: DEV.2 R6 — G119/E05 (`0.1.19.05-beta`);
+- G119 no se considera aceptado hasta superar PR, CI, integración y
+  revalidación sobre `main`;
+- la promoción, el tag firmado y el GitHub Release pertenecen a una etapa
+  posterior y separada.
+
+
 ## 4. Categorías
 
 - núcleo/servicios;
