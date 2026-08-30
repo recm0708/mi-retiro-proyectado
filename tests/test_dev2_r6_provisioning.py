@@ -154,6 +154,10 @@ class TestDev2R6Provisioning(unittest.TestCase):
             self.assertTrue(
                 actualizado.debe_cambiar_password
             )
+            self.assertEqual(
+                2,
+                actualizado.revision_seguridad,
+            )
             self.assertTrue(
                 verificar_password(
                     "MRP-Operador-Nueva-2026",
@@ -253,6 +257,10 @@ class TestDev2R6Provisioning(unittest.TestCase):
             self.assertNotEqual(
                 codigo_anterior,
                 codigo_nuevo,
+            )
+            self.assertEqual(
+                2,
+                actualizado.revision_seguridad,
             )
             self.assertTrue(
                 verificar_password(

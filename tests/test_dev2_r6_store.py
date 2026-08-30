@@ -312,6 +312,59 @@ class TestDev2R6DeveloperStore(unittest.TestCase):
                 RolDeveloper.ADMINISTRADOR,
                 actualizado.rol,
             )
+            self.assertEqual(
+                2,
+                actualizado.revision_seguridad,
+            )
+
+
+    def test_esquema_previo_migra_revision_seguridad(self):
+        """Una base R6 inicial previa recibe security_version sin perderse."""
+
+        with TemporaryDirectory() as temp:
+            ruta = self._ruta(temp)
+
+            inicializar_almacen_developer(
+                ruta
+            )
+
+            conexion = sqlite3.connect(
+                ruta
+            )
+
+            try:
+                conexion.execute(
+                    """
+                    ALTER TABLE developer_users
+                    DROP COLUMN security_version
+                    """
+                )
+                conexion.commit()
+            finally:
+                conexion.close()
+
+            inicializar_almacen_developer(
+                ruta
+            )
+
+            conexion = sqlite3.connect(
+                ruta
+            )
+
+            try:
+                columnas = {
+                    fila[1]
+                    for fila in conexion.execute(
+                        "PRAGMA table_info(developer_users)"
+                    ).fetchall()
+                }
+            finally:
+                conexion.close()
+
+            self.assertIn(
+                "security_version",
+                columnas,
+            )
 
 
 if __name__ == "__main__":

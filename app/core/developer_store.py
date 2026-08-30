@@ -37,6 +37,7 @@ class UsuarioDeveloper:
     nombre_visible: str
     rol: RolDeveloper
     password_hash: str = field(repr=False)
+    revision_seguridad: int = 1
     activo: bool = True
     debe_cambiar_password: bool = False
     es_propietario: bool = False
@@ -152,6 +153,8 @@ CREATE TABLE IF NOT EXISTS developer_users (
         CHECK (is_active IN (0, 1)),
     must_change_password INTEGER NOT NULL DEFAULT 0
         CHECK (must_change_password IN (0, 1)),
+    security_version INTEGER NOT NULL DEFAULT 1
+        CHECK (security_version >= 1),
     is_owner INTEGER NOT NULL DEFAULT 0
         CHECK (is_owner IN (0, 1)),
     avatar_path TEXT,
@@ -237,6 +240,28 @@ END;
 """
 
 
+def _migrar_esquema_developer(
+    conexion: sqlite3.Connection,
+) -> None:
+    """Migra de forma aditiva bases Developer creadas por revisiones previas."""
+
+    columnas = {
+        fila["name"]
+        for fila in conexion.execute(
+            "PRAGMA table_info(developer_users)"
+        ).fetchall()
+    }
+
+    if "security_version" not in columnas:
+        conexion.execute(
+            """
+            ALTER TABLE developer_users
+            ADD COLUMN security_version INTEGER NOT NULL
+            DEFAULT 1 CHECK (security_version >= 1)
+            """
+        )
+
+
 def inicializar_almacen_developer(
     ruta: str | Path | None = None,
 ) -> Path:
@@ -246,6 +271,7 @@ def inicializar_almacen_developer(
 
     with _conectar(destino) as conexion:
         conexion.executescript(_ESQUEMA)
+        _migrar_esquema_developer(conexion)
 
     return destino
 
@@ -261,6 +287,7 @@ def _fila_a_usuario(
         nombre_visible=fila["display_name"],
         rol=RolDeveloper(fila["role"]),
         password_hash=fila["password_hash"],
+        revision_seguridad=int(fila["security_version"]),
         recovery_code_hash=fila["recovery_code_hash"],
         activo=bool(fila["is_active"]),
         debe_cambiar_password=bool(
@@ -571,6 +598,7 @@ def cambiar_rol_usuario(
             UPDATE developer_users
             SET
                 role = ?,
+                security_version = security_version + 1,
                 updated_at = ?
             WHERE id = ?
             """,
@@ -656,6 +684,7 @@ def actualizar_password_usuario(
             SET
                 password_hash = ?,
                 must_change_password = ?,
+                security_version = security_version + 1,
                 updated_at = ?
             WHERE id = ?
             """,
@@ -713,6 +742,7 @@ def rotar_credenciales_propietario(
                 password_hash = ?,
                 recovery_code_hash = ?,
                 must_change_password = 0,
+                security_version = security_version + 1,
                 updated_at = ?
             WHERE
                 id = ?
