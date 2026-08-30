@@ -1,0 +1,68 @@
+{% extends "dev_base.html" %}
+
+{% block title %}Archivos · Portal Developer · {{ app_name }}{% endblock %}
+
+{% block content %}
+<section class="hero-section py-5">
+  <div class="container">
+    <span class="dev-kicker">Diagnósticos locales</span>
+    <h1 class="display-6 fw-bold mb-3">Archivos</h1>
+    <p class="lead mb-0">
+      Inventario conocido de archivos generados por el entorno técnico.
+    </p>
+  </div>
+</section>
+
+<section class="py-4" aria-labelledby="archivos-dev-title">
+  <div class="container">
+    <div class="card">
+      <div class="card-body">
+        <div class="d-flex flex-column flex-md-row justify-content-between gap-3 mb-3">
+          <div>
+            <h2 id="archivos-dev-title" class="h5 mb-1">
+              Archivos diagnósticos conocidos
+            </h2>
+            <p class="text-muted mb-0">
+              {{ estado_dev.total_archivos_existentes }} archivo(s),
+              {{ estado_dev.total_bytes }} byte(s).
+            </p>
+          </div>
+
+          {% if estado_dev.exportacion_zip_disponible %}
+          <span class="badge text-bg-success align-self-start">
+            Exportación disponible
+          </span>
+          {% else %}
+          <span class="badge text-bg-secondary align-self-start">
+            Exportación no disponible
+          </span>
+          {% endif %}
+        </div>
+
+        <div class="table-responsive">
+          <table class="table align-middle">
+            <thead>
+              <tr>
+                <th scope="col">Archivo</th>
+                <th scope="col">Existe</th>
+                <th scope="col">Tamaño</th>
+                <th scope="col">Actualizado UTC</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for archivo in estado_dev.archivos_diagnostico %}
+              <tr>
+                <th scope="row"><code>{{ archivo.nombre }}</code></th>
+                <td>{{ "Sí" if archivo.existe else "No" }}</td>
+                <td>{{ archivo.tamano_bytes }} byte(s)</td>
+                <td>{{ archivo.actualizado_utc or "No disponible" }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

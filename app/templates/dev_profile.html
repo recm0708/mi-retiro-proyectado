@@ -1,0 +1,88 @@
+{% extends "dev_base.html" %}
+
+{% block title %}Perfil · Portal Developer · {{ app_name }}{% endblock %}
+
+{% block content %}
+<section class="hero-section py-5">
+  <div class="container">
+    <span class="dev-kicker">Cuenta Developer</span>
+    <h1 class="display-6 fw-bold mb-3">Perfil</h1>
+    <p class="lead mb-0">
+      Identidad asociada a tu sesión del Portal Developer.
+    </p>
+  </div>
+</section>
+
+<section class="py-4">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-5">
+        <article class="card h-100">
+          <div class="card-body p-4">
+            <div class="dev-profile-summary">
+              <div class="dev-avatar dev-avatar-lg" aria-hidden="true">
+                {{ dev_iniciales }}
+              </div>
+
+              <div>
+                <h2 class="h4 mb-1">
+                  {{ dev_nombre_presentacion }}
+                </h2>
+                <p class="text-muted mb-2">
+                  @{{ dev_usuario.usuario }}
+                </p>
+                <span class="badge text-bg-primary">
+                  {{ dev_rol_etiqueta }}
+                </span>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="col-lg-7">
+        <article class="card h-100">
+          <div class="card-body p-4">
+            <h2 class="h5">Seguridad de la cuenta</h2>
+
+            <dl class="dev-detail-list mb-0">
+              <div>
+                <dt>Estado</dt>
+                <dd>
+                  {% if dev_usuario.activo %}
+                  <span class="badge text-bg-success">Activa</span>
+                  {% else %}
+                  <span class="badge text-bg-danger">Desactivada</span>
+                  {% endif %}
+                </dd>
+              </div>
+
+              <div>
+                <dt>Rol</dt>
+                <dd>{{ dev_rol_etiqueta }}</dd>
+              </div>
+
+              <div>
+                <dt>Revisión de seguridad</dt>
+                <dd>{{ dev_usuario.revision_seguridad }}</dd>
+              </div>
+
+              <div>
+                <dt>Cambio obligatorio de contraseña</dt>
+                <dd>
+                  {{ "Sí" if dev_usuario.debe_cambiar_password else "No" }}
+                </dd>
+              </div>
+            </dl>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <div class="alert alert-secondary mt-4 mb-0" role="note">
+      La edición del perfil, avatar y cambio de contraseña se habilitarán
+      mediante operaciones protegidas en una revisión posterior de R6.
+    </div>
+  </div>
+</section>
+{% endblock %}

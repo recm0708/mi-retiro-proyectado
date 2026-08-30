@@ -1,0 +1,47 @@
+{% extends "dev_base.html" %}
+
+{% block title %}Privacidad · Portal Developer · {{ app_name }}{% endblock %}
+
+{% block content %}
+<section class="hero-section py-5">
+  <div class="container">
+    <span class="dev-kicker">Protección de datos</span>
+    <h1 class="display-6 fw-bold mb-3">Privacidad</h1>
+    <p class="lead mb-0">
+      Advertencias y controles aplicables a los datos del entorno Developer.
+    </p>
+  </div>
+</section>
+
+<section class="py-4" aria-labelledby="privacidad-dev-title">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-6">
+        <article class="card h-100 border-warning">
+          <div class="card-body">
+            <h2 id="privacidad-dev-title" class="h5">Advertencias</h2>
+            <ul class="mb-0">
+              {% for advertencia in estado_dev.advertencias %}
+              <li>{{ advertencia }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        </article>
+      </div>
+
+      <div class="col-lg-6">
+        <article class="card h-100">
+          <div class="card-body">
+            <h2 class="h5">Controles de privacidad</h2>
+            <ul class="mb-0">
+              {% for control in estado_dev.controles_privacidad %}
+              <li>{{ control }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

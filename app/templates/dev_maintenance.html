@@ -1,0 +1,39 @@
+{% extends "dev_base.html" %}
+
+{% block title %}Mantenimiento · Portal Developer · {{ app_name }}{% endblock %}
+
+{% block content %}
+<section class="hero-section py-5">
+  <div class="container">
+    <span class="dev-kicker">Operación controlada</span>
+    <h1 class="display-6 fw-bold mb-3">Mantenimiento</h1>
+    <p class="lead mb-0">
+      Área administrativa reservada para operaciones técnicas autorizadas.
+    </p>
+  </div>
+</section>
+
+<section class="py-4">
+  <div class="container">
+    <div class="card">
+      <div class="card-body p-4">
+        <div class="d-flex gap-3 align-items-start">
+          <div>
+            <h2 class="h5">Superficie preparada</h2>
+            <p class="mb-2">
+              La arquitectura de esta página ya está disponible, pero las
+              operaciones de mantenimiento todavía no se habilitan desde
+              este punto de R6.
+            </p>
+            <p class="text-muted mb-0">
+              Las acciones operativas y destructivas se incorporarán con
+              autorización por rol, confirmación explícita, revalidación
+              y auditoría.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -414,3 +414,24 @@ simulaciones y sus cookies nunca forman parte de Developer Diagnostics.
 AUD.SEC2 R1 corrige la ruta POST de login para respetar el kill switch, limita
 el fallback de sesión a errores 401, convierte logout en POST y extiende
 `Cache-Control: no-store` a `/dev/`.
+
+## Portal Developer multipágina
+
+El Portal Developer mantiene una superficie humana autenticada separada del acceso técnico programático. Todas sus páginas comparten la misma sesión Developer, el mismo sistema visual de la aplicación y el control administrativo de disponibilidad.
+
+Las rutas humanas vigentes son:
+
+- `/dev`: resumen y entrada canónica del Portal Developer.
+- `/dev/diagnostico`: autodiagnóstico técnico del entorno local.
+- `/dev/eventos`: visor y resumen de eventos de observabilidad.
+- `/dev/archivos`: inventario de archivos diagnósticos conocidos.
+- `/dev/mantenimiento`: superficie reservada para operaciones administrativas controladas.
+- `/dev/privacidad`: advertencias y controles de privacidad del entorno Developer.
+- `/dev/perfil`: información no secreta de la cuenta Developer autenticada.
+- `/dev/acceso-tecnico`: superficie humana destinada a la administración futura de credenciales técnicas Bearer.
+
+La navegación humana utiliza un sidebar colapsable. El acceso a Perfil y Acceso técnico permanece dentro del menú de cuenta para separar las herramientas operativas de las funciones asociadas a la identidad del usuario.
+
+La apariencia visual no mantiene una paleta Developer independiente. `developer-portal.css` consume los tokens semánticos definidos por `design-system.css`, mientras que `theme.js` conserva una única preferencia para Automático, Claro, Oscuro y Alto contraste. De esta forma, los cambios futuros del sistema visual se propagan tanto a la aplicación principal como al Portal Developer.
+
+El endpoint histórico `/dev/centro-desarrollo` permanece temporalmente como superficie de compatibilidad para el contrato técnico Bearer y no forma parte de la navegación humana del Portal Developer.

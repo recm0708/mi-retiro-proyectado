@@ -1,0 +1,122 @@
+{% extends "dev_base.html" %}
+
+{% block title %}Resumen · Portal Developer · {{ app_name }}{% endblock %}
+
+{% block content %}
+<section class="hero-section py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-xl-10">
+        <span class="dev-kicker">Centro de desarrollo</span>
+        <h1 class="display-6 fw-bold mb-3">Resumen del Portal Developer</h1>
+        <p class="lead mb-0">
+          Estado general del entorno técnico y acceso a las herramientas
+          disponibles para tu cuenta.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-4" aria-labelledby="dev-resumen-estado">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-md-6 col-xl-4">
+        <article class="card h-100">
+          <div class="card-body">
+            <p class="dev-kicker mb-2">Entorno</p>
+            <h2 id="dev-resumen-estado" class="h5">Modo desarrollador</h2>
+            <p class="mb-3">
+              {% if estado_dev.dev_mode_activo %}
+              <span class="badge text-bg-success">Activo</span>
+              {% else %}
+              <span class="badge text-bg-secondary">Desactivado</span>
+              {% endif %}
+            </p>
+            <p class="mb-0">
+              Versión <code>{{ estado_dev.app_version }}</code>
+            </p>
+          </div>
+        </article>
+      </div>
+
+      <div class="col-md-6 col-xl-4">
+        <article class="card h-100">
+          <div class="card-body">
+            <p class="dev-kicker mb-2">Diagnóstico</p>
+            <h2 class="h5">Estado técnico</h2>
+            <p class="mb-3">
+              Estado global:
+              <strong>{{ estado_dev.resumen_autodiagnostico.estado_global }}</strong>
+            </p>
+            <a class="btn btn-outline-primary btn-sm" href="/dev/diagnostico">
+              Abrir diagnóstico
+            </a>
+          </div>
+        </article>
+      </div>
+
+      <div class="col-md-6 col-xl-4">
+        <article class="card h-100">
+          <div class="card-body">
+            <p class="dev-kicker mb-2">Observabilidad</p>
+            <h2 class="h5">Eventos recientes</h2>
+            <p class="mb-3">
+              {{ estado_dev.total_eventos_visibles }} evento(s) visibles.
+            </p>
+            <a class="btn btn-outline-primary btn-sm" href="/dev/eventos">
+              Abrir eventos
+            </a>
+          </div>
+        </article>
+      </div>
+
+      <div class="col-md-6 col-xl-4">
+        <article class="card h-100">
+          <div class="card-body">
+            <p class="dev-kicker mb-2">Archivos</p>
+            <h2 class="h5">Diagnósticos locales</h2>
+            <p class="mb-3">
+              {{ estado_dev.total_archivos_existentes }} archivo(s),
+              {{ estado_dev.total_bytes }} byte(s).
+            </p>
+            <a class="btn btn-outline-primary btn-sm" href="/dev/archivos">
+              Abrir archivos
+            </a>
+          </div>
+        </article>
+      </div>
+
+      <div class="col-md-6 col-xl-4">
+        <article class="card h-100">
+          <div class="card-body">
+            <p class="dev-kicker mb-2">Operación</p>
+            <h2 class="h5">Mantenimiento</h2>
+            <p class="mb-3">
+              Área reservada para operaciones administrativas controladas.
+            </p>
+            <a class="btn btn-outline-primary btn-sm" href="/dev/mantenimiento">
+              Abrir mantenimiento
+            </a>
+          </div>
+        </article>
+      </div>
+
+      <div class="col-md-6 col-xl-4">
+        <article class="card h-100">
+          <div class="card-body">
+            <p class="dev-kicker mb-2">Protección</p>
+            <h2 class="h5">Privacidad</h2>
+            <p class="mb-3">
+              Controles y advertencias aplicables al entorno Developer.
+            </p>
+            <a class="btn btn-outline-primary btn-sm" href="/dev/privacidad">
+              Abrir privacidad
+            </a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

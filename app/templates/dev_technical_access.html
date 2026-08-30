@@ -1,0 +1,51 @@
+{% extends "dev_base.html" %}
+
+{% block title %}Acceso técnico · Portal Developer · {{ app_name }}{% endblock %}
+
+{% block content %}
+<section class="hero-section py-5">
+  <div class="container">
+    <span class="dev-kicker">Integraciones</span>
+    <h1 class="display-6 fw-bold mb-3">Acceso técnico</h1>
+    <p class="lead mb-0">
+      Credenciales independientes para automatización y clientes técnicos.
+    </p>
+  </div>
+</section>
+
+<section class="py-4">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-7">
+        <article class="card h-100">
+          <div class="card-body p-4">
+            <h2 class="h5">Credenciales Bearer</h2>
+            <p>
+              Las credenciales técnicas estarán separadas de tu contraseña
+              humana y se administrarán desde esta superficie.
+            </p>
+
+            <div class="alert alert-info mb-0" role="note">
+              La gestión de tokens todavía no está habilitada. R6 almacenará
+              solamente el digest de cada credencial y mostrará el valor
+              original una única vez al crearlo.
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="col-lg-5">
+        <article class="card h-100">
+          <div class="card-body p-4">
+            <h2 class="h5">Contrato programático</h2>
+            <p class="text-muted">
+              Los clientes técnicos utilizarán:
+            </p>
+            <pre class="dev-code-example mb-0"><code>Authorization: Bearer &lt;token&gt;</code></pre>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,91 @@
+{% extends "dev_base.html" %}
+
+{% block title %}Eventos · Portal Developer · {{ app_name }}{% endblock %}
+
+{% block content %}
+<section class="hero-section py-5">
+  <div class="container">
+    <span class="dev-kicker">Observabilidad</span>
+    <h1 class="display-6 fw-bold mb-3">Eventos</h1>
+    <p class="lead mb-0">
+      Resumen y eventos recientes registrados por Developer Diagnostics.
+    </p>
+  </div>
+</section>
+
+<section class="py-4">
+  <div class="container">
+    <div class="row g-3 mb-4">
+      <div class="col-sm-6 col-lg-3">
+        <div class="card h-100"><div class="card-body">
+          <p class="text-muted small mb-1">Eventos visibles</p>
+          <p class="fs-4 fw-bold mb-0">{{ estado_dev.total_eventos_visibles }}</p>
+        </div></div>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <div class="card h-100"><div class="card-body">
+          <p class="text-muted small mb-1">INFO</p>
+          <p class="fs-4 fw-bold mb-0">{{ estado_dev.resumen_eventos.INFO }}</p>
+        </div></div>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <div class="card h-100"><div class="card-body">
+          <p class="text-muted small mb-1">WARNING</p>
+          <p class="fs-4 fw-bold mb-0">{{ estado_dev.resumen_eventos.WARNING }}</p>
+        </div></div>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <div class="card h-100"><div class="card-body">
+          <p class="text-muted small mb-1">ERROR</p>
+          <p class="fs-4 fw-bold mb-0">{{ estado_dev.resumen_eventos.ERROR }}</p>
+        </div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <h2 class="h5 mb-3">Eventos recientes</h2>
+
+        {% if estado_dev.eventos_recientes %}
+        <div class="table-responsive">
+          <table class="table align-middle">
+            <thead>
+              <tr>
+                <th scope="col">Fecha UTC</th>
+                <th scope="col">Nivel</th>
+                <th scope="col">Evento</th>
+                <th scope="col">Componente</th>
+                <th scope="col">Resultado</th>
+                <th scope="col">Operación</th>
+                <th scope="col">Correlación</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for evento in estado_dev.eventos_recientes %}
+              <tr>
+                <td><code>{{ evento.timestamp or "No disponible" }}</code></td>
+                <td><span class="badge text-bg-secondary">{{ evento.level }}</span></td>
+                <td>{{ evento.event or "No disponible" }}</td>
+                <td>{{ evento.component or "No disponible" }}</td>
+                <td>{{ evento.outcome or "No disponible" }}</td>
+                <td><code>{{ evento.metadata.operation or "No disponible" }}</code></td>
+                <td><code>{{ evento.correlation_id or "No disponible" }}</code></td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        {% else %}
+        <p class="mb-0">Todavía no hay eventos JSONL visibles para el visor.</p>
+        {% endif %}
+
+        {% if estado_dev.total_eventos_invalidos %}
+        <p class="small text-warning-emphasis mt-3 mb-0">
+          {{ estado_dev.total_eventos_invalidos }} línea(s) JSONL no pudieron normalizarse.
+        </p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

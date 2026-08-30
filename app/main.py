@@ -437,12 +437,112 @@ async def portal_developer(request: Request):
     )
 
     if usuario is not None:
-        return _render_centro_desarrollo(
+        return _render_pagina_developer(
             request,
             usuario=usuario,
+            plantilla="dev_dashboard.html",
+            pagina_activa="resumen",
         )
 
     return _render_login_developer(request)
+
+
+@app.get(
+    "/dev/diagnostico",
+    response_class=HTMLResponse,
+)
+async def diagnostico_developer(request: Request):
+    """Muestra el autodiagnóstico técnico del Portal Developer."""
+
+    return _render_pagina_developer_autenticada(
+        request,
+        plantilla="dev_diagnostics.html",
+        pagina_activa="diagnostico",
+    )
+
+
+@app.get(
+    "/dev/eventos",
+    response_class=HTMLResponse,
+)
+async def eventos_developer(request: Request):
+    """Muestra los eventos de observabilidad del Portal Developer."""
+
+    return _render_pagina_developer_autenticada(
+        request,
+        plantilla="dev_events.html",
+        pagina_activa="eventos",
+    )
+
+
+@app.get(
+    "/dev/archivos",
+    response_class=HTMLResponse,
+)
+async def archivos_developer(request: Request):
+    """Muestra el inventario técnico del Portal Developer."""
+
+    return _render_pagina_developer_autenticada(
+        request,
+        plantilla="dev_files.html",
+        pagina_activa="archivos",
+    )
+
+
+@app.get(
+    "/dev/mantenimiento",
+    response_class=HTMLResponse,
+)
+async def mantenimiento_developer(request: Request):
+    """Muestra la superficie de mantenimiento del Portal Developer."""
+
+    return _render_pagina_developer_autenticada(
+        request,
+        plantilla="dev_maintenance.html",
+        pagina_activa="mantenimiento",
+    )
+
+
+@app.get(
+    "/dev/privacidad",
+    response_class=HTMLResponse,
+)
+async def privacidad_developer(request: Request):
+    """Muestra los controles de privacidad del Portal Developer."""
+
+    return _render_pagina_developer_autenticada(
+        request,
+        plantilla="dev_privacy.html",
+        pagina_activa="privacidad",
+    )
+
+
+@app.get(
+    "/dev/perfil",
+    response_class=HTMLResponse,
+)
+async def perfil_developer(request: Request):
+    """Muestra la identidad y preferencias de la cuenta Developer."""
+
+    return _render_pagina_developer_autenticada(
+        request,
+        plantilla="dev_profile.html",
+        pagina_activa="perfil",
+    )
+
+
+@app.get(
+    "/dev/acceso-tecnico",
+    response_class=HTMLResponse,
+)
+async def acceso_tecnico_developer(request: Request):
+    """Muestra la superficie humana de credenciales técnicas Developer."""
+
+    return _render_pagina_developer_autenticada(
+        request,
+        plantilla="dev_technical_access.html",
+        pagina_activa="acceso_tecnico",
+    )
 
 
 @app.get(
@@ -702,19 +802,169 @@ def _sesion_web_admin_valida(
     )
 
 
+def _nombre_presentacion_developer(
+    nombre_visible: str,
+) -> str:
+    """Normaliza el nombre únicamente para presentación visual."""
+
+    limpio = " ".join(
+        nombre_visible.strip().split()
+    )
+
+    if not limpio:
+        return ""
+
+    if limpio == limpio.casefold():
+        return " ".join(
+            parte[:1].upper() + parte[1:]
+            for parte in limpio.split()
+        )
+
+    return limpio
+
+
+def _iniciales_nombre_developer(
+    nombre_visible: str,
+) -> str:
+    """Obtiene hasta dos iniciales seguras para la identidad visual."""
+
+    partes = [
+        parte
+        for parte in nombre_visible.strip().split()
+        if parte
+    ]
+
+    if not partes:
+        return "?"
+
+    if len(partes) == 1:
+        return partes[0][0].upper()
+
+    return (
+        partes[0][0]
+        + partes[-1][0]
+    ).upper()
+
+
+def _revision_assets_developer() -> str:
+    """Genera una revisión local a partir de los assets Developer."""
+
+    rutas = (
+        Path("app/static/css/developer-portal.css"),
+        Path("app/static/js/developer_portal.js"),
+    )
+
+    revisiones = []
+
+    for ruta_asset in rutas:
+        try:
+            revisiones.append(
+                str(ruta_asset.stat().st_mtime_ns)
+            )
+        except OSError:
+            revisiones.append("0")
+
+    return "-".join(revisiones)
+
+
 def _contexto_developer(
     *,
     autenticado: bool,
     usuario: UsuarioDeveloper | None = None,
+    pagina_activa: str = "resumen",
 ) -> dict[str, object]:
     """Construye el contexto visual común del shell Developer."""
 
+    etiquetas_rol = {
+        "owner": "Propietario",
+        "admin": "Administrador",
+        "operator": "Operador",
+        "auditor": "Auditor",
+    }
+
     return {
-        "pagina_activa": "portal_developer",
+        "pagina_activa": pagina_activa,
         "version": APP_VERSION,
+        "app_author": APP_AUTHOR,
+        "dev_assets_revision": _revision_assets_developer(),
         "dev_autenticado": autenticado,
         "dev_usuario": usuario,
+        "dev_nombre_presentacion": (
+            _nombre_presentacion_developer(
+                usuario.nombre_visible
+            )
+            if usuario is not None
+            else None
+        ),
+        "dev_iniciales": (
+            _iniciales_nombre_developer(
+                usuario.nombre_visible
+            )
+            if usuario is not None
+            else None
+        ),
+        "dev_rol_etiqueta": (
+            etiquetas_rol.get(
+                usuario.rol.value,
+                usuario.rol.value,
+            )
+            if usuario is not None
+            else None
+        ),
     }
+
+
+def _render_pagina_developer(
+    request: Request,
+    *,
+    usuario: UsuarioDeveloper,
+    plantilla: str,
+    pagina_activa: str,
+):
+    """Renderiza una página humana autenticada del Portal Developer."""
+
+    contexto = _contexto_developer(
+        autenticado=True,
+        usuario=usuario,
+        pagina_activa=pagina_activa,
+    )
+    contexto["estado_dev"] = (
+        construir_estado_centro_desarrollo()
+    )
+
+    return templates.TemplateResponse(
+        request=request,
+        name=plantilla,
+        context=contexto,
+    )
+
+
+def _render_pagina_developer_autenticada(
+    request: Request,
+    *,
+    plantilla: str,
+    pagina_activa: str,
+):
+    """Exige sesión humana antes de renderizar una página Developer."""
+
+    _verificar_superficie_administrativa()
+
+    usuario = _obtener_usuario_sesion_web(
+        request
+    )
+
+    if usuario is None:
+        return RedirectResponse(
+            url="/dev",
+            status_code=303,
+        )
+
+    return _render_pagina_developer(
+        request,
+        usuario=usuario,
+        plantilla=plantilla,
+        pagina_activa=pagina_activa,
+    )
 
 
 def _render_login_developer(
