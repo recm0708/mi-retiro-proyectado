@@ -532,7 +532,7 @@ python -m pip check
 
 ## 3. Inventario actual de pruebas
 
-Inventario vigente: **171 módulos**.
+Inventario vigente: **175 módulos**.
 
 - `tests/test_accessibility_themes.py`
 - `tests/test_accessibility_ux4.py`
@@ -705,6 +705,14 @@ Inventario vigente: **171 módulos**.
 - `tests/test_ver2_version_revision_aware.py`
 - `tests/test_visual_identity_pre_r8.py`
 - `tests/test_visual_stabilization.py`
+
+### DEV.2 R6 — identidad y acceso Developer
+
+- `tests/test_dev2_r6_cli.py`
+- `tests/test_dev2_r6_identity.py`
+- `tests/test_dev2_r6_provisioning.py`
+- `tests/test_dev2_r6_store.py`
+
 
 ## 4. Categorías
 

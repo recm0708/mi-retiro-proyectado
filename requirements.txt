@@ -1,12 +1,15 @@
 # Dependencias Python de Mi Retiro Proyectado.
-# Dependencias directas mantenidas de forma explícita: fastapi, Jinja2, pydantic,
-# python-multipart, pypdf y uvicorn. El resto conserva un snapshot transitivo fijado
+# Dependencias directas mantenidas de forma explícita: argon2-cffi, fastapi,
+# Jinja2, pydantic, python-multipart, pypdf y uvicorn. El resto conserva un snapshot transitivo fijado
 # para que las instalaciones de CI y desarrollo sean reproducibles.
 # Node.js LTS es una herramienta opcional de desarrollo para validar JavaScript con `node --check`;
 # no es una dependencia de Python y no se instala mediante este archivo.
 annotated-doc==0.0.5
 annotated-types==0.8.0
 anyio==4.14.2
+argon2-cffi==25.1.0
+argon2-cffi-bindings==26.1.0
+cffi==2.1.1
 click==8.4.2
 colorama==0.4.6
 fastapi==0.141.1
@@ -17,6 +20,7 @@ httpx2==2.7.0
 idna==3.18
 Jinja2==3.1.6
 MarkupSafe==3.0.3
+pycparser==3.0
 pydantic==2.13.4
 pydantic_core==2.46.4
 python-dotenv==1.2.2
