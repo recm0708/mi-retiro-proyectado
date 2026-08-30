@@ -1,0 +1,108 @@
+{% extends "dev_base.html" %}
+
+{% block title %}Privacidad · Portal Developer · {{ app_name }}{% endblock %}
+
+{% block content %}
+<section class="hero-section py-5">
+  <div class="container">
+    <span class="dev-kicker">Protección de datos</span>
+    <h1 class="display-6 fw-bold mb-3">Privacidad</h1>
+    <p class="lead mb-0">
+      Límites de observación y garantías aplicadas al entorno Developer.
+    </p>
+  </div>
+</section>
+
+<section class="py-4">
+  <div class="container">
+    <div class="row g-3 mb-4">
+      <div class="col-sm-6 col-xl-3">
+        <div class="card h-100">
+          <div class="card-body">
+            <p class="text-muted small mb-1">Cuerpos HTTP</p>
+            <span class="badge text-bg-success">Excluidos</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-xl-3">
+        <div class="card h-100">
+          <div class="card-body">
+            <p class="text-muted small mb-1">PDF / uploads</p>
+            <span class="badge text-bg-success">Excluidos</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-xl-3">
+        <div class="card h-100">
+          <div class="card-body">
+            <p class="text-muted small mb-1">Secretos humanos</p>
+            <span class="badge text-bg-success">No observables</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-xl-3">
+        <div class="card h-100">
+          <div class="card-body">
+            <p class="text-muted small mb-1">Diagnóstico</p>
+            {% if estado_dev.dev_mode_activo %}
+            <span class="badge text-bg-warning">Activo localmente</span>
+            {% else %}
+            <span class="badge text-bg-secondary">Desactivado</span>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-xl-4">
+        <article class="card h-100">
+          <div class="card-body p-4">
+            <h2 class="h5">Controles aplicados</h2>
+
+            <ul class="dev-security-list mb-0">
+              {% for control in estado_dev.controles_privacidad %}
+              <li>{{ control }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        </article>
+      </div>
+
+      <div class="col-xl-4">
+        <article class="card h-100 border-warning">
+          <div class="card-body p-4">
+            <h2 class="h5">Advertencias operativas</h2>
+
+            <ul class="dev-security-list mb-0">
+              {% for advertencia in estado_dev.advertencias %}
+              <li>{{ advertencia }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        </article>
+      </div>
+
+      <div class="col-xl-4">
+        <article class="card h-100">
+          <div class="card-body p-4">
+            <h2 class="h5">Seguridad de la sesión</h2>
+
+            <ul class="dev-security-list mb-0">
+              <li>Sesión humana independiente de la credencial Bearer.</li>
+              <li>Cookie HttpOnly restringida a <code>/dev</code>.</li>
+              <li>Operaciones POST sensibles protegidas mediante CSRF.</li>
+              <li>Acciones críticas requieren revalidación de contraseña.</li>
+              <li>La autorización se evalúa en servidor mediante RBAC.</li>
+              <li>Los cambios de contraseña incrementan la revisión de seguridad.</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -11,6 +11,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from datetime import datetime, timezone
 import json
+import platform
 from pathlib import Path
 from typing import Any, Mapping
 
@@ -27,7 +28,7 @@ from app.core.version import APP_VERSION
 
 
 _MAX_BACKUPS_VISIBLES = 3
-_MAX_EVENTOS_VISIBLES = 12
+_MAX_EVENTOS_VISIBLES = 200
 _MAX_TEXTO_EVENTO = 120
 _ARCHIVO_PRUEBA_AUTODIAGNOSTICO = ".mrp-dev-autodiagnostico.tmp"
 _METADATA_VISIBLE = {
@@ -47,6 +48,7 @@ class ArchivoDiagnostico:
     existe: bool
     tamano_bytes: int
     actualizado_utc: str | None
+    tamano_legible: str = "0 B"
 
 
 @dataclass(frozen=True)
@@ -86,15 +88,37 @@ def _timestamp_utc(ruta: Path) -> str | None:
     ).isoformat(timespec="seconds")
 
 
+def _formatear_bytes(cantidad: int) -> str:
+    """Convierte bytes a una representación compacta y segura."""
+
+    valor = max(0, int(cantidad))
+    unidades = ("B", "KB", "MB", "GB")
+
+    indice = 0
+    cantidad_visible = float(valor)
+
+    while cantidad_visible >= 1024 and indice < len(unidades) - 1:
+        cantidad_visible /= 1024
+        indice += 1
+
+    if indice == 0:
+        return f"{valor} B"
+
+    return f"{cantidad_visible:.1f} {unidades[indice]}"
+
+
 def _resumir_archivo(ruta: Path) -> ArchivoDiagnostico:
     """Resume un archivo permitido sin abrir ni leer su contenido completo."""
 
     existe = ruta.is_file()
+    tamano = ruta.stat().st_size if existe else 0
+
     return ArchivoDiagnostico(
         nombre=ruta.name,
         existe=existe,
-        tamano_bytes=ruta.stat().st_size if existe else 0,
+        tamano_bytes=tamano,
         actualizado_utc=_timestamp_utc(ruta) if existe else None,
+        tamano_legible=_formatear_bytes(tamano),
     )
 
 
@@ -539,6 +563,17 @@ def resumir_autodiagnostico(
     }
 
 
+def _entorno_runtime_seguro() -> dict[str, str]:
+    """Describe el runtime sin hostname, usuario ni rutas locales."""
+
+    return {
+        "python": platform.python_version(),
+        "sistema": platform.system() or "No disponible",
+        "release": platform.release() or "No disponible",
+        "arquitectura": platform.machine() or "No disponible",
+    }
+
+
 def construir_estado_centro_desarrollo() -> dict[str, Any]:
     """Construye el estado seguro mostrado por la interfaz DEV.2."""
 
@@ -563,16 +598,23 @@ def construir_estado_centro_desarrollo() -> dict[str, Any]:
             "Developer Diagnostics está desactivado; active MRP_DEV_MODE=1 solo durante desarrollo.",
         )
 
+    total_bytes = sum(
+        archivo.tamano_bytes
+        for archivo in archivos_existentes
+    )
+
     return {
         "bloque": "DEV.2 R1",
         "revision_actual": "DEV.2 R2",
         "revision_autodiagnostico": "DEV.2 R3",
+        "revision_portal_observabilidad": "DEV.2 R6.4",
         "titulo": "Centro de desarrollo",
         "descripcion": (
             "Superficie interna para revisar el estado técnico de Developer Diagnostics "
             "sin exponer datos personales, datos financieros, PDFs ni secretos."
         ),
         "app_version": APP_VERSION,
+        "entorno_runtime": _entorno_runtime_seguro(),
         "dev_mode_env": ENV_DEV_MODE,
         "diagnostic_dir_env": ENV_DIAGNOSTIC_DIR,
         "dev_mode_activo": activo,
@@ -581,10 +623,12 @@ def construir_estado_centro_desarrollo() -> dict[str, Any]:
         "archivo_log_actual": ruta_log_actual().name,
         "archivos_diagnostico": [archivo.__dict__ for archivo in archivos],
         "total_archivos_existentes": len(archivos_existentes),
-        "total_bytes": sum(archivo.tamano_bytes for archivo in archivos_existentes),
+        "total_bytes": total_bytes,
+        "total_bytes_legible": _formatear_bytes(total_bytes),
         "exportacion_zip_disponible": activo and bool(archivos_existentes),
         "eventos_recientes": [evento.__dict__ for evento in eventos],
         "total_eventos_visibles": len(eventos),
+        "limite_eventos_visibles": _MAX_EVENTOS_VISIBLES,
         "total_eventos_invalidos": invalidos,
         "resumen_eventos": _resumen_por_nivel(eventos),
         "autodiagnostico": [resultado.__dict__ for resultado in autodiagnostico],

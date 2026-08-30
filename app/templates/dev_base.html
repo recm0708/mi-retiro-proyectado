@@ -3,98 +3,517 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Portal Developer local de Mi Retiro Proyectado.">
+  <meta
+    name="description"
+    content="Portal Developer local de Mi Retiro Proyectado."
+  >
   <meta name="color-scheme" content="light dark">
-  <title>{% block title %}Portal Developer · {{ app_name }}{% endblock %}</title>
 
-  <link rel="icon" href="{{ url_for('static', path='/img/brand/favicon.ico') }}" sizes="any">
-  <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', path='/img/brand/favicon-32x32.png') }}">
-  <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', path='/img/brand/apple-touch-icon.png') }}">
+  <title>
+    {% block title %}Portal Developer · {{ app_name }}{% endblock %}
+  </title>
+
+  <link
+    rel="icon"
+    href="{{ url_for('static', path='/img/brand/favicon.ico') }}"
+    sizes="any"
+  >
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="32x32"
+    href="{{ url_for('static', path='/img/brand/favicon-32x32.png') }}"
+  >
+  <link
+    rel="apple-touch-icon"
+    sizes="180x180"
+    href="{{ url_for('static', path='/img/brand/apple-touch-icon.png') }}"
+  >
 
   <script src="{{ url_for('static', path='/js/theme.js') }}"></script>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-  <link rel="stylesheet" href="{{ url_for('static', path='/css/style.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', path='/css/design-system.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', path='/css/accessibility.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', path='/css/brand.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', path='/css/developer-portal.css') }}">
+
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+    crossorigin="anonymous"
+  >
+
+  <link
+    rel="stylesheet"
+    href="{{ url_for('static', path='/css/style.css') }}"
+  >
+  <link
+    rel="stylesheet"
+    href="{{ url_for('static', path='/css/design-system.css') }}"
+  >
+  <link
+    rel="stylesheet"
+    href="{{ url_for('static', path='/css/accessibility.css') }}"
+  >
+  <link
+    rel="stylesheet"
+    href="{{ url_for('static', path='/css/brand.css') }}"
+  >
+  <link
+    rel="stylesheet"
+    href="{{ url_for('static', path='/css/developer-portal.css') }}?v={{ dev_assets_revision }}"
+  >
+
   {% block head %}{% endblock %}
 </head>
-<body class="dev-portal-body page-{{ pagina_activa|default('portal_developer') }}">
-  <a class="skip-link" href="#contenido-principal">Saltar al contenido principal</a>
+
+<body
+  class="dev-portal-body page-{{ pagina_activa|default('portal_developer') }}{% if request.query_params.get('sidebar') == 'compact' %} dev-sidebar-collapsed{% endif %}"
+>
+  <a class="skip-link" href="#contenido-principal">
+    Saltar al contenido principal
+  </a>
 
   <header class="dev-topbar sticky-top">
-    <div class="container dev-topbar-inner">
-      <a class="dev-brand" href="/dev" aria-label="{{ app_name }}, Portal Developer">
+    <div class="container-fluid dev-topbar-inner">
+
+      {% if dev_autenticado %}
+      <button
+        class="dev-menu-button"
+        type="button"
+        data-dev-sidebar-toggle
+        aria-controls="dev-sidebar"
+        aria-expanded="true"
+        aria-label="Mostrar u ocultar menú Developer"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path d="M4 7h16M4 12h16M4 17h16"></path>
+        </svg>
+      </button>
+      {% endif %}
+
+      <a
+        class="dev-brand"
+        href="/dev"
+        aria-label="{{ app_name }}, Portal Developer"
+      >
         <span class="dev-brand-mark" aria-hidden="true">
-          <img src="{{ url_for('static', path='/img/brand/logo-mark-128.png') }}" alt="" width="128" height="128">
+          <img
+            src="{{ url_for('static', path='/img/brand/logo-mark-128.png') }}"
+            alt=""
+            width="128"
+            height="128"
+          >
         </span>
+
         <span class="dev-brand-copy">
           <strong>{{ app_name }}</strong>
           <small>Portal Developer</small>
         </span>
       </a>
 
-      {% if dev_autenticado %}
-      <nav class="dev-nav" aria-label="Navegación del Portal Developer">
-        <a href="#resumen">Resumen</a>
-        <a href="#diagnostico">Diagnóstico</a>
-        <a href="#eventos">Eventos</a>
-        <a href="#archivos">Archivos</a>
-        <a href="#privacidad">Privacidad</a>
-      </nav>
-      {% endif %}
-
       <div class="dev-topbar-actions">
+
         {% if dev_autenticado %}
-        <a class="btn btn-sm dev-open-app" href="/" target="_blank" rel="noopener noreferrer">Abrir aplicación <span aria-hidden="true">↗</span></a>
+        <a
+          class="dev-open-app"
+          href="/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Abrir aplicación principal en otra pestaña"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path d="M14 5h5v5"></path>
+            <path d="M10 14 19 5"></path>
+            <path d="M19 13v6H5V5h6"></path>
+          </svg>
+          <span>Abrir app</span>
+        </a>
         {% else %}
         <span class="dev-local-badge">Entorno local</span>
         {% endif %}
 
         <div class="dropdown theme-control">
-          <button class="btn theme-trigger dropdown-toggle" type="button" id="menu-apariencia" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Cambiar apariencia" aria-describedby="ayuda-selector-tema">
-            <span class="theme-trigger-icon" aria-hidden="true">
-              <svg data-theme-icon="system" viewBox="0 0 24 24" focusable="false"><rect x="3" y="4" width="18" height="13" rx="2"></rect><path d="M8 21h8M12 17v4"></path></svg>
-              <svg data-theme-icon="light" viewBox="0 0 24 24" focusable="false"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M2 12h2M20 12h2"></path></svg>
-              <svg data-theme-icon="dark" viewBox="0 0 24 24" focusable="false"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5 8.5 8.5 0 1 0 20.5 14.2Z"></path></svg>
-              <svg data-theme-icon="contrast" viewBox="0 0 24 24" focusable="false"><circle cx="12" cy="12" r="9"></circle><path d="M12 3a9 9 0 0 1 0 18Z"></path></svg>
+          <button
+            class="btn theme-trigger dropdown-toggle"
+            type="button"
+            id="menu-apariencia"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            aria-label="Cambiar apariencia"
+            aria-describedby="ayuda-selector-tema"
+          >
+            <span
+              class="theme-trigger-icon"
+              aria-hidden="true"
+            >
+              <svg
+                data-theme-icon="system"
+                viewBox="0 0 24 24"
+                focusable="false"
+              >
+                <rect x="3" y="4" width="18" height="13" rx="2"></rect>
+                <path d="M8 21h8M12 17v4"></path>
+              </svg>
+
+              <svg
+                data-theme-icon="light"
+                viewBox="0 0 24 24"
+                focusable="false"
+              >
+                <circle cx="12" cy="12" r="4"></circle>
+                <path d="M12 2v2M12 20v2M2 12h2M20 12h2"></path>
+              </svg>
+
+              <svg
+                data-theme-icon="dark"
+                viewBox="0 0 24 24"
+                focusable="false"
+              >
+                <path
+                  d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5 8.5 8.5 0 1 0 20.5 14.2Z"
+                ></path>
+              </svg>
+
+              <svg
+                data-theme-icon="contrast"
+                viewBox="0 0 24 24"
+                focusable="false"
+              >
+                <circle cx="12" cy="12" r="9"></circle>
+                <path d="M12 3a9 9 0 0 1 0 18Z"></path>
+              </svg>
             </span>
+
             <span id="theme-trigger-label">Sistema</span>
           </button>
-          <div class="dropdown-menu dropdown-menu-end theme-menu" aria-labelledby="menu-apariencia">
-            <div class="theme-menu-heading">Apariencia</div>
-            <button class="dropdown-item theme-choice" type="button" data-theme-choice="system"><span><strong>Automático</strong><small>Seguir la apariencia del sistema</small></span></button>
-            <button class="dropdown-item theme-choice" type="button" data-theme-choice="light"><span><strong>Claro</strong><small>Superficies luminosas</small></span></button>
-            <button class="dropdown-item theme-choice" type="button" data-theme-choice="dark"><span><strong>Oscuro</strong><small>Menor luminancia</small></span></button>
+
+          <div
+            class="dropdown-menu dropdown-menu-end theme-menu"
+            aria-labelledby="menu-apariencia"
+          >
+            <div class="theme-menu-heading">
+              Apariencia
+            </div>
+
+            <button
+              class="dropdown-item theme-choice"
+              type="button"
+              data-theme-choice="system"
+            >
+              <span>
+                <strong>Automático</strong>
+                <small>Seguir la apariencia del sistema</small>
+              </span>
+            </button>
+
+            <button
+              class="dropdown-item theme-choice"
+              type="button"
+              data-theme-choice="light"
+            >
+              <span>
+                <strong>Claro</strong>
+                <small>Superficies luminosas</small>
+              </span>
+            </button>
+
+            <button
+              class="dropdown-item theme-choice"
+              type="button"
+              data-theme-choice="dark"
+            >
+              <span>
+                <strong>Oscuro</strong>
+                <small>Menor luminancia</small>
+              </span>
+            </button>
+
             <div class="dropdown-divider"></div>
-            <button class="dropdown-item theme-choice" type="button" data-theme-choice="contrast"><span><strong>Alto contraste</strong><small>Máxima diferenciación visual</small></span></button>
-            <p id="ayuda-selector-tema" class="theme-storage-note mb-0">Solo se conserva la preferencia visual.</p>
+
+            <button
+              class="dropdown-item theme-choice"
+              type="button"
+              data-theme-choice="contrast"
+            >
+              <span>
+                <strong>Alto contraste</strong>
+                <small>Máxima diferenciación visual</small>
+              </span>
+            </button>
+
+            <p
+              id="ayuda-selector-tema"
+              class="theme-storage-note mb-0"
+            >
+              Esta preferencia se comparte con toda la aplicación.
+            </p>
           </div>
         </div>
 
         {% if dev_autenticado %}
-        <form method="post" action="/dev/logout" class="dev-logout-form">
-          <button type="submit" class="btn btn-sm dev-logout-button">Cerrar sesión</button>
-        </form>
+        <div class="dropdown dev-user-control">
+          <button
+            class="dev-user-trigger dropdown-toggle"
+            type="button"
+            id="menu-usuario-developer"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span
+              class="dev-avatar"
+              aria-hidden="true"
+            >
+              {{ dev_iniciales }}
+            </span>
+
+            <span class="dev-user-copy">
+              <strong>@{{ dev_usuario.usuario }}</strong>
+              <small>{{ dev_rol_etiqueta }}</small>
+            </span>
+          </button>
+
+          <div
+            class="dropdown-menu dropdown-menu-end dev-user-menu"
+            aria-labelledby="menu-usuario-developer"
+          >
+            <div class="dev-user-menu-heading">
+              <strong>{{ dev_nombre_presentacion }}</strong>
+              <span>@{{ dev_usuario.usuario }}</span>
+              <small>{{ dev_rol_etiqueta }}</small>
+            </div>
+
+            <div class="dropdown-divider"></div>
+
+            <a
+              class="dropdown-item {{ 'active' if pagina_activa == 'perfil' else '' }}"
+              href="/dev/perfil"
+              {% if pagina_activa == 'perfil' %}
+              aria-current="page"
+              {% endif %}
+            >
+              Perfil
+            </a>
+
+            <a
+              class="dropdown-item {{ 'active' if pagina_activa == 'acceso_tecnico' else '' }}"
+              href="/dev/acceso-tecnico"
+              {% if pagina_activa == 'acceso_tecnico' %}
+              aria-current="page"
+              {% endif %}
+            >
+              Acceso técnico
+            </a>
+
+            <div class="dropdown-divider"></div>
+
+            <form method="post" action="/dev/logout">
+              <input
+                type="hidden"
+                name="csrf_token"
+                value="{{ dev_csrf_token }}"
+              >
+              <button
+                type="submit"
+                class="dropdown-item dev-user-logout"
+              >
+                Cerrar sesión
+              </button>
+            </form>
+          </div>
+        </div>
         {% endif %}
+
       </div>
     </div>
   </header>
 
-  <main id="contenido-principal" class="dev-main" tabindex="-1">{% block content %}{% endblock %}</main>
-  <div id="a11y-global-status" class="visually-hidden" role="status" aria-live="polite" aria-atomic="true"></div>
+  <div
+    class="dev-shell{% if dev_autenticado %} is-authenticated{% endif %}"
+  >
 
-  <footer class="dev-footer" aria-label="Información del Portal Developer">
-    <div class="container dev-footer-inner">
-      <div><strong>{{ app_name }}</strong> <span aria-hidden="true">·</span> Portal Developer</div>
-      <div>Entorno interno de desarrollo <span aria-hidden="true">·</span> v{{ app_version }}</div>
+    {% if dev_autenticado %}
+    <aside
+      id="dev-sidebar"
+      class="dev-sidebar"
+      aria-label="Herramientas del Portal Developer"
+    >
+      <div class="dev-sidebar-heading">
+        <span>Portal Developer</span>
+        <small>Herramientas</small>
+      </div>
+
+      <nav class="dev-sidebar-nav">
+        <a
+          href="/dev"
+          class="{{ 'active' if pagina_activa == 'resumen' else '' }}"
+          {% if pagina_activa == 'resumen' %}
+          aria-current="page"
+          {% endif %}
+        >
+          <span class="dev-sidebar-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <rect x="4" y="4" width="6" height="6" rx="1"></rect>
+              <rect x="14" y="4" width="6" height="6" rx="1"></rect>
+              <rect x="4" y="14" width="6" height="6" rx="1"></rect>
+              <rect x="14" y="14" width="6" height="6" rx="1"></rect>
+            </svg>
+          </span>
+          <span>Resumen</span>
+        </a>
+
+        <a
+          href="/dev/diagnostico"
+          class="{{ 'active' if pagina_activa == 'diagnostico' else '' }}"
+          {% if pagina_activa == 'diagnostico' %}
+          aria-current="page"
+          {% endif %}
+        >
+          <span class="dev-sidebar-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="8"></circle>
+              <path d="M8 12h2l1.3-3 2.1 6 1.2-3H16"></path>
+            </svg>
+          </span>
+          <span>Diagnóstico</span>
+        </a>
+
+        <a
+          href="/dev/eventos"
+          class="{{ 'active' if pagina_activa == 'eventos' else '' }}"
+          {% if pagina_activa == 'eventos' %}
+          aria-current="page"
+          {% endif %}
+        >
+          <span class="dev-sidebar-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M8 7h11M8 12h11M8 17h11"></path>
+              <circle cx="4.5" cy="7" r=".8"></circle>
+              <circle cx="4.5" cy="12" r=".8"></circle>
+              <circle cx="4.5" cy="17" r=".8"></circle>
+            </svg>
+          </span>
+          <span>Eventos</span>
+        </a>
+
+        <a
+          href="/dev/archivos"
+          class="{{ 'active' if pagina_activa == 'archivos' else '' }}"
+          {% if pagina_activa == 'archivos' %}
+          aria-current="page"
+          {% endif %}
+        >
+          <span class="dev-sidebar-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M3 7h7l2 2h9v10H3Z"></path>
+            </svg>
+          </span>
+          <span>Archivos</span>
+        </a>
+
+        <a
+          href="/dev/mantenimiento"
+          class="{{ 'active' if pagina_activa == 'mantenimiento' else '' }}"
+          {% if pagina_activa == 'mantenimiento' %}
+          aria-current="page"
+          {% endif %}
+        >
+          <span class="dev-sidebar-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="m14 6 4-2 2 2-2 4-3 1-5 5-2 4-4-4 4-2 5-5Z"></path>
+            </svg>
+          </span>
+          <span>Mantenimiento</span>
+        </a>
+
+        <a
+          href="/dev/privacidad"
+          class="{{ 'active' if pagina_activa == 'privacidad' else '' }}"
+          {% if pagina_activa == 'privacidad' %}
+          aria-current="page"
+          {% endif %}
+        >
+          <span class="dev-sidebar-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 3 5 6v5c0 4.5 2.7 7.8 7 10 4.3-2.2 7-5.5 7-10V6Z"></path>
+              <path d="m9 12 2 2 4-4"></path>
+            </svg>
+          </span>
+          <span>Privacidad</span>
+        </a>
+      </nav>
+
+      <div class="dev-sidebar-meta">
+        <span>Entorno local</span>
+        <small>v{{ app_version }}</small>
+      </div>
+    </aside>
+
+    <button
+      class="dev-sidebar-overlay"
+      type="button"
+      data-dev-sidebar-overlay
+      aria-label="Cerrar menú Developer"
+      tabindex="-1"
+    ></button>
+    {% endif %}
+
+    <div class="dev-shell-content">
+      <main
+        id="contenido-principal"
+        class="dev-main"
+        tabindex="-1"
+      >
+        {% block content %}{% endblock %}
+      </main>
+
+      <div
+        id="a11y-global-status"
+        class="visually-hidden"
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+      ></div>
+
+      <footer
+        class="dev-footer"
+        aria-label="Información del Portal Developer"
+      >
+        <div class="container dev-footer-inner">
+          <div>
+            © 2026 {{ app_author }}. Todos los derechos reservados.
+          </div>
+
+          <div>
+            <strong>{{ app_name }}</strong>
+            <span aria-hidden="true">·</span>
+            Portal Developer
+            <span aria-hidden="true">·</span>
+            v{{ app_version }}
+          </div>
+        </div>
+      </footer>
     </div>
-  </footer>
+  </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-  <script src="{{ url_for('static', path='/js/accessibility.js') }}"></script>
-  <script src="{{ url_for('static', path='/js/developer_portal.js') }}"></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"
+  ></script>
+
+  <script
+    src="{{ url_for('static', path='/js/accessibility.js') }}"
+  ></script>
+
+  <script
+    src="{{ url_for('static', path='/js/developer_portal.js') }}?v={{ dev_assets_revision }}"
+  ></script>
+
   {% block scripts %}{% endblock %}
 </body>
 </html>

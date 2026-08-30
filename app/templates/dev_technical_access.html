@@ -1,0 +1,71 @@
+{% extends "dev_base.html" %}
+
+{% block title %}Acceso técnico · Portal Developer · {{ app_name }}{% endblock %}
+
+{% block content %}
+<section class="hero-section py-5">
+  <div class="container">
+    <span class="dev-kicker">Integraciones</span>
+    <h1 class="display-6 fw-bold mb-3">Acceso técnico</h1>
+    <p class="lead mb-0">
+      Separación entre identidad humana y autenticación programática.
+    </p>
+  </div>
+</section>
+
+<section class="py-4">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-7">
+        <article class="card h-100">
+          <div class="card-body p-4">
+            <h2 class="h5">Credencial Bearer</h2>
+
+            <p>
+              Las credenciales técnicas permanecen separadas de tu contraseña
+              humana. La contraseña utilizada para iniciar sesión en el Portal
+              Developer nunca se utiliza como token programático.
+            </p>
+
+            <div class="alert alert-info mb-3" role="note">
+              El endpoint técnico histórico mantiene temporalmente la
+              compatibilidad Bearer existente. La futura credencial
+              persistente tendrá almacenamiento por digest y el valor
+              original se mostrará una sola vez.
+            </div>
+
+            {% if "tokens.manage" in dev_permisos %}
+            <span class="badge text-bg-warning">
+              Gestión persistente pendiente de migración
+            </span>
+            {% else %}
+            <span class="badge text-bg-secondary">
+              Tu rol no administra credenciales técnicas
+            </span>
+            {% endif %}
+          </div>
+        </article>
+      </div>
+
+      <div class="col-lg-5">
+        <article class="card h-100">
+          <div class="card-body p-4">
+            <h2 class="h5">Contrato programático</h2>
+
+            <p class="text-muted">
+              Los clientes técnicos utilizan la cabecera:
+            </p>
+
+            <pre class="dev-code-example mb-3"><code>Authorization: Bearer &lt;token&gt;</code></pre>
+
+            <p class="small text-muted mb-0">
+              Una credencial técnica no concede automáticamente una
+              sesión humana en el Portal Developer.
+            </p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

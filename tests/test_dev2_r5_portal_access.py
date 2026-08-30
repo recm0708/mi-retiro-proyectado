@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from contextlib import contextmanager
 import json
 import os
 from pathlib import Path
@@ -13,6 +14,7 @@ from fastapi.testclient import TestClient
 
 from app.core.admin_session import revocar_todas_las_sesiones_admin
 from app.core.observability import ruta_log_actual
+from app.core.developer_provisioning import bootstrap_propietario
 from app.main import app
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -23,17 +25,48 @@ class TestDev2R5PortalAccess(unittest.TestCase):
         revocar_todas_las_sesiones_admin()
 
     @staticmethod
+    @contextmanager
     def _env(temp: str):
-        return patch.dict(
+        """Aísla logs, Bearer legado e identidad humana de cada prueba."""
+
+        store = str(
+            Path(temp)
+            / "portal.sqlite3"
+        )
+
+        with patch.dict(
             os.environ,
             {
                 "MRP_DIAGNOSTIC_DIR": temp,
                 "MRP_DEV_MODE": "1",
                 "MRP_ADMIN_ENABLED": "1",
-                "MRP_ADMIN_SECRET": "test-admin-secret",
+                "MRP_ADMIN_SECRET": (
+                    "test-admin-secret"
+                ),
+                "MRP_DEVELOPER_STORE_PATH": store,
             },
             clear=True,
-        )
+        ):
+            bootstrap_propietario(
+                usuario="propietario",
+                nombre_visible=(
+                    "Propietario de prueba"
+                ),
+                password=(
+                    "MRP-Web!Owner-2026"
+                ),
+            )
+            yield
+
+    @staticmethod
+    def _login_data() -> dict[str, str]:
+        """Devuelve credenciales humanas aisladas de prueba."""
+
+        return {
+            "usuario": "propietario",
+            "password": "MRP-Web!Owner-2026",
+        }
+
 
     def test_dev_es_entrada_humana_canonica(self):
         with TemporaryDirectory() as temp:
@@ -52,7 +85,7 @@ class TestDev2R5PortalAccess(unittest.TestCase):
             with self._env(temp):
                 respuesta = TestClient(app).post(
                     "/dev",
-                    data={"token": "test-admin-secret"},
+                    data=self._login_data(),
                     follow_redirects=False,
                 )
 
@@ -62,13 +95,13 @@ class TestDev2R5PortalAccess(unittest.TestCase):
         self.assertIn("mrp_admin_session=", cookie)
         self.assertIn("HttpOnly", cookie)
         self.assertIn("Path=/dev", cookie)
-        self.assertNotIn("test-admin-secret", cookie)
+        self.assertNotIn("MRP-Web!Owner-2026", cookie)
 
     def test_sesion_web_renderiza_portal_sin_navegacion_publica_ni_revisiones(self):
         with TemporaryDirectory() as temp:
             with self._env(temp):
                 cliente = TestClient(app)
-                cliente.post("/dev", data={"token": "test-admin-secret"})
+                cliente.post("/dev", data=self._login_data())
                 respuesta = cliente.get("/dev")
 
         self.assertEqual(200, respuesta.status_code)
@@ -85,7 +118,7 @@ class TestDev2R5PortalAccess(unittest.TestCase):
         with TemporaryDirectory() as temp:
             with self._env(temp):
                 cliente = TestClient(app)
-                cliente.post("/dev", data={"token": "test-admin-secret"})
+                cliente.post("/dev", data=self._login_data())
                 log = ruta_log_actual()
                 if log.exists():
                     log.unlink()
@@ -125,8 +158,37 @@ class TestDev2R5PortalAccess(unittest.TestCase):
         with TemporaryDirectory() as temp:
             with self._env(temp):
                 cliente = TestClient(app)
-                cliente.post("/dev", data={"token": "test-admin-secret"})
-                respuesta = cliente.post("/dev/logout", follow_redirects=False)
+                cliente.post("/dev", data=self._login_data())
+
+                pagina = cliente.get("/dev")
+                self.assertEqual(200, pagina.status_code)
+
+                marca_csrf = 'name="csrf_token"'
+                self.assertIn(
+                    marca_csrf,
+                    pagina.text,
+                )
+
+                fragmento_csrf = pagina.text.split(
+                    marca_csrf,
+                    1,
+                )[1]
+
+                csrf_token = fragmento_csrf.split(
+                    'value="',
+                    1,
+                )[1].split(
+                    '"',
+                    1,
+                )[0]
+
+                respuesta = cliente.post(
+                    "/dev/logout",
+                    data={
+                        "csrf_token": csrf_token,
+                    },
+                    follow_redirects=False,
+                )
 
         self.assertEqual(303, respuesta.status_code)
         self.assertEqual("/dev", respuesta.headers["location"])

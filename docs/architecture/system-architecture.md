@@ -4,7 +4,7 @@
 **Versión de aplicación revisada:** `0.1.18.04-beta`
 **Versión base histórica:** `0.0.23-beta`
 **Revisión documental:** GOV.1.4 — 2026-08-17
-**Última actualización técnica:** DEV.2 R5 — Portal Developer y separación de acceso web/Bearer — 2026-08-28
+**Última actualización técnica:** DEV.2 R6 — Portal Developer multipágina, identidad, observabilidad, mantenimiento, seguridad y privacidad — 2026-08-30
 **Última actualización de mantenimiento:** MANT.1 R5E — estandarización de nombres de carpetas — 2026-08-23
 **Clasificación:** Técnica / Pública
 
@@ -24,7 +24,7 @@ Cierre técnico relevante:
 - R7 cerró operativamente MANT.1 sobre `main`.
 
 La documentación arquitectónica debe leerse desde esta base: MANT.1, DOC.1, NOR.1 y NOR.2 están cerrados; SEC.2 cerró R1–R6. AUD.SEC2 R1 corrige la prioridad del kill switch administrativo, el fallback de sesión y logout sin modificar la arquitectura previsional.
-DEV.2 R5 queda aceptado como G118/E04: `/dev` es la entrada humana canónica, la sesión web administrativa se mantiene separada del contrato técnico Bearer y el shell Developer no hereda la navegación previsional pública. DEV.2 R6 queda reservado como G119/E05 para la evolución multipágina del portal.
+DEV.2 R5 queda aceptado como G118/E04: `/dev` es la entrada humana canónica, la sesión web administrativa se mantiene separada del contrato técnico Bearer y el shell Developer no hereda la navegación previsional pública. DEV.2 R6 implementa en la rama candidata G119/E05 la evolución multipágina, identidad humana persistente, RBAC, observabilidad, mantenimiento seguro, privacidad y perfil; permanece pendiente de PR/CI/integración y todavía no constituye un estado aceptado.
 <!-- DOC1-R1-POST-MANT1:END -->
 
 Mi Retiro Proyectado es una aplicación web local basada en FastAPI, Jinja2 y JavaScript del navegador. La arquitectura separa presentación, contratos de datos, servicios de integración, motores previsionales, parámetros normativos y observabilidad de desarrollo.
@@ -414,3 +414,37 @@ simulaciones y sus cookies nunca forman parte de Developer Diagnostics.
 AUD.SEC2 R1 corrige la ruta POST de login para respetar el kill switch, limita
 el fallback de sesión a errores 401, convierte logout en POST y extiende
 `Cache-Control: no-store` a `/dev/`.
+
+## Portal Developer multipágina
+
+El Portal Developer mantiene una superficie humana autenticada separada del acceso técnico programático. Todas sus páginas comparten la misma sesión Developer, el mismo sistema visual de la aplicación y el control administrativo de disponibilidad.
+
+Las rutas humanas vigentes son:
+
+- `/dev`: resumen y entrada canónica del Portal Developer.
+- `/dev/diagnostico`: autodiagnóstico técnico del entorno local.
+- `/dev/eventos`: visor y resumen de eventos de observabilidad.
+- `/dev/archivos`: inventario de archivos diagnósticos conocidos.
+- `/dev/archivos/exportar`: descarga POST del ZIP diagnóstico sanitizado para una sesión humana autenticada.
+- `/dev/mantenimiento`: superficie reservada para operaciones administrativas controladas.
+- `/dev/privacidad`: advertencias y controles de privacidad del entorno Developer.
+- `/dev/perfil`: información no secreta de la cuenta Developer autenticada.
+- `/dev/acceso-tecnico`: superficie humana destinada a la administración futura de credenciales técnicas Bearer.
+
+La navegación humana utiliza un sidebar colapsable. El acceso a Perfil y Acceso técnico permanece dentro del menú de cuenta para separar las herramientas operativas de las funciones asociadas a la identidad del usuario.
+
+La apariencia visual no mantiene una paleta Developer independiente. `developer-portal.css` consume los tokens semánticos definidos por `design-system.css`, mientras que `theme.js` conserva una única preferencia para Automático, Claro, Oscuro y Alto contraste. De esta forma, los cambios futuros del sistema visual se propagan tanto a la aplicación principal como al Portal Developer.
+
+El endpoint histórico `/dev/centro-desarrollo` permanece temporalmente como superficie de compatibilidad para el contrato técnico Bearer y no forma parte de la navegación humana del Portal Developer.
+
+## Seguridad humana del Portal Developer
+
+Las operaciones humanas con efecto utilizan POST y se autorizan en servidor mediante los permisos atómicos del rol Developer.
+
+- `/dev/mantenimiento/limpiar-sesiones`: operación POST no destructiva que depura sesiones ya expiradas.
+- `/dev/mantenimiento/revocar-sesiones`: operación POST destructiva protegida por RBAC, CSRF, revalidación y confirmación.
+- `/dev/perfil/password`: cambio POST de contraseña propia con revocación de sesiones.
+
+Los formularios autenticados incluyen un token CSRF ligado a la sesión en memoria. Las operaciones críticas requieren además revalidación de la contraseña humana.
+
+El cambio de contraseña propia incrementa `security_version`; las sesiones previas quedan revocadas y la identidad debe autenticarse nuevamente.

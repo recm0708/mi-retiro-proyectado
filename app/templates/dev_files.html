@@ -1,0 +1,167 @@
+{% extends "dev_base.html" %}
+
+{% block title %}Archivos · Portal Developer · {{ app_name }}{% endblock %}
+
+{% block content %}
+<section class="hero-section py-5">
+  <div class="container">
+    <span class="dev-kicker">Diagnósticos locales</span>
+    <h1 class="display-6 fw-bold mb-3">Archivos</h1>
+    <p class="lead mb-0">
+      Inventario permitido y exportación sanitizada del diagnóstico local.
+    </p>
+  </div>
+</section>
+
+<section class="py-4">
+  <div class="container">
+    {% set exportacion = request.query_params.get("exportacion") %}
+
+    {% if exportacion == "bloqueada" %}
+    <div class="alert alert-warning">
+      La exportación está bloqueada porque Developer Diagnostics no está activo.
+    </div>
+    {% elif exportacion == "sin-archivos" %}
+    <div class="alert alert-warning">
+      No existen archivos diagnósticos disponibles para exportar.
+    </div>
+    {% endif %}
+
+    <div class="row g-3 mb-4">
+      <div class="col-sm-6 col-xl-3">
+        <div class="card h-100">
+          <div class="card-body">
+            <p class="text-muted small mb-1">Archivos existentes</p>
+            <p class="fs-4 fw-bold mb-0">
+              {{ estado_dev.total_archivos_existentes }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-xl-3">
+        <div class="card h-100">
+          <div class="card-body">
+            <p class="text-muted small mb-1">Tamaño total</p>
+            <p class="fs-4 fw-bold mb-0">
+              {{ estado_dev.total_bytes_legible }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-xl-3">
+        <div class="card h-100">
+          <div class="card-body">
+            <p class="text-muted small mb-1">Log vigente</p>
+            <p class="fw-bold mb-0">
+              <code>{{ estado_dev.archivo_log_actual }}</code>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-xl-3">
+        <div class="card h-100">
+          <div class="card-body">
+            <p class="text-muted small mb-1">Exportación</p>
+
+            {% if estado_dev.exportacion_zip_disponible %}
+            <span class="badge text-bg-success">
+              Disponible
+            </span>
+            {% else %}
+            <span class="badge text-bg-secondary">
+              No disponible
+            </span>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card mb-4">
+      <div class="card-body">
+        <div class="d-flex flex-column flex-lg-row justify-content-between gap-3">
+          <div>
+            <h2 class="h5 mb-1">Exportación diagnóstica</h2>
+            <p class="text-muted mb-0">
+              El paquete contiene únicamente los JSONL diagnósticos conocidos
+              permitidos por la aplicación. No incorpora bases de datos,
+              uploads, PDFs, sesiones ni secretos.
+            </p>
+          </div>
+
+          <form
+            method="post"
+            action="/dev/archivos/exportar"
+            class="align-self-lg-center"
+          >
+            <input
+              type="hidden"
+              name="csrf_token"
+              value="{{ dev_csrf_token }}"
+            >
+            <button
+              class="btn btn-primary"
+              type="submit"
+              {% if not estado_dev.exportacion_zip_disponible %}disabled{% endif %}
+            >
+              Descargar ZIP sanitizado
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <div class="mb-3">
+          <h2 class="h5 mb-1">Archivos diagnósticos conocidos</h2>
+          <p class="text-muted mb-0">
+            Solo se enumeran el JSONL vigente y sus rotaciones previstas.
+            Nunca se muestra la ruta absoluta del equipo.
+          </p>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table align-middle">
+            <thead>
+              <tr>
+                <th scope="col">Archivo</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Tamaño</th>
+                <th scope="col">Actualizado UTC</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {% for archivo in estado_dev.archivos_diagnostico %}
+              <tr>
+                <th scope="row">
+                  <code>{{ archivo.nombre }}</code>
+                </th>
+
+                <td>
+                  {% if archivo.existe %}
+                  <span class="badge text-bg-success">Disponible</span>
+                  {% else %}
+                  <span class="badge text-bg-secondary">No existe</span>
+                  {% endif %}
+                </td>
+
+                <td>{{ archivo.tamano_legible }}</td>
+
+                <td>
+                  {{ archivo.actualizado_utc or "No disponible" }}
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

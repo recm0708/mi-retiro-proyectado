@@ -1,0 +1,185 @@
+{% extends "dev_base.html" %}
+
+{% block title %}Mantenimiento · Portal Developer · {{ app_name }}{% endblock %}
+
+{% block content %}
+<section class="hero-section py-5">
+  <div class="container">
+    <span class="dev-kicker">Operación controlada</span>
+    <h1 class="display-6 fw-bold mb-3">Mantenimiento</h1>
+    <p class="lead mb-0">
+      Operaciones administrativas protegidas por sesión, RBAC y CSRF.
+    </p>
+  </div>
+</section>
+
+<section class="py-4">
+  <div class="container">
+    {% set resultado = request.query_params.get("resultado") %}
+
+    {% if resultado == "sesiones-limpiadas" %}
+    <div class="alert alert-success" role="status">
+      La limpieza de sesiones expiradas finalizó correctamente.
+    </div>
+    {% endif %}
+
+    <div class="row g-3 mb-4">
+      <div class="col-sm-6 col-xl-3">
+        <div class="card h-100">
+          <div class="card-body">
+            <p class="text-muted small mb-1">Sesiones vigentes</p>
+            <p class="fs-4 fw-bold mb-0">
+              {{ dev_sesiones_activas }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-xl-3">
+        <div class="card h-100">
+          <div class="card-body">
+            <p class="text-muted small mb-1">Rol actual</p>
+            <p class="fw-bold mb-0">{{ dev_rol_etiqueta }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-xl-3">
+        <div class="card h-100">
+          <div class="card-body">
+            <p class="text-muted small mb-1">CSRF</p>
+            <span class="badge text-bg-success">Protegido</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-xl-3">
+        <div class="card h-100">
+          <div class="card-body">
+            <p class="text-muted small mb-1">Acciones destructivas</p>
+
+            {% if "maintenance.destructive" in dev_permisos %}
+            <span class="badge text-bg-warning">
+              Autorizadas con revalidación
+            </span>
+            {% else %}
+            <span class="badge text-bg-secondary">
+              No autorizadas
+            </span>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-xl-6">
+        <article class="card h-100">
+          <div class="card-body p-4">
+            <span class="dev-kicker">Operación segura</span>
+            <h2 class="h4">Limpiar sesiones expiradas</h2>
+
+            <p class="text-muted">
+              Elimina únicamente sesiones que ya superaron sus límites
+              de inactividad o duración máxima. Las sesiones válidas
+              permanecen activas.
+            </p>
+
+            {% if "maintenance.execute" in dev_permisos %}
+            <form
+              method="post"
+              action="/dev/mantenimiento/limpiar-sesiones"
+            >
+              <input
+                type="hidden"
+                name="csrf_token"
+                value="{{ dev_csrf_token }}"
+              >
+
+              <button class="btn btn-outline-primary" type="submit">
+                Limpiar sesiones expiradas
+              </button>
+            </form>
+            {% else %}
+            <div class="alert alert-secondary mb-0">
+              Tu rol no dispone de <code>maintenance.execute</code>.
+            </div>
+            {% endif %}
+          </div>
+        </article>
+      </div>
+
+      <div class="col-xl-6">
+        <article class="card h-100 dev-danger-zone">
+          <div class="card-body p-4">
+            <span class="dev-kicker">Zona crítica</span>
+            <h2 class="h4">Revocar todas las sesiones</h2>
+
+            <p class="text-muted">
+              Cierra todas las sesiones humanas Developer, incluida la
+              sesión desde la que se ejecuta esta operación.
+            </p>
+
+            {% if "maintenance.destructive" in dev_permisos %}
+            <form
+              method="post"
+              action="/dev/mantenimiento/revocar-sesiones"
+              class="dev-sensitive-form"
+            >
+              <input
+                type="hidden"
+                name="csrf_token"
+                value="{{ dev_csrf_token }}"
+              >
+
+              <div class="mb-3">
+                <label
+                  class="form-label"
+                  for="dev-maintenance-password"
+                >
+                  Contraseña actual
+                </label>
+                <input
+                  class="form-control"
+                  id="dev-maintenance-password"
+                  name="password_actual"
+                  type="password"
+                  autocomplete="current-password"
+                  required
+                >
+              </div>
+
+              <div class="mb-3">
+                <label
+                  class="form-label"
+                  for="dev-maintenance-confirm"
+                >
+                  Escribe <strong>REVOCAR SESIONES</strong>
+                </label>
+                <input
+                  class="form-control"
+                  id="dev-maintenance-confirm"
+                  name="confirmacion"
+                  type="text"
+                  autocomplete="off"
+                  required
+                >
+              </div>
+
+              <button class="btn btn-danger" type="submit">
+                Revocar todas las sesiones
+              </button>
+            </form>
+            {% else %}
+            <div class="alert alert-secondary mb-0">
+              Esta operación requiere
+              <code>maintenance.destructive</code>.
+            </div>
+            {% endif %}
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

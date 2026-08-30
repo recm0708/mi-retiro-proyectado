@@ -1,0 +1,170 @@
+{% extends "dev_base.html" %}
+
+{% block title %}Perfil · Portal Developer · {{ app_name }}{% endblock %}
+
+{% block content %}
+<section class="hero-section py-5">
+  <div class="container">
+    <span class="dev-kicker">Cuenta Developer</span>
+    <h1 class="display-6 fw-bold mb-3">Perfil</h1>
+    <p class="lead mb-0">
+      Identidad, estado de seguridad y contraseña de tu cuenta Developer.
+    </p>
+  </div>
+</section>
+
+<section class="py-4">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-5">
+        <article class="card h-100">
+          <div class="card-body p-4">
+            <div class="dev-profile-summary">
+              <div class="dev-avatar dev-avatar-lg" aria-hidden="true">
+                {{ dev_iniciales }}
+              </div>
+
+              <div>
+                <h2 class="h4 mb-1">
+                  {{ dev_nombre_presentacion }}
+                </h2>
+                <p class="text-muted mb-2">
+                  @{{ dev_usuario.usuario }}
+                </p>
+                <span class="badge text-bg-primary">
+                  {{ dev_rol_etiqueta }}
+                </span>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="col-lg-7">
+        <article class="card h-100">
+          <div class="card-body p-4">
+            <h2 class="h5">Seguridad de la cuenta</h2>
+
+            <dl class="dev-detail-list mb-0">
+              <div>
+                <dt>Estado</dt>
+                <dd>
+                  {% if dev_usuario.activo %}
+                  <span class="badge text-bg-success">Activa</span>
+                  {% else %}
+                  <span class="badge text-bg-danger">Desactivada</span>
+                  {% endif %}
+                </dd>
+              </div>
+
+              <div>
+                <dt>Rol</dt>
+                <dd>{{ dev_rol_etiqueta }}</dd>
+              </div>
+
+              <div>
+                <dt>Revisión de seguridad</dt>
+                <dd>{{ dev_usuario.revision_seguridad }}</dd>
+              </div>
+
+              <div>
+                <dt>Cambio obligatorio de contraseña</dt>
+                <dd>
+                  {{ "Sí" if dev_usuario.debe_cambiar_password else "No" }}
+                </dd>
+              </div>
+            </dl>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <article class="card mt-4">
+      <div class="card-body p-4">
+        <div class="row g-4">
+          <div class="col-lg-5">
+            <span class="dev-kicker">Credencial humana</span>
+            <h2 class="h4">Cambiar contraseña</h2>
+
+            <p class="text-muted">
+              La contraseña actual se revalida antes del cambio.
+              Al completar la operación, todas tus sesiones se revocan
+              y deberás iniciar sesión nuevamente.
+            </p>
+
+            <p class="small text-muted mb-0">
+              Política: mínimo 12 caracteres, al menos una mayúscula
+              y un carácter especial.
+            </p>
+          </div>
+
+          <div class="col-lg-7">
+            {% if "profile.edit.self" in dev_permisos %}
+            <form
+              method="post"
+              action="/dev/perfil/password"
+            >
+              <input
+                type="hidden"
+                name="csrf_token"
+                value="{{ dev_csrf_token }}"
+              >
+
+              <div class="mb-3">
+                <label class="form-label" for="dev-current-password">
+                  Contraseña actual
+                </label>
+                <input
+                  class="form-control"
+                  id="dev-current-password"
+                  name="password_actual"
+                  type="password"
+                  autocomplete="current-password"
+                  required
+                >
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label" for="dev-new-password">
+                  Nueva contraseña
+                </label>
+                <input
+                  class="form-control"
+                  id="dev-new-password"
+                  name="nueva_password"
+                  type="password"
+                  autocomplete="new-password"
+                  minlength="12"
+                  maxlength="256"
+                  required
+                >
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label" for="dev-confirm-password">
+                  Confirmar nueva contraseña
+                </label>
+                <input
+                  class="form-control"
+                  id="dev-confirm-password"
+                  name="confirmar_password"
+                  type="password"
+                  autocomplete="new-password"
+                  minlength="12"
+                  maxlength="256"
+                  required
+                >
+              </div>
+
+              <button class="btn btn-primary" type="submit">
+                Cambiar contraseña y cerrar sesiones
+              </button>
+            </form>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+{% endblock %}

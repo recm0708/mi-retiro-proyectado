@@ -6,7 +6,13 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ## [Unreleased]
 
-- DEV.2 R6 (candidato G119/E05): Portal Developer multipágina, diagnóstico, eventos, archivos, mantenimiento y privacidad técnica; G119 permanece reservado y no aceptado.
+- DEV.2 R6 (candidato G119/E05): Portal Developer multipágina con resumen, diagnóstico, eventos, archivos, mantenimiento, privacidad, perfil y acceso técnico; G119 permanece reservado y no aceptado.
+- Identidad Developer: incorpora cuentas humanas persistentes, propietario protegido, roles Owner/Admin/Operator/Auditor, Argon2id, política de contraseña y recuperación separada.
+- Sesiones y autorización: añade revisión de seguridad persistente, invalidación entre procesos, RBAC deny-by-default y permisos explícitos también para las páginas GET del portal.
+- Seguridad web: incorpora CSRF ligado a sesión, revalidación de contraseña para operaciones destructivas, revocación de sesiones y cambio seguro de contraseña propia.
+- Observabilidad: integra diagnóstico runtime sanitizado, visor de eventos, inventario de archivos y exportación ZIP protegida.
+- Interfaz Developer: shell multipágina independiente, tema sincronizado, rail lateral compacto sin almacenamiento local de estado, microinteracciones y comportamiento responsive.
+- Gate final de desarrollo pre-PR: 1309 `pytest` passed / 6045 subtests, 1269 `unittest` OK, 182 módulos de tests, `pip check`, `compileall`, sintaxis JavaScript y `git diff --check` limpios.
 
 ## [0.1.18.04-beta]
 - G118/E04: DEV.2 R5 queda aceptado después de PR #107 / merge `bc97db0`; `VERSION` avanza a `0.1.18.04-beta`.

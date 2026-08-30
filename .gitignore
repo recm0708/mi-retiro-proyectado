@@ -36,6 +36,7 @@ dist/
 data/personales/
 data/importaciones/
 data/documentos_personales/
+data/developer/
 tests/validation_cases/originals/
 tests/validation_cases/**/*.pdf
 uploads/

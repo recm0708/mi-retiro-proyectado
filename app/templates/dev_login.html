@@ -29,7 +29,7 @@
             <div>
               <p class="dev-login-eyebrow">Acceso restringido</p>
               <h2 class="h4 mb-1">Iniciar sesión</h2>
-              <p class="mb-0">Introduce la credencial administrativa configurada para este entorno.</p>
+              <p class="mb-0">Introduce tu usuario y contraseña del Portal Developer.</p>
             </div>
           </div>
 
@@ -37,16 +37,50 @@
           <div class="alert alert-danger dev-login-alert" role="alert">{{ error }}</div>
           {% endif %}
 
-          <form method="post" action="/dev" class="dev-login-form" autocomplete="off">
+          <form method="post" action="/dev" class="dev-login-form" autocomplete="on">
             <div>
-              <label class="form-label" for="admin-token">Credencial administrativa</label>
-              <div class="input-group dev-secret-group">
-                <input id="admin-token" class="form-control" type="password" name="token" autocomplete="off" autocapitalize="none" spellcheck="false" required autofocus aria-describedby="admin-token-help">
-                <button class="btn btn-outline-secondary" type="button" data-dev-password-toggle aria-controls="admin-token" aria-pressed="false">Mostrar</button>
-              </div>
-              <div id="admin-token-help" class="form-text">La credencial se utiliza únicamente para validar el acceso administrativo.</div>
+              <label class="form-label" for="dev-usuario">Usuario</label>
+              <input
+                id="dev-usuario"
+                class="form-control"
+                type="text"
+                name="usuario"
+                autocomplete="username"
+                autocapitalize="none"
+                spellcheck="false"
+                required
+                autofocus
+              >
             </div>
-            <button class="btn btn-primary dev-login-submit" type="submit">Ingresar al Portal Developer</button>
+
+            <div>
+              <label class="form-label" for="dev-password">Contraseña</label>
+              <div class="input-group dev-secret-group">
+                <input
+                  id="dev-password"
+                  class="form-control"
+                  type="password"
+                  name="password"
+                  autocomplete="current-password"
+                  required
+                  aria-describedby="dev-password-help"
+                >
+                <button
+                  class="btn btn-outline-secondary"
+                  type="button"
+                  data-dev-password-toggle
+                  aria-controls="dev-password"
+                  aria-pressed="false"
+                >Mostrar</button>
+              </div>
+              <div id="dev-password-help" class="form-text">
+                Utiliza las credenciales de tu cuenta del Portal Developer.
+              </div>
+            </div>
+
+            <button class="btn btn-primary dev-login-submit" type="submit">
+              Ingresar al Portal Developer
+            </button>
           </form>
 
           <div class="dev-login-card-footer">
