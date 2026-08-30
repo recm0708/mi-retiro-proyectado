@@ -8,7 +8,7 @@ from pathlib import Path
 import sys
 
 from app.core.developer_identity import (
-    REQUISITOS_PASSWORD,
+    REGLAS_CREDENCIAL,
     validar_password,
 )
 from app.core.developer_provisioning import (
@@ -24,7 +24,7 @@ def _mostrar_politica_password() -> None:
 
     print()
     print("La contraseña debe cumplir:")
-    for requisito in REQUISITOS_PASSWORD:
+    for requisito in REGLAS_CREDENCIAL:
         print(f"  - {requisito}.")
     print()
 

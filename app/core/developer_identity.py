@@ -134,7 +134,7 @@ def normalizar_nombre_visible(nombre: str) -> str:
     return normalizado
 
 
-REQUISITOS_PASSWORD = (
+REGLAS_CREDENCIAL = (
     "al menos 12 caracteres",
     "al menos una letra mayúscula",
     "al menos un carácter especial",
