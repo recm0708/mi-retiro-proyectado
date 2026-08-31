@@ -1,7 +1,7 @@
 # Seguridad y privacidad
 
 **Estado:** Vigente
-**Versión de aplicación revisada:** `0.1.18.04-beta`
+**Versión de aplicación revisada:** `0.1.19.05-beta`
 **Versión base histórica:** `0.0.25-beta`
 **Versión base histórica preservada:** `0.0.23-beta`
 **Base documental preservada:** GOV.1.3 R3 — 2026-08-17
@@ -19,7 +19,7 @@ La aplicación está diseñada actualmente para ejecución local.
 - FastAPI procesa cálculos;
 - el navegador mantiene el estado de simulación;
 - no existe base de datos permanente de simulaciones;
-- no existen cuentas de usuario.
+- no existen cuentas de usuario para las simulaciones previsionales; el Portal Developer sí dispone de cuentas administrativas locales separadas de los datos de simulación.
 
 La visibilidad pública del repositorio no cambia este modelo de ejecución. Un despliegue remoto cambia el modelo de amenazas y requiere revisión específica.
 
@@ -95,7 +95,7 @@ Developer Diagnostics registra únicamente metadata agregada de cache, cantidad 
 
 La aplicación no implementa cookies propias de publicidad, analítica, seguimiento ni perfilado.
 
-La superficie administrativa sí utiliza `mrp_admin_session`, una cookie técnica `HttpOnly` de sesión temporal cuando `MRP_ADMIN_ENABLED=1`. No transporta información previsional; `SameSite` es configurable y `Secure` debe activarse en HTTPS interno.
+La superficie administrativa utiliza `mrp_admin_session`, una cookie técnica `HttpOnly` limitada a `/dev` cuando `MRP_ADMIN_ENABLED=1`. La sesión se asocia a una identidad Developer y a su revisión de seguridad; no transporta información previsional. `SameSite` es configurable y `Secure` debe activarse en HTTPS interno.
 
 Tampoco incorpora herramientas de analítica o telemetría de producto.
 
@@ -201,7 +201,9 @@ La revisión de GOV.1.5 se originó sobre `0.0.23-beta`. La posterior apertura p
 ## Controles administrativos post-SEC.2
 
 `MRP_ADMIN_ENABLED` es la condición primaria de disponibilidad de la superficie
-administrativa. El secreto se obtiene de `MRP_ADMIN_SECRET` (o compatibilidad
-`MRP_ADMIN_TOKEN`) y nunca se versiona. AUD.SEC2 R1 garantiza que el login POST
-y las sesiones existentes respeten el kill switch, que el logout sea POST y que
-`/dev/` use `Cache-Control: no-store`.
+administrativa. DEV.2 R6 incorpora identidades humanas Developer persistentes,
+contraseñas Argon2id, RBAC y revisión de seguridad de sesión. El secreto
+`MRP_ADMIN_SECRET` (o compatibilidad `MRP_ADMIN_TOKEN`) queda reservado al
+contrato técnico Bearer legado y nunca se versiona. El login humano y las
+sesiones existentes respetan el kill switch, el logout usa POST y `/dev/`
+mantiene `Cache-Control: no-store`.

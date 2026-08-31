@@ -6,13 +6,37 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ## [Unreleased]
 
-- DEV.2 R6 (candidato G119/E05): Portal Developer multipágina con resumen, diagnóstico, eventos, archivos, mantenimiento, privacidad, perfil y acceso técnico; G119 permanece reservado y no aceptado.
-- Identidad Developer: incorpora cuentas humanas persistentes, propietario protegido, roles Owner/Admin/Operator/Auditor, Argon2id, política de contraseña y recuperación separada.
-- Sesiones y autorización: añade revisión de seguridad persistente, invalidación entre procesos, RBAC deny-by-default y permisos explícitos también para las páginas GET del portal.
-- Seguridad web: incorpora CSRF ligado a sesión, revalidación de contraseña para operaciones destructivas, revocación de sesiones y cambio seguro de contraseña propia.
-- Observabilidad: integra diagnóstico runtime sanitizado, visor de eventos, inventario de archivos y exportación ZIP protegida.
-- Interfaz Developer: shell multipágina independiente, tema sincronizado, rail lateral compacto sin almacenamiento local de estado, microinteracciones y comportamiento responsive.
-- Gate final de desarrollo pre-PR: 1309 `pytest` passed / 6045 subtests, 1269 `unittest` OK, 182 módulos de tests, `pip check`, `compileall`, sintaxis JavaScript y `git diff --check` limpios.
+- UX.5 R1 (candidato G120/E01): sistema visual integral, paleta, tipografía,
+  espaciado, botones, tarjetas, estados, jerarquía y tokens reutilizables;
+  G120 permanece reservado y no aceptado.
+
+## [0.1.19.05-beta]
+
+- G119/E05: DEV.2 R6 queda aceptado después de PR #111 / merge `bd2accb`;
+  `VERSION` avanza a `0.1.19.05-beta`.
+- Portal Developer: consolida Dashboard, Diagnóstico, Eventos, Archivos,
+  Mantenimiento, Privacidad, Perfil y Acceso técnico como superficies separadas.
+- Identidad: incorpora cuentas humanas persistentes, Owner protegido,
+  roles Owner/Admin/Operator/Auditor y contraseñas Argon2id.
+- Sesiones y autorización: revisión de seguridad persistente, invalidación
+  entre procesos y RBAC deny-by-default también en superficies GET.
+- Seguridad web: CSRF ligado a sesión, revalidación de contraseña,
+  revocación de sesiones y cambio seguro de contraseña propia.
+- Observabilidad: diagnóstico runtime sanitizado, eventos, inventario de
+  archivos y exportación ZIP protegida.
+- Interfaz Developer: shell independiente, temas sincronizados, rail lateral
+  compacto mediante URL, responsive y microinteracciones.
+- Seguridad de código: la regresión CodeQL del CLI se corrigió antes del merge
+  final del desarrollo y los ocho checks de PR #111 quedaron en `success`.
+- Gate de desarrollo: 1269 `unittest` OK; `pytest` 1309 passed /
+  6045 subtests; 182 módulos de tests; Markdown 159/159;
+  16 familias / 46 identificadores; compilación y dependencias limpias.
+- Gate final de promoción: **1269 `unittest` OK** y **`pytest` 1309 passed / 6036 subtests passed**; 183 módulos `test_*.py`; Markdown 159/159; 19 JavaScript; 16 familias / 46 identificadores; `pip check`, `compileall` y `git diff --check` limpios.
+- Ledger: G119 queda aceptado; G120/E01 (`0.1.20.01-beta`) queda reservado
+  para UX.5 R1.
+- Publicación: el tag anotado y firmado `v0.1.19.05-beta` se crea únicamente
+  después de integrar y revalidar esta promoción; `v0.1.18.04-beta`
+  permanece como publicación anterior.
 
 ## [0.1.18.04-beta]
 - G118/E04: DEV.2 R5 queda aceptado después de PR #107 / merge `bc97db0`; `VERSION` avanza a `0.1.18.04-beta`.

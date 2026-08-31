@@ -1,7 +1,7 @@
 # Registro de decisiones técnicas
 
 **Estado:** Vigente
-**Versión de aplicación revisada:** `0.1.18.04-beta`
+**Versión de aplicación revisada:** `0.1.19.05-beta`
 **Versión base histórica:** `0.0.25-beta`
 **Base documental histórica:** `0.0.23-beta` — GOV.1.3 R4 — 2026-08-17
 **Revisión documental:** GOV.1.3 R4 — 2026-08-17
@@ -15,18 +15,16 @@
 <!-- DOC1-R1-REVISION-MANUAL:START -->
 ## Nota de lectura post-MANT.1
 
-Este registro conserva decisiones técnicas históricas y vigentes. Las menciones a R6, R7, UX.4.6 o bloques anteriores deben leerse según el contexto de cada ADR.
+Este registro conserva decisiones históricas y vigentes.
 
-Estado vigente para lectura transversal:
+Estado transversal:
 
-- MANT.1 quedó cerrado operativamente en R7.
-- DOC.1 R1 está cerrado.
-- VER.2 está cerrado y `v0.0.71.01-beta` fue publicado.
-- NOR.1 y NOR.2 están cerrados.
-- DOC.1 R2 está cerrado como auditoría de la documentación Markdown vigente posterior a NOR.2.
-- Las decisiones históricas no se reescriben como si hubieran sido tomadas en una revisión posterior.
-- `VERSION` está sincronizado en `0.1.18.04-beta` (G118/E04), aceptado/publicado para DEV.2 R5; G119/E05 (`0.1.19.05-beta`) queda reservado para DEV.2 R6; `v0.0.26-beta` se conserva como referencia legacy histórica.
-- SEC.2 quedó cerrado después de R1–R6; AUD.SEC2 R1 reconcilia la trazabilidad revision-aware sin reescribir decisiones históricas.
+- las ADR históricas no se reescriben;
+- `VERSION` está sincronizado en `0.1.19.05-beta` (G119/E05);
+- DEV.2 R6 queda aceptado después de PR #111 / merge `bd2accb`;
+- G118/E04 permanece publicado mediante `v0.1.18.04-beta`;
+- UX.5 R1 queda reservado como G120/E01;
+- SEC.2 R1–R6 permanece cerrado y su historia se conserva.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 
 Este registro conserva decisiones de arquitectura, modelado, UX, precisión, seguridad y aplicación normativa. Una ADR explica por qué el proyecto adoptó una decisión; no crea una norma jurídica.

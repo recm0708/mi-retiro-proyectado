@@ -4,16 +4,21 @@
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado de seguridad post-MANT.1
 
-El cierre de MANT.1 R7 no cambia la política de seguridad ni convierte candidatos de versión en releases publicadas.
+La versión canónica vigente es `0.1.19.05-beta`.
 
-Estado vigente:
+El estado revision-aware vigente durante esta promoción es:
 
-- La versión canónica vigente es `0.1.18.04-beta` (G118/E04).
-- G117/E02 está publicado mediante el tag firmado `v0.1.17.02-beta` y el GitHub Release prerelease automatizado por REL.GOV.1 R2. G116/E05 (`v0.1.16.05-beta`) permanece publicado, firmado e inmutable como estado previo.
-- `v0.0.71.01-beta` conserva su evidencia histórica reconciliada como G087/E01 y `v0.0.26-beta` permanece como tag legacy.
-- REL.GOV.1 R2 queda aceptado como G117/E02 y mantiene la creación/firma del tag fuera de GitHub Actions.
-- DEV.2 R5 queda aceptado/publicado como G118/E04 después del desarrollo PR #107 / merge `bc97db0` y de la promoción PR #108 / commit `290e84a`. DEV.2 R6 queda reservado como G119/E05; UX.5 continúa posteriormente y SEC.2 R7 revalidará las nuevas superficies antes del cierre beta.
-- Las rutas de reporte responsable y revisión de vulnerabilidades se mantienen sin cambio material.
+- versión canónica: `0.1.19.05-beta` (G119/E05);
+- DEV.2 R6 integrado mediante PR #111 / merge `bd2accb`;
+- G118/E04 permanece publicado mediante `v0.1.18.04-beta`;
+- G120/E01 queda reservado para UX.5 R1;
+- REL.GOV.1 mantiene la firma del tag fuera de GitHub Actions;
+- las rutas de reporte responsable y revisión de vulnerabilidades
+  permanecen sin cambio material.
+
+DEV.2 R6 separa expresamente identidad humana y Bearer técnico:
+el login humano usa cuentas Developer persistentes y no depende de
+`MRP_ADMIN_SECRET`; ese secreto queda limitado al contrato Bearer legado.
 <!-- DOC1-R1-POST-MANT1:END -->
 
 ## Versiones soportadas
@@ -22,7 +27,8 @@ Mi Retiro Proyectado se encuentra en **desarrollo beta**. Los estados histórico
 
 | Línea | Soporte de seguridad |
 |---|---|
-| `0.1.18.04-beta` | Beta vigente G118/E04 aceptada/publicada para DEV.2 R5 mediante tag firmado `v0.1.18.04-beta` y GitHub Release prerelease |
+| `0.1.19.05-beta` | Beta vigente G119/E05 aceptada para DEV.2 R6; publicación formal pendiente del merge/revalidación de la promoción y del tag firmado `v0.1.19.05-beta` |
+| `0.1.18.04-beta` | Beta previa G118/E04 publicada para DEV.2 R5 mediante tag firmado `v0.1.18.04-beta` y GitHub Release prerelease |
 | `0.1.17.02-beta` | Beta previa G117/E02 publicada; tag firmado y GitHub Release prerelease automatizado conforme a REL.GOV.1 R2 |
 | `0.1.16.05-beta` | Beta previa G116/E05 publicada; tag firmado, workflow de verificación y GitHub Release prerelease verificados |
 | `0.1.15.04-beta` | Beta previa G115/E04 publicada; tag firmado, workflow de verificación y GitHub Release prerelease verificados |
@@ -108,11 +114,12 @@ Esta función está habilitada y complementa el canal privado alternativo indica
 
 ## Superficie administrativa post-SEC.2
 
-La superficie Developer está deshabilitada salvo que `MRP_ADMIN_ENABLED=1` y
-exista un secreto administrativo configurado fuera del repositorio. `/dev` es
-la entrada humana canónica; la sesión web usa `mrp_admin_session` `HttpOnly`
-limitada a `Path=/dev`, mientras `Authorization: Bearer` se conserva como
-contrato técnico separado. El logout usa POST y una sesión no puede sobreponerse
-al kill switch ni a un estado de autenticación no configurada. Para HTTPS
-interno debe activarse `MRP_ADMIN_COOKIE_SECURE=1`; una exposición remota pública
-continúa fuera del escenario soportado hasta su revisión específica.
+La superficie Developer está deshabilitada salvo que `MRP_ADMIN_ENABLED=1`.
+`/dev` es la entrada humana canónica y usa cuentas Developer persistentes,
+contraseñas Argon2id y la cookie técnica `mrp_admin_session` `HttpOnly`
+limitada a `Path=/dev`. El acceso humano no depende de `MRP_ADMIN_SECRET`;
+`Authorization: Bearer` conserva ese secreto únicamente como contrato técnico
+separado. El logout usa POST, las operaciones sensibles aplican CSRF y
+revalidación cuando corresponde, y ninguna sesión puede sobreponerse al kill
+switch. Para HTTPS interno debe activarse `MRP_ADMIN_COOKIE_SECURE=1`; una
+exposición remota pública continúa fuera del escenario soportado.

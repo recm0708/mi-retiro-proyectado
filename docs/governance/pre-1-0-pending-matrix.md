@@ -1,8 +1,8 @@
 # Matriz maestra de pendientes hacia 1.0
 
 **Estado:** vigente / documento vivo
-**Versión base:** `0.1.18.04-beta` — G118/E04
-**Checkpoint candidato:** DEV.2 R6 — G119/E05 (`0.1.19.05-beta`) reservado, no aceptado
+**Versión base:** `0.1.19.05-beta` — G119/E05
+**Checkpoint candidato:** UX.5 R1 — G120/E01 (`0.1.20.01-beta`) reservado, no aceptado
 **Última replanificación:** 2026-08-27
 **Clasificación:** Planificación / Producto / Arquitectura / Seguridad / QA / Release
 
@@ -17,8 +17,8 @@ candidato fallido no lo consume.
 
 ## 1. Reglas de uso
 
-1. `VERSION` materializa `0.1.18.04-beta` después de aceptar DEV.2 R5 como G118/E04.
-2. G119/E05 (`0.1.19.05-beta`) queda reservado para DEV.2 R6; las etapas posteriores permanecen sin Global preasignado.
+1. `VERSION` materializa `0.1.19.05-beta` después de aceptar DEV.2 R6 como G119/E05.
+2. G120/E01 (`0.1.20.01-beta`) queda reservado para UX.5 R1; las etapas posteriores permanecen sin Global preasignado.
 3. Las etapas posteriores se ordenan por prioridad, no por un `G` futuro supuesto.
 4. Una revisión que amplía un bloque existente conserva su identificador canónico.
 5. `PLAN.2` y `UX.5` deben existir en el registro machine-readable antes de usarse.
@@ -35,8 +35,8 @@ candidato fallido no lo consume.
 | 3 | **DOC.1 R5** | Normalización documental integral post-G115 | Reconciliar publicación G115, humanizar navegación Markdown, completar estándares/plantillas y añadir controles de regresión sin reescribir historia. | **Cerrado/aceptado G116/E05** |
 | 4 | **REL.GOV.1 R2** | Automatización de Releases y checks | Estandarizar release notes, `gh release create`, verificación de tag/firma y lectura correcta de Actions/checks. | **Cerrado/aceptado G117/E02** |
 | 5 | **DEV.2 R5** | Portal Developer y acceso | `/dev` canónico; sesión web separada de Bearer; shell/login Developer; cookie acotada a `/dev`; secretos no persistidos. | **Cerrado/aceptado G118/E04** |
-| 6 | **DEV.2 R6** | Portal Developer multipágina y mantenimiento | Separar `/dev`, `/dev/diagnostico`, `/dev/eventos`, `/dev/archivos`, `/dev/mantenimiento` y `/dev/privacidad`; añadir ZIP diagnóstico real, filtros, métricas y limpieza segura con confirmación reforzada. | **Candidato G119/E05** |
-| 7 | **UX.5 R1** | Sistema visual integral | Nueva base visual: paleta, tipografía, espaciado, botones, tarjetas, estados, jerarquía y tokens reutilizables. | Planificado |
+| 6 | **DEV.2 R6** | Portal Developer multipágina y mantenimiento | Separar `/dev`, `/dev/diagnostico`, `/dev/eventos`, `/dev/archivos`, `/dev/mantenimiento` y `/dev/privacidad`; añadir ZIP diagnóstico real, filtros, métricas y limpieza segura con confirmación reforzada. | **Cerrado/aceptado G119/E05** |
+| 7 | **UX.5 R1** | Sistema visual integral | Nueva base visual: paleta, tipografía, espaciado, botones, tarjetas, estados, jerarquía y tokens reutilizables. | **Candidato G120/E01** |
 | 8 | **UX.5 R2** | Inicio, navegación y temas | Rediseñar Inicio/navegación y armonizar Claro, Oscuro, Automático y Alto contraste. | Planificado |
 | 9 | **UX.5 R3** | Nueva entrada a Simulación | Preguntar antes del Paso 1 si la preparación será **Manual** o **Asistida** y explicar ambas modalidades. | Planificado |
 | 10 | **UX.5 R4** | Flujo Manual | Mantener y mejorar el recorrido completo de Pasos 1–6 con revisión explícita de los datos. | Planificado |
@@ -68,7 +68,7 @@ DEV.2 R5 deja aceptado el contrato base:
 - shell Developer separado de la navegación y gestión de datos previsionales públicos;
 - credencial administrativa fuera de `localStorage`, `sessionStorage`, query string, logs y documentación visible.
 
-DEV.2 R6 queda reservado como G119/E05 y debe evolucionar el portal a páginas independientes:
+DEV.2 R6 queda aceptado como G119/E05 y evolucionó el portal a páginas independientes:
 
 - `/dev`;
 - `/dev/diagnostico`;
