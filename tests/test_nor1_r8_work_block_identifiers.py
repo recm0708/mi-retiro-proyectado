@@ -183,7 +183,7 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
             "PERSIST.1 R1",
             "Cerrado/aceptado G118/E04",
             "DEV.2 R5",
-            "Cerrado/aceptado G119/E05",
+            "Cerrado/aceptado/publicado G119/E05",
             "Candidato G120/E01",
             "DEV.2 R6",
         ):

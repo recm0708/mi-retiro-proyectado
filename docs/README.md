@@ -1,9 +1,9 @@
 # Índice de documentación
 
 **Estado:** vigente
-**Versión de aplicación:** `0.1.19.05-beta` — G119/E05 aceptado para DEV.2 R6; G120/E01 reservado para UX.5 R1; ledger aceptado hasta G119
+**Versión de aplicación:** `0.1.19.05-beta` — G119/E05 aceptado/publicado para DEV.2 R6; G120/E01 reservado para UX.5 R1; ledger aceptado hasta G119
 **Último tag formal legacy:** `v0.0.26-beta`
-**Última actualización transversal:** promoción DEV.2 R6 — G119/E05 aceptado; UX.5 R1 candidato G120/E01 — 2026-08-30
+**Última actualización transversal:** DEV.2 R6 publicado como G119/E05; UX.5 R1 candidato G120/E01 — 2026-08-30
 **Cierres históricos preservados:** UX.4.6i / PR #34 — 841 pruebas; UX.4.6e R9 — `v0.0.25-beta`
 
 Este archivo es el punto de entrada para la documentación técnica, funcional, normativa, de privacidad, validación y auditoría de Mi Retiro Proyectado.
@@ -11,7 +11,7 @@ Este archivo es el punto de entrada para la documentación técnica, funcional, 
 
 ## Estado de normalización del repositorio
 
-**Estado actual:** NOR.1 R8, NOR.2, DOC.1 R2–R5, SEC.2, AUD.SEC2 R1, REL.GOV.1 R1–R2, DOC.2 y PLAN.2 R1 están cerrados/aceptados según corresponda. DEV.2 R6 queda aceptado como G119/E05 (`0.1.19.05-beta`); UX.5 R1 reserva G120/E01 como candidato actual.
+**Estado actual:** NOR.1 R8, NOR.2, DOC.1 R2–R5, SEC.2, AUD.SEC2 R1, REL.GOV.1 R1–R2, DOC.2 y PLAN.2 R1 están cerrados/aceptados según corresponda. DEV.2 R6 queda cerrado/aceptado/publicado como G119/E05 (`0.1.19.05-beta`); UX.5 R1 reserva G120/E01 como candidato actual.
 
 Estado de la fase:
 
@@ -32,12 +32,18 @@ Estado de la fase:
 - **DOC.1 R5:** cerrado/aceptado como G116/E05 mediante PR #101 / merge `6f4266d`; normalización documental integral post-G115 completada.
 - **REL.GOV.1 R2:** cerrado/aceptado como G117/E02 mediante PR #103 / merge `46c464e`; automatización gobernada de Releases y checks completada.
 - **DEV.2 R5:** cerrado/aceptado/publicado como G118/E04 (`0.1.18.04-beta`) mediante PR #107 / merge `bc97db0`, promoción PR #108 / commit `290e84a` y tag `v0.1.18.04-beta`; Portal Developer y separación sesión web/Bearer integrados.
-- **DEV.2 R6:** cerrado/aceptado como G119/E05 (`0.1.19.05-beta`) mediante PR #111 / merge `bd2accb`; Portal Developer multipágina, identidad, observabilidad, mantenimiento, seguridad y privacidad integrados.
+- **DEV.2 R6:** cerrado/aceptado/publicado como G119/E05 (`0.1.19.05-beta`)
+  mediante PR #111 / merge `bd2accb` y publicado mediante promoción
+  PR #112 / commit `9424ea8`, tag firmado `v0.1.19.05-beta`, workflow
+  de firma #17 y GitHub Release prerelease ID `379454328`; Portal
+  Developer multipágina, identidad, observabilidad, mantenimiento,
+  seguridad y privacidad integrados.
 - **UX.5 R1:** candidato G120/E01 (`0.1.20.01-beta`) para el sistema visual integral.
 - **SEC.2 R1–R6:** cerrados; CodeQL, autenticación, protección de endpoints, auditoría, sesión web y hardening configurable completados. AUD.SEC2 R1 corrigió el kill switch, alineó documentación/ledger y quedó aceptado como G109/E01.
 
 Evidencia:
 
+- **[Índice de auditorías y evidencias](audits/README.md)** — navegación canónica de auditorías documentales, de gobierno, repositorio y seguridad.
 - **[SEC.2 R1 — CodeQL DOM hardening y normalización de workflows](audits/security/sec2-r1-codeql-workflow-hardening.md)** — hardening CodeQL y normalización de workflows SEC.2 R1.
 - **[SEC.2 — Cierre integral y auditoría post-cierre de seguridad](audits/security/sec2-final-closure.md)** — cierre integral SEC.2 R1–R6 y matriz de controles.
 - **[Auditoría integral de documentación Markdown post-SEC.2](audits/documentation/documentation-audit-post-sec2.md)** — auditoría individual de los 140 Markdown del snapshot post-SEC.2.
@@ -55,8 +61,15 @@ Evidencia:
 - **[Auditoría semántica de documentación viva post-G113 — PLAN.2 R1](audits/documentation/post-g113-live-documentation-audit-plan2-r1.md)** — auditoría semántica de documentación viva al iniciar PLAN.2 R1.
 - **[DOC.1 R4 — saneamiento semántico de documentación viva post-G114](audits/documentation/documentation-live-state-doc1-r4.md)** — auditoría DOC.1 R4 de estado vivo posterior a la publicación formal de G114/E01.
 - **[Auditoría de normalización documental DOC.1 R5](audits/documentation/documentation-normalization-doc1-r5.md)** — normalización transversal, reconciliación post-G115, plantillas Markdown, endurecimiento del auditor y saneamiento de regresiones históricas.
+- **[Reconciliación integral de documentación post-G119](audits/documentation/post-g119-documentation-reconciliation.md)** — reconciliación semántica, normativa, estructural y de mantenimiento posterior a la publicación G119/E05.
 - **[Reconstrucción del CHANGELOG histórico — DOC.2 R1](audits/documentation/changelog-reconstruction-doc2-r1.md)** — reconstrucción auditable DOC.2 R1 de 80 commits en 21 estados legacy.
 - **[Estándares del repositorio](standards/README.md)** — estándares canónicos del repositorio.
+- **[Ciclo de vida de artefactos](standards/artifact-lifecycle.md)** — reglas para crear, sustituir, archivar y eliminar artefactos.
+- **[Estándares de documentación](standards/documentation-standards.md)** — clasificación, mantenimiento, navegación y preservación documental.
+- **[Estándares de archivos](standards/file-standards.md)** — requisitos mínimos para archivos versionados.
+- **[Convenciones de nombres](standards/naming-conventions.md)** — reglas determinísticas para archivos y carpetas.
+- **[Estructura del repositorio](standards/repository-structure.md)** — árbol canónico y responsabilidades de las áreas versionadas.
+- **[Raíz y artefactos locales](standards/root-and-local-artifacts.md)** — política de raíz, evidencia temporal y directorios locales ignorados.
 - **[Plantillas del repositorio](templates/README.md)** — índice de plantillas técnicas por extensión y plantillas documentales por función.
 ## 1. Producto y alcance
 
@@ -116,6 +129,7 @@ Evidencia:
 
 - **[Especificación funcional](product/functional-specification.md)** — RF y comportamiento del producto.
 - **[Guía interna de desarrollo](operations/development-guide.md)** — convenciones de ingeniería e interfaz.
+- **[Scripts del repositorio](../scripts/README.md)** — automatizaciones versionadas para auditoría, validación, hooks y publicación.
 
 ## 5. Motores previsionales
 

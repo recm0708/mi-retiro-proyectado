@@ -129,6 +129,41 @@ Reglas obligatorias:
 - cualquier metadata nueva debe ser técnica, acotada y revisable;
 - no crear telemetría remota sin una decisión y revisión de privacidad separadas.
 
+## 12.1. Portal Developer
+
+El Portal Developer es una superficie administrativa local separada de la
+simulación previsional.
+
+Reglas obligatorias:
+
+- `MRP_ADMIN_ENABLED=1` es el kill switch principal;
+- el login humano usa identidades Developer locales;
+- `MRP_ADMIN_SECRET` y `MRP_ADMIN_TOKEN` no autentican el login humano;
+- ambos secretos quedan reservados al Bearer técnico legado;
+- la base Developer predeterminada es `data/developer/portal.sqlite3`;
+- `MRP_DEVELOPER_STORE_PATH` permite cambiar esa ubicación local;
+- las contraseñas y códigos de recuperación se almacenan únicamente como
+  hashes Argon2id;
+- Owner es único y protegido;
+- RBAC aplica una política deny-by-default;
+- las operaciones POST sensibles requieren CSRF;
+- las operaciones destructivas pueden exigir revalidación de contraseña;
+- las sesiones respetan la revisión de seguridad persistente y el kill switch;
+- el almacén Developer no se utiliza para datos de simulación.
+
+Configuración de sesión:
+
+| Variable | Predeterminado |
+| --- | --- |
+| `MRP_ADMIN_SESSION_MINUTES` | `30` |
+| `MRP_ADMIN_SESSION_MAX_HOURS` | `8` |
+| `MRP_ADMIN_MAX_SESSIONS` | `5` |
+| `MRP_ADMIN_COOKIE_SAMESITE` | `lax` |
+| `MRP_ADMIN_COOKIE_SECURE` | desactivado |
+
+La lista completa de rutas, variables y responsabilidades se mantiene en
+`docs/architecture/development-center.md`.
+
 ## 13. Seguridad HTTP
 
 Mantener validación de archivos, `no-store` en API sensible y cabeceras defensivas.

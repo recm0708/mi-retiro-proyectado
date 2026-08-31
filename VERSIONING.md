@@ -16,8 +16,10 @@ Estado vigente:
 
 - `VERSION` contiene `0.1.19.05-beta` y materializa G119/E05
   para DEV.2 R6.
-- G118/E04 permanece publicado mediante el tag firmado
-  `v0.1.18.04-beta`.
+- G119/E05 está publicado mediante el tag firmado
+  `v0.1.19.05-beta`.
+- G118/E04 permanece preservado mediante `v0.1.18.04-beta` como
+  publicación anterior.
 - G119 incorpora la revisión funcional R6 de DEV.2 con ordinal E05.
 - G120/E01 (`0.1.20.01-beta`) queda reservado para UX.5 R1.
 - DEV.2 queda cerrado después de R6.

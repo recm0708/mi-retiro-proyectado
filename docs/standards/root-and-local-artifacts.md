@@ -65,6 +65,34 @@ que deban permanecer dentro del workspace sin formar parte del árbol Git.
 Tanto `_deliverables/` como `_entregas/` permanecen en `.gitignore`; el segundo
 nombre se conserva únicamente como protección contra una reaparición accidental.
 
+## Directorios locales legítimos
+
+Una auditoría estructural debe distinguir entre divergencia y estado local
+esperado. Los siguientes directorios pueden existir físicamente sin formar
+parte del árbol canónico:
+
+| Ruta | Función | Tratamiento |
+| --- | --- | --- |
+| `.venv/` | Entorno virtual Python del clon. | Ignorado; no versionar. |
+| `.pytest_cache/` | Caché regenerable de pytest. | Ignorado; puede eliminarse. |
+| `__pycache__/` | Bytecode Python regenerable. | Ignorado; puede eliminarse. |
+| `logs/` | Logs técnicos locales. | Ignorado; revisar antes de eliminar. |
+| `logs/diagnostico/` | Developer Diagnostics local. | Ignorado; revisar antes de eliminar. |
+| `data/developer/` | Estado administrativo SQLite local del Portal Developer. | Ignorado; no eliminar automáticamente. |
+| `_deliverables/` | Entregables/evidencia local opcional. | Ignorado; no versionar. |
+| `_entregas/` | Nombre heredado retirado. | Ignorado únicamente como protección. |
+
+`.git/` pertenece a la infraestructura interna del clon y tampoco forma parte
+del árbol versionado del proyecto.
+
+La presencia de estas rutas no constituye por sí misma una falla de
+normalización. El criterio canónico es el inventario rastreado por Git y las
+reglas de `.gitignore`.
+
+Las cachés regenerables pueden limpiarse sin afectar el proyecto. En cambio,
+`data/developer/` y `logs/` pueden contener estado local útil y requieren una
+decisión explícita antes de eliminarlos.
+
 ## Evidencia temporal externa
 
 Cuando un volcado pueda interferir con pruebas o invariantes, se conserva fuera
@@ -83,8 +111,11 @@ Los paquetes comprimidos generados para transferencia no se versionan.
 
 El repositorio conserva las fuentes; el paquete es un medio de entrega local.
 
-## NOR.2
+## Aplicación vigente
 
-NOR.2 utilizará estas reglas para revisar la raíz completa, los directorios
-locales heredados y cualquier evidencia colocada fuera de su ubicación
-canónica.
+NOR.2 aplicó estas reglas durante la normalización de la raíz y de los
+artefactos locales heredados.
+
+Las auditorías estructurales posteriores reutilizan el mismo contrato para
+detectar reapariciones, nuevas carpetas locales, evidencia fuera de ubicación
+o divergencias entre el árbol físico y el árbol versionado canónico.

@@ -34,9 +34,13 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 - Gate final de promoción: **1269 `unittest` OK** y **`pytest` 1309 passed / 6036 subtests passed**; 183 módulos `test_*.py`; Markdown 159/159; 19 JavaScript; 16 familias / 46 identificadores; `pip check`, `compileall` y `git diff --check` limpios.
 - Ledger: G119 queda aceptado; G120/E01 (`0.1.20.01-beta`) queda reservado
   para UX.5 R1.
-- Publicación: el tag anotado y firmado `v0.1.19.05-beta` se crea únicamente
-  después de integrar y revalidar esta promoción; `v0.1.18.04-beta`
-  permanece como publicación anterior.
+- Publicación: G119/E05 quedó publicado mediante promoción PR #112 /
+  commit `9424ea854f859a24fd01fe83bdf5d476b52fc213`, tag anotado y
+  firmado `v0.1.19.05-beta`, objeto
+  `530db2ffdb9e6230fb976fbaf39472bf7ab30ea5`, workflow
+  `Git Tag Signature Verification` #17 en `success` y GitHub Release
+  prerelease ID `379454328`; `v0.1.18.04-beta` permanece preservado
+  como publicación anterior.
 
 ## [0.1.18.04-beta]
 - G118/E04: DEV.2 R5 queda aceptado después de PR #107 / merge `bc97db0`; `VERSION` avanza a `0.1.18.04-beta`.

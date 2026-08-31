@@ -6,11 +6,13 @@
 
 La versión canónica vigente es `0.1.19.05-beta`.
 
-El estado revision-aware vigente durante esta promoción es:
+El estado revision-aware vigente y publicado es:
 
 - versión canónica: `0.1.19.05-beta` (G119/E05);
 - DEV.2 R6 integrado mediante PR #111 / merge `bd2accb`;
-- G118/E04 permanece publicado mediante `v0.1.18.04-beta`;
+- G119/E05 está publicado mediante `v0.1.19.05-beta`, sobre
+  `9424ea854f859a24fd01fe83bdf5d476b52fc213`;
+- G118/E04 permanece preservado mediante `v0.1.18.04-beta`;
 - G120/E01 queda reservado para UX.5 R1;
 - REL.GOV.1 mantiene la firma del tag fuera de GitHub Actions;
 - las rutas de reporte responsable y revisión de vulnerabilidades
@@ -27,7 +29,7 @@ Mi Retiro Proyectado se encuentra en **desarrollo beta**. Los estados histórico
 
 | Línea | Soporte de seguridad |
 |---|---|
-| `0.1.19.05-beta` | Beta vigente G119/E05 aceptada para DEV.2 R6; publicación formal pendiente del merge/revalidación de la promoción y del tag firmado `v0.1.19.05-beta` |
+| `0.1.19.05-beta` | Beta vigente G119/E05 publicada para DEV.2 R6 mediante tag firmado `v0.1.19.05-beta`, workflow de verificación en `success` y GitHub Release prerelease |
 | `0.1.18.04-beta` | Beta previa G118/E04 publicada para DEV.2 R5 mediante tag firmado `v0.1.18.04-beta` y GitHub Release prerelease |
 | `0.1.17.02-beta` | Beta previa G117/E02 publicada; tag firmado y GitHub Release prerelease automatizado conforme a REL.GOV.1 R2 |
 | `0.1.16.05-beta` | Beta previa G116/E05 publicada; tag firmado, workflow de verificación y GitHub Release prerelease verificados |

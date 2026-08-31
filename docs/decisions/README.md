@@ -21,8 +21,11 @@ Estado transversal:
 
 - las ADR históricas no se reescriben;
 - `VERSION` está sincronizado en `0.1.19.05-beta` (G119/E05);
-- DEV.2 R6 queda aceptado después de PR #111 / merge `bd2accb`;
-- G118/E04 permanece publicado mediante `v0.1.18.04-beta`;
+- DEV.2 R6 queda aceptado/publicado como G119/E05 después de
+  PR #111 / merge `bd2accb`, promoción PR #112 y tag
+  `v0.1.19.05-beta`;
+- G118/E04 permanece preservado mediante `v0.1.18.04-beta` como
+  publicación anterior;
 - UX.5 R1 queda reservado como G120/E01;
 - SEC.2 R1–R6 permanece cerrado y su historia se conserva.
 <!-- DOC1-R1-REVISION-MANUAL:END -->

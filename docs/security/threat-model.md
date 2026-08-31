@@ -19,7 +19,7 @@ El modelo cubre la aplicación en su **etapa beta y modo local soportado**:
 - uso principal en `localhost`;
 - navegador como contenedor del estado temporal de simulación;
 - ausencia de cuentas de usuario final;
-- sesión administrativa web temporal en memoria, habilitada solo mediante configuración explícita;
+- identidades administrativas Developer persistentes en SQLite local y sesiones web temporales mantenidas en memoria del proceso, habilitadas solo mediante configuración explícita;
 - ausencia de base de datos permanente de simulaciones;
 - importación voluntaria de documentos PDF procesados en memoria;
 - Developer Diagnostics local y apagado por defecto;
@@ -83,7 +83,9 @@ Poder reconstruir decisiones técnicas y fallos sin crear una segunda base de da
 | Código de motores y servicios | Alta para exactitud | Repositorio / runtime | Integridad |
 | Dependencias Python/Bootstrap | Alta para cadena de suministro | Entorno / CDN | Integridad |
 | Historial Git, tags y CI | Alta para auditoría | GitHub/local | Integridad y trazabilidad |
-| Secreto y sesión administrativa | Alta | variable de entorno + memoria del proceso / cookie HttpOnly | Confidencialidad e integridad |
+| Identidades Developer | Alta | SQLite administrativo local | Confidencialidad e integridad |
+| Sesiones Developer | Alta | memoria del proceso + cookie HttpOnly | Confidencialidad e integridad |
+| Secreto Bearer técnico | Alta | variable de entorno | Confidencialidad e integridad |
 
 ## 4. Fronteras de confianza
 
@@ -164,6 +166,29 @@ Controles actuales:
 - Dependabot sin auto-merge;
 - versiones Python fijadas en `requirements.txt`.
 
+### F7 — Portal Developer ↔ almacén administrativo local
+
+DEV.2 R6 introduce una frontera administrativa separada de la simulación.
+
+El almacén SQLite conserva identidades Developer, roles, hashes Argon2id y
+revisión de seguridad. No almacena simulaciones previsionales.
+
+Controles actuales:
+
+- ubicación local y excluida de Git cuando contiene estado real;
+- Owner único y protegido;
+- hashes Argon2id;
+- RBAC deny-by-default;
+- revisión de seguridad persistente;
+- sesión temporal separada de la persistencia de identidad;
+- CSRF para operaciones humanas sensibles;
+- revalidación de contraseña cuando corresponde;
+- kill switch `MRP_ADMIN_ENABLED`.
+
+El código de recuperación Owner se persiste únicamente como hash. Su valor
+utilizable en texto claro solo corresponde al momento controlado de
+provisionamiento o recuperación.
+
 ## 5. Matriz de amenazas
 
 | ID | Amenaza | Superficie | Impacto | Probabilidad actual | Riesgo | Controles existentes | Riesgo residual / acción |
@@ -178,7 +203,7 @@ Controles actuales:
 | T-08 | Fuga de PDF por persistencia accidental | Importador | Alto | Baja | Medio | procesamiento en memoria; no persistencia del binario | reevaluar si se añade persistencia/exportación |
 | T-09 | Fuente CSS caída, inconsistente o manipulada | Fecha externa | Medio | Media | Medio | HTTPS, comparación de respuestas, estado no confiable | no declarar vigencia cuando la referencia no es confiable |
 | T-10 | Denegación de servicio por entradas excesivas | Upload/API | Medio | Media | Medio | límites de upload, páginas y texto | despliegue remoto requerirá límites adicionales/proxy |
-| T-11 | CSRF contra sesión administrativa | `/dev/` | Medio | Baja en localhost | Bajo/Medio | `SameSite` configurable, logout POST, superficie deshabilitada por defecto y sin CORS permisivo | exigir revisión específica si se usa `SameSite=None` o despliegue remoto |
+| T-11 | CSRF contra sesión administrativa | `/dev/` | Medio | Baja en localhost | Bajo/Medio | token CSRF ligado a sesión, `SameSite` configurable, logout POST, RBAC, revalidación en operaciones sensibles y superficie deshabilitada por defecto | exigir revisión específica si se usa `SameSite=None` o despliegue remoto |
 | T-12 | Clickjacking | UI | Medio | Baja | Bajo | `X-Frame-Options: DENY`, CSP `frame-ancestors 'none'` | mantener regresiones |
 | T-13 | Exposición mediante caché HTTP | API de simulación | Alto | Baja | Bajo/Medio | `Cache-Control: no-store` | revisar nuevas rutas sensibles |
 | T-14 | Manipulación de resultados en JavaScript | Presentación | Alto | Baja | Medio | fórmulas principales solo en Python, motores separados | no duplicar fórmulas de dominio en frontend |
@@ -333,7 +358,7 @@ Los documentos vigentes relacionados se enumeran en `README.md`. La revisión ju
 
 La versión base de esta revisión técnica es `0.0.23-beta`; el cierre integral posterior de GOV.1 se materializó en `0.0.24-beta`.
 
-> **Nota posterior — PLAN.1 R3B2 / 2026-08-20:** el estado vivo se revisó sobre `0.0.25-beta`. La terminología histórica de GOV.1.5 no se interpreta como una etapa actual “pre-beta”; el producto se encuentra en la línea beta `0.0.N-beta`.
+> **Nota posterior — PLAN.1 R3B2 / 2026-08-20:** el estado vivo se revisó entonces sobre `0.0.25-beta`. La terminología histórica de GOV.1.5 no se interpreta como una etapa actual “pre-beta”. Aquella revisión pertenecía a la familia legacy `0.0.N-beta`; el estado vigente utiliza la familia revision-aware `0.GG.RR.EE-beta`.
 
 ## Revisión de amenaza administrativa post-SEC.2
 

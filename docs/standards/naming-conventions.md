@@ -5,8 +5,9 @@
 Establece reglas determinísticas para nombrar carpetas, archivos, documentos,
 pruebas y evidencias nuevas.
 
-NOR.2 utilizará estas reglas para identificar nombres existentes que requieren
-normalización.
+NOR.2 utilizó estas reglas para la normalización inicial. Las auditorías
+posteriores las reutilizan para detectar nombres nuevos o reintroducidos que
+requieran corrección.
 
 ## Reglas transversales
 
@@ -187,8 +188,9 @@ Se conservan sin traducción:
 - contratos externos que dependan del nombre exacto.
 
 Una palabra española de uso genérico no se convierte en excepción únicamente
-porque ya exista en el repositorio. NOR.2 decidirá su migración considerando
-imports, rutas públicas, enlaces, pruebas y compatibilidad.
+porque ya exista en el repositorio. Cualquier migración posterior debe
+considerar imports, rutas públicas, enlaces, pruebas y compatibilidad, siguiendo
+el mismo criterio aplicado durante NOR.2.
 
 ## Renombrados
 

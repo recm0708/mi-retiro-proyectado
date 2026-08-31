@@ -166,7 +166,7 @@ Confiar encabezados reenviados de clientes no confiables permite falsificar info
 
 ## 6. Host, CORS y CSRF
 
-El diseño local no incorpora cuentas de usuario ni persistencia de simulaciones, pero SEC.2 sí añadió una sesión administrativa temporal en memoria y la cookie técnica `mrp_admin_session`.
+El diseño local no incorpora cuentas para las simulaciones ni persistencia de simulaciones. DEV.2 R6 sí incorpora identidades administrativas Developer persistentes en un almacén SQLite local, revisión de seguridad persistente y la cookie técnica `mrp_admin_session`; esta superficie permanece separada de los datos previsionales.
 
 AUD.SEC2 R1 confirma que `MRP_ADMIN_ENABLED` conserva prioridad, que el logout usa POST y que la cookie no sustituye estados 403. Si se amplía cualquiera de estos elementos:
 
@@ -298,4 +298,4 @@ Con R1, R2 y R3 quedaron documentados internamente:
 
 La revisión jurídica externa y la preparación de un despliegue remoto siguen siendo **gates pendientes**, no tareas que se declaren realizadas sin evidencia.
 
-> **Nota posterior — PLAN.1 R3A:** la expresión histórica “beta pública” deja de utilizarse como gate futuro vigente. El proyecto ya se encuentra en etapa beta `0.0.N-beta`; la frontera futura de producto es `1.0.0.0`. Esta aclaración no reescribe el cierre GOV.1.5.
+> **Nota posterior — PLAN.1 R3A:** la expresión histórica “beta pública” deja de utilizarse como gate futuro vigente. En aquel checkpoint el proyecto ya se encontraba en etapa beta dentro de la familia legacy `0.0.N-beta`. El estado vigente utiliza la familia revision-aware `0.GG.RR.EE-beta`; la frontera futura de producto continúa siendo `1.0.0.0`. Esta aclaración no reescribe el cierre GOV.1.5.

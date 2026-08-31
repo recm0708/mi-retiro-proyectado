@@ -30,13 +30,13 @@ Los estándares definidos aquí aplican a:
 
 ## Documentos canónicos
 
-- `repository-structure.md` — estructura y responsabilidades.
-- `naming-conventions.md` — reglas determinísticas de nombres.
-- `file-standards.md` — requisitos mínimos por tipo de archivo.
-- `documentation-standards.md` — documentación viva, histórica y referencias.
-- `artifact-lifecycle.md` — creación, sustitución, archivo y eliminación.
-- `root-and-local-artifacts.md` — raíz, evidencias y artefactos locales.
-- `work-block-identifiers.md` — familias, bloques, revisiones y reglas de asignación.
+- [Estructura del repositorio](repository-structure.md) — estructura y responsabilidades.
+- [Convenciones de nombres](naming-conventions.md) — reglas determinísticas de nombres.
+- [Estándares de archivos](file-standards.md) — requisitos mínimos por tipo de archivo.
+- [Estándares de documentación](documentation-standards.md) — documentación viva, histórica y referencias.
+- [Ciclo de vida de archivos y componentes](artifact-lifecycle.md) — creación, sustitución, archivo y eliminación.
+- [Raíz y artefactos locales](root-and-local-artifacts.md) — raíz, evidencias y artefactos locales.
+- [Identificadores de bloques de trabajo](work-block-identifiers.md) — familias, bloques, revisiones y reglas de asignación.
 
 Cuando una política técnica anterior contradiga estos documentos, prevalece el
 estándar NOR.1 más reciente. Las reglas especializadas no contradictorias

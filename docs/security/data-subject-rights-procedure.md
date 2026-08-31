@@ -5,7 +5,7 @@
 **Versión base histórica:** `0.0.25-beta`
 **Versión base histórica preservada:** `0.0.23-beta`
 **Fecha de cierre original:** 2026-08-18
-**Última revisión documental:** PLAN.1 R3B2 — 2026-08-20
+**Última revisión documental:** Reconciliación post-G119 — 2026-08-30
 **Clasificación:** Privacidad / Procedimiento / Interna
 **Revisión jurídica externa:** Pendiente antes de la primera versión oficial o de un cambio material del tratamiento/despliegue
 
@@ -80,12 +80,15 @@ Si existe duda sobre el cómputo en un caso real, debe escalarse a revisión jur
 
 La arquitectura actual:
 
-- no dispone de cuentas;
+- no dispone de cuentas de Asegurado(a) para la simulación;
+- sí dispone de cuentas administrativas Developer locales, separadas del tratamiento previsional del Asegurado(a);
 - no mantiene una base de datos permanente de simulaciones;
 - no sincroniza casos a una nube del proyecto;
 - mantiene la simulación principalmente en `sessionStorage`;
 - procesa PDF en memoria;
 - no envía el contenido de la simulación a GitHub.
+
+La existencia del almacén administrativo Developer no implica que exista una cuenta del Asegurado(a), ni que la simulación, sus PDF, salarios, cuotas o resultados se persistan en esa base.
 
 Aun si el responsable **no mantiene datos almacenados del solicitante**, ANTAI indica que debe responder al ejercicio del derecho.
 
@@ -239,7 +242,7 @@ Revisar este procedimiento si cambia:
 - el canal del responsable;
 - la versión material de privacidad;
 - la arquitectura local;
-- la existencia de cuentas;
+- la existencia futura de cuentas de Asegurado(a) o un cambio material en el alcance de las cuentas Developer;
 - la persistencia;
 - la nube/sincronización;
 - los destinatarios/terceros;

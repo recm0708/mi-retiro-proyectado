@@ -23,7 +23,7 @@ class TestDev2R4CierreFinal(unittest.TestCase):
             "**Estado general:** DEV.2 R1–R4 preservados; "
             "R5 integrado, aceptado y publicado como G118/E04; "
             "R6 integrado mediante PR #111 / merge `bd2accb` "
-            "y aceptado como G119/E05.",
+            "y aceptado/publicado como G119/E05.",
             documento,
         )
         self.assertIn("## Alcance de R5", documento)

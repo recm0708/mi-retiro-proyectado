@@ -1,7 +1,7 @@
 # Matriz de trazabilidad
 
 **Estado:** Vigente
-**Versión de aplicación:** `0.1.19.05-beta` — G118/E04 aceptado/publicado; reconciliación viva hasta G118 y G119/E05 reservado para DEV.2 R6
+**Versión de aplicación:** `0.1.19.05-beta` — G119/E05 aceptado/publicado para DEV.2 R6; reconciliación viva hasta G119 y G120/E01 reservado para UX.5 R1
 **Último tag formal legacy:** `v0.0.26-beta`
 **Base histórica:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal:** NOR.2 R8 — 2026-08-24
@@ -14,8 +14,9 @@
 La trazabilidad vigente alcanza G119/E05.
 
 - DEV.2 R5 permanece verificado como G118/E04.
-- DEV.2 R6 queda integrado mediante PR #111 / merge `bd2accb` y aceptado
-  como G119/E05.
+- DEV.2 R6 queda integrado mediante PR #111 / merge `bd2accb` y
+  aceptado/publicado como G119/E05 mediante promoción PR #112 /
+  commit `9424ea8` y tag `v0.1.19.05-beta`.
 - G120/E01 queda reservado para UX.5 R1.
 - La historia de NOR.2, SEC.2, AUD.SEC2, DOC.1, PLAN.2 y REL.GOV.1
   permanece preservada en sus fuentes canónicas.

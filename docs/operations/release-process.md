@@ -1,7 +1,7 @@
 # Proceso de release
 
 **Estado:** Vigente
-**Versión de aplicación:** `0.1.19.05-beta` — G118/E04 aceptado/publicado para DEV.2 R5; DEV.2 R6 candidato G119/E05
+**Versión de aplicación:** `0.1.19.05-beta` — G119/E05 aceptado/publicado para DEV.2 R6; G120/E01 reservado para UX.5 R1
 **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
 **Último tag formal legacy:** `v0.0.26-beta`
 **Versión base histórica preservada:** `0.0.23-beta`
@@ -20,11 +20,14 @@ Estado vigente:
 
 - `VERSION` materializa `0.1.19.05-beta` como G119/E05 para DEV.2 R6.
 - DEV.2 R6 fue integrado mediante PR #111 / merge `bd2accb`.
-- G118/E04 permanece publicado mediante `v0.1.18.04-beta`.
+- G119/E05 está publicado mediante `v0.1.19.05-beta`; G118/E04
+  permanece preservado como publicación anterior.
 - G120/E01 (`0.1.20.01-beta`) queda reservado para UX.5 R1.
 - La automatización no crea ni firma tags; esa frontera permanece local.
-- El tag `v0.1.19.05-beta` solo se crea después del merge de promoción
-  y de la revalidación del nuevo `main`.
+- El tag `v0.1.19.05-beta` fue creado de forma anotada y firmada
+  después del merge de promoción y de la revalidación de `main`;
+  el workflow de firma #17 y el GitHub Release prerelease quedaron
+  publicados correctamente.
 - Un Release existente incompatible falla cerrado y solo HTTP 404
   autoriza creación.
 
@@ -70,7 +73,9 @@ Sí puede consumir un nuevo `G` un estado de mantenimiento, seguridad, gobierno,
 
 El candidato reserva el siguiente número global, pero ese número solo queda consumido después del cierre satisfactorio. Si falla, se corrige conservando el mismo identificador reservado.
 
-La revisión funcional (`R#`) y el ordinal aceptado (`E##`) no se consideran equivalentes por definición. Cuando una revisión intermedia no consume Global, el ledger puede declarar `functional_revision`; el manifiesto de publicación usa ese valor para mostrar el nombre funcional correcto. DEV.2 R5 = G118/E04 es el precedente canónico y deja DEV.2 R6 = G119/E05 como siguiente candidato.
+La revisión funcional (`R#`) y el ordinal aceptado (`E##`) no se consideran equivalentes por definición. Cuando una revisión intermedia no consume Global, el ledger puede declarar `functional_revision`; el manifiesto de publicación usa ese valor para mostrar el nombre funcional correcto. DEV.2 R5 = G118/E04 y DEV.2 R6 = G119/E05 son precedentes
+canónicos de revisiones funcionales cuyo ordinal aceptado difiere de la
+revisión funcional. El siguiente candidato es UX.5 R1 = G120/E01.
 
 ## 3. Precondiciones
 

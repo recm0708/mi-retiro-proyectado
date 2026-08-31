@@ -17,8 +17,9 @@ La arquitectura previsional permanece separada de las superficies Developer.
 Estado vigente:
 
 - DEV.2 R5 permanece aceptado/publicado como G118/E04.
-- DEV.2 R6 queda integrado mediante PR #111 / merge `bd2accb` y
-  materializado como G119/E05.
+- DEV.2 R6 queda integrado mediante PR #111 / merge `bd2accb`,
+  aceptado y publicado como G119/E05 mediante el tag
+  `v0.1.19.05-beta`.
 - `/dev` utiliza identidad humana persistente; el Bearer técnico continúa
   separado y no autentica navegadores.
 - El Portal Developer dispone de resumen, diagnóstico, eventos, archivos,
@@ -63,8 +64,15 @@ introduce nuevas capas de producto.
 
 ### Núcleo
 
+- `app/cli/admin.py` — CLI administrativa local para aprovisionamiento y gestión Developer.
 - `app/core/pdf_files.py`
 - `app/core/config.py`
+- `app/core/admin_security.py`
+- `app/core/admin_session.py`
+- `app/core/developer_identity.py`
+- `app/core/developer_provisioning.py`
+- `app/core/developer_store.py`
+- `app/core/developer_web_security.py`
 - [`app/core/constants.py`](../../app/core/constants.py)
 - `app/core/money.py`
 - `app/core/normativa.py`
@@ -134,6 +142,20 @@ introduce nuevas capas de producto.
 - `app/static/js/theme.js`
 
 ## 3. Capas
+
+### 3.0. CLI administrativa (`app/cli/`)
+
+La carpeta `app/cli/` contiene comandos administrativos locales que no forman
+parte de la navegación pública.
+
+`app/cli/admin.py` reutiliza la infraestructura Developer para operaciones de
+aprovisionamiento y gestión autorizada. La CLI no sustituye el Portal
+Developer web ni introduce una base de identidades distinta: opera sobre el
+mismo contrato administrativo local correspondiente.
+
+Las credenciales, códigos de recuperación y secretos generados durante una
+operación administrativa no deben versionarse ni incorporarse a logs o
+evidencia pública.
 
 ### 3.1. Núcleo (`app/core/`)
 
@@ -249,18 +271,37 @@ Cuando está activa:
 
 Los endpoints bajo `/api/simulacion/` continúan recibiendo `Cache-Control: no-store`.
 
+
 ### Portal Developer
 
-DEV.2 R5 establece `/dev` como entrada humana canónica. El navegador utiliza
-una sesión administrativa temporal mediante cookie `HttpOnly` limitada a
-`/dev`; el acceso técnico programático conserva el contrato
-`Authorization: Bearer`. Ambos contratos respetan el kill switch
-`MRP_ADMIN_ENABLED`, el secreto externo `MRP_ADMIN_SECRET` y las respuestas
-Developer con `Cache-Control: no-store`.
+DEV.2 R6 mantiene `/dev` como entrada humana canónica y separa dos
+mecanismos de acceso.
 
-`/dev/login` se conserva como compatibilidad de entrada y `/dev/centro-desarrollo`
-mantiene compatibilidad técnica Bearer. El shell Developer no hereda la
-navegación previsional pública ni los módulos de gestión de datos de simulación.
+El acceso humano utiliza cuentas Developer persistentes almacenadas en SQLite.
+Las contraseñas se conservan como hashes Argon2id y las cuentas disponen de
+rol y revisión de seguridad persistente.
+
+El identificador temporal de cada sesión web permanece en memoria del proceso
+y se transporta mediante la cookie `mrp_admin_session`, `HttpOnly`, limitada
+a `Path=/dev`. La sesión conserva la identidad, rol y revisión de seguridad
+observada al crearse. La autorización contrasta esa información con el estado
+administrativo vigente cuando corresponde.
+
+El acceso técnico programático conserva
+`Authorization: Bearer <token>` mediante `MRP_ADMIN_SECRET` o la
+compatibilidad `MRP_ADMIN_TOKEN`. Ese secreto no autentica el login humano.
+
+`MRP_ADMIN_ENABLED` continúa siendo el kill switch principal. Las respuestas
+Developer mantienen `Cache-Control: no-store`.
+
+R6 incorpora superficies separadas para dashboard, diagnóstico, eventos,
+archivos, mantenimiento, privacidad, perfil y acceso técnico. Las acciones
+sensibles aplican RBAC deny-by-default, CSRF y revalidación de contraseña
+cuando corresponde.
+
+`/dev/centro-desarrollo` permanece como superficie técnica legacy autorizada.
+El shell Developer no comparte la navegación previsional ni utiliza el
+almacén administrativo para datos de simulación.
 
 ## 7.1. Inventario de rutas FastAPI
 
@@ -290,8 +331,20 @@ El siguiente inventario se deriva de los decoradores vigentes en `app/main.py`. 
 | `/api/sistema/fecha-referencia` |
 | `/comparar` |
 | `/dev` |
+| `/dev/acceso-tecnico` |
+| `/dev/archivos` |
+| `/dev/archivos/exportar` |
+| `/dev/centro-desarrollo` |
+| `/dev/diagnostico` |
+| `/dev/eventos` |
 | `/dev/login` |
 | `/dev/logout` |
+| `/dev/mantenimiento` |
+| `/dev/mantenimiento/limpiar-sesiones` |
+| `/dev/mantenimiento/revocar-sesiones` |
+| `/dev/perfil` |
+| `/dev/perfil/password` |
+| `/dev/privacidad` |
 | `/como-se-calcula` |
 | `/favicon.ico` |
 | `/metodologia` |
@@ -358,7 +411,9 @@ La versión acumulativa anterior a GOV.1.3 R2 se conserva en:
 
 `docs/archive/technical/architecture-pre-gov1-3-r2.md`
 
-Este documento describe el estado técnico vigente después de GOV.1.4.
+Este documento describe el estado técnico vigente reconciliado hasta DEV.2 R6 / G119/E05.
+
+Como ancla histórica de DEV.2 R4 y VER.2 R2, ese cierre no añade rutas públicas nuevas y conserva `0.0.26-beta` como versión visible/canónica legacy; esta referencia no la trata como candidato VER.2 ni sustituye la versión revision-aware vigente.
 
 
 ## UX.4.6f R1.1 — bloqueo documental en superficies principales
@@ -382,13 +437,31 @@ El Paso 6 enlaza a la sección del sistema correspondiente mediante anclas públ
 
 La guía reutiliza el catálogo de fuentes de `app/services/regulatory_sources.py`. Por tanto, una modificación normativa o de fórmula exige revisar en conjunto motor, JSON versionado, trazabilidad, guía pública y pruebas relacionadas.
 
+
 ## DEV.2 — Centro de desarrollo
 
-La ruta interna `/dev/centro-desarrollo` muestra una superficie local de desarrollo para revisar el estado técnico de Developer Diagnostics. Esta vista no ejecuta cálculos previsionales, no lee cuerpos HTTP, no procesa PDFs, no muestra rutas absolutas del equipo y no expone identidad, salarios, cuotas ni montos de pensión.
+DEV.2 está cerrado después de R6 y publicado como G119/E05.
 
-DEV.2 quedó cerrado documentalmente en R4 después de integrar R1, R2 y R3. R1 abrió la ruta interna, R2 añadió el visor diagnóstico seguro y la exportación ZIP sanitizada, R3 añadió el autodiagnóstico técnico local y R4 sincroniza la documentación viva del bloque.
+R1 abrió la superficie técnica inicial; R2 añadió el visor diagnóstico y la
+exportación sanitizada; R3 incorporó autodiagnóstico; R4 cerró la primera
+documentación del bloque sin consumir un Global independiente.
 
-La ruta usa `MRP_DEV_MODE` solo como indicador de activación diagnóstica, conserva `0.0.26-beta` como versión visible/canónica legacy, no la trata como candidato VER.2, no añade rutas públicas nuevas, no modifica motores previsionales, no crea tags y no adelanta el cierre transversal de VER.2.
+R5 estableció `/dev` como entrada humana canónica, separó la sesión web del
+Bearer técnico y creó un shell Developer independiente.
+
+R6 añadió identidades Developer persistentes, Owner protegido, roles
+Owner/Admin/Operator/Auditor, contraseñas Argon2id, revisión de seguridad,
+RBAC deny-by-default, CSRF y revalidación para operaciones sensibles.
+
+El portal R6 utiliza páginas independientes para dashboard, diagnóstico,
+eventos, archivos, mantenimiento, privacidad, perfil y acceso técnico.
+
+Las sesiones web siguen siendo temporales y se mantienen en memoria del
+proceso. La identidad, los hashes y la revisión de seguridad viven en el
+almacén SQLite administrativo, separado de la simulación previsional.
+
+DEV.2 no modifica motores previsionales, parámetros normativos ni contratos
+públicos de simulación.
 
 ## Política de estructura por extensión
 
@@ -404,19 +477,31 @@ comentarios internos cuando el formato lo permite.
 
 ## SEC.2 R6 — Control de sesión administrativa
 
-La autenticación administrativa separa la validación inicial mediante secreto del mantenimiento de sesión web temporal. La sesión no almacena datos personales y se invalida por expiración o revocación.
+SEC.2 R6 introdujo la sesión web administrativa temporal previa al modelo de
+identidades humanas de DEV.2 R6. Esa sesión sigue sin almacenar datos de
+simulación y continúa invalidándose por expiración o revocación; DEV.2 R6
+añade posteriormente identidad, rol y revisión de seguridad.
 
-## Reconciliación de la superficie administrativa post-SEC.2
+## Reconciliación de la superficie administrativa post-DEV.2 R6
 
-La arquitectura administrativa mantiene dos formas de acceso sobre la misma
-credencial externa: Bearer para clientes técnicos y login web que materializa
-una sesión temporal en memoria. `MRP_ADMIN_ENABLED` conserva prioridad sobre
-ambas. La sesión web no es una cuenta de usuario ni una persistencia de
-simulaciones y sus cookies nunca forman parte de Developer Diagnostics.
+La arquitectura administrativa mantiene dos contratos de acceso separados.
 
-AUD.SEC2 R1 corrige la ruta POST de login para respetar el kill switch, limita
-el fallback de sesión a errores 401, convierte logout en POST y extiende
-`Cache-Control: no-store` a `/dev/`.
+El login humano autentica una cuenta Developer persistente y materializa una
+sesión temporal en memoria. La cookie no contiene la contraseña ni los datos
+previsionales.
+
+El Bearer técnico utiliza un secreto externo independiente y no representa
+una cuenta humana.
+
+`MRP_ADMIN_ENABLED` conserva prioridad sobre ambos contratos.
+
+La revisión de seguridad persistente de cada identidad permite invalidar
+sesiones anteriores después de cambios sensibles. La sesión temporal no
+convierte el almacén Developer en una base de datos de simulaciones.
+
+AUD.SEC2 R1 permanece como antecedente del kill switch, logout POST y
+`Cache-Control: no-store`; DEV.2 R6 amplía ese modelo con identidad, RBAC,
+CSRF, perfil, mantenimiento y acceso técnico separado.
 
 ## Portal Developer multipágina
 

@@ -49,10 +49,12 @@ class TestRelGovR2LivePublicationState(unittest.TestCase):
                 self.assertIsNone(re.search(r"\breservado\b", lowered))
 
     def test_publicacion_g117_real_se_preserva_en_release_canonico(self):
-        readme = (ROOT / "README.md").read_text(encoding="utf-8")
         releases = (ROOT / "RELEASES.md").read_text(encoding="utf-8")
 
-        self.assertIn("v0.1.17.02-beta", readme)
+        # RELEASES.md conserva el inventario histórico completo de
+        # publicaciones. README.md puede resumir los estados recientes
+        # sin repetir necesariamente todos los tags anteriores.
+
         self.assertIn("v0.1.17.02-beta", releases)
         self.assertIn(
             "3ab9fefbdfc969c546feb83182e3c0e6879ba771",
@@ -71,7 +73,7 @@ class TestRelGovR2LivePublicationState(unittest.TestCase):
             text,
         )
         self.assertIn(
-            "| `0.1.19.05-beta` | Beta vigente G119/E05 aceptada",
+            "| `0.1.19.05-beta` | Beta vigente G119/E05 publicada",
             text,
         )
 

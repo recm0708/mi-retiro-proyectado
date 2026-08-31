@@ -3,9 +3,10 @@
 **Estado:** Vigente
 **Versión de aplicación revisada:** `0.1.19.05-beta`
 **Versión base histórica:** `0.0.23-beta`
-**Revisión documental:** GOV.1.3 R3 — 2026-08-17
+**Revisión documental base:** GOV.1.3 R3 — 2026-08-17
+**Última revisión documental:** Reconciliación post-G119 — 2026-08-30
 **Clasificación:** Normativa / Técnica / Pública
-**Revisión externa:** Pendiente antes de una publicación pública o comercial
+**Revisión externa:** Pendiente en REV.1 antes de la primera versión oficial o de un despliegue/distribución que cambie materialmente el riesgo jurídico
 
 Este documento describe cómo Mi Retiro Proyectado interpreta y versiona las reglas previsionales implementadas. No sustituye el texto legal, un reglamento, una resolución de la CSS ni una determinación individual.
 
@@ -98,18 +99,36 @@ El CAP requiere saldo y parámetros individualizados cuando no puedan reconstrui
 
 La discrepancia permanece explícita y vinculada al ADR correspondiente; no se armoniza silenciosamente.
 
-### 6.2. Fecha operativa de 2026
+### 6.2. Fecha operativa de 2026 y discrepancia documental
 
-La CSS continúa comunicando el **18/08/2026** como fecha límite operativa para asegurados que cumplan los requisitos de la opción de sistema.
+La CSS comunicó durante 2026 el **18/08/2026** como fecha límite operativa
+para asegurados habilitados para ejercer la opción de sistema. Esa fecha ya
+transcurrió y se conserva únicamente como antecedente operativo.
 
-Esta fecha es **temporal y contextual**. Debe revalidarse antes de utilizarse después de 2026 o para orientar una decisión individual.
+Las comunicaciones institucionales inmediatamente anteriores al vencimiento
+reiteraron el 18 de agosto de 2026.
+
+Sin embargo, el artículo 4 del Reglamento de Incorporación al Componente
+Contributivo de Capitalización Solidaria, Resolución 57,805-2025-J.D.,
+publicado en Gaceta Oficial 30314 de 3 de julio de 2025, contiene la fecha
+**17/03/2026**.
+
+El proyecto conserva ambas evidencias y no inventa una reconciliación
+jurídica entre ellas.
+
+Antes de utilizar nuevamente una fecha de opción en producto, documentación
+orientada a una decisión individual o lógica ejecutable debe identificarse
+la fuente jurídica vigente que explique, modifique o sustituya esa diferencia.
 
 Fuentes:
 
+- https://www.gacetaoficial.gob.pa/storage/gacetas/2025/07/30314/GacetaNo_30314_20250703.pdf
 - https://prensa.css.gob.pa/2026/07/10/css-intensifica-jornadas-de-capacitacion-sobre-mi-retiro-seguro-ante-la-fecha-clave-del-18-de-agosto/
 - https://prensa.css.gob.pa/2026/07/13/cuenta-regresiva-hacia-el-18-de-agosto-asegurados-deben-decidir-su-futuro-pensional/
+- https://prensa.css.gob.pa/2026/08/15/css-extendera-atencion-este-domingo-para-orientar-a-los-asegurados-sobre-mi-retiro-seguro/
+- https://prensa.css.gob.pa/2026/08/18/css-realiza-capacitaciones-sobre-pensiones-con-jornada-en-el-organo-judicial/
 
-Última verificación: **2026-08-17**.
+Última verificación documental: **2026-08-30**.
 
 Consultar [Subsistema Mixto — diseño y alcance del motor](mixto-modalities.md).
 
@@ -176,11 +195,13 @@ Ante un cambio normativo o reglamentario:
 7. registrar ADR cuando exista interpretación;
 8. actualizar changelog/versionado según corresponda.
 
-## 12. Frontera de R3
+## 12. Frontera documental y revisión externa
 
-GOV.1.3 R3 realiza **alineación documental**. No declara certificación jurídica ni resuelve por sí sola las discrepancias normativas ya documentadas.
+GOV.1.3 R3 realizó **alineación documental**. No declaró certificación jurídica ni resolvió por sí sola las discrepancias normativas ya documentadas.
 
-La revisión jurídica formal se mantiene planificada para GOV.1.5 antes de una publicación pública o comercial.
+GOV.1.5 completó posteriormente una revisión interna de seguridad, privacidad y riesgo, pero no constituyó una revisión jurídica externa.
+
+La revisión jurídica profesional permanece pendiente en REV.1 antes de la primera versión oficial o antes de un despliegue, distribución o tratamiento que cambie materialmente el modelo de riesgo.
 
 ## 13. Historia
 

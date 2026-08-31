@@ -62,7 +62,7 @@ Una aceptación activa está versionada y vinculada a la sesión actual además 
 
 La simulación se conserva temporalmente en el navegador.
 
-La versión actual no dispone de cuentas ni base de datos permanente de simulaciones.
+La versión actual no dispone de cuentas de Asegurado(a) ni base de datos permanente de simulaciones. El Portal Developer sí utiliza cuentas administrativas locales separadas, que no almacenan la simulación previsional.
 
 ## 8. Control local
 
@@ -108,7 +108,7 @@ Estas conexiones se describen en `privacy-policy.md` y `security-and-privacy.md`
 
 ## 13. Cookies y seguimiento
 
-Mi Retiro Proyectado no implementa cookies propias de publicidad, analítica, seguimiento o perfilado. La superficie administrativa puede crear `mrp_admin_session`, una cookie técnica `HttpOnly` de autenticación temporal que no se utiliza para la simulación ni para seguimiento comercial.
+Mi Retiro Proyectado no implementa cookies propias de publicidad, analítica, seguimiento o perfilado. La superficie administrativa puede crear `mrp_admin_session`, una cookie técnica `HttpOnly` para una sesión Developer temporal vinculada a una identidad administrativa local; no se utiliza para la simulación ni para seguimiento comercial.
 
 ## 14. Derechos
 

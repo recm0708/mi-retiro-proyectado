@@ -37,7 +37,11 @@ Preserva el control del titular y no concede públicamente derechos de copia, mo
 
 GOV.1.7 adoptó, durante la etapa entonces denominada pre-beta, una **licencia propietaria / todos los derechos reservados** sobre materiales originales y añadió `LICENSE` y `THIRD_PARTY_NOTICES.md`.
 
-PLAN.1 no cambia esa decisión de licencia. La aplicación está ahora documentada como beta `0.0.N-beta`, mientras la licencia propietaria continúa vigente hasta que exista una decisión expresa diferente.
+PLAN.1 no cambia esa decisión de licencia. La aplicación permanece
+en etapa beta; las publicaciones nuevas utilizan actualmente la familia
+revision-aware `0.GG.RR.EE-beta`, mientras `0.0.N-beta` se conserva como
+familia legacy histórica. La licencia propietaria continúa vigente hasta que
+exista una decisión expresa diferente.
 
 La decisión puede revisarse para versiones futuras si el titular decide abrir el proyecto y dispone de los derechos necesarios.
 

@@ -3,7 +3,7 @@
 **Proyecto:** Mi Retiro Proyectado
 **Estado:** vigente desde GOV.1.2
 **Fecha de adopción:** 2026-08-18
-**Última revisión:** promoción formal DEV.2 R6 — G119/E05 aceptado; UX.5 R1 candidato G120/E01 — 2026-08-30
+**Última revisión:** DEV.2 R6 publicado como G119/E05; UX.5 R1 candidato G120/E01 — 2026-08-30
 
 
 <!-- DOC1-R1-POST-MANT1:START -->
@@ -15,11 +15,14 @@ evidencia histórica y candidatos posteriores.
 Estado vigente:
 
 - `VERSION` sigue siendo la fuente única de versión.
-- `0.1.19.05-beta` materializa G119/E05 para DEV.2 R6 en este snapshot
-  de promoción.
-- G118/E04 permanece publicado mediante `v0.1.18.04-beta`.
-- DEV.2 R6 quedó integrado mediante PR #111 / merge `bd2accb` y se
-  registra como G119/E05.
+- `0.1.19.05-beta` es la versión canónica publicada de G119/E05
+  para DEV.2 R6.
+- G119/E05 quedó publicado mediante promoción PR #112, commit
+  `9424ea8` y tag firmado `v0.1.19.05-beta`.
+- G118/E04 permanece preservado mediante `v0.1.18.04-beta` como
+  publicación anterior.
+- DEV.2 R6 quedó integrado mediante PR #111 / merge `bd2accb`,
+  aceptado como G119/E05 y posteriormente publicado.
 - DEV.2 queda cerrado después de R6.
 - UX.5 R1 queda reservado como G120/E01 (`0.1.20.01-beta`).
 - DOC.1 R1–R5, PLAN.2 R1, NOR.1, NOR.2, SEC.2 R1–R6,

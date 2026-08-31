@@ -5,7 +5,7 @@
 **Versión base histórica:** `0.0.23-beta`
 **Revisión documental:** GOV.1.3 R3 — 2026-08-17
 **Clasificación:** Normativa / Motor
-**Revisión externa:** Pendiente
+**Revisión externa:** Pendiente en REV.1 antes de la primera versión oficial o de una decisión jurídica individual
 
 [Normativa](regulatory-framework.md) · [Fuentes](regulatory-sources.md) · [Motor](../architecture/calculation-engine.md)
 

@@ -29,9 +29,17 @@
   **1309 passed / 6036 subtests passed**; 183 módulos `test_*.py`;
   Markdown 159/159; 19 JavaScript; 16 familias / 46 identificadores;
   `pip check`, `compileall` y `git diff --check` limpios.
-- El tag `v0.1.19.05-beta` se crea únicamente después del merge y
-  la revalidación post-merge; `v0.1.18.04-beta` permanece como
-  publicación anterior.
+- Promoción final: PR #112 / commit
+  `9424ea854f859a24fd01fe83bdf5d476b52fc213`; tag anotado y firmado
+  `v0.1.19.05-beta`, objeto
+  `530db2ffdb9e6230fb976fbaf39472bf7ab30ea5`, firma SSH válida,
+  workflow `Git Tag Signature Verification` #17 en `success` y GitHub
+  Release prerelease ID `379454328`.
+- Revalidación post-merge sobre `main` antes del tag: **1269 `unittest`
+  OK**; **`pytest` 1309 passed / 6050 subtests passed**; 19 JavaScript;
+  Markdown 159/159; 16 familias / 46 identificadores; `pip check`,
+  `compileall`, contrato de release, manifiesto y `git diff --check`
+  limpios. `v0.1.18.04-beta` permanece como publicación anterior.
 
 ## Publicación G118/E04 — DEV.2 R5
 
@@ -132,7 +140,7 @@ Estado vigente:
 - `v0.0.71.01-beta` conserva su denominación histórica original y se reconcilia como G087/E01 sin alterar el tag.
 - MANT.1, NOR.1 R8, NOR.2, DOC.1 R1–R5 y PLAN.2 R1 están cerrados.
 - DOC.2 permanece aceptado/publicado como G111/E01; NOR.1 R8 como G112/E07, DOC.1 R3 como G113/E03, PLAN.2 R1 como G114/E01, DOC.1 R4 como G115/E04 y DOC.1 R5 como G116/E05.
-- G114/E01 permanece aceptado/publicado para PLAN.2 R1; G115/E04 (`0.1.15.04-beta`) queda aceptado/publicado para DOC.1 R4; G116/E05 (`0.1.16.05-beta`) queda aceptado/publicado para DOC.1 R5; G117/E02 (`0.1.17.02-beta`) queda aceptado/publicado para REL.GOV.1 R2. G118/E04 (`0.1.18.04-beta`) queda aceptado/publicado para DEV.2 R5; G119/E05 (`0.1.19.05-beta`) queda reservado para DEV.2 R6; PERSIST.1 y REP.1 permanecen posteriormente según la matriz maestra viva.
+- G114/E01 permanece aceptado/publicado para PLAN.2 R1; G115/E04 (`0.1.15.04-beta`) queda aceptado/publicado para DOC.1 R4; G116/E05 (`0.1.16.05-beta`) queda aceptado/publicado para DOC.1 R5; G117/E02 (`0.1.17.02-beta`) queda aceptado/publicado para REL.GOV.1 R2. G118/E04 (`0.1.18.04-beta`) queda aceptado/publicado para DEV.2 R5; G119/E05 (`0.1.19.05-beta`) queda aceptado/publicado para DEV.2 R6; G120/E01 (`0.1.20.01-beta`) queda reservado para UX.5 R1; PERSIST.1 y REP.1 permanecen posteriormente según la matriz maestra viva.
 - SEC.2 quedó cerrado después de R1–R6 y AUD.SEC2 R1 permanece aceptado como G109/E01.
 
 Este documento no crea una release nueva; registra el estado formal ya alcanzado por el repositorio.

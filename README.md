@@ -27,14 +27,16 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 - **Último estado funcional integrado en `main`:** DEV.2 R6 mediante
   PR #111 / merge `bd2accbea421fc719d9330015533001039648d05`.
 - **Estado revision-aware reconciliado:** G119/E05 (`0.1.19.05-beta`)
-  queda aceptado para DEV.2 R6; G120/E01 (`0.1.20.01-beta`) queda
+  queda aceptado/publicado para DEV.2 R6; G120/E01 (`0.1.20.01-beta`) queda
   reservado para UX.5 R1.
-- **Publicación revision-aware vigente durante esta promoción:**
-  `v0.1.18.04-beta` (G118/E04), tag anotado y firmado sobre
-  `290e84aab70a257e8b718d172e37365af49ef048`; `v0.1.17.02-beta`
-  (G117/E02) permanece preservado como publicación histórica anterior.
-  La publicación de `v0.1.19.05-beta` ocurre únicamente después del
-  merge y revalidación de esta promoción.
+- **Publicación revision-aware vigente:** `v0.1.19.05-beta`
+  (G119/E05), tag anotado y firmado sobre
+  `9424ea854f859a24fd01fe83bdf5d476b52fc213`, con objeto de tag
+  `530db2ffdb9e6230fb976fbaf39472bf7ab30ea5`. El workflow
+  `Git Tag Signature Verification` #17 finalizó en `success` y publicó
+  el GitHub Release prerelease ID `379454328`. `v0.1.18.04-beta`
+  (G118/E04) permanece preservado como publicación anterior.
+
 - **Última versión formal legacy:** `0.0.26-beta`.
 - **Etapa:** desarrollo beta; repositorio público y ejecución orientada
   actualmente a entorno local.
@@ -42,7 +44,7 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
   y G117/E02.
 - **DEV.2:** R1–R3 permanecen aceptados históricamente; R4 fue un cierre
   documental sin Global independiente; R5 queda aceptado/publicado como
-  G118/E04 y R6 queda aceptado como G119/E05.
+  G118/E04 y R6 queda aceptado/publicado como G119/E05.
 - **UX.5:** R1 queda como candidato reservado G120/E01.
 - **DOC.1:** R1–R5 cerrados; R6 permanece planificado para congelación
   documental final.
@@ -142,7 +144,7 @@ La documentación vigente debe apuntar únicamente a rutas canónicas actuales. 
 
 `0.0.22-beta` fue la primera versión formal adoptada bajo la política de GOV.1.2; `0.0.23-beta` cerró GOV.1.3; `0.0.24-beta` cerró integralmente GOV.1; `0.0.25-beta` cerró UX.4.6e; y `0.0.26-beta` cerró PLAN.1. Sus tags publicados permanecen firmados e inmutables.
 
-El 2026-08-26 se completó el backfill administrativo de GitHub Releases. Con las publicaciones formales posteriores hasta G118/E04, el repositorio cuenta actualmente con **37 tags formales reales** y **37 GitHub Releases**. Los Releases de `v0.0.1-beta`–`v0.0.26-beta` creados retrospectivamente no cambian la fecha histórica, firma ni commit objetivo de sus tags.
+El 2026-08-26 se completó el backfill administrativo de GitHub Releases. Con la publicación formal de G119/E05, el repositorio cuenta actualmente con **38 tags formales reales** y **38 GitHub Releases**. Los Releases de `v0.0.1-beta`–`v0.0.26-beta` creados retrospectivamente no cambian la fecha histórica, firma ni commit objetivo de sus tags.
 
 Después de `v0.0.26-beta`, UX.4.6f–UX.4.6i continuaron históricamente sobre ese mismo valor de `VERSION`. VER.2 reconstruye todo el tramo sin inventar tags: el último estado aceptado de la base `7037addd` es **G070/E02**, cierre de UX.4.6i.
 
@@ -168,29 +170,52 @@ Consultar:
 
 Git continúa siendo la evidencia primaria de autores, fechas, hashes y contenido histórico.
 
-## Arquitectura resumida
+## Arquitectura canónica del repositorio
+
+El siguiente árbol representa los **directorios versionados y canónicos**
+derivados del inventario real de Git. No intenta listar individualmente todos
+los archivos de código, documentación o pruebas, pero sí muestra todas las
+carpetas y subcarpetas canónicas vigentes y los archivos transversales de la
+raíz.
 
 ```text
 mi-retiro-proyectado/
 ├── .githooks/
 ├── .github/
+│   ├── ISSUE_TEMPLATE/
+│   └── workflows/
 ├── app/
+│   ├── cli/
 │   ├── core/
 │   ├── engines/
 │   ├── models/
 │   ├── services/
 │   ├── static/
-│   ├── templates/
-│   └── main.py
+│   │   ├── css/
+│   │   ├── img/
+│   │   │   └── brand/
+│   │   └── js/
+│   └── templates/
+│       └── partials/
 ├── assets/
 │   ├── brand/
+│   │   ├── icons/
+│   │   ├── logos/
+│   │   └── source/
 │   └── social/
 ├── data/
 ├── docs/
-│   ├── README.md
 │   ├── architecture/
 │   ├── archive/
+│   │   ├── governance/
+│   │   ├── regulatory-privacy/
+│   │   ├── technical/
+│   │   └── ux/
 │   ├── audits/
+│   │   ├── documentation/
+│   │   ├── governance/
+│   │   ├── repository/
+│   │   └── security/
 │   ├── decisions/
 │   ├── governance/
 │   ├── operations/
@@ -199,24 +224,83 @@ mi-retiro-proyectado/
 │   ├── security/
 │   ├── standards/
 │   └── templates/
+│       ├── documentation/
+│       └── file-structure/
 ├── regulations/
 ├── scripts/
 ├── tests/
+│   └── validation_cases/
+├── .editorconfig
+├── .gitattributes
+├── .gitignore
 ├── CHANGELOG.md
 ├── CODE_OF_CONDUCT.md
 ├── CONTRIBUTING.md
 ├── GOVERNANCE.md
 ├── LICENSE
+├── README.md
 ├── RELEASES.md
+├── requirements.txt
 ├── SECURITY.md
 ├── SUPPORT.md
 ├── THIRD_PARTY_NOTICES.md
 ├── VERSION
-├── VERSIONING.md
-└── requirements.txt
+└── VERSIONING.md
 ```
 
-El árbol anterior representa únicamente rutas **versionadas y canónicas**. Elementos locales como `.venv/`, `_deliverables/`, caches y logs de diagnóstico no forman parte de la arquitectura versionada y no deben añadirse al README.
+### Responsabilidad de cada área
+
+| Área | Contenido y responsabilidad |
+| --- | --- |
+| `.githooks/` | Hooks Git versionados utilizados por el gate local, incluido el delegador `pre-commit`. |
+| `.github/` | Configuración específica de GitHub: workflows, plantillas de issues, CODEOWNERS, Dependabot, release configuration y claves públicas autorizadas. |
+| `app/cli/` | Comandos administrativos locales, incluida la CLI del Portal Developer. |
+| `app/core/` | Configuración, seguridad, sesiones, identidad Developer, observabilidad, dinero, normativa, versionado y utilidades transversales. |
+| `app/engines/` | Motores previsionales y reglas ejecutables de SEBD, Mixto, SUCGS y elegibilidad. |
+| `app/models/` | Modelos y contratos de datos de la simulación, resultados, comparación y trazabilidad. |
+| `app/services/` | Orquestación y transformación de datos entre modelos, motores, importadores, cronologías, resultados y presentación. |
+| `app/static/` | Recursos servidos por la aplicación: CSS, JavaScript e imágenes de runtime. |
+| `app/templates/` | Plantillas Jinja2 de páginas y parciales reutilizables. |
+| `assets/brand/` | Fuentes maestras, logos e iconos oficiales de identidad visual. |
+| `assets/social/` | Recursos destinados a presentación social y metadata del repositorio. |
+| `data/` | Ledgers y manifiestos machine-readable versionados. El estado Developer real no se versiona. |
+| `docs/architecture/` | Arquitectura técnica, modelos, motores y Portal Developer. |
+| `docs/archive/` | Evidencia histórica cerrada que conserva valor de auditoría y no representa por sí sola el estado vigente. |
+| `docs/audits/` | Auditorías versionables de documentación, gobierno, repositorio y seguridad. |
+| `docs/decisions/` | Registro de decisiones y ADR del proyecto. |
+| `docs/governance/` | Roadmap, planificación, ledgers, versionado operativo y gobierno pre-1.0. |
+| `docs/operations/` | Desarrollo, validación, observabilidad, releases, dependencias y operación técnica. |
+| `docs/product/` | Especificación funcional, transparencia, limitaciones, identidad visual y comportamiento del producto. |
+| `docs/regulatory/` | Marco normativo, fuentes oficiales y documentación de los sistemas previsionales. |
+| `docs/security/` | Seguridad, privacidad, threat model, procedimientos y evaluaciones de riesgo. |
+| `docs/standards/` | Estándares canónicos de archivos, documentación, nomenclatura y estructura. |
+| `docs/templates/` | Plantillas documentales y plantillas técnicas por tipo de archivo. |
+| `regulations/` | Parámetros normativos versionados en JSON consumidos por la aplicación. |
+| `scripts/` | Auditores, validadores, herramientas de release y automatización de mantenimiento. |
+| `tests/` | Suite de regresión y contratos permanentes del proyecto. |
+| `tests/validation_cases/` | Casos sintéticos/versionables para validaciones específicas; los originales privados permanecen fuera de Git. |
+
+Los archivos de la raíz tienen responsabilidades transversales: versión,
+licencia, gobierno, seguridad, soporte, contribución, releases, changelog,
+dependencias y configuración del repositorio.
+
+### Elementos locales que no pertenecen al árbol canónico
+
+El workspace puede contener elementos legítimos que Git ignora y que por tanto
+no aparecen en el árbol anterior:
+
+- `.git/` — metadata interna del clon;
+- `.venv/` — entorno virtual local de Python;
+- `.pytest_cache/` y `__pycache__/` — cachés regenerables;
+- `logs/` y `logs/diagnostico/` — observabilidad local;
+- `data/developer/` — estado SQLite local del Portal Developer;
+- `_deliverables/` — entregables o evidencia local cuando se necesiten;
+- `_entregas/` — nombre heredado bloqueado únicamente para evitar su
+  reaparición accidental.
+
+Estos elementos no deben versionarse. Que existan físicamente no representa
+una divergencia del árbol canónico mientras permanezcan correctamente
+ignorados.
 
 ## Instalación para desarrollo local
 

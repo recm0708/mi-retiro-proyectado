@@ -1,11 +1,11 @@
 # Roadmap
 
 **Estado:** vigente
-**Versión vigente:** `0.1.19.05-beta` — G119/E05 aceptado para DEV.2 R6
+**Versión vigente:** `0.1.19.05-beta` — G119/E05 aceptado/publicado para DEV.2 R6
 **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
 **Último tag formal legacy:** `v0.0.26-beta`
 **Fecha de revisión:** 2026-08-30
-**Estado actual:** DEV.2 R6 queda cerrado/aceptado como G119/E05 (`0.1.19.05-beta`) después de PR #111 / merge `bd2accb`; G118/E04 permanece publicado mediante `v0.1.18.04-beta`; UX.5 R1 queda reservado como candidato G120/E01 (`0.1.20.01-beta`).
+**Estado actual:** DEV.2 R6 queda cerrado/aceptado/publicado como G119/E05 (`0.1.19.05-beta`) después de PR #111 / merge `bd2accb`, promoción PR #112 / commit `9424ea8` y tag firmado `v0.1.19.05-beta`; UX.5 R1 queda reservado como candidato G120/E01 (`0.1.20.01-beta`).
 
 
 <!-- NOR1-R7-CLOSURE:START -->
@@ -30,7 +30,10 @@ La secuencia operativa previa a SEC.2 queda:
 11. **DOC.1 R5** — cerrado/aceptado como G116/E05 (`0.1.16.05-beta`) mediante PR #101 / merge `6f4266d`.
 12. **REL.GOV.1 R2** — cerrado/aceptado como G117/E02 (`0.1.17.02-beta`) mediante PR #103 / merge `46c464e`.
 13. **DEV.2 R5** — cerrado/aceptado/publicado como G118/E04 (`0.1.18.04-beta`) mediante PR #107 / merge `bc97db0`, promoción PR #108 / `290e84a` y tag `v0.1.18.04-beta`; Portal Developer y acceso.
-14. **DEV.2 R6** — cerrado/aceptado como G119/E05 (`0.1.19.05-beta`) después de PR #111 / merge `bd2accb`.
+14. **DEV.2 R6** — cerrado/aceptado/publicado como G119/E05
+    (`0.1.19.05-beta`) después de PR #111 / merge `bd2accb`,
+    promoción PR #112 / commit `9424ea8` y tag
+    `v0.1.19.05-beta`.
 15. **UX.5 R1** — checkpoint candidato G120/E01 (`0.1.20.01-beta`) para el sistema visual integral.
 
 NOR.2 ejecutó los movimientos, renombrados, consolidaciones y retiros que
@@ -164,7 +167,10 @@ VER.2 es un bloque transversal de reconciliación y **no añade un bloque 15** a
 - repositorio público con metadata, topics, labels e Issue Forms;
 - Dependency graph, Dependabot, CodeQL, Secret Protection, Push protection y Private vulnerability reporting;
 - CI y auditoría automática de gobernanza;
-- DEV.2 — R5 aceptado/publicado como G118/E04: Portal Developer con `/dev` canónico, sesión web separada de Bearer y shell técnico independiente; R6 continúa como candidato G119/E05;
+- DEV.2 — R5 aceptado/publicado como G118/E04 y R6
+  aceptado/publicado como G119/E05: Portal Developer con `/dev`
+  canónico, identidad humana persistente, sesión web separada de
+  Bearer, RBAC, observabilidad y superficies multipágina;
 - NOR.2 — normalización integral del repositorio cerrada en R8 mediante PR #74.
 
 ### Pendiente o incompleto
@@ -219,12 +225,12 @@ No existe una una revisión intermedia no demostrada entre UX.4.6i R1 y R1.2 dem
 
 **VER.2:** bloque transversal cerrado. La primera promoción se publicó como `0.0.71.01-beta`; AUD.SEC2 R1 documenta que el ledger usado entonces terminaba en G070 y que la reconstrucción completa sitúa ese estado en G087 sin modificar el tag inmutable.
 
-**Checkpoint técnico actual:** G118/E04 (`0.1.18.04-beta`) está aceptado/publicado para DEV.2 R5. G112/E07–G117/E02 permanecen preservados según el ledger; G119/E05 (`0.1.19.05-beta`) queda reservado como candidato para DEV.2 R6 y PERSIST.1 continúa en una etapa posterior.
+**Checkpoint técnico actual:** G119/E05 (`0.1.19.05-beta`) está aceptado/publicado para DEV.2 R6. G112/E07–G118/E04 permanecen preservados según el ledger; G120/E01 (`0.1.20.01-beta`) queda reservado como candidato para UX.5 R1 y PERSIST.1 continúa en una etapa posterior.
 
 Documentos canónicos de VER.2:
 
 - `pre-1-0-versioning-audit.md` — criterio contable y exclusiones;
-- `pre-1-0-revision-ledger.md` — ledger reconciliado G001–G118 y siguiente Global G119/E05 reservado para DEV.2 R6;
+- `pre-1-0-revision-ledger.md` — ledger reconciliado G001–G119 y siguiente Global G120/E01 reservado para UX.5 R1;
 - `ver2-revision-decision-matrix.md` — justificación de la segunda pasada;
 - `../data/pre-1-0-revision-ledger.json` — ledger estructurado validable;
 - `../VERSIONING.md` — política de numeración.

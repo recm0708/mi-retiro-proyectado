@@ -9,20 +9,25 @@
 
 
 <!-- DOC1-R1-POST-MANT1:START -->
-## Estado funcional post-MANT.1
+## Estado funcional vigente
 
-El cierre MANT.1 R7 no altera el alcance funcional de la aplicación. La especificación funcional conserva los mismos motores, flujos y criterios de cálculo existentes antes del cierre operativo.
+La aplicación previsional mantiene sin cambios las fórmulas y parámetros
+normativos durante DEV.2 R6.
 
 Estado vigente:
 
-- No se modifican fórmulas previsionales.
-- No se modifican parámetros normativos.
-- No se modifica `VERSION`.
-- No se modifican datos ni entregables.
-- MANT.1 queda cerrado como bloque técnico/documental.
-- DOC.1 R1 está cerrado; la documentación Markdown vigente desalineada después de MANT.1 quedó corregida.
+- `VERSION` es `0.1.19.05-beta`.
+- DEV.2 R6 está cerrado/aceptado/publicado como G119/E05.
+- El Portal Developer es una superficie administrativa separada de la
+  simulación previsional.
+- Las identidades Developer persistentes no constituyen cuentas de
+  Asegurado(a).
+- DEV.2 R6 no modifica motores SEBD, Mixto o SUCGS.
+- DEV.2 R6 no modifica parámetros normativos.
+- G120/E01 queda reservado para UX.5 R1.
 
-Las referencias históricas dentro de auditorías, ADR o archivos archivados no deben reinterpretarse como estado vigente.
+Las referencias históricas dentro del registro RF, auditorías, ADR o archivo
+no deben reinterpretarse como estado vigente.
 <!-- DOC1-R1-POST-MANT1:END -->
 
 Este documento tiene dos capas:
@@ -173,6 +178,29 @@ Debe conservar navegación por teclado, foco visible, mensajes accesibles, tabla
 Las páginas públicas deben reutilizar resultados/fuentes ya calculados/cargados, sin implementar nuevas reglas previsionales.
 
 Los enlaces visibles deben usar nombres humanos, no IDs internos de normativa.
+
+## 8.1. Portal Developer
+
+El Portal Developer es una capacidad administrativa interna y no forma parte
+del flujo previsional de seis pasos.
+
+Su contrato vigente incluye:
+
+- `/dev` como entrada humana canónica;
+- identidades Developer locales persistentes;
+- roles Owner, Admin, Operator y Auditor;
+- RBAC deny-by-default;
+- sesiones web temporales;
+- Bearer técnico separado del login humano;
+- diagnóstico y eventos sanitizados;
+- inventario y exportación de archivos diagnósticos permitidos;
+- mantenimiento controlado;
+- privacidad, perfil y acceso técnico separados;
+- CSRF y revalidación en operaciones sensibles cuando corresponde.
+
+El Portal Developer no debe utilizar datos personales o financieros de una
+simulación como información administrativa y no altera los resultados de los
+motores previsionales.
 
 ## 9. Reglas de precedencia RF conocidas
 
