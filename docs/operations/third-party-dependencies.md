@@ -19,7 +19,7 @@ Las versiones corresponden al `requirements.txt` vigente. La estructura document
 |---|---:|---|---|---|---|
 | FastAPI | 0.141.1 | API local, rutas y middleware | MIT | Atiende solicitudes de la aplicación; no añade por sí sola un envío externo | Revisar cambios de framework/Starlette |
 | Jinja2 | 3.1.6 | Plantillas HTML | BSD-3-Clause | Render local del servidor | Revisar autoescape/plantillas |
-| Pydantic | 2.13.4 | Validación/modelos | MIT | Validación local de estructuras | Revisar cambios de esquema/core |
+| Pydantic | 2.13.5 | Validación/modelos | MIT | Validación local de estructuras | Revisar cambios de esquema/core |
 | python-multipart | 0.0.32 | Recepción multipart de archivos | Apache-2.0 | Procesa cargas recibidas por FastAPI | Sensible a frontera de upload |
 | pypdf | 6.16.2 | Extracción y lectura controlada de PDF | BSD-3-Clause | Procesa PDF en memoria; sin red propia | Dependencia crítica de parser; mantener regresiones específicas en cada actualización |
 | Uvicorn | 0.52.4 | Servidor ASGI | BSD-3-Clause | Sirve la aplicación; la red depende del modo de ejecución | Revisar configuración de despliegue |
@@ -99,7 +99,7 @@ GitHub Actions utiliza, entre otras referencias versionadas:
 - `actions/setup-python@v7`;
 - `actions/setup-node@v7`;
 - `actions/upload-artifact@v7`;
-- `actions/dependency-review-action@v4`;
+- `actions/dependency-review-action@v5`;
 - `actions/labeler@v7`.
 
 Las referencias externas declaradas mediante `uses:` se auditan con

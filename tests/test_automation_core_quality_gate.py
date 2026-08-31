@@ -8,6 +8,7 @@ from pathlib import Path
 import subprocess
 import sys
 import unittest
+import yaml
 
 from scripts import audit_action_references
 from scripts import audit_external_links
@@ -374,7 +375,7 @@ class TestAutomationCoreQualityGate(unittest.TestCase):
         ).read_text(encoding="utf-8")
         self.assertIn("name: Dependency Security", workflow)
         self.assertIn("pip-audit==2.10.1", workflow)
-        self.assertIn("actions/dependency-review-action@v4", workflow)
+        self.assertIn("actions/dependency-review-action@v5", workflow)
         self.assertIn("scripts/audit_action_references.py", workflow)
 
     def test_dependency_review_solo_corre_en_pr(self):
@@ -933,6 +934,50 @@ class TestAutomationCoreQualityGate(unittest.TestCase):
             names,
         )
 
+
+    def test_dependabot_coordina_pydantic_con_su_core(self):
+        config = yaml.safe_load(
+            (
+                ROOT
+                / ".github"
+                / "dependabot.yml"
+            ).read_text(
+                encoding="utf-8"
+            )
+        )
+
+        pip_update = next(
+            item
+            for item in config["updates"]
+            if item["package-ecosystem"] == "pip"
+        )
+
+        allowed = {
+            item["dependency-name"]
+            for item in pip_update["allow"]
+        }
+
+        patterns = set(
+            pip_update["groups"][
+                "python-runtime-minor-patch"
+            ]["patterns"]
+        )
+
+        for dependency in (
+            "pydantic",
+            "pydantic_core",
+        ):
+            with self.subTest(
+                dependency=dependency
+            ):
+                self.assertIn(
+                    dependency,
+                    allowed,
+                )
+                self.assertIn(
+                    dependency,
+                    patterns,
+                )
 
 
 if __name__ == "__main__":
