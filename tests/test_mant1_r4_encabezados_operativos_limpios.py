@@ -13,8 +13,6 @@ ARCHIVOS_OPERATIVOS = (
     ".github/ISSUE_TEMPLATE/config.yml",
     ".github/ISSUE_TEMPLATE/feature_request.yml",
     ".github/ISSUE_TEMPLATE/question.yml",
-    ".github/workflows/governance-audit.yml",
-    ".github/workflows/ci.yml",
     ".github/workflows/verificar-tags.yml",
     ".githooks/README.md",
     "scripts/README.md",
@@ -46,14 +44,34 @@ class TestMant1R4EncabezadosOperativosLimpios(unittest.TestCase):
                     self.assertNotIn(patron, primeras_lineas)
 
     def test_yaml_github_mantiene_encabezado_funcional(self):
-        """Los YAML conservan encabezado, propósito y alcance sin cambiar claves operativas."""
+        """Los YAML históricos vigentes conservan encabezado funcional."""
 
-        for ruta in ARCHIVOS_OPERATIVOS[:8]:
-            primeras_lineas = self._leer(ruta).splitlines()[:4]
+        yaml_paths = [
+            ruta
+            for ruta in ARCHIVOS_OPERATIVOS
+            if ruta.endswith(
+                (".yml", ".yaml")
+            )
+        ]
+
+        for ruta in yaml_paths:
+            primeras_lineas = (
+                self._leer(ruta)
+                .splitlines()[:4]
+            )
+
             with self.subTest(ruta=ruta):
-                self.assertTrue(primeras_lineas[0].startswith("# "))
-                self.assertIn("# Propósito:", primeras_lineas[1])
-                self.assertIn("# Alcance:", primeras_lineas[2])
+                self.assertTrue(
+                    primeras_lineas[0].startswith("# ")
+                )
+                self.assertIn(
+                    "# Propósito:",
+                    primeras_lineas[1],
+                )
+                self.assertIn(
+                    "# Alcance:",
+                    primeras_lineas[2],
+                )
 
     def test_readme_operativos_no_contienen_bloque_ni_origen_de_revision(self):
         """Los README técnicos explican uso permanente, no bitácora de MANT.1."""

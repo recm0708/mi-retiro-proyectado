@@ -8,7 +8,6 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 EXPECTED_PATHS = [
-    ".github/workflows/governance-audit.yml",
     "app/core/pdf_files.py",
     "app/core/money.py",
     "app/core/observability.py",

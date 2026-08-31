@@ -9,15 +9,9 @@
 <h1 align="center">Mi Retiro Proyectado</h1>
 
 <p align="center">
-  <a href="https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/quality-gate.yml">
-    <img alt="Repository Quality Gate" src="https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/quality-gate.yml/badge.svg?branch=main">
-  </a>
-  <a href="https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/dependency-security.yml">
-    <img alt="Dependency Security" src="https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/dependency-security.yml/badge.svg?branch=main">
-  </a>
-  <a href="https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/visual-a11y.yml">
-    <img alt="Visual & Accessibility" src="https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/visual-a11y.yml/badge.svg?branch=main">
-  </a>
+  <a href="https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/quality-gate.yml"><img alt="Repository Quality Gate" src="https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/quality-gate.yml/badge.svg?branch=main"></a>
+  <a href="https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/dependency-security.yml"><img alt="Dependency Security" src="https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/dependency-security.yml/badge.svg?branch=main"></a>
+  <a href="https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/visual-a11y.yml"><img alt="Visual & Accessibility" src="https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/visual-a11y.yml/badge.svg?branch=main"></a>
 </p>
 
 <p align="center">
@@ -85,8 +79,10 @@ de Pull Requests, Repository Health, Release Readiness, dependencias y supply
 chain, enlaces externos programados, tags firmados, autoetiquetado y baseline
 Visual/Accessibility con Playwright y axe.
 
-Los workflows históricos continúan temporalmente en paralelo hasta validar
-equivalencia remota y migrar el ruleset sin perder protección.
+La migración post-G119 quedó completada. `Repository Quality Gate` y
+`Python Compatibility` son los required checks canónicos de `main`; los
+workflows legacy de CI, gobernanza y Markdown fueron retirados después de
+demostrar equivalencia remota y migrar el ruleset sin perder protección.
 
 Esta automatización corresponde a mantenimiento post-G119 y no consume
 G120/E01.

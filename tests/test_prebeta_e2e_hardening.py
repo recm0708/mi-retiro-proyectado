@@ -338,18 +338,68 @@ class TestPreBetaE2EHardening(unittest.TestCase):
         )
         self.assertEqual(respuesta.headers.get("cache-control"), "no-store")
 
-    def test_ci_prebeta_cubre_python_node_y_suite(self):
-        workflow = (ROOT / ".github/workflows/ci.yml").read_text(encoding="utf-8")
-        self.assertIn('python-version: ["3.13", "3.14"]', workflow)
-        self.assertRegex(workflow, r'actions/checkout@v\d+')
-        self.assertRegex(workflow, r'actions/setup-python@v\d+')
-        self.assertRegex(workflow, r'actions/setup-node@v\d+')
-        self.assertIn('node-version: "24"', workflow)
-        self.assertIn('python -m pip check', workflow)
-        self.assertIn('python -m compileall app', workflow)
-        self.assertIn('node --check "$archivo"', workflow)
-        self.assertIn('python -m unittest discover -s tests -v', workflow)
-        self.assertIn('contents: read', workflow)
+    def test_quality_gate_prebeta_cubre_python_node_y_suite(self):
+        workflow = (
+            ROOT
+            / ".github/workflows/quality-gate.yml"
+        ).read_text(
+            encoding="utf-8"
+        )
+
+        self.assertIn(
+            'python-version: "3.14"',
+            workflow,
+        )
+
+        self.assertIn(
+            'python-version: "3.13"',
+            workflow,
+        )
+
+        self.assertRegex(
+            workflow,
+            r"actions/checkout@v\d+",
+        )
+
+        self.assertRegex(
+            workflow,
+            r"actions/setup-python@v\d+",
+        )
+
+        self.assertRegex(
+            workflow,
+            r"actions/setup-node@v\d+",
+        )
+
+        self.assertIn(
+            'node-version: "24"',
+            workflow,
+        )
+
+        self.assertIn(
+            "python -m pip check",
+            workflow,
+        )
+
+        self.assertIn(
+            "python -m compileall app scripts tests -q",
+            workflow,
+        )
+
+        self.assertIn(
+            "python -m unittest discover -s tests -q",
+            workflow,
+        )
+
+        self.assertIn(
+            "python scripts/quality_gate.py",
+            workflow,
+        )
+
+        self.assertIn(
+            "contents: read",
+            workflow,
+        )
 
     def test_dependabot_vigila_dependencias_directas_y_agrupa_actualizaciones(self):
         config = (ROOT / ".github/dependabot.yml").read_text(encoding="utf-8")

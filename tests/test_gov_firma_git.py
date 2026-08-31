@@ -29,25 +29,61 @@ class TestGovFirmaGit(unittest.TestCase):
         self.assertNotIn("actions/checkout@v6", texto)
 
     def test_workflow_usa_allowed_signers_versionado(self):
-        texto = (ROOT / ".github" / "workflows" / "verificar-tags.yml").read_text(encoding="utf-8")
-        self.assertIn("gpg.format ssh", texto)
-        self.assertIn("gpg.ssh.allowedSignersFile", texto)
-        self.assertIn(".github/allowed_signers", texto)
-        self.assertIn("fetch-depth: 0", texto)
-
-        ci = (ROOT / ".github" / "workflows" / "ci.yml").read_text(
+        texto = (
+            ROOT
+            / ".github"
+            / "workflows"
+            / "verificar-tags.yml"
+        ).read_text(
             encoding="utf-8"
         )
+
+        self.assertIn(
+            "gpg.format ssh",
+            texto,
+        )
+        self.assertIn(
+            "gpg.ssh.allowedSignersFile",
+            texto,
+        )
+        self.assertIn(
+            ".github/allowed_signers",
+            texto,
+        )
+        self.assertIn(
+            "fetch-depth: 0",
+            texto,
+        )
+
+        gate = (
+            ROOT
+            / ".github"
+            / "workflows"
+            / "quality-gate.yml"
+        ).read_text(
+            encoding="utf-8"
+        )
+
         for action in (
             "actions/checkout@v7",
             "actions/setup-python@v7",
             "actions/setup-node@v7",
         ):
-            self.assertIn(action, ci)
+            with self.subTest(action=action):
+                self.assertIn(
+                    action,
+                    gate,
+                )
 
-        self.assertNotIn("actions/checkout@v6", ci)
-        self.assertNotIn("actions/setup-python@v6", ci)
-        self.assertNotIn("actions/setup-node@v6", ci)
+        for old in (
+            "actions/checkout@v6",
+            "actions/setup-python@v6",
+            "actions/setup-node@v6",
+        ):
+            self.assertNotIn(
+                old,
+                gate,
+            )
 
     def test_versioning_distingue_tags_retrospectivos_de_fecha_historica(self):
         texto = (ROOT / "VERSIONING.md").read_text(encoding="utf-8")

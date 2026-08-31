@@ -172,16 +172,33 @@ class TestAutomationCoreQualityGate(unittest.TestCase):
         self.assertIn("actions/upload-artifact@v7", text)
         self.assertIn("retention-days: 14", text)
 
-    def test_workflows_historicos_permanecen_durante_migracion(self):
+    def test_workflows_canonicos_post_migracion_existen(self):
         workflows = ROOT / ".github" / "workflows"
+
+        active = {
+            "dependency-security.yml",
+            "pr-labeler.yml",
+            "quality-gate.yml",
+            "scheduled-health.yml",
+            "verificar-tags.yml",
+            "visual-a11y.yml",
+        }
+
+        for name in active:
+            with self.subTest(workflow=name):
+                self.assertTrue(
+                    (workflows / name).is_file()
+                )
+
         for name in (
             "ci.yml",
             "governance-audit.yml",
             "markdown-audit.yml",
-            "verificar-tags.yml",
         ):
-            with self.subTest(workflow=name):
-                self.assertTrue((workflows / name).is_file())
+            with self.subTest(legacy=name):
+                self.assertFalse(
+                    (workflows / name).exists()
+                )
 
     def test_scripts_readme_documenta_automation_core(self):
         text = (ROOT / "scripts" / "README.md").read_text(encoding="utf-8")
@@ -896,28 +913,26 @@ class TestAutomationCoreQualityGate(unittest.TestCase):
             compatibility,
         )
 
-    def test_ci_legacy_transitorio_conserva_contexto_reproducible(self):
-        workflow = (
-            ROOT
-            / ".github"
-            / "workflows"
-            / "ci.yml"
-        ).read_text(
-            encoding="utf-8"
+    def test_inventario_workflows_post_migracion_es_canonico(self):
+        workflows = ROOT / ".github" / "workflows"
+
+        names = {
+            path.name
+            for path in workflows.glob("*.yml")
+        }
+
+        self.assertEqual(
+            {
+                "dependency-security.yml",
+                "pr-labeler.yml",
+                "quality-gate.yml",
+                "scheduled-health.yml",
+                "verificar-tags.yml",
+                "visual-a11y.yml",
+            },
+            names,
         )
 
-        for expected in (
-            "fetch-depth: 0",
-            "fetch-tags: true",
-            "persist-credentials: false",
-            "requirements-dev.txt",
-            "python -m pip check",
-        ):
-            with self.subTest(expected=expected):
-                self.assertIn(
-                    expected,
-                    workflow,
-                )
 
 
 if __name__ == "__main__":

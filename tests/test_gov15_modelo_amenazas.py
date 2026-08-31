@@ -82,7 +82,7 @@ class TestGov15ModeloAmenazasR1(unittest.TestCase):
             "app/core/observability.py",
             "app/main.py",
             "app/services/reference_date.py",
-            ".github/workflows/ci.yml",
+            ".github/workflows/quality-gate.yml",
         ):
             with self.subTest(ruta=ruta):
                 self.assertTrue((ROOT / ruta).is_file(), ruta)

@@ -33,21 +33,37 @@ class TestSEC2R1CodeQLWorkflowHardening(unittest.TestCase):
 
     def test_workflows_tienen_nombres_tecnicos_en_ingles(self):
         esperados = {
-            "ci.yml": "name: Continuous Integration",
-            "governance-audit.yml":
-                "name: Repository Governance Audit",
-            "markdown-audit.yml": "name: Markdown Audit",
+            "quality-gate.yml":
+                "name: Repository Quality Gate",
+            "dependency-security.yml":
+                "name: Dependency Security",
+            "scheduled-health.yml":
+                "name: Scheduled Repository Health",
+            "pr-labeler.yml":
+                "name: PR Auto Labeler",
+            "visual-a11y.yml":
+                "name: Visual & Accessibility",
             "verificar-tags.yml":
                 "name: Git Tag Signature Verification",
         }
 
         for archivo, nombre in esperados.items():
-            with self.subTest(archivo=archivo):
+            with self.subTest(
+                archivo=archivo
+            ):
                 contenido = (
-                    ROOT / ".github/workflows" / archivo
-                ).read_text(encoding="utf-8")
+                    ROOT
+                    / ".github/workflows"
+                    / archivo
+                ).read_text(
+                    encoding="utf-8"
+                )
 
-                self.assertIn(nombre, contenido)
+                self.assertIn(
+                    nombre,
+                    contenido,
+                )
+
 
 
 if __name__ == "__main__":

@@ -43,20 +43,6 @@ YAML_GITHUB = {
         'labels: ["question", "needs-triage"]',
         "Confirmo que esta consulta no contiene una vulnerabilidad",
     ),
-    ".github/workflows/governance-audit.yml": (
-        "# Workflow de auditoría de gobernanza.",
-        "Propósito:",
-        "Alcance:",
-        "pull_request:",
-        "python -m unittest tests.test_gov16_controles_github -v",
-    ),
-    ".github/workflows/ci.yml": (
-        "# Workflow de validación continua.",
-        "Propósito:",
-        "Alcance:",
-        'python-version: ["3.13", "3.14"]',
-        "python -m unittest discover -s tests -v",
-    ),
     ".github/workflows/verificar-tags.yml": (
         "# Workflow de verificación de firmas Git.",
         "Propósito:",

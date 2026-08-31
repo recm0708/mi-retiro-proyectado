@@ -181,8 +181,9 @@ La auditoría visual cubre:
 - las superficies públicas principales y `/dev`;
 - WCAG 2.0, 2.1 y 2.2 mediante axe.
 
-Los workflows históricos continúan temporalmente activos para comprobar
-equivalencia antes de modificar el ruleset.
+La equivalencia remota quedó demostrada en GitHub y el ruleset de `main`
+fue migrado a `Repository Quality Gate` y `Python Compatibility`. Los
+workflows legacy de CI, gobernanza y Markdown quedaron retirados.
 
 Esta infraestructura no cambia `VERSION`, no acepta G120 y no crea commits,
 tags ni GitHub Releases.
@@ -1176,7 +1177,7 @@ Controles permanentes incorporados:
 - regresiones específicas en `tests/test_markdown_audit.py`;
 - documentación operativa en `scripts/README.md`;
 - reglas canónicas en `docs/standards/documentation-standards.md`;
-- workflow `.github/workflows/markdown-audit.yml`.
+- workflow histórico `.github/workflows/markdown-audit.yml`, retirado post-G119 después de integrar su función en `quality-gate.yml`.
 
 Validaciones focales ya confirmadas:
 

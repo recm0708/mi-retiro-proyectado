@@ -59,12 +59,31 @@ class TestUX46eRenumeracionDocumental(unittest.TestCase):
 
     def test_topics_priorizan_espanol_y_reservan_tecnologias_canonicas(self):
         for topic in (
-            "accesibilidad", "jubilacion", "retiro", "seguridad-social",
-            "estimacion-previsional", "python", "fastapi",
+            "accesibilidad",
+            "jubilacion",
+            "retiro",
+            "seguridad-social-panama",
+            "estimacion-previsional",
+            "privacidad",
+            "simulador-pension",
+            "python",
+            "fastapi",
         ):
-            self.assertIn(f"`{topic}`", self.publicacion)
-        for eliminado in ("`retirement`", "`retirement-planning`", "`social-security`"):
-            self.assertNotIn(eliminado, self.publicacion)
+            with self.subTest(topic=topic):
+                self.assertIn(
+                    f"`{topic}`",
+                    self.publicacion,
+                )
+
+        for legacy in (
+            "prevision-social",
+            "seguridad-social",
+        ):
+            with self.subTest(legacy=legacy):
+                self.assertNotIn(
+                    f"- `{legacy}`",
+                    self.publicacion,
+                )
 
     def test_topic_sebd_panama_es_el_valor_final_configurado(self):
         self.assertIn("`sebd-panama`", self.publicacion)
