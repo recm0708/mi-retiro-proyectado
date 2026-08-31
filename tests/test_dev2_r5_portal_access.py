@@ -246,8 +246,6 @@ class TestDev2R5PortalAccess(unittest.TestCase):
         self.assertIn("G118/E04", documentacion)
         self.assertIn("G119/E05", documentacion)
 
-        version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
-        self.assertEqual("0.1.18.04-beta", version)
 
 if __name__ == "__main__":
     unittest.main()

@@ -1,7 +1,7 @@
 # Transparencia del producto
 
 **Estado:** Vigente
-**Versión de aplicación revisada:** `0.1.18.04-beta`
+**Versión de aplicación revisada:** `0.1.19.05-beta`
 **Versión base histórica:** `0.0.25-beta`
 **Versión base histórica preservada:** `0.0.23-beta`
 **Base documental preservada:** GOV.1.3 R4 — 2026-08-17
@@ -12,17 +12,15 @@
 <!-- DOC1-R1-REVISION-MANUAL:START -->
 ## Nota de lectura post-MANT.1
 
-La transparencia del producto se interpreta desde el cierre operativo de MANT.1 R7 y la auditoría documental DOC.1 R1.
+La transparencia del producto se interpreta desde el estado revision-aware
+vigente.
 
-Estado vigente:
-
-- MANT.1 está cerrado.
-- DOC.1 R1 está cerrado.
-- VER.2 está cerrado y `v0.0.71.01-beta` fue publicado.
-- NOR.1 está cerrado en R8 como G112/E07; NOR.2 permanece cerrado.
-- DOC.1 R2 está cerrado tras auditar integralmente la documentación Markdown posterior a NOR.2.
-- `VERSION` está sincronizado en `0.1.18.04-beta` (G118/E04), DEV.2 R5 está aceptado/publicado mediante `v0.1.18.04-beta` y G119/E05 (`0.1.19.05-beta`) queda reservado para DEV.2 R6. PERSIST.1 permanece planificado posteriormente.
-- SEC.2 quedó cerrado después de R1–R6 sin cambiar reglas previsionales; AUD.SEC2 R1 corrige seguridad administrativa y trazabilidad sin alterar motores.
+- `VERSION` está sincronizado en `0.1.19.05-beta` (G119/E05).
+- DEV.2 R6 queda aceptado después de PR #111 / merge `bd2accb`.
+- G118/E04 permanece publicado mediante `v0.1.18.04-beta`.
+- UX.5 R1 queda reservado como G120/E01.
+- DEV.2 no altera reglas previsionales ni convierte Developer Diagnostics
+  en telemetría de producto.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 
 Mi Retiro Proyectado es una herramienta independiente de estimación previsional. Este documento delimita qué puede afirmarse sobre el producto y qué debe permanecer explícitamente como aproximación, limitación o pendiente.

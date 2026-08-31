@@ -9,14 +9,14 @@
     "tracked_files": 459
   },
   "current_candidate": {
-    "global_revision": 119,
-    "revision_aware": "0.1.19.05-beta",
-    "block": "DEV.2",
-    "revision": "R6",
+    "global_revision": 120,
+    "revision_aware": "0.1.20.01-beta",
+    "block": "UX.5",
+    "revision": "R1",
     "state": "reserved_not_accepted",
     "next_functional_block_if_accepted": "UX.5",
     "next_functional_global_if_accepted": null,
-    "edition": 5
+    "edition": 1
   },
   "families": [
     {
@@ -419,12 +419,13 @@
       "identifier": "DEV.2",
       "family": "DEV",
       "kind": "block",
-      "status": "reopened_candidate_r6",
-      "meaning": "R1–R3 aceptados en G071–G073; R4 fue cierre documental no contabilizado por separado; R5 queda aceptado como G118/E04 y R6 continúa como candidato G119/E05 para el Portal Developer multipágina, diagnóstico, archivos y mantenimiento.",
-      "evidence": "Ledger G071–G073 y G118; PR #107 / merge bc97db0; docs/governance/pre-1-0-pending-matrix.md; G119/E05 reservado para DEV.2 R6.",
+      "status": "closed",
+      "meaning": "R1–R3 aceptados en G071–G073; R4 fue cierre documental no contabilizado por separado; R5 queda aceptado como G118/E04 y R6 queda aceptado como G119/E05 con el Portal Developer multipágina, identidad, observabilidad, mantenimiento, seguridad y privacidad.",
+      "evidence": "Ledger G071–G073, G118 y G119; PR #107 / merge bc97db0; PR #111 / merge bd2accbea421fc719d9330015533001039648d05.",
       "global_refs": [
         "G071-G073",
-        "G118"
+        "G118",
+        "G119"
       ],
       "reusable_for_different_scope": false
     },
@@ -618,9 +619,9 @@
       "identifier": "UX.5",
       "family": "UX",
       "kind": "block",
-      "status": "planned_reserved",
-      "meaning": "Rediseño integral de experiencia, sistema visual y flujo Manual/Asistido.",
-      "evidence": "docs/governance/pre-1-0-pending-matrix.md",
+      "status": "candidate_r1",
+      "meaning": "Rediseño integral de experiencia, sistema visual y flujo Manual/Asistido; R1 queda reservado como G120/E01.",
+      "evidence": "docs/governance/pre-1-0-pending-matrix.md; G120/E01 reservado para UX.5 R1.",
       "global_refs": [],
       "reusable_for_different_scope": false
     }

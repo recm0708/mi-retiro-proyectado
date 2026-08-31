@@ -7,6 +7,32 @@
 
 
 <!-- DOC1-R1-POST-MANT1:START -->
+## Promoción G119/E05 — DEV.2 R6
+
+- Estado aceptado en este snapshot de promoción: G119/E05
+  (`0.1.19.05-beta`) para DEV.2 R6.
+- Evidencia funcional: PR #111 / merge
+  `bd2accbea421fc719d9330015533001039648d05`.
+- Cierre técnico firmado:
+  `ac9968b5a1e26d5dc8f08b0e28f5fab5aa9f6258`.
+- HEAD final del desarrollo:
+  `0a024bf1ab8c7a9dd79735c5b9c31fd0695d6139`.
+- Gate de desarrollo: 1269 `unittest` OK; `pytest` 1309 passed /
+  6045 subtests; 182 módulos `test_*.py`; Markdown 159/159;
+  16 familias / 46 identificadores; `pip check`, compilación,
+  JavaScript y `git diff --check` limpios.
+- Los ocho checks del PR #111 finalizaron en `success`, incluidos
+  CI, gobernanza, Markdown Audit y CodeQL.
+- Esta sincronización materializa G119 y no consume G120.
+- G120/E01 (`0.1.20.01-beta`) queda reservado para UX.5 R1.
+- Gate final de promoción: **1269 `unittest` OK**; `pytest`
+  **1309 passed / 6036 subtests passed**; 183 módulos `test_*.py`;
+  Markdown 159/159; 19 JavaScript; 16 familias / 46 identificadores;
+  `pip check`, `compileall` y `git diff --check` limpios.
+- El tag `v0.1.19.05-beta` se crea únicamente después del merge y
+  la revalidación post-merge; `v0.1.18.04-beta` permanece como
+  publicación anterior.
+
 ## Publicación G118/E04 — DEV.2 R5
 
 - Estado aceptado/publicado: G118/E04 (`0.1.18.04-beta`) para DEV.2 R5.

@@ -1,9 +1,9 @@
 # Índice de documentación
 
 **Estado:** vigente
-**Versión de aplicación:** `0.1.18.04-beta` — G118/E04 aceptado/publicado para DEV.2 R5; G119/E05 reservado para DEV.2 R6; ledger aceptado hasta G118
+**Versión de aplicación:** `0.1.19.05-beta` — G119/E05 aceptado para DEV.2 R6; G120/E01 reservado para UX.5 R1; ledger aceptado hasta G119
 **Último tag formal legacy:** `v0.0.26-beta`
-**Última actualización transversal:** publicación formal DEV.2 R5 — G118/E04 aceptado/publicado; DEV.2 R6 candidato G119/E05 — 2026-08-28
+**Última actualización transversal:** promoción DEV.2 R6 — G119/E05 aceptado; UX.5 R1 candidato G120/E01 — 2026-08-30
 **Cierres históricos preservados:** UX.4.6i / PR #34 — 841 pruebas; UX.4.6e R9 — `v0.0.25-beta`
 
 Este archivo es el punto de entrada para la documentación técnica, funcional, normativa, de privacidad, validación y auditoría de Mi Retiro Proyectado.
@@ -11,7 +11,7 @@ Este archivo es el punto de entrada para la documentación técnica, funcional, 
 
 ## Estado de normalización del repositorio
 
-**Estado actual:** NOR.1 R8, NOR.2, DOC.1 R2–R5, SEC.2, AUD.SEC2 R1, REL.GOV.1 R1–R2, DOC.2 y PLAN.2 R1 están cerrados/aceptados según corresponda. DEV.2 R5 queda aceptado/publicado como G118/E04 (`0.1.18.04-beta`); DEV.2 R6 reserva G119/E05 como candidato actual.
+**Estado actual:** NOR.1 R8, NOR.2, DOC.1 R2–R5, SEC.2, AUD.SEC2 R1, REL.GOV.1 R1–R2, DOC.2 y PLAN.2 R1 están cerrados/aceptados según corresponda. DEV.2 R6 queda aceptado como G119/E05 (`0.1.19.05-beta`); UX.5 R1 reserva G120/E01 como candidato actual.
 
 Estado de la fase:
 
@@ -32,7 +32,8 @@ Estado de la fase:
 - **DOC.1 R5:** cerrado/aceptado como G116/E05 mediante PR #101 / merge `6f4266d`; normalización documental integral post-G115 completada.
 - **REL.GOV.1 R2:** cerrado/aceptado como G117/E02 mediante PR #103 / merge `46c464e`; automatización gobernada de Releases y checks completada.
 - **DEV.2 R5:** cerrado/aceptado/publicado como G118/E04 (`0.1.18.04-beta`) mediante PR #107 / merge `bc97db0`, promoción PR #108 / commit `290e84a` y tag `v0.1.18.04-beta`; Portal Developer y separación sesión web/Bearer integrados.
-- **DEV.2 R6:** candidato G119/E05 (`0.1.19.05-beta`) para Portal Developer multipágina, diagnóstico, eventos, archivos y mantenimiento.
+- **DEV.2 R6:** cerrado/aceptado como G119/E05 (`0.1.19.05-beta`) mediante PR #111 / merge `bd2accb`; Portal Developer multipágina, identidad, observabilidad, mantenimiento, seguridad y privacidad integrados.
+- **UX.5 R1:** candidato G120/E01 (`0.1.20.01-beta`) para el sistema visual integral.
 - **SEC.2 R1–R6:** cerrados; CodeQL, autenticación, protección de endpoints, auditoría, sesión web y hardening configurable completados. AUD.SEC2 R1 corrigió el kill switch, alineó documentación/ledger y quedó aceptado como G109/E01.
 
 Evidencia:
@@ -77,7 +78,7 @@ Evidencia:
 - **[VER.2 — Segunda pasada de auditoría cruzada](archive/governance/ver2-second-pass-audit.md)** — bitácora de la segunda pasada y correcciones sobre la primera reconstrucción.
 - **[VER.2 — Conteo de segunda pasada](archive/governance/ver2-provisional-count-audit.md)** — cierre del conteo de segunda pasada en G070 antes de VER.2.
 - **[VER.2 — Matriz de decisión de revisiones aceptadas](archive/governance/ver2-revision-decision-matrix.md)** — decisión fila por fila sobre qué consume Global y por qué.
-- **[Ledger de revisiones aceptadas pre-1.0](governance/pre-1-0-revision-ledger.md)** — ledger Markdown reconciliado G001–G118 y siguiente candidato reservado G119/E05 para DEV.2 R6.
+- **[Ledger de revisiones aceptadas pre-1.0](governance/pre-1-0-revision-ledger.md)** — ledger Markdown reconciliado G001–G119 y siguiente candidato reservado G120/E01 para UX.5 R1.
 - **[Auditoría de reconciliación revision-aware posterior a G070](audits/governance/post-g070-revision-reconciliation.md)** — auditoría de reconstrucción G071–G108.
 - [`pre-1-0-revision-ledger-g070.json`](archive/governance/pre-1-0-revision-ledger-g070.json) — snapshot histórico exacto G070.
 - [`../data/pre-1-0-revision-ledger.json`](../data/pre-1-0-revision-ledger.json) — ledger machine-readable canónico de la reconstrucción.

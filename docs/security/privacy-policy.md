@@ -3,7 +3,7 @@
 **Producto:** Mi Retiro Proyectado
 **Versión del texto:** `2026-08-16.1`
 **Estado:** Vigente en la aplicación
-**Versión de aplicación revisada:** `0.1.18.04-beta`
+**Versión de aplicación revisada:** `0.1.19.05-beta`
 **Versión base histórica:** `0.0.25-beta`
 **Versión base histórica preservada:** `0.0.23-beta`
 **Base documental:** GOV.1.3 R3 — 2026-08-17
@@ -16,17 +16,17 @@
 <!-- DOC1-R1-REVISION-MANUAL:START -->
 ## Nota de lectura vigente
 
-La política de privacidad mantiene su alcance material. Las menciones a R6, GOV.1, PLAN.1 y otros bloques anteriores corresponden a trazabilidad histórica de cambios.
+La política de privacidad mantiene su alcance material.
 
 Estado vigente:
 
-- MANT.1 está cerrado.
-- DOC.1 R1 está cerrado.
-- VER.2 está cerrado y `v0.0.71.01-beta` fue publicado.
-- NOR.1 está cerrado en R8 como G112/E07; NOR.2 permanece cerrado.
-- DOC.1 R2 está cerrado tras auditar la documentación Markdown posterior a NOR.2 sin modificar por sí solo el tratamiento material de datos.
-- `VERSION` está sincronizado en `0.1.18.04-beta` (G118/E04), DEV.2 R5 está aceptado/publicado mediante `v0.1.18.04-beta` y G119/E05 (`0.1.19.05-beta`) queda reservado para DEV.2 R6; PERSIST.1 permanece planificado posteriormente.
-- SEC.2 quedó cerrado después de R1–R6. La sesión administrativa usa una cookie técnica de seguridad y no modifica la finalidad material de la simulación.
+- `VERSION` está sincronizado en `0.1.19.05-beta` (G119/E05).
+- DEV.2 R6 queda aceptado como G119/E05 después de PR #111 / merge `bd2accb`.
+- El Portal Developer utiliza identidad administrativa local separada de
+  los datos previsionales de simulación.
+- G118/E04 permanece publicado mediante `v0.1.18.04-beta`.
+- UX.5 R1 queda reservado como G120/E01.
+- SEC.2 R1–R6 permanece cerrado.
 - La aplicación sigue siendo independiente y no oficial.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 

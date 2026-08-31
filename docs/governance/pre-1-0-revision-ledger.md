@@ -3,9 +3,9 @@
 **Proyecto:** Mi Retiro Proyectado
 **Base auditada:** `7037addd44253e528c77460b678d2b3ccd540dd5`
 **Contador histórico en la base `7037addd`:** **G070**
-**Contador aceptado reconciliado al commit `bc97db0`:** **G118**
-**Siguiente Global disponible:** **G119**
-**Siguiente candidato disponible:** `0.1.19.05-beta` — DEV.2 R6 (Portal Developer multipágina y mantenimiento)
+**Contador aceptado reconciliado al commit `bd2accb`:** **G119**
+**Siguiente Global disponible:** **G120**
+**Siguiente candidato disponible:** `0.1.20.01-beta` — UX.5 R1 (Sistema visual integral)
 
 
 <!-- DOC1-R1-REVISION-MANUAL:START -->
@@ -27,7 +27,7 @@ Estado vigente de la contabilidad:
   ya existían después de `7037addd`; por eso queda documentada como una
   **anomalía histórica de numeración**. La reconciliación vigente sitúa el estado
   materializado por ese tag en G087/E01 sin modificar la evidencia publicada.
-- `VERSION` está sincronizado en `0.1.18.04-beta` después de aceptar DEV.2 R5 como G118/E04 mediante PR #107 / merge `bc97db0` y publicarlo mediante `v0.1.18.04-beta`; G119/E05 (`0.1.19.05-beta`) queda reservado para DEV.2 R6.
+- `VERSION` está sincronizado en `0.1.19.05-beta` después de aceptar DEV.2 R5 como G118/E04 mediante PR #107 / merge `bc97db0` y publicarlo mediante `v0.1.18.04-beta`; G119/E05 (`0.1.19.05-beta`) queda reservado para DEV.2 R6.
 - G110/E01 (`0.1.10.01-beta`) quedó aceptado para REL.GOV.1 mediante PR #85 y merge `5cd1cea`.
 - G111/E01 (`0.1.11.01-beta`) permanece aceptado para DOC.2. G112/E07 (`0.1.12.07-beta`) queda aceptado para NOR.1 R8 después de PR #89 / PR #90; G113/E03 (`0.1.13.03-beta`) queda aceptado para DOC.1 R3 mediante PR #92 / merge `40ae5c0`; G114/E01 (`0.1.14.01-beta`) queda aceptado para PLAN.2 R1 mediante PR #94 / merge `7ded70c`; G115/E04 (`0.1.15.04-beta`) queda aceptado para DOC.1 R4 mediante PR #96 / merge `9f51229` y publicado mediante PR #97 / merge `87fa8e9`; G116/E05 (`0.1.16.05-beta`) queda aceptado para DOC.1 R5 mediante PR #101 / merge `6f4266d`; G117/E02 (`0.1.17.02-beta`) queda aceptado para REL.GOV.1 R2 mediante PR #103 / merge `46c464e`. G118/E04 (`0.1.18.04-beta`) queda aceptado/publicado para DEV.2 R5 mediante PR #107 / merge `bc97db0`, promoción PR #108 / commit `290e84a` y tag `v0.1.18.04-beta`; G119/E05 (`0.1.19.05-beta`) queda reservado para DEV.2 R6.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
@@ -179,6 +179,7 @@ El detalle de inclusión/exclusión está en `docs/audits/governance/post-g070-r
 | G116 | `0.1.16.05-beta` | DOC.1 R5 — normalización documental integral post-G115 | `0.1.16.05-beta` | PR #101 / merge `6f4266d`; 1127 pruebas unittest; pytest 1167/5587 subtests; Markdown 158/158; checks remotos en success |
 | G117 | `0.1.17.02-beta` | REL.GOV.1 R2 — automatización gobernada de Releases y checks | `0.1.17.02-beta` | PR #103 / merge `46c464e`; 1157 unittest; pytest 1197/5731 subtests; Markdown 159/159; CI #273, gobernanza #112, Markdown #59 y CodeQL #209 en success |
 | G118 | `0.1.18.04-beta` | DEV.2 R5 — Portal Developer y separación de acceso web/Bearer | `0.1.18.04-beta` | PR #107 / merge `bc97db0`; promoción PR #108 / `290e84a`; tag `v0.1.18.04-beta`; Release `378842155`; 1172 unittest; pytest 1211/5747; gate final 1178 unittest, pytest 1218/5759; revalidación post-merge pytest 1218/5773 |
+| G119 | `0.1.19.05-beta` | DEV.2 R6 — Portal Developer multipágina, identidad, observabilidad, mantenimiento, seguridad y privacidad | `0.1.19.05-beta` | PR #111 / merge `bd2accb`; cierre técnico firmado `ac9968b`; rama final `0a024bf`; gate de desarrollo 1269 unittest y pytest 1309/6045; gate final de promoción 1269 unittest y pytest 1309/6036; 183 módulos; Markdown 159/159; 19 JavaScript; 16 familias / 46 identificadores; 8 checks remotos del desarrollo en success |
 
 ### Anomalía histórica del tag `v0.0.71.01-beta`
 
@@ -209,16 +210,20 @@ El ledger estructurado conserva también estas exclusiones para no perder histor
 
 ## Próximo estado
 
-DEV.2 R5 superó gate local, PR #107 e integración; la promoción PR #108 materializó ese mismo estado como G118/E04 (`0.1.18.04-beta`) y la publicación mediante `v0.1.18.04-beta` no consumió un Global adicional por el PR, el tag ni el GitHub Release.
+DEV.2 R6 superó desarrollo, PR #111, CI, CodeQL e integración sobre `main`
+mediante `bd2accbea421fc719d9330015533001039648d05`.
 
-La revisión funcional R5 y el ordinal E04 difieren porque DEV.2 R4 fue un cierre documental sin estado material independiente. El siguiente estado aceptado del mismo bloque continúa por tanto en E05.
+Este snapshot de promoción materializa G119/E05 (`0.1.19.05-beta`) para
+DEV.2 R6. La publicación formal continúa condicionada al merge de esta rama,
+revalidación posterior y creación local del tag anotado/firmado.
 
 | Global | ID revision-aware candidato | Bloque | Condición |
 |---:|---|---|---|
-| G119 | `0.1.19.05-beta` | DEV.2 R6 — Portal Developer multipágina y mantenimiento | separar páginas Developer, ZIP diagnóstico real, mantenimiento seguro, gate completo + commit firmado + PR/CI + integración |
+| G120 | `0.1.20.01-beta` | UX.5 R1 — Sistema visual integral | nueva base visual reutilizable, gate completo + commit firmado + PR/CI + integración |
 
-G119 permanece reservado y **no se considera aceptado** mientras DEV.2 R6 siga siendo candidato. `VERSION` queda en `0.1.18.04-beta` y `accepted_count` en 118 durante ese trabajo.
+G120 permanece reservado y **no se considera aceptado** mientras UX.5 R1
+siga siendo candidato.
 
-PERSIST.1 permanece planificado como etapa posterior de la matriz maestra y no tiene un Global preasignado.
-
-Los tags publicados permanecen inmutables. G117/E02 continúa preservado para REL.GOV.1 R2 mediante `v0.1.17.02-beta`; G118/E04 quedó publicado para DEV.2 R5 mediante `v0.1.18.04-beta`, objeto de tag `1ee2561785d2413ffffd60ea03a69d1e4dae5660`, commit `290e84aab70a257e8b718d172e37365af49ef048` y GitHub Release prerelease ID `378842155`.
+Los tags publicados permanecen inmutables. G118/E04 continúa preservado
+mediante `v0.1.18.04-beta`; el tag `v0.1.19.05-beta` solo podrá crearse
+después de integrar y revalidar la promoción G119/E05.

@@ -64,18 +64,14 @@ class TestRelGovR2LivePublicationState(unittest.TestCase):
         )
         self.assertIn("v0.1.16.05-beta", releases)
 
-    def test_security_preserva_g116_g117_y_declara_g118_vigente(self):
+    def test_security_preserva_g118_y_declara_g119_vigente(self):
         text = (ROOT / "SECURITY.md").read_text(encoding="utf-8")
         self.assertIn(
-            "| `0.1.16.05-beta` | Beta previa G116/E05 publicada;",
+            "| `0.1.18.04-beta` | Beta previa G118/E04 publicada",
             text,
         )
         self.assertIn(
-            "| `0.1.17.02-beta` | Beta previa G117/E02 publicada;",
-            text,
-        )
-        self.assertIn(
-            "| `0.1.18.04-beta` | Beta vigente G118/E04 aceptada/publicada para DEV.2 R5",
+            "| `0.1.19.05-beta` | Beta vigente G119/E05 aceptada",
             text,
         )
 
@@ -98,7 +94,7 @@ class TestRelGovR2LivePublicationState(unittest.TestCase):
         self.assertIn("release_publication.py", text)
         self.assertIn("--check-manifest", text)
 
-    def test_g117_historico_g118_aceptado_y_g119_reservado(self):
+    def test_g118_historico_g119_aceptado_y_g120_reservado(self):
         docs = (
             (ROOT / "README.md").read_text(encoding="utf-8")
             + (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
@@ -106,11 +102,11 @@ class TestRelGovR2LivePublicationState(unittest.TestCase):
                 encoding="utf-8"
             )
         )
-        self.assertIn("G117/E02", docs)
         self.assertIn("G118/E04", docs)
         self.assertIn("G119/E05", docs)
-        self.assertIn("DEV.2 R5", docs)
+        self.assertIn("G120/E01", docs)
         self.assertIn("DEV.2 R6", docs)
+        self.assertIn("UX.5 R1", docs)
 
 
 
@@ -129,7 +125,7 @@ class TestRelGovR2LivePublicationState(unittest.TestCase):
             with self.subTest(fragment=fragment):
                 self.assertIn(fragment, readme + releases)
 
-        self.assertIn("aceptada/publicada para DEV.2 R5", security)
+        self.assertIn("Beta previa G118/E04 publicada", security)
         self.assertIn("G119/E05", versioning)
 
         live_state = "\n".join((

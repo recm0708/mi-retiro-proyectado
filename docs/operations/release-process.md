@@ -1,7 +1,7 @@
 # Proceso de release
 
 **Estado:** Vigente
-**Versión de aplicación:** `0.1.18.04-beta` — G118/E04 aceptado/publicado para DEV.2 R5; DEV.2 R6 candidato G119/E05
+**Versión de aplicación:** `0.1.19.05-beta` — G118/E04 aceptado/publicado para DEV.2 R5; DEV.2 R6 candidato G119/E05
 **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
 **Último tag formal legacy:** `v0.0.26-beta`
 **Versión base histórica preservada:** `0.0.23-beta`
@@ -13,19 +13,23 @@
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado post-MANT.1
 
-El cierre de MANT.1 R7 no constituye release formal ni cambia la versión canónica.
+El proceso formal de release permanece gobernado por `VERSION`, el ledger,
+el manifiesto versionado y los gates de CI.
 
-Para una release posterior se mantiene el criterio vigente:
+Estado vigente:
 
-- `VERSION` debe ser la fuente única.
-- `0.1.18.04-beta` es la versión canónica vigente y materializa G118/E04 para DEV.2 R5. Su publicación formal se completó después del merge de promoción mediante el tag firmado local `v0.1.18.04-beta`, verificado por REL.GOV.1 R2 y asociado al GitHub Release prerelease ID `378842155`; `v0.1.17.02-beta` permanece preservado/publicado como G117/E02.
-- `v0.0.71.01-beta` conserva su reconciliación histórica como G087/E01 y `v0.0.26-beta` permanece como tag legacy inmutable.
-- REL.GOV.1 R2 queda aceptado como G117/E02 después de PR #103 / merge `46c464e`.
-- DEV.2 R5 queda aceptado/publicado como G118/E04 (`0.1.18.04-beta`); G119/E05 (`0.1.19.05-beta`) queda reservado para DEV.2 R6 y las etapas posteriores permanecen sin Global preasignado.
-- La automatización de R2 no crea ni firma tags: valida el tag local firmado, el árbol etiquetado y el contrato antes de publicar.
-- Un Release existente solo se acepta si coincide exactamente; solo HTTP 404 autoriza creación y cualquier estado ambiguo falla cerrado.
+- `VERSION` materializa `0.1.19.05-beta` como G119/E05 para DEV.2 R6.
+- DEV.2 R6 fue integrado mediante PR #111 / merge `bd2accb`.
+- G118/E04 permanece publicado mediante `v0.1.18.04-beta`.
+- G120/E01 (`0.1.20.01-beta`) queda reservado para UX.5 R1.
+- La automatización no crea ni firma tags; esa frontera permanece local.
+- El tag `v0.1.19.05-beta` solo se crea después del merge de promoción
+  y de la revalidación del nuevo `main`.
+- Un Release existente incompatible falla cerrado y solo HTTP 404
+  autoriza creación.
 
-Todo release futuro requiere gate completo, PR/CI, actualización documental coherente, tag y evidencia reproducible.
+Todo release futuro requiere gate completo, PR/CI, documentación coherente,
+tag firmado y evidencia reproducible.
 <!-- DOC1-R1-POST-MANT1:END -->
 
 Este procedimiento complementa `VERSIONING.md`, `RELEASES.md`, `CHANGELOG.md`, `GOVERNANCE.md`, `LICENSE`, `THIRD_PARTY_NOTICES.md`, `docs/governance/licensing-and-distribution.md`, `docs/archive/governance/pre-1-0-versioning-audit.md`, `docs/governance/pre-1-0-revision-ledger.md`, `docs/archive/governance/ver2-revision-decision-matrix.md`, `data/pre-1-0-revision-ledger.json` y `docs/governance/master-plan-to-1-0.md`.

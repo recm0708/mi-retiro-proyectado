@@ -3,7 +3,7 @@
 **Estado:** vigente
 **Versión base al iniciar el plan:** `0.0.25-beta`
 **Cierre histórico de PLAN.1:** `0.0.26-beta` / `v0.0.26-beta`
-**Versión transversal vigente:** `0.1.18.04-beta` — G118/E04 aceptado/publicado para DEV.2 R5; DEV.2 R6 candidato G119/E05
+**Versión transversal vigente:** `0.1.19.05-beta` — G119/E05 aceptado para DEV.2 R6; UX.5 R1 candidato G120/E01
 **Fecha:** 2026-08-25
 **Clasificación:** Producto / Arquitectura / QA / Release
 
@@ -11,16 +11,17 @@
 <!-- NOR1-R7-CLOSURE:START -->
 ## Checkpoint de normalización previo a SEC.2
 
-NOR.1 y NOR.2 son checkpoints técnicos transversales y no agregan bloques
-funcionales al plan de 14 bloques.
+NOR.1 y NOR.2 permanecen cerrados y la secuencia revision-aware vigente
+alcanza G119/E05.
 
-- **NOR.1:** cerrado en R7; estándares determinísticos establecidos.
-- **NOR.2:** cerrado en R8 mediante PR #74; normalización integral completada.
-- **DOC.1 R2:** auditoría integral Markdown post-NOR.2 cerrada; documentación vigente, evidencia histórica y controles permanentes quedaron reconciliados.
-- **SEC.2 R1–R6:** cerrados; hardening CodeQL, autenticación/protección administrativa, auditoría, sesión web y hardening de sesión completados. AUD.SEC2 R1 quedó aceptado/publicado como G109/E01. REL.GOV.1 R1 quedó aceptado como G110/E01. DOC.2 R1 quedó aceptado/publicado como G111/E01. NOR.1 R8 quedó aceptado como G112/E07, DOC.1 R3 como G113/E03, PLAN.2 R1 como G114/E01, DOC.1 R4 como G115/E04 y DOC.1 R5 como G116/E05. REL.GOV.1 R2 queda aceptado/publicado como G117/E02; DEV.2 R5 queda aceptado/publicado como G118/E04 y DEV.2 R6 reserva G119/E05 antes de UX.5/PERSIST.1.
-
-La separación evita que SEC.2 cree nuevas rutas, archivos o estructuras sobre
-una base cuya nomenclatura y documentación no hayan sido normalizadas.
+- SEC.2 R1–R6 permanece cerrado.
+- AUD.SEC2 R1 queda preservado como G109/E01.
+- REL.GOV.1 R1/R2 quedan preservados como G110/E01 y G117/E02.
+- DOC.2 R1, NOR.1 R8, DOC.1 R3–R5 y PLAN.2 R1 permanecen cerrados.
+- DEV.2 R5 permanece aceptado/publicado como G118/E04.
+- DEV.2 R6 queda aceptado como G119/E05 después de PR #111 /
+  merge `bd2accb`.
+- UX.5 R1 queda reservado como G120/E01 antes de PERSIST.1.
 <!-- NOR1-R7-CLOSURE:END -->
 
 
@@ -239,7 +240,7 @@ La explicación pública no duplica motores de cálculo en JavaScript y mantiene
 
 ### 6. DEV.2 — Centro de desarrollo
 
-**Estado:** R5 cerrado/aceptado como G118/E04; R6 candidato G119/E05.
+**Estado:** R5 cerrado/aceptado como G118/E04; R6 cerrado/aceptado como G119/E05.
 
 > Ancla histórica preservada por pruebas de regresión: **Estado:** siguiente bloque funcional; pendiente de inicio hasta cerrar VER.2.
 
@@ -252,8 +253,8 @@ Evolución visible y controlada de Developer Diagnostics:
 - R5 limita la cookie administrativa a `Path=/dev`;
 - R5 incorpora shell/login Developer independiente de la navegación pública;
 - R5 preserva logs estructurados, correlation ID, autodiagnóstico y ZIP sanitizado en la capa de servicio;
-- R6 debe convertir el portal en superficies independientes de resumen, diagnóstico, eventos, archivos, mantenimiento y privacidad;
-- R6 debe exponer la descarga segura del ZIP diagnóstico y mantenimiento controlado de logs/rotaciones con confirmación reforzada;
+- R6 convirtió el portal en superficies independientes de resumen, diagnóstico, eventos, archivos, mantenimiento y privacidad;
+- R6 expone descarga segura del ZIP diagnóstico y mantenimiento controlado con protección CSRF, revalidación y confirmación reforzada;
 - ninguna superficie Developer debe incorporar PII ni valores financieros sensibles a logs o artefactos diagnósticos.
 
 ### 7. SEC.2 — Hardening integral

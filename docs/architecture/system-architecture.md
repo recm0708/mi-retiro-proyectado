@@ -1,7 +1,7 @@
 # Arquitectura
 
 **Estado:** Vigente
-**Versión de aplicación revisada:** `0.1.18.04-beta`
+**Versión de aplicación revisada:** `0.1.19.05-beta`
 **Versión base histórica:** `0.0.23-beta`
 **Revisión documental:** GOV.1.4 — 2026-08-17
 **Última actualización técnica:** DEV.2 R6 — Portal Developer multipágina, identidad, observabilidad, mantenimiento, seguridad y privacidad — 2026-08-30
@@ -12,19 +12,22 @@
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado arquitectónico post-MANT.1
 
-La arquitectura vigente conserva el mismo alcance funcional y normativo. MANT.1 no cambió fórmulas, motores previsionales, rutas públicas, selectores funcionales, parámetros de `regulations/`, datos ni entregables.
+La arquitectura previsional permanece separada de las superficies Developer.
 
-Cierre técnico relevante:
+Estado vigente:
 
-- R5E consolidó nombres de carpetas técnicas.
-- R5F consolidó nombres de archivos técnicos.
-- R5G reforzó la documentación base.
-- R5H auditó nombres técnicos restantes.
-- R6 validó funcionalmente el repositorio después de los renombres.
-- R7 cerró operativamente MANT.1 sobre `main`.
-
-La documentación arquitectónica debe leerse desde esta base: MANT.1, DOC.1, NOR.1 y NOR.2 están cerrados; SEC.2 cerró R1–R6. AUD.SEC2 R1 corrige la prioridad del kill switch administrativo, el fallback de sesión y logout sin modificar la arquitectura previsional.
-DEV.2 R5 queda aceptado como G118/E04: `/dev` es la entrada humana canónica, la sesión web administrativa se mantiene separada del contrato técnico Bearer y el shell Developer no hereda la navegación previsional pública. DEV.2 R6 implementa en la rama candidata G119/E05 la evolución multipágina, identidad humana persistente, RBAC, observabilidad, mantenimiento seguro, privacidad y perfil; permanece pendiente de PR/CI/integración y todavía no constituye un estado aceptado.
+- DEV.2 R5 permanece aceptado/publicado como G118/E04.
+- DEV.2 R6 queda integrado mediante PR #111 / merge `bd2accb` y
+  materializado como G119/E05.
+- `/dev` utiliza identidad humana persistente; el Bearer técnico continúa
+  separado y no autentica navegadores.
+- El Portal Developer dispone de resumen, diagnóstico, eventos, archivos,
+  mantenimiento, privacidad, perfil y acceso técnico.
+- RBAC, CSRF, revisión de seguridad, revocación de sesiones y revalidación
+  protegen las operaciones administrativas aplicables.
+- DEV.2 no modifica motores previsionales, normativa ni rutas públicas
+  de simulación.
+- UX.5 R1 queda reservado como G120/E01.
 <!-- DOC1-R1-POST-MANT1:END -->
 
 Mi Retiro Proyectado es una aplicación web local basada en FastAPI, Jinja2 y JavaScript del navegador. La arquitectura separa presentación, contratos de datos, servicios de integración, motores previsionales, parámetros normativos y observabilidad de desarrollo.

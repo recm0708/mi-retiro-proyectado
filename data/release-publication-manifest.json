@@ -1,48 +1,48 @@
 {
   "schema_version": 1,
-  "version": "0.1.18.04-beta",
+  "version": "0.1.19.05-beta",
   "block": "DEV.2",
-  "revision": "R5",
+  "revision": "R6",
   "summary": [
-    "G118/E04 materializa formalmente DEV.2 R5 después de integrar el Portal Developer y la separación de acceso web/Bearer mediante PR #107.",
-    "La revisión establece `/dev` como entrada humana canónica, mantiene Bearer como contrato técnico separado y prepara el rediseño multipágina DEV.2 R6."
+    "G119/E05 materializa formalmente DEV.2 R6 después de integrar el Portal Developer multipágina mediante PR #111.",
+    "La revisión consolida identidad humana persistente, RBAC, sesiones seguras, observabilidad, archivos diagnósticos, mantenimiento, privacidad, perfil y acceso técnico separado."
   ],
   "changes": [
-    "DEV.2 R5 queda aceptado formalmente como G118/E04.",
-    "`VERSION` avanza a `0.1.18.04-beta`.",
-    "El ledger revision-aware queda en `accepted_count=118`.",
-    "DEV.2 R5 se registra como revisión funcional R5 con ordinal aceptado E04.",
-    "G119/E05 (`0.1.19.05-beta`) queda reservado para DEV.2 R6.",
-    "`/dev` queda como entrada humana canónica del Portal Developer.",
-    "La sesión web administrativa permanece separada del acceso técnico Bearer.",
-    "La cookie `mrp_admin_session` queda limitada a `Path=/dev` y conserva `HttpOnly`.",
-    "El shell Developer queda separado de la navegación previsional pública.",
+    "DEV.2 R6 queda aceptado formalmente como G119/E05.",
+    "`VERSION` avanza a `0.1.19.05-beta`.",
+    "El ledger revision-aware queda en `accepted_count=119`.",
+    "DEV.2 R6 se registra como revisión funcional R6 con ordinal aceptado E05.",
+    "G120/E01 (`0.1.20.01-beta`) queda reservado para UX.5 R1.",
+    "El Portal Developer conserva identidad humana separada del Bearer técnico.",
+    "Las cuentas humanas usan Argon2id, revisión de seguridad y RBAC deny-by-default.",
+    "Las operaciones sensibles usan CSRF, revalidación y controles de sesión.",
+    "Diagnóstico, eventos, archivos y mantenimiento quedan integrados en superficies separadas.",
     "La creación y firma del tag permanecen como frontera local del mantenedor."
   ],
   "validation": [
-    "Gate final de desarrollo: **1172 tests `unittest` OK**.",
-    "`pytest` de desarrollo: **1211 passed / 5747 subtests passed**.",
-    "`pip check`: OK.",
-    "Compilación Python: OK.",
-    "Sintaxis JavaScript: **19 archivos OK**.",
+    "Gate final de desarrollo: **1269 tests `unittest` OK**.",
+    "`pytest` de desarrollo: **1309 passed / 6045 subtests passed**.",
+    "Inventario: **182 módulos `test_*.py`**.",
     "Auditoría Markdown previa: **159/159 OK**.",
     "Auditoría de identificadores: **16 familias / 46 identificadores OK**.",
+    "`pip check`: OK.",
+    "Compilación Python: OK.",
     "`git diff --check`: OK.",
-    "Checks remotos post-merge de CI, gobernanza, Markdown Audit y CodeQL: success.",
-    "Gate final de promoción: **1178 tests `unittest` OK**; **1218 `pytest` passed / 5759 subtests passed**."
+    "PR #111: **8 checks remotos en success**, incluidos CI, gobernanza, Markdown y CodeQL.",
+    "Gate final de promoción: 1269 tests `unittest` OK; `pytest` 1309 passed / 6036 subtests passed; 183 módulos `test_*.py`; Markdown 159/159; 19 JavaScript; 16 familias / 46 identificadores; `pip check`, `compileall` y `git diff --check` limpios."
   ],
   "evidence": [
-    "**DEV.2 R5 desarrollo:** PR #107.",
-    "**Commit de desarrollo firmado:** `f0f4cbc17d11155b5869ca6bedd3a751030811cc`.",
-    "**Integración de desarrollo en `main`:** `bc97db04ef0f08d3005882ff08dd68b371aeb61e`.",
-    "Validación del PR: 1172 `unittest`, 1211 `pytest` / 5747 subtests, 159 Markdown y 19 JavaScript.",
-    "La publicación de G118/E04 queda condicionada al merge de esta promoción, revalidación de `main` y tag anotado/firmado local.",
-    "Gate final de promoción local sobre el snapshot preparado: 1178 `unittest` OK; 1218 `pytest` passed / 5759 subtests passed; 159 Markdown; 19 JavaScript; `pip check`, `compileall` y `git diff --cached --check` limpios."
+    "**DEV.2 R6 desarrollo:** PR #111.",
+    "**Integración de desarrollo en `main`:** `bd2accbea421fc719d9330015533001039648d05`.",
+    "**Cierre técnico firmado:** `ac9968b5a1e26d5dc8f08b0e28f5fab5aa9f6258`.",
+    "**HEAD final del candidato de desarrollo:** `0a024bf1ab8c7a9dd79735c5b9c31fd0695d6139`.",
+    "La alerta CodeQL de logging sensible quedó corregida antes de integrar PR #111.",
+    "La publicación de G119/E05 queda condicionada al merge de esta promoción, revalidación de `main` y tag anotado/firmado local."
   ],
   "next_step": {
-    "global_revision": 119,
-    "revision_aware": "0.1.19.05-beta",
-    "block": "DEV.2",
-    "description": "El siguiente checkpoint formal es **DEV.2 R6 — Portal Developer multipágina, diagnóstico, eventos, archivos y mantenimiento**. Debe conservar la separación sesión/Bearer, añadir descarga segura del ZIP diagnóstico y proteger las operaciones destructivas con revalidación y confirmación reforzada."
+    "global_revision": 120,
+    "revision_aware": "0.1.20.01-beta",
+    "block": "UX.5",
+    "description": "El siguiente checkpoint formal es **UX.5 R1 — Sistema visual integral**. Debe establecer la nueva base visual reutilizable antes de continuar con Inicio, navegación, temas y los flujos Manual/Asistido."
   }
 }

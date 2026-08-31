@@ -1,7 +1,7 @@
 # Matriz de trazabilidad
 
 **Estado:** Vigente
-**Versión de aplicación:** `0.1.18.04-beta` — G118/E04 aceptado/publicado; reconciliación viva hasta G118 y G119/E05 reservado para DEV.2 R6
+**Versión de aplicación:** `0.1.19.05-beta` — G118/E04 aceptado/publicado; reconciliación viva hasta G118 y G119/E05 reservado para DEV.2 R6
 **Último tag formal legacy:** `v0.0.26-beta`
 **Base histórica:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal:** NOR.2 R8 — 2026-08-24
@@ -11,25 +11,16 @@
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado post-MANT.1
 
-La trazabilidad vigente incorpora los cierres de MANT.1, DOC.1 R1, DOC.1 R2,
-VER.2 y NOR.2.
+La trazabilidad vigente alcanza G119/E05.
 
-Estado documental actual:
+- DEV.2 R5 permanece verificado como G118/E04.
+- DEV.2 R6 queda integrado mediante PR #111 / merge `bd2accb` y aceptado
+  como G119/E05.
+- G120/E01 queda reservado para UX.5 R1.
+- La historia de NOR.2, SEC.2, AUD.SEC2, DOC.1, PLAN.2 y REL.GOV.1
+  permanece preservada en sus fuentes canónicas.
 
-- MANT.1 R5H auditó nombres técnicos restantes.
-- MANT.1 R6 validó funcionalmente el repositorio después de renombres.
-- MANT.1 R7 cerró operativamente el bloque en `main`.
-- DOC.1 R1 está cerrado y su documentación viva quedó consolidada.
-- DOC.1 R2 está cerrado como auditoría integral Markdown post-NOR.2 y deja
-  controles permanentes locales y remotos.
-- `v0.0.71.01-beta` fue publicado originalmente como VER.2 G071/E01 y reconciliado posteriormente como G087/E01 sin alterar el tag.
-- NOR.2 R7 está cerrado.
-- NOR.2 R8 está cerrado e integrado mediante PR #74.
-- NOR.2 está cerrado después de completar R1–R8.
-- SEC.2 quedó cerrado después de R1–R6; AUD.SEC2 R1 corrigió el kill switch, reconcilió documentación/ledger y quedó aceptado como G109/E01 mediante PR #83.
-- PLAN.2 R1 quedó aceptado como G114/E01 mediante PR #94 / merge `7ded70c`; DOC.1 R4 quedó aceptado/publicado como G115/E04; DOC.1 R5 quedó aceptado como G116/E05; REL.GOV.1 R2 quedó aceptado/publicado como G117/E02; DEV.2 R5 queda aceptado como G118/E04 y G119/E05 queda reservado para DEV.2 R6.
-
-Esta matriz debe distinguir trazabilidad histórica de estado vigente.
+Esta matriz distingue trazabilidad histórica de estado vigente.
 <!-- DOC1-R1-POST-MANT1:END -->
 
 Esta matriz conecta contratos críticos del producto con su fuente, decisión, implementación y evidencia de prueba. No sustituye `functional-specification.md` ni pretende afirmar cobertura granular completa de todos los RF históricos.
@@ -80,7 +71,7 @@ Esta matriz conecta contratos críticos del producto con su fuente, decisión, i
 | TR-028 | Los identificadores de bloques históricos, cerrados y planificados se registran de forma canónica y no pueden reutilizarse para otro alcance | N/A — gobierno/nomenclatura | N/A — NOR.1 R8 | `data/work-block-registry.json`, `docs/standards/work-block-identifiers.md`, `scripts/audit_block_identifiers.py` | `tests/test_nor1_r8_work_block_identifiers.py` | Verificado; NOR.1 R8 aceptado como G112/E07 |
 
 | TR-029 | Portal Developer separa acceso humano por sesión web del contrato técnico Bearer, limita la cookie administrativa a `/dev`, evita persistir credenciales y conserva `no-store`/observabilidad explícita | N/A — desarrollo/seguridad | N/A — DEV.2 R5 | `app/main.py`, `app/templates/dev_base.html`, `app/templates/dev_login.html`, `app/core/observability.py` | `tests/test_dev2_r5_portal_access.py`, `tests/test_sec2_r5_admin_web_session.py` | Verificado DEV.2 R5 / G118/E04 |
-| TR-030 | Portal Developer multipágina aplica identidad humana persistente, RBAC deny-by-default, CSRF, revalidación para operaciones destructivas, observabilidad sanitizada, mantenimiento seguro y separación del Bearer técnico | N/A — desarrollo/seguridad/privacidad | N/A — DEV.2 R6 | `app/main.py`, `app/core/developer_store.py`, `app/core/developer_web_security.py`, `app/templates/dev_base.html`, `app/templates/dev_maintenance.html`, `app/templates/dev_privacy.html` | `tests/test_dev2_r6_identity.py`, `tests/test_dev2_r6_web_session.py`, `tests/test_dev2_r6_observability_portal.py`, `tests/test_dev2_r6_security_maintenance_privacy.py` | Verificado en candidato DEV.2 R6 / G119/E05; pendiente PR/CI/integración |
+| TR-030 | Portal Developer multipágina aplica identidad humana persistente, RBAC deny-by-default, CSRF, revalidación para operaciones destructivas, observabilidad sanitizada, mantenimiento seguro y separación del Bearer técnico | N/A — desarrollo/seguridad/privacidad | N/A — DEV.2 R6 | `app/main.py`, `app/core/developer_store.py`, `app/core/developer_web_security.py`, `app/templates/dev_base.html`, `app/templates/dev_maintenance.html`, `app/templates/dev_privacy.html` | `tests/test_dev2_r6_identity.py`, `tests/test_dev2_r6_web_session.py`, `tests/test_dev2_r6_observability_portal.py`, `tests/test_dev2_r6_security_maintenance_privacy.py` | Verificado DEV.2 R6 / G119/E05 — PR #111 / merge `bd2accb` |
 
 ## 3. Cobertura de RF
 

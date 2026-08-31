@@ -1,6 +1,6 @@
-# DEV.2 R1/R2/R3/R4/R5 — Centro de desarrollo
+# DEV.2 R1/R2/R3/R4/R5/R6 — Centro de desarrollo
 
-**Estado general:** DEV.2 R1–R4 preservados; R5 integrado, aceptado y publicado como G118/E04; R6 está implementado en la rama candidata G119/E05 y permanece pendiente de PR/CI/integración.
+**Estado general:** DEV.2 R1–R4 preservados; R5 integrado, aceptado y publicado como G118/E04; R6 integrado mediante PR #111 / merge `bd2accb` y aceptado como G119/E05.
 
 **Estado R1:** integrado en `main` mediante PR #37.
 
@@ -14,17 +14,19 @@
 <!-- DOC1-R1-REVISION-MANUAL:START -->
 ## Nota de lectura post-MANT.1
 
-DEV.2 queda preservado como bloque funcional cerrado. Sus referencias a VER.2 o a bloques posteriores se conservan como trazabilidad del momento en que fue documentado.
+DEV.2 conserva su historia R1–R5 y queda cerrado funcionalmente después de R6.
 
 Estado vigente:
 
-- DEV.2 R1–R4 quedan preservados; R5 está integrado mediante PR #107 / merge `bc97db0`, aceptado como G118/E04 y publicado mediante `v0.1.18.04-beta` para Portal Developer y acceso. R6 queda reservado como G119/E05.
-- MANT.1 quedó cerrado operativamente en R7.
-- DOC.1 R1 está cerrado.
-- NOR.1 y NOR.2 están cerrados.
-- DOC.1 R2 está cerrado como revisión documental integral posterior a NOR.2.
-- `VERSION` está sincronizado en `0.1.18.04-beta` después de aceptar y publicar DEV.2 R5 como G118/E04; G119/E05 (`0.1.19.05-beta`) queda reservado para DEV.2 R6. REL.GOV.1 R2 permanece preservado/publicado como G117/E02.
-- SEC.2 quedó cerrado después de R1–R6; AUD.SEC2 R1 corrige el kill switch y el contrato de sesión web sin reabrir DEV.2.
+- R1–R4 quedan preservados.
+- R5 está integrado mediante PR #107 / merge `bc97db0`, aceptado como G118/E04
+  y publicado mediante `v0.1.18.04-beta`.
+- R6 está integrado mediante PR #111 / merge `bd2accb` y se materializa
+  como G119/E05 (`0.1.19.05-beta`).
+- G120/E01 (`0.1.20.01-beta`) queda reservado para UX.5 R1.
+- La sesión humana Developer permanece separada del contrato Bearer técnico.
+- SEC.2 R1–R6 permanece cerrado y SEC.2 R7 se mantiene planificado para
+  el hardening posterior a las nuevas superficies.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 
 DEV.2 abre y cierra una superficie interna y local para revisar el estado técnico
@@ -54,14 +56,15 @@ activación explícita:
 ```powershell
 $env:MRP_DEV_MODE = "1"
 $env:MRP_ADMIN_ENABLED = "1"
+
 $env:MRP_ADMIN_SECRET = "<secreto-local-no-versionado>"
 ```
 
-`MRP_ADMIN_SECRET` se define fuera del repositorio y no tiene valor
-predeterminado. En configuración equivalente, Developer Diagnostics requiere
-`MRP_DEV_MODE=1`. El directorio diagnóstico puede mantenerse por defecto bajo
-`logs/diagnostico/` o configurarse con `MRP_DIAGNOSTIC_DIR` durante pruebas
-locales.
+`MRP_ADMIN_SECRET` se define fuera del repositorio únicamente para el
+contrato técnico Bearer legado y no constituye la credencial del login humano.
+Developer Diagnostics requiere `MRP_DEV_MODE=1`. El directorio diagnóstico
+puede mantenerse por defecto bajo `logs/diagnostico/` o configurarse con
+`MRP_DIAGNOSTIC_DIR` durante pruebas locales.
 
 ## Alcance de R1
 
@@ -221,7 +224,7 @@ R6 no duplica la aplicación previsional pública. Evoluciona únicamente el Por
 - `/dev/mantenimiento` con uso de disco, rotaciones, limpieza controlada y revocación de sesiones cuando corresponda;
 - `/dev/privacidad` para controles técnicos de privacidad y seguridad.
 
-Las operaciones destructivas de mantenimiento deberán actuar solo sobre artefactos diagnósticos conocidos, revalidar la sesión administrativa, aplicar protección anti-CSRF cuando corresponda al diseño final, registrar la acción sin secretos/datos previsionales y exigir confirmaciones escalonadas antes de borrar.
+Las operaciones destructivas de mantenimiento actúan únicamente sobre superficies permitidas, aplican autorización RBAC y CSRF, revalidan contraseña cuando corresponde y registran evidencia sanitizada sin secretos ni datos previsionales.
 
 ## Versionado
 
@@ -319,19 +322,18 @@ python -m pytest -q
 
 El Centro de desarrollo utiliza una sesión administrativa temporal posterior a la validación inicial. La sesión usa cookie HttpOnly configurable, expiración por inactividad y controles preparados para despliegue HTTPS interno.
 
-## Estado vigente post-SEC.2 / DEV.2 R5
+## Estado vigente post-SEC.2 / DEV.2 R6
 
-El acceso humano utiliza `/dev` como entrada canónica y una sesión administrativa
-temporal en memoria. `MRP_ADMIN_ENABLED=1` es un kill switch obligatorio y
-`MRP_ADMIN_SECRET` se define fuera del repositorio; no existe contraseña
-predeterminada. La cookie `mrp_admin_session` es `HttpOnly`, queda limitada a
-`Path=/dev`, expira por inactividad y mantiene un límite absoluto de sesión. El
-logout usa `POST /dev/logout`; `/dev` y sus subrutas reciben
-`Cache-Control: no-store`.
+El acceso humano utiliza `/dev` como entrada canónica, identidad Developer
+persistente y sesiones asociadas a una revisión de seguridad.
+`MRP_ADMIN_ENABLED=1` continúa como kill switch obligatorio. Las contraseñas
+humanas se almacenan mediante Argon2id y no existe una contraseña predeterminada.
+La cookie `mrp_admin_session` es `HttpOnly`, queda limitada a `Path=/dev`,
+expira por inactividad y mantiene un límite absoluto de sesión. El logout usa
+`POST /dev/logout`; `/dev` y sus subrutas reciben `Cache-Control: no-store`.
 
 El contrato Bearer se conserva de forma separada para clientes técnicos
-autorizados. Las páginas HTML no fuerzan un rechazo Bearer antes de validar una
-sesión web existente. Una sesión válida nunca anula el kill switch ni la
-obligación de que el secreto administrativo continúe configurado. Para HTTPS
-interno se activa `MRP_ADMIN_COOKIE_SECURE=1`; multi-instancia exige un backend
-compartido de sesiones antes de considerarse soportado.
+autorizados y utiliza `MRP_ADMIN_SECRET`/`MRP_ADMIN_TOKEN` exclusivamente en
+esa superficie. Una sesión humana válida nunca anula el kill switch. Las
+operaciones sensibles aplican RBAC, CSRF y revalidación cuando corresponde.
+Para HTTPS interno se activa `MRP_ADMIN_COOKIE_SECURE=1`.

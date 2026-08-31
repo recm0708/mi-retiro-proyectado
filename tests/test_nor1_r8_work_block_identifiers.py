@@ -42,7 +42,9 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
 
         self.assertEqual("closed", ids["PLAN.2"]["status"])
         self.assertIn("G114", ids["PLAN.2"]["global_refs"])
-        for ident in ("UX.5", "PERSIST.1", "REP.1", "A11Y.2", "REV.1", "QA.1", "REL.1"):
+        self.assertEqual("candidate_r1", ids["UX.5"]["status"])
+
+        for ident in ("PERSIST.1", "REP.1", "A11Y.2", "REV.1", "QA.1", "REL.1"):
             self.assertEqual("planned_reserved", ids[ident]["status"])
 
     def test_revisiones_y_etiquetas_no_son_familias(self):
@@ -66,10 +68,10 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
         self.assertEqual("0.1.12.07-beta", entry["revision_aware"])
 
         candidate = self.data["current_candidate"]
-        self.assertEqual(119, candidate["global_revision"])
-        self.assertEqual("DEV.2", candidate["block"])
-        self.assertEqual("R6", candidate["revision"])
-        self.assertEqual(5, candidate["edition"])
+        self.assertEqual(120, candidate["global_revision"])
+        self.assertEqual("UX.5", candidate["block"])
+        self.assertEqual("R1", candidate["revision"])
+        self.assertEqual(1, candidate["edition"])
         self.assertEqual("reserved_not_accepted", candidate["state"])
         self.assertEqual(
             "UX.5",
@@ -181,7 +183,8 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
             "PERSIST.1 R1",
             "Cerrado/aceptado G118/E04",
             "DEV.2 R5",
-            "Candidato G119/E05",
+            "Cerrado/aceptado G119/E05",
+            "Candidato G120/E01",
             "DEV.2 R6",
         ):
             with self.subTest(fragment=fragment):

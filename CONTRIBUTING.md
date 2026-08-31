@@ -4,18 +4,20 @@
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado de contribución post-MANT.1
 
-La contribución al proyecto debe leerse desde la línea base documental posterior a MANT.1 R7.
+La contribución al proyecto debe leerse desde la línea base vigente.
 
-Estado vigente:
+Estado actual:
 
-- MANT.1 quedó cerrado operativamente en R7.
-- DOC.1 R1 y DOC.1 R2 están cerrados; DOC.1 R3 quedó aceptado como G113/E03 después de la auditoría conservadora de referencias navegables.
-- PLAN.2 R1 quedó aceptado como G114/E01 mediante PR #94 / merge `7ded70c`; DOC.1 R4 y R5 quedaron aceptados posteriormente como G115/E04 y G116/E05.
-- VER.2 está cerrado; `v0.0.71.01-beta` fue publicado originalmente como G071/E01 y reconciliado posteriormente como G087/E01 sin mover el tag.
-- NOR.1 R8 está cerrado como G112/E07; NOR.2 permanece cerrado después de R1–R8.
-- `VERSION` está sincronizado en `0.1.18.04-beta` (G118/E04) para DEV.2 R5, ya aceptado/publicado mediante `v0.1.18.04-beta`; G117/E02 permanece preservado como publicación anterior y G119/E05 (`0.1.19.05-beta`) queda reservado para DEV.2 R6. PERSIST.1 permanece planificado posteriormente.
-- SEC.2 quedó cerrado después de R1–R6 y AUD.SEC2 R1 quedó aceptado como G109/E01. Los cambios posteriores que afecten autenticación, sesiones, cookies, secretos o endpoints administrativos requieren regresión de seguridad y sincronización documental antes de promover una nueva revisión.
-- Todo cambio debe mantener sincronizados código, pruebas, documentación y evidencia aplicable.
+- `VERSION` está sincronizado en `0.1.19.05-beta` (G119/E05).
+- DEV.2 R6 queda aceptado como G119/E05 después de PR #111 /
+  merge `bd2accb`.
+- DEV.2 queda cerrado después de R6.
+- UX.5 R1 queda reservado como G120/E01 (`0.1.20.01-beta`).
+- G118/E04 permanece publicado mediante `v0.1.18.04-beta`.
+- SEC.2 R1–R6 permanece cerrado; los cambios futuros de autenticación,
+  sesiones, cookies, secretos o endpoints administrativos deben conservar
+  regresiones de seguridad.
+- Código, pruebas, documentación y evidencia deben mantenerse sincronizados.
 <!-- DOC1-R1-POST-MANT1:END -->
 
 Este documento define el flujo mínimo para modificar Mi Retiro Proyectado sin perder trazabilidad técnica, normativa, documental o de pruebas.

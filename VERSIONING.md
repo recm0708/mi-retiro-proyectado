@@ -14,16 +14,21 @@ La fuente canónica de versión continúa siendo `VERSION`.
 
 Estado vigente:
 
-- `VERSION` contiene `0.1.18.04-beta` y materializa G118/E04 (DEV.2 R5) después del desarrollo PR #107 / merge `bc97db0`, de la promoción PR #108 / commit `290e84a` y de la publicación formal mediante `v0.1.18.04-beta`.
-- `v0.1.18.04-beta` permanece publicado, firmado e inmutable como materialización formal de G118/E04 sobre `290e84aab70a257e8b718d172e37365af49ef048`; `v0.1.17.02-beta` permanece preservado como publicación anterior G117/E02.
-- La reconciliación post-G070 permanece inmutable y conserva `v0.0.71.01-beta` como evidencia histórica de G087/E01.
-- G109–G117 permanecen aceptados según el ledger; DEV.2 R5 queda aceptado/publicado como G118/E04.
-- G119/E05 (`0.1.19.05-beta`) queda reservado para DEV.2 R6.
-- DEV.2 R5 es la revisión funcional R5 y E04 es el cuarto estado aceptado del bloque: R4 fue cierre documental y no consumió Global independiente.
-- Las etapas posteriores no tienen Global preasignado más allá del candidato vigente.
-- Los cierres y sincronizaciones que no crean un estado materialmente distinto no consumen `G` por sí solos.
+- `VERSION` contiene `0.1.19.05-beta` y materializa G119/E05
+  para DEV.2 R6.
+- G118/E04 permanece publicado mediante el tag firmado
+  `v0.1.18.04-beta`.
+- G119 incorpora la revisión funcional R6 de DEV.2 con ordinal E05.
+- G120/E01 (`0.1.20.01-beta`) queda reservado para UX.5 R1.
+- DEV.2 queda cerrado después de R6.
+- UX.5 es un bloque nuevo y por eso inicia su secuencia aceptable en E01.
+- Las etapas posteriores no tienen Global preasignado más allá del
+  candidato vigente.
+- Un PR, squash, tag o GitHub Release que materializa el mismo estado
+  no consume por sí solo otro Global.
 
-Cualquier promoción futura de versión debe seguir el proceso formal de release, validación, PR/CI, tag y evidencia documental correspondiente.
+Cualquier publicación requiere gate completo, PR/CI, revalidación,
+tag firmado y evidencia reproducible.
 <!-- DOC1-R1-POST-MANT1:END -->
 
 ## 1. Objetivo

@@ -1,7 +1,7 @@
 # Validación
 
 **Estado:** Vigente
-**Versión revisada:** `0.1.18.04-beta` — G118/E04 aceptado/publicado para DEV.2 R5; G119/E05 reservado para DEV.2 R6
+**Versión revisada:** `0.1.19.05-beta` — G118/E04 aceptado/publicado para DEV.2 R5; G119/E05 reservado para DEV.2 R6
 **Versión base histórica:** `0.0.25-beta`
 **Base documental histórica:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal histórica preservada:** UX.4.6e R8 — validación funcional y procedencia editable — 2026-08-19
@@ -12,6 +12,34 @@
 
 
 <!-- NOR1-R7-VALIDATION:START -->
+## Promoción DEV.2 R6 — G119/E05
+
+Evidencia previa al gate final de promoción:
+
+- desarrollo integrado mediante PR #111 / merge
+  `bd2accbea421fc719d9330015533001039648d05`;
+- cierre técnico firmado
+  `ac9968b5a1e26d5dc8f08b0e28f5fab5aa9f6258`;
+- HEAD final de desarrollo
+  `0a024bf1ab8c7a9dd79735c5b9c31fd0695d6139`;
+- 1269 pruebas `unittest` OK;
+- `pytest`: 1309 passed / 6045 subtests;
+- 182 módulos `test_*.py`;
+- Markdown 159/159;
+- 16 familias / 46 identificadores;
+- `pip check`, `compileall`, JavaScript y `git diff --check` limpios;
+- ocho checks remotos del PR #111 en `success`, incluidos CodeQL,
+  CI Python 3.13/3.14, Markdown y gobernanza.
+
+La promoción mueve `VERSION` a `0.1.19.05-beta`, registra G119/E05 para
+DEV.2 R6 y reserva G120/E01 (`0.1.20.01-beta`) para UX.5 R1.
+
+**Gate final de promoción:** congelado sobre este snapshot con
+**1269 pruebas `unittest` OK**, **1309 pruebas `pytest` passed /
+6036 subtests passed**, **183 módulos `test_*.py`**, Markdown 159/159,
+19 JavaScript, 16 familias / 46 identificadores y `pip check`,
+`compileall` y `git diff --check` limpios.
+
 ## Promoción DEV.2 R5 — G118/E04
 
 Evidencia previa al gate final de promoción:
@@ -532,7 +560,7 @@ python -m pip check
 
 ## 3. Inventario actual de pruebas
 
-Inventario vigente: **182 módulos**.
+Inventario vigente: **183 módulos**.
 
 - `tests/test_accessibility_themes.py`
 - `tests/test_accessibility_ux4.py`
@@ -559,6 +587,7 @@ Inventario vigente: **182 módulos**.
 - `tests/test_g116_promotion_post_merge.py`
 - `tests/test_g117_promotion_post_merge.py`
 - `tests/test_g118_promotion_post_merge.py`
+- `tests/test_g119_promotion_post_merge.py`
 - `tests/test_gov12_versionado.py`
 - `tests/test_gov13_documentacion.py`
 - `tests/test_gov13_documentacion_r2.py`

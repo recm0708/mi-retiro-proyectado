@@ -10,7 +10,7 @@
 
 [![Validación continua](https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/ci.yml)
 [![Auditoría de gobernanza](https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/governance-audit.yml/badge.svg?branch=main)](https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/governance-audit.yml)
-![Versión](https://img.shields.io/badge/versi%C3%B3n-0.1.18.04--beta-2563eb)
+![Versión](https://img.shields.io/badge/versi%C3%B3n-0.1.19.05--beta-2563eb)
 ![Python](https://img.shields.io/badge/Python-3.13%20%7C%203.14-3776AB?logo=python&logoColor=white)
 ![Licencia](https://img.shields.io/badge/licencia-propietaria-6B7280)
 
@@ -20,17 +20,36 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 
 ## Estado del proyecto
 
-- **Versión canónica vigente:** `0.1.18.04-beta`, obtenida exclusivamente desde [`VERSION`](VERSION). Materializa DEV.2 R5 como G118/E04 después del desarrollo PR #107 / merge `bc97db0` y de la promoción/publicación PR #108 / commit `290e84aab70a257e8b718d172e37365af49ef048`.
-- **Último estado funcional integrado en `main`:** DEV.2 R5 mediante PR #107 / merge `bc97db04ef0f08d3005882ff08dd68b371aeb61e`; la promoción G118/E04 quedó integrada mediante PR #108 / commit `290e84aab70a257e8b718d172e37365af49ef048`.
-- **Estado revision-aware reconciliado:** G118/E04 (`0.1.18.04-beta`) queda aceptado/publicado para DEV.2 R5; G119/E05 (`0.1.19.05-beta`) queda reservado para DEV.2 R6.
-- **Publicación revision-aware vigente:** `v0.1.18.04-beta` (G118/E04), tag anotado y firmado sobre `290e84aab70a257e8b718d172e37365af49ef048`, objeto de tag `1ee2561785d2413ffffd60ea03a69d1e4dae5660` y GitHub Release prerelease ID `378842155`. G117/E02 (`v0.1.17.02-beta`) permanece preservado como publicación anterior.
-- **Última versión formal legacy:** `0.0.26-beta` — tag firmado e inmutable `v0.0.26-beta`.
-- **Etapa:** desarrollo beta; repositorio público y ejecución orientada actualmente a entorno local.
-- **REL.GOV.1:** R1 y R2 cerrados/aceptados como G110/E01 y G117/E02. La automatización de Releases queda integrada sin transferir a Actions la creación o firma del tag.
-- **DEV.2:** R1–R3 permanecen aceptados históricamente; R4 fue un cierre documental sin Global independiente; R5 queda aceptado/publicado como G118/E04 y R6 continúa como candidato G119/E05.
-- **DOC.1:** R1–R5 cerrados; DOC.1 R6 permanece planificado para congelación documental final.
-- **SEC.2:** R1–R6 cerrados; R7 permanece planificado después de las nuevas superficies Developer/UX/persistencia.
-- **Primera versión oficial objetivo:** `1.0.0.0` con `Build 000001`, únicamente después de cerrar todos los gates definidos en el plan maestro.
+- **Versión canónica vigente:** `0.1.19.05-beta`, obtenida exclusivamente
+  desde [`VERSION`](VERSION). Materializa DEV.2 R6 como G119/E05 después
+  del desarrollo PR #111 / merge
+  `bd2accbea421fc719d9330015533001039648d05` y de esta promoción.
+- **Último estado funcional integrado en `main`:** DEV.2 R6 mediante
+  PR #111 / merge `bd2accbea421fc719d9330015533001039648d05`.
+- **Estado revision-aware reconciliado:** G119/E05 (`0.1.19.05-beta`)
+  queda aceptado para DEV.2 R6; G120/E01 (`0.1.20.01-beta`) queda
+  reservado para UX.5 R1.
+- **Publicación revision-aware vigente durante esta promoción:**
+  `v0.1.18.04-beta` (G118/E04), tag anotado y firmado sobre
+  `290e84aab70a257e8b718d172e37365af49ef048`; `v0.1.17.02-beta`
+  (G117/E02) permanece preservado como publicación histórica anterior.
+  La publicación de `v0.1.19.05-beta` ocurre únicamente después del
+  merge y revalidación de esta promoción.
+- **Última versión formal legacy:** `0.0.26-beta`.
+- **Etapa:** desarrollo beta; repositorio público y ejecución orientada
+  actualmente a entorno local.
+- **REL.GOV.1:** R1 y R2 permanecen cerrados/aceptados como G110/E01
+  y G117/E02.
+- **DEV.2:** R1–R3 permanecen aceptados históricamente; R4 fue un cierre
+  documental sin Global independiente; R5 queda aceptado/publicado como
+  G118/E04 y R6 queda aceptado como G119/E05.
+- **UX.5:** R1 queda como candidato reservado G120/E01.
+- **DOC.1:** R1–R5 cerrados; R6 permanece planificado para congelación
+  documental final.
+- **SEC.2:** R1–R6 cerrados; R7 permanece planificado después de las
+  nuevas superficies UX/persistencia.
+- **Primera versión oficial objetivo:** `1.0.0.0` con `Build 000001`.
+
 
 La visibilidad pública del repositorio **no convierte una beta de desarrollo en versión oficial, no constituye un despliegue de producción y no modifica por sí sola la licencia vigente**.
 
@@ -55,7 +74,7 @@ Los tres motores generales principales implementados son:
 
 El alcance jurídico y matemático exacto de cada motor se encuentra en la documentación normativa y técnica. No debe asumirse que el motor general cubre regímenes especiales no documentados.
 
-La aplicación dispone además de **Developer Diagnostics** y de un **Portal Developer** interno. Developer Diagnostics se activa con `MRP_DEV_MODE=1`; el acceso humano al portal usa `/dev` y requiere además la superficie administrativa habilitada y un secreto configurado fuera del repositorio. La sesión web y el acceso técnico Bearer permanecen separados; estas capacidades no constituyen telemetría de producto ni envían logs automáticamente a terceros.
+La aplicación dispone además de **Developer Diagnostics** y de un **Portal Developer** interno. Developer Diagnostics se activa con `MRP_DEV_MODE=1`; el acceso humano a `/dev` requiere la superficie administrativa habilitada y una cuenta Developer local. `MRP_ADMIN_SECRET`/`MRP_ADMIN_TOKEN` pertenecen exclusivamente al contrato técnico Bearer legado y no son requisito del login humano. Las capacidades Developer no constituyen telemetría de producto ni envían logs automáticamente a terceros.
 
 ## Principios de diseño
 
@@ -101,7 +120,7 @@ Documentos principales:
 - **[Cierre GOV.1 — Auditoría, Gobierno y Trazabilidad Pre-Beta](docs/archive/governance/gov1-closeout.md)** — auditoría final y decisión de cierre de GOV.1;
 - **[Auditoría de versionado pre-1.0](docs/archive/governance/pre-1-0-versioning-audit.md)** — criterio contable y reconciliación VER.2;
 - **[VER.2 — Matriz de decisión de revisiones aceptadas](docs/archive/governance/ver2-revision-decision-matrix.md)** — decisiones de inclusión/exclusión del contador;
-- **[Ledger de revisiones aceptadas pre-1.0](docs/governance/pre-1-0-revision-ledger.md)** — secuencia reconciliada G001–G118 y próximo candidato G119/E05 para DEV.2 R6;
+- **[Ledger de revisiones aceptadas pre-1.0](docs/governance/pre-1-0-revision-ledger.md)** — secuencia reconciliada G001–G119 y próximo candidato G120/E01 para UX.5 R1;
 - [`data/pre-1-0-revision-ledger.json`](data/pre-1-0-revision-ledger.json) — ledger machine-readable;
 - **[Identificadores de bloques de trabajo](docs/standards/work-block-identifiers.md)** — política canónica de identificadores de bloques;
 - [`data/work-block-registry.json`](data/work-block-registry.json) — registro machine-readable de identificadores históricos, cerrados y planificados;
@@ -251,8 +270,10 @@ Para activar Developer Diagnostics y el Portal Developer en una sesión local de
 ```powershell
 $env:MRP_DEV_MODE = "1"
 $env:MRP_ADMIN_ENABLED = "1"
-$env:MRP_ADMIN_SECRET = "<secreto-local-no-versionado>"
 python -m uvicorn app.main:app --reload
+
+# Solo si se necesita el contrato técnico Bearer legado:
+# $env:MRP_ADMIN_SECRET = "<define-tu-secreto-local-no-versionado>"
 ```
 
 Abrir el Portal Developer en:
@@ -281,7 +302,7 @@ La CI del repositorio ejecuta validaciones equivalentes sobre las versiones de P
 
 ## Privacidad y datos personales
 
-La versión actual no dispone de cuentas de usuario ni de una base de datos permanente de simulaciones. Los documentos seleccionados para importación se procesan bajo los controles documentados y los originales personales no deben incorporarse al repositorio público.
+La simulación previsional no utiliza cuentas de usuario ni una base de datos permanente de simulaciones. El Portal Developer sí dispone de cuentas administrativas locales, separadas de los datos previsionales. Los documentos seleccionados para importación se procesan bajo los controles documentados y los originales personales no deben incorporarse al repositorio público.
 
 Developer Diagnostics no debe registrar cuerpos HTTP, contenido PDF, identidad, salarios, cuotas detalladas, montos de pensión, cookies, tokens ni mensajes de excepción potencialmente sensibles. Los logs son locales, rotan y están excluidos de Git.
 
@@ -402,21 +423,26 @@ Activación temporal de diagnósticos y de la superficie administrativa:
 ```powershell
 $env:MRP_DEV_MODE = "1"
 $env:MRP_ADMIN_ENABLED = "1"
-$env:MRP_ADMIN_SECRET = "<define-tu-secreto-local-no-versionado>"
 python -m uvicorn app.main:app --reload
+
+# Solo para el contrato técnico Bearer legado, si se necesita:
+# $env:MRP_ADMIN_SECRET = "<define-tu-secreto-local-no-versionado>"
 ```
 
-No existe una clave administrativa predeterminada en el repositorio. El valor
-que el operador asigne a `MRP_ADMIN_SECRET` es la credencial de ese entorno y
-**no debe publicarse, compartirse ni versionarse**. `MRP_ADMIN_ENABLED` actúa
-como kill switch: si no vale `1`, el login y el Centro de desarrollo quedan
-bloqueados aunque exista un secreto o una sesión anterior.
+No existe una clave administrativa predeterminada ni una cuenta Developer
+predeterminada en el repositorio. El acceso humano requiere una identidad
+Developer local previamente provisionada. `MRP_ADMIN_SECRET`/`MRP_ADMIN_TOKEN` quedan reservados al contrato
+técnico Bearer legado y **no autentican el login humano**. Ninguna credencial
+debe publicarse, compartirse ni versionarse. `MRP_ADMIN_ENABLED` actúa como
+kill switch: si no vale `1`, el Portal Developer permanece bloqueado aunque
+exista una sesión anterior.
 
 Accesos locales:
 
 - aplicación: <http://127.0.0.1:8000>;
-- login administrativo: <http://127.0.0.1:8000/dev/login>;
-- Centro de desarrollo: <http://127.0.0.1:8000/dev/centro-desarrollo>.
+- Portal Developer humano: <http://127.0.0.1:8000/dev>;
+- compatibilidad de entrada: <http://127.0.0.1:8000/dev/login>;
+- acceso técnico legado: <http://127.0.0.1:8000/dev/centro-desarrollo>.
 
 El login del navegador crea una sesión administrativa temporal mediante la
 cookie técnica `mrp_admin_session`, `HttpOnly`, con `SameSite` configurable,
