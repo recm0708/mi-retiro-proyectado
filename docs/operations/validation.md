@@ -149,6 +149,45 @@ DOC.1 R1 no cambia el contrato funcional ni los motores previsionales. Su valida
 
 La estrategia combina pruebas automatizadas, CI, casos sintéticos/anonimizados y validación manual cuando una propiedad no puede demostrarse suficientemente con código.
 
+<!-- AUTOMATION-POST-G119:START -->
+## Automatización de calidad post-G119
+
+La validación reproducible queda centralizada en
+`scripts/quality_gate.py`.
+
+Modos canónicos:
+
+```powershell
+python scripts/quality_gate.py --fast
+python scripts/quality_gate.py --pre-commit
+python scripts/quality_gate.py --full
+python scripts/quality_gate.py --release
+```
+
+El gate integra dependencias Python, Markdown, identificadores, integridad del
+repositorio, compilación Python, JavaScript, contratos revision-aware,
+manifiesto de publicación, whitespace y, según el modo, `unittest`, `pytest`
+y contrato de tag.
+
+GitHub añade además PR Policy, Repository Health, Release Readiness,
+Dependency Security, Scheduled Repository Health, auditoría de enlaces
+externos, auto-labeling y baseline Visual/A11y.
+
+La auditoría visual cubre:
+
+- 360 x 800 en tema claro;
+- 768 x 1024 en tema oscuro;
+- 1440 x 900 en alto contraste;
+- las superficies públicas principales y `/dev`;
+- WCAG 2.0, 2.1 y 2.2 mediante axe.
+
+Los workflows históricos continúan temporalmente activos para comprobar
+equivalencia antes de modificar el ruleset.
+
+Esta infraestructura no cambia `VERSION`, no acepta G120 y no crea commits,
+tags ni GitHub Releases.
+<!-- AUTOMATION-POST-G119:END -->
+
 ## Validación MANT.1 R5H — nombres técnicos restantes
 
 MANT.1 R5H completa una segunda pasada sobre nombres técnicos restantes,
@@ -574,10 +613,11 @@ python -m pip check
 
 ## 3. Inventario actual de pruebas
 
-Inventario vigente: **183 módulos**.
+Inventario vigente: **184 módulos**.
 
 - `tests/test_accessibility_themes.py`
 - `tests/test_accessibility_ux4.py`
+- `tests/test_automation_core_quality_gate.py`
 - `tests/test_comparator.py`
 - `tests/test_dev2_development_center.py`
 - `tests/test_dev2_r1_cierre_documental.py`

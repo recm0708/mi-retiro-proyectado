@@ -143,6 +143,34 @@ Si el cambio modifica comportamiento visible, realizar además las pruebas manua
 
 Las pruebas automatizadas no sustituyen una auditoría WCAG con tecnologías de apoyo ni una revisión jurídica.
 
+<!-- AUTOMATION-POST-G119:START -->
+### Gate canónico y automatización post-G119
+
+Las herramientas Python de desarrollo se instalan con
+`python -m pip install -r requirements-dev.txt`.
+
+El cierre técnico local usa como contrato canónico:
+
+```powershell
+python scripts/quality_gate.py --full
+```
+
+El hook conserva las barreras específicas del clon y delega el gate técnico en
+`quality_gate.py --pre-commit`. En Pull Requests, `Repository Quality Gate`
+añade política de rama, firmas humanas autorizadas e integridad del repositorio.
+
+`VERSION`, `data/pre-1-0-revision-ledger.json` y
+`data/release-publication-manifest.json` se consideran estado revision-aware
+coordinado: un cambio de promoción debe tratarlos de forma coherente.
+
+El tooling npm versionado bajo `scripts/package.json` y
+`scripts/package-lock.json` existe exclusivamente para automatización visual y
+de accesibilidad; no forma parte del runtime de la aplicación.
+
+La automatización verifica, pero no crea commits o tags firmados ni autoriza
+auto-merge. Esas decisiones permanecen bajo control del mantenedor.
+<!-- AUTOMATION-POST-G119:END -->
+
 ## 6. Documentación como parte del cambio
 
 Actualizar únicamente los documentos afectados, pero hacerlo **antes del cierre** del cambio.
@@ -251,7 +279,7 @@ No introducir telemetría o registro de datos sensibles de forma silenciosa.
 
 `requirements.txt` contiene dependencias Python reproducibles.
 
-Node.js LTS es una herramienta auxiliar para `node --check`; no forma parte del runtime y no justifica un `package.json` mientras no existan dependencias npm reales.
+Node.js 24 continúa fuera del runtime. El repositorio sí mantiene `scripts/package.json` y `scripts/package-lock.json` porque Playwright y axe-core son dependencias reales de automatización y accesibilidad.
 
 Dependabot no reemplaza la revisión humana ni autoriza auto-merge. Los PR de dependencias deben revisarse contra `main` actualizado, ejecutar CI y recibir validación adicional cuando afecten parsers, seguridad, normativa o infraestructura de publicación.
 

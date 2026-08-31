@@ -4,11 +4,10 @@ Describe qué cambia y por qué.
 
 ## Validación
 
-- [ ] Ejecuté `python -m compileall app`.
-- [ ] Ejecuté la suite de pruebas aplicable.
-- [ ] Ejecuté `git diff --check`.
-- [ ] Validé JavaScript con `node --check` si corresponde.
+- [ ] Ejecuté `python scripts/quality_gate.py --full`.
 - [ ] Revisé el diff staged antes del commit.
+- [ ] Ejecuté validaciones específicas adicionales cuando el cambio lo requirió.
+- [ ] Si modifiqué tooling Node, revisé `npm audit --prefix scripts --audit-level=high`.
 
 ## Documentación
 

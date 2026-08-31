@@ -183,10 +183,14 @@ La publicación del repositorio no elimina la revisión jurídica externa ni cua
 - [`../tests/test_ver2_version_revision_aware.py`](../tests/test_ver2_version_revision_aware.py) — regresiones del esquema revision-aware.
 - [`../tests/test_ver2_documentacion_vigente.py`](../tests/test_ver2_documentacion_vigente.py) — coherencia de superficies vigentes durante VER.2.
 - **[Casos de validación](../tests/validation_cases/README.md)** — reglas de casos sintéticos/anonimizados.
-- `../.github/workflows/ci.yml` — CI funcional.
-- `../.github/workflows/governance-audit.yml` — auditoría automática de gobierno.
-- `../.github/workflows/verificar-tags.yml` — verificación criptográfica de tags.
-- `../.github/dependabot.yml` — mantenimiento de dependencias.
+- `../.github/workflows/quality-gate.yml` — gate canónico del repositorio y compatibilidad Python.
+- `../.github/workflows/dependency-security.yml` — seguridad de dependencias y supply chain.
+- `../.github/workflows/scheduled-health.yml` — auditoría periódica de salud, enlaces externos y tags.
+- `../.github/workflows/pr-labeler.yml` — clasificación automática de Pull Requests.
+- `../.github/workflows/visual-a11y.yml` — baseline Visual/Accessibility con Playwright y axe.
+- `../.github/workflows/verificar-tags.yml` — verificación criptográfica de tags y publicación autorizada.
+- `../.github/dependabot.yml` — mantenimiento de dependencias Python, npm y GitHub Actions.
+- `ci.yml`, `governance-audit.yml` y `markdown-audit.yml` permanecen temporalmente como workflows legacy mientras se demuestra equivalencia remota y se migra el ruleset.
 
 ## 11. Desarrollo y contribución
 
@@ -194,7 +198,7 @@ La publicación del repositorio no elimina la revisión jurídica externa ni cua
 - **[Código de conducta](../CODE_OF_CONDUCT.md)** — reglas de convivencia y colaboración.
 - **[Soporte](../SUPPORT.md)** — rutas de consulta y reporte.
 - **[Guía interna de desarrollo](operations/development-guide.md)** — convenciones internas.
-- **[DEV.2 R1–R5 — Centro de desarrollo](architecture/development-center.md)** — estado aceptado/publicado de DEV.2 hasta R5; R6 permanece como siguiente candidato funcional.
+- **[DEV.2 R1–R6 — Centro de desarrollo](architecture/development-center.md)** — DEV.2 queda cerrado hasta R6; R5 permanece aceptado/publicado como G118/E04 y R6 queda aceptado/publicado como G119/E05.
 - **[Política de estructura de archivos por extensión](standards/file-structure-by-extension.md)** — política vigente de estructura, nombres y ubicación de archivos.
 - **[Estándar de código y comentarios](standards/code-and-comments.md)** — patrón permanente de comentarios y docstrings por tecnología.
 - [`../.editorconfig`](../.editorconfig) — formato.

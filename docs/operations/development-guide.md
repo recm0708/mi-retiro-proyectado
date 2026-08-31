@@ -194,7 +194,7 @@ Cada clon de desarrollo debe activar una vez el gate de Git versionado:
 
 `.githooks/pre-commit` delega en `scripts/validate_precommit.py`. Antes de permitir un commit comprueba que no se confirme directamente en `main`, que no existan cambios sin preparar ni archivos no rastreados y que pasen `git diff --cached --check`, `pip check`, compilación Python, sintaxis JavaScript y la suite completa. Un fallo devuelve código no cero y Git no crea el commit. `--no-verify` no se utiliza como vía normal para saltar este control.
 
-El gate manual de cierre sigue siendo:
+El gate manual canónico es `python scripts/quality_gate.py --full`. Los comandos siguientes permanecen útiles para diagnóstico aislado:
 
 ```powershell
 python -m compileall app
@@ -215,6 +215,31 @@ git diff --cached --stat
 git diff --cached --check
 ```
 
+<!-- AUTOMATION-POST-G119:START -->
+## 16.1. Automatización de calidad post-G119
+
+`scripts/quality_gate.py` es el ejecutor canónico de validación para desarrollo
+local y GitHub Actions. Sus modos son `--fast`, `--pre-commit`, `--full` y
+`--release`.
+
+La infraestructura añade auditorías de integridad del repositorio, política y
+firmas de Pull Requests, preparación post-merge, referencias de Actions,
+enlaces externos programados, tags firmados, dependencias y regresión
+Visual/A11y.
+
+Para un cierre ordinario:
+
+```powershell
+python -m pip install -r requirements-dev.txt
+python scripts/quality_gate.py --full
+```
+
+El tooling de navegador vive bajo `scripts/package.json`;
+`npm ci --prefix scripts` prepara Playwright/axe cuando sea necesario.
+Chromium se instala en el workflow Visual/A11y y no forma parte del runtime
+Python.
+<!-- AUTOMATION-POST-G119:END -->
+
 ## 17. Favicon e iconos
 
 Mientras no exista el paquete gráfico definitivo, `/favicon.ico` puede responder 204 conforme a la implementación actual.
@@ -230,7 +255,7 @@ El siguiente inventario describe el **entorno de referencia observado el 2026-08
 | Python | `3.14.3` | Runtime local, aplicación, scripts y pruebas | Requerido; CI valida además Python 3.13 y 3.14 |
 | pip | `26.2.1` | Instalación reproducible desde `requirements.txt` dentro de `.venv` | Requerido para preparar el entorno Python |
 | Git for Windows | `2.55.0.windows.4` | Control de versiones, ramas, firmas y hooks | Requerido para el flujo de contribución |
-| Node.js | `24.20.0` | `node --check` sobre JavaScript del runtime | Requerido por el gate técnico; no existe cadena npm de runtime |
+| Node.js | `24.20.0` | Sintaxis JavaScript y tooling Playwright/axe bajo `scripts/` | Requerido por automatización; no forma parte del runtime de la aplicación |
 | Visual Studio Code | `1.135.0` x64 | Editor principal utilizado durante el desarrollo | Opcional; no se requieren extensiones específicas salvo documentación futura |
 | GitHub Desktop | `3.6.4` | Cliente gráfico complementario para inspección y operaciones Git | Opcional; no sustituye los contratos Git/PR del repositorio |
 | GitHub CLI (`gh`) | `2.98.0` | Administración puntual del repositorio y operaciones remotas excepcionales | Opcional; no es necesario para ejecutar la aplicación |
@@ -244,7 +269,7 @@ Reglas de interpretación:
 - `requirements.txt` sigue siendo la fuente reproducible de dependencias Python de la aplicación; las herramientas de esta tabla no deben añadirse allí.
 - `.venv` es local y no se versiona.
 - GitHub Actions constituye la referencia remota para los gates obligatorios. El CI ejecuta la aplicación y la suite en Python 3.13 y 3.14, por lo que la versión local 3.14.3 no define por sí sola el mínimo soportado.
-- Node.js se usa como herramienta de validación sintáctica. Mientras no existan dependencias npm reales, no se crea `package.json` únicamente para registrar Node.
+- Node.js conserva funciones de validación sintáctica y además ejecuta el tooling reproducible de Playwright/axe versionado en `scripts/package.json` y `scripts/package-lock.json`.
 - Visual Studio Code y GitHub Desktop son interfaces de trabajo, no fuentes de verdad. Git, los archivos versionados y GitHub conservan la trazabilidad.
 - GitHub CLI y ripgrep son utilidades de mantenimiento. Una contribución no debe fallar por su ausencia si puede completar por otros medios los mismos contratos obligatorios.
 - ImageMagick solo pasará a ser requisito documentado si un script, build o proceso reproducible del repositorio llega a depender de él; en ese caso deberá versionarse también la instrucción de instalación/uso correspondiente.
@@ -254,7 +279,7 @@ Reglas de interpretación:
 
 `requirements.txt` es el snapshot reproducible Python.
 
-Node.js LTS se usa para validación sintáctica; no existe una cadena npm de runtime.
+Node.js 24 se usa para sintaxis JavaScript y automatización Playwright/axe. La cadena npm vive en `scripts/` y no forma parte del runtime del usuario final.
 
 Dependabot no implica auto-merge.
 

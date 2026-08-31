@@ -126,6 +126,21 @@ La CI remota debe permanecer en verde.
 
 GOV.1.6 añadió `.github/workflows/governance-audit.yml`. El job **Auditoría de gobernanza** usa permisos de solo lectura y no reemplaza los checks funcionales `Python 3.13` y `Python 3.14`. Tras su primera ejecución exitosa fue incorporado al ruleset de `main`; el conjunto requerido vigente contiene los tres checks.
 
+### Migración de automatización post-G119
+
+El mantenimiento post-G119 introduce `Repository Quality Gate`,
+`Python Compatibility` y `Dependency Security` como candidatos a sustituir la
+fragmentación histórica de CI, Markdown y gobernanza.
+
+Mientras no exista evidencia remota satisfactoria y el ruleset no haya sido
+migrado, los checks históricos requeridos permanecen vigentes y sus workflows
+no deben retirarse.
+
+La retirada de `ci.yml`, `governance-audit.yml` y `markdown-audit.yml` solo
+puede realizarse después de comprobar los reemplazos sobre GitHub y actualizar
+el ruleset sin una ventana de protección. CodeQL permanece independiente.
+
+
 Desde el 2026-08-17 la rama predeterminada está protegida mediante un ruleset activo que exige Pull Request, commits verificados, historial lineal, resolución de conversaciones, checks `Python 3.13` y `Python 3.14`, rama actualizada antes de integrar y bloqueo de eliminación y force push.
 
 El rol `Repository admin` dispone únicamente de bypass mediante Pull Request para recuperación administrativa excepcional.

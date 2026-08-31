@@ -6,13 +6,25 @@
   >
 </p>
 
-# Mi Retiro Proyectado
+<h1 align="center">Mi Retiro Proyectado</h1>
 
-[![Validación continua](https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/ci.yml)
-[![Auditoría de gobernanza](https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/governance-audit.yml/badge.svg?branch=main)](https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/governance-audit.yml)
-![Versión](https://img.shields.io/badge/versi%C3%B3n-0.1.19.05--beta-2563eb)
-![Python](https://img.shields.io/badge/Python-3.13%20%7C%203.14-3776AB?logo=python&logoColor=white)
-![Licencia](https://img.shields.io/badge/licencia-propietaria-6B7280)
+<p align="center">
+  <a href="https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/quality-gate.yml">
+    <img alt="Repository Quality Gate" src="https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/quality-gate.yml/badge.svg?branch=main">
+  </a>
+  <a href="https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/dependency-security.yml">
+    <img alt="Dependency Security" src="https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/dependency-security.yml/badge.svg?branch=main">
+  </a>
+  <a href="https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/visual-a11y.yml">
+    <img alt="Visual & Accessibility" src="https://github.com/recm0708/mi-retiro-proyectado/actions/workflows/visual-a11y.yml/badge.svg?branch=main">
+  </a>
+</p>
+
+<p align="center">
+  <img alt="Versión 0.1.19.05-beta" src="https://img.shields.io/badge/versi%C3%B3n-0.1.19.05--beta-2563eb">
+  <img alt="Python 3.13 y 3.14" src="https://img.shields.io/badge/Python-3.13%20%7C%203.14-3776AB?logo=python&logoColor=white">
+  <img alt="Licencia propietaria" src="https://img.shields.io/badge/licencia-propietaria-6B7280">
+</p>
 
 Mi Retiro Proyectado es una aplicación web local e independiente para **estimar, explicar y comparar escenarios de retiro** de personas aseguradas de la Caja de Seguro Social (CSS) de Panamá.
 
@@ -57,6 +69,29 @@ La visibilidad pública del repositorio **no convierte una beta de desarrollo en
 
 La versión se obtiene exclusivamente del archivo [`VERSION`](VERSION). La política completa se documenta en [Política de versionado](VERSIONING.md). VER.2 publicó `v0.0.71.01-beta` bajo la denominación original G071/E01; la reconciliación posterior sitúa ese estado en G087/E01 sin alterar el tag, y su evidencia histórica quedó preservada por NOR.2. Los estándares vigentes del repositorio están en [Estándares del repositorio](docs/standards) y el cierre de la normalización se documenta en [Auditorías de normalización del repositorio](docs/audits/repository).
 
+<!-- AUTOMATION-POST-G119:START -->
+## Automatización y calidad
+
+El repositorio mantiene un gate reproducible común para desarrollo local,
+hooks y GitHub Actions:
+
+```powershell
+python -m pip install -r requirements-dev.txt
+python scripts/quality_gate.py --full
+```
+
+La infraestructura cubre integridad estructural y documental, política y firmas
+de Pull Requests, Repository Health, Release Readiness, dependencias y supply
+chain, enlaces externos programados, tags firmados, autoetiquetado y baseline
+Visual/Accessibility con Playwright y axe.
+
+Los workflows históricos continúan temporalmente en paralelo hasta validar
+equivalencia remota y migrar el ruleset sin perder protección.
+
+Esta automatización corresponde a mantenimiento post-G119 y no consume
+G120/E01.
+<!-- AUTOMATION-POST-G119:END -->
+
 ## Capacidades implementadas
 
 La aplicación dispone de un asistente de seis pasos para:
@@ -76,7 +111,12 @@ Los tres motores generales principales implementados son:
 
 El alcance jurídico y matemático exacto de cada motor se encuentra en la documentación normativa y técnica. No debe asumirse que el motor general cubre regímenes especiales no documentados.
 
-La aplicación dispone además de **Developer Diagnostics** y de un **Portal Developer** interno. Developer Diagnostics se activa con `MRP_DEV_MODE=1`; el acceso humano a `/dev` requiere la superficie administrativa habilitada y una cuenta Developer local. `MRP_ADMIN_SECRET`/`MRP_ADMIN_TOKEN` pertenecen exclusivamente al contrato técnico Bearer legado y no son requisito del login humano. Las capacidades Developer no constituyen telemetría de producto ni envían logs automáticamente a terceros.
+La aplicación dispone además de **Developer Diagnostics** y de un
+**Portal Developer** interno. Su activación, modelo de acceso, rutas locales y
+controles de seguridad se documentan en
+[Developer Diagnostics y acceso al portal de desarrollo](#developer-diagnostics-y-acceso-al-portal-de-desarrollo).
+Estas capacidades son exclusivas de desarrollo y no constituyen telemetría de
+producto ni envían logs automáticamente a terceros.
 
 ## Principios de diseño
 
@@ -241,6 +281,7 @@ mi-retiro-proyectado/
 ├── README.md
 ├── RELEASES.md
 ├── requirements.txt
+├── requirements-dev.txt
 ├── SECURITY.md
 ├── SUPPORT.md
 ├── THIRD_PARTY_NOTICES.md
@@ -331,6 +372,14 @@ Instalar dependencias:
 python -m pip install -r requirements.txt
 ```
 
+Para desarrollo, pruebas y automatización se instala el tooling adicional versionado:
+
+```powershell
+python -m pip install -r requirements-dev.txt
+```
+
+`requirements-dev.txt` incluye `requirements.txt`, por lo que puede utilizarse directamente en un entorno de desarrollo nuevo.
+
 Activar una sola vez por clon el gate que protege la creación de commits:
 
 ```powershell
@@ -349,40 +398,30 @@ Abrir:
 http://127.0.0.1:8000
 ```
 
-Para activar Developer Diagnostics y el Portal Developer en una sesión local de desarrollo:
-
-```powershell
-$env:MRP_DEV_MODE = "1"
-$env:MRP_ADMIN_ENABLED = "1"
-python -m uvicorn app.main:app --reload
-
-# Solo si se necesita el contrato técnico Bearer legado:
-# $env:MRP_ADMIN_SECRET = "<define-tu-secreto-local-no-versionado>"
-```
-
-Abrir el Portal Developer en:
-
-```text
-http://127.0.0.1:8000/dev
-```
-
-No se recomienda mantener `MRP_DEV_MODE=1` como configuración ordinaria de ejecución.
+Para habilitar Developer Diagnostics o el Portal Developer durante
+el desarrollo, consulta la sección
+[Developer Diagnostics y acceso al portal de desarrollo](#developer-diagnostics-y-acceso-al-portal-de-desarrollo),
+que concentra el contrato vigente de activación, autenticación y rutas locales.
 
 ## Validación mínima
 
-Antes de cerrar un cambio:
+Antes de cerrar un cambio ordinario, instala el tooling de desarrollo y ejecuta
+el gate canónico:
 
 ```powershell
-python -m compileall app
-Get-ChildItem .\app\static\js\*.js | ForEach-Object {
-    node --check $_.FullName
-    if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-}
-python -m unittest discover -s tests -q
-git diff --check
+python -m pip install -r requirements-dev.txt
+python scripts/quality_gate.py --full
 ```
 
-La CI del repositorio ejecuta validaciones equivalentes sobre las versiones de Python soportadas por el proyecto.
+Cuando se modifique el tooling Node de automatización, revisar además:
+
+```powershell
+npm audit --prefix scripts --audit-level=high
+```
+
+GitHub complementa el gate local con PR Policy, `Python Compatibility`,
+Dependency Security y los demás controles aplicables al alcance de cada Pull
+Request.
 
 ## Privacidad y datos personales
 

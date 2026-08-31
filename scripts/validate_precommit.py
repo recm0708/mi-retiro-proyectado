@@ -14,7 +14,6 @@ Límites:
 
 from __future__ import annotations
 
-import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -99,51 +98,20 @@ def _validar_estado_git(raiz: Path) -> None:
             "hay archivos no rastreados. Añádelos, ignóralos o retíralos antes de confirmar."
         )
 
-    _ejecutar(
-        ["git", "diff", "--cached", "--check"],
-        raiz=raiz,
-        descripcion="validar whitespace del contenido preparado",
-    )
 
 
 def _validar_entorno_y_codigo(raiz: Path) -> None:
-    """Ejecuta el gate técnico completo del proyecto antes de cada commit."""
+    """Delega el gate técnico al motor canónico del repositorio."""
 
     _ejecutar(
-        [sys.executable, "-m", "pip", "check"],
+        [
+            sys.executable,
+            "scripts/quality_gate.py",
+            "--pre-commit",
+            "--fail-fast",
+        ],
         raiz=raiz,
-        descripcion="verificar dependencias Python",
-    )
-    _ejecutar(
-        [sys.executable, "scripts/audit_markdown.py"],
-        raiz=raiz,
-        descripcion="auditar documentación Markdown",
-    )
-    _ejecutar(
-        [sys.executable, "-m", "compileall", "-q", "app"],
-        raiz=raiz,
-        descripcion="compilar Python",
-    )
-
-    node = shutil.which("node")
-    if not node:
-        _fallar(
-            "Node.js no está disponible en PATH; es necesario para validar la sintaxis "
-            "JavaScript antes del commit."
-        )
-
-    archivos_js = sorted((raiz / "app" / "static" / "js").rglob("*.js"))
-    for archivo in archivos_js:
-        _ejecutar(
-            [node, "--check", str(archivo)],
-            raiz=raiz,
-            descripcion=f"validar JavaScript {archivo.relative_to(raiz)}",
-        )
-
-    _ejecutar(
-        [sys.executable, "-m", "unittest", "discover", "-s", "tests", "-q"],
-        raiz=raiz,
-        descripcion="ejecutar suite completa",
+        descripcion="ejecutar Repository Quality Gate pre-commit",
     )
 
 

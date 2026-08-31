@@ -48,8 +48,20 @@ class TestUX46ePreparacionPublica(unittest.TestCase):
         self.assertNotIn("disponible públicamente", self.terminos.lower())
 
     def test_readme_muestra_badges_reales_y_estado_actual(self):
-        self.assertIn("actions/workflows/ci.yml/badge.svg?branch=main", self.readme)
-        self.assertIn("actions/workflows/governance-audit.yml/badge.svg?branch=main", self.readme)
+        for workflow in (
+            "quality-gate.yml",
+            "dependency-security.yml",
+            "visual-a11y.yml",
+        ):
+            with self.subTest(workflow=workflow):
+                self.assertIn(
+                    (
+                        "actions/workflows/"
+                        + workflow
+                        + "/badge.svg?branch=main"
+                    ),
+                    self.readme,
+                )
         badge_version = self.version.replace("-", "--")
         self.assertIn(
             f"img.shields.io/badge/versi%C3%B3n-{badge_version}",

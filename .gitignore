@@ -89,3 +89,8 @@ _entregas/
 
 # Paquetes temporales de auditoría local
 _auditoria_repo_*/
+
+# Node.js y automatización de navegador
+node_modules/
+playwright-report/
+test-results/

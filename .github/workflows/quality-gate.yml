@@ -1,0 +1,200 @@
+# Gate canónico de calidad del repositorio.
+#
+# Durante Automation Core convive temporalmente con los workflows históricos.
+# Una vez demostrada equivalencia o superioridad, CI, Markdown y gobernanza
+# podrán consolidarse sin perder protección.
+#
+# Este workflow solo valida. No crea commits, tags ni Releases.
+
+name: Repository Quality Gate
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: quality-gate-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality-gate:
+    name: Repository Quality Gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+
+      - name: Configurar Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.14"
+          cache: pip
+          cache-dependency-path: |
+            requirements.txt
+            requirements-dev.txt
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+          package-manager-cache: false
+
+      - name: Instalar tooling de desarrollo
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements-dev.txt
+
+      - name: Preparar referencia base del Pull Request
+        if: github.event_name == 'pull_request'
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch \
+            --no-tags \
+            origin \
+            "${{ github.base_ref }}:refs/remotes/origin/${{ github.base_ref }}"
+
+      - name: Validar política del Pull Request
+        if: github.event_name == 'pull_request'
+        shell: bash
+        env:
+          PR_BASE: origin/${{ github.base_ref }}
+          PR_BRANCH: ${{ github.head_ref }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_ACTOR: ${{ github.actor }}
+        run: |
+          set -euo pipefail
+          python scripts/audit_pr_policy.py \
+            --base "$PR_BASE" \
+            --head HEAD \
+            --branch "$PR_BRANCH" \
+            --title "$PR_TITLE" \
+            --actor "$PR_ACTOR"
+
+      - name: Ejecutar Repository Quality Gate
+        id: repository-quality-gate
+        shell: bash
+        env:
+          HEALTH_JSON: ${{ runner.temp }}/repository-health.json
+          HEALTH_MD: ${{ runner.temp }}/repository-health.md
+        run: |
+          set -euo pipefail
+
+          args=(
+            --full
+            --report-json "$HEALTH_JSON"
+            --summary-md "$HEALTH_MD"
+          )
+
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            args+=(
+              --base-ref
+              "origin/${{ github.base_ref }}"
+            )
+          fi
+
+          python scripts/quality_gate.py "${args[@]}"
+
+      - name: Publicar resumen del gate
+        if: always()
+        shell: bash
+        env:
+          HEALTH_MD: ${{ runner.temp }}/repository-health.md
+        run: |
+          if [[ -f "$HEALTH_MD" ]]; then
+            cat "$HEALTH_MD" >> "$GITHUB_STEP_SUMMARY"
+          else
+            {
+              echo "# Repository Quality Gate"
+              echo
+              echo "No fue posible generar el resumen estructurado."
+            } >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Evaluar readiness post-merge
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        shell: bash
+        env:
+          READINESS_JSON: ${{ runner.temp }}/release-readiness.json
+          READINESS_MD: ${{ runner.temp }}/release-readiness.md
+        run: |
+          set -euo pipefail
+          python scripts/release_readiness.py \
+            --json-out "$READINESS_JSON" \
+            --markdown-out "$READINESS_MD"
+
+      - name: Publicar readiness post-merge
+        if: ${{ always() && github.ref == 'refs/heads/main' && github.event_name != 'pull_request' }}
+        shell: bash
+        env:
+          READINESS_MD: ${{ runner.temp }}/release-readiness.md
+        run: |
+          if [[ -f "$READINESS_MD" ]]; then
+            echo >> "$GITHUB_STEP_SUMMARY"
+            cat "$READINESS_MD" >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Guardar Repository Health
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: repository-health-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/repository-health.json
+            ${{ runner.temp }}/repository-health.md
+            ${{ runner.temp }}/release-readiness.json
+            ${{ runner.temp }}/release-readiness.md
+          if-no-files-found: warn
+          retention-days: 14
+
+  python-compatibility:
+    name: Python Compatibility
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+          persist-credentials: false
+
+      - name: Configurar Python 3.13
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: |
+            requirements.txt
+            requirements-dev.txt
+
+      - name: Instalar tooling
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements-dev.txt
+          python -m pip check
+
+      - name: Compilar Python
+        run: |
+          python -m compileall app scripts tests -q
+
+      - name: Ejecutar suite unittest en Python 3.13
+        run: |
+          python -m unittest discover -s tests -q

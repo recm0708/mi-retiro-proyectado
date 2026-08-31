@@ -1,0 +1,9 @@
+# Tooling de desarrollo y validación de Mi Retiro Proyectado.
+#
+# Las dependencias de runtime permanecen en requirements.txt.
+# Este archivo añade únicamente herramientas necesarias para desarrollo,
+# pruebas y automatización del repositorio.
+
+-r requirements.txt
+
+pytest==9.1.1
