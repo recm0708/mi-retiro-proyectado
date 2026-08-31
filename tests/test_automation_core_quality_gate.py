@@ -863,5 +863,62 @@ class TestAutomationCoreQualityGate(unittest.TestCase):
                 )
 
 
+
+    def test_python_compatibility_recupera_historial_y_tags(self):
+        workflow = (
+            ROOT
+            / ".github"
+            / "workflows"
+            / "quality-gate.yml"
+        ).read_text(
+            encoding="utf-8"
+        )
+
+        compatibility = workflow.split(
+            "  python-compatibility:",
+            1,
+        )[1]
+
+        self.assertIn(
+            "fetch-depth: 0",
+            compatibility,
+        )
+        self.assertIn(
+            "fetch-tags: true",
+            compatibility,
+        )
+        self.assertIn(
+            "persist-credentials: false",
+            compatibility,
+        )
+        self.assertIn(
+            "requirements-dev.txt",
+            compatibility,
+        )
+
+    def test_ci_legacy_transitorio_conserva_contexto_reproducible(self):
+        workflow = (
+            ROOT
+            / ".github"
+            / "workflows"
+            / "ci.yml"
+        ).read_text(
+            encoding="utf-8"
+        )
+
+        for expected in (
+            "fetch-depth: 0",
+            "fetch-tags: true",
+            "persist-credentials: false",
+            "requirements-dev.txt",
+            "python -m pip check",
+        ):
+            with self.subTest(expected=expected):
+                self.assertIn(
+                    expected,
+                    workflow,
+                )
+
+
 if __name__ == "__main__":
     unittest.main()

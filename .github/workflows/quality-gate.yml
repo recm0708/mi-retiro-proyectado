@@ -172,6 +172,8 @@ jobs:
       - name: Descargar repositorio
         uses: actions/checkout@v7
         with:
+          fetch-depth: 0
+          fetch-tags: true
           persist-credentials: false
 
       - name: Configurar Python 3.13
