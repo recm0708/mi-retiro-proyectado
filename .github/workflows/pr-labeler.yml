@@ -1,0 +1,37 @@
+# Etiquetado automático de Pull Requests.
+#
+# Este workflow no descarga ni ejecuta código del Pull Request.
+# Solo consulta metadatos de archivos modificados y administra etiquetas.
+
+name: PR Auto Labeler
+
+on:
+  pull_request_target:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - ready_for_review
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: pr-labeler-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  label:
+    name: PR Auto Labeler
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Clasificar Pull Request
+        uses: actions/labeler@v7
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          configuration-path: .github/labeler.yml
+          sync-labels: false
+          dot: true

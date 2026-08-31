@@ -178,6 +178,14 @@ Abrir un Pull Request hacia `main` y confirmar:
 - ausencia de cambios no relacionados;
 - evidencia local requerida disponible.
 
+
+Durante la migración de automatización post-G119, `Repository Quality Gate`,
+`Python Compatibility` y `Dependency Security` se consideran comprobaciones
+adicionales. No sustituyen los required checks históricos hasta que su
+equivalencia haya sido demostrada remotamente y el ruleset de `main` haya sido
+actualizado.
+
+
 La integración ordinaria se realiza mediante `Squash and merge`. El commit resultante en `main` debe cumplir los controles de firma/verificación exigidos por el ruleset.
 
 Después de integrar:

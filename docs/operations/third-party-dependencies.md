@@ -6,7 +6,7 @@
 **Versión base histórica preservada:** `0.0.23-beta`
 **Base documental:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal histórica:** GOV.1.5 R3 — 2026-08-18
-**Última revisión documental:** mantenimiento pre-G118 — 2026-08-28
+**Última revisión documental:** mantenimiento post-G119 — 2026-08-31
 **Clasificación:** Técnica / Terceros / Auditoría
 
 Este inventario distingue dependencias directas, snapshot transitivo, recursos externos y servicios de red. GOV.1.7 adopta una licencia propietaria para materiales originales sin relicenciar dependencias upstream.
@@ -43,6 +43,26 @@ El snapshot transitivo mejora reproducibilidad, pero **no constituye por sí sol
 
 Dependabot propone actualizaciones directas permitidas; no existe auto-merge.
 
+<!-- AUTOMATION-POST-G119:START -->
+## 2.1. Tooling de desarrollo y automatización
+
+El runtime Python continúa definido por `requirements.txt`. Las herramientas de
+desarrollo y automatización se mantienen separadas:
+
+- `pytest 9.1.1` mediante `requirements-dev.txt`;
+- `playwright 1.62.1` mediante `scripts/package.json`;
+- `@axe-core/playwright 4.13.0` mediante `scripts/package.json`;
+- `pip-audit 2.10.1` instalado de forma reproducible por
+  `dependency-security.yml`.
+
+Playwright, axe-core y sus paquetes npm son tooling de CI/desarrollo. No se
+cargan en el navegador del usuario ni forman parte del servidor FastAPI.
+
+Dependabot cubre Python, GitHub Actions y el ecosistema npm de `/scripts`.
+`Dependency Security` complementa esas actualizaciones con auditoría de
+vulnerabilidades Python/npm y referencias externas de GitHub Actions.
+<!-- AUTOMATION-POST-G119:END -->
+
 ## 3. Bootstrap
 
 La interfaz usa **Bootstrap 5.3.8**.
@@ -73,11 +93,17 @@ No es una dependencia de software; se registra como **servicio externo operativo
 
 GitHub aloja el repositorio público y ejecuta CI/Dependabot.
 
-GitHub Actions utiliza actualmente:
+GitHub Actions utiliza, entre otras referencias versionadas:
 
 - `actions/checkout@v7`;
 - `actions/setup-python@v7`;
-- `actions/setup-node@v7`.
+- `actions/setup-node@v7`;
+- `actions/upload-artifact@v7`;
+- `actions/dependency-review-action@v4`;
+- `actions/labeler@v7`.
+
+Las referencias externas declaradas mediante `uses:` se auditan con
+`scripts/audit_action_references.py`.
 
 Estas herramientas son de desarrollo/CI, no runtime del usuario final.
 
@@ -94,9 +120,11 @@ Los badges de estado de CI y gobernanza se sirven directamente desde GitHub Acti
 
 ## 6. Node.js
 
-Node 24 se usa en CI para `node --check`.
+Node 24 se usa en CI para `node --check` y para el tooling reproducible
+Playwright/axe de `scripts/package.json`.
 
-No forma parte del runtime Python de la aplicación.
+La cadena npm está limitada a automatización y no forma parte del runtime
+Python ni del frontend entregado al usuario.
 
 ## 6.1. Evaluación GOV.1.5 de terceros
 

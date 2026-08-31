@@ -1,0 +1,149 @@
+# Baseline visual y de accesibilidad del frontend.
+#
+# Las violaciones axe son informativas mientras UX.5 redefine la base visual.
+# Fallos operativos del navegador, servidor o rutas sí bloquean el workflow.
+
+name: Visual & Accessibility
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "app/main.py"
+      - "app/templates/**"
+      - "app/static/**"
+      - "scripts/package*.json"
+      - "scripts/visual_a11y_audit.mjs"
+      - ".github/workflows/visual-a11y.yml"
+
+  push:
+    branches:
+      - main
+    paths:
+      - "app/main.py"
+      - "app/templates/**"
+      - "app/static/**"
+      - "scripts/package*.json"
+      - "scripts/visual_a11y_audit.mjs"
+      - ".github/workflows/visual-a11y.yml"
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: visual-a11y-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  visual-a11y:
+    name: Visual & Accessibility
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Configurar Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.14"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: scripts/package-lock.json
+
+      - name: Instalar aplicación
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+
+      - name: Instalar tooling Visual/A11y
+        run: npm ci --prefix scripts
+
+      - name: Instalar Chromium
+        working-directory: scripts
+        run: npx playwright install --with-deps chromium
+
+      - name: Ejecutar baseline Visual/A11y
+        shell: bash
+        env:
+          MRP_ADMIN_ENABLED: "1"
+          MRP_A11Y_STRICT: "0"
+          MRP_VISUAL_BASE_URL: http://127.0.0.1:8000
+          VISUAL_A11Y_OUTPUT: ${{ runner.temp }}/visual-a11y
+          SERVER_LOG: ${{ runner.temp }}/visual-a11y-server.log
+        run: |
+          set -euo pipefail
+
+          mkdir -p "$VISUAL_A11Y_OUTPUT"
+
+          python -m uvicorn app.main:app \
+            --host 127.0.0.1 \
+            --port 8000 \
+            > "$SERVER_LOG" 2>&1 &
+
+          SERVER_PID=$!
+
+          cleanup() {
+            kill "$SERVER_PID" 2>/dev/null || true
+          }
+
+          trap cleanup EXIT
+
+          for attempt in {1..60}; do
+            if curl \
+              --fail \
+              --silent \
+              http://127.0.0.1:8000/ \
+              > /dev/null
+            then
+              break
+            fi
+
+            if [[ "$attempt" -eq 60 ]]; then
+              cat "$SERVER_LOG"
+              exit 1
+            fi
+
+            sleep 1
+          done
+
+          node scripts/visual_a11y_audit.mjs
+
+      - name: Publicar resumen Visual/A11y
+        if: always()
+        shell: bash
+        run: |
+          REPORT="${{ runner.temp }}/visual-a11y/summary.md"
+
+          if [[ -f "$REPORT" ]]; then
+            cat "$REPORT" >> "$GITHUB_STEP_SUMMARY"
+          else
+            {
+              echo "# Visual & Accessibility"
+              echo
+              echo "No se generó el reporte Visual/A11y."
+            } >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Guardar evidencia Visual/A11y
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: visual-a11y-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/visual-a11y/
+            ${{ runner.temp }}/visual-a11y-server.log
+          if-no-files-found: warn
+          retention-days: 14

@@ -259,6 +259,32 @@ Cada carpeta operativa versionada, como `scripts/` o `.githooks/`, debe tener un
 `README.md` breve cuando su contenido afecte commits, CI, publicación,
 seguridad, privacidad o reproducibilidad del proyecto.
 
+<!-- AUTOMATION-POST-G119:START -->
+### Automatización y auditores de repositorio
+
+Los validadores y auditores deben derivar inventarios dinámicos desde Git
+cuando el contrato pueda crecer. No se congelan conteos de archivos,
+directorios, tags o documentos como sustituto del estado real.
+
+Los scripts de automatización deben:
+
+- separar validación de mutación;
+- usar funciones comprobables mediante pruebas;
+- devolver código distinto de cero ante una condición bloqueante;
+- producir reportes solo en rutas solicitadas explícitamente;
+- evitar secretos y datos locales ignorados;
+- conservar mensajes de error suficientes para diagnóstico.
+
+Todo workflow nuevo debe declarar permisos mínimos, triggers y límites de
+seguridad.
+
+`pull_request_target` solo puede utilizarse cuando el workflow no descarga ni
+ejecuta contenido no confiable del Pull Request.
+
+Los hooks deben permanecer como delegadores pequeños; la lógica compartida
+pertenece a scripts versionados y probables.
+<!-- AUTOMATION-POST-G119:END -->
+
 ## 10. Web Storage
 
 Las claves propias de la aplicación usan el namespace `miRetiroProyectado.*`.

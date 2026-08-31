@@ -14,8 +14,25 @@ class TestGov16ControlesGithub(unittest.TestCase):
         b=(GH/'ISSUE_TEMPLATE/bug_report.yml').read_text(encoding='utf-8'); f=(GH/'ISSUE_TEMPLATE/feature_request.yml').read_text(encoding='utf-8'); q=(GH/'ISSUE_TEMPLATE/question.yml').read_text(encoding='utf-8'); c=(GH/'ISSUE_TEMPLATE/config.yml').read_text(encoding='utf-8')
         self.assertIn('Reporte de error',b); self.assertIn('Solicitud de mejora',f); self.assertIn('Consulta / soporte',q); self.assertIn('SECURITY.md',b); self.assertIn('blank_issues_enabled: false',c); self.assertIn('/security/policy',c); self.assertIn('recm0708/mi-retiro-proyectado',c)
     def test_pr_template_exige_validacion_documentacion_y_privacidad(self):
-        t=(GH/'pull_request_template.md').read_text(encoding='utf-8')
-        for e in ('python -m compileall app','git diff --check','Documentación','Seguridad y privacidad','VERSION','commit está firmado'): self.assertIn(e,t)
+        t = (
+            GH / "pull_request_template.md"
+        ).read_text(
+            encoding="utf-8"
+        )
+
+        for expected in (
+            "python scripts/quality_gate.py --full",
+            "Revisé el diff staged antes del commit",
+            "Documentación",
+            "Seguridad y privacidad",
+            "VERSION",
+            "commit está firmado",
+        ):
+            with self.subTest(expected=expected):
+                self.assertIn(
+                    expected,
+                    t,
+                )
     def test_workflow_auditoria_permisos_minimos_y_v7(self):
         t=(GH/'workflows/governance-audit.yml').read_text(encoding='utf-8')
         for e in ('name: Auditoría de gobernanza','contents: read','actions/checkout@v7','actions/setup-python@v7','tests.test_gov16_controles_github','git diff --check'): self.assertIn(e,t)

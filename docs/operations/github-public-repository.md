@@ -6,7 +6,7 @@
 **Versión base del checkpoint público:** `0.0.24-beta`
 **Fecha de preparación original:** 2026-08-18
 **Revalidación pública:** 2026-08-19
-**Última revisión documental:** REL.GOV.1 — gobierno de GitHub Releases — 2026-08-26
+**Última revisión documental:** mantenimiento post-G119 — 2026-08-31
 **Clasificación:** GitHub / Comunidad / Publicación
 
 Este documento conserva la preparación realizada antes del cambio de visibilidad y registra el estado vigente después de convertir el repositorio en público. La publicación del **repositorio de código** no equivale a declarar una versión oficial de la aplicación, ni constituye por sí sola un despliegue de producción, ni sustituye los gates jurídicos, de accesibilidad, alcance funcional o seguridad.
@@ -80,15 +80,22 @@ Las cinco convenciones finales conservan su nombre canónico en inglés porque f
 
 ## 4. Badges del README
 
-El README muestra:
+El README muestra de forma centrada:
 
-- estado de `Validación continua` sobre `main`;
-- estado de `Auditoría de gobernanza` sobre `main`;
+- estado de `Repository Quality Gate` sobre `main`;
+- estado de `Dependency Security` sobre `main`;
+- estado de `Visual & Accessibility` sobre `main`;
 - versión formal;
 - versiones Python soportadas;
 - licencia propietaria.
 
-Los badges de workflows usan GitHub Actions. Los badges estáticos de versión/Python/licencia usan Shields.io únicamente en el README y no forman parte del runtime de la simulación.
+`Repository Quality Gate` contiene además el check `Python Compatibility`,
+que preserva la validación de Python 3.13 mientras el gate canónico completo se
+ejecuta con Python 3.14.
+
+Los badges de workflows usan GitHub Actions. Los badges estáticos de
+versión/Python/licencia usan Shields.io únicamente en el README y no forman
+parte del runtime de la simulación.
 
 ## 5. Issue Forms y Pull Requests
 
@@ -100,7 +107,7 @@ Los Issue Forms continúan separados en:
 
 Las vulnerabilidades explotables no deben publicarse en Issues. El repositorio tiene habilitado **Private vulnerability reporting** y conserva el canal alternativo documentado en `SECURITY.md`.
 
-Los Pull Requests pueden recibir varias labels según alcance. Un PR transversal de UX puede usar, por ejemplo, `ui`, `documentation`, `tests` y `maintenance`. No se añade un workflow con permisos de escritura solo para autoetiquetar PRs; el etiquetado de PR es manual mientras el volumen de contribuciones sea bajo.
+Los Pull Requests pueden recibir varias labels según alcance. Un PR transversal de UX puede usar, por ejemplo, `ui`, `documentation`, `tests` y `maintenance`. `.github/workflows/pr-labeler.yml` reutiliza la taxonomía canónica existente mediante `actions/labeler@v7`. El workflow utiliza `pull_request_target` sin checkout ni ejecución de código del PR, con `contents: read` y `pull-requests: write`. `sync-labels: false` preserva las etiquetas añadidas manualmente.
 
 ## 6. Social Preview e identidad visual
 
@@ -147,6 +154,39 @@ REL.GOV.1 añade un contrato específico de publicación sin modificar la visibi
 - una edición descriptiva de un Release histórico no autoriza mover, borrar ni recrear su tag.
 
 El formato canónico completo vive en `docs/operations/release-process.md`.
+
+<!-- AUTOMATION-POST-G119:START -->
+## 7.2. Automatización post-G119
+
+La capa de automatización incorpora:
+
+- `Repository Quality Gate`;
+- `Dependency Security`;
+- `Scheduled Repository Health`;
+- `PR Auto Labeler`;
+- `Visual & Accessibility`.
+
+`verificar-tags.yml` permanece separado porque posee triggers y permisos de
+publicación diferentes.
+
+`quality-gate.yml` centraliza validaciones técnicas, PR Policy, Repository
+Health y Release Readiness.
+
+`dependency-security.yml` audita vulnerabilidades Python/npm, referencias de
+Actions y Dependency Review.
+
+`scheduled-health.yml` ejecuta comprobaciones periódicas, incluidos enlaces
+externos y auditoría de tags firmados.
+
+`visual-a11y.yml` levanta temporalmente FastAPI y Chromium, ejecuta Playwright
+con axe y conserva screenshots y reportes como artifacts. Las violaciones axe
+son inicialmente informativas; los fallos operativos sí fallan el job.
+
+Los workflows históricos `ci.yml`, `governance-audit.yml` y
+`markdown-audit.yml` continúan temporalmente en paralelo. No deben retirarse ni
+cambiarse los required checks hasta demostrar equivalencia remota y migrar el
+ruleset sin una ventana de protección.
+<!-- AUTOMATION-POST-G119:END -->
 
 ## 8. Gate de seguridad ejecutado al cambiar a Public
 
