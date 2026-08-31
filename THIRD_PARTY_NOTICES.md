@@ -3,9 +3,9 @@
 **Proyecto:** Mi Retiro Proyectado
 **Estado:** Vigente para el repositorio fuente y la beta actual
 **Fecha:** 2026-08-18
-**Última actualización del inventario:** 2026-08-28
+**Última actualización del inventario:** 2026-08-31
 **Versión de aplicación revisada:** `0.1.19.05-beta`
-**Última revisión documental:** mantenimiento pre-G118 — 2026-08-28
+**Última revisión documental:** mantenimiento post-G119 — 2026-08-31
 
 La licencia propietaria de Mi Retiro Proyectado **no relicencia** componentes de terceros.
 
@@ -15,7 +15,7 @@ La licencia propietaria de Mi Retiro Proyectado **no relicencia** componentes de
 |---|---:|---|
 | FastAPI | 0.141.1 | MIT |
 | Jinja2 | 3.1.6 | BSD-3-Clause |
-| Pydantic | 2.13.4 | MIT |
+| Pydantic | 2.13.5 | MIT |
 | python-multipart | 0.0.32 | Apache-2.0 |
 | pypdf | 6.16.2 | BSD-3-Clause |
 | Uvicorn | 0.52.4 | BSD-3-Clause |
@@ -34,7 +34,7 @@ Si una distribución futura incorpora físicamente dependencias, código minific
 
 ## GitHub Actions
 
-Los workflows usan actualmente `actions/checkout@v7`, `actions/setup-python@v7` y `actions/setup-node@v7`. Conservan sus licencias upstream y forman parte de la cadena de desarrollo/CI.
+Los workflows usan actualmente, entre otras referencias versionadas, `actions/checkout@v7`, `actions/setup-python@v7`, `actions/setup-node@v7`, `actions/upload-artifact@v7`, `actions/dependency-review-action@v5` y `actions/labeler@v7`. Conservan sus licencias upstream y forman parte de la cadena de desarrollo/CI.
 
 ## Servicios externos
 

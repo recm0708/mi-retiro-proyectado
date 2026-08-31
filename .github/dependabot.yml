@@ -13,6 +13,7 @@ updates:
       - dependency-name: fastapi
       - dependency-name: Jinja2
       - dependency-name: pydantic
+      - dependency-name: pydantic_core
       - dependency-name: python-multipart
       - dependency-name: pypdf
       - dependency-name: uvicorn
@@ -23,6 +24,7 @@ updates:
           - fastapi
           - Jinja2
           - pydantic
+          - pydantic_core
           - python-multipart
           - uvicorn
         update-types:
