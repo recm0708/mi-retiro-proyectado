@@ -124,24 +124,31 @@ git log --show-signature -1
 
 La CI remota debe permanecer en verde.
 
-GOV.1.6 añadió `.github/workflows/governance-audit.yml`. El job **Auditoría de gobernanza** usa permisos de solo lectura y no reemplaza los checks funcionales `Python 3.13` y `Python 3.14`. Tras su primera ejecución exitosa fue incorporado al ruleset de `main`; el conjunto requerido vigente contiene los tres checks.
+GOV.1.6 introdujo históricamente
+`.github/workflows/governance-audit.yml` y el check
+**Auditoría de gobernanza** como control independiente. La migración
+post-G119 absorbió ese contrato, junto con CI y Markdown, dentro del gate
+canónico después de demostrar equivalencia remota en GitHub.
 
-### Migración de automatización post-G119
+### Automatización canónica post-G119
 
-El mantenimiento post-G119 introduce `Repository Quality Gate`,
-`Python Compatibility` y `Dependency Security` como candidatos a sustituir la
-fragmentación histórica de CI, Markdown y gobernanza.
+El ruleset vigente de `main` exige `Repository Quality Gate` y
+`Python Compatibility`.
 
-Mientras no exista evidencia remota satisfactoria y el ruleset no haya sido
-migrado, los checks históricos requeridos permanecen vigentes y sus workflows
-no deben retirarse.
+`Repository Quality Gate` centraliza validación técnica, documental, de
+integridad y política de Pull Requests. `Python Compatibility` preserva la
+compatibilidad con Python 3.13.
 
-La retirada de `ci.yml`, `governance-audit.yml` y `markdown-audit.yml` solo
-puede realizarse después de comprobar los reemplazos sobre GitHub y actualizar
-el ruleset sin una ventana de protección. CodeQL permanece independiente.
+`Dependency Security`, `Visual & Accessibility` y CodeQL permanecen como
+controles complementarios. `verificar-tags.yml` continúa separado por su
+contrato específico de firma y publicación.
+
+Los workflows legacy `ci.yml`, `governance-audit.yml` y
+`markdown-audit.yml` fueron retirados después de migrar el ruleset, sin abrir
+una ventana de desprotección. CodeQL permanece independiente.
 
 
-Desde el 2026-08-17 la rama predeterminada está protegida mediante un ruleset activo que exige Pull Request, commits verificados, historial lineal, resolución de conversaciones, checks `Python 3.13` y `Python 3.14`, rama actualizada antes de integrar y bloqueo de eliminación y force push.
+La rama predeterminada está protegida mediante un ruleset activo que exige Pull Request, commits verificados, historial lineal, resolución de conversaciones, los checks `Repository Quality Gate` y `Python Compatibility`, rama actualizada antes de integrar y bloqueo de eliminación y force push.
 
 El rol `Repository admin` dispone únicamente de bypass mediante Pull Request para recuperación administrativa excepcional.
 

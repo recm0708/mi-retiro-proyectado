@@ -190,7 +190,7 @@ La publicación del repositorio no elimina la revisión jurídica externa ni cua
 - `../.github/workflows/visual-a11y.yml` — baseline Visual/Accessibility con Playwright y axe.
 - `../.github/workflows/verificar-tags.yml` — verificación criptográfica de tags y publicación autorizada.
 - `../.github/dependabot.yml` — mantenimiento de dependencias Python, npm y GitHub Actions.
-- `ci.yml`, `governance-audit.yml` y `markdown-audit.yml` permanecen temporalmente como workflows legacy mientras se demuestra equivalencia remota y se migra el ruleset.
+- `Repository Quality Gate` y `Python Compatibility` son los required checks vigentes de `main`; los workflows legacy de CI, gobernanza y Markdown fueron retirados tras completar la migración post-G119.
 
 ## 11. Desarrollo y contribución
 

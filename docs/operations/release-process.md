@@ -172,18 +172,17 @@ git push -u origin <rama>
 Abrir un Pull Request hacia `main` y confirmar:
 
 - rama actualizada respecto de `main`;
-- checks requeridos `Python 3.13` y `Python 3.14` en **success**;
-- check `Auditoría de gobernanza` en **success**;
+- check requerido `Repository Quality Gate` en **success**;
+- check requerido `Python Compatibility` en **success**;
 - conversaciones resueltas;
 - ausencia de cambios no relacionados;
 - evidencia local requerida disponible.
 
 
-Durante la migración de automatización post-G119, `Repository Quality Gate`,
-`Python Compatibility` y `Dependency Security` se consideran comprobaciones
-adicionales. No sustituyen los required checks históricos hasta que su
-equivalencia haya sido demostrada remotamente y el ruleset de `main` haya sido
-actualizado.
+La migración de automatización post-G119 está cerrada. `Repository Quality
+Gate` y `Python Compatibility` constituyen los required checks del ruleset de
+`main`. `Dependency Security`, Visual/Accessibility y CodeQL complementan esos
+controles cuando resultan aplicables al alcance del cambio.
 
 
 La integración ordinaria se realiza mediante `Squash and merge`. El commit resultante en `main` debe cumplir los controles de firma/verificación exigidos por el ruleset.

@@ -74,15 +74,50 @@ class TestUX46ePreparacionPublica(unittest.TestCase):
         self.assertIn("`sebd-panama` adoptado", self.readme)
 
     def test_documento_publicacion_define_topics_aprobados(self):
-        for topic in (
-            "accesibilidad", "caja-seguro-social", "calculadora-pension",
-            "estimacion-previsional", "fastapi", "jubilacion", "panama",
-            "pension", "pensiones-panama", "planificacion-retiro",
-            "prevision-social", "proyeccion-retiro", "proyeccion-salarial",
-            "python", "retiro", "seguridad-social",
-            "seguridad-social-panama", "sistema-mixto", "sucgs", "sebd-panama",
+        topics = (
+            "accesibilidad",
+            "caja-seguro-social",
+            "calculadora-pension",
+            "estimacion-previsional",
+            "fastapi",
+            "jubilacion",
+            "panama",
+            "pension",
+            "pensiones-panama",
+            "planificacion-retiro",
+            "privacidad",
+            "proyeccion-retiro",
+            "proyeccion-salarial",
+            "python",
+            "retiro",
+            "simulador-pension",
+            "seguridad-social-panama",
+            "sistema-mixto",
+            "sucgs",
+            "sebd-panama",
+        )
+
+        self.assertIn(
+            "**20 topics**",
+            self.publicacion,
+        )
+
+        for topic in topics:
+            with self.subTest(topic=topic):
+                self.assertIn(
+                    f"`{topic}`",
+                    self.publicacion,
+                )
+
+        for legacy in (
+            "prevision-social",
+            "seguridad-social",
         ):
-            self.assertIn(f"`{topic}`", self.publicacion)
+            with self.subTest(legacy=legacy):
+                self.assertNotIn(
+                    f"- `{legacy}`",
+                    self.publicacion,
+                )
 
     def test_documento_publicacion_define_labels_y_aclara_commits(self):
         for label in (

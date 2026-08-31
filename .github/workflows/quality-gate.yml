@@ -1,8 +1,7 @@
 # Gate canónico de calidad del repositorio.
 #
-# Durante Automation Core convive temporalmente con los workflows históricos.
-# Una vez demostrada equivalencia o superioridad, CI, Markdown y gobernanza
-# podrán consolidarse sin perder protección.
+# Centraliza validación técnica, documental, de integridad y política de PR.
+# Python Compatibility preserva por separado la compatibilidad con Python 3.13.
 #
 # Este workflow solo valida. No crea commits, tags ni Releases.
 

@@ -16,7 +16,7 @@ Este documento conserva la preparación realizada antes del cambio de visibilida
 ## 1. Metadata About
 
 - **Nombre:** `mi-retiro-proyectado`
-- **Descripción:** `Aplicación web independiente y no oficial para estimar, explicar y comparar escenarios de retiro de la CSS de Panamá (SEBD, Mixto y SUCGS).`
+- **Descripción:** `Herramienta web independiente y no oficial para estimar, explicar y comparar escenarios de jubilación en Panamá (SEBD, Mixto y SUCGS), con trazabilidad normativa, privacidad y accesibilidad.`
 - **Homepage:** sin URL de aplicación pública hasta que exista un despliegue aprobado.
 - **Visibilidad actual:** pública.
 - **Licencia:** propietaria pre-beta / todos los derechos reservados; la visibilidad pública del código no concede derechos adicionales de reutilización.
@@ -35,12 +35,12 @@ Los topics priorizan vocabulario en español y se mantienen en minúsculas, sin 
 - `pension`
 - `pensiones-panama`
 - `planificacion-retiro`
-- `prevision-social`
+- `privacidad`
 - `proyeccion-retiro`
 - `proyeccion-salarial`
 - `python`
 - `retiro`
-- `seguridad-social`
+- `simulador-pension`
 - `seguridad-social-panama`
 - `sistema-mixto`
 - `sucgs`
@@ -77,6 +77,16 @@ Las labels clasifican Issues y Pull Requests; no se asignan a commits. Los commi
 | `wontfix` | `ffffff` | No se continuará trabajando en este cambio |
 
 Las cinco convenciones finales conservan su nombre canónico en inglés porque forman parte del lenguaje habitual de GitHub; sus descripciones y la documentación del proyecto permanecen en español. Los formularios versionados aplican automáticamente `bug`, `enhancement` o `question` junto con `needs-triage`.
+
+### 3.1. Contributors automatizados
+
+La sección **Contributors** de GitHub puede mostrar `dependabot[bot]` porque
+commits de actualización de dependencias fueron integrados legítimamente en
+`main`. Esa aparición refleja autoría histórica de commits automatizados y no
+convierte al bot en mantenedor humano ni en CODEOWNER.
+
+El mantenedor humano vigente continúa siendo `@recm0708`, conforme a
+`GOVERNANCE.md` y `.github/CODEOWNERS`.
 
 ## 4. Badges del README
 
@@ -182,10 +192,10 @@ externos y auditoría de tags firmados.
 con axe y conserva screenshots y reportes como artifacts. Las violaciones axe
 son inicialmente informativas; los fallos operativos sí fallan el job.
 
-Los workflows históricos `ci.yml`, `governance-audit.yml` y
-`markdown-audit.yml` continúan temporalmente en paralelo. No deben retirarse ni
-cambiarse los required checks hasta demostrar equivalencia remota y migrar el
-ruleset sin una ventana de protección.
+La migración post-G119 quedó completada después de demostrar equivalencia
+remota. El ruleset de `main` exige `Repository Quality Gate` y
+`Python Compatibility`; los workflows legacy de CI, gobernanza y Markdown
+fueron retirados sin abrir una ventana de desprotección.
 <!-- AUTOMATION-POST-G119:END -->
 
 ## 8. Gate de seguridad ejecutado al cambiar a Public

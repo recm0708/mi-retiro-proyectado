@@ -150,30 +150,54 @@ class TestMarkdownAudit(unittest.TestCase):
                 {issue.code for issue in issues},
             )
 
-    def test_workflow_markdown_audit_esta_versionado(self):
-        workflow = ROOT / ".github/workflows/markdown-audit.yml"
+    def test_workflow_markdown_audit_esta_integrado_en_quality_gate(self):
+        workflow = (
+            ROOT
+            / ".github/workflows/quality-gate.yml"
+        )
 
         self.assertTrue(
             workflow.is_file(),
-            "Falta el workflow permanente de auditoría Markdown.",
+            "Falta el Quality Gate canónico.",
         )
 
-        contenido = workflow.read_text(encoding="utf-8")
+        contenido = workflow.read_text(
+            encoding="utf-8"
+        )
 
-        esperados = (
-            "name: Markdown Audit",
+        for esperado in (
+            "name: Repository Quality Gate",
             "pull_request:",
             "push:",
             "workflow_dispatch:",
             'python-version: "3.14"',
-            "python scripts/audit_markdown.py",
-            "python -m unittest tests.test_markdown_audit -v",
+            "python scripts/quality_gate.py",
+        ):
+            with self.subTest(
+                esperado=esperado
+            ):
+                self.assertIn(
+                    esperado,
+                    contenido,
+                )
+
+        motor = (
+            ROOT
+            / "scripts"
+            / "quality_gate.py"
+        ).read_text(
+            encoding="utf-8"
         )
 
-        for esperado in esperados:
-            with self.subTest(esperado=esperado):
-                self.assertIn(esperado, contenido)
+        self.assertIn(
+            "scripts/audit_markdown.py",
+            motor,
+        )
 
+        self.assertIn(
+            "unittest",
+            motor,
+        )
 
 if __name__ == "__main__":
     unittest.main()

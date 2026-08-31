@@ -33,28 +33,104 @@ class TestGov16ControlesGithub(unittest.TestCase):
                     expected,
                     t,
                 )
-    def test_workflow_auditoria_permisos_minimos_y_v7(self):
-        t=(GH/'workflows/governance-audit.yml').read_text(encoding='utf-8')
-        for e in ('name: Auditoría de gobernanza','contents: read','actions/checkout@v7','actions/setup-python@v7','tests.test_gov16_controles_github','git diff --check'): self.assertIn(e,t)
-        self.assertNotIn('pull_request_target',t); self.assertNotIn('contents: write',t)
-    def test_workflows_mantienen_permisos_minimos(self):
-        ci=(GH/'workflows/ci.yml').read_text(encoding='utf-8')
-        self.assertIn('permissions:',ci)
-        self.assertIn('contents: read',ci)
-        self.assertNotIn('contents: write',ci)
+    def test_quality_gate_absorbe_auditoria_con_permisos_minimos(self):
+        t = (
+            GH / "workflows/quality-gate.yml"
+        ).read_text(
+            encoding="utf-8"
+        )
 
-        tags=(GH/'workflows/verificar-tags.yml').read_text(encoding='utf-8')
-        self.assertIn('permissions:\n  contents: read',tags)
-        self.assertIn('publicar-release:',tags)
-        self.assertEqual(1,tags.count('contents: write'))
-        antes=tags.split('  publicar-release:',1)[0]
-        self.assertNotIn('contents: write',antes)
-        publicacion=tags.split('  publicar-release:',1)[1].split(
-            '  auditar-todos-los-tags:',1
-        )[0]
-        self.assertIn('permissions:\n      contents: write',publicacion)
+        for expected in (
+            "name: Repository Quality Gate",
+            "contents: read",
+            "actions/checkout@v7",
+            "actions/setup-python@v7",
+            "python scripts/quality_gate.py",
+            "python scripts/audit_pr_policy.py",
+        ):
+            with self.subTest(expected=expected):
+                self.assertIn(
+                    expected,
+                    t,
+                )
+
+        self.assertNotIn(
+            "pull_request_target",
+            t,
+        )
+        self.assertNotIn(
+            "contents: write",
+            t,
+        )
+
+    def test_workflows_mantienen_permisos_minimos(self):
+        gate = (
+            GH / "workflows/quality-gate.yml"
+        ).read_text(
+            encoding="utf-8"
+        )
+
         self.assertIn(
-            'needs:\n      - verificar-tag-publicado',
+            "permissions:",
+            gate,
+        )
+
+        self.assertIn(
+            "contents: read",
+            gate,
+        )
+
+        self.assertNotIn(
+            "contents: write",
+            gate,
+        )
+
+        tags = (
+            GH / "workflows/verificar-tags.yml"
+        ).read_text(
+            encoding="utf-8"
+        )
+
+        self.assertIn(
+            "permissions:\n  contents: read",
+            tags,
+        )
+
+        self.assertIn(
+            "publicar-release:",
+            tags,
+        )
+
+        self.assertEqual(
+            1,
+            tags.count("contents: write"),
+        )
+
+        antes = tags.split(
+            "  publicar-release:",
+            1,
+        )[0]
+
+        self.assertNotIn(
+            "contents: write",
+            antes,
+        )
+
+        publicacion = tags.split(
+            "  publicar-release:",
+            1,
+        )[1].split(
+            "  auditar-todos-los-tags:",
+            1,
+        )[0]
+
+        self.assertIn(
+            "permissions:\n      contents: write",
+            publicacion,
+        )
+
+        self.assertIn(
+            "needs:\n      - verificar-tag-publicado",
             publicacion,
         )
 
@@ -70,8 +146,42 @@ class TestGov16ControlesGithub(unittest.TestCase):
     def test_roadmap_cierra_gov16_sin_congelar_gov17(self):
         t=(DOCS/'governance/roadmap.md').read_text(encoding='utf-8'); self.assertIn('- [x] **GOV.1.6 — Controles GitHub y auditoría automática**',t); self.assertIn('**GOV.1.7 — Licencia**',t)
     def test_archivos_nuevos_limpios(self):
-        ps=[ROOT/'SECURITY.md',ROOT/'CODE_OF_CONDUCT.md',ROOT/'SUPPORT.md',DOCS/'archive/governance/github-audit.md',DOCS/'archive/governance/repository-audit-2026-08-18.md',GH/'ISSUE_TEMPLATE/bug_report.yml',GH/'ISSUE_TEMPLATE/feature_request.yml',GH/'ISSUE_TEMPLATE/question.yml',GH/'ISSUE_TEMPLATE/config.yml',GH/'pull_request_template.md',GH/'workflows/governance-audit.yml']
+        ps = [
+            ROOT / "SECURITY.md",
+            ROOT / "CODE_OF_CONDUCT.md",
+            ROOT / "SUPPORT.md",
+            DOCS / "archive/governance/github-audit.md",
+            DOCS / "archive/governance/repository-audit-2026-08-18.md",
+            GH / "ISSUE_TEMPLATE/bug_report.yml",
+            GH / "ISSUE_TEMPLATE/feature_request.yml",
+            GH / "ISSUE_TEMPLATE/question.yml",
+            GH / "ISSUE_TEMPLATE/config.yml",
+            GH / "pull_request_template.md",
+            GH / "workflows/quality-gate.yml",
+        ]
+
         for p in ps:
-            t=p.read_text(encoding='utf-8'); self.assertFalse(any(ord(c)<32 and c not in '\n\r\t' for c in t)); self.assertFalse(any(l.endswith((' ','\t')) for l in t.splitlines()))
+            t = p.read_text(
+                encoding="utf-8"
+            )
+
+            self.assertFalse(
+                any(
+                    ord(c) < 32
+                    and c not in "\n\r\t"
+                    for c in t
+                )
+            )
+
+            self.assertFalse(
+                any(
+                    line.endswith(
+                        (" ", "\t")
+                    )
+                    for line in t.splitlines()
+                )
+            )
+
+
 
 if __name__=='__main__': unittest.main()
