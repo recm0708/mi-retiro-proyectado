@@ -9,11 +9,13 @@ La contribución al proyecto debe leerse desde la línea base vigente.
 Estado actual:
 
 - `VERSION` está sincronizado en `0.1.19.05-beta` (G119/E05).
-- DEV.2 R6 queda aceptado como G119/E05 después de PR #111 /
-  merge `bd2accb`.
+- DEV.2 R6 queda aceptado/publicado como G119/E05 después de
+  PR #111 / merge `bd2accb`, promoción PR #112 / commit
+  `9424ea8` y tag firmado `v0.1.19.05-beta`.
 - DEV.2 queda cerrado después de R6.
 - UX.5 R1 queda reservado como G120/E01 (`0.1.20.01-beta`).
-- G118/E04 permanece publicado mediante `v0.1.18.04-beta`.
+- G118/E04 permanece preservado mediante `v0.1.18.04-beta`
+  como publicación anterior.
 - SEC.2 R1–R6 permanece cerrado; los cambios futuros de autenticación,
   sesiones, cookies, secretos o endpoints administrativos deben conservar
   regresiones de seguridad.

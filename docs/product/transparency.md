@@ -16,8 +16,11 @@ La transparencia del producto se interpreta desde el estado revision-aware
 vigente.
 
 - `VERSION` está sincronizado en `0.1.19.05-beta` (G119/E05).
-- DEV.2 R6 queda aceptado después de PR #111 / merge `bd2accb`.
-- G118/E04 permanece publicado mediante `v0.1.18.04-beta`.
+- DEV.2 R6 queda aceptado/publicado como G119/E05 después de
+  PR #111 / merge `bd2accb`, promoción PR #112 y tag
+  `v0.1.19.05-beta`.
+- G118/E04 permanece preservado mediante `v0.1.18.04-beta` como
+  publicación anterior.
 - UX.5 R1 queda reservado como G120/E01.
 - DEV.2 no altera reglas previsionales ni convierte Developer Diagnostics
   en telemetría de producto.
@@ -136,11 +139,16 @@ Como evidencia del checkpoint anterior se conserva la formulación: **no declara
 
 Como evidencia histórica también se conserva la formulación **“cierre de UX.4.6e y del alcance funcional UX.4.6f–h”**, que en aquella revisión describía trabajo todavía pendiente. Esa frase se mantiene únicamente para preservar la trazabilidad documental y **ya no representa el estado vigente**.
 
-UX.4.6e–UX.4.6i, DEV.2, SEC.2 R1–R6, AUD.SEC2 R1, DOC.2, NOR.1 R8 y DOC.1 R3 están cerrados. PLAN.2 R1 es el checkpoint candidato actual y la secuencia posterior se mantiene en la matriz maestra hacia 1.0.
+UX.4.6e–UX.4.6i, DEV.2, SEC.2 R1–R6, AUD.SEC2 R1, DOC.2,
+NOR.1 R8, DOC.1 R3–R5, PLAN.2 R1 y REL.GOV.1 R2 están cerrados.
+DEV.2 R6 está publicado como G119/E05. UX.5 R1 es el candidato
+vigente G120/E01 y la secuencia posterior se mantiene en la matriz
+maestra hacia 1.0.
 
 Continúan pendientes, según corresponda:
 
-- revisiones Developer/UX, persistencia, informes y demás bloques posteriores definidos en `pre-1-0-pending-matrix.md`;
+- UX.5, persistencia, informes y demás bloques posteriores definidos
+  en `pre-1-0-pending-matrix.md`;
 - revisión jurídica externa previa a la primera versión oficial;
 - hardening específico si se decide un despliegue remoto;
 - verificación periódica de configuración y alertas de GitHub;

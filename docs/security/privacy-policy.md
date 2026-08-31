@@ -21,10 +21,13 @@ La política de privacidad mantiene su alcance material.
 Estado vigente:
 
 - `VERSION` está sincronizado en `0.1.19.05-beta` (G119/E05).
-- DEV.2 R6 queda aceptado como G119/E05 después de PR #111 / merge `bd2accb`.
+- DEV.2 R6 queda aceptado/publicado como G119/E05 después de
+  PR #111 / merge `bd2accb`, promoción PR #112 y tag
+  `v0.1.19.05-beta`.
 - El Portal Developer utiliza identidad administrativa local separada de
   los datos previsionales de simulación.
-- G118/E04 permanece publicado mediante `v0.1.18.04-beta`.
+- G118/E04 permanece preservado mediante `v0.1.18.04-beta` como
+  publicación anterior.
 - UX.5 R1 queda reservado como G120/E01.
 - SEC.2 R1–R6 permanece cerrado.
 - La aplicación sigue siendo independiente y no oficial.
@@ -127,12 +130,16 @@ En una consulta desde Fuentes, cerrar/rechazar la ventana no registra aceptació
 
 La simulación utiliza almacenamiento temporal de sesión del navegador.
 
-No existe actualmente:
+No existe para la simulación previsional:
 
-- cuenta de usuario;
+- cuenta de Asegurado(a);
 - base de datos permanente de simulaciones;
 - sincronización remota;
 - nube del proyecto para datos de simulación.
+
+El Portal Developer sí dispone de cuentas administrativas locales persistentes,
+separadas de los datos previsionales. Esa persistencia no guarda simulaciones
+ni convierte al Asegurado(a) en usuario registrado.
 
 La aceptación/versionado y la apariencia utilizan almacenamiento local del navegador conforme al contrato implementado.
 
@@ -160,7 +167,7 @@ No se envían identidad, salarios, cuotas, resultados ni PDF.
 
 La aplicación no implementa cookies propias de publicidad, analítica, seguimiento o perfilado.
 
-Cuando la superficie administrativa está habilitada, el login web crea la cookie técnica `mrp_admin_session` para autenticar temporalmente el Centro de desarrollo. Es `HttpOnly`, no contiene datos de simulación ni se usa para publicidad o perfilado; `SameSite` y `Secure` se configuran según el entorno.
+Cuando la superficie administrativa está habilitada, el login web crea la cookie técnica `mrp_admin_session` para mantener temporalmente una sesión Developer. Es `HttpOnly`, no contiene datos de simulación ni se usa para publicidad o perfilado; `SameSite` y `Secure` se configuran según el entorno. La identidad administrativa asociada se mantiene separadamente en el almacén SQLite local.
 
 No incorpora actualmente telemetría de producto.
 

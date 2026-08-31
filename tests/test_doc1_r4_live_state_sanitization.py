@@ -52,7 +52,7 @@ class TestDOC1R4LiveStateSanitization(unittest.TestCase):
         self.assertIn("DOC.1 R4", matrix)
         self.assertIn("Cerrado/aceptado G117/E02", matrix)
         self.assertIn("Cerrado/aceptado G118/E04", matrix)
-        self.assertIn("Cerrado/aceptado G119/E05", matrix)
+        self.assertIn("Cerrado/aceptado/publicado G119/E05", matrix)
         self.assertIn("Candidato G120/E01", matrix)
 
         releases = (ROOT / "RELEASES.md").read_text(encoding="utf-8")

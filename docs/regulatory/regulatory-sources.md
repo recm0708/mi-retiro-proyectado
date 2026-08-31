@@ -5,7 +5,7 @@
 **Versión base histórica:** `0.0.23-beta`
 **Revisión documental:** GOV.1.3 R3 — 2026-08-17
 **Clasificación:** Normativa / Técnica / Pública
-**Última verificación documental de enlaces clave:** 2026-08-17
+**Última verificación documental de enlaces clave:** 2026-08-30
 
 Este catálogo organiza las fuentes oficiales utilizadas por la documentación y la implementación. No convierte páginas informativas o notas de prensa en normas jurídicas.
 
@@ -44,14 +44,39 @@ La CSS identifica el Texto Único como Ley 51 de 2005 con reformas aprobadas por
 
 ## 5. Fecha operativa de opción — 2026
 
-La CSS continúa señalando el **18/08/2026 (18 de agosto de 2026)** como fecha límite operativa para los asegurados que cumplen los requisitos correspondientes.
+La fecha **18/08/2026 (18 de agosto de 2026)** ya transcurrió.
 
-Fuentes verificadas el 2026-08-17:
+Durante 2026 la CSS comunicó institucionalmente esa fecha como límite
+operativo para los asegurados habilitados para ejercer la opción. Las
+comunicaciones oficiales inmediatamente anteriores al vencimiento reiteraron
+el 18 de agosto y señalaron atención especial y disponibilidad de la
+plataforma hasta ese día.
+
+Fuentes institucionales verificadas:
 
 - https://prensa.css.gob.pa/2026/07/10/css-intensifica-jornadas-de-capacitacion-sobre-mi-retiro-seguro-ante-la-fecha-clave-del-18-de-agosto/
 - https://prensa.css.gob.pa/2026/07/13/cuenta-regresiva-hacia-el-18-de-agosto-asegurados-deben-decidir-su-futuro-pensional/
+- https://prensa.css.gob.pa/2026/08/15/css-extendera-atencion-este-domingo-para-orientar-a-los-asegurados-sobre-mi-retiro-seguro/
+- https://prensa.css.gob.pa/2026/08/18/css-realiza-capacitaciones-sobre-pensiones-con-jornada-en-el-organo-judicial/
 
-**Clasificación:** información operativa temporal. Debe volver a verificarse antes de una decisión individual y no se trata como regla normativa permanente.
+Existe, sin embargo, una diferencia documental que no debe armonizarse
+silenciosamente: el artículo 4 del Reglamento de Incorporación al Componente
+Contributivo de Capitalización Solidaria, aprobado mediante Resolución
+57,805-2025-J.D. y publicado en Gaceta Oficial 30314 de 3 de julio de 2025,
+indica **17/03/2026** para la opción regulada en ese artículo.
+
+Fuente oficial:
+
+- https://www.gacetaoficial.gob.pa/storage/gacetas/2025/07/30314/GacetaNo_30314_20250703.pdf
+
+**Clasificación:** antecedente operativo temporal con discrepancia de fuentes.
+
+El proyecto no debe utilizar ahora el 18/08/2026 como una fecha futura ni
+convertirla automáticamente en una regla jurídica permanente. Antes de
+orientar una decisión individual, reabrir una opción, reutilizar la fecha en
+producto o modificar un motor debe verificarse la base jurídica vigente y,
+cuando corresponda, aclarar mediante fuente oficial posterior la relación
+entre el reglamento citado y las comunicaciones institucionales de 2026.
 
 ## 6. SUCGS
 

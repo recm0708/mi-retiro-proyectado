@@ -1,7 +1,7 @@
 # Validación
 
 **Estado:** Vigente
-**Versión revisada:** `0.1.19.05-beta` — G118/E04 aceptado/publicado para DEV.2 R5; G119/E05 reservado para DEV.2 R6
+**Versión revisada:** `0.1.19.05-beta` — G119/E05 aceptado/publicado para DEV.2 R6; G120/E01 reservado para UX.5 R1
 **Versión base histórica:** `0.0.25-beta`
 **Base documental histórica:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal histórica preservada:** UX.4.6e R8 — validación funcional y procedencia editable — 2026-08-19
@@ -39,6 +39,20 @@ DEV.2 R6 y reserva G120/E01 (`0.1.20.01-beta`) para UX.5 R1.
 6036 subtests passed**, **183 módulos `test_*.py`**, Markdown 159/159,
 19 JavaScript, 16 familias / 46 identificadores y `pip check`,
 `compileall` y `git diff --check` limpios.
+
+**Revalidación post-merge antes del tag:** sobre `main` en
+`9424ea854f859a24fd01fe83bdf5d476b52fc213` se obtuvieron
+**1269 pruebas `unittest` OK** y **`pytest` 1309 passed /
+6050 subtests passed**. También quedaron limpios `compileall`,
+`pip check`, 19 JavaScript, Markdown 159/159, 16 familias /
+46 identificadores, contrato de release, manifiesto y
+`git diff --check`. El árbol terminó limpio y sincronizado con
+`origin/main`.
+
+**Publicación:** el tag anotado y firmado `v0.1.19.05-beta`, objeto
+`530db2ffdb9e6230fb976fbaf39472bf7ab30ea5`, pasó
+`Git Tag Signature Verification` #17 y publicó el GitHub Release
+prerelease ID `379454328`.
 
 ## Promoción DEV.2 R5 — G118/E04
 

@@ -207,3 +207,49 @@ contraseñas Argon2id, RBAC y revisión de seguridad de sesión. El secreto
 contrato técnico Bearer legado y nunca se versiona. El login humano y las
 sesiones existentes respetan el kill switch, el logout usa POST y `/dev/`
 mantiene `Cache-Control: no-store`.
+
+## 15. Configuración administrativa local de DEV.2 R6
+
+La persistencia administrativa introducida por DEV.2 R6 no convierte la
+aplicación en un sistema multiusuario de simulaciones.
+
+El almacén Developer:
+
+- es local;
+- se ubica por defecto en `data/developer/portal.sqlite3`;
+- puede reubicarse con `MRP_DEVELOPER_STORE_PATH`;
+- contiene identidades y estado administrativo, no simulaciones;
+- conserva hashes Argon2id, nunca contraseñas o códigos de recuperación
+  en texto claro;
+- mantiene una revisión de seguridad utilizada para invalidación de sesiones;
+- debe permanecer excluido del contenido público versionado cuando contiene
+  estado real del entorno local.
+
+Las sesiones administrativas aplican:
+
+- inactividad configurable mediante `MRP_ADMIN_SESSION_MINUTES`;
+- duración absoluta configurable mediante `MRP_ADMIN_SESSION_MAX_HOURS`;
+- límite configurable mediante `MRP_ADMIN_MAX_SESSIONS`;
+- política `SameSite` configurable mediante `MRP_ADMIN_COOKIE_SAMESITE`;
+- atributo `Secure` configurable mediante `MRP_ADMIN_COOKIE_SECURE`.
+
+Los valores predeterminados del entorno local son:
+
+- 30 minutos de inactividad;
+- 8 horas de duración absoluta;
+- máximo de 5 sesiones;
+- `SameSite=lax`;
+- `Secure` desactivado para localhost sin HTTPS.
+
+`MRP_ADMIN_COOKIE_SECURE` debe habilitarse cuando exista HTTPS interno.
+
+`MRP_ADMIN_ENABLED` continúa siendo el kill switch principal de toda la
+superficie administrativa.
+
+`MRP_ADMIN_SECRET` y `MRP_ADMIN_TOKEN` permanecen restringidos al contrato
+técnico Bearer legado y no son credenciales para las cuentas humanas
+Developer.
+
+Cualquier despliegue remoto, uso compartido entre personas o exposición
+de la base administrativa cambia el modelo de riesgo y requiere una revisión
+específica antes de considerarse soportado.

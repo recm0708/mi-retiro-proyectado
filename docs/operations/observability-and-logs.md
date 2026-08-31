@@ -1,6 +1,6 @@
 # Observabilidad y Developer Diagnostics
 
-**Estado:** Vigente — GOV.1.4 cerrado / SEC.2 R1–R6 integrado / DEV.2 R6 aceptado G119/E05
+**Estado:** Vigente — GOV.1.4 cerrado / SEC.2 R1–R6 integrado / DEV.2 R6 aceptado/publicado G119/E05
 **Versión de aplicación revisada:** `0.1.19.05-beta`
 **Versión base histórica:** `0.0.25-beta`
 **Versión base histórica preservada:** `0.0.23-beta`
@@ -16,7 +16,10 @@ Permanece desactivado por defecto y no constituye telemetría de producto.
 GOV.1.4 no modificó fórmulas previsionales, motores de cálculo ni reglas normativas.
 Su alcance correspondió exclusivamente a observabilidad técnica y diagnóstico.
 
-El bloque DEV.2 permanece como cierre funcional histórico asociado a esta capacidad.
+DEV.2 R1–R4 conserva la evolución histórica de Developer Diagnostics.
+DEV.2 R5–R6 amplía esa base con el Portal Developer humano, identidad,
+RBAC, diagnóstico, eventos, archivos, mantenimiento, privacidad, perfil y
+acceso técnico. G119/E05 constituye su cierre aceptado y publicado.
 
 ## 1. Activación
 
@@ -88,9 +91,12 @@ La auditoría utiliza metadata mínima y nunca almacena tokens o secretos.
 
 La evolución de Developer Diagnostics conserva la evidencia histórica del cierre funcional:
 
-- DEV.2: cierre del bloque de diagnóstico.
+- DEV.2 R1–R4: evolución histórica del bloque de diagnóstico.
 - GOV.1.4: integración de observabilidad segura.
-- 487/487: evidencia histórica de pruebas asociadas al cierre del bloque.
+- 487/487: evidencia histórica de pruebas de la etapa inicial.
+- DEV.2 R5–R6: Portal Developer, acceso humano y superficies
+  administrativas sobre la misma base diagnóstica sanitizada.
+- G119/E05: cierre aceptado/publicado de DEV.2.
 
 ## 6. Revisión de seguridad GOV.1.5
 
@@ -129,3 +135,30 @@ outcome y motivo técnico controlado. Nunca registran el valor de
 `MRP_ADMIN_SECRET`, cabeceras Authorization completas, Bearer, identificadores
 de sesión ni cookies. AUD.SEC2 R1 extiende `Cache-Control: no-store` a `/dev/`
 y mantiene esta superficie separada de la telemetría de producto.
+
+## 9. Integración DEV.2 R6
+
+Developer Diagnostics y el Portal Developer son capacidades relacionadas,
+pero no equivalentes.
+
+Developer Diagnostics:
+
+- se habilita mediante `MRP_DEV_MODE=1`;
+- genera eventos técnicos sanitizados;
+- no autentica personas;
+- no constituye telemetría de producto.
+
+El Portal Developer:
+
+- se habilita mediante `MRP_ADMIN_ENABLED=1`;
+- utiliza identidades Developer persistentes;
+- utiliza sesiones web temporales;
+- aplica roles y permisos;
+- consume eventos y artefactos diagnósticos permitidos;
+- puede ejecutar operaciones administrativas autorizadas.
+
+La identidad administrativa, el rol, la revisión de seguridad y los hashes
+de credenciales no deben escribirse como contenido sensible de los logs.
+
+Los eventos de acceso y mantenimiento solo deben conservar metadata técnica
+mínima, outcome y motivos controlados.

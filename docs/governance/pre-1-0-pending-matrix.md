@@ -35,7 +35,7 @@ candidato fallido no lo consume.
 | 3 | **DOC.1 R5** | Normalización documental integral post-G115 | Reconciliar publicación G115, humanizar navegación Markdown, completar estándares/plantillas y añadir controles de regresión sin reescribir historia. | **Cerrado/aceptado G116/E05** |
 | 4 | **REL.GOV.1 R2** | Automatización de Releases y checks | Estandarizar release notes, `gh release create`, verificación de tag/firma y lectura correcta de Actions/checks. | **Cerrado/aceptado G117/E02** |
 | 5 | **DEV.2 R5** | Portal Developer y acceso | `/dev` canónico; sesión web separada de Bearer; shell/login Developer; cookie acotada a `/dev`; secretos no persistidos. | **Cerrado/aceptado G118/E04** |
-| 6 | **DEV.2 R6** | Portal Developer multipágina y mantenimiento | Separar `/dev`, `/dev/diagnostico`, `/dev/eventos`, `/dev/archivos`, `/dev/mantenimiento` y `/dev/privacidad`; añadir ZIP diagnóstico real, filtros, métricas y limpieza segura con confirmación reforzada. | **Cerrado/aceptado G119/E05** |
+| 6 | **DEV.2 R6** | Portal Developer multipágina y mantenimiento | Separar `/dev`, `/dev/diagnostico`, `/dev/eventos`, `/dev/archivos`, `/dev/mantenimiento`, `/dev/privacidad`, perfil y acceso técnico; añadir identidad persistente, RBAC, ZIP diagnóstico, filtros, métricas y mantenimiento seguro. | **Cerrado/aceptado/publicado G119/E05** |
 | 7 | **UX.5 R1** | Sistema visual integral | Nueva base visual: paleta, tipografía, espaciado, botones, tarjetas, estados, jerarquía y tokens reutilizables. | **Candidato G120/E01** |
 | 8 | **UX.5 R2** | Inicio, navegación y temas | Rediseñar Inicio/navegación y armonizar Claro, Oscuro, Automático y Alto contraste. | Planificado |
 | 9 | **UX.5 R3** | Nueva entrada a Simulación | Preguntar antes del Paso 1 si la preparación será **Manual** o **Asistida** y explicar ambas modalidades. | Planificado |
@@ -68,7 +68,7 @@ DEV.2 R5 deja aceptado el contrato base:
 - shell Developer separado de la navegación y gestión de datos previsionales públicos;
 - credencial administrativa fuera de `localStorage`, `sessionStorage`, query string, logs y documentación visible.
 
-DEV.2 R6 queda aceptado como G119/E05 y evolucionó el portal a páginas independientes:
+DEV.2 R6 queda cerrado/aceptado/publicado como G119/E05 y evolucionó el portal a páginas independientes:
 
 - `/dev`;
 - `/dev/diagnostico`;
@@ -77,7 +77,7 @@ DEV.2 R6 queda aceptado como G119/E05 y evolucionó el portal a páginas indepen
 - `/dev/mantenimiento`;
 - `/dev/privacidad`.
 
-R6 debe añadir el ZIP diagnóstico descargable real y mantenimiento sobre artefactos diagnósticos conocidos. Toda operación destructiva debe revalidar sesión, limitarse a rutas permitidas, registrar evidencia sin secretos ni datos previsionales y exigir confirmación escalonada antes de borrar el log vigente, rotaciones o todos los artefactos diagnósticos.
+R6 añadió el ZIP diagnóstico descargable, mantenimiento sobre artefactos diagnósticos conocidos, identidad humana persistente, RBAC y superficies separadas de perfil y acceso técnico. Las operaciones destructivas implementadas revalidan autorización, se limitan a superficies permitidas, registran evidencia sanitizada y aplican confirmación reforzada cuando corresponde.
 
 ## 4. Simulación Manual / Asistida
 

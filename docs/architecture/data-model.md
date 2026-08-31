@@ -264,6 +264,36 @@ La simulación del navegador incorpora datos que no son modelos Pydantic, por ej
 
 Estos campos administran continuidad y presentación. Solo los contratos requeridos por un endpoint se envían al backend.
 
+## 13.1. Estado administrativo Developer
+
+El modelo administrativo de DEV.2 R6 está separado de los modelos Pydantic
+de simulación.
+
+`app/core/developer_store.py` mantiene en SQLite información administrativa
+como:
+
+- identificador estable;
+- usuario;
+- nombre visible;
+- rol;
+- hash Argon2id de contraseña;
+- revisión de seguridad;
+- estado de activación;
+- indicador de cambio obligatorio de contraseña;
+- condición Owner;
+- hash del código de recuperación Owner;
+- metadata administrativa de creación, actualización y último acceso.
+
+La ubicación predeterminada es `data/developer/portal.sqlite3` y puede
+configurarse mediante `MRP_DEVELOPER_STORE_PATH`.
+
+Las sesiones temporales no se persisten en esa base. `app/core/admin_session.py`
+las mantiene en memoria y asocia identidad, rol y revisión de seguridad al
+identificador temporal.
+
+El almacén Developer no contiene datos de Pasos 1–6, PDF, salarios, cuotas ni
+resultados previsionales.
+
 ## 14. Procedencia
 
 La procedencia puede distinguir estados como detectado, editado y completado manualmente. Su finalidad es evitar presentar un dato manual como documental y controlar edición en interfaz.

@@ -65,4 +65,7 @@ se mantienen fuera del árbol canónico o en directorios locales ignorados segú
 
 NOR.1 define estas reglas.
 
-NOR.2 aplicará estas reglas para auditar y normalizar el repositorio existente.
+NOR.2 las aplicó durante la auditoría y normalización del repositorio existente.
+
+Las reconciliaciones posteriores deben reutilizarlas para decidir de forma
+explícita si un artefacto se mantiene, modifica, mueve, archiva o elimina.

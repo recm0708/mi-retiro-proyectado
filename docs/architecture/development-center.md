@@ -1,6 +1,6 @@
 # DEV.2 R1/R2/R3/R4/R5/R6 — Centro de desarrollo
 
-**Estado general:** DEV.2 R1–R4 preservados; R5 integrado, aceptado y publicado como G118/E04; R6 integrado mediante PR #111 / merge `bd2accb` y aceptado como G119/E05.
+**Estado general:** DEV.2 R1–R4 preservados; R5 integrado, aceptado y publicado como G118/E04; R6 integrado mediante PR #111 / merge `bd2accb` y aceptado/publicado como G119/E05.
 
 **Estado R1:** integrado en `main` mediante PR #37.
 
@@ -225,6 +225,153 @@ R6 no duplica la aplicación previsional pública. Evoluciona únicamente el Por
 - `/dev/privacidad` para controles técnicos de privacidad y seguridad.
 
 Las operaciones destructivas de mantenimiento actúan únicamente sobre superficies permitidas, aplican autorización RBAC y CSRF, revalidan contraseña cuando corresponde y registran evidencia sanitizada sin secretos ni datos previsionales.
+
+## Contrato operativo vigente de DEV.2 R6
+
+Esta sección describe el estado operativo vigente después de publicar
+DEV.2 R6 como G119/E05. Las secciones R1-R5 anteriores conservan el contexto
+histórico de cómo evolucionó el bloque.
+
+### Activación y almacenamiento
+
+El Portal Developer permanece deshabilitado por defecto.
+
+La activación humana mínima en desarrollo local es:
+
+```powershell
+$env:MRP_ADMIN_ENABLED = "1"
+```
+
+Developer Diagnostics requiere adicionalmente:
+
+```powershell
+$env:MRP_DEV_MODE = "1"
+```
+
+`MRP_ADMIN_SECRET` y `MRP_ADMIN_TOKEN` no son credenciales del login humano.
+Se reservan exclusivamente para el contrato técnico Bearer legado.
+
+Las identidades Developer se almacenan localmente en SQLite. La ruta
+predeterminada es:
+
+```text
+data/developer/portal.sqlite3
+```
+
+Puede cambiarse mediante `MRP_DEVELOPER_STORE_PATH`.
+
+Esta base no contiene datos de simulación previsional. Mantiene únicamente
+estado administrativo, entre otros:
+
+- identificador estable de la cuenta;
+- nombre de usuario;
+- nombre visible;
+- rol;
+- hash Argon2id de contraseña;
+- revisión de seguridad;
+- estado activo/inactivo;
+- condición de cambio obligatorio de contraseña;
+- metadata administrativa;
+- hash del código de recuperación cuando corresponde.
+
+La cuenta Owner es única y está protegida contra eliminación,
+desactivación, degradación de rol o promoción de otra cuenta a Owner.
+
+### Variables de entorno del Portal Developer
+
+| Variable | Valor predeterminado | Función |
+| --- | --- | --- |
+| `MRP_ADMIN_ENABLED` | desactivado | Kill switch principal del Portal Developer. |
+| `MRP_DEV_MODE` | desactivado | Activa Developer Diagnostics; no habilita por sí solo el Portal Developer. |
+| `MRP_ADMIN_SECRET` | sin valor | Secreto del contrato técnico Bearer legado; no autentica cuentas humanas. |
+| `MRP_ADMIN_TOKEN` | sin valor | Compatibilidad para el contrato técnico Bearer legado. |
+| `MRP_ADMIN_SESSION_MINUTES` | `30` | Tiempo máximo de inactividad de una sesión administrativa. |
+| `MRP_ADMIN_SESSION_MAX_HOURS` | `8` | Duración absoluta máxima de una sesión administrativa. |
+| `MRP_ADMIN_MAX_SESSIONS` | `5` | Límite configurable de sesiones administrativas activas. |
+| `MRP_ADMIN_COOKIE_SECURE` | desactivado | Debe habilitarse cuando el Portal Developer se sirve mediante HTTPS. |
+| `MRP_ADMIN_COOKIE_SAMESITE` | `lax` | Política `SameSite` de la cookie `mrp_admin_session`. |
+| `MRP_DEVELOPER_STORE_PATH` | `data/developer/portal.sqlite3` | Ubicación del almacén SQLite administrativo local. |
+| `MRP_DIAGNOSTIC_DIR` | `logs/diagnostico/` | Permite sobrescribir el directorio local de Developer Diagnostics. |
+
+Las rutas de datos Developer, diagnósticos y secretos son artefactos locales
+y no deben incorporarse al contenido versionado normal del repositorio.
+
+### Rutas implementadas
+
+| Ruta | Responsabilidad vigente |
+| --- | --- |
+| `/dev` | Entrada humana canónica y dashboard del Portal Developer. |
+| `/dev/login` | Compatibilidad de entrada y procesamiento del acceso humano. |
+| `/dev/logout` | Cierre de sesión mediante POST. |
+| `/dev/diagnostico` | Estado técnico y autodiagnóstico Developer. |
+| `/dev/eventos` | Consulta de eventos diagnósticos sanitizados. |
+| `/dev/archivos` | Inventario seguro de archivos diagnósticos reconocidos. |
+| `/dev/archivos/exportar` | Exportación explícita del ZIP diagnóstico sanitizado. |
+| `/dev/mantenimiento` | Estado y operaciones de mantenimiento autorizadas. |
+| `/dev/mantenimiento/limpiar-sesiones` | Limpieza controlada de sesiones según permisos. |
+| `/dev/mantenimiento/revocar-sesiones` | Revocación reforzada de sesiones administrativas. |
+| `/dev/privacidad` | Controles técnicos de privacidad y seguridad del portal. |
+| `/dev/perfil` | Perfil de la identidad Developer autenticada. |
+| `/dev/perfil/password` | Cambio seguro de la contraseña propia. |
+| `/dev/acceso-tecnico` | Explicación y separación del acceso técnico Bearer. |
+| `/dev/centro-desarrollo` | Superficie técnica legacy preservada para compatibilidad autorizada. |
+
+Las superficies humanas utilizan sesión web y RBAC deny-by-default.
+Las operaciones sensibles aplican CSRF y, cuando corresponde,
+revalidación de contraseña y confirmación explícita.
+
+### Roles
+
+El modelo vigente define cuatro roles:
+
+- `owner`;
+- `admin`;
+- `operator`;
+- `auditor`.
+
+Owner es único y protegido.
+
+Admin dispone de atribuciones amplias, pero no puede alterar las invariantes
+protegidas del Owner.
+
+Operator y Auditor reciben únicamente los permisos explícitamente asignados.
+
+Una acción sin permiso reconocido se deniega por defecto.
+
+### Sesiones y revisión de seguridad
+
+La cookie humana es `mrp_admin_session`, `HttpOnly` y limitada a
+`Path=/dev`.
+
+La sesión queda vinculada a una identidad Developer y a su revisión de
+seguridad persistente.
+
+Un cambio de contraseña, una revocación u otra operación que incremente
+esa revisión invalida las sesiones anteriores cuando posteriormente se
+contrasta su estado persistente.
+
+`MRP_ADMIN_ENABLED` prevalece sobre cualquier sesión existente:
+si el kill switch está desactivado, una cookie anterior no puede reactivar
+la superficie administrativa.
+
+### Frontera de datos
+
+El Portal Developer y su SQLite administrativo están separados de los datos
+de simulación previsional.
+
+No deben almacenarse en el portal:
+
+- cédulas o NSS;
+- salarios o cuotas previsionales;
+- montos de pensión;
+- contenido de PDF;
+- cookies o tokens dentro de logs;
+- secretos Bearer;
+- contraseñas en texto claro;
+- códigos de recuperación en texto claro.
+
+Las contraseñas y el código de recuperación Owner se persisten únicamente
+como hashes Argon2id.
 
 ## Versionado
 

@@ -92,11 +92,17 @@ class TestNOR2R4LiveDocumentation(unittest.TestCase):
 
         root_readme = (ROOT / "README.md").read_text(encoding="utf-8")
         self.assertIn(
-            "├── docs/\n│   ├── README.md\n│   ├── architecture/",
+            "├── docs/\n│   ├── architecture/",
             root_readme,
         )
         self.assertIn(
-            "│   └── templates/\n├── regulations/",
+            "│   └── templates/\n"
+            "│       ├── documentation/\n"
+            "│       └── file-structure/",
+            root_readme,
+        )
+        self.assertIn(
+            "├── regulations/",
             root_readme,
         )
 

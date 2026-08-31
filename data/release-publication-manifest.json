@@ -29,7 +29,8 @@
     "Compilación Python: OK.",
     "`git diff --check`: OK.",
     "PR #111: **8 checks remotos en success**, incluidos CI, gobernanza, Markdown y CodeQL.",
-    "Gate final de promoción: 1269 tests `unittest` OK; `pytest` 1309 passed / 6036 subtests passed; 183 módulos `test_*.py`; Markdown 159/159; 19 JavaScript; 16 familias / 46 identificadores; `pip check`, `compileall` y `git diff --check` limpios."
+    "Gate final de promoción: 1269 tests `unittest` OK; `pytest` 1309 passed / 6036 subtests passed; 183 módulos `test_*.py`; Markdown 159/159; 19 JavaScript; 16 familias / 46 identificadores; `pip check`, `compileall` y `git diff --check` limpios.",
+    "Revalidación post-merge: 1269 tests `unittest` OK; `pytest` 1309 passed / 6050 subtests passed; 19 JavaScript; Markdown 159/159; 16 familias / 46 identificadores; `pip check`, `compileall`, contrato de release, manifiesto y `git diff --check` limpios."
   ],
   "evidence": [
     "**DEV.2 R6 desarrollo:** PR #111.",
@@ -37,7 +38,7 @@
     "**Cierre técnico firmado:** `ac9968b5a1e26d5dc8f08b0e28f5fab5aa9f6258`.",
     "**HEAD final del candidato de desarrollo:** `0a024bf1ab8c7a9dd79735c5b9c31fd0695d6139`.",
     "La alerta CodeQL de logging sensible quedó corregida antes de integrar PR #111.",
-    "La publicación de G119/E05 queda condicionada al merge de esta promoción, revalidación de `main` y tag anotado/firmado local."
+    "Publicación final: promoción PR #112 / commit `9424ea854f859a24fd01fe83bdf5d476b52fc213`; tag anotado y firmado `v0.1.19.05-beta`, objeto `530db2ffdb9e6230fb976fbaf39472bf7ab30ea5`; workflow `Git Tag Signature Verification` #17 en `success`; GitHub Release prerelease ID `379454328`."
   ],
   "next_step": {
     "global_revision": 120,
