@@ -133,6 +133,7 @@ Un cambio en fórmula, factor, umbral, clasificación o fuente normativa debe re
 - documentación técnica/funcional relacionada.
 
 La guía no puede adelantarse a una regla que el motor todavía no implemente ni presentar como oficial un parámetro pendiente de confirmación.
+
 ## R1.3 — fórmula, sustitución y vocabulario
 
 Cada fórmula pública se conserva en forma general y puede ir seguida de una sustitución numérica marcada como **Ejemplo**. Estas cifras son ilustrativas: ayudan a leer el orden de operaciones, pero no reemplazan la sustitución personal que Paso 6 muestra en **Ver cálculo completo**.

@@ -1,4 +1,4 @@
-"""DEV.2 R6 — Persistencia local de identidades del Portal Developer."""
+"""Persistencia local de identidades y credenciales del Portal Developer."""
 
 from __future__ import annotations
 

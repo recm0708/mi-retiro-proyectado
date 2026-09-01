@@ -5,8 +5,8 @@
 **Último tag formal legacy:** `v0.0.26-beta`
 **Base histórica:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal:** NOR.2 R8 — 2026-08-24
+**Mantenimiento post-G119:** PR #117/#118 — 2026-08-31
 **Clasificación:** Técnica / Auditoría
-
 
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado post-MANT.1
@@ -18,6 +18,8 @@ La trazabilidad vigente alcanza G119/E05.
   aceptado/publicado como G119/E05 mediante promoción PR #112 /
   commit `9424ea8` y tag `v0.1.19.05-beta`.
 - G120/E01 queda reservado para UX.5 R1.
+- PR #117 y PR #118 cierran la migración de automatización y el mantenimiento
+  coordinado de dependencias post-G119 sin consumir G120.
 - La historia de NOR.2, SEC.2, AUD.SEC2, DOC.1, PLAN.2 y REL.GOV.1
   permanece preservada en sus fuentes canónicas.
 
@@ -29,7 +31,7 @@ Esta matriz conecta contratos críticos del producto con su fuente, decisión, i
 ## 1. Convención
 
 | Campo | Significado |
-|---|---|
+| --- | --- |
 | ID | identificador estable dentro de esta matriz |
 | Requisito/contrato | propiedad que el proyecto afirma |
 | Fuente/criterio | norma, fuente o `N/A — técnico/UX` |
@@ -41,7 +43,7 @@ Esta matriz conecta contratos críticos del producto con su fuente, decisión, i
 ## 2. Núcleo trazable
 
 | ID | Requisito/contrato | Fuente/criterio | ADR | Implementación | Prueba | Estado |
-|---|---|---|---|---|---|---|
+| --- | --- | --- | --- | --- | --- | --- |
 | TR-001 | Identidad independiente de la CSS | N/A — gobierno/producto | ADR-045 | `app/core/config.py`, `app/templates/base.html` | `tests/test_identidad_interfaz.py` | Verificado |
 | TR-002 | `VERSION` es fuente canónica | N/A — gobierno | ADR-157, ADR-158 | `VERSION`, `app/core/version.py`, `app/core/config.py` | `tests/test_gov12_versionado.py` | Verificado |
 | TR-003 | Datos históricos y proyectados permanecen separados | N/A — integridad de datos | ADR-006, ADR-073 | `app/services/timeline.py`, `app/services/results.py` | `tests/test_timeline.py`, `tests/test_results.py` | Verificado |
@@ -74,7 +76,7 @@ Esta matriz conecta contratos críticos del producto con su fuente, decisión, i
 | TR-029 | Portal Developer separa acceso humano por sesión web del contrato técnico Bearer, limita la cookie administrativa a `/dev`, evita persistir credenciales y conserva `no-store`/observabilidad explícita | N/A — desarrollo/seguridad | N/A — DEV.2 R5 | `app/main.py`, `app/templates/dev_base.html`, `app/templates/dev_login.html`, `app/core/observability.py` | `tests/test_dev2_r5_portal_access.py`, `tests/test_sec2_r5_admin_web_session.py` | Verificado DEV.2 R5 / G118/E04 |
 | TR-030 | Portal Developer multipágina aplica identidad humana persistente, RBAC deny-by-default, CSRF, revalidación para operaciones destructivas, observabilidad sanitizada, mantenimiento seguro y separación del Bearer técnico | N/A — desarrollo/seguridad/privacidad | N/A — DEV.2 R6 | `app/main.py`, `app/core/developer_store.py`, `app/core/developer_web_security.py`, `app/templates/dev_base.html`, `app/templates/dev_maintenance.html`, `app/templates/dev_privacy.html` | `tests/test_dev2_r6_identity.py`, `tests/test_dev2_r6_web_session.py`, `tests/test_dev2_r6_observability_portal.py`, `tests/test_dev2_r6_security_maintenance_privacy.py` | Verificado DEV.2 R6 / G119/E05 — PR #111 / merge `bd2accb` |
 
-| TR-031 | La automatización post-G119 centraliza el gate local/CI, compatibilidad Python, integridad, política de PR, dependencias, salud programada y baseline Visual/A11y sin crear commits ni tags | N/A — calidad/gobierno | N/A — mantenimiento post-G119 | `scripts/quality_gate.py`, `.github/workflows/quality-gate.yml`, `.github/workflows/dependency-security.yml`, `.github/workflows/scheduled-health.yml`, `.github/workflows/pr-labeler.yml`, `.github/workflows/visual-a11y.yml` | `tests/test_automation_core_quality_gate.py`, `tests/test_precommit_guard.py` | Verificado local y remoto; ruleset migrado y workflows legacy retirados |
+| TR-031 | La automatización post-G119 centraliza el gate local/CI, compatibilidad Python, integridad, política de PR, dependencias, salud programada y baseline Visual/A11y sin crear commits ni tags | N/A — calidad/gobierno | N/A — mantenimiento post-G119 | `scripts/quality_gate.py`, `.github/workflows/quality-gate.yml`, `.github/workflows/dependency-security.yml`, `.github/workflows/scheduled-health.yml`, `.github/workflows/pr-labeler.yml`, `.github/workflows/visual-a11y.yml`, `.github/dependabot.yml` | `tests/test_automation_core_quality_gate.py`, `tests/test_precommit_guard.py` | Verificado local y remoto; PR #117 retiró workflows legacy después de migrar el ruleset; PR #118 coordinó Pydantic/Pydantic Core, Dependabot y `actions/dependency-review-action@v5`; G120/E01 no consumido |
 
 ## 3. Cobertura de RF
 
@@ -111,7 +113,6 @@ Los estados `Candidato` deben promoverse a `Verificado` únicamente después del
 | Preservar 36 documentos clasificados por R2 | movimientos Git R5 | `test_36_documentos_archivados` |
 | Mantener `VERSION` y SEC.2 sin promoción | `VERSION` + estado documental | `test_version_y_estado_transversal` |
 
-
 ## Trazabilidad NOR.2 R6
 
 | Criterio | Evidencia | Regresión |
@@ -121,7 +122,6 @@ Los estados `Candidato` deben promoverse a `Verificado` únicamente después del
 | Mantener runtime sobre la ruta canónica | `app/core/version_ledger.py` | `test_ruta_normalizada` |
 | Eliminar consumidores vivos de la ruta anterior | barrido R6: 0 referencias no justificadas | `test_no_quedan_consumidores_vivos_de_ruta_anterior` |
 | Mantener versión y SEC.2 sin promoción | `VERSION` + estado transversal | `test_version_no_cambia`, `test_estado_transversal` |
-
 
 ## Trazabilidad NOR.2 R7
 
@@ -134,7 +134,6 @@ Los estados `Candidato` deben promoverse a `Verificado` únicamente después del
 | Mantener `_deliverables/` fuera del árbol Git | `.gitignore` + política de artefactos locales | `test_directorios_locales_permanecen_ignorados` |
 | Preservar la decisión histórica de R2 | matriz de migración NOR.2 R2 | `test_matriz_r2_preserva_decision_historica` |
 | Mantener `VERSION` y SEC.2 sin promoción | `VERSION` + documentación transversal | `test_version_y_estado_transversal` |
-
 
 <!-- NOR2-R8-TRACEABILITY:START -->
 ## Trazabilidad NOR.2 R8
@@ -153,7 +152,7 @@ Los estados `Candidato` deben promoverse a `Verificado` únicamente después del
 ## Trazabilidad DOC.1 R2
 
 | Objetivo / control | Evidencia | Regresión o validación |
-|---|---|---|
+| --- | --- | --- |
 | Auditar integralmente el Markdown post-NOR.2 | `docs/audits/documentation/documentation-markdown-audit-doc1-r2.md` | `scripts/audit_markdown.py` |
 | Normalizar metadata de documentación vigente | documentos vivos revisados contra `VERSION` | `tests/test_markdown_audit.py` |
 | Preservar verdad histórica | `docs/archive/` y `docs/audits/` mantienen versiones, rutas y estados históricos válidos | `tests/test_markdown_audit.py` |
@@ -169,7 +168,7 @@ Los estados `Candidato` deben promoverse a `Verificado` únicamente después del
 ## Trazabilidad SEC.2 R1
 
 | Control | Evidencia | Regresión |
-|---|---|---|
+| --- | --- | --- |
 | Retirar sinks DOM dinámicos reportados por CodeQL | `results_orchestration.js` | `test_sec2_r1_codeql_workflow_hardening.py` |
 | Construir texto dinámico sin reinterpretarlo como HTML | DOM API + `textContent` + `createTextNode` | regresión SEC.2 R1 |
 | Preservar `innerHTML` únicamente donde el contenido es estático | revisión manual de los tres usos restantes | análisis SEC.2 R1 |
@@ -181,7 +180,7 @@ Los estados `Candidato` deben promoverse a `Verificado` únicamente después del
 ## Trazabilidad SEC.2 R2–R6 y AUD.SEC2 R1
 
 | Control | Implementación | Regresión/evidencia | Estado |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | Secreto fuera del repositorio y kill switch explícito | `app/core/admin_security.py`, `app/main.py` | `test_sec2_r2_admin_security.py`, `test_sec2_postclosure_hardening.py` | Verificado |
 | Protección centralizada de endpoints administrativos | `requerir_administrador()` | `test_sec2_r3_admin_protection.py` | Verificado |
 | Auditoría sin secretos | `app/core/observability.py`, `admin.access.*` | `test_sec2_r4_admin_audit.py` | Verificado |

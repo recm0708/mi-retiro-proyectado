@@ -12,7 +12,10 @@ ROOT = Path(__file__).resolve().parents[1]
 APP = ROOT / "app"
 TESTS = ROOT / "tests"
 DOCS = ROOT / "docs"
-FASE_RE = re.compile(r"\b(?:UX|GOV)\.\d", re.IGNORECASE)
+FASE_RE = re.compile(
+    r"\b(?:UX|GOV|MANT|DEV|VER|DOC|NOR|SEC|AUD|REL|PLAN|"
+    r"PERSIST|REP|A11Y|REV|QA)(?:\.[A-Z0-9]+)+"
+)
 
 
 class TestUX46eEstandarRuntime(unittest.TestCase):
@@ -51,6 +54,11 @@ class TestUX46eEstandarRuntime(unittest.TestCase):
 
     def test_css_vigente_no_conserva_identificadores_cronologicos(self):
         for ruta in (APP / "static" / "css").glob("*.css"):
+            with self.subTest(ruta=ruta.relative_to(ROOT)):
+                self.assertIsNone(FASE_RE.search(ruta.read_text(encoding="utf-8")))
+
+    def test_javascript_vigente_no_conserva_identificadores_cronologicos(self):
+        for ruta in (APP / "static" / "js").rglob("*.js"):
             with self.subTest(ruta=ruta.relative_to(ROOT)):
                 self.assertIsNone(FASE_RE.search(ruta.read_text(encoding="utf-8")))
 

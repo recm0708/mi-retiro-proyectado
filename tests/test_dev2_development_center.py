@@ -1,4 +1,4 @@
-"""Regresiones DEV.2 R1: Centro de desarrollo."""
+"""Regresiones del Centro de desarrollo."""
 
 from __future__ import annotations
 
@@ -35,7 +35,25 @@ class TestDev2CentroDesarrolloR1(unittest.TestCase):
             with self._env(temp, activo=False):
                 estado = construir_estado_centro_desarrollo()
 
-        self.assertEqual("DEV.2 R1", estado["bloque"])
+        self.assertEqual(
+            "developer_diagnostics",
+            estado["componente"],
+        )
+        self.assertEqual(
+            "Observabilidad local segura",
+            estado["estado_portal"],
+        )
+        for clave_cronologica in (
+            "bloque",
+            "revision_actual",
+            "revision_autodiagnostico",
+            "revision_portal_observabilidad",
+        ):
+            self.assertNotIn(
+                clave_cronologica,
+                estado,
+            )
+
         self.assertEqual("Centro de desarrollo", estado["titulo"])
         self.assertFalse(estado["dev_mode_activo"])
         self.assertEqual(APP_VERSION, estado["app_version"])

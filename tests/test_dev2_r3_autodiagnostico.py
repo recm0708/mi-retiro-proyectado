@@ -41,8 +41,15 @@ class TestDev2R3Autodiagnostico(unittest.TestCase):
             with self._env(temp, activo=False):
                 estado = construir_estado_centro_desarrollo()
 
-        self.assertEqual("DEV.2 R2", estado["revision_actual"])
-        self.assertEqual("DEV.2 R3", estado["revision_autodiagnostico"])
+        self.assertEqual("developer_diagnostics", estado["componente"])
+        self.assertEqual("Observabilidad local segura", estado["estado_portal"])
+        for clave_historica in (
+            "bloque",
+            "revision_actual",
+            "revision_autodiagnostico",
+            "revision_portal_observabilidad",
+        ):
+            self.assertNotIn(clave_historica, estado)
         self.assertIn("autodiagnostico", estado)
         self.assertIn("resumen_autodiagnostico", estado)
         self.assertGreaterEqual(estado["resumen_autodiagnostico"]["total"], 8)

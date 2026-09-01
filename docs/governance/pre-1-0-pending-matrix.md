@@ -29,7 +29,7 @@ candidato fallido no lo consume.
 ## 2. Matriz maestra
 
 | Orden | Identificador | Trabajo pendiente | Alcance / criterio de cierre | Estado |
-|---:|---|---|---|---|
+| ---: | --- | --- | --- | --- |
 | 1 | **PLAN.2 R1** | Replanificación maestra final hacia 1.0 | Formalizar esta matriz, registrar PLAN.2/UX.5, corregir la reserva G114 y reconciliar documentación viva post-G113. | **Cerrado/aceptado G114/E01** |
 | 2 | **DOC.1 R4** | Saneamiento documental post-G113 | Corregir metadata viva, estados desactualizados y contradicciones actuales sin reescribir evidencia histórica. | **Cerrado/aceptado G115/E04** |
 | 3 | **DOC.1 R5** | Normalización documental integral post-G115 | Reconciliar publicación G115, humanizar navegación Markdown, completar estándares/plantillas y añadir controles de regresión sin reescribir historia. | **Cerrado/aceptado G116/E05** |

@@ -1,4 +1,4 @@
-"""DEV.2 R6 — Provisión y recuperación de cuentas Developer."""
+"""Provisión, autenticación y recuperación de cuentas Developer."""
 
 from __future__ import annotations
 

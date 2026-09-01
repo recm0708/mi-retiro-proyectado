@@ -8,7 +8,6 @@
 **Última actualización de mantenimiento:** MANT.1 R5E — estandarización de nombres de carpetas — 2026-08-23
 **Clasificación:** Técnica / Pública
 
-
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado arquitectónico post-MANT.1
 
@@ -271,7 +270,6 @@ Cuando está activa:
 
 Los endpoints bajo `/api/simulacion/` continúan recibiendo `Cache-Control: no-store`.
 
-
 ### Portal Developer
 
 DEV.2 R6 mantiene `/dev` como entrada humana canónica y separa dos
@@ -308,7 +306,7 @@ almacén administrativo para datos de simulación.
 El siguiente inventario se deriva de los decoradores vigentes en `app/main.py`. Se conserva explícitamente para auditoría documental iniciada en GOV.1.3 R2 y actualizada por GOV.1.4.
 
 | Ruta |
-|---|
+| --- |
 | `/` |
 | `/api/simulacion/comparar-escenarios` |
 | `/api/simulacion/cuotas` |
@@ -350,7 +348,6 @@ El siguiente inventario se deriva de los decoradores vigentes en `app/main.py`. 
 | `/metodologia` |
 | `/salud` |
 | `/simulacion` |
-
 
 ## 7.2. Automatización local de calidad
 
@@ -415,7 +412,6 @@ Este documento describe el estado técnico vigente reconciliado hasta DEV.2 R6 /
 
 Como ancla histórica de DEV.2 R4 y VER.2 R2, ese cierre no añade rutas públicas nuevas y conserva `0.0.26-beta` como versión visible/canónica legacy; esta referencia no la trata como candidato VER.2 ni sustituye la versión revision-aware vigente.
 
-
 ## UX.4.6f R1.1 — bloqueo documental en superficies principales
 
 `editable_provenance.js` separa tres conceptos: **fotografía documental original**, **copia de trabajo** y **capacidad de edición de la superficie actual**. En los paneles principales, un control cuyo valor existía en la fotografía original se aplica mediante `readonly` o `disabled` y la clase visual `field-imported-readonly`; los modales de revisión quedan excluidos de este helper para permitir el ciclo explícito **Editar campos → confirmar**.
@@ -425,6 +421,7 @@ El patrón se reutiliza en datos personales, cuotas, historial anual y detalle d
 ### UX.4.6g R1 — frontera de escenarios de retiro
 
 Paso 5 mantiene dos capas separadas: `app/static/js/retirement.js` propone y conserva la selección visible, mientras `app/services/retirement.py` construye fechas/cuotas sin decidir elegibilidad. Las sugerencias posteriores se derivan de la cobertura de Paso 4; las elecciones anticipadas requieren acción explícita. `app/engines/elegibilidad.py` y los motores de prestaciones continúan siendo la frontera jurídica para determinar modalidad y factores.
+
 ### Contrato transversal de fechas
 
 `app/static/js/accessibility.js` aplica de forma idempotente validación y clase visual a todos los `input[type=date]`, incluidos controles dinámicos. `app/static/css/accessibility.css` define la geometría compacta común. Las superficies pueden declarar límites `min`/`max` más restrictivos; la capa transversal solo aporta valores por defecto cuando faltan. Paso 5 consume este contrato y añade exclusivamente la explicación de cobertura contra el horizonte salarial.
@@ -436,7 +433,6 @@ Paso 5 mantiene dos capas separadas: `app/static/js/retirement.js` propone y con
 El Paso 6 enlaza a la sección del sistema correspondiente mediante anclas públicas (`#sebd`, `#mixto`, `#sucgs`) sin transportar datos personales, salarios, cuotas ni montos en la URL. Las sustituciones numéricas del caso individual permanecen en la trazabilidad de resultados.
 
 La guía reutiliza el catálogo de fuentes de `app/services/regulatory_sources.py`. Por tanto, una modificación normativa o de fórmula exige revisar en conjunto motor, JSON versionado, trazabilidad, guía pública y pruebas relacionadas.
-
 
 ## DEV.2 — Centro de desarrollo
 
@@ -473,7 +469,6 @@ Las plantillas oficiales se ubican en `docs/templates/file-structure/` y
 funcionan como contrato inicial para archivos futuros. Las plantillas no agregan
 capas de ejecución; solo estandarizan encabezados, propósito, alcance y
 comentarios internos cuando el formato lo permite.
-
 
 ## SEC.2 R6 — Control de sesión administrativa
 

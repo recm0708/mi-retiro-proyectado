@@ -65,7 +65,15 @@ class TestDev2R2VisorDiagnostico(unittest.TestCase):
 
                 estado = construir_estado_centro_desarrollo()
 
-        self.assertEqual("DEV.2 R2", estado["revision_actual"])
+        self.assertEqual("developer_diagnostics", estado["componente"])
+        self.assertEqual("Observabilidad local segura", estado["estado_portal"])
+        for clave_historica in (
+            "bloque",
+            "revision_actual",
+            "revision_autodiagnostico",
+            "revision_portal_observabilidad",
+        ):
+            self.assertNotIn(clave_historica, estado)
         self.assertEqual(1, estado["total_eventos_visibles"])
         self.assertEqual(1, estado["resumen_eventos"]["INFO"])
         evento = estado["eventos_recientes"][0]

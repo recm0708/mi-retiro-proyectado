@@ -4,20 +4,21 @@
 **Versión vigente:** `0.1.19.05-beta` — G119/E05 aceptado/publicado para DEV.2 R6
 **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
 **Último tag formal legacy:** `v0.0.26-beta`
-**Fecha de revisión:** 2026-08-30
-**Estado actual:** DEV.2 R6 queda cerrado/aceptado/publicado como G119/E05 (`0.1.19.05-beta`) después de PR #111 / merge `bd2accb`, promoción PR #112 / commit `9424ea8` y tag firmado `v0.1.19.05-beta`; UX.5 R1 queda reservado como candidato G120/E01 (`0.1.20.01-beta`).
-
+**Fecha de revisión:** 2026-08-31
+**Estado actual:** DEV.2 R6 queda cerrado/aceptado/publicado como G119/E05 (`0.1.19.05-beta`) después de PR #111 / merge `bd2accb`, promoción PR #112 / commit `9424ea8` y tag firmado `v0.1.19.05-beta`; los mantenimientos post-G119 PR #117 y PR #118 quedaron integrados sin consumir un nuevo Global; UX.5 R1 continúa reservado como candidato G120/E01 (`0.1.20.01-beta`).
 
 <!-- NOR1-R7-CLOSURE:START -->
 ## Estado NOR.1 / NOR.2
 
-NOR.1 quedó cerrado en R7 después de consolidar los estándares de
-estructura, nombres, documentación, archivos, evidencias, raíz y artefactos
-locales.
+NOR.1 consolidó en R7 la definición inicial de estándares de estructura,
+nombres, documentación, archivos, evidencias, raíz y artefactos locales. Después
+fue reabierto de forma acotada para R8, aceptado como G112/E07, que incorporó el
+gobierno canónico de identificadores de bloques y dejó el bloque cerrado
+definitivamente.
 
 La secuencia operativa previa a SEC.2 queda:
 
-1. **NOR.1** — definición y auditoría preparatoria — cerrado en R7;
+1. **NOR.1** — definición y auditoría preparatoria — base consolidada en R7 y cierre definitivo en R8/G112-E07;
 2. **NOR.2** — normalización integral del repositorio — cerrado en R8 mediante PR #74;
 3. **SEC.2** — hardening integral — cerrado después de R1–R6;
 4. **AUD.SEC2 R1** — saneamiento post-cierre y reconciliación revision-aware — cerrado/aceptado como G109/E01 mediante PR #83;
@@ -40,7 +41,6 @@ NOR.2 ejecutó los movimientos, renombrados, consolidaciones y retiros que
 NOR.1 deliberadamente no realizó.
 <!-- NOR1-R7-CLOSURE:END -->
 
-
 <!-- NOR2-R1-BASELINE:START -->
 ## Registro histórico NOR.2 R1 — línea base de normalización
 
@@ -50,7 +50,6 @@ matriz de migración por impacto antes de modificar rutas críticas.
 
 SEC.2 quedó cerrado tras completar sus controles planificados durante NOR.2.
 <!-- NOR2-R1-BASELINE:END -->
-
 
 <!-- NOR2-R2-MATRIX:START -->
 ## Registro histórico NOR.2 R2 — matriz de migración
@@ -62,7 +61,6 @@ auditar en el cierre.
 
 SEC.2 quedó cerrado tras completar sus controles planificados.
 <!-- NOR2-R2-MATRIX:END -->
-
 
 <!-- NOR2-R3-RUNTIME:START -->
 ## Registro histórico NOR.2 R3 — migración técnica
@@ -93,7 +91,7 @@ Este roadmap describe **estado actual y trabajo futuro**.
 
 La secuencia de pendientes vigente se mantiene en [Matriz maestra de pendientes hacia 1.0](pre-1-0-pending-matrix.md). Esa matriz es evolutiva y no preasigna Globales futuros más allá del candidato actual. La evolución detallada ya completada se conserva en `RELEASES.md`, `CHANGELOG.md`, `docs/archive/governance/pre-1-0-versioning-audit.md`, `docs/governance/pre-1-0-revision-ledger.md`, `docs/archive/governance/ver2-revision-decision-matrix.md`, `data/pre-1-0-revision-ledger.json` y `docs/archive/`.
 
-VER.2 es un bloque transversal de reconciliación y **no añade un bloque 15** al plan maestro de producto. DEV.2 ya quedó cerrado documentalmente en R4. MANT.1 se trata como checkpoint técnico de mantenibilidad antes de SEC.2 y tampoco añade un bloque funcional de producto. MANT.1 R1 queda como auditoría inicial de alcance, MANT.1 R2 conserva la documentación de scripts y hooks antes de SEC.2, MANT.1 R3 documenta los YAML de GitHub sin cambiar CI ni formularios y MANT.1 R4 limpia encabezados operativos para que la trazabilidad histórica permanezca en documentación, MANT.1 R5A comenta servicios Python grandes, MANT.1 R5B comenta CSS/plantilla de la guía pública, MANT.1 R5C comenta JavaScript complejo sin cambiar lógica visible y MANT.1 R5D define política/plantillas por extensión con uniformidad de encabezados.
+VER.2 es un bloque transversal de reconciliación y **no añade un bloque 15** al plan maestro de producto. DEV.2 tuvo un checkpoint documental en R4 y quedó cerrado funcionalmente después de R6. MANT.1 se trata como checkpoint técnico de mantenibilidad antes de SEC.2 y tampoco añade un bloque funcional de producto. MANT.1 R1 queda como auditoría inicial de alcance, MANT.1 R2 conserva la documentación de scripts y hooks antes de SEC.2, MANT.1 R3 documenta los YAML de GitHub sin cambiar CI ni formularios y MANT.1 R4 limpia encabezados operativos para que la trazabilidad histórica permanezca en documentación, MANT.1 R5A comenta servicios Python grandes, MANT.1 R5B comenta CSS/plantilla de la guía pública, MANT.1 R5C comenta JavaScript complejo sin cambiar lógica visible y MANT.1 R5D define política/plantillas por extensión con uniformidad de encabezados.
 
 ## 1. Programa GOV.1 — Auditoría, Gobierno y Trazabilidad Pre-Beta
 
@@ -166,7 +164,7 @@ VER.2 es un bloque transversal de reconciliación y **no añade un bloque 15** a
 - identidad visual oficial, favicons y Social Preview;
 - repositorio público con metadata, topics, labels e Issue Forms;
 - Dependency graph, Dependabot, CodeQL, Secret Protection, Push protection y Private vulnerability reporting;
-- CI y auditoría automática de gobernanza;
+- `Repository Quality Gate` y `Python Compatibility` como required checks canónicos, con Dependency Security, Visual & Accessibility y CodeQL como controles complementarios;
 - DEV.2 — R5 aceptado/publicado como G118/E04 y R6
   aceptado/publicado como G119/E05: Portal Developer con `/dev`
   canónico, identidad humana persistente, sesión web separada de
@@ -225,7 +223,7 @@ No existe una una revisión intermedia no demostrada entre UX.4.6i R1 y R1.2 dem
 
 **VER.2:** bloque transversal cerrado. La primera promoción se publicó como `0.0.71.01-beta`; AUD.SEC2 R1 documenta que el ledger usado entonces terminaba en G070 y que la reconstrucción completa sitúa ese estado en G087 sin modificar el tag inmutable.
 
-**Checkpoint técnico actual:** G119/E05 (`0.1.19.05-beta`) está aceptado/publicado para DEV.2 R6. G112/E07–G118/E04 permanecen preservados según el ledger; G120/E01 (`0.1.20.01-beta`) queda reservado como candidato para UX.5 R1 y PERSIST.1 continúa en una etapa posterior.
+**Checkpoint técnico actual:** G119/E05 (`0.1.19.05-beta`) está aceptado/publicado para DEV.2 R6. G112/E07–G118/E04 permanecen preservados según el ledger. PR #117 cerró la migración de automatización y PR #118 coordinó el mantenimiento de dependencias post-G119; ambos son mantenimiento sin Global independiente y no consumen G120. G120/E01 (`0.1.20.01-beta`) queda reservado como candidato para UX.5 R1 y PERSIST.1 continúa en una etapa posterior.
 
 Documentos canónicos de VER.2:
 
@@ -366,7 +364,6 @@ Estas referencias preservan contratos documentales de regresión histórica sin 
 
 Esta referencia conserva el encabezado histórico esperado por las regresiones de PLAN.1, aunque VER.2 reordene el resumen vigente.
 
-
 ## NOR.2 R4 — documentación viva canónica
 
 R4 migra 41 documentos vivos y consolida 2 estándares heredados dentro de la estructura documental canónica. R5 tratará exclusivamente auditorías, cierres y evidencia histórica aún ubicada en la raíz de `docs/`. SEC.2 quedó cerrado tras completar sus controles planificados.
@@ -378,7 +375,6 @@ R4 migra 41 documentos vivos y consolida 2 estándares heredados dentro de la es
 R5 retira de la raíz de `docs/` los 36 documentos cerrados clasificados por R2
 y los conserva en `docs/archive/` sin reescribir su contenido histórico. R6
 queda como siguiente revisión de NOR.2.
-
 
 <!-- NOR2-R6-LEDGER:START -->
 ## NOR.2 R6 — ledger y datos de alto impacto
@@ -401,7 +397,6 @@ R6 quedó integrado en `main` mediante PR #72 y commit squash `365ba5b`.
 
 La revisión activa pasa a **NOR.2 R7 — artefactos locales**.
 <!-- NOR2-R6-LEDGER:END -->
-
 
 <!-- NOR2-R7-LOCAL-ARTIFACTS:START -->
 ## NOR.2 R7 — artefactos locales
@@ -438,7 +433,6 @@ Después continúa **NOR.2 R8 — auditoría integral y cierre formal de NOR.2**
 SEC.2 quedó cerrado tras completar sus controles planificados hasta completar dicho cierre.
 <!-- NOR2-R7-LOCAL-ARTIFACTS:END -->
 
-
 <!-- NOR2-R8-FINAL-AUDIT:START -->
 ## NOR.2 R8 — auditoría integral y cierre formal
 
@@ -464,7 +458,6 @@ El gate integral local de R8 quedó completado y la CI remota pasó en verde des
 
 R8 quedó integrado mediante PR #74 y commit squash `b4df9b7`. Esa frase describe el checkpoint histórico previo al inicio de SEC.2; el estado vigente es que **SEC.2 cerró después de R1–R6** y AUD.SEC2 R1 ejecuta el saneamiento post-cierre.
 <!-- NOR2-R8-FINAL-AUDIT:END -->
-
 
 **SEC.2 R6 cerrado:** hardening de sesión administrativa web y preparación para HTTPS interno completados.
 

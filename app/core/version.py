@@ -4,10 +4,10 @@ La fuente única es el archivo ``VERSION`` situado en la raíz del repositorio.
 Este módulo valida y expone su contenido para que FastAPI, las plantillas y
 otros componentes no mantengan copias independientes del número de versión.
 
-La historia conserva la familia legacy ``0.0.N-beta``. VER.2 incorpora una
-familia beta revision-aware ``0.GG.RR.EE-beta`` para estados nuevos, donde
-``GG``/``RR`` codifican el contador global y ``EE`` el ordinal aceptado dentro
-del bloque. La línea oficial futura conserva cuatro componentes
+La aplicación admite la familia legacy ``0.0.N-beta`` y la familia beta
+revision-aware ``0.GG.RR.EE-beta`` para estados pre-1.0, donde ``GG``/``RR``
+codifican el contador global y ``EE`` el ordinal aceptado dentro del bloque.
+La línea oficial futura conserva cuatro componentes
 ``MAYOR.MENOR.PARCHE.REVISIÓN`` sin sufijo. El Build es independiente.
 """
 

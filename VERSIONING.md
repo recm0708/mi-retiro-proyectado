@@ -6,7 +6,6 @@
 **Revisión de transición a versión oficial:** 2026-08-19
 **Revisión revision-aware:** 2026-08-22
 
-
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado post-MANT.1
 

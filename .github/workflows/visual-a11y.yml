@@ -1,6 +1,6 @@
 # Baseline visual y de accesibilidad del frontend.
 #
-# Las violaciones axe son informativas mientras UX.5 redefine la base visual.
+# Las violaciones axe son informativas con MRP_A11Y_STRICT=0.
 # Fallos operativos del navegador, servidor o rutas sí bloquean el workflow.
 
 name: Visual & Accessibility

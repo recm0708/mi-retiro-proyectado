@@ -1,4 +1,4 @@
-"""Carga y valida el ledger revision-aware materializado por VER.2.
+"""Carga y valida el ledger revision-aware previo a 1.0.
 
 El ledger es un artefacto de auditoría local del repositorio. No consulta GitHub,
 no mueve tags y no sustituye ``VERSION``. Su objetivo es garantizar que la

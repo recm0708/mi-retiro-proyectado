@@ -7,6 +7,7 @@
 **Base documental preservada:** GOV.1.3 R3 — 2026-08-17
 **Revisión transversal histórica:** repositorio público y controles GitHub — 2026-08-19
 **Última revisión documental:** AUD.SEC2 R1 — 2026-08-25
+**Última revisión operativa:** mantenimiento post-G119 — 2026-08-31
 **Clasificación:** Seguridad / Privacidad / Técnica
 **Revisión externa:** Pendiente antes de la primera versión oficial o de cualquier despliegue remoto que cambie el modelo de riesgo
 
@@ -74,7 +75,7 @@ Bootstrap 5.3.8 se carga actualmente desde **cdn.jsdelivr.net** con Subresource 
 
 Esto produce una conexión técnica del navegador al CDN y puede revelar metadatos ordinarios de red.
 
-Servir dependencias críticas localmente continúa como objetivo antes de la primera versión oficial y se revisará específicamente en SEC.2/REL.1.
+Servir dependencias críticas localmente continúa como objetivo antes de la primera versión oficial. SEC.2 cerró sin retirar esta dependencia; la excepción debe reevaluarse en REV.1/REL.1 antes de `1.0.0.0`.
 
 ## 7. Verificación externa de fecha
 
@@ -139,9 +140,11 @@ El borrado integral elimina únicamente claves propiedad de Mi Retiro Proyectado
 
 ## 11. CI, dependencias y seguridad del repositorio público
 
-CI ejecuta instalación/validación, `compileall`, sintaxis JavaScript y suite `unittest`.
+`Repository Quality Gate` centraliza dependencias, Markdown, integridad del repositorio, compilación Python, sintaxis JavaScript, contratos revision-aware y suites de pruebas. `Python Compatibility` preserva de forma independiente la compatibilidad con Python 3.13.
 
-Dependabot propone actualizaciones; no existe auto-merge.
+`Dependency Security` audita dependencias Python y referencias versionadas de GitHub Actions. `Visual & Accessibility` y CodeQL permanecen como controles complementarios. PR #117 retiró los workflows legacy después de migrar el ruleset sin abrir una ventana de desprotección.
+
+Dependabot propone actualizaciones; no existe auto-merge. PR #118 coordinó Pydantic 2.13.5 con Pydantic Core 2.46.5, actualizó `actions/dependency-review-action` a v5 y protegió ambas dependencias como grupo compatible.
 
 Las actualizaciones de `pypdf` requieren revisión explícita de importadores.
 

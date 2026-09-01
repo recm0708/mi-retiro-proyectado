@@ -3,8 +3,7 @@
 **Proyecto:** Mi Retiro Proyectado
 **Estado:** vigente desde GOV.1.2
 **Fecha de adopción:** 2026-08-18
-**Última revisión:** DEV.2 R6 publicado como G119/E05; UX.5 R1 candidato G120/E01 — 2026-08-30
-
+**Última revisión:** G119/E05 publicado; mantenimiento post-G119 PR #117/#118 cerrado; UX.5 R1 candidato G120/E01 — 2026-08-31
 
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado de gobierno post-MANT.1
@@ -147,6 +146,11 @@ Los workflows legacy `ci.yml`, `governance-audit.yml` y
 `markdown-audit.yml` fueron retirados después de migrar el ruleset, sin abrir
 una ventana de desprotección. CodeQL permanece independiente.
 
+La migración final quedó integrada mediante PR #117. El mantenimiento
+coordinado PR #118 actualizó la pareja Pydantic/Pydantic Core, Dependency
+Review y la agrupación de Dependabot sin modificar `VERSION`, el ledger ni el
+manifiesto de publicación. Estos cambios son mantenimiento posterior a
+G119/E05 y no consumen G120/E01.
 
 La rama predeterminada está protegida mediante un ruleset activo que exige Pull Request, commits verificados, historial lineal, resolución de conversaciones, los checks `Repository Quality Gate` y `Python Compatibility`, rama actualizada antes de integrar y bloqueo de eliminación y force push.
 
@@ -179,7 +183,6 @@ La política aplicable está en `VERSIONING.md`.
 ## 8. Propiedad y revisión de áreas críticas
 
 Antes de crear o reutilizar una sigla, fase o bloque se consultan `docs/standards/work-block-identifiers.md` y `data/work-block-registry.json`. Los identificadores históricos o planificados no se reasignan; `R...` identifica revisiones, no bloques.
-
 
 Mientras exista un único mantenedor, `@recm0708` revisa todo el repositorio. Se consideran especialmente críticas:
 

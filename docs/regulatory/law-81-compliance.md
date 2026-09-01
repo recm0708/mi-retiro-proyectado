@@ -24,7 +24,7 @@ Fuentes: `regulatory-sources.md`.
 ## 2. Matriz vigente
 
 | Área | Control actual | Estado |
-|---|---|---|
+| --- | --- | --- |
 | Información previa | Documento visible antes de tratar datos en Simular | Implementado |
 | Lectura | Casilla bloqueada hasta llegar al final | Implementado |
 | Consentimiento | Aceptación explícita/versionada y activa por sesión | Implementado |
@@ -48,7 +48,7 @@ Fuentes: `regulatory-sources.md`.
 ## 3. Inventario de necesidad
 
 | Dato | Necesidad en cálculo | Observación |
-|---|---|---|
+| --- | --- | --- |
 | Nombres/apellidos | No | Identificación voluntaria |
 | Cédula | No | Identificación voluntaria |
 | NSS | No | Identificación voluntaria |

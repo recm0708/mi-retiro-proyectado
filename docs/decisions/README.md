@@ -6,11 +6,10 @@
 **Base documental histórica:** `0.0.23-beta` — GOV.1.3 R4 — 2026-08-17
 **Revisión documental:** GOV.1.3 R4 — 2026-08-17
 **Última actualización de gobierno:** PLAN.1 / ADR-168 — 2026-08-20
-**Última actualización técnica:** VER.2 / ADR-179; reconciliación AUD.SEC2 R1 — 2026-08-25
+**Última actualización técnica:** mantenimiento post-G119 / ADR-180–ADR-181 — 2026-08-31
 **Clasificación:** Técnica / Gobierno / Auditoría
 **Naturaleza documental:** Registro vivo acumulativo — el índice y el cuerpo ADR permanecen juntos como contrato canónico; las decisiones históricas no se extraen ni modernizan si hacerlo altera su trazabilidad o las regresiones que las protegen.
-**ADR indexadas:** 179 (`ADR-001` a `ADR-179`)
-
+**ADR indexadas:** 181 (`ADR-001` a `ADR-181`)
 
 <!-- DOC1-R1-REVISION-MANUAL:START -->
 ## Nota de lectura post-MANT.1
@@ -28,6 +27,10 @@ Estado transversal:
   publicación anterior;
 - UX.5 R1 queda reservado como G120/E01;
 - SEC.2 R1–R6 permanece cerrado y su historia se conserva.
+- PR #117 cerró la migración de automatización post-G119 sin consumir un
+  Global independiente.
+- PR #118 coordinó Pydantic/Pydantic Core y Dependency Review sin consumir
+  G120/E01.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 
 Este registro conserva decisiones de arquitectura, modelado, UX, precisión, seguridad y aplicación normativa. Una ADR explica por qué el proyecto adoptó una decisión; no crea una norma jurídica.
@@ -52,7 +55,7 @@ R4 **no inventa un estado retroactivo** para esas decisiones. El índice las mar
 ## 3. Índice de decisiones
 
 | ADR | Decisión | Estado declarado |
-|---|---|---|
+| --- | --- | --- |
 | ADR-001 | Aplicación web local | Aceptada |
 | ADR-002 | FastAPI como backend | Aceptada |
 | ADR-003 | Separación del motor de cálculo | Aceptada |
@@ -127,8 +130,8 @@ R4 **no inventa un estado retroactivo** para esas decisiones. El índice las mar
 | ADR-072 | La Ficha Digital se limita al año calendario actual | Aceptada |
 | ADR-073 | Separar una fotografía acreditada de la proyección al retiro | Aceptada |
 | ADR-074 | Validar PDFs en la frontera HTTP antes del parser | Aceptada |
-| ADR-075 | La primera beta exige CI reproducible y vigilancia de dependencias | Aceptada |
-| ADR-076 | Dependabot no debe convertir versiones concretas en falsos fallos de CI | Aceptada |
+| ADR-075 | La primera beta exige CI reproducible y vigilancia de dependencias | Aceptada; topología operativa de CI sustituida parcialmente por ADR-180 |
+| ADR-076 | Dependabot no debe convertir versiones concretas en falsos fallos de CI | Aceptada; política de dependencias transitivas sustituida parcialmente por ADR-181 |
 | ADR-077 | Mantener una capa visual transversal separada antes de la beta | Aceptada |
 | ADR-078 | Priorizar tareas del Asegurado(a) y simplificar controles globales | Aceptada |
 | ADR-079 | Separar captura manual e importación documental en Datos personales | Aceptada |
@@ -232,6 +235,8 @@ R4 **no inventa un estado retroactivo** para esas decisiones. El índice las mar
 | ADR-177 | Los bloques comparables conservan alineación y densidad visual en escritorio | Aceptada para UX.4.6g R1.4.3 |
 | ADR-178 | La guía pública explica parámetros versionados sin convertirse en un segundo motor | Aceptada para UX.4.6i R1–R1.4 |
 | ADR-179 | El versionado beta usa un ledger de estados aceptados y no cuenta commits como revisiones | Aceptada; reconciliada post-G070 en AUD.SEC2 R1 |
+| ADR-180 | La automatización post-G119 centraliza el gate sin consumir una revisión revision-aware | Aceptada — mantenimiento post-G119 |
+| ADR-181 | Las dependencias transitivas fijadas pueden gestionarse cuando están contractualmente acopladas | Aceptada — mantenimiento post-G119 |
 
 ## 4. Registro íntegro de ADR
 
@@ -312,6 +317,7 @@ Una proyección futura nunca deberá modificar o reemplazar silenciosamente info
 GitHub será la fuente principal del proyecto.
 
 Esto permitirá desarrollar indistintamente desde diferentes computadoras utilizando `git pull` y `git push`.
+
 ---
 
 ## ADR-008 — Estado temporal del asistente en `sessionStorage`
@@ -366,6 +372,7 @@ Las proyecciones son datos estimados y permanecerán diferenciadas de los datos 
 Las tablas salariales del Paso 4 utilizan años calendario para facilitar la planificación y comparación visual.
 
 Estas tablas no se utilizarán por sí solas para decidir si una cuota o salario ocurrió antes o después de una fecha legal crítica. Los motores de elegibilidad y pensión utilizarán fechas y meses exactos cuando corresponda.
+
 ---
 
 ## ADR-013 — Historial anual separado del salario actual
@@ -472,7 +479,6 @@ JavaScript enviará el estado validado y presentará la respuesta, pero no decid
 
 Cuando un año futuro solo se utiliza parcialmente hasta la fecha de retiro, el salario proyectado se prorrateará por las cuotas consumidas y se mostrará una advertencia de que se trata de una estimación.
 
-
 ## ADR-023 — Clasificación automática de modalidad SEBD
 
 **Estado:** Aceptada
@@ -497,7 +503,6 @@ Cuando un año futuro solo se utiliza parcialmente hasta la fecha de retiro, el 
 
 **Motivo:** un factor reglamentario debe reproducirse desde una tabla versionada, no deducirse por aproximación matemática.
 
-
 ## ADR-026 — Indemnización por Vejez como pago único separado
 
 **Estado:** Aceptada
@@ -507,7 +512,6 @@ La Indemnización por Vejez no se almacenará ni presentará como `pension_mensu
 El cociente entre meses acreditados y seis se calculará mediante división decimal directa, sin truncarlo a bloques enteros, porque el procedimiento reglamentario ordena dividir el total de meses registrados entre seis y multiplicar el resultado por la mensualidad hipotética.
 
 Desde el 01/03/2036 el clasificador no calculará esta indemnización y derivará el escenario a la transición SUCGS prevista por el artículo 186.
-
 
 ## ADR-027 — No reconstruir el saldo CAP desde historial anual
 
@@ -653,7 +657,6 @@ El salto directo reutiliza las funciones existentes de preparación de Historial
 
 El año inicial usado para distribuir cuotas en el artículo 197 se tomará del inicio del historial declarado en el Paso 3. La confirmación de que ese historial cubre toda la vida laboral relevante permanecerá como una declaración explícita, y la estabilidad salarial conservará un estado pendiente cuando no exista confirmación suficiente.
 
-
 ## ADR-041 — El comparador coordina motores y no recalcula fórmulas
 
 **Estado:** Aceptada
@@ -663,7 +666,6 @@ El año inicial usado para distribuir cuotas en el artículo 197 se tomará del 
 Para Mixto y SUCGS, cuando se evalúe una fecha alternativa se reutilizarán explícitamente los saldos y parámetros específicos ingresados en el Paso 6 y se mostrará una advertencia de escenario hipotético con saldo constante. No se proyectarán silenciosamente cuentas CAP o de Capitalización Solidaria.
 
 **Motivo:** evita una cuarta implementación de fórmulas previsionales y, al mismo tiempo, impide presentar como proyección actuarial un saldo futuro que la aplicación todavía no puede reconstruir con datos oficiales suficientes.
-
 
 ## ADR-042 — La trazabilidad explica resultados y no recalcula prestaciones
 
@@ -865,7 +867,6 @@ La asociación de error de campo debe retirarse cuando el valor vuelve a ser vá
 
 **Motivo:** separar estos canales evita anuncios duplicados, reduce ruido para tecnologías de apoyo y conserva una relación clara entre el problema, el control que debe corregirse y los mensajes generales emitidos por una operación.
 
-
 ## ADR-065 — Las mutaciones observadas de accesibilidad deben ser idempotentes
 
 **Estado:** Aceptada
@@ -874,7 +875,6 @@ La asociación de error de campo debe retirarse cuando el valor vuelve a ser vá
 
 **Motivo:** escribir repetidamente una clase observada puede generar una cadena de notificaciones del `MutationObserver`, saturar el hilo principal y dejar la interfaz cargando sin responder aunque FastAPI siga devolviendo HTTP 200. Asimismo, `checkValidity()` puede volver a emitir `invalid` y provocar retroalimentación innecesaria durante la corrección de un campo.
 
-
 ## ADR-066 — Los errores de campo deben ser visibles y no depender del globo nativo
 
 **Estado:** Aceptada
@@ -882,7 +882,6 @@ La asociación de error de campo debe retirarse cuando el valor vuelve a ser vá
 **Decisión:** cuando un control falle la validación, la interfaz mostrará un mensaje inline visible junto al campo y lo asociará programáticamente mediante `aria-errormessage`. El manejador `invalid` suprimirá únicamente la presentación nativa del navegador mediante `preventDefault()`; la restricción de validación y el bloqueo de avance permanecen activos.
 
 **Motivo:** los globos nativos no se presentan de forma uniforme entre navegadores, tipos de control ni plataformas. Un borde rojo sin texto tampoco comunica por sí solo la causa del problema. El mensaje propio mantiene consistencia visual, accesibilidad, trazabilidad y permite validar el comportamiento de manera automatizada.
-
 
 ## ADR-067 — Mostrar la edad que se cumple durante cada año de la línea temporal
 
@@ -893,7 +892,6 @@ La asociación de error de campo debe retirarse cuando el valor vuelve a ser vá
 La edad no se incorporará al contrato de los motores ni se persistirá como un dato independiente, porque puede derivarse de la fecha de nacimiento ya capturada.
 
 **Motivo:** los comprobantes oficiales utilizados como referencia presentan Año y Edad de forma conjunta. Mostrar ambos valores facilita contrastar la simulación con el historial de la CSS y evita que el Asegurado(a) tenga que calcular manualmente su edad para cada período. Mantenerla como dato derivado evita duplicidad y riesgo de inconsistencias.
-
 
 ## ADR-068 — Separar salario visible, cuota acreditada y períodos parciales del año actual
 
@@ -908,7 +906,6 @@ La base de proyección futura permanece conceptualmente separada del salario acr
 La interfaz ofrece acceso a Mi Caja Digital y, cuando el documento PDF contiene texto estructurado reconocible, permite analizar la Ficha Digital. El parser nunca aplica datos directamente: la información detectada pasa primero por una vista previa editable y requiere confirmación explícita.
 
 **Motivo:** la información salarial y la acreditación de cuotas pueden actualizarse en momentos distintos; además, una consulta puede capturar solo una quincena de un mes. Mezclar estos estados como si fueran un único dato anual puede alterar el corte real y la base utilizada para proyección.
-
 
 ## ADR-069 — La referencia de Mi Retiro Seguro se extrae del PDF personal y no es una constante
 
@@ -930,7 +927,6 @@ La fecha de corte, cuotas y supuestos salariales pueden diferir entre el comprob
 
 **Motivo:** una referencia personal puede haber sido calculada con información acreditada o supuestos distintos a los actuales. Separar contexto y compatibilidad evita presentar diferencias engañosas.
 
-
 ## ADR-071 — Toda importación oficial requiere vista previa editable y confirmación explícita
 
 **Estado:** Aceptada
@@ -943,7 +939,6 @@ Los archivos se procesan en memoria. Los contratos del backend limitan los ident
 
 **Motivo:** los documentos pueden contener valores parciales, proyectados o actualizados en momentos distintos. Prellenar sin revisión podría convertir una detección imperfecta en un dato operativo y alterar el cálculo. La confirmación explícita mantiene al Asegurado(a) en control y permite corregir errores del parser sin renunciar a la automatización.
 
-
 ## ADR-072 — La Ficha Digital se limita al año calendario actual
 
 **Estado:** Aceptada
@@ -953,7 +948,6 @@ Los archivos se procesan en memoria. Los contratos del backend limitan los ident
 Las vistas previas monetarias deben utilizar el mismo formato público del resto de la aplicación: coma como separador de miles y dos decimales, manteniendo edición segura mediante la utilidad común `currency.js`.
 
 **Motivo:** el objetivo de la Ficha Digital dentro de UX.4.4 es completar el detalle reciente del año actual y separar salario disponible, cuota acreditada y períodos parciales. Conservar meses del año anterior añadía información que no alimentaba ninguna decisión posterior y aumentaba el riesgo de confusión. Un formato monetario uniforme reduce errores de revisión antes de confirmar la importación.
-
 
 ## ADR-073 — Separar una fotografía acreditada de la proyección al retiro
 
@@ -967,7 +961,6 @@ En Mixto y SUCGS los datos específicos del Paso 6 que la aplicación no puede p
 
 **Motivo:** mezclar salarios/cuotas ya acreditados con períodos futuros impedía distinguir una referencia basada en la fotografía actual de una estimación que supone continuidad laboral. Separar ambas lecturas mejora transparencia sin duplicar fórmulas legales ni convertir un PDF personal en una regla general.
 
-
 ## ADR-074 — Validar PDFs en la frontera HTTP antes del parser
 
 **Estado:** Aceptada
@@ -980,22 +973,25 @@ Las respuestas de importación se marcan `Cache-Control: no-store` y la aplicaci
 
 ## ADR-075 — La primera beta exige CI reproducible y vigilancia de dependencias
 
-**Estado:** Aceptada
+**Estado:** Aceptada; sustituida parcialmente por ADR-180 en su topología operativa de CI.
 
 **Decisión:** `main` y los pull requests se validarán con GitHub Actions sobre Python 3.13 y 3.14, con instalación desde `requirements.txt`, `pip check`, `compileall`, `node --check` y `unittest`. El token del workflow mantendrá `contents: read`. Dependabot revisará semanalmente `pip` y GitHub Actions.
 
 **Motivo:** las pruebas locales no detectan por sí solas una instalación limpia rota, incompatibilidades entre versiones de Python o cambios de dependencias. Automatizar el mismo contrato antes de la beta reduce el riesgo de publicar un paquete que solo funciona en la máquina de desarrollo.
 
+**Nota posterior — 2026-08-31:** ADR-180 conserva el principio de CI reproducible y vigilancia de dependencias, pero sustituye la topología operativa histórica basada en workflows separados por el contrato canónico post-G119.
 
 ## ADR-076 — Dependabot no debe convertir versiones concretas en falsos fallos de CI
 
-**Estado:** Aceptada
+**Estado:** Aceptada; sustituida parcialmente por ADR-181 en la política de dependencias transitivas fijadas.
 
 **Decisión:** las regresiones que inspeccionan `.github/workflows/ci.yml` validarán que existan `actions/checkout`, `actions/setup-python` y `actions/setup-node` con una versión mayor explícita, además del contrato funcional del pipeline, pero no exigirán que dichas Actions permanezcan para siempre en un major específico. De forma equivalente, la regresión de `pypdf` comprobará que exista una única versión exacta con formato `X.Y.Z`, mientras los tests funcionales de importación determinan si una versión nueva es compatible.
 
 `requirements.txt` se mantiene completamente fijado como snapshot reproducible, pero documenta sus dependencias directas. Dependabot solo propone actualizaciones ordinarias para `fastapi`, `Jinja2`, `pydantic`, `python-multipart`, `pypdf` y `uvicorn`; las dependencias transitivas fijadas no generan ruido de actualización individual. Las actualizaciones minor/patch del runtime, salvo `pypdf`, se agrupan; GitHub Actions se agrupa en una sola propuesta. `pypdf` y las actualizaciones major permanecen fuera del grupo general para revisión específica. No se habilita auto-merge.
 
 **Motivo:** la primera ejecución de Dependabot demostró dos clases de falsos negativos: una Action actualizada podía completar correctamente instalación, compilación y validación de JavaScript pero fallar porque una prueba exigía literalmente `@v6`; y `pypdf` podía superar los tests del parser pero fallar porque una regresión esperaba exactamente `5.9.0`. Al mismo tiempo, proponer por separado paquetes transitivos fijados, como `pydantic_core`, puede crear combinaciones incompatibles con su dependencia principal. La estrategia nueva conserva reproducibilidad, reduce ruido y hace que CI mida compatibilidad real en vez de números históricos.
+
+**Nota posterior — 2026-08-31:** ADR-181 sustituye únicamente la exclusión general de dependencias transitivas fijadas. El principio de evitar ruido, conservar pins reproducibles, revisar compatibilidad y mantener deshabilitado el auto-merge continúa vigente.
 
 ## ADR-077 — Mantener una capa visual transversal separada antes de la beta
 
@@ -1006,7 +1002,6 @@ Las respuestas de importación se marcan `Cache-Control: no-store` y la aplicaci
 La modernización visual no puede cambiar IDs consumidos por JavaScript, contratos de formularios, rutas, persistencia ni fórmulas previsionales. Una consolidación futura de CSS solo se hará después de estabilizar la beta y deberá conservar las regresiones existentes.
 
 **Motivo:** separar la nueva presentación reduce el riesgo de una reescritura masiva del CSS histórico inmediatamente antes de la beta, permite aislar regresiones visuales y mantiene clara la frontera entre cálculo, comportamiento y apariencia.
-
 
 ## ADR-078 — Priorizar tareas del Asegurado(a) y simplificar controles globales
 
@@ -1019,7 +1014,6 @@ La página de Inicio debe comunicar beneficios y tareas del Asegurado(a) antes q
 El footer global se presentará centrado con nombre, versión, aviso de independencia, enlace a Fuentes oficiales, autoría y copyright. Mi Caja Digital no se duplicará en el footer; permanecerá en los puntos funcionales destinados a verificar información individual.
 
 **Motivo:** reducir terminología y controles globales visibles mejora jerarquía sin perder funcionalidad. Separar recursos normativos de recursos personales evita que el footer se convierta en un contenedor de acciones operativas y mantiene la portada enfocada en orientar al Asegurado(a).
-
 
 ## ADR-079 — Separar captura manual e importación documental en Datos personales
 
@@ -1046,7 +1040,6 @@ Si el PDF ofrece un nombre completo, el parser puede descomponerlo de forma cons
 **Decisión:** la barra común de los Pasos 1–6 conserva su lógica de retroceso, salto directo, estado y acción principal, pero deja de usar posicionamiento `sticky/fixed`. Se renderiza después del contenido activo.
 
 **Motivo:** la persistencia flotante cumplía una decisión UX anterior, pero en formularios largos ocultaba información y competía con el contenido. Mantener un único componente estático conserva consistencia sin sacrificar legibilidad.
-
 
 ## ADR-082 — Consentimiento informado y versionado antes de Simular
 
@@ -1080,7 +1073,6 @@ Si el PDF ofrece un nombre completo, el parser puede descomponerlo de forma cons
 
 **Motivo:** el flujo ya maneja identificadores, salarios y documentos personales. Las medidas deben proteger el conjunto de la simulación y no solamente los endpoints de PDF.
 
-
 ## ADR-086 — Consentimiento con lectura completa y navegación dual del wizard (UX.4.6b R3)
 
 - El aviso de privacidad visible se amplía a un documento de 21 apartados alineado con Ley 81/Decreto 285 y adaptado a la realidad de Mi Retiro Proyectado.
@@ -1089,7 +1081,6 @@ Si el PDF ofrece un nombre completo, el parser puede descomponerlo de forma cons
 - El asistente usa dos barras simétricas dentro del mismo ancho del contenido: superior e inferior. En PC/laptop la superior puede permanecer disponible bajo el encabezado durante pasos largos; la inferior ofrece cierre natural.
 - Las ayudas contextuales no deben quedar recortadas por `overflow` de la tarjeta de simulación.
 
-
 ## ADR-087 — El contenido público debe ser pertinente al propósito del producto
 
 **Estado:** Aceptada
@@ -1097,7 +1088,6 @@ Si el PDF ofrece un nombre completo, el parser puede descomponerlo de forma cons
 **Decisión:** la interfaz solo debe presentar información que ayude a operar la aplicación, comprender una estimación previsional, conocer su alcance, ejercer decisiones de privacidad, cumplir requisitos legales o utilizar funciones de seguridad/accesibilidad. Se eliminan mensajes meta como **Fin de los términos** y **Lectura completada** cuando no aportan una decisión adicional. Mi Retiro Proyectado no se presentará como aplicación educativa, didáctica o pedagógica mientras ese no sea un propósito real del producto.
 
 **Motivo:** reducir texto ajeno a la tarea mejora claridad, evita confundir el posicionamiento del producto y mantiene coherencia entre interfaz, finalidad previsional y documentación.
-
 
 ## ADR-088 — Los datos importados se bloquean por campo, no por paso
 
@@ -1124,7 +1114,6 @@ Para el Paso 2, `origen_campos_cuotas` registra de forma independiente el origen
 **Decisión:** el control global de apariencia usa SVG inline para representar Sistema, Claro, Oscuro y Alto contraste. Los SVG son decorativos (`aria-hidden`) y el nombre textual del tema sigue siendo la fuente accesible de significado.
 
 **Motivo:** la iconografía de monitor, sol, luna y contraste comunica mejor el estado que el símbolo circular abstracto anterior, sin añadir archivos gráficos ni dependencias externas.
-
 
 ## ADR-091 — Los modales de importación son superficies globales del wizard
 
@@ -1206,7 +1195,6 @@ Para el Paso 2, `origen_campos_cuotas` registra de forma independiente el origen
 
 **Motivo:** la división interna reduce carga perceptiva sin alterar la arquitectura de seis pasos ni fragmentar datos que deben validarse conjuntamente antes de proyectar.
 
-
 ## ADR-101 — Ficha Digital no redefine las cuotas acreditadas del Paso 2
 
 **Estado:** Sustituida parcialmente por ADR-155 en UX.4.6d R23; se conserva como historial de la protección introducida en R2
@@ -1240,7 +1228,6 @@ Para el Paso 2, `origen_campos_cuotas` registra de forma independiente el origen
 **Decisión:** las filas que contienen información importada confirmada reciben una clase visual común `data-row-imported`; las filas sin procedencia documental usan `data-row-manual`. El patrón debe reutilizarse en Pasos 1–6 y vistas futuras cuando una tabla mezcle datos importados y manuales. Desde R4 la procedencia documental usa la paleta primaria/azul y no el verde semántico de éxito. La señal visual se acompaña siempre de controles de solo lectura/deshabilitados y no se utiliza para casillas que representan decisiones del usuario.
 
 **Motivo:** permite identificar de inmediato qué información proviene de un documento y cuál requiere intervención manual sin depender exclusivamente del texto de ayuda o del color de un campo individual.
-
 
 ## ADR-105 — Las casillas importadas deben conservar una marca visual inequívoca
 
@@ -1360,8 +1347,6 @@ Los placeholders públicos no reutilizan nombres, apellidos, identificadores o i
 
 **Motivo:** la accesibilidad visual exige que cambiar de tema no cambie la estructura percibida ni confunda origen documental con estado funcional.
 
-
-
 ## ADR-123 — El scrollbar tabular forma parte de la geometría de `app-table-shell`
 
 **Estado:** Aceptada para UX.4.6d R11.
@@ -1402,7 +1387,6 @@ Los placeholders públicos no reutilizan nombres, apellidos, identificadores o i
 
 **Motivo:** una cabecera sin filas aparenta contenido incompleto y añade ruido visual; un estado vacío comunica de manera directa que no quedan registros pendientes.
 
-
 ## ADR-128 — El selector nativo de archivo no depende del hover interno
 
 **Estado:** Aceptada para UX.4.6d R13.
@@ -1410,7 +1394,6 @@ Los placeholders públicos no reutilizan nombres, apellidos, identificadores o i
 **Decisión:** el botón nativo de `input[type=file]` mantiene una paleta estable en estados base, hover y focus. El feedback interactivo se expresa en el control exterior, sin depender de `::file-selector-button:hover`.
 
 **Motivo:** Bootstrap/Chromium puede considerar `:hover` activo sobre todo el input cuando el puntero está sobre el nombre del archivo, y la pseudoclase del botón no ofrece un comportamiento suficientemente uniforme entre motores. La regla estable evita regresar accidentalmente a la paleta predeterminada.
-
 
 ## ADR-129 — El Paso 1 manual usa un único bloque de Información personal
 
@@ -1467,7 +1450,6 @@ Los placeholders públicos no reutilizan nombres, apellidos, identificadores o i
 **Decisión:** el cargador/revisor de Ficha Digital deja de ser una subsección paralela entre Historial anual y Detalle. Se integra dentro de **Detalle salarial del año actual** y se muestra antes de la tabla mensual que alimenta.
 
 **Motivo:** la fuente debe preceder visualmente al resultado que genera y la Ficha Digital solo aporta información del año actual.
-
 
 ## ADR-136 — Bloqueo documental y valor booleano son estados independientes
 
@@ -1533,7 +1515,6 @@ Los placeholders públicos no reutilizan nombres, apellidos, identificadores o i
 
 **Motivo:** permite continuidad de UX tras F5 sin alterar el modelo de privacidad ni introducir almacenamiento remoto.
 
-
 ## ADR-144 — El detalle del año actual es la fuente de la fila anual vigente cuando está habilitado
 
 **Estado:** Aceptada para UX.4.6d R19.
@@ -1558,7 +1539,6 @@ Los placeholders públicos no reutilizan nombres, apellidos, identificadores o i
 
 **Motivo:** conserva la distinción temporal entre información salarial conocida y acreditación efectiva, evitando sumar como histórico un mes que aún no se confirmó como cuota.
 
-
 ## ADR-147 — La vigencia de Ficha Digital se evalúa por el último período detectado
 
 **Estado:** Sustituida por ADR-149 en UX.4.6d R21; se conserva como historial de R20.
@@ -1574,7 +1554,6 @@ Los placeholders públicos no reutilizan nombres, apellidos, identificadores o i
 **Decisión:** `resumen_detalle_anio_actual` se muestra en una sección compacta dentro del Paso 3 sin crear un nuevo modelo ni recalcular fórmulas en JavaScript. El bloque se oculta cuando el detalle se invalida.
 
 **Motivo:** las bases salariales automáticas dependen de valores que antes solo existían internamente. Mostrar el resumen permite verificar las cifras antes de continuar y evita depender de cálculos externos.
-
 
 ## ADR-149 — Una Ficha Digital anterior al mes actual siempre requiere revisión
 
@@ -1623,8 +1602,6 @@ Los placeholders públicos no reutilizan nombres, apellidos, identificadores o i
 **Decisión:** se mantienen cuotas identificadas, salarios disponible/acreditado, meses con información/completos, últimos períodos, último salario y los tres promedios. Aunque algunos valores coincidan en un escenario totalmente acreditado, divergen con salarios no acreditados o períodos parciales y los tres promedios alimentan opciones automáticas distintas.
 
 **Motivo:** eliminarlos por coincidencia circunstancial ocultaría diferencias relevantes para el asegurado y reduciría auditabilidad.
-
-
 
 ## ADR-155 — Una Ficha Digital confirmada puede ampliar la referencia agregada del año actual
 
@@ -1738,6 +1715,7 @@ mantenibilidad, no un rediseño visual.
 **Motivo:** preparar un repositorio para publicación no implica trasladar sus mecanismos internos de ingeniería a la interfaz de usuario. La aplicación debe conservar transparencia sobre lo que afecta a uso, datos, fuentes y soporte, mientras GitHub conserva la información de contribución, mantenimiento y auditoría.
 
 **Consecuencia:** el enlace al repositorio puede existir desde la interfaz sin afirmar que el acceso sea público en todas las etapas. Las labels se aplican a Issues/PR, no a commits; el README puede mostrar badges de estado del repositorio sin convertir esos controles en elementos del asistente previsional.
+
 ## ADR-164 — La renumeración vigente no reescribe la historia UX anterior
 
 **Estado:** Aceptada para UX.4.6e R6.
@@ -1866,7 +1844,6 @@ El contrato cubre inicialmente los tres selectores de archivo existentes: import
 
 **Consecuencia:** `attachment_processing.js` se carga de forma global antes de los scripts específicos de cada página. El cambio es exclusivamente de coordinación de interfaz: no modifica validación HTTP, parsers, persistencia de archivos, límites de seguridad ni política de privacidad.
 
-
 ## ADR-171 — Los datos documentales detectados se editan en la ventana de revisión y quedan bloqueados en la vista principal
 
 **Estado:** Aceptada para UX.4.6f R1.1.
@@ -1941,6 +1918,7 @@ El backend valida esa opción contra `maximo_anios_anticipacion` de `regulations
 **Motivo:** disponibilidad normativa y decisión del usuario son conceptos distintos. Además, presentar 2024 o 2025 como una decisión futura en una evaluación de 2026 induce a error aunque la fecha pueda conservar valor histórico o comparativo.
 
 **Consecuencia:** la interfaz distingue opción futura, fecha transcurrida y fecha de evaluación dentro de banda. La fecha personalizada permanece disponible para comparaciones específicas y la clasificación jurídica sigue centralizada en los motores del Paso 6.
+
 ## ADR-176 — Los campos de fecha usan validación calendárica transversal y ancho compacto
 
 **Estado:** Aceptada para UX.4.6g R1.
@@ -1984,7 +1962,6 @@ La guía reutiliza `construir_catalogo_metodologia()` para las fuentes oficiales
 
 **Refinamiento R1.3:** la explicación conserva cada fórmula general y añade debajo una sustitución numérica marcada como ejemplo. Los términos previsionales se definen dentro de la sección donde se utilizan, evitando un glosario aislado y evitando también replicarlos todavía por todo el asistente. El espaciado de tablas, notas y fuentes se ajusta con tokens semánticos; no se modifica ningún motor ni parámetro normativo.
 
-
 ## ADR-179 — El versionado beta usa un ledger de estados aceptados y no cuenta commits como revisiones
 
 **Estado:** Aceptada; reconciliada documentalmente por AUD.SEC2 R1.
@@ -1995,3 +1972,33 @@ La guía reutiliza `construir_catalogo_metodologia()` para las fuentes oficiales
 La segunda pasada de VER.2 fijó G070 sobre `7037addd`. AUD.SEC2 R1 reconstruyó los estados posteriores hasta G108, preservó `v0.0.71.01-beta` como tag publicado e inmutable con anomalía histórica de numeración y quedó aceptado como G109/E01 (`0.1.09.01-beta`) mediante PR #83; G110/E01 quedó aceptado como REL.GOV.1 mediante PR #85 y merge `5cd1cea`; G111/E01 (`0.1.11.01-beta`) quedó aceptado como DOC.2 mediante PR #87 y merge `1041b59`; G112/E07 (`0.1.12.07-beta`) queda aceptado para NOR.1 R8; G113/E03 (`0.1.13.03-beta`) queda reservado para DOC.1 R3 antes de PERSIST.1.
 
 El detalle, alternativas y evidencia completa permanecen en [ADR-179 — El versionado beta usa un ledger de estados aceptados y no cuenta commits como revisiones](adr-179-revision-aware-versioning.md).
+
+## ADR-180 — La automatización post-G119 centraliza el gate sin consumir una revisión revision-aware
+
+**Estado:** Aceptada — mantenimiento post-G119.
+**Fecha:** 2026-08-31.
+
+**Decisión:** `scripts/quality_gate.py --full` es el gate local canónico. En GitHub, `Repository Quality Gate` y `Python Compatibility` permanecen como required checks independientes de `main`; `Dependency Security`, `Scheduled Health`, PR Labeler, verificación de tags y Visual & Accessibility conservan responsabilidades complementarias.
+
+PR #117 retiró `.github/workflows/ci.yml`, `.github/workflows/governance-audit.yml` y `.github/workflows/markdown-audit.yml` únicamente después de migrar el ruleset y demostrar equivalencia de protección. La automatización no crea commits, tags ni GitHub Releases por sí sola.
+
+Este mantenimiento conserva `VERSION`, `data/pre-1-0-revision-ledger.json` y `data/release-publication-manifest.json` sin cambios. Por tanto, no materializa un nuevo estado revision-aware y no consume G120/E01, reservado para UX.5 R1.
+
+**Motivo:** mantener varios workflows con responsabilidades ya centralizadas duplicaba contratos, podía producir divergencias entre validaciones locales/remotas y obligaba a conservar required checks asociados a rutas legacy. La migración ordenada permite retirar duplicación sin abrir una ventana de desprotección.
+
+**Consecuencia:** ADR-075 continúa vigente en el principio de CI reproducible, compatibilidad Python y vigilancia de dependencias, pero queda sustituida parcialmente respecto de la topología concreta de workflows. Cualquier retiro o renombre futuro de un required check exige migrar primero el ruleset y demostrar el contrato equivalente.
+
+## ADR-181 — Las dependencias transitivas fijadas pueden gestionarse cuando están contractualmente acopladas
+
+**Estado:** Aceptada — mantenimiento post-G119.
+**Fecha:** 2026-08-31.
+
+**Decisión:** `requirements.txt` continúa siendo un snapshot completamente fijado. Una dependencia transitiva fijada puede incluirse en Dependabot cuando su compatibilidad esté contractualmente acoplada a una dependencia directa y ambas deban evolucionar como una sola unidad revisable.
+
+El caso vigente es Pydantic/Pydantic Core: PR #118 permitió `pydantic_core`, agrupó `pydantic` y `pydantic_core` dentro de `python-runtime-minor-patch` y actualizó coordinadamente Pydantic a 2.13.5 con Pydantic Core 2.46.5. El mismo mantenimiento actualizó `actions/dependency-review-action` a v5 y conservó `pip check`, pruebas funcionales y revisión humana como gates. No se habilita auto-merge.
+
+`pypdf` y las actualizaciones major permanecen fuera del grupo general cuando requieren revisión específica por contrato o riesgo.
+
+**Motivo:** excluir de forma absoluta toda dependencia transitiva fijada evita ruido, pero también puede impedir que Dependabot proponga una pareja de versiones que debe mantenerse coordinada. Agrupar únicamente dependencias con acoplamiento explícito conserva reproducibilidad y reduce la probabilidad de combinaciones incompatibles.
+
+**Consecuencia:** ADR-076 continúa vigente en su rechazo a falsos fallos por números históricos, en la revisión por compatibilidad real y en la ausencia de auto-merge. Queda sustituida parcialmente solo en la regla que excluía de forma general las dependencias transitivas fijadas de las propuestas ordinarias.

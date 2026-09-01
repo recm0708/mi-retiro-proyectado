@@ -7,7 +7,6 @@
 **Siguiente Global disponible:** **G120**
 **Siguiente candidato disponible:** `0.1.20.01-beta` — UX.5 R1 (Sistema visual integral)
 
-
 <!-- DOC1-R1-REVISION-MANUAL:START -->
 ## Nota de lectura vigente — reconciliación post-SEC.2
 
@@ -56,7 +55,7 @@ Los identificadores revision-aware son una reconstrucción de auditoría. **No e
 ## Ledger G001–G070
 
 | Global | ID revision-aware | Bloque / estado aceptado | Ancla histórica | Evidencia resumida |
-|---:|---|---|---|---|
+| ---: | --- | --- | --- | --- |
 | G001 | `0.0.01.01-beta` | Estado retrospectivo 01 — base técnica | `0.0.1-beta` | GOV.1.1 / `RELEASES.md` |
 | G002 | `0.0.02.01-beta` | Estado retrospectivo 02 — historial/proyección | `0.0.2-beta` | GOV.1.1 / `RELEASES.md` |
 | G003 | `0.0.03.01-beta` | Estado retrospectivo 03 — retiro/precisión | `0.0.3-beta` | GOV.1.1 / `RELEASES.md` |
@@ -134,7 +133,7 @@ Estos estados se reconstruyen cronológicamente desde el árbol posterior a `703
 El detalle de inclusión/exclusión está en `docs/audits/governance/post-g070-revision-reconciliation.md`.
 
 | Global | ID revision-aware | Bloque / estado aceptado | Ancla histórica | Evidencia resumida |
-|---:|---|---|---|---|
+| ---: | --- | --- | --- | --- |
 | G071 | `0.0.71.01-beta` | DEV.2 R1 — Centro de desarrollo y estado interno | `0.0.26-beta` | commit 06e2821 / PR #37; apertura funcional DEV.2 |
 | G072 | `0.0.72.02-beta` | DEV.2 R2 — visor diagnóstico seguro | `0.0.26-beta` | commit 5451d18 / PR #39; visor y exportación diagnóstica |
 | G073 | `0.0.73.03-beta` | DEV.2 R3 — autodiagnóstico técnico local | `0.0.26-beta` | commit 9fb86af / PR #40; autodiagnóstico y regresiones |
@@ -185,6 +184,25 @@ El detalle de inclusión/exclusión está en `docs/audits/governance/post-g070-r
 | G118 | `0.1.18.04-beta` | DEV.2 R5 — Portal Developer y separación de acceso web/Bearer | `0.1.18.04-beta` | PR #107 / merge `bc97db0`; promoción PR #108 / `290e84a`; tag `v0.1.18.04-beta`; Release `378842155`; 1172 unittest; pytest 1211/5747; gate final 1178 unittest, pytest 1218/5759; revalidación post-merge pytest 1218/5773 |
 | G119 | `0.1.19.05-beta` | DEV.2 R6 — Portal Developer multipágina, identidad, observabilidad, mantenimiento, seguridad y privacidad | `0.1.19.05-beta` | PR #111 / merge `bd2accb`; cierre técnico firmado `ac9968b`; rama final `0a024bf`; gate de desarrollo 1269 unittest y pytest 1309/6045; gate final de promoción 1269 unittest y pytest 1309/6036; 183 módulos; Markdown 159/159; 19 JavaScript; 16 familias / 46 identificadores; 8 checks remotos del desarrollo en success |
 
+### Mantenimiento post-G119 que no consume Global
+
+Después de aceptar y publicar G119/E05, se integraron dos mantenimientos
+transversales que no constituyen estados revision-aware independientes:
+
+- PR #117 / merge `cbd5819` completó la migración de automatización,
+  retiró los workflows legacy después de migrar el ruleset y cerró con
+  `Repository Quality Gate` 11/0, pre-commit 10/0, 1337 `unittest` y
+  `pytest` 1377 passed / 6388 subtests;
+- PR #118 / merge `453d247` coordinó Pydantic 2.13.5 con Pydantic Core
+  2.46.5, actualizó `actions/dependency-review-action` a v5 y agrupó
+  ambas dependencias en Dependabot; cerró con `Repository Quality Gate`
+  11/0, pre-commit 10/0, 1338 `unittest` y `pytest` 1378 passed /
+  6390 subtests;
+- ambos mantenimientos conservaron sin cambios `VERSION`,
+  `data/pre-1-0-revision-ledger.json` y
+  `data/release-publication-manifest.json`;
+- G120/E01 continúa reservado exclusivamente para UX.5 R1.
+
 ### Anomalía histórica del tag `v0.0.71.01-beta`
 
 La publicación de `v0.0.71.01-beta` ocurrió durante VER.2 R4. La decisión VER.2 R3
@@ -210,6 +228,7 @@ El ledger estructurado conserva también estas exclusiones para no perder histor
 - UX.4.6h R1, candidato fallido;
 - UX.4.6i R1.1, inexistente como revisión independiente;
 - UX.4.6i R1.2/R1.3, sin aceptación diferenciada demostrada;
+- PR #117 y PR #118 como mantenimiento post-G119: migración final de automatización y actualización coordinada de dependencias sin consumir G120;
 - Pull Requests Dependabot cerrados o sustituidos que no constituyeron el estado finalmente aceptado.
 
 ## Próximo estado
@@ -223,7 +242,7 @@ el tag anotado y firmado `v0.1.19.05-beta`, el workflow de verificación en
 `success` y el GitHub Release prerelease correspondiente.
 
 | Global | ID revision-aware candidato | Bloque | Condición |
-|---:|---|---|---|
+| ---: | --- | --- | --- |
 | G120 | `0.1.20.01-beta` | UX.5 R1 — Sistema visual integral | nueva base visual reutilizable, gate completo + commit firmado + PR/CI + integración |
 
 G120 permanece reservado y **no se considera aceptado** mientras UX.5 R1

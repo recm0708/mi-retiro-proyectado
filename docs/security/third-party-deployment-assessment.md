@@ -6,6 +6,7 @@
 **Versión base histórica preservada:** `0.0.23-beta`
 **Fecha de cierre interno original:** 2026-08-18
 **Última revisión documental:** AUD.SEC2 R1 — 2026-08-25
+**Última revisión operativa:** mantenimiento post-G119 — 2026-08-31
 **Clasificación:** Seguridad / Privacidad / Terceros / Despliegue
 **Revisión jurídica externa:** Pendiente antes de la primera versión oficial o de un despliegue remoto
 
@@ -52,7 +53,7 @@ Decisión histórica de GOV.1.5/GOV.1.8:
 - riesgo aceptado temporalmente para desarrollo local;
 - mantener SRI, versión fija y CSP;
 - servir Bootstrap localmente sigue siendo la opción preferida antes de una distribución oficial amplia;
-- SEC.2/REL.1 deben reevaluar esta excepción antes de `1.0.0.0`.
+- SEC.2 cerró sin retirar esta dependencia; REV.1/REL.1 deben reevaluar la excepción antes de `1.0.0.0`.
 
 ### Infraestructura oficial CSS para fecha de referencia
 
@@ -90,9 +91,12 @@ GitHub se utiliza para:
 
 - repositorio;
 - Pull Requests;
-- GitHub Actions;
+- `Repository Quality Gate` y `Python Compatibility`;
+- `Dependency Security`, Visual & Accessibility y CodeQL como controles complementarios;
 - Dependabot;
 - auditoría de commits/tags.
+
+PR #117 completó la migración de automatización y retiró los workflows legacy después de migrar el ruleset. PR #118 coordinó Pydantic 2.13.5 con Pydantic Core 2.46.5 y actualizó `actions/dependency-review-action` a v5. Estos mantenimientos no cambian el flujo runtime de datos ni consumen G120/E01.
 
 GitHub **no forma parte del flujo runtime de la simulación**.
 
@@ -121,7 +125,7 @@ No se envía intencionalmente:
 - cuotas;
 - resultado previsional.
 
-Riesgo residual: disponibilidad y metadata ordinaria asociada a la carga del recurso documental. El estado de CI y gobernanza usa badges propios de GitHub Actions.
+Riesgo residual: disponibilidad y metadata ordinaria asociada a la carga del recurso documental. Los badges operativos vigentes corresponden al `Repository Quality Gate`, Dependency Security y Visual & Accessibility.
 
 ## 3. TLS
 

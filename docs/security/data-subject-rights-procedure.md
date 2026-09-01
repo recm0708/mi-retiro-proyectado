@@ -63,7 +63,7 @@ Al recibir una solicitud:
 Según la información publicada por ANTAI:
 
 | Derecho | Plazo máximo publicado |
-|---|---|
+| --- | --- |
 | Acceso | 10 días hábiles |
 | Rectificación | 5 días hábiles |
 | Cancelación | 10 días hábiles |

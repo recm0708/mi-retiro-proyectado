@@ -7,7 +7,6 @@
 **Actualización funcional vigente:** UX.4.6e R8 — procedencia editable — 2026-08-19
 **Clasificación:** Funcional / Auditoría
 
-
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado funcional vigente
 
@@ -553,7 +552,6 @@ La comparación debe reutilizar los motores existentes, conservar un escenario b
 
 **RF-114.** El foco de teclado sobre el control de selección de retiro debe reforzar visualmente la fila asociada y, cuando el sistema operativo active colores forzados, la selección debe respetar los colores de resaltado del sistema.
 
-
 ## 15. UX.4.3 — errores, foco y operación por teclado
 
 **RF-115.** Cuando la validación nativa de un control falle, el campo debe quedar marcado con `aria-invalid` y disponer de un mensaje programáticamente asociado mediante `aria-errormessage`, sin reemplazar la ayuda contextual o descriptiva ya existente.
@@ -584,7 +582,6 @@ La comparación debe reutilizar los motores existentes, conservar un escenario b
 
 **RF-127.** La edad anual es un dato derivado de presentación y no puede modificar salarios, cuotas, elegibilidad, fechas de retiro ni resultados de los motores previsionales.
 
-
 ## 17. UX.4.4 — detalle salarial del año actual
 
 **RF-128.** El Paso 3 debe permitir activar opcionalmente un detalle del año calendario actual sin obligar al Asegurado(a) a abandonar el historial anual existente.
@@ -605,7 +602,6 @@ La comparación debe reutilizar los motores existentes, conservar un escenario b
 
 **RF-136.** La interfaz debe enlazar a Mi Caja Digital para consulta manual y puede analizar una Ficha Digital PDF cuando exista texto estructurado reconocible. El análisis no debe aplicar datos hasta que el Asegurado(a) revise y confirme la vista previa.
 
-
 ## 18. UX.4.4 — referencia personal desde comprobante PDF
 
 **RF-137.** El Paso 1 debe permitir cargar opcionalmente un comprobante digital PDF de Mi Retiro Seguro sin convertirlo en requisito para completar una simulación.
@@ -622,7 +618,6 @@ La comparación debe reutilizar los motores existentes, conservar un escenario b
 
 **RF-143.** La interfaz debe explicar que el comprobante y la simulación actual pueden corresponder a fechas de corte o supuestos distintos y que una diferencia no implica por sí misma un error de cálculo.
 
-
 ## 19. Fuera del alcance inmediato
 
 Quedan para fases posteriores:
@@ -634,7 +629,6 @@ Quedan para fases posteriores:
 - reconstrucción completa de cuentas CAP/SUCGS desde movimientos mensuales oficiales;
 - auditoría integral WCAG 2.2 y pruebas asistidas con tecnologías de apoyo;
 - revisión visual cruzada de todos los temas en formularios y resultados extensos.
-
 
 ## 19. UX.4.4 — importación revisable de documentos oficiales
 
@@ -656,7 +650,6 @@ Quedan para fases posteriores:
 
 **RF-152.** Todo importe monetario editable en las vistas previas de importación debe mostrarse con separador de miles y exactamente dos decimales, reutilizando la normalización monetaria común de la aplicación.
 
-
 ## 20. UX.4.5 — origen acreditado y proyección al retiro
 
 **RF-123.** El Paso 6 debe poder evaluar la prestación en la fecha de retiro seleccionada usando únicamente salarios y cuotas ya acreditados, sin añadir períodos futuros.
@@ -670,7 +663,6 @@ Quedan para fases posteriores:
 **RF-127.** En Mixto y SUCGS, los saldos y parámetros específicos que no pueden proyectarse de forma fiable se mantendrán constantes entre ambas fotografías y se informará esta limitación.
 
 **RF-128.** La tabla comparativa debe disponer de caption accesible, encabezados programáticos de fila/columna y estado textual que no dependa únicamente del color.
-
 
 ## 21. Pre-beta — regresión E2E y hardening
 
@@ -690,7 +682,6 @@ Quedan para fases posteriores:
 
 **RF-160.** La vigilancia de dependencias debe distinguir paquetes directos de transitivos fijados, agrupar propuestas relacionadas cuando sea seguro y mantener revisión explícita sin auto-merge.
 
-
 ## 22. UX.4.6a — rediseño visual integral
 
 **RF-161.** La modernización visual debe ser transversal a Inicio, Simulación, Comparador y Fuentes sin modificar fórmulas, contratos previsionales, rutas ni datos persistidos.
@@ -708,7 +699,6 @@ Quedan para fases posteriores:
 **RF-167.** Botones, controles, cards, tablas, alertas, acordeones, wizard y superficies de páginas internas deben reutilizar tokens semánticos compatibles con Claro, Oscuro y Alto contraste.
 
 **RF-168.** El cierre inmediato de UX.4.6a requiere validación manual en PC/laptop y regresiones automatizadas en verde. La validación específica en móvil, tablet, macOS y pantallas grandes puede diferirse para beta/RC mientras se conserven las reglas responsive existentes y no exista una incidencia conocida.
-
 
 ## 23. UX.4.6b — Simular / Paso 1 · Datos personales
 
@@ -730,7 +720,6 @@ Quedan para fases posteriores:
 
 **RF-177.** En modalidad PDF no se puede continuar si faltan fecha de nacimiento, sexo o sistema previsional; la interfaz debe indicar que esos campos se completan mediante la revisión editable del documento.
 
-
 ### UX.4.6b Revisión 2 — privacidad, validación y consistencia transversal
 
 **RF-178.** Fecha de nacimiento, sexo y sistema previsional deben mostrar un indicador visual de campo obligatorio, acompañado de una alternativa textual accesible. Al intentar continuar con un requerido inválido, se conserva borde/estado de error, mensaje inline asociado y foco sobre el primer campo inválido.
@@ -749,13 +738,11 @@ Quedan para fases posteriores:
 
 **RF-185.** La vista pública de Fuentes debe incluir el marco de protección de datos aplicable al producto —Ley 81 de 2019, Decreto Ejecutivo 285 de 2021 y orientación oficial de ANTAI— y acceso a la política/condiciones de tratamiento vigentes.
 
-
 **RF-186.** La casilla de aceptación de términos debe permanecer deshabilitada hasta que el usuario alcance el final del documento visible. La aplicación no debe añadir un bloque **Fin de los términos** ni mostrar un mensaje **Lectura completada**; al cumplirse el requisito se habilita la casilla y desaparece la ayuda previa de desplazamiento.
 
 **RF-187.** Todos los pasos de Simular deben compartir dos barras visualmente simétricas y sincronizadas, con Inicio/Anterior, selector directo de paso, estado y acción primaria. En escritorio la superior puede mantenerse visible bajo el encabezado; la inferior permanece al final del contenido.
 
 **RF-188.** Los textos visibles de la aplicación deben estar vinculados a su finalidad previsional o a necesidades funcionales, legales, de privacidad, seguridad y accesibilidad. No deben presentar Mi Retiro Proyectado como aplicación educativa, didáctica o pedagógica ni exponer detalles internos que no ayuden al usuario a tomar una acción o comprender el alcance del producto.
-
 
 ## 24. UX.4.6c — Simular / Paso 2 · Cuotas
 
@@ -779,7 +766,6 @@ Quedan para fases posteriores:
 
 **RF-198.** El selector de apariencia debe representar Sistema, Claro, Oscuro y Alto contraste mediante iconografía SVG reconocible sin sustituir sus etiquetas textuales accesibles.
 
-
 **RF-199.** Desde cualquier paso que consuma datos importados, la acción de revisar la importación debe abrir la misma vista previa aunque el componente original se haya renderizado dentro de otro panel del wizard.
 
 **RF-200.** Las leyendas de obligatoriedad deben usar de forma uniforme `* Campo obligatorio`. Cuando una obligación dependa de otra respuesta, el asterisco y el atributo `required` se actualizarán dinámicamente sin cambiar la redacción general de la leyenda.
@@ -789,7 +775,6 @@ Quedan para fases posteriores:
 **RF-202.** Las ayudas contextuales deben mostrar únicamente el icono `i` en la interfaz, conservando un nombre accesible mediante `aria-label`.
 
 **RF-203.** Los estados de datos importados deben describirse en lenguaje neutral, por ejemplo “Dato completado desde la importación”, evitando mensajes técnicos como “protegido contra edición” o referencias innecesarias al mecanismo interno.
-
 
 **RF-204.** La vista previa de Mi Retiro Seguro debe estar agrupada por destino funcional y mostrar en los títulos el paso correspondiente: Datos personales e Información previsional básica en Paso 1, Cuotas acreditadas en Paso 2, Historial anual en Paso 3 y referencia de retiro/prestación en Pasos 5 y 6.
 
@@ -855,7 +840,6 @@ Quedan para fases posteriores:
 
 **RF-234.** En la vista previa de Mi Retiro Seguro, la casilla de inclusión en historial real debe quedar determinada por la clasificación del registro: `HISTORICO` marcado, cualquier otra clasificación no marcada; el usuario corrige la clasificación mediante **Editar campos**, no la casilla directamente.
 
-
 **RF-235.** Las filas que mezclen procedencia documental y captura manual deben usar una señal de origen basada en la paleta primaria, reservando verde para estados semánticos de éxito/completitud.
 
 **RF-236.** Toda casilla que represente un valor documental confirmado debe mostrarse marcada y bloqueada; su marca debe permanecer visible en Claro, Oscuro y Alto contraste.
@@ -865,7 +849,6 @@ Quedan para fases posteriores:
 **RF-238.** En el detalle salarial del año actual, todo mes importado desde Ficha Digital con salario/estado utilizable debe mostrar **Cuota acreditada** seleccionada y bloqueada. La marca debe seguir visible en Claro, Oscuro y Alto contraste incluso si el navegador atenúa controles deshabilitados.
 
 **RF-239.** La lectura del detalle y de la vista previa debe interpretar una casilla con procedencia documental bloqueada como seleccionada, aunque una sesión antigua no conserve el estado nativo `checked`. Los meses sin procedencia documental continúan bajo captura manual.
-
 
 ### UX.4.6d R6 — gestión de datos del asistente
 
@@ -937,8 +920,6 @@ Quedan para fases posteriores:
 
 **RF-270.** Una nueva tabla no debe introducir radios, bordes o paletas ad hoc si puede reutilizar `app-table-shell` y los tokens visuales del sistema.
 
-
-
 ### UX.4.6d — Revisión 11
 
 **RF-271.** Toda tabla con scroll interno y contrato `app-table-shell` debe mantener carril y thumb visualmente dentro de la geometría redondeada; en navegadores Chromium no deben aparecer botones/flechas que invadan las esquinas.
@@ -963,13 +944,11 @@ Quedan para fases posteriores:
 
 **RF-280.** Comparador y las tablas posteriores que usan el contrato común deben conservar `app-table-shell`; las reglas funcionales específicas solo se añaden cuando su semántica lo requiera.
 
-
 ### UX.4.6d — Revisión 13
 
 **RF-281.** Todo `input[type=file]` debe mantener el color, fondo y borde definidos por la paleta de la aplicación aunque el puntero esté sobre el nombre del archivo y el navegador active `:hover` sobre el control completo.
 
 **RF-282.** El comportamiento anterior debe conservarse en Claro, Oscuro y Alto contraste y en estados de foco; no debe depender de soporte específico para hover sobre `::file-selector-button`.
-
 
 ### UX.4.6d — Revisión 14
 
@@ -1005,7 +984,6 @@ Quedan para fases posteriores:
 
 **RF-296.** La reorganización de R16 no puede modificar parser, fórmulas, motores previsionales ni el significado de los datos importados/bloqueados.
 
-
 ### UX.4.6d — Revisión 17
 
 **RF-297.** Un checkbox documental bloqueado debe conservar su valor booleano real; solo un control `checked` puede mostrar el gancho de selección.
@@ -1038,7 +1016,6 @@ Quedan para fases posteriores:
 
 **RF-310.** Limpiar un paso debe eliminar también la metadata de procedencia/edición perteneciente a ese paso y a los posteriores que se invaliden.
 
-
 ### UX.4.6d — Revisión 19
 
 **RF-311.** Cuando el detalle del año actual esté habilitado, la fila anual del año vigente debe derivar automáticamente su número de cuotas de las casillas **Cuota acreditada** del detalle.
@@ -1053,7 +1030,6 @@ Quedan para fases posteriores:
 
 **RF-316.** Si una cuota marcada carece de salario, la sincronización anual no debe presentar un total parcial como válido; la fila debe continuar pendiente y el servicio mensual debe rechazar el análisis hasta completar el salario.
 
-
 ### UX.4.6d — Revisión 20
 
 **RF-317.** El importador de Ficha Digital debe evaluar el último período detectado frente al mes actual antes de abrir la vista previa.
@@ -1065,7 +1041,6 @@ Quedan para fases posteriores:
 **RF-320.** Una importación de Ficha Digital confirmada debe mostrar su último período detectado también después de F5; si deja de cumplir la ventana de vigencia, debe mostrarse una advertencia no destructiva sin volver a pedir el archivo.
 
 **RF-321.** El Paso 3 debe mostrar un resumen visible de `resumen_detalle_anio_actual` con cuotas identificadas, salarios disponible/acreditado, meses con información/completos, últimos períodos y promedios utilizados por las bases automáticas; el resumen debe ocultarse al invalidar el detalle.
-
 
 ### UX.4.6d — Revisión 21
 
@@ -1089,8 +1064,6 @@ Quedan para fases posteriores:
 
 **RF-331.** El resumen visible del detalle del año actual debe conservar las métricas necesarias para diferenciar salario disponible/acreditado, información completa/parcial y las bases automáticas soportadas.
 
-
-
 ### UX.4.6d — Revisión 23
 
 **RF-332.** Si una Ficha Digital confirmada identifica más cuotas acreditadas del año actual que Paso 2, la aplicación debe actualizar `cuotas_anio_actual` al nuevo conteo y recalcular `cuotas_totales` conservando las cuotas previas al año vigente.
@@ -1102,7 +1075,6 @@ Quedan para fases posteriores:
 **RF-335.** La reconciliación defensiva de **Analizar historial** debe reconocer tanto cuotas manuales confirmadas como cuotas documentales bloqueadas de una Ficha Digital cuando estas amplían la referencia del Paso 2.
 
 **RF-336.** Al sincronizar cuotas desde el detalle, `detalle_anio_actual.cuotas_anio_actual_referencia` debe actualizarse junto con Paso 2 para que F5/restauración no reintroduzca una referencia obsoleta.
-
 
 ### UX.4.6f — Revisión 1 · consistencia de procedencia, decisiones y adjuntos
 
@@ -1133,7 +1105,6 @@ Quedan para fases posteriores:
 **RF-349.** El flujo del Paso 3 debe registrar correctamente los listeners de acciones de revisión y no permitir que un error de inicialización de un control interrumpa la configuración de los controles posteriores; R1 no altera parsers, fórmulas previsionales, motores, normativa ni la política de no persistencia del PDF.
 
 **RF-350.** El cierre de R1 debe combinar regresiones automáticas con revisión manual de los estados afectados en tema Claro, Oscuro y Alto contraste, incluyendo procedencia, selección, avisos y procesamiento de adjuntos.
-
 
 ### UX.4.6f — Revisión 1.1 · bloqueo documental en vista principal
 

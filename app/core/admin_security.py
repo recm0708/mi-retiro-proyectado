@@ -1,4 +1,4 @@
-"""SEC.2 R3 - Seguridad administrativa centralizada."""
+"""Seguridad administrativa centralizada y auditable."""
 
 from __future__ import annotations
 

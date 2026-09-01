@@ -7,7 +7,6 @@
 **Fecha:** 2026-08-25
 **Clasificación:** Producto / Arquitectura / QA / Release
 
-
 <!-- NOR1-R7-CLOSURE:START -->
 ## Checkpoint de normalización previo a SEC.2
 
@@ -25,7 +24,6 @@ alcanza G119/E05.
 - UX.5 R1 queda reservado como G120/E01 antes de PERSIST.1.
 <!-- NOR1-R7-CLOSURE:END -->
 
-
 <!-- NOR2-R1-STATUS:START -->
 ## Registro histórico de NOR.2 R1
 
@@ -34,7 +32,6 @@ migraciones reales se ejecutarán en revisiones posteriores según una matriz de
 impacto. NOR.2 sigue siendo un checkpoint transversal y no agrega un bloque
 funcional al plan de 14 bloques.
 <!-- NOR2-R1-STATUS:END -->
-
 
 <!-- NOR2-R2-STATUS:START -->
 ## Registro histórico NOR.2 R2 — decisión de migración
@@ -46,7 +43,6 @@ validación, arquitectura, enlaces, imports y estado de fases.
 La historia se conserva mediante Git y archivo justificado; el árbol vigente no
 mantendrá copias sustituidas únicamente por compatibilidad documental.
 <!-- NOR2-R2-STATUS:END -->
-
 
 <!-- NOR2-R3-STATUS:START -->
 ## Registro histórico NOR.2 R3 — runtime/configuración
@@ -79,7 +75,6 @@ Las referencias históricas a bloques previos se conservan como trazabilidad, pe
 ## 1. Propósito
 
 > **Replanificación PLAN.2 R1:** aceptada como G114/E01. La secuencia futura detallada y evolutiva se mantiene en [Matriz maestra de pendientes hacia 1.0](pre-1-0-pending-matrix.md). El plan histórico de 14 bloques se preserva como trazabilidad, mientras la matriz incorpora los nuevos frentes Developer/UX, hardening posterior y congelación documental final sin preasignar Globales futuros.
-
 
 Este documento ordena el trabajo desde el cierre de `v0.0.25-beta` hasta la primera versión oficial de Mi Retiro Proyectado.
 
@@ -444,7 +439,6 @@ VER.2 no invalida ese cierre: corrige únicamente la granularidad y trazabilidad
 - R4.2 — PR #23/#24 preservan la integración y saneamiento final de PLAN.1 antes del tag `v0.0.26-beta`.
 - Después de su cierre se habilitó UX.4.6g.
 
-
 ## Registro histórico NOR.2 R4 — normalización documental viva
 
 La documentación vigente queda distribuida entre `architecture/`, `decisions/`, `governance/`, `operations/`, `product/`, `regulatory/`, `security/` y `standards/`. R5 archivará o retirará del árbol vivo los documentos históricos definidos por R2.
@@ -454,7 +448,6 @@ La documentación vigente queda distribuida entre `architecture/`, `decisions/`,
 NOR.2 R5 separa evidencia histórica de documentación viva mediante 36
 movimientos hacia `docs/archive/`. `VERSION` no cambiaba y SEC.2 permanecía pausado
 en ese checkpoint hasta completar NOR.2.
-
 
 <!-- NOR2-R6-LEDGER:START -->
 ## Registro histórico — actualización NOR.2 R6
@@ -479,7 +472,6 @@ R6 quedó integrado en `main` mediante PR #72 y commit squash `365ba5b`.
 R7 queda como revisión activa para resolver los artefactos locales heredados.
 R8 ejecutará el cierre integral de NOR.2 antes de reanudar SEC.2.
 <!-- NOR2-R6-LEDGER:END -->
-
 
 <!-- NOR2-R7-LOCAL-ARTIFACTS:START -->
 ## Actualización NOR.2 R7
@@ -522,7 +514,6 @@ Después de R7 solo queda **NOR.2 R8 — auditoría integral y cierre formal**.
 SEC.2 quedó cerrado tras completar sus controles planificados hasta completar R8.
 <!-- NOR2-R7-LOCAL-ARTIFACTS:END -->
 
-
 <!-- NOR2-R8-FINAL-AUDIT:START -->
 ## Registro histórico — actualización NOR.2 R8
 
@@ -545,7 +536,6 @@ R8 quedó integrado mediante PR #74 y commit squash `b4df9b7`. Con esa integraci
 
 En ese checkpoint, SEC.2 quedaba habilitado para reanudación y todavía no se había iniciado formalmente. El estado vigente posterior es su cierre R1–R6.
 <!-- NOR2-R8-FINAL-AUDIT:END -->
-
 
 **SEC.2 R6:** endurecimiento de sesión administrativa web y controles configurables de despliegue.
 

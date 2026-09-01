@@ -162,7 +162,6 @@ El parser selecciona el año más reciente del documento cuando no se le suminis
 
 Representa `fecha`, `confiable` y `fuente`.
 
-
 ### Estado frontend de procedencia y copia de trabajo
 
 Los resúmenes Pydantic de Mi Retiro Seguro y Ficha Digital describen lo detectado por el backend. El navegador puede añadir estado temporal para permitir ajustes posteriores a la confirmación sin reinterpretar el parser.
@@ -305,7 +304,6 @@ La procedencia no altera por sí sola una fórmula previsional.
 La versión acumulativa anterior se conserva en:
 
 `docs/archive/technical/data-model-pre-gov1-3-r2.md`
-
 
 ### UX.4.6f R1.1 — decisión explícita de disponibilidad del historial
 

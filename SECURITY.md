@@ -1,6 +1,5 @@
 # Política de seguridad
 
-
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado de seguridad post-MANT.1
 
@@ -28,7 +27,7 @@ el login humano usa cuentas Developer persistentes y no depende de
 Mi Retiro Proyectado se encuentra en **desarrollo beta**. Los estados históricos conservan la familia legacy `0.0.N-beta`; VER.2 adopta para candidatos y estados nuevos la familia revision-aware `0.GG.RR.EE-beta`. El repositorio de código es público, pero la aplicación no se declara todavía como versión oficial ni como despliegue de producción.
 
 | Línea | Soporte de seguridad |
-|---|---|
+| --- | --- |
 | `0.1.19.05-beta` | Beta vigente G119/E05 publicada para DEV.2 R6 mediante tag firmado `v0.1.19.05-beta`, workflow de verificación en `success` y GitHub Release prerelease |
 | `0.1.18.04-beta` | Beta previa G118/E04 publicada para DEV.2 R5 mediante tag firmado `v0.1.18.04-beta` y GitHub Release prerelease |
 | `0.1.17.02-beta` | Beta previa G117/E02 publicada; tag firmado y GitHub Release prerelease automatizado conforme a REL.GOV.1 R2 |

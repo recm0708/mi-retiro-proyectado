@@ -12,7 +12,7 @@ La licencia propietaria de Mi Retiro Proyectado **no relicencia** componentes de
 ## Dependencias directas Python
 
 | Componente | Versión | Licencia upstream documentada |
-|---|---:|---|
+| --- | ---: | --- |
 | FastAPI | 0.141.1 | MIT |
 | Jinja2 | 3.1.6 | BSD-3-Clause |
 | Pydantic | 2.13.5 | MIT |
@@ -23,7 +23,7 @@ La licencia propietaria de Mi Retiro Proyectado **no relicencia** componentes de
 ## Recurso frontend
 
 | Componente | Versión | Licencia upstream documentada |
-|---|---:|---|
+| --- | ---: | --- |
 | Bootstrap | 5.3.8 | MIT |
 
 ## Dependencias transitivas y artefactos

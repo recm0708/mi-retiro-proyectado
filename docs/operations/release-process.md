@@ -9,7 +9,6 @@
 **Revisión transversal:** REL.GOV.1 — gobierno de GitHub Releases — 2026-08-26
 **Clasificación:** Gobierno / Release / Auditoría
 
-
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado post-MANT.1
 
@@ -178,12 +177,10 @@ Abrir un Pull Request hacia `main` y confirmar:
 - ausencia de cambios no relacionados;
 - evidencia local requerida disponible.
 
-
 La migración de automatización post-G119 está cerrada. `Repository Quality
 Gate` y `Python Compatibility` constituyen los required checks del ruleset de
 `main`. `Dependency Security`, Visual/Accessibility y CodeQL complementan esos
 controles cuando resultan aplicables al alcance del cambio.
-
 
 La integración ordinaria se realiza mediante `Squash and merge`. El commit resultante en `main` debe cumplir los controles de firma/verificación exigidos por el ruleset.
 
@@ -427,7 +424,6 @@ comandos y un archivo de notas cuando la herramienta esté disponible.
 
 La matriz viva de trabajo pendiente está en
 `docs/governance/pre-1-0-pending-matrix.md`.
-
 
 ## Promoción G114/E01 — PLAN.2 R1
 
