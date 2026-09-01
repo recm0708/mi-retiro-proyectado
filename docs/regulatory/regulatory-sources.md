@@ -28,11 +28,16 @@ La CSS identifica el Texto Único como Ley 51 de 2005 con reformas aprobadas por
 ## 3. Prestaciones Económicas
 
 - Normativa de Prestaciones Económicas: <https://www.css.gob.pa/normativa-prestaciones-economicas/>
+- Reglamento para el Cálculo de Prestaciones Económicas — edición actualizada: <https://w3.css.gob.pa/wp-content/wdocs/Reglamento%20para%20el%20Ca%CC%81lculo%20de%20Prestaciones%20Econo%CC%81micas,%20actualizado.pdf>
 - Resolución 39,302-2007-J.D.: <https://w3.css.gob.pa/wp-content/wdocs/Resolucion%20%2039%2C302-2007-J.D..pdf>
 - Pensión por Vejez: <https://www.css.gob.pa/pension-por-vejez/>
 - Pensión por Vejez Anticipada: <https://www.css.gob.pa/pension-por-vejez-anticipada/>
 - Pensión por Vejez Proporcional: <https://www.css.gob.pa/pension-por-vejez-proporcional/>
 - Pensión Proporcional Anticipada: <https://www.css.gob.pa/pension-por-vejez-proporcional-anticipada/>
+- CSS Noticias — explicación y descarga del cuadro comparativo de pensiones: <https://prensa.css.gob.pa/2025/04/02/descarga-la-plantilla-y-calcula-tu-pension-explicacion-completa-por-el-director-general-dino-mon/>
+- Cuadro comparativo de pensiones — XLSX oficial: <https://prensa.css.gob.pa/wp-content/uploads/2025/03/Cuadro-comparativo-de-pensiones.xlsx>
+
+El cuadro comparativo es una **referencia técnica institucional**, no una norma jurídica. Se utiliza para contraste documental y no sustituye leyes, reglamentos, resoluciones ni Gacetas.
 
 ## 4. Subsistema Mixto
 
@@ -41,6 +46,7 @@ La CSS identifica el Texto Único como Ley 51 de 2005 con reformas aprobadas por
 - Resolución 41,055-2009-J.D.: <https://w3.css.gob.pa/wp-content/wdocs/RES%2041%2C055-2009-J.D..pdf>
 - Reglamento de Seguros Colectivos CAP: <https://www.css.gob.pa/wp-content/uploads/2023/10/REGLAMENTO-DE-SEGUROS-COLECTIVOS-DEL-COMPONENTE-DE-AHORRO-PERSONAL-DEL-SUBSISTEMA-MIXTO-actualizado.pdf>
 - Reglamento de Incorporación al CCCS: <https://www.css.gob.pa/wp-content/uploads/2025/07/REGLAMENTO-DE-INCORPORACION-AL-CCCS.pdf>
+- Resolución 57,805-2025-J.D.: <https://www.css.gob.pa/wp-content/uploads/2025/07/Resolucio%CC%81n-57805-2025-JD.pdf>
 
 ## 5. Fecha operativa de opción — 2026
 
@@ -103,6 +109,9 @@ Mi Caja Digital es un recurso de consulta individual, no una fuente normativa de
 
 Fuentes de referencia del bloque de privacidad:
 
+- Gaceta Oficial — Ley 81 de 2019: <https://www.gacetaoficial.gob.pa/pdfTemp/28743_A/72148.pdf>
+- ANTAI — Decreto Ejecutivo 285 de 2021: <https://antai.gob.pa/wp-content/uploads/2021/05/Reglamentacio%CC%81n-de-Ley-81-de-Proteccio%CC%81n-de-Datos-Personales.pdf>
+
 - ANTAI — Protección de Datos Personales: <https://antai.gob.pa/preguntas-frecuentes-proteccion-de-datos-personales/>
 - ANTAI — Preguntas frecuentes y plazos de derechos: <https://antai.gob.pa/preguntas-frecuentes-de-proteccion-de-datos-personales/>
 - ANTAI — Reglamentación Ley 81 / Decreto Ejecutivo 285: <https://antai.gob.pa/reglamentan-ley-81-de-proteccion-de-datos-personales/>
@@ -130,7 +139,13 @@ Cuando cambie una fuente, enlace, monto indexado, tabla o fecha operativa:
 4. conservar la referencia anterior cuando sea necesaria para reproducibilidad;
 5. diferenciar fuente jurídica de comunicación operativa.
 
-## 12. Historia
+## 12. Copias oficiales preservadas
+
+La colección local de preservación se documenta en [Fuentes oficiales preservadas](sources/official/README.md) y su inventario verificable está en `sources/official/manifest.json`.
+
+Estas copias permiten consulta offline, trazabilidad por SHA-256 y reproducción documental si una URL cambia o deja de estar disponible. No sustituyen la verificación de vigencia en el sitio oficial y todavía **no forman parte del runtime de la aplicación**.
+
+## 13. Historia
 
 Snapshot anterior:
 

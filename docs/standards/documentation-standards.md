@@ -174,7 +174,7 @@ auditoría histórica registre que esa ruta existió durante una migración.
 
 ## Auditoría automática
 
-La documentación Markdown versionada se valida mediante
+La documentación Markdown versionable —rastreada o nueva no ignorada por Git— se valida mediante
 `scripts/audit_markdown.py`. El auditor forma parte del gate local de
 pre-commit y también dispone de un workflow específico de GitHub Actions.
 

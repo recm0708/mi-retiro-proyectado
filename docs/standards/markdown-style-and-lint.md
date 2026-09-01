@@ -168,6 +168,22 @@ Una nueva excepción requiere una necesidad concreta, alcance mínimo y
 documentación de la razón. No se agregan excepciones únicamente para ocultar una
 advertencia.
 
+## Integración reproducible con Visual Studio Code
+
+El workspace versiona `.vscode/settings.json` para asociar correctamente archivos especiales cuyo contenido no es Markdown ni C/C++:
+
+- `VERSION` → texto plano;
+- `LICENSE` → texto plano;
+- `.github/CODEOWNERS` → texto plano.
+
+Estas asociaciones corrigen falsos positivos del editor sin desactivar validadores globales ni alterar el contenido de esos archivos.
+
+`.markdownlint-cli2.jsonc` conserva validación por JSON Schema, pero apunta a la copia local fijada en `.vscode/schemas/markdownlint-cli2-config-schema.json`. La colección local conserva los schemas de `markdownlint-cli2` `0.23.2` y `markdownlint` `0.41.1`, junto con sus licencias MIT y las URLs upstream.
+
+El schema local de `markdownlint-cli2` cambia únicamente su `$ref` interno al schema local de `markdownlint`; las reglas de lint no se modifican por esta decisión. La CLI continúa siendo la autoridad reproducible de validación y debe producir el mismo resultado con o sin acceso a Internet.
+
+No se usa `json.schemaDownload.enable = false` ni una exclusión global equivalente para esconder errores de configuración.
+
 ## Validación reproducible
 
 La comprobación manual de referencia es:

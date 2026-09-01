@@ -1,0 +1,7 @@
+{
+  "files.associations": {
+    "**/CODEOWNERS": "plaintext",
+    "LICENSE": "plaintext",
+    "VERSION": "plaintext"
+  }
+}

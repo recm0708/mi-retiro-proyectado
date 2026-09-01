@@ -61,6 +61,7 @@ No se renombran cuando el nombre pertenece al ecosistema:
 ```text
 .github/
 .githooks/
+.vscode/
 .venv/
 .pytest_cache/
 .git/
@@ -154,6 +155,25 @@ SUPPORT.md
 RELEASES.md
 VERSIONING.md
 THIRD_PARTY_NOTICES.md
+```
+
+## Fuentes oficiales preservadas
+
+Los PDF, XLSX y otros binarios oficiales preservados bajo `docs/regulatory/sources/official/` usan `kebab-case` y el patrón:
+
+```text
+<emisor>-[<año>-]<tipo>-<identificador>-<tema>.<ext>
+```
+
+El año se incluye solo cuando está confirmado. Los números de ley, resolución, Gaceta y demás identificadores oficiales se conservan cuando aportan trazabilidad. El nombre original servido por la URL se registra en el manifiesto y no obliga a reproducir espacios, tildes, mayúsculas o codificaciones problemáticas en la ruta local.
+
+Ejemplos:
+
+```text
+css-2025-ley-462.pdf
+css-2007-resolucion-39302-jd.pdf
+gaceta-oficial-2025-30314-resolucion-57805-jd.pdf
+css-2025-cuadro-comparativo-pensiones.xlsx
 ```
 
 ## Auditorías y evidencias

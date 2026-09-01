@@ -1,0 +1,28 @@
+Fuentes upstream de los schemas versionados para VS Code
+=========================================================
+
+markdownlint-cli2 config schema
+Version: v0.23.2
+URL: https://raw.githubusercontent.com/DavidAnson/markdownlint-cli2/v0.23.2/schema/markdownlint-cli2-config-schema.json
+SHA-256 upstream descargado: E275713149A0083ED905234FD307219C0EF5F0CA78B8ABDE4218972E580E1DB6
+Nota local: el $ref de markdownlint se cambia a ./markdownlint-config-schema.json
+para evitar dependencia de red durante la validación del editor.
+
+markdownlint config schema
+Version: v0.41.1
+URL: https://raw.githubusercontent.com/DavidAnson/markdownlint/v0.41.1/schema/markdownlint-config-schema.json
+SHA-256 upstream descargado: 500E390AAF7CDD3C2EA19ACC791F43D697E35A887EABECEB7791C2EFCAE9A1FA
+
+markdownlint-cli2 LICENSE
+URL: https://raw.githubusercontent.com/DavidAnson/markdownlint-cli2/v0.23.2/LICENSE
+SHA-256: 319FA64EFF9E8658EB8883857516B3D2C8439F3D042C6E5270734EB33B0749AA
+
+markdownlint LICENSE
+URL: https://raw.githubusercontent.com/DavidAnson/markdownlint/v0.41.1/LICENSE
+SHA-256: CDC3C1FB00EE139442C915E98AFAC039223569A00527E9F7AEFC54F92019AEC4
+
+Uso:
+- únicamente tooling/editor;
+- no forma parte del runtime;
+- ambos proyectos declaran licencia MIT;
+- las copias de LICENSE se conservan junto a los schemas.

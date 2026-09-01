@@ -633,7 +633,7 @@ python -m pip check
 
 ## 3. Inventario actual de pruebas
 
-Inventario vigente: **184 módulos**.
+Inventario vigente: **185 módulos**.
 
 - `tests/test_accessibility_themes.py`
 - `tests/test_accessibility_ux4.py`
@@ -694,6 +694,7 @@ Inventario vigente: **184 módulos**.
 - `tests/test_mant1_scripts_hooks_documentados.py`
 - `tests/test_mantenimiento_tecnico.py`
 - `tests/test_markdown_audit.py`
+- `tests/test_markdown_versionable_inventory.py`
 - `tests/test_mixto.py`
 - `tests/test_mixto_prestaciones_cap.py`
 - `tests/test_mixto_results.py`
@@ -1186,7 +1187,7 @@ Resultados documentales confirmados durante la revisión:
 
 Controles permanentes incorporados:
 
-- `scripts/audit_markdown.py`;
+- `scripts/audit_markdown.py`, que cubre Markdown rastreado y archivos nuevos no ignorados antes del staging;
 - integración del auditor en `scripts/validate_precommit.py`;
 - regresiones específicas en `tests/test_markdown_audit.py`;
 - documentación operativa en `scripts/README.md`;

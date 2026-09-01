@@ -13,6 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 EXPECTED_ROOT_DIRS = {
     ".githooks",
     ".github",
+    ".vscode",
     "app",
     "assets",
     "data",

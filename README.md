@@ -148,6 +148,7 @@ Documentos principales:
 - **[Cómo se calcula — contrato de transparencia](docs/product/calculation-guide.md)** — contrato de transparencia de la guía pública de cálculo;
 - **[Normativa](docs/regulatory/regulatory-framework.md)** — interpretación y aplicación normativa;
 - **[Fuentes normativas y enlaces oficiales](docs/regulatory/regulatory-sources.md)** — fuentes oficiales;
+- **[Archivo offline de fuentes oficiales](docs/regulatory/sources/official/README.md)** — copias preservadas con URL de origen y SHA-256;
 - **[Identidad visual de Mi Retiro Proyectado](docs/product/visual-identity.md)** — logo oficial, derivados, favicons y Social Preview;
 - **[Observabilidad y Developer Diagnostics](docs/operations/observability-and-logs.md)** — Developer Diagnostics, esquema y privacidad de logs;
 - **[Validación](docs/operations/validation.md)** — estrategia y evidencia de pruebas;
@@ -226,6 +227,8 @@ mi-retiro-proyectado/
 ├── .github/
 │   ├── ISSUE_TEMPLATE/
 │   └── workflows/
+├── .vscode/
+│   └── schemas/
 ├── app/
 │   ├── cli/
 │   ├── core/
@@ -263,6 +266,13 @@ mi-retiro-proyectado/
 │   ├── operations/
 │   ├── product/
 │   ├── regulatory/
+│   │   └── sources/
+│   │       └── official/
+│   │           ├── pensions/
+│   │           │   ├── normative/
+│   │           │   └── reference/
+│   │           └── privacy/
+│   │               └── normative/
 │   ├── security/
 │   ├── standards/
 │   └── templates/
@@ -298,6 +308,7 @@ mi-retiro-proyectado/
 | --- | --- |
 | `.githooks/` | Hooks Git versionados utilizados por el gate local, incluido el delegador `pre-commit`. |
 | `.github/` | Configuración específica de GitHub: workflows, plantillas de issues, CODEOWNERS, Dependabot, release configuration y claves públicas autorizadas. |
+| `.vscode/` | Configuración reproducible del workspace de VS Code y schemas locales fijados para validación de configuración sin depender de red. |
 | `app/cli/` | Comandos administrativos locales, incluida la CLI del Portal Developer. |
 | `app/core/` | Configuración, seguridad, sesiones, identidad Developer, observabilidad, dinero, normativa, versionado y utilidades transversales. |
 | `app/engines/` | Motores previsionales y reglas ejecutables de SEBD, Mixto, SUCGS y elegibilidad. |
