@@ -35,7 +35,7 @@ la beta pública y se aceptó descartar el estado local de pruebas existente.
 **Limpiar este paso** conserva los pasos anteriores y elimina/invalida el paso activo y sus dependencias posteriores.
 
 | Paso limpiado | Conserva | Elimina/invalida |
-|---|---|---|
+| --- | --- | --- |
 | 1 — Datos personales | privacidad/tema | Pasos 1–6 |
 | 2 — Cuotas | Paso 1 | Pasos 2–6 |
 | 3 — Historial | Pasos 1–2 | Pasos 3–6 |
@@ -135,7 +135,6 @@ Al recargar:
 - si `paso_actual` ya no cumple prerrequisitos, se corrige al último paso accesible;
 - resúmenes derivados pueden recalcularse silenciosamente cuando los datos de origen continúan completos.
 
-
 ## 8.1. Procedencia editable y referencias documentales
 
 Una importación confirmada no vuelve inmutable el dato para la simulación.
@@ -195,7 +194,6 @@ Una invalidación de datos de origen elimina ambas fotografías dependientes.
 La versión anterior se conserva en:
 
 `docs/archive/technical/simulation-data-management-pre-gov1-3-r2.md`
-
 
 ### Decisiones de historial en R1.1
 

@@ -3,11 +3,10 @@
 **Estado:** vigente
 **Versión de aplicación:** `0.1.19.05-beta` — G119/E05 aceptado/publicado para DEV.2 R6; G120/E01 reservado para UX.5 R1; ledger aceptado hasta G119
 **Último tag formal legacy:** `v0.0.26-beta`
-**Última actualización transversal:** DEV.2 R6 publicado como G119/E05; UX.5 R1 candidato G120/E01 — 2026-08-30
+**Última actualización transversal:** G119/E05 publicado; mantenimiento post-G119 PR #117/#118 cerrado; UX.5 R1 candidato G120/E01 — 2026-08-31
 **Cierres históricos preservados:** UX.4.6i / PR #34 — 841 pruebas; UX.4.6e R9 — `v0.0.25-beta`
 
 Este archivo es el punto de entrada para la documentación técnica, funcional, normativa, de privacidad, validación y auditoría de Mi Retiro Proyectado.
-
 
 ## Estado de normalización del repositorio
 
@@ -62,6 +61,7 @@ Evidencia:
 - **[DOC.1 R4 — saneamiento semántico de documentación viva post-G114](audits/documentation/documentation-live-state-doc1-r4.md)** — auditoría DOC.1 R4 de estado vivo posterior a la publicación formal de G114/E01.
 - **[Auditoría de normalización documental DOC.1 R5](audits/documentation/documentation-normalization-doc1-r5.md)** — normalización transversal, reconciliación post-G115, plantillas Markdown, endurecimiento del auditor y saneamiento de regresiones históricas.
 - **[Reconciliación integral de documentación post-G119](audits/documentation/post-g119-documentation-reconciliation.md)** — reconciliación semántica, normativa, estructural y de mantenimiento posterior a la publicación G119/E05.
+- **[Auditoría documental integral pre-UX.5](audits/documentation/pre-ux5-documentation-audit.md)** — cierre PREUX5.2 de reconciliación documental antes de UX.5, con G120/E01 preservado.
 - **[Reconstrucción del CHANGELOG histórico — DOC.2 R1](audits/documentation/changelog-reconstruction-doc2-r1.md)** — reconstrucción auditable DOC.2 R1 de 80 commits en 21 estados legacy.
 - **[Estándares del repositorio](standards/README.md)** — estándares canónicos del repositorio.
 - **[Ciclo de vida de artefactos](standards/artifact-lifecycle.md)** — reglas para crear, sustituir, archivar y eliminar artefactos.
@@ -71,6 +71,7 @@ Evidencia:
 - **[Estructura del repositorio](standards/repository-structure.md)** — árbol canónico y responsabilidades de las áreas versionadas.
 - **[Raíz y artefactos locales](standards/root-and-local-artifacts.md)** — política de raíz, evidencia temporal y directorios locales ignorados.
 - **[Plantillas del repositorio](templates/README.md)** — índice de plantillas técnicas por extensión y plantillas documentales por función.
+
 ## 1. Producto y alcance
 
 - **[Mi Retiro Proyectado](../README.md)** — presentación, alcance, instalación y estado general.
@@ -278,19 +279,23 @@ La metadata de versión de revisión de un documento de dominio puede conservar 
 - `doc1-r1-post-mant1-documentation-baseline.md`: línea base documental vigente para sincronizar README, roadmap, validación, versionado y demás documentos vivos post-MANT.1.
 - `doc1-r1-applicability-only-review.md`: revisión de documentos de soporte o política general marcados como actualizar solo si aplica; no requirieron cambios materiales.
 - `doc1-r1-markdown-documentation-closeout.md`: cierre formal de DOC.1 R1 con alcance revisado, evidencia generada, límites respetados y validación documental.
+
 ## VER.2 R1 — Reconciliación post-DOC.1
 
 - **[Auditoría de reconciliación VER.2 R1](archive/governance/ver2-r1-post-doc1-reconciliation-audit.md)**
 - **[Matriz de decisión VER.2 R1](archive/governance/ver2-r1-post-doc1-reconciliation-decision-matrix.md)**
 - **[Decisión operativa VER.2 R1](archive/governance/ver2-r1-post-doc1-operational-decision.md)**
+
 ## VER.2 R2 — Documentación viva post-R1
 
 - **[Análisis de contradicciones VER.2 R2](archive/governance/ver2-r2-post-r1-contradiction-analysis.md)**
 - **[Propuesta de corrección de documentación viva VER.2 R2](archive/governance/ver2-r2-live-documentation-correction-proposal.md)**
 - **[Cierre de documentación viva VER.2 R2](archive/governance/ver2-r2-post-r1-live-documentation-closeout.md)**
+
 ## VER.2 R3 — Decisión de versión candidata post-R2
 
 - **[Decisión de versión candidata VER.2 R3](archive/governance/ver2-r3-post-r2-candidate-version-decision.md)**
+
 ## VER.2 R4 — Promoción controlada G071/E01
 
 - **[Promoción controlada VER.2 R4 G071/E01](archive/governance/ver2-r4-g071-e01-promotion.md)**
@@ -298,7 +303,6 @@ La metadata de versión de revisión de un documento de dominio puede conservar 
 ## VER.2 R5 — Estabilización post-release
 
 - **[Estabilización post-release VER.2 R5](archive/governance/ver2-r5-post-release-stabilization.md)**
-
 
 **SEC.2 R6:** hardening de sesión administrativa web preparado para despliegue interno controlado.
 

@@ -1,4 +1,4 @@
-"""Servicios seguros para DEV.2 — Centro de desarrollo.
+"""Servicios seguros del Centro de desarrollo.
 
 El Centro de desarrollo expone metadata técnica, un visor acotado de eventos
 JSONL, una exportación controlada y un autodiagnóstico local de Developer
@@ -161,7 +161,7 @@ def _texto_seguro(valor: Any, *, maximo: int = _MAX_TEXTO_EVENTO) -> str:
 
 
 def _metadata_visible(metadata: Mapping[str, Any] | None) -> dict[str, Any]:
-    """Expone solo metadata operacional permitida para el visor DEV.2."""
+    """Expone solo metadata operacional permitida para el visor Developer."""
 
     if not metadata:
         return {}
@@ -301,7 +301,10 @@ def _diagnosticar_modo_desarrollo(activo: bool) -> ResultadoAutodiagnostico:
         componente="Modo desarrollador",
         estado="ADVERTENCIA",
         detalle=f"{ENV_DEV_MODE} no está activo; el diagnóstico solo muestra estado pasivo.",
-        accion="Activar MRP_DEV_MODE=1 únicamente cuando se necesite observar DEV.2.",
+        accion=(
+            "Activar MRP_DEV_MODE=1 únicamente cuando se necesite observar "
+            "Developer Diagnostics."
+        ),
     )
 
 
@@ -494,7 +497,7 @@ def _diagnosticar_visor(
 
 
 def _diagnosticar_privacidad() -> ResultadoAutodiagnostico:
-    """Declara las barreras de privacidad aplicadas por DEV.2."""
+    """Declara las barreras de privacidad aplicadas al diagnóstico Developer."""
 
     return _resultado_autodiagnostico(
         codigo="privacidad",
@@ -575,7 +578,7 @@ def _entorno_runtime_seguro() -> dict[str, str]:
 
 
 def construir_estado_centro_desarrollo() -> dict[str, Any]:
-    """Construye el estado seguro mostrado por la interfaz DEV.2."""
+    """Construye el estado seguro mostrado por la interfaz Developer."""
 
     activo = modo_desarrollo_activo()
     archivos = archivos_diagnostico_conocidos()
@@ -604,10 +607,8 @@ def construir_estado_centro_desarrollo() -> dict[str, Any]:
     )
 
     return {
-        "bloque": "DEV.2 R1",
-        "revision_actual": "DEV.2 R2",
-        "revision_autodiagnostico": "DEV.2 R3",
-        "revision_portal_observabilidad": "DEV.2 R6.4",
+        "componente": "developer_diagnostics",
+        "estado_portal": "Observabilidad local segura",
         "titulo": "Centro de desarrollo",
         "descripcion": (
             "Superficie interna para revisar el estado técnico de Developer Diagnostics "

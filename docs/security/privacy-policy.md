@@ -12,7 +12,6 @@
 **Última revisión documental:** AUD.SEC2 R1 — 2026-08-25
 **Revisión jurídica externa:** Pendiente antes de la primera versión oficial o de un despliegue remoto que cambie el tratamiento
 
-
 <!-- DOC1-R1-REVISION-MANUAL:START -->
 ## Nota de lectura vigente
 

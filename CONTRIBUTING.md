@@ -1,6 +1,5 @@
 # Guía de contribución
 
-
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado de contribución post-MANT.1
 
@@ -29,7 +28,6 @@ La creación o edición de tags/GitHub Releases se rige adicionalmente por `docs
 ## 1. Antes de comenzar
 
 Si un cambio requiere nombrar una fase, bloque o checkpoint, validar `docs/standards/work-block-identifiers.md` y ejecutar `python scripts/audit_block_identifiers.py` antes de proponer el identificador.
-
 
 Actualizar primero la rama predeterminada:
 

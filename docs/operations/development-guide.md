@@ -289,7 +289,6 @@ La guía acumulativa anterior se conserva en:
 
 `docs/archive/technical/development-guide-pre-gov1-3-r2.md`
 
-
 ### Regla R1.1 para datos documentales
 
 - En vistas principales, un valor presente en la referencia documental original debe renderizarse con `readonly`/`disabled` y semántica visual de campo bloqueado.
@@ -298,6 +297,7 @@ La guía acumulativa anterior se conserva en:
 - Reutilizar `aplicarBloqueoVistaPrincipalPorProcedencia` o el helper equivalente y excluir explícitamente los modales de revisión.
 - Mantener la misma franja de no edición y la misma iconografía de procedencia en Claro, Oscuro y Alto contraste.
 - Los selectores que representan una decisión del usuario no deben inferirse de la existencia de datos importados salvo contrato documental explícito y trazado.
+
 ### Campos de fecha
 
 Los nuevos controles `input[type=date]` no deben implementar validadores o anchos particulares salvo una necesidad funcional demostrada. `app/static/js/accessibility.js` aplica el contrato transversal de año de cuatro dígitos, calendario válido y límites técnicos por defecto; `app/static/css/accessibility.css` aplica la geometría compacta responsive. Si una superficie necesita un rango más estricto, debe declarar `min`/`max` en el propio control y la capa global lo conservará.

@@ -172,7 +172,7 @@ La aplicación no reconstruye un saldo solidario real a partir de datos insufici
 
 ## 12. Resultados integrados
 
-Los servicios `resultados_*.py` preparan una entrada coherente a cada motor usando el estado de Pasos 1–5.
+Los servicios `results.py`, `sebd_results.py`, `mixto_results.py` y `sucgs_results.py` preparan una entrada coherente a los motores correspondientes usando el estado de Pasos 1–5.
 
 Soportan dos modos:
 

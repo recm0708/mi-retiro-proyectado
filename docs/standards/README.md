@@ -34,6 +34,7 @@ Los estándares definidos aquí aplican a:
 - [Convenciones de nombres](naming-conventions.md) — reglas determinísticas de nombres.
 - [Estándares de archivos](file-standards.md) — requisitos mínimos por tipo de archivo.
 - [Estándares de documentación](documentation-standards.md) — documentación viva, histórica y referencias.
+- [Política de estilo y lint de Markdown](markdown-style-and-lint.md) — reglas de markdownlint, excepciones acotadas y prevención para documentación nueva.
 - [Ciclo de vida de archivos y componentes](artifact-lifecycle.md) — creación, sustitución, archivo y eliminación.
 - [Raíz y artefactos locales](root-and-local-artifacts.md) — raíz, evidencias y artefactos locales.
 - [Identificadores de bloques de trabajo](work-block-identifiers.md) — familias, bloques, revisiones y reglas de asignación.
@@ -55,16 +56,19 @@ definida por este estándar.
 
 ## Aplicación
 
-NOR.1 definió las reglas y quedó cerrado en R7.
+NOR.1 consolidó en R7 la definición inicial de las reglas y quedó cerrado
+definitivamente en R8/G112-E07 al incorporar el gobierno canónico de
+identificadores de bloques de trabajo.
 
 NOR.2 auditó y normalizó el repositorio existente contra estas reglas y quedó
 cerrado después de completar R1–R8. SEC.2 quedó cerrado después de R1–R6;
-AUD.SEC2 R1 aplica nuevamente estos estándares al saneamiento post-cierre.
+AUD.SEC2 R1 aplicó nuevamente estos estándares al saneamiento post-cierre.
 
-DOC.1 R2, ya cerrado, incorpora `scripts/audit_markdown.py` como control permanente para
-verificar automáticamente parte de estos estándares en el gate local y en
-GitHub Actions.
-
+DOC.1 R2, ya cerrado, incorporó `scripts/audit_markdown.py` como control
+permanente. En el estado vigente, su ejecución forma parte del
+`Repository Quality Gate`; `Python Compatibility` se conserva como required
+check independiente y la evidencia histórica del antiguo workflow Markdown no
+se reescribe.
 
 ## Estándares especializados consolidados en NOR.2 R4
 

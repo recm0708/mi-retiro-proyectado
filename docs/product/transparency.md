@@ -8,7 +8,6 @@
 **Revisión transversal vigente:** UX.4.6i — cierre de guía pública de cálculo — 2026-08-21
 **Clasificación:** Pública / Auditoría
 
-
 <!-- DOC1-R1-REVISION-MANUAL:START -->
 ## Nota de lectura post-MANT.1
 

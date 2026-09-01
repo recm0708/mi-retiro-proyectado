@@ -10,7 +10,6 @@
 
 **Estado R3:** integrado en `main` mediante PR #40.
 
-
 <!-- DOC1-R1-REVISION-MANUAL:START -->
 ## Nota de lectura post-MANT.1
 
@@ -463,7 +462,6 @@ python -m pytest tests\test_dev2_development_center.py tests\test_dev2_r1_cierre
 python -m pytest -q
 882 passed, 695 subtests passed
 ```
-
 
 ## SEC.2 R6 — Sesión administrativa web endurecida
 

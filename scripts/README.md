@@ -10,7 +10,7 @@ no calculan pensiones y no modifican normativa.
 ## Inventario
 
 | Archivo | Propósito | Modifica archivos del proyecto |
-|---|---|---|
+| --- | --- | --- |
 | `configure_git_hooks.ps1` | Configura `core.hooksPath=.githooks` para que Git use los hooks versionados del proyecto. | No |
 | `audit_markdown.py` | Audita la documentación Markdown versionada: formato, metadata, versión vigente, idioma, enlaces locales y stubs de compatibilidad. | No |
 | `audit_repository_integrity.py` | Contrasta el inventario Git/versionable con el árbol canónico y detecta referencias rotas, huérfanos, stubs y duplicados Markdown. | No |
@@ -59,7 +59,8 @@ Para validar un archivo de notas de Release:
 python scripts/release_contract.py --check-notes .\release-notes.md
 ```
 
-REL.GOV.1 R2 añade un manifiesto versionado de publicación. Durante preparación y diagnóstico puede validarse o renderizarse así:
+El manifiesto versionado de publicación puede validarse o renderizarse durante
+preparación y diagnóstico:
 
 ```powershell
 python scripts/release_publication.py --check-manifest
@@ -71,8 +72,8 @@ La segunda operación requiere que el tag anotado exista localmente, porque obti
 El mismo auditor forma parte del gate local, por lo que una infracción Markdown
 bloqueante impide crear el commit.
 
-<!-- AUTOMATION-POST-G119:START -->
-## Automatización post-G119
+<!-- AUTOMATION-CANONICAL:START -->
+## Automatización canónica
 
 La capa canónica de automatización está compuesta por:
 
@@ -103,7 +104,7 @@ npm audit --prefix scripts --audit-level=high
 
 Los scripts de auditoría validan y reportan. No crean commits, tags, Releases
 ni cambios de producto.
-<!-- AUTOMATION-POST-G119:END -->
+<!-- AUTOMATION-CANONICAL:END -->
 
 ## Contrato de mantenimiento
 
@@ -124,4 +125,5 @@ obligatorios del repositorio.
 
 ## `audit_block_identifiers.py`
 
-Valida `data/work-block-registry.json` y detecta identificadores de familias conocidas que no estén registrados por NOR.1 R8. No modifica archivos.
+Valida `data/work-block-registry.json` y detecta identificadores de familias
+conocidas que no estén registrados en el registro canónico. No modifica archivos.

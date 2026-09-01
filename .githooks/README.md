@@ -10,7 +10,7 @@ manuales dentro de `.git/hooks/`.
 ## Inventario
 
 | Hook | Momento de ejecución | Propósito |
-|---|---|---|
+| --- | --- | --- |
 | `pre-commit` | Antes de crear un commit | Delegar en `scripts/validate_precommit.py` el gate local del repositorio. |
 
 ## Activación

@@ -30,6 +30,7 @@ Pull Requests o bloques de trabajo pertenecen a la documentación del proyecto.
 Los archivos `template.png` y `template.ico` son activos binarios mínimos de
 referencia. No contienen encabezado textual; deben reemplazarse por el activo
 real y documentarse mediante nombre, ubicación y documentación asociada.
+
 ## Documentación Markdown
 
 `template.md` define la estructura técnica mínima de un archivo Markdown. Cuando el archivo sea documentación del proyecto, debe combinarse con la plantilla semántica apropiada de **[Plantillas documentales](../documentation/README.md)**.

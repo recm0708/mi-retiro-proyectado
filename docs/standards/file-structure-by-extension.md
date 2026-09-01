@@ -36,7 +36,7 @@ propósito, contrato, flujo, dependencias o riesgos técnicos permanentes.
 ## 2. Política por extensión
 
 | Extensión o tipo | Encabezado esperado | Comentarios internos | Observaciones |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | `.md` | H1 único y descriptivo; metadata en negrita cuando aplique. | H2/H3 según la función documental; listas, tablas y bloques de código solo cuando aporten estructura real. | Contenido en español; enlaces a documentos con título humano; historia/auditorías se preservan; aplica `documentation-standards.md` y las plantillas documentales. |
 | `.py` | Docstring de módulo con propósito permanente. | Docstrings en funciones/clases públicas y comentarios antes de lógica no obvia. | No usar encabezados de revisión en módulos operativos. |
 | `.js` | `"use strict";` cuando aplique y bloque inicial con `Mi Retiro Proyectado —`, `Propósito` y `Alcance`. | Secciones para storage, eventos, API, renderizado e invalidación. | JavaScript no replica fórmulas previsionales. |

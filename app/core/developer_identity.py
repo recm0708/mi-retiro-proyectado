@@ -1,4 +1,4 @@
-"""DEV.2 R6 — Identidad y autorización del Portal Developer."""
+"""Identidad, credenciales, roles y autorización del Portal Developer."""
 
 from __future__ import annotations
 

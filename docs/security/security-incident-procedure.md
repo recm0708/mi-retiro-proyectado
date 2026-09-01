@@ -190,7 +190,7 @@ En un comunicado de 2022, ANTAI solicitó a una empresa un informe en 72 horas d
 Estos objetivos son metas internas, **no plazos legales**:
 
 | Hito | Objetivo interno |
-|---|---|
+| --- | --- |
 | Clasificar evento inicial | Lo antes posible tras detección |
 | Contener una exposición activa SEV-1 | Inmediato |
 | Abrir registro mínimo | Durante la respuesta inicial |

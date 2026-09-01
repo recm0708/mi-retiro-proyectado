@@ -43,7 +43,7 @@ pruebas.
 ## 3. Resultado por archivo — 140/140
 
 | # | Archivo | Clasificación base | Decisión |
-|---:|---|---|---|
+| ---: | --- | --- | --- |
 | 1 | `.githooks/README.md` | SOPORTE | SIN CAMBIO — soporte operativo sin contrato afectado por SEC.2. |
 | 2 | `.github/pull_request_template.md` | SOPORTE | SIN CAMBIO — soporte operativo sin contrato afectado por SEC.2. |
 | 3 | `CHANGELOG.md` | VIVO | ACTUALIZAR — estado vigente, seguridad, versionado o trazabilidad materialmente afectados por SEC.2/AUD.SEC2. |

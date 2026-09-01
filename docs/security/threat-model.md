@@ -6,6 +6,7 @@
 **Versión base histórica preservada:** `0.0.23-beta`
 **Fecha de cierre original:** 2026-08-17
 **Última revisión documental:** AUD.SEC2 R1 — 2026-08-25
+**Última revisión operativa:** mantenimiento post-G119 — 2026-08-31
 **Clasificación:** Seguridad / Privacidad / Riesgo
 **Revisión externa:** Pendiente antes de la primera versión oficial o de cualquier despliegue remoto que cambie el modelo de riesgo
 
@@ -70,7 +71,7 @@ Poder reconstruir decisiones técnicas y fallos sin crear una segunda base de da
 ## 3. Activos
 
 | Activo | Sensibilidad | Ubicación/vida actual | Objetivo principal |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | Datos de identidad opcionales | Alta | Estado temporal del navegador / request en memoria | Confidencialidad |
 | Fecha de nacimiento, sexo, ingreso CSS | Alta | Estado temporal / modelos de request | Confidencialidad e integridad |
 | Cuotas e historial salarial | Alta | Estado temporal / request en memoria | Confidencialidad e integridad |
@@ -162,9 +163,12 @@ Controles actuales:
 - commits/tags gobernados por firma;
 - rulesets;
 - PR obligatorio;
-- CI requerida;
+- `Repository Quality Gate` y `Python Compatibility` como required checks canónicos;
+- `Dependency Security` para dependencias y referencias de Actions;
 - Dependabot sin auto-merge;
 - versiones Python fijadas en `requirements.txt`.
+
+PR #117 completó la migración de automatización y retiró los workflows legacy después de migrar el ruleset. PR #118 coordinó Pydantic/Pydantic Core y actualizó `actions/dependency-review-action` a v5 sin consumir G120/E01.
 
 ### F7 — Portal Developer ↔ almacén administrativo local
 
@@ -192,13 +196,13 @@ provisionamiento o recuperación.
 ## 5. Matriz de amenazas
 
 | ID | Amenaza | Superficie | Impacto | Probabilidad actual | Riesgo | Controles existentes | Riesgo residual / acción |
-|---|---|---|---|---|---|---|---|
+| --- | --- | --- | --- | --- | --- | --- | --- |
 | T-01 | PDF malformado o deliberadamente hostil | Parser/importación | Alto | Media | Alto | límites de tamaño/páginas/texto, firma PDF, pypdf actualizado, pruebas | mantener revisión explícita de parser y dependencias |
 | T-02 | Divulgación de datos por logging | Developer Diagnostics | Alto | Baja con modo apagado | Medio | `MRP_DEV_MODE=1`, sanitización, no bodies, no mensajes de excepción | revisar esquema cada vez que se añada metadata |
 | T-03 | Exposición accidental al ejecutar fuera de localhost | Servidor ASGI | Alto | Baja en uso actual | Medio | diseño local documentado | cualquier bind público exige TLS, autenticación/controles y nuevo threat model |
 | T-04 | XSS o inyección en contenido renderizado | Navegador/plantillas | Alto | Baja/Media | Medio | Jinja2, CSP, validación, sin HTML dinámico arbitrario previsto | revisar cambios que introduzcan HTML no confiable |
-| T-05 | Dependencia/CDN comprometida o indisponible | Bootstrap/jsDelivr | Medio/Alto | Baja | Medio | SRI + CSP | servir recursos críticos localmente antes de `1.0.0.0`, salvo excepción revisada en SEC.2/REL.1 |
-| T-06 | Alteración de normativa/código | Repositorio | Alto | Baja | Medio | firma, rulesets, PR, CI, historial | mantener revisión humana de cambios normativos |
+| T-05 | Dependencia/CDN comprometida o indisponible | Bootstrap/jsDelivr | Medio/Alto | Baja | Medio | SRI + CSP | servir recursos críticos localmente antes de `1.0.0.0`, salvo excepción revalidada en REV.1/REL.1; SEC.2 cerró sin retirar esta dependencia |
+| T-06 | Alteración de normativa/código | Repositorio | Alto | Baja | Medio | firma, rulesets, PR, required checks canónicos, historial | mantener revisión humana de cambios normativos |
 | T-07 | Robo/lectura del estado del navegador por software local o extensión | Web Storage | Alto | Dependiente del equipo | Medio | `sessionStorage`, minimización, limpieza | el proyecto no controla un equipo ya comprometido |
 | T-08 | Fuga de PDF por persistencia accidental | Importador | Alto | Baja | Medio | procesamiento en memoria; no persistencia del binario | reevaluar si se añade persistencia/exportación |
 | T-09 | Fuente CSS caída, inconsistente o manipulada | Fecha externa | Medio | Media | Medio | HTTPS, comparación de respuestas, estado no confiable | no declarar vigencia cuando la referencia no es confiable |
@@ -207,7 +211,7 @@ provisionamiento o recuperación.
 | T-12 | Clickjacking | UI | Medio | Baja | Bajo | `X-Frame-Options: DENY`, CSP `frame-ancestors 'none'` | mantener regresiones |
 | T-13 | Exposición mediante caché HTTP | API de simulación | Alto | Baja | Bajo/Medio | `Cache-Control: no-store` | revisar nuevas rutas sensibles |
 | T-14 | Manipulación de resultados en JavaScript | Presentación | Alto | Baja | Medio | fórmulas principales solo en Python, motores separados | no duplicar fórmulas de dominio en frontend |
-| T-15 | Dependencia vulnerable o actualización incompatible | Python/Actions | Alto | Media | Medio | pins, `pip check`, CI, Dependabot, revisión controlada | evaluación explícita de actualizaciones mayores |
+| T-15 | Dependencia vulnerable o actualización incompatible | Python/Actions | Alto | Media | Medio | pins, `pip check`, `Repository Quality Gate`, `Dependency Security`, Dependabot, revisión controlada | evaluación explícita de actualizaciones mayores |
 
 ## 6. Amenazas fuera del control directo del producto
 
@@ -265,7 +269,7 @@ La consulta no transporta datos de la simulación.
 
 ### GitHub
 
-GitHub aloja código y ejecuta CI/Dependabot. No forma parte del flujo de datos de simulación del usuario final.
+GitHub aloja código y ejecuta `Repository Quality Gate`, `Python Compatibility`, `Dependency Security`, controles complementarios y Dependabot. No forma parte del flujo de datos de simulación del usuario final.
 
 ## 9. Privacidad por diseño
 

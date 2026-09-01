@@ -53,7 +53,7 @@ La evidencia manual confirmó **20/20 topics** configurados. La interfaz de GitH
 Las labels clasifican Issues y Pull Requests; no se asignan a commits. Los commits se identifican mediante mensaje, firma, checks, PR asociado y tags cuando corresponda. La taxonomía vigente contiene **21 labels**.
 
 | Label | Color | Uso |
-|---|---|---|
+| --- | --- | --- |
 | `bug` | `d73a4a` | Error o regresión reproducible |
 | `enhancement` | `a2eeef` | Mejora o nueva capacidad |
 | `question` | `d876e3` | Consulta o soporte |

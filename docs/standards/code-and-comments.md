@@ -7,7 +7,6 @@
 **Revisión de mantenimiento:** MANT.1 R5E — estandarización de nombres de carpetas — 2026-08-23
 **Clasificación:** Técnica / Mantenibilidad
 
-
 <!-- DOC1-R1-REVISION-MANUAL:START -->
 ## Nota de lectura post-MANT.1
 
@@ -103,7 +102,6 @@ de la revisión, el PR que los agregó ni la historia del bloque.
 En servicios de cálculo o integración no se comentan líneas evidentes. Se comenta
 la razón por la que una rama evita mutación, por qué se omite una fecha, por qué
 se conserva una advertencia o por qué una fuente se consulta en una capa concreta.
-
 
 Todo módulo de aplicación debe comenzar con un docstring que describa su
 responsabilidad. Clases, servicios y funciones del runtime deben tener un docstring breve cuando
@@ -239,7 +237,6 @@ encabezado breve cuando ese encabezado documenta propósito, alcance y límites
 operativos. En workflows no debe alterar `on`, `permissions`, `concurrency`,
 `jobs`, matriz, actions ni comandos; en Issue Forms no debe cambiar `labels`,
 campos requeridos, opciones ni advertencias de privacidad.
-
 
 ## 9.1. Scripts, hooks y automatización local
 

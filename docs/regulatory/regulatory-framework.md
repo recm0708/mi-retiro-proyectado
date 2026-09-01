@@ -30,9 +30,9 @@ El proyecto utiliza como referencia consolidada el **Texto Único de la Ley 51 d
 
 Fuentes oficiales:
 
-- CSS: https://www.css.gob.pa/normativas-ley-organica/
-- Texto Único PDF: https://www.css.gob.pa/wp-content/uploads/2025/05/TEXTO-UNICO-DE-LA-LEY-51-DE-2005-CSS-GACETA-OFICIAL-22-5-25.pdf
-- Gaceta Oficial: https://www.gacetaoficial.gob.pa/pdfTemp/30284_B/GacetaNo_30284b_20250522.pdf
+- CSS: <https://www.css.gob.pa/normativas-ley-organica/>
+- Texto Único PDF: <https://www.css.gob.pa/wp-content/uploads/2025/05/TEXTO-UNICO-DE-LA-LEY-51-DE-2005-CSS-GACETA-OFICIAL-22-5-25.pdf>
+- Gaceta Oficial: <https://www.gacetaoficial.gob.pa/pdfTemp/30284_B/GacetaNo_30284b_20250522.pdf>
 
 **Metadata de la fuente base:** `fecha_gaceta = 2025-05-22`.
 
@@ -41,7 +41,7 @@ Fuentes oficiales:
 ## 3. Contrato de versionado normativo
 
 | Archivo | Alcance |
-|---|---|
+| --- | --- |
 | `regulations/general-parameters.json` | Edades de referencia y metadatos generales. |
 | `regulations/sebd.json` | SEBD, anticipación, mínimos/máximos e indemnización. |
 | `regulations/mixto.json` | BD, CAP, transición y fuentes del Mixto. |
@@ -122,11 +122,11 @@ la fuente jurídica vigente que explique, modifique o sustituya esa diferencia.
 
 Fuentes:
 
-- https://www.gacetaoficial.gob.pa/storage/gacetas/2025/07/30314/GacetaNo_30314_20250703.pdf
-- https://prensa.css.gob.pa/2026/07/10/css-intensifica-jornadas-de-capacitacion-sobre-mi-retiro-seguro-ante-la-fecha-clave-del-18-de-agosto/
-- https://prensa.css.gob.pa/2026/07/13/cuenta-regresiva-hacia-el-18-de-agosto-asegurados-deben-decidir-su-futuro-pensional/
-- https://prensa.css.gob.pa/2026/08/15/css-extendera-atencion-este-domingo-para-orientar-a-los-asegurados-sobre-mi-retiro-seguro/
-- https://prensa.css.gob.pa/2026/08/18/css-realiza-capacitaciones-sobre-pensiones-con-jornada-en-el-organo-judicial/
+- <https://www.gacetaoficial.gob.pa/storage/gacetas/2025/07/30314/GacetaNo_30314_20250703.pdf>
+- <https://prensa.css.gob.pa/2026/07/10/css-intensifica-jornadas-de-capacitacion-sobre-mi-retiro-seguro-ante-la-fecha-clave-del-18-de-agosto/>
+- <https://prensa.css.gob.pa/2026/07/13/cuenta-regresiva-hacia-el-18-de-agosto-asegurados-deben-decidir-su-futuro-pensional/>
+- <https://prensa.css.gob.pa/2026/08/15/css-extendera-atencion-este-domingo-para-orientar-a-los-asegurados-sobre-mi-retiro-seguro/>
+- <https://prensa.css.gob.pa/2026/08/18/css-realiza-capacitaciones-sobre-pensiones-con-jornada-en-el-organo-judicial/>
 
 Última verificación documental: **2026-08-30**.
 

@@ -30,7 +30,7 @@ seguridad adicional a R1–R6.
 ## 3. Matriz del alcance maestro SEC.2
 
 | Área del plan | Estado al cierre | Evidencia / decisión |
-|---|---|---|
+| --- | --- | --- |
 | Autenticación y sesiones administrativas | Implementado | `app/core/admin_security.py`, `app/core/admin_session.py`, `/dev/login` |
 | Gestión de secretos | Implementado | `MRP_ADMIN_SECRET`; compatibilidad `MRP_ADMIN_TOKEN`; ningún secreto fijo en Git |
 | Kill switch administrativo | Corregido post-cierre | `MRP_ADMIN_ENABLED=1` requerido para login y reutilización de sesión; regresión AUD.SEC2 R1 |
@@ -98,7 +98,6 @@ sustituye REV.1 ni REL.1.
 La reconciliación revision-aware sitúa el snapshot de cierre `4bd7d8d` en G108.
 G109/E01 (`0.1.09.01-beta`) queda reservado para AUD.SEC2 R1 y solo será aceptado
 después de gate, commit firmado, PR/CI e integración.
-
 
 ## Addendum de aceptación AUD.SEC2 R1
 

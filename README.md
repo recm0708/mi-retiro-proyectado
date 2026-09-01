@@ -58,7 +58,6 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
   nuevas superficies UX/persistencia.
 - **Primera versión oficial objetivo:** `1.0.0.0` con `Build 000001`.
 
-
 La visibilidad pública del repositorio **no convierte una beta de desarrollo en versión oficial, no constituye un despliegue de producción y no modifica por sí sola la licencia vigente**.
 
 La versión se obtiene exclusivamente del archivo [`VERSION`](VERSION). La política completa se documenta en [Política de versionado](VERSIONING.md). VER.2 publicó `v0.0.71.01-beta` bajo la denominación original G071/E01; la reconciliación posterior sitúa ese estado en G087/E01 sin alterar el tag, y su evidencia histórica quedó preservada por NOR.2. Los estándares vigentes del repositorio están en [Estándares del repositorio](docs/standards) y el cierre de la normalización se documenta en [Auditorías de normalización del repositorio](docs/audits/repository).
@@ -86,6 +85,13 @@ demostrar equivalencia remota y migrar el ruleset sin perder protección.
 
 Esta automatización corresponde a mantenimiento post-G119 y no consume
 G120/E01.
+
+El cierre operativo de la migración se integró mediante PR #117, que retiró
+los workflows legacy después de migrar el ruleset sin pérdida de protección.
+El mantenimiento coordinado PR #118 actualizó Pydantic/Pydantic Core,
+`actions/dependency-review-action` y la configuración de Dependabot con sus
+regresiones y documentación correspondientes. Ambos cambios son mantenimiento
+posterior a G119/E05 y no consumen G120/E01.
 <!-- AUTOMATION-POST-G119:END -->
 
 ## Capacidades implementadas
@@ -172,7 +178,7 @@ Documentos principales:
 - **[Código de conducta](CODE_OF_CONDUCT.md)** — reglas de participación y convivencia;
 - **[Soporte](SUPPORT.md)** — rutas de soporte y reporte.
 
-La documentación vigente debe apuntar únicamente a rutas canónicas actuales. Las fases cerradas se preservan mediante Git y, cuando conservan valor documental independiente, bajo `docs/archive/`; NOR.2 no mantendrá stubs permanentes de rutas antiguas solo por compatibilidad documental.
+La documentación vigente debe apuntar únicamente a rutas canónicas actuales. Las fases cerradas se preservan mediante Git y, cuando conservan valor documental independiente, bajo `docs/archive/`; NOR.2 no mantiene stubs permanentes de rutas antiguas solo por compatibilidad documental.
 
 ## Versiones e historia
 
@@ -269,6 +275,7 @@ mi-retiro-proyectado/
 ├── .editorconfig
 ├── .gitattributes
 ├── .gitignore
+├── .markdownlint-cli2.jsonc
 ├── CHANGELOG.md
 ├── CODE_OF_CONDUCT.md
 ├── CONTRIBUTING.md
@@ -459,14 +466,13 @@ Las dependencias y materiales de terceros conservan sus propias licencias y dere
 
 ## Responsable del proyecto
 
-**Rubén Enrique Cañizares Miranda — Panamá**
+**Responsable:** Rubén Enrique Cañizares Miranda — Panamá
 
 El proyecto mantiene una identidad independiente de la Caja de Seguro Social de Panamá.
 
 ## Anclas históricas preservadas por pruebas de regresión
 
 Las siguientes líneas se conservan como compatibilidad histórica de pruebas anteriores. No reemplazan el estado vigente declarado en la sección **Estado del proyecto**.
-
 
 - **DOC.1 R1:** cerrado — auditoría Markdown post-MANT.1 preservada como hito histórico.
 - **DOC.1 R2:** cerrado — auditoría integral Markdown post-NOR.2 preservada como hito histórico.
@@ -518,7 +524,6 @@ Estas referencias conservan evidencia de regresiones históricas sin cambiar el 
 - **PLAN.1:** cerrado en `0.0.26-beta`; PR #23 y PR #24 preservan el cierre legacy antes de la reconciliación revision-aware.
 - `0.1.0-beta.1` se conserva como referencia histórica previa a PLAN.1; VER.2 no la reactiva como familia vigente.
 - Badge histórico preservado: `img.shields.io/badge/versi%C3%B3n-0.0.26--beta`.
-
 
 ## Developer Diagnostics y acceso al portal de desarrollo
 

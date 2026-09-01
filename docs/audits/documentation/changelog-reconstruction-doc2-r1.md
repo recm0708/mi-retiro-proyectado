@@ -31,7 +31,7 @@ La clasificación no cambia el significado histórico del commit. Los mensajes a
 ## Matriz de control
 
 | Versión | Fecha | Rango Git | Commits | Hito |
-|---|---|---|---:|---|
+| --- | --- | --- | ---: | --- |
 | `0.0.1-beta` | 2026-08-10 | `a0a9e09` → `13ce028` | 6 | Base técnica, FastAPI, primera interfaz, asistente, cuotas, salario y documentación inicial. |
 | `0.0.2-beta` | 2026-08-11 | `ae45943` → `eafe54d` | 3 | Historial salarial, proyección y línea temporal. |
 | `0.0.3-beta` | 2026-08-11 | `a7e1ed4` → `78e5188` | 4 | Retiro, precisión monetaria, pruebas y protección de datos de validación. |

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Audita identificadores de bloques contra el registro canónico NOR.1 R8."""
+"""Audita identificadores de bloques contra el registro canónico del proyecto."""
 
 from __future__ import annotations
 

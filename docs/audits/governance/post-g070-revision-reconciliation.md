@@ -46,7 +46,7 @@ firmado, PR/CI e integración.
 ## 3. Estados aceptados reconstruidos
 
 | Global | Bloque | Estado aceptado | Evidencia resumida |
-|---:|---|---|---|
+| ---: | --- | --- | --- |
 | G071 | DEV.2 | R1 — Centro de desarrollo y estado interno | commit 06e2821 / PR #37; apertura funcional DEV.2 |
 | G072 | DEV.2 | R2 — visor diagnóstico seguro | commit 5451d18 / PR #39; visor y exportación diagnóstica |
 | G073 | DEV.2 | R3 — autodiagnóstico técnico local | commit 9fb86af / PR #40; autodiagnóstico y regresiones |
@@ -89,7 +89,7 @@ firmado, PR/CI e integración.
 ## 4. Estados revisados que no consumen Global
 
 | Estado | Motivo de exclusión |
-|---|---|
+| --- | --- |
 | DEV.2 R1 cierre documental | Sincroniza el R1 ya contabilizado. |
 | DEV.2 R4 cierre formal | Checkpoint que agrupa R1–R3 sin nueva capacidad. |
 | MANT.1 R1 | Auditoría inicial absorbida por la primera revisión aplicada R2. |
@@ -121,7 +121,6 @@ La reconstrucción usa:
 
 No se cuenta un estado solo porque exista un commit. Tampoco se inventa una
 revisión ausente para rellenar numeración de fase.
-
 
 ## 7. Addendum post-merge G109
 

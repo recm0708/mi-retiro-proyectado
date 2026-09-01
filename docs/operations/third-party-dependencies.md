@@ -16,7 +16,7 @@ Este inventario distingue dependencias directas, snapshot transitivo, recursos e
 Las versiones corresponden al `requirements.txt` vigente. La estructura documental se originó en GOV.1.3 R4 y se mantiene actualizada durante la etapa beta.
 
 | Dependencia | Versión | Finalidad en el proyecto | Licencia upstream verificada | Conexión/datos en el uso actual | Riesgo/revisión |
-|---|---:|---|---|---|---|
+| --- | ---: | --- | --- | --- | --- |
 | FastAPI | 0.141.1 | API local, rutas y middleware | MIT | Atiende solicitudes de la aplicación; no añade por sí sola un envío externo | Revisar cambios de framework/Starlette |
 | Jinja2 | 3.1.6 | Plantillas HTML | BSD-3-Clause | Render local del servidor | Revisar autoescape/plantillas |
 | Pydantic | 2.13.5 | Validación/modelos | MIT | Validación local de estructuras | Revisar cambios de esquema/core |

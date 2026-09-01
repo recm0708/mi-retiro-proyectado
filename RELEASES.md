@@ -5,7 +5,6 @@
 **Revisión de planificación hacia 1.0:** 2026-08-20
 **Reconciliación revision-aware:** 2026-08-22
 
-
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Promoción G119/E05 — DEV.2 R6
 
@@ -134,14 +133,30 @@ Después de `v0.0.26-beta`, el repositorio integró trabajo funcional, técnico,
 
 Estado vigente:
 
-- Último tag formal publicado: `v0.1.18.04-beta` (G118/E04), firmado, verificado y asociado al GitHub Release prerelease ID `378842155` automatizado por REL.GOV.1 R2.
+- Último tag formal publicado: `v0.1.19.05-beta` (G119/E05), firmado,
+  verificado y asociado al GitHub Release prerelease ID `379454328`.
+  `v0.1.18.04-beta` permanece preservado como publicación anterior.
 - Último tag formal legacy: `v0.0.26-beta`.
-- Versión canónica en `VERSION`: `0.1.18.04-beta` (G118/E04).
+- Versión canónica en `VERSION`: `0.1.19.05-beta` (G119/E05).
 - `v0.0.71.01-beta` conserva su denominación histórica original y se reconcilia como G087/E01 sin alterar el tag.
 - MANT.1, NOR.1 R8, NOR.2, DOC.1 R1–R5 y PLAN.2 R1 están cerrados.
 - DOC.2 permanece aceptado/publicado como G111/E01; NOR.1 R8 como G112/E07, DOC.1 R3 como G113/E03, PLAN.2 R1 como G114/E01, DOC.1 R4 como G115/E04 y DOC.1 R5 como G116/E05.
 - G114/E01 permanece aceptado/publicado para PLAN.2 R1; G115/E04 (`0.1.15.04-beta`) queda aceptado/publicado para DOC.1 R4; G116/E05 (`0.1.16.05-beta`) queda aceptado/publicado para DOC.1 R5; G117/E02 (`0.1.17.02-beta`) queda aceptado/publicado para REL.GOV.1 R2. G118/E04 (`0.1.18.04-beta`) queda aceptado/publicado para DEV.2 R5; G119/E05 (`0.1.19.05-beta`) queda aceptado/publicado para DEV.2 R6; G120/E01 (`0.1.20.01-beta`) queda reservado para UX.5 R1; PERSIST.1 y REP.1 permanecen posteriormente según la matriz maestra viva.
 - SEC.2 quedó cerrado después de R1–R6 y AUD.SEC2 R1 permanece aceptado como G109/E01.
+
+### Mantenimiento posterior a G119/E05
+
+Después de publicar `v0.1.19.05-beta`, el repositorio integró mantenimiento que
+no constituye una nueva revisión aceptada ni una publicación independiente:
+
+- PR #117 completó la migración de automatización y retiró los workflows legacy
+  después de migrar los required checks de `main`;
+- PR #118 coordinó Pydantic 2.13.5 con Pydantic Core 2.46.5, actualizó
+  `actions/dependency-review-action` a v5 y endureció Dependabot para mantener
+  juntas las dependencias acopladas;
+- ambos cambios conservaron `VERSION`, ledger revision-aware y manifiesto de
+  publicación sin modificación;
+- G120/E01 continúa reservado exclusivamente para UX.5 R1.
 
 Este documento no crea una release nueva; registra el estado formal ya alcanzado por el repositorio.
 <!-- DOC1-R1-POST-MANT1:END -->
@@ -159,7 +174,7 @@ VER.2 añade una segunda capa de auditoría: `docs/governance/pre-1-0-revision-l
 ## 2. Estados retrospectivos
 
 | Versión | Fecha de cierre | Rango Git | Commits | Hito |
-|---|---|---|---:|---|
+| --- | --- | --- | ---: | --- |
 | `0.0.1-beta` | 2026-08-10 | `a0a9e09` → `13ce028` | 6 | Base técnica, FastAPI, primera interfaz, asistente, cuotas, salario y documentación inicial. |
 | `0.0.2-beta` | 2026-08-11 | `ae45943` → `eafe54d` | 3 | Historial salarial, proyección y línea temporal. |
 | `0.0.3-beta` | 2026-08-11 | `a7e1ed4` → `78e5188` | 4 | Retiro, precisión monetaria, pruebas y protección de datos de validación. |
@@ -312,7 +327,6 @@ La segunda pasada de VER.2 reconoce dentro de PLAN.1 diez estados aceptados G051
 > revalidación pendiente describen aquel momento y no el estado actual. VER.2 fue
 > posteriormente integrado y `v0.0.71.01-beta` quedó publicado como tag formal.
 
-
 UX.4.6f, UX.4.6g, UX.4.6h y UX.4.6i se desarrollaron y cerraron históricamente **sin publicar un tag adicional y manteniendo `VERSION = 0.0.26-beta`**. VER.2 no inventa releases retroactivas para esos bloques; su posición se reconstruye en el ledger como G061–G070.
 
 `0.0.71.01-beta` queda promovido en `VERSION` como VER.2 G071/E01 durante R4; no mueve `v0.0.26-beta`, no crea tag dentro del PR y requiere merge, revalidación post-merge y firma antes de declarar publicado `v0.0.71.01-beta`.
@@ -390,6 +404,7 @@ La transición a `1.0.0.0` depende del cierre de la secuencia definida en `docs/
 ## 6. Línea oficial futura prevista
 
 La línea oficial futura prevista permanece orientada a `1.0.0.0` con Build independiente. Las betas legacy y revision-aware no son la primera versión oficial.
+
 - `0.0.24-beta` no es una beta pública; conserva el cierre interno de GOV.1 antes de los hitos UX y PLAN posteriores.
 
 ## Reconciliación post-G070 — 2026-08-25

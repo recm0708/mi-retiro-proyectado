@@ -58,7 +58,6 @@ R6 exige:
 
 **NOR.2 R7** revisará los artefactos locales heredados bajo `_entregas/`.
 
-
 ## Gate local previo al commit — 2026-08-25
 
 Resultados observados:

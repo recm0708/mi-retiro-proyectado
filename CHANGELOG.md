@@ -9,6 +9,15 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 - UX.5 R1 (candidato G120/E01): sistema visual integral, paleta, tipografía,
   espaciado, botones, tarjetas, estados, jerarquía y tokens reutilizables;
   G120 permanece reservado y no aceptado.
+- Mantenimiento post-G119: PR #117 completó la migración de automatización,
+  retiró `ci.yml`, `governance-audit.yml` y `markdown-audit.yml` después de
+  trasladar sus contratos al `Repository Quality Gate` y conservar
+  `Python Compatibility` como required check independiente.
+- Dependencias post-G119: PR #118 actualizó coordinadamente Pydantic a 2.13.5
+  y Pydantic Core a 2.46.5, agrupó ambas dependencias en Dependabot y actualizó
+  `actions/dependency-review-action` a v5 con sus regresiones y documentación.
+- Los mantenimientos PR #117 y PR #118 no modifican `VERSION`, no crean una
+  nueva publicación revision-aware y no consumen G120/E01.
 
 ## [0.1.19.05-beta]
 
@@ -43,6 +52,7 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
   como publicación anterior.
 
 ## [0.1.18.04-beta]
+
 - G118/E04: DEV.2 R5 queda aceptado después de PR #107 / merge `bc97db0`; `VERSION` avanza a `0.1.18.04-beta`.
 - Portal Developer: `/dev` queda como entrada humana canónica; la sesión web administrativa se separa del contrato técnico Bearer y `/dev/login` queda como compatibilidad de entrada.
 - Seguridad: `mrp_admin_session` queda limitada a `Path=/dev`, mantiene `HttpOnly`, el logout vuelve a `/dev` y las superficies Developer usan `Cache-Control: no-store`.
@@ -56,6 +66,7 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 - Incluye la normalización documental y el mantenimiento de dependencias realizados después de G117 y antes del cierre de G118, sin contarlos como Globales independientes.
 
 ## [0.1.17.02-beta]
+
 - G117/E02: REL.GOV.1 R2 queda aceptado mediante PR #103 / merge `46c464e` después de completar la automatización gobernada de Releases y checks.
 - Release governance: incorpora manifiesto versionado, renderer determinista, validación del árbol etiquetado, firma/contrato, publicación idempotente y política fail-closed 200/404.
 - Gate: revalidación post-merge del desarrollo con 1157 `unittest` y `pytest` 1197 passed / 5731 subtests; gate final de promoción del 2026-08-28 con **1161 `unittest` OK** y **1201 `pytest` passed / 5721 subtests passed**; Markdown 159/159, 18 JavaScript, 16 familias / 46 identificadores, `pip check`, compilación y `git diff --check` limpios; CI #273, gobernanza #112, Markdown #59 y CodeQL #209 en `success`.
@@ -63,6 +74,7 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 - Publicación: G117/E02 quedó publicado mediante el tag anotado y firmado `v0.1.17.02-beta`, objeto de tag `d2e493d16a2768ea5e6284c577c21b4f84897fae`, y GitHub Release prerelease automatizado por REL.GOV.1 R2 después de integrar y revalidar la promoción; G116/E05 permanece preservado e inmutable.
 
 ## [0.1.16.05-beta]
+
 - G116/E05: DOC.1 R5 queda aceptado mediante PR #101 / merge `6f4266d` después de completar la normalización documental integral post-G115.
 - Documentación: humaniza navegación Markdown, completa plantillas técnicas/semánticas, reconcilia el estado publicado de G115 y endurece el auditor contra etiquetas técnicas y candidatos revision-aware obsoletos.
 - Gate: desarrollo DOC.1 R5 con 1127 pruebas `unittest` y `pytest` 1167 passed / 5587 subtests; promoción con 1132 pruebas `unittest`; revalidación post-merge con `pytest` 1172 passed / 5615 subtests, Markdown 158/158, `pip check`, compilación Python, sintaxis JavaScript, auditor de identificadores y `git diff --check` limpios; checks remotos y CodeQL en `success`.
@@ -70,6 +82,7 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 - Tag/Release: promoción PR #102 / `main` `dfb7dc6`; tag anotado y firmado `v0.1.16.05-beta`, objeto `4b5902bf7a3d2b94fcad8a426652d7ad8b77a32c`, firma válida en GitHub, workflow `Git Tag Signature Verification` #14 en `success` y GitHub Release prerelease publicado.
 
 ## [0.1.15.04-beta]
+
 - G115/E04: DOC.1 R4 queda aceptado mediante PR #96 / merge `9f51229` después de sanear el estado documental vivo posterior a la publicación de G114/E01 sin reescribir evidencia histórica.
 - Documentación: reconcilia metadata viva, estados actuales, gobierno, seguridad, proceso de release, roadmap y ledger; conserva `docs/archive/`, auditorías históricas y anclas contractuales.
 - Gate: 1114 pruebas post-merge en `OK`, Markdown 149/149, `pip check`, compilación Python, sintaxis JavaScript, auditor de identificadores y `git diff --check` limpios.
@@ -77,14 +90,15 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 - Tag/Release: `v0.1.15.04-beta` fue creado como tag anotado y firmado sobre `87fa8e9`, verificado por GitHub y publicado como GitHub Release prerelease; `v0.1.14.01-beta` permanece preservado como publicación anterior.
 
 ## [0.1.14.01-beta]
+
 - G114/E01: PLAN.2 R1 queda aceptado mediante PR #94 / merge `7ded70c` después de formalizar la matriz maestra viva hacia `1.0.0.0`.
 - Planificación: registra PLAN.2/UX.5, incorpora DEV.2 R5/R6, UX.5 R1–R6, SEC.2 R7, DOC.1 R5 y los gates finales; PERSIST.1/REP.1 permanecen en la secuencia posterior.
 - Gate: 1103 pruebas post-merge en `OK`, Markdown 148/148, `pip check`, compilación Python, sintaxis JavaScript, auditor de identificadores y `git diff --check` limpios; checks remotos requeridos en `success`.
 - Ledger: G114 queda aceptado; G115/E04 (`0.1.15.04-beta`) queda reservado para DOC.1 R4.
 - Tag/Release: `v0.1.14.01-beta` fue creado como tag anotado y firmado sobre `5c6d2db`, verificado por GitHub y publicado como GitHub Release prerelease; `v0.1.13.03-beta` permanece preservado como publicación anterior.
 
-
 ## [0.1.13.03-beta]
+
 - G113/E03: DOC.1 R3 queda aceptado mediante PR #92 / merge `40ae5c0` después de la auditoría conservadora de referencias navegables.
 - Documentación: normaliza 11 referencias inequívocas, formaliza etiquetas humanas para documentos y rutas técnicas clicables, y preserva historia, matrices contractuales, HTML y literales protegidos.
 - Gate: 1092 pruebas post-merge en `OK`, Markdown 146/146, `pip check`, auditor de identificadores y `git diff --check` limpios; checks remotos requeridos en `success`.
@@ -92,6 +106,7 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 - Tag/Release: `v0.1.13.03-beta` fue creado de forma firmada sobre `277505a`, verificado y publicado como GitHub Release prerelease; los tags anteriores permanecen inmutables.
 
 ## [0.1.12.07-beta]
+
 - G112/E07: NOR.1 R8 queda aceptado después de PR #89 / merge `cc6695b` y la corrección revision-aware PR #90 / merge `2de10b5`.
 - Gobierno: incorpora política canónica, registro machine-readable y auditor automático de identificadores; los bloques reabiertos continúan su ordinal `EE` y los bloques nuevos comienzan en E01.
 - Gate: 1081 pruebas post-merge en `OK`, Markdown 145/145, `pip check`, compilación Python, sintaxis JavaScript y `git diff --check` limpios; CI remota en `success`.
@@ -99,6 +114,7 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 - Tag/Release: `v0.1.12.07-beta` queda pendiente hasta integrar y revalidar esta promoción; `v0.1.11.01-beta` permanece como último tag publicado.
 
 ## [0.1.11.01-beta]
+
 - G111/E01: DOC.2 R1 aceptado mediante PR #87 y merge `1041b59`; reconstruye de forma auditable `0.0.1-beta`–`0.0.21-beta`.
 - Evidencia: 21 estados retrospectivos y 80 commits reales/únicos preservados en `data/doc2-legacy-changelog-evidence.json`.
 - Gate: 1066 pruebas post-merge en `OK`, Markdown 143/143, `pip check`, compilación Python, sintaxis JavaScript y `git diff --check` limpios; CI remota Python 3.13/3.14 + Markdown/gobernanza en `success`.
@@ -106,6 +122,7 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 - Tag/Release: `v0.1.11.01-beta` queda pendiente de creación firmada/publicación después de integrar y revalidar esta promoción; tags anteriores permanecen inmutables.
 
 ## [0.1.10.01-beta]
+
 - G110/E01: REL.GOV.1 R1 aceptado mediante PR #85 y merge `5cd1cea`; normaliza el gobierno de GitHub Releases y corrige la interpretación viva de `v0.0.71.01-beta` como G087/E01 sin alterar su tag histórico.
 - Releases: incorpora `.github/release.yml`, `scripts/release_contract.py` y validación de tag en GitHub Actions para estandarizar título, prerelease, cuerpo mínimo, firma y correspondencia VERSION/ledger/tag.
 - Gate REL.GOV.1 R1: 1054 pruebas locales en `OK`, Markdown 142/142, CI Python 3.13/3.14, Markdown Audit y Repository Governance Audit en `success`; la promoción G110/E01 fue revalidada posteriormente con 1058 pruebas en `OK` antes del tag.
@@ -113,6 +130,7 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 - Tag/Release: `v0.1.10.01-beta` fue creado de forma firmada sobre `cef373a`, pasó Git Tag Signature Verification y cuenta con GitHub Release prerelease; los tags históricos permanecen inmutables.
 
 ## [0.1.09.01-beta]
+
 - G109/E01: promoción post-merge de AUD.SEC2 R1 después de PR #83, 1040 pruebas locales y CI remota en Python 3.13/3.14 + auditorías de Markdown/gobernanza en `success`; la sincronización no consume G110.
 - Ledger: G109 queda aceptado sobre `ec1842d`; G110/E01 (`0.1.10.01-beta`) queda disponible y posteriormente se reserva para REL.GOV.1 antes de DOC.2.
 - Tag/Release: `v0.1.09.01-beta` fue creado de forma firmada y publicado como prerelease después de integrar/revalidar la promoción; `v0.0.71.01-beta` permanece inmutable.
@@ -146,6 +164,7 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 - Actualiza `docs/INDICE.md` para incluir documentos raíz que existían en `docs/` pero no estaban listados.
 - Conserva expresiones de dominio como normativa/privacidad, normativa/código y normativa/jurídica porque no son rutas obsoletas.
 - Mantiene sin cambios la lógica de cálculo, valores normativos, `VERSION`, `APP_VERSION`, `SEC.2` y `_entregas/`.
+
 ## MANT.1 R5F
 
 - Normaliza nombres de archivos técnicos en `scripts`, `data`, `regulations` y pruebas seleccionadas.

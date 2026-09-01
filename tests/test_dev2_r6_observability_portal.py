@@ -57,9 +57,20 @@ class TestDev2R6ObservabilityPortal(unittest.TestCase):
                 estado = construir_estado_centro_desarrollo()
 
         self.assertEqual(
-            "DEV.2 R6.4",
-            estado["revision_portal_observabilidad"],
+            "developer_diagnostics",
+            estado["componente"],
         )
+        self.assertEqual(
+            "Observabilidad local segura",
+            estado["estado_portal"],
+        )
+        for clave_historica in (
+            "bloque",
+            "revision_actual",
+            "revision_autodiagnostico",
+            "revision_portal_observabilidad",
+        ):
+            self.assertNotIn(clave_historica, estado)
         self.assertIn("python", estado["entorno_runtime"])
         self.assertIn("sistema", estado["entorno_runtime"])
         self.assertIn("arquitectura", estado["entorno_runtime"])

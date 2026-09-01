@@ -7,9 +7,9 @@
 **Revisión transversal histórica preservada:** UX.4.6e R8 — validación funcional y procedencia editable — 2026-08-19
 **Última revisión transversal:** UX.4.6f R2 integrada y cierre del Paso 4 — 2026-08-20
 **Revisión de normalización:** NOR.1 R7 — cierre de estándares y preparación de NOR.2 — 2026-08-24
+**Última revisión operativa:** mantenimiento post-G119 PR #117/#118 — 2026-08-31
 **Clasificación:** Técnica / Calidad
 **Naturaleza documental:** Registro vivo acumulativo — mantiene la estrategia vigente y evidencia histórica de gates protegida por regresiones; los resultados históricos no se reescriben como si pertenecieran al estado actual.
-
 
 <!-- NOR1-R7-VALIDATION:START -->
 ## Promoción DEV.2 R6 — G119/E05
@@ -88,7 +88,6 @@ El cierre formal de R7 exige repetir pruebas focales, gate completo, CI y merge.
 NOR.2 no debe iniciarse desde una rama que no haya cumplido estos gates.
 <!-- NOR1-R7-VALIDATION:END -->
 
-
 <!-- NOR2-R1-VALIDATION:START -->
 ## Validación NOR.2 R1
 
@@ -100,7 +99,6 @@ rutas públicas. El gate debe demostrar además que la documentación transversa
 registra NOR.2 R1 y que la evidencia de auditoría permanece bajo `docs/audits/`.
 <!-- NOR2-R1-VALIDATION:END -->
 
-
 <!-- NOR2-R2-VALIDATION:START -->
 ## Validación NOR.2 R2
 
@@ -111,7 +109,6 @@ representara las carpetas reales `engines/`, `models/` y `services/`.
 
 La versión de aplicación no cambia.
 <!-- NOR2-R2-VALIDATION:END -->
-
 
 <!-- NOR2-R3-VALIDATION:START -->
 ## Validación NOR.2 R3
@@ -184,6 +181,35 @@ La auditoría visual cubre:
 La equivalencia remota quedó demostrada en GitHub y el ruleset de `main`
 fue migrado a `Repository Quality Gate` y `Python Compatibility`. Los
 workflows legacy de CI, gobernanza y Markdown quedaron retirados.
+
+### Evidencia de cierre post-G119
+
+PR #117 completó la migración final de automatización:
+
+- merge `cbd5819fe2b4ec65900dfc1de157d10a77f16911`;
+- `Repository Quality Gate`: 11 PASS / 0 FAIL;
+- pre-commit: 10 PASS / 0 FAIL;
+- `unittest`: 1337 pruebas — OK;
+- `pytest`: 1377 passed / 6388 subtests;
+- integridad: 542 archivos versionables, 50 directorios canónicos y
+  0 bloqueadores.
+
+PR #118 completó el mantenimiento coordinado de dependencias:
+
+- merge `453d247f4bb7b18da31b2412a9ba544ba5ffb09b`;
+- Pydantic 2.13.5 y Pydantic Core 2.46.5;
+- `actions/dependency-review-action@v5`;
+- agrupación Pydantic/Pydantic Core en Dependabot;
+- `Repository Quality Gate`: 11 PASS / 0 FAIL;
+- pre-commit: 10 PASS / 0 FAIL;
+- `unittest`: 1338 pruebas — OK;
+- `pytest`: 1378 passed / 6390 subtests;
+- `git diff --check`: limpio.
+
+Ambos cierres conservaron sin cambios `VERSION`,
+`data/pre-1-0-revision-ledger.json` y
+`data/release-publication-manifest.json`. Son mantenimiento posterior a
+G119/E05 y no consumen G120/E01.
 
 Esta infraestructura no cambia `VERSION`, no acepta G120 y no crea commits,
 tags ni GitHub Releases.
@@ -332,7 +358,6 @@ python -m pytest -q
 Esta revisión no cambia workflows, formularios, Dependabot, motores, normativa,
 `VERSION`, `APP_VERSION` ni SEC.2.
 
-
 ## 1. Línea base
 
 Cierre validado de GOV.1.3 R2:
@@ -393,7 +418,6 @@ UX.4.6e R7 cerró con **598 pruebas en `OK`**. Durante R8, la primera prueba man
 
 El checkpoint de identidad visual y publicación del repositorio previo a continuar R8 añadió **20 regresiones**: 10 para estructura/dimensiones de activos, favicon, navbar, temas y Social Preview; y 10 para coherencia pública de README, seguridad, soporte, versionado, identidad, auditoría y transparencia. La suite integrada fue ejecutada con **624 pruebas en `OK`**. `git diff --check` permaneció limpio y la validación visual confirmó el logo oficial en la navbar y el Social Preview. `VERSION` continúa en `0.0.24-beta`.
 
-
 UX.4.6e R8.1/R8.2 sustituyó el bloqueo obligatorio de datos importados por una procedencia editable con fotografía original preservada. La capa añadió y refinó **20 regresiones** sobre edición, exclusión, sincronización, avisos reactivos, iconografía, checkboxes y referencias documentales. Después de los hotfixes de `MutationObserver` y representación del gancho, la suite integrada alcanzó **644 pruebas en `OK`**.
 
 La validación manual del caso femenino comprobó:
@@ -411,7 +435,6 @@ La validación manual del caso femenino comprobó:
 El cierre documental de R8 añade **8 regresiones adicionales** sobre ADR-167 y coherencia funcional/documental. Partiendo de 644, el gate esperado para declarar R8 completamente cerrado es **652 pruebas en `OK`**. `VERSION` permanece en `0.0.24-beta`; la promoción de versión pertenece a R9.
 
 La revalidación manual del repositorio público del 2026-08-19 confirmó Dependency graph, Dependabot alerts/security updates, CodeQL Default setup, Secret Protection, Push protection y Private vulnerability reporting habilitados, con **0 alertas abiertas** en Code scanning, Secret scanning y Dependabot en ese momento. Esta evidencia no sustituye revisión periódica ni auditoría externa.
-
 
 ## Gate R9.1 — candidato `0.0.25-beta`
 
@@ -433,7 +456,6 @@ R9.1 añade **8 regresiones específicas** para proteger:
 Partiendo de 652 pruebas, R9.1 alcanzó **660 pruebas en `OK`** el 2026-08-19. La compilación Python, la sintaxis JavaScript y `git diff --check` quedaron limpios.
 
 Con este gate local cumplido, R9.2 puede comenzar: commits firmados, PR, CI requerida, squash, validación post-merge y tag firmado.
-
 
 ## Gate R9.2 — cierre formal UX.4.6e
 
@@ -460,7 +482,6 @@ Este cierre documental no modifica motores, cálculos, normativa ni contratos de
 - commit de cierre documental firmado;
 - CI requerida verde después de integrar el cierre;
 - tag `v0.0.25-beta` anotado y firmado, creado después del merge final y validado antes de iniciar UX.4.6f.
-
 
 ## PLAN.1 — alineación hacia la primera versión oficial
 
@@ -552,9 +573,7 @@ El cierre documental inicial añadió una regresión para impedir que README, RO
 
 Como endurecimiento permanente, el repositorio incorpora `.githooks/pre-commit`, `scripts/validate_precommit.py` y `scripts/configure_git_hooks.ps1`. Una vez activado por clon, Git rechaza el commit si se intenta confirmar directamente en `main`, existe un árbol de trabajo que no corresponde al staging, falla `git diff --cached --check`, `pip check`, `compileall`, `node --check` o la suite completa. Cinco regresiones adicionales protegen el contrato; el inventario de cierre pasa a **762 pruebas** sin modificar `VERSION`. Los checks remotos del Pull Request siguen siendo obligatorios y no son sustituidos por el hook local.
 
-
 ### MANT.1 R2 — documentación de scripts y hooks
-
 
 MANT.1 R1 queda como auditoría inicial: inventario de archivos de código/configuración,
 clasificación de superficies por carpeta y decisión de ejecutar el mantenimiento por
@@ -802,19 +821,15 @@ Inventario vigente: **184 módulos**.
 - `tests/test_dev2_r6_web_access.py`
 - `tests/test_dev2_r6_web_session.py`
 
-
-
 ### DEV.2 R6 — arquitectura visual del Portal Developer
 
 - `tests/test_dev2_r6_header_identity.py`
 - `tests/test_dev2_r6_multipage_shell.py`
 - `tests/test_dev2_r6_sidebar_theme_sync.py`
 
-
 ### DEV.2 R6.2-R6.4 — observabilidad Developer
 
 - `tests/test_dev2_r6_observability_portal.py`
-
 
 ### DEV.2 R6.5-R6.7 — seguridad y mantenimiento
 
@@ -853,7 +868,6 @@ Estado revision-aware durante este cierre:
   revalidación sobre `main`;
 - la promoción, el tag firmado y el GitHub Release pertenecen a una etapa
   posterior y separada.
-
 
 ## 4. Categorías
 
@@ -933,9 +947,11 @@ La primera validación visual de R1 confirmó la estructura general y detectó c
 R1.2 añade **6 regresiones** sobre la línea de 826 pruebas: navegación activa, recorrido de transformación de datos, ausencia de lenguaje interno en la copia principal, formato monetario, densidad de factores SEBD/SUCGS y uso de tokens/tema. El gate objetivo pasa a **832 pruebas en `OK`**.
 
 La validación manual debe confirmar Claro, Oscuro y Alto contraste; navbar activa; tablas SEBD en 3 filas y SUCGS en aproximadamente 5 filas en escritorio amplio; legibilidad responsive; y correspondencia de las explicaciones de Pasos 1–6 con la simulación real.
+
 ### UX.4.6i R1.3 — sustituciones numéricas y terminología contextual
 
 R1.3 añade **8 regresiones** sobre la línea de 832 pruebas. Protegen la presencia simultánea de fórmula general y ejemplo sustituido, la terminología contextual de SEBD/Mixto/SUCGS, las fórmulas adicionales de tasa equivalente y fracción de año, el espaciado de tabla/nota/fuentes y el uso exclusivo de tokens semánticos en la nueva capa visual. El gate objetivo pasa a **840 pruebas en `OK`**.
+
 ### UX.4.6i R1.4 — cierre de guía pública
 
 R1.4 simplifica la etiqueta visible de cada sustitución numérica a **Ejemplo** y añade una regresión para impedir que reaparezca la coletilla anterior. La validación manual acumulada confirmó estructura, navegación, recorrido de datos Pasos 1–6, fórmulas con sustitución, definiciones contextuales, tablas SEBD/SUCGS compactas, espaciado y presentación de los tres sistemas. El gate de cierre queda en **841 pruebas en `OK`**.
@@ -952,6 +968,7 @@ Antes del cierre del Pull Request debe ejecutarse además la suite completa:
 
 - `python -m pytest -q`
 - `python -m unittest discover -s tests -q`
+
 ### Validación MANT.1 R5F
 
 La revisión de nombres de archivos técnicos se valida con:
@@ -965,7 +982,6 @@ Antes del cierre del Pull Request debe ejecutarse además la suite completa:
 
 - `python -m pytest -q`
 - `python -m unittest discover -s tests -q`
-
 
 ## Validación NOR.2 R4
 
@@ -1040,7 +1056,6 @@ El gate local final de R6 verificó:
 R6 quedó integrado en `main` mediante PR #72 y commit squash `365ba5b`.
 <!-- NOR2-R6-VALIDATION:END -->
 
-
 <!-- NOR2-R7-VALIDATION:START -->
 ## Validación NOR.2 R7
 
@@ -1108,7 +1123,6 @@ integración en `main` y verificación post-merge.
 
 Después de R7 continuaba **NOR.2 R8 — auditoría integral y cierre formal** y SEC.2 permanecía pausado hasta completar R8. Ambos estados son históricos; NOR.2 y SEC.2 están cerrados en el estado vigente.
 <!-- NOR2-R7-VALIDATION:END -->
-
 
 <!-- NOR2-R8-VALIDATION:START -->
 ## Validación NOR.2 R8
@@ -1248,7 +1262,6 @@ integral del entorno de auditoría quedó limitada por una discrepancia externa 
 `pypdf` (entorno 5.9.0 frente al pin del proyecto 6.16.1); por ello el gate final
 debe ejecutarse en el `.venv` del repositorio antes del commit firmado.
 
-
 ## Validación de promoción G109/E01
 
 AUD.SEC2 R1 fue aceptado mediante PR #83 y merge `ec1842d`. La promoción post-merge:
@@ -1258,7 +1271,6 @@ AUD.SEC2 R1 fue aceptado mediante PR #83 y merge `ec1842d`. La promoción post-m
 - conserva intacto el snapshot histórico G070 y el tag `v0.0.71.01-beta`;
 - no consume G110 por ser sincronización del estado G109 ya aceptado;
 - requiere `pip check`, auditoría Markdown, compilación Python, sintaxis JavaScript, suite completa y `git diff --check` antes del commit firmado.
-
 
 ## REL.GOV.1 — validación del contrato de GitHub Releases
 
@@ -1284,7 +1296,6 @@ El gate también debe confirmar:
 - auditoría Markdown, compilación Python, sintaxis JavaScript, suite completa y `git diff --check`.
 
 REL.GOV.1 quedó aceptado. Esta sincronización materializa G110/E01 y deja G111/E01 disponible para DOC.2.
-
 
 ## Validación de promoción G110/E01
 
@@ -1370,7 +1381,6 @@ Gate de PLAN.2 R1:
 5. suite completa;
 6. documentación viva sin bloqueadores semánticos post-G113;
 7. commit firmado, PR/CI e integración antes de consumir G114.
-
 
 ## G114/E01 — promoción formal de PLAN.2 R1
 
