@@ -142,6 +142,23 @@ class TestGitHistoryAttestation(
             ),
         )
 
+    def test_presencia_de_firma_se_deriva_del_objeto_commit(
+        self,
+    ):
+        self.assertFalse(
+            audit_git_history_attestation
+            .commit_has_signature(
+                self.entries[88]["sha"]
+            )
+        )
+
+        self.assertTrue(
+            audit_git_history_attestation
+            .commit_has_signature(
+                self.entries[89]["sha"]
+            )
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

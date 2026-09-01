@@ -82,6 +82,30 @@ def history_records(
     return records
 
 
+def commit_has_signature(
+    sha: str,
+) -> bool:
+    """Indica si el objeto commit contiene una firma embebida."""
+
+    result = run_git(
+        "cat-file",
+        "commit",
+        sha,
+    )
+
+    if result.returncode != 0:
+        raise RuntimeError(
+            result.stdout + result.stderr
+        )
+
+    return any(
+        line.startswith(
+            ("gpgsig ", "gpgsig-sha256 ")
+        )
+        for line in result.stdout.splitlines()
+    )
+
+
 def pr_from_subject(
     subject: str,
 ) -> int | None:
@@ -152,28 +176,41 @@ def audit_history() -> dict:
         "HEAD"
     )
 
-    if len(current) < baseline_count:
-        errors.append(
-            "El historial actual contiene menos "
-            "commits que el snapshot atestado."
+    baseline_head = str(
+        data.get(
+            "attested_head",
+            "",
         )
-        baseline_records = current
+    ).strip()
+
+    if not baseline_head:
+        errors.append(
+            "attested_head ausente."
+        )
+        baseline_records = []
     else:
-        baseline_records = current[
-            :baseline_count
-        ]
-
-    merge_commits = git_lines(
-        "rev-list",
-        "--merges",
-        "HEAD",
-    )
-
-    if merge_commits:
-        errors.append(
-            "El historial dejó de ser lineal: "
-            f"{len(merge_commits)} merge commits."
+        baseline_records = history_records(
+            baseline_head
         )
+
+        if len(baseline_records) != baseline_count:
+            errors.append(
+                "El historial del snapshot contiene "
+                f"{len(baseline_records)} commits; "
+                f"esperado: {baseline_count}."
+            )
+
+        merge_commits = git_lines(
+            "rev-list",
+            "--merges",
+            baseline_head,
+        )
+
+        if merge_commits:
+            errors.append(
+                "El snapshot atestado dejó de ser lineal: "
+                f"{len(merge_commits)} merge commits."
+            )
 
     for index, entry in enumerate(
         entries,
@@ -201,7 +238,7 @@ def audit_history() -> dict:
         if index > len(baseline_records):
             continue
 
-        sha, subject, sig_status = (
+        sha, subject, _sig_status = (
             baseline_records[
                 index - 1
             ]
@@ -222,7 +259,9 @@ def audit_history() -> dict:
             )
 
         signature_present = (
-            sig_status != "N"
+            commit_has_signature(
+                sha
+            )
         )
 
         if (
