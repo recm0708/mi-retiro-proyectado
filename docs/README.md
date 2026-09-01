@@ -42,6 +42,7 @@ Estado de la fase:
 
 Evidencia:
 
+- **[Atestación histórica Git pre-UX.5](audits/governance/git-history-attestation-pre-ux5.md)** — identidad HIST-0001–HIST-0195, frontera de firma, PR y normalización administrativa en español sin reescritura;
 - **[Índice de auditorías y evidencias](audits/README.md)** — navegación canónica de auditorías documentales, de gobierno, repositorio y seguridad.
 - **[SEC.2 R1 — CodeQL DOM hardening y normalización de workflows](audits/security/sec2-r1-codeql-workflow-hardening.md)** — hardening CodeQL y normalización de workflows SEC.2 R1.
 - **[SEC.2 — Cierre integral y auditoría post-cierre de seguridad](audits/security/sec2-final-closure.md)** — cierre integral SEC.2 R1–R6 y matriz de controles.
@@ -104,6 +105,7 @@ Evidencia:
 - **[Soporte](../SUPPORT.md)** — canales de soporte, privacidad y seguridad.
 - **[Plan maestro hacia Mi Retiro Proyectado 1.0](governance/master-plan-to-1-0.md)** — dependencias y gates previos a `1.0.0.0`.
 - **[Migración de firma criptográfica Git — 2026-08-17](archive/governance/git-signature-migration-2026-08-17.md)** — firma SSH y migración histórica controlada.
+- **[Atestación histórica Git pre-UX.5](audits/governance/git-history-attestation-pre-ux5.md)** — inventario ordinal y criptográfico del historial preservado.
 - [`../.github/allowed_signers`](../.github/allowed_signers) — claves públicas autorizadas.
 - **[Auditoría de GitHub y controles de repositorio](archive/governance/github-audit.md)** — controles GitHub, seguridad y auditoría automática.
 - **[Preparación pública de GitHub](operations/github-public-repository.md)** — metadata, topics, labels, badges, Social Preview y seguridad del repositorio público.
