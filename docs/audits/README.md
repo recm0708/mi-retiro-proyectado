@@ -34,6 +34,7 @@ Auditorías de estructura, clasificación, referencias, estado vivo y normalizac
 
 Auditorías de reconciliación revision-aware y gobierno de Releases.
 
+- [Atestación histórica Git pre-UX.5](governance/git-history-attestation-pre-ux5.md) — identidad HIST, frontera de firma y normalización española sin reescritura.
 - [Auditoría de reconciliación revision-aware posterior a G070](governance/post-g070-revision-reconciliation.md)
 - [REL.GOV.1 R2 — automatización gobernada de Releases](governance/rel-gov1-r2-release-automation.md)
 

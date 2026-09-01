@@ -7,7 +7,7 @@
 **Revisión transversal histórica preservada:** UX.4.6e R8 — validación funcional y procedencia editable — 2026-08-19
 **Última revisión transversal:** UX.4.6f R2 integrada y cierre del Paso 4 — 2026-08-20
 **Revisión de normalización:** NOR.1 R7 — cierre de estándares y preparación de NOR.2 — 2026-08-24
-**Última revisión operativa:** mantenimiento post-G119 PR #117/#118 — 2026-08-31
+**Última revisión operativa:** atestación histórica Git pre-UX.5 — 2026-09-01
 **Clasificación:** Técnica / Calidad
 **Naturaleza documental:** Registro vivo acumulativo — mantiene la estrategia vigente y evidencia histórica de gates protegida por regresiones; los resultados históricos no se reescriben como si pertenecieran al estado actual.
 
@@ -214,6 +214,38 @@ G119/E05 y no consumen G120/E01.
 Esta infraestructura no cambia `VERSION`, no acepta G120 y no crea commits,
 tags ni GitHub Releases.
 <!-- AUTOMATION-POST-G119:END -->
+
+## Atestación histórica Git pre-UX.5
+
+Antes de iniciar UX.5 se cerró un snapshot de integridad sobre los 195 commits
+alcanzables de `main` en `561d702f8c70aebfcc178e2351794ab5f3f01e57`.
+
+Resultados estructurales:
+
+- identidad continua `HIST-0001`–`HIST-0195`;
+- historial lineal, con 0 merge commits;
+- 89 commits iniciales sin objeto de firma;
+- 106 commits consecutivos con firma desde `HIST-0090`;
+- frontera exacta `HIST-0089` → `HIST-0090`;
+- primer PR explícito en asunto: `HIST-0092` / PR #9;
+- 17 commits posteriores sin número de PR explícito en el asunto;
+- 38 commits con uno o más tags;
+- 19 asuntos revisados por idioma: 11 falsos positivos por prefijo técnico,
+  2 casos mixtos y 6 mensajes materialmente en inglés.
+
+La política adoptada preserva los asuntos y SHA originales. Las representaciones
+españolas viven en `data/git-history-attestation.json`; no se firman ni
+renombran retroactivamente commits históricos porque hacerlo recrearía sus
+objetos Git y rompería referencias posteriores.
+
+Validación permanente:
+
+```powershell
+python scripts/audit_git_history_attestation.py
+python -m pytest tests/test_git_history_attestation.py -q
+```
+
+La atestación no cambia `VERSION`, no consume G120/E01 y no inicia UX.5.
 
 ## Validación MANT.1 R5H — nombres técnicos restantes
 
@@ -633,7 +665,7 @@ python -m pip check
 
 ## 3. Inventario actual de pruebas
 
-Inventario vigente: **185 módulos**.
+Inventario vigente: **186 módulos**.
 
 - `tests/test_accessibility_themes.py`
 - `tests/test_accessibility_ux4.py`
@@ -693,6 +725,7 @@ Inventario vigente: **185 módulos**.
 - `tests/test_mant1_r7_cierre_operativo_post_auditoria.py`
 - `tests/test_mant1_scripts_hooks_documentados.py`
 - `tests/test_mantenimiento_tecnico.py`
+- `tests/test_git_history_attestation.py`
 - `tests/test_markdown_audit.py`
 - `tests/test_markdown_versionable_inventory.py`
 - `tests/test_mixto.py`
