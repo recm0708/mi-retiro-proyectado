@@ -143,6 +143,7 @@ Evidencia:
 
 - **[Normativa](regulatory/regulatory-framework.md)** — interpretación y aplicación normativa.
 - **[Fuentes normativas y enlaces oficiales](regulatory/regulatory-sources.md)** — catálogo de fuentes oficiales.
+- **[Fuentes oficiales preservadas](regulatory/sources/official/README.md)** — copias offline verificables de fuentes regulatorias e institucionales.
 - `../regulations/*.json` — parámetros legales versionados.
 
 ## 7. Datos y trazabilidad

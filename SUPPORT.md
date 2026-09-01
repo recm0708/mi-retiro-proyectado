@@ -2,7 +2,7 @@
 
 **Proyecto:** Mi Retiro Proyectado
 **Estado:** vigente
-**Fecha de revisión:** 2026-08-20
+**Fecha de revisión:** 2026-08-31
 
 Este documento indica qué canal utilizar según el tipo de necesidad. El proyecto se encuentra en **desarrollo beta** y no ofrece un SLA contractual ni asesoría jurídica, financiera o previsional individual.
 

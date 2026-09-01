@@ -65,7 +65,17 @@ htmlcov/
 .pyright/
 
 # IDE y editores
-.vscode/
+# VS Code permanece ignorado por defecto. Solo se versiona la configuración
+# reproducible del proyecto y los schemas fijados explícitamente.
+.vscode/*
+!.vscode/settings.json
+!.vscode/schemas/
+.vscode/schemas/*
+!.vscode/schemas/markdownlint-cli2-config-schema.json
+!.vscode/schemas/markdownlint-config-schema.json
+!.vscode/schemas/LICENSE.markdownlint-cli2.txt
+!.vscode/schemas/LICENSE.markdownlint.txt
+!.vscode/schemas/SOURCES.txt
 .idea/
 .vs/
 *.suo

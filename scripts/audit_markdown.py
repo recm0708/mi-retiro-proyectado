@@ -1,6 +1,6 @@
 """Auditor permanente de documentación Markdown del repositorio.
 
-Valida únicamente archivos Markdown rastreados y físicamente presentes.
+Valida archivos Markdown versionables y físicamente presentes: rastreados o nuevos no ignorados por Git.
 
 Reglas:
 - UTF-8 sin BOM;
@@ -229,24 +229,39 @@ def repository_root() -> Path:
     return Path(result.stdout.strip()).resolve()
 
 
-def tracked_markdown(root: Path) -> list[str]:
+def versionable_markdown(root: Path) -> list[str]:
+    """Devuelve Markdown rastreado o nuevo que Git considera versionable."""
+
     result = subprocess.run(
-        ["git", "ls-files", "*.md"],
+        [
+            "git",
+            "ls-files",
+            "--cached",
+            "--others",
+            "--exclude-standard",
+            "--",
+            "*.md",
+        ],
         cwd=root,
         text=True,
         capture_output=True,
+        encoding="utf-8",
+        errors="replace",
         check=False,
     )
 
     if result.returncode != 0:
         raise RuntimeError(
-            "No se pudo obtener el inventario Markdown mediante Git."
+            "No se pudo obtener el inventario Markdown versionable mediante Git."
         )
 
     return sorted(
-        path
-        for path in result.stdout.splitlines()
-        if (root / path).is_file()
+        {
+            path.strip().replace("\\", "/")
+            for path in result.stdout.splitlines()
+            if path.strip()
+            and (root / path.strip()).is_file()
+        }
     )
 
 
@@ -1027,7 +1042,7 @@ def audit_repository(
         encoding="utf-8"
     ).strip()
 
-    files = tracked_markdown(root)
+    files = versionable_markdown(root)
     next_global, next_candidate = load_candidate_state(root)
 
     counts = Counter(

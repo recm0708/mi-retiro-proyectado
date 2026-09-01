@@ -43,7 +43,7 @@ propósito, contrato, flujo, dependencias o riesgos técnicos permanentes.
 | `.css` | Bloque inicial con `Mi Retiro Proyectado —`, `Propósito` y `Alcance`. | Comentarios de sección para componentes, estados, temas y responsive. | No comentar cada regla evidente. |
 | `.html` | En plantillas Jinja con `{% extends %}`, el `extends` se conserva al inicio. | Comentarios Jinja/HTML para secciones grandes, parciales y contratos visuales. | No anteponer comentarios al `<!DOCTYPE html>` de `base.html`. |
 | `.yml` / `.yaml` | Comentarios iniciales de propósito y alcance. | Comentarios solo donde aclaren permisos, triggers, cadencia o matrices. | No cambiar acciones ni comandos por documentar. |
-| `.json` | Sin comentarios, porque JSON no los permite. | Documentar mediante nombres de claves y documentación externa. | La plantilla debe ser JSON válido. |
+| `.json` / `.jsonc` | JSON no admite comentarios; JSONC puede usarlos cuando el contrato de la herramienta lo permita. | Documentar mediante nombres de claves y comentarios solo en JSONC cuando aporten contexto real. | Respetar primero el formato exigido por la herramienta; los archivos versionados mantienen LF. |
 | `.ps1` | Comentarios `#` al inicio con propósito, entradas y alcance. | Comentarios antes de pasos destructivos, validaciones o decisiones de ruta. | Mantener comandos legibles y sin trazabilidad histórica operativa. |
 | `.githook` / hooks sin extensión | Shebang si aplica y comentarios de responsabilidad. | Comentarios de flujo antes de validaciones o delegaciones. | El hook debe delegar lógica compleja a scripts versionados. |
 | `.txt` | Comentarios iniciales si el formato los acepta; si no, contenido directo. | Estructura por bloques cuando sea inventario, lista o dependencia. | `requirements.txt` puede documentar grupos de dependencias. |
@@ -52,6 +52,7 @@ propósito, contrato, flujo, dependencias o riesgos técnicos permanentes.
 | `.editorconfig` | Sin comentarios obligatorios; declarar `root = true` y reglas generales. | Comentarios opcionales si una regla no es evidente. | Define estilo transversal del editor. |
 | archivos sin extensión | Depende del contrato del archivo. | Comentarios solo si el formato los acepta. | `VERSION`, `LICENSE`, `CODEOWNERS` y firmas tienen reglas propias. |
 | `.png` / `.ico` | No aplica encabezado textual. | No aplica. | Usar nombre descriptivo, carpeta correcta y documentación externa. |
+| `.pdf` / `.xlsx` | No aplica encabezado textual. | No aplica. | Las fuentes oficiales preservadas usan nombre canónico, ubicación documental y entrada con SHA-256 en `docs/regulatory/sources/official/manifest.json`. |
 
 ## 3. Plantillas oficiales
 
