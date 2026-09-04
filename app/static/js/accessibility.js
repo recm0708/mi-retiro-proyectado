@@ -98,6 +98,7 @@ const CAPTIONS_TABLAS = [
 
 let ultimoPanelWizardVisible = null;
 let focoInvalidoProgramado = false;
+let resumenValidacionProgramado = false;
 
 
 // Las pistas breves viven dentro de campos editables. El placeholder
@@ -272,10 +273,186 @@ function prepararCamposFecha() {
 function obtenerEtiquetaControl(control) {
   const etiqueta = document.querySelector(`label[for="${control.id}"]`);
   if (etiqueta) {
-    return etiqueta.textContent.replace(/\s+/g, " ").trim();
+    return etiqueta.textContent
+      .replace(/\*/g, "")
+      .replace(/\s+/g, " ")
+      .trim();
   }
   return control.getAttribute("aria-label") || control.name || "campo";
 }
+
+function prepararCamposObligatorios() {
+  document
+    .querySelectorAll(
+      "input, select, textarea",
+    )
+    .forEach((control) => {
+      const obligatorio = Boolean(
+        control.required
+        && control.willValidate
+      );
+
+      if (obligatorio) {
+        control.setAttribute(
+          "aria-required",
+          "true",
+        );
+      } else {
+        control.removeAttribute(
+          "aria-required",
+        );
+      }
+
+      if (
+        !control.id
+        || [
+          "radio",
+          "checkbox",
+          "hidden",
+        ].includes(
+          (
+            control.getAttribute("type")
+            || ""
+          ).toLowerCase(),
+        )
+      ) {
+        return;
+      }
+
+      const etiqueta = document.querySelector(
+        `label[for="${control.id}"]`,
+      );
+
+      if (!etiqueta) {
+        return;
+      }
+
+      const marcadorDinamico = (
+        etiqueta.querySelector(
+          '[data-a11y-required-marker="true"]',
+        )
+      );
+
+      if (!obligatorio) {
+        marcadorDinamico?.remove();
+        return;
+      }
+
+      if (
+        etiqueta.querySelector(
+          ".required-marker",
+        )
+      ) {
+        return;
+      }
+
+      const marcador = document.createElement(
+        "span",
+      );
+
+      marcador.className = "required-marker";
+      marcador.dataset.a11yRequiredMarker = (
+        "true"
+      );
+      marcador.setAttribute(
+        "aria-hidden",
+        "true",
+      );
+      marcador.textContent = "*";
+
+      etiqueta.append(
+        document.createTextNode(" "),
+        marcador,
+      );
+    });
+}
+
+
+function controlesInvalidosVisibles(
+  formulario,
+) {
+  const panel = (
+    formulario.closest(
+      ".wizard-panel",
+    )
+    || formulario
+  );
+
+  return Array.from(
+    panel.querySelectorAll(
+      "input, select, textarea",
+    ),
+  ).filter(
+    (control) => (
+      control.willValidate
+      && !control.validity.valid
+      && !control.disabled
+      && control.getClientRects().length > 0
+    ),
+  );
+}
+
+
+function actualizarResumenValidacionWizard(
+  formulario,
+) {
+  const resumen = document.getElementById(
+    "wizard-validation-summary",
+  );
+
+  if (!resumen) {
+    return;
+  }
+
+  const invalidos = (
+    controlesInvalidosVisibles(
+      formulario,
+    )
+  );
+
+  if (!invalidos.length) {
+    resumen.textContent = "";
+    resumen.classList.add(
+      "d-none",
+    );
+    return;
+  }
+
+  const cantidad = invalidos.length;
+
+  resumen.textContent = (
+    cantidad === 1
+      ? "Hay 1 campo que debes revisar antes de continuar."
+      : `Hay ${cantidad} campos que debes revisar antes de continuar.`
+  );
+
+  resumen.classList.remove(
+    "d-none",
+  );
+}
+
+
+function programarResumenValidacionWizard(
+  formulario,
+) {
+  if (resumenValidacionProgramado) {
+    return;
+  }
+
+  resumenValidacionProgramado = true;
+
+  window.setTimeout(
+    () => {
+      actualizarResumenValidacionWizard(
+        formulario,
+      );
+
+      resumenValidacionProgramado = false;
+    },
+    0,
+  );
+}
+
 
 function anunciarAccesibilidad(mensaje) {
   const region = document.getElementById("a11y-global-status");
@@ -596,6 +773,113 @@ function prepararMensajesDinamicos() {
   });
 }
 
+
+function prepararValidacionWizardSinFormulario() {
+  document
+    .querySelectorAll(
+      "#simulation-wizard-shell "
+      + "input, "
+      + "#simulation-wizard-shell "
+      + "select, "
+      + "#simulation-wizard-shell "
+      + "textarea",
+    )
+    .forEach((control) => {
+      /*
+       * Los controles que pertenecen a un formulario ya son
+       * responsabilidad de prepararValidacionAccesible().
+       */
+      if (
+        control.form
+        || control.dataset
+          .a11yStandaloneValidation
+          === "ready"
+      ) {
+        return;
+      }
+
+      control.dataset
+        .a11yStandaloneValidation = (
+          "ready"
+        );
+
+      control.addEventListener(
+        "invalid",
+        (evento) => {
+          evento.preventDefault();
+
+          control.setAttribute(
+            "aria-invalid",
+            "true",
+          );
+
+          asegurarErrorDeCampo(
+            control,
+          );
+
+          programarResumenValidacionWizard(
+            control,
+          );
+
+          if (!focoInvalidoProgramado) {
+            focoInvalidoProgramado = true;
+
+            const etiqueta = (
+              obtenerEtiquetaControl(
+                control,
+              )
+            );
+
+            window.setTimeout(
+              () => {
+                control.focus({
+                  preventScroll: false,
+                });
+
+                anunciarAccesibilidad(
+                  `Revisa el campo ${etiqueta}.`,
+                );
+
+                focoInvalidoProgramado = false;
+              },
+              0,
+            );
+          }
+        },
+      );
+
+      const limpiarSiValido = () => {
+        if (
+          control.validity?.valid
+          === true
+        ) {
+          control.removeAttribute(
+            "aria-invalid",
+          );
+
+          limpiarErrorDeCampo(
+            control,
+          );
+        }
+
+        programarResumenValidacionWizard(
+          control,
+        );
+      };
+
+      control.addEventListener(
+        "input",
+        limpiarSiValido,
+      );
+
+      control.addEventListener(
+        "change",
+        limpiarSiValido,
+      );
+    });
+}
+
+
 function prepararValidacionAccesible() {
   document.querySelectorAll("form").forEach((formulario) => {
     if (formulario.dataset.a11yValidation === "ready") {
@@ -613,6 +897,9 @@ function prepararValidacionAccesible() {
 
       control.setAttribute("aria-invalid", "true");
       asegurarErrorDeCampo(control);
+      programarResumenValidacionWizard(
+        formulario,
+      );
 
       if (!focoInvalidoProgramado) {
         focoInvalidoProgramado = true;
@@ -631,6 +918,10 @@ function prepararValidacionAccesible() {
         control.removeAttribute("aria-invalid");
         limpiarErrorDeCampo(control);
       }
+
+      programarResumenValidacionWizard(
+        formulario,
+      );
     };
 
     formulario.addEventListener("input", limpiarSiValido);
@@ -642,6 +933,10 @@ function prepararValidacionAccesible() {
           control.removeAttribute("aria-invalid");
           limpiarErrorDeCampo(control);
         });
+
+        actualizarResumenValidacionWizard(
+          formulario,
+        );
       }, 0);
     });
   });
@@ -754,6 +1049,8 @@ function prepararEnlacesExternos() {
 }
 
 function sincronizarAccesibilidadDinamica() {
+  prepararCamposObligatorios();
+  prepararValidacionWizardSinFormulario();
   prepararPistasCampos();
   prepararCamposFecha();
   vincularAyudasDeFormulario();
@@ -773,7 +1070,12 @@ document.addEventListener("DOMContentLoaded", () => {
     childList: true,
     subtree: true,
     attributes: true,
-    attributeFilter: ["class"],
+    attributeFilter: [
+      "class",
+      "required",
+      "disabled",
+      "hidden",
+    ],
   };
 
   const observador = new MutationObserver((cambios) => {

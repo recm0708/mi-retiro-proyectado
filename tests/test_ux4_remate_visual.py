@@ -58,21 +58,51 @@ class TestRemateUX41(unittest.TestCase):
         self.assertIn("padding-top: 2rem", self.estilos)
 
     def test_ayuda_contextual_es_hover_focus_y_no_solo_click(self):
-        js = (ROOT / "app/static/js/accessibility.js").read_text(
-            encoding="utf-8",
-        )
-        css = (ROOT / "app/static/css/accessibility.css").read_text(
+        js = (
+            ROOT / "app/static/js/accessibility.js"
+        ).read_text(
             encoding="utf-8",
         )
 
-        self.assertIn('"mouseenter"', js)
-        self.assertIn('"mouseleave"', js)
-        self.assertIn('"focus"', js)
-        self.assertIn('role", "tooltip"', js)
-        self.assertIn("min-height: 1.8rem", css)
-        self.assertIn("border-radius: 999px", css)
-        self.assertIn(".context-help-icon", css)
-        self.assertIn("position: absolute", css)
+        css = (
+            ROOT / "app/static/css/accessibility.css"
+        ).read_text(
+            encoding="utf-8",
+        )
+
+        self.assertIn(
+            '"mouseenter"',
+            js,
+        )
+        self.assertIn(
+            '"mouseleave"',
+            js,
+        )
+        self.assertIn(
+            '"focus"',
+            js,
+        )
+        self.assertIn(
+            'role", "tooltip"',
+            js,
+        )
+        self.assertIn(
+            "min-height: 1.8rem",
+            css,
+        )
+        self.assertIn(
+            "border-radius: var(--app-radius-pill);",
+            css,
+        )
+        self.assertIn(
+            ".context-help-icon",
+            css,
+        )
+        self.assertIn(
+            "position: absolute",
+            css,
+        )
+
 
 
 if __name__ == "__main__":

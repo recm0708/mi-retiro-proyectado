@@ -79,6 +79,24 @@ function puedeAccederDirectamenteAPaso(
     );
   }
 
+  if (
+    numeroPaso === 6
+    && simulacion.modo_flujo === "MANUAL"
+    && typeof manualFlowCompleto === "function"
+    && !manualFlowCompleto(simulacion)
+  ) {
+    return false;
+  }
+
+  if (
+    numeroPaso === 6
+    && simulacion.modo_flujo === "ASISTIDO"
+    && typeof assistedFlowCompleto === "function"
+    && !assistedFlowCompleto(simulacion)
+  ) {
+    return false;
+  }
+
   if (numeroPaso === 6) {
     return Boolean(
       simulacion.resumen_retiro
@@ -309,6 +327,18 @@ function obtenerConfiguracionNavegacionFlotante() {
       };
     }
 
+    if (
+      simulacion.modo_flujo === "MANUAL"
+      && typeof manualFlowCompleto === "function"
+      && !manualFlowCompleto(simulacion)
+    ) {
+      return {
+        estado: "Paso 5 de 6 · Revisa la completitud",
+        etiqueta: "Revisar datos pendientes",
+        deshabilitado: false,
+      };
+    }
+
     return {
       estado: "Paso 5 de 6 · Escenario listo para calcular",
       etiqueta: "Continuar a resultados",
@@ -495,6 +525,21 @@ function ejecutarAccionPrimariaFlotante() {
       document.getElementById(
         "btn-ajustar-proyeccion-retiro",
       ).click();
+      return;
+    }
+
+    if (
+      simulacion.modo_flujo === "MANUAL"
+      && typeof manualFlowCompleto === "function"
+      && !manualFlowCompleto(simulacion)
+    ) {
+      if (
+        typeof mostrarResumenCompletitudManual
+        === "function"
+      ) {
+        mostrarResumenCompletitudManual();
+      }
+
       return;
     }
 

@@ -79,19 +79,46 @@ class TestUX44ImportacionOficial(unittest.TestCase):
         self.assertEqual(respuesta.status_code, 415)
 
     def test_comprobante_esta_en_paso_uno_y_ficha_digital_en_paso_tres(self):
-        posicion_paso_1 = self.simulacion.index('data-panel="1"')
-        posicion_comprobante = self.simulacion.index('partials/official_data_import.html')
-        posicion_paso_2 = self.simulacion.index('data-panel="2"')
-        posicion_paso_3 = self.simulacion.index('data-panel="3"')
-        posicion_detalle = self.simulacion.index('partials/current_year_detail.html')
-        posicion_ficha_en_detalle = self.parcial_detalle.index('partials/ficha_digital_import.html')
+        assisted = (
+            ROOT
+            / "app/templates/partials/assisted_preparation.html"
+        ).read_text(
+            encoding="utf-8"
+        )
 
-        self.assertLess(posicion_paso_1, posicion_comprobante)
-        self.assertLess(posicion_comprobante, posicion_paso_2)
-        self.assertLess(posicion_paso_3, posicion_detalle)
-        self.assertGreaterEqual(posicion_ficha_en_detalle, 0)
-        self.assertNotIn('id="import-ficha-digital-pdf"', self.parcial_comprobante)
-        self.assertIn('id="import-ficha-digital-pdf"', self.parcial_ficha)
+        self.assertIn(
+            "partials/assisted_preparation.html",
+            self.simulacion,
+        )
+
+        self.assertNotIn(
+            "partials/official_data_import.html",
+            self.simulacion,
+        )
+
+        self.assertNotIn(
+            "partials/ficha_digital_import.html",
+            self.simulacion,
+        )
+
+        self.assertIn(
+            "partials/official_data_import.html",
+            assisted,
+        )
+
+        self.assertIn(
+            "partials/ficha_digital_import.html",
+            assisted,
+        )
+
+        self.assertLess(
+            assisted.index(
+                "partials/official_data_import.html"
+            ),
+            assisted.index(
+                "partials/ficha_digital_import.html"
+            ),
+        )
 
     def test_interfaz_exige_revision_y_confirmacion_antes_de_aplicar(self):
         self.assertIn("revisa la información detectada antes", self.parcial_comprobante)

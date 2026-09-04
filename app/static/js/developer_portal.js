@@ -43,6 +43,13 @@
   }
 
   function iniciarSidebar() {
+    const MOBILE_QUERY = "(max-width: 991.98px)";
+
+    const STORAGE_KEY = (
+      "miRetiroProyectado.shell.sidebar"
+    );
+
+
     const body = document.body;
 
     const sidebar = document.getElementById(
@@ -57,34 +64,93 @@
       "[data-dev-sidebar-overlay]",
     );
 
-    if (!sidebar || !toggle) {
+
+    if (
+      !sidebar
+      || !toggle
+    ) {
       return;
     }
 
-    const mediaMobile = window.matchMedia(
+
+    const mobile = window.matchMedia(
       MOBILE_QUERY,
     );
 
+
+    function leerPreferencia() {
+      try {
+        return window.localStorage.getItem(
+          STORAGE_KEY,
+        );
+      } catch {
+        return null;
+      }
+    }
+
+
+    function guardarPreferencia(
+      colapsado,
+    ) {
+      try {
+        window.localStorage.setItem(
+          STORAGE_KEY,
+          colapsado
+            ? "collapsed"
+            : "expanded",
+        );
+      } catch {
+        // El shell continúa siendo utilizable.
+      }
+    }
+
+
+    function aplicarPreferencia() {
+      body.classList.remove(
+        "dev-sidebar-open",
+      );
+
+
+      if (mobile.matches) {
+        body.classList.remove(
+          "dev-sidebar-collapsed",
+        );
+
+        return;
+      }
+
+
+      body.classList.toggle(
+        "dev-sidebar-collapsed",
+        leerPreferencia()
+          === "collapsed",
+      );
+    }
+
+
     function estaAbierto() {
-      if (mediaMobile.matches) {
+      if (mobile.matches) {
         return body.classList.contains(
           "dev-sidebar-open",
         );
       }
+
 
       return !body.classList.contains(
         "dev-sidebar-collapsed",
       );
     }
 
-    function sincronizarEstado() {
-      const abierto = estaAbierto();
 
+    function sincronizarEstado() {
       toggle.setAttribute(
         "aria-expanded",
-        abierto ? "true" : "false",
+        estaAbierto()
+          ? "true"
+          : "false",
       );
     }
+
 
     function cerrarMovil() {
       body.classList.remove(
@@ -94,46 +160,61 @@
       sincronizarEstado();
     }
 
-    toggle.addEventListener("click", () => {
-      if (mediaMobile.matches) {
-        body.classList.toggle(
-          "dev-sidebar-open",
-        );
-      } else {
-        body.classList.toggle(
-          "dev-sidebar-collapsed",
-        );
-      }
 
-      sincronizarEstado();
-    });
+    toggle.addEventListener(
+      "click",
+      () => {
+        if (mobile.matches) {
+          body.classList.toggle(
+            "dev-sidebar-open",
+          );
+        } else {
+          body.classList.toggle(
+            "dev-sidebar-collapsed",
+          );
 
-    if (overlay) {
-      overlay.addEventListener(
-        "click",
-        cerrarMovil,
-      );
-    }
+
+          guardarPreferencia(
+            body.classList.contains(
+              "dev-sidebar-collapsed",
+            ),
+          );
+        }
+
+
+        sincronizarEstado();
+      },
+    );
+
+
+    overlay?.addEventListener(
+      "click",
+      cerrarMovil,
+    );
+
 
     sidebar
       .querySelectorAll("a")
-      .forEach((enlace) => {
-        enlace.addEventListener(
-          "click",
-          () => {
-            if (mediaMobile.matches) {
-              cerrarMovil();
-            }
-          },
-        );
-      });
+      .forEach(
+        (link) => {
+          link.addEventListener(
+            "click",
+            () => {
+              if (mobile.matches) {
+                cerrarMovil();
+              }
+            },
+          );
+        },
+      );
+
 
     document.addEventListener(
       "keydown",
       (event) => {
         if (
           event.key === "Escape"
-          && mediaMobile.matches
+          && mobile.matches
           && body.classList.contains(
             "dev-sidebar-open",
           )
@@ -144,21 +225,17 @@
       },
     );
 
-    mediaMobile.addEventListener(
+
+    mobile.addEventListener(
       "change",
       () => {
-        body.classList.remove(
-          "dev-sidebar-open",
-        );
-
-        body.classList.remove(
-          "dev-sidebar-collapsed",
-        );
-
+        aplicarPreferencia();
         sincronizarEstado();
       },
     );
 
+
+    aplicarPreferencia();
     sincronizarEstado();
   }
 
@@ -332,273 +409,4 @@
     iniciarVisorEventos,
   );
 
-})();
-
-/* ==========================================================
- * R6 sidebar compact persistence
- * ========================================================== */
-
-(() => {
-  const PARAMETRO = "sidebar";
-  const VALOR_COMPACTO = "compact";
-  const DESKTOP_QUERY = "(min-width: 992px)";
-
-  function urlConEstadoSidebar(
-    href,
-    compacto,
-  ) {
-    const url = new URL(
-      href,
-      window.location.origin,
-    );
-
-    if (compacto) {
-      url.searchParams.set(
-        PARAMETRO,
-        VALOR_COMPACTO,
-      );
-    } else {
-      url.searchParams.delete(
-        PARAMETRO,
-      );
-    }
-
-    return (
-      url.pathname
-      + url.search
-      + url.hash
-    );
-  }
-
-  function estadoCompactoEnUrl() {
-    const url = new URL(
-      window.location.href,
-    );
-
-    return (
-      url.searchParams.get(
-        PARAMETRO,
-      ) === VALOR_COMPACTO
-    );
-  }
-
-  function actualizarUrlActual(
-    compacto,
-  ) {
-    const url = new URL(
-      window.location.href,
-    );
-
-    if (compacto) {
-      url.searchParams.set(
-        PARAMETRO,
-        VALOR_COMPACTO,
-      );
-    } else {
-      url.searchParams.delete(
-        PARAMETRO,
-      );
-    }
-
-    window.history.replaceState(
-      window.history.state,
-      "",
-      (
-        url.pathname
-        + url.search
-        + url.hash
-      ),
-    );
-  }
-
-  function obtenerEtiqueta(
-    enlace,
-  ) {
-    const elementos = enlace.querySelectorAll(
-      "span",
-    );
-
-    if (!elementos.length) {
-      return "";
-    }
-
-    return (
-      elementos[
-        elementos.length - 1
-      ].textContent.trim()
-    );
-  }
-
-  function iniciarPersistenciaSidebar() {
-    const body = document.body;
-
-    const boton = document.querySelector(
-      "[data-dev-sidebar-toggle]",
-    );
-
-    const enlaces = Array.from(
-      document.querySelectorAll(
-        ".dev-sidebar-nav a",
-      ),
-    );
-
-    const desktop = window.matchMedia(
-      DESKTOP_QUERY,
-    );
-
-    if (!body || !boton) {
-      return;
-    }
-
-    function estaCompacto() {
-      return (
-        desktop.matches
-        && body.classList.contains(
-          "dev-sidebar-collapsed",
-        )
-      );
-    }
-
-    function actualizarEnlaces(
-      compacto,
-    ) {
-      enlaces.forEach((enlace) => {
-        const href = enlace.getAttribute(
-          "href",
-        );
-
-        if (
-          !href
-          || !href.startsWith("/dev")
-        ) {
-          return;
-        }
-
-        enlace.setAttribute(
-          "href",
-          urlConEstadoSidebar(
-            href,
-            compacto,
-          ),
-        );
-      });
-    }
-
-    function actualizarAyudas(
-      compacto,
-    ) {
-      enlaces.forEach((enlace) => {
-        const etiqueta = obtenerEtiqueta(
-          enlace,
-        );
-
-        if (!etiqueta) {
-          return;
-        }
-
-        if (compacto) {
-          enlace.setAttribute(
-            "title",
-            etiqueta,
-          );
-        } else {
-          enlace.removeAttribute(
-            "title",
-          );
-        }
-      });
-    }
-
-    function sincronizarPresentacion(
-      compacto,
-    ) {
-      actualizarEnlaces(
-        compacto,
-      );
-
-      actualizarAyudas(
-        compacto,
-      );
-    }
-
-    function aplicarEstadoInicial() {
-      if (!desktop.matches) {
-        body.classList.remove(
-          "dev-sidebar-collapsed",
-        );
-
-        sincronizarPresentacion(
-          false,
-        );
-
-        return;
-      }
-
-      const compacto = (
-        estadoCompactoEnUrl()
-      );
-
-      body.classList.toggle(
-        "dev-sidebar-collapsed",
-        compacto,
-      );
-
-      sincronizarPresentacion(
-        compacto,
-      );
-    }
-
-    /*
-     * El controlador original realiza el toggle visual.
-     * Después sincronizamos la URL actual y todos los enlaces.
-     *
-     * El estado visual se conserva únicamente en la URL.
-     */
-    boton.addEventListener(
-      "click",
-      () => {
-        window.requestAnimationFrame(
-          () => {
-            if (!desktop.matches) {
-              return;
-            }
-
-            const compacto = (
-              estaCompacto()
-            );
-
-            actualizarUrlActual(
-              compacto,
-            );
-
-            sincronizarPresentacion(
-              compacto,
-            );
-          },
-        );
-      },
-    );
-
-    if (
-      typeof desktop.addEventListener
-      === "function"
-    ) {
-      desktop.addEventListener(
-        "change",
-        aplicarEstadoInicial,
-      );
-    }
-
-    window.addEventListener(
-      "pageshow",
-      aplicarEstadoInicial,
-    );
-
-    aplicarEstadoInicial();
-  }
-
-  document.addEventListener(
-    "DOMContentLoaded",
-    iniciarPersistenciaSidebar,
-  );
 })();

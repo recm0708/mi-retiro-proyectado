@@ -29,7 +29,7 @@
   padding: 0;
 
   border: 0;
-  border-radius: 999px;
+  border-radius: var(--app-radius-pill);
 
   background-color: transparent;
   color: var(--app-primary);
@@ -119,22 +119,17 @@
 
 .form-control[aria-invalid="true"],
 .form-select[aria-invalid="true"] {
-  border-color: var(--bs-danger);
-  box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--bs-danger) 18%, transparent);
+  border-color: var(--app-danger-border);
+  box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--app-danger-border) 22%, transparent);
 }
 
 .a11y-field-error {
   display: block;
   margin-top: 0.4rem;
-  color: var(--bs-danger-text-emphasis, var(--bs-danger));
+  color: var(--app-danger-text);
   font-size: 0.9rem;
   font-weight: 600;
   line-height: 1.35;
-}
-
-html[data-app-theme="dark"] .a11y-field-error,
-html[data-app-theme="contrast"] .a11y-field-error {
-  color: color-mix(in srgb, var(--bs-danger) 62%, var(--app-text));
 }
 
 html[data-app-theme="contrast"] .a11y-field-error {

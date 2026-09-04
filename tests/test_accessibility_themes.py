@@ -21,14 +21,42 @@ class TestAccesibilidadTemas(unittest.TestCase):
     def test_menu_de_apariencia_conserva_cuatro_modos(self):
         respuesta = self.cliente.get("/")
 
-        self.assertEqual(respuesta.status_code, 200)
-        self.assertIn('id="menu-apariencia"', respuesta.text)
-        self.assertIn('data-theme-choice="system"', respuesta.text)
-        self.assertIn('data-theme-choice="light"', respuesta.text)
-        self.assertIn('data-theme-choice="dark"', respuesta.text)
-        self.assertIn('data-theme-choice="contrast"', respuesta.text)
-        self.assertIn("Accesibilidad", respuesta.text)
-        self.assertIn('/static/js/theme.js', respuesta.text)
+        self.assertEqual(
+            respuesta.status_code,
+            200,
+        )
+
+        self.assertIn(
+            'id="menu-apariencia"',
+            respuesta.text,
+        )
+
+        for mode in (
+            "system",
+            "light",
+            "dark",
+            "contrast",
+        ):
+            with self.subTest(mode=mode):
+                self.assertIn(
+                    f'data-theme-choice="{mode}"',
+                    respuesta.text,
+                )
+
+        self.assertIn(
+            "Apariencia",
+            respuesta.text,
+        )
+
+        self.assertIn(
+            "Alto contraste",
+            respuesta.text,
+        )
+
+        self.assertIn(
+            "/static/js/theme.js",
+            respuesta.text,
+        )
 
     def test_navegacion_incluye_salto_al_contenido_y_aria_current(self):
         respuesta = self.cliente.get("/metodologia")

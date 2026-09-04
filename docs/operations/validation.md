@@ -665,7 +665,7 @@ python -m pip check
 
 ## 3. Inventario actual de pruebas
 
-Inventario vigente: **186 módulos**.
+Inventario vigente: **191 módulos**.
 
 - `tests/test_accessibility_themes.py`
 - `tests/test_accessibility_ux4.py`
@@ -832,6 +832,9 @@ Inventario vigente: **186 módulos**.
 - `tests/test_ux46h_r1_resultados_exportacion.py`
 - `tests/test_ux46i_r1_calculation_guide.py`
 - `tests/test_ux4_remate_visual.py`
+- `tests/test_ux5_r1_design_system.py`
+- `tests/test_ux5_r2_shell_navigation.py`
+- `tests/test_ux5_r3_r4_simulation_flows.py`
 - `tests/test_ver2_documentacion_vigente.py`
 - `tests/test_ver2_ledger_estructurado.py`
 - `tests/test_ver2_r1_reconciliacion_post_doc1.py`
@@ -902,6 +905,12 @@ Estado revision-aware durante este cierre:
   revalidación sobre `main`;
 - la promoción, el tag firmado y el GitHub Release pertenecen a una etapa
   posterior y separada.
+
+
+Módulos incorporados al inventario vigente:
+
+- `tests/test_ux5_r5_assisted_upload_layout.py`
+- `tests/test_ux5_r5_r6_assisted_integration.py`
 
 ## 4. Categorías
 

@@ -107,7 +107,7 @@ class TestDev2R6MultipageShell(unittest.TestCase):
         """Cada dominio Developer dispone de una página humana real."""
 
         casos = {
-            "/dev": "Resumen del Portal Developer",
+            "/dev": "Centro de control del entorno local",
             "/dev/diagnostico": "Autodiagnóstico técnico",
             "/dev/eventos": "<h1",
             "/dev/archivos": "<h1",
@@ -122,12 +122,15 @@ class TestDev2R6MultipageShell(unittest.TestCase):
 
                 for ruta, contenido in casos.items():
                     with self.subTest(ruta=ruta):
-                        respuesta = cliente.get(ruta)
+                        respuesta = cliente.get(
+                            ruta
+                        )
 
                         self.assertEqual(
                             200,
                             respuesta.status_code,
                         )
+
                         self.assertIn(
                             contenido,
                             respuesta.text,

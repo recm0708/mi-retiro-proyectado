@@ -64,7 +64,7 @@
 </head>
 
 <body
-  class="dev-portal-body page-{{ pagina_activa|default('portal_developer') }}{% if request.query_params.get('sidebar') == 'compact' %} dev-sidebar-collapsed{% endif %}"
+  class="dev-portal-body page-{{ pagina_activa|default('portal_developer') }}"
 >
   <a class="skip-link" href="#contenido-principal">
     Saltar al contenido principal
@@ -446,12 +446,7 @@
           <span>Privacidad</span>
         </a>
       </nav>
-
-      <div class="dev-sidebar-meta">
-        <span>Entorno local</span>
-        <small>v{{ app_version }}</small>
-      </div>
-    </aside>
+</aside>
 
     <button
       class="dev-sidebar-overlay"

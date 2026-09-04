@@ -3287,6 +3287,22 @@ document.addEventListener(
       () => {
         const simulacion = obtenerSimulacion();
 
+        if (
+          simulacion.modo_flujo === "MANUAL"
+          && typeof manualFlowCompleto === "function"
+          && !manualFlowCompleto(simulacion)
+        ) {
+          if (
+            typeof mostrarResumenCompletitudManual
+            === "function"
+          ) {
+            mostrarResumenCompletitudManual();
+          }
+
+          return;
+        }
+
+
         if (!simulacion.resumen_retiro) {
           mostrarErrorRetiro(
             "Primero debes analizar los escenarios de retiro.",

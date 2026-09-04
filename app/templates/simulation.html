@@ -15,9 +15,110 @@ Nueva simulación | {{ app_name }}
 
   <div class="container">
 
+    <section
+      id="simulation-mode-gate"
+      class="simulation-mode-gate"
+      aria-labelledby="simulation-mode-title"
+    >
+      <div class="simulation-mode-heading">
+        <span class="simulation-mode-kicker">
+          Nueva simulación
+        </span>
+
+        <h2 id="simulation-mode-title">
+          ¿Cómo quieres preparar tu simulación?
+        </h2>
+
+        <p>
+          Ambas modalidades utilizan las mismas reglas de cálculo.
+          La diferencia está en cómo preparas y revisas la
+          información necesaria antes de obtener los resultados.
+        </p>
+      </div>
+
+      <div
+        class="simulation-mode-grid"
+        aria-label="Modalidades de simulación"
+      >
+        <button
+          type="button"
+          class="simulation-mode-card"
+          data-simulation-mode-choice="MANUAL"
+        >
+          <span class="simulation-mode-card-label">
+            Manual
+          </span>
+
+          <strong>
+            Completar los datos paso a paso
+          </strong>
+
+          <span>
+            Introduces personalmente la información necesaria.
+            Durante este recorrido no se solicitarán documentos
+            de Mi Retiro Seguro ni Ficha Digital.
+          </span>
+
+          <span class="simulation-mode-card-action">
+            Comenzar en modo Manual →
+          </span>
+        </button>
+
+        <button
+          type="button"
+          class="simulation-mode-card"
+          data-simulation-mode-choice="ASISTIDO"
+        >
+          <span class="simulation-mode-card-label">
+            Asistido
+          </span>
+
+          <strong>
+            Preparar datos con ayuda documental
+          </strong>
+
+          <span>
+            Puedes utilizar Mi Retiro Seguro, Ficha Digital
+            o ambos documentos y después revisar, corregir
+            y completar la información detectada.
+            El modo Asistido prepara datos; nunca toma decisiones por ti.
+          </span>
+
+          <span class="simulation-mode-card-action">
+            Comenzar en modo Asistido →
+          </span>
+        </button>
+      </div>
+</section>
+
+
+    <div
+      id="simulation-workspace"
+      class="d-none"
+      data-simulation-workspace
+      hidden
+    >
+
     <!-- Encabezado general del asistente. -->
 
     <div class="simulation-header mb-4">
+
+      <div class="simulation-flow-context mb-3">
+        <span
+          id="simulation-flow-badge"
+          class="simulation-flow-badge"
+        >
+          Modalidad
+        </span>
+
+        <button
+          type="button"
+          class="btn btn-sm btn-outline-secondary"
+          data-simulation-mode-change
+        >
+          Cambiar modalidad
+        </button>
+      </div>
 
       <span class="text-primary fw-semibold">
         Nueva simulación
@@ -33,6 +134,38 @@ Nueva simulación | {{ app_name }}
       </p>
 
     </div>
+
+
+
+
+
+    {% include "partials/assisted_preparation.html" %}
+
+    <div
+      id="simulation-wizard-shell"
+      class="d-none"
+      data-simulation-wizard-shell
+      hidden
+    >
+
+
+<p
+      id="simulation-required-global"
+      class="required-fields-note simulation-required-global mb-3"
+    >
+      <span
+        class="required-marker"
+        aria-hidden="true"
+      >*</span>
+      Campo obligatorio
+    </p>
+
+    <div
+      id="wizard-validation-summary"
+      class="wizard-validation-summary d-none mb-4"
+      role="alert"
+      aria-atomic="true"
+    ></div>
 
 
     <!-- ==================================================
@@ -174,24 +307,7 @@ Nueva simulación | {{ app_name }}
               </div>
 
 
-              <div class="personal-data-source mb-4" aria-labelledby="modo-datos-personales-titulo">
-                <div class="mb-3">
-                  <h3 id="modo-datos-personales-titulo" class="h5 fw-bold mb-1">¿Cómo quieres proporcionar tus datos?</h3>
-                  <p class="text-secondary mb-0">Elige una modalidad. Puedes cambiarla sin perder silenciosamente la información ya escrita.</p>
-                </div>
-                <div class="personal-data-source-grid" role="radiogroup" aria-label="Modalidad de captura de datos personales">
-                  <label class="personal-data-source-option" for="modo-datos-manual">
-                    <input class="form-check-input" type="radio" name="modo_datos_personales" id="modo-datos-manual" value="MANUAL" checked>
-                    <span><strong>Ingresarlos manualmente</strong><small>Completaré personalmente los campos necesarios.</small></span>
-                  </label>
-                  <label class="personal-data-source-option" for="modo-datos-pdf">
-                    <input class="form-check-input" type="radio" name="modo_datos_personales" id="modo-datos-pdf" value="MI_RETIRO_SEGURO">
-                    <span><strong>Importar desde Mi Retiro Seguro</strong><small>Usaré mi comprobante para detectar y revisar información.</small></span>
-                  </label>
-                </div>
-              </div>
 
-              {% include "partials/official_data_import.html" %}
 
               <form id="form-datos-personales">
                 <div id="bloque-datos-personales" class="personal-data-form">
@@ -339,7 +455,7 @@ Nueva simulación | {{ app_name }}
                     </div>
                   </div>
 
-                  <div id="cuotas-importadas-acciones" class="imported-data-actions d-none mt-3">
+                  <div id="cuotas-importadas-acciones" data-assisted-only class="imported-data-actions d-none mt-3">
                     <span class="imported-data-status-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="m7 12 3 3 7-7"></path></svg></span>
                     <span id="cuotas-importadas-estado">Los datos confirmados desde la importación se mantienen sin cambios en este paso.</span>
                     <button type="button" id="btn-revisar-cuotas-importadas" class="btn btn-sm btn-outline-primary">
@@ -1080,6 +1196,80 @@ Nueva simulación | {{ app_name }}
 
 
 
+        <section
+          id="manual-completeness-gate"
+          class="manual-completeness-gate d-none mb-4"
+          data-manual-only
+          aria-labelledby="manual-completeness-title"
+        >
+          <div class="manual-completeness-heading">
+            <div>
+              <span>
+                Verificación antes de calcular
+              </span>
+
+              <h2
+                id="manual-completeness-title"
+                class="h5 mb-1"
+              >
+                Completitud de la simulación Manual
+              </h2>
+            </div>
+
+            <strong
+              id="manual-completeness-status"
+              aria-live="polite"
+            >
+              Pendiente
+            </strong>
+          </div>
+
+          <ul class="manual-completeness-list">
+            <li data-completeness-key="datos">
+              <span>Datos obligatorios</span>
+              <strong data-completeness-state>
+                Pendiente
+              </strong>
+            </li>
+
+            <li data-completeness-key="decisiones">
+              <span>Decisiones obligatorias</span>
+              <strong data-completeness-state>
+                Pendiente
+              </strong>
+            </li>
+
+            <li data-completeness-key="fechas">
+              <span>Coherencia de fechas</span>
+              <strong data-completeness-state>
+                Pendiente
+              </strong>
+            </li>
+
+            <li data-completeness-key="importados">
+              <span>Datos importados revisados</span>
+              <strong data-completeness-state>
+                No aplica
+              </strong>
+            </li>
+
+            <li data-completeness-key="dependencias">
+              <span>Dependencias entre pasos</span>
+              <strong data-completeness-state>
+                Pendiente
+              </strong>
+            </li>
+
+            <li data-completeness-key="accion">
+              <span>Acción explícita del usuario</span>
+              <strong data-completeness-state>
+                Pendiente
+              </strong>
+            </li>
+          </ul>
+        </section>
+
+
         <!-- Navegación inferior equivalente para mantener acciones accesibles al final del contenido. -->
         <div id="wizard-navigation-bottom" class="wizard-navigation-bar wizard-navigation-bar-bottom mt-4" data-wizard-nav="bottom" aria-label="Navegación inferior del asistente">
           <div class="wizard-sticky-nav-secondary">
@@ -1096,6 +1286,10 @@ Nueva simulación | {{ app_name }}
         </div>
 
       </div>
+
+    </div>
+
+    </div>
 
     </div>
 
@@ -1119,6 +1313,13 @@ Nueva simulación | {{ app_name }}
 
 <script
   src="{{ url_for('static', path='/js/simulation.js') }}"
+></script>
+
+
+<!-- Elección y contrato de modalidad de la simulación. -->
+<script
+  src="{{ url_for('static', path='/js/simulation_mode.js') }}"
+  <script src="{{ url_for('static', path='js/assisted_flow.js') }}"></script>
 ></script>
 
 

@@ -290,6 +290,26 @@ async def agregar_cabeceras_defensivas(request: Request, call_next):
     ):
         respuesta.headers["Cache-Control"] = "no-store"
 
+    # En desarrollo, el navegador debe consumir siempre el HTML, CSS y
+    # JavaScript correspondientes al árbol de trabajo actual. Esto evita
+    # combinar una plantilla nueva con recursos estáticos almacenados de
+    # una revisión anterior.
+    if modo_desarrollo_activo():
+        content_type = respuesta.headers.get(
+            "content-type",
+            "",
+        )
+
+        if (
+            request.url.path.startswith("/static/")
+            or content_type.startswith("text/html")
+        ):
+            respuesta.headers["Cache-Control"] = (
+                "no-store, no-cache, must-revalidate, max-age=0"
+            )
+            respuesta.headers["Pragma"] = "no-cache"
+            respuesta.headers["Expires"] = "0"
+
     return respuesta
 
 

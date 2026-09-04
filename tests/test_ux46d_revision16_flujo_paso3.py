@@ -31,16 +31,43 @@ class TestUX46dRevision16FlujoPaso3(unittest.TestCase):
         ).read_text(encoding="utf-8")
 
     def test_paso3_agrupa_ficha_digital_dentro_del_detalle_actual(self):
-        paso3 = self.simulacion.split('data-panel="3"', 1)[1].split('data-panel="4"', 1)[0]
-        self.assertLess(
-            paso3.index('partials/salary_history.html'),
-            paso3.index('partials/current_year_detail.html'),
+        paso3 = self.simulacion.split(
+            'data-panel="3"',
+            1,
+        )[1].split(
+            'data-panel="4"',
+            1,
+        )[0]
+
+        assisted = (
+            ROOT
+            / "app/templates/partials/assisted_preparation.html"
+        ).read_text(
+            encoding="utf-8"
         )
-        self.assertNotIn('partials/ficha_digital_import.html', paso3)
-        self.assertIn('partials/ficha_digital_import.html', self.detalle)
+
         self.assertLess(
-            self.detalle.index('partials/ficha_digital_import.html'),
-            self.detalle.index('id="detalle-anio-actual-contenido"'),
+            paso3.index(
+                "partials/salary_history.html"
+            ),
+            paso3.index(
+                "partials/current_year_detail.html"
+            ),
+        )
+
+        self.assertNotIn(
+            "partials/ficha_digital_import.html",
+            paso3,
+        )
+
+        self.assertNotIn(
+            "partials/ficha_digital_import.html",
+            self.detalle,
+        )
+
+        self.assertIn(
+            "partials/ficha_digital_import.html",
+            assisted,
         )
 
     def test_render_final_mantiene_fuente_antes_de_tabla_mensual(self):
@@ -61,9 +88,27 @@ class TestUX46dRevision16FlujoPaso3(unittest.TestCase):
         )
 
     def test_ficha_digital_es_componente_interno_y_no_nuevo_subpaso(self):
-        self.assertIn('id="seccion-importacion-ficha"', self.ficha)
-        self.assertNotIn('step3-subsection mt-5', self.ficha)
-        self.assertIn('official-import-section mt-4 mb-4', self.ficha)
+        assisted = (
+            ROOT
+            / "app/templates/partials/assisted_preparation.html"
+        ).read_text(
+            encoding="utf-8"
+        )
+
+        self.assertIn(
+            "partials/ficha_digital_import.html",
+            assisted,
+        )
+
+        self.assertNotIn(
+            "partials/ficha_digital_import.html",
+            self.detalle,
+        )
+
+        self.assertIn(
+            'id="seccion-detalle-anio-actual"',
+            self.detalle,
+        )
 
     def test_paso3_revalida_cuotas_sin_navegar_hacia_atras(self):
         self.assertIn('async function asegurarCuotasAnalizadasParaPaso3()', self.simulacion_js)

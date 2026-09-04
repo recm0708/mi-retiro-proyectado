@@ -16,23 +16,127 @@
     return boton?.dataset.procesandoAdjunto === "true";
   }
 
-  function mostrarEstado(estado, mensaje = MENSAJE_PROCESANDO) {
-    if (!estado) return;
+  function mostrarEstado(
+    estado,
+    mensaje = MENSAJE_PROCESANDO,
+  ) {
+    if (!estado) {
+      return;
+    }
 
-    const indicador = document.createElement("span");
-    indicador.className = "spinner-border spinner-border-sm me-2";
-    indicador.setAttribute("aria-hidden", "true");
 
-    const texto = document.createElement("span");
+    const linea = document.createElement(
+      "div",
+    );
+
+    linea.className = (
+      "d-flex align-items-center gap-2"
+    );
+
+
+    const indicador = document.createElement(
+      "span",
+    );
+
+    indicador.className = (
+      "spinner-border spinner-border-sm"
+    );
+
+    indicador.setAttribute(
+      "aria-hidden",
+      "true",
+    );
+
+
+    const texto = document.createElement(
+      "span",
+    );
+
     texto.textContent = mensaje;
 
-    estado.replaceChildren(indicador, texto);
-    estado.classList.remove("d-none");
-    estado.classList.add("attachment-processing-status");
-    estado.setAttribute("role", "status");
-    estado.setAttribute("aria-live", "polite");
-    estado.setAttribute("aria-atomic", "true");
-    estado.setAttribute("aria-busy", "true");
+
+    linea.append(
+      indicador,
+      texto,
+    );
+
+
+    /*
+     * El backend no informa porcentaje de avance.
+     * La barra representa actividad indeterminada y
+     * nunca presenta un porcentaje artificial.
+     */
+    const progreso = document.createElement(
+      "div",
+    );
+
+    progreso.className = (
+      "progress mt-2"
+    );
+
+    progreso.setAttribute(
+      "role",
+      "progressbar",
+    );
+
+    progreso.setAttribute(
+      "aria-label",
+      "Análisis del documento",
+    );
+
+    progreso.setAttribute(
+      "aria-valuetext",
+      "Procesando documento",
+    );
+
+
+    const barra = document.createElement(
+      "div",
+    );
+
+    barra.className = (
+      "progress-bar progress-bar-striped "
+      + "progress-bar-animated w-100"
+    );
+
+
+    progreso.appendChild(
+      barra,
+    );
+
+
+    estado.replaceChildren(
+      linea,
+      progreso,
+    );
+
+    estado.classList.remove(
+      "d-none",
+    );
+
+    estado.classList.add(
+      "attachment-processing-status",
+    );
+
+    estado.setAttribute(
+      "role",
+      "status",
+    );
+
+    estado.setAttribute(
+      "aria-live",
+      "polite",
+    );
+
+    estado.setAttribute(
+      "aria-atomic",
+      "true",
+    );
+
+    estado.setAttribute(
+      "aria-busy",
+      "true",
+    );
   }
 
   function iniciar({

@@ -16,23 +16,76 @@ class TestEstabilizacionVisual(unittest.TestCase):
     """Protege temas, portada y separación entre interfaz y detalles técnicos."""
 
     def test_oscuro_conserva_base_estable_y_capa_moderna_profunda(self):
-        historico = CSS.read_text(encoding="utf-8")
-        moderno = DESIGN.read_text(encoding="utf-8")
+        historico = CSS.read_text(
+            encoding="utf-8"
+        )
+        moderno = DESIGN.read_text(
+            encoding="utf-8"
+        )
 
-        self.assertIn("--app-background: #05070b;", historico)
-        self.assertIn("--app-surface: #0d1117;", historico)
-        self.assertIn("--app-background: #070b12;", moderno)
-        self.assertIn("--app-surface: #0d1420;", moderno)
-        self.assertIn("--app-text-secondary: #b8c2d6;", moderno)
+        self.assertNotIn(
+            "--app-background:",
+            historico,
+        )
+        self.assertNotIn(
+            "--app-surface:",
+            historico,
+        )
+
+        self.assertIn(
+            "--app-background: #070b12;",
+            moderno,
+        )
+        self.assertIn(
+            "--app-surface: #0d1420;",
+            moderno,
+        )
+        self.assertIn(
+            "--app-text-secondary: #b8c2d6;",
+            moderno,
+        )
 
     def test_alto_contraste_es_negro_y_se_resuelve_como_tema_oscuro(self):
-        css = CSS.read_text(encoding="utf-8")
-        tema = TEMA.read_text(encoding="utf-8")
-        self.assertIn("--app-background: #000000;", css)
-        self.assertIn("--app-text: #ffffff;", css)
-        self.assertIn("--app-focus: #ffdf00;", css)
-        self.assertIn('if (preference === "contrast")', tema)
-        self.assertIn('return "dark";', tema)
+        historico = CSS.read_text(
+            encoding="utf-8"
+        )
+        moderno = DESIGN.read_text(
+            encoding="utf-8"
+        )
+        tema = TEMA.read_text(
+            encoding="utf-8"
+        )
+
+        self.assertNotIn(
+            "--app-background:",
+            historico,
+        )
+        self.assertNotIn(
+            "--app-text:",
+            historico,
+        )
+
+        self.assertIn(
+            "--app-background: #000000;",
+            moderno,
+        )
+        self.assertIn(
+            "--app-text: #ffffff;",
+            moderno,
+        )
+        self.assertIn(
+            "--app-focus: #ffdf00;",
+            moderno,
+        )
+
+        self.assertIn(
+            'if (preference === "contrast")',
+            tema,
+        )
+        self.assertIn(
+            'return "dark";',
+            tema,
+        )
 
     def test_wizard_y_barra_rapida_consumen_superficies_del_tema(self):
         contenido = CSS.read_text(encoding="utf-8")
