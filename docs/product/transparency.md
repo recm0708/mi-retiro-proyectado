@@ -20,7 +20,7 @@ vigente.
   `v0.1.19.05-beta`.
 - G118/E04 permanece preservado mediante `v0.1.18.04-beta` como
   publicación anterior.
-- UX.5 R1 queda reservado como G120/E01.
+- UX.5 R6 queda como candidato de cierre G120/E01; UX.6 queda planificado después sin Global preasignado.
 - DEV.2 no altera reglas previsionales ni convierte Developer Diagnostics
   en telemetría de producto.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
@@ -140,7 +140,7 @@ Como evidencia histórica también se conserva la formulación **“cierre de UX
 
 UX.4.6e–UX.4.6i, DEV.2, SEC.2 R1–R6, AUD.SEC2 R1, DOC.2,
 NOR.1 R8, DOC.1 R3–R5, PLAN.2 R1 y REL.GOV.1 R2 están cerrados.
-DEV.2 R6 está publicado como G119/E05. UX.5 R1 es el candidato
+DEV.2 R6 está publicado como G119/E05. UX.5 R6 es el candidato de cierre
 vigente G120/E01 y la secuencia posterior se mantiene en la matriz
 maestra hacia 1.0.
 

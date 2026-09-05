@@ -6,9 +6,14 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ## [Unreleased]
 
-- UX.5 R1 (candidato G120/E01): sistema visual integral, paleta, tipografía,
-  espaciado, botones, tarjetas, estados, jerarquía y tokens reutilizables;
-  G120 permanece reservado y no aceptado.
+- UX.5 R1–R6 (candidato de cierre G120/E01): consolida el sistema visual, shell, navegación, temas y la entrada explícita Manual/Asistida.
+- Flujo Manual: conserva el recorrido común de seis pasos sin exigir documentos y aplica gates de completitud antes de Resultados.
+- Flujo Asistido: integra Mi Retiro Seguro y Ficha Digital como fuentes opcionales individuales; exige confirmar al menos una, conserva revisión/procedencia y deja las decisiones faltantes al usuario.
+- Integración: unifica estado canónico, cambio de modalidad, invalidación descendente, recuperación, loaders indeterminados y protección del Paso 6.
+- Importadores: Mi Retiro Seguro y Ficha Digital pueden seleccionarse y analizarse desde el Centro documental Asistido, con revisión de los datos detectados antes de incorporarlos.
+- Runtime web: corrige la carga independiente de `simulation_mode.js` y `assisted_flow.js` y añade revisión de URL a assets locales para evitar mezclar HTML actual con CSS o JavaScript almacenados previamente.
+- Gobierno: R1–R6 forman el primer estado aceptable de UX.5; G120/E01 permanece reservado y no aceptado hasta completar PR/CI, integración y promoción.
+- UX.6 queda planificado después de UX.5, sin Global preasignado, para la auditoría integral visual, accesible, responsive y de ownership de App y Portal Developer.
 - Mantenimiento post-G119: PR #117 completó la migración de automatización,
   retiró `ci.yml`, `governance-audit.yml` y `markdown-audit.yml` después de
   trasladar sus contratos al `Repository Quality Gate` y conservar

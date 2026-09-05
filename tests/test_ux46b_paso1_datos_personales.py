@@ -82,12 +82,47 @@ class TestUX46bPaso1DatosPersonales(unittest.TestCase):
         cls.design = (ROOT / "app/static/css/design-system.css").read_text(encoding="utf-8")
 
     def test_simulacion_responde_con_modalidad_manual_por_defecto(self):
-        respuesta = self.cliente.get("/simulacion")
-        self.assertEqual(respuesta.status_code, 200)
-        self.assertIn("¿Cómo quieres proporcionar tus datos?", respuesta.text)
-        self.assertIn('id="modo-datos-manual"', respuesta.text)
-        self.assertIn('id="modo-datos-pdf"', respuesta.text)
-        self.assertIn('value="MANUAL" checked', respuesta.text)
+        self.assertIn(
+            "¿Cómo quieres preparar tu simulación?",
+            self.simulacion,
+        )
+
+        self.assertIn(
+            'data-simulation-mode-choice="MANUAL"',
+            self.simulacion,
+        )
+
+        self.assertIn(
+            'data-simulation-mode-choice="ASISTIDO"',
+            self.simulacion,
+        )
+
+        self.assertIn(
+            'id="simulation-workspace"',
+            self.simulacion,
+        )
+
+        position = self.simulacion.index(
+            'id="simulation-workspace"'
+        )
+
+        fragment = self.simulacion[
+            max(
+                0,
+                position - 100,
+            ):
+            position + 200
+        ]
+
+        self.assertIn(
+            'class="d-none"',
+            fragment,
+        )
+
+        self.assertIn(
+            "hidden",
+            fragment,
+        )
 
     def test_paso_uno_agrega_identificacion_opcional_sin_usarla_como_requisito(self):
         for identificador in (
@@ -109,18 +144,81 @@ class TestUX46bPaso1DatosPersonales(unittest.TestCase):
         self.assertIn('actualizarApellidoCasada()', self.importacion_js)
 
     def test_manual_y_pdf_son_modalidades_mutuamente_excluyentes(self):
-        self.assertIn('importacion?.classList.toggle("d-none", !esPdf)', self.importacion_js)
-        self.assertIn('formulario.classList.toggle("d-none", esPdf && !importacionConfirmada)', self.importacion_js)
-        self.assertIn('bloquearFormularioPersonal(esPdf && importacionConfirmada, simulacion)', self.importacion_js)
-        self.assertIn('modo_datos_personales: "MANUAL"', self.simulacion_js)
+        mode = (
+            ROOT
+            / "app/static/js/simulation_mode.js"
+        ).read_text(
+            encoding="utf-8"
+        )
+
+        self.assertIn(
+            'data-simulation-mode-choice="MANUAL"',
+            self.simulacion,
+        )
+
+        self.assertIn(
+            'data-simulation-mode-choice="ASISTIDO"',
+            self.simulacion,
+        )
+
+        self.assertIn(
+            "aplicarVisibilidadModalidad",
+            mode,
+        )
+
+        self.assertNotIn(
+            "seccion-importacion-comprobante",
+            self.importacion_js,
+        )
+
+        self.assertNotIn(
+            'input[name="modo_datos_personales"]',
+            self.simulacion,
+        )
 
     def test_ficha_digital_sale_del_paso_uno_y_se_ubica_en_historial(self):
-        paso1 = self.simulacion.split('data-panel="1"', 1)[1].split('data-panel="2"', 1)[0]
-        paso3 = self.simulacion.split('data-panel="3"', 1)[1].split('data-panel="4"', 1)[0]
-        self.assertNotIn('importacion_ficha_digital.html', paso1)
-        self.assertIn('current_year_detail.html', paso3)
-        self.assertIn('ficha_digital_import.html', self.detalle)
-        self.assertIn("Importar salarios recientes desde Ficha Digital", self.ficha)
+        paso1 = self.simulacion.split(
+            'data-panel="1"',
+            1,
+        )[1].split(
+            'data-panel="2"',
+            1,
+        )[0]
+
+        paso3 = self.simulacion.split(
+            'data-panel="3"',
+            1,
+        )[1].split(
+            'data-panel="4"',
+            1,
+        )[0]
+
+        assisted = (
+            ROOT
+            / "app/templates/partials/assisted_preparation.html"
+        ).read_text(
+            encoding="utf-8"
+        )
+
+        self.assertNotIn(
+            "ficha_digital_import.html",
+            paso1,
+        )
+
+        self.assertIn(
+            "current_year_detail.html",
+            paso3,
+        )
+
+        self.assertNotIn(
+            "ficha_digital_import.html",
+            self.detalle,
+        )
+
+        self.assertIn(
+            "partials/ficha_digital_import.html",
+            assisted,
+        )
 
     def test_navegacion_comun_tiene_barra_superior_e_inferior(self):
         self.assertLess(

@@ -150,21 +150,54 @@ class UX46fR1ConsistenciaProcedenciaAdjuntosTests(unittest.TestCase):
         self.assertLess(helper, bloque_pagina)
 
     def test_11_helper_de_adjuntos_expone_estado_accesible_y_antiduplicado(self):
-        for contrato in (
+        import re
+
+        compact = re.sub(
+            r"\s+",
+            " ",
+            self.procesamiento_js,
+        )
+
+        for expected in (
             "Analizando documento… Esto puede tardar unos segundos.",
-            "spinner-border spinner-border-sm me-2",
-            'estado.setAttribute("role", "status")',
-            'estado.setAttribute("aria-live", "polite")',
-            'estado.setAttribute("aria-atomic", "true")',
-            'estado.setAttribute("aria-busy", "true")',
+            "spinner-border spinner-border-sm",
+            "progress-bar progress-bar-striped",
+            "progress-bar-animated w-100",
+            "Procesando documento",
             'boton.dataset.procesandoAdjunto = "true"',
             "if (!boton || estaActivo(boton))",
             "boton.disabled = true",
             "input.disabled = true",
             "input.disabled = inputDeshabilitadoOriginal",
         ):
-            with self.subTest(contrato=contrato):
-                self.assertIn(contrato, self.procesamiento_js)
+            with self.subTest(
+                expected=expected
+            ):
+                self.assertIn(
+                    expected,
+                    self.procesamiento_js,
+                )
+
+        for accessible in (
+            'progreso.setAttribute( "role", "progressbar", );',
+            'progreso.setAttribute( "aria-valuetext", "Procesando documento", );',
+            'estado.setAttribute( "role", "status", );',
+            'estado.setAttribute( "aria-live", "polite", );',
+            'estado.setAttribute( "aria-atomic", "true", );',
+            'estado.setAttribute( "aria-busy", "true", );',
+        ):
+            with self.subTest(
+                accessible=accessible
+            ):
+                self.assertIn(
+                    accessible,
+                    compact,
+                )
+
+        self.assertNotIn(
+            "aria-valuenow",
+            self.procesamiento_js,
+        )
 
     def test_12_tres_analizadores_reutilizan_inicio_y_finalizacion_global(self):
         self.assertEqual(

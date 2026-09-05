@@ -76,15 +76,43 @@ class TestAccesibilidadUX4(unittest.TestCase):
         self.assertIn('table-scroll-focus', self.js)
 
     def test_css_protege_ayudas_contraste_y_estado_invalido(self):
-        self.assertIn(".context-help-trigger", self.css)
-        self.assertIn(".context-help-panel", self.css)
-        self.assertIn("min-height: 1.8rem", self.css)
-        self.assertIn("border-radius: 999px", self.css)
-        self.assertIn(".context-help-icon", self.css)
-        self.assertIn("cursor: help", self.css)
-        self.assertIn('[aria-invalid="true"]', self.css)
-        self.assertIn("prefers-contrast: more", self.css)
-        self.assertIn('data-app-theme="contrast"', self.css)
+        self.assertIn(
+            ".context-help-trigger",
+            self.css,
+        )
+        self.assertIn(
+            ".context-help-panel",
+            self.css,
+        )
+        self.assertIn(
+            "min-height: 1.8rem",
+            self.css,
+        )
+        self.assertIn(
+            "border-radius: var(--app-radius-pill);",
+            self.css,
+        )
+        self.assertIn(
+            ".context-help-icon",
+            self.css,
+        )
+        self.assertIn(
+            "cursor: help",
+            self.css,
+        )
+        self.assertIn(
+            '[aria-invalid="true"]',
+            self.css,
+        )
+        self.assertIn(
+            "prefers-contrast: more",
+            self.css,
+        )
+        self.assertIn(
+            'data-app-theme="contrast"',
+            self.css,
+        )
+
 
 
 if __name__ == "__main__":

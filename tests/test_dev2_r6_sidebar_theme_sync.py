@@ -71,18 +71,23 @@ class TestDev2R6SidebarThemeSync(unittest.TestCase):
             encoding="utf-8"
         )
 
-        self.assertIn(
-            "--dev-accent: var(--app-primary);",
+        self.assertNotIn(
+            "--dev-",
             css,
         )
-        self.assertIn(
-            "--dev-panel: var(--app-surface);",
-            css,
-        )
-        self.assertIn(
-            "--dev-text: var(--app-text);",
-            css,
-        )
+
+        for token in (
+            "var(--app-primary)",
+            "var(--app-surface)",
+            "var(--app-text)",
+            "var(--app-border)",
+            "var(--app-shell-sidebar-width)",
+        ):
+            with self.subTest(token=token):
+                self.assertIn(
+                    token,
+                    css,
+                )
 
     def test_developer_no_define_temas_paralelos(self):
         css = (
@@ -144,20 +149,31 @@ class TestDev2R6SidebarThemeSync(unittest.TestCase):
             js,
         )
 
-    def test_sidebar_no_persiste_estado_local(self):
+    def test_sidebar_persiste_solo_preferencia_visual(self):
         js = (
             ROOT
             / "app/static/js/developer_portal.js"
         ).read_text(
             encoding="utf-8"
-        ).casefold()
+        )
 
-        self.assertNotIn(
-            "localstorage",
+        self.assertIn(
+            "miRetiroProyectado.shell.sidebar",
             js,
         )
+
+        self.assertIn(
+            "localStorage",
+            js,
+        )
+
         self.assertNotIn(
-            "sessionstorage",
+            "sessionStorage",
+            js,
+        )
+
+        self.assertNotIn(
+            "sidebar=compact",
             js,
         )
 

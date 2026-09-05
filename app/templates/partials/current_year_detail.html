@@ -45,14 +45,12 @@
   </div>
 
   {# La Ficha Digital es una fuente del detalle del año actual, no una sección independiente. #}
-  {% include "partials/ficha_digital_import.html" %}
-
-  <div id="detalle-importado-inactivo" class="form-state-note d-none mb-4" role="status">
+<div id="detalle-importado-inactivo" data-assisted-only class="form-state-note d-none mb-4" role="status">
     La Ficha Digital está importada, pero sus salarios no se usarán mientras mantengas la opción «No — usar el total anual del historial». Si deseas aprovechar el detalle importado, selecciona «Sí — registrar salarios por período».
   </div>
 
   <div id="detalle-anio-actual-contenido" class="d-none">
-    <div id="detalle-importado-estado" class="imported-data-actions d-none mb-4">
+    <div id="detalle-importado-estado" data-assisted-only class="imported-data-actions d-none mb-4">
       <span class="imported-data-status-icon" aria-hidden="true">
         <svg viewBox="0 0 24 24" focusable="false"><path d="m7 12 3 3 7-7"></path></svg>
       </span>

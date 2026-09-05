@@ -12,7 +12,7 @@ El estado revision-aware vigente y publicado es:
 - G119/E05 está publicado mediante `v0.1.19.05-beta`, sobre
   `9424ea854f859a24fd01fe83bdf5d476b52fc213`;
 - G118/E04 permanece preservado mediante `v0.1.18.04-beta`;
-- G120/E01 queda reservado para UX.5 R1;
+- G120/E01 permanece reservado para el cierre UX.5 R6; UX.6 queda planificado después sin Global preasignado;
 - REL.GOV.1 mantiene la firma del tag fuera de GitHub Actions;
 - las rutas de reporte responsable y revisión de vulnerabilidades
   permanecen sin cambio material.

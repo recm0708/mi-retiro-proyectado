@@ -20,9 +20,11 @@ Estado vigente:
 - G118/E04 permanece preservado mediante `v0.1.18.04-beta` como
   publicación anterior.
 - G119 incorpora la revisión funcional R6 de DEV.2 con ordinal E05.
-- G120/E01 (`0.1.20.01-beta`) queda reservado para UX.5 R1.
+- G120/E01 (`0.1.20.01-beta`) permanece reservado para el candidato de cierre UX.5 R6.
 - DEV.2 queda cerrado después de R6.
 - UX.5 es un bloque nuevo y por eso inicia su secuencia aceptable en E01.
+- UX.5 R1–R6 son revisiones internas del mismo candidato y no consumieron estados aceptados independientes; si el bloque supera integración y promoción, G120/E01 registrará `functional_revision = R6`.
+- UX.6 queda registrado como bloque posterior planificado, sin Global preasignado mientras G120 no haya sido aceptado.
 - Las etapas posteriores no tienen Global preasignado más allá del
   candidato vigente.
 - Un PR, squash, tag o GitHub Release que materializa el mismo estado

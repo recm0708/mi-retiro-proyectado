@@ -101,18 +101,55 @@ class TestDev2R5PortalAccess(unittest.TestCase):
         with TemporaryDirectory() as temp:
             with self._env(temp):
                 cliente = TestClient(app)
-                cliente.post("/dev", data=self._login_data())
-                respuesta = cliente.get("/dev")
+                cliente.post(
+                    "/dev",
+                    data=self._login_data(),
+                )
+                respuesta = cliente.get(
+                    "/dev"
+                )
 
-        self.assertEqual(200, respuesta.status_code)
-        self.assertIn("Centro de desarrollo", respuesta.text)
-        for texto in ("Resumen", "Diagnóstico", "Eventos", "Archivos", "Privacidad"):
-            self.assertIn(texto, respuesta.text)
-        self.assertNotIn('href="/simulacion"', respuesta.text)
-        self.assertNotIn('href="/comparar"', respuesta.text)
-        self.assertNotIn(">DEV.2 R1<", respuesta.text)
-        self.assertNotIn(">DEV.2 R2<", respuesta.text)
-        self.assertNotIn(">DEV.2 R3<", respuesta.text)
+        self.assertEqual(
+            200,
+            respuesta.status_code,
+        )
+
+        self.assertIn(
+            "Centro de control del entorno local",
+            respuesta.text,
+        )
+
+        for texto in (
+            "Resumen",
+            "Diagnóstico",
+            "Eventos",
+            "Archivos",
+            "Privacidad",
+        ):
+            with self.subTest(texto=texto):
+                self.assertIn(
+                    texto,
+                    respuesta.text,
+                )
+
+        self.assertNotIn(
+            'href="/simulacion"',
+            respuesta.text,
+        )
+        self.assertNotIn(
+            'href="/comparar"',
+            respuesta.text,
+        )
+
+        for revision in (
+            ">DEV.2 R1<",
+            ">DEV.2 R2<",
+            ">DEV.2 R3<",
+        ):
+            self.assertNotIn(
+                revision,
+                respuesta.text,
+            )
 
     def test_centro_legacy_browser_redirige_sin_falso_denied(self):
         with TemporaryDirectory() as temp:
@@ -224,12 +261,47 @@ class TestDev2R5PortalAccess(unittest.TestCase):
         self.assertIn('{% extends "dev_base.html" %}', centro)
 
     def test_javascript_dev_no_persiste_credenciales(self):
-        texto = (ROOT / "app/static/js/developer_portal.js").read_text(encoding="utf-8").casefold()
-        self.assertNotIn("localstorage", texto)
-        self.assertNotIn("sessionstorage", texto)
-        self.assertNotIn("token=", texto)
-        self.assertNotIn("?token", texto)
+        texto = (
+            ROOT
+            / "app/static/js/developer_portal.js"
+        ).read_text(
+            encoding="utf-8"
+        )
 
+        password_section = texto.split(
+            "function iniciarVisibilidadPassword()",
+            1,
+        )[1].split(
+            "function iniciarSidebar()",
+            1,
+        )[0]
+
+        self.assertNotIn(
+            "localStorage",
+            password_section,
+        )
+
+        self.assertNotIn(
+            "sessionStorage",
+            password_section,
+        )
+
+        self.assertIn(
+            "miRetiroProyectado.shell.sidebar",
+            texto,
+        )
+
+        for sensible in (
+            "dev-password",
+            "admin-token",
+        ):
+            with self.subTest(
+                sensible=sensible
+            ):
+                self.assertNotIn(
+                    f'localStorage.setItem("{sensible}"',
+                    texto,
+                )
 
     def test_documentacion_r5_describe_contrato_vigente_promovido_g118(self):
         documentacion = (

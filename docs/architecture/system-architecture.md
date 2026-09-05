@@ -27,7 +27,7 @@ Estado vigente:
   protegen las operaciones administrativas aplicables.
 - DEV.2 no modifica motores previsionales, normativa ni rutas públicas
   de simulación.
-- UX.5 R1 queda reservado como G120/E01.
+- UX.5 R6 queda como candidato de cierre G120/E01; UX.6 se planifica a continuación sin Global preasignado.
 <!-- DOC1-R1-POST-MANT1:END -->
 
 Mi Retiro Proyectado es una aplicación web local basada en FastAPI, Jinja2 y JavaScript del navegador. La arquitectura separa presentación, contratos de datos, servicios de integración, motores previsionales, parámetros normativos y observabilidad de desarrollo.

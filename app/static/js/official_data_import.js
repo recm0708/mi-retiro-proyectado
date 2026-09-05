@@ -319,28 +319,52 @@ function bloquearFormularioPersonal(bloqueado, simulacion = obtenerSimulacion())
   });
 }
 
-function aplicarModoDatosPersonales(modo, simulacion = obtenerSimulacion()) {
-  const esPdf = modo === "MI_RETIRO_SEGURO";
-  const importacion = document.getElementById("seccion-importacion-comprobante");
-  const formulario = document.getElementById("form-datos-personales");
-  const importacionConfirmada = Boolean(
-    simulacion.importacion_comprobante_confirmada
-    && simulacion.referencia_mi_retiro_seguro,
+function aplicarModoDatosPersonales(
+  modo,
+  simulacion = obtenerSimulacion(),
+) {
+  const formulario = document.getElementById(
+    "form-datos-personales",
   );
 
-  importacion?.classList.toggle("d-none", !esPdf);
-  if (formulario) {
-    formulario.classList.toggle("d-none", esPdf && !importacionConfirmada);
-  }
-  bloquearFormularioPersonal(esPdf && importacionConfirmada, simulacion);
 
-  document.querySelectorAll(".personal-data-source-option").forEach((opcion) => {
-    const radio = opcion.querySelector('input[name="modo_datos_personales"]');
-    opcion.classList.toggle("selected", Boolean(radio?.checked));
-  });
+  const importacionConfirmada = Boolean(
+    simulacion.importacion_comprobante_confirmada
+    && simulacion.referencia_mi_retiro_seguro
+  );
+
+
+  /*
+   * La visibilidad de la preparación documental pertenece
+   * exclusivamente a simulation_mode.js mediante
+   * assisted-preparation-panel. Este importador no vuelve
+   * a ocultarse de forma independiente.
+   */
+
+  /*
+   * Después de la preparación documental, los campos
+   * faltantes deben poder completarse manualmente.
+   */
+  formulario?.classList.remove(
+    "d-none",
+  );
+
+
+  bloquearFormularioPersonal(
+    importacionConfirmada,
+    simulacion,
+  );
+
 
   actualizarApellidoCasada();
-  if (typeof actualizarNavegacionFlotante === "function") actualizarNavegacionFlotante();
+
+
+  if (
+    typeof actualizarNavegacionFlotante
+    === "function"
+  ) {
+    actualizarNavegacionFlotante();
+  }
 }
 
 function restaurarModoDatosPersonales(simulacion = obtenerSimulacion()) {

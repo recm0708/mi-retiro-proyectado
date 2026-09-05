@@ -38,6 +38,9 @@ function crearSimulacionVacia() {
   return {
     paso_actual: 1,
 
+    modo_flujo: null,
+    modo_flujo_confirmado: false,
+
     persona: {},
     modo_datos_personales: "MANUAL",
     origen_persona: "MANUAL",
@@ -122,6 +125,16 @@ function obtenerSimulacion() {
       ...crearSimulacionVacia(),
       ...simulacion,
 
+      modo_flujo:
+        ["MANUAL", "ASISTIDO"].includes(
+          simulacion.modo_flujo,
+        )
+          ? simulacion.modo_flujo
+          : null,
+
+      modo_flujo_confirmado:
+        simulacion.modo_flujo_confirmado === true,
+
       persona:
         simulacion.persona || {},
 
@@ -201,6 +214,24 @@ function guardarSimulacion(simulacion) {
   }
 
   if (
+    typeof actualizarCompletitudManual
+    === "function"
+  ) {
+    actualizarCompletitudManual(
+      simulacion,
+    );
+  }
+
+
+  if (
+    typeof actualizarPanelAsistido
+    === "function"
+  ) {
+    actualizarPanelAsistido(
+      simulacion,
+    );
+  }
+  if (
     typeof actualizarDisponibilidadGestionDatos
     === "function"
   ) {
@@ -219,6 +250,22 @@ function guardarSimulacion(simulacion) {
  * @param {number} numeroPaso Número del paso que debe mostrarse.
  */
 function mostrarPaso(numeroPaso) {
+  /*
+   * Todas las entradas al Paso 6 terminan aquí.
+   * El flujo Asistido no puede saltarse su gate
+   * mediante navegación directa o botones auxiliares.
+   */
+  if (
+    typeof bloquearResultadosAsistidos
+      === "function"
+    && bloquearResultadosAsistidos(
+      numeroPaso,
+    )
+  ) {
+    return;
+  }
+
+
   pasoActual = numeroPaso;
 
   // Oculta todos los paneles.

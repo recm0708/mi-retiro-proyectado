@@ -1,7 +1,7 @@
 # Matriz de trazabilidad
 
 **Estado:** Vigente
-**Versión de aplicación:** `0.1.19.05-beta` — G119/E05 aceptado/publicado para DEV.2 R6; reconciliación viva hasta G119 y G120/E01 reservado para UX.5 R1
+**Versión de aplicación:** `0.1.19.05-beta` — G119/E05 aceptado/publicado para DEV.2 R6; G120/E01 permanece reservado para el cierre UX.5 R6 y UX.6 está planificado sin Global preasignado
 **Último tag formal legacy:** `v0.0.26-beta`
 **Base histórica:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal:** NOR.2 R8 — 2026-08-24
@@ -17,7 +17,8 @@ La trazabilidad vigente alcanza G119/E05.
 - DEV.2 R6 queda integrado mediante PR #111 / merge `bd2accb` y
   aceptado/publicado como G119/E05 mediante promoción PR #112 /
   commit `9424ea8` y tag `v0.1.19.05-beta`.
-- G120/E01 queda reservado para UX.5 R1.
+- G120/E01 permanece reservado para el cierre UX.5 R6; R1–R6 se consolidan en el mismo candidato.
+- UX.6 queda planificado después de UX.5 y antes de PERSIST.1, sin Global preasignado.
 - PR #117 y PR #118 cierran la migración de automatización y el mantenimiento
   coordinado de dependencias post-G119 sin consumir G120.
 - La historia de NOR.2, SEC.2, AUD.SEC2, DOC.1, PLAN.2 y REL.GOV.1
@@ -77,6 +78,10 @@ Esta matriz conecta contratos críticos del producto con su fuente, decisión, i
 | TR-030 | Portal Developer multipágina aplica identidad humana persistente, RBAC deny-by-default, CSRF, revalidación para operaciones destructivas, observabilidad sanitizada, mantenimiento seguro y separación del Bearer técnico | N/A — desarrollo/seguridad/privacidad | N/A — DEV.2 R6 | `app/main.py`, `app/core/developer_store.py`, `app/core/developer_web_security.py`, `app/templates/dev_base.html`, `app/templates/dev_maintenance.html`, `app/templates/dev_privacy.html` | `tests/test_dev2_r6_identity.py`, `tests/test_dev2_r6_web_session.py`, `tests/test_dev2_r6_observability_portal.py`, `tests/test_dev2_r6_security_maintenance_privacy.py` | Verificado DEV.2 R6 / G119/E05 — PR #111 / merge `bd2accb` |
 
 | TR-031 | La automatización post-G119 centraliza el gate local/CI, compatibilidad Python, integridad, política de PR, dependencias, salud programada y baseline Visual/A11y sin crear commits ni tags | N/A — calidad/gobierno | N/A — mantenimiento post-G119 | `scripts/quality_gate.py`, `.github/workflows/quality-gate.yml`, `.github/workflows/dependency-security.yml`, `.github/workflows/scheduled-health.yml`, `.github/workflows/pr-labeler.yml`, `.github/workflows/visual-a11y.yml`, `.github/dependabot.yml` | `tests/test_automation_core_quality_gate.py`, `tests/test_precommit_guard.py` | Verificado local y remoto; PR #117 retiró workflows legacy después de migrar el ruleset; PR #118 coordinó Pydantic/Pydantic Core, Dependabot y `actions/dependency-review-action@v5`; G120/E01 no consumido |
+
+| TR-032 | La simulación exige una selección explícita Manual/Asistida y ambas modalidades convergen en un estado canónico y el mismo wizard de seis pasos | N/A — UX/arquitectura | N/A — UX.5 | `app/templates/simulation.html`, `app/static/js/simulation_mode.js`, `app/static/js/simulation.js` | `tests/test_ux5_r3_r4_simulation_flows.py`, `tests/test_ux5_r5_r6_assisted_integration.py` | Verificado en candidato UX.5 R6 |
+| TR-033 | El modo Asistido presenta Mi Retiro Seguro y Ficha Digital como fuentes documentales revisables, exige confirmar al menos una y no convierte detecciones en decisiones silenciosas | N/A — UX/integridad | ADR-071 + UX.5 | `app/templates/partials/assisted_preparation.html`, `app/static/js/official_data_import.js`, `app/static/js/assisted_flow.js` | `tests/test_ux5_r5_r6_assisted_integration.py`, `tests/test_ux5_r5_assisted_upload_layout.py` | Verificado en candidato UX.5 R6 |
+| TR-034 | Los assets locales reciben revisión de URL y los scripts de modalidad y asistencia se cargan de forma independiente para evitar combinar HTML actual con CSS o JavaScript almacenados | N/A — estabilidad web | N/A — UX.5 | `app/main.py`, `app/templates/base.html`, `app/templates/simulation.html` | `tests/test_ux5_r7_documentation_closure.py` | Verificado en candidato UX.5 R6 |
 
 ## 3. Cobertura de RF
 

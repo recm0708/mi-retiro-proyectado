@@ -152,18 +152,40 @@ class TestDev2R6ObservabilityPortal(unittest.TestCase):
     def test_javascript_implementa_visor_sin_persistencia(self):
         script = (
             ROOT
-            / "app"
-            / "static"
-            / "js"
-            / "developer_portal.js"
-        ).read_text(encoding="utf-8")
-
-        self.assertIn(
-            "function iniciarVisorEventos()",
-            script,
+            / "app/static/js/developer_portal.js"
+        ).read_text(
+            encoding="utf-8"
         )
-        self.assertNotIn("localStorage", script)
-        self.assertNotIn("sessionStorage", script)
+
+        visor = script.split(
+            "function iniciarVisorEventos()",
+            1,
+        )[1]
+
+        self.assertNotIn(
+            "localStorage",
+            visor,
+        )
+
+        self.assertNotIn(
+            "sessionStorage",
+            visor,
+        )
+
+        for expected in (
+            "[data-dev-event-row]",
+            "[data-dev-event-search]",
+            "[data-dev-event-level]",
+            "[data-dev-event-page-size]",
+            "renderizar()",
+        ):
+            with self.subTest(
+                expected=expected
+            ):
+                self.assertIn(
+                    expected,
+                    visor,
+                )
 
     def test_archivos_expone_exportacion_sanitizada(self):
         plantilla = (

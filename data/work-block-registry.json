@@ -12,9 +12,9 @@
     "global_revision": 120,
     "revision_aware": "0.1.20.01-beta",
     "block": "UX.5",
-    "revision": "R1",
+    "revision": "R6",
     "state": "reserved_not_accepted",
-    "next_functional_block_if_accepted": "UX.5",
+    "next_functional_block_if_accepted": "UX.6",
     "next_functional_global_if_accepted": null,
     "edition": 1
   },
@@ -619,9 +619,19 @@
       "identifier": "UX.5",
       "family": "UX",
       "kind": "block",
-      "status": "candidate_r1",
-      "meaning": "Rediseño integral de experiencia, sistema visual y flujo Manual/Asistido; R1 queda reservado como G120/E01.",
-      "evidence": "docs/governance/pre-1-0-pending-matrix.md; G120/E01 reservado para UX.5 R1.",
+      "status": "candidate_r6",
+      "meaning": "Sistema visual integral y flujo Manual/Asistido; R1–R6 se consolidan en el primer estado aceptable del bloque, candidato G120/E01 con revisión funcional de cierre R6.",
+      "evidence": "Cierre funcional UX.5 R1–R6; G120/E01 reservado y pendiente de aceptación.",
+      "global_refs": [],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "UX.6",
+      "family": "UX",
+      "kind": "block",
+      "status": "planned_reserved",
+      "meaning": "Auditoría integral de experiencia de App y Portal Developer: revisión visual, accesibilidad, responsive, interacción, compatibilidad y limpieza de ownership de código.",
+      "evidence": "Planificado después del cierre de UX.5; sin Global preasignado mientras G120 permanezca sin aceptar.",
       "global_refs": [],
       "reusable_for_different_scope": false
     }

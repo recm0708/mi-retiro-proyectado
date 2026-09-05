@@ -64,10 +64,44 @@ class TestUX46DRevision8Tablas(unittest.TestCase):
         self.assertIn("ocultarResumenHistorialAnalizado()", self.historial_js)
 
     def test_selector_archivo_usa_tratamiento_visual_global_en_tres_temas(self):
-        self.assertIn('input[type="file"].form-control::file-selector-button', self.style)
-        self.assertIn('html[data-bs-theme="dark"] input[type="file"].form-control::file-selector-button', self.style)
-        self.assertIn('html[data-app-theme="contrast"] input[type="file"].form-control::file-selector-button', self.style)
-        self.assertIn("background: var(--app-primary-soft)", self.design)
+        selector = (
+            'input[type="file"].form-control'
+            '::file-selector-button'
+        )
+
+        self.assertNotIn(
+            selector,
+            self.style,
+        )
+
+        self.assertIn(
+            selector,
+            self.design,
+        )
+
+        self.assertIn(
+            'html[data-bs-theme="dark"] '
+            'input[type="file"].form-control {',
+            self.design,
+        )
+
+        self.assertIn(
+            'html[data-app-theme="contrast"] '
+            'input[type="file"].form-control {',
+            self.design,
+        )
+
+        for token in (
+            "--app-file-button-color",
+            "--app-file-button-bg",
+            "--app-file-button-hover-bg",
+            "--app-file-button-border",
+        ):
+            with self.subTest(token=token):
+                self.assertIn(
+                    token,
+                    self.design,
+                )
 
     def test_mensaje_del_ultimo_mes_no_desalinea_la_celda_de_estado(self):
         self.assertNotIn('nota.textContent = "Revisa si este mes está completo o parcial."', self.importacion_js)

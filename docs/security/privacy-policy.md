@@ -27,7 +27,7 @@ Estado vigente:
   los datos previsionales de simulación.
 - G118/E04 permanece preservado mediante `v0.1.18.04-beta` como
   publicación anterior.
-- UX.5 R1 queda reservado como G120/E01.
+- UX.5 R6 queda como candidato de cierre G120/E01; UX.6 queda planificado después sin Global preasignado.
 - SEC.2 R1–R6 permanece cerrado.
 - La aplicación sigue siendo independiente y no oficial.
 <!-- DOC1-R1-REVISION-MANUAL:END -->

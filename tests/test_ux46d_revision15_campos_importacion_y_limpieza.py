@@ -30,13 +30,47 @@ class TestUX46DRevision15CamposImportacionYLimpieza(unittest.TestCase):
         self.assertIn('html[data-app-theme="contrast"] :is(.form-control, .form-select):disabled', self.design)
 
     def test_paso1_no_presenta_importacion_como_pdf_en_encabezados_principales(self):
-        self.assertIn("Importar desde Mi Retiro Seguro", self.simulacion)
-        self.assertNotIn("<strong>Importar desde PDF</strong>", self.simulacion)
-        self.assertIn("Importar información desde Mi Retiro Seguro", self.importador)
-        self.assertIn("Selecciona tu comprobante", self.importador)
-        self.assertNotIn("Importar desde un comprobante PDF", self.importador)
-        self.assertNotIn("comprobante compatible", self.importador)
-        self.assertIn("1. Selecciona el documento", self.importador)
+        simulacion = (
+            ROOT
+            / "app/templates/simulation.html"
+        ).read_text(
+            encoding="utf-8"
+        )
+
+        paso1 = simulacion.split(
+            'data-panel="1"',
+            1,
+        )[1].split(
+            'data-panel="2"',
+            1,
+        )[0]
+
+        assisted = (
+            ROOT
+            / "app/templates/partials/assisted_preparation.html"
+        ).read_text(
+            encoding="utf-8"
+        )
+
+        self.assertNotIn(
+            "Mi Retiro Seguro",
+            paso1,
+        )
+
+        self.assertNotIn(
+            "Ficha Digital",
+            paso1,
+        )
+
+        self.assertIn(
+            "Mi Retiro Seguro",
+            assisted,
+        )
+
+        self.assertIn(
+            "Ficha Digital",
+            assisted,
+        )
 
     def test_ficha_digital_usa_copia_de_documento_no_de_pdf(self):
         self.assertIn("1. Selecciona el documento", self.ficha)

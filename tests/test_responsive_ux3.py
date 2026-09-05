@@ -71,12 +71,51 @@ class TestResponsiveUX3(unittest.TestCase):
         )
 
     def test_navegacion_movil_mantiene_selector_de_tema_y_menu_tactil(self):
-        css = CSS.read_text(encoding="utf-8")
+        css = CSS.read_text(
+            encoding="utf-8"
+        )
 
-        self.assertIn(".app-navbar .navbar-collapse", css)
-        self.assertIn(".app-navbar .nav-link", css)
-        self.assertIn(".theme-select", css)
-        self.assertIn("min-height: 48px;", css)
+        base = (
+            ROOT / "app/templates/base.html"
+        ).read_text(
+            encoding="utf-8"
+        )
+
+        shell = (
+            ROOT / "app/static/js/app_shell.js"
+        ).read_text(
+            encoding="utf-8"
+        )
+
+        self.assertIn(
+            "@media (max-width: 991.98px)",
+            css,
+        )
+        self.assertIn(
+            "transform: translateX(-105%);",
+            css,
+        )
+        self.assertIn(
+            ".app-sidebar-open .app-sidebar",
+            css,
+        )
+        self.assertIn(
+            "data-app-sidebar-toggle",
+            base,
+        )
+        self.assertIn(
+            "data-app-sidebar-overlay",
+            base,
+        )
+        self.assertIn(
+            'data-theme-choice="contrast"',
+            base,
+        )
+        self.assertNotIn(
+            "miRetiroProyectado.sidebar",
+            shell,
+        )
+
 
 
 if __name__ == "__main__":

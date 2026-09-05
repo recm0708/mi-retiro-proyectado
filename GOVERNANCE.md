@@ -3,7 +3,7 @@
 **Proyecto:** Mi Retiro Proyectado
 **Estado:** vigente desde GOV.1.2
 **Fecha de adopción:** 2026-08-18
-**Última revisión:** G119/E05 publicado; mantenimiento post-G119 PR #117/#118 cerrado; UX.5 R1 candidato G120/E01 — 2026-08-31
+**Última revisión:** G119/E05 publicado; mantenimiento post-G119 PR #117/#118 cerrado; UX.5 R6 candidato de cierre G120/E01 y UX.6 planificado sin Global preasignado — 2026-09-04
 
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado de gobierno post-MANT.1
@@ -23,7 +23,7 @@ Estado vigente:
 - DEV.2 R6 quedó integrado mediante PR #111 / merge `bd2accb`,
   aceptado como G119/E05 y posteriormente publicado.
 - DEV.2 queda cerrado después de R6.
-- UX.5 R1 queda reservado como G120/E01 (`0.1.20.01-beta`).
+- UX.5 R6 queda como candidato de cierre G120/E01 (`0.1.20.01-beta`); UX.6 permanece planificado a continuación sin Global preasignado.
 - DOC.1 R1–R5, PLAN.2 R1, NOR.1, NOR.2, SEC.2 R1–R6,
   AUD.SEC2 R1 y REL.GOV.1 permanecen preservados según su ledger.
 - PERSIST.1 continúa como etapa posterior y no recibe Global anticipado.

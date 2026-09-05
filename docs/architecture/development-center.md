@@ -22,7 +22,7 @@ Estado vigente:
   y publicado mediante `v0.1.18.04-beta`.
 - R6 está integrado mediante PR #111 / merge `bd2accb` y se materializa
   como G119/E05 (`0.1.19.05-beta`).
-- G120/E01 (`0.1.20.01-beta`) queda reservado para UX.5 R1.
+- G120/E01 (`0.1.20.01-beta`) permanece reservado para el cierre UX.5 R6; UX.6 queda planificado después sin Global preasignado.
 - La sesión humana Developer permanece separada del contrato Bearer técnico.
 - SEC.2 R1–R6 permanece cerrado y SEC.2 R7 se mantiene planificado para
   el hardening posterior a las nuevas superficies.

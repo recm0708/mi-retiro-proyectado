@@ -6,7 +6,7 @@ y por los servicios de cálculo.
 """
 
 from pathlib import Path
-from time import monotonic
+from time import monotonic, time_ns
 
 from app.core.pdf_files import leer_pdf_subido
 from app.core.observability import (
@@ -290,6 +290,26 @@ async def agregar_cabeceras_defensivas(request: Request, call_next):
     ):
         respuesta.headers["Cache-Control"] = "no-store"
 
+    # En desarrollo, el navegador debe consumir siempre el HTML, CSS y
+    # JavaScript correspondientes al árbol de trabajo actual. Esto evita
+    # combinar una plantilla nueva con recursos estáticos almacenados de
+    # una revisión anterior.
+    if modo_desarrollo_activo():
+        content_type = respuesta.headers.get(
+            "content-type",
+            "",
+        )
+
+        if (
+            request.url.path.startswith("/static/")
+            or content_type.startswith("text/html")
+        ):
+            respuesta.headers["Cache-Control"] = (
+                "no-store, no-cache, must-revalidate, max-age=0"
+            )
+            respuesta.headers["Pragma"] = "no-cache"
+            respuesta.headers["Expires"] = "0"
+
     return respuesta
 
 
@@ -311,7 +331,18 @@ templates = Jinja2Templates(
     directory=BASE_DIR / "templates",
 )
 
+# Los recursos locales reciben una revisión de URL.
+# En desarrollo cambia con cada proceso para evitar combinar
+# HTML actual con CSS o JavaScript almacenados anteriormente.
+# Fuera de desarrollo utiliza la versión publicada.
+STATIC_REVISION = (
+    str(time_ns())
+    if modo_desarrollo_activo()
+    else APP_VERSION
+)
+
 templates.env.globals.update(
+    static_revision=STATIC_REVISION,
     app_name=APP_NAME,
     app_subtitle=APP_SUBTITLE,
     app_author=APP_AUTHOR,

@@ -12,7 +12,7 @@ Estado actual:
   PR #111 / merge `bd2accb`, promoción PR #112 / commit
   `9424ea8` y tag firmado `v0.1.19.05-beta`.
 - DEV.2 queda cerrado después de R6.
-- UX.5 R1 queda reservado como G120/E01 (`0.1.20.01-beta`).
+- UX.5 R6 es el candidato de cierre G120/E01 (`0.1.20.01-beta`); UX.6 queda planificado a continuación sin Global preasignado.
 - G118/E04 permanece preservado mediante `v0.1.18.04-beta`
   como publicación anterior.
 - SEC.2 R1–R6 permanece cerrado; los cambios futuros de autenticación,

@@ -1,0 +1,271 @@
+<section
+  id="assisted-preparation-panel"
+  class="assisted-preparation-panel d-none mb-4"
+  data-assisted-only
+  aria-labelledby="assisted-preparation-title"
+  hidden
+>
+  <div class="card border-0 shadow-sm">
+    <div class="card-body p-4 p-lg-5">
+
+      <div class="d-flex flex-column flex-xl-row justify-content-between gap-3 mb-4">
+        <div>
+          <span class="text-primary fw-semibold">
+            Preparación asistida
+          </span>
+
+          <h2
+            id="assisted-preparation-title"
+            class="h4 fw-bold mt-1 mb-2"
+          >
+            Añade la información documental disponible
+          </h2>
+
+          <p class="text-secondary mb-2">
+            Puedes utilizar Mi Retiro Seguro, Ficha Digital
+            o ambos. Cada documento es opcional individualmente,
+            pero el modo Asistido requiere confirmar al menos uno.
+          </p>
+
+          <p class="mb-0">
+            Si no dispones de ninguno, utiliza la modalidad Manual.
+            Los datos que falten después de importar podrán
+            completarse durante los pasos de la simulación.
+          </p>
+        </div>
+
+        <div
+          class="assisted-source-summary"
+          aria-live="polite"
+        >
+          <span class="text-secondary small">
+            Fuentes confirmadas
+          </span>
+
+          <strong id="assisted-source-count">
+            0 de 2
+          </strong>
+        </div>
+      </div>
+
+
+      <div class="assisted-source-grid mb-4">
+
+        <section
+          class="card h-100 assisted-source-card"
+          aria-labelledby="assisted-mrs-title"
+        >
+          <div class="card-body">
+            <div class="assisted-source-card-header">
+              <div>
+                <span class="text-primary fw-semibold small">
+                  Documento opcional
+                </span>
+
+                <h3
+                  id="assisted-mrs-title"
+                  class="h5 fw-bold mt-1 mb-0"
+                >
+                  Mi Retiro Seguro
+                </h3>
+              </div>
+
+              <span
+                id="assisted-mrs-status"
+                class="badge text-bg-secondary"
+              >
+                Pendiente
+              </span>
+            </div>
+
+            {% include "partials/official_data_import.html" %}
+          </div>
+        </section>
+
+
+        <section
+          class="card h-100 assisted-source-card"
+          aria-labelledby="assisted-ficha-title"
+        >
+          <div class="card-body">
+            <div class="assisted-source-card-header">
+              <div>
+                <span class="text-primary fw-semibold small">
+                  Documento opcional
+                </span>
+
+                <h3
+                  id="assisted-ficha-title"
+                  class="h5 fw-bold mt-1 mb-0"
+                >
+                  Ficha Digital
+                </h3>
+              </div>
+
+              <span
+                id="assisted-ficha-status"
+                class="badge text-bg-secondary"
+              >
+                Pendiente
+              </span>
+            </div>
+
+            {% include "partials/ficha_digital_import.html" %}
+          </div>
+        </section>
+
+      </div>
+
+
+      <div
+        id="assisted-preparation-ready"
+        class="alert alert-success d-none mb-4"
+        role="status"
+        aria-live="polite"
+      >
+        Ya confirmaste al menos una fuente documental.
+        Los pasos de la simulación están disponibles debajo.
+        Puedes añadir la segunda fuente ahora o más adelante
+        antes de completar los datos dependientes.
+      </div>
+
+
+      <div class="assisted-readiness-grid mb-4">
+
+        <div class="border rounded p-3">
+          <span class="text-secondary small d-block">
+            Información base pendiente
+          </span>
+
+          <strong
+            id="assisted-facts-pending"
+            class="d-block mt-1"
+          >
+            —
+          </strong>
+
+          <small class="text-secondary">
+            Lo que los documentos no aporten se completa
+            manualmente en los pasos correspondientes.
+          </small>
+        </div>
+
+
+        <div class="border rounded p-3">
+          <span class="text-secondary small d-block">
+            Decisiones pendientes
+          </span>
+
+          <strong
+            id="assisted-decisions-pending"
+            class="d-block mt-1"
+          >
+            —
+          </strong>
+
+          <small class="text-secondary">
+            Ningún documento decide por ti.
+          </small>
+        </div>
+
+      </div>
+
+
+      <section
+        id="assisted-completeness-gate"
+        class="assisted-completeness-gate alert alert-info mb-4"
+        aria-labelledby="assisted-completeness-title"
+        aria-live="polite"
+      >
+        <h3
+          id="assisted-completeness-title"
+          class="h6 fw-bold mb-2"
+        >
+          Estado de preparación
+        </h3>
+
+        <p
+          id="assisted-completeness-message"
+          class="mb-3"
+        >
+          Confirma al menos un documento y completa
+          la información necesaria antes de Resultados.
+        </p>
+
+        <ul class="assisted-completeness-list mb-0">
+          <li data-assisted-completeness="fuente">
+            Fuente documental confirmada
+          </li>
+
+          <li data-assisted-completeness="datos">
+            Datos obligatorios disponibles
+          </li>
+
+          <li data-assisted-completeness="decisiones">
+            Decisiones obligatorias realizadas
+          </li>
+
+          <li data-assisted-completeness="revision">
+            Información documental revisada
+          </li>
+
+          <li data-assisted-completeness="dependencias">
+            Dependencias entre pasos resueltas
+          </li>
+
+          <li data-assisted-completeness="accion">
+            Acción explícita del usuario completada
+          </li>
+        </ul>
+      </section>
+
+
+      <section
+        class="assisted-provenance-legend"
+        aria-labelledby="assisted-provenance-title"
+      >
+        <h3
+          id="assisted-provenance-title"
+          class="h6 fw-bold mb-2"
+        >
+          Procedencia de la información
+        </h3>
+
+        <div class="d-flex flex-wrap gap-2">
+          <span class="badge text-bg-secondary">
+            Ficha Digital
+          </span>
+
+          <span class="badge text-bg-secondary">
+            Mi Retiro Seguro
+          </span>
+
+          <span class="badge text-bg-secondary">
+            Ingresado manualmente
+          </span>
+
+          <span class="badge text-bg-secondary">
+            Modificado por el usuario
+          </span>
+
+          <span class="badge text-bg-secondary">
+            Calculado
+          </span>
+
+          <span class="badge text-bg-secondary">
+            Derivado
+          </span>
+
+          <span class="badge text-bg-secondary">
+            Confirmado
+          </span>
+        </div>
+
+        <p class="text-secondary small mt-2 mb-0">
+          El color nunca es el único indicador de procedencia.
+        </p>
+      </section>
+
+    </div>
+  </div>
+</section>

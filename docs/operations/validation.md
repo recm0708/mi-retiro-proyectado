@@ -1,13 +1,13 @@
 # Validación
 
 **Estado:** Vigente
-**Versión revisada:** `0.1.19.05-beta` — G119/E05 aceptado/publicado para DEV.2 R6; G120/E01 reservado para UX.5 R1
+**Versión revisada:** `0.1.19.05-beta` — G119/E05 aceptado/publicado; UX.5 R6 es candidato de cierre G120/E01 (`0.1.20.01-beta`), reservado y todavía no aceptado.
 **Versión base histórica:** `0.0.25-beta`
 **Base documental histórica:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal histórica preservada:** UX.4.6e R8 — validación funcional y procedencia editable — 2026-08-19
 **Última revisión transversal:** UX.4.6f R2 integrada y cierre del Paso 4 — 2026-08-20
 **Revisión de normalización:** NOR.1 R7 — cierre de estándares y preparación de NOR.2 — 2026-08-24
-**Última revisión operativa:** atestación histórica Git pre-UX.5 — 2026-09-01
+**Última revisión operativa:** candidato de cierre UX.5 R6 — 2026-09-04
 **Clasificación:** Técnica / Calidad
 **Naturaleza documental:** Registro vivo acumulativo — mantiene la estrategia vigente y evidencia histórica de gates protegida por regresiones; los resultados históricos no se reescriben como si pertenecieran al estado actual.
 
@@ -214,6 +214,22 @@ G119/E05 y no consumen G120/E01.
 Esta infraestructura no cambia `VERSION`, no acepta G120 y no crea commits,
 tags ni GitHub Releases.
 <!-- AUTOMATION-POST-G119:END -->
+
+## Validación UX.5 — candidato de cierre G120/E01
+
+UX.5 R1–R6 quedan consolidados en el candidato G120/E01 con revisión funcional R6. La aceptación revision-aware continúa pendiente de PR/CI, integración y promoción.
+
+Evidencia focal observada después de la corrección de Mi Retiro Seguro y del versionado de assets:
+
+- 34 pruebas passed y 59 subtests passed en las regresiones focales UX.5 R3–R6;
+- `git diff --check` limpio;
+- Mi Retiro Seguro visible nuevamente en la ventana normal de Chrome;
+- carga y análisis manual de PDF de Mi Retiro Seguro funcionales;
+- carga y análisis manual de PDF de Ficha Digital funcionales;
+- ambos importadores produjeron detección de información;
+- la revisión detallada visual, accesible y de mensajes pasa a UX.6.
+
+El gate completo de cierre local se ejecutó después de la reconciliación documental y obtuvo **11 PASS / 0 FAIL**: **1404 pruebas `unittest` OK**, **1444 pruebas `pytest` passed / 6865 subtests passed**, Markdown 166/166, 22 JavaScript válidos, 16 familias / 47 identificadores, 586 archivos Git/versionables y `pip check`, compilación Python, contrato revision-aware, manifiesto de publicación y `git diff --check` limpios. G120/E01 continúa reservado y sin aceptar hasta completar integración y promoción.
 
 ## Atestación histórica Git pre-UX.5
 
@@ -665,7 +681,7 @@ python -m pip check
 
 ## 3. Inventario actual de pruebas
 
-Inventario vigente: **186 módulos**.
+Inventario vigente: **192 módulos**.
 
 - `tests/test_accessibility_themes.py`
 - `tests/test_accessibility_ux4.py`
@@ -677,6 +693,17 @@ Inventario vigente: **186 módulos**.
 - `tests/test_dev2_r3_autodiagnostico.py`
 - `tests/test_dev2_r4_cierre_final.py`
 - `tests/test_dev2_r5_portal_access.py`
+- `tests/test_dev2_r6_cli.py`
+- `tests/test_dev2_r6_header_identity.py`
+- `tests/test_dev2_r6_identity.py`
+- `tests/test_dev2_r6_multipage_shell.py`
+- `tests/test_dev2_r6_observability_portal.py`
+- `tests/test_dev2_r6_provisioning.py`
+- `tests/test_dev2_r6_security_maintenance_privacy.py`
+- `tests/test_dev2_r6_sidebar_theme_sync.py`
+- `tests/test_dev2_r6_store.py`
+- `tests/test_dev2_r6_web_access.py`
+- `tests/test_dev2_r6_web_session.py`
 - `tests/test_doc1_r1_auditoria_markdown_post_mant1.py`
 - `tests/test_doc1_r3_markdown_links.py`
 - `tests/test_doc1_r4_live_state_sanitization.py`
@@ -694,6 +721,7 @@ Inventario vigente: **186 módulos**.
 - `tests/test_g117_promotion_post_merge.py`
 - `tests/test_g118_promotion_post_merge.py`
 - `tests/test_g119_promotion_post_merge.py`
+- `tests/test_git_history_attestation.py`
 - `tests/test_gov12_versionado.py`
 - `tests/test_gov13_documentacion.py`
 - `tests/test_gov13_documentacion_r2.py`
@@ -725,7 +753,6 @@ Inventario vigente: **186 módulos**.
 - `tests/test_mant1_r7_cierre_operativo_post_auditoria.py`
 - `tests/test_mant1_scripts_hooks_documentados.py`
 - `tests/test_mantenimiento_tecnico.py`
-- `tests/test_git_history_attestation.py`
 - `tests/test_markdown_audit.py`
 - `tests/test_markdown_versionable_inventory.py`
 - `tests/test_mixto.py`
@@ -832,6 +859,12 @@ Inventario vigente: **186 módulos**.
 - `tests/test_ux46h_r1_resultados_exportacion.py`
 - `tests/test_ux46i_r1_calculation_guide.py`
 - `tests/test_ux4_remate_visual.py`
+- `tests/test_ux5_r1_design_system.py`
+- `tests/test_ux5_r2_shell_navigation.py`
+- `tests/test_ux5_r3_r4_simulation_flows.py`
+- `tests/test_ux5_r5_assisted_upload_layout.py`
+- `tests/test_ux5_r5_r6_assisted_integration.py`
+- `tests/test_ux5_r7_documentation_closure.py`
 - `tests/test_ver2_documentacion_vigente.py`
 - `tests/test_ver2_ledger_estructurado.py`
 - `tests/test_ver2_r1_reconciliacion_post_doc1.py`
@@ -902,6 +935,12 @@ Estado revision-aware durante este cierre:
   revalidación sobre `main`;
 - la promoción, el tag firmado y el GitHub Release pertenecen a una etapa
   posterior y separada.
+
+
+Módulos incorporados al inventario vigente:
+
+- `tests/test_ux5_r5_assisted_upload_layout.py`
+- `tests/test_ux5_r5_r6_assisted_integration.py`
 
 ## 4. Categorías
 

@@ -22,29 +22,29 @@
   <!-- Identidad gráfica del navegador. -->
   <link
     rel="icon"
-    href="{{ url_for('static', path='/img/brand/favicon.ico') }}"
+    href="{{ url_for('static', path='/img/brand/favicon.ico') }}?v={{ static_revision }}"
     sizes="any"
   >
   <link
     rel="icon"
     type="image/png"
     sizes="32x32"
-    href="{{ url_for('static', path='/img/brand/favicon-32x32.png') }}"
+    href="{{ url_for('static', path='/img/brand/favicon-32x32.png') }}?v={{ static_revision }}"
   >
   <link
     rel="icon"
     type="image/png"
     sizes="16x16"
-    href="{{ url_for('static', path='/img/brand/favicon-16x16.png') }}"
+    href="{{ url_for('static', path='/img/brand/favicon-16x16.png') }}?v={{ static_revision }}"
   >
   <link
     rel="apple-touch-icon"
     sizes="180x180"
-    href="{{ url_for('static', path='/img/brand/apple-touch-icon.png') }}"
+    href="{{ url_for('static', path='/img/brand/apple-touch-icon.png') }}?v={{ static_revision }}"
   >
 
   <!-- Se aplica antes de los estilos para reducir cambios visuales al cargar. -->
-  <script src="{{ url_for('static', path='/js/theme.js') }}"></script>
+  <script src="{{ url_for('static', path='/js/theme.js') }}?v={{ static_revision }}"></script>
 
   <link
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
@@ -56,23 +56,23 @@
   <!-- Capas visuales: base, sistema de diseño, accesibilidad e identidad. -->
   <link
     rel="stylesheet"
-    href="{{ url_for('static', path='/css/style.css') }}"
+    href="{{ url_for('static', path='/css/style.css') }}?v={{ static_revision }}"
   >
   <link
     rel="stylesheet"
-    href="{{ url_for('static', path='/css/design-system.css') }}"
+    href="{{ url_for('static', path='/css/design-system.css') }}?v={{ static_revision }}"
   >
   <link
     rel="stylesheet"
-    href="{{ url_for('static', path='/css/accessibility.css') }}"
+    href="{{ url_for('static', path='/css/accessibility.css') }}?v={{ static_revision }}"
   >
   <link
     rel="stylesheet"
-    href="{{ url_for('static', path='/css/brand.css') }}"
+    href="{{ url_for('static', path='/css/brand.css') }}?v={{ static_revision }}"
   >
   <link
     rel="stylesheet"
-    href="{{ url_for('static', path='/css/editable-provenance.css') }}"
+    href="{{ url_for('static', path='/css/editable-provenance.css') }}?v={{ static_revision }}"
   >
 
   {% block head %}{% endblock %}
@@ -83,207 +83,323 @@
     Saltar al contenido principal
   </a>
 
-  <nav
-    class="navbar navbar-expand-lg app-navbar sticky-top"
-    aria-label="Navegación principal"
-  >
-    <div class="container app-navbar-inner">
-      <a class="navbar-brand app-brand" href="/" aria-label="{{ app_name }}, inicio">
+  <header class="app-topbar sticky-top">
+    <div class="app-topbar-inner">
+      <button
+        class="app-menu-button"
+        type="button"
+        data-app-sidebar-toggle
+        aria-controls="app-sidebar"
+        aria-expanded="true"
+        aria-label="Mostrar u ocultar navegación"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M4 7h16M4 12h16M4 17h16"></path>
+        </svg>
+      </button>
+
+      <a
+        class="app-brand"
+        href="/"
+        aria-label="{{ app_name }}, inicio"
+      >
         <span class="app-brand-mark" aria-hidden="true">
           <img
             class="app-brand-mark-image"
-            src="{{ url_for('static', path='/img/brand/logo-mark-128.png') }}"
+            src="{{ url_for('static', path='/img/brand/logo-mark-128.png') }}?v={{ static_revision }}"
             alt=""
             width="128"
             height="128"
           >
         </span>
+
         <span class="app-brand-copy">
           <strong>{{ app_name }}</strong>
           <small>Planificación previsional</small>
         </span>
       </a>
 
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarPrincipal"
-        aria-controls="navbarPrincipal"
-        aria-expanded="false"
-        aria-label="Mostrar navegación"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarPrincipal">
-        <div class="navbar-nav ms-auto align-items-lg-center app-nav-links">
-          <a
-            class="nav-link {% if pagina_activa == 'inicio' %}active{% endif %}"
-            href="/"
-            {% if pagina_activa == 'inicio' %}aria-current="page"{% endif %}
+      <div class="app-topbar-actions">
+        <div class="dropdown theme-control">
+          <button
+            class="btn theme-trigger dropdown-toggle"
+            type="button"
+            id="menu-apariencia"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            aria-label="Cambiar apariencia"
+            aria-describedby="ayuda-selector-tema"
           >
-            Inicio
-          </a>
+            <span class="theme-trigger-icon" aria-hidden="true">
+              <svg data-theme-icon="system" viewBox="0 0 24 24" focusable="false">
+                <rect x="3" y="4" width="18" height="13" rx="2"></rect>
+                <path d="M8 21h8M12 17v4"></path>
+              </svg>
+              <svg data-theme-icon="light" viewBox="0 0 24 24" focusable="false">
+                <circle cx="12" cy="12" r="4"></circle>
+                <path d="M12 2v2M12 20v2M2 12h2M20 12h2"></path>
+              </svg>
+              <svg data-theme-icon="dark" viewBox="0 0 24 24" focusable="false">
+                <path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5 8.5 8.5 0 1 0 20.5 14.2Z"></path>
+              </svg>
+              <svg data-theme-icon="contrast" viewBox="0 0 24 24" focusable="false">
+                <circle cx="12" cy="12" r="9"></circle>
+                <path d="M12 3a9 9 0 0 1 0 18Z"></path>
+              </svg>
+            </span>
+            <span id="theme-trigger-label">Sistema</span>
+          </button>
 
-          <a
-            class="nav-link {% if pagina_activa == 'simulacion' %}active{% endif %}"
-            href="/simulacion"
-            {% if pagina_activa == 'simulacion' %}aria-current="page"{% endif %}
+          <div
+            class="dropdown-menu dropdown-menu-end theme-menu"
+            aria-labelledby="menu-apariencia"
           >
-            Simular
-          </a>
+            <div class="theme-menu-heading">
+              Apariencia
+            </div>
 
-          <a
-            class="nav-link {% if pagina_activa == 'comparar' %}active{% endif %}"
-            href="/comparar"
-            {% if pagina_activa == 'comparar' %}aria-current="page"{% endif %}
-          >
-            Escenarios
-          </a>
-
-          <a
-            class="nav-link {% if pagina_activa == 'como_se_calcula' %}active{% endif %}"
-            href="/como-se-calcula"
-            {% if pagina_activa == 'como_se_calcula' %}aria-current="page"{% endif %}
-          >
-            Cómo se calcula
-          </a>
-
-          <a
-            class="nav-link {% if pagina_activa == 'metodologia' %}active{% endif %}"
-            href="/metodologia"
-            {% if pagina_activa == 'metodologia' %}aria-current="page"{% endif %}
-          >
-            Fuentes
-          </a>
-
-          <div class="dropdown theme-control ms-lg-3 mt-3 mt-lg-0">
             <button
-              class="btn theme-trigger dropdown-toggle"
+              class="dropdown-item theme-choice"
               type="button"
-              id="menu-apariencia"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-              aria-label="Cambiar apariencia"
-              aria-describedby="ayuda-selector-tema"
+              data-theme-choice="system"
             >
-              <span class="theme-trigger-icon" aria-hidden="true">
-                <svg data-theme-icon="system" viewBox="0 0 24 24" focusable="false"><rect x="3" y="4" width="18" height="13" rx="2"></rect><path d="M8 21h8M12 17v4"></path></svg>
-                <svg data-theme-icon="light" viewBox="0 0 24 24" focusable="false"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"></path></svg>
-                <svg data-theme-icon="dark" viewBox="0 0 24 24" focusable="false"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5 8.5 8.5 0 1 0 20.5 14.2Z"></path></svg>
-                <svg data-theme-icon="contrast" viewBox="0 0 24 24" focusable="false"><circle cx="12" cy="12" r="9"></circle><path d="M12 3a9 9 0 0 1 0 18Z"></path></svg>
+              <span>
+                <strong>Automático</strong>
+                <small>Seguir la apariencia del sistema</small>
               </span>
-              <span id="theme-trigger-label">Sistema</span>
             </button>
 
-            <div
-              class="dropdown-menu dropdown-menu-end theme-menu"
-              aria-labelledby="menu-apariencia"
+            <button
+              class="dropdown-item theme-choice"
+              type="button"
+              data-theme-choice="light"
             >
-              <div class="theme-menu-heading">Apariencia</div>
+              <span>
+                <strong>Claro</strong>
+                <small>Superficies luminosas y limpias</small>
+              </span>
+            </button>
 
-              <button class="dropdown-item theme-choice" type="button" data-theme-choice="system">
-                <span class="theme-choice-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><rect x="3" y="4" width="18" height="13" rx="2"></rect><path d="M8 21h8M12 17v4"></path></svg></span>
-                <span>
-                  <strong>Automático</strong>
-                  <small>Seguir la apariencia del sistema</small>
-                </span>
-              </button>
+            <button
+              class="dropdown-item theme-choice"
+              type="button"
+              data-theme-choice="dark"
+            >
+              <span>
+                <strong>Oscuro</strong>
+                <small>Fondo profundo y menor luminancia</small>
+              </span>
+            </button>
 
-              <button class="dropdown-item theme-choice" type="button" data-theme-choice="light">
-                <span class="theme-choice-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"></path></svg></span>
-                <span>
-                  <strong>Claro</strong>
-                  <small>Superficies luminosas y limpias</small>
-                </span>
-              </button>
+            <div class="dropdown-divider"></div>
 
-              <button class="dropdown-item theme-choice" type="button" data-theme-choice="dark">
-                <span class="theme-choice-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5 8.5 8.5 0 1 0 20.5 14.2Z"></path></svg></span>
-                <span>
-                  <strong>Oscuro</strong>
-                  <small>Fondo profundo y menor luminancia</small>
-                </span>
-              </button>
+            <button
+              class="dropdown-item theme-choice"
+              type="button"
+              data-theme-choice="contrast"
+            >
+              <span>
+                <strong>Alto contraste</strong>
+                <small>Máxima diferenciación visual</small>
+              </span>
+            </button>
 
-              <div class="dropdown-divider"></div>
-              <div class="theme-menu-heading">Accesibilidad</div>
-
-              <button class="dropdown-item theme-choice" type="button" data-theme-choice="contrast">
-                <span class="theme-choice-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><circle cx="12" cy="12" r="9"></circle><path d="M12 3a9 9 0 0 1 0 18Z"></path></svg></span>
-                <span>
-                  <strong>Alto contraste</strong>
-                  <small>Opción reforzada para máxima diferenciación</small>
-                </span>
-              </button>
-
-              <p id="ayuda-selector-tema" class="theme-storage-note mb-0">
-                La preferencia se guarda únicamente en este navegador.
-              </p>
-            </div>
+            <p
+              id="ayuda-selector-tema"
+              class="theme-storage-note mb-0"
+            >
+              La preferencia se guarda únicamente en este navegador.
+            </p>
           </div>
         </div>
       </div>
     </div>
-  </nav>
+  </header>
 
-  <main id="contenido-principal" tabindex="-1">
-    {% block content %}{% endblock %}
-  </main>
-
-  <div
-    id="a11y-global-status"
-    class="visually-hidden"
-    role="status"
-    aria-live="polite"
-    aria-atomic="true"
-  ></div>
-
-  {% include "partials/data_management.html" %}
-  {% include "partials/privacy_consent.html" %}
-
-  <footer class="footer" aria-label="Información legal">
-    <div class="container footer-modern">
-      <div class="footer-identity">
-        <strong>{{ app_name }}</strong>
-        <span class="footer-version">v{{ app_version }}</span>
+  <div class="app-shell">
+    <aside
+      id="app-sidebar"
+      class="app-sidebar"
+      data-app-sidebar
+      aria-label="Navegación principal"
+    >
+      <div class="app-sidebar-heading">
+        <span>Mi Retiro Proyectado</span>
+        <small>Navegación</small>
       </div>
 
-      <p class="footer-disclaimer mb-0">
-        Herramienta independiente de estimación previsional.
-        No sustituye la determinación oficial de la Caja de Seguro Social de Panamá ni emite
-        resoluciones o certificaciones.
-      </p>
+      <nav class="app-sidebar-nav">
+        <a
+          href="/"
+          aria-label="Inicio"
+          class="{{ 'active' if pagina_activa == 'inicio' else '' }}"
+          {% if pagina_activa == 'inicio' %}aria-current="page"{% endif %}
+        >
+          <span class="app-sidebar-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M4 11 12 4l8 7v9h-6v-6h-4v6H4Z"></path>
+            </svg>
+          </span>
+          <span>Inicio</span>
+        </a>
 
-      <div class="footer-bottom" aria-label="Fuentes, ayuda, privacidad, autoría y derechos">
-        <a class="footer-link" href="/metodologia">Fuentes oficiales</a>
-        <span aria-hidden="true">·</span>
-        <a class="footer-link" href="/metodologia#ayuda-contacto">Ayuda y contacto</a>
-        <span aria-hidden="true">·</span>
-        <a class="footer-link" href="/metodologia#privacidad-datos">Privacidad</a>
-        <span aria-hidden="true">·</span>
-        <span class="footer-copyright">
-          © 2026 {{ app_author }}. Todos los derechos reservados.
-        </span>
-      </div>
+        <a
+          href="/simulacion"
+          aria-label="Simular"
+          class="{{ 'active' if pagina_activa == 'simulacion' else '' }}"
+          {% if pagina_activa == 'simulacion' %}aria-current="page"{% endif %}
+        >
+          <span class="app-sidebar-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M5 5h14v14H5Z"></path>
+              <path d="M8 15l3-4 2 2 3-5"></path>
+            </svg>
+          </span>
+          <span>Simular</span>
+        </a>
+
+        <a
+          href="/comparar"
+          aria-label="Escenarios"
+          class="{{ 'active' if pagina_activa == 'comparar' else '' }}"
+          {% if pagina_activa == 'comparar' %}aria-current="page"{% endif %}
+        >
+          <span class="app-sidebar-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M5 18V9M12 18V5M19 18v-6"></path>
+            </svg>
+          </span>
+          <span>Escenarios</span>
+        </a>
+
+        <a
+          href="/como-se-calcula"
+          aria-label="Cómo se calcula"
+          class="{{ 'active' if pagina_activa == 'como_se_calcula' else '' }}"
+          {% if pagina_activa == 'como_se_calcula' %}aria-current="page"{% endif %}
+        >
+          <span class="app-sidebar-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="8"></circle>
+              <path d="M9 9h6M9 12h6M9 15h4"></path>
+            </svg>
+          </span>
+          <span>Cómo se calcula</span>
+        </a>
+
+        <a
+          href="/metodologia"
+          aria-label="Fuentes"
+          class="{{ 'active' if pagina_activa == 'metodologia' else '' }}"
+          {% if pagina_activa == 'metodologia' %}aria-current="page"{% endif %}
+        >
+          <span class="app-sidebar-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M5 4h11l3 3v13H5Z"></path>
+              <path d="M8 10h8M8 14h8M8 18h5"></path>
+            </svg>
+          </span>
+          <span>Fuentes</span>
+        </a>
+      </nav>
+</aside>
+
+    <button
+      class="app-sidebar-overlay"
+      type="button"
+      data-app-sidebar-overlay
+      aria-label="Cerrar navegación"
+      tabindex="-1"
+    ></button>
+
+    <div class="app-shell-content">
+      <main
+        id="contenido-principal"
+        class="app-main"
+        tabindex="-1"
+      >
+        {% block content %}{% endblock %}
+      </main>
+
+      <div
+        id="a11y-global-status"
+        class="visually-hidden"
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+      ></div>
+
+      {% include "partials/data_management.html" %}
+      {% include "partials/privacy_consent.html" %}
+
+      <footer
+        class="footer"
+        aria-label="Información legal"
+      >
+        <div class="container footer-modern">
+          <div class="footer-identity">
+            <strong>{{ app_name }}</strong>
+            <span class="footer-version">
+              v{{ app_version }}
+            </span>
+          </div>
+
+          <p class="footer-disclaimer mb-0">
+            Herramienta independiente de estimación previsional.
+            No sustituye la determinación oficial de la Caja de Seguro
+            Social de Panamá ni emite resoluciones o certificaciones.
+          </p>
+
+          <div
+            class="footer-bottom"
+            aria-label="Fuentes, ayuda, privacidad, autoría y derechos"
+          >
+            <a class="footer-link" href="/metodologia">
+              Fuentes oficiales
+            </a>
+            <span aria-hidden="true">·</span>
+
+            <a
+              class="footer-link"
+              href="/metodologia#ayuda-contacto"
+            >
+              Ayuda y contacto
+            </a>
+            <span aria-hidden="true">·</span>
+
+            <a
+              class="footer-link"
+              href="/metodologia#privacidad-datos"
+            >
+              Privacidad
+            </a>
+            <span aria-hidden="true">·</span>
+
+            <span class="footer-copyright">
+              © 2026 {{ app_author }}.
+              Todos los derechos reservados.
+            </span>
+          </div>
+        </div>
+      </footer>
     </div>
-  </footer>
+  </div>
 
   <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
     crossorigin="anonymous"
   ></script>
-  <script src="{{ url_for('static', path='/js/accessibility.js') }}"></script>
-  <script src="{{ url_for('static', path='/js/data_management.js') }}"></script>
-  <script src="{{ url_for('static', path='/js/privacy.js') }}"></script>
-  <script src="{{ url_for('static', path='/js/attachment_processing.js') }}"></script>
+
+  <script src="{{ url_for('static', path='/js/app_shell.js') }}?v={{ static_revision }}"></script>
+  <script src="{{ url_for('static', path='/js/accessibility.js') }}?v={{ static_revision }}"></script>
+  <script src="{{ url_for('static', path='/js/data_management.js') }}?v={{ static_revision }}"></script>
+  <script src="{{ url_for('static', path='/js/privacy.js') }}?v={{ static_revision }}"></script>
+  <script src="{{ url_for('static', path='/js/attachment_processing.js') }}?v={{ static_revision }}"></script>
 
   {% block scripts %}{% endblock %}
 
-  <!-- La capa de procedencia editable se carga después de los módulos de cada vista. -->
-  <script src="{{ url_for('static', path='/js/editable_provenance.js') }}"></script>
+  <script src="{{ url_for('static', path='/js/editable_provenance.js') }}?v={{ static_revision }}"></script>
 </body>
 
 </html>

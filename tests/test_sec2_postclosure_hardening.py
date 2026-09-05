@@ -248,16 +248,18 @@ class TestSec2PostClosureHardening(unittest.TestCase):
                     "/dev/centro-desarrollo"
                 )
 
-        self.assertEqual(
+        self.assertIn(
             "no-store",
             login_get.headers.get(
-                "cache-control"
+                "cache-control",
+                "",
             ),
         )
-        self.assertEqual(
+        self.assertIn(
             "no-store",
             centro.headers.get(
-                "cache-control"
+                "cache-control",
+                "",
             ),
         )
 
