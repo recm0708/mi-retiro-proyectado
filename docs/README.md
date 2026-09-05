@@ -1,16 +1,16 @@
 # Índice de documentación
 
 **Estado:** vigente
-**Versión de aplicación:** `0.1.19.05-beta` — G119/E05 aceptado/publicado para DEV.2 R6; G120/E01 reservado para UX.5 R1; ledger aceptado hasta G119
+**Versión de aplicación:** `0.1.19.05-beta` — G119/E05 aceptado/publicado para DEV.2 R6; G120/E01 reservado para el cierre UX.5 R6; UX.6 planificado después sin Global preasignado; ledger aceptado hasta G119
 **Último tag formal legacy:** `v0.0.26-beta`
-**Última actualización transversal:** G119/E05 publicado; mantenimiento post-G119 PR #117/#118 cerrado; UX.5 R1 candidato G120/E01 — 2026-08-31
+**Última actualización transversal:** G119/E05 publicado; mantenimiento post-G119 PR #117/#118 cerrado; UX.5 R6 candidato de cierre G120/E01; UX.6 planificado — 2026-09-04
 **Cierres históricos preservados:** UX.4.6i / PR #34 — 841 pruebas; UX.4.6e R9 — `v0.0.25-beta`
 
 Este archivo es el punto de entrada para la documentación técnica, funcional, normativa, de privacidad, validación y auditoría de Mi Retiro Proyectado.
 
 ## Estado de normalización del repositorio
 
-**Estado actual:** NOR.1 R8, NOR.2, DOC.1 R2–R5, SEC.2, AUD.SEC2 R1, REL.GOV.1 R1–R2, DOC.2 y PLAN.2 R1 están cerrados/aceptados según corresponda. DEV.2 R6 queda cerrado/aceptado/publicado como G119/E05 (`0.1.19.05-beta`); UX.5 R1 reserva G120/E01 como candidato actual.
+**Estado actual:** NOR.1 R8, NOR.2, DOC.1 R2–R5, SEC.2, AUD.SEC2 R1, REL.GOV.1 R1–R2, DOC.2 y PLAN.2 R1 están cerrados/aceptados según corresponda. DEV.2 R6 queda cerrado/aceptado/publicado como G119/E05 (`0.1.19.05-beta`); UX.5 R1–R6 están consolidados en el candidato de cierre G120/E01 y UX.6 queda planificado a continuación sin Global preasignado.
 
 Estado de la fase:
 
@@ -37,7 +37,7 @@ Estado de la fase:
   de firma #17 y GitHub Release prerelease ID `379454328`; Portal
   Developer multipágina, identidad, observabilidad, mantenimiento,
   seguridad y privacidad integrados.
-- **UX.5 R1:** candidato G120/E01 (`0.1.20.01-beta`) para el sistema visual integral.
+- **UX.5 R6:** candidato de cierre G120/E01 (`0.1.20.01-beta`) para el alcance R1–R6 consolidado; UX.6 queda planificado después sin Global preasignado.
 - **SEC.2 R1–R6:** cerrados; CodeQL, autenticación, protección de endpoints, auditoría, sesión web y hardening configurable completados. AUD.SEC2 R1 corrigió el kill switch, alineó documentación/ledger y quedó aceptado como G109/E01.
 
 Evidencia:
@@ -93,7 +93,7 @@ Evidencia:
 - **[VER.2 — Segunda pasada de auditoría cruzada](archive/governance/ver2-second-pass-audit.md)** — bitácora de la segunda pasada y correcciones sobre la primera reconstrucción.
 - **[VER.2 — Conteo de segunda pasada](archive/governance/ver2-provisional-count-audit.md)** — cierre del conteo de segunda pasada en G070 antes de VER.2.
 - **[VER.2 — Matriz de decisión de revisiones aceptadas](archive/governance/ver2-revision-decision-matrix.md)** — decisión fila por fila sobre qué consume Global y por qué.
-- **[Ledger de revisiones aceptadas pre-1.0](governance/pre-1-0-revision-ledger.md)** — ledger Markdown reconciliado G001–G119 y siguiente candidato reservado G120/E01 para UX.5 R1.
+- **[Ledger de revisiones aceptadas pre-1.0](governance/pre-1-0-revision-ledger.md)** — ledger Markdown reconciliado G001–G119 y siguiente candidato reservado G120/E01 para el cierre UX.5 R6; UX.6 queda planificado como bloque posterior.
 - **[Auditoría de reconciliación revision-aware posterior a G070](audits/governance/post-g070-revision-reconciliation.md)** — auditoría de reconstrucción G071–G108.
 - [`pre-1-0-revision-ledger-g070.json`](archive/governance/pre-1-0-revision-ledger-g070.json) — snapshot histórico exacto G070.
 - [`../data/pre-1-0-revision-ledger.json`](../data/pre-1-0-revision-ledger.json) — ledger machine-readable canónico de la reconstrucción.

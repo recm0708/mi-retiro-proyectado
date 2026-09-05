@@ -22,29 +22,29 @@
   <!-- Identidad gráfica del navegador. -->
   <link
     rel="icon"
-    href="{{ url_for('static', path='/img/brand/favicon.ico') }}"
+    href="{{ url_for('static', path='/img/brand/favicon.ico') }}?v={{ static_revision }}"
     sizes="any"
   >
   <link
     rel="icon"
     type="image/png"
     sizes="32x32"
-    href="{{ url_for('static', path='/img/brand/favicon-32x32.png') }}"
+    href="{{ url_for('static', path='/img/brand/favicon-32x32.png') }}?v={{ static_revision }}"
   >
   <link
     rel="icon"
     type="image/png"
     sizes="16x16"
-    href="{{ url_for('static', path='/img/brand/favicon-16x16.png') }}"
+    href="{{ url_for('static', path='/img/brand/favicon-16x16.png') }}?v={{ static_revision }}"
   >
   <link
     rel="apple-touch-icon"
     sizes="180x180"
-    href="{{ url_for('static', path='/img/brand/apple-touch-icon.png') }}"
+    href="{{ url_for('static', path='/img/brand/apple-touch-icon.png') }}?v={{ static_revision }}"
   >
 
   <!-- Se aplica antes de los estilos para reducir cambios visuales al cargar. -->
-  <script src="{{ url_for('static', path='/js/theme.js') }}"></script>
+  <script src="{{ url_for('static', path='/js/theme.js') }}?v={{ static_revision }}"></script>
 
   <link
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
@@ -56,23 +56,23 @@
   <!-- Capas visuales: base, sistema de diseño, accesibilidad e identidad. -->
   <link
     rel="stylesheet"
-    href="{{ url_for('static', path='/css/style.css') }}"
+    href="{{ url_for('static', path='/css/style.css') }}?v={{ static_revision }}"
   >
   <link
     rel="stylesheet"
-    href="{{ url_for('static', path='/css/design-system.css') }}"
+    href="{{ url_for('static', path='/css/design-system.css') }}?v={{ static_revision }}"
   >
   <link
     rel="stylesheet"
-    href="{{ url_for('static', path='/css/accessibility.css') }}"
+    href="{{ url_for('static', path='/css/accessibility.css') }}?v={{ static_revision }}"
   >
   <link
     rel="stylesheet"
-    href="{{ url_for('static', path='/css/brand.css') }}"
+    href="{{ url_for('static', path='/css/brand.css') }}?v={{ static_revision }}"
   >
   <link
     rel="stylesheet"
-    href="{{ url_for('static', path='/css/editable-provenance.css') }}"
+    href="{{ url_for('static', path='/css/editable-provenance.css') }}?v={{ static_revision }}"
   >
 
   {% block head %}{% endblock %}
@@ -106,7 +106,7 @@
         <span class="app-brand-mark" aria-hidden="true">
           <img
             class="app-brand-mark-image"
-            src="{{ url_for('static', path='/img/brand/logo-mark-128.png') }}"
+            src="{{ url_for('static', path='/img/brand/logo-mark-128.png') }}?v={{ static_revision }}"
             alt=""
             width="128"
             height="128"
@@ -391,15 +391,15 @@
     crossorigin="anonymous"
   ></script>
 
-  <script src="{{ url_for('static', path='/js/app_shell.js') }}"></script>
-  <script src="{{ url_for('static', path='/js/accessibility.js') }}"></script>
-  <script src="{{ url_for('static', path='/js/data_management.js') }}"></script>
-  <script src="{{ url_for('static', path='/js/privacy.js') }}"></script>
-  <script src="{{ url_for('static', path='/js/attachment_processing.js') }}"></script>
+  <script src="{{ url_for('static', path='/js/app_shell.js') }}?v={{ static_revision }}"></script>
+  <script src="{{ url_for('static', path='/js/accessibility.js') }}?v={{ static_revision }}"></script>
+  <script src="{{ url_for('static', path='/js/data_management.js') }}?v={{ static_revision }}"></script>
+  <script src="{{ url_for('static', path='/js/privacy.js') }}?v={{ static_revision }}"></script>
+  <script src="{{ url_for('static', path='/js/attachment_processing.js') }}?v={{ static_revision }}"></script>
 
   {% block scripts %}{% endblock %}
 
-  <script src="{{ url_for('static', path='/js/editable_provenance.js') }}"></script>
+  <script src="{{ url_for('static', path='/js/editable_provenance.js') }}?v={{ static_revision }}"></script>
 </body>
 
 </html>

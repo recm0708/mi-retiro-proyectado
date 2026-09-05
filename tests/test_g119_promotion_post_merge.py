@@ -39,7 +39,7 @@ class TestG119PromotionPostMerge(unittest.TestCase):
         self.assertIn("PR #111", entry["evidence"])
         self.assertIn("bd2accb", entry["evidence"])
 
-    def test_registro_cierra_dev2_y_reserva_ux5_r1(self):
+    def test_registro_cierra_dev2_y_mantiene_candidato_ux5(self):
         data = json.loads(
             (ROOT / "data/work-block-registry.json").read_text(
                 encoding="utf-8"
@@ -57,7 +57,7 @@ class TestG119PromotionPostMerge(unittest.TestCase):
         self.assertEqual(120, candidate["global_revision"])
         self.assertEqual("0.1.20.01-beta", candidate["revision_aware"])
         self.assertEqual("UX.5", candidate["block"])
-        self.assertEqual("R1", candidate["revision"])
+        self.assertEqual("R6", candidate["revision"])
         self.assertEqual(1, candidate["edition"])
         self.assertEqual(
             "reserved_not_accepted",

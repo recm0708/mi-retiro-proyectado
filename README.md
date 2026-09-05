@@ -34,7 +34,7 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
   PR #111 / merge `bd2accbea421fc719d9330015533001039648d05`.
 - **Estado revision-aware reconciliado:** G119/E05 (`0.1.19.05-beta`)
   queda aceptado/publicado para DEV.2 R6; G120/E01 (`0.1.20.01-beta`) queda
-  reservado para UX.5 R1.
+  reservado para el cierre de UX.5 R6; UX.6 queda planificado después, sin Global preasignado.
 - **Publicación revision-aware vigente:** `v0.1.19.05-beta`
   (G119/E05), tag anotado y firmado sobre
   `9424ea854f859a24fd01fe83bdf5d476b52fc213`, con objeto de tag
@@ -165,7 +165,7 @@ Documentos principales:
 - **[Cierre GOV.1 — Auditoría, Gobierno y Trazabilidad Pre-Beta](docs/archive/governance/gov1-closeout.md)** — auditoría final y decisión de cierre de GOV.1;
 - **[Auditoría de versionado pre-1.0](docs/archive/governance/pre-1-0-versioning-audit.md)** — criterio contable y reconciliación VER.2;
 - **[VER.2 — Matriz de decisión de revisiones aceptadas](docs/archive/governance/ver2-revision-decision-matrix.md)** — decisiones de inclusión/exclusión del contador;
-- **[Ledger de revisiones aceptadas pre-1.0](docs/governance/pre-1-0-revision-ledger.md)** — secuencia reconciliada G001–G119 y próximo candidato G120/E01 para UX.5 R1;
+- **[Ledger de revisiones aceptadas pre-1.0](docs/governance/pre-1-0-revision-ledger.md)** — secuencia reconciliada G001–G119 y próximo candidato G120/E01 para el cierre de UX.5 R6; UX.6 queda planificado después sin Global preasignado;
 - [`data/pre-1-0-revision-ledger.json`](data/pre-1-0-revision-ledger.json) — ledger machine-readable;
 - **[Identificadores de bloques de trabajo](docs/standards/work-block-identifiers.md)** — política canónica de identificadores de bloques;
 - [`data/work-block-registry.json`](data/work-block-registry.json) — registro machine-readable de identificadores históricos, cerrados y planificados;

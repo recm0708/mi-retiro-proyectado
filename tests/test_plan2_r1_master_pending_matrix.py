@@ -14,7 +14,7 @@ class TestPLAN2R1MasterPendingMatrix(unittest.TestCase):
         self.assertEqual("closed",ids["PLAN.2"]["status"]); self.assertIn("G114",ids["PLAN.2"]["global_refs"]); self.assertIn("UX.5",ids)
     def test_matriz_contiene_frentes_obligatorios(self):
         matrix=(ROOT/"docs/governance/pre-1-0-pending-matrix.md").read_text(encoding="utf-8")
-        for token in ("PLAN.2 R1","DOC.1 R4","REL.GOV.1 R2","DEV.2 R5","DEV.2 R6","UX.5 R1","UX.5 R6","PERSIST.1 R1","REP.1 R1","SEC.2 R7","A11Y.2","REV.1","DOC.1 R5","QA.1","REL.1","1.0.0.0"):
+        for token in ("PLAN.2 R1","DOC.1 R4","REL.GOV.1 R2","DEV.2 R5","DEV.2 R6","UX.5 R1","UX.5 R6","UX.6 R1","PERSIST.1 R1","REP.1 R1","SEC.2 R7","A11Y.2","REV.1","DOC.1 R5","QA.1","REL.1","1.0.0.0"):
             self.assertIn(token,matrix)
         self.assertIn("Cerrado/aceptado G114/E01",matrix); self.assertIn("Cerrado/aceptado G115/E04",matrix)
     def test_matriz_documenta_developer_y_modalidades(self):

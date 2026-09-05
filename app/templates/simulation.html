@@ -1305,72 +1305,76 @@ Nueva simulación | {{ app_name }}
 
 <!-- Utilidades de entrada y formato monetario. -->
 <script
-  src="{{ url_for('static', path='/js/currency.js') }}"
+  src="{{ url_for('static', path='/js/currency.js') }}?v={{ static_revision }}"
 ></script>
 
 
 <!-- JavaScript principal del asistente. -->
 
 <script
-  src="{{ url_for('static', path='/js/simulation.js') }}"
+  src="{{ url_for('static', path='/js/simulation.js') }}?v={{ static_revision }}"
 ></script>
 
 
 <!-- Elección y contrato de modalidad de la simulación. -->
 <script
-  src="{{ url_for('static', path='/js/simulation_mode.js') }}"
-  <script src="{{ url_for('static', path='js/assisted_flow.js') }}"></script>
+  src="{{ url_for('static', path='/js/simulation_mode.js') }}?v={{ static_revision }}"
+></script>
+
+<!-- Coordinación de la preparación documental Asistida. -->
+<script
+  src="{{ url_for('static', path='/js/assisted_flow.js') }}?v={{ static_revision }}"
 ></script>
 
 
 <!-- Gestión específica del historial salarial. -->
 
 <script
-  src="{{ url_for('static', path='/js/salary_history.js') }}"
+  src="{{ url_for('static', path='/js/salary_history.js') }}?v={{ static_revision }}"
 ></script>
 
 
 <!-- Referencia personal opcional de Mi Retiro Seguro. -->
 <script
-  src="{{ url_for('static', path='/js/mi_retiro_seguro_reference.js') }}"
+  src="{{ url_for('static', path='/js/mi_retiro_seguro_reference.js') }}?v={{ static_revision }}"
 ></script>
 
 
-<!-- Importación revisable: Mi Retiro Seguro en Paso 1 y Ficha Digital en Paso 3. -->
+<!-- Importación revisable de las fuentes del Centro documental Asistido. -->
 <script
-  src="{{ url_for('static', path='/js/official_data_import.js') }}"
+  src="{{ url_for('static', path='/js/official_data_import.js') }}?v={{ static_revision }}"
 ></script>
 
 
 <!-- Detalle mensual/quincenal del año actual. -->
 <script
-  src="{{ url_for('static', path='/js/current_year_detail.js') }}"
+  src="{{ url_for('static', path='/js/current_year_detail.js') }}?v={{ static_revision }}"
 ></script>
 
 
 <!-- Presentación integrada de historial y proyección. -->
 
 <script
-  src="{{ url_for('static', path='/js/timeline.js') }}"
+  src="{{ url_for('static', path='/js/timeline.js') }}?v={{ static_revision }}"
 ></script>
 
 
 <!-- Gestión específica de fechas y escenarios de retiro. -->
 
 <script
-  src="{{ url_for('static', path='/js/retirement.js') }}"
+  src="{{ url_for('static', path='/js/retirement.js') }}?v={{ static_revision }}"
 ></script>
 
 
 <!-- Integración de los motores legales con el Paso 6. -->
 <script
-  src="{{ url_for('static', path='/js/results.js') }}"
+  src="{{ url_for('static', path='/js/results.js') }}?v={{ static_revision }}"
 ></script>
 
 
 <!-- Navegación común del asistente al final del paso activo. -->
 <script
-  src="{{ url_for('static', path='/js/wizard_navigation.js') }}"
+  src="{{ url_for('static', path='/js/wizard_navigation.js') }}?v={{ static_revision }}"
 ></script>
 
 {% endblock %}

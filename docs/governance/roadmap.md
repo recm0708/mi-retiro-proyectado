@@ -4,8 +4,8 @@
 **Versión vigente:** `0.1.19.05-beta` — G119/E05 aceptado/publicado para DEV.2 R6
 **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
 **Último tag formal legacy:** `v0.0.26-beta`
-**Fecha de revisión:** 2026-08-31
-**Estado actual:** DEV.2 R6 queda cerrado/aceptado/publicado como G119/E05 (`0.1.19.05-beta`) después de PR #111 / merge `bd2accb`, promoción PR #112 / commit `9424ea8` y tag firmado `v0.1.19.05-beta`; los mantenimientos post-G119 PR #117 y PR #118 quedaron integrados sin consumir un nuevo Global; UX.5 R1 continúa reservado como candidato G120/E01 (`0.1.20.01-beta`).
+**Fecha de revisión:** 2026-09-04
+**Estado actual:** DEV.2 R6 permanece cerrado/aceptado/publicado como G119/E05 (`0.1.19.05-beta`); UX.5 R1–R6 están consolidados en el candidato de cierre G120/E01 (`0.1.20.01-beta`), todavía no aceptado. UX.6 queda planificado después de UX.5 y antes de PERSIST.1, sin Global preasignado.
 
 <!-- NOR1-R7-CLOSURE:START -->
 ## Estado NOR.1 / NOR.2
@@ -35,7 +35,8 @@ La secuencia operativa previa a SEC.2 queda:
     (`0.1.19.05-beta`) después de PR #111 / merge `bd2accb`,
     promoción PR #112 / commit `9424ea8` y tag
     `v0.1.19.05-beta`.
-15. **UX.5 R1** — checkpoint candidato G120/E01 (`0.1.20.01-beta`) para el sistema visual integral.
+15. **UX.5 R6** — candidato de cierre G120/E01 (`0.1.20.01-beta`); R1–R6 se consolidan en este único estado aceptable del bloque.
+16. **UX.6 R1** — auditoría integral de experiencia App + Developer, planificada sin Global preasignado antes de PERSIST.1.
 
 NOR.2 ejecutó los movimientos, renombrados, consolidaciones y retiros que
 NOR.1 deliberadamente no realizó.
@@ -92,6 +93,16 @@ Este roadmap describe **estado actual y trabajo futuro**.
 La secuencia de pendientes vigente se mantiene en [Matriz maestra de pendientes hacia 1.0](pre-1-0-pending-matrix.md). Esa matriz es evolutiva y no preasigna Globales futuros más allá del candidato actual. La evolución detallada ya completada se conserva en `RELEASES.md`, `CHANGELOG.md`, `docs/archive/governance/pre-1-0-versioning-audit.md`, `docs/governance/pre-1-0-revision-ledger.md`, `docs/archive/governance/ver2-revision-decision-matrix.md`, `data/pre-1-0-revision-ledger.json` y `docs/archive/`.
 
 VER.2 es un bloque transversal de reconciliación y **no añade un bloque 15** al plan maestro de producto. DEV.2 tuvo un checkpoint documental en R4 y quedó cerrado funcionalmente después de R6. MANT.1 se trata como checkpoint técnico de mantenibilidad antes de SEC.2 y tampoco añade un bloque funcional de producto. MANT.1 R1 queda como auditoría inicial de alcance, MANT.1 R2 conserva la documentación de scripts y hooks antes de SEC.2, MANT.1 R3 documenta los YAML de GitHub sin cambiar CI ni formularios y MANT.1 R4 limpia encabezados operativos para que la trazabilidad histórica permanezca en documentación, MANT.1 R5A comenta servicios Python grandes, MANT.1 R5B comenta CSS/plantilla de la guía pública, MANT.1 R5C comenta JavaScript complejo sin cambiar lógica visible y MANT.1 R5D define política/plantillas por extensión con uniformidad de encabezados.
+
+## Estado operativo UX.5 / UX.6
+
+UX.5 completó funcionalmente R1–R6 dentro del mismo candidato G120/E01. El cierre incluye el sistema visual base, shell y temas, selección Manual/Asistida, recorrido Manual, preparación documental Asistida, Mi Retiro Seguro, Ficha Digital, completitud, invalidación y protección de resultados.
+
+La aceptación de G120 continúa pendiente de gate final, PR/CI, integración y promoción revision-aware. R1–R5 no consumieron Globales independientes.
+
+UX.6 queda registrado como el siguiente bloque de experiencia, sin Global preasignado mientras G120 permanezca sin aceptar. Concentrará la revisión visual completa de App y Portal Developer, accesibilidad, tooltips, microanimaciones, responsive, zoom, compatibilidad, revisión detallada de importadores y auditoría integral de redundancias, cascadas, código muerto y ownership.
+
+PERSIST.1 permanece detrás del cierre de UX.6.
 
 ## 1. Programa GOV.1 — Auditoría, Gobierno y Trazabilidad Pre-Beta
 
@@ -223,12 +234,12 @@ No existe una una revisión intermedia no demostrada entre UX.4.6i R1 y R1.2 dem
 
 **VER.2:** bloque transversal cerrado. La primera promoción se publicó como `0.0.71.01-beta`; AUD.SEC2 R1 documenta que el ledger usado entonces terminaba en G070 y que la reconstrucción completa sitúa ese estado en G087 sin modificar el tag inmutable.
 
-**Checkpoint técnico actual:** G119/E05 (`0.1.19.05-beta`) está aceptado/publicado para DEV.2 R6. G112/E07–G118/E04 permanecen preservados según el ledger. PR #117 cerró la migración de automatización y PR #118 coordinó el mantenimiento de dependencias post-G119; ambos son mantenimiento sin Global independiente y no consumen G120. G120/E01 (`0.1.20.01-beta`) queda reservado como candidato para UX.5 R1 y PERSIST.1 continúa en una etapa posterior.
+**Checkpoint técnico actual:** G119/E05 (`0.1.19.05-beta`) está aceptado/publicado para DEV.2 R6. G112/E07–G118/E04 permanecen preservados según el ledger. PR #117 cerró la migración de automatización y PR #118 coordinó el mantenimiento de dependencias post-G119; ambos son mantenimiento sin Global independiente y no consumen G120. G120/E01 (`0.1.20.01-beta`) permanece reservado como candidato de cierre UX.5 R6; UX.6 queda planificado después sin Global preasignado y PERSIST.1 continúa en una etapa posterior.
 
 Documentos canónicos de VER.2:
 
 - `pre-1-0-versioning-audit.md` — criterio contable y exclusiones;
-- `pre-1-0-revision-ledger.md` — ledger reconciliado G001–G119 y siguiente Global G120/E01 reservado para UX.5 R1;
+- `pre-1-0-revision-ledger.md` — ledger reconciliado G001–G119 y siguiente Global G120/E01 reservado para el cierre UX.5 R6; UX.6 queda planificado después;
 - `ver2-revision-decision-matrix.md` — justificación de la segunda pasada;
 - `../data/pre-1-0-revision-ledger.json` — ledger estructurado validable;
 - `../VERSIONING.md` — política de numeración.
