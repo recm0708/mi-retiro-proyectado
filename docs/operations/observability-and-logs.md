@@ -1,7 +1,7 @@
 # Observabilidad y Developer Diagnostics
 
 **Estado:** Vigente — GOV.1.4 cerrado / SEC.2 R1–R6 integrado / DEV.2 R6 aceptado/publicado G119/E05
-**Versión de aplicación revisada:** `0.1.19.05-beta`
+**Versión de aplicación revisada:** `0.1.20.01-beta`
 **Versión base histórica:** `0.0.25-beta`
 **Versión base histórica preservada:** `0.0.23-beta`
 **Fecha de cierre original:** 2026-08-17

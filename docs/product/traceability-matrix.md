@@ -1,7 +1,7 @@
 # Matriz de trazabilidad
 
 **Estado:** Vigente
-**Versión de aplicación:** `0.1.19.05-beta` — G119/E05 aceptado/publicado para DEV.2 R6; G120/E01 permanece reservado para el cierre UX.5 R6 y UX.6 está planificado sin Global preasignado
+**Versión de aplicación:** `0.1.20.01-beta` — G120/E01 aceptado para UX.5 R6; G121/E01 reservado para UX.6 R1
 **Último tag formal legacy:** `v0.0.26-beta`
 **Base histórica:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal:** NOR.2 R8 — 2026-08-24
@@ -17,8 +17,8 @@ La trazabilidad vigente alcanza G119/E05.
 - DEV.2 R6 queda integrado mediante PR #111 / merge `bd2accb` y
   aceptado/publicado como G119/E05 mediante promoción PR #112 /
   commit `9424ea8` y tag `v0.1.19.05-beta`.
-- G120/E01 permanece reservado para el cierre UX.5 R6; R1–R6 se consolidan en el mismo candidato.
-- UX.6 queda planificado después de UX.5 y antes de PERSIST.1, sin Global preasignado.
+- G120/E01 queda aceptado para UX.5 R6; R1–R6 consumen un único estado aceptado.
+- UX.6 R1 queda reservado como G121/E01 antes de PERSIST.1.
 - PR #117 y PR #118 cierran la migración de automatización y el mantenimiento
   coordinado de dependencias post-G119 sin consumir G120.
 - La historia de NOR.2, SEC.2, AUD.SEC2, DOC.1, PLAN.2 y REL.GOV.1

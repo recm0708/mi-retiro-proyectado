@@ -3,7 +3,7 @@
 **Producto:** Mi Retiro Proyectado
 **Versión del texto:** `2026-08-16.1`
 **Estado:** Vigente en la aplicación
-**Versión de aplicación revisada:** `0.1.19.05-beta`
+**Versión de aplicación revisada:** `0.1.20.01-beta`
 **Versión base histórica:** `0.0.25-beta`
 **Versión base histórica preservada:** `0.0.23-beta`
 **Base documental:** GOV.1.3 R3 — 2026-08-17
@@ -19,7 +19,7 @@ La política de privacidad mantiene su alcance material.
 
 Estado vigente:
 
-- `VERSION` está sincronizado en `0.1.19.05-beta` (G119/E05).
+- `VERSION` está sincronizado en `0.1.20.01-beta` (G120/E01).
 - DEV.2 R6 queda aceptado/publicado como G119/E05 después de
   PR #111 / merge `bd2accb`, promoción PR #112 y tag
   `v0.1.19.05-beta`.
@@ -27,7 +27,7 @@ Estado vigente:
   los datos previsionales de simulación.
 - G118/E04 permanece preservado mediante `v0.1.18.04-beta` como
   publicación anterior.
-- UX.5 R6 queda como candidato de cierre G120/E01; UX.6 queda planificado después sin Global preasignado.
+- UX.5 R6 queda aceptado como G120/E01; UX.6 R1 queda reservado como G121/E01.
 - SEC.2 R1–R6 permanece cerrado.
 - La aplicación sigue siendo independiente y no oficial.
 <!-- DOC1-R1-REVISION-MANUAL:END -->

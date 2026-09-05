@@ -1,7 +1,7 @@
 # Arquitectura
 
 **Estado:** Vigente
-**Versión de aplicación revisada:** `0.1.19.05-beta`
+**Versión de aplicación revisada:** `0.1.20.01-beta`
 **Versión base histórica:** `0.0.23-beta`
 **Revisión documental:** GOV.1.4 — 2026-08-17
 **Última actualización técnica:** DEV.2 R6 — Portal Developer multipágina, identidad, observabilidad, mantenimiento, seguridad y privacidad — 2026-08-30

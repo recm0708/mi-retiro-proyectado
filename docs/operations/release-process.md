@@ -21,7 +21,7 @@ Estado vigente:
 - DEV.2 R6 fue integrado mediante PR #111 / merge `bd2accb`.
 - G119/E05 está publicado mediante `v0.1.19.05-beta`; G118/E04
   permanece preservado como publicación anterior.
-- G120/E01 (`0.1.20.01-beta`) permanece reservado para el cierre UX.5 R6; UX.6 queda planificado después sin Global preasignado.
+- G120/E01 (`0.1.20.01-beta`) queda aceptado para UX.5 R6; G121/E01 (`0.1.21.01-beta`) queda reservado para UX.6 R1.
 - La automatización no crea ni firma tags; esa frontera permanece local.
 - El tag `v0.1.19.05-beta` fue creado de forma anotada y firmada
   después del merge de promoción y de la revalidación de `main`;

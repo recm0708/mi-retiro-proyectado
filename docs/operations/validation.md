@@ -1,7 +1,7 @@
 # Validación
 
 **Estado:** Vigente
-**Versión revisada:** `0.1.19.05-beta` — G119/E05 aceptado/publicado; UX.5 R6 es candidato de cierre G120/E01 (`0.1.20.01-beta`), reservado y todavía no aceptado.
+**Versión revisada:** `0.1.20.01-beta` — UX.5 R6 aceptado como G120/E01; UX.6 R1 es candidato G121/E01 (`0.1.21.01-beta`).
 **Versión base histórica:** `0.0.25-beta`
 **Base documental histórica:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal histórica preservada:** UX.4.6e R8 — validación funcional y procedencia editable — 2026-08-19
@@ -215,9 +215,9 @@ Esta infraestructura no cambia `VERSION`, no acepta G120 y no crea commits,
 tags ni GitHub Releases.
 <!-- AUTOMATION-POST-G119:END -->
 
-## Validación UX.5 — candidato de cierre G120/E01
+## Validación UX.5 — aceptación G120/E01
 
-UX.5 R1–R6 quedan consolidados en el candidato G120/E01 con revisión funcional R6. La aceptación revision-aware continúa pendiente de PR/CI, integración y promoción.
+UX.5 R1–R6 quedan consolidados y aceptados como G120/E01 con revisión funcional R6 y ordinal E01. UX.6 R1 pasa a ser el candidato G121/E01.
 
 Evidencia focal observada después de la corrección de Mi Retiro Seguro y del versionado de assets:
 
@@ -229,7 +229,7 @@ Evidencia focal observada después de la corrección de Mi Retiro Seguro y del v
 - ambos importadores produjeron detección de información;
 - la revisión detallada visual, accesible y de mensajes pasa a UX.6.
 
-El gate completo de cierre local se ejecutó después de la reconciliación documental y obtuvo **11 PASS / 0 FAIL**: **1404 pruebas `unittest` OK**, **1444 pruebas `pytest` passed / 6865 subtests passed**, Markdown 166/166, 22 JavaScript válidos, 16 familias / 47 identificadores, 586 archivos Git/versionables y `pip check`, compilación Python, contrato revision-aware, manifiesto de publicación y `git diff --check` limpios. G120/E01 continúa reservado y sin aceptar hasta completar integración y promoción.
+El gate completo de cierre local se ejecutó después de la reconciliación documental y obtuvo **11 PASS / 0 FAIL**: **1404 pruebas `unittest` OK**, **1444 pruebas `pytest` passed / 6865 subtests passed**, Markdown 166/166, 22 JavaScript válidos, 16 familias / 47 identificadores, 586 archivos Git/versionables y `pip check`, compilación Python, contrato revision-aware, manifiesto de publicación y `git diff --check` limpios. G120/E01 quedó aceptado después de PR #122 / merge `4c43a816526201c5869d2df8e88af44419c4df11`; la publicación formal mediante tag se completa después del merge de promoción y la revalidación de `main`.
 
 ## Atestación histórica Git pre-UX.5
 
@@ -681,7 +681,7 @@ python -m pip check
 
 ## 3. Inventario actual de pruebas
 
-Inventario vigente: **192 módulos**.
+Inventario vigente: **193 módulos**.
 
 - `tests/test_accessibility_themes.py`
 - `tests/test_accessibility_ux4.py`
@@ -721,6 +721,7 @@ Inventario vigente: **192 módulos**.
 - `tests/test_g117_promotion_post_merge.py`
 - `tests/test_g118_promotion_post_merge.py`
 - `tests/test_g119_promotion_post_merge.py`
+- `tests/test_g120_promotion_post_merge.py`
 - `tests/test_git_history_attestation.py`
 - `tests/test_gov12_versionado.py`
 - `tests/test_gov13_documentacion.py`
@@ -875,72 +876,6 @@ Inventario vigente: **192 módulos**.
 - `tests/test_ver2_version_revision_aware.py`
 - `tests/test_visual_identity_pre_r8.py`
 - `tests/test_visual_stabilization.py`
-
-### DEV.2 R6 — identidad y acceso Developer
-
-- `tests/test_dev2_r6_cli.py`
-- `tests/test_dev2_r6_identity.py`
-- `tests/test_dev2_r6_provisioning.py`
-- `tests/test_dev2_r6_store.py`
-
-### DEV.2 R6 — acceso web e identidad de sesión
-
-- `tests/test_dev2_r6_web_access.py`
-- `tests/test_dev2_r6_web_session.py`
-
-### DEV.2 R6 — arquitectura visual del Portal Developer
-
-- `tests/test_dev2_r6_header_identity.py`
-- `tests/test_dev2_r6_multipage_shell.py`
-- `tests/test_dev2_r6_sidebar_theme_sync.py`
-
-### DEV.2 R6.2-R6.4 — observabilidad Developer
-
-- `tests/test_dev2_r6_observability_portal.py`
-
-### DEV.2 R6.5-R6.7 — seguridad y mantenimiento
-
-- `tests/test_dev2_r6_security_maintenance_privacy.py`
-
-### DEV.2 R6.8 — cierre técnico pre-PR
-
-DEV.2 R6 completa su desarrollo funcional sobre la rama
-`feat/dev2-r6-portal-developer` manteniendo G119/E05 como candidato reservado.
-Este cierre no modifica todavía `VERSION`, `accepted_count`, el ledger aceptado
-ni el manifiesto de publicación vigente de G118/E04.
-
-Estado técnico auditado antes del PR:
-
-- último commit funcional firmado: `62e3c4eb800115122cc3d462f5acd76bfd6fe859`;
-- `pytest`: **1309 passed / 6045 subtests passed**;
-- `unittest`: **1269 tests OK**;
-- inventario: **182 módulos de pruebas**;
-- `python -m compileall -q app tests`: OK;
-- `python -m pip check`: sin dependencias rotas;
-- sintaxis de `app/static/js/developer_portal.js`: OK;
-- `git diff --check` y `git diff --cached --check`: limpios en el gate final;
-- RBAC explícito aplicado a diagnóstico, eventos, archivos, mantenimiento,
-  privacidad, perfil y acceso técnico;
-- CSRF, revalidación de contraseña y revocación de sesiones protegen las
-  operaciones sensibles;
-- no se incorporan bases SQLite, backups, ZIP diagnósticos, logs ni secretos.
-
-Estado revision-aware durante este cierre:
-
-- versión canónica publicada: `0.1.18.04-beta` — G118/E04;
-- `accepted_count = 118`;
-- siguiente Global reservado: G119;
-- candidato: DEV.2 R6 — G119/E05 (`0.1.19.05-beta`);
-- G119 no se considera aceptado hasta superar PR, CI, integración y
-  revalidación sobre `main`;
-- la promoción, el tag firmado y el GitHub Release pertenecen a una etapa
-  posterior y separada.
-
-
-Módulos incorporados al inventario vigente:
-
-- `tests/test_ux5_r5_assisted_upload_layout.py`
-- `tests/test_ux5_r5_r6_assisted_integration.py`
 
 ## 4. Categorías
 

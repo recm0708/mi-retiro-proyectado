@@ -1,11 +1,11 @@
 # Roadmap
 
 **Estado:** vigente
-**Versión vigente:** `0.1.19.05-beta` — G119/E05 aceptado/publicado para DEV.2 R6
+**Versión vigente:** `0.1.20.01-beta` — G120/E01 aceptado para UX.5 R6
 **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
 **Último tag formal legacy:** `v0.0.26-beta`
 **Fecha de revisión:** 2026-09-04
-**Estado actual:** DEV.2 R6 permanece cerrado/aceptado/publicado como G119/E05 (`0.1.19.05-beta`); UX.5 R1–R6 están consolidados en el candidato de cierre G120/E01 (`0.1.20.01-beta`), todavía no aceptado. UX.6 queda planificado después de UX.5 y antes de PERSIST.1, sin Global preasignado.
+**Estado actual:** UX.5 R1–R6 quedaron consolidados y aceptados como G120/E01 (`0.1.20.01-beta`). UX.6 R1 es el candidato G121/E01 (`0.1.21.01-beta`) y debe cerrarse antes de PERSIST.1.
 
 <!-- NOR1-R7-CLOSURE:START -->
 ## Estado NOR.1 / NOR.2
@@ -35,8 +35,8 @@ La secuencia operativa previa a SEC.2 queda:
     (`0.1.19.05-beta`) después de PR #111 / merge `bd2accb`,
     promoción PR #112 / commit `9424ea8` y tag
     `v0.1.19.05-beta`.
-15. **UX.5 R6** — candidato de cierre G120/E01 (`0.1.20.01-beta`); R1–R6 se consolidan en este único estado aceptable del bloque.
-16. **UX.6 R1** — auditoría integral de experiencia App + Developer, planificada sin Global preasignado antes de PERSIST.1.
+15. **UX.5 R6** — cerrado/aceptado como G120/E01 (`0.1.20.01-beta`); R1–R6 consumen este único estado aceptado del bloque.
+16. **UX.6 R1** — auditoría integral de experiencia App + Developer; candidato G121/E01 (`0.1.21.01-beta`) antes de PERSIST.1.
 
 NOR.2 ejecutó los movimientos, renombrados, consolidaciones y retiros que
 NOR.1 deliberadamente no realizó.
@@ -98,9 +98,9 @@ VER.2 es un bloque transversal de reconciliación y **no añade un bloque 15** a
 
 UX.5 completó funcionalmente R1–R6 dentro del mismo candidato G120/E01. El cierre incluye el sistema visual base, shell y temas, selección Manual/Asistida, recorrido Manual, preparación documental Asistida, Mi Retiro Seguro, Ficha Digital, completitud, invalidación y protección de resultados.
 
-La aceptación de G120 continúa pendiente de gate final, PR/CI, integración y promoción revision-aware. R1–R5 no consumieron Globales independientes.
+G120/E01 queda aceptado para UX.5 R6 después del gate, PR #122, CI e integración. R1–R5 no consumieron Globales independientes.
 
-UX.6 queda registrado como el siguiente bloque de experiencia, sin Global preasignado mientras G120 permanezca sin aceptar. Concentrará la revisión visual completa de App y Portal Developer, accesibilidad, tooltips, microanimaciones, responsive, zoom, compatibilidad, revisión detallada de importadores y auditoría integral de redundancias, cascadas, código muerto y ownership.
+UX.6 queda registrado como el siguiente bloque de experiencia y pasa a ser candidato G121/E01. Concentrará la revisión visual completa de App y Portal Developer, accesibilidad, tooltips, microanimaciones, responsive, zoom, compatibilidad, revisión detallada de importadores y auditoría integral de redundancias, cascadas, código muerto y ownership.
 
 PERSIST.1 permanece detrás del cierre de UX.6.
 
@@ -234,7 +234,7 @@ No existe una una revisión intermedia no demostrada entre UX.4.6i R1 y R1.2 dem
 
 **VER.2:** bloque transversal cerrado. La primera promoción se publicó como `0.0.71.01-beta`; AUD.SEC2 R1 documenta que el ledger usado entonces terminaba en G070 y que la reconstrucción completa sitúa ese estado en G087 sin modificar el tag inmutable.
 
-**Checkpoint técnico actual:** G119/E05 (`0.1.19.05-beta`) está aceptado/publicado para DEV.2 R6. G112/E07–G118/E04 permanecen preservados según el ledger. PR #117 cerró la migración de automatización y PR #118 coordinó el mantenimiento de dependencias post-G119; ambos son mantenimiento sin Global independiente y no consumen G120. G120/E01 (`0.1.20.01-beta`) permanece reservado como candidato de cierre UX.5 R6; UX.6 queda planificado después sin Global preasignado y PERSIST.1 continúa en una etapa posterior.
+**Checkpoint técnico actual:** G119/E05 (`0.1.19.05-beta`) está aceptado/publicado para DEV.2 R6. G112/E07–G118/E04 permanecen preservados según el ledger. PR #117 cerró la migración de automatización y PR #118 coordinó el mantenimiento de dependencias post-G119; ambos son mantenimiento sin Global independiente y no consumen G120. G120/E01 (`0.1.20.01-beta`) queda aceptado para UX.5 R6; G121/E01 (`0.1.21.01-beta`) queda reservado para UX.6 R1 y PERSIST.1 continúa en una etapa posterior.
 
 Documentos canónicos de VER.2:
 

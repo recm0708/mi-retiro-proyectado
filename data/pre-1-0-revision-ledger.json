@@ -2,9 +2,9 @@
   "schema_version": 1,
   "project": "Mi Retiro Proyectado",
   "base_commit": "7037addd44253e528c77460b678d2b3ccd540dd5",
-  "accepted_count": 119,
-  "next_global_if_ver2_accepted": 120,
-  "next_candidate": "0.1.20.01-beta",
+  "accepted_count": 120,
+  "next_global_if_ver2_accepted": 121,
+  "next_candidate": "0.1.21.01-beta",
   "historical_tags_immutable": {
     "from": "v0.0.1-beta",
     "to": "v0.0.26-beta"
@@ -1082,6 +1082,16 @@
       "state": "R6 — Portal Developer multipágina, identidad, observabilidad, mantenimiento, seguridad y privacidad",
       "anchor": "0.1.19.05-beta",
       "evidence": "PR #111 / merge bd2accbea421fc719d9330015533001039648d05; cierre técnico firmado ac9968b5a1e26d5dc8f08b0e28f5fab5aa9f6258; rama final de desarrollo 0a024bf1ab8c7a9dd79735c5b9c31fd0695d6139; 1269 unittest OK; pytest 1309 passed / 6045 subtests passed; 182 módulos test_*.py; Markdown 159/159; 16 familias / 46 identificadores; 8 checks remotos del PR #111 en success, incluido CodeQL; gate final de promoción: 1269 unittest OK; pytest 1309 passed / 6036 subtests passed; 183 módulos test_*.py; Markdown 159/159; 19 JavaScript; 16 familias / 46 identificadores; pip check, compileall y git diff --check limpios"
+    },
+    {
+      "global_revision": 120,
+      "block": "UX.5",
+      "ordinal": 1,
+      "functional_revision": "R6",
+      "revision_aware": "0.1.20.01-beta",
+      "state": "R6 — cierre funcional UX.5 R1–R6: sistema visual y flujo Manual/Asistido",
+      "anchor": "0.1.20.01-beta",
+      "evidence": "PR #122 / merge 4c43a816526201c5869d2df8e88af44419c4df11; commit de desarrollo firmado 1415c4b43a6d96d1c9ae8833537f0a4b1907228b; Repository Quality Gate local 11 PASS / 0 FAIL; 1404 unittest OK; pytest 1444 passed / 6865 subtests passed; Markdown 166/166; 22 JavaScript; 16 familias / 47 identificadores; CI PR #122 Repository Quality Gate, Python Compatibility y Visual & Accessibility en success"
     }
   ],
   "excluded": [
@@ -1158,8 +1168,8 @@
       "reason": "La decisión VER.2 R3 establece expresamente que R1, R2 y R3 son correcciones internas del mismo candidato G071/E01; no consumen G072 ni incrementan EE. R4 materializa la aceptación única del candidato."
     }
   ],
-  "reconciled_through_commit": "9424ea854f859a24fd01fe83bdf5d476b52fc213",
-  "reconciliation_date": "2026-08-30",
-  "next_global": 120,
-  "next_candidate_block": "UX.5"
+  "reconciled_through_commit": "4c43a816526201c5869d2df8e88af44419c4df11",
+  "reconciliation_date": "2026-09-04",
+  "next_global": 121,
+  "next_candidate_block": "UX.6"
 }

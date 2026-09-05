@@ -6,6 +6,27 @@
 **Reconciliación revision-aware:** 2026-08-22
 
 <!-- DOC1-R1-POST-MANT1:START -->
+
+## Promoción G120/E01 — UX.5 R6
+
+- Estado aceptado en este snapshot de promoción: G120/E01
+  (`0.1.20.01-beta`) para UX.5 R6.
+- R1–R6 se consolidan en un único estado aceptado con ordinal E01.
+- Evidencia funcional: PR #122 / merge
+  `4c43a816526201c5869d2df8e88af44419c4df11`.
+- Commit final de desarrollo firmado:
+  `1415c4b43a6d96d1c9ae8833537f0a4b1907228b`.
+- Gate local de desarrollo: 11 PASS / 0 FAIL; 1404 `unittest` OK;
+  `pytest` 1444 passed / 6865 subtests; Markdown 166/166;
+  22 JavaScript; 16 familias / 47 identificadores.
+- Repository Quality Gate, Python Compatibility y Visual & Accessibility
+  del PR #122 finalizaron en `success`.
+- G121/E01 (`0.1.21.01-beta`) queda reservado para UX.6 R1.
+- PERSIST.1 permanece detrás del cierre de UX.6.
+- El tag `v0.1.20.01-beta` se crea únicamente después del merge de esta
+  promoción y de la revalidación post-merge de `main`.
+
+
 ## Promoción G119/E05 — DEV.2 R6
 
 - Estado aceptado en este snapshot de promoción: G119/E05
@@ -137,11 +158,11 @@ Estado vigente:
   verificado y asociado al GitHub Release prerelease ID `379454328`.
   `v0.1.18.04-beta` permanece preservado como publicación anterior.
 - Último tag formal legacy: `v0.0.26-beta`.
-- Versión canónica en `VERSION`: `0.1.19.05-beta` (G119/E05).
+- Versión canónica en `VERSION`: `0.1.20.01-beta` (G120/E01).
 - `v0.0.71.01-beta` conserva su denominación histórica original y se reconcilia como G087/E01 sin alterar el tag.
 - MANT.1, NOR.1 R8, NOR.2, DOC.1 R1–R5 y PLAN.2 R1 están cerrados.
 - DOC.2 permanece aceptado/publicado como G111/E01; NOR.1 R8 como G112/E07, DOC.1 R3 como G113/E03, PLAN.2 R1 como G114/E01, DOC.1 R4 como G115/E04 y DOC.1 R5 como G116/E05.
-- G114/E01 permanece aceptado/publicado para PLAN.2 R1; G115/E04 (`0.1.15.04-beta`) queda aceptado/publicado para DOC.1 R4; G116/E05 (`0.1.16.05-beta`) queda aceptado/publicado para DOC.1 R5; G117/E02 (`0.1.17.02-beta`) queda aceptado/publicado para REL.GOV.1 R2. G118/E04 (`0.1.18.04-beta`) queda aceptado/publicado para DEV.2 R5; G119/E05 (`0.1.19.05-beta`) queda aceptado/publicado para DEV.2 R6; G120/E01 (`0.1.20.01-beta`) queda reservado para UX.5 R1; PERSIST.1 y REP.1 permanecen posteriormente según la matriz maestra viva.
+- G114/E01 permanece aceptado/publicado para PLAN.2 R1; G115/E04 (`0.1.15.04-beta`) queda aceptado/publicado para DOC.1 R4; G116/E05 (`0.1.16.05-beta`) queda aceptado/publicado para DOC.1 R5; G117/E02 (`0.1.17.02-beta`) queda aceptado/publicado para REL.GOV.1 R2. G118/E04 (`0.1.18.04-beta`) queda aceptado/publicado para DEV.2 R5; G119/E05 (`0.1.19.05-beta`) queda aceptado/publicado para DEV.2 R6; G120/E01 (`0.1.20.01-beta`) queda aceptado para UX.5 R6; G121/E01 (`0.1.21.01-beta`) queda reservado para UX.6 R1; PERSIST.1 permanece posteriormente según la matriz maestra viva.
 - SEC.2 quedó cerrado después de R1–R6 y AUD.SEC2 R1 permanece aceptado como G109/E01.
 
 ### Mantenimiento posterior a G119/E05
@@ -156,7 +177,7 @@ no constituye una nueva revisión aceptada ni una publicación independiente:
   juntas las dependencias acopladas;
 - ambos cambios conservaron `VERSION`, ledger revision-aware y manifiesto de
   publicación sin modificación;
-- G120/E01 continúa reservado exclusivamente para UX.5 R1.
+- G120/E01 queda aceptado para UX.5 R6 y G121/E01 queda reservado para UX.6 R1.
 
 Este documento no crea una release nueva; registra el estado formal ya alcanzado por el repositorio.
 <!-- DOC1-R1-POST-MANT1:END -->

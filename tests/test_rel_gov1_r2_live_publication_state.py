@@ -66,14 +66,18 @@ class TestRelGovR2LivePublicationState(unittest.TestCase):
         )
         self.assertIn("v0.1.16.05-beta", releases)
 
-    def test_security_preserva_g118_y_declara_g119_vigente(self):
+    def test_security_preserva_g118_g119_y_declara_g120_vigente(self):
         text = (ROOT / "SECURITY.md").read_text(encoding="utf-8")
         self.assertIn(
             "| `0.1.18.04-beta` | Beta previa G118/E04 publicada",
             text,
         )
         self.assertIn(
-            "| `0.1.19.05-beta` | Beta vigente G119/E05 publicada",
+            "| `0.1.19.05-beta` | Beta previa G119/E05 publicada",
+            text,
+        )
+        self.assertIn(
+            "| `0.1.20.01-beta` | Beta vigente G120/E01 aceptada",
             text,
         )
 
@@ -96,7 +100,7 @@ class TestRelGovR2LivePublicationState(unittest.TestCase):
         self.assertIn("release_publication.py", text)
         self.assertIn("--check-manifest", text)
 
-    def test_g118_historico_g119_aceptado_y_g120_reservado(self):
+    def test_g118_g119_preservados_g120_aceptado_y_g121_reservado(self):
         docs = (
             (ROOT / "README.md").read_text(encoding="utf-8")
             + (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
@@ -107,8 +111,10 @@ class TestRelGovR2LivePublicationState(unittest.TestCase):
         self.assertIn("G118/E04", docs)
         self.assertIn("G119/E05", docs)
         self.assertIn("G120/E01", docs)
+        self.assertIn("G121/E01", docs)
         self.assertIn("DEV.2 R6", docs)
-        self.assertIn("UX.5 R1", docs)
+        self.assertIn("UX.5 R6", docs)
+        self.assertIn("UX.6 R1", docs)
 
 
 

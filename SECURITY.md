@@ -3,16 +3,16 @@
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado de seguridad post-MANT.1
 
-La versión canónica vigente es `0.1.19.05-beta`.
+La versión canónica vigente es `0.1.20.01-beta`.
 
 El estado revision-aware vigente y publicado es:
 
-- versión canónica: `0.1.19.05-beta` (G119/E05);
+- versión canónica: `0.1.20.01-beta` (G120/E01);
 - DEV.2 R6 integrado mediante PR #111 / merge `bd2accb`;
 - G119/E05 está publicado mediante `v0.1.19.05-beta`, sobre
   `9424ea854f859a24fd01fe83bdf5d476b52fc213`;
 - G118/E04 permanece preservado mediante `v0.1.18.04-beta`;
-- G120/E01 permanece reservado para el cierre UX.5 R6; UX.6 queda planificado después sin Global preasignado;
+- G120/E01 queda aceptado para UX.5 R6; G121/E01 queda reservado para UX.6 R1;
 - REL.GOV.1 mantiene la firma del tag fuera de GitHub Actions;
 - las rutas de reporte responsable y revisión de vulnerabilidades
   permanecen sin cambio material.
@@ -28,7 +28,8 @@ Mi Retiro Proyectado se encuentra en **desarrollo beta**. Los estados histórico
 
 | Línea | Soporte de seguridad |
 | --- | --- |
-| `0.1.19.05-beta` | Beta vigente G119/E05 publicada para DEV.2 R6 mediante tag firmado `v0.1.19.05-beta`, workflow de verificación en `success` y GitHub Release prerelease |
+| `0.1.20.01-beta` | Beta vigente G120/E01 aceptada para UX.5 R6; publicación mediante tag formal pendiente del cierre de promoción |
+| `0.1.19.05-beta` | Beta previa G119/E05 publicada para DEV.2 R6 mediante tag firmado `v0.1.19.05-beta`, workflow de verificación en `success` y GitHub Release prerelease |
 | `0.1.18.04-beta` | Beta previa G118/E04 publicada para DEV.2 R5 mediante tag firmado `v0.1.18.04-beta` y GitHub Release prerelease |
 | `0.1.17.02-beta` | Beta previa G117/E02 publicada; tag firmado y GitHub Release prerelease automatizado conforme a REL.GOV.1 R2 |
 | `0.1.16.05-beta` | Beta previa G116/E05 publicada; tag firmado, workflow de verificación y GitHub Release prerelease verificados |

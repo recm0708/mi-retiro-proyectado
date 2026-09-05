@@ -6,23 +6,46 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ## [Unreleased]
 
-- UX.5 R1–R6 (candidato de cierre G120/E01): consolida el sistema visual, shell, navegación, temas y la entrada explícita Manual/Asistida.
-- Flujo Manual: conserva el recorrido común de seis pasos sin exigir documentos y aplica gates de completitud antes de Resultados.
-- Flujo Asistido: integra Mi Retiro Seguro y Ficha Digital como fuentes opcionales individuales; exige confirmar al menos una, conserva revisión/procedencia y deja las decisiones faltantes al usuario.
-- Integración: unifica estado canónico, cambio de modalidad, invalidación descendente, recuperación, loaders indeterminados y protección del Paso 6.
-- Importadores: Mi Retiro Seguro y Ficha Digital pueden seleccionarse y analizarse desde el Centro documental Asistido, con revisión de los datos detectados antes de incorporarlos.
-- Runtime web: corrige la carga independiente de `simulation_mode.js` y `assisted_flow.js` y añade revisión de URL a assets locales para evitar mezclar HTML actual con CSS o JavaScript almacenados previamente.
-- Gobierno: R1–R6 forman el primer estado aceptable de UX.5; G120/E01 permanece reservado y no aceptado hasta completar PR/CI, integración y promoción.
-- UX.6 queda planificado después de UX.5, sin Global preasignado, para la auditoría integral visual, accesible, responsive y de ownership de App y Portal Developer.
-- Mantenimiento post-G119: PR #117 completó la migración de automatización,
-  retiró `ci.yml`, `governance-audit.yml` y `markdown-audit.yml` después de
-  trasladar sus contratos al `Repository Quality Gate` y conservar
-  `Python Compatibility` como required check independiente.
-- Dependencias post-G119: PR #118 actualizó coordinadamente Pydantic a 2.13.5
-  y Pydantic Core a 2.46.5, agrupó ambas dependencias en Dependabot y actualizó
-  `actions/dependency-review-action` a v5 con sus regresiones y documentación.
-- Los mantenimientos PR #117 y PR #118 no modifican `VERSION`, no crean una
-  nueva publicación revision-aware y no consumen G120/E01.
+- UX.6 R1 queda reservado como G121/E01 (`0.1.21.01-beta`) para la
+  auditoría integral de experiencia de App y Portal Developer antes de
+  PERSIST.1.
+
+## [0.1.20.01-beta]
+
+- G120/E01: UX.5 R6 queda aceptado después de PR #122 / merge
+  `4c43a816526201c5869d2df8e88af44419c4df11`; `VERSION` avanza a
+  `0.1.20.01-beta`.
+- Gobierno: UX.5 R1–R6 consumen un único estado revision-aware, con
+  `functional_revision = R6` y ordinal E01.
+- Sistema visual: consolida shell, navegación, temas y el sistema visual
+  reutilizable de la aplicación.
+- Simulación: incorpora la elección explícita entre modalidad Manual y
+  Asistida y conserva un único recorrido canónico de seis pasos.
+- Flujo Manual: permite completar la simulación sin documentos y aplica
+  gates de completitud antes de Resultados.
+- Flujo Asistido: integra Mi Retiro Seguro y Ficha Digital como fuentes
+  documentales opcionales individualmente; exige confirmar al menos una
+  fuente y conserva revisión y procedencia de los datos detectados.
+- Importadores: Mi Retiro Seguro y Ficha Digital pueden seleccionarse,
+  analizarse y revisarse desde el Centro documental Asistido sin convertir
+  detecciones documentales en decisiones silenciosas.
+- Estado de simulación: unifica cambio de modalidad, invalidación
+  descendente, recuperación, loaders indeterminados y protección del Paso 6.
+- Runtime web: separa correctamente `simulation_mode.js` y
+  `assisted_flow.js` y versiona las URL de assets locales para evitar
+  combinaciones de HTML actual con CSS o JavaScript almacenados previamente.
+- Validación de desarrollo: Repository Quality Gate local
+  **11 PASS / 0 FAIL**, 1404 `unittest` OK, `pytest` 1444 passed /
+  6865 subtests, Markdown 166/166, 22 JavaScript y
+  16 familias / 47 identificadores.
+- CI del PR #122: Repository Quality Gate, Python Compatibility y
+  Visual & Accessibility finalizaron en `success`.
+- Mantenimiento post-G119: PR #117 y PR #118 permanecen registrados como
+  mantenimiento transversal sin Global independiente.
+- Siguiente candidato: UX.6 R1 queda reservado como G121/E01
+  (`0.1.21.01-beta`) antes de PERSIST.1.
+- Publicación: el tag `v0.1.20.01-beta` se crea únicamente después del
+  merge de esta promoción y de la revalidación post-merge de `main`.
 
 ## [0.1.19.05-beta]
 
