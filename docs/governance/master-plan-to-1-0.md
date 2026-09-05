@@ -3,7 +3,7 @@
 **Estado:** vigente
 **Versión base al iniciar el plan:** `0.0.25-beta`
 **Cierre histórico de PLAN.1:** `0.0.26-beta` / `v0.0.26-beta`
-**Versión transversal vigente:** `0.1.19.05-beta` — G119/E05 aceptado/publicado; UX.5 R6 es el candidato de cierre G120/E01, aún no aceptado; UX.6 queda planificado sin Global preasignado.
+**Versión transversal vigente:** `0.1.20.01-beta` — G120/E01 aceptado para UX.5 R6; UX.6 R1 es candidato G121/E01.
 **Fecha:** 2026-08-25
 **Clasificación:** Producto / Arquitectura / QA / Release
 
@@ -21,7 +21,7 @@ alcanza G119/E05.
 - DEV.2 R6 queda aceptado/publicado como G119/E05 después de PR #111 /
   merge `bd2accb`, promoción PR #112 / commit `9424ea8` y tag
   `v0.1.19.05-beta`.
-- UX.5 R1–R6 quedan consolidados en el candidato de cierre G120/E01; UX.6 se ejecutará después de su aceptación y antes de PERSIST.1.
+- UX.5 R1–R6 quedan consolidados y aceptados como G120/E01; UX.6 R1 queda reservado como G121/E01 antes de PERSIST.1.
 <!-- NOR1-R7-CLOSURE:END -->
 
 <!-- NOR2-R1-STATUS:START -->
@@ -74,9 +74,9 @@ Las referencias históricas a bloques previos se conservan como trazabilidad, pe
 
 ## Secuencia operativa UX.5 → UX.6
 
-UX.5 se cierra como un único estado revision-aware candidato G120/E01 con revisión funcional R6. Sus R1–R6 no se publicaron por separado.
+UX.5 queda cerrado como un único estado revision-aware G120/E01 con revisión funcional R6. Sus R1–R6 no se aceptaron por separado.
 
-UX.6 se incorpora a la secuencia viva antes de PERSIST.1 y se mantiene planificado sin Global preasignado hasta que G120 sea aceptado. Una vez aceptado UX.5, el siguiente Global disponible podrá convertirse en el candidato formal de UX.6 conforme a `VERSIONING.md`.
+UX.6 se incorpora a la secuencia viva antes de PERSIST.1 como candidato G121/E01 (`0.1.21.01-beta`) después de la aceptación de UX.5.
 
 No se inicia PERSIST.1 mientras UX.5 o UX.6 permanezcan abiertos.
 
@@ -294,7 +294,7 @@ Objetivo previo a DOC.2:
 - extender el workflow de tags para ejecutar el contrato en todo tag futuro;
 - fijar reglas de edición posterior que preserven firma, commit objetivo y evidencia histórica.
 
-REL.GOV.1 superó gate, PR/CI e integración y consumió G110; la promoción PR #86 publicó `v0.1.10.01-beta`. DOC.2 R1 superó gate, PR #87, CI, integración y revalidación post-merge, por lo que G111/E01 (`0.1.11.01-beta`) quedó aceptado; G112/E07 (`0.1.12.07-beta`) quedó aceptado para NOR.1 R8 y G113/E03 (`0.1.13.03-beta`) para DOC.1 R3. En aquel plan, G114/E01 se proyectaba para PERSIST.1; PLAN.2 R1 reasignó posteriormente esa reserva y quedó aceptado/publicado como G114/E01. Después quedaron aceptados/publicados DOC.1 R4 como G115/E04, DOC.1 R5 como G116/E05 y REL.GOV.1 R2 como G117/E02; DEV.2 R5 queda aceptado/publicado como G118/E04; DEV.2 R6 queda aceptado/publicado como G119/E05; UX.5 R1–R6 quedan consolidados en el candidato de cierre G120/E01; UX.6 queda planificado después sin Global preasignado. PERSIST.1 se mantiene como etapa posterior.
+REL.GOV.1 superó gate, PR/CI e integración y consumió G110; la promoción PR #86 publicó `v0.1.10.01-beta`. DOC.2 R1 superó gate, PR #87, CI, integración y revalidación post-merge, por lo que G111/E01 (`0.1.11.01-beta`) quedó aceptado; G112/E07 (`0.1.12.07-beta`) quedó aceptado para NOR.1 R8 y G113/E03 (`0.1.13.03-beta`) para DOC.1 R3. En aquel plan, G114/E01 se proyectaba para PERSIST.1; PLAN.2 R1 reasignó posteriormente esa reserva y quedó aceptado/publicado como G114/E01. Después quedaron aceptados/publicados DOC.1 R4 como G115/E04, DOC.1 R5 como G116/E05 y REL.GOV.1 R2 como G117/E02; DEV.2 R5 queda aceptado/publicado como G118/E04; DEV.2 R6 queda aceptado/publicado como G119/E05; UX.5 R1–R6 quedan consolidados y aceptados como G120/E01; UX.6 R1 queda reservado como G121/E01. PERSIST.1 se mantiene como etapa posterior.
 
 ### 8. DOC.2 — CHANGELOG detallado `0.0.1-beta`–`0.0.21-beta`
 
@@ -315,7 +315,7 @@ No se inventará detalle retrospectivo no sustentado.
 
 **Estado:** cerrado/aceptado como G112/E07 (`0.1.12.07-beta`) después de PR #89 y PR #90.
 
-Amplía NOR.1 sin añadir un bloque funcional al programa de 14 bloques. Define familias, namespaces, revisiones, reservas y un registro machine-readable. DOC.1 R3 se ejecutó posteriormente como auditoría Markdown transversal; PLAN.2 R1 quedó aceptado después, DOC.1 R4 quedó aceptado/publicado como G115/E04, DOC.1 R5 como G116/E05 y REL.GOV.1 R2 como G117/E02. DEV.2 R5 queda aceptado/publicado como G118/E04; DEV.2 R6 queda aceptado/publicado como G119/E05 y UX.5 R6 queda como candidato de cierre G120/E01 y UX.6 como bloque posterior planificado.
+Amplía NOR.1 sin añadir un bloque funcional al programa de 14 bloques. Define familias, namespaces, revisiones, reservas y un registro machine-readable. DOC.1 R3 se ejecutó posteriormente como auditoría Markdown transversal; PLAN.2 R1 quedó aceptado después, DOC.1 R4 quedó aceptado/publicado como G115/E04, DOC.1 R5 como G116/E05 y REL.GOV.1 R2 como G117/E02. DEV.2 R5 queda aceptado/publicado como G118/E04; DEV.2 R6 queda aceptado/publicado como G119/E05 y UX.5 R6 queda aceptado como G120/E01 y UX.6 R1 como candidato G121/E01.
 
 #### Checkpoint transversal DOC.1 R3 — etiquetas visibles de enlaces Markdown
 

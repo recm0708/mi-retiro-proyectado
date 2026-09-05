@@ -3,9 +3,9 @@
 **Proyecto:** Mi Retiro Proyectado
 **Base auditada:** `7037addd44253e528c77460b678d2b3ccd540dd5`
 **Contador histórico en la base `7037addd`:** **G070**
-**Contador aceptado reconciliado al commit `9424ea8`:** **G119**
-**Siguiente Global disponible:** **G120**
-**Siguiente candidato disponible:** `0.1.20.01-beta` — UX.5 R6 (cierre funcional R1–R6 consolidado)
+**Contador aceptado reconciliado al merge UX.5:** **G120**
+**Siguiente Global disponible:** **G121**
+**Siguiente candidato disponible:** `0.1.21.01-beta` — UX.6 R1
 
 <!-- DOC1-R1-REVISION-MANUAL:START -->
 ## Nota de lectura vigente — reconciliación post-SEC.2
@@ -26,13 +26,9 @@ Estado vigente de la contabilidad:
   ya existían después de `7037addd`; por eso queda documentada como una
   **anomalía histórica de numeración**. La reconciliación vigente sitúa el estado
   materializado por ese tag en G087/E01 sin modificar la evidencia publicada.
-- `VERSION` está sincronizado en `0.1.19.05-beta`: DEV.2 R6 quedó
-  aceptado como G119/E05 mediante PR #111 / merge `bd2accb` y
-  publicado mediante promoción PR #112 / commit `9424ea8`, tag firmado
-  `v0.1.19.05-beta` y GitHub Release prerelease ID `379454328`;
-  G120/E01 (`0.1.20.01-beta`) queda reservado para el cierre de UX.5 en su revisión funcional R6.
+- `VERSION` está sincronizado en `0.1.20.01-beta`: UX.5 R6 quedó aceptado como G120/E01 después de PR #122 / merge `4c43a816526201c5869d2df8e88af44419c4df11`; G119/E05 permanece publicado mediante `v0.1.19.05-beta` y G121/E01 (`0.1.21.01-beta`) queda reservado para UX.6 R1.
 - G110/E01 (`0.1.10.01-beta`) quedó aceptado para REL.GOV.1 mediante PR #85 y merge `5cd1cea`.
-- G111/E01 (`0.1.11.01-beta`) permanece aceptado para DOC.2. G112/E07 (`0.1.12.07-beta`) queda aceptado para NOR.1 R8 después de PR #89 / PR #90; G113/E03 (`0.1.13.03-beta`) queda aceptado para DOC.1 R3 mediante PR #92 / merge `40ae5c0`; G114/E01 (`0.1.14.01-beta`) queda aceptado para PLAN.2 R1 mediante PR #94 / merge `7ded70c`; G115/E04 (`0.1.15.04-beta`) queda aceptado para DOC.1 R4 mediante PR #96 / merge `9f51229` y publicado mediante PR #97 / merge `87fa8e9`; G116/E05 (`0.1.16.05-beta`) queda aceptado para DOC.1 R5 mediante PR #101 / merge `6f4266d`; G117/E02 (`0.1.17.02-beta`) queda aceptado para REL.GOV.1 R2 mediante PR #103 / merge `46c464e`. G118/E04 (`0.1.18.04-beta`) queda aceptado/publicado para DEV.2 R5 mediante PR #107 / merge `bc97db0`, promoción PR #108 / commit `290e84a` y tag `v0.1.18.04-beta`; G119/E05 (`0.1.19.05-beta`) queda aceptado/publicado para DEV.2 R6 mediante PR #111 / merge `bd2accb`, promoción PR #112 / commit `9424ea8` y tag `v0.1.19.05-beta`; G120/E01 (`0.1.20.01-beta`) queda reservado para el cierre UX.5 R6.
+- G111/E01 (`0.1.11.01-beta`) permanece aceptado para DOC.2. G112/E07 (`0.1.12.07-beta`) queda aceptado para NOR.1 R8 después de PR #89 / PR #90; G113/E03 (`0.1.13.03-beta`) queda aceptado para DOC.1 R3 mediante PR #92 / merge `40ae5c0`; G114/E01 (`0.1.14.01-beta`) queda aceptado para PLAN.2 R1 mediante PR #94 / merge `7ded70c`; G115/E04 (`0.1.15.04-beta`) queda aceptado para DOC.1 R4 mediante PR #96 / merge `9f51229` y publicado mediante PR #97 / merge `87fa8e9`; G116/E05 (`0.1.16.05-beta`) queda aceptado para DOC.1 R5 mediante PR #101 / merge `6f4266d`; G117/E02 (`0.1.17.02-beta`) queda aceptado para REL.GOV.1 R2 mediante PR #103 / merge `46c464e`. G118/E04 (`0.1.18.04-beta`) queda aceptado/publicado para DEV.2 R5 mediante PR #107 / merge `bc97db0`, promoción PR #108 / commit `290e84a` y tag `v0.1.18.04-beta`; G119/E05 (`0.1.19.05-beta`) queda aceptado/publicado para DEV.2 R6 mediante PR #111 / merge `bd2accb`, promoción PR #112 / commit `9424ea8` y tag `v0.1.19.05-beta`; G120/E01 (`0.1.20.01-beta`) queda aceptado para UX.5 R6; G121/E01 (`0.1.21.01-beta`) queda reservado para UX.6 R1.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 
 Este ledger registra los estados aceptados reconstruidos durante VER.2 y su reconciliación posterior. La regla contable histórica y las exclusiones originales se conservan en `docs/archive/governance/ver2-revision-decision-matrix.md` y `docs/archive/governance/pre-1-0-versioning-audit.md`; la ampliación post-G070 se justifica en `docs/audits/governance/post-g070-revision-reconciliation.md`.
@@ -201,7 +197,7 @@ transversales que no constituyen estados revision-aware independientes:
 - ambos mantenimientos conservaron sin cambios `VERSION`,
   `data/pre-1-0-revision-ledger.json` y
   `data/release-publication-manifest.json`;
-- G120/E01 continúa reservado exclusivamente para el cierre UX.5 R6.
+- G120/E01 queda aceptado para UX.5 R6; R1–R6 consumen un único estado aceptado.
 
 ### Anomalía histórica del tag `v0.0.71.01-beta`
 
@@ -233,23 +229,18 @@ El ledger estructurado conserva también estas exclusiones para no perder histor
 
 ## Próximo estado
 
-DEV.2 R6 superó desarrollo, PR #111, CI, CodeQL e integración sobre `main`
-mediante `bd2accbea421fc719d9330015533001039648d05`.
+UX.5 R1–R6 quedaron integrados mediante PR #122 / merge
+`4c43a816526201c5869d2df8e88af44419c4df11`.
 
-G119/E05 (`0.1.19.05-beta`) quedó aceptado y publicado para DEV.2 R6
-después de la promoción PR #112 / commit `9424ea8`, la revalidación post-merge,
-el tag anotado y firmado `v0.1.19.05-beta`, el workflow de verificación en
-`success` y el GitHub Release prerelease correspondiente.
+G120/E01 (`0.1.20.01-beta`) queda aceptado para UX.5 R6 con
+`functional_revision = R6` y ordinal E01.
 
 | Global | ID revision-aware candidato | Bloque | Condición |
 | ---: | --- | --- | --- |
-| G120 | `0.1.20.01-beta` | UX.5 R6 — cierre funcional R1–R6 consolidado | nueva base visual reutilizable, gate completo + commit firmado + PR/CI + integración |
+| G121 | `0.1.21.01-beta` | UX.6 R1 — auditoría integral App + Developer | gate completo + commit firmado + PR/CI + integración |
 
-G120 permanece reservado y **no se considera aceptado** mientras UX.5 R6
+G121 permanece reservado y **no se considera aceptado** mientras UX.6 R1
 siga siendo candidato.
 
-Los tags publicados permanecen inmutables. G118/E04 continúa preservado
-mediante `v0.1.18.04-beta` y G119/E05 queda publicado mediante
-`v0.1.19.05-beta`. G120 permanece reservado para el cierre UX.5 R6 y no se considera
-aceptado mientras ese bloque no supere su gate, commit firmado, PR, CI,
-integración y revalidación.
+PERSIST.1 permanece detrás del cierre de UX.6. Los tags publicados
+anteriores permanecen inmutables.

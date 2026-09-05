@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class TestUX5R7DocumentationClosure(unittest.TestCase):
-    def test_candidato_ux5_conserva_g120_e01(self):
+    def test_promocion_reserva_ux6_g121_e01(self):
         data = json.loads(
             (
                 ROOT
@@ -25,19 +25,19 @@ class TestUX5R7DocumentationClosure(unittest.TestCase):
         candidate = data["current_candidate"]
 
         self.assertEqual(
-            120,
+            121,
             candidate["global_revision"],
         )
         self.assertEqual(
-            "0.1.20.01-beta",
+            "0.1.21.01-beta",
             candidate["revision_aware"],
         )
         self.assertEqual(
-            "UX.5",
+            "UX.6",
             candidate["block"],
         )
         self.assertEqual(
-            "R6",
+            "R1",
             candidate["revision"],
         )
         self.assertEqual(
@@ -49,7 +49,7 @@ class TestUX5R7DocumentationClosure(unittest.TestCase):
             candidate["state"],
         )
 
-    def test_ux6_esta_planificado_sin_global(self):
+    def test_ux5_cerrado_y_ux6_es_candidato(self):
         data = json.loads(
             (
                 ROOT
@@ -66,11 +66,11 @@ class TestUX5R7DocumentationClosure(unittest.TestCase):
         }
 
         self.assertEqual(
-            "candidate_r6",
+            "closed",
             identifiers["UX.5"]["status"],
         )
         self.assertEqual(
-            "planned_reserved",
+            "candidate_r1",
             identifiers["UX.6"]["status"],
         )
         self.assertEqual(
@@ -81,7 +81,7 @@ class TestUX5R7DocumentationClosure(unittest.TestCase):
         candidate = data["current_candidate"]
 
         self.assertEqual(
-            "UX.6",
+            "PERSIST.1",
             candidate[
                 "next_functional_block_if_accepted"
             ],
@@ -201,7 +201,7 @@ class TestUX5R7DocumentationClosure(unittest.TestCase):
             simulation,
         )
 
-    def test_version_publicada_aun_es_g119(self):
+    def test_version_materializa_g120(self):
         version = (
             ROOT
             / "VERSION"
@@ -210,7 +210,7 @@ class TestUX5R7DocumentationClosure(unittest.TestCase):
         ).strip()
 
         self.assertEqual(
-            "0.1.19.05-beta",
+            "0.1.20.01-beta",
             version,
         )
 

@@ -1,8 +1,8 @@
 # Matriz maestra de pendientes hacia 1.0
 
 **Estado:** vigente / documento vivo
-**Versión base:** `0.1.19.05-beta` — G119/E05
-**Checkpoint candidato:** UX.5 R6 — G120/E01 (`0.1.20.01-beta`) reservado, no aceptado; R1–R6 consolidados en el mismo candidato
+**Versión base:** `0.1.20.01-beta` — G120/E01
+**Checkpoint candidato:** UX.6 R1 — G121/E01 (`0.1.21.01-beta`) reservado, no aceptado
 **Última replanificación:** 2026-09-04
 **Clasificación:** Planificación / Producto / Arquitectura / Seguridad / QA / Release
 
@@ -17,8 +17,8 @@ candidato fallido no lo consume.
 
 ## 1. Reglas de uso
 
-1. `VERSION` materializa `0.1.19.05-beta` después de aceptar DEV.2 R6 como G119/E05.
-2. G120/E01 (`0.1.20.01-beta`) permanece reservado para el cierre de UX.5 en R6; R1–R6 no consumieron Globales independientes y las etapas posteriores permanecen sin Global preasignado.
+1. `VERSION` materializa `0.1.20.01-beta` después de aceptar UX.5 R6 como G120/E01; R1–R6 consumen un único estado aceptado.
+2. G121/E01 (`0.1.21.01-beta`) queda reservado para UX.6 R1; las etapas posteriores permanecen sin Global preasignado.
 3. Las etapas posteriores se ordenan por prioridad, no por un `G` futuro supuesto.
 4. Una revisión que amplía un bloque existente conserva su identificador canónico.
 5. `PLAN.2`, `UX.5` y `UX.6` deben existir en el registro machine-readable antes de usarse.
@@ -36,13 +36,13 @@ candidato fallido no lo consume.
 | 4 | **REL.GOV.1 R2** | Automatización de Releases y checks | Estandarizar release notes, `gh release create`, verificación de tag/firma y lectura correcta de Actions/checks. | **Cerrado/aceptado G117/E02** |
 | 5 | **DEV.2 R5** | Portal Developer y acceso | `/dev` canónico; sesión web separada de Bearer; shell/login Developer; cookie acotada a `/dev`; secretos no persistidos. | **Cerrado/aceptado G118/E04** |
 | 6 | **DEV.2 R6** | Portal Developer multipágina y mantenimiento | Separar `/dev`, `/dev/diagnostico`, `/dev/eventos`, `/dev/archivos`, `/dev/mantenimiento`, `/dev/privacidad`, perfil y acceso técnico; añadir identidad persistente, RBAC, ZIP diagnóstico, filtros, métricas y mantenimiento seguro. | **Cerrado/aceptado/publicado G119/E05** |
-| 7 | **UX.5 R1** | Sistema visual integral | Nueva base visual: paleta, tipografía, espaciado, botones, tarjetas, estados, jerarquía y tokens reutilizables. | **Completado dentro del candidato G120/E01; pendiente aceptación** |
-| 8 | **UX.5 R2** | Inicio, navegación y temas | Rediseñar Inicio/navegación y armonizar Claro, Oscuro, Automático y Alto contraste. | **Completado dentro del candidato G120/E01; pendiente aceptación** |
-| 9 | **UX.5 R3** | Nueva entrada a Simulación | Preguntar antes del Paso 1 si la preparación será **Manual** o **Asistida** y explicar ambas modalidades. | **Completado dentro del candidato G120/E01; pendiente aceptación** |
-| 10 | **UX.5 R4** | Flujo Manual | Mantener y mejorar el recorrido completo de Pasos 1–6 con revisión explícita de los datos. | **Completado dentro del candidato G120/E01; pendiente aceptación** |
-| 11 | **UX.5 R5** | Flujo Asistido | Procesar Mi Retiro Seguro y Ficha Digital, exigir revisión y confirmar al menos una fuente antes de habilitar el recorrido compartido. | **Completado dentro del candidato G120/E01; pendiente aceptación** |
-| 12 | **UX.5 R6** | Integración y cierre funcional UX.5 | Unificar Manual/Asistido, invalidación, navegación, completitud, errores, loaders, cambio de modalidad, resultados y consistencia de assets. | **Candidato de cierre G120/E01; pendiente aceptación** |
-| 13 | **UX.6 R1** | Auditoría integral App + Developer | Revisar todas las pantallas, temas, accesibilidad, responsive, teclado/foco, tooltips del sidebar, microanimaciones, navegadores/zoom, importadores, Portal Developer y ownership/duplicación de CSS, JavaScript, templates y Python. | **Planificado; sin Global preasignado** |
+| 7 | **UX.5 R1** | Sistema visual integral | Nueva base visual: paleta, tipografía, espaciado, botones, tarjetas, estados, jerarquía y tokens reutilizables. | **Completado dentro de G120/E01 aceptado** |
+| 8 | **UX.5 R2** | Inicio, navegación y temas | Rediseñar Inicio/navegación y armonizar Claro, Oscuro, Automático y Alto contraste. | **Completado dentro de G120/E01 aceptado** |
+| 9 | **UX.5 R3** | Nueva entrada a Simulación | Preguntar antes del Paso 1 si la preparación será **Manual** o **Asistida** y explicar ambas modalidades. | **Completado dentro de G120/E01 aceptado** |
+| 10 | **UX.5 R4** | Flujo Manual | Mantener y mejorar el recorrido completo de Pasos 1–6 con revisión explícita de los datos. | **Completado dentro de G120/E01 aceptado** |
+| 11 | **UX.5 R5** | Flujo Asistido | Procesar Mi Retiro Seguro y Ficha Digital, exigir revisión y confirmar al menos una fuente antes de habilitar el recorrido compartido. | **Completado dentro de G120/E01 aceptado** |
+| 12 | **UX.5 R6** | Integración y cierre funcional UX.5 | Unificar Manual/Asistido, invalidación, navegación, completitud, errores, loaders, cambio de modalidad, resultados y consistencia de assets. | **Cerrado/aceptado G120/E01** |
+| 13 | **UX.6 R1** | Auditoría integral App + Developer | Revisar todas las pantallas, temas, accesibilidad, responsive, teclado/foco, tooltips del sidebar, microanimaciones, navegadores/zoom, importadores, Portal Developer y ownership/duplicación de CSS, JavaScript, templates y Python. | **Candidato G121/E01; pendiente aceptación** |
 | 14 | **PERSIST.1 R1** | Arquitectura de persistencia | Separar sesión temporal de guardado voluntario; definir esquema persistente versionado, local-first y migrable. | Etapa posterior |
 | 15 | **PERSIST.1 R2** | Guardar, restaurar y eliminar | Guardado explícito, listado, restauración, borrado individual y borrado completo. | Planificado |
 | 16 | **PERSIST.1 R3** | Importación, exportación y migraciones | Exportación/importación controlada, validación de esquema, incompatibilidades y migraciones. | Planificado |

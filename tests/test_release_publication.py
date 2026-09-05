@@ -45,26 +45,26 @@ class TestReleasePublication(unittest.TestCase):
             result.stdout + result.stderr,
         )
 
-    def test_manifest_actual_es_g119_y_apunta_a_g120(self):
+    def test_manifest_actual_es_g120_y_apunta_a_g121(self):
         data = json.loads(
             MANIFEST.read_text(encoding="utf-8")
         )
         self.assertEqual(
-            "0.1.19.05-beta",
+            "0.1.20.01-beta",
             data["version"],
         )
-        self.assertEqual("DEV.2", data["block"])
+        self.assertEqual("UX.5", data["block"])
         self.assertEqual("R6", data["revision"])
         self.assertEqual(
-            120,
+            121,
             data["next_step"]["global_revision"],
         )
         self.assertEqual(
-            "0.1.20.01-beta",
+            "0.1.21.01-beta",
             data["next_step"]["revision_aware"],
         )
         self.assertEqual(
-            "UX.5",
+            "UX.6",
             data["next_step"]["block"],
         )
 
@@ -76,7 +76,7 @@ class TestReleasePublication(unittest.TestCase):
             result.stdout + result.stderr,
         )
         self.assertIn(
-            "G119/E05 validado",
+            "G120/E01 validado",
             result.stdout,
         )
 
@@ -93,18 +93,18 @@ class TestReleasePublication(unittest.TestCase):
             "## Validación",
             "## Evidencia",
             "## Siguiente paso",
-            "G119/E05",
-            "DEV.2 R6",
+            "G120/E01",
+            "UX.5 R6",
             PUBLISHED_COMMIT,
             TAG_OBJECT,
-            "**G120/E01**",
-            "`0.1.20.01-beta`",
-            "UX.5",
+            "**G121/E01**",
+            "`0.1.21.01-beta`",
+            "UX.6",
         ):
             with self.subTest(fragment=fragment):
                 self.assertIn(fragment, text)
 
-    def test_manifiesto_contiene_evidencia_g119(self):
+    def test_manifiesto_contiene_evidencia_g120(self):
         data = json.loads(
             MANIFEST.read_text(encoding="utf-8")
         )
@@ -113,10 +113,10 @@ class TestReleasePublication(unittest.TestCase):
             ensure_ascii=False,
         )
         for fragment in (
-            "PR #111",
-            "bd2accbea421fc719d9330015533001039648d05",
-            "1309 passed / 6045 subtests passed",
-            "1269 tests `unittest` OK",
+            "PR #122",
+            "4c43a816526201c5869d2df8e88af44419c4df11",
+            "1444 passed / 6865 subtests passed",
+            "1404 tests `unittest` OK",
         ):
             with self.subTest(fragment=fragment):
                 self.assertIn(fragment, corpus)
@@ -131,10 +131,10 @@ class TestReleasePublication(unittest.TestCase):
             snapshot.write_text(
                 json.dumps(
                     {
-                        "tagName": "v0.1.19.05-beta",
+                        "tagName": "v0.1.20.01-beta",
                         "name": (
                             "Mi Retiro Proyectado "
-                            "v0.1.19.05-beta — G119/E05"
+                            "v0.1.20.01-beta — G120/E01"
                         ),
                         "isDraft": False,
                         "isPrerelease": True,
@@ -167,7 +167,7 @@ class TestReleasePublication(unittest.TestCase):
             data = json.loads(
                 MANIFEST.read_text(encoding="utf-8")
             )
-            data["version"] = "0.1.18.04-beta"
+            data["version"] = "0.1.19.05-beta"
 
             stale.write_text(
                 json.dumps(

@@ -15,7 +15,7 @@
 </p>
 
 <p align="center">
-  <img alt="Versión 0.1.19.05-beta" src="https://img.shields.io/badge/versi%C3%B3n-0.1.19.05--beta-2563eb">
+  <img alt="Versión 0.1.20.01-beta" src="https://img.shields.io/badge/versi%C3%B3n-0.1.20.01--beta-2563eb">
   <img alt="Python 3.13 y 3.14" src="https://img.shields.io/badge/Python-3.13%20%7C%203.14-3776AB?logo=python&logoColor=white">
   <img alt="Licencia propietaria" src="https://img.shields.io/badge/licencia-propietaria-6B7280">
 </p>
@@ -26,16 +26,16 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 
 ## Estado del proyecto
 
-- **Versión canónica vigente:** `0.1.19.05-beta`, obtenida exclusivamente
-  desde [`VERSION`](VERSION). Materializa DEV.2 R6 como G119/E05 después
-  del desarrollo PR #111 / merge
-  `bd2accbea421fc719d9330015533001039648d05` y de esta promoción.
-- **Último estado funcional integrado en `main`:** DEV.2 R6 mediante
-  PR #111 / merge `bd2accbea421fc719d9330015533001039648d05`.
-- **Estado revision-aware reconciliado:** G119/E05 (`0.1.19.05-beta`)
-  queda aceptado/publicado para DEV.2 R6; G120/E01 (`0.1.20.01-beta`) queda
-  reservado para el cierre de UX.5 R6; UX.6 queda planificado después, sin Global preasignado.
-- **Publicación revision-aware vigente:** `v0.1.19.05-beta`
+- **Versión canónica vigente:** `0.1.20.01-beta`, obtenida exclusivamente
+  desde [`VERSION`](VERSION). Materializa UX.5 R6 como G120/E01 después
+  del desarrollo PR #122 / merge
+  `4c43a816526201c5869d2df8e88af44419c4df11` y de esta promoción.
+- **Último estado funcional integrado en `main`:** UX.5 R1–R6 mediante
+  PR #122 / merge `4c43a816526201c5869d2df8e88af44419c4df11`.
+- **Estado revision-aware reconciliado:** G120/E01 (`0.1.20.01-beta`)
+  queda aceptado para UX.5 R6; G121/E01 (`0.1.21.01-beta`) queda
+  reservado para UX.6 R1 antes de PERSIST.1.
+- **Última publicación revision-aware con tag:** `v0.1.19.05-beta`
   (G119/E05), tag anotado y firmado sobre
   `9424ea854f859a24fd01fe83bdf5d476b52fc213`, con objeto de tag
   `530db2ffdb9e6230fb976fbaf39472bf7ab30ea5`. El workflow
@@ -51,7 +51,7 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 - **DEV.2:** R1–R3 permanecen aceptados históricamente; R4 fue un cierre
   documental sin Global independiente; R5 queda aceptado/publicado como
   G118/E04 y R6 queda aceptado/publicado como G119/E05.
-- **UX.5:** R1 queda como candidato reservado G120/E01.
+- **UX.5:** R1–R6 quedan consolidados y aceptados como G120/E01; UX.6 R1 es el candidato G121/E01.
 - **DOC.1:** R1–R5 cerrados; R6 permanece planificado para congelación
   documental final.
 - **SEC.2:** R1–R6 cerrados; R7 permanece planificado después de las
@@ -165,7 +165,7 @@ Documentos principales:
 - **[Cierre GOV.1 — Auditoría, Gobierno y Trazabilidad Pre-Beta](docs/archive/governance/gov1-closeout.md)** — auditoría final y decisión de cierre de GOV.1;
 - **[Auditoría de versionado pre-1.0](docs/archive/governance/pre-1-0-versioning-audit.md)** — criterio contable y reconciliación VER.2;
 - **[VER.2 — Matriz de decisión de revisiones aceptadas](docs/archive/governance/ver2-revision-decision-matrix.md)** — decisiones de inclusión/exclusión del contador;
-- **[Ledger de revisiones aceptadas pre-1.0](docs/governance/pre-1-0-revision-ledger.md)** — secuencia reconciliada G001–G119 y próximo candidato G120/E01 para el cierre de UX.5 R6; UX.6 queda planificado después sin Global preasignado;
+- **[Ledger de revisiones aceptadas pre-1.0](docs/governance/pre-1-0-revision-ledger.md)** — secuencia reconciliada G001–G120 y próximo candidato G121/E01 para UX.6 R1;
 - [`data/pre-1-0-revision-ledger.json`](data/pre-1-0-revision-ledger.json) — ledger machine-readable;
 - **[Identificadores de bloques de trabajo](docs/standards/work-block-identifiers.md)** — política canónica de identificadores de bloques;
 - [`data/work-block-registry.json`](data/work-block-registry.json) — registro machine-readable de identificadores históricos, cerrados y planificados;

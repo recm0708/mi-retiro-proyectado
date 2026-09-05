@@ -1,7 +1,7 @@
 # Especificación funcional
 
 **Estado:** Vigente con registro RF histórico integrado
-**Versión de aplicación revisada:** `0.1.19.05-beta`
+**Versión de aplicación revisada:** `0.1.20.01-beta`
 **Versión base histórica:** `0.0.23-beta`
 **Revisión documental:** GOV.1.3 R2 — 2026-08-17
 **Actualización funcional vigente:** UX.4.6e R8 — procedencia editable — 2026-08-19
@@ -23,7 +23,7 @@ Estado vigente:
   Asegurado(a).
 - DEV.2 R6 no modifica motores SEBD, Mixto o SUCGS.
 - DEV.2 R6 no modifica parámetros normativos.
-- G120/E01 permanece reservado para el cierre UX.5 R6; UX.6 queda planificado después sin Global preasignado.
+- G120/E01 queda aceptado para UX.5 R6; G121/E01 queda reservado para UX.6 R1.
 
 Las referencias históricas dentro del registro RF, auditorías, ADR o archivo
 no deben reinterpretarse como estado vigente.

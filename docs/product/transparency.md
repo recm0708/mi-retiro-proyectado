@@ -1,7 +1,7 @@
 # Transparencia del producto
 
 **Estado:** Vigente
-**Versión de aplicación revisada:** `0.1.19.05-beta`
+**Versión de aplicación revisada:** `0.1.20.01-beta`
 **Versión base histórica:** `0.0.25-beta`
 **Versión base histórica preservada:** `0.0.23-beta`
 **Base documental preservada:** GOV.1.3 R4 — 2026-08-17
@@ -20,7 +20,7 @@ vigente.
   `v0.1.19.05-beta`.
 - G118/E04 permanece preservado mediante `v0.1.18.04-beta` como
   publicación anterior.
-- UX.5 R6 queda como candidato de cierre G120/E01; UX.6 queda planificado después sin Global preasignado.
+- UX.5 R6 queda aceptado como G120/E01; UX.6 R1 queda reservado como G121/E01.
 - DEV.2 no altera reglas previsionales ni convierte Developer Diagnostics
   en telemetría de producto.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
