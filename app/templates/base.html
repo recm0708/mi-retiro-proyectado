@@ -76,6 +76,11 @@
     href="{{ url_for('static', path='/css/editable-provenance.css') }}?v={{ static_revision }}"
   >
 
+  <link
+    rel="stylesheet"
+    href="{{ url_for('static', path='/css/motion.css') }}?v={{ static_revision }}"
+  >
+
   {% block head %}{% endblock %}
 </head>
 
@@ -362,6 +367,10 @@
   <script src="{{ url_for('static', path='/js/data_management.js') }}?v={{ static_revision }}"></script>
   <script src="{{ url_for('static', path='/js/privacy.js') }}?v={{ static_revision }}"></script>
   <script src="{{ url_for('static', path='/js/attachment_processing.js') }}?v={{ static_revision }}"></script>
+
+  <script
+    src="{{ url_for('static', path='/js/interaction_ui.js') }}?v={{ static_revision }}"
+  ></script>
 
   {% block scripts %}{% endblock %}
 

@@ -238,3 +238,185 @@ html[data-app-theme="contrast"] .retirement-date-coverage {
   color: var(--app-validation-text);
   font-weight: 650;
 }
+
+/* ==========================================================
+   Accesibilidad, zoom y adaptación transversal
+   ========================================================== */
+
+:where(
+  a,
+  button,
+  input,
+  select,
+  textarea,
+  summary,
+  [role="button"],
+  [tabindex]:not([tabindex="-1"])
+) {
+  scroll-margin-block: calc(var(--app-shell-topbar-height) + 1rem);
+}
+
+:where(
+  button,
+  .btn,
+  .app-menu-button,
+  .dev-menu-button,
+  .theme-trigger,
+  .app-sidebar-nav a,
+  .dev-sidebar-nav a,
+  .dropdown-item
+) {
+  min-block-size: 44px;
+}
+
+:where(
+  .card,
+  .alert,
+  .accordion-body,
+  .dropdown-menu,
+  .modal-content,
+  .offcanvas,
+  .app-main,
+  .dev-main
+) {
+  overflow-wrap: anywhere;
+}
+
+.table-responsive,
+.table-scroll-focus,
+.history-table-wrapper,
+.current-year-detail-table-wrapper {
+  overscroll-behavior-inline: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.table-responsive:focus-visible,
+.table-scroll-focus:focus-visible,
+.history-table-wrapper:focus-visible,
+.current-year-detail-table-wrapper:focus-visible {
+  outline: 3px solid var(--app-focus);
+  outline-offset: 3px;
+}
+
+@media (max-width: 991.98px) {
+  .app-main,
+  .dev-main {
+    min-width: 0;
+  }
+
+  .app-topbar-actions,
+  .dev-topbar-actions {
+    min-width: 0;
+    gap: var(--app-space-2);
+  }
+
+  .app-brand-copy,
+  .dev-brand-copy,
+  .app-user-copy,
+  .dev-user-copy {
+    min-width: 0;
+  }
+
+  .app-brand-copy strong,
+  .dev-brand-copy strong,
+  .app-user-copy strong,
+  .dev-user-copy strong {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .table-responsive {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .app-topbar-inner,
+  .dev-topbar-inner {
+    gap: var(--app-space-2);
+    padding-inline: var(--app-space-2);
+  }
+
+  .app-brand-copy small,
+  .dev-brand-copy small,
+  .app-user-copy small,
+  .dev-user-copy small,
+  .dev-local-badge {
+    display: none;
+  }
+
+  .app-brand-copy strong,
+  .dev-brand-copy strong {
+    max-width: 9.5rem;
+  }
+
+  .app-topbar-actions,
+  .dev-topbar-actions {
+    margin-left: auto;
+  }
+
+  .btn,
+  .dropdown-item {
+    white-space: normal;
+  }
+
+  .modal-dialog {
+    margin: var(--app-space-2);
+  }
+}
+
+@media (max-width: 399.98px) {
+  .app-brand-copy,
+  .dev-brand-copy {
+    display: none;
+  }
+}
+
+@media (forced-colors: active) {
+  :where(
+    a,
+    button,
+    input,
+    select,
+    textarea,
+    summary,
+    [role="button"],
+    [tabindex]:not([tabindex="-1"])
+  ):focus-visible {
+    outline: 3px solid Highlight;
+    outline-offset: 3px;
+  }
+
+  .card,
+  .dropdown-menu,
+  .modal-content,
+  .accordion-item {
+    border: 1px solid CanvasText;
+  }
+
+  .btn,
+  .form-control,
+  .form-select {
+    forced-color-adjust: auto;
+  }
+}
+
+@media print {
+  .app-menu-button,
+  .dev-menu-button,
+  .theme-control,
+  .app-sidebar,
+  .dev-sidebar,
+  .app-sidebar-overlay,
+  .dev-sidebar-overlay {
+    display: none !important;
+  }
+
+  .app-shell,
+  .dev-shell,
+  .app-shell-content,
+  .dev-shell-content {
+    display: block !important;
+  }
+}

@@ -3759,3 +3759,64 @@ html[data-app-theme="contrast"] {
   --app-validation-text: #ff8a8a;
   --app-validation-ring: rgba(255, 107, 107, 0.34);
 }
+
+/* ==========================================================
+   Componentes compartidos de interfaz
+   ========================================================== */
+
+.card,
+.accordion-item,
+.dropdown-menu {
+  border-color: var(--app-border);
+  background-color: var(--app-surface);
+  color: var(--app-text);
+}
+
+.card {
+  border-radius: var(--app-radius-lg);
+  box-shadow: var(--app-shadow-xs);
+}
+
+.dropdown-menu {
+  border-radius: var(--app-radius-md);
+  box-shadow: var(--app-shadow-md);
+}
+
+.btn,
+.form-control,
+.form-select {
+  min-height: var(--app-control-height);
+  border-radius: var(--app-radius-md);
+}
+
+.btn {
+  font-weight: var(--app-font-weight-semibold);
+}
+
+.form-control,
+.form-select {
+  border-color: var(--app-control-border);
+  background-color: var(--app-surface);
+  color: var(--app-text);
+}
+
+.form-control::placeholder {
+  color: var(--app-muted);
+  opacity: 1;
+}
+
+.table {
+  --bs-table-bg: transparent;
+  --bs-table-color: var(--app-text);
+  --bs-table-border-color: var(--app-border);
+}
+
+.table thead th {
+  color: var(--app-text-secondary);
+  font-weight: var(--app-font-weight-semibold);
+}
+
+.badge {
+  border-radius: var(--app-radius-pill);
+  font-weight: var(--app-font-weight-semibold);
+}

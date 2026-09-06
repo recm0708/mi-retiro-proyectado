@@ -61,6 +61,11 @@
     href="{{ url_for('static', path='/css/developer-portal.css') }}?v={{ dev_assets_revision }}"
   >
 
+  <link
+    rel="stylesheet"
+    href="{{ url_for('static', path='/css/motion.css') }}?v={{ dev_assets_revision }}"
+  >
+
   {% block head %}{% endblock %}
 </head>
 
@@ -540,6 +545,10 @@
 
 
   <script src="{{ url_for('static', path='/js/developer_forms.js') }}?v={{ dev_assets_revision }}"></script>
+  <script
+    src="{{ url_for('static', path='/js/interaction_ui.js') }}?v={{ dev_assets_revision }}"
+  ></script>
+
   {% block scripts %}{% endblock %}
 </body>
 </html>

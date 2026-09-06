@@ -548,3 +548,35 @@ Las operaciones humanas con efecto utilizan POST y se autorizan en servidor medi
 Los formularios autenticados incluyen un token CSRF ligado a la sesión en memoria. Las operaciones críticas requieren además revalidación de la contraseña humana.
 
 El cambio de contraseña propia incrementa `security_version`; las sesiones previas quedan revocadas y la identidad debe autenticarse nuevamente.
+
+## Movimiento e interacción transversal
+
+La Aplicación principal, el Portal Developer y cualquier superficie web futura
+comparten un único contrato de movimiento. `app/static/css/motion.css` consume
+las duraciones y la curva definidas por `design-system.css`, sin declarar una
+segunda familia de tokens. Las entradas de página, microinteracciones, feedback
+y transiciones deben reutilizar ese contrato en lugar de crear animaciones
+propias por portal.
+
+El movimiento es progresivo y no funcional: ninguna operación depende de una
+animación para comunicar su resultado. Cuando el sistema solicita
+`prefers-reduced-motion: reduce`, la duración de animaciones y transiciones se
+reduce al mínimo y se eliminan desplazamientos decorativos.
+
+`app/static/js/interaction_ui.js` proporciona clases de compatibilidad para
+estados visuales que no deben depender exclusivamente de selectores CSS
+modernos como `:has()`. La lógica de negocio y la accesibilidad semántica
+continúan funcionando aunque el navegador no aplique esos selectores.
+
+## Adaptación de interfaz y accesibilidad
+
+La interfaz compartida utiliza `design-system.css` como propietario de los
+componentes base y `accessibility.css` como capa transversal para foco, tamaño
+de objetivo, zoom, adaptación responsive, impresión y modos de color forzado.
+La Aplicación principal y el Portal Developer consumen el mismo contrato.
+
+Los controles interactivos mantienen un objetivo mínimo de 44 px cuando
+corresponde, las tablas desplazables conservan foco visible y las cabeceras
+reducen información secundaria en pantallas estrechas sin eliminar nombres
+accesibles. Los modos `forced-colors` y `prefers-reduced-motion` forman parte
+del contrato mínimo para superficies actuales y futuras.
