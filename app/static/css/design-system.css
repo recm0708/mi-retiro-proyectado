@@ -1611,6 +1611,12 @@ html[data-bs-theme="dark"] .accordion-button:not(.collapsed) {
   font-size: 0.98rem;
 }
 
+.footer-context {
+  color: var(--app-footer-text);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
 .footer-version {
   display: inline-flex;
   align-items: center;
@@ -3497,4 +3503,240 @@ html[data-app-theme="contrast"] .results-origin,
 html[data-app-theme="contrast"] .results-tag,
 html[data-app-theme="contrast"] .trace-badge {
   border: 2px solid var(--app-border);
+}
+
+
+/* ==========================================================
+   Interacción transversal del shell
+   ========================================================== */
+
+.shell-menu-icon {
+  width: 22px;
+  height: 18px;
+  position: relative;
+  display: inline-block;
+  flex: 0 0 auto;
+}
+
+.shell-menu-line {
+  width: 18px;
+  height: 2px;
+  position: absolute;
+  left: 2px;
+  border-radius: var(--app-radius-pill);
+  background: currentColor;
+  transform-origin: center;
+  transition:
+    top var(--app-duration-fast) var(--app-ease-standard),
+    transform var(--app-duration-fast) var(--app-ease-standard),
+    opacity var(--app-duration-fast) var(--app-ease-standard);
+}
+
+.shell-menu-line:nth-child(1) {
+  top: 2px;
+}
+
+.shell-menu-line:nth-child(2) {
+  top: 8px;
+}
+
+.shell-menu-line:nth-child(3) {
+  top: 14px;
+}
+
+/*
+ * Escritorio:
+ * - X = sidebar expandido y puede contraerse.
+ * - hamburguesa = rail colapsado y puede expandirse.
+ *
+ * El selector html evita un destello incorrecto mientras el
+ * estado persistido temprano todavía vive en documentElement.
+ */
+@media (min-width: 992px) {
+  html:not(.app-sidebar-collapsed)
+  body:not(.app-sidebar-collapsed)
+  .app-menu-button
+  .shell-menu-line:nth-child(1),
+  html:not(.dev-sidebar-collapsed)
+  body:not(.dev-sidebar-collapsed)
+  .dev-menu-button
+  .shell-menu-line:nth-child(1) {
+    top: 8px;
+    transform: rotate(45deg);
+  }
+
+  html:not(.app-sidebar-collapsed)
+  body:not(.app-sidebar-collapsed)
+  .app-menu-button
+  .shell-menu-line:nth-child(2),
+  html:not(.dev-sidebar-collapsed)
+  body:not(.dev-sidebar-collapsed)
+  .dev-menu-button
+  .shell-menu-line:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(.35);
+  }
+
+  html:not(.app-sidebar-collapsed)
+  body:not(.app-sidebar-collapsed)
+  .app-menu-button
+  .shell-menu-line:nth-child(3),
+  html:not(.dev-sidebar-collapsed)
+  body:not(.dev-sidebar-collapsed)
+  .dev-menu-button
+  .shell-menu-line:nth-child(3) {
+    top: 8px;
+    transform: rotate(-45deg);
+  }
+}
+
+
+/* En móvil la X indica que el drawer visible puede cerrarse. */
+@media (max-width: 991.98px) {
+  body.app-sidebar-open
+  .app-menu-button
+  .shell-menu-line:nth-child(1),
+  body.dev-sidebar-open
+  .dev-menu-button
+  .shell-menu-line:nth-child(1) {
+    top: 8px;
+    transform: rotate(45deg);
+  }
+
+  body.app-sidebar-open
+  .app-menu-button
+  .shell-menu-line:nth-child(2),
+  body.dev-sidebar-open
+  .dev-menu-button
+  .shell-menu-line:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(.35);
+  }
+
+  body.app-sidebar-open
+  .app-menu-button
+  .shell-menu-line:nth-child(3),
+  body.dev-sidebar-open
+  .dev-menu-button
+  .shell-menu-line:nth-child(3) {
+    top: 8px;
+    transform: rotate(-45deg);
+  }
+}
+
+
+/* Microinteracción común de iconos de navegación. */
+.app-sidebar-icon,
+.dev-sidebar-icon {
+  transform-origin: center;
+  transition:
+    transform var(--app-duration-fast) var(--app-ease-standard),
+    color var(--app-duration-fast) var(--app-ease-standard);
+}
+
+.app-sidebar-nav a:hover
+.app-sidebar-icon,
+.app-sidebar-nav a:focus-visible
+.app-sidebar-icon,
+.dev-sidebar-nav a:hover
+.dev-sidebar-icon,
+.dev-sidebar-nav a:focus-visible
+.dev-sidebar-icon {
+  transform:
+    translateY(-1px)
+    scale(1.08);
+}
+
+
+/* Una sola animación breve al entrar en la página seleccionada. */
+.app-sidebar-nav a.active
+.app-sidebar-icon,
+.app-sidebar-nav a[aria-current="page"]
+.app-sidebar-icon,
+.dev-sidebar-nav a.active
+.dev-sidebar-icon,
+.dev-sidebar-nav a[aria-current="page"]
+.dev-sidebar-icon {
+  animation:
+    shell-nav-icon-selected
+    .28s
+    var(--app-ease-standard);
+}
+
+@keyframes shell-nav-icon-selected {
+  0% {
+    transform: scale(.86);
+  }
+
+  65% {
+    transform: scale(1.08);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+
+/*
+ * Tooltip visual para el rail colapsado.
+ * Se posiciona desde shell_ui.js fuera del contenedor con overflow.
+ */
+.shell-sidebar-tooltip {
+  max-width: min(16rem, calc(100vw - 1rem));
+  position: fixed;
+  z-index: 1090;
+
+  padding: .48rem .7rem;
+
+  border: 1px solid var(--app-border-strong);
+  border-radius: var(--app-radius-sm);
+
+  background: var(--app-surface);
+  color: var(--app-text);
+
+  box-shadow: var(--app-shadow-md);
+
+  font-size: var(--app-font-size-sm);
+  font-weight: var(--app-font-weight-semibold);
+  line-height: 1.25;
+
+  pointer-events: none;
+
+  opacity: 0;
+  transform:
+    translateY(-50%)
+    translateX(-4px);
+
+  transition:
+    opacity var(--app-duration-fast) var(--app-ease-standard),
+    transform var(--app-duration-fast) var(--app-ease-standard);
+}
+
+.shell-sidebar-tooltip.is-visible {
+  opacity: 1;
+  transform:
+    translateY(-50%)
+    translateX(0);
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .shell-menu-line,
+  .app-sidebar-icon,
+  .dev-sidebar-icon,
+  .shell-sidebar-tooltip {
+    transition: none !important;
+  }
+
+  .app-sidebar-nav a.active
+  .app-sidebar-icon,
+  .app-sidebar-nav a[aria-current="page"]
+  .app-sidebar-icon,
+  .dev-sidebar-nav a.active
+  .dev-sidebar-icon,
+  .dev-sidebar-nav a[aria-current="page"]
+  .dev-sidebar-icon {
+    animation: none !important;
+  }
 }

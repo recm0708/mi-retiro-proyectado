@@ -114,46 +114,157 @@
                 <label class="form-label" for="dev-current-password">
                   Contraseña actual
                 </label>
-                <input
-                  class="form-control"
-                  id="dev-current-password"
-                  name="password_actual"
-                  type="password"
-                  autocomplete="current-password"
-                  required
-                >
+                <div class="input-group dev-secret-group">
+                  <input
+                    class="form-control"
+                    id="dev-current-password"
+                    name="password_actual"
+                    type="password"
+                    autocomplete="current-password"
+
+                    placeholder="Ingresa tu contraseña actual"                    required
+                  >
+                  <button
+                    class="btn btn-outline-secondary dev-password-toggle"
+                    type="button"
+                    data-dev-password-toggle
+                    data-dev-password-target="dev-current-password"
+                    data-dev-password-name="contraseña actual"
+                    aria-controls="dev-current-password"
+                    aria-pressed="false"
+                    aria-label="Mostrar contraseña actual"
+                    title="Mostrar contraseña actual"
+                  >
+                    <svg
+                      data-dev-password-icon-hidden
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                      focusable="false"
+                    >
+                      <path d="M3 3l18 18"></path>
+                      <path d="M10.6 10.6a2 2 0 0 0 2.8 2.8"></path>
+                      <path d="M9.9 5.2A10.7 10.7 0 0 1 12 5c6.5 0 10 7 10 7a18 18 0 0 1-2 2.7"></path>
+                      <path d="M6.6 6.6C3.8 8.5 2 12 2 12s3.5 7 10 7a10.5 10.5 0 0 0 4.1-.8"></path>
+                    </svg>
+
+                    <svg
+                      data-dev-password-icon-visible
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                      focusable="false"
+                      hidden
+                    >
+                      <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"></path>
+                      <circle cx="12" cy="12" r="2.5"></circle>
+                    </svg>
+                  </button>
+                </div>
               </div>
 
               <div class="mb-3">
                 <label class="form-label" for="dev-new-password">
                   Nueva contraseña
                 </label>
-                <input
-                  class="form-control"
-                  id="dev-new-password"
-                  name="nueva_password"
-                  type="password"
-                  autocomplete="new-password"
-                  minlength="12"
-                  maxlength="256"
-                  required
-                >
+                <div class="input-group dev-secret-group">
+                  <input
+                    class="form-control"
+                    id="dev-new-password"
+                    name="nueva_password"
+                    type="password"
+                    autocomplete="new-password"
+
+                    placeholder="Ingresa una nueva contraseña"                    minlength="12"
+                    maxlength="256"
+                    required
+                  >
+                  <button
+                    class="btn btn-outline-secondary dev-password-toggle"
+                    type="button"
+                    data-dev-password-toggle
+                    data-dev-password-target="dev-new-password"
+                    data-dev-password-name="nueva contraseña"
+                    aria-controls="dev-new-password"
+                    aria-pressed="false"
+                    aria-label="Mostrar nueva contraseña"
+                    title="Mostrar nueva contraseña"
+                  >
+                    <svg
+                      data-dev-password-icon-hidden
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                      focusable="false"
+                    >
+                      <path d="M3 3l18 18"></path>
+                      <path d="M10.6 10.6a2 2 0 0 0 2.8 2.8"></path>
+                      <path d="M9.9 5.2A10.7 10.7 0 0 1 12 5c6.5 0 10 7 10 7a18 18 0 0 1-2 2.7"></path>
+                      <path d="M6.6 6.6C3.8 8.5 2 12 2 12s3.5 7 10 7a10.5 10.5 0 0 0 4.1-.8"></path>
+                    </svg>
+
+                    <svg
+                      data-dev-password-icon-visible
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                      focusable="false"
+                      hidden
+                    >
+                      <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"></path>
+                      <circle cx="12" cy="12" r="2.5"></circle>
+                    </svg>
+                  </button>
+                </div>
               </div>
 
               <div class="mb-3">
                 <label class="form-label" for="dev-confirm-password">
                   Confirmar nueva contraseña
                 </label>
-                <input
-                  class="form-control"
-                  id="dev-confirm-password"
-                  name="confirmar_password"
-                  type="password"
-                  autocomplete="new-password"
-                  minlength="12"
-                  maxlength="256"
-                  required
-                >
+                <div class="input-group dev-secret-group">
+                  <input
+                    class="form-control"
+                    id="dev-confirm-password"
+                    name="confirmar_password"
+                    type="password"
+                    autocomplete="new-password"
+
+                    placeholder="Repite la nueva contraseña"                    minlength="12"
+                    maxlength="256"
+                    required
+                  >
+                  <button
+                    class="btn btn-outline-secondary dev-password-toggle"
+                    type="button"
+                    data-dev-password-toggle
+                    data-dev-password-target="dev-confirm-password"
+                    data-dev-password-name="confirmación de contraseña"
+                    aria-controls="dev-confirm-password"
+                    aria-pressed="false"
+                    aria-label="Mostrar confirmación de contraseña"
+                    title="Mostrar confirmación de contraseña"
+                  >
+                    <svg
+                      data-dev-password-icon-hidden
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                      focusable="false"
+                    >
+                      <path d="M3 3l18 18"></path>
+                      <path d="M10.6 10.6a2 2 0 0 0 2.8 2.8"></path>
+                      <path d="M9.9 5.2A10.7 10.7 0 0 1 12 5c6.5 0 10 7 10 7a18 18 0 0 1-2 2.7"></path>
+                      <path d="M6.6 6.6C3.8 8.5 2 12 2 12s3.5 7 10 7a10.5 10.5 0 0 0 4.1-.8"></path>
+                    </svg>
+
+                    <svg
+                      data-dev-password-icon-visible
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                      focusable="false"
+                      hidden
+                    >
+                      <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"></path>
+                      <circle cx="12" cy="12" r="2.5"></circle>
+                    </svg>
+                  </button>
+                </div>
               </div>
 
               <button class="btn btn-primary" type="submit">

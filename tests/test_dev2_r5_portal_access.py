@@ -260,6 +260,141 @@ class TestDev2R5PortalAccess(unittest.TestCase):
         self.assertIn('{% extends "dev_base.html" %}', login)
         self.assertIn('{% extends "dev_base.html" %}', centro)
 
+    def test_controles_password_son_iconograficos_y_accesibles(self):
+        login = (
+            ROOT
+            / "app/templates/dev_login.html"
+        ).read_text(
+            encoding="utf-8"
+        )
+
+        perfil = (
+            ROOT
+            / "app/templates/dev_profile.html"
+        ).read_text(
+            encoding="utf-8"
+        )
+
+        script = (
+            ROOT
+            / "app/static/js/developer_portal.js"
+        ).read_text(
+            encoding="utf-8"
+        )
+
+        self.assertEqual(
+            1,
+            login.count(
+                "data-dev-password-toggle"
+            ),
+        )
+
+        self.assertEqual(
+            3,
+            perfil.count(
+                "data-dev-password-toggle"
+            ),
+        )
+
+        self.assertIn(
+            "data-dev-password-icon-hidden",
+            login,
+        )
+
+        self.assertIn(
+            "data-dev-password-icon-visible",
+            login,
+        )
+
+        self.assertIn(
+            'aria-label="Mostrar contraseña"',
+            login,
+        )
+
+        self.assertNotIn(
+            ">Mostrar</button>",
+            login,
+        )
+
+        self.assertIn(
+            'querySelectorAll(',
+            script,
+        )
+
+        self.assertIn(
+            "data-dev-password-target",
+            login,
+        )
+
+        self.assertIn(
+            "aria-pressed",
+            script,
+        )
+
+
+    def test_svg_password_alterna_atributo_hidden(self):
+        script = (
+            ROOT
+            / "app/static/js/developer_portal.js"
+        ).read_text(
+            encoding="utf-8"
+        )
+
+        login = (
+            ROOT
+            / "app/templates/dev_login.html"
+        ).read_text(
+            encoding="utf-8"
+        )
+
+        perfil = (
+            ROOT
+            / "app/templates/dev_profile.html"
+        ).read_text(
+            encoding="utf-8"
+        )
+
+        self.assertIn(
+            'iconoOculto.toggleAttribute(',
+            script,
+        )
+
+        self.assertIn(
+            'iconoVisible.toggleAttribute(',
+            script,
+        )
+
+        self.assertNotIn(
+            "iconoOculto.hidden =",
+            script,
+        )
+
+        self.assertNotIn(
+            "iconoVisible.hidden =",
+            script,
+        )
+
+        self.assertIn(
+            'placeholder="Ingresa contraseña"',
+            login,
+        )
+
+        self.assertIn(
+            'placeholder="Ingresa tu contraseña actual"',
+            perfil,
+        )
+
+        self.assertIn(
+            'placeholder="Ingresa una nueva contraseña"',
+            perfil,
+        )
+
+        self.assertIn(
+            'placeholder="Repite la nueva contraseña"',
+            perfil,
+        )
+
+
     def test_javascript_dev_no_persiste_credenciales(self):
         texto = (
             ROOT

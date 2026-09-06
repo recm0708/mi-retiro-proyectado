@@ -3653,9 +3653,6 @@ html[data-app-theme="contrast"] .official-import-table-wrapper {
   border-color: var(--app-selected-border);
   background: var(--app-selected-bg);
   color: var(--app-primary);
-  box-shadow:
-    inset 3px 0 0
-    var(--app-primary);
 }
 
 .app-sidebar-icon {

@@ -65,54 +65,6 @@
   stroke-linecap: round;
 }
 
-.dev-brand {
-  min-width: 0;
-  display: inline-flex;
-  align-items: center;
-  gap: .65rem;
-  color: var(--app-navbar-text);
-  text-decoration: none;
-  white-space: nowrap;
-}
-
-.dev-brand:hover,
-.dev-brand:focus-visible {
-  color: var(--app-navbar-text);
-}
-
-.dev-brand-mark {
-  width: 42px;
-  height: 42px;
-  display: grid;
-  place-items: center;
-  flex: 0 0 auto;
-  overflow: hidden;
-  border-radius: 50%;
-}
-
-.dev-brand-mark img {
-  width: 42px;
-  height: 42px;
-  object-fit: cover;
-}
-
-.dev-brand-copy {
-  display: grid;
-  min-width: 0;
-  line-height: 1.12;
-}
-
-.dev-brand-copy strong {
-  font-size: .97rem;
-}
-
-.dev-brand-copy small {
-  margin-top: .12rem;
-  color: var(--app-navbar-muted);
-  font-size: .73rem;
-  font-weight: 650;
-}
-
 .dev-topbar-actions {
   min-width: 0;
   display: flex;
@@ -329,29 +281,34 @@
 
 .dev-sidebar-heading {
   display: grid;
-  padding: 1.3rem 1.3rem .9rem;
+  gap: var(--app-space-1);
+  padding:
+    var(--app-space-5)
+    var(--app-space-5)
+    var(--app-space-3);
 }
 
 .dev-sidebar-heading span {
   color: var(--app-text);
-  font-size: .86rem;
-  font-weight: 800;
+  font-size: var(--app-font-size-sm);
+  font-weight: var(--app-font-weight-bold);
 }
 
 .dev-sidebar-heading small {
-  margin-top: .15rem;
   color: var(--app-text-secondary);
-  font-size: .72rem;
+  font-size: var(--app-font-size-xs);
 }
 
 .dev-sidebar-nav {
   display: grid;
-  gap: .25rem;
-  padding: .3rem .95rem;
+  gap: var(--app-space-1);
+  padding:
+    var(--app-space-2)
+    var(--app-space-3);
 }
 
 .dev-sidebar-nav a {
-  min-height: 46px;
+  min-height: var(--app-control-height);
   position: relative;
   display: flex;
   align-items: center;
@@ -365,15 +322,15 @@
   color: var(--app-text-secondary);
   text-decoration: none;
 
-  font-size: .86rem;
-  font-weight: 700;
+  font-size: var(--app-font-size-sm);
+  font-weight: var(--app-font-weight-semibold);
 }
 
 .dev-sidebar-nav a:hover,
 .dev-sidebar-nav a:focus-visible {
   border-color: var(--app-primary-border);
   background: var(--app-selected-bg);
-  color: var(--app-text);
+  color: var(--app-primary);
 }
 
 .dev-sidebar-nav a.active,
@@ -381,18 +338,6 @@
   border-color: var(--app-selected-border);
   background: var(--app-selected-bg);
   color: var(--app-primary);
-}
-
-.dev-sidebar-nav a.active::before,
-.dev-sidebar-nav a[aria-current="page"]::before {
-  width: 3px;
-  position: absolute;
-  top: 8px;
-  bottom: 8px;
-  left: -1px;
-  border-radius: var(--app-radius-pill);
-  background: var(--app-primary);
-  content: "";
 }
 
 .dev-sidebar-icon {
@@ -426,7 +371,7 @@
  * por lo que esta superficie usa un límite propio y nunca desborda
  * la columna principal.
  */
-.dev-shell-content .container {
+.dev-main .container {
   width: 100%;
   max-width: 1360px;
   padding-left: clamp(1rem, 2vw, 2rem);
@@ -448,14 +393,14 @@
  * activos continúan disponibles.
  */
 @media (min-width: 992px) {
-  body.dev-sidebar-collapsed
+  .dev-sidebar-collapsed
   .dev-shell.is-authenticated {
     grid-template-columns:
       var(--app-shell-sidebar-collapsed-width)
       minmax(0, 1fr);
   }
 
-  body.dev-sidebar-collapsed
+  .dev-sidebar-collapsed
   .dev-sidebar {
     width: var(--app-shell-sidebar-collapsed-width);
     transform: none;
@@ -463,15 +408,10 @@
     pointer-events: auto;
   }
 
-  body.dev-sidebar-collapsed
-  .dev-sidebar-heading {
-    min-height: 58px;
-    padding: 0;
-  }
 
-  body.dev-sidebar-collapsed
+  .dev-sidebar-collapsed
   .dev-sidebar-heading span,
-  body.dev-sidebar-collapsed
+  .dev-sidebar-collapsed
   .dev-sidebar-heading small {
     position: absolute;
     width: 1px;
@@ -481,19 +421,15 @@
     white-space: nowrap;
   }
 
-  body.dev-sidebar-collapsed
-  .dev-sidebar-nav {
-    padding: .3rem .6rem;
-  }
 
-  body.dev-sidebar-collapsed
+  .dev-sidebar-collapsed
   .dev-sidebar-nav a {
     justify-content: center;
     gap: 0;
-    padding: .65rem;
+    padding-inline: var(--app-space-2);
   }
 
-  body.dev-sidebar-collapsed
+  .dev-sidebar-collapsed
   .dev-sidebar-nav a > span:not(.dev-sidebar-icon) {
     position: absolute;
     width: 1px;
@@ -503,17 +439,7 @@
     white-space: nowrap;
   }
 
-  body.dev-sidebar-collapsed
-  .dev-sidebar-icon {
-    width: 24px;
-    height: 24px;
-  }
 
-  body.dev-sidebar-collapsed
-  .dev-sidebar-icon svg {
-    width: 22px;
-    height: 22px;
-  }
 }
 
 /* ==========================================================
@@ -853,32 +779,6 @@
 }
 
 /* ==========================================================
-   Footer
-   ========================================================== */
-
-.dev-footer {
-  margin-top: auto;
-
-  border-top: 1px solid var(--app-border);
-  background: var(--app-surface);
-}
-
-.dev-footer-inner {
-  min-height: 72px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-
-  color: var(--app-text-secondary);
-  font-size: .8rem;
-}
-
-.dev-footer-inner strong {
-  color: var(--app-text);
-}
-
-/* ==========================================================
    Responsive
    ========================================================== */
 
@@ -920,7 +820,7 @@
     pointer-events: auto;
   }
 
-  body.dev-sidebar-collapsed .dev-sidebar {
+  .dev-sidebar-collapsed .dev-sidebar {
     transform: translateX(-100%);
     opacity: 1;
     pointer-events: auto;
@@ -1053,13 +953,6 @@
     gap: .25rem;
   }
 
-  .dev-footer-inner {
-    flex-direction: column;
-    align-items: flex-start;
-
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-  }
 }
 
 /* ==========================================================
@@ -1182,7 +1075,7 @@
 }
 
 @media (min-width: 992px) {
-  body.dev-sidebar-collapsed
+  .dev-sidebar-collapsed
   .dev-menu-button svg {
     transform:
       rotate(180deg)
@@ -1209,41 +1102,6 @@
     color .18s ease,
     transform .22s cubic-bezier(.2, .8, .2, 1);
 }
-
-.dev-sidebar-nav a:hover
-.dev-sidebar-icon,
-.dev-sidebar-nav a:focus-visible
-.dev-sidebar-icon {
-  transform:
-    translateX(1px)
-    scale(1.09);
-}
-
-.dev-sidebar-nav a.active
-.dev-sidebar-icon,
-.dev-sidebar-nav a[aria-current="page"]
-.dev-sidebar-icon {
-  animation:
-    dev-nav-icon-selected
-    .34s
-    cubic-bezier(.2, .85, .25, 1)
-    both;
-}
-
-@keyframes dev-nav-icon-selected {
-  0% {
-    transform: scale(.82);
-  }
-
-  58% {
-    transform: scale(1.15);
-  }
-
-  100% {
-    transform: scale(1);
-  }
-}
-
 
 /* Cambio de página */
 
@@ -1550,4 +1408,55 @@
   .dev-sidebar {
     transition: none !important;
   }
+}
+
+
+/* Iconografía semántica del acceso Developer. */
+.dev-login-note-icon svg,
+.dev-login-lock svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+
+/* ==========================================================
+   Visibilidad de credenciales
+   ========================================================== */
+
+.dev-password-toggle {
+  width: var(--app-control-height);
+  min-width: var(--app-control-height);
+  min-height: var(--app-control-height);
+
+  display: inline-grid;
+  place-items: center;
+
+  padding: 0;
+
+  color: var(--app-text-secondary);
+}
+
+.dev-password-toggle:hover,
+.dev-password-toggle:focus-visible {
+  color: var(--app-primary);
+}
+
+.dev-password-toggle svg {
+  width: 20px;
+  height: 20px;
+
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.dev-password-toggle svg[hidden] {
+  display: none;
 }

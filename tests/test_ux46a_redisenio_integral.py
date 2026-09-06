@@ -6,6 +6,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = ROOT / "app/templates/base.html"
+FOOTER = ROOT / "app/templates/partials/global_footer.html"
 INDEX = ROOT / "app/templates/index.html"
 DESIGN = ROOT / "app/static/css/design-system.css"
 TEMA = ROOT / "app/static/js/theme.js"
@@ -16,7 +17,11 @@ class TestUX46aRedisenioIntegral(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.base = BASE.read_text(encoding="utf-8")
+        cls.base = (
+            BASE.read_text(encoding="utf-8")
+            + "\n"
+            + FOOTER.read_text(encoding="utf-8")
+        )
         cls.index = INDEX.read_text(encoding="utf-8")
         cls.design = DESIGN.read_text(encoding="utf-8")
         cls.tema = TEMA.read_text(encoding="utf-8")
@@ -109,7 +114,7 @@ class TestUX46aRedisenioIntegral(unittest.TestCase):
         self.assertNotIn("Abrir Mi Caja Digital", self.base)
 
     def test_portada_prioriza_beneficios_y_mockup_sin_resultado_ficticio(self):
-        self.assertIn("Planifica tu retiro con más claridad", self.index)
+        self.assertIn("Planificación previsional", self.index)
         self.assertIn("Vista ilustrativa", self.index)
         self.assertIn("B/. —", self.index)
         self.assertIn("El resultado se calcula con tus propios datos", self.index)

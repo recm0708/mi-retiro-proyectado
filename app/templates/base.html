@@ -45,6 +45,7 @@
 
   <!-- Se aplica antes de los estilos para reducir cambios visuales al cargar. -->
   <script src="{{ url_for('static', path='/js/theme.js') }}?v={{ static_revision }}"></script>
+  <script src="{{ url_for('static', path='/js/shell_state_boot.js') }}?v={{ static_revision }}"></script>
 
   <link
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
@@ -93,9 +94,14 @@
         aria-expanded="true"
         aria-label="Mostrar u ocultar navegación"
       >
-        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-          <path d="M4 7h16M4 12h16M4 17h16"></path>
-        </svg>
+        <span
+          class="shell-menu-icon"
+          aria-hidden="true"
+        >
+          <span class="shell-menu-line"></span>
+          <span class="shell-menu-line"></span>
+          <span class="shell-menu-line"></span>
+        </span>
       </button>
 
       <a
@@ -231,6 +237,7 @@
       <nav class="app-sidebar-nav">
         <a
           href="/"
+          data-sidebar-label="Inicio"
           aria-label="Inicio"
           class="{{ 'active' if pagina_activa == 'inicio' else '' }}"
           {% if pagina_activa == 'inicio' %}aria-current="page"{% endif %}
@@ -245,6 +252,7 @@
 
         <a
           href="/simulacion"
+          data-sidebar-label="Simular"
           aria-label="Simular"
           class="{{ 'active' if pagina_activa == 'simulacion' else '' }}"
           {% if pagina_activa == 'simulacion' %}aria-current="page"{% endif %}
@@ -260,6 +268,7 @@
 
         <a
           href="/comparar"
+          data-sidebar-label="Escenarios"
           aria-label="Escenarios"
           class="{{ 'active' if pagina_activa == 'comparar' else '' }}"
           {% if pagina_activa == 'comparar' %}aria-current="page"{% endif %}
@@ -274,6 +283,7 @@
 
         <a
           href="/como-se-calcula"
+          data-sidebar-label="Cómo se calcula"
           aria-label="Cómo se calcula"
           class="{{ 'active' if pagina_activa == 'como_se_calcula' else '' }}"
           {% if pagina_activa == 'como_se_calcula' %}aria-current="page"{% endif %}
@@ -289,6 +299,7 @@
 
         <a
           href="/metodologia"
+          data-sidebar-label="Fuentes"
           aria-label="Fuentes"
           class="{{ 'active' if pagina_activa == 'metodologia' else '' }}"
           {% if pagina_activa == 'metodologia' %}aria-current="page"{% endif %}
@@ -332,56 +343,8 @@
       {% include "partials/data_management.html" %}
       {% include "partials/privacy_consent.html" %}
 
-      <footer
-        class="footer"
-        aria-label="Información legal"
-      >
-        <div class="container footer-modern">
-          <div class="footer-identity">
-            <strong>{{ app_name }}</strong>
-            <span class="footer-version">
-              v{{ app_version }}
-            </span>
-          </div>
-
-          <p class="footer-disclaimer mb-0">
-            Herramienta independiente de estimación previsional.
-            No sustituye la determinación oficial de la Caja de Seguro
-            Social de Panamá ni emite resoluciones o certificaciones.
-          </p>
-
-          <div
-            class="footer-bottom"
-            aria-label="Fuentes, ayuda, privacidad, autoría y derechos"
-          >
-            <a class="footer-link" href="/metodologia">
-              Fuentes oficiales
-            </a>
-            <span aria-hidden="true">·</span>
-
-            <a
-              class="footer-link"
-              href="/metodologia#ayuda-contacto"
-            >
-              Ayuda y contacto
-            </a>
-            <span aria-hidden="true">·</span>
-
-            <a
-              class="footer-link"
-              href="/metodologia#privacidad-datos"
-            >
-              Privacidad
-            </a>
-            <span aria-hidden="true">·</span>
-
-            <span class="footer-copyright">
-              © 2026 {{ app_author }}.
-              Todos los derechos reservados.
-            </span>
-          </div>
-        </div>
-      </footer>
+      {% set footer_surface = "app" %}
+      {% include "partials/global_footer.html" %}
     </div>
   </div>
 
@@ -391,6 +354,7 @@
     crossorigin="anonymous"
   ></script>
 
+  <script src="{{ url_for('static', path='/js/shell_ui.js') }}?v={{ static_revision }}"></script>
   <script src="{{ url_for('static', path='/js/app_shell.js') }}?v={{ static_revision }}"></script>
   <script src="{{ url_for('static', path='/js/accessibility.js') }}?v={{ static_revision }}"></script>
   <script src="{{ url_for('static', path='/js/data_management.js') }}?v={{ static_revision }}"></script>
