@@ -315,6 +315,14 @@ y no deben incorporarse al contenido versionado normal del repositorio.
 | `/dev/mantenimiento/revocar-sesiones` | Revocación reforzada de sesiones administrativas. |
 | `/dev/privacidad` | Controles técnicos de privacidad y seguridad del portal. |
 | `/dev/perfil` | Perfil de la identidad Developer autenticada. |
+| `/dev/usuarios` | Directorio administrativo de cuentas autorizado por RBAC. |
+| `/dev/usuarios/crear` | Creación reforzada de cuentas con contraseña temporal. |
+| `/dev/usuarios/{identificador}/datos` | Edición del nombre visible de una cuenta gestionable. |
+| `/dev/usuarios/{identificador}/editar` | Edición unificada de nombre, rol y estado con una sola revalidación; los campos omitidos conservan su valor. |
+| `/dev/usuarios/{identificador}/rol` | Cambio reforzado de rol con revocación de sesiones. |
+| `/dev/usuarios/{identificador}/estado` | Activación o desactivación reforzada de una cuenta. |
+| `/dev/usuarios/{identificador}/password-temporal` | Restablecimiento reforzado a una credencial temporal de un solo visionado. |
+| `/dev/usuarios/{identificador}/eliminar` | Eliminación irreversible Owner-only con CSRF, revalidación, confirmación y revocación de sesiones. |
 | `/dev/perfil/datos` | Actualización de los datos personales editables del perfil propio. |
 | `/dev/perfil/avatar` | Carga o sustitución segura de la foto de perfil propia. |
 | `/dev/perfil/avatar/eliminar` | Eliminación de la foto personalizada y retorno a las iniciales. |

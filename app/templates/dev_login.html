@@ -23,8 +23,7 @@
           </div>
           <div>
             <strong>Operación administrativa segura</strong>
-            <p>La sesión aplica los permisos de tu cuenta y mantiene
-              separado el acceso humano del acceso técnico programático.</p>
+            <p>La sesión aplica los permisos de tu cuenta y mantiene separado el acceso al portal del acceso técnico programático.</p>
           </div>
         </div>
       </div>
@@ -44,11 +43,6 @@
               <p class="mb-0">Introduce tu usuario y contraseña del Portal Developer.</p>
             </div>
           </div>
-
-          {% if error %}
-          <div class="alert alert-danger dev-login-alert" role="alert">{{ error }}</div>
-          {% endif %}
-
           <form method="post" action="/dev" class="dev-login-form" autocomplete="on">
             <div>
               <label class="form-label" for="dev-usuario">Usuario</label>
@@ -57,6 +51,7 @@
                 class="form-control"
                 type="text"
                 name="usuario"
+                value="{{ usuario_recordado|default('') }}"
                 autocomplete="username"
                 autocapitalize="none"
                 spellcheck="false"
@@ -74,9 +69,13 @@
                   type="password"
                   name="password"
                   autocomplete="current-password"
-
-                  placeholder="Ingresa contraseña"                  required
+                  placeholder="Ingresa tu contraseña"
+                  required
+                  aria-invalid="{{ 'true' if error else 'false' }}"
                   aria-describedby="dev-password-help"
+                  {% if error %}
+                  aria-errormessage="dev-login-password-error"
+                  {% endif %}
                 >
                 <button
                   class="btn btn-outline-secondary dev-password-toggle"
@@ -113,6 +112,15 @@
                   </svg>
                 </button>
               </div>
+              {% if error %}
+              <div
+                id="dev-login-password-error"
+                class="invalid-feedback d-block"
+                role="alert"
+              >
+                {{ error }}
+              </div>
+              {% endif %}
               <div id="dev-password-help" class="form-text">
                 Utiliza las credenciales de tu cuenta del Portal Developer.
               </div>

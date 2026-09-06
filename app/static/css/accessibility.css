@@ -213,3 +213,28 @@ html[data-app-theme="contrast"] .retirement-date-coverage {
     max-width: 100%;
   }
 }
+
+/* validacion transversal App + Developer */
+.form-control[aria-invalid="true"],
+.form-select[aria-invalid="true"] {
+  border-color: var(--app-validation-border);
+  box-shadow:
+    0 0 0 1px var(--app-validation-border),
+    0 0 0 0.22rem var(--app-validation-ring);
+}
+
+.form-control[aria-invalid="true"]:focus,
+.form-select[aria-invalid="true"]:focus {
+  border-color: var(--app-validation-border);
+  box-shadow:
+    0 0 0 1px var(--app-validation-border),
+    0 0 0 0.25rem var(--app-validation-ring);
+}
+
+.invalid-feedback,
+.field-error,
+.app-field-error,
+[data-field-error] {
+  color: var(--app-validation-text);
+  font-weight: 650;
+}

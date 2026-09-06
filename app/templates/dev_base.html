@@ -445,6 +445,29 @@
           <span>Mantenimiento</span>
         </a>
 
+        {% if "users.read" in dev_permisos %}
+        <a
+          href="/dev/usuarios"
+          class="{{ 'active' if pagina_activa == 'usuarios' else '' }}"
+          {% if pagina_activa == 'usuarios' %}
+          aria-current="page"
+          {% endif %}
+
+          data-sidebar-label="Usuarios"
+          aria-label="Usuarios"
+        >
+          <span class="dev-sidebar-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <circle cx="9" cy="8" r="3"></circle>
+              <path d="M4 19c0-3 2-5 5-5s5 2 5 5"></path>
+              <circle cx="17" cy="9" r="2"></circle>
+              <path d="M15.5 14.5c2.7 0 4.5 1.6 4.5 4.5"></path>
+            </svg>
+          </span>
+          <span>Usuarios</span>
+        </a>
+        {% endif %}
+
         <a
           href="/dev/privacidad"
           data-sidebar-label="Privacidad"
@@ -505,6 +528,8 @@
     src="{{ url_for('static', path='/js/accessibility.js') }}"
   ></script>
 
+  <script src="{{ url_for('static', path='/js/datetime_ui.js') }}?v={{ dev_assets_revision }}"></script>
+
   <script
     src="{{ url_for('static', path='/js/shell_ui.js') }}?v={{ dev_assets_revision }}"
   ></script>
@@ -513,6 +538,8 @@
     src="{{ url_for('static', path='/js/developer_portal.js') }}?v={{ dev_assets_revision }}"
   ></script>
 
+
+  <script src="{{ url_for('static', path='/js/developer_forms.js') }}?v={{ dev_assets_revision }}"></script>
   {% block scripts %}{% endblock %}
 </body>
 </html>

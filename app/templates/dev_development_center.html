@@ -162,7 +162,7 @@ Centro de desarrollo · {{ app_name }}
             <table class="table align-middle">
               <thead>
                 <tr>
-                  <th scope="col">Fecha UTC</th>
+                  <th scope="col">Fecha y hora</th>
                   <th scope="col">Nivel</th>
                   <th scope="col">Evento</th>
                   <th scope="col">Componente</th>
@@ -174,7 +174,17 @@ Centro de desarrollo · {{ app_name }}
               <tbody>
                 {% for evento in estado_dev.eventos_recientes %}
                   <tr>
-                    <td><code>{{ evento.timestamp or "No disponible" }}</code></td>
+                    <td>{% if evento.timestamp %}
+                  <time
+                    class="app-local-datetime"
+                    datetime="{{ evento.timestamp }}"
+                    data-app-local-datetime
+                  >
+                    {{ evento.timestamp }}
+                  </time>
+                  {% else %}
+                  No disponible
+                  {% endif %}</td>
                     <td><span class="badge text-bg-secondary">{{ evento.level }}</span></td>
                     <td>{{ evento.event or "No disponible" }}</td>
                     <td>{{ evento.component or "No disponible" }}</td>
@@ -201,14 +211,24 @@ Centro de desarrollo · {{ app_name }}
         <h2 id="archivos-dev-title" class="h5 mb-3">Archivos diagnósticos conocidos</h2>
         <div class="table-responsive">
           <table class="table align-middle">
-            <thead><tr><th scope="col">Archivo</th><th scope="col">Existe</th><th scope="col">Tamaño</th><th scope="col">Actualizado UTC</th></tr></thead>
+            <thead><tr><th scope="col">Archivo</th><th scope="col">Existe</th><th scope="col">Tamaño</th><th scope="col">Última actualización</th></tr></thead>
             <tbody>
               {% for archivo in estado_dev.archivos_diagnostico %}
                 <tr>
                   <th scope="row"><code>{{ archivo.nombre }}</code></th>
                   <td>{{ "Sí" if archivo.existe else "No" }}</td>
                   <td>{{ archivo.tamano_bytes }} byte(s)</td>
-                  <td>{{ archivo.actualizado_utc or "No disponible" }}</td>
+                  <td>{% if archivo.actualizado_utc %}
+                  <time
+                    class="app-local-datetime"
+                    datetime="{{ archivo.actualizado_utc }}"
+                    data-app-local-datetime
+                  >
+                    {{ archivo.actualizado_utc }}
+                  </time>
+                  {% else %}
+                  No disponible
+                  {% endif %}</td>
                 </tr>
               {% endfor %}
             </tbody>

@@ -14,95 +14,91 @@
       "[data-dev-password-toggle]",
     );
 
-    toggles.forEach(
-      (toggle) => {
-        const targetId = (
-          toggle.dataset.devPasswordTarget
-          || toggle.getAttribute("aria-controls")
-          || ""
+    toggles.forEach((toggle) => {
+      const targetId = (
+        toggle.dataset.devPasswordTarget
+        || toggle.getAttribute("aria-controls")
+        || ""
+      );
+
+      const input = document.getElementById(
+        targetId,
+      );
+
+      if (!input) {
+        return;
+      }
+
+      const nombre = (
+        toggle.dataset.devPasswordName
+        || "contraseña"
+      );
+
+      const iconoOculto = toggle.querySelector(
+        "[data-dev-password-icon-hidden]",
+      );
+
+      const iconoVisible = toggle.querySelector(
+        "[data-dev-password-icon-visible]",
+      );
+
+      function sincronizarVisibilidad() {
+        const visible = (
+          input.type === "text"
         );
 
-        const input = document.getElementById(
-          targetId,
+        toggle.setAttribute(
+          "aria-pressed",
+          visible
+            ? "true"
+            : "false",
         );
 
-        if (!input) {
-          return;
-        }
+        const accion = visible
+          ? `Ocultar ${nombre}`
+          : `Mostrar ${nombre}`;
 
-        const nombre = (
-          toggle.dataset.devPasswordName
-          || "contraseña"
+        toggle.setAttribute(
+          "aria-label",
+          accion,
         );
 
-        const iconoOculto = toggle.querySelector(
-          "[data-dev-password-icon-hidden]",
+        toggle.setAttribute(
+          "title",
+          accion,
         );
 
-        const iconoVisible = toggle.querySelector(
-          "[data-dev-password-icon-visible]",
-        );
-
-        function sincronizarVisibilidad() {
-          const visible = (
-            input.type === "text"
-          );
-
-          toggle.setAttribute(
-            "aria-pressed",
-            visible
-              ? "true"
-              : "false",
-          );
-
-          const accion = visible
-            ? `Ocultar ${nombre}`
-            : `Mostrar ${nombre}`;
-
-          toggle.setAttribute(
-            "aria-label",
-            accion,
-          );
-
-          toggle.setAttribute(
-            "title",
-            accion,
-          );
-
-          if (iconoOculto) {
-            iconoOculto.toggleAttribute(
+        if (iconoOculto) {
+          iconoOculto.toggleAttribute(
             "hidden",
             visible,
           );
-          }
+        }
 
-          if (iconoVisible) {
-            iconoVisible.toggleAttribute(
+        if (iconoVisible) {
+          iconoVisible.toggleAttribute(
             "hidden",
             !visible,
           );
-          }
         }
+      }
 
-        toggle.addEventListener(
-          "click",
-          () => {
-            const mostrar = (
-              input.type === "password"
-            );
-
-            input.type = mostrar
+      toggle.addEventListener(
+        "click",
+        () => {
+          input.type = (
+            input.type === "password"
               ? "text"
-              : "password";
+              : "password"
+          );
 
-            sincronizarVisibilidad();
-            input.focus();
-          },
-        );
+          sincronizarVisibilidad();
+          input.focus();
+        },
+      );
 
-        sincronizarVisibilidad();
-      },
-    );
+      sincronizarVisibilidad();
+    });
   }
 
   function iniciarSidebar() {
@@ -492,5 +488,8 @@
     "DOMContentLoaded",
     iniciarVisorEventos,
   );
+
+
+
 
 })();

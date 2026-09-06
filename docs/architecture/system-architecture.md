@@ -71,6 +71,7 @@ introduce nuevas capas de producto.
 - `app/core/developer_identity.py`
 - `app/core/developer_provisioning.py`
 - `app/core/developer_store.py`
+- `app/core/developer_user_admin.py` — reglas humanas de gestión de cuentas, jerarquía y credenciales temporales.
 - `app/core/developer_web_security.py`
 - [`app/core/constants.py`](../../app/core/constants.py)
 - `app/core/money.py`
@@ -341,6 +342,14 @@ El siguiente inventario se deriva de los decoradores vigentes en `app/main.py`. 
 | `/dev/mantenimiento/limpiar-sesiones` |
 | `/dev/mantenimiento/revocar-sesiones` |
 | `/dev/perfil` |
+| `/dev/usuarios` |
+| `/dev/usuarios/crear` |
+| `/dev/usuarios/{identificador}/datos` |
+| `/dev/usuarios/{identificador}/editar` |
+| `/dev/usuarios/{identificador}/rol` |
+| `/dev/usuarios/{identificador}/estado` |
+| `/dev/usuarios/{identificador}/password-temporal` |
+| `/dev/usuarios/{identificador}/eliminar` |
 | `/dev/perfil/datos` |
 | `/dev/perfil/avatar` |
 | `/dev/perfil/avatar/eliminar` |

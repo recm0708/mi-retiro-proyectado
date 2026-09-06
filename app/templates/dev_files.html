@@ -131,7 +131,7 @@
                 <th scope="col">Archivo</th>
                 <th scope="col">Estado</th>
                 <th scope="col">Tamaño</th>
-                <th scope="col">Actualizado UTC</th>
+                <th scope="col">Última actualización</th>
               </tr>
             </thead>
 
@@ -153,7 +153,17 @@
                 <td>{{ archivo.tamano_legible }}</td>
 
                 <td>
-                  {{ archivo.actualizado_utc or "No disponible" }}
+                  {% if archivo.actualizado_utc %}
+                  <time
+                    class="app-local-datetime"
+                    datetime="{{ archivo.actualizado_utc }}"
+                    data-app-local-datetime
+                  >
+                    {{ archivo.actualizado_utc }}
+                  </time>
+                  {% else %}
+                  No disponible
+                  {% endif %}
                 </td>
               </tr>
               {% endfor %}

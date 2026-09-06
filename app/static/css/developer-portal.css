@@ -1478,3 +1478,344 @@
 .dev-profile-photo-management {
   max-width: 36rem;
 }
+
+/* ==========================================================
+   Gestión de usuarios Developer
+   ========================================================== */
+
+.dev-users-layout {
+  display: grid;
+  grid-template-columns: minmax(280px, .72fr) minmax(0, 1.8fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.dev-users-create-card {
+  position: sticky;
+  top: calc(var(--app-shell-topbar-height) + 1rem);
+}
+
+.dev-users-form {
+  display: grid;
+  gap: 1rem;
+}
+
+.dev-users-directory {
+  min-width: 0;
+}
+
+.dev-users-section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.dev-users-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.dev-user-card {
+  overflow: hidden;
+}
+
+.dev-user-card-head {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: .85rem;
+  align-items: center;
+}
+
+.dev-users-avatar {
+  width: 48px;
+  height: 48px;
+  display: inline-grid;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid var(--app-primary-border);
+  border-radius: 50%;
+  background:
+    linear-gradient(
+      135deg,
+      var(--app-primary-strong),
+      var(--app-primary)
+    );
+  color: #fff;
+  font-size: .82rem;
+  font-weight: 850;
+}
+
+.dev-users-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dev-user-card-identity {
+  min-width: 0;
+}
+
+.dev-user-card-identity h3,
+.dev-user-card-identity p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dev-user-card-identity p {
+  color: var(--app-text-secondary);
+  font-size: .84rem;
+}
+
+.dev-user-card-meta {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 1rem 0 0;
+  border-top: 1px solid var(--app-border);
+}
+
+.dev-user-card-meta > div {
+  min-width: 0;
+  padding: .9rem .85rem .2rem 0;
+}
+
+.dev-user-card-meta dt {
+  margin-bottom: .2rem;
+  color: var(--app-text-secondary);
+  font-size: .72rem;
+  font-weight: 750;
+}
+
+.dev-user-card-meta dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+  font-size: .86rem;
+}
+
+.dev-users-protection-note,
+.dev-users-temporary {
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius-md);
+  background: var(--app-surface-subtle);
+  color: var(--app-text-secondary);
+}
+
+.dev-users-protection-note {
+  margin-top: 1rem;
+  padding: .75rem .9rem;
+  font-size: .82rem;
+}
+
+.dev-users-temporary {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: center;
+  padding: 1rem 1.1rem;
+  border-color: var(--app-warning-border);
+  background: var(--app-warning-bg);
+  color: var(--app-warning-text);
+}
+
+.dev-users-temporary-secret {
+  max-width: min(100%, 520px);
+  overflow-x: auto;
+  padding: .65rem .8rem;
+  border: 1px solid var(--app-warning-border);
+  border-radius: var(--app-radius-sm);
+  background: var(--app-surface);
+  color: var(--app-text) !important;
+  user-select: all;
+  white-space: nowrap;
+}
+
+.dev-user-actions {
+  border-top: 1px solid var(--app-border);
+  padding-top: 1rem;
+}
+
+.dev-user-actions summary {
+  width: fit-content;
+  cursor: pointer;
+  color: var(--app-primary);
+  font-weight: 750;
+}
+
+.dev-user-actions-body {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.dev-users-form-compact {
+  align-content: start;
+  padding: 1rem;
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius-md);
+  background: var(--app-surface-subtle);
+}
+
+.dev-users-state-form {
+  border-color: var(--app-warning-border);
+}
+
+@media (max-width: 1199.98px) {
+  .dev-users-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .dev-users-create-card {
+    position: static;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .dev-user-card-head {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .dev-user-card-head > .badge {
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+
+  .dev-user-card-meta,
+  .dev-user-actions-body {
+    grid-template-columns: 1fr;
+  }
+
+  .dev-users-temporary {
+    grid-template-columns: 1fr;
+  }
+
+  .dev-users-temporary-secret {
+    width: 100%;
+  }
+}
+
+/* edición unificada de usuarios */
+.dev-user-actions-body {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.dev-user-edit-panel,
+.dev-user-security-panel,
+.dev-user-delete-panel {
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius-lg);
+  padding: 1rem;
+  background: var(--app-surface);
+}
+
+.dev-user-delete-panel {
+  border-color: var(--app-danger);
+}
+
+.dev-user-edit-panel .dev-users-form,
+.dev-user-security-panel .dev-users-form,
+.dev-user-delete-panel .dev-users-form {
+  gap: 1rem;
+}
+
+.dev-secret-group .dev-password-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.75rem;
+  padding-inline: 0.75rem;
+}
+
+.dev-secret-group .dev-password-toggle svg,
+.dev-copy-secret svg {
+  width: 1.1rem;
+  height: 1.1rem;
+  min-width: 1.1rem;
+  min-height: 1.1rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.dev-secret-group:has(.form-control[aria-invalid="true"]) .form-control,
+.dev-secret-group:has(.form-control[aria-invalid="true"]) .dev-password-toggle {
+  border-color: var(--app-danger);
+}
+
+.dev-users-temporary {
+  border: 1px solid var(--app-warning);
+  border-radius: var(--app-radius-lg);
+  padding: 1rem;
+  background: var(--app-surface);
+}
+
+.dev-users-temporary-copy {
+  display: grid;
+  gap: 1rem;
+}
+
+.dev-users-temporary-secret-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.75rem;
+  align-items: stretch;
+}
+
+.dev-users-temporary-secret {
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-variant-ligatures: none;
+}
+
+.dev-copy-secret {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-width: 7rem;
+}
+
+.dev-copy-secret.is-copied {
+  border-color: var(--app-success);
+}
+
+@media (max-width: 767.98px) {
+  .dev-users-temporary-secret-row {
+    grid-template-columns: 1fr;
+  }
+
+  .dev-copy-secret {
+    width: 100%;
+  }
+}
+
+/* control secreto invalido como unidad visual */
+.dev-secret-group:has(> .form-control[aria-invalid="true"]) {
+  border-radius: var(--app-radius-md);
+  outline: 2px solid var(--app-validation-border);
+  outline-offset: 0;
+  box-shadow: 0 0 0 0.22rem var(--app-validation-ring);
+}
+
+.dev-secret-group:has(> .form-control[aria-invalid="true"])
+  > .form-control,
+.dev-secret-group:has(> .form-control[aria-invalid="true"])
+  > .dev-password-toggle {
+  border-color: var(--app-validation-border);
+}
+
+.dev-secret-group:has(> .form-control[aria-invalid="true"])
+  > .form-control {
+  box-shadow: none;
+}
+
+.dev-secret-group:has(> .form-control[aria-invalid="true"])
+  + .invalid-feedback {
+  color: var(--app-validation-text);
+  font-weight: 650;
+}

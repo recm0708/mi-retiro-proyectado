@@ -194,6 +194,23 @@ from app.core.developer_avatar import (
 )
 
 
+from app.core.developer_identity import RolDeveloper
+from app.core.developer_store import listar_usuarios_developer
+from app.core.developer_user_audit import (
+    listar_auditoria_usuarios_developer,
+)
+from app.core.developer_user_admin import (
+    actualizar_nombre_usuario_administrado,
+    cambiar_estado_usuario_administrado,
+    cambiar_rol_usuario_administrado,
+    consumir_credencial_temporal_para_sesion,
+    crear_usuario_administrado,
+    eliminar_usuario_administrado,
+    guardar_credencial_temporal_para_sesion,
+    restablecer_password_temporal_usuario,
+    roles_asignables_por_actor,
+)
+
 app = FastAPI(
     title=APP_NAME,
     description=APP_DESCRIPTION,
@@ -1091,6 +1108,722 @@ async def cambiar_password_perfil_developer(
     return respuesta
 
 
+
+@app.get(
+    "/dev/usuarios",
+    response_class=HTMLResponse,
+)
+async def usuarios_developer(request: Request):
+    """Muestra el directorio humano de cuentas según RBAC y jerarquía."""
+
+    _verificar_superficie_administrativa()
+
+    actor = _obtener_usuario_sesion_web(
+        request
+    )
+
+    if actor is None:
+        return RedirectResponse(
+            url="/dev",
+            status_code=303,
+        )
+
+    if actor.debe_cambiar_password:
+        return RedirectResponse(
+            url="/dev/perfil?cambio_password=obligatorio",
+            status_code=303,
+        )
+
+    if not rol_tiene_permiso(
+        actor.rol,
+        PermisoDeveloper.USUARIOS_LEER,
+    ):
+        raise HTTPException(
+            status_code=403,
+            detail=(
+                "La cuenta Developer no tiene permiso "
+                "para acceder a esta sección."
+            ),
+        )
+
+    contexto = _contexto_developer(
+        request,
+        autenticado=True,
+        usuario=actor,
+        pagina_activa="usuarios",
+    )
+
+    contexto["estado_dev"] = (
+        construir_estado_centro_desarrollo()
+    )
+
+    contexto["dev_usuarios"] = (
+        _filas_gestion_usuarios_developer(
+            actor
+        )
+    )
+
+    contexto["dev_roles_creables"] = [
+        _opcion_rol_developer(
+            rol
+        )
+        for rol in roles_asignables_por_actor(
+            actor
+        )
+    ]
+
+    contexto["dev_auditoria_usuarios"] = (
+        listar_auditoria_usuarios_developer(
+            limite=200,
+        )
+        if rol_tiene_permiso(
+            actor.rol,
+            PermisoDeveloper.SEGURIDAD_AUDITAR,
+        )
+        else []
+    )
+
+    contexto["dev_credencial_temporal"] = (
+        consumir_credencial_temporal_para_sesion(
+            _identificador_sesion_developer(
+                request
+            )
+        )
+    )
+
+    contexto["dev_resultado_mensaje"] = (
+        _mensaje_resultado_usuarios(
+            request.query_params.get(
+                "resultado"
+            )
+        )
+    )
+
+    return templates.TemplateResponse(
+        request=request,
+        name="dev_users.html",
+        context=contexto,
+    )
+
+
+@app.post(
+    "/dev/usuarios/crear",
+)
+async def crear_usuario_developer_web(
+    request: Request,
+    csrf_token: str = Form(...),
+    usuario_nuevo: str = Form(...),
+    nombre_visible: str = Form(...),
+    rol: str = Form(...),
+    password_actual: str = Form(...),
+):
+    """Crea una cuenta con credencial temporal tras autorización reforzada."""
+
+    actor = _requerir_permiso_developer(
+        request,
+        PermisoDeveloper.USUARIOS_CREAR,
+    )
+
+    _validar_csrf_developer(
+        request,
+        csrf_token,
+    )
+
+    permiso_rol = (
+        PermisoDeveloper.ROLES_ASIGNAR_ADMIN
+        if rol == RolDeveloper.ADMINISTRADOR.value
+        else PermisoDeveloper.ROLES_ASIGNAR_BASICOS
+    )
+
+    _requerir_permiso_developer(
+        request,
+        permiso_rol,
+    )
+
+    if not revalidar_password_usuario(
+        actor,
+        password_actual,
+    ):
+        return RedirectResponse(
+            url="/dev/usuarios?resultado=revalidacion-invalida",
+            status_code=303,
+        )
+
+    try:
+        creado, password_temporal = (
+            crear_usuario_administrado(
+                actor=actor,
+                usuario=usuario_nuevo,
+                nombre_visible=nombre_visible,
+                rol=rol,
+            )
+        )
+    except PermissionError as error:
+        raise HTTPException(
+            status_code=403,
+            detail=str(error),
+        ) from error
+    except ValueError:
+        return RedirectResponse(
+            url="/dev/usuarios?resultado=crear-invalido",
+            status_code=303,
+        )
+
+    guardar_credencial_temporal_para_sesion(
+        sesion=_identificador_sesion_developer(
+            request
+        ),
+        usuario=creado.usuario,
+        password=password_temporal,
+        operacion="crear",
+    )
+
+    registrar_evento(
+        level="INFO",
+        event="dev.users.created",
+        component="security.developer",
+        outcome="success",
+        metadata={
+            "operation": "users.create",
+            "actor_role": actor.rol.value,
+            "target_role": creado.rol.value,
+        },
+    )
+
+    return RedirectResponse(
+        url="/dev/usuarios?resultado=creado",
+        status_code=303,
+    )
+
+
+@app.post(
+    "/dev/usuarios/{identificador}/editar",
+)
+async def editar_usuario_developer_web(
+    identificador: str,
+    request: Request,
+    csrf_token: str = Form(...),
+    nombre_visible: str = Form(""),
+    nuevo_rol: str = Form(""),
+    estado: str = Form(""),
+    password_actual: str = Form(...),
+):
+    """Aplica en una sola revalidación los cambios solicitados."""
+
+    actor = _requerir_permiso_developer(
+        request,
+        PermisoDeveloper.USUARIOS_EDITAR,
+    )
+
+    _validar_csrf_developer(
+        request,
+        csrf_token,
+    )
+
+    if not revalidar_password_usuario(
+        actor,
+        password_actual,
+    ):
+        return RedirectResponse(
+            url="/dev/usuarios?resultado=revalidacion-invalida",
+            status_code=303,
+        )
+
+    objetivo = next(
+        (
+            usuario
+            for usuario
+            in listar_usuarios_developer()
+            if usuario.identificador == identificador
+        ),
+        None,
+    )
+
+    if objetivo is None:
+        raise HTTPException(
+            status_code=404,
+            detail="La cuenta Developer no existe.",
+        )
+
+    cambios = 0
+    seguridad_cambiada = False
+
+    nombre_solicitado = nombre_visible.strip()
+
+    if (
+        nombre_solicitado
+        and nombre_solicitado != objetivo.nombre_visible
+    ):
+        objetivo = actualizar_nombre_usuario_administrado(
+            actor=actor,
+            identificador=objetivo.identificador,
+            nombre_visible=nombre_solicitado,
+        )
+        cambios += 1
+
+    rol_solicitado = nuevo_rol.strip()
+
+    if rol_solicitado:
+        try:
+            destino = RolDeveloper(
+                rol_solicitado
+            )
+        except ValueError:
+            return RedirectResponse(
+                url="/dev/usuarios?resultado=editar-invalido",
+                status_code=303,
+            )
+
+        if destino is not objetivo.rol:
+            objetivo = cambiar_rol_usuario_administrado(
+                actor=actor,
+                identificador=objetivo.identificador,
+                nuevo_rol=destino,
+            )
+            cambios += 1
+            seguridad_cambiada = True
+
+    estado_solicitado = estado.strip()
+
+    if estado_solicitado:
+        if estado_solicitado not in {
+            "activa",
+            "desactivada",
+        }:
+            return RedirectResponse(
+                url="/dev/usuarios?resultado=editar-invalido",
+                status_code=303,
+            )
+
+        activo_solicitado = (
+            estado_solicitado == "activa"
+        )
+
+        if activo_solicitado != objetivo.activo:
+            objetivo = cambiar_estado_usuario_administrado(
+                actor=actor,
+                identificador=objetivo.identificador,
+                activo=activo_solicitado,
+            )
+            cambios += 1
+            seguridad_cambiada = True
+
+    if seguridad_cambiada:
+        revocar_sesiones_usuario(
+            objetivo.identificador
+        )
+
+    if cambios == 0:
+        return RedirectResponse(
+            url="/dev/usuarios?resultado=sin-cambios",
+            status_code=303,
+        )
+
+    registrar_evento(
+        level="INFO",
+        event="dev.users.updated",
+        component="security.developer",
+        outcome="success",
+        metadata={
+            "operation": "users.edit",
+            "changes": cambios,
+            "security_changed": seguridad_cambiada,
+        },
+    )
+
+    return RedirectResponse(
+        url="/dev/usuarios?resultado=cuenta-actualizada",
+        status_code=303,
+    )
+
+
+@app.post(
+    "/dev/usuarios/{identificador}/datos",
+)
+async def actualizar_usuario_developer_web(
+    identificador: str,
+    request: Request,
+    csrf_token: str = Form(...),
+    nombre_visible: str = Form(...),
+):
+    """Actualiza el nombre visible de una cuenta administrable."""
+
+    actor = _requerir_permiso_developer(
+        request,
+        PermisoDeveloper.USUARIOS_EDITAR,
+    )
+
+    _validar_csrf_developer(
+        request,
+        csrf_token,
+    )
+
+    try:
+        actualizar_nombre_usuario_administrado(
+            actor=actor,
+            identificador=identificador,
+            nombre_visible=nombre_visible,
+        )
+    except PermissionError as error:
+        raise HTTPException(
+            status_code=403,
+            detail=str(error),
+        ) from error
+    except LookupError as error:
+        raise HTTPException(
+            status_code=404,
+            detail=str(error),
+        ) from error
+    except ValueError:
+        return RedirectResponse(
+            url="/dev/usuarios?resultado=datos-invalidos",
+            status_code=303,
+        )
+
+    registrar_evento(
+        level="INFO",
+        event="dev.users.profile.updated",
+        component="security.developer",
+        outcome="success",
+        metadata={
+            "operation": "users.profile.update",
+            "actor_role": actor.rol.value,
+        },
+    )
+
+    return RedirectResponse(
+        url="/dev/usuarios?resultado=datos-actualizados",
+        status_code=303,
+    )
+
+
+@app.post(
+    "/dev/usuarios/{identificador}/rol",
+)
+async def cambiar_rol_usuario_developer_web(
+    identificador: str,
+    request: Request,
+    csrf_token: str = Form(...),
+    nuevo_rol: str = Form(...),
+    password_actual: str = Form(...),
+):
+    """Cambia el rol de una cuenta con permiso específico y revalidación."""
+
+    actor = _requerir_permiso_developer(
+        request,
+        PermisoDeveloper.USUARIOS_EDITAR,
+    )
+
+    _validar_csrf_developer(
+        request,
+        csrf_token,
+    )
+
+    permiso_rol = (
+        PermisoDeveloper.ROLES_ASIGNAR_ADMIN
+        if nuevo_rol == RolDeveloper.ADMINISTRADOR.value
+        else PermisoDeveloper.ROLES_ASIGNAR_BASICOS
+    )
+
+    _requerir_permiso_developer(
+        request,
+        permiso_rol,
+    )
+
+    if not revalidar_password_usuario(
+        actor,
+        password_actual,
+    ):
+        return RedirectResponse(
+            url="/dev/usuarios?resultado=revalidacion-invalida",
+            status_code=303,
+        )
+
+    try:
+        actualizado = (
+            cambiar_rol_usuario_administrado(
+                actor=actor,
+                identificador=identificador,
+                nuevo_rol=nuevo_rol,
+            )
+        )
+    except PermissionError as error:
+        raise HTTPException(
+            status_code=403,
+            detail=str(error),
+        ) from error
+    except LookupError as error:
+        raise HTTPException(
+            status_code=404,
+            detail=str(error),
+        ) from error
+    except ValueError:
+        return RedirectResponse(
+            url="/dev/usuarios?resultado=rol-invalido",
+            status_code=303,
+        )
+
+    revocar_sesiones_usuario(
+        actualizado.identificador
+    )
+
+    registrar_evento(
+        level="WARNING",
+        event="dev.users.role.changed",
+        component="security.developer",
+        outcome="success",
+        metadata={
+            "operation": "users.role.change",
+            "actor_role": actor.rol.value,
+            "target_role": actualizado.rol.value,
+        },
+    )
+
+    return RedirectResponse(
+        url="/dev/usuarios?resultado=rol-actualizado",
+        status_code=303,
+    )
+
+
+@app.post(
+    "/dev/usuarios/{identificador}/estado",
+)
+async def cambiar_estado_usuario_developer_web(
+    identificador: str,
+    request: Request,
+    csrf_token: str = Form(...),
+    activo: str = Form(...),
+    password_actual: str = Form(...),
+):
+    """Activa o desactiva una cuenta tras revalidación de identidad."""
+
+    actor = _requerir_permiso_developer(
+        request,
+        PermisoDeveloper.USUARIOS_DESACTIVAR,
+    )
+
+    _validar_csrf_developer(
+        request,
+        csrf_token,
+    )
+
+    if not revalidar_password_usuario(
+        actor,
+        password_actual,
+    ):
+        return RedirectResponse(
+            url="/dev/usuarios?resultado=revalidacion-invalida",
+            status_code=303,
+        )
+
+    if activo not in {
+        "0",
+        "1",
+    }:
+        raise HTTPException(
+            status_code=400,
+            detail="Estado de cuenta inválido.",
+        )
+
+    try:
+        actualizado = (
+            cambiar_estado_usuario_administrado(
+                actor=actor,
+                identificador=identificador,
+                activo=(activo == "1"),
+            )
+        )
+    except PermissionError as error:
+        raise HTTPException(
+            status_code=403,
+            detail=str(error),
+        ) from error
+    except LookupError as error:
+        raise HTTPException(
+            status_code=404,
+            detail=str(error),
+        ) from error
+
+    revocar_sesiones_usuario(
+        actualizado.identificador
+    )
+
+    registrar_evento(
+        level="WARNING",
+        event="dev.users.state.changed",
+        component="security.developer",
+        outcome="success",
+        metadata={
+            "operation": "users.state.change",
+            "actor_role": actor.rol.value,
+            "active": actualizado.activo,
+        },
+    )
+
+    return RedirectResponse(
+        url="/dev/usuarios?resultado=estado-actualizado",
+        status_code=303,
+    )
+
+
+@app.post(
+    "/dev/usuarios/{identificador}/password-temporal",
+)
+async def restablecer_password_usuario_developer_web(
+    identificador: str,
+    request: Request,
+    csrf_token: str = Form(...),
+    password_actual: str = Form(...),
+):
+    """Genera una credencial temporal y revoca las sesiones del objetivo."""
+
+    actor = _requerir_permiso_developer(
+        request,
+        PermisoDeveloper.USUARIOS_EDITAR,
+    )
+
+    _validar_csrf_developer(
+        request,
+        csrf_token,
+    )
+
+    if not revalidar_password_usuario(
+        actor,
+        password_actual,
+    ):
+        return RedirectResponse(
+            url="/dev/usuarios?resultado=revalidacion-invalida",
+            status_code=303,
+        )
+
+    try:
+        actualizado, password_temporal = (
+            restablecer_password_temporal_usuario(
+                actor=actor,
+                identificador=identificador,
+            )
+        )
+    except PermissionError as error:
+        raise HTTPException(
+            status_code=403,
+            detail=str(error),
+        ) from error
+    except LookupError as error:
+        raise HTTPException(
+            status_code=404,
+            detail=str(error),
+        ) from error
+
+    revocar_sesiones_usuario(
+        actualizado.identificador
+    )
+
+    guardar_credencial_temporal_para_sesion(
+        sesion=_identificador_sesion_developer(
+            request
+        ),
+        usuario=actualizado.usuario,
+        password=password_temporal,
+        operacion="restablecer",
+    )
+
+    registrar_evento(
+        level="WARNING",
+        event="dev.users.password.reset",
+        component="security.developer",
+        outcome="success",
+        metadata={
+            "operation": "users.password.reset",
+            "actor_role": actor.rol.value,
+            "target_role": actualizado.rol.value,
+        },
+    )
+
+    return RedirectResponse(
+        url="/dev/usuarios?resultado=password-temporal",
+        status_code=303,
+    )
+
+
+@app.post(
+    "/dev/usuarios/{identificador}/eliminar",
+)
+async def eliminar_usuario_developer_web(
+    identificador: str,
+    request: Request,
+    csrf_token: str = Form(...),
+    password_actual: str = Form(...),
+    confirmacion: str = Form(...),
+):
+    """Elimina una cuenta ordinaria desde la superficie web protegida."""
+    actor = _requerir_permiso_developer(
+        request,
+        PermisoDeveloper.USUARIOS_ELIMINAR,
+    )
+
+    _validar_csrf_developer(
+        request,
+        csrf_token,
+    )
+
+    if not revalidar_password_usuario(
+        actor,
+        password_actual,
+    ):
+        return RedirectResponse(
+            url="/dev/usuarios?resultado=revalidacion-invalida",
+            status_code=303,
+        )
+
+    if confirmacion.strip() != "ELIMINAR USUARIO":
+        return RedirectResponse(
+            url="/dev/usuarios?resultado=eliminar-confirmacion",
+            status_code=303,
+        )
+
+    try:
+        eliminado = eliminar_usuario_administrado(
+            actor=actor,
+            identificador=identificador,
+        )
+    except PermissionError as error:
+        raise HTTPException(
+            status_code=403,
+            detail=str(error),
+        ) from error
+    except LookupError as error:
+        raise HTTPException(
+            status_code=404,
+            detail=str(error),
+        ) from error
+
+    revocar_sesiones_usuario(
+        eliminado.identificador
+    )
+
+    if eliminado.avatar_relativo:
+        eliminar_avatar_developer(
+            eliminado.avatar_relativo
+        )
+
+    registrar_evento(
+        level="WARNING",
+        event="dev.users.deleted",
+        component="security.developer",
+        outcome="success",
+        metadata={
+            "operation": "users.delete",
+            "actor_role": actor.rol.value,
+            "target_role": eliminado.rol.value,
+        },
+    )
+
+    return RedirectResponse(
+        url="/dev/usuarios?resultado=usuario-eliminado",
+        status_code=303,
+    )
+
+
 @app.get(
     "/dev/acceso-tecnico",
     response_class=HTMLResponse,
@@ -1162,6 +1895,7 @@ async def procesar_login_administrativo(
             request,
             error="Usuario o contraseña incorrectos.",
             status_code=401,
+            usuario_recordado=usuario.strip(),
         )
 
     cuenta = registrar_acceso_usuario(
@@ -1430,6 +2164,7 @@ def _revision_assets_developer() -> str:
     rutas = (
         Path("app/static/css/developer-portal.css"),
         Path("app/static/js/developer_portal.js"),
+        Path("app/static/js/developer_forms.js"),
     )
 
     revisiones = []
@@ -1579,6 +2314,214 @@ def _revalidar_operacion_developer(
             status_code=403,
             detail="Revalidación de identidad incorrecta.",
         )
+
+
+
+def _etiqueta_rol_gestion_developer(
+    rol: RolDeveloper,
+) -> str:
+    """Devuelve la etiqueta humana utilizada en la gestión de usuarios."""
+
+    return {
+        RolDeveloper.PROPIETARIO: "Propietario",
+        RolDeveloper.ADMINISTRADOR: "Administrador",
+        RolDeveloper.OPERADOR: "Operador",
+        RolDeveloper.AUDITOR: "Auditor",
+    }[rol]
+
+
+def _opcion_rol_developer(
+    rol: RolDeveloper,
+) -> dict[str, str]:
+    """Convierte un rol asignable en una opción segura para la interfaz."""
+
+    return {
+        "value": rol.value,
+        "label": _etiqueta_rol_gestion_developer(
+            rol
+        ),
+    }
+
+
+def _usuario_gestionable_por_actor(
+    actor: UsuarioDeveloper,
+    objetivo: UsuarioDeveloper,
+) -> bool:
+    """Replica solo la visibilidad de acciones; el dominio revalida la operación."""
+
+    if (
+        objetivo.es_propietario
+        or objetivo.identificador
+        == actor.identificador
+    ):
+        return False
+
+    if actor.rol is RolDeveloper.PROPIETARIO:
+        return True
+
+    if actor.rol is not RolDeveloper.ADMINISTRADOR:
+        return False
+
+    return (
+        objetivo.rol
+        is not RolDeveloper.ADMINISTRADOR
+    )
+
+
+def _filas_gestion_usuarios_developer(
+    actor: UsuarioDeveloper,
+) -> list[dict[str, object]]:
+    """Prepara el directorio de usuarios sin exponer hashes ni secretos."""
+
+    roles_actor = roles_asignables_por_actor(
+        actor
+    )
+
+    filas: list[dict[str, object]] = []
+
+    for usuario in listar_usuarios_developer():
+        gestionable = (
+            _usuario_gestionable_por_actor(
+                actor,
+                usuario,
+            )
+        )
+
+        roles_cambio = [
+            _opcion_rol_developer(
+                rol
+            )
+            for rol in roles_actor
+            if (
+                gestionable
+                and rol is not usuario.rol
+            )
+        ]
+
+        filas.append(
+            {
+                "usuario": usuario,
+                "nombre": _nombre_presentacion_developer(
+                    usuario.nombre_visible
+                ),
+                "iniciales": _iniciales_nombre_developer(
+                    usuario.nombre_visible
+                ),
+                "rol_label": _etiqueta_rol_gestion_developer(
+                    usuario.rol
+                ),
+                "avatar_url": (
+                    (
+                        "/dev/perfil/avatar/"
+                        + usuario.identificador
+                    )
+                    if usuario.avatar_relativo
+                    else None
+                ),
+                "es_actual": (
+                    usuario.identificador
+                    == actor.identificador
+                ),
+                "gestionable": gestionable,
+                "roles_cambio": roles_cambio,
+            }
+        )
+
+    return filas
+
+
+def _mensaje_resultado_usuarios(
+    codigo: str | None,
+) -> dict[str, str] | None:
+    """Traduce códigos no sensibles de redirección a mensajes de interfaz."""
+
+    mensajes = {
+        "creado": {
+            "tipo": "success",
+            "texto": (
+                "La cuenta fue creada. Copia la "
+                "contraseña temporal antes de salir de esta página."
+            ),
+        },
+        "revalidacion-invalida": {
+            "tipo": "danger",
+            "texto": (
+                "La contraseña actual no coincide. "
+                "No se realizó ningún cambio."
+            ),
+        },
+        "crear-invalido": {
+            "tipo": "danger",
+            "texto": (
+                "No fue posible crear la cuenta. Revisa "
+                "el usuario, nombre y rol seleccionados."
+            ),
+        },
+        "datos-invalidos": {
+            "tipo": "danger",
+            "texto": (
+                "El nombre visible no cumple los requisitos."
+            ),
+        },
+        "cuenta-actualizada": {
+            "tipo": "success",
+            "texto": "Los cambios de la cuenta fueron guardados.",
+        },
+        "sin-cambios": {
+            "tipo": "secondary",
+            "texto": "No se solicitaron cambios para esta cuenta.",
+        },
+        "editar-invalido": {
+            "tipo": "danger",
+            "texto": "No fue posible aplicar los cambios solicitados.",
+        },
+        "datos-actualizados": {
+            "tipo": "success",
+            "texto": "El nombre visible fue actualizado.",
+        },
+        "rol-invalido": {
+            "tipo": "danger",
+            "texto": "El rol seleccionado no es válido.",
+        },
+        "rol-actualizado": {
+            "tipo": "success",
+            "texto": (
+                "El rol fue actualizado y las sesiones "
+                "anteriores de la cuenta fueron revocadas."
+            ),
+        },
+        "estado-actualizado": {
+            "tipo": "success",
+            "texto": (
+                "El estado de la cuenta fue actualizado y "
+                "sus sesiones anteriores fueron revocadas."
+            ),
+        },
+        "eliminar-confirmacion": {
+            "tipo": "danger",
+            "texto": (
+                "La confirmación no coincide. "
+                "La cuenta no fue eliminada."
+            ),
+        },
+        "usuario-eliminado": {
+            "tipo": "success",
+            "texto": (
+                "La cuenta fue eliminada definitivamente."
+            ),
+        },
+        "password-temporal": {
+            "tipo": "warning",
+            "texto": (
+                "La contraseña fue restablecida. Copia la "
+                "nueva credencial temporal antes de salir de esta página."
+            ),
+        },
+    }
+
+    return mensajes.get(
+        str(codigo or "")
+    )
 
 
 def _contexto_developer(
@@ -1746,6 +2689,7 @@ def _render_login_developer(
     *,
     error: str | None = None,
     status_code: int = 200,
+    usuario_recordado: str = "",
 ):
     """Renderiza el acceso humano sin persistir credenciales."""
 
@@ -1754,6 +2698,7 @@ def _render_login_developer(
         autenticado=False
     )
     contexto["error"] = error
+    contexto["usuario_recordado"] = usuario_recordado
 
     return templates.TemplateResponse(
         request=request,

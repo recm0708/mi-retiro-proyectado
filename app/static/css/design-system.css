@@ -3740,3 +3740,22 @@ html[data-app-theme="contrast"] .trace-badge {
     animation: none !important;
   }
 }
+
+/* tokens semanticos de validacion */
+:root {
+  --app-validation-border: #dc2626;
+  --app-validation-text: #b91c1c;
+  --app-validation-ring: rgba(220, 38, 38, 0.22);
+}
+
+html[data-bs-theme="dark"] {
+  --app-validation-border: #ef4444;
+  --app-validation-text: #f87171;
+  --app-validation-ring: rgba(239, 68, 68, 0.26);
+}
+
+html[data-app-theme="contrast"] {
+  --app-validation-border: #ff6b6b;
+  --app-validation-text: #ff8a8a;
+  --app-validation-ring: rgba(255, 107, 107, 0.34);
+}

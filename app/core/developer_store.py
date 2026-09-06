@@ -1127,3 +1127,39 @@ def registrar_acceso_usuario(
         )
 
     return actualizado
+
+
+def eliminar_usuario_developer(
+    identificador: str,
+    ruta: str | Path | None = None,
+) -> UsuarioDeveloper:
+    # Elimina definitivamente una cuenta no propietaria.
+    """Elimina de forma persistente una cuenta Developer ordinaria protegida."""
+    objetivo = obtener_usuario_por_id(
+        identificador,
+        ruta,
+    )
+
+    if objetivo is None:
+        raise LookupError(
+            "La cuenta Developer no existe."
+        )
+
+    if objetivo.es_propietario:
+        raise PermissionError(
+            "La cuenta Propietario está protegida."
+        )
+
+    with _conectar(ruta) as conexion:
+        cursor = conexion.execute(
+            "DELETE FROM developer_users "
+            "WHERE id = ? AND is_owner = 0",
+            (objetivo.identificador,),
+        )
+
+        if cursor.rowcount != 1:
+            raise RuntimeError(
+                "No fue posible eliminar la cuenta Developer."
+            )
+
+    return objetivo

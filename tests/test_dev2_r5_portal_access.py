@@ -375,7 +375,7 @@ class TestDev2R5PortalAccess(unittest.TestCase):
         )
 
         self.assertIn(
-            'placeholder="Ingresa contraseña"',
+            'placeholder="Ingresa tu contraseña"',
             login,
         )
 

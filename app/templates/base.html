@@ -354,6 +354,8 @@
     crossorigin="anonymous"
   ></script>
 
+  <script src="{{ url_for('static', path='/js/datetime_ui.js') }}?v={{ static_revision }}"></script>
+
   <script src="{{ url_for('static', path='/js/shell_ui.js') }}?v={{ static_revision }}"></script>
   <script src="{{ url_for('static', path='/js/app_shell.js') }}?v={{ static_revision }}"></script>
   <script src="{{ url_for('static', path='/js/accessibility.js') }}?v={{ static_revision }}"></script>
