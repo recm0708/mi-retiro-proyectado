@@ -8,20 +8,39 @@
     <span class="dev-kicker">Cuenta Developer</span>
     <h1 class="display-6 fw-bold mb-3">Perfil</h1>
     <p class="lead mb-0">
-      Identidad, estado de seguridad y contraseña de tu cuenta Developer.
+      Identidad, foto de perfil, datos personales y seguridad de tu cuenta Developer.
     </p>
   </div>
 </section>
 
 <section class="py-4">
   <div class="container">
+    {% if dev_usuario.debe_cambiar_password %}
+    <div
+      class="alert alert-warning"
+      role="alert"
+    >
+      <strong>Cambio de contraseña requerido.</strong>
+      Esta cuenta utiliza una contraseña temporal.
+      Debes establecer una contraseña propia antes de acceder
+      al resto del Portal Developer.
+    </div>
+    {% endif %}
+
     <div class="row g-4">
       <div class="col-lg-5">
         <article class="card h-100">
           <div class="card-body p-4">
             <div class="dev-profile-summary">
               <div class="dev-avatar dev-avatar-lg" aria-hidden="true">
+                {% if dev_avatar_url %}
+                <img
+                  src="{{ dev_avatar_url }}"
+                  alt=""
+                >
+                {% else %}
                 {{ dev_iniciales }}
+                {% endif %}
               </div>
 
               <div>
@@ -78,6 +97,155 @@
         </article>
       </div>
     </div>
+
+
+    <article class="card mt-4">
+      <div class="card-body p-4">
+        <div class="row g-4">
+          <div class="col-lg-5">
+            <span class="dev-kicker">Identidad personal</span>
+            <h2 class="h4">Datos de perfil</h2>
+
+            <p class="text-muted mb-0">
+              Puedes actualizar tu nombre visible y la imagen
+              utilizada para identificar tu sesión.
+            </p>
+          </div>
+
+          <div class="col-lg-7">
+            {% if "profile.edit.self" in dev_permisos %}
+            <form
+              method="post"
+              action="/dev/perfil/datos"
+              class="mb-4"
+            >
+              <input
+                type="hidden"
+                name="csrf_token"
+                value="{{ dev_csrf_token }}"
+              >
+
+              <div class="mb-3">
+                <label
+                  class="form-label"
+                  for="dev-profile-username"
+                >
+                  Usuario
+                </label>
+
+                <input
+                  class="form-control"
+                  id="dev-profile-username"
+                  value="{{ dev_usuario.usuario }}"
+                  type="text"
+                  readonly
+                >
+
+                <div class="form-text">
+                  El identificador de inicio de sesión no se modifica
+                  desde el perfil personal.
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label
+                  class="form-label"
+                  for="dev-profile-display-name"
+                >
+                  Nombre visible
+                </label>
+
+                <input
+                  class="form-control"
+                  id="dev-profile-display-name"
+                  name="nombre_visible"
+                  value="{{ dev_usuario.nombre_visible }}"
+                  maxlength="120"
+                  autocomplete="name"
+                  required
+                >
+              </div>
+
+              <button
+                class="btn btn-primary"
+                type="submit"
+              >
+                Guardar datos del perfil
+              </button>
+            </form>
+
+            <hr>
+
+            <div class="dev-profile-photo-management">
+              <h3 class="h6">Foto de perfil</h3>
+
+              <form
+                method="post"
+                action="/dev/perfil/avatar"
+                enctype="multipart/form-data"
+                class="mb-3"
+              >
+                <input
+                  type="hidden"
+                  name="csrf_token"
+                  value="{{ dev_csrf_token }}"
+                >
+
+                <div class="mb-3">
+                  <label
+                    class="form-label"
+                    for="dev-profile-avatar"
+                  >
+                    Seleccionar imagen
+                  </label>
+
+                  <input
+                    class="form-control official-import-file-input"
+                    id="dev-profile-avatar"
+                    name="avatar"
+                    type="file"
+                    accept="image/png,image/jpeg,image/webp"
+                    required
+                  >
+
+                  <div class="form-text">
+                    PNG, JPEG o WebP. Tamaño máximo: 8 MiB.
+                  </div>
+                </div>
+
+                <button
+                  class="btn btn-outline-primary"
+                  type="submit"
+                >
+                  {{ "Reemplazar foto" if dev_avatar_url else "Subir foto" }}
+                </button>
+              </form>
+
+              {% if dev_avatar_url %}
+              <form
+                method="post"
+                action="/dev/perfil/avatar/eliminar"
+              >
+                <input
+                  type="hidden"
+                  name="csrf_token"
+                  value="{{ dev_csrf_token }}"
+                >
+
+                <button
+                  class="btn btn-outline-danger"
+                  type="submit"
+                >
+                  Eliminar foto
+                </button>
+              </form>
+              {% endif %}
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </article>
 
     <article class="card mt-4">
       <div class="card-body p-4">

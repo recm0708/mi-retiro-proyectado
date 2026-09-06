@@ -271,7 +271,14 @@
               class="dev-avatar"
               aria-hidden="true"
             >
+              {% if dev_avatar_url %}
+              <img
+                src="{{ dev_avatar_url }}"
+                alt=""
+              >
+              {% else %}
               {{ dev_iniciales }}
+              {% endif %}
             </span>
 
             <span class="dev-user-copy">

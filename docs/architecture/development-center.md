@@ -259,6 +259,9 @@ data/developer/portal.sqlite3
 
 Puede cambiarse mediante `MRP_DEVELOPER_STORE_PATH`.
 
+Las fotografías de perfil no se almacenan dentro de SQLite ni se versionan en Git. La base conserva únicamente una referencia relativa.
+Durante el desarrollo, la ubicación predeterminada es `data/developer/media/avatars/`. La raíz de medios puede trasladarse fuera del repositorio mediante `MRP_DEVELOPER_MEDIA_DIR` sin cambiar las referencias persistidas.
+
 Esta base no contiene datos de simulación previsional. Mantiene únicamente
 estado administrativo, entre otros:
 
@@ -290,6 +293,7 @@ desactivación, degradación de rol o promoción de otra cuenta a Owner.
 | `MRP_ADMIN_COOKIE_SECURE` | desactivado | Debe habilitarse cuando el Portal Developer se sirve mediante HTTPS. |
 | `MRP_ADMIN_COOKIE_SAMESITE` | `lax` | Política `SameSite` de la cookie `mrp_admin_session`. |
 | `MRP_DEVELOPER_STORE_PATH` | `data/developer/portal.sqlite3` | Ubicación del almacén SQLite administrativo local. |
+| `MRP_DEVELOPER_MEDIA_DIR` | `data/developer/media/` | Raíz persistente configurable para medios privados del Portal Developer, incluidos los avatares. |
 | `MRP_DIAGNOSTIC_DIR` | `logs/diagnostico/` | Permite sobrescribir el directorio local de Developer Diagnostics. |
 
 Las rutas de datos Developer, diagnósticos y secretos son artefactos locales
@@ -311,6 +315,10 @@ y no deben incorporarse al contenido versionado normal del repositorio.
 | `/dev/mantenimiento/revocar-sesiones` | Revocación reforzada de sesiones administrativas. |
 | `/dev/privacidad` | Controles técnicos de privacidad y seguridad del portal. |
 | `/dev/perfil` | Perfil de la identidad Developer autenticada. |
+| `/dev/perfil/datos` | Actualización de los datos personales editables del perfil propio. |
+| `/dev/perfil/avatar` | Carga o sustitución segura de la foto de perfil propia. |
+| `/dev/perfil/avatar/eliminar` | Eliminación de la foto personalizada y retorno a las iniciales. |
+| `/dev/perfil/avatar/{identificador}` | Entrega autenticada de la foto de perfil autorizada. |
 | `/dev/perfil/password` | Cambio seguro de la contraseña propia. |
 | `/dev/acceso-tecnico` | Explicación y separación del acceso técnico Bearer. |
 | `/dev/centro-desarrollo` | Superficie técnica legacy preservada para compatibilidad autorizada. |

@@ -31,7 +31,12 @@ from app.core.config import (
 )
 
 from fastapi import FastAPI, File, Form, HTTPException, Request, UploadFile
-from fastapi.responses import HTMLResponse, Response, RedirectResponse
+from fastapi.responses import (
+    FileResponse,
+    HTMLResponse,
+    RedirectResponse,
+    Response,
+)
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
@@ -176,7 +181,16 @@ from app.core.developer_provisioning import (
 )
 from app.core.developer_store import (
     UsuarioDeveloper,
+    actualizar_avatar_usuario,
+    actualizar_nombre_visible_usuario,
     obtener_usuario_por_id,
+    registrar_acceso_usuario,
+)
+from app.core.developer_avatar import (
+    MAX_AVATAR_BYTES,
+    eliminar_avatar_developer,
+    guardar_avatar_developer,
+    resolver_avatar_developer,
 )
 
 
@@ -486,6 +500,12 @@ async def portal_developer(request: Request):
     )
 
     if usuario is not None:
+        if usuario.debe_cambiar_password:
+            return RedirectResponse(
+                url="/dev/perfil?cambio_password=obligatorio",
+                status_code=303,
+            )
+
         return _render_pagina_developer(
             request,
             usuario=usuario,
@@ -735,6 +755,278 @@ async def perfil_developer(request: Request):
 
 
 @app.post(
+    "/dev/perfil/datos",
+)
+async def actualizar_datos_perfil_developer(
+    request: Request,
+    csrf_token: str = Form(...),
+    nombre_visible: str = Form(...),
+):
+    """Actualiza los datos personales editables de la cuenta autenticada."""
+
+    usuario = _requerir_permiso_developer(
+        request,
+        PermisoDeveloper.PERFIL_EDITAR_PROPIO,
+    )
+
+    _validar_csrf_developer(
+        request,
+        csrf_token,
+    )
+
+    try:
+        actualizar_nombre_visible_usuario(
+            identificador=usuario.identificador,
+            nombre_visible=nombre_visible,
+        )
+    except ValueError as error:
+        raise HTTPException(
+            status_code=400,
+            detail=str(error),
+        ) from error
+
+    registrar_evento(
+        level="INFO",
+        event="dev.profile.updated",
+        component="security.developer",
+        outcome="success",
+        metadata={
+            "operation": "profile.update",
+            "actor_role": usuario.rol.value,
+        },
+    )
+
+    return RedirectResponse(
+        url="/dev/perfil?perfil=actualizado",
+        status_code=303,
+    )
+
+
+@app.post(
+    "/dev/perfil/avatar",
+)
+async def actualizar_avatar_perfil_developer(
+    request: Request,
+    csrf_token: str = Form(...),
+    avatar: UploadFile = File(...),
+):
+    """Valida y reemplaza la imagen de perfil de la cuenta autenticada."""
+
+    usuario = _requerir_permiso_developer(
+        request,
+        PermisoDeveloper.PERFIL_EDITAR_PROPIO,
+    )
+
+    _validar_csrf_developer(
+        request,
+        csrf_token,
+    )
+
+    permitidos = {
+        "image/jpeg",
+        "image/png",
+        "image/webp",
+    }
+
+    if (
+        avatar.content_type
+        and avatar.content_type.lower()
+        not in permitidos
+    ):
+        raise HTTPException(
+            status_code=400,
+            detail=(
+                "La foto debe ser PNG, JPEG o WebP."
+            ),
+        )
+
+    try:
+        contenido = await avatar.read(
+            MAX_AVATAR_BYTES + 1
+        )
+    finally:
+        await avatar.close()
+
+    anterior = usuario.avatar_relativo
+    nueva_referencia = None
+
+    try:
+        nueva_referencia = guardar_avatar_developer(
+            identificador=usuario.identificador,
+            contenido=contenido,
+        )
+
+        actualizar_avatar_usuario(
+            identificador=usuario.identificador,
+            avatar_relativo=nueva_referencia,
+        )
+    except ValueError as error:
+        if nueva_referencia:
+            eliminar_avatar_developer(
+                nueva_referencia
+            )
+
+        raise HTTPException(
+            status_code=400,
+            detail=str(error),
+        ) from error
+    except Exception:
+        if nueva_referencia:
+            eliminar_avatar_developer(
+                nueva_referencia
+            )
+
+        raise
+
+    if (
+        anterior
+        and anterior != nueva_referencia
+    ):
+        eliminar_avatar_developer(
+            anterior
+        )
+
+    registrar_evento(
+        level="INFO",
+        event="dev.profile.avatar.updated",
+        component="security.developer",
+        outcome="success",
+        metadata={
+            "operation": "profile.avatar.update",
+            "actor_role": usuario.rol.value,
+        },
+    )
+
+    return RedirectResponse(
+        url="/dev/perfil?avatar=actualizado",
+        status_code=303,
+    )
+
+
+@app.post(
+    "/dev/perfil/avatar/eliminar",
+)
+async def eliminar_avatar_perfil_developer(
+    request: Request,
+    csrf_token: str = Form(...),
+):
+    """Elimina la imagen personalizada de la cuenta autenticada."""
+
+    usuario = _requerir_permiso_developer(
+        request,
+        PermisoDeveloper.PERFIL_EDITAR_PROPIO,
+    )
+
+    _validar_csrf_developer(
+        request,
+        csrf_token,
+    )
+
+    anterior = usuario.avatar_relativo
+
+    actualizar_avatar_usuario(
+        identificador=usuario.identificador,
+        avatar_relativo=None,
+    )
+
+    eliminar_avatar_developer(
+        anterior
+    )
+
+    registrar_evento(
+        level="INFO",
+        event="dev.profile.avatar.removed",
+        component="security.developer",
+        outcome="success",
+        metadata={
+            "operation": "profile.avatar.remove",
+            "actor_role": usuario.rol.value,
+        },
+    )
+
+    return RedirectResponse(
+        url="/dev/perfil?avatar=eliminado",
+        status_code=303,
+    )
+
+
+@app.get(
+    "/dev/perfil/avatar/{identificador}",
+    include_in_schema=False,
+)
+async def obtener_avatar_perfil_developer(
+    request: Request,
+    identificador: str,
+):
+    """Entrega un avatar únicamente dentro de una sesión Developer válida."""
+
+    solicitante = _obtener_usuario_sesion_web(
+        request
+    )
+
+    if solicitante is None:
+        raise HTTPException(
+            status_code=401,
+            detail="Sesión Developer requerida.",
+        )
+
+    objetivo = obtener_usuario_por_id(
+        identificador
+    )
+
+    if objetivo is None:
+        raise HTTPException(
+            status_code=404,
+            detail="La cuenta Developer no existe.",
+        )
+
+    puede_ver_otros = rol_tiene_permiso(
+        solicitante.rol,
+        PermisoDeveloper.USUARIOS_LEER,
+    )
+
+    if (
+        objetivo.identificador
+        != solicitante.identificador
+        and not puede_ver_otros
+    ):
+        raise HTTPException(
+            status_code=403,
+            detail="La cuenta no puede consultar este perfil.",
+        )
+
+    ruta = resolver_avatar_developer(
+        objetivo.avatar_relativo
+    )
+
+    if (
+        ruta is None
+        or not ruta.is_file()
+    ):
+        raise HTTPException(
+            status_code=404,
+            detail="La cuenta no tiene foto de perfil.",
+        )
+
+    media_type = {
+        ".png": "image/png",
+        ".jpg": "image/jpeg",
+        ".webp": "image/webp",
+    }.get(
+        ruta.suffix.lower(),
+        "application/octet-stream",
+    )
+
+    return FileResponse(
+        path=ruta,
+        media_type=media_type,
+        headers={
+            "Cache-Control": "no-store",
+        },
+    )
+
+
+@app.post(
     "/dev/perfil/password",
 )
 async def cambiar_password_perfil_developer(
@@ -871,6 +1163,10 @@ async def procesar_login_administrativo(
             error="Usuario o contraseña incorrectos.",
             status_code=401,
         )
+
+    cuenta = registrar_acceso_usuario(
+        identificador=cuenta.identificador,
+    )
 
     sesion = crear_sesion_admin(
         usuario_id=cuenta.identificador,
@@ -1222,6 +1518,19 @@ def _requerir_permiso_developer(
             detail="Sesión Developer requerida.",
         )
 
+    if (
+        usuario.debe_cambiar_password
+        and request.url.path
+        != "/dev/perfil/password"
+    ):
+        raise HTTPException(
+            status_code=403,
+            detail=(
+                "Debes cambiar la contraseña temporal "
+                "antes de continuar."
+            ),
+        )
+
     if not rol_tiene_permiso(
         usuario.rol,
         permiso,
@@ -1331,6 +1640,17 @@ def _contexto_developer(
             if usuario is not None
             else None
         ),
+        "dev_avatar_url": (
+            (
+                "/dev/perfil/avatar/"
+                + usuario.identificador
+            )
+            if (
+                usuario is not None
+                and usuario.avatar_relativo
+            )
+            else None
+        ),
         "dev_rol_etiqueta": (
             etiquetas_rol.get(
                 usuario.rol.value,
@@ -1390,18 +1710,12 @@ def _render_pagina_developer_autenticada(
         )
 
     if (
-        permiso is not None
-        and not rol_tiene_permiso(
-            usuario.rol,
-            permiso,
-        )
+        usuario.debe_cambiar_password
+        and pagina_activa != "perfil"
     ):
-        raise HTTPException(
-            status_code=403,
-            detail=(
-                "La cuenta Developer no tiene permiso "
-                "para acceder a esta sección."
-            ),
+        return RedirectResponse(
+            url="/dev/perfil?cambio_password=obligatorio",
+            status_code=303,
         )
 
     if (

@@ -341,6 +341,10 @@ El siguiente inventario se deriva de los decoradores vigentes en `app/main.py`. 
 | `/dev/mantenimiento/limpiar-sesiones` |
 | `/dev/mantenimiento/revocar-sesiones` |
 | `/dev/perfil` |
+| `/dev/perfil/datos` |
+| `/dev/perfil/avatar` |
+| `/dev/perfil/avatar/eliminar` |
+| `/dev/perfil/avatar/{identificador}` |
 | `/dev/perfil/password` |
 | `/dev/privacidad` |
 | `/como-se-calcula` |
@@ -526,6 +530,10 @@ Las operaciones humanas con efecto utilizan POST y se autorizan en servidor medi
 
 - `/dev/mantenimiento/limpiar-sesiones`: operación POST no destructiva que depura sesiones ya expiradas.
 - `/dev/mantenimiento/revocar-sesiones`: operación POST destructiva protegida por RBAC, CSRF, revalidación y confirmación.
+- `/dev/perfil/datos`: actualización POST del nombre visible propio con sesión, RBAC y CSRF.
+- `/dev/perfil/avatar`: carga o reemplazo POST de la foto de perfil con validación de formato, tamaño y CSRF.
+- `/dev/perfil/avatar/eliminar`: eliminación POST de la foto personalizada de la cuenta autenticada.
+- `/dev/perfil/avatar/{identificador}`: lectura autenticada de la foto de perfil, limitada por identidad o permiso `users.read`.
 - `/dev/perfil/password`: cambio POST de contraseña propia con revocación de sesiones.
 
 Los formularios autenticados incluyen un token CSRF ligado a la sesión en memoria. Las operaciones críticas requieren además revalidación de la contraseña humana.

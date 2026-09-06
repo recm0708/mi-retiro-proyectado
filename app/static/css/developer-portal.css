@@ -1460,3 +1460,21 @@
 .dev-password-toggle svg[hidden] {
   display: none;
 }
+
+
+/* Imagen de perfil Developer. */
+
+.dev-avatar {
+  overflow: hidden;
+}
+
+.dev-avatar img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.dev-profile-photo-management {
+  max-width: 36rem;
+}

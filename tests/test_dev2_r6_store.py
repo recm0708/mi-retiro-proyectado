@@ -3,9 +3,11 @@
 from __future__ import annotations
 
 from pathlib import Path
+import os
 import sqlite3
 from tempfile import TemporaryDirectory
 import unittest
+from unittest.mock import patch
 
 from app.core.developer_identity import (
     RolDeveloper,
@@ -13,13 +15,25 @@ from app.core.developer_identity import (
     hashear_codigo_recuperacion,
     hashear_password,
 )
+from app.core.developer_avatar import (
+    directorio_avatares_developer,
+    eliminar_avatar_developer,
+    guardar_avatar_developer,
+    resolver_avatar_developer,
+    ruta_media_developer,
+)
 from app.core.developer_store import (
+    actualizar_avatar_usuario,
+    actualizar_nombre_visible_usuario,
+    cambiar_estado_usuario,
     cambiar_rol_usuario,
     contar_propietarios,
     crear_propietario,
     crear_usuario_developer,
     inicializar_almacen_developer,
+    listar_usuarios_developer,
     obtener_usuario_por_login,
+    registrar_acceso_usuario,
 )
 
 
@@ -318,6 +332,228 @@ class TestDev2R6DeveloperStore(unittest.TestCase):
             )
 
 
+    def test_perfil_actualiza_nombre_avatar_y_listado(self):
+        with TemporaryDirectory() as temp:
+            ruta = self._ruta(temp)
+
+            self._crear_propietario(
+                ruta
+            )
+
+            operador = crear_usuario_developer(
+                actor_rol=RolDeveloper.PROPIETARIO,
+                usuario="perfil01",
+                nombre_visible="Perfil Uno",
+                rol=RolDeveloper.OPERADOR,
+                password_hash=hashear_password(
+                    "MRP-Perfil-Uno!2026"
+                ),
+                ruta=ruta,
+            )
+
+            actualizado = actualizar_nombre_visible_usuario(
+                identificador=operador.identificador,
+                nombre_visible="Perfil Actualizado",
+                ruta=ruta,
+            )
+
+            self.assertEqual(
+                "Perfil Actualizado",
+                actualizado.nombre_visible,
+            )
+
+            avatar = actualizar_avatar_usuario(
+                identificador=operador.identificador,
+                avatar_relativo="avatars/prueba.png",
+                ruta=ruta,
+            )
+
+            self.assertEqual(
+                "avatars/prueba.png",
+                avatar.avatar_relativo,
+            )
+
+            usuarios = listar_usuarios_developer(
+                ruta
+            )
+
+            self.assertEqual(
+                2,
+                len(usuarios),
+            )
+
+            self.assertTrue(
+                usuarios[0].es_propietario
+            )
+
+
+    def test_media_avatar_admite_raiz_persistente_configurable(self):
+        with TemporaryDirectory() as temp:
+            raiz = (
+                Path(temp)
+                / "media-persistente"
+            )
+
+            almacen = (
+                Path(temp)
+                / "store"
+                / "portal.sqlite3"
+            )
+
+            with patch.dict(
+                os.environ,
+                {
+                    "MRP_DEVELOPER_MEDIA_DIR": str(
+                        raiz
+                    ),
+                },
+                clear=False,
+            ):
+                self.assertEqual(
+                    raiz.resolve(),
+                    ruta_media_developer(
+                        almacen
+                    ),
+                )
+
+                self.assertEqual(
+                    (
+                        raiz
+                        / "avatars"
+                    ).resolve(),
+                    directorio_avatares_developer(
+                        almacen
+                    ),
+                )
+
+                referencia = guardar_avatar_developer(
+                    identificador="persistente01",
+                    contenido=(
+                        b"\x89PNG\r\n\x1a\n"
+                        b"avatar-persistente"
+                    ),
+                    ruta_almacen=almacen,
+                )
+
+                self.assertEqual(
+                    "avatars",
+                    Path(
+                        referencia
+                    ).parts[0],
+                )
+
+                self.assertTrue(
+                    (
+                        raiz
+                        / referencia
+                    ).is_file()
+                )
+
+
+    def test_avatar_local_valida_ruta_y_formato(self):
+        with TemporaryDirectory() as temp:
+            ruta = self._ruta(temp)
+
+            referencia = guardar_avatar_developer(
+                identificador="usuario01",
+                contenido=(
+                    b"\x89PNG\r\n\x1a\n"
+                    b"contenido-prueba"
+                ),
+                ruta_almacen=ruta,
+            )
+
+            destino = resolver_avatar_developer(
+                referencia,
+                ruta,
+            )
+
+            self.assertIsNotNone(
+                destino
+            )
+
+            self.assertTrue(
+                destino.is_file()
+            )
+
+            eliminar_avatar_developer(
+                referencia,
+                ruta,
+            )
+
+            self.assertFalse(
+                destino.exists()
+            )
+
+
+    def test_estado_cuenta_incrementa_revision_y_protege_owner(self):
+        with TemporaryDirectory() as temp:
+            ruta = self._ruta(temp)
+
+            propietario = self._crear_propietario(
+                ruta
+            )
+
+            operador = crear_usuario_developer(
+                actor_rol=RolDeveloper.PROPIETARIO,
+                usuario="estado01",
+                nombre_visible="Estado Uno",
+                rol=RolDeveloper.OPERADOR,
+                password_hash=hashear_password(
+                    "MRP-Estado-Uno!2026"
+                ),
+                ruta=ruta,
+            )
+
+            desactivado = cambiar_estado_usuario(
+                actor_rol=RolDeveloper.ADMINISTRADOR,
+                identificador=operador.identificador,
+                activo=False,
+                ruta=ruta,
+            )
+
+            self.assertFalse(
+                desactivado.activo
+            )
+
+            self.assertEqual(
+                operador.revision_seguridad + 1,
+                desactivado.revision_seguridad,
+            )
+
+            with self.assertRaises(
+                PermissionError
+            ):
+                cambiar_estado_usuario(
+                    actor_rol=RolDeveloper.PROPIETARIO,
+                    identificador=propietario.identificador,
+                    activo=False,
+                    ruta=ruta,
+                )
+
+
+    def test_login_correcto_registra_ultimo_acceso(self):
+        with TemporaryDirectory() as temp:
+            ruta = self._ruta(temp)
+
+            propietario = self._crear_propietario(
+                ruta
+            )
+
+            self.assertIsNone(
+                propietario.ultimo_acceso_utc
+            )
+
+            actualizado = registrar_acceso_usuario(
+                identificador=propietario.identificador,
+                ruta=ruta,
+            )
+
+            self.assertIsNotNone(
+                actualizado.ultimo_acceso_utc
+            )
+
+
     def test_esquema_previo_migra_revision_seguridad(self):
         """Una base R6 inicial previa recibe security_version sin perderse."""
 
@@ -364,6 +600,57 @@ class TestDev2R6DeveloperStore(unittest.TestCase):
             self.assertIn(
                 "security_version",
                 columnas,
+            )
+
+
+    def test_media_developer_permanece_fuera_de_git(self):
+        """Los medios personales Developer permanecen fuera del repositorio."""
+
+        raiz = Path(
+            __file__
+        ).resolve().parents[1]
+
+        gitignore = (
+            raiz
+            / ".gitignore"
+        ).read_text(
+            encoding="utf-8"
+        )
+
+        self.assertIn(
+            "data/developer/",
+            gitignore,
+        )
+
+        with patch.dict(
+            os.environ,
+            {},
+            clear=False,
+        ):
+            os.environ.pop(
+                "MRP_DEVELOPER_MEDIA_DIR",
+                None,
+            )
+
+            almacen = (
+                raiz
+                / "data"
+                / "developer"
+                / "portal.sqlite3"
+            )
+
+            esperado = (
+                raiz
+                / "data"
+                / "developer"
+                / "media"
+            ).resolve()
+
+            self.assertEqual(
+                esperado,
+                ruta_media_developer(
+                    almacen
+                ),
             )
 
 
