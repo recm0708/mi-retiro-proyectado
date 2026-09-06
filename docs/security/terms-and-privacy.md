@@ -12,6 +12,10 @@
 
 Este documento describe las condiciones funcionales actualmente implementadas. No constituye una certificación jurídica ni una resolución de la CSS.
 
+Su alcance corresponde exclusivamente a la aplicación principal de simulación
+y a las funciones públicas utilizadas por Asegurados(as). Las superficies
+administrativas internas se rigen por controles y documentación separados.
+
 ## 1. Objeto
 
 Mi Retiro Proyectado es una herramienta independiente para estimar, explicar y comparar escenarios previsionales.
@@ -36,19 +40,30 @@ Contacto: `ruben.canizares@outlook.com`
 
 ## 4. Uso de datos
 
-La aplicación puede tratar datos personales/previsionales proporcionados manualmente o detectados en documentos seleccionados voluntariamente.
+La aplicación puede utilizarse en modalidad Manual o Asistida.
 
-Los identificadores directos son opcionales para las fórmulas principales.
+En modalidad Manual, el Asegurado(a) introduce y revisa directamente los datos.
+En modalidad Asistida puede seleccionar voluntariamente Mi Retiro Seguro,
+Ficha Digital o ambos para preparar información compatible con la simulación.
+
+Los identificadores directos continúan siendo opcionales para las fórmulas
+principales.
 
 ## 5. Importación
 
-La extracción automática puede contener errores.
+Los PDF seleccionados se procesan temporalmente para extraer información y
+generar una vista previa.
 
 Por ello:
 
-- se presenta vista previa;
-- el usuario puede revisar/corregir;
-- los datos se aplican solo tras confirmación.
+- el usuario revisa los datos detectados;
+- puede corregirlos cuando corresponda;
+- los datos se aplican solo tras confirmación explícita;
+- el **archivo original no se guarda** como parte de la simulación;
+- no se conserva la ruta local ni el contenido binario del PDF.
+
+Después de confirmar puede mantenerse durante la sesión metadata mínima de
+continuidad, como el nombre visible del documento y los datos aceptados.
 
 ## 6. Consentimiento
 
@@ -60,9 +75,12 @@ Una aceptación activa está versionada y vinculada a la sesión actual además 
 
 ## 7. Conservación
 
-La simulación se conserva temporalmente en el navegador.
+La simulación se conserva temporalmente en la sesión de la pestaña del
+navegador.
 
-La versión actual no dispone de cuentas de Asegurado(a) ni base de datos permanente de simulaciones. El Portal Developer sí utiliza cuentas administrativas locales separadas, que no almacenan la simulación previsional.
+La aplicación principal no dispone de cuentas de Asegurado(a), base de datos
+permanente de simulaciones, sincronización remota ni nube del proyecto para
+conservar un historial personal de simulaciones.
 
 ## 8. Control local
 
@@ -92,11 +110,20 @@ La precisión depende de:
 - parámetros normativos versionados;
 - limitaciones del modelo.
 
-## 11. Datos no confirmados
+## 11. Datos no confirmados, decisiones y cambio de modalidad
 
-Cuando el motor requiere un dato individual que no puede inferirse con seguridad, debe quedar pendiente o solicitarse explícitamente.
+El modo Asistido prepara datos compatibles, pero **no decide por el
+Asegurado(a)**. Cuando el motor requiere una decisión personal o un dato
+individual que no puede inferirse con seguridad, debe quedar pendiente o
+solicitarse explícitamente.
 
-No se inventan saldos o parámetros actuariales personales.
+Si el usuario cambia a modalidad Manual después de una importación confirmada,
+la aplicación advierte antes de retirar los **datos que proceden de documentos**
+y reiniciar los cálculos posteriores que dependan de ellos. Los
+**datos personales introducidos manualmente** que no procedan de documentos
+pueden conservarse.
+
+No se inventan saldos, decisiones o parámetros actuariales personales.
 
 ## 12. Terceros y conexiones
 
@@ -106,9 +133,15 @@ El backend puede consultar la fecha HTTP de infraestructura oficial CSS para vig
 
 Estas conexiones se describen en `privacy-policy.md` y `security-and-privacy.md`.
 
-## 13. Cookies y seguimiento
+## 13. Cookies y seguimiento de la aplicación principal
 
-Mi Retiro Proyectado no implementa cookies propias de publicidad, analítica, seguimiento o perfilado. La superficie administrativa puede crear `mrp_admin_session`, una cookie técnica `HttpOnly` para una sesión Developer temporal vinculada a una identidad administrativa local; no se utiliza para la simulación ni para seguimiento comercial.
+La aplicación principal no utiliza cookies propias para publicidad, analítica,
+seguimiento o perfilado. El navegador puede conservar preferencias de
+funcionamiento y la constancia versionada de aceptación, mientras que la
+simulación previsional permanece limitada al estado temporal de la sesión.
+
+Si cambia materialmente este modelo, los términos deberán revisarse antes de
+habilitar la nueva finalidad o mecanismo.
 
 ## 14. Derechos
 

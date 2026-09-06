@@ -872,9 +872,6 @@
 }
 
 @media (max-width: 767.98px) {
-  .dev-topbar {
-  }
-
   .dev-brand-copy strong {
     font-size: .86rem;
   }
@@ -1103,37 +1100,6 @@
     transform .22s cubic-bezier(.2, .8, .2, 1);
 }
 
-/* Cambio de página */
-
-.dev-main > section {
-  animation:
-    dev-page-enter
-    .3s
-    cubic-bezier(.2, .8, .2, 1)
-    both;
-}
-
-.dev-main > section:nth-child(2) {
-  animation-delay: .035s;
-}
-
-.dev-main > section:nth-child(3) {
-  animation-delay: .065s;
-}
-
-@keyframes dev-page-enter {
-  from {
-    opacity: 0;
-    transform: translateY(7px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-
 /* Tarjetas */
 
 .dev-main .card {
@@ -1203,21 +1169,6 @@
 
 .dev-portal-body .badge:hover {
   transform: translateY(-1px);
-}
-
-
-/* Accesibilidad */
-
-@media (prefers-reduced-motion: reduce) {
-  .dev-portal-body *,
-  .dev-portal-body *::before,
-  .dev-portal-body *::after {
-    scroll-behavior: auto !important;
-    animation-duration: .01ms !important;
-    animation-delay: 0s !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: .01ms !important;
-  }
 }
 
 

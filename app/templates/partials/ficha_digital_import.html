@@ -32,7 +32,15 @@
             id="import-ficha-digital-pdf"
             class="form-control official-import-file-input"
             accept=".pdf,application/pdf"
+            aria-describedby="ayuda-import-ficha-digital-pdf"
           >
+          <small
+            id="ayuda-import-ficha-digital-pdf"
+            class="form-text d-block mt-2"
+          >
+            Revisa la vista previa antes de continuar. Los salarios solo se
+            incorporan cuando confirmas «Importar datos».
+          </small>
         </div>
         <div class="official-import-upload-action">
           <span class="form-label fw-semibold" aria-hidden="true">2. Analiza el documento</span>
@@ -40,6 +48,7 @@
             type="button"
             id="btn-analizar-ficha-digital-importacion"
             class="btn btn-outline-primary"
+            aria-controls="estado-ficha-digital-importacion modal-vigencia-ficha-digital modal-import-ficha-digital"
             disabled
           >
             Analizar documento
@@ -61,6 +70,11 @@
       </div>
     </div>
 
+    <p class="official-import-policy-link mb-0 mt-3">
+      <a href="/metodologia#privacidad-datos">
+        Consulta cómo protegemos y utilizamos tus datos.
+      </a>
+    </p>
   </div>
 </div>
 

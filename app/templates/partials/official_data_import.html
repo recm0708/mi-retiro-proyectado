@@ -16,12 +16,30 @@
       <div class="official-import-upload-grid">
         <div class="official-import-upload-file">
           <label for="import-comprobante-pdf" class="form-label fw-semibold">1. Selecciona el documento</label>
-          <input type="file" id="import-comprobante-pdf" class="form-control official-import-file-input"
-                 accept=".pdf,application/pdf">
+          <input
+            type="file"
+            id="import-comprobante-pdf"
+            class="form-control official-import-file-input"
+            accept=".pdf,application/pdf"
+            aria-describedby="ayuda-import-comprobante-pdf"
+          >
+          <small
+            id="ayuda-import-comprobante-pdf"
+            class="form-text d-block mt-2"
+          >
+            Revisa la vista previa antes de continuar. Ningún dato se incorpora
+            hasta que confirmas «Importar datos».
+          </small>
         </div>
         <div class="official-import-upload-action">
           <span class="form-label fw-semibold" aria-hidden="true">2. Analiza el documento</span>
-          <button type="button" id="btn-analizar-comprobante-importacion" class="btn btn-outline-primary" disabled>
+          <button
+            type="button"
+            id="btn-analizar-comprobante-importacion"
+            class="btn btn-outline-primary"
+            aria-controls="estado-comprobante-importacion modal-import-comprobante"
+            disabled
+          >
             Analizar documento
           </button>
         </div>
