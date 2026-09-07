@@ -698,7 +698,7 @@ python -m pip check
 
 ## 3. Inventario actual de pruebas
 
-Inventario vigente: **205 módulos**.
+Inventario vigente: **206 módulos**.
 
 - `tests/test_accessibility_themes.py`
 - `tests/test_accessibility_ux4.py`
@@ -895,6 +895,7 @@ Inventario vigente: **205 módulos**.
 - `tests/test_ux6_r5_r6_public_terms_final.py`
 - `tests/test_ux6_r5_r6_seguro_cleanup.py`
 - `tests/test_ux6_r7_documentation_closure.py`
+- `tests/test_ux6_r8_integral_hardening.py`
 - `tests/test_ver2_documentacion_vigente.py`
 - `tests/test_ver2_ledger_estructurado.py`
 - `tests/test_ver2_r1_reconciliacion_post_doc1.py`

@@ -303,7 +303,7 @@ desactivación, degradación de rol o promoción de otra cuenta a Owner.
 | `MRP_ADMIN_TOKEN` | sin valor | Compatibilidad para el contrato técnico Bearer legado. |
 | `MRP_ADMIN_SESSION_MINUTES` | `30` | Tiempo máximo de inactividad de una sesión administrativa. |
 | `MRP_ADMIN_SESSION_MAX_HOURS` | `8` | Duración absoluta máxima de una sesión administrativa. |
-| `MRP_ADMIN_MAX_SESSIONS` | `5` | Límite configurable de sesiones administrativas activas. |
+| `MRP_ADMIN_MAX_SESSIONS` | `5` | Límite configurable de sesiones simultáneas por cuenta; una sesión adicional revoca la más antigua de esa misma cuenta. |
 | `MRP_ADMIN_COOKIE_SECURE` | desactivado | Debe habilitarse cuando el Portal Developer se sirve mediante HTTPS. |
 | `MRP_ADMIN_COOKIE_SAMESITE` | `lax` | Política `SameSite` de la cookie `mrp_admin_session`. |
 | `MRP_DEVELOPER_STORE_PATH` | `data/developer/portal.sqlite3` | Ubicación del almacén SQLite administrativo local. |

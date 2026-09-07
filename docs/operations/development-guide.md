@@ -168,6 +168,15 @@ Configuración de sesión:
 | `MRP_ADMIN_COOKIE_SAMESITE` | `lax` |
 | `MRP_ADMIN_COOKIE_SECURE` | desactivado |
 
+El límite `MRP_ADMIN_MAX_SESSIONS` se aplica **por cuenta**. Al abrir
+una sesión adicional sobre el máximo permitido, el Portal Developer conserva
+la sesión nueva, revoca la más antigua de esa misma identidad y muestra un
+aviso. Las sesiones de otras cuentas no se cierran por ese límite.
+
+La cookie `mrp_admin_session` utiliza como vida máxima del navegador la
+duración absoluta `MRP_ADMIN_SESSION_MAX_HOURS`; el servidor continúa
+aplicando en paralelo la inactividad `MRP_ADMIN_SESSION_MINUTES`.
+
 La lista completa de rutas, variables y responsabilidades se mantiene en
 `docs/architecture/development-center.md`.
 
@@ -262,7 +271,10 @@ Python.
 
 ## 17. Favicon e iconos
 
-Mientras no exista el paquete gráfico definitivo, `/favicon.ico` puede responder 204 conforme a la implementación actual.
+La familia gráfica oficial está integrada bajo `app/static/img/brand/`.
+`/favicon.ico` entrega el favicon oficial y las plantillas App/Developer
+declaran explícitamente sus variantes versionadas. La respuesta temporal
+`204 No Content` quedó retirada al cumplirse la condición de ADR-060.
 
 ## 18. Entorno y herramientas de desarrollo
 

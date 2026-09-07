@@ -19,13 +19,20 @@ class TestMantenimientoTecnico(unittest.TestCase):
 
         self.assertIn("* text=auto eol=lf", contenido)
 
-    def test_favicon_temporal_no_genera_404(self):
+    def test_favicon_oficial_se_entrega_desde_la_ruta_estandar(self):
         cliente = TestClient(app)
         respuesta = cliente.get("/favicon.ico")
 
-        self.assertEqual(respuesta.status_code, 204)
-        self.assertEqual(respuesta.content, b"")
-        self.assertEqual(respuesta.headers.get("cache-control"), "no-store")
+        self.assertEqual(respuesta.status_code, 200)
+        self.assertGreater(len(respuesta.content), 0)
+        self.assertEqual(
+            respuesta.headers.get("content-type"),
+            "image/x-icon",
+        )
+        self.assertIn(
+            "max-age=86400",
+            respuesta.headers.get("cache-control", ""),
+        )
 
 
 if __name__ == "__main__":

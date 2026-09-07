@@ -102,8 +102,6 @@
   }
 
   function iniciarSidebar() {
-    const MOBILE_QUERY = "(max-width: 991.98px)";
-
     const STORAGE_KEY = (
       "miRetiroProyectado.shell.sidebar"
     );

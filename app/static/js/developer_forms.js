@@ -340,7 +340,7 @@
   }
 })();
 
-/* correccion final de foco de validacion */
+/* Refuerza el foco del primer control inválido en validaciones dinámicas. */
 (() => {
   const RESULTADOS_CON_ERROR = new Set([
     "revalidacion-invalida",

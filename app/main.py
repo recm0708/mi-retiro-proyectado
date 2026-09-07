@@ -28,6 +28,7 @@ from app.core.config import (
     ADMIN_COOKIE_SECURE,
     ADMIN_COOKIE_SAMESITE,
     ADMIN_SESSION_MINUTES,
+    ADMIN_SESSION_MAX_HOURS,
 )
 
 from fastapi import FastAPI, File, Form, HTTPException, Request, UploadFile
@@ -390,13 +391,20 @@ templates.env.globals.update(
     "/favicon.ico",
     include_in_schema=False,
 )
-async def favicon_temporal():
-    """Evita un 404 mientras se integra el favicon definitivo."""
+async def favicon_aplicacion():
+    """Entrega el favicon oficial de la aplicación."""
 
-    return Response(
-        status_code=204,
+    return FileResponse(
+        path=(
+            BASE_DIR
+            / "static"
+            / "img"
+            / "brand"
+            / "favicon.ico"
+        ),
+        media_type="image/x-icon",
         headers={
-            "Cache-Control": "no-store",
+            "Cache-Control": "public, max-age=86400",
         },
     )
 
@@ -1911,6 +1919,16 @@ async def procesar_login_administrativo(
         ),
     )
 
+    sesion_info = obtener_sesion_admin(
+        sesion,
+        actualizar_actividad=False,
+    )
+
+    limite_sesiones_aplicado = bool(
+        sesion_info is not None
+        and sesion_info.sesiones_cerradas_por_limite > 0
+    )
+
     registrar_evento(
         level="INFO",
         event="admin.login.granted",
@@ -1924,7 +1942,11 @@ async def procesar_login_administrativo(
     )
 
     respuesta = RedirectResponse(
-        url="/dev",
+        url=(
+            "/dev?sesion=limite"
+            if limite_sesiones_aplicado
+            else "/dev"
+        ),
         status_code=303,
     )
     respuesta.set_cookie(
@@ -1933,7 +1955,7 @@ async def procesar_login_administrativo(
         httponly=True,
         samesite=ADMIN_COOKIE_SAMESITE,
         secure=ADMIN_COOKIE_SECURE,
-        max_age=ADMIN_SESSION_MINUTES * 60,
+        max_age=ADMIN_SESSION_MAX_HOURS * 60 * 60,
         path="/dev",
     )
     return respuesta

@@ -232,15 +232,21 @@ Las sesiones administrativas aplican:
 
 - inactividad configurable mediante `MRP_ADMIN_SESSION_MINUTES`;
 - duración absoluta configurable mediante `MRP_ADMIN_SESSION_MAX_HOURS`;
-- límite configurable mediante `MRP_ADMIN_MAX_SESSIONS`;
+- límite configurable por cuenta mediante `MRP_ADMIN_MAX_SESSIONS`;
 - política `SameSite` configurable mediante `MRP_ADMIN_COOKIE_SAMESITE`;
 - atributo `Secure` configurable mediante `MRP_ADMIN_COOKIE_SECURE`.
+
+La cookie Developer conserva como `Max-Age` la duración absoluta
+configurada de la sesión. La inactividad se controla en servidor y se renueva
+con la actividad válida; por tanto, el límite de inactividad no sustituye la
+duración absoluta.
 
 Los valores predeterminados del entorno local son:
 
 - 30 minutos de inactividad;
 - 8 horas de duración absoluta;
-- máximo de 5 sesiones;
+- máximo de 5 sesiones simultáneas por cuenta; una sesión adicional
+  revoca la más antigua de esa misma cuenta;
 - `SameSite=lax`;
 - `Secure` desactivado para localhost sin HTTPS.
 

@@ -3,6 +3,16 @@
 {% block title %}Resumen · Portal Developer · {{ app_name }}{% endblock %}
 
 {% block content %}
+{% if request.query_params.get("sesion") == "limite" %}
+<div class="container-fluid pt-3">
+  <div class="alert alert-warning mb-0" role="status">
+    Se alcanzó el límite de sesiones simultáneas de tu cuenta.
+    Se cerró automáticamente la sesión más antigua y esta sesión
+    permanece activa.
+  </div>
+</div>
+{% endif %}
+
 <section class="dev-home-hero">
   <div class="dev-home-hero-copy">
     <span class="dev-kicker">
@@ -106,6 +116,7 @@
       </a>
     </article>
 
+    {% if "maintenance.read" in dev_permisos %}
     <article class="dev-home-card">
       <span class="dev-kicker">Operación</span>
       <h3>Mantenimiento</h3>
@@ -119,6 +130,7 @@
         Abrir mantenimiento
       </a>
     </article>
+    {% endif %}
 
     <article class="dev-home-card">
       <span class="dev-kicker">Protección</span>
