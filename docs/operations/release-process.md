@@ -1,7 +1,7 @@
 # Proceso de release
 
 **Estado:** Vigente
-**Versión de aplicación:** `0.1.20.01-beta` — G120/E01 aceptado/publicado; UX.6 mantiene G121/E01 (`0.1.21.01-beta`) reservado/no aceptado, con R7 activo y R8 pendiente.
+**Versión de aplicación:** `0.1.21.01-beta` — G121/E01 materializado para UX.6 R8 en PR #124; G120/E01 permanece publicado y PERSIST.1 R1 queda reservado como G122/E01.
 **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
 **Último tag formal legacy:** `v0.0.26-beta`
 **Versión base histórica preservada:** `0.0.23-beta`
@@ -12,12 +12,13 @@
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado de publicación vigente
 
-- `VERSION` materializa G120/E01 (`0.1.20.01-beta`) para UX.5 R6.
-- G120/E01 está publicado mediante `v0.1.20.01-beta` y GitHub Release.
-- G121/E01 (`0.1.21.01-beta`) está reservado para UX.6 pero no aceptado.
-- R1–R6 están implementados; R7 reconcilia documentación y R8 mantiene gate,
-  aceptación, promoción y eventual tag pendientes.
+- `VERSION` materializa G121/E01 (`0.1.21.01-beta`) para UX.6 R8.
+- UX.6 R1–R8 consumen un único estado con ordinal E01.
+- G120/E01 permanece publicado mediante `v0.1.20.01-beta`.
+- PR #124 integra/promueve G121/E01.
+- G122/E01 (`0.1.22.01-beta`) queda reservado para PERSIST.1 R1 sin iniciar.
 - La automatización no crea ni firma tags.
+- `v0.1.21.01-beta` solo se crea después de merge y revalidación.
 - Un Release incompatible falla cerrado y solo HTTP 404 autoriza creación.
 <!-- DOC1-R1-POST-MANT1:END -->
 

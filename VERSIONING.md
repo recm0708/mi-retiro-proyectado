@@ -9,15 +9,12 @@
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado revision-aware vigente
 
-- `VERSION` contiene `0.1.20.01-beta` y materializa G120/E01 para UX.5 R6.
-- G120/E01 está publicado mediante el tag firmado `v0.1.20.01-beta`.
-- G121/E01 (`0.1.21.01-beta`) permanece reservado para UX.6 y no está
-  consumido.
-- UX.6 abrió el candidato en R1; R1–R6 son revisiones internas, R7 realiza
-  la reconciliación documental y R8 conserva aceptación/promoción final.
-- PERSIST.1 permanece posterior y sin Global preasignado.
-- PR, squash, tag o Release que materializan el mismo estado no consumen otro
-  Global.
+- `VERSION` contiene `0.1.21.01-beta` y materializa G121/E01 para UX.6 R8.
+- UX.6 R1–R8 consumen un único estado con `functional_revision=R8` y ordinal E01.
+- G120/E01 permanece publicado mediante `v0.1.20.01-beta`.
+- PERSIST.1 R1 queda reservado como G122/E01 (`0.1.22.01-beta`) y no se inicia.
+- UX.7 continúa como revisión visual final no bloqueante.
+- PR, squash, tag o Release que materializan el mismo estado no consumen otro Global.
 <!-- DOC1-R1-POST-MANT1:END -->
 
 ## 1. Objetivo

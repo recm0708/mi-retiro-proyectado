@@ -1,13 +1,13 @@
 # Validación
 
 **Estado:** Vigente
-**Versión revisada:** `0.1.20.01-beta` — G120/E01 publicado; UX.6 mantiene G121/E01 reservado/no aceptado, R7 activo y R8 pendiente.
+**Versión revisada:** `0.1.21.01-beta` — G121/E01 materializado para UX.6 R8 en PR #124.
 **Versión base histórica:** `0.0.25-beta`
 **Base documental histórica:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal histórica preservada:** UX.4.6e R8 — validación funcional y procedencia editable — 2026-08-19
 **Última revisión transversal:** UX.4.6f R2 integrada y cierre del Paso 4 — 2026-08-20
 **Revisión de normalización:** NOR.1 R7 — cierre de estándares y preparación de NOR.2 — 2026-08-24
-**Última revisión operativa:** UX.6 R7 — auditoría documental integral — 2026-09-07
+**Última revisión operativa:** UX.6 R8 — promoción G121/E01 — 2026-09-07
 **Clasificación:** Técnica / Calidad
 **Naturaleza documental:** Registro vivo acumulativo — mantiene la estrategia vigente y evidencia histórica de gates protegida por regresiones; los resultados históricos no se reescriben como si pertenecieran al estado actual.
 
@@ -247,6 +247,23 @@ G121/E01 sigue sin aceptarse y `VERSION` permanece en `0.1.20.01-beta`.
 Las señales son candidatos semánticos, no órdenes de edición. El gate completo
 y la promoción se reservan para R8.
 <!-- UX6-R7-VALIDATION:END -->
+
+<!-- UX6-R8-PROMOTION:START -->
+## Validación de promoción UX.6 R8 → G121/E01
+
+- R7 firmado: `0bbcece30b7653b694f84ac3c843ba5b7ad0173a`.
+- R8 firmado: `f2b7ed0e0d52d64e2687c37748a00f66bb6e759b`.
+- Repository Quality Gate R8: 10 PASS / 0 FAIL.
+- 1508 `unittest` OK.
+- Markdown 167, sin bloqueantes.
+- 27 JavaScript válidos.
+- checkpoint R8 previo al registro de UX.7: 16 familias / 47 identificadores;
+- promoción G121/E01: UX.7 queda registrado como revisión visual final no bloqueante y el inventario pasa a 16 familias / 48 identificadores;
+- Validación focal/visual App + Developer completada.
+- PR de integración/promoción: #124.
+
+El commit de promoción vuelve a ejecutar el Quality Gate. Después del merge se revalida `main`; solo entonces se crea/firma `v0.1.21.01-beta` y se publica el prerelease. PERSIST.1 R1 queda reservado como G122/E01, pero no iniciado.
+<!-- UX6-R8-PROMOTION:END -->
 
 ## Atestación histórica Git pre-UX.5
 
@@ -698,7 +715,7 @@ python -m pip check
 
 ## 3. Inventario actual de pruebas
 
-Inventario vigente: **206 módulos**.
+Inventario vigente: **207 módulos**.
 
 - `tests/test_accessibility_themes.py`
 - `tests/test_accessibility_ux4.py`
@@ -739,6 +756,7 @@ Inventario vigente: **206 módulos**.
 - `tests/test_g118_promotion_post_merge.py`
 - `tests/test_g119_promotion_post_merge.py`
 - `tests/test_g120_promotion_post_merge.py`
+- `tests/test_g121_promotion_post_merge.py`
 - `tests/test_git_history_attestation.py`
 - `tests/test_gov12_versionado.py`
 - `tests/test_gov13_documentacion.py`

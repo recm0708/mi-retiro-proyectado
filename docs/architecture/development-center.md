@@ -13,12 +13,14 @@
 <!-- DOC1-R1-REVISION-MANUAL:START -->
 ## Nota de lectura vigente
 
-DEV.2 permanece cerrado después de R6/G119/E05. UX.6 amplía la experiencia y
-controles sin reabrir su contabilidad. G120/E01 está publicado; G121/E01
-permanece reservado/no aceptado para UX.6. R1–R2 incorporan perfil/avatar,
-usuarios, credenciales temporales y auditoría persistente; R3–R4 alinean el
-portal con el Design System; R7 reconcilia documentación y R8 mantiene el
-cierre/promoción pendiente. La sesión humana continúa separada del Bearer.
+DEV.2 permanece cerrado después de R6/G119-E05. UX.6 amplía la experiencia Developer sin reabrir DEV.2.
+
+- UX.6 R1–R8 queda consolidado como G121/E01 con revisión funcional R8.
+- PR #124 materializa la integración/promoción.
+- Perfil/avatar, usuarios/RBAC, credenciales temporales, revocación y auditoría persistente permanecen vigentes.
+- App y Developer comparten Design System, movimiento y accesibilidad.
+- La sesión humana continúa separada del Bearer técnico.
+- PERSIST.1 R1 queda reservado como G122/E01, sin iniciar.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 
 Como evidencia histórica de integración, R5 está integrado mediante PR #107 / merge `bc97db0` y aceptado como G118/E04. R6 quedó integrado mediante PR #111 / merge `bd2accb` y aceptado/publicado como G119/E05.

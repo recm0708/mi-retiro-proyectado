@@ -6,20 +6,36 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ## [Unreleased]
 
-- UX.6 mantiene reservado G121/E01 (`0.1.21.01-beta`) como un único
-  candidato aún no aceptado; `VERSION` continúa en `0.1.20.01-beta`.
-- R1–R2: unifica identidad visual App/Developer y completa perfil, avatar
-  local, administración de cuentas, RBAC, credenciales temporales y auditoría
-  persistente append-only de usuarios.
-- R3–R4: centraliza movimiento, feedback, responsive, forced colors y
-  reducción de movimiento en el sistema visual compartido.
-- R5–R6: refuerza Mi Retiro Seguro/Ficha Digital, procesamiento temporal del
-  PDF, confirmación explícita, términos públicos y limpieza de animaciones
-  generales redundantes.
-- R7: audita los 166 Markdown y reconcilia solo documentación viva realmente
-  afectada.
-- R8: queda reservado para auditoría integral, gate completo, aceptación de
-  G121/E01 y promoción si todo resulta satisfactorio.
+- PERSIST.1 R1 queda reservado como siguiente candidato G122/E01
+  (`0.1.22.01-beta`) después del cierre de UX.6.
+- La reserva de PERSIST.1 no inicia trabajo sin autorización explícita.
+- UX.7 permanece como revisión visual final no bloqueante antes de la
+  versión estable.
+
+## [0.1.21.01-beta]
+
+- G121/E01: UX.6 R8 consolida R1–R8 como un único estado aceptado.
+- `VERSION` avanza a `0.1.21.01-beta`; UX.6 usa
+  `functional_revision = R8` y ordinal E01.
+- App + Developer comparten identidad visual e interacción sin forzar la
+  misma densidad o composición.
+- Developer: perfil/avatar local, usuarios, RBAC, contraseñas temporales y
+  auditoría append-only.
+- Accesibilidad: movimiento compartido, `prefers-reduced-motion`, responsive,
+  forced colors, foco y feedback.
+- Importación: Mi Retiro Seguro y Ficha Digital conservan revisión,
+  procesamiento temporal y confirmación explícita.
+- Privacidad: términos públicos de la App permanecen separados de cookies,
+  sesiones y contratos técnicos Developer.
+- Hardening R8: sesiones por cuenta, cookie alineada con duración absoluta,
+  navegación RBAC, cache-busting compartido y favicon oficial.
+- R7/R8 cierran documentación y auditoría integral.
+- Evidencia pre-promoción: Quality Gate 10 PASS / 0 FAIL; 1508 `unittest`
+  OK; Markdown 167; 27 JavaScript; 16 familias / 47 identificadores.
+- PR de integración/promoción: #124.
+- Siguiente candidato: PERSIST.1 R1 / G122/E01 (`0.1.22.01-beta`).
+- Publicación: `v0.1.21.01-beta` se crea únicamente después del merge,
+  revalidación de `main` y firma local del tag.
 
 ## [0.1.20.01-beta]
 

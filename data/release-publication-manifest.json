@@ -1,45 +1,50 @@
 {
   "schema_version": 1,
-  "version": "0.1.20.01-beta",
-  "block": "UX.5",
-  "revision": "R6",
+  "version": "0.1.21.01-beta",
+  "block": "UX.6",
+  "revision": "R8",
   "summary": [
-    "G120/E01 materializa formalmente UX.5 R6 después de integrar mediante PR #122 el alcance R1–R6 como un único estado aceptable del bloque.",
-    "La revisión consolida el sistema visual, shell y temas, entrada Manual/Asistida, flujo Manual, preparación documental Asistida con Mi Retiro Seguro y Ficha Digital, completitud, invalidación, resultados y consistencia de assets."
+    "G121/E01 materializa UX.6 R8 y consolida R1–R8 como un único estado aceptado del bloque.",
+    "UX.6 unifica App y Portal Developer bajo un sistema visual e interacción compartidos; completa perfil y administración Developer, accesibilidad, responsive, movimiento, importación documental, privacidad pública y hardening final de sesiones/RBAC."
   ],
   "changes": [
-    "UX.5 R6 queda aceptado formalmente como G120/E01.",
-    "`VERSION` avanza a `0.1.20.01-beta`.",
-    "El ledger revision-aware queda en `accepted_count=120`.",
-    "UX.5 se registra con revisión funcional R6 y ordinal aceptado E01.",
-    "R1–R5 fueron revisiones internas del mismo candidato y no consumieron estados aceptados independientes.",
-    "G121/E01 (`0.1.21.01-beta`) queda reservado para UX.6 R1.",
-    "UX.5 queda cerrado después de R6.",
-    "UX.6 pasa a ser el siguiente bloque funcional antes de PERSIST.1.",
-    "La creación y firma del tag permanecen como frontera local del mantenedor."
+    "UX.6 R1–R8 queda aceptado como G121/E01 con revisión funcional R8 y ordinal E01.",
+    "`VERSION` avanza a `0.1.21.01-beta`.",
+    "El ledger revision-aware queda en `accepted_count=121`.",
+    "UX.6 se registra cerrado y PERSIST.1 R1 queda reservado como siguiente candidato G122/E01.",
+    "R1–R2 consolidan shell/identidad, perfil/avatar, usuarios, RBAC, credenciales temporales y auditoría append-only.",
+    "R3–R4 consolidan movimiento compartido, accesibilidad, responsive, forced colors y compatibilidad.",
+    "R5–R6 consolidan Mi Retiro Seguro/Ficha Digital, confirmación explícita y separación de términos públicos frente a Developer.",
+    "R7 cierra la reconciliación documental integral.",
+    "R8 endurece sesiones por cuenta, cookie, RBAC visual, assets compartidos y favicon oficial.",
+    "La creación y firma del tag permanecen como operación local después del merge y la revalidación de `main`."
   ],
   "validation": [
-    "Repository Quality Gate local de desarrollo: **11 PASS / 0 FAIL**.",
-    "Desarrollo: **1404 tests `unittest` OK**.",
-    "`pytest` de desarrollo: **1444 passed / 6865 subtests passed**.",
-    "Auditoría Markdown previa: **166/166 OK**.",
-    "Auditoría de identificadores: **16 familias / 47 identificadores OK**.",
-    "Sintaxis JavaScript: **22 archivos válidos**.",
+    "Repository Quality Gate del checkpoint R8: **10 PASS / 0 FAIL**.",
+    "Checkpoint R8: **1508 tests `unittest` OK**.",
+    "Auditoría Markdown R8: **167 documentos**, sin bloqueantes.",
+    "Sintaxis JavaScript: **27 archivos válidos**.",
+    "Checkpoint R8 previo al registro de UX.7: **16 familias / 47 identificadores OK**.",
     "`pip check`: OK.",
     "Compilación Python: OK.",
     "`git diff --check`: OK.",
-    "PR #122: Repository Quality Gate, Python Compatibility y Visual & Accessibility finalizaron en `success`."
+    "Validación focal y visual App/Developer completada antes del commit de hardening.",
+    "El commit de promoción y PR #124 deben superar nuevamente los gates antes del merge.",
+    "Promoción G121/E01: UX.7 queda registrado como revisión visual final no bloqueante; inventario actual **16 familias / 48 identificadores**."
   ],
   "evidence": [
-    "**UX.5 R1–R6 desarrollo:** PR #122.",
-    "**Integración de desarrollo en `main`:** `4c43a816526201c5869d2df8e88af44419c4df11`.",
-    "**Commit final de desarrollo firmado:** `1415c4b43a6d96d1c9ae8833537f0a4b1907228b`.",
-    "La publicación final de G120/E01 queda condicionada al merge de esta promoción, revalidación de `main` y tag anotado/firmado."
+    "**PR de integración/promoción UX.6:** #124.",
+    "**R1–R2 firmado:** `2b783bcca1e02cbc169a3c560f95b2a0069e659d`.",
+    "**R3–R4 firmado:** `9c96cc18cbcc751296b2feb761dbcab997a9107d`.",
+    "**R5–R6 firmado:** `f9cf50e0fe83e85092965562ad394271eafc52dd`.",
+    "**R7 documental firmado:** `0bbcece30b7653b694f84ac3c843ba5b7ad0173a`.",
+    "**R8 hardening firmado:** `f2b7ed0e0d52d64e2687c37748a00f66bb6e759b`.",
+    "La publicación final queda condicionada al merge de PR #124, revalidación post-merge, tag anotado/firmado y GitHub Release prerelease."
   ],
   "next_step": {
-    "global_revision": 121,
-    "revision_aware": "0.1.21.01-beta",
-    "block": "UX.6",
-    "description": "El siguiente checkpoint formal es **UX.6 R1 — Auditoría integral App + Developer**. Debe ejecutarse antes de PERSIST.1 y cubrir revisión visual, accesibilidad, responsive, navegadores/zoom, interacción, importadores, Portal Developer y ownership del código UI."
+    "global_revision": 122,
+    "revision_aware": "0.1.22.01-beta",
+    "block": "PERSIST.1",
+    "description": "El siguiente candidato formal queda reservado como **PERSIST.1 R1 — arquitectura de persistencia voluntaria y segura**. La reserva no inicia el bloque ni sustituye la autorización explícita para comenzar. UX.7 permanece como revisión visual final no bloqueante antes de la versión estable."
   }
 }

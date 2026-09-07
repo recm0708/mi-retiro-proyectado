@@ -43,9 +43,10 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
         self.assertEqual("closed", ids["PLAN.2"]["status"])
         self.assertIn("G114", ids["PLAN.2"]["global_refs"])
         self.assertEqual("closed", ids["UX.5"]["status"])
-        self.assertEqual("candidate_r1", ids["UX.6"]["status"])
+        self.assertEqual("closed", ids["UX.6"]["status"])
 
-        for ident in ("PERSIST.1", "REP.1", "A11Y.2", "REV.1", "QA.1", "REL.1"):
+        self.assertEqual("candidate_r1", ids["PERSIST.1"]["status"])
+        for ident in ("UX.7", "REP.1", "A11Y.2", "REV.1", "QA.1", "REL.1"):
             self.assertEqual("planned_reserved", ids[ident]["status"])
 
     def test_revisiones_y_etiquetas_no_son_familias(self):
@@ -59,7 +60,7 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
         for label in ("LEGACY", "INTEGRIDAD", "POST-GOV"):
             self.assertFalse(labels[label]["reusable_as_family"])
 
-    def test_g112_permanece_aceptado_y_ux6_r1_es_candidato_actual(self):
+    def test_g112_permanece_aceptado_y_persist1_es_candidato_actual(self):
         ledger = cargar_ledger()
         entry = next(
             x for x in ledger["entries"] if x["global_revision"] == 112
@@ -69,13 +70,13 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
         self.assertEqual("0.1.12.07-beta", entry["revision_aware"])
 
         candidate = self.data["current_candidate"]
-        self.assertEqual(121, candidate["global_revision"])
-        self.assertEqual("UX.6", candidate["block"])
+        self.assertEqual(122, candidate["global_revision"])
+        self.assertEqual("PERSIST.1", candidate["block"])
         self.assertEqual("R1", candidate["revision"])
         self.assertEqual(1, candidate["edition"])
         self.assertEqual("reserved_not_accepted", candidate["state"])
         self.assertEqual(
-            "PERSIST.1",
+            "REP.1",
             candidate["next_functional_block_if_accepted"],
         )
         self.assertIsNone(
@@ -113,7 +114,7 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
     def test_bloque_nuevo_comienza_en_e01(self):
         ledger = cargar_ledger()
         candidato = copy.deepcopy(ledger)
-        candidato["next_candidate_block"] = "UX.6"
+        candidato["next_candidate_block"] = "PERSIST.1"
         candidato["next_candidate"] = construir_version_beta_revision(
             ledger["next_global"],
             1,
@@ -171,7 +172,7 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
             ids["DOC.1"]["status"],
         )
         self.assertEqual(
-            "planned_reserved",
+            "candidate_r1",
             ids["PERSIST.1"]["status"],
         )
 
@@ -186,8 +187,10 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
             "DEV.2 R5",
             "Cerrado/aceptado/publicado G119/E05",
             "Cerrado/aceptado G120/E01",
-            "Candidato G121/E01",
-            "UX.6 R1",
+            "Cerrado/aceptado G121/E01",
+            "Candidato G122/E01",
+            "UX.6 R1–R8",
+            "PERSIST.1 R1",
             "DEV.2 R6",
         ):
             with self.subTest(fragment=fragment):

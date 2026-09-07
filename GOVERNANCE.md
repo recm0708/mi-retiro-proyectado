@@ -3,19 +3,18 @@
 **Proyecto:** Mi Retiro Proyectado
 **Estado:** vigente desde GOV.1.2
 **Fecha de adopción:** 2026-08-18
-**Última revisión:** UX.6 R7 — reconciliación documental del candidato G121/E01 — 2026-09-07
+**Última revisión:** UX.6 R8 — candidato de promoción G121/E01 en PR #124 — 2026-09-07
 
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado de gobierno vigente
 
 - `VERSION` sigue siendo la fuente única de versión.
-- G120/E01 (`0.1.20.01-beta`) es el último estado aceptado y está publicado.
-- UX.6 mantiene G121/E01 reservado/no aceptado.
-- R1–R6 están implementados; R7 reconcilia documentación y R8 mantiene
-  auditoría, aceptación y promoción final.
-- DEV.2 permanece cerrado en G119/E05; UX.6 amplía su experiencia sin reabrir
-  su contabilidad.
-- PERSIST.1 continúa como etapa posterior.
+- UX.6 R1–R8 queda consolidado como G121/E01 (`0.1.21.01-beta`) en PR #124.
+- G120/E01 permanece como última publicación con tag.
+- DEV.2 permanece cerrado en G119/E05.
+- PERSIST.1 R1 queda reservado como G122/E01 y no se inicia por la reserva.
+- UX.7 permanece como revisión visual final no bloqueante.
+- Publicar G121 exige merge, revalidación de `main`, tag firmado y Release.
 <!-- DOC1-R1-POST-MANT1:END -->
 
 ## 1. Propósito

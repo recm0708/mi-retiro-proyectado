@@ -1,7 +1,7 @@
 # Matriz de trazabilidad
 
 **Estado:** Vigente
-**Versión de aplicación:** `0.1.20.01-beta` — G120/E01 aceptado para UX.5 R6; G121/E01 reservado para UX.6 R1
+**Versión de aplicación:** `0.1.21.01-beta` — G121/E01 materializado para UX.6 R8 en PR #124; G120/E01 permanece publicado; PERSIST.1 R1 queda reservado como G122/E01
 **Último tag formal legacy:** `v0.0.26-beta`
 **Base histórica:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal:** NOR.2 R8 — 2026-08-24
@@ -11,11 +11,12 @@
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado transversal vigente
 
-- G120/E01 está aceptado/publicado para UX.5 R6.
-- G121/E01 permanece reservado/no aceptado para UX.6.
-- R1–R6 están implementados; R7 reconcilia documentación y R8 mantiene cierre.
+- G120/E01 permanece publicado para UX.5 R6.
+- G121/E01 (`0.1.21.01-beta`) consolida UX.6 R1–R8 con `functional_revision = R8`.
+- PR #124 materializa la integración/promoción de UX.6.
+- TR-035, TR-036 y TR-037 preservan los contratos añadidos por UX.6.
 - DEV.2 R5/R6 permanecen preservados como G118/E04 y G119/E05.
-- La historia de NOR.2, SEC.2, AUD.SEC2, DOC.1, PLAN.2 y REL.GOV.1 se preserva.
+- PERSIST.1 R1 queda reservado como G122/E01 sin iniciar.
 <!-- DOC1-R1-POST-MANT1:END -->
 
 Esta matriz conecta contratos críticos del producto con su fuente, decisión, implementación y evidencia de prueba. No sustituye `functional-specification.md` ni pretende afirmar cobertura granular completa de todos los RF históricos.

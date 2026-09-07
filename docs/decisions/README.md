@@ -1,7 +1,7 @@
 # Registro de decisiones técnicas
 
 **Estado:** Vigente
-**Versión de aplicación revisada:** `0.1.20.01-beta`
+**Versión de aplicación revisada:** `0.1.21.01-beta`
 **Versión base histórica:** `0.0.25-beta`
 **Base documental histórica:** `0.0.23-beta` — GOV.1.3 R4 — 2026-08-17
 **Revisión documental:** GOV.1.3 R4 — 2026-08-17
@@ -14,14 +14,12 @@
 <!-- DOC1-R1-REVISION-MANUAL:START -->
 ## Nota de lectura vigente
 
-- las ADR históricas no se reescriben;
-- `VERSION` está sincronizado en `0.1.20.01-beta` (G120/E01);
-- G120/E01 está publicado mediante `v0.1.20.01-beta`;
-- UX.6 mantiene G121/E01 reservado/no aceptado, con R1–R6 implementados, R7
-  documental y R8 pendiente;
-- UX.6 endurece contratos ya existentes de identidad visual, accesibilidad,
-  importación, privacidad y seguridad; R7 no crea por sí solo una ADR nueva;
-- SEC.2 R1–R6 permanece cerrado.
+- Las ADR históricas no se reescriben.
+- `VERSION` está sincronizado en `0.1.21.01-beta` (G121/E01).
+- G120/E01 permanece publicado mediante `v0.1.20.01-beta`.
+- UX.6 R1–R8 queda consolidado dentro de PR #124.
+- PERSIST.1 R1 queda reservado como G122/E01 sin iniciar.
+- SEC.2 R1–R6 permanece cerrado y su historia se conserva.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 
 Este registro conserva decisiones de arquitectura, modelado, UX, precisión, seguridad y aplicación normativa. Una ADR explica por qué el proyecto adoptó una decisión; no crea una norma jurídica.

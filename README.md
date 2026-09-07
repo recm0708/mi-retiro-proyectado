@@ -15,7 +15,7 @@
 </p>
 
 <p align="center">
-  <img alt="Versión 0.1.20.01-beta" src="https://img.shields.io/badge/versi%C3%B3n-0.1.20.01--beta-2563eb">
+  <img alt="Versión 0.1.21.01-beta" src="https://img.shields.io/badge/versi%C3%B3n-0.1.21.01--beta-2563eb">
   <img alt="Python 3.13 y 3.14" src="https://img.shields.io/badge/Python-3.13%20%7C%203.14-3776AB?logo=python&logoColor=white">
   <img alt="Licencia propietaria" src="https://img.shields.io/badge/licencia-propietaria-6B7280">
 </p>
@@ -26,34 +26,27 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 
 ## Estado del proyecto
 
-- **Versión canónica vigente:** `0.1.20.01-beta`, obtenida exclusivamente
-  desde [`VERSION`](VERSION). Materializa UX.5 R6 como G120/E01.
-- **Último estado aceptado en `main`:** UX.5 R6 / G120/E01.
-- **Candidato de desarrollo vigente:** UX.6 conserva G121/E01
-  (`0.1.21.01-beta`) reservado y todavía no aceptado. R1–R6 están
-  materializados en la rama de desarrollo; R7 ejecuta la reconciliación
-  documental integral y R8 conserva la auditoría, aceptación y promoción final.
+- **Versión canónica vigente:** `0.1.21.01-beta`, obtenida exclusivamente
+  desde [`VERSION`](VERSION). Materializa UX.6 R8 como G121/E01.
+- **Estado revision-aware del candidato de promoción:** UX.6 R1–R8 / G121/E01.
+- **PR de integración/promoción:** #124.
+- **Siguiente candidato reservado:** PERSIST.1 R1 / G122/E01
+  (`0.1.22.01-beta`). Esta reserva no inicia el bloque.
 - **Última publicación revision-aware con tag:** `v0.1.20.01-beta`
   (G120/E01), publicada sobre
   `76586b5a7c77a5cffa97128a29ea77bd36cb988b`, con objeto de tag firmado
   `7dbcca8071e2726b6aa4f17704bf41b92f6cd5bd` y GitHub Release prerelease
   ID `383133233`.
-- **Última versión formal legacy:** `0.0.26-beta`.
+- **UX.5:** R1–R6 consolidados/publicados como G120/E01.
+- **UX.6:** R1–R8 consolidados como G121/E01 con revisión funcional R8;
+  la publicación final exige merge, revalidación, tag firmado y Release.
+- **PERSIST.1:** siguiente bloque reservado; no iniciado por esta promoción.
+- **UX.7:** revisión visual final no bloqueante reservada para una etapa
+  posterior antes de la versión estable.
+- **DEV.2:** R5/R6 permanecen preservados en G118/E04 y G119/E05.
+- **SEC.2:** R1–R6 cerrados; R7 continúa planificado para hardening posterior.
 - **Etapa:** desarrollo beta; repositorio público y ejecución orientada
   actualmente a entorno local.
-- **REL.GOV.1:** R1 y R2 permanecen cerrados/aceptados como G110/E01
-  y G117/E02.
-- **DEV.2:** R1–R3 permanecen aceptados históricamente; R4 fue un cierre
-  documental sin Global independiente; R5 queda aceptado/publicado como
-  G118/E04 y R6 queda aceptado/publicado como G119/E05.
-- **UX.5:** R1–R6 quedan consolidados y aceptados como G120/E01.
-- **UX.6:** R1–R6 están implementados dentro del candidato G121/E01;
-  R7 está dedicado al cierre documental y R8 mantiene pendiente la
-  aceptación/promoción del bloque. PERSIST.1 no inicia antes de ese cierre.
-- **DOC.1:** R1–R5 cerrados; R6 permanece planificado para congelación
-  documental final.
-- **SEC.2:** R1–R6 cerrados; R7 permanece planificado después de las
-  nuevas superficies UX/persistencia.
 - **Primera versión oficial objetivo:** `1.0.0.0` con `Build 000001`.
 
 La visibilidad pública del repositorio **no convierte una beta de desarrollo en versión oficial, no constituye un despliegue de producción y no modifica por sí sola la licencia vigente**.

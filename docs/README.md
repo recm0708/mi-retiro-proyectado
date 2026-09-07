@@ -1,16 +1,16 @@
 # Índice de documentación
 
 **Estado:** vigente
-**Versión de aplicación:** `0.1.20.01-beta` — G120/E01 publicado; G121/E01 (`0.1.21.01-beta`) permanece como candidato UX.6 no aceptado
+**Versión de aplicación:** `0.1.21.01-beta` — G121/E01 materializado para UX.6 R8 en PR #124; G120/E01 permanece publicado; PERSIST.1 R1 queda reservado como G122/E01
 **Último tag formal legacy:** `v0.0.26-beta`
-**Última actualización transversal:** UX.6 R7 — auditoría y reconciliación documental integral — 2026-09-07
+**Última actualización transversal:** UX.6 R8 — promoción revision-aware G121/E01 — 2026-09-07
 **Cierres históricos preservados:** UX.4.6i / PR #34 — 841 pruebas; UX.4.6e R9 — `v0.0.25-beta`
 
 Este archivo es el punto de entrada para la documentación técnica, funcional, normativa, de privacidad, validación y auditoría de Mi Retiro Proyectado.
 
 ## Estado de normalización del repositorio
 
-**Estado actual:** UX.5 permanece cerrado/publicado como G120/E01. UX.6 R1–R6 están implementados dentro del candidato G121/E01; R7 ejecuta el cierre documental y R8 conserva pendiente auditoría, aceptación y promoción antes de PERSIST.1.
+**Estado actual:** UX.6 R1–R8 queda consolidado como G121/E01 dentro de PR #124; PERSIST.1 R1 es el siguiente candidato reservado G122/E01 y no se inicia por esta reserva. UX.7 permanece no bloqueante.
 
 Estado de la fase:
 

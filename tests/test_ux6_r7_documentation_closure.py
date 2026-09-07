@@ -34,12 +34,19 @@ class TestUX6R7DocumentationClosure(unittest.TestCase):
         cls.public_privacy = load("docs/security/privacy-policy.md")
         cls.public_terms = load("docs/security/terms-and-privacy.md")
 
-    def test_r7_no_promueve_g121(self):
-        self.assertEqual("0.1.20.01-beta", self.version)
-        for text in (self.readme, self.releases, self.security, self.versioning, self.release_process):
-            self.assertNotIn("G121/E01 queda aceptado", text)
-            self.assertNotIn("G121/E01 está aceptado", text)
-
+    def test_r7_preserva_estado_pre_promocion_en_su_auditoria(self):
+        self.assertIn(
+            "0.1.20.01-beta",
+            self.audit,
+        )
+        self.assertIn(
+            "G121/E01 (`0.1.21.01-beta`) — reservado, no aceptado",
+            self.audit,
+        )
+        self.assertIn(
+            "R8 de auditoría/gate/promoción",
+            self.audit,
+        )
     def test_g120_publicado_reconciliado(self):
         for text in (self.readme, self.releases, self.security, self.versioning, self.release_process):
             self.assertIn("v0.1.20.01-beta", text)

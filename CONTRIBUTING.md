@@ -3,12 +3,12 @@
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado de contribución vigente
 
-- `VERSION` está sincronizado en `0.1.20.01-beta` (G120/E01).
-- G120/E01 está publicado como `v0.1.20.01-beta`.
-- UX.6 mantiene G121/E01 (`0.1.21.01-beta`) reservado y no aceptado: R1–R6
-  implementados, R7 documental y R8 de cierre/promoción.
-- Los cambios de autenticación, sesiones, cookies, secretos o endpoints
-  administrativos deben conservar regresiones de seguridad.
+- `VERSION` está sincronizado en `0.1.21.01-beta` (G121/E01).
+- G120/E01 permanece publicado como `v0.1.20.01-beta`.
+- UX.6 R1–R8 queda consolidado en PR #124 con revisión funcional R8.
+- PERSIST.1 R1 queda reservado como G122/E01, pero no iniciado.
+- UX.7 permanece como revisión visual final no bloqueante.
+- Los cambios de seguridad deben conservar sus regresiones.
 - Código, pruebas, documentación y evidencia deben permanecer sincronizados.
 <!-- DOC1-R1-POST-MANT1:END -->
 

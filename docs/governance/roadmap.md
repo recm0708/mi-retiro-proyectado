@@ -1,11 +1,11 @@
 # Roadmap
 
 **Estado:** vigente
-**Versión vigente:** `0.1.20.01-beta` — G120/E01 aceptado para UX.5 R6
+**Versión vigente:** `0.1.21.01-beta` — G121/E01 materializado para UX.6 R8 en PR #124
 **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
 **Último tag formal legacy:** `v0.0.26-beta`
 **Fecha de revisión:** 2026-09-07
-**Estado actual:** UX.5 está cerrado/publicado como G120/E01 (`0.1.20.01-beta`). UX.6 mantiene G121/E01 (`0.1.21.01-beta`) reservado/no aceptado: R1–R6 completados, R7 documental activo y R8 pendiente antes de PERSIST.1.
+**Estado actual:** UX.6 R1–R8 queda consolidado como G121/E01 (`0.1.21.01-beta`) en PR #124. PERSIST.1 R1 queda reservado como G122/E01 (`0.1.22.01-beta`) sin iniciar; UX.7 permanece no bloqueante.
 
 <!-- NOR1-R7-CLOSURE:START -->
 ## Estado NOR.1 / NOR.2
@@ -36,7 +36,7 @@ La secuencia operativa previa a SEC.2 queda:
     promoción PR #112 / commit `9424ea8` y tag
     `v0.1.19.05-beta`.
 15. **UX.5 R6** — cerrado/aceptado como G120/E01 (`0.1.20.01-beta`); R1–R6 consumen este único estado aceptado del bloque.
-16. **UX.6** — candidato G121/E01 abierto en R1; R1–R6 implementados, R7 documental activo y R8 reservado para cierre/promoción.
+16. **UX.6** — R1–R8 consolidados/aceptados como G121/E01 con revisión funcional R8; PR #124 materializa la promoción.
 
 NOR.2 ejecutó los movimientos, renombrados, consolidaciones y retiros que
 NOR.1 deliberadamente no realizó.

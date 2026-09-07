@@ -5,21 +5,22 @@
 **Revisión de planificación hacia 1.0:** 2026-08-20
 **Reconciliación revision-aware:** 2026-08-22
 
-<!-- UX6-R7-CANDIDATE:START -->
-## Desarrollo UX.6 — candidato G121/E01
+<!-- UX6-R8-PROMOTION:START -->
+## Promoción G121/E01 — UX.6 R8
 
-UX.6 se desarrolla sobre G120/E01 sin consumir todavía G121.
-
-- Candidato reservado: G121/E01 (`0.1.21.01-beta`).
-- `VERSION` permanece en `0.1.20.01-beta` hasta la aceptación R8.
-- R1–R2: checkpoint firmado `2b783bcca1e02cbc169a3c560f95b2a0069e659d`.
-- R3–R4: checkpoint firmado `9c96cc18cbcc751296b2feb761dbcab997a9107d`.
-- R5–R6: checkpoint firmado `f9cf50e0fe83e85092965562ad394271eafc52dd`.
-- R7: reconciliación documental integral en curso.
-- R8: auditoría integral, gate y promoción pendientes.
-- No existe tag ni GitHub Release de G121/E01 mientras el candidato no sea
-  aceptado.
-<!-- UX6-R7-CANDIDATE:END -->
+- Estado aceptado en este snapshot de promoción: G121/E01
+  (`0.1.21.01-beta`) para UX.6 R8.
+- R1–R8 se consolidan en un único estado aceptado con ordinal E01.
+- PR de integración/promoción: #124.
+- Checkpoints firmados: `2b783bc`, `9c96cc1`, `f9cf50e`, `0bbcece` y `f2b7ed0`.
+- Gate R8: 10 PASS / 0 FAIL; 1508 `unittest` OK; Markdown 167;
+  27 JavaScript; 16 familias / 47 identificadores.
+- PERSIST.1 R1 queda reservado como G122/E01 (`0.1.22.01-beta`);
+  la reserva no inicia el bloque.
+- UX.7 permanece como revisión visual final no bloqueante.
+- No existe tag ni GitHub Release de G121/E01 antes de merge/revalidación.
+- La publicación final exige tag anotado/firmado y GitHub Release prerelease.
+<!-- UX6-R8-PROMOTION:END -->
 
 <!-- DOC1-R1-POST-MANT1:START -->
 

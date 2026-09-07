@@ -3,14 +3,14 @@
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado de seguridad vigente
 
-La versión canónica aceptada continúa siendo `0.1.20.01-beta`.
+La versión canónica del candidato de promoción es `0.1.21.01-beta`.
 
-- G120/E01 está publicado mediante `v0.1.20.01-beta`.
-- UX.6 conserva G121/E01 (`0.1.21.01-beta`) reservado y no aceptado; R1–R6
-  están implementados, R7 reconcilia documentación y R8 mantiene el cierre.
-- UX.6 amplía perfil, avatar local, administración de cuentas y auditoría
-  append-only sin convertir las simulaciones en cuentas persistentes.
+- UX.6 R1–R8 queda consolidado como G121/E01 con revisión funcional R8.
+- G120/E01 permanece publicado mediante `v0.1.20.01-beta`.
+- R8 refuerza sesiones por cuenta, cookie, RBAC visual, assets y favicon.
+- Perfil/avatar y auditoría Developer permanecen separados de datos previsionales.
 - El login humano sigue separado del Bearer técnico.
+- PERSIST.1 R1 queda reservado como G122/E01, sin iniciar.
 - REL.GOV.1 mantiene la firma del tag fuera de GitHub Actions.
 <!-- DOC1-R1-POST-MANT1:END -->
 
@@ -20,7 +20,8 @@ Mi Retiro Proyectado se encuentra en **desarrollo beta**. Los estados histórico
 
 | Línea | Soporte de seguridad |
 | --- | --- |
-| `0.1.20.01-beta` | Beta vigente G120/E01 aceptada y publicada mediante tag firmado `v0.1.20.01-beta` y GitHub Release prerelease |
+| `0.1.21.01-beta` | Beta vigente G121/E01 aceptada para UX.6 R8; publicación pendiente de merge/revalidación, tag firmado y GitHub Release prerelease |
+| `0.1.20.01-beta` | Beta previa G120/E01 publicada mediante tag firmado `v0.1.20.01-beta` y GitHub Release prerelease |
 | `0.1.19.05-beta` | Beta previa G119/E05 publicada para DEV.2 R6 mediante tag firmado `v0.1.19.05-beta`, workflow de verificación en `success` y GitHub Release prerelease |
 | `0.1.18.04-beta` | Beta previa G118/E04 publicada para DEV.2 R5 mediante tag firmado `v0.1.18.04-beta` y GitHub Release prerelease |
 | `0.1.17.02-beta` | Beta previa G117/E02 publicada; tag firmado y GitHub Release prerelease automatizado conforme a REL.GOV.1 R2 |
