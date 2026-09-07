@@ -1,9 +1,9 @@
 # Política de seguridad
 
 <!-- DOC1-R1-POST-MANT1:START -->
-## Estado de seguridad vigente
+## Estado de seguridad post-MANT.1
 
-La versión canónica del candidato de promoción es `0.1.21.01-beta`.
+La versión canónica vigente es `0.1.21.01-beta`.
 
 - UX.6 R1–R8 queda consolidado como G121/E01 con revisión funcional R8.
 - G120/E01 permanece publicado mediante `v0.1.20.01-beta`.
