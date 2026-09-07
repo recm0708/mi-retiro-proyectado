@@ -293,6 +293,19 @@ identificador temporal.
 El almacén Developer no contiene datos de Pasos 1–6, PDF, salarios, cuotas ni
 resultados previsionales.
 
+<!-- UX6-R7-DATA-MODEL:START -->
+## 13.2. Avatar y auditoría administrativa UX.6
+
+- `avatar_relativo`: referencia relativa opcional al archivo; SQLite no guarda
+  binario ni base64.
+- `developer_user_audit`: tabla append-only con timestamp UTC, acción, actor,
+  objetivo, roles y resumen sanitizado.
+
+Triggers impiden `UPDATE` y `DELETE` ordinarios. La auditoría de usuarios es
+distinta de Developer Diagnostics y no almacena contraseñas temporales,
+cookies, tokens ni otros secretos.
+<!-- UX6-R7-DATA-MODEL:END -->
+
 ## 14. Procedencia
 
 La procedencia puede distinguir estados como detectado, editado y completado manualmente. Su finalidad es evitar presentar un dato manual como documental y controlar edición en interfaz.

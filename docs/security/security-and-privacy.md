@@ -7,7 +7,7 @@
 **Base documental preservada:** GOV.1.3 R3 — 2026-08-17
 **Revisión transversal histórica:** repositorio público y controles GitHub — 2026-08-19
 **Última revisión documental:** AUD.SEC2 R1 — 2026-08-25
-**Última revisión operativa:** mantenimiento post-G119 — 2026-08-31
+**Última revisión operativa:** UX.6 R1–R6 / reconciliación R7 — 2026-09-07
 **Clasificación:** Seguridad / Privacidad / Técnica
 **Revisión externa:** Pendiente antes de la primera versión oficial o de cualquier despliegue remoto que cambie el modelo de riesgo
 
@@ -256,3 +256,18 @@ Developer.
 Cualquier despliegue remoto, uso compartido entre personas o exposición
 de la base administrativa cambia el modelo de riesgo y requiere una revisión
 específica antes de considerarse soportado.
+
+<!-- UX6-R7-SECURITY-EXTENSION:START -->
+## Extensión administrativa del Portal Developer
+
+- avatares como archivos locales; SQLite conserva referencia relativa;
+- `MRP_DEVELOPER_MEDIA_DIR` permite reubicar la raíz;
+- binarios/DB reales permanecen fuera de Git;
+- `developer_user_audit` es append-only en SQLite;
+- registra acción, UTC, actor, objetivo, roles y resumen sanitizado, nunca
+  contraseñas/credenciales temporales/cookies/tokens;
+- credenciales temporales solo se muestran en el momento controlado;
+- esta auditoría es distinta de Developer Diagnostics.
+
+La App sigue sin base de datos permanente de simulaciones.
+<!-- UX6-R7-SECURITY-EXTENSION:END -->

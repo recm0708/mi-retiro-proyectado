@@ -5,6 +5,22 @@
 **Revisión de planificación hacia 1.0:** 2026-08-20
 **Reconciliación revision-aware:** 2026-08-22
 
+<!-- UX6-R7-CANDIDATE:START -->
+## Desarrollo UX.6 — candidato G121/E01
+
+UX.6 se desarrolla sobre G120/E01 sin consumir todavía G121.
+
+- Candidato reservado: G121/E01 (`0.1.21.01-beta`).
+- `VERSION` permanece en `0.1.20.01-beta` hasta la aceptación R8.
+- R1–R2: checkpoint firmado `2b783bcca1e02cbc169a3c560f95b2a0069e659d`.
+- R3–R4: checkpoint firmado `9c96cc18cbcc751296b2feb761dbcab997a9107d`.
+- R5–R6: checkpoint firmado `f9cf50e0fe83e85092965562ad394271eafc52dd`.
+- R7: reconciliación documental integral en curso.
+- R8: auditoría integral, gate y promoción pendientes.
+- No existe tag ni GitHub Release de G121/E01 mientras el candidato no sea
+  aceptado.
+<!-- UX6-R7-CANDIDATE:END -->
+
 <!-- DOC1-R1-POST-MANT1:START -->
 
 ## Promoción G120/E01 — UX.5 R6
@@ -23,8 +39,10 @@
   del PR #122 finalizaron en `success`.
 - G121/E01 (`0.1.21.01-beta`) queda reservado para UX.6 R1.
 - PERSIST.1 permanece detrás del cierre de UX.6.
-- El tag `v0.1.20.01-beta` se crea únicamente después del merge de esta
-  promoción y de la revalidación post-merge de `main`.
+- Publicación final: tag anotado y firmado `v0.1.20.01-beta` sobre
+  `76586b5a7c77a5cffa97128a29ea77bd36cb988b`, objeto
+  `7dbcca8071e2726b6aa4f17704bf41b92f6cd5bd` y GitHub Release prerelease
+  ID `383133233`.
 
 
 ## Promoción G119/E05 — DEV.2 R6

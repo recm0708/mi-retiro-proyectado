@@ -7,29 +7,17 @@
 **Revisión revision-aware:** 2026-08-22
 
 <!-- DOC1-R1-POST-MANT1:START -->
-## Estado post-MANT.1
+## Estado revision-aware vigente
 
-La fuente canónica de versión continúa siendo `VERSION`.
-
-Estado vigente:
-
-- `VERSION` contiene `0.1.20.01-beta` y materializa G120/E01
-  para UX.5 R6.
-- G120 incorpora la revisión funcional R6 de UX.5 con ordinal E01.
-- UX.5 R1–R6 fueron revisiones internas del mismo candidato y
-  consumen un único estado aceptado.
-- UX.5 queda cerrado después de R6.
-- G119/E05 permanece publicado mediante el tag firmado
-  `v0.1.19.05-beta`.
-- G121/E01 (`0.1.21.01-beta`) queda reservado para UX.6 R1.
-- UX.6 R1 queda reservado como G121/E01 y debe completarse antes de PERSIST.1.
-- Las etapas posteriores no tienen Global preasignado más allá del
-  candidato vigente.
-- Un PR, squash, tag o GitHub Release que materializa el mismo estado
-  no consume por sí solo otro Global.
-
-Cualquier publicación requiere gate completo, PR/CI, revalidación,
-tag firmado y evidencia reproducible.
+- `VERSION` contiene `0.1.20.01-beta` y materializa G120/E01 para UX.5 R6.
+- G120/E01 está publicado mediante el tag firmado `v0.1.20.01-beta`.
+- G121/E01 (`0.1.21.01-beta`) permanece reservado para UX.6 y no está
+  consumido.
+- UX.6 abrió el candidato en R1; R1–R6 son revisiones internas, R7 realiza
+  la reconciliación documental y R8 conserva aceptación/promoción final.
+- PERSIST.1 permanece posterior y sin Global preasignado.
+- PR, squash, tag o Release que materializan el mismo estado no consumen otro
+  Global.
 <!-- DOC1-R1-POST-MANT1:END -->
 
 ## 1. Objetivo

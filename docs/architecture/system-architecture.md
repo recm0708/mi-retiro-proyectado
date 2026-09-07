@@ -5,29 +5,20 @@
 **Versión base histórica:** `0.0.23-beta`
 **Revisión documental:** GOV.1.4 — 2026-08-17
 **Última actualización técnica:** DEV.2 R6 — Portal Developer multipágina, identidad, observabilidad, mantenimiento, seguridad y privacidad — 2026-08-30
+**Última actualización transversal UX.6:** R1–R6 — identidad Developer, administración de usuarios, sistema visual compartido, accesibilidad, movimiento e importación segura — 2026-09-07
 **Última actualización de mantenimiento:** MANT.1 R5E — estandarización de nombres de carpetas — 2026-08-23
 **Clasificación:** Técnica / Pública
 
 <!-- DOC1-R1-POST-MANT1:START -->
-## Estado arquitectónico post-MANT.1
+## Estado arquitectónico vigente
 
-La arquitectura previsional permanece separada de las superficies Developer.
-
-Estado vigente:
-
-- DEV.2 R5 permanece aceptado/publicado como G118/E04.
-- DEV.2 R6 queda integrado mediante PR #111 / merge `bd2accb`,
-  aceptado y publicado como G119/E05 mediante el tag
-  `v0.1.19.05-beta`.
-- `/dev` utiliza identidad humana persistente; el Bearer técnico continúa
-  separado y no autentica navegadores.
-- El Portal Developer dispone de resumen, diagnóstico, eventos, archivos,
-  mantenimiento, privacidad, perfil y acceso técnico.
-- RBAC, CSRF, revisión de seguridad, revocación de sesiones y revalidación
-  protegen las operaciones administrativas aplicables.
-- DEV.2 no modifica motores previsionales, normativa ni rutas públicas
-  de simulación.
-- UX.5 R6 queda como candidato de cierre G120/E01; UX.6 se planifica a continuación sin Global preasignado.
+- G120/E01 (`0.1.20.01-beta`) permanece como último estado aceptado/publicado.
+- UX.6 mantiene G121/E01 reservado/no aceptado.
+- R1–R2 extienden Developer con perfil, avatar, usuarios y auditoría persistente.
+- R3–R4 consolidan Design System, movimiento, accesibilidad y responsive.
+- R5–R6 mantienen importadores en memoria con revisión/confirmación explícitas.
+- UX.6 no modifica motores SEBD/Mixto/SUCGS ni normativa.
+- R7 reconcilia documentación y R8 conserva gate/promoción final.
 <!-- DOC1-R1-POST-MANT1:END -->
 
 Mi Retiro Proyectado es una aplicación web local basada en FastAPI, Jinja2 y JavaScript del navegador. La arquitectura separa presentación, contratos de datos, servicios de integración, motores previsionales, parámetros normativos y observabilidad de desarrollo.
@@ -68,10 +59,12 @@ introduce nuevas capas de producto.
 - `app/core/config.py`
 - `app/core/admin_security.py`
 - `app/core/admin_session.py`
+- `app/core/developer_avatar.py` — almacenamiento local controlado de avatares Developer.
 - `app/core/developer_identity.py`
 - `app/core/developer_provisioning.py`
 - `app/core/developer_store.py`
 - `app/core/developer_user_admin.py` — reglas humanas de gestión de cuentas, jerarquía y credenciales temporales.
+- `app/core/developer_user_audit.py` — ledger append-only de gestión de cuentas.
 - `app/core/developer_web_security.py`
 - [`app/core/constants.py`](../../app/core/constants.py)
 - `app/core/money.py`
@@ -208,6 +201,20 @@ No leen PDFs, `sessionStorage`, controles HTML ni logs. Developer Diagnostics no
 Jinja2 genera las páginas y parciales. JavaScript administra el asistente, estado temporal, importaciones, procedencia, invalidación, llamadas HTTP y representación de resultados. La ruta pública `/como-se-calcula` usa `calculation_guide.html` y `calculation-guide.css` para explicar el procedimiento general sin convertir la página en una calculadora paralela.
 
 JavaScript no implementa fórmulas previsionales principales ni un segundo sistema de logging de datos de negocio.
+
+<!-- UX6-R7-DESIGN-SYSTEM:START -->
+### 3.6. Sistema visual compartido
+
+- `design-system.css` es la única fuente global de tokens `--app-*`; no existe
+  una familia paralela `--dev-*`.
+- `motion.css` posee entradas/transiciones generales y `prefers-reduced-motion`.
+- `accessibility.css` conserva reglas transversales de accesibilidad.
+- `interaction_ui.js` mantiene fallbacks de estado.
+- `datetime_ui.js` presenta timestamps operativos en hora local del navegador
+  sin cambiar su representación UTC.
+- App y Developer comparten identidad, no necesariamente densidad/composición.
+- El movimiento es funcional y nunca la única señal de estado.
+<!-- UX6-R7-DESIGN-SYSTEM:END -->
 
 ## 4. Flujo funcional
 

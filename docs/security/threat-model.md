@@ -380,3 +380,14 @@ se redactó el modelo original. AUD.SEC2 R1 incorpora explícitamente:
 
 La cookie administrativa no convierte la aplicación en un sistema de cuentas de
 usuarios ni crea persistencia de simulaciones.
+
+<!-- UX6-R7-THREAT-EXTENSION:START -->
+## Revisión UX.6 de la frontera Developer
+
+F7 incorpora medios de perfil locales y auditoría append-only. Los avatares se
+referencian de forma relativa, se excluyen de Git y usan una raíz controlada.
+La gestión de cuentas conserva RBAC, CSRF, revalidación, revocación de sesiones
+y no persistencia de contraseñas temporales. El ledger de auditoría no contiene
+datos previsionales y sus triggers impiden actualización/eliminación ordinaria.
+Un despliegue remoto/compartido sigue requiriendo revisión específica.
+<!-- UX6-R7-THREAT-EXTENSION:END -->

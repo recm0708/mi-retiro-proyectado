@@ -29,11 +29,18 @@ JavaScript no debe implementar fórmulas previsionales principales, introducir p
 
 Las páginas heredan de `base.html`.
 
-Capas CSS:
+Capas CSS transversales principales:
 
-1. `style.css`;
-2. `design-system.css`;
-3. `accessibility.css`.
+1. `style.css` — base;
+2. `design-system.css` — tokens/componentes compartidos;
+3. `accessibility.css` — accesibilidad transversal;
+4. `brand.css` — identidad gráfica;
+5. `editable-provenance.css` — procedencia;
+6. `motion.css` — movimiento/feedback generales.
+
+`design-system.css` es la única fuente global de tokens `--app-*`; no crear
+`--dev-*`. `motion.css` posee transiciones generales y
+`prefers-reduced-motion`.
 
 Usar tokens semánticos existentes antes de introducir colores literales.
 
@@ -163,6 +170,19 @@ Configuración de sesión:
 
 La lista completa de rutas, variables y responsabilidades se mantiene en
 `docs/architecture/development-center.md`.
+
+<!-- UX6-R7-DEVELOPER-GUIDE:START -->
+## 12.2. Administración y medios Developer UX.6
+
+Mantener jerarquía Owner/Admin/Operator/Auditor, username inmutable, contraseña
+temporal de un solo visionado, CSRF/revalidación, revocación de sesiones,
+auditoría append-only sin secretos, avatar en filesystem local y referencia
+relativa en SQLite. `data/developer/` permanece fuera de Git. Timestamps se
+persisten UTC y se presentan en hora local del navegador.
+
+Los formularios solo pueden preservar campos no sensibles; contraseñas, CSRF,
+tokens y confirmaciones reforzadas no se guardan en Web Storage.
+<!-- UX6-R7-DEVELOPER-GUIDE:END -->
 
 ## 13. Seguridad HTTP
 

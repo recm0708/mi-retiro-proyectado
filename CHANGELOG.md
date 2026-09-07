@@ -6,9 +6,20 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ## [Unreleased]
 
-- UX.6 R1 queda reservado como G121/E01 (`0.1.21.01-beta`) para la
-  auditoría integral de experiencia de App y Portal Developer antes de
-  PERSIST.1.
+- UX.6 mantiene reservado G121/E01 (`0.1.21.01-beta`) como un único
+  candidato aún no aceptado; `VERSION` continúa en `0.1.20.01-beta`.
+- R1–R2: unifica identidad visual App/Developer y completa perfil, avatar
+  local, administración de cuentas, RBAC, credenciales temporales y auditoría
+  persistente append-only de usuarios.
+- R3–R4: centraliza movimiento, feedback, responsive, forced colors y
+  reducción de movimiento en el sistema visual compartido.
+- R5–R6: refuerza Mi Retiro Seguro/Ficha Digital, procesamiento temporal del
+  PDF, confirmación explícita, términos públicos y limpieza de animaciones
+  generales redundantes.
+- R7: audita los 166 Markdown y reconcilia solo documentación viva realmente
+  afectada.
+- R8: queda reservado para auditoría integral, gate completo, aceptación de
+  G121/E01 y promoción si todo resulta satisfactorio.
 
 ## [0.1.20.01-beta]
 
@@ -44,8 +55,10 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
   mantenimiento transversal sin Global independiente.
 - Siguiente candidato: UX.6 R1 queda reservado como G121/E01
   (`0.1.21.01-beta`) antes de PERSIST.1.
-- Publicación: el tag `v0.1.20.01-beta` se crea únicamente después del
-  merge de esta promoción y de la revalidación post-merge de `main`.
+- Publicación: `v0.1.20.01-beta` quedó publicado sobre
+  `76586b5a7c77a5cffa97128a29ea77bd36cb988b`, con objeto de tag firmado
+  `7dbcca8071e2726b6aa4f17704bf41b92f6cd5bd` y GitHub Release prerelease
+  ID `383133233`.
 
 ## [0.1.19.05-beta]
 

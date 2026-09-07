@@ -10,23 +10,15 @@
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado funcional vigente
 
-La aplicación previsional mantiene sin cambios las fórmulas y parámetros
-normativos durante DEV.2 R6.
-
-Estado vigente:
-
-- `VERSION` es `0.1.19.05-beta`.
-- DEV.2 R6 está cerrado/aceptado/publicado como G119/E05.
-- El Portal Developer es una superficie administrativa separada de la
-  simulación previsional.
-- Las identidades Developer persistentes no constituyen cuentas de
-  Asegurado(a).
-- DEV.2 R6 no modifica motores SEBD, Mixto o SUCGS.
-- DEV.2 R6 no modifica parámetros normativos.
-- G120/E01 queda aceptado para UX.5 R6; G121/E01 queda reservado para UX.6 R1.
-
-Las referencias históricas dentro del registro RF, auditorías, ADR o archivo
-no deben reinterpretarse como estado vigente.
+- `VERSION` continúa en `0.1.20.01-beta`; G120/E01 está publicado.
+- UX.6 mantiene G121/E01 reservado/no aceptado.
+- R1–R2 amplían Developer con perfil, avatar, usuarios, RBAC, credenciales
+  temporales y auditoría persistente.
+- R3–R4 consolidan sistema visual, movimiento, accesibilidad y responsive.
+- R5–R6 refuerzan importación oficial, privacidad visible y limpieza técnica.
+- R7 reconcilia documentación; R8 conserva cierre/promoción final.
+- UX.6 no modifica motores SEBD, Mixto o SUCGS ni normativa.
+- Las identidades Developer no constituyen cuentas de Asegurado(a).
 <!-- DOC1-R1-POST-MANT1:END -->
 
 Este documento tiene dos capas:
@@ -200,6 +192,16 @@ Su contrato vigente incluye:
 El Portal Developer no debe utilizar datos personales o financieros de una
 simulación como información administrativa y no altera los resultados de los
 motores previsionales.
+
+<!-- UX6-R7-FUNCTIONAL-DEVELOPER:START -->
+### Extensión UX.6 del Portal Developer
+
+Incluye perfil/avatar, directorio de usuarios según RBAC, creación con
+contraseña temporal, cambios autorizados de nombre/rol/estado, restablecimiento
+reforzado, eliminación Owner-only cuando corresponde, revocación de sesiones,
+auditoría append-only, feedback accesible de formularios, timestamps locales y
+Design System compartido. No usa datos previsionales para administrar cuentas.
+<!-- UX6-R7-FUNCTIONAL-DEVELOPER:END -->
 
 ## 9. Reglas de precedencia RF conocidas
 

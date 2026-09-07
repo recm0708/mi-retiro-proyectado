@@ -11,22 +11,17 @@
 **Estado R3:** integrado en `main` mediante PR #40.
 
 <!-- DOC1-R1-REVISION-MANUAL:START -->
-## Nota de lectura post-MANT.1
+## Nota de lectura vigente
 
-DEV.2 conserva su historia R1–R5 y queda cerrado funcionalmente después de R6.
-
-Estado vigente:
-
-- R1–R4 quedan preservados.
-- R5 está integrado mediante PR #107 / merge `bc97db0`, aceptado como G118/E04
-  y publicado mediante `v0.1.18.04-beta`.
-- R6 está integrado mediante PR #111 / merge `bd2accb` y se materializa
-  como G119/E05 (`0.1.19.05-beta`).
-- G120/E01 (`0.1.20.01-beta`) permanece reservado para el cierre UX.5 R6; UX.6 queda planificado después sin Global preasignado.
-- La sesión humana Developer permanece separada del contrato Bearer técnico.
-- SEC.2 R1–R6 permanece cerrado y SEC.2 R7 se mantiene planificado para
-  el hardening posterior a las nuevas superficies.
+DEV.2 permanece cerrado después de R6/G119/E05. UX.6 amplía la experiencia y
+controles sin reabrir su contabilidad. G120/E01 está publicado; G121/E01
+permanece reservado/no aceptado para UX.6. R1–R2 incorporan perfil/avatar,
+usuarios, credenciales temporales y auditoría persistente; R3–R4 alinean el
+portal con el Design System; R7 reconcilia documentación y R8 mantiene el
+cierre/promoción pendiente. La sesión humana continúa separada del Bearer.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
+
+Como evidencia histórica de integración, R5 está integrado mediante PR #107 / merge `bc97db0` y aceptado como G118/E04. R6 quedó integrado mediante PR #111 / merge `bd2accb` y aceptado/publicado como G119/E05.
 
 DEV.2 abre y cierra una superficie interna y local para revisar el estado técnico
 de Developer Diagnostics sin alterar los cálculos previsionales, sin leer datos
@@ -34,6 +29,25 @@ de simulación y sin exponer información personal o financiera.
 
 DEV.2 no cambia cálculos, motores previsionales, normativa, resultados ni
 flujos públicos de simulación.
+
+<!-- UX6-R7-DEVELOPER-EXTENSIONS:START -->
+## Extensiones UX.6 del Portal Developer
+
+- perfil propio con nombre visible y avatar opcional;
+- avatar en filesystem local, nunca BLOB/base64 en SQLite;
+- SQLite conserva `avatar_relativo`;
+- raíz configurable mediante `MRP_DEVELOPER_MEDIA_DIR`;
+- administración jerárquica de cuentas y roles;
+- contraseña temporal de un solo visionado para creación/restablecimiento;
+- revocación de sesiones en cambios sensibles;
+- auditoría persistente `developer_user_audit`, append-only y separada de
+  Developer Diagnostics;
+- timestamps operativos mostrados en hora local manteniendo UTC persistido;
+- sistema visual/feedback/movimiento compartidos con App.
+
+Nada de esto almacena simulaciones, PDFs, salarios, cuotas o resultados en el
+almacén Developer.
+<!-- UX6-R7-DEVELOPER-EXTENSIONS:END -->
 
 ## Objetivo
 

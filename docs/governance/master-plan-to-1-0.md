@@ -3,7 +3,7 @@
 **Estado:** vigente
 **Versión base al iniciar el plan:** `0.0.25-beta`
 **Cierre histórico de PLAN.1:** `0.0.26-beta` / `v0.0.26-beta`
-**Versión transversal vigente:** `0.1.20.01-beta` — G120/E01 aceptado para UX.5 R6; UX.6 R1 es candidato G121/E01.
+**Versión transversal vigente:** `0.1.20.01-beta` — G120/E01 publicado; UX.6 mantiene G121/E01 reservado/no aceptado, con R7 activo y R8 pendiente.
 **Fecha:** 2026-08-25
 **Clasificación:** Producto / Arquitectura / QA / Release
 
@@ -74,11 +74,12 @@ Las referencias históricas a bloques previos se conservan como trazabilidad, pe
 
 ## Secuencia operativa UX.5 → UX.6
 
-UX.5 queda cerrado como un único estado revision-aware G120/E01 con revisión funcional R6. Sus R1–R6 no se aceptaron por separado.
+UX.5 está cerrado y publicado como G120/E01 (`0.1.20.01-beta`). UX.6 se
+ejecuta como un único candidato G121/E01 (`0.1.21.01-beta`) abierto en R1.
+R1–R6 están implementados; R7 reconcilia documentación y R8 mantiene pendiente
+la auditoría integral, aceptación y promoción.
 
-UX.6 se incorpora a la secuencia viva antes de PERSIST.1 como candidato G121/E01 (`0.1.21.01-beta`) después de la aceptación de UX.5.
-
-No se inicia PERSIST.1 mientras UX.5 o UX.6 permanezcan abiertos.
+No se inicia PERSIST.1 mientras UX.6 permanezca abierto.
 
 ## 1. Propósito
 

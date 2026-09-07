@@ -162,3 +162,14 @@ de credenciales no deben escribirse como contenido sensible de los logs.
 
 Los eventos de acceso y mantenimiento solo deben conservar metadata técnica
 mínima, outcome y motivos controlados.
+
+<!-- UX6-R7-USER-AUDIT:START -->
+## 10. Auditoría persistente de usuarios UX.6
+
+La auditoría de gestión de cuentas de UX.6 **no es Developer Diagnostics**.
+`app/core/developer_user_audit.py` registra en SQLite evidencia append-only de
+acciones administrativas. Conserva metadata mínima de actor/objetivo/rol/acción
+y resumen sanitizado; no almacena contraseñas, credenciales temporales, cookies,
+Bearer, tokens, datos previsionales ni PDF. Triggers impiden `UPDATE` y `DELETE`
+ordinarios sobre esa tabla.
+<!-- UX6-R7-USER-AUDIT:END -->

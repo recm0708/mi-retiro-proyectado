@@ -4,8 +4,8 @@
 **Versión vigente:** `0.1.20.01-beta` — G120/E01 aceptado para UX.5 R6
 **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
 **Último tag formal legacy:** `v0.0.26-beta`
-**Fecha de revisión:** 2026-09-04
-**Estado actual:** UX.5 R1–R6 quedaron consolidados y aceptados como G120/E01 (`0.1.20.01-beta`). UX.6 R1 es el candidato G121/E01 (`0.1.21.01-beta`) y debe cerrarse antes de PERSIST.1.
+**Fecha de revisión:** 2026-09-07
+**Estado actual:** UX.5 está cerrado/publicado como G120/E01 (`0.1.20.01-beta`). UX.6 mantiene G121/E01 (`0.1.21.01-beta`) reservado/no aceptado: R1–R6 completados, R7 documental activo y R8 pendiente antes de PERSIST.1.
 
 <!-- NOR1-R7-CLOSURE:START -->
 ## Estado NOR.1 / NOR.2
@@ -36,7 +36,7 @@ La secuencia operativa previa a SEC.2 queda:
     promoción PR #112 / commit `9424ea8` y tag
     `v0.1.19.05-beta`.
 15. **UX.5 R6** — cerrado/aceptado como G120/E01 (`0.1.20.01-beta`); R1–R6 consumen este único estado aceptado del bloque.
-16. **UX.6 R1** — auditoría integral de experiencia App + Developer; candidato G121/E01 (`0.1.21.01-beta`) antes de PERSIST.1.
+16. **UX.6** — candidato G121/E01 abierto en R1; R1–R6 implementados, R7 documental activo y R8 reservado para cierre/promoción.
 
 NOR.2 ejecutó los movimientos, renombrados, consolidaciones y retiros que
 NOR.1 deliberadamente no realizó.
@@ -96,13 +96,17 @@ VER.2 es un bloque transversal de reconciliación y **no añade un bloque 15** a
 
 ## Estado operativo UX.5 / UX.6
 
-UX.5 completó funcionalmente R1–R6 dentro del mismo candidato G120/E01. El cierre incluye el sistema visual base, shell y temas, selección Manual/Asistida, recorrido Manual, preparación documental Asistida, Mi Retiro Seguro, Ficha Digital, completitud, invalidación y protección de resultados.
+UX.5 está cerrado/publicado como G120/E01 (`0.1.20.01-beta`).
 
-G120/E01 queda aceptado para UX.5 R6 después del gate, PR #122, CI e integración. R1–R5 no consumieron Globales independientes.
+UX.6 conserva un único candidato G121/E01 todavía no aceptado:
 
-UX.6 queda registrado como el siguiente bloque de experiencia y pasa a ser candidato G121/E01. Concentrará la revisión visual completa de App y Portal Developer, accesibilidad, tooltips, microanimaciones, responsive, zoom, compatibilidad, revisión detallada de importadores y auditoría integral de redundancias, cascadas, código muerto y ownership.
+- R1–R2: shell, identidad, perfil, avatar, usuarios y auditoría persistente;
+- R3–R4: movimiento, accesibilidad y responsive compartidos;
+- R5–R6: importación oficial segura, privacidad pública y limpieza técnica;
+- R7: auditoría/reconciliación documental;
+- R8: auditoría integral, gate, aceptación y promoción.
 
-PERSIST.1 permanece detrás del cierre de UX.6.
+PERSIST.1 permanece detrás de R8.
 
 ## 1. Programa GOV.1 — Auditoría, Gobierno y Trazabilidad Pre-Beta
 

@@ -27,22 +27,17 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 ## Estado del proyecto
 
 - **Versión canónica vigente:** `0.1.20.01-beta`, obtenida exclusivamente
-  desde [`VERSION`](VERSION). Materializa UX.5 R6 como G120/E01 después
-  del desarrollo PR #122 / merge
-  `4c43a816526201c5869d2df8e88af44419c4df11` y de esta promoción.
-- **Último estado funcional integrado en `main`:** UX.5 R1–R6 mediante
-  PR #122 / merge `4c43a816526201c5869d2df8e88af44419c4df11`.
-- **Estado revision-aware reconciliado:** G120/E01 (`0.1.20.01-beta`)
-  queda aceptado para UX.5 R6; G121/E01 (`0.1.21.01-beta`) queda
-  reservado para UX.6 R1 antes de PERSIST.1.
-- **Última publicación revision-aware con tag:** `v0.1.19.05-beta`
-  (G119/E05), tag anotado y firmado sobre
-  `9424ea854f859a24fd01fe83bdf5d476b52fc213`, con objeto de tag
-  `530db2ffdb9e6230fb976fbaf39472bf7ab30ea5`. El workflow
-  `Git Tag Signature Verification` #17 finalizó en `success` y publicó
-  el GitHub Release prerelease ID `379454328`. `v0.1.18.04-beta`
-  (G118/E04) permanece preservado como publicación anterior.
-
+  desde [`VERSION`](VERSION). Materializa UX.5 R6 como G120/E01.
+- **Último estado aceptado en `main`:** UX.5 R6 / G120/E01.
+- **Candidato de desarrollo vigente:** UX.6 conserva G121/E01
+  (`0.1.21.01-beta`) reservado y todavía no aceptado. R1–R6 están
+  materializados en la rama de desarrollo; R7 ejecuta la reconciliación
+  documental integral y R8 conserva la auditoría, aceptación y promoción final.
+- **Última publicación revision-aware con tag:** `v0.1.20.01-beta`
+  (G120/E01), publicada sobre
+  `76586b5a7c77a5cffa97128a29ea77bd36cb988b`, con objeto de tag firmado
+  `7dbcca8071e2726b6aa4f17704bf41b92f6cd5bd` y GitHub Release prerelease
+  ID `383133233`.
 - **Última versión formal legacy:** `0.0.26-beta`.
 - **Etapa:** desarrollo beta; repositorio público y ejecución orientada
   actualmente a entorno local.
@@ -51,7 +46,10 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 - **DEV.2:** R1–R3 permanecen aceptados históricamente; R4 fue un cierre
   documental sin Global independiente; R5 queda aceptado/publicado como
   G118/E04 y R6 queda aceptado/publicado como G119/E05.
-- **UX.5:** R1–R6 quedan consolidados y aceptados como G120/E01; UX.6 R1 es el candidato G121/E01.
+- **UX.5:** R1–R6 quedan consolidados y aceptados como G120/E01.
+- **UX.6:** R1–R6 están implementados dentro del candidato G121/E01;
+  R7 está dedicado al cierre documental y R8 mantiene pendiente la
+  aceptación/promoción del bloque. PERSIST.1 no inicia antes de ese cierre.
 - **DOC.1:** R1–R5 cerrados; R6 permanece planificado para congelación
   documental final.
 - **SEC.2:** R1–R6 cerrados; R7 permanece planificado después de las

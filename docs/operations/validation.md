@@ -1,13 +1,13 @@
 # Validación
 
 **Estado:** Vigente
-**Versión revisada:** `0.1.20.01-beta` — UX.5 R6 aceptado como G120/E01; UX.6 R1 es candidato G121/E01 (`0.1.21.01-beta`).
+**Versión revisada:** `0.1.20.01-beta` — G120/E01 publicado; UX.6 mantiene G121/E01 reservado/no aceptado, R7 activo y R8 pendiente.
 **Versión base histórica:** `0.0.25-beta`
 **Base documental histórica:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal histórica preservada:** UX.4.6e R8 — validación funcional y procedencia editable — 2026-08-19
 **Última revisión transversal:** UX.4.6f R2 integrada y cierre del Paso 4 — 2026-08-20
 **Revisión de normalización:** NOR.1 R7 — cierre de estándares y preparación de NOR.2 — 2026-08-24
-**Última revisión operativa:** candidato de cierre UX.5 R6 — 2026-09-04
+**Última revisión operativa:** UX.6 R7 — auditoría documental integral — 2026-09-07
 **Clasificación:** Técnica / Calidad
 **Naturaleza documental:** Registro vivo acumulativo — mantiene la estrategia vigente y evidencia histórica de gates protegida por regresiones; los resultados históricos no se reescriben como si pertenecieran al estado actual.
 
@@ -230,6 +230,23 @@ Evidencia focal observada después de la corrección de Mi Retiro Seguro y del v
 - la revisión detallada visual, accesible y de mensajes pasa a UX.6.
 
 El gate completo de cierre local se ejecutó después de la reconciliación documental y obtuvo **11 PASS / 0 FAIL**: **1404 pruebas `unittest` OK**, **1444 pruebas `pytest` passed / 6865 subtests passed**, Markdown 166/166, 22 JavaScript válidos, 16 familias / 47 identificadores, 586 archivos Git/versionables y `pip check`, compilación Python, contrato revision-aware, manifiesto de publicación y `git diff --check` limpios. G120/E01 quedó aceptado después de PR #122 / merge `4c43a816526201c5869d2df8e88af44419c4df11`; la publicación formal mediante tag se completa después del merge de promoción y la revalidación de `main`.
+
+<!-- UX6-R7-VALIDATION:START -->
+## Validación del candidato UX.6 — previa a R8
+
+G121/E01 sigue sin aceptarse y `VERSION` permanece en `0.1.20.01-beta`.
+
+- R1–R2: `2b783bcca1e02cbc169a3c560f95b2a0069e659d`, firmado.
+- R3–R4: `9c96cc18cbcc751296b2feb761dbcab997a9107d`, firmado; pre-commit
+  10 PASS / 0 FAIL y 1477 `unittest` OK.
+- R5–R6: `f9cf50e0fe83e85092965562ad394271eafc52dd`, firmado.
+- R7 auditó 166 Markdown: 60 VIVO, 29 AUDITORIA, 64 HISTORICO, 9 PLANTILLA,
+  4 SOPORTE, 0 enlaces locales rotos, 118 señales heurísticas/46 candidatos
+  VIVO y 0 mezclas Developer en términos públicos.
+
+Las señales son candidatos semánticos, no órdenes de edición. El gate completo
+y la promoción se reservan para R8.
+<!-- UX6-R7-VALIDATION:END -->
 
 ## Atestación histórica Git pre-UX.5
 
@@ -681,7 +698,7 @@ python -m pip check
 
 ## 3. Inventario actual de pruebas
 
-Inventario vigente: **204 módulos**.
+Inventario vigente: **205 módulos**.
 
 - `tests/test_accessibility_themes.py`
 - `tests/test_accessibility_ux4.py`
@@ -877,6 +894,7 @@ Inventario vigente: **204 módulos**.
 - `tests/test_ux6_r5_r6_manual_privacy_scope.py`
 - `tests/test_ux6_r5_r6_public_terms_final.py`
 - `tests/test_ux6_r5_r6_seguro_cleanup.py`
+- `tests/test_ux6_r7_documentation_closure.py`
 - `tests/test_ver2_documentacion_vigente.py`
 - `tests/test_ver2_ledger_estructurado.py`
 - `tests/test_ver2_r1_reconciliacion_post_doc1.py`

@@ -2,8 +2,8 @@
 
 **Estado:** vigente / documento vivo
 **Versión base:** `0.1.20.01-beta` — G120/E01
-**Checkpoint candidato:** UX.6 R1 — G121/E01 (`0.1.21.01-beta`) reservado, no aceptado
-**Última replanificación:** 2026-09-04
+**Checkpoint candidato:** UX.6 — G121/E01 (`0.1.21.01-beta`) reservado/no aceptado; R1–R6 completados, R7 activo y R8 pendiente
+**Última replanificación:** 2026-09-07
 **Clasificación:** Planificación / Producto / Arquitectura / Seguridad / QA / Release
 
 Esta matriz ordena el trabajo pendiente antes de la primera versión oficial de
@@ -56,6 +56,21 @@ candidato fallido no lo consume.
 | 24 | **DOC.1 R6** | Congelación documental final | Última reconciliación de documentación pública/técnica antes de QA y release estable. | Reapertura planificada |
 | 25 | **QA.1** | Auditoría integral de cierre beta | Código, pruebas, UX, seguridad, accesibilidad, normativa, documentación, rendimiento básico, estabilidad, compatibilidad, datos corruptos y entorno limpio. | Planificado |
 | 26 | **REL.1** | Primera versión oficial | Freeze, build reproducible, SBOM/inventario, hashes, firma, instalación, soporte, release notes, validación limpia y `v1.0.0.0`. | Último bloque |
+
+<!-- UX6-R7-PROGRESS:START -->
+## 2.1. Estado de ejecución UX.6
+
+La fila UX.6 conserva el origen del candidato G121/E01 en R1. Sus revisiones
+internas no consumen Globales independientes mientras el candidato no sea
+aceptado.
+
+- R1–R2: completados.
+- R3–R4: completados.
+- R5–R6: completados.
+- R7: auditoría y reconciliación documental activa.
+- R8: auditoría integral, gate, aceptación y promoción pendientes.
+- PERSIST.1 continúa inmediatamente después de cerrar UX.6.
+<!-- UX6-R7-PROGRESS:END -->
 
 ## 3. Portal Developer — alcance confirmado
 

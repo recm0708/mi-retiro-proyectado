@@ -12,25 +12,16 @@
 **ADR indexadas:** 181 (`ADR-001` a `ADR-181`)
 
 <!-- DOC1-R1-REVISION-MANUAL:START -->
-## Nota de lectura post-MANT.1
-
-Este registro conserva decisiones históricas y vigentes.
-
-Estado transversal:
+## Nota de lectura vigente
 
 - las ADR históricas no se reescriben;
-- `VERSION` está sincronizado en `0.1.19.05-beta` (G119/E05);
-- DEV.2 R6 queda aceptado/publicado como G119/E05 después de
-  PR #111 / merge `bd2accb`, promoción PR #112 y tag
-  `v0.1.19.05-beta`;
-- G118/E04 permanece preservado mediante `v0.1.18.04-beta` como
-  publicación anterior;
-- UX.5 R1 queda reservado como G120/E01;
-- SEC.2 R1–R6 permanece cerrado y su historia se conserva.
-- PR #117 cerró la migración de automatización post-G119 sin consumir un
-  Global independiente.
-- PR #118 coordinó Pydantic/Pydantic Core y Dependency Review sin consumir
-  G120/E01.
+- `VERSION` está sincronizado en `0.1.20.01-beta` (G120/E01);
+- G120/E01 está publicado mediante `v0.1.20.01-beta`;
+- UX.6 mantiene G121/E01 reservado/no aceptado, con R1–R6 implementados, R7
+  documental y R8 pendiente;
+- UX.6 endurece contratos ya existentes de identidad visual, accesibilidad,
+  importación, privacidad y seguridad; R7 no crea por sí solo una ADR nueva;
+- SEC.2 R1–R6 permanece cerrado.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 
 Este registro conserva decisiones de arquitectura, modelado, UX, precisión, seguridad y aplicación normativa. Una ADR explica por qué el proyecto adoptó una decisión; no crea una norma jurídica.
