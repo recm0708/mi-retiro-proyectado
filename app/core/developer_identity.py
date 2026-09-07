@@ -33,6 +33,7 @@ class PermisoDeveloper(StrEnum):
     USUARIOS_CREAR = "users.create"
     USUARIOS_EDITAR = "users.edit"
     USUARIOS_DESACTIVAR = "users.disable"
+    USUARIOS_ELIMINAR = "users.delete"
 
     ROLES_ASIGNAR_BASICOS = "roles.assign.basic"
     ROLES_ASIGNAR_ADMIN = "roles.assign.admin"

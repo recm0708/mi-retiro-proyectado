@@ -67,6 +67,9 @@
       !sidebar
       || !toggle
     ) {
+      document.documentElement.classList.remove(
+        "app-sidebar-collapsed",
+      );
       return;
     }
 
@@ -123,11 +126,20 @@
 
 
     function sincronizarAria() {
+      const abierto = estaAbierto();
+
       toggle.setAttribute(
         "aria-expanded",
-        estaAbierto()
+        abierto
           ? "true"
           : "false",
+      );
+
+      toggle.setAttribute(
+        "aria-label",
+        abierto
+          ? "Contraer navegación"
+          : "Expandir navegación",
       );
     }
 
@@ -221,6 +233,15 @@
 
     aplicarPreferencia();
     sincronizarAria();
+
+    /*
+     * El estado persistido ya quedó transferido al body.
+     * Se retira la clase temprana del elemento html sin
+     * cambiar la geometría visible.
+     */
+    document.documentElement.classList.remove(
+      "app-sidebar-collapsed",
+    );
   }
 
 

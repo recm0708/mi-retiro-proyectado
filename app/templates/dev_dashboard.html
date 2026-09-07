@@ -3,6 +3,16 @@
 {% block title %}Resumen · Portal Developer · {{ app_name }}{% endblock %}
 
 {% block content %}
+{% if request.query_params.get("sesion") == "limite" %}
+<div class="container-fluid pt-3">
+  <div class="alert alert-warning mb-0" role="status">
+    Se alcanzó el límite de sesiones simultáneas de tu cuenta.
+    Se cerró automáticamente la sesión más antigua y esta sesión
+    permanece activa.
+  </div>
+</div>
+{% endif %}
+
 <section class="dev-home-hero">
   <div class="dev-home-hero-copy">
     <span class="dev-kicker">
@@ -14,9 +24,9 @@
     </h1>
 
     <p>
-      Revisa el estado técnico de Mi Retiro Proyectado y
-      accede rápidamente a diagnóstico, eventos, archivos y
-      operaciones administrativas disponibles para tu cuenta.
+      Supervisa el estado técnico de Mi Retiro Proyectado y
+      accede a diagnóstico, eventos, archivos, mantenimiento y
+      privacidad según los permisos de tu cuenta.
     </p>
   </div>
 
@@ -47,17 +57,17 @@
   <div class="dev-home-heading">
     <div>
       <span class="dev-kicker">
-        Vista general
+        Operación
       </span>
 
       <h2 id="dev-home-overview-title">
-        Herramientas disponibles
+        Áreas operativas
       </h2>
     </div>
 
     <p>
-      Cada área mantiene una responsabilidad técnica separada
-      y opera únicamente en el entorno Developer local.
+      Las funciones visibles dependen del rol de la cuenta y
+      permanecen limitadas al entorno Developer local.
     </p>
   </div>
 
@@ -106,6 +116,7 @@
       </a>
     </article>
 
+    {% if "maintenance.read" in dev_permisos %}
     <article class="dev-home-card">
       <span class="dev-kicker">Operación</span>
       <h3>Mantenimiento</h3>
@@ -119,6 +130,7 @@
         Abrir mantenimiento
       </a>
     </article>
+    {% endif %}
 
     <article class="dev-home-card">
       <span class="dev-kicker">Protección</span>

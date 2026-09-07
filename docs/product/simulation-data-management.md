@@ -1,10 +1,10 @@
 # Gestión de datos de la simulación
 
 **Estado:** Vigente
-**Versión de aplicación revisada:** `0.1.20.01-beta`
+**Versión de aplicación revisada:** `0.1.21.01-beta`
 **Versión base documental:** `0.0.23-beta`
 **Revisión documental base:** GOV.1.3 R2 — 2026-08-17
-**Actualización vigente:** UX.4.6e R8 — procedencia editable y control documental — 2026-08-19
+**Actualización vigente:** UX.6 R5–R6 — importación temporal, revisión y confirmación explícita — 2026-09-07
 **Clasificación:** Técnica / Privacidad
 
 Este documento describe el ciclo de vida actual del estado local del asistente.
@@ -174,11 +174,14 @@ Una Ficha cuyo último período sea anterior al mes actual **verificado** requie
 
 ## 10. Privacidad de archivos
 
-Los archivos PDF se leen para su análisis y no se guardan como parte del estado de simulación.
+Los PDF de Mi Retiro Seguro y Ficha Digital se procesan temporalmente para
+construir una vista previa y el archivo original no se persiste por los
+endpoints ni entra al estado de simulación. Seleccionar/analizar no equivale a
+importar: los datos pasan a la copia de trabajo solo cuando el Asegurado(a)
+confirma **Importar datos**.
 
-El navegador solo conserva los datos confirmados y metadata necesaria para continuidad de interfaz.
-
-El indicador global de análisis de adjuntos es estado efímero de interfaz: deshabilita temporalmente los controles, evita ejecuciones duplicadas y no añade persistencia del archivo.
+El navegador puede conservar datos confirmados y metadata de procedencia, nunca
+la ruta local ni el binario. El indicador de análisis de adjuntos es efímero.
 
 ## 11. Resultados por fotografía
 

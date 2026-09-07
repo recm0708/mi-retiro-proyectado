@@ -9,12 +9,12 @@
     "tracked_files": 459
   },
   "current_candidate": {
-    "global_revision": 121,
-    "revision_aware": "0.1.21.01-beta",
-    "block": "UX.6",
+    "global_revision": 122,
+    "revision_aware": "0.1.22.01-beta",
+    "block": "PERSIST.1",
     "revision": "R1",
     "state": "reserved_not_accepted",
-    "next_functional_block_if_accepted": "PERSIST.1",
+    "next_functional_block_if_accepted": "REP.1",
     "next_functional_global_if_accepted": null,
     "edition": 1
   },
@@ -547,9 +547,9 @@
       "identifier": "PERSIST.1",
       "family": "PERSIST",
       "kind": "block",
-      "status": "planned_reserved",
+      "status": "candidate_r1",
       "meaning": "Persistencia voluntaria y segura.",
-      "evidence": "docs/governance/master-plan-to-1-0.md",
+      "evidence": "Reservado como siguiente candidato después de cerrar UX.6 en G121/E01; la reserva no inicia PERSIST.1.",
       "global_refs": [],
       "reusable_for_different_scope": false
     },
@@ -631,9 +631,21 @@
       "identifier": "UX.6",
       "family": "UX",
       "kind": "block",
-      "status": "candidate_r1",
-      "meaning": "Auditoría integral de experiencia de App y Portal Developer: revisión visual, accesibilidad, responsive, interacción, compatibilidad y limpieza de ownership de código; R1 queda reservado como G121/E01.",
-      "evidence": "Planificado después de G120/E01; G121/E01 reservado para UX.6 R1.",
+      "status": "closed",
+      "meaning": "Auditoría y cierre integral de experiencia de App y Portal Developer; R1–R8 quedan consolidados y aceptados como G121/E01 con revisión funcional R8.",
+      "evidence": "PR #124; G121/E01; checkpoints firmados R1–R8; Repository Quality Gate R8 10 PASS / 0 FAIL.",
+      "global_refs": [
+        "G121"
+      ],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "UX.7",
+      "family": "UX",
+      "kind": "block",
+      "status": "planned_reserved",
+      "meaning": "Revisión visual final no bloqueante de App, Portal Developer y futuras superficies antes de la versión estable; no es prerrequisito para continuar PERSIST.1 ni otros bloques.",
+      "evidence": "README.md; VERSIONING.md; docs/governance/roadmap.md.",
       "global_refs": [],
       "reusable_for_different_scope": false
     }

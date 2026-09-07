@@ -34,7 +34,7 @@ class TestUX46bRevision3TerminosNavegacion(unittest.TestCase):
             "Objeto y alcance",
             "Responsable y canales de contacto",
             "Marco legal de referencia",
-            "Obtención de la información",
+            "Obtención y procedencia de la información",
             "Datos que pueden tratarse",
             "Finalidades del tratamiento",
             "Consentimiento y carácter voluntario",

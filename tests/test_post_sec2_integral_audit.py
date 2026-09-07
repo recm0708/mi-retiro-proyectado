@@ -68,12 +68,17 @@ class TestPostSec2IntegralAudit(unittest.TestCase):
         ]
         self.assertEqual(140, len(filas))
 
-    def test_documentacion_viva_reconoce_sesion_admin(self):
+    def test_documentacion_viva_separa_sesion_admin_de_privacidad_publica(self):
         threat = (ROOT / "docs/security/threat-model.md").read_text(encoding="utf-8")
         privacy = (ROOT / "docs/security/privacy-policy.md").read_text(encoding="utf-8")
         security = (ROOT / "docs/security/security-and-privacy.md").read_text(encoding="utf-8")
-        for texto in (threat, privacy, security):
+
+        for texto in (threat, security):
             self.assertIn("mrp_admin_session", texto)
+
+        self.assertNotIn("mrp_admin_session", privacy)
+        self.assertNotIn("Portal Developer", privacy)
+        self.assertIn("aplicación principal de simulación", privacy)
         self.assertIn("logout POST", threat)
 
 

@@ -13,7 +13,18 @@ class TestUX46ePreparacionPublica(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.base = (ROOT / "app/templates/base.html").read_text(encoding="utf-8")
+        cls.base = (
+            (ROOT / "app/templates/base.html").read_text(
+                encoding="utf-8"
+            )
+            + "\n"
+            + (
+                ROOT
+                / "app/templates/partials/global_footer.html"
+            ).read_text(
+                encoding="utf-8"
+            )
+        )
         cls.metodologia = (ROOT / "app/templates/methodology.html").read_text(encoding="utf-8")
         cls.terminos = (ROOT / "app/templates/partials/privacy_consent.html").read_text(encoding="utf-8")
         cls.readme = (ROOT / "README.md").read_text(encoding="utf-8")

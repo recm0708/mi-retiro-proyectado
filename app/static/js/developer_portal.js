@@ -10,41 +10,98 @@
   const MOBILE_QUERY = "(max-width: 991.98px)";
 
   function iniciarVisibilidadPassword() {
-    const toggle = document.querySelector(
+    const toggles = document.querySelectorAll(
       "[data-dev-password-toggle]",
     );
 
-    const input =
-      document.getElementById("dev-password")
-      || document.getElementById("admin-token");
-
-    if (!toggle || !input) {
-      return;
-    }
-
-    toggle.addEventListener("click", () => {
-      const mostrar = input.type === "password";
-
-      input.type = mostrar
-        ? "text"
-        : "password";
-
-      toggle.textContent = mostrar
-        ? "Ocultar"
-        : "Mostrar";
-
-      toggle.setAttribute(
-        "aria-pressed",
-        mostrar ? "true" : "false",
+    toggles.forEach((toggle) => {
+      const targetId = (
+        toggle.dataset.devPasswordTarget
+        || toggle.getAttribute("aria-controls")
+        || ""
       );
 
-      input.focus();
+      const input = document.getElementById(
+        targetId,
+      );
+
+      if (!input) {
+        return;
+      }
+
+      const nombre = (
+        toggle.dataset.devPasswordName
+        || "contraseña"
+      );
+
+      const iconoOculto = toggle.querySelector(
+        "[data-dev-password-icon-hidden]",
+      );
+
+      const iconoVisible = toggle.querySelector(
+        "[data-dev-password-icon-visible]",
+      );
+
+      function sincronizarVisibilidad() {
+        const visible = (
+          input.type === "text"
+        );
+
+        toggle.setAttribute(
+          "aria-pressed",
+          visible
+            ? "true"
+            : "false",
+        );
+
+        const accion = visible
+          ? `Ocultar ${nombre}`
+          : `Mostrar ${nombre}`;
+
+        toggle.setAttribute(
+          "aria-label",
+          accion,
+        );
+
+        toggle.setAttribute(
+          "title",
+          accion,
+        );
+
+        if (iconoOculto) {
+          iconoOculto.toggleAttribute(
+            "hidden",
+            visible,
+          );
+        }
+
+        if (iconoVisible) {
+          iconoVisible.toggleAttribute(
+            "hidden",
+            !visible,
+          );
+        }
+      }
+
+      toggle.addEventListener(
+        "click",
+        () => {
+          input.type = (
+            input.type === "password"
+              ? "text"
+              : "password"
+          );
+
+          sincronizarVisibilidad();
+          input.focus();
+        },
+      );
+
+      sincronizarVisibilidad();
     });
   }
 
   function iniciarSidebar() {
-    const MOBILE_QUERY = "(max-width: 991.98px)";
-
     const STORAGE_KEY = (
       "miRetiroProyectado.shell.sidebar"
     );
@@ -69,6 +126,9 @@
       !sidebar
       || !toggle
     ) {
+      document.documentElement.classList.remove(
+        "dev-sidebar-collapsed",
+      );
       return;
     }
 
@@ -143,11 +203,20 @@
 
 
     function sincronizarEstado() {
+      const abierto = estaAbierto();
+
       toggle.setAttribute(
         "aria-expanded",
-        estaAbierto()
+        abierto
           ? "true"
           : "false",
+      );
+
+      toggle.setAttribute(
+        "aria-label",
+        abierto
+          ? "Contraer menú Developer"
+          : "Expandir menú Developer",
       );
     }
 
@@ -237,6 +306,15 @@
 
     aplicarPreferencia();
     sincronizarEstado();
+
+    /*
+     * El body ya conserva el estado definitivo del sidebar.
+     * La clase aplicada antes del primer pintado deja de ser
+     * necesaria y se elimina sin provocar transición visual.
+     */
+    document.documentElement.classList.remove(
+      "dev-sidebar-collapsed",
+    );
   }
 
   document.addEventListener(
@@ -408,5 +486,8 @@
     "DOMContentLoaded",
     iniciarVisorEventos,
   );
+
+
+
 
 })();

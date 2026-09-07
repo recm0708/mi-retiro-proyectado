@@ -15,6 +15,7 @@ Para conocer el estado actual se consulta primero [el índice general de documen
 
 ### Documentación
 
+- [Auditoría documental integral UX.6 R7](documentation/ux6-r7-documentation-audit.md) — reconciliación semántica de la documentación viva del candidato G121/E01 antes de R8.
 - [Cierre UX.5 — sistema visual y flujo Manual/Asistido](documentation/ux5-closure.md) — evidencia del candidato G120/E01 y frontera hacia UX.6.
 - [Auditoría documental integral pre-UX.5](documentation/pre-ux5-documentation-audit.md) — cierre PREUX5.2 previo a UX.5, con reconciliación post-G119 y G120/E01 preservado.
 - [Reconciliación integral de documentación post-G119](documentation/post-g119-documentation-reconciliation.md) — sincronización documental, normativa y estructural posterior a G119/E05.

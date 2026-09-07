@@ -11,22 +11,19 @@
 **Estado R3:** integrado en `main` mediante PR #40.
 
 <!-- DOC1-R1-REVISION-MANUAL:START -->
-## Nota de lectura post-MANT.1
+## Nota de lectura vigente
 
-DEV.2 conserva su historia R1–R5 y queda cerrado funcionalmente después de R6.
+DEV.2 permanece cerrado después de R6/G119-E05. UX.6 amplía la experiencia Developer sin reabrir DEV.2.
 
-Estado vigente:
-
-- R1–R4 quedan preservados.
-- R5 está integrado mediante PR #107 / merge `bc97db0`, aceptado como G118/E04
-  y publicado mediante `v0.1.18.04-beta`.
-- R6 está integrado mediante PR #111 / merge `bd2accb` y se materializa
-  como G119/E05 (`0.1.19.05-beta`).
-- G120/E01 (`0.1.20.01-beta`) permanece reservado para el cierre UX.5 R6; UX.6 queda planificado después sin Global preasignado.
-- La sesión humana Developer permanece separada del contrato Bearer técnico.
-- SEC.2 R1–R6 permanece cerrado y SEC.2 R7 se mantiene planificado para
-  el hardening posterior a las nuevas superficies.
+- UX.6 R1–R8 queda consolidado como G121/E01 con revisión funcional R8.
+- PR #124 materializa la integración/promoción.
+- Perfil/avatar, usuarios/RBAC, credenciales temporales, revocación y auditoría persistente permanecen vigentes.
+- App y Developer comparten Design System, movimiento y accesibilidad.
+- La sesión humana continúa separada del Bearer técnico.
+- PERSIST.1 R1 queda reservado como G122/E01, sin iniciar.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
+
+Como evidencia histórica de integración, R5 está integrado mediante PR #107 / merge `bc97db0` y aceptado como G118/E04. R6 quedó integrado mediante PR #111 / merge `bd2accb` y aceptado/publicado como G119/E05.
 
 DEV.2 abre y cierra una superficie interna y local para revisar el estado técnico
 de Developer Diagnostics sin alterar los cálculos previsionales, sin leer datos
@@ -34,6 +31,25 @@ de simulación y sin exponer información personal o financiera.
 
 DEV.2 no cambia cálculos, motores previsionales, normativa, resultados ni
 flujos públicos de simulación.
+
+<!-- UX6-R7-DEVELOPER-EXTENSIONS:START -->
+## Extensiones UX.6 del Portal Developer
+
+- perfil propio con nombre visible y avatar opcional;
+- avatar en filesystem local, nunca BLOB/base64 en SQLite;
+- SQLite conserva `avatar_relativo`;
+- raíz configurable mediante `MRP_DEVELOPER_MEDIA_DIR`;
+- administración jerárquica de cuentas y roles;
+- contraseña temporal de un solo visionado para creación/restablecimiento;
+- revocación de sesiones en cambios sensibles;
+- auditoría persistente `developer_user_audit`, append-only y separada de
+  Developer Diagnostics;
+- timestamps operativos mostrados en hora local manteniendo UTC persistido;
+- sistema visual/feedback/movimiento compartidos con App.
+
+Nada de esto almacena simulaciones, PDFs, salarios, cuotas o resultados en el
+almacén Developer.
+<!-- UX6-R7-DEVELOPER-EXTENSIONS:END -->
 
 ## Objetivo
 
@@ -259,6 +275,9 @@ data/developer/portal.sqlite3
 
 Puede cambiarse mediante `MRP_DEVELOPER_STORE_PATH`.
 
+Las fotografías de perfil no se almacenan dentro de SQLite ni se versionan en Git. La base conserva únicamente una referencia relativa.
+Durante el desarrollo, la ubicación predeterminada es `data/developer/media/avatars/`. La raíz de medios puede trasladarse fuera del repositorio mediante `MRP_DEVELOPER_MEDIA_DIR` sin cambiar las referencias persistidas.
+
 Esta base no contiene datos de simulación previsional. Mantiene únicamente
 estado administrativo, entre otros:
 
@@ -286,10 +305,11 @@ desactivación, degradación de rol o promoción de otra cuenta a Owner.
 | `MRP_ADMIN_TOKEN` | sin valor | Compatibilidad para el contrato técnico Bearer legado. |
 | `MRP_ADMIN_SESSION_MINUTES` | `30` | Tiempo máximo de inactividad de una sesión administrativa. |
 | `MRP_ADMIN_SESSION_MAX_HOURS` | `8` | Duración absoluta máxima de una sesión administrativa. |
-| `MRP_ADMIN_MAX_SESSIONS` | `5` | Límite configurable de sesiones administrativas activas. |
+| `MRP_ADMIN_MAX_SESSIONS` | `5` | Límite configurable de sesiones simultáneas por cuenta; una sesión adicional revoca la más antigua de esa misma cuenta. |
 | `MRP_ADMIN_COOKIE_SECURE` | desactivado | Debe habilitarse cuando el Portal Developer se sirve mediante HTTPS. |
 | `MRP_ADMIN_COOKIE_SAMESITE` | `lax` | Política `SameSite` de la cookie `mrp_admin_session`. |
 | `MRP_DEVELOPER_STORE_PATH` | `data/developer/portal.sqlite3` | Ubicación del almacén SQLite administrativo local. |
+| `MRP_DEVELOPER_MEDIA_DIR` | `data/developer/media/` | Raíz persistente configurable para medios privados del Portal Developer, incluidos los avatares. |
 | `MRP_DIAGNOSTIC_DIR` | `logs/diagnostico/` | Permite sobrescribir el directorio local de Developer Diagnostics. |
 
 Las rutas de datos Developer, diagnósticos y secretos son artefactos locales
@@ -311,6 +331,18 @@ y no deben incorporarse al contenido versionado normal del repositorio.
 | `/dev/mantenimiento/revocar-sesiones` | Revocación reforzada de sesiones administrativas. |
 | `/dev/privacidad` | Controles técnicos de privacidad y seguridad del portal. |
 | `/dev/perfil` | Perfil de la identidad Developer autenticada. |
+| `/dev/usuarios` | Directorio administrativo de cuentas autorizado por RBAC. |
+| `/dev/usuarios/crear` | Creación reforzada de cuentas con contraseña temporal. |
+| `/dev/usuarios/{identificador}/datos` | Edición del nombre visible de una cuenta gestionable. |
+| `/dev/usuarios/{identificador}/editar` | Edición unificada de nombre, rol y estado con una sola revalidación; los campos omitidos conservan su valor. |
+| `/dev/usuarios/{identificador}/rol` | Cambio reforzado de rol con revocación de sesiones. |
+| `/dev/usuarios/{identificador}/estado` | Activación o desactivación reforzada de una cuenta. |
+| `/dev/usuarios/{identificador}/password-temporal` | Restablecimiento reforzado a una credencial temporal de un solo visionado. |
+| `/dev/usuarios/{identificador}/eliminar` | Eliminación irreversible Owner-only con CSRF, revalidación, confirmación y revocación de sesiones. |
+| `/dev/perfil/datos` | Actualización de los datos personales editables del perfil propio. |
+| `/dev/perfil/avatar` | Carga o sustitución segura de la foto de perfil propia. |
+| `/dev/perfil/avatar/eliminar` | Eliminación de la foto personalizada y retorno a las iniciales. |
+| `/dev/perfil/avatar/{identificador}` | Entrega autenticada de la foto de perfil autorizada. |
 | `/dev/perfil/password` | Cambio seguro de la contraseña propia. |
 | `/dev/acceso-tecnico` | Explicación y separación del acceso técnico Bearer. |
 | `/dev/centro-desarrollo` | Superficie técnica legacy preservada para compatibilidad autorizada. |

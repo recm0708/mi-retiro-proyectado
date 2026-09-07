@@ -1,7 +1,7 @@
 # Modelo de amenazas
 
 **Estado:** GOV.1.5 R1 — vigente como modelo técnico interno
-**Versión de aplicación revisada:** `0.1.20.01-beta`
+**Versión de aplicación revisada:** `0.1.21.01-beta`
 **Versión base histórica:** `0.0.25-beta`
 **Versión base histórica preservada:** `0.0.23-beta`
 **Fecha de cierre original:** 2026-08-17
@@ -380,3 +380,14 @@ se redactó el modelo original. AUD.SEC2 R1 incorpora explícitamente:
 
 La cookie administrativa no convierte la aplicación en un sistema de cuentas de
 usuarios ni crea persistencia de simulaciones.
+
+<!-- UX6-R7-THREAT-EXTENSION:START -->
+## Revisión UX.6 de la frontera Developer
+
+F7 incorpora medios de perfil locales y auditoría append-only. Los avatares se
+referencian de forma relativa, se excluyen de Git y usan una raíz controlada.
+La gestión de cuentas conserva RBAC, CSRF, revalidación, revocación de sesiones
+y no persistencia de contraseñas temporales. El ledger de auditoría no contiene
+datos previsionales y sus triggers impiden actualización/eliminación ordinaria.
+Un despliegue remoto/compartido sigue requiriendo revisión específica.
+<!-- UX6-R7-THREAT-EXTENSION:END -->

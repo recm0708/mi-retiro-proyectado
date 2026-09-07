@@ -217,26 +217,91 @@ class UX46fR1ConsistenciaProcedenciaAdjuntosTests(unittest.TestCase):
             1,
         )
 
-    def test_13_todos_los_inputs_de_archivo_actuales_estan_cubiertos(self):
-        plantillas = list((ROOT / "app/templates").rglob("*.html"))
+    def test_13_todos_los_inputs_de_archivo_actuales_estan_clasificados(self):
+        plantillas = list(
+            (ROOT / "app/templates").rglob("*.html")
+        )
+
         ids_archivo: set[str] = set()
-        patron = re.compile(r'<input\b(?=[^>]*\btype="file")(?=[^>]*\bid="([^"]+)")[^>]*>', re.I)
+
+        patron = re.compile(
+            r'<input\b'
+            r'(?=[^>]*\btype="file")'
+            r'(?=[^>]*\bid="([^"]+)")'
+            r'[^>]*>',
+            re.I,
+        )
+
         for plantilla in plantillas:
-            ids_archivo.update(patron.findall(plantilla.read_text(encoding="utf-8")))
+            ids_archivo.update(
+                patron.findall(
+                    plantilla.read_text(
+                        encoding="utf-8"
+                    )
+                )
+            )
+
+        ids_documentos_analizados = {
+            "import-comprobante-pdf",
+            "import-ficha-digital-pdf",
+            "referencia-mi-retiro-pdf",
+        }
+
+        ids_media_developer = {
+            "dev-profile-avatar",
+        }
 
         self.assertEqual(
             ids_archivo,
-            {
-                "import-comprobante-pdf",
-                "import-ficha-digital-pdf",
-                "referencia-mi-retiro-pdf",
-            },
+            ids_documentos_analizados | ids_media_developer,
         )
-        codigo_analizadores = self.importacion_js + self.referencia_js
-        for identificador in ids_archivo:
-            with self.subTest(identificador=identificador):
-                self.assertIn(f'getElementById("{identificador}")', codigo_analizadores)
-        self.assertIn('id="estado-procesamiento-referencia-mi-retiro"', self.referencia)
+
+        codigo_analizadores = (
+            self.importacion_js
+            + self.referencia_js
+        )
+
+        for identificador in ids_documentos_analizados:
+            with self.subTest(
+                documento=identificador
+            ):
+                self.assertIn(
+                    f'getElementById("{identificador}")',
+                    codigo_analizadores,
+                )
+
+        for identificador in ids_media_developer:
+            with self.subTest(
+                media_developer=identificador
+            ):
+                self.assertNotIn(
+                    f'getElementById("{identificador}")',
+                    codigo_analizadores,
+                )
+
+        perfil = leer(
+            "app/templates/dev_profile.html"
+        )
+
+        self.assertIn(
+            'id="dev-profile-avatar"',
+            perfil,
+        )
+
+        self.assertIn(
+            'accept="image/png,image/jpeg,image/webp"',
+            perfil,
+        )
+
+        self.assertIn(
+            'action="/dev/perfil/avatar"',
+            perfil,
+        )
+
+        self.assertIn(
+            'id="estado-procesamiento-referencia-mi-retiro"',
+            self.referencia,
+        )
 
     def test_14_listener_y_documentacion_r1_quedan_trazados(self):
         self.assertIn(

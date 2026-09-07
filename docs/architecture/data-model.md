@@ -1,7 +1,7 @@
 # Modelo de datos
 
 **Estado:** Vigente
-**Versión de aplicación revisada:** `0.1.20.01-beta`
+**Versión de aplicación revisada:** `0.1.21.01-beta`
 **Versión base histórica:** `0.0.23-beta`
 **Revisión documental:** GOV.1.3 R2 — 2026-08-17
 **Actualización de estado frontend:** UX.4.6f R1.1 — bloqueo documental y decisión explícita de historial — 2026-08-20
@@ -292,6 +292,19 @@ identificador temporal.
 
 El almacén Developer no contiene datos de Pasos 1–6, PDF, salarios, cuotas ni
 resultados previsionales.
+
+<!-- UX6-R7-DATA-MODEL:START -->
+## 13.2. Avatar y auditoría administrativa UX.6
+
+- `avatar_relativo`: referencia relativa opcional al archivo; SQLite no guarda
+  binario ni base64.
+- `developer_user_audit`: tabla append-only con timestamp UTC, acción, actor,
+  objetivo, roles y resumen sanitizado.
+
+Triggers impiden `UPDATE` y `DELETE` ordinarios. La auditoría de usuarios es
+distinta de Developer Diagnostics y no almacena contraseñas temporales,
+cookies, tokens ni otros secretos.
+<!-- UX6-R7-DATA-MODEL:END -->
 
 ## 14. Procedencia
 

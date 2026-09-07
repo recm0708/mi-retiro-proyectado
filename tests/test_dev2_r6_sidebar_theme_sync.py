@@ -177,7 +177,7 @@ class TestDev2R6SidebarThemeSync(unittest.TestCase):
             js,
         )
 
-    def test_toggle_password_apunta_al_formulario_r6(self):
+    def test_toggle_password_apunta_al_control_vigente(self):
         js = (
             ROOT
             / "app/static/js/developer_portal.js"
@@ -186,6 +186,21 @@ class TestDev2R6SidebarThemeSync(unittest.TestCase):
         )
 
         self.assertIn(
+            '"[data-dev-password-toggle]"',
+            js,
+        )
+
+        self.assertIn(
+            "toggle.dataset.devPasswordTarget",
+            js,
+        )
+
+        self.assertIn(
+            "getElementById(",
+            js,
+        )
+
+        self.assertNotIn(
             'getElementById("dev-password")',
             js,
         )

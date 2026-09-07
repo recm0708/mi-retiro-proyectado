@@ -5,6 +5,23 @@
 **Revisión de planificación hacia 1.0:** 2026-08-20
 **Reconciliación revision-aware:** 2026-08-22
 
+<!-- UX6-R8-PROMOTION:START -->
+## Promoción G121/E01 — UX.6 R8
+
+- Estado aceptado en este snapshot de promoción: G121/E01
+  (`0.1.21.01-beta`) para UX.6 R8.
+- R1–R8 se consolidan en un único estado aceptado con ordinal E01.
+- PR de integración/promoción: #124.
+- Checkpoints firmados: `2b783bc`, `9c96cc1`, `f9cf50e`, `0bbcece` y `f2b7ed0`.
+- Gate R8: 10 PASS / 0 FAIL; 1508 `unittest` OK; Markdown 167;
+  27 JavaScript; 16 familias / 47 identificadores.
+- PERSIST.1 R1 queda reservado como G122/E01 (`0.1.22.01-beta`);
+  la reserva no inicia el bloque.
+- UX.7 permanece como revisión visual final no bloqueante.
+- No existe tag ni GitHub Release de G121/E01 antes de merge/revalidación.
+- La publicación final exige tag anotado/firmado y GitHub Release prerelease.
+<!-- UX6-R8-PROMOTION:END -->
+
 <!-- DOC1-R1-POST-MANT1:START -->
 
 ## Promoción G120/E01 — UX.5 R6
@@ -23,8 +40,10 @@
   del PR #122 finalizaron en `success`.
 - G121/E01 (`0.1.21.01-beta`) queda reservado para UX.6 R1.
 - PERSIST.1 permanece detrás del cierre de UX.6.
-- El tag `v0.1.20.01-beta` se crea únicamente después del merge de esta
-  promoción y de la revalidación post-merge de `main`.
+- Publicación final: tag anotado y firmado `v0.1.20.01-beta` sobre
+  `76586b5a7c77a5cffa97128a29ea77bd36cb988b`, objeto
+  `7dbcca8071e2726b6aa4f17704bf41b92f6cd5bd` y GitHub Release prerelease
+  ID `383133233`.
 
 
 ## Promoción G119/E05 — DEV.2 R6

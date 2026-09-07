@@ -9,6 +9,7 @@ DESIGN = ROOT / "app/static/css/design-system.css"
 TEMA = ROOT / "app/static/js/theme.js"
 INDEX = ROOT / "app/templates/index.html"
 BASE = ROOT / "app/templates/base.html"
+FOOTER = ROOT / "app/templates/partials/global_footer.html"
 TEMPLATES = ROOT / "app/templates"
 
 
@@ -97,10 +98,10 @@ class TestEstabilizacionVisual(unittest.TestCase):
 
     def test_inicio_es_portada_orientada_a_beneficios_y_no_al_motor(self):
         contenido = INDEX.read_text(encoding="utf-8")
-        self.assertIn("Planifica tu retiro con más claridad", contenido)
-        self.assertIn("Proyecta tu jubilación con información clara, útil y comparable", contenido)
+        self.assertIn("Planificación previsional", contenido)
+        self.assertIn("Simula tu retiro con información clara, trazable y comparable", contenido)
         self.assertIn("Vista ilustrativa", contenido)
-        self.assertIn("Entiende mejor cada decisión de retiro", contenido)
+        self.assertIn("Revisa las variables que cambian tu proyección", contenido)
         self.assertIn("De tus datos a un resultado explicado", contenido)
         self.assertIn("Comenzar simulación", contenido)
         self.assertNotIn("motor de cálculo específico", contenido)
@@ -123,7 +124,11 @@ class TestEstabilizacionVisual(unittest.TestCase):
         self.assertIn("align-self-start btn-center-content", resultados_js)
 
     def test_footer_moderno_no_repite_acceso_a_mi_caja_digital(self):
-        base = BASE.read_text(encoding="utf-8")
+        base = (
+            BASE.read_text(encoding="utf-8")
+            + "\n"
+            + FOOTER.read_text(encoding="utf-8")
+        )
         moderno = DESIGN.read_text(encoding="utf-8")
 
         self.assertIn("footer-modern", base)

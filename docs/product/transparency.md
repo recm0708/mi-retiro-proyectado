@@ -1,7 +1,7 @@
 # Transparencia del producto
 
 **Estado:** Vigente
-**Versión de aplicación revisada:** `0.1.20.01-beta`
+**Versión de aplicación revisada:** `0.1.21.01-beta`
 **Versión base histórica:** `0.0.25-beta`
 **Versión base histórica preservada:** `0.0.23-beta`
 **Base documental preservada:** GOV.1.3 R4 — 2026-08-17
@@ -9,20 +9,14 @@
 **Clasificación:** Pública / Auditoría
 
 <!-- DOC1-R1-REVISION-MANUAL:START -->
-## Nota de lectura post-MANT.1
+## Nota de lectura vigente
 
-La transparencia del producto se interpreta desde el estado revision-aware
-vigente.
-
-- `VERSION` está sincronizado en `0.1.19.05-beta` (G119/E05).
-- DEV.2 R6 queda aceptado/publicado como G119/E05 después de
-  PR #111 / merge `bd2accb`, promoción PR #112 y tag
-  `v0.1.19.05-beta`.
-- G118/E04 permanece preservado mediante `v0.1.18.04-beta` como
-  publicación anterior.
-- UX.5 R6 queda aceptado como G120/E01; UX.6 R1 queda reservado como G121/E01.
-- DEV.2 no altera reglas previsionales ni convierte Developer Diagnostics
-  en telemetría de producto.
+- `VERSION` está sincronizado en `0.1.21.01-beta` (G121/E01).
+- G120/E01 permanece publicado mediante `v0.1.20.01-beta`.
+- UX.6 R1–R8 queda consolidado con revisión funcional R8 dentro de PR #124.
+- UX.6 no altera reglas previsionales ni convierte Developer Diagnostics en telemetría de producto.
+- Administración Developer y su auditoría permanecen separadas de simulación.
+- PERSIST.1 R1 queda reservado como G122/E01 y no iniciado.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 
 Mi Retiro Proyectado es una herramienta independiente de estimación previsional. Este documento delimita qué puede afirmarse sobre el producto y qué debe permanecer explícitamente como aproximación, limitación o pendiente.
@@ -139,18 +133,17 @@ Como evidencia del checkpoint anterior se conserva la formulación: **no declara
 Como evidencia histórica también se conserva la formulación **“cierre de UX.4.6e y del alcance funcional UX.4.6f–h”**, que en aquella revisión describía trabajo todavía pendiente. Esa frase se mantiene únicamente para preservar la trazabilidad documental y **ya no representa el estado vigente**.
 
 UX.4.6e–UX.4.6i, DEV.2, SEC.2 R1–R6, AUD.SEC2 R1, DOC.2,
-NOR.1 R8, DOC.1 R3–R5, PLAN.2 R1 y REL.GOV.1 R2 están cerrados.
-DEV.2 R6 está publicado como G119/E05. UX.5 R6 es el candidato de cierre
-vigente G120/E01 y la secuencia posterior se mantiene en la matriz
-maestra hacia 1.0.
+NOR.1 R8, DOC.1 R3–R5, PLAN.2 R1, REL.GOV.1 R2 y UX.5 están cerrados.
+UX.5 R6 está publicado como G120/E01. UX.6 mantiene R1–R6 implementados,
+R7 documental activo y R8 pendiente dentro del candidato G121/E01.
 
 Continúan pendientes, según corresponda:
 
-- UX.5, persistencia, informes y demás bloques posteriores definidos
-  en `pre-1-0-pending-matrix.md`;
+- cierre/promoción de UX.6 R8;
+- persistencia, informes y bloques posteriores de la matriz maestra;
 - revisión jurídica externa previa a la primera versión oficial;
 - hardening específico si se decide un despliegue remoto;
-- verificación periódica de configuración y alertas de GitHub;
+- verificación periódica de GitHub;
 - declaración explícita de aptitud para distribución oficial.
 
 ## 10. Identidad

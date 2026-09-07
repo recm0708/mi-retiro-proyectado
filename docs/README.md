@@ -1,16 +1,16 @@
 # Índice de documentación
 
 **Estado:** vigente
-**Versión de aplicación:** `0.1.20.01-beta` — G120/E01 aceptado para UX.5 R6; G121/E01 reservado para UX.6 R1; ledger aceptado hasta G120
+**Versión de aplicación:** `0.1.21.01-beta` — G121/E01 materializado para UX.6 R8 en PR #124; G120/E01 permanece publicado; PERSIST.1 R1 queda reservado como G122/E01
 **Último tag formal legacy:** `v0.0.26-beta`
-**Última actualización transversal:** UX.5 R6 aceptado como G120/E01; UX.6 R1 candidato G121/E01 — 2026-09-04
+**Última actualización transversal:** UX.6 R8 — promoción revision-aware G121/E01 — 2026-09-07
 **Cierres históricos preservados:** UX.4.6i / PR #34 — 841 pruebas; UX.4.6e R9 — `v0.0.25-beta`
 
 Este archivo es el punto de entrada para la documentación técnica, funcional, normativa, de privacidad, validación y auditoría de Mi Retiro Proyectado.
 
 ## Estado de normalización del repositorio
 
-**Estado actual:** NOR.1 R8, NOR.2, DOC.1 R2–R5, SEC.2, AUD.SEC2 R1, REL.GOV.1 R1–R2, DOC.2, PLAN.2 R1, DEV.2 R6 y UX.5 R6 están cerrados/aceptados según corresponde. UX.5 R1–R6 quedaron consolidados como G120/E01 (`0.1.20.01-beta`); UX.6 R1 es el candidato G121/E01 antes de PERSIST.1.
+**Estado actual:** UX.6 R1–R8 queda consolidado como G121/E01 dentro de PR #124; PERSIST.1 R1 es el siguiente candidato reservado G122/E01 y no se inicia por esta reserva. UX.7 permanece no bloqueante.
 
 Estado de la fase:
 
@@ -37,11 +37,12 @@ Estado de la fase:
   de firma #17 y GitHub Release prerelease ID `379454328`; Portal
   Developer multipágina, identidad, observabilidad, mantenimiento,
   seguridad y privacidad integrados.
-- **UX.5 R6:** cerrado/aceptado como G120/E01 (`0.1.20.01-beta`) para el alcance R1–R6 consolidado; UX.6 R1 queda como candidato G121/E01.
+- **UX.5 R6:** cerrado/aceptado/publicado como G120/E01 (`0.1.20.01-beta`) para R1–R6 consolidados; UX.6 mantiene G121/E01 reservado/no aceptado, con R1–R6 implementados, R7 activo y R8 pendiente.
 - **SEC.2 R1–R6:** cerrados; CodeQL, autenticación, protección de endpoints, auditoría, sesión web y hardening configurable completados. AUD.SEC2 R1 corrigió el kill switch, alineó documentación/ledger y quedó aceptado como G109/E01.
 
 Evidencia:
 
+- **[Auditoría documental integral UX.6 R7](audits/documentation/ux6-r7-documentation-audit.md)** — inventario de 166 Markdown, clasificación semántica de impacto y frontera hacia R8.
 - **[Atestación histórica Git pre-UX.5](audits/governance/git-history-attestation-pre-ux5.md)** — identidad HIST-0001–HIST-0195, frontera de firma, PR y normalización administrativa en español sin reescritura;
 - **[Índice de auditorías y evidencias](audits/README.md)** — navegación canónica de auditorías documentales, de gobierno, repositorio y seguridad.
 - **[SEC.2 R1 — CodeQL DOM hardening y normalización de workflows](audits/security/sec2-r1-codeql-workflow-hardening.md)** — hardening CodeQL y normalización de workflows SEC.2 R1.

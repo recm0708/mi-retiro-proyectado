@@ -54,7 +54,8 @@ class TestDOC1R4LiveStateSanitization(unittest.TestCase):
         self.assertIn("Cerrado/aceptado G118/E04", matrix)
         self.assertIn("Cerrado/aceptado/publicado G119/E05", matrix)
         self.assertIn("Cerrado/aceptado G120/E01", matrix)
-        self.assertIn("Candidato G121/E01", matrix)
+        self.assertIn("Cerrado/aceptado G121/E01", matrix)
+        self.assertIn("Candidato G122/E01", matrix)
 
         releases = (ROOT / "RELEASES.md").read_text(encoding="utf-8")
         self.assertIn("v0.1.15.04-beta", releases)
@@ -65,8 +66,8 @@ class TestDOC1R4LiveStateSanitization(unittest.TestCase):
             )
         )
         candidate = registry["current_candidate"]
-        self.assertEqual(121, candidate["global_revision"])
-        self.assertEqual("UX.6", candidate["block"])
+        self.assertEqual(122, candidate["global_revision"])
+        self.assertEqual("PERSIST.1", candidate["block"])
         self.assertEqual("R1", candidate["revision"])
 
     def test_ledger_markdown_registra_g115(self):

@@ -1,7 +1,7 @@
 # Registro de decisiones técnicas
 
 **Estado:** Vigente
-**Versión de aplicación revisada:** `0.1.20.01-beta`
+**Versión de aplicación revisada:** `0.1.21.01-beta`
 **Versión base histórica:** `0.0.25-beta`
 **Base documental histórica:** `0.0.23-beta` — GOV.1.3 R4 — 2026-08-17
 **Revisión documental:** GOV.1.3 R4 — 2026-08-17
@@ -12,25 +12,14 @@
 **ADR indexadas:** 181 (`ADR-001` a `ADR-181`)
 
 <!-- DOC1-R1-REVISION-MANUAL:START -->
-## Nota de lectura post-MANT.1
+## Nota de lectura vigente
 
-Este registro conserva decisiones históricas y vigentes.
-
-Estado transversal:
-
-- las ADR históricas no se reescriben;
-- `VERSION` está sincronizado en `0.1.19.05-beta` (G119/E05);
-- DEV.2 R6 queda aceptado/publicado como G119/E05 después de
-  PR #111 / merge `bd2accb`, promoción PR #112 y tag
-  `v0.1.19.05-beta`;
-- G118/E04 permanece preservado mediante `v0.1.18.04-beta` como
-  publicación anterior;
-- UX.5 R1 queda reservado como G120/E01;
+- Las ADR históricas no se reescriben.
+- `VERSION` está sincronizado en `0.1.21.01-beta` (G121/E01).
+- G120/E01 permanece publicado mediante `v0.1.20.01-beta`.
+- UX.6 R1–R8 queda consolidado dentro de PR #124.
+- PERSIST.1 R1 queda reservado como G122/E01 sin iniciar.
 - SEC.2 R1–R6 permanece cerrado y su historia se conserva.
-- PR #117 cerró la migración de automatización post-G119 sin consumir un
-  Global independiente.
-- PR #118 coordinó Pydantic/Pydantic Core y Dependency Review sin consumir
-  G120/E01.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 
 Este registro conserva decisiones de arquitectura, modelado, UX, precisión, seguridad y aplicación normativa. Una ADR explica por qué el proyecto adoptó una decisión; no crea una norma jurídica.

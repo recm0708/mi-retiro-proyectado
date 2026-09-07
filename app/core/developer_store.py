@@ -843,3 +843,323 @@ def cambiar_password_propio(
         )
 
     return actualizado
+
+
+
+def listar_usuarios_developer(
+    ruta: str | Path | None = None,
+) -> list[UsuarioDeveloper]:
+    """Lista las cuentas Developer sin exponer secretos."""
+
+    inicializar_almacen_developer(
+        ruta
+    )
+
+    with _conectar(ruta) as conexion:
+        filas = conexion.execute(
+            """
+            SELECT *
+            FROM developer_users
+            ORDER BY
+                is_owner DESC,
+                display_name COLLATE NOCASE,
+                username COLLATE NOCASE
+            """
+        ).fetchall()
+
+    return [
+        _fila_a_usuario(fila)
+        for fila in filas
+    ]
+
+
+def actualizar_nombre_visible_usuario(
+    *,
+    identificador: str,
+    nombre_visible: str,
+    ruta: str | Path | None = None,
+) -> UsuarioDeveloper:
+    """Actualiza el nombre presentado de una identidad Developer."""
+
+    usuario = obtener_usuario_por_id(
+        identificador,
+        ruta,
+    )
+
+    if usuario is None:
+        raise LookupError(
+            "La cuenta Developer no existe."
+        )
+
+    nombre = normalizar_nombre_visible(
+        nombre_visible
+    )
+
+    ahora = _ahora_utc()
+
+    with _conectar(ruta) as conexion:
+        conexion.execute(
+            """
+            UPDATE developer_users
+            SET
+                display_name = ?,
+                updated_at = ?
+            WHERE id = ?
+            """,
+            (
+                nombre,
+                ahora,
+                identificador,
+            ),
+        )
+
+    actualizado = obtener_usuario_por_id(
+        identificador,
+        ruta,
+    )
+
+    if actualizado is None:
+        raise RuntimeError(
+            "La cuenta actualizada no pudo recuperarse."
+        )
+
+    return actualizado
+
+
+def actualizar_avatar_usuario(
+    *,
+    identificador: str,
+    avatar_relativo: str | None,
+    ruta: str | Path | None = None,
+) -> UsuarioDeveloper:
+    """Actualiza únicamente la referencia local de la imagen de perfil."""
+
+    usuario = obtener_usuario_por_id(
+        identificador,
+        ruta,
+    )
+
+    if usuario is None:
+        raise LookupError(
+            "La cuenta Developer no existe."
+        )
+
+    valor = (
+        str(avatar_relativo).strip()
+        if avatar_relativo is not None
+        else None
+    )
+
+    if valor:
+        relativa = Path(valor)
+
+        if (
+            relativa.is_absolute()
+            or ".." in relativa.parts
+            or len(relativa.parts) != 2
+            or relativa.parts[0] != "avatars"
+        ):
+            raise ValueError(
+                "La referencia del avatar es inválida."
+            )
+    else:
+        valor = None
+
+    ahora = _ahora_utc()
+
+    with _conectar(ruta) as conexion:
+        conexion.execute(
+            """
+            UPDATE developer_users
+            SET
+                avatar_path = ?,
+                updated_at = ?
+            WHERE id = ?
+            """,
+            (
+                valor,
+                ahora,
+                identificador,
+            ),
+        )
+
+    actualizado = obtener_usuario_por_id(
+        identificador,
+        ruta,
+    )
+
+    if actualizado is None:
+        raise RuntimeError(
+            "La cuenta actualizada no pudo recuperarse."
+        )
+
+    return actualizado
+
+
+def cambiar_estado_usuario(
+    *,
+    actor_rol: RolDeveloper | str,
+    identificador: str,
+    activo: bool,
+    ruta: str | Path | None = None,
+) -> UsuarioDeveloper:
+    """Activa o desactiva una cuenta respetando la jerarquía Developer."""
+
+    actor = RolDeveloper(
+        actor_rol
+    )
+
+    if actor not in {
+        RolDeveloper.PROPIETARIO,
+        RolDeveloper.ADMINISTRADOR,
+    }:
+        raise PermissionError(
+            "La cuenta no puede administrar usuarios."
+        )
+
+    usuario = obtener_usuario_por_id(
+        identificador,
+        ruta,
+    )
+
+    if usuario is None:
+        raise LookupError(
+            "La cuenta Developer no existe."
+        )
+
+    if usuario.es_propietario:
+        raise PermissionError(
+            "La cuenta Propietario está protegida."
+        )
+
+    if (
+        usuario.rol
+        is RolDeveloper.ADMINISTRADOR
+        and actor
+        is not RolDeveloper.PROPIETARIO
+    ):
+        raise PermissionError(
+            "Solo el Propietario puede modificar a un Administrador."
+        )
+
+    estado = bool(
+        activo
+    )
+
+    if usuario.activo == estado:
+        return usuario
+
+    ahora = _ahora_utc()
+
+    with _conectar(ruta) as conexion:
+        conexion.execute(
+            """
+            UPDATE developer_users
+            SET
+                is_active = ?,
+                security_version = security_version + 1,
+                updated_at = ?
+            WHERE id = ?
+            """,
+            (
+                int(estado),
+                ahora,
+                identificador,
+            ),
+        )
+
+    actualizado = obtener_usuario_por_id(
+        identificador,
+        ruta,
+    )
+
+    if actualizado is None:
+        raise RuntimeError(
+            "La cuenta actualizada no pudo recuperarse."
+        )
+
+    return actualizado
+
+
+def registrar_acceso_usuario(
+    *,
+    identificador: str,
+    ruta: str | Path | None = None,
+) -> UsuarioDeveloper:
+    """Registra el último inicio de sesión correcto de una cuenta."""
+
+    usuario = obtener_usuario_por_id(
+        identificador,
+        ruta,
+    )
+
+    if (
+        usuario is None
+        or not usuario.activo
+    ):
+        raise PermissionError(
+            "La cuenta Developer no está activa."
+        )
+
+    ahora = _ahora_utc()
+
+    with _conectar(ruta) as conexion:
+        conexion.execute(
+            """
+            UPDATE developer_users
+            SET last_login_at = ?
+            WHERE id = ?
+            """,
+            (
+                ahora,
+                identificador,
+            ),
+        )
+
+    actualizado = obtener_usuario_por_id(
+        identificador,
+        ruta,
+    )
+
+    if actualizado is None:
+        raise RuntimeError(
+            "La cuenta actualizada no pudo recuperarse."
+        )
+
+    return actualizado
+
+
+def eliminar_usuario_developer(
+    identificador: str,
+    ruta: str | Path | None = None,
+) -> UsuarioDeveloper:
+    # Elimina definitivamente una cuenta no propietaria.
+    """Elimina de forma persistente una cuenta Developer ordinaria protegida."""
+    objetivo = obtener_usuario_por_id(
+        identificador,
+        ruta,
+    )
+
+    if objetivo is None:
+        raise LookupError(
+            "La cuenta Developer no existe."
+        )
+
+    if objetivo.es_propietario:
+        raise PermissionError(
+            "La cuenta Propietario está protegida."
+        )
+
+    with _conectar(ruta) as conexion:
+        cursor = conexion.execute(
+            "DELETE FROM developer_users "
+            "WHERE id = ? AND is_owner = 0",
+            (objetivo.identificador,),
+        )
+
+        if cursor.rowcount != 1:
+            raise RuntimeError(
+                "No fue posible eliminar la cuenta Developer."
+            )
+
+    return objetivo

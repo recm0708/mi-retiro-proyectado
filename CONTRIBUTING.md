@@ -1,24 +1,15 @@
 # Guía de contribución
 
 <!-- DOC1-R1-POST-MANT1:START -->
-## Estado de contribución post-MANT.1
+## Estado de contribución vigente
 
-La contribución al proyecto debe leerse desde la línea base vigente.
-
-Estado actual:
-
-- `VERSION` está sincronizado en `0.1.20.01-beta` (G120/E01).
-- DEV.2 R6 queda aceptado/publicado como G119/E05 después de
-  PR #111 / merge `bd2accb`, promoción PR #112 / commit
-  `9424ea8` y tag firmado `v0.1.19.05-beta`.
-- DEV.2 queda cerrado después de R6.
-- UX.5 R6 queda aceptado como G120/E01 (`0.1.20.01-beta`); UX.6 R1 queda reservado como G121/E01 (`0.1.21.01-beta`).
-- G118/E04 permanece preservado mediante `v0.1.18.04-beta`
-  como publicación anterior.
-- SEC.2 R1–R6 permanece cerrado; los cambios futuros de autenticación,
-  sesiones, cookies, secretos o endpoints administrativos deben conservar
-  regresiones de seguridad.
-- Código, pruebas, documentación y evidencia deben mantenerse sincronizados.
+- `VERSION` está sincronizado en `0.1.21.01-beta` (G121/E01).
+- G120/E01 permanece publicado como `v0.1.20.01-beta`.
+- UX.6 R1–R8 queda consolidado en PR #124 con revisión funcional R8.
+- PERSIST.1 R1 queda reservado como G122/E01, pero no iniciado.
+- UX.7 permanece como revisión visual final no bloqueante.
+- Los cambios de seguridad deben conservar sus regresiones.
+- Código, pruebas, documentación y evidencia deben permanecer sincronizados.
 <!-- DOC1-R1-POST-MANT1:END -->
 
 Este documento define el flujo mínimo para modificar Mi Retiro Proyectado sin perder trazabilidad técnica, normativa, documental o de pruebas.

@@ -45,28 +45,19 @@ class TestReleasePublication(unittest.TestCase):
             result.stdout + result.stderr,
         )
 
-    def test_manifest_actual_es_g120_y_apunta_a_g121(self):
+    def test_manifest_actual_es_g121_y_apunta_a_g122(self):
         data = json.loads(
             MANIFEST.read_text(encoding="utf-8")
         )
+        self.assertEqual("0.1.21.01-beta", data["version"])
+        self.assertEqual("UX.6", data["block"])
+        self.assertEqual("R8", data["revision"])
+        self.assertEqual(122, data["next_step"]["global_revision"])
         self.assertEqual(
-            "0.1.20.01-beta",
-            data["version"],
-        )
-        self.assertEqual("UX.5", data["block"])
-        self.assertEqual("R6", data["revision"])
-        self.assertEqual(
-            121,
-            data["next_step"]["global_revision"],
-        )
-        self.assertEqual(
-            "0.1.21.01-beta",
+            "0.1.22.01-beta",
             data["next_step"]["revision_aware"],
         )
-        self.assertEqual(
-            "UX.6",
-            data["next_step"]["block"],
-        )
+        self.assertEqual("PERSIST.1", data["next_step"]["block"])
 
     def test_manifiesto_supera_validacion(self):
         result = self.run_script("--check-manifest")
@@ -75,10 +66,7 @@ class TestReleasePublication(unittest.TestCase):
             result.returncode,
             result.stdout + result.stderr,
         )
-        self.assertIn(
-            "G120/E01 validado",
-            result.stdout,
-        )
+        self.assertIn("G121/E01 validado", result.stdout)
 
     def test_renderer_incluye_campos_dinamicos_y_secciones(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -93,30 +81,28 @@ class TestReleasePublication(unittest.TestCase):
             "## Validación",
             "## Evidencia",
             "## Siguiente paso",
-            "G120/E01",
-            "UX.5 R6",
+            "G121/E01",
+            "UX.6 R8",
             PUBLISHED_COMMIT,
             TAG_OBJECT,
-            "**G121/E01**",
-            "`0.1.21.01-beta`",
-            "UX.6",
+            "**G122/E01**",
+            "`0.1.22.01-beta`",
+            "PERSIST.1",
         ):
             with self.subTest(fragment=fragment):
                 self.assertIn(fragment, text)
 
-    def test_manifiesto_contiene_evidencia_g120(self):
+    def test_manifiesto_contiene_evidencia_g121(self):
         data = json.loads(
             MANIFEST.read_text(encoding="utf-8")
         )
-        corpus = json.dumps(
-            data,
-            ensure_ascii=False,
-        )
+        corpus = json.dumps(data, ensure_ascii=False)
+
         for fragment in (
-            "PR #122",
-            "4c43a816526201c5869d2df8e88af44419c4df11",
-            "1444 passed / 6865 subtests passed",
-            "1404 tests `unittest` OK",
+            "PR #124",
+            "f2b7ed0e0d52d64e2687c37748a00f66bb6e759b",
+            "1508 tests `unittest` OK",
+            "16 familias / 48 identificadores",
         ):
             with self.subTest(fragment=fragment):
                 self.assertIn(fragment, corpus)
@@ -131,16 +117,14 @@ class TestReleasePublication(unittest.TestCase):
             snapshot.write_text(
                 json.dumps(
                     {
-                        "tagName": "v0.1.20.01-beta",
+                        "tagName": "v0.1.21.01-beta",
                         "name": (
                             "Mi Retiro Proyectado "
-                            "v0.1.20.01-beta — G120/E01"
+                            "v0.1.21.01-beta — G121/E01"
                         ),
                         "isDraft": False,
                         "isPrerelease": True,
-                        "body": notes.read_text(
-                            encoding="utf-8"
-                        ),
+                        "body": notes.read_text(encoding="utf-8"),
                     },
                     ensure_ascii=False,
                 ),
@@ -164,17 +148,11 @@ class TestReleasePublication(unittest.TestCase):
     def test_manifiesto_obsoleto_falla_cerrado(self):
         with tempfile.TemporaryDirectory() as tmp:
             stale = Path(tmp) / "manifest.json"
-            data = json.loads(
-                MANIFEST.read_text(encoding="utf-8")
-            )
-            data["version"] = "0.1.19.05-beta"
+            data = json.loads(MANIFEST.read_text(encoding="utf-8"))
+            data["version"] = "0.1.20.01-beta"
 
             stale.write_text(
-                json.dumps(
-                    data,
-                    ensure_ascii=False,
-                    indent=2,
-                ),
+                json.dumps(data, ensure_ascii=False, indent=2),
                 encoding="utf-8",
             )
 
@@ -185,10 +163,7 @@ class TestReleasePublication(unittest.TestCase):
             )
 
         self.assertNotEqual(0, result.returncode)
-        self.assertIn(
-            "no corresponde a VERSION",
-            result.stdout,
-        )
+        self.assertIn("no corresponde a VERSION", result.stdout)
 
 
 if __name__ == "__main__":

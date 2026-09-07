@@ -197,14 +197,26 @@ class TestDev2R6MultipageShell(unittest.TestCase):
     def test_footer_comparte_copyright_publico(self):
         """El shell Developer utiliza el copyright de la aplicación."""
 
+        root = Path(__file__).resolve().parents[1]
+
         base = (
-            Path(__file__).resolve().parents[1]
+            root
             / "app/templates/dev_base.html"
         ).read_text(encoding="utf-8")
 
+        footer = (
+            root
+            / "app/templates/partials/global_footer.html"
+        ).read_text(encoding="utf-8")
+
+        self.assertIn(
+            '{% include "partials/global_footer.html" %}',
+            base,
+        )
+
         self.assertIn(
             "© 2026 {{ app_author }}. Todos los derechos reservados.",
-            base,
+            footer,
         )
 
     def test_centro_legacy_se_conserva_fuera_del_menu_humano(self):

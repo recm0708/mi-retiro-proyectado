@@ -234,10 +234,6 @@ body {
    Resumen de cuotas
    ========================================================== */
 
-.resultado-cuotas {
-  animation: aparecer-suave 0.25s ease-out;
-}
-
 .summary-card {
   display: flex;
   flex-direction: column;
@@ -283,18 +279,6 @@ body {
 .summary-card small {
   margin-top: auto;
   color: var(--app-muted);
-}
-
-@keyframes aparecer-suave {
-  from {
-    opacity: 0;
-    transform: translateY(6px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 /* ==========================================================
@@ -3653,9 +3637,6 @@ html[data-app-theme="contrast"] .official-import-table-wrapper {
   border-color: var(--app-selected-border);
   background: var(--app-selected-bg);
   color: var(--app-primary);
-  box-shadow:
-    inset 3px 0 0
-    var(--app-primary);
 }
 
 .app-sidebar-icon {

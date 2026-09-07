@@ -3,7 +3,7 @@
 **Producto:** Mi Retiro Proyectado
 **Versión del texto:** `2026-08-16.1`
 **Estado:** Vigente en la aplicación
-**Versión de aplicación revisada:** `0.1.20.01-beta`
+**Versión de aplicación revisada:** `0.1.21.01-beta`
 **Versión base histórica:** `0.0.25-beta`
 **Versión base histórica preservada:** `0.0.23-beta`
 **Base documental:** GOV.1.3 R3 — 2026-08-17
@@ -15,24 +15,33 @@
 <!-- DOC1-R1-REVISION-MANUAL:START -->
 ## Nota de lectura vigente
 
-La política de privacidad mantiene su alcance material.
+Esta política describe la aplicación principal de simulación y el tratamiento
+de datos previsionales del Asegurado(a).
 
-Estado vigente:
+Estado funcional consolidado:
 
-- `VERSION` está sincronizado en `0.1.20.01-beta` (G120/E01).
-- DEV.2 R6 queda aceptado/publicado como G119/E05 después de
-  PR #111 / merge `bd2accb`, promoción PR #112 y tag
-  `v0.1.19.05-beta`.
-- El Portal Developer utiliza identidad administrativa local separada de
-  los datos previsionales de simulación.
-- G118/E04 permanece preservado mediante `v0.1.18.04-beta` como
-  publicación anterior.
-- UX.5 R6 queda aceptado como G120/E01; UX.6 R1 queda reservado como G121/E01.
-- SEC.2 R1–R6 permanece cerrado.
-- La aplicación sigue siendo independiente y no oficial.
+- la simulación puede utilizarse en modalidad Manual o Asistida;
+- Mi Retiro Seguro y Ficha Digital son fuentes documentales opcionales;
+- toda importación exige vista previa y confirmación explícita;
+- el archivo PDF original no forma parte del estado persistente de la simulación;
+- el estado previsional se mantiene temporalmente en la sesión del navegador;
+- la aplicación principal no crea cuentas de Asegurado(a) ni un historial
+  permanente de simulaciones;
+- las decisiones personales permanecen bajo control del usuario;
+- las superficies administrativas internas se documentan por separado y no
+  forman parte de este consentimiento.
+
+La versión material de privacidad continúa siendo `2026-08-16.1` porque estas
+revisiones consolidan y aclaran el tratamiento ya implementado sin añadir una
+nueva finalidad, categoría de datos, destinatario ni persistencia remota.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 
 Esta política describe el tratamiento implementado actualmente. No constituye certificación jurídica.
+
+Su alcance se limita a la aplicación principal de simulación, sus funciones
+públicas y los datos previsionales proporcionados por el Asegurado(a). Las
+superficies administrativas internas se documentan por separado y no forman
+parte de este consentimiento.
 
 ## 1. Responsable
 
@@ -82,14 +91,21 @@ Estos datos no son necesarios para ejecutar las fórmulas principales.
 - escenarios;
 - resultados.
 
-## 5. Origen
+## 5. Origen y modalidad
 
-Los datos provienen:
+La simulación puede utilizarse de dos formas:
 
-- de captura manual; o
-- de documentos seleccionados voluntariamente.
+- **Manual:** el Asegurado(a) introduce y revisa directamente la información;
+- **Asistida:** el Asegurado(a) puede seleccionar voluntariamente Mi Retiro
+  Seguro, Ficha Digital o ambos para preparar datos compatibles.
 
-Una importación se revisa antes de confirmar.
+La modalidad Asistida prepara información, pero **no toma decisiones personales
+por el Asegurado(a)**. Cada importación presenta una vista previa y requiere
+confirmación explícita antes de aplicar datos.
+
+Si el usuario cambia a Manual después de confirmar información documental, la
+aplicación solicita confirmación y retira los **datos que proceden de documentos**
+junto con los resultados posteriores que dependan de ellos. Los **datos personales introducidos manualmente** que no procedan de documentos pueden conservarse.
 
 ## 6. Finalidad
 
@@ -97,12 +113,17 @@ Los datos se utilizan para:
 
 - construir la simulación;
 - comprobar coherencia;
+- analizar cuotas y salarios;
 - proyectar;
 - comparar escenarios;
+- registrar la procedencia de la información;
 - estimar prestaciones;
-- explicar resultados.
+- explicar resultados;
+- generar exportaciones solo cuando el usuario las solicite.
 
-No se autoriza su uso para publicidad, venta de información o perfilado comercial.
+No se autoriza su uso para publicidad, venta de información, perfilado
+comercial ni para tomar automáticamente decisiones personales o jurídicas
+sobre el Asegurado(a).
 
 ## 7. Consentimiento
 
@@ -136,19 +157,22 @@ No existe para la simulación previsional:
 - sincronización remota;
 - nube del proyecto para datos de simulación.
 
-El Portal Developer sí dispone de cuentas administrativas locales persistentes,
-separadas de los datos previsionales. Esa persistencia no guarda simulaciones
-ni convierte al Asegurado(a) en usuario registrado.
-
-La aceptación/versionado y la apariencia utilizan almacenamiento local del navegador conforme al contrato implementado.
+La aceptación versionada y la apariencia pueden conservar metadata local de
+funcionamiento. La simulación previsional no se almacena como historial
+permanente en ese almacenamiento local.
 
 ## 10. Documentos
 
-Los archivos originales no se guardan en una base de datos.
+Los PDF de Mi Retiro Seguro y Ficha Digital se procesan temporalmente para
+extraer la información necesaria y generar una vista previa.
 
-Después de confirmar una importación puede conservarse metadata mínima como el nombre visible del archivo y los datos ya confirmados.
+El **archivo original no se guarda** como parte de la simulación ni se incorpora
+a una base de datos permanente. Los datos detectados solo se aplican después de
+la confirmación explícita del usuario.
 
-No se conserva la ruta local ni el binario del PDF.
+Después de una importación confirmada puede conservarse, durante la sesión,
+metadata mínima de continuidad como el nombre visible del archivo y los datos
+ya aceptados. No se conserva la ruta local ni el contenido binario del PDF.
 
 ## 11. Conexiones externas
 
@@ -162,26 +186,39 @@ Para evaluar vigencia de Ficha Digital, el backend puede consultar por HTTPS inf
 
 No se envían identidad, salarios, cuotas, resultados ni PDF.
 
-## 12. Cookies, analítica y publicidad
+## 12. Cookies, analítica y publicidad de la aplicación principal
 
-La aplicación no implementa cookies propias de publicidad, analítica, seguimiento o perfilado.
+La aplicación principal de simulación no implementa cookies propias de
+publicidad, analítica, seguimiento o perfilado.
 
-Cuando la superficie administrativa está habilitada, el login web crea la cookie técnica `mrp_admin_session` para mantener temporalmente una sesión Developer. Es `HttpOnly`, no contiene datos de simulación ni se usa para publicidad o perfilado; `SameSite` y `Secure` se configuran según el entorno. La identidad administrativa asociada se mantiene separadamente en el almacén SQLite local.
+El estado previsional en curso se mantiene temporalmente en la sesión del
+navegador. La apariencia y la constancia versionada de aceptación pueden
+recordarse localmente para el funcionamiento de la aplicación.
 
-No incorpora actualmente telemetría de producto.
+No se incorpora actualmente telemetría de producto sobre la actividad del
+Asegurado(a). Cualquier cambio futuro de finalidad, analítica o seguimiento
+requiere revisar esta política antes de habilitarse.
 
 ## 13. Controles del usuario
 
-El usuario dispone de:
+El Asegurado(a) dispone de:
 
-- edición/revisión de datos;
+- revisión y edición de datos;
+- elección entre modalidad Manual y Asistida;
+- confirmación explícita antes de aplicar una importación;
+- cambio de modalidad con advertencia cuando existan datos documentales;
 - limpiar paso;
 - reiniciar simulación;
 - borrar datos de esta aplicación en este navegador.
 
-El borrado integral elimina también la constancia local de aceptación y vuelve a presentar las condiciones desde Inicio. Cerrar esa consulta no crea una nueva aceptación; un ingreso posterior a Simular sin consentimiento vigente vuelve a bloquear el asistente hasta que el usuario decida aceptarlo.
+Al cambiar de Asistida a Manual después de una importación, se retiran los
+**datos que proceden de documentos** y se reinician los cálculos dependientes,
+mientras que los **datos personales introducidos manualmente** que no procedan
+de documentos pueden conservarse.
 
-Los controles locales no sustituyen un procedimiento formal de derechos si en el futuro existe tratamiento remoto/persistente.
+El borrado integral elimina también la constancia local de aceptación y vuelve a presentar las condiciones desde Inicio. Los controles locales no sustituyen
+un procedimiento formal de derechos si en el futuro existe tratamiento remoto
+o persistente.
 
 ## 14. Derechos
 
@@ -215,13 +252,18 @@ No existe integración comercial que reciba la simulación.
 
 Recursos técnicos externos actuales se documentan en `security-and-privacy.md`.
 
-## 16.1. Seguridad, incidentes y diagnóstico
+## 16.1. Seguridad e incidentes
 
-Developer Diagnostics es una herramienta local de desarrollo, apagada por defecto y diseñada para no registrar PII, PDF ni valores financieros.
+Los datos previsionales y los documentos personales no deben incluirse en
+registros de diagnóstico, ejemplos públicos ni evidencias versionadas.
 
-El procedimiento interno de incidentes se documenta en `security-incident-procedure.md`.
+El procedimiento interno de respuesta a incidentes se documenta en
+`security-incident-procedure.md`.
 
-GOV.1.5 no introduce una nueva finalidad, categoría de datos, destinatario ni persistencia remota. La evaluación interna mantiene la versión material `2026-08-16.1`; esta conclusión no sustituye la revisión jurídica externa.
+La revisión de UX.6 no introduce una nueva finalidad, categoría de datos,
+destinatario ni persistencia remota para la aplicación principal; por ello se
+mantiene la versión material `2026-08-16.1`. Esta conclusión técnica no
+sustituye la revisión jurídica externa.
 
 ## 17. Cambios materiales
 

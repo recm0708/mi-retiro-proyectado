@@ -1,7 +1,7 @@
 # Guía interna de desarrollo
 
 **Estado:** Vigente
-**Versión de aplicación revisada:** `0.1.20.01-beta`
+**Versión de aplicación revisada:** `0.1.21.01-beta`
 **Versión base histórica:** `0.0.23-beta`
 **Base documental preservada:** GOV.1.3 R2 — 2026-08-17
 **Revisión transversal vigente:** GOV.1.4 — 2026-08-17
@@ -29,11 +29,18 @@ JavaScript no debe implementar fórmulas previsionales principales, introducir p
 
 Las páginas heredan de `base.html`.
 
-Capas CSS:
+Capas CSS transversales principales:
 
-1. `style.css`;
-2. `design-system.css`;
-3. `accessibility.css`.
+1. `style.css` — base;
+2. `design-system.css` — tokens/componentes compartidos;
+3. `accessibility.css` — accesibilidad transversal;
+4. `brand.css` — identidad gráfica;
+5. `editable-provenance.css` — procedencia;
+6. `motion.css` — movimiento/feedback generales.
+
+`design-system.css` es la única fuente global de tokens `--app-*`; no crear
+`--dev-*`. `motion.css` posee transiciones generales y
+`prefers-reduced-motion`.
 
 Usar tokens semánticos existentes antes de introducir colores literales.
 
@@ -161,8 +168,30 @@ Configuración de sesión:
 | `MRP_ADMIN_COOKIE_SAMESITE` | `lax` |
 | `MRP_ADMIN_COOKIE_SECURE` | desactivado |
 
+El límite `MRP_ADMIN_MAX_SESSIONS` se aplica **por cuenta**. Al abrir
+una sesión adicional sobre el máximo permitido, el Portal Developer conserva
+la sesión nueva, revoca la más antigua de esa misma identidad y muestra un
+aviso. Las sesiones de otras cuentas no se cierran por ese límite.
+
+La cookie `mrp_admin_session` utiliza como vida máxima del navegador la
+duración absoluta `MRP_ADMIN_SESSION_MAX_HOURS`; el servidor continúa
+aplicando en paralelo la inactividad `MRP_ADMIN_SESSION_MINUTES`.
+
 La lista completa de rutas, variables y responsabilidades se mantiene en
 `docs/architecture/development-center.md`.
+
+<!-- UX6-R7-DEVELOPER-GUIDE:START -->
+## 12.2. Administración y medios Developer UX.6
+
+Mantener jerarquía Owner/Admin/Operator/Auditor, username inmutable, contraseña
+temporal de un solo visionado, CSRF/revalidación, revocación de sesiones,
+auditoría append-only sin secretos, avatar en filesystem local y referencia
+relativa en SQLite. `data/developer/` permanece fuera de Git. Timestamps se
+persisten UTC y se presentan en hora local del navegador.
+
+Los formularios solo pueden preservar campos no sensibles; contraseñas, CSRF,
+tokens y confirmaciones reforzadas no se guardan en Web Storage.
+<!-- UX6-R7-DEVELOPER-GUIDE:END -->
 
 ## 13. Seguridad HTTP
 
@@ -242,7 +271,10 @@ Python.
 
 ## 17. Favicon e iconos
 
-Mientras no exista el paquete gráfico definitivo, `/favicon.ico` puede responder 204 conforme a la implementación actual.
+La familia gráfica oficial está integrada bajo `app/static/img/brand/`.
+`/favicon.ico` entrega el favicon oficial y las plantillas App/Developer
+declaran explícitamente sus variantes versionadas. La respuesta temporal
+`204 No Content` quedó retirada al cumplirse la condición de ADR-060.
 
 ## 18. Entorno y herramientas de desarrollo
 

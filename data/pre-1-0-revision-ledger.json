@@ -2,9 +2,9 @@
   "schema_version": 1,
   "project": "Mi Retiro Proyectado",
   "base_commit": "7037addd44253e528c77460b678d2b3ccd540dd5",
-  "accepted_count": 120,
-  "next_global_if_ver2_accepted": 121,
-  "next_candidate": "0.1.21.01-beta",
+  "accepted_count": 121,
+  "next_global_if_ver2_accepted": 122,
+  "next_candidate": "0.1.22.01-beta",
   "historical_tags_immutable": {
     "from": "v0.0.1-beta",
     "to": "v0.0.26-beta"
@@ -1092,6 +1092,16 @@
       "state": "R6 — cierre funcional UX.5 R1–R6: sistema visual y flujo Manual/Asistido",
       "anchor": "0.1.20.01-beta",
       "evidence": "PR #122 / merge 4c43a816526201c5869d2df8e88af44419c4df11; commit de desarrollo firmado 1415c4b43a6d96d1c9ae8833537f0a4b1907228b; Repository Quality Gate local 11 PASS / 0 FAIL; 1404 unittest OK; pytest 1444 passed / 6865 subtests passed; Markdown 166/166; 22 JavaScript; 16 familias / 47 identificadores; CI PR #122 Repository Quality Gate, Python Compatibility y Visual & Accessibility en success"
+    },
+    {
+      "global_revision": 121,
+      "block": "UX.6",
+      "ordinal": 1,
+      "functional_revision": "R8",
+      "revision_aware": "0.1.21.01-beta",
+      "state": "R8 — cierre integral UX.6 R1–R8: App + Developer, accesibilidad, responsive, seguridad, importación segura y documentación",
+      "anchor": "0.1.21.01-beta",
+      "evidence": "PR #124; checkpoints firmados 2b783bc, 9c96cc1, f9cf50e, 0bbcece y f2b7ed0; Repository Quality Gate R8 10 PASS / 0 FAIL; 1508 unittest OK; Markdown 167/167; 27 JavaScript; 16 familias / 47 identificadores"
     }
   ],
   "excluded": [
@@ -1168,8 +1178,8 @@
       "reason": "La decisión VER.2 R3 establece expresamente que R1, R2 y R3 son correcciones internas del mismo candidato G071/E01; no consumen G072 ni incrementan EE. R4 materializa la aceptación única del candidato."
     }
   ],
-  "reconciled_through_commit": "4c43a816526201c5869d2df8e88af44419c4df11",
-  "reconciliation_date": "2026-09-04",
-  "next_global": 121,
-  "next_candidate_block": "UX.6"
+  "reconciled_through_commit": "f2b7ed0e0d52d64e2687c37748a00f66bb6e759b",
+  "reconciliation_date": "2026-09-07",
+  "next_global": 122,
+  "next_candidate_block": "PERSIST.1"
 }

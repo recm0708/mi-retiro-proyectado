@@ -3,29 +3,18 @@
 **Proyecto:** Mi Retiro Proyectado
 **Estado:** vigente desde GOV.1.2
 **Fecha de adopción:** 2026-08-18
-**Última revisión:** UX.5 R6 aceptado como G120/E01; UX.6 R1 reservado como G121/E01 — 2026-09-04
+**Última revisión:** UX.6 R8 — candidato de promoción G121/E01 en PR #124 — 2026-09-07
 
 <!-- DOC1-R1-POST-MANT1:START -->
-## Estado de gobierno post-MANT.1
-
-El gobierno vigente conserva la separación entre estado canónico,
-evidencia histórica y candidatos posteriores.
-
-Estado vigente:
+## Estado de gobierno vigente
 
 - `VERSION` sigue siendo la fuente única de versión.
-- `0.1.20.01-beta` es la versión canónica aceptada de G120/E01 para UX.5 R6.
-- G119/E05 quedó publicado mediante promoción PR #112, commit
-  `9424ea8` y tag firmado `v0.1.19.05-beta`.
-- G118/E04 permanece preservado mediante `v0.1.18.04-beta` como
-  publicación anterior.
-- DEV.2 R6 quedó integrado mediante PR #111 / merge `bd2accb`,
-  aceptado como G119/E05 y posteriormente publicado.
-- DEV.2 queda cerrado después de R6.
-- UX.5 R6 queda cerrado/aceptado como G120/E01 (`0.1.20.01-beta`); UX.6 R1 pasa a ser el candidato G121/E01 (`0.1.21.01-beta`).
-- DOC.1 R1–R5, PLAN.2 R1, NOR.1, NOR.2, SEC.2 R1–R6,
-  AUD.SEC2 R1 y REL.GOV.1 permanecen preservados según su ledger.
-- PERSIST.1 continúa como etapa posterior y no recibe Global anticipado.
+- UX.6 R1–R8 queda consolidado como G121/E01 (`0.1.21.01-beta`) en PR #124.
+- G120/E01 permanece como última publicación con tag.
+- DEV.2 permanece cerrado en G119/E05.
+- PERSIST.1 R1 queda reservado como G122/E01 y no se inicia por la reserva.
+- UX.7 permanece como revisión visual final no bloqueante.
+- Publicar G121 exige merge, revalidación de `main`, tag firmado y Release.
 <!-- DOC1-R1-POST-MANT1:END -->
 
 ## 1. Propósito

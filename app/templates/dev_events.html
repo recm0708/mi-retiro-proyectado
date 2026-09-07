@@ -149,7 +149,7 @@
           <table class="table align-middle">
             <thead>
               <tr>
-                <th scope="col">Fecha UTC</th>
+                <th scope="col">Fecha y hora</th>
                 <th scope="col">Nivel</th>
                 <th scope="col">Evento</th>
                 <th scope="col">Componente</th>
@@ -173,7 +173,17 @@
                 )|lower|e }}"
               >
                 <td>
-                  <code>{{ evento.timestamp or "No disponible" }}</code>
+                  {% if evento.timestamp %}
+                  <time
+                    class="app-local-datetime"
+                    datetime="{{ evento.timestamp }}"
+                    data-app-local-datetime
+                  >
+                    {{ evento.timestamp }}
+                  </time>
+                  {% else %}
+                  No disponible
+                  {% endif %}
                 </td>
 
                 <td>

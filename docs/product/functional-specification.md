@@ -1,7 +1,7 @@
 # Especificación funcional
 
 **Estado:** Vigente con registro RF histórico integrado
-**Versión de aplicación revisada:** `0.1.20.01-beta`
+**Versión de aplicación revisada:** `0.1.21.01-beta`
 **Versión base histórica:** `0.0.23-beta`
 **Revisión documental:** GOV.1.3 R2 — 2026-08-17
 **Actualización funcional vigente:** UX.4.6e R8 — procedencia editable — 2026-08-19
@@ -10,23 +10,14 @@
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado funcional vigente
 
-La aplicación previsional mantiene sin cambios las fórmulas y parámetros
-normativos durante DEV.2 R6.
-
-Estado vigente:
-
-- `VERSION` es `0.1.19.05-beta`.
-- DEV.2 R6 está cerrado/aceptado/publicado como G119/E05.
-- El Portal Developer es una superficie administrativa separada de la
-  simulación previsional.
-- Las identidades Developer persistentes no constituyen cuentas de
-  Asegurado(a).
-- DEV.2 R6 no modifica motores SEBD, Mixto o SUCGS.
-- DEV.2 R6 no modifica parámetros normativos.
-- G120/E01 queda aceptado para UX.5 R6; G121/E01 queda reservado para UX.6 R1.
-
-Las referencias históricas dentro del registro RF, auditorías, ADR o archivo
-no deben reinterpretarse como estado vigente.
+- `VERSION` materializa `0.1.21.01-beta`.
+- UX.6 R1–R8 queda consolidado como G121/E01 con revisión funcional R8.
+- UX.6 no modifica motores SEBD, Mixto o SUCGS.
+- Perfil/avatar, usuarios/RBAC y auditoría Developer permanecen separados de la simulación.
+- Design System, movimiento, accesibilidad y responsive quedan compartidos.
+- Mi Retiro Seguro/Ficha Digital mantienen revisión y confirmación explícitas.
+- Términos públicos de la App permanecen separados de contratos Developer.
+- PERSIST.1 R1 queda reservado como G122/E01 y no iniciado.
 <!-- DOC1-R1-POST-MANT1:END -->
 
 Este documento tiene dos capas:
@@ -200,6 +191,16 @@ Su contrato vigente incluye:
 El Portal Developer no debe utilizar datos personales o financieros de una
 simulación como información administrativa y no altera los resultados de los
 motores previsionales.
+
+<!-- UX6-R7-FUNCTIONAL-DEVELOPER:START -->
+### Extensión UX.6 del Portal Developer
+
+Incluye perfil/avatar, directorio de usuarios según RBAC, creación con
+contraseña temporal, cambios autorizados de nombre/rol/estado, restablecimiento
+reforzado, eliminación Owner-only cuando corresponde, revocación de sesiones,
+auditoría append-only, feedback accesible de formularios, timestamps locales y
+Design System compartido. No usa datos previsionales para administrar cuentas.
+<!-- UX6-R7-FUNCTIONAL-DEVELOPER:END -->
 
 ## 9. Reglas de precedencia RF conocidas
 

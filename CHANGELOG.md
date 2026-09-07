@@ -6,9 +6,36 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ## [Unreleased]
 
-- UX.6 R1 queda reservado como G121/E01 (`0.1.21.01-beta`) para la
-  auditoría integral de experiencia de App y Portal Developer antes de
-  PERSIST.1.
+- PERSIST.1 R1 queda reservado como siguiente candidato G122/E01
+  (`0.1.22.01-beta`) después del cierre de UX.6.
+- La reserva de PERSIST.1 no inicia trabajo sin autorización explícita.
+- UX.7 permanece como revisión visual final no bloqueante antes de la
+  versión estable.
+
+## [0.1.21.01-beta]
+
+- G121/E01: UX.6 R8 consolida R1–R8 como un único estado aceptado.
+- `VERSION` avanza a `0.1.21.01-beta`; UX.6 usa
+  `functional_revision = R8` y ordinal E01.
+- App + Developer comparten identidad visual e interacción sin forzar la
+  misma densidad o composición.
+- Developer: perfil/avatar local, usuarios, RBAC, contraseñas temporales y
+  auditoría append-only.
+- Accesibilidad: movimiento compartido, `prefers-reduced-motion`, responsive,
+  forced colors, foco y feedback.
+- Importación: Mi Retiro Seguro y Ficha Digital conservan revisión,
+  procesamiento temporal y confirmación explícita.
+- Privacidad: términos públicos de la App permanecen separados de cookies,
+  sesiones y contratos técnicos Developer.
+- Hardening R8: sesiones por cuenta, cookie alineada con duración absoluta,
+  navegación RBAC, cache-busting compartido y favicon oficial.
+- R7/R8 cierran documentación y auditoría integral.
+- Evidencia pre-promoción: Quality Gate 10 PASS / 0 FAIL; 1508 `unittest`
+  OK; Markdown 167; 27 JavaScript; 16 familias / 47 identificadores.
+- PR de integración/promoción: #124.
+- Siguiente candidato: PERSIST.1 R1 / G122/E01 (`0.1.22.01-beta`).
+- Publicación: `v0.1.21.01-beta` se crea únicamente después del merge,
+  revalidación de `main` y firma local del tag.
 
 ## [0.1.20.01-beta]
 
@@ -44,8 +71,10 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
   mantenimiento transversal sin Global independiente.
 - Siguiente candidato: UX.6 R1 queda reservado como G121/E01
   (`0.1.21.01-beta`) antes de PERSIST.1.
-- Publicación: el tag `v0.1.20.01-beta` se crea únicamente después del
-  merge de esta promoción y de la revalidación post-merge de `main`.
+- Publicación: `v0.1.20.01-beta` quedó publicado sobre
+  `76586b5a7c77a5cffa97128a29ea77bd36cb988b`, con objeto de tag firmado
+  `7dbcca8071e2726b6aa4f17704bf41b92f6cd5bd` y GitHub Release prerelease
+  ID `383133233`.
 
 ## [0.1.19.05-beta]
 

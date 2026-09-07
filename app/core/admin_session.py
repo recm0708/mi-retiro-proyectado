@@ -25,6 +25,7 @@ class SesionAdministrativa:
     usuario: str | None = None
     rol: RolDeveloper | None = None
     revision_seguridad: int | None = None
+    sesiones_cerradas_por_limite: int = 0
 
     @property
     def tiene_identidad(self) -> bool:
@@ -113,7 +114,18 @@ def crear_sesion_admin(
         revision_seguridad=revision_seguridad,
     )
 
-    limitar_sesiones_activas()
+    cerradas_por_limite = limitar_sesiones_activas(
+        usuario_id=usuario_id,
+    )
+
+    sesion_creada = _sesiones.get(
+        identificador
+    )
+
+    if sesion_creada is not None:
+        sesion_creada.sesiones_cerradas_por_limite = (
+            cerradas_por_limite
+        )
 
     return identificador
 
@@ -223,6 +235,28 @@ def obtener_sesiones_activas() -> list[str]:
     return list(_sesiones.keys())
 
 
+def obtener_sesiones_activas_usuario(
+    usuario_id: str,
+) -> list[str]:
+    """Devuelve sesiones vigentes asociadas a una identidad Developer."""
+
+    limpiar_sesiones_expiradas()
+
+    objetivo = str(
+        usuario_id
+    ).strip()
+
+    if not objetivo:
+        return []
+
+    return [
+        identificador
+        for identificador, sesion
+        in _sesiones.items()
+        if sesion.usuario_id == objetivo
+    ]
+
+
 def revocar_sesiones_usuario(
     usuario_id: str,
 ) -> int:
@@ -276,9 +310,37 @@ def limpiar_sesiones_expiradas() -> None:
             )
 
 
-def limitar_sesiones_activas() -> None:
-    """Mantiene el límite global configurado de sesiones activas."""
+def limitar_sesiones_activas(
+    *,
+    usuario_id: str | None = None,
+) -> int:
+    """Aplica el límite configurado únicamente al grupo de sesión indicado."""
 
-    while len(_sesiones) > ADMIN_MAX_SESSIONS:
-        primera = next(iter(_sesiones))
-        eliminar_sesion_admin(primera)
+    limite = max(
+        1,
+        int(ADMIN_MAX_SESSIONS),
+    )
+
+    candidatas = [
+        sesion
+        for sesion in _sesiones.values()
+        if sesion.usuario_id == usuario_id
+    ]
+
+    candidatas.sort(
+        key=lambda sesion: (
+            sesion.creada,
+            sesion.identificador,
+        )
+    )
+
+    cerradas = 0
+
+    while len(candidatas) > limite:
+        mas_antigua = candidatas.pop(0)
+        eliminar_sesion_admin(
+            mas_antigua.identificador
+        )
+        cerradas += 1
+
+    return cerradas

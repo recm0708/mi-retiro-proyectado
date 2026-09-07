@@ -1,7 +1,7 @@
 # Matriz de trazabilidad
 
 **Estado:** Vigente
-**Versión de aplicación:** `0.1.20.01-beta` — G120/E01 aceptado para UX.5 R6; G121/E01 reservado para UX.6 R1
+**Versión de aplicación:** `0.1.21.01-beta` — G121/E01 materializado para UX.6 R8 en PR #124; G120/E01 permanece publicado; PERSIST.1 R1 queda reservado como G122/E01
 **Último tag formal legacy:** `v0.0.26-beta`
 **Base histórica:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal:** NOR.2 R8 — 2026-08-24
@@ -9,22 +9,14 @@
 **Clasificación:** Técnica / Auditoría
 
 <!-- DOC1-R1-POST-MANT1:START -->
-## Estado post-MANT.1
+## Estado transversal vigente
 
-La trazabilidad vigente alcanza G119/E05.
-
-- DEV.2 R5 permanece verificado como G118/E04.
-- DEV.2 R6 queda integrado mediante PR #111 / merge `bd2accb` y
-  aceptado/publicado como G119/E05 mediante promoción PR #112 /
-  commit `9424ea8` y tag `v0.1.19.05-beta`.
-- G120/E01 queda aceptado para UX.5 R6; R1–R6 consumen un único estado aceptado.
-- UX.6 R1 queda reservado como G121/E01 antes de PERSIST.1.
-- PR #117 y PR #118 cierran la migración de automatización y el mantenimiento
-  coordinado de dependencias post-G119 sin consumir G120.
-- La historia de NOR.2, SEC.2, AUD.SEC2, DOC.1, PLAN.2 y REL.GOV.1
-  permanece preservada en sus fuentes canónicas.
-
-Esta matriz distingue trazabilidad histórica de estado vigente.
+- G120/E01 permanece publicado para UX.5 R6.
+- G121/E01 (`0.1.21.01-beta`) consolida UX.6 R1–R8 con `functional_revision = R8`.
+- PR #124 materializa la integración/promoción de UX.6.
+- TR-035, TR-036 y TR-037 preservan los contratos añadidos por UX.6.
+- DEV.2 R5/R6 permanecen preservados como G118/E04 y G119/E05.
+- PERSIST.1 R1 queda reservado como G122/E01 sin iniciar.
 <!-- DOC1-R1-POST-MANT1:END -->
 
 Esta matriz conecta contratos críticos del producto con su fuente, decisión, implementación y evidencia de prueba. No sustituye `functional-specification.md` ni pretende afirmar cobertura granular completa de todos los RF históricos.
@@ -79,9 +71,13 @@ Esta matriz conecta contratos críticos del producto con su fuente, decisión, i
 
 | TR-031 | La automatización post-G119 centraliza el gate local/CI, compatibilidad Python, integridad, política de PR, dependencias, salud programada y baseline Visual/A11y sin crear commits ni tags | N/A — calidad/gobierno | N/A — mantenimiento post-G119 | `scripts/quality_gate.py`, `.github/workflows/quality-gate.yml`, `.github/workflows/dependency-security.yml`, `.github/workflows/scheduled-health.yml`, `.github/workflows/pr-labeler.yml`, `.github/workflows/visual-a11y.yml`, `.github/dependabot.yml` | `tests/test_automation_core_quality_gate.py`, `tests/test_precommit_guard.py` | Verificado local y remoto; PR #117 retiró workflows legacy después de migrar el ruleset; PR #118 coordinó Pydantic/Pydantic Core, Dependabot y `actions/dependency-review-action@v5`; G120/E01 no consumido |
 
-| TR-032 | La simulación exige una selección explícita Manual/Asistida y ambas modalidades convergen en un estado canónico y el mismo wizard de seis pasos | N/A — UX/arquitectura | N/A — UX.5 | `app/templates/simulation.html`, `app/static/js/simulation_mode.js`, `app/static/js/simulation.js` | `tests/test_ux5_r3_r4_simulation_flows.py`, `tests/test_ux5_r5_r6_assisted_integration.py` | Verificado en candidato UX.5 R6 |
-| TR-033 | El modo Asistido presenta Mi Retiro Seguro y Ficha Digital como fuentes documentales revisables, exige confirmar al menos una y no convierte detecciones en decisiones silenciosas | N/A — UX/integridad | ADR-071 + UX.5 | `app/templates/partials/assisted_preparation.html`, `app/static/js/official_data_import.js`, `app/static/js/assisted_flow.js` | `tests/test_ux5_r5_r6_assisted_integration.py`, `tests/test_ux5_r5_assisted_upload_layout.py` | Verificado en candidato UX.5 R6 |
-| TR-034 | Los assets locales reciben revisión de URL y los scripts de modalidad y asistencia se cargan de forma independiente para evitar combinar HTML actual con CSS o JavaScript almacenados | N/A — estabilidad web | N/A — UX.5 | `app/main.py`, `app/templates/base.html`, `app/templates/simulation.html` | `tests/test_ux5_r7_documentation_closure.py` | Verificado en candidato UX.5 R6 |
+| TR-032 | La simulación exige una selección explícita Manual/Asistida y ambas modalidades convergen en un estado canónico y el mismo wizard de seis pasos | N/A — UX/arquitectura | N/A — UX.5 | `app/templates/simulation.html`, `app/static/js/simulation_mode.js`, `app/static/js/simulation.js` | `tests/test_ux5_r3_r4_simulation_flows.py`, `tests/test_ux5_r5_r6_assisted_integration.py` | Verificado en G120/E01 aceptado |
+| TR-033 | El modo Asistido presenta Mi Retiro Seguro y Ficha Digital como fuentes documentales revisables, exige confirmar al menos una y no convierte detecciones en decisiones silenciosas | N/A — UX/integridad | ADR-071 + UX.5 | `app/templates/partials/assisted_preparation.html`, `app/static/js/official_data_import.js`, `app/static/js/assisted_flow.js` | `tests/test_ux5_r5_r6_assisted_integration.py`, `tests/test_ux5_r5_assisted_upload_layout.py` | Verificado en G120/E01 aceptado |
+| TR-034 | Los assets locales reciben revisión de URL y los scripts de modalidad y asistencia se cargan de forma independiente para evitar combinar HTML actual con CSS o JavaScript almacenados | N/A — estabilidad web | N/A — UX.5 | `app/main.py`, `app/templates/base.html`, `app/templates/simulation.html` | `tests/test_ux5_r7_documentation_closure.py` | Verificado en G120/E01 aceptado |
+
+| TR-035 | Portal Developer permite perfil/avatar y administración jerárquica de cuentas con credenciales temporales, revocación y auditoría append-only sin almacenar simulaciones | N/A — desarrollo/seguridad/UX | N/A — UX.6 | `app/core/developer_avatar.py`, `app/core/developer_user_admin.py`, `app/core/developer_user_audit.py`, `app/templates/dev_profile.html`, `app/templates/dev_users.html` | `tests/test_ux6_r2_user_admin.py`, `tests/test_ux6_r2_user_audit.py`, `tests/test_ux6_r2_users_web.py` | Verificado en candidato UX.6 |
+| TR-036 | App, Developer y superficies futuras comparten tokens, movimiento general, responsive y accesibilidad, con reducción de movimiento y sin familia paralela `--dev-*` | N/A — UX/accesibilidad/arquitectura | N/A — UX.6 | `app/static/css/design-system.css`, `app/static/css/motion.css`, `app/static/js/interaction_ui.js` | `tests/test_ux6_r3_r4_interface_polish.py`, `tests/test_ux6_r3_r4_motion_accessibility.py` | Verificado en candidato UX.6 |
+| TR-037 | Mi Retiro Seguro y Ficha Digital explican procesamiento temporal/no persistencia y aplican datos solo tras confirmación explícita | N/A — privacidad/UX/integridad | ADR-071 + UX.6 | `app/services/mi_retiro_seguro_reference.py`, `app/static/js/official_data_import.js`, `app/templates/partials/official_data_import.html`, `app/templates/partials/ficha_digital_import.html` | `tests/test_ux6_r5_r6_seguro_cleanup.py`, `tests/test_ux6_r5_r6_manual_privacy_scope.py`, `tests/test_ux6_r5_r6_public_terms_final.py` | Verificado en candidato UX.6 |
 
 ## 3. Cobertura de RF
 

@@ -1,13 +1,13 @@
 # Seguridad y privacidad
 
 **Estado:** Vigente
-**Versión de aplicación revisada:** `0.1.20.01-beta`
+**Versión de aplicación revisada:** `0.1.21.01-beta`
 **Versión base histórica:** `0.0.25-beta`
 **Versión base histórica preservada:** `0.0.23-beta`
 **Base documental preservada:** GOV.1.3 R3 — 2026-08-17
 **Revisión transversal histórica:** repositorio público y controles GitHub — 2026-08-19
 **Última revisión documental:** AUD.SEC2 R1 — 2026-08-25
-**Última revisión operativa:** mantenimiento post-G119 — 2026-08-31
+**Última revisión operativa:** UX.6 R1–R6 / reconciliación R7 — 2026-09-07
 **Clasificación:** Seguridad / Privacidad / Técnica
 **Revisión externa:** Pendiente antes de la primera versión oficial o de cualquier despliegue remoto que cambie el modelo de riesgo
 
@@ -232,15 +232,21 @@ Las sesiones administrativas aplican:
 
 - inactividad configurable mediante `MRP_ADMIN_SESSION_MINUTES`;
 - duración absoluta configurable mediante `MRP_ADMIN_SESSION_MAX_HOURS`;
-- límite configurable mediante `MRP_ADMIN_MAX_SESSIONS`;
+- límite configurable por cuenta mediante `MRP_ADMIN_MAX_SESSIONS`;
 - política `SameSite` configurable mediante `MRP_ADMIN_COOKIE_SAMESITE`;
 - atributo `Secure` configurable mediante `MRP_ADMIN_COOKIE_SECURE`.
+
+La cookie Developer conserva como `Max-Age` la duración absoluta
+configurada de la sesión. La inactividad se controla en servidor y se renueva
+con la actividad válida; por tanto, el límite de inactividad no sustituye la
+duración absoluta.
 
 Los valores predeterminados del entorno local son:
 
 - 30 minutos de inactividad;
 - 8 horas de duración absoluta;
-- máximo de 5 sesiones;
+- máximo de 5 sesiones simultáneas por cuenta; una sesión adicional
+  revoca la más antigua de esa misma cuenta;
 - `SameSite=lax`;
 - `Secure` desactivado para localhost sin HTTPS.
 
@@ -256,3 +262,18 @@ Developer.
 Cualquier despliegue remoto, uso compartido entre personas o exposición
 de la base administrativa cambia el modelo de riesgo y requiere una revisión
 específica antes de considerarse soportado.
+
+<!-- UX6-R7-SECURITY-EXTENSION:START -->
+## Extensión administrativa del Portal Developer
+
+- avatares como archivos locales; SQLite conserva referencia relativa;
+- `MRP_DEVELOPER_MEDIA_DIR` permite reubicar la raíz;
+- binarios/DB reales permanecen fuera de Git;
+- `developer_user_audit` es append-only en SQLite;
+- registra acción, UTC, actor, objetivo, roles y resumen sanitizado, nunca
+  contraseñas/credenciales temporales/cookies/tokens;
+- credenciales temporales solo se muestran en el momento controlado;
+- esta auditoría es distinta de Developer Diagnostics.
+
+La App sigue sin base de datos permanente de simulaciones.
+<!-- UX6-R7-SECURITY-EXTENSION:END -->

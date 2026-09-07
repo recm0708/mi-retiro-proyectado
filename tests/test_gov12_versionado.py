@@ -14,6 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 VERSION_FILE = ROOT / "VERSION"
 CONFIG = ROOT / "app/core/config.py"
 BASE = ROOT / "app/templates/base.html"
+FOOTER = ROOT / "app/templates/partials/global_footer.html"
 
 
 class TestGov12Versionado(unittest.TestCase):
@@ -46,7 +47,18 @@ class TestGov12Versionado(unittest.TestCase):
 
     def test_footer_renderiza_la_version_canonica(self):
         base = BASE.read_text(encoding="utf-8")
-        self.assertIn("v{{ app_version }}", base)
+        footer = FOOTER.read_text(encoding="utf-8")
+
+        self.assertIn(
+            '{% include "partials/global_footer.html" %}',
+            base,
+        )
+
+        self.assertIn(
+            "v{{ app_version }}",
+            footer,
+        )
+
         respuesta = self.client.get("/")
         self.assertEqual(respuesta.status_code, 200)
         self.assertIn(f"v{APP_VERSION}", respuesta.text)

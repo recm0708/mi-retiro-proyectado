@@ -1,7 +1,7 @@
 # Proceso de release
 
 **Estado:** Vigente
-**Versión de aplicación:** `0.1.19.05-beta` — G119/E05 aceptado/publicado para DEV.2 R6; UX.5 R6 es candidato de cierre G120/E01 (`0.1.20.01-beta`), todavía no aceptado; UX.6 queda planificado sin Global preasignado.
+**Versión de aplicación:** `0.1.21.01-beta` — G121/E01 materializado para UX.6 R8 en PR #124; G120/E01 permanece publicado y PERSIST.1 R1 queda reservado como G122/E01.
 **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
 **Último tag formal legacy:** `v0.0.26-beta`
 **Versión base histórica preservada:** `0.0.23-beta`
@@ -10,28 +10,16 @@
 **Clasificación:** Gobierno / Release / Auditoría
 
 <!-- DOC1-R1-POST-MANT1:START -->
-## Estado post-MANT.1
+## Estado de publicación vigente
 
-El proceso formal de release permanece gobernado por `VERSION`, el ledger,
-el manifiesto versionado y los gates de CI.
-
-Estado vigente:
-
-- `VERSION` materializa `0.1.19.05-beta` como G119/E05 para DEV.2 R6.
-- DEV.2 R6 fue integrado mediante PR #111 / merge `bd2accb`.
-- G119/E05 está publicado mediante `v0.1.19.05-beta`; G118/E04
-  permanece preservado como publicación anterior.
-- G120/E01 (`0.1.20.01-beta`) queda aceptado para UX.5 R6; G121/E01 (`0.1.21.01-beta`) queda reservado para UX.6 R1.
-- La automatización no crea ni firma tags; esa frontera permanece local.
-- El tag `v0.1.19.05-beta` fue creado de forma anotada y firmada
-  después del merge de promoción y de la revalidación de `main`;
-  el workflow de firma #17 y el GitHub Release prerelease quedaron
-  publicados correctamente.
-- Un Release existente incompatible falla cerrado y solo HTTP 404
-  autoriza creación.
-
-Todo release futuro requiere gate completo, PR/CI, documentación coherente,
-tag firmado y evidencia reproducible.
+- `VERSION` materializa G121/E01 (`0.1.21.01-beta`) para UX.6 R8.
+- UX.6 R1–R8 consumen un único estado con ordinal E01.
+- G120/E01 permanece publicado mediante `v0.1.20.01-beta`.
+- PR #124 integra/promueve G121/E01.
+- G122/E01 (`0.1.22.01-beta`) queda reservado para PERSIST.1 R1 sin iniciar.
+- La automatización no crea ni firma tags.
+- `v0.1.21.01-beta` solo se crea después de merge y revalidación.
+- Un Release incompatible falla cerrado y solo HTTP 404 autoriza creación.
 <!-- DOC1-R1-POST-MANT1:END -->
 
 Este procedimiento complementa `VERSIONING.md`, `RELEASES.md`, `CHANGELOG.md`, `GOVERNANCE.md`, `LICENSE`, `THIRD_PARTY_NOTICES.md`, `docs/governance/licensing-and-distribution.md`, `docs/archive/governance/pre-1-0-versioning-audit.md`, `docs/governance/pre-1-0-revision-ledger.md`, `docs/archive/governance/ver2-revision-decision-matrix.md`, `data/pre-1-0-revision-ledger.json` y `docs/governance/master-plan-to-1-0.md`.
@@ -74,7 +62,9 @@ El candidato reserva el siguiente número global, pero ese número solo queda co
 
 La revisión funcional (`R#`) y el ordinal aceptado (`E##`) no se consideran equivalentes por definición. Cuando una revisión intermedia no consume Global, el ledger puede declarar `functional_revision`; el manifiesto de publicación usa ese valor para mostrar el nombre funcional correcto. DEV.2 R5 = G118/E04 y DEV.2 R6 = G119/E05 son precedentes
 canónicos de revisiones funcionales cuyo ordinal aceptado difiere de la
-revisión funcional. El candidato de cierre vigente es UX.5 R6 = G120/E01. R1–R5 fueron revisiones internas no aceptadas independientemente, por lo que el ordinal continúa siendo E01.
+revisión funcional. El último estado aceptado es UX.5 R6 = G120/E01. El candidato vigente
+es UX.6 = G121/E01, abierto en R1 y todavía no aceptado; R1–R7 son revisiones
+internas del mismo candidato mientras R8 mantiene pendiente la promoción.
 
 ## 3. Precondiciones
 

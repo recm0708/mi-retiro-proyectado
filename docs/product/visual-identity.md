@@ -1,7 +1,7 @@
 # Identidad visual de Mi Retiro Proyectado
 
 **Estado:** Vigente
-**Versión de aplicación revisada:** `0.1.20.01-beta`
+**Versión de aplicación revisada:** `0.1.21.01-beta`
 **Versión base histórica:** `0.0.24-beta`
 **Fecha:** 2026-08-19
 **Clasificación:** Producto / UX / Marca / GitHub
@@ -172,3 +172,20 @@ Un cambio sustancial del símbolo, composición o significado visual exige:
 5. ejecutar pruebas automatizadas y validación visual.
 
 Una simple optimización sin cambio perceptible debe conservar las dimensiones y el contrato de transparencia aplicable.
+
+<!-- UX6-R7-VISUAL-SYSTEM:START -->
+## 12. Sistema visual transversal UX.6
+
+- App, Developer y futuras superficies usan los mismos tokens `--app-*`.
+- `design-system.css` es la única autoridad global; no se mantiene `--dev-*`.
+- Compartir identidad no obliga a igualar densidad o composición.
+- `motion.css` concentra movimiento general, feedback y
+  `prefers-reduced-motion`.
+- Claro, Oscuro, Automático, Alto contraste, foco, forced colors, responsive y
+  objetivos táctiles forman parte del contrato visual.
+- Las microinteracciones son sutiles/funcionales y nunca la única señal de
+  estado.
+
+Las futuras superficies deben consumir este sistema antes de crear patrones
+visuales independientes.
+<!-- UX6-R7-VISUAL-SYSTEM:END -->

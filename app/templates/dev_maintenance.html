@@ -27,7 +27,7 @@
       <div class="col-sm-6 col-xl-3">
         <div class="card h-100">
           <div class="card-body">
-            <p class="text-muted small mb-1">Sesiones vigentes</p>
+            <p class="text-muted small mb-1">Sesiones vigentes globales</p>
             <p class="fs-4 fw-bold mb-0">
               {{ dev_sesiones_activas }}
             </p>
@@ -116,8 +116,7 @@
             <h2 class="h4">Revocar todas las sesiones</h2>
 
             <p class="text-muted">
-              Cierra todas las sesiones humanas Developer, incluida la
-              sesión desde la que se ejecuta esta operación.
+              Cierra todas las sesiones activas del Portal Developer, incluida la sesión desde la que se ejecuta esta operación.
             </p>
 
             {% if "maintenance.destructive" in dev_permisos %}
@@ -146,7 +145,12 @@
                   type="password"
                   autocomplete="current-password"
                   required
+
+                  placeholder="Ingresa tu contraseña actual"
                 >
+                <div class="form-text">
+                  Se utiliza únicamente para revalidar tu cuenta antes de ejecutar la operación.
+                </div>
               </div>
 
               <div class="mb-3">
@@ -163,7 +167,12 @@
                   type="text"
                   autocomplete="off"
                   required
+
+                  placeholder="Escribe exactamente REVOCAR SESIONES"
                 >
+                <div class="form-text">
+                  Escribe exactamente REVOCAR SESIONES para confirmar esta operación.
+                </div>
               </div>
 
               <button class="btn btn-danger" type="submit">

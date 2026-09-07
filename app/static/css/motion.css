@@ -1,0 +1,165 @@
+/*
+ * Mi Retiro Proyectado — Movimiento e interacción transversal.
+ *
+ * Propósito: Unifica animaciones, transiciones y microinteracciones de todas las superficies web del producto.
+ * Alcance: Consume tokens del sistema de diseño; no define paletas, autenticación, reglas previsionales ni contratos de datos.
+ */
+
+@keyframes app-surface-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes app-feedback-enter {
+  from {
+    opacity: 0;
+    transform: translateY(4px) scale(0.995);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.app-main > section,
+.dev-main > section,
+.app-motion-enter,
+[data-app-motion="enter"] {
+  animation:
+    app-surface-enter
+    var(--app-duration-slow)
+    var(--app-ease-standard)
+    both;
+}
+
+.app-main > section:nth-child(2),
+.dev-main > section:nth-child(2) {
+  animation-delay: 35ms;
+}
+
+.app-main > section:nth-child(3),
+.dev-main > section:nth-child(3) {
+  animation-delay: 65ms;
+}
+
+.resultado-cuotas,
+.official-import-status:not(.d-none),
+.dropdown-menu.show,
+details[open] > :not(summary),
+.app-motion-feedback,
+[data-app-motion="feedback"] {
+  animation:
+    app-feedback-enter
+    var(--app-duration-base)
+    var(--app-ease-standard)
+    both;
+}
+
+.btn:not(:disabled),
+.theme-trigger,
+.app-menu-button,
+.dev-menu-button,
+.dev-open-app,
+.dev-user-trigger,
+.app-sidebar-nav a,
+.dev-sidebar-nav a,
+.dropdown-item,
+summary,
+.form-control,
+.form-select,
+.app-motion-lift,
+[data-app-motion="lift"] {
+  transition:
+    transform var(--app-duration-fast) var(--app-ease-standard),
+    border-color var(--app-duration-fast) var(--app-ease-standard),
+    background-color var(--app-duration-fast) var(--app-ease-standard),
+    color var(--app-duration-fast) var(--app-ease-standard),
+    box-shadow var(--app-duration-fast) var(--app-ease-standard),
+    opacity var(--app-duration-fast) var(--app-ease-standard);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn:not(:disabled):hover,
+  .theme-trigger:hover,
+  .app-menu-button:hover,
+  .dev-menu-button:hover,
+  .dev-open-app:hover,
+  .dev-user-trigger:hover,
+  .app-motion-lift:hover,
+  [data-app-motion="lift"]:hover {
+    transform: translateY(-1px);
+  }
+
+  .app-sidebar-nav a:hover,
+  .dev-sidebar-nav a:hover {
+    transform: translateX(2px);
+  }
+}
+
+.btn:not(:disabled):active,
+.theme-trigger:active,
+.app-menu-button:active,
+.dev-menu-button:active,
+.dev-open-app:active,
+.dev-user-trigger:active,
+.app-sidebar-nav a:active,
+.dev-sidebar-nav a:active,
+.app-motion-lift:active,
+[data-app-motion="lift"]:active {
+  transform: translateY(0);
+}
+
+.input-group.is-invalid-group {
+  border-radius: var(--app-radius-md);
+  outline: 2px solid var(--app-validation-border);
+  outline-offset: 0;
+  box-shadow: 0 0 0 0.22rem var(--app-validation-ring);
+}
+
+.input-group.is-invalid-group > .form-control,
+.input-group.is-invalid-group > .form-select,
+.input-group.is-invalid-group > .btn {
+  border-color: var(--app-validation-border);
+}
+
+.input-group.is-invalid-group > .form-control,
+.input-group.is-invalid-group > .form-select {
+  box-shadow: none;
+}
+
+.comparison-option.is-disabled {
+  cursor: default;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+
+  body *,
+  body *::before,
+  body *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .app-main > section,
+  .dev-main > section,
+  .app-motion-enter,
+  .app-motion-feedback,
+  [data-app-motion] {
+    transform: none !important;
+  }
+}

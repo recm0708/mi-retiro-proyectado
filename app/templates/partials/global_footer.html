@@ -1,0 +1,89 @@
+{% set footer_es_developer = footer_surface|default('app') == 'developer' %}
+
+<footer
+  class="footer"
+  aria-label="{{ 'Información del Portal Developer' if footer_es_developer else 'Información legal' }}"
+>
+  <div class="container footer-modern">
+    <div class="footer-identity">
+      <strong>{{ app_name }}</strong>
+
+      {% if footer_es_developer %}
+      <span class="footer-context">
+        Portal Developer
+      </span>
+      {% endif %}
+
+      <span class="footer-version">
+        v{{ app_version }}
+      </span>
+    </div>
+
+    {% if footer_es_developer %}
+    <p class="footer-disclaimer mb-0">
+      Superficie administrativa local para diagnóstico,
+      observabilidad, seguridad y mantenimiento.
+    </p>
+    {% else %}
+    <p class="footer-disclaimer mb-0">
+      Herramienta independiente de estimación previsional.
+      No sustituye la determinación oficial de la Caja de Seguro
+      Social de Panamá ni emite resoluciones o certificaciones.
+    </p>
+    {% endif %}
+
+    <div
+      class="footer-bottom"
+      aria-label="Enlaces, autoría y derechos"
+    >
+      {% if footer_es_developer %}
+      <a class="footer-link" href="/">
+        Aplicación principal
+      </a>
+
+      {% if dev_autenticado %}
+      <span aria-hidden="true">·</span>
+
+      <a class="footer-link" href="/dev/privacidad">
+        Privacidad
+      </a>
+
+      <span aria-hidden="true">·</span>
+
+      <a class="footer-link" href="/dev/perfil">
+        Perfil
+      </a>
+      {% endif %}
+
+      {% else %}
+      <a class="footer-link" href="/metodologia">
+        Fuentes oficiales
+      </a>
+
+      <span aria-hidden="true">·</span>
+
+      <a
+        class="footer-link"
+        href="/metodologia#ayuda-contacto"
+      >
+        Ayuda y contacto
+      </a>
+
+      <span aria-hidden="true">·</span>
+
+      <a
+        class="footer-link"
+        href="/metodologia#privacidad-datos"
+      >
+        Privacidad
+      </a>
+      {% endif %}
+
+      <span aria-hidden="true">·</span>
+
+      <span class="footer-copyright">
+        © 2026 {{ app_author }}. Todos los derechos reservados.
+      </span>
+    </div>
+  </div>
+</footer>
