@@ -62,9 +62,11 @@ El candidato reserva el siguiente número global, pero ese número solo queda co
 
 La revisión funcional (`R#`) y el ordinal aceptado (`E##`) no se consideran equivalentes por definición. Cuando una revisión intermedia no consume Global, el ledger puede declarar `functional_revision`; el manifiesto de publicación usa ese valor para mostrar el nombre funcional correcto. DEV.2 R5 = G118/E04 y DEV.2 R6 = G119/E05 son precedentes
 canónicos de revisiones funcionales cuyo ordinal aceptado difiere de la
-revisión funcional. El último estado aceptado es UX.5 R6 = G120/E01. El candidato vigente
-es UX.6 = G121/E01, abierto en R1 y todavía no aceptado; R1–R7 son revisiones
-internas del mismo candidato mientras R8 mantiene pendiente la promoción.
+revisión funcional. El último estado integrado/aceptado es UX.6 R8 = G121/E01
+(`0.1.21.01-beta`), materializado mediante PR #124 / merge `5dcd2503e83ba69df83fa906d331df594653c0a0`. El
+siguiente candidato formal es PERSIST.1 R1 = G122/E01 (`0.1.22.01-beta`),
+reservado pero no iniciado. UX.7 permanece como revisión visual final
+`planned_reserved` y no bloqueante.
 
 ## 3. Precondiciones
 
