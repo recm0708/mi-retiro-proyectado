@@ -96,17 +96,16 @@ VER.2 es un bloque transversal de reconciliación y **no añade un bloque 15** a
 
 ## Estado operativo UX.5 / UX.6
 
-UX.5 está cerrado/publicado como G120/E01 (`0.1.20.01-beta`).
+UX.5 permanece cerrado/publicado como G120/E01 (`0.1.20.01-beta`).
 
-UX.6 conserva un único candidato G121/E01 todavía no aceptado:
+UX.6 R1–R8 queda integrado/aceptado como G121/E01 (`0.1.21.01-beta`)
+mediante PR #124 / merge `5dcd2503e83ba69df83fa906d331df594653c0a0` con revisión funcional R8 y ordinal E01.
 
-- R1–R2: shell, identidad, perfil, avatar, usuarios y auditoría persistente;
-- R3–R4: movimiento, accesibilidad y responsive compartidos;
-- R5–R6: importación oficial segura, privacidad pública y limpieza técnica;
-- R7: auditoría/reconciliación documental;
-- R8: auditoría integral, gate, aceptación y promoción.
+PERSIST.1 R1 queda reservado como siguiente candidato G122/E01
+(`0.1.22.01-beta`) y **no se considera iniciado** por esta reserva.
 
-PERSIST.1 permanece detrás de R8.
+UX.7 permanece como revisión visual final `planned_reserved`, no bloqueante
+para PERSIST.1 ni para los demás bloques.
 
 ## 1. Programa GOV.1 — Auditoría, Gobierno y Trazabilidad Pre-Beta
 

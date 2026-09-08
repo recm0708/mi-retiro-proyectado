@@ -28,8 +28,8 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 
 - **Versión canónica vigente:** `0.1.21.01-beta`, obtenida exclusivamente
   desde [`VERSION`](VERSION). Materializa UX.6 R8 como G121/E01.
-- **Estado revision-aware del candidato de promoción:** UX.6 R1–R8 / G121/E01.
-- **PR de integración/promoción:** #124.
+- **Estado revision-aware integrado/aceptado:** UX.6 R1–R8 / G121/E01.
+- **Integración/promoción:** PR #124 / merge `5dcd2503e83ba69df83fa906d331df594653c0a0`.
 - **Siguiente candidato reservado:** PERSIST.1 R1 / G122/E01
   (`0.1.22.01-beta`). Esta reserva no inicia el bloque.
 - **Última publicación revision-aware con tag:** `v0.1.20.01-beta`

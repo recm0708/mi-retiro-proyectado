@@ -76,12 +76,16 @@ Las referencias históricas a bloques previos se conservan como trazabilidad, pe
 
 ## Secuencia operativa UX.5 → UX.6
 
-UX.5 está cerrado y publicado como G120/E01 (`0.1.20.01-beta`). UX.6 se
-ejecuta como un único candidato G121/E01 (`0.1.21.01-beta`) abierto en R1.
-R1–R6 están implementados; R7 reconcilia documentación y R8 mantiene pendiente
-la auditoría integral, aceptación y promoción.
+UX.5 permanece cerrado/publicado como G120/E01 (`0.1.20.01-beta`).
 
-No se inicia PERSIST.1 mientras UX.6 permanezca abierto.
+UX.6 R1–R8 queda integrado/aceptado como G121/E01 (`0.1.21.01-beta`)
+mediante PR #124 / merge `5dcd2503e83ba69df83fa906d331df594653c0a0`, con `functional_revision = R8`.
+
+El siguiente candidato formal es PERSIST.1 R1 / G122/E01
+(`0.1.22.01-beta`), reservado pero no iniciado.
+
+UX.7 se conserva como revisión visual final no bloqueante antes de la
+versión estable y no impide avanzar PERSIST.1 ni otros bloques.
 
 ## 1. Propósito
 

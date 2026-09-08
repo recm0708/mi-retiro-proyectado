@@ -10,7 +10,7 @@ Este archivo es el punto de entrada para la documentación técnica, funcional, 
 
 ## Estado de normalización del repositorio
 
-**Estado actual:** UX.6 R1–R8 queda consolidado como G121/E01 dentro de PR #124; PERSIST.1 R1 es el siguiente candidato reservado G122/E01 y no se inicia por esta reserva. UX.7 permanece no bloqueante.
+**Estado actual:** UX.6 R1–R8 queda integrado/aceptado como G121/E01 mediante PR #124 / merge `5dcd2503e83ba69df83fa906d331df594653c0a0`; PERSIST.1 R1 es el siguiente candidato reservado G122/E01 y no se inicia por esta reserva. UX.7 permanece no bloqueante.
 
 Estado de la fase:
 

@@ -133,13 +133,15 @@ Como evidencia del checkpoint anterior se conserva la formulación: **no declara
 Como evidencia histórica también se conserva la formulación **“cierre de UX.4.6e y del alcance funcional UX.4.6f–h”**, que en aquella revisión describía trabajo todavía pendiente. Esa frase se mantiene únicamente para preservar la trazabilidad documental y **ya no representa el estado vigente**.
 
 UX.4.6e–UX.4.6i, DEV.2, SEC.2 R1–R6, AUD.SEC2 R1, DOC.2,
-NOR.1 R8, DOC.1 R3–R5, PLAN.2 R1, REL.GOV.1 R2 y UX.5 están cerrados.
-UX.5 R6 está publicado como G120/E01. UX.6 mantiene R1–R6 implementados,
-R7 documental activo y R8 pendiente dentro del candidato G121/E01.
+NOR.1 R8, DOC.1 R3–R5, PLAN.2 R1, REL.GOV.1 R2, UX.5 y UX.6 están cerrados.
+UX.5 R6 permanece publicado como G120/E01. UX.6 R1–R8 queda
+integrado/aceptado como G121/E01 (`0.1.21.01-beta`) mediante PR #124 /
+merge `5dcd2503e83ba69df83fa906d331df594653c0a0`; su tag y GitHub Release prerelease permanecen pendientes
+hasta completar la revalidación post-merge y la publicación formal.
 
 Continúan pendientes, según corresponda:
 
-- cierre/promoción de UX.6 R8;
+- PERSIST.1 R1 como siguiente candidato G122/E01, todavía no iniciado;
 - persistencia, informes y bloques posteriores de la matriz maestra;
 - revisión jurídica externa previa a la primera versión oficial;
 - hardening específico si se decide un despliegue remoto;

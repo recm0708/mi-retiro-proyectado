@@ -20,7 +20,7 @@ Mi Retiro Proyectado se encuentra en **desarrollo beta**. Los estados histórico
 
 | Línea | Soporte de seguridad |
 | --- | --- |
-| `0.1.21.01-beta` | Beta vigente G121/E01 aceptada para UX.6 R8; publicación pendiente de merge/revalidación, tag firmado y GitHub Release prerelease |
+| `0.1.21.01-beta` | Beta vigente G121/E01 aceptada e integrada para UX.6 R8; publicación pendiente de revalidación post-merge, tag firmado y GitHub Release prerelease |
 | `0.1.20.01-beta` | Beta previa G120/E01 publicada mediante tag firmado `v0.1.20.01-beta` y GitHub Release prerelease |
 | `0.1.19.05-beta` | Beta previa G119/E05 publicada para DEV.2 R6 mediante tag firmado `v0.1.19.05-beta`, workflow de verificación en `success` y GitHub Release prerelease |
 | `0.1.18.04-beta` | Beta previa G118/E04 publicada para DEV.2 R5 mediante tag firmado `v0.1.18.04-beta` y GitHub Release prerelease |
