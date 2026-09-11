@@ -6,8 +6,11 @@
 - `VERSION` está sincronizado en `0.1.21.01-beta` (G121/E01).
 - G120/E01 permanece publicado como `v0.1.20.01-beta`.
 - UX.6 R1–R8 queda consolidado en PR #124 con revisión funcional R8.
-- PERSIST.1 R1 queda reservado como G122/E01, pero no iniciado.
-- UX.7 permanece como revisión visual final no bloqueante.
+- NOR.3 R1–R2 queda como candidato G122/E01 reservado/no aceptado; G121/E01
+  continúa siendo el último estado material aceptado.
+- PERSIST.1 permanece planificado, no iniciado y sin Global preasignado hasta
+  el cierre de NOR.3 y la replanificación #155.
+- UX.7/UX.8 permanecen planificados y no iniciados.
 - Los cambios de seguridad deben conservar sus regresiones.
 - Código, pruebas, documentación y evidencia deben permanecer sincronizados.
 <!-- DOC1-R1-POST-MANT1:END -->
@@ -326,3 +329,15 @@ Consultar:
 - [Índice de documentación](docs/README.md).
 - [Código de conducta](CODE_OF_CONDUCT.md);
 - [Soporte](SUPPORT.md).
+
+<!-- NOR3-GOV-BOOTSTRAP:START -->
+## Issues y revisiones por pares
+
+Antes de abrir trabajo material, identifica el Issue propietario y consulta
+[`docs/governance/github-issues-pr-governance.md`](docs/governance/github-issues-pr-governance.md).
+
+Los bloques con revisiones consecutivas se ejecutan por defecto en pares
+(`R1+R2`, `R3+R4`, etc.) cuando no exista una frontera técnica que requiera
+separación. Todo PR material debe declarar Issues, alcance, validación,
+documentación y remanentes.
+<!-- NOR3-GOV-BOOTSTRAP:END -->

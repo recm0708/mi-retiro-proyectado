@@ -3,7 +3,7 @@
 **Estado:** vigente
 **Versión base al iniciar el plan:** `0.0.25-beta`
 **Cierre histórico de PLAN.1:** `0.0.26-beta` / `v0.0.26-beta`
-**Versión transversal vigente:** `0.1.21.01-beta` — UX.6 R1–R8 consolidado como G121/E01 en PR #124; PERSIST.1 R1 queda reservado como G122/E01.
+**Versión transversal vigente:** `0.1.21.01-beta` — UX.6 R1–R8 consolidado como G121/E01 en PR #124; NOR.3 R1–R2 es el candidato G122/E01 reservado/no aceptado; PERSIST.1 permanece planificado sin Global preasignado.
 **Fecha:** 2026-08-25
 **Clasificación:** Producto / Arquitectura / QA / Release
 
@@ -23,7 +23,9 @@ alcanza G119/E05.
   `v0.1.19.05-beta`.
 - UX.5 R1–R6 permanecen consolidados/publicados como G120/E01.
 - UX.6 R1–R8 queda consolidado como G121/E01 con revisión funcional R8 en PR #124.
-- PERSIST.1 R1 queda reservado como G122/E01 y no se inicia por esta reserva.
+- NOR.3 R1–R2 queda como candidato G122/E01 reservado/no aceptado.
+- PERSIST.1 permanece planificado, no iniciado y sin Global preasignado hasta
+  el cierre de NOR.3 y la replanificación #155.
 <!-- NOR1-R7-CLOSURE:END -->
 
 <!-- NOR2-R1-STATUS:START -->
@@ -81,11 +83,14 @@ UX.5 permanece cerrado/publicado como G120/E01 (`0.1.20.01-beta`).
 UX.6 R1–R8 queda integrado/aceptado como G121/E01 (`0.1.21.01-beta`)
 mediante PR #124 / merge `5dcd2503e83ba69df83fa906d331df594653c0a0`, con `functional_revision = R8`.
 
-El siguiente candidato formal es PERSIST.1 R1 / G122/E01
-(`0.1.22.01-beta`), reservado pero no iniciado.
+El siguiente candidato formal es NOR.3 R1–R2 / G122/E01
+(`0.1.22.01-beta`), reservado/no aceptado y actualmente en progreso. La
+apertura del bloque no modifica `VERSION` ni consume G122.
 
-UX.7 se conserva como revisión visual final no bloqueante antes de la
-versión estable y no impide avanzar PERSIST.1 ni otros bloques.
+PERSIST.1 permanece como etapa funcional posterior, no iniciada y sin Global
+preasignado hasta cerrar NOR.3 y ejecutar la replanificación #155.
+
+UX.7/UX.8 permanecen como programa UX granular posterior y no iniciado.
 
 ## 1. Propósito
 
@@ -332,7 +337,7 @@ Audita documentación viva para sustituir etiquetas visibles basadas únicamente
 
 ### 9. PERSIST.1 — Persistencia voluntaria y segura
 
-**Estado:** etapa funcional posterior de la matriz maestra y sin Global preasignado; G118/E04 permanece aceptado/publicado para DEV.2 R5, G119/E05 permanece aceptado/publicado para DEV.2 R6 y G120/E01 queda reservado para el cierre UX.5 R6; UX.6 se ubica después y antes de PERSIST.1 conforme a la matriz viva.
+**Estado:** etapa funcional posterior a NOR.3 y sin Global preasignado; permanece planificada y no iniciada hasta el cierre de NOR.3 y la replanificación post-NOR.3 de #155.
 
 - guardado solo por decisión del asegurado;
 - modelo de datos versionado;

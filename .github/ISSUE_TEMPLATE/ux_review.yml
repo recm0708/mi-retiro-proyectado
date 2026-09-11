@@ -1,0 +1,115 @@
+name: Revisión UX / superficie
+description: Registra una revisión UX granular de una superficie o flujo concreto.
+title: "[UX] "
+labels: ["planning", "ui"]
+body:
+  - type: input
+    id: relacion
+    attributes:
+      label: Umbrella / Issue relacionado
+      placeholder: "Ej.: #129"
+    validations:
+      required: true
+
+  - type: textarea
+    id: superficies
+    attributes:
+      label: Superficies / rutas incluidas
+    validations:
+      required: true
+
+  - type: textarea
+    id: exclusiones
+    attributes:
+      label: Exclusiones explícitas
+    validations:
+      required: true
+
+  - type: textarea
+    id: estados
+    attributes:
+      label: Estados que deben revisarse
+    validations:
+      required: true
+
+  - type: textarea
+    id: temas
+    attributes:
+      label: Temas y modos visuales
+      description: Claro, oscuro, automático, alto contraste y forced-colors cuando aplique.
+    validations:
+      required: true
+
+  - type: textarea
+    id: responsive
+    attributes:
+      label: Responsive / resoluciones
+    validations:
+      required: true
+
+  - type: textarea
+    id: accesibilidad
+    attributes:
+      label: Accesibilidad
+    validations:
+      required: true
+
+  - type: textarea
+    id: interaccion
+    attributes:
+      label: Interacción y motion
+
+  - type: textarea
+    id: ownership
+    attributes:
+      label: Shared vs portal-specific
+
+  - type: textarea
+    id: implementacion
+    attributes:
+      label: Implementación / checklist
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidencia
+    attributes:
+      label: Evidencia visual requerida
+    validations:
+      required: true
+
+  - type: textarea
+    id: derivados
+    attributes:
+      label: Defectos / hallazgos derivados
+
+  - type: textarea
+    id: validacion
+    attributes:
+      label: Validación
+    validations:
+      required: true
+
+  - type: textarea
+    id: cierre
+    attributes:
+      label: Criterio de cierre
+    validations:
+      required: true
+
+  - type: textarea
+    id: continuidad
+    attributes:
+      label: Continuidad
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: control
+    attributes:
+      label: Confirmaciones
+      options:
+        - label: Confirmo que no he incluido secretos ni datos personales sensibles.
+          required: true
+        - label: Confirmo que la superficie está acotada y no duplica otro Issue UX conocido.
+          required: true

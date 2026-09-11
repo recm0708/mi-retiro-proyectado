@@ -1,0 +1,97 @@
+name: Hallazgo / deuda técnica
+description: Registra un hallazgo diferido con riesgo, owner futuro y criterio de cierre.
+title: "[DEUDA] "
+labels: ["planning", "maintenance"]
+body:
+  - type: input
+    id: origen
+    attributes:
+      label: Origen / Issue relacionado
+      placeholder: "Ej.: #126"
+    validations:
+      required: true
+
+  - type: input
+    id: area
+    attributes:
+      label: Área o ruta afectada
+    validations:
+      required: true
+
+  - type: textarea
+    id: problema
+    attributes:
+      label: Problema observado
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidencia
+    attributes:
+      label: Evidencia
+    validations:
+      required: true
+
+  - type: textarea
+    id: riesgo
+    attributes:
+      label: Riesgo si se difiere
+    validations:
+      required: true
+
+  - type: textarea
+    id: motivo
+    attributes:
+      label: Motivo de diferimiento
+    validations:
+      required: true
+
+  - type: textarea
+    id: owner
+    attributes:
+      label: Fase / Issue propietario futuro
+    validations:
+      required: true
+
+  - type: textarea
+    id: propuesta
+    attributes:
+      label: Propuesta o alternativas
+
+  - type: textarea
+    id: implementacion
+    attributes:
+      label: Implementación / checklist
+    validations:
+      required: true
+
+  - type: textarea
+    id: validacion
+    attributes:
+      label: Validación requerida
+    validations:
+      required: true
+
+  - type: textarea
+    id: cierre
+    attributes:
+      label: Criterio de cierre
+    validations:
+      required: true
+
+  - type: textarea
+    id: continuidad
+    attributes:
+      label: Continuidad
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: control
+    attributes:
+      label: Confirmaciones
+      options:
+        - label: Confirmo que no he incluido secretos ni datos personales sensibles.
+          required: true
+        - label: Confirmo que busqué un Issue propietario existente antes de crear este hallazgo.
+          required: true

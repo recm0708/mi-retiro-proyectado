@@ -67,7 +67,7 @@ class TestDOC1R4LiveStateSanitization(unittest.TestCase):
         )
         candidate = registry["current_candidate"]
         self.assertEqual(122, candidate["global_revision"])
-        self.assertEqual("PERSIST.1", candidate["block"])
+        self.assertEqual("NOR.3", candidate["block"])
         self.assertEqual("R1", candidate["revision"])
 
     def test_ledger_markdown_registra_g115(self):

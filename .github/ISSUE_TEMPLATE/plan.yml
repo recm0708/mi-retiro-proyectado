@@ -1,0 +1,122 @@
+name: Plan / fase / trabajo diferido
+description: Registra planificación material, una fase o trabajo diferido con ownership claro.
+title: "[PLAN] "
+labels: ["planning"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Usa este formulario para trabajo material planificado.
+        No incluyas secretos, credenciales ni datos personales sensibles.
+
+  - type: dropdown
+    id: estado
+    attributes:
+      label: Estado operativo inicial
+      options:
+        - proposed
+        - approved_not_started
+        - blocked
+        - deferred
+        - post_1_0
+    validations:
+      required: true
+
+  - type: input
+    id: umbrella
+    attributes:
+      label: Umbrella / Issue relacionado
+      placeholder: "Ej.: #126"
+    validations:
+      required: true
+
+  - type: input
+    id: bloque
+    attributes:
+      label: Fase o bloque
+      placeholder: "Ej.: NOR.3 R3-R4"
+
+  - type: textarea
+    id: contexto
+    attributes:
+      label: Contexto
+      description: Explica por qué existe este trabajo.
+    validations:
+      required: true
+
+  - type: textarea
+    id: objetivo
+    attributes:
+      label: Objetivo
+      description: Define el resultado final verificable.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alcance
+    attributes:
+      label: Alcance incluido
+    validations:
+      required: true
+
+  - type: textarea
+    id: exclusiones
+    attributes:
+      label: Fuera de alcance
+    validations:
+      required: true
+
+  - type: textarea
+    id: contratos
+    attributes:
+      label: Contratos y compatibilidad que deben preservarse
+
+  - type: textarea
+    id: dependencias
+    attributes:
+      label: Dependencias y orden
+
+  - type: textarea
+    id: implementacion
+    attributes:
+      label: Implementación / líneas de trabajo
+      description: Escribe resultados verificables; no microcomandos.
+    validations:
+      required: true
+
+  - type: textarea
+    id: validacion
+    attributes:
+      label: Validación y evidencia
+    validations:
+      required: true
+
+  - type: textarea
+    id: riesgos
+    attributes:
+      label: Riesgos / decisiones abiertas
+
+  - type: textarea
+    id: cierre
+    attributes:
+      label: Criterio de cierre
+    validations:
+      required: true
+
+  - type: textarea
+    id: continuidad
+    attributes:
+      label: Continuidad
+      description: Último estado material y siguiente paso exacto.
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: seguridad
+    attributes:
+      label: Confirmaciones
+      options:
+        - label: Confirmo que no he incluido secretos ni datos personales sensibles.
+          required: true
+        - label: Confirmo que este trabajo tiene un owner claro y no duplica otro Issue conocido.
+          required: true

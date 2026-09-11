@@ -11,7 +11,7 @@
     "UX.6 R1–R8 queda aceptado como G121/E01 con revisión funcional R8 y ordinal E01.",
     "`VERSION` avanza a `0.1.21.01-beta`.",
     "El ledger revision-aware queda en `accepted_count=121`.",
-    "UX.6 se registra cerrado y PERSIST.1 R1 queda reservado como siguiente candidato G122/E01.",
+    "UX.6 se registra cerrado; NOR.3 R1–R2 queda como alcance material vigente del candidato G122/E01 reservado/no aceptado y PERSIST.1 permanece planificado sin Global preasignado.",
     "R1–R2 consolidan shell/identidad, perfil/avatar, usuarios, RBAC, credenciales temporales y auditoría append-only.",
     "R3–R4 consolidan movimiento compartido, accesibilidad, responsive, forced colors y compatibilidad.",
     "R5–R6 consolidan Mi Retiro Seguro/Ficha Digital, confirmación explícita y separación de términos públicos frente a Developer.",
@@ -44,7 +44,7 @@
   "next_step": {
     "global_revision": 122,
     "revision_aware": "0.1.22.01-beta",
-    "block": "PERSIST.1",
-    "description": "El siguiente candidato formal queda reservado como **PERSIST.1 R1 — arquitectura de persistencia voluntaria y segura**. La reserva no inicia el bloque ni sustituye la autorización explícita para comenzar. UX.7 permanece como revisión visual final no bloqueante antes de la versión estable."
+    "block": "NOR.3",
+    "description": "NOR.3 R1–R2 es el alcance material vigente del candidato G122/E01 para normalización estructural, gobierno y policy machine-readable. El Global no se consume hasta su aceptación. PERSIST.1 permanece planificado y no iniciado, sin Global preasignado."
   }
 }

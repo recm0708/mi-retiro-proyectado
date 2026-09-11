@@ -20,7 +20,7 @@ DEV.2 permanece cerrado después de R6/G119-E05. UX.6 amplía la experiencia Dev
 - Perfil/avatar, usuarios/RBAC, credenciales temporales, revocación y auditoría persistente permanecen vigentes.
 - App y Developer comparten Design System, movimiento y accesibilidad.
 - La sesión humana continúa separada del Bearer técnico.
-- PERSIST.1 R1 queda reservado como G122/E01, sin iniciar.
+- NOR.3 R1–R2 queda como candidato G122/E01 reservado/no aceptado; PERSIST.1 permanece planificado, no iniciado y sin Global preasignado.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 
 Como evidencia histórica de integración, R5 está integrado mediante PR #107 / merge `bc97db0` y aceptado como G118/E04. R6 quedó integrado mediante PR #111 / merge `bd2accb` y aceptado/publicado como G119/E05.

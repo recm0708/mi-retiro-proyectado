@@ -1,7 +1,7 @@
 # Proceso de release
 
 **Estado:** Vigente
-**Versión de aplicación:** `0.1.21.01-beta` — G121/E01 materializado para UX.6 R8 en PR #124; G120/E01 permanece publicado y PERSIST.1 R1 queda reservado como G122/E01.
+**Versión de aplicación:** `0.1.21.01-beta` — G121/E01 materializado para UX.6 R8 en PR #124; G120/E01 permanece publicado y NOR.3 R1–R2 es el candidato G122/E01 reservado/no aceptado.
 **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
 **Último tag formal legacy:** `v0.0.26-beta`
 **Versión base histórica preservada:** `0.0.23-beta`
@@ -16,7 +16,7 @@
 - UX.6 R1–R8 consumen un único estado con ordinal E01.
 - G120/E01 permanece publicado mediante `v0.1.20.01-beta`.
 - PR #124 integra/promueve G121/E01.
-- G122/E01 (`0.1.22.01-beta`) queda reservado para PERSIST.1 R1 sin iniciar.
+- G122/E01 (`0.1.22.01-beta`) queda reservado como candidato NOR.3 R1–R2; no se considera aceptado ni consumido.
 - La automatización no crea ni firma tags.
 - `v0.1.21.01-beta` solo se crea después de merge y revalidación.
 - Un Release incompatible falla cerrado y solo HTTP 404 autoriza creación.
@@ -64,9 +64,10 @@ La revisión funcional (`R#`) y el ordinal aceptado (`E##`) no se consideran equ
 canónicos de revisiones funcionales cuyo ordinal aceptado difiere de la
 revisión funcional. El último estado integrado/aceptado es UX.6 R8 = G121/E01
 (`0.1.21.01-beta`), materializado mediante PR #124 / merge `5dcd2503e83ba69df83fa906d331df594653c0a0`. El
-siguiente candidato formal es PERSIST.1 R1 = G122/E01 (`0.1.22.01-beta`),
-reservado pero no iniciado. UX.7 permanece como revisión visual final
-`planned_reserved` y no bloqueante.
+siguiente candidato formal es NOR.3 R1–R2 = G122/E01 (`0.1.22.01-beta`),
+reservado/no aceptado y actualmente en progreso. PERSIST.1 permanece
+planificado, no iniciado y sin Global preasignado hasta el cierre de NOR.3
+y la replanificación #155. UX.7/UX.8 permanecen planificados y no iniciados.
 
 ## 3. Precondiciones
 

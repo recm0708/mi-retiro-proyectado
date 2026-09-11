@@ -3,7 +3,7 @@
 **Proyecto:** Mi Retiro Proyectado
 **Estado:** vigente desde GOV.1.2
 **Fecha de adopción:** 2026-08-18
-**Última revisión:** UX.6 R8 — G121/E01 integrado mediante PR #124 / merge `5dcd2503e83ba69df83fa906d331df594653c0a0` — 2026-09-07
+**Última revisión de estado:** NOR.3 R1–R2 — inventario, gobierno y policy estructural del candidato G122/E01 — 2026-09-11
 
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado de gobierno vigente
@@ -12,8 +12,11 @@
 - UX.6 R1–R8 queda integrado/aceptado como G121/E01 (`0.1.21.01-beta`) mediante PR #124 / merge `5dcd2503e83ba69df83fa906d331df594653c0a0`.
 - G120/E01 permanece como última publicación con tag.
 - DEV.2 permanece cerrado en G119/E05.
-- PERSIST.1 R1 queda reservado como G122/E01 y no se inicia por la reserva.
-- UX.7 permanece como revisión visual final no bloqueante.
+- NOR.3 R1–R2 queda como candidato G122/E01 reservado/no aceptado y no modifica
+  `VERSION` hasta su eventual aceptación.
+- PERSIST.1 permanece planificado, no iniciado y sin Global preasignado hasta
+  el cierre de NOR.3 y la replanificación #155.
+- UX.7/UX.8 permanecen planificados y no iniciados.
 - Publicar G121 exige revalidación post-merge de `main`, tag firmado y GitHub Release prerelease.
 <!-- DOC1-R1-POST-MANT1:END -->
 
@@ -213,3 +216,15 @@ Toda modificación sustancial de gobierno debe:
 - explicar su motivo;
 - actualizar documentos relacionados;
 - respetar el historial anterior.
+
+<!-- NOR3-GOV-BOOTSTRAP:START -->
+## Gobierno durable de Issues y Pull Requests
+
+La convención canónica de Issues, checkpoints, labels, revisiones por pares,
+Milestones y Pull Requests se mantiene en
+[`docs/governance/github-issues-pr-governance.md`](docs/governance/github-issues-pr-governance.md).
+
+Durante NOR.3 se aplica por defecto la ejecución `R1+R2`, `R3+R4`, `R5+R6`
+y `R7+R8` dentro de un bloque ya autorizado, preservando evidencia individual
+por revisión y separando el par cuando la auditabilidad o el riesgo lo exijan.
+<!-- NOR3-GOV-BOOTSTRAP:END -->

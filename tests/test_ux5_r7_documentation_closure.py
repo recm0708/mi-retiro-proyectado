@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class TestUX5R7DocumentationClosure(unittest.TestCase):
-    def test_transicion_post_ux5_reserva_persist1_g122_e01(self):
+    def test_estado_vigente_conserva_g121_y_candidato_nor3_g122_e01(self):
         data = json.loads(
             (ROOT / "data/work-block-registry.json").read_text(
                 encoding="utf-8"
@@ -20,12 +20,12 @@ class TestUX5R7DocumentationClosure(unittest.TestCase):
         candidate = data["current_candidate"]
         self.assertEqual(122, candidate["global_revision"])
         self.assertEqual("0.1.22.01-beta", candidate["revision_aware"])
-        self.assertEqual("PERSIST.1", candidate["block"])
+        self.assertEqual("NOR.3", candidate["block"])
         self.assertEqual("R1", candidate["revision"])
         self.assertEqual(1, candidate["edition"])
         self.assertEqual("reserved_not_accepted", candidate["state"])
 
-    def test_ux5_y_ux6_cerrados_y_persist1_es_candidato(self):
+    def test_ux5_y_ux6_cerrados_nor3_candidato_y_persist1_planificado(self):
         data = json.loads(
             (ROOT / "data/work-block-registry.json").read_text(
                 encoding="utf-8"
@@ -39,12 +39,12 @@ class TestUX5R7DocumentationClosure(unittest.TestCase):
         self.assertIn("G120", identifiers["UX.5"]["global_refs"])
         self.assertEqual("closed", identifiers["UX.6"]["status"])
         self.assertIn("G121", identifiers["UX.6"]["global_refs"])
-        self.assertEqual("candidate_r1", identifiers["PERSIST.1"]["status"])
+        self.assertEqual("planned_reserved", identifiers["PERSIST.1"]["status"])
+        self.assertEqual("candidate_r1", identifiers["NOR.3"]["status"])
 
         candidate = data["current_candidate"]
-        self.assertEqual(
-            "REP.1",
-            candidate["next_functional_block_if_accepted"],
+        self.assertIsNone(
+            candidate["next_functional_block_if_accepted"]
         )
         self.assertIsNone(
             candidate["next_functional_global_if_accepted"]

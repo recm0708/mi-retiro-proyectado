@@ -57,7 +57,7 @@ class TestReleasePublication(unittest.TestCase):
             "0.1.22.01-beta",
             data["next_step"]["revision_aware"],
         )
-        self.assertEqual("PERSIST.1", data["next_step"]["block"])
+        self.assertEqual("NOR.3", data["next_step"]["block"])
 
     def test_manifiesto_supera_validacion(self):
         result = self.run_script("--check-manifest")
@@ -87,7 +87,7 @@ class TestReleasePublication(unittest.TestCase):
             TAG_OBJECT,
             "**G122/E01**",
             "`0.1.22.01-beta`",
-            "PERSIST.1",
+            "NOR.3",
         ):
             with self.subTest(fragment=fragment):
                 self.assertIn(fragment, text)

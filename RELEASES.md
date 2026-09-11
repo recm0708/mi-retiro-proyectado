@@ -22,6 +22,33 @@
 - La publicación final exige tag anotado/firmado y GitHub Release prerelease.
 <!-- UX6-R8-PROMOTION:END -->
 
+<!-- NOR3-R1-CANDIDATE-RECONCILIATION:START -->
+## Reconciliación de candidato post-G121 — NOR.3 R1
+
+- El snapshot de promoción G121/E01 anterior se preserva como evidencia del
+  estado existente cuando UX.6 cerró.
+- La planificación posterior registrada en #126 antepone NOR.3 a PERSIST.1.
+- G122/E01 (`0.1.22.01-beta`) queda como candidato NOR.3 R1
+  reservado/no aceptado; `VERSION` permanece en `0.1.21.01-beta`.
+- La antigua reserva PERSIST.1 → G122 queda superada por esta planificación;
+  PERSIST.1 permanece planificado, no iniciado y sin Global preasignado.
+- No se preasigna el Global posterior a NOR.3; #155 determinará la secuencia
+  siguiente después del cierre del bloque.
+<!-- NOR3-R1-CANDIDATE-RECONCILIATION:END -->
+
+<!-- NOR3-R2-CANDIDATE-CONTINUITY:START -->
+## Continuidad del candidato NOR.3 R2 — par R1–R2
+
+- La evidencia específica de R1 se conserva sin reescritura.
+- R2 materializa la policy estructural machine-readable y sus gates dentro del
+  mismo candidato G122/E01.
+- El alcance material vigente del candidato es NOR.3 R1–R2; `VERSION` continúa
+  en `0.1.21.01-beta` y G122 permanece reservado/no aceptado.
+- No se realizó ningún movimiento físico de backend, templates, assets, tests
+  ni data; esos cambios comienzan en R3–R4 conforme a #126/#127/#128.
+<!-- NOR3-R2-CANDIDATE-CONTINUITY:END -->
+
+
 <!-- DOC1-R1-POST-MANT1:START -->
 
 ## Promoción G120/E01 — UX.5 R6

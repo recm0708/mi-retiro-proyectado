@@ -74,7 +74,7 @@ class TestReleaseGovernanceContract(unittest.TestCase):
             data["next_candidate"],
         )
         self.assertEqual(
-            "PERSIST.1",
+            "NOR.3",
             data["next_candidate_block"],
         )
 
@@ -175,7 +175,7 @@ class TestReleaseGovernanceContract(unittest.TestCase):
             with self.subTest(fragment=fragment):
                 self.assertIn(fragment, text)
 
-    def test_g121_aceptado_y_g122_reservado_para_persist1(self):
+    def test_g121_aceptado_y_g122_es_candidato_nor3(self):
         ledger = json.loads(
             (
                 ROOT / "data/pre-1-0-revision-ledger.json"
@@ -188,7 +188,7 @@ class TestReleaseGovernanceContract(unittest.TestCase):
             ledger["next_candidate"],
         )
         self.assertEqual(
-            "PERSIST.1",
+            "NOR.3",
             ledger["next_candidate_block"],
         )
         self.assertEqual(

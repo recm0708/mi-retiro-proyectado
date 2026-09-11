@@ -10,7 +10,7 @@ La versión canónica vigente es `0.1.21.01-beta`.
 - R8 refuerza sesiones por cuenta, cookie, RBAC visual, assets y favicon.
 - Perfil/avatar y auditoría Developer permanecen separados de datos previsionales.
 - El login humano sigue separado del Bearer técnico.
-- PERSIST.1 R1 queda reservado como G122/E01, sin iniciar.
+- NOR.3 R1–R2 queda como candidato G122/E01 reservado/no aceptado; PERSIST.1 permanece planificado, no iniciado y sin Global preasignado.
 - REL.GOV.1 mantiene la firma del tag fuera de GitHub Actions.
 <!-- DOC1-R1-POST-MANT1:END -->
 

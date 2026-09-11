@@ -12,8 +12,11 @@
 - `VERSION` contiene `0.1.21.01-beta` y materializa G121/E01 para UX.6 R8.
 - UX.6 R1–R8 consumen un único estado con `functional_revision=R8` y ordinal E01.
 - G120/E01 permanece publicado mediante `v0.1.20.01-beta`.
-- PERSIST.1 R1 queda reservado como G122/E01 (`0.1.22.01-beta`) y no se inicia.
-- UX.7 continúa como revisión visual final no bloqueante.
+- NOR.3 R1–R2 queda como candidato G122/E01 (`0.1.22.01-beta`)
+  reservado/no aceptado; G122 no se consume mientras el estado no sea aceptado.
+- PERSIST.1 permanece planificado y sin Global preasignado hasta el cierre de
+  NOR.3 y la replanificación #155.
+- UX.7/UX.8 permanecen planificados y no iniciados.
 - PR, squash, tag o Release que materializan el mismo estado no consumen otro Global.
 <!-- DOC1-R1-POST-MANT1:END -->
 

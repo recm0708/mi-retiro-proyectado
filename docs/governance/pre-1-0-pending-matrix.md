@@ -2,8 +2,8 @@
 
 **Estado:** vigente / documento vivo
 **Versión base:** `0.1.21.01-beta` — G121/E01
-**Checkpoint candidato:** PERSIST.1 R1 — G122/E01 (`0.1.22.01-beta`) reservado/no aceptado; no iniciado
-**Última replanificación:** 2026-09-07
+**Checkpoint candidato:** NOR.3 R1–R2 — G122/E01 (`0.1.22.01-beta`) reservado/no aceptado; validado localmente
+**Última replanificación:** 2026-09-11
 **Clasificación:** Planificación / Producto / Arquitectura / Seguridad / QA / Release
 
 Esta matriz ordena el trabajo pendiente antes de la primera versión oficial de
@@ -18,12 +18,13 @@ candidato fallido no lo consume.
 ## 1. Reglas de uso
 
 1. `VERSION` materializa `0.1.21.01-beta` al consolidar UX.6 R1–R8 como G121/E01.
-2. G122/E01 (`0.1.22.01-beta`) queda reservado para PERSIST.1 R1; la reserva no inicia el bloque.
-3. Las etapas posteriores se ordenan por prioridad, no por un `G` futuro supuesto.
-4. Una revisión que amplía un bloque existente conserva su identificador canónico.
-5. `PLAN.2`, `UX.5` y `UX.6` deben existir en el registro machine-readable antes de usarse.
-6. La historia cerrada permanece preservada y no se moderniza mecánicamente.
-7. Cambiar el orden o alcance exige sincronizar esta matriz, roadmap, plan maestro,
+2. G122/E01 (`0.1.22.01-beta`) queda reservado como candidato de NOR.3 R1–R2; la reserva no acepta ni consume el Global.
+3. PERSIST.1 permanece planificado y sin Global preasignado hasta cerrar NOR.3 y ejecutar la replanificación #155.
+4. Las etapas posteriores se ordenan por prioridad, no por un `G` futuro supuesto.
+5. Una revisión que amplía un bloque existente conserva su identificador canónico.
+6. Todo bloque usado por la planificación viva debe existir en el registro machine-readable.
+7. La historia cerrada permanece preservada y no se moderniza mecánicamente.
+8. Cambiar el orden o alcance exige sincronizar esta matriz, roadmap, plan maestro,
    registro y ledger de reserva cuando corresponda.
 
 ## 2. Matriz maestra
@@ -43,19 +44,20 @@ candidato fallido no lo consume.
 | 11 | **UX.5 R5** | Flujo Asistido | Procesar Mi Retiro Seguro y Ficha Digital, exigir revisión y confirmar al menos una fuente antes de habilitar el recorrido compartido. | **Completado dentro de G120/E01 aceptado** |
 | 12 | **UX.5 R6** | Integración y cierre funcional UX.5 | Unificar Manual/Asistido, invalidación, navegación, completitud, errores, loaders, cambio de modalidad, resultados y consistencia de assets. | **Cerrado/aceptado G120/E01** |
 | 13 | **UX.6 R1–R8** | Auditoría integral App + Developer | Identidad/shell, perfil/avatar, usuarios/RBAC, movimiento, accesibilidad, responsive, importadores, privacidad pública, ownership y hardening final. | **Cerrado/aceptado G121/E01** |
-| 14 | **PERSIST.1 R1** | Arquitectura de persistencia | Separar sesión temporal de guardado voluntario; definir esquema persistente versionado, local-first y migrable. | **Candidato G122/E01; reservado/no iniciado** |
-| 15 | **PERSIST.1 R2** | Guardar, restaurar y eliminar | Guardado explícito, listado, restauración, borrado individual y borrado completo. | Planificado |
-| 16 | **PERSIST.1 R3** | Importación, exportación y migraciones | Exportación/importación controlada, validación de esquema, incompatibilidades y migraciones. | Planificado |
-| 17 | **PERSIST.1 R4** | Seguridad y privacidad de persistencia | Minimización, protección/cifrado cuando aporte seguridad real, borrado y revisión de privacidad. | Planificado |
-| 18 | **REP.1 R1** | Motor de informes | Generación real de PDF e informe final reproducible. | Planificado |
-| 19 | **REP.1 R2** | Exportaciones finales | Formatos seleccionables, metodología, trazabilidad, metadatos y protección de datos. | Planificado |
-| 20 | **REP.1 R3** | Cierre de informes | Accesibilidad del PDF, impresión, compatibilidad y validación final. | Planificado |
-| 21 | **SEC.2 R7** | Hardening posterior a nuevas superficies | Reevaluar Developer, sesiones/Bearer, persistencia, archivos, exportaciones, CSP/CSRF/CORS aplicables y amenazas nuevas. | Reapertura planificada |
-| 22 | **A11Y.2** | Auditoría WCAG 2.2 ampliada | Teclado, lector de pantalla, zoom, forced colors, alto contraste, navegadores, dispositivos, formularios, modales y exportaciones. | Planificado |
-| 23 | **REV.1** | Revisión normativa, jurídica, privacidad y seguridad final | Revalidar fuentes, parámetros, interpretaciones, limitaciones, licencia, terceros y revisión jurídica externa prevista. | Planificado |
-| 24 | **DOC.1 R6** | Congelación documental final | Última reconciliación de documentación pública/técnica antes de QA y release estable. | Reapertura planificada |
-| 25 | **QA.1** | Auditoría integral de cierre beta | Código, pruebas, UX, seguridad, accesibilidad, normativa, documentación, rendimiento básico, estabilidad, compatibilidad, datos corruptos y entorno limpio. | Planificado |
-| 26 | **REL.1** | Primera versión oficial | Freeze, build reproducible, SBOM/inventario, hashes, firma, instalación, soporte, release notes, validación limpia y `v1.0.0.0`. | Último bloque |
+| 14 | **NOR.3 R1–R8** | Normalización estructural integral | R1 formaliza inventario, ownership, consumidores y contrato; R2 formaliza policy machine-readable y gates; R3–R8 cubren backend, templates, assets, tests, data/scripts y cierre documental según #126/#127/#128. | **R1–R2 materializados/validados localmente; Candidato G122/E01 reservado/no aceptado** |
+| 15 | **PERSIST.1 R1** | Arquitectura de persistencia | Separar sesión temporal de guardado voluntario; definir esquema persistente versionado, local-first y migrable. | **Planificado; no iniciado; sin Global preasignado** |
+| 16 | **PERSIST.1 R2** | Guardar, restaurar y eliminar | Guardado explícito, listado, restauración, borrado individual y borrado completo. | Planificado |
+| 17 | **PERSIST.1 R3** | Importación, exportación y migraciones | Exportación/importación controlada, validación de esquema, incompatibilidades y migraciones. | Planificado |
+| 18 | **PERSIST.1 R4** | Seguridad y privacidad de persistencia | Minimización, protección/cifrado cuando aporte seguridad real, borrado y revisión de privacidad. | Planificado |
+| 19 | **REP.1 R1** | Motor de informes | Generación real de PDF e informe final reproducible. | Planificado |
+| 20 | **REP.1 R2** | Exportaciones finales | Formatos seleccionables, metodología, trazabilidad, metadatos y protección de datos. | Planificado |
+| 21 | **REP.1 R3** | Cierre de informes | Accesibilidad del PDF, impresión, compatibilidad y validación final. | Planificado |
+| 22 | **SEC.2 R7** | Hardening posterior a nuevas superficies | Reevaluar Developer, sesiones/Bearer, persistencia, archivos, exportaciones, CSP/CSRF/CORS aplicables y amenazas nuevas. | Reapertura planificada |
+| 23 | **A11Y.2** | Auditoría WCAG 2.2 ampliada | Teclado, lector de pantalla, zoom, forced colors, alto contraste, navegadores, dispositivos, formularios, modales y exportaciones. | Planificado |
+| 24 | **REV.1** | Revisión normativa, jurídica, privacidad y seguridad final | Revalidar fuentes, parámetros, interpretaciones, limitaciones, licencia, terceros y revisión jurídica externa prevista. | Planificado |
+| 25 | **DOC.1 R6** | Congelación documental final | Última reconciliación de documentación pública/técnica antes de QA y release estable. | Reapertura planificada |
+| 26 | **QA.1** | Auditoría integral de cierre beta | Código, pruebas, UX, seguridad, accesibilidad, normativa, documentación, rendimiento básico, estabilidad, compatibilidad, datos corruptos y entorno limpio. | Planificado |
+| 27 | **REL.1** | Primera versión oficial | Freeze, build reproducible, SBOM/inventario, hashes, firma, instalación, soporte, release notes, validación limpia y `v1.0.0.0`. | Último bloque |
 
 <!-- UX6-R8-CLOSURE:START -->
 ## 2.1. Cierre de ejecución UX.6
@@ -67,8 +69,9 @@ UX.6 R1–R8 queda consolidado como G121/E01 (`0.1.21.01-beta`) con revisión fu
 - R5–R6: cerrados.
 - R7: auditoría/reconciliación documental cerrada.
 - R8: auditoría integral y hardening cerrados; promoción en PR #124.
-- PERSIST.1 R1 queda reservado como G122/E01, pero no iniciado.
-- UX.7 permanece como revisión visual final no bloqueante.
+- NOR.3 R1–R2 queda como candidato G122/E01 reservado/no aceptado y validado localmente.
+- PERSIST.1 permanece planificado, no iniciado y sin Global preasignado.
+- UX.7/UX.8 permanecen planificados y no iniciados.
 <!-- UX6-R8-CLOSURE:END -->
 
 ## 3. Portal Developer — alcance confirmado

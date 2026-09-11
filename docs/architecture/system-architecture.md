@@ -18,7 +18,7 @@
 - Design System, movimiento, accesibilidad y responsive son compartidos.
 - Importadores documentales mantienen revisión/confirmación explícita.
 - UX.6 no modifica motores SEBD/Mixto/SUCGS ni parámetros normativos.
-- PERSIST.1 R1 queda reservado como G122/E01 y no iniciado.
+- NOR.3 R1–R2 queda como candidato G122/E01 reservado/no aceptado; PERSIST.1 permanece planificado, no iniciado y sin Global preasignado.
 <!-- DOC1-R1-POST-MANT1:END -->
 
 Mi Retiro Proyectado es una aplicación web local basada en FastAPI, Jinja2 y JavaScript del navegador. La arquitectura separa presentación, contratos de datos, servicios de integración, motores previsionales, parámetros normativos y observabilidad de desarrollo.

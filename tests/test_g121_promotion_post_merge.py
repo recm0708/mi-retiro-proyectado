@@ -21,7 +21,7 @@ class TestG121PromotionPostMerge(unittest.TestCase):
         self.assertEqual(121, ledger["accepted_count"])
         self.assertEqual(122, ledger["next_global"])
         self.assertEqual("0.1.22.01-beta", ledger["next_candidate"])
-        self.assertEqual("PERSIST.1", ledger["next_candidate_block"])
+        self.assertEqual("NOR.3", ledger["next_candidate_block"])
         entry = ledger["entries"][-1]
         self.assertEqual(121, entry["global_revision"])
         self.assertEqual("UX.6", entry["block"])
@@ -31,21 +31,25 @@ class TestG121PromotionPostMerge(unittest.TestCase):
         self.assertIn("PR #124", entry["evidence"])
         self.assertIn("f2b7ed0", entry["evidence"])
 
-    def test_registro_cierra_ux6_y_reserva_persist1(self):
+    def test_registro_cierra_ux6_y_activa_nor3_como_candidato(self):
         data = json.loads((ROOT / "data/work-block-registry.json").read_text(encoding="utf-8"))
         ids = {x["identifier"]: x for x in data["identifiers"]}
         self.assertEqual("closed", ids["UX.6"]["status"])
         self.assertIn("G121", ids["UX.6"]["global_refs"])
-        self.assertEqual("candidate_r1", ids["PERSIST.1"]["status"])
+        self.assertEqual("planned_reserved", ids["PERSIST.1"]["status"])
+        self.assertEqual("candidate_r1", ids["NOR.3"]["status"])
         self.assertEqual("planned_reserved", ids["UX.7"]["status"])
-        self.assertIn("no bloqueante", ids["UX.7"]["meaning"])
+        self.assertIn("Inicio de App Asegurado", ids["UX.7"]["meaning"])
+        self.assertIn("/dev", ids["UX.7"]["meaning"])
+        self.assertEqual("planned_reserved", ids["UX.8"]["status"])
+        self.assertIn("/simulacion", ids["UX.8"]["meaning"])
         candidate = data["current_candidate"]
         self.assertEqual(122, candidate["global_revision"])
         self.assertEqual("0.1.22.01-beta", candidate["revision_aware"])
-        self.assertEqual("PERSIST.1", candidate["block"])
+        self.assertEqual("NOR.3", candidate["block"])
         self.assertEqual("R1", candidate["revision"])
         self.assertEqual("reserved_not_accepted", candidate["state"])
-        self.assertEqual("REP.1", candidate["next_functional_block_if_accepted"])
+        self.assertIsNone(candidate["next_functional_block_if_accepted"])
 
     def test_manifiesto_materializa_ux6_r8(self):
         data = json.loads((ROOT / "data/release-publication-manifest.json").read_text(encoding="utf-8"))
@@ -54,7 +58,7 @@ class TestG121PromotionPostMerge(unittest.TestCase):
         self.assertEqual("R8", data["revision"])
         self.assertEqual(122, data["next_step"]["global_revision"])
         self.assertEqual("0.1.22.01-beta", data["next_step"]["revision_aware"])
-        self.assertEqual("PERSIST.1", data["next_step"]["block"])
+        self.assertEqual("NOR.3", data["next_step"]["block"])
 
     def test_ux6_r1_r8_consumen_un_solo_estado(self):
         entries = [x for x in cargar_ledger()["entries"] if x["block"] == "UX.6"]

@@ -28,6 +28,7 @@ from urllib.parse import unquote
 
 ROOT = Path(__file__).resolve().parents[1]
 README = ROOT / "README.md"
+STRUCTURE_POLICY = ROOT / "data" / "repository-structure-policy.json"
 
 EXCLUDED_ORPHAN_PREFIXES = (
     "docs/archive/",
@@ -535,6 +536,162 @@ def duplicate_groups(
     return exact_groups, normalized_groups
 
 
+def load_structure_policy() -> dict:
+    """Carga y valida el contrato estructural machine-readable."""
+
+    data = json.loads(
+        STRUCTURE_POLICY.read_text(
+            encoding="utf-8-sig"
+        )
+    )
+
+    if not isinstance(data, dict):
+        raise ValueError(
+            "La política estructural debe ser un objeto JSON."
+        )
+
+    if data.get("schema_version") != 1:
+        raise ValueError(
+            "schema_version estructural no soportado."
+        )
+
+    for key in (
+        "allowed_root_directories",
+        "required_paths",
+        "forbidden_versioned_prefixes",
+        "forbidden_versioned_suffixes",
+        "depth_policy",
+    ):
+        if key not in data:
+            raise ValueError(
+                "Política estructural incompleta: falta "
+                + key
+            )
+
+    return data
+
+
+def path_depth(rel: str) -> int:
+    """Calcula profundidad POSIX como cantidad de separadores."""
+
+    return rel.strip("/").count("/")
+
+
+def path_has_prefix(
+    rel: str,
+    prefix: str,
+) -> bool:
+    """Compara una ruta con un prefijo de política."""
+
+    normalized = prefix.strip("/")
+
+    return (
+        rel == normalized
+        or rel.startswith(normalized + "/")
+    )
+
+
+def structure_policy_analysis(
+    files: list[str],
+    directories: set[str],
+    policy: dict,
+) -> dict[str, list[str]]:
+    """Evalúa el workspace contra la política estructural R2."""
+
+    allowed_roots = set(
+        policy["allowed_root_directories"]
+    )
+
+    observed_roots = {
+        rel.split("/", 1)[0]
+        for rel in files
+        if "/" in rel
+    }
+
+    unknown_roots = sorted(
+        observed_roots - allowed_roots
+    )
+
+    file_set = set(files)
+
+    missing_required = sorted(
+        rel
+        for rel in policy["required_paths"]
+        if (
+            rel not in file_set
+            and rel not in directories
+        )
+    )
+
+    forbidden_paths = sorted(
+        rel
+        for rel in files
+        if any(
+            path_has_prefix(rel, prefix)
+            for prefix in policy[
+                "forbidden_versioned_prefixes"
+            ]
+        )
+    )
+
+    forbidden_suffixes = tuple(
+        suffix.lower()
+        for suffix in policy[
+            "forbidden_versioned_suffixes"
+        ]
+    )
+
+    forbidden_artifacts = sorted(
+        rel
+        for rel in files
+        if rel.lower().endswith(
+            forbidden_suffixes
+        )
+    )
+
+    depth_policy = policy["depth_policy"]
+    default_limit = int(
+        depth_policy["default_max_depth"]
+    )
+
+    exceptions = sorted(
+        depth_policy.get("exceptions", []),
+        key=lambda item: len(item["prefix"]),
+        reverse=True,
+    )
+
+    depth_violations = []
+
+    for rel in files:
+        limit = default_limit
+
+        for exception in exceptions:
+            if path_has_prefix(
+                rel,
+                exception["prefix"],
+            ):
+                limit = int(
+                    exception["max_depth"]
+                )
+                break
+
+        depth = path_depth(rel)
+
+        if depth > limit:
+            depth_violations.append(
+                f"{rel} (depth={depth}, limit={limit})"
+            )
+
+    return {
+        "policy_unknown_root_directories": unknown_roots,
+        "policy_missing_required_paths": missing_required,
+        "policy_forbidden_versioned_paths": forbidden_paths,
+        "policy_forbidden_artifacts": forbidden_artifacts,
+        "policy_depth_violations": sorted(
+            depth_violations
+        ),
+    }
+
 def audit_repository() -> dict:
     """Ejecuta la auditoría integral del repositorio."""
 
@@ -565,6 +722,13 @@ def audit_repository() -> dict:
         normalized_duplicates,
     ) = duplicate_groups(files)
 
+    policy = load_structure_policy()
+    policy_blockers = structure_policy_analysis(
+        files,
+        directories,
+        policy,
+    )
+
     blockers = {
         "missing_directories": sorted(
             directories - readme_directories
@@ -583,6 +747,7 @@ def audit_repository() -> dict:
         "trivial_stubs": stubs,
         "exact_duplicate_groups": exact_duplicates,
         "normalized_duplicate_groups": normalized_duplicates,
+        **policy_blockers,
     }
 
     failed = any(
@@ -698,6 +863,26 @@ def print_report(
         (
             "Grupos duplicados normalizados",
             "normalized_duplicate_groups",
+        ),
+        (
+            "Raíces no autorizadas por policy",
+            "policy_unknown_root_directories",
+        ),
+        (
+            "Rutas requeridas ausentes por policy",
+            "policy_missing_required_paths",
+        ),
+        (
+            "Rutas locales versionadas prohibidas",
+            "policy_forbidden_versioned_paths",
+        ),
+        (
+            "Artefactos versionados prohibidos",
+            "policy_forbidden_artifacts",
+        ),
+        (
+            "Violaciones de profundidad",
+            "policy_depth_violations",
         ),
     )
 

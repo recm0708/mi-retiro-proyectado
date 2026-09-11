@@ -103,8 +103,9 @@ class TestNOR2R6LedgerData(unittest.TestCase):
             item["identifier"]: item
             for item in registry["identifiers"]
         }
-        self.assertEqual("candidate_r1", ids["PERSIST.1"]["status"])
-        self.assertEqual("PERSIST.1", registry["current_candidate"]["block"])
+        self.assertEqual("planned_reserved", ids["PERSIST.1"]["status"])
+        self.assertEqual("candidate_r1", ids["NOR.3"]["status"])
+        self.assertEqual("NOR.3", registry["current_candidate"]["block"])
         self.assertEqual(122, registry["current_candidate"]["global_revision"])
 
         matrix = (

@@ -45,8 +45,9 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
         self.assertEqual("closed", ids["UX.5"]["status"])
         self.assertEqual("closed", ids["UX.6"]["status"])
 
-        self.assertEqual("candidate_r1", ids["PERSIST.1"]["status"])
-        for ident in ("UX.7", "REP.1", "A11Y.2", "REV.1", "QA.1", "REL.1"):
+        self.assertEqual("planned_reserved", ids["PERSIST.1"]["status"])
+        self.assertEqual("candidate_r1", ids["NOR.3"]["status"])
+        for ident in ("UX.7", "UX.8", "REP.1", "A11Y.2", "REV.1", "QA.1", "REL.1"):
             self.assertEqual("planned_reserved", ids[ident]["status"])
 
     def test_revisiones_y_etiquetas_no_son_familias(self):
@@ -60,7 +61,7 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
         for label in ("LEGACY", "INTEGRIDAD", "POST-GOV"):
             self.assertFalse(labels[label]["reusable_as_family"])
 
-    def test_g112_permanece_aceptado_y_persist1_es_candidato_actual(self):
+    def test_g112_permanece_aceptado_y_nor3_es_candidato_actual(self):
         ledger = cargar_ledger()
         entry = next(
             x for x in ledger["entries"] if x["global_revision"] == 112
@@ -71,13 +72,12 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
 
         candidate = self.data["current_candidate"]
         self.assertEqual(122, candidate["global_revision"])
-        self.assertEqual("PERSIST.1", candidate["block"])
+        self.assertEqual("NOR.3", candidate["block"])
         self.assertEqual("R1", candidate["revision"])
         self.assertEqual(1, candidate["edition"])
         self.assertEqual("reserved_not_accepted", candidate["state"])
-        self.assertEqual(
-            "REP.1",
-            candidate["next_functional_block_if_accepted"],
+        self.assertIsNone(
+            candidate["next_functional_block_if_accepted"]
         )
         self.assertIsNone(
             candidate["next_functional_global_if_accepted"]
@@ -172,8 +172,12 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
             ids["DOC.1"]["status"],
         )
         self.assertEqual(
-            "candidate_r1",
+            "planned_reserved",
             ids["PERSIST.1"]["status"],
+        )
+        self.assertEqual(
+            "candidate_r1",
+            ids["NOR.3"]["status"],
         )
 
         matrix = (

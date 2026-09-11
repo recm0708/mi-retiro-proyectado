@@ -30,8 +30,8 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
   desde [`VERSION`](VERSION). Materializa UX.6 R8 como G121/E01.
 - **Estado revision-aware integrado/aceptado:** UX.6 R1–R8 / G121/E01.
 - **Integración/promoción:** PR #124 / merge `5dcd2503e83ba69df83fa906d331df594653c0a0`.
-- **Siguiente candidato reservado:** PERSIST.1 R1 / G122/E01
-  (`0.1.22.01-beta`). Esta reserva no inicia el bloque.
+- **Candidato vigente reservado/no aceptado:** NOR.3 R1–R2 / G122/E01
+  (`0.1.22.01-beta`). La reserva no modifica `VERSION` ni consume G122.
 - **Última publicación revision-aware con tag:** `v0.1.20.01-beta`
   (G120/E01), publicada sobre
   `76586b5a7c77a5cffa97128a29ea77bd36cb988b`, con objeto de tag firmado
@@ -40,9 +40,13 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 - **UX.5:** R1–R6 consolidados/publicados como G120/E01.
 - **UX.6:** R1–R8 consolidados como G121/E01 con revisión funcional R8;
   la publicación final exige merge, revalidación, tag firmado y Release.
-- **PERSIST.1:** siguiente bloque reservado; no iniciado por esta promoción.
-- **UX.7:** revisión visual final no bloqueante reservada para una etapa
-  posterior antes de la versión estable.
+- **NOR.3:** R1–R2 materializados y validados localmente: inventario,
+  ownership/consumidores, gobierno y policy estructural machine-readable;
+  todavía no autoriza movimientos físicos del árbol.
+- **PERSIST.1:** alcance preservado y planificado, sin Global preasignado;
+  no iniciado hasta cerrar NOR.3 y ejecutar la replanificación #155.
+- **UX.7 / UX.8:** programa UX granular planificado y no iniciado; su
+  secuencia posterior se consolida después de NOR.3.
 - **DEV.2:** R5/R6 permanecen preservados en G118/E04 y G119/E05.
 - **SEC.2:** R1–R6 cerrados; R7 continúa planificado para hardening posterior.
 - **Etapa:** desarrollo beta; repositorio público y ejecución orientada

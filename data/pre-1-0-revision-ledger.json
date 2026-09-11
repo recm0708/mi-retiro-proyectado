@@ -1181,5 +1181,5 @@
   "reconciled_through_commit": "f2b7ed0e0d52d64e2687c37748a00f66bb6e759b",
   "reconciliation_date": "2026-09-07",
   "next_global": 122,
-  "next_candidate_block": "PERSIST.1"
+  "next_candidate_block": "NOR.3"
 }

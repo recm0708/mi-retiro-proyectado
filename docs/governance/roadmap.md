@@ -4,8 +4,8 @@
 **Versión vigente:** `0.1.21.01-beta` — G121/E01 materializado para UX.6 R8 en PR #124
 **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
 **Último tag formal legacy:** `v0.0.26-beta`
-**Fecha de revisión:** 2026-09-07
-**Estado actual:** UX.6 R1–R8 queda consolidado como G121/E01 (`0.1.21.01-beta`) en PR #124. PERSIST.1 R1 queda reservado como G122/E01 (`0.1.22.01-beta`) sin iniciar; UX.7 permanece no bloqueante.
+**Fecha de revisión:** 2026-09-10
+**Estado actual:** UX.6 R1–R8 queda consolidado como G121/E01 (`0.1.21.01-beta`) en PR #124. NOR.3 R1–R2 está materializado y validado localmente como candidato G122/E01 (`0.1.22.01-beta`) reservado/no aceptado. PERSIST.1 permanece planificado, no iniciado y sin Global preasignado; UX.7/UX.8 permanecen planificados.
 
 <!-- NOR1-R7-CLOSURE:START -->
 ## Estado NOR.1 / NOR.2
@@ -37,6 +37,7 @@ La secuencia operativa previa a SEC.2 queda:
     `v0.1.19.05-beta`.
 15. **UX.5 R6** — cerrado/aceptado como G120/E01 (`0.1.20.01-beta`); R1–R6 consumen este único estado aceptado del bloque.
 16. **UX.6** — R1–R8 consolidados/aceptados como G121/E01 con revisión funcional R8; PR #124 materializa la promoción.
+17. **NOR.3 R1–R2** — materializado/validado localmente como candidato G122/E01 reservado/no aceptado; inventario, gobierno y policy estructural antes de cualquier movimiento físico. PERSIST.1 permanece después y sin Global preasignado.
 
 NOR.2 ejecutó los movimientos, renombrados, consolidaciones y retiros que
 NOR.1 deliberadamente no realizó.
@@ -101,11 +102,13 @@ UX.5 permanece cerrado/publicado como G120/E01 (`0.1.20.01-beta`).
 UX.6 R1–R8 queda integrado/aceptado como G121/E01 (`0.1.21.01-beta`)
 mediante PR #124 / merge `5dcd2503e83ba69df83fa906d331df594653c0a0` con revisión funcional R8 y ordinal E01.
 
-PERSIST.1 R1 queda reservado como siguiente candidato G122/E01
-(`0.1.22.01-beta`) y **no se considera iniciado** por esta reserva.
+NOR.3 R1–R2 queda como siguiente candidato G122/E01
+(`0.1.22.01-beta`), reservado/no aceptado y actualmente en progreso.
 
-UX.7 permanece como revisión visual final `planned_reserved`, no bloqueante
-para PERSIST.1 ni para los demás bloques.
+PERSIST.1 permanece planificado, no iniciado y sin Global preasignado hasta
+el cierre de NOR.3 y la replanificación #155.
+
+UX.7/UX.8 permanecen como programa UX granular planificado y no iniciado.
 
 ## 1. Programa GOV.1 — Auditoría, Gobierno y Trazabilidad Pre-Beta
 

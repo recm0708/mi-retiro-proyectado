@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "phase": "NOR.3 R2",
+  "status": "transitional_pre_physical_moves",
+  "source_issue": 128,
+  "description": "Contrato estructural machine-readable derivado del inventario NOR.3 R1.",
+  "allowed_root_directories": [
+    ".githooks",
+    ".github",
+    ".vscode",
+    "app",
+    "assets",
+    "data",
+    "docs",
+    "regulations",
+    "scripts",
+    "tests"
+  ],
+  "required_paths": [
+    ".githooks",
+    ".github",
+    ".vscode",
+    "app",
+    "assets",
+    "data",
+    "docs",
+    "regulations",
+    "scripts",
+    "tests",
+    "app/main.py",
+    "app/cli/admin.py",
+    "scripts/quality_gate.py",
+    "scripts/audit_repository_integrity.py",
+    "requirements.txt",
+    "requirements-dev.txt",
+    "VERSION"
+  ],
+  "forbidden_versioned_prefixes": [
+    "data/developer/"
+  ],
+  "forbidden_versioned_suffixes": [
+    ".log",
+    ".tmp",
+    ".bak",
+    ".patch",
+    ".diff",
+    ".zip",
+    ".tar",
+    ".gz",
+    ".sqlite",
+    ".sqlite3",
+    ".db"
+  ],
+  "depth_policy": {
+    "default_max_depth": 5,
+    "depth_definition": "number_of_posix_path_separators",
+    "exceptions": [
+      {
+        "prefix": "docs/regulatory/sources/official/pensions/normative/",
+        "max_depth": 6,
+        "reason": "Fuente normativa oficial preservada por procedencia y dominio."
+      },
+      {
+        "prefix": "docs/regulatory/sources/official/pensions/reference/",
+        "max_depth": 6,
+        "reason": "Referencia oficial de pensiones separada de normativa."
+      },
+      {
+        "prefix": "docs/regulatory/sources/official/privacy/normative/",
+        "max_depth": 6,
+        "reason": "Fuente normativa oficial de privacidad preservada por procedencia."
+      }
+    ]
+  },
+  "semantic_single_child_exceptions": [
+    {
+      "path": "app/static/img/brand",
+      "reason": "Namespace runtime de marca compartida."
+    },
+    {
+      "path": "assets/social",
+      "reason": "Categoría de publicación social."
+    },
+    {
+      "path": "docs/regulatory/sources/official",
+      "reason": "Frontera de procedencia oficial."
+    },
+    {
+      "path": "docs/regulatory/sources/official/pensions/reference",
+      "reason": "Referencia previsional separada de normativa."
+    },
+    {
+      "path": "docs/regulatory/sources/official/privacy/normative",
+      "reason": "Taxonomía normativa de privacidad."
+    },
+    {
+      "path": "tests/validation_cases",
+      "reason": "Namespace reservado para casos de validación."
+    }
+  ],
+  "future_ownership_contract": {
+    "enforced": false,
+    "activation": "NOR.3 R3-R5",
+    "portal_namespaces": {
+      "asegurado": "app/portals/asegurado",
+      "developer": "app/portals/developer"
+    },
+    "shared_rule": "Shared solo admite contratos realmente multiportal; dominio compartido no implica namespace shared.",
+    "composition_root": "app/main.py"
+  }
+}

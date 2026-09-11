@@ -6,11 +6,14 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ## [Unreleased]
 
-- PERSIST.1 R1 queda reservado como siguiente candidato G122/E01
-  (`0.1.22.01-beta`) después del cierre de UX.6.
-- La reserva de PERSIST.1 no inicia trabajo sin autorización explícita.
-- UX.7 permanece como revisión visual final no bloqueante antes de la
-  versión estable.
+- NOR.3 R1–R2 queda como candidato vigente G122/E01
+  (`0.1.22.01-beta`), reservado/no aceptado; `VERSION` permanece en
+  `0.1.21.01-beta`.
+- La antigua reserva PERSIST.1 → G122/E01 queda reconciliada: PERSIST.1
+  permanece planificado, no iniciado y sin Global preasignado hasta el cierre
+  de NOR.3 y la replanificación post-NOR.3 de #155.
+- UX.7/UX.8 permanecen planificados como programa UX granular posterior;
+  no se consideran iniciados por esta reconciliación.
 
 ## [0.1.21.01-beta]
 

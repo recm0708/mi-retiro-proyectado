@@ -1,16 +1,16 @@
 # Índice de documentación
 
 **Estado:** vigente
-**Versión de aplicación:** `0.1.21.01-beta` — G121/E01 materializado para UX.6 R8 en PR #124; G120/E01 permanece publicado; PERSIST.1 R1 queda reservado como G122/E01
+**Versión de aplicación:** `0.1.21.01-beta` — G121/E01 materializado para UX.6 R8 en PR #124; G120/E01 permanece publicado; NOR.3 R1–R2 es el candidato G122/E01 reservado/no aceptado
 **Último tag formal legacy:** `v0.0.26-beta`
-**Última actualización transversal:** UX.6 R8 — promoción revision-aware G121/E01 — 2026-09-07
+**Última actualización transversal:** NOR.3 R1–R2 — inventario, gobierno y policy estructural — 2026-09-11
 **Cierres históricos preservados:** UX.4.6i / PR #34 — 841 pruebas; UX.4.6e R9 — `v0.0.25-beta`
 
 Este archivo es el punto de entrada para la documentación técnica, funcional, normativa, de privacidad, validación y auditoría de Mi Retiro Proyectado.
 
 ## Estado de normalización del repositorio
 
-**Estado actual:** UX.6 R1–R8 queda integrado/aceptado como G121/E01 mediante PR #124 / merge `5dcd2503e83ba69df83fa906d331df594653c0a0`; PERSIST.1 R1 es el siguiente candidato reservado G122/E01 y no se inicia por esta reserva. UX.7 permanece no bloqueante.
+**Estado actual:** UX.6 R1–R8 queda integrado/aceptado como G121/E01 mediante PR #124 / merge `5dcd2503e83ba69df83fa906d331df594653c0a0`; NOR.3 R1–R2 está materializado y validado localmente como candidato G122/E01 reservado/no aceptado. PERSIST.1 R1 permanece planificado, no iniciado y sin Global preasignado; UX.7/UX.8 permanecen planificados y no iniciados.
 
 Estado de la fase:
 
@@ -314,3 +314,14 @@ La metadata de versión de revisión de un documento de dominio puede conservar 
 
 - **[Identificadores de bloques de trabajo](standards/work-block-identifiers.md)** — política canónica de familias, bloques y revisiones.
 - **[NOR.1 R8 — auditoría de identificadores de bloques](audits/repository/work-block-identifier-audit-nor1-r8.md)** — auditoría que justifica NOR.1 R8 y la reserva de G112.
+
+<!-- NOR3-R2-STRUCTURE-POLICY:START -->
+## Política estructural machine-readable
+
+NOR.3 R2 formaliza las guardas permanentes del árbol en
+[`governance/repository-structure-policy.md`](governance/repository-structure-policy.md)
+y en `data/repository-structure-policy.json`.
+
+La política es consumida por `scripts/audit_repository_integrity.py` y, por
+extensión, por el Quality Gate completo.
+<!-- NOR3-R2-STRUCTURE-POLICY:END -->
