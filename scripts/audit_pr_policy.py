@@ -28,10 +28,14 @@ TRUSTED_BOTS = {
     "dependabot[bot]",
 }
 
-REVISION_STATE_FILES = {
-    "VERSION",
+REVISION_METADATA_FILES = {
     "data/pre-1-0-revision-ledger.json",
     "data/release-publication-manifest.json",
+}
+
+REVISION_STATE_FILES = {
+    "VERSION",
+    *REVISION_METADATA_FILES,
 }
 
 BRANCH_RE = re.compile(
@@ -173,18 +177,44 @@ def revision_state_errors(
         & set(files)
     )
 
-    if (
-        changed
-        and changed != REVISION_STATE_FILES
-    ):
+    if not changed:
+        return []
+
+    if "VERSION" in changed:
         missing = sorted(
             REVISION_STATE_FILES
             - changed
         )
 
+        if missing:
+            return [
+                "Una promoción revision-aware que modifica "
+                "VERSION debe actualizar ledger y manifiesto. "
+                "Faltan: "
+                + ", ".join(missing)
+            ]
+
+        return []
+
+    metadata_changed = (
+        REVISION_METADATA_FILES
+        & changed
+    )
+
+    if (
+        metadata_changed
+        and metadata_changed
+        != REVISION_METADATA_FILES
+    ):
+        missing = sorted(
+            REVISION_METADATA_FILES
+            - metadata_changed
+        )
+
         return [
-            "Los archivos de estado revision-aware deben "
-            "cambiar de forma coordinada. Faltan: "
+            "Los metadatos revision-aware de candidato deben "
+            "cambiar de forma coordinada cuando VERSION "
+            "permanece estable. Faltan: "
             + ", ".join(missing)
         ]
 

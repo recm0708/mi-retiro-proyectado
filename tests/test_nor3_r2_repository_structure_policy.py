@@ -4,6 +4,7 @@ from pathlib import Path
 import json
 import unittest
 
+from scripts import audit_pr_policy as pr_policy
 from scripts import audit_repository_integrity as audit
 
 
@@ -171,6 +172,55 @@ class TestNOR3R2RepositoryStructurePolicy(unittest.TestCase):
         self.assertEqual(
             "R1-R2",
             ids["NOR.3"]["active_scope"],
+        )
+
+    def test_pr_policy_permite_candidato_sin_version(self):
+        files = [
+            "data/pre-1-0-revision-ledger.json",
+            "data/release-publication-manifest.json",
+        ]
+
+        self.assertEqual(
+            [],
+            pr_policy.revision_state_errors(files),
+        )
+
+    def test_pr_policy_exige_metadata_si_cambia_version(self):
+        errors = pr_policy.revision_state_errors(
+            ["VERSION"]
+        )
+
+        self.assertEqual(len(errors), 1)
+        self.assertIn(
+            "pre-1-0-revision-ledger.json",
+            errors[0],
+        )
+        self.assertIn(
+            "release-publication-manifest.json",
+            errors[0],
+        )
+
+    def test_pr_policy_rechaza_metadata_parcial(self):
+        errors = pr_policy.revision_state_errors(
+            [
+                "data/"
+                "pre-1-0-revision-ledger.json"
+            ]
+        )
+
+        self.assertEqual(len(errors), 1)
+        self.assertIn(
+            "release-publication-manifest.json",
+            errors[0],
+        )
+        self.assertEqual(
+            (
+                "Los metadatos revision-aware de candidato deben "
+                "cambiar de forma coordinada cuando VERSION "
+                "permanece estable. Faltan: "
+                "data/release-publication-manifest.json"
+            ),
+            errors[0],
         )
 
     def test_quality_gate_hereda_integridad(self):
