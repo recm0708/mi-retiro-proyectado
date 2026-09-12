@@ -10,11 +10,11 @@ ROOT = Path(__file__).resolve().parents[1]
 class TestUX46DRevision7PrivacidadConsulta(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.base = (ROOT / "app/templates/base.html").read_text(encoding="utf-8")
-        cls.simulacion = (ROOT / "app/templates/simulation.html").read_text(encoding="utf-8")
-        cls.metodologia = (ROOT / "app/templates/methodology.html").read_text(encoding="utf-8")
+        cls.base = (ROOT / "app/templates/asegurado/base.html").read_text(encoding="utf-8")
+        cls.simulacion = (ROOT / "app/templates/asegurado/simulation.html").read_text(encoding="utf-8")
+        cls.metodologia = (ROOT / "app/templates/asegurado/methodology.html").read_text(encoding="utf-8")
         cls.terminos = (
-            ROOT / "app/templates/partials/privacy_consent.html"
+            ROOT / "app/templates/asegurado/partials/privacy_consent.html"
         ).read_text(encoding="utf-8")
         cls.privacidad = (ROOT / "app/static/js/privacy.js").read_text(encoding="utf-8")
         cls.design = (ROOT / "app/static/css/design-system.css").read_text(encoding="utf-8")

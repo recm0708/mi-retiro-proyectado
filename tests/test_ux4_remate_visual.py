@@ -12,14 +12,14 @@ class TestRemateUX41(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.simulacion = (ROOT / "app/templates/simulation.html").read_text(
+        cls.simulacion = (ROOT / "app/templates/asegurado/simulation.html").read_text(
             encoding="utf-8",
         )
         cls.historial = (
-            ROOT / "app/templates/partials/salary_history.html"
+            ROOT / "app/templates/asegurado/partials/salary_history.html"
         ).read_text(encoding="utf-8")
         cls.resultados = (
-            ROOT / "app/templates/partials/results.html"
+            ROOT / "app/templates/asegurado/partials/results.html"
         ).read_text(encoding="utf-8")
         cls.retiro_js = (ROOT / "app/static/js/retirement.js").read_text(
             encoding="utf-8",

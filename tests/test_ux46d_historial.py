@@ -12,18 +12,18 @@ class TestUX46DHistorial(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.simulacion = (ROOT / "app/templates/simulation.html").read_text(encoding="utf-8")
+        cls.simulacion = (ROOT / "app/templates/asegurado/simulation.html").read_text(encoding="utf-8")
         cls.historial = (
-            ROOT / "app/templates/partials/salary_history.html"
+            ROOT / "app/templates/asegurado/partials/salary_history.html"
         ).read_text(encoding="utf-8")
         cls.ficha = (
-            ROOT / "app/templates/partials/ficha_digital_import.html"
+            ROOT / "app/templates/asegurado/partials/ficha_digital_import.html"
         ).read_text(encoding="utf-8")
         cls.detalle = (
-            ROOT / "app/templates/partials/current_year_detail.html"
+            ROOT / "app/templates/asegurado/partials/current_year_detail.html"
         ).read_text(encoding="utf-8")
         cls.retiro = (
-            ROOT / "app/templates/partials/retirement.html"
+            ROOT / "app/templates/asegurado/partials/retirement.html"
         ).read_text(encoding="utf-8")
         cls.historial_js = (
             ROOT / "app/static/js/salary_history.js"
@@ -114,7 +114,7 @@ class TestUX46DHistorial(unittest.TestCase):
 
     def test_revision_del_comprobante_desde_paso3_es_contextual(self):
         self.assertIn("revisarComprobanteImportado(3)", self.historial_js)
-        preview = (ROOT / "app/templates/partials/official_data_import.html").read_text(encoding="utf-8")
+        preview = (ROOT / "app/templates/asegurado/partials/official_data_import.html").read_text(encoding="utf-8")
         self.assertIn("Historial anual detectado", preview)
         self.assertIn("(Paso 3)", preview)
         self.assertIn('data-preview-step="3"', preview)

@@ -1,4 +1,5 @@
 """Regresiones UX.4.6d R21: vigencia mensual con fecha externa verificable."""
+from tests._runtime_http_source import runtime_http_source
 
 import unittest
 from datetime import date
@@ -27,11 +28,11 @@ class TestUX46DRevision21FechaConfiable(unittest.TestCase):
         cls.importacion_js = (
             ROOT / "app/static/js/official_data_import.js"
         ).read_text(encoding="utf-8")
-        cls.main_py = (ROOT / "app/main.py").read_text(encoding="utf-8")
+        cls.main_py = runtime_http_source()
         cls.modelo = (ROOT / "app/models/simulation.py").read_text(encoding="utf-8")
         cls.servicio = (ROOT / "app/services/reference_date.py").read_text(encoding="utf-8")
         cls.privacidad_js = (ROOT / "app/static/js/privacy.js").read_text(encoding="utf-8")
-        cls.privacidad_html = (ROOT / "app/templates/partials/privacy_consent.html").read_text(encoding="utf-8")
+        cls.privacidad_html = (ROOT / "app/templates/asegurado/partials/privacy_consent.html").read_text(encoding="utf-8")
 
     def test_cualquier_mes_anterior_requiere_revision(self):
         self.assertIn("diferenciaMeses > 0", self.importacion_js)

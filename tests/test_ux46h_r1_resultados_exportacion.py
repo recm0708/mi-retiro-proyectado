@@ -9,7 +9,14 @@ import unittest
 
 
 ROOT = Path(__file__).resolve().parents[1]
-LOADER = ROOT / "app" / "templates" / "partials" / "data_management.html"
+LOADER = (
+    ROOT
+    / "app"
+    / "templates"
+    / "asegurado"
+    / "partials"
+    / "data_management.html"
+)
 ORQUESTACION = ROOT / "app" / "static" / "js" / "results_orchestration.js"
 ESTILOS = ROOT / "app" / "static" / "css" / "results.css"
 

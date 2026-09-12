@@ -6,19 +6,19 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 import unittest
 
-from app.core.developer_identity import (
+from app.portals.developer.developer_identity import (
     RolDeveloper,
     hashear_password,
     verificar_codigo_recuperacion,
     verificar_password,
 )
-from app.core.developer_provisioning import (
+from app.portals.developer.developer_provisioning import (
     autenticar_usuario_developer,
     bootstrap_propietario,
     recuperar_propietario,
     restablecer_password_developer,
 )
-from app.core.developer_store import (
+from app.portals.developer.developer_store import (
     crear_usuario_developer,
     obtener_propietario,
     obtener_usuario_por_login,

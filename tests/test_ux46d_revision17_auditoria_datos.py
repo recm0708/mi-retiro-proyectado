@@ -48,7 +48,7 @@ class TestUX46DRevision17AuditoriaDatos(unittest.TestCase):
             ROOT / "app/static/css/design-system.css"
         ).read_text(encoding="utf-8")
         cls.parcial = (
-            ROOT / "app/templates/partials/official_data_import.html"
+            ROOT / "app/templates/asegurado/partials/official_data_import.html"
         ).read_text(encoding="utf-8")
 
     def test_checkbox_bloqueado_solo_pinta_gancho_si_valor_real_esta_checked(self):

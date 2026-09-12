@@ -1,4 +1,5 @@
 """Regresiones de cierre GOV.1.5 — seguridad, privacidad y transparencia."""
+from tests._runtime_http_source import runtime_http_source
 
 from pathlib import Path
 import re
@@ -100,7 +101,7 @@ class TestGov15CierreSeguridadPrivacidad(unittest.TestCase):
         self.assertIn("camera=()", response.headers["permissions-policy"])
 
     def test_api_simulacion_mantiene_no_store(self):
-        main = (ROOT / "app/main.py").read_text(encoding="utf-8")
+        main = runtime_http_source()
         self.assertIn('request.url.path.startswith("/api/simulacion/")', main)
         self.assertIn('respuesta.headers["Cache-Control"] = "no-store"', main)
 

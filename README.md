@@ -229,6 +229,9 @@ mi-retiro-proyectado/
 │   ├── core/
 │   ├── engines/
 │   ├── models/
+│   ├── portals/
+│   │   ├── asegurado/
+│   │   └── developer/
 │   ├── services/
 │   ├── static/
 │   │   ├── css/
@@ -236,7 +239,11 @@ mi-retiro-proyectado/
 │   │   │   └── brand/
 │   │   └── js/
 │   └── templates/
-│       └── partials/
+│       ├── asegurado/
+│       │   └── partials/
+│       ├── developer/
+│       └── shared/
+│           └── partials/
 ├── assets/
 │   ├── brand/
 │   │   ├── icons/

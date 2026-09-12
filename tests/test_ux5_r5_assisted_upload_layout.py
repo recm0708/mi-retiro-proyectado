@@ -8,17 +8,17 @@ ROOT = Path(__file__).resolve().parents[1]
 
 ASSISTED = (
     ROOT
-    / "app/templates/partials/assisted_preparation.html"
+    / "app/templates/asegurado/partials/assisted_preparation.html"
 )
 
 MRS = (
     ROOT
-    / "app/templates/partials/official_data_import.html"
+    / "app/templates/asegurado/partials/official_data_import.html"
 )
 
 FICHA = (
     ROOT
-    / "app/templates/partials/ficha_digital_import.html"
+    / "app/templates/asegurado/partials/ficha_digital_import.html"
 )
 
 STYLE = (

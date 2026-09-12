@@ -1,4 +1,5 @@
 """Regresiones para la guía pública de transparencia del cálculo."""
+from tests._runtime_http_source import runtime_http_source
 
 from pathlib import Path
 import unittest
@@ -29,7 +30,7 @@ class TestUX46iR1ComoSeCalcula(unittest.TestCase):
         cls.servicio = (ROOT / "app/services/calculation_guide.py").read_text(
             encoding="utf-8"
         )
-        cls.plantilla = (ROOT / "app/templates/calculation_guide.html").read_text(
+        cls.plantilla = (ROOT / "app/templates/asegurado/calculation_guide.html").read_text(
             encoding="utf-8"
         )
         cls.css = (ROOT / "app/static/css/calculation-guide.css").read_text(
@@ -38,7 +39,7 @@ class TestUX46iR1ComoSeCalcula(unittest.TestCase):
         cls.resultados = (
             ROOT / "app/static/js/results_orchestration.js"
         ).read_text(encoding="utf-8")
-        cls.metodologia = (ROOT / "app/templates/methodology.html").read_text(
+        cls.metodologia = (ROOT / "app/templates/asegurado/methodology.html").read_text(
             encoding="utf-8"
         )
 
@@ -197,8 +198,8 @@ class TestUX46iR1ComoSeCalcula(unittest.TestCase):
         self.assertTrue((ROOT / "docs/archive/ux/ux46i-r1-calculation-explanation-audit.md").exists())
 
     def test_15_navbar_ofrece_acceso_directo_y_estado_activo(self):
-        base = (ROOT / "app/templates/base.html").read_text(encoding="utf-8")
-        main = (ROOT / "app/main.py").read_text(encoding="utf-8")
+        base = (ROOT / "app/templates/asegurado/base.html").read_text(encoding="utf-8")
+        main = runtime_http_source()
         self.assertIn('href="/como-se-calcula"', base)
         self.assertIn("Cómo se calcula", base)
         self.assertIn("pagina_activa == 'como_se_calcula'", base)

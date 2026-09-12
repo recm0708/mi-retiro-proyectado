@@ -21,11 +21,11 @@ class TestMotionAccessibilityContract(unittest.TestCase):
         ).read_text(encoding="utf-8")
 
         cls.base = (
-            ROOT / "app/templates/base.html"
+            ROOT / "app/templates/asegurado/base.html"
         ).read_text(encoding="utf-8")
 
         cls.dev_base = (
-            ROOT / "app/templates/dev_base.html"
+            ROOT / "app/templates/developer/dev_base.html"
         ).read_text(encoding="utf-8")
 
     def test_ambos_shells_cargan_movimiento_e_interaccion(self):

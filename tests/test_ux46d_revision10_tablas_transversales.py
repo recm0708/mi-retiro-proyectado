@@ -17,13 +17,13 @@ class TestUX46DRevision10TablasTransversales(unittest.TestCase):
 
     def test_tablas_estaticas_principales_usan_superficie_comun(self):
         rutas = (
-            "app/templates/partials/salary_history.html",
-            "app/templates/partials/current_year_detail.html",
-            "app/templates/partials/official_data_import.html",
-            "app/templates/partials/ficha_digital_import.html",
-            "app/templates/partials/retirement.html",
-            "app/templates/partials/results.html",
-            "app/templates/comparison.html",
+            "app/templates/asegurado/partials/salary_history.html",
+            "app/templates/asegurado/partials/current_year_detail.html",
+            "app/templates/asegurado/partials/official_data_import.html",
+            "app/templates/asegurado/partials/ficha_digital_import.html",
+            "app/templates/asegurado/partials/retirement.html",
+            "app/templates/asegurado/partials/results.html",
+            "app/templates/asegurado/comparison.html",
         )
         for ruta in rutas:
             contenido = (ROOT / ruta).read_text(encoding="utf-8")

@@ -1,20 +1,21 @@
 """Regresiones UX.6 R8 para hardening integral previo a promoción."""
 
 from __future__ import annotations
+from tests._runtime_http_source import runtime_http_source
 
 from pathlib import Path
 import unittest
 from unittest.mock import patch
 
-import app.core.admin_session as admin_session
-from app.core.admin_session import (
+import app.portals.developer.admin_session as admin_session
+from app.portals.developer.admin_session import (
     crear_sesion_admin,
     obtener_sesion_admin,
     obtener_sesiones_activas_usuario,
     revocar_todas_las_sesiones_admin,
     validar_sesion_admin,
 )
-from app.core.developer_identity import RolDeveloper
+from app.portals.developer.developer_identity import RolDeveloper
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -76,9 +77,9 @@ class TestUX6R8IntegralHardening(unittest.TestCase):
             self.assertTrue(validar_sesion_admin(identificada))
 
     def test_login_alinea_cookie_con_duracion_absoluta_y_avisa_limite(self):
-        main = (ROOT / "app/main.py").read_text(encoding="utf-8")
+        main = runtime_http_source()
         dashboard = (
-            ROOT / "app/templates/dev_dashboard.html"
+            ROOT / "app/templates/developer/dev_dashboard.html"
         ).read_text(encoding="utf-8")
 
         self.assertIn(
@@ -94,10 +95,10 @@ class TestUX6R8IntegralHardening(unittest.TestCase):
 
     def test_navegacion_developer_oculta_destinos_sin_permiso(self):
         base = (
-            ROOT / "app/templates/dev_base.html"
+            ROOT / "app/templates/developer/dev_base.html"
         ).read_text(encoding="utf-8")
         dashboard = (
-            ROOT / "app/templates/dev_dashboard.html"
+            ROOT / "app/templates/developer/dev_dashboard.html"
         ).read_text(encoding="utf-8")
 
         self.assertIn(
@@ -115,7 +116,7 @@ class TestUX6R8IntegralHardening(unittest.TestCase):
 
     def test_assets_compartidos_y_developer_tienen_revision_correcta(self):
         base = (
-            ROOT / "app/templates/dev_base.html"
+            ROOT / "app/templates/developer/dev_base.html"
         ).read_text(encoding="utf-8")
 
         for asset in (

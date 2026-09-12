@@ -2,7 +2,7 @@
 
 import unittest
 
-from app.core.admin_session import (
+from app.portals.developer.admin_session import (
     crear_sesion_admin,
     eliminar_sesion_admin,
     obtener_sesiones_activas,

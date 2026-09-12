@@ -25,7 +25,7 @@ class TestUX6R2ValidationFeedback(unittest.TestCase):
             ROOT / "app/static/js/developer_forms.js"
         ).read_text(encoding="utf-8")
         cls.users = (
-            ROOT / "app/templates/dev_users.html"
+            ROOT / "app/templates/developer/dev_users.html"
         ).read_text(encoding="utf-8")
 
     def test_tokens_de_validacion_pertenecen_al_design_system(self):

@@ -15,10 +15,10 @@ class TestUX46DRevision18ProcedenciaPersistencia(unittest.TestCase):
         cls.historial_js = (ROOT / "app/static/js/salary_history.js").read_text(encoding="utf-8")
         cls.css = (ROOT / "app/static/css/design-system.css").read_text(encoding="utf-8")
         cls.comprobante_html = (
-            ROOT / "app/templates/partials/official_data_import.html"
+            ROOT / "app/templates/asegurado/partials/official_data_import.html"
         ).read_text(encoding="utf-8")
         cls.ficha_html = (
-            ROOT / "app/templates/partials/ficha_digital_import.html"
+            ROOT / "app/templates/asegurado/partials/ficha_digital_import.html"
         ).read_text(encoding="utf-8")
 
     def test_contrato_de_procedencia_tiene_cuatro_estados(self):

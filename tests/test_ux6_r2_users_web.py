@@ -1,6 +1,7 @@
 """Regresiones UX.6 R2 para la superficie web de usuarios Developer."""
 
 from __future__ import annotations
+from tests._runtime_http_source import runtime_http_source
 
 from pathlib import Path
 import re
@@ -15,21 +16,16 @@ class TestUX6R2UsersWeb(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls) -> None:
-        cls.main = (
-            ROOT
-            / "app/main.py"
-        ).read_text(
-            encoding="utf-8"
-        )
+        cls.main = runtime_http_source()
         cls.base = (
             ROOT
-            / "app/templates/dev_base.html"
+            / "app/templates/developer/dev_base.html"
         ).read_text(
             encoding="utf-8"
         )
         cls.usuarios = (
             ROOT
-            / "app/templates/dev_users.html"
+            / "app/templates/developer/dev_users.html"
         ).read_text(
             encoding="utf-8"
         )
@@ -70,7 +66,7 @@ class TestUX6R2UsersWeb(unittest.TestCase):
         )
 
         self.assertIn(
-            'name="dev_users.html"',
+            'name="developer/dev_users.html"',
             bloque,
         )
 
@@ -242,7 +238,7 @@ class TestUX6R2UsersWeb(unittest.TestCase):
 
     def test_eliminacion_es_owner_only_y_reforzada(self):
         identidad = (
-            ROOT / "app/core/developer_identity.py"
+            ROOT / "app/portals/developer/developer_identity.py"
         ).read_text(
             encoding="utf-8"
         )
@@ -333,14 +329,14 @@ class TestUX6R2UsersWeb(unittest.TestCase):
 
         base = (
             ROOT
-            / "app/templates/base.html"
+            / "app/templates/asegurado/base.html"
         ).read_text(
             encoding="utf-8"
         )
 
         dev_base = (
             ROOT
-            / "app/templates/dev_base.html"
+            / "app/templates/developer/dev_base.html"
         ).read_text(
             encoding="utf-8"
         )
@@ -383,9 +379,9 @@ class TestUX6R2UsersWeb(unittest.TestCase):
 
     def test_fechas_eventos_y_archivos_no_exponen_iso_como_presentacion(self):
         for nombre in (
-            "dev_events.html",
-            "dev_files.html",
-            "dev_development_center.html",
+            "developer/dev_events.html",
+            "developer/dev_files.html",
+            "developer/dev_development_center.html",
         ):
             texto = (
                 ROOT
@@ -416,7 +412,7 @@ class TestUX6R2UsersWeb(unittest.TestCase):
     def test_usuarios_tooltip_y_mantenimiento_son_explicitos(self):
         base = (
             ROOT
-            / "app/templates/dev_base.html"
+            / "app/templates/developer/dev_base.html"
         ).read_text(
             encoding="utf-8"
         )
@@ -445,7 +441,7 @@ class TestUX6R2UsersWeb(unittest.TestCase):
 
         mantenimiento = (
             ROOT
-            / "app/templates/dev_maintenance.html"
+            / "app/templates/developer/dev_maintenance.html"
         ).read_text(
             encoding="utf-8"
         )

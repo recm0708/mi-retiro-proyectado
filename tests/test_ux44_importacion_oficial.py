@@ -1,4 +1,5 @@
 """Regresiones UX.4.4 para importación revisable de documentos oficiales."""
+from tests._runtime_http_source import runtime_http_source
 
 import unittest
 from pathlib import Path
@@ -36,22 +37,22 @@ class TestUX44ImportacionOficial(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.cliente = TestClient(app)
-        cls.simulacion = (ROOT / "app/templates/simulation.html").read_text(encoding="utf-8")
+        cls.simulacion = (ROOT / "app/templates/asegurado/simulation.html").read_text(encoding="utf-8")
         cls.parcial_comprobante = (
-            ROOT / "app/templates/partials/official_data_import.html"
+            ROOT / "app/templates/asegurado/partials/official_data_import.html"
         ).read_text(encoding="utf-8")
         cls.parcial_ficha = (
-            ROOT / "app/templates/partials/ficha_digital_import.html"
+            ROOT / "app/templates/asegurado/partials/ficha_digital_import.html"
         ).read_text(encoding="utf-8")
         cls.parcial_detalle = (
-            ROOT / "app/templates/partials/current_year_detail.html"
+            ROOT / "app/templates/asegurado/partials/current_year_detail.html"
         ).read_text(encoding="utf-8")
         cls.parcial = cls.parcial_comprobante + "\n" + cls.parcial_ficha
         cls.js = (
             ROOT / "app/static/js/official_data_import.js"
         ).read_text(encoding="utf-8")
         cls.css = (ROOT / "app/static/css/style.css").read_text(encoding="utf-8")
-        cls.main = (ROOT / "app/main.py").read_text(encoding="utf-8")
+        cls.main = runtime_http_source()
 
     def test_ficha_digital_extrae_solo_salarios_del_anio_actual(self):
         resumen = extraer_ficha_digital_desde_texto(
@@ -81,7 +82,7 @@ class TestUX44ImportacionOficial(unittest.TestCase):
     def test_comprobante_esta_en_paso_uno_y_ficha_digital_en_paso_tres(self):
         assisted = (
             ROOT
-            / "app/templates/partials/assisted_preparation.html"
+            / "app/templates/asegurado/partials/assisted_preparation.html"
         ).read_text(
             encoding="utf-8"
         )

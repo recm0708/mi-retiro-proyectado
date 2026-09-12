@@ -70,14 +70,14 @@ class TestUX44ReferenciaPDF(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.cliente = TestClient(app)
-        cls.simulacion = (ROOT / "app/templates/simulation.html").read_text(
+        cls.simulacion = (ROOT / "app/templates/asegurado/simulation.html").read_text(
             encoding="utf-8"
         )
         cls.parcial = (
-            ROOT / "app/templates/partials/official_data_import.html"
+            ROOT / "app/templates/asegurado/partials/official_data_import.html"
         ).read_text(encoding="utf-8")
         cls.resultados_html = (
-            ROOT / "app/templates/partials/results.html"
+            ROOT / "app/templates/asegurado/partials/results.html"
         ).read_text(encoding="utf-8")
         cls.referencia_js = (
             ROOT / "app/static/js/mi_retiro_seguro_reference.js"
@@ -148,8 +148,8 @@ class TestUX44ReferenciaPDF(unittest.TestCase):
     def test_produccion_no_hardcodea_montos_de_los_dos_comprobantes(self):
         rutas = [
             ROOT / "app/static/js/mi_retiro_seguro_reference.js",
-            ROOT / "app/templates/partials/results.html",
-            ROOT / "app/templates/partials/official_data_import.html",
+            ROOT / "app/templates/asegurado/partials/results.html",
+            ROOT / "app/templates/asegurado/partials/official_data_import.html",
             ROOT / "app/services/mi_retiro_seguro_reference.py",
         ]
         contenido = "\n".join(ruta.read_text(encoding="utf-8") for ruta in rutas)

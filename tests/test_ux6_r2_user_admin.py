@@ -6,18 +6,18 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 import unittest
 
-from app.core.developer_identity import (
+from app.portals.developer.developer_identity import (
     RolDeveloper,
     hashear_password,
     validar_password,
 )
-from app.core.developer_provisioning import (
+from app.portals.developer.developer_provisioning import (
     bootstrap_propietario,
 )
-from app.core.developer_store import (
+from app.portals.developer.developer_store import (
     crear_usuario_developer,
 )
-from app.core.developer_user_admin import (
+from app.portals.developer.developer_user_admin import (
     actualizar_nombre_usuario_administrado,
     cambiar_estado_usuario_administrado,
     cambiar_rol_usuario_administrado,

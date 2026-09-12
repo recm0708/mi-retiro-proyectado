@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import unittest
 
-from app.core.developer_identity import (
+from app.portals.developer.developer_identity import (
     PermisoDeveloper,
     RolDeveloper,
     generar_codigo_recuperacion_propietario,

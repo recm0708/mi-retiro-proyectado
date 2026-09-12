@@ -11,7 +11,7 @@ class TestUX46DRevision8Tablas(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.historial = (
-            ROOT / "app/templates/partials/salary_history.html"
+            ROOT / "app/templates/asegurado/partials/salary_history.html"
         ).read_text(encoding="utf-8")
         cls.historial_js = (
             ROOT / "app/static/js/salary_history.js"

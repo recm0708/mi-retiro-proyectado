@@ -11,13 +11,13 @@ class TestUX46bRevision3TerminosNavegacion(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.terminos = (
-            ROOT / "app/templates/partials/privacy_consent.html"
+            ROOT / "app/templates/asegurado/partials/privacy_consent.html"
         ).read_text(encoding="utf-8")
         cls.privacidad_js = (
             ROOT / "app/static/js/privacy.js"
         ).read_text(encoding="utf-8")
         cls.simulacion = (
-            ROOT / "app/templates/simulation.html"
+            ROOT / "app/templates/asegurado/simulation.html"
         ).read_text(encoding="utf-8")
         cls.navegacion_js = (
             ROOT / "app/static/js/wizard_navigation.js"
@@ -26,7 +26,7 @@ class TestUX46bRevision3TerminosNavegacion(unittest.TestCase):
             ROOT / "app/static/css/design-system.css"
         ).read_text(encoding="utf-8")
         cls.metodologia = (
-            ROOT / "app/templates/methodology.html"
+            ROOT / "app/templates/asegurado/methodology.html"
         ).read_text(encoding="utf-8")
 
     def test_terminos_ampliados_cubren_apartados_juridicos_y_operativos(self):

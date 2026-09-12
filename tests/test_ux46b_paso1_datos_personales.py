@@ -59,15 +59,15 @@ class TestUX46bPaso1DatosPersonales(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.cliente = TestClient(app)
-        cls.simulacion = (ROOT / "app/templates/simulation.html").read_text(encoding="utf-8")
+        cls.simulacion = (ROOT / "app/templates/asegurado/simulation.html").read_text(encoding="utf-8")
         cls.comprobante = (
-            ROOT / "app/templates/partials/official_data_import.html"
+            ROOT / "app/templates/asegurado/partials/official_data_import.html"
         ).read_text(encoding="utf-8")
         cls.ficha = (
-            ROOT / "app/templates/partials/ficha_digital_import.html"
+            ROOT / "app/templates/asegurado/partials/ficha_digital_import.html"
         ).read_text(encoding="utf-8")
         cls.detalle = (
-            ROOT / "app/templates/partials/current_year_detail.html"
+            ROOT / "app/templates/asegurado/partials/current_year_detail.html"
         ).read_text(encoding="utf-8")
         cls.simulacion_js = (ROOT / "app/static/js/simulation.js").read_text(encoding="utf-8")
         cls.importacion_js = (
@@ -77,7 +77,7 @@ class TestUX46bPaso1DatosPersonales(unittest.TestCase):
             ROOT / "app/static/js/wizard_navigation.js"
         ).read_text(encoding="utf-8")
         cls.privacidad = (
-            ROOT / "app/templates/partials/privacy_consent.html"
+            ROOT / "app/templates/asegurado/partials/privacy_consent.html"
         ).read_text(encoding="utf-8")
         cls.design = (ROOT / "app/static/css/design-system.css").read_text(encoding="utf-8")
 
@@ -195,7 +195,7 @@ class TestUX46bPaso1DatosPersonales(unittest.TestCase):
 
         assisted = (
             ROOT
-            / "app/templates/partials/assisted_preparation.html"
+            / "app/templates/asegurado/partials/assisted_preparation.html"
         ).read_text(
             encoding="utf-8"
         )

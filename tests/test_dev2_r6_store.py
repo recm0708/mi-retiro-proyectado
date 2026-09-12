@@ -9,20 +9,20 @@ from tempfile import TemporaryDirectory
 import unittest
 from unittest.mock import patch
 
-from app.core.developer_identity import (
+from app.portals.developer.developer_identity import (
     RolDeveloper,
     generar_codigo_recuperacion_propietario,
     hashear_codigo_recuperacion,
     hashear_password,
 )
-from app.core.developer_avatar import (
+from app.portals.developer.developer_avatar import (
     directorio_avatares_developer,
     eliminar_avatar_developer,
     guardar_avatar_developer,
     resolver_avatar_developer,
     ruta_media_developer,
 )
-from app.core.developer_store import (
+from app.portals.developer.developer_store import (
     actualizar_avatar_usuario,
     actualizar_nombre_visible_usuario,
     cambiar_estado_usuario,

@@ -55,22 +55,29 @@ introduce nuevas capas de producto.
 ### Núcleo
 
 - `app/cli/admin.py` — CLI administrativa local para aprovisionamiento y gestión Developer.
-- `app/core/pdf_files.py`
+- `app/portals/asegurado/pdf_files.py`
 - `app/core/config.py`
-- `app/core/admin_security.py`
-- `app/core/admin_session.py`
-- `app/core/developer_avatar.py` — almacenamiento local controlado de avatares Developer.
-- `app/core/developer_identity.py`
-- `app/core/developer_provisioning.py`
-- `app/core/developer_store.py`
-- `app/core/developer_user_admin.py` — reglas humanas de gestión de cuentas, jerarquía y credenciales temporales.
-- `app/core/developer_user_audit.py` — ledger append-only de gestión de cuentas.
-- `app/core/developer_web_security.py`
-- [`app/core/constants.py`](../../app/core/constants.py)
+- `app/portals/developer/admin_security.py`
+- `app/portals/developer/admin_session.py`
+- `app/portals/developer/developer_avatar.py` — almacenamiento local controlado de avatares Developer.
+- `app/portals/developer/developer_identity.py`
+- `app/portals/developer/developer_provisioning.py`
+- `app/portals/developer/developer_store.py`
+- `app/portals/developer/developer_user_admin.py` — reglas humanas de gestión de cuentas, jerarquía y credenciales temporales.
+- `app/portals/developer/developer_user_audit.py` — ledger append-only de gestión de cuentas.
+- `app/portals/developer/developer_web_security.py`
 - `app/core/money.py`
 - `app/core/normativa.py`
 - `app/core/observability.py`
 - `app/core/version.py`
+
+### Portales
+
+- `app/portals/asegurado/router.py` — rutas públicas y API previsional del portal Asegurado.
+- `app/portals/asegurado/pdf_files.py` — validación defensiva de PDF en la frontera Asegurado.
+- `app/portals/developer/router.py` — rutas humanas y técnicas bajo `/dev`.
+- `app/portals/developer/development_center.py` — estado y diagnóstico del Centro de desarrollo.
+- `app/portals/developer/` concentra identidad, sesiones, seguridad, almacenamiento y administración exclusivas del Portal Developer.
 
 ### Modelos
 
@@ -112,7 +119,7 @@ introduce nuevas capas de producto.
 ### Presentación CSS y plantillas documentadas
 
 - `app/static/css/calculation-guide.css` — delimita responsabilidades visuales de la guía pública: hero, navegación, fórmulas, tablas, fuentes, accesibilidad y responsive.
-- `app/templates/calculation_guide.html` — organiza comentarios Jinja por recorrido general, sistemas previsionales, fuentes y cierre sin modificar el HTML renderizado.
+- `app/templates/asegurado/calculation_guide.html` — organiza comentarios Jinja por recorrido general, sistemas previsionales, fuentes y cierre sin modificar el HTML renderizado.
 
 ### Presentación JavaScript crítica
 
@@ -158,8 +165,6 @@ Responsabilidades:
 - versión canónica;
 - precisión monetaria;
 - carga de normativa;
-- constantes comunes;
-- validación defensiva de archivos PDF;
 - Developer Diagnostics.
 
 `app/core/observability.py` implementa el esquema JSONL, correlación aleatoria, redacción, rotación, retención y exportación controlada. El módulo no conoce modelos previsionales ni ejecuta cálculos.
@@ -264,7 +269,7 @@ La observabilidad asociada registra solo cantidades, estado de cache, outcome y 
 
 ## 7. API y middleware
 
-`app/main.py` contiene el middleware global de seguridad y Developer Diagnostics.
+`app/main.py` actúa como composition root: contiene el middleware global de seguridad y Developer Diagnostics, configura recursos compartidos y registra los routers Asegurado y Developer.
 
 Cuando `MRP_DEV_MODE` no vale `1`, la observabilidad no escribe logs ni añade `X-Correlation-ID`.
 
@@ -311,7 +316,7 @@ almacén administrativo para datos de simulación.
 
 ## 7.1. Inventario de rutas FastAPI
 
-El siguiente inventario se deriva de los decoradores vigentes en `app/main.py`. Se conserva explícitamente para auditoría documental iniciada en GOV.1.3 R2 y actualizada por GOV.1.4.
+El siguiente inventario se deriva de las rutas registradas por `app/main.py` mediante `app/portals/asegurado/router.py` y `app/portals/developer/router.py`. Se conserva explícitamente para auditoría documental iniciada en GOV.1.3 R2 y actualizada por GOV.1.4.
 
 | Ruta |
 | --- |
@@ -448,7 +453,7 @@ Paso 5 mantiene dos capas separadas: `app/static/js/retirement.js` propone y con
 
 ## 14. Guía pública de cálculo
 
-`/como-se-calcula` es una superficie pública de transparencia. `app/services/calculation_guide.py` lee parámetros de `regulations/*.json` y los entrega a `app/templates/calculation_guide.html`; no ejecuta `app/engines/` ni construye resultados individuales.
+`/como-se-calcula` es una superficie pública de transparencia. `app/services/calculation_guide.py` lee parámetros de `regulations/*.json` y los entrega a `app/templates/asegurado/calculation_guide.html`; no ejecuta `app/engines/` ni construye resultados individuales.
 
 El Paso 6 enlaza a la sección del sistema correspondiente mediante anclas públicas (`#sebd`, `#mixto`, `#sucgs`) sin transportar datos personales, salarios, cuotas ni montos en la URL. Las sustituciones numéricas del caso individual permanecen en la trazabilidad de resultados.
 

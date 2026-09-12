@@ -13,10 +13,10 @@ class TestSeguroCleanup(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         cls.official = (
-            ROOT / "app/templates/partials/official_data_import.html"
+            ROOT / "app/templates/asegurado/partials/official_data_import.html"
         ).read_text(encoding="utf-8")
         cls.ficha = (
-            ROOT / "app/templates/partials/ficha_digital_import.html"
+            ROOT / "app/templates/asegurado/partials/ficha_digital_import.html"
         ).read_text(encoding="utf-8")
         cls.import_js = (
             ROOT / "app/static/js/official_data_import.js"

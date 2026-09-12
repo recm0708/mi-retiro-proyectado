@@ -7,11 +7,11 @@ from getpass import getpass
 from pathlib import Path
 import sys
 
-from app.core.developer_identity import (
+from app.portals.developer.developer_identity import (
     REGLAS_CREDENCIAL,
     validar_password,
 )
-from app.core.developer_provisioning import (
+from app.portals.developer.developer_provisioning import (
     autenticar_usuario_developer,
     bootstrap_propietario,
     recuperar_propietario,

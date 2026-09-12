@@ -1,6 +1,7 @@
 """Regresiones DEV.2 R6.2-R6.4: observabilidad del Portal Developer."""
 
 from __future__ import annotations
+from tests._runtime_http_source import runtime_http_source
 
 import json
 import os
@@ -10,7 +11,7 @@ import unittest
 from unittest.mock import patch
 
 from app.core.observability import ruta_log_actual
-from app.services.development_center import (
+from app.portals.developer.development_center import (
     construir_estado_centro_desarrollo,
 )
 
@@ -136,7 +137,7 @@ class TestDev2R6ObservabilityPortal(unittest.TestCase):
             ROOT
             / "app"
             / "templates"
-            / "dev_events.html"
+            / "developer/dev_events.html"
         ).read_text(encoding="utf-8")
 
         for contrato in (
@@ -192,7 +193,7 @@ class TestDev2R6ObservabilityPortal(unittest.TestCase):
             ROOT
             / "app"
             / "templates"
-            / "dev_files.html"
+            / "developer/dev_files.html"
         ).read_text(encoding="utf-8")
 
         self.assertIn(
@@ -209,11 +210,7 @@ class TestDev2R6ObservabilityPortal(unittest.TestCase):
         )
 
     def test_main_protege_exportacion_con_sesion_humana(self):
-        main = (
-            ROOT
-            / "app"
-            / "main.py"
-        ).read_text(encoding="utf-8")
+        main = runtime_http_source()
 
         self.assertIn(
             '"/dev/archivos/exportar"',

@@ -5,7 +5,7 @@ import unittest
 
 
 ROOT = Path(__file__).resolve().parents[1]
-BASE = ROOT / "app/templates/base.html"
+BASE = ROOT / "app/templates/asegurado/base.html"
 JS = ROOT / "app/static/js/editable_provenance.js"
 CSS = ROOT / "app/static/css/editable-provenance.css"
 

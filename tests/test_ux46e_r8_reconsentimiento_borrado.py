@@ -19,7 +19,7 @@ class TestUX46eR8ReconsentimientoBorrado(unittest.TestCase):
         cls.gestion = (JS / "data_management.js").read_text(encoding="utf-8")
         cls.privacidad = (JS / "privacy.js").read_text(encoding="utf-8")
         cls.terminos = (
-            ROOT / "app/templates/partials/privacy_consent.html"
+            ROOT / "app/templates/asegurado/partials/privacy_consent.html"
         ).read_text(encoding="utf-8")
         cls.decisiones = (DOCS / "decisions/README.md").read_text(encoding="utf-8")
 

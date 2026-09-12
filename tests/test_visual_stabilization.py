@@ -7,10 +7,10 @@ ROOT = Path(__file__).resolve().parents[1]
 CSS = ROOT / "app/static/css/style.css"
 DESIGN = ROOT / "app/static/css/design-system.css"
 TEMA = ROOT / "app/static/js/theme.js"
-INDEX = ROOT / "app/templates/index.html"
-BASE = ROOT / "app/templates/base.html"
-FOOTER = ROOT / "app/templates/partials/global_footer.html"
-TEMPLATES = ROOT / "app/templates"
+INDEX = ROOT / "app/templates/asegurado/index.html"
+BASE = ROOT / "app/templates/asegurado/base.html"
+FOOTER = ROOT / "app/templates/shared/partials/global_footer.html"
+TEMPLATES = ROOT / "app/templates/asegurado"
 
 
 class TestEstabilizacionVisual(unittest.TestCase):

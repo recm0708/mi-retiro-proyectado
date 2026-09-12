@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import unittest
 
-from app.core.admin_session import (
+from app.portals.developer.admin_session import (
     crear_sesion_admin,
     eliminar_sesion_admin,
     obtener_sesion_admin,
@@ -14,7 +14,7 @@ from app.core.admin_session import (
     validar_sesion_admin_con_identidad,
     validar_sesion_admin_para_usuario,
 )
-from app.core.developer_identity import (
+from app.portals.developer.developer_identity import (
     RolDeveloper,
 )
 

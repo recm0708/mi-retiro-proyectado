@@ -21,7 +21,7 @@ class TestPublicTermsFinal(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         cls.modal = (
-            ROOT / "app/templates/partials/privacy_consent.html"
+            ROOT / "app/templates/asegurado/partials/privacy_consent.html"
         ).read_text(encoding="utf-8")
         cls.policy = (
             ROOT / "docs/security/privacy-policy.md"

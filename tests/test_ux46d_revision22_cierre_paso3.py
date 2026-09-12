@@ -10,7 +10,7 @@ class TestUX46DRevision22CierrePaso3(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.detalle_js = (ROOT / "app/static/js/current_year_detail.js").read_text(encoding="utf-8")
-        cls.detalle_html = (ROOT / "app/templates/partials/current_year_detail.html").read_text(encoding="utf-8")
+        cls.detalle_html = (ROOT / "app/templates/asegurado/partials/current_year_detail.html").read_text(encoding="utf-8")
 
     def test_validacion_reconcilia_cuotas_manuales_antes_del_payload(self):
         self.assertIn("function detallePuedeReconciliarCuotasPaso2", self.detalle_js)

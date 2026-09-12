@@ -12,17 +12,17 @@ from unittest.mock import patch
 
 from fastapi.testclient import TestClient
 
-from app.core.admin_session import (
+from app.portals.developer.admin_session import (
     revocar_todas_las_sesiones_admin,
 )
-from app.core.developer_identity import (
+from app.portals.developer.developer_identity import (
     RolDeveloper,
     hashear_password,
 )
-from app.core.developer_provisioning import (
+from app.portals.developer.developer_provisioning import (
     bootstrap_propietario,
 )
-from app.core.developer_store import (
+from app.portals.developer.developer_store import (
     crear_usuario_developer,
 )
 from app.main import app
@@ -312,7 +312,7 @@ class TestDev2R6HeaderIdentity(unittest.TestCase):
 
         plantilla = (
             Path(__file__).resolve().parents[1]
-            / "app/templates/dev_profile.html"
+            / "app/templates/developer/dev_profile.html"
         ).read_text(
             encoding="utf-8"
         )

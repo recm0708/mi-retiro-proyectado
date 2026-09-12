@@ -1,6 +1,7 @@
 """Regresión MANT.1 R6: auditoría funcional posterior a renombres técnicos."""
 
 from __future__ import annotations
+from tests._runtime_http_source import runtime_http_source
 
 import ast
 import inspect
@@ -15,6 +16,8 @@ from fastapi.testclient import TestClient
 from pydantic import BaseModel
 
 from app.main import app
+from app.portals.asegurado.router import router as asegurado_router
+from app.portals.developer.router import router as developer_router
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -46,6 +49,20 @@ class ParserHTML(HTMLParser):
         self.tags.append((tag, dict(attrs)))
 
 
+def _rutas_runtime():
+    direct = [
+        route
+        for route in app.routes
+        if getattr(route, 'path', None) is not None
+    ]
+
+    return [
+        *direct,
+        *list(asegurado_router.routes),
+        *list(developer_router.routes),
+    ]
+
+
 def _rutas_fastapi():
     return {
         getattr(route, "path", ""): sorted(
@@ -53,7 +70,7 @@ def _rutas_fastapi():
             for metodo in (getattr(route, "methods", set()) or set())
             if metodo not in {"HEAD", "OPTIONS"}
         )
-        for route in app.routes
+        for route in _rutas_runtime()
         if getattr(route, "path", "")
     }
 
@@ -251,7 +268,7 @@ def test_r6_formdata_frontend_coincide_con_uploadfile_backend():
             if parametros_file:
                 uploads_backend[ruta] = parametros_file
 
-    EndpointVisitor().visit(ast.parse(main_py.read_text(encoding="utf-8")))
+    EndpointVisitor().visit(ast.parse(runtime_http_source()))
 
     assert uploads_backend == {
         "/api/simulacion/ficha-digital": ["archivo"],
@@ -320,7 +337,7 @@ def _resolver_modelo(annotation):
 def test_r6_endpoints_post_declaran_modelo_json_o_uploadfile():
     """Evita endpoints POST sin contrato explícito de entrada."""
 
-    for route in app.routes:
+    for route in _rutas_runtime():
         path = getattr(route, "path", "")
         methods = set(getattr(route, "methods", set()) or set())
 
@@ -400,7 +417,7 @@ def test_r6_payloads_indirectos_conservan_campos_requeridos():
 def test_r6_como_se_calcula_anclas_dinamicas_existen():
     """La URL dinámica /como-se-calcula#${ancla} debe apuntar a ids reales."""
 
-    html = _texto("app/templates/calculation_guide.html")
+    html = _texto("app/templates/asegurado/calculation_guide.html")
     js = _texto("app/static/js/results_orchestration.js")
 
     assert "/como-se-calcula#${ancla}" in js

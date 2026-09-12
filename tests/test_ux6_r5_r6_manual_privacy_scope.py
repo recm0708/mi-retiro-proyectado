@@ -13,16 +13,16 @@ class TestManualPrivacyScope(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         cls.assisted = (
-            ROOT / "app/templates/partials/assisted_preparation.html"
+            ROOT / "app/templates/asegurado/partials/assisted_preparation.html"
         ).read_text(encoding="utf-8")
         cls.mode_js = (
             ROOT / "app/static/js/simulation_mode.js"
         ).read_text(encoding="utf-8")
         cls.privacy_html = (
-            ROOT / "app/templates/partials/privacy_consent.html"
+            ROOT / "app/templates/asegurado/partials/privacy_consent.html"
         ).read_text(encoding="utf-8")
         cls.methodology = (
-            ROOT / "app/templates/methodology.html"
+            ROOT / "app/templates/asegurado/methodology.html"
         ).read_text(encoding="utf-8")
         cls.privacy_policy = (
             ROOT / "docs/security/privacy-policy.md"

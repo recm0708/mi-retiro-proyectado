@@ -13,8 +13,8 @@ from app.main import app
 ROOT = Path(__file__).resolve().parents[1]
 VERSION_FILE = ROOT / "VERSION"
 CONFIG = ROOT / "app/core/config.py"
-BASE = ROOT / "app/templates/base.html"
-FOOTER = ROOT / "app/templates/partials/global_footer.html"
+BASE = ROOT / "app/templates/asegurado/base.html"
+FOOTER = ROOT / "app/templates/shared/partials/global_footer.html"
 
 
 class TestGov12Versionado(unittest.TestCase):
@@ -50,7 +50,7 @@ class TestGov12Versionado(unittest.TestCase):
         footer = FOOTER.read_text(encoding="utf-8")
 
         self.assertIn(
-            '{% include "partials/global_footer.html" %}',
+            '{% include "shared/partials/global_footer.html" %}',
             base,
         )
 

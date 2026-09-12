@@ -6,7 +6,7 @@ import os
 import unittest
 from unittest.mock import patch
 
-from app.core.admin_security import (
+from app.portals.developer.admin_security import (
     autenticacion_admin_habilitada,
     validar_token_administrativo,
 )

@@ -6,8 +6,8 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 
-BASE = ROOT / "app/templates/base.html"
-DEV_BASE = ROOT / "app/templates/dev_base.html"
+BASE = ROOT / "app/templates/asegurado/base.html"
+DEV_BASE = ROOT / "app/templates/developer/dev_base.html"
 
 STYLE = ROOT / "app/static/css/style.css"
 DESIGN = ROOT / "app/static/css/design-system.css"
@@ -18,8 +18,8 @@ DEV_JS = ROOT / "app/static/js/developer_portal.js"
 BOOT_JS = ROOT / "app/static/js/shell_state_boot.js"
 SHELL_UI_JS = ROOT / "app/static/js/shell_ui.js"
 
-HOME = ROOT / "app/templates/index.html"
-DEV_HOME = ROOT / "app/templates/dev_dashboard.html"
+HOME = ROOT / "app/templates/asegurado/index.html"
+DEV_HOME = ROOT / "app/templates/developer/dev_dashboard.html"
 
 
 class TestUX5R2ShellNavigation(unittest.TestCase):

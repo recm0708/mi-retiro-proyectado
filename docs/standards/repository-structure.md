@@ -31,6 +31,9 @@ app/
 ├── core/
 ├── engines/
 ├── models/
+├── portals/
+│   ├── asegurado/
+│   └── developer/
 ├── services/
 ├── static/
 │   ├── css/
@@ -38,7 +41,11 @@ app/
 │   │   └── brand/
 │   └── js/
 └── templates/
-    └── partials/
+    ├── asegurado/
+    │   └── partials/
+    ├── developer/
+    └── shared/
+        └── partials/
 
 assets/
 ├── brand/

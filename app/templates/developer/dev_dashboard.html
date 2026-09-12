@@ -1,0 +1,150 @@
+{% extends "developer/dev_base.html" %}
+
+{% block title %}Resumen · Portal Developer · {{ app_name }}{% endblock %}
+
+{% block content %}
+{% if request.query_params.get("sesion") == "limite" %}
+<div class="container-fluid pt-3">
+  <div class="alert alert-warning mb-0" role="status">
+    Se alcanzó el límite de sesiones simultáneas de tu cuenta.
+    Se cerró automáticamente la sesión más antigua y esta sesión
+    permanece activa.
+  </div>
+</div>
+{% endif %}
+
+<section class="dev-home-hero">
+  <div class="dev-home-hero-copy">
+    <span class="dev-kicker">
+      Portal Developer
+    </span>
+
+    <h1>
+      Centro de control del entorno local
+    </h1>
+
+    <p>
+      Supervisa el estado técnico de Mi Retiro Proyectado y
+      accede a diagnóstico, eventos, archivos, mantenimiento y
+      privacidad según los permisos de tu cuenta.
+    </p>
+  </div>
+
+  <aside
+    class="dev-home-status"
+    aria-label="Estado general del entorno"
+  >
+    <span>Entorno Developer</span>
+
+    <strong>
+      {% if estado_dev.dev_mode_activo %}
+      Activo
+      {% else %}
+      Desactivado
+      {% endif %}
+    </strong>
+
+    <small>
+      Versión {{ estado_dev.app_version }}
+    </small>
+  </aside>
+</section>
+
+<section
+  class="dev-home-overview"
+  aria-labelledby="dev-home-overview-title"
+>
+  <div class="dev-home-heading">
+    <div>
+      <span class="dev-kicker">
+        Operación
+      </span>
+
+      <h2 id="dev-home-overview-title">
+        Áreas operativas
+      </h2>
+    </div>
+
+    <p>
+      Las funciones visibles dependen del rol de la cuenta y
+      permanecen limitadas al entorno Developer local.
+    </p>
+  </div>
+
+  <div class="dev-home-grid">
+    <article class="dev-home-card">
+      <span class="dev-kicker">Diagnóstico</span>
+      <h3>Estado técnico</h3>
+
+      <p>
+        Estado global:
+        <strong>
+          {{ estado_dev.resumen_autodiagnostico.estado_global }}
+        </strong>
+      </p>
+
+      <a href="/dev/diagnostico">
+        Abrir diagnóstico
+      </a>
+    </article>
+
+    <article class="dev-home-card">
+      <span class="dev-kicker">Observabilidad</span>
+      <h3>Eventos recientes</h3>
+
+      <p>
+        {{ estado_dev.total_eventos_visibles }}
+        evento(s) visibles actualmente.
+      </p>
+
+      <a href="/dev/eventos">
+        Abrir eventos
+      </a>
+    </article>
+
+    <article class="dev-home-card">
+      <span class="dev-kicker">Archivos</span>
+      <h3>Diagnósticos locales</h3>
+
+      <p>
+        {{ estado_dev.total_archivos_existentes }}
+        archivo(s) · {{ estado_dev.total_bytes }} byte(s).
+      </p>
+
+      <a href="/dev/archivos">
+        Abrir archivos
+      </a>
+    </article>
+
+    {% if "maintenance.read" in dev_permisos %}
+    <article class="dev-home-card">
+      <span class="dev-kicker">Operación</span>
+      <h3>Mantenimiento</h3>
+
+      <p>
+        Operaciones administrativas controladas para el
+        mantenimiento del entorno local.
+      </p>
+
+      <a href="/dev/mantenimiento">
+        Abrir mantenimiento
+      </a>
+    </article>
+    {% endif %}
+
+    <article class="dev-home-card">
+      <span class="dev-kicker">Protección</span>
+      <h3>Privacidad</h3>
+
+      <p>
+        Revisa controles, advertencias y tratamiento de datos
+        aplicables al Portal Developer.
+      </p>
+
+      <a href="/dev/privacidad">
+        Abrir privacidad
+      </a>
+    </article>
+  </div>
+</section>
+{% endblock %}

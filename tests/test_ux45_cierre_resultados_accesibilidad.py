@@ -35,11 +35,11 @@ class TestUX45CierreResultadosAccesibilidad(unittest.TestCase):
             ROOT / "app/static/js/mi_retiro_seguro_reference.js"
         ).read_text(encoding="utf-8")
         cls.resultados_html = (
-            ROOT / "app/templates/partials/results.html"
+            ROOT / "app/templates/asegurado/partials/results.html"
         ).read_text(encoding="utf-8")
         cls.importacion_html = "\n".join([
-            (ROOT / "app/templates/partials/official_data_import.html").read_text(encoding="utf-8"),
-            (ROOT / "app/templates/partials/ficha_digital_import.html").read_text(encoding="utf-8"),
+            (ROOT / "app/templates/asegurado/partials/official_data_import.html").read_text(encoding="utf-8"),
+            (ROOT / "app/templates/asegurado/partials/ficha_digital_import.html").read_text(encoding="utf-8"),
         ])
         cls.css = (ROOT / "app/static/css/style.css").read_text(encoding="utf-8")
 

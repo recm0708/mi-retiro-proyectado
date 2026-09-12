@@ -1,14 +1,15 @@
 """Regresiones UX.6 R2 para formularios Developer resilientes."""
 
 from __future__ import annotations
+from tests._runtime_http_source import runtime_http_source
 
 from pathlib import Path
 from tempfile import TemporaryDirectory
 import unittest
 
-from app.core.developer_identity import RolDeveloper
-from app.core.developer_provisioning import bootstrap_propietario
-from app.core.developer_user_admin import crear_usuario_administrado
+from app.portals.developer.developer_identity import RolDeveloper
+from app.portals.developer.developer_provisioning import bootstrap_propietario
+from app.portals.developer.developer_user_admin import crear_usuario_administrado
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -17,12 +18,12 @@ ROOT = Path(__file__).resolve().parents[1]
 class TestUX6R2FormResilience(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        cls.main = (ROOT / "app/main.py").read_text(encoding="utf-8")
+        cls.main = runtime_http_source()
         cls.login = (
-            ROOT / "app/templates/dev_login.html"
+            ROOT / "app/templates/developer/dev_login.html"
         ).read_text(encoding="utf-8")
         cls.base = (
-            ROOT / "app/templates/dev_base.html"
+            ROOT / "app/templates/developer/dev_base.html"
         ).read_text(encoding="utf-8")
         cls.js = (
             ROOT / "app/static/js/developer_forms.js"

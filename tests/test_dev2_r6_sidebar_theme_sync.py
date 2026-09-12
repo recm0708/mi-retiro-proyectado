@@ -13,7 +13,7 @@ class TestDev2R6SidebarThemeSync(unittest.TestCase):
 
     def test_sidebar_contiene_todas_las_rutas_principales(self):
         base = (
-            ROOT / "app/templates/dev_base.html"
+            ROOT / "app/templates/developer/dev_base.html"
         ).read_text(encoding="utf-8")
 
         self.assertIn(
@@ -41,7 +41,7 @@ class TestDev2R6SidebarThemeSync(unittest.TestCase):
 
     def test_header_ya_no_contiene_navegacion_horizontal(self):
         base = (
-            ROOT / "app/templates/dev_base.html"
+            ROOT / "app/templates/developer/dev_base.html"
         ).read_text(encoding="utf-8")
 
         self.assertNotIn(
@@ -51,7 +51,7 @@ class TestDev2R6SidebarThemeSync(unittest.TestCase):
 
     def test_header_usa_identidad_compacta(self):
         base = (
-            ROOT / "app/templates/dev_base.html"
+            ROOT / "app/templates/developer/dev_base.html"
         ).read_text(encoding="utf-8")
 
         self.assertIn(

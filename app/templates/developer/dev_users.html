@@ -1,0 +1,603 @@
+{% extends "developer/dev_base.html" %}
+
+{% macro password_control(id, name="password_actual", placeholder="Ingresa tu contraseña actual") -%}
+<div class="input-group dev-secret-group">
+  <input
+    class="form-control"
+    id="{{ id }}"
+    name="{{ name }}"
+    type="password"
+    autocomplete="current-password"
+    placeholder="{{ placeholder }}"
+    required
+  >
+  <button
+    class="btn btn-outline-secondary dev-password-toggle"
+    type="button"
+    data-dev-password-toggle
+    data-dev-password-target="{{ id }}"
+    data-dev-password-name="contraseña"
+    aria-controls="{{ id }}"
+    aria-pressed="false"
+    aria-label="Mostrar contraseña"
+    title="Mostrar contraseña"
+  >
+    <svg
+      data-dev-password-icon-hidden
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path d="M3 3l18 18"></path>
+      <path d="M10.6 10.6a2 2 0 0 0 2.8 2.8"></path>
+      <path d="M9.9 5.2A10.7 10.7 0 0 1 12 5c6.5 0 10 7 10 7a18 18 0 0 1-2 2.7"></path>
+      <path d="M6.6 6.6C3.8 8.5 2 12 2 12s3.5 7 10 7a10.5 10.5 0 0 0 4.1-.8"></path>
+    </svg>
+    <svg
+      data-dev-password-icon-visible
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      focusable="false"
+      hidden
+    >
+      <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"></path>
+      <circle cx="12" cy="12" r="2.5"></circle>
+    </svg>
+  </button>
+</div>
+{%- endmacro %}
+
+{% block title %}Usuarios · Portal Developer · {{ app_name }}{% endblock %}
+
+{% block content %}
+<section class="hero-section py-5">
+  <div class="container">
+    <p class="dev-kicker">Administración de identidades</p>
+    <h1 class="display-6 fw-bold mb-3">Usuarios Developer</h1>
+    <p class="lead mb-0">
+      Gestiona las cuentas de acceso del portal según tu rol y los permisos
+      asignados. La cuenta Propietario y tu propia cuenta conservan
+      protecciones adicionales.
+    </p>
+  </div>
+</section>
+
+<section class="py-4">
+  <div class="container">
+    {% if dev_resultado_mensaje and dev_resultado_mensaje.tipo != "danger" %}
+    <div
+      class="alert alert-{{ dev_resultado_mensaje.tipo }} dev-users-notice"
+      role="status"
+    >
+      {{ dev_resultado_mensaje.texto }}
+    </div>
+    {% endif %}
+
+    {% if dev_credencial_temporal %}
+    <section
+      class="dev-users-temporary mb-4"
+      role="status"
+      aria-live="polite"
+      aria-labelledby="dev-temporary-title"
+    >
+      <div class="dev-users-temporary-copy">
+        <div>
+          <p class="dev-kicker mb-2">Credencial temporal</p>
+          <h2 class="h5 mb-2" id="dev-temporary-title">
+            Contraseña temporal para @{{ dev_credencial_temporal.usuario }}
+          </h2>
+          <p class="mb-0">
+            Cópiala ahora y entrégala por un canal seguro. Se muestra una sola
+            vez y deberá cambiarse al iniciar sesión.
+          </p>
+        </div>
+
+        <div class="dev-users-temporary-secret-row">
+          <input
+            class="form-control dev-users-temporary-secret"
+            id="dev-temporary-password"
+            type="text"
+            value="{{ dev_credencial_temporal.password }}"
+            readonly
+            data-dev-temporary-password
+            aria-label="Contraseña temporal"
+          >
+          <button
+            class="btn btn-outline-secondary dev-copy-secret"
+            type="button"
+            data-dev-copy-password
+            data-dev-copy-target="dev-temporary-password"
+            aria-label="Copiar contraseña temporal"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <rect x="9" y="9" width="11" height="11" rx="2"></rect>
+              <path d="M15 9V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h3"></path>
+            </svg>
+            <span data-dev-copy-label>Copiar</span>
+          </button>
+        </div>
+      </div>
+    </section>
+    {% endif %}
+
+    <div class="dev-users-layout">
+      {% if "users.create" in dev_permisos %}
+      <section class="card dev-users-create-card">
+        <div class="card-body p-4">
+          <p class="dev-kicker">Nueva cuenta</p>
+          <h2 class="h4 mb-2">Crear usuario</h2>
+          <p class="text-muted mb-4">
+            El nombre de usuario será la identidad de acceso y no se edita
+            desde esta pantalla. El sistema generará una contraseña temporal.
+          </p>
+
+          <form
+            method="post"
+            action="/dev/usuarios/crear"
+            class="dev-users-form"
+            data-dev-preserve-form
+          >
+            <input
+              type="hidden"
+              name="csrf_token"
+              value="{{ dev_csrf_token }}"
+            >
+
+            <div>
+              <label class="form-label" for="dev-user-create-login">
+                Usuario <span class="required-marker" aria-hidden="true">*</span>
+                <span class="visually-hidden">obligatorio</span>
+              </label>
+              <input
+                class="form-control"
+                id="dev-user-create-login"
+                name="usuario_nuevo"
+                type="text"
+                minlength="3"
+                maxlength="64"
+                autocomplete="off"
+                placeholder="Ingresa el usuario"
+                required
+              >
+              <div class="form-text">
+                Entre 3 y 64 caracteres: minúsculas, números, punto, guion o
+                guion bajo.
+              </div>
+            </div>
+
+            <div>
+              <label class="form-label" for="dev-user-create-name">
+                Nombre visible <span class="required-marker" aria-hidden="true">*</span>
+                <span class="visually-hidden">obligatorio</span>
+              </label>
+              <input
+                class="form-control"
+                id="dev-user-create-name"
+                name="nombre_visible"
+                type="text"
+                maxlength="120"
+                autocomplete="off"
+                placeholder="Ingresa el nombre visible"
+                required
+              >
+            </div>
+
+            <div>
+              <label class="form-label" for="dev-user-create-role">
+                Rol <span class="required-marker" aria-hidden="true">*</span>
+                <span class="visually-hidden">obligatorio</span>
+              </label>
+              <select
+                class="form-select"
+                id="dev-user-create-role"
+                name="rol"
+                required
+              >
+                <option value="">Seleccione un rol</option>
+                {% for rol in dev_roles_creables %}
+                <option value="{{ rol.value }}">{{ rol.label }}</option>
+                {% endfor %}
+              </select>
+            </div>
+
+            <div>
+              <label class="form-label" for="dev-user-create-password">
+                Confirma tu contraseña <span class="required-marker" aria-hidden="true">*</span>
+                <span class="visually-hidden">obligatorio</span>
+              </label>
+              {{ password_control("dev-user-create-password") }}
+              <div class="form-text">
+                Esta revalidación protege la creación de identidades.
+              </div>
+            </div>
+
+            <button class="btn btn-primary" type="submit">
+              Crear usuario
+            </button>
+          </form>
+        </div>
+      </section>
+      {% endif %}
+
+      <section class="dev-users-directory">
+        <div class="dev-users-section-heading">
+          <div>
+            <p class="dev-kicker">Directorio</p>
+            <h2 class="h4 mb-1">Cuentas del portal</h2>
+          </div>
+          <span class="badge text-bg-secondary">
+            {{ dev_usuarios|length }} cuentas
+          </span>
+        </div>
+
+        <div class="dev-users-grid">
+          {% for fila in dev_usuarios %}
+          <article class="card dev-user-card">
+            <div class="card-body p-4">
+              <div class="dev-user-card-head">
+                <span class="dev-users-avatar" aria-hidden="true">
+                  {% if fila.avatar_url %}
+                  <img
+                    src="{{ fila.avatar_url }}"
+                    alt=""
+                    width="48"
+                    height="48"
+                  >
+                  {% else %}
+                  {{ fila.iniciales }}
+                  {% endif %}
+                </span>
+
+                <div class="dev-user-card-identity">
+                  <h3 class="h6 mb-1">{{ fila.nombre }}</h3>
+                  <p class="mb-0">@{{ fila.usuario.usuario }}</p>
+                </div>
+
+                <span
+                  class="badge {{ 'text-bg-success' if fila.usuario.activo else 'text-bg-secondary' }}"
+                >
+                  {{ 'Activa' if fila.usuario.activo else 'Desactivada' }}
+                </span>
+              </div>
+
+              <dl class="dev-user-card-meta">
+                <div>
+                  <dt>Rol</dt>
+                  <dd>{{ fila.rol_label }}</dd>
+                </div>
+                <div>
+                  <dt>Credencial</dt>
+                  <dd>
+                    {% if fila.usuario.debe_cambiar_password %}
+                    Cambio obligatorio pendiente
+                    {% else %}
+                    Vigente
+                    {% endif %}
+                  </dd>
+                </div>
+                <div>
+                  <dt>Último acceso</dt>
+                  <dd>
+                    {% if fila.usuario.ultimo_acceso_utc %}
+                    <time
+                      class="app-local-datetime"
+                      datetime="{{ fila.usuario.ultimo_acceso_utc }}"
+                      data-app-local-datetime
+                    >
+                      {{ fila.usuario.ultimo_acceso_utc }}
+                    </time>
+                    {% else %}
+                    Sin acceso registrado
+                    {% endif %}
+                  </dd>
+                </div>
+              </dl>
+
+              {% if fila.es_actual %}
+              <div class="dev-users-protection-note">
+                Esta es tu cuenta. Los datos propios se administran desde
+                <a href="/dev/perfil">Mi perfil</a>.
+              </div>
+              {% elif fila.usuario.es_propietario %}
+              <div class="dev-users-protection-note">
+                La cuenta Propietario está protegida y no admite operaciones
+                administrativas ordinarias.
+              </div>
+              {% elif not fila.gestionable %}
+              <div class="dev-users-protection-note">
+                Tu jerarquía actual permite consultar esta cuenta, pero no
+                modificarla.
+              </div>
+              {% endif %}
+
+              {% if fila.gestionable %}
+              <details class="dev-user-actions mt-3">
+                <summary>Administrar cuenta</summary>
+
+                <div class="dev-user-actions-body">
+                  <section class="dev-user-edit-panel">
+                    <div>
+                      <p class="dev-kicker mb-2">Edición</p>
+                      <h4 class="h6 mb-2">Editar cuenta</h4>
+                      <p class="form-text mb-3">
+                        Completa únicamente los campos que quieras modificar.
+                        Los campos vacíos o marcados como “Sin cambios”
+                        conservarán su valor actual.
+                      </p>
+                    </div>
+
+                    <form
+                      method="post"
+                      action="/dev/usuarios/{{ fila.usuario.identificador }}/editar"
+                      class="dev-users-form"
+                      data-dev-preserve-form
+                    >
+                      <input
+                        type="hidden"
+                        name="csrf_token"
+                        value="{{ dev_csrf_token }}"
+                      >
+
+                      {% if "users.edit" in dev_permisos %}
+                      <div>
+                        <label
+                          class="form-label"
+                          for="dev-user-edit-name-{{ fila.usuario.identificador }}"
+                        >
+                          Nombre visible
+                        </label>
+                        <input
+                          class="form-control"
+                          id="dev-user-edit-name-{{ fila.usuario.identificador }}"
+                          name="nombre_visible"
+                          type="text"
+                          maxlength="120"
+                          autocomplete="off"
+                          placeholder="Actual: {{ fila.usuario.nombre_visible }}"
+                        >
+                      </div>
+                      {% endif %}
+
+                      {% if fila.roles_cambio %}
+                      <div>
+                        <label
+                          class="form-label"
+                          for="dev-user-edit-role-{{ fila.usuario.identificador }}"
+                        >
+                          Rol
+                        </label>
+                        <select
+                          class="form-select"
+                          id="dev-user-edit-role-{{ fila.usuario.identificador }}"
+                          name="nuevo_rol"
+                        >
+                          <option value="">Sin cambios</option>
+                          {% for rol in fila.roles_cambio %}
+                          <option value="{{ rol.value }}">{{ rol.label }}</option>
+                          {% endfor %}
+                        </select>
+                      </div>
+                      {% endif %}
+
+                      {% if "users.disable" in dev_permisos %}
+                      <div>
+                        <label
+                          class="form-label"
+                          for="dev-user-edit-state-{{ fila.usuario.identificador }}"
+                        >
+                          Estado de la cuenta
+                        </label>
+                        <select
+                          class="form-select"
+                          id="dev-user-edit-state-{{ fila.usuario.identificador }}"
+                          name="estado"
+                        >
+                          <option value="">Sin cambios</option>
+                          {% if fila.usuario.activo %}
+                          <option value="desactivada">Desactivar cuenta</option>
+                          {% else %}
+                          <option value="activa">Reactivar cuenta</option>
+                          {% endif %}
+                        </select>
+                      </div>
+                      {% endif %}
+
+                      <div class="dev-user-edit-password">
+                        <label
+                          class="form-label"
+                          for="dev-user-edit-password-{{ fila.usuario.identificador }}"
+                        >
+                          Confirma tu contraseña
+                          <span class="required-marker" aria-hidden="true">*</span>
+                          <span class="visually-hidden">obligatorio</span>
+                        </label>
+                        {{ password_control(
+                          "dev-user-edit-password-" ~ fila.usuario.identificador
+                        ) }}
+                        <div class="form-text">
+                          Se solicita una sola vez para guardar los cambios de
+                          esta cuenta.
+                        </div>
+                      </div>
+
+                      <button class="btn btn-outline-primary" type="submit">
+                        Guardar cambios
+                      </button>
+                    </form>
+                  </section>
+
+                  <section class="dev-user-security-panel">
+                    <div>
+                      <p class="dev-kicker mb-2">Credencial</p>
+                      <h4 class="h6 mb-2">Restablecer contraseña</h4>
+                      <p class="form-text mb-3">
+                        Genera una nueva contraseña temporal. La cuenta deberá
+                        cambiarla al iniciar sesión.
+                      </p>
+                    </div>
+
+                    <form
+                      method="post"
+                      action="/dev/usuarios/{{ fila.usuario.identificador }}/password-temporal"
+                      class="dev-users-form"
+                    >
+                      <input
+                        type="hidden"
+                        name="csrf_token"
+                        value="{{ dev_csrf_token }}"
+                      >
+
+                      <div>
+                        <label
+                          class="form-label"
+                          for="dev-user-reset-password-{{ fila.usuario.identificador }}"
+                        >
+                          Confirma tu contraseña
+                          <span class="required-marker" aria-hidden="true">*</span>
+                          <span class="visually-hidden">obligatorio</span>
+                        </label>
+                        {{ password_control(
+                          "dev-user-reset-password-" ~ fila.usuario.identificador
+                        ) }}
+                      </div>
+
+                      <button class="btn btn-outline-primary" type="submit">
+                        Generar contraseña temporal
+                      </button>
+                    </form>
+                  </section>
+
+                  {% if "users.delete" in dev_permisos %}
+                  <section class="dev-user-delete-panel">
+                    <div>
+                      <p class="dev-kicker mb-2">Zona crítica</p>
+                      <h4 class="h6 mb-2">Eliminar usuario</h4>
+                      <p class="form-text mb-3">
+                        Esta acción elimina definitivamente la cuenta. No puede
+                        aplicarse a la cuenta Propietario ni a tu propia cuenta.
+                      </p>
+                    </div>
+
+                    <form
+                      method="post"
+                      action="/dev/usuarios/{{ fila.usuario.identificador }}/eliminar"
+                      class="dev-users-form"
+                      data-dev-preserve-form
+                    >
+                      <input
+                        type="hidden"
+                        name="csrf_token"
+                        value="{{ dev_csrf_token }}"
+                      >
+
+                      <div>
+                        <label
+                          class="form-label"
+                          for="dev-user-delete-password-{{ fila.usuario.identificador }}"
+                        >
+                          Contraseña actual
+                          <span class="required-marker" aria-hidden="true">*</span>
+                          <span class="visually-hidden">obligatorio</span>
+                        </label>
+                        {{ password_control(
+                          "dev-user-delete-password-" ~ fila.usuario.identificador
+                        ) }}
+                      </div>
+
+                      <div>
+                        <label
+                          class="form-label"
+                          for="dev-user-delete-confirm-{{ fila.usuario.identificador }}"
+                        >
+                          Escribe ELIMINAR USUARIO
+                          <span class="required-marker" aria-hidden="true">*</span>
+                          <span class="visually-hidden">obligatorio</span>
+                        </label>
+                        <input
+                          class="form-control"
+                          id="dev-user-delete-confirm-{{ fila.usuario.identificador }}"
+                          name="confirmacion"
+                          type="text"
+                          autocomplete="off"
+                          placeholder="Escribe exactamente ELIMINAR USUARIO"
+                          required
+                        >
+                      </div>
+
+                      <button class="btn btn-outline-danger" type="submit">
+                        Eliminar usuario definitivamente
+                      </button>
+                    </form>
+                  </section>
+                  {% endif %}
+                </div>
+              </details>
+              {% endif %}
+            </div>
+          </article>
+          {% endfor %}
+        </div>
+      </section>
+    </div>
+
+    {% if "security.audit" in dev_permisos %}
+    <section class="card dev-users-audit mt-4">
+      <div class="card-body p-4">
+        <div class="dev-users-section-heading">
+          <div>
+            <p class="dev-kicker">Auditoría</p>
+            <h2 class="h4 mb-1">Actividad administrativa</h2>
+            <p class="text-muted mb-0">
+              Registro persistente de creación, edición, cambio de rol,
+              desactivación, reactivación, restablecimiento y eliminación.
+            </p>
+          </div>
+          <span class="badge text-bg-secondary">
+            {{ dev_auditoria_usuarios|length }} eventos
+          </span>
+        </div>
+
+        {% if dev_auditoria_usuarios %}
+        <div class="table-responsive mt-3">
+          <table class="table align-middle dev-users-audit-table">
+            <thead>
+              <tr>
+                <th scope="col">Fecha y hora</th>
+                <th scope="col">Acción</th>
+                <th scope="col">Cuenta</th>
+                <th scope="col">Realizada por</th>
+                <th scope="col">Detalle</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for evento in dev_auditoria_usuarios %}
+              <tr>
+                <td>
+                  <time
+                    class="app-local-datetime"
+                    datetime="{{ evento.timestamp_utc }}"
+                    data-app-local-datetime
+                  >
+                    {{ evento.timestamp_utc }}
+                  </time>
+                </td>
+                <td>{{ evento.accion_etiqueta }}</td>
+                <td>@{{ evento.objetivo_usuario }}</td>
+                <td>@{{ evento.actor_usuario }}</td>
+                <td>{{ evento.resumen }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        {% else %}
+        <p class="text-muted mb-0 mt-3">
+          Todavía no se han registrado acciones administrativas de usuarios.
+        </p>
+        {% endif %}
+      </div>
+    </section>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

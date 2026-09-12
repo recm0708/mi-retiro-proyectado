@@ -8,7 +8,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 EXPECTED_PATHS = [
-    "app/core/pdf_files.py",
+    "app/portals/asegurado/pdf_files.py",
     "app/core/money.py",
     "app/core/observability.py",
     "app/models/simulation.py",
@@ -44,13 +44,13 @@ EXPECTED_PATHS = [
     "app/static/js/simulation.js",
     "app/static/js/timeline.js",
     "app/static/js/wizard_navigation.js",
-    "app/templates/partials/data_management.html",
-    "app/templates/partials/official_data_import.html",
-    "app/templates/partials/privacy_consent.html",
-    "app/templates/partials/results.html",
-    "app/templates/partials/retirement.html",
-    "app/templates/partials/salary_history.html",
-    "app/templates/simulation.html",
+    "app/templates/asegurado/partials/data_management.html",
+    "app/templates/asegurado/partials/official_data_import.html",
+    "app/templates/asegurado/partials/privacy_consent.html",
+    "app/templates/asegurado/partials/results.html",
+    "app/templates/asegurado/partials/retirement.html",
+    "app/templates/asegurado/partials/salary_history.html",
+    "app/templates/asegurado/simulation.html",
     "tests/test_accessibility_themes.py",
     "tests/test_accessibility_ux4.py",
     "tests/test_money.py",
@@ -63,10 +63,10 @@ EXPECTED_PATHS = [
 
 PRESERVED_PATHS = [
     "app/core/normativa.py",
-    "app/services/development_center.py",
+    "app/portals/developer/development_center.py",
     "app/services/mi_retiro_seguro_reference.py",
-    "app/templates/dev_development_center.html",
-    "app/templates/partials/mi_retiro_seguro_reference.html",
+    "app/templates/developer/dev_development_center.html",
+    "app/templates/asegurado/partials/mi_retiro_seguro_reference.html",
     "regulations/mixto.json",
     "regulations/sebd.json",
     "regulations/sucgs.json",

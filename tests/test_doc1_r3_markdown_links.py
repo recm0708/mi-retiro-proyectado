@@ -29,7 +29,6 @@ class TestDOC1R3MarkdownLinks(unittest.TestCase):
                 self.assertIn(token, data_model)
 
         expected_architecture = (
-            "[`app/core/constants.py`](../../app/core/constants.py)",
             "[`app/models/comparacion.py`](../../app/models/comparacion.py)",
             "[`app/models/pension.py`](../../app/models/pension.py)",
             "[`app/engines/elegibilidad.py`](../../app/engines/elegibilidad.py)",

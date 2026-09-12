@@ -7,17 +7,17 @@ import unittest
 ROOT = Path(__file__).resolve().parents[1]
 
 SIMULATION = (
-    ROOT / "app/templates/simulation.html"
+    ROOT / "app/templates/asegurado/simulation.html"
 )
 
 CURRENT = (
     ROOT
-    / "app/templates/partials/current_year_detail.html"
+    / "app/templates/asegurado/partials/current_year_detail.html"
 )
 
 ASSISTED_TEMPLATE = (
     ROOT
-    / "app/templates/partials/assisted_preparation.html"
+    / "app/templates/asegurado/partials/assisted_preparation.html"
 )
 
 MODE_JS = (
@@ -117,12 +117,12 @@ class TestUX5R5R6AssistedIntegration(
         )
 
         self.assertIn(
-            'include "partials/official_data_import.html"',
+            'include "asegurado/partials/official_data_import.html"',
             text,
         )
 
         self.assertIn(
-            'include "partials/ficha_digital_import.html"',
+            'include "asegurado/partials/ficha_digital_import.html"',
             text,
         )
 
@@ -137,12 +137,12 @@ class TestUX5R5R6AssistedIntegration(
         )
 
         self.assertNotIn(
-            'include "partials/official_data_import.html"',
+            'include "asegurado/partials/official_data_import.html"',
             simulation,
         )
 
         self.assertNotIn(
-            'include "partials/ficha_digital_import.html"',
+            'include "asegurado/partials/ficha_digital_import.html"',
             current,
         )
 

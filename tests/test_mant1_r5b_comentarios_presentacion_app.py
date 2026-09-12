@@ -9,7 +9,13 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 CSS = ROOT / "app" / "static" / "css" / "calculation-guide.css"
-TEMPLATE = ROOT / "app" / "templates" / "calculation_guide.html"
+TEMPLATE = (
+    ROOT
+    / "app"
+    / "templates"
+    / "asegurado"
+    / "calculation_guide.html"
+)
 DOCS = (
     ROOT / "CHANGELOG.md",
     ROOT / "docs" / "standards/code-and-comments.md",

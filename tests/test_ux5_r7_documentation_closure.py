@@ -1,6 +1,7 @@
 """Regresiones del cierre documental de UX.5."""
 
 from __future__ import annotations
+from tests._runtime_http_source import runtime_http_source
 
 import json
 from pathlib import Path
@@ -82,10 +83,10 @@ class TestUX5R7DocumentationClosure(unittest.TestCase):
                 self.assertIn(expected, text)
 
     def test_assets_locales_tienen_revision(self):
-        main = (ROOT / "app/main.py").read_text(encoding="utf-8")
-        base = (ROOT / "app/templates/base.html").read_text(encoding="utf-8")
+        main = runtime_http_source()
+        base = (ROOT / "app/templates/asegurado/base.html").read_text(encoding="utf-8")
         simulation = (
-            ROOT / "app/templates/simulation.html"
+            ROOT / "app/templates/asegurado/simulation.html"
         ).read_text(encoding="utf-8")
 
         self.assertIn("static_revision=STATIC_REVISION", main)

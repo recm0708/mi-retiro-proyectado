@@ -14,7 +14,7 @@ class TestUX46DRevision9ReactividadPrivacidad(unittest.TestCase):
         cls.style = (ROOT / "app/static/css/style.css").read_text(encoding="utf-8")
         cls.privacidad_js = (ROOT / "app/static/js/privacy.js").read_text(encoding="utf-8")
         cls.terminos = (
-            ROOT / "app/templates/partials/privacy_consent.html"
+            ROOT / "app/templates/asegurado/partials/privacy_consent.html"
         ).read_text(encoding="utf-8")
         cls.accesibilidad = (ROOT / "app/static/js/accessibility.js").read_text(encoding="utf-8")
 

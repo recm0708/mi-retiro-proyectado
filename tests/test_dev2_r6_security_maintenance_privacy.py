@@ -1,23 +1,24 @@
 """Regresiones DEV.2 R6.5-R6.7: seguridad, mantenimiento y privacidad."""
 
 from __future__ import annotations
+from tests._runtime_http_source import runtime_http_source
 
 from pathlib import Path
 from tempfile import TemporaryDirectory
 import unittest
 
-from app.core.developer_identity import (
+from app.portals.developer.developer_identity import (
     PermisoDeveloper,
     RolDeveloper,
     hashear_password,
     rol_tiene_permiso,
     verificar_password,
 )
-from app.core.developer_store import (
+from app.portals.developer.developer_store import (
     cambiar_password_propio,
     crear_propietario,
 )
-from app.core.developer_web_security import (
+from app.portals.developer.developer_web_security import (
     token_csrf_para_sesion,
     validar_token_csrf_sesion,
 )
@@ -118,10 +119,7 @@ class TestDev2R6SecurityMaintenancePrivacy(unittest.TestCase):
             )
 
     def test_main_no_expone_acciones_destructivas_por_get(self):
-        main = (
-            ROOT
-            / "app/main.py"
-        ).read_text(encoding="utf-8")
+        main = runtime_http_source()
 
         self.assertIn(
             '@app.post(\n    "/dev/mantenimiento/revocar-sesiones"',
@@ -133,10 +131,7 @@ class TestDev2R6SecurityMaintenancePrivacy(unittest.TestCase):
         )
 
     def test_rutas_sensibles_exigen_csrf_y_revalidacion(self):
-        main = (
-            ROOT
-            / "app/main.py"
-        ).read_text(encoding="utf-8")
+        main = runtime_http_source()
 
         self.assertIn(
             "_validar_csrf_developer(",
@@ -157,10 +152,10 @@ class TestDev2R6SecurityMaintenancePrivacy(unittest.TestCase):
 
     def test_formularios_humanos_incluyen_csrf(self):
         for nombre in (
-            "dev_base.html",
-            "dev_files.html",
-            "dev_maintenance.html",
-            "dev_profile.html",
+            "developer/dev_base.html",
+            "developer/dev_files.html",
+            "developer/dev_maintenance.html",
+            "developer/dev_profile.html",
         ):
             texto = (
                 ROOT
@@ -177,7 +172,7 @@ class TestDev2R6SecurityMaintenancePrivacy(unittest.TestCase):
     def test_privacidad_documenta_barreras_de_sesion(self):
         texto = (
             ROOT
-            / "app/templates/dev_privacy.html"
+            / "app/templates/developer/dev_privacy.html"
         ).read_text(encoding="utf-8")
 
         for contrato in (
@@ -198,40 +193,35 @@ class TestDev2R6GetRbacRegression(unittest.TestCase):
     """Contratos RBAC de lectura de las páginas Developer."""
 
     def test_paginas_get_declaran_permiso_rbac(self):
-        codigo = (
-            Path(__file__).resolve().parents[1]
-            / "app/main.py"
-        ).read_text(
-            encoding="utf-8"
-        )
+        codigo = runtime_http_source()
 
         contratos = (
             (
-                'plantilla="dev_diagnostics.html"',
+                'plantilla="developer/dev_diagnostics.html"',
                 "PermisoDeveloper.DIAGNOSTICO_LEER",
             ),
             (
-                'plantilla="dev_events.html"',
+                'plantilla="developer/dev_events.html"',
                 "PermisoDeveloper.EVENTOS_LEER",
             ),
             (
-                'plantilla="dev_files.html"',
+                'plantilla="developer/dev_files.html"',
                 "PermisoDeveloper.ARCHIVOS_LEER",
             ),
             (
-                'plantilla="dev_maintenance.html"',
+                'plantilla="developer/dev_maintenance.html"',
                 "PermisoDeveloper.MANTENIMIENTO_LEER",
             ),
             (
-                'plantilla="dev_privacy.html"',
+                'plantilla="developer/dev_privacy.html"',
                 "PermisoDeveloper.PRIVACIDAD_LEER",
             ),
             (
-                'plantilla="dev_profile.html"',
+                'plantilla="developer/dev_profile.html"',
                 "PermisoDeveloper.PERFIL_LEER",
             ),
             (
-                'plantilla="dev_technical_access.html"',
+                'plantilla="developer/dev_technical_access.html"',
                 "PermisoDeveloper.TOKENS_LEER",
             ),
         )
@@ -255,12 +245,7 @@ class TestDev2R6GetRbacRegression(unittest.TestCase):
             )
 
     def test_helper_get_aplica_deny_default_rbac(self):
-        codigo = (
-            Path(__file__).resolve().parents[1]
-            / "app/main.py"
-        ).read_text(
-            encoding="utf-8"
-        )
+        codigo = runtime_http_source()
 
         inicio = codigo.index(
             "def _render_pagina_developer_autenticada("

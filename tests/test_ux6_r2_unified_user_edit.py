@@ -1,6 +1,7 @@
 """Regresiones UX.6 R2 para edición unificada de usuarios."""
 
 from __future__ import annotations
+from tests._runtime_http_source import runtime_http_source
 
 from pathlib import Path
 import re
@@ -13,12 +14,10 @@ ROOT = Path(__file__).resolve().parents[1]
 class TestUX6R2UnifiedUserEdit(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        cls.main = (
-            ROOT / "app/main.py"
-        ).read_text(encoding="utf-8")
+        cls.main = runtime_http_source()
 
         cls.template = (
-            ROOT / "app/templates/dev_users.html"
+            ROOT / "app/templates/developer/dev_users.html"
         ).read_text(encoding="utf-8")
 
         cls.js = (

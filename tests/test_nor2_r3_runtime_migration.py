@@ -1,4 +1,5 @@
 """Regresiones de NOR.2 R3 — migración técnica de runtime y configuración."""
+from tests._runtime_http_source import runtime_http_source
 
 from importlib import import_module
 from pathlib import Path
@@ -8,7 +9,7 @@ import unittest
 ROOT = Path(__file__).resolve().parents[1]
 
 MOVES = {
-    "app/services/centro_desarrollo.py": "app/services/development_center.py",
+    "app/services/centro_desarrollo.py": "app/portals/developer/development_center.py",
     "app/services/como_se_calcula.py": "app/services/calculation_guide.py",
     "app/services/detalle_anio_actual.py": "app/services/current_year_detail.py",
     "app/services/referencia_mi_retiro_seguro.py": "app/services/mi_retiro_seguro_reference.py",
@@ -18,13 +19,13 @@ MOVES = {
     "app/static/js/procedencia_editable.js": "app/static/js/editable_provenance.js",
     "app/static/js/referencia_mi_retiro_seguro.js": "app/static/js/mi_retiro_seguro_reference.js",
     "app/static/js/tema.js": "app/static/js/theme.js",
-    "app/templates/como_se_calcula.html": "app/templates/calculation_guide.html",
-    "app/templates/comparar.html": "app/templates/comparison.html",
-    "app/templates/dev_centro_desarrollo.html": "app/templates/dev_development_center.html",
-    "app/templates/metodologia.html": "app/templates/methodology.html",
-    "app/templates/partials/detalle_anio_actual.html": "app/templates/partials/current_year_detail.html",
-    "app/templates/partials/importacion_ficha_digital.html": "app/templates/partials/ficha_digital_import.html",
-    "app/templates/partials/referencia_mi_retiro_seguro.html": "app/templates/partials/mi_retiro_seguro_reference.html",
+    "app/templates/como_se_calcula.html": "app/templates/asegurado/calculation_guide.html",
+    "app/templates/comparar.html": "app/templates/asegurado/comparison.html",
+    "app/templates/dev_centro_desarrollo.html": "app/templates/developer/dev_development_center.html",
+    "app/templates/metodologia.html": "app/templates/asegurado/methodology.html",
+    "app/templates/partials/detalle_anio_actual.html": "app/templates/asegurado/partials/current_year_detail.html",
+    "app/templates/partials/importacion_ficha_digital.html": "app/templates/asegurado/partials/ficha_digital_import.html",
+    "app/templates/partials/referencia_mi_retiro_seguro.html": "app/templates/asegurado/partials/mi_retiro_seguro_reference.html",
     "tests/test_dev2_centro_desarrollo.py": "tests/test_dev2_development_center.py",
     "tests/test_ux44_detalle_anio_actual.py": "tests/test_ux44_current_year_detail.py",
     "tests/test_ux44_referencia_pdf.py": "tests/test_ux44_pdf_reference.py",
@@ -50,7 +51,7 @@ class TestNOR2R3RuntimeMigration(unittest.TestCase):
 
     def test_modulos_python_migrados_importan(self):
         for module in (
-            "app.services.development_center",
+            "app.portals.developer.development_center",
             "app.services.calculation_guide",
             "app.services.current_year_detail",
             "app.services.mi_retiro_seguro_reference",
@@ -99,7 +100,7 @@ class TestNOR2R3RuntimeMigration(unittest.TestCase):
         self.assertEqual([], errores)
 
     def test_urls_publicas_en_espanol_no_cambian(self):
-        main = (ROOT / "app/main.py").read_text(encoding="utf-8")
+        main = runtime_http_source()
         for route in (
             "/como-se-calcula",
             "/comparar",

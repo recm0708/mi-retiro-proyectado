@@ -12,9 +12,9 @@ from unittest.mock import patch
 
 from fastapi.testclient import TestClient
 
-from app.core.admin_session import revocar_todas_las_sesiones_admin
+from app.portals.developer.admin_session import revocar_todas_las_sesiones_admin
 from app.core.observability import ruta_log_actual
-from app.core.developer_provisioning import bootstrap_propietario
+from app.portals.developer.developer_provisioning import bootstrap_propietario
 from app.main import app
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -249,28 +249,28 @@ class TestDev2R5PortalAccess(unittest.TestCase):
         self.assertIn("dev.login", operaciones)
 
     def test_shell_dev_no_arrastra_superficie_previsional(self):
-        base = (ROOT / "app/templates/dev_base.html").read_text(encoding="utf-8")
-        login = (ROOT / "app/templates/dev_login.html").read_text(encoding="utf-8")
-        centro = (ROOT / "app/templates/dev_development_center.html").read_text(encoding="utf-8")
+        base = (ROOT / "app/templates/developer/dev_base.html").read_text(encoding="utf-8")
+        login = (ROOT / "app/templates/developer/dev_login.html").read_text(encoding="utf-8")
+        centro = (ROOT / "app/templates/developer/dev_development_center.html").read_text(encoding="utf-8")
 
         self.assertNotIn('partials/data_management.html', base)
         self.assertNotIn('partials/privacy_consent.html', base)
         self.assertNotIn('href="/simulacion"', base)
         self.assertNotIn('href="/comparar"', base)
-        self.assertIn('{% extends "dev_base.html" %}', login)
-        self.assertIn('{% extends "dev_base.html" %}', centro)
+        self.assertIn('{% extends "developer/dev_base.html" %}', login)
+        self.assertIn('{% extends "developer/dev_base.html" %}', centro)
 
     def test_controles_password_son_iconograficos_y_accesibles(self):
         login = (
             ROOT
-            / "app/templates/dev_login.html"
+            / "app/templates/developer/dev_login.html"
         ).read_text(
             encoding="utf-8"
         )
 
         perfil = (
             ROOT
-            / "app/templates/dev_profile.html"
+            / "app/templates/developer/dev_profile.html"
         ).read_text(
             encoding="utf-8"
         )
@@ -342,14 +342,14 @@ class TestDev2R5PortalAccess(unittest.TestCase):
 
         login = (
             ROOT
-            / "app/templates/dev_login.html"
+            / "app/templates/developer/dev_login.html"
         ).read_text(
             encoding="utf-8"
         )
 
         perfil = (
             ROOT
-            / "app/templates/dev_profile.html"
+            / "app/templates/developer/dev_profile.html"
         ).read_text(
             encoding="utf-8"
         )

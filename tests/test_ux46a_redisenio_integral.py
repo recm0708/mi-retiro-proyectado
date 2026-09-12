@@ -5,9 +5,9 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-BASE = ROOT / "app/templates/base.html"
-FOOTER = ROOT / "app/templates/partials/global_footer.html"
-INDEX = ROOT / "app/templates/index.html"
+BASE = ROOT / "app/templates/asegurado/base.html"
+FOOTER = ROOT / "app/templates/shared/partials/global_footer.html"
+INDEX = ROOT / "app/templates/asegurado/index.html"
 DESIGN = ROOT / "app/static/css/design-system.css"
 TEMA = ROOT / "app/static/js/theme.js"
 

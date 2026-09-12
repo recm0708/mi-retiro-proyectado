@@ -228,7 +228,7 @@ class TestUX46fR2AuditoriaPaso4(unittest.TestCase):
         )
 
     def test_09_interfaz_explica_compuesto_y_futuro_conocido(self):
-        plantilla = (ROOT / "app/templates/simulation.html").read_text(encoding="utf-8")
+        plantilla = (ROOT / "app/templates/asegurado/simulation.html").read_text(encoding="utf-8")
         self.assertIn("Se aplica de forma compuesta", plantilla)
         self.assertIn("tasa anual compuesta necesaria", plantilla)
         self.assertIn("se mantendrá constante", plantilla)
@@ -261,7 +261,7 @@ class TestUX46fR2AuditoriaPaso4(unittest.TestCase):
 
 
     def test_12_escenarios_inicia_sin_porcentajes_predeterminados(self):
-        plantilla = (ROOT / "app/templates/simulation.html").read_text(encoding="utf-8")
+        plantilla = (ROOT / "app/templates/asegurado/simulation.html").read_text(encoding="utf-8")
         javascript = (ROOT / "app/static/js/simulation.js").read_text(encoding="utf-8")
 
         self.assertNotIn('value="0, 1, 2, 3"', plantilla)

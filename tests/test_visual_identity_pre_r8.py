@@ -97,14 +97,14 @@ class TestIdentidadVisualPreR8(unittest.TestCase):
         self.assertLess(ruta.stat().st_size, 1024 * 1024)
 
     def test_plantilla_global_declara_favicons_y_apple_touch(self):
-        contenido = (ROOT / "app/templates/base.html").read_text(encoding="utf-8")
+        contenido = (ROOT / "app/templates/asegurado/base.html").read_text(encoding="utf-8")
         self.assertIn("/img/brand/favicon.ico", contenido)
         self.assertIn("/img/brand/favicon-32x32.png", contenido)
         self.assertIn("/img/brand/favicon-16x16.png", contenido)
         self.assertIn("/img/brand/apple-touch-icon.png", contenido)
 
     def test_navbar_usa_logo_oficial_y_no_marcador_mr(self):
-        contenido = (ROOT / "app/templates/base.html").read_text(encoding="utf-8")
+        contenido = (ROOT / "app/templates/asegurado/base.html").read_text(encoding="utf-8")
         self.assertIn("/img/brand/logo-mark-128.png", contenido)
         self.assertIn('class="app-brand-mark-image"', contenido)
         self.assertNotIn(">MR</span>", contenido)

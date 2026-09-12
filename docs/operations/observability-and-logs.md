@@ -167,7 +167,7 @@ mínima, outcome y motivos controlados.
 ## 10. Auditoría persistente de usuarios UX.6
 
 La auditoría de gestión de cuentas de UX.6 **no es Developer Diagnostics**.
-`app/core/developer_user_audit.py` registra en SQLite evidencia append-only de
+`app/portals/developer/developer_user_audit.py` registra en SQLite evidencia append-only de
 acciones administrativas. Conserva metadata mínima de actor/objetivo/rol/acción
 y resumen sanitizado; no almacena contraseñas, credenciales temporales, cookies,
 Bearer, tokens, datos previsionales ni PDF. Triggers impiden `UPDATE` y `DELETE`

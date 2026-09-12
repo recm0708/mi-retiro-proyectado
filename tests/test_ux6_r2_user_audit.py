@@ -7,9 +7,9 @@ import sqlite3
 from tempfile import TemporaryDirectory
 import unittest
 
-from app.core.developer_identity import RolDeveloper
-from app.core.developer_provisioning import bootstrap_propietario
-from app.core.developer_user_admin import (
+from app.portals.developer.developer_identity import RolDeveloper
+from app.portals.developer.developer_provisioning import bootstrap_propietario
+from app.portals.developer.developer_user_admin import (
     actualizar_nombre_usuario_administrado,
     cambiar_estado_usuario_administrado,
     cambiar_rol_usuario_administrado,
@@ -17,7 +17,7 @@ from app.core.developer_user_admin import (
     eliminar_usuario_administrado,
     restablecer_password_temporal_usuario,
 )
-from app.core.developer_user_audit import (
+from app.portals.developer.developer_user_audit import (
     listar_auditoria_usuarios_developer,
 )
 

@@ -6,9 +6,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 CSS = ROOT / "app/static/css/style.css"
 DESIGN = ROOT / "app/static/css/design-system.css"
-SIMULACION = ROOT / "app/templates/simulation.html"
-RETIRO = ROOT / "app/templates/partials/retirement.html"
-METODOLOGIA = ROOT / "app/templates/methodology.html"
+SIMULACION = ROOT / "app/templates/asegurado/simulation.html"
+RETIRO = ROOT / "app/templates/asegurado/partials/retirement.html"
+METODOLOGIA = ROOT / "app/templates/asegurado/methodology.html"
 RETIRO_JS = ROOT / "app/static/js/retirement.js"
 
 
@@ -76,7 +76,7 @@ class TestResponsiveUX3(unittest.TestCase):
         )
 
         base = (
-            ROOT / "app/templates/base.html"
+            ROOT / "app/templates/asegurado/base.html"
         ).read_text(
             encoding="utf-8"
         )

@@ -4,8 +4,8 @@ import unittest
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-SIMULACION = ROOT / "app/templates/simulation.html"
-BASE = ROOT / "app/templates/base.html"
+SIMULACION = ROOT / "app/templates/asegurado/simulation.html"
+BASE = ROOT / "app/templates/asegurado/base.html"
 SIMULACION_JS = ROOT / "app/static/js/simulation.js"
 IMPORTACION_JS = ROOT / "app/static/js/official_data_import.js"
 NAVEGACION_JS = ROOT / "app/static/js/wizard_navigation.js"
@@ -142,7 +142,7 @@ class TestUX46CCuotas(unittest.TestCase):
 
     def test_revision_importada_filtra_secciones_por_paso(self):
         parcial = (
-            ROOT / "app/templates/partials/official_data_import.html"
+            ROOT / "app/templates/asegurado/partials/official_data_import.html"
         ).read_text(encoding="utf-8")
         js = IMPORTACION_JS.read_text(encoding="utf-8")
         simulacion_js = SIMULACION_JS.read_text(encoding="utf-8")
@@ -157,7 +157,7 @@ class TestUX46CCuotas(unittest.TestCase):
 
     def test_vista_previa_nombra_grupos_por_etapa(self):
         parcial = (
-            ROOT / "app/templates/partials/official_data_import.html"
+            ROOT / "app/templates/asegurado/partials/official_data_import.html"
         ).read_text(encoding="utf-8")
 
         self.assertIn("Datos personales", parcial)
@@ -173,7 +173,7 @@ class TestUX46CCuotas(unittest.TestCase):
 
     def test_paso2_revisa_total_y_cuotas_del_anio_actual(self):
         parcial = (
-            ROOT / "app/templates/partials/official_data_import.html"
+            ROOT / "app/templates/asegurado/partials/official_data_import.html"
         ).read_text(encoding="utf-8")
         js = IMPORTACION_JS.read_text(encoding="utf-8")
 

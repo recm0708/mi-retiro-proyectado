@@ -13,6 +13,7 @@ from unittest.mock import patch
 from fastapi.testclient import TestClient
 
 from app import main as main_module
+import app.portals.asegurado.router as asegurado_router_module
 from app.core.observability import contexto_correlacion, ruta_log_actual
 from app.main import app
 from app.services import reference_date
@@ -91,12 +92,12 @@ class TestGov14ObservabilidadIntegracion(unittest.TestCase):
             "cuotas_esperadas_cierre_anio": 12,
             "cuotas_esperadas_por_anio": 12,
         }
-        original = main_module.analizar_cuotas
+        original = asegurado_router_module.analizar_cuotas
 
         with TemporaryDirectory() as temp:
             with self._env(temp, activo=True):
                 with patch.object(
-                    main_module,
+                    asegurado_router_module,
                     "analizar_cuotas",
                     wraps=original,
                 ) as calculo:
@@ -118,7 +119,7 @@ class TestGov14ObservabilidadIntegracion(unittest.TestCase):
         with TemporaryDirectory() as temp:
             with self._env(temp, activo=True):
                 with patch.object(
-                    main_module,
+                    asegurado_router_module,
                     "analizar_cuotas",
                     side_effect=RuntimeError(secreto),
                 ):

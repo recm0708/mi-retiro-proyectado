@@ -8,17 +8,17 @@ import unittest
 ROOT = Path(__file__).resolve().parents[1]
 
 SIMULATION = (
-    ROOT / "app/templates/simulation.html"
+    ROOT / "app/templates/asegurado/simulation.html"
 )
 
 CURRENT_YEAR = (
     ROOT
-    / "app/templates/partials/current_year_detail.html"
+    / "app/templates/asegurado/partials/current_year_detail.html"
 )
 
 SALARY_HISTORY = (
     ROOT
-    / "app/templates/partials/salary_history.html"
+    / "app/templates/asegurado/partials/salary_history.html"
 )
 
 SIMULATION_JS = (
@@ -54,7 +54,7 @@ RETIREMENT_JS = (
 )
 
 RETIREMENT_TEMPLATE = (
-    ROOT / "app/templates/partials/retirement.html"
+    ROOT / "app/templates/asegurado/partials/retirement.html"
 )
 
 

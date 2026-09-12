@@ -25,9 +25,9 @@ class TestUX44DetalleAnioActual(unittest.TestCase):
     def setUpClass(cls):
         cls.cliente = TestClient(app)
         cls.parcial = (
-            ROOT / "app/templates/partials/current_year_detail.html"
+            ROOT / "app/templates/asegurado/partials/current_year_detail.html"
         ).read_text(encoding="utf-8")
-        cls.simulacion = (ROOT / "app/templates/simulation.html").read_text(
+        cls.simulacion = (ROOT / "app/templates/asegurado/simulation.html").read_text(
             encoding="utf-8"
         )
         cls.js = (ROOT / "app/static/js/current_year_detail.js").read_text(
@@ -196,7 +196,7 @@ class TestUX44DetalleAnioActual(unittest.TestCase):
 
     def test_interfaz_ofrece_detalle_manual_y_deja_ficha_en_su_bloque(self):
         ficha = (
-            ROOT / "app/templates/partials/ficha_digital_import.html"
+            ROOT / "app/templates/asegurado/partials/ficha_digital_import.html"
         ).read_text(encoding="utf-8")
         self.assertIn("Abrir Mi Caja Digital", ficha)
         self.assertNotIn("Abrir Mi Caja Digital", self.parcial)

@@ -11,10 +11,10 @@ from unittest.mock import patch
 
 from fastapi.testclient import TestClient
 
-from app.core.admin_session import (
+from app.portals.developer.admin_session import (
     revocar_todas_las_sesiones_admin,
 )
-from app.core.developer_provisioning import (
+from app.portals.developer.developer_provisioning import (
     bootstrap_propietario,
 )
 from app.main import app
@@ -141,7 +141,7 @@ class TestDev2R6MultipageShell(unittest.TestCase):
 
         base = (
             Path(__file__).resolve().parents[1]
-            / "app/templates/dev_base.html"
+            / "app/templates/developer/dev_base.html"
         ).read_text(encoding="utf-8")
 
         for ruta in (
@@ -201,16 +201,16 @@ class TestDev2R6MultipageShell(unittest.TestCase):
 
         base = (
             root
-            / "app/templates/dev_base.html"
+            / "app/templates/developer/dev_base.html"
         ).read_text(encoding="utf-8")
 
         footer = (
             root
-            / "app/templates/partials/global_footer.html"
+            / "app/templates/shared/partials/global_footer.html"
         ).read_text(encoding="utf-8")
 
         self.assertIn(
-            '{% include "partials/global_footer.html" %}',
+            '{% include "shared/partials/global_footer.html" %}',
             base,
         )
 
@@ -224,7 +224,7 @@ class TestDev2R6MultipageShell(unittest.TestCase):
 
         base = (
             Path(__file__).resolve().parents[1]
-            / "app/templates/dev_base.html"
+            / "app/templates/developer/dev_base.html"
         ).read_text(encoding="utf-8")
 
         self.assertNotIn(

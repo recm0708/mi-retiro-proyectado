@@ -35,18 +35,18 @@ class TestUX46bRevision2Privacidad(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.client = TestClient(app)
-        cls.simulacion = (ROOT / "app/templates/simulation.html").read_text(encoding="utf-8")
+        cls.simulacion = (ROOT / "app/templates/asegurado/simulation.html").read_text(encoding="utf-8")
         cls.importacion = (
-            ROOT / "app/templates/partials/official_data_import.html"
+            ROOT / "app/templates/asegurado/partials/official_data_import.html"
         ).read_text(encoding="utf-8")
         cls.privacidad_html = (
-            ROOT / "app/templates/partials/privacy_consent.html"
+            ROOT / "app/templates/asegurado/partials/privacy_consent.html"
         ).read_text(encoding="utf-8")
         cls.privacidad_js = (ROOT / "app/static/js/privacy.js").read_text(encoding="utf-8")
         cls.accesibilidad_js = (ROOT / "app/static/js/accessibility.js").read_text(encoding="utf-8")
         cls.design = (ROOT / "app/static/css/design-system.css").read_text(encoding="utf-8")
-        cls.metodologia = (ROOT / "app/templates/methodology.html").read_text(encoding="utf-8")
-        cls.base = (ROOT / "app/templates/base.html").read_text(encoding="utf-8")
+        cls.metodologia = (ROOT / "app/templates/asegurado/methodology.html").read_text(encoding="utf-8")
+        cls.base = (ROOT / "app/templates/asegurado/base.html").read_text(encoding="utf-8")
 
     def test_campos_obligatorios_tienen_asterisco_y_ayuda_semantica(self):
         self.assertIn("Campo obligatorio", self.simulacion)

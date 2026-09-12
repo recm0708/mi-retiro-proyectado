@@ -23,11 +23,11 @@ class UX46fR1ConsistenciaProcedenciaAdjuntosTests(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls) -> None:
-        cls.simulacion = leer("app/templates/simulation.html")
-        cls.historial = leer("app/templates/partials/salary_history.html")
-        cls.detalle = leer("app/templates/partials/current_year_detail.html")
-        cls.referencia = leer("app/templates/partials/mi_retiro_seguro_reference.html")
-        cls.base = leer("app/templates/base.html")
+        cls.simulacion = leer("app/templates/asegurado/simulation.html")
+        cls.historial = leer("app/templates/asegurado/partials/salary_history.html")
+        cls.detalle = leer("app/templates/asegurado/partials/current_year_detail.html")
+        cls.referencia = leer("app/templates/asegurado/partials/mi_retiro_seguro_reference.html")
+        cls.base = leer("app/templates/asegurado/base.html")
         cls.simulacion_js = leer("app/static/js/simulation.js")
         cls.historial_js = leer("app/static/js/salary_history.js")
         cls.detalle_js = leer("app/static/js/current_year_detail.js")
@@ -280,7 +280,7 @@ class UX46fR1ConsistenciaProcedenciaAdjuntosTests(unittest.TestCase):
                 )
 
         perfil = leer(
-            "app/templates/dev_profile.html"
+            "app/templates/developer/dev_profile.html"
         )
 
         self.assertIn(

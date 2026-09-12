@@ -12,14 +12,14 @@ class TestUX46DGestionDatos(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.simulacion = (ROOT / "app/templates/simulation.html").read_text(encoding="utf-8")
-        cls.base = (ROOT / "app/templates/base.html").read_text(encoding="utf-8")
-        cls.metodologia = (ROOT / "app/templates/methodology.html").read_text(encoding="utf-8")
+        cls.simulacion = (ROOT / "app/templates/asegurado/simulation.html").read_text(encoding="utf-8")
+        cls.base = (ROOT / "app/templates/asegurado/base.html").read_text(encoding="utf-8")
+        cls.metodologia = (ROOT / "app/templates/asegurado/methodology.html").read_text(encoding="utf-8")
         cls.modal = (
-            ROOT / "app/templates/partials/data_management.html"
+            ROOT / "app/templates/asegurado/partials/data_management.html"
         ).read_text(encoding="utf-8")
         cls.terminos = (
-            ROOT / "app/templates/partials/privacy_consent.html"
+            ROOT / "app/templates/asegurado/partials/privacy_consent.html"
         ).read_text(encoding="utf-8")
         cls.gestion = (
             ROOT / "app/static/js/data_management.js"

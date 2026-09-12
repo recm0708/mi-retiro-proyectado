@@ -1,4 +1,5 @@
 """Regresiones de coherencia documental consolidadas en GOV.1.3 R2."""
+from tests._runtime_http_source import runtime_http_source
 
 from pathlib import Path
 import re
@@ -47,7 +48,7 @@ class TestGov13DocumentacionR2(unittest.TestCase):
     def test_arquitectura_documenta_modulos_criticos(self):
         texto = (DOCS / "architecture/system-architecture.md").read_text(encoding="utf-8")
         for esperado in (
-            "app/core/pdf_files.py",
+            "app/portals/asegurado/pdf_files.py",
             "app/core/version.py",
             "app/services/reference_date.py",
             "app/services/ficha_digital.py",
@@ -58,7 +59,7 @@ class TestGov13DocumentacionR2(unittest.TestCase):
                 self.assertIn(esperado, texto)
 
     def test_arquitectura_documenta_todas_las_rutas_fastapi(self):
-        main = (ROOT / "app/main.py").read_text(encoding="utf-8")
+        main = runtime_http_source()
         rutas = {
             ruta
             for _, ruta in re.findall(

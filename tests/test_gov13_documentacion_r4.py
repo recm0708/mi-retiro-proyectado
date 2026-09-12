@@ -105,7 +105,7 @@ class TestGov13DocumentacionR4(unittest.TestCase):
         rutas = (
             "app/models/traceability.py",
             "app/services/traceability.py",
-            "app/core/pdf_files.py",
+            "app/portals/asegurado/pdf_files.py",
             "app/engines/sebd.py",
             "app/engines/mixto.py",
             "app/engines/sucgs.py",

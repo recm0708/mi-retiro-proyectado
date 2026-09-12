@@ -16,12 +16,12 @@ class TestUX46dRevision16FlujoPaso3(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.simulacion = (ROOT / "app/templates/simulation.html").read_text(encoding="utf-8")
+        cls.simulacion = (ROOT / "app/templates/asegurado/simulation.html").read_text(encoding="utf-8")
         cls.detalle = (
-            ROOT / "app/templates/partials/current_year_detail.html"
+            ROOT / "app/templates/asegurado/partials/current_year_detail.html"
         ).read_text(encoding="utf-8")
         cls.ficha = (
-            ROOT / "app/templates/partials/ficha_digital_import.html"
+            ROOT / "app/templates/asegurado/partials/ficha_digital_import.html"
         ).read_text(encoding="utf-8")
         cls.simulacion_js = (
             ROOT / "app/static/js/simulation.js"
@@ -41,7 +41,7 @@ class TestUX46dRevision16FlujoPaso3(unittest.TestCase):
 
         assisted = (
             ROOT
-            / "app/templates/partials/assisted_preparation.html"
+            / "app/templates/asegurado/partials/assisted_preparation.html"
         ).read_text(
             encoding="utf-8"
         )
@@ -90,7 +90,7 @@ class TestUX46dRevision16FlujoPaso3(unittest.TestCase):
     def test_ficha_digital_es_componente_interno_y_no_nuevo_subpaso(self):
         assisted = (
             ROOT
-            / "app/templates/partials/assisted_preparation.html"
+            / "app/templates/asegurado/partials/assisted_preparation.html"
         ).read_text(
             encoding="utf-8"
         )

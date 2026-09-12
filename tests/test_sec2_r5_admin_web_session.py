@@ -11,10 +11,10 @@ from unittest.mock import patch
 
 from fastapi.testclient import TestClient
 
-from app.core.admin_session import (
+from app.portals.developer.admin_session import (
     revocar_todas_las_sesiones_admin,
 )
-from app.core.developer_provisioning import (
+from app.portals.developer.developer_provisioning import (
     bootstrap_propietario,
 )
 from app.main import app
