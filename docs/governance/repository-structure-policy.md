@@ -4,7 +4,7 @@
 
 **Issue propietario:** #128
 
-**Política machine-readable:** `data/repository-structure-policy.json`
+**Política machine-readable:** `data/governance/repository-structure-policy.json`
 
 ## Objetivo
 

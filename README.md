@@ -15,7 +15,7 @@
 </p>
 
 <p align="center">
-  <img alt="Versión 0.1.21.01-beta" src="https://img.shields.io/badge/versi%C3%B3n-0.1.21.01--beta-2563eb">
+  <img alt="Versión 0.1.22.01-beta" src="https://img.shields.io/badge/versi%C3%B3n-0.1.22.01--beta-2563eb">
   <img alt="Python 3.13 y 3.14" src="https://img.shields.io/badge/Python-3.13%20%7C%203.14-3776AB?logo=python&logoColor=white">
   <img alt="Licencia propietaria" src="https://img.shields.io/badge/licencia-propietaria-6B7280">
 </p>
@@ -26,29 +26,18 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 
 ## Estado del proyecto
 
-- **Versión canónica vigente:** `0.1.21.01-beta`, obtenida exclusivamente
-  desde [`VERSION`](VERSION). Materializa UX.6 R8 como G121/E01.
-- **Estado revision-aware integrado/aceptado:** UX.6 R1–R8 / G121/E01.
-- **Integración/promoción:** PR #124 / merge `5dcd2503e83ba69df83fa906d331df594653c0a0`.
-- **Candidato vigente reservado/no aceptado:** NOR.3 R1–R2 / G122/E01
-  (`0.1.22.01-beta`). La reserva no modifica `VERSION` ni consume G122.
-- **Última publicación revision-aware con tag:** `v0.1.20.01-beta`
-  (G120/E01), publicada sobre
-  `76586b5a7c77a5cffa97128a29ea77bd36cb988b`, con objeto de tag firmado
-  `7dbcca8071e2726b6aa4f17704bf41b92f6cd5bd` y GitHub Release prerelease
-  ID `383133233`.
-- **UX.5:** R1–R6 consolidados/publicados como G120/E01.
-- **UX.6:** R1–R8 consolidados como G121/E01 con revisión funcional R8;
-  la publicación final exige merge, revalidación, tag firmado y Release.
-- **NOR.3:** R1–R2 materializados y validados localmente: inventario,
-  ownership/consumidores, gobierno y policy estructural machine-readable;
-  todavía no autoriza movimientos físicos del árbol.
-- **PERSIST.1:** alcance preservado y planificado, sin Global preasignado;
-  no iniciado hasta cerrar NOR.3 y ejecutar la replanificación #155.
-- **UX.7 / UX.8:** programa UX granular planificado y no iniciado; su
-  secuencia posterior se consolida después de NOR.3.
-- **DEV.2:** R5/R6 permanecen preservados en G118/E04 y G119/E05.
-- **SEC.2:** R1–R6 cerrados; R7 continúa planificado para hardening posterior.
+- **Versión canónica vigente:** `0.1.22.01-beta`, obtenida exclusivamente
+  desde [`VERSION`](VERSION). Materializa NOR.3 R8 como G122/E01.
+- **Estado revision-aware de promoción:** NOR.3 R1–R8 / G122/E01.
+- **Integración/promoción:** PR #162; la aceptación definitiva exige merge
+  protegido y revalidación de `main`.
+- **Siguiente candidato:** no asignado. G123 es únicamente el siguiente Global
+  disponible; #154/#155 y la reconciliación post-NOR.3 determinan el próximo
+  bloque real sin preasignar PERSIST.1.
+- **NOR.3:** R1–R8 cerrados estructuralmente y protegidos por regresiones.
+- **PERSIST.1:** preservado y planificado, sin Global preasignado; no iniciado.
+- **SEC.2:** R1–R6 cerrados; su hardening vigente permanece preservado.
+- **Última publicación revision-aware con tag:** `v0.1.20.01-beta` (G120/E01), publicada sobre `76586b5a7c77a5cffa97128a29ea77bd36cb988b`, con objeto de tag firmado `7dbcca8071e2726b6aa4f17704bf41b92f6cd5bd` y GitHub Release prerelease ID `383133233`.
 - **Etapa:** desarrollo beta; repositorio público y ejecución orientada
   actualmente a entorno local.
 - **Primera versión oficial objetivo:** `1.0.0.0` con `Build 000001`.
@@ -161,9 +150,9 @@ Documentos principales:
 - **[Auditoría de versionado pre-1.0](docs/archive/governance/pre-1-0-versioning-audit.md)** — criterio contable y reconciliación VER.2;
 - **[VER.2 — Matriz de decisión de revisiones aceptadas](docs/archive/governance/ver2-revision-decision-matrix.md)** — decisiones de inclusión/exclusión del contador;
 - **[Ledger de revisiones aceptadas pre-1.0](docs/governance/pre-1-0-revision-ledger.md)** — secuencia reconciliada G001–G120 y próximo candidato G121/E01 para UX.6 R1;
-- [`data/pre-1-0-revision-ledger.json`](data/pre-1-0-revision-ledger.json) — ledger machine-readable;
+- [`data/governance/pre-1-0-revision-ledger.json`](data/governance/pre-1-0-revision-ledger.json) — ledger machine-readable;
 - **[Identificadores de bloques de trabajo](docs/standards/work-block-identifiers.md)** — política canónica de identificadores de bloques;
-- [`data/work-block-registry.json`](data/work-block-registry.json) — registro machine-readable de identificadores históricos, cerrados y planificados;
+- [`data/governance/work-block-registry.json`](data/governance/work-block-registry.json) — registro machine-readable de identificadores históricos, cerrados y planificados;
 - **[Licencia y estrategia de distribución](docs/governance/licensing-and-distribution.md)** — decisión de licencia y estrategia de distribución;
 - **[Avisos de terceros](THIRD_PARTY_NOTICES.md)** — avisos y obligaciones de terceros;
 - **[Roadmap](docs/governance/roadmap.md)** — estado actual y próximos hitos;
@@ -203,7 +192,7 @@ Consultar:
 - **[Auditoría de versionado pre-1.0](docs/archive/governance/pre-1-0-versioning-audit.md)** — criterio de reconciliación;
 - **[VER.2 — Matriz de decisión de revisiones aceptadas](docs/archive/governance/ver2-revision-decision-matrix.md)** — matriz de decisiones contables;
 - **[Ledger de revisiones aceptadas pre-1.0](docs/governance/pre-1-0-revision-ledger.md)** — contador global pre-1.0;
-- [`data/pre-1-0-revision-ledger.json`](data/pre-1-0-revision-ledger.json) — representación machine-readable;
+- [`data/governance/pre-1-0-revision-ledger.json`](data/governance/pre-1-0-revision-ledger.json) — representación machine-readable;
 - **[Registro histórico de cambios](docs/archive/governance/historical-change-registry.md)** — mapa cronológico para auditoría.
 
 Git continúa siendo la evidencia primaria de autores, fechas, hashes y contenido histórico.
@@ -258,6 +247,8 @@ mi-retiro-proyectado/
 │   │   └── source/
 │   └── social/
 ├── data/
+│   ├── audits/
+│   └── governance/
 ├── docs/
 │   ├── architecture/
 │   ├── archive/

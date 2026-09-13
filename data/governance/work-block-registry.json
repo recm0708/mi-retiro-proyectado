@@ -9,15 +9,17 @@
     "tracked_files": 459
   },
   "current_candidate": {
-    "global_revision": 122,
-    "revision_aware": "0.1.22.01-beta",
-    "block": "NOR.3",
-    "revision": "R1",
-    "revision_scope": "R1-R2",
-    "state": "reserved_not_accepted",
+    "global_revision": null,
+    "revision_aware": null,
+    "block": null,
+    "revision": null,
+    "revision_scope": null,
+    "state": "unassigned_pending_replanning",
     "next_functional_block_if_accepted": null,
     "next_functional_global_if_accepted": null,
-    "edition": 1
+    "edition": null,
+    "planning_issue": 155,
+    "next_global_available": 123
   },
   "families": [
     {
@@ -511,12 +513,14 @@
       "identifier": "NOR.3",
       "family": "NOR",
       "kind": "block",
-      "status": "candidate_r1",
-      "meaning": "Normalización estructural del repositorio y separación explícita App Asegurado / Portal Developer / shared.",
-      "evidence": "NOR.3 R1–R2 materializado y validado localmente mediante #126/#128; candidato G122/E01 (0.1.22.01-beta) reservado/no aceptado.",
-      "global_refs": [],
+      "status": "closed",
+      "meaning": "Normalización estructural integral del repositorio cerrada en R8: ownership App Asegurado / Portal Developer / shared, templates/assets, taxonomía de pruebas, data/scripts y guardas estructurales.",
+      "evidence": "G122/E01; PR #162; auditorías NOR.3 R1–R8; Quality Gate R7/R8 FULL.",
+      "global_refs": [
+        "G122"
+      ],
       "reusable_for_different_scope": false,
-      "active_scope": "R1-R2"
+      "active_scope": "R1-R8"
     },
     {
       "identifier": "SEC.2",
@@ -719,5 +723,13 @@
     "new_identifier_requires_history_and_registry_audit": true,
     "compound_identifiers_require_explicit_registration": true,
     "segment_meaning_is_family_specific": true
+  },
+  "post_nor3_state": {
+    "nor3_global": "G122/E01",
+    "nor3_version": "0.1.22.01-beta",
+    "issues_reconciliation_required": true,
+    "documentation_audit_issue": 154,
+    "master_replanning_issue": 155,
+    "next_candidate_assigned": false
   }
 }

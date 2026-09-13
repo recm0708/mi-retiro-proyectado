@@ -66,7 +66,7 @@ class TestRelGovR2LivePublicationState(unittest.TestCase):
         )
         self.assertIn("v0.1.16.05-beta", releases)
 
-    def test_security_preserva_g119_g120_y_declara_g121_vigente(self):
+    def test_security_preserva_historia_y_declara_g122_vigente(self):
         text = (ROOT / "SECURITY.md").read_text(encoding="utf-8")
         self.assertIn(
             "| `0.1.18.04-beta` | Beta previa G118/E04 publicada",
@@ -81,7 +81,11 @@ class TestRelGovR2LivePublicationState(unittest.TestCase):
             text,
         )
         self.assertIn(
-            "| `0.1.21.01-beta` | Beta vigente G121/E01 aceptada",
+            "| `0.1.21.01-beta` | Beta previa G121/E01 integrada",
+            text,
+        )
+        self.assertIn(
+            "| `0.1.22.01-beta` | Beta vigente G122/E01 materializada",
             text,
         )
 
@@ -90,7 +94,7 @@ class TestRelGovR2LivePublicationState(unittest.TestCase):
             encoding="utf-8"
         )
         for fragment in (
-            "data/release-publication-manifest.json",
+            "data/governance/release-publication-manifest.json",
             "scripts\\release_publication.py --check-manifest",
             "Publicar GitHub Release",
             "falla cerrado",
@@ -104,7 +108,7 @@ class TestRelGovR2LivePublicationState(unittest.TestCase):
         self.assertIn("release_publication.py", text)
         self.assertIn("--check-manifest", text)
 
-    def test_g120_preservado_g121_aceptado_y_g122_reservado(self):
+    def test_g120_g121_preservados_y_g122_materializado(self):
         docs = (
             (ROOT / "README.md").read_text(encoding="utf-8")
             + (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")

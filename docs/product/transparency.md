@@ -1,7 +1,7 @@
 # Transparencia del producto
 
 **Estado:** Vigente
-**Versión de aplicación revisada:** `0.1.21.01-beta`
+**Versión de aplicación revisada:** `0.1.22.01-beta`
 **Versión base histórica:** `0.0.25-beta`
 **Versión base histórica preservada:** `0.0.23-beta`
 **Base documental preservada:** GOV.1.3 R4 — 2026-08-17
@@ -11,7 +11,7 @@
 <!-- DOC1-R1-REVISION-MANUAL:START -->
 ## Nota de lectura vigente
 
-- `VERSION` está sincronizado en `0.1.21.01-beta` (G121/E01).
+- `VERSION` está sincronizado en `0.1.22.01-beta` (G121/E01).
 - G120/E01 permanece publicado mediante `v0.1.20.01-beta`.
 - UX.6 R1–R8 queda consolidado con revisión funcional R8 dentro de PR #124.
 - UX.6 no altera reglas previsionales ni convierte Developer Diagnostics en telemetría de producto.

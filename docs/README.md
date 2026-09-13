@@ -1,10 +1,24 @@
 # Índice de documentación
 
 **Estado:** vigente
-**Versión de aplicación:** `0.1.21.01-beta` — G121/E01 materializado para UX.6 R8 en PR #124; G120/E01 permanece publicado; NOR.3 R1–R2 es el candidato G122/E01 reservado/no aceptado
+**Versión de aplicación:** `0.1.22.01-beta` — G121/E01 materializado para UX.6 R8 en PR #124; G120/E01 permanece publicado; NOR.3 R1–R2 es el candidato G122/E01 reservado/no aceptado
 **Último tag formal legacy:** `v0.0.26-beta`
 **Última actualización transversal:** NOR.3 R1–R2 — inventario, gobierno y policy estructural — 2026-09-11
 **Cierres históricos preservados:** UX.4.6i / PR #34 — 841 pruebas; UX.4.6e R9 — `v0.0.25-beta`
+
+
+<!-- NOR3-G122-PROMOTION:START -->
+## Estado post-NOR.3 / promoción G122-E01
+
+- `VERSION` materializa `0.1.22.01-beta` para NOR.3 R8 / G122-E01.
+- NOR.3 R1–R8 queda cerrado estructuralmente en PR #162.
+- G123 es el siguiente Global disponible, pero **no tiene candidato ni bloque
+  preasignado**.
+- PERSIST.1 permanece planificado y no iniciado, sin Global preasignado.
+- La reconciliación integral de Issues, #154 y la replanificación #155
+  determinan el próximo candidato real.
+- El tag/release de G122 solo procede después de merge y revalidación de `main`.
+<!-- NOR3-G122-PROMOTION:END -->
 
 Este archivo es el punto de entrada para la documentación técnica, funcional, normativa, de privacidad, validación y auditoría de Mi Retiro Proyectado.
 
@@ -97,7 +111,7 @@ Evidencia:
 - **[Ledger de revisiones aceptadas pre-1.0](governance/pre-1-0-revision-ledger.md)** — ledger Markdown reconciliado G001–G120 y siguiente candidato reservado G121/E01 para UX.6 R1.
 - **[Auditoría de reconciliación revision-aware posterior a G070](audits/governance/post-g070-revision-reconciliation.md)** — auditoría de reconstrucción G071–G108.
 - [`pre-1-0-revision-ledger-g070.json`](archive/governance/pre-1-0-revision-ledger-g070.json) — snapshot histórico exacto G070.
-- [`../data/pre-1-0-revision-ledger.json`](../data/pre-1-0-revision-ledger.json) — ledger machine-readable canónico de la reconstrucción.
+- [`../data/governance/pre-1-0-revision-ledger.json`](../data/governance/pre-1-0-revision-ledger.json) — ledger machine-readable canónico de la reconstrucción.
 - [`../app/core/version_ledger.py`](../app/core/version_ledger.py) — validador de continuidad, unicidad y codificación del ledger estructurado.
 - **[Registro de versiones y estados del proyecto](../RELEASES.md)** — versiones, tags y reconstrucción histórica.
 - **[Changelog](../CHANGELOG.md)** — cambios notables por versión.
@@ -234,7 +248,7 @@ Los archivos históricos documentan lo que se pensó, probó o decidió en un mo
 - **[Política de versionado](../VERSIONING.md)** — reglas de incremento y tags.
 - **[Auditoría de versionado pre-1.0](archive/governance/pre-1-0-versioning-audit.md)** — reconciliación VER.2.
 - **[Ledger de revisiones aceptadas pre-1.0](governance/pre-1-0-revision-ledger.md)** — contador global.
-- [`../data/pre-1-0-revision-ledger.json`](../data/pre-1-0-revision-ledger.json) — representación estructurada del contador.
+- [`../data/governance/pre-1-0-revision-ledger.json`](../data/governance/pre-1-0-revision-ledger.json) — representación estructurada del contador.
 - **[Plan maestro hacia Mi Retiro Proyectado 1.0](governance/master-plan-to-1-0.md)** — gates hasta la primera versión oficial.
 
 ## Clasificación documental
@@ -320,7 +334,7 @@ La metadata de versión de revisión de un documento de dominio puede conservar 
 
 NOR.3 R2 formaliza las guardas permanentes del árbol en
 [`governance/repository-structure-policy.md`](governance/repository-structure-policy.md)
-y en `data/repository-structure-policy.json`.
+y en `data/governance/repository-structure-policy.json`.
 
 La política es consumida por `scripts/audit_repository_integrity.py` y, por
 extensión, por el Quality Gate completo.

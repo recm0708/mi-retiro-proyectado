@@ -10,7 +10,7 @@ class TestPLAN2R1MasterPendingMatrix(unittest.TestCase):
         ledger=cargar_ledger(); entry=next(e for e in ledger["entries"] if e["global_revision"]==114)
         self.assertEqual("PLAN.2",entry["block"]); self.assertEqual(1,entry["ordinal"]); self.assertEqual("0.1.14.01-beta",entry["revision_aware"]); self.assertIn("PR #94",entry["evidence"])
     def test_registro_preserva_plan2_y_ux5(self):
-        data=json.loads((ROOT/"data/work-block-registry.json").read_text(encoding="utf-8")); ids={x["identifier"]:x for x in data["identifiers"]}
+        data=json.loads((ROOT/"data/governance/work-block-registry.json").read_text(encoding="utf-8")); ids={x["identifier"]:x for x in data["identifiers"]}
         self.assertEqual("closed",ids["PLAN.2"]["status"]); self.assertIn("G114",ids["PLAN.2"]["global_refs"]); self.assertIn("UX.5",ids)
     def test_matriz_contiene_frentes_obligatorios(self):
         matrix=(ROOT/"docs/governance/pre-1-0-pending-matrix.md").read_text(encoding="utf-8")

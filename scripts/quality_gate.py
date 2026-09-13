@@ -483,12 +483,14 @@ def collect_metadata() -> dict:
     ledger = read_json(
         ROOT
         / "data"
+        / "governance"
         / "pre-1-0-revision-ledger.json"
     )
 
     manifest = read_json(
         ROOT
         / "data"
+        / "governance"
         / "release-publication-manifest.json"
     )
 

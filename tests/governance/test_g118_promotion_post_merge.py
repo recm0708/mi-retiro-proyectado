@@ -42,7 +42,7 @@ class TestG118PromotionPostMerge(unittest.TestCase):
 
     def test_registro_dev2_preserva_g118_y_g119(self):
         data = json.loads(
-            (ROOT / "data/work-block-registry.json").read_text(
+            (ROOT / "data/governance/work-block-registry.json").read_text(
                 encoding="utf-8"
             )
         )

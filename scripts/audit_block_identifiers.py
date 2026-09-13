@@ -10,7 +10,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-REGISTRY = ROOT / "data" / "work-block-registry.json"
+REGISTRY = ROOT / "data" / "governance" / "work-block-registry.json"
 
 def tracked_files() -> list[str]:
     proc = subprocess.run(

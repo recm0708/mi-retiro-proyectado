@@ -38,7 +38,7 @@ class TestPostSec2IntegralAudit(unittest.TestCase):
 
     def test_ledger_vivo_esta_reconciliado_hasta_g108(self):
         data = json.loads(
-            (ROOT / "data/pre-1-0-revision-ledger.json").read_text(encoding="utf-8")
+            (ROOT / "data/governance/pre-1-0-revision-ledger.json").read_text(encoding="utf-8")
         )
         accepted = data["accepted_count"]
         self.assertGreaterEqual(accepted, 109)

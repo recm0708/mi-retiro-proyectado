@@ -1,9 +1,23 @@
 # Política de seguridad
 
+
+<!-- NOR3-G122-PROMOTION:START -->
+## Estado post-NOR.3 / promoción G122-E01
+
+- `VERSION` materializa `0.1.22.01-beta` para NOR.3 R8 / G122-E01.
+- NOR.3 R1–R8 queda cerrado estructuralmente en PR #162.
+- G123 es el siguiente Global disponible, pero **no tiene candidato ni bloque
+  preasignado**.
+- PERSIST.1 permanece planificado y no iniciado, sin Global preasignado.
+- La reconciliación integral de Issues, #154 y la replanificación #155
+  determinan el próximo candidato real.
+- El tag/release de G122 solo procede después de merge y revalidación de `main`.
+<!-- NOR3-G122-PROMOTION:END -->
+
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado de seguridad post-MANT.1
 
-La versión canónica vigente es `0.1.21.01-beta`.
+La versión canónica vigente es `0.1.22.01-beta`.
 
 - UX.6 R1–R8 queda consolidado como G121/E01 con revisión funcional R8.
 - G120/E01 permanece publicado mediante `v0.1.20.01-beta`.
@@ -20,7 +34,8 @@ Mi Retiro Proyectado se encuentra en **desarrollo beta**. Los estados histórico
 
 | Línea | Soporte de seguridad |
 | --- | --- |
-| `0.1.21.01-beta` | Beta vigente G121/E01 aceptada e integrada para UX.6 R8; publicación pendiente de revalidación post-merge, tag firmado y GitHub Release prerelease |
+| `0.1.22.01-beta` | Beta vigente G122/E01 materializada para NOR.3 R8; aceptación definitiva pendiente de merge protegido, revalidación de `main`, tag firmado y GitHub Release prerelease |
+| `0.1.21.01-beta` | Beta previa G121/E01 integrada para UX.6 R8; se conserva como estado material anterior a NOR.3 |
 | `0.1.20.01-beta` | Beta previa G120/E01 publicada mediante tag firmado `v0.1.20.01-beta` y GitHub Release prerelease |
 | `0.1.19.05-beta` | Beta previa G119/E05 publicada para DEV.2 R6 mediante tag firmado `v0.1.19.05-beta`, workflow de verificación en `success` y GitHub Release prerelease |
 | `0.1.18.04-beta` | Beta previa G118/E04 publicada para DEV.2 R5 mediante tag firmado `v0.1.18.04-beta` y GitHub Release prerelease |
@@ -96,7 +111,7 @@ Esta función está habilitada y complementa el canal privado alternativo indica
 - `docs/archive/governance/pre-1-0-versioning-audit.md`
 - `docs/archive/governance/ver2-revision-decision-matrix.md`
 - `docs/governance/pre-1-0-revision-ledger.md`
-- `data/pre-1-0-revision-ledger.json`
+- `data/governance/pre-1-0-revision-ledger.json`
 
 <!-- ANCLAS_HISTORICAS_VER2_SECURITY_CONSOLIDADAS -->
 

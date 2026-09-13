@@ -10,7 +10,7 @@ class TestG114PromotionPostMerge(unittest.TestCase):
         ledger=cargar_ledger(); entry=next(x for x in ledger["entries"] if x["global_revision"]==114)
         self.assertEqual("PLAN.2",entry["block"]); self.assertEqual(1,entry["ordinal"]); self.assertEqual("0.1.14.01-beta",entry["revision_aware"]); self.assertIn("PR #94",entry["evidence"]); self.assertIn("7ded70c",entry["evidence"])
     def test_registro_preserva_plan2_cerrado(self):
-        data=json.loads((ROOT/"data/work-block-registry.json").read_text(encoding="utf-8")); ids={x["identifier"]:x for x in data["identifiers"]}
+        data=json.loads((ROOT/"data/governance/work-block-registry.json").read_text(encoding="utf-8")); ids={x["identifier"]:x for x in data["identifiers"]}
         self.assertEqual("closed",ids["PLAN.2"]["status"]); self.assertIn("G114",ids["PLAN.2"]["global_refs"])
     def test_documentacion_preserva_g114_plan2(self):
         ledger = cargar_ledger()

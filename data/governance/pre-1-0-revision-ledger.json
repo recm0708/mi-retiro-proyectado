@@ -2,9 +2,9 @@
   "schema_version": 1,
   "project": "Mi Retiro Proyectado",
   "base_commit": "7037addd44253e528c77460b678d2b3ccd540dd5",
-  "accepted_count": 121,
-  "next_global_if_ver2_accepted": 122,
-  "next_candidate": "0.1.22.01-beta",
+  "accepted_count": 122,
+  "next_global_if_ver2_accepted": 123,
+  "next_candidate": null,
   "historical_tags_immutable": {
     "from": "v0.0.1-beta",
     "to": "v0.0.26-beta"
@@ -1102,6 +1102,16 @@
       "state": "R8 — cierre integral UX.6 R1–R8: App + Developer, accesibilidad, responsive, seguridad, importación segura y documentación",
       "anchor": "0.1.21.01-beta",
       "evidence": "PR #124; checkpoints firmados 2b783bc, 9c96cc1, f9cf50e, 0bbcece y f2b7ed0; Repository Quality Gate R8 10 PASS / 0 FAIL; 1508 unittest OK; Markdown 167/167; 27 JavaScript; 16 familias / 47 identificadores"
+    },
+    {
+      "global_revision": 122,
+      "block": "NOR.3",
+      "ordinal": 1,
+      "functional_revision": "R8",
+      "revision_aware": "0.1.22.01-beta",
+      "state": "R8 — cierre estructural integral NOR.3 R1–R8: ownership, portales, templates/assets, taxonomía de pruebas, data/scripts, policy y documentación estructural",
+      "anchor": "0.1.22.01-beta",
+      "evidence": "PR #162; R5-R6 firmado b54b2d27e78d08e62d54873b749af1f99a6ce120; R7 FULL 11 PASS / 0 FAIL, 1574 unittest, 1614 pytest + 7708 subtests; R8 FULL 11 PASS / 0 FAIL, 1579 unittest, 1619 pytest + 7708 subtests; 171 Markdown; 27 JavaScript"
     }
   ],
   "excluded": [
@@ -1178,8 +1188,14 @@
       "reason": "La decisión VER.2 R3 establece expresamente que R1, R2 y R3 son correcciones internas del mismo candidato G071/E01; no consumen G072 ni incrementan EE. R4 materializa la aceptación única del candidato."
     }
   ],
-  "reconciled_through_commit": "f2b7ed0e0d52d64e2687c37748a00f66bb6e759b",
-  "reconciliation_date": "2026-09-07",
-  "next_global": 122,
-  "next_candidate_block": "NOR.3"
+  "reconciled_through_commit": "b54b2d27e78d08e62d54873b749af1f99a6ce120",
+  "reconciliation_date": "2026-09-13",
+  "next_global": 123,
+  "next_candidate_block": null,
+  "next_candidate_assignment": {
+    "state": "unassigned_pending_post_nor3_replanning",
+    "next_global_available": 123,
+    "issue": 155,
+    "reason": "Después de NOR.3 se reconcilian Issues y trabajo transversal antes de asignar el siguiente bloque revision-aware."
+  }
 }

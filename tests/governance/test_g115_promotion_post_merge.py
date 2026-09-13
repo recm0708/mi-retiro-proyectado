@@ -27,7 +27,7 @@ class TestG115PromotionPostMerge(unittest.TestCase):
 
     def test_registro_preserva_g115_en_doc1(self):
         data = json.loads(
-            (ROOT / "data/work-block-registry.json").read_text(encoding="utf-8")
+            (ROOT / "data/governance/work-block-registry.json").read_text(encoding="utf-8")
         )
         ids = {item["identifier"]: item for item in data["identifiers"]}
         self.assertIn("G115", ids["DOC.1"]["global_refs"])

@@ -29,8 +29,8 @@ TRUSTED_BOTS = {
 }
 
 REVISION_METADATA_FILES = {
-    "data/pre-1-0-revision-ledger.json",
-    "data/release-publication-manifest.json",
+    "data/governance/pre-1-0-revision-ledger.json",
+    "data/governance/release-publication-manifest.json",
 }
 
 REVISION_STATE_FILES = {

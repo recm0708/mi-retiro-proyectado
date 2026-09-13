@@ -74,7 +74,7 @@ class TestAutomationCoreQualityGate(unittest.TestCase):
             metadata["version"],
         )
         ledger = json.loads(
-            (ROOT / "data" / "pre-1-0-revision-ledger.json").read_text(
+            (ROOT / "data" / "governance" / "pre-1-0-revision-ledger.json").read_text(
                 encoding="utf-8"
             )
         )
@@ -287,8 +287,8 @@ class TestAutomationCoreQualityGate(unittest.TestCase):
     def test_pr_policy_exige_estado_revision_aware_coordinado(self):
         expected = {
             "VERSION",
-            "data/pre-1-0-revision-ledger.json",
-            "data/release-publication-manifest.json",
+            "data/governance/pre-1-0-revision-ledger.json",
+            "data/governance/release-publication-manifest.json",
         }
         self.assertEqual(expected, set(audit_pr_policy.REVISION_STATE_FILES))
 
@@ -335,7 +335,7 @@ class TestAutomationCoreQualityGate(unittest.TestCase):
     def test_quality_gate_metadata_usa_next_global_canonico(self):
         metadata = quality_gate.collect_metadata()
         ledger = quality_gate.read_json(
-            ROOT / "data" / "pre-1-0-revision-ledger.json"
+            ROOT / "data" / "governance" / "pre-1-0-revision-ledger.json"
         )
         self.assertEqual(
             ledger["next_global_if_ver2_accepted"],

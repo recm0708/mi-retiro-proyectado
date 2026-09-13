@@ -1,5 +1,20 @@
 # Registro de versiones y estados del proyecto
 
+
+<!-- NOR3-R8-PROMOTION:START -->
+## Promoción G122/E01 — NOR.3 R8
+
+- Estado materializado en este snapshot de promoción: G122/E01
+  (`0.1.22.01-beta`) para NOR.3 R8.
+- NOR.3 R1–R8 se consolidan con ordinal E01 y revisión funcional R8.
+- PR de integración/promoción: #162.
+- G123 queda disponible pero sin candidato/bloque asignado.
+- PERSIST.1 permanece planificado y no iniciado, sin Global preasignado.
+- La aceptación definitiva requiere merge protegido y revalidación de `main`.
+- El tag `v0.1.22.01-beta` no se crea desde este helper.
+
+<!-- NOR3-R8-PROMOTION:END -->
+
 **Fecha de reconstrucción histórica:** 2026-08-17
 **Fuente:** historial Git de `recm0708/mi-retiro-proyectado`
 **Revisión de planificación hacia 1.0:** 2026-08-20
@@ -236,7 +251,7 @@ Git conserva la evidencia primaria: hashes, fechas, autores, mensajes y contenid
 
 El commit raíz real es `a0a9e09` (`tipo: descripción del cambio`). Su mensaje es una anomalía histórica previa a la convención posterior y se conserva sin modificar.
 
-VER.2 añade una segunda capa de auditoría: `docs/governance/pre-1-0-revision-ledger.md` y `data/pre-1-0-revision-ledger.json` reconstruyen los **estados aceptados** como G001–G070 sobre la base `7037addd44253e528c77460b678d2b3ccd540dd5`. Esos identificadores revision-aware no sustituyen versiones/tags históricos ni autorizan tags retroactivos. `0.0.71.01-beta` fue publicada originalmente como VER.2 G071/E01. La reconciliación posterior determinó que su estado corresponde cronológicamente a G087/E01; el tag y su commit objetivo permanecen inmutables.
+VER.2 añade una segunda capa de auditoría: `docs/governance/pre-1-0-revision-ledger.md` y `data/governance/pre-1-0-revision-ledger.json` reconstruyen los **estados aceptados** como G001–G070 sobre la base `7037addd44253e528c77460b678d2b3ccd540dd5`. Esos identificadores revision-aware no sustituyen versiones/tags históricos ni autorizan tags retroactivos. `0.0.71.01-beta` fue publicada originalmente como VER.2 G071/E01. La reconciliación posterior determinó que su estado corresponde cronológicamente a G087/E01; el tag y su commit objetivo permanecen inmutables.
 
 ## 2. Estados retrospectivos
 
@@ -421,7 +436,7 @@ Mientras el PR de VER.2 no supere el gate completo y se integre:
 
 Si VER.2 se integra satisfactoriamente, `0.0.71.01-beta` pasa a ser el primer estado nuevo gobernado por la familia revision-aware. La creación de su tag, si corresponde al cierre, se realizará únicamente después de merge y revalidación.
 
-La distribución del contador aceptado hasta G070 se conserva de forma auditable en `docs/archive/governance/ver2-revision-decision-matrix.md`, `docs/governance/pre-1-0-revision-ledger.md` y `data/pre-1-0-revision-ledger.json`; los intentos fallidos, refinamientos sin aceptación independiente y checkpoints absorbidos se preservan como evidencia sin consumir un `G` adicional.
+La distribución del contador aceptado hasta G070 se conserva de forma auditable en `docs/archive/governance/ver2-revision-decision-matrix.md`, `docs/governance/pre-1-0-revision-ledger.md` y `data/governance/pre-1-0-revision-ledger.json`; los intentos fallidos, refinamientos sin aceptación independiente y checkpoints absorbidos se preservan como evidencia sin consumir un `G` adicional.
 
 ## 6. Migración criptográfica de tags — materializada
 

@@ -113,6 +113,7 @@ class TestNOR2R8FinalAudit(unittest.TestCase):
         new = (
             ROOT
             / "data"
+            / "governance"
             / "pre-1-0-revision-ledger.json"
         )
 
@@ -172,7 +173,7 @@ class TestNOR2R8FinalAudit(unittest.TestCase):
             ROOT / "docs/product/traceability-matrix.md"
         ).read_text(encoding="utf-8")
         ledger = json.loads(
-            (ROOT / "data/pre-1-0-revision-ledger.json").read_text(
+            (ROOT / "data/governance/pre-1-0-revision-ledger.json").read_text(
                 encoding="utf-8"
             )
         )

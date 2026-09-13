@@ -3,9 +3,23 @@
 **Estado:** vigente
 **Versión base al iniciar el plan:** `0.0.25-beta`
 **Cierre histórico de PLAN.1:** `0.0.26-beta` / `v0.0.26-beta`
-**Versión transversal vigente:** `0.1.21.01-beta` — UX.6 R1–R8 consolidado como G121/E01 en PR #124; NOR.3 R1–R2 es el candidato G122/E01 reservado/no aceptado; PERSIST.1 permanece planificado sin Global preasignado.
+**Versión transversal vigente:** `0.1.22.01-beta` — NOR.3 R1–R8 materializado como G122/E01 en PR #162; G123 queda disponible sin candidato preasignado; PERSIST.1 permanece planificado sin Global preasignado.
 **Fecha:** 2026-08-25
 **Clasificación:** Producto / Arquitectura / QA / Release
+
+
+<!-- NOR3-G122-PROMOTION:START -->
+## Estado post-NOR.3 / promoción G122-E01
+
+- `VERSION` materializa `0.1.22.01-beta` para NOR.3 R8 / G122-E01.
+- NOR.3 R1–R8 queda cerrado estructuralmente en PR #162.
+- G123 es el siguiente Global disponible, pero **no tiene candidato ni bloque
+  preasignado**.
+- PERSIST.1 permanece planificado y no iniciado, sin Global preasignado.
+- La reconciliación integral de Issues, #154 y la replanificación #155
+  determinan el próximo candidato real.
+- El tag/release de G122 solo procede después de merge y revalidación de `main`.
+<!-- NOR3-G122-PROMOTION:END -->
 
 <!-- NOR1-R7-CLOSURE:START -->
 ## Checkpoint de normalización previo a SEC.2
@@ -170,7 +184,7 @@ Fuentes canónicas:
 - `docs/archive/governance/pre-1-0-versioning-audit.md`;
 - `docs/governance/pre-1-0-revision-ledger.md`;
 - `docs/archive/governance/ver2-revision-decision-matrix.md`;
-- `data/pre-1-0-revision-ledger.json`;
+- `data/governance/pre-1-0-revision-ledger.json`;
 - ADR de gobierno correspondiente.
 
 Durante VER.2, DOC.1 R1 fue el bloque documental utilizado para sincronizar la documentación Markdown vigente posterior a MANT.1. Después de NOR.2, DOC.1 R2 ejecutó la auditoría integral Markdown y estableció controles permanentes de regresión. VER.2, DOC.1 R1 y DOC.1 R2 están cerrados, y DEV.2 permanece como bloque funcional cerrado.
@@ -482,7 +496,7 @@ La normalización del ledger de alto impacto conserva como invariantes:
   `f5e0020643b324119855693588469eb8c98a0abafdb8f6108d60d5fb03a2288e`.
 
 El consumidor de runtime y la documentación viva utilizan
-`data/pre-1-0-revision-ledger.json`.
+`data/governance/pre-1-0-revision-ledger.json`.
 
 La evidencia histórica conserva los nombres que existían cuando fue generada.
 No se crean stubs ni copias de compatibilidad.

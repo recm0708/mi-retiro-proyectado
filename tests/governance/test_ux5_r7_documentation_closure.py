@@ -14,21 +14,21 @@ ROOT = Path(__file__).resolve().parents[2]
 class TestUX5R7DocumentationClosure(unittest.TestCase):
     def test_estado_vigente_conserva_g121_y_candidato_nor3_g122_e01(self):
         data = json.loads(
-            (ROOT / "data/work-block-registry.json").read_text(
+            (ROOT / "data/governance/work-block-registry.json").read_text(
                 encoding="utf-8"
             )
         )
         candidate = data["current_candidate"]
-        self.assertEqual(122, candidate["global_revision"])
-        self.assertEqual("0.1.22.01-beta", candidate["revision_aware"])
-        self.assertEqual("NOR.3", candidate["block"])
-        self.assertEqual("R1", candidate["revision"])
-        self.assertEqual(1, candidate["edition"])
-        self.assertEqual("reserved_not_accepted", candidate["state"])
+        self.assertIsNone(candidate["global_revision"])
+        self.assertIsNone(candidate["revision_aware"])
+        self.assertIsNone(candidate["block"])
+        self.assertIsNone(candidate["revision"])
+        self.assertIsNone(candidate["edition"])
+        self.assertEqual("unassigned_pending_replanning", candidate["state"])
 
     def test_ux5_y_ux6_cerrados_nor3_candidato_y_persist1_planificado(self):
         data = json.loads(
-            (ROOT / "data/work-block-registry.json").read_text(
+            (ROOT / "data/governance/work-block-registry.json").read_text(
                 encoding="utf-8"
             )
         )
@@ -41,7 +41,7 @@ class TestUX5R7DocumentationClosure(unittest.TestCase):
         self.assertEqual("closed", identifiers["UX.6"]["status"])
         self.assertIn("G121", identifiers["UX.6"]["global_refs"])
         self.assertEqual("planned_reserved", identifiers["PERSIST.1"]["status"])
-        self.assertEqual("candidate_r1", identifiers["NOR.3"]["status"])
+        self.assertEqual("closed", identifiers["NOR.3"]["status"])
 
         candidate = data["current_candidate"]
         self.assertIsNone(
@@ -96,7 +96,7 @@ class TestUX5R7DocumentationClosure(unittest.TestCase):
 
     def test_version_materializa_g121(self):
         version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
-        self.assertEqual("0.1.21.01-beta", version)
+        self.assertEqual("0.1.22.01-beta", version)
 
 
 if __name__ == "__main__":

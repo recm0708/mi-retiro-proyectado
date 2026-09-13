@@ -6,6 +6,20 @@
 **Última replanificación:** 2026-09-11
 **Clasificación:** Planificación / Producto / Arquitectura / Seguridad / QA / Release
 
+
+<!-- NOR3-G122-PROMOTION:START -->
+## Estado post-NOR.3 / promoción G122-E01
+
+- `VERSION` materializa `0.1.22.01-beta` para NOR.3 R8 / G122-E01.
+- NOR.3 R1–R8 queda cerrado estructuralmente en PR #162.
+- G123 es el siguiente Global disponible, pero **no tiene candidato ni bloque
+  preasignado**.
+- PERSIST.1 permanece planificado y no iniciado, sin Global preasignado.
+- La reconciliación integral de Issues, #154 y la replanificación #155
+  determinan el próximo candidato real.
+- El tag/release de G122 solo procede después de merge y revalidación de `main`.
+<!-- NOR3-G122-PROMOTION:END -->
+
 Esta matriz ordena el trabajo pendiente antes de la primera versión oficial de
 Mi Retiro Proyectado. Debe actualizarse cuando un bloque se inicia, cambia de
 alcance, se divide justificadamente, se cierra o aparece una necesidad nueva
@@ -134,7 +148,7 @@ Al cerrar una revisión se actualizan, cuando resulten afectados:
 - esta matriz;
 - `docs/governance/roadmap.md`;
 - `docs/governance/master-plan-to-1-0.md`;
-- `data/work-block-registry.json`;
+- `data/governance/work-block-registry.json`;
 - ledger revision-aware cuando cambie candidato o se acepte un estado;
 - `CHANGELOG.md`, `RELEASES.md` y documentación transversal pertinente.
 

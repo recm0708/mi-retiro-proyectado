@@ -218,3 +218,51 @@ permanece como soporte de casos de validación.
 `tests/shared/` solo contiene contratos realmente multiportal. Las
 pruebas de dominio, gobierno, seguridad o repositorio conservan un
 propietario explícito aunque sean consumidas por más de una superficie.
+
+<!-- NOR3-R7-DATA-SCRIPTS -->
+## NOR.3 R7 — Ownership de data y scripts
+
+`data/` deja de ser una colección plana:
+
+```text
+data/
+├── audits/
+└── governance/
+```
+
+- `data/governance/` contiene ledger, manifiesto de publicación, policy
+  estructural y registro de bloques de trabajo.
+- `data/audits/` contiene evidencia machine-readable derivada de auditorías
+  históricas o de trazabilidad.
+- `data/developer/` permanece local/ignorado; R7 no lo versiona ni lo elimina.
+- `data/.gitkeep` deja de ser necesario porque `data/` contiene estructura real.
+
+`scripts/` fue auditado en R7 y ya se encontraba semánticamente plano: todos
+sus entry points versionados viven directamente bajo `scripts/`. R7 no agrega
+anidamiento artificial ni mueve scripts sin una frontera funcional que lo
+justifique.
+
+<!-- NOR3-R8-CLOSURE -->
+## NOR.3 R8 — cierre estructural
+
+R8 congela como contrato verificable la estructura materializada por NOR.3
+R1–R8:
+
+- `app/portals/asegurado/` y `app/portals/developer/` separan ownership de
+  backend;
+- `app/templates/` y `app/static/` separan Asegurado, Developer y contratos
+  realmente compartidos;
+- `tests/` usa taxonomía por ownership y no admite módulos `test_*.py` planos
+  en su raíz;
+- `data/governance/` contiene estado/política versionados;
+- `data/audits/` contiene evidencia machine-readable;
+- `data/developer/` permanece local e ignorado;
+- `scripts/` conserva entry points versionados planos; `node_modules/` es
+  tooling local/ignorado;
+- el candidato de cierre es G122/E01 (`0.1.22.01-beta`), todavía
+  reservado/no aceptado hasta promoción, integración y revalidación.
+
+La auditoría transversal completa de contenido documental y código no se
+declara ejecutada por R8. Se realizará después de NOR.3 como fase propia,
+posterior a la reconciliación de Issues y al saneamiento de
+Dependabot/seguridad.

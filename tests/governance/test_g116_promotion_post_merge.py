@@ -26,7 +26,7 @@ class TestG116PromotionPostMerge(unittest.TestCase):
 
     def test_registro_preserva_g116_en_doc1(self):
         data = json.loads(
-            (ROOT / "data/work-block-registry.json").read_text(
+            (ROOT / "data/governance/work-block-registry.json").read_text(
                 encoding="utf-8"
             )
         )

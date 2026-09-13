@@ -6,10 +6,24 @@
 **Revisión de transición a versión oficial:** 2026-08-19
 **Revisión revision-aware:** 2026-08-22
 
+
+<!-- NOR3-G122-PROMOTION:START -->
+## Estado post-NOR.3 / promoción G122-E01
+
+- `VERSION` materializa `0.1.22.01-beta` para NOR.3 R8 / G122-E01.
+- NOR.3 R1–R8 queda cerrado estructuralmente en PR #162.
+- G123 es el siguiente Global disponible, pero **no tiene candidato ni bloque
+  preasignado**.
+- PERSIST.1 permanece planificado y no iniciado, sin Global preasignado.
+- La reconciliación integral de Issues, #154 y la replanificación #155
+  determinan el próximo candidato real.
+- El tag/release de G122 solo procede después de merge y revalidación de `main`.
+<!-- NOR3-G122-PROMOTION:END -->
+
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado revision-aware vigente
 
-- `VERSION` contiene `0.1.21.01-beta` y materializa G121/E01 para UX.6 R8.
+- `VERSION` contiene `0.1.22.01-beta` y materializa G121/E01 para UX.6 R8.
 - UX.6 R1–R8 consumen un único estado con `functional_revision=R8` y ordinal E01.
 - G120/E01 permanece publicado mediante `v0.1.20.01-beta`.
 - NOR.3 R1–R2 queda como candidato G122/E01 (`0.1.22.01-beta`)
@@ -35,7 +49,7 @@ La fuente canónica de la versión de aplicación es el archivo raíz `VERSION`.
 - `app/core/config.py` importa `APP_VERSION`; no mantiene una copia literal.
 - FastAPI usa `APP_VERSION` como versión de la aplicación.
 - Jinja2 recibe `app_version` y el footer muestra el mismo valor.
-- El contador y la procedencia de revisiones aceptadas se auditan en `docs/governance/pre-1-0-revision-ledger.md` y `data/pre-1-0-revision-ledger.json`.
+- El contador y la procedencia de revisiones aceptadas se auditan en `docs/governance/pre-1-0-revision-ledger.md` y `data/governance/pre-1-0-revision-ledger.json`.
 - `app/core/version_ledger.py` valida continuidad, unicidad y codificación del ledger estructurado.
 - `docs/governance/pre-1-0-pending-matrix.md` ordena el trabajo pendiente hacia 1.0 sin preasignar Globales futuros.
 - La regla que determina qué cuenta y qué no cuenta se documenta en `docs/archive/governance/ver2-revision-decision-matrix.md` y `docs/archive/governance/pre-1-0-versioning-audit.md`.

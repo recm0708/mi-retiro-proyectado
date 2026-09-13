@@ -1,7 +1,7 @@
 # Validación
 
 **Estado:** Vigente
-**Versión revisada:** `0.1.21.01-beta` — G121/E01 materializado para UX.6 R8 en PR #124.
+**Versión revisada:** `0.1.22.01-beta` — G121/E01 materializado para UX.6 R8 en PR #124.
 **Versión base histórica:** `0.0.25-beta`
 **Base documental histórica:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal histórica preservada:** UX.4.6e R8 — validación funcional y procedencia editable — 2026-08-19
@@ -10,6 +10,20 @@
 **Última revisión operativa:** UX.6 R8 — promoción G121/E01 — 2026-09-07
 **Clasificación:** Técnica / Calidad
 **Naturaleza documental:** Registro vivo acumulativo — mantiene la estrategia vigente y evidencia histórica de gates protegida por regresiones; los resultados históricos no se reescriben como si pertenecieran al estado actual.
+
+
+<!-- NOR3-G122-PROMOTION:START -->
+## Estado post-NOR.3 / promoción G122-E01
+
+- `VERSION` materializa `0.1.22.01-beta` para NOR.3 R8 / G122-E01.
+- NOR.3 R1–R8 queda cerrado estructuralmente en PR #162.
+- G123 es el siguiente Global disponible, pero **no tiene candidato ni bloque
+  preasignado**.
+- PERSIST.1 permanece planificado y no iniciado, sin Global preasignado.
+- La reconciliación integral de Issues, #154 y la replanificación #155
+  determinan el próximo candidato real.
+- El tag/release de G122 solo procede después de merge y revalidación de `main`.
+<!-- NOR3-G122-PROMOTION:END -->
 
 <!-- NOR1-R7-VALIDATION:START -->
 ## Promoción DEV.2 R6 — G119/E05
@@ -207,8 +221,8 @@ PR #118 completó el mantenimiento coordinado de dependencias:
 - `git diff --check`: limpio.
 
 Ambos cierres conservaron sin cambios `VERSION`,
-`data/pre-1-0-revision-ledger.json` y
-`data/release-publication-manifest.json`. Son mantenimiento posterior a
+`data/governance/pre-1-0-revision-ledger.json` y
+`data/governance/release-publication-manifest.json`. Son mantenimiento posterior a
 G119/E05 y no consumen G120/E01.
 
 Esta infraestructura no cambia `VERSION`, no acepta G120 y no crea commits,
@@ -284,7 +298,7 @@ Resultados estructurales:
   2 casos mixtos y 6 mensajes materialmente en inglés.
 
 La política adoptada preserva los asuntos y SHA originales. Las representaciones
-españolas viven en `data/git-history-attestation.json`; no se firman ni
+españolas viven en `data/audits/git-history-attestation.json`; no se firman ni
 renombran retroactivamente commits históricos porque hacerlo recrearía sus
 objetos Git y rompería referencias posteriores.
 
@@ -715,9 +729,9 @@ python -m pip check
 
 ## 3. Inventario actual de pruebas
 
-Inventario vigente: **214 módulos**.
+Inventario vigente: **217 módulos**.
 
-NOR.3 R6 organiza las pruebas por ownership semántico. `tests/shared/` se reserva para contratos realmente multiportal; `tests/validation_cases/` conserva casos de validación y no funciona como categoría de módulos `test_*.py`.
+La taxonomía NOR.3 conserva ownership semántico, discovery recursivo y contratos permanentes R1–R8 + G122.
 
 - `tests/domain/test_comparator.py`
 - `tests/domain/test_indemnizacion_vejez.py`
@@ -758,6 +772,7 @@ NOR.3 R6 organiza las pruebas por ownership semántico. `tests/shared/` se reser
 - `tests/governance/test_g119_promotion_post_merge.py`
 - `tests/governance/test_g120_promotion_post_merge.py`
 - `tests/governance/test_g121_promotion_post_merge.py`
+- `tests/governance/test_g122_nor3_promotion.py`
 - `tests/governance/test_git_history_attestation.py`
 - `tests/governance/test_gov12_versionado.py`
 - `tests/governance/test_gov13_documentacion.py`
@@ -914,6 +929,8 @@ NOR.3 R6 organiza las pruebas por ownership semántico. `tests/shared/` se reser
 - `tests/repository/test_nor3_r3_r4_portal_routers.py`
 - `tests/repository/test_nor3_r5_static_ownership.py`
 - `tests/repository/test_nor3_r6_test_taxonomy.py`
+- `tests/repository/test_nor3_r7_data_and_scripts.py`
+- `tests/repository/test_nor3_r8_closure.py`
 - `tests/repository/test_precommit_guard.py`
 - `tests/repository/test_ux46e_estandar_runtime.py`
 - `tests/security/test_post_sec2_integral_audit.py`
@@ -1089,7 +1106,7 @@ Resultados observados antes del commit:
 ## Validación NOR.2 R6
 
 R6 normaliza el ledger estructurado en
-`data/pre-1-0-revision-ledger.json`, preservando sin cambios el contenido
+`data/governance/pre-1-0-revision-ledger.json`, preservando sin cambios el contenido
 del archivo de origen identificado durante NOR.2 R2.
 
 El contenido del JSON permanece inalterado. El preflight verificó:
@@ -1377,7 +1394,7 @@ DOC.2 R1 fue aceptado mediante PR #87 y revalidado post-merge con G110/E01 aún 
 
 Controles específicos:
 
-- `data/doc2-legacy-changelog-evidence.json` contiene exactamente 21 estados y 80 commits únicos;
+- `data/audits/doc2-legacy-changelog-evidence.json` contiene exactamente 21 estados y 80 commits únicos;
 - cada tag `v0.0.1-beta`–`v0.0.21-beta` apunta al cierre registrado;
 - `CHANGELOG.md` conserva rango, cantidad de commits, hito y cada sujeto de commit por estado;
 - el commit raíz anómalo se preserva sin reescritura;
@@ -1598,8 +1615,8 @@ Alcance del cambio:
   nuevas rutas;
 - estado documental vivo reconciliado con G117/E02 ya aceptado y publicado;
 - G118/E04 permanece reservado exclusivamente para DEV.2 R5;
-- `VERSION`, `data/pre-1-0-revision-ledger.json` y
-  `data/release-publication-manifest.json` permanecen sin cambios.
+- `VERSION`, `data/governance/pre-1-0-revision-ledger.json` y
+  `data/governance/release-publication-manifest.json` permanecen sin cambios.
 
 Gate final:
 

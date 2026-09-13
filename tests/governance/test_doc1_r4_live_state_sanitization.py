@@ -11,7 +11,7 @@ class TestDOC1R4LiveStateSanitization(unittest.TestCase):
         entry=next(e for e in ledger["entries"] if e["global_revision"]==115)
         self.assertEqual("DOC.1",entry["block"]); self.assertEqual(4,entry["ordinal"]); self.assertEqual("0.1.15.04-beta",entry["revision_aware"]); self.assertIn("PR #96",entry["evidence"]); self.assertIn("9f51229",entry["evidence"])
     def test_registro_preserva_g115_en_doc1(self):
-        data=json.loads((ROOT/"data/work-block-registry.json").read_text(encoding="utf-8")); ids={x["identifier"]:x for x in data["identifiers"]}
+        data=json.loads((ROOT/"data/governance/work-block-registry.json").read_text(encoding="utf-8")); ids={x["identifier"]:x for x in data["identifiers"]}
         self.assertIn("G115",ids["DOC.1"]["global_refs"]); self.assertFalse(ids["DOC.1"]["reusable_for_different_scope"])
     def test_publicacion_g114_permanece_preservada(self):
         ledger = cargar_ledger()
@@ -61,14 +61,14 @@ class TestDOC1R4LiveStateSanitization(unittest.TestCase):
         self.assertIn("v0.1.15.04-beta", releases)
 
         registry = json.loads(
-            (ROOT / "data/work-block-registry.json").read_text(
+            (ROOT / "data/governance/work-block-registry.json").read_text(
                 encoding="utf-8"
             )
         )
         candidate = registry["current_candidate"]
-        self.assertEqual(122, candidate["global_revision"])
-        self.assertEqual("NOR.3", candidate["block"])
-        self.assertEqual("R1", candidate["revision"])
+        self.assertIsNone(candidate["global_revision"])
+        self.assertIsNone(candidate["block"])
+        self.assertIsNone(candidate["revision"])
 
     def test_ledger_markdown_registra_g115(self):
         text=(ROOT/"docs/governance/pre-1-0-revision-ledger.md").read_text(encoding="utf-8"); self.assertIn("| G115 | `0.1.15.04-beta` | DOC.1 R4",text)

@@ -1,9 +1,23 @@
 # Guía de contribución
 
+
+<!-- NOR3-G122-PROMOTION:START -->
+## Estado post-NOR.3 / promoción G122-E01
+
+- `VERSION` materializa `0.1.22.01-beta` para NOR.3 R8 / G122-E01.
+- NOR.3 R1–R8 queda cerrado estructuralmente en PR #162.
+- G123 es el siguiente Global disponible, pero **no tiene candidato ni bloque
+  preasignado**.
+- PERSIST.1 permanece planificado y no iniciado, sin Global preasignado.
+- La reconciliación integral de Issues, #154 y la replanificación #155
+  determinan el próximo candidato real.
+- El tag/release de G122 solo procede después de merge y revalidación de `main`.
+<!-- NOR3-G122-PROMOTION:END -->
+
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado de contribución vigente
 
-- `VERSION` está sincronizado en `0.1.21.01-beta` (G121/E01).
+- `VERSION` está sincronizado en `0.1.22.01-beta` (G121/E01).
 - G120/E01 permanece publicado como `v0.1.20.01-beta`.
 - UX.6 R1–R8 queda consolidado en PR #124 con revisión funcional R8.
 - NOR.3 R1–R2 queda como candidato G122/E01 reservado/no aceptado; G121/E01
@@ -151,8 +165,8 @@ El hook conserva las barreras específicas del clon y delega el gate técnico en
 `quality_gate.py --pre-commit`. En Pull Requests, `Repository Quality Gate`
 añade política de rama, firmas humanas autorizadas e integridad del repositorio.
 
-`VERSION`, `data/pre-1-0-revision-ledger.json` y
-`data/release-publication-manifest.json` se consideran estado revision-aware
+`VERSION`, `data/governance/pre-1-0-revision-ledger.json` y
+`data/governance/release-publication-manifest.json` se consideran estado revision-aware
 coordinado: un cambio de promoción debe tratarlos de forma coherente.
 
 El tooling npm versionado bajo `scripts/package.json` y

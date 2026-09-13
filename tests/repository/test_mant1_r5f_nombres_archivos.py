@@ -38,7 +38,7 @@ class TestMant1R5FNombresArchivos(unittest.TestCase):
         nuevos = (
             "scripts/configure_git_hooks.ps1",
             "scripts/validate_precommit.py",
-            "data/pre-1-0-revision-ledger.json",
+            "data/governance/pre-1-0-revision-ledger.json",
             "regulations/general-parameters.json",
             "tests/domain/test_comparator.py",
             "tests/domain/test_regulatory_sources.py",

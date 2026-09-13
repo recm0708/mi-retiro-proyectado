@@ -65,7 +65,7 @@ class TestNOR3R6TestTaxonomy(unittest.TestCase):
 
     def test_policy_declara_taxonomia_r6(self):
         policy = json.loads(
-            (ROOT / "data/repository-structure-policy.json").read_text(
+            (ROOT / "data/governance/repository-structure-policy.json").read_text(
                 encoding="utf-8"
             )
         )

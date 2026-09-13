@@ -1,13 +1,27 @@
 # Proceso de release
 
 **Estado:** Vigente
-**Versión de aplicación:** `0.1.21.01-beta` — G121/E01 materializado para UX.6 R8 en PR #124; G120/E01 permanece publicado y NOR.3 R1–R2 es el candidato G122/E01 reservado/no aceptado.
+**Versión de aplicación:** `0.1.22.01-beta` — G121/E01 materializado para UX.6 R8 en PR #124; G120/E01 permanece publicado y NOR.3 R1–R2 es el candidato G122/E01 reservado/no aceptado.
 **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
 **Último tag formal legacy:** `v0.0.26-beta`
 **Versión base histórica preservada:** `0.0.23-beta`
 **Base documental:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal:** REL.GOV.1 — gobierno de GitHub Releases — 2026-08-26
 **Clasificación:** Gobierno / Release / Auditoría
+
+
+<!-- NOR3-G122-PROMOTION:START -->
+## Estado post-NOR.3 / promoción G122-E01
+
+- `VERSION` materializa `0.1.22.01-beta` para NOR.3 R8 / G122-E01.
+- NOR.3 R1–R8 queda cerrado estructuralmente en PR #162.
+- G123 es el siguiente Global disponible, pero **no tiene candidato ni bloque
+  preasignado**.
+- PERSIST.1 permanece planificado y no iniciado, sin Global preasignado.
+- La reconciliación integral de Issues, #154 y la replanificación #155
+  determinan el próximo candidato real.
+- El tag/release de G122 solo procede después de merge y revalidación de `main`.
+<!-- NOR3-G122-PROMOTION:END -->
 
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado de publicación vigente
@@ -22,7 +36,7 @@
 - Un Release incompatible falla cerrado y solo HTTP 404 autoriza creación.
 <!-- DOC1-R1-POST-MANT1:END -->
 
-Este procedimiento complementa `VERSIONING.md`, `RELEASES.md`, `CHANGELOG.md`, `GOVERNANCE.md`, `LICENSE`, `THIRD_PARTY_NOTICES.md`, `docs/governance/licensing-and-distribution.md`, `docs/archive/governance/pre-1-0-versioning-audit.md`, `docs/governance/pre-1-0-revision-ledger.md`, `docs/archive/governance/ver2-revision-decision-matrix.md`, `data/pre-1-0-revision-ledger.json` y `docs/governance/master-plan-to-1-0.md`.
+Este procedimiento complementa `VERSIONING.md`, `RELEASES.md`, `CHANGELOG.md`, `GOVERNANCE.md`, `LICENSE`, `THIRD_PARTY_NOTICES.md`, `docs/governance/licensing-and-distribution.md`, `docs/archive/governance/pre-1-0-versioning-audit.md`, `docs/governance/pre-1-0-revision-ledger.md`, `docs/archive/governance/ver2-revision-decision-matrix.md`, `data/governance/pre-1-0-revision-ledger.json` y `docs/governance/master-plan-to-1-0.md`.
 
 ## 1. Principio
 
@@ -301,7 +315,7 @@ python scripts\release_contract.py --check-notes .\release-notes.md
 
 REL.GOV.1 R2 mantiene la **creación y firma del tag como operación local del mantenedor**. GitHub Actions no crea ni firma tags.
 
-Antes de la promoción se prepara `data/release-publication-manifest.json` con resumen, cambios, validación, evidencia y siguiente paso sustentados. El manifiesto debe corresponder a `VERSION`, al bloque/ordinal aceptado del ledger y al siguiente candidato real. Su contrato se valida con:
+Antes de la promoción se prepara `data/governance/release-publication-manifest.json` con resumen, cambios, validación, evidencia y siguiente paso sustentados. El manifiesto debe corresponder a `VERSION`, al bloque/ordinal aceptado del ledger y al siguiente candidato real. Su contrato se valida con:
 
 ```powershell
 python scripts\release_publication.py --check-manifest

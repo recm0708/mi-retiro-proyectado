@@ -17,7 +17,7 @@ from app.core.version_ledger import (
 )
 
 ROOT = Path(__file__).resolve().parents[2]
-REGISTRY = ROOT / "data/work-block-registry.json"
+REGISTRY = ROOT / "data/governance/work-block-registry.json"
 
 
 class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
@@ -46,7 +46,7 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
         self.assertEqual("closed", ids["UX.6"]["status"])
 
         self.assertEqual("planned_reserved", ids["PERSIST.1"]["status"])
-        self.assertEqual("candidate_r1", ids["NOR.3"]["status"])
+        self.assertEqual("closed", ids["NOR.3"]["status"])
         for ident in ("UX.7", "UX.8", "REP.1", "A11Y.2", "REV.1", "QA.1", "REL.1"):
             self.assertEqual("planned_reserved", ids[ident]["status"])
 
@@ -71,11 +71,11 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
         self.assertEqual("0.1.12.07-beta", entry["revision_aware"])
 
         candidate = self.data["current_candidate"]
-        self.assertEqual(122, candidate["global_revision"])
-        self.assertEqual("NOR.3", candidate["block"])
-        self.assertEqual("R1", candidate["revision"])
-        self.assertEqual(1, candidate["edition"])
-        self.assertEqual("reserved_not_accepted", candidate["state"])
+        self.assertIsNone(candidate["global_revision"])
+        self.assertIsNone(candidate["block"])
+        self.assertIsNone(candidate["revision"])
+        self.assertIsNone(candidate["edition"])
+        self.assertEqual("unassigned_pending_replanning", candidate["state"])
         self.assertIsNone(
             candidate["next_functional_block_if_accepted"]
         )
@@ -176,7 +176,7 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
             ids["PERSIST.1"]["status"],
         )
         self.assertEqual(
-            "candidate_r1",
+            "closed",
             ids["NOR.3"]["status"],
         )
 

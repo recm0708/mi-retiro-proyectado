@@ -30,7 +30,7 @@ class TestG111PromotionPostMerge(unittest.TestCase):
 
     def test_evidencia_doc2_marca_g111_aceptado(self):
         data = json.loads(
-            (ROOT / "data/doc2-legacy-changelog-evidence.json").read_text(encoding="utf-8")
+            (ROOT / "data/audits/doc2-legacy-changelog-evidence.json").read_text(encoding="utf-8")
         )
         self.assertTrue(data["reserved_candidate"]["consumed"])
         self.assertEqual(111, data["accepted_state"]["global_revision"])

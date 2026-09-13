@@ -383,7 +383,7 @@ def check_current_candidate_state(
     lines: list[str],
     *,
     next_global: int,
-    next_candidate: str,
+    next_candidate: str | None,
 ) -> list[Issue]:
     """Detecta reservas del Global vigente que contradicen el ledger actual."""
 
@@ -392,6 +392,9 @@ def check_current_candidate_state(
         "SOPORTE",
         "PLANTILLA",
     }:
+        return []
+
+    if next_candidate is None:
         return []
 
     if rel in CANDIDATE_HISTORY_FILES:
@@ -462,16 +465,16 @@ def check_current_candidate_state(
     return issues
 
 
-def load_candidate_state(root: Path) -> tuple[int, str]:
+def load_candidate_state(root: Path) -> tuple[int, str | None]:
     """Carga el Global siguiente y candidato reservado desde el ledger."""
 
     import json
 
-    path = root / "data" / "pre-1-0-revision-ledger.json"
+    path = root / "data" / "governance" / "pre-1-0-revision-ledger.json"
 
     if not path.is_file():
         raise RuntimeError(
-            "No existe data/pre-1-0-revision-ledger.json."
+            "No existe data/governance/pre-1-0-revision-ledger.json."
         )
 
     data = json.loads(path.read_text(encoding="utf-8"))
@@ -487,9 +490,9 @@ def load_candidate_state(root: Path) -> tuple[int, str]:
             "El ledger no declara un siguiente Global válido."
         )
 
-    if not isinstance(next_candidate, str):
+    if next_candidate is not None and not isinstance(next_candidate, str):
         raise RuntimeError(
-            "El ledger no declara next_candidate válido."
+            "El ledger declara next_candidate inválido."
         )
 
     return next_global, next_candidate

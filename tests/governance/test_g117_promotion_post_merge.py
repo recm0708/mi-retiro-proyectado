@@ -23,7 +23,7 @@ class TestG117PromotionPostMerge(unittest.TestCase):
         self.assertIn("46c464e", entry["evidence"])
 
     def test_registro_preserva_rel_gov1(self):
-        data = json.loads((ROOT / "data/work-block-registry.json").read_text(encoding="utf-8"))
+        data = json.loads((ROOT / "data/governance/work-block-registry.json").read_text(encoding="utf-8"))
         ids = {item["identifier"]: item for item in data["identifiers"]}
         self.assertIn("G117", ids["REL.GOV.1"]["global_refs"])
         self.assertEqual("closed", ids["REL.GOV.1"]["status"])

@@ -10,7 +10,7 @@ import unittest
 from app.core.version_ledger import cargar_ledger
 
 ROOT = Path(__file__).resolve().parents[2]
-EVIDENCE = ROOT / "data/doc2-legacy-changelog-evidence.json"
+EVIDENCE = ROOT / "data/audits/doc2-legacy-changelog-evidence.json"
 
 
 class TestDOC2R1ChangelogReconstruction(unittest.TestCase):

@@ -12,7 +12,7 @@ class TestG112PromotionPostMerge(unittest.TestCase):
         self.assertEqual("NOR.1", entry["block"]); self.assertEqual(7, entry["ordinal"]); self.assertEqual("0.1.12.07-beta", entry["revision_aware"])
         self.assertIn("PR #89", entry["evidence"]); self.assertIn("PR #90", entry["evidence"])
     def test_registro_preserva_nor1(self):
-        data=json.loads((ROOT/"data/work-block-registry.json").read_text(encoding="utf-8")); ids={x["identifier"]:x for x in data["identifiers"]}
+        data=json.loads((ROOT/"data/governance/work-block-registry.json").read_text(encoding="utf-8")); ids={x["identifier"]:x for x in data["identifiers"]}
         self.assertEqual("closed",ids["NOR.1"]["status"]); self.assertIn("G112",ids["NOR.1"]["global_refs"]); self.assertFalse(ids["NOR.1"]["reusable_for_different_scope"])
     def test_documentacion_viva_no_asocia_nor1_r8_con_e01(self):
         files=("README.md","RELEASES.md","VERSIONING.md","GOVERNANCE.md","CONTRIBUTING.md","SECURITY.md","docs/README.md","docs/governance/master-plan-to-1-0.md","docs/governance/roadmap.md","docs/governance/pre-1-0-revision-ledger.md","docs/operations/validation.md","docs/standards/work-block-identifiers.md")

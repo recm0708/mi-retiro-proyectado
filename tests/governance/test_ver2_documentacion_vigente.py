@@ -21,7 +21,7 @@ class TestVer2DocumentacionVigente(unittest.TestCase):
         self.assertEqual(VERSION_CANONICA, version)
         self.assertEqual(version, APP_VERSION)
         ledger = json.loads(
-            (ROOT / "data/pre-1-0-revision-ledger.json").read_text(encoding="utf-8")
+            (ROOT / "data/governance/pre-1-0-revision-ledger.json").read_text(encoding="utf-8")
         )
         self.assertEqual(
             (ledger["accepted_count"], ledger["entries"][-1]["ordinal"]),

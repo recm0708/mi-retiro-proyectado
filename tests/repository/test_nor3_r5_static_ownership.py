@@ -70,7 +70,7 @@ class TestNOR3R5StaticOwnership(unittest.TestCase):
         self.assertIn(".form-control,", design)
 
     def test_policy_activa_namespaces_static(self):
-        policy = json.loads((ROOT / "data" / "repository-structure-policy.json").read_text(encoding="utf-8"))
+        policy = json.loads((ROOT / "data" / "governance" / "repository-structure-policy.json").read_text(encoding="utf-8"))
         ownership = policy["future_ownership_contract"]
         self.assertTrue(ownership["enforced"])
         self.assertEqual("NOR.3 R5", ownership["activated_in"])

@@ -10,7 +10,7 @@ class TestG113PromotionPostMerge(unittest.TestCase):
         ledger=cargar_ledger(); entry=next(x for x in ledger["entries"] if x["global_revision"]==113)
         self.assertEqual("DOC.1",entry["block"]); self.assertEqual(3,entry["ordinal"]); self.assertEqual("0.1.13.03-beta",entry["revision_aware"]); self.assertIn("PR #92",entry["evidence"])
     def test_registro_preserva_g113_en_doc1(self):
-        data=json.loads((ROOT/"data/work-block-registry.json").read_text(encoding="utf-8")); ids={x["identifier"]:x for x in data["identifiers"]}
+        data=json.loads((ROOT/"data/governance/work-block-registry.json").read_text(encoding="utf-8")); ids={x["identifier"]:x for x in data["identifiers"]}
         self.assertIn("G113",ids["DOC.1"]["global_refs"]); self.assertFalse(ids["DOC.1"]["reusable_for_different_scope"])
     def test_documentacion_preserva_g113_y_doc1_r3(self):
         ledger = cargar_ledger()

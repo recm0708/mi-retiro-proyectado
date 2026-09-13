@@ -16,7 +16,7 @@ from app.core.version import construir_version_beta_revision
 
 
 ROOT = Path(__file__).resolve().parents[2]
-LEDGER_FILE = ROOT / "data" / "pre-1-0-revision-ledger.json"
+LEDGER_FILE = ROOT / "data" / "governance" / "pre-1-0-revision-ledger.json"
 
 
 class LedgerRevisionError(ValueError):
@@ -119,26 +119,39 @@ def validar_ledger(ledger: dict[str, Any]) -> None:
         )
 
     next_candidate_block = ledger.get("next_candidate_block")
-    if not isinstance(next_candidate_block, str) or not next_candidate_block.strip():
-        raise LedgerRevisionError("next_candidate_block debe ser un texto no vacío.")
-
-    ordinales_del_bloque = [
-        entry["ordinal"]
-        for entry in entries
-        if entry["block"] == next_candidate_block
-    ]
-    siguiente_ordinal = max(ordinales_del_bloque, default=0) + 1
-
     next_candidate = ledger.get("next_candidate")
-    candidato_esperado = construir_version_beta_revision(
-        next_global,
-        siguiente_ordinal,
-    )
-    if next_candidate != candidato_esperado:
-        raise LedgerRevisionError(
-            f"next_candidate debe ser {candidato_esperado!r} para "
-            f"{next_candidate_block} E{siguiente_ordinal:02d}."
+
+    if next_candidate_block is None or next_candidate is None:
+        if not (next_candidate_block is None and next_candidate is None):
+            raise LedgerRevisionError(
+                "next_candidate y next_candidate_block deben ser ambos "
+                "nulos o ambos estar definidos."
+            )
+    else:
+        if not isinstance(next_candidate_block, str) or not next_candidate_block.strip():
+            raise LedgerRevisionError(
+                "next_candidate_block debe ser texto no vacío o null."
+            )
+        if not isinstance(next_candidate, str) or not next_candidate.strip():
+            raise LedgerRevisionError(
+                "next_candidate debe ser texto no vacío o null."
+            )
+
+        ordinales_del_bloque = [
+            entry["ordinal"]
+            for entry in entries
+            if entry["block"] == next_candidate_block
+        ]
+        siguiente_ordinal = max(ordinales_del_bloque, default=0) + 1
+        candidato_esperado = construir_version_beta_revision(
+            next_global,
+            siguiente_ordinal,
         )
+        if next_candidate != candidato_esperado:
+            raise LedgerRevisionError(
+                f"next_candidate debe ser {candidato_esperado!r} para "
+                f"{next_candidate_block} E{siguiente_ordinal:02d}."
+            )
 
     tags = ledger.get("historical_tags_immutable")
     if tags != {"from": "v0.0.1-beta", "to": "v0.0.26-beta"}:

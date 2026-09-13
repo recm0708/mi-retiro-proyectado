@@ -28,7 +28,7 @@ from urllib.parse import unquote
 
 ROOT = Path(__file__).resolve().parents[1]
 README = ROOT / "README.md"
-STRUCTURE_POLICY = ROOT / "data" / "repository-structure-policy.json"
+STRUCTURE_POLICY = ROOT / "data" / "governance" / "repository-structure-policy.json"
 
 EXCLUDED_ORPHAN_PREFIXES = (
     "docs/archive/",

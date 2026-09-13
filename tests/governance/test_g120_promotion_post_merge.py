@@ -18,7 +18,7 @@ class TestG120PromotionPostMerge(unittest.TestCase):
         self.assertIn("4c43a816", entry["evidence"])
 
     def test_ux5_conserva_referencia_g120(self):
-        data = json.loads((ROOT / "data/work-block-registry.json").read_text(encoding="utf-8"))
+        data = json.loads((ROOT / "data/governance/work-block-registry.json").read_text(encoding="utf-8"))
         ux5 = next(x for x in data["identifiers"] if x["identifier"] == "UX.5")
         self.assertEqual("closed", ux5["status"])
         self.assertIn("G120", ux5["global_refs"])

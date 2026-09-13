@@ -9,7 +9,7 @@ from scripts import audit_repository_integrity as audit
 
 
 ROOT = Path(__file__).resolve().parents[2]
-POLICY_PATH = ROOT / "data" / "repository-structure-policy.json"
+POLICY_PATH = ROOT / "data" / "governance" / "repository-structure-policy.json"
 QUALITY_GATE = ROOT / "scripts" / "quality_gate.py"
 
 
@@ -134,33 +134,22 @@ class TestNOR3R2RepositoryStructurePolicy(unittest.TestCase):
 
         self.assertEqual(report["result"], "pass")
 
-    def test_candidate_scope_refleja_par_r1_r2(self):
+    def test_post_promocion_cierra_scope_r1_r8(self):
         registry = json.loads(
             (
-                ROOT
-                / "data"
+                ROOT / "data" / "governance"
                 / "work-block-registry.json"
-            ).read_text(
-                encoding="utf-8"
-            )
+            ).read_text(encoding="utf-8")
         )
 
         candidate = registry["current_candidate"]
-
+        self.assertIsNone(candidate["global_revision"])
+        self.assertIsNone(candidate["revision_aware"])
+        self.assertIsNone(candidate["block"])
+        self.assertIsNone(candidate["revision"])
+        self.assertIsNone(candidate["revision_scope"])
         self.assertEqual(
-            "NOR.3",
-            candidate["block"],
-        )
-        self.assertEqual(
-            "R1",
-            candidate["revision"],
-        )
-        self.assertEqual(
-            "R1-R2",
-            candidate["revision_scope"],
-        )
-        self.assertEqual(
-            "reserved_not_accepted",
+            "unassigned_pending_replanning",
             candidate["state"],
         )
 
@@ -168,16 +157,14 @@ class TestNOR3R2RepositoryStructurePolicy(unittest.TestCase):
             item["identifier"]: item
             for item in registry["identifiers"]
         }
-
-        self.assertEqual(
-            "R1-R2",
-            ids["NOR.3"]["active_scope"],
-        )
+        self.assertEqual("closed", ids["NOR.3"]["status"])
+        self.assertEqual("R1-R8", ids["NOR.3"]["active_scope"])
+        self.assertEqual(["G122"], ids["NOR.3"]["global_refs"])
 
     def test_pr_policy_permite_candidato_sin_version(self):
         files = [
-            "data/pre-1-0-revision-ledger.json",
-            "data/release-publication-manifest.json",
+            "data/governance/pre-1-0-revision-ledger.json",
+            "data/governance/release-publication-manifest.json",
         ]
 
         self.assertEqual(
@@ -203,8 +190,7 @@ class TestNOR3R2RepositoryStructurePolicy(unittest.TestCase):
     def test_pr_policy_rechaza_metadata_parcial(self):
         errors = pr_policy.revision_state_errors(
             [
-                "data/"
-                "pre-1-0-revision-ledger.json"
+                "data/governance/pre-1-0-revision-ledger.json"
             ]
         )
 
@@ -218,7 +204,7 @@ class TestNOR3R2RepositoryStructurePolicy(unittest.TestCase):
                 "Los metadatos revision-aware de candidato deben "
                 "cambiar de forma coordinada cuando VERSION "
                 "permanece estable. Faltan: "
-                "data/release-publication-manifest.json"
+                "data/governance/release-publication-manifest.json"
             ),
             errors[0],
         )

@@ -10,7 +10,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 VERSION_PATH = ROOT / "VERSION"
-LEDGER_PATH = ROOT / "data" / "pre-1-0-revision-ledger.json"
+LEDGER_PATH = ROOT / "data" / "governance" / "pre-1-0-revision-ledger.json"
 
 REVISION_AWARE_RE = re.compile(r"^0\.(?P<gg>\d+)\.(?P<rr>\d{2})\.(?P<ee>\d{2})-beta$")
 REQUIRED_HEADINGS = (
@@ -58,7 +58,7 @@ def validate_version_against_ledger(version: str, ledger: dict) -> list[str]:
     global_revision, _ = parse_revision_aware(version)
     accepted_count = int(ledger["accepted_count"])
     next_global = int(ledger["next_global"])
-    next_candidate = str(ledger["next_candidate"])
+    next_candidate = ledger.get("next_candidate")
 
     if global_revision == accepted_count:
         matches = [
@@ -73,9 +73,15 @@ def validate_version_against_ledger(version: str, ledger: dict) -> list[str]:
                 f"La entrada G{global_revision:03d} usa {matches[0]['revision_aware']} y no {version}."
             )
     elif global_revision == next_global:
-        if next_candidate != version:
+        if not isinstance(next_candidate, str) or not next_candidate.strip():
             errors.append(
-                f"El candidato G{global_revision:03d} esperado es {next_candidate}, no {version}."
+                f"G{global_revision:03d} está disponible, pero no existe "
+                "candidato revision-aware reservado."
+            )
+        elif next_candidate != version:
+            errors.append(
+                f"El candidato G{global_revision:03d} esperado es "
+                f"{next_candidate}, no {version}."
             )
     else:
         errors.append(

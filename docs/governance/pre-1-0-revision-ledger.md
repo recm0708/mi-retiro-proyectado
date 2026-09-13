@@ -7,6 +7,20 @@
 **Siguiente Global disponible:** **G122**
 **Siguiente candidato disponible:** `0.1.22.01-beta` — NOR.3 R1–R2
 
+
+<!-- NOR3-G122-PROMOTION:START -->
+## Estado post-NOR.3 / promoción G122-E01
+
+- `VERSION` materializa `0.1.22.01-beta` para NOR.3 R8 / G122-E01.
+- NOR.3 R1–R8 queda cerrado estructuralmente en PR #162.
+- G123 es el siguiente Global disponible, pero **no tiene candidato ni bloque
+  preasignado**.
+- PERSIST.1 permanece planificado y no iniciado, sin Global preasignado.
+- La reconciliación integral de Issues, #154 y la replanificación #155
+  determinan el próximo candidato real.
+- El tag/release de G122 solo procede después de merge y revalidación de `main`.
+<!-- NOR3-G122-PROMOTION:END -->
+
 <!-- DOC1-R1-REVISION-MANUAL:START -->
 ## Nota de lectura vigente — reconciliación post-SEC.2
 
@@ -186,8 +200,8 @@ transversales que no constituyen estados revision-aware independientes:
   11/0, pre-commit 10/0, 1338 `unittest` y `pytest` 1378 passed /
   6390 subtests;
 - ambos mantenimientos conservaron sin cambios `VERSION`,
-  `data/pre-1-0-revision-ledger.json` y
-  `data/release-publication-manifest.json`;
+  `data/governance/pre-1-0-revision-ledger.json` y
+  `data/governance/release-publication-manifest.json`;
 - G120/E01 queda aceptado para UX.5 R6; R1–R6 consumen un único estado aceptado.
 
 ### Anomalía histórica del tag `v0.0.71.01-beta`

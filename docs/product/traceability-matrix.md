@@ -1,7 +1,7 @@
 # Matriz de trazabilidad
 
 **Estado:** Vigente
-**Versión de aplicación:** `0.1.21.01-beta` — G121/E01 materializado para UX.6 R8 en PR #124; G120/E01 permanece publicado; NOR.3 R1–R2 es el candidato G122/E01 reservado/no aceptado
+**Versión de aplicación:** `0.1.22.01-beta` — G121/E01 materializado para UX.6 R8 en PR #124; G120/E01 permanece publicado; NOR.3 R1–R2 es el candidato G122/E01 reservado/no aceptado
 **Último tag formal legacy:** `v0.0.26-beta`
 **Base histórica:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal:** NOR.2 R8 — 2026-08-24
@@ -64,7 +64,7 @@ Esta matriz conecta contratos críticos del producto con su fuente, decisión, i
 | TR-025 | Alineación y densidad visual de períodos y resumen de retiro | N/A — UX/responsive | ADR-177 | `app/templates/asegurado/partials/salary_history.html`, `app/templates/asegurado/simulation.html`, `app/templates/asegurado/partials/retirement.html`, `app/static/shared/css/design-system.css` | `tests/portals/asegurado/test_ux46g_r1_retirement_scenarios.py` | Verificado UX.4.6g / PR #32 |
 | TR-026 | La guía pública explica cómo se transforman los datos de los Pasos 1–6 y los tres sistemas con parámetros versionados, fórmula general + sustitución numérica y términos definidos en contexto, sin duplicar motores; navbar, Metodología y Paso 6 enlazan sin transportar datos personales | N/A — transparencia/UX; normativa versionada existente | ADR-178 | `app/services/calculation_guide.py`, `app/templates/asegurado/calculation_guide.html`, `app/static/asegurado/css/calculation-guide.css`, `app/templates/asegurado/base.html`, `app/static/asegurado/js/results_orchestration.js`, `app/templates/asegurado/methodology.html` | `tests/portals/asegurado/test_ux46i_r1_calculation_guide.py` | Verificado UX.4.6i / PR #34 |
 | TR-027 | La beta revision-aware cuenta estados aceptados, preserva tags históricos y mantiene ledger continuo sin convertir commits/candidatos en revisiones | N/A — gobierno/versionado | ADR-179 | `VERSION`, `VERSIONING.md`, `app/core/version.py`, `docs/archive/governance/pre-1-0-versioning-audit.md`, `docs/governance/pre-1-0-revision-ledger.md` | `tests/governance/test_ver2_version_revision_aware.py`, `tests/governance/test_ver2_documentacion_vigente.py` | VER.2 R4 preservado como denominación original G071/E01; reconciliación vigente G087/E01 |
-| TR-028 | Los identificadores de bloques históricos, cerrados y planificados se registran de forma canónica y no pueden reutilizarse para otro alcance | N/A — gobierno/nomenclatura | N/A — NOR.1 R8 | `data/work-block-registry.json`, `docs/standards/work-block-identifiers.md`, `scripts/audit_block_identifiers.py` | `tests/repository/test_nor1_r8_work_block_identifiers.py` | Verificado; NOR.1 R8 aceptado como G112/E07 |
+| TR-028 | Los identificadores de bloques históricos, cerrados y planificados se registran de forma canónica y no pueden reutilizarse para otro alcance | N/A — gobierno/nomenclatura | N/A — NOR.1 R8 | `data/governance/work-block-registry.json`, `docs/standards/work-block-identifiers.md`, `scripts/audit_block_identifiers.py` | `tests/repository/test_nor1_r8_work_block_identifiers.py` | Verificado; NOR.1 R8 aceptado como G112/E07 |
 
 | TR-029 | Portal Developer separa acceso humano por sesión web del contrato técnico Bearer, limita la cookie administrativa a `/dev`, evita persistir credenciales y conserva `no-store`/observabilidad explícita | N/A — desarrollo/seguridad | N/A — DEV.2 R5 | `app/main.py`, `app/templates/developer/dev_base.html`, `app/templates/developer/dev_login.html`, `app/core/observability.py` | `tests/portals/developer/test_dev2_r5_portal_access.py`, `tests/security/test_sec2_r5_admin_web_session.py` | Verificado DEV.2 R5 / G118/E04 |
 | TR-030 | Portal Developer multipágina aplica identidad humana persistente, RBAC deny-by-default, CSRF, revalidación para operaciones destructivas, observabilidad sanitizada, mantenimiento seguro y separación del Bearer técnico | N/A — desarrollo/seguridad/privacidad | N/A — DEV.2 R6 | `app/main.py`, `app/portals/developer/developer_store.py`, `app/portals/developer/developer_web_security.py`, `app/templates/developer/dev_base.html`, `app/templates/developer/dev_maintenance.html`, `app/templates/developer/dev_privacy.html` | `tests/portals/developer/test_dev2_r6_identity.py`, `tests/portals/developer/test_dev2_r6_web_session.py`, `tests/portals/developer/test_dev2_r6_observability_portal.py`, `tests/portals/developer/test_dev2_r6_security_maintenance_privacy.py` | Verificado DEV.2 R6 / G119/E05 — PR #111 / merge `bd2accb` |
@@ -118,7 +118,7 @@ Los estados `Candidato` deben promoverse a `Verificado` únicamente después del
 
 | Criterio | Evidencia | Regresión |
 | --- | --- | --- |
-| Normalizar el nombre del ledger estructurado | `data/pre-1-0-revision-ledger.json` + evidencia R6 | `tests/repository/test_nor2_r6_ledger_data.py` |
+| Normalizar el nombre del ledger estructurado | `data/governance/pre-1-0-revision-ledger.json` + evidencia R6 | `tests/repository/test_nor2_r6_ledger_data.py` |
 | Preservar exactamente el contenido G001–G070 | SHA-256 R6 + validador canónico | `test_contenido_permanece_identico`, `test_invariantes_del_ledger` |
 | Mantener runtime sobre la ruta canónica | `app/core/version_ledger.py` | `test_ruta_normalizada` |
 | Eliminar consumidores vivos de la ruta anterior | barrido R6: 0 referencias no justificadas | `test_no_quedan_consumidores_vivos_de_ruta_anterior` |
@@ -145,7 +145,7 @@ Los estados `Candidato` deben promoverse a `Verificado` únicamente después del
 | Retirar residuos transitorios directos de `docs/` | `CHANGELOG_ADD_R5.txt` e `INDICE_ADD_R5.txt` retirados | `test_docs_raiz_queda_solo_con_readme` |
 | Mantener artefactos locales fuera de Git | auditoría local: 20 artefactos preservados; Git: 0 trackeados | `test_artefactos_locales_quedan_fuera_de_git` |
 | Preservar la evidencia histórica de `v0.0.71.01-beta` y su reconciliación G087/E01 | tag/ledger/documentación | regresiones VER.2 + reconciliación post-G070 |
-| Preservar ledger G001–G070 y ruta canónica | `data/pre-1-0-revision-ledger.json` | `test_ledger_permanece_canonico_e_inmutable` |
+| Preservar ledger G001–G070 y ruta canónica | `data/governance/pre-1-0-revision-ledger.json` | `test_ledger_permanece_canonico_e_inmutable` |
 | Sincronizar el checkpoint histórico de NOR.2 | R7/R8 cerrados; en ese momento SEC.2 quedaba habilitado para reanudación | `test_estado_documental_vigente_es_r8` |
 | Eliminar contradicciones vigentes de VER.2/NOR.1/NOR.2 | barrido post-corrección: 0 hallazgos | `test_ver2_no_figura_como_pendiente_en_estado_vivo` |
 <!-- NOR2-R8-TRACEABILITY:END -->
@@ -189,4 +189,4 @@ Los estados `Candidato` deben promoverse a `Verificado` únicamente después del
 | Expiración/límite y cookies configurables | `app/core/config.py`, `admin_session.py` | `test_sec2_r6_admin_session_security.py` | Verificado |
 | Kill switch no sustituible por cookie | `app/main.py` | `test_sec2_postclosure_hardening.py` | Verificado post-cierre |
 | Logout mutante solo por POST | `/dev/logout` | `test_sec2_postclosure_hardening.py` | Verificado post-cierre |
-| Ledger reconciliado | `data/pre-1-0-revision-ledger.json` | pruebas VER.2/NOR.2 + auditoría post-G070 | G113/E03 permanece preservado para DOC.1 R3; G114/E01 aceptado para PLAN.2 R1; G115/E04 reservado para DOC.1 R4; PERSIST.1 permanece planificado posteriormente; REP.1 bloque funcional posterior |
+| Ledger reconciliado | `data/governance/pre-1-0-revision-ledger.json` | pruebas VER.2/NOR.2 + auditoría post-G070 | G113/E03 permanece preservado para DOC.1 R3; G114/E01 aceptado para PLAN.2 R1; G115/E04 reservado para DOC.1 R4; PERSIST.1 permanece planificado posteriormente; REP.1 bloque funcional posterior |

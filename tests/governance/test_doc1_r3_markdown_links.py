@@ -86,7 +86,7 @@ class TestDOC1R3MarkdownLinks(unittest.TestCase):
         ).read_text(encoding="utf-8")
 
         self.assertIn(
-            "`data/doc2-legacy-changelog-evidence.json`",
+            "`data/audits/doc2-legacy-changelog-evidence.json`",
             changelog,
         )
         self.assertIn(

@@ -11,7 +11,7 @@ from app.core.version_ledger import LEDGER_FILE, cargar_ledger
 
 ROOT = Path(__file__).resolve().parents[2]
 OLD = ROOT / "data/revision_ledger_pre_1_0.json"
-NEW = ROOT / "data/pre-1-0-revision-ledger.json"
+NEW = ROOT / "data/governance/pre-1-0-revision-ledger.json"
 HISTORICAL_G070 = ROOT / "docs/archive/governance/pre-1-0-revision-ledger-g070.json"
 EXPECTED_SHA256 = (
     "f5e0020643b324119855693588469eb8c98a0abafdb8f6108d60d5fb03a2288e"
@@ -95,7 +95,7 @@ class TestNOR2R6LedgerData(unittest.TestCase):
         self.assertEqual(7, entries[112]["ordinal"])
 
         registry = json.loads(
-            (ROOT / "data/work-block-registry.json").read_text(
+            (ROOT / "data/governance/work-block-registry.json").read_text(
                 encoding="utf-8"
             )
         )
@@ -104,9 +104,9 @@ class TestNOR2R6LedgerData(unittest.TestCase):
             for item in registry["identifiers"]
         }
         self.assertEqual("planned_reserved", ids["PERSIST.1"]["status"])
-        self.assertEqual("candidate_r1", ids["NOR.3"]["status"])
-        self.assertEqual("NOR.3", registry["current_candidate"]["block"])
-        self.assertEqual(122, registry["current_candidate"]["global_revision"])
+        self.assertEqual("closed", ids["NOR.3"]["status"])
+        self.assertIsNone(registry["current_candidate"]["block"])
+        self.assertIsNone(registry["current_candidate"]["global_revision"])
 
         matrix = (
             ROOT / "docs/governance/pre-1-0-pending-matrix.md"

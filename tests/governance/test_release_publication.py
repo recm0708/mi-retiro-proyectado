@@ -11,7 +11,7 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[2]
 SCRIPT = ROOT / "scripts" / "release_publication.py"
-MANIFEST = ROOT / "data/release-publication-manifest.json"
+MANIFEST = ROOT / "data/governance/release-publication-manifest.json"
 
 PUBLISHED_COMMIT = "1111111111111111111111111111111111111111"
 TAG_OBJECT = "2222222222222222222222222222222222222222"
@@ -45,19 +45,16 @@ class TestReleasePublication(unittest.TestCase):
             result.stdout + result.stderr,
         )
 
-    def test_manifest_actual_es_g121_y_apunta_a_g122(self):
+    def test_manifest_actual_es_g122_y_no_preasigna_g123(self):
         data = json.loads(
             MANIFEST.read_text(encoding="utf-8")
         )
-        self.assertEqual("0.1.21.01-beta", data["version"])
-        self.assertEqual("UX.6", data["block"])
+        self.assertEqual("0.1.22.01-beta", data["version"])
+        self.assertEqual("NOR.3", data["block"])
         self.assertEqual("R8", data["revision"])
-        self.assertEqual(122, data["next_step"]["global_revision"])
-        self.assertEqual(
-            "0.1.22.01-beta",
-            data["next_step"]["revision_aware"],
-        )
-        self.assertEqual("NOR.3", data["next_step"]["block"])
+        self.assertEqual(123, data["next_step"]["global_revision"])
+        self.assertIsNone(data["next_step"]["revision_aware"])
+        self.assertIsNone(data["next_step"]["block"])
 
     def test_manifiesto_supera_validacion(self):
         result = self.run_script("--check-manifest")
@@ -66,7 +63,7 @@ class TestReleasePublication(unittest.TestCase):
             result.returncode,
             result.stdout + result.stderr,
         )
-        self.assertIn("G121/E01 validado", result.stdout)
+        self.assertIn("G122/E01 validado", result.stdout)
 
     def test_renderer_incluye_campos_dinamicos_y_secciones(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -81,28 +78,28 @@ class TestReleasePublication(unittest.TestCase):
             "## Validación",
             "## Evidencia",
             "## Siguiente paso",
-            "G121/E01",
-            "UX.6 R8",
+            "G122/E01",
+            "NOR.3 R8",
             PUBLISHED_COMMIT,
             TAG_OBJECT,
-            "**G122/E01**",
+            "**G123**",
             "`0.1.22.01-beta`",
             "NOR.3",
         ):
             with self.subTest(fragment=fragment):
                 self.assertIn(fragment, text)
 
-    def test_manifiesto_contiene_evidencia_g121(self):
+    def test_manifiesto_contiene_evidencia_g122(self):
         data = json.loads(
             MANIFEST.read_text(encoding="utf-8")
         )
         corpus = json.dumps(data, ensure_ascii=False)
 
         for fragment in (
-            "PR #124",
-            "f2b7ed0e0d52d64e2687c37748a00f66bb6e759b",
-            "1508 tests `unittest` OK",
-            "16 familias / 48 identificadores",
+            "PR de integración/promoción NOR.3",
+            "b54b2d27e78d08e62d54873b749af1f99a6ce120",
+            "1579 unittest OK",
+            "27 archivos válidos",
         ):
             with self.subTest(fragment=fragment):
                 self.assertIn(fragment, corpus)
@@ -117,10 +114,10 @@ class TestReleasePublication(unittest.TestCase):
             snapshot.write_text(
                 json.dumps(
                     {
-                        "tagName": "v0.1.21.01-beta",
+                        "tagName": "v0.1.22.01-beta",
                         "name": (
                             "Mi Retiro Proyectado "
-                            "v0.1.21.01-beta — G121/E01"
+                            "v0.1.22.01-beta — G122/E01"
                         ),
                         "isDraft": False,
                         "isPrerelease": True,
