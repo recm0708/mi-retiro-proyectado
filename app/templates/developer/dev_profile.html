@@ -1,0 +1,449 @@
+{% extends "developer/dev_base.html" %}
+
+{% block title %}Perfil · Portal Developer · {{ app_name }}{% endblock %}
+
+{% block content %}
+<section class="hero-section py-5">
+  <div class="container">
+    <span class="dev-kicker">Cuenta Developer</span>
+    <h1 class="display-6 fw-bold mb-3">Perfil</h1>
+    <p class="lead mb-0">
+      Identidad, foto de perfil, datos personales y seguridad de tu cuenta Developer.
+    </p>
+  </div>
+</section>
+
+<section class="py-4">
+  <div class="container">
+    {% if dev_usuario.debe_cambiar_password %}
+    <div
+      class="alert alert-warning"
+      role="alert"
+    >
+      <strong>Cambio de contraseña requerido.</strong>
+      Esta cuenta utiliza una contraseña temporal.
+      Debes establecer una contraseña propia antes de acceder
+      al resto del Portal Developer.
+    </div>
+    {% endif %}
+
+    <div class="row g-4">
+      <div class="col-lg-5">
+        <article class="card h-100">
+          <div class="card-body p-4">
+            <div class="dev-profile-summary">
+              <div class="dev-avatar dev-avatar-lg" aria-hidden="true">
+                {% if dev_avatar_url %}
+                <img
+                  src="{{ dev_avatar_url }}"
+                  alt=""
+                >
+                {% else %}
+                {{ dev_iniciales }}
+                {% endif %}
+              </div>
+
+              <div>
+                <h2 class="h4 mb-1">
+                  {{ dev_nombre_presentacion }}
+                </h2>
+                <p class="text-muted mb-2">
+                  @{{ dev_usuario.usuario }}
+                </p>
+                <span class="badge text-bg-primary">
+                  {{ dev_rol_etiqueta }}
+                </span>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="col-lg-7">
+        <article class="card h-100">
+          <div class="card-body p-4">
+            <h2 class="h5">Seguridad de la cuenta</h2>
+
+            <dl class="dev-detail-list mb-0">
+              <div>
+                <dt>Estado</dt>
+                <dd>
+                  {% if dev_usuario.activo %}
+                  <span class="badge text-bg-success">Activa</span>
+                  {% else %}
+                  <span class="badge text-bg-danger">Desactivada</span>
+                  {% endif %}
+                </dd>
+              </div>
+
+              <div>
+                <dt>Rol</dt>
+                <dd>{{ dev_rol_etiqueta }}</dd>
+              </div>
+
+              <div>
+                <dt>Revisión de seguridad</dt>
+                <dd>{{ dev_usuario.revision_seguridad }}</dd>
+              </div>
+
+              <div>
+                <dt>Cambio obligatorio de contraseña</dt>
+                <dd>
+                  {{ "Sí" if dev_usuario.debe_cambiar_password else "No" }}
+                </dd>
+              </div>
+            </dl>
+          </div>
+        </article>
+      </div>
+    </div>
+
+
+    <article class="card mt-4">
+      <div class="card-body p-4">
+        <div class="row g-4">
+          <div class="col-lg-5">
+            <span class="dev-kicker">Identidad personal</span>
+            <h2 class="h4">Datos de perfil</h2>
+
+            <p class="text-muted mb-0">
+              Puedes actualizar tu nombre visible y la imagen
+              utilizada para identificar tu sesión.
+            </p>
+          </div>
+
+          <div class="col-lg-7">
+            {% if "profile.edit.self" in dev_permisos %}
+            <form
+              method="post"
+              action="/dev/perfil/datos"
+              class="mb-4"
+            >
+              <input
+                type="hidden"
+                name="csrf_token"
+                value="{{ dev_csrf_token }}"
+              >
+
+              <div class="mb-3">
+                <label
+                  class="form-label"
+                  for="dev-profile-username"
+                >
+                  Usuario
+                </label>
+
+                <input
+                  class="form-control"
+                  id="dev-profile-username"
+                  value="{{ dev_usuario.usuario }}"
+                  type="text"
+                  readonly
+                >
+
+                <div class="form-text">
+                  El identificador de inicio de sesión no se modifica
+                  desde el perfil personal.
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label
+                  class="form-label"
+                  for="dev-profile-display-name"
+                >
+                  Nombre visible
+                </label>
+
+                <input
+                  class="form-control"
+                  id="dev-profile-display-name"
+                  name="nombre_visible"
+                  value="{{ dev_usuario.nombre_visible }}"
+                  maxlength="120"
+                  autocomplete="name"
+                  required
+                >
+              </div>
+
+              <button
+                class="btn btn-primary"
+                type="submit"
+              >
+                Guardar datos del perfil
+              </button>
+            </form>
+
+            <hr>
+
+            <div class="dev-profile-photo-management">
+              <h3 class="h6">Foto de perfil</h3>
+
+              <form
+                method="post"
+                action="/dev/perfil/avatar"
+                enctype="multipart/form-data"
+                class="mb-3"
+              >
+                <input
+                  type="hidden"
+                  name="csrf_token"
+                  value="{{ dev_csrf_token }}"
+                >
+
+                <div class="mb-3">
+                  <label
+                    class="form-label"
+                    for="dev-profile-avatar"
+                  >
+                    Seleccionar imagen
+                  </label>
+
+                  <input
+                    class="form-control official-import-file-input"
+                    id="dev-profile-avatar"
+                    name="avatar"
+                    type="file"
+                    accept="image/png,image/jpeg,image/webp"
+                    required
+                  >
+
+                  <div class="form-text">
+                    PNG, JPEG o WebP. Tamaño máximo: 8 MiB.
+                  </div>
+                </div>
+
+                <button
+                  class="btn btn-outline-primary"
+                  type="submit"
+                >
+                  {{ "Reemplazar foto" if dev_avatar_url else "Subir foto" }}
+                </button>
+              </form>
+
+              {% if dev_avatar_url %}
+              <form
+                method="post"
+                action="/dev/perfil/avatar/eliminar"
+              >
+                <input
+                  type="hidden"
+                  name="csrf_token"
+                  value="{{ dev_csrf_token }}"
+                >
+
+                <button
+                  class="btn btn-outline-danger"
+                  type="submit"
+                >
+                  Eliminar foto
+                </button>
+              </form>
+              {% endif %}
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card mt-4">
+      <div class="card-body p-4">
+        <div class="row g-4">
+          <div class="col-lg-5">
+            <span class="dev-kicker">Credencial de acceso</span>
+            <h2 class="h4">Cambiar contraseña</h2>
+
+            <p class="text-muted">
+              La contraseña actual se revalida antes del cambio.
+              Al completar la operación, todas tus sesiones se revocan
+              y deberás iniciar sesión nuevamente.
+            </p>
+
+            <p class="small text-muted mb-0">
+              Política: mínimo 12 caracteres, al menos una mayúscula
+              y un carácter especial.
+            </p>
+          </div>
+
+          <div class="col-lg-7">
+            {% if "profile.edit.self" in dev_permisos %}
+            <form
+              method="post"
+              action="/dev/perfil/password"
+            >
+              <input
+                type="hidden"
+                name="csrf_token"
+                value="{{ dev_csrf_token }}"
+              >
+
+              <div class="mb-3">
+                <label class="form-label" for="dev-current-password">
+                  Contraseña actual
+                </label>
+                <div class="input-group dev-secret-group">
+                  <input
+                    class="form-control"
+                    id="dev-current-password"
+                    name="password_actual"
+                    type="password"
+                    autocomplete="current-password"
+
+                    placeholder="Ingresa tu contraseña actual"                    required
+                  >
+                  <button
+                    class="btn btn-outline-secondary dev-password-toggle"
+                    type="button"
+                    data-dev-password-toggle
+                    data-dev-password-target="dev-current-password"
+                    data-dev-password-name="contraseña actual"
+                    aria-controls="dev-current-password"
+                    aria-pressed="false"
+                    aria-label="Mostrar contraseña actual"
+                    title="Mostrar contraseña actual"
+                  >
+                    <svg
+                      data-dev-password-icon-hidden
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                      focusable="false"
+                    >
+                      <path d="M3 3l18 18"></path>
+                      <path d="M10.6 10.6a2 2 0 0 0 2.8 2.8"></path>
+                      <path d="M9.9 5.2A10.7 10.7 0 0 1 12 5c6.5 0 10 7 10 7a18 18 0 0 1-2 2.7"></path>
+                      <path d="M6.6 6.6C3.8 8.5 2 12 2 12s3.5 7 10 7a10.5 10.5 0 0 0 4.1-.8"></path>
+                    </svg>
+
+                    <svg
+                      data-dev-password-icon-visible
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                      focusable="false"
+                      hidden
+                    >
+                      <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"></path>
+                      <circle cx="12" cy="12" r="2.5"></circle>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label" for="dev-new-password">
+                  Nueva contraseña
+                </label>
+                <div class="input-group dev-secret-group">
+                  <input
+                    class="form-control"
+                    id="dev-new-password"
+                    name="nueva_password"
+                    type="password"
+                    autocomplete="new-password"
+
+                    placeholder="Ingresa una nueva contraseña"                    minlength="12"
+                    maxlength="256"
+                    required
+                  >
+                  <button
+                    class="btn btn-outline-secondary dev-password-toggle"
+                    type="button"
+                    data-dev-password-toggle
+                    data-dev-password-target="dev-new-password"
+                    data-dev-password-name="nueva contraseña"
+                    aria-controls="dev-new-password"
+                    aria-pressed="false"
+                    aria-label="Mostrar nueva contraseña"
+                    title="Mostrar nueva contraseña"
+                  >
+                    <svg
+                      data-dev-password-icon-hidden
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                      focusable="false"
+                    >
+                      <path d="M3 3l18 18"></path>
+                      <path d="M10.6 10.6a2 2 0 0 0 2.8 2.8"></path>
+                      <path d="M9.9 5.2A10.7 10.7 0 0 1 12 5c6.5 0 10 7 10 7a18 18 0 0 1-2 2.7"></path>
+                      <path d="M6.6 6.6C3.8 8.5 2 12 2 12s3.5 7 10 7a10.5 10.5 0 0 0 4.1-.8"></path>
+                    </svg>
+
+                    <svg
+                      data-dev-password-icon-visible
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                      focusable="false"
+                      hidden
+                    >
+                      <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"></path>
+                      <circle cx="12" cy="12" r="2.5"></circle>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label" for="dev-confirm-password">
+                  Confirmar nueva contraseña
+                </label>
+                <div class="input-group dev-secret-group">
+                  <input
+                    class="form-control"
+                    id="dev-confirm-password"
+                    name="confirmar_password"
+                    type="password"
+                    autocomplete="new-password"
+
+                    placeholder="Repite la nueva contraseña"                    minlength="12"
+                    maxlength="256"
+                    required
+                  >
+                  <button
+                    class="btn btn-outline-secondary dev-password-toggle"
+                    type="button"
+                    data-dev-password-toggle
+                    data-dev-password-target="dev-confirm-password"
+                    data-dev-password-name="confirmación de contraseña"
+                    aria-controls="dev-confirm-password"
+                    aria-pressed="false"
+                    aria-label="Mostrar confirmación de contraseña"
+                    title="Mostrar confirmación de contraseña"
+                  >
+                    <svg
+                      data-dev-password-icon-hidden
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                      focusable="false"
+                    >
+                      <path d="M3 3l18 18"></path>
+                      <path d="M10.6 10.6a2 2 0 0 0 2.8 2.8"></path>
+                      <path d="M9.9 5.2A10.7 10.7 0 0 1 12 5c6.5 0 10 7 10 7a18 18 0 0 1-2 2.7"></path>
+                      <path d="M6.6 6.6C3.8 8.5 2 12 2 12s3.5 7 10 7a10.5 10.5 0 0 0 4.1-.8"></path>
+                    </svg>
+
+                    <svg
+                      data-dev-password-icon-visible
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                      focusable="false"
+                      hidden
+                    >
+                      <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"></path>
+                      <circle cx="12" cy="12" r="2.5"></circle>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <button class="btn btn-primary" type="submit">
+                Cambiar contraseña y cerrar sesiones
+              </button>
+            </form>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+{% endblock %}

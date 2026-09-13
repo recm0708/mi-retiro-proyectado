@@ -20,8 +20,8 @@
 "accessibility":
   - changed-files:
       - any-glob-to-any-file:
-          - "app/static/css/accessibility.css"
-          - "app/static/js/accessibility.js"
+          - "app/static/shared/css/accessibility.css"
+          - "app/static/shared/js/accessibility.js"
           - "scripts/visual_a11y_audit.mjs"
           - ".github/workflows/visual-a11y.yml"
 
@@ -69,7 +69,7 @@
   - changed-files:
       - any-glob-to-any-file:
           - "VERSION"
-          - "data/pre-1-0-revision-ledger.json"
-          - "data/release-publication-manifest.json"
-          - "data/work-block-registry.json"
+          - "data/governance/pre-1-0-revision-ledger.json"
+          - "data/governance/release-publication-manifest.json"
+          - "data/governance/work-block-registry.json"
           - "docs/governance/**"

@@ -18,7 +18,7 @@ from release_contract import (
 )
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_MANIFEST = ROOT / "data" / "release-publication-manifest.json"
+DEFAULT_MANIFEST = ROOT / "data" / "governance" / "release-publication-manifest.json"
 
 
 def configure_utf8_stdio() -> None:
@@ -96,7 +96,7 @@ def validate_manifest(manifest: dict, version: str, ledger: dict) -> list[str]:
     else:
         expected = {
             "global_revision": int(ledger["next_global"]),
-            "revision_aware": str(ledger["next_candidate"]),
+            "revision_aware": ledger.get("next_candidate"),
             "block": ledger.get("next_candidate_block"),
         }
         for field, expected_value in expected.items():
@@ -182,29 +182,45 @@ def render_notes(
         lines.extend(f"- {item}" for item in manifest[field])
 
     next_step = manifest["next_step"]
-    candidate_global, candidate_edition = parse_revision_aware(
-        str(next_step["revision_aware"])
-    )
-    if candidate_global != int(next_step["global_revision"]):
-        raise ValueError(
-            "next_step.global_revision no coincide con "
-            "next_step.revision_aware."
-        )
+    next_revision = next_step.get("revision_aware")
+    next_block = next_step.get("block")
+    next_global = int(next_step["global_revision"])
 
-    lines.extend(
-        [
-            "",
-            "## Siguiente paso",
-            "",
-            (
-                "El siguiente Global disponible es "
-                f"**G{candidate_global:03d}/E{candidate_edition:02d}**, "
-                f"candidato `{next_step['revision_aware']}`."
-            ),
-            "",
-            next_step["description"],
-        ]
-    )
+    lines.extend(["", "## Siguiente paso", ""])
+
+    if next_revision is None and next_block is None:
+        lines.extend(
+            [
+                (
+                    "El siguiente Global aritméticamente disponible es "
+                    f"**G{next_global:03d}**, pero no existe candidato "
+                    "revision-aware reservado."
+                ),
+                "",
+                next_step["description"],
+            ]
+        )
+    else:
+        candidate_global, candidate_edition = parse_revision_aware(
+            str(next_revision)
+        )
+        if candidate_global != next_global:
+            raise ValueError(
+                "next_step.global_revision no coincide con "
+                "next_step.revision_aware."
+            )
+        lines.extend(
+            [
+                "",
+                (
+                    "El siguiente Global disponible es "
+                    f"**G{candidate_global:03d}/E{candidate_edition:02d}**, "
+                    f"candidato `{next_revision}`."
+                ),
+                "",
+                next_step["description"],
+            ]
+        )
 
     text = "\n".join(lines).rstrip() + "\n"
     errors = validate_notes(text)

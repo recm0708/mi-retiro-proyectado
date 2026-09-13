@@ -1,0 +1,114 @@
+name: Arquitectura / estructura
+description: Registra cambios de arquitectura, ownership o estructura del repositorio.
+title: "[ARCH] "
+labels: ["planning", "architecture"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Describe arquitectura actual, objetivo, consumidores y migración.
+        No incluyas secretos ni datos personales sensibles.
+
+  - type: input
+    id: relacion
+    attributes:
+      label: Umbrella / Issue relacionado
+      placeholder: "Ej.: #126 / #128"
+    validations:
+      required: true
+
+  - type: textarea
+    id: estado_actual
+    attributes:
+      label: Estado actual
+    validations:
+      required: true
+
+  - type: textarea
+    id: problema
+    attributes:
+      label: Problema arquitectónico
+    validations:
+      required: true
+
+  - type: textarea
+    id: objetivo
+    attributes:
+      label: Arquitectura objetivo / alternativas
+    validations:
+      required: true
+
+  - type: textarea
+    id: ownership
+    attributes:
+      label: Ownership
+    validations:
+      required: true
+
+  - type: textarea
+    id: rutas
+    attributes:
+      label: Rutas / archivos afectados
+    validations:
+      required: true
+
+  - type: textarea
+    id: consumidores
+    attributes:
+      label: Consumidores y referencias
+    validations:
+      required: true
+
+  - type: textarea
+    id: compatibilidad
+    attributes:
+      label: Compatibilidad / trazabilidad
+
+  - type: textarea
+    id: migracion
+    attributes:
+      label: Migración / checklist
+    validations:
+      required: true
+
+  - type: textarea
+    id: gates
+    attributes:
+      label: Tests / gates
+    validations:
+      required: true
+
+  - type: textarea
+    id: documentacion
+    attributes:
+      label: Documentación afectada
+
+  - type: textarea
+    id: riesgos
+    attributes:
+      label: Riesgos
+
+  - type: textarea
+    id: cierre
+    attributes:
+      label: Criterio de cierre
+    validations:
+      required: true
+
+  - type: textarea
+    id: continuidad
+    attributes:
+      label: Continuidad
+      description: Último estado material y siguiente paso exacto.
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: control
+    attributes:
+      label: Confirmaciones
+      options:
+        - label: Confirmo que no he incluido secretos ni datos personales sensibles.
+          required: true
+        - label: Confirmo que identifiqué consumidores antes de proponer movimientos físicos.
+          required: true

@@ -3,7 +3,7 @@
 **Proyecto:** Mi Retiro Proyectado
 **Estándar:** NOR.1 R8
 **Base auditada:** `7e81034ae05f5e588d07a0caf97e6fc79877dfb1` — G111/E01
-**Registro canónico:** `data/work-block-registry.json`
+**Registro canónico:** `data/governance/work-block-registry.json`
 
 ## Propósito
 
@@ -39,7 +39,7 @@ reconciliación histórica. No son familias disponibles para trabajo futuro.
 
 ## Reglas de asignación
 
-1. Consultar primero `data/work-block-registry.json`.
+1. Consultar primero `data/governance/work-block-registry.json`.
 2. Un identificador histórico o planificado queda reservado y no puede
    reasignarse a otro propósito.
 3. Si el nuevo trabajo amplía el mismo alcance de un bloque existente, se

@@ -1,7 +1,7 @@
 # Especificación funcional
 
 **Estado:** Vigente con registro RF histórico integrado
-**Versión de aplicación revisada:** `0.1.21.01-beta`
+**Versión de aplicación revisada:** `0.1.22.01-beta`
 **Versión base histórica:** `0.0.23-beta`
 **Revisión documental:** GOV.1.3 R2 — 2026-08-17
 **Actualización funcional vigente:** UX.4.6e R8 — procedencia editable — 2026-08-19
@@ -17,7 +17,7 @@
 - Design System, movimiento, accesibilidad y responsive quedan compartidos.
 - Mi Retiro Seguro/Ficha Digital mantienen revisión y confirmación explícitas.
 - Términos públicos de la App permanecen separados de contratos Developer.
-- PERSIST.1 R1 queda reservado como G122/E01 y no iniciado.
+- NOR.3 R1–R2 queda como candidato G122/E01 reservado/no aceptado; PERSIST.1 permanece planificado, no iniciado y sin Global preasignado.
 <!-- DOC1-R1-POST-MANT1:END -->
 
 Este documento tiene dos capas:

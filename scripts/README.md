@@ -131,5 +131,5 @@ obligatorios del repositorio.
 
 ## `audit_block_identifiers.py`
 
-Valida `data/work-block-registry.json` y detecta identificadores de familias
+Valida `data/governance/work-block-registry.json` y detecta identificadores de familias
 conocidas que no estén registrados en el registro canónico. No modifica archivos.

@@ -1,7 +1,7 @@
 # Registro de decisiones técnicas
 
 **Estado:** Vigente
-**Versión de aplicación revisada:** `0.1.21.01-beta`
+**Versión de aplicación revisada:** `0.1.22.01-beta`
 **Versión base histórica:** `0.0.25-beta`
 **Base documental histórica:** `0.0.23-beta` — GOV.1.3 R4 — 2026-08-17
 **Revisión documental:** GOV.1.3 R4 — 2026-08-17
@@ -15,10 +15,10 @@
 ## Nota de lectura vigente
 
 - Las ADR históricas no se reescriben.
-- `VERSION` está sincronizado en `0.1.21.01-beta` (G121/E01).
+- `VERSION` está sincronizado en `0.1.22.01-beta` (G121/E01).
 - G120/E01 permanece publicado mediante `v0.1.20.01-beta`.
 - UX.6 R1–R8 queda consolidado dentro de PR #124.
-- PERSIST.1 R1 queda reservado como G122/E01 sin iniciar.
+- NOR.3 R1–R2 queda como candidato G122/E01 reservado/no aceptado; PERSIST.1 permanece planificado, no iniciado y sin Global preasignado.
 - SEC.2 R1–R6 permanece cerrado y su historia se conserva.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 
@@ -1971,7 +1971,7 @@ El detalle, alternativas y evidencia completa permanecen en [ADR-179 — El vers
 
 PR #117 retiró `.github/workflows/ci.yml`, `.github/workflows/governance-audit.yml` y `.github/workflows/markdown-audit.yml` únicamente después de migrar el ruleset y demostrar equivalencia de protección. La automatización no crea commits, tags ni GitHub Releases por sí sola.
 
-Este mantenimiento conserva `VERSION`, `data/pre-1-0-revision-ledger.json` y `data/release-publication-manifest.json` sin cambios. Por tanto, no materializa un nuevo estado revision-aware y no consume G120/E01, reservado para UX.5 R1.
+Este mantenimiento conserva `VERSION`, `data/governance/pre-1-0-revision-ledger.json` y `data/governance/release-publication-manifest.json` sin cambios. Por tanto, no materializa un nuevo estado revision-aware y no consume G120/E01, reservado para UX.5 R1.
 
 **Motivo:** mantener varios workflows con responsabilidades ya centralizadas duplicaba contratos, podía producir divergencias entre validaciones locales/remotas y obligaba a conservar required checks asociados a rutas legacy. La migración ordenada permite retirar duplicación sin abrir una ventana de desprotección.
 

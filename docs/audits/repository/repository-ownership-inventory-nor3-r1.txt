@@ -1,0 +1,1558 @@
+NOR.3 R1 — INVENTARIO DE OWNERSHIP Y CONSUMIDORES
+==============================================================================
+
+EVIDENCIA AUTOMATIZADA DE PRECISIÓN
+
+branch: feat/nor3-r1-inventario-estructural
+HEAD: eb4795007ac16807661eaace675a093ee19cbf49
+VERSION aceptada durante la captura: 0.1.21.01-beta
+SHA256 inventario original: 8a8594209bd653e4f08c5e84839547a996cb9dc92bdc98e8578bf453eddf3cb1
+
+IMPORTANTE
+----------
+Este TXT conserva la evidencia automatizada obtenida antes de cualquier
+movimiento físico.
+
+Las etiquetas automáticas son evidencia de consumidores, NO la decisión
+canónica final de ownership. Cuando exista diferencia, prevalece:
+
+docs/audits/repository/repository-ownership-baseline-nor3-r1.md
+
+Correcciones humanas relevantes:
+- app/templates/base.html = App Asegurado, no Shared.
+- app/templates/partials/ficha_digital_import.html = App Asegurado.
+- app/templates/partials/official_data_import.html = App Asegurado.
+- app/templates/partials/mi_retiro_seguro_reference.html = App Asegurado;
+  requiere verificación de orfandad en R4.
+- app/static/css/results.css = App Asegurado.
+- todos los derivados app/static/img/brand/ = Shared de marca.
+- app/static/css/style.css = transicional/mixto; se divide en R5.
+- app/core/pdf_files.py = boundary API de App Asegurado.
+- app/core/constants.py = candidato de eliminación por ausencia de consumidores.
+- los 14 tests etiquetados Revisar fueron resueltos manualmente en el baseline.
+
+No se realizó ningún movimiento físico en R1.
+
+------------------------------------------------------------------------------
+INVENTARIO AUTOMATIZADO ORIGINAL
+------------------------------------------------------------------------------
+
+NOR.3 R1 — INVENTARIO DE PRECISIÓN
+==============================================================================
+
+branch: feat/nor3-r1-inventario-estructural
+HEAD: eb4795007ac16807661eaace675a093ee19cbf49
+VERSION: 0.1.21.01-beta
+tracked_files: 613
+
+===== RUTAS FASTAPI COMPLETAS =====
+total_routes=55
+App Asegurado: 24
+Portal Developer: 29
+Shared/Platform: 2
+
+L 420 | GET          | /                                             | App Asegurado    | fn=inicio
+    templates: index.html
+L3200 | POST         | /api/simulacion/comparar-escenarios           | App Asegurado    | fn=calcular_comparacion_escenarios
+    app-deps: app.services.comparator
+L2764 | POST         | /api/simulacion/cuotas                        | App Asegurado    | fn=calcular_resumen_cuotas
+    app-deps: app.services.contribution_projection
+L2814 | POST         | /api/simulacion/detalle-anio-actual           | App Asegurado    | fn=calcular_detalle_anio_actual
+    app-deps: app.services.current_year_detail
+L2872 | POST         | /api/simulacion/ficha-digital                 | App Asegurado    | fn=analizar_ficha_digital
+    app-deps: app.core.pdf_files, app.services.ficha_digital, app.services.reference_date
+L2789 | POST         | /api/simulacion/historial-salarial            | App Asegurado    | fn=calcular_resumen_historial_salarial
+    app-deps: app.services.salary_history
+L2976 | POST         | /api/simulacion/linea-tiempo                  | App Asegurado    | fn=calcular_linea_tiempo
+    app-deps: app.services.timeline
+L3116 | POST         | /api/simulacion/mixto                         | App Asegurado    | fn=calcular_pension_mixto
+    app-deps: app.engines.mixto
+L2951 | POST         | /api/simulacion/proyeccion-salario            | App Asegurado    | fn=calcular_proyeccion_salario
+    app-deps: app.services.salary_projection
+L2839 | POST         | /api/simulacion/referencia-mi-retiro-seguro   | App Asegurado    | fn=analizar_referencia_mi_retiro_seguro
+    app-deps: app.core.pdf_files, app.services.mi_retiro_seguro_reference
+L3135 | POST         | /api/simulacion/resultados/mixto              | App Asegurado    | fn=calcular_resultado_integrado_mixto
+    app-deps: app.services.mixto_results
+L3093 | POST         | /api/simulacion/resultados/sebd               | App Asegurado    | fn=calcular_resultado_integrado_sebd
+    app-deps: app.services.sebd_results
+L3049 | POST         | /api/simulacion/resultados/sebd-normal        | App Asegurado    | fn=calcular_resultado_integrado_sebd_normal
+    app-deps: app.services.results
+L3177 | POST         | /api/simulacion/resultados/sucgs              | App Asegurado    | fn=calcular_resultado_integrado_sucgs
+    app-deps: app.services.sucgs_results
+L3000 | POST         | /api/simulacion/retiro                        | App Asegurado    | fn=calcular_retiro
+    app-deps: app.services.retirement
+L2926 | POST         | /api/simulacion/salario                       | App Asegurado    | fn=calcular_resumen_salario
+    app-deps: app.services.salary_projection
+L3074 | POST         | /api/simulacion/sebd                          | App Asegurado    | fn=calcular_pension_sebd
+    app-deps: app.engines.sebd_modalidades
+L3024 | POST         | /api/simulacion/sebd/normal                   | App Asegurado    | fn=calcular_pension_sebd_normal
+    app-deps: app.engines.sebd
+L3158 | POST         | /api/simulacion/sucgs                         | App Asegurado    | fn=calcular_pension_sucgs
+    app-deps: app.engines.sucgs
+L2907 | GET          | /api/sistema/fecha-referencia                 | App Asegurado    | fn=consultar_fecha_referencia
+    app-deps: app.models.simulation, app.services.reference_date
+L 497 | GET          | /como-se-calcula                              | App Asegurado    | fn=como_se_calcula
+    templates: calculation_guide.html
+    app-deps: app.services.calculation_guide, app.services.regulatory_sources
+L 458 | GET          | /comparar                                     | App Asegurado    | fn=comparar
+    templates: comparison.html
+L 518 | GET          | /dev                                          | Portal Developer | fn=portal_developer
+L1870 | POST         | /dev                                          | Portal Developer | fn=procesar_login_administrativo
+    app-deps: app.core.admin_session, app.core.developer_provisioning, app.core.developer_store, app.core.observability
+L1839 | GET          | /dev/acceso-tecnico                           | Portal Developer | fn=acceso_tecnico_developer
+L 578 | GET          | /dev/archivos                                 | Portal Developer | fn=archivos_developer
+L 592 | POST         | /dev/archivos/exportar                        | Portal Developer | fn=exportar_archivos_developer
+L2014 | GET          | /dev/centro-desarrollo                        | Portal Developer | fn=centro_desarrollo
+    app-deps: app.core.admin_security
+L 548 | GET          | /dev/diagnostico                              | Portal Developer | fn=diagnostico_developer
+L 563 | GET          | /dev/eventos                                  | Portal Developer | fn=eventos_developer
+L1854 | GET          | /dev/login                                    | Portal Developer | fn=login_administrativo_legacy
+L1870 | POST         | /dev/login                                    | Portal Developer | fn=procesar_login_administrativo
+    app-deps: app.core.admin_session, app.core.developer_provisioning, app.core.developer_store, app.core.observability
+L1965 | POST         | /dev/logout                                   | Portal Developer | fn=logout_administrativo
+    app-deps: app.core.admin_session, app.core.observability
+L 640 | GET          | /dev/mantenimiento                            | Portal Developer | fn=mantenimiento_developer
+L 654 | POST         | /dev/mantenimiento/limpiar-sesiones           | Portal Developer | fn=limpiar_sesiones_developer
+    app-deps: app.core.admin_session, app.core.observability
+L 700 | POST         | /dev/mantenimiento/revocar-sesiones           | Portal Developer | fn=revocar_sesiones_developer
+    app-deps: app.core.admin_session, app.core.observability
+L 771 | GET          | /dev/perfil                                   | Portal Developer | fn=perfil_developer
+L 833 | POST         | /dev/perfil/avatar                            | Portal Developer | fn=actualizar_avatar_perfil_developer
+    app-deps: app.core.developer_avatar, app.core.developer_store, app.core.observability
+L 934 | POST         | /dev/perfil/avatar/eliminar                   | Portal Developer | fn=eliminar_avatar_perfil_developer
+    app-deps: app.core.developer_avatar, app.core.developer_store, app.core.observability
+L 982 | GET          | /dev/perfil/avatar/{identificador}            | Portal Developer | fn=obtener_avatar_perfil_developer
+    app-deps: app.core.developer_avatar, app.core.developer_identity, app.core.developer_store
+L 785 | POST         | /dev/perfil/datos                             | Portal Developer | fn=actualizar_datos_perfil_developer
+    app-deps: app.core.developer_store, app.core.observability
+L1057 | POST         | /dev/perfil/password                          | Portal Developer | fn=cambiar_password_perfil_developer
+    app-deps: app.core.admin_session, app.core.developer_identity, app.core.developer_store, app.core.observability
+L 756 | GET          | /dev/privacidad                               | Portal Developer | fn=privacidad_developer
+L1124 | GET          | /dev/usuarios                                 | Portal Developer | fn=usuarios_developer
+    templates: dev_users.html
+    app-deps: app.core.developer_identity, app.core.developer_user_admin, app.core.developer_user_audit, app.services.development_center
+L1220 | POST         | /dev/usuarios/crear                           | Portal Developer | fn=crear_usuario_developer_web
+    app-deps: app.core.developer_user_admin, app.core.developer_web_security, app.core.observability
+L1451 | POST         | /dev/usuarios/{identificador}/datos           | Portal Developer | fn=actualizar_usuario_developer_web
+    app-deps: app.core.developer_user_admin, app.core.observability
+L1310 | POST         | /dev/usuarios/{identificador}/editar          | Portal Developer | fn=editar_usuario_developer_web
+    app-deps: app.core.admin_session, app.core.developer_identity, app.core.developer_store, app.core.developer_user_admin, app.core.developer_web_security, app.core.observability
+L1759 | POST         | /dev/usuarios/{identificador}/eliminar        | Portal Developer | fn=eliminar_usuario_developer_web
+    app-deps: app.core.admin_session, app.core.developer_avatar, app.core.developer_user_admin, app.core.developer_web_security, app.core.observability
+L1599 | POST         | /dev/usuarios/{identificador}/estado          | Portal Developer | fn=cambiar_estado_usuario_developer_web
+    app-deps: app.core.admin_session, app.core.developer_user_admin, app.core.developer_web_security, app.core.observability
+L1680 | POST         | /dev/usuarios/{identificador}/password-temporal | Portal Developer | fn=restablecer_password_usuario_developer_web
+    app-deps: app.core.admin_session, app.core.developer_user_admin, app.core.developer_web_security, app.core.observability
+L1511 | POST         | /dev/usuarios/{identificador}/rol             | Portal Developer | fn=cambiar_rol_usuario_developer_web
+    app-deps: app.core.admin_session, app.core.developer_user_admin, app.core.developer_web_security, app.core.observability
+L 394 | GET          | /favicon.ico                                  | Shared/Platform  | fn=favicon_aplicacion
+L 477 | GET          | /metodologia                                  | App Asegurado    | fn=metodologia
+    templates: methodology.html
+    app-deps: app.services.regulatory_sources
+L3220 | GET          | /salud                                        | Shared/Platform  | fn=salud
+L 439 | GET          | /simulacion                                   | App Asegurado    | fn=simulacion
+    templates: simulation.html
+
+===== TEMPLATES: OWNERSHIP + GRAFO =====
+app/templates/base.html | owner=Shared
+    included_by: app/templates/calculation_guide.html, app/templates/comparison.html, app/templates/dev_dashboard.html, app/templates/dev_development_center.html, app/templates/dev_diagnostics.html, app/templates/dev_events.html, app/templates/dev_files.html, app/templates/dev_login.html, app/templates/dev_maintenance.html, app/templates/dev_privacy.html, app/templates/dev_profile.html, app/templates/dev_technical_access.html, app/templates/dev_users.html, app/templates/index.html, app/templates/methodology.html, app/templates/simulation.html
+    deps: partials/data_management.html, partials/global_footer.html, partials/privacy_consent.html
+app/templates/calculation_guide.html | owner=App Asegurado
+    rendered_by: como_se_calcula
+    deps: base.html
+app/templates/comparison.html | owner=App Asegurado
+    rendered_by: comparar
+    deps: base.html
+app/templates/dev_base.html | owner=Portal Developer
+    included_by: app/templates/dev_dashboard.html, app/templates/dev_development_center.html, app/templates/dev_diagnostics.html, app/templates/dev_events.html, app/templates/dev_files.html, app/templates/dev_login.html, app/templates/dev_maintenance.html, app/templates/dev_privacy.html, app/templates/dev_profile.html, app/templates/dev_technical_access.html, app/templates/dev_users.html
+    deps: partials/global_footer.html
+app/templates/dev_dashboard.html | owner=Portal Developer
+    deps: dev_base.html
+app/templates/dev_development_center.html | owner=Portal Developer
+    deps: dev_base.html
+app/templates/dev_diagnostics.html | owner=Portal Developer
+    deps: dev_base.html
+app/templates/dev_events.html | owner=Portal Developer
+    deps: dev_base.html
+app/templates/dev_files.html | owner=Portal Developer
+    deps: dev_base.html
+app/templates/dev_login.html | owner=Portal Developer
+    deps: dev_base.html
+app/templates/dev_maintenance.html | owner=Portal Developer
+    deps: dev_base.html
+app/templates/dev_privacy.html | owner=Portal Developer
+    deps: dev_base.html
+app/templates/dev_profile.html | owner=Portal Developer
+    deps: dev_base.html
+app/templates/dev_technical_access.html | owner=Portal Developer
+    deps: dev_base.html
+app/templates/dev_users.html | owner=Portal Developer
+    rendered_by: usuarios_developer
+    deps: dev_base.html
+app/templates/index.html | owner=App Asegurado
+    rendered_by: inicio
+    deps: base.html
+app/templates/methodology.html | owner=App Asegurado
+    rendered_by: metodologia
+    deps: base.html
+app/templates/partials/assisted_preparation.html | owner=App Asegurado
+    included_by: app/templates/simulation.html
+    deps: partials/ficha_digital_import.html, partials/official_data_import.html
+app/templates/partials/current_year_detail.html | owner=App Asegurado
+    included_by: app/templates/simulation.html
+app/templates/partials/data_management.html | owner=App Asegurado
+    included_by: app/templates/base.html
+app/templates/partials/ficha_digital_import.html | owner=Revisar
+    included_by: app/templates/partials/assisted_preparation.html
+app/templates/partials/global_footer.html | owner=Shared
+    included_by: app/templates/base.html, app/templates/dev_base.html
+app/templates/partials/mi_retiro_seguro_reference.html | owner=Revisar
+app/templates/partials/official_data_import.html | owner=Revisar
+    included_by: app/templates/partials/assisted_preparation.html
+app/templates/partials/privacy_consent.html | owner=App Asegurado
+    included_by: app/templates/base.html
+app/templates/partials/results.html | owner=App Asegurado
+    included_by: app/templates/simulation.html
+app/templates/partials/retirement.html | owner=App Asegurado
+    included_by: app/templates/simulation.html
+app/templates/partials/salary_history.html | owner=App Asegurado
+    included_by: app/templates/simulation.html
+app/templates/simulation.html | owner=App Asegurado
+    rendered_by: simulacion
+    deps: base.html, partials/assisted_preparation.html, partials/current_year_detail.html, partials/results.html, partials/retirement.html, partials/salary_history.html
+
+Resumen templates:
+App Asegurado: 12
+Portal Developer: 12
+Revisar: 3
+Shared: 2
+
+===== ASSETS RUNTIME: OWNERSHIP + CONSUMIDORES =====
+app/static/css/accessibility.css | owner=Shared | runtime_refs=4
+    <- .github/labeler.yml
+    <- app/static/css/design-system.css
+    <- app/templates/base.html
+    <- app/templates/dev_base.html
+app/static/css/brand.css | owner=Shared | runtime_refs=2
+    <- app/templates/base.html
+    <- app/templates/dev_base.html
+app/static/css/calculation-guide.css | owner=App Asegurado | runtime_refs=1
+    <- app/templates/calculation_guide.html
+app/static/css/design-system.css | owner=Shared | runtime_refs=2
+    <- app/templates/base.html
+    <- app/templates/dev_base.html
+app/static/css/developer-portal.css | owner=Portal Developer | runtime_refs=2
+    <- app/main.py
+    <- app/templates/dev_base.html
+app/static/css/editable-provenance.css | owner=App Asegurado | runtime_refs=1
+    <- app/templates/base.html
+app/static/css/motion.css | owner=Shared | runtime_refs=2
+    <- app/templates/base.html
+    <- app/templates/dev_base.html
+app/static/css/results.css | owner=Revisar | runtime_refs=1
+    <- app/static/js/results_orchestration.js
+app/static/css/style.css | owner=Shared | runtime_refs=3
+    <- app/static/css/design-system.css
+    <- app/templates/base.html
+    <- app/templates/dev_base.html
+app/static/img/brand/app-icon-192.png | owner=Shared | runtime_refs=0
+app/static/img/brand/app-icon-512.png | owner=Shared | runtime_refs=0
+app/static/img/brand/apple-touch-icon.png | owner=Shared | runtime_refs=2
+    <- app/templates/base.html
+    <- app/templates/dev_base.html
+app/static/img/brand/favicon-16x16.png | owner=App Asegurado | runtime_refs=1
+    <- app/templates/base.html
+app/static/img/brand/favicon-32x32.png | owner=Shared | runtime_refs=2
+    <- app/templates/base.html
+    <- app/templates/dev_base.html
+app/static/img/brand/favicon-48x48.png | owner=Shared | runtime_refs=0
+app/static/img/brand/favicon.ico | owner=Shared | runtime_refs=4
+    <- app/core/observability.py
+    <- app/main.py
+    <- app/templates/base.html
+    <- app/templates/dev_base.html
+app/static/img/brand/logo-mark-128.png | owner=Shared | runtime_refs=3
+    <- app/static/js/results_orchestration.js
+    <- app/templates/base.html
+    <- app/templates/dev_base.html
+app/static/js/accessibility.js | owner=Shared | runtime_refs=3
+    <- .github/labeler.yml
+    <- app/templates/base.html
+    <- app/templates/dev_base.html
+app/static/js/app_shell.js | owner=App Asegurado | runtime_refs=1
+    <- app/templates/base.html
+app/static/js/assisted_flow.js | owner=App Asegurado | runtime_refs=1
+    <- app/templates/simulation.html
+app/static/js/attachment_processing.js | owner=App Asegurado | runtime_refs=1
+    <- app/templates/base.html
+app/static/js/comparator.js | owner=App Asegurado | runtime_refs=1
+    <- app/templates/comparison.html
+app/static/js/currency.js | owner=App Asegurado | runtime_refs=2
+    <- app/templates/comparison.html
+    <- app/templates/simulation.html
+app/static/js/current_year_detail.js | owner=App Asegurado | runtime_refs=1
+    <- app/templates/simulation.html
+app/static/js/data_management.js | owner=App Asegurado | runtime_refs=1
+    <- app/templates/base.html
+app/static/js/datetime_ui.js | owner=Shared | runtime_refs=2
+    <- app/templates/base.html
+    <- app/templates/dev_base.html
+app/static/js/developer_forms.js | owner=Portal Developer | runtime_refs=2
+    <- app/main.py
+    <- app/templates/dev_base.html
+app/static/js/developer_portal.js | owner=Portal Developer | runtime_refs=2
+    <- app/main.py
+    <- app/templates/dev_base.html
+app/static/js/editable_provenance.js | owner=App Asegurado | runtime_refs=1
+    <- app/templates/base.html
+app/static/js/interaction_ui.js | owner=Shared | runtime_refs=2
+    <- app/templates/base.html
+    <- app/templates/dev_base.html
+app/static/js/mi_retiro_seguro_reference.js | owner=App Asegurado | runtime_refs=1
+    <- app/templates/simulation.html
+app/static/js/official_data_import.js | owner=App Asegurado | runtime_refs=1
+    <- app/templates/simulation.html
+app/static/js/privacy.js | owner=App Asegurado | runtime_refs=1
+    <- app/templates/base.html
+app/static/js/results.js | owner=App Asegurado | runtime_refs=1
+    <- app/templates/simulation.html
+app/static/js/results_orchestration.js | owner=App Asegurado | runtime_refs=1
+    <- app/templates/partials/data_management.html
+app/static/js/retirement.js | owner=App Asegurado | runtime_refs=1
+    <- app/templates/simulation.html
+app/static/js/salary_history.js | owner=App Asegurado | runtime_refs=1
+    <- app/templates/simulation.html
+app/static/js/shell_state_boot.js | owner=Shared | runtime_refs=2
+    <- app/templates/base.html
+    <- app/templates/dev_base.html
+app/static/js/shell_ui.js | owner=Shared | runtime_refs=3
+    <- app/static/css/design-system.css
+    <- app/templates/base.html
+    <- app/templates/dev_base.html
+app/static/js/simulation.js | owner=App Asegurado | runtime_refs=1
+    <- app/templates/simulation.html
+app/static/js/simulation_mode.js | owner=App Asegurado | runtime_refs=2
+    <- app/static/js/official_data_import.js
+    <- app/templates/simulation.html
+app/static/js/theme.js | owner=Shared | runtime_refs=2
+    <- app/templates/base.html
+    <- app/templates/dev_base.html
+app/static/js/timeline.js | owner=App Asegurado | runtime_refs=1
+    <- app/templates/simulation.html
+app/static/js/wizard_navigation.js | owner=App Asegurado | runtime_refs=1
+    <- app/templates/simulation.html
+
+Resumen assets:
+App Asegurado: 22
+Portal Developer: 3
+Revisar: 1
+Shared: 18
+
+===== TESTS: CLASIFICACIÓN DE PRECISIÓN =====
+tests/test_accessibility_themes.py | owner=Shared
+    Shared: frontend-shared
+tests/test_accessibility_ux4.py | owner=Shared
+    Shared: frontend-shared
+tests/test_automation_core_quality_gate.py | owner=Integración:Portal Developer+App Asegurado
+    Portal Developer: ruta:/dev
+    App Asegurado: frontend-app
+    Tooling/Governance: nombre
+tests/test_comparator.py | owner=App Asegurado
+    App Asegurado: import:app.models.comparacion, import:app.models.comparacion.DatosComparacionEscenarios, import:app.models.pension, import:app.models.pension.DatosResultadoMixto, import:app.models.pension.DatosResultadoSEBD, import:app.models.pension.DatosResultadoSUCGS, import:app.models.simulation, import:app.models.simulation.DatosHistorialSalarial, import:app.models.simulation.EscenarioLineaTiempo, import:app.models.simulation.EscenarioRetiro, import:app.models.simulation.RegistroHistorialSalarial, import:app.models.simulation.RegistroLineaTiempo, import:app.models.simulation.ResumenLineaTiempo, import:app.models.simulation.ResumenRetiro, import:app.services.comparator, import:app.services.comparator.comparar_escenarios
+tests/test_dev2_development_center.py | owner=Integración:Portal Developer+Shared
+    Portal Developer: import:app.services.development_center, import:app.services.development_center.construir_estado_centro_desarrollo, ruta:/dev
+    Shared: import:app.core.observability, import:app.core.observability.ruta_log_actual, import:app.core.version, import:app.core.version.APP_VERSION
+tests/test_dev2_r1_cierre_documental.py | owner=Integración:Portal Developer+Shared
+    Portal Developer: ruta:/dev
+    Shared: import:app.core.version, import:app.core.version.APP_VERSION
+tests/test_dev2_r2_visor_diagnostico.py | owner=Integración:Portal Developer+Shared
+    Portal Developer: import:app.services.development_center, import:app.services.development_center.construir_estado_centro_desarrollo, import:app.services.development_center.exportar_zip_diagnostico_sanitizado, ruta:/dev
+    Shared: import:app.core.observability, import:app.core.observability.registrar_evento, import:app.core.observability.ruta_log_actual
+tests/test_dev2_r3_autodiagnostico.py | owner=Integración:Portal Developer+Shared
+    Portal Developer: import:app.services.development_center, import:app.services.development_center.construir_estado_centro_desarrollo, import:app.services.development_center.ejecutar_autodiagnostico, ruta:/dev
+    Shared: import:app.core.observability, import:app.core.observability.registrar_evento, import:app.core.observability.ruta_log_actual
+tests/test_dev2_r4_cierre_final.py | owner=Integración:Portal Developer+Shared
+    Portal Developer: ruta:/dev
+    Shared: import:app.core.version, import:app.core.version.APP_VERSION
+tests/test_dev2_r5_portal_access.py | owner=Integración:Portal Developer+App Asegurado+Shared
+    Portal Developer: import:app.core.admin_session, import:app.core.admin_session.revocar_todas_las_sesiones_admin, import:app.core.developer_provisioning, import:app.core.developer_provisioning.bootstrap_propietario, ruta:/dev, frontend-developer
+    App Asegurado: frontend-app
+    Shared: import:app.core.observability, import:app.core.observability.ruta_log_actual
+tests/test_dev2_r6_cli.py | owner=Portal Developer
+    Portal Developer: import:app.cli.admin, import:app.cli.admin._password_confirmada
+tests/test_dev2_r6_header_identity.py | owner=Portal Developer
+    Portal Developer: import:app.core.admin_session, import:app.core.admin_session.revocar_todas_las_sesiones_admin, import:app.core.developer_identity, import:app.core.developer_identity.RolDeveloper, import:app.core.developer_identity.hashear_password, import:app.core.developer_provisioning, import:app.core.developer_provisioning.bootstrap_propietario, import:app.core.developer_store, import:app.core.developer_store.crear_usuario_developer, ruta:/dev
+tests/test_dev2_r6_identity.py | owner=Portal Developer
+    Portal Developer: import:app.core.developer_identity, import:app.core.developer_identity.PermisoDeveloper, import:app.core.developer_identity.RolDeveloper, import:app.core.developer_identity.generar_codigo_recuperacion_propietario, import:app.core.developer_identity.hashear_codigo_recuperacion, import:app.core.developer_identity.hashear_password, import:app.core.developer_identity.normalizar_nombre_visible, import:app.core.developer_identity.normalizar_usuario, import:app.core.developer_identity.password_necesita_rehash, import:app.core.developer_identity.permisos_para_rol, import:app.core.developer_identity.rol_puede_asignar, import:app.core.developer_identity.rol_tiene_permiso, import:app.core.developer_identity.verificar_codigo_recuperacion, import:app.core.developer_identity.verificar_password
+tests/test_dev2_r6_multipage_shell.py | owner=Portal Developer
+    Portal Developer: import:app.core.admin_session, import:app.core.admin_session.revocar_todas_las_sesiones_admin, import:app.core.developer_provisioning, import:app.core.developer_provisioning.bootstrap_propietario, ruta:/dev, frontend-developer
+tests/test_dev2_r6_observability_portal.py | owner=Integración:Portal Developer+Shared
+    Portal Developer: import:app.services.development_center, import:app.services.development_center.construir_estado_centro_desarrollo, ruta:/dev, frontend-developer
+    Shared: import:app.core.observability, import:app.core.observability.ruta_log_actual
+tests/test_dev2_r6_provisioning.py | owner=Portal Developer
+    Portal Developer: import:app.core.developer_identity, import:app.core.developer_identity.RolDeveloper, import:app.core.developer_identity.hashear_password, import:app.core.developer_identity.verificar_codigo_recuperacion, import:app.core.developer_identity.verificar_password, import:app.core.developer_provisioning, import:app.core.developer_provisioning.autenticar_usuario_developer, import:app.core.developer_provisioning.bootstrap_propietario, import:app.core.developer_provisioning.recuperar_propietario, import:app.core.developer_provisioning.restablecer_password_developer, import:app.core.developer_store, import:app.core.developer_store.crear_usuario_developer, import:app.core.developer_store.obtener_propietario, import:app.core.developer_store.obtener_usuario_por_login
+tests/test_dev2_r6_security_maintenance_privacy.py | owner=Portal Developer
+    Portal Developer: import:app.core.developer_identity, import:app.core.developer_identity.PermisoDeveloper, import:app.core.developer_identity.RolDeveloper, import:app.core.developer_identity.hashear_password, import:app.core.developer_identity.rol_tiene_permiso, import:app.core.developer_identity.verificar_password, import:app.core.developer_store, import:app.core.developer_store.cambiar_password_propio, import:app.core.developer_store.crear_propietario, import:app.core.developer_web_security, import:app.core.developer_web_security.token_csrf_para_sesion, import:app.core.developer_web_security.validar_token_csrf_sesion, ruta:/dev, frontend-developer
+tests/test_dev2_r6_sidebar_theme_sync.py | owner=Integración:Portal Developer+Shared
+    Portal Developer: ruta:/dev, frontend-developer
+    Shared: frontend-shared
+tests/test_dev2_r6_store.py | owner=Portal Developer
+    Portal Developer: import:app.core.developer_avatar, import:app.core.developer_avatar.directorio_avatares_developer, import:app.core.developer_avatar.eliminar_avatar_developer, import:app.core.developer_avatar.guardar_avatar_developer, import:app.core.developer_avatar.resolver_avatar_developer, import:app.core.developer_avatar.ruta_media_developer, import:app.core.developer_identity, import:app.core.developer_identity.RolDeveloper, import:app.core.developer_identity.generar_codigo_recuperacion_propietario, import:app.core.developer_identity.hashear_codigo_recuperacion, import:app.core.developer_identity.hashear_password, import:app.core.developer_store, import:app.core.developer_store.actualizar_avatar_usuario, import:app.core.developer_store.actualizar_nombre_visible_usuario, import:app.core.developer_store.cambiar_estado_usuario, import:app.core.developer_store.cambiar_rol_usuario, import:app.core.developer_store.contar_propietarios, import:app.core.developer_store.crear_propietario, import:app.core.developer_store.crear_usuario_developer, import:app.core.developer_store.inicializar_almacen_developer, import:app.core.developer_store.listar_usuarios_developer, import:app.core.developer_store.obtener_usuario_por_login, import:app.core.developer_store.registrar_acceso_usuario
+tests/test_dev2_r6_web_access.py | owner=Portal Developer
+    Portal Developer: import:app.core.admin_session, import:app.core.admin_session.revocar_todas_las_sesiones_admin, import:app.core.developer_provisioning, import:app.core.developer_provisioning.bootstrap_propietario, ruta:/dev
+tests/test_dev2_r6_web_session.py | owner=Portal Developer
+    Portal Developer: import:app.core.admin_session, import:app.core.admin_session.crear_sesion_admin, import:app.core.admin_session.eliminar_sesion_admin, import:app.core.admin_session.obtener_sesion_admin, import:app.core.admin_session.revocar_sesiones_usuario, import:app.core.admin_session.revocar_todas_las_sesiones_admin, import:app.core.admin_session.validar_sesion_admin, import:app.core.admin_session.validar_sesion_admin_con_identidad, import:app.core.admin_session.validar_sesion_admin_para_usuario, import:app.core.developer_identity, import:app.core.developer_identity.RolDeveloper
+tests/test_doc1_r1_auditoria_markdown_post_mant1.py | owner=Tooling/Governance
+    Tooling/Governance: nombre
+tests/test_doc1_r3_markdown_links.py | owner=Tooling/Governance
+    Shared: import:app.core.version_ledger, import:app.core.version_ledger.cargar_ledger
+    Tooling/Governance: nombre
+tests/test_doc1_r4_live_state_sanitization.py | owner=Tooling/Governance
+    Shared: import:app.core.version_ledger, import:app.core.version_ledger.cargar_ledger
+    Tooling/Governance: nombre
+tests/test_doc1_r5_markdown_auditor.py | owner=Tooling/Governance
+    Tooling/Governance: nombre
+tests/test_doc1_r5_markdown_standards.py | owner=Tooling/Governance
+    Tooling/Governance: nombre
+tests/test_doc2_r1_changelog_reconstruction.py | owner=Tooling/Governance
+    Shared: import:app.core.version_ledger, import:app.core.version_ledger.cargar_ledger
+    Tooling/Governance: nombre
+tests/test_g109_promotion_post_merge.py | owner=Shared
+    Shared: import:app.core.config, import:app.core.config.APP_VERSION, import:app.core.version, import:app.core.version.descomponer_version_beta_revision, import:app.core.version_ledger, import:app.core.version_ledger.cargar_ledger
+tests/test_g110_promotion_post_merge.py | owner=Shared
+    Shared: import:app.core.config, import:app.core.config.APP_VERSION, import:app.core.version, import:app.core.version.descomponer_version_beta_revision, import:app.core.version_ledger, import:app.core.version_ledger.cargar_ledger
+tests/test_g111_promotion_post_merge.py | owner=Shared
+    Shared: import:app.core.config, import:app.core.config.APP_VERSION, import:app.core.version, import:app.core.version.descomponer_version_beta_revision, import:app.core.version_ledger, import:app.core.version_ledger.cargar_ledger
+tests/test_g112_promotion_post_merge.py | owner=Shared
+    Shared: import:app.core.version_ledger, import:app.core.version_ledger.cargar_ledger
+tests/test_g113_promotion_post_merge.py | owner=Shared
+    Shared: import:app.core.version_ledger, import:app.core.version_ledger.cargar_ledger
+tests/test_g114_promotion_post_merge.py | owner=Shared
+    Shared: import:app.core.version_ledger, import:app.core.version_ledger.cargar_ledger
+tests/test_g115_promotion_post_merge.py | owner=Shared
+    Shared: import:app.core.version_ledger, import:app.core.version_ledger.cargar_ledger
+tests/test_g116_promotion_post_merge.py | owner=Shared
+    Shared: import:app.core.version_ledger, import:app.core.version_ledger.cargar_ledger
+tests/test_g117_promotion_post_merge.py | owner=Shared
+    Shared: import:app.core.version_ledger, import:app.core.version_ledger.cargar_ledger
+tests/test_g118_promotion_post_merge.py | owner=Shared
+    Shared: import:app.core.version_ledger, import:app.core.version_ledger.cargar_ledger
+tests/test_g119_promotion_post_merge.py | owner=Shared
+    Shared: import:app.core.version_ledger, import:app.core.version_ledger.cargar_ledger
+tests/test_g120_promotion_post_merge.py | owner=Shared
+    Shared: import:app.core.version_ledger, import:app.core.version_ledger.cargar_ledger
+tests/test_g121_promotion_post_merge.py | owner=Integración:Portal Developer+App Asegurado+Shared
+    Portal Developer: ruta:/dev
+    App Asegurado: frontend-app
+    Shared: import:app.core.config, import:app.core.config.APP_VERSION, import:app.core.version, import:app.core.version.descomponer_version_beta_revision, import:app.core.version_ledger, import:app.core.version_ledger.cargar_ledger
+tests/test_git_history_attestation.py | owner=Tooling/Governance
+    Tooling/Governance: nombre
+tests/test_gov12_versionado.py | owner=Tooling/Governance
+    Shared: import:app.core.config, import:app.core.config.APP_VERSION
+    Tooling/Governance: nombre
+tests/test_gov13_documentacion.py | owner=Tooling/Governance
+    Tooling/Governance: nombre
+tests/test_gov13_documentacion_r2.py | owner=Tooling/Governance
+    Tooling/Governance: nombre
+tests/test_gov13_documentacion_r3.py | owner=Tooling/Governance
+    Tooling/Governance: nombre
+tests/test_gov13_documentacion_r4.py | owner=Tooling/Governance
+    Tooling/Governance: nombre
+tests/test_gov14_observabilidad.py | owner=Tooling/Governance
+    Shared: import:app.core.observability, import:app.core.observability.SCHEMA_VERSION, import:app.core.observability.contexto_correlacion, import:app.core.observability.correlacion_actual, import:app.core.observability.exportar_diagnostico, import:app.core.observability.modo_desarrollo_activo, import:app.core.observability.registrar_evento, import:app.core.observability.registrar_excepcion, import:app.core.observability.ruta_log_actual
+    Tooling/Governance: nombre
+tests/test_gov14_observabilidad_integracion.py | owner=Integración:App Asegurado+Shared
+    App Asegurado: frontend-app
+    Shared: import:app.core.observability, import:app.core.observability.contexto_correlacion, import:app.core.observability.ruta_log_actual
+    Tooling/Governance: nombre
+tests/test_gov15_cierre_seguridad_privacidad.py | owner=App Asegurado
+    App Asegurado: frontend-app
+    Tooling/Governance: nombre
+tests/test_gov15_modelo_amenazas.py | owner=Tooling/Governance
+    Tooling/Governance: nombre
+tests/test_gov15_procedimientos_privacidad.py | owner=Tooling/Governance
+    Tooling/Governance: nombre
+tests/test_gov16_controles_github.py | owner=Tooling/Governance
+    Tooling/Governance: nombre
+tests/test_gov17_licencia.py | owner=Tooling/Governance
+    Tooling/Governance: nombre
+tests/test_gov18_cierre_gobierno.py | owner=Tooling/Governance
+    Shared: import:app.core.config, import:app.core.config.APP_VERSION
+    Tooling/Governance: nombre
+tests/test_gov_firma_git.py | owner=Tooling/Governance
+    Tooling/Governance: nombre
+tests/test_identidad_interfaz.py | owner=Integración:App Asegurado+Shared
+    App Asegurado: frontend-app
+    Shared: import:app.core.config, import:app.core.config.APP_NAME
+tests/test_identidad_publica_github_pre_r8.py | owner=Revisar
+tests/test_indemnizacion_vejez.py | owner=App Asegurado
+    App Asegurado: import:app.engines.elegibilidad, import:app.engines.elegibilidad.clasificar_modalidad_sebd, import:app.engines.sebd_modalidades, import:app.engines.sebd_modalidades.calcular_sebd, import:app.models.pension, import:app.models.pension.DatosCalculoSEBD, import:app.models.pension.DatosResultadoSEBD, import:app.models.simulation, import:app.models.simulation.DatosHistorialSalarial, import:app.models.simulation.EscenarioLineaTiempo, import:app.models.simulation.EscenarioRetiro, import:app.models.simulation.RegistroHistorialSalarial, import:app.models.simulation.RegistroLineaTiempo, import:app.models.simulation.ResumenLineaTiempo, import:app.models.simulation.ResumenRetiro, import:app.services.sebd_results, import:app.services.sebd_results.calcular_resultado_sebd
+tests/test_mant1_r3_yaml_github_documentados.py | owner=Tooling/Governance
+    Shared: import:app.core.version, import:app.core.version.APP_VERSION
+    Tooling/Governance: nombre
+tests/test_mant1_r4_encabezados_operativos_limpios.py | owner=Tooling/Governance
+    Tooling/Governance: nombre
+tests/test_mant1_r5a_comentarios_servicios_app.py | owner=Tooling/Governance
+    Shared: import:app.core.version, import:app.core.version.APP_VERSION
+    Tooling/Governance: nombre
+tests/test_mant1_r5b_comentarios_presentacion_app.py | owner=Tooling/Governance
+    Tooling/Governance: nombre
+tests/test_mant1_r5c_comentarios_js_app.py | owner=App Asegurado
+    App Asegurado: frontend-app
+    Tooling/Governance: nombre
+tests/test_mant1_r5d_politica_extensiones.py | owner=Tooling/Governance
+    Tooling/Governance: nombre
+tests/test_mant1_r5e_nombres_carpetas.py | owner=Tooling/Governance
+    Tooling/Governance: nombre
+tests/test_mant1_r5f_nombres_archivos.py | owner=Tooling/Governance
+    Tooling/Governance: nombre
+tests/test_mant1_r5g_documentacion.py | owner=Tooling/Governance
+    Tooling/Governance: nombre
+tests/test_mant1_r5h_auditoria_nombres_restantes.py | owner=Integración:App Asegurado+Shared
+    App Asegurado: frontend-app
+    Shared: frontend-shared
+    Tooling/Governance: nombre
+tests/test_mant1_r6_auditoria_funcional_post_renombres.py | owner=App Asegurado
+    App Asegurado: frontend-app
+    Tooling/Governance: nombre
+tests/test_mant1_r7_cierre_operativo_post_auditoria.py | owner=Tooling/Governance
+    Tooling/Governance: nombre
+tests/test_mant1_scripts_hooks_documentados.py | owner=Tooling/Governance
+    Shared: import:app.core.version, import:app.core.version.APP_VERSION
+    Tooling/Governance: nombre
+tests/test_mantenimiento_tecnico.py | owner=Tooling/Governance
+    Tooling/Governance: nombre
+tests/test_markdown_audit.py | owner=Tooling/Governance
+    Tooling/Governance: nombre
+tests/test_markdown_versionable_inventory.py | owner=Tooling/Governance
+    Tooling/Governance: nombre
+tests/test_mixto.py | owner=App Asegurado
+    App Asegurado: import:app.engines.mixto, import:app.engines.mixto.calcular_mixto, import:app.models.pension, import:app.models.pension.DatosCalculoMixto, import:app.models.simulation, import:app.models.simulation.RegistroHistorialSalarial
+tests/test_mixto_prestaciones_cap.py | owner=App Asegurado
+    App Asegurado: import:app.engines.mixto, import:app.engines.mixto.calcular_mixto, import:app.models.pension, import:app.models.pension.DatosCalculoMixto, import:app.models.simulation, import:app.models.simulation.RegistroHistorialSalarial
+tests/test_mixto_results.py | owner=App Asegurado
+    App Asegurado: import:app.models.pension, import:app.models.pension.DatosResultadoMixto, import:app.models.simulation, import:app.models.simulation.DatosHistorialSalarial, import:app.models.simulation.EscenarioLineaTiempo, import:app.models.simulation.EscenarioRetiro, import:app.models.simulation.RegistroHistorialSalarial, import:app.models.simulation.ResumenLineaTiempo, import:app.models.simulation.ResumenRetiro, import:app.services.mixto_results, import:app.services.mixto_results.calcular_resultado_mixto
+tests/test_modality_results.py | owner=App Asegurado
+    App Asegurado: import:app.models.pension, import:app.models.pension.DatosResultadoSEBD, import:app.models.simulation, import:app.models.simulation.DatosHistorialSalarial, import:app.models.simulation.EscenarioLineaTiempo, import:app.models.simulation.EscenarioRetiro, import:app.models.simulation.RegistroHistorialSalarial, import:app.models.simulation.RegistroLineaTiempo, import:app.models.simulation.ResumenLineaTiempo, import:app.models.simulation.ResumenRetiro, import:app.services.sebd_results, import:app.services.sebd_results.calcular_resultado_sebd
+tests/test_money.py | owner=Shared
+    Shared: import:app.core.money, import:app.core.money.redondear_moneda, import:app.core.money.tiene_maximo_dos_decimales
+tests/test_nor1_r8_work_block_identifiers.py | owner=Tooling/Governance
+    Shared: import:app.core.version, import:app.core.version.construir_version_beta_revision, import:app.core.version_ledger, import:app.core.version_ledger.LedgerRevisionError, import:app.core.version_ledger.cargar_ledger, import:app.core.version_ledger.validar_ledger
+    Tooling/Governance: nombre
+tests/test_nor1_repository_standards.py | owner=Tooling/Governance
+    Tooling/Governance: nombre
+tests/test_nor2_r2_migration_matrix.py | owner=Tooling/Governance
+    Shared: import:app.core.version, import:app.core.version.APP_VERSION
+    Tooling/Governance: nombre
+tests/test_nor2_r3_runtime_migration.py | owner=Integración:Portal Developer+App Asegurado+Shared
+    Portal Developer: ruta:/dev
+    App Asegurado: frontend-app
+    Shared: import:app.core.version, import:app.core.version.APP_VERSION, frontend-shared
+    Tooling/Governance: nombre
+tests/test_nor2_r4_live_documentation.py | owner=Tooling/Governance
+    Shared: import:app.core.version, import:app.core.version.APP_VERSION
+    Tooling/Governance: nombre
+tests/test_nor2_r5_historical_documentation.py | owner=Tooling/Governance
+    Shared: import:app.core.version, import:app.core.version.APP_VERSION
+    Tooling/Governance: nombre
+tests/test_nor2_r6_ledger_data.py | owner=Tooling/Governance
+    Shared: import:app.core.version_ledger, import:app.core.version_ledger.LEDGER_FILE, import:app.core.version_ledger.cargar_ledger
+    Tooling/Governance: nombre
+tests/test_nor2_r7_local_artifacts.py | owner=Tooling/Governance
+    Shared: import:app.core.version, import:app.core.version.APP_VERSION
+    Tooling/Governance: nombre
+tests/test_nor2_r8_final_audit.py | owner=Tooling/Governance
+    Shared: import:app.core.config, import:app.core.config.APP_VERSION
+    Tooling/Governance: nombre
+tests/test_nor2_repository_normalization.py | owner=Tooling/Governance
+    Shared: import:app.core.version, import:app.core.version.APP_VERSION
+    Tooling/Governance: nombre
+tests/test_plan1_documentacion_primaria.py | owner=Tooling/Governance
+    Shared: import:app.core.config, import:app.core.config.APP_VERSION
+    Tooling/Governance: nombre
+tests/test_plan1_documentacion_transversal.py | owner=Tooling/Governance
+    Shared: import:app.core.config, import:app.core.config.APP_VERSION
+    Tooling/Governance: nombre
+tests/test_plan1_gobierno_versionado_oficial.py | owner=Tooling/Governance
+    Shared: import:app.core.config, import:app.core.config.APP_VERSION
+    Tooling/Governance: nombre
+tests/test_plan1_guard_referencias_historicas.py | owner=Tooling/Governance
+    Tooling/Governance: nombre
+tests/test_plan1_licencia_privacidad_viva.py | owner=Tooling/Governance
+    Tooling/Governance: nombre
+tests/test_plan1_r4_candidato_cierre.py | owner=Tooling/Governance
+    Shared: import:app.core.config, import:app.core.config.APP_VERSION, import:app.core.version, import:app.core.version.version_valida
+    Tooling/Governance: nombre
+tests/test_plan1_saneamiento_metadata.py | owner=Tooling/Governance
+    Tooling/Governance: nombre
+tests/test_plan1_terminologia_seguridad.py | owner=Tooling/Governance
+    Tooling/Governance: nombre
+tests/test_plan1_versionado_oficial.py | owner=Tooling/Governance
+    Shared: import:app.core.config, import:app.core.config.APP_VERSION, import:app.core.version, import:app.core.version.version_valida
+    Tooling/Governance: nombre
+tests/test_plan2_r1_master_pending_matrix.py | owner=Integración:Portal Developer+Shared
+    Portal Developer: ruta:/dev
+    Shared: import:app.core.version_ledger, import:app.core.version_ledger.cargar_ledger
+    Tooling/Governance: nombre
+tests/test_post_sec2_integral_audit.py | owner=Revisar
+tests/test_prebeta_e2e_hardening.py | owner=App Asegurado
+    App Asegurado: import:app.models.pension, import:app.models.pension.DatosResultadoMixto, import:app.models.pension.DatosResultadoSEBD, import:app.models.pension.DatosResultadoSUCGS, import:app.models.simulation, import:app.models.simulation.DatosHistorialSalarial, import:app.models.simulation.EscenarioLineaTiempo, import:app.models.simulation.EscenarioRetiro, import:app.models.simulation.RegistroHistorialSalarial, import:app.models.simulation.RegistroLineaTiempo, import:app.models.simulation.ResumenLineaTiempo, import:app.models.simulation.ResumenRetiro, frontend-app
+tests/test_precommit_guard.py | owner=Tooling/Governance
+    Tooling/Governance: nombre
+tests/test_pypdf_compatibilidad.py | owner=App Asegurado
+    App Asegurado: import:app.services.ficha_digital, import:app.services.ficha_digital.analizar_ficha_digital_pdf, import:app.services.mi_retiro_seguro_reference, import:app.services.mi_retiro_seguro_reference.analizar_comprobante_pdf
+tests/test_regulatory_sources.py | owner=App Asegurado
+    App Asegurado: import:app.services.regulatory_sources, import:app.services.regulatory_sources.construir_catalogo_metodologia
+tests/test_rel_gov1_r2_live_publication_state.py | owner=Tooling/Governance
+    Tooling/Governance: nombre
+tests/test_release_governance_contract.py | owner=Tooling/Governance
+    Tooling/Governance: nombre
+tests/test_release_publication.py | owner=Tooling/Governance
+    Tooling/Governance: nombre
+tests/test_release_workflow_automation.py | owner=Tooling/Governance
+    Tooling/Governance: nombre
+tests/test_responsive_ux3.py | owner=Integración:App Asegurado+Shared
+    App Asegurado: frontend-app
+    Shared: frontend-shared
+tests/test_results.py | owner=App Asegurado
+    App Asegurado: import:app.models.pension, import:app.models.pension.DatosResultadoSEBDNormal, import:app.models.simulation, import:app.models.simulation.DatosHistorialSalarial, import:app.models.simulation.EscenarioLineaTiempo, import:app.models.simulation.EscenarioRetiro, import:app.models.simulation.RegistroHistorialSalarial, import:app.models.simulation.RegistroLineaTiempo, import:app.models.simulation.ResumenLineaTiempo, import:app.models.simulation.ResumenRetiro, import:app.services.results, import:app.services.results.calcular_resultado_sebd_normal
+tests/test_retirement.py | owner=App Asegurado
+    App Asegurado: import:app.models.simulation, import:app.models.simulation.DatosRetiro, import:app.services.retirement, import:app.services.retirement.analizar_retiro
+tests/test_salary_projection.py | owner=App Asegurado
+    App Asegurado: import:app.models.simulation, import:app.models.simulation.DatosProyeccionSalario, import:app.services.salary_projection, import:app.services.salary_projection.proyectar_salario
+tests/test_sebd.py | owner=App Asegurado
+    App Asegurado: import:app.engines.sebd, import:app.engines.sebd.calcular_sebd_normal, import:app.models.pension, import:app.models.pension.DatosCalculoSEBDNormal, import:app.models.simulation, import:app.models.simulation.RegistroHistorialSalarial
+tests/test_sebd_modalidades.py | owner=App Asegurado
+    App Asegurado: import:app.engines.elegibilidad, import:app.engines.elegibilidad.clasificar_modalidad_sebd, import:app.engines.sebd_modalidades, import:app.engines.sebd_modalidades.calcular_sebd, import:app.models.pension, import:app.models.pension.DatosCalculoSEBD, import:app.models.simulation, import:app.models.simulation.RegistroHistorialSalarial
+tests/test_sec2_postclosure_hardening.py | owner=Portal Developer
+    Portal Developer: import:app.core.admin_session, import:app.core.admin_session.revocar_todas_las_sesiones_admin, import:app.core.developer_provisioning, import:app.core.developer_provisioning.bootstrap_propietario, ruta:/dev, frontend-developer
+tests/test_sec2_r1_codeql_workflow_hardening.py | owner=Revisar
+tests/test_sec2_r2_admin_endpoint_protection.py | owner=Portal Developer
+    Portal Developer: ruta:/dev
+tests/test_sec2_r2_admin_security.py | owner=Portal Developer
+    Portal Developer: import:app.core.admin_security, import:app.core.admin_security.autenticacion_admin_habilitada, import:app.core.admin_security.validar_token_administrativo
+tests/test_sec2_r2_secret_filtering.py | owner=Shared
+    Shared: import:app.core.observability, import:app.core.observability._SENSITIVE_KEY_PARTS
+tests/test_sec2_r3_admin_protection.py | owner=Portal Developer
+    Portal Developer: ruta:/dev
+tests/test_sec2_r4_admin_audit.py | owner=Integración:Portal Developer+Shared
+    Portal Developer: ruta:/dev
+    Shared: import:app.core.observability, import:app.core.observability.ruta_log_actual
+tests/test_sec2_r5_admin_web_session.py | owner=Portal Developer
+    Portal Developer: import:app.core.admin_session, import:app.core.admin_session.revocar_todas_las_sesiones_admin, import:app.core.developer_provisioning, import:app.core.developer_provisioning.bootstrap_propietario, ruta:/dev
+tests/test_sec2_r6_admin_session_security.py | owner=Portal Developer
+    Portal Developer: import:app.core.admin_session, import:app.core.admin_session.crear_sesion_admin, import:app.core.admin_session.eliminar_sesion_admin, import:app.core.admin_session.obtener_sesiones_activas, import:app.core.admin_session.revocar_todas_las_sesiones_admin, import:app.core.admin_session.validar_sesion_admin
+tests/test_sucgs.py | owner=App Asegurado
+    App Asegurado: import:app.engines.sucgs, import:app.engines.sucgs.calcular_sucgs, import:app.models.pension, import:app.models.pension.DatosCalculoSUCGS
+tests/test_sucgs_capa_solidaria.py | owner=App Asegurado
+    App Asegurado: import:app.engines.sucgs, import:app.engines.sucgs.calcular_sucgs, import:app.models.pension, import:app.models.pension.DatosCalculoSUCGS
+tests/test_sucgs_reemplazo.py | owner=App Asegurado
+    App Asegurado: import:app.engines.sucgs, import:app.engines.sucgs.calcular_sucgs, import:app.models.pension, import:app.models.pension.DatosCalculoSUCGS, import:app.models.simulation, import:app.models.simulation.RegistroHistorialSalarial
+tests/test_sucgs_results.py | owner=App Asegurado
+    App Asegurado: import:app.models.pension, import:app.models.pension.DatosResultadoSUCGS, import:app.models.simulation, import:app.models.simulation.DatosHistorialSalarial, import:app.models.simulation.EscenarioLineaTiempo, import:app.models.simulation.EscenarioRetiro, import:app.models.simulation.RegistroHistorialSalarial, import:app.models.simulation.RegistroLineaTiempo, import:app.models.simulation.ResumenLineaTiempo, import:app.models.simulation.ResumenRetiro, import:app.services.sucgs_results, import:app.services.sucgs_results.calcular_resultado_sucgs
+tests/test_timeline.py | owner=App Asegurado
+    App Asegurado: import:app.models.simulation, import:app.models.simulation.DatosCuotas, import:app.models.simulation.DatosHistorialSalarial, import:app.models.simulation.DatosLineaTiempo, import:app.models.simulation.DatosProyeccionSalario, import:app.models.simulation.DatosSalario, import:app.models.simulation.RegistroHistorialSalarial, import:app.services.timeline, import:app.services.timeline.construir_linea_tiempo
+tests/test_traceability.py | owner=App Asegurado
+    App Asegurado: import:app.services.traceability, import:app.services.traceability.construir_trazabilidad_mixto, import:app.services.traceability.construir_trazabilidad_sebd, import:app.services.traceability.construir_trazabilidad_sucgs
+tests/test_unified_result.py | owner=App Asegurado
+    App Asegurado: import:app.services.unified_result, import:app.services.unified_result.construir_resumen_unificado_mixto, import:app.services.unified_result.construir_resumen_unificado_sebd, import:app.services.unified_result.construir_resumen_unificado_sucgs
+tests/test_ux42_estados_visuales.py | owner=Shared
+    Shared: frontend-shared
+tests/test_ux43_formularios_teclado.py | owner=Integración:App Asegurado+Shared
+    App Asegurado: frontend-app
+    Shared: frontend-shared
+tests/test_ux44_current_year_detail.py | owner=App Asegurado
+    App Asegurado: import:app.models.simulation, import:app.models.simulation.DatosDetalleAnioActual, import:app.models.simulation.RegistroDetalleAnioActual, import:app.services.current_year_detail, import:app.services.current_year_detail.analizar_detalle_anio_actual, frontend-app
+tests/test_ux44_edad_linea_tiempo.py | owner=App Asegurado
+    App Asegurado: frontend-app
+tests/test_ux44_importacion_oficial.py | owner=App Asegurado
+    App Asegurado: import:app.services.ficha_digital, import:app.services.ficha_digital.extraer_ficha_digital_desde_texto, frontend-app
+tests/test_ux44_pdf_reference.py | owner=App Asegurado
+    App Asegurado: import:app.services.mi_retiro_seguro_reference, import:app.services.mi_retiro_seguro_reference.extraer_referencia_desde_texto, frontend-app
+tests/test_ux45_cierre_resultados_accesibilidad.py | owner=App Asegurado
+    App Asegurado: import:app.models.pension, import:app.models.pension.DatosResultadoSEBD, import:app.models.simulation, import:app.models.simulation.DatosHistorialSalarial, import:app.models.simulation.EscenarioLineaTiempo, import:app.models.simulation.EscenarioRetiro, import:app.models.simulation.RegistroHistorialSalarial, import:app.models.simulation.RegistroLineaTiempo, import:app.models.simulation.ResumenLineaTiempo, import:app.models.simulation.ResumenRetiro, import:app.services.sebd_results, import:app.services.sebd_results.calcular_resultado_sebd, frontend-app
+tests/test_ux46a_redisenio_integral.py | owner=Shared
+    Shared: frontend-shared
+tests/test_ux46b_paso1_datos_personales.py | owner=Integración:App Asegurado+Shared
+    App Asegurado: import:app.services.mi_retiro_seguro_reference, import:app.services.mi_retiro_seguro_reference.extraer_referencia_desde_texto, frontend-app
+    Shared: frontend-shared
+tests/test_ux46b_revision2_privacidad.py | owner=Integración:App Asegurado+Shared
+    App Asegurado: import:app.services.mi_retiro_seguro_reference, import:app.services.mi_retiro_seguro_reference.extraer_referencia_desde_texto, frontend-app
+    Shared: frontend-shared
+tests/test_ux46b_revision3_terminos_navegacion.py | owner=Integración:App Asegurado+Shared
+    App Asegurado: frontend-app
+    Shared: frontend-shared
+tests/test_ux46c_cuotas.py | owner=Integración:App Asegurado+Shared
+    App Asegurado: frontend-app
+    Shared: frontend-shared
+tests/test_ux46d_gestion_datos.py | owner=Integración:App Asegurado+Shared
+    App Asegurado: frontend-app
+    Shared: frontend-shared
+tests/test_ux46d_historial.py | owner=Integración:App Asegurado+Shared
+    App Asegurado: frontend-app
+    Shared: frontend-shared
+tests/test_ux46d_revision10_tablas_transversales.py | owner=Integración:App Asegurado+Shared
+    App Asegurado: frontend-app
+    Shared: frontend-shared
+tests/test_ux46d_revision11_scrollbars_y_carga.py | owner=Shared
+    Shared: frontend-shared
+tests/test_ux46d_revision12_scroll_global_y_vacio.py | owner=Integración:App Asegurado+Shared
+    App Asegurado: frontend-app
+    Shared: frontend-shared
+tests/test_ux46d_revision13_selector_archivo.py | owner=Shared
+    Shared: frontend-shared
+tests/test_ux46d_revision14_paso1_informacion_personal.py | owner=App Asegurado
+    App Asegurado: frontend-app
+tests/test_ux46d_revision15_campos_importacion_y_limpieza.py | owner=Integración:App Asegurado+Shared
+    App Asegurado: frontend-app
+    Shared: frontend-shared
+tests/test_ux46d_revision16_flujo_paso3.py | owner=App Asegurado
+    App Asegurado: frontend-app
+tests/test_ux46d_revision17_auditoria_datos.py | owner=Integración:App Asegurado+Shared
+    App Asegurado: import:app.services.mi_retiro_seguro_reference, import:app.services.mi_retiro_seguro_reference.extraer_referencia_desde_texto, frontend-app
+    Shared: frontend-shared
+tests/test_ux46d_revision18_provenance_persistence.py | owner=Integración:App Asegurado+Shared
+    App Asegurado: frontend-app
+    Shared: frontend-shared
+tests/test_ux46d_revision19_current_sync.py | owner=App Asegurado
+    App Asegurado: import:app.models.simulation, import:app.models.simulation.DatosDetalleAnioActual, import:app.models.simulation.RegistroDetalleAnioActual, import:app.services.current_year_detail, import:app.services.current_year_detail.analizar_detalle_anio_actual
+tests/test_ux46d_revision20_vigencia_resumen.py | owner=Integración:App Asegurado+Shared
+    App Asegurado: frontend-app
+    Shared: frontend-shared
+tests/test_ux46d_revision21_fecha_confiable.py | owner=App Asegurado
+    App Asegurado: import:app.services.ficha_digital, import:app.services.ficha_digital.extraer_ficha_digital_desde_texto, frontend-app
+tests/test_ux46d_revision22_cierre_paso3.py | owner=Revisar
+tests/test_ux46d_revision23_ficha_updates_contributions.py | owner=App Asegurado
+    App Asegurado: frontend-app
+tests/test_ux46d_revision7_privacidad_consulta.py | owner=Integración:App Asegurado+Shared
+    App Asegurado: frontend-app
+    Shared: frontend-shared
+tests/test_ux46d_revision8_tablas.py | owner=Integración:App Asegurado+Shared
+    App Asegurado: frontend-app
+    Shared: frontend-shared
+tests/test_ux46d_revision9_reactividad_privacidad.py | owner=Shared
+    Shared: frontend-shared
+tests/test_ux46e_almacenamiento_comentarios_js.py | owner=Integración:App Asegurado+Shared
+    App Asegurado: frontend-app
+    Shared: frontend-shared
+tests/test_ux46e_auditoria_coherencia.py | owner=Revisar
+tests/test_ux46e_estandar_runtime.py | owner=Revisar
+tests/test_ux46e_preparacion_publica.py | owner=Revisar
+tests/test_ux46e_proyeccion_salarial.py | owner=App Asegurado
+    App Asegurado: import:app.models.simulation, import:app.models.simulation.DatosCuotas, import:app.models.simulation.DatosHistorialSalarial, import:app.models.simulation.DatosLineaTiempo, import:app.models.simulation.DatosProyeccionSalario, import:app.models.simulation.DatosSalario, import:app.models.simulation.RegistroHistorialSalarial, import:app.services.salary_projection, import:app.services.salary_projection.proyectar_salario, import:app.services.timeline, import:app.services.timeline.construir_linea_tiempo
+tests/test_ux46e_r81_editable_provenance.py | owner=Revisar
+tests/test_ux46e_r8_cierre_funcional.py | owner=Revisar
+tests/test_ux46e_r8_reconsentimiento_borrado.py | owner=Revisar
+tests/test_ux46e_r91_candidato_cierre.py | owner=Shared
+    Shared: import:app.core.config, import:app.core.config.APP_VERSION, import:app.core.version, import:app.core.version.version_valida
+tests/test_ux46e_renumeracion_documental.py | owner=Revisar
+tests/test_ux46f_r11_bloqueo_documental_vista_principal.py | owner=Integración:App Asegurado+Shared
+    App Asegurado: frontend-app
+    Shared: frontend-shared
+tests/test_ux46f_r1_attachment_provenance_consistency.py | owner=Integración:Portal Developer+App Asegurado+Shared
+    Portal Developer: ruta:/dev
+    App Asegurado: frontend-app
+    Shared: import:app.core.version, import:app.core.version.version_valida, frontend-shared
+tests/test_ux46f_r2_auditoria_paso4.py | owner=App Asegurado
+    App Asegurado: import:app.models.simulation, import:app.models.simulation.DatosCuotas, import:app.models.simulation.DatosHistorialSalarial, import:app.models.simulation.DatosLineaTiempo, import:app.models.simulation.DatosProyeccionSalario, import:app.models.simulation.DatosSalario, import:app.models.simulation.RegistroHistorialSalarial, import:app.services.salary_projection, import:app.services.salary_projection.proyectar_salario, import:app.services.timeline, import:app.services.timeline.construir_linea_tiempo, frontend-app
+tests/test_ux46g_r1_retirement_scenarios.py | owner=Integración:App Asegurado+Shared
+    App Asegurado: import:app.models.simulation, import:app.models.simulation.DatosRetiro, import:app.services.retirement, import:app.services.retirement.analizar_retiro, frontend-app
+    Shared: frontend-shared
+tests/test_ux46h_r1_resultados_exportacion.py | owner=Revisar
+tests/test_ux46i_r1_calculation_guide.py | owner=Integración:App Asegurado+Shared
+    App Asegurado: import:app.services.calculation_guide, import:app.services.calculation_guide.construir_guia_calculo
+    Shared: import:app.core.normativa, import:app.core.normativa.cargar_parametros_generales, import:app.core.normativa.cargar_parametros_mixto, import:app.core.normativa.cargar_parametros_sebd, import:app.core.normativa.cargar_parametros_sucgs
+tests/test_ux4_remate_visual.py | owner=Integración:App Asegurado+Shared
+    App Asegurado: frontend-app
+    Shared: frontend-shared
+tests/test_ux5_r1_design_system.py | owner=Shared
+    Shared: frontend-shared
+tests/test_ux5_r2_shell_navigation.py | owner=Integración:Portal Developer+Shared
+    Portal Developer: frontend-developer
+    Shared: frontend-shared
+tests/test_ux5_r3_r4_simulation_flows.py | owner=Integración:App Asegurado+Shared
+    App Asegurado: frontend-app
+    Shared: frontend-shared
+tests/test_ux5_r5_assisted_upload_layout.py | owner=Integración:App Asegurado+Shared
+    App Asegurado: frontend-app
+    Shared: frontend-shared
+tests/test_ux5_r5_r6_assisted_integration.py | owner=App Asegurado
+    App Asegurado: frontend-app
+tests/test_ux5_r7_documentation_closure.py | owner=App Asegurado
+    App Asegurado: frontend-app
+tests/test_ux6_r2_form_resilience.py | owner=Portal Developer
+    Portal Developer: import:app.core.developer_identity, import:app.core.developer_identity.RolDeveloper, import:app.core.developer_provisioning, import:app.core.developer_provisioning.bootstrap_propietario, import:app.core.developer_user_admin, import:app.core.developer_user_admin.crear_usuario_administrado, frontend-developer
+tests/test_ux6_r2_unified_user_edit.py | owner=Portal Developer
+    Portal Developer: ruta:/dev, frontend-developer
+tests/test_ux6_r2_user_admin.py | owner=Portal Developer
+    Portal Developer: import:app.core.developer_identity, import:app.core.developer_identity.RolDeveloper, import:app.core.developer_identity.hashear_password, import:app.core.developer_identity.validar_password, import:app.core.developer_provisioning, import:app.core.developer_provisioning.bootstrap_propietario, import:app.core.developer_store, import:app.core.developer_store.crear_usuario_developer, import:app.core.developer_user_admin, import:app.core.developer_user_admin.actualizar_nombre_usuario_administrado, import:app.core.developer_user_admin.cambiar_estado_usuario_administrado, import:app.core.developer_user_admin.cambiar_rol_usuario_administrado, import:app.core.developer_user_admin.consumir_credencial_temporal_para_sesion, import:app.core.developer_user_admin.crear_usuario_administrado, import:app.core.developer_user_admin.eliminar_usuario_administrado, import:app.core.developer_user_admin.generar_password_temporal_developer, import:app.core.developer_user_admin.guardar_credencial_temporal_para_sesion, import:app.core.developer_user_admin.restablecer_password_temporal_usuario, import:app.core.developer_user_admin.roles_asignables_por_actor
+tests/test_ux6_r2_user_audit.py | owner=Portal Developer
+    Portal Developer: import:app.core.developer_identity, import:app.core.developer_identity.RolDeveloper, import:app.core.developer_provisioning, import:app.core.developer_provisioning.bootstrap_propietario, import:app.core.developer_user_admin, import:app.core.developer_user_admin.actualizar_nombre_usuario_administrado, import:app.core.developer_user_admin.cambiar_estado_usuario_administrado, import:app.core.developer_user_admin.cambiar_rol_usuario_administrado, import:app.core.developer_user_admin.crear_usuario_administrado, import:app.core.developer_user_admin.eliminar_usuario_administrado, import:app.core.developer_user_admin.restablecer_password_temporal_usuario, import:app.core.developer_user_audit, import:app.core.developer_user_audit.listar_auditoria_usuarios_developer
+tests/test_ux6_r2_users_web.py | owner=Portal Developer
+    Portal Developer: ruta:/dev, frontend-developer
+tests/test_ux6_r2_validation_feedback.py | owner=Integración:Portal Developer+Shared
+    Portal Developer: frontend-developer
+    Shared: frontend-shared
+tests/test_ux6_r3_r4_interface_polish.py | owner=Shared
+    Shared: frontend-shared
+tests/test_ux6_r3_r4_motion_accessibility.py | owner=Integración:Portal Developer+Shared
+    Portal Developer: frontend-developer
+    Shared: frontend-shared
+tests/test_ux6_r5_r6_manual_privacy_scope.py | owner=Revisar
+tests/test_ux6_r5_r6_public_terms_final.py | owner=Revisar
+tests/test_ux6_r5_r6_seguro_cleanup.py | owner=Integración:Portal Developer+App Asegurado+Shared
+    Portal Developer: frontend-developer
+    App Asegurado: frontend-app
+    Shared: frontend-shared
+tests/test_ux6_r7_documentation_closure.py | owner=Shared
+    Shared: frontend-shared
+tests/test_ux6_r8_integral_hardening.py | owner=Integración:Portal Developer+Shared
+    Portal Developer: import:app.core.admin_session, import:app.core.admin_session.crear_sesion_admin, import:app.core.admin_session.obtener_sesion_admin, import:app.core.admin_session.obtener_sesiones_activas_usuario, import:app.core.admin_session.revocar_todas_las_sesiones_admin, import:app.core.admin_session.validar_sesion_admin, import:app.core.developer_identity, import:app.core.developer_identity.RolDeveloper, ruta:/dev, frontend-developer
+    Shared: frontend-shared
+tests/test_ver2_documentacion_vigente.py | owner=Tooling/Governance
+    Shared: import:app.core.config, import:app.core.config.APP_VERSION, import:app.core.version, import:app.core.version.descomponer_version_beta_revision
+    Tooling/Governance: nombre
+tests/test_ver2_ledger_estructurado.py | owner=Tooling/Governance
+    Shared: import:app.core.version_ledger, import:app.core.version_ledger.LEDGER_FILE, import:app.core.version_ledger.LedgerRevisionError, import:app.core.version_ledger.cargar_ledger, import:app.core.version_ledger.validar_ledger
+    Tooling/Governance: nombre
+tests/test_ver2_r1_reconciliacion_post_doc1.py | owner=Tooling/Governance
+    Tooling/Governance: nombre
+tests/test_ver2_r2_documentacion_viva_post_r1.py | owner=Tooling/Governance
+    Tooling/Governance: nombre
+tests/test_ver2_r3_decision_version_candidata_post_r2.py | owner=Tooling/Governance
+    Tooling/Governance: nombre
+tests/test_ver2_r4_promocion_g071_e01.py | owner=Tooling/Governance
+    Shared: import:app.core.config, import:app.core.config.APP_VERSION, import:app.core.version, import:app.core.version.descomponer_version_beta_revision, import:app.core.version.version_valida
+    Tooling/Governance: nombre
+tests/test_ver2_r5_estabilizacion_post_release.py | owner=Tooling/Governance
+    Shared: import:app.core.version, import:app.core.version.APP_VERSION
+    Tooling/Governance: nombre
+tests/test_ver2_version_revision_aware.py | owner=Tooling/Governance
+    Shared: import:app.core.version, import:app.core.version.construir_version_beta_revision, import:app.core.version.descomponer_version_beta_revision, import:app.core.version.version_valida
+    Tooling/Governance: nombre
+tests/test_visual_identity_pre_r8.py | owner=Shared
+    Shared: frontend-shared
+tests/test_visual_stabilization.py | owner=Integración:App Asegurado+Shared
+    App Asegurado: frontend-app
+    Shared: frontend-shared
+
+Resumen tests:
+App Asegurado: 38
+Integración:App Asegurado+Shared: 27
+Integración:Portal Developer+App Asegurado: 1
+Integración:Portal Developer+App Asegurado+Shared: 5
+Integración:Portal Developer+Shared: 13
+Portal Developer: 20
+Revisar: 14
+Shared: 26
+Tooling/Governance: 63
+
+===== DIRECTORIOS =====
+.githooks | depth=0 | direct_files=2 | direct_subdirs=0 | recursive_files=2 | max_extra_depth=0 | bytes=2036 | flags=-
+.github | depth=0 | direct_files=6 | direct_subdirs=2 | recursive_files=16 | max_extra_depth=1 | bytes=35468 | flags=-
+    subdirs: ISSUE_TEMPLATE, workflows
+.github/ISSUE_TEMPLATE | depth=1 | direct_files=4 | direct_subdirs=0 | recursive_files=4 | max_extra_depth=0 | bytes=5611 | flags=-
+.github/workflows | depth=1 | direct_files=6 | direct_subdirs=0 | recursive_files=6 | max_extra_depth=0 | bytes=23826 | flags=-
+.vscode | depth=0 | direct_files=1 | direct_subdirs=1 | recursive_files=6 | max_extra_depth=1 | bytes=146452 | flags=-
+    subdirs: schemas
+.vscode/schemas | depth=1 | direct_files=5 | direct_subdirs=0 | recursive_files=5 | max_extra_depth=0 | bytes=146329 | flags=-
+app | depth=0 | direct_files=2 | direct_subdirs=7 | recursive_files=127 | max_extra_depth=3 | bytes=2594002 | flags=-
+    subdirs: cli, core, engines, models, services, static, templates
+app/cli | depth=1 | direct_files=2 | direct_subdirs=0 | recursive_files=2 | max_extra_depth=0 | bytes=6132 | flags=-
+app/core | depth=1 | direct_files=18 | direct_subdirs=0 | recursive_files=18 | max_extra_depth=0 | bytes=106785 | flags=-
+app/engines | depth=1 | direct_files=6 | direct_subdirs=0 | recursive_files=6 | max_extra_depth=0 | bytes=102760 | flags=-
+app/models | depth=1 | direct_files=6 | direct_subdirs=0 | recursive_files=6 | max_extra_depth=0 | bytes=49183 | flags=-
+app/services | depth=1 | direct_files=20 | direct_subdirs=0 | recursive_files=20 | max_extra_depth=0 | bytes=209376 | flags=-
+app/static | depth=1 | direct_files=0 | direct_subdirs=3 | recursive_files=44 | max_extra_depth=2 | bytes=1647945 | flags=-
+    subdirs: css, img, js
+app/static/css | depth=2 | direct_files=9 | direct_subdirs=0 | recursive_files=9 | max_extra_depth=0 | bytes=255459 | flags=-
+app/static/img | depth=2 | direct_files=0 | direct_subdirs=1 | recursive_files=8 | max_extra_depth=1 | bytes=774052 | flags=single-child
+    subdirs: brand
+app/static/img/brand | depth=3 | direct_files=8 | direct_subdirs=0 | recursive_files=8 | max_extra_depth=0 | bytes=774052 | flags=-
+app/static/js | depth=2 | direct_files=27 | direct_subdirs=0 | recursive_files=27 | max_extra_depth=0 | bytes=618434 | flags=-
+app/templates | depth=1 | direct_files=18 | direct_subdirs=1 | recursive_files=29 | max_extra_depth=1 | bytes=392043 | flags=-
+    subdirs: partials
+app/templates/partials | depth=2 | direct_files=11 | direct_subdirs=0 | recursive_files=11 | max_extra_depth=0 | bytes=151911 | flags=-
+assets | depth=0 | direct_files=0 | direct_subdirs=2 | recursive_files=15 | max_extra_depth=2 | bytes=6763878 | flags=-
+    subdirs: brand, social
+assets/brand | depth=1 | direct_files=0 | direct_subdirs=3 | recursive_files=14 | max_extra_depth=1 | bytes=6267039 | flags=-
+    subdirs: icons, logos, source
+assets/brand/icons | depth=2 | direct_files=10 | direct_subdirs=0 | recursive_files=10 | max_extra_depth=0 | bytes=1766437 | flags=-
+assets/brand/logos | depth=2 | direct_files=2 | direct_subdirs=0 | recursive_files=2 | max_extra_depth=0 | bytes=1496542 | flags=-
+assets/brand/source | depth=2 | direct_files=2 | direct_subdirs=0 | recursive_files=2 | max_extra_depth=0 | bytes=3004060 | flags=-
+assets/social | depth=1 | direct_files=1 | direct_subdirs=0 | recursive_files=1 | max_extra_depth=0 | bytes=496839 | flags=single-child
+data | depth=0 | direct_files=6 | direct_subdirs=0 | recursive_files=6 | max_extra_depth=0 | bytes=229647 | flags=gitkeep
+docs | depth=0 | direct_files=1 | direct_subdirs=11 | recursive_files=192 | max_extra_depth=5 | bytes=57370807 | flags=-
+    subdirs: architecture, archive, audits, decisions, governance, operations, product, regulatory, security, standards, templates
+docs/architecture | depth=1 | direct_files=4 | direct_subdirs=0 | recursive_files=4 | max_extra_depth=0 | bytes=75686 | flags=-
+docs/archive | depth=1 | direct_files=3 | direct_subdirs=4 | recursive_files=65 | max_extra_depth=1 | bytes=1456052 | flags=-
+    subdirs: governance, regulatory-privacy, technical, ux
+docs/archive/governance | depth=2 | direct_files=28 | direct_subdirs=0 | recursive_files=28 | max_extra_depth=0 | bytes=925875 | flags=-
+docs/archive/regulatory-privacy | depth=2 | direct_files=10 | direct_subdirs=0 | recursive_files=10 | max_extra_depth=0 | bytes=84737 | flags=-
+docs/archive/technical | depth=2 | direct_files=16 | direct_subdirs=0 | recursive_files=16 | max_extra_depth=0 | bytes=283710 | flags=-
+docs/archive/ux | depth=2 | direct_files=8 | direct_subdirs=0 | recursive_files=8 | max_extra_depth=0 | bytes=80466 | flags=-
+docs/audits | depth=1 | direct_files=1 | direct_subdirs=4 | recursive_files=35 | max_extra_depth=1 | bytes=395620 | flags=-
+    subdirs: documentation, governance, repository, security
+docs/audits/documentation | depth=2 | direct_files=15 | direct_subdirs=0 | recursive_files=15 | max_extra_depth=0 | bytes=114938 | flags=-
+docs/audits/governance | depth=2 | direct_files=3 | direct_subdirs=0 | recursive_files=3 | max_extra_depth=0 | bytes=21804 | flags=-
+docs/audits/repository | depth=2 | direct_files=14 | direct_subdirs=0 | recursive_files=14 | max_extra_depth=0 | bytes=245476 | flags=-
+docs/audits/security | depth=2 | direct_files=2 | direct_subdirs=0 | recursive_files=2 | max_extra_depth=0 | bytes=8292 | flags=-
+docs/decisions | depth=1 | direct_files=2 | direct_subdirs=0 | recursive_files=2 | max_extra_depth=0 | bytes=174983 | flags=-
+docs/governance | depth=1 | direct_files=5 | direct_subdirs=0 | recursive_files=5 | max_extra_depth=0 | bytes=92923 | flags=-
+docs/operations | depth=1 | direct_files=6 | direct_subdirs=0 | recursive_files=6 | max_extra_depth=0 | bytes=153276 | flags=-
+docs/product | depth=1 | direct_files=7 | direct_subdirs=0 | recursive_files=7 | max_extra_depth=0 | bytes=153346 | flags=-
+docs/regulatory | depth=1 | direct_files=6 | direct_subdirs=1 | recursive_files=24 | max_extra_depth=4 | bytes=54680645 | flags=-
+    subdirs: sources
+docs/regulatory/sources | depth=2 | direct_files=0 | direct_subdirs=1 | recursive_files=18 | max_extra_depth=3 | bytes=54651408 | flags=single-child
+    subdirs: official
+docs/regulatory/sources/official | depth=3 | direct_files=2 | direct_subdirs=2 | recursive_files=18 | max_extra_depth=2 | bytes=54651408 | flags=-
+    subdirs: pensions, privacy
+docs/regulatory/sources/official/pensions | depth=4 | direct_files=0 | direct_subdirs=2 | recursive_files=14 | max_extra_depth=1 | bytes=50007383 | flags=-
+    subdirs: normative, reference
+docs/regulatory/sources/official/pensions/normative | depth=5 | direct_files=13 | direct_subdirs=0 | recursive_files=13 | max_extra_depth=0 | bytes=49769330 | flags=-
+docs/regulatory/sources/official/pensions/reference | depth=5 | direct_files=1 | direct_subdirs=0 | recursive_files=1 | max_extra_depth=0 | bytes=238053 | flags=single-child
+docs/regulatory/sources/official/privacy | depth=4 | direct_files=0 | direct_subdirs=1 | recursive_files=2 | max_extra_depth=1 | bytes=4625111 | flags=single-child
+    subdirs: normative
+docs/regulatory/sources/official/privacy/normative | depth=5 | direct_files=2 | direct_subdirs=0 | recursive_files=2 | max_extra_depth=0 | bytes=4625111 | flags=-
+docs/security | depth=1 | direct_files=7 | direct_subdirs=0 | recursive_files=7 | max_extra_depth=0 | bytes=79380 | flags=-
+docs/standards | depth=1 | direct_files=11 | direct_subdirs=0 | recursive_files=11 | max_extra_depth=0 | bytes=65697 | flags=-
+docs/templates | depth=1 | direct_files=1 | direct_subdirs=2 | recursive_files=25 | max_extra_depth=1 | bytes=13500 | flags=-
+    subdirs: documentation, file-structure
+docs/templates/documentation | depth=2 | direct_files=6 | direct_subdirs=0 | recursive_files=6 | max_extra_depth=0 | bytes=4953 | flags=-
+docs/templates/file-structure | depth=2 | direct_files=18 | direct_subdirs=0 | recursive_files=18 | max_extra_depth=0 | bytes=7248 | flags=-
+regulations | depth=0 | direct_files=4 | direct_subdirs=0 | recursive_files=4 | max_extra_depth=0 | bytes=17743 | flags=-
+scripts | depth=0 | direct_files=19 | direct_subdirs=0 | recursive_files=19 | max_extra_depth=0 | bytes=165418 | flags=-
+tests | depth=0 | direct_files=207 | direct_subdirs=1 | recursive_files=208 | max_extra_depth=1 | bytes=1100332 | flags=-
+    subdirs: validation_cases
+tests/validation_cases | depth=1 | direct_files=1 | direct_subdirs=0 | recursive_files=1 | max_extra_depth=0 | bytes=1068 | flags=single-child
+
+===== DATA: CONSUMIDORES =====
+data/.gitkeep | refs=7
+    <- docs/archive/changelog-pre-gov1-3.md
+    <- docs/archive/governance/decisions-pre-gov1-3-r4.md
+    <- docs/archive/technical/development-guide-pre-gov1-3-r2.md
+    <- docs/archive/technical/functional-audit-post-renames-r6.md
+    <- docs/audits/repository/repository-structure-inventory-nor1-r2.txt
+    <- docs/decisions/README.md
+    <- tests/test_visual_identity_pre_r8.py
+data/doc2-legacy-changelog-evidence.json | refs=6
+    <- docs/audits/documentation/changelog-reconstruction-doc2-r1.md
+    <- docs/governance/roadmap.md
+    <- docs/operations/validation.md
+    <- tests/test_doc1_r3_markdown_links.py
+    <- tests/test_doc2_r1_changelog_reconstruction.py
+    <- tests/test_g111_promotion_post_merge.py
+data/git-history-attestation.json | refs=3
+    <- docs/audits/governance/git-history-attestation-pre-ux5.md
+    <- docs/operations/validation.md
+    <- scripts/audit_git_history_attestation.py
+data/pre-1-0-revision-ledger.json | refs=30
+    <- .github/labeler.yml
+    <- CONTRIBUTING.md
+    <- README.md
+    <- VERSIONING.md
+    <- app/core/version_ledger.py
+    <- docs/README.md
+    <- docs/audits/documentation/documentation-normalization-doc1-r5.md
+    <- docs/audits/documentation/pre-ux5-documentation-audit.md
+    <- docs/audits/repository/repository-normalization-final-audit-nor2-r8.md
+    <- docs/audits/repository/repository-normalization-ledger-data-nor2-r6.md
+    <- docs/audits/repository/repository-normalization-migration-matrix-nor2-r2.md
+    <- docs/decisions/README.md
+    <- docs/governance/master-plan-to-1-0.md
+    <- docs/governance/pre-1-0-revision-ledger.md
+    <- docs/governance/roadmap.md
+    <- docs/operations/release-process.md
+    <- docs/operations/validation.md
+    <- docs/product/traceability-matrix.md
+    <- scripts/audit_markdown.py
+    <- scripts/audit_pr_policy.py
+    <- scripts/quality_gate.py
+    <- scripts/release_contract.py
+    <- scripts/release_readiness.py
+    <- tests/test_automation_core_quality_gate.py
+    <- tests/test_mant1_r5f_nombres_archivos.py
+    <- tests/test_nor2_r6_ledger_data.py
+    <- tests/test_nor2_r8_final_audit.py
+    <- tests/test_post_sec2_integral_audit.py
+    <- tests/test_release_governance_contract.py
+    <- tests/test_ver2_documentacion_vigente.py
+data/release-publication-manifest.json | refs=16
+    <- .github/labeler.yml
+    <- CONTRIBUTING.md
+    <- docs/audits/documentation/pre-ux5-documentation-audit.md
+    <- docs/audits/governance/rel-gov1-r2-release-automation.md
+    <- docs/decisions/README.md
+    <- docs/governance/pre-1-0-revision-ledger.md
+    <- docs/operations/release-process.md
+    <- docs/operations/validation.md
+    <- scripts/audit_pr_policy.py
+    <- scripts/quality_gate.py
+    <- scripts/release_publication.py
+    <- scripts/release_readiness.py
+    <- tests/test_automation_core_quality_gate.py
+    <- tests/test_g121_promotion_post_merge.py
+    <- tests/test_rel_gov1_r2_live_publication_state.py
+    <- tests/test_release_publication.py
+data/work-block-registry.json | refs=26
+    <- .github/labeler.yml
+    <- GOVERNANCE.md
+    <- README.md
+    <- docs/audits/documentation/documentation-normalization-doc1-r5.md
+    <- docs/audits/documentation/ux6-r7-documentation-audit.md
+    <- docs/audits/repository/work-block-identifier-audit-nor1-r8.md
+    <- docs/governance/pre-1-0-pending-matrix.md
+    <- docs/product/traceability-matrix.md
+    <- docs/standards/work-block-identifiers.md
+    <- scripts/README.md
+    <- scripts/audit_block_identifiers.py
+    <- tests/test_doc1_r4_live_state_sanitization.py
+    <- tests/test_g112_promotion_post_merge.py
+    <- tests/test_g113_promotion_post_merge.py
+    <- tests/test_g114_promotion_post_merge.py
+    <- tests/test_g115_promotion_post_merge.py
+    <- tests/test_g116_promotion_post_merge.py
+    <- tests/test_g117_promotion_post_merge.py
+    <- tests/test_g118_promotion_post_merge.py
+    <- tests/test_g119_promotion_post_merge.py
+    <- tests/test_g120_promotion_post_merge.py
+    <- tests/test_g121_promotion_post_merge.py
+    <- tests/test_nor1_r8_work_block_identifiers.py
+    <- tests/test_nor2_r6_ledger_data.py
+    <- tests/test_plan2_r1_master_pending_matrix.py
+    <- tests/test_ux5_r7_documentation_closure.py
+
+===== SCRIPTS: CONSUMIDORES =====
+scripts/audit_action_references.py | refs=5
+    <- .github/workflows/dependency-security.yml
+    <- .github/workflows/scheduled-health.yml
+    <- docs/operations/third-party-dependencies.md
+    <- scripts/README.md
+    <- tests/test_automation_core_quality_gate.py
+scripts/audit_block_identifiers.py | refs=9
+    <- CONTRIBUTING.md
+    <- docs/audits/repository/work-block-identifier-audit-nor1-r8.md
+    <- docs/operations/validation.md
+    <- docs/product/traceability-matrix.md
+    <- docs/standards/work-block-identifiers.md
+    <- scripts/README.md
+    <- scripts/quality_gate.py
+    <- tests/test_nor1_r8_work_block_identifiers.py
+    <- tests/test_precommit_guard.py
+scripts/audit_external_links.py | refs=3
+    <- .github/workflows/scheduled-health.yml
+    <- scripts/README.md
+    <- tests/test_automation_core_quality_gate.py
+scripts/audit_git_history_attestation.py | refs=3
+    <- docs/audits/governance/git-history-attestation-pre-ux5.md
+    <- docs/operations/validation.md
+    <- scripts/README.md
+scripts/audit_markdown.py | refs=15
+    <- docs/audits/documentation/documentation-audit-post-sec2.md
+    <- docs/audits/documentation/documentation-markdown-audit-doc1-r2.md
+    <- docs/audits/documentation/documentation-normalization-doc1-r5.md
+    <- docs/audits/documentation/pre-ux5-documentation-audit.md
+    <- docs/operations/validation.md
+    <- docs/product/traceability-matrix.md
+    <- docs/standards/README.md
+    <- docs/standards/documentation-standards.md
+    <- scripts/README.md
+    <- scripts/quality_gate.py
+    <- tests/test_automation_core_quality_gate.py
+    <- tests/test_doc1_r5_markdown_auditor.py
+    <- tests/test_mant1_scripts_hooks_documentados.py
+    <- tests/test_markdown_audit.py
+    <- tests/test_precommit_guard.py
+scripts/audit_official_sources.py | refs=2
+    <- docs/regulatory/sources/official/README.md
+    <- scripts/README.md
+scripts/audit_pr_policy.py | refs=4
+    <- .github/workflows/quality-gate.yml
+    <- scripts/README.md
+    <- tests/test_automation_core_quality_gate.py
+    <- tests/test_gov16_controles_github.py
+scripts/audit_repository_integrity.py | refs=4
+    <- docs/audits/documentation/pre-ux5-documentation-audit.md
+    <- scripts/README.md
+    <- scripts/quality_gate.py
+    <- tests/test_automation_core_quality_gate.py
+scripts/audit_signed_tags.py | refs=3
+    <- .github/workflows/scheduled-health.yml
+    <- scripts/README.md
+    <- tests/test_automation_core_quality_gate.py
+scripts/configure_git_hooks.ps1 | refs=13
+    <- .githooks/README.md
+    <- CONTRIBUTING.md
+    <- README.md
+    <- docs/architecture/system-architecture.md
+    <- docs/archive/governance/doc1-r1-markdown-update-context.md
+    <- docs/archive/technical/files-audit-r5f.md
+    <- docs/audits/repository/repository-structure-inventory-nor1-r2.txt
+    <- docs/operations/development-guide.md
+    <- docs/operations/validation.md
+    <- scripts/README.md
+    <- tests/test_mant1_r5f_nombres_archivos.py
+    <- tests/test_mant1_scripts_hooks_documentados.py
+    <- tests/test_precommit_guard.py
+scripts/package-lock.json | refs=6
+    <- .github/labeler.yml
+    <- .github/workflows/dependency-security.yml
+    <- .github/workflows/visual-a11y.yml
+    <- CONTRIBUTING.md
+    <- docs/operations/development-guide.md
+    <- scripts/README.md
+scripts/package.json | refs=7
+    <- .github/labeler.yml
+    <- CONTRIBUTING.md
+    <- docs/archive/technical/architecture-pre-gov1-3-r2.md
+    <- docs/operations/development-guide.md
+    <- docs/operations/third-party-dependencies.md
+    <- scripts/README.md
+    <- tests/test_automation_core_quality_gate.py
+scripts/quality_gate.py | refs=16
+    <- .github/pull_request_template.md
+    <- .github/workflows/quality-gate.yml
+    <- .github/workflows/scheduled-health.yml
+    <- CONTRIBUTING.md
+    <- README.md
+    <- docs/decisions/README.md
+    <- docs/operations/development-guide.md
+    <- docs/operations/validation.md
+    <- docs/product/traceability-matrix.md
+    <- scripts/README.md
+    <- scripts/validate_precommit.py
+    <- tests/test_automation_core_quality_gate.py
+    <- tests/test_gov16_controles_github.py
+    <- tests/test_markdown_audit.py
+    <- tests/test_prebeta_e2e_hardening.py
+    <- tests/test_precommit_guard.py
+scripts/README.md | refs=123
+    <- .github/pull_request_template.md
+    <- CONTRIBUTING.md
+    <- GOVERNANCE.md
+    <- README.md
+    <- docs/README.md
+    <- docs/architecture/data-model.md
+    <- docs/architecture/development-center.md
+    <- docs/architecture/system-architecture.md
+    <- docs/archive/README.md
+    <- docs/archive/governance/README.md
+    <- docs/archive/governance/doc1-r1-applicability-only-review.md
+    <- docs/archive/governance/doc1-r1-markdown-decision-matrix.md
+    <- docs/archive/governance/doc1-r1-markdown-documentation-closeout.md
+    <- docs/archive/governance/doc1-r1-markdown-update-context.md
+    <- docs/archive/governance/markdown-audit-post-mant1-doc1-r1.md
+    <- docs/archive/governance/repository-audit-2026-08-18.md
+    <- docs/archive/governance/ver2-r1-post-doc1-operational-decision.md
+    <- docs/archive/governance/ver2-r1-post-doc1-reconciliation-audit.md
+    <- docs/archive/governance/ver2-r1-post-doc1-reconciliation-decision-matrix.md
+    <- docs/archive/governance/ver2-r2-live-documentation-correction-proposal.md
+    <- docs/archive/governance/ver2-r2-post-r1-contradiction-analysis.md
+    <- docs/archive/governance/ver2-r2-post-r1-live-documentation-closeout.md
+    <- docs/archive/regulatory-privacy/README.md
+    <- docs/archive/technical/README.md
+    <- docs/archive/technical/development-guide-pre-gov1-3-r2.md
+    <- docs/archive/technical/validation-pre-gov1-3-r2.md
+    <- docs/archive/ux/README.md
+    <- docs/archive/ux/ux46a-visual-redesign.md
+    <- docs/audits/README.md
+    <- docs/audits/documentation/documentation-audit-post-sec2.md
+    <- docs/audits/documentation/documentation-dependency-audit-nor1-r5.md
+    <- docs/audits/documentation/documentation-inventory-nor1-r3.txt
+    <- docs/audits/documentation/documentation-markdown-audit-doc1-r2.md
+    <- docs/audits/documentation/documentation-normalization-doc1-r5.md
+    <- docs/audits/documentation/nor1-r5-documentation-inventory.txt
+    <- docs/audits/documentation/post-g119-documentation-reconciliation.md
+    <- docs/audits/documentation/pre-ux5-documentation-audit.md
+    <- docs/audits/documentation/ux6-r7-documentation-audit.md
+    <- docs/audits/repository/repository-normalization-final-audit-nor2-r8.md
+    <- docs/audits/repository/repository-normalization-inventory-nor2-r1.txt
+    <- docs/audits/repository/repository-normalization-live-docs-nor2-r4.md
+    <- docs/audits/repository/repository-normalization-migration-matrix-nor2-r2.md
+    <- docs/audits/repository/repository-structure-inventory-nor1-r2.txt
+    <- docs/governance/roadmap.md
+    <- docs/operations/validation.md
+    <- docs/product/functional-specification.md
+    <- docs/product/traceability-matrix.md
+    <- docs/regulatory/regulatory-framework.md
+    <- docs/regulatory/regulatory-sources.md
+    <- docs/security/third-party-deployment-assessment.md
+    <- docs/security/threat-model.md
+    <- docs/standards/code-and-comments.md
+    <- docs/standards/documentation-standards.md
+    <- docs/standards/markdown-style-and-lint.md
+    <- docs/standards/naming-conventions.md
+    <- docs/templates/README.md
+    <- docs/templates/file-structure/README.md
+    <- scripts/audit_markdown.py
+    <- scripts/audit_repository_integrity.py
+    <- tests/test_automation_core_quality_gate.py
+    <- tests/test_dev2_r4_cierre_final.py
+    <- tests/test_doc1_r1_auditoria_markdown_post_mant1.py
+    <- tests/test_doc1_r3_markdown_links.py
+    <- tests/test_doc1_r4_live_state_sanitization.py
+    <- tests/test_doc1_r5_markdown_auditor.py
+    <- tests/test_doc1_r5_markdown_standards.py
+    <- tests/test_doc2_r1_changelog_reconstruction.py
+    <- tests/test_g112_promotion_post_merge.py
+    <- tests/test_g118_promotion_post_merge.py
+    <- tests/test_g120_promotion_post_merge.py
+    <- tests/test_gov13_documentacion.py
+    <- tests/test_gov13_documentacion_r3.py
+    <- tests/test_gov13_documentacion_r4.py
+    <- tests/test_gov14_observabilidad_integracion.py
+    <- tests/test_gov15_cierre_seguridad_privacidad.py
+    <- tests/test_gov17_licencia.py
+    <- tests/test_gov18_cierre_gobierno.py
+    <- tests/test_gov_firma_git.py
+    <- tests/test_identidad_publica_github_pre_r8.py
+    <- tests/test_mant1_r4_encabezados_operativos_limpios.py
+    <- tests/test_mant1_r5d_politica_extensiones.py
+    <- tests/test_mant1_r5e_nombres_carpetas.py
+    <- tests/test_mant1_r5g_documentacion.py
+    <- tests/test_mant1_r5h_auditoria_nombres_restantes.py
+    <- tests/test_mant1_r7_cierre_operativo_post_auditoria.py
+    <- tests/test_mant1_scripts_hooks_documentados.py
+    <- tests/test_markdown_audit.py
+    <- tests/test_nor1_r8_work_block_identifiers.py
+    <- tests/test_nor1_repository_standards.py
+    <- tests/test_nor2_r2_migration_matrix.py
+    <- tests/test_nor2_r3_runtime_migration.py
+    <- tests/test_nor2_r4_live_documentation.py
+    <- tests/test_nor2_r5_historical_documentation.py
+    <- tests/test_nor2_r6_ledger_data.py
+    <- tests/test_nor2_r7_local_artifacts.py
+    <- tests/test_nor2_r8_final_audit.py
+    <- tests/test_nor2_repository_normalization.py
+    <- tests/test_plan1_documentacion_primaria.py
+    <- tests/test_plan1_documentacion_transversal.py
+    <- tests/test_plan1_gobierno_versionado_oficial.py
+    <- tests/test_plan1_guard_referencias_historicas.py
+    <- tests/test_plan1_r4_candidato_cierre.py
+    <- tests/test_plan2_r1_master_pending_matrix.py
+    <- tests/test_post_sec2_integral_audit.py
+    <- tests/test_rel_gov1_r2_live_publication_state.py
+    <- tests/test_ux46e_almacenamiento_comentarios_js.py
+    <- tests/test_ux46e_auditoria_coherencia.py
+    <- tests/test_ux46e_estandar_runtime.py
+    <- tests/test_ux46e_preparacion_publica.py
+    <- tests/test_ux46e_r8_cierre_funcional.py
+    <- tests/test_ux46e_r8_reconsentimiento_borrado.py
+    <- tests/test_ux46e_r91_candidato_cierre.py
+    <- tests/test_ux46e_renumeracion_documental.py
+    <- tests/test_ux46f_r11_bloqueo_documental_vista_principal.py
+    <- tests/test_ux46f_r1_attachment_provenance_consistency.py
+    <- tests/test_ux46f_r2_auditoria_paso4.py
+    <- tests/test_ux46g_r1_retirement_scenarios.py
+    <- tests/test_ux46i_r1_calculation_guide.py
+    <- tests/test_ux6_r7_documentation_closure.py
+    <- tests/test_ver2_documentacion_vigente.py
+    <- tests/test_ver2_r2_documentacion_viva_post_r1.py
+    <- tests/test_ver2_r3_decision_version_candidata_post_r2.py
+    <- tests/test_ver2_r4_promocion_g071_e01.py
+scripts/release_contract.py | refs=13
+    <- .github/workflows/verificar-tags.yml
+    <- CONTRIBUTING.md
+    <- GOVERNANCE.md
+    <- docs/audits/documentation/documentation-normalization-doc1-r5.md
+    <- docs/audits/governance/rel-gov1-r2-release-automation.md
+    <- docs/governance/master-plan-to-1-0.md
+    <- docs/governance/roadmap.md
+    <- docs/operations/github-public-repository.md
+    <- docs/operations/release-process.md
+    <- docs/operations/validation.md
+    <- scripts/README.md
+    <- scripts/quality_gate.py
+    <- tests/test_release_governance_contract.py
+scripts/release_publication.py | refs=10
+    <- .github/workflows/verificar-tags.yml
+    <- docs/audits/governance/rel-gov1-r2-release-automation.md
+    <- docs/operations/github-public-repository.md
+    <- docs/operations/release-process.md
+    <- docs/operations/validation.md
+    <- scripts/README.md
+    <- scripts/quality_gate.py
+    <- tests/test_rel_gov1_r2_live_publication_state.py
+    <- tests/test_release_publication.py
+    <- tests/test_release_workflow_automation.py
+scripts/release_readiness.py | refs=4
+    <- .github/workflows/quality-gate.yml
+    <- .github/workflows/scheduled-health.yml
+    <- scripts/README.md
+    <- tests/test_automation_core_quality_gate.py
+scripts/validate_precommit.py | refs=17
+    <- .githooks/README.md
+    <- .githooks/pre-commit
+    <- docs/architecture/system-architecture.md
+    <- docs/archive/governance/doc1-r1-markdown-update-context.md
+    <- docs/archive/technical/files-audit-r5f.md
+    <- docs/audits/documentation/documentation-markdown-audit-doc1-r2.md
+    <- docs/audits/repository/repository-structure-inventory-nor1-r2.txt
+    <- docs/operations/development-guide.md
+    <- docs/operations/validation.md
+    <- docs/product/traceability-matrix.md
+    <- docs/templates/file-structure/template.githook
+    <- scripts/README.md
+    <- scripts/configure_git_hooks.ps1
+    <- tests/test_automation_core_quality_gate.py
+    <- tests/test_mant1_r5f_nombres_archivos.py
+    <- tests/test_mant1_scripts_hooks_documentados.py
+    <- tests/test_precommit_guard.py
+scripts/visual_a11y_audit.mjs | refs=4
+    <- .github/labeler.yml
+    <- .github/workflows/visual-a11y.yml
+    <- scripts/README.md
+    <- tests/test_automation_core_quality_gate.py
+
+===== MÓDULOS CORE: OWNER PRELIMINAR =====
+app/core/admin_security.py | owner=Portal Developer | consumers=2
+    <- app/main.py
+    <- tests/test_sec2_r2_admin_security.py
+app/core/admin_session.py | owner=Portal Developer | consumers=10
+    <- app/main.py
+    <- tests/test_dev2_r5_portal_access.py
+    <- tests/test_dev2_r6_header_identity.py
+    <- tests/test_dev2_r6_multipage_shell.py
+    <- tests/test_dev2_r6_web_access.py
+    <- tests/test_dev2_r6_web_session.py
+    <- tests/test_sec2_postclosure_hardening.py
+    <- tests/test_sec2_r5_admin_web_session.py
+    <- tests/test_sec2_r6_admin_session_security.py
+    <- tests/test_ux6_r8_integral_hardening.py
+app/core/config.py | owner=Shared/Platform | consumers=18
+    <- app/core/admin_session.py
+    <- app/main.py
+    <- tests/test_g109_promotion_post_merge.py
+    <- tests/test_g110_promotion_post_merge.py
+    <- tests/test_g111_promotion_post_merge.py
+    <- tests/test_g121_promotion_post_merge.py
+    <- tests/test_gov12_versionado.py
+    <- tests/test_gov18_cierre_gobierno.py
+    <- tests/test_identidad_interfaz.py
+    <- tests/test_nor2_r8_final_audit.py
+    <- tests/test_plan1_documentacion_primaria.py
+    <- tests/test_plan1_documentacion_transversal.py
+    <- tests/test_plan1_gobierno_versionado_oficial.py
+    <- tests/test_plan1_r4_candidato_cierre.py
+    <- tests/test_plan1_versionado_oficial.py
+    <- tests/test_ux46e_r91_candidato_cierre.py
+    <- tests/test_ver2_documentacion_vigente.py
+    <- tests/test_ver2_r4_promocion_g071_e01.py
+app/core/constants.py | owner=Revisar-posible-dead-code | consumers=0
+app/core/developer_avatar.py | owner=Portal Developer | consumers=2
+    <- app/main.py
+    <- tests/test_dev2_r6_store.py
+app/core/developer_identity.py | owner=Portal Developer | consumers=18
+    <- app/cli/admin.py
+    <- app/core/admin_session.py
+    <- app/core/developer_provisioning.py
+    <- app/core/developer_store.py
+    <- app/core/developer_user_admin.py
+    <- app/core/developer_user_audit.py
+    <- app/core/developer_web_security.py
+    <- app/main.py
+    <- tests/test_dev2_r6_header_identity.py
+    <- tests/test_dev2_r6_identity.py
+    <- tests/test_dev2_r6_provisioning.py
+    <- tests/test_dev2_r6_security_maintenance_privacy.py
+    <- tests/test_dev2_r6_store.py
+    <- tests/test_dev2_r6_web_session.py
+    <- tests/test_ux6_r2_form_resilience.py
+    <- tests/test_ux6_r2_user_admin.py
+    <- tests/test_ux6_r2_user_audit.py
+    <- tests/test_ux6_r8_integral_hardening.py
+app/core/developer_provisioning.py | owner=Portal Developer | consumers=13
+    <- app/cli/admin.py
+    <- app/core/developer_user_admin.py
+    <- app/main.py
+    <- tests/test_dev2_r5_portal_access.py
+    <- tests/test_dev2_r6_header_identity.py
+    <- tests/test_dev2_r6_multipage_shell.py
+    <- tests/test_dev2_r6_provisioning.py
+    <- tests/test_dev2_r6_web_access.py
+    <- tests/test_sec2_postclosure_hardening.py
+    <- tests/test_sec2_r5_admin_web_session.py
+    <- tests/test_ux6_r2_form_resilience.py
+    <- tests/test_ux6_r2_user_admin.py
+    <- tests/test_ux6_r2_user_audit.py
+app/core/developer_store.py | owner=Portal Developer | consumers=11
+    <- app/core/developer_avatar.py
+    <- app/core/developer_provisioning.py
+    <- app/core/developer_user_admin.py
+    <- app/core/developer_user_audit.py
+    <- app/core/developer_web_security.py
+    <- app/main.py
+    <- tests/test_dev2_r6_header_identity.py
+    <- tests/test_dev2_r6_provisioning.py
+    <- tests/test_dev2_r6_security_maintenance_privacy.py
+    <- tests/test_dev2_r6_store.py
+    <- tests/test_ux6_r2_user_admin.py
+app/core/developer_user_admin.py | owner=Portal Developer | consumers=4
+    <- app/main.py
+    <- tests/test_ux6_r2_form_resilience.py
+    <- tests/test_ux6_r2_user_admin.py
+    <- tests/test_ux6_r2_user_audit.py
+app/core/developer_user_audit.py | owner=Portal Developer | consumers=3
+    <- app/core/developer_user_admin.py
+    <- app/main.py
+    <- tests/test_ux6_r2_user_audit.py
+app/core/developer_web_security.py | owner=Portal Developer | consumers=2
+    <- app/main.py
+    <- tests/test_dev2_r6_security_maintenance_privacy.py
+app/core/money.py | owner=Shared/Platform | consumers=12
+    <- app/engines/mixto.py
+    <- app/engines/sebd.py
+    <- app/engines/sebd_modalidades.py
+    <- app/engines/sucgs.py
+    <- app/models/simulation.py
+    <- app/services/comparator.py
+    <- app/services/current_year_detail.py
+    <- app/services/results.py
+    <- app/services/salary_history.py
+    <- app/services/salary_projection.py
+    <- app/services/timeline.py
+    <- tests/test_money.py
+app/core/normativa.py | owner=Shared/Platform | consumers=10
+    <- app/engines/elegibilidad.py
+    <- app/engines/mixto.py
+    <- app/engines/sebd.py
+    <- app/engines/sebd_modalidades.py
+    <- app/engines/sucgs.py
+    <- app/services/calculation_guide.py
+    <- app/services/regulatory_sources.py
+    <- app/services/retirement.py
+    <- app/services/traceability.py
+    <- tests/test_ux46i_r1_calculation_guide.py
+app/core/observability.py | owner=Shared/Platform | consumers=13
+    <- app/core/admin_security.py
+    <- app/main.py
+    <- app/services/development_center.py
+    <- app/services/reference_date.py
+    <- tests/test_dev2_development_center.py
+    <- tests/test_dev2_r2_visor_diagnostico.py
+    <- tests/test_dev2_r3_autodiagnostico.py
+    <- tests/test_dev2_r5_portal_access.py
+    <- tests/test_dev2_r6_observability_portal.py
+    <- tests/test_gov14_observabilidad.py
+    <- tests/test_gov14_observabilidad_integracion.py
+    <- tests/test_sec2_r2_secret_filtering.py
+    <- tests/test_sec2_r4_admin_audit.py
+app/core/pdf_files.py | owner=Revisar-App/Platform | consumers=1
+    <- app/main.py
+app/core/version.py | owner=Shared/Platform | consumers=29
+    <- app/core/config.py
+    <- app/core/observability.py
+    <- app/core/version_ledger.py
+    <- app/services/development_center.py
+    <- tests/test_dev2_development_center.py
+    <- tests/test_dev2_r1_cierre_documental.py
+    <- tests/test_dev2_r4_cierre_final.py
+    <- tests/test_g109_promotion_post_merge.py
+    <- tests/test_g110_promotion_post_merge.py
+    <- tests/test_g111_promotion_post_merge.py
+    <- tests/test_g121_promotion_post_merge.py
+    <- tests/test_mant1_r3_yaml_github_documentados.py
+    <- tests/test_mant1_r5a_comentarios_servicios_app.py
+    <- tests/test_mant1_scripts_hooks_documentados.py
+    <- tests/test_nor1_r8_work_block_identifiers.py
+    <- tests/test_nor2_r2_migration_matrix.py
+    <- tests/test_nor2_r3_runtime_migration.py
+    <- tests/test_nor2_r4_live_documentation.py
+    <- tests/test_nor2_r5_historical_documentation.py
+    <- tests/test_nor2_r7_local_artifacts.py
+    <- tests/test_nor2_repository_normalization.py
+    <- tests/test_plan1_r4_candidato_cierre.py
+    <- tests/test_plan1_versionado_oficial.py
+    <- tests/test_ux46e_r91_candidato_cierre.py
+    <- tests/test_ux46f_r1_attachment_provenance_consistency.py
+    <- tests/test_ver2_documentacion_vigente.py
+    <- tests/test_ver2_r4_promocion_g071_e01.py
+    <- tests/test_ver2_r5_estabilizacion_post_release.py
+    <- tests/test_ver2_version_revision_aware.py
+app/core/version_ledger.py | owner=Tooling/Governance | consumers=20
+    <- tests/test_doc1_r3_markdown_links.py
+    <- tests/test_doc1_r4_live_state_sanitization.py
+    <- tests/test_doc2_r1_changelog_reconstruction.py
+    <- tests/test_g109_promotion_post_merge.py
+    <- tests/test_g110_promotion_post_merge.py
+    <- tests/test_g111_promotion_post_merge.py
+    <- tests/test_g112_promotion_post_merge.py
+    <- tests/test_g113_promotion_post_merge.py
+    <- tests/test_g114_promotion_post_merge.py
+    <- tests/test_g115_promotion_post_merge.py
+    <- tests/test_g116_promotion_post_merge.py
+    <- tests/test_g117_promotion_post_merge.py
+    <- tests/test_g118_promotion_post_merge.py
+    <- tests/test_g119_promotion_post_merge.py
+    <- tests/test_g120_promotion_post_merge.py
+    <- tests/test_g121_promotion_post_merge.py
+    <- tests/test_nor1_r8_work_block_identifiers.py
+    <- tests/test_nor2_r6_ledger_data.py
+    <- tests/test_plan2_r1_master_pending_matrix.py
+    <- tests/test_ver2_ledger_estructurado.py
+
+===== CANDIDATOS ESTRUCTURALES =====
+Developer fuera de frontera propia:
+  MOVE-R3: app/core/admin_security.py
+  MOVE-R3: app/core/admin_session.py
+  MOVE-R3: app/core/developer_avatar.py
+  MOVE-R3: app/core/developer_identity.py
+  MOVE-R3: app/core/developer_provisioning.py
+  MOVE-R3: app/core/developer_store.py
+  MOVE-R3: app/core/developer_user_admin.py
+  MOVE-R3: app/core/developer_user_audit.py
+  MOVE-R3: app/core/developer_web_security.py
+
+Templates Developer:
+  MOVE-R4: app/templates/dev_base.html
+  MOVE-R4: app/templates/dev_dashboard.html
+  MOVE-R4: app/templates/dev_development_center.html
+  MOVE-R4: app/templates/dev_diagnostics.html
+  MOVE-R4: app/templates/dev_events.html
+  MOVE-R4: app/templates/dev_files.html
+  MOVE-R4: app/templates/dev_login.html
+  MOVE-R4: app/templates/dev_maintenance.html
+  MOVE-R4: app/templates/dev_privacy.html
+  MOVE-R4: app/templates/dev_profile.html
+  MOVE-R4: app/templates/dev_technical_access.html
+  MOVE-R4: app/templates/dev_users.html
+
+Assets Developer:
+  MOVE-R5: app/static/css/developer-portal.css
+  MOVE-R5: app/static/js/developer_forms.js
+  MOVE-R5: app/static/js/developer_portal.js
+
+Posibles Shared:
+  SHARED-R4: app/templates/base.html
+  SHARED-R4: app/templates/partials/global_footer.html
+  SHARED-R5: app/static/css/accessibility.css
+  SHARED-R5: app/static/css/brand.css
+  SHARED-R5: app/static/css/design-system.css
+  SHARED-R5: app/static/css/motion.css
+  SHARED-R5: app/static/css/style.css
+  SHARED-R5: app/static/img/brand/app-icon-192.png
+  SHARED-R5: app/static/img/brand/app-icon-512.png
+  SHARED-R5: app/static/img/brand/apple-touch-icon.png
+  SHARED-R5: app/static/img/brand/favicon-32x32.png
+  SHARED-R5: app/static/img/brand/favicon-48x48.png
+  SHARED-R5: app/static/img/brand/favicon.ico
+  SHARED-R5: app/static/img/brand/logo-mark-128.png
+  SHARED-R5: app/static/js/accessibility.js
+  SHARED-R5: app/static/js/datetime_ui.js
+  SHARED-R5: app/static/js/interaction_ui.js
+  SHARED-R5: app/static/js/shell_state_boot.js
+  SHARED-R5: app/static/js/shell_ui.js
+  SHARED-R5: app/static/js/theme.js
+
+Directorios single-child:
+  REVIEW-R7: app/static/img
+  REVIEW-R7: assets/social
+  REVIEW-R7: docs/regulatory/sources
+  REVIEW-R7: docs/regulatory/sources/official/pensions/reference
+  REVIEW-R7: docs/regulatory/sources/official/privacy
+  REVIEW-R7: tests/validation_cases
+
+Archivos .gitkeep versionados:
+  REVIEW-R7: data/.gitkeep
+
+===== FIN =====

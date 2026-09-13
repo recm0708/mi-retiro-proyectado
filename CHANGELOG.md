@@ -6,11 +6,29 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ## [Unreleased]
 
-- PERSIST.1 R1 queda reservado como siguiente candidato G122/E01
-  (`0.1.22.01-beta`) después del cierre de UX.6.
-- La reserva de PERSIST.1 no inicia trabajo sin autorización explícita.
-- UX.7 permanece como revisión visual final no bloqueante antes de la
-  versión estable.
+- Después de G122/E01 no se preasigna G123 a ningún bloque; la
+  replanificación post-NOR.3 determina el siguiente candidato real.
+
+## [0.1.22.01-beta]
+
+- G122/E01: NOR.3 R8 consolida R1–R8 como un único estado estructural.
+- `VERSION` avanza a `0.1.22.01-beta`; NOR.3 usa `functional_revision = R8`
+  y ordinal E01.
+- Portales, templates, assets, tests, data y scripts quedan normalizados por
+  ownership y protegidos por policy/regresiones.
+- PR de integración/promoción: #162.
+- No se reserva G123 para PERSIST.1 ni para otro bloque antes de #154/#155.
+- `v0.1.22.01-beta` solo se crea después del merge, revalidación de `main`
+  y firma local.
+
+- NOR.3 R1–R2 queda como candidato vigente G122/E01
+  (`0.1.22.01-beta`), reservado/no aceptado; `VERSION` permanece en
+  `0.1.21.01-beta`.
+- La antigua reserva PERSIST.1 → G122/E01 queda reconciliada: PERSIST.1
+  permanece planificado, no iniciado y sin Global preasignado hasta el cierre
+  de NOR.3 y la replanificación post-NOR.3 de #155.
+- UX.7/UX.8 permanecen planificados como programa UX granular posterior;
+  no se consideran iniciados por esta reconciliación.
 
 ## [0.1.21.01-beta]
 
@@ -173,7 +191,7 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 ## [0.1.11.01-beta]
 
 - G111/E01: DOC.2 R1 aceptado mediante PR #87 y merge `1041b59`; reconstruye de forma auditable `0.0.1-beta`–`0.0.21-beta`.
-- Evidencia: 21 estados retrospectivos y 80 commits reales/únicos preservados en `data/doc2-legacy-changelog-evidence.json`.
+- Evidencia: 21 estados retrospectivos y 80 commits reales/únicos preservados en `data/audits/doc2-legacy-changelog-evidence.json`.
 - Gate: 1066 pruebas post-merge en `OK`, Markdown 143/143, `pip check`, compilación Python, sintaxis JavaScript y `git diff --check` limpios; CI remota Python 3.13/3.14 + Markdown/gobernanza en `success`.
 - Ledger: G111 queda aceptado; G112/E01 (`0.1.12.01-beta`) pasa a ser el siguiente candidato disponible para PERSIST.1.
 - Tag/Release: `v0.1.11.01-beta` queda pendiente de creación firmada/publicación después de integrar y revalidar esta promoción; tags anteriores permanecen inmutables.
@@ -201,7 +219,7 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 - DOC.1 R2: completa la auditoría integral Markdown post-NOR.2, normaliza metadata y estados vigentes, retira cuatro stubs documentales residuales, preserva la verdad histórica e incorpora auditoría Markdown permanente en pre-commit y GitHub Actions.
 - NOR.2 R8: ejecuta la auditoría integral de cierre, retira dos fragmentos transitorios de `docs/`, corrige estados vivos obsoletos, revalida estructura, artefactos locales, versión y ledger, y agrega regresión final de normalización.
 - NOR.2 R7: migra la evidencia local heredada desde `_entregas/` hacia `_deliverables/`, conserva 20 artefactos únicos, retira 8 duplicados SHA-256 exactos y elimina un ZIP reproducible íntegramente desde Git.
-- NOR.2 R6: normaliza el ledger estructurado a `data/pre-1-0-revision-ledger.json`, preserva íntegramente G001–G070 y actualiza consumidores vivos sin reescribir evidencia histórica.
+- NOR.2 R6: normaliza el ledger estructurado a `data/governance/pre-1-0-revision-ledger.json`, preserva íntegramente G001–G070 y actualiza consumidores vivos sin reescribir evidencia histórica.
 - NOR.2 R5: archiva 36 documentos cerrados en `docs/archive/`, actualiza índices históricos y separa evidencia cerrada de documentación viva.
 - NOR.2 R4: migra 41 documentos vivos a áreas canónicas, consolida 2 estándares heredados y sincroniza enlaces/referencias sin conservar stubs de compatibilidad.
 - NOR.2 R3: migra 28 rutas técnicas de runtime, plantillas, pruebas y configuración; mantiene estables las URL públicas y preserva Ficha Digital como excepción de dominio.
@@ -320,7 +338,7 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 - reconoce como estados independientes cuando la evidencia lo sustenta los hitos de firma/integridad, seguridad/gobierno, mantenimiento, identidad/publicación, PLAN.1 y los cierres posteriores;
 - corrige la secuencia canónica de UX.4.6i a **R1 → R1.2 → R1.3 → R1.4**; no existe evidencia independiente de una revisión intermedia no demostrada entre UX.4.6i R1 y R1.2;
 - separa la versión vigente de aplicación de la metadata histórica que indica en qué versión fue revisado un documento de dominio;
-- incorpora ledger estructurado en `data/pre-1-0-revision-ledger.json`, validador `app/core/version_ledger.py`, matriz de decisión, auditoría y regresiones de coherencia;
+- incorpora ledger estructurado en `data/governance/pre-1-0-revision-ledger.json`, validador `app/core/version_ledger.py`, matriz de decisión, auditoría y regresiones de coherencia;
 - DEV.2 queda cerrado como bloque funcional independiente antes del cierre final de VER.2, sin consumir promoción revision-aware ni cambiar VERSION, APP_VERSION o tags.
 
 ### UX.4.6i — cierre de Cómo se calcula

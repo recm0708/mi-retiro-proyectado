@@ -119,7 +119,7 @@ reemite ni renombra tags y no altera GitHub Releases.
 ## 7. Evidencia machine-readable
 
 La evidencia canónica se encuentra en
-[`data/git-history-attestation.json`](../../../data/git-history-attestation.json).
+[`data/git-history-attestation.json`](../../../data/audits/git-history-attestation.json).
 
 El manifiesto registra, por cada commit:
 
@@ -153,7 +153,7 @@ exactamente con el snapshot atestado y que la frontera 89/106 permanezca
 intacta.
 
 Las regresiones viven en
-[`tests/test_git_history_attestation.py`](../../../tests/test_git_history_attestation.py).
+[`tests/test_git_history_attestation.py`](../../../tests/governance/test_git_history_attestation.py).
 
 ## 9. Decisión
 

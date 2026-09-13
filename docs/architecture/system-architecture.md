@@ -1,7 +1,7 @@
 # Arquitectura
 
 **Estado:** Vigente
-**Versión de aplicación revisada:** `0.1.21.01-beta`
+**Versión de aplicación revisada:** `0.1.22.01-beta`
 **Versión base histórica:** `0.0.23-beta`
 **Revisión documental:** GOV.1.4 — 2026-08-17
 **Última actualización técnica:** DEV.2 R6 — Portal Developer multipágina, identidad, observabilidad, mantenimiento, seguridad y privacidad — 2026-08-30
@@ -18,7 +18,7 @@
 - Design System, movimiento, accesibilidad y responsive son compartidos.
 - Importadores documentales mantienen revisión/confirmación explícita.
 - UX.6 no modifica motores SEBD/Mixto/SUCGS ni parámetros normativos.
-- PERSIST.1 R1 queda reservado como G122/E01 y no iniciado.
+- NOR.3 R1–R2 queda como candidato G122/E01 reservado/no aceptado; PERSIST.1 permanece planificado, no iniciado y sin Global preasignado.
 <!-- DOC1-R1-POST-MANT1:END -->
 
 Mi Retiro Proyectado es una aplicación web local basada en FastAPI, Jinja2 y JavaScript del navegador. La arquitectura separa presentación, contratos de datos, servicios de integración, motores previsionales, parámetros normativos y observabilidad de desarrollo.
@@ -55,22 +55,29 @@ introduce nuevas capas de producto.
 ### Núcleo
 
 - `app/cli/admin.py` — CLI administrativa local para aprovisionamiento y gestión Developer.
-- `app/core/pdf_files.py`
+- `app/portals/asegurado/pdf_files.py`
 - `app/core/config.py`
-- `app/core/admin_security.py`
-- `app/core/admin_session.py`
-- `app/core/developer_avatar.py` — almacenamiento local controlado de avatares Developer.
-- `app/core/developer_identity.py`
-- `app/core/developer_provisioning.py`
-- `app/core/developer_store.py`
-- `app/core/developer_user_admin.py` — reglas humanas de gestión de cuentas, jerarquía y credenciales temporales.
-- `app/core/developer_user_audit.py` — ledger append-only de gestión de cuentas.
-- `app/core/developer_web_security.py`
-- [`app/core/constants.py`](../../app/core/constants.py)
+- `app/portals/developer/admin_security.py`
+- `app/portals/developer/admin_session.py`
+- `app/portals/developer/developer_avatar.py` — almacenamiento local controlado de avatares Developer.
+- `app/portals/developer/developer_identity.py`
+- `app/portals/developer/developer_provisioning.py`
+- `app/portals/developer/developer_store.py`
+- `app/portals/developer/developer_user_admin.py` — reglas humanas de gestión de cuentas, jerarquía y credenciales temporales.
+- `app/portals/developer/developer_user_audit.py` — ledger append-only de gestión de cuentas.
+- `app/portals/developer/developer_web_security.py`
 - `app/core/money.py`
 - `app/core/normativa.py`
 - `app/core/observability.py`
 - `app/core/version.py`
+
+### Portales
+
+- `app/portals/asegurado/router.py` — rutas públicas y API previsional del portal Asegurado.
+- `app/portals/asegurado/pdf_files.py` — validación defensiva de PDF en la frontera Asegurado.
+- `app/portals/developer/router.py` — rutas humanas y técnicas bajo `/dev`.
+- `app/portals/developer/development_center.py` — estado y diagnóstico del Centro de desarrollo.
+- `app/portals/developer/` concentra identidad, sesiones, seguridad, almacenamiento y administración exclusivas del Portal Developer.
 
 ### Modelos
 
@@ -111,28 +118,28 @@ introduce nuevas capas de producto.
 
 ### Presentación CSS y plantillas documentadas
 
-- `app/static/css/calculation-guide.css` — delimita responsabilidades visuales de la guía pública: hero, navegación, fórmulas, tablas, fuentes, accesibilidad y responsive.
-- `app/templates/calculation_guide.html` — organiza comentarios Jinja por recorrido general, sistemas previsionales, fuentes y cierre sin modificar el HTML renderizado.
+- `app/static/asegurado/css/calculation-guide.css` — delimita responsabilidades visuales de la guía pública: hero, navegación, fórmulas, tablas, fuentes, accesibilidad y responsive.
+- `app/templates/asegurado/calculation_guide.html` — organiza comentarios Jinja por recorrido general, sistemas previsionales, fuentes y cierre sin modificar el HTML renderizado.
 
 ### Presentación JavaScript crítica
 
-- `app/static/js/accessibility.js`
-- `app/static/js/comparator.js` — matriz retiro × salario, advertencias y diferencias sin recalcular pensiones.
-- `app/static/js/current_year_detail.js`
-- `app/static/js/data_management.js` — limpieza controlada de pasos, invalidación descendente y borrado limitado a claves propias.
-- `app/static/js/salary_history.js`
-- `app/static/js/official_data_import.js` — borradores revisables de Mi Retiro Seguro/Ficha Digital, vigencia y confirmación explícita.
-- `app/static/js/timeline.js`
-- `app/static/js/currency.js`
-- `app/static/js/wizard_navigation.js`
-- `app/static/js/privacy.js` — consentimiento versionado, sesión autorizada y borrado defensivo de datos propios.
-- `app/static/js/attachment_processing.js` — estado global accesible y exclusión de dobles ejecuciones durante análisis de archivos.
-- `app/static/js/mi_retiro_seguro_reference.js`
-- `app/static/js/results.js` — contratos de cálculo, comparación acreditado/proyectado, trazabilidad y salida por sistema.
-- `app/static/js/results_orchestration.js` — decisiones de Paso 6, transición Mixto/SUCGS, enlace contextual e impresión sin duplicar fórmulas.
-- `app/static/js/retirement.js`
-- `app/static/js/simulation.js` — estado temporal, navegación de pasos, validación progresiva y dependencias entre módulos.
-- `app/static/js/theme.js`
+- `app/static/shared/js/accessibility.js`
+- `app/static/asegurado/js/comparator.js` — matriz retiro × salario, advertencias y diferencias sin recalcular pensiones.
+- `app/static/asegurado/js/current_year_detail.js`
+- `app/static/asegurado/js/data_management.js` — limpieza controlada de pasos, invalidación descendente y borrado limitado a claves propias.
+- `app/static/asegurado/js/salary_history.js`
+- `app/static/asegurado/js/official_data_import.js` — borradores revisables de Mi Retiro Seguro/Ficha Digital, vigencia y confirmación explícita.
+- `app/static/asegurado/js/timeline.js`
+- `app/static/asegurado/js/currency.js`
+- `app/static/asegurado/js/wizard_navigation.js`
+- `app/static/asegurado/js/privacy.js` — consentimiento versionado, sesión autorizada y borrado defensivo de datos propios.
+- `app/static/asegurado/js/attachment_processing.js` — estado global accesible y exclusión de dobles ejecuciones durante análisis de archivos.
+- `app/static/asegurado/js/mi_retiro_seguro_reference.js`
+- `app/static/asegurado/js/results.js` — contratos de cálculo, comparación acreditado/proyectado, trazabilidad y salida por sistema.
+- `app/static/asegurado/js/results_orchestration.js` — decisiones de Paso 6, transición Mixto/SUCGS, enlace contextual e impresión sin duplicar fórmulas.
+- `app/static/asegurado/js/retirement.js`
+- `app/static/asegurado/js/simulation.js` — estado temporal, navegación de pasos, validación progresiva y dependencias entre módulos.
+- `app/static/shared/js/theme.js`
 
 ## 3. Capas
 
@@ -158,8 +165,6 @@ Responsabilidades:
 - versión canónica;
 - precisión monetaria;
 - carga de normativa;
-- constantes comunes;
-- validación defensiva de archivos PDF;
 - Developer Diagnostics.
 
 `app/core/observability.py` implementa el esquema JSONL, correlación aleatoria, redacción, rotación, retención y exportación controlada. El módulo no conoce modelos previsionales ni ejecuta cálculos.
@@ -264,7 +269,7 @@ La observabilidad asociada registra solo cantidades, estado de cache, outcome y 
 
 ## 7. API y middleware
 
-`app/main.py` contiene el middleware global de seguridad y Developer Diagnostics.
+`app/main.py` actúa como composition root: contiene el middleware global de seguridad y Developer Diagnostics, configura recursos compartidos y registra los routers Asegurado y Developer.
 
 Cuando `MRP_DEV_MODE` no vale `1`, la observabilidad no escribe logs ni añade `X-Correlation-ID`.
 
@@ -311,7 +316,7 @@ almacén administrativo para datos de simulación.
 
 ## 7.1. Inventario de rutas FastAPI
 
-El siguiente inventario se deriva de los decoradores vigentes en `app/main.py`. Se conserva explícitamente para auditoría documental iniciada en GOV.1.3 R2 y actualizada por GOV.1.4.
+El siguiente inventario se deriva de las rutas registradas por `app/main.py` mediante `app/portals/asegurado/router.py` y `app/portals/developer/router.py`. Se conserva explícitamente para auditoría documental iniciada en GOV.1.3 R2 y actualizada por GOV.1.4.
 
 | Ruta |
 | --- |
@@ -440,15 +445,15 @@ El patrón se reutiliza en datos personales, cuotas, historial anual y detalle d
 
 ### UX.4.6g R1 — frontera de escenarios de retiro
 
-Paso 5 mantiene dos capas separadas: `app/static/js/retirement.js` propone y conserva la selección visible, mientras `app/services/retirement.py` construye fechas/cuotas sin decidir elegibilidad. Las sugerencias posteriores se derivan de la cobertura de Paso 4; las elecciones anticipadas requieren acción explícita. `app/engines/elegibilidad.py` y los motores de prestaciones continúan siendo la frontera jurídica para determinar modalidad y factores.
+Paso 5 mantiene dos capas separadas: `app/static/asegurado/js/retirement.js` propone y conserva la selección visible, mientras `app/services/retirement.py` construye fechas/cuotas sin decidir elegibilidad. Las sugerencias posteriores se derivan de la cobertura de Paso 4; las elecciones anticipadas requieren acción explícita. `app/engines/elegibilidad.py` y los motores de prestaciones continúan siendo la frontera jurídica para determinar modalidad y factores.
 
 ### Contrato transversal de fechas
 
-`app/static/js/accessibility.js` aplica de forma idempotente validación y clase visual a todos los `input[type=date]`, incluidos controles dinámicos. `app/static/css/accessibility.css` define la geometría compacta común. Las superficies pueden declarar límites `min`/`max` más restrictivos; la capa transversal solo aporta valores por defecto cuando faltan. Paso 5 consume este contrato y añade exclusivamente la explicación de cobertura contra el horizonte salarial.
+`app/static/shared/js/accessibility.js` aplica de forma idempotente validación y clase visual a todos los `input[type=date]`, incluidos controles dinámicos. `app/static/shared/css/accessibility.css` define la geometría compacta común. Las superficies pueden declarar límites `min`/`max` más restrictivos; la capa transversal solo aporta valores por defecto cuando faltan. Paso 5 consume este contrato y añade exclusivamente la explicación de cobertura contra el horizonte salarial.
 
 ## 14. Guía pública de cálculo
 
-`/como-se-calcula` es una superficie pública de transparencia. `app/services/calculation_guide.py` lee parámetros de `regulations/*.json` y los entrega a `app/templates/calculation_guide.html`; no ejecuta `app/engines/` ni construye resultados individuales.
+`/como-se-calcula` es una superficie pública de transparencia. `app/services/calculation_guide.py` lee parámetros de `regulations/*.json` y los entrega a `app/templates/asegurado/calculation_guide.html`; no ejecuta `app/engines/` ni construye resultados individuales.
 
 El Paso 6 enlaza a la sección del sistema correspondiente mediante anclas públicas (`#sebd`, `#mixto`, `#sucgs`) sin transportar datos personales, salarios, cuotas ni montos en la URL. Las sustituciones numéricas del caso individual permanecen en la trazabilidad de resultados.
 
@@ -559,7 +564,7 @@ El cambio de contraseña propia incrementa `security_version`; las sesiones prev
 ## Movimiento e interacción transversal
 
 La Aplicación principal, el Portal Developer y cualquier superficie web futura
-comparten un único contrato de movimiento. `app/static/css/motion.css` consume
+comparten un único contrato de movimiento. `app/static/shared/css/motion.css` consume
 las duraciones y la curva definidas por `design-system.css`, sin declarar una
 segunda familia de tokens. Las entradas de página, microinteracciones, feedback
 y transiciones deben reutilizar ese contrato en lugar de crear animaciones
@@ -570,7 +575,7 @@ animación para comunicar su resultado. Cuando el sistema solicita
 `prefers-reduced-motion: reduce`, la duración de animaciones y transiciones se
 reduce al mínimo y se eliminan desplazamientos decorativos.
 
-`app/static/js/interaction_ui.js` proporciona clases de compatibilidad para
+`app/static/shared/js/interaction_ui.js` proporciona clases de compatibilidad para
 estados visuales que no deben depender exclusivamente de selectores CSS
 modernos como `:has()`. La lógica de negocio y la accesibilidad semántica
 continúan funcionando aunque el navegador no aplique esos selectores.
@@ -587,3 +592,12 @@ corresponde, las tablas desplazables conservan foco visible y las cabeceras
 reducen información secundaria en pantallas estrechas sin eliminar nombres
 accesibles. Los modos `forced-colors` y `prefers-reduced-motion` forman parte
 del contrato mínimo para superficies actuales y futuras.
+
+<!-- NOR3-R6-TEST-TAXONOMY -->
+
+## NOR.3 R6 — Fronteras de validación
+
+La arquitectura de pruebas refleja las fronteras de ownership del
+runtime: dominio, Portal Asegurado, Portal Developer y contratos
+compartidos. `repository`, `governance`, `security` y `regression`
+separan controles transversales sin mezclarlos con los portales.

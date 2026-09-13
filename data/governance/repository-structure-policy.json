@@ -1,0 +1,223 @@
+{
+  "schema_version": 1,
+  "phase": "NOR.3 R2",
+  "status": "active_physical_ownership",
+  "source_issue": 128,
+  "description": "Contrato estructural machine-readable derivado del inventario NOR.3 R1.",
+  "allowed_root_directories": [
+    ".githooks",
+    ".github",
+    ".vscode",
+    "app",
+    "assets",
+    "data",
+    "docs",
+    "regulations",
+    "scripts",
+    "tests"
+  ],
+  "required_paths": [
+    ".githooks",
+    ".github",
+    ".vscode",
+    "app",
+    "assets",
+    "data",
+    "docs",
+    "regulations",
+    "scripts",
+    "tests",
+    "app/main.py",
+    "app/cli/admin.py",
+    "scripts/quality_gate.py",
+    "scripts/audit_repository_integrity.py",
+    "requirements.txt",
+    "requirements-dev.txt",
+    "VERSION",
+    "app/portals/asegurado",
+    "app/portals/developer",
+    "app/templates/asegurado",
+    "app/templates/developer",
+    "app/templates/shared",
+    "app/static/shared",
+    "app/static/asegurado",
+    "app/static/developer",
+    "data/audits",
+    "data/governance",
+    "tests/repository/test_nor3_r7_data_and_scripts.py",
+    "tests/repository/test_nor3_r8_closure.py",
+    "docs/audits/repository/nor3-r8-closure-audit.md"
+  ],
+  "forbidden_versioned_prefixes": [
+    "data/developer/"
+  ],
+  "forbidden_versioned_suffixes": [
+    ".log",
+    ".tmp",
+    ".bak",
+    ".patch",
+    ".diff",
+    ".zip",
+    ".tar",
+    ".gz",
+    ".sqlite",
+    ".sqlite3",
+    ".db"
+  ],
+  "depth_policy": {
+    "default_max_depth": 5,
+    "depth_definition": "number_of_posix_path_separators",
+    "exceptions": [
+      {
+        "prefix": "docs/regulatory/sources/official/pensions/normative/",
+        "max_depth": 6,
+        "reason": "Fuente normativa oficial preservada por procedencia y dominio."
+      },
+      {
+        "prefix": "docs/regulatory/sources/official/pensions/reference/",
+        "max_depth": 6,
+        "reason": "Referencia oficial de pensiones separada de normativa."
+      },
+      {
+        "prefix": "docs/regulatory/sources/official/privacy/normative/",
+        "max_depth": 6,
+        "reason": "Fuente normativa oficial de privacidad preservada por procedencia."
+      }
+    ]
+  },
+  "semantic_single_child_exceptions": [
+    {
+      "path": "app/static/shared/img/brand",
+      "reason": "Namespace runtime de marca compartida."
+    },
+    {
+      "path": "assets/social",
+      "reason": "Categoría de publicación social."
+    },
+    {
+      "path": "docs/regulatory/sources/official",
+      "reason": "Frontera de procedencia oficial."
+    },
+    {
+      "path": "docs/regulatory/sources/official/pensions/reference",
+      "reason": "Referencia previsional separada de normativa."
+    },
+    {
+      "path": "docs/regulatory/sources/official/privacy/normative",
+      "reason": "Taxonomía normativa de privacidad."
+    },
+    {
+      "path": "tests/validation_cases",
+      "reason": "Namespace reservado para casos de validación."
+    }
+  ],
+  "future_ownership_contract": {
+    "enforced": true,
+    "activation": "NOR.3 R3-R5",
+    "portal_namespaces": {
+      "asegurado": "app/portals/asegurado",
+      "developer": "app/portals/developer"
+    },
+    "shared_rule": "Shared solo admite contratos realmente multiportal; dominio compartido no implica namespace shared.",
+    "composition_root": "app/main.py",
+    "activated_in": "NOR.3 R5",
+    "static_namespaces": {
+      "shared": "app/static/shared",
+      "asegurado": "app/static/asegurado",
+      "developer": "app/static/developer"
+    },
+    "static_shared_contract": {
+      "css": [
+        "accessibility.css",
+        "brand.css",
+        "design-system.css",
+        "motion.css"
+      ],
+      "js": [
+        "accessibility.js",
+        "datetime_ui.js",
+        "interaction_ui.js",
+        "shell_state_boot.js",
+        "shell_ui.js",
+        "theme.js"
+      ],
+      "brand": "app/static/shared/img/brand"
+    }
+  },
+  "test_taxonomy_contract": {
+    "enforced": true,
+    "activation": "NOR.3 R6",
+    "module_roots": [
+      "domain",
+      "portals/asegurado",
+      "portals/developer",
+      "shared",
+      "security",
+      "regression",
+      "repository",
+      "governance"
+    ],
+    "support_roots": [
+      "tests/validation_cases"
+    ],
+    "root_test_modules_allowed": false,
+    "shared_rule": "tests/shared solo admite contratos realmente multiportal; no es categoría de descarte."
+  },
+  "data_ownership_contract": {
+    "enforced": true,
+    "activation": "NOR.3 R7",
+    "versioned_roots": [
+      "data/audits",
+      "data/governance"
+    ],
+    "forbidden_versioned_roots": [
+      "data/developer"
+    ],
+    "local_ignored_roots": [
+      "data/developer"
+    ],
+    "root_files_allowed": false,
+    "gitkeep_allowed": false,
+    "ownership": {
+      "audits": "Evidencia machine-readable derivada de auditorías y atestaciones.",
+      "governance": "Estado, política, ledger, manifiestos y registros de gobierno versionados."
+    }
+  },
+  "scripts_ownership_contract": {
+    "enforced": true,
+    "activation": "NOR.3 R7",
+    "layout": "flat_entry_points",
+    "nested_directories_allowed": false,
+    "local_ignored_directories": [
+      "scripts/node_modules"
+    ],
+    "rationale": "Los scripts versionados ya son entry points/auditores canónicos independientes; no existe frontera semántica que justifique subdirectorios en R7."
+  },
+  "nor3_closure_contract": {
+    "enforced": true,
+    "revision_scope": "R1-R8",
+    "candidate_global": "G122/E01",
+    "candidate_version": "0.1.22.01-beta",
+    "candidate_state": "promotion_materialized_pending_merge",
+    "pull_request": 162,
+    "closure_audit": "docs/audits/repository/nor3-r8-closure-audit.md",
+    "completed_areas": [
+      "backend_portals",
+      "templates",
+      "static_assets",
+      "tests_taxonomy",
+      "data_ownership",
+      "scripts_flat_entry_points",
+      "repository_structure_policy",
+      "documentation_structural_reconciliation"
+    ],
+    "post_nor3_transversal_audit": {
+      "included_in_r8": false,
+      "reason": "La auditoría transversal completa de todo el corpus documental y código se ejecutará como fase post-NOR.3 después de reconciliar Issues y seguridad/Dependabot."
+    },
+    "promotion_version": "0.1.22.01-beta",
+    "promotion_global": "G122/E01",
+    "next_candidate_assigned": false,
+    "post_merge_acceptance_required": true
+  }
+}

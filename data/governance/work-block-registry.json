@@ -1,0 +1,735 @@
+{
+  "schema_version": 1,
+  "project": "Mi Retiro Proyectado",
+  "policy_revision": "NOR.1 R8",
+  "audited_source": {
+    "commit": "7e81034ae05f5e588d07a0caf97e6fc79877dfb1",
+    "version": "0.1.11.01-beta",
+    "accepted_count": 111,
+    "tracked_files": 459
+  },
+  "current_candidate": {
+    "global_revision": null,
+    "revision_aware": null,
+    "block": null,
+    "revision": null,
+    "revision_scope": null,
+    "state": "unassigned_pending_replanning",
+    "next_functional_block_if_accepted": null,
+    "next_functional_global_if_accepted": null,
+    "edition": null,
+    "planning_issue": 155,
+    "next_global_available": 123
+  },
+  "families": [
+    {
+      "prefix": "GOV",
+      "meaning": "Gobierno, políticas, versionado y controles."
+    },
+    {
+      "prefix": "UX",
+      "meaning": "Experiencia de usuario, flujos, interfaz y accesibilidad."
+    },
+    {
+      "prefix": "PLAN",
+      "meaning": "Planificación y alineación maestra."
+    },
+    {
+      "prefix": "DEV",
+      "meaning": "Herramientas internas de desarrollo y diagnóstico."
+    },
+    {
+      "prefix": "MANT",
+      "meaning": "Mantenimiento técnico e higiene estructural."
+    },
+    {
+      "prefix": "DOC",
+      "meaning": "Integridad, auditoría y reconstrucción documental."
+    },
+    {
+      "prefix": "VER",
+      "meaning": "Versionado, reconciliación y promoción."
+    },
+    {
+      "prefix": "NOR",
+      "meaning": "Estándares determinísticos y normalización del repositorio."
+    },
+    {
+      "prefix": "SEC",
+      "meaning": "Hardening y controles técnicos de seguridad."
+    },
+    {
+      "prefix": "AUD",
+      "meaning": "Auditoría/remediación compuesta sobre un objetivo registrado."
+    },
+    {
+      "prefix": "REL",
+      "meaning": "Publicación, Releases y preparación de versiones."
+    },
+    {
+      "prefix": "PERSIST",
+      "meaning": "Persistencia voluntaria y segura."
+    },
+    {
+      "prefix": "REP",
+      "meaning": "Informes y exportaciones finales."
+    },
+    {
+      "prefix": "A11Y",
+      "meaning": "Accesibilidad."
+    },
+    {
+      "prefix": "REV",
+      "meaning": "Revisión normativa, jurídica, privacidad y seguridad."
+    },
+    {
+      "prefix": "QA",
+      "meaning": "Calidad y cierre de la etapa beta."
+    }
+  ],
+  "identifiers": [
+    {
+      "identifier": "GOV.1",
+      "family": "GOV",
+      "kind": "program",
+      "status": "closed",
+      "meaning": "Programa histórico de gobierno pre-beta.",
+      "evidence": "Registro histórico.",
+      "global_refs": [],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "GOV.1.1",
+      "family": "GOV",
+      "kind": "block",
+      "status": "closed",
+      "meaning": "Reconstrucción histórica.",
+      "evidence": "docs/archive/governance/historical-change-registry.md",
+      "global_refs": [
+        "G001-G021"
+      ],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "GOV.1.2",
+      "family": "GOV",
+      "kind": "block",
+      "status": "closed",
+      "meaning": "Gobierno y versionado formal.",
+      "evidence": "docs/archive/governance/historical-change-registry.md",
+      "global_refs": [
+        "G022"
+      ],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "GOV.1.3",
+      "family": "GOV",
+      "kind": "block",
+      "status": "closed",
+      "meaning": "Reorganización y auditoría documental.",
+      "evidence": "docs/archive/governance/historical-change-registry.md",
+      "global_refs": [
+        "G023-G026"
+      ],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "GOV.1.4",
+      "family": "GOV",
+      "kind": "block",
+      "status": "closed",
+      "meaning": "Observabilidad y Developer Diagnostics.",
+      "evidence": "docs/archive/governance/historical-change-registry.md",
+      "global_refs": [
+        "G032"
+      ],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "GOV.1.5",
+      "family": "GOV",
+      "kind": "block",
+      "status": "closed",
+      "meaning": "Seguridad, privacidad y transparencia.",
+      "evidence": "docs/archive/governance/historical-change-registry.md",
+      "global_refs": [
+        "G033-G035"
+      ],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "GOV.1.6",
+      "family": "GOV",
+      "kind": "block",
+      "status": "closed",
+      "meaning": "Controles GitHub.",
+      "evidence": "docs/archive/governance/historical-change-registry.md",
+      "global_refs": [
+        "G036"
+      ],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "GOV.1.7",
+      "family": "GOV",
+      "kind": "block",
+      "status": "closed",
+      "meaning": "Licencia y distribución.",
+      "evidence": "docs/archive/governance/historical-change-registry.md",
+      "global_refs": [
+        "G037-G038"
+      ],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "GOV.1.8",
+      "family": "GOV",
+      "kind": "block",
+      "status": "closed",
+      "meaning": "Auditoría final y cierre GOV.1.",
+      "evidence": "docs/archive/governance/historical-change-registry.md",
+      "global_refs": [
+        "G039"
+      ],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "UX.2.1",
+      "family": "UX",
+      "kind": "block",
+      "status": "historical_absorbed",
+      "meaning": "Subfase real absorbida en G009; no consume Global independiente.",
+      "evidence": "Ledger G009 + evidencia histórica.",
+      "global_refs": [
+        "G009"
+      ],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "UX.3",
+      "family": "UX",
+      "kind": "block",
+      "status": "historical_closed",
+      "meaning": "Responsive y precisión del corte mensual.",
+      "evidence": "Ledger G008.",
+      "global_refs": [
+        "G008"
+      ],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "UX.4",
+      "family": "UX",
+      "kind": "namespace",
+      "status": "historical_parent",
+      "meaning": "Namespace histórico para UX.4.x.",
+      "evidence": "Inventario del árbol.",
+      "global_refs": [],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "UX.4.1",
+      "family": "UX",
+      "kind": "block",
+      "status": "historical_closed",
+      "meaning": "Accesibilidad y ayudas contextuales.",
+      "evidence": "Ledger.",
+      "global_refs": [
+        "G011"
+      ],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "UX.4.2",
+      "family": "UX",
+      "kind": "block",
+      "status": "historical_closed",
+      "meaning": "Estados activos y selección visual.",
+      "evidence": "Ledger.",
+      "global_refs": [
+        "G012"
+      ],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "UX.4.3",
+      "family": "UX",
+      "kind": "block",
+      "status": "historical_closed",
+      "meaning": "Validación, teclado, foco y estabilidad.",
+      "evidence": "Ledger.",
+      "global_refs": [
+        "G013"
+      ],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "UX.4.4",
+      "family": "UX",
+      "kind": "block",
+      "status": "historical_closed",
+      "meaning": "Edad, detalle salarial e importación documental.",
+      "evidence": "Ledger.",
+      "global_refs": [
+        "G014"
+      ],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "UX.4.5",
+      "family": "UX",
+      "kind": "block",
+      "status": "historical_closed",
+      "meaning": "Acreditado frente a proyectado.",
+      "evidence": "Ledger.",
+      "global_refs": [
+        "G015"
+      ],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "UX.4.6",
+      "family": "UX",
+      "kind": "namespace",
+      "status": "historical_parent",
+      "meaning": "Namespace histórico para UX.4.6a–UX.4.6i.",
+      "evidence": "Inventario del árbol.",
+      "global_refs": [],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "UX.4.6a",
+      "family": "UX",
+      "kind": "block",
+      "status": "closed",
+      "meaning": "Rediseño visual integral.",
+      "evidence": "Ledger + plan maestro.",
+      "global_refs": [
+        "G018"
+      ],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "UX.4.6b",
+      "family": "UX",
+      "kind": "block",
+      "status": "closed",
+      "meaning": "Paso 1 — datos personales, privacidad e importación.",
+      "evidence": "Ledger + plan maestro.",
+      "global_refs": [
+        "G019"
+      ],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "UX.4.6c",
+      "family": "UX",
+      "kind": "block",
+      "status": "closed",
+      "meaning": "Paso 2 — cuotas e importación contextual.",
+      "evidence": "Ledger + plan maestro.",
+      "global_refs": [
+        "G020"
+      ],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "UX.4.6d",
+      "family": "UX",
+      "kind": "block",
+      "status": "closed",
+      "meaning": "Paso 3 — historial, Ficha Digital e integración.",
+      "evidence": "Ledger + plan maestro.",
+      "global_refs": [
+        "G021"
+      ],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "UX.4.6e",
+      "family": "UX",
+      "kind": "block",
+      "status": "closed",
+      "meaning": "Cierre técnico/visual posterior al Paso 3.",
+      "evidence": "Ledger + plan maestro.",
+      "global_refs": [
+        "G041-G050"
+      ],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "UX.4.6f",
+      "family": "UX",
+      "kind": "block",
+      "status": "closed",
+      "meaning": "Paso 4 — proyección salarial/laboral.",
+      "evidence": "Ledger + plan maestro.",
+      "global_refs": [
+        "G061-G064"
+      ],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "UX.4.6g",
+      "family": "UX",
+      "kind": "block",
+      "status": "closed",
+      "meaning": "Paso 5 — escenarios de retiro.",
+      "evidence": "Ledger + plan maestro.",
+      "global_refs": [
+        "G065"
+      ],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "UX.4.6h",
+      "family": "UX",
+      "kind": "block",
+      "status": "closed",
+      "meaning": "Paso 6 — resultados y exportación imprimible.",
+      "evidence": "Ledger + plan maestro.",
+      "global_refs": [
+        "G066-G068"
+      ],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "UX.4.6i",
+      "family": "UX",
+      "kind": "block",
+      "status": "closed",
+      "meaning": "Guía pública Cómo se calcula.",
+      "evidence": "Ledger + plan maestro.",
+      "global_refs": [
+        "G069-G070"
+      ],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "PLAN.1",
+      "family": "PLAN",
+      "kind": "block",
+      "status": "closed",
+      "meaning": "Alineación maestra hacia 1.0.",
+      "evidence": "Ledger revision-aware.",
+      "global_refs": [
+        "G051-G060"
+      ],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "DEV.2",
+      "family": "DEV",
+      "kind": "block",
+      "status": "closed",
+      "meaning": "R1–R3 aceptados en G071–G073; R4 fue cierre documental no contabilizado por separado; R5 queda aceptado como G118/E04 y R6 queda aceptado como G119/E05 con el Portal Developer multipágina, identidad, observabilidad, mantenimiento, seguridad y privacidad.",
+      "evidence": "Ledger G071–G073, G118 y G119; PR #107 / merge bc97db0; PR #111 / merge bd2accbea421fc719d9330015533001039648d05.",
+      "global_refs": [
+        "G071-G073",
+        "G118",
+        "G119"
+      ],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "MANT.1",
+      "family": "MANT",
+      "kind": "block",
+      "status": "closed",
+      "meaning": "Mantenimiento e higiene técnica.",
+      "evidence": "Ledger revision-aware.",
+      "global_refs": [
+        "G074-G085"
+      ],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "DOC.1",
+      "family": "DOC",
+      "kind": "block",
+      "status": "reopened_planned_r6",
+      "meaning": "R1–R5 cerrados; R5 queda aceptado como G116/E05 después de PR #101; R6 permanece planificado para la congelación documental final.",
+      "evidence": "Ledger revision-aware; G113 / PR #92; G115 / PR #96; G116 / PR #101 / merge 6f4266d; matriz PLAN.2 R1.",
+      "global_refs": [
+        "G086",
+        "G102",
+        "G113",
+        "G115",
+        "G116"
+      ],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "DOC.2",
+      "family": "DOC",
+      "kind": "block",
+      "status": "closed",
+      "meaning": "Reconstrucción auditable del CHANGELOG histórico.",
+      "evidence": "Ledger revision-aware.",
+      "global_refs": [
+        "G111"
+      ],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "VER.2",
+      "family": "VER",
+      "kind": "block",
+      "status": "closed",
+      "meaning": "Reconciliación revision-aware y promoción.",
+      "evidence": "Ledger revision-aware.",
+      "global_refs": [
+        "G087"
+      ],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "NOR.1",
+      "family": "NOR",
+      "kind": "block",
+      "status": "closed",
+      "meaning": "Definición de estándares; R8 cerró el gobierno de identificadores.",
+      "evidence": "Ledger revision-aware; G112 / PR #89 + PR #90.",
+      "global_refs": [
+        "G088-G093",
+        "G112"
+      ],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "NOR.2",
+      "family": "NOR",
+      "kind": "block",
+      "status": "closed",
+      "meaning": "Normalización integral del repositorio contra NOR.1.",
+      "evidence": "Ledger revision-aware.",
+      "global_refs": [
+        "G094-G101"
+      ],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "NOR.3",
+      "family": "NOR",
+      "kind": "block",
+      "status": "closed",
+      "meaning": "Normalización estructural integral del repositorio cerrada en R8: ownership App Asegurado / Portal Developer / shared, templates/assets, taxonomía de pruebas, data/scripts y guardas estructurales.",
+      "evidence": "G122/E01; PR #162; auditorías NOR.3 R1–R8; Quality Gate R7/R8 FULL.",
+      "global_refs": [
+        "G122"
+      ],
+      "reusable_for_different_scope": false,
+      "active_scope": "R1-R8"
+    },
+    {
+      "identifier": "SEC.2",
+      "family": "SEC",
+      "kind": "block",
+      "status": "closed",
+      "meaning": "Hardening integral de seguridad.",
+      "evidence": "Ledger revision-aware.",
+      "global_refs": [
+        "G103-G108"
+      ],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "AUD.SEC2",
+      "family": "AUD",
+      "kind": "compound_block",
+      "status": "closed",
+      "meaning": "Auditoría y remediación integral post-SEC.2.",
+      "evidence": "G109 / PR #83.",
+      "global_refs": [
+        "G109"
+      ],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "REL.GOV.1",
+      "family": "REL",
+      "kind": "compound_block",
+      "status": "closed",
+      "meaning": "R1 cerrado/aceptado en G110/E01 y R2 cerrado/aceptado en G117/E02; gobierno de Releases y publicación automatizada con tag firmado como frontera de confianza.",
+      "evidence": "G110 / PR #85; G117 / PR #103 / merge 46c464e; docs/audits/governance/rel-gov1-r2-release-automation.md.",
+      "global_refs": [
+        "G110",
+        "G117"
+      ],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "PERSIST.1",
+      "family": "PERSIST",
+      "kind": "block",
+      "status": "planned_reserved",
+      "meaning": "Persistencia voluntaria y segura.",
+      "evidence": "Alcance preservado, sin Global preasignado. No inicia hasta el cierre de NOR.3 y la replanificación post-NOR.3 de #155.",
+      "global_refs": [],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "REP.1",
+      "family": "REP",
+      "kind": "block",
+      "status": "planned_reserved",
+      "meaning": "Informes PDF y exportaciones finales.",
+      "evidence": "docs/governance/master-plan-to-1-0.md",
+      "global_refs": [],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "A11Y.2",
+      "family": "A11Y",
+      "kind": "block",
+      "status": "planned_reserved",
+      "meaning": "Auditoría WCAG 2.2 ampliada.",
+      "evidence": "docs/governance/master-plan-to-1-0.md",
+      "global_refs": [],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "REV.1",
+      "family": "REV",
+      "kind": "block",
+      "status": "planned_reserved",
+      "meaning": "Revisión normativa, jurídica, privacidad y seguridad final.",
+      "evidence": "docs/governance/master-plan-to-1-0.md",
+      "global_refs": [],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "QA.1",
+      "family": "QA",
+      "kind": "block",
+      "status": "planned_reserved",
+      "meaning": "Auditoría integral de cierre beta.",
+      "evidence": "docs/governance/master-plan-to-1-0.md",
+      "global_refs": [],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "REL.1",
+      "family": "REL",
+      "kind": "block",
+      "status": "planned_reserved",
+      "meaning": "Preparación de la primera versión oficial.",
+      "evidence": "docs/governance/master-plan-to-1-0.md",
+      "global_refs": [],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "PLAN.2",
+      "family": "PLAN",
+      "kind": "block",
+      "status": "closed",
+      "meaning": "Replanificación maestra final hacia 1.0 y matriz viva de pendientes.",
+      "evidence": "G114 / PR #94.",
+      "global_refs": [
+        "G114"
+      ],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "UX.5",
+      "family": "UX",
+      "kind": "block",
+      "status": "closed",
+      "meaning": "Sistema visual integral y flujo Manual/Asistido; R1–R6 quedaron consolidados y aceptados como G120/E01 con revisión funcional R6.",
+      "evidence": "PR #122 / merge 4c43a816526201c5869d2df8e88af44419c4df11; G120/E01 aceptado para UX.5 R6.",
+      "global_refs": [
+        "G120"
+      ],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "UX.6",
+      "family": "UX",
+      "kind": "block",
+      "status": "closed",
+      "meaning": "Auditoría y cierre integral de experiencia de App y Portal Developer; R1–R8 quedan consolidados y aceptados como G121/E01 con revisión funcional R8.",
+      "evidence": "PR #124; G121/E01; checkpoints firmados R1–R8; Repository Quality Gate R8 10 PASS / 0 FAIL.",
+      "global_refs": [
+        "G121"
+      ],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "UX.7",
+      "family": "UX",
+      "kind": "block",
+      "status": "planned_reserved",
+      "meaning": "Revisión UX granular de las entradas principales: Inicio de App Asegurado (/) y Portal Developer (/dev) en estados login y dashboard autenticado; se ejecuta después de NOR.3.",
+      "evidence": "#133; #129; #126; replanificación post-NOR.3 #155.",
+      "global_refs": [],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "UX.8",
+      "family": "UX",
+      "kind": "block",
+      "status": "planned_reserved",
+      "meaning": "Revisión UX granular de la entrada /simulacion, explicación y selección Manual/Asistida y transición inicial; los flujos internos completos se definirán en revisiones UX posteriores mediante el inventario NOR.3 y la replanificación #155.",
+      "evidence": "#134; #129; #126; replanificación post-NOR.3 #155.",
+      "global_refs": [],
+      "reusable_for_different_scope": false
+    }
+  ],
+  "historical_ledger_labels": [
+    {
+      "label": "LEGACY",
+      "meaning": "Agrupador contable retrospectivo G001–G021.",
+      "reusable_as_family": false
+    },
+    {
+      "label": "INTEGRIDAD",
+      "meaning": "Etiqueta histórica G027–G031.",
+      "reusable_as_family": false
+    },
+    {
+      "label": "POST-GOV",
+      "meaning": "Etiqueta histórica G040.",
+      "reusable_as_family": false
+    }
+  ],
+  "non_block_tokens": [
+    "R1.1",
+    "R1.2",
+    "R1.3",
+    "R1.4",
+    "R1.4.2",
+    "R1.4.3",
+    "R4.1",
+    "R4.2",
+    "R8.1",
+    "R8.2",
+    "R9.1",
+    "R9.2",
+    "CACHEDIR.TAG",
+    "LICENSE.APACHE",
+    "LICENSE.BSD",
+    "M20.5",
+    "MAYOR.MENOR.PARCHE.REVISIÓN"
+  ],
+  "rules": {
+    "revision_tokens_are_not_block_identifiers": true,
+    "global_revision_is_not_block_identifier": true,
+    "edition_is_not_block_identifier": true,
+    "planned_identifiers_are_reserved": true,
+    "historical_identifiers_are_never_reassigned": true,
+    "reuse_closed_identifier_for_different_scope": false,
+    "reopen_existing_identifier_requires_same_scope_and_unused_revision": true,
+    "new_identifier_requires_history_and_registry_audit": true,
+    "compound_identifiers_require_explicit_registration": true,
+    "segment_meaning_is_family_specific": true
+  },
+  "post_nor3_state": {
+    "nor3_global": "G122/E01",
+    "nor3_version": "0.1.22.01-beta",
+    "issues_reconciliation_required": true,
+    "documentation_audit_issue": 154,
+    "master_replanning_issue": 155,
+    "next_candidate_assigned": false
+  }
+}

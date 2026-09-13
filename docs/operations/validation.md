@@ -1,7 +1,7 @@
 # Validación
 
 **Estado:** Vigente
-**Versión revisada:** `0.1.21.01-beta` — G121/E01 materializado para UX.6 R8 en PR #124.
+**Versión revisada:** `0.1.22.01-beta` — G121/E01 materializado para UX.6 R8 en PR #124.
 **Versión base histórica:** `0.0.25-beta`
 **Base documental histórica:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal histórica preservada:** UX.4.6e R8 — validación funcional y procedencia editable — 2026-08-19
@@ -10,6 +10,20 @@
 **Última revisión operativa:** UX.6 R8 — promoción G121/E01 — 2026-09-07
 **Clasificación:** Técnica / Calidad
 **Naturaleza documental:** Registro vivo acumulativo — mantiene la estrategia vigente y evidencia histórica de gates protegida por regresiones; los resultados históricos no se reescriben como si pertenecieran al estado actual.
+
+
+<!-- NOR3-G122-PROMOTION:START -->
+## Estado post-NOR.3 / promoción G122-E01
+
+- `VERSION` materializa `0.1.22.01-beta` para NOR.3 R8 / G122-E01.
+- NOR.3 R1–R8 queda cerrado estructuralmente en PR #162.
+- G123 es el siguiente Global disponible, pero **no tiene candidato ni bloque
+  preasignado**.
+- PERSIST.1 permanece planificado y no iniciado, sin Global preasignado.
+- La reconciliación integral de Issues, #154 y la replanificación #155
+  determinan el próximo candidato real.
+- El tag/release de G122 solo procede después de merge y revalidación de `main`.
+<!-- NOR3-G122-PROMOTION:END -->
 
 <!-- NOR1-R7-VALIDATION:START -->
 ## Promoción DEV.2 R6 — G119/E05
@@ -207,8 +221,8 @@ PR #118 completó el mantenimiento coordinado de dependencias:
 - `git diff --check`: limpio.
 
 Ambos cierres conservaron sin cambios `VERSION`,
-`data/pre-1-0-revision-ledger.json` y
-`data/release-publication-manifest.json`. Son mantenimiento posterior a
+`data/governance/pre-1-0-revision-ledger.json` y
+`data/governance/release-publication-manifest.json`. Son mantenimiento posterior a
 G119/E05 y no consumen G120/E01.
 
 Esta infraestructura no cambia `VERSION`, no acepta G120 y no crea commits,
@@ -284,7 +298,7 @@ Resultados estructurales:
   2 casos mixtos y 6 mensajes materialmente en inglés.
 
 La política adoptada preserva los asuntos y SHA originales. Las representaciones
-españolas viven en `data/git-history-attestation.json`; no se firman ni
+españolas viven en `data/audits/git-history-attestation.json`; no se firman ni
 renombran retroactivamente commits históricos porque hacerlo recrearía sus
 objetos Git y rompería referencias posteriores.
 
@@ -292,7 +306,7 @@ Validación permanente:
 
 ```powershell
 python scripts/audit_git_history_attestation.py
-python -m pytest tests/test_git_history_attestation.py -q
+python -m pytest tests/governance/test_git_history_attestation.py -q
 ```
 
 La atestación no cambia `VERSION`, no consume G120/E01 y no inicia UX.5.
@@ -333,8 +347,8 @@ inglés y que las referencias internas queden sincronizadas.
 Comandos mínimos para el cierre local:
 
 ```powershell
-python -m pytest tests\test_mant1_r5e_nombres_carpetas.py -q
-python -m pytest tests\test_mant1_r5d_politica_extensiones.py tests\test_mant1_r5e_nombres_carpetas.py -q
+python -m pytest tests\repository\test_mant1_r5e_nombres_carpetas.py -q
+python -m pytest tests\repository\test_mant1_r5d_politica_extensiones.py tests\repository\test_mant1_r5e_nombres_carpetas.py -q
 git diff --check
 python -m pytest -q
 python -m unittest discover -s tests -q
@@ -353,8 +367,8 @@ alcance permanente.
 Comandos previstos:
 
 ```powershell
-python -m pytest tests\test_mant1_r5d_politica_extensiones.py -q
-python -m pytest tests\test_mant1_r5c_comentarios_js_app.py tests\test_mant1_r5d_politica_extensiones.py -q
+python -m pytest tests\repository\test_mant1_r5d_politica_extensiones.py -q
+python -m pytest tests\repository\test_mant1_r5c_comentarios_js_app.py tests\repository\test_mant1_r5d_politica_extensiones.py -q
 git diff --check
 python -m pytest -q
 ```
@@ -373,9 +387,9 @@ ids, clases, textos visibles ni lógica funcional.
 Comandos usados:
 
 ```powershell
-python -m pytest tests\test_mant1_r5c_comentarios_js_app.py -q
-python -m pytest tests\test_mant1_r5a_comentarios_servicios_app.py tests\test_mant1_r5b_comentarios_presentacion_app.py tests\test_mant1_r5c_comentarios_js_app.py -q
-python -m pytest tests\test_ux46e_almacenamiento_comentarios_js.py tests\test_ux46e_auditoria_coherencia.py -q
+python -m pytest tests\repository\test_mant1_r5c_comentarios_js_app.py -q
+python -m pytest tests\repository\test_mant1_r5a_comentarios_servicios_app.py tests\repository\test_mant1_r5b_comentarios_presentacion_app.py tests\repository\test_mant1_r5c_comentarios_js_app.py -q
+python -m pytest tests\portals\asegurado\test_ux46e_almacenamiento_comentarios_js.py tests\governance\test_ux46e_auditoria_coherencia.py -q
 git diff --check
 python -m pytest -q
 ```
@@ -392,9 +406,9 @@ visibles, rutas ni lógica Jinja.
 Comandos usados:
 
 ```powershell
-python -m pytest tests\test_mant1_r5b_comentarios_presentacion_app.py -q
-python -m pytest tests\test_mant1_r5a_comentarios_servicios_app.py tests\test_mant1_r5b_comentarios_presentacion_app.py -q
-python -m pytest tests\test_ux46e_almacenamiento_comentarios_js.py tests\test_ux46e_auditoria_coherencia.py -q
+python -m pytest tests\repository\test_mant1_r5b_comentarios_presentacion_app.py -q
+python -m pytest tests\repository\test_mant1_r5a_comentarios_servicios_app.py tests\repository\test_mant1_r5b_comentarios_presentacion_app.py -q
+python -m pytest tests\portals\asegurado\test_ux46e_almacenamiento_comentarios_js.py tests\governance\test_ux46e_auditoria_coherencia.py -q
 git diff --check
 python -m pytest -q
 ```
@@ -411,9 +425,9 @@ identificadores de revisión dentro del código operativo.
 Comandos mínimos para el cierre local:
 
 ```text
-python -m pytest tests\test_mant1_r5a_comentarios_servicios_app.py -q
-python -m pytest tests\test_mant1_r4_encabezados_operativos_limpios.py tests\test_mant1_r5a_comentarios_servicios_app.py -q
-python -m pytest tests\test_ux46e_almacenamiento_comentarios_js.py tests\test_ux46e_auditoria_coherencia.py -q
+python -m pytest tests\repository\test_mant1_r5a_comentarios_servicios_app.py -q
+python -m pytest tests\repository\test_mant1_r4_encabezados_operativos_limpios.py tests\repository\test_mant1_r5a_comentarios_servicios_app.py -q
+python -m pytest tests\portals\asegurado\test_ux46e_almacenamiento_comentarios_js.py tests\governance\test_ux46e_auditoria_coherencia.py -q
 git diff --check
 python -m pytest -q
 ```
@@ -430,9 +444,9 @@ encabezados funcionales, sin declarar MANT.1 en sus primeras líneas.
 Comandos mínimos para el cierre local:
 
 ```text
-python -m pytest tests\test_mant1_r4_encabezados_operativos_limpios.py -q
-python -m pytest tests\test_mant1_r3_yaml_github_documentados.py tests\test_mant1_r4_encabezados_operativos_limpios.py -q
-python -m pytest tests\test_mant1_scripts_hooks_documentados.py tests\test_mant1_r3_yaml_github_documentados.py tests\test_mant1_r4_encabezados_operativos_limpios.py -q
+python -m pytest tests\repository\test_mant1_r4_encabezados_operativos_limpios.py -q
+python -m pytest tests\repository\test_mant1_r3_yaml_github_documentados.py tests\repository\test_mant1_r4_encabezados_operativos_limpios.py -q
+python -m pytest tests\repository\test_mant1_scripts_hooks_documentados.py tests\repository\test_mant1_r3_yaml_github_documentados.py tests\repository\test_mant1_r4_encabezados_operativos_limpios.py -q
 git diff --check
 python -m pytest -q
 ```
@@ -618,7 +632,7 @@ Partiendo de la línea base de **720 pruebas**, R1 eleva el inventario esperado 
 En ese mismo entorno quedaron correctos:
 
 - `python -m compileall -q app`;
-- validación `node --check` de todos los archivos `app/static/js/*.js`;
+- validación `node --check` de todos los archivos `app/static/**/*.js`;
 - `git diff --check`;
 - las **14/14 regresiones específicas de R1**;
 - las regresiones históricas reconciliadas que protegen procedencia, historial y continuidad documental.
@@ -669,7 +683,7 @@ comportamiento funcional. La revisión cubre:
 - `scripts/validate_precommit.py`;
 - `scripts/README.md`;
 - `.githooks/README.md`;
-- regresión `tests/test_mant1_scripts_hooks_documentados.py`.
+- regresión `tests/repository/test_mant1_scripts_hooks_documentados.py`.
 
 El alcance de validación de MANT.1 R2 exige que los scripts y hooks expliquen su
 propósito, límites, dependencias y relación con la CI. El gate local sigue
@@ -683,7 +697,7 @@ inicial de MANT.1 R1. La revisión agrega comentarios superiores a Dependabot,
 Issue Forms y workflows sin cambiar triggers, jobs, permisos, labels, campos,
 cadencias ni comandos operativos.
 
-La regresión `tests/test_mant1_r3_yaml_github_documentados.py` protege que:
+La regresión `tests/repository/test_mant1_r3_yaml_github_documentados.py` protege que:
 
 - los ocho YAML de GitHub conserven encabezados funcionales permanentes;
 - los encabezados declaren propósito y límites;
@@ -715,216 +729,227 @@ python -m pip check
 
 ## 3. Inventario actual de pruebas
 
-Inventario vigente: **207 módulos**.
+Inventario vigente: **217 módulos**.
 
-- `tests/test_accessibility_themes.py`
-- `tests/test_accessibility_ux4.py`
-- `tests/test_automation_core_quality_gate.py`
-- `tests/test_comparator.py`
-- `tests/test_dev2_development_center.py`
-- `tests/test_dev2_r1_cierre_documental.py`
-- `tests/test_dev2_r2_visor_diagnostico.py`
-- `tests/test_dev2_r3_autodiagnostico.py`
-- `tests/test_dev2_r4_cierre_final.py`
-- `tests/test_dev2_r5_portal_access.py`
-- `tests/test_dev2_r6_cli.py`
-- `tests/test_dev2_r6_header_identity.py`
-- `tests/test_dev2_r6_identity.py`
-- `tests/test_dev2_r6_multipage_shell.py`
-- `tests/test_dev2_r6_observability_portal.py`
-- `tests/test_dev2_r6_provisioning.py`
-- `tests/test_dev2_r6_security_maintenance_privacy.py`
-- `tests/test_dev2_r6_sidebar_theme_sync.py`
-- `tests/test_dev2_r6_store.py`
-- `tests/test_dev2_r6_web_access.py`
-- `tests/test_dev2_r6_web_session.py`
-- `tests/test_doc1_r1_auditoria_markdown_post_mant1.py`
-- `tests/test_doc1_r3_markdown_links.py`
-- `tests/test_doc1_r4_live_state_sanitization.py`
-- `tests/test_doc1_r5_markdown_auditor.py`
-- `tests/test_doc1_r5_markdown_standards.py`
-- `tests/test_doc2_r1_changelog_reconstruction.py`
-- `tests/test_g109_promotion_post_merge.py`
-- `tests/test_g110_promotion_post_merge.py`
-- `tests/test_g111_promotion_post_merge.py`
-- `tests/test_g112_promotion_post_merge.py`
-- `tests/test_g113_promotion_post_merge.py`
-- `tests/test_g114_promotion_post_merge.py`
-- `tests/test_g115_promotion_post_merge.py`
-- `tests/test_g116_promotion_post_merge.py`
-- `tests/test_g117_promotion_post_merge.py`
-- `tests/test_g118_promotion_post_merge.py`
-- `tests/test_g119_promotion_post_merge.py`
-- `tests/test_g120_promotion_post_merge.py`
-- `tests/test_g121_promotion_post_merge.py`
-- `tests/test_git_history_attestation.py`
-- `tests/test_gov12_versionado.py`
-- `tests/test_gov13_documentacion.py`
-- `tests/test_gov13_documentacion_r2.py`
-- `tests/test_gov13_documentacion_r3.py`
-- `tests/test_gov13_documentacion_r4.py`
-- `tests/test_gov14_observabilidad.py`
-- `tests/test_gov14_observabilidad_integracion.py`
-- `tests/test_gov15_cierre_seguridad_privacidad.py`
-- `tests/test_gov15_modelo_amenazas.py`
-- `tests/test_gov15_procedimientos_privacidad.py`
-- `tests/test_gov16_controles_github.py`
-- `tests/test_gov17_licencia.py`
-- `tests/test_gov18_cierre_gobierno.py`
-- `tests/test_gov_firma_git.py`
-- `tests/test_identidad_interfaz.py`
-- `tests/test_identidad_publica_github_pre_r8.py`
-- `tests/test_indemnizacion_vejez.py`
-- `tests/test_mant1_r3_yaml_github_documentados.py`
-- `tests/test_mant1_r4_encabezados_operativos_limpios.py`
-- `tests/test_mant1_r5a_comentarios_servicios_app.py`
-- `tests/test_mant1_r5b_comentarios_presentacion_app.py`
-- `tests/test_mant1_r5c_comentarios_js_app.py`
-- `tests/test_mant1_r5d_politica_extensiones.py`
-- `tests/test_mant1_r5e_nombres_carpetas.py`
-- `tests/test_mant1_r5f_nombres_archivos.py`
-- `tests/test_mant1_r5g_documentacion.py`
-- `tests/test_mant1_r5h_auditoria_nombres_restantes.py`
-- `tests/test_mant1_r6_auditoria_funcional_post_renombres.py`
-- `tests/test_mant1_r7_cierre_operativo_post_auditoria.py`
-- `tests/test_mant1_scripts_hooks_documentados.py`
-- `tests/test_mantenimiento_tecnico.py`
-- `tests/test_markdown_audit.py`
-- `tests/test_markdown_versionable_inventory.py`
-- `tests/test_mixto.py`
-- `tests/test_mixto_prestaciones_cap.py`
-- `tests/test_mixto_results.py`
-- `tests/test_modality_results.py`
-- `tests/test_money.py`
-- `tests/test_nor1_r8_work_block_identifiers.py`
-- `tests/test_nor1_repository_standards.py`
-- `tests/test_nor2_r2_migration_matrix.py`
-- `tests/test_nor2_r3_runtime_migration.py`
-- `tests/test_nor2_r4_live_documentation.py`
-- `tests/test_nor2_r5_historical_documentation.py`
-- `tests/test_nor2_r6_ledger_data.py`
-- `tests/test_nor2_r7_local_artifacts.py`
-- `tests/test_nor2_r8_final_audit.py`
-- `tests/test_nor2_repository_normalization.py`
-- `tests/test_plan1_documentacion_primaria.py`
-- `tests/test_plan1_documentacion_transversal.py`
-- `tests/test_plan1_gobierno_versionado_oficial.py`
-- `tests/test_plan1_guard_referencias_historicas.py`
-- `tests/test_plan1_licencia_privacidad_viva.py`
-- `tests/test_plan1_r4_candidato_cierre.py`
-- `tests/test_plan1_saneamiento_metadata.py`
-- `tests/test_plan1_terminologia_seguridad.py`
-- `tests/test_plan1_versionado_oficial.py`
-- `tests/test_plan2_r1_master_pending_matrix.py`
-- `tests/test_post_sec2_integral_audit.py`
-- `tests/test_prebeta_e2e_hardening.py`
-- `tests/test_precommit_guard.py`
-- `tests/test_pypdf_compatibilidad.py`
-- `tests/test_regulatory_sources.py`
-- `tests/test_rel_gov1_r2_live_publication_state.py`
-- `tests/test_release_governance_contract.py`
-- `tests/test_release_publication.py`
-- `tests/test_release_workflow_automation.py`
-- `tests/test_responsive_ux3.py`
-- `tests/test_results.py`
-- `tests/test_retirement.py`
-- `tests/test_salary_projection.py`
-- `tests/test_sebd.py`
-- `tests/test_sebd_modalidades.py`
-- `tests/test_sec2_postclosure_hardening.py`
-- `tests/test_sec2_r1_codeql_workflow_hardening.py`
-- `tests/test_sec2_r2_admin_endpoint_protection.py`
-- `tests/test_sec2_r2_admin_security.py`
-- `tests/test_sec2_r2_secret_filtering.py`
-- `tests/test_sec2_r3_admin_protection.py`
-- `tests/test_sec2_r4_admin_audit.py`
-- `tests/test_sec2_r5_admin_web_session.py`
-- `tests/test_sec2_r6_admin_session_security.py`
-- `tests/test_sucgs.py`
-- `tests/test_sucgs_capa_solidaria.py`
-- `tests/test_sucgs_reemplazo.py`
-- `tests/test_sucgs_results.py`
-- `tests/test_timeline.py`
-- `tests/test_traceability.py`
-- `tests/test_unified_result.py`
-- `tests/test_ux42_estados_visuales.py`
-- `tests/test_ux43_formularios_teclado.py`
-- `tests/test_ux44_current_year_detail.py`
-- `tests/test_ux44_edad_linea_tiempo.py`
-- `tests/test_ux44_importacion_oficial.py`
-- `tests/test_ux44_pdf_reference.py`
-- `tests/test_ux45_cierre_resultados_accesibilidad.py`
-- `tests/test_ux46a_redisenio_integral.py`
-- `tests/test_ux46b_paso1_datos_personales.py`
-- `tests/test_ux46b_revision2_privacidad.py`
-- `tests/test_ux46b_revision3_terminos_navegacion.py`
-- `tests/test_ux46c_cuotas.py`
-- `tests/test_ux46d_gestion_datos.py`
-- `tests/test_ux46d_historial.py`
-- `tests/test_ux46d_revision10_tablas_transversales.py`
-- `tests/test_ux46d_revision11_scrollbars_y_carga.py`
-- `tests/test_ux46d_revision12_scroll_global_y_vacio.py`
-- `tests/test_ux46d_revision13_selector_archivo.py`
-- `tests/test_ux46d_revision14_paso1_informacion_personal.py`
-- `tests/test_ux46d_revision15_campos_importacion_y_limpieza.py`
-- `tests/test_ux46d_revision16_flujo_paso3.py`
-- `tests/test_ux46d_revision17_auditoria_datos.py`
-- `tests/test_ux46d_revision18_provenance_persistence.py`
-- `tests/test_ux46d_revision19_current_sync.py`
-- `tests/test_ux46d_revision20_vigencia_resumen.py`
-- `tests/test_ux46d_revision21_fecha_confiable.py`
-- `tests/test_ux46d_revision22_cierre_paso3.py`
-- `tests/test_ux46d_revision23_ficha_updates_contributions.py`
-- `tests/test_ux46d_revision7_privacidad_consulta.py`
-- `tests/test_ux46d_revision8_tablas.py`
-- `tests/test_ux46d_revision9_reactividad_privacidad.py`
-- `tests/test_ux46e_almacenamiento_comentarios_js.py`
-- `tests/test_ux46e_auditoria_coherencia.py`
-- `tests/test_ux46e_estandar_runtime.py`
-- `tests/test_ux46e_preparacion_publica.py`
-- `tests/test_ux46e_proyeccion_salarial.py`
-- `tests/test_ux46e_r81_editable_provenance.py`
-- `tests/test_ux46e_r8_cierre_funcional.py`
-- `tests/test_ux46e_r8_reconsentimiento_borrado.py`
-- `tests/test_ux46e_r91_candidato_cierre.py`
-- `tests/test_ux46e_renumeracion_documental.py`
-- `tests/test_ux46f_r11_bloqueo_documental_vista_principal.py`
-- `tests/test_ux46f_r1_attachment_provenance_consistency.py`
-- `tests/test_ux46f_r2_auditoria_paso4.py`
-- `tests/test_ux46g_r1_retirement_scenarios.py`
-- `tests/test_ux46h_r1_resultados_exportacion.py`
-- `tests/test_ux46i_r1_calculation_guide.py`
-- `tests/test_ux4_remate_visual.py`
-- `tests/test_ux5_r1_design_system.py`
-- `tests/test_ux5_r2_shell_navigation.py`
-- `tests/test_ux5_r3_r4_simulation_flows.py`
-- `tests/test_ux5_r5_assisted_upload_layout.py`
-- `tests/test_ux5_r5_r6_assisted_integration.py`
-- `tests/test_ux5_r7_documentation_closure.py`
-- `tests/test_ux6_r2_form_resilience.py`
-- `tests/test_ux6_r2_unified_user_edit.py`
-- `tests/test_ux6_r2_user_admin.py`
-- `tests/test_ux6_r2_user_audit.py`
-- `tests/test_ux6_r2_users_web.py`
-- `tests/test_ux6_r2_validation_feedback.py`
-- `tests/test_ux6_r3_r4_interface_polish.py`
-- `tests/test_ux6_r3_r4_motion_accessibility.py`
-- `tests/test_ux6_r5_r6_manual_privacy_scope.py`
-- `tests/test_ux6_r5_r6_public_terms_final.py`
-- `tests/test_ux6_r5_r6_seguro_cleanup.py`
-- `tests/test_ux6_r7_documentation_closure.py`
-- `tests/test_ux6_r8_integral_hardening.py`
-- `tests/test_ver2_documentacion_vigente.py`
-- `tests/test_ver2_ledger_estructurado.py`
-- `tests/test_ver2_r1_reconciliacion_post_doc1.py`
-- `tests/test_ver2_r2_documentacion_viva_post_r1.py`
-- `tests/test_ver2_r3_decision_version_candidata_post_r2.py`
-- `tests/test_ver2_r4_promocion_g071_e01.py`
-- `tests/test_ver2_r5_estabilizacion_post_release.py`
-- `tests/test_ver2_version_revision_aware.py`
-- `tests/test_visual_identity_pre_r8.py`
-- `tests/test_visual_stabilization.py`
+La taxonomía NOR.3 conserva ownership semántico, discovery recursivo y contratos permanentes R1–R8 + G122.
 
+- `tests/domain/test_comparator.py`
+- `tests/domain/test_indemnizacion_vejez.py`
+- `tests/domain/test_mixto.py`
+- `tests/domain/test_mixto_prestaciones_cap.py`
+- `tests/domain/test_mixto_results.py`
+- `tests/domain/test_modality_results.py`
+- `tests/domain/test_money.py`
+- `tests/domain/test_regulatory_sources.py`
+- `tests/domain/test_results.py`
+- `tests/domain/test_retirement.py`
+- `tests/domain/test_salary_projection.py`
+- `tests/domain/test_sebd.py`
+- `tests/domain/test_sebd_modalidades.py`
+- `tests/domain/test_sucgs.py`
+- `tests/domain/test_sucgs_capa_solidaria.py`
+- `tests/domain/test_sucgs_reemplazo.py`
+- `tests/domain/test_sucgs_results.py`
+- `tests/domain/test_timeline.py`
+- `tests/domain/test_traceability.py`
+- `tests/domain/test_unified_result.py`
+- `tests/governance/test_doc1_r1_auditoria_markdown_post_mant1.py`
+- `tests/governance/test_doc1_r3_markdown_links.py`
+- `tests/governance/test_doc1_r4_live_state_sanitization.py`
+- `tests/governance/test_doc1_r5_markdown_auditor.py`
+- `tests/governance/test_doc1_r5_markdown_standards.py`
+- `tests/governance/test_doc2_r1_changelog_reconstruction.py`
+- `tests/governance/test_g109_promotion_post_merge.py`
+- `tests/governance/test_g110_promotion_post_merge.py`
+- `tests/governance/test_g111_promotion_post_merge.py`
+- `tests/governance/test_g112_promotion_post_merge.py`
+- `tests/governance/test_g113_promotion_post_merge.py`
+- `tests/governance/test_g114_promotion_post_merge.py`
+- `tests/governance/test_g115_promotion_post_merge.py`
+- `tests/governance/test_g116_promotion_post_merge.py`
+- `tests/governance/test_g117_promotion_post_merge.py`
+- `tests/governance/test_g118_promotion_post_merge.py`
+- `tests/governance/test_g119_promotion_post_merge.py`
+- `tests/governance/test_g120_promotion_post_merge.py`
+- `tests/governance/test_g121_promotion_post_merge.py`
+- `tests/governance/test_g122_nor3_promotion.py`
+- `tests/governance/test_git_history_attestation.py`
+- `tests/governance/test_gov12_versionado.py`
+- `tests/governance/test_gov13_documentacion.py`
+- `tests/governance/test_gov13_documentacion_r2.py`
+- `tests/governance/test_gov13_documentacion_r3.py`
+- `tests/governance/test_gov13_documentacion_r4.py`
+- `tests/governance/test_gov14_observabilidad.py`
+- `tests/governance/test_gov14_observabilidad_integracion.py`
+- `tests/governance/test_gov15_cierre_seguridad_privacidad.py`
+- `tests/governance/test_gov15_modelo_amenazas.py`
+- `tests/governance/test_gov15_procedimientos_privacidad.py`
+- `tests/governance/test_gov16_controles_github.py`
+- `tests/governance/test_gov17_licencia.py`
+- `tests/governance/test_gov18_cierre_gobierno.py`
+- `tests/governance/test_gov_firma_git.py`
+- `tests/governance/test_identidad_publica_github_pre_r8.py`
+- `tests/governance/test_markdown_audit.py`
+- `tests/governance/test_markdown_versionable_inventory.py`
+- `tests/governance/test_plan1_documentacion_primaria.py`
+- `tests/governance/test_plan1_documentacion_transversal.py`
+- `tests/governance/test_plan1_gobierno_versionado_oficial.py`
+- `tests/governance/test_plan1_guard_referencias_historicas.py`
+- `tests/governance/test_plan1_licencia_privacidad_viva.py`
+- `tests/governance/test_plan1_r4_candidato_cierre.py`
+- `tests/governance/test_plan1_saneamiento_metadata.py`
+- `tests/governance/test_plan1_terminologia_seguridad.py`
+- `tests/governance/test_plan1_versionado_oficial.py`
+- `tests/governance/test_plan2_r1_master_pending_matrix.py`
+- `tests/governance/test_rel_gov1_r2_live_publication_state.py`
+- `tests/governance/test_release_governance_contract.py`
+- `tests/governance/test_release_publication.py`
+- `tests/governance/test_release_workflow_automation.py`
+- `tests/governance/test_ux46e_auditoria_coherencia.py`
+- `tests/governance/test_ux46e_preparacion_publica.py`
+- `tests/governance/test_ux46e_r91_candidato_cierre.py`
+- `tests/governance/test_ux46e_renumeracion_documental.py`
+- `tests/governance/test_ux5_r7_documentation_closure.py`
+- `tests/governance/test_ux6_r7_documentation_closure.py`
+- `tests/governance/test_ver2_documentacion_vigente.py`
+- `tests/governance/test_ver2_ledger_estructurado.py`
+- `tests/governance/test_ver2_r1_reconciliacion_post_doc1.py`
+- `tests/governance/test_ver2_r2_documentacion_viva_post_r1.py`
+- `tests/governance/test_ver2_r3_decision_version_candidata_post_r2.py`
+- `tests/governance/test_ver2_r4_promocion_g071_e01.py`
+- `tests/governance/test_ver2_r5_estabilizacion_post_release.py`
+- `tests/governance/test_ver2_version_revision_aware.py`
+- `tests/portals/asegurado/test_identidad_interfaz.py`
+- `tests/portals/asegurado/test_pypdf_compatibilidad.py`
+- `tests/portals/asegurado/test_ux42_estados_visuales.py`
+- `tests/portals/asegurado/test_ux43_formularios_teclado.py`
+- `tests/portals/asegurado/test_ux44_current_year_detail.py`
+- `tests/portals/asegurado/test_ux44_edad_linea_tiempo.py`
+- `tests/portals/asegurado/test_ux44_importacion_oficial.py`
+- `tests/portals/asegurado/test_ux44_pdf_reference.py`
+- `tests/portals/asegurado/test_ux45_cierre_resultados_accesibilidad.py`
+- `tests/portals/asegurado/test_ux46a_redisenio_integral.py`
+- `tests/portals/asegurado/test_ux46b_paso1_datos_personales.py`
+- `tests/portals/asegurado/test_ux46b_revision2_privacidad.py`
+- `tests/portals/asegurado/test_ux46b_revision3_terminos_navegacion.py`
+- `tests/portals/asegurado/test_ux46c_cuotas.py`
+- `tests/portals/asegurado/test_ux46d_gestion_datos.py`
+- `tests/portals/asegurado/test_ux46d_historial.py`
+- `tests/portals/asegurado/test_ux46d_revision10_tablas_transversales.py`
+- `tests/portals/asegurado/test_ux46d_revision11_scrollbars_y_carga.py`
+- `tests/portals/asegurado/test_ux46d_revision12_scroll_global_y_vacio.py`
+- `tests/portals/asegurado/test_ux46d_revision13_selector_archivo.py`
+- `tests/portals/asegurado/test_ux46d_revision14_paso1_informacion_personal.py`
+- `tests/portals/asegurado/test_ux46d_revision15_campos_importacion_y_limpieza.py`
+- `tests/portals/asegurado/test_ux46d_revision16_flujo_paso3.py`
+- `tests/portals/asegurado/test_ux46d_revision17_auditoria_datos.py`
+- `tests/portals/asegurado/test_ux46d_revision18_provenance_persistence.py`
+- `tests/portals/asegurado/test_ux46d_revision19_current_sync.py`
+- `tests/portals/asegurado/test_ux46d_revision20_vigencia_resumen.py`
+- `tests/portals/asegurado/test_ux46d_revision21_fecha_confiable.py`
+- `tests/portals/asegurado/test_ux46d_revision22_cierre_paso3.py`
+- `tests/portals/asegurado/test_ux46d_revision23_ficha_updates_contributions.py`
+- `tests/portals/asegurado/test_ux46d_revision7_privacidad_consulta.py`
+- `tests/portals/asegurado/test_ux46d_revision8_tablas.py`
+- `tests/portals/asegurado/test_ux46d_revision9_reactividad_privacidad.py`
+- `tests/portals/asegurado/test_ux46e_almacenamiento_comentarios_js.py`
+- `tests/portals/asegurado/test_ux46e_proyeccion_salarial.py`
+- `tests/portals/asegurado/test_ux46e_r81_editable_provenance.py`
+- `tests/portals/asegurado/test_ux46e_r8_reconsentimiento_borrado.py`
+- `tests/portals/asegurado/test_ux46f_r11_bloqueo_documental_vista_principal.py`
+- `tests/portals/asegurado/test_ux46f_r1_attachment_provenance_consistency.py`
+- `tests/portals/asegurado/test_ux46f_r2_auditoria_paso4.py`
+- `tests/portals/asegurado/test_ux46g_r1_retirement_scenarios.py`
+- `tests/portals/asegurado/test_ux46h_r1_resultados_exportacion.py`
+- `tests/portals/asegurado/test_ux46i_r1_calculation_guide.py`
+- `tests/portals/asegurado/test_ux4_remate_visual.py`
+- `tests/portals/asegurado/test_ux5_r1_design_system.py`
+- `tests/portals/asegurado/test_ux5_r2_shell_navigation.py`
+- `tests/portals/asegurado/test_ux5_r3_r4_simulation_flows.py`
+- `tests/portals/asegurado/test_ux5_r5_assisted_upload_layout.py`
+- `tests/portals/asegurado/test_ux5_r5_r6_assisted_integration.py`
+- `tests/portals/asegurado/test_ux6_r5_r6_manual_privacy_scope.py`
+- `tests/portals/asegurado/test_ux6_r5_r6_public_terms_final.py`
+- `tests/portals/asegurado/test_ux6_r5_r6_seguro_cleanup.py`
+- `tests/portals/developer/test_dev2_development_center.py`
+- `tests/portals/developer/test_dev2_r1_cierre_documental.py`
+- `tests/portals/developer/test_dev2_r2_visor_diagnostico.py`
+- `tests/portals/developer/test_dev2_r3_autodiagnostico.py`
+- `tests/portals/developer/test_dev2_r4_cierre_final.py`
+- `tests/portals/developer/test_dev2_r5_portal_access.py`
+- `tests/portals/developer/test_dev2_r6_cli.py`
+- `tests/portals/developer/test_dev2_r6_header_identity.py`
+- `tests/portals/developer/test_dev2_r6_identity.py`
+- `tests/portals/developer/test_dev2_r6_multipage_shell.py`
+- `tests/portals/developer/test_dev2_r6_observability_portal.py`
+- `tests/portals/developer/test_dev2_r6_provisioning.py`
+- `tests/portals/developer/test_dev2_r6_security_maintenance_privacy.py`
+- `tests/portals/developer/test_dev2_r6_sidebar_theme_sync.py`
+- `tests/portals/developer/test_dev2_r6_store.py`
+- `tests/portals/developer/test_dev2_r6_web_access.py`
+- `tests/portals/developer/test_dev2_r6_web_session.py`
+- `tests/portals/developer/test_ux6_r2_form_resilience.py`
+- `tests/portals/developer/test_ux6_r2_unified_user_edit.py`
+- `tests/portals/developer/test_ux6_r2_user_admin.py`
+- `tests/portals/developer/test_ux6_r2_user_audit.py`
+- `tests/portals/developer/test_ux6_r2_users_web.py`
+- `tests/portals/developer/test_ux6_r2_validation_feedback.py`
+- `tests/portals/developer/test_ux6_r8_integral_hardening.py`
+- `tests/regression/test_prebeta_e2e_hardening.py`
+- `tests/regression/test_ux46e_r8_cierre_funcional.py`
+- `tests/repository/test_automation_core_quality_gate.py`
+- `tests/repository/test_mant1_r3_yaml_github_documentados.py`
+- `tests/repository/test_mant1_r4_encabezados_operativos_limpios.py`
+- `tests/repository/test_mant1_r5a_comentarios_servicios_app.py`
+- `tests/repository/test_mant1_r5b_comentarios_presentacion_app.py`
+- `tests/repository/test_mant1_r5c_comentarios_js_app.py`
+- `tests/repository/test_mant1_r5d_politica_extensiones.py`
+- `tests/repository/test_mant1_r5e_nombres_carpetas.py`
+- `tests/repository/test_mant1_r5f_nombres_archivos.py`
+- `tests/repository/test_mant1_r5g_documentacion.py`
+- `tests/repository/test_mant1_r5h_auditoria_nombres_restantes.py`
+- `tests/repository/test_mant1_r6_auditoria_funcional_post_renombres.py`
+- `tests/repository/test_mant1_r7_cierre_operativo_post_auditoria.py`
+- `tests/repository/test_mant1_scripts_hooks_documentados.py`
+- `tests/repository/test_mantenimiento_tecnico.py`
+- `tests/repository/test_nor1_r8_work_block_identifiers.py`
+- `tests/repository/test_nor1_repository_standards.py`
+- `tests/repository/test_nor2_r2_migration_matrix.py`
+- `tests/repository/test_nor2_r3_runtime_migration.py`
+- `tests/repository/test_nor2_r4_live_documentation.py`
+- `tests/repository/test_nor2_r5_historical_documentation.py`
+- `tests/repository/test_nor2_r6_ledger_data.py`
+- `tests/repository/test_nor2_r7_local_artifacts.py`
+- `tests/repository/test_nor2_r8_final_audit.py`
+- `tests/repository/test_nor2_repository_normalization.py`
+- `tests/repository/test_nor3_r1_candidate_reconciliation.py`
+- `tests/repository/test_nor3_r1_r2_governance_bootstrap.py`
+- `tests/repository/test_nor3_r1_repository_inventory.py`
+- `tests/repository/test_nor3_r2_repository_structure_policy.py`
+- `tests/repository/test_nor3_r3_r4_portal_routers.py`
+- `tests/repository/test_nor3_r5_static_ownership.py`
+- `tests/repository/test_nor3_r6_test_taxonomy.py`
+- `tests/repository/test_nor3_r7_data_and_scripts.py`
+- `tests/repository/test_nor3_r8_closure.py`
+- `tests/repository/test_precommit_guard.py`
+- `tests/repository/test_ux46e_estandar_runtime.py`
+- `tests/security/test_post_sec2_integral_audit.py`
+- `tests/security/test_sec2_postclosure_hardening.py`
+- `tests/security/test_sec2_r1_codeql_workflow_hardening.py`
+- `tests/security/test_sec2_r2_admin_endpoint_protection.py`
+- `tests/security/test_sec2_r2_admin_security.py`
+- `tests/security/test_sec2_r2_secret_filtering.py`
+- `tests/security/test_sec2_r3_admin_protection.py`
+- `tests/security/test_sec2_r4_admin_audit.py`
+- `tests/security/test_sec2_r5_admin_web_session.py`
+- `tests/security/test_sec2_r6_admin_session_security.py`
+- `tests/shared/test_accessibility_themes.py`
+- `tests/shared/test_accessibility_ux4.py`
+- `tests/shared/test_responsive_ux3.py`
+- `tests/shared/test_ux6_r3_r4_interface_polish.py`
+- `tests/shared/test_ux6_r3_r4_motion_accessibility.py`
+- `tests/shared/test_visual_identity_pre_r8.py`
+- `tests/shared/test_visual_stabilization.py`
 ## 4. Categorías
 
 - núcleo/servicios;
@@ -980,7 +1005,7 @@ La CI debe permanecer verde antes de considerar cerrado un hito formal.
 
 ### UX.4.6g R1 — gate candidato
 
-La revisión acumula 18 regresiones en `tests/test_ux46g_r1_retirement_scenarios.py`. Partiendo del cierre de UX.4.6f con 762 pruebas, el gate objetivo del candidato es **780 pruebas en `OK`**, además de `pip check`, `compileall`, sintaxis JavaScript y `git diff --check`. La validación manual debe cubrir: sugerencia `+1…+N` desde Paso 4, preservación de una edición manual, ausencia de selección anticipada automática, fechas anticipadas transcurridas deshabilitadas, disponibilidad de la fecha de evaluación dentro de banda para sexo `F`/`M`, presencia de `+4`, tabla corta sin scroll vertical interno, mensaje explícito de cobertura de fecha personalizada y controles de fecha compactos/validados en Claro, Oscuro y Alto contraste.
+La revisión acumula 18 regresiones en `tests/portals/asegurado/test_ux46g_r1_retirement_scenarios.py`. Partiendo del cierre de UX.4.6f con 762 pruebas, el gate objetivo del candidato es **780 pruebas en `OK`**, además de `pip check`, `compileall`, sintaxis JavaScript y `git diff --check`. La validación manual debe cubrir: sugerencia `+1…+N` desde Paso 4, preservación de una edición manual, ausencia de selección anticipada automática, fechas anticipadas transcurridas deshabilitadas, disponibilidad de la fecha de evaluación dentro de banda para sexo `F`/`M`, presencia de `+4`, tabla corta sin scroll vertical interno, mensaje explícito de cobertura de fecha personalizada y controles de fecha compactos/validados en Claro, Oscuro y Alto contraste.
 
 ### UX.4.6g R1.4.2 — robustez de inicialización
 
@@ -992,7 +1017,7 @@ Se añaden tres regresiones para la alineación del período del historial, la a
 
 ### UX.4.6i R1 — guía pública Cómo se calcula
 
-La revisión añade **14 regresiones específicas** en `tests/test_ux46i_r1_calculation_guide.py`. Partiendo del cierre de UX.4.6h con 812 pruebas, el gate objetivo del candidato es **826 pruebas en `OK`**, además de `pip check`, compilación Python, sintaxis JavaScript y `git diff --check`.
+La revisión añade **14 regresiones específicas** en `tests/portals/asegurado/test_ux46i_r1_calculation_guide.py`. Partiendo del cierre de UX.4.6h con 812 pruebas, el gate objetivo del candidato es **826 pruebas en `OK`**, además de `pip check`, compilación Python, sintaxis JavaScript y `git diff --check`.
 
 La validación automática cubre ruta pública, lectura de parámetros normativos, ausencia de motores en la capa explicativa, contenido SEBD/Mixto/SUCGS, enlaces desde resultados y Metodología, estructura accesible/responsive, ADR/RF/TR y documentación. La validación manual debe comprobar temas Claro, Oscuro y Alto contraste, navegación por anclas, tablas desplegables y legibilidad en escritorio/móvil.
 
@@ -1016,9 +1041,9 @@ R1.4 simplifica la etiqueta visible de cada sustitución numérica a **Ejemplo**
 
 La revisión documental R5G se valida con:
 
-- `python -m pytest tests\test_mant1_r5g_documentacion.py -q`
-- `python -m pytest tests\test_ver2_documentacion_vigente.py -q`
-- `python -m pytest tests\test_ux46e_estandar_runtime.py -q`
+- `python -m pytest tests\repository\test_mant1_r5g_documentacion.py -q`
+- `python -m pytest tests\governance\test_ver2_documentacion_vigente.py -q`
+- `python -m pytest tests\repository\test_ux46e_estandar_runtime.py -q`
 
 Antes del cierre del Pull Request debe ejecutarse además la suite completa:
 
@@ -1029,9 +1054,9 @@ Antes del cierre del Pull Request debe ejecutarse además la suite completa:
 
 La revisión de nombres de archivos técnicos se valida con:
 
-- `python -m pytest tests\test_mant1_r5f_nombres_archivos.py -q`
-- `python -m pytest tests\test_mant1_scripts_hooks_documentados.py tests\test_precommit_guard.py -q`
-- `python -m pytest tests\test_mant1_r5e_nombres_carpetas.py -q`
+- `python -m pytest tests\repository\test_mant1_r5f_nombres_archivos.py -q`
+- `python -m pytest tests\repository\test_mant1_scripts_hooks_documentados.py tests\repository\test_precommit_guard.py -q`
+- `python -m pytest tests\repository\test_mant1_r5e_nombres_carpetas.py -q`
 - `python -m compileall app tests -q`
 
 Antes del cierre del Pull Request debe ejecutarse además la suite completa:
@@ -1081,7 +1106,7 @@ Resultados observados antes del commit:
 ## Validación NOR.2 R6
 
 R6 normaliza el ledger estructurado en
-`data/pre-1-0-revision-ledger.json`, preservando sin cambios el contenido
+`data/governance/pre-1-0-revision-ledger.json`, preservando sin cambios el contenido
 del archivo de origen identificado durante NOR.2 R2.
 
 El contenido del JSON permanece inalterado. El preflight verificó:
@@ -1157,7 +1182,7 @@ El gate local final de R7 quedó completado satisfactoriamente.
 
 Resultados observados:
 
-- regresión específica `tests/test_nor2_r7_local_artifacts.py`: **7 pruebas — OK**;
+- regresión específica `tests/repository/test_nor2_r7_local_artifacts.py`: **7 pruebas — OK**;
 - gate focal NOR.2/documental inicial: **71 pruebas + 77 subtests — OK**;
 - regresiones heredadas corregidas y revalidadas: **37 pruebas + 19 subtests — OK**;
 - `python -m pytest -q`: **1024 pruebas + 4902 subtests — OK**;
@@ -1210,7 +1235,7 @@ Gate estructural:
 
 Regresiones ejecutadas hasta este checkpoint:
 
-- `tests/test_nor2_r8_final_audit.py`:
+- `tests/repository/test_nor2_r8_final_audit.py`:
   **10 pruebas + 17 subtests — OK**;
 - suite completa `test_nor2_*.py`:
   **59 pruebas + 143 subtests — OK**;
@@ -1244,16 +1269,16 @@ Controles permanentes incorporados:
 
 - `scripts/audit_markdown.py`, que cubre Markdown rastreado y archivos nuevos no ignorados antes del staging;
 - integración del auditor en `scripts/validate_precommit.py`;
-- regresiones específicas en `tests/test_markdown_audit.py`;
+- regresiones específicas en `tests/governance/test_markdown_audit.py`;
 - documentación operativa en `scripts/README.md`;
 - reglas canónicas en `docs/standards/documentation-standards.md`;
 - workflow histórico `.github/workflows/markdown-audit.yml`, retirado post-G119 después de integrar su función en `quality-gate.yml`.
 
 Validaciones focales ya confirmadas:
 
-- `tests/test_markdown_audit.py`:
+- `tests/governance/test_markdown_audit.py`:
   **7 pruebas + 12 subtests — OK**;
-- `tests/test_mant1_scripts_hooks_documentados.py`:
+- `tests/repository/test_mant1_scripts_hooks_documentados.py`:
   **4 pruebas — OK**;
 - gate focal conjunto de auditor, pre-commit y documentación de scripts:
   **15 pruebas + 8 subtests — OK** en el checkpoint previo a la incorporación
@@ -1369,7 +1394,7 @@ DOC.2 R1 fue aceptado mediante PR #87 y revalidado post-merge con G110/E01 aún 
 
 Controles específicos:
 
-- `data/doc2-legacy-changelog-evidence.json` contiene exactamente 21 estados y 80 commits únicos;
+- `data/audits/doc2-legacy-changelog-evidence.json` contiene exactamente 21 estados y 80 commits únicos;
 - cada tag `v0.0.1-beta`–`v0.0.21-beta` apunta al cierre registrado;
 - `CHANGELOG.md` conserva rango, cantidad de commits, hito y cada sujeto de commit por estado;
 - el commit raíz anómalo se preserva sin reescritura;
@@ -1590,8 +1615,8 @@ Alcance del cambio:
   nuevas rutas;
 - estado documental vivo reconciliado con G117/E02 ya aceptado y publicado;
 - G118/E04 permanece reservado exclusivamente para DEV.2 R5;
-- `VERSION`, `data/pre-1-0-revision-ledger.json` y
-  `data/release-publication-manifest.json` permanecen sin cambios.
+- `VERSION`, `data/governance/pre-1-0-revision-ledger.json` y
+  `data/governance/release-publication-manifest.json` permanecen sin cambios.
 
 Gate final:
 

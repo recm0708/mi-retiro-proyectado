@@ -1,7 +1,7 @@
 # Modelo de datos
 
 **Estado:** Vigente
-**Versión de aplicación revisada:** `0.1.21.01-beta`
+**Versión de aplicación revisada:** `0.1.22.01-beta`
 **Versión base histórica:** `0.0.23-beta`
 **Revisión documental:** GOV.1.3 R2 — 2026-08-17
 **Actualización de estado frontend:** UX.4.6f R1.1 — bloqueo documental y decisión explícita de historial — 2026-08-20
@@ -268,7 +268,7 @@ Estos campos administran continuidad y presentación. Solo los contratos requeri
 El modelo administrativo de DEV.2 R6 está separado de los modelos Pydantic
 de simulación.
 
-`app/core/developer_store.py` mantiene en SQLite información administrativa
+`app/portals/developer/developer_store.py` mantiene en SQLite información administrativa
 como:
 
 - identificador estable;
@@ -286,7 +286,7 @@ como:
 La ubicación predeterminada es `data/developer/portal.sqlite3` y puede
 configurarse mediante `MRP_DEVELOPER_STORE_PATH`.
 
-Las sesiones temporales no se persisten en esa base. `app/core/admin_session.py`
+Las sesiones temporales no se persisten en esa base. `app/portals/developer/admin_session.py`
 las mantiene en memoria y asocia identidad, rol y revisión de seguridad al
 identificador temporal.
 

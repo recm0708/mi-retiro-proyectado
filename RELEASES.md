@@ -1,5 +1,20 @@
 # Registro de versiones y estados del proyecto
 
+
+<!-- NOR3-R8-PROMOTION:START -->
+## Promoción G122/E01 — NOR.3 R8
+
+- Estado materializado en este snapshot de promoción: G122/E01
+  (`0.1.22.01-beta`) para NOR.3 R8.
+- NOR.3 R1–R8 se consolidan con ordinal E01 y revisión funcional R8.
+- PR de integración/promoción: #162.
+- G123 queda disponible pero sin candidato/bloque asignado.
+- PERSIST.1 permanece planificado y no iniciado, sin Global preasignado.
+- La aceptación definitiva requiere merge protegido y revalidación de `main`.
+- El tag `v0.1.22.01-beta` no se crea desde este helper.
+
+<!-- NOR3-R8-PROMOTION:END -->
+
 **Fecha de reconstrucción histórica:** 2026-08-17
 **Fuente:** historial Git de `recm0708/mi-retiro-proyectado`
 **Revisión de planificación hacia 1.0:** 2026-08-20
@@ -21,6 +36,33 @@
 - No existe tag ni GitHub Release de G121/E01 antes de merge/revalidación.
 - La publicación final exige tag anotado/firmado y GitHub Release prerelease.
 <!-- UX6-R8-PROMOTION:END -->
+
+<!-- NOR3-R1-CANDIDATE-RECONCILIATION:START -->
+## Reconciliación de candidato post-G121 — NOR.3 R1
+
+- El snapshot de promoción G121/E01 anterior se preserva como evidencia del
+  estado existente cuando UX.6 cerró.
+- La planificación posterior registrada en #126 antepone NOR.3 a PERSIST.1.
+- G122/E01 (`0.1.22.01-beta`) queda como candidato NOR.3 R1
+  reservado/no aceptado; `VERSION` permanece en `0.1.21.01-beta`.
+- La antigua reserva PERSIST.1 → G122 queda superada por esta planificación;
+  PERSIST.1 permanece planificado, no iniciado y sin Global preasignado.
+- No se preasigna el Global posterior a NOR.3; #155 determinará la secuencia
+  siguiente después del cierre del bloque.
+<!-- NOR3-R1-CANDIDATE-RECONCILIATION:END -->
+
+<!-- NOR3-R2-CANDIDATE-CONTINUITY:START -->
+## Continuidad del candidato NOR.3 R2 — par R1–R2
+
+- La evidencia específica de R1 se conserva sin reescritura.
+- R2 materializa la policy estructural machine-readable y sus gates dentro del
+  mismo candidato G122/E01.
+- El alcance material vigente del candidato es NOR.3 R1–R2; `VERSION` continúa
+  en `0.1.21.01-beta` y G122 permanece reservado/no aceptado.
+- No se realizó ningún movimiento físico de backend, templates, assets, tests
+  ni data; esos cambios comienzan en R3–R4 conforme a #126/#127/#128.
+<!-- NOR3-R2-CANDIDATE-CONTINUITY:END -->
+
 
 <!-- DOC1-R1-POST-MANT1:START -->
 
@@ -209,7 +251,7 @@ Git conserva la evidencia primaria: hashes, fechas, autores, mensajes y contenid
 
 El commit raíz real es `a0a9e09` (`tipo: descripción del cambio`). Su mensaje es una anomalía histórica previa a la convención posterior y se conserva sin modificar.
 
-VER.2 añade una segunda capa de auditoría: `docs/governance/pre-1-0-revision-ledger.md` y `data/pre-1-0-revision-ledger.json` reconstruyen los **estados aceptados** como G001–G070 sobre la base `7037addd44253e528c77460b678d2b3ccd540dd5`. Esos identificadores revision-aware no sustituyen versiones/tags históricos ni autorizan tags retroactivos. `0.0.71.01-beta` fue publicada originalmente como VER.2 G071/E01. La reconciliación posterior determinó que su estado corresponde cronológicamente a G087/E01; el tag y su commit objetivo permanecen inmutables.
+VER.2 añade una segunda capa de auditoría: `docs/governance/pre-1-0-revision-ledger.md` y `data/governance/pre-1-0-revision-ledger.json` reconstruyen los **estados aceptados** como G001–G070 sobre la base `7037addd44253e528c77460b678d2b3ccd540dd5`. Esos identificadores revision-aware no sustituyen versiones/tags históricos ni autorizan tags retroactivos. `0.0.71.01-beta` fue publicada originalmente como VER.2 G071/E01. La reconciliación posterior determinó que su estado corresponde cronológicamente a G087/E01; el tag y su commit objetivo permanecen inmutables.
 
 ## 2. Estados retrospectivos
 
@@ -394,7 +436,7 @@ Mientras el PR de VER.2 no supere el gate completo y se integre:
 
 Si VER.2 se integra satisfactoriamente, `0.0.71.01-beta` pasa a ser el primer estado nuevo gobernado por la familia revision-aware. La creación de su tag, si corresponde al cierre, se realizará únicamente después de merge y revalidación.
 
-La distribución del contador aceptado hasta G070 se conserva de forma auditable en `docs/archive/governance/ver2-revision-decision-matrix.md`, `docs/governance/pre-1-0-revision-ledger.md` y `data/pre-1-0-revision-ledger.json`; los intentos fallidos, refinamientos sin aceptación independiente y checkpoints absorbidos se preservan como evidencia sin consumir un `G` adicional.
+La distribución del contador aceptado hasta G070 se conserva de forma auditable en `docs/archive/governance/ver2-revision-decision-matrix.md`, `docs/governance/pre-1-0-revision-ledger.md` y `data/governance/pre-1-0-revision-ledger.json`; los intentos fallidos, refinamientos sin aceptación independiente y checkpoints absorbidos se preservan como evidencia sin consumir un `G` adicional.
 
 ## 6. Migración criptográfica de tags — materializada
 

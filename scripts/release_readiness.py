@@ -24,12 +24,14 @@ ROOT = Path(__file__).resolve().parents[1]
 LEDGER_PATH = (
     ROOT
     / "data"
+    / "governance"
     / "pre-1-0-revision-ledger.json"
 )
 
 MANIFEST_PATH = (
     ROOT
     / "data"
+    / "governance"
     / "release-publication-manifest.json"
 )
 
@@ -347,9 +349,15 @@ def render_markdown(
         ),
         (
             "- **Siguiente candidato:** "
-            f"`G{report['next_global']:03d}` — "
-            f"`{report['next_candidate']}` — "
-            f"`{report['next_candidate_block']}`"
+            + (
+                f"`G{report['next_global']:03d}` disponible — sin candidato reservado"
+                if report["next_candidate"] is None
+                else (
+                    f"`G{report['next_global']:03d}` — "
+                    f"`{report['next_candidate']}` — "
+                    f"`{report['next_candidate_block']}`"
+                )
+            )
         ),
         (
             "- **Tag esperado:** "
@@ -443,13 +451,20 @@ def main() -> int:
         f"G{report['accepted_count']:03d} aceptado"
     )
 
-    print(
-        "[release-readiness] "
-        f"Siguiente: "
-        f"G{report['next_global']:03d} / "
-        f"{report['next_candidate_block']} / "
-        f"{report['next_candidate']}"
-    )
+    if report["next_candidate"] is None:
+        print(
+            "[release-readiness] "
+            f"Siguiente Global disponible: G{report['next_global']:03d}; "
+            "sin candidato reservado"
+        )
+    else:
+        print(
+            "[release-readiness] "
+            f"Siguiente: "
+            f"G{report['next_global']:03d} / "
+            f"{report['next_candidate_block']} / "
+            f"{report['next_candidate']}"
+        )
 
     print(
         "[release-readiness] "

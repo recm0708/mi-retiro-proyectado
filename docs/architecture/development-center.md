@@ -20,7 +20,7 @@ DEV.2 permanece cerrado después de R6/G119-E05. UX.6 amplía la experiencia Dev
 - Perfil/avatar, usuarios/RBAC, credenciales temporales, revocación y auditoría persistente permanecen vigentes.
 - App y Developer comparten Design System, movimiento y accesibilidad.
 - La sesión humana continúa separada del Bearer técnico.
-- PERSIST.1 R1 queda reservado como G122/E01, sin iniciar.
+- NOR.3 R1–R2 queda como candidato G122/E01 reservado/no aceptado; PERSIST.1 permanece planificado, no iniciado y sin Global preasignado.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 
 Como evidencia histórica de integración, R5 está integrado mediante PR #107 / merge `bc97db0` y aceptado como G118/E04. R6 quedó integrado mediante PR #111 / merge `bd2accb` y aceptado/publicado como G119/E05.
@@ -151,7 +151,7 @@ Incluye:
 - sincronización de `CHANGELOG.md`;
 - sincronización de `docs/architecture/system-architecture.md`;
 - sincronización de `docs/decisions/adr-179-revision-aware-versioning.md`;
-- regresión documental `tests/test_dev2_r4_cierre_final.py`;
+- regresión documental `tests/portals/developer/test_dev2_r4_cierre_final.py`;
 - conservación explícita de VER.2 como cierre transversal posterior.
 
 No incluye:
@@ -440,7 +440,7 @@ previsionales y deja como siguiente trabajo DEV.2 R2.
 La validación local de cierre quedó en:
 
 ```text
-python -m pytest tests\test_dev2_development_center.py -q
+python -m pytest tests\portals\developer\test_dev2_development_center.py -q
 4 passed
 
 python -m pytest -q
@@ -456,7 +456,7 @@ sanitizada controlada, manteniendo `VERSION` y `APP_VERSION` en `0.0.26-beta`.
 La validación local de cierre quedó en:
 
 ```text
-python -m pytest tests\test_dev2_r2_visor_diagnostico.py -q
+python -m pytest tests\portals\developer\test_dev2_r2_visor_diagnostico.py -q
 4 passed
 
 python -m pytest -q
@@ -472,10 +472,10 @@ y `APP_VERSION` en `0.0.26-beta`.
 La validación local de cierre quedó en:
 
 ```text
-python -m pytest tests\test_dev2_r3_autodiagnostico.py -q
+python -m pytest tests\portals\developer\test_dev2_r3_autodiagnostico.py -q
 4 passed
 
-python -m pytest tests\test_dev2_development_center.py tests\test_dev2_r1_cierre_documental.py tests\test_dev2_r2_visor_diagnostico.py tests\test_dev2_r3_autodiagnostico.py -q
+python -m pytest tests\portals\developer\test_dev2_development_center.py tests\portals\developer\test_dev2_r1_cierre_documental.py tests\portals\developer\test_dev2_r2_visor_diagnostico.py tests\portals\developer\test_dev2_r3_autodiagnostico.py -q
 14 passed
 
 python -m pytest -q
@@ -485,10 +485,10 @@ python -m pytest -q
 ## Validación esperada de DEV.2 R4
 
 ```text
-python -m pytest tests\test_dev2_r4_cierre_final.py -q
+python -m pytest tests\portals\developer\test_dev2_r4_cierre_final.py -q
 4 passed
 
-python -m pytest tests\test_dev2_development_center.py tests\test_dev2_r1_cierre_documental.py tests\test_dev2_r2_visor_diagnostico.py tests\test_dev2_r3_autodiagnostico.py tests\test_dev2_r4_cierre_final.py -q
+python -m pytest tests\portals\developer\test_dev2_development_center.py tests\portals\developer\test_dev2_r1_cierre_documental.py tests\portals\developer\test_dev2_r2_visor_diagnostico.py tests\portals\developer\test_dev2_r3_autodiagnostico.py tests\portals\developer\test_dev2_r4_cierre_final.py -q
 18 passed
 
 python -m pytest -q

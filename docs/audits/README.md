@@ -44,6 +44,7 @@ Auditorías de reconciliación revision-aware y gobierno de Releases.
 
 Auditorías de normalización, nomenclatura, estructura y artefactos del repositorio.
 
+- [Línea base de ownership y estructura NOR.3 R1](repository/repository-ownership-baseline-nor3-r1.md) — inventario de 613 archivos, ownership App/Developer/Shared/Dominio, consumidores y decisiones R1–R8; sin movimientos físicos.
 - [Auditoría de nomenclatura NOR.1 R4](repository/naming-audit-nor1-r4.md)
 - [Línea base de normalización NOR.2 R1](repository/repository-normalization-baseline-nor2-r1.md)
 - [Auditoría integral y cierre formal NOR.2 R8](repository/repository-normalization-final-audit-nor2-r8.md)

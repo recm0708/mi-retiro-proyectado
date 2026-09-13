@@ -5,7 +5,21 @@
 **Contador histórico en la base `7037addd`:** **G070**
 **Contador aceptado reconciliado vigente:** **G121**
 **Siguiente Global disponible:** **G122**
-**Siguiente candidato disponible:** `0.1.22.01-beta` — PERSIST.1 R1
+**Siguiente candidato disponible:** `0.1.22.01-beta` — NOR.3 R1–R2
+
+
+<!-- NOR3-G122-PROMOTION:START -->
+## Estado post-NOR.3 / promoción G122-E01
+
+- `VERSION` materializa `0.1.22.01-beta` para NOR.3 R8 / G122-E01.
+- NOR.3 R1–R8 queda cerrado estructuralmente en PR #162.
+- G123 es el siguiente Global disponible, pero **no tiene candidato ni bloque
+  preasignado**.
+- PERSIST.1 permanece planificado y no iniciado, sin Global preasignado.
+- La reconciliación integral de Issues, #154 y la replanificación #155
+  determinan el próximo candidato real.
+- El tag/release de G122 solo procede después de merge y revalidación de `main`.
+<!-- NOR3-G122-PROMOTION:END -->
 
 <!-- DOC1-R1-REVISION-MANUAL:START -->
 ## Nota de lectura vigente — reconciliación post-SEC.2
@@ -15,7 +29,8 @@ La reconstrucción histórica G001–G070 permanece intacta.
 - G118/E04 y G119/E05 preservan DEV.2 R5/R6.
 - G120/E01 (`0.1.20.01-beta`) permanece publicado para UX.5 R6.
 - G121/E01 (`0.1.21.01-beta`) consolida UX.6 R1–R8 con `functional_revision = R8`, ordinal E01 y PR #124.
-- G122/E01 (`0.1.22.01-beta`) queda reservado para PERSIST.1 R1 y no se considera iniciado ni aceptado por esta reserva.
+- G122/E01 (`0.1.22.01-beta`) queda reservado como candidato NOR.3 R1–R2 y no se considera aceptado ni consumido por esta reserva.
+- PERSIST.1 permanece planificado, no iniciado y sin Global preasignado hasta la replanificación post-NOR.3.
 - Los tags ya publicados permanecen inmutables.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 
@@ -185,8 +200,8 @@ transversales que no constituyen estados revision-aware independientes:
   11/0, pre-commit 10/0, 1338 `unittest` y `pytest` 1378 passed /
   6390 subtests;
 - ambos mantenimientos conservaron sin cambios `VERSION`,
-  `data/pre-1-0-revision-ledger.json` y
-  `data/release-publication-manifest.json`;
+  `data/governance/pre-1-0-revision-ledger.json` y
+  `data/governance/release-publication-manifest.json`;
 - G120/E01 queda aceptado para UX.5 R6; R1–R6 consumen un único estado aceptado.
 
 ### Anomalía histórica del tag `v0.0.71.01-beta`
@@ -223,8 +238,8 @@ UX.6 R1–R8 queda consolidado como G121/E01 (`0.1.21.01-beta`) con `functional_
 
 | Global | ID revision-aware candidato | Bloque | Condición |
 | ---: | --- | --- | --- |
-| G122 | `0.1.22.01-beta` | PERSIST.1 R1 — arquitectura de persistencia | autorización explícita + implementación + gate + aceptación |
+| G122 | `0.1.22.01-beta` | NOR.3 R1–R2 — inventario, gobierno y policy estructural | cierre material NOR.3 + gate + aceptación |
 
-G122 permanece reservado y **no se considera iniciado ni aceptado** por esta promoción. UX.7 permanece como revisión visual final no bloqueante.
+G122 permanece reservado como candidato y **no se considera aceptado ni consumido** mientras NOR.3 no cierre satisfactoriamente. PERSIST.1 permanece planificado sin Global preasignado; UX.7/UX.8 permanecen no iniciados.
 
 Los tags publicados anteriores permanecen inmutables.

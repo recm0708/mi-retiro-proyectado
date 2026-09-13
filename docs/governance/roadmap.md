@@ -1,11 +1,25 @@
 # Roadmap
 
 **Estado:** vigente
-**Versión vigente:** `0.1.21.01-beta` — G121/E01 materializado para UX.6 R8 en PR #124
+**Versión vigente:** `0.1.22.01-beta` — G121/E01 materializado para UX.6 R8 en PR #124
 **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
 **Último tag formal legacy:** `v0.0.26-beta`
-**Fecha de revisión:** 2026-09-07
-**Estado actual:** UX.6 R1–R8 queda consolidado como G121/E01 (`0.1.21.01-beta`) en PR #124. PERSIST.1 R1 queda reservado como G122/E01 (`0.1.22.01-beta`) sin iniciar; UX.7 permanece no bloqueante.
+**Fecha de revisión:** 2026-09-10
+**Estado actual:** UX.6 R1–R8 queda consolidado como G121/E01 (`0.1.21.01-beta`) en PR #124. NOR.3 R1–R2 está materializado y validado localmente como candidato G122/E01 (`0.1.22.01-beta`) reservado/no aceptado. PERSIST.1 permanece planificado, no iniciado y sin Global preasignado; UX.7/UX.8 permanecen planificados.
+
+
+<!-- NOR3-G122-PROMOTION:START -->
+## Estado post-NOR.3 / promoción G122-E01
+
+- `VERSION` materializa `0.1.22.01-beta` para NOR.3 R8 / G122-E01.
+- NOR.3 R1–R8 queda cerrado estructuralmente en PR #162.
+- G123 es el siguiente Global disponible, pero **no tiene candidato ni bloque
+  preasignado**.
+- PERSIST.1 permanece planificado y no iniciado, sin Global preasignado.
+- La reconciliación integral de Issues, #154 y la replanificación #155
+  determinan el próximo candidato real.
+- El tag/release de G122 solo procede después de merge y revalidación de `main`.
+<!-- NOR3-G122-PROMOTION:END -->
 
 <!-- NOR1-R7-CLOSURE:START -->
 ## Estado NOR.1 / NOR.2
@@ -37,6 +51,7 @@ La secuencia operativa previa a SEC.2 queda:
     `v0.1.19.05-beta`.
 15. **UX.5 R6** — cerrado/aceptado como G120/E01 (`0.1.20.01-beta`); R1–R6 consumen este único estado aceptado del bloque.
 16. **UX.6** — R1–R8 consolidados/aceptados como G121/E01 con revisión funcional R8; PR #124 materializa la promoción.
+17. **NOR.3 R1–R2** — materializado/validado localmente como candidato G122/E01 reservado/no aceptado; inventario, gobierno y policy estructural antes de cualquier movimiento físico. PERSIST.1 permanece después y sin Global preasignado.
 
 NOR.2 ejecutó los movimientos, renombrados, consolidaciones y retiros que
 NOR.1 deliberadamente no realizó.
@@ -90,7 +105,7 @@ Estado vigente:
 
 Este roadmap describe **estado actual y trabajo futuro**.
 
-La secuencia de pendientes vigente se mantiene en [Matriz maestra de pendientes hacia 1.0](pre-1-0-pending-matrix.md). Esa matriz es evolutiva y no preasigna Globales futuros más allá del candidato actual. La evolución detallada ya completada se conserva en `RELEASES.md`, `CHANGELOG.md`, `docs/archive/governance/pre-1-0-versioning-audit.md`, `docs/governance/pre-1-0-revision-ledger.md`, `docs/archive/governance/ver2-revision-decision-matrix.md`, `data/pre-1-0-revision-ledger.json` y `docs/archive/`.
+La secuencia de pendientes vigente se mantiene en [Matriz maestra de pendientes hacia 1.0](pre-1-0-pending-matrix.md). Esa matriz es evolutiva y no preasigna Globales futuros más allá del candidato actual. La evolución detallada ya completada se conserva en `RELEASES.md`, `CHANGELOG.md`, `docs/archive/governance/pre-1-0-versioning-audit.md`, `docs/governance/pre-1-0-revision-ledger.md`, `docs/archive/governance/ver2-revision-decision-matrix.md`, `data/governance/pre-1-0-revision-ledger.json` y `docs/archive/`.
 
 VER.2 es un bloque transversal de reconciliación y **no añade un bloque 15** al plan maestro de producto. DEV.2 tuvo un checkpoint documental en R4 y quedó cerrado funcionalmente después de R6. MANT.1 se trata como checkpoint técnico de mantenibilidad antes de SEC.2 y tampoco añade un bloque funcional de producto. MANT.1 R1 queda como auditoría inicial de alcance, MANT.1 R2 conserva la documentación de scripts y hooks antes de SEC.2, MANT.1 R3 documenta los YAML de GitHub sin cambiar CI ni formularios y MANT.1 R4 limpia encabezados operativos para que la trazabilidad histórica permanezca en documentación, MANT.1 R5A comenta servicios Python grandes, MANT.1 R5B comenta CSS/plantilla de la guía pública, MANT.1 R5C comenta JavaScript complejo sin cambiar lógica visible y MANT.1 R5D define política/plantillas por extensión con uniformidad de encabezados.
 
@@ -101,11 +116,13 @@ UX.5 permanece cerrado/publicado como G120/E01 (`0.1.20.01-beta`).
 UX.6 R1–R8 queda integrado/aceptado como G121/E01 (`0.1.21.01-beta`)
 mediante PR #124 / merge `5dcd2503e83ba69df83fa906d331df594653c0a0` con revisión funcional R8 y ordinal E01.
 
-PERSIST.1 R1 queda reservado como siguiente candidato G122/E01
-(`0.1.22.01-beta`) y **no se considera iniciado** por esta reserva.
+NOR.3 R1–R2 queda como siguiente candidato G122/E01
+(`0.1.22.01-beta`), reservado/no aceptado y actualmente en progreso.
 
-UX.7 permanece como revisión visual final `planned_reserved`, no bloqueante
-para PERSIST.1 ni para los demás bloques.
+PERSIST.1 permanece planificado, no iniciado y sin Global preasignado hasta
+el cierre de NOR.3 y la replanificación #155.
+
+UX.7/UX.8 permanecen como programa UX granular planificado y no iniciado.
 
 ## 1. Programa GOV.1 — Auditoría, Gobierno y Trazabilidad Pre-Beta
 
@@ -244,7 +261,7 @@ Documentos canónicos de VER.2:
 - `pre-1-0-versioning-audit.md` — criterio contable y exclusiones;
 - `pre-1-0-revision-ledger.md` — ledger reconciliado G001–G119 y siguiente Global G120/E01 reservado para el cierre UX.5 R6; UX.6 queda planificado después;
 - `ver2-revision-decision-matrix.md` — justificación de la segunda pasada;
-- `../data/pre-1-0-revision-ledger.json` — ledger estructurado validable;
+- `../data/governance/pre-1-0-revision-ledger.json` — ledger estructurado validable;
 - `../VERSIONING.md` — política de numeración.
 
 Secuencia funcional de 14 bloques hacia 1.0, sin contar VER.2 como bloque adicional:
@@ -396,7 +413,7 @@ queda como siguiente revisión de NOR.2.
 R5 queda cerrado después de integrar el archivo histórico en PR #71.
 
 R6 normaliza el ledger machine-readable a
-`data/pre-1-0-revision-ledger.json` sin modificar su contenido, numeración,
+`data/governance/pre-1-0-revision-ledger.json` sin modificar su contenido, numeración,
 esquema ni versión de aplicación.
 
 Gate local observado:
@@ -515,7 +532,7 @@ R1 materializa la reconstrucción exigida por el plan:
 - 21 estados retrospectivos `0.0.1-beta`–`0.0.21-beta`;
 - 80 commits reales, contiguos y únicos;
 - rango Git, fecha, hito y sujetos de commit preservados por versión;
-- evidencia machine-readable en `data/doc2-legacy-changelog-evidence.json`;
+- evidencia machine-readable en `data/audits/doc2-legacy-changelog-evidence.json`;
 - auditoría en `docs/audits/documentation/changelog-reconstruction-doc2-r1.md`;
 - regresiones para impedir que el CHANGELOG vuelva a degradarse a resúmenes de una sola línea;
 - sincronización del estado real de G110 y del inventario **29 tags ↔ 29 GitHub Releases**.

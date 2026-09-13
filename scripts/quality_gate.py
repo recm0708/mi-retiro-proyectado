@@ -200,8 +200,7 @@ def tracked_javascript_files() -> list[Path]:
             "git",
             "ls-files",
             "--",
-            ":(glob)app/static/js/**/*.js",
-            "app/static/js/*.js",
+            ":(glob)app/static/**/*.js",
         ]
     )
 
@@ -484,12 +483,14 @@ def collect_metadata() -> dict:
     ledger = read_json(
         ROOT
         / "data"
+        / "governance"
         / "pre-1-0-revision-ledger.json"
     )
 
     manifest = read_json(
         ROOT
         / "data"
+        / "governance"
         / "release-publication-manifest.json"
     )
 

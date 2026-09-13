@@ -1,0 +1,1380 @@
+{% extends "asegurado/base.html" %}
+
+{% block title %}
+Nueva simulación | {{ app_name }}
+{% endblock %}
+
+
+{% block content %}
+
+<!-- ==================================================
+     Asistente principal de simulación previsional
+     ================================================== -->
+
+<section class="simulation-section py-5">
+
+  <div class="container">
+
+    <section
+      id="simulation-mode-gate"
+      class="simulation-mode-gate"
+      aria-labelledby="simulation-mode-title"
+    >
+      <div class="simulation-mode-heading">
+        <span class="simulation-mode-kicker">
+          Nueva simulación
+        </span>
+
+        <h2 id="simulation-mode-title">
+          ¿Cómo quieres preparar tu simulación?
+        </h2>
+
+        <p>
+          Ambas modalidades utilizan las mismas reglas de cálculo.
+          La diferencia está en cómo preparas y revisas la
+          información necesaria antes de obtener los resultados.
+        </p>
+      </div>
+
+      <div
+        class="simulation-mode-grid"
+        aria-label="Modalidades de simulación"
+      >
+        <button
+          type="button"
+          class="simulation-mode-card"
+          data-simulation-mode-choice="MANUAL"
+        >
+          <span class="simulation-mode-card-label">
+            Manual
+          </span>
+
+          <strong>
+            Completar los datos paso a paso
+          </strong>
+
+          <span>
+            Introduces personalmente la información necesaria.
+            Durante este recorrido no se solicitarán documentos
+            de Mi Retiro Seguro ni Ficha Digital.
+          </span>
+
+          <span class="simulation-mode-card-action">
+            Comenzar en modo Manual →
+          </span>
+        </button>
+
+        <button
+          type="button"
+          class="simulation-mode-card"
+          data-simulation-mode-choice="ASISTIDO"
+        >
+          <span class="simulation-mode-card-label">
+            Asistido
+          </span>
+
+          <strong>
+            Preparar datos con ayuda documental
+          </strong>
+
+          <span>
+            Puedes utilizar Mi Retiro Seguro, Ficha Digital
+            o ambos documentos y después revisar, corregir
+            y completar la información detectada.
+            El modo Asistido prepara datos; nunca toma decisiones por ti.
+          </span>
+
+          <span class="simulation-mode-card-action">
+            Comenzar en modo Asistido →
+          </span>
+        </button>
+      </div>
+</section>
+
+
+    <div
+      id="simulation-workspace"
+      class="d-none"
+      data-simulation-workspace
+      hidden
+    >
+
+    <!-- Encabezado general del asistente. -->
+
+    <div class="simulation-header mb-4">
+
+      <div class="simulation-flow-context mb-3">
+        <span
+          id="simulation-flow-badge"
+          class="simulation-flow-badge"
+        >
+          Modalidad
+        </span>
+
+        <button
+          type="button"
+          class="btn btn-sm btn-outline-secondary"
+          data-simulation-mode-change
+        >
+          Cambiar modalidad
+        </button>
+      </div>
+
+      <span class="text-primary fw-semibold">
+        Nueva simulación
+      </span>
+
+      <h1 class="fw-bold mt-2 mb-3">
+        Proyección de jubilación
+      </h1>
+
+      <p class="text-secondary mb-0">
+        Completa los datos paso a paso. La aplicación utilizará
+        esta información para construir los escenarios de jubilación.
+      </p>
+
+    </div>
+
+
+
+
+
+    {% include "asegurado/partials/assisted_preparation.html" %}
+
+    <div
+      id="simulation-wizard-shell"
+      class="d-none"
+      data-simulation-wizard-shell
+      hidden
+    >
+
+
+<p
+      id="simulation-required-global"
+      class="required-fields-note simulation-required-global mb-3"
+    >
+      <span
+        class="required-marker"
+        aria-hidden="true"
+      >*</span>
+      Campo obligatorio
+    </p>
+
+    <div
+      id="wizard-validation-summary"
+      class="wizard-validation-summary d-none mb-4"
+      role="alert"
+      aria-atomic="true"
+    ></div>
+
+
+    <!-- ==================================================
+         PROGRESO DEL ASISTENTE
+         ================================================== -->
+
+    <div class="wizard-steps mb-5">
+
+      <button
+        type="button"
+        class="wizard-step active"
+        data-step="1"
+        aria-label="Ir al paso 1"
+      >
+        <span>1</span>
+        <small>Datos personales</small>
+      </button>
+
+      <div class="wizard-line"></div>
+
+      <button
+        type="button"
+        class="wizard-step"
+        data-step="2"
+        aria-label="Ir al paso 2"
+      >
+        <span>2</span>
+        <small>Cuotas</small>
+      </button>
+
+      <div class="wizard-line"></div>
+
+      <button
+        type="button"
+        class="wizard-step"
+        data-step="3"
+        aria-label="Ir al paso 3"
+      >
+        <span>3</span>
+        <small>Historial</small>
+      </button>
+
+      <div class="wizard-line"></div>
+
+      <button
+        type="button"
+        class="wizard-step"
+        data-step="4"
+        aria-label="Ir al paso 4"
+      >
+        <span>4</span>
+        <small>Proyección</small>
+      </button>
+
+      <div class="wizard-line"></div>
+
+      <button
+        type="button"
+        class="wizard-step"
+        data-step="5"
+        aria-label="Ir al paso 5"
+      >
+        <span>5</span>
+        <small>Retiro</small>
+      </button>
+
+      <div class="wizard-line"></div>
+
+      <button
+        type="button"
+        class="wizard-step"
+        data-step="6"
+        aria-label="Ir al paso 6"
+      >
+        <span>6</span>
+        <small>Resultados</small>
+      </button>
+
+    </div>
+
+
+
+
+
+    <div class="row justify-content-center">
+
+      <div class="col-12 col-xl-11">
+
+
+        <!-- Navegación superior persistente para recorrer pasos largos del asistente. -->
+        <div id="wizard-sticky-nav" class="wizard-navigation-bar wizard-navigation-bar-top mb-4" data-wizard-nav="top" aria-label="Navegación superior del asistente">
+          <div class="wizard-sticky-nav-secondary">
+            <button type="button" id="wizard-sticky-back" class="btn btn-outline-secondary" data-wizard-action="back">← Anterior</button>
+            <label for="wizard-step-jump" class="visually-hidden">Ir directamente a un paso del asistente</label>
+            <select id="wizard-step-jump" class="form-select wizard-step-jump" data-wizard-step-jump aria-label="Ir directamente a un paso del asistente">
+              <option value="1">Paso 1 · Datos personales</option><option value="2">Paso 2 · Cuotas</option><option value="3">Paso 3 · Historial</option><option value="4">Paso 4 · Proyección</option><option value="5">Paso 5 · Retiro</option><option value="6">Paso 6 · Resultados</option>
+            </select>
+            <div class="dropdown wizard-data-options">
+              <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="wizard-data-options" data-bs-toggle="dropdown" aria-expanded="false">
+                Opciones
+              </button>
+              <ul class="dropdown-menu wizard-data-options-menu" aria-labelledby="wizard-data-options">
+                <li><button class="dropdown-item" type="button" data-data-action="clear-step">Limpiar este paso</button></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><button class="dropdown-item text-danger" type="button" data-data-action="restart-simulation">Reiniciar simulación</button></li>
+              </ul>
+            </div>
+          </div>
+          <div class="wizard-sticky-nav-main">
+            <small id="wizard-sticky-status" class="text-secondary" data-wizard-status aria-live="polite">Paso 1 de 6</small>
+            <button type="button" id="wizard-sticky-primary" class="btn btn-primary" data-wizard-action="primary">Continuar</button>
+          </div>
+        </div>
+
+        <!-- ==================================================
+             PASO 1 — DATOS PERSONALES
+             ================================================== -->
+
+        <div
+          class="wizard-panel"
+          data-panel="1"
+        >
+
+          <div class="card border-0 shadow-sm simulation-card">
+
+            <div class="card-body p-4 p-lg-5">
+
+              <div class="mb-4">
+
+                <h2 class="h4 fw-bold mb-2">
+                  Datos personales y sistema previsional
+                </h2>
+
+                <p class="text-secondary mb-0">
+                  Estos datos permiten calcular posteriormente
+                  la edad y las fechas previsionales relevantes.
+                </p>
+
+              </div>
+
+
+
+
+              <form id="form-datos-personales">
+                <div id="bloque-datos-personales" class="personal-data-form">
+                  <section class="personal-form-section" aria-labelledby="informacion-personal-titulo">
+                    <div class="personal-form-heading mb-4">
+                      <div>
+                        <h3 id="informacion-personal-titulo" class="h5 fw-bold mb-1">Información personal</h3>
+                        <p class="text-secondary mb-1">Completa la información disponible. Los datos de identificación son opcionales; los campos marcados con <span class="required-marker" aria-hidden="true">*</span> se utilizan para determinar las reglas previsionales aplicables.</p>
+                        <p class="required-fields-note mb-0"><span class="required-marker" aria-hidden="true">*</span> Campo obligatorio</p>
+                      </div>
+                    </div>
+
+                    <div class="row g-4 mb-1">
+                      <div class="col-md-6"><label for="primer_nombre" class="form-label fw-semibold">Primer nombre</label><input type="text" class="form-control form-control-lg" id="primer_nombre" maxlength="80" autocomplete="given-name"></div>
+                      <div class="col-md-6"><label for="segundo_nombre" class="form-label fw-semibold">Segundo nombre</label><input type="text" class="form-control form-control-lg" id="segundo_nombre" maxlength="80" autocomplete="additional-name"></div>
+                      <div class="col-md-6"><label for="primer_apellido" class="form-label fw-semibold">Primer apellido</label><input type="text" class="form-control form-control-lg" id="primer_apellido" maxlength="80" autocomplete="family-name"></div>
+                      <div class="col-md-6"><label for="segundo_apellido" class="form-label fw-semibold">Segundo apellido</label><input type="text" class="form-control form-control-lg" id="segundo_apellido" maxlength="80"></div>
+                    </div>
+
+                    <div class="row g-4 mb-1 mt-0">
+                      <div class="col-md-6">
+                        <label for="sexo" class="form-label fw-semibold">Sexo <span class="required-marker" aria-hidden="true">*</span><span class="visually-hidden"> (obligatorio)</span></label>
+                        <select class="form-select form-select-lg" id="sexo" required><option value="" selected disabled>Selecciona una opción</option><option value="F">Femenino</option><option value="M">Masculino</option></select>
+                      </div>
+                      <div id="apellido-casada-wrapper" class="col-md-6 d-none"><label for="apellido_casada" class="form-label fw-semibold">Apellido de casada <span class="text-secondary fw-normal">(si aplica)</span></label><input type="text" class="form-control form-control-lg" id="apellido_casada" maxlength="80"></div>
+                    </div>
+
+                    <div class="row g-4 mb-1 mt-0">
+                      <div class="col-md-6"><label for="cedula" class="form-label fw-semibold">Número de cédula</label><input type="text" class="form-control form-control-lg" id="cedula" maxlength="40" autocomplete="off"></div>
+                      <div class="col-md-6"><label for="numero_seguro_social" class="form-label fw-semibold">Número de Seguro Social</label><input type="text" class="form-control form-control-lg" id="numero_seguro_social" maxlength="40" autocomplete="off"></div>
+                    </div>
+
+                    <div class="row g-4 mt-0">
+                      <div class="col-md-6">
+                        <label for="fecha_nacimiento" class="form-label fw-semibold">Fecha de nacimiento <span class="required-marker" aria-hidden="true">*</span><span class="visually-hidden"> (obligatorio)</span></label>
+                        <input type="date" class="form-control form-control-lg" id="fecha_nacimiento" required>
+                        <div class="form-text">La edad y las fechas previsionales se calculan automáticamente.</div>
+                      </div>
+                      <div class="col-md-6">
+                        <label for="fecha_ingreso_css" class="form-label fw-semibold">Fecha de ingreso a la CSS</label>
+                        <input type="date" class="form-control form-control-lg" id="fecha_ingreso_css">
+                        <div class="form-text">Puede completarse posteriormente si no conoces la fecha exacta.</div>
+                      </div>
+                      <div class="col-md-6">
+                        <label for="sistema" class="form-label fw-semibold">Sistema previsional <span class="required-marker" aria-hidden="true">*</span><span class="visually-hidden"> (obligatorio)</span></label>
+                        <select class="form-select form-select-lg" id="sistema" required>
+                          <option value="" selected disabled>Selecciona una opción</option><option value="NO_SE">No sé cuál tengo</option><option value="SEBD">SEBD — Beneficio Definido</option><option value="MIXTO">Subsistema Mixto</option><option value="SUCGS">SUCGS — Capitalización con Garantía Solidaria</option>
+                        </select>
+                      </div>
+                    </div>
+                  </section>
+
+                  <div id="error-datos-personales" class="alert alert-danger mt-4 d-none" role="alert"></div>
+                </div>
+              </form>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- ==================================================
+             PASO 2 — CUOTAS
+             ================================================== -->
+
+        <div
+          class="wizard-panel d-none"
+          data-panel="2"
+        >
+
+          <div class="card border-0 shadow-sm simulation-card">
+
+            <div class="card-body p-4 p-lg-5">
+
+              <div class="mb-4">
+                <h2 class="h4 fw-bold mb-2">
+                  Cuotas acreditadas y cotización futura
+                </h2>
+                <p class="text-secondary mb-0">
+                  Revisa las cuotas que ya están acreditadas y define cómo esperas continuar cotizando.
+                </p>
+              </div>
+
+              <form id="form-cuotas">
+
+                <section class="quota-form-section" aria-labelledby="cuotas-acreditadas-titulo">
+                  <div class="quota-section-heading">
+                    <div>
+                      <h3 id="cuotas-acreditadas-titulo" class="h5 fw-bold mb-1">
+                        Cuotas acreditadas
+                      </h3>
+                      <p class="text-secondary mb-1">
+                        Son las cuotas que ya figuran acreditadas por la CSS.
+                      </p>
+                      <p class="required-fields-note mb-0">
+                        <span class="required-marker" aria-hidden="true">*</span> Campo obligatorio
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="row g-4 mt-1">
+                    <div class="col-md-6">
+                      <label for="cuotas_totales" class="form-label fw-semibold">
+                        Total de cuotas acreditadas
+                        <span class="required-marker" aria-hidden="true">*</span>
+                        <span class="visually-hidden"> (obligatorio)</span>
+                      </label>
+                      <input
+                        type="number"
+                        min="0"
+                        step="1"
+                        class="form-control form-control-lg"
+                        id="cuotas_totales"
+                        placeholder="Ej.: 281"
+                        required
+                      >
+                      <div class="form-text">
+                        Utiliza el total que aparece actualmente en tu historial de la CSS.
+                      </div>
+                      <div id="origen-cuotas-totales" class="field-origin-note d-none"></div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <label for="cuotas_anio_actual" class="form-label fw-semibold">
+                        Cuotas acreditadas este año
+                        <span class="required-marker" aria-hidden="true">*</span>
+                        <span class="visually-hidden"> (obligatorio)</span>
+                      </label>
+                      <input
+                        type="number"
+                        min="0"
+                        max="12"
+                        step="1"
+                        class="form-control form-control-lg"
+                        id="cuotas_anio_actual"
+                        placeholder="Ej.: 5"
+                        required
+                      >
+                      <div class="form-text">
+                        Estas cuotas ya están incluidas dentro del total anterior.
+                      </div>
+                      <div id="origen-cuotas-anio-actual" class="field-origin-note d-none"></div>
+                    </div>
+                  </div>
+
+                  <div id="cuotas-importadas-acciones" data-assisted-only class="imported-data-actions d-none mt-3">
+                    <span class="imported-data-status-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="m7 12 3 3 7-7"></path></svg></span>
+                    <span id="cuotas-importadas-estado">Los datos confirmados desde la importación se mantienen sin cambios en este paso.</span>
+                    <button type="button" id="btn-revisar-cuotas-importadas" class="btn btn-sm btn-outline-primary">
+                      Revisar importación
+                    </button>
+                  </div>
+                </section>
+
+                <hr class="my-5">
+
+                <section class="quota-form-section" aria-labelledby="cotizacion-futura-titulo">
+                  <div class="quota-section-heading">
+                    <div>
+                      <h3 id="cotizacion-futura-titulo" class="h5 fw-bold mb-1">
+                        Cotización futura
+                      </h3>
+                      <p class="text-secondary mb-1">
+                        Estos valores son supuestos y no cuotas ya acreditadas.
+                      </p>
+                      <p class="required-fields-note mb-0">
+                        <span class="required-marker" aria-hidden="true">*</span> Campo obligatorio
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="row g-4 mt-1">
+                    <div class="col-md-6">
+                      <label for="continua_cotizando" class="form-label fw-semibold">
+                        ¿Continuarás cotizando?
+                        <span class="required-marker" aria-hidden="true">*</span>
+                        <span class="visually-hidden"> (obligatorio)</span>
+                      </label>
+                      <select class="form-select form-select-lg" id="continua_cotizando" required>
+                        <option value="" selected disabled>Selecciona una opción</option>
+                        <option value="true">Sí</option>
+                        <option value="false">No</option>
+                      </select>
+                    </div>
+
+                    <div class="col-md-6">
+                      <label for="cuotas_esperadas_cierre_anio" class="form-label fw-semibold">
+                        Cuotas esperadas al cerrar este año
+                        <span id="required-cierre-anio" class="required-marker" aria-hidden="true">*</span>
+                        <span class="visually-hidden"> (obligatorio cuando continúas cotizando)</span>
+                      </label>
+                      <input
+                        type="number"
+                        min="0"
+                        max="12"
+                        step="1"
+                        class="form-control form-control-lg"
+                        id="cuotas_esperadas_cierre_anio"
+                        placeholder="Ej.: 12"
+                        required
+                      >
+                    </div>
+
+                    <div class="col-md-6">
+                      <label for="cuotas_esperadas_por_anio" class="form-label fw-semibold">
+                        Cuotas esperadas por año futuro
+                        <span id="required-cuotas-futuras" class="required-marker" aria-hidden="true">*</span>
+                        <span class="visually-hidden"> (obligatorio cuando continúas cotizando)</span>
+                      </label>
+                      <input
+                        type="number"
+                        min="0"
+                        max="12"
+                        step="1"
+                        class="form-control form-control-lg"
+                        id="cuotas_esperadas_por_anio"
+                        placeholder="Ej.: 12"
+                        required
+                      >
+                    </div>
+                  </div>
+
+                  <div id="cuotas-sugerencia-continuidad" class="form-state-note d-none mt-3" role="status" aria-live="polite">
+                    Al indicar que continuarás cotizando, se sugieren inicialmente 12 cuotas al cierre del año y 12 por cada año futuro. Son valores editables: ajústalos si tu situación prevista es distinta.
+                  </div>
+
+                  <div id="cuotas-sin-continuidad" class="form-state-note d-none mt-3" role="status">
+                    No se proyectarán nuevas cuotas porque indicaste que no continuarás cotizando.
+                  </div>
+                </section>
+
+                <div id="error-cuotas" class="alert alert-danger mt-4 d-none" role="alert"></div>
+
+              </form>
+
+              <!-- ==========================================
+                   RESULTADO DE CUOTAS
+                   ========================================== -->
+
+              <div id="resultado-cuotas" class="resultado-cuotas mt-5 d-none">
+
+                <hr class="mb-4">
+
+                <div class="mb-4">
+                  <h3 class="h5 fw-bold mb-2">
+                    Situación de tus cuotas
+                  </h3>
+                  <p class="text-secondary mb-0">
+                    Esta información todavía no representa el cálculo de una pensión.
+                  </p>
+                </div>
+
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <div class="summary-card">
+                      <span class="summary-label">Cuotas acreditadas</span>
+                      <strong id="resultado-cuotas-reales" class="summary-value">0</strong>
+                      <small>Ya acreditadas por la CSS</small>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="summary-card">
+                      <span class="summary-label">Estimación al cierre del año</span>
+                      <strong id="resultado-cuotas-cierre" class="summary-value">0</strong>
+                      <small>Incluye las cuotas futuras que indicaste</small>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="summary-card">
+                      <span class="summary-label">Faltantes para 180</span>
+                      <strong id="resultado-faltantes-180" class="summary-value">0</strong>
+                      <small id="resultado-tiempo-180">—</small>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="summary-card">
+                      <span class="summary-label">Faltantes para 240</span>
+                      <strong id="resultado-faltantes-240" class="summary-value">0</strong>
+                      <small id="resultado-tiempo-240">—</small>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- ==================================================
+             PASO 3 — HISTORIAL Y BASE SALARIAL
+             ================================================== -->
+
+        <div
+          class="wizard-panel d-none"
+          data-panel="3"
+        >
+
+          <div class="card border-0 shadow-sm simulation-card">
+
+            <div class="card-body p-4 p-lg-5">
+
+              <div class="mb-4">
+                <h2 class="h4 fw-bold mb-2">
+                  Historial salarial y base para proyección
+                </h2>
+                <p class="text-secondary mb-0">
+                  Revisa tu historial de cuotas y salarios, completa la información reciente si la necesitas y define la base salarial que usarás para proyectar el futuro.
+                </p>
+              </div>
+
+              {% include "asegurado/partials/salary_history.html" %}
+
+              {% include "asegurado/partials/current_year_detail.html" %}
+
+              <section class="step3-subsection mt-5" aria-labelledby="base-salarial-titulo">
+                <hr class="mb-4">
+
+                <div class="step3-section-heading mb-4">
+                  <div>
+                    <h3 id="base-salarial-titulo" class="h5 fw-bold mb-2">
+                      Base salarial para proyección
+                    </h3>
+                    <p class="text-secondary mb-1">
+                      Selecciona el valor mensual que servirá como punto de partida para las proyecciones futuras.
+                    </p>
+                    <p id="base-salarial-required-note" class="required-fields-note mb-0">
+                      <span class="required-marker" aria-hidden="true">*</span> Campo obligatorio
+                    </p>
+                  </div>
+                </div>
+
+                <form id="form-salario">
+                  <div class="row g-4 mb-4">
+                    <div class="col-lg-8">
+                      <label for="origen_salario_proyeccion" class="form-label fw-semibold">
+                        Base para proyectar salarios futuros
+                      </label>
+                      <select id="origen_salario_proyeccion" class="form-select form-select-lg" required>
+                        <option value="" selected disabled>Seleccione una opción</option>
+                        <option value="MANUAL">Indicar el salario manualmente</option>
+                        <option value="ULTIMO_MES_COMPLETO" disabled>Último mes completo disponible</option>
+                        <option value="PROMEDIO_ANIO_ACTUAL" disabled>Promedio de meses completos del año actual</option>
+                        <option value="PROMEDIO_3_MESES" disabled>Promedio de los últimos 3 meses completos</option>
+                        <option value="PROMEDIO_CUOTA_ACREDITADA" disabled>Promedio del salario acreditado por cuota del año actual</option>
+                      </select>
+                      <div id="origen-salario-proyeccion-ayuda" class="form-text">
+                        Si no existe una base automática disponible, indica el salario manualmente.
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row g-4">
+                    <div class="col-md-6">
+                      <label for="monto_salario" class="form-label fw-semibold">
+                        Salario base
+                        <span id="required-monto-salario" class="required-marker" aria-hidden="true">*</span>
+                        <span class="visually-hidden"> (obligatorio cuando la base es manual)</span>
+                      </label>
+                      <div class="input-group input-group-lg">
+                        <span class="input-group-text">B/.</span>
+                        <input
+                          type="text"
+                          inputmode="decimal"
+                          class="form-control money-input"
+                          id="monto_salario"
+                          placeholder="Ej.: 1500.00"
+                          required
+                        >
+                      </div>
+                      <div id="origen-monto-salario" class="field-origin-note d-none"></div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <label for="periodicidad_salario" class="form-label fw-semibold">
+                        ¿Cómo está expresado este salario?
+                        <span id="required-periodicidad-salario" class="required-marker" aria-hidden="true">*</span>
+                        <span class="visually-hidden"> (obligatorio cuando la base es manual)</span>
+                      </label>
+                      <select class="form-select form-select-lg" id="periodicidad_salario" required>
+                        <option value="" selected disabled>Selecciona una opción</option>
+                        <option value="SEMANAL">Semanal</option>
+                        <option value="QUINCENAL">Quincenal</option>
+                        <option value="MENSUAL">Mensual</option>
+                        <option value="ANUAL">Anual</option>
+                      </select>
+                      <div id="origen-periodicidad-salario" class="field-origin-note d-none"></div>
+                    </div>
+                  </div>
+
+                  <div id="error-salario" class="alert alert-danger mt-4 d-none" role="alert"></div>
+                </form>
+              </section>
+
+              <section id="resultado-paso3" class="step3-summary mt-5 d-none" aria-labelledby="resumen-paso3-titulo">
+                <hr class="mb-4">
+                <div class="mb-4">
+                  <h3 id="resumen-paso3-titulo" class="h5 fw-bold mb-2">
+                    Resumen del historial y la base salarial
+                  </h3>
+                  <p class="text-secondary mb-0">
+                    Comprueba la información que se utilizará como punto de partida para la proyección.
+                  </p>
+                </div>
+
+                <div class="row g-3">
+                  <div class="col-sm-6 col-xl">
+                    <div class="summary-card history-summary-card">
+                      <span class="summary-label">Cuotas de referencia</span>
+                      <strong id="paso3-cuotas-referencia" class="summary-value">—</strong>
+                    </div>
+                  </div>
+                  <div class="col-sm-6 col-xl">
+                    <div class="summary-card history-summary-card">
+                      <span class="summary-label">Cuotas identificadas</span>
+                      <strong id="paso3-cuotas-identificadas" class="summary-value">—</strong>
+                    </div>
+                  </div>
+                  <div class="col-sm-6 col-xl">
+                    <div class="summary-card history-summary-card">
+                      <span class="summary-label">Diferencia</span>
+                      <strong id="paso3-diferencia-cuotas" class="summary-value">—</strong>
+                    </div>
+                  </div>
+                  <div class="col-sm-6 col-xl">
+                    <div class="summary-card history-summary-card">
+                      <span class="summary-label">Salarios reportados</span>
+                      <strong id="paso3-total-salarios" class="summary-value salary-value">—</strong>
+                    </div>
+                  </div>
+                  <div class="col-sm-6 col-xl">
+                    <div class="summary-card history-summary-card">
+                      <span class="summary-label">Base mensual</span>
+                      <strong id="paso3-base-mensual" class="summary-value salary-value">—</strong>
+                    </div>
+                  </div>
+                </div>
+
+                <div id="paso3-estado-general" class="alert alert-success mt-4 mb-0" role="status" aria-live="polite">
+                  Historial y base salarial listos para continuar.
+                </div>
+              </section>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- ==================================================
+            PASO 4 — PROYECCIÓN
+            ================================================== -->
+
+        <div
+          class="wizard-panel d-none"
+          data-panel="4"
+        >
+
+          <div class="card border-0 shadow-sm simulation-card">
+
+            <div class="card-body p-4 p-lg-5">
+
+              <!-- Encabezado del Paso 4. -->
+
+              <div class="mb-4">
+
+                <span class="text-primary fw-semibold">
+                  Paso 4 de 6
+                </span>
+
+                <h2 class="h4 fw-bold mt-2 mb-2">
+                  Proyección salarial
+                </h2>
+
+                <p class="text-secondary mb-0">
+                  Define cómo deseas estimar la evolución de tu
+                  salario durante los próximos años.
+                </p>
+
+              </div>
+
+
+              <!-- Salario base proveniente del Paso 3. -->
+
+              <div class="projection-base-card mb-4">
+
+                <div>
+
+                  <span class="projection-base-label">
+                    Salario mensual utilizado como base
+                  </span>
+
+                  <strong
+                    id="proyeccion-salario-base"
+                    class="projection-base-value"
+                  >
+                    B/.0.00
+                  </strong>
+
+                </div>
+
+                <div class="projection-base-note">
+                  Obtenido automáticamente del Paso 3
+                </div>
+
+              </div>
+
+
+              <form id="form-proyeccion">
+
+                <!-- Período de proyección. -->
+
+                <div class="row g-4 mb-4">
+
+                  <div class="col-md-6">
+
+                    <label
+                      for="proyeccion_anio_inicio"
+                      class="form-label fw-semibold projection-period-label"
+                    >
+                      Año inicial
+                    </label>
+
+                    <input
+                      type="number"
+                      class="form-control form-control-lg"
+                      id="proyeccion_anio_inicio"
+                      readonly
+                    >
+
+                    <div id="origen-proyeccion-anio-inicio" class="field-origin-note automatic">
+                      Calculado automáticamente a partir del año calendario actual.
+                    </div>
+
+                  </div>
+
+
+                  <div class="col-md-6">
+
+                    <label
+                      for="proyeccion_anio_fin"
+                      class="form-label fw-semibold projection-period-label"
+                    >
+                      Proyectar hasta el año
+                    </label>
+
+                    <input
+                      type="number"
+                      min="1900"
+                      max="2200"
+                      step="1"
+                      class="form-control form-control-lg"
+                      id="proyeccion_anio_fin"
+                      required
+                    >
+
+                    <div id="origen-proyeccion-anio-fin" class="field-origin-note automatic" aria-live="polite">
+                      Calculado automáticamente: horizonte inicial sugerido de 5 años. Puedes modificarlo según la edad de retiro que quieras comparar.
+                    </div>
+
+                  </div>
+
+                </div>
+
+
+                <!-- Modalidad de proyección. -->
+
+                <div class="mb-4">
+
+                  <label
+                    for="modalidad_proyeccion"
+                    class="form-label fw-semibold"
+                  >
+                    ¿Cómo deseas proyectar tu salario?
+                  </label>
+
+                  <select
+                    class="form-select form-select-lg"
+                    id="modalidad_proyeccion"
+                    required
+                  >
+
+                    <option value="" selected disabled>
+                      Selecciona una opción
+                    </option>
+
+                    <option value="CONSTANTE">
+                      Mantener el salario actual
+                    </option>
+
+                    <option value="PORCENTAJE">
+                      Aplicar un porcentaje de cambio cada año
+                    </option>
+
+                    <option value="FUTURO_CONOCIDO">
+                      Conozco un salario que tendré en el futuro
+                    </option>
+
+                    <option value="ESCENARIOS">
+                      No sé — comparar varios escenarios
+                    </option>
+
+                  </select>
+
+                </div>
+
+
+                <!-- ==========================================
+                    Configuración: porcentaje anual
+                    ========================================== -->
+
+                <div
+                  id="config-proyeccion-porcentaje"
+                  class="projection-config d-none"
+                >
+
+                  <div class="row g-4">
+
+                    <div class="col-md-6">
+
+                      <label
+                        for="porcentaje_anual"
+                        class="form-label fw-semibold"
+                      >
+                        Variación anual
+                      </label>
+
+                      <div class="input-group input-group-lg">
+
+                        <input
+                          type="text"
+                          inputmode="decimal"
+                          class="form-control decimal-two-input"
+                          id="porcentaje_anual"
+                          data-allow-negative="true"
+                          placeholder="0.00"
+                        >
+
+                        <span class="input-group-text">
+                          %
+                        </span>
+
+                      </div>
+
+                      <div class="form-text">
+                        Puede ser positiva o negativa. Se aplica de forma compuesta: cada año parte del salario proyectado del año anterior.
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+
+                <!-- ==========================================
+                    Configuración: salario futuro conocido
+                    ========================================== -->
+
+                <div
+                  id="config-proyeccion-futuro"
+                  class="projection-config d-none"
+                >
+
+                  <div class="row g-4">
+
+                    <div class="col-md-6">
+
+                      <label
+                        for="salario_mensual_futuro"
+                        class="form-label fw-semibold"
+                      >
+                        Salario mensual futuro
+                      </label>
+
+                      <div class="input-group input-group-lg">
+
+                        <span class="input-group-text">
+                          B/.
+                        </span>
+
+                        <input
+                          type="text"
+                          inputmode="decimal"
+                          class="form-control money-input"
+                          id="salario_mensual_futuro"
+                          placeholder="0.00"
+                        >
+
+                      </div>
+
+                      <div class="form-text">
+                        La aplicación calculará la tasa anual compuesta necesaria para llegar a este monto en el año indicado.
+                      </div>
+
+                    </div>
+
+
+                    <div class="col-md-6">
+
+                      <label
+                        for="anio_salario_futuro"
+                        class="form-label fw-semibold"
+                      >
+                        Año de ese salario
+                      </label>
+
+                      <input
+                        type="number"
+                        min="1900"
+                        max="2200"
+                        step="1"
+                        class="form-control form-control-lg"
+                        id="anio_salario_futuro"
+                      >
+
+                      <div class="form-text">
+                        Si el horizonte continúa después de este año, el salario conocido se mantendrá constante; no se inventará otra tasa de crecimiento.
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+
+                <!-- ==========================================
+                    Configuración: varios escenarios
+                    ========================================== -->
+
+                <div
+                  id="config-proyeccion-escenarios"
+                  class="projection-config d-none"
+                >
+
+                  <div class="row">
+
+                    <div class="col-lg-8">
+
+                      <label
+                        for="escenarios_porcentajes"
+                        class="form-label fw-semibold"
+                      >
+                        Porcentajes a comparar
+                      </label>
+
+                      <input
+                        type="text"
+                        class="form-control form-control-lg"
+                        id="escenarios_porcentajes"
+                        placeholder="Escribe los porcentajes a comparar"
+                      >
+
+                      <div class="form-text">
+                        Separa cada porcentaje con una coma. Cada escenario se calcula de forma compuesta desde la misma base salarial. Ejemplo: 0, 1, 2, 3
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+
+                <!-- Explicación sobre el carácter estimado. -->
+
+                <div class="info-box mt-4">
+
+                  <strong>
+                    Esta etapa genera escenarios, no salarios reales.
+                  </strong>
+
+                  <p class="mb-0 mt-1">
+                    Los valores futuros se mantendrán identificados
+                    como proyecciones y no reemplazarán información
+                    salarial histórica.
+                  </p>
+
+                </div>
+
+
+                <!-- Mensajes de error del Paso 4. -->
+
+                <div
+                  id="error-proyeccion"
+                  class="alert alert-danger mt-4 d-none"
+                  role="alert"
+                ></div>
+
+
+                <!-- Navegación y ejecución. -->
+
+                <div
+                  class="d-flex justify-content-between
+                        align-items-center mt-5 wizard-actions"
+                >
+
+                  <button
+                    type="button"
+                    id="btn-volver-paso-3"
+                    class="btn btn-outline-secondary"
+                  >
+                    Anterior
+                  </button>
+
+                  <button
+                    type="submit"
+                    class="btn btn-primary px-4"
+                  >
+                    Generar proyección
+                  </button>
+
+                </div>
+
+              </form>
+
+
+              <!-- ==========================================
+                  RESULTADOS DE LA PROYECCIÓN
+                  ========================================== -->
+
+              <div
+                id="resultado-proyeccion"
+                class="mt-5 d-none"
+              >
+
+                <hr class="mb-4">
+
+
+                <div class="mb-4">
+
+                  <h3 class="h5 fw-bold mb-2">
+                    Historial y proyección salarial
+                  </h3>
+
+                  <p class="text-secondary mb-0">
+                    La aplicación separa los datos históricos reales,
+                    el año actual y las estimaciones futuras.
+                  </p>
+
+                </div>
+
+
+                <!-- JavaScript insertará aquí las tablas. -->
+
+                <div id="contenedor-escenarios"></div>
+<div class="d-flex justify-content-end mt-4 wizard-actions-end">
+
+                  <button
+                    type="button"
+                    id="btn-continuar-paso-5"
+                    class="btn btn-primary px-4"
+                  >
+                    Continuar a retiro
+                  </button>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- Paso 5 modularizado para evitar aumentar este archivo. -->
+
+        {% include "asegurado/partials/retirement.html" %}
+
+
+        <!-- Paso 6 modularizado: resultados y cálculo de pensión. -->
+
+        {% include "asegurado/partials/results.html" %}
+
+
+
+        <section
+          id="manual-completeness-gate"
+          class="manual-completeness-gate d-none mb-4"
+          data-manual-only
+          aria-labelledby="manual-completeness-title"
+        >
+          <div class="manual-completeness-heading">
+            <div>
+              <span>
+                Verificación antes de calcular
+              </span>
+
+              <h2
+                id="manual-completeness-title"
+                class="h5 mb-1"
+              >
+                Completitud de la simulación Manual
+              </h2>
+            </div>
+
+            <strong
+              id="manual-completeness-status"
+              aria-live="polite"
+            >
+              Pendiente
+            </strong>
+          </div>
+
+          <ul class="manual-completeness-list">
+            <li data-completeness-key="datos">
+              <span>Datos obligatorios</span>
+              <strong data-completeness-state>
+                Pendiente
+              </strong>
+            </li>
+
+            <li data-completeness-key="decisiones">
+              <span>Decisiones obligatorias</span>
+              <strong data-completeness-state>
+                Pendiente
+              </strong>
+            </li>
+
+            <li data-completeness-key="fechas">
+              <span>Coherencia de fechas</span>
+              <strong data-completeness-state>
+                Pendiente
+              </strong>
+            </li>
+
+            <li data-completeness-key="importados">
+              <span>Datos importados revisados</span>
+              <strong data-completeness-state>
+                No aplica
+              </strong>
+            </li>
+
+            <li data-completeness-key="dependencias">
+              <span>Dependencias entre pasos</span>
+              <strong data-completeness-state>
+                Pendiente
+              </strong>
+            </li>
+
+            <li data-completeness-key="accion">
+              <span>Acción explícita del usuario</span>
+              <strong data-completeness-state>
+                Pendiente
+              </strong>
+            </li>
+          </ul>
+        </section>
+
+
+        <!-- Navegación inferior equivalente para mantener acciones accesibles al final del contenido. -->
+        <div id="wizard-navigation-bottom" class="wizard-navigation-bar wizard-navigation-bar-bottom mt-4" data-wizard-nav="bottom" aria-label="Navegación inferior del asistente">
+          <div class="wizard-sticky-nav-secondary">
+            <button type="button" id="wizard-back-bottom" class="btn btn-outline-secondary" data-wizard-action="back">← Anterior</button>
+            <label for="wizard-step-jump-bottom" class="visually-hidden">Ir directamente a un paso del asistente</label>
+            <select id="wizard-step-jump-bottom" class="form-select wizard-step-jump" data-wizard-step-jump aria-label="Ir directamente a un paso del asistente">
+              <option value="1">Paso 1 · Datos personales</option><option value="2">Paso 2 · Cuotas</option><option value="3">Paso 3 · Historial</option><option value="4">Paso 4 · Proyección</option><option value="5">Paso 5 · Retiro</option><option value="6">Paso 6 · Resultados</option>
+            </select>
+          </div>
+          <div class="wizard-sticky-nav-main">
+            <small id="wizard-status-bottom" class="text-secondary" data-wizard-status aria-live="polite">Paso 1 de 6</small>
+            <button type="button" id="wizard-primary-bottom" class="btn btn-primary" data-wizard-action="primary">Continuar</button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+{% endblock %}
+
+
+{% block scripts %}
+
+<!-- Utilidades de entrada y formato monetario. -->
+<script
+  src="{{ url_for('static', path='/asegurado/js/currency.js') }}?v={{ static_revision }}"
+></script>
+
+
+<!-- JavaScript principal del asistente. -->
+
+<script
+  src="{{ url_for('static', path='/asegurado/js/simulation.js') }}?v={{ static_revision }}"
+></script>
+
+
+<!-- Elección y contrato de modalidad de la simulación. -->
+<script
+  src="{{ url_for('static', path='/asegurado/js/simulation_mode.js') }}?v={{ static_revision }}"
+></script>
+
+<!-- Coordinación de la preparación documental Asistida. -->
+<script
+  src="{{ url_for('static', path='/asegurado/js/assisted_flow.js') }}?v={{ static_revision }}"
+></script>
+
+
+<!-- Gestión específica del historial salarial. -->
+
+<script
+  src="{{ url_for('static', path='/asegurado/js/salary_history.js') }}?v={{ static_revision }}"
+></script>
+
+
+<!-- Referencia personal opcional de Mi Retiro Seguro. -->
+<script
+  src="{{ url_for('static', path='/asegurado/js/mi_retiro_seguro_reference.js') }}?v={{ static_revision }}"
+></script>
+
+
+<!-- Importación revisable de las fuentes del Centro documental Asistido. -->
+<script
+  src="{{ url_for('static', path='/asegurado/js/official_data_import.js') }}?v={{ static_revision }}"
+></script>
+
+
+<!-- Detalle mensual/quincenal del año actual. -->
+<script
+  src="{{ url_for('static', path='/asegurado/js/current_year_detail.js') }}?v={{ static_revision }}"
+></script>
+
+
+<!-- Presentación integrada de historial y proyección. -->
+
+<script
+  src="{{ url_for('static', path='/asegurado/js/timeline.js') }}?v={{ static_revision }}"
+></script>
+
+
+<!-- Gestión específica de fechas y escenarios de retiro. -->
+
+<script
+  src="{{ url_for('static', path='/asegurado/js/retirement.js') }}?v={{ static_revision }}"
+></script>
+
+
+<!-- Integración de los motores legales con el Paso 6. -->
+<script
+  src="{{ url_for('static', path='/asegurado/js/results.js') }}?v={{ static_revision }}"
+></script>
+
+
+<!-- Navegación común del asistente al final del paso activo. -->
+<script
+  src="{{ url_for('static', path='/asegurado/js/wizard_navigation.js') }}?v={{ static_revision }}"
+></script>
+
+{% endblock %}

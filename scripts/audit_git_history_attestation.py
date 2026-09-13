@@ -7,7 +7,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-MANIFEST = ROOT / "data" / "git-history-attestation.json"
+MANIFEST = ROOT / "data" / "audits" / "git-history-attestation.json"
 
 
 def run_git(*args: str) -> subprocess.CompletedProcess[str]:

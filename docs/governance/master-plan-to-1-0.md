@@ -3,9 +3,23 @@
 **Estado:** vigente
 **Versión base al iniciar el plan:** `0.0.25-beta`
 **Cierre histórico de PLAN.1:** `0.0.26-beta` / `v0.0.26-beta`
-**Versión transversal vigente:** `0.1.21.01-beta` — UX.6 R1–R8 consolidado como G121/E01 en PR #124; PERSIST.1 R1 queda reservado como G122/E01.
+**Versión transversal vigente:** `0.1.22.01-beta` — NOR.3 R1–R8 materializado como G122/E01 en PR #162; G123 queda disponible sin candidato preasignado; PERSIST.1 permanece planificado sin Global preasignado.
 **Fecha:** 2026-08-25
 **Clasificación:** Producto / Arquitectura / QA / Release
+
+
+<!-- NOR3-G122-PROMOTION:START -->
+## Estado post-NOR.3 / promoción G122-E01
+
+- `VERSION` materializa `0.1.22.01-beta` para NOR.3 R8 / G122-E01.
+- NOR.3 R1–R8 queda cerrado estructuralmente en PR #162.
+- G123 es el siguiente Global disponible, pero **no tiene candidato ni bloque
+  preasignado**.
+- PERSIST.1 permanece planificado y no iniciado, sin Global preasignado.
+- La reconciliación integral de Issues, #154 y la replanificación #155
+  determinan el próximo candidato real.
+- El tag/release de G122 solo procede después de merge y revalidación de `main`.
+<!-- NOR3-G122-PROMOTION:END -->
 
 <!-- NOR1-R7-CLOSURE:START -->
 ## Checkpoint de normalización previo a SEC.2
@@ -23,7 +37,9 @@ alcanza G119/E05.
   `v0.1.19.05-beta`.
 - UX.5 R1–R6 permanecen consolidados/publicados como G120/E01.
 - UX.6 R1–R8 queda consolidado como G121/E01 con revisión funcional R8 en PR #124.
-- PERSIST.1 R1 queda reservado como G122/E01 y no se inicia por esta reserva.
+- NOR.3 R1–R2 queda como candidato G122/E01 reservado/no aceptado.
+- PERSIST.1 permanece planificado, no iniciado y sin Global preasignado hasta
+  el cierre de NOR.3 y la replanificación #155.
 <!-- NOR1-R7-CLOSURE:END -->
 
 <!-- NOR2-R1-STATUS:START -->
@@ -81,11 +97,14 @@ UX.5 permanece cerrado/publicado como G120/E01 (`0.1.20.01-beta`).
 UX.6 R1–R8 queda integrado/aceptado como G121/E01 (`0.1.21.01-beta`)
 mediante PR #124 / merge `5dcd2503e83ba69df83fa906d331df594653c0a0`, con `functional_revision = R8`.
 
-El siguiente candidato formal es PERSIST.1 R1 / G122/E01
-(`0.1.22.01-beta`), reservado pero no iniciado.
+El siguiente candidato formal es NOR.3 R1–R2 / G122/E01
+(`0.1.22.01-beta`), reservado/no aceptado y actualmente en progreso. La
+apertura del bloque no modifica `VERSION` ni consume G122.
 
-UX.7 se conserva como revisión visual final no bloqueante antes de la
-versión estable y no impide avanzar PERSIST.1 ni otros bloques.
+PERSIST.1 permanece como etapa funcional posterior, no iniciada y sin Global
+preasignado hasta cerrar NOR.3 y ejecutar la replanificación #155.
+
+UX.7/UX.8 permanecen como programa UX granular posterior y no iniciado.
 
 ## 1. Propósito
 
@@ -165,7 +184,7 @@ Fuentes canónicas:
 - `docs/archive/governance/pre-1-0-versioning-audit.md`;
 - `docs/governance/pre-1-0-revision-ledger.md`;
 - `docs/archive/governance/ver2-revision-decision-matrix.md`;
-- `data/pre-1-0-revision-ledger.json`;
+- `data/governance/pre-1-0-revision-ledger.json`;
 - ADR de gobierno correspondiente.
 
 Durante VER.2, DOC.1 R1 fue el bloque documental utilizado para sincronizar la documentación Markdown vigente posterior a MANT.1. Después de NOR.2, DOC.1 R2 ejecutó la auditoría integral Markdown y estableció controles permanentes de regresión. VER.2, DOC.1 R1 y DOC.1 R2 están cerrados, y DEV.2 permanece como bloque funcional cerrado.
@@ -332,7 +351,7 @@ Audita documentación viva para sustituir etiquetas visibles basadas únicamente
 
 ### 9. PERSIST.1 — Persistencia voluntaria y segura
 
-**Estado:** etapa funcional posterior de la matriz maestra y sin Global preasignado; G118/E04 permanece aceptado/publicado para DEV.2 R5, G119/E05 permanece aceptado/publicado para DEV.2 R6 y G120/E01 queda reservado para el cierre UX.5 R6; UX.6 se ubica después y antes de PERSIST.1 conforme a la matriz viva.
+**Estado:** etapa funcional posterior a NOR.3 y sin Global preasignado; permanece planificada y no iniciada hasta el cierre de NOR.3 y la replanificación post-NOR.3 de #155.
 
 - guardado solo por decisión del asegurado;
 - modelo de datos versionado;
@@ -477,7 +496,7 @@ La normalización del ledger de alto impacto conserva como invariantes:
   `f5e0020643b324119855693588469eb8c98a0abafdb8f6108d60d5fb03a2288e`.
 
 El consumidor de runtime y la documentación viva utilizan
-`data/pre-1-0-revision-ledger.json`.
+`data/governance/pre-1-0-revision-ledger.json`.
 
 La evidencia histórica conserva los nombres que existían cuando fue generada.
 No se crean stubs ni copias de compatibilidad.

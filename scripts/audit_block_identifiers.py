@@ -10,7 +10,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-REGISTRY = ROOT / "data" / "work-block-registry.json"
+REGISTRY = ROOT / "data" / "governance" / "work-block-registry.json"
 
 def tracked_files() -> list[str]:
     proc = subprocess.run(
@@ -41,7 +41,7 @@ def main() -> int:
         return 1
 
     allowed = set(identifiers)
-    planned = {"UX.5", "PERSIST.1", "REP.1", "A11Y.2", "REV.1", "QA.1", "REL.1"}
+    planned = {"UX.5", "UX.7", "UX.8", "PERSIST.1", "REP.1", "A11Y.2", "REV.1", "QA.1", "REL.1"}
     if not planned.issubset(allowed):
         print("ERROR: faltan identificadores futuros reservados.")
         return 1

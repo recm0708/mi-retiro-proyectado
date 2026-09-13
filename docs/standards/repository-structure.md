@@ -31,14 +31,28 @@ app/
 ├── core/
 ├── engines/
 ├── models/
+├── portals/
+│   ├── asegurado/
+│   └── developer/
 ├── services/
 ├── static/
-│   ├── css/
-│   ├── img/
-│   │   └── brand/
-│   └── js/
+│   ├── asegurado/
+│   │   ├── css/
+│   │   └── js/
+│   ├── developer/
+│   │   ├── css/
+│   │   └── js/
+│   └── shared/
+│       ├── css/
+│       ├── img/
+│       │   └── brand/
+│       └── js/
 └── templates/
-    └── partials/
+    ├── asegurado/
+    │   └── partials/
+    ├── developer/
+    └── shared/
+        └── partials/
 
 assets/
 ├── brand/
@@ -66,6 +80,15 @@ regulations/
 scripts/
 
 tests/
+├── domain/
+├── governance/
+├── portals/
+│   ├── asegurado/
+│   └── developer/
+├── regression/
+├── repository/
+├── security/
+├── shared/
 └── validation_cases/
 ```
 
@@ -88,6 +111,10 @@ directorio ignorado no lo convierte en parte de la arquitectura canónica.
 
 Las carpetas de herramientas o ecosistemas conservan su nombre convencional
 cuando cambiarlo rompería integración o semántica externa.
+
+## Ownership de assets runtime
+
+NOR.3 R5 materializa `app/static/shared/`, `app/static/asegurado/` y `app/static/developer/`. `style.css` queda en Asegurado después de retirar contratos transversales redundantes; Developer no depende de esa hoja. La marca runtime única vive en `shared/img/brand/`.
 
 ## Estructura documental
 
@@ -178,3 +205,64 @@ paquetes de entrega, copias de trabajo ni evidencia generada para una revisión.
 Cuando un documento o archivo sea sustituido, Git conserva las versiones
 anteriores. La permanencia adicional bajo `docs/archive/` se justifica solo
 cuando el artefacto histórico sigue siendo parte útil de la trazabilidad.
+
+<!-- NOR3-R6-TEST-TAXONOMY -->
+
+## NOR.3 R6 — Taxonomía de pruebas por ownership
+
+La suite deja de ser plana y se distribuye en `domain`,
+`portals/asegurado`, `portals/developer`, `shared`, `repository`,
+`governance`, `security` y `regression`. `tests/validation_cases/`
+permanece como soporte de casos de validación.
+
+`tests/shared/` solo contiene contratos realmente multiportal. Las
+pruebas de dominio, gobierno, seguridad o repositorio conservan un
+propietario explícito aunque sean consumidas por más de una superficie.
+
+<!-- NOR3-R7-DATA-SCRIPTS -->
+## NOR.3 R7 — Ownership de data y scripts
+
+`data/` deja de ser una colección plana:
+
+```text
+data/
+├── audits/
+└── governance/
+```
+
+- `data/governance/` contiene ledger, manifiesto de publicación, policy
+  estructural y registro de bloques de trabajo.
+- `data/audits/` contiene evidencia machine-readable derivada de auditorías
+  históricas o de trazabilidad.
+- `data/developer/` permanece local/ignorado; R7 no lo versiona ni lo elimina.
+- `data/.gitkeep` deja de ser necesario porque `data/` contiene estructura real.
+
+`scripts/` fue auditado en R7 y ya se encontraba semánticamente plano: todos
+sus entry points versionados viven directamente bajo `scripts/`. R7 no agrega
+anidamiento artificial ni mueve scripts sin una frontera funcional que lo
+justifique.
+
+<!-- NOR3-R8-CLOSURE -->
+## NOR.3 R8 — cierre estructural
+
+R8 congela como contrato verificable la estructura materializada por NOR.3
+R1–R8:
+
+- `app/portals/asegurado/` y `app/portals/developer/` separan ownership de
+  backend;
+- `app/templates/` y `app/static/` separan Asegurado, Developer y contratos
+  realmente compartidos;
+- `tests/` usa taxonomía por ownership y no admite módulos `test_*.py` planos
+  en su raíz;
+- `data/governance/` contiene estado/política versionados;
+- `data/audits/` contiene evidencia machine-readable;
+- `data/developer/` permanece local e ignorado;
+- `scripts/` conserva entry points versionados planos; `node_modules/` es
+  tooling local/ignorado;
+- el candidato de cierre es G122/E01 (`0.1.22.01-beta`), todavía
+  reservado/no aceptado hasta promoción, integración y revalidación.
+
+La auditoría transversal completa de contenido documental y código no se
+declara ejecutada por R8. Se realizará después de NOR.3 como fase propia,
+posterior a la reconciliación de Issues y al saneamiento de
+Dependabot/seguridad.
