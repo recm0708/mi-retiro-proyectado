@@ -240,6 +240,7 @@ async def favicon_aplicacion():
         path=(
             BASE_DIR
             / "static"
+            / "shared"
             / "img"
             / "brand"
             / "favicon.ico"

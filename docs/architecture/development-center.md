@@ -151,7 +151,7 @@ Incluye:
 - sincronización de `CHANGELOG.md`;
 - sincronización de `docs/architecture/system-architecture.md`;
 - sincronización de `docs/decisions/adr-179-revision-aware-versioning.md`;
-- regresión documental `tests/test_dev2_r4_cierre_final.py`;
+- regresión documental `tests/portals/developer/test_dev2_r4_cierre_final.py`;
 - conservación explícita de VER.2 como cierre transversal posterior.
 
 No incluye:
@@ -440,7 +440,7 @@ previsionales y deja como siguiente trabajo DEV.2 R2.
 La validación local de cierre quedó en:
 
 ```text
-python -m pytest tests\test_dev2_development_center.py -q
+python -m pytest tests\portals\developer\test_dev2_development_center.py -q
 4 passed
 
 python -m pytest -q
@@ -456,7 +456,7 @@ sanitizada controlada, manteniendo `VERSION` y `APP_VERSION` en `0.0.26-beta`.
 La validación local de cierre quedó en:
 
 ```text
-python -m pytest tests\test_dev2_r2_visor_diagnostico.py -q
+python -m pytest tests\portals\developer\test_dev2_r2_visor_diagnostico.py -q
 4 passed
 
 python -m pytest -q
@@ -472,10 +472,10 @@ y `APP_VERSION` en `0.0.26-beta`.
 La validación local de cierre quedó en:
 
 ```text
-python -m pytest tests\test_dev2_r3_autodiagnostico.py -q
+python -m pytest tests\portals\developer\test_dev2_r3_autodiagnostico.py -q
 4 passed
 
-python -m pytest tests\test_dev2_development_center.py tests\test_dev2_r1_cierre_documental.py tests\test_dev2_r2_visor_diagnostico.py tests\test_dev2_r3_autodiagnostico.py -q
+python -m pytest tests\portals\developer\test_dev2_development_center.py tests\portals\developer\test_dev2_r1_cierre_documental.py tests\portals\developer\test_dev2_r2_visor_diagnostico.py tests\portals\developer\test_dev2_r3_autodiagnostico.py -q
 14 passed
 
 python -m pytest -q
@@ -485,10 +485,10 @@ python -m pytest -q
 ## Validación esperada de DEV.2 R4
 
 ```text
-python -m pytest tests\test_dev2_r4_cierre_final.py -q
+python -m pytest tests\portals\developer\test_dev2_r4_cierre_final.py -q
 4 passed
 
-python -m pytest tests\test_dev2_development_center.py tests\test_dev2_r1_cierre_documental.py tests\test_dev2_r2_visor_diagnostico.py tests\test_dev2_r3_autodiagnostico.py tests\test_dev2_r4_cierre_final.py -q
+python -m pytest tests\portals\developer\test_dev2_development_center.py tests\portals\developer\test_dev2_r1_cierre_documental.py tests\portals\developer\test_dev2_r2_visor_diagnostico.py tests\portals\developer\test_dev2_r3_autodiagnostico.py tests\portals\developer\test_dev2_r4_cierre_final.py -q
 18 passed
 
 python -m pytest -q

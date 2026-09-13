@@ -234,10 +234,17 @@ mi-retiro-proyectado/
 │   │   └── developer/
 │   ├── services/
 │   ├── static/
-│   │   ├── css/
-│   │   ├── img/
-│   │   │   └── brand/
-│   │   └── js/
+│   │   ├── asegurado/
+│   │   │   ├── css/
+│   │   │   └── js/
+│   │   ├── developer/
+│   │   │   ├── css/
+│   │   │   └── js/
+│   │   └── shared/
+│   │       ├── css/
+│   │       ├── img/
+│   │       │   └── brand/
+│   │       └── js/
 │   └── templates/
 │       ├── asegurado/
 │       │   └── partials/
@@ -283,6 +290,15 @@ mi-retiro-proyectado/
 ├── regulations/
 ├── scripts/
 ├── tests/
+│   ├── domain/
+│   ├── governance/
+│   ├── portals/
+│   │   ├── asegurado/
+│   │   └── developer/
+│   ├── regression/
+│   ├── repository/
+│   ├── security/
+│   ├── shared/
 │   └── validation_cases/
 ├── .editorconfig
 ├── .gitattributes
@@ -334,7 +350,7 @@ mi-retiro-proyectado/
 | `docs/templates/` | Plantillas documentales y plantillas técnicas por tipo de archivo. |
 | `regulations/` | Parámetros normativos versionados en JSON consumidos por la aplicación. |
 | `scripts/` | Auditores, validadores, herramientas de release y automatización de mantenimiento. |
-| `tests/` | Suite de regresión y contratos permanentes del proyecto. |
+| `tests/` | Suite organizada por ownership semántico: dominio, portales, contratos compartidos, repositorio, gobierno, seguridad y regresión. |
 | `tests/validation_cases/` | Casos sintéticos/versionables para validaciones específicas; los originales privados permanecen fuera de Git. |
 
 Los archivos de la raíz tienen responsabilidades transversales: versión,

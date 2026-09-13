@@ -20,8 +20,8 @@
 "accessibility":
   - changed-files:
       - any-glob-to-any-file:
-          - "app/static/css/accessibility.css"
-          - "app/static/js/accessibility.js"
+          - "app/static/shared/css/accessibility.css"
+          - "app/static/shared/js/accessibility.js"
           - "scripts/visual_a11y_audit.mjs"
           - ".github/workflows/visual-a11y.yml"
 

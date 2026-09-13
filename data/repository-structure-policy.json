@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "phase": "NOR.3 R2",
-  "status": "transitional_pre_physical_moves",
+  "status": "active_physical_ownership",
   "source_issue": 128,
   "description": "Contrato estructural machine-readable derivado del inventario NOR.3 R1.",
   "allowed_root_directories": [
@@ -33,7 +33,15 @@
     "scripts/audit_repository_integrity.py",
     "requirements.txt",
     "requirements-dev.txt",
-    "VERSION"
+    "VERSION",
+    "app/portals/asegurado",
+    "app/portals/developer",
+    "app/templates/asegurado",
+    "app/templates/developer",
+    "app/templates/shared",
+    "app/static/shared",
+    "app/static/asegurado",
+    "app/static/developer"
   ],
   "forbidden_versioned_prefixes": [
     "data/developer/"
@@ -74,7 +82,7 @@
   },
   "semantic_single_child_exceptions": [
     {
-      "path": "app/static/img/brand",
+      "path": "app/static/shared/img/brand",
       "reason": "Namespace runtime de marca compartida."
     },
     {
@@ -99,13 +107,55 @@
     }
   ],
   "future_ownership_contract": {
-    "enforced": false,
+    "enforced": true,
     "activation": "NOR.3 R3-R5",
     "portal_namespaces": {
       "asegurado": "app/portals/asegurado",
       "developer": "app/portals/developer"
     },
     "shared_rule": "Shared solo admite contratos realmente multiportal; dominio compartido no implica namespace shared.",
-    "composition_root": "app/main.py"
+    "composition_root": "app/main.py",
+    "activated_in": "NOR.3 R5",
+    "static_namespaces": {
+      "shared": "app/static/shared",
+      "asegurado": "app/static/asegurado",
+      "developer": "app/static/developer"
+    },
+    "static_shared_contract": {
+      "css": [
+        "accessibility.css",
+        "brand.css",
+        "design-system.css",
+        "motion.css"
+      ],
+      "js": [
+        "accessibility.js",
+        "datetime_ui.js",
+        "interaction_ui.js",
+        "shell_state_boot.js",
+        "shell_ui.js",
+        "theme.js"
+      ],
+      "brand": "app/static/shared/img/brand"
+    }
+  },
+  "test_taxonomy_contract": {
+    "enforced": true,
+    "activation": "NOR.3 R6",
+    "module_roots": [
+      "domain",
+      "portals/asegurado",
+      "portals/developer",
+      "shared",
+      "security",
+      "regression",
+      "repository",
+      "governance"
+    ],
+    "support_roots": [
+      "tests/validation_cases"
+    ],
+    "root_test_modules_allowed": false,
+    "shared_rule": "tests/shared solo admite contratos realmente multiportal; no es categoría de descarte."
   }
 }

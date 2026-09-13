@@ -27,22 +27,13 @@ JavaScript no debe implementar fórmulas previsionales principales, introducir p
 
 ## 3. Presentación
 
-Las páginas heredan de `base.html`.
+Los assets runtime se separan por ownership.
 
-Capas CSS transversales principales:
+Capas CSS shared: `app/static/shared/css/design-system.css`, `accessibility.css`, `brand.css` y `motion.css`.
 
-1. `style.css` — base;
-2. `design-system.css` — tokens/componentes compartidos;
-3. `accessibility.css` — accesibilidad transversal;
-4. `brand.css` — identidad gráfica;
-5. `editable-provenance.css` — procedencia;
-6. `motion.css` — movimiento/feedback generales.
+Asegurado usa `style.css`, `calculation-guide.css`, `editable-provenance.css` y `results.css` bajo `app/static/asegurado/css/`. Developer usa `app/static/developer/css/developer-portal.css`.
 
-`design-system.css` es la única fuente global de tokens `--app-*`; no crear
-`--dev-*`. `motion.css` posee transiciones generales y
-`prefers-reduced-motion`.
-
-Usar tokens semánticos existentes antes de introducir colores literales.
+`style.css` conserva reglas funcionales Asegurado tras retirar contratos shared redundantes; Developer no debe cargarla. `design-system.css` sigue siendo la única autoridad global de tokens `--app-*`.
 
 ## 4. Temas
 
@@ -228,7 +219,7 @@ El gate manual canónico es `python scripts/quality_gate.py --full`. Los comando
 ```powershell
 python -m compileall app
 
-Get-ChildItem .\app\static\js\*.js | ForEach-Object {
+Get-ChildItem .\app\static -Recurse -Filter *.js | ForEach-Object {
     node --check $_.FullName
     if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 }
@@ -271,7 +262,7 @@ Python.
 
 ## 17. Favicon e iconos
 
-La familia gráfica oficial está integrada bajo `app/static/img/brand/`.
+La familia gráfica oficial está integrada bajo `app/static/shared/img/brand/`.
 `/favicon.ico` entrega el favicon oficial y las plantillas App/Developer
 declaran explícitamente sus variantes versionadas. La respuesta temporal
 `204 No Content` quedó retirada al cumplirse la condición de ADR-060.
@@ -332,7 +323,7 @@ La guía acumulativa anterior se conserva en:
 
 ### Campos de fecha
 
-Los nuevos controles `input[type=date]` no deben implementar validadores o anchos particulares salvo una necesidad funcional demostrada. `app/static/js/accessibility.js` aplica el contrato transversal de año de cuatro dígitos, calendario válido y límites técnicos por defecto; `app/static/css/accessibility.css` aplica la geometría compacta responsive. Si una superficie necesita un rango más estricto, debe declarar `min`/`max` en el propio control y la capa global lo conservará.
+Los nuevos controles `input[type=date]` no deben implementar validadores o anchos particulares salvo una necesidad funcional demostrada. `app/static/shared/js/accessibility.js` aplica el contrato transversal de año de cuatro dígitos, calendario válido y límites técnicos por defecto; `app/static/shared/css/accessibility.css` aplica la geometría compacta responsive. Si una superficie necesita un rango más estricto, debe declarar `min`/`max` en el propio control y la capa global lo conservará.
 
 ### Observadores del DOM
 

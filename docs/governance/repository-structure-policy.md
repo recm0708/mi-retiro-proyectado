@@ -1,6 +1,6 @@
 # Política estructural del repositorio
 
-**Estado:** Vigente / NOR.3 R2
+**Estado:** Vigente / NOR.3 R2, enforcement físico activado en R5
 
 **Issue propietario:** #128
 
@@ -8,8 +8,9 @@
 
 ## Objetivo
 
-Convertir las decisiones del inventario NOR.3 R1 en guardas reproducibles sin
-forzar todavía los movimientos físicos reservados para R3–R8.
+Convertir las decisiones del inventario NOR.3 R1 en guardas reproducibles.
+R5 activa el enforcement físico de backend/templates/assets ya materializados,
+mientras R6–R8 completan tests, data y cierre integral.
 
 La política se consume desde `scripts/audit_repository_integrity.py`, que ya
 forma parte de `scripts/quality_gate.py`. Por tanto, una violación estructural
@@ -48,14 +49,25 @@ solo para:
 
 Estas excepciones existen por procedencia y semántica, no para eludir el gate.
 
-## Ownership futuro
+## Ownership materializado
 
-La política registra, pero todavía no exige físicamente, los namespaces
-`app/portals/asegurado` y `app/portals/developer`. Su enforcement se activa
-cuando R3–R5 materialicen backend/templates/assets.
+R3–R5 hacen exigible el ownership de portales, templates y assets. `app/static/shared/`
+contiene contratos multiportal; `app/static/asegurado/` pertenece a la experiencia
+pública y `app/static/developer/` al Portal Developer. La marca runtime vive en
+`app/static/shared/img/brand/`.
 
 ## Regla de mantenimiento
 
 Toda migración estructural posterior debe actualizar en el mismo lote rutas,
 consumidores, política machine-readable, auditor, pruebas y documentación.
 No se aceptan excepciones silenciosas.
+
+<!-- NOR3-R6-TEST-TAXONOMY -->
+
+## NOR.3 R6 — Contrato de pruebas
+
+La política estructural activa una taxonomía de pruebas verificable. No
+se permiten módulos `test_*.py` directamente en `tests/`; cada módulo
+debe tener un único owner semántico. El helper HTTP común reside en
+`tests/shared/` y el discovery recursivo continúa siendo el mecanismo
+canónico.

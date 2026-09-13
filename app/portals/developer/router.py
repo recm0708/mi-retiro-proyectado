@@ -1772,9 +1772,9 @@ def _revision_assets_developer() -> str:
     """Genera una revisión local a partir de los assets Developer."""
 
     rutas = (
-        Path("app/static/css/developer-portal.css"),
-        Path("app/static/js/developer_portal.js"),
-        Path("app/static/js/developer_forms.js"),
+        Path("app/static/developer/css/developer-portal.css"),
+        Path("app/static/developer/js/developer_portal.js"),
+        Path("app/static/developer/js/developer_forms.js"),
     )
 
     revisiones = []

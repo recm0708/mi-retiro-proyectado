@@ -118,28 +118,28 @@ introduce nuevas capas de producto.
 
 ### Presentación CSS y plantillas documentadas
 
-- `app/static/css/calculation-guide.css` — delimita responsabilidades visuales de la guía pública: hero, navegación, fórmulas, tablas, fuentes, accesibilidad y responsive.
+- `app/static/asegurado/css/calculation-guide.css` — delimita responsabilidades visuales de la guía pública: hero, navegación, fórmulas, tablas, fuentes, accesibilidad y responsive.
 - `app/templates/asegurado/calculation_guide.html` — organiza comentarios Jinja por recorrido general, sistemas previsionales, fuentes y cierre sin modificar el HTML renderizado.
 
 ### Presentación JavaScript crítica
 
-- `app/static/js/accessibility.js`
-- `app/static/js/comparator.js` — matriz retiro × salario, advertencias y diferencias sin recalcular pensiones.
-- `app/static/js/current_year_detail.js`
-- `app/static/js/data_management.js` — limpieza controlada de pasos, invalidación descendente y borrado limitado a claves propias.
-- `app/static/js/salary_history.js`
-- `app/static/js/official_data_import.js` — borradores revisables de Mi Retiro Seguro/Ficha Digital, vigencia y confirmación explícita.
-- `app/static/js/timeline.js`
-- `app/static/js/currency.js`
-- `app/static/js/wizard_navigation.js`
-- `app/static/js/privacy.js` — consentimiento versionado, sesión autorizada y borrado defensivo de datos propios.
-- `app/static/js/attachment_processing.js` — estado global accesible y exclusión de dobles ejecuciones durante análisis de archivos.
-- `app/static/js/mi_retiro_seguro_reference.js`
-- `app/static/js/results.js` — contratos de cálculo, comparación acreditado/proyectado, trazabilidad y salida por sistema.
-- `app/static/js/results_orchestration.js` — decisiones de Paso 6, transición Mixto/SUCGS, enlace contextual e impresión sin duplicar fórmulas.
-- `app/static/js/retirement.js`
-- `app/static/js/simulation.js` — estado temporal, navegación de pasos, validación progresiva y dependencias entre módulos.
-- `app/static/js/theme.js`
+- `app/static/shared/js/accessibility.js`
+- `app/static/asegurado/js/comparator.js` — matriz retiro × salario, advertencias y diferencias sin recalcular pensiones.
+- `app/static/asegurado/js/current_year_detail.js`
+- `app/static/asegurado/js/data_management.js` — limpieza controlada de pasos, invalidación descendente y borrado limitado a claves propias.
+- `app/static/asegurado/js/salary_history.js`
+- `app/static/asegurado/js/official_data_import.js` — borradores revisables de Mi Retiro Seguro/Ficha Digital, vigencia y confirmación explícita.
+- `app/static/asegurado/js/timeline.js`
+- `app/static/asegurado/js/currency.js`
+- `app/static/asegurado/js/wizard_navigation.js`
+- `app/static/asegurado/js/privacy.js` — consentimiento versionado, sesión autorizada y borrado defensivo de datos propios.
+- `app/static/asegurado/js/attachment_processing.js` — estado global accesible y exclusión de dobles ejecuciones durante análisis de archivos.
+- `app/static/asegurado/js/mi_retiro_seguro_reference.js`
+- `app/static/asegurado/js/results.js` — contratos de cálculo, comparación acreditado/proyectado, trazabilidad y salida por sistema.
+- `app/static/asegurado/js/results_orchestration.js` — decisiones de Paso 6, transición Mixto/SUCGS, enlace contextual e impresión sin duplicar fórmulas.
+- `app/static/asegurado/js/retirement.js`
+- `app/static/asegurado/js/simulation.js` — estado temporal, navegación de pasos, validación progresiva y dependencias entre módulos.
+- `app/static/shared/js/theme.js`
 
 ## 3. Capas
 
@@ -445,11 +445,11 @@ El patrón se reutiliza en datos personales, cuotas, historial anual y detalle d
 
 ### UX.4.6g R1 — frontera de escenarios de retiro
 
-Paso 5 mantiene dos capas separadas: `app/static/js/retirement.js` propone y conserva la selección visible, mientras `app/services/retirement.py` construye fechas/cuotas sin decidir elegibilidad. Las sugerencias posteriores se derivan de la cobertura de Paso 4; las elecciones anticipadas requieren acción explícita. `app/engines/elegibilidad.py` y los motores de prestaciones continúan siendo la frontera jurídica para determinar modalidad y factores.
+Paso 5 mantiene dos capas separadas: `app/static/asegurado/js/retirement.js` propone y conserva la selección visible, mientras `app/services/retirement.py` construye fechas/cuotas sin decidir elegibilidad. Las sugerencias posteriores se derivan de la cobertura de Paso 4; las elecciones anticipadas requieren acción explícita. `app/engines/elegibilidad.py` y los motores de prestaciones continúan siendo la frontera jurídica para determinar modalidad y factores.
 
 ### Contrato transversal de fechas
 
-`app/static/js/accessibility.js` aplica de forma idempotente validación y clase visual a todos los `input[type=date]`, incluidos controles dinámicos. `app/static/css/accessibility.css` define la geometría compacta común. Las superficies pueden declarar límites `min`/`max` más restrictivos; la capa transversal solo aporta valores por defecto cuando faltan. Paso 5 consume este contrato y añade exclusivamente la explicación de cobertura contra el horizonte salarial.
+`app/static/shared/js/accessibility.js` aplica de forma idempotente validación y clase visual a todos los `input[type=date]`, incluidos controles dinámicos. `app/static/shared/css/accessibility.css` define la geometría compacta común. Las superficies pueden declarar límites `min`/`max` más restrictivos; la capa transversal solo aporta valores por defecto cuando faltan. Paso 5 consume este contrato y añade exclusivamente la explicación de cobertura contra el horizonte salarial.
 
 ## 14. Guía pública de cálculo
 
@@ -564,7 +564,7 @@ El cambio de contraseña propia incrementa `security_version`; las sesiones prev
 ## Movimiento e interacción transversal
 
 La Aplicación principal, el Portal Developer y cualquier superficie web futura
-comparten un único contrato de movimiento. `app/static/css/motion.css` consume
+comparten un único contrato de movimiento. `app/static/shared/css/motion.css` consume
 las duraciones y la curva definidas por `design-system.css`, sin declarar una
 segunda familia de tokens. Las entradas de página, microinteracciones, feedback
 y transiciones deben reutilizar ese contrato en lugar de crear animaciones
@@ -575,7 +575,7 @@ animación para comunicar su resultado. Cuando el sistema solicita
 `prefers-reduced-motion: reduce`, la duración de animaciones y transiciones se
 reduce al mínimo y se eliminan desplazamientos decorativos.
 
-`app/static/js/interaction_ui.js` proporciona clases de compatibilidad para
+`app/static/shared/js/interaction_ui.js` proporciona clases de compatibilidad para
 estados visuales que no deben depender exclusivamente de selectores CSS
 modernos como `:has()`. La lógica de negocio y la accesibilidad semántica
 continúan funcionando aunque el navegador no aplique esos selectores.
@@ -592,3 +592,12 @@ corresponde, las tablas desplazables conservan foco visible y las cabeceras
 reducen información secundaria en pantallas estrechas sin eliminar nombres
 accesibles. Los modos `forced-colors` y `prefers-reduced-motion` forman parte
 del contrato mínimo para superficies actuales y futuras.
+
+<!-- NOR3-R6-TEST-TAXONOMY -->
+
+## NOR.3 R6 — Fronteras de validación
+
+La arquitectura de pruebas refleja las fronteras de ownership del
+runtime: dominio, Portal Asegurado, Portal Developer y contratos
+compartidos. `repository`, `governance`, `security` y `regression`
+separan controles transversales sin mezclarlos con los portales.

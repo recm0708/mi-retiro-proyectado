@@ -77,7 +77,7 @@ Estos archivos se destinan a documentación, GitHub y otras superficies de prese
 
 La aplicación consume únicamente derivados necesarios bajo:
 
-`app/static/img/brand/`
+`app/static/shared/img/brand/`
 
 Inventario:
 
@@ -92,7 +92,7 @@ Inventario:
 
 El ICO vigente contiene 16 × 16, 32 × 32, 48 × 48 y 256 × 256.
 
-La plantilla global declara explícitamente favicon PNG/ICO y Apple Touch icon. La capa `app/static/css/brand.css` controla únicamente presentación de marca y se mantiene separada del sistema visual transversal.
+La plantilla global declara explícitamente favicon PNG/ICO y Apple Touch icon. La capa `app/static/shared/css/brand.css` controla únicamente presentación de marca y se mantiene separada del sistema visual transversal.
 
 ## 7. Temas y accesibilidad
 

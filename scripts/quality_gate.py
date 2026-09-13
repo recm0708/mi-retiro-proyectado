@@ -200,8 +200,7 @@ def tracked_javascript_files() -> list[Path]:
             "git",
             "ls-files",
             "--",
-            ":(glob)app/static/js/**/*.js",
-            "app/static/js/*.js",
+            ":(glob)app/static/**/*.js",
         ]
     )
 

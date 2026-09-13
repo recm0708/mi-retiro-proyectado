@@ -36,10 +36,17 @@ app/
 │   └── developer/
 ├── services/
 ├── static/
-│   ├── css/
-│   ├── img/
-│   │   └── brand/
-│   └── js/
+│   ├── asegurado/
+│   │   ├── css/
+│   │   └── js/
+│   ├── developer/
+│   │   ├── css/
+│   │   └── js/
+│   └── shared/
+│       ├── css/
+│       ├── img/
+│       │   └── brand/
+│       └── js/
 └── templates/
     ├── asegurado/
     │   └── partials/
@@ -73,6 +80,15 @@ regulations/
 scripts/
 
 tests/
+├── domain/
+├── governance/
+├── portals/
+│   ├── asegurado/
+│   └── developer/
+├── regression/
+├── repository/
+├── security/
+├── shared/
 └── validation_cases/
 ```
 
@@ -95,6 +111,10 @@ directorio ignorado no lo convierte en parte de la arquitectura canónica.
 
 Las carpetas de herramientas o ecosistemas conservan su nombre convencional
 cuando cambiarlo rompería integración o semántica externa.
+
+## Ownership de assets runtime
+
+NOR.3 R5 materializa `app/static/shared/`, `app/static/asegurado/` y `app/static/developer/`. `style.css` queda en Asegurado después de retirar contratos transversales redundantes; Developer no depende de esa hoja. La marca runtime única vive en `shared/img/brand/`.
 
 ## Estructura documental
 
@@ -185,3 +205,16 @@ paquetes de entrega, copias de trabajo ni evidencia generada para una revisión.
 Cuando un documento o archivo sea sustituido, Git conserva las versiones
 anteriores. La permanencia adicional bajo `docs/archive/` se justifica solo
 cuando el artefacto histórico sigue siendo parte útil de la trazabilidad.
+
+<!-- NOR3-R6-TEST-TAXONOMY -->
+
+## NOR.3 R6 — Taxonomía de pruebas por ownership
+
+La suite deja de ser plana y se distribuye en `domain`,
+`portals/asegurado`, `portals/developer`, `shared`, `repository`,
+`governance`, `security` y `regression`. `tests/validation_cases/`
+permanece como soporte de casos de validación.
+
+`tests/shared/` solo contiene contratos realmente multiportal. Las
+pruebas de dominio, gobierno, seguridad o repositorio conservan un
+propietario explícito aunque sean consumidas por más de una superficie.

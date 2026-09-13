@@ -352,7 +352,7 @@ Las regresiones documentales deben validar la diferencia entre historia y estado
 - Todo tag formal nuevo se crea con `git tag -s` y debe verificarse antes de declarar cerrado el hito.
 - La visibilidad pública del repositorio de código no cambia por sí sola la versión de producto, el estado de despliegue ni la licencia aplicable.
 - Las expresiones históricas sustituidas no pueden volver a utilizarse como objetivo vigente.
-- El contrato histórico protegido por `tests/test_plan1_guard_referencias_historicas.py` evita borrar referencias legacy necesarias para auditar cierres anteriores.
+- El contrato histórico protegido por `tests/governance/test_plan1_guard_referencias_historicas.py` evita borrar referencias legacy necesarias para auditar cierres anteriores.
 
 ### 3.1. Desarrollo pre-beta
 

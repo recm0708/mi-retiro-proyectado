@@ -15,23 +15,23 @@
 
   <link
     rel="icon"
-    href="{{ url_for('static', path='/img/brand/favicon.ico') }}?v={{ static_revision }}"
+    href="{{ url_for('static', path='/shared/img/brand/favicon.ico') }}?v={{ static_revision }}"
     sizes="any"
   >
   <link
     rel="icon"
     type="image/png"
     sizes="32x32"
-    href="{{ url_for('static', path='/img/brand/favicon-32x32.png') }}?v={{ static_revision }}"
+    href="{{ url_for('static', path='/shared/img/brand/favicon-32x32.png') }}?v={{ static_revision }}"
   >
   <link
     rel="apple-touch-icon"
     sizes="180x180"
-    href="{{ url_for('static', path='/img/brand/apple-touch-icon.png') }}?v={{ static_revision }}"
+    href="{{ url_for('static', path='/shared/img/brand/apple-touch-icon.png') }}?v={{ static_revision }}"
   >
 
-  <script src="{{ url_for('static', path='/js/theme.js') }}?v={{ static_revision }}"></script>
-  <script src="{{ url_for('static', path='/js/shell_state_boot.js') }}?v={{ static_revision }}"></script>
+  <script src="{{ url_for('static', path='/shared/js/theme.js') }}?v={{ static_revision }}"></script>
+  <script src="{{ url_for('static', path='/shared/js/shell_state_boot.js') }}?v={{ static_revision }}"></script>
 
   <link
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
@@ -42,28 +42,24 @@
 
   <link
     rel="stylesheet"
-    href="{{ url_for('static', path='/css/style.css') }}?v={{ static_revision }}"
+    href="{{ url_for('static', path='/shared/css/design-system.css') }}?v={{ static_revision }}"
   >
   <link
     rel="stylesheet"
-    href="{{ url_for('static', path='/css/design-system.css') }}?v={{ static_revision }}"
+    href="{{ url_for('static', path='/shared/css/accessibility.css') }}?v={{ static_revision }}"
   >
   <link
     rel="stylesheet"
-    href="{{ url_for('static', path='/css/accessibility.css') }}?v={{ static_revision }}"
+    href="{{ url_for('static', path='/shared/css/brand.css') }}?v={{ static_revision }}"
   >
   <link
     rel="stylesheet"
-    href="{{ url_for('static', path='/css/brand.css') }}?v={{ static_revision }}"
-  >
-  <link
-    rel="stylesheet"
-    href="{{ url_for('static', path='/css/developer-portal.css') }}?v={{ dev_assets_revision }}"
+    href="{{ url_for('static', path='/developer/css/developer-portal.css') }}?v={{ dev_assets_revision }}"
   >
 
   <link
     rel="stylesheet"
-    href="{{ url_for('static', path='/css/motion.css') }}?v={{ static_revision }}"
+    href="{{ url_for('static', path='/shared/css/motion.css') }}?v={{ static_revision }}"
   >
 
   {% block head %}{% endblock %}
@@ -107,7 +103,7 @@
         <span class="dev-brand-mark app-brand-mark" aria-hidden="true">
           <img
             class="app-brand-mark-image"
-            src="{{ url_for('static', path='/img/brand/logo-mark-128.png') }}?v={{ static_revision }}"
+            src="{{ url_for('static', path='/shared/img/brand/logo-mark-128.png') }}?v={{ static_revision }}"
             alt=""
             width="128"
             height="128"
@@ -534,23 +530,23 @@
   ></script>
 
   <script
-    src="{{ url_for('static', path='/js/accessibility.js') }}?v={{ static_revision }}"
+    src="{{ url_for('static', path='/shared/js/accessibility.js') }}?v={{ static_revision }}"
   ></script>
 
-  <script src="{{ url_for('static', path='/js/datetime_ui.js') }}?v={{ static_revision }}"></script>
+  <script src="{{ url_for('static', path='/shared/js/datetime_ui.js') }}?v={{ static_revision }}"></script>
 
   <script
-    src="{{ url_for('static', path='/js/shell_ui.js') }}?v={{ static_revision }}"
+    src="{{ url_for('static', path='/shared/js/shell_ui.js') }}?v={{ static_revision }}"
   ></script>
 
   <script
-    src="{{ url_for('static', path='/js/developer_portal.js') }}?v={{ dev_assets_revision }}"
+    src="{{ url_for('static', path='/developer/js/developer_portal.js') }}?v={{ dev_assets_revision }}"
   ></script>
 
 
-  <script src="{{ url_for('static', path='/js/developer_forms.js') }}?v={{ dev_assets_revision }}"></script>
+  <script src="{{ url_for('static', path='/developer/js/developer_forms.js') }}?v={{ dev_assets_revision }}"></script>
   <script
-    src="{{ url_for('static', path='/js/interaction_ui.js') }}?v={{ static_revision }}"
+    src="{{ url_for('static', path='/shared/js/interaction_ui.js') }}?v={{ static_revision }}"
   ></script>
 
   {% block scripts %}{% endblock %}

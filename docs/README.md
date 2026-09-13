@@ -184,9 +184,9 @@ La publicación del repositorio no elimina la revisión jurídica externa ni cua
 ## 10. Validación y calidad
 
 - **[Validación](operations/validation.md)** — estrategia y evidencias.
-- [`../tests/test_ver2_ledger_estructurado.py`](../tests/test_ver2_ledger_estructurado.py) — regresiones del ledger JSON y sus invariantes.
-- [`../tests/test_ver2_version_revision_aware.py`](../tests/test_ver2_version_revision_aware.py) — regresiones del esquema revision-aware.
-- [`../tests/test_ver2_documentacion_vigente.py`](../tests/test_ver2_documentacion_vigente.py) — coherencia de superficies vigentes durante VER.2.
+- [`../tests/governance/test_ver2_ledger_estructurado.py`](../tests/governance/test_ver2_ledger_estructurado.py) — regresiones del ledger JSON y sus invariantes.
+- [`../tests/governance/test_ver2_version_revision_aware.py`](../tests/governance/test_ver2_version_revision_aware.py) — regresiones del esquema revision-aware.
+- [`../tests/governance/test_ver2_documentacion_vigente.py`](../tests/governance/test_ver2_documentacion_vigente.py) — coherencia de superficies vigentes durante VER.2.
 - **[Casos de validación](../tests/validation_cases/README.md)** — reglas de casos sintéticos/anonimizados.
 - `../.github/workflows/quality-gate.yml` — gate canónico del repositorio y compatibilidad Python.
 - `../.github/workflows/dependency-security.yml` — seguridad de dependencias y supply chain.
