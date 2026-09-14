@@ -19,7 +19,7 @@
     "next_functional_global_if_accepted": null,
     "edition": null,
     "planning_issue": 155,
-    "next_global_available": 123
+    "next_global_available": 124
   },
   "families": [
     {
@@ -445,6 +445,18 @@
       "reusable_for_different_scope": false
     },
     {
+      "identifier": "MANT.2",
+      "family": "MANT",
+      "kind": "block",
+      "status": "accepted_pending_publication_r1",
+      "meaning": "Bloque recurrente exclusivo para PRs/alerts de Dependabot. R1 queda aceptado localmente como G123/E01 y permanece en promoción; solo cierra después de PR/merge, revalidación de main, tag firmado y GitHub Release prerelease. Futuras R2+ interrumpen la fase planificada cuando exista trabajo material pendiente.",
+      "evidence": "Issue #167; G123/E01; Quality Gate post-promoción local 11/11; 1588 unittest OK; pytest 1628 passed + 7767 subtests; pip-audit y npm audit verdes; publicación pendiente.",
+      "global_refs": [
+        "G123"
+      ],
+      "reusable_for_different_scope": false
+    },
+    {
       "identifier": "DOC.1",
       "family": "DOC",
       "kind": "block",
@@ -470,6 +482,16 @@
       "global_refs": [
         "G111"
       ],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "DOC.3",
+      "family": "DOC",
+      "kind": "block",
+      "status": "planned_reserved",
+      "meaning": "Auditoría documental integral periódica post-fase material. R1 corresponde al Issue #154 y comienza únicamente después de cerrar/publicar MANT.1 R8/#163.",
+      "evidence": "Issue #154; identificador formal resuelto como DOC.3 R1. Reserva machine-readable anticipada sin Global ni VERSION; materialización propia pendiente después de MANT.1 R8.",
+      "global_refs": [],
       "reusable_for_different_scope": false
     },
     {

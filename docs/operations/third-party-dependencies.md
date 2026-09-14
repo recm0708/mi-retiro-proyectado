@@ -1,12 +1,12 @@
 # Dependencias y terceros
 
 **Estado:** Vigente
-**Versión de aplicación revisada:** `0.1.22.01-beta`
+**Versión de aplicación revisada:** `0.1.23.01-beta`
 **Versión base histórica:** `0.0.25-beta`
 **Versión base histórica preservada:** `0.0.23-beta`
 **Base documental:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal histórica:** GOV.1.5 R3 — 2026-08-18
-**Última revisión documental:** mantenimiento post-G119 — 2026-08-31
+**Última revisión documental:** MANT.2 R1 — 2026-09-14
 **Clasificación:** Técnica / Terceros / Auditoría
 
 Este inventario distingue dependencias directas, snapshot transitivo, recursos externos y servicios de red. GOV.1.7 adopta una licencia propietaria para materiales originales sin relicenciar dependencias upstream.
@@ -21,7 +21,7 @@ Las versiones corresponden al `requirements.txt` vigente. La estructura document
 | Jinja2 | 3.1.6 | Plantillas HTML | BSD-3-Clause | Render local del servidor | Revisar autoescape/plantillas |
 | Pydantic | 2.13.5 | Validación/modelos | MIT | Validación local de estructuras | Revisar cambios de esquema/core |
 | python-multipart | 0.0.32 | Recepción multipart de archivos | Apache-2.0 | Procesa cargas recibidas por FastAPI | Sensible a frontera de upload |
-| pypdf | 6.16.2 | Extracción y lectura controlada de PDF | BSD-3-Clause | Procesa PDF en memoria; sin red propia | Dependencia crítica de parser; mantener regresiones específicas en cada actualización |
+| pypdf | 6.18.1 | Extracción y lectura controlada de PDF | BSD-3-Clause | Procesa PDF en memoria; sin red propia | Dependencia crítica de parser; mantener regresiones específicas en cada actualización |
 | Uvicorn | 0.52.4 | Servidor ASGI | BSD-3-Clause | Sirve la aplicación; la red depende del modo de ejecución | Revisar configuración de despliegue |
 
 Fuentes upstream de licencia verificadas documentalmente:
@@ -50,7 +50,7 @@ El runtime Python continúa definido por `requirements.txt`. Las herramientas de
 desarrollo y automatización se mantienen separadas:
 
 - `pytest 9.1.1` mediante `requirements-dev.txt`;
-- `playwright 1.62.1` mediante `scripts/package.json`;
+- `playwright 1.63.0` mediante `scripts/package.json`;
 - `@axe-core/playwright 4.13.0` mediante `scripts/package.json`;
 - `pip-audit 2.10.1` instalado de forma reproducible por
   `dependency-security.yml`.
@@ -150,7 +150,25 @@ Antes de aceptar una actualización:
 6. revisar importadores si cambia `pypdf`/multipart;
 7. actualizar este documento si cambia versión, licencia, función, riesgo o conexión.
 
-### 7.1. Mantenimiento pre-G118
+### 7.1. MANT.2 R1 — Dependabot y remediación post-G122
+
+MANT.2 R1 introduce una actualización coordinada del snapshot y del tooling
+después de la auditoría de Dependabot posterior a G122:
+
+- `httpx2 2.7.0` → `2.12.0` y `httpcore2 2.7.0` → `2.12.0`, en lockstep
+  upstream, para cubrir los cinco advisories únicos activos detectados por
+  Dependabot;
+- `pypdf 6.16.2` → `6.18.1`, sustituyendo el PR Dependabot #160 que quedó
+  desactualizado en `6.18.0`;
+- `playwright 1.62.1` → `1.63.0`, coordinando `package.json`, lockfile,
+  regresión de tooling y validación Visual/A11y.
+
+La aceptación de estas versiones exige instalación reproducible, `pip check`,
+`pip-audit --strict`, `npm audit`, regresiones específicas, suite completa y
+Quality Gate. Los 37 alerts históricos revisados permanecen en estado `fixed`;
+no se reescribe su evidencia histórica.
+
+### 7.2. Mantenimiento pre-G118
 
 El mantenimiento pre-G118 actualiza las dos dependencias directas propuestas por Dependabot sin consumir un Global ni modificar `VERSION`:
 
@@ -159,7 +177,7 @@ El mantenimiento pre-G118 actualiza las dos dependencias directas propuestas por
 
 Los guards de inventario obtienen la versión esperada desde `requirements.txt` y exigen que esta documentación y `THIRD_PARTY_NOTICES.md` permanezcan sincronizados con el pin vigente.
 
-### 7.2. Antecedente histórico G062
+### 7.3. Antecedente histórico G062
 
 La actualización a `pypdf 6.16.1` conservó las regresiones específicas introducidas con `6.15.0`. El salto `6.15.0` → `6.16.1` incorporó correcciones upstream de seguridad y robustez relacionadas con ciclos e iteraciones limitadas durante el procesamiento PDF.
 

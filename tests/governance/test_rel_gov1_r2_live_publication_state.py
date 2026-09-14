@@ -66,7 +66,7 @@ class TestRelGovR2LivePublicationState(unittest.TestCase):
         )
         self.assertIn("v0.1.16.05-beta", releases)
 
-    def test_security_preserva_historia_y_declara_g122_vigente(self):
+    def test_security_preserva_historia_y_declara_g123_vigente(self):
         text = (ROOT / "SECURITY.md").read_text(encoding="utf-8")
         self.assertIn(
             "| `0.1.18.04-beta` | Beta previa G118/E04 publicada",
@@ -85,7 +85,11 @@ class TestRelGovR2LivePublicationState(unittest.TestCase):
             text,
         )
         self.assertIn(
-            "| `0.1.22.01-beta` | Beta vigente G122/E01 materializada",
+            "| `0.1.22.01-beta` | Beta previa G122/E01 publicada",
+            text,
+        )
+        self.assertIn(
+            "| `0.1.23.01-beta` | Beta vigente G123/E01 en promoción",
             text,
         )
 

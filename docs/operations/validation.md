@@ -1,13 +1,13 @@
 # Validación
 
 **Estado:** Vigente
-**Versión revisada:** `0.1.22.01-beta` — G122/E01 integrado/aceptado para NOR.3 R8 mediante PR #162 / merge `b97cf61763479b80b8e8724b878089e8bb20fa00`.
+**Versión revisada:** `0.1.23.01-beta` — G123/E01 en promoción para MANT.2 R1.
 **Versión base histórica:** `0.0.25-beta`
 **Base documental histórica:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal histórica preservada:** UX.4.6e R8 — validación funcional y procedencia editable — 2026-08-19
 **Última revisión transversal:** UX.4.6f R2 integrada y cierre del Paso 4 — 2026-08-20
 **Revisión de normalización:** NOR.1 R7 — cierre de estándares y preparación de NOR.2 — 2026-08-24
-**Última revisión operativa:** NOR.3 R8 — G122/E01 post-merge — 2026-09-13
+**Última revisión operativa:** MANT.2 R1 — G123/E01 post-promoción local — 2026-09-14
 **Clasificación:** Técnica / Calidad
 **Naturaleza documental:** Registro vivo acumulativo — mantiene la estrategia vigente y evidencia histórica de gates protegida por regresiones; los resultados históricos no se reescriben como si pertenecieran al estado actual.
 
@@ -733,7 +733,7 @@ python -m pip check
 
 ## 3. Inventario actual de pruebas
 
-Inventario vigente: **217 módulos**.
+Inventario vigente: **218 módulos**.
 
 La taxonomía NOR.3 conserva ownership semántico, discovery recursivo y contratos permanentes R1–R8 + G122.
 
@@ -954,6 +954,8 @@ La taxonomía NOR.3 conserva ownership semántico, discovery recursivo y contrat
 - `tests/shared/test_ux6_r3_r4_motion_accessibility.py`
 - `tests/shared/test_visual_identity_pre_r8.py`
 - `tests/shared/test_visual_stabilization.py`
+- `tests/governance/test_g123_mant2_promotion.py`
+
 ## 4. Categorías
 
 - núcleo/servicios;

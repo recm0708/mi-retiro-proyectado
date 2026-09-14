@@ -635,7 +635,7 @@ class TestAutomationCoreQualityGate(unittest.TestCase):
         )
 
         self.assertIn(
-            '"playwright": "1.62.1"',
+            '"playwright": "1.63.0"',
             package,
         )
 

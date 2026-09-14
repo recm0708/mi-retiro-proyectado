@@ -3,10 +3,21 @@
 **Proyecto:** Mi Retiro Proyectado
 **Base auditada:** `7037addd44253e528c77460b678d2b3ccd540dd5`
 **Contador histórico en la base `7037addd`:** **G070**
-**Contador aceptado reconciliado vigente:** **G122**
-**Siguiente Global disponible:** **G123**
-**Siguiente candidato disponible:** **ninguno asignado** — G123 permanece disponible sin bloque preasignado; MANT.1 R8 / #163 es la siguiente fase material tras publicar G122/NOR.3
+**Contador aceptado reconciliado vigente:** **G123**
+**Siguiente Global disponible:** **G124**
+**Siguiente candidato disponible:** **ninguno asignado** — G124 permanece disponible sin bloque preasignado; MANT.1 R8/#163 es la siguiente fase material después de publicar G123/MANT.2 R1
 
+
+<!-- MANT2-G123-PROMOTION:START -->
+## Estado MANT.2 R1 / promoción G123-E01
+
+- `VERSION` materializa `0.1.23.01-beta` para MANT.2 R1 / G123-E01.
+- Dependencias coordinadas: `httpx2/httpcore2 2.12.0`, `pypdf 6.18.1` y Playwright 1.63.0.
+- Pre-promoción: Quality Gate 11 PASS / 0 FAIL; 1584 unittest; pytest 1624 + 7767 subtests; pip-audit y npm audit verdes.
+- Post-promoción local: Quality Gate 11 PASS / 0 FAIL; 1588 unittest; pytest 1628 + 7767 subtests; publicación remota pendiente.
+- G124 queda disponible sin candidato/bloque preasignado.
+- MANT.1 R8/#163 comienza después de publicar G123.
+<!-- MANT2-G123-PROMOTION:END -->
 
 <!-- NOR3-G122-PROMOTION:START -->
 ## Estado post-NOR.3 / promoción G122-E01

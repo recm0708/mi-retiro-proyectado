@@ -2,8 +2,8 @@
   "schema_version": 1,
   "project": "Mi Retiro Proyectado",
   "base_commit": "7037addd44253e528c77460b678d2b3ccd540dd5",
-  "accepted_count": 122,
-  "next_global_if_ver2_accepted": 123,
+  "accepted_count": 123,
+  "next_global_if_ver2_accepted": 124,
   "next_candidate": null,
   "historical_tags_immutable": {
     "from": "v0.0.1-beta",
@@ -1112,6 +1112,16 @@
       "state": "R8 — cierre estructural integral NOR.3 R1–R8: ownership, portales, templates/assets, taxonomía de pruebas, data/scripts, policy y documentación estructural",
       "anchor": "0.1.22.01-beta",
       "evidence": "PR #162 / merge b97cf61763479b80b8e8724b878089e8bb20fa00; R5-R6 firmado b54b2d27e78d08e62d54873b749af1f99a6ce120; R7 FULL 11 PASS / 0 FAIL, 1574 unittest, 1614 pytest + 7708 subtests; R8 FULL 11 PASS / 0 FAIL, 1579 unittest, 1619 pytest + 7708 subtests; revalidación post-merge de main 11 PASS / 0 FAIL, 1584 unittest OK, 1624 pytest + 7750 subtests; Visual & Accessibility y CodeQL en success; 171 Markdown; 27 JavaScript"
+    },
+    {
+      "global_revision": 123,
+      "block": "MANT.2",
+      "ordinal": 1,
+      "functional_revision": "R1",
+      "revision_aware": "0.1.23.01-beta",
+      "state": "R1 — Dependabot y remediación coordinada post-G122",
+      "anchor": "0.1.23.01-beta",
+      "evidence": "Issue #167; pre-promoción Quality Gate 11 PASS / 0 FAIL, 1584 unittest OK y pytest 1624 passed / 7767 subtests; post-promoción local Quality Gate 11 PASS / 0 FAIL, 1588 unittest OK y pytest 1628 passed / 7767 subtests; pip-audit sin vulnerabilidades; npm audit 0 vulnerabilidades; publicación remota pendiente."
     }
   ],
   "excluded": [
@@ -1189,13 +1199,13 @@
     }
   ],
   "reconciled_through_commit": "b97cf61763479b80b8e8724b878089e8bb20fa00",
-  "reconciliation_date": "2026-09-13",
-  "next_global": 123,
+  "reconciliation_date": "2026-09-14",
+  "next_global": 124,
   "next_candidate_block": null,
   "next_candidate_assignment": {
-    "state": "unassigned_pending_post_nor3_replanning",
-    "next_global_available": 123,
+    "state": "unassigned_pending_post_mant2",
+    "next_global_available": 124,
     "issue": 155,
-    "reason": "G123 permanece sin candidato ni bloque preasignado. Después de la publicación definitiva de G122/NOR.3, la continuidad obligatoria es MANT.1 R8 / #163 → #154 → #155 → VER.2 R6 / #164 antes de PERSIST.1; la replanificación #155 no reserva por sí sola un estado revision-aware."
+    "reason": "G123/E01 materializa MANT.2 R1. G124 queda sin candidato. La continuidad es MANT.1 R8/#163 → DOC.3 R1/#154 → PLAN.2 R2/#155 → VER.2 R6/#164 → PERSIST.1/#130."
   }
 }

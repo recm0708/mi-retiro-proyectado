@@ -1,7 +1,7 @@
 # Matriz de trazabilidad
 
 **Estado:** Vigente
-**Versión de aplicación:** `0.1.22.01-beta` — G122/E01 integrado/aceptado para NOR.3 R8 mediante PR #162 / merge `b97cf61763479b80b8e8724b878089e8bb20fa00`; G121/E01 permanece publicado
+**Versión de aplicación:** `0.1.23.01-beta` — G123/E01 en promoción para MANT.2 R1; G122/E01 permanece publicado como cierre NOR.3.
 **Último tag formal legacy:** `v0.0.26-beta`
 **Base histórica:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal:** NOR.2 R8 — 2026-08-24

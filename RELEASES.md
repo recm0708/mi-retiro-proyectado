@@ -1,6 +1,18 @@
 # Registro de versiones y estados del proyecto
 
 
+<!-- MANT2-R1-PROMOTION:START -->
+## Promoción G123/E01 — MANT.2 R1
+
+- G123/E01 (`0.1.23.01-beta`) materializa MANT.2 R1.
+- `httpx2`/`httpcore2`: 2.12.0; `pypdf`: 6.18.1; Playwright: 1.63.0.
+- Pre-promoción: Quality Gate 11 PASS / 0 FAIL; 1584 unittest; pytest 1624 + 7767 subtests; pip-audit y npm audit verdes.
+- Post-promoción local: Quality Gate 11 PASS / 0 FAIL; 1588 unittest; pytest 1628 + 7767 subtests; Markdown, identificadores y diff check verdes.
+- Issue #167. Los PRs Dependabot #160/#161 serán sustituidos por la integración coordinada.
+- G124 queda disponible sin candidato.
+- El tag `v0.1.23.01-beta` y GitHub Release prerelease se crean solo después de merge y revalidación de `main`.
+<!-- MANT2-R1-PROMOTION:END -->
+
 <!-- NOR3-R8-PROMOTION:START -->
 ## Promoción G122/E01 — NOR.3 R8
 
