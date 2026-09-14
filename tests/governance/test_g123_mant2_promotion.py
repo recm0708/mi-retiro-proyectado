@@ -33,8 +33,10 @@ class TestG123MANT2Promotion(unittest.TestCase):
     def test_registry_y_manifest(self):
         registry = json.loads((ROOT / "data/governance/work-block-registry.json").read_text(encoding="utf-8"))
         ids = {x["identifier"]: x for x in registry["identifiers"]}
-        self.assertEqual("accepted_pending_publication_r1", ids["MANT.2"]["status"])
+        self.assertEqual("closed", ids["MANT.2"]["status"])
         self.assertEqual(["G123"], ids["MANT.2"]["global_refs"])
+        self.assertIn("PR #168", ids["MANT.2"]["evidence"])
+        self.assertIn("7781 subtests", ids["MANT.2"]["evidence"])
         self.assertEqual(124, registry["current_candidate"]["next_global_available"])
 
         manifest = json.loads((ROOT / "data/governance/release-publication-manifest.json").read_text(encoding="utf-8"))

@@ -1,7 +1,7 @@
 # Validación
 
 **Estado:** Vigente
-**Versión revisada:** `0.1.23.01-beta` — G123/E01 en promoción para MANT.2 R1.
+**Versión revisada:** `0.1.23.01-beta` — G123/E01 integrado/aceptado para MANT.2 R1; publicación formal pendiente.
 **Versión base histórica:** `0.0.25-beta`
 **Base documental histórica:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal histórica preservada:** UX.4.6e R8 — validación funcional y procedencia editable — 2026-08-19

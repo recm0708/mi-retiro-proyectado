@@ -448,9 +448,9 @@
       "identifier": "MANT.2",
       "family": "MANT",
       "kind": "block",
-      "status": "accepted_pending_publication_r1",
-      "meaning": "Bloque recurrente exclusivo para PRs/alerts de Dependabot. R1 queda aceptado localmente como G123/E01 y permanece en promoción; solo cierra después de PR/merge, revalidación de main, tag firmado y GitHub Release prerelease. Futuras R2+ interrumpen la fase planificada cuando exista trabajo material pendiente.",
-      "evidence": "Issue #167; G123/E01; Quality Gate post-promoción local 11/11; 1588 unittest OK; pytest 1628 passed + 7767 subtests; pip-audit y npm audit verdes; publicación pendiente.",
+      "status": "closed",
+      "meaning": "Bloque recurrente exclusivo para PRs/alerts de Dependabot. R1 queda integrado y aceptado como G123/E01 después de PR #168, merge y revalidación completa de main; la publicación formal del estado aceptado queda pendiente únicamente de tag firmado y GitHub Release prerelease. Futuras R2+ interrumpen la fase planificada cuando exista trabajo material pendiente.",
+      "evidence": "Issue #167; PR #168; merge 1a3942a6c14ab047fe8bc587c21b9b96cf62f2bd; #160/#161 cerrados como superseded; Dependabot alerts abiertos=0; Repository Quality Gate, Python Compatibility, Dependency Security, Visual & Accessibility y CodeQL post-merge en success; revalidación local de main 11 PASS / 0 FAIL; 1588 unittest OK; pytest 1628 passed + 7781 subtests; pip-audit sin vulnerabilidades; npm audit 0 vulnerabilidades; tag/release pendiente.",
       "global_refs": [
         "G123"
       ],

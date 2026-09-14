@@ -5,7 +5,7 @@
   "revision": "R1",
   "summary": [
     "G123/E01 materializa MANT.2 R1 como fase recurrente exclusiva de Dependabot.",
-    "La fase remedia localmente el lote detectado y coordina pypdf, httpx2/httpcore2 y Playwright; el cierre remoto depende del PR/merge y del preflight post-merge."
+    "La integración coordinada quedó aceptada en main mediante PR #168; el bloque cerró materialmente con 0 Dependabot alerts abiertos y publicación formal pendiente de tag firmado y GitHub Release prerelease."
   ],
   "changes": [
     "MANT.2 R1 queda materializado como G123/E01.",
@@ -16,19 +16,23 @@
     "G124 queda disponible sin bloque preasignado."
   ],
   "validation": [
-    "Repository Quality Gate FULL post-promoción local: 11 PASS / 0 FAIL.",
+    "Repository Quality Gate FULL post-merge sobre main: 11 PASS / 0 FAIL.",
     "1588 unittest OK.",
-    "pytest: 1628 passed + 7767 subtests.",
+    "pytest: 1628 passed + 7781 subtests.",
+    "pip check: sin dependencias rotas.",
     "pip-audit --strict: sin vulnerabilidades conocidas.",
     "npm audit --audit-level=high: 0 vulnerabilidades.",
-    "Markdown: 171 archivos sin bloqueantes; identificadores: 16 familias / 52 identificadores.",
-    "git diff --check: limpio."
+    "Repository Quality Gate, Python Compatibility, Dependency Security, Visual & Accessibility y CodeQL post-merge: success.",
+    "Dependabot dependency graph update post-merge: success; alerts abiertos: 0.",
+    "Working tree post-merge revalidado limpio."
   ],
   "evidence": [
     "Issue de fase: #167.",
-    "PR Dependabot pypdf #160: pendiente de cierre como superseded después de validar la integración coordinada.",
-    "PR Dependabot Playwright #161: pendiente de cierre como superseded después de validar la integración coordinada.",
-    "Inventario inicial: 49 alerts; 37 fixed y 12 abiertos agrupados en 5 advisories únicos."
+    "PR coordinado #168 integrado en main como 1a3942a6c14ab047fe8bc587c21b9b96cf62f2bd.",
+    "PR Dependabot pypdf #160: cerrado sin merge como superseded por #168.",
+    "PR Dependabot Playwright #161: cerrado sin merge como superseded por #168.",
+    "Inventario inicial: 49 alerts; 37 fixed y 12 abiertos agrupados en 5 advisories únicos.",
+    "Estado post-merge: 0 Dependabot alerts abiertos."
   ],
   "next_step": {
     "global_revision": 124,

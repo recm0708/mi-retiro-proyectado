@@ -89,7 +89,7 @@ class TestRelGovR2LivePublicationState(unittest.TestCase):
             text,
         )
         self.assertIn(
-            "| `0.1.23.01-beta` | Beta vigente G123/E01 en promoción",
+            "| `0.1.23.01-beta` | Beta vigente G123/E01 integrada/aceptada",
             text,
         )
 

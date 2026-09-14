@@ -9,12 +9,15 @@
 
 
 <!-- MANT2-G123-PROMOTION:START -->
-## Estado MANT.2 R1 / promoción G123-E01
+## Estado MANT.2 R1 / cierre material G123-E01
 
 - `VERSION` materializa `0.1.23.01-beta` para MANT.2 R1 / G123-E01.
 - Dependencias coordinadas: `httpx2/httpcore2 2.12.0`, `pypdf 6.18.1` y Playwright 1.63.0.
 - Pre-promoción: Quality Gate 11 PASS / 0 FAIL; 1584 unittest; pytest 1624 + 7767 subtests; pip-audit y npm audit verdes.
-- Post-promoción local: Quality Gate 11 PASS / 0 FAIL; 1588 unittest; pytest 1628 + 7767 subtests; publicación remota pendiente.
+- Post-promoción local: Quality Gate 11 PASS / 0 FAIL; 1588 unittest; pytest 1628 + 7767 subtests.
+- Integración: PR #168 / merge `1a3942a6c14ab047fe8bc587c21b9b96cf62f2bd`; #160/#161 superseded; Dependabot 0 alerts abiertos.
+- Post-merge `main`: Quality Gate 11 PASS / 0 FAIL; 1588 unittest; pytest 1628 + 7781 subtests; CI y CodeQL verdes.
+- La publicación formal de G123/E01 permanece pendiente únicamente de tag firmado y GitHub Release prerelease.
 - G124 queda disponible sin candidato/bloque preasignado.
 - MANT.1 R8/#163 comienza después de publicar G123.
 <!-- MANT2-G123-PROMOTION:END -->
@@ -46,7 +49,7 @@ La reconstrucción histórica G001–G070 permanece intacta.
 - G121/E01 (`0.1.21.01-beta`) permanece publicado para UX.6 R1–R8 mediante `v0.1.21.01-beta`.
 - G122/E01 (`0.1.22.01-beta`) queda integrado/aceptado para NOR.3 R1–R8
   mediante PR #162 / merge `b97cf61763479b80b8e8724b878089e8bb20fa00`.
-- G123 queda disponible sin candidato ni bloque preasignado.
+- G123/E01 (`0.1.23.01-beta`) queda integrado/aceptado para MANT.2 R1 mediante PR #168 / merge `1a3942a6c14ab047fe8bc587c21b9b96cf62f2bd`; G124 queda disponible sin candidato ni bloque preasignado.
 - PERSIST.1 permanece planificado, no iniciado y sin Global preasignado; no puede iniciar antes de completar #163 → #154 → #155 → #164.
 - Los tags ya publicados permanecen inmutables.
 <!-- DOC1-R1-REVISION-MANUAL:END -->

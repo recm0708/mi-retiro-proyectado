@@ -1121,7 +1121,7 @@
       "revision_aware": "0.1.23.01-beta",
       "state": "R1 — Dependabot y remediación coordinada post-G122",
       "anchor": "0.1.23.01-beta",
-      "evidence": "Issue #167; pre-promoción Quality Gate 11 PASS / 0 FAIL, 1584 unittest OK y pytest 1624 passed / 7767 subtests; post-promoción local Quality Gate 11 PASS / 0 FAIL, 1588 unittest OK y pytest 1628 passed / 7767 subtests; pip-audit sin vulnerabilidades; npm audit 0 vulnerabilidades; publicación remota pendiente."
+      "evidence": "Issue #167; PR #168; merge 1a3942a6c14ab047fe8bc587c21b9b96cf62f2bd; #160/#161 superseded; 0 Dependabot alerts abiertos; pre-promoción Quality Gate 11 PASS / 0 FAIL, 1584 unittest OK y pytest 1624 passed / 7767 subtests; post-promoción local 11 PASS / 0 FAIL, 1588 unittest OK y pytest 1628 passed / 7767 subtests; post-merge main 11 PASS / 0 FAIL, 1588 unittest OK y pytest 1628 passed / 7781 subtests; pip-audit sin vulnerabilidades; npm audit 0 vulnerabilidades; CI post-merge y CodeQL verdes; publicación formal pendiente de tag/release."
     }
   ],
   "excluded": [
