@@ -6,8 +6,18 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ## [Unreleased]
 
-- G124 permanece disponible sin candidato ni bloque preasignado.
-- Continuidad tras publicar G123/E01: MANT.1 R8/#163 → DOC.3 R1/#154 → PLAN.2 R2/#155 → VER.2 R6/#164 → PERSIST.1.
+- G125 permanece disponible sin candidato ni bloque preasignado.
+- Continuidad tras publicar G124/E13: DOC.3 R1/#154 → PLAN.2 R2/#155 → VER.2 R6/#164 → PERSIST.1.
+
+## [0.1.24.13-beta]
+
+### Mantenimiento, pruebas y gobierno
+
+- MANT.1 R8 materializa G124/E13 después de auditar scripts, tests, labels y estructura técnica post-NOR.3.
+- Se conservan los 16 scripts operativos y los 219 módulos de pruebas auditados; no se demostró redundancia equivalente que justificara retiros.
+- `scripts/README.md`, `.github/release.yml`, Issue Forms/documentación de labels y guards permanentes quedan reconciliados.
+- El Quality Gate FULL pre-promoción cierra 11 PASS / 0 FAIL; el gate post-materialización local también cierra 11 PASS / 0 FAIL con 1600 unittest y pytest 1640 passed + 7782 subtests; el preflight #166 no detecta trabajo Dependabot pendiente.
+- La publicación formal queda pendiente de PR/merge, revalidación de `main`, tag firmado y GitHub Release prerelease.
 
 ## [0.1.23.01-beta]
 

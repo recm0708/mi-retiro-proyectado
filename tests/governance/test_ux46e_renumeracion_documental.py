@@ -19,6 +19,9 @@ class TestUX46eRenumeracionDocumental(unittest.TestCase):
         cls.decisiones = (DOCS / "decisions/README.md").read_text(encoding="utf-8")
         cls.cierre = (DOCS / "archive/governance/gov1-closeout.md").read_text(encoding="utf-8")
         cls.transparencia = (DOCS / "product/transparency.md").read_text(encoding="utf-8")
+        cls.auditoria_r7 = (
+            DOCS / "archive/ux/ux46e-r7-audit-2026-08-18.md"
+        ).read_text(encoding="utf-8")
 
     def test_secuencia_vigente_reserva_e_para_estandarizacion(self):
         self.assertIn("UX.4.6e — Estandarización técnica", self.roadmap)
@@ -91,11 +94,21 @@ class TestUX46eRenumeracionDocumental(unittest.TestCase):
         self.assertIn("no forma parte de la taxonomía final", self.publicacion)
         self.assertNotIn("- `sebd`\n", self.publicacion)
 
-    def test_taxonomia_declara_21_labels_y_convenciones_github(self):
-        self.assertIn("21 labels", self.publicacion)
-        for label in ("duplicate", "good first issue", "help wanted", "invalid", "wontfix"):
+    def test_taxonomia_vigente_declara_28_labels_y_preserva_checkpoint_21(self):
+        self.assertIn("28 labels", self.publicacion)
+        self.assertIn("16 labels canónicos", self.publicacion)
+        self.assertIn("12 labels suplementarios", self.publicacion)
+
+        for label in (
+            "duplicate",
+            "good first issue",
+            "help wanted",
+            "invalid",
+            "wontfix",
+        ):
             self.assertIn(f"`{label}`", self.publicacion)
-        self.assertIn("nombre canónico en inglés", self.publicacion)
+
+        self.assertIn("**21 labels** configuradas", self.auditoria_r7)
 
 
 if __name__ == "__main__":

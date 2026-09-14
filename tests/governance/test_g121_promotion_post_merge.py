@@ -36,16 +36,16 @@ class TestG121PromotionPostMerge(unittest.TestCase):
     def test_ledger_actual_avanza_a_g122_sin_candidato_g123(self):
         ledger = cargar_ledger()
 
-        self.assertEqual(123, ledger["accepted_count"])
-        self.assertEqual(124, ledger["next_global"])
+        self.assertEqual(124, ledger["accepted_count"])
+        self.assertEqual(125, ledger["next_global"])
         self.assertIsNone(ledger["next_candidate"])
         self.assertIsNone(ledger["next_candidate_block"])
 
         entry = ledger["entries"][-1]
-        self.assertEqual(123, entry["global_revision"])
-        self.assertEqual("MANT.2", entry["block"])
-        self.assertEqual("R1", entry["functional_revision"])
-        self.assertEqual("0.1.23.01-beta", entry["revision_aware"])
+        self.assertEqual(124, entry["global_revision"])
+        self.assertEqual("MANT.1", entry["block"])
+        self.assertEqual("R8", entry["functional_revision"])
+        self.assertEqual("0.1.24.13-beta", entry["revision_aware"])
 
     def test_registry_preserva_ux6_y_cierra_nor3(self):
         data = json.loads(
@@ -69,7 +69,7 @@ class TestG121PromotionPostMerge(unittest.TestCase):
         self.assertIsNone(candidate["revision_aware"])
         self.assertIsNone(candidate["block"])
         self.assertEqual(
-            "unassigned_pending_replanning",
+            "unassigned_pending_post_mant1_r8",
             candidate["state"],
         )
 
@@ -80,10 +80,10 @@ class TestG121PromotionPostMerge(unittest.TestCase):
             ).read_text(encoding="utf-8")
         )
 
-        self.assertEqual("0.1.23.01-beta", data["version"])
-        self.assertEqual("MANT.2", data["block"])
-        self.assertEqual("R1", data["revision"])
-        self.assertEqual(124, data["next_step"]["global_revision"])
+        self.assertEqual("0.1.24.13-beta", data["version"])
+        self.assertEqual("MANT.1", data["block"])
+        self.assertEqual("R8", data["revision"])
+        self.assertEqual(125, data["next_step"]["global_revision"])
         self.assertIsNone(data["next_step"]["revision_aware"])
         self.assertIsNone(data["next_step"]["block"])
 

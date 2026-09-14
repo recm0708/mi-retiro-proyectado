@@ -1,43 +1,49 @@
 {
   "schema_version": 1,
-  "version": "0.1.23.01-beta",
-  "block": "MANT.2",
-  "revision": "R1",
+  "version": "0.1.24.13-beta",
+  "block": "MANT.1",
+  "revision": "R8",
   "summary": [
-    "G123/E01 materializa MANT.2 R1 como fase recurrente exclusiva de Dependabot.",
-    "La integración coordinada quedó aceptada en main mediante PR #168; el bloque cerró materialmente con 0 Dependabot alerts abiertos y publicación formal pendiente de tag firmado y GitHub Release prerelease."
+    "G124/E13 materializa MANT.1 R8 como cierre de la auditoría, consolidación y saneamiento operativo post-NOR.3.",
+    "La auditoría demostró que los 16 scripts operativos y los 219 módulos de pruebas pre-promoción conservan responsabilidades no equivalentes; se corrigió deriva de labels/documentación y se añadió protección permanente sin eliminar cobertura."
   ],
   "changes": [
-    "MANT.2 R1 queda materializado como G123/E01.",
-    "`VERSION` avanza a `0.1.23.01-beta`.",
-    "`httpx2` y `httpcore2` avanzan a 2.12.0.",
-    "`pypdf` avanza a 6.18.1.",
-    "`playwright` avanza a 1.63.0.",
-    "G124 queda disponible sin bloque preasignado."
+    "MANT.1 R8 queda materializado como G124/E13.",
+    "`VERSION` avanza a `0.1.24.13-beta`.",
+    "El inventario de `scripts/README.md` queda sincronizado con 16 scripts operativos.",
+    "La taxonomía GitHub queda reconciliada en 28 labels: 16 canónicos y 12 suplementarios.",
+    "Se incorpora un guard automatizado de taxonomía y un guard de paridad exacta del inventario de scripts.",
+    "Las regresiones históricas de labels se vuelven revision-aware y se elimina flakiness del test de observabilidad sin cambiar runtime.",
+    "G125 queda disponible sin bloque ni VERSION preasignados."
   ],
   "validation": [
-    "Repository Quality Gate FULL post-merge sobre main: 11 PASS / 0 FAIL.",
-    "1588 unittest OK.",
-    "pytest: 1628 passed + 7781 subtests.",
-    "pip check: sin dependencias rotas.",
+    "Repository Quality Gate FULL pre-promoción: 11 PASS / 0 FAIL.",
+    "1594 unittest OK.",
+    "pytest: 1634 passed + 7781 subtests.",
+    "Repository Quality Gate FULL post-materialización local: 11 PASS / 0 FAIL.",
+    "1600 unittest OK.",
+    "pytest: 1640 passed + 7782 subtests.",
+    "Markdown: 172 archivos sin bloqueantes.",
+    "JavaScript: 27 archivos válidos.",
+    "Identificadores: 16 familias / 52 identificadores.",
+    "git diff --check: limpio.",
+    "Preflight final #166: 0 PRs, 0 Dependabot alerts y 0 PRs Dependabot abiertos.",
     "pip-audit --strict: sin vulnerabilidades conocidas.",
-    "npm audit --audit-level=high: 0 vulnerabilidades.",
-    "Repository Quality Gate, Python Compatibility, Dependency Security, Visual & Accessibility y CodeQL post-merge: success.",
-    "Dependabot dependency graph update post-merge: success; alerts abiertos: 0.",
-    "Working tree post-merge revalidado limpio."
+    "npm audit --audit-level=high: 0 vulnerabilidades."
   ],
   "evidence": [
-    "Issue de fase: #167.",
-    "PR coordinado #168 integrado en main como 1a3942a6c14ab047fe8bc587c21b9b96cf62f2bd.",
-    "PR Dependabot pypdf #160: cerrado sin merge como superseded por #168.",
-    "PR Dependabot Playwright #161: cerrado sin merge como superseded por #168.",
-    "Inventario inicial: 49 alerts; 37 fixed y 12 abiertos agrupados en 5 advisories únicos.",
-    "Estado post-merge: 0 Dependabot alerts abiertos."
+    "Issue de fase: #163.",
+    "Política de preflight/limpieza: #166.",
+    "Auditoría de scripts: 16 conservar / 0 consolidar / 0 retirar / 0 mover.",
+    "Auditoría semántica V2: 219 módulos, 1633 funciones test_*, 0 duplicados AST y 0 grupos estructuralmente equivalentes.",
+    "Matriz final de tests auditados: 219 conservar / 0 consolidar / 0 retirar / 0 revisar pendiente.",
+    "Taxonomía remota: 28 labels = 16 canónicos + 12 suplementarios.",
+    "G123/MANT.2 R1 ya publicado como v0.1.23.01-beta antes de iniciar MANT.1 R8."
   ],
   "next_step": {
-    "global_revision": 124,
+    "global_revision": 125,
     "revision_aware": null,
     "block": null,
-    "description": "G124 queda disponible sin candidato. La siguiente fase planificada es MANT.1 R8/#163; después siguen DOC.3 R1/#154, PLAN.2 R2/#155, VER.2 R6/#164 y PERSIST.1/#130."
+    "description": "G125 queda disponible sin candidato. Después de publicar G124/MANT.1 R8 corresponde DOC.3 R1/#154; después siguen PLAN.2 R2/#155, VER.2 R6/#164 y PERSIST.1/#130. Antes de cada fase se repite #166 y un lote material de dependencias inserta MANT.2 R2+."
   }
 }

@@ -1,13 +1,13 @@
 # Validación
 
 **Estado:** Vigente
-**Versión revisada:** `0.1.23.01-beta` — G123/E01 integrado/aceptado para MANT.2 R1; publicación formal pendiente.
+**Versión revisada:** `0.1.24.13-beta` — G124/E13 aceptado localmente para MANT.1 R8; publicación formal pendiente.
 **Versión base histórica:** `0.0.25-beta`
 **Base documental histórica:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal histórica preservada:** UX.4.6e R8 — validación funcional y procedencia editable — 2026-08-19
 **Última revisión transversal:** UX.4.6f R2 integrada y cierre del Paso 4 — 2026-08-20
 **Revisión de normalización:** NOR.1 R7 — cierre de estándares y preparación de NOR.2 — 2026-08-24
-**Última revisión operativa:** MANT.2 R1 — G123/E01 post-promoción local — 2026-09-14
+**Última revisión operativa:** MANT.1 R8 — G124/E13 promoción local — 2026-09-14
 **Clasificación:** Técnica / Calidad
 **Naturaleza documental:** Registro vivo acumulativo — mantiene la estrategia vigente y evidencia histórica de gates protegida por regresiones; los resultados históricos no se reescriben como si pertenecieran al estado actual.
 
@@ -733,7 +733,15 @@ python -m pip check
 
 ## 3. Inventario actual de pruebas
 
-Inventario vigente: **218 módulos**.
+Inventario vigente: **220 módulos**.
+
+MANT.1 R8 añade `tests/governance/test_github_label_taxonomy.py` como guard permanente de coherencia entre gobierno, documentación pública, Issue Forms, auto-labeling y configuración de Release.
+
+La auditoría semántica de MANT.1 R8 revisó los 219 módulos y 1,633 funciones `test_*`: no detectó duplicados AST ni grupos estructuralmente equivalentes. La matriz final conserva los 219 módulos, sin consolidaciones ni retiros. La evidencia durable se registra en `docs/audits/repository/mant1-r8-scripts-tests-consolidation.md`.
+
+La promoción G124/E13 añade `tests/governance/test_g124_mant1_r8_promotion.py` como guard del estado materializado. Por ello el inventario final posterior a la auditoría pasa de **219 a 220 módulos `test_*.py`**; el módulo 220 no formó parte del corpus auditado porque existe precisamente para proteger la promoción resultante.
+
+La revalidación post-materialización de G124/E13 cerró el Repository Quality Gate FULL en **11 PASS / 0 FAIL**, con **1600 unittest OK** y **pytest 1640 passed + 7782 subtests**; Markdown, integridad, contrato revision-aware, manifiesto y whitespace permanecieron verdes.
 
 La taxonomía NOR.3 conserva ownership semántico, discovery recursivo y contratos permanentes R1–R8 + G122.
 

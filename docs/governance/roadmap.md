@@ -1,11 +1,11 @@
 # Roadmap
 
 **Estado:** vigente
-**Versión vigente:** `0.1.23.01-beta` — G123/E01 integrado/aceptado para MANT.2 R1; publicación formal pendiente
+**Versión vigente:** `0.1.24.13-beta` — G124/E13 aceptado localmente para MANT.1 R8; publicación formal pendiente
 **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
 **Último tag formal legacy:** `v0.0.26-beta`
 **Fecha de revisión:** 2026-09-14
-**Estado actual:** MANT.2 R1 se materializa como G123/E01; G124 queda disponible sin candidato y MANT.1 R8/#163 sigue después de publicar G123.
+**Estado actual:** MANT.1 R8 se materializa como G124/E13; G125 queda disponible sin candidato y DOC.3 R1/#154 sigue después de publicar G124.
 
 
 <!-- NOR3-G122-PROMOTION:START -->
@@ -28,27 +28,31 @@
 <!-- POST-NOR3-INTERMEDIATE-SEQUENCE:START -->
 ## Secuencia intermedia obligatoria post-NOR.3
 
-MANT.2 R1 / Issue #167 se materializa como **G123/E01**
-(`0.1.23.01-beta`) para resolver el lote Dependabot detectado después de G122.
-La integración coordinada quedó completada mediante PR #168 / merge
-`1a3942a6c14ab047fe8bc587c21b9b96cf62f2bd`; `main` fue revalidado con
-0 Dependabot alerts abiertos y checks remotos verdes. La publicación formal
-queda pendiente únicamente del tag firmado y GitHub Release prerelease.
+G123/MANT.2 R1 está publicado como `v0.1.23.01-beta` y permanece preservado
+como el estado material inmediatamente anterior.
 
-Después de publicar G123/MANT.2 R1 y antes de iniciar PERSIST.1, la continuidad
+MANT.1 R8 / Issue #163 se materializa como **G124/E13**
+(`0.1.24.13-beta`). El ordinal E13 continúa la historia propia de MANT.1:
+G074–G085 ya ocupan E01–E12; la revisión funcional vigente es R8.
+
+La aceptación local se sustenta en la auditoría de 16 scripts operativos y
+219 módulos de pruebas pre-promoción, la reconciliación de 28 labels, el
+Quality Gate FULL 11 PASS / 0 FAIL y el preflight final #166 sin trabajo
+Dependabot pendiente. La publicación formal de G124 requiere todavía
+PR/merge, revalidación de `main`, tag firmado y GitHub Release prerelease.
+
+Después de publicar G124/MANT.1 R8 y antes de iniciar PERSIST.1, la continuidad
 material queda fijada así:
 
-1. **MANT.1 R8 — Issue #163:** auditoría, consolidación y saneamiento operativo
-   post-NOR.3 de `scripts/`, `tests`, labels y estructura técnica.
-2. **DOC.3 R1 — Issue #154:** auditoría documental integral.
-3. **PLAN.2 R2 — Issue #155:** replanificación maestra hacia 1.0.
-4. **VER.2 R6 — Issue #164:** reforma del versionado beta y del componente
+1. **DOC.3 R1 — Issue #154:** auditoría documental integral.
+2. **PLAN.2 R2 — Issue #155:** replanificación maestra hacia 1.0.
+3. **VER.2 R6 — Issue #164:** reforma del versionado beta y del componente
    futuro dedicado a fases MANT.2/Dependabot.
-5. **PERSIST.1 — Issue #130:** bloqueado hasta completar toda la secuencia.
+4. **PERSIST.1 — Issue #130:** bloqueado hasta completar toda la secuencia.
 
-G124 queda únicamente como siguiente Global disponible y no se asigna por
-adelantado. Antes de iniciar cada fase futura se repite el preflight Dependabot;
-un lote material nuevo inserta MANT.2 R2+.
+G125 queda únicamente como siguiente Global disponible y no se asigna por
+adelantado. Antes de iniciar cada fase futura se repite el preflight #166;
+un lote material nuevo de dependencias inserta MANT.2 R2+.
 <!-- POST-NOR3-INTERMEDIATE-SEQUENCE:END -->
 
 <!-- NOR1-R7-CLOSURE:START -->

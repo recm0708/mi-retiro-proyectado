@@ -37,13 +37,23 @@ rollback independiente o pérdida de auditabilidad.
 
 ## Labels
 
-La taxonomía canónica usa `planning`, `governance`, `architecture`,
-`post-1.0`, `blocked`, `ui`, `accessibility`, `security`, `privacy`,
-`documentation`, `tests`, `backend`, `regulations`, `dependencies`,
-`github-actions` y `maintenance`.
+La taxonomía canónica del proyecto usa 16 labels de ownership y superficie:
+`planning`, `governance`, `architecture`, `post-1.0`, `blocked`, `ui`,
+`accessibility`, `security`, `privacy`, `documentation`, `tests`, `backend`,
+`regulations`, `dependencies`, `github-actions` y `maintenance`.
+
+GitHub conserva además 12 labels suplementarios para tipo de Issue, triage,
+colaboración, ecosistema y publicación: `bug`, `enhancement`, `question`,
+`needs-triage`, `duplicate`, `good first issue`, `help wanted`, `invalid`,
+`wontfix`, `python`, `javascript` y `release`.
+
+El conjunto remoto activo esperado es, por tanto, de 28 labels. Los labels
+suplementarios no sustituyen el ownership canónico: pueden coexistir con uno o
+más labels de superficie cuando el Issue o Pull Request lo requiera.
 
 No se crean sinónimos `ux`, `technical-debt`, `qa` o `testing` mientras `ui`,
-`maintenance` y `tests` cubran esas funciones.
+`maintenance` y `tests` cubran esas funciones. Tampoco se reintroducen aliases
+históricos retirados como `github_actions`, `normativa` o `needs-review`.
 
 ## Milestones
 

@@ -134,7 +134,7 @@ class TestNOR3R2RepositoryStructurePolicy(unittest.TestCase):
 
         self.assertEqual(report["result"], "pass")
 
-    def test_post_promocion_cierra_scope_r1_r8(self):
+    def test_post_promocion_preserva_scope_r1_r8_y_estado_actual(self):
         registry = json.loads(
             (
                 ROOT / "data" / "governance"
@@ -149,9 +149,10 @@ class TestNOR3R2RepositoryStructurePolicy(unittest.TestCase):
         self.assertIsNone(candidate["revision"])
         self.assertIsNone(candidate["revision_scope"])
         self.assertEqual(
-            "unassigned_pending_replanning",
+            "unassigned_pending_post_mant1_r8",
             candidate["state"],
         )
+        self.assertEqual(125, candidate["next_global_available"])
 
         ids = {
             item["identifier"]: item

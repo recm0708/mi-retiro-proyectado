@@ -45,14 +45,14 @@ class TestReleasePublication(unittest.TestCase):
             result.stdout + result.stderr,
         )
 
-    def test_manifest_actual_es_g123_y_no_preasigna_g124(self):
+    def test_manifest_actual_es_g124_y_no_preasigna_g125(self):
         data = json.loads(
             MANIFEST.read_text(encoding="utf-8")
         )
-        self.assertEqual("0.1.23.01-beta", data["version"])
-        self.assertEqual("MANT.2", data["block"])
-        self.assertEqual("R1", data["revision"])
-        self.assertEqual(124, data["next_step"]["global_revision"])
+        self.assertEqual("0.1.24.13-beta", data["version"])
+        self.assertEqual("MANT.1", data["block"])
+        self.assertEqual("R8", data["revision"])
+        self.assertEqual(125, data["next_step"]["global_revision"])
         self.assertIsNone(data["next_step"]["revision_aware"])
         self.assertIsNone(data["next_step"]["block"])
 
@@ -63,7 +63,7 @@ class TestReleasePublication(unittest.TestCase):
             result.returncode,
             result.stdout + result.stderr,
         )
-        self.assertIn("G123/E01 validado", result.stdout)
+        self.assertIn("G124/E13 validado", result.stdout)
 
     def test_renderer_incluye_campos_dinamicos_y_secciones(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -78,13 +78,13 @@ class TestReleasePublication(unittest.TestCase):
             "## Validación",
             "## Evidencia",
             "## Siguiente paso",
-            "G123/E01",
-            "MANT.2 R1",
+            "G124/E13",
+            "MANT.1 R8",
             PUBLISHED_COMMIT,
             TAG_OBJECT,
-            "**G124**",
-            "`0.1.23.01-beta`",
-            "MANT.2",
+            "**G125**",
+            "`0.1.24.13-beta`",
+            "MANT.1",
         ):
             with self.subTest(fragment=fragment):
                 self.assertIn(fragment, text)
@@ -96,10 +96,10 @@ class TestReleasePublication(unittest.TestCase):
         corpus = json.dumps(data, ensure_ascii=False)
 
         for fragment in (
-            "Issue de fase: #167",
-            "PR Dependabot pypdf",
-            "PR Dependabot Playwright",
-            "49 alerts",
+            "Issue de fase: #163",
+            "16 scripts operativos",
+            "219 módulos",
+            "Taxonomía remota: 28 labels",
         ):
             with self.subTest(fragment=fragment):
                 self.assertIn(fragment, corpus)
@@ -114,10 +114,10 @@ class TestReleasePublication(unittest.TestCase):
             snapshot.write_text(
                 json.dumps(
                     {
-                        "tagName": "v0.1.23.01-beta",
+                        "tagName": "v0.1.24.13-beta",
                         "name": (
                             "Mi Retiro Proyectado "
-                            "v0.1.23.01-beta — G123/E01"
+                            "v0.1.24.13-beta — G124/E13"
                         ),
                         "isDraft": False,
                         "isPrerelease": True,

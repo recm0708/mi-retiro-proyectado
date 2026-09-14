@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+import re
 import unittest
 
 
@@ -32,6 +33,28 @@ class TestMant1ScriptsHooksDocumentados(unittest.TestCase):
         self.assertIn("scripts/validate_precommit.py", hooks)
         self.assertIn("No sustituye la CI remota", hooks)
         self.assertIn("No debe depender de rutas absolutas", hooks)
+
+    def test_inventario_readme_cubre_exactamente_scripts_operativos(self):
+        scripts_dir = ROOT / "scripts"
+        operativos = {
+            path.name
+            for path in scripts_dir.iterdir()
+            if path.is_file() and path.suffix.lower() in {".py", ".ps1", ".mjs"}
+        }
+
+        readme = self._leer("scripts/README.md")
+        inventario = readme.split("## Inventario", 1)[1].split(
+            "## Uso previsto", 1
+        )[0]
+        documentados = set(
+            re.findall(
+                r"(?m)^\| `([^`]+\.(?:py|ps1|mjs))` \|",
+                inventario,
+            )
+        )
+
+        self.assertEqual(16, len(operativos))
+        self.assertEqual(operativos, documentados)
 
     def test_hook_y_scripts_explican_proposito_y_limites(self):
         hook = self._leer(".githooks/pre-commit")

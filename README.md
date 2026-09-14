@@ -15,7 +15,7 @@
 </p>
 
 <p align="center">
-  <img alt="Versión 0.1.23.01-beta" src="https://img.shields.io/badge/versi%C3%B3n-0.1.23.01--beta-2563eb">
+  <img alt="Versión 0.1.24.13-beta" src="https://img.shields.io/badge/versi%C3%B3n-0.1.24.13--beta-2563eb">
   <img alt="Python 3.13 y 3.14" src="https://img.shields.io/badge/Python-3.13%20%7C%203.14-3776AB?logo=python&logoColor=white">
   <img alt="Licencia propietaria" src="https://img.shields.io/badge/licencia-propietaria-6B7280">
 </p>
@@ -26,24 +26,27 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 
 ## Estado del proyecto
 
-- **Versión canónica vigente:** `0.1.23.01-beta`, obtenida exclusivamente
-  desde [`VERSION`](VERSION). Materializa MANT.2 R1 como G123/E01.
-- **Estado revision-aware integrado/aceptado:** MANT.2 R1 / G123/E01; publicación formal pendiente de tag/release.
-- **Integración:** PR #168 / merge `1a3942a6c14ab047fe8bc587c21b9b96cf62f2bd`;
-  Repository Quality Gate, Python Compatibility, Dependency Security,
-  Visual & Accessibility y CodeQL post-merge en `success`.
-- **Dependencias coordinadas:** `httpx2 2.12.0`, `httpcore2 2.12.0`,
-  `pypdf 6.18.1` y Playwright `1.63.0`.
-- **Seguridad post-merge:** Dependabot quedó con **0 alerts abiertos**;
-  `pip-audit --strict` no reporta vulnerabilidades conocidas y `npm audit`
-  reporta 0 vulnerabilidades.
-- **Publicación anterior:** G122/E01 (`v0.1.22.01-beta`) permanece publicada,
-  firmada e inmutable como cierre de NOR.3.
-- **Siguiente Global:** G124 queda únicamente disponible; no tiene candidato
+- **Versión canónica vigente:** `0.1.24.13-beta`, obtenida exclusivamente
+  desde [`VERSION`](VERSION). Materializa MANT.1 R8 como G124/E13.
+- **Estado revision-aware aceptado localmente:** MANT.1 R8 / G124/E13;
+  publicación formal pendiente de PR/merge, revalidación, tag firmado y Release.
+- **Auditoría MANT.1 R8:** 16 scripts conservados; 219 módulos de pruebas
+  pre-promoción auditados; sin redundancias equivalentes que justificaran
+  consolidación o retiro.
+- **Gobierno GitHub:** 28 labels reconciliados (16 canónicos + 12
+  suplementarios) y protegidos por regresiones.
+- **Validación pre-promoción:** Repository Quality Gate **11 PASS / 0 FAIL**;
+  `unittest` **1594 OK**; `pytest` **1634 passed + 7781 subtests**.
+- **Validación post-materialización local:** Repository Quality Gate **11 PASS / 0 FAIL**;
+  `unittest` **1600 OK**; `pytest` **1640 passed + 7782 subtests**.
+- **Preflight final #166:** 0 PRs abiertos, 0 Dependabot alerts, 0 PRs
+  Dependabot, `pip-audit` y `npm audit` verdes.
+- **Publicación anterior:** G123/E01 (`v0.1.23.01-beta`) permanece publicada
+  como cierre de MANT.2 R1.
+- **Siguiente Global:** G125 queda únicamente disponible; no tiene candidato
   ni bloque preasignado.
-- **Continuidad:** después de publicar G123/MANT.2 R1 corresponde ejecutar
-  MANT.1 R8 / #163 → DOC.3 R1 / #154 → PLAN.2 R2 / #155 →
-  VER.2 R6 / #164 → PERSIST.1 / #130.
+- **Continuidad:** después de publicar G124/MANT.1 R8 corresponde DOC.3 R1 /
+  #154 → PLAN.2 R2 / #155 → VER.2 R6 / #164 → PERSIST.1 / #130.
 - **PERSIST.1:** preservado y planificado, sin Global preasignado; no iniciado.
 - **SEC.2:** R1–R6 cerrados; su hardening vigente permanece preservado.
 - **Etapa:** desarrollo beta; repositorio público y ejecución orientada
@@ -57,27 +60,31 @@ La versión se obtiene exclusivamente del archivo [`VERSION`](VERSION). La polí
 <!-- POST-NOR3-INTERMEDIATE-SEQUENCE:START -->
 ## Secuencia intermedia obligatoria post-NOR.3
 
-MANT.2 R1 / Issue #167 se materializa como **G123/E01**
-(`0.1.23.01-beta`) para resolver el lote Dependabot detectado después de G122.
-La integración coordinada quedó completada mediante PR #168 / merge
-`1a3942a6c14ab047fe8bc587c21b9b96cf62f2bd`; `main` fue revalidado con
-0 Dependabot alerts abiertos y checks remotos verdes. La publicación formal
-queda pendiente únicamente del tag firmado y GitHub Release prerelease.
+G123/MANT.2 R1 está publicado como `v0.1.23.01-beta` y permanece preservado
+como el estado material inmediatamente anterior.
 
-Después de publicar G123/MANT.2 R1 y antes de iniciar PERSIST.1, la continuidad
+MANT.1 R8 / Issue #163 se materializa como **G124/E13**
+(`0.1.24.13-beta`). El ordinal E13 continúa la historia propia de MANT.1:
+G074–G085 ya ocupan E01–E12; la revisión funcional vigente es R8.
+
+La aceptación local se sustenta en la auditoría de 16 scripts operativos y
+219 módulos de pruebas pre-promoción, la reconciliación de 28 labels, el
+Quality Gate FULL 11 PASS / 0 FAIL y el preflight final #166 sin trabajo
+Dependabot pendiente. La publicación formal de G124 requiere todavía
+PR/merge, revalidación de `main`, tag firmado y GitHub Release prerelease.
+
+Después de publicar G124/MANT.1 R8 y antes de iniciar PERSIST.1, la continuidad
 material queda fijada así:
 
-1. **MANT.1 R8 — Issue #163:** auditoría, consolidación y saneamiento operativo
-   post-NOR.3 de `scripts/`, `tests`, labels y estructura técnica.
-2. **DOC.3 R1 — Issue #154:** auditoría documental integral.
-3. **PLAN.2 R2 — Issue #155:** replanificación maestra hacia 1.0.
-4. **VER.2 R6 — Issue #164:** reforma del versionado beta y del componente
+1. **DOC.3 R1 — Issue #154:** auditoría documental integral.
+2. **PLAN.2 R2 — Issue #155:** replanificación maestra hacia 1.0.
+3. **VER.2 R6 — Issue #164:** reforma del versionado beta y del componente
    futuro dedicado a fases MANT.2/Dependabot.
-5. **PERSIST.1 — Issue #130:** bloqueado hasta completar toda la secuencia.
+4. **PERSIST.1 — Issue #130:** bloqueado hasta completar toda la secuencia.
 
-G124 queda únicamente como siguiente Global disponible y no se asigna por
-adelantado. Antes de iniciar cada fase futura se repite el preflight Dependabot;
-un lote material nuevo inserta MANT.2 R2+.
+G125 queda únicamente como siguiente Global disponible y no se asigna por
+adelantado. Antes de iniciar cada fase futura se repite el preflight #166;
+un lote material nuevo de dependencias inserta MANT.2 R2+.
 <!-- POST-NOR3-INTERMEDIATE-SEQUENCE:END -->
 
 <!-- AUTOMATION-POST-G119:START -->

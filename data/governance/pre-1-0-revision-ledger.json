@@ -2,8 +2,8 @@
   "schema_version": 1,
   "project": "Mi Retiro Proyectado",
   "base_commit": "7037addd44253e528c77460b678d2b3ccd540dd5",
-  "accepted_count": 123,
-  "next_global_if_ver2_accepted": 124,
+  "accepted_count": 124,
+  "next_global_if_ver2_accepted": 125,
   "next_candidate": null,
   "historical_tags_immutable": {
     "from": "v0.0.1-beta",
@@ -1121,7 +1121,17 @@
       "revision_aware": "0.1.23.01-beta",
       "state": "R1 — Dependabot y remediación coordinada post-G122",
       "anchor": "0.1.23.01-beta",
-      "evidence": "Issue #167; PR #168; merge 1a3942a6c14ab047fe8bc587c21b9b96cf62f2bd; #160/#161 superseded; 0 Dependabot alerts abiertos; pre-promoción Quality Gate 11 PASS / 0 FAIL, 1584 unittest OK y pytest 1624 passed / 7767 subtests; post-promoción local 11 PASS / 0 FAIL, 1588 unittest OK y pytest 1628 passed / 7767 subtests; post-merge main 11 PASS / 0 FAIL, 1588 unittest OK y pytest 1628 passed / 7781 subtests; pip-audit sin vulnerabilidades; npm audit 0 vulnerabilidades; CI post-merge y CodeQL verdes; publicación formal pendiente de tag/release."
+      "evidence": "Issue #167; PR #168; merge 1a3942a6c14ab047fe8bc587c21b9b96cf62f2bd; #160/#161 superseded; 0 Dependabot alerts abiertos; pre-promoción Quality Gate 11 PASS / 0 FAIL, 1584 unittest OK y pytest 1624 passed / 7767 subtests; post-promoción local 11 PASS / 0 FAIL, 1588 unittest OK y pytest 1628 passed / 7767 subtests; post-merge main 11 PASS / 0 FAIL, 1588 unittest OK y pytest 1628 passed / 7781 subtests; pip-audit sin vulnerabilidades; npm audit 0 vulnerabilidades; CI post-merge y CodeQL verdes; publicación formal completada mediante tag firmado v0.1.23.01-beta y GitHub Release prerelease ID 388217270."
+    },
+    {
+      "global_revision": 124,
+      "block": "MANT.1",
+      "ordinal": 13,
+      "functional_revision": "R8",
+      "revision_aware": "0.1.24.13-beta",
+      "state": "R8 — auditoría, consolidación y saneamiento operativo post-NOR.3 de scripts, tests, labels y estructura técnica",
+      "anchor": "0.1.24.13-beta",
+      "evidence": "Issue #163; auditoría de 16 scripts operativos: 16 conservar / 0 consolidar / 0 retirar / 0 mover; auditoría semántica V2 de 219 módulos y 1633 funciones test_*: 0 duplicados AST, 0 grupos estructurales equivalentes y 0 retiros justificados; taxonomía GitHub reconciliada en 28 labels (16 canónicos + 12 suplementarios); Quality Gate FULL pre-promoción 11 PASS / 0 FAIL, 1594 unittest OK y pytest 1634 passed + 7781 subtests; Quality Gate FULL post-promoción local 11 PASS / 0 FAIL, 1600 unittest OK y pytest 1640 passed + 7782 subtests; preflight final #166: 0 PRs abiertos, 0 Dependabot alerts, 0 PRs Dependabot, pip-audit sin vulnerabilidades y npm audit 0 vulnerabilidades; publicación remota G124 pendiente de PR/merge, revalidación, tag firmado y Release."
     }
   ],
   "excluded": [
@@ -1200,12 +1210,12 @@
   ],
   "reconciled_through_commit": "b97cf61763479b80b8e8724b878089e8bb20fa00",
   "reconciliation_date": "2026-09-14",
-  "next_global": 124,
+  "next_global": 125,
   "next_candidate_block": null,
   "next_candidate_assignment": {
-    "state": "unassigned_pending_post_mant2",
-    "next_global_available": 124,
+    "state": "unassigned_pending_post_mant1_r8",
+    "next_global_available": 125,
     "issue": 155,
-    "reason": "G123/E01 materializa MANT.2 R1. G124 queda sin candidato. La continuidad es MANT.1 R8/#163 → DOC.3 R1/#154 → PLAN.2 R2/#155 → VER.2 R6/#164 → PERSIST.1/#130."
+    "reason": "G124/E13 materializa MANT.1 R8. G125 queda sin candidato ni bloque preasignado. La continuidad es DOC.3 R1/#154 → PLAN.2 R2/#155 → VER.2 R6/#164 → PERSIST.1/#130; antes de cada fase se repite #166."
   }
 }

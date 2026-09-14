@@ -1,5 +1,21 @@
 # Registro de versiones y estados del proyecto
 
+<!-- MANT1-R8-PROMOTION:START -->
+## Promoción G124/E13 — MANT.1 R8
+
+- G124/E13 (`0.1.24.13-beta`) materializa MANT.1 R8 con revisión funcional R8.
+- MANT.1 continúa su ordinal propio: G074–G085 preservan E01–E12 y G124 usa E13.
+- Auditoría: 16 scripts conservar / 0 consolidar / 0 retirar / 0 mover.
+- Tests pre-promoción: 219 módulos y 1633 funciones `test_*`; 0 duplicados AST, 0 grupos estructuralmente equivalentes y 0 retiros justificados.
+- Labels: 28 remotos reconciliados = 16 canónicos + 12 suplementarios.
+- Quality Gate FULL pre-promoción: 11 PASS / 0 FAIL; 1594 unittest OK; pytest 1634 passed + 7781 subtests.
+- Quality Gate FULL post-promoción local: 11 PASS / 0 FAIL; 1600 unittest OK; pytest 1640 passed + 7782 subtests.
+- Preflight final #166: 0 PRs, 0 Dependabot alerts, 0 PRs Dependabot; `pip-audit` y `npm audit` verdes.
+- G123/E01 permanece publicado mediante `v0.1.23.01-beta` / GitHub Release prerelease ID `388217270`.
+- G125 queda disponible sin candidato.
+- La publicación de G124 queda pendiente de PR/merge, revalidación de `main`, tag firmado y GitHub Release prerelease.
+<!-- MANT1-R8-PROMOTION:END -->
+
 
 <!-- MANT2-R1-PROMOTION:START -->
 ## Promoción G123/E01 — MANT.2 R1
@@ -11,7 +27,7 @@
 - Integración: PR #168 / merge `1a3942a6c14ab047fe8bc587c21b9b96cf62f2bd`; #160/#161 cerrados sin merge como superseded.
 - Revalidación post-merge de `main`: Quality Gate 11 PASS / 0 FAIL; 1588 unittest; pytest 1628 + 7781 subtests; Dependabot 0 alerts abiertos; pip-audit y npm audit verdes; Repository Quality Gate, Python Compatibility, Dependency Security, Visual & Accessibility y CodeQL en `success`.
 - G124 queda disponible sin candidato.
-- El tag `v0.1.23.01-beta` y GitHub Release prerelease permanecen pendientes hasta integrar esta reconciliación post-merge y revalidar `main` final.
+- G123/E01 quedó publicado mediante tag firmado `v0.1.23.01-beta` y GitHub Release prerelease ID `388217270`.
 <!-- MANT2-R1-PROMOTION:END -->
 
 <!-- NOR3-R8-PROMOTION:START -->

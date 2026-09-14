@@ -3,22 +3,20 @@
 # docs/operations/release-process.md.
 changelog:
   exclude:
-    labels:
-      - ignore-for-release
     authors:
       - dependabot
   categories:
     - title: Funcionalidad y UX
       labels:
         - enhancement
-        - feature
+        - ui
     - title: Seguridad y privacidad
       labels:
         - security
+        - privacy
     - title: Correcciones
       labels:
         - bug
-        - fix
     - title: Documentación y gobierno
       labels:
         - documentation
