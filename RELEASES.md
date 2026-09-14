@@ -8,9 +8,10 @@
 - `httpx2`/`httpcore2`: 2.12.0; `pypdf`: 6.18.1; Playwright: 1.63.0.
 - Pre-promoción: Quality Gate 11 PASS / 0 FAIL; 1584 unittest; pytest 1624 + 7767 subtests; pip-audit y npm audit verdes.
 - Post-promoción local: Quality Gate 11 PASS / 0 FAIL; 1588 unittest; pytest 1628 + 7767 subtests; Markdown, identificadores y diff check verdes.
-- Issue #167. Los PRs Dependabot #160/#161 serán sustituidos por la integración coordinada.
+- Integración: PR #168 / merge `1a3942a6c14ab047fe8bc587c21b9b96cf62f2bd`; #160/#161 cerrados sin merge como superseded.
+- Revalidación post-merge de `main`: Quality Gate 11 PASS / 0 FAIL; 1588 unittest; pytest 1628 + 7781 subtests; Dependabot 0 alerts abiertos; pip-audit y npm audit verdes; Repository Quality Gate, Python Compatibility, Dependency Security, Visual & Accessibility y CodeQL en `success`.
 - G124 queda disponible sin candidato.
-- El tag `v0.1.23.01-beta` y GitHub Release prerelease se crean solo después de merge y revalidación de `main`.
+- El tag `v0.1.23.01-beta` y GitHub Release prerelease permanecen pendientes hasta integrar esta reconciliación post-merge y revalidar `main` final.
 <!-- MANT2-R1-PROMOTION:END -->
 
 <!-- NOR3-R8-PROMOTION:START -->

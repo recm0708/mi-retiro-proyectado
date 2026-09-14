@@ -28,11 +28,15 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 
 - **Versión canónica vigente:** `0.1.23.01-beta`, obtenida exclusivamente
   desde [`VERSION`](VERSION). Materializa MANT.2 R1 como G123/E01.
-- **Estado revision-aware en promoción:** MANT.2 R1 / G123/E01.
+- **Estado revision-aware integrado/aceptado:** MANT.2 R1 / G123/E01; publicación formal pendiente de tag/release.
+- **Integración:** PR #168 / merge `1a3942a6c14ab047fe8bc587c21b9b96cf62f2bd`;
+  Repository Quality Gate, Python Compatibility, Dependency Security,
+  Visual & Accessibility y CodeQL post-merge en `success`.
 - **Dependencias coordinadas:** `httpx2 2.12.0`, `httpcore2 2.12.0`,
   `pypdf 6.18.1` y Playwright `1.63.0`.
-- **Seguridad local previa a la promoción:** `pip-audit --strict` sin
-  vulnerabilidades conocidas y `npm audit` con 0 vulnerabilidades.
+- **Seguridad post-merge:** Dependabot quedó con **0 alerts abiertos**;
+  `pip-audit --strict` no reporta vulnerabilidades conocidas y `npm audit`
+  reporta 0 vulnerabilidades.
 - **Publicación anterior:** G122/E01 (`v0.1.22.01-beta`) permanece publicada,
   firmada e inmutable como cierre de NOR.3.
 - **Siguiente Global:** G124 queda únicamente disponible; no tiene candidato
@@ -55,8 +59,10 @@ La versión se obtiene exclusivamente del archivo [`VERSION`](VERSION). La polí
 
 MANT.2 R1 / Issue #167 se materializa como **G123/E01**
 (`0.1.23.01-beta`) para resolver el lote Dependabot detectado después de G122.
-La publicación definitiva exige PR/merge, checks remotos, revalidación de
-`main`, tag firmado y GitHub Release prerelease.
+La integración coordinada quedó completada mediante PR #168 / merge
+`1a3942a6c14ab047fe8bc587c21b9b96cf62f2bd`; `main` fue revalidado con
+0 Dependabot alerts abiertos y checks remotos verdes. La publicación formal
+queda pendiente únicamente del tag firmado y GitHub Release prerelease.
 
 Después de publicar G123/MANT.2 R1 y antes de iniciar PERSIST.1, la continuidad
 material queda fijada así:

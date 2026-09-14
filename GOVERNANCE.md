@@ -28,8 +28,10 @@
 
 MANT.2 R1 / Issue #167 se materializa como **G123/E01**
 (`0.1.23.01-beta`) para resolver el lote Dependabot detectado después de G122.
-La publicación definitiva exige PR/merge, checks remotos, revalidación de
-`main`, tag firmado y GitHub Release prerelease.
+La integración coordinada quedó completada mediante PR #168 / merge
+`1a3942a6c14ab047fe8bc587c21b9b96cf62f2bd`; `main` fue revalidado con
+0 Dependabot alerts abiertos y checks remotos verdes. La publicación formal
+queda pendiente únicamente del tag firmado y GitHub Release prerelease.
 
 Después de publicar G123/MANT.2 R1 y antes de iniciar PERSIST.1, la continuidad
 material queda fijada así:

@@ -1,9 +1,9 @@
 # Matriz maestra de pendientes hacia 1.0
 
 **Estado:** vigente / documento vivo
-**Versión base:** `0.1.23.01-beta` — G123/E01 MANT.2 R1 en promoción
-**Checkpoint candidato:** G123/E01 materializa MANT.2 R1; G124 queda disponible sin bloque/candidato; MANT.1 R8/#163 continúa después de publicar G123
-**Última replanificación:** 2026-09-14 — MANT.2 R1/G123 en promoción; DOC.3 R1 y PLAN.2 R2 formalizados como fases materiales posteriores a MANT.1 R8.
+**Versión base:** `0.1.23.01-beta` — G123/E01 MANT.2 R1 integrado/aceptado; publicación formal pendiente
+**Checkpoint candidato:** G123/E01 quedó integrado/aceptado mediante PR #168; G124 queda disponible sin bloque/candidato; MANT.1 R8/#163 continúa después de publicar G123
+**Última replanificación:** 2026-09-14 — MANT.2 R1/G123 integrado y revalidado post-merge; publicación formal pendiente; DOC.3 R1 y PLAN.2 R2 permanecen como fases materiales posteriores a MANT.1 R8.
 **Clasificación:** Planificación / Producto / Arquitectura / Seguridad / QA / Release
 
 
@@ -35,9 +35,9 @@ candidato fallido no lo consume.
 
 ## 1. Reglas de uso
 
-1. `VERSION` materializa `0.1.22.01-beta` al consolidar NOR.3 R1–R8 como G122/E01.
-2. G122/E01 queda integrado/aceptado mediante PR #162 / merge `b97cf61763479b80b8e8724b878089e8bb20fa00`.
-3. G123 es únicamente el siguiente Global disponible; no tiene candidato ni bloque preasignado.
+1. `VERSION` materializa `0.1.23.01-beta` al consolidar MANT.2 R1 como G123/E01.
+2. G123/E01 queda integrado/aceptado mediante PR #168 / merge `1a3942a6c14ab047fe8bc587c21b9b96cf62f2bd`.
+3. G124 es únicamente el siguiente Global disponible; no tiene candidato ni bloque preasignado.
 4. PERSIST.1 permanece planificado y sin Global preasignado; no puede iniciar hasta completar #163 → #154 → #155 → #164.
 5. Las etapas posteriores se ordenan por prioridad, no por un `G` futuro supuesto.
 6. Una revisión que amplía un bloque existente conserva su identificador canónico.
@@ -47,20 +47,29 @@ candidato fallido no lo consume.
    registro y ledger cuando corresponda.
 
 <!-- POST-NOR3-INTERMEDIATE-SEQUENCE:START -->
-### Secuencia obligatoria antes de PERSIST.1
+## Secuencia intermedia obligatoria post-NOR.3
 
-`publicación G122/NOR.3`
-→ `MANT.2 R1 #167 / G123-E01`
-→ `MANT.1 R8 #163`
-→ `DOC.3 R1 #154`
-→ `PLAN.2 R2 #155`
-→ `VER.2 R6 #164`
-→ `PERSIST.1 #130`.
+MANT.2 R1 / Issue #167 se materializa como **G123/E01**
+(`0.1.23.01-beta`) para resolver el lote Dependabot detectado después de G122.
+La integración coordinada quedó completada mediante PR #168 / merge
+`1a3942a6c14ab047fe8bc587c21b9b96cf62f2bd`; `main` fue revalidado con
+0 Dependabot alerts abiertos y checks remotos verdes. La publicación formal
+queda pendiente únicamente del tag firmado y GitHub Release prerelease.
 
-G124 queda libre y sin candidato preasignado. PERSIST.1 permanece bloqueado por
-#163 → #154 → #155 → #164 después de publicar MANT.2 R1. Ejecutar #163 solo
-después de la publicación definitiva de G122/NOR.3 y de G123/MANT.2 R1.
-Antes de cada fase se ejecuta el preflight Dependabot definido por #166/#167.
+Después de publicar G123/MANT.2 R1 y antes de iniciar PERSIST.1, la continuidad
+material queda fijada así:
+
+1. **MANT.1 R8 — Issue #163:** auditoría, consolidación y saneamiento operativo
+   post-NOR.3 de `scripts/`, `tests`, labels y estructura técnica.
+2. **DOC.3 R1 — Issue #154:** auditoría documental integral.
+3. **PLAN.2 R2 — Issue #155:** replanificación maestra hacia 1.0.
+4. **VER.2 R6 — Issue #164:** reforma del versionado beta y del componente
+   futuro dedicado a fases MANT.2/Dependabot.
+5. **PERSIST.1 — Issue #130:** bloqueado hasta completar toda la secuencia.
+
+G124 queda únicamente como siguiente Global disponible y no se asigna por
+adelantado. Antes de iniciar cada fase futura se repite el preflight Dependabot;
+un lote material nuevo inserta MANT.2 R2+.
 <!-- POST-NOR3-INTERMEDIATE-SEQUENCE:END -->
 
 ## 2. Matriz maestra
@@ -81,8 +90,8 @@ Antes de cada fase se ejecuta el preflight Dependabot definido por #166/#167.
 | 12 | **UX.5 R6** | Integración y cierre funcional UX.5 | Unificar Manual/Asistido, invalidación, navegación, completitud, errores, loaders, cambio de modalidad, resultados y consistencia de assets. | **Cerrado/aceptado G120/E01** |
 | 13 | **UX.6 R1–R8** | Auditoría integral App + Developer | Identidad/shell, perfil/avatar, usuarios/RBAC, movimiento, accesibilidad, responsive, importadores, privacidad pública, ownership y hardening final. | **Cerrado/aceptado G121/E01** |
 | 14 | **NOR.3 R1–R8** | Normalización estructural integral | Inventario/ownership, policy, backend/portales, templates, assets, tests, data/scripts y cierre documental según #126/#127/#128. | **Cerrado/aceptado G122/E01** |
-| 15 | **MANT.2 R1** | Dependabot y remediación coordinada post-G122 | Resolver alerts/PRs Dependabot, actualizar dependencias y formalizar el preflight recurrente. | **En promoción como G123/E01** |
-| 16 | **MANT.1 R8** | Auditoría y consolidación post-NOR.3 de scripts y pruebas | Ejecutar #163 solo después de la publicación definitiva de G122/NOR.3; clasificar, consolidar y retirar redundancias solo con cobertura equivalente; cerrar con versión beta propia. Bloquea #154. | **Planificado; no iniciado; sin Global preasignado** |
+| 15 | **MANT.2 R1** | Dependabot y remediación coordinada post-G122 | Resolver alerts/PRs Dependabot, actualizar dependencias y formalizar el preflight recurrente. | **Cerrado/aceptado G123/E01; publicación formal pendiente** |
+| 16 | **MANT.1 R8** | Auditoría y consolidación post-NOR.3 de scripts y pruebas | Ejecutar #163 solo después de la publicación definitiva de G123/MANT.2 R1; clasificar, consolidar y retirar redundancias solo con cobertura equivalente; cerrar con versión beta propia. Bloquea #154. | **Planificado; no iniciado; sin Global preasignado** |
 | 17 | **DOC.3 R1** | Auditoría documental integral post-MANT.1 | Ejecutar #154 después de publicar MANT.1 R8; reconciliar documentación viva/histórica, metadatos, enlaces y evidencia, con beta propia. | **Planificado; no iniciado; sin Global preasignado** |
 | 18 | **PLAN.2 R2** | Replanificación maestra post-DOC.3 | Ejecutar #155 después de DOC.3 R1; reconciliar matriz, roadmap, gates restantes y continuidad hacia 1.0, con beta propia. | **Planificado; no iniciado; sin Global preasignado** |
 | 19 | **VER.2 R6** | Auditoría y reforma del versionado beta | Ejecutar después de #163 → #154 → #155; formalizar revisiones, subrevisiones, correcciones materiales e inserción automática de fases nuevas. Bloquea PERSIST.1. | **Planificado; no iniciado; sin Global preasignado** |

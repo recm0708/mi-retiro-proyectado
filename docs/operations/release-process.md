@@ -1,7 +1,7 @@
 # Proceso de release
 
 **Estado:** Vigente
-**Versión de aplicación:** `0.1.23.01-beta` — G123/E01 en promoción para MANT.2 R1; G122/E01 permanece publicado como cierre NOR.3 mediante `v0.1.22.01-beta`.
+**Versión de aplicación:** `0.1.23.01-beta` — G123/E01 integrado/aceptado para MANT.2 R1; publicación formal pendiente; G122/E01 permanece publicado como cierre NOR.3 mediante `v0.1.22.01-beta`.
 **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
 **Último tag formal legacy:** `v0.0.26-beta`
 **Versión base histórica preservada:** `0.0.23-beta`
@@ -32,8 +32,10 @@
 
 MANT.2 R1 / Issue #167 se materializa como **G123/E01**
 (`0.1.23.01-beta`) para resolver el lote Dependabot detectado después de G122.
-La publicación definitiva exige PR/merge, checks remotos, revalidación de
-`main`, tag firmado y GitHub Release prerelease.
+La integración coordinada quedó completada mediante PR #168 / merge
+`1a3942a6c14ab047fe8bc587c21b9b96cf62f2bd`; `main` fue revalidado con
+0 Dependabot alerts abiertos y checks remotos verdes. La publicación formal
+queda pendiente únicamente del tag firmado y GitHub Release prerelease.
 
 Después de publicar G123/MANT.2 R1 y antes de iniciar PERSIST.1, la continuidad
 material queda fijada así:
