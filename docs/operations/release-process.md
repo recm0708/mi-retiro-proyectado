@@ -1,7 +1,7 @@
 # Proceso de release
 
 **Estado:** Vigente
-**Versión de aplicación:** `0.1.22.01-beta` — G121/E01 materializado para UX.6 R8 en PR #124; G120/E01 permanece publicado y NOR.3 R1–R2 es el candidato G122/E01 reservado/no aceptado.
+**Versión de aplicación:** `0.1.22.01-beta` — G122/E01 integrado/aceptado para NOR.3 R8 mediante PR #162 / merge `b97cf61763479b80b8e8724b878089e8bb20fa00`; G121/E01 permanece publicado mediante `v0.1.21.01-beta`.
 **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
 **Último tag formal legacy:** `v0.0.26-beta`
 **Versión base histórica preservada:** `0.0.23-beta`
@@ -14,25 +14,52 @@
 ## Estado post-NOR.3 / promoción G122-E01
 
 - `VERSION` materializa `0.1.22.01-beta` para NOR.3 R8 / G122-E01.
-- NOR.3 R1–R8 queda cerrado estructuralmente en PR #162.
+- NOR.3 R1–R8 quedó integrado/aceptado mediante PR #162 / merge
+  `b97cf61763479b80b8e8724b878089e8bb20fa00`.
+- La revalidación automática de `main` quedó GREEN: Repository Quality Gate,
+  Visual & Accessibility y CodeQL finalizaron en `success`.
 - G123 es el siguiente Global disponible, pero **no tiene candidato ni bloque
   preasignado**.
 - PERSIST.1 permanece planificado y no iniciado, sin Global preasignado.
-- La reconciliación integral de Issues, #154 y la replanificación #155
-  determinan el próximo candidato real.
-- El tag/release de G122 solo procede después de merge y revalidación de `main`.
+- `v0.1.21.01-beta` / G121/E01 permanece como última publicación revision-aware
+  hasta completar el tag/release firmado de G122/E01.
+- `v0.1.22.01-beta` queda pendiente de creación/firma local y de la
+  verificación/publicación gobernada por REL.GOV.1.
 <!-- NOR3-G122-PROMOTION:END -->
+
+<!-- POST-NOR3-INTERMEDIATE-SEQUENCE:START -->
+## Secuencia intermedia obligatoria post-NOR.3
+
+Después de la publicación definitiva de G122/NOR.3 y antes de iniciar PERSIST.1,
+la continuidad material queda fijada así:
+
+1. **MANT.1 R8 — Issue #163:** auditoría y consolidación post-NOR.3
+   de `scripts/` y `tests/`.
+2. **Issue #154:** auditoría documental integral sobre el árbol ya depurado.
+3. **Issue #155:** replanificación maestra con todos los pendientes vigentes.
+4. **VER.2 R6 — Issue #164:** auditoría y reforma del versionado beta,
+   incluidas revisiones, subrevisiones, correcciones materiales e inserción
+   de fases intermedias.
+5. **PERSIST.1 — Issue #130:** permanece bloqueado hasta completar
+   toda la secuencia anterior.
+
+G123 continúa siendo únicamente el siguiente Global disponible.
+Ninguno de estos trabajos recibe Global ni versión candidata mientras
+permanezca solamente planificado.
+<!-- POST-NOR3-INTERMEDIATE-SEQUENCE:END -->
 
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado de publicación vigente
 
-- `VERSION` materializa G121/E01 (`0.1.21.01-beta`) para UX.6 R8.
-- UX.6 R1–R8 consumen un único estado con ordinal E01.
-- G120/E01 permanece publicado mediante `v0.1.20.01-beta`.
-- PR #124 integra/promueve G121/E01.
-- G122/E01 (`0.1.22.01-beta`) queda reservado como candidato NOR.3 R1–R2; no se considera aceptado ni consumido.
+- `VERSION` materializa G122/E01 (`0.1.22.01-beta`) para NOR.3 R8.
+- NOR.3 R1–R8 consume un único estado con ordinal E01.
+- G121/E01 permanece publicado mediante `v0.1.21.01-beta`.
+- PR #162 / merge `b97cf61763479b80b8e8724b878089e8bb20fa00` integra/acepta G122/E01.
+- G123 queda disponible sin candidato ni bloque preasignado.
+- PERSIST.1 permanece planificado, no iniciado y sin Global preasignado.
 - La automatización no crea ni firma tags.
-- `v0.1.21.01-beta` solo se crea después de merge y revalidación.
+- `v0.1.22.01-beta` queda pendiente de firma local, verificación de tag y
+  GitHub Release prerelease.
 - Un Release incompatible falla cerrado y solo HTTP 404 autoriza creación.
 <!-- DOC1-R1-POST-MANT1:END -->
 
@@ -76,12 +103,7 @@ El candidato reserva el siguiente número global, pero ese número solo queda co
 
 La revisión funcional (`R#`) y el ordinal aceptado (`E##`) no se consideran equivalentes por definición. Cuando una revisión intermedia no consume Global, el ledger puede declarar `functional_revision`; el manifiesto de publicación usa ese valor para mostrar el nombre funcional correcto. DEV.2 R5 = G118/E04 y DEV.2 R6 = G119/E05 son precedentes
 canónicos de revisiones funcionales cuyo ordinal aceptado difiere de la
-revisión funcional. El último estado integrado/aceptado es UX.6 R8 = G121/E01
-(`0.1.21.01-beta`), materializado mediante PR #124 / merge `5dcd2503e83ba69df83fa906d331df594653c0a0`. El
-siguiente candidato formal es NOR.3 R1–R2 = G122/E01 (`0.1.22.01-beta`),
-reservado/no aceptado y actualmente en progreso. PERSIST.1 permanece
-planificado, no iniciado y sin Global preasignado hasta el cierre de NOR.3
-y la replanificación #155. UX.7/UX.8 permanecen planificados y no iniciados.
+revisión funcional. El último estado integrado/aceptado es NOR.3 R8 = G122/E01 (`0.1.22.01-beta`), materializado mediante PR #162 / merge `b97cf61763479b80b8e8724b878089e8bb20fa00`. G123 es el siguiente Global disponible, sin candidato ni bloque reservado. PERSIST.1 permanece planificado, no iniciado y sin Global preasignado; no puede iniciar antes de completar #163 → #154 → #155 → #164. UX.7/UX.8 permanecen planificados y no iniciados.
 
 ## 3. Precondiciones
 

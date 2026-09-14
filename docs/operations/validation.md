@@ -1,13 +1,13 @@
 # Validación
 
 **Estado:** Vigente
-**Versión revisada:** `0.1.22.01-beta` — G121/E01 materializado para UX.6 R8 en PR #124.
+**Versión revisada:** `0.1.22.01-beta` — G122/E01 integrado/aceptado para NOR.3 R8 mediante PR #162 / merge `b97cf61763479b80b8e8724b878089e8bb20fa00`.
 **Versión base histórica:** `0.0.25-beta`
 **Base documental histórica:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal histórica preservada:** UX.4.6e R8 — validación funcional y procedencia editable — 2026-08-19
 **Última revisión transversal:** UX.4.6f R2 integrada y cierre del Paso 4 — 2026-08-20
 **Revisión de normalización:** NOR.1 R7 — cierre de estándares y preparación de NOR.2 — 2026-08-24
-**Última revisión operativa:** UX.6 R8 — promoción G121/E01 — 2026-09-07
+**Última revisión operativa:** NOR.3 R8 — G122/E01 post-merge — 2026-09-13
 **Clasificación:** Técnica / Calidad
 **Naturaleza documental:** Registro vivo acumulativo — mantiene la estrategia vigente y evidencia histórica de gates protegida por regresiones; los resultados históricos no se reescriben como si pertenecieran al estado actual.
 
@@ -16,13 +16,17 @@
 ## Estado post-NOR.3 / promoción G122-E01
 
 - `VERSION` materializa `0.1.22.01-beta` para NOR.3 R8 / G122-E01.
-- NOR.3 R1–R8 queda cerrado estructuralmente en PR #162.
+- NOR.3 R1–R8 quedó integrado/aceptado mediante PR #162 / merge
+  `b97cf61763479b80b8e8724b878089e8bb20fa00`.
+- La revalidación automática de `main` quedó GREEN: Repository Quality Gate,
+  Visual & Accessibility y CodeQL finalizaron en `success`.
 - G123 es el siguiente Global disponible, pero **no tiene candidato ni bloque
   preasignado**.
 - PERSIST.1 permanece planificado y no iniciado, sin Global preasignado.
-- La reconciliación integral de Issues, #154 y la replanificación #155
-  determinan el próximo candidato real.
-- El tag/release de G122 solo procede después de merge y revalidación de `main`.
+- `v0.1.21.01-beta` / G121/E01 permanece como última publicación revision-aware
+  hasta completar el tag/release firmado de G122/E01.
+- `v0.1.22.01-beta` queda pendiente de creación/firma local y de la
+  verificación/publicación gobernada por REL.GOV.1.
 <!-- NOR3-G122-PROMOTION:END -->
 
 <!-- NOR1-R7-VALIDATION:START -->

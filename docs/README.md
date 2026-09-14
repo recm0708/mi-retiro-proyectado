@@ -1,9 +1,9 @@
 # Índice de documentación
 
 **Estado:** vigente
-**Versión de aplicación:** `0.1.22.01-beta` — G121/E01 materializado para UX.6 R8 en PR #124; G120/E01 permanece publicado; NOR.3 R1–R2 es el candidato G122/E01 reservado/no aceptado
+**Versión de aplicación:** `0.1.22.01-beta` — G122/E01 integrado/aceptado para NOR.3 R8 mediante PR #162 / merge `b97cf61763479b80b8e8724b878089e8bb20fa00`; G121/E01 permanece publicado mediante `v0.1.21.01-beta`
 **Último tag formal legacy:** `v0.0.26-beta`
-**Última actualización transversal:** NOR.3 R1–R2 — inventario, gobierno y policy estructural — 2026-09-11
+**Última actualización transversal:** NOR.3 R1–R8 — cierre estructural G122/E01 post-merge — 2026-09-13
 **Cierres históricos preservados:** UX.4.6i / PR #34 — 841 pruebas; UX.4.6e R9 — `v0.0.25-beta`
 
 
@@ -11,20 +11,45 @@
 ## Estado post-NOR.3 / promoción G122-E01
 
 - `VERSION` materializa `0.1.22.01-beta` para NOR.3 R8 / G122-E01.
-- NOR.3 R1–R8 queda cerrado estructuralmente en PR #162.
+- NOR.3 R1–R8 quedó integrado/aceptado mediante PR #162 / merge
+  `b97cf61763479b80b8e8724b878089e8bb20fa00`.
+- La revalidación automática de `main` quedó GREEN: Repository Quality Gate,
+  Visual & Accessibility y CodeQL finalizaron en `success`.
 - G123 es el siguiente Global disponible, pero **no tiene candidato ni bloque
   preasignado**.
 - PERSIST.1 permanece planificado y no iniciado, sin Global preasignado.
-- La reconciliación integral de Issues, #154 y la replanificación #155
-  determinan el próximo candidato real.
-- El tag/release de G122 solo procede después de merge y revalidación de `main`.
+- `v0.1.21.01-beta` / G121/E01 permanece como última publicación revision-aware
+  hasta completar el tag/release firmado de G122/E01.
+- `v0.1.22.01-beta` queda pendiente de creación/firma local y de la
+  verificación/publicación gobernada por REL.GOV.1.
 <!-- NOR3-G122-PROMOTION:END -->
+
+<!-- POST-NOR3-INTERMEDIATE-SEQUENCE:START -->
+## Secuencia intermedia obligatoria post-NOR.3
+
+Después de la publicación definitiva de G122/NOR.3 y antes de iniciar PERSIST.1,
+la continuidad material queda fijada así:
+
+1. **MANT.1 R8 — Issue #163:** auditoría y consolidación post-NOR.3
+   de `scripts/` y `tests/`.
+2. **Issue #154:** auditoría documental integral sobre el árbol ya depurado.
+3. **Issue #155:** replanificación maestra con todos los pendientes vigentes.
+4. **VER.2 R6 — Issue #164:** auditoría y reforma del versionado beta,
+   incluidas revisiones, subrevisiones, correcciones materiales e inserción
+   de fases intermedias.
+5. **PERSIST.1 — Issue #130:** permanece bloqueado hasta completar
+   toda la secuencia anterior.
+
+G123 continúa siendo únicamente el siguiente Global disponible.
+Ninguno de estos trabajos recibe Global ni versión candidata mientras
+permanezca solamente planificado.
+<!-- POST-NOR3-INTERMEDIATE-SEQUENCE:END -->
 
 Este archivo es el punto de entrada para la documentación técnica, funcional, normativa, de privacidad, validación y auditoría de Mi Retiro Proyectado.
 
 ## Estado de normalización del repositorio
 
-**Estado actual:** UX.6 R1–R8 queda integrado/aceptado como G121/E01 mediante PR #124 / merge `5dcd2503e83ba69df83fa906d331df594653c0a0`; NOR.3 R1–R2 está materializado y validado localmente como candidato G122/E01 reservado/no aceptado. PERSIST.1 R1 permanece planificado, no iniciado y sin Global preasignado; UX.7/UX.8 permanecen planificados y no iniciados.
+**Estado actual:** NOR.3 R1–R8 queda integrado/aceptado como G122/E01 mediante PR #162 / merge `b97cf61763479b80b8e8724b878089e8bb20fa00`; G121/E01 permanece publicado mediante `v0.1.21.01-beta`. G123 queda disponible sin candidato preasignado. PERSIST.1 permanece planificado, no iniciado y sin Global; UX.7/UX.8 permanecen planificados y no iniciados.
 
 Estado de la fase:
 
@@ -51,7 +76,9 @@ Estado de la fase:
   de firma #17 y GitHub Release prerelease ID `379454328`; Portal
   Developer multipágina, identidad, observabilidad, mantenimiento,
   seguridad y privacidad integrados.
-- **UX.5 R6:** cerrado/aceptado/publicado como G120/E01 (`0.1.20.01-beta`) para R1–R6 consolidados; UX.6 mantiene G121/E01 reservado/no aceptado, con R1–R6 implementados, R7 activo y R8 pendiente.
+- **UX.5 R6:** cerrado/aceptado/publicado como G120/E01 (`0.1.20.01-beta`).
+- **UX.6 R1–R8:** cerrado/aceptado/publicado como G121/E01 (`0.1.21.01-beta`) mediante PR #124 y `v0.1.21.01-beta`.
+- **NOR.3 R1–R8:** cerrado/integrado/aceptado como G122/E01 (`0.1.22.01-beta`) mediante PR #162 / merge `b97cf61763479b80b8e8724b878089e8bb20fa00`.
 - **SEC.2 R1–R6:** cerrados; CodeQL, autenticación, protección de endpoints, auditoría, sesión web y hardening configurable completados. AUD.SEC2 R1 corrigió el kill switch, alineó documentación/ledger y quedó aceptado como G109/E01.
 
 Evidencia:

@@ -1,25 +1,50 @@
 # Roadmap
 
 **Estado:** vigente
-**Versión vigente:** `0.1.22.01-beta` — G121/E01 materializado para UX.6 R8 en PR #124
+**Versión vigente:** `0.1.22.01-beta` — G122/E01 integrado/aceptado para NOR.3 R8 mediante PR #162 / merge `b97cf61763479b80b8e8724b878089e8bb20fa00`
 **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
 **Último tag formal legacy:** `v0.0.26-beta`
-**Fecha de revisión:** 2026-09-10
-**Estado actual:** UX.6 R1–R8 queda consolidado como G121/E01 (`0.1.21.01-beta`) en PR #124. NOR.3 R1–R2 está materializado y validado localmente como candidato G122/E01 (`0.1.22.01-beta`) reservado/no aceptado. PERSIST.1 permanece planificado, no iniciado y sin Global preasignado; UX.7/UX.8 permanecen planificados.
+**Fecha de revisión:** 2026-09-13
+**Estado actual:** NOR.3 R1–R8 queda integrado/aceptado como G122/E01 (`0.1.22.01-beta`) mediante PR #162 / merge `b97cf61763479b80b8e8724b878089e8bb20fa00`. G121/E01 permanece publicado mediante `v0.1.21.01-beta`. G123 queda disponible sin candidato/bloque asignado; PERSIST.1 permanece planificado, no iniciado y sin Global preasignado; UX.7/UX.8 permanecen planificados.
 
 
 <!-- NOR3-G122-PROMOTION:START -->
 ## Estado post-NOR.3 / promoción G122-E01
 
 - `VERSION` materializa `0.1.22.01-beta` para NOR.3 R8 / G122-E01.
-- NOR.3 R1–R8 queda cerrado estructuralmente en PR #162.
+- NOR.3 R1–R8 quedó integrado/aceptado mediante PR #162 / merge
+  `b97cf61763479b80b8e8724b878089e8bb20fa00`.
+- La revalidación automática de `main` quedó GREEN: Repository Quality Gate,
+  Visual & Accessibility y CodeQL finalizaron en `success`.
 - G123 es el siguiente Global disponible, pero **no tiene candidato ni bloque
   preasignado**.
 - PERSIST.1 permanece planificado y no iniciado, sin Global preasignado.
-- La reconciliación integral de Issues, #154 y la replanificación #155
-  determinan el próximo candidato real.
-- El tag/release de G122 solo procede después de merge y revalidación de `main`.
+- `v0.1.21.01-beta` / G121/E01 permanece como última publicación revision-aware
+  hasta completar el tag/release firmado de G122/E01.
+- `v0.1.22.01-beta` queda pendiente de creación/firma local y de la
+  verificación/publicación gobernada por REL.GOV.1.
 <!-- NOR3-G122-PROMOTION:END -->
+
+<!-- POST-NOR3-INTERMEDIATE-SEQUENCE:START -->
+## Secuencia intermedia obligatoria post-NOR.3
+
+Después de la publicación definitiva de G122/NOR.3 y antes de iniciar PERSIST.1,
+la continuidad material queda fijada así:
+
+1. **MANT.1 R8 — Issue #163:** auditoría y consolidación post-NOR.3
+   de `scripts/` y `tests/`.
+2. **Issue #154:** auditoría documental integral sobre el árbol ya depurado.
+3. **Issue #155:** replanificación maestra con todos los pendientes vigentes.
+4. **VER.2 R6 — Issue #164:** auditoría y reforma del versionado beta,
+   incluidas revisiones, subrevisiones, correcciones materiales e inserción
+   de fases intermedias.
+5. **PERSIST.1 — Issue #130:** permanece bloqueado hasta completar
+   toda la secuencia anterior.
+
+G123 continúa siendo únicamente el siguiente Global disponible.
+Ninguno de estos trabajos recibe Global ni versión candidata mientras
+permanezca solamente planificado.
+<!-- POST-NOR3-INTERMEDIATE-SEQUENCE:END -->
 
 <!-- NOR1-R7-CLOSURE:START -->
 ## Estado NOR.1 / NOR.2
@@ -51,7 +76,7 @@ La secuencia operativa previa a SEC.2 queda:
     `v0.1.19.05-beta`.
 15. **UX.5 R6** — cerrado/aceptado como G120/E01 (`0.1.20.01-beta`); R1–R6 consumen este único estado aceptado del bloque.
 16. **UX.6** — R1–R8 consolidados/aceptados como G121/E01 con revisión funcional R8; PR #124 materializa la promoción.
-17. **NOR.3 R1–R2** — materializado/validado localmente como candidato G122/E01 reservado/no aceptado; inventario, gobierno y policy estructural antes de cualquier movimiento físico. PERSIST.1 permanece después y sin Global preasignado.
+17. **NOR.3 R1–R8** — cerrado/integrado/aceptado como G122/E01 mediante PR #162 / merge `b97cf61763479b80b8e8724b878089e8bb20fa00`; G123 queda disponible sin candidato y PERSIST.1 permanece sin Global preasignado.
 
 NOR.2 ejecutó los movimientos, renombrados, consolidaciones y retiros que
 NOR.1 deliberadamente no realizó.
@@ -107,22 +132,21 @@ Este roadmap describe **estado actual y trabajo futuro**.
 
 La secuencia de pendientes vigente se mantiene en [Matriz maestra de pendientes hacia 1.0](pre-1-0-pending-matrix.md). Esa matriz es evolutiva y no preasigna Globales futuros más allá del candidato actual. La evolución detallada ya completada se conserva en `RELEASES.md`, `CHANGELOG.md`, `docs/archive/governance/pre-1-0-versioning-audit.md`, `docs/governance/pre-1-0-revision-ledger.md`, `docs/archive/governance/ver2-revision-decision-matrix.md`, `data/governance/pre-1-0-revision-ledger.json` y `docs/archive/`.
 
-VER.2 es un bloque transversal de reconciliación y **no añade un bloque 15** al plan maestro de producto. DEV.2 tuvo un checkpoint documental en R4 y quedó cerrado funcionalmente después de R6. MANT.1 se trata como checkpoint técnico de mantenibilidad antes de SEC.2 y tampoco añade un bloque funcional de producto. MANT.1 R1 queda como auditoría inicial de alcance, MANT.1 R2 conserva la documentación de scripts y hooks antes de SEC.2, MANT.1 R3 documenta los YAML de GitHub sin cambiar CI ni formularios y MANT.1 R4 limpia encabezados operativos para que la trazabilidad histórica permanezca en documentación, MANT.1 R5A comenta servicios Python grandes, MANT.1 R5B comenta CSS/plantilla de la guía pública, MANT.1 R5C comenta JavaScript complejo sin cambiar lógica visible y MANT.1 R5D define política/plantillas por extensión con uniformidad de encabezados.
+VER.2 es un bloque transversal de reconciliación y **no añade un bloque 15** al plan maestro de producto. DEV.2 tuvo un checkpoint documental en R4 y quedó cerrado funcionalmente después de R6. MANT.1 R1–R7 corresponde históricamente al checkpoint técnico de mantenibilidad previo a SEC.2 y no añade un bloque funcional de producto. MANT.1 se reabre exclusivamente como R8 después de la publicación definitiva de G122/NOR.3 para auditar y consolidar scripts/tests antes de #154. MANT.1 R1 queda como auditoría inicial de alcance, MANT.1 R2 conserva la documentación de scripts y hooks antes de SEC.2, MANT.1 R3 documenta los YAML de GitHub sin cambiar CI ni formularios y MANT.1 R4 limpia encabezados operativos para que la trazabilidad histórica permanezca en documentación, MANT.1 R5A comenta servicios Python grandes, MANT.1 R5B comenta CSS/plantilla de la guía pública, MANT.1 R5C comenta JavaScript complejo sin cambiar lógica visible y MANT.1 R5D define política/plantillas por extensión con uniformidad de encabezados.
 
-## Estado operativo UX.5 / UX.6
+## Estado operativo UX.5 / UX.6 / NOR.3
 
 UX.5 permanece cerrado/publicado como G120/E01 (`0.1.20.01-beta`).
 
-UX.6 R1–R8 queda integrado/aceptado como G121/E01 (`0.1.21.01-beta`)
-mediante PR #124 / merge `5dcd2503e83ba69df83fa906d331df594653c0a0` con revisión funcional R8 y ordinal E01.
+UX.6 R1–R8 permanece cerrado/publicado como G121/E01 (`0.1.21.01-beta`)
+mediante PR #124 y `v0.1.21.01-beta`.
 
-NOR.3 R1–R2 queda como siguiente candidato G122/E01
-(`0.1.22.01-beta`), reservado/no aceptado y actualmente en progreso.
+NOR.3 R1–R8 queda integrado/aceptado como G122/E01 (`0.1.22.01-beta`)
+mediante PR #162 / merge `b97cf61763479b80b8e8724b878089e8bb20fa00`.
 
-PERSIST.1 permanece planificado, no iniciado y sin Global preasignado hasta
-el cierre de NOR.3 y la replanificación #155.
-
-UX.7/UX.8 permanecen como programa UX granular planificado y no iniciado.
+G123 queda disponible sin candidato/bloque asignado. PERSIST.1 permanece
+planificado, no iniciado y sin Global preasignado; no puede iniciar antes de
+completar #163 → #154 → #155 → #164.
 
 ## 1. Programa GOV.1 — Auditoría, Gobierno y Trazabilidad Pre-Beta
 

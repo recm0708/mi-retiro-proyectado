@@ -1111,7 +1111,7 @@
       "revision_aware": "0.1.22.01-beta",
       "state": "R8 — cierre estructural integral NOR.3 R1–R8: ownership, portales, templates/assets, taxonomía de pruebas, data/scripts, policy y documentación estructural",
       "anchor": "0.1.22.01-beta",
-      "evidence": "PR #162; R5-R6 firmado b54b2d27e78d08e62d54873b749af1f99a6ce120; R7 FULL 11 PASS / 0 FAIL, 1574 unittest, 1614 pytest + 7708 subtests; R8 FULL 11 PASS / 0 FAIL, 1579 unittest, 1619 pytest + 7708 subtests; 171 Markdown; 27 JavaScript"
+      "evidence": "PR #162 / merge b97cf61763479b80b8e8724b878089e8bb20fa00; R5-R6 firmado b54b2d27e78d08e62d54873b749af1f99a6ce120; R7 FULL 11 PASS / 0 FAIL, 1574 unittest, 1614 pytest + 7708 subtests; R8 FULL 11 PASS / 0 FAIL, 1579 unittest, 1619 pytest + 7708 subtests; revalidación post-merge de main 11 PASS / 0 FAIL, 1584 unittest OK, 1624 pytest + 7750 subtests; Visual & Accessibility y CodeQL en success; 171 Markdown; 27 JavaScript"
     }
   ],
   "excluded": [
@@ -1188,7 +1188,7 @@
       "reason": "La decisión VER.2 R3 establece expresamente que R1, R2 y R3 son correcciones internas del mismo candidato G071/E01; no consumen G072 ni incrementan EE. R4 materializa la aceptación única del candidato."
     }
   ],
-  "reconciled_through_commit": "b54b2d27e78d08e62d54873b749af1f99a6ce120",
+  "reconciled_through_commit": "b97cf61763479b80b8e8724b878089e8bb20fa00",
   "reconciliation_date": "2026-09-13",
   "next_global": 123,
   "next_candidate_block": null,
@@ -1196,6 +1196,6 @@
     "state": "unassigned_pending_post_nor3_replanning",
     "next_global_available": 123,
     "issue": 155,
-    "reason": "Después de NOR.3 se reconcilian Issues y trabajo transversal antes de asignar el siguiente bloque revision-aware."
+    "reason": "G123 permanece sin candidato ni bloque preasignado. Después de la publicación definitiva de G122/NOR.3, la continuidad obligatoria es MANT.1 R8 / #163 → #154 → #155 → VER.2 R6 / #164 antes de PERSIST.1; la replanificación #155 no reserva por sí sola un estado revision-aware."
   }
 }

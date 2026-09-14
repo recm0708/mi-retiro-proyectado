@@ -28,16 +28,24 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 
 - **Versión canónica vigente:** `0.1.22.01-beta`, obtenida exclusivamente
   desde [`VERSION`](VERSION). Materializa NOR.3 R8 como G122/E01.
-- **Estado revision-aware de promoción:** NOR.3 R1–R8 / G122/E01.
-- **Integración/promoción:** PR #162; la aceptación definitiva exige merge
-  protegido y revalidación de `main`.
+- **Estado revision-aware integrado/aceptado:** NOR.3 R1–R8 / G122/E01.
+- **Integración:** PR #162 / merge `b97cf61763479b80b8e8724b878089e8bb20fa00`.
+- **Revalidación post-merge:** Repository Quality Gate **11 PASS / 0 FAIL**;
+  `unittest` **1584 OK**; `pytest` **1624 passed + 7750 subtests**;
+  Visual & Accessibility y CodeQL en `success`.
 - **Siguiente candidato:** no asignado. G123 es únicamente el siguiente Global
-  disponible; #154/#155 y la reconciliación post-NOR.3 determinan el próximo
-  bloque real sin preasignar PERSIST.1.
-- **NOR.3:** R1–R8 cerrados estructuralmente y protegidos por regresiones.
+  disponible y no está reservado para ningún bloque. La próxima fase material es
+  MANT.1 R8 / #163, que solo inicia después de publicar definitivamente G122;
+  #154 → #155 → #164 deben completarse antes de habilitar PERSIST.1.
+- **NOR.3:** R1–R8 cerrados e integrados como G122/E01.
 - **PERSIST.1:** preservado y planificado, sin Global preasignado; no iniciado.
 - **SEC.2:** R1–R6 cerrados; su hardening vigente permanece preservado.
-- **Última publicación revision-aware con tag:** `v0.1.20.01-beta` (G120/E01), publicada sobre `76586b5a7c77a5cffa97128a29ea77bd36cb988b`, con objeto de tag firmado `7dbcca8071e2726b6aa4f17704bf41b92f6cd5bd` y GitHub Release prerelease ID `383133233`.
+- **Última publicación revision-aware con tag:** `v0.1.21.01-beta` (G121/E01),
+  publicada sobre `eb4795007ac16807661eaace675a093ee19cbf49`, con objeto de tag firmado
+  `a7a1f1a5b208ee43224d1348e639af2619f14ff0` y GitHub Release prerelease ID `384382887`.
+- **Publicación anterior preservada:** `v0.1.20.01-beta` (G120/E01).
+- **Publicación G122:** `v0.1.22.01-beta` pendiente de tag firmado y
+  GitHub Release prerelease.
 - **Etapa:** desarrollo beta; repositorio público y ejecución orientada
   actualmente a entorno local.
 - **Primera versión oficial objetivo:** `1.0.0.0` con `Build 000001`.
@@ -46,7 +54,29 @@ La visibilidad pública del repositorio **no convierte una beta de desarrollo en
 
 La versión se obtiene exclusivamente del archivo [`VERSION`](VERSION). La política completa se documenta en [Política de versionado](VERSIONING.md). VER.2 publicó `v0.0.71.01-beta` bajo la denominación original G071/E01; la reconciliación posterior sitúa ese estado en G087/E01 sin alterar el tag, y su evidencia histórica quedó preservada por NOR.2. Los estándares vigentes del repositorio están en [Estándares del repositorio](docs/standards) y el cierre de la normalización se documenta en [Auditorías de normalización del repositorio](docs/audits/repository).
 
+<!-- POST-NOR3-INTERMEDIATE-SEQUENCE:START -->
+## Secuencia intermedia obligatoria post-NOR.3
+
+Después de la publicación definitiva de G122/NOR.3 y antes de iniciar PERSIST.1,
+la continuidad material queda fijada así:
+
+1. **MANT.1 R8 — Issue #163:** auditoría y consolidación post-NOR.3
+   de `scripts/` y `tests/`.
+2. **Issue #154:** auditoría documental integral sobre el árbol ya depurado.
+3. **Issue #155:** replanificación maestra con todos los pendientes vigentes.
+4. **VER.2 R6 — Issue #164:** auditoría y reforma del versionado beta,
+   incluidas revisiones, subrevisiones, correcciones materiales e inserción
+   de fases intermedias.
+5. **PERSIST.1 — Issue #130:** permanece bloqueado hasta completar
+   toda la secuencia anterior.
+
+G123 continúa siendo únicamente el siguiente Global disponible.
+Ninguno de estos trabajos recibe Global ni versión candidata mientras
+permanezca solamente planificado.
+<!-- POST-NOR3-INTERMEDIATE-SEQUENCE:END -->
+
 <!-- AUTOMATION-POST-G119:START -->
+
 ## Automatización y calidad
 
 El repositorio mantiene un gate reproducible común para desarrollo local,

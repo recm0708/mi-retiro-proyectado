@@ -198,7 +198,7 @@
     "revision_scope": "R1-R8",
     "candidate_global": "G122/E01",
     "candidate_version": "0.1.22.01-beta",
-    "candidate_state": "promotion_materialized_pending_merge",
+    "candidate_state": "integrated_accepted_post_merge",
     "pull_request": 162,
     "closure_audit": "docs/audits/repository/nor3-r8-closure-audit.md",
     "completed_areas": [
@@ -218,6 +218,17 @@
     "promotion_version": "0.1.22.01-beta",
     "promotion_global": "G122/E01",
     "next_candidate_assigned": false,
-    "post_merge_acceptance_required": true
+    "post_merge_acceptance_required": false,
+    "merge_commit": "b97cf61763479b80b8e8724b878089e8bb20fa00",
+    "pull_request_state": "merged",
+    "post_merge_revalidation": {
+      "repository_quality_gate": "success",
+      "visual_accessibility": "success",
+      "codeql": "success",
+      "quality_gate_full": "11 PASS / 0 FAIL",
+      "unittest": 1584,
+      "pytest": 1624,
+      "pytest_subtests": 7750
+    }
   }
 }

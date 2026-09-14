@@ -57,15 +57,25 @@ class TestG122NOR3Promotion(unittest.TestCase):
         self.assertEqual(123, data["next_step"]["global_revision"])
         self.assertIsNone(data["next_step"]["revision_aware"])
         self.assertIsNone(data["next_step"]["block"])
-        self.assertIn("#155", data["next_step"]["description"])
+        description = data["next_step"]["description"]
+        for fragment in (
+            "MANT.1 R8", "#163", "#154", "#155",
+            "VER.2 R6", "#164", "PERSIST.1",
+        ):
+            with self.subTest(fragment=fragment):
+                self.assertIn(fragment, description)
 
     def test_policy_conserva_procedencia_r2_y_registra_promocion(self):
         data = json.loads(POLICY.read_text(encoding="utf-8"))
         self.assertEqual("NOR.3 R2", data["phase"])
         closure = data["nor3_closure_contract"]
-        self.assertEqual("promotion_materialized_pending_merge", closure["candidate_state"])
+        self.assertEqual("integrated_accepted_post_merge", closure["candidate_state"])
         self.assertFalse(closure["next_candidate_assigned"])
-        self.assertTrue(closure["post_merge_acceptance_required"])
+        self.assertFalse(closure["post_merge_acceptance_required"])
+        self.assertEqual(
+            "b97cf61763479b80b8e8724b878089e8bb20fa00",
+            closure["merge_commit"],
+        )
 
 
 if __name__ == "__main__":

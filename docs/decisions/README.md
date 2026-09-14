@@ -15,10 +15,13 @@
 ## Nota de lectura vigente
 
 - Las ADR históricas no se reescriben.
-- `VERSION` está sincronizado en `0.1.22.01-beta` (G121/E01).
-- G120/E01 permanece publicado mediante `v0.1.20.01-beta`.
-- UX.6 R1–R8 queda consolidado dentro de PR #124.
-- NOR.3 R1–R2 queda como candidato G122/E01 reservado/no aceptado; PERSIST.1 permanece planificado, no iniciado y sin Global preasignado.
+- `VERSION` está sincronizado en `0.1.22.01-beta` (G122/E01).
+- G121/E01 permanece publicado mediante `v0.1.21.01-beta`.
+- UX.6 R1–R8 permanece cerrado/publicado dentro de G121/E01.
+- NOR.3 R1–R8 queda integrado/aceptado mediante PR #162 / merge
+  `b97cf61763479b80b8e8724b878089e8bb20fa00`.
+- G123 queda disponible sin candidato/bloque asignado.
+- PERSIST.1 permanece planificado, no iniciado y sin Global preasignado.
 - SEC.2 R1–R6 permanece cerrado y su historia se conserva.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 

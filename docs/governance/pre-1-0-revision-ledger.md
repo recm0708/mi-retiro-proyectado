@@ -3,34 +3,40 @@
 **Proyecto:** Mi Retiro Proyectado
 **Base auditada:** `7037addd44253e528c77460b678d2b3ccd540dd5`
 **Contador histórico en la base `7037addd`:** **G070**
-**Contador aceptado reconciliado vigente:** **G121**
-**Siguiente Global disponible:** **G122**
-**Siguiente candidato disponible:** `0.1.22.01-beta` — NOR.3 R1–R2
+**Contador aceptado reconciliado vigente:** **G122**
+**Siguiente Global disponible:** **G123**
+**Siguiente candidato disponible:** **ninguno asignado** — G123 permanece disponible sin bloque preasignado; MANT.1 R8 / #163 es la siguiente fase material tras publicar G122/NOR.3
 
 
 <!-- NOR3-G122-PROMOTION:START -->
 ## Estado post-NOR.3 / promoción G122-E01
 
 - `VERSION` materializa `0.1.22.01-beta` para NOR.3 R8 / G122-E01.
-- NOR.3 R1–R8 queda cerrado estructuralmente en PR #162.
+- NOR.3 R1–R8 quedó integrado/aceptado mediante PR #162 / merge
+  `b97cf61763479b80b8e8724b878089e8bb20fa00`.
+- La revalidación automática de `main` quedó GREEN: Repository Quality Gate,
+  Visual & Accessibility y CodeQL finalizaron en `success`.
 - G123 es el siguiente Global disponible, pero **no tiene candidato ni bloque
   preasignado**.
 - PERSIST.1 permanece planificado y no iniciado, sin Global preasignado.
-- La reconciliación integral de Issues, #154 y la replanificación #155
-  determinan el próximo candidato real.
-- El tag/release de G122 solo procede después de merge y revalidación de `main`.
+- `v0.1.21.01-beta` / G121/E01 permanece como última publicación revision-aware
+  hasta completar el tag/release firmado de G122/E01.
+- `v0.1.22.01-beta` queda pendiente de creación/firma local y de la
+  verificación/publicación gobernada por REL.GOV.1.
 <!-- NOR3-G122-PROMOTION:END -->
 
 <!-- DOC1-R1-REVISION-MANUAL:START -->
-## Nota de lectura vigente — reconciliación post-SEC.2
+## Nota de lectura vigente — reconciliación post-NOR.3
 
 La reconstrucción histórica G001–G070 permanece intacta.
 
 - G118/E04 y G119/E05 preservan DEV.2 R5/R6.
 - G120/E01 (`0.1.20.01-beta`) permanece publicado para UX.5 R6.
-- G121/E01 (`0.1.21.01-beta`) consolida UX.6 R1–R8 con `functional_revision = R8`, ordinal E01 y PR #124.
-- G122/E01 (`0.1.22.01-beta`) queda reservado como candidato NOR.3 R1–R2 y no se considera aceptado ni consumido por esta reserva.
-- PERSIST.1 permanece planificado, no iniciado y sin Global preasignado hasta la replanificación post-NOR.3.
+- G121/E01 (`0.1.21.01-beta`) permanece publicado para UX.6 R1–R8 mediante `v0.1.21.01-beta`.
+- G122/E01 (`0.1.22.01-beta`) queda integrado/aceptado para NOR.3 R1–R8
+  mediante PR #162 / merge `b97cf61763479b80b8e8724b878089e8bb20fa00`.
+- G123 queda disponible sin candidato ni bloque preasignado.
+- PERSIST.1 permanece planificado, no iniciado y sin Global preasignado; no puede iniciar antes de completar #163 → #154 → #155 → #164.
 - Los tags ya publicados permanecen inmutables.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 

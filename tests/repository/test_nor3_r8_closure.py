@@ -48,7 +48,7 @@ class TestNOR3R8Closure(unittest.TestCase):
         self.assertEqual("R1-R8", closure["revision_scope"])
         self.assertEqual("G122/E01", closure["candidate_global"])
         self.assertEqual(
-            "promotion_materialized_pending_merge",
+            "integrated_accepted_post_merge",
             closure["candidate_state"],
         )
         self.assertFalse(

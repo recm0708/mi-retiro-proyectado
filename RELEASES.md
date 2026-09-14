@@ -4,15 +4,18 @@
 <!-- NOR3-R8-PROMOTION:START -->
 ## Promoción G122/E01 — NOR.3 R8
 
-- Estado materializado en este snapshot de promoción: G122/E01
-  (`0.1.22.01-beta`) para NOR.3 R8.
+- G122/E01 (`0.1.22.01-beta`) queda integrado/aceptado para NOR.3 R8.
 - NOR.3 R1–R8 se consolidan con ordinal E01 y revisión funcional R8.
 - PR de integración/promoción: #162.
+- Commit squash de `main`: `b97cf61763479b80b8e8724b878089e8bb20fa00`.
+- Revalidación post-merge: Quality Gate **11 PASS / 0 FAIL**;
+  `unittest` **1584 OK**; `pytest` **1624 passed + 7750 subtests**;
+  Visual & Accessibility y CodeQL en `success`.
 - G123 queda disponible pero sin candidato/bloque asignado.
 - PERSIST.1 permanece planificado y no iniciado, sin Global preasignado.
-- La aceptación definitiva requiere merge protegido y revalidación de `main`.
-- El tag `v0.1.22.01-beta` no se crea desde este helper.
-
+- `v0.1.21.01-beta` permanece como última publicación revision-aware existente.
+- El tag `v0.1.22.01-beta` y su GitHub Release prerelease siguen pendientes
+  de creación/verificación conforme a REL.GOV.1.
 <!-- NOR3-R8-PROMOTION:END -->
 
 **Fecha de reconstrucción histórica:** 2026-08-17

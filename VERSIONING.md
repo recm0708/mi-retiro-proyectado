@@ -11,25 +11,50 @@
 ## Estado post-NOR.3 / promoción G122-E01
 
 - `VERSION` materializa `0.1.22.01-beta` para NOR.3 R8 / G122-E01.
-- NOR.3 R1–R8 queda cerrado estructuralmente en PR #162.
+- NOR.3 R1–R8 quedó integrado/aceptado mediante PR #162 / merge
+  `b97cf61763479b80b8e8724b878089e8bb20fa00`.
+- La revalidación automática de `main` quedó GREEN: Repository Quality Gate,
+  Visual & Accessibility y CodeQL finalizaron en `success`.
 - G123 es el siguiente Global disponible, pero **no tiene candidato ni bloque
   preasignado**.
 - PERSIST.1 permanece planificado y no iniciado, sin Global preasignado.
-- La reconciliación integral de Issues, #154 y la replanificación #155
-  determinan el próximo candidato real.
-- El tag/release de G122 solo procede después de merge y revalidación de `main`.
+- `v0.1.21.01-beta` / G121/E01 permanece como última publicación revision-aware
+  hasta completar el tag/release firmado de G122/E01.
+- `v0.1.22.01-beta` queda pendiente de creación/firma local y de la
+  verificación/publicación gobernada por REL.GOV.1.
 <!-- NOR3-G122-PROMOTION:END -->
+
+<!-- POST-NOR3-INTERMEDIATE-SEQUENCE:START -->
+## Secuencia intermedia obligatoria post-NOR.3
+
+Después de la publicación definitiva de G122/NOR.3 y antes de iniciar PERSIST.1,
+la continuidad material queda fijada así:
+
+1. **MANT.1 R8 — Issue #163:** auditoría y consolidación post-NOR.3
+   de `scripts/` y `tests/`.
+2. **Issue #154:** auditoría documental integral sobre el árbol ya depurado.
+3. **Issue #155:** replanificación maestra con todos los pendientes vigentes.
+4. **VER.2 R6 — Issue #164:** auditoría y reforma del versionado beta,
+   incluidas revisiones, subrevisiones, correcciones materiales e inserción
+   de fases intermedias.
+5. **PERSIST.1 — Issue #130:** permanece bloqueado hasta completar
+   toda la secuencia anterior.
+
+G123 continúa siendo únicamente el siguiente Global disponible.
+Ninguno de estos trabajos recibe Global ni versión candidata mientras
+permanezca solamente planificado.
+<!-- POST-NOR3-INTERMEDIATE-SEQUENCE:END -->
 
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado revision-aware vigente
 
-- `VERSION` contiene `0.1.22.01-beta` y materializa G121/E01 para UX.6 R8.
-- UX.6 R1–R8 consumen un único estado con `functional_revision=R8` y ordinal E01.
-- G120/E01 permanece publicado mediante `v0.1.20.01-beta`.
-- NOR.3 R1–R2 queda como candidato G122/E01 (`0.1.22.01-beta`)
-  reservado/no aceptado; G122 no se consume mientras el estado no sea aceptado.
-- PERSIST.1 permanece planificado y sin Global preasignado hasta el cierre de
-  NOR.3 y la replanificación #155.
+- `VERSION` contiene `0.1.22.01-beta` y materializa G122/E01 para NOR.3 R8.
+- NOR.3 R1–R8 consume un único estado con `functional_revision=R8` y ordinal E01.
+- G121/E01 permanece publicado mediante `v0.1.21.01-beta`.
+- UX.6 R1–R8 permanece cerrado/publicado como G121/E01.
+- G123 es el siguiente Global disponible, sin candidato ni bloque reservado.
+- PERSIST.1 permanece planificado y sin Global preasignado; no puede iniciar
+  antes de completar #163 → #154 → #155 → #164.
 - UX.7/UX.8 permanecen planificados y no iniciados.
 - PR, squash, tag o Release que materializan el mismo estado no consumen otro Global.
 <!-- DOC1-R1-POST-MANT1:END -->
