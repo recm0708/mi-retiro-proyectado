@@ -6,8 +6,8 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ## [Unreleased]
 
-- Después de G122/E01 no se preasigna G123 a ningún bloque; la
-  replanificación post-NOR.3 determina el siguiente candidato real.
+- G123 permanece disponible sin candidato ni bloque preasignado.
+- Continuidad obligatoria: publicación definitiva de G122/E01 → MANT.1 R8 / #163 → #154 → #155 → VER.2 R6 / #164 → PERSIST.1.
 
 ## [0.1.22.01-beta]
 
@@ -17,16 +17,16 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 - Portales, templates, assets, tests, data y scripts quedan normalizados por
   ownership y protegidos por policy/regresiones.
 - PR de integración/promoción: #162.
-- No se reserva G123 para PERSIST.1 ni para otro bloque antes de #154/#155.
+- G123 permanece sin candidato/bloque preasignado; la continuidad posterior a la publicación de G122 se gobierna por #163 → #154 → #155 → #164 antes de PERSIST.1.
 - `v0.1.22.01-beta` solo se crea después del merge, revalidación de `main`
   y firma local.
 
-- NOR.3 R1–R2 queda como candidato vigente G122/E01
-  (`0.1.22.01-beta`), reservado/no aceptado; `VERSION` permanece en
+- Checkpoint histórico de apertura: NOR.3 R1–R2 quedó como candidato G122/E01
+  (`0.1.22.01-beta`), reservado/no aceptado mientras `VERSION` permanecía en
   `0.1.21.01-beta`.
-- La antigua reserva PERSIST.1 → G122/E01 queda reconciliada: PERSIST.1
-  permanece planificado, no iniciado y sin Global preasignado hasta el cierre
-  de NOR.3 y la replanificación post-NOR.3 de #155.
+- En ese checkpoint se retiró la antigua reserva PERSIST.1 → G122/E01; la
+  continuidad vigente posterior está definida en `Unreleased` y en las superficies
+  canónicas de gobierno.
 - UX.7/UX.8 permanecen planificados como programa UX granular posterior;
   no se consideran iniciados por esta reconciliación.
 

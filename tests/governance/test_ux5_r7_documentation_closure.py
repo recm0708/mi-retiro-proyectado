@@ -63,7 +63,7 @@ class TestUX5R7DocumentationClosure(unittest.TestCase):
         self.assertLess(ux5, ux6)
         self.assertLess(ux6, persist)
         self.assertIn("Cerrado/aceptado G121/E01", text)
-        self.assertIn("Candidato G122/E01", text)
+        self.assertIn("Cerrado/aceptado G122/E01", text)
 
     def test_evidencia_de_cierre_existe(self):
         closure = (

@@ -3,35 +3,62 @@
 **Proyecto:** Mi Retiro Proyectado
 **Estado:** vigente desde GOV.1.2
 **Fecha de adopción:** 2026-08-18
-**Última revisión de estado:** NOR.3 R1–R2 — inventario, gobierno y policy estructural del candidato G122/E01 — 2026-09-11
+**Última revisión de estado:** NOR.3 R8 — G122/E01 integrado mediante PR #162 / merge `b97cf61763479b80b8e8724b878089e8bb20fa00` — 2026-09-13
 
 
 <!-- NOR3-G122-PROMOTION:START -->
 ## Estado post-NOR.3 / promoción G122-E01
 
 - `VERSION` materializa `0.1.22.01-beta` para NOR.3 R8 / G122-E01.
-- NOR.3 R1–R8 queda cerrado estructuralmente en PR #162.
+- NOR.3 R1–R8 quedó integrado/aceptado mediante PR #162 / merge
+  `b97cf61763479b80b8e8724b878089e8bb20fa00`.
+- La revalidación automática de `main` quedó GREEN: Repository Quality Gate,
+  Visual & Accessibility y CodeQL finalizaron en `success`.
 - G123 es el siguiente Global disponible, pero **no tiene candidato ni bloque
   preasignado**.
 - PERSIST.1 permanece planificado y no iniciado, sin Global preasignado.
-- La reconciliación integral de Issues, #154 y la replanificación #155
-  determinan el próximo candidato real.
-- El tag/release de G122 solo procede después de merge y revalidación de `main`.
+- `v0.1.21.01-beta` / G121/E01 permanece como última publicación revision-aware
+  hasta completar el tag/release firmado de G122/E01.
+- `v0.1.22.01-beta` queda pendiente de creación/firma local y de la
+  verificación/publicación gobernada por REL.GOV.1.
 <!-- NOR3-G122-PROMOTION:END -->
+
+<!-- POST-NOR3-INTERMEDIATE-SEQUENCE:START -->
+## Secuencia intermedia obligatoria post-NOR.3
+
+Después de la publicación definitiva de G122/NOR.3 y antes de iniciar PERSIST.1,
+la continuidad material queda fijada así:
+
+1. **MANT.1 R8 — Issue #163:** auditoría y consolidación post-NOR.3
+   de `scripts/` y `tests/`.
+2. **Issue #154:** auditoría documental integral sobre el árbol ya depurado.
+3. **Issue #155:** replanificación maestra con todos los pendientes vigentes.
+4. **VER.2 R6 — Issue #164:** auditoría y reforma del versionado beta,
+   incluidas revisiones, subrevisiones, correcciones materiales e inserción
+   de fases intermedias.
+5. **PERSIST.1 — Issue #130:** permanece bloqueado hasta completar
+   toda la secuencia anterior.
+
+G123 continúa siendo únicamente el siguiente Global disponible.
+Ninguno de estos trabajos recibe Global ni versión candidata mientras
+permanezca solamente planificado.
+<!-- POST-NOR3-INTERMEDIATE-SEQUENCE:END -->
 
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado de gobierno vigente
 
 - `VERSION` sigue siendo la fuente única de versión.
-- UX.6 R1–R8 queda integrado/aceptado como G121/E01 (`0.1.21.01-beta`) mediante PR #124 / merge `5dcd2503e83ba69df83fa906d331df594653c0a0`.
-- G120/E01 permanece como última publicación con tag.
+- NOR.3 R1–R8 queda integrado/aceptado como G122/E01 (`0.1.22.01-beta`)
+  mediante PR #162 / merge `b97cf61763479b80b8e8724b878089e8bb20fa00`.
+- G121/E01 permanece publicado mediante `v0.1.21.01-beta`.
+- UX.6 permanece cerrado/publicado en G121/E01.
 - DEV.2 permanece cerrado en G119/E05.
-- NOR.3 R1–R2 queda como candidato G122/E01 reservado/no aceptado y no modifica
-  `VERSION` hasta su eventual aceptación.
-- PERSIST.1 permanece planificado, no iniciado y sin Global preasignado hasta
-  el cierre de NOR.3 y la replanificación #155.
+- G123 queda disponible sin candidato ni bloque preasignado.
+- PERSIST.1 permanece planificado, no iniciado y sin Global preasignado; no puede
+  iniciar antes de completar #163 → #154 → #155 → #164.
 - UX.7/UX.8 permanecen planificados y no iniciados.
-- Publicar G121 exige revalidación post-merge de `main`, tag firmado y GitHub Release prerelease.
+- Publicar G122 exige tag firmado, verificación automática y GitHub Release
+  prerelease; el merge/revalidación de `main` ya están completos.
 <!-- DOC1-R1-POST-MANT1:END -->
 
 ## 1. Propósito

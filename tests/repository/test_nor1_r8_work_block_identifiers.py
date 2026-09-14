@@ -41,6 +41,18 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
             self.assertFalse(ids[ident]["reusable_for_different_scope"])
 
         self.assertEqual("closed", ids["PLAN.2"]["status"])
+        self.assertEqual(
+            "reopened_planned_r8",
+            ids["MANT.1"]["status"],
+        )
+        self.assertIn(
+            "publicación definitiva de G122/NOR.3",
+            ids["MANT.1"]["meaning"],
+        )
+        self.assertEqual(
+            "reopened_planned_r6",
+            ids["VER.2"]["status"],
+        )
         self.assertIn("G114", ids["PLAN.2"]["global_refs"])
         self.assertEqual("closed", ids["UX.5"]["status"])
         self.assertEqual("closed", ids["UX.6"]["status"])
@@ -192,13 +204,29 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
             "Cerrado/aceptado/publicado G119/E05",
             "Cerrado/aceptado G120/E01",
             "Cerrado/aceptado G121/E01",
-            "Candidato G122/E01",
+            "Cerrado/aceptado G122/E01",
+            "MANT.1 R8",
+            "VER.2 R6",
+            "#163",
+            "#154",
+            "#155",
+            "#164",
+            "publicación G122/NOR.3",
+            "Todo bloque usado por la planificación viva",
+            "bloqueado por #163 → #154 → #155 → #164",
+            "Ejecutar #163 solo después de la publicación definitiva de G122/NOR.3",
             "UX.6 R1–R8",
             "PERSIST.1 R1",
             "DEV.2 R6",
         ):
             with self.subTest(fragment=fragment):
                 self.assertIn(fragment, matrix)
+
+        mant = matrix.index("**MANT.1 R8**")
+        ver = matrix.index("**VER.2 R6**")
+        persist = matrix.index("**PERSIST.1 R1**")
+        self.assertLess(mant, ver)
+        self.assertLess(ver, persist)
 
     def test_auditor_automatico_queda_limpio(self):
         proc = subprocess.run(

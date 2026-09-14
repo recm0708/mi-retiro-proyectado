@@ -436,9 +436,9 @@
       "identifier": "MANT.1",
       "family": "MANT",
       "kind": "block",
-      "status": "closed",
-      "meaning": "Mantenimiento e higiene técnica.",
-      "evidence": "Ledger revision-aware.",
+      "status": "reopened_planned_r8",
+      "meaning": "Mantenimiento e higiene técnica. R8 queda planificado para ejecutarse únicamente después de la publicación definitiva de G122/NOR.3 y antes de #154, auditando y consolidando scripts y pruebas.",
+      "evidence": "Ledger revision-aware. Issue #163: approved_not_started; requiere publicación definitiva de G122/NOR.3.",
       "global_refs": [
         "G074-G085"
       ],
@@ -476,9 +476,9 @@
       "identifier": "VER.2",
       "family": "VER",
       "kind": "block",
-      "status": "closed",
-      "meaning": "Reconciliación revision-aware y promoción.",
-      "evidence": "Ledger revision-aware.",
+      "status": "reopened_planned_r6",
+      "meaning": "Reconciliación revision-aware y promoción. R6 queda planificado para auditar y reformar el versionado beta antes de PERSIST.1.",
+      "evidence": "Ledger revision-aware. Issue #164.",
       "global_refs": [
         "G087"
       ],
@@ -564,8 +564,8 @@
       "family": "PERSIST",
       "kind": "block",
       "status": "planned_reserved",
-      "meaning": "Persistencia voluntaria y segura.",
-      "evidence": "Alcance preservado, sin Global preasignado. No inicia hasta el cierre de NOR.3 y la replanificación post-NOR.3 de #155.",
+      "meaning": "Persistencia voluntaria y segura. Antes de iniciar R1 permanece bloqueado por #163 → #154 → #155 → #164.",
+      "evidence": "Alcance preservado, sin Global preasignado. No inicia antes de completar #163 → #154 → #155 → #164. Issue #130. Issue #163. Issue #154. Issue #155. Issue #164.",
       "global_refs": [],
       "reusable_for_different_scope": false
     },

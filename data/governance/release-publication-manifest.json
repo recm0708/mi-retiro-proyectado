@@ -13,7 +13,7 @@
     "El ledger revision-aware queda en `accepted_count=122`.",
     "NOR.3 queda cerrado con `global_refs=[G122]`.",
     "G123 queda solo como siguiente Global aritméticamente disponible; no se asigna a PERSIST.1 ni a otro bloque.",
-    "La replanificación #155 decidirá el próximo candidato real después de la reconciliación post-NOR.3.",
+    "Después de la publicación definitiva de G122/NOR.3, MANT.1 R8 / #163 es la siguiente fase material; #154 → #155 → VER.2 R6 / #164 deben completarse antes de PERSIST.1, sin preasignar G123.",
     "La creación/firma del tag permanece como operación local posterior al merge y revalidación de `main`."
   ],
   "validation": [
@@ -23,7 +23,7 @@
     "NOR.3 R8: **1579 unittest OK**; **1619 pytest + 7708 subtests**.",
     "NOR.3 R8: **171 Markdown**, sin bloqueantes.",
     "JavaScript versionado: **27 archivos válidos**.",
-    "La promoción G122/E01 debe superar nuevamente el gate completo antes del commit firmado."
+    "La integración G122/E01 superó el gate completo antes del commit final y la revalidación post-merge de `main`: 11 PASS / 0 FAIL; 1584 unittest OK; 1624 pytest + 7750 subtests; Visual & Accessibility y CodeQL en `success`."
   ],
   "evidence": [
     "**PR de integración/promoción NOR.3:** #162.",
@@ -32,12 +32,12 @@
     "**R3–R4 firmado:** `e39aeccd5237cdcd82647777acc344cc55821e6a`.",
     "**R5–R6 firmado:** `b54b2d27e78d08e62d54873b749af1f99a6ce120`.",
     "R7 y R8 se materializan en el mismo working tree antes del commit final firmado.",
-    "La publicación final queda condicionada al merge de PR #162, revalidación post-merge, tag firmado y GitHub Release prerelease cuando corresponda."
+    "PR #162 integrado en `b97cf61763479b80b8e8724b878089e8bb20fa00` y revalidación post-merge completada; la publicación definitiva queda pendiente del tag firmado/verificado y del GitHub Release prerelease."
   ],
   "next_step": {
     "global_revision": 123,
     "revision_aware": null,
     "block": null,
-    "description": "G123 es únicamente el siguiente número global disponible. No existe candidato ni bloque preasignado. Después de NOR.3 se reconciliarán Issues, la política/auditoría documental y la replanificación #155 antes de reservar un nuevo estado revision-aware."
+    "description": "G123 es únicamente el siguiente número global disponible. No existe candidato ni bloque preasignado. Después de la publicación definitiva de G122/NOR.3, la continuidad es MANT.1 R8 / #163 → #154 → #155 → VER.2 R6 / #164 → PERSIST.1; cada fase material aceptada recibirá su beta conforme a la política vigente."
   }
 }

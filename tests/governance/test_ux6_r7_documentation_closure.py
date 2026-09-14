@@ -48,10 +48,41 @@ class TestUX6R7DocumentationClosure(unittest.TestCase):
             self.audit,
         )
     def test_g120_publicado_reconciliado(self):
-        for text in (self.readme, self.releases, self.security, self.versioning, self.release_process):
-            self.assertIn("v0.1.20.01-beta", text)
-        self.assertIn("383133233", self.readme)
-        self.assertIn("7dbcca8071e2726b6aa4f17704bf41b92f6cd5bd", self.releases)
+        # G120 sigue preservado como historia publicada.
+        # Sus identificadores de publicación viven en RELEASES;
+        # los documentos vivos de gobierno pueden avanzar.
+        corpus_historico = "\\n".join(
+            (
+                self.readme,
+                self.releases,
+                self.security,
+            )
+        )
+
+        self.assertIn(
+            "v0.1.20.01-beta",
+            corpus_historico,
+        )
+
+        self.assertIn(
+            "383133233",
+            self.releases,
+        )
+
+        self.assertIn(
+            "7dbcca8071e2726b6aa4f17704bf41b92f6cd5bd",
+            self.releases,
+        )
+
+        self.assertIn(
+            "0.1.22.01-beta",
+            self.versioning,
+        )
+
+        self.assertIn(
+            "G122/E01",
+            self.versioning,
+        )
 
     def test_auditoria_r7_indexada(self):
         target = "ux6-r7-documentation-audit.md"

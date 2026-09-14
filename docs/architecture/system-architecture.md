@@ -12,13 +12,15 @@
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado arquitectónico vigente
 
-- UX.6 R1–R8 queda consolidado como G121/E01 (`0.1.21.01-beta`) en PR #124.
-- G120/E01 permanece publicado para UX.5 R6.
+- NOR.3 R1–R8 queda integrado/aceptado como G122/E01 (`0.1.22.01-beta`)
+  mediante PR #162 / merge `b97cf61763479b80b8e8724b878089e8bb20fa00`.
+- UX.6 R1–R8 permanece cerrado/publicado como G121/E01 mediante `v0.1.21.01-beta`.
 - Perfil/avatar, usuarios y auditoría Developer permanecen fuera del modelo previsional.
 - Design System, movimiento, accesibilidad y responsive son compartidos.
 - Importadores documentales mantienen revisión/confirmación explícita.
-- UX.6 no modifica motores SEBD/Mixto/SUCGS ni parámetros normativos.
-- NOR.3 R1–R2 queda como candidato G122/E01 reservado/no aceptado; PERSIST.1 permanece planificado, no iniciado y sin Global preasignado.
+- NOR.3 no modifica motores SEBD/Mixto/SUCGS ni parámetros normativos.
+- G123 queda disponible sin candidato/bloque asignado.
+- PERSIST.1 permanece planificado, no iniciado y sin Global preasignado.
 <!-- DOC1-R1-POST-MANT1:END -->
 
 Mi Retiro Proyectado es una aplicación web local basada en FastAPI, Jinja2 y JavaScript del navegador. La arquitectura separa presentación, contratos de datos, servicios de integración, motores previsionales, parámetros normativos y observabilidad de desarrollo.

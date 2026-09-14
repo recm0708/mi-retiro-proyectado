@@ -11,12 +11,14 @@
 <!-- DOC1-R1-REVISION-MANUAL:START -->
 ## Nota de lectura vigente
 
-- `VERSION` está sincronizado en `0.1.22.01-beta` (G121/E01).
-- G120/E01 permanece publicado mediante `v0.1.20.01-beta`.
-- UX.6 R1–R8 queda consolidado con revisión funcional R8 dentro de PR #124.
+- `VERSION` está sincronizado en `0.1.22.01-beta` (G122/E01).
+- G121/E01 permanece publicado mediante `v0.1.21.01-beta`.
+- UX.6 R1–R8 permanece cerrado con revisión funcional R8.
 - UX.6 no altera reglas previsionales ni convierte Developer Diagnostics en telemetría de producto.
 - Administración Developer y su auditoría permanecen separadas de simulación.
-- NOR.3 R1–R2 queda como candidato G122/E01 reservado/no aceptado; PERSIST.1 permanece planificado, no iniciado y sin Global preasignado.
+- NOR.3 R1–R8 queda integrado/aceptado mediante PR #162 / merge
+  `b97cf61763479b80b8e8724b878089e8bb20fa00`.
+- PERSIST.1 permanece planificado, no iniciado y sin Global preasignado.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 
 Mi Retiro Proyectado es una herramienta independiente de estimación previsional. Este documento delimita qué puede afirmarse sobre el producto y qué debe permanecer explícitamente como aproximación, limitación o pendiente.
