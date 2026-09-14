@@ -21,35 +21,42 @@
 <!-- POST-NOR3-INTERMEDIATE-SEQUENCE:START -->
 ## Secuencia intermedia obligatoria post-NOR.3
 
-Después de la publicación definitiva de G122/NOR.3 y antes de iniciar PERSIST.1,
-la continuidad material queda fijada así:
+MANT.2 R1 / Issue #167 se materializa como **G123/E01**
+(`0.1.23.01-beta`) para resolver el lote Dependabot detectado después de G122.
+La publicación definitiva exige PR/merge, checks remotos, revalidación de
+`main`, tag firmado y GitHub Release prerelease.
 
-1. **MANT.1 R8 — Issue #163:** auditoría y consolidación post-NOR.3
-   de `scripts/` y `tests/`.
-2. **Issue #154:** auditoría documental integral sobre el árbol ya depurado.
-3. **Issue #155:** replanificación maestra con todos los pendientes vigentes.
-4. **VER.2 R6 — Issue #164:** auditoría y reforma del versionado beta,
-   incluidas revisiones, subrevisiones, correcciones materiales e inserción
-   de fases intermedias.
-5. **PERSIST.1 — Issue #130:** permanece bloqueado hasta completar
-   toda la secuencia anterior.
+Después de publicar G123/MANT.2 R1 y antes de iniciar PERSIST.1, la continuidad
+material queda fijada así:
 
-G123 continúa siendo únicamente el siguiente Global disponible.
-Ninguno de estos trabajos recibe Global ni versión candidata mientras
-permanezca solamente planificado.
+1. **MANT.1 R8 — Issue #163:** auditoría, consolidación y saneamiento operativo
+   post-NOR.3 de `scripts/`, `tests`, labels y estructura técnica.
+2. **DOC.3 R1 — Issue #154:** auditoría documental integral.
+3. **PLAN.2 R2 — Issue #155:** replanificación maestra hacia 1.0.
+4. **VER.2 R6 — Issue #164:** reforma del versionado beta y del componente
+   futuro dedicado a fases MANT.2/Dependabot.
+5. **PERSIST.1 — Issue #130:** bloqueado hasta completar toda la secuencia.
+
+G124 queda únicamente como siguiente Global disponible y no se asigna por
+adelantado. Antes de iniciar cada fase futura se repite el preflight Dependabot;
+un lote material nuevo inserta MANT.2 R2+.
 <!-- POST-NOR3-INTERMEDIATE-SEQUENCE:END -->
 
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado de seguridad post-MANT.1
 
-La versión canónica vigente es `0.1.22.01-beta`.
+La versión canónica vigente es `0.1.23.01-beta`.
 
-- NOR.3 R1–R8 queda integrado/aceptado como G122/E01.
+- MANT.2 R1 se materializa como G123/E01 para la remediación coordinada
+  de Dependabot posterior a G122.
+- G122/E01 permanece cerrado/publicado como `v0.1.22.01-beta`.
 - UX.6 R1–R8 permanece cerrado/publicado como G121/E01.
-- `v0.1.21.01-beta` permanece como última publicación revision-aware existente.
+- `pip-audit --strict` y `npm audit` quedan sin vulnerabilidades conocidas
+  en la validación local de MANT.2 R1.
 - R8 de UX.6 preserva sesiones por cuenta, cookie, RBAC visual, assets y favicon.
 - Perfil/avatar y auditoría Developer permanecen separados de datos previsionales.
 - El login humano sigue separado del Bearer técnico.
+- G124 queda disponible sin candidato ni bloque preasignado.
 - PERSIST.1 permanece planificado, no iniciado y sin Global preasignado.
 - REL.GOV.1 mantiene la firma del tag fuera de GitHub Actions.
 <!-- DOC1-R1-POST-MANT1:END -->
@@ -60,7 +67,8 @@ Mi Retiro Proyectado se encuentra en **desarrollo beta**. Los estados histórico
 
 | Línea | Soporte de seguridad |
 | --- | --- |
-| `0.1.22.01-beta` | Beta vigente G122/E01 materializada e integrada/aceptada para NOR.3 R8 mediante PR #162; tag firmado y GitHub Release prerelease pendientes |
+| `0.1.23.01-beta` | Beta vigente G123/E01 en promoción para MANT.2 R1; publicación pendiente de PR/merge, revalidación de `main`, tag firmado y GitHub Release prerelease |
+| `0.1.22.01-beta` | Beta previa G122/E01 publicada para NOR.3; tag firmado y GitHub Release prerelease preservados |
 | `0.1.21.01-beta` | Beta previa G121/E01 integrada para UX.6 R8; se conserva como estado material anterior a NOR.3 |
 | `0.1.20.01-beta` | Beta previa G120/E01 publicada mediante tag firmado `v0.1.20.01-beta` y GitHub Release prerelease |
 | `0.1.19.05-beta` | Beta previa G119/E05 publicada para DEV.2 R6 mediante tag firmado `v0.1.19.05-beta`, workflow de verificación en `success` y GitHub Release prerelease |

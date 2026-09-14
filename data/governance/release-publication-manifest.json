@@ -1,43 +1,39 @@
 {
   "schema_version": 1,
-  "version": "0.1.22.01-beta",
-  "block": "NOR.3",
-  "revision": "R8",
+  "version": "0.1.23.01-beta",
+  "block": "MANT.2",
+  "revision": "R1",
   "summary": [
-    "G122/E01 materializa NOR.3 R8 y consolida R1–R8 como un único estado estructural de normalización.",
-    "NOR.3 separa ownership de App Asegurado, Portal Developer y shared; normaliza templates/assets/tests/data y formaliza guardas estructurales permanentes."
+    "G123/E01 materializa MANT.2 R1 como fase recurrente exclusiva de Dependabot.",
+    "La fase remedia localmente el lote detectado y coordina pypdf, httpx2/httpcore2 y Playwright; el cierre remoto depende del PR/merge y del preflight post-merge."
   ],
   "changes": [
-    "NOR.3 R1–R8 queda materializado como G122/E01 con revisión funcional R8 y ordinal E01.",
-    "`VERSION` avanza a `0.1.22.01-beta`.",
-    "El ledger revision-aware queda en `accepted_count=122`.",
-    "NOR.3 queda cerrado con `global_refs=[G122]`.",
-    "G123 queda solo como siguiente Global aritméticamente disponible; no se asigna a PERSIST.1 ni a otro bloque.",
-    "Después de la publicación definitiva de G122/NOR.3, MANT.1 R8 / #163 es la siguiente fase material; #154 → #155 → VER.2 R6 / #164 deben completarse antes de PERSIST.1, sin preasignar G123.",
-    "La creación/firma del tag permanece como operación local posterior al merge y revalidación de `main`."
+    "MANT.2 R1 queda materializado como G123/E01.",
+    "`VERSION` avanza a `0.1.23.01-beta`.",
+    "`httpx2` y `httpcore2` avanzan a 2.12.0.",
+    "`pypdf` avanza a 6.18.1.",
+    "`playwright` avanza a 1.63.0.",
+    "G124 queda disponible sin bloque preasignado."
   ],
   "validation": [
-    "NOR.3 R7: Repository Quality Gate FULL **11 PASS / 0 FAIL**.",
-    "NOR.3 R7: **1574 unittest OK**; **1614 pytest + 7708 subtests**.",
-    "NOR.3 R8: Repository Quality Gate FULL **11 PASS / 0 FAIL**.",
-    "NOR.3 R8: **1579 unittest OK**; **1619 pytest + 7708 subtests**.",
-    "NOR.3 R8: **171 Markdown**, sin bloqueantes.",
-    "JavaScript versionado: **27 archivos válidos**.",
-    "La integración G122/E01 superó el gate completo antes del commit final y la revalidación post-merge de `main`: 11 PASS / 0 FAIL; 1584 unittest OK; 1624 pytest + 7750 subtests; Visual & Accessibility y CodeQL en `success`."
+    "Repository Quality Gate FULL post-promoción local: 11 PASS / 0 FAIL.",
+    "1588 unittest OK.",
+    "pytest: 1628 passed + 7767 subtests.",
+    "pip-audit --strict: sin vulnerabilidades conocidas.",
+    "npm audit --audit-level=high: 0 vulnerabilidades.",
+    "Markdown: 171 archivos sin bloqueantes; identificadores: 16 familias / 52 identificadores.",
+    "git diff --check: limpio."
   ],
   "evidence": [
-    "**PR de integración/promoción NOR.3:** #162.",
-    "**R1–R2 firmado:** `f88e3b1834406884dbc81b8a4b882add7ad3af11`.",
-    "**Hotfix CI R1–R2:** `2d61337520db482e8eca7fe3b6f500e703bc2665`.",
-    "**R3–R4 firmado:** `e39aeccd5237cdcd82647777acc344cc55821e6a`.",
-    "**R5–R6 firmado:** `b54b2d27e78d08e62d54873b749af1f99a6ce120`.",
-    "R7 y R8 se materializan en el mismo working tree antes del commit final firmado.",
-    "PR #162 integrado en `b97cf61763479b80b8e8724b878089e8bb20fa00` y revalidación post-merge completada; la publicación definitiva queda pendiente del tag firmado/verificado y del GitHub Release prerelease."
+    "Issue de fase: #167.",
+    "PR Dependabot pypdf #160: pendiente de cierre como superseded después de validar la integración coordinada.",
+    "PR Dependabot Playwright #161: pendiente de cierre como superseded después de validar la integración coordinada.",
+    "Inventario inicial: 49 alerts; 37 fixed y 12 abiertos agrupados en 5 advisories únicos."
   ],
   "next_step": {
-    "global_revision": 123,
+    "global_revision": 124,
     "revision_aware": null,
     "block": null,
-    "description": "G123 es únicamente el siguiente número global disponible. No existe candidato ni bloque preasignado. Después de la publicación definitiva de G122/NOR.3, la continuidad es MANT.1 R8 / #163 → #154 → #155 → VER.2 R6 / #164 → PERSIST.1; cada fase material aceptada recibirá su beta conforme a la política vigente."
+    "description": "G124 queda disponible sin candidato. La siguiente fase planificada es MANT.1 R8/#163; después siguen DOC.3 R1/#154, PLAN.2 R2/#155, VER.2 R6/#164 y PERSIST.1/#130."
   }
 }

@@ -15,7 +15,7 @@
 </p>
 
 <p align="center">
-  <img alt="Versión 0.1.22.01-beta" src="https://img.shields.io/badge/versi%C3%B3n-0.1.22.01--beta-2563eb">
+  <img alt="Versión 0.1.23.01-beta" src="https://img.shields.io/badge/versi%C3%B3n-0.1.23.01--beta-2563eb">
   <img alt="Python 3.13 y 3.14" src="https://img.shields.io/badge/Python-3.13%20%7C%203.14-3776AB?logo=python&logoColor=white">
   <img alt="Licencia propietaria" src="https://img.shields.io/badge/licencia-propietaria-6B7280">
 </p>
@@ -26,26 +26,22 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 
 ## Estado del proyecto
 
-- **Versión canónica vigente:** `0.1.22.01-beta`, obtenida exclusivamente
-  desde [`VERSION`](VERSION). Materializa NOR.3 R8 como G122/E01.
-- **Estado revision-aware integrado/aceptado:** NOR.3 R1–R8 / G122/E01.
-- **Integración:** PR #162 / merge `b97cf61763479b80b8e8724b878089e8bb20fa00`.
-- **Revalidación post-merge:** Repository Quality Gate **11 PASS / 0 FAIL**;
-  `unittest` **1584 OK**; `pytest` **1624 passed + 7750 subtests**;
-  Visual & Accessibility y CodeQL en `success`.
-- **Siguiente candidato:** no asignado. G123 es únicamente el siguiente Global
-  disponible y no está reservado para ningún bloque. La próxima fase material es
-  MANT.1 R8 / #163, que solo inicia después de publicar definitivamente G122;
-  #154 → #155 → #164 deben completarse antes de habilitar PERSIST.1.
-- **NOR.3:** R1–R8 cerrados e integrados como G122/E01.
+- **Versión canónica vigente:** `0.1.23.01-beta`, obtenida exclusivamente
+  desde [`VERSION`](VERSION). Materializa MANT.2 R1 como G123/E01.
+- **Estado revision-aware en promoción:** MANT.2 R1 / G123/E01.
+- **Dependencias coordinadas:** `httpx2 2.12.0`, `httpcore2 2.12.0`,
+  `pypdf 6.18.1` y Playwright `1.63.0`.
+- **Seguridad local previa a la promoción:** `pip-audit --strict` sin
+  vulnerabilidades conocidas y `npm audit` con 0 vulnerabilidades.
+- **Publicación anterior:** G122/E01 (`v0.1.22.01-beta`) permanece publicada,
+  firmada e inmutable como cierre de NOR.3.
+- **Siguiente Global:** G124 queda únicamente disponible; no tiene candidato
+  ni bloque preasignado.
+- **Continuidad:** después de publicar G123/MANT.2 R1 corresponde ejecutar
+  MANT.1 R8 / #163 → DOC.3 R1 / #154 → PLAN.2 R2 / #155 →
+  VER.2 R6 / #164 → PERSIST.1 / #130.
 - **PERSIST.1:** preservado y planificado, sin Global preasignado; no iniciado.
 - **SEC.2:** R1–R6 cerrados; su hardening vigente permanece preservado.
-- **Última publicación revision-aware con tag:** `v0.1.21.01-beta` (G121/E01),
-  publicada sobre `eb4795007ac16807661eaace675a093ee19cbf49`, con objeto de tag firmado
-  `a7a1f1a5b208ee43224d1348e639af2619f14ff0` y GitHub Release prerelease ID `384382887`.
-- **Publicación anterior preservada:** `v0.1.20.01-beta` (G120/E01).
-- **Publicación G122:** `v0.1.22.01-beta` pendiente de tag firmado y
-  GitHub Release prerelease.
 - **Etapa:** desarrollo beta; repositorio público y ejecución orientada
   actualmente a entorno local.
 - **Primera versión oficial objetivo:** `1.0.0.0` con `Build 000001`.
@@ -57,22 +53,25 @@ La versión se obtiene exclusivamente del archivo [`VERSION`](VERSION). La polí
 <!-- POST-NOR3-INTERMEDIATE-SEQUENCE:START -->
 ## Secuencia intermedia obligatoria post-NOR.3
 
-Después de la publicación definitiva de G122/NOR.3 y antes de iniciar PERSIST.1,
-la continuidad material queda fijada así:
+MANT.2 R1 / Issue #167 se materializa como **G123/E01**
+(`0.1.23.01-beta`) para resolver el lote Dependabot detectado después de G122.
+La publicación definitiva exige PR/merge, checks remotos, revalidación de
+`main`, tag firmado y GitHub Release prerelease.
 
-1. **MANT.1 R8 — Issue #163:** auditoría y consolidación post-NOR.3
-   de `scripts/` y `tests/`.
-2. **Issue #154:** auditoría documental integral sobre el árbol ya depurado.
-3. **Issue #155:** replanificación maestra con todos los pendientes vigentes.
-4. **VER.2 R6 — Issue #164:** auditoría y reforma del versionado beta,
-   incluidas revisiones, subrevisiones, correcciones materiales e inserción
-   de fases intermedias.
-5. **PERSIST.1 — Issue #130:** permanece bloqueado hasta completar
-   toda la secuencia anterior.
+Después de publicar G123/MANT.2 R1 y antes de iniciar PERSIST.1, la continuidad
+material queda fijada así:
 
-G123 continúa siendo únicamente el siguiente Global disponible.
-Ninguno de estos trabajos recibe Global ni versión candidata mientras
-permanezca solamente planificado.
+1. **MANT.1 R8 — Issue #163:** auditoría, consolidación y saneamiento operativo
+   post-NOR.3 de `scripts/`, `tests`, labels y estructura técnica.
+2. **DOC.3 R1 — Issue #154:** auditoría documental integral.
+3. **PLAN.2 R2 — Issue #155:** replanificación maestra hacia 1.0.
+4. **VER.2 R6 — Issue #164:** reforma del versionado beta y del componente
+   futuro dedicado a fases MANT.2/Dependabot.
+5. **PERSIST.1 — Issue #130:** bloqueado hasta completar toda la secuencia.
+
+G124 queda únicamente como siguiente Global disponible y no se asigna por
+adelantado. Antes de iniciar cada fase futura se repite el preflight Dependabot;
+un lote material nuevo inserta MANT.2 R2+.
 <!-- POST-NOR3-INTERMEDIATE-SEQUENCE:END -->
 
 <!-- AUTOMATION-POST-G119:START -->

@@ -17,18 +17,18 @@ class TestNOR3R1CandidateReconciliation(unittest.TestCase):
         version = (ROOT / "VERSION").read_text(
             encoding="utf-8"
         ).strip()
-        self.assertEqual("0.1.22.01-beta", version)
+        self.assertEqual("0.1.23.01-beta", version)
 
         ledger = cargar_ledger()
-        self.assertEqual(122, ledger["accepted_count"])
+        self.assertEqual(123, ledger["accepted_count"])
         self.assertEqual(
             "0.1.22.01-beta",
-            ledger["entries"][-1]["revision_aware"],
+            next(x for x in ledger["entries"] if x["global_revision"] == 122)["revision_aware"],
         )
 
     def test_g123_disponible_sin_candidato_preasignado(self):
         ledger = cargar_ledger()
-        self.assertEqual(123, ledger["next_global"])
+        self.assertEqual(124, ledger["next_global"])
         self.assertIsNone(ledger["next_candidate"])
         self.assertIsNone(ledger["next_candidate_block"])
 
@@ -67,15 +67,15 @@ class TestNOR3R1CandidateReconciliation(unittest.TestCase):
             ).read_text(encoding="utf-8")
         )
 
-        self.assertEqual("0.1.22.01-beta", manifest["version"])
-        self.assertEqual("NOR.3", manifest["block"])
-        self.assertEqual("R8", manifest["revision"])
+        self.assertEqual("0.1.23.01-beta", manifest["version"])
+        self.assertEqual("MANT.2", manifest["block"])
+        self.assertEqual("R1", manifest["revision"])
 
         next_step = manifest["next_step"]
-        self.assertEqual(123, next_step["global_revision"])
+        self.assertEqual(124, next_step["global_revision"])
         self.assertIsNone(next_step["revision_aware"])
         self.assertIsNone(next_step["block"])
-        self.assertIn("No existe candidato", next_step["description"])
+        self.assertIn("G124", next_step["description"])
         self.assertIn("#155", next_step["description"])
 
     def test_matriz_ubica_nor3_antes_de_persist1(self):

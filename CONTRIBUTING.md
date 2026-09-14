@@ -21,22 +21,25 @@
 <!-- POST-NOR3-INTERMEDIATE-SEQUENCE:START -->
 ## Secuencia intermedia obligatoria post-NOR.3
 
-Después de la publicación definitiva de G122/NOR.3 y antes de iniciar PERSIST.1,
-la continuidad material queda fijada así:
+MANT.2 R1 / Issue #167 se materializa como **G123/E01**
+(`0.1.23.01-beta`) para resolver el lote Dependabot detectado después de G122.
+La publicación definitiva exige PR/merge, checks remotos, revalidación de
+`main`, tag firmado y GitHub Release prerelease.
 
-1. **MANT.1 R8 — Issue #163:** auditoría y consolidación post-NOR.3
-   de `scripts/` y `tests/`.
-2. **Issue #154:** auditoría documental integral sobre el árbol ya depurado.
-3. **Issue #155:** replanificación maestra con todos los pendientes vigentes.
-4. **VER.2 R6 — Issue #164:** auditoría y reforma del versionado beta,
-   incluidas revisiones, subrevisiones, correcciones materiales e inserción
-   de fases intermedias.
-5. **PERSIST.1 — Issue #130:** permanece bloqueado hasta completar
-   toda la secuencia anterior.
+Después de publicar G123/MANT.2 R1 y antes de iniciar PERSIST.1, la continuidad
+material queda fijada así:
 
-G123 continúa siendo únicamente el siguiente Global disponible.
-Ninguno de estos trabajos recibe Global ni versión candidata mientras
-permanezca solamente planificado.
+1. **MANT.1 R8 — Issue #163:** auditoría, consolidación y saneamiento operativo
+   post-NOR.3 de `scripts/`, `tests`, labels y estructura técnica.
+2. **DOC.3 R1 — Issue #154:** auditoría documental integral.
+3. **PLAN.2 R2 — Issue #155:** replanificación maestra hacia 1.0.
+4. **VER.2 R6 — Issue #164:** reforma del versionado beta y del componente
+   futuro dedicado a fases MANT.2/Dependabot.
+5. **PERSIST.1 — Issue #130:** bloqueado hasta completar toda la secuencia.
+
+G124 queda únicamente como siguiente Global disponible y no se asigna por
+adelantado. Antes de iniciar cada fase futura se repite el preflight Dependabot;
+un lote material nuevo inserta MANT.2 R2+.
 <!-- POST-NOR3-INTERMEDIATE-SEQUENCE:END -->
 
 <!-- DOC1-R1-POST-MANT1:START -->

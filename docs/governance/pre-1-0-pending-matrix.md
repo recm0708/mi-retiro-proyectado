@@ -1,9 +1,9 @@
 # Matriz maestra de pendientes hacia 1.0
 
 **Estado:** vigente / documento vivo
-**Versión base:** `0.1.22.01-beta` — G122/E01
-**Checkpoint candidato:** ninguno asignado; G123 es el siguiente Global disponible y permanece sin bloque/candidato; MANT.1 R8 / #163 es la siguiente fase material tras la publicación definitiva de G122/NOR.3
-**Última replanificación:** 2026-09-13 — cierre NOR.3; replanificación #155 pendiente
+**Versión base:** `0.1.23.01-beta` — G123/E01 MANT.2 R1 en promoción
+**Checkpoint candidato:** G123/E01 materializa MANT.2 R1; G124 queda disponible sin bloque/candidato; MANT.1 R8/#163 continúa después de publicar G123
+**Última replanificación:** 2026-09-14 — MANT.2 R1/G123 en promoción; DOC.3 R1 y PLAN.2 R2 formalizados como fases materiales posteriores a MANT.1 R8.
 **Clasificación:** Planificación / Producto / Arquitectura / Seguridad / QA / Release
 
 
@@ -50,15 +50,17 @@ candidato fallido no lo consume.
 ### Secuencia obligatoria antes de PERSIST.1
 
 `publicación G122/NOR.3`
+→ `MANT.2 R1 #167 / G123-E01`
 → `MANT.1 R8 #163`
-→ `#154`
-→ `#155`
+→ `DOC.3 R1 #154`
+→ `PLAN.2 R2 #155`
 → `VER.2 R6 #164`
-→ `PERSIST.1`.
+→ `PERSIST.1 #130`.
 
-Los checkpoints #163 y #164 son trabajo material planificado,
-pero no tienen Global preasignado. #154 y #155 actúan como gates
-de auditoría/replanificación entre ambas fases.
+G124 queda libre y sin candidato preasignado. PERSIST.1 permanece bloqueado por
+#163 → #154 → #155 → #164 después de publicar MANT.2 R1. Ejecutar #163 solo
+después de la publicación definitiva de G122/NOR.3 y de G123/MANT.2 R1.
+Antes de cada fase se ejecuta el preflight Dependabot definido por #166/#167.
 <!-- POST-NOR3-INTERMEDIATE-SEQUENCE:END -->
 
 ## 2. Matriz maestra
@@ -79,21 +81,24 @@ de auditoría/replanificación entre ambas fases.
 | 12 | **UX.5 R6** | Integración y cierre funcional UX.5 | Unificar Manual/Asistido, invalidación, navegación, completitud, errores, loaders, cambio de modalidad, resultados y consistencia de assets. | **Cerrado/aceptado G120/E01** |
 | 13 | **UX.6 R1–R8** | Auditoría integral App + Developer | Identidad/shell, perfil/avatar, usuarios/RBAC, movimiento, accesibilidad, responsive, importadores, privacidad pública, ownership y hardening final. | **Cerrado/aceptado G121/E01** |
 | 14 | **NOR.3 R1–R8** | Normalización estructural integral | Inventario/ownership, policy, backend/portales, templates, assets, tests, data/scripts y cierre documental según #126/#127/#128. | **Cerrado/aceptado G122/E01** |
-| 15 | **MANT.1 R8** | Auditoría y consolidación post-NOR.3 de scripts y pruebas | Ejecutar #163 solo después de la publicación definitiva de G122/NOR.3; clasificar, consolidar y retirar redundancias solo con cobertura equivalente; cerrar con versión beta propia. Bloquea #154. | **Planificado; no iniciado; sin Global preasignado** |
-| 16 | **VER.2 R6** | Auditoría y reforma del versionado beta | Ejecutar después de #163 → #154 → #155; formalizar revisiones, subrevisiones, correcciones materiales e inserción automática de fases nuevas. Bloquea PERSIST.1. | **Planificado; no iniciado; sin Global preasignado** |
-| 17 | **PERSIST.1 R1** | Arquitectura de persistencia | Separar sesión temporal de guardado voluntario; definir esquema persistente versionado, local-first y migrable. | **Planificado; bloqueado por #163 → #154 → #155 → #164; no iniciado; sin Global preasignado** |
-| 18 | **PERSIST.1 R2** | Guardar, restaurar y eliminar | Guardado explícito, listado, restauración, borrado individual y borrado completo. | Planificado |
-| 19 | **PERSIST.1 R3** | Importación, exportación y migraciones | Exportación/importación controlada, validación de esquema, incompatibilidades y migraciones. | Planificado |
-| 20 | **PERSIST.1 R4** | Seguridad y privacidad de persistencia | Minimización, protección/cifrado cuando aporte seguridad real, borrado y revisión de privacidad. | Planificado |
-| 21 | **REP.1 R1** | Motor de informes | Generación real de PDF e informe final reproducible. | Planificado |
-| 22 | **REP.1 R2** | Exportaciones finales | Formatos seleccionables, metodología, trazabilidad, metadatos y protección de datos. | Planificado |
-| 23 | **REP.1 R3** | Cierre de informes | Accesibilidad del PDF, impresión, compatibilidad y validación final. | Planificado |
-| 24 | **SEC.2 R7** | Hardening posterior a nuevas superficies | Reevaluar Developer, sesiones/Bearer, persistencia, archivos, exportaciones, CSP/CSRF/CORS aplicables y amenazas nuevas. | Reapertura planificada |
-| 25 | **A11Y.2** | Auditoría WCAG 2.2 ampliada | Teclado, lector de pantalla, zoom, forced colors, alto contraste, navegadores, dispositivos, formularios, modales y exportaciones. | Planificado |
-| 26 | **REV.1** | Revisión normativa, jurídica, privacidad y seguridad final | Revalidar fuentes, parámetros, interpretaciones, limitaciones, licencia, terceros y revisión jurídica externa prevista. | Planificado |
-| 27 | **DOC.1 R6** | Congelación documental final | Última reconciliación de documentación pública/técnica antes de QA y release estable. | Reapertura planificada |
-| 28 | **QA.1** | Auditoría integral de cierre beta | Código, pruebas, UX, seguridad, accesibilidad, normativa, documentación, rendimiento básico, estabilidad, compatibilidad, datos corruptos y entorno limpio. | Planificado |
-| 29 | **REL.1** | Primera versión oficial | Freeze, build reproducible, SBOM/inventario, hashes, firma, instalación, soporte, release notes, validación limpia y `v1.0.0.0`. | Último bloque |
+| 15 | **MANT.2 R1** | Dependabot y remediación coordinada post-G122 | Resolver alerts/PRs Dependabot, actualizar dependencias y formalizar el preflight recurrente. | **En promoción como G123/E01** |
+| 16 | **MANT.1 R8** | Auditoría y consolidación post-NOR.3 de scripts y pruebas | Ejecutar #163 solo después de la publicación definitiva de G122/NOR.3; clasificar, consolidar y retirar redundancias solo con cobertura equivalente; cerrar con versión beta propia. Bloquea #154. | **Planificado; no iniciado; sin Global preasignado** |
+| 17 | **DOC.3 R1** | Auditoría documental integral post-MANT.1 | Ejecutar #154 después de publicar MANT.1 R8; reconciliar documentación viva/histórica, metadatos, enlaces y evidencia, con beta propia. | **Planificado; no iniciado; sin Global preasignado** |
+| 18 | **PLAN.2 R2** | Replanificación maestra post-DOC.3 | Ejecutar #155 después de DOC.3 R1; reconciliar matriz, roadmap, gates restantes y continuidad hacia 1.0, con beta propia. | **Planificado; no iniciado; sin Global preasignado** |
+| 19 | **VER.2 R6** | Auditoría y reforma del versionado beta | Ejecutar después de #163 → #154 → #155; formalizar revisiones, subrevisiones, correcciones materiales e inserción automática de fases nuevas. Bloquea PERSIST.1. | **Planificado; no iniciado; sin Global preasignado** |
+| 20 | **PERSIST.1 R1** | Arquitectura de persistencia | Separar sesión temporal de guardado voluntario; definir esquema persistente versionado, local-first y migrable. | **Planificado; bloqueado por #163 → #154 → #155 → #164; no iniciado; sin Global preasignado** |
+| 21 | **PERSIST.1 R2** | Guardar, restaurar y eliminar | Guardado explícito, listado, restauración, borrado individual y borrado completo. | Planificado |
+| 22 | **PERSIST.1 R3** | Importación, exportación y migraciones | Exportación/importación controlada, validación de esquema, incompatibilidades y migraciones. | Planificado |
+| 23 | **PERSIST.1 R4** | Seguridad y privacidad de persistencia | Minimización, protección/cifrado cuando aporte seguridad real, borrado y revisión de privacidad. | Planificado |
+| 24 | **REP.1 R1** | Motor de informes | Generación real de PDF e informe final reproducible. | Planificado |
+| 25 | **REP.1 R2** | Exportaciones finales | Formatos seleccionables, metodología, trazabilidad, metadatos y protección de datos. | Planificado |
+| 26 | **REP.1 R3** | Cierre de informes | Accesibilidad del PDF, impresión, compatibilidad y validación final. | Planificado |
+| 27 | **SEC.2 R7** | Hardening posterior a nuevas superficies | Reevaluar Developer, sesiones/Bearer, persistencia, archivos, exportaciones, CSP/CSRF/CORS aplicables y amenazas nuevas. | Reapertura planificada |
+| 28 | **A11Y.2** | Auditoría WCAG 2.2 ampliada | Teclado, lector de pantalla, zoom, forced colors, alto contraste, navegadores, dispositivos, formularios, modales y exportaciones. | Planificado |
+| 29 | **REV.1** | Revisión normativa, jurídica, privacidad y seguridad final | Revalidar fuentes, parámetros, interpretaciones, limitaciones, licencia, terceros y revisión jurídica externa prevista. | Planificado |
+| 30 | **DOC.1 R6** | Congelación documental final | Última reconciliación de documentación pública/técnica antes de QA y release estable. | Reapertura planificada |
+| 31 | **QA.1** | Auditoría integral de cierre beta | Código, pruebas, UX, seguridad, accesibilidad, normativa, documentación, rendimiento básico, estabilidad, compatibilidad, datos corruptos y entorno limpio. | Planificado |
+| 32 | **REL.1** | Primera versión oficial | Freeze, build reproducible, SBOM/inventario, hashes, firma, instalación, soporte, release notes, validación limpia y `v1.0.0.0`. | Último bloque |
 
 <!-- UX6-R8-CLOSURE:START -->
 ## 2.1. Cierre de ejecución UX.6

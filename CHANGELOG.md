@@ -6,8 +6,16 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ## [Unreleased]
 
-- G123 permanece disponible sin candidato ni bloque preasignado.
-- Continuidad obligatoria: publicación definitiva de G122/E01 → MANT.1 R8 / #163 → #154 → #155 → VER.2 R6 / #164 → PERSIST.1.
+- G124 permanece disponible sin candidato ni bloque preasignado.
+- Continuidad tras publicar G123/E01: MANT.1 R8/#163 → DOC.3 R1/#154 → PLAN.2 R2/#155 → VER.2 R6/#164 → PERSIST.1.
+
+## [0.1.23.01-beta]
+
+### Dependencias y seguridad
+
+- MANT.2 R1 materializa G123/E01 como fase recurrente exclusiva de Dependabot.
+- `httpx2`/`httpcore2` avanzan a 2.12.0; `pypdf` a 6.18.1; Playwright a 1.63.0.
+- `pip-audit --strict` y `npm audit` quedan sin vulnerabilidades conocidas.
 
 ## [0.1.22.01-beta]
 

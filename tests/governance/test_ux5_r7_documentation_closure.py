@@ -96,7 +96,7 @@ class TestUX5R7DocumentationClosure(unittest.TestCase):
 
     def test_version_materializa_g121(self):
         version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
-        self.assertEqual("0.1.22.01-beta", version)
+        self.assertEqual("0.1.23.01-beta", version)
 
 
 if __name__ == "__main__":

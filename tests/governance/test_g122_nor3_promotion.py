@@ -19,17 +19,17 @@ POLICY = ROOT / "data/governance/repository-structure-policy.json"
 class TestG122NOR3Promotion(unittest.TestCase):
     def test_version_materializa_g122_e01(self):
         version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
-        self.assertEqual("0.1.22.01-beta", version)
+        self.assertEqual("0.1.23.01-beta", version)
         self.assertEqual(version, APP_VERSION)
-        self.assertEqual((122, 1), descomponer_version_beta_revision(version))
+        self.assertEqual((123, 1), descomponer_version_beta_revision(version))
 
     def test_ledger_cierra_g122_y_no_reserva_g123(self):
         ledger = cargar_ledger()
-        self.assertEqual(122, ledger["accepted_count"])
-        self.assertEqual(123, ledger["next_global"])
+        self.assertEqual(123, ledger["accepted_count"])
+        self.assertEqual(124, ledger["next_global"])
         self.assertIsNone(ledger["next_candidate"])
         self.assertIsNone(ledger["next_candidate_block"])
-        entry = ledger["entries"][-1]
+        entry = next(x for x in ledger["entries"] if x["global_revision"] == 122)
         self.assertEqual(122, entry["global_revision"])
         self.assertEqual("NOR.3", entry["block"])
         self.assertEqual(1, entry["ordinal"])
@@ -51,10 +51,10 @@ class TestG122NOR3Promotion(unittest.TestCase):
 
     def test_manifest_publica_nor3_y_no_inventa_candidato(self):
         data = json.loads(MANIFEST.read_text(encoding="utf-8"))
-        self.assertEqual("0.1.22.01-beta", data["version"])
-        self.assertEqual("NOR.3", data["block"])
-        self.assertEqual("R8", data["revision"])
-        self.assertEqual(123, data["next_step"]["global_revision"])
+        self.assertEqual("0.1.23.01-beta", data["version"])
+        self.assertEqual("MANT.2", data["block"])
+        self.assertEqual("R1", data["revision"])
+        self.assertEqual(124, data["next_step"]["global_revision"])
         self.assertIsNone(data["next_step"]["revision_aware"])
         self.assertIsNone(data["next_step"]["block"])
         description = data["next_step"]["description"]
