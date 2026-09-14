@@ -1,7 +1,7 @@
 # Matriz de trazabilidad
 
 **Estado:** Vigente
-**Versión de aplicación:** `0.1.23.01-beta` — G123/E01 integrado/aceptado para MANT.2 R1; publicación formal pendiente; G122/E01 permanece publicado como cierre NOR.3.
+**Versión de aplicación:** `0.1.24.13-beta` — G124/E13 aceptado localmente para MANT.1 R8; publicación formal pendiente; G123/E01 permanece publicado como MANT.2 R1.
 **Último tag formal legacy:** `v0.0.26-beta`
 **Base histórica:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal:** NOR.2 R8 — 2026-08-24
@@ -11,12 +11,17 @@
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado transversal vigente
 
-- G121/E01 (`0.1.21.01-beta`) permanece publicado para UX.6 R8 mediante `v0.1.21.01-beta`.
-- NOR.3 R1–R8 queda integrado/aceptado como G122/E01 (`0.1.22.01-beta`)
+- G124/E13 (`0.1.24.13-beta`) queda aceptado localmente para MANT.1 R8; la
+  publicación formal permanece pendiente de PR/merge, revalidación, tag y Release.
+- MANT.1 R8 no altera contratos previsionales ni la trazabilidad funcional.
+- G123/E01 (`0.1.23.01-beta`) permanece publicado para MANT.2 R1.
+- G121/E01 (`0.1.21.01-beta`) permanece publicado para UX.6 R8 mediante
+  `v0.1.21.01-beta`.
+- NOR.3 R1–R8 permanece cerrado/aceptado como G122/E01 (`0.1.22.01-beta`)
   mediante PR #162 / merge `b97cf61763479b80b8e8724b878089e8bb20fa00`.
 - TR-035, TR-036 y TR-037 preservan los contratos añadidos por UX.6.
 - DEV.2 R5/R6 permanecen preservados como G118/E04 y G119/E05.
-- G123 queda disponible sin candidato/bloque asignado.
+- G125 queda disponible sin candidato/bloque asignado.
 - PERSIST.1 permanece planificado, no iniciado y sin Global preasignado.
 <!-- DOC1-R1-POST-MANT1:END -->
 

@@ -13,19 +13,19 @@ ROOT = Path(__file__).resolve().parents[2]
 
 
 class TestG123MANT2Promotion(unittest.TestCase):
-    def test_version_materializa_g123_e01(self):
+    def test_version_actual_avanza_sin_reescribir_g123(self):
         version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
-        self.assertEqual("0.1.23.01-beta", version)
+        self.assertEqual("0.1.24.13-beta", version)
         self.assertEqual(version, APP_VERSION)
-        self.assertEqual((123, 1), descomponer_version_beta_revision(version))
+        self.assertEqual((124, 13), descomponer_version_beta_revision(version))
 
-    def test_ledger_materializa_g123_y_deja_g124_libre(self):
+    def test_ledger_preserva_g123_y_avanza_a_g124(self):
         ledger = cargar_ledger()
-        self.assertEqual(123, ledger["accepted_count"])
-        self.assertEqual(124, ledger["next_global"])
+        self.assertEqual(124, ledger["accepted_count"])
+        self.assertEqual(125, ledger["next_global"])
         self.assertIsNone(ledger["next_candidate"])
         self.assertIsNone(ledger["next_candidate_block"])
-        entry = ledger["entries"][-1]
+        entry = next(x for x in ledger["entries"] if x["global_revision"] == 123)
         self.assertEqual("MANT.2", entry["block"])
         self.assertEqual("R1", entry["functional_revision"])
         self.assertEqual("0.1.23.01-beta", entry["revision_aware"])
@@ -37,13 +37,13 @@ class TestG123MANT2Promotion(unittest.TestCase):
         self.assertEqual(["G123"], ids["MANT.2"]["global_refs"])
         self.assertIn("PR #168", ids["MANT.2"]["evidence"])
         self.assertIn("7781 subtests", ids["MANT.2"]["evidence"])
-        self.assertEqual(124, registry["current_candidate"]["next_global_available"])
+        self.assertEqual(125, registry["current_candidate"]["next_global_available"])
 
         manifest = json.loads((ROOT / "data/governance/release-publication-manifest.json").read_text(encoding="utf-8"))
-        self.assertEqual("0.1.23.01-beta", manifest["version"])
-        self.assertEqual("MANT.2", manifest["block"])
-        self.assertEqual("R1", manifest["revision"])
-        self.assertEqual(124, manifest["next_step"]["global_revision"])
+        self.assertEqual("0.1.24.13-beta", manifest["version"])
+        self.assertEqual("MANT.1", manifest["block"])
+        self.assertEqual("R8", manifest["revision"])
+        self.assertEqual(125, manifest["next_step"]["global_revision"])
 
     def test_dependencias_materializadas(self):
         req = (ROOT / "requirements.txt").read_text(encoding="utf-8")

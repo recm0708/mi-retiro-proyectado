@@ -19,14 +19,14 @@ POLICY = ROOT / "data/governance/repository-structure-policy.json"
 class TestG122NOR3Promotion(unittest.TestCase):
     def test_version_materializa_g122_e01(self):
         version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
-        self.assertEqual("0.1.23.01-beta", version)
+        self.assertEqual("0.1.24.13-beta", version)
         self.assertEqual(version, APP_VERSION)
-        self.assertEqual((123, 1), descomponer_version_beta_revision(version))
+        self.assertEqual((124, 13), descomponer_version_beta_revision(version))
 
     def test_ledger_cierra_g122_y_no_reserva_g123(self):
         ledger = cargar_ledger()
-        self.assertEqual(123, ledger["accepted_count"])
-        self.assertEqual(124, ledger["next_global"])
+        self.assertEqual(124, ledger["accepted_count"])
+        self.assertEqual(125, ledger["next_global"])
         self.assertIsNone(ledger["next_candidate"])
         self.assertIsNone(ledger["next_candidate_block"])
         entry = next(x for x in ledger["entries"] if x["global_revision"] == 122)
@@ -36,7 +36,7 @@ class TestG122NOR3Promotion(unittest.TestCase):
         self.assertEqual("R8", entry["functional_revision"])
         self.assertEqual("0.1.22.01-beta", entry["revision_aware"])
 
-    def test_registry_cierra_nor3_sin_preasignar_bloque(self):
+    def test_registry_preserva_nor3_cerrado_y_estado_actual(self):
         data = json.loads(REGISTRY.read_text(encoding="utf-8"))
         ids = {item["identifier"]: item for item in data["identifiers"]}
         self.assertEqual("closed", ids["NOR.3"]["status"])
@@ -46,21 +46,21 @@ class TestG122NOR3Promotion(unittest.TestCase):
         self.assertIsNone(candidate["global_revision"])
         self.assertIsNone(candidate["revision_aware"])
         self.assertIsNone(candidate["block"])
-        self.assertEqual("unassigned_pending_replanning", candidate["state"])
+        self.assertEqual("unassigned_pending_post_mant1_r8", candidate["state"])
         self.assertEqual(155, candidate["planning_issue"])
 
-    def test_manifest_publica_nor3_y_no_inventa_candidato(self):
+    def test_manifest_actual_preserva_continuidad_post_g122(self):
         data = json.loads(MANIFEST.read_text(encoding="utf-8"))
-        self.assertEqual("0.1.23.01-beta", data["version"])
-        self.assertEqual("MANT.2", data["block"])
-        self.assertEqual("R1", data["revision"])
-        self.assertEqual(124, data["next_step"]["global_revision"])
+        self.assertEqual("0.1.24.13-beta", data["version"])
+        self.assertEqual("MANT.1", data["block"])
+        self.assertEqual("R8", data["revision"])
+        self.assertEqual(125, data["next_step"]["global_revision"])
         self.assertIsNone(data["next_step"]["revision_aware"])
         self.assertIsNone(data["next_step"]["block"])
         description = data["next_step"]["description"]
         for fragment in (
-            "MANT.1 R8", "#163", "#154", "#155",
-            "VER.2 R6", "#164", "PERSIST.1",
+            "MANT.1 R8", "#154", "#155",
+            "VER.2 R6", "#164", "PERSIST.1", "#166",
         ):
             with self.subTest(fragment=fragment):
                 self.assertIn(fragment, description)

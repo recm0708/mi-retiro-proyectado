@@ -41,14 +41,9 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
             self.assertFalse(ids[ident]["reusable_for_different_scope"])
 
         self.assertEqual("closed", ids["PLAN.2"]["status"])
-        self.assertEqual(
-            "reopened_planned_r8",
-            ids["MANT.1"]["status"],
-        )
-        self.assertIn(
-            "publicación definitiva de G122/NOR.3",
-            ids["MANT.1"]["meaning"],
-        )
+        self.assertEqual("closed", ids["MANT.1"]["status"])
+        self.assertIn("G124/E13", ids["MANT.1"]["meaning"])
+        self.assertIn("G124", ids["MANT.1"]["global_refs"])
         self.assertEqual(
             "reopened_planned_r6",
             ids["VER.2"]["status"],
@@ -73,7 +68,7 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
         for label in ("LEGACY", "INTEGRIDAD", "POST-GOV"):
             self.assertFalse(labels[label]["reusable_as_family"])
 
-    def test_g112_permanece_aceptado_y_nor3_es_candidato_actual(self):
+    def test_g112_permanece_aceptado_y_estado_actual_no_preasigna_g125(self):
         ledger = cargar_ledger()
         entry = next(
             x for x in ledger["entries"] if x["global_revision"] == 112
@@ -87,7 +82,8 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
         self.assertIsNone(candidate["block"])
         self.assertIsNone(candidate["revision"])
         self.assertIsNone(candidate["edition"])
-        self.assertEqual("unassigned_pending_replanning", candidate["state"])
+        self.assertEqual("unassigned_pending_post_mant1_r8", candidate["state"])
+        self.assertEqual(125, candidate["next_global_available"])
         self.assertIsNone(
             candidate["next_functional_block_if_accepted"]
         )
@@ -205,16 +201,17 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
             "Cerrado/aceptado G120/E01",
             "Cerrado/aceptado G121/E01",
             "Cerrado/aceptado G122/E01",
+            "Cerrado/aceptado/publicado G123/E01",
             "MANT.1 R8",
             "VER.2 R6",
             "#163",
             "#154",
             "#155",
             "#164",
-            "G123/E01 quedó integrado/aceptado mediante PR #168",
+            "G123/MANT.2 R1 está publicado como `v0.1.23.01-beta`",
             "Todo bloque usado por la planificación viva",
-            "bloqueado por #163 → #154 → #155 → #164",
-            "Ejecutar #163 solo después de la publicación definitiva de G123/MANT.2 R1",
+            "bloqueado por #154 → #155 → #164",
+            "G125 queda únicamente como siguiente Global disponible",
             "UX.6 R1–R8",
             "PERSIST.1 R1",
             "DEV.2 R6",
@@ -223,9 +220,13 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
                 self.assertIn(fragment, matrix)
 
         mant = matrix.index("**MANT.1 R8**")
+        doc3 = matrix.index("**DOC.3 R1**")
+        plan2_r2 = matrix.index("**PLAN.2 R2**")
         ver = matrix.index("**VER.2 R6**")
         persist = matrix.index("**PERSIST.1 R1**")
-        self.assertLess(mant, ver)
+        self.assertLess(mant, doc3)
+        self.assertLess(doc3, plan2_r2)
+        self.assertLess(plan2_r2, ver)
         self.assertLess(ver, persist)
 
     def test_auditor_automatico_queda_limpio(self):

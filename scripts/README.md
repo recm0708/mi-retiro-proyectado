@@ -12,16 +12,21 @@ no calculan pensiones y no modifican normativa.
 | Archivo | Propósito | Modifica archivos del proyecto |
 | --- | --- | --- |
 | `configure_git_hooks.ps1` | Configura `core.hooksPath=.githooks` para que Git use los hooks versionados del proyecto. | No |
+| `audit_action_references.py` | Audita referencias `uses:` de GitHub Actions y detecta referencias no permitidas o no gobernadas. | No |
+| `audit_block_identifiers.py` | Valida el registro canónico de bloques de trabajo y detecta identificadores conocidos no registrados. | No |
+| `audit_external_links.py` | Audita enlaces HTTP/HTTPS de la documentación vigente. | No |
+| `audit_git_history_attestation.py` | Valida la identidad HIST, el snapshot de commits y la frontera histórica de firma sin reescribir objetos Git. | No |
 | `audit_markdown.py` | Audita todo Markdown versionable —rastreado o nuevo no ignorado—: formato, metadata, versión vigente, idioma, enlaces locales y stubs de compatibilidad. | No |
-| `audit_repository_integrity.py` | Contrasta el inventario Git/versionable con el árbol canónico y detecta referencias rotas, huérfanos, stubs y duplicados Markdown. | No |
-| `audit_git_history_attestation.py` | Valida la identidad HIST, el snapshot de 195 commits y la frontera histórica de firma sin reescribir objetos Git. | No |
 | `audit_official_sources.py` | Valida manifiesto, nombres, tamaños, firmas binarias, SHA-256 y ausencia de huérfanos en la colección de fuentes oficiales preservadas. | No |
 | `audit_pr_policy.py` | Valida rama, título, estado revision-aware, historial lineal y firmas de commits humanos de un Pull Request contra `allowed_signers` de la rama base. | No |
+| `audit_repository_integrity.py` | Contrasta el inventario Git/versionable con el árbol canónico y detecta referencias rotas, huérfanos, stubs y duplicados Markdown. | No |
+| `audit_signed_tags.py` | Audita firmas y pertenencia histórica de tags `v*`. | No |
 | `quality_gate.py` | Motor canónico de validación usado por desarrollo local y GitHub Actions. | Solo escribe reportes cuando se solicitan explícitamente |
 | `release_readiness.py` | Genera el estado post-merge de versión, Global aceptado, próximo candidato y necesidad de tag firmado sin publicar nada automáticamente. | Solo escribe reportes cuando se solicitan explícitamente |
 | `validate_precommit.py` | Ejecuta el gate local antes de crear commits: estado Git, whitespace, auditoría Markdown, dependencias, compilación Python, sintaxis JavaScript y pruebas. | No |
 | `release_contract.py` | Valida el contrato revision-aware de VERSION/ledger/tag/título/notas para tags y GitHub Releases futuros. | No |
 | `release_publication.py` | Valida el manifiesto de publicación, genera notas canónicas desde evidencia versionada y comprueba la idempotencia de un GitHub Release existente. | Solo escribe el archivo de notas indicado explícitamente por `--render-notes` |
+| `visual_a11y_audit.mjs` | Ejecuta la auditoría visual y de accesibilidad con Playwright, Chromium, screenshots y axe. | Solo escribe artifacts/reportes de auditoría en las rutas de ejecución previstas |
 
 ## Uso previsto
 

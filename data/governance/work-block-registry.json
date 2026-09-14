@@ -14,12 +14,12 @@
     "block": null,
     "revision": null,
     "revision_scope": null,
-    "state": "unassigned_pending_replanning",
+    "state": "unassigned_pending_post_mant1_r8",
     "next_functional_block_if_accepted": null,
     "next_functional_global_if_accepted": null,
     "edition": null,
     "planning_issue": 155,
-    "next_global_available": 124
+    "next_global_available": 125
   },
   "families": [
     {
@@ -436,11 +436,12 @@
       "identifier": "MANT.1",
       "family": "MANT",
       "kind": "block",
-      "status": "reopened_planned_r8",
-      "meaning": "Mantenimiento e higiene técnica. R8 queda planificado para ejecutarse únicamente después de la publicación definitiva de G122/NOR.3 y antes de #154, auditando y consolidando scripts y pruebas.",
-      "evidence": "Ledger revision-aware. Issue #163: approved_not_started; requiere publicación definitiva de G122/NOR.3.",
+      "status": "closed",
+      "meaning": "Mantenimiento e higiene técnica. R8 queda cerrado/aceptado como G124/E13 después de auditar scripts, tests, labels y estructura post-NOR.3 sin retirar cobertura no equivalente.",
+      "evidence": "Ledger G074-G085 y G124; Issue #163; evidencia docs/audits/repository/mant1-r8-scripts-tests-consolidation.md; Quality Gate FULL pre-promoción 11 PASS / 0 FAIL; 1594 unittest OK; pytest 1634 passed + 7781 subtests; Quality Gate FULL post-promoción local 11 PASS / 0 FAIL; 1600 unittest OK; pytest 1640 passed + 7782 subtests; preflight final #166 limpio; publicación G124 pendiente de PR/merge/tag/release.",
       "global_refs": [
-        "G074-G085"
+        "G074-G085",
+        "G124"
       ],
       "reusable_for_different_scope": false
     },

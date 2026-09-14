@@ -3,10 +3,25 @@
 **Proyecto:** Mi Retiro Proyectado
 **Base auditada:** `7037addd44253e528c77460b678d2b3ccd540dd5`
 **Contador histórico en la base `7037addd`:** **G070**
-**Contador aceptado reconciliado vigente:** **G123**
-**Siguiente Global disponible:** **G124**
-**Siguiente candidato disponible:** **ninguno asignado** — G124 permanece disponible sin bloque preasignado; MANT.1 R8/#163 es la siguiente fase material después de publicar G123/MANT.2 R1
+**Contador aceptado reconciliado vigente:** **G124**
+**Siguiente Global disponible:** **G125**
+**Siguiente candidato disponible:** **ninguno asignado** — G125 permanece disponible sin bloque preasignado; DOC.3 R1/#154 es la siguiente fase material después de publicar G124/MANT.1 R8
 
+
+<!-- MANT1-G124-PROMOTION:START -->
+## Estado MANT.1 R8 / promoción local G124-E13
+
+- `VERSION` materializa `0.1.24.13-beta` para MANT.1 R8 / G124-E13.
+- E13 continúa los doce ordinales previos MANT.1 E01–E12 registrados en G074–G085.
+- Auditoría de scripts: 16 conservar / 0 consolidar / 0 retirar / 0 mover.
+- Auditoría semántica pre-promoción: 219 módulos, 1633 funciones `test_*`, 0 duplicados AST y 0 equivalencias estructurales.
+- Quality Gate FULL pre-promoción: 11 PASS / 0 FAIL; 1594 unittest; pytest 1634 + 7781 subtests.
+- Quality Gate FULL post-promoción local: 11 PASS / 0 FAIL; 1600 unittest; pytest 1640 + 7782 subtests.
+- Preflight final #166: 0 PRs, 0 Dependabot alerts, 0 PRs Dependabot; auditorías Python/npm verdes.
+- G123/E01 permanece publicado como `v0.1.23.01-beta`.
+- La publicación formal de G124/E13 permanece pendiente de PR/merge, revalidación de `main`, tag firmado y GitHub Release prerelease.
+- G125 queda disponible sin candidato/bloque preasignado.
+<!-- MANT1-G124-PROMOTION:END -->
 
 <!-- MANT2-G123-PROMOTION:START -->
 ## Estado MANT.2 R1 / cierre material G123-E01

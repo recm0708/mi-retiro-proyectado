@@ -136,6 +136,7 @@ class TestGov14ObservabilidadR1(unittest.TestCase):
                     component="tests",
                     error=error,
                     metadata={"operation": "synthetic"},
+                    correlation_id="f" * 32,
                 )
 
                 contenido = ruta_log_actual().read_text(encoding="utf-8")

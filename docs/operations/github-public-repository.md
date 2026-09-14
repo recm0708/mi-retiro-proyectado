@@ -1,12 +1,12 @@
 # Preparación pública de GitHub
 
 **Estado:** Completada para visibilidad pública — mantenimiento vigente
-**Versión de aplicación revisada:** `0.1.23.01-beta`
+**Versión de aplicación revisada:** `0.1.24.13-beta`
 **Versión base histórica:** `0.0.25-beta`
 **Versión base del checkpoint público:** `0.0.24-beta`
 **Fecha de preparación original:** 2026-08-18
 **Revalidación pública:** 2026-08-19
-**Última revisión documental:** mantenimiento post-G119 — 2026-08-31
+**Última revisión documental:** MANT.1 R8 — 2026-09-14
 **Clasificación:** GitHub / Comunidad / Publicación
 
 Este documento conserva la preparación realizada antes del cambio de visibilidad y registra el estado vigente después de convertir el repositorio en público. La publicación del **repositorio de código** no equivale a declarar una versión oficial de la aplicación, ni constituye por sí sola un despliegue de producción, ni sustituye los gates jurídicos, de accesibilidad, alcance funcional o seguridad.
@@ -50,33 +50,48 @@ La evidencia manual confirmó **20/20 topics** configurados. La interfaz de GitH
 
 ## 3. Taxonomía de labels
 
-Las labels clasifican Issues y Pull Requests; no se asignan a commits. Los commits se identifican mediante mensaje, firma, checks, PR asociado y tags cuando corresponda. La taxonomía vigente contiene **21 labels**.
+Las labels clasifican Issues y Pull Requests; no se asignan a commits. Los commits se identifican mediante mensaje, firma, checks, PR asociado y tags cuando corresponda.
 
-| Label | Color | Uso |
-| --- | --- | --- |
-| `bug` | `d73a4a` | Error o regresión reproducible |
-| `enhancement` | `a2eeef` | Mejora o nueva capacidad |
-| `question` | `d876e3` | Consulta o soporte |
-| `documentation` | `0075ca` | Documentación |
-| `tests` | `1d76db` | Pruebas y calidad |
-| `maintenance` | `cfd3d7` | Refactor, mantenimiento o deuda técnica |
-| `dependencies` | `0366d6` | Dependencias |
-| `github-actions` | `000000` | Workflows y automatización GitHub |
-| `ui` | `7057ff` | Interfaz y experiencia de usuario |
-| `backend` | `0e8a16` | API, servicios y motores |
-| `regulations` | `fbca04` | Normativa y fuentes oficiales |
-| `privacy` | `b60205` | Privacidad y tratamiento de datos |
-| `security` | `8b0000` | Seguridad y vulnerabilidades |
-| `accessibility` | `5319e7` | Accesibilidad |
-| `needs-triage` | `ededed` | Pendiente de clasificación inicial |
-| `blocked` | `24292f` | Bloqueado por una dependencia o decisión |
-| `duplicate` | `cfd3d7` | Duplicado de otro Issue o Pull Request |
-| `good first issue` | `7057ff` | Apropiado para una primera contribución |
-| `help wanted` | `008672` | Se necesita colaboración adicional |
-| `invalid` | `e4e669` | No válido, no aplicable o no reproducible |
-| `wontfix` | `ffffff` | No se continuará trabajando en este cambio |
+El inventario remoto vigente contiene **28 labels** organizados en dos capas:
 
-Las cinco convenciones finales conservan su nombre canónico en inglés porque forman parte del lenguaje habitual de GitHub; sus descripciones y la documentación del proyecto permanecen en español. Los formularios versionados aplican automáticamente `bug`, `enhancement` o `question` junto con `needs-triage`.
+- **16 labels canónicos del proyecto** para ownership, gobierno y superficie;
+- **12 labels suplementarios de GitHub** para tipo de Issue, triage, colaboración, ecosistema y publicación.
+
+| Label | Capa | Color | Uso |
+| --- | --- | --- | --- |
+| `planning` | Canónica | `1d76db` | Planificación y continuidad de trabajo material |
+| `governance` | Canónica | `5319e7` | Gobierno del repositorio, versionado, Issues y Pull Requests |
+| `architecture` | Canónica | `006b75` | Arquitectura, ownership y estructura del repositorio |
+| `post-1.0` | Canónica | `c5def5` | Trabajo expresamente fuera del alcance pre-1.0 |
+| `blocked` | Canónica | `24292f` | Bloqueado por una dependencia o decisión |
+| `ui` | Canónica | `7057ff` | Interfaz y experiencia de usuario |
+| `accessibility` | Canónica | `5319e7` | Accesibilidad |
+| `security` | Canónica | `8b0000` | Seguridad y vulnerabilidades |
+| `privacy` | Canónica | `b60205` | Privacidad y tratamiento de datos |
+| `documentation` | Canónica | `0075ca` | Documentación |
+| `tests` | Canónica | `1d76db` | Pruebas y calidad |
+| `backend` | Canónica | `0e8a16` | API, servicios y motores |
+| `regulations` | Canónica | `fbca04` | Normativa y fuentes oficiales |
+| `dependencies` | Canónica | `0366d6` | Dependencias |
+| `github-actions` | Canónica | `000000` | Workflows y automatización GitHub |
+| `maintenance` | Canónica | `cfd3d7` | Refactor, mantenimiento o deuda técnica |
+| `bug` | Suplementaria | `d73a4a` | Error o regresión reproducible |
+| `enhancement` | Suplementaria | `a2eeef` | Mejora o nueva capacidad |
+| `question` | Suplementaria | `d876e3` | Consulta o soporte |
+| `needs-triage` | Suplementaria | `ededed` | Pendiente de clasificación inicial |
+| `duplicate` | Suplementaria | `cfd3d7` | Duplicado de otro Issue o Pull Request |
+| `good first issue` | Suplementaria | `7057ff` | Apropiado para una primera contribución |
+| `help wanted` | Suplementaria | `008672` | Se necesita colaboración adicional |
+| `invalid` | Suplementaria | `e4e669` | No válido, no aplicable o no reproducible |
+| `wontfix` | Suplementaria | `ffffff` | No se continuará trabajando en este cambio |
+| `python` | Suplementaria | `2b67c6` | Cambios de dependencias o código del ecosistema Python |
+| `javascript` | Suplementaria | `168700` | Cambios de dependencias o código del ecosistema JavaScript |
+| `release` | Suplementaria | `ededed` | Publicación, tags y GitHub Releases |
+
+Los Issue Forms aplican labels suplementarios de tipo/triage junto con los
+labels canónicos de superficie cuando corresponde. Los aliases históricos
+`github_actions`, `normativa` y `needs-review` permanecen retirados. Tampoco se
+crean los sinónimos `ux`, `technical-debt`, `qa` o `testing`.
 
 ### 3.1. Contributors automatizados
 
@@ -109,15 +124,21 @@ parte del runtime de la simulación.
 
 ## 5. Issue Forms y Pull Requests
 
-Los Issue Forms continúan separados en:
+Los Issue Forms versionados se mantienen separados por intención:
 
-- Reporte de error;
-- Solicitud de mejora;
-- Consulta / soporte.
+- Reporte de error → `bug`, `needs-triage`;
+- Solicitud de mejora → `enhancement`, `needs-triage`;
+- Consulta / soporte → `question`, `needs-triage`;
+- Plan / fase / trabajo diferido → `planning`;
+- Arquitectura / estructura → `planning`, `architecture`;
+- Hallazgo / deuda técnica → `planning`, `maintenance`;
+- Revisión UX / superficie → `planning`, `ui`.
 
 Las vulnerabilidades explotables no deben publicarse en Issues. El repositorio tiene habilitado **Private vulnerability reporting** y conserva el canal alternativo documentado en `SECURITY.md`.
 
-Los Pull Requests pueden recibir varias labels según alcance. Un PR transversal de UX puede usar, por ejemplo, `ui`, `documentation`, `tests` y `maintenance`. `.github/workflows/pr-labeler.yml` reutiliza la taxonomía canónica existente mediante `actions/labeler@v7`. El workflow utiliza `pull_request_target` sin checkout ni ejecución de código del PR, con `contents: read` y `pull-requests: write`. `sync-labels: false` preserva las etiquetas añadidas manualmente.
+Los Pull Requests pueden recibir varias labels según alcance. Un PR transversal de UX puede usar, por ejemplo, `ui`, `documentation`, `tests` y `maintenance`. `.github/workflows/pr-labeler.yml` reutiliza la taxonomía existente mediante `actions/labeler@v7`. El workflow utiliza `pull_request_target` sin checkout ni ejecución de código del PR, con `contents: read` y `pull-requests: write`. `sync-labels: false` preserva las etiquetas añadidas manualmente.
+
+`.github/release.yml` usa exclusivamente labels existentes de la taxonomía para categorizar notas generadas y no introduce aliases adicionales.
 
 ## 6. Social Preview e identidad visual
 
@@ -226,7 +247,7 @@ Este gate no equivale a una auditoría externa de seguridad y no elimina los pen
 Topics, labels, Social Preview, visibilidad y parte de los settings de seguridad no son impuestos por archivos versionados. La evidencia manual del mantenedor confirma:
 
 - repositorio público;
-- 21 labels;
+- 28 labels activos, divididos en 16 canónicos y 12 suplementarios;
 - 20/20 topics, incluido `sebd-panama`;
 - Social Preview configurado;
 - controles de seguridad del apartado 8 habilitados;

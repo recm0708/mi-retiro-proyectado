@@ -21,44 +21,47 @@
 <!-- POST-NOR3-INTERMEDIATE-SEQUENCE:START -->
 ## Secuencia intermedia obligatoria post-NOR.3
 
-MANT.2 R1 / Issue #167 se materializa como **G123/E01**
-(`0.1.23.01-beta`) para resolver el lote Dependabot detectado después de G122.
-La integración coordinada quedó completada mediante PR #168 / merge
-`1a3942a6c14ab047fe8bc587c21b9b96cf62f2bd`; `main` fue revalidado con
-0 Dependabot alerts abiertos y checks remotos verdes. La publicación formal
-queda pendiente únicamente del tag firmado y GitHub Release prerelease.
+G123/MANT.2 R1 está publicado como `v0.1.23.01-beta` y permanece preservado
+como el estado material inmediatamente anterior.
 
-Después de publicar G123/MANT.2 R1 y antes de iniciar PERSIST.1, la continuidad
+MANT.1 R8 / Issue #163 se materializa como **G124/E13**
+(`0.1.24.13-beta`). El ordinal E13 continúa la historia propia de MANT.1:
+G074–G085 ya ocupan E01–E12; la revisión funcional vigente es R8.
+
+La aceptación local se sustenta en la auditoría de 16 scripts operativos y
+219 módulos de pruebas pre-promoción, la reconciliación de 28 labels, el
+Quality Gate FULL 11 PASS / 0 FAIL y el preflight final #166 sin trabajo
+Dependabot pendiente. La publicación formal de G124 requiere todavía
+PR/merge, revalidación de `main`, tag firmado y GitHub Release prerelease.
+
+Después de publicar G124/MANT.1 R8 y antes de iniciar PERSIST.1, la continuidad
 material queda fijada así:
 
-1. **MANT.1 R8 — Issue #163:** auditoría, consolidación y saneamiento operativo
-   post-NOR.3 de `scripts/`, `tests`, labels y estructura técnica.
-2. **DOC.3 R1 — Issue #154:** auditoría documental integral.
-3. **PLAN.2 R2 — Issue #155:** replanificación maestra hacia 1.0.
-4. **VER.2 R6 — Issue #164:** reforma del versionado beta y del componente
+1. **DOC.3 R1 — Issue #154:** auditoría documental integral.
+2. **PLAN.2 R2 — Issue #155:** replanificación maestra hacia 1.0.
+3. **VER.2 R6 — Issue #164:** reforma del versionado beta y del componente
    futuro dedicado a fases MANT.2/Dependabot.
-5. **PERSIST.1 — Issue #130:** bloqueado hasta completar toda la secuencia.
+4. **PERSIST.1 — Issue #130:** bloqueado hasta completar toda la secuencia.
 
-G124 queda únicamente como siguiente Global disponible y no se asigna por
-adelantado. Antes de iniciar cada fase futura se repite el preflight Dependabot;
-un lote material nuevo inserta MANT.2 R2+.
+G125 queda únicamente como siguiente Global disponible y no se asigna por
+adelantado. Antes de iniciar cada fase futura se repite el preflight #166;
+un lote material nuevo de dependencias inserta MANT.2 R2+.
 <!-- POST-NOR3-INTERMEDIATE-SEQUENCE:END -->
 
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado de seguridad post-MANT.1
 
-La versión canónica vigente es `0.1.23.01-beta`.
+La versión canónica vigente es `0.1.24.13-beta`.
 
-- MANT.2 R1 se materializa como G123/E01 para la remediación coordinada
-  de Dependabot posterior a G122.
-- G122/E01 permanece cerrado/publicado como `v0.1.22.01-beta`.
-- UX.6 R1–R8 permanece cerrado/publicado como G121/E01.
-- `pip-audit --strict` y `npm audit` quedan sin vulnerabilidades conocidas
-  en la validación local de MANT.2 R1.
+- MANT.1 R8 se materializa como G124/E13 sin modificar motores previsionales ni runtime.
+- G123/E01 permanece publicado como `v0.1.23.01-beta`.
+- `pip-audit --strict` y `npm audit` no reportan vulnerabilidades conocidas
+  en el preflight final #166.
+- Dependabot alerts abiertos: 0; PRs Dependabot abiertos: 0.
 - R8 de UX.6 preserva sesiones por cuenta, cookie, RBAC visual, assets y favicon.
 - Perfil/avatar y auditoría Developer permanecen separados de datos previsionales.
 - El login humano sigue separado del Bearer técnico.
-- G124 queda disponible sin candidato ni bloque preasignado.
+- G125 queda disponible sin candidato ni bloque preasignado.
 - PERSIST.1 permanece planificado, no iniciado y sin Global preasignado.
 - REL.GOV.1 mantiene la firma del tag fuera de GitHub Actions.
 <!-- DOC1-R1-POST-MANT1:END -->
@@ -69,7 +72,8 @@ Mi Retiro Proyectado se encuentra en **desarrollo beta**. Los estados histórico
 
 | Línea | Soporte de seguridad |
 | --- | --- |
-| `0.1.23.01-beta` | Beta vigente G123/E01 integrada/aceptada para MANT.2 R1; Dependabot con 0 alerts abiertos y checks post-merge verdes; publicación formal pendiente de tag firmado y GitHub Release prerelease |
+| `0.1.24.13-beta` | Beta vigente G124/E13 aceptada localmente para MANT.1 R8; Quality Gate y preflight #166 verdes; publicación formal pendiente de PR/merge, tag firmado y GitHub Release prerelease |
+| `0.1.23.01-beta` | Beta previa G123/E01 publicada para MANT.2 R1 mediante tag firmado `v0.1.23.01-beta` y GitHub Release prerelease |
 | `0.1.22.01-beta` | Beta previa G122/E01 publicada para NOR.3; tag firmado y GitHub Release prerelease preservados |
 | `0.1.21.01-beta` | Beta previa G121/E01 integrada para UX.6 R8; se conserva como estado material anterior a NOR.3 |
 | `0.1.20.01-beta` | Beta previa G120/E01 publicada mediante tag firmado `v0.1.20.01-beta` y GitHub Release prerelease |

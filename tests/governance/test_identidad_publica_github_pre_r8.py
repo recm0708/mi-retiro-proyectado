@@ -54,10 +54,13 @@ class TestIdentidadPublicaGithubPreR8(unittest.TestCase):
             with self.subTest(esperado=esperado):
                 self.assertIn(esperado, self.identity)
 
-    def test_documentacion_publica_declara_20_topics_21_labels_y_social_preview(self):
+    def test_documentacion_publica_declara_estado_vigente_y_preserva_checkpoint_labels(self):
         self.assertIn("**Visibilidad actual:** pública", self.prep)
         self.assertIn("20/20 topics", self.prep)
-        self.assertIn("21 labels", self.prep)
+        self.assertIn("28 labels", self.prep)
+        self.assertIn("16 labels canónicos", self.prep)
+        self.assertIn("12 labels suplementarios", self.prep)
+        self.assertIn("labels: 21", self.audit)
         self.assertIn("`sebd-panama`", self.prep)
         self.assertIn("assets/social/github-social-preview.png", self.prep)
 

@@ -15,7 +15,7 @@ AUDIT = ROOT / "docs/audits/repository/nor3-r8-closure-audit.md"
 
 
 class TestNOR3R8Closure(unittest.TestCase):
-    def test_cierre_r8_refleja_promocion_g122(self):
+    def test_cierre_r8_preserva_g122_y_estado_actual(self):
         data = json.loads(REGISTRY.read_text(encoding="utf-8"))
         candidate = data["current_candidate"]
 
@@ -24,7 +24,8 @@ class TestNOR3R8Closure(unittest.TestCase):
         self.assertIsNone(candidate["block"])
         self.assertIsNone(candidate["revision"])
         self.assertIsNone(candidate["revision_scope"])
-        self.assertEqual("unassigned_pending_replanning", candidate["state"])
+        self.assertEqual("unassigned_pending_post_mant1_r8", candidate["state"])
+        self.assertEqual(125, candidate["next_global_available"])
 
         identifiers = {
             item["identifier"]: item

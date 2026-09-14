@@ -24,7 +24,7 @@ class TestUX5R7DocumentationClosure(unittest.TestCase):
         self.assertIsNone(candidate["block"])
         self.assertIsNone(candidate["revision"])
         self.assertIsNone(candidate["edition"])
-        self.assertEqual("unassigned_pending_replanning", candidate["state"])
+        self.assertEqual("unassigned_pending_post_mant1_r8", candidate["state"])
 
     def test_ux5_y_ux6_cerrados_nor3_candidato_y_persist1_planificado(self):
         data = json.loads(
@@ -96,7 +96,7 @@ class TestUX5R7DocumentationClosure(unittest.TestCase):
 
     def test_version_materializa_g121(self):
         version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
-        self.assertEqual("0.1.23.01-beta", version)
+        self.assertEqual("0.1.24.13-beta", version)
 
 
 if __name__ == "__main__":

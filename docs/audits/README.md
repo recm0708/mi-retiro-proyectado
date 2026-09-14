@@ -44,6 +44,7 @@ Auditorías de reconciliación revision-aware y gobierno de Releases.
 
 Auditorías de normalización, nomenclatura, estructura y artefactos del repositorio.
 
+- [MANT.1 R8 — auditoría y decisión de consolidación de scripts y tests](repository/mant1-r8-scripts-tests-consolidation.md) — inventario de 16 scripts y 219 módulos de pruebas; decisión final conservar 16/219, sin fusiones ni retiros por falta de equivalencia demostrada.
 - [Línea base de ownership y estructura NOR.3 R1](repository/repository-ownership-baseline-nor3-r1.md) — inventario de 613 archivos, ownership App/Developer/Shared/Dominio, consumidores y decisiones R1–R8; sin movimientos físicos.
 - [Auditoría de nomenclatura NOR.1 R4](repository/naming-audit-nor1-r4.md)
 - [Línea base de normalización NOR.2 R1](repository/repository-normalization-baseline-nor2-r1.md)
