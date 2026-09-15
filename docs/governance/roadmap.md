@@ -3,36 +3,24 @@
 **Estado:** vigente  
 **Último estado publicado:** G125/E01 — DOC.3 R1  
 **Versión publicada:** `0.1.25.01-beta`  
-**`main` de línea base PLAN.2 R2:**
-`ee077c0d83931f140c91583fa8b2c4ae6b72dec8`  
+**`main` base de PLAN.2 R2:** `ee077c0d83931f140c91583fa8b2c4ae6b72dec8`  
 **Siguiente Global disponible:** G126, libre y no reservado  
-**Fase en curso:** PLAN.2 R2 / Issue #155  
+**Fase en curso:** PLAN.2 R2 / #155  
 **Fecha de reconciliación:** 2026-09-15
 
-Este roadmap muestra el **programa vigente** hacia la primera versión oficial.
-La historia de estados aceptados y publicaciones se conserva en el ledger,
-`RELEASES.md`, `CHANGELOG.md`, tags, GitHub Releases y `docs/archive/`.
+Este roadmap muestra el programa vigente hacia `1.0.0.0`. La historia de estados aceptados permanece en ledger, `RELEASES.md`, `CHANGELOG.md`, tags, GitHub Releases y `docs/archive/`.
 
-## Estado de entrada de PLAN.2 R2
+## Línea base
 
-DOC.3 R1 quedó publicado como G125/E01 mediante el tag firmado
-`v0.1.25.01-beta` y GitHub Release prerelease 388866555.
+DOC.3 R1 quedó publicado como G125/E01 mediante `v0.1.25.01-beta` y GitHub Release prerelease 388866555. El preflight #166 de entrada a PLAN.2 R2 quedó limpio y la verificación diferencial confirmó que `main` no se había movido ni había trabajo material nuevo de dependencias. No se insertó MANT.2 R2.
 
-El preflight #166 inmediatamente anterior a PLAN.2 R2 quedó limpio. La
-verificación diferencial al cambiar de chat confirmó que `main` no se había
-movido, no había PRs abiertos ni trabajo material nuevo de dependencias y
-`Dependency Security` seguía verde sobre el mismo SHA. Por ello no se insertó
-MANT.2 R2 antes de PLAN.2.
-
-PLAN.2 R2 trabaja en la rama:
+PLAN.2 R2 trabaja en:
 
 ```text
 plan/plan2-r2-replanificacion-maestra
 ```
 
-La rama nació exactamente desde el `main` publicado G125. `VERSION` continúa
-en `0.1.25.01-beta`: **PLAN.2 no reserva G126 ni modifica VERSION mientras no
-exista un candidato material validado y aceptable**.
+`VERSION` continúa en `0.1.25.01-beta`. G126 no está reservado ni asociado a PLAN.2 hasta existir candidato material validado.
 
 ## Árbol vigente hacia `1.0.0.0`
 
@@ -46,7 +34,11 @@ G125 / DOC.3 R1 publicado
 → PERSIST.1
 → REP.1
 → DEPLOY.1
-→ UX.7–UX.20
+→ UX.7
+→ UX.8
+→ ...
+→ UX.x final realmente necesario
+→ gate UX/GOV #189 sin drift visual shared
 → SEC.2 R7
 → rendimiento #156
 → A11Y.2
@@ -58,123 +50,123 @@ G125 / DOC.3 R1 publicado
 → 1.0.0.0
 ```
 
-Este orden representa dependencias materiales, no Globals futuros supuestos.
-Cada fase recibe Global/versión únicamente cuando exista un candidato real y
-validado conforme a `VERSIONING.md`.
+El orden expresa dependencias materiales, no Globals futuros supuestos.
 
-## Decisiones de PLAN.2 R2
+## Decisiones principales
 
 ### VER.2 R6 antes de DOC.4
 
-VER.2 R6/#164 reforma primero el contrato revision-aware, parsers, ledger,
-registry y tooling de Release. DOC.4 Lote C revisará después esos mismos
-artefactos declarativos sobre el modelo ya estabilizado; hacerlo al revés
-obligaría a canonizarlos dos veces.
+VER.2 R6/#164 reforma primero el contrato revision-aware, parsers, ledger, registry y tooling de Release. DOC.4/Lote C revisa después esos artefactos declarativos sobre el modelo estabilizado.
 
-### DOC.4 antes de congelar alcance funcional/persistencia
+### DOC.4 antes de #142/PERSIST
 
-DOC.4 R1/#171 ejecuta la reingeniería documental canónica mediante los lotes
-#172, #173 y #174. El Lote C absorbe además #176, la deuda menor del schema
-local de markdownlint. Los lotes son internos y no consumen Globals propios.
+DOC.4 R1/#171 ejecuta la reingeniería documental canónica mediante #172/#173/#174. #174 absorbe #176. Al cerrar, DOC.4 se convierte en nuevo baseline documental y reinicia la cadencia de DOC.3.
 
-Al cerrar DOC.4, su revisión integral se convierte en nuevo baseline documental
-y reinicia la cadencia de DOC.3.
+### #142 antes de PERSIST.1
 
-### Auditoría previsional antes de PERSIST.1
+#142 debe demostrar qué prestaciones/modalidades SEBD/Mixto/SUCGS están realmente cubiertas. Un faltante obligatorio para 1.0 se inserta antes de PERSIST.1. El esquema persistente no se congela con alcance funcional desconocido.
 
-#142 debe establecer qué prestaciones y modalidades SEBD/Mixto/SUCGS están
-realmente soportadas. Si descubre una carencia obligatoria para 1.0, se crea e
-inserta su fase funcional antes de PERSIST.1. El esquema persistente no se
-congela antes de conocer el alcance funcional real.
+### PERSIST.1 → REP.1 → DEPLOY.1 → UX
 
-### PERSIST.1 → REP.1 → DEPLOY.1
+PERSIST estabiliza datos; REP materializa informes/exportaciones; DEPLOY fija runtime/hosting/URLs/condiciones operativas. Solo después se ejecuta la auditoría visual final para evitar rehacer superficies.
 
-PERSIST.1/#130 estabiliza guardado/restauración/migraciones y la auditoría
-técnica transversal. REP.1/#143 materializa informes PDF/exportaciones sobre
-ese estado canónico. DEPLOY.1/#157 fija runtime, hosting, HTTPS, persistencia
-y CI/CD antes de la revisión UX final.
+## Programa UX dinámico
 
-### UX final después de superficies funcionales estables
+El programa se rige por #129 y la política transversal #189.
 
-UX.7/#133 y UX.8/#134 se conservan expresamente. PLAN.2 R2 materializó
-UX.9–UX.20 como Issues #177–#188. La ola completa cubre entradas, simulación
-Manual/Asistida, comparación, metodología, guía de cálculo, gestión local de
-datos, informes y todas las familias visibles del Portal Developer.
+**Regla:** una UX.x corresponde a una superficie, paso o modal material suficientemente pequeño para revisarlo al detalle. La numeración es abierta y consecutiva. El baseline conocido es UX.7–UX.32; UX.33+ se crea si antes del cierre aparece una nueva superficie pre-1.0.
 
-La ola UX empieza después de #142/derivados, PERSIST.1, REP.1 y DEPLOY.1, y
-termina antes de SEC.2 R7. Así los gates finales auditan superficies reales,
-no borradores que cambiarán inmediatamente.
+### Baseline conocido UX.7–UX.32
 
-### Gates finales
-
-SEC.2 R7 endurece el producto y deployment final. #156 mide rendimiento y
-resiliencia sobre ese escenario endurecido. A11Y.2 ejecuta la auditoría WCAG
-2.2 ampliada. REV.1 realiza la revisión normativa/jurídica/privacidad final.
-#153 revalida settings GitHub. DOC.1 R6 congela documentación. QA.1 valida el
-candidato beta final y REL.1 publica la primera estable.
-
-## Programa UX pre-1.0
-
-| UX | Issue | Superficie o flujo |
+| UX | Issue | Superficie |
 | --- | ---: | --- |
-| UX.7 | #133 | Inicio App + login/dashboard Developer |
-| UX.8 | #134 | Entrada a Simulación y selección Manual/Asistida |
-| UX.9 | #177 | Manual — Pasos 1–3 |
-| UX.10 | #178 | Manual — Pasos 4–6 y resultados |
-| UX.11 | #179 | Asistido — Mi Retiro Seguro/importación inicial |
-| UX.12 | #180 | Asistido — Ficha Digital/revisión/corrección |
-| UX.13 | #181 | Comparación de escenarios |
-| UX.14 | #182 | Metodología pública |
-| UX.15 | #183 | Cómo se calcula |
-| UX.16 | #184 | Gestión local de datos/persistencia/privacidad |
-| UX.17 | #185 | Informes/exportación/impresión |
-| UX.18 | #186 | Developer — Diagnóstico/Eventos/Archivos |
-| UX.19 | #187 | Developer — Mantenimiento/Privacidad/Usuarios-RBAC |
-| UX.20 | #188 | Developer — Perfil/credenciales/acceso técnico |
+| UX.7 | #133 | Inicio Asegurado `/` + Inicio/Resumen Developer `/dev` autenticado |
+| UX.8 | #134 | Asegurado `/simulacion` — entrada Manual/Asistida antes del Paso 1 |
+| UX.9 | #177 | Paso 1 — Datos personales |
+| UX.10 | #178 | Paso 2 — Cuotas |
+| UX.11 | #179 | Paso 3 — Historial y base salarial |
+| UX.12 | #180 | Paso 4 — Proyección y línea temporal |
+| UX.13 | #181 | Paso 5 — Escenarios de retiro |
+| UX.14 | #182 | Paso 6 — Resultados |
+| UX.15 | #183 | Asegurado `/comparar` — Escenarios/Comparación |
+| UX.16 | #184 | Asegurado `/como-se-calcula` |
+| UX.17 | #185 | Asegurado `/metodologia` — Fuentes/Metodología |
+| UX.18 | #186 | modal Términos, privacidad y consentimiento |
+| UX.19 | #187 | modal Gestión de datos |
+| UX.20 | #188 | modal Mi Retiro Seguro |
+| UX.21 | #190 | modal Ficha Digital — revisión/importación |
+| UX.22 | #191 | modal Vigencia de Ficha Digital |
+| UX.23 | #192 | Developer — inicio de sesión |
+| UX.24 | #193 | Developer — Diagnóstico |
+| UX.25 | #194 | Developer — Eventos |
+| UX.26 | #195 | Developer — Archivos |
+| UX.27 | #196 | Developer — Mantenimiento |
+| UX.28 | #197 | Developer — Usuarios/RBAC |
+| UX.29 | #198 | Developer — Privacidad |
+| UX.30 | #199 | Developer — Perfil/credenciales web |
+| UX.31 | #200 | Developer — Acceso técnico |
+| UX.32 | #201 | Developer — Centro de desarrollo legacy, si sigue soportado |
 
-## Trabajo expresamente post-1.0
+UX.7 es la única agrupación deliberada: revisa las dos superficies de Inicio por compartir la identidad de entrada de ambos portales. El login Developer se audita aparte en UX.23.
+
+### Regla de expansión UX.33+
+
+Si #142/derivados, PERSIST.1, REP.1, DEPLOY.1 o una UX previa crea/descubre una nueva superficie visual material:
+
+1. se crea la siguiente UX consecutiva;
+2. recibe Issue propio con alcance y criterio de cierre;
+3. se actualizan #129, #155 y fuentes vivas antes de continuar;
+4. se aplica #189;
+5. no se renumeran UX existentes;
+6. no se preasigna Global/VERSION.
+
+## Sincronización visual multiportal — #189
+
+#189 es transversal y no consume Global propio. Todo cambio visual debe clasificarse como `shared` o `portal-specific`.
+
+Cuando sea shared debe sincronizarse en App Asegurado, Portal Developer y futuros portales aplicables. Esto incluye especialmente tokens/paleta, tipografía, tamaños/pesos, colores de texto, botones, inputs, tarjetas, tablas genéricas, badges/alerts, spacing, bordes/radios/sombras, foco, temas Claro/Oscuro/Automático/Alto contraste, forced-colors, motion, selector de apariencia, footer y patrones visuales comunes.
+
+Una UX.x no puede cerrar si dejó otro portal desincronizado por un cambio shared. Si una dependencia real impide resolverlo en la misma fase, debe crear un Issue derivado bloqueante antes del cierre.
+
+## Gate antes de SEC.2 R7
+
+SEC.2 R7 no se habilita por alcanzar UX.32. Se habilita cuando:
+
+- todas las UX.x obligatorias registradas estén cerradas o absorbidas explícitamente;
+- no quede superficie visual material pre-1.0 sin UX owner/clasificación;
+- no exista derivado bloqueante de sincronización shared;
+- #189 confirme ausencia de drift visual shared conocido.
+
+## Gates finales
+
+Después del cierre real de UX.7→UX.x: SEC.2 R7 endurece el producto/deployment; #156 mide rendimiento; A11Y.2 audita WCAG 2.2; REV.1 revisa normativa/jurídica/privacidad; #153 revalida settings GitHub; DOC.1 R6 congela documentación; QA.1 valida el candidato; REL.1 publica 1.0.
+
+## Trabajo post-1.0
 
 No bloquean `1.0.0.0`:
 
-- i18n español/inglés #131;
-- gestión avanzada/historial de sesiones Developer #150;
-- centro de notificaciones Developer #151;
-- administración granular de credenciales Bearer #152.
+- i18n #131;
+- sesiones/accesos Developer avanzados #150;
+- notificaciones Developer #151;
+- credenciales Bearer granulares #152 por defecto.
 
-#152 conserva una excepción: SEC.2 R7 puede escalarla a obligatorio 1.0 si el
-deployment aprobado demuestra que el contrato Bearer vigente no es suficiente
-para operar con seguridad. Ese escalamiento debe actualizar el árbol antes de
-continuar.
+#152 puede escalarse si SEC.2 R7 demuestra necesidad material. Si ese escalamiento introduce una superficie visible, debe crear una nueva UX.x antes de continuar.
 
 ## Políticas transversales
 
-### #166 — preflight, mantenimiento y limpieza
+- **#166:** preflight/limpieza antes y después de cada fase; puede insertar MANT.2 R2+.
+- **DOC.3:** auditoría documental periódica; DOC.4 crea nuevo baseline/reset.
+- **#189:** sincronización visual multiportal y expansión UX.x.
+- **#153:** revalidación final de settings GitHub.
 
-Antes y después de cada fase material se revalida Dependabot/dependencias,
-PRs, ramas, working tree, Issues y gates. Si aparece trabajo material nuevo de
-dependencias, se inserta MANT.2 R2+ antes de la fase prevista y se actualizan
-inmediatamente las fuentes de planificación afectadas.
+## Clasificación
 
-### DOC.3 — auditoría documental periódica
-
-DOC.3 no es un peldaño funcional fijo. Se cuenta por fases materiales top-level
-aceptadas. DOC.4 se convierte en nuevo baseline documental al cerrar y reinicia
-el contador. Por defecto la siguiente auditoría integral ocurre después de la
-segunda fase material aceptada desde ese baseline, salvo un evento documental
-de alto impacto que justifique adelantarla y reiniciar de nuevo el contador.
-
-No se crea ahora DOC.3 R2 ni se le reserva Global.
-
-## Clasificación de pendientes
-
-- **Obligatorios 1.0:** #164, #171–#174, #142 y derivados obligatorios,
-  #130, #143, #157, #129/#133/#134/#177–#188, #144, #156, #145, #146,
-  #147, #148 y #149.
-- **Transversales obligatorios:** #166, #153 y la cadencia DOC.3.
+- **Obligatorios 1.0:** #164, #171–#174, #142 y derivados obligatorios, #130, #143, #157, #129 y todas sus UX.x, #144, #156, #145, #146, #147, #148 y #149.
+- **Transversales obligatorios:** #166, #189, #153 y DOC.3 por cadencia.
 - **Post-1.0:** #131 y #150–#152.
 - **Absorbido:** #176 → #174.
 - **Cerrado/consumido:** #141.
-- **Opcionales 1.0 sin owner material:** ninguno identificado.
+- **Opcionales 1.0 sin owner material:** ninguno.
 
 ## Autoridades relacionadas
 
@@ -189,6 +181,4 @@ No se crea ahora DOC.3 R2 ni se le reserva Global.
 
 ## Regla de continuidad
 
-La siguiente fase material después de PLAN.2 R2 es **VER.2 R6/#164**, pero no
-se inicia hasta que PLAN.2 R2 tenga candidato real validado, sea aceptado,
-integrado y publicado, y un preflight fresco #166 vuelva a quedar limpio.
+La siguiente fase material después de PLAN.2 R2 es VER.2 R6/#164, únicamente después de validar, aceptar, integrar y publicar PLAN.2 R2 y repetir el preflight #166.
