@@ -333,7 +333,6 @@ Alto contraste conserva tokens explícitos dentro de la capa visual moderna y la
 
 La accesibilidad base y UX.4.1 se implementan en la capa global para que Inicio, Simulación, Comparador y Metodología compartan comportamiento coherente sin duplicarlo en cada plantilla.
 
-
 ## UX.3 — adaptación responsive y dato mensual de cuotas
 
 La presentación mantiene una única plantilla global y una sola hoja principal de estilos. UX.3 no introduce una aplicación móvil separada: `style.css` reorganiza navegación, tarjetas, formularios y acciones mediante breakpoints, mientras que las tablas extensas conservan su estructura dentro de contenedores desplazables. En anchos inferiores a 768 px, la navegación persistente del wizard pasa a la parte inferior y respeta las áreas seguras del dispositivo.
@@ -344,7 +343,6 @@ En el Paso 5, JavaScript captura `ultimo_mes_cuotas` con granularidad `YYYY-MM` 
 
 Las dependencias de ejecución Python continúan centralizadas en `requirements.txt`. Node.js LTS no forma parte del runtime ni se instala mediante `pip`; se usa únicamente como herramienta opcional para validaciones estáticas como `node --check`. Actualmente no existe una cadena de compilación frontend ni dependencias npm que requieran `package.json`.
 
-
 ## UX.4.3 — canal de errores y foco de recuperación
 
 `app/static/js/accesibilidad.js` mantiene la semántica de validación separada de la lógica de negocio. La validación crea un mensaje inline visible asociado al campo mediante `aria-errormessage`; al corregirse el valor, se elimina tanto el mensaje como `aria-invalid`. Los errores generales generados por servicios o reglas del frontend permanecen en sus contenedores visibles existentes y reciben foco únicamente cuando pasan de ocultos a visibles.
@@ -353,18 +351,15 @@ La presentación nativa variable del navegador se suprime durante `invalid`; la 
 
 El `MutationObserver` transversal observa inserciones y cambios de clase necesarios para componentes dinámicos. Toda mutación de clase realizada por funciones llamadas desde ese observador debe ser idempotente: antes de añadir una clase se verifica que no exista y antes de retirarla se verifica que esté presente. Esto evita realimentaciones infinitas del propio observador y protege el hilo principal del navegador. La limpieza de errores consulta `ValidityState.valid` para no redisparar `invalid` mediante `checkValidity()`.
 
-
 ## UX.4.4 — dato derivado de edad en presentación
 
 `app/static/js/linea_tiempo.js` deriva la edad anual desde `simulacion.persona.fecha_nacimiento` únicamente para renderizar las tablas del Paso 4. No se añade un campo nuevo a los modelos ni a los endpoints de cálculo: la fecha de nacimiento continúa siendo la fuente única y la edad se recalcula como `año - año de nacimiento` al construir cada fila.
-
 
 ## Referencia PDF personal de Mi Retiro Seguro
 
 `app/services/referencia_mi_retiro_seguro.py` constituye una capa de extracción documental, no un motor previsional. El endpoint `POST /api/simulacion/referencia-mi-retiro-seguro` recibe un `UploadFile`, limita tamaño y tipo, lee el PDF en memoria con `pypdf` y devuelve un contrato revisable. Desde UX.4.6b puede incluir identificadores personales opcionales cuando el PDF los etiqueta de forma inequívoca; el código único del documento continúa excluido y el archivo no se persiste.
 
 `app/static/js/referencia_mi_retiro_seguro.js` conserva el resumen extraído únicamente dentro del estado temporal de la pestaña. En Resultados compara esa referencia con `resumen_unificado`, reutilizando la semántica común de pensión mensual o pago único. El motor actual sigue siendo la fuente del resultado de Mi Retiro Proyectado; el PDF solo aporta una fotografía personal externa.
-
 
 ## Importación revisable de documentos oficiales
 
@@ -374,18 +369,15 @@ UX.4.4 centraliza en el Paso 1 dos entradas opcionales: `referencia_mi_retiro_se
 
 El importador no ejecuta motores legales ni valida elegibilidad. Después de la confirmación invalida resultados derivados para obligar a recalcular con los datos revisados. Las filas proyectadas del comprobante se mantienen fuera del historial real por defecto. Desde UX.4.6d R3, un mes detectado por Ficha Digital se incorpora con su casilla de cuota fijada como parte del registro documental confirmado; meses no presentes permanecen manuales.
 
-
 ### Alcance temporal y formato de la Ficha Digital
 
 El parser `ficha_digital.py` descarta períodos de años distintos al año calendario actual antes de construir `ResumenFichaDigital`. De esta forma el frontend no recibe ni persiste contexto histórico que no vaya a utilizarse en el detalle mensual. Los campos monetarios editables de las vistas previas reutilizan `moneda.js`: se muestran con coma de miles y dos decimales, se editan sin separadores visuales y se normalizan de nuevo al salir del campo.
-
 
 ## UX.4.5 — doble integración sin duplicar motores
 
 Los modelos integrados de SEBD, Mixto y SUCGS incorporan `modo_integracion`, con `PROYECTADO` como valor predeterminado y `SOLO_ACREDITADO` como fotografía alternativa. `app/services/resultados.py` ajusta el escenario seleccionado en modo acreditado para conservar la fecha/edad de retiro, fijar las cuotas al total real del historial y eliminar cuotas futuras. La construcción cronológica existente recibe entonces cero cuotas nuevas y no consume salarios proyectados.
 
 Los tres servicios de resultados reutilizan sus motores legales sin ramas de fórmula paralelas. El frontend solicita ambas fotografías, almacena cada una por separado en `sessionStorage` y las invalida conjuntamente cuando cambia una dependencia. La comparación con Mi Retiro Seguro consulta primero la fotografía acreditada guardada y solo recurre al resultado proyectado si todavía no existe aquella.
-
 
 ## Hardening previo a beta
 
@@ -405,8 +397,6 @@ La página `index.html` utiliza un mockup puramente presentacional construido co
 
 La simplificación de etiquetas del header es únicamente visual: `/`, `/simulacion`, `/comparar` y `/metodologia` continúan siendo las rutas reales. El footer consume `app_version` desde la configuración común y enlaza a la vista de Fuentes; Mi Caja Digital permanece en los flujos de verificación individual.
 
-
-
 ## UX.4.6b — frontera de Datos personales e importación
 
 La capa de presentación mantiene `simulacion.persona` en `sessionStorage` y agrega `modo_datos_personales` y `origen_persona`. Los identificadores opcionales no se envían a los motores previsionales: solo fecha de nacimiento, sexo, fecha de ingreso y sistema continúan alimentando las dependencias de cálculo correspondientes.
@@ -414,7 +404,6 @@ La capa de presentación mantiene `simulacion.persona` en `sessionStorage` y agr
 `app/templates/partials/importacion_datos_oficiales.html` queda dedicado a Mi Retiro Seguro en el Paso 1. `app/templates/partials/importacion_ficha_digital.html` contiene la importación salarial trasladada al Paso 3. Ambos reutilizan `app/static/js/importacion_datos_oficiales.js`, manteniendo una sola frontera HTTP por tipo de documento.
 
 La navegación del wizard conserva selectores históricos por compatibilidad, pero UX.4.6b renderiza dos instancias `wizard-navigation-bar` sincronizadas por `data-wizard-*`: superior e inferior. En PC/laptop la barra superior utiliza `position: sticky` bajo el header dentro del mismo ancho de las tarjetas; la inferior permanece en el flujo normal al final del panel. Ninguna de las dos duplica lógica de negocio.
-
 
 ### UX.4.6b R2 — consentimiento y frontera de privacidad
 
@@ -434,13 +423,11 @@ La navegación del wizard se renderiza dos veces dentro del mismo contenedor de 
 
 Las ayudas contextuales del formulario pueden proyectarse fuera del borde de `.simulation-card` para evitar recortes por `overflow` cuando se abren cerca del final de la página.
 
-
 ### UX.4.6b R4 — cierre de lectura y criterio de contenido público
 
 La detección de llegada al final del documento de privacidad continúa siendo una condición de interfaz para habilitar la casilla de consentimiento, pero no genera un bloque de “fin” ni un mensaje de “lectura completada”. Antes de llegar al final se conserva únicamente la ayuda necesaria para explicar por qué la casilla todavía está deshabilitada; al cumplirse el requisito, esa ayuda desaparece.
 
 Como criterio transversal de presentación, las plantillas públicas deben limitar la redacción a información funcional, previsional, legal, de privacidad, seguridad o accesibilidad que ayude al usuario a operar o comprender el alcance del producto. Terminología de implementación, mensajes meta de desarrollo o posicionamientos ajenos al propósito de Mi Retiro Proyectado —por ejemplo presentarlo como recurso educativo/didáctico— no deben formar parte de la interfaz salvo que exista una función real que lo justifique.
-
 
 ## UX.4.6c — frontera de cuotas acreditadas e hipótesis futuras
 
@@ -451,7 +438,6 @@ Cuando Mi Retiro Seguro confirma `cuotas_historicas`, `cuotas_totales` queda de 
 Las barras superior e inferior del wizard son la única superficie de acción primaria del Paso 2. `navegacion_wizard.js` delega en `continuarDesdePasoCuotas()` cuando ya existe `resumen_cuotas`, eliminando la necesidad de botones duplicados dentro de la tarjeta.
 
 El selector global de apariencia mantiene los mismos cuatro valores de estado, pero su representación visual pasa a SVG inline, sin depender de imágenes externas ni alterar la persistencia del tema.
-
 
 ### Revisión 2: modal compartido y pistas de campos
 
@@ -487,7 +473,6 @@ La eliminación de acciones internas y de paneles `Próximo paso...` reduce ruta
 ### Coherencia Ficha Digital ↔ Paso 2 (R2)
 
 `simulacion.cuotas.cuotas_anio_actual` pertenece al contrato funcional del Paso 2 y no es reescrito por la mera importación de Ficha Digital. `ficha_digital_importada` y `detalle_anio_actual` almacenan salarios/estado/cuota por mes. R3 marca y bloquea automáticamente la casilla de los meses documentales detectados. Desde R19, una **acción manual explícita** sobre una casilla editable del detalle sí puede actualizar la referencia agregada del Paso 2 porque representa información más reciente confirmada por el usuario; el total previo al año actual se conserva y los resúmenes dependientes se revalidan. Las tablas utilizan `data-row-imported`/`data-row-manual` como contrato visual transversal de procedencia.
-
 
 ### Procedencia visual de tablas — UX.4.6d R4
 
@@ -531,8 +516,6 @@ El contrato no centraliza lógica de negocio. `historial_salarios.js` conserva s
 
 Las fases futuras deben partir de este contrato antes de crear un nuevo estilo tabular.
 
-
-
 ### Scrollbar y carga documental — UX.4.6d R11
 
 `app-table-shell` no solo define borde y radio: también es el propietario visual del scrollbar interno. En Chromium/Windows se ocultan los botones nativos del carril, el track permanece transparente y se separa de las esquinas; Firefox usa `scrollbar-color`/`scrollbar-width` equivalentes. La geometría no altera el `overflow` funcional específico de cada tabla.
@@ -545,11 +528,9 @@ R12 generaliza la presentación de desplazamiento más allá de `app-table-shell
 
 `app-table-shell` reduce su radio al token `--app-radius-md`, menor que el de las tarjetas, para integrar mejor el carril interno. El historial anual añade un estado vacío independiente: cuando el filtro **Pendientes** no tiene filas, el wrapper tabular se oculta y se muestra un mensaje de estado; no se renderiza una cabecera huérfana. El componente de archivo usa variables visuales propias y separa el hover del botón de la interacción sobre el nombre del archivo. Comparador continúa declarado con `app-table-shell`, cubierto por regresión.
 
-
 ### Selector de archivo estable — UX.4.6d R13
 
 R13 corrige la interacción entre Bootstrap y el botón nativo de `input[type=file]`. En Chromium, el `:hover` del input puede activarse al pasar por el nombre del archivo y competir con `::file-selector-button`; por ello el componente común fija color, fondo y borde con una regla de prioridad explícita en estados base, hover y focus. No cambia la API de carga ni el procesamiento de PDFs.
-
 
 ### Paso 1 unificado — UX.4.6d R14
 
@@ -571,7 +552,6 @@ La restauración de `paso_actual` se normaliza contra `puedeAccederDirectamenteA
 
 En presentación, `detalle_anio_actual.html` incorpora el componente `importacion_ficha_digital.html`. La estructura conceptual queda **Historial anual → Detalle del año actual (incluye Ficha Digital y tabla mensual) → Base salarial**. No existe acoplamiento nuevo entre parser y motor; solo cambia la orquestación de interfaz.
 
-
 ### UX.4.6d R17 — semántica de procedencia documental
 
 La capa de importación separa tres dimensiones que no deben inferirse entre sí: **procedencia**, **bloqueo** y **valor**. `data-imported-locked` expresa que el control no puede alterarse desde esa vista; no implica que un checkbox esté marcado. La marca visual depende del `checked` real.
@@ -586,13 +566,11 @@ La capa cliente separa ahora tres conceptos: **valor**, **fuente/procedencia** y
 
 El componente común de procedencia convierte códigos de fuente en cuatro estados visibles: Detectado, Editado por ti, Completado manualmente y No detectado. Esta capa puede reutilizarse en Pasos 4–6 sin acoplarla a un parser específico.
 
-
 ### Sincronización mensual → anual en Paso 3 (R19)
 
 `detalle_anio_actual.js` mantiene una proyección local de la fila anual vigente a partir de los registros visibles. `sincronizarFilaAnualDesdeDetalleLocal()` actualiza cuotas y salario sin ejecutar fórmulas previsionales; la API `detalle-anio-actual` continúa siendo la autoridad de validación y recalcula los mismos totales antes del análisis definitivo.
 
 Cuando cambia una casilla manual, `sincronizarCuotasPaso2DesdeDetalle()` conserva la base de cuotas anterior al año actual mediante `cuotas_totales - cuotas_anio_actual`, reemplaza el conteo vigente por el confirmado en el detalle y marca `resumen_cuotas`/resultados posteriores como inválidos. `asegurarCuotasAnalizadasParaPaso3()` reconstruye el resumen mediante el servicio normal antes de validar historial. No se duplican fórmulas actuariales en JavaScript.
-
 
 ### Vigencia y auditoría del detalle actual — UX.4.6d R20
 
@@ -602,7 +580,6 @@ Si la ficha queda fuera de esa ventana, un modal intermedio exige una decisión 
 
 `detalle_anio_actual.js` sigue tomando como autoridad el `ResumenDetalleAnioActual` devuelto por el backend. R20 solo presenta esos campos en `detalle_anio_actual.html`; no duplica promedios ni totales en la capa cliente. Al invalidar el detalle, el resumen visible se oculta junto con el resumen persistido.
 
-
 ## UX.4.6d R21 — servicio de fecha de referencia
 
 `app/services/fecha_referencia.py` encapsula la obtención de una fecha externa para controles de vigencia. Consulta por HTTPS únicamente encabezados de fecha de dominios oficiales de la CSS, cachea brevemente el resultado y devuelve `confiable=false` si no puede verificarlo. `POST /api/simulacion/ficha-digital` incorpora esa referencia a `ResumenFichaDigital` y `GET /api/sistema/fecha-referencia` permite revalidar importaciones persistidas tras F5. La UI no usa el reloj del navegador para decidir si una Ficha Digital es reciente.
@@ -610,8 +587,6 @@ Si la ficha queda fuera de esa ventana, un modal intermedio exige una decisión 
 ### UX.4.6d R22 — reconciliación antes de validar Paso 3
 
 La validación del detalle incorpora una etapa idempotente previa al payload: si existe confirmación manual de cuota o la referencia de Paso 2 ya deriva del detalle, se ejecuta la sincronización de cuotas y, solo cuando cambia la referencia, se reejecuta el servicio de cuotas en segundo plano. El servicio de detalle continúa siendo la fuente de los cálculos mensuales; esta capa únicamente garantiza consistencia de dependencias y mensajes accionables.
-
-
 
 ### UX.4.6d R23 — precedencia temporal de la Ficha Digital
 

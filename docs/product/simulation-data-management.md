@@ -1,7 +1,7 @@
 # Gestión de datos de la simulación
 
 **Estado:** Vigente
-**Versión de aplicación revisada:** `0.1.24.13-beta`
+**Versión de aplicación revisada:** `0.1.25.01-beta`
 **Versión base documental:** `0.0.23-beta`
 **Revisión documental base:** GOV.1.3 R2 — 2026-08-17
 **Actualización vigente:** UX.6 R5–R6 — importación temporal, revisión y confirmación explícita — 2026-09-07

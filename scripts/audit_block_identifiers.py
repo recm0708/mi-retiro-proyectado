@@ -13,6 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / "data" / "governance" / "work-block-registry.json"
 
 def tracked_files() -> list[str]:
+    """Devuelve las rutas versionadas que participan en la auditoría."""
     proc = subprocess.run(
         ["git", "ls-files"],
         cwd=ROOT,
@@ -25,6 +26,7 @@ def tracked_files() -> list[str]:
     return [line for line in proc.stdout.splitlines() if line.strip()]
 
 def main() -> int:
+    """Ejecuta el flujo principal del script y devuelve el código de salida."""
     data = json.loads(REGISTRY.read_text(encoding="utf-8"))
 
     if data.get("schema_version") != 1:

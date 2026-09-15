@@ -155,6 +155,7 @@ VERSION_RX = re.compile(
 
 @dataclass(frozen=True)
 class Issue:
+    """Representa un hallazgo documental detectado por el auditor."""
     path: str
     line: int
     code: str
@@ -162,6 +163,7 @@ class Issue:
 
 
 def normalize(value: str) -> str:
+    """Normaliza texto para comparaciones documentales reproducibles."""
     value = value.strip().lower()
 
     value = value.translate(
@@ -180,6 +182,7 @@ def normalize(value: str) -> str:
 
 
 def classify(path: str) -> str:
+    """Clasifica un documento según su función y ciclo de vida."""
     if path.startswith("docs/archive/"):
         return "HISTORICO"
 
@@ -196,6 +199,7 @@ def classify(path: str) -> str:
 
 
 def looks_like_metadata(label: str) -> bool:
+    """Determina si una línea pertenece al bloque de metadata documental."""
     value = normalize(label)
 
     if value in METADATA_HINTS:
@@ -214,6 +218,7 @@ def looks_like_metadata(label: str) -> bool:
 
 
 def repository_root() -> Path:
+    """Resuelve la raíz Git que debe usar la auditoría."""
     result = subprocess.run(
         ["git", "rev-parse", "--show-toplevel"],
         text=True,
@@ -499,6 +504,7 @@ def load_candidate_state(root: Path) -> tuple[int, str | None]:
 
 
 def clean_prose(line: str) -> str:
+    """Normaliza prosa antes de aplicar comprobaciones lingüísticas."""
     line = re.sub(r"`[^`]*`", " ", line)
     line = re.sub(r"https?://\S+", " ", line)
     line = re.sub(r"\[[^\]]*\]\([^)]+\)", " ", line)
@@ -512,6 +518,7 @@ def metadata_header(
     lines: list[str],
     h1_line: int,
 ) -> list[tuple[str, str, str, int]]:
+    """Extrae y valida la cabecera de metadata documental aplicable."""
     metadata = []
 
     for number in range(
@@ -549,6 +556,7 @@ def check_local_links(
     rel: str,
     lines: list[str],
 ) -> list[Issue]:
+    """Comprueba enlaces y anchors locales del documento."""
     kind = classify(rel)
 
     if kind not in {
@@ -658,6 +666,7 @@ def check_language(
     rel: str,
     lines: list[str],
 ) -> list[Issue]:
+    """Evalúa reglas lingüísticas aplicables al documento."""
     issues = []
     in_code = False
 
@@ -788,6 +797,7 @@ def audit_file(
     next_global: int | None = None,
     next_candidate: str | None = None,
 ) -> list[Issue]:
+    """Audita un archivo Markdown y devuelve los hallazgos detectados."""
     path = root / rel
     issues = []
 
@@ -1034,6 +1044,7 @@ def audit_file(
 def audit_repository(
     root: Path,
 ) -> tuple[list[Issue], Counter[str], int]:
+    """Audita el corpus Markdown versionable del repositorio."""
     version_path = root / "VERSION"
 
     if not version_path.is_file():
@@ -1070,6 +1081,7 @@ def audit_repository(
 
 
 def main() -> int:
+    """Ejecuta el flujo principal del script y devuelve el código de salida."""
     try:
         root = repository_root()
         issues, counts, total = audit_repository(

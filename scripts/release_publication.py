@@ -22,6 +22,7 @@ DEFAULT_MANIFEST = ROOT / "data" / "governance" / "release-publication-manifest.
 
 
 def configure_utf8_stdio() -> None:
+    """Configura la salida estándar para conservar UTF-8 en entornos compatibles."""
     for stream in (sys.stdout, sys.stderr):
         reconfigure = getattr(stream, "reconfigure", None)
         if reconfigure is not None:
@@ -29,6 +30,7 @@ def configure_utf8_stdio() -> None:
 
 
 def load_json(path: Path) -> dict:
+    """Carga un documento JSON versionado y devuelve su contenido."""
     data = json.loads(path.read_text(encoding="utf-8-sig"))
     if not isinstance(data, dict):
         raise ValueError(f"{path} debe contener un objeto JSON.")
@@ -36,6 +38,7 @@ def load_json(path: Path) -> dict:
 
 
 def _validate_text_list(data: dict, field: str, errors: list[str]) -> None:
+    """Valida una lista textual requerida por el manifiesto de publicación."""
     value = data.get(field)
     if not isinstance(value, list) or not value:
         errors.append(f"{field} debe ser una lista no vacía.")
@@ -45,6 +48,7 @@ def _validate_text_list(data: dict, field: str, errors: list[str]) -> None:
 
 
 def validate_manifest(manifest: dict, version: str, ledger: dict) -> list[str]:
+    """Comprueba estructura y campos obligatorios del manifiesto de publicación."""
     errors = validate_version_against_ledger(version, ledger)
 
     if manifest.get("schema_version") != 1:
@@ -113,6 +117,7 @@ def validate_manifest(manifest: dict, version: str, ledger: dict) -> list[str]:
 
 
 def _run_git(*args: str) -> str:
+    """Ejecuta Git con los argumentos recibidos y captura su resultado."""
     cp = subprocess.run(
         ["git", *args],
         cwd=ROOT,
@@ -130,6 +135,7 @@ def _run_git(*args: str) -> str:
 
 
 def resolve_tag(tag: str) -> tuple[str, str]:
+    """Resuelve y valida el tag correspondiente al estado publicado."""
     object_type = _run_git("cat-file", "-t", tag)
     if object_type != "tag":
         raise ValueError(f"{tag} no es un tag anotado.")
@@ -144,6 +150,7 @@ def render_notes(
     published_commit: str,
     tag_object: str,
 ) -> str:
+    """Renderiza las notas de release desde el manifiesto gobernado."""
     version = str(manifest["version"])
     global_revision, edition = parse_revision_aware(version)
     tag = f"v{version}"
@@ -230,6 +237,7 @@ def render_notes(
 
 
 def normalize_body(text: str) -> str:
+    """Normaliza el cuerpo de release para comparaciones idempotentes."""
     return text.replace("\r\n", "\n").replace("\r", "\n").rstrip()
 
 
@@ -239,6 +247,7 @@ def validate_release_snapshot(
     version: str,
     expected_notes: str,
 ) -> list[str]:
+    """Contrasta una publicación existente con el snapshot esperado."""
     expected = {
         "tagName": f"v{version}",
         "name": expected_title(version),
@@ -268,6 +277,7 @@ def validate_release_snapshot(
 
 
 def parser() -> argparse.ArgumentParser:
+    """Construye el parser de argumentos de línea de comandos."""
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST)
     p.add_argument("--check-manifest", action="store_true")
@@ -281,6 +291,7 @@ def parser() -> argparse.ArgumentParser:
 
 
 def main() -> int:
+    """Ejecuta el flujo principal del script y devuelve el código de salida."""
     configure_utf8_stdio()
     args = parser().parse_args()
 

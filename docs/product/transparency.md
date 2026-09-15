@@ -1,30 +1,33 @@
 # Transparencia del producto
 
 **Estado:** Vigente
-**Versión de aplicación revisada:** `0.1.24.13-beta`
+**Versión de aplicación revisada:** `0.1.25.01-beta`
 **Versión base histórica:** `0.0.25-beta`
 **Versión base histórica preservada:** `0.0.23-beta`
 **Base documental preservada:** GOV.1.3 R4 — 2026-08-17
-**Revisión transversal vigente:** UX.4.6i — cierre de guía pública de cálculo — 2026-08-21
+**Revisión transversal vigente:** DOC.3 R1 — materialización G125/E01 pendiente de publicación — 2026-09-15
 **Clasificación:** Pública / Auditoría
 
 <!-- DOC1-R1-REVISION-MANUAL:START -->
 ## Nota de lectura vigente
 
-- `VERSION` está sincronizado en `0.1.24.13-beta` (G124/E13) para MANT.1 R8.
+- `VERSION` está sincronizado en `0.1.25.01-beta` (G125/E01) para DOC.3 R1.
+- G124/E13 está cerrado y publicado mediante PR #170, tag firmado
+  `v0.1.24.13-beta` y GitHub Release prerelease.
 - MANT.1 R8 no modifica reglas previsionales, fórmulas ni afirmaciones
   funcionales del producto.
 - G123/E01 permanece publicado mediante `v0.1.23.01-beta`.
 - G121/E01 permanece publicado mediante `v0.1.21.01-beta`.
-- UX.6 R1–R8 permanece cerrado con revisión funcional R8.
+- UX.6 R1–R8 permanece cerrado/publicado con revisión funcional R8.
 - UX.6 no altera reglas previsionales ni convierte Developer Diagnostics en
   telemetría de producto.
 - Administración Developer y su auditoría permanecen separadas de simulación.
-- NOR.3 R1–R8 permanece cerrado/aceptado como G122/E01 mediante PR #162 /
-  merge `b97cf61763479b80b8e8724b878089e8bb20fa00`.
-- G125 queda disponible sin candidato/bloque preasignado; DOC.3 R1/#154 es la
-  siguiente fase material.
-- PERSIST.1 permanece planificado, no iniciado y sin Global preasignado.
+- NOR.3 R1–R8 permanece cerrado/publicado como G122/E01 mediante PR #162 /
+  merge `b97cf61763479b80b8e8724b878089e8bb20fa00` y tag firmado
+  `v0.1.22.01-beta`.
+- DOC.3 R1/#154 está materializado como G125/E01 y pendiente de publicación.
+- G126 queda disponible sin candidato/bloque preasignado.
+- PLAN.2 R2/#155, VER.2 R6/#164 y PERSIST.1/#130 permanecen no iniciados.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 
 Mi Retiro Proyectado es una herramienta independiente de estimación previsional. Este documento delimita qué puede afirmarse sobre el producto y qué debe permanecer explícitamente como aproximación, limitación o pendiente.
@@ -115,7 +118,7 @@ Las pruebas automatizadas demuestran contratos técnicos concretos. No demuestra
 
 GOV.1.4 dispone de regresiones específicas para observabilidad y GOV.1.5 completó internamente el threat model formal.
 
-La redacción histórica indicaba que la revisión jurídica externa continuaba pendiente antes de una beta pública de producto. PLAN.1 sustituye ese hito de publicación: la revisión externa permanece pendiente como gate previo a la primera versión oficial.
+La redacción histórica indicaba que la revisión jurídica externa continuaba pendiente antes de una beta pública de producto. PLAN.1 sustituyó ese hito de publicación: la revisión externa permanece pendiente como gate previo a la primera versión oficial.
 
 ## 8. Trazabilidad documental
 
@@ -141,21 +144,28 @@ Como evidencia del checkpoint anterior se conserva la formulación: **no declara
 Como evidencia histórica también se conserva la formulación **“cierre de UX.4.6e y del alcance funcional UX.4.6f–h”**, que en aquella revisión describía trabajo todavía pendiente. Esa frase se mantiene únicamente para preservar la trazabilidad documental y **ya no representa el estado vigente**.
 
 UX.4.6e–UX.4.6i, DEV.2, SEC.2 R1–R6, AUD.SEC2 R1, DOC.2,
-NOR.1 R8, DOC.1 R3–R5, PLAN.2 R1, REL.GOV.1 R2, UX.5 y UX.6 están cerrados.
-UX.5 R6 permanece publicado como G120/E01. UX.6 R1–R8 queda
-integrado/aceptado como G121/E01 (`0.1.21.01-beta`) mediante PR #124 /
-merge `5dcd2503e83ba69df83fa906d331df594653c0a0`; su tag y GitHub Release prerelease permanecen pendientes
-hasta completar la revalidación post-merge y la publicación formal.
+NOR.1 R8, DOC.1 R3–R5, PLAN.2 R1, REL.GOV.1 R2, UX.5, UX.6,
+NOR.3 R1–R8, MANT.2 R1 y MANT.1 R8 están cerrados.
 
-Continúan pendientes, según corresponda:
+Estados revision-aware recientes publicados:
 
-- NOR.3 R1–R2 como candidato G122/E01 reservado/no aceptado y validado localmente;
-- PERSIST.1 R1 planificado posteriormente, todavía no iniciado y sin Global preasignado;
-- persistencia, informes y bloques posteriores de la matriz maestra;
-- revisión jurídica externa previa a la primera versión oficial;
-- hardening específico si se decide un despliegue remoto;
-- verificación periódica de GitHub;
-- declaración explícita de aptitud para distribución oficial.
+- UX.5 R6 — G120/E01 — `v0.1.20.01-beta`;
+- UX.6 R8 — G121/E01 — `v0.1.21.01-beta`;
+- NOR.3 R8 — G122/E01 — `v0.1.22.01-beta`;
+- MANT.2 R1 — G123/E01 — `v0.1.23.01-beta`;
+- MANT.1 R8 — G124/E13 — `v0.1.24.13-beta`.
+
+Estado material actual:
+
+- DOC.3 R1/#154 está en ejecución sobre G124 publicado;
+- G125 es el siguiente Global disponible, sin candidato ni bloque preasignado;
+- PLAN.2 R2/#155 permanece no iniciado y se ejecutará después de DOC.3;
+- VER.2 R6/#164 permanece no iniciado y se ejecutará después de PLAN.2 R2;
+- PERSIST.1/#130 permanece planificado y bloqueado detrás de esa secuencia;
+- revisión jurídica externa previa a la primera versión oficial continúa pendiente;
+- hardening específico sigue siendo necesario si se decide un despliegue remoto;
+- la configuración pública de GitHub requiere la revalidación final prevista antes de 1.0;
+- la aptitud para distribución oficial todavía no está declarada.
 
 ## 10. Identidad
 

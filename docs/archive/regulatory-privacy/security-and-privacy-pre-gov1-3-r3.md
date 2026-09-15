@@ -74,7 +74,6 @@ Los casos reales de validación deben anonimizarse o transformarse en fixtures s
 
 Esta fase no afirma resistencia contra cargas hostiles a nivel de un servicio expuesto a Internet. Antes de desplegar la aplicación como servicio público remoto harían falta controles adicionales de infraestructura, límites de concurrencia, observabilidad, revisión/endurecimiento de CSP para el entorno de producción, revisión de dependencias y una evaluación de amenazas acorde al entorno de despliegue.
 
-
 ## 8. UX.4.6b — identificadores personales, consentimiento y Web Storage
 
 La incorporación opcional de datos de identidad modifica la política anterior de exclusión total de identificadores, pero no habilita persistencia permanente. Se aplican estas condiciones:
@@ -106,11 +105,9 @@ El consentimiento informado se presenta antes de la captura/importación. Su ver
 - revisar jurídicamente política y consentimiento;
 - reevaluar el modelo si se añaden cuentas, almacenamiento remoto, sincronización, analítica, telemetría, publicidad o terceros.
 
-
 ## Consentimiento visible UX.4.6b R4
 
 El consentimiento previo se presenta como un documento extenso y versionado. La casilla de aceptación se habilita únicamente después de alcanzar el final del texto. La interfaz no agrega un bloque de **Fin de los términos** ni un mensaje de **Lectura completada**: al cumplirse el requisito desaparece la ayuda previa y la casilla queda disponible. La interfaz pública describe conservación temporal, cookies, terceros y derechos en lenguaje comprensible; la documentación técnica conserva los nombres de las tecnologías cuando son necesarios para auditoría.
-
 
 ## 9. UX.4.6c — integridad de datos importados por campo
 
@@ -155,7 +152,6 @@ La interfaz y el consentimiento describen **documentos importados** sin exigir a
 ## UX.4.6d R18 — recarga y nombre del documento
 
 Por seguridad del navegador, `input[type=file]` se vacía después de recargar y la aplicación no intenta reconstruirlo. Para no confundir al usuario, la sesión puede conservar el **nombre del documento** como metadata de presentación junto con los datos que ya fueron confirmados. No se persisten bytes, ruta local, copia del PDF ni contenido adicional fuera de los datos extraídos/revisados. No se incorpora telemetría ni almacenamiento remoto y se mantiene la versión de privacidad **2026-08-15.1**.
-
 
 ## UX.4.6d R21 — verificación externa de fecha
 

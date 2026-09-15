@@ -94,7 +94,6 @@ Alto contraste se considera un tema oscuro de contraste máximo: fondo negro, te
 
 La trazabilidad visible puede indicar artículo, reglamento, fórmula, nombre de la fuente y enlace oficial. No debe explicar al Asegurado(a) que el enlace procede de `regulations/*.json`, de un endpoint, del backend o de otra estructura interna. Esos detalles se documentan aquí, en Arquitectura o en Decisiones.
 
-
 ## 9. Responsive y navegación móvil
 
 UX.3 establece estas reglas para componentes nuevos:
@@ -167,7 +166,6 @@ La ausencia de Node.js no impide ejecutar FastAPI ni la suite `unittest`. Si en 
 - `forced-colors: active` debe delegar la selección en `Highlight` y `HighlightText` del sistema.
 - No eliminar el control de radio: el clic sobre toda la fila es una mejora de puntero, mientras el radio conserva la semántica y operación de teclado.
 
-
 ## 15. UX.4.3 — errores y recuperación por teclado
 
 - Un control inválido debe conservar su etiqueta y ayudas existentes; el mensaje de error específico se muestra inline y se asocia mediante `aria-errormessage`.
@@ -181,7 +179,6 @@ La ausencia de Node.js no impide ejecutar FastAPI ni la suite `unittest`. Si en 
 - Las funciones llamadas por el `MutationObserver` deben ser idempotentes sobre `class`; no repetir `classList.add()` para una clase ya presente ni `classList.remove()` para una ausente.
 - En validación reactiva, usar `control.validity.valid` para consultar estado sin emitir de nuevo `invalid`; reservar `checkValidity()`/`reportValidity()` para flujos donde esa emisión sea intencional.
 
-
 ## 16. UX.4.4 — edad anual en la línea temporal
 
 - La columna **Edad** de Paso 4 es derivada; no almacenar una segunda edad persistente.
@@ -189,7 +186,6 @@ La ausencia de Node.js no impide ejecutar FastAPI ni la suite `unittest`. Si en 
 - Si falta una fecha de nacimiento válida, mostrar `—`; no asumir una edad.
 - Mantener la columna inmediatamente después de **Año** en Historial salarial real y Proyección futura.
 - Cualquier cambio futuro de esta convención debe actualizar pruebas, especificación, ADR y validación manual de los casos de referencia.
-
 
 ## 17. UX.4.4 — detalle reciente y base salarial
 
@@ -204,13 +200,11 @@ Reglas de implementación:
 - los importadores solo aceptan formatos cuya estructura pueda validarse; para PDF digital se exige texto extraíble y una vista previa editable antes de aplicar;
 - no versionar fichas, comprobantes, capturas ni datos personales usados para validación manual.
 
-
 ## UX.4.4 — comprobante personal como referencia dinámica
 
 El importador de Mi Retiro Seguro debe mantenerse independiente de los motores. Los cambios al parser se validan contra texto sintético y, de forma manual, contra documentos personales conservados fuera de Git. La respuesta del endpoint puede incluir identificadores personales opcionales desde UX.4.6b cuando están etiquetados de forma inequívoca; el código único del documento se omite y el archivo no se escribe en disco.
 
 La comparación de Resultados consume `resumen_unificado`; no debe conocer campos internos exclusivos de SEBD, Mixto o SUCGS. Un caso de validación puede aparecer en tests, pero su monto nunca debe formar parte de JavaScript, plantillas o servicios de producción.
-
 
 ## 18. UX.4.4 — importación revisable
 
@@ -225,7 +219,6 @@ La comparación de Resultados consume `resumen_unificado`; no debe conocer campo
 - probar parsers con fixtures sintéticos; documentos personales reales se usan solo fuera de Git para validación manual;
 - todo nuevo importador debe declarar límites de tamaño, formato, páginas y tratamiento de documentos sin texto extraíble.
 
-
 ## 19. UX.4.5 — cierre de resultados y accesibilidad
 
 Para validar UX.4.5:
@@ -238,7 +231,6 @@ Para validar UX.4.5:
 6. comprobar que una referencia PDF compatible se compare preferentemente con el cálculo acreditado.
 
 La validación manual obligatoria inmediata se limita a PC/laptop. La matriz real de dispositivos puede ampliarse con un teléfono Android en la misma red local. Tablet Android, iOS/iPadOS, pantallas de escritorio muy grandes y macOS se mantienen como compatibilidad diferida para la beta/RC y no bloquean por sí solos el cierre de UX.4.5. Las regresiones responsive automatizadas continúan siendo obligatorias.
-
 
 ## Pre-beta — criterio de hardening
 
@@ -261,8 +253,6 @@ Cuando Dependabot proponga un cambio Python, revisar primero si corresponde a un
 - El marcador de marca `MR` es temporal y deberá reemplazarse cuando se integren favicon e iconos definitivos.
 - La validación inmediata de cambios visuales continúa en PC/laptop; la matriz completa de móvil/tablet/pantallas grandes se ejecutará en beta/RC.
 
-
-
 ## UX.4.6b — reglas de mantenimiento del Paso 1
 
 - No volver a mostrar simultáneamente captura manual e importación PDF.
@@ -271,7 +261,6 @@ Cuando Dependabot proponga un cambio Python, revisar primero si corresponde a un
 - Mantener nombres/cédula/NSS fuera de motores, logs y fixtures reales.
 - La vista previa del comprobante debe abrir bloqueada y requerir una acción explícita para editar.
 - La barra común del wizard debe permanecer en flujo normal y no recuperar `position: sticky` o `fixed` sin una nueva decisión de UX.
-
 
 ### UX.4.6b R2 — privacidad y consentimiento
 
@@ -282,7 +271,6 @@ Cuando Dependabot proponga un cambio Python, revisar primero si corresponde a un
 - Mantener las ayudas mediante icono `i` y el hover de tablas como patrones transversales para los siguientes pasos UX.4.6c–g.
 - Antes de beta pública, preferir Bootstrap local sobre CDN y revisar jurídicamente los textos de privacidad/condiciones.
 
-
 ## UX.4.6b R3 — reglas transversales
 
 - No mostrar `sessionStorage`, `localStorage` u otros nombres de implementación en textos destinados al usuario salvo que exista una razón funcional clara; describir el comportamiento en lenguaje común.
@@ -291,7 +279,6 @@ Cuando Dependabot proponga un cambio Python, revisar primero si corresponde a un
 - Las barras superior e inferior del wizard deben actualizarse desde la misma lógica y conservar simetría de ancho/alineación.
 - Las ayudas contextuales nunca deben quedar recortadas por tarjetas o footer.
 
-
 ## UX.4.6b R4 — criterio de contenido público
 
 - La casilla del consentimiento se habilita únicamente después de llegar al final del documento, pero no debe mostrarse un bloque de **Fin de los términos** ni una confirmación **Lectura completada**.
@@ -299,7 +286,6 @@ Cuando Dependabot proponga un cambio Python, revisar primero si corresponde a un
 - Toda redacción pública debe estar justificada por una necesidad funcional, previsional, legal, de privacidad, seguridad o accesibilidad.
 - No presentar Mi Retiro Proyectado como aplicación educativa, didáctica o pedagógica salvo que en el futuro exista una función explícita de ese tipo aprobada como alcance del producto.
 - No exponer jerga técnica, estados internos o mensajes meta de desarrollo cuando el usuario no necesite conocerlos para tomar una decisión.
-
 
 ## UX.4.6c — reglas de mantenimiento del Paso 2
 
@@ -351,7 +337,6 @@ Cuando una tabla mezcle datos documentales y captura manual:
 3. bloquear controles importados, incluidas casillas cuyo estado derive del documento;
 4. mantener editables únicamente campos/filas que el documento no aporte;
 5. no aplicar este bloqueo a casillas que expresen una decisión del usuario.
-
 
 - No usar `--app-success-*` para señalar que un dato fue importado; éxito/completitud y procedencia son conceptos diferentes.
 - Para procedencia documental usar `data-row-imported` con tokens primarios/seleccionados.
@@ -407,8 +392,6 @@ Cuando una tabla mezcle datos documentales y captura manual:
 - `data-row-imported` / `data-row-manual`, filtros reactivos y estados progresivos se aplican solo a tablas cuya semántica lo justifique.
 - Revisar siempre Claro, Oscuro y Alto contraste; Alto contraste debe conservar borde fuerte y no depender de sombra/color tenue para separar la tabla.
 
-
-
 ### Scrollbar contenido y carga PDF simétrica — UX.4.6d R11
 
 - No estilizar scrollbars de tablas por paso: el contrato vive en `.app-table-shell`.
@@ -426,11 +409,9 @@ Cuando una tabla mezcle datos documentales y captura manual:
 - Para `input[type=file]`, no usar `input:hover::file-selector-button` para un cambio de color que se active desde el nombre del archivo; el hover debe estar asociado al pseudo-elemento del botón.
 - Verificar siempre Claro, Oscuro y Alto contraste después de modificar scroll, bordes o estados vacíos.
 
-
 ### Selector de archivo y hover — UX.4.6d R13
 
 Para cargadores futuros, reutilizar el contrato global de `input[type=file].form-control`. No añadir reglas locales que cambien el botón mediante `input:hover::file-selector-button`; Bootstrap/Chromium puede activar ese estado al pasar por el texto del archivo. Mantener la paleta interna estable y usar borde/foco del input para feedback interactivo.
-
 
 ### Formulario personal del Paso 1 — UX.4.6d R14
 
@@ -448,7 +429,6 @@ Antes de redirigir a un paso anterior, distinguir entre **dato faltante** y **re
 
 Las importaciones deben colocarse junto al bloque que alimentan. Ficha Digital es fuente del detalle mensual del año actual, por lo que su componente precede a esa tabla dentro de la misma subsección.
 
-
 ### Checklist R17 para importadores
 
 1. Verificar por separado procedencia, editabilidad y valor booleano.
@@ -463,20 +443,17 @@ Para campos mixtos usar los helpers comunes de procedencia y evitar textos ad ho
 
 Los file inputs nunca se restauran con JavaScript. La continuidad tras F5 se implementa restaurando el modelo confirmado y mostrando `Importación vigente: <nombre>` cuando exista metadata.
 
-
 ## Regla de desarrollo R19 — evitar doble captura del año actual
 
 Si una pantalla mensual/quincenal alimenta un total anual, no deben existir dos fuentes editables para el mismo dato. En Paso 3, la fila del año vigente es derivada y de solo lectura cuando el detalle está activo. Los eventos de salario actualizan la vista anual; los cambios manuales de casilla de cuota actualizan además la referencia agregada de Paso 2 y obligan a invalidar/revalidar dependencias.
 
 No sumar salarios de meses sin cuota al historial acreditado. Sí conservarlos como salario disponible para bases recientes. Mantener pruebas separadas para: mes con salario sin cuota, mes con cuota sin salario y seis meses acreditados completos.
 
-
 ## Regla de desarrollo R20 — vigencia de documentos periódicos
 
 Cuando un documento represente una fotografía periódica, evaluar su vigencia usando un período realmente extraído del contenido. No inferir actualidad por fecha del archivo, nombre o fecha de carga. La advertencia debe ser no bloqueante salvo que exista una regla normativa específica que exija lo contrario.
 
 Para Ficha Digital, la tolerancia UX es mes actual + dos meses calendario anteriores. Si cambia esta regla, actualizar regresiones, ADR y especificación. El resumen visible del detalle debe consumir exclusivamente el resumen backend ya validado y ocultarse ante cualquier invalidación.
-
 
 ## Regla temporal para importadores — R21
 
@@ -485,8 +462,6 @@ No introduzcas lógica de vigencia con el reloj del cliente. Usa la metadata `fe
 ### Fallos de validación con scroll/foco
 
 No usar `scrollIntoView()` como única señal de error. Toda rama que devuelva `false` en una acción principal debe dejar un mensaje visible o una validación nativa inequívoca. Para dependencias entre pasos, reconciliar primero el estado derivable y revalidar sin navegación regresiva antes de pedir intervención manual.
-
-
 
 ### Ficha Digital y referencia agregada de cuotas — R23
 

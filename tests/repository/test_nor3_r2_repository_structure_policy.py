@@ -135,32 +135,20 @@ class TestNOR3R2RepositoryStructurePolicy(unittest.TestCase):
         self.assertEqual(report["result"], "pass")
 
     def test_post_promocion_preserva_scope_r1_r8_y_estado_actual(self):
-        registry = json.loads(
-            (
-                ROOT / "data" / "governance"
-                / "work-block-registry.json"
-            ).read_text(encoding="utf-8")
-        )
-
+        registry = json.loads((ROOT / "data" / "governance" / "work-block-registry.json").read_text(encoding="utf-8"))
         candidate = registry["current_candidate"]
         self.assertIsNone(candidate["global_revision"])
         self.assertIsNone(candidate["revision_aware"])
         self.assertIsNone(candidate["block"])
         self.assertIsNone(candidate["revision"])
         self.assertIsNone(candidate["revision_scope"])
-        self.assertEqual(
-            "unassigned_pending_post_mant1_r8",
-            candidate["state"],
-        )
-        self.assertEqual(125, candidate["next_global_available"])
-
-        ids = {
-            item["identifier"]: item
-            for item in registry["identifiers"]
-        }
+        self.assertEqual("unassigned", candidate["state"])
+        self.assertEqual(126, candidate["next_global_available"])
+        ids = {item["identifier"]: item for item in registry["identifiers"]}
         self.assertEqual("closed", ids["NOR.3"]["status"])
         self.assertEqual("R1-R8", ids["NOR.3"]["active_scope"])
         self.assertEqual(["G122"], ids["NOR.3"]["global_refs"])
+        self.assertEqual("accepted_pending_publication", ids["DOC.3"]["status"])
 
     def test_pr_policy_permite_candidato_sin_version(self):
         files = [

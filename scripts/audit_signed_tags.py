@@ -22,6 +22,7 @@ ALLOWED_SIGNERS = (
 def run_git(
     *args: str,
 ) -> subprocess.CompletedProcess[str]:
+    """Ejecuta Git con los argumentos recibidos y captura su resultado."""
     return subprocess.run(
         ["git", *args],
         cwd=ROOT,
@@ -34,6 +35,7 @@ def run_git(
 
 
 def version_tags() -> list[str]:
+    """Enumera tags de versión que deben cumplir la política de firma."""
     result = run_git(
         "tag",
         "--list",
@@ -57,6 +59,7 @@ def version_tags() -> list[str]:
 def verify_tag(
     tag: str,
 ) -> list[str]:
+    """Verifica firma, objeto y política de un tag de versión."""
     errors = []
 
     signature = subprocess.run(
@@ -113,6 +116,7 @@ def verify_tag(
 
 
 def main() -> int:
+    """Ejecuta el flujo principal del script y devuelve el código de salida."""
     if not ALLOWED_SIGNERS.is_file():
         print(
             "[tag-audit] ERROR: allowed_signers no existe.",

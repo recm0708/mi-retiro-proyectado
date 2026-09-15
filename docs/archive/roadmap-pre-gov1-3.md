@@ -276,8 +276,6 @@ Estado técnico actual; la validación manual multidispositivo queda aplazada y 
 - casos sintéticos SUCGS;
 - validaciones visuales de los tres motores integrados.
 
-
-
 ## 10. Camino a la primera beta
 
 Antes de `v0.1.0-beta.1` se mantiene este orden de cierre:
@@ -353,8 +351,6 @@ Implementada técnicamente: Paso 3 se concentra en tres secciones internas, elim
 - [x] Consentimiento desde Fuentes validado durante recorrido limpio 1–3.
 - [x] Puntos 20–30 ejecutados y UX.4.6d cerrada antes de commits.
 
-
-
 ### Revisión 11 de UX.4.6d — scroll contenido y carga PDF
 
 - [x] Eliminar botones/flechas nativos de scroll que invadían radios en Chromium/Windows.
@@ -372,7 +368,6 @@ Implementada técnicamente: Paso 3 se concentra en tres secciones internas, elim
 - [x] Validar visualmente R12 y selector reforzado de R13.
 - [x] Recorrido integral Pasos 1–3 y puntos funcionales restantes completados.
 
-
 ### Revisión 13 de UX.4.6d — selector de archivo estable
 
 - [x] Neutralizar el hover heredado del input completo sobre **Seleccionar archivo**.
@@ -381,7 +376,6 @@ Implementada técnicamente: Paso 3 se concentra en tres secciones internas, elim
 - [x] Validar manualmente el selector en los tres temas.
 - [x] Recorrido limpio integral Pasos 1–3 completado, incluyendo puntos 20–30.
 - [x] UX.4.6d cerrada y commits lógicos preparados después de aprobación manual.
-
 
 ### Revisión 14 de UX.4.6d — continuidad del formulario del Paso 1
 
@@ -405,7 +399,6 @@ Paso 1 manual e importado ya fue validado durante el recorrido limpio. R15 corri
 - [x] R16 validada manualmente y recorrido Paso 2 → Paso 3 completado.
 - [x] UX.4.6d cerrada con coherencia código/pruebas/documentación y commits acumulados.
 
-
 ### UX.4.6d R17 — auditoría Paso 1–3
 
 Completada la revisión de coherencia entre comprobante, importación y pantallas: corrección visual de checkboxes proyectados, contexto 281/293, advertencia por historial anterior a fecha de ingreso, trazabilidad de campos editados y explicación de salario disponible frente a cuota acreditada. Pendiente únicamente la validación manual final de R17 y las pruebas de integración restantes antes de commits.
@@ -419,7 +412,6 @@ Completada la revisión de coherencia entre comprobante, importación y pantalla
 - [x] Revalidación silenciosa cubierta por regresión y restauración tras limpiar Paso 2 validada manualmente.
 - [x] UX.4.6d cerrada y commits lógicos preparados antes de la siguiente fase.
 
-
 ### UX.4.6d R19 — sincronización del año actual
 - [x] Derivar fila anual vigente desde el detalle mensual/quincenal.
 - [x] Actualizar Paso 2 desde una casilla manual de cuota sin navegación regresiva.
@@ -427,7 +419,6 @@ Completada la revisión de coherencia entre comprobante, importación y pantalla
 - [x] Cubrir enero–junio con 6 cuotas/B/.8,883.50 y promedio B/.1,480.58.
 - [x] Sincronización 5→6 y total 281→282 validada; protección de reversión/reducción cubierta por regresiones.
 - [x] F5/limpieza de Paso 2, recorrido final 1→3 y commits acumulados completados.
-
 
 ### UX.4.6d R20 — vigencia de Ficha Digital y resumen auditable
 - [x] Detectar último período de Ficha Digital usando metadata extraída del documento.
@@ -437,7 +428,6 @@ Completada la revisión de coherencia entre comprobante, importación y pantalla
 - [x] Exponer `resumen_detalle_anio_actual` dentro del Paso 3 y ocultarlo al invalidar.
 - [x] R20 validada manualmente y recorrido limpio de cierre completado.
 - [x] Coherencia final código/pruebas/documentación revisada y commits acumulados preparados.
-
 
 ### UX.4.6d R21
 - [x] Advertir por cualquier Ficha Digital anterior al mes actual verificado.
@@ -454,8 +444,6 @@ Completada la revisión de coherencia entre comprobante, importación y pantalla
 - Revisión de redundancias del resumen: se conservan las 11 métricas por semántica distinta.
 - [x] **Analizar historial → Continuar a proyección** validado manualmente y cierre Git completado.
 
-
-
 ### UX.4.6d — R23 / sincronización documental final de cuotas
 
 - [x] Permitir que una Ficha Digital confirmada con más cuotas del año actual actualice Paso 2 y el total acumulado.
@@ -463,7 +451,6 @@ Completada la revisión de coherencia entre comprobante, importación y pantalla
 - [x] Evitar reducciones automáticas cuando una ficha contiene menos meses que la referencia vigente.
 - [x] Cubrir la reconciliación al importar y al pulsar **Analizar historial** después de restauraciones/F5.
 - [x] Caso 5→6 cuotas y acceso a Paso 4 validados manualmente antes del cierre/commits.
-
 
 ### Cierre final de UX.4.6d
 

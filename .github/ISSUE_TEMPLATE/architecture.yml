@@ -1,3 +1,7 @@
+# Plantilla de arquitectura y estructura.
+# Propósito: registrar cambios de arquitectura, ownership o estructura con contexto suficiente para revisión.
+# Alcance: conserva labels, campos obligatorios, migración y advertencias de privacidad.
+
 name: Arquitectura / estructura
 description: Registra cambios de arquitectura, ownership o estructura del repositorio.
 title: "[ARCH] "

@@ -6,8 +6,25 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ## [Unreleased]
 
-- G125 permanece disponible sin candidato ni bloque preasignado.
-- Continuidad tras publicar G124/E13: DOC.3 R1/#154 → PLAN.2 R2/#155 → VER.2 R6/#164 → PERSIST.1.
+- G126 permanece disponible sin candidato ni bloque preasignado.
+- G125/E01 está materializado para DOC.3 R1 y pendiente de publicación formal.
+- Después de publicar G125/E01 corresponde PLAN.2 R2/#155, que reconciliará la
+  posición de DOC.4/#171 y la continuidad hacia VER.2 R6/#164 y PERSIST.1.
+
+## [0.1.25.01-beta]
+
+### Documentación, gobierno y trazabilidad
+
+- DOC.3 R1 materializa G125/E01 después de una auditoría documental integral.
+- Se auditan 173 Markdown y 418 archivos textuales de código/configuración.
+- La limpieza Markdown final corrige MD012/whitespace sin reescribir la
+  semántica histórica.
+- DOC.4/#171 queda registrado como trabajo diferido `planned_reserved`, con
+  lotes #172–#174 y sin Global/VERSION preasignados.
+- El preflight final #166 cierra sin PRs/alerts Dependabot y con auditorías de
+  dependencias verdes.
+- La publicación formal de G125/E01 permanece pendiente de PR/merge,
+  revalidación de `main`, tag firmado y GitHub Release prerelease.
 
 ## [0.1.24.13-beta]
 

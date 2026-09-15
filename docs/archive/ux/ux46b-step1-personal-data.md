@@ -75,7 +75,6 @@ La Revisión 4 conserva las regresiones de lectura completa antes de consentir, 
 
 Validación manual en PC/laptop de: consentimiento aceptar/rechazar y habilitación silenciosa de la casilla al llegar al final, Manual/PDF, asteriscos y errores obligatorios, cargador compacto, parser de nombre/apellido de casada, modal revisión/edición/importación, hover de tablas, ayuda mediante icono `i`, navegación superior/inferior y comportamiento `sticky` de escritorio, Fuentes/privacidad y los tres temas. Después de la aceptación se actualizará el estado documental y se prepararán commits lógicos por categorías.
 
-
 ## Criterio transversal de contenido visible
 
 Los textos dirigidos al usuario deben responder a una necesidad real de operación, previsión, alcance, privacidad, seguridad, accesibilidad o cumplimiento legal. No se utilizará lenguaje que presente Mi Retiro Proyectado como producto educativo, didáctico o pedagógico, ni se mostrarán detalles internos de implementación cuando no ayuden a realizar una acción o comprender una consecuencia relevante.

@@ -347,14 +347,11 @@ No contiene fórmulas legales. El comparador y la interfaz pueden consumir este 
 
 6F.1–6F.4 están completados para el alcance actual: comparación, trazabilidad, metodología/fuentes y unificación transversal. Las ampliaciones posteriores deben reutilizar estas capas y no duplicar cálculos previsionales.
 
-
-
 ## Referencias importadas y motores
 
 El comprobante de Mi Retiro Seguro no participa en las fórmulas de SEBD, Mixto o SUCGS. Su monto estimado se conserva como una referencia externa variable y se compara únicamente después de que el motor actual produce `resumen_unificado`. Ninguna cifra del PDF se usa para ajustar, forzar o calibrar el resultado de los motores.
 
 El promedio salarial por cuota acreditada del año actual se calcula como `total_salario_acreditado / cuotas_acreditadas_identificadas` y constituye una opción explícita de base futura. No reemplaza el historial acreditado ni se interpreta como regla legal.
-
 
 ## UX.4.5 — misma fórmula, distinto origen temporal
 

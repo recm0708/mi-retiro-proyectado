@@ -154,7 +154,6 @@ Cuando cambie una norma, un monto indexado, una tabla actuarial o una fecha oper
 
 **Última verificación de enlaces públicos de esta edición documental:** 11 de agosto de 2026.
 
-
 ### 8.1. Uso de enlaces en la interfaz
 
 La vista `Ver cálculo completo` consume los enlaces de `fuentes_oficiales` definidos en `regulations/*.json`. De esta manera, cada resultado puede abrir la fuente oficial sin duplicar URLs en JavaScript. La página `/metodologia` reutiliza el mismo registro.
@@ -166,7 +165,6 @@ La ruta `/metodologia` constituye el punto central visible de consulta normativa
 En `Ver cálculo completo`, los IDs internos de integración (`texto_unico`, `ley_462`, `reglamento_calculo`, etc.) no se presentan literalmente. Cada paso muestra el título humano de la fuente y un enlace oficial cuando está disponible.
 
 La página de metodología no sustituye este documento técnico: la interfaz está orientada al Asegurado(a) final y este archivo conserva el inventario y las notas de mantenimiento del repositorio.
-
 
 ## Protección de datos personales y privacidad de la aplicación
 

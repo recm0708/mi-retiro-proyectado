@@ -300,7 +300,6 @@ Toda nueva fórmula o interpretación normativa debe incluir al menos:
 
 Si una corrección responde a un error encontrado manualmente, debe añadirse una regresión automatizada antes de cerrar el cambio.
 
-
 ## Comparador 6F.1
 
 La suite incorpora `tests/test_comparator.py` con tres regresiones transversales:
@@ -310,7 +309,6 @@ La suite incorpora `tests/test_comparator.py` con tres regresiones transversales
 3. SUCGS normaliza el caso maestro de B/.477.00 como resultado mensual completo.
 
 Estado después de 6F.1: **60 pruebas automatizadas en OK**.
-
 
 ## 12. Validación 6F.2
 
@@ -336,8 +334,6 @@ La suite queda en **83 pruebas automatizadas**. `tests/test_resultado_unificado.
 
 Las pruebas integradas existentes de SEBD, Mixto y SUCGS también comprueban que los servicios anexen `resumen_unificado` sin modificar las cifras de regresión validadas. El comparador consume este resumen común y continúa calculando diferencias sin replicar fórmulas previsionales.
 
-
-
 ## 14. Identidad y contenido visible
 
 `tests/test_identidad_interfaz.py` protege la capa pública frente a regresiones de presentación:
@@ -356,7 +352,6 @@ Estas pruebas no validan fórmulas previsionales; complementan las regresiones d
 La suite incluye regresiones que verifican la presencia de los cuatro modos visuales, persistencia local de la preferencia, enlace de salto al contenido, semántica de página activa, footer compacto, foco visible, movimiento reducido y altura mínima de objetivos táctiles.
 
 La validación automatizada no sustituye la revisión visual manual en los cuatro temas ni una auditoría WCAG con tecnologías de apoyo.
-
 
 ## Validación UX.3 — responsive y último mes acreditado
 
@@ -427,7 +422,6 @@ La suite alcanza **112 pruebas automatizadas**. `tests/test_ux42_estados_visuale
 
 Estas regresiones protegen la estructura CSS, pero la percepción final del contraste y de la jerarquía de selección se revisa manualmente en PC/laptop antes del cierre de UX.4.2. La ronda multidispositivo continúa diferida.
 
-
 ## Validación UX.4.3 — errores, foco y teclado
 
 La suite alcanza **124 pruebas automatizadas**. `tests/test_ux43_formularios_teclado.py` añade doce regresiones:
@@ -447,7 +441,6 @@ La suite alcanza **124 pruebas automatizadas**. `tests/test_ux43_formularios_tec
 
 Además de las pruebas unitarias, el remate de estabilidad se verifica con un navegador Chromium real contra `/simulacion`, comprobando que el documento termina de cargar y que el proceso no queda atrapado en un ciclo de mutaciones. La validación manual inmediata de UX.4.3 se mantiene en PC/laptop e incluye provocar campos obligatorios vacíos en los Pasos 1 y 2 para confirmar que el mensaje inline aparece, el foco llega al primer control inválido y el estado se limpia al corregirlo. La comprobación con lector de pantalla, móvil/tablet y otras tecnologías de apoyo sigue reservada para la ronda integral de cierre WCAG 2.2.
 
-
 ## Validación UX.4.4 — edad anual en historial y proyección
 
 La suite alcanzaba **128 pruebas automatizadas** al incorporar la edad anual. `tests/test_ux44_edad_linea_tiempo.py` protege cuatro condiciones:
@@ -458,7 +451,6 @@ La suite alcanzaba **128 pruebas automatizadas** al incorporar la edad anual. `t
 4. la tabla conserva un ancho mínimo legible y `/simulacion` continúa cargando el recurso de línea temporal.
 
 La validación manual debe contrastar al menos los casos de referencia disponibles contra sus comprobantes oficiales. Para el caso femenino de nacimiento en 1969, 1992 debe mostrar 23 y 2027 debe mostrar 58; para el caso masculino de nacimiento en 1966, 1986 debe mostrar 20 y 2028 debe mostrar 62. Los documentos originales con datos personales permanecen fuera del repositorio.
-
 
 ## Validación UX.4.4 — detalle salarial del año actual
 
@@ -479,7 +471,6 @@ La validación manual en PC/laptop debe ejecutar al menos dos fotografías del m
 
 Los valores personales utilizados para esas comprobaciones permanecen fuera del repositorio.
 
-
 ## Validación UX.4.4 — referencia PDF personal y comparación dinámica
 
 La suite alcanzaba **147 pruebas automatizadas** antes del cierre del flujo de importación revisable. `tests/test_ux44_referencia_pdf.py` añade nueve regresiones y se amplía la cobertura del detalle salarial:
@@ -497,7 +488,6 @@ La suite alcanzaba **147 pruebas automatizadas** antes del cierre del flujo de i
 Además, el detalle salarial comprueba `promedio_por_cuota_acreditada`; para una fotografía con B/.6,659.50 y cinco cuotas el valor esperado es B/.1,331.90.
 
 En validación manual se deben probar al menos dos comprobantes personales distintos fuera del repositorio. Se confirma que el PDF femenino y el masculino usados durante el desarrollo son reconocidos dinámicamente, pero esos archivos y sus identificadores personales no se versionan. También se verifica que una edad o sistema distinto muestre la referencia sin calcular una diferencia engañosa.
-
 
 ## Validación UX.4.4 — importación revisable y Ficha Digital
 
@@ -532,7 +522,6 @@ La validación manual de cierre de UX.4.4 debe comprobar en PC/laptop:
 
 Los documentos personales reales permanecen fuera del repositorio.
 
-
 ## Validación UX.4.5 — información acreditada, proyección y cierre accesible
 
 La suite alcanza **170 pruebas automatizadas**. `tests/test_ux45_cierre_resultados_accesibilidad.py` añade nueve regresiones específicas:
@@ -549,7 +538,6 @@ La suite alcanza **170 pruebas automatizadas**. `tests/test_ux45_cierre_resultad
 
 La validación manual obligatoria de UX.4.5 se realiza en PC/laptop y debe comprobar: cálculo SEBD con ambas fotografías, un caso Mixto y uno SUCGS, navegación por teclado, reapertura de resultados guardados y temas Claro/Oscuro/Alto contraste. Si se dispone de un teléfono Android, puede añadirse una prueba real por red local. Tablet Android, iPhone/iPad, macOS y pantallas muy grandes quedan diferidos para la ronda beta/RC; su ausencia no bloquea el cierre mientras las regresiones responsive permanezcan en verde y no exista una incidencia conocida.
 
-
 ## Validación pre-beta — E2E y hardening
 
 La suite alcanza **185 pruebas automatizadas**. `tests/test_prebeta_e2e_hardening.py` añade 15 regresiones centradas en la frontera real de la API:
@@ -565,7 +553,6 @@ La suite alcanza **185 pruebas automatizadas**. `tests/test_prebeta_e2e_hardenin
 - `Cache-Control: no-store` en importaciones.
 
 La validación local del entorno de desarrollo incluye `compileall` y `node --check` sobre todos los JavaScript. La instalación realmente limpia y `pip check` quedan además automatizados en `.github/workflows/ci.yml`; su resultado remoto debe verificarse después de commitear/pushear el workflow.
-
 
 ## Validación pre-beta — ajuste CI/Dependabot
 
@@ -632,8 +619,6 @@ git diff --check
 
 La validación específica en móvil, tablet, macOS y pantallas grandes permanece diferida para la matriz beta/RC y no bloquea este cierre.
 
-
-
 ## Validación UX.4.6b — Simular / Paso 1 · Datos personales
 
 La Revisión 2 deja la suite en **223 pruebas automatizadas en `OK`**. Las regresiones específicas cubren:
@@ -685,7 +670,6 @@ UX.4.6b fue revisada y aprobada en PC/laptop antes de sus commits de cierre. La 
 
 La matriz móvil/tablet/macOS/pantallas grandes continúa diferida para beta/RC.
 
-
 ### Validación adicional UX.4.6b Revisión 3
 
 Comprobar en PC/laptop:
@@ -700,7 +684,6 @@ Comprobar en PC/laptop:
 
 La validación técnica de UX.4.6b Revisión 3 ejecutó **232 pruebas automatizadas en OK**, además de `compileall` y validación de sintaxis JavaScript.
 
-
 ### Validación adicional UX.4.6b Revisión 4
 
 Comprobar en PC/laptop:
@@ -713,7 +696,6 @@ Comprobar en PC/laptop:
 6. navegación superior/inferior, términos, Manual/PDF, campos obligatorios y ayuda mediante icono `i` conservan el comportamiento validado en R3.
 
 La validación técnica de UX.4.6b Revisión 4 ejecutó **233 pruebas automatizadas en OK**, además de `compileall`, validación de sintaxis JavaScript y revisión de espacios finales.
-
 
 ## Validación UX.4.6c — Simular / Paso 2 · Cuotas
 
@@ -761,7 +743,6 @@ La validación visual de cierre de UX.4.6c en PC/laptop comprobó en Claro, Oscu
 - El bloque del Paso 2 contiene total de cuotas y cuotas acreditadas del año actual.
 - Los encabezados de la vista previa identifican el paso de destino de cada grupo.
 - El icono de ayuda muestra una sola circunferencia visual y conserva foco/hover/teclado.
-
 
 ### Cierre confirmado de UX.4.6c
 
@@ -832,7 +813,6 @@ La validación móvil/tablet/pantallas grandes continúa diferida para beta/RC.
 6. En Mi Retiro Seguro, comprobar que las filas `HISTORICO` aparecen seleccionadas para historial real y la casilla no es editable; cambiar la clasificación mediante **Editar campos** debe actualizar el estado automáticamente.
 7. Verificar la diferenciación visual de filas importadas/manuales en Claro, Oscuro y Alto contraste.
 8. Repetir la matriz funcional de R2 completa antes de aceptar la revisión.
-
 
 ### Validación específica UX.4.6d Revisión 4
 
@@ -938,8 +918,6 @@ La prueba de consentimiento pendiente desde Fuentes se realizará durante el rec
 
 Resultado técnico R10: **330 pruebas automatizadas en OK**; `compileall` y `node --check` correctos.
 
-
-
 ### Validación específica UX.4.6d Revisión 11
 
 R11 no modifica motores, fórmulas, estados tabulares ni procedencia documental. Antes de continuar con los puntos 20–30 validar:
@@ -966,7 +944,6 @@ R12 no modifica motores, fórmulas, cuotas ni salarios. Validar en PC/laptop:
 
 Resultado técnico R12: **340 pruebas automatizadas en OK**; `compileall` y `node --check` correctos. Después de esta validación continúan los puntos 20–30 y el recorrido integral pendiente.
 
-
 ### Validación específica UX.4.6d Revisión 13
 
 R12 quedó validada manualmente en scrollbars, estados vacíos, temas y Comparador a nivel visual; el único fallo persistente fue el cambio de color de **Seleccionar archivo** al pasar por el nombre del archivo. R13 corrige exclusivamente esa cascada visual.
@@ -981,7 +958,6 @@ Validar antes del recorrido integral:
 Después ejecutar un recorrido limpio completo de Pasos 1–3: consentimiento desde Fuentes y Simular, captura manual/importada, Cuotas, Historial anual, Ficha Digital, detalle mensual/quincenal, bases salariales, limpieza/reinicio, persistencia temporal, errores y resúmenes. Los puntos 20–30 de la matriz original quedan integrados dentro de ese recorrido.
 
 Resultado técnico R13: **343 pruebas automatizadas en OK**; `compileall` y `node --check` correctos.
-
 
 ### Validación específica UX.4.6d Revisión 14
 
@@ -1028,7 +1004,6 @@ Validar manualmente:
 
 Resultado técnico previo a validación manual R16: **356 pruebas automatizadas en OK**.
 
-
 ### UX.4.6d R17 — auditoría de datos del caso real
 
 Caso documental utilizado para regresión:
@@ -1063,7 +1038,6 @@ Pruebas manuales pendientes para cierre:
 5. Registrar junio B/.1,562.37 como salario conocido separando la casilla de cuota acreditada; julio sin información; agosto puede registrarse como parcial cuando solo se disponga de una quincena.
 6. Completar las pruebas R16 de revalidación silenciosa del Paso 2 y limpiar Paso 2 + recargar.
 
-
 ## UX.4.6d R19 — sincronización del detalle con historial y Paso 2
 
 Validación automatizada: **374 pruebas en OK**.
@@ -1085,7 +1059,6 @@ Pruebas manuales de cierre R19:
 7. Verificar que julio/agosto vacíos no bloquean el Paso 3 mientras no estén marcados como cuota.
 8. Repetir F5 con importaciones vigentes y completar finalmente la prueba R16 de Limpiar Paso 2 + recargar.
 
-
 ## UX.4.6d R20 — vigencia de Ficha Digital y resumen visible
 
 Validación automatizada: **379 pruebas en OK**.
@@ -1099,7 +1072,6 @@ Pruebas manuales de cierre:
 6. Después de validar el detalle del año actual debe aparecer **Resumen del detalle del año actual** con las cifras devueltas por el servicio.
 7. Modificar cualquier dato del detalle debe ocultar el resumen anterior hasta volver a validar, evitando cifras obsoletas.
 8. Verificar Claro, Oscuro y Alto contraste para modal de vigencia, metadata persistente y tarjetas de resumen.
-
 
 ## UX.4.6d R21 — vigencia mensual y fecha verificable
 
@@ -1126,7 +1098,6 @@ Prueba manual final:
 
 Resultado automatizado R22: `python -m unittest discover -s tests -q` → **392 pruebas OK**; `python -m compileall app` y `node --check app/static/js/*.js` → OK.
 
-
 ## UX.4.6d R23 — Ficha Digital más reciente frente a Paso 2
 
 Validar un escenario donde Mi Retiro Seguro deja `cuotas_anio_actual=5` y una Ficha Digital posterior contiene 6 meses confirmados:
@@ -1138,7 +1109,6 @@ Validar un escenario donde Mi Retiro Seguro deja `cuotas_anio_actual=5` y una Fi
 5. después de F5, `cuotas_anio_actual_referencia` debe continuar sincronizada.
 
 Regresiones automatizadas: `test_ux46d_revision23_ficha_actualiza_cuotas.py` más cobertura histórica R22 adaptada al nuevo contrato.
-
 
 ## Cierre final UX.4.6d
 

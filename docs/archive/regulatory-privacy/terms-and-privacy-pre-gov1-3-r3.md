@@ -162,7 +162,6 @@ Fuentes oficiales mantenidas en `docs/FUENTES_NORMATIVAS.md` y en la pantalla **
 
 La Revisión 3 tomó como referencia de organización la plantilla de términos compartida por el usuario del portal SERTRACEN, especialmente sus apartados de obtención de información, privacidad, cookies, protección de datos, legislación, modificaciones y canales de consulta. No se reutilizan cláusulas específicas de licencias, biometría, pagos, entregas o trámites porque no corresponden a Mi Retiro Proyectado.
 
-
 ## 22. Presentación y aceptación en la interfaz
 
 La interfaz exige que el usuario llegue al final del documento antes de habilitar la casilla de aceptación. Este control no añade declaraciones de **Fin de los términos** ni mensajes de **Lectura completada**: una vez alcanzado el final, la casilla simplemente queda disponible para una decisión afirmativa. La redacción visible se limita a contenidos relacionados con el uso, alcance, privacidad y tratamiento de datos de Mi Retiro Proyectado.
@@ -190,7 +189,6 @@ Se aclara que Fuentes no es una vía alternativa para omitir el consentimiento. 
 ### Aclaración operativa UX.4.6d R18
 
 Cuando el usuario confirma datos extraídos de un documento, el navegador puede borrar visualmente la selección del archivo al recargar. La aplicación puede recordar en la sesión el nombre del documento y los datos ya confirmados para permitir su revisión posterior, sin conservar el archivo original ni su ruta local. Esta precisión no modifica el alcance material del tratamiento informado en la versión **2026-08-15.1**.
-
 
 ### UX.4.6d R21 — consulta de fecha oficial
 

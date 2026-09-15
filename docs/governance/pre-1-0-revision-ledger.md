@@ -3,13 +3,26 @@
 **Proyecto:** Mi Retiro Proyectado
 **Base auditada:** `7037addd44253e528c77460b678d2b3ccd540dd5`
 **Contador histórico en la base `7037addd`:** **G070**
-**Contador aceptado reconciliado vigente:** **G124**
-**Siguiente Global disponible:** **G125**
-**Siguiente candidato disponible:** **ninguno asignado** — G125 permanece disponible sin bloque preasignado; DOC.3 R1/#154 es la siguiente fase material después de publicar G124/MANT.1 R8
+**Contador aceptado reconciliado vigente:** **G125**
+**Siguiente Global disponible:** **G126**
+**Siguiente candidato disponible:** **ninguno asignado** — G126 permanece disponible sin bloque preasignado; DOC.3 R1/#154 está materializado como G125/E01 y pendiente de publicación
 
+<!-- DOC3-G125-PROMOTION:START -->
+## Estado DOC.3 R1 / materialización local G125-E01
+
+- `VERSION` materializa `0.1.25.01-beta` para DOC.3 R1 / G125-E01.
+- G124/E13 permanece publicado como `v0.1.24.13-beta`.
+- Auditoría DOC.3: 173 Markdown y 418 archivos textuales de código/configuración.
+- Quality Gate FULL previo: 11 PASS / 0 FAIL; 1603 unittest; pytest 1643 + 7824 subtests.
+- Preflight final #166: 0 PRs, 0 Dependabot alerts, 0 PRs Dependabot;
+  auditorías Python/npm verdes.
+- G125/E01 está aceptado localmente y pendiente de publicación.
+- G126 queda disponible sin candidato/bloque preasignado.
+- PLAN.2 R2/#155 no inicia hasta completar la publicación de G125/E01.
+<!-- DOC3-G125-PROMOTION:END -->
 
 <!-- MANT1-G124-PROMOTION:START -->
-## Estado MANT.1 R8 / promoción local G124-E13
+## Estado MANT.1 R8 / cierre publicado G124-E13
 
 - `VERSION` materializa `0.1.24.13-beta` para MANT.1 R8 / G124-E13.
 - E13 continúa los doce ordinales previos MANT.1 E01–E12 registrados en G074–G085.
@@ -19,7 +32,8 @@
 - Quality Gate FULL post-promoción local: 11 PASS / 0 FAIL; 1600 unittest; pytest 1640 + 7782 subtests.
 - Preflight final #166: 0 PRs, 0 Dependabot alerts, 0 PRs Dependabot; auditorías Python/npm verdes.
 - G123/E01 permanece publicado como `v0.1.23.01-beta`.
-- La publicación formal de G124/E13 permanece pendiente de PR/merge, revalidación de `main`, tag firmado y GitHub Release prerelease.
+- G124/E13 está integrado en `main@f9d181ceaaf4824bf8807d9237d0e19e71d3b29c` y publicado mediante tag firmado `v0.1.24.13-beta` y GitHub Release prerelease.
+- DOC.3 R1/#154 está en ejecución sin candidato Global preasignado.
 - G125 queda disponible sin candidato/bloque preasignado.
 <!-- MANT1-G124-PROMOTION:END -->
 
@@ -38,7 +52,9 @@
 <!-- MANT2-G123-PROMOTION:END -->
 
 <!-- NOR3-G122-PROMOTION:START -->
-## Estado post-NOR.3 / promoción G122-E01
+## Registro histórico — promoción G122-E01 post-NOR.3
+
+> **Checkpoint histórico preservado.** Este bloque describe el estado inmediatamente posterior a la integración de NOR.3 y anterior a MANT.2 R1 / MANT.1 R8. No representa el estado vigente del repositorio; las secciones vigentes posteriores de este documento tienen precedencia.
 
 - `VERSION` materializa `0.1.22.01-beta` para NOR.3 R8 / G122-E01.
 - NOR.3 R1–R8 quedó integrado/aceptado mediante PR #162 / merge
@@ -64,8 +80,10 @@ La reconstrucción histórica G001–G070 permanece intacta.
 - G121/E01 (`0.1.21.01-beta`) permanece publicado para UX.6 R1–R8 mediante `v0.1.21.01-beta`.
 - G122/E01 (`0.1.22.01-beta`) queda integrado/aceptado para NOR.3 R1–R8
   mediante PR #162 / merge `b97cf61763479b80b8e8724b878089e8bb20fa00`.
-- G123/E01 (`0.1.23.01-beta`) queda integrado/aceptado para MANT.2 R1 mediante PR #168 / merge `1a3942a6c14ab047fe8bc587c21b9b96cf62f2bd`; G124 queda disponible sin candidato ni bloque preasignado.
-- PERSIST.1 permanece planificado, no iniciado y sin Global preasignado; no puede iniciar antes de completar #163 → #154 → #155 → #164.
+- G123/E01 (`0.1.23.01-beta`) está integrado/aceptado/publicado para MANT.2 R1 mediante PR #168 y `v0.1.23.01-beta`.
+- G124/E13 (`0.1.24.13-beta`) está integrado/aceptado/publicado para MANT.1 R8 mediante PR #170 y `v0.1.24.13-beta`.
+- DOC.3 R1/#154 está materializado como G125/E01 y pendiente de publicación; G126 permanece disponible sin candidato ni bloque preasignado.
+- PERSIST.1 permanece planificado, no iniciado y sin Global preasignado; no puede iniciar antes de completar #154 → #155 → #164.
 - Los tags ya publicados permanecen inmutables.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 

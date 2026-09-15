@@ -1,14 +1,15 @@
 # Índice de documentación
 
 **Estado:** vigente
-**Versión de aplicación:** `0.1.24.13-beta` — G124/E13 aceptado localmente para MANT.1 R8; publicación formal pendiente; G123/E01 permanece publicado como MANT.2 R1
+**Versión de aplicación:** `0.1.25.01-beta` — G125/E01 materializado para DOC.3 R1; publicación pendiente; G126 permanece disponible sin candidato
 **Último tag formal legacy:** `v0.0.26-beta`
-**Última actualización transversal:** MANT.1 R8 — promoción local G124/E13 y saneamiento operativo — 2026-09-14
+**Última actualización transversal:** DOC.3 R1 — materialización G125/E01 pendiente de publicación — 2026-09-15
 **Cierres históricos preservados:** UX.4.6i / PR #34 — 841 pruebas; UX.4.6e R9 — `v0.0.25-beta`
 
-
 <!-- NOR3-G122-PROMOTION:START -->
-## Estado post-NOR.3 / promoción G122-E01
+## Registro histórico — promoción G122-E01 post-NOR.3
+
+> **Checkpoint histórico preservado.** Este bloque describe el estado inmediatamente posterior a la integración de NOR.3 y anterior a MANT.2 R1 / MANT.1 R8. No representa el estado vigente del repositorio; las secciones vigentes posteriores de este documento tienen precedencia.
 
 - `VERSION` materializa `0.1.22.01-beta` para NOR.3 R8 / G122-E01.
 - NOR.3 R1–R8 quedó integrado/aceptado mediante PR #162 / merge
@@ -27,38 +28,38 @@
 <!-- POST-NOR3-INTERMEDIATE-SEQUENCE:START -->
 ## Secuencia intermedia obligatoria post-NOR.3
 
-G123/MANT.2 R1 está publicado como `v0.1.23.01-beta` y permanece preservado
-como el estado material inmediatamente anterior.
+G124/MANT.1 R8 permanece cerrado/publicado como `v0.1.24.13-beta` y constituye
+la base material inmediatamente anterior.
 
-MANT.1 R8 / Issue #163 se materializa como **G124/E13**
-(`0.1.24.13-beta`). El ordinal E13 continúa la historia propia de MANT.1:
-G074–G085 ya ocupan E01–E12; la revisión funcional vigente es R8.
+DOC.3 R1 / Issue #154 se materializa localmente como **G125/E01**
+(`0.1.25.01-beta`) después de completar la auditoría integral, la normalización
+Markdown 173/173, el registro de DOC.4/#171 como trabajo diferido y el preflight
+final #166 sin trabajo material nuevo de dependencias.
 
-La aceptación local se sustenta en la auditoría de 16 scripts operativos y
-219 módulos de pruebas pre-promoción, la reconciliación de 28 labels, el
-Quality Gate FULL 11 PASS / 0 FAIL y el preflight final #166 sin trabajo
-Dependabot pendiente. La publicación formal de G124 requiere todavía
-PR/merge, revalidación de `main`, tag firmado y GitHub Release prerelease.
+El estado G125/E01 queda **aceptado localmente y pendiente de publicación**.
+Su cierre definitivo requiere PR/merge, revalidación de `main`, tag firmado y
+GitHub Release prerelease. PLAN.2 R2/#155 no inicia hasta completar esa
+publicación.
 
-Después de publicar G124/MANT.1 R8 y antes de iniciar PERSIST.1, la continuidad
-material queda fijada así:
+La continuidad posterior a la publicación de G125 queda:
 
-1. **DOC.3 R1 — Issue #154:** auditoría documental integral.
-2. **PLAN.2 R2 — Issue #155:** replanificación maestra hacia 1.0.
-3. **VER.2 R6 — Issue #164:** reforma del versionado beta y del componente
+1. **PLAN.2 R2 — Issue #155:** replanificación maestra post-DOC.3.
+   Debe ubicar DOC.4 R1/#171 y sus lotes #172/#173/#174.
+2. **VER.2 R6 — Issue #164:** reforma del versionado beta y del componente
    futuro dedicado a fases MANT.2/Dependabot.
-4. **PERSIST.1 — Issue #130:** bloqueado hasta completar toda la secuencia.
+3. **PERSIST.1 — Issue #130:** permanece bloqueado hasta completar la secuencia
+   que determine PLAN.2 R2 y VER.2 R6.
 
-G125 queda únicamente como siguiente Global disponible y no se asigna por
-adelantado. Antes de iniciar cada fase futura se repite el preflight #166;
-un lote material nuevo de dependencias inserta MANT.2 R2+.
+G126 queda únicamente como siguiente Global disponible y no se asigna por
+adelantado. Antes de cada fase futura se repite el preflight #166; un lote
+material nuevo de dependencias inserta MANT.2 R2+.
 <!-- POST-NOR3-INTERMEDIATE-SEQUENCE:END -->
 
 Este archivo es el punto de entrada para la documentación técnica, funcional, normativa, de privacidad, validación y auditoría de Mi Retiro Proyectado.
 
 ## Estado de normalización del repositorio
 
-**Estado actual:** MANT.1 R8 se materializa como G124/E13 (`0.1.24.13-beta`) sobre G123/MANT.2 R1 publicado; G125 queda disponible sin candidato. DOC.3 R1/#154 es la siguiente fase material y PERSIST.1 permanece bloqueado.
+**Estado actual:** MANT.1 R8 está cerrado/publicado como G124/E13 (`0.1.24.13-beta`); DOC.3 R1/#154 está en ejecución; G125 permanece disponible sin candidato y PERSIST.1 continúa bloqueado por #154 → #155 → #164.
 
 Estado de la fase:
 
@@ -87,7 +88,10 @@ Estado de la fase:
   seguridad y privacidad integrados.
 - **UX.5 R6:** cerrado/aceptado/publicado como G120/E01 (`0.1.20.01-beta`).
 - **UX.6 R1–R8:** cerrado/aceptado/publicado como G121/E01 (`0.1.21.01-beta`) mediante PR #124 y `v0.1.21.01-beta`.
-- **NOR.3 R1–R8:** cerrado/integrado/aceptado como G122/E01 (`0.1.22.01-beta`) mediante PR #162 / merge `b97cf61763479b80b8e8724b878089e8bb20fa00`.
+- **NOR.3 R1–R8:** cerrado/integrado/aceptado/publicado como G122/E01 (`0.1.22.01-beta`) mediante PR #162 / merge `b97cf61763479b80b8e8724b878089e8bb20fa00`.
+- **MANT.2 R1:** cerrado/aceptado/publicado como G123/E01 (`0.1.23.01-beta`).
+- **MANT.1 R8:** cerrado/aceptado/publicado como G124/E13 (`0.1.24.13-beta`) mediante PR #170 y `v0.1.24.13-beta`.
+- **DOC.3 R1:** en ejecución bajo Issue #154 y rama `docs/doc3-r1-auditoria-documental`, sin Global preasignado.
 - **SEC.2 R1–R6:** cerrados; CodeQL, autenticación, protección de endpoints, auditoría, sesión web y hardening configurable completados. AUD.SEC2 R1 corrigió el kill switch, alineó documentación/ledger y quedó aceptado como G109/E01.
 
 Evidencia:

@@ -122,7 +122,6 @@ La diferenciación visual no sustituye el bloqueo funcional: una fila importada 
 - `python -m unittest discover -s tests`: **282 pruebas en OK**;
 - se actualizan regresiones históricas cuya expectativa de confirmación manual de cuotas quedó sustituida por la regla de importación automática aprobada en R3.
 
-
 ## 16. Revisión 4 — procedencia visual y casillas importadas
 
 La procedencia documental deja de representarse con verde. Ese color se reserva para estados semánticos de éxito o completitud. Las filas con datos importados usan ahora una señal azul derivada de la paleta primaria, con fondo tenue y borde lateral, manteniendo el mismo significado en Claro, Oscuro y Alto contraste.
@@ -220,8 +219,6 @@ La prueba integral de consentimiento desde Fuentes queda pendiente para el recor
 
 Validación técnica R10: **330 pruebas automatizadas en OK**, compilación Python y sintaxis JavaScript correctas.
 
-
-
 ## Revisión 11 — scrollbars contenidos y simetría de carga PDF
 
 Después de validar la geometría común de R10, se detectó que el scrollbar nativo de tablas extensas todavía podía superponerse visualmente al radio derecho, especialmente por los botones/flechas superior e inferior de Chromium/Windows. R11 mantiene `app-table-shell` como contenedor desplazable pero personaliza su scrollbar: elimina esas flechas, usa track transparente con margen respecto de las esquinas y adapta el thumb a Claro, Oscuro y Alto contraste. Las tablas cortas conservan la eliminación reactiva del carril introducida previamente.
@@ -242,7 +239,6 @@ El botón **Seleccionar archivo** deja de cambiar por el hover sobre el nombre d
 
 Validación técnica R12: **340 pruebas automatizadas en OK**, compilación Python y sintaxis JavaScript correctas. Permanecen pendientes la revisión visual de R12, los puntos 20–30 y el recorrido integral de consentimiento antes de cerrar UX.4.6d.
 
-
 ## Revisión 13 — selector de archivo estable y preparación del recorrido integral
 
 La validación manual de R12 confirmó correctamente scrollbars temáticos en tablas, vistas previas y Términos/Privacidad; los tres temas; estado vacío de **Pendientes**; reaparición reactiva de filas incompletas; y geometría de Comparador. El único fallo persistente fue **Seleccionar archivo**, cuyo color aún podía cambiar al pasar el puntero por el nombre del archivo.
@@ -250,7 +246,6 @@ La validación manual de R12 confirmó correctamente scrollbars temáticos en ta
 R13 refuerza el componente global de carga contra la cascada de Bootstrap/Chromium. El botón nativo conserva color, fondo y borde de la paleta de la aplicación en estado base, hover y focus; no se modifica procesamiento de PDFs, estado del wizard, fórmulas ni motores.
 
 Validación técnica R13: **343 pruebas automatizadas en OK**. Antes del cierre se hará una prueba manual breve del selector y, a continuación, un recorrido limpio integral de Pasos 1–3 que absorberá los puntos 20–30 aún pendientes y validará funciones, cálculos, importaciones, errores, consentimiento, limpieza, temas y resúmenes.
-
 
 ## Revisión 14 — continuidad del Paso 1 durante el recorrido integral
 
@@ -276,7 +271,6 @@ Visualmente, Ficha Digital deja de estar entre las grandes subsecciones del Paso
 
 R16 no modifica motores, fórmulas ni parser; solo orquestación, restauración y estructura de interfaz. Validación técnica: **356 pruebas automatizadas en OK** antes de la comprobación manual.
 
-
 ## Revisión 17 — auditoría documental Paso 1–3
 
 La auditoría con el comprobante real confirmó que Paso 2 utiliza correctamente 281 cuotas acreditadas aunque el documento muestre 293 acumuladas al sumar una fila proyectada de 2027. Asimismo, el historial anual 1992–2026 conserva 281 cuotas y sustituye el monto híbrido/proyectado de 2026 por el salario acreditado derivado de Ficha Digital cuando el detalle mensual coincide.
@@ -291,7 +285,6 @@ La auditoría manual confirmó que un salario conocido —por ejemplo junio— p
 
 R18 también corrige la percepción de que una importación “se pierde” tras F5. El `input[type=file]` se vacía inevitablemente por seguridad del navegador, pero la simulación conserva los datos confirmados, la metadata del nombre del documento y las acciones Revisar/Quitar importación. El usuario no necesita adjuntar otra vez el archivo para continuar usando esos datos. No se conservan bytes ni rutas locales.
 
-
 ## Revisión 19 — sincronización reactiva del año actual
 
 La validación manual confirmó un caso real: Mi Retiro Seguro/Ficha Digital podía contener cinco cuotas hasta mayo, mientras el usuario ya conocía y confirmaba junio. El detalle mensual calculaba correctamente seis registros, pero la fila 2026 del historial anual continuaba con el valor anterior o exigía completar de nuevo el salario anual.
@@ -302,7 +295,6 @@ Marcar junio manualmente también actualiza Paso 2 desde 5/281 a 6/282 conservan
 
 El promedio por cuota acreditada del caso de seis meses pasa a **B/.1,480.58**; el valor B/.1,464.23 correspondía únicamente al escenario anterior de cinco cuotas enero–mayo.
 
-
 ## Revisión 20 — vigencia de Ficha Digital y resumen visible
 
 El recorrido final confirmó que una Ficha Digital puede ser válida para completar el Paso 3 aunque no sea la más reciente disponible. R20 evita tratar ambas ideas como equivalentes. La aplicación compara el último período salarial detectado con el mes local actual; el mes actual y los dos anteriores se consideran suficientemente recientes para no interrumpir el flujo. Un documento más antiguo muestra una advertencia previa a la vista de revisión con dos acciones explícitas: **Seleccionar una ficha más reciente** o **Continuar con esta ficha**. La segunda opción conserva toda la capacidad de completar manualmente meses faltantes.
@@ -312,7 +304,6 @@ La decisión no añade persistencia del archivo. Tras confirmar, `anio_mas_recie
 R20 también hace visible el resumen del detalle del año actual que hasta R19 solo alimentaba internamente las bases automáticas. El nuevo bloque muestra cuotas identificadas, salarios disponible/acreditado, meses con información/completos, último mes completo, último mes con cuota, último salario completo y los tres promedios. Las cifras siguen procediendo del servicio backend; la UI únicamente las presenta y las oculta al invalidar el detalle.
 
 Validación técnica R20: **379 pruebas automatizadas en OK**, `python -m compileall app` y `node --check app/static/js/*.js` correctos.
-
 
 ## Revisión 21 — vigencia mensual con fecha externa verificable
 
@@ -330,13 +321,11 @@ Se revisó el bloque **Resumen del detalle del año actual**. Se mantienen sus 1
 
 Validación técnica R22: **392 pruebas automatizadas en OK**, compilación Python y validación sintáctica JavaScript correctas.
 
-
 ## Revisión 23 — una Ficha Digital posterior puede actualizar Paso 2
 
 La validación con una Ficha Digital más reciente reveló que R22 solo reconciliaba casillas manuales. Cuando los seis meses confirmados procedían del documento y por tanto estaban bloqueados, `detallePuedeReconciliarCuotasPaso2()` descartaba esas casillas y Paso 2 permanecía en cinco cuotas, provocando exactamente el error `6 vs 5`.
 
 R23 distingue precedencia temporal y procedencia: una Ficha Digital confirmada que aporta **más cuotas** que Paso 2 amplía automáticamente la referencia del año actual, conserva las cuotas anteriores al año vigente y revalida Cuotas en segundo plano. Si una ficha aporta menos meses, no se reduce la referencia superior de Paso 2. La reconciliación se ejecuta tanto al confirmar la ficha como defensivamente al analizar el detalle, y actualiza también `detalle_anio_actual.cuotas_anio_actual_referencia` para persistencia/F5.
-
 
 ## Cierre de UX.4.6d
 

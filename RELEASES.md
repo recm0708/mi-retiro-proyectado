@@ -1,5 +1,23 @@
 # Registro de versiones y estados del proyecto
 
+<!-- DOC3-R1-G125-PROMOTION:START -->
+## Promoción G125/E01 — DOC.3 R1
+
+- G125/E01 (`0.1.25.01-beta`) materializa DOC.3 R1.
+- Alcance: auditoría documental integral de estado vigente, gobierno,
+  estructura, historia, coherencia semántica y cierre reproducible.
+- Inventario: 173 Markdown y 418 archivos textuales de código/configuración.
+- Quality Gate FULL pre-materialización: 11 PASS / 0 FAIL; 1603 unittest OK;
+  pytest 1643 passed + 7824 subtests.
+- Preflight final #166: 0 PRs, 0 Dependabot alerts, 0 PRs Dependabot;
+  `pip-audit --strict` y `npm audit --prefix scripts --audit-level=high` verdes.
+- DOC.4/#171 queda diferido como `planned_reserved`, con lotes #172–#174.
+- G124/E13 permanece publicado mediante `v0.1.24.13-beta`.
+- G125/E01 está materializado localmente y pendiente de PR/merge,
+  revalidación de `main`, tag firmado y GitHub Release prerelease.
+- G126 queda disponible sin candidato.
+<!-- DOC3-R1-G125-PROMOTION:END -->
+
 <!-- MANT1-R8-PROMOTION:START -->
 ## Promoción G124/E13 — MANT.1 R8
 
@@ -12,10 +30,12 @@
 - Quality Gate FULL post-promoción local: 11 PASS / 0 FAIL; 1600 unittest OK; pytest 1640 passed + 7782 subtests.
 - Preflight final #166: 0 PRs, 0 Dependabot alerts, 0 PRs Dependabot; `pip-audit` y `npm audit` verdes.
 - G123/E01 permanece publicado mediante `v0.1.23.01-beta` / GitHub Release prerelease ID `388217270`.
+- G124/E13 quedó integrado mediante PR #170 en
+  `main@f9d181ceaaf4824bf8807d9237d0e19e71d3b29c`.
+- G124/E13 quedó publicado mediante tag firmado `v0.1.24.13-beta` y GitHub
+  Release prerelease ID `388505679`.
 - G125 queda disponible sin candidato.
-- La publicación de G124 queda pendiente de PR/merge, revalidación de `main`, tag firmado y GitHub Release prerelease.
 <!-- MANT1-R8-PROMOTION:END -->
-
 
 <!-- MANT2-R1-PROMOTION:START -->
 ## Promoción G123/E01 — MANT.2 R1
@@ -95,7 +115,6 @@
   ni data; esos cambios comienzan en R3–R4 conforme a #126/#127/#128.
 <!-- NOR3-R2-CANDIDATE-CONTINUITY:END -->
 
-
 <!-- DOC1-R1-POST-MANT1:START -->
 
 ## Promoción G120/E01 — UX.5 R6
@@ -118,7 +137,6 @@
   `76586b5a7c77a5cffa97128a29ea77bd36cb988b`, objeto
   `7dbcca8071e2726b6aa4f17704bf41b92f6cd5bd` y GitHub Release prerelease
   ID `383133233`.
-
 
 ## Promoción G119/E05 — DEV.2 R6
 

@@ -1,3 +1,5 @@
+"""Audita la atestación versionada del historial Git y contrasta su identidad, continuidad y firmas con el repositorio real."""
+
 from __future__ import annotations
 
 import json
@@ -11,6 +13,7 @@ MANIFEST = ROOT / "data" / "audits" / "git-history-attestation.json"
 
 
 def run_git(*args: str) -> subprocess.CompletedProcess[str]:
+    """Ejecuta Git con los argumentos recibidos y captura su resultado."""
     return subprocess.run(
         ["git", *args],
         cwd=ROOT,
@@ -23,6 +26,7 @@ def run_git(*args: str) -> subprocess.CompletedProcess[str]:
 
 
 def git_lines(*args: str) -> list[str]:
+    """Ejecuta Git y devuelve las líneas no vacías de su salida."""
     result = run_git(*args)
 
     if result.returncode != 0:
@@ -36,6 +40,7 @@ def git_lines(*args: str) -> list[str]:
 
 
 def history_shas(ref: str = "HEAD") -> list[str]:
+    """Devuelve los SHA del historial en orden cronológico."""
     return git_lines(
         "rev-list",
         "--reverse",
@@ -46,6 +51,7 @@ def history_shas(ref: str = "HEAD") -> list[str]:
 def history_records(
     ref: str = "HEAD",
 ) -> list[tuple[str, str, str]]:
+    """Construye registros cronológicos con SHA, asunto y estado de firma."""
     result = run_git(
         "-c",
         "i18n.logOutputEncoding=UTF-8",
@@ -109,6 +115,7 @@ def commit_has_signature(
 def pr_from_subject(
     subject: str,
 ) -> int | None:
+    """Extrae del asunto del commit el Pull Request asociado cuando existe."""
     match = re.search(
         r"\(#(?P<n>\d+)\)\s*$",
         subject,
@@ -131,10 +138,12 @@ def pr_from_subject(
 def current_history_identity(
     ref: str = "HEAD",
 ) -> str:
+    """Calcula la identidad reproducible del historial Git actual."""
     return f"HIST-{len(history_shas(ref)):04d}"
 
 
 def load_manifest() -> dict:
+    """Carga el manifiesto de atestación histórica versionado."""
     return json.loads(
         MANIFEST.read_text(
             encoding="utf-8"
@@ -143,6 +152,7 @@ def load_manifest() -> dict:
 
 
 def audit_history() -> dict:
+    """Contrasta la atestación versionada con el historial Git observado."""
     data = load_manifest()
     errors: list[str] = []
     entries = data.get(
@@ -489,6 +499,7 @@ def audit_history() -> dict:
 
 
 def main() -> int:
+    """Ejecuta el flujo principal del script y devuelve el código de salida."""
     report = audit_history()
 
     print(

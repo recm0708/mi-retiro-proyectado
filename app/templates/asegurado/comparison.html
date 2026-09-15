@@ -5,6 +5,7 @@ Comparar escenarios | {{ app_name }}
 {% endblock %}
 
 {% block content %}
+<!-- Comparador de escenarios: selección, ejecución y presentación de diferencias entre resultados. -->
 <section class="py-5 comparison-section">
   <div class="container comparison-container">
 
@@ -52,6 +53,7 @@ Comparar escenarios | {{ app_name }}
         <div class="col-xl-6">
           <div class="card h-100 border-0 shadow-sm comparison-card">
             <div class="card-body p-4">
+              <!-- Sección visible: Escenarios de retiro. -->
               <h2 class="h5 fw-bold mb-2">Escenarios de retiro</h2>
               <p class="text-secondary small mb-3">
                 Selecciona las fechas que deseas incluir. El escenario base se
@@ -65,6 +67,7 @@ Comparar escenarios | {{ app_name }}
         <div class="col-xl-6">
           <div class="card h-100 border-0 shadow-sm comparison-card">
             <div class="card-body p-4">
+              <!-- Sección visible: Escenarios salariales. -->
               <h2 class="h5 fw-bold mb-2">Escenarios salariales</h2>
               <p class="text-secondary small mb-3">
                 Puedes comparar una misma fecha de retiro bajo varias
@@ -120,6 +123,7 @@ Comparar escenarios | {{ app_name }}
         <div class="card border-0 shadow-sm comparison-card mb-4">
           <div class="card-body p-0">
             <div class="p-4 pb-2">
+              <!-- Sección visible: Matriz comparativa. -->
               <h2 class="h4 fw-bold mb-1">Matriz comparativa</h2>
               <p class="text-secondary mb-0">
                 Los importes mensuales y pagos únicos se mantienen separados.
@@ -148,6 +152,7 @@ Comparar escenarios | {{ app_name }}
 
         <div id="comparador-advertencias" class="card border-0 shadow-sm comparison-card d-none">
           <div class="card-body p-4">
+            <!-- Sección visible: Notas para interpretar la comparación. -->
             <h2 class="h5 fw-bold mb-3">Notas para interpretar la comparación</h2>
             <ul id="comparador-lista-advertencias" class="mb-0"></ul>
           </div>
@@ -159,6 +164,7 @@ Comparar escenarios | {{ app_name }}
 </section>
 {% endblock %}
 
+<!-- Scripts específicos de esta vista. -->
 {% block scripts %}
 <script src="{{ url_for('static', path='/asegurado/js/currency.js') }}"></script>
 <script src="{{ url_for('static', path='/asegurado/js/comparator.js') }}"></script>

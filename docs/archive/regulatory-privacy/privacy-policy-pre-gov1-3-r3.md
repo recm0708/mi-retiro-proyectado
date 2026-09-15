@@ -122,7 +122,6 @@ La futura exportación de resultados deberá ser voluntaria, permitir excluir id
 
 Antes de habilitar cuentas, base de datos permanente, nube, telemetría, analítica, publicidad o transferencias a terceros se requiere una nueva evaluación de privacidad, actualización documental y nuevo consentimiento cuando corresponda.
 
-
 ## Criterio de presentación del consentimiento
 
 La casilla de aceptación permanece deshabilitada hasta que el usuario llega al final del documento visible. Una vez cumplido ese requisito, la casilla se habilita sin añadir bloques de **Fin de los términos** ni mensajes de **Lectura completada**. La interfaz muestra solo la ayuda necesaria mientras el requisito todavía no se ha cumplido.
@@ -138,7 +137,6 @@ La sección Fuentes permite volver a consultar las condiciones vigentes. Si toda
 ### Aclaración UX.4.6d R18
 
 Tras confirmar una importación, la aplicación puede conservar temporalmente en la sesión el **nombre del documento seleccionado** para que el usuario identifique qué importación sigue vigente después de recargar la página. El navegador vacía el selector de archivos por seguridad. Esta metadata no incluye la ruta local ni el archivo original, que continúa sin almacenarse de forma permanente. Esta aclaración no cambia finalidades, destinatarios ni persistencia remota y no modifica la versión **2026-08-15.1**.
-
 
 ### UX.4.6d R21 — fecha de referencia para vigencia documental
 
