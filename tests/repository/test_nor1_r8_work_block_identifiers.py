@@ -68,28 +68,21 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
         for label in ("LEGACY", "INTEGRIDAD", "POST-GOV"):
             self.assertFalse(labels[label]["reusable_as_family"])
 
-    def test_g112_permanece_aceptado_y_estado_actual_no_preasigna_g125(self):
+    def test_g112_permanece_aceptado_y_estado_actual_no_preasigna_g126(self):
         ledger = cargar_ledger()
-        entry = next(
-            x for x in ledger["entries"] if x["global_revision"] == 112
-        )
+        entry = next(x for x in ledger["entries"] if x["global_revision"] == 112)
         self.assertEqual("NOR.1", entry["block"])
         self.assertEqual(7, entry["ordinal"])
         self.assertEqual("0.1.12.07-beta", entry["revision_aware"])
-
         candidate = self.data["current_candidate"]
         self.assertIsNone(candidate["global_revision"])
         self.assertIsNone(candidate["block"])
         self.assertIsNone(candidate["revision"])
         self.assertIsNone(candidate["edition"])
-        self.assertEqual("unassigned_pending_post_mant1_r8", candidate["state"])
-        self.assertEqual(125, candidate["next_global_available"])
-        self.assertIsNone(
-            candidate["next_functional_block_if_accepted"]
-        )
-        self.assertIsNone(
-            candidate["next_functional_global_if_accepted"]
-        )
+        self.assertEqual("unassigned", candidate["state"])
+        self.assertEqual(126, candidate["next_global_available"])
+        self.assertIsNone(candidate["next_functional_block_if_accepted"])
+        self.assertIsNone(candidate["next_functional_global_if_accepted"])
 
     def test_candidato_reabierto_continua_ordinal_del_bloque(self):
         ledger = cargar_ledger()
@@ -148,77 +141,42 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
 
     def test_historia_y_planificacion_se_validan_en_fuentes_canonicas(self):
         ledger = cargar_ledger()
-        entries = {
-            entry["global_revision"]: entry
-            for entry in ledger["entries"]
-        }
-
+        entries = {entry["global_revision"]: entry for entry in ledger["entries"]}
         expected = {
             112: ("NOR.1", 7, "0.1.12.07-beta"),
             113: ("DOC.1", 3, "0.1.13.03-beta"),
             114: ("PLAN.2", 1, "0.1.14.01-beta"),
             115: ("DOC.1", 4, "0.1.15.04-beta"),
+            122: ("NOR.3", 1, "0.1.22.01-beta"),
+            123: ("MANT.2", 1, "0.1.23.01-beta"),
+            124: ("MANT.1", 13, "0.1.24.13-beta"),
+            125: ("DOC.3", 1, "0.1.25.01-beta"),
         }
         for global_revision, expected_entry in expected.items():
             entry = entries[global_revision]
             with self.subTest(global_revision=global_revision):
                 self.assertEqual(expected_entry[0], entry["block"])
                 self.assertEqual(expected_entry[1], entry["ordinal"])
-                self.assertEqual(
-                    expected_entry[2],
-                    entry["revision_aware"],
-                )
-
-        ids = {
-            item["identifier"]: item
-            for item in self.data["identifiers"]
-        }
+                self.assertEqual(expected_entry[2], entry["revision_aware"])
+        ids = {item["identifier"]: item for item in self.data["identifiers"]}
         self.assertEqual("closed", ids["NOR.1"]["status"])
         self.assertEqual("closed", ids["PLAN.2"]["status"])
-        self.assertEqual(
-            "reopened_planned_r6",
-            ids["DOC.1"]["status"],
-        )
-        self.assertEqual(
-            "planned_reserved",
-            ids["PERSIST.1"]["status"],
-        )
-        self.assertEqual(
-            "closed",
-            ids["NOR.3"]["status"],
-        )
-
-        matrix = (
-            ROOT / "docs/governance/pre-1-0-pending-matrix.md"
-        ).read_text(encoding="utf-8")
+        self.assertEqual("reopened_planned_r6", ids["DOC.1"]["status"])
+        self.assertEqual("planned_reserved", ids["PERSIST.1"]["status"])
+        self.assertEqual("closed", ids["NOR.3"]["status"])
+        self.assertEqual("accepted_pending_publication", ids["DOC.3"]["status"])
+        self.assertEqual("planned_reserved", ids["DOC.4"]["status"])
+        matrix = (ROOT / "docs/governance/pre-1-0-pending-matrix.md").read_text(encoding="utf-8")
         for fragment in (
-            "Cerrado/aceptado G114/E01",
-            "DOC.1 R4",
-            "PERSIST.1 R1",
-            "Cerrado/aceptado G118/E04",
-            "DEV.2 R5",
-            "Cerrado/aceptado/publicado G119/E05",
-            "Cerrado/aceptado G120/E01",
-            "Cerrado/aceptado G121/E01",
-            "Cerrado/aceptado G122/E01",
-            "Cerrado/aceptado/publicado G123/E01",
-            "MANT.1 R8",
-            "VER.2 R6",
-            "#163",
-            "#154",
-            "#155",
-            "#164",
-            "G123/MANT.2 R1 está publicado como `v0.1.23.01-beta`",
-            "Todo bloque usado por la planificación viva",
-            "bloqueado por #154 → #155 → #164",
-            "G125 queda únicamente como siguiente Global disponible",
-            "UX.6 R1–R8",
-            "PERSIST.1 R1",
-            "DEV.2 R6",
+            "Cerrado/aceptado G114/E01", "Cerrado/aceptado G118/E04",
+            "Cerrado/aceptado/publicado G119/E05", "Cerrado/aceptado G120/E01",
+            "Cerrado/aceptado G121/E01", "Cerrado/aceptado G122/E01",
+            "Cerrado/aceptado/publicado G123/E01", "Cerrado/aceptado/publicado G124/E13",
+            "Materializado G125/E01", "DOC.4 R1", "#154", "#155", "#164", "#171",
+            "Todo bloque usado por la planificación viva", "G126", "PERSIST.1 R1", "DEV.2 R6",
         ):
             with self.subTest(fragment=fragment):
                 self.assertIn(fragment, matrix)
-
         mant = matrix.index("**MANT.1 R8**")
         doc3 = matrix.index("**DOC.3 R1**")
         plan2_r2 = matrix.index("**PLAN.2 R2**")

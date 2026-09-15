@@ -18,22 +18,18 @@ class TestNOR3R8Closure(unittest.TestCase):
     def test_cierre_r8_preserva_g122_y_estado_actual(self):
         data = json.loads(REGISTRY.read_text(encoding="utf-8"))
         candidate = data["current_candidate"]
-
         self.assertIsNone(candidate["global_revision"])
         self.assertIsNone(candidate["revision_aware"])
         self.assertIsNone(candidate["block"])
         self.assertIsNone(candidate["revision"])
         self.assertIsNone(candidate["revision_scope"])
-        self.assertEqual("unassigned_pending_post_mant1_r8", candidate["state"])
-        self.assertEqual(125, candidate["next_global_available"])
-
-        identifiers = {
-            item["identifier"]: item
-            for item in data["identifiers"]
-        }
+        self.assertEqual("unassigned", candidate["state"])
+        self.assertEqual(126, candidate["next_global_available"])
+        identifiers = {item["identifier"]: item for item in data["identifiers"]}
         self.assertEqual("closed", identifiers["NOR.3"]["status"])
         self.assertEqual("R1-R8", identifiers["NOR.3"]["active_scope"])
         self.assertEqual(["G122"], identifiers["NOR.3"]["global_refs"])
+        self.assertEqual("accepted_pending_publication", identifiers["DOC.3"]["status"])
 
     def test_policy_declara_cierre_r8_sin_simular_auditoria_posterior(self):
         data = json.loads(POLICY.read_text(encoding="utf-8"))

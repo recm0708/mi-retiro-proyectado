@@ -3,6 +3,7 @@
 {% block title %}Archivos · Portal Developer · {{ app_name }}{% endblock %}
 
 {% block content %}
+<!-- Archivos Developer: inventaría y expone únicamente artefactos diagnósticos permitidos. -->
 <section class="hero-section py-5">
   <div class="container">
     <span class="dev-kicker">Diagnósticos locales</span>
@@ -84,6 +85,7 @@
       <div class="card-body">
         <div class="d-flex flex-column flex-lg-row justify-content-between gap-3">
           <div>
+            <!-- Sección visible: Exportación diagnóstica. -->
             <h2 class="h5 mb-1">Exportación diagnóstica</h2>
             <p class="text-muted mb-0">
               El paquete contiene únicamente los JSONL diagnósticos conocidos
@@ -117,6 +119,7 @@
     <div class="card">
       <div class="card-body">
         <div class="mb-3">
+          <!-- Sección visible: Archivos diagnósticos conocidos. -->
           <h2 class="h5 mb-1">Archivos diagnósticos conocidos</h2>
           <p class="text-muted mb-0">
             Solo se enumeran el JSONL vigente y sus rotaciones previstas.

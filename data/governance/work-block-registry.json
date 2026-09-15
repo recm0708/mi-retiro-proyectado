@@ -14,12 +14,12 @@
     "block": null,
     "revision": null,
     "revision_scope": null,
-    "state": "unassigned_pending_post_mant1_r8",
+    "state": "unassigned",
     "next_functional_block_if_accepted": null,
     "next_functional_global_if_accepted": null,
     "edition": null,
     "planning_issue": 155,
-    "next_global_available": 125
+    "next_global_available": 126
   },
   "families": [
     {
@@ -489,11 +489,14 @@
       "identifier": "DOC.3",
       "family": "DOC",
       "kind": "block",
-      "status": "planned_reserved",
-      "meaning": "Auditoría documental integral periódica post-fase material. R1 corresponde al Issue #154 y comienza únicamente después de cerrar/publicar MANT.1 R8/#163.",
-      "evidence": "Issue #154; identificador formal resuelto como DOC.3 R1. Reserva machine-readable anticipada sin Global ni VERSION; materialización propia pendiente después de MANT.1 R8.",
-      "global_refs": [],
-      "reusable_for_different_scope": false
+      "status": "accepted_pending_publication",
+      "meaning": "Auditoría documental integral periódica post-fase material. DOC.3 R1 / Issue #154 queda materializado como G125/E01 (0.1.25.01-beta) y pendiente de PR/merge/tag/release.",
+      "evidence": "Issue #154; rama docs/doc3-r1-auditoria-documental; cierre interno 6e94fbcc1598dff612cb4c676553faa21ff8c831; preflight final #166 CLEAN; Quality Gate FULL 11 PASS / 0 FAIL; G125/E01 materializado localmente.",
+      "global_refs": [
+        "G125"
+      ],
+      "reusable_for_different_scope": false,
+      "active_scope": "R1"
     },
     {
       "identifier": "VER.2",
@@ -583,12 +586,22 @@
       "reusable_for_different_scope": false
     },
     {
+      "identifier": "DOC.4",
+      "family": "DOC",
+      "kind": "block",
+      "status": "planned_reserved",
+      "meaning": "Reingeniería documental canónica current-state-only: revisión 1:1 de Markdown, racionalización del árbol documental y revisión por extensión de artefactos textuales no ejecutables. Su posición exacta será resuelta por PLAN.2 R2/#155.",
+      "evidence": "Issue #171; lotes #172/#173/#174; hallazgo diferido de DOC.3 R1/#154. No iniciado y sin Global/VERSION preasignados.",
+      "global_refs": [],
+      "reusable_for_different_scope": false
+    },
+    {
       "identifier": "PERSIST.1",
       "family": "PERSIST",
       "kind": "block",
       "status": "planned_reserved",
-      "meaning": "Persistencia voluntaria y segura. Antes de iniciar R1 permanece bloqueado por #163 → #154 → #155 → #164.",
-      "evidence": "Alcance preservado, sin Global preasignado. No inicia antes de completar #163 → #154 → #155 → #164. Issue #130. Issue #163. Issue #154. Issue #155. Issue #164.",
+      "meaning": "Persistencia voluntaria y segura. Antes de iniciar R1 permanece bloqueado por DOC.3 R1/#154 → PLAN.2 R2/#155 → VER.2 R6/#164.",
+      "evidence": "Alcance preservado, sin Global preasignado. MANT.1 R8/#163 ya fue cerrado/publicado como G124/E13. No inicia antes de completar #154 → #155 → #164. Issues #130, #154, #155 y #164.",
       "global_refs": [],
       "reusable_for_different_scope": false
     },
@@ -753,6 +766,21 @@
     "issues_reconciliation_required": true,
     "documentation_audit_issue": 154,
     "master_replanning_issue": 155,
-    "next_candidate_assigned": false
+    "next_candidate_assigned": false,
+    "active_phase": "DOC.3 R1",
+    "active_phase_issue": 154,
+    "active_phase_state": "accepted_pending_publication",
+    "next_global_available": 126
+  },
+  "active_phase": {
+    "block": "DOC.3",
+    "revision": "R1",
+    "issue": 154,
+    "state": "accepted_pending_publication",
+    "global_revision": 125,
+    "revision_aware": "0.1.25.01-beta",
+    "base_global_revision": 124,
+    "base_revision_aware": "0.1.24.13-beta",
+    "next_phase_issue": 155
   }
 }

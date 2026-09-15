@@ -47,6 +47,7 @@ BRANCH_RE = re.compile(
 def run_git(
     *args: str,
 ) -> subprocess.CompletedProcess[str]:
+    """Ejecuta Git con los argumentos recibidos y captura su resultado."""
     return subprocess.run(
         ["git", *args],
         cwd=ROOT,
@@ -61,6 +62,7 @@ def run_git(
 def git_lines(
     *args: str,
 ) -> list[str]:
+    """Ejecuta Git y devuelve las líneas no vacías de su salida."""
     result = run_git(*args)
 
     if result.returncode != 0:
@@ -79,6 +81,7 @@ def git_lines(
 def branch_errors(
     branch: str,
 ) -> list[str]:
+    """Devuelve incumplimientos detectados en el nombre de la rama."""
     errors = []
 
     if not branch:
@@ -108,6 +111,7 @@ def branch_errors(
 def title_errors(
     title: str,
 ) -> list[str]:
+    """Devuelve incumplimientos detectados en el título del Pull Request."""
     errors = []
 
     if not title.strip():
@@ -140,6 +144,7 @@ def changed_files(
     base: str,
     head: str,
 ) -> list[str]:
+    """Obtiene los archivos modificados entre las referencias auditadas."""
     return git_lines(
         "diff",
         "--name-only",
@@ -151,6 +156,7 @@ def commits_in_range(
     base: str,
     head: str,
 ) -> list[str]:
+    """Obtiene los commits incluidos en el rango auditado."""
     return git_lines(
         "rev-list",
         "--reverse",
@@ -162,6 +168,7 @@ def merge_commits(
     base: str,
     head: str,
 ) -> list[str]:
+    """Identifica merges presentes en el rango de commits."""
     return git_lines(
         "rev-list",
         "--merges",
@@ -172,6 +179,7 @@ def merge_commits(
 def revision_state_errors(
     files: list[str],
 ) -> list[str]:
+    """Valida que el cambio respete el estado revision-aware esperado."""
     changed = (
         REVISION_STATE_FILES
         & set(files)
@@ -224,6 +232,7 @@ def revision_state_errors(
 def base_allowed_signers(
     base: str,
 ) -> str:
+    """Obtiene los firmantes autorizados desde la base auditada."""
     result = run_git(
         "show",
         f"{base}:.github/allowed_signers",
@@ -250,6 +259,7 @@ def verify_human_commits(
     *,
     base: str,
 ) -> list[str]:
+    """Verifica firmas de commits humanos incluidos en el rango."""
     errors = []
 
     allowed = base_allowed_signers(
@@ -311,6 +321,7 @@ def audit_pr(
     title: str,
     actor: str,
 ) -> dict:
+    """Evalúa el contrato completo de gobierno aplicable al Pull Request."""
     files = changed_files(
         base,
         head,
@@ -378,6 +389,7 @@ def audit_pr(
 
 
 def parser() -> argparse.ArgumentParser:
+    """Construye el parser de argumentos de línea de comandos."""
     p = argparse.ArgumentParser(
         description=__doc__,
     )
@@ -411,6 +423,7 @@ def parser() -> argparse.ArgumentParser:
 
 
 def main() -> int:
+    """Ejecuta el flujo principal del script y devuelve el código de salida."""
     args = parser().parse_args()
 
     try:

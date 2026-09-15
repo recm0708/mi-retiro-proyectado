@@ -1,3 +1,7 @@
+# Plantilla de deuda técnica.
+# Propósito: registrar deuda técnica reproducible, su impacto y una ruta verificable de saneamiento.
+# Alcance: conserva labels, campos obligatorios y límites para no mezclar deuda con cambios funcionales no planificados.
+
 name: Hallazgo / deuda técnica
 description: Registra un hallazgo diferido con riesgo, owner futuro y criterio de cierre.
 title: "[DEUDA] "

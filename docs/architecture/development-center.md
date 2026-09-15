@@ -17,12 +17,14 @@ DEV.2 permanece cerrado después de R6/G119-E05. UX.6 amplía la experiencia
 Developer sin reabrir DEV.2.
 
 - UX.6 R1–R8 permanece cerrado/publicado como G121/E01.
-- NOR.3 R1–R8 queda integrado/aceptado como G122/E01 mediante PR #162
-  / merge `b97cf61763479b80b8e8724b878089e8bb20fa00`.
+- NOR.3 R1–R8 permanece cerrado/publicado como G122/E01 mediante
+  `v0.1.22.01-beta`.
 - Perfil/avatar, usuarios/RBAC, credenciales temporales, revocación y auditoría persistente permanecen vigentes.
 - App y Developer comparten Design System, movimiento y accesibilidad.
 - La sesión humana continúa separada del Bearer técnico.
-- G123 queda disponible sin candidato/bloque asignado.
+- MANT.2 R1/G123 y MANT.1 R8/G124 permanecen cerrados/publicados.
+- DOC.3 R1/#154 está en ejecución y no modifica el contrato funcional del Portal Developer.
+- G125 queda disponible sin candidato/bloque asignado.
 - PERSIST.1 permanece planificado, no iniciado y sin Global preasignado.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 

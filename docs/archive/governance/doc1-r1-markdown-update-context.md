@@ -2968,7 +2968,6 @@ Este documento extrae contexto de los Markdown candidatos antes de editarlos.
 0239: Los documentos que sí describen el estado actual —README, ROADMAP, SECURITY, índice operativo, CHANGELOG/RELEASES vigentes y ledger— deben actualizarse cuando corresponda.
 ```
 
-
 ## Documentos marcados REVISAR_MANUALMENTE
 
 ## docs/DECISIONES.md

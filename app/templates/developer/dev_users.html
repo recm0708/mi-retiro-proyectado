@@ -50,6 +50,7 @@
 {% block title %}Usuarios · Portal Developer · {{ app_name }}{% endblock %}
 
 {% block content %}
+<!-- Administración de usuarios Developer: aplica RBAC a creación, edición, estado y revocación. -->
 <section class="hero-section py-5">
   <div class="container">
     <p class="dev-kicker">Administración de identidades</p>
@@ -83,6 +84,7 @@
       <div class="dev-users-temporary-copy">
         <div>
           <p class="dev-kicker mb-2">Credencial temporal</p>
+          <!-- Sección visible: Contraseña temporal para @. -->
           <h2 class="h5 mb-2" id="dev-temporary-title">
             Contraseña temporal para @{{ dev_credencial_temporal.usuario }}
           </h2>
@@ -125,6 +127,7 @@
       <section class="card dev-users-create-card">
         <div class="card-body p-4">
           <p class="dev-kicker">Nueva cuenta</p>
+          <!-- Sección visible: Crear usuario. -->
           <h2 class="h4 mb-2">Crear usuario</h2>
           <p class="text-muted mb-4">
             El nombre de usuario será la identidad de acceso y no se edita
@@ -223,6 +226,7 @@
         <div class="dev-users-section-heading">
           <div>
             <p class="dev-kicker">Directorio</p>
+            <!-- Sección visible: Cuentas del portal. -->
             <h2 class="h4 mb-1">Cuentas del portal</h2>
           </div>
           <span class="badge text-bg-secondary">
@@ -546,6 +550,7 @@
         <div class="dev-users-section-heading">
           <div>
             <p class="dev-kicker">Auditoría</p>
+            <!-- Sección visible: Actividad administrativa. -->
             <h2 class="h4 mb-1">Actividad administrativa</h2>
             <p class="text-muted mb-0">
               Registro persistente de creación, edición, cambio de rol,

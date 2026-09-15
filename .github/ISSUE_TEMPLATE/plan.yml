@@ -1,3 +1,7 @@
+# Plantilla de planificación.
+# Propósito: registrar fases, dependencias, alcance y criterios de cierre antes de materializar trabajo.
+# Alcance: conserva labels, campos obligatorios y separación entre planificación y ejecución.
+
 name: Plan / fase / trabajo diferido
 description: Registra planificación material, una fase o trabajo diferido con ownership claro.
 title: "[PLAN] "

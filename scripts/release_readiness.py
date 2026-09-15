@@ -41,6 +41,7 @@ VERSION_PATH = ROOT / "VERSION"
 def read_json(
     path: Path,
 ) -> dict:
+    """Lee un documento JSON requerido por el contrato del script."""
     data = json.loads(
         path.read_text(
             encoding="utf-8-sig"
@@ -58,6 +59,7 @@ def read_json(
 def git(
     *args: str,
 ) -> subprocess.CompletedProcess[str]:
+    """Ejecuta un comando Git y devuelve su salida normalizada."""
     return subprocess.run(
         ["git", *args],
         cwd=ROOT,
@@ -72,6 +74,7 @@ def git(
 def tag_state(
     version: str,
 ) -> dict:
+    """Determina el estado local y remoto de un tag de versión."""
     tag = "v" + version
 
     exists = git(
@@ -152,6 +155,7 @@ def derive_release_action(
 
 
 def build_report() -> dict:
+    """Construye el reporte de preparación de release a partir de los gates."""
     version = VERSION_PATH.read_text(
         encoding="utf-8"
     ).strip()
@@ -325,6 +329,7 @@ def build_report() -> dict:
 def render_markdown(
     report: dict,
 ) -> str:
+    """Renderiza en Markdown el reporte de preparación de release."""
     tag = report["tag"]
 
     tag_status = (
@@ -406,6 +411,7 @@ def render_markdown(
 
 
 def parser() -> argparse.ArgumentParser:
+    """Construye el parser de argumentos de línea de comandos."""
     p = argparse.ArgumentParser(
         description=__doc__,
     )
@@ -424,6 +430,7 @@ def parser() -> argparse.ArgumentParser:
 
 
 def main() -> int:
+    """Ejecuta el flujo principal del script y devuelve el código de salida."""
     args = parser().parse_args()
 
     try:

@@ -56,13 +56,11 @@ La regla no borra información adicional: únicamente corrige qué panel puede m
 
 El estado temporal puede conservar `nombre_archivo_origen` para identificar visualmente una importación confirmada después de recargar la página. No se conserva el archivo original, su ruta local ni una copia binaria. `Limpiar este paso`, `Reiniciar simulación` y **Borrar datos de esta aplicación en este navegador** eliminan esta metadata junto con el estado al que pertenece.
 
-
 ## UX.4.6d R19 — actualización ascendente controlada desde Paso 3
 
 La dependencia normal del asistente sigue siendo descendente, pero existe una excepción explícita: una casilla manual de **Cuota acreditada** en el detalle del año actual puede actualizar los dos campos agregados de cuotas del Paso 2 porque el usuario está confirmando información temporalmente más reciente. Esta actualización no restaura resultados posteriores; al contrario, invalida `resumen_cuotas`, historial, proyección, retiro y resultados para recalcularlos con el dato nuevo.
 
 La excepción no aplica por cargar una Ficha Digital ni por escribir un salario: requiere una acción manual sobre la casilla de acreditación.
-
 
 ## R21 — metadata de fecha de referencia
 

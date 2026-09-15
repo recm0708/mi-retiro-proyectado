@@ -109,10 +109,16 @@ def test_readme_expone_estado_vigente_y_doc1_preserva_su_cierre():
 
 def test_security_declara_estado_vigente_post_mant1_y_preserva_anclas():
     text = read("SECURITY.md")
-
-    assert "## Estado de seguridad post-MANT.1" in text
     version = read("VERSION").strip()
-    assert f"La versión canónica vigente es `{version}`" in text
+    start = "<!-- DOC1-R1-POST-MANT1:START -->"
+    end = "<!-- DOC1-R1-POST-MANT1:END -->"
+    assert start in text and end in text
+    bloque = text.split(start, 1)[1].split(end, 1)[0]
+    assert "## Estado de seguridad post-MANT.1" in bloque
+    assert f"`{version}`" in bloque
+    assert "G125/E01" in bloque
+    assert "G124/E13" in bloque
+    assert "publicad" in bloque.lower()
     assert "`v0.0.71.01-beta`" in text
     assert "G071/E01" in text
     assert "Referencia legacy histórica preservada por pruebas de regresión" in text

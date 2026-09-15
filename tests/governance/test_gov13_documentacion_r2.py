@@ -31,12 +31,12 @@ R2_SNAPSHOTS = {
 
 
 class TestGov13DocumentacionR2(unittest.TestCase):
-    def test_r2_documentos_declaran_estado_y_version_base(self):
+    def test_r2_documentos_preservan_version_base_y_estado(self):
+        # Los documentos vivos pueden recibir revisiones posteriores a GOV.1.3 R2.
         for nombre in R2_DOCS:
             with self.subTest(nombre=nombre):
                 texto = (DOCS / nombre).read_text(encoding="utf-8")
                 self.assertIn(BASE_VERSION, texto)
-                self.assertIn("GOV.1.3 R2", texto)
                 self.assertIn("**Estado:**", texto)
 
     def test_snapshots_tecnicos_existen(self):

@@ -1,7 +1,7 @@
 # Arquitectura
 
 **Estado:** Vigente
-**Versión de aplicación revisada:** `0.1.24.13-beta`
+**Versión de aplicación revisada:** `0.1.25.01-beta`
 **Versión base histórica:** `0.0.23-beta`
 **Revisión documental:** GOV.1.4 — 2026-08-17
 **Última actualización técnica:** DEV.2 R6 — Portal Developer multipágina, identidad, observabilidad, mantenimiento, seguridad y privacidad — 2026-08-30
@@ -12,14 +12,16 @@
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado arquitectónico vigente
 
-- NOR.3 R1–R8 queda integrado/aceptado como G122/E01 (`0.1.22.01-beta`)
-  mediante PR #162 / merge `b97cf61763479b80b8e8724b878089e8bb20fa00`.
+- NOR.3 R1–R8 permanece cerrado/publicado como G122/E01 (`0.1.22.01-beta`).
 - UX.6 R1–R8 permanece cerrado/publicado como G121/E01 mediante `v0.1.21.01-beta`.
 - Perfil/avatar, usuarios y auditoría Developer permanecen fuera del modelo previsional.
 - Design System, movimiento, accesibilidad y responsive son compartidos.
 - Importadores documentales mantienen revisión/confirmación explícita.
 - NOR.3 no modifica motores SEBD/Mixto/SUCGS ni parámetros normativos.
-- G123 queda disponible sin candidato/bloque asignado.
+- MANT.2 R1/G123 y MANT.1 R8/G124 permanecen cerrados/publicados; ninguno
+  modifica los motores previsionales ni los parámetros normativos.
+- DOC.3 R1/#154 está en ejecución como auditoría documental, sin cambio de runtime.
+- G125 queda disponible sin candidato/bloque asignado.
 - PERSIST.1 permanece planificado, no iniciado y sin Global preasignado.
 <!-- DOC1-R1-POST-MANT1:END -->
 

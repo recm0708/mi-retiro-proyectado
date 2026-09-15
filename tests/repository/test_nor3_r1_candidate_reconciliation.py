@@ -13,22 +13,18 @@ ROOT = Path(__file__).resolve().parents[2]
 
 
 class TestNOR3R1CandidateReconciliation(unittest.TestCase):
-    def test_version_material_promueve_g122(self):
-        version = (ROOT / "VERSION").read_text(
-            encoding="utf-8"
-        ).strip()
-        self.assertEqual("0.1.24.13-beta", version)
-
+    def test_version_actual_preserva_promocion_historica_g122(self):
+        version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
+        self.assertEqual("0.1.25.01-beta", version)
         ledger = cargar_ledger()
-        self.assertEqual(124, ledger["accepted_count"])
-        self.assertEqual(
-            "0.1.22.01-beta",
-            next(x for x in ledger["entries"] if x["global_revision"] == 122)["revision_aware"],
-        )
+        self.assertEqual(125, ledger["accepted_count"])
+        entry = next(x for x in ledger["entries"] if x["global_revision"] == 122)
+        self.assertEqual("0.1.22.01-beta", entry["revision_aware"])
+        self.assertEqual("NOR.3", entry["block"])
 
-    def test_g125_disponible_sin_candidato_preasignado(self):
+    def test_g126_disponible_sin_candidato_preasignado(self):
         ledger = cargar_ledger()
-        self.assertEqual(125, ledger["next_global"])
+        self.assertEqual(126, ledger["next_global"])
         self.assertIsNone(ledger["next_candidate"])
         self.assertIsNone(ledger["next_candidate_block"])
 
@@ -55,27 +51,21 @@ class TestNOR3R1CandidateReconciliation(unittest.TestCase):
         self.assertIsNone(candidate["revision"])
         self.assertIsNone(candidate["revision_scope"])
         self.assertEqual(
-            "unassigned_pending_post_mant1_r8",
+            "unassigned",
             candidate["state"],
         )
         self.assertEqual(155, candidate["planning_issue"])
 
-    def test_manifest_actual_materializa_nor3(self):
-        manifest = json.loads(
-            (
-                ROOT / "data/governance/release-publication-manifest.json"
-            ).read_text(encoding="utf-8")
-        )
-
-        self.assertEqual("0.1.24.13-beta", manifest["version"])
-        self.assertEqual("MANT.1", manifest["block"])
-        self.assertEqual("R8", manifest["revision"])
-
+    def test_manifest_actual_materializa_doc3(self):
+        manifest = json.loads((ROOT / "data/governance/release-publication-manifest.json").read_text(encoding="utf-8"))
+        self.assertEqual("0.1.25.01-beta", manifest["version"])
+        self.assertEqual("DOC.3", manifest["block"])
+        self.assertEqual("R1", manifest["revision"])
         next_step = manifest["next_step"]
-        self.assertEqual(125, next_step["global_revision"])
+        self.assertEqual(126, next_step["global_revision"])
         self.assertIsNone(next_step["revision_aware"])
         self.assertIsNone(next_step["block"])
-        self.assertIn("G125", next_step["description"])
+        self.assertIn("G126", next_step["description"])
         self.assertIn("#155", next_step["description"])
 
     def test_matriz_ubica_nor3_antes_de_persist1(self):

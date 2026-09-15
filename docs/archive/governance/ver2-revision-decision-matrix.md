@@ -5,7 +5,6 @@
 **Rama:** `chore/ver2-revision-ledger`
 **Estado:** SEGUNDA PASADA RESUELTA EN LO CONTABLE; pendiente materialización del ledger y gates.
 
-
 <!-- DOC1-R1-REVISION-MANUAL:START -->
 ## Nota de lectura post-MANT.1
 

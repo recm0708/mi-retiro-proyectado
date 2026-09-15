@@ -165,6 +165,7 @@ def audit_workflows() -> dict:
 
 
 def main() -> int:
+    """Ejecuta el flujo principal del script y devuelve el código de salida."""
     report = audit_workflows()
 
     print(

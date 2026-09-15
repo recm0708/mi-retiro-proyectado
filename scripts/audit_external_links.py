@@ -369,6 +369,7 @@ def render_markdown(report: dict) -> str:
 
 
 def parser() -> argparse.ArgumentParser:
+    """Construye el parser de argumentos de línea de comandos."""
     p = argparse.ArgumentParser(description=__doc__)
 
     p.add_argument(
@@ -406,6 +407,7 @@ def parser() -> argparse.ArgumentParser:
 
 
 def main() -> int:
+    """Ejecuta el flujo principal del script y devuelve el código de salida."""
     args = parser().parse_args()
 
     report = build_report(

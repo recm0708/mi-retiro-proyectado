@@ -84,7 +84,6 @@ R9 unifica los puntos de acceso al documento legal: una persona sin consentimien
 
 Se documenta expresamente que la continuidad visual de una importación tras F5 utiliza únicamente metadata local de sesión —incluido, cuando esté disponible, el nombre del documento— y datos previamente confirmados. No se conserva el archivo original ni se introduce una base de datos remota. Por no cambiar finalidad, destinatarios ni tecnología de seguimiento, se mantiene la versión material 2026-08-15.1.
 
-
 ### UX.4.6d R21 — minimización en la verificación de fecha
 
 La nueva consulta externa se limita a obtener una fecha de referencia desde infraestructura oficial de la CSS. No se transmiten categorías de datos previsionales ni el documento importado. Se informa expresamente al titular sobre la posible exposición de metadatos técnicos ordinarios de red y sobre el propósito de la consulta. Por incorporar una nueva interacción de red, el texto de privacidad se versiona como **2026-08-16.1**.

@@ -97,14 +97,11 @@ Periodicidades soportadas:
 - mensual;
 - anual.
 
-
-
 ### Importación revisable
 
 `ResumenReferenciaMiRetiroSeguro` conserva la referencia personal, filas anuales detectadas e identificadores opcionales etiquetados de forma inequívoca para revisión en UX.4.6b. `ResumenFichaDigital` contiene únicamente registros del año calendario actual mediante `RegistroFichaDigital` (`anio`, `mes`, `salario` y estado inicial del salario). Los períodos de años anteriores detectados en el PDF se descartan antes de construir el contrato.
 
 En el navegador se distinguen dos estados adicionales: `importacion_comprobante_confirmada` y `importacion_ficha_digital_confirmada`. La detección previa a la confirmación no se persiste. Después de confirmar una Ficha Digital, los registros del año actual se traducen a `DatosDetalleAnioActual` y la marca `cuota_acreditada` procede exclusivamente de la decisión revisada por el Asegurado(a).
-
 
 ## 7. Proyección salarial
 
@@ -335,7 +332,6 @@ dato de entrada
 
 Esta estructura se diseñará para reutilizarse en la interfaz comparativa y en futuros informes PDF.
 
-
 ## 15. Comparación transversal — 6F.1
 
 `app/models/comparacion.py` define una capa normalizada que no sustituye los modelos de cada motor.
@@ -345,7 +341,6 @@ Esta estructura se diseñará para reutilizarse en la interfaz comparativa y en 
 - `ResumenComparacionEscenarios`: matriz completa, conteos, mejor pensión mensual comparable y advertencias globales.
 
 Los pagos únicos y las pensiones mensuales permanecen en campos separados.
-
 
 ## 16. Trazabilidad 6F.2
 
@@ -376,14 +371,11 @@ Los modelos integrados `ResumenResultadoSEBD`, `ResumenResultadoMixto` y `Resume
 
 Los modelos `ResumenResultadoSEBD`, `ResumenResultadoMixto` y `ResumenResultadoSUCGS` incluyen ahora `resumen_unificado`. El desglose específico continúa en `calculo` y la explicación en `trazabilidad`.
 
-
-
 ### Referencia personal importada
 
 - `RegistroReferenciaMiRetiroSeguro`: año, edad, tipo histórico/proyectado, salario anual y cuotas extraídos de una fila del comprobante.
 - `ResumenReferenciaMiRetiroSeguro`: fecha del comprobante, datos mínimos de compatibilidad, sistema elegido, edad de retiro, cuotas históricas, naturaleza y monto estimado de prestación, total de cuotas acumuladas, filas anuales y advertencias.
 - El modelo excluye el código único del documento. Puede contener nombres, apellidos, cédula y número de Seguro Social opcionales cuando el PDF los identifica explícitamente. El PDF original no forma parte del estado de simulación.
-
 
 ## UX.4.5 — modo de integración del resultado
 
@@ -393,7 +385,6 @@ Los modelos `ResumenResultadoSEBD`, `ResumenResultadoMixto` y `ResumenResultadoS
 - `SOLO_ACREDITADO`: conserva la fecha de retiro, usa `historial.cuotas_totales_referencia` como total de cuotas y no añade registros salariales proyectados.
 
 Los resúmenes integrados devuelven también el modo utilizado para que la interfaz pueda almacenar y presentar ambas fotografías sin confundirlas.
-
 
 ## UX.4.6b — estado personal de la simulación
 
@@ -406,18 +397,15 @@ El estado agrega:
 
 `ResumenReferenciaMiRetiroSeguro` puede conservar `nombre_completo_detectado` como trazabilidad del texto original y, al mismo tiempo, devolver componentes descompuestos de forma conservadora. Los campos explícitos del documento prevalecen. Para nombres femeninos, el patrón final `de Apellido` puede poblar `apellido_casada`; la vista previa sigue siendo la autoridad de revisión antes de importar.
 
-
 ### Consentimiento de privacidad fuera del modelo previsional
 
 La aceptación de privacidad no forma parte de `simulacion.persona` ni de los modelos Pydantic de cálculo. `privacidad.js` conserva en `localStorage` únicamente versión, estado de aceptación y fecha técnica de aceptación. El contenido de la simulación permanece en `sessionStorage`. Esta separación evita que un estado legal/de interfaz se mezcle con los contratos de los motores.
-
 
 ## UX.4.6c — trazabilidad de campos de cuotas
 
 `DatosCuotas` no cambia su contrato con la API. UX.4.6c añade en el estado temporal del frontend `origen_campos_cuotas`, un mapa de procedencia por campo que actualmente puede identificar `cuotas_totales` y `cuotas_anio_actual` como `MI_RETIRO_SEGURO` o `MI_RETIRO_SEGURO_EDITADO`. La ausencia de una marca de origen significa que el valor es manual o todavía está pendiente.
 
 Esta metadata no forma parte del cálculo legal ni se envía al endpoint de análisis de cuotas. Su finalidad es impedir ediciones accidentales de información documental ya confirmada y mantener habilitados únicamente los datos que el PDF no proporcionó.
-
 
 ### Vista previa contextual de cuotas — UX.4.6c R3
 
@@ -442,7 +430,6 @@ El cierre visual del Paso 3 se deriva de los resúmenes existentes (`resumen_his
 - `detalle_anio_actual.registros[*].cuota_acreditada`: estado mensual. En captura manual lo define el usuario; en registros detectados por Ficha Digital R3 queda marcado/bloqueado como parte de la importación confirmada. No sustituye el total del Paso 2.
 - `origen_campos_cuotas.cuotas_anio_actual`: conserva su procedencia aunque se importe o retire una Ficha Digital.
 
-
 ### Metadatos de procedencia visual — UX.4.6d R4
 
 Los metadatos `origen_campos_historial` y `origen_campos_detalle_anio_actual` determinan qué controles deben tratarse como documentales. En la UI, una casilla documental se restaura como marcada/bloqueada y una fila documental recibe `data-row-imported`. Estos atributos de presentación no cambian los contratos numéricos de historial, cuotas ni salario.
@@ -463,7 +450,6 @@ R8 no modifica `RegistroHistorialSalarial` ni los modelos Pydantic. Añade únic
 
 R9 no modifica los modelos Pydantic ni las estructuras persistidas de historial, detalle o consentimiento. Los nuevos estados continúan siendo clasificación de presentación. La reactividad por delegación y el contexto del modal son metadata de interfaz y no alteran los datos previsionales.
 
-
 ### Metadata de revisión documental — UX.4.6d R17
 
 La sesión puede conservar `campos_editados_importacion_comprobante: string[]` con IDs de controles modificados durante la revisión de Mi Retiro Seguro. Este arreglo no representa información previsional ni altera el contenido del documento original; permite que la UI distinga **Detectado**, **Editado por ti** y **Completado manualmente** al volver a revisar una importación confirmada.
@@ -474,23 +460,19 @@ La sesión puede conservar `campos_editados_importacion_comprobante: string[]` c
 
 El estado cliente incorpora `origen_campos_persona` y reutiliza los mapas de origen existentes para diferenciar fuente y edición por campo. Los códigos pueden incluir sufijos `DETECTADO`, `EDITADO`, `COMPLETADO_MANUAL` o `NO_DETECTADO`. `ficha_digital_importada` y `referencia_mi_retiro_seguro` pueden incluir `nombre_archivo_origen` como metadata de presentación; este campo no representa contenido documental ni ruta local.
 
-
 ## UX.4.6d R19 — cuotas actuales derivadas del detalle
 
 Cuando el usuario modifica explícitamente una casilla manual del detalle del año actual, `simulacion.cuotas.cuotas_anio_actual` puede actualizarse con el conteo confirmado y `simulacion.cuotas.cuotas_totales` se recalcula como `cuotas_previas_al_anio_actual + cuotas_anio_actual`. `origen_campos_cuotas` registra `DETALLE_ANIO_ACTUAL_EDITADO` para conservar trazabilidad.
 
 La fila vigente de `simulacion.historial` se materializa al analizar a partir del detalle: `cuotas` corresponde a meses marcados y `salario_cotizado` al total salarial de esos meses. Los salarios de meses no acreditados permanecen únicamente en `detalle_anio_actual`/`resumen_detalle_anio_actual`.
 
-
 ## UX.4.6d R20 — vigencia sin nuevo estado persistente
 
 R20 no agrega campos al contrato Pydantic ni a `sessionStorage`. La vigencia se deriva dinámicamente de `ficha_digital_importada.anio_mas_reciente` y `mes_mas_reciente`, que ya existían en `ResumenFichaDigital`. `resumen_detalle_anio_actual` tampoco cambia de forma: sus valores existentes pasan a tener representación visible en el Paso 3.
 
-
 ## UX.4.6d R21 — metadata temporal de Ficha Digital
 
 `ResumenFichaDigital` incorpora `fecha_referencia`, `fecha_referencia_confiable` y `fuente_fecha_referencia`. Estos campos no forman parte del cálculo salarial; documentan la referencia temporal con la que se evaluó la vigencia del archivo. La importación persistida conserva esta metadata y puede refrescarla mediante `/api/sistema/fecha-referencia`.
-
 
 ### Procedencia de cuotas actualizadas desde Ficha Digital (UX.4.6d R23)
 

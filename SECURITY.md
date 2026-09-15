@@ -1,8 +1,9 @@
 # Política de seguridad
 
-
 <!-- NOR3-G122-PROMOTION:START -->
-## Estado post-NOR.3 / promoción G122-E01
+## Registro histórico — promoción G122-E01 post-NOR.3
+
+> **Checkpoint histórico preservado.** Este bloque describe el estado inmediatamente posterior a la integración de NOR.3 y anterior a MANT.2 R1 / MANT.1 R8. No representa el estado vigente del repositorio; las secciones vigentes posteriores de este documento tienen precedencia.
 
 - `VERSION` materializa `0.1.22.01-beta` para NOR.3 R8 / G122-E01.
 - NOR.3 R1–R8 quedó integrado/aceptado mediante PR #162 / merge
@@ -21,47 +22,50 @@
 <!-- POST-NOR3-INTERMEDIATE-SEQUENCE:START -->
 ## Secuencia intermedia obligatoria post-NOR.3
 
-G123/MANT.2 R1 está publicado como `v0.1.23.01-beta` y permanece preservado
-como el estado material inmediatamente anterior.
+G124/MANT.1 R8 permanece cerrado/publicado como `v0.1.24.13-beta` y constituye
+la base material inmediatamente anterior.
 
-MANT.1 R8 / Issue #163 se materializa como **G124/E13**
-(`0.1.24.13-beta`). El ordinal E13 continúa la historia propia de MANT.1:
-G074–G085 ya ocupan E01–E12; la revisión funcional vigente es R8.
+DOC.3 R1 / Issue #154 se materializa localmente como **G125/E01**
+(`0.1.25.01-beta`) después de completar la auditoría integral, la normalización
+Markdown 173/173, el registro de DOC.4/#171 como trabajo diferido y el preflight
+final #166 sin trabajo material nuevo de dependencias.
 
-La aceptación local se sustenta en la auditoría de 16 scripts operativos y
-219 módulos de pruebas pre-promoción, la reconciliación de 28 labels, el
-Quality Gate FULL 11 PASS / 0 FAIL y el preflight final #166 sin trabajo
-Dependabot pendiente. La publicación formal de G124 requiere todavía
-PR/merge, revalidación de `main`, tag firmado y GitHub Release prerelease.
+El estado G125/E01 queda **aceptado localmente y pendiente de publicación**.
+Su cierre definitivo requiere PR/merge, revalidación de `main`, tag firmado y
+GitHub Release prerelease. PLAN.2 R2/#155 no inicia hasta completar esa
+publicación.
 
-Después de publicar G124/MANT.1 R8 y antes de iniciar PERSIST.1, la continuidad
-material queda fijada así:
+La continuidad posterior a la publicación de G125 queda:
 
-1. **DOC.3 R1 — Issue #154:** auditoría documental integral.
-2. **PLAN.2 R2 — Issue #155:** replanificación maestra hacia 1.0.
-3. **VER.2 R6 — Issue #164:** reforma del versionado beta y del componente
+1. **PLAN.2 R2 — Issue #155:** replanificación maestra post-DOC.3.
+   Debe ubicar DOC.4 R1/#171 y sus lotes #172/#173/#174.
+2. **VER.2 R6 — Issue #164:** reforma del versionado beta y del componente
    futuro dedicado a fases MANT.2/Dependabot.
-4. **PERSIST.1 — Issue #130:** bloqueado hasta completar toda la secuencia.
+3. **PERSIST.1 — Issue #130:** permanece bloqueado hasta completar la secuencia
+   que determine PLAN.2 R2 y VER.2 R6.
 
-G125 queda únicamente como siguiente Global disponible y no se asigna por
-adelantado. Antes de iniciar cada fase futura se repite el preflight #166;
-un lote material nuevo de dependencias inserta MANT.2 R2+.
+G126 queda únicamente como siguiente Global disponible y no se asigna por
+adelantado. Antes de cada fase futura se repite el preflight #166; un lote
+material nuevo de dependencias inserta MANT.2 R2+.
 <!-- POST-NOR3-INTERMEDIATE-SEQUENCE:END -->
 
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado de seguridad post-MANT.1
 
-La versión canónica vigente es `0.1.24.13-beta`.
+La versión canónica vigente es `0.1.25.01-beta` / G125/E01.
 
-- MANT.1 R8 se materializa como G124/E13 sin modificar motores previsionales ni runtime.
+- DOC.3 R1 está materializado como G125/E01 y pendiente de publicación.
+- G124/E13 permanece como última beta publicada mediante
+  `v0.1.24.13-beta` y GitHub Release prerelease.
 - G123/E01 permanece publicado como `v0.1.23.01-beta`.
-- `pip-audit --strict` y `npm audit` no reportan vulnerabilidades conocidas
-  en el preflight final #166.
+- El preflight final #166 previo a G125 cerró con `pip-audit --strict` y
+  `npm audit --prefix scripts --audit-level=high` sin vulnerabilidades conocidas.
 - Dependabot alerts abiertos: 0; PRs Dependabot abiertos: 0.
 - R8 de UX.6 preserva sesiones por cuenta, cookie, RBAC visual, assets y favicon.
 - Perfil/avatar y auditoría Developer permanecen separados de datos previsionales.
 - El login humano sigue separado del Bearer técnico.
-- G125 queda disponible sin candidato ni bloque preasignado.
+- G126 queda disponible sin candidato ni bloque preasignado.
+- PLAN.2 R2/#155 permanece sin iniciar hasta publicar G125/E01.
 - PERSIST.1 permanece planificado, no iniciado y sin Global preasignado.
 - REL.GOV.1 mantiene la firma del tag fuera de GitHub Actions.
 <!-- DOC1-R1-POST-MANT1:END -->
@@ -72,7 +76,8 @@ Mi Retiro Proyectado se encuentra en **desarrollo beta**. Los estados histórico
 
 | Línea | Soporte de seguridad |
 | --- | --- |
-| `0.1.24.13-beta` | Beta vigente G124/E13 aceptada localmente para MANT.1 R8; Quality Gate y preflight #166 verdes; publicación formal pendiente de PR/merge, tag firmado y GitHub Release prerelease |
+| `0.1.25.01-beta` | Beta vigente G125/E01 materializada para DOC.3 R1; publicación pendiente de PR/merge, tag firmado y GitHub Release prerelease; Quality Gate y preflight #166 verdes |
+| `0.1.24.13-beta` | Beta previa G124/E13 publicada para MANT.1 R8 mediante PR #170, tag firmado `v0.1.24.13-beta` y GitHub Release prerelease |
 | `0.1.23.01-beta` | Beta previa G123/E01 publicada para MANT.2 R1 mediante tag firmado `v0.1.23.01-beta` y GitHub Release prerelease |
 | `0.1.22.01-beta` | Beta previa G122/E01 publicada para NOR.3; tag firmado y GitHub Release prerelease preservados |
 | `0.1.21.01-beta` | Beta previa G121/E01 integrada para UX.6 R8; se conserva como estado material anterior a NOR.3 |

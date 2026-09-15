@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- Shell del Portal Developer: navegación, layout compartido, feedback y zonas reutilizables. -->
 <html lang="es" data-app-theme="system">
 <head>
   <meta charset="UTF-8">
@@ -549,6 +550,7 @@
     src="{{ url_for('static', path='/shared/js/interaction_ui.js') }}?v={{ static_revision }}"
   ></script>
 
-  {% block scripts %}{% endblock %}
+  <!-- Scripts específicos de esta vista. -->
+{% block scripts %}{% endblock %}
 </body>
 </html>

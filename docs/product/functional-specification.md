@@ -1,23 +1,30 @@
 # Especificación funcional
 
 **Estado:** Vigente con registro RF histórico integrado
-**Versión de aplicación revisada:** `0.1.24.13-beta`
+**Versión de aplicación revisada:** `0.1.25.01-beta`
 **Versión base histórica:** `0.0.23-beta`
-**Revisión documental:** GOV.1.3 R2 — 2026-08-17
-**Actualización funcional vigente:** UX.4.6e R8 — procedencia editable — 2026-08-19
+**Revisión documental:** DOC.3 R1 — 2026-09-14
+**Actualización funcional vigente:** UX.6 R8 — consolidación funcional App/Developer — 2026-08-22
 **Clasificación:** Funcional / Auditoría
 
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado funcional vigente
 
-- `VERSION` materializa `0.1.21.01-beta`.
-- UX.6 R1–R8 queda consolidado como G121/E01 con revisión funcional R8.
-- UX.6 no modifica motores SEBD, Mixto o SUCGS.
+- `VERSION` materializa `0.1.24.13-beta` como G124/E13 para MANT.1 R8,
+  cerrado/publicado mediante `v0.1.24.13-beta`.
+- MANT.2 R1 permanece publicado como G123/E01 y NOR.3 R1–R8 como G122/E01;
+  ambos se conservan como estados anteriores publicados.
+- DOC.3 R1/#154 está en ejecución como auditoría documental y no modifica por sí
+  misma los motores SEBD, Mixto o SUCGS ni sus parámetros normativos.
+- G125 es únicamente el siguiente Global disponible; no tiene candidato,
+  bloque ni VERSION preasignados.
+- UX.6 R1–R8 permanece cerrado/publicado como G121/E01 con revisión funcional R8.
 - Perfil/avatar, usuarios/RBAC y auditoría Developer permanecen separados de la simulación.
 - Design System, movimiento, accesibilidad y responsive quedan compartidos.
 - Mi Retiro Seguro/Ficha Digital mantienen revisión y confirmación explícitas.
 - Términos públicos de la App permanecen separados de contratos Developer.
-- NOR.3 R1–R2 queda como candidato G122/E01 reservado/no aceptado; PERSIST.1 permanece planificado, no iniciado y sin Global preasignado.
+- PERSIST.1 permanece planificado, no iniciado y sin Global preasignado; no
+  puede comenzar antes de completar #154 → #155 → #164.
 <!-- DOC1-R1-POST-MANT1:END -->
 
 Este documento tiene dos capas:
@@ -25,7 +32,7 @@ Este documento tiene dos capas:
 1. **Contrato funcional vigente consolidado**, que describe el comportamiento actual.
 2. **Registro cronológico RF preservado**, que mantiene los identificadores históricos sin renumerarlos.
 
-Cuando una descripción cronológica antigua contradiga el contrato consolidado o una regla posterior explícitamente identificada, prevalece la regla vigente más reciente. La trazabilidad RF completa se ampliará en GOV.1.3 R4.
+Cuando una descripción cronológica antigua contradiga el contrato consolidado o una regla posterior explícitamente identificada, prevalece la regla vigente más reciente. La trazabilidad RF consolidada se complementa con [la matriz de trazabilidad](traceability-matrix.md) y con el registro cronológico preservado en este documento.
 
 ## 1. Alcance vigente
 
@@ -244,7 +251,7 @@ El contenido cronológico previo se conserva íntegramente a continuación como 
 
 ---
 
-# Anexo A — Registro cronológico RF preservado
+## Anexo A — Registro cronológico RF preservado
 
 La aplicación guía al Asegurado(a) por seis pasos y calcula una prestación estimada según el sistema previsional seleccionado. Este documento describe el comportamiento funcional vigente y las mejoras de producto posteriores al cierre de la Fase 6.
 

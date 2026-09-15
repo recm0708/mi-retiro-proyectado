@@ -15,7 +15,7 @@
 </p>
 
 <p align="center">
-  <img alt="Versión 0.1.24.13-beta" src="https://img.shields.io/badge/versi%C3%B3n-0.1.24.13--beta-2563eb">
+  <img alt="Versión 0.1.25.01-beta" src="https://img.shields.io/badge/versi%C3%B3n-0.1.25.01--beta-2563eb">
   <img alt="Python 3.13 y 3.14" src="https://img.shields.io/badge/Python-3.13%20%7C%203.14-3776AB?logo=python&logoColor=white">
   <img alt="Licencia propietaria" src="https://img.shields.io/badge/licencia-propietaria-6B7280">
 </p>
@@ -26,27 +26,26 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 
 ## Estado del proyecto
 
-- **Versión canónica vigente:** `0.1.24.13-beta`, obtenida exclusivamente
-  desde [`VERSION`](VERSION). Materializa MANT.1 R8 como G124/E13.
-- **Estado revision-aware aceptado localmente:** MANT.1 R8 / G124/E13;
-  publicación formal pendiente de PR/merge, revalidación, tag firmado y Release.
-- **Auditoría MANT.1 R8:** 16 scripts conservados; 219 módulos de pruebas
-  pre-promoción auditados; sin redundancias equivalentes que justificaran
-  consolidación o retiro.
-- **Gobierno GitHub:** 28 labels reconciliados (16 canónicos + 12
-  suplementarios) y protegidos por regresiones.
-- **Validación pre-promoción:** Repository Quality Gate **11 PASS / 0 FAIL**;
-  `unittest` **1594 OK**; `pytest` **1634 passed + 7781 subtests**.
-- **Validación post-materialización local:** Repository Quality Gate **11 PASS / 0 FAIL**;
-  `unittest` **1600 OK**; `pytest` **1640 passed + 7782 subtests**.
+- **Versión canónica vigente:** `0.1.25.01-beta`, obtenida exclusivamente
+  desde [`VERSION`](VERSION). Materializa DOC.3 R1 como G125/E01.
+- **Estado revision-aware actual:** DOC.3 R1 / G125/E01 está materializado
+  localmente y **pendiente de publicación** mediante PR/merge, revalidación de
+  `main`, tag firmado y GitHub Release prerelease.
+- **Última publicación formal:** MANT.1 R8 / G124/E13 permanece integrada en
+  `main` y publicada mediante `v0.1.24.13-beta`.
+- **Auditoría DOC.3 R1:** 173 Markdown auditados; 418 archivos textuales de
+  código/configuración revisados; estructura, enlaces, historia y coherencia
+  semántica reconciliadas.
+- **Validación previa a G125:** Repository Quality Gate **11 PASS / 0 FAIL**;
+  `unittest` **1603 OK**; `pytest` **1643 passed + 7824 subtests**.
 - **Preflight final #166:** 0 PRs abiertos, 0 Dependabot alerts, 0 PRs
-  Dependabot, `pip-audit` y `npm audit` verdes.
-- **Publicación anterior:** G123/E01 (`v0.1.23.01-beta`) permanece publicada
-  como cierre de MANT.2 R1.
-- **Siguiente Global:** G125 queda únicamente disponible; no tiene candidato
-  ni bloque preasignado.
-- **Continuidad:** después de publicar G124/MANT.1 R8 corresponde DOC.3 R1 /
-  #154 → PLAN.2 R2 / #155 → VER.2 R6 / #164 → PERSIST.1 / #130.
+  Dependabot; `pip-audit` y `npm audit --prefix scripts` verdes.
+- **Siguiente Global:** G126 queda únicamente disponible; no tiene candidato,
+  bloque ni `VERSION` preasignados.
+- **Fase material actual:** DOC.3 R1 / #154 — `accepted_pending_publication`.
+  PLAN.2 R2 / #155 no inicia hasta publicar G125/E01.
+- **Trabajo documental diferido:** DOC.4 R1 / #171 con lotes #172–#174 queda
+  `planned_reserved`; PLAN.2 R2 decidirá su posición exacta.
 - **PERSIST.1:** preservado y planificado, sin Global preasignado; no iniciado.
 - **SEC.2:** R1–R6 cerrados; su hardening vigente permanece preservado.
 - **Etapa:** desarrollo beta; repositorio público y ejecución orientada
@@ -60,31 +59,31 @@ La versión se obtiene exclusivamente del archivo [`VERSION`](VERSION). La polí
 <!-- POST-NOR3-INTERMEDIATE-SEQUENCE:START -->
 ## Secuencia intermedia obligatoria post-NOR.3
 
-G123/MANT.2 R1 está publicado como `v0.1.23.01-beta` y permanece preservado
-como el estado material inmediatamente anterior.
+G124/MANT.1 R8 permanece cerrado/publicado como `v0.1.24.13-beta` y constituye
+la base material inmediatamente anterior.
 
-MANT.1 R8 / Issue #163 se materializa como **G124/E13**
-(`0.1.24.13-beta`). El ordinal E13 continúa la historia propia de MANT.1:
-G074–G085 ya ocupan E01–E12; la revisión funcional vigente es R8.
+DOC.3 R1 / Issue #154 se materializa localmente como **G125/E01**
+(`0.1.25.01-beta`) después de completar la auditoría integral, la normalización
+Markdown 173/173, el registro de DOC.4/#171 como trabajo diferido y el preflight
+final #166 sin trabajo material nuevo de dependencias.
 
-La aceptación local se sustenta en la auditoría de 16 scripts operativos y
-219 módulos de pruebas pre-promoción, la reconciliación de 28 labels, el
-Quality Gate FULL 11 PASS / 0 FAIL y el preflight final #166 sin trabajo
-Dependabot pendiente. La publicación formal de G124 requiere todavía
-PR/merge, revalidación de `main`, tag firmado y GitHub Release prerelease.
+El estado G125/E01 queda **aceptado localmente y pendiente de publicación**.
+Su cierre definitivo requiere PR/merge, revalidación de `main`, tag firmado y
+GitHub Release prerelease. PLAN.2 R2/#155 no inicia hasta completar esa
+publicación.
 
-Después de publicar G124/MANT.1 R8 y antes de iniciar PERSIST.1, la continuidad
-material queda fijada así:
+La continuidad posterior a la publicación de G125 queda:
 
-1. **DOC.3 R1 — Issue #154:** auditoría documental integral.
-2. **PLAN.2 R2 — Issue #155:** replanificación maestra hacia 1.0.
-3. **VER.2 R6 — Issue #164:** reforma del versionado beta y del componente
+1. **PLAN.2 R2 — Issue #155:** replanificación maestra post-DOC.3.
+   Debe ubicar DOC.4 R1/#171 y sus lotes #172/#173/#174.
+2. **VER.2 R6 — Issue #164:** reforma del versionado beta y del componente
    futuro dedicado a fases MANT.2/Dependabot.
-4. **PERSIST.1 — Issue #130:** bloqueado hasta completar toda la secuencia.
+3. **PERSIST.1 — Issue #130:** permanece bloqueado hasta completar la secuencia
+   que determine PLAN.2 R2 y VER.2 R6.
 
-G125 queda únicamente como siguiente Global disponible y no se asigna por
-adelantado. Antes de iniciar cada fase futura se repite el preflight #166;
-un lote material nuevo de dependencias inserta MANT.2 R2+.
+G126 queda únicamente como siguiente Global disponible y no se asigna por
+adelantado. Antes de cada fase futura se repite el preflight #166; un lote
+material nuevo de dependencias inserta MANT.2 R2+.
 <!-- POST-NOR3-INTERMEDIATE-SEQUENCE:END -->
 
 <!-- AUTOMATION-POST-G119:START -->
@@ -191,7 +190,7 @@ Documentos principales:
 - **[Cierre GOV.1 — Auditoría, Gobierno y Trazabilidad Pre-Beta](docs/archive/governance/gov1-closeout.md)** — auditoría final y decisión de cierre de GOV.1;
 - **[Auditoría de versionado pre-1.0](docs/archive/governance/pre-1-0-versioning-audit.md)** — criterio contable y reconciliación VER.2;
 - **[VER.2 — Matriz de decisión de revisiones aceptadas](docs/archive/governance/ver2-revision-decision-matrix.md)** — decisiones de inclusión/exclusión del contador;
-- **[Ledger de revisiones aceptadas pre-1.0](docs/governance/pre-1-0-revision-ledger.md)** — secuencia reconciliada G001–G120 y próximo candidato G121/E01 para UX.6 R1;
+- **[Ledger de revisiones aceptadas pre-1.0](docs/governance/pre-1-0-revision-ledger.md)** — secuencia reconciliada hasta G125; G126 permanece disponible sin candidato;
 - [`data/governance/pre-1-0-revision-ledger.json`](data/governance/pre-1-0-revision-ledger.json) — ledger machine-readable;
 - **[Identificadores de bloques de trabajo](docs/standards/work-block-identifiers.md)** — política canónica de identificadores de bloques;
 - [`data/governance/work-block-registry.json`](data/governance/work-block-registry.json) — registro machine-readable de identificadores históricos, cerrados y planificados;
@@ -213,7 +212,7 @@ La documentación vigente debe apuntar únicamente a rutas canónicas actuales. 
 
 `0.0.22-beta` fue la primera versión formal adoptada bajo la política de GOV.1.2; `0.0.23-beta` cerró GOV.1.3; `0.0.24-beta` cerró integralmente GOV.1; `0.0.25-beta` cerró UX.4.6e; y `0.0.26-beta` cerró PLAN.1. Sus tags publicados permanecen firmados e inmutables.
 
-El 2026-08-26 se completó el backfill administrativo de GitHub Releases. Con la publicación formal de G119/E05, el repositorio cuenta actualmente con **38 tags formales reales** y **38 GitHub Releases**. Los Releases de `v0.0.1-beta`–`v0.0.26-beta` creados retrospectivamente no cambian la fecha histórica, firma ni commit objetivo de sus tags.
+El 2026-08-26 se completó el backfill administrativo de GitHub Releases. Con la publicación formal de G119/E05, el repositorio **contaba entonces** con **38 tags formales reales** y **38 GitHub Releases**. Las publicaciones revision-aware posteriores se conservan como hitos adicionales e inmutables. Los Releases de `v0.0.1-beta`–`v0.0.26-beta` creados retrospectivamente no cambian la fecha histórica, firma ni commit objetivo de sus tags.
 
 Después de `v0.0.26-beta`, UX.4.6f–UX.4.6i continuaron históricamente sobre ese mismo valor de `VERSION`. VER.2 reconstruye todo el tramo sin inventar tags: el último estado aceptado de la base `7037addd` es **G070/E02**, cierre de UX.4.6i.
 

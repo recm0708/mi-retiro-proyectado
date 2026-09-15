@@ -38,7 +38,6 @@ El control de apariencia reemplaza el símbolo circular abstracto por SVG inline
 - `python -m unittest discover -s tests`: **253 pruebas en OK**.
 - Revisión visual en PC/laptop: completada.
 
-
 ## Refinamientos de Revisión 2
 
 - **Revisar importación** vuelve a abrir correctamente la vista previa desde Paso 2; el modal se desacopla del panel oculto donde fue renderizado inicialmente.
@@ -48,7 +47,6 @@ El control de apariencia reemplaza el símbolo circular abstracto por SVG inline
 - Se elimina la ayuda redundante debajo de `Cuotas esperadas por año futuro`, ya cubierta por la ayuda contextual.
 - Los disparadores de ayuda muestran únicamente el icono `i`; el texto accesible continúa disponible mediante `aria-label`.
 - El estado general de datos importados usa un icono de confirmación en lugar de un candado.
-
 
 ## Refinamientos de Revisión 3
 

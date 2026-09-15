@@ -32,14 +32,17 @@ def configure_utf8_stdio() -> None:
 
 
 def read_version() -> str:
+    """Lee VERSION y devuelve la versión canónica del repositorio."""
     return VERSION_PATH.read_text(encoding="utf-8").strip()
 
 
 def read_ledger() -> dict:
+    """Carga el ledger revision-aware usado por el contrato de release."""
     return json.loads(LEDGER_PATH.read_text(encoding="utf-8"))
 
 
 def parse_revision_aware(version: str) -> tuple[int, int]:
+    """Descompone una versión revision-aware en sus componentes gobernados."""
     match = REVISION_AWARE_RE.fullmatch(version)
     if not match:
         raise ValueError(f"Versión beta revision-aware no válida: {version}")
@@ -49,11 +52,13 @@ def parse_revision_aware(version: str) -> tuple[int, int]:
 
 
 def expected_title(version: str) -> str:
+    """Construye el título canónico esperado para una publicación."""
     global_revision, edition = parse_revision_aware(version)
     return f"Mi Retiro Proyectado v{version} — G{global_revision:03d}/E{edition:02d}"
 
 
 def validate_version_against_ledger(version: str, ledger: dict) -> list[str]:
+    """Comprueba que VERSION y ledger describan el mismo estado aceptado."""
     errors: list[str] = []
     global_revision, _ = parse_revision_aware(version)
     accepted_count = int(ledger["accepted_count"])
@@ -92,10 +97,12 @@ def validate_version_against_ledger(version: str, ledger: dict) -> list[str]:
 
 
 def validate_notes(text: str) -> list[str]:
+    """Valida que las notas de release contengan las secciones obligatorias."""
     return [f"Falta la sección obligatoria: {heading}" for heading in REQUIRED_HEADINGS if heading not in text]
 
 
 def build_parser() -> argparse.ArgumentParser:
+    """Construye el parser de argumentos de línea de comandos."""
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check-tag", help="Valida que el tag sea v<VERSION>.")
     parser.add_argument("--check-title", help="Valida el título canónico del GitHub Release.")
@@ -106,6 +113,7 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def main() -> int:
+    """Ejecuta el flujo principal del script y devuelve el código de salida."""
     configure_utf8_stdio()
     args = build_parser().parse_args()
     version = read_version()

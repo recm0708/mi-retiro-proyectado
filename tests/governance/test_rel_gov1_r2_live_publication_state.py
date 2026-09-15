@@ -66,36 +66,20 @@ class TestRelGovR2LivePublicationState(unittest.TestCase):
         )
         self.assertIn("v0.1.16.05-beta", releases)
 
-    def test_security_preserva_historia_y_declara_g124_vigente(self):
+    def test_security_preserva_historia_y_declara_estado_actual(self):
         text = (ROOT / "SECURITY.md").read_text(encoding="utf-8")
-        self.assertIn(
+        for fragment in (
             "| `0.1.18.04-beta` | Beta previa G118/E04 publicada",
-            text,
-        )
-        self.assertIn(
             "| `0.1.19.05-beta` | Beta previa G119/E05 publicada",
-            text,
-        )
-        self.assertIn(
             "| `0.1.20.01-beta` | Beta previa G120/E01 publicada",
-            text,
-        )
-        self.assertIn(
             "| `0.1.21.01-beta` | Beta previa G121/E01 integrada",
-            text,
-        )
-        self.assertIn(
             "| `0.1.22.01-beta` | Beta previa G122/E01 publicada",
-            text,
-        )
-        self.assertIn(
             "| `0.1.23.01-beta` | Beta previa G123/E01 publicada",
-            text,
-        )
-        self.assertIn(
-            "| `0.1.24.13-beta` | Beta vigente G124/E13 aceptada localmente",
-            text,
-        )
+            "| `0.1.24.13-beta` | Beta previa G124/E13 publicada",
+            "| `0.1.25.01-beta` | Beta vigente G125/E01 materializada",
+        ):
+            with self.subTest(fragment=fragment):
+                self.assertIn(fragment, text)
 
     def test_proceso_documenta_automatizacion_r2(self):
         text = (ROOT / "docs/operations/release-process.md").read_text(

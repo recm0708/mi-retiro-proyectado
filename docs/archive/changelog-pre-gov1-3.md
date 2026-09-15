@@ -118,7 +118,6 @@
 - El texto legal visible y los documentos de privacidad se actualizan a la versión **2026-08-15.1** para explicar conservación, eliminación y controles del titular.
 - Se agregan regresiones para impedir resultados posteriores obsoletos después de una limpieza parcial.
 
-
 - Revisión 4: las filas con procedencia documental dejan de usar verde de éxito y pasan a una señal azul derivada de la paleta primaria, consistente en Claro, Oscuro y Alto contraste.
 - Revisión 4: las casillas de cuota procedentes de Ficha Digital se fuerzan visual y funcionalmente como marcadas/bloqueadas, incluso tras restaurar una simulación existente.
 - Revisión 4: el verde queda reservado para estados semánticos de éxito/completitud, evitando confundir procedencia de datos con validación.
@@ -217,7 +216,6 @@
 - Se agrega Dependabot semanal para `pip` y GitHub Actions.
 - La suite alcanza **185 pruebas automatizadas**.
 
-
 ### UX.4.5 — información acreditada, proyección y cierre accesible
 
 - El Paso 6 genera una segunda evaluación `SOLO_ACREDITADO` con la misma fecha de retiro pero sin añadir salarios ni cuotas futuras.
@@ -248,11 +246,9 @@
 - La vista previa de Ficha Digital elimina las columnas redundantes Año y Aplicación porque todos sus registros pertenecen al año actual.
 - La suite alcanza **161 pruebas automatizadas**.
 
-
 Todos los cambios relevantes del proyecto se documentan aquí.
 
 El proyecto todavía no ha publicado una versión estable; los cambios actuales se acumulan bajo **Unreleased** para la futura versión `0.1.0`.
-
 
 ## [Unreleased]
 
@@ -447,7 +443,6 @@ El proyecto todavía no ha publicado una versión estable; los cambios actuales 
 - Los meses no importados continúan con checkbox manual editable.
 - La suite completa alcanza **290 pruebas automatizadas en OK** después de la corrección.
 
-
 ### UX.4.6d — Revisión 17
 
 #### Corregido
@@ -475,7 +470,6 @@ El proyecto todavía no ha publicado una versión estable; los cambios actuales 
 
 ### Privacidad
 - Se conserva únicamente metadata local de visualización del nombre del documento junto con los datos ya confirmados en la sesión; no se conserva el archivo original ni se introduce persistencia remota. La versión de privacidad **2026-08-15.1** no cambia.
-
 
 ## UX.4.6d — Revisión 19
 
@@ -505,8 +499,6 @@ El proyecto todavía no ha publicado una versión estable; los cambios actuales 
 ### Validación
 - Se añaden regresiones específicas de cierre de Paso 3 para reconciliación, revalidación silenciosa, mensaje explícito y contrato del resumen visible.
 - Suite completa: **392 pruebas automatizadas en OK**.
-
-
 
 ## UX.4.6d — Revisión 23
 

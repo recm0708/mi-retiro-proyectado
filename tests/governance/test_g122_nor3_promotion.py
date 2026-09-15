@@ -1,4 +1,5 @@
-"""Regresión de promoción NOR.3 R8 -> G122/E01."""
+"""Regresión histórica de promoción NOR.3 R8 -> G122/E01."""
+
 from __future__ import annotations
 
 import json
@@ -10,28 +11,28 @@ from app.core.version import descomponer_version_beta_revision
 from app.core.version_ledger import cargar_ledger
 
 ROOT = Path(__file__).resolve().parents[2]
-LEDGER = ROOT / "data/governance/pre-1-0-revision-ledger.json"
 REGISTRY = ROOT / "data/governance/work-block-registry.json"
 MANIFEST = ROOT / "data/governance/release-publication-manifest.json"
 POLICY = ROOT / "data/governance/repository-structure-policy.json"
 
 
 class TestG122NOR3Promotion(unittest.TestCase):
-    def test_version_materializa_g122_e01(self):
+    def test_version_actual_avanza_sin_reescribir_g122(self):
         version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
-        self.assertEqual("0.1.24.13-beta", version)
+        self.assertEqual("0.1.25.01-beta", version)
         self.assertEqual(version, APP_VERSION)
-        self.assertEqual((124, 13), descomponer_version_beta_revision(version))
+        self.assertEqual((125, 1), descomponer_version_beta_revision(version))
+        entry = next(x for x in cargar_ledger()["entries"] if x["global_revision"] == 122)
+        self.assertEqual("NOR.3", entry["block"])
+        self.assertEqual("0.1.22.01-beta", entry["revision_aware"])
 
-    def test_ledger_cierra_g122_y_no_reserva_g123(self):
+    def test_ledger_preserva_g122_y_estado_actual_g125(self):
         ledger = cargar_ledger()
-        self.assertEqual(124, ledger["accepted_count"])
-        self.assertEqual(125, ledger["next_global"])
+        self.assertEqual(125, ledger["accepted_count"])
+        self.assertEqual(126, ledger["next_global"])
         self.assertIsNone(ledger["next_candidate"])
         self.assertIsNone(ledger["next_candidate_block"])
         entry = next(x for x in ledger["entries"] if x["global_revision"] == 122)
-        self.assertEqual(122, entry["global_revision"])
-        self.assertEqual("NOR.3", entry["block"])
         self.assertEqual(1, entry["ordinal"])
         self.assertEqual("R8", entry["functional_revision"])
         self.assertEqual("0.1.22.01-beta", entry["revision_aware"])
@@ -43,25 +44,21 @@ class TestG122NOR3Promotion(unittest.TestCase):
         self.assertEqual(["G122"], ids["NOR.3"]["global_refs"])
         self.assertEqual("planned_reserved", ids["PERSIST.1"]["status"])
         candidate = data["current_candidate"]
+        self.assertEqual("unassigned", candidate["state"])
         self.assertIsNone(candidate["global_revision"])
-        self.assertIsNone(candidate["revision_aware"])
-        self.assertIsNone(candidate["block"])
-        self.assertEqual("unassigned_pending_post_mant1_r8", candidate["state"])
+        self.assertEqual(126, candidate["next_global_available"])
         self.assertEqual(155, candidate["planning_issue"])
 
-    def test_manifest_actual_preserva_continuidad_post_g122(self):
+    def test_manifest_actual_materializa_doc3_r1(self):
         data = json.loads(MANIFEST.read_text(encoding="utf-8"))
-        self.assertEqual("0.1.24.13-beta", data["version"])
-        self.assertEqual("MANT.1", data["block"])
-        self.assertEqual("R8", data["revision"])
-        self.assertEqual(125, data["next_step"]["global_revision"])
+        self.assertEqual("0.1.25.01-beta", data["version"])
+        self.assertEqual("DOC.3", data["block"])
+        self.assertEqual("R1", data["revision"])
+        self.assertEqual(126, data["next_step"]["global_revision"])
         self.assertIsNone(data["next_step"]["revision_aware"])
         self.assertIsNone(data["next_step"]["block"])
         description = data["next_step"]["description"]
-        for fragment in (
-            "MANT.1 R8", "#154", "#155",
-            "VER.2 R6", "#164", "PERSIST.1", "#166",
-        ):
+        for fragment in ("PLAN.2 R2/#155", "DOC.4/#171", "VER.2 R6/#164", "PERSIST.1", "#166"):
             with self.subTest(fragment=fragment):
                 self.assertIn(fragment, description)
 
@@ -72,10 +69,7 @@ class TestG122NOR3Promotion(unittest.TestCase):
         self.assertEqual("integrated_accepted_post_merge", closure["candidate_state"])
         self.assertFalse(closure["next_candidate_assigned"])
         self.assertFalse(closure["post_merge_acceptance_required"])
-        self.assertEqual(
-            "b97cf61763479b80b8e8724b878089e8bb20fa00",
-            closure["merge_commit"],
-        )
+        self.assertEqual("b97cf61763479b80b8e8724b878089e8bb20fa00", closure["merge_commit"])
 
 
 if __name__ == "__main__":
