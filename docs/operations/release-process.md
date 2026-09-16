@@ -1,7 +1,7 @@
 # Proceso de release
 
 **Estado:** Vigente
-**Versión de aplicación:** `0.1.25.01-beta` — G125/E01 materializado para DOC.3 R1; publicación pendiente; G126 permanece disponible sin candidato.
+**Versión de aplicación:** `0.1.26.01-beta` — PLAN.2 R2/G126-E01 aceptado localmente; publicación pendiente; G127 libre sin candidato.
 **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
 **Último tag formal legacy:** `v0.0.26-beta`
 **Versión base histórica preservada:** `0.0.23-beta`
@@ -29,47 +29,50 @@
 <!-- NOR3-G122-PROMOTION:END -->
 
 <!-- POST-NOR3-INTERMEDIATE-SEQUENCE:START -->
-## Secuencia intermedia obligatoria post-NOR.3
+## Estado vigente post-G125 / PLAN.2 R2
 
-G124/MANT.1 R8 permanece cerrado/publicado como `v0.1.24.13-beta` y constituye
-la base material inmediatamente anterior.
+DOC.3 R1/#154 está cerrado, integrado y publicado como **G125/E01**
+(`0.1.25.01-beta`) sobre
+`main@ee077c0d83931f140c91583fa8b2c4ae6b72dec8`, con tag firmado
+`v0.1.25.01-beta` y GitHub Release prerelease 388866555.
 
-DOC.3 R1 / Issue #154 se materializa localmente como **G125/E01**
-(`0.1.25.01-beta`) después de completar la auditoría integral, la normalización
-Markdown 173/173, el registro de DOC.4/#171 como trabajo diferido y el preflight
-final #166 sin trabajo material nuevo de dependencias.
+PLAN.2 R2/#155 está aceptado localmente como G126/E01 (`0.1.26.01-beta`) y pendiente de publicación en la rama
+`plan/plan2-r2-replanificacion-maestra`. G127 permanece libre: no tiene
+candidato, bloque ni `VERSION` preasignados.
 
-El estado G125/E01 queda **aceptado localmente y pendiente de publicación**.
-Su cierre definitivo requiere PR/merge, revalidación de `main`, tag firmado y
-GitHub Release prerelease. PLAN.2 R2/#155 no inicia hasta completar esa
-publicación.
+La continuidad material vigente es:
 
-La continuidad posterior a la publicación de G125 queda:
+1. **PLAN.2 R2 / #155** — replanificación y sincronización del programa.
+2. **VER.2 R6 / #164** — primera fase material después de publicar PLAN.2.
+3. **DOC.4 R1 / #171** — reingeniería documental después de VER.2.
+4. **Auditoría previsional / #142** y derivados funcionales obligatorios.
+5. **PERSIST.1 / #130 → REP.1 / #143 → DEPLOY.1 / #157**.
+6. **UX.7 → UX.x** — baseline conocido UX.7–UX.32 y expansión UX.33+ si
+   aparecen nuevas superficies; #189 exige sincronización visual multiportal.
+7. **SEC.2 R7 → rendimiento → A11Y.2 → REV.1 → #153 → DOC.1 R6 → QA.1 → REL.1**.
 
-1. **PLAN.2 R2 — Issue #155:** replanificación maestra post-DOC.3.
-   Debe ubicar DOC.4 R1/#171 y sus lotes #172/#173/#174.
-2. **VER.2 R6 — Issue #164:** reforma del versionado beta y del componente
-   futuro dedicado a fases MANT.2/Dependabot.
-3. **PERSIST.1 — Issue #130:** permanece bloqueado hasta completar la secuencia
-   que determine PLAN.2 R2 y VER.2 R6.
-
-G126 queda únicamente como siguiente Global disponible y no se asigna por
-adelantado. Antes de cada fase futura se repite el preflight #166; un lote
-material nuevo de dependencias inserta MANT.2 R2+.
+Antes y después de cada fase material se aplica #166. Un trabajo material nuevo
+de dependencias antepone MANT.2 R2+ y obliga a sincronizar el árbol antes de
+continuar.
 <!-- POST-NOR3-INTERMEDIATE-SEQUENCE:END -->
 
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado de publicación vigente
 
-- `VERSION` materializa G124/E13 (`0.1.24.13-beta`) para MANT.1 R8.
-- MANT.1 usa ordinal E13 y revisión funcional R8.
-- G123/E01 permanece publicado mediante `v0.1.23.01-beta`.
-- G124/E13 está integrado y publicado mediante PR #170, `v0.1.24.13-beta` y GitHub Release prerelease.
-- DOC.3 R1/#154 está en ejecución sin candidato Global preasignado.
-- G125 queda disponible sin candidato ni bloque preasignado.
-- PERSIST.1 permanece planificado, no iniciado y sin Global preasignado.
+- `VERSION` permanece en `0.1.26.01-beta` para PLAN.2 R2/G126-E01; DOC.3 R1/G125-E01 permanece publicado como `0.1.25.01-beta`.
+- G125/E01 está integrado/publicado en
+  `main@ee077c0d83931f140c91583fa8b2c4ae6b72dec8` mediante tag firmado
+  `v0.1.25.01-beta` y GitHub Release prerelease 388866555.
+- G124/E13 y G123/E01 permanecen como betas anteriores publicadas.
+- PLAN.2 R2/#155 está aceptado localmente como G126/E01 (`0.1.26.01-beta`) y pendiente de publicación.
+- G127 permanece libre, sin candidato, bloque ni VERSION.
+- VER.2 R6/#164 será la siguiente fase material después de publicar PLAN.2 y
+  repetir #166.
+- PERSIST.1 permanece planificado detrás de
+  VER.2 → DOC.4 → #142/derivados.
 - La automatización no crea ni firma tags.
-- `v0.1.24.13-beta` ya está publicado y se conserva inmutable; cualquier tag posterior seguirá exigiendo merge, revalidación de `main` y firma local.
+- Los tags publicados permanecen inmutables; cualquier tag posterior exige
+  integración, revalidación de `main` y firma local.
 - Un Release incompatible falla cerrado y solo HTTP 404 autoriza creación.
 <!-- DOC1-R1-POST-MANT1:END -->
 
@@ -113,7 +116,7 @@ El candidato reserva el siguiente número global, pero ese número solo queda co
 
 La revisión funcional (`R#`) y el ordinal aceptado (`E##`) no se consideran equivalentes por definición. Cuando una revisión intermedia no consume Global, el ledger puede declarar `functional_revision`; el manifiesto de publicación usa ese valor para mostrar el nombre funcional correcto. DEV.2 R5 = G118/E04 y DEV.2 R6 = G119/E05 son precedentes
 canónicos de revisiones funcionales cuyo ordinal aceptado difiere de la
-revisión funcional. El último estado cerrado/publicado es MANT.1 R8 = G124/E13 (`0.1.24.13-beta`), materializado mediante PR #170 y `v0.1.24.13-beta`. DOC.3 R1/#154 está en ejecución sin candidato Global preasignado. G125 es el siguiente Global disponible, sin candidato ni bloque reservado. PERSIST.1 permanece planificado, no iniciado y sin Global preasignado; no puede iniciar antes de completar #154 → #155 → #164. UX.7/UX.8 permanecen planificados y no iniciados.
+revisión funcional. El último estado cerrado/publicado es DOC.3 R1 = G125/E01 (`0.1.25.01-beta`), integrado en `main@ee077c0d83931f140c91583fa8b2c4ae6b72dec8` y publicado mediante `v0.1.25.01-beta`. PLAN.2 R2/#155 está aceptado localmente como G126/E01 (`0.1.26.01-beta`) y pendiente de publicación. G127 es el siguiente Global disponible, libre y sin bloque reservado. Después de publicar PLAN.2 corresponde VER.2 R6/#164; PERSIST.1 permanece detrás de VER.2 → DOC.4 → #142/derivados. La ola UX final es dinámica, UX.7→UX.x, bajo #129/#189.
 
 ## 3. Precondiciones
 

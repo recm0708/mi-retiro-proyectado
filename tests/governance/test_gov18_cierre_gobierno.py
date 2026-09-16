@@ -33,15 +33,39 @@ class TestGov18CierreGobierno(unittest.TestCase):
         self.assertIn("GOV.1.8", cierre)
         self.assertIn("0.1.0-beta.1", cierre)
 
-    def test_roadmap_cierra_gov18_y_preserva_reanudacion_ux46e(self):
-        texto = (DOCS / "governance/roadmap.md").read_text(encoding="utf-8")
+    def test_closeout_preserva_gov1_completo_y_reanudacion_ux46e(self):
+        cierre = (
+            DOCS
+            / "archive/governance/gov1-closeout.md"
+        ).read_text(encoding="utf-8")
+
         for bloque in range(1, 9):
-            self.assertIn(f"**GOV.1.{bloque}", texto)
+            with self.subTest(bloque=bloque):
+                self.assertIn(
+                    f"GOV.1.{bloque}",
+                    cierre,
+                )
+
         self.assertIn(
-            "- [x] **GOV.1.8 — Auditoría final y cierre pre-beta de gobierno**",
-            texto,
+            "GOV.1.8",
+            cierre,
         )
-        self.assertIn("UX.4.6e queda descongelada", texto)
+        self.assertIn(
+            "UX.4.6e quedó reanudada",
+            cierre,
+        )
+        self.assertIn(
+            "v0.0.24-beta",
+            cierre,
+        )
+
+        roadmap = (
+            DOCS / "governance/roadmap.md"
+        ).read_text(encoding="utf-8")
+
+        self.assertIn("G125/E01", roadmap)
+        self.assertIn("PLAN.2 R2", roadmap)
+        self.assertIn("1.0.0.0", roadmap)
 
     def test_releases_documenta_0_0_24_y_tag_firmado(self):
         texto = (ROOT / "RELEASES.md").read_text(encoding="utf-8")

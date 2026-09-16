@@ -64,7 +64,7 @@ class TestNOR1Standards(unittest.TestCase):
         self.assertIn("NOR.2", contenido)
         self.assertIn("SEC.2 permanece pausado", contenido)
 
-    def test_documentacion_transversal_declara_transicion_nor1_nor2(self):
+    def test_historia_nor1_nor2_y_programa_vivo_usan_owners_correctos(self):
         cierre = (
             ROOT
             / "docs"
@@ -75,18 +75,61 @@ class TestNOR1Standards(unittest.TestCase):
 
         self.assertIn("NOR.1", cierre)
         self.assertIn("NOR.2", cierre)
+        self.assertIn(
+            "SEC.2 permanece pausado",
+            cierre,
+        )
 
-        documentos = [
-            ROOT / "CHANGELOG.md",
-            ROOT / "docs" / "README.md",
-            ROOT / "docs" / "governance" / "roadmap.md",
-            ROOT / "docs" / "operations" / "validation.md",
-            ROOT / "docs" / "governance" / "master-plan-to-1-0.md",
-        ]
+        ledger = (
+            ROOT
+            / "docs"
+            / "governance"
+            / "pre-1-0-revision-ledger.md"
+        ).read_text(encoding="utf-8")
 
-        for documento in documentos:
-            contenido = documento.read_text(encoding="utf-8")
-            self.assertIn("NOR.2 R4", contenido, str(documento))
+        for esperado in (
+            "G094",
+            "NOR.2 R1",
+            "G101",
+            "NOR.2 R8",
+            "G112",
+            "NOR.1 R8",
+        ):
+            self.assertIn(
+                esperado,
+                ledger,
+            )
+
+        releases = (
+            ROOT / "RELEASES.md"
+        ).read_text(encoding="utf-8")
+
+        self.assertIn(
+            "NOR.1 R8",
+            releases,
+        )
+        self.assertIn(
+            "NOR.2",
+            releases,
+        )
+
+        for rel in (
+            "docs/governance/roadmap.md",
+            "docs/governance/master-plan-to-1-0.md",
+        ):
+            text = (
+                ROOT / rel
+            ).read_text(encoding="utf-8")
+
+            with self.subTest(rel=rel):
+                self.assertIn(
+                    "G125/E01",
+                    text,
+                )
+                self.assertIn(
+                    "PLAN.2 R2",
+                    text,
+                )
 
 if __name__ == "__main__":
     unittest.main()

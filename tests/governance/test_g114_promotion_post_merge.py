@@ -9,9 +9,24 @@ class TestG114PromotionPostMerge(unittest.TestCase):
     def test_g114_permanece_preservado_en_ledger(self):
         ledger=cargar_ledger(); entry=next(x for x in ledger["entries"] if x["global_revision"]==114)
         self.assertEqual("PLAN.2",entry["block"]); self.assertEqual(1,entry["ordinal"]); self.assertEqual("0.1.14.01-beta",entry["revision_aware"]); self.assertIn("PR #94",entry["evidence"]); self.assertIn("7ded70c",entry["evidence"])
-    def test_registro_preserva_plan2_cerrado(self):
-        data=json.loads((ROOT/"data/governance/work-block-registry.json").read_text(encoding="utf-8")); ids={x["identifier"]:x for x in data["identifiers"]}
-        self.assertEqual("closed",ids["PLAN.2"]["status"]); self.assertIn("G114",ids["PLAN.2"]["global_refs"])
+    def test_registro_preserva_g114_aunque_plan2_este_reabierto(self):
+        data = json.loads(
+            (ROOT / "data/governance/work-block-registry.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        ids = {item["identifier"]: item for item in data["identifiers"]}
+
+        self.assertEqual("accepted_pending_publication", ids["PLAN.2"]["status"])
+        self.assertIn("G114", ids["PLAN.2"]["global_refs"])
+        self.assertIn("G126", ids["PLAN.2"]["global_refs"])
+        self.assertEqual(["G114", "G126"], ids["PLAN.2"]["global_refs"])
+
+        active = data["active_phase"]
+        self.assertEqual("PLAN.2", active["block"])
+        self.assertEqual("R2", active["revision"])
+        self.assertEqual(155, active["issue"])
+        self.assertEqual(126, active["global_revision"])
     def test_documentacion_preserva_g114_plan2(self):
         ledger = cargar_ledger()
         entry = next(
@@ -23,11 +38,15 @@ class TestG114PromotionPostMerge(unittest.TestCase):
         self.assertEqual(1, entry["ordinal"])
         self.assertEqual("0.1.14.01-beta", entry["revision_aware"])
 
-        matrix = (
-            ROOT / "docs/governance/pre-1-0-pending-matrix.md"
-        ).read_text(encoding="utf-8")
-        self.assertIn("PLAN.2 R1", matrix)
-        self.assertIn("Cerrado/aceptado G114/E01", matrix)
+        historical_audit = (
+            ROOT
+            / "docs/audits/documentation/"
+            "post-g113-live-documentation-audit-plan2-r1.md"
+        )
+        self.assertTrue(historical_audit.is_file())
+
+        audit_text = historical_audit.read_text(encoding="utf-8")
+        self.assertIn("PLAN.2 R1", audit_text)
 
         releases = (ROOT / "RELEASES.md").read_text(encoding="utf-8")
         self.assertIn("v0.1.14.01-beta", releases)

@@ -109,7 +109,7 @@ class TestNOR2R3RuntimeMigration(unittest.TestCase):
         ):
             self.assertIn(route, main)
 
-    def test_documentacion_transversal_declara_nor2_r3(self):
+    def test_historia_nor2_r3_y_programa_vivo_usan_fuentes_correctas(self):
         evidencia = (
             ROOT
             / "docs"
@@ -118,18 +118,46 @@ class TestNOR2R3RuntimeMigration(unittest.TestCase):
             / "repository-normalization-runtime-migration-nor2-r3.md"
         ).read_text(encoding="utf-8")
 
-        self.assertIn("NOR.2 R3", evidencia)
+        self.assertIn(
+            "NOR.2 R3",
+            evidencia,
+        )
+
+        ledger = (
+            ROOT
+            / "docs"
+            / "governance"
+            / "pre-1-0-revision-ledger.md"
+        ).read_text(encoding="utf-8")
+
+        for esperado in (
+            "G096",
+            "NOR.2 R3",
+            "G097",
+            "NOR.2 R4",
+        ):
+            self.assertIn(
+                esperado,
+                ledger,
+            )
 
         for rel in (
-            "CHANGELOG.md",
-            "README.md",
-            "docs/README.md",
             "docs/governance/roadmap.md",
-            "docs/operations/validation.md",
             "docs/governance/master-plan-to-1-0.md",
         ):
-            text = (ROOT / rel).read_text(encoding="utf-8")
-            self.assertIn("NOR.2 R4", text, rel)
+            text = (
+                ROOT / rel
+            ).read_text(encoding="utf-8")
+
+            with self.subTest(rel=rel):
+                self.assertIn(
+                    "G125/E01",
+                    text,
+                )
+                self.assertIn(
+                    "PLAN.2 R2",
+                    text,
+                )
 
     def test_evidencia_r3_existe(self):
         report = (

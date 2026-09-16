@@ -32,12 +32,39 @@ class TestG115PromotionPostMerge(unittest.TestCase):
         ids = {item["identifier"]: item for item in data["identifiers"]}
         self.assertIn("G115", ids["DOC.1"]["global_refs"])
 
-    def test_matriz_preserva_g115_como_estado_aceptado(self):
+    def test_historia_g115_no_depende_de_matriz_viva(self):
+        ledger = cargar_ledger()
+
+        entry = next(
+            item
+            for item in ledger["entries"]
+            if item["global_revision"] == 115
+        )
+
+        self.assertEqual("DOC.1", entry["block"])
+        self.assertEqual(4, entry["ordinal"])
+        self.assertEqual(
+            "0.1.15.04-beta",
+            entry["revision_aware"],
+        )
+
         matrix = (
             ROOT / "docs/governance/pre-1-0-pending-matrix.md"
         ).read_text(encoding="utf-8")
-        self.assertIn("Cerrado/aceptado G115/E04", matrix)
-        self.assertIn("DOC.1 R4", matrix)
+
+        self.assertIn("PLAN.2 R2", matrix)
+        self.assertNotIn(
+            "Cerrado/aceptado G115/E04",
+            matrix,
+        )
+
+        releases = (
+            ROOT / "RELEASES.md"
+        ).read_text(encoding="utf-8")
+        self.assertIn(
+            "v0.1.15.04-beta",
+            releases,
+        )
 
     def test_publicacion_g115_permanece_preservada(self):
         ledger = cargar_ledger()

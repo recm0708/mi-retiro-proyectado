@@ -114,10 +114,12 @@ def test_security_declara_estado_vigente_post_mant1_y_preserva_anclas():
     end = "<!-- DOC1-R1-POST-MANT1:END -->"
     assert start in text and end in text
     bloque = text.split(start, 1)[1].split(end, 1)[0]
-    assert "## Estado de seguridad post-MANT.1" in bloque
+    assert "## Estado de seguridad vigente" in bloque
     assert f"`{version}`" in bloque
     assert "G125/E01" in bloque
-    assert "G124/E13" in bloque
+    ledger = read("docs/governance/pre-1-0-revision-ledger.md")
+    assert "G124/E13" in ledger
+    assert "v0.1.24.13-beta" in ledger
     assert "publicad" in bloque.lower()
     assert "`v0.0.71.01-beta`" in text
     assert "G071/E01" in text

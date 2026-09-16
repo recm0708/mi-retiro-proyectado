@@ -72,25 +72,62 @@ class TestNOR2R4LiveDocumentation(unittest.TestCase):
                 self.assertTrue((docs / area).is_dir(), area)
         self.assertTrue((docs / "README.md").is_file())
 
-    def test_documentacion_viva_declara_r4(self):
-        for rel in (
-            "README.md",
-            "CHANGELOG.md",
-            "docs/README.md",
-            "docs/governance/roadmap.md",
-            "docs/governance/master-plan-to-1-0.md",
-            "docs/operations/validation.md",
-        ):
-            text = (ROOT / rel).read_text(encoding="utf-8")
-            self.assertIn("NOR.2 R4", text, rel)
+    def test_historia_nor2_r4_y_documentacion_viva_actual_coexisten(self):
+        evidencia = (
+            ROOT
+            / "docs"
+            / "audits"
+            / "repository"
+            / "repository-normalization-live-docs-nor2-r4.md"
+        ).read_text(encoding="utf-8")
 
-        docs_index = (ROOT / "docs/README.md").read_text(encoding="utf-8")
         self.assertIn(
-            "**NOR.2 R4:** cerrado",
-            docs_index,
+            "NOR.2 R4",
+            evidencia,
+        )
+        self.assertIn(
+            "43 movimientos Git",
+            evidencia,
         )
 
-        root_readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        ledger = (
+            ROOT
+            / "docs"
+            / "governance"
+            / "pre-1-0-revision-ledger.md"
+        ).read_text(encoding="utf-8")
+
+        self.assertIn(
+            "G097",
+            ledger,
+        )
+        self.assertIn(
+            "NOR.2 R4",
+            ledger,
+        )
+
+        for rel in (
+            "docs/governance/roadmap.md",
+            "docs/governance/master-plan-to-1-0.md",
+        ):
+            text = (
+                ROOT / rel
+            ).read_text(encoding="utf-8")
+
+            with self.subTest(rel=rel):
+                self.assertIn(
+                    "G125/E01",
+                    text,
+                )
+                self.assertIn(
+                    "PLAN.2 R2",
+                    text,
+                )
+
+        root_readme = (
+            ROOT / "README.md"
+        ).read_text(encoding="utf-8")
+
         self.assertIn(
             "├── docs/\n│   ├── architecture/",
             root_readme,

@@ -84,22 +84,37 @@ class TestMant1R4EncabezadosOperativosLimpios(unittest.TestCase):
                 self.assertIn("**Estado:** vigente", texto)
                 self.assertIn("**Clasificación:** técnica / mantenimiento local", texto)
 
-    def test_documentacion_transversal_registra_r4(self):
-        """La trazabilidad de la corrección vive en documentación, no en encabezados."""
-
-        rutas = (
+    def test_historia_mant1_r4_y_roadmap_vivo_usan_fuentes_correctas(self):
+        historicos = (
             "CHANGELOG.md",
             "docs/standards/code-and-comments.md",
             "docs/operations/validation.md",
             "docs/architecture/system-architecture.md",
-            "docs/governance/roadmap.md",
         )
-        for ruta in rutas:
+
+        for ruta in historicos:
             texto = self._leer(ruta)
+
             with self.subTest(ruta=ruta):
                 self.assertIn("MANT.1 R4", texto)
-                self.assertIn("encabezados operativos", texto)
+                self.assertIn(
+                    "encabezados operativos",
+                    texto,
+                )
 
+        ledger = self._leer(
+            "docs/governance/pre-1-0-revision-ledger.md"
+        )
+
+        self.assertIn("G076", ledger)
+        self.assertIn("MANT.1 R4", ledger)
+
+        roadmap = self._leer(
+            "docs/governance/roadmap.md"
+        )
+
+        self.assertIn("G125/E01", roadmap)
+        self.assertIn("PLAN.2 R2", roadmap)
 
 if __name__ == "__main__":
     unittest.main()

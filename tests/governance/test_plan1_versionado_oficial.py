@@ -1,5 +1,6 @@
 """Regresiones de PLAN.1 para la transición futura a versión oficial 1.x."""
 
+import json
 from pathlib import Path
 import unittest
 
@@ -61,30 +62,90 @@ class TestPlan1VersionadoOficial(unittest.TestCase):
             with self.subTest(esperado=esperado):
                 self.assertIn(esperado, texto)
 
-    def test_plan_maestro_contiene_los_catorce_bloques(self):
-        texto = (
-            ROOT / "docs" / "governance/master-plan-to-1-0.md"
-        ).read_text(encoding="utf-8")
-        esperados = (
-            "### 1. PLAN.1",
-            "### 2. UX.4.6f",
-            "### 3. UX.4.6g",
-            "### 4. UX.4.6h",
-            "### 5. UX.4.6i",
-            "### 6. DEV.2",
-            "### 7. SEC.2",
-            "### 8. DOC.2",
-            "### 9. PERSIST.1",
-            "### 10. REP.1",
-            "### 11. A11Y.2",
-            "### 12. REV.1",
-            "### 13. QA.1",
-            "### 14. REL.1",
+    def test_programa_historico_plan1_y_plan_vivo_quedan_separados(self):
+        registry = json.loads(
+            (
+                ROOT
+                / "data/governance/"
+                "work-block-registry.json"
+            ).read_text(encoding="utf-8")
         )
-        for esperado in esperados:
-            with self.subTest(esperado=esperado):
-                self.assertIn(esperado, texto)
 
+        ids = {
+            item["identifier"]
+            for item in registry["identifiers"]
+        }
+
+        programa_historico = (
+            "PLAN.1",
+            "UX.4.6f",
+            "UX.4.6g",
+            "UX.4.6h",
+            "UX.4.6i",
+            "DEV.2",
+            "SEC.2",
+            "DOC.2",
+            "PERSIST.1",
+            "REP.1",
+            "A11Y.2",
+            "REV.1",
+            "QA.1",
+            "REL.1",
+        )
+
+        for bloque in programa_historico:
+            with self.subTest(bloque=bloque):
+                self.assertIn(
+                    bloque,
+                    ids,
+                )
+
+        ledger = json.loads(
+            (
+                ROOT
+                / "data/governance/"
+                "pre-1-0-revision-ledger.json"
+            ).read_text(encoding="utf-8")
+        )
+
+        plan1 = [
+            item
+            for item in ledger["entries"]
+            if item["block"] == "PLAN.1"
+        ]
+
+        self.assertEqual(
+            60,
+            max(
+                item["global_revision"]
+                for item in plan1
+            ),
+        )
+
+        texto = (
+            ROOT
+            / "docs/governance/"
+            "master-plan-to-1-0.md"
+        ).read_text(encoding="utf-8")
+
+        for esperado in (
+            "G125/E01",
+            "PLAN.2 R2",
+            "VER.2 R6",
+            "DOC.4 R1",
+            "PERSIST.1",
+            "REP.1",
+            "DEPLOY.1",
+            "UX.x final realmente necesario",
+            "SEC.2 R7",
+            "REL.1",
+            "1.0.0.0",
+        ):
+            with self.subTest(esperado=esperado):
+                self.assertIn(
+                    esperado,
+                    texto,
+                )
 
 if __name__ == "__main__":
     unittest.main()

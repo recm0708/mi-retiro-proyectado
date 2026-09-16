@@ -143,8 +143,23 @@ class TestGov16ControlesGithub(unittest.TestCase):
         self.assertTrue((ROOT/'CODE_OF_CONDUCT.md').is_file()); self.assertTrue((ROOT/'SUPPORT.md').is_file()); self.assertTrue((DOCS/'archive/governance/repository-audit-2026-08-18.md').is_file())
     def test_governance_enlaza_security_y_auditoria(self):
         t=(ROOT/'GOVERNANCE.md').read_text(encoding='utf-8'); self.assertIn('SECURITY.md',t); self.assertIn('Auditoría de gobernanza',t); self.assertIn('git verify-commit',t)
-    def test_roadmap_cierra_gov16_sin_congelar_gov17(self):
-        t=(DOCS/'governance/roadmap.md').read_text(encoding='utf-8'); self.assertIn('- [x] **GOV.1.6 — Controles GitHub y auditoría automática**',t); self.assertIn('**GOV.1.7 — Licencia**',t)
+    def test_cierre_gov16_y_gov17_se_preservan_en_closeout(self):
+        cierre = (
+            DOCS
+            / "archive/governance/gov1-closeout.md"
+        ).read_text(encoding="utf-8")
+
+        self.assertIn("GOV.1.6", cierre)
+        self.assertIn("controles GitHub", cierre)
+        self.assertIn("GOV.1.7", cierre)
+        self.assertIn("licencia propietaria pre-beta", cierre)
+
+        roadmap = (
+            DOCS / "governance/roadmap.md"
+        ).read_text(encoding="utf-8")
+
+        self.assertIn("PLAN.2 R2", roadmap)
+
     def test_archivos_nuevos_limpios(self):
         ps = [
             ROOT / "SECURITY.md",

@@ -3,22 +3,48 @@
 **Proyecto:** Mi Retiro Proyectado
 **Base auditada:** `7037addd44253e528c77460b678d2b3ccd540dd5`
 **Contador histórico en la base `7037addd`:** **G070**
-**Contador aceptado reconciliado vigente:** **G125**
-**Siguiente Global disponible:** **G126**
-**Siguiente candidato disponible:** **ninguno asignado** — G126 permanece disponible sin bloque preasignado; DOC.3 R1/#154 está materializado como G125/E01 y pendiente de publicación
+**Contador aceptado reconciliado vigente:** **G126**
+**Siguiente Global disponible:** **G127**
+**Siguiente candidato disponible:** **ninguno asignado** — G127 permanece disponible sin bloque preasignado; PLAN.2 R2 está aceptado localmente como G126/E01 y pendiente de publicación
+
+<!-- PLAN2-G126-PROMOTION:START -->
+## Estado PLAN.2 R2 / materialización local G126-E01
+
+- `VERSION` materializa `0.1.26.01-beta` para PLAN.2 R2 / G126-E01.
+- G125/E01 permanece publicado como `v0.1.25.01-beta` para DOC.3 R1.
+- PLAN.2 R1 permanece preservado como G114/E01.
+- PLAN.2 R2 reconcilia el programa hacia `1.0.0.0`: VER.2 → DOC.4 → #142/derivados → PERSIST → REP → DEPLOY → UX.7–UX.x → #189 → SEC.2 R7 → rendimiento → A11Y.2 → REV.1 → #153 → DOC.1 R6 → QA.1 → REL.1.
+- Quality Gate FULL pre-materialización: 11 PASS / 0 FAIL; 1613 unittest; pytest 1653 + 7913 subtests.
+- Preflight final #166: `main` sin cambios desde G125, 0 PRs abiertos, 0 Dependabot alerts, `pip check`/`pip-audit` limpios y npm raíz N/A.
+- G126/E01 está aceptado localmente y pendiente de PR/merge/tag/release.
+- G127 queda disponible sin candidato, bloque ni VERSION preasignados.
+- VER.2 R6/#164 no inicia hasta publicar G126 y repetir un preflight fresco #166.
+<!-- PLAN2-G126-PROMOTION:END -->
+
+<!-- LEDGER-G122-G126:START -->
+## Extensión revision-aware vigente G122–G126
+
+| Global | ID revision-aware | Bloque / estado aceptado | Ancla | Evidencia resumida |
+| ---: | --- | --- | --- | --- |
+| G122 | `0.1.22.01-beta` | NOR.3 R8 — R8 — cierre estructural integral NOR.3 R1–R8: ownership, portales, templates/assets, taxonomía de pruebas, data/scripts, policy y documentación estructural | `0.1.22.01-beta` | PR #162 / merge b97cf61763479b80b8e8724b878089e8bb20fa00; R5-R6 firmado b54b2d27e78d08e62d54873b749af1f99a6ce120; R7 FULL 11 PASS / 0 FAIL, 1574 unittest, 1614 pytest + 7708 subtests; R8 FULL 11 PASS / 0 FAIL, 1579 unittest, 1619 pytest + 7708 subtests; revalidación post-merge de main 11 PASS / 0 FAIL, 1584 unittest OK, 1624 pytest + 7750 subtests; Visual & Accessibility y CodeQL en success; 171 Markdown; 27 JavaScript |
+| G123 | `0.1.23.01-beta` | MANT.2 R1 — R1 — Dependabot y remediación coordinada post-G122 | `0.1.23.01-beta` | Issue #167; PR #168; merge 1a3942a6c14ab047fe8bc587c21b9b96cf62f2bd; #160/#161 superseded; 0 Dependabot alerts abiertos; pre-promoción Quality Gate 11 PASS / 0 FAIL, 1584 unittest OK y pytest 1624 passed / 7767 subtests; post-promoción local 11 PASS / 0 FAIL, 1588 unittest OK y pytest 1628 passed / 7767 subtests; post-merge main 11 PASS / 0 FAIL, 1588 unittest OK y pytest 1628 passed / 7781 subtests; pip-audit sin vulnerabilidades; npm audit 0 vulnerabilidades; CI post-merge y CodeQL verdes; publicación formal completada mediante tag firmado v0.1.23.01-beta y GitHub Release prerelease ID 388217270. |
+| G124 | `0.1.24.13-beta` | MANT.1 R8 — R8 — auditoría, consolidación y saneamiento operativo post-NOR.3 de scripts, tests, labels y estructura técnica | `0.1.24.13-beta` | Issue #163; auditoría de 16 scripts operativos: 16 conservar / 0 consolidar / 0 retirar / 0 mover; auditoría semántica V2 de 219 módulos y 1633 funciones test_*: 0 duplicados AST, 0 grupos estructurales equivalentes y 0 retiros justificados; taxonomía GitHub reconciliada en 28 labels (16 canónicos + 12 suplementarios); Quality Gate FULL pre-promoción 11 PASS / 0 FAIL, 1594 unittest OK y pytest 1634 passed + 7781 subtests; Quality Gate FULL post-promoción local 11 PASS / 0 FAIL, 1600 unittest OK y pytest 1640 passed + 7782 subtests; preflight final #166: 0 PRs abiertos, 0 Dependabot alerts, 0 PRs Dependabot, pip-audit sin vulnerabilidades y npm audit 0 vulnerabilidades; publicación remota G124 pendiente de PR/merge, revalidación, tag firmado y Release. |
+| G125 | `0.1.25.01-beta` | DOC.3 R1 — R1 — auditoría documental integral post-MANT.1: estado vigente, gobierno, estructura, historia, coherencia semántica y cierre reproducible | `0.1.25.01-beta` | Issue #154; cierre interno 6e94fbcc1598dff612cb4c676553faa21ff8c831; 173 Markdown auditados y normalizados; 418 archivos textuales de código/configuración auditados; 16 familias / 53 identificadores; Quality Gate FULL 11 PASS / 0 FAIL; 1603 unittest OK; pytest 1643 passed + 7824 subtests; preflight final #166 CLEAN con 0 PRs, 0 Dependabot alerts, 0 PRs Dependabot, pip-audit limpio y npm audit 0 vulnerabilidades; DOC.4/#171 transferido como trabajo diferido. |
+| G126 | `0.1.26.01-beta` | PLAN.2 R2 — R2 — replanificación maestra post-G125 hacia 1.0: grafo canónico, clasificación pre/post-1.0, DOC.4 y auditoría previsional, PERSIST/REP/DEPLOY, programa UX granular dinámico UX.7–UX.x, contrato multiportal #189 y reconciliación integral de gobierno | `0.1.26.01-beta` | Issue #155; rama plan/plan2-r2-replanificacion-maestra; auditoría integral de Issues reconciliada; Quality Gate FULL 11 PASS / 0 FAIL; 1613 unittest OK; pytest 1653 passed + 7913 subtests; 173 Markdown auditados; 17 familias / 78 identificadores; integridad 656 archivos / 84 directorios canónicos; git diff --check limpio; preflight final #166 con main G125 sin cambios, 0 PRs abiertos, 0 Dependabot alerts abiertos, dependency manifests sin cambios, pip check limpio, pip-audit sin vulnerabilidades y contrato npm raíz N/A. |
+<!-- LEDGER-G122-G126:END -->
 
 <!-- DOC3-G125-PROMOTION:START -->
-## Estado DOC.3 R1 / materialización local G125-E01
+## Estado DOC.3 R1 / G125-E01 publicado
 
-- `VERSION` materializa `0.1.25.01-beta` para DOC.3 R1 / G125-E01.
-- G124/E13 permanece publicado como `v0.1.24.13-beta`.
-- Auditoría DOC.3: 173 Markdown y 418 archivos textuales de código/configuración.
-- Quality Gate FULL previo: 11 PASS / 0 FAIL; 1603 unittest; pytest 1643 + 7824 subtests.
-- Preflight final #166: 0 PRs, 0 Dependabot alerts, 0 PRs Dependabot;
-  auditorías Python/npm verdes.
-- G125/E01 está aceptado localmente y pendiente de publicación.
+- DOC.3 R1 / G125-E01 se publicó con `0.1.25.01-beta`; la `VERSION` vigente posterior corresponde a PLAN.2 R2 / G126-E01 (`0.1.26.01-beta`).
+- G125/E01 está integrado en
+  `main@ee077c0d83931f140c91583fa8b2c4ae6b72dec8`.
+- Tag firmado: `v0.1.25.01-beta`.
+- GitHub Release prerelease: 388866555.
+- Revalidación final: Quality Gate FULL 11 PASS / 0 FAIL; 1608 unittest OK;
+  pytest 1648 passed + 7844 subtests.
 - G126 queda disponible sin candidato/bloque preasignado.
-- PLAN.2 R2/#155 no inicia hasta completar la publicación de G125/E01.
+- PLAN.2 R2/#155 está en progreso sin Global/VERSION preasignados.
 <!-- DOC3-G125-PROMOTION:END -->
 
 <!-- MANT1-G124-PROMOTION:START -->
@@ -71,19 +97,20 @@
 <!-- NOR3-G122-PROMOTION:END -->
 
 <!-- DOC1-R1-REVISION-MANUAL:START -->
-## Nota de lectura vigente — reconciliación post-NOR.3
+## Nota de lectura vigente — reconciliación post-PLAN.2 R2
 
 La reconstrucción histórica G001–G070 permanece intacta.
 
-- G118/E04 y G119/E05 preservan DEV.2 R5/R6.
-- G120/E01 (`0.1.20.01-beta`) permanece publicado para UX.5 R6.
-- G121/E01 (`0.1.21.01-beta`) permanece publicado para UX.6 R1–R8 mediante `v0.1.21.01-beta`.
-- G122/E01 (`0.1.22.01-beta`) queda integrado/aceptado para NOR.3 R1–R8
-  mediante PR #162 / merge `b97cf61763479b80b8e8724b878089e8bb20fa00`.
-- G123/E01 (`0.1.23.01-beta`) está integrado/aceptado/publicado para MANT.2 R1 mediante PR #168 y `v0.1.23.01-beta`.
-- G124/E13 (`0.1.24.13-beta`) está integrado/aceptado/publicado para MANT.1 R8 mediante PR #170 y `v0.1.24.13-beta`.
-- DOC.3 R1/#154 está materializado como G125/E01 y pendiente de publicación; G126 permanece disponible sin candidato ni bloque preasignado.
-- PERSIST.1 permanece planificado, no iniciado y sin Global preasignado; no puede iniciar antes de completar #154 → #155 → #164.
+- G120/E01 permanece publicado para UX.5 R6.
+- G121/E01 permanece publicado para UX.6 R8.
+- G122/E01 permanece publicado para NOR.3.
+- G123/E01 permanece publicado para MANT.2 R1.
+- G124/E13 permanece publicado para MANT.1 R8.
+- G125/E01 permanece publicado para DOC.3 R1.
+- PLAN.2 R1 permanece preservado como G114/E01.
+- PLAN.2 R2 está aceptado localmente como G126/E01 (`0.1.26.01-beta`) y pendiente de publicación.
+- G127 permanece disponible sin candidato, bloque ni VERSION preasignados.
+- Después de publicar G126 y repetir #166, la siguiente fase material es VER.2 R6/#164.
 - Los tags ya publicados permanecen inmutables.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 

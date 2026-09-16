@@ -267,20 +267,90 @@ class TestNOR2R8FinalAudit(unittest.TestCase):
             with self.subTest(value=value):
                 self.assertIn(value, text)
 
-    def test_superficies_transversales_registran_r8(self):
-        expected = {
-            "CHANGELOG.md": "NOR.2 R8",
-            "docs/operations/validation.md": "Validación NOR.2 R8",
-            "docs/product/traceability-matrix.md": "Trazabilidad NOR.2 R8",
-            "docs/governance/roadmap.md": "NOR.2 R8 — auditoría integral",
-            "docs/governance/master-plan-to-1-0.md": "NOR.2 R8",
-            "docs/README.md": "repository-normalization-final-audit-nor2-r8.md",
-        }
+    def test_historia_nor2_r8_y_programa_vivo_usan_owners_correctos(self):
+        evidencia = (
+            ROOT
+            / "docs"
+            / "audits"
+            / "repository"
+            / "repository-normalization-final-audit-nor2-r8.md"
+        ).read_text(encoding="utf-8")
 
-        for rel, value in expected.items():
+        for esperado in (
+            "NOR.2 R8",
+            "115 filas",
+            "11 contradicciones",
+            "G001–G070",
+        ):
+            with self.subTest(
+                esperado=esperado
+            ):
+                self.assertIn(
+                    esperado,
+                    evidencia,
+                )
+
+        ledger = (
+            ROOT
+            / "docs"
+            / "governance"
+            / "pre-1-0-revision-ledger.md"
+        ).read_text(encoding="utf-8")
+
+        self.assertIn(
+            "G101",
+            ledger,
+        )
+        self.assertIn(
+            "NOR.2 R8",
+            ledger,
+        )
+
+        changelog = (
+            ROOT / "CHANGELOG.md"
+        ).read_text(encoding="utf-8")
+
+        validacion = (
+            ROOT
+            / "docs"
+            / "operations"
+            / "validation.md"
+        ).read_text(encoding="utf-8")
+
+        indice = (
+            ROOT / "docs/README.md"
+        ).read_text(encoding="utf-8")
+
+        self.assertIn(
+            "NOR.2 R8",
+            changelog,
+        )
+        self.assertIn(
+            "Validación NOR.2 R8",
+            validacion,
+        )
+        self.assertIn(
+            "repository-normalization-final-audit-nor2-r8.md",
+            indice,
+        )
+
+        for rel in (
+            "docs/governance/roadmap.md",
+            "docs/governance/master-plan-to-1-0.md",
+        ):
+            text = (
+                ROOT / rel
+            ).read_text(encoding="utf-8")
+
             with self.subTest(rel=rel):
-                text = (ROOT / rel).read_text(encoding="utf-8")
-                self.assertIn(value, text)
+                self.assertIn(
+                    "G125/E01",
+                    text,
+                )
+                self.assertIn(
+                    "PLAN.2 R2",
+                    text,
+                )
 
 if __name__ == "__main__":
     unittest.main()

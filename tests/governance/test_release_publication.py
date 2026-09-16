@@ -26,31 +26,31 @@ class TestReleasePublication(unittest.TestCase):
 
     def test_manifest_actual_es_g125_y_no_preasigna_g126(self):
         data = json.loads(MANIFEST.read_text(encoding="utf-8"))
-        self.assertEqual("0.1.25.01-beta", data["version"])
-        self.assertEqual("DOC.3", data["block"])
-        self.assertEqual("R1", data["revision"])
-        self.assertEqual(126, data["next_step"]["global_revision"])
+        self.assertEqual("0.1.26.01-beta", data["version"])
+        self.assertEqual("PLAN.2", data["block"])
+        self.assertEqual("R2", data["revision"])
+        self.assertEqual(127, data["next_step"]["global_revision"])
         self.assertIsNone(data["next_step"]["revision_aware"])
         self.assertIsNone(data["next_step"]["block"])
 
     def test_manifiesto_supera_validacion(self):
         result = self.run_script("--check-manifest")
         self.assertEqual(0, result.returncode, result.stdout + result.stderr)
-        self.assertIn("G125/E01 validado", result.stdout)
+        self.assertIn("G126/E01 validado", result.stdout)
 
     def test_renderer_incluye_campos_dinamicos_y_secciones(self):
         with tempfile.TemporaryDirectory() as tmp:
             output = Path(tmp) / "notes.md"
             self.render(output)
             text = output.read_text(encoding="utf-8")
-        for fragment in ("## Estado publicado", "## Resumen", "## Cambios principales", "## Validación", "## Evidencia", "## Siguiente paso", "G125/E01", "DOC.3 R1", PUBLISHED_COMMIT, TAG_OBJECT, "**G126**", "`0.1.25.01-beta`", "DOC.3"):
+        for fragment in ("## Estado publicado", "## Resumen", "## Cambios principales", "## Validación", "## Evidencia", "## Siguiente paso", "G126/E01", "PLAN.2 R2", PUBLISHED_COMMIT, TAG_OBJECT, "**G127**", "`0.1.26.01-beta`", "PLAN.2"):
             with self.subTest(fragment=fragment):
                 self.assertIn(fragment, text)
 
     def test_manifiesto_contiene_evidencia_doc3(self):
         data = json.loads(MANIFEST.read_text(encoding="utf-8"))
         corpus = json.dumps(data, ensure_ascii=False)
-        for fragment in ("Issue de fase: #154", "173 Markdown", "418 archivos textuales", "53 identificadores", "DOC.4"):
+        for fragment in ("Issue de fase: #155", "Markdown: 173 archivos", "17 familias / 78 identificadores", "VER.2 R6/#164", "#166"):
             with self.subTest(fragment=fragment):
                 self.assertIn(fragment, corpus)
 
@@ -60,7 +60,7 @@ class TestReleasePublication(unittest.TestCase):
             notes = root / "notes.md"
             snapshot = root / "release.json"
             self.render(notes)
-            snapshot.write_text(json.dumps({"tagName": "v0.1.25.01-beta", "name": "Mi Retiro Proyectado v0.1.25.01-beta — G125/E01", "isDraft": False, "isPrerelease": True, "body": notes.read_text(encoding="utf-8")}, ensure_ascii=False), encoding="utf-8")
+            snapshot.write_text(json.dumps({"tagName": "v0.1.26.01-beta", "name": "Mi Retiro Proyectado v0.1.26.01-beta — G126/E01", "isDraft": False, "isPrerelease": True, "body": notes.read_text(encoding="utf-8")}, ensure_ascii=False), encoding="utf-8")
             result = self.run_script("--check-release-json", str(snapshot), "--notes", str(notes))
         self.assertEqual(0, result.returncode, result.stdout + result.stderr)
         self.assertIn("idempotente", result.stdout)

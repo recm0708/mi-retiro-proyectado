@@ -296,15 +296,23 @@ class TestUX46fR2AuditoriaPaso4(unittest.TestCase):
         roadmap = (ROOT / "docs/governance/roadmap.md").read_text(encoding="utf-8")
         plan = (ROOT / "docs/governance/master-plan-to-1-0.md").read_text(encoding="utf-8")
         changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
+        historico = (
+            ROOT
+            / "docs/archive/governance/doc1-r1-markdown-update-context.md"
+        ).read_text(encoding="utf-8")
 
         self.assertIn("**UX.4.6f:** cerrado", readme)
-        self.assertIn("[x] **UX.4.6f — Paso 4", roadmap)
-        self.assertIn(
-            "Después de su cierre se habilitó UX.4.6g",
-            plan,
-        )
+        self.assertIn("[x] **UX.4.6f — Paso 4", historico)
+        self.assertIn("UX.4.6g", historico)
         self.assertIn("PR #30 se integró por squash", changelog)
-        self.assertNotIn("Paso 4 — proyección salarial/laboral;", roadmap.split("### Pendiente o incompleto", 1)[1].split("## 3.", 1)[0])
+
+        # El roadmap vigente ya no debe conservar el bloque legacy
+        # de pendientes históricos.
+        self.assertNotIn("### Pendiente o incompleto", roadmap)
+        self.assertNotIn(
+            "Paso 4 — proyección salarial/laboral;",
+            roadmap,
+        )
 
 
 if __name__ == "__main__":

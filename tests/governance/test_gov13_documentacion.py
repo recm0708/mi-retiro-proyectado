@@ -52,12 +52,29 @@ class TestGov13Documentacion(unittest.TestCase):
         version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
         self.assertIn(f"## [{version}]", texto)
 
-    def test_roadmap_declara_gov13_en_ejecucion(self):
-        texto = (ROOT / "docs" / "governance/roadmap.md").read_text(encoding="utf-8")
-        self.assertIn("GOV.1.3", texto)
-        self.assertIn("R1 — documentos de entrada", texto)
-        self.assertIn("GOV.1.4", texto)
-        self.assertIn("GOV.1.7", texto)
+    def test_historia_gov13_y_estado_vivo_usan_owners_correctos(self):
+        history = (
+            ROOT
+            / "docs/archive/governance/"
+            "historical-change-registry.md"
+        ).read_text(encoding="utf-8")
+
+        for fragment in (
+            "GOV.1.3",
+            "R1 — estructura, documentos de entrada e histórico",
+            "GOV.1.4",
+            "GOV.1.7",
+        ):
+            with self.subTest(fragment=fragment):
+                self.assertIn(fragment, history)
+
+        roadmap = (
+            ROOT / "docs/governance/roadmap.md"
+        ).read_text(encoding="utf-8")
+
+        self.assertIn("G125/E01", roadmap)
+        self.assertIn("PLAN.2 R2", roadmap)
+        self.assertIn("G126", roadmap)
 
     def test_indice_separa_documentacion_historica(self):
         texto = (ROOT / "docs" / "README.md").read_text(encoding="utf-8")

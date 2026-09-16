@@ -1,22 +1,16 @@
 # Transparencia del producto
 
 **Estado:** Vigente
-**Versión de aplicación revisada:** `0.1.25.01-beta`
+**Versión de aplicación revisada:** `0.1.26.01-beta`
 **Versión base histórica:** `0.0.25-beta`
 **Versión base histórica preservada:** `0.0.23-beta`
 **Base documental preservada:** GOV.1.3 R4 — 2026-08-17
-**Revisión transversal vigente:** DOC.3 R1 — materialización G125/E01 pendiente de publicación — 2026-09-15
+**Revisión transversal vigente:** PLAN.2 R2/#155 — G126/E01 aceptado localmente, publicación pendiente — 2026-09-16
 **Clasificación:** Pública / Auditoría
 
 <!-- DOC1-R1-REVISION-MANUAL:START -->
 ## Nota de lectura vigente
 
-- `VERSION` está sincronizado en `0.1.25.01-beta` (G125/E01) para DOC.3 R1.
-- G124/E13 está cerrado y publicado mediante PR #170, tag firmado
-  `v0.1.24.13-beta` y GitHub Release prerelease.
-- MANT.1 R8 no modifica reglas previsionales, fórmulas ni afirmaciones
-  funcionales del producto.
-- G123/E01 permanece publicado mediante `v0.1.23.01-beta`.
 - G121/E01 permanece publicado mediante `v0.1.21.01-beta`.
 - UX.6 R1–R8 permanece cerrado/publicado con revisión funcional R8.
 - UX.6 no altera reglas previsionales ni convierte Developer Diagnostics en
@@ -25,9 +19,13 @@
 - NOR.3 R1–R8 permanece cerrado/publicado como G122/E01 mediante PR #162 /
   merge `b97cf61763479b80b8e8724b878089e8bb20fa00` y tag firmado
   `v0.1.22.01-beta`.
-- DOC.3 R1/#154 está materializado como G125/E01 y pendiente de publicación.
-- G126 queda disponible sin candidato/bloque preasignado.
-- PLAN.2 R2/#155, VER.2 R6/#164 y PERSIST.1/#130 permanecen no iniciados.
+- MANT.2 R1/G123 y MANT.1 R8/G124 permanecen publicados.
+- DOC.3 R1/#154 está cerrado/publicado como G125/E01 mediante
+  `v0.1.25.01-beta`.
+- PLAN.2 R2/#155 está aceptado localmente como G126/E01 (`0.1.26.01-beta`) y pendiente de publicación.
+- G127 permanece libre y sin candidato.
+- VER.2 R6/#164 será la siguiente fase material después de PLAN.2 publicado.
+- PERSIST.1 permanece detrás de VER.2 → DOC.4 → #142/derivados.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 
 Mi Retiro Proyectado es una herramienta independiente de estimación previsional. Este documento delimita qué puede afirmarse sobre el producto y qué debe permanecer explícitamente como aproximación, limitación o pendiente.
@@ -157,14 +155,22 @@ Estados revision-aware recientes publicados:
 
 Estado material actual:
 
-- DOC.3 R1/#154 está en ejecución sobre G124 publicado;
-- G125 es el siguiente Global disponible, sin candidato ni bloque preasignado;
-- PLAN.2 R2/#155 permanece no iniciado y se ejecutará después de DOC.3;
-- VER.2 R6/#164 permanece no iniciado y se ejecutará después de PLAN.2 R2;
-- PERSIST.1/#130 permanece planificado y bloqueado detrás de esa secuencia;
-- revisión jurídica externa previa a la primera versión oficial continúa pendiente;
-- hardening específico sigue siendo necesario si se decide un despliegue remoto;
-- la configuración pública de GitHub requiere la revalidación final prevista antes de 1.0;
+- DOC.3 R1/#154 está cerrado/integrado/publicado como G125/E01
+  (`0.1.25.01-beta`);
+- PLAN.2 R2/#155 está aceptado localmente como G126/E01 (`0.1.26.01-beta`) y pendiente de publicación sobre G125 publicado y no tiene
+  Global/VERSION preasignados;
+- G126/E01 está materializado para PLAN.2 R2; G127 permanece como siguiente Global disponible, libre y sin candidato;
+- VER.2 R6/#164 será la siguiente fase material después de publicar PLAN.2;
+- DOC.4 R1/#171 se ejecutará después de VER.2 y antes de #142;
+- #142 y cualquier derivado funcional obligatorio preceden PERSIST.1;
+- PERSIST.1 → REP.1 → DEPLOY.1 preceden la ola UX.7→UX.x;
+- #129/#189 gobiernan la revisión UX dinámica y la sincronización visual
+  multiportal;
+- revisión jurídica externa previa a la primera versión oficial continúa
+  pendiente;
+- SEC.2 R7 realizará el hardening final después del cierre real de la ola UX;
+- la configuración pública de GitHub requiere la revalidación final prevista
+  antes de 1.0;
 - la aptitud para distribución oficial todavía no está declarada.
 
 ## 10. Identidad

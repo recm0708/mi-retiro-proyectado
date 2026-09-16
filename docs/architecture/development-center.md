@@ -19,13 +19,18 @@ Developer sin reabrir DEV.2.
 - UX.6 R1–R8 permanece cerrado/publicado como G121/E01.
 - NOR.3 R1–R8 permanece cerrado/publicado como G122/E01 mediante
   `v0.1.22.01-beta`.
-- Perfil/avatar, usuarios/RBAC, credenciales temporales, revocación y auditoría persistente permanecen vigentes.
-- App y Developer comparten Design System, movimiento y accesibilidad.
+- Perfil/avatar, usuarios/RBAC, credenciales temporales, revocación y auditoría
+  persistente permanecen vigentes.
+- App Asegurado y Portal Developer comparten Design System, movimiento y
+  accesibilidad donde corresponde.
 - La sesión humana continúa separada del Bearer técnico.
 - MANT.2 R1/G123 y MANT.1 R8/G124 permanecen cerrados/publicados.
-- DOC.3 R1/#154 está en ejecución y no modifica el contrato funcional del Portal Developer.
-- G125 queda disponible sin candidato/bloque asignado.
-- PERSIST.1 permanece planificado, no iniciado y sin Global preasignado.
+- DOC.3 R1/#154 está cerrado/publicado como G125/E01.
+- PLAN.2 R2/#155 está aceptado localmente como G126/E01 (`0.1.26.01-beta`) y pendiente de publicación.
+- G127 permanece libre y sin candidato.
+- PERSIST.1 permanece planificado detrás de VER.2 → DOC.4 → #142/derivados.
+- La revisión UX final Developer se gobierna por #129/#189 dentro de
+  UX.7→UX.x.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 
 Como evidencia histórica de integración, R5 está integrado mediante PR #107 / merge `bc97db0` y aceptado como G118/E04. R6 quedó integrado mediante PR #111 / merge `bd2accb` y aceptado/publicado como G119/E05.

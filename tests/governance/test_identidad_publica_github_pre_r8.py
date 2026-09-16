@@ -1,5 +1,6 @@
 """Regresiones del checkpoint público de identidad visual previo a R8."""
 
+import json
 from pathlib import Path
 import unittest
 
@@ -108,15 +109,76 @@ class TestIdentidadPublicaGithubPreR8(unittest.TestCase):
         ):
             self.assertIn(esperado, self.security_privacy)
 
-    def test_indice_y_cierre_documental_son_coherentes(self):
-        self.assertIn("product/visual-identity.md", self.index)
-        self.assertIn("repositorio público", self.index)
-        self.assertIn("Social Preview", self.index)
-        self.assertIn("Checkpoint pre-R8 — identidad visual y repositorio público", self.changelog)
-        self.assertIn("624 pruebas en `OK`", self.changelog)
-        self.assertIn("checkpoint pre-R8 — identidad visual oficial", self.roadmap)
-        self.assertIn("**624 pruebas en `OK`**", self.validation)
+    def test_identidad_pre_r8_y_estado_vivo_usan_owners_correctos(self):
+        self.assertIn(
+            "product/visual-identity.md",
+            self.index,
+        )
+        self.assertIn(
+            "repositorio público",
+            self.index,
+        )
+        self.assertIn(
+            "Social Preview",
+            self.index,
+        )
 
+        self.assertIn(
+            "Checkpoint pre-R8 — identidad visual y repositorio público",
+            self.changelog,
+        )
+        self.assertIn(
+            "624 pruebas en `OK`",
+            self.changelog,
+        )
+        self.assertIn(
+            "**624 pruebas en `OK`**",
+            self.validation,
+        )
+
+        ledger = json.loads(
+            (
+                ROOT
+                / "data/governance/"
+                "pre-1-0-revision-ledger.json"
+            ).read_text(encoding="utf-8")
+        )
+
+        g48 = next(
+            item
+            for item in ledger["entries"]
+            if item["global_revision"] == 48
+        )
+
+        self.assertEqual(
+            "UX.4.6e",
+            g48["block"],
+        )
+        self.assertEqual(
+            "identidad visual oficial y publicación",
+            g48["state"],
+        )
+        self.assertIn(
+            "PR #20",
+            g48["evidence"],
+        )
+        self.assertIn(
+            "624 pruebas",
+            g48["evidence"],
+        )
+
+        roadmap = (
+            DOCS / "governance/roadmap.md"
+        ).read_text(encoding="utf-8")
+
+        self.assertIn(
+            "PLAN.2 R2",
+            roadmap,
+        )
+        self.assertIn(
+            "G125/E01",
+            roadmap,
+        )
 
 if __name__ == "__main__":
     unittest.main()

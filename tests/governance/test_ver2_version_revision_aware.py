@@ -68,9 +68,14 @@ class TestVer2VersionRevisionAware(unittest.TestCase):
         ]
         # El prefijo G001–G070 sigue intacto y la reconciliación post-G070
         # extiende el ledger hasta el último estado aceptado auditado.
-        self.assertEqual(list(range(1, 109)), globales[:108])
-        self.assertEqual(108, len(globales[:108]))
-        self.assertEqual(len(globales[:108]), len(set(globales[:108])))
+        historicos = [
+            value
+            for value in globales
+            if 1 <= value <= 108
+        ]
+        self.assertEqual(list(range(1, 109)), historicos)
+        self.assertEqual(108, len(historicos))
+        self.assertEqual(len(historicos), len(set(historicos)))
 
     def test_ids_del_ledger_codifican_su_global(self):
         texto = LEDGER.read_text(encoding="utf-8")

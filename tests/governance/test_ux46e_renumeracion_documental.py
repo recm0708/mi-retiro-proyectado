@@ -1,5 +1,6 @@
 """Regresiones UX.4.6e R6 para renumeración documental y metadata GitHub."""
 
+import json
 from pathlib import Path
 import re
 import unittest
@@ -23,17 +24,82 @@ class TestUX46eRenumeracionDocumental(unittest.TestCase):
             DOCS / "archive/ux/ux46e-r7-audit-2026-08-18.md"
         ).read_text(encoding="utf-8")
 
-    def test_secuencia_vigente_reserva_e_para_estandarizacion(self):
-        self.assertIn("UX.4.6e — Estandarización técnica", self.roadmap)
-        self.assertIn("UX.4.6f — Paso 4 · Proyección salarial/laboral", self.roadmap)
-        self.assertIn("UX.4.6g — Paso 5 · Escenarios de retiro", self.roadmap)
-        self.assertIn("UX.4.6h — Paso 6 · Resultados y exportación", self.roadmap)
+    def test_secuencia_historica_ux46e_a_h_permanece_registrada(self):
+        registry = json.loads(
+            (
+                ROOT
+                / "data/governance/"
+                "work-block-registry.json"
+            ).read_text(encoding="utf-8")
+        )
 
-    def test_r5_y_r6_permanecen_cerradas_en_la_secuencia_actual(self):
-        self.assertIn("[x] R5 — coherencia GOV", self.roadmap)
-        self.assertIn("[x] R6 — documentación transversal", self.roadmap)
-        self.assertIn("586 pruebas en `OK`", self.roadmap)
-        self.assertIn("R7 — regresiones y auditoría", self.roadmap)
+        ids = {
+            item["identifier"]
+            for item in registry["identifiers"]
+        }
+
+        for bloque in (
+            "UX.4.6e",
+            "UX.4.6f",
+            "UX.4.6g",
+            "UX.4.6h",
+        ):
+            with self.subTest(bloque=bloque):
+                self.assertIn(
+                    bloque,
+                    ids,
+                )
+
+        self.assertIn(
+            "UX.4.6f/UX.4.6g/UX.4.6h",
+            self.cierre,
+        )
+
+        self.assertIn(
+            "PLAN.2 R2",
+            self.roadmap,
+        )
+
+    def test_r5_r6_r7_permanecen_en_ledger_historico(self):
+        ledger = json.loads(
+            (
+                ROOT
+                / "data/governance/"
+                "pre-1-0-revision-ledger.json"
+            ).read_text(encoding="utf-8")
+        )
+
+        entries = {
+            item["global_revision"]: item
+            for item in ledger["entries"]
+        }
+
+        self.assertEqual(
+            "R5 — coherencia visible",
+            entries[45]["state"],
+        )
+        self.assertIn(
+            "576 pruebas",
+            entries[45]["evidence"],
+        )
+
+        self.assertEqual(
+            "R6 — renumeración/metadata",
+            entries[46]["state"],
+        )
+        self.assertIn(
+            "586 pruebas",
+            entries[46]["evidence"],
+        )
+
+        self.assertEqual(
+            "R7 — auditoría transversal",
+            entries[47]["state"],
+        )
+        self.assertIn(
+            "598 pruebas",
+            entries[47]["evidence"],
+        )
 
     def test_transparencia_usa_alcance_actual_e_a_h(self):
         self.assertIn("cierre de UX.4.6e y del alcance funcional UX.4.6f–h", self.transparencia)

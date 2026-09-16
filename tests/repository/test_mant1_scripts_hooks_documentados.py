@@ -73,20 +73,74 @@ class TestMant1ScriptsHooksDocumentados(unittest.TestCase):
         self.assertIn("no corrige archivos automáticamente", validar)
         self.assertIn("no reemplaza los checks remotos", validar)
 
-    def test_documentacion_transversal_registra_mant1_r1_y_r2(self):
-        changelog = self._leer("CHANGELOG.md")
-        estandar = self._leer("docs/standards/code-and-comments.md")
-        validacion = self._leer("docs/operations/validation.md")
-        arquitectura = self._leer("docs/architecture/system-architecture.md")
-        roadmap = self._leer("docs/governance/roadmap.md")
+    def test_historia_mant1_r1_r2_y_roadmap_vivo_usan_fuentes_correctas(self):
+        changelog = self._leer(
+            "CHANGELOG.md"
+        )
+        estandar = self._leer(
+            "docs/standards/code-and-comments.md"
+        )
+        validacion = self._leer(
+            "docs/operations/validation.md"
+        )
+        arquitectura = self._leer(
+            "docs/architecture/system-architecture.md"
+        )
 
-        for texto in (changelog, estandar, validacion, arquitectura, roadmap):
-            self.assertIn("MANT.1 R2", texto)
-            self.assertIn("MANT.1 R1", texto)
+        for texto in (
+            changelog,
+            estandar,
+            validacion,
+            arquitectura,
+        ):
+            self.assertIn(
+                "MANT.1 R2",
+                texto,
+            )
+            self.assertIn(
+                "MANT.1 R1",
+                texto,
+            )
 
-        self.assertIn("Scripts, hooks y automatización local", estandar)
-        self.assertIn("Automatización local de calidad", arquitectura)
-        self.assertIn("documentación de scripts y hooks antes de SEC.2", roadmap)
+        self.assertIn(
+            "Scripts, hooks y automatización local",
+            estandar,
+        )
+        self.assertIn(
+            "Automatización local de calidad",
+            arquitectura,
+        )
+
+        ledger = self._leer(
+            "docs/governance/pre-1-0-revision-ledger.md"
+        )
+
+        self.assertIn("G074", ledger)
+        self.assertIn(
+            "MANT.1 R2",
+            ledger,
+        )
+        self.assertIn(
+            "R1 queda como auditoría inicial absorbida",
+            ledger,
+        )
+
+        roadmap = self._leer(
+            "docs/governance/roadmap.md"
+        )
+
+        self.assertIn(
+            "G125/E01",
+            roadmap,
+        )
+        self.assertIn(
+            "PLAN.2 R2",
+            roadmap,
+        )
+        self.assertIn(
+            "MANT.2 R2",
+            roadmap,
+        )
 
     def test_mant1_r2_no_promueve_version_ni_toca_motores(self):
         from app.core.version import APP_VERSION

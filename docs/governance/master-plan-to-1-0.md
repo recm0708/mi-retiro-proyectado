@@ -1,620 +1,222 @@
 # Plan maestro hacia Mi Retiro Proyectado 1.0
 
 **Estado:** vigente
-**Versión base al iniciar el plan:** `0.0.25-beta`
-**Cierre histórico de PLAN.1:** `0.0.26-beta` / `v0.0.26-beta`
-**Versión transversal vigente:** `0.1.25.01-beta` — DOC.3 R1 está materializado como G125/E01 y pendiente de publicación; G126 queda disponible sin candidato; PLAN.2 R2, VER.2 R6 y PERSIST.1 permanecen sin iniciar y sin Global preasignado.
-**Fecha:** 2026-08-25
-**Clasificación:** Producto / Arquitectura / QA / Release
+**Último estado publicado:** G125/E01 — DOC.3 R1
+**Versión publicada:** `0.1.25.01-beta`
+**Fase en curso:** PLAN.2 R2 / #155
+**Siguiente Global disponible:** G127, libre y no reservado
+**Objetivo estable:** `1.0.0.0`
+**Fecha de reconciliación:** 2026-09-15
 
-<!-- NOR3-G122-PROMOTION:START -->
-## Registro histórico — promoción G122-E01 post-NOR.3
+Este documento es la autoridad narrativa del programa vigente hacia la primera versión oficial. La matriz tabular vive en [Matriz maestra de pendientes hacia 1.0](pre-1-0-pending-matrix.md); la historia aceptada se preserva en ledger, `RELEASES.md`, `CHANGELOG.md`, tags, GitHub Releases y `docs/archive/`.
 
-> **Checkpoint histórico preservado.** Este bloque describe el estado inmediatamente posterior a la integración de NOR.3 y anterior a MANT.2 R1 / MANT.1 R8. No representa el estado vigente del repositorio; las secciones vigentes posteriores de este documento tienen precedencia.
+## 1. Principios
 
-- `VERSION` materializa `0.1.22.01-beta` para NOR.3 R8 / G122-E01.
-- NOR.3 R1–R8 quedó integrado/aceptado mediante PR #162 / merge
-  `b97cf61763479b80b8e8724b878089e8bb20fa00`.
-- La revalidación automática de `main` quedó GREEN: Repository Quality Gate,
-  Visual & Accessibility y CodeQL finalizaron en `success`.
-- G123 es el siguiente Global disponible, pero **no tiene candidato ni bloque
-  preasignado**.
-- PERSIST.1 permanece planificado y no iniciado, sin Global preasignado.
-- `v0.1.21.01-beta` / G121/E01 permanece como última publicación revision-aware
-  hasta completar el tag/release firmado de G122/E01.
-- `v0.1.22.01-beta` queda pendiente de creación/firma local y de la
-  verificación/publicación gobernada por REL.GOV.1.
-<!-- NOR3-G122-PROMOTION:END -->
+1. Ninguna fase planificada recibe Global o `VERSION` por anticipado.
+2. G126 está materializado como PLAN.2 R2/E01; G127 es el siguiente Global aritméticamente disponible y permanece libre.
+3. Un Global se materializa únicamente con candidato real, validado y aceptable.
+4. Issues y documentación versionada deben describir el mismo programa.
+5. Trabajo material nuevo con responsabilidad propia se inserta inmediatamente en todos los árboles afectados antes de continuar.
+6. #166 se ejecuta antes/después de cada fase material y puede insertar MANT.2 R2+.
+7. Lotes internos no consumen Globals propios salvo decisión explícita.
+8. Gates manuales/transversales no se convierten en Globals por inercia.
+9. El programa UX es abierto: el número final UX.x se conoce solo cuando las superficies pre-1.0 están estabilizadas.
+10. `1.0.0.0` se publica únicamente después de QA.1 y REL.1.
 
-<!-- POST-NOR3-INTERMEDIATE-SEQUENCE:START -->
-## Secuencia intermedia obligatoria post-NOR.3
-
-G124/MANT.1 R8 permanece cerrado/publicado como `v0.1.24.13-beta` y constituye
-la base material inmediatamente anterior.
-
-DOC.3 R1 / Issue #154 se materializa localmente como **G125/E01**
-(`0.1.25.01-beta`) después de completar la auditoría integral, la normalización
-Markdown 173/173, el registro de DOC.4/#171 como trabajo diferido y el preflight
-final #166 sin trabajo material nuevo de dependencias.
-
-El estado G125/E01 queda **aceptado localmente y pendiente de publicación**.
-Su cierre definitivo requiere PR/merge, revalidación de `main`, tag firmado y
-GitHub Release prerelease. PLAN.2 R2/#155 no inicia hasta completar esa
-publicación.
-
-La continuidad posterior a la publicación de G125 queda:
-
-1. **PLAN.2 R2 — Issue #155:** replanificación maestra post-DOC.3.
-   Debe ubicar DOC.4 R1/#171 y sus lotes #172/#173/#174.
-2. **VER.2 R6 — Issue #164:** reforma del versionado beta y del componente
-   futuro dedicado a fases MANT.2/Dependabot.
-3. **PERSIST.1 — Issue #130:** permanece bloqueado hasta completar la secuencia
-   que determine PLAN.2 R2 y VER.2 R6.
-
-G126 queda únicamente como siguiente Global disponible y no se asigna por
-adelantado. Antes de cada fase futura se repite el preflight #166; un lote
-material nuevo de dependencias inserta MANT.2 R2+.
-<!-- POST-NOR3-INTERMEDIATE-SEQUENCE:END -->
-
-<!-- NOR1-R7-CLOSURE:START -->
-## Checkpoint de normalización previo a SEC.2
-
-NOR.1 y NOR.2 permanecen cerrados y la secuencia revision-aware vigente
-alcanza G119/E05.
-
-- SEC.2 R1–R6 permanece cerrado.
-- AUD.SEC2 R1 queda preservado como G109/E01.
-- REL.GOV.1 R1/R2 quedan preservados como G110/E01 y G117/E02.
-- DOC.2 R1, NOR.1 R8, DOC.1 R3–R5 y PLAN.2 R1 permanecen cerrados.
-- DEV.2 R5 permanece aceptado/publicado como G118/E04.
-- DEV.2 R6 queda aceptado/publicado como G119/E05 después de PR #111 /
-  merge `bd2accb`, promoción PR #112 / commit `9424ea8` y tag
-  `v0.1.19.05-beta`.
-- UX.5 R1–R6 permanecen consolidados/publicados como G120/E01.
-- UX.6 R1–R8 queda consolidado como G121/E01 con revisión funcional R8 en PR #124.
-- NOR.3 R1–R2 queda como candidato G122/E01 reservado/no aceptado.
-- PERSIST.1 permanece planificado, no iniciado y sin Global preasignado hasta
-  el cierre de NOR.3 y la replanificación #155.
-<!-- NOR1-R7-CLOSURE:END -->
-
-<!-- NOR2-R1-STATUS:START -->
-## Registro histórico de NOR.2 R1
-
-En ese checkpoint, NOR.2 se encontraba activo en R1. Esta revisión establece la línea base; las
-migraciones reales se ejecutarán en revisiones posteriores según una matriz de
-impacto. NOR.2 sigue siendo un checkpoint transversal y no agrega un bloque
-funcional al plan de 14 bloques.
-<!-- NOR2-R1-STATUS:END -->
-
-<!-- NOR2-R2-STATUS:START -->
-## Registro histórico NOR.2 R2 — decisión de migración
-
-En ese checkpoint, R2 convierte la línea base en un plan R3–R8 y adopta como gate de cierre la
-sincronización completa de README, índice documental, roadmap, plan maestro,
-validación, arquitectura, enlaces, imports y estado de fases.
-
-La historia se conserva mediante Git y archivo justificado; el árbol vigente no
-mantendrá copias sustituidas únicamente por compatibilidad documental.
-<!-- NOR2-R2-STATUS:END -->
-
-<!-- NOR2-R3-STATUS:START -->
-## Registro histórico NOR.2 R3 — runtime/configuración
-
-En ese checkpoint, R3 materializa la normalización técnica de bajo/medio impacto aprobada por R2.
-La siguiente revisión R4 debía migrar la documentación viva y sus enlaces hacia la
-estructura canónica. SEC.2 estaba pausado en ese momento; posteriormente cerró R1–R6.
-<!-- NOR2-R3-STATUS:END -->
-
-<!-- DOC1-R1-POST-MANT1:START -->
-## Estado post-MANT.1
-
-El plan maestro se interpreta desde la línea base documental posterior a MANT.1 R7.
-
-Estado vigente:
-
-- VER.2 promovió `0.0.71.01-beta` bajo la denominación original G071/E01; la reconciliación posterior sitúa ese estado en G087/E01.
-- `v0.0.26-beta` permanece como tag legacy histórico e inmutable; VER.2 publicó formalmente `v0.0.71.01-beta`.
-- VER.2 está cerrado; `v0.0.71.01-beta` fue publicado originalmente como G071/E01 y reconciliado posteriormente como G087/E01 sin mover el tag.
-- MANT.1 está cerrado operativamente.
-- DOC.1 R1 está cerrado.
-- DOC.1 R2 queda cerrado como auditoría integral Markdown post-NOR.2, con controles locales y remotos permanentes.
-- NOR.1 y NOR.2 están cerrados; R8 quedó integrado mediante PR #74.
-- SEC.2 quedó cerrado después de R1–R6; AUD.SEC2 R1 fue publicado como G109/E01. REL.GOV.1 R1 quedó aceptado como G110/E01; DOC.2, NOR.1 R8, DOC.1 R3, PLAN.2 R1, DOC.1 R4 y DOC.1 R5 también están cerrados. REL.GOV.1 R2 queda cerrado/aceptado/publicado como G117/E02; DEV.2 R5 queda cerrado/aceptado/publicado como G118/E04 y DEV.2 R6 queda cerrado/aceptado/publicado como G119/E05.
-- La meta `1.0.0.0` / `Build 000001` se mantiene condicionada al cierre de los gates definidos.
-
-Las referencias históricas a bloques previos se conservan como trazabilidad, pero el estado operativo vigente debe leerse desde esta sección.
-<!-- DOC1-R1-POST-MANT1:END -->
-
-## Secuencia operativa UX.5 → UX.6 → NOR.3 → MANT.2 → MANT.1 → DOC.3
-
-UX.5 permanece cerrado/publicado como G120/E01 (`0.1.20.01-beta`).
-
-UX.6 R1–R8 permanece cerrado/publicado como G121/E01 (`0.1.21.01-beta`)
-mediante PR #124 y `v0.1.21.01-beta`.
-
-NOR.3 R1–R8 permanece cerrado/publicado como G122/E01 (`0.1.22.01-beta`)
-mediante `v0.1.22.01-beta`.
-
-MANT.2 R1 permanece cerrado/publicado como G123/E01 (`0.1.23.01-beta`).
-
-MANT.1 R8 permanece cerrado/publicado como G124/E13 (`0.1.24.13-beta`).
-
-DOC.3 R1/#154 está en ejecución sin Global preasignado. G125 permanece
-disponible sin candidato/bloque asignado. PLAN.2 R2/#155 y VER.2 R6/#164
-permanecen sin iniciar. PERSIST.1 continúa planificado y bloqueado hasta
-completar #154 → #155 → #164.
-
-## 1. Propósito
-
-> **Replanificación PLAN.2 R1:** aceptada como G114/E01. La secuencia futura detallada y evolutiva se mantiene en [Matriz maestra de pendientes hacia 1.0](pre-1-0-pending-matrix.md). El plan histórico de 14 bloques se preserva como trazabilidad, mientras la matriz incorpora los nuevos frentes Developer/UX, hardening posterior y congelación documental final sin preasignar Globales futuros.
-
-Este documento ordena el trabajo desde el cierre de `v0.0.25-beta` hasta la primera versión oficial de Mi Retiro Proyectado.
-
-PLAN.1 adoptó originalmente la familia beta legacy `0.0.N-beta`. VER.2, ejecutado después de UX.4.6i, conserva esa familia como historia publicada y adopta para **estados nuevos** el formato revision-aware:
+## 2. Línea base post-G125
 
 ```text
-0.GG.RR.EE-beta
+Global:  G125
+Edition: E01
+Version: 0.1.26.01-beta
+Tag:     v0.1.25.01-beta
+main:    ee077c0d83931f140c91583fa8b2c4ae6b72dec8
+Release: 388866555
 ```
 
-La primera versión oficial objetivo continúa siendo:
+El preflight #166 inmediatamente anterior a PLAN.2 R2 quedó CLEAN y la verificación diferencial confirmó el mismo `main`, 0 PRs abiertos, 0 PRs Dependabot y el mismo Dependency Security verde. No se activó MANT.2 R2.
+
+PLAN.2 R2 se abrió en `plan/plan2-r2-replanificacion-maestra`. `VERSION` permanece en `0.1.26.01-beta`; PLAN.2 todavía no es G126.
+
+## 3. Árbol definitivo de dependencias
 
 ```text
-1.0.0.0
-Build 000001
+G125 / DOC.3 R1 publicado
+→ PLAN.2 R2
+→ VER.2 R6
+→ DOC.4 R1
+→ #142 auditoría previsional
+→ [fases funcionales obligatorias derivadas, si existen]
+→ PERSIST.1
+→ REP.1
+→ DEPLOY.1
+→ UX.7
+→ UX.8
+→ ...
+→ UX.x final realmente necesario
+→ #189 sin drift visual shared
+→ SEC.2 R7
+→ rendimiento #156
+→ A11Y.2
+→ REV.1
+→ #153 settings GitHub
+→ DOC.1 R6
+→ QA.1
+→ REL.1
+→ 1.0.0.0
 ```
 
-No se utilizará `0.1.0-beta.1` como etapa futura vigente.
+#166/MANT.2, DOC.3 y #189 atraviesan el árbol como políticas transversales.
 
-## 2. Regla transversal de sincronización
+## 4. Bloques materiales previos a UX
 
-Todo cambio debe revisar de manera coordinada los artefactos que dependan de él:
+### PLAN.2 R2 — #155
+Clasifica, ordena y sincroniza el programa. No implementa las fases posteriores ni reserva G126 antes de candidato real.
 
-```text
-Código
-↕
-Pruebas
-↕
-Interfaz
-↕
-Normativa
-↕
-Modelo de datos
-↕
-Documentación técnica
-↕
-Documentación pública
-↕
-CHANGELOG / ROADMAP / RELEASES
-↕
-ADR cuando exista una decisión arquitectónica
-↕
-Git / versión / tag / Build cuando corresponda
-```
+### VER.2 R6 — #164
+Primera fase material después de PLAN.2 publicado. Reforma el contrato revision-aware antes de DOC.4 para que registry, ledger, manifests y tooling sean canonizados una sola vez sobre el modelo final.
 
-Un archivo no se modifica de forma aislada si el cambio altera contratos descritos en otros documentos o pruebas.
+### DOC.4 R1 — #171
+Después de VER.2. Lotes internos #172 Markdown, #173 estructura/poda y #174 artefactos declarativos. #174 absorbe #176. DOC.4 crea nuevo baseline documental y reinicia la cadencia DOC.3.
 
-Los comentarios y docstrings del runtime siguen el contrato de ADR-162: explican responsabilidades, motivos, límites y comportamiento permanente, no números cronológicos de fase.
+### Auditoría previsional — #142
+Después de DOC.4 y antes de PERSIST.1. Contrasta SEBD/Mixto/SUCGS, modalidades y prestaciones. Todo faltante obligatorio para 1.0 se crea e inserta antes de PERSIST.1.
 
-La metadata `Versión de aplicación revisada` de un documento de dominio registra la base en la que ese documento fue revisado. No constituye una copia canónica de la versión vigente ni obliga a reescribir documentos no afectados por cada incremento de `VERSION`.
+### PERSIST.1 — #130
+Persistencia voluntaria/versionada, guardar/restaurar/borrar, migraciones, privacidad, contraseña Developer y auditoría técnica transversal. Si crea una nueva superficie visual material, debe registrar la siguiente UX.x disponible antes de cerrar.
 
-## 3. Prerrequisito transversal VER.2
+### REP.1 — #143
+PDF/exportaciones finales reproducibles y trazables. Toda nueva pantalla visible de generación/exportación debe crear la siguiente UX.x disponible; no existe un número UX de informes preasignado.
 
-VER.2 — Reconciliación revision-aware del historial pre-1.0 — **no es un bloque 15**. Es una corrección de gobierno necesaria antes de continuar el bloque 6, DEV.2.
+### DEPLOY.1 — #157
+Runtime/hosting/HTTPS/persistencia/CI-CD. Toda nueva superficie visual material del deployment debe crear la siguiente UX.x disponible antes de cerrar.
 
-Base auditada:
+## 5. Programa UX final — UX.7 → UX.x
 
-```text
-main = 7037addd44253e528c77460b678d2b3ccd540dd5
-G070 / E02 = cierre UX.4.6i
-```
+La ola UX comienza únicamente después de #142/derivados, PERSIST.1, REP.1 y DEPLOY.1. Esto formaliza que la revisión visual final ocurre sobre superficies funcionalmente estables.
 
-Candidato:
+### Regla de granularidad
 
-```text
-G071 / E01 = 0.0.71.01-beta
-```
+**Una UX.x = una superficie, paso o modal material.** No se agrupan varios pasos de Simulación ni varias páginas Developer en una sola fase.
 
-G071 solo se considera aceptado después de gate completo, PR/CI e integración. Un candidato fallido no consume el número.
+### Baseline conocido UX.7–UX.32
 
-Fuentes canónicas:
+| UX | Issue | Superficie |
+| --- | ---: | --- |
+| UX.7 | #133 | Inicio Asegurado `/` + Inicio/Resumen Developer `/dev` autenticado |
+| UX.8 | #134 | Asegurado `/simulacion` — selección Manual/Asistida antes del Paso 1 |
+| UX.9 | #177 | Paso 1 — Datos personales |
+| UX.10 | #178 | Paso 2 — Cuotas |
+| UX.11 | #179 | Paso 3 — Historial y base salarial |
+| UX.12 | #180 | Paso 4 — Proyección y línea temporal |
+| UX.13 | #181 | Paso 5 — Escenarios de retiro |
+| UX.14 | #182 | Paso 6 — Resultados |
+| UX.15 | #183 | Asegurado `/comparar` |
+| UX.16 | #184 | Asegurado `/como-se-calcula` |
+| UX.17 | #185 | Asegurado `/metodologia` |
+| UX.18 | #186 | modal Términos/privacidad/consentimiento |
+| UX.19 | #187 | modal Gestión de datos |
+| UX.20 | #188 | modal Mi Retiro Seguro |
+| UX.21 | #190 | modal Ficha Digital — revisión/importación |
+| UX.22 | #191 | modal Vigencia de Ficha Digital |
+| UX.23 | #192 | Developer — inicio de sesión |
+| UX.24 | #193 | Developer — Diagnóstico |
+| UX.25 | #194 | Developer — Eventos |
+| UX.26 | #195 | Developer — Archivos |
+| UX.27 | #196 | Developer — Mantenimiento |
+| UX.28 | #197 | Developer — Usuarios/RBAC |
+| UX.29 | #198 | Developer — Privacidad |
+| UX.30 | #199 | Developer — Perfil/credenciales web |
+| UX.31 | #200 | Developer — Acceso técnico |
+| UX.32 | #201 | Developer — Centro de desarrollo legacy si continúa soportado |
 
-- `VERSIONING.md`;
-- `docs/archive/governance/pre-1-0-versioning-audit.md`;
-- `docs/governance/pre-1-0-revision-ledger.md`;
-- `docs/archive/governance/ver2-revision-decision-matrix.md`;
-- `data/governance/pre-1-0-revision-ledger.json`;
-- ADR de gobierno correspondiente.
+UX.7 es la única agrupación deliberada: las dos páginas de Inicio forman el punto de identidad de ambos portales. El login Developer es UX.23.
 
-Durante VER.2, DOC.1 R1 fue el bloque documental utilizado para sincronizar la documentación Markdown vigente posterior a MANT.1. Después de NOR.2, DOC.1 R2 ejecutó la auditoría integral Markdown y estableció controles permanentes de regresión. VER.2, DOC.1 R1 y DOC.1 R2 están cerrados, y DEV.2 permanece como bloque funcional cerrado.
+### Regla UX.33+
 
-## 4. Secuencia de 14 bloques
+Si antes del cierre UX aparece otra superficie visual material:
 
-### 1. PLAN.1 — Alineación maestra post-`0.0.25-beta`
+1. crear la siguiente UX consecutiva;
+2. crear Issue propio con alcance/criterio;
+3. actualizar #129, #155 y fuentes vivas inmediatamente;
+4. aplicar #189;
+5. no renumerar UX existentes;
+6. no preasignar Global/VERSION.
 
-Objetivo original:
+## 6. Sincronización visual multiportal — #189
 
-- sustituir el objetivo futuro `0.1.0-beta.1` por `1.0.0.0`;
-- adoptar versión oficial de cuatro componentes;
-- definir Build oficial de seis dígitos;
-- preparar el validador de `VERSION`;
-- registrar la decisión en ADR;
-- alinear documentación vigente y regresiones;
-- preservar sin reescritura la documentación histórica.
+#189 es transversal y no consume Global propio. Cada cambio visual se clasifica como `shared` o `portal-specific`.
 
-**Estado de PLAN.1:** cerrado. R4.2 integró PR #23 y PR #24, superó los checks remotos, revalidó `main` con **720 pruebas en `OK`** sin `SyntaxWarning` y publicó el tag firmado `v0.0.26-beta` (`bfbb746b177ebcc577f7241fef4d6914f713739a` → `b572796d68ff6fd91ce9944a0c6d1cf7d45753a0`).
+Un cambio `shared` debe propagarse a App Asegurado, Portal Developer y portales futuros aplicables. Incluye tokens/paleta, tipografía, tamaños/pesos, colores, botones, inputs, tarjetas, tablas genéricas, badges/alerts, spacing, bordes/radios/sombras, foco, temas Claro/Oscuro/Automático/Alto contraste, forced-colors, motion, selector de apariencia, footer y patrones comunes.
 
-Revisiones internas preservadas:
+Ninguna UX puede cerrar dejando drift conocido en otro portal. Si una dependencia real impide sincronizar en la misma fase, se crea un Issue derivado bloqueante antes del cierre.
 
-- **R1:** política, soporte técnico futuro, plan maestro y regresiones base;
-- **R2A/R2B1/R2B2/R2C:** alineación documental progresiva;
-- **R3A/R3B1/R3B2:** release, terminología, seguridad, privacidad/licencia y guard histórico;
-- **R4.1:** candidato local `0.0.26-beta`;
-- **R4.2:** commit/PR/CI, corrección de higiene, validación y tag firmado.
+## 7. Gate de salida UX y SEC.2 R7
 
-### 2. UX.4.6f — Paso 4 · Proyección salarial/laboral
+SEC.2 R7 no se habilita por alcanzar UX.32. Se habilita únicamente cuando:
 
-**Estado:** cerrado.
+- todas las UX.x obligatorias registradas están cerradas/absorbidas explícitamente;
+- no existe superficie visual material sin UX owner/clasificación;
+- no existe derivado bloqueante de sincronización shared;
+- #189 confirma ausencia de drift shared conocido.
 
-- **R1/R1.1 aceptadas conjuntamente:** PR #28, validación manual y **743 pruebas**;
-- **mantenimiento técnico post-R1:** PR #29, actualización coordinada de `pypdf`/`uvicorn`, mismo gate funcional y estado técnico aceptado independiente;
-- **R2 cerrada:** PR #30, validación manual y **756 pruebas**;
-- **cierre/hardening final:** PR #31, gate `pre-commit` y **762 pruebas**;
-- lógica y precisión de las cuatro modalidades salariales auditadas;
-- separación de información acreditada, datos reales recientes y proyección;
-- trazabilidad hacia Pasos 5 y 6.
+Si SEC.2 R7 escala #152 y eso crea UI nueva, se crea una nueva UX.x y se vuelve a satisfacer el gate antes de continuar.
 
-### 3. UX.4.6g — Paso 5 · Escenarios de retiro
+## 8. Gates finales
 
-**Estado:** cerrado mediante PR #32 con **784 pruebas en `OK`**.
+- **SEC.2 R7 #144:** hardening final del producto/deployment.
+- **Rendimiento #156:** mediciones sobre escenario ya endurecido.
+- **A11Y.2 #145:** auditoría WCAG 2.2 sobre todas las UX.x finales.
+- **REV.1 #146:** revisión normativa/jurídica/privacidad final.
+- **#153:** revalidación final de settings GitHub, sin Global propio mientras sea gate manual.
+- **DOC.1 R6 #147:** freeze documental final.
+- **QA.1 #148:** auditoría integral del candidato beta final.
+- **REL.1 #149:** publicación oficial `1.0.0.0`.
 
-Incluye:
+## 9. Post-1.0
 
-- escenarios de edad/fecha;
-- continuación de cotización;
-- cuotas adicionales;
-- selección explícita/contextual del escenario;
-- retiro anticipado explícito;
-- cobertura por horizonte del Paso 4;
-- validación transversal de fechas;
-- coherencia con los tres sistemas.
+- #131 i18n;
+- #150 sesiones/accesos avanzados;
+- #151 notificaciones Developer;
+- #152 credenciales Bearer granulares por defecto, salvo escalamiento explícito de SEC.2 R7.
 
-Los refinamientos R1.2/R1.3/R1.4/R1.4.2/R1.4.3 permanecen documentados como evolución interna del cierre y no se reinterpretan como tags separados.
+Estas capacidades no crean UX pre-1.0 mientras permanezcan post-1.0.
 
-### 4. UX.4.6h — Paso 6 · Resultados y exportación
+## 10. Cadencia DOC.3
 
-**Estado:** cerrado mediante PR #33 con **812 pruebas**.
+DOC.3 cuenta fases materiales top-level aceptadas, no lotes internos. DOC.4 crea un nuevo baseline y reinicia el contador. Por defecto la siguiente DOC.3 integral ocurre después de la segunda fase material aceptada desde ese baseline, salvo impacto documental alto que justifique adelanto/reset. No se crea ahora DOC.3 R2 ni se reserva Global.
 
-- R1 fue un primer candidato y falló tres regresiones de gobierno/documentación; no consume revisión global aceptada;
-- R1.1 corrigió el candidato y constituye el primer estado aceptado del bloque;
-- R1.2 fue aceptada visualmente y depuró claridad/jerarquía;
-- R1.3 creó el informe A4 imprimible independiente y cerró el bloque.
+## 11. Clasificación
 
-El cierre incorpora selección salarial explícita, invalidación de resultados obsoletos, transición Mixto→SUCGS guiada, presentación depurada, comparación, trazabilidad, fuentes y advertencias. La generación/descarga directa de PDF permanece reservada a REP.1.
+### Obligatorios 1.0
+#164, #171–#174, #142 y derivados obligatorios, #130, #143, #157, #129 y todas las UX.x que registre, #144, #156, #145, #146, #147, #148 y #149.
 
-### 5. UX.4.6i — Cómo se calcula
+### Transversales obligatorios
+#166, #189, #153 y DOC.3 por cadencia.
 
-**Estado:** cerrado mediante PR #34 con **841 pruebas**.
+### Post-1.0
+#131, #150, #151 y #152 por defecto.
 
-La secuencia demostrada por la auditoría canónica es:
+### Absorbidos/cerrados
+#176 → #174; #141 consumido/cerrado.
 
-- **R1:** ruta pública, procedimientos SEBD/Mixto/SUCGS, parámetros y fuentes; estado aceptado G069;
-- **R1.2:** navegación, recorrido Pasos 1–6, formato monetario y densidad de tablas; refinamiento interno sin aceptación independiente recuperada;
-- **R1.3:** ejemplos sustituidos, terminología contextual y espaciado; refinamiento interno sin aceptación independiente recuperada;
-- **R1.4:** etiqueta visible **Ejemplo** y cierre aceptado G070.
+### Opcionales 1.0
+Ninguno identificado.
 
-No existe una sección, gate ni artefacto independiente que sustente una una revisión intermedia no demostrada entre UX.4.6i R1 y R1.2; VER.2 corrige las referencias agregadas que la incluyeron por error.
+## 12. Autoridades sincronizadas
 
-La explicación pública no duplica motores de cálculo en JavaScript y mantiene las fórmulas ejecutables en los motores Python existentes.
+- [Roadmap vigente](roadmap.md)
+- [Matriz maestra de pendientes hacia 1.0](pre-1-0-pending-matrix.md)
+- [Ledger revision-aware pre-1.0](pre-1-0-revision-ledger.md)
+- `data/governance/pre-1-0-revision-ledger.json`
+- `data/governance/work-block-registry.json`
+- `data/governance/release-publication-manifest.json`
+- `VERSIONING.md`
+- `GOVERNANCE.md`
+- Issues propietarios
 
-### 6. DEV.2 — Centro de desarrollo
+El ledger y manifest no reservan PLAN.2 R2/G126 antes de aceptación. La historia G001–G125 permanece inmutable.
 
-**Estado:** R5 cerrado/aceptado/publicado como G118/E04; R6 cerrado/aceptado/publicado como G119/E05.
+## 13. Continuidad
 
-> Ancla histórica preservada por pruebas de regresión: **Estado:** siguiente bloque funcional; pendiente de inicio hasta cerrar VER.2.
-
-Evolución visible y controlada de Developer Diagnostics:
-
-- R1–R3 quedan preservados como G071–G073;
-- R4 fue un cierre documental y no consumió Global independiente;
-- R5 establece `/dev` como entrada humana canónica;
-- R5 separa sesión administrativa web y acceso técnico Bearer;
-- R5 limita la cookie administrativa a `Path=/dev`;
-- R5 incorpora shell/login Developer independiente de la navegación pública;
-- R5 preserva logs estructurados, correlation ID, autodiagnóstico y ZIP sanitizado en la capa de servicio;
-- R6 convirtió el portal en superficies independientes de resumen, diagnóstico, eventos, archivos, mantenimiento y privacidad;
-- R6 expone descarga segura del ZIP diagnóstico y mantenimiento controlado con protección CSRF, revalidación y confirmación reforzada;
-- ninguna superficie Developer debe incorporar PII ni valores financieros sensibles a logs o artefactos diagnósticos.
-
-### 7. SEC.2 — Hardening integral
-
-**Estado:** cerrado después de completar R1-R6.
-
-- autenticación y sesiones administrativas;
-- gestión de secretos;
-- CSP;
-- CORS/CSRF según superficie real;
-- seguridad de archivos;
-- permisos locales;
-- endurecimiento del servidor;
-- Bootstrap local o decisión final documentada;
-- dependencias;
-- SBOM/inventario;
-- seguridad de persistencia;
-- cifrado donde exista información persistente que lo requiera;
-- evaluación de despliegue remoto si se adopta.
-
-#### Checkpoint transversal REL.GOV.1 — Gobierno de GitHub Releases
-
-**Estado:** cerrado; G110/E01 (`0.1.10.01-beta`) aceptado mediante PR #85 y merge `5cd1cea`; no añade un bloque funcional al programa de 14 bloques.
-
-Objetivo previo a DOC.2:
-
-- normalizar la interpretación viva de `v0.0.71.01-beta` como G087/E01 sin alterar su tag histórico;
-- exigir un formato canónico para títulos y cuerpos de GitHub Release;
-- distinguir de forma determinística prerelease beta y release estable;
-- prohibir Releases retroactivos para estados aceptados que nunca tuvieron tag;
-- configurar `.github/release.yml` para categorización asistida;
-- validar VERSION, ledger y tag con `scripts/release_contract.py`;
-- extender el workflow de tags para ejecutar el contrato en todo tag futuro;
-- fijar reglas de edición posterior que preserven firma, commit objetivo y evidencia histórica.
-
-REL.GOV.1 superó gate, PR/CI e integración y consumió G110; la promoción PR #86 publicó `v0.1.10.01-beta`. DOC.2 R1 superó gate, PR #87, CI, integración y revalidación post-merge, por lo que G111/E01 (`0.1.11.01-beta`) quedó aceptado; G112/E07 (`0.1.12.07-beta`) quedó aceptado para NOR.1 R8 y G113/E03 (`0.1.13.03-beta`) para DOC.1 R3. En aquel plan, G114/E01 se proyectaba para PERSIST.1; PLAN.2 R1 reasignó posteriormente esa reserva y quedó aceptado/publicado como G114/E01. Después quedaron aceptados/publicados DOC.1 R4 como G115/E04, DOC.1 R5 como G116/E05 y REL.GOV.1 R2 como G117/E02; DEV.2 R5 queda aceptado/publicado como G118/E04; DEV.2 R6 queda aceptado/publicado como G119/E05; UX.5 R1–R6 quedan consolidados y aceptados como G120/E01; UX.6 R1 queda reservado como G121/E01. PERSIST.1 se mantiene como etapa posterior.
-
-### 8. DOC.2 — CHANGELOG detallado `0.0.1-beta`–`0.0.21-beta`
-
-**Estado:** cerrado en R1 como G111/E01 (`0.1.11.01-beta`) mediante PR #87; posteriormente quedaron aceptados NOR.1 R8 como G112/E07, DOC.1 R3 como G113/E03, PLAN.2 R1 como G114/E01, DOC.1 R4 como G115/E04, DOC.1 R5 como G116/E05 y REL.GOV.1 R2 como G117/E02. DEV.2 R5 queda aceptado/publicado como G118/E04; DEV.2 R6 queda aceptado/publicado como G119/E05 y el candidato vigente es UX.5 R6 como cierre consolidado G120/E01; UX.6 queda planificado a continuación.
-
-Reconstrucción basada exclusivamente en evidencia:
-
-- rangos Git de `RELEASES.md`;
-- commits reales;
-- `docs/archive/governance/historical-change-registry.md`;
-- documentación histórica;
-- ADR;
-- pruebas disponibles.
-
-No se inventará detalle retrospectivo no sustentado.
-
-#### Checkpoint transversal NOR.1 R8 — Gobierno de identificadores de bloques
-
-**Estado:** cerrado/aceptado como G112/E07 (`0.1.12.07-beta`) después de PR #89 y PR #90.
-
-Amplía NOR.1 sin añadir un bloque funcional al programa de 14 bloques. Define familias, namespaces, revisiones, reservas y un registro machine-readable. DOC.1 R3 se ejecutó posteriormente como auditoría Markdown transversal; PLAN.2 R1 quedó aceptado después, DOC.1 R4 quedó aceptado/publicado como G115/E04, DOC.1 R5 como G116/E05 y REL.GOV.1 R2 como G117/E02. DEV.2 R5 queda aceptado/publicado como G118/E04; DEV.2 R6 queda aceptado/publicado como G119/E05 y UX.5 R6 queda aceptado como G120/E01 y UX.6 R1 como candidato G121/E01.
-
-#### Checkpoint transversal DOC.1 R3 — etiquetas visibles de enlaces Markdown
-
-**Estado:** cerrado/aceptado como G113/E03 (`0.1.13.03-beta`) mediante PR #92 / merge `40ae5c0`, posterior a G112/E07; después quedaron aceptados PLAN.2 R1 como G114/E01, DOC.1 R4 como G115/E04, DOC.1 R5 como G116/E05 y REL.GOV.1 R2 como G117/E02. DEV.2 R5 queda aceptado/publicado como G118/E04; DEV.2 R6 queda aceptado/publicado como G119/E05 y UX.5 R6 queda como candidato vigente de cierre G120/E01; UX.6 queda planificado a continuación.
-
-Audita documentación viva para sustituir etiquetas visibles basadas únicamente en rutas/URLs por nombres humanos legibles cuando el path no sea semánticamente necesario; preserva `docs/archive/` y añade regresión de enlaces.
-
-### 9. PERSIST.1 — Persistencia voluntaria y segura
-
-**Estado:** etapa funcional posterior a NOR.3 y sin Global preasignado; permanece planificada y no iniciada hasta el cierre de NOR.3 y la replanificación post-NOR.3 de #155.
-
-- guardado solo por decisión del asegurado;
-- modelo de datos versionado;
-- migraciones;
-- cifrado/protección aplicable;
-- borrado;
-- exportación/importación controlada;
-- revisión de privacidad.
-
-### 10. REP.1 — Informes PDF y exportaciones finales
-
-- PDF;
-- formatos seleccionables;
-- versión de aplicación y metodología;
-- trazabilidad;
-- accesibilidad;
-- metadatos mínimos;
-- protección de datos.
-
-### 11. A11Y.2 — Auditoría WCAG 2.2 ampliada
-
-- teclado;
-- lector de pantalla;
-- zoom;
-- alto contraste;
-- colores forzados;
-- navegadores;
-- dispositivos;
-- exportaciones;
-- formularios;
-- modales y navegación.
-
-### 12. REV.1 — Revisión normativa, jurídica, privacidad y seguridad final
-
-- fuentes oficiales;
-- interpretación de los tres motores;
-- parámetros;
-- limitaciones;
-- privacidad;
-- licencia;
-- terceros;
-- revisión jurídica externa cuando corresponda.
-
-### 13. QA.1 — Auditoría integral de cierre de la etapa beta
-
-Gate transversal:
-
-```text
-Código
-↔ pruebas
-↔ documentación
-↔ normativa
-↔ UX
-↔ seguridad
-↔ accesibilidad
-↔ release
-```
-
-Mientras este bloque no cierre, la aplicación permanece en la familia beta revision-aware `0.GG.RR.EE-beta`.
-
-### 14. REL.1 — Preparación de la primera versión oficial
-
-Objetivo inicial:
-
-```text
-Versión 1.0.0.0
-Build 000001
-Tag v1.0.0.0
-```
-
-Debe incluir:
-
-- congelación funcional;
-- build reproducible;
-- fuente canónica de Build;
-- empaquetado;
-- inventario/SBOM;
-- licencias y avisos;
-- hashes;
-- firma;
-- documentación de instalación/uso/soporte;
-- release notes;
-- validación en entorno limpio;
-- CI final;
-- tag firmado;
-- política de distribución.
-
-## 5. Estado al comenzar PLAN.1
-
-La versión base fue:
-
-```text
-0.0.25-beta
-```
-
-El tag `v0.0.25-beta` es histórico e inmutable. PLAN.1 no movió ese tag.
-
-## 6. Criterio histórico de salida de PLAN.1
-
-PLAN.1 quedó cerrado porque:
-
-- las referencias vigentes dejaron de presentar `0.1.0-beta.1` como objetivo futuro;
-- la documentación histórica conservó su contexto sin reescritura;
-- `VERSIONING.md` y el validador Python admitieron la línea oficial futura;
-- ADR-168 registró la decisión;
-- ROADMAP, README, RELEASES, CHANGELOG, índice, validación y documentos dependientes quedaron sincronizados;
-- compilación Python, sintaxis JavaScript, `git diff --check` y suite completa quedaron limpios;
-- el cierre formal siguió commit, PR, CI, squash, revalidación y tag aplicable.
-
-VER.2 no invalida ese cierre: corrige únicamente la granularidad y trazabilidad de la etapa beta posterior.
-
-<!-- ANCLAS_HISTORICAS_VER2_PLAN_CONSOLIDADAS -->
-
-## Compatibilidad histórica preservada por VER.2
-
-- **GOV.1.8 — Auditoría final y cierre pre-beta de gobierno** queda preservado como cierre histórico previo a PLAN.1.
-- R4.1 — candidato local `0.0.26-beta`.
-- R4.2 integró el cierre de PLAN.1 mediante PR protegido y preservó `v0.0.26-beta`.
-- R4.2 — PR #23/#24 preservan la integración y saneamiento final de PLAN.1 antes del tag `v0.0.26-beta`.
-- Después de su cierre se habilitó UX.4.6g.
-
-## Registro histórico NOR.2 R4 — normalización documental viva
-
-La documentación vigente queda distribuida entre `architecture/`, `decisions/`, `governance/`, `operations/`, `product/`, `regulatory/`, `security/` y `standards/`. R5 archivará o retirará del árbol vivo los documentos históricos definidos por R2.
-
-## Registro histórico NOR.2 R5 — archivo documental histórico
-
-NOR.2 R5 separa evidencia histórica de documentación viva mediante 36
-movimientos hacia `docs/archive/`. `VERSION` no cambiaba y SEC.2 permanecía pausado
-en ese checkpoint hasta completar NOR.2.
-
-<!-- NOR2-R6-LEDGER:START -->
-## Registro histórico — actualización NOR.2 R6
-
-La normalización del ledger de alto impacto conserva como invariantes:
-
-- `schema_version = 1`;
-- 70 entradas continuas G001–G070;
-- siguiente Global 71;
-- candidato `0.0.71.01-beta`;
-- SHA-256
-  `f5e0020643b324119855693588469eb8c98a0abafdb8f6108d60d5fb03a2288e`.
-
-El consumidor de runtime y la documentación viva utilizan
-`data/governance/pre-1-0-revision-ledger.json`.
-
-La evidencia histórica conserva los nombres que existían cuando fue generada.
-No se crean stubs ni copias de compatibilidad.
-
-R6 quedó integrado en `main` mediante PR #72 y commit squash `365ba5b`.
-
-R7 queda como revisión activa para resolver los artefactos locales heredados.
-R8 ejecutará el cierre integral de NOR.2 antes de reanudar SEC.2.
-<!-- NOR2-R6-LEDGER:END -->
-
-<!-- NOR2-R7-LOCAL-ARTIFACTS:START -->
-## Actualización NOR.2 R7
-
-NOR.2 R7 resuelve la excepción transitoria de artefactos locales heredados bajo
-`_entregas/`.
-
-La línea base comprobada fue de **29 archivos y 9,874,828 bytes**.
-
-La migración local conserva como invariantes:
-
-- la evidencia local útil no se incorpora al árbol Git;
-- `_deliverables/` pasa a ser la ubicación local canónica;
-- **20 evidencias únicas** permanecen conservadas;
-- **2** corresponden a DEV.2;
-- **18** corresponden a VER.2 R2;
-- **8 duplicados SHA-256 exactos** se retiran conservando una copia;
-- `_entregas/` deja de existir como ubicación activa;
-- `_deliverables/` y `_entregas/` permanecen ignorados por Git.
-
-El paquete `VER2_PR35_NETO_929628d.zip`, de **8,412,675 bytes**, se retiró
-únicamente después de comprobar que era completamente reproducible desde el
-commit Git `929628df38d4750fb103ffc79bdb81f8405535bb`.
-
-La comparación verificó:
-
-- archivos Git: **329**;
-- archivos ZIP: **329**;
-- archivos comunes: **329**;
-- solo Git: **0**;
-- solo ZIP: **0**;
-- diferencias de contenido: **0**.
-
-La historia y evidencia versionada permanecen preservadas mediante Git. El
-manifest detallado de los artefactos locales se mantiene fuera del repositorio.
-
-R7 permanece activo hasta completar sus gates, PR, CI e integración en `main`.
-
-Después de R7 solo queda **NOR.2 R8 — auditoría integral y cierre formal**.
-SEC.2 quedó cerrado tras completar sus controles planificados hasta completar R8.
-<!-- NOR2-R7-LOCAL-ARTIFACTS:END -->
-
-<!-- NOR2-R8-FINAL-AUDIT:START -->
-## Registro histórico — actualización NOR.2 R8
-
-R8 constituye el gate final de normalización antes de SEC.2.
-
-La auditoría integral confirma:
-
-- raíz y estructura documental canónicas;
-- ausencia de residuos técnicos de las migraciones R3–R7;
-- retiro de dos artefactos transitorios directos de `docs/`;
-- artefactos locales preservados fuera de Git;
-- documentación viva sincronizada con VER.2 cerrado, NOR.1 cerrado,
-  NOR.2 R7 cerrado y R8 cerrado;
-- versión `0.0.71.01-beta` preservada;
-- ledger G001–G070 preservado;
-- regresiones específicas de normalización en `OK`;
-- CI remota y auditoría de gobernanza en verde después de hacer reproducible el guard de artefactos locales.
-
-R8 quedó integrado mediante PR #74 y commit squash `b4df9b7`. Con esa integración, **NOR.2 queda formalmente cerrado**.
-
-En ese checkpoint, SEC.2 quedaba habilitado para reanudación y todavía no se había iniciado formalmente. El estado vigente posterior es su cierre R1–R6.
-<!-- NOR2-R8-FINAL-AUDIT:END -->
-
-**SEC.2 R6:** endurecimiento de sesión administrativa web y controles configurables de despliegue.
-
-## Estado transversal vigente después de SEC.2
-
-SEC.2 está cerrado después de R1–R6. Antes de abrir DOC.2, AUD.SEC2 R1 ejecuta
-una auditoría integral post-cierre porque el snapshot `4bd7d8d` reveló una
-regresión del kill switch administrativo y un ledger revision-aware incompleto.
-
-La reconciliación preserva G001–G070, reconstruye G071–G108 y AUD.SEC2 R1 queda aceptado/publicado como G109/E01 (`0.1.09.01-beta`). G110/E01 (`0.1.10.01-beta`) quedó aceptado para REL.GOV.1 mediante PR #85 y merge `5cd1cea`. El tag `v0.0.71.01-beta` se conserva inmutable aunque su estado corresponda cronológicamente a G087. Tras aceptar REL.GOV.1, el plan continúa con **DOC.2** usando el siguiente Global disponible.
+La siguiente fase material es VER.2 R6/#164, únicamente después de que PLAN.2 R2 sea validado, aceptado, integrado, publicado y un preflight fresco #166 vuelva a quedar limpio.

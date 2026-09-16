@@ -24,12 +24,20 @@ class TestNOR3R8Closure(unittest.TestCase):
         self.assertIsNone(candidate["revision"])
         self.assertIsNone(candidate["revision_scope"])
         self.assertEqual("unassigned", candidate["state"])
-        self.assertEqual(126, candidate["next_global_available"])
+        self.assertEqual(127, candidate["next_global_available"])
         identifiers = {item["identifier"]: item for item in data["identifiers"]}
         self.assertEqual("closed", identifiers["NOR.3"]["status"])
         self.assertEqual("R1-R8", identifiers["NOR.3"]["active_scope"])
         self.assertEqual(["G122"], identifiers["NOR.3"]["global_refs"])
-        self.assertEqual("accepted_pending_publication", identifiers["DOC.3"]["status"])
+        self.assertEqual("closed", identifiers["DOC.3"]["status"])
+        self.assertEqual(["G125"], identifiers["DOC.3"]["global_refs"])
+
+        active = data["active_phase"]
+        self.assertEqual("PLAN.2", active["block"])
+        self.assertEqual("R2", active["revision"])
+        self.assertEqual(155, active["issue"])
+        self.assertEqual("accepted_pending_publication", active["state"])
+        self.assertEqual(126, active["global_revision"])
 
     def test_policy_declara_cierre_r8_sin_simular_auditoria_posterior(self):
         data = json.loads(POLICY.read_text(encoding="utf-8"))

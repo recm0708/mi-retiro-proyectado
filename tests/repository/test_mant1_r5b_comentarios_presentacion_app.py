@@ -79,18 +79,81 @@ class TestMant1R5BComentariosPresentacionApp(unittest.TestCase):
                     "Los comentarios de app deben describir intención permanente, no trazabilidad histórica.",
                 )
 
-    def test_documentacion_transversal_registra_r5b_y_alcance_excluido(self):
+    def test_historia_r5b_y_alcance_excluido_usan_fuentes_correctas(self):
         for ruta in DOCS:
-            texto = ruta.read_text(encoding="utf-8")
-            with self.subTest(ruta=ruta.as_posix()):
-                self.assertIn("MANT.1 R5B", texto)
-        changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
-        self.assertIn("no cambia `VERSION`", changelog)
-        self.assertIn("`APP_VERSION`", changelog)
-        self.assertIn("motores previsionales", changelog)
-        self.assertIn("regulations", changelog)
-        self.assertIn("SEC.2", changelog)
+            if ruta == (
+                ROOT
+                / "docs"
+                / "governance"
+                / "roadmap.md"
+            ):
+                continue
 
+            texto = ruta.read_text(
+                encoding="utf-8"
+            )
+
+            with self.subTest(
+                ruta=ruta.as_posix()
+            ):
+                self.assertIn(
+                    "MANT.1 R5B",
+                    texto,
+                )
+
+        ledger = (
+            ROOT
+            / "docs"
+            / "governance"
+            / "pre-1-0-revision-ledger.md"
+        ).read_text(encoding="utf-8")
+
+        self.assertIn("G078", ledger)
+        self.assertIn(
+            "MANT.1 R5B",
+            ledger,
+        )
+
+        changelog = (
+            ROOT / "CHANGELOG.md"
+        ).read_text(encoding="utf-8")
+
+        self.assertIn(
+            "no cambia `VERSION`",
+            changelog,
+        )
+        self.assertIn(
+            "`APP_VERSION`",
+            changelog,
+        )
+        self.assertIn(
+            "motores previsionales",
+            changelog,
+        )
+        self.assertIn(
+            "regulations",
+            changelog,
+        )
+        self.assertIn(
+            "SEC.2",
+            changelog,
+        )
+
+        roadmap = (
+            ROOT
+            / "docs"
+            / "governance"
+            / "roadmap.md"
+        ).read_text(encoding="utf-8")
+
+        self.assertIn(
+            "G125/E01",
+            roadmap,
+        )
+        self.assertIn(
+            "PLAN.2 R2",
+            roadmap,
+        )
 
 if __name__ == "__main__":
     unittest.main()

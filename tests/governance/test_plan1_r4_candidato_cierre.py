@@ -1,5 +1,6 @@
 """PLAN.1 R4.2 — preservación histórica del cierre formal de PLAN.1."""
 
+import json
 from pathlib import Path
 import unittest
 import warnings
@@ -65,16 +66,91 @@ class TestPlan1R4CandidatoCierre(unittest.TestCase):
         self.assertIn("v0.0.25-beta", texto)
         self.assertIn("7affa00e2530aeede066c10ecfee8c6dbd49b10b", texto)
 
-    def test_roadmap_y_plan_maestro_preservan_r4_1_r4_2(self):
-        roadmap = (DOCS / "governance/roadmap.md").read_text(encoding="utf-8")
-        plan = (DOCS / "governance/master-plan-to-1-0.md").read_text(encoding="utf-8")
-        self.assertIn("R4.1 — candidato local `0.0.26-beta`", roadmap)
-        self.assertIn("**720 pruebas en `OK`**", roadmap)
-        self.assertIn("R4.2 — PR #23/#24", roadmap)
-        self.assertIn("**Cierre histórico de PLAN.1:** `0.0.26-beta`", plan)
-        self.assertIn("**Estado de PLAN.1:** cerrado", plan)
-        self.assertIn("PR #23 y PR #24", plan)
-        self.assertIn("`v0.0.26-beta`", plan)
+    def test_plan1_r4_1_r4_2_se_preservan_en_ledger_y_release(self):
+        ledger = json.loads(
+            (
+                ROOT
+                / "data/governance/"
+                "pre-1-0-revision-ledger.json"
+            ).read_text(encoding="utf-8")
+        )
+
+        entries = {
+            item["global_revision"]: item
+            for item in ledger["entries"]
+        }
+
+        g59 = entries[59]
+        g60 = entries[60]
+
+        self.assertEqual(
+            "PLAN.1",
+            g59["block"],
+        )
+        self.assertEqual(
+            "R4.1 — candidato local cerrado",
+            g59["state"],
+        )
+        self.assertIn(
+            "PR #23",
+            g59["evidence"],
+        )
+        self.assertIn(
+            "720 pruebas",
+            g59["evidence"],
+        )
+
+        self.assertEqual(
+            "PLAN.1",
+            g60["block"],
+        )
+        self.assertEqual(
+            "R4.2 — higiene y cierre formal",
+            g60["state"],
+        )
+        self.assertEqual(
+            "v0.0.26-beta",
+            g60["anchor"],
+        )
+        self.assertIn(
+            "PR #24",
+            g60["evidence"],
+        )
+
+        releases = (
+            ROOT / "RELEASES.md"
+        ).read_text(encoding="utf-8")
+
+        self.assertIn(
+            "cierre formal de PLAN.1",
+            releases,
+        )
+        self.assertIn(
+            "v0.0.26-beta",
+            releases,
+        )
+
+        roadmap = (
+            DOCS / "governance/roadmap.md"
+        ).read_text(encoding="utf-8")
+
+        plan = (
+            DOCS
+            / "governance/master-plan-to-1-0.md"
+        ).read_text(encoding="utf-8")
+
+        for documento in (
+            roadmap,
+            plan,
+        ):
+            self.assertIn(
+                "PLAN.2 R2",
+                documento,
+            )
+            self.assertIn(
+                "G125/E01",
+                documento,
+            )
 
     def test_validacion_preserva_cierre_posttag(self):
         texto = (DOCS / "operations/validation.md").read_text(encoding="utf-8")

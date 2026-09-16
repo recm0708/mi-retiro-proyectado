@@ -28,47 +28,76 @@ class TestDOC1R4LiveStateSanitization(unittest.TestCase):
         self.assertIn("v0.1.14.01-beta", releases)
     def test_historia_g115_y_transicion_actual_usan_fuentes_canonicas(self):
         ledger = cargar_ledger()
-        g115 = next(
-            entry
-            for entry in ledger["entries"]
-            if entry["global_revision"] == 115
-        )
-        g117 = next(
-            entry
-            for entry in ledger["entries"]
-            if entry["global_revision"] == 117
-        )
 
-        self.assertEqual("DOC.1", g115["block"])
-        self.assertEqual(4, g115["ordinal"])
-        self.assertEqual("0.1.15.04-beta", g115["revision_aware"])
-        self.assertEqual("REL.GOV.1", g117["block"])
-        self.assertEqual(2, g117["ordinal"])
+        expected = {
+            115: ("DOC.1", 4, "0.1.15.04-beta"),
+            117: ("REL.GOV.1", 2, "0.1.17.02-beta"),
+            118: ("DEV.2", 4, "0.1.18.04-beta"),
+            119: ("DEV.2", 5, "0.1.19.05-beta"),
+            120: ("UX.5", 1, "0.1.20.01-beta"),
+            121: ("UX.6", 1, "0.1.21.01-beta"),
+            122: ("NOR.3", 1, "0.1.22.01-beta"),
+        }
+
+        by_global = {
+            entry["global_revision"]: entry
+            for entry in ledger["entries"]
+        }
+
+        for global_revision, (
+            block,
+            ordinal,
+            revision_aware,
+        ) in expected.items():
+            with self.subTest(global_revision=global_revision):
+                entry = by_global[global_revision]
+                self.assertEqual(block, entry["block"])
+                self.assertEqual(ordinal, entry["ordinal"])
+                self.assertEqual(
+                    revision_aware,
+                    entry["revision_aware"],
+                )
 
         matrix = (
             ROOT / "docs/governance/pre-1-0-pending-matrix.md"
         ).read_text(encoding="utf-8")
-        self.assertIn("Cerrado/aceptado G115/E04", matrix)
-        self.assertIn("DOC.1 R4", matrix)
-        self.assertIn("Cerrado/aceptado G117/E02", matrix)
-        self.assertIn("Cerrado/aceptado G118/E04", matrix)
-        self.assertIn("Cerrado/aceptado/publicado G119/E05", matrix)
-        self.assertIn("Cerrado/aceptado G120/E01", matrix)
-        self.assertIn("Cerrado/aceptado G121/E01", matrix)
-        self.assertIn("Cerrado/aceptado G122/E01", matrix)
 
-        releases = (ROOT / "RELEASES.md").read_text(encoding="utf-8")
-        self.assertIn("v0.1.15.04-beta", releases)
+        # La matriz es autoridad del trabajo vivo, no un ledger histórico.
+        self.assertIn("PLAN.2 R2", matrix)
+        self.assertIn("VER.2 R6", matrix)
+        self.assertIn("DOC.4 R1", matrix)
+        self.assertIn("PERSIST.1", matrix)
+        self.assertNotIn(
+            "Cerrado/aceptado G115/E04",
+            matrix,
+        )
+
+        releases = (
+            ROOT / "RELEASES.md"
+        ).read_text(encoding="utf-8")
+        self.assertIn(
+            "v0.1.15.04-beta",
+            releases,
+        )
 
         registry = json.loads(
-            (ROOT / "data/governance/work-block-registry.json").read_text(
-                encoding="utf-8"
-            )
+            (
+                ROOT
+                / "data/governance/work-block-registry.json"
+            ).read_text(encoding="utf-8")
         )
+
         candidate = registry["current_candidate"]
+        self.assertEqual(
+            "unassigned",
+            candidate["state"],
+        )
         self.assertIsNone(candidate["global_revision"])
         self.assertIsNone(candidate["block"])
-        self.assertIsNone(candidate["revision"])
+        self.assertEqual(
+            127,
+            candidate["next_global_available"],
+        )
 
     def test_ledger_markdown_registra_g115(self):
         text=(ROOT/"docs/governance/pre-1-0-revision-ledger.md").read_text(encoding="utf-8"); self.assertIn("| G115 | `0.1.15.04-beta` | DOC.1 R4",text)
