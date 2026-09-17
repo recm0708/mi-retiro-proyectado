@@ -20,53 +20,47 @@
 <!-- NOR3-G122-PROMOTION:END -->
 
 <!-- POST-NOR3-INTERMEDIATE-SEQUENCE:START -->
-## Secuencia intermedia obligatoria post-NOR.3
+## Estado vigente post-G125 / PLAN.2 R2
 
-G124/MANT.1 R8 permanece cerrado/publicado como `v0.1.24.13-beta` y constituye
-la base material inmediatamente anterior.
+DOC.3 R1/#154 está cerrado, integrado y publicado como **G125/E01**
+(`0.1.25.01-beta`) sobre
+`main@ee077c0d83931f140c91583fa8b2c4ae6b72dec8`, con tag firmado
+`v0.1.25.01-beta` y GitHub Release prerelease 388866555.
 
-DOC.3 R1 / Issue #154 se materializa localmente como **G125/E01**
-(`0.1.25.01-beta`) después de completar la auditoría integral, la normalización
-Markdown 173/173, el registro de DOC.4/#171 como trabajo diferido y el preflight
-final #166 sin trabajo material nuevo de dependencias.
+PLAN.2 R2/#155 está aceptado localmente como G126/E01 (`0.1.26.01-beta`) y pendiente de publicación en la rama
+`plan/plan2-r2-replanificacion-maestra`. G127 permanece libre: no tiene
+candidato, bloque ni `VERSION` preasignados.
 
-El estado G125/E01 queda **aceptado localmente y pendiente de publicación**.
-Su cierre definitivo requiere PR/merge, revalidación de `main`, tag firmado y
-GitHub Release prerelease. PLAN.2 R2/#155 no inicia hasta completar esa
-publicación.
+La continuidad material vigente es:
 
-La continuidad posterior a la publicación de G125 queda:
+1. **PLAN.2 R2 / #155** — replanificación y sincronización del programa.
+2. **VER.2 R6 / #164** — primera fase material después de publicar PLAN.2.
+3. **DOC.4 R1 / #171** — reingeniería documental después de VER.2.
+4. **Auditoría previsional / #142** y derivados funcionales obligatorios.
+5. **PERSIST.1 / #130 → REP.1 / #143 → DEPLOY.1 / #157**.
+6. **UX.7 → UX.x** — baseline conocido UX.7–UX.32 y expansión UX.33+ si
+   aparecen nuevas superficies; #189 exige sincronización visual multiportal.
+7. **SEC.2 R7 → rendimiento → A11Y.2 → REV.1 → #153 → DOC.1 R6 → QA.1 → REL.1**.
 
-1. **PLAN.2 R2 — Issue #155:** replanificación maestra post-DOC.3.
-   Debe ubicar DOC.4 R1/#171 y sus lotes #172/#173/#174.
-2. **VER.2 R6 — Issue #164:** reforma del versionado beta y del componente
-   futuro dedicado a fases MANT.2/Dependabot.
-3. **PERSIST.1 — Issue #130:** permanece bloqueado hasta completar la secuencia
-   que determine PLAN.2 R2 y VER.2 R6.
-
-G126 queda únicamente como siguiente Global disponible y no se asigna por
-adelantado. Antes de cada fase futura se repite el preflight #166; un lote
-material nuevo de dependencias inserta MANT.2 R2+.
+Antes y después de cada fase material se aplica #166. Un trabajo material nuevo
+de dependencias antepone MANT.2 R2+ y obliga a sincronizar el árbol antes de
+continuar.
 <!-- POST-NOR3-INTERMEDIATE-SEQUENCE:END -->
 
 <!-- DOC1-R1-POST-MANT1:START -->
-## Estado de seguridad post-MANT.1
+## Estado de seguridad vigente
 
-La versión canónica vigente es `0.1.25.01-beta` / G125/E01.
+La versión canónica vigente es `0.1.26.01-beta` / G126/E01, aceptada localmente y pendiente de publicación. La última publicación formal permanece en `0.1.25.01-beta` / G125/E01.
 
-- DOC.3 R1 está materializado como G125/E01 y pendiente de publicación.
-- G124/E13 permanece como última beta publicada mediante
-  `v0.1.24.13-beta` y GitHub Release prerelease.
-- G123/E01 permanece publicado como `v0.1.23.01-beta`.
-- El preflight final #166 previo a G125 cerró con `pip-audit --strict` y
-  `npm audit --prefix scripts --audit-level=high` sin vulnerabilidades conocidas.
-- Dependabot alerts abiertos: 0; PRs Dependabot abiertos: 0.
-- R8 de UX.6 preserva sesiones por cuenta, cookie, RBAC visual, assets y favicon.
-- Perfil/avatar y auditoría Developer permanecen separados de datos previsionales.
-- El login humano sigue separado del Bearer técnico.
-- G126 queda disponible sin candidato ni bloque preasignado.
-- PLAN.2 R2/#155 permanece sin iniciar hasta publicar G125/E01.
-- PERSIST.1 permanece planificado, no iniciado y sin Global preasignado.
+- DOC.3 R1 está cerrado/publicado mediante `v0.1.25.01-beta`.
+- El preflight #166 de entrada a PLAN.2 R2 quedó CLEAN y no apareció trabajo
+  material nuevo de dependencias.
+- PLAN.2 R2/#155 está aceptado localmente como G126/E01 (`0.1.26.01-beta`) y pendiente de publicación; G127 sigue
+  libre.
+- Login humano y Bearer técnico continúan separados.
+- PERSIST.1, REP.1 y DEPLOY.1 permanecen pendientes antes de la ola UX final.
+- SEC.2 R7/#144 se ejecutará únicamente después de cerrar toda UX.7→UX.x y de
+  que #189 confirme ausencia de drift visual shared bloqueante.
 - REL.GOV.1 mantiene la firma del tag fuera de GitHub Actions.
 <!-- DOC1-R1-POST-MANT1:END -->
 
@@ -76,7 +70,8 @@ Mi Retiro Proyectado se encuentra en **desarrollo beta**. Los estados histórico
 
 | Línea | Soporte de seguridad |
 | --- | --- |
-| `0.1.25.01-beta` | Beta vigente G125/E01 materializada para DOC.3 R1; publicación pendiente de PR/merge, tag firmado y GitHub Release prerelease; Quality Gate y preflight #166 verdes |
+| `0.1.26.01-beta` | Beta vigente candidata G126/E01 / PLAN.2 R2 aceptado localmente; publicación pendiente; Quality Gate FULL y preflight #166 limpios |
+| `0.1.25.01-beta` | Beta previa publicada G125/E01 / DOC.3 R1 mediante tag firmado `v0.1.25.01-beta` y GitHub Release prerelease |
 | `0.1.24.13-beta` | Beta previa G124/E13 publicada para MANT.1 R8 mediante PR #170, tag firmado `v0.1.24.13-beta` y GitHub Release prerelease |
 | `0.1.23.01-beta` | Beta previa G123/E01 publicada para MANT.2 R1 mediante tag firmado `v0.1.23.01-beta` y GitHub Release prerelease |
 | `0.1.22.01-beta` | Beta previa G122/E01 publicada para NOR.3; tag firmado y GitHub Release prerelease preservados |

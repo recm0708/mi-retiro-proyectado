@@ -145,24 +145,62 @@ class TestGovFirmaGit(unittest.TestCase):
         self.assertEqual(list(range(1, max(ids) + 1)), ids)
         self.assertEqual(list(range(1, 160)), ids[:159])
 
-    def test_roadmap_declara_version_canonica_y_prebloque_firma(self):
-        texto = (DOCS / "governance/roadmap.md").read_text(encoding="utf-8")
-        self.assertIn(f"**Versión vigente:** `{self.version}`", texto)
-        self.assertIn("Firma e integridad Git/GitHub", texto)
-        self.assertIn("- [x] primer commit nuevo firmado y verificado por GitHub;", texto)
-        self.assertIn("- [x] materialización firmada de `v0.0.1-beta` a `v0.0.21-beta`;", texto)
-        self.assertIn("- [x] reemisión firmada única de `v0.0.22-beta` y `v0.0.23-beta`;", texto)
-        self.assertIn("- [x] auditoría local/remota 23/23 tags;", texto)
-        self.assertIn("- [x] ruleset de tags;", texto)
-        self.assertIn("- [x] protección/ruleset de `main`;", texto)
-        self.assertIn("- [x] **Prebloque transversal — Firma e integridad Git/GitHub**", texto)
-        self.assertIn("- [x] revisión de configuración GitHub y PR de Dependabot.", texto)
+    def test_firma_historica_y_roadmap_vivo_usan_fuentes_correctas(self):
+        roadmap = (
+            DOCS / "governance/roadmap.md"
+        ).read_text(encoding="utf-8")
 
-        migracion = (DOCS / "archive/governance/git-signature-migration-2026-08-17.md").read_text(
-            encoding="utf-8"
+        self.assertIn(
+            "**Versión publicada:** `0.1.25.01-beta`",
+            roadmap,
         )
-        self.assertIn("Firma e integridad Git/GitHub queda cerrado", migracion)
-        self.assertIn("0 Pull Requests abiertos", migracion)
+        self.assertIn(
+            "**Fase en curso:** PLAN.2 R2 / #155",
+            roadmap,
+        )
+        self.assertIn(
+            "G127, libre y no reservado",
+            roadmap,
+        )
+
+        migracion = (
+            DOCS
+            / "archive/governance/"
+            "git-signature-migration-2026-08-17.md"
+        ).read_text(encoding="utf-8")
+
+        for esperado in (
+            "Materialización criptográfica:",
+            "primer commit posterior a la frontera histórica firmado",
+            "`v0.0.1-beta` a `v0.0.21-beta`",
+            "`v0.0.22-beta` y `v0.0.23-beta`",
+            "23/23 tags verificaron localmente",
+            "23/23 objetos tag remotos",
+            "23/23 targets remotos",
+        ):
+            with self.subTest(esperado=esperado):
+                self.assertIn(
+                    esperado,
+                    migracion,
+                )
+
+        auditoria = (
+            DOCS
+            / "archive/governance/github-audit.md"
+        ).read_text(
+            encoding="utf-8"
+        ).casefold()
+
+        for esperado in (
+            "ruleset",
+            "dependabot",
+            "main",
+        ):
+            with self.subTest(esperado=esperado):
+                self.assertIn(
+                    esperado,
+                    auditoria,
+                )
 
     def test_indice_changelog_y_validacion_registran_firma(self):
         indice = (DOCS / "README.md").read_text(encoding="utf-8")

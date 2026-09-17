@@ -143,12 +143,20 @@ class TestNOR3R2RepositoryStructurePolicy(unittest.TestCase):
         self.assertIsNone(candidate["revision"])
         self.assertIsNone(candidate["revision_scope"])
         self.assertEqual("unassigned", candidate["state"])
-        self.assertEqual(126, candidate["next_global_available"])
+        self.assertEqual(127, candidate["next_global_available"])
         ids = {item["identifier"]: item for item in registry["identifiers"]}
         self.assertEqual("closed", ids["NOR.3"]["status"])
         self.assertEqual("R1-R8", ids["NOR.3"]["active_scope"])
         self.assertEqual(["G122"], ids["NOR.3"]["global_refs"])
-        self.assertEqual("accepted_pending_publication", ids["DOC.3"]["status"])
+        self.assertEqual("closed", ids["DOC.3"]["status"])
+        self.assertEqual(["G125"], ids["DOC.3"]["global_refs"])
+
+        active = registry["active_phase"]
+        self.assertEqual("PLAN.2", active["block"])
+        self.assertEqual("R2", active["revision"])
+        self.assertEqual(155, active["issue"])
+        self.assertEqual("accepted_pending_publication", active["state"])
+        self.assertEqual(126, active["global_revision"])
 
     def test_pr_policy_permite_candidato_sin_version(self):
         files = [

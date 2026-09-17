@@ -1,5 +1,6 @@
 """Regresiones de PLAN.1 R2A para documentación primaria hacia 1.0."""
 
+import json
 from pathlib import Path
 import unittest
 
@@ -20,13 +21,62 @@ class TestPlan1DocumentacionPrimaria(unittest.TestCase):
         self.assertIn("`Build 000001`", texto)
         self.assertNotIn("Primera beta pública objetivo de la aplicación", texto)
 
-    def test_roadmap_registra_plan_de_catorce_bloques(self):
-        texto = (DOCS / "governance/roadmap.md").read_text(encoding="utf-8")
-        self.assertIn("## 4. PLAN.1 y secuencia hacia 1.0", texto)
-        self.assertIn("14. REL.1 — preparación de la primera versión oficial", texto)
-        self.assertIn("## 8. Criterio para primera versión oficial", texto)
-        self.assertIn("Versión 1.0.0.0", texto)
-        self.assertIn("Build 000001", texto)
+    def test_plan1_historico_y_roadmap_vivo_usan_fuentes_correctas(self):
+        ledger = json.loads(
+            (
+                ROOT
+                / "data/governance/"
+                "pre-1-0-revision-ledger.json"
+            ).read_text(encoding="utf-8")
+        )
+
+        plan1 = [
+            item
+            for item in ledger["entries"]
+            if item["block"] == "PLAN.1"
+        ]
+
+        self.assertGreaterEqual(
+            len(plan1),
+            10,
+        )
+        self.assertEqual(
+            51,
+            min(item["global_revision"] for item in plan1),
+        )
+        self.assertEqual(
+            60,
+            max(item["global_revision"] for item in plan1),
+        )
+
+        releases = (
+            ROOT / "RELEASES.md"
+        ).read_text(encoding="utf-8")
+
+        self.assertIn(
+            "cierre formal de PLAN.1",
+            releases,
+        )
+        self.assertIn(
+            "v0.0.26-beta",
+            releases,
+        )
+
+        roadmap = (
+            DOCS / "governance/roadmap.md"
+        ).read_text(encoding="utf-8")
+
+        for esperado in (
+            "PLAN.2 R2",
+            "1.0.0.0",
+            "VER.2 R6",
+            "REL.1",
+        ):
+            with self.subTest(esperado=esperado):
+                self.assertIn(
+                    esperado,
+                    roadmap,
+                )
 
     def test_releases_registra_evidencia_final_0_0_25(self):
         texto = (ROOT / "RELEASES.md").read_text(encoding="utf-8")

@@ -18,14 +18,68 @@ DOCS = ROOT / "docs"
 class TestUX46eAuditoriaCoherencia(unittest.TestCase):
     """Protege el gate transversal y su evolución posterior sin reescribir R7."""
 
-    def test_roadmap_preserva_r7_r8_r9_y_cierre_ux46e(self):
-        texto = (DOCS / "governance/roadmap.md").read_text(encoding="utf-8")
-        self.assertIn("R6 — renumeración/metadata; 586 pruebas", texto)
-        self.assertIn("R7 — auditoría transversal; 598 pruebas", texto)
-        self.assertIn("R8 — validación funcional/procedencia editable", texto)
-        self.assertIn("R9.2 — cierre formal mediante PR #21/#22", texto)
-        self.assertIn("R9.1 se conserva como candidato local histórico", texto)
-        self.assertIn("[x] **UX.4.6e — Estandarización técnica", texto)
+    def test_ledger_preserva_r6_r7_r8_r9_y_cierre_ux46e(self):
+        ledger = json.loads(
+            (
+                ROOT
+                / "data/governance/"
+                "pre-1-0-revision-ledger.json"
+            ).read_text(encoding="utf-8")
+        )
+
+        entries = {
+            item["global_revision"]: item
+            for item in ledger["entries"]
+        }
+
+        self.assertEqual(
+            "R6 — renumeración/metadata",
+            entries[46]["state"],
+        )
+        self.assertIn(
+            "586 pruebas",
+            entries[46]["evidence"],
+        )
+
+        self.assertEqual(
+            "R7 — auditoría transversal",
+            entries[47]["state"],
+        )
+        self.assertIn(
+            "598 pruebas",
+            entries[47]["evidence"],
+        )
+
+        self.assertEqual(
+            "R8 — validación funcional/procedencia",
+            entries[49]["state"],
+        )
+
+        self.assertEqual(
+            "R9 — cierre formal",
+            entries[50]["state"],
+        )
+        self.assertEqual(
+            "v0.0.25-beta",
+            entries[50]["anchor"],
+        )
+        self.assertIn(
+            "PR #21/#22",
+            entries[50]["evidence"],
+        )
+        self.assertIn(
+            "660 pruebas",
+            entries[50]["evidence"],
+        )
+
+        roadmap = (
+            DOCS / "governance/roadmap.md"
+        ).read_text(encoding="utf-8")
+
+        self.assertIn(
+            "PLAN.2 R2",
+            roadmap,
+        )
 
     def test_readme_preserva_cierre_r8_r9_sin_congelar_bloque_activo(self):
         texto = (ROOT / "README.md").read_text(encoding="utf-8")

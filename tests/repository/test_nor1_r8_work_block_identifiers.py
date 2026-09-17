@@ -40,7 +40,7 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
             self.assertIn(ident, ids)
             self.assertFalse(ids[ident]["reusable_for_different_scope"])
 
-        self.assertEqual("closed", ids["PLAN.2"]["status"])
+        self.assertEqual("accepted_pending_publication", ids["PLAN.2"]["status"])
         self.assertEqual("closed", ids["MANT.1"]["status"])
         self.assertIn("G124/E13", ids["MANT.1"]["meaning"])
         self.assertIn("G124", ids["MANT.1"]["global_refs"])
@@ -54,7 +54,11 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
 
         self.assertEqual("planned_reserved", ids["PERSIST.1"]["status"])
         self.assertEqual("closed", ids["NOR.3"]["status"])
-        for ident in ("UX.7", "UX.8", "REP.1", "A11Y.2", "REV.1", "QA.1", "REL.1"):
+        future_reserved = (
+            tuple(f"UX.{number}" for number in range(7, 33))
+            + ("REP.1", "DEPLOY.1", "A11Y.2", "REV.1", "QA.1", "REL.1")
+        )
+        for ident in future_reserved:
             self.assertEqual("planned_reserved", ids[ident]["status"])
 
     def test_revisiones_y_etiquetas_no_son_familias(self):
@@ -80,7 +84,7 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
         self.assertIsNone(candidate["revision"])
         self.assertIsNone(candidate["edition"])
         self.assertEqual("unassigned", candidate["state"])
-        self.assertEqual(126, candidate["next_global_available"])
+        self.assertEqual(127, candidate["next_global_available"])
         self.assertIsNone(candidate["next_functional_block_if_accepted"])
         self.assertIsNone(candidate["next_functional_global_if_accepted"])
 
@@ -151,6 +155,7 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
             123: ("MANT.2", 1, "0.1.23.01-beta"),
             124: ("MANT.1", 13, "0.1.24.13-beta"),
             125: ("DOC.3", 1, "0.1.25.01-beta"),
+            126: ("PLAN.2", 1, "0.1.26.01-beta"),
         }
         for global_revision, expected_entry in expected.items():
             entry = entries[global_revision]
@@ -160,32 +165,84 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
                 self.assertEqual(expected_entry[2], entry["revision_aware"])
         ids = {item["identifier"]: item for item in self.data["identifiers"]}
         self.assertEqual("closed", ids["NOR.1"]["status"])
-        self.assertEqual("closed", ids["PLAN.2"]["status"])
+        self.assertEqual("accepted_pending_publication", ids["PLAN.2"]["status"])
         self.assertEqual("reopened_planned_r6", ids["DOC.1"]["status"])
         self.assertEqual("planned_reserved", ids["PERSIST.1"]["status"])
         self.assertEqual("closed", ids["NOR.3"]["status"])
-        self.assertEqual("accepted_pending_publication", ids["DOC.3"]["status"])
+        self.assertEqual("closed", ids["DOC.3"]["status"])
+        self.assertIn("G125", ids["DOC.3"]["global_refs"])
         self.assertEqual("planned_reserved", ids["DOC.4"]["status"])
-        matrix = (ROOT / "docs/governance/pre-1-0-pending-matrix.md").read_text(encoding="utf-8")
+        matrix = (
+            ROOT / "docs/governance/pre-1-0-pending-matrix.md"
+        ).read_text(encoding="utf-8")
+
         for fragment in (
-            "Cerrado/aceptado G114/E01", "Cerrado/aceptado G118/E04",
-            "Cerrado/aceptado/publicado G119/E05", "Cerrado/aceptado G120/E01",
-            "Cerrado/aceptado G121/E01", "Cerrado/aceptado G122/E01",
-            "Cerrado/aceptado/publicado G123/E01", "Cerrado/aceptado/publicado G124/E13",
-            "Materializado G125/E01", "DOC.4 R1", "#154", "#155", "#164", "#171",
-            "Todo bloque usado por la planificación viva", "G126", "PERSIST.1 R1", "DEV.2 R6",
+            "G125/E01 — DOC.3 R1",
+            "PLAN.2 R2 / #155",
+            "VER.2 R6 / #164",
+            "DOC.4 R1 / #171",
+            "Auditoría previsional / #142",
+            "PERSIST.1 / #130",
+            "REP.1 / #143",
+            "DEPLOY.1 / #157",
+            "UX.7–UX.32",
+            "UX.33+",
+            "#189",
+            "SEC.2 R7 / #144",
+            "A11Y.2 / #145",
+            "REV.1 / #146",
+            "DOC.1 R6 / #147",
+            "QA.1 / #148",
+            "REL.1 / #149",
+            "G126",
+            "1.0.0.0",
         ):
             with self.subTest(fragment=fragment):
                 self.assertIn(fragment, matrix)
-        mant = matrix.index("**MANT.1 R8**")
-        doc3 = matrix.index("**DOC.3 R1**")
-        plan2_r2 = matrix.index("**PLAN.2 R2**")
-        ver = matrix.index("**VER.2 R6**")
-        persist = matrix.index("**PERSIST.1 R1**")
-        self.assertLess(mant, doc3)
-        self.assertLess(doc3, plan2_r2)
-        self.assertLess(plan2_r2, ver)
-        self.assertLess(ver, persist)
+
+        graph = matrix.split("## 2. Grafo canónico", 1)[1].split(
+            "## 3. Pendientes obligatorios pre-1.0", 1
+        )[0]
+
+        ordered = (
+            "PLAN.2 R2",
+            "VER.2 R6",
+            "DOC.4 R1",
+            "#142 auditoría previsional",
+            "PERSIST.1",
+            "REP.1",
+            "DEPLOY.1",
+            "UX.7",
+            "#189 sin drift visual shared",
+            "SEC.2 R7",
+            "A11Y.2",
+            "REV.1",
+            "DOC.1 R6",
+            "QA.1",
+            "REL.1",
+            "1.0.0.0",
+        )
+        positions = [graph.index(token) for token in ordered]
+        self.assertEqual(positions, sorted(positions))
+
+    def test_marcador_expansion_abierta_no_reserva_ux33(self):
+        ids = {
+            item["identifier"]
+            for item in self.data["identifiers"]
+        }
+        next_dynamic_ux = "UX." + str(33)
+        self.assertNotIn(next_dynamic_ux, ids)
+
+        standard = (
+            ROOT / "docs/standards/work-block-identifiers.md"
+        ).read_text(encoding="utf-8")
+        self.assertIn("UX.33+", standard)
+        self.assertIn("expansión", standard)
+
+        matrix = (
+            ROOT / "docs/governance/pre-1-0-pending-matrix.md"
+        ).read_text(encoding="utf-8")
+        self.assertIn("UX.33+", matrix)
 
     def test_auditor_automatico_queda_limpio(self):
         proc = subprocess.run(

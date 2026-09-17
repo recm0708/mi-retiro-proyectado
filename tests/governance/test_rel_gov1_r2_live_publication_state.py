@@ -76,7 +76,7 @@ class TestRelGovR2LivePublicationState(unittest.TestCase):
             "| `0.1.22.01-beta` | Beta previa G122/E01 publicada",
             "| `0.1.23.01-beta` | Beta previa G123/E01 publicada",
             "| `0.1.24.13-beta` | Beta previa G124/E13 publicada",
-            "| `0.1.25.01-beta` | Beta vigente G125/E01 materializada",
+            "| `0.1.25.01-beta` | Beta previa publicada G125/E01",
         ):
             with self.subTest(fragment=fragment):
                 self.assertIn(fragment, text)

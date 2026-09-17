@@ -18,8 +18,8 @@
     "next_functional_block_if_accepted": null,
     "next_functional_global_if_accepted": null,
     "edition": null,
-    "planning_issue": 155,
-    "next_global_available": 126
+    "planning_issue": 164,
+    "next_global_available": 127
   },
   "families": [
     {
@@ -85,6 +85,10 @@
     {
       "prefix": "QA",
       "meaning": "Calidad y cierre de la etapa beta."
+    },
+    {
+      "prefix": "DEPLOY",
+      "meaning": "Despliegue, runtime, hosting y operación de la aplicación."
     }
   ],
   "identifiers": [
@@ -489,9 +493,9 @@
       "identifier": "DOC.3",
       "family": "DOC",
       "kind": "block",
-      "status": "accepted_pending_publication",
-      "meaning": "Auditoría documental integral periódica post-fase material. DOC.3 R1 / Issue #154 queda materializado como G125/E01 (0.1.25.01-beta) y pendiente de PR/merge/tag/release.",
-      "evidence": "Issue #154; rama docs/doc3-r1-auditoria-documental; cierre interno 6e94fbcc1598dff612cb4c676553faa21ff8c831; preflight final #166 CLEAN; Quality Gate FULL 11 PASS / 0 FAIL; G125/E01 materializado localmente.",
+      "status": "closed",
+      "meaning": "Auditoría documental integral periódica. R1 quedó cerrada, integrada y publicada como G125/E01 (0.1.25.01-beta).",
+      "evidence": "Issue #154; main@ee077c0d83931f140c91583fa8b2c4ae6b72dec8; tag firmado v0.1.25.01-beta; GitHub Release prerelease 388866555; preflight #166 CLEAN.",
       "global_refs": [
         "G125"
       ],
@@ -503,8 +507,8 @@
       "family": "VER",
       "kind": "block",
       "status": "reopened_planned_r6",
-      "meaning": "Reconciliación revision-aware y promoción. R6 queda planificado para auditar y reformar el versionado beta antes de PERSIST.1.",
-      "evidence": "Ledger revision-aware. Issue #164.",
+      "meaning": "Reconciliación revision-aware y promoción. R6 será la primera fase material después de PLAN.2 R2 publicado y debe cerrar antes de DOC.4 R1.",
+      "evidence": "Ledger revision-aware; Issue #164; PLAN.2 R2/#155.",
       "global_refs": [
         "G087"
       ],
@@ -552,9 +556,9 @@
       "identifier": "SEC.2",
       "family": "SEC",
       "kind": "block",
-      "status": "closed",
-      "meaning": "Hardening integral de seguridad.",
-      "evidence": "Ledger revision-aware.",
+      "status": "reopened_planned_r7",
+      "meaning": "R1–R6 permanecen cerrados en G103–G108. R7 queda planificado como hardening final después de DEPLOY.1 y de toda la ola UX.7→UX.x, con #189 sin drift shared.",
+      "evidence": "Ledger G103-G108; Issue #144; PLAN.2 R2/#155; #189.",
       "global_refs": [
         "G103-G108"
       ],
@@ -590,8 +594,8 @@
       "family": "DOC",
       "kind": "block",
       "status": "planned_reserved",
-      "meaning": "Reingeniería documental canónica current-state-only: revisión 1:1 de Markdown, racionalización del árbol documental y revisión por extensión de artefactos textuales no ejecutables. Su posición exacta será resuelta por PLAN.2 R2/#155.",
-      "evidence": "Issue #171; lotes #172/#173/#174; hallazgo diferido de DOC.3 R1/#154. No iniciado y sin Global/VERSION preasignados.",
+      "meaning": "Reingeniería documental canónica current-state-only. Se ejecuta después de VER.2 R6 y antes de la auditoría previsional #142; incluye lotes #172/#173/#174 y #174 absorbe #176.",
+      "evidence": "Issues #171–#174; decisión PLAN.2 R2/#155.",
       "global_refs": [],
       "reusable_for_different_scope": false
     },
@@ -600,8 +604,8 @@
       "family": "PERSIST",
       "kind": "block",
       "status": "planned_reserved",
-      "meaning": "Persistencia voluntaria y segura. Antes de iniciar R1 permanece bloqueado por DOC.3 R1/#154 → PLAN.2 R2/#155 → VER.2 R6/#164.",
-      "evidence": "Alcance preservado, sin Global preasignado. MANT.1 R8/#163 ya fue cerrado/publicado como G124/E13. No inicia antes de completar #154 → #155 → #164. Issues #130, #154, #155 y #164.",
+      "meaning": "Persistencia voluntaria y segura. Espera PLAN.2 publicado → VER.2 R6 → DOC.4 R1 → #142 y cualquier derivado funcional obligatorio. Toda nueva superficie visual debe recibir UX.x.",
+      "evidence": "Issues #130, #142, #155, #164, #171 y política UX/GOV #189.",
       "global_refs": [],
       "reusable_for_different_scope": false
     },
@@ -610,8 +614,8 @@
       "family": "REP",
       "kind": "block",
       "status": "planned_reserved",
-      "meaning": "Informes PDF y exportaciones finales.",
-      "evidence": "docs/governance/master-plan-to-1-0.md",
+      "meaning": "Informes PDF y exportaciones finales después de PERSIST.1. Toda nueva superficie visible debe registrar la siguiente UX.x.",
+      "evidence": "Issue #143; PLAN.2 R2/#155; política UX/GOV #189.",
       "global_refs": [],
       "reusable_for_different_scope": false
     },
@@ -620,8 +624,8 @@
       "family": "A11Y",
       "kind": "block",
       "status": "planned_reserved",
-      "meaning": "Auditoría WCAG 2.2 ampliada.",
-      "evidence": "docs/governance/master-plan-to-1-0.md",
+      "meaning": "Auditoría WCAG 2.2 ampliada sobre todas las UX.x finales.",
+      "evidence": "Issue #145; programa UX #129; PLAN.2 R2/#155.",
       "global_refs": [],
       "reusable_for_different_scope": false
     },
@@ -630,8 +634,8 @@
       "family": "REV",
       "kind": "block",
       "status": "planned_reserved",
-      "meaning": "Revisión normativa, jurídica, privacidad y seguridad final.",
-      "evidence": "docs/governance/master-plan-to-1-0.md",
+      "meaning": "Revisión normativa, jurídica, privacidad y seguridad final después de A11Y.2.",
+      "evidence": "Issue #146; PLAN.2 R2/#155.",
       "global_refs": [],
       "reusable_for_different_scope": false
     },
@@ -640,8 +644,8 @@
       "family": "QA",
       "kind": "block",
       "status": "planned_reserved",
-      "meaning": "Auditoría integral de cierre beta.",
-      "evidence": "docs/governance/master-plan-to-1-0.md",
+      "meaning": "Auditoría integral de cierre beta después de DOC.1 R6 y toda UX.x final.",
+      "evidence": "Issue #148; PLAN.2 R2/#155.",
       "global_refs": [],
       "reusable_for_different_scope": false
     },
@@ -650,8 +654,8 @@
       "family": "REL",
       "kind": "block",
       "status": "planned_reserved",
-      "meaning": "Preparación de la primera versión oficial.",
-      "evidence": "docs/governance/master-plan-to-1-0.md",
+      "meaning": "Preparación y publicación de la primera versión oficial 1.0.0.0 después de QA.1.",
+      "evidence": "Issue #149; PLAN.2 R2/#155.",
       "global_refs": [],
       "reusable_for_different_scope": false
     },
@@ -659,13 +663,15 @@
       "identifier": "PLAN.2",
       "family": "PLAN",
       "kind": "block",
-      "status": "closed",
-      "meaning": "Replanificación maestra final hacia 1.0 y matriz viva de pendientes.",
-      "evidence": "G114 / PR #94.",
+      "status": "accepted_pending_publication",
+      "meaning": "R1 permanece cerrado/aceptado como G114/E01. R2 queda materializado y aceptado localmente como G126/E01 (0.1.26.01-beta), pendiente de PR/merge/tag/release.",
+      "evidence": "G114 / PR #94 preservado; PLAN.2 R2 Issue #155; rama plan/plan2-r2-replanificacion-maestra; Quality Gate FULL 11 PASS / 0 FAIL; 1613 unittest; pytest 1653 + 7913 subtests; preflight final #166 CLEAN; G126/E01 materializado localmente.",
       "global_refs": [
-        "G114"
+        "G114",
+        "G126"
       ],
-      "reusable_for_different_scope": false
+      "reusable_for_different_scope": false,
+      "active_scope": "R2"
     },
     {
       "identifier": "UX.5",
@@ -696,8 +702,8 @@
       "family": "UX",
       "kind": "block",
       "status": "planned_reserved",
-      "meaning": "Revisión UX granular de las entradas principales: Inicio de App Asegurado (/) y Portal Developer (/dev) en estados login y dashboard autenticado; se ejecuta después de NOR.3.",
-      "evidence": "#133; #129; #126; replanificación post-NOR.3 #155.",
+      "meaning": "Inicio Asegurado / + Inicio/Resumen Developer /dev autenticado.",
+      "evidence": "Issue #133; programa #129; política transversal #189; PLAN.2 R2/#155.",
       "global_refs": [],
       "reusable_for_different_scope": false
     },
@@ -706,8 +712,258 @@
       "family": "UX",
       "kind": "block",
       "status": "planned_reserved",
-      "meaning": "Revisión UX granular de la entrada /simulacion, explicación y selección Manual/Asistida y transición inicial; los flujos internos completos se definirán en revisiones UX posteriores mediante el inventario NOR.3 y la replanificación #155.",
-      "evidence": "#134; #129; #126; replanificación post-NOR.3 #155.",
+      "meaning": "Asegurado /simulacion: entrada y selección Manual/Asistida antes del Paso 1.",
+      "evidence": "Issue #134; programa #129; política transversal #189; PLAN.2 R2/#155.",
+      "global_refs": [],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "DEPLOY.1",
+      "family": "DEPLOY",
+      "kind": "block",
+      "status": "planned_reserved",
+      "meaning": "Arquitectura de despliegue 1.0: runtime FastAPI, hosting, HTTPS, persistencia operativa y CI/CD. Se ejecuta después de REP.1 y antes de la ola UX final.",
+      "evidence": "Issue #157; PLAN.2 R2/#155.",
+      "global_refs": [],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "UX.9",
+      "family": "UX",
+      "kind": "block",
+      "status": "planned_reserved",
+      "meaning": "Simulación Paso 1: Datos personales.",
+      "evidence": "Issue #177; programa #129; política transversal #189; PLAN.2 R2/#155.",
+      "global_refs": [],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "UX.10",
+      "family": "UX",
+      "kind": "block",
+      "status": "planned_reserved",
+      "meaning": "Simulación Paso 2: Cuotas.",
+      "evidence": "Issue #178; programa #129; política transversal #189; PLAN.2 R2/#155.",
+      "global_refs": [],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "UX.11",
+      "family": "UX",
+      "kind": "block",
+      "status": "planned_reserved",
+      "meaning": "Simulación Paso 3: Historial y base salarial.",
+      "evidence": "Issue #179; programa #129; política transversal #189; PLAN.2 R2/#155.",
+      "global_refs": [],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "UX.12",
+      "family": "UX",
+      "kind": "block",
+      "status": "planned_reserved",
+      "meaning": "Simulación Paso 4: Proyección y línea temporal.",
+      "evidence": "Issue #180; programa #129; política transversal #189; PLAN.2 R2/#155.",
+      "global_refs": [],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "UX.13",
+      "family": "UX",
+      "kind": "block",
+      "status": "planned_reserved",
+      "meaning": "Simulación Paso 5: Escenarios de retiro.",
+      "evidence": "Issue #181; programa #129; política transversal #189; PLAN.2 R2/#155.",
+      "global_refs": [],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "UX.14",
+      "family": "UX",
+      "kind": "block",
+      "status": "planned_reserved",
+      "meaning": "Simulación Paso 6: Resultados.",
+      "evidence": "Issue #182; programa #129; política transversal #189; PLAN.2 R2/#155.",
+      "global_refs": [],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "UX.15",
+      "family": "UX",
+      "kind": "block",
+      "status": "planned_reserved",
+      "meaning": "Asegurado /comparar: Escenarios/Comparación.",
+      "evidence": "Issue #183; programa #129; política transversal #189; PLAN.2 R2/#155.",
+      "global_refs": [],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "UX.16",
+      "family": "UX",
+      "kind": "block",
+      "status": "planned_reserved",
+      "meaning": "Asegurado /como-se-calcula.",
+      "evidence": "Issue #184; programa #129; política transversal #189; PLAN.2 R2/#155.",
+      "global_refs": [],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "UX.17",
+      "family": "UX",
+      "kind": "block",
+      "status": "planned_reserved",
+      "meaning": "Asegurado /metodologia: Fuentes/Metodología.",
+      "evidence": "Issue #185; programa #129; política transversal #189; PLAN.2 R2/#155.",
+      "global_refs": [],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "UX.18",
+      "family": "UX",
+      "kind": "block",
+      "status": "planned_reserved",
+      "meaning": "Modal Términos, privacidad y consentimiento.",
+      "evidence": "Issue #186; programa #129; política transversal #189; PLAN.2 R2/#155.",
+      "global_refs": [],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "UX.19",
+      "family": "UX",
+      "kind": "block",
+      "status": "planned_reserved",
+      "meaning": "Modal Gestión de datos.",
+      "evidence": "Issue #187; programa #129; política transversal #189; PLAN.2 R2/#155.",
+      "global_refs": [],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "UX.20",
+      "family": "UX",
+      "kind": "block",
+      "status": "planned_reserved",
+      "meaning": "Modal Mi Retiro Seguro: vista previa/importación.",
+      "evidence": "Issue #188; programa #129; política transversal #189; PLAN.2 R2/#155.",
+      "global_refs": [],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "UX.21",
+      "family": "UX",
+      "kind": "block",
+      "status": "planned_reserved",
+      "meaning": "Modal Ficha Digital: vista previa/revisión/importación.",
+      "evidence": "Issue #190; programa #129; política transversal #189; PLAN.2 R2/#155.",
+      "global_refs": [],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "UX.22",
+      "family": "UX",
+      "kind": "block",
+      "status": "planned_reserved",
+      "meaning": "Modal Vigencia de Ficha Digital.",
+      "evidence": "Issue #191; programa #129; política transversal #189; PLAN.2 R2/#155.",
+      "global_refs": [],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "UX.23",
+      "family": "UX",
+      "kind": "block",
+      "status": "planned_reserved",
+      "meaning": "Portal Developer: inicio de sesión.",
+      "evidence": "Issue #192; programa #129; política transversal #189; PLAN.2 R2/#155.",
+      "global_refs": [],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "UX.24",
+      "family": "UX",
+      "kind": "block",
+      "status": "planned_reserved",
+      "meaning": "Portal Developer: Diagnóstico.",
+      "evidence": "Issue #193; programa #129; política transversal #189; PLAN.2 R2/#155.",
+      "global_refs": [],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "UX.25",
+      "family": "UX",
+      "kind": "block",
+      "status": "planned_reserved",
+      "meaning": "Portal Developer: Eventos.",
+      "evidence": "Issue #194; programa #129; política transversal #189; PLAN.2 R2/#155.",
+      "global_refs": [],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "UX.26",
+      "family": "UX",
+      "kind": "block",
+      "status": "planned_reserved",
+      "meaning": "Portal Developer: Archivos.",
+      "evidence": "Issue #195; programa #129; política transversal #189; PLAN.2 R2/#155.",
+      "global_refs": [],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "UX.27",
+      "family": "UX",
+      "kind": "block",
+      "status": "planned_reserved",
+      "meaning": "Portal Developer: Mantenimiento.",
+      "evidence": "Issue #196; programa #129; política transversal #189; PLAN.2 R2/#155.",
+      "global_refs": [],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "UX.28",
+      "family": "UX",
+      "kind": "block",
+      "status": "planned_reserved",
+      "meaning": "Portal Developer: Usuarios/RBAC.",
+      "evidence": "Issue #197; programa #129; política transversal #189; PLAN.2 R2/#155.",
+      "global_refs": [],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "UX.29",
+      "family": "UX",
+      "kind": "block",
+      "status": "planned_reserved",
+      "meaning": "Portal Developer: Privacidad.",
+      "evidence": "Issue #198; programa #129; política transversal #189; PLAN.2 R2/#155.",
+      "global_refs": [],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "UX.30",
+      "family": "UX",
+      "kind": "block",
+      "status": "planned_reserved",
+      "meaning": "Portal Developer: Perfil y credenciales web.",
+      "evidence": "Issue #199; programa #129; política transversal #189; PLAN.2 R2/#155.",
+      "global_refs": [],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "UX.31",
+      "family": "UX",
+      "kind": "block",
+      "status": "planned_reserved",
+      "meaning": "Portal Developer: Acceso técnico.",
+      "evidence": "Issue #200; programa #129; política transversal #189; PLAN.2 R2/#155.",
+      "global_refs": [],
+      "reusable_for_different_scope": false
+    },
+    {
+      "identifier": "UX.32",
+      "family": "UX",
+      "kind": "block",
+      "status": "planned_reserved",
+      "meaning": "Portal Developer: Centro de desarrollo legacy, si continúa soportado.",
+      "evidence": "Issue #201; programa #129; política transversal #189; PLAN.2 R2/#155.",
       "global_refs": [],
       "reusable_for_different_scope": false
     }
@@ -767,20 +1023,20 @@
     "documentation_audit_issue": 154,
     "master_replanning_issue": 155,
     "next_candidate_assigned": false,
-    "active_phase": "DOC.3 R1",
-    "active_phase_issue": 154,
-    "active_phase_state": "accepted_pending_publication",
+    "active_phase": "PLAN.2 R2",
+    "active_phase_issue": 155,
+    "active_phase_state": "in_progress",
     "next_global_available": 126
   },
   "active_phase": {
-    "block": "DOC.3",
-    "revision": "R1",
-    "issue": 154,
+    "block": "PLAN.2",
+    "revision": "R2",
+    "issue": 155,
     "state": "accepted_pending_publication",
-    "global_revision": 125,
-    "revision_aware": "0.1.25.01-beta",
-    "base_global_revision": 124,
-    "base_revision_aware": "0.1.24.13-beta",
-    "next_phase_issue": 155
+    "global_revision": 126,
+    "revision_aware": "0.1.26.01-beta",
+    "base_global_revision": 125,
+    "base_revision_aware": "0.1.25.01-beta",
+    "next_phase_issue": 164
   }
 }

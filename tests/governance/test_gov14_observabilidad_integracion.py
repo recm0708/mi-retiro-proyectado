@@ -219,8 +219,23 @@ class TestGov14ObservabilidadIntegracion(unittest.TestCase):
         )
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
 
+        historial = (
+            ROOT
+            / "docs/archive/governance/"
+            "gov1-closeout.md"
+        ).read_text(encoding="utf-8")
+
         self.assertIn(
-            "- [x] **GOV.1.4 — Observabilidad y Developer Diagnostics**",
+            "GOV.1.4",
+            historial,
+        )
+        self.assertIn(
+            "Developer Diagnostics",
+            historial,
+        )
+
+        self.assertIn(
+            "PLAN.2 R2",
             roadmap,
         )
         self.assertIn("(operations/observability-and-logs.md)", indice)

@@ -47,14 +47,31 @@ class TestGov15CierreSeguridadPrivacidad(unittest.TestCase):
                 self.assertIn(self.version_base, texto)
                 self.assertIn("GOV.1.5", texto)
 
-    def test_roadmap_conserva_cierre_gov15_sin_congelar_estado_futuro(self):
-        texto = (DOCS / "governance/roadmap.md").read_text(encoding="utf-8")
+    def test_cierre_gov15_se_preserva_en_evidencia_historica(self):
+        cierre = (
+            DOCS
+            / "archive/governance/gov1-closeout.md"
+        ).read_text(encoding="utf-8")
+
         self.assertIn(
-            "- [x] **GOV.1.5 — Seguridad, privacidad y transparencia**",
-            texto,
+            "GOV.1.5",
+            cierre,
         )
-        self.assertIn("GOV.1.6 — Controles GitHub y auditoría automática", texto)
-        self.assertIn("revisión jurídica externa", texto)
+        self.assertIn(
+            "seguridad, privacidad, threat model",
+            cierre,
+        )
+        self.assertIn(
+            "revisión jurídica externa",
+            cierre,
+        )
+
+        roadmap = (
+            DOCS / "governance/roadmap.md"
+        ).read_text(encoding="utf-8")
+
+        self.assertIn("PLAN.2 R2", roadmap)
+        self.assertIn("REV.1", roadmap)
 
     def test_readme_conserva_cierre_gov15_sin_fijar_bloque_activo(self):
         texto = (ROOT / "README.md").read_text(encoding="utf-8")

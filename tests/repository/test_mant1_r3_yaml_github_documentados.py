@@ -80,23 +80,46 @@ class TestMant1R3YamlGithubDocumentados(unittest.TestCase):
                 with self.subTest(ruta=ruta, patron=patron):
                     self.assertIn(patron, texto)
 
-    def test_documentacion_transversal_registra_mant1_r1_r2_y_r3(self):
-        """La documentación vigente conserva la contabilidad incremental de MANT.1."""
-
-        rutas = (
+    def test_historia_mant1_r1_r2_r3_y_roadmap_vivo_usan_fuentes_correctas(self):
+        historicos = (
             "CHANGELOG.md",
             "docs/standards/code-and-comments.md",
             "docs/operations/validation.md",
             "docs/architecture/system-architecture.md",
-            "docs/governance/roadmap.md",
         )
-        for ruta in rutas:
+
+        for ruta in historicos:
             texto = self._leer(ruta)
+
             with self.subTest(ruta=ruta):
                 self.assertIn("MANT.1 R1", texto)
                 self.assertIn("MANT.1 R2", texto)
                 self.assertIn("MANT.1 R3", texto)
                 self.assertIn("YAML", texto)
+
+        ledger = self._leer(
+            "docs/governance/pre-1-0-revision-ledger.md"
+        )
+
+        for esperado in (
+            "G074",
+            "MANT.1 R2",
+            "G075",
+            "MANT.1 R3",
+        ):
+            self.assertIn(esperado, ledger)
+
+        roadmap = self._leer(
+            "docs/governance/roadmap.md"
+        )
+
+        for esperado in (
+            "G125/E01",
+            "PLAN.2 R2",
+            "G126",
+            "MANT.2 R2",
+        ):
+            self.assertIn(esperado, roadmap)
 
     def test_mant1_r3_no_declara_inicio_de_sec2_ni_cambio_de_version(self):
         """MANT.1 R3 es mantenimiento previo a SEC.2, no cambio funcional."""

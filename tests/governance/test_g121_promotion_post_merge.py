@@ -26,15 +26,15 @@ class TestG121PromotionPostMerge(unittest.TestCase):
 
     def test_estado_actual_avanza_a_g125_y_deja_g126_libre(self):
         ledger = cargar_ledger()
-        self.assertEqual(125, ledger["accepted_count"])
-        self.assertEqual(126, ledger["next_global"])
+        self.assertEqual(126, ledger["accepted_count"])
+        self.assertEqual(127, ledger["next_global"])
         self.assertIsNone(ledger["next_candidate"])
         self.assertIsNone(ledger["next_candidate_block"])
         entry = ledger["entries"][-1]
-        self.assertEqual(125, entry["global_revision"])
-        self.assertEqual("DOC.3", entry["block"])
-        self.assertEqual("R1", entry["functional_revision"])
-        self.assertEqual("0.1.25.01-beta", entry["revision_aware"])
+        self.assertEqual(126, entry["global_revision"])
+        self.assertEqual("PLAN.2", entry["block"])
+        self.assertEqual("R2", entry["functional_revision"])
+        self.assertEqual("0.1.26.01-beta", entry["revision_aware"])
 
     def test_registry_preserva_ux6_y_nor3_historicos(self):
         data = json.loads((ROOT / "data/governance/work-block-registry.json").read_text(encoding="utf-8"))
@@ -47,14 +47,14 @@ class TestG121PromotionPostMerge(unittest.TestCase):
         candidate = data["current_candidate"]
         self.assertEqual("unassigned", candidate["state"])
         self.assertIsNone(candidate["global_revision"])
-        self.assertEqual(126, candidate["next_global_available"])
+        self.assertEqual(127, candidate["next_global_available"])
 
     def test_manifest_actual_materializa_doc3_r1(self):
         data = json.loads((ROOT / "data/governance/release-publication-manifest.json").read_text(encoding="utf-8"))
-        self.assertEqual("0.1.25.01-beta", data["version"])
-        self.assertEqual("DOC.3", data["block"])
-        self.assertEqual("R1", data["revision"])
-        self.assertEqual(126, data["next_step"]["global_revision"])
+        self.assertEqual("0.1.26.01-beta", data["version"])
+        self.assertEqual("PLAN.2", data["block"])
+        self.assertEqual("R2", data["revision"])
+        self.assertEqual(127, data["next_step"]["global_revision"])
         self.assertIsNone(data["next_step"]["revision_aware"])
         self.assertIsNone(data["next_step"]["block"])
 

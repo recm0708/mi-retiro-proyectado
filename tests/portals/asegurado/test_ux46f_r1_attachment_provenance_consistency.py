@@ -322,8 +322,11 @@ class UX46fR1ConsistenciaProcedenciaAdjuntosTests(unittest.TestCase):
                 self.assertIn(f"**RF-{rf}.**", especificacion)
         self.assertIn("| TR-017 |", matriz)
         self.assertIn("| TR-018 |", matriz)
-        self.assertIn("UX.4.6f", roadmap)
-        self.assertIn("R1/R1.1", roadmap)
+        ledger_historico = leer(
+            "docs/archive/governance/pre-1-0-revision-ledger-g070.json"
+        )
+        self.assertIn('"block":"UX.4.6f"', ledger_historico)
+        self.assertIn("R1/R1.1 — aceptación conjunta", ledger_historico)
         self.assertIn("### UX.4.6f R1 — consistencia de procedencia", changelog)
 
 

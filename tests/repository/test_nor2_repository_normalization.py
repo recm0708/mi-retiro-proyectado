@@ -31,7 +31,7 @@ class TestNOR2RepositoryNormalization(unittest.TestCase):
         self.assertIn("NOR.2 R2", texto)
         self.assertIn("SEC.2", texto)
 
-    def test_documentacion_transversal_registra_nor2_r1(self):
+    def test_historia_nor2_r1_y_programa_vivo_usan_fuentes_correctas(self):
         evidencia = (
             ROOT
             / "docs"
@@ -40,17 +40,46 @@ class TestNOR2RepositoryNormalization(unittest.TestCase):
             / "repository-normalization-baseline-nor2-r1.md"
         ).read_text(encoding="utf-8")
 
-        self.assertIn("NOR.2 R1", evidencia)
+        self.assertIn(
+            "NOR.2 R1",
+            evidencia,
+        )
+
+        ledger = (
+            ROOT
+            / "docs"
+            / "governance"
+            / "pre-1-0-revision-ledger.md"
+        ).read_text(encoding="utf-8")
+
+        for esperado in (
+            "G094",
+            "NOR.2 R1",
+            "G097",
+            "NOR.2 R4",
+        ):
+            self.assertIn(
+                esperado,
+                ledger,
+            )
 
         for ruta in (
-            "CHANGELOG.md",
-            "docs/README.md",
             "docs/governance/roadmap.md",
-            "docs/operations/validation.md",
             "docs/governance/master-plan-to-1-0.md",
         ):
-            texto = (ROOT / ruta).read_text(encoding="utf-8")
-            self.assertIn("NOR.2 R4", texto, ruta)
+            texto = (
+                ROOT / ruta
+            ).read_text(encoding="utf-8")
+
+            with self.subTest(ruta=ruta):
+                self.assertIn(
+                    "G125/E01",
+                    texto,
+                )
+                self.assertIn(
+                    "PLAN.2 R2",
+                    texto,
+                )
 
     def test_version_permanece_sin_cambios(self):
         from app.core.version import APP_VERSION

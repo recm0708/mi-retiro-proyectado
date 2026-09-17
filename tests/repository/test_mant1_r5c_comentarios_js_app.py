@@ -106,25 +106,62 @@ class TestMant1R5CComentariosJSApp(unittest.TestCase):
         self.assertNotIn("getItem(CLAVES_PRIVACIDAD_LEGACY", privacidad)
         self.assertNotIn("setItem(CLAVES_PRIVACIDAD_LEGACY", privacidad)
 
-    def test_documentacion_transversal_registra_r5c_sin_promover_version(self):
-        documentos = (
+    def test_historia_r5c_y_estado_vivo_usan_fuentes_correctas(self):
+        historicos = (
             "CHANGELOG.md",
             "docs/standards/code-and-comments.md",
             "docs/operations/validation.md",
             "docs/architecture/system-architecture.md",
-            "docs/governance/roadmap.md",
         )
 
-        for ruta in documentos:
+        for ruta in historicos:
             texto = self._leer(ruta)
+
             with self.subTest(ruta=ruta):
-                self.assertIn("MANT.1 R5C", texto)
-                self.assertIn("JavaScript", texto)
+                self.assertIn(
+                    "MANT.1 R5C",
+                    texto,
+                )
+                self.assertIn(
+                    "JavaScript",
+                    texto,
+                )
 
-        changelog = self._leer("CHANGELOG.md")
-        self.assertIn("no cambia `VERSION`, `APP_VERSION`", changelog)
-        self.assertIn("sin cambiar claves de storage", changelog)
+        ledger = self._leer(
+            "docs/governance/pre-1-0-revision-ledger.md"
+        )
 
+        self.assertIn("G079", ledger)
+        self.assertIn(
+            "MANT.1 R5C",
+            ledger,
+        )
+
+        changelog = self._leer(
+            "CHANGELOG.md"
+        )
+
+        self.assertIn(
+            "no cambia `VERSION`, `APP_VERSION`",
+            changelog,
+        )
+        self.assertIn(
+            "sin cambiar claves de storage",
+            changelog,
+        )
+
+        roadmap = self._leer(
+            "docs/governance/roadmap.md"
+        )
+
+        self.assertIn(
+            "G125/E01",
+            roadmap,
+        )
+        self.assertIn(
+            "PLAN.2 R2",
+            roadmap,
+        )
 
 if __name__ == "__main__":
     unittest.main()

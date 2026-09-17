@@ -71,18 +71,55 @@ class TestUx46eR8CierreFuncional(unittest.TestCase):
             self.assertIn(esperado, texto)
 
     def test_roadmap_y_readme_marcan_r8_cerrada_y_r9_en_cierre(self):
-        texto = (DOCS / "governance/roadmap.md").read_text(encoding="utf-8")
-        self.assertIn("- [x] R8 — prueba funcional", texto)
-        self.assertIn("- [x] R9 — cierre técnico y publicación del hito;", texto)
-        self.assertIn(
-            "[x] R9.1 — candidato local `0.0.25-beta` validado con 660 pruebas en `OK`",
-            texto,
+        import json
+
+        ledger = json.loads(
+            (
+                DOCS.parent
+                / "data/governance/pre-1-0-revision-ledger.json"
+            ).read_text(encoding="utf-8")
         )
-        self.assertIn(
-            "[x] R9.2 — PR #21 integrado por squash",
-            texto,
+
+        ux46e = [
+            entry
+            for entry in ledger["entries"]
+            if entry["block"] == "UX.4.6e"
+        ]
+
+        r8 = [
+            entry
+            for entry in ux46e
+            if entry["global_revision"] == 49
+        ]
+        r9 = [
+            entry
+            for entry in ux46e
+            if entry["global_revision"] == 50
+        ]
+
+        self.assertEqual(len(r8), 1)
+        self.assertEqual(len(r9), 1)
+        self.assertIn("R8", r8[0]["state"])
+        self.assertIn("R9", r9[0]["state"])
+        self.assertIn("660", r9[0].get("evidence", ""))
+
+        roadmap = (
+            DOCS / "governance/roadmap.md"
+        ).read_text(encoding="utf-8")
+
+        self.assertNotIn(
+            "- [x] R8 — prueba funcional",
+            roadmap,
         )
-        self.assertIn("procedencia editable", texto)
+        self.assertNotIn(
+            "- [x] R9 — cierre técnico y publicación del hito;",
+            roadmap,
+        )
+        historico = (
+            DOCS
+            / "archive/governance/doc1-r1-markdown-update-context.md"
+        ).read_text(encoding="utf-8")
+        self.assertIn("procedencia editable", historico)
 
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
         self.assertIn("UX.4.6e:** cerrada en `0.0.25-beta`", readme)

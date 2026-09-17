@@ -27,7 +27,7 @@ lectura depende de la familia y del registro canónico.
 ## Familias canónicas
 
 `GOV`, `UX`, `PLAN`, `DEV`, `MANT`, `DOC`, `VER`, `NOR`, `SEC`, `AUD`,
-`REL`, `PERSIST`, `REP`, `A11Y`, `REV` y `QA`.
+`REL`, `PERSIST`, `REP`, `DEPLOY`, `A11Y`, `REV` y `QA`.
 
 `AUD.SEC2` y `REL.GOV.1` son compuestos históricos explícitamente registrados.
 No autorizan a crear compuestos nuevos por analogía.
@@ -57,6 +57,12 @@ reconciliación histórica. No son familias disponibles para trabajo futuro.
 10. Un candidato fallido no consume Global.
 11. `docs/archive/` conserva terminología histórica aunque difiera de la política
     vigente.
+12. Un marcador terminado en `+`, por ejemplo `UX.33+`, expresa una **expansión
+    abierta futura** y no constituye por sí mismo un identificador reservado.
+    Solo cuando exista trabajo material real se crea y registra el siguiente
+    identificador consecutivo que corresponda. El auditor automático no debe
+    truncar un marcador abierto y tratar su prefijo numérico como bloque
+    existente.
 
 ## Decisión NOR.1 R8
 

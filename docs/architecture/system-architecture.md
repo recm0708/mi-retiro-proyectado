@@ -1,7 +1,7 @@
 # Arquitectura
 
 **Estado:** Vigente
-**Versión de aplicación revisada:** `0.1.25.01-beta`
+**Versión de aplicación revisada:** `0.1.26.01-beta`
 **Versión base histórica:** `0.0.23-beta`
 **Revisión documental:** GOV.1.4 — 2026-08-17
 **Última actualización técnica:** DEV.2 R6 — Portal Developer multipágina, identidad, observabilidad, mantenimiento, seguridad y privacidad — 2026-08-30
@@ -13,16 +13,21 @@
 ## Estado arquitectónico vigente
 
 - NOR.3 R1–R8 permanece cerrado/publicado como G122/E01 (`0.1.22.01-beta`).
-- UX.6 R1–R8 permanece cerrado/publicado como G121/E01 mediante `v0.1.21.01-beta`.
-- Perfil/avatar, usuarios y auditoría Developer permanecen fuera del modelo previsional.
-- Design System, movimiento, accesibilidad y responsive son compartidos.
+- UX.6 R1–R8 permanece cerrado/publicado como G121/E01 mediante
+  `v0.1.21.01-beta`.
+- Perfil/avatar, usuarios y auditoría Developer permanecen fuera del modelo
+  previsional.
+- Design System, movimiento, accesibilidad y responsive son compartidos donde
+  corresponde.
 - Importadores documentales mantienen revisión/confirmación explícita.
 - NOR.3 no modifica motores SEBD/Mixto/SUCGS ni parámetros normativos.
-- MANT.2 R1/G123 y MANT.1 R8/G124 permanecen cerrados/publicados; ninguno
-  modifica los motores previsionales ni los parámetros normativos.
-- DOC.3 R1/#154 está en ejecución como auditoría documental, sin cambio de runtime.
-- G125 queda disponible sin candidato/bloque asignado.
-- PERSIST.1 permanece planificado, no iniciado y sin Global preasignado.
+- MANT.2 R1/G123 y MANT.1 R8/G124 permanecen cerrados/publicados.
+- DOC.3 R1/#154 está cerrado/publicado como G125/E01 y no modificó runtime.
+- PLAN.2 R2/#155 está aceptado localmente como G126/E01 (`0.1.26.01-beta`) y pendiente de publicación.
+- G127 permanece libre, sin candidato.
+- VER.2 R6 precede DOC.4; #142/derivados preceden PERSIST.1.
+- La ola UX final se ejecutará como UX.7→UX.x bajo #129/#189 después de
+  PERSIST.1, REP.1 y DEPLOY.1.
 <!-- DOC1-R1-POST-MANT1:END -->
 
 Mi Retiro Proyectado es una aplicación web local basada en FastAPI, Jinja2 y JavaScript del navegador. La arquitectura separa presentación, contratos de datos, servicios de integración, motores previsionales, parámetros normativos y observabilidad de desarrollo.

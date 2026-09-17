@@ -16,14 +16,14 @@ ROOT = Path(__file__).resolve().parents[2]
 class TestG123MANT2Promotion(unittest.TestCase):
     def test_version_actual_avanza_sin_reescribir_g123(self):
         version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
-        self.assertEqual("0.1.25.01-beta", version)
+        self.assertEqual("0.1.26.01-beta", version)
         self.assertEqual(version, APP_VERSION)
-        self.assertEqual((125, 1), descomponer_version_beta_revision(version))
+        self.assertEqual((126, 1), descomponer_version_beta_revision(version))
 
     def test_ledger_preserva_g123_y_avanza_a_g125(self):
         ledger = cargar_ledger()
-        self.assertEqual(125, ledger["accepted_count"])
-        self.assertEqual(126, ledger["next_global"])
+        self.assertEqual(126, ledger["accepted_count"])
+        self.assertEqual(127, ledger["next_global"])
         self.assertIsNone(ledger["next_candidate"])
         self.assertIsNone(ledger["next_candidate_block"])
         entry = next(x for x in ledger["entries"] if x["global_revision"] == 123)
@@ -38,12 +38,12 @@ class TestG123MANT2Promotion(unittest.TestCase):
         self.assertEqual(["G123"], ids["MANT.2"]["global_refs"])
         self.assertIn("PR #168", ids["MANT.2"]["evidence"])
         self.assertIn("7781 subtests", ids["MANT.2"]["evidence"])
-        self.assertEqual(126, registry["current_candidate"]["next_global_available"])
+        self.assertEqual(127, registry["current_candidate"]["next_global_available"])
         manifest = json.loads((ROOT / "data/governance/release-publication-manifest.json").read_text(encoding="utf-8"))
-        self.assertEqual("0.1.25.01-beta", manifest["version"])
-        self.assertEqual("DOC.3", manifest["block"])
-        self.assertEqual("R1", manifest["revision"])
-        self.assertEqual(126, manifest["next_step"]["global_revision"])
+        self.assertEqual("0.1.26.01-beta", manifest["version"])
+        self.assertEqual("PLAN.2", manifest["block"])
+        self.assertEqual("R2", manifest["revision"])
+        self.assertEqual(127, manifest["next_step"]["global_revision"])
 
     def test_dependencias_materializadas(self):
         req = (ROOT / "requirements.txt").read_text(encoding="utf-8")

@@ -28,19 +28,88 @@ class TestVer2DocumentacionVigente(unittest.TestCase):
             descomponer_version_beta_revision(version),
         )
 
-    def test_documentos_vivos_declaran_promocion_vigente(self):
-        readme = (ROOT / "README.md").read_text(encoding="utf-8")
-        roadmap = (DOCS / "governance/roadmap.md").read_text(encoding="utf-8")
-        plan = (DOCS / "governance/master-plan-to-1-0.md").read_text(encoding="utf-8")
-        security = (ROOT / "SECURITY.md").read_text(encoding="utf-8")
-        indice = (DOCS / "README.md").read_text(encoding="utf-8")
+    def test_historia_ver2_y_estado_vivo_usan_autoridades_correctas(self):
+        readme = (
+            ROOT / "README.md"
+        ).read_text(encoding="utf-8")
 
-        self.assertIn(f"**Versión canónica vigente:** `{VERSION_CANONICA}`", readme)
-        self.assertIn("G071/E01 promovido en `VERSION`", readme)
-        self.assertIn("la reconciliación posterior sitúa ese estado en G087/E01", roadmap)
-        self.assertIn("la reconciliación posterior sitúa ese estado en G087/E01", plan)
-        self.assertIn("| `0.0.71.01-beta` | Versión promovida históricamente en VER.2 R4", security)
-        self.assertIn(f"**Versión de aplicación:** `{VERSION_CANONICA}`", indice)
+        roadmap = (
+            DOCS / "governance/roadmap.md"
+        ).read_text(encoding="utf-8")
+
+        plan = (
+            DOCS / "governance/master-plan-to-1-0.md"
+        ).read_text(encoding="utf-8")
+
+        security = (
+            ROOT / "SECURITY.md"
+        ).read_text(encoding="utf-8")
+
+        indice = (
+            DOCS / "README.md"
+        ).read_text(encoding="utf-8")
+
+        ledger = (
+            DOCS / "governance/pre-1-0-revision-ledger.md"
+        ).read_text(encoding="utf-8")
+
+        audit = (
+            DOCS
+            / "archive/governance/pre-1-0-versioning-audit.md"
+        ).read_text(encoding="utf-8")
+
+        # Estado vivo actual.
+        self.assertIn(
+            f"**Versión canónica vigente:** `{VERSION_CANONICA}`",
+            readme,
+        )
+
+        self.assertIn(
+            "G125/E01",
+            roadmap,
+        )
+        self.assertIn(
+            "PLAN.2 R2",
+            roadmap,
+        )
+        self.assertIn(
+            "VER.2 R6",
+            roadmap,
+        )
+
+        self.assertIn(
+            "G125/E01",
+            plan,
+        )
+        self.assertIn(
+            "PLAN.2 R2",
+            plan,
+        )
+        self.assertIn(
+            "VER.2 R6",
+            plan,
+        )
+
+        self.assertIn(
+            f"**Versión de aplicación:** `{VERSION_CANONICA}`",
+            indice,
+        )
+
+        # Historia VER.2 preservada en autoridades apropiadas.
+        self.assertIn(
+            "G071",
+            ledger + audit,
+        )
+        self.assertIn(
+            "G087",
+            ledger + audit,
+        )
+
+        self.assertIn(
+            "| `0.0.71.01-beta` | "
+            "Versión promovida históricamente en VER.2 R4",
+            security,
+        )
 
     def test_tag_legacy_y_reconciliacion_g071_g087_permanecen_documentados(self):
         versioning = (ROOT / "VERSIONING.md").read_text(encoding="utf-8")

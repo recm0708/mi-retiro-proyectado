@@ -2,8 +2,8 @@
   "schema_version": 1,
   "project": "Mi Retiro Proyectado",
   "base_commit": "7037addd44253e528c77460b678d2b3ccd540dd5",
-  "accepted_count": 125,
-  "next_global_if_ver2_accepted": 126,
+  "accepted_count": 126,
+  "next_global_if_ver2_accepted": 127,
   "next_candidate": null,
   "historical_tags_immutable": {
     "from": "v0.0.1-beta",
@@ -1142,6 +1142,16 @@
       "state": "R1 — auditoría documental integral post-MANT.1: estado vigente, gobierno, estructura, historia, coherencia semántica y cierre reproducible",
       "anchor": "0.1.25.01-beta",
       "evidence": "Issue #154; cierre interno 6e94fbcc1598dff612cb4c676553faa21ff8c831; 173 Markdown auditados y normalizados; 418 archivos textuales de código/configuración auditados; 16 familias / 53 identificadores; Quality Gate FULL 11 PASS / 0 FAIL; 1603 unittest OK; pytest 1643 passed + 7824 subtests; preflight final #166 CLEAN con 0 PRs, 0 Dependabot alerts, 0 PRs Dependabot, pip-audit limpio y npm audit 0 vulnerabilidades; DOC.4/#171 transferido como trabajo diferido."
+    },
+    {
+      "global_revision": 126,
+      "block": "PLAN.2",
+      "ordinal": 1,
+      "functional_revision": "R2",
+      "revision_aware": "0.1.26.01-beta",
+      "state": "R2 — replanificación maestra post-G125 hacia 1.0: grafo canónico, clasificación pre/post-1.0, DOC.4 y auditoría previsional, PERSIST/REP/DEPLOY, programa UX granular dinámico UX.7–UX.x, contrato multiportal #189 y reconciliación integral de gobierno",
+      "anchor": "0.1.26.01-beta",
+      "evidence": "Issue #155; rama plan/plan2-r2-replanificacion-maestra; auditoría integral de Issues reconciliada; Quality Gate FULL 11 PASS / 0 FAIL; 1613 unittest OK; pytest 1653 passed + 7913 subtests; 173 Markdown auditados; 17 familias / 78 identificadores; integridad 656 archivos / 84 directorios canónicos; git diff --check limpio; preflight final #166 con main G125 sin cambios, 0 PRs abiertos, 0 Dependabot alerts abiertos, dependency manifests sin cambios, pip check limpio, pip-audit sin vulnerabilidades y contrato npm raíz N/A."
     }
   ],
   "excluded": [
@@ -1219,24 +1229,25 @@
     }
   ],
   "reconciled_through_commit": "b97cf61763479b80b8e8724b878089e8bb20fa00",
-  "reconciliation_date": "2026-09-14",
-  "next_global": 126,
+  "reconciliation_date": "2026-09-16",
+  "next_global": 127,
   "next_candidate_block": null,
   "next_candidate_assignment": {
     "state": "unassigned",
-    "next_global_available": 126,
-    "issue": 155,
-    "reason": "G124/E13 está cerrado/publicado para MANT.1 R8. DOC.3 R1/#154 está en ejecución sin candidato Global; G125 permanece disponible sin bloque ni VERSION preasignados. Después siguen PLAN.2 R2/#155, VER.2 R6/#164 y PERSIST.1/#130; antes de cada fase se repite #166."
+    "next_global_available": 127,
+    "issue": 164,
+    "reason": "PLAN.2 R2/#155 está aceptado localmente como G126/E01 (0.1.26.01-beta) y pendiente de integración/publicación. G127 queda disponible sin candidato, bloque ni VERSION preasignados. Después de publicar G126 y repetir un preflight fresco #166 podrá abrirse VER.2 R6/#164; si aparece trabajo material nuevo de dependencias, se inserta primero MANT.2 R2+.",
+    "planning_issue": 164
   },
   "active_phase": {
-    "block": "DOC.3",
-    "revision": "R1",
-    "issue": 154,
+    "block": "PLAN.2",
+    "revision": "R2",
+    "issue": 155,
     "state": "accepted_pending_publication",
-    "global_revision": 125,
-    "revision_aware": "0.1.25.01-beta",
-    "base_global_revision": 124,
-    "base_revision_aware": "0.1.24.13-beta",
-    "next_phase_issue": 155
+    "global_revision": 126,
+    "revision_aware": "0.1.26.01-beta",
+    "base_global_revision": 125,
+    "base_revision_aware": "0.1.25.01-beta",
+    "next_phase_issue": 164
   }
 }

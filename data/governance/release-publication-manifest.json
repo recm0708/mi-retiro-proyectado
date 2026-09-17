@@ -1,46 +1,51 @@
 {
   "schema_version": 1,
-  "version": "0.1.25.01-beta",
-  "block": "DOC.3",
-  "revision": "R1",
+  "version": "0.1.26.01-beta",
+  "block": "PLAN.2",
+  "revision": "R2",
   "summary": [
-    "G125/E01 materializa DOC.3 R1 como auditoría documental integral post-MANT.1.",
-    "La fase reconcilia estado vigente, trazabilidad de gobierno, estructura documental, preservación histórica, coherencia semántica y cierre reproducible; además transfiere la reingeniería current-state-only a DOC.4/#171 sin iniciarla."
+    "G126/E01 materializa PLAN.2 R2 como replanificación maestra post-G125 hacia 1.0.",
+    "La fase reconcilia el grafo pre-1.0, separa trabajo obligatorio/post-1.0/transversal, fija VER.2 → DOC.4 → #142/derivados → PERSIST → REP → DEPLOY, y establece la ola UX dinámica UX.7–UX.x con #189."
   ],
   "changes": [
-    "DOC.3 R1 queda materializado como G125/E01.",
-    "`VERSION` avanza a `0.1.25.01-beta`.",
-    "Se auditan exhaustivamente 173 Markdown versionados.",
-    "Se auditan 418 archivos textuales de código/configuración.",
-    "La limpieza Markdown final corrige MD012/whitespace sin reescribir historia.",
-    "DOC.4/#171 queda planned_reserved con lotes #172/#173/#174.",
-    "G126 queda disponible sin bloque ni VERSION preasignados."
+    "PLAN.2 R2 queda materializado como G126/E01.",
+    "`VERSION` avanza a `0.1.26.01-beta`.",
+    "VER.2 R6/#164 queda como siguiente fase material únicamente después de publicar PLAN.2 R2.",
+    "DOC.4 R1/#171 queda después de VER.2 y antes de #142/PERSIST.",
+    "El programa UX obligatorio queda granularizado en UX.7–UX.32 con expansión dinámica UX.33+.",
+    "#189 gobierna sincronización visual shared multiportal y el gate sin drift.",
+    "G127 queda disponible sin bloque ni VERSION preasignados."
   ],
   "validation": [
-    "Repository Quality Gate FULL pre-materialización: 11 PASS / 0 FAIL.",
-    "1603 unittest OK.",
-    "pytest: 1643 passed + 7824 subtests.",
+    "Repository Quality Gate FULL: 11 PASS / 0 FAIL.",
+    "1613 unittest OK.",
+    "pytest: 1653 passed + 7913 subtests.",
     "Markdown: 173 archivos sin bloqueantes.",
     "JavaScript: 27 archivos válidos.",
-    "Identificadores: 16 familias / 53 identificadores.",
-    "Integridad: 653 archivos versionables; 84/84 README canónicos; 0 enlaces rotos.",
+    "Identificadores: 17 familias / 78 identificadores.",
+    "Integridad: 656 archivos Git/versionables; 84 directorios canónicos; 0 divergencias.",
     "git diff --check: limpio.",
-    "Preflight final #166: 0 PRs, 0 Dependabot alerts y 0 PRs Dependabot abiertos.",
-    "pip-audit --strict: sin vulnerabilidades conocidas.",
-    "npm audit --prefix scripts --audit-level=high: 0 vulnerabilidades."
+    "Preflight final #166: main/origin-main conservan G125.",
+    "0 Pull Requests abiertos.",
+    "0 Dependabot alerts abiertos.",
+    "pip check: limpio.",
+    "pip-audit: sin vulnerabilidades conocidas.",
+    "npm raíz: N/A; no existe package.json/lockfile raíz."
   ],
   "evidence": [
-    "Issue de fase: #154.",
-    "Política de preflight/limpieza: #166.",
-    "Cierre interno DOC.3: commit 6e94fbcc1598dff612cb4c676553faa21ff8c831.",
-    "Auditoría documental: docs/audits/documentation/documentation-audit-doc3-r1.md.",
-    "DOC.4 diferido: #171; lotes #172/#173/#174.",
-    "G124/MANT.1 R8 permanece publicado como v0.1.24.13-beta."
+    "Issue de fase: #155.",
+    "Política transversal de preflight/limpieza: #166.",
+    "Baseline publicado: G125/E01 / v0.1.25.01-beta / DOC.3 R1.",
+    "Programa UX: #129.",
+    "Contrato UX/GOV transversal: #189.",
+    "Siguiente fase material condicionada: VER.2 R6/#164.",
+    "DOC.4: #171–#174.",
+    "Auditoría previsional: #142."
   ],
   "next_step": {
-    "global_revision": 126,
+    "global_revision": 127,
     "revision_aware": null,
     "block": null,
-    "description": "G126 queda disponible sin candidato. Después de publicar G125/DOC.3 R1 corresponde PLAN.2 R2/#155, que debe ubicar DOC.4/#171 y reconciliar la continuidad antes de VER.2 R6/#164 y PERSIST.1/#130. Antes de cada fase se repite #166 y un lote material de dependencias inserta MANT.2 R2+."
+    "description": "G127 permanece disponible sin candidato, bloque ni VERSION preasignados. PLAN.2 R2/G126-E01 está aceptado localmente y pendiente de integración y publicación. Después de publicar G126 y ejecutar un preflight fresco #166 podrá abrirse VER.2 R6/#164; cualquier trabajo material nuevo de dependencias inserta MANT.2 R2+ antes de continuar."
   }
 }

@@ -85,7 +85,7 @@ class TestNOR2R2MigrationMatrix(unittest.TestCase):
         for carpeta in ("motores/", "modelos/", "servicios/"):
             self.assertNotIn(carpeta, readme)
 
-    def test_documentacion_transversal_registra_r2(self):
+    def test_historia_r2_r4_y_programa_vivo_usan_fuentes_correctas(self):
         matriz_r2 = (
             ROOT
             / "docs"
@@ -94,18 +94,46 @@ class TestNOR2R2MigrationMatrix(unittest.TestCase):
             / "repository-normalization-migration-matrix-nor2-r2.md"
         ).read_text(encoding="utf-8")
 
-        self.assertIn("NOR.2 R2", matriz_r2)
+        self.assertIn(
+            "NOR.2 R2",
+            matriz_r2,
+        )
+
+        ledger = (
+            ROOT
+            / "docs"
+            / "governance"
+            / "pre-1-0-revision-ledger.md"
+        ).read_text(encoding="utf-8")
+
+        for esperado in (
+            "G095",
+            "NOR.2 R2",
+            "G097",
+            "NOR.2 R4",
+        ):
+            self.assertIn(
+                esperado,
+                ledger,
+            )
 
         for ruta in (
-            "CHANGELOG.md",
-            "README.md",
-            "docs/README.md",
             "docs/governance/roadmap.md",
-            "docs/operations/validation.md",
             "docs/governance/master-plan-to-1-0.md",
         ):
-            texto = (ROOT / ruta).read_text(encoding="utf-8")
-            self.assertIn("NOR.2 R4", texto, ruta)
+            texto = (
+                ROOT / ruta
+            ).read_text(encoding="utf-8")
+
+            with self.subTest(ruta=ruta):
+                self.assertIn(
+                    "G125/E01",
+                    texto,
+                )
+                self.assertIn(
+                    "PLAN.2 R2",
+                    texto,
+                )
 
     def test_version_no_cambia(self):
         from app.core.version import APP_VERSION

@@ -1,13 +1,13 @@
 # Validación
 
 **Estado:** Vigente
-**Versión revisada:** `0.1.25.01-beta` — DOC.3 R1 materializado como G125/E01; publicación pendiente.
+**Versión revisada:** `0.1.26.01-beta` — PLAN.2 R2/G126-E01 aceptado localmente; publicación pendiente.
 **Versión base histórica:** `0.0.25-beta`
 **Base documental histórica:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal histórica preservada:** UX.4.6e R8 — validación funcional y procedencia editable — 2026-08-19
 **Última revisión transversal:** UX.4.6f R2 integrada y cierre del Paso 4 — 2026-08-20
 **Revisión de normalización:** NOR.1 R7 — cierre de estándares y preparación de NOR.2 — 2026-08-24
-**Última revisión operativa:** DOC.3 R1 — materialización G125/E01 pendiente de publicación — 2026-09-15
+**Última revisión operativa:** PLAN.2 R2/#155 — G126/E01 aceptado localmente, publicación pendiente — 2026-09-16
 **Clasificación:** Técnica / Calidad
 **Naturaleza documental:** Registro vivo acumulativo — mantiene la estrategia vigente y evidencia histórica de gates protegida por regresiones; los resultados históricos no se reescriben como si pertenecieran al estado actual.
 
@@ -734,9 +734,13 @@ python -m pip check
 
 ## 3. Inventario actual de pruebas
 
-Inventario vigente: **222 módulos**.
+Inventario vigente: **223 módulos**.
 
-DOC.3 R1 incorpora `tests/governance/test_doc3_r1_machine_state.py` como guard del contrato machine-readable que separa la fase activa DOC.3 R1/#154 del siguiente Global disponible G125, sin preasignar candidato ni VERSION.
+El inventario se deriva de todos los módulos `test_*.py` ubicados bajo `tests/` y se mantiene
+sincronizado con la suite versionada. En la frontera vigente, PLAN.2 R2/#155 está aceptado localmente como G126/E01 (`0.1.26.01-beta`) y pendiente de publicación, mientras G127 continúa libre
+y sin candidato. Las regresiones específicas de PLAN.2 protegen el programa
+pre-1.0, la separación entre historia y estado vivo, el baseline UX.7–UX.32,
+la expansión abierta UX.33+ y la ausencia de preasignación de G126.
 
 ### Módulos inventariados
 
@@ -813,6 +817,7 @@ DOC.3 R1 incorpora `tests/governance/test_doc3_r1_machine_state.py` como guard d
 - `tests/governance/test_plan1_terminologia_seguridad.py`
 - `tests/governance/test_plan1_versionado_oficial.py`
 - `tests/governance/test_plan2_r1_master_pending_matrix.py`
+- `tests/governance/test_plan2_r2_program.py`
 - `tests/governance/test_rel_gov1_r2_live_publication_state.py`
 - `tests/governance/test_release_governance_contract.py`
 - `tests/governance/test_release_publication.py`

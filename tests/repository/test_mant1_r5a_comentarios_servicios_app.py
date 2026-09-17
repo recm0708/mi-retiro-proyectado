@@ -85,18 +85,43 @@ class TestMant1R5AComentariosServiciosApp(unittest.TestCase):
             with self.subTest(ruta=ruta):
                 self.assertEqual([], hallazgos)
 
-    def test_documentacion_transversal_registra_mant1_r5a(self):
-        for ruta in (
+    def test_historia_mant1_r5a_y_roadmap_vivo_usan_fuentes_correctas(self):
+        historicos = (
             "CHANGELOG.md",
             "docs/standards/code-and-comments.md",
             "docs/operations/validation.md",
             "docs/architecture/system-architecture.md",
-            "docs/governance/roadmap.md",
-        ):
+        )
+
+        for ruta in historicos:
             texto = self._leer(ruta)
+
             with self.subTest(ruta=ruta):
-                self.assertIn("MANT.1 R5A", texto)
-                self.assertIn("comentarios internos", texto)
+                self.assertIn(
+                    "MANT.1 R5A",
+                    texto,
+                )
+                self.assertIn(
+                    "comentarios internos",
+                    texto,
+                )
+
+        ledger = self._leer(
+            "docs/governance/pre-1-0-revision-ledger.md"
+        )
+
+        self.assertIn("G077", ledger)
+        self.assertIn(
+            "MANT.1 R5A",
+            ledger,
+        )
+
+        roadmap = self._leer(
+            "docs/governance/roadmap.md"
+        )
+
+        self.assertIn("G125/E01", roadmap)
+        self.assertIn("PLAN.2 R2", roadmap)
 
     def test_r5a_no_promueve_version_ni_sec2(self):
         from app.core.version import APP_VERSION

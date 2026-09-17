@@ -1,5 +1,6 @@
 """UX.4.6e R9.1/R9.2 — preservación histórica del cierre 0.0.25-beta."""
 
+import json
 from pathlib import Path
 import re
 import unittest
@@ -49,12 +50,63 @@ class TestUx46eR91CandidatoCierre(unittest.TestCase):
         self.assertIn("ADR-167", texto)
         self.assertIn("## [0.0.24-beta] — 2026-08-18", texto)
 
-    def test_roadmap_preserva_r9_y_declara_cierre_ux46e(self):
-        texto = (DOCS / "governance/roadmap.md").read_text(encoding="utf-8")
-        self.assertIn("R9.1 se conserva como candidato local histórico", texto)
-        self.assertIn("R9.2 — cierre formal mediante PR #21/#22", texto)
-        self.assertIn("[x] **UX.4.6e — Estandarización técnica", texto)
-        self.assertIn("DEV.2 — Centro de desarrollo", texto)
+    def test_cierre_r9_se_preserva_en_ledger_y_release(self):
+        ledger = json.loads(
+            (
+                ROOT
+                / "data/governance/"
+                "pre-1-0-revision-ledger.json"
+            ).read_text(encoding="utf-8")
+        )
+
+        g50 = next(
+            item
+            for item in ledger["entries"]
+            if item["global_revision"] == 50
+        )
+
+        self.assertEqual(
+            "UX.4.6e",
+            g50["block"],
+        )
+        self.assertEqual(
+            "R9 — cierre formal",
+            g50["state"],
+        )
+        self.assertEqual(
+            "v0.0.25-beta",
+            g50["anchor"],
+        )
+        self.assertIn(
+            "PR #21/#22",
+            g50["evidence"],
+        )
+        self.assertIn(
+            "660 pruebas",
+            g50["evidence"],
+        )
+
+        releases = (
+            ROOT / "RELEASES.md"
+        ).read_text(encoding="utf-8")
+
+        self.assertIn(
+            "0.0.25-beta",
+            releases,
+        )
+        self.assertIn(
+            "PR #21",
+            releases,
+        )
+
+        roadmap = (
+            DOCS / "governance/roadmap.md"
+        ).read_text(encoding="utf-8")
+
+        self.assertIn(
+            "PLAN.2 R2",
+            roadmap,
+        )
 
     def test_validacion_registra_gate_local_de_660_cumplido(self):
         texto = (DOCS / "operations/validation.md").read_text(encoding="utf-8")

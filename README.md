@@ -15,7 +15,7 @@
 </p>
 
 <p align="center">
-  <img alt="Versión 0.1.25.01-beta" src="https://img.shields.io/badge/versi%C3%B3n-0.1.25.01--beta-2563eb">
+  <img alt="Versión 0.1.26.01-beta" src="https://img.shields.io/badge/versi%C3%B3n-0.1.26.01--beta-2563eb">
   <img alt="Python 3.13 y 3.14" src="https://img.shields.io/badge/Python-3.13%20%7C%203.14-3776AB?logo=python&logoColor=white">
   <img alt="Licencia propietaria" src="https://img.shields.io/badge/licencia-propietaria-6B7280">
 </p>
@@ -26,64 +26,56 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 
 ## Estado del proyecto
 
-- **Versión canónica vigente:** `0.1.25.01-beta`, obtenida exclusivamente
-  desde [`VERSION`](VERSION). Materializa DOC.3 R1 como G125/E01.
-- **Estado revision-aware actual:** DOC.3 R1 / G125/E01 está materializado
-  localmente y **pendiente de publicación** mediante PR/merge, revalidación de
-  `main`, tag firmado y GitHub Release prerelease.
-- **Última publicación formal:** MANT.1 R8 / G124/E13 permanece integrada en
-  `main` y publicada mediante `v0.1.24.13-beta`.
-- **Auditoría DOC.3 R1:** 173 Markdown auditados; 418 archivos textuales de
-  código/configuración revisados; estructura, enlaces, historia y coherencia
-  semántica reconciliadas.
-- **Validación previa a G125:** Repository Quality Gate **11 PASS / 0 FAIL**;
-  `unittest` **1603 OK**; `pytest` **1643 passed + 7824 subtests**.
-- **Preflight final #166:** 0 PRs abiertos, 0 Dependabot alerts, 0 PRs
-  Dependabot; `pip-audit` y `npm audit --prefix scripts` verdes.
-- **Siguiente Global:** G126 queda únicamente disponible; no tiene candidato,
-  bloque ni `VERSION` preasignados.
-- **Fase material actual:** DOC.3 R1 / #154 — `accepted_pending_publication`.
-  PLAN.2 R2 / #155 no inicia hasta publicar G125/E01.
-- **Trabajo documental diferido:** DOC.4 R1 / #171 con lotes #172–#174 queda
-  `planned_reserved`; PLAN.2 R2 decidirá su posición exacta.
-- **PERSIST.1:** preservado y planificado, sin Global preasignado; no iniciado.
-- **SEC.2:** R1–R6 cerrados; su hardening vigente permanece preservado.
-- **Etapa:** desarrollo beta; repositorio público y ejecución orientada
-  actualmente a entorno local.
+- **Versión canónica vigente:** `0.1.26.01-beta`, obtenida exclusivamente desde
+  [`VERSION`](VERSION); corresponde a PLAN.2 R2 / G126/E01, aceptado localmente y pendiente de publicación.
+- **Última publicación formal:** `v0.1.25.01-beta`, tag firmado sobre
+  `main@ee077c0d83931f140c91583fa8b2c4ae6b72dec8`; GitHub Release prerelease
+  388866555.
+- **Fase material actual:** PLAN.2 R2 / #155, aceptado localmente como **G126/E01 (`0.1.26.01-beta`)** y pendiente de publicación.
+- **Siguiente Global disponible:** G127, libre y sin candidato.
+- **Preflight de entrada #166:** CLEAN; la verificación diferencial de apertura
+  no detectó trabajo material nuevo de dependencias.
+- **Próxima fase material después de PLAN.2 publicado:** VER.2 R6 / #164.
+- **Secuencia posterior:** VER.2 → DOC.4 → #142/derivados → PERSIST.1 → REP.1 →
+  DEPLOY.1 → UX.7→UX.x → SEC.2 R7 → rendimiento → A11Y.2 → REV.1 → #153 →
+  DOC.1 R6 → QA.1 → REL.1.
+- **Programa UX:** baseline conocido UX.7–UX.32; UX.33+ se crea de forma
+  consecutiva cuando aparezca una superficie visual material nueva. #189 obliga
+  a sincronizar todo cambio shared entre Asegurado, Developer y portales futuros.
 - **Primera versión oficial objetivo:** `1.0.0.0` con `Build 000001`.
+- **Etapa:** desarrollo beta; el repositorio público no equivale por sí solo a
+  un despliegue oficial de producción.
 
 La visibilidad pública del repositorio **no convierte una beta de desarrollo en versión oficial, no constituye un despliegue de producción y no modifica por sí sola la licencia vigente**.
 
 La versión se obtiene exclusivamente del archivo [`VERSION`](VERSION). La política completa se documenta en [Política de versionado](VERSIONING.md). VER.2 publicó `v0.0.71.01-beta` bajo la denominación original G071/E01; la reconciliación posterior sitúa ese estado en G087/E01 sin alterar el tag, y su evidencia histórica quedó preservada por NOR.2. Los estándares vigentes del repositorio están en [Estándares del repositorio](docs/standards) y el cierre de la normalización se documenta en [Auditorías de normalización del repositorio](docs/audits/repository).
 
 <!-- POST-NOR3-INTERMEDIATE-SEQUENCE:START -->
-## Secuencia intermedia obligatoria post-NOR.3
+## Estado vigente post-G125 / PLAN.2 R2
 
-G124/MANT.1 R8 permanece cerrado/publicado como `v0.1.24.13-beta` y constituye
-la base material inmediatamente anterior.
+DOC.3 R1/#154 está cerrado, integrado y publicado como **G125/E01**
+(`0.1.25.01-beta`) sobre
+`main@ee077c0d83931f140c91583fa8b2c4ae6b72dec8`, con tag firmado
+`v0.1.25.01-beta` y GitHub Release prerelease 388866555.
 
-DOC.3 R1 / Issue #154 se materializa localmente como **G125/E01**
-(`0.1.25.01-beta`) después de completar la auditoría integral, la normalización
-Markdown 173/173, el registro de DOC.4/#171 como trabajo diferido y el preflight
-final #166 sin trabajo material nuevo de dependencias.
+PLAN.2 R2/#155 está aceptado localmente como G126/E01 (`0.1.26.01-beta`) y pendiente de publicación en la rama
+`plan/plan2-r2-replanificacion-maestra`. G127 permanece libre: no tiene
+candidato, bloque ni `VERSION` preasignados.
 
-El estado G125/E01 queda **aceptado localmente y pendiente de publicación**.
-Su cierre definitivo requiere PR/merge, revalidación de `main`, tag firmado y
-GitHub Release prerelease. PLAN.2 R2/#155 no inicia hasta completar esa
-publicación.
+La continuidad material vigente es:
 
-La continuidad posterior a la publicación de G125 queda:
+1. **PLAN.2 R2 / #155** — replanificación y sincronización del programa.
+2. **VER.2 R6 / #164** — primera fase material después de publicar PLAN.2.
+3. **DOC.4 R1 / #171** — reingeniería documental después de VER.2.
+4. **Auditoría previsional / #142** y derivados funcionales obligatorios.
+5. **PERSIST.1 / #130 → REP.1 / #143 → DEPLOY.1 / #157**.
+6. **UX.7 → UX.x** — baseline conocido UX.7–UX.32 y expansión UX.33+ si
+   aparecen nuevas superficies; #189 exige sincronización visual multiportal.
+7. **SEC.2 R7 → rendimiento → A11Y.2 → REV.1 → #153 → DOC.1 R6 → QA.1 → REL.1**.
 
-1. **PLAN.2 R2 — Issue #155:** replanificación maestra post-DOC.3.
-   Debe ubicar DOC.4 R1/#171 y sus lotes #172/#173/#174.
-2. **VER.2 R6 — Issue #164:** reforma del versionado beta y del componente
-   futuro dedicado a fases MANT.2/Dependabot.
-3. **PERSIST.1 — Issue #130:** permanece bloqueado hasta completar la secuencia
-   que determine PLAN.2 R2 y VER.2 R6.
-
-G126 queda únicamente como siguiente Global disponible y no se asigna por
-adelantado. Antes de cada fase futura se repite el preflight #166; un lote
-material nuevo de dependencias inserta MANT.2 R2+.
+Antes y después de cada fase material se aplica #166. Un trabajo material nuevo
+de dependencias antepone MANT.2 R2+ y obliga a sincronizar el árbol antes de
+continuar.
 <!-- POST-NOR3-INTERMEDIATE-SEQUENCE:END -->
 
 <!-- AUTOMATION-POST-G119:START -->
@@ -190,7 +182,7 @@ Documentos principales:
 - **[Cierre GOV.1 — Auditoría, Gobierno y Trazabilidad Pre-Beta](docs/archive/governance/gov1-closeout.md)** — auditoría final y decisión de cierre de GOV.1;
 - **[Auditoría de versionado pre-1.0](docs/archive/governance/pre-1-0-versioning-audit.md)** — criterio contable y reconciliación VER.2;
 - **[VER.2 — Matriz de decisión de revisiones aceptadas](docs/archive/governance/ver2-revision-decision-matrix.md)** — decisiones de inclusión/exclusión del contador;
-- **[Ledger de revisiones aceptadas pre-1.0](docs/governance/pre-1-0-revision-ledger.md)** — secuencia reconciliada hasta G125; G126 permanece disponible sin candidato;
+- **[Ledger de revisiones aceptadas pre-1.0](docs/governance/pre-1-0-revision-ledger.md)** — secuencia reconciliada hasta G126; G127 permanece disponible sin candidato;
 - [`data/governance/pre-1-0-revision-ledger.json`](data/governance/pre-1-0-revision-ledger.json) — ledger machine-readable;
 - **[Identificadores de bloques de trabajo](docs/standards/work-block-identifiers.md)** — política canónica de identificadores de bloques;
 - [`data/governance/work-block-registry.json`](data/governance/work-block-registry.json) — registro machine-readable de identificadores históricos, cerrados y planificados;

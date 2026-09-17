@@ -179,6 +179,10 @@ class TestUX46iR1ComoSeCalcula(unittest.TestCase):
         roadmap = (ROOT / "docs/governance/roadmap.md").read_text(encoding="utf-8")
         plan = (ROOT / "docs/governance/master-plan-to-1-0.md").read_text(encoding="utf-8")
         changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
+        historico = (
+            ROOT
+            / "docs/archive/governance/doc1-r1-markdown-update-context.md"
+        ).read_text(encoding="utf-8")
 
         self.assertIn("## ADR-178 —", decisiones)
         for rf in range(383, 390):
@@ -186,11 +190,15 @@ class TestUX46iR1ComoSeCalcula(unittest.TestCase):
         self.assertIn("| TR-026 |", matriz)
         self.assertIn("UX.4.6i", readme)
         self.assertIn("**841 pruebas**", readme)
-        self.assertIn("R1.4", roadmap)
-        self.assertIn("**841 pruebas**", roadmap)
-        self.assertIn("R1.2", plan)
-        self.assertIn("R1.3", plan)
-        self.assertIn("R1.4", plan)
+        self.assertIn("R1.2 — navegación", historico)
+        self.assertIn("R1.3 — ejemplos sustituidos", historico)
+        self.assertIn("R1.4 — etiqueta **Ejemplo**", historico)
+        self.assertIn("841 pruebas", historico)
+        self.assertNotIn("UX.4.6i R1.1", historico)
+
+        # El roadmap/master vigentes no necesitan repetir
+        # el detalle revision-by-revision ya cerrado.
+        self.assertNotIn("UX.4.6i R1.1", roadmap)
         self.assertNotIn("UX.4.6i R1.1", plan)
         self.assertIn("### UX.4.6i R1 —", changelog)
         self.assertIn("### UX.4.6i — cierre de Cómo se calcula", changelog)
@@ -329,25 +337,32 @@ class TestUX46iR1ComoSeCalcula(unittest.TestCase):
         plan = (ROOT / "docs/governance/master-plan-to-1-0.md").read_text(encoding="utf-8")
         validacion = (ROOT / "docs/operations/validation.md").read_text(encoding="utf-8")
         guia = (ROOT / "docs/product/calculation-guide.md").read_text(encoding="utf-8")
+        changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
+        historico = (
+            ROOT
+            / "docs/archive/governance/doc1-r1-markdown-update-context.md"
+        ).read_text(encoding="utf-8")
 
         self.assertIn("**DEV.2:** cerrado.", readme)
         self.assertIn("**NOR.2 R4:** cerrado", readme)
         self.assertIn("**NOR.2 R5:** cerrado", readme)
         self.assertIn("**NOR.2 R6:** cerrado", readme)
         self.assertIn("**NOR.2 R7:** cerrado", readme)
+        self.assertIn("### UX.4.6i R1 —", changelog)
+
         for revision in (
-            "R1 — ruta pública",
             "R1.2 — navegación",
             "R1.3 — ejemplos sustituidos",
             "R1.4 — etiqueta **Ejemplo**",
         ):
-            self.assertIn(revision, roadmap)
-        self.assertIn("R1.4", roadmap)
-        self.assertIn("841 pruebas", roadmap)
-        self.assertIn("R1.2", plan)
-        self.assertIn("R1.3", plan)
-        self.assertIn("R1.4", plan)
-        self.assertIn("DEV.2 — Centro de desarrollo", plan)
+            self.assertIn(revision, historico)
+
+        self.assertIn("841 pruebas", historico)
+        self.assertNotIn("UX.4.6i R1.1", historico)
+
+        # La evidencia cerrada no vuelve a imponerse sobre
+        # roadmap/master current-state-only.
+        self.assertNotIn("UX.4.6i R1.1", roadmap)
         self.assertNotIn("UX.4.6i R1.1", plan)
         self.assertIn("841 pruebas en `OK`", validacion)
         self.assertIn("## Cierre de UX.4.6i", guia)

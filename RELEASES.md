@@ -6,16 +6,18 @@
 - G125/E01 (`0.1.25.01-beta`) materializa DOC.3 R1.
 - Alcance: auditoría documental integral de estado vigente, gobierno,
   estructura, historia, coherencia semántica y cierre reproducible.
-- Inventario: 173 Markdown y 418 archivos textuales de código/configuración.
-- Quality Gate FULL pre-materialización: 11 PASS / 0 FAIL; 1603 unittest OK;
-  pytest 1643 passed + 7824 subtests.
-- Preflight final #166: 0 PRs, 0 Dependabot alerts, 0 PRs Dependabot;
-  `pip-audit --strict` y `npm audit --prefix scripts --audit-level=high` verdes.
-- DOC.4/#171 queda diferido como `planned_reserved`, con lotes #172–#174.
-- G124/E13 permanece publicado mediante `v0.1.24.13-beta`.
-- G125/E01 está materializado localmente y pendiente de PR/merge,
-  revalidación de `main`, tag firmado y GitHub Release prerelease.
-- G126 queda disponible sin candidato.
+- Inventario auditado: 173 Markdown y 418 archivos textuales de
+  código/configuración.
+- Preflight final #166: 0 PRs, 0 Dependabot alerts y 0 PRs Dependabot; auditorías
+  Python/npm verdes.
+- Integración/publicación: `main@ee077c0d83931f140c91583fa8b2c4ae6b72dec8`,
+  tag firmado `v0.1.25.01-beta`, GitHub Release prerelease 388866555.
+- Revalidación final publicada: Quality Gate FULL 11 PASS / 0 FAIL; 1608
+  `unittest` OK; `pytest` 1648 passed + 7844 subtests.
+- DOC.4/#171 permanece planificado, ahora ubicado por PLAN.2 R2 después de
+  VER.2 R6 y antes de #142/PERSIST.1.
+- PLAN.2 R2/#155 está aceptado localmente como G126/E01 (`0.1.26.01-beta`) y pendiente de publicación.
+- G126/E01 está aceptado localmente para PLAN.2 R2 y pendiente de publicación; G127 permanece disponible sin candidato.
 <!-- DOC3-R1-G125-PROMOTION:END -->
 
 <!-- MANT1-R8-PROMOTION:START -->

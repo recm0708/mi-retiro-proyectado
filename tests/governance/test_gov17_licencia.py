@@ -68,10 +68,25 @@ class TestGov17Licencia(unittest.TestCase):
         self.assertIn("(LICENSE)", texto)
         self.assertIn("(THIRD_PARTY_NOTICES.md)", texto)
 
-    def test_roadmap_preserva_cierre_gov17(self):
-        texto = (DOCS / "governance/roadmap.md").read_text(encoding="utf-8")
-        self.assertIn("- [x] **GOV.1.7 — Licencia**", texto)
-        self.assertIn("**GOV.1.8 — Auditoría final y cierre pre-beta de gobierno**", texto)
+    def test_cierre_gov17_se_preserva_en_closeout(self):
+        cierre = (
+            DOCS
+            / "archive/governance/gov1-closeout.md"
+        ).read_text(encoding="utf-8")
+
+        self.assertIn("GOV.1.7", cierre)
+        self.assertIn(
+            "licencia propietaria pre-beta",
+            cierre,
+        )
+        self.assertIn("GOV.1.8", cierre)
+
+        roadmap = (
+            DOCS / "governance/roadmap.md"
+        ).read_text(encoding="utf-8")
+
+        self.assertIn("PLAN.2 R2", roadmap)
+        self.assertIn("1.0.0.0", roadmap)
 
     def test_governance_respeta_decision_propietaria(self):
         texto = (ROOT / "GOVERNANCE.md").read_text(encoding="utf-8")

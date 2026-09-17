@@ -54,7 +54,7 @@ def main() -> int:
     token_re = re.compile(
         rf"(?<![A-Za-z0-9_.-])(?:{family_alt})"
         rf"(?:\.(?:[A-Z][A-Z0-9]*|\d+[A-Za-z0-9]*))+"
-        rf"(?![A-Za-z0-9_.-])"
+        rf"(?![A-Za-z0-9_.+-])"
     )
 
     unknown: dict[str, list[str]] = {}
