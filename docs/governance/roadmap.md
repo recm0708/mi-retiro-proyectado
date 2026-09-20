@@ -1,32 +1,44 @@
 # Roadmap
 
 **Estado:** vigente
-**Último estado publicado:** G125/E01 — DOC.3 R1
-**Versión publicada:** `0.1.25.01-beta`
-**`main` base de PLAN.2 R2:** `ee077c0d83931f140c91583fa8b2c4ae6b72dec8`
-**Siguiente Global disponible:** G127, libre y no reservado
-**Fase en curso:** PLAN.2 R2 / #155
-**Fecha de reconciliación:** 2026-09-15
+**Último estado publicado:** G126/E01 — PLAN.2 R2
+**Versión publicada:** `0.1.26.01-beta`
+**`main` publicado de entrada a MANT.2 R2:** `1819f59f95731dc652ad62d84d6a5ad87ad3f8a4`
+**Siguiente Global disponible:** G128, libre y no reservado
+**Fase en curso:** MANT.2 R2 / #206 — G127/E02 aceptado localmente, publicación pendiente
+**Fecha de reconciliación:** 2026-09-19
 
 Este roadmap muestra el programa vigente hacia `1.0.0.0`. La historia de estados aceptados permanece en ledger, `RELEASES.md`, `CHANGELOG.md`, tags, GitHub Releases y `docs/archive/`.
 
 ## Línea base
 
-DOC.3 R1 quedó publicado como G125/E01 mediante `v0.1.25.01-beta` y GitHub Release prerelease 388866555. El preflight #166 de entrada a PLAN.2 R2 quedó limpio y la verificación diferencial confirmó que `main` no se había movido ni había trabajo material nuevo de dependencias. No se insertó MANT.2 R2.
+G125/E01 — DOC.3 R1 permanece preservado como la publicación inmediatamente anterior.
 
-PLAN.2 R2 trabaja en:
+PLAN.2 R2 quedó integrado y publicado como G126/E01 mediante
+`v0.1.26.01-beta`, con `main` en
+`1819f59f95731dc652ad62d84d6a5ad87ad3f8a4` y GitHub Release prerelease
+390399947.
 
-```text
-plan/plan2-r2-replanificacion-maestra
-```
+El preflight fresco #166 inmediatamente anterior a VER.2 detectó dos PRs
+Dependabot nuevos sobre G126:
 
-`VERSION` está materializado en `0.1.26.01-beta` para PLAN.2 R2 / G126-E01, aceptado localmente y pendiente de publicación. G127 permanece libre y no reservado.
+- #204: `uvicorn 0.52.4 → 0.53.0`;
+- #205: `pydantic-core 2.46.5 → 2.49.0`.
+
+#204 requiere reconciliar inventario/licencias antes de integración. #205 no
+es instalable tal cual porque `pydantic==2.13.5` exige exactamente
+`pydantic-core==2.46.5`.
+
+Por la regla transversal #166 se abrió MANT.2 R2/#206 antes de VER.2. La rama
+local de trabajo es `chore/mant2-r2-dependabot-post-g126`.
+
+`VERSION` materializa `0.1.27.02-beta` para MANT.2 R2 / G127-E02 aceptado localmente. G128 continúa libre y sin candidato.
 
 ## Árbol vigente hacia `1.0.0.0`
 
 ```text
-G125 / DOC.3 R1 publicado
-→ PLAN.2 R2
+G126 / PLAN.2 R2 publicado
+→ MANT.2 R2 / #206
 → VER.2 R6
 → DOC.4 R1
 → auditoría previsional #142
@@ -53,6 +65,12 @@ G125 / DOC.3 R1 publicado
 El orden expresa dependencias materiales, no Globals futuros supuestos.
 
 ## Decisiones principales
+
+### MANT.2 R2 antes de VER.2
+
+MANT.2 R2/#206 reconcilia los PRs Dependabot #204/#205 detectados por el
+preflight #166 y queda materializado como G127/E02 (`0.1.27.02-beta`). VER.2 permanece
+bloqueado hasta publicar este mantenimiento y repetir #166 con resultado limpio.
 
 ### VER.2 R6 antes de DOC.4
 
@@ -161,6 +179,7 @@ No bloquean `1.0.0.0`:
 
 ## Clasificación
 
+- **Intermedio obligatorio activo:** MANT.2 R2/#206, insertado por #166.
 - **Obligatorios 1.0:** #164, #171–#174, #142 y derivados obligatorios, #130, #143, #157, #129 y todas sus UX.x, #144, #156, #145, #146, #147, #148 y #149.
 - **Transversales obligatorios:** #166, #189, #153 y DOC.3 por cadencia.
 - **Post-1.0:** #131 y #150–#152.
@@ -181,4 +200,4 @@ No bloquean `1.0.0.0`:
 
 ## Regla de continuidad
 
-La siguiente fase material después de PLAN.2 R2 es VER.2 R6/#164, únicamente después de validar, aceptar, integrar y publicar PLAN.2 R2 y repetir el preflight #166.
+La fase material activa es MANT.2 R2/#206, aceptada localmente como G127/E02 y pendiente de publicación. Después de publicarla debe repetirse #166; solo con ese preflight limpio podrá iniciar VER.2 R6/#164.

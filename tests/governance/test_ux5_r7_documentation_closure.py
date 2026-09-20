@@ -181,7 +181,7 @@ class TestUX5R7DocumentationClosure(unittest.TestCase):
         data = json.loads((ROOT / "data/governance/work-block-registry.json").read_text(encoding="utf-8"))
         ids = {item["identifier"]: item for item in data["identifiers"]}
         self.assertIn("G121", ids["UX.6"]["global_refs"])
-        self.assertEqual("0.1.26.01-beta", (ROOT / "VERSION").read_text(encoding="utf-8").strip())
+        self.assertEqual("0.1.27.02-beta", (ROOT / "VERSION").read_text(encoding="utf-8").strip())
 
 
 if __name__ == "__main__":

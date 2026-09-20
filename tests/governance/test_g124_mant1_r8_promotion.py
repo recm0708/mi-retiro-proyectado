@@ -16,9 +16,9 @@ ROOT = Path(__file__).resolve().parents[2]
 class TestG124MANT1R8Promotion(unittest.TestCase):
     def test_version_actual_avanza_sin_reescribir_g124(self):
         version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
-        self.assertEqual("0.1.26.01-beta", version)
+        self.assertEqual("0.1.27.02-beta", version)
         self.assertEqual(version, APP_VERSION)
-        self.assertEqual((126, 1), descomponer_version_beta_revision(version))
+        self.assertEqual((127, 2), descomponer_version_beta_revision(version))
         entry = next(x for x in cargar_ledger()["entries"] if x["global_revision"] == 124)
         self.assertEqual("MANT.1", entry["block"])
         self.assertEqual(13, entry["ordinal"])
@@ -27,8 +27,8 @@ class TestG124MANT1R8Promotion(unittest.TestCase):
 
     def test_ledger_preserva_g124_y_materializa_g125(self):
         ledger = cargar_ledger()
-        self.assertEqual(126, ledger["accepted_count"])
-        self.assertEqual(127, ledger["next_global"])
+        self.assertEqual(127, ledger["accepted_count"])
+        self.assertEqual(128, ledger["next_global"])
         self.assertIsNone(ledger["next_candidate"])
         self.assertIsNone(ledger["next_candidate_block"])
         entry = next(x for x in ledger["entries"] if x["global_revision"] == 124)
@@ -47,15 +47,19 @@ class TestG124MANT1R8Promotion(unittest.TestCase):
         self.assertIsNone(candidate["global_revision"])
         self.assertIsNone(candidate["revision_aware"])
         self.assertIsNone(candidate["block"])
-        self.assertEqual(127, candidate["next_global_available"])
+        self.assertEqual(128, candidate["next_global_available"])
         self.assertEqual("unassigned", candidate["state"])
 
-    def test_manifest_actual_materializa_g125_e01(self):
-        manifest = json.loads((ROOT / "data/governance/release-publication-manifest.json").read_text(encoding="utf-8"))
-        self.assertEqual("0.1.26.01-beta", manifest["version"])
-        self.assertEqual("PLAN.2", manifest["block"])
+    def test_manifest_actual_materializa_mant2_r2(self):
+        manifest = json.loads(
+            (ROOT / "data/governance/release-publication-manifest.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        self.assertEqual("0.1.27.02-beta", manifest["version"])
+        self.assertEqual("MANT.2", manifest["block"])
         self.assertEqual("R2", manifest["revision"])
-        self.assertEqual(127, manifest["next_step"]["global_revision"])
+        self.assertEqual(128, manifest["next_step"]["global_revision"])
         self.assertIsNone(manifest["next_step"]["revision_aware"])
         self.assertIsNone(manifest["next_step"]["block"])
         self.assertIn("VER.2 R6/#164", manifest["next_step"]["description"])

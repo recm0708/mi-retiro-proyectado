@@ -3,7 +3,7 @@
 **Proyecto:** Mi Retiro Proyectado
 **Estado:** vigente desde GOV.1.2
 **Fecha de adopción:** 2026-08-18
-**Última revisión de estado:** PLAN.2 R2/#155 aceptado localmente como G126/E01 (`0.1.26.01-beta`), publicación pendiente; G127 libre — 2026-09-16
+**Última revisión de estado:** MANT.2 R2/#206 aceptado localmente como G127/E02 (`0.1.27.02-beta`), publicación pendiente; G128 libre — 2026-09-19
 
 <!-- NOR3-G122-PROMOTION:START -->
 ## Registro histórico — promoción G122-E01 post-NOR.3
@@ -25,41 +25,46 @@
 <!-- NOR3-G122-PROMOTION:END -->
 
 <!-- POST-NOR3-INTERMEDIATE-SEQUENCE:START -->
-## Estado vigente post-G125 / PLAN.2 R2
+## Estado vigente post-G126 / MANT.2 R2 — candidato G127/E02
 
-DOC.3 R1/#154 está cerrado, integrado y publicado como **G125/E01**
-(`0.1.25.01-beta`) sobre
-`main@ee077c0d83931f140c91583fa8b2c4ae6b72dec8`, con tag firmado
-`v0.1.25.01-beta` y GitHub Release prerelease 388866555.
+PLAN.2 R2/#155 permanece cerrado, integrado y publicado como **G126/E01**
+(`0.1.26.01-beta`) sobre `main@1819f59f95731dc652ad62d84d6a5ad87ad3f8a4`,
+mediante PR #202, tag firmado `v0.1.26.01-beta` y GitHub Release prerelease 390399947.
 
-PLAN.2 R2/#155 está aceptado localmente como G126/E01 (`0.1.26.01-beta`) y pendiente de publicación en la rama
-`plan/plan2-r2-replanificacion-maestra`. G127 permanece libre: no tiene
-candidato, bloque ni `VERSION` preasignados.
+El preflight #166 previo a VER.2 detectó #204/#205 e insertó MANT.2 R2/#206.
+La integración coordinada acepta `uvicorn 0.53.0`, conserva
+`pydantic==2.13.5` + `pydantic_core==2.46.5`, cierra #204/#205 sin merge
+directo, deja 0 PRs Dependabot, 0 ramas `dependabot/*` y 0 alerts abiertos, e
+institucionaliza mediante #203 el checklist obligatorio de Issues.
+
+MANT.2 R2/#206 queda **materializado y aceptado localmente como G127/E02**
+(`0.1.27.02-beta`) en el Draft PR #207. Integración, revalidación de `main`, tag firmado
+y GitHub Release prerelease todavía están pendientes.
+
+**G128 permanece libre** y sin candidato, bloque ni `VERSION` preasignados.
 
 La continuidad material vigente es:
 
-1. **PLAN.2 R2 / #155** — replanificación y sincronización del programa.
-2. **VER.2 R6 / #164** — primera fase material después de publicar PLAN.2.
-3. **DOC.4 R1 / #171** — reingeniería documental después de VER.2.
-4. **Auditoría previsional / #142** y derivados funcionales obligatorios.
-5. **PERSIST.1 / #130 → REP.1 / #143 → DEPLOY.1 / #157**.
-6. **UX.7 → UX.x** — baseline conocido UX.7–UX.32 y expansión UX.33+ si
-   aparecen nuevas superficies; #189 exige sincronización visual multiportal.
-7. **SEC.2 R7 → rendimiento → A11Y.2 → REV.1 → #153 → DOC.1 R6 → QA.1 → REL.1**.
-
-Antes y después de cada fase material se aplica #166. Un trabajo material nuevo
-de dependencias antepone MANT.2 R2+ y obliga a sincronizar el árbol antes de
-continuar.
+1. **publicar MANT.2 R2 / G127-E02 / #206**;
+2. **preflight fresco #166** después de la publicación;
+3. **VER.2 R6 / #164** solo si #166 queda limpio;
+4. **DOC.4 R1 / #171**;
+5. **#142** y derivados funcionales obligatorios;
+6. **PERSIST.1 / #130 → REP.1 / #143 → DEPLOY.1 / #157**;
+7. **UX.7→UX.x / #129** bajo #189;
+8. **SEC.2 R7 → rendimiento → A11Y.2 → REV.1 → #153 → DOC.1 R6 → QA.1 → REL.1**.
 <!-- POST-NOR3-INTERMEDIATE-SEQUENCE:END -->
+
 
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado de gobierno vigente
 
-- `VERSION` sigue siendo la fuente única y permanece en `0.1.26.01-beta`.
-- DOC.3 R1 está cerrado/publicado como G125/E01 mediante `v0.1.25.01-beta`.
-- PLAN.2 R2/#155 está aceptado localmente como G126/E01 (`0.1.26.01-beta`) y pendiente de publicación.
-- G127 permanece libre y `current_candidate` sigue sin asignar.
-- VER.2 R6/#164 será la siguiente fase material después de publicar PLAN.2.
+- `VERSION` sigue siendo la fuente única y materializa `0.1.27.02-beta` para MANT.2 R2 / G127-E02.
+- PLAN.2 R2/#155 está cerrado/publicado como G126/E01 mediante `v0.1.26.01-beta`.
+- DOC.3 R1/G125 permanece preservado como publicación anterior.
+- MANT.2 R2/#206 está aceptado localmente como G127/E02; #204/#205 quedaron cerrados como sustituidos por #207.
+- G128 permanece libre y `current_candidate` sigue sin asignar.
+- VER.2 R6/#164 permanece bloqueado hasta publicar MANT.2 R2 y repetir #166 limpio.
 - DOC.4/#171 queda después de VER.2; #142/derivados preceden PERSIST.1.
 - El programa UX se gobierna por #129: baseline UX.7–UX.32, expansión UX.33+
   y sincronización visual multiportal obligatoria mediante #189.
@@ -89,6 +94,7 @@ El mantenedor y responsable de revisión actual del repositorio es:
 6. **Historia preservada:** una decisión sustituida se marca como tal; no se elimina para aparentar que nunca existió.
 7. **Independencia institucional:** el proyecto no debe presentarse como producto oficial de la CSS.
 8. **Sincronización transversal:** cuando evoluciona un contrato compartido, se revisan conjuntamente código, pruebas, interfaz, normativa, documentación y evidencia de release que dependan de él.
+9. **Issues verificables:** toda Issue nueva debe incluir un checklist real de trabajo y cierre que permanezca actualizado hasta resolver o transferir todos sus puntos aplicables.
 
 ## 4. Tipos de cambio
 
@@ -126,6 +132,33 @@ Requieren revisión de:
 ### 4.4. Gobierno y releases
 
 Cambios en versionado, licencia, gobernanza, CI o proceso de publicación deben quedar documentados y no pueden depender únicamente de una convención oral.
+
+### 4.5. Ciclo de vida obligatorio de Issues
+
+Toda Issue nueva, ya sea creada manualmente, mediante Issue Forms, automatización
+o asistencia programática, debe contener al menos un checklist Markdown real con
+elementos `- [ ]` / `- [x]`.
+
+El checklist debe representar trabajo verificable y, cuando aplique, cubrir:
+
+- condiciones y dependencias de entrada;
+- implementación o trabajo principal;
+- pruebas, gates y evidencia;
+- documentación, trazabilidad e Issues derivadas;
+- criterio de cierre.
+
+Una casilla solo pasa a `[x]` cuando exista evidencia suficiente de que el punto
+quedó completado. Una Issue material se cierra cuando todos sus puntos
+aplicables y su criterio de cierre estén completos. Si aparece trabajo fuera de
+alcance, debe transferirse a un owner/Issue explícito antes del cierre.
+
+Las Issues transversales o recurrentes pueden permanecer abiertas mientras
+exista trabajo recurrente pendiente, pero cada ejecución debe actualizar su
+checklist y conservar evidencia del resultado.
+
+Los Issue Forms versionados bajo `.github/ISSUE_TEMPLATE/` deben pregenerar un
+checklist de trabajo/cierre. Los guards del repositorio protegen este contrato
+para impedir que nuevas plantillas vuelvan a crear Issues sin seguimiento.
 
 ## 5. Decisiones
 

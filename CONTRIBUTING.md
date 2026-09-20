@@ -20,40 +20,44 @@
 <!-- NOR3-G122-PROMOTION:END -->
 
 <!-- POST-NOR3-INTERMEDIATE-SEQUENCE:START -->
-## Estado vigente post-G125 / PLAN.2 R2
+## Estado vigente post-G126 / MANT.2 R2 — candidato G127/E02
 
-DOC.3 R1/#154 está cerrado, integrado y publicado como **G125/E01**
-(`0.1.25.01-beta`) sobre
-`main@ee077c0d83931f140c91583fa8b2c4ae6b72dec8`, con tag firmado
-`v0.1.25.01-beta` y GitHub Release prerelease 388866555.
+PLAN.2 R2/#155 permanece cerrado, integrado y publicado como **G126/E01**
+(`0.1.26.01-beta`) sobre `main@1819f59f95731dc652ad62d84d6a5ad87ad3f8a4`,
+mediante PR #202, tag firmado `v0.1.26.01-beta` y GitHub Release prerelease 390399947.
 
-PLAN.2 R2/#155 está aceptado localmente como G126/E01 (`0.1.26.01-beta`) y pendiente de publicación en la rama
-`plan/plan2-r2-replanificacion-maestra`. G127 permanece libre: no tiene
-candidato, bloque ni `VERSION` preasignados.
+El preflight #166 previo a VER.2 detectó #204/#205 e insertó MANT.2 R2/#206.
+La integración coordinada acepta `uvicorn 0.53.0`, conserva
+`pydantic==2.13.5` + `pydantic_core==2.46.5`, cierra #204/#205 sin merge
+directo, deja 0 PRs Dependabot, 0 ramas `dependabot/*` y 0 alerts abiertos, e
+institucionaliza mediante #203 el checklist obligatorio de Issues.
+
+MANT.2 R2/#206 queda **materializado y aceptado localmente como G127/E02**
+(`0.1.27.02-beta`) en el Draft PR #207. Integración, revalidación de `main`, tag firmado
+y GitHub Release prerelease todavía están pendientes.
+
+**G128 permanece libre** y sin candidato, bloque ni `VERSION` preasignados.
 
 La continuidad material vigente es:
 
-1. **PLAN.2 R2 / #155** — replanificación y sincronización del programa.
-2. **VER.2 R6 / #164** — primera fase material después de publicar PLAN.2.
-3. **DOC.4 R1 / #171** — reingeniería documental después de VER.2.
-4. **Auditoría previsional / #142** y derivados funcionales obligatorios.
-5. **PERSIST.1 / #130 → REP.1 / #143 → DEPLOY.1 / #157**.
-6. **UX.7 → UX.x** — baseline conocido UX.7–UX.32 y expansión UX.33+ si
-   aparecen nuevas superficies; #189 exige sincronización visual multiportal.
-7. **SEC.2 R7 → rendimiento → A11Y.2 → REV.1 → #153 → DOC.1 R6 → QA.1 → REL.1**.
-
-Antes y después de cada fase material se aplica #166. Un trabajo material nuevo
-de dependencias antepone MANT.2 R2+ y obliga a sincronizar el árbol antes de
-continuar.
+1. **publicar MANT.2 R2 / G127-E02 / #206**;
+2. **preflight fresco #166** después de la publicación;
+3. **VER.2 R6 / #164** solo si #166 queda limpio;
+4. **DOC.4 R1 / #171**;
+5. **#142** y derivados funcionales obligatorios;
+6. **PERSIST.1 / #130 → REP.1 / #143 → DEPLOY.1 / #157**;
+7. **UX.7→UX.x / #129** bajo #189;
+8. **SEC.2 R7 → rendimiento → A11Y.2 → REV.1 → #153 → DOC.1 R6 → QA.1 → REL.1**.
 <!-- POST-NOR3-INTERMEDIATE-SEQUENCE:END -->
+
 
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado de contribución vigente
 
-- `VERSION` está materializado en `0.1.26.01-beta` para PLAN.2 R2 / G126-E01; G125/E01 permanece como última publicación formal (`0.1.25.01-beta`).
-- PLAN.2 R2/#155 está aceptado localmente como G126/E01 (`0.1.26.01-beta`) y pendiente de publicación y G127 sigue libre, sin candidato.
-- La siguiente fase material será VER.2 R6/#164 después de publicar PLAN.2 y
-  repetir #166.
+- `VERSION` materializa `0.1.27.02-beta` para MANT.2 R2 / G127-E02 aceptado localmente; G126/E01 permanece como última publicación formal.
+- G125/E01 permanece preservado como publicación formal anterior.
+- MANT.2 R2/#206 está aceptado localmente como G127/E02 y G128 sigue libre sin candidato.
+- VER.2 R6/#164 solo podrá iniciar después de publicar MANT.2 R2 y repetir #166 limpio.
 - PERSIST.1 no comienza antes de VER.2 → DOC.4 → #142/derivados.
 - La ola UX es dinámica (UX.7→UX.x) y todo cambio visual shared debe cumplir
   #189 en todos los portales aplicables.

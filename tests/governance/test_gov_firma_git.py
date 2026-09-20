@@ -151,15 +151,19 @@ class TestGovFirmaGit(unittest.TestCase):
         ).read_text(encoding="utf-8")
 
         self.assertIn(
-            "**Versión publicada:** `0.1.25.01-beta`",
+            "**Versión publicada:** `0.1.26.01-beta`",
             roadmap,
         )
         self.assertIn(
-            "**Fase en curso:** PLAN.2 R2 / #155",
+            "**Fase en curso:** MANT.2 R2 / #206",
             roadmap,
         )
         self.assertIn(
-            "G127, libre y no reservado",
+            "G125/E01",
+            roadmap,
+        )
+        self.assertIn(
+            "G128, libre y no reservado",
             roadmap,
         )
 

@@ -1,12 +1,12 @@
 # Dependencias y terceros
 
 **Estado:** Vigente
-**Versión de aplicación revisada:** `0.1.26.01-beta`
+**Versión de aplicación revisada:** `0.1.27.02-beta`
 **Versión base histórica:** `0.0.25-beta`
 **Versión base histórica preservada:** `0.0.23-beta`
 **Base documental:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal histórica:** GOV.1.5 R3 — 2026-08-18
-**Última revisión documental:** MANT.2 R1 — 2026-09-14
+**Última revisión documental:** MANT.2 R2 — 2026-09-19
 **Clasificación:** Técnica / Terceros / Auditoría
 
 Este inventario distingue dependencias directas, snapshot transitivo, recursos externos y servicios de red. GOV.1.7 adopta una licencia propietaria para materiales originales sin relicenciar dependencias upstream.
@@ -22,7 +22,7 @@ Las versiones corresponden al `requirements.txt` vigente. La estructura document
 | Pydantic | 2.13.5 | Validación/modelos | MIT | Validación local de estructuras | Revisar cambios de esquema/core |
 | python-multipart | 0.0.32 | Recepción multipart de archivos | Apache-2.0 | Procesa cargas recibidas por FastAPI | Sensible a frontera de upload |
 | pypdf | 6.18.1 | Extracción y lectura controlada de PDF | BSD-3-Clause | Procesa PDF en memoria; sin red propia | Dependencia crítica de parser; mantener regresiones específicas en cada actualización |
-| Uvicorn | 0.52.4 | Servidor ASGI | BSD-3-Clause | Sirve la aplicación; la red depende del modo de ejecución | Revisar configuración de despliegue |
+| Uvicorn | 0.53.0 | Servidor ASGI | BSD-3-Clause | Sirve la aplicación; la red depende del modo de ejecución | HTTP/2/zttp y zuvloop continúan opt-in; revisar configuración de despliegue |
 
 Fuentes upstream de licencia verificadas documentalmente:
 
@@ -168,7 +168,32 @@ La aceptación de estas versiones exige instalación reproducible, `pip check`,
 Quality Gate. Los 37 alerts históricos revisados permanecen en estado `fixed`;
 no se reescribe su evidencia histórica.
 
-### 7.2. Mantenimiento pre-G118
+### 7.2. MANT.2 R2 — mantenimiento post-G126
+
+El preflight fresco #166 previo a VER.2 detectó los PRs Dependabot #204 y #205.
+
+La decisión coordinada de MANT.2 R2 es:
+
+- integrar `Uvicorn 0.52.4` → `0.53.0`, release estable que conserva licencia
+  BSD-3-Clause y soporte para las versiones Python usadas por el proyecto;
+- mantener `pydantic==2.13.5` + `pydantic_core==2.46.5`;
+- no integrar `pydantic_core==2.49.0` de forma aislada, porque el pin estable
+  actual de Pydantic exige exactamente `2.46.5`;
+- no introducir Pydantic `2.14.0b2` únicamente para satisfacer #205, porque
+  esa versión continúa siendo prerelease.
+
+Uvicorn 0.53.0 incorpora HTTP/2 experimental mediante `zttp` y soporte de
+`zuvloop` como opciones explícitas. Mi Retiro Proyectado no habilita esas
+opciones en este mantenimiento. También incorpora correcciones de manejo de
+`Connection: close`, proxy IPv6 loopback y keep-alive durante upgrade
+WebSocket.
+
+La aceptación requiere instalación reproducible, `pip check`,
+`pip-audit --strict`, regresiones documentales/licencias, Quality Gate completo
+y CI remoto en verde. Después de validar #207, #204/#205 deben cerrarse o
+marcarse como sustituidos con trazabilidad a la decisión coordinada.
+
+### 7.3. Mantenimiento pre-G118
 
 El mantenimiento pre-G118 actualiza las dos dependencias directas propuestas por Dependabot sin consumir un Global ni modificar `VERSION`:
 
@@ -177,7 +202,7 @@ El mantenimiento pre-G118 actualiza las dos dependencias directas propuestas por
 
 Los guards de inventario obtienen la versión esperada desde `requirements.txt` y exigen que esta documentación y `THIRD_PARTY_NOTICES.md` permanezcan sincronizados con el pin vigente.
 
-### 7.3. Antecedente histórico G062
+### 7.4. Antecedente histórico G062
 
 La actualización a `pypdf 6.16.1` conservó las regresiones específicas introducidas con `6.15.0`. El salto `6.15.0` → `6.16.1` incorporó correcciones upstream de seguridad y robustez relacionadas con ciclos e iteraciones limitadas durante el procesamiento PDF.
 

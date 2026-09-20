@@ -1,5 +1,35 @@
 # Registro de versiones y estados del proyecto
 
+<!-- MANT2-R2-G127-PROMOTION:START -->
+## Promoción G127/E02 — MANT.2 R2
+
+- G127/E02 (`0.1.27.02-beta`) materializa MANT.2 R2.
+- Uvicorn: 0.53.0; Pydantic: 2.13.5; pydantic-core: 2.46.5.
+- #204/#205: cerrados sin merge directo como sustituidos por Draft PR #207.
+- Reauditoría previa al candidato: 0 PRs Dependabot, 0 ramas `dependabot/*` y 0 alerts abiertos.
+- CP2 remoto: Repository Quality Gate #56, Python Compatibility y Dependency Security #24 en success.
+- CP3 remoto: Repository Quality Gate #57, Python Compatibility y Dependency Security #25 en success.
+- #203: checklist obligatorio de Issues materializado en Issue Forms y protegido por regresión.
+- G128 queda disponible sin candidato.
+- El tag `v0.1.27.02-beta` y GitHub Release prerelease se crean únicamente después de merge y revalidación de `main`.
+<!-- MANT2-R2-G127-PROMOTION:END -->
+
+## Publicación G126/E01 — PLAN.2 R2
+
+- Estado publicado: G126/E01 (`0.1.26.01-beta`) para PLAN.2 R2/#155.
+- Integración: PR #202; `main@1819f59f95731dc652ad62d84d6a5ad87ad3f8a4`.
+- Publicación: tag firmado `v0.1.26.01-beta`; GitHub Release prerelease
+  390399947, publicado el 2026-09-17.
+- Validación de publicación: Repository Quality Gate FULL 11 PASS / 0 FAIL;
+  1613 `unittest`; `pytest` 1653 passed + 7913 subtests; Markdown 173 sin
+  bloqueantes; 17 familias / 78 identificadores; `pip check` limpio;
+  `pip-audit` sin vulnerabilidades conocidas.
+- G127 permanece libre y sin candidato revision-aware.
+- El preflight fresco #166 posterior a G126 detectó los PRs Dependabot #204 y
+  #205 e insertó MANT.2 R2/#206 antes de VER.2 R6/#164.
+- MANT.2 R2 está en curso sin Global, Edition ni `VERSION` preasignados.
+
+
 <!-- DOC3-R1-G125-PROMOTION:START -->
 ## Promoción G125/E01 — DOC.3 R1
 

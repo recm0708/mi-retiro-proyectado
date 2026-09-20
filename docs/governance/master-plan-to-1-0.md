@@ -1,19 +1,19 @@
 # Plan maestro hacia Mi Retiro Proyectado 1.0
 
 **Estado:** vigente
-**Último estado publicado:** G125/E01 — DOC.3 R1
-**Versión publicada:** `0.1.25.01-beta`
-**Fase en curso:** PLAN.2 R2 / #155
-**Siguiente Global disponible:** G127, libre y no reservado
+**Último estado publicado:** G126/E01 — PLAN.2 R2
+**Versión publicada:** `0.1.26.01-beta`
+**Fase en curso:** MANT.2 R2 / #206 — G127/E02 aceptado localmente, publicación pendiente
+**Siguiente Global disponible:** G128, libre y no reservado
 **Objetivo estable:** `1.0.0.0`
-**Fecha de reconciliación:** 2026-09-15
+**Fecha de reconciliación:** 2026-09-19
 
 Este documento es la autoridad narrativa del programa vigente hacia la primera versión oficial. La matriz tabular vive en [Matriz maestra de pendientes hacia 1.0](pre-1-0-pending-matrix.md); la historia aceptada se preserva en ledger, `RELEASES.md`, `CHANGELOG.md`, tags, GitHub Releases y `docs/archive/`.
 
 ## 1. Principios
 
 1. Ninguna fase planificada recibe Global o `VERSION` por anticipado.
-2. G126 está materializado como PLAN.2 R2/E01; G127 es el siguiente Global aritméticamente disponible y permanece libre.
+2. G126 está publicado como PLAN.2 R2/E01; MANT.2 R2 queda aceptado localmente como G127/E02 y G128 es el siguiente Global disponible.
 3. Un Global se materializa únicamente con candidato real, validado y aceptable.
 4. Issues y documentación versionada deben describir el mismo programa.
 5. Trabajo material nuevo con responsabilidad propia se inserta inmediatamente en todos los árboles afectados antes de continuar.
@@ -23,26 +23,33 @@ Este documento es la autoridad narrativa del programa vigente hacia la primera v
 9. El programa UX es abierto: el número final UX.x se conoce solo cuando las superficies pre-1.0 están estabilizadas.
 10. `1.0.0.0` se publica únicamente después de QA.1 y REL.1.
 
-## 2. Línea base post-G125
+## 2. Línea base post-G126
 
 ```text
-Global:  G125
+Global:  G126
 Edition: E01
 Version: 0.1.26.01-beta
-Tag:     v0.1.25.01-beta
-main:    ee077c0d83931f140c91583fa8b2c4ae6b72dec8
-Release: 388866555
+Tag:     v0.1.26.01-beta
+main:    1819f59f95731dc652ad62d84d6a5ad87ad3f8a4
+Release: 390399947
 ```
 
-El preflight #166 inmediatamente anterior a PLAN.2 R2 quedó CLEAN y la verificación diferencial confirmó el mismo `main`, 0 PRs abiertos, 0 PRs Dependabot y el mismo Dependency Security verde. No se activó MANT.2 R2.
+PLAN.2 R2/#155 está cerrado, integrado y publicado.
+G125/E01 — DOC.3 R1 permanece preservado como publicación inmediatamente anterior.
 
-PLAN.2 R2 se abrió en `plan/plan2-r2-replanificacion-maestra`. `VERSION` permanece en `0.1.26.01-beta`; PLAN.2 todavía no es G126.
+
+El preflight #166 inmediatamente anterior a VER.2 detectó los PRs Dependabot
+#204 y #205. Por la regla permanente de inserción se creó MANT.2 R2/#206 antes
+de VER.2 R6/#164.
+
+MANT.2 R2 queda materializado y aceptado localmente como G127/E02 (`0.1.27.02-beta`),
+pendiente de integración/publicación. G128 permanece libre.
 
 ## 3. Árbol definitivo de dependencias
 
 ```text
-G125 / DOC.3 R1 publicado
-→ PLAN.2 R2
+G126 / PLAN.2 R2 publicado
+→ MANT.2 R2 / #206
 → VER.2 R6
 → DOC.4 R1
 → #142 auditoría previsional
@@ -71,10 +78,16 @@ G125 / DOC.3 R1 publicado
 ## 4. Bloques materiales previos a UX
 
 ### PLAN.2 R2 — #155
-Clasifica, ordena y sincroniza el programa. No implementa las fases posteriores ni reserva G126 antes de candidato real.
+Fase cerrada, integrada y publicada como G126/E01. Su programa vigente queda
+preservado como baseline de entrada a MANT.2 R2; ya no representa la fase activa.
+
+### MANT.2 R2 — #206
+Integra de forma coordinada el trabajo Dependabot detectado por #166. Evalúa
+#204/#205 sin merge directo, preserva reproducibilidad y mantiene G127 libre
+hasta existir candidato material validado.
 
 ### VER.2 R6 — #164
-Primera fase material después de PLAN.2 publicado. Reforma el contrato revision-aware antes de DOC.4 para que registry, ledger, manifests y tooling sean canonizados una sola vez sobre el modelo final.
+Primera fase material planificada después de MANT.2 R2 publicado y de un nuevo #166 limpio. Reforma el contrato revision-aware antes de DOC.4 para que registry, ledger, manifests y tooling sean canonizados una sola vez sobre el modelo final.
 
 ### DOC.4 R1 — #171
 Después de VER.2. Lotes internos #172 Markdown, #173 estructura/poda y #174 artefactos declarativos. #174 absorbe #176. DOC.4 crea nuevo baseline documental y reinicia la cadencia DOC.3.
@@ -189,7 +202,7 @@ DOC.3 cuenta fases materiales top-level aceptadas, no lotes internos. DOC.4 crea
 ## 11. Clasificación
 
 ### Obligatorios 1.0
-#164, #171–#174, #142 y derivados obligatorios, #130, #143, #157, #129 y todas las UX.x que registre, #144, #156, #145, #146, #147, #148 y #149.
+MANT.2 R2/#206 como inserción activa previa, seguido por #164, #171–#174, #142 y derivados obligatorios, #130, #143, #157, #129 y todas las UX.x que registre, #144, #156, #145, #146, #147, #148 y #149.
 
 ### Transversales obligatorios
 #166, #189, #153 y DOC.3 por cadencia.
@@ -215,8 +228,8 @@ Ninguno identificado.
 - `GOVERNANCE.md`
 - Issues propietarios
 
-El ledger y manifest no reservan PLAN.2 R2/G126 antes de aceptación. La historia G001–G125 permanece inmutable.
+El ledger y el manifest mantienen G127 sin candidato material mientras MANT.2 R2/#206 está en curso. La historia publicada G001–G126 permanece inmutable.
 
 ## 13. Continuidad
 
-La siguiente fase material es VER.2 R6/#164, únicamente después de que PLAN.2 R2 sea validado, aceptado, integrado, publicado y un preflight fresco #166 vuelva a quedar limpio.
+La fase material activa es MANT.2 R2/#206. Tras su cierre/publicación se repite #166; VER.2 R6/#164 solo inicia si ese preflight queda limpio.

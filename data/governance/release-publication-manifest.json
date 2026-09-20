@@ -1,51 +1,45 @@
 {
   "schema_version": 1,
-  "version": "0.1.26.01-beta",
-  "block": "PLAN.2",
+  "version": "0.1.27.02-beta",
+  "block": "MANT.2",
   "revision": "R2",
   "summary": [
-    "G126/E01 materializa PLAN.2 R2 como replanificación maestra post-G125 hacia 1.0.",
-    "La fase reconcilia el grafo pre-1.0, separa trabajo obligatorio/post-1.0/transversal, fija VER.2 → DOC.4 → #142/derivados → PERSIST → REP → DEPLOY, y establece la ola UX dinámica UX.7–UX.x con #189."
+    "G127/E02 materializa MANT.2 R2 como mantenimiento coordinado post-G126 antes de VER.2.",
+    "La fase integra Uvicorn 0.53.0, conserva la pareja estable Pydantic/Pydantic Core, resuelve #204/#205 sin merge directo y deja Dependabot limpio antes de la publicación."
   ],
   "changes": [
-    "PLAN.2 R2 queda materializado como G126/E01.",
-    "`VERSION` avanza a `0.1.26.01-beta`.",
-    "VER.2 R6/#164 queda como siguiente fase material únicamente después de publicar PLAN.2 R2.",
-    "DOC.4 R1/#171 queda después de VER.2 y antes de #142/PERSIST.",
-    "El programa UX obligatorio queda granularizado en UX.7–UX.32 con expansión dinámica UX.33+.",
-    "#189 gobierna sincronización visual shared multiportal y el gate sin drift.",
-    "G127 queda disponible sin bloque ni VERSION preasignados."
+    "MANT.2 R2 queda materializado como G127/E02.",
+    "`VERSION` avanza a `0.1.27.02-beta`.",
+    "`uvicorn` avanza de 0.52.4 a 0.53.0.",
+    "`pydantic==2.13.5` y `pydantic_core==2.46.5` permanecen coordinados; no se introduce una prerelease de Pydantic.",
+    "#204 y #205 quedan sustituidos por la integración coordinada del Draft PR #207.",
+    "La política transversal #203 exige checklist real y criterio de cierre en toda Issue nueva mediante 7 Issue Forms y un guard automático.",
+    "G128 queda disponible sin bloque ni VERSION preasignados."
   ],
   "validation": [
-    "Repository Quality Gate FULL: 11 PASS / 0 FAIL.",
-    "1613 unittest OK.",
-    "pytest: 1653 passed + 7913 subtests.",
-    "Markdown: 173 archivos sin bloqueantes.",
-    "JavaScript: 27 archivos válidos.",
-    "Identificadores: 17 familias / 78 identificadores.",
-    "Integridad: 656 archivos Git/versionables; 84 directorios canónicos; 0 divergencias.",
-    "git diff --check: limpio.",
-    "Preflight final #166: main/origin-main conservan G125.",
-    "0 Pull Requests abiertos.",
-    "0 Dependabot alerts abiertos.",
+    "CP2 local: Repository Quality Gate 10 PASS / 0 FAIL; 1618 unittest OK.",
+    "CP2 remoto: Repository Quality Gate #56, Python Compatibility y Dependency Security #24 en success.",
+    "CP3 local: Repository Quality Gate 10 PASS / 0 FAIL; 1621 unittest OK.",
+    "CP3 remoto: Repository Quality Gate #57, Python Compatibility y Dependency Security #25 en success.",
     "pip check: limpio.",
-    "pip-audit: sin vulnerabilidades conocidas.",
-    "npm raíz: N/A; no existe package.json/lockfile raíz."
+    "pip-audit --strict: sin vulnerabilidades conocidas.",
+    "Dependabot: 0 PRs abiertos, 0 ramas dependabot/* y 0 alerts abiertos.",
+    "Quality Gate FULL post-materialización: obligatorio antes del commit de promoción."
   ],
   "evidence": [
-    "Issue de fase: #155.",
+    "Issue de fase: #206.",
+    "Draft PR coordinado: #207.",
     "Política transversal de preflight/limpieza: #166.",
-    "Baseline publicado: G125/E01 / v0.1.25.01-beta / DOC.3 R1.",
-    "Programa UX: #129.",
-    "Contrato UX/GOV transversal: #189.",
-    "Siguiente fase material condicionada: VER.2 R6/#164.",
-    "DOC.4: #171–#174.",
-    "Auditoría previsional: #142."
+    "Política de checkpoints remotos y lifecycle de Issues: #203.",
+    "PR Dependabot #204: cerrado como superseded por #207.",
+    "PR Dependabot #205: cerrado como incompatible/superseded por #207.",
+    "Baseline publicado: G126/E01 / v0.1.26.01-beta / PLAN.2 R2.",
+    "Siguiente fase condicionada: VER.2 R6/#164 después de publicar G127 y repetir #166 limpio."
   ],
   "next_step": {
-    "global_revision": 127,
+    "global_revision": 128,
     "revision_aware": null,
     "block": null,
-    "description": "G127 permanece disponible sin candidato, bloque ni VERSION preasignados. PLAN.2 R2/G126-E01 está aceptado localmente y pendiente de integración y publicación. Después de publicar G126 y ejecutar un preflight fresco #166 podrá abrirse VER.2 R6/#164; cualquier trabajo material nuevo de dependencias inserta MANT.2 R2+ antes de continuar."
+    "description": "MANT.2 R2/G127-E02 está aceptado localmente y pendiente de integración y publicación. G128 permanece disponible sin candidato, bloque ni VERSION preasignados. Después de publicar G127 debe ejecutarse un preflight fresco #166; solo con resultado limpio podrá iniciar VER.2 R6/#164."
   }
 }
