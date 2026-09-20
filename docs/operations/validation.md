@@ -734,7 +734,7 @@ python -m pip check
 
 ## 3. Inventario actual de pruebas
 
-Inventario vigente: **224 módulos**.
+Inventario vigente: **225 módulos**.
 
 El inventario se deriva de todos los módulos `test_*.py` ubicados bajo `tests/` y se mantiene
 sincronizado con la suite versionada. En la frontera vigente, PLAN.2 R2/#155 está publicado como G126/E01 (`0.1.26.01-beta`), MANT.2 R2/#206 está activo y G127 continúa libre
@@ -791,6 +791,7 @@ la expansión abierta UX.33+ y la ausencia de preasignación de G127.
 - `tests/governance/test_mant2_r2_insertion.py`
 - `tests/governance/test_git_history_attestation.py`
 - `tests/governance/test_github_label_taxonomy.py`
+- `tests/governance/test_issue_checklist_policy.py`
 - `tests/governance/test_gov12_versionado.py`
 - `tests/governance/test_gov13_documentacion.py`
 - `tests/governance/test_gov13_documentacion_r2.py`

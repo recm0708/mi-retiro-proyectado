@@ -36,6 +36,20 @@ body:
     attributes:
       label: Qué has intentado
       description: Incluye comandos o mensajes de error sanitizados cuando ayuden.
+  - type: textarea
+    id: checklist_trabajo
+    attributes:
+      label: Checklist de trabajo y cierre
+      description: Mantén este checklist actualizado durante la vida de la Issue. Marca cada punto solo cuando exista evidencia suficiente.
+      value: |
+        - [ ] Confirmar el alcance real de la consulta.
+        - [ ] Investigar o reproducir lo necesario con información sanitizada.
+        - [ ] Responder y validar que la consulta quedó resuelta.
+        - [ ] Actualizar documentación o abrir Issue derivada si se detecta trabajo material.
+        - [ ] Verificar el criterio de cierre y cerrar esta Issue.
+    validations:
+      required: true
+
   - type: checkboxes
     id: privacidad
     attributes:

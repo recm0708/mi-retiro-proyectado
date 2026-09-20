@@ -96,6 +96,7 @@ El mantenedor y responsable de revisión actual del repositorio es:
 6. **Historia preservada:** una decisión sustituida se marca como tal; no se elimina para aparentar que nunca existió.
 7. **Independencia institucional:** el proyecto no debe presentarse como producto oficial de la CSS.
 8. **Sincronización transversal:** cuando evoluciona un contrato compartido, se revisan conjuntamente código, pruebas, interfaz, normativa, documentación y evidencia de release que dependan de él.
+9. **Issues verificables:** toda Issue nueva debe incluir un checklist real de trabajo y cierre que permanezca actualizado hasta resolver o transferir todos sus puntos aplicables.
 
 ## 4. Tipos de cambio
 
@@ -133,6 +134,33 @@ Requieren revisión de:
 ### 4.4. Gobierno y releases
 
 Cambios en versionado, licencia, gobernanza, CI o proceso de publicación deben quedar documentados y no pueden depender únicamente de una convención oral.
+
+### 4.5. Ciclo de vida obligatorio de Issues
+
+Toda Issue nueva, ya sea creada manualmente, mediante Issue Forms, automatización
+o asistencia programática, debe contener al menos un checklist Markdown real con
+elementos `- [ ]` / `- [x]`.
+
+El checklist debe representar trabajo verificable y, cuando aplique, cubrir:
+
+- condiciones y dependencias de entrada;
+- implementación o trabajo principal;
+- pruebas, gates y evidencia;
+- documentación, trazabilidad e Issues derivadas;
+- criterio de cierre.
+
+Una casilla solo pasa a `[x]` cuando exista evidencia suficiente de que el punto
+quedó completado. Una Issue material se cierra cuando todos sus puntos
+aplicables y su criterio de cierre estén completos. Si aparece trabajo fuera de
+alcance, debe transferirse a un owner/Issue explícito antes del cierre.
+
+Las Issues transversales o recurrentes pueden permanecer abiertas mientras
+exista trabajo recurrente pendiente, pero cada ejecución debe actualizar su
+checklist y conservar evidencia del resultado.
+
+Los Issue Forms versionados bajo `.github/ISSUE_TEMPLATE/` deben pregenerar un
+checklist de trabajo/cierre. Los guards del repositorio protegen este contrato
+para impedir que nuevas plantillas vuelvan a crear Issues sin seguimiento.
 
 ## 5. Decisiones
 
