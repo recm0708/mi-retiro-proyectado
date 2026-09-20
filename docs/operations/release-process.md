@@ -29,45 +29,50 @@
 <!-- NOR3-G122-PROMOTION:END -->
 
 <!-- POST-NOR3-INTERMEDIATE-SEQUENCE:START -->
-## Estado vigente post-G125 / PLAN.2 R2
+## Estado vigente post-G126 / MANT.2 R2
 
-DOC.3 R1/#154 está cerrado, integrado y publicado como **G125/E01**
-(`0.1.25.01-beta`) sobre
-`main@ee077c0d83931f140c91583fa8b2c4ae6b72dec8`, con tag firmado
-`v0.1.25.01-beta` y GitHub Release prerelease 388866555.
+PLAN.2 R2/#155 está cerrado, integrado y publicado como **G126/E01**
+(`0.1.26.01-beta`) sobre
+`main@1819f59f95731dc652ad62d84d6a5ad87ad3f8a4`, mediante PR #202,
+tag firmado `v0.1.26.01-beta` y GitHub Release prerelease 390399947.
 
-PLAN.2 R2/#155 está aceptado localmente como G126/E01 (`0.1.26.01-beta`) y pendiente de publicación en la rama
-`plan/plan2-r2-replanificacion-maestra`. G127 permanece libre: no tiene
-candidato, bloque ni `VERSION` preasignados.
+G125/E01 — DOC.3 R1 permanece preservado como publicación inmediatamente
+anterior mediante `v0.1.25.01-beta`.
+
+El preflight fresco #166 previo a VER.2 detectó trabajo material nuevo de
+dependencias en los PRs Dependabot #204 y #205. Por esa razón se insertó
+**MANT.2 R2/#206** antes de VER.2 R6/#164.
+
+MANT.2 R2 está en curso sin Global, Edition ni `VERSION` preasignados.
+**G127 permanece libre** y `VERSION` continúa en `0.1.26.01-beta`.
 
 La continuidad material vigente es:
 
-1. **PLAN.2 R2 / #155** — replanificación y sincronización del programa.
-2. **VER.2 R6 / #164** — primera fase material después de publicar PLAN.2.
-3. **DOC.4 R1 / #171** — reingeniería documental después de VER.2.
-4. **Auditoría previsional / #142** y derivados funcionales obligatorios.
-5. **PERSIST.1 / #130 → REP.1 / #143 → DEPLOY.1 / #157**.
-6. **UX.7 → UX.x** — baseline conocido UX.7–UX.32 y expansión UX.33+ si
-   aparecen nuevas superficies; #189 exige sincronización visual multiportal.
-7. **SEC.2 R7 → rendimiento → A11Y.2 → REV.1 → #153 → DOC.1 R6 → QA.1 → REL.1**.
+1. **MANT.2 R2 / #206** — integración coordinada de dependencias post-G126.
+2. **preflight fresco #166** — obligatorio después de publicar MANT.2 R2.
+3. **VER.2 R6 / #164** — solo si #166 vuelve a quedar limpio.
+4. **DOC.4 R1 / #171** — reingeniería documental después de VER.2.
+5. **#142** — auditoría previsional y derivados funcionales obligatorios.
+6. **PERSIST.1 / #130** → **REP.1 / #143** → **DEPLOY.1 / #157**.
+7. **UX.7→UX.x / #129** bajo sincronización multiportal **#189**.
+8. **SEC.2 R7** → rendimiento → A11Y.2 → REV.1 → #153 → DOC.1 R6 → QA.1 → REL.1.
 
-Antes y después de cada fase material se aplica #166. Un trabajo material nuevo
-de dependencias antepone MANT.2 R2+ y obliga a sincronizar el árbol antes de
-continuar.
+Antes y después de cada fase material se aplica #166. Ninguna fase futura
+recibe Global o `VERSION` por anticipado.
 <!-- POST-NOR3-INTERMEDIATE-SEQUENCE:END -->
+
 
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado de publicación vigente
 
-- `VERSION` permanece en `0.1.26.01-beta` para PLAN.2 R2/G126-E01; DOC.3 R1/G125-E01 permanece publicado como `0.1.25.01-beta`.
-- G125/E01 está integrado/publicado en
-  `main@ee077c0d83931f140c91583fa8b2c4ae6b72dec8` mediante tag firmado
-  `v0.1.25.01-beta` y GitHub Release prerelease 388866555.
-- G124/E13 y G123/E01 permanecen como betas anteriores publicadas.
-- PLAN.2 R2/#155 está aceptado localmente como G126/E01 (`0.1.26.01-beta`) y pendiente de publicación.
+- `VERSION` permanece en `0.1.26.01-beta` para PLAN.2 R2/G126-E01 publicado.
+- G126/E01 está integrado/publicado en
+  `main@1819f59f95731dc652ad62d84d6a5ad87ad3f8a4` mediante tag firmado
+  `v0.1.26.01-beta` y GitHub Release prerelease 390399947.
+- G125/E01, G124/E13 y G123/E01 permanecen como betas anteriores publicadas.
+- MANT.2 R2/#206 está activo sin Global/VERSION preasignados.
 - G127 permanece libre, sin candidato, bloque ni VERSION.
-- VER.2 R6/#164 será la siguiente fase material después de publicar PLAN.2 y
-  repetir #166.
+- VER.2 R6/#164 solo podrá iniciar después de publicar MANT.2 R2 y repetir #166 limpio.
 - PERSIST.1 permanece planificado detrás de
   VER.2 → DOC.4 → #142/derivados.
 - La automatización no crea ni firma tags.
@@ -116,7 +121,7 @@ El candidato reserva el siguiente número global, pero ese número solo queda co
 
 La revisión funcional (`R#`) y el ordinal aceptado (`E##`) no se consideran equivalentes por definición. Cuando una revisión intermedia no consume Global, el ledger puede declarar `functional_revision`; el manifiesto de publicación usa ese valor para mostrar el nombre funcional correcto. DEV.2 R5 = G118/E04 y DEV.2 R6 = G119/E05 son precedentes
 canónicos de revisiones funcionales cuyo ordinal aceptado difiere de la
-revisión funcional. El último estado cerrado/publicado es DOC.3 R1 = G125/E01 (`0.1.25.01-beta`), integrado en `main@ee077c0d83931f140c91583fa8b2c4ae6b72dec8` y publicado mediante `v0.1.25.01-beta`. PLAN.2 R2/#155 está aceptado localmente como G126/E01 (`0.1.26.01-beta`) y pendiente de publicación. G127 es el siguiente Global disponible, libre y sin bloque reservado. Después de publicar PLAN.2 corresponde VER.2 R6/#164; PERSIST.1 permanece detrás de VER.2 → DOC.4 → #142/derivados. La ola UX final es dinámica, UX.7→UX.x, bajo #129/#189.
+revisión funcional. El último estado cerrado/publicado es PLAN.2 R2 = G126/E01 (`0.1.26.01-beta`), integrado en `main@1819f59f95731dc652ad62d84d6a5ad87ad3f8a4` y publicado mediante `v0.1.26.01-beta`. G125/E01 permanece como publicación anterior. MANT.2 R2/#206 está activo sin candidato revision-aware y G127 es el siguiente Global disponible, libre y sin bloque reservado. Después de publicar MANT.2 R2 y repetir #166 limpio corresponde VER.2 R6/#164; PERSIST.1 permanece detrás de VER.2 → DOC.4 → #142/derivados. La ola UX final es dinámica, UX.7→UX.x, bajo #129/#189.
 
 ## 3. Precondiciones
 

@@ -53,7 +53,7 @@ class TestPLAN2R2Program(unittest.TestCase):
         self.assertIsNone(candidate["global_revision"])
         self.assertIsNone(candidate["revision_aware"])
         self.assertIsNone(candidate["block"])
-        self.assertEqual(164, candidate["planning_issue"])
+        self.assertEqual(206, candidate["planning_issue"])
         self.assertEqual(127, candidate["next_global_available"])
 
         ids = {
@@ -62,7 +62,7 @@ class TestPLAN2R2Program(unittest.TestCase):
         }
 
         self.assertEqual(
-            "accepted_pending_publication",
+            "closed",
             ids["PLAN.2"]["status"],
         )
         self.assertEqual(

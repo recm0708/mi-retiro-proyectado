@@ -26,9 +26,10 @@ Developer sin reabrir DEV.2.
 - La sesión humana continúa separada del Bearer técnico.
 - MANT.2 R1/G123 y MANT.1 R8/G124 permanecen cerrados/publicados.
 - DOC.3 R1/#154 está cerrado/publicado como G125/E01.
-- PLAN.2 R2/#155 está aceptado localmente como G126/E01 (`0.1.26.01-beta`) y pendiente de publicación.
+- PLAN.2 R2/#155 está cerrado/publicado como G126/E01 (`0.1.26.01-beta`).
+- MANT.2 R2/#206 está activo sin Global/VERSION preasignados.
 - G127 permanece libre y sin candidato.
-- PERSIST.1 permanece planificado detrás de VER.2 → DOC.4 → #142/derivados.
+- PERSIST.1 permanece planificado detrás de MANT.2 R2 → #166 → VER.2 → DOC.4 → #142/derivados.
 - La revisión UX final Developer se gobierna por #129/#189 dentro de
   UX.7→UX.x.
 <!-- DOC1-R1-REVISION-MANUAL:END -->

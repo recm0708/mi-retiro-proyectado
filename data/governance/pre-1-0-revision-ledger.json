@@ -1229,25 +1229,25 @@
     }
   ],
   "reconciled_through_commit": "b97cf61763479b80b8e8724b878089e8bb20fa00",
-  "reconciliation_date": "2026-09-16",
+  "reconciliation_date": "2026-09-19",
   "next_global": 127,
   "next_candidate_block": null,
   "next_candidate_assignment": {
     "state": "unassigned",
     "next_global_available": 127,
-    "issue": 164,
-    "reason": "PLAN.2 R2/#155 está aceptado localmente como G126/E01 (0.1.26.01-beta) y pendiente de integración/publicación. G127 queda disponible sin candidato, bloque ni VERSION preasignados. Después de publicar G126 y repetir un preflight fresco #166 podrá abrirse VER.2 R6/#164; si aparece trabajo material nuevo de dependencias, se inserta primero MANT.2 R2+.",
-    "planning_issue": 164
+    "issue": 206,
+    "reason": "PLAN.2 R2/#155 está integrado y publicado como G126/E01 (0.1.26.01-beta). El preflight fresco #166 previo a VER.2 detectó trabajo material nuevo en Dependabot (#204 y #205), por lo que MANT.2 R2/#206 se insertó antes de VER.2 R6/#164. G127 permanece disponible sin candidato, bloque ni VERSION preasignados. Después de cerrar/publicar #206 debe repetirse #166 antes de abrir #164.",
+    "planning_issue": 206
   },
   "active_phase": {
-    "block": "PLAN.2",
+    "block": "MANT.2",
     "revision": "R2",
-    "issue": 155,
-    "state": "accepted_pending_publication",
-    "global_revision": 126,
-    "revision_aware": "0.1.26.01-beta",
-    "base_global_revision": 125,
-    "base_revision_aware": "0.1.25.01-beta",
+    "issue": 206,
+    "state": "in_progress",
+    "global_revision": null,
+    "revision_aware": null,
+    "base_global_revision": 126,
+    "base_revision_aware": "0.1.26.01-beta",
     "next_phase_issue": 164
   }
 }

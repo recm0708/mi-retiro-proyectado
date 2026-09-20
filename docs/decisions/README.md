@@ -24,7 +24,7 @@
 - UX.6 R1–R8 permanece cerrado/publicado dentro de G121/E01.
 - NOR.3 R1–R8 permanece cerrado/aceptado como G122/E01 mediante PR #162 /
   merge `b97cf61763479b80b8e8724b878089e8bb20fa00`.
-- DOC.3 R1/#154 está cerrado/publicado como G125/E01; PLAN.2 R2/#155 está aceptado localmente como G126/E01 (`0.1.26.01-beta`) y pendiente de publicación y G127 queda disponible sin candidato/bloque asignado.
+- DOC.3 R1/#154 permanece publicado como G125/E01; PLAN.2 R2/#155 está cerrado/publicado como G126/E01 (`0.1.26.01-beta`); MANT.2 R2/#206 está activo y G127 queda disponible sin candidato/bloque asignado.
 - PERSIST.1 permanece planificado, no iniciado y sin Global preasignado.
 - SEC.2 R1–R6 permanece cerrado y su historia se conserva.
 <!-- DOC1-R1-REVISION-MANUAL:END -->

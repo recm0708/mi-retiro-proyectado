@@ -23,9 +23,10 @@
 - NOR.3 no modifica motores SEBD/Mixto/SUCGS ni parámetros normativos.
 - MANT.2 R1/G123 y MANT.1 R8/G124 permanecen cerrados/publicados.
 - DOC.3 R1/#154 está cerrado/publicado como G125/E01 y no modificó runtime.
-- PLAN.2 R2/#155 está aceptado localmente como G126/E01 (`0.1.26.01-beta`) y pendiente de publicación.
+- PLAN.2 R2/#155 está cerrado/publicado como G126/E01 (`0.1.26.01-beta`).
+- MANT.2 R2/#206 está activo sin Global/VERSION preasignados.
 - G127 permanece libre, sin candidato.
-- VER.2 R6 precede DOC.4; #142/derivados preceden PERSIST.1.
+- MANT.2 R2 → #166 → VER.2 R6 precede DOC.4; #142/derivados preceden PERSIST.1.
 - La ola UX final se ejecutará como UX.7→UX.x bajo #129/#189 después de
   PERSIST.1, REP.1 y DEPLOY.1.
 <!-- DOC1-R1-POST-MANT1:END -->

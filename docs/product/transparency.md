@@ -5,7 +5,7 @@
 **Versión base histórica:** `0.0.25-beta`
 **Versión base histórica preservada:** `0.0.23-beta`
 **Base documental preservada:** GOV.1.3 R4 — 2026-08-17
-**Revisión transversal vigente:** PLAN.2 R2/#155 — G126/E01 aceptado localmente, publicación pendiente — 2026-09-16
+**Revisión transversal vigente:** MANT.2 R2/#206 — inserción post-G126 por #204/#205 — 2026-09-20
 **Clasificación:** Pública / Auditoría
 
 <!-- DOC1-R1-REVISION-MANUAL:START -->
@@ -22,9 +22,10 @@
 - MANT.2 R1/G123 y MANT.1 R8/G124 permanecen publicados.
 - DOC.3 R1/#154 está cerrado/publicado como G125/E01 mediante
   `v0.1.25.01-beta`.
-- PLAN.2 R2/#155 está aceptado localmente como G126/E01 (`0.1.26.01-beta`) y pendiente de publicación.
+- PLAN.2 R2/#155 está cerrado/publicado como G126/E01 (`0.1.26.01-beta`).
+- MANT.2 R2/#206 está activo sin Global/VERSION preasignados.
 - G127 permanece libre y sin candidato.
-- VER.2 R6/#164 será la siguiente fase material después de PLAN.2 publicado.
+- VER.2 R6/#164 espera el cierre/publicación de MANT.2 R2 y un #166 limpio.
 - PERSIST.1 permanece detrás de VER.2 → DOC.4 → #142/derivados.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 
@@ -157,10 +158,10 @@ Estado material actual:
 
 - DOC.3 R1/#154 está cerrado/integrado/publicado como G125/E01
   (`0.1.25.01-beta`);
-- PLAN.2 R2/#155 está aceptado localmente como G126/E01 (`0.1.26.01-beta`) y pendiente de publicación sobre G125 publicado y no tiene
-  Global/VERSION preasignados;
-- G126/E01 está materializado para PLAN.2 R2; G127 permanece como siguiente Global disponible, libre y sin candidato;
-- VER.2 R6/#164 será la siguiente fase material después de publicar PLAN.2;
+- PLAN.2 R2/#155 está cerrado/integrado/publicado como G126/E01 (`0.1.26.01-beta`);
+- MANT.2 R2/#206 está activo sin Global/VERSION preasignados;
+- G127 permanece como siguiente Global disponible, libre y sin candidato;
+- VER.2 R6/#164 será la siguiente fase material después de publicar MANT.2 R2 y repetir #166 limpio;
 - DOC.4 R1/#171 se ejecutará después de VER.2 y antes de #142;
 - #142 y cualquier derivado funcional obligatorio preceden PERSIST.1;
 - PERSIST.1 → REP.1 → DEPLOY.1 preceden la ola UX.7→UX.x;

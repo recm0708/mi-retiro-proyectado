@@ -5,10 +5,19 @@
 **Contador histórico en la base `7037addd`:** **G070**
 **Contador aceptado reconciliado vigente:** **G126**
 **Siguiente Global disponible:** **G127**
-**Siguiente candidato disponible:** **ninguno asignado** — G127 permanece disponible sin bloque preasignado; PLAN.2 R2 está aceptado localmente como G126/E01 y pendiente de publicación
+**Siguiente candidato disponible:** **ninguno asignado** — G127 permanece disponible sin bloque preasignado; MANT.2 R2/#206 está en curso sin candidato material
+
+## Estado vivo post-G126 — MANT.2 R2/#206
+
+- PLAN.2 R2/#155 está integrado y publicado como G126/E01 (`0.1.26.01-beta`).
+- `main` publicado: `1819f59f95731dc652ad62d84d6a5ad87ad3f8a4`.
+- El preflight fresco #166 previo a VER.2 detectó #204 y #205.
+- MANT.2 R2/#206 está en curso sin Global, Edition ni VERSION asignados.
+- G127 permanece libre y `VERSION` continúa en `0.1.26.01-beta`.
+- VER.2 R6/#164 permanece bloqueado hasta publicar #206 y repetir #166 con resultado limpio.
 
 <!-- PLAN2-G126-PROMOTION:START -->
-## Estado PLAN.2 R2 / materialización local G126-E01
+## Checkpoint histórico — PLAN.2 R2 / materialización local G126-E01
 
 - `VERSION` materializa `0.1.26.01-beta` para PLAN.2 R2 / G126-E01.
 - G125/E01 permanece publicado como `v0.1.25.01-beta` para DOC.3 R1.
@@ -43,8 +52,8 @@
 - GitHub Release prerelease: 388866555.
 - Revalidación final: Quality Gate FULL 11 PASS / 0 FAIL; 1608 unittest OK;
   pytest 1648 passed + 7844 subtests.
-- G126 queda disponible sin candidato/bloque preasignado.
-- PLAN.2 R2/#155 está en progreso sin Global/VERSION preasignados.
+- G127 permanece disponible sin candidato/bloque preasignado.
+- MANT.2 R2/#206 está en progreso sin Global/VERSION preasignados.
 <!-- DOC3-G125-PROMOTION:END -->
 
 <!-- MANT1-G124-PROMOTION:START -->
@@ -97,7 +106,7 @@
 <!-- NOR3-G122-PROMOTION:END -->
 
 <!-- DOC1-R1-REVISION-MANUAL:START -->
-## Nota de lectura vigente — reconciliación post-PLAN.2 R2
+## Nota de lectura vigente — MANT.2 R2 post-G126
 
 La reconstrucción histórica G001–G070 permanece intacta.
 
@@ -108,9 +117,9 @@ La reconstrucción histórica G001–G070 permanece intacta.
 - G124/E13 permanece publicado para MANT.1 R8.
 - G125/E01 permanece publicado para DOC.3 R1.
 - PLAN.2 R1 permanece preservado como G114/E01.
-- PLAN.2 R2 está aceptado localmente como G126/E01 (`0.1.26.01-beta`) y pendiente de publicación.
+- PLAN.2 R2 está publicado como G126/E01 (`0.1.26.01-beta`).
 - G127 permanece disponible sin candidato, bloque ni VERSION preasignados.
-- Después de publicar G126 y repetir #166, la siguiente fase material es VER.2 R6/#164.
+- El preflight #166 posterior a G126 insertó MANT.2 R2/#206 antes de VER.2 R6/#164.
 - Los tags ya publicados permanecen inmutables.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 

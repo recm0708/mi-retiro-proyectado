@@ -40,7 +40,8 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
             self.assertIn(ident, ids)
             self.assertFalse(ids[ident]["reusable_for_different_scope"])
 
-        self.assertEqual("accepted_pending_publication", ids["PLAN.2"]["status"])
+        self.assertEqual("closed", ids["PLAN.2"]["status"])
+        self.assertEqual("in_progress", ids["MANT.2"]["status"])
         self.assertEqual("closed", ids["MANT.1"]["status"])
         self.assertIn("G124/E13", ids["MANT.1"]["meaning"])
         self.assertIn("G124", ids["MANT.1"]["global_refs"])
@@ -165,7 +166,7 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
                 self.assertEqual(expected_entry[2], entry["revision_aware"])
         ids = {item["identifier"]: item for item in self.data["identifiers"]}
         self.assertEqual("closed", ids["NOR.1"]["status"])
-        self.assertEqual("accepted_pending_publication", ids["PLAN.2"]["status"])
+        self.assertEqual("closed", ids["PLAN.2"]["status"])
         self.assertEqual("reopened_planned_r6", ids["DOC.1"]["status"])
         self.assertEqual("planned_reserved", ids["PERSIST.1"]["status"])
         self.assertEqual("closed", ids["NOR.3"]["status"])
@@ -177,8 +178,8 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
         ).read_text(encoding="utf-8")
 
         for fragment in (
-            "G125/E01 — DOC.3 R1",
-            "PLAN.2 R2 / #155",
+            "G126/E01 — PLAN.2 R2",
+            "MANT.2 R2 / #206",
             "VER.2 R6 / #164",
             "DOC.4 R1 / #171",
             "Auditoría previsional / #142",
@@ -206,6 +207,7 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
 
         ordered = (
             "PLAN.2 R2",
+            "MANT.2 R2",
             "VER.2 R6",
             "DOC.4 R1",
             "#142 auditoría previsional",

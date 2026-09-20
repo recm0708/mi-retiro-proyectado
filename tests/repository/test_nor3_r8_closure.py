@@ -33,11 +33,11 @@ class TestNOR3R8Closure(unittest.TestCase):
         self.assertEqual(["G125"], identifiers["DOC.3"]["global_refs"])
 
         active = data["active_phase"]
-        self.assertEqual("PLAN.2", active["block"])
+        self.assertEqual("MANT.2", active["block"])
         self.assertEqual("R2", active["revision"])
-        self.assertEqual(155, active["issue"])
-        self.assertEqual("accepted_pending_publication", active["state"])
-        self.assertEqual(126, active["global_revision"])
+        self.assertEqual(206, active["issue"])
+        self.assertEqual("in_progress", active["state"])
+        self.assertIsNone(active["global_revision"])
 
     def test_policy_declara_cierre_r8_sin_simular_auditoria_posterior(self):
         data = json.loads(POLICY.read_text(encoding="utf-8"))

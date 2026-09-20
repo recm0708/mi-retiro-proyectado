@@ -47,7 +47,7 @@ class TestG125DOC3R1Promotion(unittest.TestCase):
         self.assertEqual("planned_reserved", ids["DOC.4"]["status"])
 
         plan2 = ids["PLAN.2"]
-        self.assertEqual("accepted_pending_publication", plan2["status"])
+        self.assertEqual("closed", plan2["status"])
         self.assertIn("G114", plan2["global_refs"])
         self.assertIn("G126", plan2["global_refs"])
 

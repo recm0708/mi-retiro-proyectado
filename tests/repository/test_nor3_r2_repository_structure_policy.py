@@ -152,11 +152,11 @@ class TestNOR3R2RepositoryStructurePolicy(unittest.TestCase):
         self.assertEqual(["G125"], ids["DOC.3"]["global_refs"])
 
         active = registry["active_phase"]
-        self.assertEqual("PLAN.2", active["block"])
+        self.assertEqual("MANT.2", active["block"])
         self.assertEqual("R2", active["revision"])
-        self.assertEqual(155, active["issue"])
-        self.assertEqual("accepted_pending_publication", active["state"])
-        self.assertEqual(126, active["global_revision"])
+        self.assertEqual(206, active["issue"])
+        self.assertEqual("in_progress", active["state"])
+        self.assertIsNone(active["global_revision"])
 
     def test_pr_policy_permite_candidato_sin_version(self):
         files = [

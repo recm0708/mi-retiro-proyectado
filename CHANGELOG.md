@@ -12,10 +12,11 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ### Planificación, gobierno y trazabilidad
 
-- PLAN.2 R2/#155 está aceptado localmente como G126/E01 (`0.1.26.01-beta`) y pendiente de publicación sobre G125/E01 publicado.
-- Se reconstruye el árbol pre-1.0: VER.2 → DOC.4 → #142/derivados → PERSIST →
-  REP → DEPLOY → UX.7→UX.x → SEC.2 R7 → rendimiento → A11Y.2 → REV.1 → #153
-  → DOC.1 R6 → QA.1 → REL.1.
+- PLAN.2 R2/#155 está cerrado/integrado/publicado como G126/E01 (`0.1.26.01-beta`).
+- El preflight fresco #166 previo a VER.2 detectó #204/#205 e insertó MANT.2 R2/#206.
+- El árbol pre-1.0 vigente queda: MANT.2 R2 → #166 → VER.2 → DOC.4 →
+  #142/derivados → PERSIST → REP → DEPLOY → UX.7→UX.x → SEC.2 R7 →
+  rendimiento → A11Y.2 → REV.1 → #153 → DOC.1 R6 → QA.1 → REL.1.
 - El baseline UX conocido se granulariza como UX.7–UX.32, una superficie/paso/
   modal por fase; UX.33+ se crea consecutivamente cuando aparezcan nuevas
   superficies pre-1.0.

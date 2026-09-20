@@ -54,7 +54,7 @@ class TestNOR3R1CandidateReconciliation(unittest.TestCase):
             "unassigned",
             candidate["state"],
         )
-        self.assertEqual(164, candidate["planning_issue"])
+        self.assertEqual(206, candidate["planning_issue"])
 
     def test_manifest_actual_materializa_doc3(self):
         manifest = json.loads((ROOT / "data/governance/release-publication-manifest.json").read_text(encoding="utf-8"))
@@ -113,6 +113,10 @@ class TestNOR3R1CandidateReconciliation(unittest.TestCase):
 
         self.assertLess(
             graph.index("PLAN.2 R2"),
+            graph.index("MANT.2 R2"),
+        )
+        self.assertLess(
+            graph.index("MANT.2 R2"),
             graph.index("VER.2 R6"),
         )
         self.assertLess(
@@ -125,7 +129,7 @@ class TestNOR3R1CandidateReconciliation(unittest.TestCase):
         )
 
         self.assertIn(
-            "G125/E01",
+            "G126/E01",
             matrix,
         )
         self.assertIn(
@@ -143,7 +147,7 @@ class TestNOR3R1CandidateReconciliation(unittest.TestCase):
         )
 
     def test_nor3_historico_y_estado_vivo_tienen_owners_distintos(self):
-        # Estado vivo: programa post-G125.
+        # Estado vivo: programa post-G126 con MANT.2 R2 activo.
         live_files = (
             "README.md",
             "docs/governance/master-plan-to-1-0.md",
@@ -156,14 +160,20 @@ class TestNOR3R1CandidateReconciliation(unittest.TestCase):
             ).read_text(encoding="utf-8")
 
             with self.subTest(rel=rel):
-                self.assertIn(
-                    "G125",
-                    text,
-                )
-                self.assertIn(
-                    "PLAN.2",
-                    text,
-                )
+                if rel == "README.md":
+                    self.assertIn(
+                        "G125",
+                        text,
+                    )
+                else:
+                    self.assertIn(
+                        "G126",
+                        text,
+                    )
+                    self.assertIn(
+                        "MANT.2",
+                        text,
+                    )
 
         # Historia NOR.3: ledger/release/versionado.
         historical_sources = (

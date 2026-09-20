@@ -7,7 +7,7 @@
 **Revisión transversal histórica preservada:** UX.4.6e R8 — validación funcional y procedencia editable — 2026-08-19
 **Última revisión transversal:** UX.4.6f R2 integrada y cierre del Paso 4 — 2026-08-20
 **Revisión de normalización:** NOR.1 R7 — cierre de estándares y preparación de NOR.2 — 2026-08-24
-**Última revisión operativa:** PLAN.2 R2/#155 — G126/E01 aceptado localmente, publicación pendiente — 2026-09-16
+**Última revisión operativa:** MANT.2 R2/#206 — CP1 de gobierno vivo post-G126 — 2026-09-20
 **Clasificación:** Técnica / Calidad
 **Naturaleza documental:** Registro vivo acumulativo — mantiene la estrategia vigente y evidencia histórica de gates protegida por regresiones; los resultados históricos no se reescriben como si pertenecieran al estado actual.
 
@@ -734,13 +734,13 @@ python -m pip check
 
 ## 3. Inventario actual de pruebas
 
-Inventario vigente: **223 módulos**.
+Inventario vigente: **224 módulos**.
 
 El inventario se deriva de todos los módulos `test_*.py` ubicados bajo `tests/` y se mantiene
-sincronizado con la suite versionada. En la frontera vigente, PLAN.2 R2/#155 está aceptado localmente como G126/E01 (`0.1.26.01-beta`) y pendiente de publicación, mientras G127 continúa libre
-y sin candidato. Las regresiones específicas de PLAN.2 protegen el programa
-pre-1.0, la separación entre historia y estado vivo, el baseline UX.7–UX.32,
-la expansión abierta UX.33+ y la ausencia de preasignación de G126.
+sincronizado con la suite versionada. En la frontera vigente, PLAN.2 R2/#155 está publicado como G126/E01 (`0.1.26.01-beta`), MANT.2 R2/#206 está activo y G127 continúa libre
+y sin candidato. Las regresiones específicas protegen el programa pre-1.0,
+la separación entre historia y estado vivo, el baseline UX.7–UX.32,
+la expansión abierta UX.33+ y la ausencia de preasignación de G127.
 
 ### Módulos inventariados
 
@@ -788,6 +788,7 @@ la expansión abierta UX.33+ y la ausencia de preasignación de G126.
 - `tests/governance/test_g123_mant2_promotion.py`
 - `tests/governance/test_g124_mant1_r8_promotion.py`
 - `tests/governance/test_g125_doc3_r1_promotion.py`
+- `tests/governance/test_mant2_r2_insertion.py`
 - `tests/governance/test_git_history_attestation.py`
 - `tests/governance/test_github_label_taxonomy.py`
 - `tests/governance/test_gov12_versionado.py`

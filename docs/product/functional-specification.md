@@ -10,14 +10,15 @@
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado funcional vigente
 
-- `VERSION` permanece en `0.1.26.01-beta` y corresponde a PLAN.2 R2/G126-E01, pendiente de publicación.
+- `VERSION` permanece en `0.1.26.01-beta` y corresponde al estado publicado PLAN.2 R2/G126-E01.
 - DOC.3 R1/G125-E01 permanece cerrado/publicado mediante `v0.1.25.01-beta`.
 - MANT.2 R1/G123, MANT.1 R8/G124 y NOR.3/G122 permanecen como estados
   anteriores publicados.
 - DOC.3 R1/#154 no modificó los motores SEBD, Mixto o SUCGS ni sus parámetros
   normativos.
-- PLAN.2 R2/#155 está aceptado localmente como G126/E01 (`0.1.26.01-beta`) y pendiente de publicación.
-- G126/E01 está materializado para PLAN.2 R2; G127 permanece como siguiente Global disponible y libre.
+- PLAN.2 R2/#155 está cerrado/publicado como G126/E01 (`0.1.26.01-beta`).
+- MANT.2 R2/#206 está activo sin Global/VERSION preasignados.
+- G127 permanece como siguiente Global disponible y libre.
 - UX.6 R1–R8 permanece cerrado/publicado como G121/E01 con revisión funcional
   R8.
 - Perfil/avatar, usuarios/RBAC y auditoría Developer permanecen separados de la
@@ -27,7 +28,7 @@
 - Mi Retiro Seguro/Ficha Digital mantienen revisión y confirmación explícitas.
 - Términos públicos de la App permanecen separados de contratos Developer.
 - PERSIST.1 permanece planificado y no inicia antes de
-  VER.2 → DOC.4 → #142/derivados.
+  MANT.2 R2 → #166 → VER.2 → DOC.4 → #142/derivados.
 - Toda nueva superficie visible pre-1.0 debe incorporarse al programa UX
   dinámico #129/#189 cuando corresponda.
 <!-- DOC1-R1-POST-MANT1:END -->

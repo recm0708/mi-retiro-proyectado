@@ -47,7 +47,7 @@ class TestG122NOR3Promotion(unittest.TestCase):
         self.assertEqual("unassigned", candidate["state"])
         self.assertIsNone(candidate["global_revision"])
         self.assertEqual(127, candidate["next_global_available"])
-        self.assertEqual(164, candidate["planning_issue"])
+        self.assertEqual(206, candidate["planning_issue"])
 
     def test_manifest_actual_materializa_doc3_r1(self):
         data = json.loads(
@@ -83,6 +83,7 @@ class TestG122NOR3Promotion(unittest.TestCase):
         # PLAN.2 activo -> VER.2 solo tras publicación/preflight.
         for fragment in (
             "PLAN.2 R2/G126-E01",
+            "MANT.2 R2/#206",
             "VER.2 R6/#164",
             "#166",
         ):

@@ -46,6 +46,6 @@
     "global_revision": 127,
     "revision_aware": null,
     "block": null,
-    "description": "G127 permanece disponible sin candidato, bloque ni VERSION preasignados. PLAN.2 R2/G126-E01 está aceptado localmente y pendiente de integración y publicación. Después de publicar G126 y ejecutar un preflight fresco #166 podrá abrirse VER.2 R6/#164; cualquier trabajo material nuevo de dependencias inserta MANT.2 R2+ antes de continuar."
+    "description": "PLAN.2 R2/G126-E01 ya está publicado. El preflight fresco #166 previo a VER.2 detectó trabajo material nuevo de dependencias en los PRs #204 y #205, por lo que se insertó MANT.2 R2/#206 antes de VER.2 R6/#164. G127 permanece disponible sin candidato, bloque ni VERSION preasignados. Después de publicar MANT.2 R2 debe repetirse #166 antes de iniciar VER.2."
   }
 }

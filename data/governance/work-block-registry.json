@@ -18,7 +18,7 @@
     "next_functional_block_if_accepted": null,
     "next_functional_global_if_accepted": null,
     "edition": null,
-    "planning_issue": 164,
+    "planning_issue": 206,
     "next_global_available": 127
   },
   "families": [
@@ -453,9 +453,9 @@
       "identifier": "MANT.2",
       "family": "MANT",
       "kind": "block",
-      "status": "closed",
-      "meaning": "Bloque recurrente exclusivo para PRs/alerts de Dependabot. R1 queda integrado y aceptado como G123/E01 después de PR #168, merge y revalidación completa de main; la publicación formal del estado aceptado queda pendiente únicamente de tag firmado y GitHub Release prerelease. Futuras R2+ interrumpen la fase planificada cuando exista trabajo material pendiente.",
-      "evidence": "Issue #167; PR #168; merge 1a3942a6c14ab047fe8bc587c21b9b96cf62f2bd; #160/#161 cerrados como superseded; Dependabot alerts abiertos=0; Repository Quality Gate, Python Compatibility, Dependency Security, Visual & Accessibility y CodeQL post-merge en success; revalidación local de main 11 PASS / 0 FAIL; 1588 unittest OK; pytest 1628 passed + 7781 subtests; pip-audit sin vulnerabilidades; npm audit 0 vulnerabilidades; tag/release pendiente.",
+      "status": "in_progress",
+      "meaning": "Bloque recurrente exclusivo para Dependabot y dependencias. R1 permanece publicado como G123/E01. R2 está en curso mediante Issue #206 después de que el preflight #166 previo a VER.2 detectara los PRs Dependabot #204 y #205. R2 todavía no tiene Global, Edition ni VERSION asignados.",
+      "evidence": "R1 histórico: Issue #167; PR #168; G123/E01 publicado. R2 activo: Issue #206; baseline G126 publicado 1819f59f95731dc652ad62d84d6a5ad87ad3f8a4; PR #204 uvicorn 0.52.4→0.53.0; PR #205 pydantic-core 2.46.5→2.49.0; #204 requiere reconciliación documental/licencias; #205 produce ResolutionImpossible con pydantic 2.13.5.",
       "global_refs": [
         "G123"
       ],
@@ -507,8 +507,8 @@
       "family": "VER",
       "kind": "block",
       "status": "reopened_planned_r6",
-      "meaning": "Reconciliación revision-aware y promoción. R6 será la primera fase material después de PLAN.2 R2 publicado y debe cerrar antes de DOC.4 R1.",
-      "evidence": "Ledger revision-aware; Issue #164; PLAN.2 R2/#155.",
+      "meaning": "Reconciliación revision-aware y promoción. R6 permanece planificado y bloqueado por MANT.2 R2/#206; solo podrá iniciar después de publicar #206 y repetir un preflight #166 limpio.",
+      "evidence": "Ledger revision-aware; Issue #164; PLAN.2 R2/#155 publicado como G126; MANT.2 R2/#206 interpuesto por #166.",
       "global_refs": [
         "G087"
       ],
@@ -663,15 +663,15 @@
       "identifier": "PLAN.2",
       "family": "PLAN",
       "kind": "block",
-      "status": "accepted_pending_publication",
-      "meaning": "R1 permanece cerrado/aceptado como G114/E01. R2 queda materializado y aceptado localmente como G126/E01 (0.1.26.01-beta), pendiente de PR/merge/tag/release.",
-      "evidence": "G114 / PR #94 preservado; PLAN.2 R2 Issue #155; rama plan/plan2-r2-replanificacion-maestra; Quality Gate FULL 11 PASS / 0 FAIL; 1613 unittest; pytest 1653 + 7913 subtests; preflight final #166 CLEAN; G126/E01 materializado localmente.",
+      "status": "closed",
+      "meaning": "R1 permanece preservado como G114/E01. R2 quedó cerrado, integrado y publicado como G126/E01 (0.1.26.01-beta); no representa la fase activa.",
+      "evidence": "G114 / PR #94 preservado; PLAN.2 R2 Issue #155; PR #202 integrado; tag firmado v0.1.26.01-beta; GitHub Release prerelease 390399947; main publicado 1819f59f95731dc652ad62d84d6a5ad87ad3f8a4.",
       "global_refs": [
         "G114",
         "G126"
       ],
       "reusable_for_different_scope": false,
-      "active_scope": "R2"
+      "active_scope": "R1-R2"
     },
     {
       "identifier": "UX.5",
@@ -1023,20 +1023,20 @@
     "documentation_audit_issue": 154,
     "master_replanning_issue": 155,
     "next_candidate_assigned": false,
-    "active_phase": "PLAN.2 R2",
-    "active_phase_issue": 155,
+    "active_phase": "MANT.2 R2",
+    "active_phase_issue": 206,
     "active_phase_state": "in_progress",
-    "next_global_available": 126
+    "next_global_available": 127
   },
   "active_phase": {
-    "block": "PLAN.2",
+    "block": "MANT.2",
     "revision": "R2",
-    "issue": 155,
-    "state": "accepted_pending_publication",
-    "global_revision": 126,
-    "revision_aware": "0.1.26.01-beta",
-    "base_global_revision": 125,
-    "base_revision_aware": "0.1.25.01-beta",
+    "issue": 206,
+    "state": "in_progress",
+    "global_revision": null,
+    "revision_aware": null,
+    "base_global_revision": 126,
+    "base_revision_aware": "0.1.26.01-beta",
     "next_phase_issue": 164
   }
 }

@@ -16,14 +16,15 @@
 - G124/E13 (`0.1.24.13-beta`) permanece publicado para MANT.1 R8 y G123/E01
   para MANT.2 R1.
 - DOC.3 R1 no alteró contratos previsionales ni la trazabilidad funcional.
-- PLAN.2 R2/#155 está aceptado localmente como G126/E01 (`0.1.26.01-beta`) y pendiente de publicación.
+- PLAN.2 R2/#155 está cerrado/publicado como G126/E01 (`0.1.26.01-beta`).
+- MANT.2 R2/#206 está activo sin Global/VERSION preasignados.
 - G127 permanece libre y sin candidato.
 - G121/E01 (`0.1.21.01-beta`) permanece publicado para UX.6 R8.
 - NOR.3 R1–R8 permanece cerrado/aceptado como G122/E01 (`0.1.22.01-beta`)
   mediante PR #162 / merge `b97cf61763479b80b8e8724b878089e8bb20fa00`.
 - TR-035, TR-036 y TR-037 preservan los contratos añadidos por UX.6.
 - DEV.2 R5/R6 permanecen preservados como G118/E04 y G119/E05.
-- PERSIST.1 permanece planificado detrás de VER.2 → DOC.4 → #142/derivados.
+- PERSIST.1 permanece planificado detrás de MANT.2 R2 → #166 → VER.2 → DOC.4 → #142/derivados.
 - El programa visual pre-1.0 es UX.7→UX.x bajo #129/#189.
 <!-- DOC1-R1-POST-MANT1:END -->
 

@@ -17,16 +17,16 @@ class TestG114PromotionPostMerge(unittest.TestCase):
         )
         ids = {item["identifier"]: item for item in data["identifiers"]}
 
-        self.assertEqual("accepted_pending_publication", ids["PLAN.2"]["status"])
+        self.assertEqual("closed", ids["PLAN.2"]["status"])
         self.assertIn("G114", ids["PLAN.2"]["global_refs"])
         self.assertIn("G126", ids["PLAN.2"]["global_refs"])
         self.assertEqual(["G114", "G126"], ids["PLAN.2"]["global_refs"])
 
         active = data["active_phase"]
-        self.assertEqual("PLAN.2", active["block"])
+        self.assertEqual("MANT.2", active["block"])
         self.assertEqual("R2", active["revision"])
-        self.assertEqual(155, active["issue"])
-        self.assertEqual(126, active["global_revision"])
+        self.assertEqual(206, active["issue"])
+        self.assertIsNone(active["global_revision"])
     def test_documentacion_preserva_g114_plan2(self):
         ledger = cargar_ledger()
         entry = next(
