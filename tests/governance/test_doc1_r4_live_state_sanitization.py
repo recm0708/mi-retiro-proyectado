@@ -95,7 +95,7 @@ class TestDOC1R4LiveStateSanitization(unittest.TestCase):
         self.assertIsNone(candidate["global_revision"])
         self.assertIsNone(candidate["block"])
         self.assertEqual(
-            127,
+            128,
             candidate["next_global_available"],
         )
 

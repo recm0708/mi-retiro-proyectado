@@ -24,7 +24,7 @@ class TestNOR3R8Closure(unittest.TestCase):
         self.assertIsNone(candidate["revision"])
         self.assertIsNone(candidate["revision_scope"])
         self.assertEqual("unassigned", candidate["state"])
-        self.assertEqual(127, candidate["next_global_available"])
+        self.assertEqual(128, candidate["next_global_available"])
         identifiers = {item["identifier"]: item for item in data["identifiers"]}
         self.assertEqual("closed", identifiers["NOR.3"]["status"])
         self.assertEqual("R1-R8", identifiers["NOR.3"]["active_scope"])
@@ -36,8 +36,8 @@ class TestNOR3R8Closure(unittest.TestCase):
         self.assertEqual("MANT.2", active["block"])
         self.assertEqual("R2", active["revision"])
         self.assertEqual(206, active["issue"])
-        self.assertEqual("in_progress", active["state"])
-        self.assertIsNone(active["global_revision"])
+        self.assertEqual("accepted_pending_publication", active["state"])
+        self.assertEqual(127, active["global_revision"])
 
     def test_policy_declara_cierre_r8_sin_simular_auditoria_posterior(self):
         data = json.loads(POLICY.read_text(encoding="utf-8"))

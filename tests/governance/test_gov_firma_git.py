@@ -163,7 +163,7 @@ class TestGovFirmaGit(unittest.TestCase):
             roadmap,
         )
         self.assertIn(
-            "G127, libre y no reservado",
+            "G128, libre y no reservado",
             roadmap,
         )
 

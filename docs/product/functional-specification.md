@@ -1,7 +1,7 @@
 # Especificación funcional
 
 **Estado:** Vigente con registro RF histórico integrado
-**Versión de aplicación revisada:** `0.1.26.01-beta`
+**Versión de aplicación revisada:** `0.1.27.02-beta` — MANT.2 R2/G127-E02 aceptado localmente; publicación pendiente.
 **Versión base histórica:** `0.0.23-beta`
 **Revisión documental:** DOC.3 R1 — 2026-09-14
 **Actualización funcional vigente:** UX.6 R8 — consolidación funcional App/Developer — 2026-08-22
@@ -10,15 +10,15 @@
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado funcional vigente
 
-- `VERSION` permanece en `0.1.26.01-beta` y corresponde al estado publicado PLAN.2 R2/G126-E01.
+- `VERSION` materializa `0.1.27.02-beta` para MANT.2 R2/G127-E02 aceptado localmente; G126/E01 permanece como última publicación formal.
 - DOC.3 R1/G125-E01 permanece cerrado/publicado mediante `v0.1.25.01-beta`.
 - MANT.2 R1/G123, MANT.1 R8/G124 y NOR.3/G122 permanecen como estados
   anteriores publicados.
 - DOC.3 R1/#154 no modificó los motores SEBD, Mixto o SUCGS ni sus parámetros
   normativos.
 - PLAN.2 R2/#155 está cerrado/publicado como G126/E01 (`0.1.26.01-beta`).
-- MANT.2 R2/#206 está activo sin Global/VERSION preasignados.
-- G127 permanece como siguiente Global disponible y libre.
+- MANT.2 R2/#206 está aceptado localmente como G127/E02 (`0.1.27.02-beta`), pendiente de integración/publicación.
+- G128 permanece como siguiente Global disponible y libre.
 - UX.6 R1–R8 permanece cerrado/publicado como G121/E01 con revisión funcional
   R8.
 - Perfil/avatar, usuarios/RBAC y auditoría Developer permanecen separados de la

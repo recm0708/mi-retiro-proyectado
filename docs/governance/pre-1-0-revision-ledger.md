@@ -3,18 +3,33 @@
 **Proyecto:** Mi Retiro Proyectado
 **Base auditada:** `7037addd44253e528c77460b678d2b3ccd540dd5`
 **Contador histórico en la base `7037addd`:** **G070**
-**Contador aceptado reconciliado vigente:** **G126**
-**Siguiente Global disponible:** **G127**
-**Siguiente candidato disponible:** **ninguno asignado** — G127 permanece disponible sin bloque preasignado; MANT.2 R2/#206 está en curso sin candidato material
+**Contador aceptado reconciliado vigente:** **G127**
+**Siguiente Global disponible:** **G128**
+**Siguiente candidato disponible:** **ninguno asignado** — G128 permanece disponible sin bloque preasignado; MANT.2 R2/G127-E02 está aceptado localmente y pendiente de publicación
 
 ## Estado vivo post-G126 — MANT.2 R2/#206
 
 - PLAN.2 R2/#155 está integrado y publicado como G126/E01 (`0.1.26.01-beta`).
-- `main` publicado: `1819f59f95731dc652ad62d84d6a5ad87ad3f8a4`.
-- El preflight fresco #166 previo a VER.2 detectó #204 y #205.
-- MANT.2 R2/#206 está en curso sin Global, Edition ni VERSION asignados.
-- G127 permanece libre y `VERSION` continúa en `0.1.26.01-beta`.
-- VER.2 R6/#164 permanece bloqueado hasta publicar #206 y repetir #166 con resultado limpio.
+- `main` publicado de base: `1819f59f95731dc652ad62d84d6a5ad87ad3f8a4`.
+- MANT.2 R2/#206 queda aceptado localmente como **G127/E02** (`0.1.27.02-beta`).
+- Draft PR #207 contiene los checkpoints firmados CP1–CP3 y la materialización.
+- #204/#205 están cerrados sin merge directo como sustituidos por #207.
+- Reauditoría Dependabot: 0 PRs abiertos, 0 ramas `dependabot/*`, 0 alerts abiertos.
+- G128 permanece libre; VER.2 R6/#164 sigue bloqueado hasta publicar G127 y repetir #166 limpio.
+
+
+<!-- MANT2-R2-G127-PROMOTION:START -->
+## Promoción local MANT.2 R2 / G127-E02
+
+- `VERSION` materializa `0.1.27.02-beta` para MANT.2 R2 / G127-E02.
+- E02 continúa el ordinal E01 ya consumido por MANT.2 R1/G123.
+- Uvicorn avanza a 0.53.0; Pydantic 2.13.5 + pydantic-core 2.46.5 permanecen coordinados.
+- #204/#205 quedan cerrados sin merge directo como sustituidos por #207.
+- CP2 y CP3 quedaron verdes local/remotamente; Dependabot queda con 0 PRs/ramas/alerts abiertos.
+- G127/E02 queda aceptado localmente y pendiente de PR/merge/revalidación de `main`/tag/Release.
+- G128 queda disponible sin candidato, bloque ni `VERSION` preasignados.
+- VER.2 R6/#164 solo podrá iniciar después de publicar G127 y repetir #166 limpio.
+<!-- MANT2-R2-G127-PROMOTION:END -->
 
 <!-- PLAN2-G126-PROMOTION:START -->
 ## Checkpoint histórico — PLAN.2 R2 / materialización local G126-E01
@@ -40,6 +55,7 @@
 | G124 | `0.1.24.13-beta` | MANT.1 R8 — R8 — auditoría, consolidación y saneamiento operativo post-NOR.3 de scripts, tests, labels y estructura técnica | `0.1.24.13-beta` | Issue #163; auditoría de 16 scripts operativos: 16 conservar / 0 consolidar / 0 retirar / 0 mover; auditoría semántica V2 de 219 módulos y 1633 funciones test_*: 0 duplicados AST, 0 grupos estructurales equivalentes y 0 retiros justificados; taxonomía GitHub reconciliada en 28 labels (16 canónicos + 12 suplementarios); Quality Gate FULL pre-promoción 11 PASS / 0 FAIL, 1594 unittest OK y pytest 1634 passed + 7781 subtests; Quality Gate FULL post-promoción local 11 PASS / 0 FAIL, 1600 unittest OK y pytest 1640 passed + 7782 subtests; preflight final #166: 0 PRs abiertos, 0 Dependabot alerts, 0 PRs Dependabot, pip-audit sin vulnerabilidades y npm audit 0 vulnerabilidades; publicación remota G124 pendiente de PR/merge, revalidación, tag firmado y Release. |
 | G125 | `0.1.25.01-beta` | DOC.3 R1 — R1 — auditoría documental integral post-MANT.1: estado vigente, gobierno, estructura, historia, coherencia semántica y cierre reproducible | `0.1.25.01-beta` | Issue #154; cierre interno 6e94fbcc1598dff612cb4c676553faa21ff8c831; 173 Markdown auditados y normalizados; 418 archivos textuales de código/configuración auditados; 16 familias / 53 identificadores; Quality Gate FULL 11 PASS / 0 FAIL; 1603 unittest OK; pytest 1643 passed + 7824 subtests; preflight final #166 CLEAN con 0 PRs, 0 Dependabot alerts, 0 PRs Dependabot, pip-audit limpio y npm audit 0 vulnerabilidades; DOC.4/#171 transferido como trabajo diferido. |
 | G126 | `0.1.26.01-beta` | PLAN.2 R2 — R2 — replanificación maestra post-G125 hacia 1.0: grafo canónico, clasificación pre/post-1.0, DOC.4 y auditoría previsional, PERSIST/REP/DEPLOY, programa UX granular dinámico UX.7–UX.x, contrato multiportal #189 y reconciliación integral de gobierno | `0.1.26.01-beta` | Issue #155; rama plan/plan2-r2-replanificacion-maestra; auditoría integral de Issues reconciliada; Quality Gate FULL 11 PASS / 0 FAIL; 1613 unittest OK; pytest 1653 passed + 7913 subtests; 173 Markdown auditados; 17 familias / 78 identificadores; integridad 656 archivos / 84 directorios canónicos; git diff --check limpio; preflight final #166 con main G125 sin cambios, 0 PRs abiertos, 0 Dependabot alerts abiertos, dependency manifests sin cambios, pip check limpio, pip-audit sin vulnerabilidades y contrato npm raíz N/A. |
+| G127 | `0.1.27.02-beta` | MANT.2 R2 — R2 — mantenimiento coordinado post-G126: Uvicorn 0.53.0, resolución de #204/#205, reauditoría Dependabot limpia e institucionalización del checklist obligatorio de Issues | `0.1.27.02-beta` | Issue #206; Draft PR #207; CP1 17d4c498; CP2 1e69029; CP3 9186f4d; pip check/pip-audit verdes; Repository Quality Gate, Python Compatibility y Dependency Security verdes; 0 PRs/ramas/alerts Dependabot abiertos. |
 <!-- LEDGER-G122-G126:END -->
 
 <!-- DOC3-G125-PROMOTION:START -->
@@ -52,8 +68,8 @@
 - GitHub Release prerelease: 388866555.
 - Revalidación final: Quality Gate FULL 11 PASS / 0 FAIL; 1608 unittest OK;
   pytest 1648 passed + 7844 subtests.
-- G127 permanece disponible sin candidato/bloque preasignado.
-- MANT.2 R2/#206 está en progreso sin Global/VERSION preasignados.
+- G128 permanece disponible sin candidato/bloque preasignado.
+- MANT.2 R2/#206 está aceptado localmente como G127/E02 (`0.1.27.02-beta`), pendiente de publicación.
 <!-- DOC3-G125-PROMOTION:END -->
 
 <!-- MANT1-G124-PROMOTION:START -->
@@ -118,7 +134,7 @@ La reconstrucción histórica G001–G070 permanece intacta.
 - G125/E01 permanece publicado para DOC.3 R1.
 - PLAN.2 R1 permanece preservado como G114/E01.
 - PLAN.2 R2 está publicado como G126/E01 (`0.1.26.01-beta`).
-- G127 permanece disponible sin candidato, bloque ni VERSION preasignados.
+- G128 permanece disponible sin candidato, bloque ni VERSION preasignados.
 - El preflight #166 posterior a G126 insertó MANT.2 R2/#206 antes de VER.2 R6/#164.
 - Los tags ya publicados permanecen inmutables.
 <!-- DOC1-R1-REVISION-MANUAL:END -->

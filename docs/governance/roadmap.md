@@ -4,8 +4,8 @@
 **Último estado publicado:** G126/E01 — PLAN.2 R2
 **Versión publicada:** `0.1.26.01-beta`
 **`main` publicado de entrada a MANT.2 R2:** `1819f59f95731dc652ad62d84d6a5ad87ad3f8a4`
-**Siguiente Global disponible:** G127, libre y no reservado
-**Fase en curso:** MANT.2 R2 / #206
+**Siguiente Global disponible:** G128, libre y no reservado
+**Fase en curso:** MANT.2 R2 / #206 — G127/E02 aceptado localmente, publicación pendiente
 **Fecha de reconciliación:** 2026-09-19
 
 Este roadmap muestra el programa vigente hacia `1.0.0.0`. La historia de estados aceptados permanece en ledger, `RELEASES.md`, `CHANGELOG.md`, tags, GitHub Releases y `docs/archive/`.
@@ -32,7 +32,7 @@ es instalable tal cual porque `pydantic==2.13.5` exige exactamente
 Por la regla transversal #166 se abrió MANT.2 R2/#206 antes de VER.2. La rama
 local de trabajo es `chore/mant2-r2-dependabot-post-g126`.
 
-`VERSION` permanece en `0.1.26.01-beta`. G127 continúa libre y sin candidato.
+`VERSION` materializa `0.1.27.02-beta` para MANT.2 R2 / G127-E02 aceptado localmente. G128 continúa libre y sin candidato.
 
 ## Árbol vigente hacia `1.0.0.0`
 
@@ -69,7 +69,7 @@ El orden expresa dependencias materiales, no Globals futuros supuestos.
 ### MANT.2 R2 antes de VER.2
 
 MANT.2 R2/#206 reconcilia los PRs Dependabot #204/#205 detectados por el
-preflight #166. No tiene Global ni `VERSION` preasignados. VER.2 permanece
+preflight #166 y queda materializado como G127/E02 (`0.1.27.02-beta`). VER.2 permanece
 bloqueado hasta publicar este mantenimiento y repetir #166 con resultado limpio.
 
 ### VER.2 R6 antes de DOC.4
@@ -200,4 +200,4 @@ No bloquean `1.0.0.0`:
 
 ## Regla de continuidad
 
-La fase material activa es MANT.2 R2/#206. Después de cerrarla y publicarla debe repetirse #166; solo con ese preflight limpio podrá iniciar VER.2 R6/#164.
+La fase material activa es MANT.2 R2/#206, aceptada localmente como G127/E02 y pendiente de publicación. Después de publicarla debe repetirse #166; solo con ese preflight limpio podrá iniciar VER.2 R6/#164.

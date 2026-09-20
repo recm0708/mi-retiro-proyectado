@@ -23,51 +23,64 @@ class TestPLAN2R2Program(unittest.TestCase):
             for path in (ROADMAP, MASTER, MATRIX)
         )
 
-    def test_g126_materializado_y_g127_permanece_libre(self):
+    def test_g126_permanece_preservado_y_g127_e02_es_estado_actual(self):
         self.assertEqual(
-            "0.1.26.01-beta",
+            "0.1.27.02-beta",
             (ROOT / "VERSION").read_text(encoding="utf-8").strip(),
         )
 
         ledger = cargar_ledger()
-        self.assertEqual(126, ledger["accepted_count"])
+        self.assertEqual(127, ledger["accepted_count"])
+        self.assertEqual(128, ledger["next_global"])
 
-        entry = next(
+        g126 = next(
             item
             for item in ledger["entries"]
             if item["global_revision"] == 126
         )
+        self.assertEqual("PLAN.2", g126["block"])
+        self.assertEqual("R2", g126["functional_revision"])
+        self.assertEqual(1, g126["ordinal"])
+        self.assertEqual("0.1.26.01-beta", g126["revision_aware"])
 
-        self.assertEqual("PLAN.2", entry["block"])
-        self.assertEqual("R2", entry["functional_revision"])
-        self.assertEqual(1, entry["ordinal"])
-        self.assertEqual("0.1.26.01-beta", entry["revision_aware"])
+        g127 = next(
+            item
+            for item in ledger["entries"]
+            if item["global_revision"] == 127
+        )
+        self.assertEqual("MANT.2", g127["block"])
+        self.assertEqual("R2", g127["functional_revision"])
+        self.assertEqual(2, g127["ordinal"])
+        self.assertEqual("0.1.27.02-beta", g127["revision_aware"])
 
         registry = json.loads(
             REGISTRY.read_text(encoding="utf-8")
         )
-
         candidate = registry["current_candidate"]
 
         self.assertEqual("unassigned", candidate["state"])
         self.assertIsNone(candidate["global_revision"])
         self.assertIsNone(candidate["revision_aware"])
         self.assertIsNone(candidate["block"])
-        self.assertEqual(206, candidate["planning_issue"])
-        self.assertEqual(127, candidate["next_global_available"])
+        self.assertEqual(164, candidate["planning_issue"])
+        self.assertEqual(128, candidate["next_global_available"])
 
         ids = {
             item["identifier"]: item
             for item in registry["identifiers"]
         }
-
-        self.assertEqual(
-            "closed",
-            ids["PLAN.2"]["status"],
-        )
+        self.assertEqual("closed", ids["PLAN.2"]["status"])
         self.assertEqual(
             ["G114", "G126"],
             ids["PLAN.2"]["global_refs"],
+        )
+        self.assertEqual(
+            "accepted_pending_publication_r2",
+            ids["MANT.2"]["status"],
+        )
+        self.assertEqual(
+            ["G123", "G127"],
+            ids["MANT.2"]["global_refs"],
         )
 
 

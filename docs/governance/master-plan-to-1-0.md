@@ -3,8 +3,8 @@
 **Estado:** vigente
 **Último estado publicado:** G126/E01 — PLAN.2 R2
 **Versión publicada:** `0.1.26.01-beta`
-**Fase en curso:** MANT.2 R2 / #206
-**Siguiente Global disponible:** G127, libre y no reservado
+**Fase en curso:** MANT.2 R2 / #206 — G127/E02 aceptado localmente, publicación pendiente
+**Siguiente Global disponible:** G128, libre y no reservado
 **Objetivo estable:** `1.0.0.0`
 **Fecha de reconciliación:** 2026-09-19
 
@@ -13,7 +13,7 @@ Este documento es la autoridad narrativa del programa vigente hacia la primera v
 ## 1. Principios
 
 1. Ninguna fase planificada recibe Global o `VERSION` por anticipado.
-2. G126 está publicado como PLAN.2 R2/E01; G127 es el siguiente Global aritméticamente disponible y permanece libre.
+2. G126 está publicado como PLAN.2 R2/E01; MANT.2 R2 queda aceptado localmente como G127/E02 y G128 es el siguiente Global disponible.
 3. Un Global se materializa únicamente con candidato real, validado y aceptable.
 4. Issues y documentación versionada deben describir el mismo programa.
 5. Trabajo material nuevo con responsabilidad propia se inserta inmediatamente en todos los árboles afectados antes de continuar.
@@ -42,8 +42,8 @@ El preflight #166 inmediatamente anterior a VER.2 detectó los PRs Dependabot
 #204 y #205. Por la regla permanente de inserción se creó MANT.2 R2/#206 antes
 de VER.2 R6/#164.
 
-MANT.2 R2 está en curso sin Global ni `VERSION` preasignados. G127 permanece
-libre.
+MANT.2 R2 queda materializado y aceptado localmente como G127/E02 (`0.1.27.02-beta`),
+pendiente de integración/publicación. G128 permanece libre.
 
 ## 3. Árbol definitivo de dependencias
 

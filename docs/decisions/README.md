@@ -1,7 +1,7 @@
 # Registro de decisiones técnicas
 
 **Estado:** Vigente
-**Versión de aplicación revisada:** `0.1.26.01-beta`
+**Versión de aplicación revisada:** `0.1.27.02-beta`
 **Versión base histórica:** `0.0.25-beta`
 **Base documental histórica:** `0.0.23-beta` — GOV.1.3 R4 — 2026-08-17
 **Revisión documental:** GOV.1.3 R4 — 2026-08-17
@@ -15,7 +15,7 @@
 ## Nota de lectura vigente
 
 - Las ADR históricas no se reescriben.
-- `VERSION` está sincronizado en `0.1.26.01-beta` para PLAN.2 R2 / G126-E01; DOC.3 R1 permanece publicado como G125/E01 (`0.1.25.01-beta`).
+- `VERSION` materializa `0.1.27.02-beta` para MANT.2 R2 / G127-E02 aceptado localmente; PLAN.2 R2 / G126-E01 permanece como última publicación formal y DOC.3 R1 como G125/E01 histórico.
 - G124/E13 está cerrado/publicado mediante PR #170,
   `main@f9d181ceaaf4824bf8807d9237d0e19e71d3b29c`, tag firmado
   `v0.1.24.13-beta` y GitHub Release prerelease.
@@ -24,7 +24,7 @@
 - UX.6 R1–R8 permanece cerrado/publicado dentro de G121/E01.
 - NOR.3 R1–R8 permanece cerrado/aceptado como G122/E01 mediante PR #162 /
   merge `b97cf61763479b80b8e8724b878089e8bb20fa00`.
-- DOC.3 R1/#154 permanece publicado como G125/E01; PLAN.2 R2/#155 está cerrado/publicado como G126/E01 (`0.1.26.01-beta`); MANT.2 R2/#206 está activo y G127 queda disponible sin candidato/bloque asignado.
+- DOC.3 R1/#154 permanece publicado como G125/E01; PLAN.2 R2/#155 está cerrado/publicado como G126/E01 (`0.1.26.01-beta`); MANT.2 R2/#206 está aceptado localmente como G127/E02 (`0.1.27.02-beta`) y G128 queda libre sin candidato/bloque asignado.
 - PERSIST.1 permanece planificado, no iniciado y sin Global preasignado.
 - SEC.2 R1–R6 permanece cerrado y su historia se conserva.
 <!-- DOC1-R1-REVISION-MANUAL:END -->

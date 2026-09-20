@@ -19,17 +19,17 @@ POLICY = ROOT / "data/governance/repository-structure-policy.json"
 class TestG122NOR3Promotion(unittest.TestCase):
     def test_version_actual_avanza_sin_reescribir_g122(self):
         version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
-        self.assertEqual("0.1.26.01-beta", version)
+        self.assertEqual("0.1.27.02-beta", version)
         self.assertEqual(version, APP_VERSION)
-        self.assertEqual((126, 1), descomponer_version_beta_revision(version))
+        self.assertEqual((127, 2), descomponer_version_beta_revision(version))
         entry = next(x for x in cargar_ledger()["entries"] if x["global_revision"] == 122)
         self.assertEqual("NOR.3", entry["block"])
         self.assertEqual("0.1.22.01-beta", entry["revision_aware"])
 
     def test_ledger_preserva_g122_y_estado_actual_g125(self):
         ledger = cargar_ledger()
-        self.assertEqual(126, ledger["accepted_count"])
-        self.assertEqual(127, ledger["next_global"])
+        self.assertEqual(127, ledger["accepted_count"])
+        self.assertEqual(128, ledger["next_global"])
         self.assertIsNone(ledger["next_candidate"])
         self.assertIsNone(ledger["next_candidate_block"])
         entry = next(x for x in ledger["entries"] if x["global_revision"] == 122)
@@ -46,59 +46,30 @@ class TestG122NOR3Promotion(unittest.TestCase):
         candidate = data["current_candidate"]
         self.assertEqual("unassigned", candidate["state"])
         self.assertIsNone(candidate["global_revision"])
-        self.assertEqual(127, candidate["next_global_available"])
-        self.assertEqual(206, candidate["planning_issue"])
+        self.assertEqual(128, candidate["next_global_available"])
+        self.assertEqual(164, candidate["planning_issue"])
 
-    def test_manifest_actual_materializa_doc3_r1(self):
-        data = json.loads(
-            MANIFEST.read_text(encoding="utf-8")
-        )
+    def test_manifest_actual_materializa_mant2_r2(self):
+        data = json.loads(MANIFEST.read_text(encoding="utf-8"))
 
-        self.assertEqual("0.1.26.01-beta", data["version"])
-        self.assertEqual(
-            "PLAN.2",
-            data["block"],
-        )
-        self.assertEqual(
-            "R2",
-            data["revision"],
-        )
+        self.assertEqual("0.1.27.02-beta", data["version"])
+        self.assertEqual("MANT.2", data["block"])
+        self.assertEqual("R2", data["revision"])
 
         next_step = data["next_step"]
-
-        self.assertEqual(
-            127,
-            next_step["global_revision"],
-        )
-        self.assertIsNone(
-            next_step["revision_aware"],
-        )
-        self.assertIsNone(
-            next_step["block"],
-        )
+        self.assertEqual(128, next_step["global_revision"])
+        self.assertIsNone(next_step["revision_aware"])
+        self.assertIsNone(next_step["block"])
 
         description = next_step["description"]
-
-        # El manifest conserva la frontera inmediata:
-        # PLAN.2 activo -> VER.2 solo tras publicación/preflight.
         for fragment in (
-            "PLAN.2 R2/G126-E01",
-            "MANT.2 R2/#206",
+            "MANT.2 R2/G127-E02",
+            "G128",
             "VER.2 R6/#164",
             "#166",
         ):
             with self.subTest(fragment=fragment):
-                self.assertIn(
-                    fragment,
-                    description,
-                )
-
-        # El plan completo pertenece a roadmap/master/matrix,
-        # no al campo next_step del manifest.
-        self.assertNotEqual(
-            "",
-            description.strip(),
-        )
+                self.assertIn(fragment, description)
 
     def test_policy_conserva_procedencia_r2_y_registra_promocion(self):
         data = json.loads(POLICY.read_text(encoding="utf-8"))

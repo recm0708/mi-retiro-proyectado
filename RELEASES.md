@@ -1,5 +1,19 @@
 # Registro de versiones y estados del proyecto
 
+<!-- MANT2-R2-G127-PROMOTION:START -->
+## Promoción G127/E02 — MANT.2 R2
+
+- G127/E02 (`0.1.27.02-beta`) materializa MANT.2 R2.
+- Uvicorn: 0.53.0; Pydantic: 2.13.5; pydantic-core: 2.46.5.
+- #204/#205: cerrados sin merge directo como sustituidos por Draft PR #207.
+- Reauditoría previa al candidato: 0 PRs Dependabot, 0 ramas `dependabot/*` y 0 alerts abiertos.
+- CP2 remoto: Repository Quality Gate #56, Python Compatibility y Dependency Security #24 en success.
+- CP3 remoto: Repository Quality Gate #57, Python Compatibility y Dependency Security #25 en success.
+- #203: checklist obligatorio de Issues materializado en Issue Forms y protegido por regresión.
+- G128 queda disponible sin candidato.
+- El tag `v0.1.27.02-beta` y GitHub Release prerelease se crean únicamente después de merge y revalidación de `main`.
+<!-- MANT2-R2-G127-PROMOTION:END -->
+
 ## Publicación G126/E01 — PLAN.2 R2
 
 - Estado publicado: G126/E01 (`0.1.26.01-beta`) para PLAN.2 R2/#155.

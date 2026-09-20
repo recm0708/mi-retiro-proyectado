@@ -18,8 +18,8 @@
     "next_functional_block_if_accepted": null,
     "next_functional_global_if_accepted": null,
     "edition": null,
-    "planning_issue": 206,
-    "next_global_available": 127
+    "planning_issue": 164,
+    "next_global_available": 128
   },
   "families": [
     {
@@ -453,13 +453,15 @@
       "identifier": "MANT.2",
       "family": "MANT",
       "kind": "block",
-      "status": "in_progress",
-      "meaning": "Bloque recurrente exclusivo para Dependabot y dependencias. R1 permanece publicado como G123/E01. R2 está en curso mediante Issue #206 después de que el preflight #166 previo a VER.2 detectara los PRs Dependabot #204 y #205. R2 todavía no tiene Global, Edition ni VERSION asignados.",
-      "evidence": "R1 histórico: Issue #167; PR #168; G123/E01 publicado. R2 activo: Issue #206; baseline G126 publicado 1819f59f95731dc652ad62d84d6a5ad87ad3f8a4; PR #204 uvicorn 0.52.4→0.53.0; PR #205 pydantic-core 2.46.5→2.49.0; #204 requiere reconciliación documental/licencias; #205 produce ResolutionImpossible con pydantic 2.13.5.",
+      "status": "accepted_pending_publication_r2",
+      "meaning": "Bloque recurrente exclusivo para Dependabot y dependencias. R1 permanece publicado como G123/E01. R2 queda materializado y aceptado localmente como G127/E02 (0.1.27.02-beta) mediante Issue #206 y Draft PR #207, pendiente de integración, revalidación de main, tag firmado y GitHub Release prerelease.",
+      "evidence": "R1 histórico: Issue #167; PR #168; G123/E01 publicado. R2: Issue #206; Draft PR #207; baseline G126 publicado 1819f59f95731dc652ad62d84d6a5ad87ad3f8a4; CP1 17d4c49855e9451833311f49babaa4d284585a87; CP2 1e69029a0b19d0ff1ad6bf37456d1fbcd71ef14a integra Uvicorn 0.53.0 manteniendo Pydantic 2.13.5 + pydantic-core 2.46.5; CP3 9186f4dfecf410cf29606c764532eb438697135e institucionaliza checklist obligatorio de Issues; Repository Quality Gate, Python Compatibility y Dependency Security verdes; #204/#205 cerrados sin merge directo; 0 PRs Dependabot abiertos, 0 ramas dependabot/* y 0 Dependabot alerts abiertos.",
       "global_refs": [
-        "G123"
+        "G123",
+        "G127"
       ],
-      "reusable_for_different_scope": false
+      "reusable_for_different_scope": false,
+      "active_scope": "R1-R2"
     },
     {
       "identifier": "DOC.1",
@@ -1025,16 +1027,16 @@
     "next_candidate_assigned": false,
     "active_phase": "MANT.2 R2",
     "active_phase_issue": 206,
-    "active_phase_state": "in_progress",
-    "next_global_available": 127
+    "active_phase_state": "accepted_pending_publication",
+    "next_global_available": 128
   },
   "active_phase": {
     "block": "MANT.2",
     "revision": "R2",
     "issue": 206,
-    "state": "in_progress",
-    "global_revision": null,
-    "revision_aware": null,
+    "state": "accepted_pending_publication",
+    "global_revision": 127,
+    "revision_aware": "0.1.27.02-beta",
     "base_global_revision": 126,
     "base_revision_aware": "0.1.26.01-beta",
     "next_phase_issue": 164

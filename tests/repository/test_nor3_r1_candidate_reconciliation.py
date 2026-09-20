@@ -15,16 +15,16 @@ ROOT = Path(__file__).resolve().parents[2]
 class TestNOR3R1CandidateReconciliation(unittest.TestCase):
     def test_version_actual_preserva_promocion_historica_g122(self):
         version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
-        self.assertEqual("0.1.26.01-beta", version)
+        self.assertEqual("0.1.27.02-beta", version)
         ledger = cargar_ledger()
-        self.assertEqual(126, ledger["accepted_count"])
+        self.assertEqual(127, ledger["accepted_count"])
         entry = next(x for x in ledger["entries"] if x["global_revision"] == 122)
         self.assertEqual("0.1.22.01-beta", entry["revision_aware"])
         self.assertEqual("NOR.3", entry["block"])
 
     def test_g126_disponible_sin_candidato_preasignado(self):
         ledger = cargar_ledger()
-        self.assertEqual(127, ledger["next_global"])
+        self.assertEqual(128, ledger["next_global"])
         self.assertIsNone(ledger["next_candidate"])
         self.assertIsNone(ledger["next_candidate_block"])
 
@@ -54,18 +54,24 @@ class TestNOR3R1CandidateReconciliation(unittest.TestCase):
             "unassigned",
             candidate["state"],
         )
-        self.assertEqual(206, candidate["planning_issue"])
+        self.assertEqual(164, candidate["planning_issue"])
 
-    def test_manifest_actual_materializa_doc3(self):
-        manifest = json.loads((ROOT / "data/governance/release-publication-manifest.json").read_text(encoding="utf-8"))
-        self.assertEqual("0.1.26.01-beta", manifest["version"])
-        self.assertEqual("PLAN.2", manifest["block"])
+    def test_manifest_actual_materializa_mant2_r2(self):
+        manifest = json.loads(
+            (ROOT / "data/governance/release-publication-manifest.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        self.assertEqual("0.1.27.02-beta", manifest["version"])
+        self.assertEqual("MANT.2", manifest["block"])
         self.assertEqual("R2", manifest["revision"])
+
         next_step = manifest["next_step"]
-        self.assertEqual(127, next_step["global_revision"])
+        self.assertEqual(128, next_step["global_revision"])
         self.assertIsNone(next_step["revision_aware"])
         self.assertIsNone(next_step["block"])
-        self.assertIn("G127", next_step["description"])
+        self.assertIn("G127-E02", next_step["description"])
+        self.assertIn("G128", next_step["description"])
         self.assertIn("#164", next_step["description"])
 
     def test_historia_nor3_y_programa_vivo_quedan_separados(self):
@@ -147,7 +153,6 @@ class TestNOR3R1CandidateReconciliation(unittest.TestCase):
         )
 
     def test_nor3_historico_y_estado_vivo_tienen_owners_distintos(self):
-        # Estado vivo: programa post-G126 con MANT.2 R2 activo.
         live_files = (
             "README.md",
             "docs/governance/master-plan-to-1-0.md",
@@ -155,27 +160,12 @@ class TestNOR3R1CandidateReconciliation(unittest.TestCase):
         )
 
         for rel in live_files:
-            text = (
-                ROOT / rel
-            ).read_text(encoding="utf-8")
-
+            text = (ROOT / rel).read_text(encoding="utf-8")
             with self.subTest(rel=rel):
-                if rel == "README.md":
-                    self.assertIn(
-                        "G125",
-                        text,
-                    )
-                else:
-                    self.assertIn(
-                        "G126",
-                        text,
-                    )
-                    self.assertIn(
-                        "MANT.2",
-                        text,
-                    )
+                self.assertIn("G126", text)
+                self.assertIn("MANT.2", text)
+                self.assertIn("G127/E02", text)
 
-        # Historia NOR.3: ledger/release/versionado.
         historical_sources = (
             "CHANGELOG.md",
             "RELEASES.md",
@@ -184,24 +174,13 @@ class TestNOR3R1CandidateReconciliation(unittest.TestCase):
         )
 
         corpus = "\n".join(
-            (
-                ROOT / rel
-            ).read_text(encoding="utf-8")
+            (ROOT / rel).read_text(encoding="utf-8")
             for rel in historical_sources
         )
 
-        self.assertIn(
-            "NOR.3",
-            corpus,
-        )
-        self.assertIn(
-            "G122/E01",
-            corpus,
-        )
-        self.assertIn(
-            "0.1.22.01-beta",
-            corpus,
-        )
+        self.assertIn("NOR.3", corpus)
+        self.assertIn("G122/E01", corpus)
+        self.assertIn("0.1.22.01-beta", corpus)
 
     def test_releases_documenta_promocion_nor3(self):
         releases = (ROOT / "RELEASES.md").read_text(encoding="utf-8")

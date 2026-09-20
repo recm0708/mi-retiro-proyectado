@@ -1,7 +1,7 @@
 # Matriz de trazabilidad
 
 **Estado:** Vigente
-**Versión de aplicación:** `0.1.26.01-beta` — PLAN.2 R2/G126-E01 aceptado localmente; publicación pendiente; G127 libre sin candidato.
+**Versión de aplicación:** `0.1.27.02-beta` — MANT.2 R2/G127-E02 aceptado localmente; publicación pendiente.
 **Último tag formal legacy:** `v0.0.26-beta`
 **Base histórica:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal:** NOR.2 R8 — 2026-08-24
@@ -17,8 +17,8 @@
   para MANT.2 R1.
 - DOC.3 R1 no alteró contratos previsionales ni la trazabilidad funcional.
 - PLAN.2 R2/#155 está cerrado/publicado como G126/E01 (`0.1.26.01-beta`).
-- MANT.2 R2/#206 está activo sin Global/VERSION preasignados.
-- G127 permanece libre y sin candidato.
+- MANT.2 R2/#206 está aceptado localmente como G127/E02 (`0.1.27.02-beta`), pendiente de integración/publicación.
+- G128 permanece libre y sin candidato.
 - G121/E01 (`0.1.21.01-beta`) permanece publicado para UX.6 R8.
 - NOR.3 R1–R8 permanece cerrado/aceptado como G122/E01 (`0.1.22.01-beta`)
   mediante PR #162 / merge `b97cf61763479b80b8e8724b878089e8bb20fa00`.

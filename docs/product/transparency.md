@@ -1,7 +1,7 @@
 # Transparencia del producto
 
 **Estado:** Vigente
-**Versión de aplicación revisada:** `0.1.26.01-beta`
+**Versión de aplicación revisada:** `0.1.27.02-beta` — MANT.2 R2/G127-E02 aceptado localmente; publicación pendiente.
 **Versión base histórica:** `0.0.25-beta`
 **Versión base histórica preservada:** `0.0.23-beta`
 **Base documental preservada:** GOV.1.3 R4 — 2026-08-17
@@ -23,8 +23,8 @@
 - DOC.3 R1/#154 está cerrado/publicado como G125/E01 mediante
   `v0.1.25.01-beta`.
 - PLAN.2 R2/#155 está cerrado/publicado como G126/E01 (`0.1.26.01-beta`).
-- MANT.2 R2/#206 está activo sin Global/VERSION preasignados.
-- G127 permanece libre y sin candidato.
+- MANT.2 R2/#206 está aceptado localmente como G127/E02 (`0.1.27.02-beta`), pendiente de integración/publicación.
+- G128 permanece libre y sin candidato.
 - VER.2 R6/#164 espera el cierre/publicación de MANT.2 R2 y un #166 limpio.
 - PERSIST.1 permanece detrás de VER.2 → DOC.4 → #142/derivados.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
@@ -159,8 +159,8 @@ Estado material actual:
 - DOC.3 R1/#154 está cerrado/integrado/publicado como G125/E01
   (`0.1.25.01-beta`);
 - PLAN.2 R2/#155 está cerrado/integrado/publicado como G126/E01 (`0.1.26.01-beta`);
-- MANT.2 R2/#206 está activo sin Global/VERSION preasignados;
-- G127 permanece como siguiente Global disponible, libre y sin candidato;
+- MANT.2 R2/#206 está aceptado localmente como G127/E02 (`0.1.27.02-beta`);
+- G128 permanece como siguiente Global disponible, libre y sin candidato;
 - VER.2 R6/#164 será la siguiente fase material después de publicar MANT.2 R2 y repetir #166 limpio;
 - DOC.4 R1/#171 se ejecutará después de VER.2 y antes de #142;
 - #142 y cualquier derivado funcional obligatorio preceden PERSIST.1;

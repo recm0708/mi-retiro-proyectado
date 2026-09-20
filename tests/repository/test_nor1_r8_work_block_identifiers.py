@@ -41,7 +41,7 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
             self.assertFalse(ids[ident]["reusable_for_different_scope"])
 
         self.assertEqual("closed", ids["PLAN.2"]["status"])
-        self.assertEqual("in_progress", ids["MANT.2"]["status"])
+        self.assertEqual("accepted_pending_publication_r2", ids["MANT.2"]["status"])
         self.assertEqual("closed", ids["MANT.1"]["status"])
         self.assertIn("G124/E13", ids["MANT.1"]["meaning"])
         self.assertIn("G124", ids["MANT.1"]["global_refs"])
@@ -85,7 +85,7 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
         self.assertIsNone(candidate["revision"])
         self.assertIsNone(candidate["edition"])
         self.assertEqual("unassigned", candidate["state"])
-        self.assertEqual(127, candidate["next_global_available"])
+        self.assertEqual(128, candidate["next_global_available"])
         self.assertIsNone(candidate["next_functional_block_if_accepted"])
         self.assertIsNone(candidate["next_functional_global_if_accepted"])
 
@@ -157,6 +157,7 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
             124: ("MANT.1", 13, "0.1.24.13-beta"),
             125: ("DOC.3", 1, "0.1.25.01-beta"),
             126: ("PLAN.2", 1, "0.1.26.01-beta"),
+            127: ("MANT.2", 2, "0.1.27.02-beta"),
         }
         for global_revision, expected_entry in expected.items():
             entry = entries[global_revision]
@@ -179,6 +180,7 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
 
         for fragment in (
             "G126/E01 — PLAN.2 R2",
+            "G127/E02 — MANT.2 R2",
             "MANT.2 R2 / #206",
             "VER.2 R6 / #164",
             "DOC.4 R1 / #171",

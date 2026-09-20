@@ -1,13 +1,13 @@
 # Validación
 
 **Estado:** Vigente
-**Versión revisada:** `0.1.26.01-beta` — PLAN.2 R2/G126-E01 aceptado localmente; publicación pendiente.
+**Versión revisada:** `0.1.27.02-beta` — MANT.2 R2/G127-E02 aceptado localmente; publicación pendiente.
 **Versión base histórica:** `0.0.25-beta`
 **Base documental histórica:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal histórica preservada:** UX.4.6e R8 — validación funcional y procedencia editable — 2026-08-19
 **Última revisión transversal:** UX.4.6f R2 integrada y cierre del Paso 4 — 2026-08-20
 **Revisión de normalización:** NOR.1 R7 — cierre de estándares y preparación de NOR.2 — 2026-08-24
-**Última revisión operativa:** MANT.2 R2/#206 — CP1 de gobierno vivo post-G126 — 2026-09-20
+**Última revisión operativa:** MANT.2 R2/#206 — materialización G127/E02 — 2026-09-19
 **Clasificación:** Técnica / Calidad
 **Naturaleza documental:** Registro vivo acumulativo — mantiene la estrategia vigente y evidencia histórica de gates protegida por regresiones; los resultados históricos no se reescriben como si pertenecieran al estado actual.
 
@@ -737,10 +737,10 @@ python -m pip check
 Inventario vigente: **225 módulos**.
 
 El inventario se deriva de todos los módulos `test_*.py` ubicados bajo `tests/` y se mantiene
-sincronizado con la suite versionada. En la frontera vigente, PLAN.2 R2/#155 está publicado como G126/E01 (`0.1.26.01-beta`), MANT.2 R2/#206 está activo y G127 continúa libre
+sincronizado con la suite versionada. En la frontera vigente, PLAN.2 R2/#155 está publicado como G126/E01 (`0.1.26.01-beta`), MANT.2 R2/#206 está aceptado localmente como G127/E02 (`0.1.27.02-beta`) y G128 continúa libre
 y sin candidato. Las regresiones específicas protegen el programa pre-1.0,
 la separación entre historia y estado vivo, el baseline UX.7–UX.32,
-la expansión abierta UX.33+ y la ausencia de preasignación de G127.
+la expansión abierta UX.33+ y la ausencia de preasignación de G128.
 
 ### Módulos inventariados
 

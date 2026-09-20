@@ -6,7 +6,25 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ## [Unreleased]
 
-- Sin cambios posteriores al candidato local PLAN.2 R2 / G126-E01.
+- G128 permanece disponible sin candidato, bloque ni VERSION preasignados.
+- Después de publicar G127/E02 debe ejecutarse #166 fresco; VER.2 R6/#164 solo inicia si queda limpio.
+
+
+## [0.1.27.02-beta]
+
+### Dependencias y mantenimiento
+
+- MANT.2 R2 materializa G127/E02 como segunda aceptación del bloque recurrente MANT.2.
+- `uvicorn` avanza de 0.52.4 a 0.53.0.
+- `pydantic==2.13.5` + `pydantic_core==2.46.5` permanecen coordinados.
+- #204/#205 se cierran sin merge directo como sustituidos por #207.
+- Reauditoría Dependabot: 0 PRs abiertos, 0 ramas `dependabot/*` y 0 alerts abiertos.
+
+### Gobierno
+
+- #203 institucionaliza checklist real y criterio de cierre en los 7 Issue Forms.
+- El guard `tests/governance/test_issue_checklist_policy.py` protege la política.
+- G128 queda libre; la publicación de G127 y un #166 limpio preceden VER.2 R6/#164.
 
 ## [0.1.26.01-beta]
 

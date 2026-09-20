@@ -2,8 +2,8 @@
   "schema_version": 1,
   "project": "Mi Retiro Proyectado",
   "base_commit": "7037addd44253e528c77460b678d2b3ccd540dd5",
-  "accepted_count": 126,
-  "next_global_if_ver2_accepted": 127,
+  "accepted_count": 127,
+  "next_global_if_ver2_accepted": 128,
   "next_candidate": null,
   "historical_tags_immutable": {
     "from": "v0.0.1-beta",
@@ -1152,6 +1152,16 @@
       "state": "R2 — replanificación maestra post-G125 hacia 1.0: grafo canónico, clasificación pre/post-1.0, DOC.4 y auditoría previsional, PERSIST/REP/DEPLOY, programa UX granular dinámico UX.7–UX.x, contrato multiportal #189 y reconciliación integral de gobierno",
       "anchor": "0.1.26.01-beta",
       "evidence": "Issue #155; rama plan/plan2-r2-replanificacion-maestra; auditoría integral de Issues reconciliada; Quality Gate FULL 11 PASS / 0 FAIL; 1613 unittest OK; pytest 1653 passed + 7913 subtests; 173 Markdown auditados; 17 familias / 78 identificadores; integridad 656 archivos / 84 directorios canónicos; git diff --check limpio; preflight final #166 con main G125 sin cambios, 0 PRs abiertos, 0 Dependabot alerts abiertos, dependency manifests sin cambios, pip check limpio, pip-audit sin vulnerabilidades y contrato npm raíz N/A."
+    },
+    {
+      "global_revision": 127,
+      "block": "MANT.2",
+      "ordinal": 2,
+      "functional_revision": "R2",
+      "revision_aware": "0.1.27.02-beta",
+      "state": "R2 — mantenimiento coordinado post-G126: Uvicorn 0.53.0, resolución de #204/#205, reauditoría Dependabot limpia e institucionalización del checklist obligatorio de Issues",
+      "anchor": "0.1.27.02-beta",
+      "evidence": "Issue #206; Draft PR #207; CP1 17d4c49855e9451833311f49babaa4d284585a87; CP2 1e69029a0b19d0ff1ad6bf37456d1fbcd71ef14a; CP3 9186f4dfecf410cf29606c764532eb438697135e; Uvicorn 0.52.4→0.53.0; Pydantic 2.13.5 + pydantic-core 2.46.5 preservados; pip check PASS; pip-audit --strict sin vulnerabilidades conocidas; Repository Quality Gate, Python Compatibility y Dependency Security verdes; #204/#205 cerrados sin merge directo; 0 PRs/ramas/alerts Dependabot abiertos; política #203 materializada en Issue Forms y protegida por regresión."
     }
   ],
   "excluded": [
@@ -1230,22 +1240,22 @@
   ],
   "reconciled_through_commit": "b97cf61763479b80b8e8724b878089e8bb20fa00",
   "reconciliation_date": "2026-09-19",
-  "next_global": 127,
+  "next_global": 128,
   "next_candidate_block": null,
   "next_candidate_assignment": {
     "state": "unassigned",
-    "next_global_available": 127,
-    "issue": 206,
-    "reason": "PLAN.2 R2/#155 está integrado y publicado como G126/E01 (0.1.26.01-beta). El preflight fresco #166 previo a VER.2 detectó trabajo material nuevo en Dependabot (#204 y #205), por lo que MANT.2 R2/#206 se insertó antes de VER.2 R6/#164. G127 permanece disponible sin candidato, bloque ni VERSION preasignados. Después de cerrar/publicar #206 debe repetirse #166 antes de abrir #164.",
-    "planning_issue": 206
+    "next_global_available": 128,
+    "issue": 164,
+    "reason": "MANT.2 R2/#206 queda aceptado localmente como G127/E02 (0.1.27.02-beta) y pendiente de integración/publicación mediante #207. G128 queda disponible sin candidato, bloque ni VERSION preasignados. Después de publicar G127 debe repetirse un preflight fresco #166; solo si queda limpio podrá abrirse VER.2 R6/#164.",
+    "planning_issue": 164
   },
   "active_phase": {
     "block": "MANT.2",
     "revision": "R2",
     "issue": 206,
-    "state": "in_progress",
-    "global_revision": null,
-    "revision_aware": null,
+    "state": "accepted_pending_publication",
+    "global_revision": 127,
+    "revision_aware": "0.1.27.02-beta",
     "base_global_revision": 126,
     "base_revision_aware": "0.1.26.01-beta",
     "next_phase_issue": 164

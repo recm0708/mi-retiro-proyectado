@@ -20,47 +20,45 @@
 <!-- NOR3-G122-PROMOTION:END -->
 
 <!-- POST-NOR3-INTERMEDIATE-SEQUENCE:START -->
-## Estado vigente post-G126 / MANT.2 R2
+## Estado vigente post-G126 / MANT.2 R2 — candidato G127/E02
 
-PLAN.2 R2/#155 está cerrado, integrado y publicado como **G126/E01**
-(`0.1.26.01-beta`) sobre
-`main@1819f59f95731dc652ad62d84d6a5ad87ad3f8a4`, mediante PR #202,
-tag firmado `v0.1.26.01-beta` y GitHub Release prerelease 390399947.
+PLAN.2 R2/#155 permanece cerrado, integrado y publicado como **G126/E01**
+(`0.1.26.01-beta`) sobre `main@1819f59f95731dc652ad62d84d6a5ad87ad3f8a4`,
+mediante PR #202, tag firmado `v0.1.26.01-beta` y GitHub Release prerelease 390399947.
 
-G125/E01 — DOC.3 R1 permanece preservado como publicación inmediatamente
-anterior mediante `v0.1.25.01-beta`.
+El preflight #166 previo a VER.2 detectó #204/#205 e insertó MANT.2 R2/#206.
+La integración coordinada acepta `uvicorn 0.53.0`, conserva
+`pydantic==2.13.5` + `pydantic_core==2.46.5`, cierra #204/#205 sin merge
+directo, deja 0 PRs Dependabot, 0 ramas `dependabot/*` y 0 alerts abiertos, e
+institucionaliza mediante #203 el checklist obligatorio de Issues.
 
-El preflight fresco #166 previo a VER.2 detectó trabajo material nuevo de
-dependencias en los PRs Dependabot #204 y #205. Por esa razón se insertó
-**MANT.2 R2/#206** antes de VER.2 R6/#164.
+MANT.2 R2/#206 queda **materializado y aceptado localmente como G127/E02**
+(`0.1.27.02-beta`) en el Draft PR #207. Integración, revalidación de `main`, tag firmado
+y GitHub Release prerelease todavía están pendientes.
 
-MANT.2 R2 está en curso sin Global, Edition ni `VERSION` preasignados.
-**G127 permanece libre** y `VERSION` continúa en `0.1.26.01-beta`.
+**G128 permanece libre** y sin candidato, bloque ni `VERSION` preasignados.
 
 La continuidad material vigente es:
 
-1. **MANT.2 R2 / #206** — integración coordinada de dependencias post-G126.
-2. **preflight fresco #166** — obligatorio después de publicar MANT.2 R2.
-3. **VER.2 R6 / #164** — solo si #166 vuelve a quedar limpio.
-4. **DOC.4 R1 / #171** — reingeniería documental después de VER.2.
-5. **#142** — auditoría previsional y derivados funcionales obligatorios.
-6. **PERSIST.1 / #130** → **REP.1 / #143** → **DEPLOY.1 / #157**.
-7. **UX.7→UX.x / #129** bajo sincronización multiportal **#189**.
-8. **SEC.2 R7** → rendimiento → A11Y.2 → REV.1 → #153 → DOC.1 R6 → QA.1 → REL.1.
-
-Antes y después de cada fase material se aplica #166. Ninguna fase futura
-recibe Global o `VERSION` por anticipado.
+1. **publicar MANT.2 R2 / G127-E02 / #206**;
+2. **preflight fresco #166** después de la publicación;
+3. **VER.2 R6 / #164** solo si #166 queda limpio;
+4. **DOC.4 R1 / #171**;
+5. **#142** y derivados funcionales obligatorios;
+6. **PERSIST.1 / #130 → REP.1 / #143 → DEPLOY.1 / #157**;
+7. **UX.7→UX.x / #129** bajo #189;
+8. **SEC.2 R7 → rendimiento → A11Y.2 → REV.1 → #153 → DOC.1 R6 → QA.1 → REL.1**.
 <!-- POST-NOR3-INTERMEDIATE-SEQUENCE:END -->
 
 
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado de seguridad vigente
 
-La versión canónica vigente es `0.1.26.01-beta` / G126/E01 y está publicada mediante `v0.1.26.01-beta`. G125/E01 permanece preservado como publicación anterior.
+La versión canónica vigente es `0.1.27.02-beta` / G127/E02 y está aceptada localmente para MANT.2 R2, pendiente de integración/publicación. La última publicación formal permanece `v0.1.26.01-beta` / G126/E01; G125/E01 se conserva como publicación histórica anterior.
 
 - PLAN.2 R2/#155 está cerrado/publicado como G126/E01.
 - El preflight fresco #166 previo a VER.2 detectó #204/#205 y activó MANT.2 R2/#206.
-- MANT.2 R2 permanece sin Global/VERSION preasignados; G127 sigue libre.
+- MANT.2 R2/#206 está aceptado localmente como G127/E02 (`0.1.27.02-beta`), pendiente de integración/publicación; G128 sigue libre.
 - Login humano y Bearer técnico continúan separados.
 - PERSIST.1, REP.1 y DEPLOY.1 permanecen pendientes antes de la ola UX final.
 - SEC.2 R7/#144 se ejecutará únicamente después de cerrar toda UX.7→UX.x y de
@@ -74,7 +72,8 @@ Mi Retiro Proyectado se encuentra en **desarrollo beta**. Los estados histórico
 
 | Línea | Soporte de seguridad |
 | --- | --- |
-| `0.1.26.01-beta` | Beta vigente candidata G126/E01 / PLAN.2 R2 aceptado localmente; publicación pendiente; Quality Gate FULL y preflight #166 limpios |
+| `0.1.27.02-beta` | Beta vigente candidata G127/E02 / MANT.2 R2 aceptada localmente; integración/publicación pendiente; gates CP2/CP3 y reauditoría Dependabot en verde |
+| `0.1.26.01-beta` | Beta previa publicada G126/E01 / PLAN.2 R2 mediante tag firmado `v0.1.26.01-beta` y GitHub Release prerelease 390399947 |
 | `0.1.25.01-beta` | Beta previa publicada G125/E01 / DOC.3 R1 mediante tag firmado `v0.1.25.01-beta` y GitHub Release prerelease |
 | `0.1.24.13-beta` | Beta previa G124/E13 publicada para MANT.1 R8 mediante PR #170, tag firmado `v0.1.24.13-beta` y GitHub Release prerelease |
 | `0.1.23.01-beta` | Beta previa G123/E01 publicada para MANT.2 R1 mediante tag firmado `v0.1.23.01-beta` y GitHub Release prerelease |

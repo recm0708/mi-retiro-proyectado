@@ -15,7 +15,7 @@
 </p>
 
 <p align="center">
-  <img alt="Versión 0.1.26.01-beta" src="https://img.shields.io/badge/versi%C3%B3n-0.1.26.01--beta-2563eb">
+  <img alt="Versión 0.1.27.02-beta" src="https://img.shields.io/badge/versi%C3%B3n-0.1.27.02--beta-2563eb">
   <img alt="Python 3.13 y 3.14" src="https://img.shields.io/badge/Python-3.13%20%7C%203.14-3776AB?logo=python&logoColor=white">
   <img alt="Licencia propietaria" src="https://img.shields.io/badge/licencia-propietaria-6B7280">
 </p>
@@ -26,23 +26,21 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 
 ## Estado del proyecto
 
-- **Versión canónica vigente:** `0.1.26.01-beta`, obtenida exclusivamente desde
-  [`VERSION`](VERSION); corresponde a PLAN.2 R2 / G126/E01 **publicado**.
+- **Versión canónica vigente:** `0.1.27.02-beta`, obtenida exclusivamente desde
+  [`VERSION`](VERSION); corresponde a MANT.2 R2 / G127/E02 **aceptado
+  localmente** y pendiente de integración/publicación.
 - **Última publicación formal:** `v0.1.26.01-beta`, tag firmado sobre
   `main@1819f59f95731dc652ad62d84d6a5ad87ad3f8a4`; GitHub Release prerelease
   390399947.
-- **Fase material actual:** **MANT.2 R2 / #206**, en curso sin Global ni
-  `VERSION` preasignados.
-- **Siguiente Global disponible:** G127, libre y sin candidato.
-- **Preflight de entrada #166:** `BLOCKED_BY_MANT2_R2`; detectó los PRs
-  Dependabot #204 y #205 antes de iniciar VER.2 R6/#164.
-- **Próxima fase material después de PLAN.2 publicado:** VER.2 R6 / #164.
-- **Secuencia posterior:** VER.2 → DOC.4 → #142/derivados → PERSIST.1 → REP.1 →
-  DEPLOY.1 → UX.7→UX.x → SEC.2 R7 → rendimiento → A11Y.2 → REV.1 → #153 →
-  DOC.1 R6 → QA.1 → REL.1.
-- **Programa UX:** baseline conocido UX.7–UX.32; UX.33+ se crea de forma
-  consecutiva cuando aparezca una superficie visual material nueva. #189 obliga
-  a sincronizar todo cambio shared entre Asegurado, Developer y portales futuros.
+- **Fase material actual:** **MANT.2 R2 / #206 — G127/E02**, en promoción
+  dentro del Draft PR #207.
+- **Mantenimiento coordinado:** Uvicorn 0.53.0; Pydantic 2.13.5 +
+  pydantic-core 2.46.5; #204/#205 cerrados sin merge directo.
+- **Dependabot previo a promoción:** 0 PRs abiertos, 0 ramas `dependabot/*`
+  y 0 alerts abiertos.
+- **Siguiente Global disponible:** G128, libre y sin candidato.
+- **Preflight #166:** debe repetirse después de publicar G127; VER.2 R6/#164
+  permanece bloqueado hasta que ese preflight quede limpio.
 - **Primera versión oficial objetivo:** `1.0.0.0` con `Build 000001`.
 - **Etapa:** desarrollo beta; el repositorio público no equivale por sí solo a
   un despliegue oficial de producción.
@@ -52,36 +50,34 @@ La visibilidad pública del repositorio **no convierte una beta de desarrollo en
 La versión se obtiene exclusivamente del archivo [`VERSION`](VERSION). La política completa se documenta en [Política de versionado](VERSIONING.md). VER.2 publicó `v0.0.71.01-beta` bajo la denominación original G071/E01; la reconciliación posterior sitúa ese estado en G087/E01 sin alterar el tag, y su evidencia histórica quedó preservada por NOR.2. Los estándares vigentes del repositorio están en [Estándares del repositorio](docs/standards) y el cierre de la normalización se documenta en [Auditorías de normalización del repositorio](docs/audits/repository).
 
 <!-- POST-NOR3-INTERMEDIATE-SEQUENCE:START -->
-## Estado vigente post-G126 / MANT.2 R2
+## Estado vigente post-G126 / MANT.2 R2 — candidato G127/E02
 
-PLAN.2 R2/#155 está cerrado, integrado y publicado como **G126/E01**
-(`0.1.26.01-beta`) sobre
-`main@1819f59f95731dc652ad62d84d6a5ad87ad3f8a4`, mediante PR #202,
-tag firmado `v0.1.26.01-beta` y GitHub Release prerelease 390399947.
+PLAN.2 R2/#155 permanece cerrado, integrado y publicado como **G126/E01**
+(`0.1.26.01-beta`) sobre `main@1819f59f95731dc652ad62d84d6a5ad87ad3f8a4`,
+mediante PR #202, tag firmado `v0.1.26.01-beta` y GitHub Release prerelease 390399947.
 
-G125/E01 — DOC.3 R1 permanece preservado como publicación inmediatamente
-anterior mediante `v0.1.25.01-beta`.
+El preflight #166 previo a VER.2 detectó #204/#205 e insertó MANT.2 R2/#206.
+La integración coordinada acepta `uvicorn 0.53.0`, conserva
+`pydantic==2.13.5` + `pydantic_core==2.46.5`, cierra #204/#205 sin merge
+directo, deja 0 PRs Dependabot, 0 ramas `dependabot/*` y 0 alerts abiertos, e
+institucionaliza mediante #203 el checklist obligatorio de Issues.
 
-El preflight fresco #166 previo a VER.2 detectó trabajo material nuevo de
-dependencias en los PRs Dependabot #204 y #205. Por esa razón se insertó
-**MANT.2 R2/#206** antes de VER.2 R6/#164.
+MANT.2 R2/#206 queda **materializado y aceptado localmente como G127/E02**
+(`0.1.27.02-beta`) en el Draft PR #207. Integración, revalidación de `main`, tag firmado
+y GitHub Release prerelease todavía están pendientes.
 
-MANT.2 R2 está en curso sin Global, Edition ni `VERSION` preasignados.
-**G127 permanece libre** y `VERSION` continúa en `0.1.26.01-beta`.
+**G128 permanece libre** y sin candidato, bloque ni `VERSION` preasignados.
 
 La continuidad material vigente es:
 
-1. **MANT.2 R2 / #206** — integración coordinada de dependencias post-G126.
-2. **preflight fresco #166** — obligatorio después de publicar MANT.2 R2.
-3. **VER.2 R6 / #164** — solo si #166 vuelve a quedar limpio.
-4. **DOC.4 R1 / #171** — reingeniería documental después de VER.2.
-5. **#142** — auditoría previsional y derivados funcionales obligatorios.
-6. **PERSIST.1 / #130** → **REP.1 / #143** → **DEPLOY.1 / #157**.
-7. **UX.7→UX.x / #129** bajo sincronización multiportal **#189**.
-8. **SEC.2 R7** → rendimiento → A11Y.2 → REV.1 → #153 → DOC.1 R6 → QA.1 → REL.1.
-
-Antes y después de cada fase material se aplica #166. Ninguna fase futura
-recibe Global o `VERSION` por anticipado.
+1. **publicar MANT.2 R2 / G127-E02 / #206**;
+2. **preflight fresco #166** después de la publicación;
+3. **VER.2 R6 / #164** solo si #166 queda limpio;
+4. **DOC.4 R1 / #171**;
+5. **#142** y derivados funcionales obligatorios;
+6. **PERSIST.1 / #130 → REP.1 / #143 → DEPLOY.1 / #157**;
+7. **UX.7→UX.x / #129** bajo #189;
+8. **SEC.2 R7 → rendimiento → A11Y.2 → REV.1 → #153 → DOC.1 R6 → QA.1 → REL.1**.
 <!-- POST-NOR3-INTERMEDIATE-SEQUENCE:END -->
 
 
@@ -189,7 +185,7 @@ Documentos principales:
 - **[Cierre GOV.1 — Auditoría, Gobierno y Trazabilidad Pre-Beta](docs/archive/governance/gov1-closeout.md)** — auditoría final y decisión de cierre de GOV.1;
 - **[Auditoría de versionado pre-1.0](docs/archive/governance/pre-1-0-versioning-audit.md)** — criterio contable y reconciliación VER.2;
 - **[VER.2 — Matriz de decisión de revisiones aceptadas](docs/archive/governance/ver2-revision-decision-matrix.md)** — decisiones de inclusión/exclusión del contador;
-- **[Ledger de revisiones aceptadas pre-1.0](docs/governance/pre-1-0-revision-ledger.md)** — secuencia reconciliada hasta G126; G127 permanece disponible sin candidato;
+- **[Ledger de revisiones aceptadas pre-1.0](docs/governance/pre-1-0-revision-ledger.md)** — secuencia reconciliada hasta G127; G128 permanece disponible sin candidato;
 - [`data/governance/pre-1-0-revision-ledger.json`](data/governance/pre-1-0-revision-ledger.json) — ledger machine-readable;
 - **[Identificadores de bloques de trabajo](docs/standards/work-block-identifiers.md)** — política canónica de identificadores de bloques;
 - [`data/governance/work-block-registry.json`](data/governance/work-block-registry.json) — registro machine-readable de identificadores históricos, cerrados y planificados;
