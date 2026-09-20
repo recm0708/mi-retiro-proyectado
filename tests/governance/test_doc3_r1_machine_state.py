@@ -55,7 +55,8 @@ class TestDOC3R1PublishedMachineState(unittest.TestCase):
         data = json.loads(LEDGER.read_text(encoding="utf-8"))
         self.assertEqual(127, data["accepted_count"])
         self.assertEqual(128, data["next_global"])
-        self.assertEqual(128, data["next_global_if_ver2_accepted"])
+        self.assertEqual(2, data["schema_version"])
+        self.assertNotIn("next_global_if_ver2_accepted", data)
         self.assertIsNone(data["next_candidate"])
         self.assertIsNone(data["next_candidate_block"])
 

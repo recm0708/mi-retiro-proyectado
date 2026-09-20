@@ -485,8 +485,7 @@ def load_candidate_state(root: Path) -> tuple[int, str | None]:
     data = json.loads(path.read_text(encoding="utf-8"))
 
     next_global = data.get(
-        "next_global",
-        data.get("next_global_if_ver2_accepted"),
+        "next_global"
     )
     next_candidate = data.get("next_candidate")
 

@@ -22,7 +22,8 @@ class TestMANT2R2Insertion(unittest.TestCase):
         ledger = json.loads(LEDGER.read_text(encoding="utf-8"))
         self.assertEqual(127, ledger["accepted_count"])
         self.assertEqual(128, ledger["next_global"])
-        self.assertEqual(128, ledger["next_global_if_ver2_accepted"])
+        self.assertEqual(2, ledger["schema_version"])
+        self.assertNotIn("next_global_if_ver2_accepted", ledger)
         self.assertIsNone(ledger["next_candidate"])
         self.assertIsNone(ledger["next_candidate_block"])
         entry = ledger["entries"][-1]

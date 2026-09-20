@@ -182,7 +182,7 @@ def build_report() -> dict:
     )
 
     next_global = ledger.get(
-        "next_global_if_ver2_accepted"
+        "next_global"
     )
 
     next_candidate = ledger.get(

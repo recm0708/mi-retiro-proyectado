@@ -9,7 +9,9 @@ import subprocess
 import sys
 import unittest
 
-from app.core.version import construir_version_beta_revision
+from app.core.version import (
+    construir_version_beta_revision_v2,
+)
 from app.core.version_ledger import (
     LedgerRevisionError,
     cargar_ledger,
@@ -102,7 +104,7 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
 
         candidato = copy.deepcopy(ledger)
         candidato["next_candidate_block"] = "NOR.1"
-        candidato["next_candidate"] = construir_version_beta_revision(
+        candidato["next_candidate"] = construir_version_beta_revision_v2(
             siguiente_global,
             8,
         )
@@ -110,7 +112,7 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
 
         invalido = copy.deepcopy(ledger)
         invalido["next_candidate_block"] = "NOR.1"
-        invalido["next_candidate"] = construir_version_beta_revision(
+        invalido["next_candidate"] = construir_version_beta_revision_v2(
             siguiente_global,
             1,
         )
@@ -121,7 +123,7 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
         ledger = cargar_ledger()
         candidato = copy.deepcopy(ledger)
         candidato["next_candidate_block"] = "PERSIST.1"
-        candidato["next_candidate"] = construir_version_beta_revision(
+        candidato["next_candidate"] = construir_version_beta_revision_v2(
             ledger["next_global"],
             1,
         )
