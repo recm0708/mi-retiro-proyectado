@@ -206,6 +206,91 @@ class TestNOR3R2RepositoryStructurePolicy(unittest.TestCase):
             errors[0],
         )
 
+    def test_pr_policy_normaliza_schema_v1_y_v2_sin_cambiar_estado(
+        self,
+    ):
+        base = {
+            "accepted_count": 127,
+            "next_global_if_ver2_accepted": 128,
+            "next_candidate": None,
+            "next_candidate_block": None,
+            "entries": [
+                {
+                    "global_revision": 127,
+                    "block": "MANT.2",
+                    "ordinal": 2,
+                    "functional_revision": "R2",
+                    "revision_aware": "0.1.27.02-beta",
+                }
+            ],
+        }
+
+        head = {
+            "schema_version": 2,
+            "accepted_count": 127,
+            "next_global": 128,
+            "next_candidate": None,
+            "next_candidate_block": None,
+            "entries": [
+                {
+                    "global_revision": 127,
+                    "block": "MANT.2",
+                    "ordinal": 2,
+                    "edition": 2,
+                    "functional_revision": "R2",
+                    "identifier_schema": 1,
+                    "version_format": "revision-aware-v1",
+                    "correction_ordinal": None,
+                    "maintenance_ordinal": 2,
+                    "revision_aware": "0.1.27.02-beta",
+                }
+            ],
+        }
+
+        self.assertTrue(
+            pr_policy.ledger_preserves_revision_state(
+                base,
+                head,
+            )
+        )
+
+        self.assertEqual(
+            pr_policy.revision_state_snapshot(base),
+            pr_policy.revision_state_snapshot(head),
+        )
+
+    def test_pr_policy_detecta_mutacion_material_del_ledger(
+        self,
+    ):
+        base = {
+            "accepted_count": 127,
+            "next_global": 128,
+            "next_candidate": None,
+            "next_candidate_block": None,
+            "entries": [
+                {
+                    "global_revision": 127,
+                    "block": "MANT.2",
+                    "ordinal": 2,
+                    "functional_revision": "R2",
+                    "revision_aware": "0.1.27.02-beta",
+                }
+            ],
+        }
+
+        changed = {
+            **base,
+            "next_candidate": "0.1.28.01.000.000-beta",
+            "next_candidate_block": "SYNTHETIC",
+        }
+
+        self.assertFalse(
+            pr_policy.ledger_preserves_revision_state(
+                base,
+                changed,
+            )
+        )
+
     def test_quality_gate_hereda_integridad(self):
         text = QUALITY_GATE.read_text(encoding="utf-8")
         self.assertIn(
