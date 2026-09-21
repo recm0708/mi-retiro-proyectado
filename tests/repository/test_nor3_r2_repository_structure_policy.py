@@ -135,8 +135,21 @@ class TestNOR3R2RepositoryStructurePolicy(unittest.TestCase):
         self.assertEqual(report["result"], "pass")
 
     def test_post_promocion_preserva_scope_r1_r8_y_estado_actual(self):
-        registry = json.loads((ROOT / "data" / "governance" / "work-block-registry.json").read_text(encoding="utf-8"))
+        registry = json.loads(
+            (
+                ROOT
+                / "data"
+                / "governance"
+                / "work-block-registry.json"
+            ).read_text(
+                encoding="utf-8"
+            )
+        )
+
+        self.assertEqual(2, registry["schema_version"])
+
         candidate = registry["current_candidate"]
+
         self.assertIsNone(candidate["global_revision"])
         self.assertIsNone(candidate["revision_aware"])
         self.assertIsNone(candidate["block"])
@@ -144,24 +157,51 @@ class TestNOR3R2RepositoryStructurePolicy(unittest.TestCase):
         self.assertIsNone(candidate["revision_scope"])
         self.assertEqual("unassigned", candidate["state"])
         self.assertEqual(128, candidate["next_global_available"])
-        ids = {item["identifier"]: item for item in registry["identifiers"]}
+
+        ids = {
+            item["identifier"]: item
+            for item in registry["identifiers"]
+        }
+
         self.assertEqual("closed", ids["NOR.3"]["status"])
         self.assertEqual("R1-R8", ids["NOR.3"]["active_scope"])
         self.assertEqual(["G122"], ids["NOR.3"]["global_refs"])
+
         self.assertEqual("closed", ids["DOC.3"]["status"])
         self.assertEqual(["G125"], ids["DOC.3"]["global_refs"])
 
+        self.assertEqual(
+            "closed_r2",
+            ids["MANT.2"]["status"],
+        )
+        self.assertEqual(
+            "in_progress_r6",
+            ids["VER.2"]["status"],
+        )
+
+        baseline = registry["accepted_baseline"]
+
+        self.assertEqual(
+            127,
+            baseline["global_revision"],
+        )
+        self.assertEqual(
+            "0.1.27.02-beta",
+            baseline["revision_aware"],
+        )
+
         active = registry["active_phase"]
-        self.assertEqual("MANT.2", active["block"])
-        self.assertEqual("R2", active["revision"])
-        self.assertEqual(206, active["issue"])
-        self.assertEqual("accepted_pending_publication", active["state"])
-        self.assertEqual(127, active["global_revision"])
+
+        self.assertEqual("VER.2", active["block"])
+        self.assertEqual("R6", active["revision"])
+        self.assertEqual(164, active["issue"])
+        self.assertEqual("in_progress", active["state"])
+        self.assertIsNone(active["global_revision"])
+        self.assertIsNone(active["revision_aware"])
 
     def test_pr_policy_permite_candidato_sin_version(self):
         files = [
             "data/governance/pre-1-0-revision-ledger.json",
-            "data/governance/release-publication-manifest.json",
         ]
 
         self.assertEqual(
@@ -184,25 +224,20 @@ class TestNOR3R2RepositoryStructurePolicy(unittest.TestCase):
             errors[0],
         )
 
-    def test_pr_policy_rechaza_metadata_parcial(self):
+    def test_pr_policy_manifest_estable_requiere_contexto_git(self):
         errors = pr_policy.revision_state_errors(
             [
-                "data/governance/pre-1-0-revision-ledger.json"
+                "data/governance/release-publication-manifest.json"
             ]
         )
 
-        self.assertEqual(len(errors), 1)
-        self.assertIn(
-            "release-publication-manifest.json",
-            errors[0],
-        )
         self.assertEqual(
-            (
-                "Los metadatos revision-aware de candidato deben "
-                "cambiar de forma coordinada cuando VERSION "
-                "permanece estable. Faltan: "
-                "data/governance/release-publication-manifest.json"
-            ),
+            1,
+            len(errors),
+        )
+
+        self.assertIn(
+            "base y head",
             errors[0],
         )
 

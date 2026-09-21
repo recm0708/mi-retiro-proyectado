@@ -297,6 +297,16 @@ def validar_ledger(
             "next_global_if_ver2_accepted."
         )
 
+    for field in (
+        "next_candidate_assignment",
+        "active_phase",
+    ):
+        if field in ledger:
+            raise LedgerRevisionError(
+                "El ledger v2 no admite estado de workflow: "
+                + field
+            )
+
     accepted_count = ledger.get(
         "accepted_count"
     )

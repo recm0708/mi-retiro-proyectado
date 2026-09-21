@@ -43,12 +43,12 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
             self.assertFalse(ids[ident]["reusable_for_different_scope"])
 
         self.assertEqual("closed", ids["PLAN.2"]["status"])
-        self.assertEqual("accepted_pending_publication_r2", ids["MANT.2"]["status"])
+        self.assertEqual("closed_r2", ids["MANT.2"]["status"])
         self.assertEqual("closed", ids["MANT.1"]["status"])
         self.assertIn("G124/E13", ids["MANT.1"]["meaning"])
         self.assertIn("G124", ids["MANT.1"]["global_refs"])
         self.assertEqual(
-            "reopened_planned_r6",
+            "in_progress_r6",
             ids["VER.2"]["status"],
         )
         self.assertIn("G114", ids["PLAN.2"]["global_refs"])

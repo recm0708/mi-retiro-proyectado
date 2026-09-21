@@ -75,7 +75,7 @@ class TestPLAN2R2Program(unittest.TestCase):
             ids["PLAN.2"]["global_refs"],
         )
         self.assertEqual(
-            "accepted_pending_publication_r2",
+            "closed_r2",
             ids["MANT.2"]["status"],
         )
         self.assertEqual(

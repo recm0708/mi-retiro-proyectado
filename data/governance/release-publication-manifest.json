@@ -1,5 +1,12 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
+  "snapshot_role": "release-input",
+  "publication_resolution": "runtime",
+  "global_revision": 127,
+  "edition": 2,
+  "identifier_schema": 1,
+  "correction_ordinal": null,
+  "maintenance_ordinal": 2,
   "version": "0.1.27.02-beta",
   "block": "MANT.2",
   "revision": "R2",

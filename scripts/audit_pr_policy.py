@@ -305,17 +305,68 @@ def ledger_preserves_revision_state(
     )
 
 
+def manifest_release_snapshot(
+    manifest: dict,
+) -> dict:
+    """Extrae solo el contenido que determina las notas del Release."""
+
+    return {
+        "version": manifest.get(
+            "version"
+        ),
+        "block": manifest.get(
+            "block"
+        ),
+        "revision": manifest.get(
+            "revision"
+        ),
+        "summary": manifest.get(
+            "summary"
+        ),
+        "changes": manifest.get(
+            "changes"
+        ),
+        "validation": manifest.get(
+            "validation"
+        ),
+        "evidence": manifest.get(
+            "evidence"
+        ),
+        "next_step": manifest.get(
+            "next_step"
+        ),
+    }
+
+
+def manifest_preserves_release_snapshot(
+    base_manifest: dict,
+    head_manifest: dict,
+) -> bool:
+    """Indica si una migración conserva el Release input inmutable."""
+
+    return (
+        manifest_release_snapshot(
+            base_manifest
+        )
+        == manifest_release_snapshot(
+            head_manifest
+        )
+    )
+
+
 def revision_state_errors(
     files: list[str],
     *,
     base: str | None = None,
     head: str | None = None,
 ) -> list[str]:
-    """Valida coordinación del estado revision-aware del PR."""
+    """Valida promoción de VERSION sin acoplar candidato y manifest."""
 
     changed = (
         REVISION_STATE_FILES
-        & set(files)
+        & set(
+            files
+        )
     )
 
     if not changed:
@@ -332,56 +383,49 @@ def revision_state_errors(
                 "Una promoción revision-aware que modifica "
                 "VERSION debe actualizar ledger y manifiesto. "
                 "Faltan: "
-                + ", ".join(missing)
+                + ", ".join(
+                    missing
+                )
             ]
 
         return []
 
-    metadata_changed = (
-        REVISION_METADATA_FILES
-        & changed
-    )
-
-    if (
-        not metadata_changed
-        or metadata_changed
-        == REVISION_METADATA_FILES
-    ):
+    # Con VERSION estable, el ledger puede evolucionar
+    # independientemente: contiene candidato/estado aceptado,
+    # no el snapshot de notas del Release.
+    if MANIFEST_PATH not in changed:
         return []
 
     if (
-        metadata_changed
-        == {LEDGER_PATH}
-        and base is not None
-        and head is not None
+        base is None
+        or head is None
     ):
-        base_ledger = json_from_ref(
-            base,
-            LEDGER_PATH,
-        )
+        return [
+            "Un cambio del manifest con VERSION estable "
+            "requiere base y head para comprobar que el "
+            "snapshot de Release permanece inmutable."
+        ]
 
-        head_ledger = json_from_ref(
-            head,
-            LEDGER_PATH,
-        )
-
-        if ledger_preserves_revision_state(
-            base_ledger,
-            head_ledger,
-        ):
-            return []
-
-    missing = sorted(
-        REVISION_METADATA_FILES
-        - metadata_changed
+    base_manifest = json_from_ref(
+        base,
+        MANIFEST_PATH,
     )
 
-    return [
-        "Los metadatos revision-aware de candidato deben "
-        "cambiar de forma coordinada cuando VERSION "
-        "permanece estable. Faltan: "
-        + ", ".join(missing)
-    ]
+    head_manifest = json_from_ref(
+        head,
+        MANIFEST_PATH,
+    )
+
+    if not manifest_preserves_release_snapshot(
+        base_manifest,
+        head_manifest,
+    ):
+        return [
+            "El contenido del snapshot de Release no puede "
+            "cambiar mientras VERSION permanece estable."
+        ]
+
+    return []
 
 
 def base_allowed_signers(

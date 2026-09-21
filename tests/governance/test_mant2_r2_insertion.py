@@ -39,18 +39,31 @@ class TestMANT2R2Insertion(unittest.TestCase):
         self.assertEqual(164, candidate["planning_issue"])
         self.assertEqual(128, candidate["next_global_available"])
         active = data["active_phase"]
-        self.assertEqual(("MANT.2", "R2", 206, "accepted_pending_publication", 127, "0.1.27.02-beta", 164),
-            (active["block"], active["revision"], active["issue"], active["state"],
-             active["global_revision"], active["revision_aware"], active["next_phase_issue"]))
+        self.assertEqual(
+            ("VER.2", "R6", 164, "in_progress", None, None, 171),
+            (
+                active["block"],
+                active["revision"],
+                active["issue"],
+                active["state"],
+                active["global_revision"],
+                active["revision_aware"],
+                active["next_phase_issue"],
+            ),
+        )
+        self.assertEqual(127, active["base_global_revision"])
+        self.assertEqual("0.1.27.02-beta", active["base_revision_aware"])
         ids = {x["identifier"]: x for x in data["identifiers"]}
-        self.assertEqual("accepted_pending_publication_r2", ids["MANT.2"]["status"])
+        self.assertEqual("closed_r2", ids["MANT.2"]["status"])
         self.assertEqual(["G123", "G127"], ids["MANT.2"]["global_refs"])
 
     def test_ledger_deja_g128_libre_y_ver2_como_siguiente_owner(self):
         data = json.loads(LEDGER.read_text(encoding="utf-8"))
-        a = data["next_candidate_assignment"]
-        self.assertEqual(("unassigned", 128, 164, 164),
-            (a["state"], a["next_global_available"], a["issue"], a["planning_issue"]))
+        self.assertNotIn("next_candidate_assignment", data)
+        self.assertNotIn("active_phase", data)
+        self.assertEqual(128, data["next_global"])
+        self.assertIsNone(data["next_candidate"])
+        self.assertIsNone(data["next_candidate_block"])
 
     def test_manifest_materializa_g127_e02_y_no_preasigna_g128(self):
         data = json.loads(MANIFEST.read_text(encoding="utf-8"))
