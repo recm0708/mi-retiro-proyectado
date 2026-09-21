@@ -1,9 +1,9 @@
 # Índice de documentación
 
 **Estado:** vigente
-**Versión de aplicación:** `0.1.27.02-beta` — MANT.2 R2/G127-E02 aceptado localmente; publicación pendiente; G128 libre sin candidato
+**Versión de aplicación:** `0.1.27.02-beta` — MANT.2 R2/G127-E02 publicado; VER.2 R6/#164 en curso; G128 libre sin candidato
 **Último tag formal legacy:** `v0.0.26-beta`
-**Última actualización transversal:** MANT.2 R2/#206 — materialización G127/E02 — 2026-09-19
+**Última actualización transversal:** VER.2 R6/#164 — CP5.1 cerrado; CP6 en curso — 2026-09-21
 **Cierres históricos preservados:** UX.4.6i / PR #34 — 841 pruebas; UX.4.6e R9 — `v0.0.25-beta`
 
 <!-- NOR3-G122-PROMOTION:START -->
@@ -26,34 +26,25 @@
 <!-- NOR3-G122-PROMOTION:END -->
 
 <!-- POST-NOR3-INTERMEDIATE-SEQUENCE:START -->
-## Estado vigente post-G126 / MANT.2 R2 — candidato G127/E02
+## Estado vigente post-G127 / VER.2 R6 en curso
 
-PLAN.2 R2/#155 permanece cerrado, integrado y publicado como **G126/E01**
-(`0.1.26.01-beta`) sobre `main@1819f59f95731dc652ad62d84d6a5ad87ad3f8a4`,
-mediante PR #202, tag firmado `v0.1.26.01-beta` y GitHub Release prerelease 390399947.
+MANT.2 R2/#206 está cerrado, integrado y publicado como **G127/E02**
+(`0.1.27.02-beta`) sobre
+`main@2df33a5c24d1c7cea1a6db91539a92da02c91500`, mediante PR #207,
+tag firmado `v0.1.27.02-beta` y GitHub Release prerelease 392412590.
 
-El preflight #166 previo a VER.2 detectó #204/#205 e insertó MANT.2 R2/#206.
-La integración coordinada acepta `uvicorn 0.53.0`, conserva
-`pydantic==2.13.5` + `pydantic_core==2.46.5`, cierra #204/#205 sin merge
-directo, deja 0 PRs Dependabot, 0 ramas `dependabot/*` y 0 alerts abiertos, e
-institucionaliza mediante #203 el checklist obligatorio de Issues.
+El preflight #166 posterior a G127/E02 quedó **CLEAN** y habilitó
+VER.2 R6/#164.
 
-MANT.2 R2/#206 queda **materializado y aceptado localmente como G127/E02**
-(`0.1.27.02-beta`) en el Draft PR #207. Integración, revalidación de `main`, tag firmado
-y GitHub Release prerelease todavía están pendientes.
+VER.2 R6/#164 está en ejecución mediante la rama
+`ver/ver2-r6-revision-aware` y el Draft PR #208. CP1–CP5.1 están
+cerrados y auditados remotamente.
 
 **G128 permanece libre** y sin candidato, bloque ni `VERSION` preasignados.
+La existencia de rama, commits, checkpoints o PR no consume un Global.
 
-La continuidad material vigente es:
-
-1. **publicar MANT.2 R2 / G127-E02 / #206**;
-2. **preflight fresco #166** después de la publicación;
-3. **VER.2 R6 / #164** solo si #166 queda limpio;
-4. **DOC.4 R1 / #171**;
-5. **#142** y derivados funcionales obligatorios;
-6. **PERSIST.1 / #130 → REP.1 / #143 → DEPLOY.1 / #157**;
-7. **UX.7→UX.x / #129** bajo #189;
-8. **SEC.2 R7 → rendimiento → A11Y.2 → REV.1 → #153 → DOC.1 R6 → QA.1 → REL.1**.
+La siguiente fase material ordinaria después de publicar VER.2 es
+**DOC.4 R1 / #171**, salvo inserción obligatoria de MANT.2 por #166.
 <!-- POST-NOR3-INTERMEDIATE-SEQUENCE:END -->
 
 
@@ -61,7 +52,7 @@ Este archivo es el punto de entrada para la documentación técnica, funcional, 
 
 ## Estado de normalización del repositorio
 
-**Estado actual:** PLAN.2 R2/#155 está publicado como G126/E01 (`0.1.26.01-beta`); MANT.2 R2/#206 está aceptado localmente como G127/E02 (`0.1.27.02-beta`) y pendiente de integración/publicación; G128 permanece libre y VER.2 R6/#164 espera la publicación de G127 más un #166 limpio.
+**Estado actual:** MANT.2 R2/#206 está cerrado/publicado como G127/E02 (`0.1.27.02-beta`); el preflight post-G127 #166 quedó CLEAN; VER.2 R6/#164 está en ejecución mediante Draft PR #208 y G128 permanece libre, sin candidato ni `VERSION` preasignados.
 
 Estado de la fase:
 

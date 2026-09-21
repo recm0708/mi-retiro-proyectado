@@ -26,58 +26,42 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 
 ## Estado del proyecto
 
-- **Versión canónica vigente:** `0.1.27.02-beta`, obtenida exclusivamente desde
-  [`VERSION`](VERSION); corresponde a MANT.2 R2 / G127/E02 **aceptado
-  localmente** y pendiente de integración/publicación.
-- **Última publicación formal:** `v0.1.26.01-beta`, tag firmado sobre
-  `main@1819f59f95731dc652ad62d84d6a5ad87ad3f8a4`; GitHub Release prerelease
-  390399947.
-- **Fase material actual:** **MANT.2 R2 / #206 — G127/E02**, en promoción
-  dentro del Draft PR #207.
-- **Mantenimiento coordinado:** Uvicorn 0.53.0; Pydantic 2.13.5 +
-  pydantic-core 2.46.5; #204/#205 cerrados sin merge directo.
-- **Dependabot previo a promoción:** 0 PRs abiertos, 0 ramas `dependabot/*`
-  y 0 alerts abiertos.
+- **Versión canónica vigente:** `0.1.27.02-beta`; corresponde a
+  MANT.2 R2 / G127/E02 publicado.
+- **Última publicación formal:** `v0.1.27.02-beta`, sobre
+  `main@2df33a5c24d1c7cea1a6db91539a92da02c91500`; GitHub Release
+  prerelease 392412590.
+- **Fase material actual:** **VER.2 R6 / #164**, en ejecución mediante
+  Draft PR #208.
+- **Preflight #166 post-G127:** CLEAN.
 - **Siguiente Global disponible:** G128, libre y sin candidato.
-- **Preflight #166:** debe repetirse después de publicar G127; VER.2 R6/#164
-  permanece bloqueado hasta que ese preflight quede limpio.
-- **Primera versión oficial objetivo:** `1.0.0.0` con `Build 000001`.
-- **Etapa:** desarrollo beta; el repositorio público no equivale por sí solo a
-  un despliegue oficial de producción.
+- **Primera versión oficial objetivo:** `1.0.0.0`; el primer identificador de artefacto oficial previsto es `Build 000001`.
+- **Gate futuro de seguridad:** SEC.2 R7 permanece en la ruta pre-1.0 despues de la ola UX final.\n- **Etapa:** desarrollo beta.
 
 La visibilidad pública del repositorio **no convierte una beta de desarrollo en versión oficial, no constituye un despliegue de producción y no modifica por sí sola la licencia vigente**.
 
 La versión se obtiene exclusivamente del archivo [`VERSION`](VERSION). La política completa se documenta en [Política de versionado](VERSIONING.md). VER.2 publicó `v0.0.71.01-beta` bajo la denominación original G071/E01; la reconciliación posterior sitúa ese estado en G087/E01 sin alterar el tag, y su evidencia histórica quedó preservada por NOR.2. Los estándares vigentes del repositorio están en [Estándares del repositorio](docs/standards) y el cierre de la normalización se documenta en [Auditorías de normalización del repositorio](docs/audits/repository).
 
 <!-- POST-NOR3-INTERMEDIATE-SEQUENCE:START -->
-## Estado vigente post-G126 / MANT.2 R2 — candidato G127/E02
+## Estado vigente post-G127 / VER.2 R6 en curso
 
-PLAN.2 R2/#155 permanece cerrado, integrado y publicado como **G126/E01**
-(`0.1.26.01-beta`) sobre `main@1819f59f95731dc652ad62d84d6a5ad87ad3f8a4`,
-mediante PR #202, tag firmado `v0.1.26.01-beta` y GitHub Release prerelease 390399947.
+MANT.2 R2/#206 está cerrado, integrado y publicado como **G127/E02**
+(`0.1.27.02-beta`) sobre
+`main@2df33a5c24d1c7cea1a6db91539a92da02c91500`, mediante PR #207,
+tag firmado `v0.1.27.02-beta` y GitHub Release prerelease 392412590.
 
-El preflight #166 previo a VER.2 detectó #204/#205 e insertó MANT.2 R2/#206.
-La integración coordinada acepta `uvicorn 0.53.0`, conserva
-`pydantic==2.13.5` + `pydantic_core==2.46.5`, cierra #204/#205 sin merge
-directo, deja 0 PRs Dependabot, 0 ramas `dependabot/*` y 0 alerts abiertos, e
-institucionaliza mediante #203 el checklist obligatorio de Issues.
+El preflight #166 posterior a G127/E02 quedó **CLEAN** y habilitó
+VER.2 R6/#164.
 
-MANT.2 R2/#206 queda **materializado y aceptado localmente como G127/E02**
-(`0.1.27.02-beta`) en el Draft PR #207. Integración, revalidación de `main`, tag firmado
-y GitHub Release prerelease todavía están pendientes.
+VER.2 R6/#164 está en ejecución mediante la rama
+`ver/ver2-r6-revision-aware` y el Draft PR #208. CP1–CP5.1 están
+cerrados y auditados remotamente.
 
 **G128 permanece libre** y sin candidato, bloque ni `VERSION` preasignados.
+La existencia de rama, commits, checkpoints o PR no consume un Global.
 
-La continuidad material vigente es:
-
-1. **publicar MANT.2 R2 / G127-E02 / #206**;
-2. **preflight fresco #166** después de la publicación;
-3. **VER.2 R6 / #164** solo si #166 queda limpio;
-4. **DOC.4 R1 / #171**;
-5. **#142** y derivados funcionales obligatorios;
-6. **PERSIST.1 / #130 → REP.1 / #143 → DEPLOY.1 / #157**;
-7. **UX.7→UX.x / #129** bajo #189;
-8. **SEC.2 R7 → rendimiento → A11Y.2 → REV.1 → #153 → DOC.1 R6 → QA.1 → REL.1**.
+La siguiente fase material ordinaria después de publicar VER.2 es
+**DOC.4 R1 / #171**, salvo inserción obligatoria de MANT.2 por #166.
 <!-- POST-NOR3-INTERMEDIATE-SEQUENCE:END -->
 
 
@@ -563,6 +547,18 @@ Las siguientes líneas se conservan como compatibilidad histórica de pruebas an
 - referencia histórica preservada.
 
 <!-- ANCLAS_HISTORICAS_VER2_README_CONSOLIDADAS -->
+
+<!-- VER2-CP6A-HISTORICAL-ANCHORS:START -->
+### Anclas históricas de continuidad
+
+Estas referencias se conservan para regresión y trazabilidad. **No sustituyen
+el estado vigente declarado arriba**.
+
+- DOC.3 R1 cerró/publicó **G125/E01**.
+- **PLAN.2 R2** cerró/publicó **G126/E01** como `0.1.26.01-beta`.
+- MANT.2 R2 cerró/publicó G127/E02 como `0.1.27.02-beta`.
+- G128 permanece libre mientras VER.2 R6 no tenga candidato material.
+<!-- VER2-CP6A-HISTORICAL-ANCHORS:END -->
 
 ## Compatibilidad histórica preservada por VER.2
 
