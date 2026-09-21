@@ -354,7 +354,7 @@ class TestVer2LedgerEstructurado(
                 "version_format": "revision-aware-v2",
                 "correction_ordinal": 0,
                 "maintenance_ordinal": 0,
-                "revision_aware": "0.1.28.01.000.000-beta",
+                "revision_aware": "0.128.1.0-beta",
                 "state": "estado sintético de validación",
                 "anchor": "test-only",
                 "evidence": "test-only",

@@ -12,12 +12,17 @@ ROOT = Path(__file__).resolve().parents[1]
 VERSION_PATH = ROOT / "VERSION"
 LEDGER_PATH = ROOT / "data" / "governance" / "pre-1-0-revision-ledger.json"
 
-REVISION_AWARE_RE = re.compile(
+REVISION_AWARE_V1_RE = re.compile(
     r"^0\.(?P<g_hi>0|[1-9][0-9]*)"
     r"\.(?P<g_lo>[0-9]{2})"
     r"\.(?P<ee>[0-9]{2})"
-    r"(?:(?:\.(?P<ccc>[0-9]{3}))"
-    r"(?:\.(?P<ddd>[0-9]{3})))?"
+    r"-beta$"
+)
+
+REVISION_AWARE_V2_RE = re.compile(
+    r"^0\.(?P<global>[1-9][0-9]*)"
+    r"\.(?P<ee>[1-9][0-9]*)"
+    r"\.(?P<correction>0|[1-9][0-9]*)"
     r"-beta$"
 )
 REQUIRED_HEADINGS = (
@@ -51,62 +56,45 @@ def read_ledger() -> dict:
 def parse_revision_aware_components(
     version: str,
 ) -> tuple[int, int, int, int, int]:
-    """Descompone v1/v2 en Global, Edition, CCC, DDD y schema."""
+    """Descompone v1/v2 en Global, Edition, Correction, compat y schema.
 
-    match = REVISION_AWARE_RE.fullmatch(
-        version
-    )
+    El cuarto valor se conserva por compatibilidad de API, pero el ordinal
+    MANT.2 ya no se codifica en VERSION y por ello siempre vale 0 aquí.
+    """
 
-    if not match:
+    match_v2 = REVISION_AWARE_V2_RE.fullmatch(version)
+    if match_v2 is not None:
+        global_revision = int(match_v2.group("global"))
+        edition = int(match_v2.group("ee"))
+        correction = int(match_v2.group("correction"))
+
+        if global_revision < 128:
+            raise ValueError(
+                "La familia revision-aware v2 comienza en G128."
+            )
+        if not 1 <= edition <= 99:
+            raise ValueError("Edition debe estar entre 1 y 99.")
+        if not 0 <= correction <= 999:
+            raise ValueError("Correction debe estar entre 0 y 999.")
+
+        return global_revision, edition, correction, 0, 2
+
+    match_v1 = REVISION_AWARE_V1_RE.fullmatch(version)
+    if match_v1 is None:
         raise ValueError(
-            "Versión beta revision-aware no válida: "
-            + version
+            "Versión beta revision-aware no válida: " + version
         )
 
     global_revision = (
-        int(match.group("g_hi")) * 100
-        + int(match.group("g_lo"))
+        int(match_v1.group("g_hi")) * 100
+        + int(match_v1.group("g_lo"))
     )
-
-    edition = int(
-        match.group("ee")
-    )
+    edition = int(match_v1.group("ee"))
 
     if global_revision <= 0 or edition <= 0:
-        raise ValueError(
-            "Global y Edition deben ser mayores que cero."
-        )
+        raise ValueError("Global y Edition deben ser mayores que cero.")
 
-    is_v2 = (
-        match.group("ccc") is not None
-    )
-
-    correction = (
-        int(match.group("ccc"))
-        if is_v2
-        else 0
-    )
-
-    maintenance = (
-        int(match.group("ddd"))
-        if is_v2
-        else 0
-    )
-
-    schema = (
-        2
-        if is_v2
-        else 1
-    )
-
-    return (
-        global_revision,
-        edition,
-        correction,
-        maintenance,
-        schema,
-    )
-
+    return global_revision, edition, 0, 0, 1
 
 def parse_revision_aware(
     version: str,

@@ -199,8 +199,7 @@ def _validar_entry(
                 global_revision,
                 edition,
                 correction_value,
-                maintenance,
-            )
+                )
         )
 
     version = entry.get(
@@ -478,8 +477,7 @@ def validar_ledger(
             candidate_global,
             candidate_edition,
             _candidate_correction,
-            _candidate_maintenance,
-        ) = details
+            ) = details
 
         if candidate_global != next_global:
             raise LedgerRevisionError(

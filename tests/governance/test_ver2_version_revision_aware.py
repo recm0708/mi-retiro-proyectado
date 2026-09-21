@@ -181,205 +181,135 @@ class TestVer2VersionRevisionAware(unittest.TestCase):
                     )
                 )
 
-    def test_constructor_v2_codifica_ccc_y_ddd(self):
+    def test_constructor_v2_usa_forma_corta_sin_maintenance(self):
         self.assertEqual(
-            "0.2.34.07.000.000-beta",
+            "0.128.2.0-beta",
             construir_version_beta_revision_v2(
-                234,
-                7,
+                128,
+                2,
             ),
         )
-
         self.assertEqual(
-            "0.2.35.08.001.000-beta",
+            "0.129.2.1-beta",
             construir_version_beta_revision_v2(
-                235,
-                8,
+                129,
+                2,
                 correction=1,
             ),
         )
-
         self.assertEqual(
-            "0.2.36.05.000.012-beta",
+            "0.234.7.12-beta",
             construir_version_beta_revision_v2(
-                236,
-                5,
-                maintenance=12,
-            ),
-        )
-
-        self.assertEqual(
-            "0.2.37.06.002.012-beta",
-            construir_version_beta_revision_v2(
-                237,
-                6,
-                correction=2,
-                maintenance=12,
+                234,
+                7,
+                correction=12,
             ),
         )
 
     def test_constructor_v2_rechaza_limites_invalidos(self):
         casos = (
-            (0, 1, 0, 0),
-            (234, 0, 0, 0),
-            (234, 100, 0, 0),
-            (234, 1, -1, 0),
-            (234, 1, 1000, 0),
-            (234, 1, 0, -1),
-            (234, 1, 0, 1000),
+            (127, 1, 0),
+            (128, 0, 0),
+            (128, 100, 0),
+            (128, 1, -1),
+            (128, 1, 1000),
         )
-
         for caso in casos:
-            with self.subTest(
-                caso=caso
-            ):
-                with self.assertRaises(
-                    ValueError
-                ):
-                    construir_version_beta_revision_v2(
-                        *caso
-                    )
+            with self.subTest(caso=caso):
+                with self.assertRaises(ValueError):
+                    construir_version_beta_revision_v2(*caso)
 
     def test_descomposicion_v2_recupera_componentes(self):
         self.assertEqual(
-            (
-                234,
-                7,
-                0,
-                0,
-            ),
+            (128, 2, 0),
             descomponer_version_beta_revision_v2(
-                "0.2.34.07.000.000-beta"
+                "0.128.2.0-beta"
             ),
         )
-
         self.assertEqual(
-            (
-                237,
-                6,
-                2,
-                12,
-            ),
+            (129, 2, 1),
             descomponer_version_beta_revision_v2(
-                "0.2.37.06.002.012-beta"
+                "0.129.2.1-beta"
             ),
         )
 
     def test_parser_generico_preserva_global_y_edition_para_v2(self):
         self.assertEqual(
-            (
-                237,
-                6,
-            ),
+            (128, 2),
             descomponer_version_beta_revision(
-                "0.2.37.06.002.012-beta"
+                "0.128.2.0-beta"
             ),
         )
 
     def test_familia_v2_es_valida_sin_invalidar_v1(self):
         validas = (
             "0.0.71.01-beta",
-            "0.2.34.07.000.000-beta",
-            "0.2.35.08.001.000-beta",
-            "0.2.36.05.000.012-beta",
-            "0.2.37.06.002.012-beta",
+            "0.1.27.02-beta",
+            "0.128.2.0-beta",
+            "0.129.2.1-beta",
+            "0.234.7.12-beta",
         )
-
         for version in validas:
-            with self.subTest(
-                version=version
-            ):
-                self.assertTrue(
-                    version_valida(
-                        version
-                    )
-                )
+            with self.subTest(version=version):
+                self.assertTrue(version_valida(version))
 
-    def test_familia_v2_rechaza_formatos_incompletos(self):
+    def test_familia_v2_rechaza_forma_larga_y_padding(self):
         invalidas = (
-            "0.2.34.07.000-beta",
-            "0.2.34.07.000.00-beta",
-            "0.2.34.07.00.000-beta",
-            "0.2.34.07.000.000.000-beta",
-            "0.02.34.07.000.000-beta",
-            "0.2.034.07.000.000-beta",
-            "0.2.34.00.000.000-beta",
+            "0.127.2.0-beta",
+            "0.128.02.0-beta",
+            "0.128.2.00-beta",
+            "0.128.0.0-beta",
+            "0.128.100.0-beta",
+            "0.128.2.000.000-beta",
+            "0.2.34.07.000.000-beta",
         )
-
         for version in invalidas:
-            with self.subTest(
-                version=version
-            ):
-                self.assertFalse(
-                    version_valida(
-                        version
-                    )
-                )
+            with self.subTest(version=version):
+                self.assertFalse(version_valida(version))
 
     def test_release_contract_normaliza_v1_y_expone_v2(self):
         self.assertEqual(
-            (
-                127,
-                2,
-            ),
+            (127, 2),
             parse_revision_aware(
                 "0.1.27.02-beta"
             ),
         )
-
         self.assertEqual(
-            (
-                127,
-                2,
-                0,
-                0,
-                1,
-            ),
+            (127, 2, 0, 0, 1),
             parse_revision_aware_components(
                 "0.1.27.02-beta"
             ),
         )
-
         self.assertEqual(
-            (
-                237,
-                6,
-                2,
-                12,
-                2,
-            ),
+            (128, 2, 0, 0, 2),
             parse_revision_aware_components(
-                "0.2.37.06.002.012-beta"
+                "0.128.2.0-beta"
             ),
         )
-
         self.assertEqual(
-            (
-                237,
-                6,
+            (129, 2, 1, 0, 2),
+            parse_revision_aware_components(
+                "0.129.2.1-beta"
             ),
+        )
+        self.assertEqual(
+            (129, 2),
             parse_revision_aware(
-                "0.2.37.06.002.012-beta"
+                "0.129.2.1-beta"
             ),
         )
 
     def test_release_contract_rechaza_revision_aware_ambigua(self):
         invalidas = (
             "0.00.71.01-beta",
-            "0.2.34.00.000.000-beta",
-            "0.2.34.07.000-beta",
+            "0.128.02.0-beta",
+            "0.128.2.00-beta",
+            "0.2.34.07.000.000-beta",
         )
-
         for version in invalidas:
-            with self.subTest(
-                version=version
-            ):
-                with self.assertRaises(
-                    ValueError
-                ):
-                    parse_revision_aware_components(
-                        version
-                    )
+            with self.subTest(version=version):
+                with self.assertRaises(ValueError):
+                    parse_revision_aware_components(version)
 
     def test_ledger_contiene_g001_a_g108_sin_huecos_ni_duplicados(self):
         texto = LEDGER.read_text(
