@@ -26,49 +26,51 @@
 <!-- NOR3-G122-PROMOTION:END -->
 
 <!-- POST-NOR3-INTERMEDIATE-SEQUENCE:START -->
-## Estado vigente post-G126 / MANT.2 R2 — candidato G127/E02
+## Estado vigente post-G127 / VER.2 R6 en curso
 
-PLAN.2 R2/#155 permanece cerrado, integrado y publicado como **G126/E01**
-(`0.1.26.01-beta`) sobre `main@1819f59f95731dc652ad62d84d6a5ad87ad3f8a4`,
-mediante PR #202, tag firmado `v0.1.26.01-beta` y GitHub Release prerelease 390399947.
+MANT.2 R2/#206 está cerrado, integrado y publicado como **G127/E02**
+(`0.1.27.02-beta`) sobre
+`main@2df33a5c24d1c7cea1a6db91539a92da02c91500`, mediante PR #207,
+tag firmado `v0.1.27.02-beta` y GitHub Release prerelease 392412590.
 
-El preflight #166 previo a VER.2 detectó #204/#205 e insertó MANT.2 R2/#206.
-La integración coordinada acepta `uvicorn 0.53.0`, conserva
-`pydantic==2.13.5` + `pydantic_core==2.46.5`, cierra #204/#205 sin merge
-directo, deja 0 PRs Dependabot, 0 ramas `dependabot/*` y 0 alerts abiertos, e
-institucionaliza mediante #203 el checklist obligatorio de Issues.
+El preflight #166 posterior a G127/E02 quedó **CLEAN** y habilitó
+VER.2 R6/#164.
 
-MANT.2 R2/#206 queda **materializado y aceptado localmente como G127/E02**
-(`0.1.27.02-beta`) en el Draft PR #207. Integración, revalidación de `main`, tag firmado
-y GitHub Release prerelease todavía están pendientes.
+VER.2 R6/#164 está en ejecución mediante la rama
+`ver/ver2-r6-revision-aware` y el Draft PR #208. CP1–CP6A-R1 están
+cerrados y auditados remotamente.
 
 **G128 permanece libre** y sin candidato, bloque ni `VERSION` preasignados.
+La existencia de rama, commits, checkpoints o PR no consume un Global.
 
 La continuidad material vigente es:
 
-1. **publicar MANT.2 R2 / G127-E02 / #206**;
-2. **preflight fresco #166** después de la publicación;
-3. **VER.2 R6 / #164** solo si #166 queda limpio;
-4. **DOC.4 R1 / #171**;
-5. **#142** y derivados funcionales obligatorios;
-6. **PERSIST.1 / #130 → REP.1 / #143 → DEPLOY.1 / #157**;
-7. **UX.7→UX.x / #129** bajo #189;
-8. **SEC.2 R7 → rendimiento → A11Y.2 → REV.1 → #153 → DOC.1 R6 → QA.1 → REL.1**.
+1. **cerrar CP6B documental de VER.2 R6**;
+2. **auditoría/candidato final de VER.2 R6**;
+3. **DOC.4 R1 / #171** después de publicar VER.2;
+4. **#142** y derivados funcionales obligatorios;
+5. **PERSIST.1 / #130 → REP.1 / #143 → DEPLOY.1 / #157**;
+6. **UX.7→UX.x / #129** bajo #189;
+7. **SEC.2 R7 → rendimiento → A11Y.2 → REV.1 → #153 → DOC.1 R6 → QA.1 → REL.1**.
+
+Un MANT.2 R3+ solo se inserta si #166 detecta trabajo material nuevo.
 <!-- POST-NOR3-INTERMEDIATE-SEQUENCE:END -->
 
 
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado revision-aware vigente
 
-- `VERSION` contiene `0.1.27.02-beta` y corresponde a MANT.2 R2 / G127-E02 aceptado localmente.
-- G126/E01 está integrado y publicado mediante tag firmado
-  `v0.1.26.01-beta` y GitHub Release prerelease 390399947.
-- G125/E01 permanece preservado como publicación anterior.
-- G128 es el siguiente Global disponible, **sin candidato ni bloque reservado**.
-- MANT.2 R2/#206 queda materializado como G127/E02 (`0.1.27.02-beta`), pendiente de integración/publicación.
-- G128/current_candidate permanece libre, sin bloque, `global_revision`, `revision_aware` ni edición preasignados.
-- VER.2 R6/#164 permanece bloqueado hasta publicar MANT.2 R2 y repetir un
-  preflight #166 limpio; después reformará esta política antes de DOC.4 R1.
+- `VERSION` contiene `0.1.27.02-beta` y corresponde a MANT.2 R2 / G127-E02
+  publicado.
+- G127/E02 está integrado en
+  `main@2df33a5c24d1c7cea1a6db91539a92da02c91500`, con tag firmado
+  `v0.1.27.02-beta` y GitHub Release prerelease 392412590.
+- G126/E01 y G125/E01 permanecen como publicaciones históricas anteriores.
+- El preflight #166 post-G127 quedó CLEAN y habilitó VER.2 R6/#164.
+- VER.2 R6 está en ejecución mediante Draft PR #208, sin Global ni `VERSION`
+  preasignados.
+- G128/current_candidate permanece libre, sin bloque, `global_revision`,
+  `revision_aware`, edición ni corrección preasignados.
 - PR, squash, tag o Release que materializan un mismo estado no consumen otro
   Global.
 <!-- DOC1-R1-POST-MANT1:END -->
@@ -100,7 +102,7 @@ No se deben introducir versiones independientes en plantillas, JavaScript, motor
 
 ## 3. Familias admitidas
 
-Mi Retiro Proyectado reconoce tres familias de identificadores.
+Mi Retiro Proyectado reconoce cuatro familias/etapas de identificadores.
 
 ### 3.1. Familia beta legacy histórica
 
@@ -110,50 +112,75 @@ La historia ya publicada conserva:
 0.0.N-beta
 ```
 
-Ejemplos:
+Ejemplos: `0.0.22-beta`, `0.0.25-beta` y `0.0.26-beta`.
+
+Esta familia sigue siendo válida para leer y auditar estados históricos. Los
+tags ya publicados no se renombran ni se mueven.
+
+### 3.2. Familia revision-aware v1 histórica
+
+Los estados revision-aware ya publicados hasta G127 conservan el esquema v1:
 
 ```text
-0.0.22-beta
-0.0.25-beta
-0.0.26-beta
+0.<G_HI>.<G_LO>.<EE>-beta
 ```
 
-Esta familia sigue siendo válida para leer y auditar estados históricos. Los tags `v0.0.1-beta` a `v0.0.26-beta` no se renombran ni se mueven.
+donde `G_HI = G // 100`, `G_LO = G % 100` se expresa con dos dígitos y
+`EE` es el ordinal aceptado del bloque con dos dígitos.
 
-Después del cierre de VER.2, **los estados beta nuevos no continúan incrementando esta familia legacy**.
-
-### 3.2. Familia beta revision-aware
-
-Los candidatos y estados nuevos gobernados por VER.2 usan:
+Ejemplos históricos:
 
 ```text
-0.GG.RR.EE-beta
-```
-
-Donde:
-
-- `G` es el contador global de estados aceptados;
-- `GG = G // 100`;
-- `RR = G % 100`, siempre con dos dígitos;
-- `EE` es el ordinal aceptado dentro del bloque vigente, siempre con dos dígitos entre `01` y `99`.
-
-La **revisión funcional `R#`** y el **ordinal aceptado `E##`** son conceptos distintos. Normalmente coinciden, pero pueden divergir cuando una revisión intermedia no consume Global. DEV.2 R5 es el caso canónico: R1–R3 consumieron E01–E03, R4 no consumió Global y R5 se acepta como **G118/E04**. El siguiente estado aceptado del mismo bloque, DEV.2 R6, usa por tanto **G119/E05**. El ledger puede declarar `functional_revision` para que la publicación muestre la revisión funcional correcta sin alterar `EE`.
-
-Ejemplos:
-
-```text
-G001 / E01 -> 0.0.01.01-beta
-G070 / E02 -> 0.0.70.02-beta
 G071 / E01 -> 0.0.71.01-beta
 G100 / E03 -> 0.1.00.03-beta
-G425 / E12 -> 0.4.25.12-beta
+G127 / E02 -> 0.1.27.02-beta
 ```
 
-Los identificadores revision-aware usados en el ledger para G001–G070 son **identificadores de reconstrucción/auditoría**. No existieron como versiones publicadas y no autorizan tags retroactivos.
+La notación documental antigua `0.GG.RR.EE-beta` se conserva únicamente al
+citar decisiones o evidencia histórica. No se usa para construir nuevos
+identificadores después de VER.2 R6.
 
-### 3.3. Versiones oficiales
+La **revisión funcional** (`R#`, `R1.1`, `R3B2`, etc.) es metadata semántica y
+no un componente literal de `VERSION`. Puede divergir de Edition.
 
-Cuando todos los gates de producto se hayan cerrado, la primera versión oficial prevista sigue siendo:
+Precedente histórico de divergencia: DEV.2 R5 = G118/E04 y DEV.2 R6 = G119/E05. Estos estados ya publicados permanecen inmutables bajo la familia v1.
+
+### 3.3. Familia revision-aware v2 prospectiva
+
+A partir del primer estado aceptado posterior a G127 se usa:
+
+```text
+0.<GLOBAL>.<EDITION>.<CORRECTION>-beta
+```
+
+Reglas:
+
+- `GLOBAL` es el contador global decimal directo y la familia v2 comienza en
+  G128;
+- `EDITION` es el ordinal del estado aceptado dentro del bloque, entre 1 y 99;
+- `CORRECTION` es 0 para la línea ordinaria y 1..999 para una corrección
+  material post-aceptación dentro de la misma línea funcional;
+- una corrección material aceptada consume un nuevo Global;
+- un intento fallido o una corrección previa a aceptación no consume Global;
+- una nueva línea funcional reinicia `CORRECTION` a 0;
+- `maintenance_ordinal` y la revisión funcional permanecen como metadata;
+- el formato largo prospectivo de seis componentes queda sustituido antes de
+  haber sido publicado y no se acepta como v2.
+
+Ejemplos sintéticos:
+
+```text
+G128 / E2 / C0 -> 0.128.2.0-beta
+G129 / E2 / C1 -> 0.129.2.1-beta
+G234 / E7 / C12 -> 0.234.7.12-beta
+```
+
+G128 permanece libre hasta que VER.2 R6 materialice un candidato real.
+
+### 3.4. Versiones oficiales
+
+Cuando todos los gates de producto se hayan cerrado, la primera versión oficial
+prevista sigue siendo:
 
 ```text
 1.0.0.0
@@ -169,10 +196,12 @@ Semántica:
 
 - **MAYOR**: cambios incompatibles o nueva generación del producto;
 - **MENOR**: capacidades compatibles de alcance relevante;
-- **PARCHE**: correcciones o mejoras compatibles que justifican una nueva versión funcional;
+- **PARCHE**: correcciones o mejoras compatibles que justifican una nueva
+  versión funcional;
 - **REVISIÓN**: hotfix o revisión puntual de una versión oficial ya publicada.
 
-La numeración de cuatro componentes es una convención propia del producto y no se presenta como SemVer estricto.
+La numeración de cuatro componentes es una convención propia del producto y no
+se presenta como SemVer estricto.
 
 ## 4. Qué incrementa el contador global
 
@@ -255,6 +284,8 @@ Ejemplos:
 
 ```text
 v0.0.71.01-beta
+v0.1.27.02-beta
+v0.128.2.0-beta
 v1.0.0.0
 v1.0.0.1
 ```

@@ -5,30 +5,36 @@
 **Contador histórico en la base `7037addd`:** **G070**
 **Contador aceptado reconciliado vigente:** **G127**
 **Siguiente Global disponible:** **G128**
-**Siguiente candidato disponible:** **ninguno asignado** — G128 permanece disponible sin bloque preasignado; MANT.2 R2/G127-E02 está aceptado localmente y pendiente de publicación
+**Siguiente candidato disponible:** **ninguno asignado** — G128 permanece disponible; VER.2 R6 está activo pero todavía no reserva Global ni versión
 
-## Estado vivo post-G126 — MANT.2 R2/#206
+## Estado vivo post-G127 — VER.2 R6/#164
 
-- PLAN.2 R2/#155 está integrado y publicado como G126/E01 (`0.1.26.01-beta`).
-- `main` publicado de base: `1819f59f95731dc652ad62d84d6a5ad87ad3f8a4`.
-- MANT.2 R2/#206 queda aceptado localmente como **G127/E02** (`0.1.27.02-beta`).
-- Draft PR #207 contiene los checkpoints firmados CP1–CP3 y la materialización.
-- #204/#205 están cerrados sin merge directo como sustituidos por #207.
-- Reauditoría Dependabot: 0 PRs abiertos, 0 ramas `dependabot/*`, 0 alerts abiertos.
-- G128 permanece libre; VER.2 R6/#164 sigue bloqueado hasta publicar G127 y repetir #166 limpio.
-
+- MANT.2 R2/#206 está integrado y publicado como **G127/E02**
+  (`0.1.27.02-beta`).
+- `main` publicado de baseline:
+  `2df33a5c24d1c7cea1a6db91539a92da02c91500`.
+- Tag firmado: `v0.1.27.02-beta`.
+- GitHub Release prerelease: 392412590.
+- El preflight post-G127 #166 quedó CLEAN.
+- VER.2 R6/#164 está en ejecución mediante Draft PR #208.
+- CP1–CP6A-R1 están cerrados y auditados.
+- G128 permanece libre, sin candidato, bloque ni `VERSION` preasignados.
 
 <!-- MANT2-R2-G127-PROMOTION:START -->
-## Promoción local MANT.2 R2 / G127-E02
+## Publicación MANT.2 R2 / G127-E02
 
 - `VERSION` materializa `0.1.27.02-beta` para MANT.2 R2 / G127-E02.
-- E02 continúa el ordinal E01 ya consumido por MANT.2 R1/G123.
-- Uvicorn avanza a 0.53.0; Pydantic 2.13.5 + pydantic-core 2.46.5 permanecen coordinados.
-- #204/#205 quedan cerrados sin merge directo como sustituidos por #207.
-- CP2 y CP3 quedaron verdes local/remotamente; Dependabot queda con 0 PRs/ramas/alerts abiertos.
-- G127/E02 queda aceptado localmente y pendiente de PR/merge/revalidación de `main`/tag/Release.
-- G128 queda disponible sin candidato, bloque ni `VERSION` preasignados.
-- VER.2 R6/#164 solo podrá iniciar después de publicar G127 y repetir #166 limpio.
+- E02 continúa el ordinal E01 consumido por MANT.2 R1/G123.
+- Uvicorn avanzó a 0.53.0; Pydantic 2.13.5 + pydantic-core 2.46.5
+  permanecen coordinados.
+- #204/#205 quedaron cerrados sin merge directo como sustituidos por #207.
+- Integración: PR #207 →
+  `main@2df33a5c24d1c7cea1a6db91539a92da02c91500`.
+- Tag firmado: `v0.1.27.02-beta`.
+- GitHub Release prerelease: 392412590.
+- El preflight posterior #166 quedó CLEAN.
+- G128 continúa disponible sin candidato.
+- VER.2 R6/#164 está en ejecución.
 <!-- MANT2-R2-G127-PROMOTION:END -->
 
 <!-- PLAN2-G126-PROMOTION:START -->

@@ -1,32 +1,25 @@
 # Transparencia del producto
 
 **Estado:** Vigente
-**Versión de aplicación revisada:** `0.1.27.02-beta` — MANT.2 R2/G127-E02 aceptado localmente; publicación pendiente.
+**Versión de aplicación revisada:** `0.1.27.02-beta` — MANT.2 R2/G127-E02 publicado; VER.2 R6/#164 en curso.
 **Versión base histórica:** `0.0.25-beta`
 **Versión base histórica preservada:** `0.0.23-beta`
 **Base documental preservada:** GOV.1.3 R4 — 2026-08-17
-**Revisión transversal vigente:** MANT.2 R2/#206 — inserción post-G126 por #204/#205 — 2026-09-20
+**Revisión transversal vigente:** VER.2 R6/#164 — CP6B documental — 2026-09-21
 **Clasificación:** Pública / Auditoría
 
 <!-- DOC1-R1-REVISION-MANUAL:START -->
 ## Nota de lectura vigente
 
-- G121/E01 permanece publicado mediante `v0.1.21.01-beta`.
-- UX.6 R1–R8 permanece cerrado/publicado con revisión funcional R8.
-- UX.6 no altera reglas previsionales ni convierte Developer Diagnostics en
-  telemetría de producto.
-- Administración Developer y su auditoría permanecen separadas de simulación.
-- NOR.3 R1–R8 permanece cerrado/publicado como G122/E01 mediante PR #162 /
-  merge `b97cf61763479b80b8e8724b878089e8bb20fa00` y tag firmado
-  `v0.1.22.01-beta`.
-- MANT.2 R1/G123 y MANT.1 R8/G124 permanecen publicados.
-- DOC.3 R1/#154 está cerrado/publicado como G125/E01 mediante
-  `v0.1.25.01-beta`.
-- PLAN.2 R2/#155 está cerrado/publicado como G126/E01 (`0.1.26.01-beta`).
-- MANT.2 R2/#206 está aceptado localmente como G127/E02 (`0.1.27.02-beta`), pendiente de integración/publicación.
+- G121/E01–G126/E01 permanecen como publicaciones históricas previas.
+- MANT.2 R2/#206 está cerrado/publicado como G127/E02
+  (`0.1.27.02-beta`).
+- El preflight post-G127 #166 quedó CLEAN.
+- VER.2 R6/#164 está en ejecución sin candidato material asignado.
 - G128 permanece libre y sin candidato.
-- VER.2 R6/#164 espera el cierre/publicación de MANT.2 R2 y un #166 limpio.
 - PERSIST.1 permanece detrás de VER.2 → DOC.4 → #142/derivados.
+- La revisión de versionado no modifica motores previsionales ni convierte
+  Developer Diagnostics en telemetría de producto.
 <!-- DOC1-R1-REVISION-MANUAL:END -->
 
 Mi Retiro Proyectado es una herramienta independiente de estimación previsional. Este documento delimita qué puede afirmarse sobre el producto y qué debe permanecer explícitamente como aproximación, limitación o pendiente.

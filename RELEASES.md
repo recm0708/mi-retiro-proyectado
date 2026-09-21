@@ -1,17 +1,19 @@
 # Registro de versiones y estados del proyecto
 
 <!-- MANT2-R2-G127-PROMOTION:START -->
-## Promoción G127/E02 — MANT.2 R2
+## Publicación G127/E02 — MANT.2 R2
 
 - G127/E02 (`0.1.27.02-beta`) materializa MANT.2 R2.
 - Uvicorn: 0.53.0; Pydantic: 2.13.5; pydantic-core: 2.46.5.
-- #204/#205: cerrados sin merge directo como sustituidos por Draft PR #207.
-- Reauditoría previa al candidato: 0 PRs Dependabot, 0 ramas `dependabot/*` y 0 alerts abiertos.
-- CP2 remoto: Repository Quality Gate #56, Python Compatibility y Dependency Security #24 en success.
-- CP3 remoto: Repository Quality Gate #57, Python Compatibility y Dependency Security #25 en success.
-- #203: checklist obligatorio de Issues materializado en Issue Forms y protegido por regresión.
-- G128 queda disponible sin candidato.
-- El tag `v0.1.27.02-beta` y GitHub Release prerelease se crean únicamente después de merge y revalidación de `main`.
+- #204/#205 quedaron cerrados sin merge directo como sustituidos por PR #207.
+- Integración: PR #207;
+  `main@2df33a5c24d1c7cea1a6db91539a92da02c91500`.
+- Publicación: tag firmado `v0.1.27.02-beta`; GitHub Release prerelease
+  392412590.
+- #203 institucionalizó checkpoints remotos auditables y commits incrementales.
+- El preflight #166 posterior a la publicación quedó CLEAN.
+- G128 permanece libre y sin candidato.
+- VER.2 R6/#164 está en ejecución mediante Draft PR #208.
 <!-- MANT2-R2-G127-PROMOTION:END -->
 
 ## Publicación G126/E01 — PLAN.2 R2
@@ -538,13 +540,15 @@ Desde entonces los tags publicados son inmutables. `v0.0.24-beta`, `v0.0.25-beta
 
 ## 7. Línea beta revision-aware y versión oficial futura
 
-Después de VER.2, los estados beta nuevos usan:
+La historia publicada conserva la familia legacy y la revision-aware v1.
+Prospectivamente desde G128, los estados beta nuevos usan:
 
 ```text
-0.GG.RR.EE-beta
+0.<GLOBAL>.<EDITION>.<CORRECTION>-beta
 ```
 
-La familia `0.0.N-beta` queda preservada como historia publicada y no continúa incrementándose.
+Las familias históricas quedan preservadas e inmutables; no se reetiquetan ni
+continúan incrementándose bajo el contrato v2.
 
 Cuando todos los gates de producto estén cerrados, la primera versión oficial objetivo será:
 

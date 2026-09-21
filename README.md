@@ -195,7 +195,7 @@ El 2026-08-26 se completó el backfill administrativo de GitHub Releases. Con la
 
 Después de `v0.0.26-beta`, UX.4.6f–UX.4.6i continuaron históricamente sobre ese mismo valor de `VERSION`. VER.2 reconstruye todo el tramo sin inventar tags: el último estado aceptado de la base `7037addd` es **G070/E02**, cierre de UX.4.6i.
 
-La nueva familia beta usa `0.GG.RR.EE-beta`. VER.2 R4 promovió `0.0.71.01-beta` bajo la denominación original G071/E01 después de R1, R2 y R3; la reconciliación post-G070 sitúa el estado publicado en G087/E01 y conserva intacto el tag firmado `v0.0.71.01-beta`. No se crean tags revision-aware retrospectivos para G001–G070.
+La familia revision-aware v1 ya publicada conserva `0.<G_HI>.<G_LO>.<EE>-beta`; VER.2 R4 promovió `0.0.71.01-beta` y la historia posterior permanece inmutable. VER.2 R6 define prospectivamente desde G128 la familia v2 `0.<GLOBAL>.<EDITION>.<CORRECTION>-beta`. No se crean tags revision-aware retrospectivos para G001–G070.
 
 Objetivo de release estable:
 

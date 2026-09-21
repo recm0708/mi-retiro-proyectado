@@ -1,22 +1,22 @@
 # Matriz maestra de pendientes hacia 1.0
 
 **Estado:** vigente / documento vivo
-**Último estado publicado:** G126/E01 — PLAN.2 R2
-**Versión publicada:** `0.1.26.01-beta`
-**Fase activa:** MANT.2 R2 / #206 — G127/E02 aceptado localmente, publicación pendiente
+**Último estado publicado:** G127/E02 — MANT.2 R2
+**Versión publicada:** `0.1.27.02-beta`
+**Fase activa:** VER.2 R6 / #164 — sin Global ni `VERSION` preasignados
 **Siguiente Global disponible:** G128, libre y no reservado
-**Última reconciliación:** 2026-09-19 — inserción MANT.2 R2 previa a VER.2
+**Última reconciliación:** 2026-09-21 — CP6A-R1 cerrado; CP6B en curso
 
 Esta matriz es la autoridad tabular del trabajo pendiente hacia `1.0.0.0`. No preasigna Globals futuros. El orden expresa dependencias reales; cada estado material aceptado recibe Global/versión únicamente con candidato validado conforme a `VERSIONING.md`.
 
-Como antecedente inmediato preservado, G125/E01 — DOC.3 R1 permanece en el ledger histórico; el estado publicado vigente es G126/E01 — PLAN.2 R2.
+Como antecedentes inmediatos preservados, G125/E01 — DOC.3 R1 y G126/E01 — PLAN.2 R2 permanecen en el ledger histórico; el estado publicado vigente es G127/E02 — MANT.2 R2.
 
-El estado material aceptado localmente actual es **G127/E02 — MANT.2 R2**, pendiente de integración/publicación mediante #207. G128 permanece libre y sin candidato.
+El baseline publicado vigente es **G127/E02 — MANT.2 R2** (`0.1.27.02-beta`). VER.2 R6/#164 está en ejecución sin candidato; G128 permanece libre.
 
 ## 1. Reglas
 
-1. G126/E01 — PLAN.2 R2 es el último estado publicado e inmutable.
-2. MANT.2 R2/#206 está materializado y aceptado localmente como G127/E02, pendiente de integración/publicación.
+1. G127/E02 — MANT.2 R2 es el último estado publicado e inmutable.
+2. VER.2 R6/#164 está en ejecución sin Global ni `VERSION` preasignados.
 3. G128 permanece libre, sin candidato, bloque ni VERSION asignados.
 4. Todo pendiente debe tener owner, clasificación y dependencia explícitos.
 5. Trabajo material nuevo se inserta en todos los árboles afectados antes de continuar.
@@ -32,7 +32,7 @@ El estado material aceptado localmente actual es **G127/E02 — MANT.2 R2**, pen
 
 ```text
 G126 / PLAN.2 R2 publicado
-→ MANT.2 R2 / #206
+→ G127 / MANT.2 R2 publicado
 → VER.2 R6
 → DOC.4 R1
 → #142 auditoría previsional
@@ -59,8 +59,8 @@ G126 / PLAN.2 R2 publicado
 
 | Orden lógico | Identificador / Issue | Clasificación | Dependencia de entrada | Criterio principal de cierre | Estado |
 | ---: | --- | --- | --- | --- | --- |
-| 1 | MANT.2 R2 / #206 | obligatorio intermedio | G126 publicado + #166 bloqueado por #204/#205 | dependencias, documentación/licencias y checks reconciliados; #204/#205 resueltos o sustituidos | G127/E02 aceptado localmente; publicación pendiente |
-| 2 | VER.2 R6 / #164 | obligatorio 1.0 | MANT.2 R2 publicado + #166 CLEAN | modelo revision-aware y guards reconciliados | Espera MANT.2 R2 |
+| 1 | MANT.2 R2 / #206 | baseline cerrado | G126 publicado + #166 | dependencias reconciliadas y publicación formal | Cerrado/publicado G127/E02 |
+| 2 | VER.2 R6 / #164 | obligatorio 1.0 | G127 publicado + #166 CLEAN | modelo revision-aware, documentación y guards reconciliados | En ejecución; G128 libre |
 | 3 | DOC.4 R1 / #171 | obligatorio 1.0 | VER.2 publicado + #166 | documentación/no-código current-state-only reingenierizados | Espera VER.2 |
 | 3A | DOC.4 Lote A / #172 | interno DOC.4 | #171 abierto | 100 % Markdown revisado 1:1 | Sin Global |
 | 3B | DOC.4 Lote B / #173 | interno DOC.4 | decisiones #172 | poda/movimientos/fusiones/enlaces reconciliados | Sin Global |
@@ -186,18 +186,21 @@ Cuenta fases materiales top-level aceptadas, no lotes internos. DOC.4 crea nuevo
 
 **Ninguno identificado.**
 
-## 12. Invariantes de versionado durante MANT.2 R2
+## 12. Invariantes de versionado durante VER.2 R6
 
 ```text
 VERSION = 0.1.27.02-beta
+accepted_baseline = G127/E02 / MANT.2 R2
+active_phase = VER.2 R6 / #164
 current_candidate = unassigned
 next_global_available = 128
-G127 = accepted_pending_publication / MANT.2 R2 / E02
 G128 = libre / no reservado
 ```
 
-El ledger aceptado alcanza G127/E02 y el manifest materializa MANT.2 R2 como `0.1.27.02-beta`; `next_step` conserva G128 libre, sin bloque ni versión preasignados.
+El ledger v2 registra historia aceptada y candidato; el registry declara el
+baseline G127/E02 y VER.2 R6 como fase activa. El manifest de G127 es un
+snapshot `release-input`; los hechos de publicación se resuelven en runtime.
 
 ## 13. Próxima frontera
 
-MANT.2 R2/#206 está aceptado localmente como G127/E02 y pendiente de publicación. G128 continúa libre. Después de publicar #206/G127 se repite #166; únicamente con ese preflight limpio podrá abrirse VER.2 R6/#164.
+VER.2 R6/#164 está en ejecución sobre G127/E02. G128 continúa libre. La siguiente fase material ordinaria es DOC.4 R1/#171 después de publicar VER.2, salvo que #166 detecte trabajo material nuevo y requiera insertar MANT.2 R3+.

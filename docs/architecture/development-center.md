@@ -11,25 +11,21 @@
 **Estado R3:** integrado en `main` mediante PR #40.
 
 <!-- DOC1-R1-REVISION-MANUAL:START -->
-## Nota de lectura vigente
+## Nota de estado vigente
 
-DEV.2 permanece cerrado después de R6/G119-E05. UX.6 amplía la experiencia
-Developer sin reabrir DEV.2.
-
-- UX.6 R1–R8 permanece cerrado/publicado como G121/E01.
-- NOR.3 R1–R8 permanece cerrado/publicado como G122/E01 mediante
-  `v0.1.22.01-beta`.
+- NOR.3 R1–R8 permanece cerrado/publicado como G122/E01.
+- MANT.2 R1/G123, MANT.1 R8/G124, DOC.3 R1/G125 y PLAN.2 R2/G126
+  permanecen cerrados/publicados.
+- MANT.2 R2/#206 está cerrado/publicado como G127/E02
+  (`0.1.27.02-beta`).
+- El preflight post-G127 #166 quedó CLEAN.
+- VER.2 R6/#164 está en ejecución; G128 permanece libre y sin candidato.
 - Perfil/avatar, usuarios/RBAC, credenciales temporales, revocación y auditoría
   persistente permanecen vigentes.
 - App Asegurado y Portal Developer comparten Design System, movimiento y
   accesibilidad donde corresponde.
 - La sesión humana continúa separada del Bearer técnico.
-- MANT.2 R1/G123 y MANT.1 R8/G124 permanecen cerrados/publicados.
-- DOC.3 R1/#154 está cerrado/publicado como G125/E01.
-- PLAN.2 R2/#155 está cerrado/publicado como G126/E01 (`0.1.26.01-beta`).
-- MANT.2 R2/#206 está aceptado localmente como G127/E02 (`0.1.27.02-beta`), pendiente de integración/publicación.
-- G128 permanece libre y sin candidato.
-- PERSIST.1 permanece planificado detrás de MANT.2 R2 → #166 → VER.2 → DOC.4 → #142/derivados.
+- PERSIST.1 permanece planificado detrás de VER.2 → DOC.4 → #142/derivados.
 - La revisión UX final Developer se gobierna por #129/#189 dentro de
   UX.7→UX.x.
 <!-- DOC1-R1-REVISION-MANUAL:END -->

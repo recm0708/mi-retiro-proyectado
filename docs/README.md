@@ -134,7 +134,7 @@ Evidencia:
 ## 2. Gobierno y versionado
 
 - **[Gobierno del proyecto](../GOVERNANCE.md)** — gobierno del proyecto.
-- **[Política de versionado](../VERSIONING.md)** — política legacy, beta revision-aware `0.GG.RR.EE-beta`, versión oficial de cuatro componentes y Build independiente.
+- **[Política de versionado](../VERSIONING.md)** — legacy, revision-aware v1 histórica, v2 `0.<GLOBAL>.<EDITION>.<CORRECTION>-beta`, versión oficial de cuatro componentes y Build independiente.
 - [`../VERSION`](../VERSION) — fuente canónica de la versión candidata de aplicación.
 - **[Auditoría de versionado pre-1.0](archive/governance/pre-1-0-versioning-audit.md)** — auditoría del historial, criterio contable y exclusiones de VER.2.
 - **[ADR-179 — El versionado beta usa un ledger de estados aceptados y no cuenta commits como revisiones](decisions/adr-179-revision-aware-versioning.md)** — decisión ADR del esquema revision-aware previo a `1.0.0.0`.
