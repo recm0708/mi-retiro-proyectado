@@ -71,7 +71,7 @@ El orden expresa dependencias materiales, no Globals futuros supuestos.
 MANT.2 R2/#206 reconcilió los PRs Dependabot #204/#205 detectados por el
 preflight #166 y quedó cerrado/publicado como G127/E02
 (`0.1.27.02-beta`). El preflight posterior #166 quedó CLEAN y habilitó
-VER.2 R6/#164, que ahora está en ejecución.
+VER.2 R6/#164, que ya materializó G128/E02/C0 (`0.128.2.0-beta`) y está listo para integración mediante PR #208.
 
 ### VER.2 R6 antes de DOC.4
 

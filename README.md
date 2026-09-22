@@ -29,7 +29,7 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 - **Versión canónica vigente:** `0.128.2.0-beta`; candidato aceptado VER.2 R6 / G128/E02/C0 pendiente de integración/publicación.
 - **Versión de aplicación:** `0.128.2.0-beta` — VER.2 R6 / G128-E02-C0 aceptado localmente; publicación pendiente.
 - **Última publicación formal:** `v0.1.27.02-beta`, sobre `main@2df33a5c24d1c7cea1a6db91539a92da02c91500`; GitHub Release prerelease 392412590.
-- **Fase material actual:** **VER.2 R6 / #164**, candidato materializado mediante Draft PR #208.
+- **Fase material actual:** **VER.2 R6 / #164**, G128/E02/C0 materializado mediante PR #208, listo para integración.
 - **Preflight #166 previo al candidato:** CLEAN.
 - **Siguiente Global aritmético:** G129, libre y sin candidato.
 - **Primera versión oficial objetivo:** `1.0.0.0`; el primer identificador de artefacto oficial previsto es `Build 000001`.
@@ -165,7 +165,7 @@ Documentos principales:
 - **[Cierre GOV.1 — Auditoría, Gobierno y Trazabilidad Pre-Beta](docs/archive/governance/gov1-closeout.md)** — auditoría final y decisión de cierre de GOV.1;
 - **[Auditoría de versionado pre-1.0](docs/archive/governance/pre-1-0-versioning-audit.md)** — criterio contable y reconciliación VER.2;
 - **[VER.2 — Matriz de decisión de revisiones aceptadas](docs/archive/governance/ver2-revision-decision-matrix.md)** — decisiones de inclusión/exclusión del contador;
-- **[Ledger de revisiones aceptadas pre-1.0](docs/governance/pre-1-0-revision-ledger.md)** — secuencia reconciliada hasta G127; G128 permanece disponible sin candidato;
+- **[Ledger de revisiones aceptadas pre-1.0](docs/governance/pre-1-0-revision-ledger.md)** — secuencia reconciliada hasta G128; G129 permanece disponible sin candidato;
 - [`data/governance/pre-1-0-revision-ledger.json`](data/governance/pre-1-0-revision-ledger.json) — ledger machine-readable;
 - **[Identificadores de bloques de trabajo](docs/standards/work-block-identifiers.md)** — política canónica de identificadores de bloques;
 - [`data/governance/work-block-registry.json`](data/governance/work-block-registry.json) — registro machine-readable de identificadores históricos, cerrados y planificados;

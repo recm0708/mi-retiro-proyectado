@@ -19,7 +19,7 @@
 - MANT.2 R2/#206 está cerrado/publicado como G127/E02
   (`0.1.27.02-beta`).
 - El preflight post-G127 #166 quedó CLEAN.
-- VER.2 R6/#164 está en ejecución; G128 permanece libre y sin candidato.
+- VER.2 R6/#164 materializó G128/E02/C0 (`0.128.2.0-beta`) y el PR #208 está listo para integración; G129 permanece libre y sin candidato.
 - Perfil/avatar, usuarios/RBAC, credenciales temporales, revocación y auditoría
   persistente permanecen vigentes.
 - App Asegurado y Portal Developer comparten Design System, movimiento y

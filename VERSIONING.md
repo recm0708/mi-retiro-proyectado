@@ -26,7 +26,7 @@
 <!-- NOR3-G122-PROMOTION:END -->
 
 <!-- POST-NOR3-INTERMEDIATE-SEQUENCE:START -->
-## Estado vigente post-G127 / VER.2 R6 en curso
+## Estado vigente — VER.2 R6 / G128-E02-C0 pendiente de integración
 
 MANT.2 R2/#206 está cerrado, integrado y publicado como **G127/E02**
 (`0.1.27.02-beta`) sobre
@@ -36,18 +36,17 @@ tag firmado `v0.1.27.02-beta` y GitHub Release prerelease 392412590.
 El preflight #166 posterior a G127/E02 quedó **CLEAN** y habilitó
 VER.2 R6/#164.
 
-VER.2 R6/#164 está en ejecución mediante la rama
-`ver/ver2-r6-revision-aware` y el Draft PR #208. CP1–CP6A-R1 están
-cerrados y auditados remotamente.
-
-**G128 permanece libre** y sin candidato, bloque ni `VERSION` preasignados.
-La existencia de rama, commits, checkpoints o PR no consume un Global.
+VER.2 R6/#164 materializó G128/E02/C0 como `0.128.2.0-beta` mediante la rama
+`ver/ver2-r6-revision-aware` y el PR #208, actualmente listo para integración.
+CP1–CP7 están cerrados y auditados; G128 está aceptado localmente y pendiente
+de integración/publicación. **G129 permanece libre** y sin candidato, bloque ni
+`VERSION` preasignados.
 
 La continuidad material vigente es:
 
-1. **cerrar CP6B documental de VER.2 R6**;
-2. **auditoría/candidato final de VER.2 R6**;
-3. **DOC.4 R1 / #171** después de publicar VER.2;
+1. **integrar y publicar VER.2 R6 / G128-E02-C0**;
+2. **repetir #166 post-publicación**;
+3. **DOC.4 R1 / #171**;
 4. **#142** y derivados funcionales obligatorios;
 5. **PERSIST.1 / #130 → REP.1 / #143 → DEPLOY.1 / #157**;
 6. **UX.7→UX.x / #129** bajo #189;
@@ -166,7 +165,7 @@ G129 / E2 / C1 -> 0.129.2.1-beta
 G234 / E7 / C12 -> 0.234.7.12-beta
 ```
 
-G128 permanece libre hasta que VER.2 R6 materialice un candidato real.
+G128 ya está materializado como G128/E02/C0 (`0.128.2.0-beta`); G129 permanece libre hasta que exista un candidato material posterior.
 
 ### 3.4. Versiones oficiales
 

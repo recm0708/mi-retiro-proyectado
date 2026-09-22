@@ -97,7 +97,7 @@ Sí puede consumir un nuevo `G` un estado de mantenimiento, seguridad, gobierno,
 
 El candidato reserva el siguiente número global, pero ese número solo queda consumido después del cierre satisfactorio. Si falla, se corrige conservando el mismo identificador reservado.
 
-La revisión funcional y Edition no son equivalentes por definición; `functional_revision` permanece como metadata. DEV.2 R5 = G118/E04 y DEV.2 R6 = G119/E05 siguen siendo precedentes históricos. El último estado cerrado/publicado es MANT.2 R2 = G127/E02 (`0.1.27.02-beta`), integrado en `main@2df33a5c24d1c7cea1a6db91539a92da02c91500`, con tag firmado `v0.1.27.02-beta` y GitHub Release prerelease 392412590. El preflight post-G127 #166 quedó CLEAN; VER.2 R6/#164 está en ejecución sin candidato y G128 permanece libre. PERSIST.1 continúa detrás de VER.2 → DOC.4 → #142/derivados; la ola UX final es UX.7→UX.x bajo #129/#189.
+La revisión funcional y Edition no son equivalentes por definición; `functional_revision` permanece como metadata. DEV.2 R5 = G118/E04 y DEV.2 R6 = G119/E05 siguen siendo precedentes históricos. El último estado publicado continúa siendo MANT.2 R2 = G127/E02 (`0.1.27.02-beta`), integrado en `main@2df33a5c24d1c7cea1a6db91539a92da02c91500`, con tag firmado `v0.1.27.02-beta` y GitHub Release prerelease 392412590. VER.2 R6/#164 ya materializó y validó local/remotamente G128/E02/C0 (`0.128.2.0-beta`) mediante PR #208, listo para integración; G129 permanece libre. PERSIST.1 continúa detrás de VER.2 → DOC.4 → #142/derivados; la ola UX final es UX.7→UX.x bajo #129/#189.
 
 ## 3. Precondiciones
 

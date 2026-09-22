@@ -10,12 +10,12 @@
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado funcional vigente
 
-- `VERSION` materializa `0.1.27.02-beta` para MANT.2 R2/G127-E02 publicado.
+- `VERSION` materializa `0.128.2.0-beta` para VER.2 R6/G128-E02-C0 aceptado localmente; G127/E02 permanece como último estado publicado.
 - G123/E01–G126/E01 permanecen como estados anteriores publicados.
 - DOC.3 R1/#154 y PLAN.2 R2/#155 no modificaron motores previsionales.
-- VER.2 R6/#164 está en ejecución y modifica gobierno/versionado, no fórmulas
-  SEBD, Mixto o SUCGS.
-- G128 permanece como siguiente Global disponible y libre.
+- VER.2 R6/#164 materializó G128/E02/C0 y modifica gobierno/versionado, no fórmulas
+  SEBD, Mixto o SUCGS; el PR #208 está listo para integración.
+- G129 permanece como siguiente Global disponible y libre.
 - UX.6 R1–R8 permanece cerrado/publicado como G121/E01.
 - Perfil/avatar, usuarios/RBAC y auditoría Developer permanecen separados de la
   simulación.

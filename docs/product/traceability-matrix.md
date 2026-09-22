@@ -15,7 +15,7 @@
 - MANT.2 R2/#206 está cerrado/publicado como G127/E02
   (`0.1.27.02-beta`).
 - El preflight post-G127 #166 quedó CLEAN.
-- VER.2 R6/#164 está en ejecución; G128 permanece libre y sin candidato.
+- VER.2 R6/#164 materializó G128/E02/C0 (`0.128.2.0-beta`) y el PR #208 está listo para integración; G129 permanece libre y sin candidato.
 - G121/E01 permanece publicado para UX.6 R8 y G122/E01 para NOR.3.
 - TR-035, TR-036 y TR-037 preservan los contratos añadidos por UX.6.
 - DEV.2 R5/R6 permanecen preservados como G118/E04 y G119/E05.
