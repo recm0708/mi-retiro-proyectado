@@ -19,12 +19,12 @@ class TestUX5R7DocumentationClosure(unittest.TestCase):
             )
         )
         candidate = data["current_candidate"]
-        self.assertIsNone(candidate["global_revision"])
-        self.assertIsNone(candidate["revision_aware"])
-        self.assertIsNone(candidate["block"])
-        self.assertIsNone(candidate["revision"])
-        self.assertIsNone(candidate["edition"])
-        self.assertEqual("unassigned", candidate["state"])
+        self.assertEqual(128, candidate["global_revision"])
+        self.assertEqual("0.128.2.0-beta", candidate["revision_aware"])
+        self.assertEqual("VER.2", candidate["block"])
+        self.assertEqual("R6", candidate["revision"])
+        self.assertEqual(2, candidate["edition"])
+        self.assertEqual("accepted_pending_integration", candidate["state"])
 
     def test_ux5_y_ux6_cerrados_nor3_candidato_y_persist1_planificado(self):
         data = json.loads(
@@ -44,9 +44,7 @@ class TestUX5R7DocumentationClosure(unittest.TestCase):
         self.assertEqual("closed", identifiers["NOR.3"]["status"])
 
         candidate = data["current_candidate"]
-        self.assertIsNone(
-            candidate["next_functional_block_if_accepted"]
-        )
+        self.assertEqual("DOC.4", candidate["next_functional_block_if_accepted"])
         self.assertIsNone(
             candidate["next_functional_global_if_accepted"]
         )
@@ -181,7 +179,7 @@ class TestUX5R7DocumentationClosure(unittest.TestCase):
         data = json.loads((ROOT / "data/governance/work-block-registry.json").read_text(encoding="utf-8"))
         ids = {item["identifier"]: item for item in data["identifiers"]}
         self.assertIn("G121", ids["UX.6"]["global_refs"])
-        self.assertEqual("0.1.27.02-beta", (ROOT / "VERSION").read_text(encoding="utf-8").strip())
+        self.assertEqual("0.128.2.0-beta", (ROOT / "VERSION").read_text(encoding="utf-8").strip())
 
 
 if __name__ == "__main__":

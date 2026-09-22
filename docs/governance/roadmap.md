@@ -4,8 +4,8 @@
 **Último estado publicado:** G127/E02 — MANT.2 R2
 **Versión publicada:** `0.1.27.02-beta`
 **`main` publicado de entrada a VER.2 R6:** `2df33a5c24d1c7cea1a6db91539a92da02c91500`
-**Siguiente Global disponible:** G128, libre y no reservado
-**Fase en curso:** VER.2 R6 / #164 — sin Global ni `VERSION` preasignados
+**Siguiente Global aritmético:** G129, libre y no reservado
+**Fase en curso:** VER.2 R6 / #164 — G128/E02/C0 `0.128.2.0-beta` aceptado, integración/publicación pendiente
 **Fecha de reconciliación:** 2026-09-21
 
 Este roadmap muestra el programa vigente hacia `1.0.0.0`. La historia de estados aceptados permanece en ledger, `RELEASES.md`, `CHANGELOG.md`, tags, GitHub Releases y `docs/archive/`.
@@ -17,8 +17,8 @@ sobre `main@2df33a5c24d1c7cea1a6db91539a92da02c91500`, mediante PR #207,
 tag firmado `v0.1.27.02-beta` y GitHub Release prerelease 392412590.
 
 El preflight #166 posterior a G127 quedó CLEAN y habilitó VER.2 R6/#164.
-VER.2 R6 está en ejecución mediante Draft PR #208. CP1–CP5.1 están
-cerrados y auditados. G128 permanece libre y sin candidato.
+VER.2 R6 materializó G128/E02/C0 (`0.128.2.0-beta`) mediante Draft PR #208.
+G128 aún no está publicado; G129 permanece libre.
 
 <!-- VER2-CP6A-HISTORICAL-ANCHORS:START -->
 ## Anclas históricas preservadas
@@ -32,6 +32,7 @@ anteriores; **no describen el estado operativo vigente**:
 - **Fase en curso:** MANT.2 R2 / #206 — referencia histórica anterior a la
   publicación G127/E02.
 - MANT.2 R2 quedó después publicado como G127/E02 (`0.1.27.02-beta`).
+- G128, libre y no reservado — ancla histórica del estado inmediatamente anterior a la materialización CP7.
 <!-- VER2-CP6A-HISTORICAL-ANCHORS:END -->
 
 ## Árbol vigente hacia `1.0.0.0`
@@ -200,4 +201,4 @@ No bloquean `1.0.0.0`:
 
 ## Regla de continuidad
 
-La fase material activa es VER.2 R6/#164 sobre el baseline publicado G127/E02. G128 permanece libre y sin candidato. Después de publicar VER.2 corresponde DOC.4 R1/#171, salvo que un preflight #166 obligue a insertar MANT.2 R3+.
+La fase material activa es VER.2 R6/#164 con G128/E02/C0 (`0.128.2.0-beta`) aceptado localmente; G129 permanece libre y sin candidato. Después de publicar VER.2 corresponde DOC.4 R1/#171, salvo que un preflight #166 obligue a insertar MANT.2 R3+.

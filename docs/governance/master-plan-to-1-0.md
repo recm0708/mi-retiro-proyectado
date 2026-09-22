@@ -3,8 +3,8 @@
 **Estado:** vigente
 **Último estado publicado:** G127/E02 — MANT.2 R2
 **Versión publicada:** `0.1.27.02-beta`
-**Fase en curso:** VER.2 R6 / #164 — sin Global ni `VERSION` preasignados
-**Siguiente Global disponible:** G128, libre y no reservado
+**Fase en curso:** VER.2 R6 / #164 — G128/E02/C0 `0.128.2.0-beta` aceptado pendiente de integración/publicación
+**Siguiente Global aritmético:** G129, libre y no reservado
 **Objetivo estable:** `1.0.0.0`
 **Fecha de reconciliación:** 2026-09-21
 
@@ -13,7 +13,7 @@ Este documento es la autoridad narrativa del programa vigente hacia la primera v
 ## 1. Principios
 
 1. Ninguna fase planificada recibe Global o `VERSION` por anticipado.
-2. G127 está publicado como MANT.2 R2/E02; VER.2 R6 está en ejecución sin candidato y G128 es el siguiente Global disponible.
+2. G127 está publicado como MANT.2 R2/E02; VER.2 R6 materializó G128/E02/C0 como candidato aceptado pendiente de integración/publicación; G129 queda libre.
 3. Un Global se materializa únicamente con candidato real, validado y aceptable.
 4. Issues y documentación versionada deben describir el mismo programa.
 5. Trabajo material nuevo con responsabilidad propia se inserta inmediatamente en todos los árboles afectados antes de continuar.
@@ -36,8 +36,8 @@ Release: 392412590
 
 MANT.2 R2/#206 está cerrado, integrado y publicado.
 El preflight #166 posterior a G127/E02 quedó CLEAN.
-VER.2 R6/#164 está en ejecución mediante Draft PR #208, sin Global ni
-`VERSION` preasignados. G128 permanece libre.
+VER.2 R6/#164 materializó G128/E02/C0 (`0.128.2.0-beta`) mediante Draft PR #208.
+El candidato está aceptado localmente y pendiente de integración/publicación. G129 permanece libre.
 
 <!-- VER2-CP6A-HISTORICAL-ANCHORS:START -->
 ### Anclas históricas del programa

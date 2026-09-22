@@ -90,7 +90,7 @@ class TestVer2PublicationStateModel(
         )
 
         self.assertEqual(
-            128,
+            129,
             self.ledger[
                 "next_global"
             ],
@@ -124,11 +124,11 @@ class TestVer2PublicationStateModel(
 
         self.assertEqual(
             (
-                127,
+                128,
                 2,
-                "0.1.27.02-beta",
-                "MANT.2",
-                "R2",
+                "0.128.2.0-beta",
+                "VER.2",
+                "R6",
             ),
             (
                 baseline[
@@ -158,7 +158,7 @@ class TestVer2PublicationStateModel(
                 "VER.2",
                 "R6",
                 164,
-                "in_progress",
+                "accepted_pending_integration",
             ),
             (
                 active[
@@ -176,41 +176,29 @@ class TestVer2PublicationStateModel(
             ),
         )
 
-        self.assertIsNone(
-            active[
-                "global_revision"
-            ]
-        )
-
-        self.assertIsNone(
-            active[
-                "revision_aware"
-            ]
-        )
+        self.assertEqual(128, active["global_revision"])
+        self.assertEqual("0.128.2.0-beta", active["revision_aware"])
 
         candidate = self.registry[
             "current_candidate"
         ]
 
         self.assertEqual(
-            "unassigned",
+            "accepted_pending_integration",
             candidate[
                 "state"
             ],
         )
 
         self.assertEqual(
-            128,
+            129,
             candidate[
                 "next_global_available"
             ],
         )
 
-        self.assertIsNone(
-            candidate[
-                "global_revision"
-            ]
-        )
+        self.assertEqual(128, candidate["global_revision"])
+        self.assertEqual(2, candidate["edition"])
 
     def test_mantenimiento_cerrado_y_ver2_activo(
         self,
@@ -234,7 +222,7 @@ class TestVer2PublicationStateModel(
         )
 
         self.assertEqual(
-            "in_progress_r6",
+            "accepted_r6_pending_integration",
             ids[
                 "VER.2"
             ][
@@ -269,7 +257,7 @@ class TestVer2PublicationStateModel(
         )
 
         self.assertEqual(
-            127,
+            128,
             manifest[
                 "global_revision"
             ],
@@ -283,20 +271,21 @@ class TestVer2PublicationStateModel(
         )
 
         self.assertEqual(
-            1,
+            2,
             manifest[
                 "identifier_schema"
             ],
         )
 
-        self.assertIsNone(
+        self.assertEqual(
+            0,
             manifest[
                 "correction_ordinal"
-            ]
+            ],
         )
 
         self.assertEqual(
-            2,
+            0,
             manifest[
                 "maintenance_ordinal"
             ],
@@ -360,7 +349,7 @@ class TestVer2PublicationStateModel(
         )
 
         self.assertEqual(
-            128,
+            129,
             report[
                 "next_global"
             ],

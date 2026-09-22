@@ -24,13 +24,13 @@ class TestNOR3R8Closure(unittest.TestCase):
 
         candidate = data["current_candidate"]
 
-        self.assertIsNone(candidate["global_revision"])
-        self.assertIsNone(candidate["revision_aware"])
-        self.assertIsNone(candidate["block"])
-        self.assertIsNone(candidate["revision"])
-        self.assertIsNone(candidate["revision_scope"])
-        self.assertEqual("unassigned", candidate["state"])
-        self.assertEqual(128, candidate["next_global_available"])
+        self.assertEqual(128, candidate["global_revision"])
+        self.assertEqual("0.128.2.0-beta", candidate["revision_aware"])
+        self.assertEqual("VER.2", candidate["block"])
+        self.assertEqual("R6", candidate["revision"])
+        self.assertEqual("final_revision_aware_reform", candidate["revision_scope"])
+        self.assertEqual("accepted_pending_integration", candidate["state"])
+        self.assertEqual(129, candidate["next_global_available"])
 
         identifiers = {
             item["identifier"]: item
@@ -64,7 +64,7 @@ class TestNOR3R8Closure(unittest.TestCase):
             identifiers["MANT.2"]["status"],
         )
         self.assertEqual(
-            "in_progress_r6",
+            "accepted_r6_pending_integration",
             identifiers["VER.2"]["status"],
         )
 
@@ -73,8 +73,8 @@ class TestNOR3R8Closure(unittest.TestCase):
         self.assertEqual("VER.2", active["block"])
         self.assertEqual("R6", active["revision"])
         self.assertEqual(164, active["issue"])
-        self.assertEqual("in_progress", active["state"])
-        self.assertIsNone(active["global_revision"])
+        self.assertEqual("accepted_pending_integration", active["state"])
+        self.assertEqual(128, active["global_revision"])
 
     def test_policy_declara_cierre_r8_sin_simular_auditoria_posterior(self):
         data = json.loads(POLICY.read_text(encoding="utf-8"))

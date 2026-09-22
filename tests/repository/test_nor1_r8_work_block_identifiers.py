@@ -47,10 +47,7 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
         self.assertEqual("closed", ids["MANT.1"]["status"])
         self.assertIn("G124/E13", ids["MANT.1"]["meaning"])
         self.assertIn("G124", ids["MANT.1"]["global_refs"])
-        self.assertEqual(
-            "in_progress_r6",
-            ids["VER.2"]["status"],
-        )
+        self.assertEqual("accepted_r6_pending_integration", ids["VER.2"]["status"])
         self.assertIn("G114", ids["PLAN.2"]["global_refs"])
         self.assertEqual("closed", ids["UX.5"]["status"])
         self.assertEqual("closed", ids["UX.6"]["status"])
@@ -82,13 +79,13 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
         self.assertEqual(7, entry["ordinal"])
         self.assertEqual("0.1.12.07-beta", entry["revision_aware"])
         candidate = self.data["current_candidate"]
-        self.assertIsNone(candidate["global_revision"])
-        self.assertIsNone(candidate["block"])
-        self.assertIsNone(candidate["revision"])
-        self.assertIsNone(candidate["edition"])
-        self.assertEqual("unassigned", candidate["state"])
-        self.assertEqual(128, candidate["next_global_available"])
-        self.assertIsNone(candidate["next_functional_block_if_accepted"])
+        self.assertEqual(128, candidate["global_revision"])
+        self.assertEqual("VER.2", candidate["block"])
+        self.assertEqual("R6", candidate["revision"])
+        self.assertEqual(2, candidate["edition"])
+        self.assertEqual("accepted_pending_integration", candidate["state"])
+        self.assertEqual(129, candidate["next_global_available"])
+        self.assertEqual("DOC.4", candidate["next_functional_block_if_accepted"])
         self.assertIsNone(candidate["next_functional_global_if_accepted"])
 
     def test_candidato_reabierto_continua_ordinal_del_bloque(self):

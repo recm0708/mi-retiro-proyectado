@@ -1,7 +1,7 @@
 # Proceso de release
 
 **Estado:** Vigente
-**Versión de aplicación:** `0.1.27.02-beta` — MANT.2 R2/G127-E02 publicado; VER.2 R6/#164 en curso; G128 libre sin candidato.
+**Versión de aplicación:** `0.128.2.0-beta` — VER.2 R6/G128-E02-C0 aceptado localmente; integración/publicación pendiente; G129 libre.
 **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
 **Último tag formal legacy:** `v0.0.26-beta`
 **Versión base histórica preservada:** `0.0.23-beta`
@@ -29,55 +29,33 @@
 <!-- NOR3-G122-PROMOTION:END -->
 
 <!-- POST-NOR3-INTERMEDIATE-SEQUENCE:START -->
-## Estado vigente post-G127 / VER.2 R6 en curso
+## Estado vigente — candidato VER.2 R6 materializado
 
-MANT.2 R2/#206 está cerrado, integrado y publicado como **G127/E02**
-(`0.1.27.02-beta`) sobre
+MANT.2 R2/#206 permanece publicado como **G127/E02** (`0.1.27.02-beta`) sobre
 `main@2df33a5c24d1c7cea1a6db91539a92da02c91500`, mediante PR #207,
 tag firmado `v0.1.27.02-beta` y GitHub Release prerelease 392412590.
 
-El preflight #166 posterior a G127/E02 quedó **CLEAN** y habilitó
-VER.2 R6/#164.
+El preflight #166 posterior a G127 quedó CLEAN. VER.2 R6/#164 alcanzó un
+candidato material aceptable y **G128/E02/C0 queda materializado localmente
+como `0.128.2.0-beta`** dentro del Draft PR #208.
 
-VER.2 R6/#164 está en ejecución mediante la rama
-`ver/ver2-r6-revision-aware` y el Draft PR #208. CP1–CP6A-R1 están
-cerrados y auditados remotamente.
+G128 está aceptado/versionado pero todavía **no está publicado**: faltan el
+checkpoint firmado, auditoría remota, integración a `main`, revalidación,
+tag firmado y GitHub Release prerelease.
 
-**G128 permanece libre** y sin candidato, bloque ni `VERSION` preasignados.
-La existencia de rama, commits, checkpoints o PR no consume un Global.
-
-La continuidad material vigente es:
-
-1. **cerrar CP6B documental de VER.2 R6**;
-2. **auditoría/candidato final de VER.2 R6**;
-3. **DOC.4 R1 / #171** después de publicar VER.2;
-4. **#142** y derivados funcionales obligatorios;
-5. **PERSIST.1 / #130 → REP.1 / #143 → DEPLOY.1 / #157**;
-6. **UX.7→UX.x / #129** bajo #189;
-7. **SEC.2 R7 → rendimiento → A11Y.2 → REV.1 → #153 → DOC.1 R6 → QA.1 → REL.1**.
-
-Un MANT.2 R3+ solo se inserta si #166 detecta trabajo material nuevo.
+**G129 es el siguiente Global aritmético** y permanece libre, sin candidato,
+bloque ni `VERSION` preasignados. Después de publicar VER.2 y repetir #166
+limpio corresponde **DOC.4 R1 / #171**.
 <!-- POST-NOR3-INTERMEDIATE-SEQUENCE:END -->
 
 
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado de publicación vigente
-
-- `VERSION` materializa `0.1.27.02-beta` para MANT.2 R2/G127-E02 publicado.
-- G127/E02 está integrado en
-  `main@2df33a5c24d1c7cea1a6db91539a92da02c91500`.
-- Tag firmado: `v0.1.27.02-beta`.
-- GitHub Release prerelease: 392412590.
-- G126/E01, G125/E01, G124/E13 y G123/E01 permanecen como publicaciones
-  anteriores.
-- El preflight post-G127 #166 quedó CLEAN.
-- VER.2 R6/#164 está en ejecución mediante Draft PR #208.
-- G128 permanece libre, sin candidato, bloque ni VERSION.
-- PERSIST.1 permanece planificado detrás de VER.2 → DOC.4 → #142/derivados.
-- La automatización no crea ni firma tags.
-- Los tags publicados permanecen inmutables; cualquier tag posterior exige
-  integración, revalidación de `main` y firma local.
-- Un Release incompatible falla cerrado y solo HTTP 404 autoriza creación.
+- `VERSION` materializa `0.128.2.0-beta` para VER.2 R6/G128-E02-C0.
+- G128 está aceptado localmente pero aún no tiene tag ni GitHub Release.
+- G127/E02 permanece publicado mediante `v0.1.27.02-beta` / Release 392412590.
+- G129 permanece libre, sin candidato, bloque ni VERSION.
+- Los tags publicados permanecen inmutables.
 <!-- DOC1-R1-POST-MANT1:END -->
 
 Este procedimiento complementa `VERSIONING.md`, `RELEASES.md`, `CHANGELOG.md`, `GOVERNANCE.md`, `LICENSE`, `THIRD_PARTY_NOTICES.md`, `docs/governance/licensing-and-distribution.md`, `docs/archive/governance/pre-1-0-versioning-audit.md`, `docs/governance/pre-1-0-revision-ledger.md`, `docs/archive/governance/ver2-revision-decision-matrix.md`, `data/governance/pre-1-0-revision-ledger.json` y `docs/governance/master-plan-to-1-0.md`.

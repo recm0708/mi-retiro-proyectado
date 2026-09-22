@@ -1,7 +1,7 @@
 # Política de estructura de archivos por extensión
 
 **Estado:** Vigente
-**Versión de aplicación revisada:** `0.1.27.02-beta`
+**Versión de aplicación revisada:** `0.128.2.0-beta`
 **Checkpoint técnico:** Mantenibilidad previa a SEC.2
 **Clasificación:** Técnica / Mantenibilidad
 

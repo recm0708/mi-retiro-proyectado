@@ -2,51 +2,43 @@
   "schema_version": 2,
   "snapshot_role": "release-input",
   "publication_resolution": "runtime",
-  "global_revision": 127,
+  "global_revision": 128,
   "edition": 2,
-  "identifier_schema": 1,
-  "correction_ordinal": null,
-  "maintenance_ordinal": 2,
-  "version": "0.1.27.02-beta",
-  "block": "MANT.2",
-  "revision": "R2",
+  "identifier_schema": 2,
+  "correction_ordinal": 0,
+  "maintenance_ordinal": 0,
+  "version": "0.128.2.0-beta",
+  "block": "VER.2",
+  "revision": "R6",
   "summary": [
-    "G127/E02 materializa MANT.2 R2 como mantenimiento coordinado post-G126 antes de VER.2.",
-    "La fase integra Uvicorn 0.53.0, conserva la pareja estable Pydantic/Pydantic Core, resuelve #204/#205 sin merge directo y deja Dependabot limpio antes de la publicación."
+    "G128/E02/C0 materializa VER.2 R6 como primer estado revision-aware v2 prospectivo.",
+    "Legacy/v1 permanecen inmutables; Build continúa separado de VERSION."
   ],
   "changes": [
-    "MANT.2 R2 queda materializado como G127/E02.",
-    "`VERSION` avanza a `0.1.27.02-beta`.",
-    "`uvicorn` avanza de 0.52.4 a 0.53.0.",
-    "`pydantic==2.13.5` y `pydantic_core==2.46.5` permanecen coordinados; no se introduce una prerelease de Pydantic.",
-    "#204 y #205 quedan sustituidos por la integración coordinada del Draft PR #207.",
-    "La política transversal #203 exige checklist real y criterio de cierre en toda Issue nueva mediante 7 Issue Forms y un guard automático.",
-    "G128 queda disponible sin bloque ni VERSION preasignados."
+    "La familia v2 queda fijada como 0.<GLOBAL>.<EDITION>.<CORRECTION>-beta.",
+    "G128 se materializa como 0.128.2.0-beta.",
+    "Edition E02 continúa G087/E01 como estado VER.2 anterior.",
+    "Correction C0 identifica la línea ordinaria y functional_revision=R6 permanece metadata.",
+    "Ledger/registry/manifest/tooling separan snapshot, workflow y publicación runtime."
   ],
   "validation": [
-    "CP2 local: Repository Quality Gate 10 PASS / 0 FAIL; 1618 unittest OK.",
-    "CP2 remoto: Repository Quality Gate #56, Python Compatibility y Dependency Security #24 en success.",
-    "CP3 local: Repository Quality Gate 10 PASS / 0 FAIL; 1621 unittest OK.",
-    "CP3 remoto: Repository Quality Gate #57, Python Compatibility y Dependency Security #25 en success.",
-    "pip check: limpio.",
-    "pip-audit --strict: sin vulnerabilidades conocidas.",
-    "Dependabot: 0 PRs abiertos, 0 ramas dependabot/* y 0 alerts abiertos.",
-    "Quality Gate FULL post-materialización: obligatorio antes del commit de promoción."
+    "CP1–CP6B firmados y auditados remotamente.",
+    "CP6B remoto: Repository Quality Gate, Python Compatibility y CodeQL/Analyze en success.",
+    "Preflight #166 previo al candidato: solo PR #208 abierto; 0 PRs Dependabot y 0 ramas dependabot/*.",
+    "Gate completo local CP7 obligatorio antes del commit firmado."
   ],
   "evidence": [
-    "Issue de fase: #206.",
-    "Draft PR coordinado: #207.",
-    "Política transversal de preflight/limpieza: #166.",
-    "Política de checkpoints remotos y lifecycle de Issues: #203.",
-    "PR Dependabot #204: cerrado como superseded por #207.",
-    "PR Dependabot #205: cerrado como incompatible/superseded por #207.",
-    "Baseline publicado: G126/E01 / v0.1.26.01-beta / PLAN.2 R2.",
-    "Siguiente fase condicionada: VER.2 R6/#164 después de publicar G127 y repetir #166 limpio."
+    "Issue #164.",
+    "Draft PR #208.",
+    "Política #203.",
+    "Preflight #166.",
+    "Baseline publicado G127/E02 / v0.1.27.02-beta / Release 392412590.",
+    "Estado VER.2 histórico previo G087/E01 / v0.0.71.01-beta."
   ],
   "next_step": {
-    "global_revision": 128,
+    "global_revision": 129,
     "revision_aware": null,
     "block": null,
-    "description": "MANT.2 R2/G127-E02 está aceptado localmente y pendiente de integración y publicación. G128 permanece disponible sin candidato, bloque ni VERSION preasignados. Después de publicar G127 debe ejecutarse un preflight fresco #166; solo con resultado limpio podrá iniciar VER.2 R6/#164."
+    "description": "G128/E02/C0 está aceptado localmente para VER.2 R6/#164 y pendiente de integración/publicación. El baseline publicado anterior es MANT.2 R2/G127-E02. G129 permanece libre; tras publicar G128 y repetir #166 limpio corresponde DOC.4 R1/#171."
   }
 }

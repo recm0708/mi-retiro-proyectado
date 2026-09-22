@@ -24,30 +24,30 @@ class TestDOC3R1PublishedMachineState(unittest.TestCase):
         self.assertEqual(2, data["schema_version"])
 
         candidate = data["current_candidate"]
-        self.assertEqual("unassigned", candidate["state"])
-        self.assertIsNone(candidate["global_revision"])
-        self.assertIsNone(candidate["revision_aware"])
-        self.assertIsNone(candidate["block"])
-        self.assertEqual(128, candidate["next_global_available"])
+        self.assertEqual("accepted_pending_integration", candidate["state"])
+        self.assertEqual(128, candidate["global_revision"])
+        self.assertEqual("0.128.2.0-beta", candidate["revision_aware"])
+        self.assertEqual("VER.2", candidate["block"])
+        self.assertEqual(129, candidate["next_global_available"])
         self.assertEqual(164, candidate["planning_issue"])
 
         baseline = data["accepted_baseline"]
-        self.assertEqual(127, baseline["global_revision"])
+        self.assertEqual(128, baseline["global_revision"])
         self.assertEqual(2, baseline["edition"])
         self.assertEqual(
-            "0.1.27.02-beta",
+            "0.128.2.0-beta",
             baseline["revision_aware"],
         )
-        self.assertEqual("MANT.2", baseline["block"])
-        self.assertEqual("R2", baseline["functional_revision"])
+        self.assertEqual("VER.2", baseline["block"])
+        self.assertEqual("R6", baseline["functional_revision"])
 
         active = data["active_phase"]
         self.assertEqual("VER.2", active["block"])
         self.assertEqual("R6", active["revision"])
         self.assertEqual(164, active["issue"])
-        self.assertEqual("in_progress", active["state"])
-        self.assertIsNone(active["global_revision"])
-        self.assertIsNone(active["revision_aware"])
+        self.assertEqual("accepted_pending_integration", active["state"])
+        self.assertEqual(128, active["global_revision"])
+        self.assertEqual("0.128.2.0-beta", active["revision_aware"])
         self.assertEqual(127, active["base_global_revision"])
         self.assertEqual(
             "0.1.27.02-beta",
@@ -72,8 +72,8 @@ class TestDOC3R1PublishedMachineState(unittest.TestCase):
     def test_ledger_preserva_g125_y_estado_actual_g127_e02(self):
         data = json.loads(LEDGER.read_text(encoding="utf-8"))
 
-        self.assertEqual(127, data["accepted_count"])
-        self.assertEqual(128, data["next_global"])
+        self.assertEqual(128, data["accepted_count"])
+        self.assertEqual(129, data["next_global"])
         self.assertEqual(2, data["schema_version"])
         self.assertNotIn("next_global_if_ver2_accepted", data)
         self.assertNotIn("next_candidate_assignment", data)
@@ -97,24 +97,24 @@ class TestDOC3R1PublishedMachineState(unittest.TestCase):
 
         current = data["entries"][-1]
 
-        self.assertEqual(127, current["global_revision"])
-        self.assertEqual("MANT.2", current["block"])
+        self.assertEqual(128, current["global_revision"])
+        self.assertEqual("VER.2", current["block"])
         self.assertEqual(2, current["ordinal"])
         self.assertEqual(2, current["edition"])
-        self.assertEqual("R2", current["functional_revision"])
+        self.assertEqual("R6", current["functional_revision"])
         self.assertEqual(
-            "0.1.27.02-beta",
+            "0.128.2.0-beta",
             current["revision_aware"],
         )
 
     def test_manifest_actual_materializa_mant2_r2_y_deja_g128_libre(self):
         data = json.loads(MANIFEST.read_text(encoding="utf-8"))
-        self.assertEqual("0.1.27.02-beta", data["version"])
-        self.assertEqual("MANT.2", data["block"])
-        self.assertEqual("R2", data["revision"])
+        self.assertEqual("0.128.2.0-beta", data["version"])
+        self.assertEqual("VER.2", data["block"])
+        self.assertEqual("R6", data["revision"])
 
         next_step = data["next_step"]
-        self.assertEqual(128, next_step["global_revision"])
+        self.assertEqual(129, next_step["global_revision"])
         self.assertIsNone(next_step["revision_aware"])
         self.assertIsNone(next_step["block"])
         self.assertIn("G127-E02", next_step["description"])

@@ -150,13 +150,13 @@ class TestNOR3R2RepositoryStructurePolicy(unittest.TestCase):
 
         candidate = registry["current_candidate"]
 
-        self.assertIsNone(candidate["global_revision"])
-        self.assertIsNone(candidate["revision_aware"])
-        self.assertIsNone(candidate["block"])
-        self.assertIsNone(candidate["revision"])
-        self.assertIsNone(candidate["revision_scope"])
-        self.assertEqual("unassigned", candidate["state"])
-        self.assertEqual(128, candidate["next_global_available"])
+        self.assertEqual(128, candidate["global_revision"])
+        self.assertEqual("0.128.2.0-beta", candidate["revision_aware"])
+        self.assertEqual("VER.2", candidate["block"])
+        self.assertEqual("R6", candidate["revision"])
+        self.assertEqual("final_revision_aware_reform", candidate["revision_scope"])
+        self.assertEqual("accepted_pending_integration", candidate["state"])
+        self.assertEqual(129, candidate["next_global_available"])
 
         ids = {
             item["identifier"]: item
@@ -174,19 +174,13 @@ class TestNOR3R2RepositoryStructurePolicy(unittest.TestCase):
             "closed_r2",
             ids["MANT.2"]["status"],
         )
-        self.assertEqual(
-            "in_progress_r6",
-            ids["VER.2"]["status"],
-        )
+        self.assertEqual("accepted_r6_pending_integration", ids["VER.2"]["status"])
 
         baseline = registry["accepted_baseline"]
 
+        self.assertEqual(128, baseline["global_revision"])
         self.assertEqual(
-            127,
-            baseline["global_revision"],
-        )
-        self.assertEqual(
-            "0.1.27.02-beta",
+            "0.128.2.0-beta",
             baseline["revision_aware"],
         )
 
@@ -195,9 +189,9 @@ class TestNOR3R2RepositoryStructurePolicy(unittest.TestCase):
         self.assertEqual("VER.2", active["block"])
         self.assertEqual("R6", active["revision"])
         self.assertEqual(164, active["issue"])
-        self.assertEqual("in_progress", active["state"])
-        self.assertIsNone(active["global_revision"])
-        self.assertIsNone(active["revision_aware"])
+        self.assertEqual("accepted_pending_integration", active["state"])
+        self.assertEqual(128, active["global_revision"])
+        self.assertEqual("0.128.2.0-beta", active["revision_aware"])
 
     def test_pr_policy_permite_candidato_sin_version(self):
         files = [

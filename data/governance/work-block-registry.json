@@ -3,17 +3,17 @@
   "project": "Mi Retiro Proyectado",
   "policy_revision": "NOR.1 R8",
   "current_candidate": {
-    "global_revision": null,
-    "revision_aware": null,
-    "block": null,
-    "revision": null,
-    "revision_scope": null,
-    "state": "unassigned",
-    "next_functional_block_if_accepted": null,
+    "global_revision": 128,
+    "revision_aware": "0.128.2.0-beta",
+    "block": "VER.2",
+    "revision": "R6",
+    "revision_scope": "final_revision_aware_reform",
+    "state": "accepted_pending_integration",
+    "next_functional_block_if_accepted": "DOC.4",
     "next_functional_global_if_accepted": null,
-    "edition": null,
+    "edition": 2,
     "planning_issue": 164,
-    "next_global_available": 128
+    "next_global_available": 129
   },
   "families": [
     {
@@ -502,11 +502,12 @@
       "identifier": "VER.2",
       "family": "VER",
       "kind": "block",
-      "status": "in_progress_r6",
-      "meaning": "Reconciliación revision-aware y promoción. R6 está en ejecución sobre el baseline aceptado G127/E02. El trabajo de R6 no reserva G128 por existir rama, commits o PR; G128 solo se asignará cuando exista un candidato material aceptable.",
-      "evidence": "Issue #164; Draft PR #208; baseline G127/E02; preflight #166 limpio; checkpoints R6 firmados y auditados remotamente.",
+      "status": "accepted_r6_pending_integration",
+      "meaning": "VER.2 R6 materializado como G128/E02/C0 bajo v2; integración/publicación pendientes.",
+      "evidence": "Issue #164; Draft PR #208; G087/E01 histórico; G128/E02/C0 = 0.128.2.0-beta; preflight #166 limpio.",
       "global_refs": [
-        "G087"
+        "G087",
+        "G128"
       ],
       "reusable_for_different_scope": false,
       "active_scope": "R6"
@@ -1029,21 +1030,21 @@
     "block": "VER.2",
     "revision": "R6",
     "issue": 164,
-    "state": "in_progress",
-    "global_revision": null,
-    "revision_aware": null,
+    "state": "accepted_pending_integration",
+    "global_revision": 128,
+    "revision_aware": "0.128.2.0-beta",
     "base_global_revision": 127,
     "base_revision_aware": "0.1.27.02-beta",
     "next_phase_issue": 171
   },
   "accepted_baseline": {
-    "global_revision": 127,
+    "global_revision": 128,
     "edition": 2,
-    "revision_aware": "0.1.27.02-beta",
-    "block": "MANT.2",
-    "functional_revision": "R2",
-    "identifier_schema": 1,
-    "correction_ordinal": null,
-    "maintenance_ordinal": 2
+    "revision_aware": "0.128.2.0-beta",
+    "block": "VER.2",
+    "functional_revision": "R6",
+    "identifier_schema": 2,
+    "correction_ordinal": 0,
+    "maintenance_ordinal": 0
   }
 }

@@ -42,9 +42,9 @@ class TestG114PromotionPostMerge(unittest.TestCase):
         self.assertEqual("VER.2", active["block"])
         self.assertEqual("R6", active["revision"])
         self.assertEqual(164, active["issue"])
-        self.assertEqual("in_progress", active["state"])
-        self.assertIsNone(active["global_revision"])
-        self.assertIsNone(active["revision_aware"])
+        self.assertEqual("accepted_pending_integration", active["state"])
+        self.assertEqual(128, active["global_revision"])
+        self.assertEqual("0.128.2.0-beta", active["revision_aware"])
         self.assertEqual(
             127,
             active["base_global_revision"],

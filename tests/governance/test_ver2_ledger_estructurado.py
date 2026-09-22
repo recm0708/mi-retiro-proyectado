@@ -133,19 +133,10 @@ class TestVer2LedgerEstructurado(
                     "global_revision"
                 ]
             ):
-                self.assertEqual(
-                    1,
-                    entry[
-                        "identifier_schema"
-                    ],
-                )
-
-                self.assertEqual(
-                    "revision-aware-v1",
-                    entry[
-                        "version_format"
-                    ],
-                )
+                expected_schema = 2 if entry["global_revision"] == 128 else 1
+                expected_format = "revision-aware-v2" if entry["global_revision"] == 128 else "revision-aware-v1"
+                self.assertEqual(expected_schema, entry["identifier_schema"])
+                self.assertEqual(expected_format, entry["version_format"])
 
                 self.assertEqual(
                     entry[
@@ -161,11 +152,10 @@ class TestVer2LedgerEstructurado(
                     entry,
                 )
 
-                self.assertIsNone(
-                    entry[
-                        "correction_ordinal"
-                    ]
-                )
+                if entry["global_revision"] == 128:
+                    self.assertEqual(0, entry["correction_ordinal"])
+                else:
+                    self.assertIsNone(entry["correction_ordinal"])
 
                 self.assertIsInstance(
                     entry[
@@ -214,11 +204,11 @@ class TestVer2LedgerEstructurado(
                 ],
             )
 
-    def test_candidato_permanece_sin_asignar(
+    def test_g128_materializado_y_siguiente_candidato_sin_asignar(
         self,
     ):
         self.assertEqual(
-            128,
+            129,
             self.ledger[
                 "next_global"
             ],
@@ -285,7 +275,7 @@ class TestVer2LedgerEstructurado(
 
         altered[
             "entries"
-        ][-1][
+        ][-2][
             "version_format"
         ] = "revision-aware-v2"
 
@@ -345,7 +335,7 @@ class TestVer2LedgerEstructurado(
             "entries"
         ].append(
             {
-                "global_revision": 128,
+                "global_revision": 129,
                 "block": "SYNTHETIC",
                 "ordinal": 1,
                 "edition": 1,
@@ -354,7 +344,7 @@ class TestVer2LedgerEstructurado(
                 "version_format": "revision-aware-v2",
                 "correction_ordinal": 0,
                 "maintenance_ordinal": 0,
-                "revision_aware": "0.128.1.0-beta",
+                "revision_aware": "0.129.1.0-beta",
                 "state": "estado sintético de validación",
                 "anchor": "test-only",
                 "evidence": "test-only",
@@ -363,11 +353,11 @@ class TestVer2LedgerEstructurado(
 
         altered[
             "accepted_count"
-        ] = 128
+        ] = 129
 
         altered[
             "next_global"
-        ] = 129
+        ] = 130
 
         validar_ledger(
             altered

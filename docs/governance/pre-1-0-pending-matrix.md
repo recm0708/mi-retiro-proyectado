@@ -3,21 +3,21 @@
 **Estado:** vigente / documento vivo
 **Último estado publicado:** G127/E02 — MANT.2 R2
 **Versión publicada:** `0.1.27.02-beta`
-**Fase activa:** VER.2 R6 / #164 — sin Global ni `VERSION` preasignados
-**Siguiente Global disponible:** G128, libre y no reservado
+**Fase activa:** VER.2 R6 / #164 — G128/E02/C0 `0.128.2.0-beta` aceptado pendiente de integración/publicación
+**Siguiente Global aritmético:** G129, libre y no reservado
 **Última reconciliación:** 2026-09-21 — CP6A-R1 cerrado; CP6B en curso
 
 Esta matriz es la autoridad tabular del trabajo pendiente hacia `1.0.0.0`. No preasigna Globals futuros. El orden expresa dependencias reales; cada estado material aceptado recibe Global/versión únicamente con candidato validado conforme a `VERSIONING.md`.
 
 Como antecedentes inmediatos preservados, G125/E01 — DOC.3 R1 y G126/E01 — PLAN.2 R2 permanecen en el ledger histórico; el estado publicado vigente es G127/E02 — MANT.2 R2.
 
-El baseline publicado vigente es **G127/E02 — MANT.2 R2** (`0.1.27.02-beta`). VER.2 R6/#164 está en ejecución sin candidato; G128 permanece libre.
+El baseline publicado vigente es **G127/E02 — MANT.2 R2** (`0.1.27.02-beta`). VER.2 R6/#164 materializó **G128/E02/C0** (`0.128.2.0-beta`) como candidato aceptado pendiente de integración/publicación; G129 permanece libre.
 
 ## 1. Reglas
 
 1. G127/E02 — MANT.2 R2 es el último estado publicado e inmutable.
-2. VER.2 R6/#164 está en ejecución sin Global ni `VERSION` preasignados.
-3. G128 permanece libre, sin candidato, bloque ni VERSION asignados.
+2. VER.2 R6/#164 materializó G128/E02/C0 como `0.128.2.0-beta` y está pendiente de integración/publicación.
+3. G129 permanece libre, sin candidato, bloque ni VERSION asignados.
 4. Todo pendiente debe tener owner, clasificación y dependencia explícitos.
 5. Trabajo material nuevo se inserta en todos los árboles afectados antes de continuar.
 6. #166 puede insertar MANT.2 R2+ en cualquier frontera material.
@@ -189,12 +189,13 @@ Cuenta fases materiales top-level aceptadas, no lotes internos. DOC.4 crea nuevo
 ## 12. Invariantes de versionado durante VER.2 R6
 
 ```text
-VERSION = 0.1.27.02-beta
-accepted_baseline = G127/E02 / MANT.2 R2
+VERSION = 0.128.2.0-beta
+accepted_baseline = G128/E02/C0 / VER.2 R6
+published_baseline = G127/E02 / MANT.2 R2
 active_phase = VER.2 R6 / #164
-current_candidate = unassigned
-next_global_available = 128
-G128 = libre / no reservado
+current_candidate = accepted_pending_integration
+next_global_available = 129
+G129 = libre / no reservado
 ```
 
 El ledger v2 registra historia aceptada y candidato; el registry declara el
@@ -203,4 +204,4 @@ snapshot `release-input`; los hechos de publicación se resuelven en runtime.
 
 ## 13. Próxima frontera
 
-VER.2 R6/#164 está en ejecución sobre G127/E02. G128 continúa libre. La siguiente fase material ordinaria es DOC.4 R1/#171 después de publicar VER.2, salvo que #166 detecte trabajo material nuevo y requiera insertar MANT.2 R3+.
+VER.2 R6/#164 materializó G128/E02/C0 (`0.128.2.0-beta`) sobre el baseline publicado G127/E02. G129 continúa libre. La siguiente fase material ordinaria es DOC.4 R1/#171 después de publicar VER.2, salvo que #166 detecte trabajo material nuevo y requiera insertar MANT.2 R3+.

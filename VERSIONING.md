@@ -59,20 +59,11 @@ Un MANT.2 R3+ solo se inserta si #166 detecta trabajo material nuevo.
 
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado revision-aware vigente
-
-- `VERSION` contiene `0.1.27.02-beta` y corresponde a MANT.2 R2 / G127-E02
-  publicado.
-- G127/E02 está integrado en
-  `main@2df33a5c24d1c7cea1a6db91539a92da02c91500`, con tag firmado
-  `v0.1.27.02-beta` y GitHub Release prerelease 392412590.
-- G126/E01 y G125/E01 permanecen como publicaciones históricas anteriores.
-- El preflight #166 post-G127 quedó CLEAN y habilitó VER.2 R6/#164.
-- VER.2 R6 está en ejecución mediante Draft PR #208, sin Global ni `VERSION`
-  preasignados.
-- G128/current_candidate permanece libre, sin bloque, `global_revision`,
-  `revision_aware`, edición ni corrección preasignados.
-- PR, squash, tag o Release que materializan un mismo estado no consumen otro
-  Global.
+- `VERSION` contiene `0.128.2.0-beta` y corresponde a VER.2 R6 / G128-E02-C0.
+- G128 es el primer estado aceptado bajo `revision-aware-v2`.
+- G127/E02 permanece como último estado publicado mediante `v0.1.27.02-beta` y Release 392412590.
+- G087/E01 permanece como Edition histórica anterior de VER.2.
+- G129 es el siguiente Global disponible, sin candidato ni bloque reservado.
 <!-- DOC1-R1-POST-MANT1:END -->
 
 ## 1. Objetivo

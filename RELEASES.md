@@ -1,5 +1,15 @@
 # Registro de versiones y estados del proyecto
 
+<!-- VER2-R6-G128-CANDIDATE:START -->
+## Candidato aceptado G128/E02/C0 — VER.2 R6
+- `VERSION`: `0.128.2.0-beta`.
+- Primer estado materializado con la familia v2 `0.<GLOBAL>.<EDITION>.<CORRECTION>-beta`.
+- Edition E02 continúa G087/E01; `functional_revision=R6`, `correction_ordinal=0`.
+- Aceptado localmente en Draft PR #208; **no publicado todavía**.
+- Baseline publicado: G127/E02 / `v0.1.27.02-beta` / Release 392412590.
+- G129 permanece libre y sin candidato.
+<!-- VER2-R6-G128-CANDIDATE:END -->
+
 <!-- MANT2-R2-G127-PROMOTION:START -->
 ## Publicación G127/E02 — MANT.2 R2
 
@@ -12,8 +22,8 @@
   392412590.
 - #203 institucionalizó checkpoints remotos auditables y commits incrementales.
 - El preflight #166 posterior a la publicación quedó CLEAN.
-- G128 permanece libre y sin candidato.
-- VER.2 R6/#164 está en ejecución mediante Draft PR #208.
+- G128 fue posteriormente materializado por VER.2 R6 como `0.128.2.0-beta`.
+- VER.2 R6/#164 continúa mediante Draft PR #208.
 <!-- MANT2-R2-G127-PROMOTION:END -->
 
 ## Publicación G126/E01 — PLAN.2 R2

@@ -3,22 +3,19 @@
 **Proyecto:** Mi Retiro Proyectado
 **Base auditada:** `7037addd44253e528c77460b678d2b3ccd540dd5`
 **Contador histórico en la base `7037addd`:** **G070**
-**Contador aceptado reconciliado vigente:** **G127**
-**Siguiente Global disponible:** **G128**
-**Siguiente candidato disponible:** **ninguno asignado** — G128 permanece disponible; VER.2 R6 está activo pero todavía no reserva Global ni versión
+**Contador aceptado reconciliado vigente:** **G128**
+**Siguiente Global disponible:** **G129**
+**Estado candidato actual:** **G128/E02/C0 — VER.2 R6 — `0.128.2.0-beta`**, aceptado localmente y pendiente de integración/publicación; G129 queda libre
 
-## Estado vivo post-G127 — VER.2 R6/#164
+## Estado vivo — VER.2 R6 / G128-E02-C0
 
-- MANT.2 R2/#206 está integrado y publicado como **G127/E02**
-  (`0.1.27.02-beta`).
-- `main` publicado de baseline:
-  `2df33a5c24d1c7cea1a6db91539a92da02c91500`.
-- Tag firmado: `v0.1.27.02-beta`.
-- GitHub Release prerelease: 392412590.
+- MANT.2 R2/#206 permanece publicado como **G127/E02** (`0.1.27.02-beta`).
+- `main` publicado de baseline: `2df33a5c24d1c7cea1a6db91539a92da02c91500`.
+- Tag baseline: `v0.1.27.02-beta`; Release 392412590.
 - El preflight post-G127 #166 quedó CLEAN.
-- VER.2 R6/#164 está en ejecución mediante Draft PR #208.
-- CP1–CP6A-R1 están cerrados y auditados.
-- G128 permanece libre, sin candidato, bloque ni `VERSION` preasignados.
+- VER.2 R6/#164 materializó **G128/E02/C0** como `0.128.2.0-beta` en Draft PR #208.
+- G128 está aceptado/versionado localmente y pendiente de integración/publicación.
+- G129 permanece libre, sin candidato, bloque ni `VERSION` preasignados.
 
 <!-- MANT2-R2-G127-PROMOTION:START -->
 ## Publicación MANT.2 R2 / G127-E02
@@ -62,6 +59,7 @@
 | G125 | `0.1.25.01-beta` | DOC.3 R1 — R1 — auditoría documental integral post-MANT.1: estado vigente, gobierno, estructura, historia, coherencia semántica y cierre reproducible | `0.1.25.01-beta` | Issue #154; cierre interno 6e94fbcc1598dff612cb4c676553faa21ff8c831; 173 Markdown auditados y normalizados; 418 archivos textuales de código/configuración auditados; 16 familias / 53 identificadores; Quality Gate FULL 11 PASS / 0 FAIL; 1603 unittest OK; pytest 1643 passed + 7824 subtests; preflight final #166 CLEAN con 0 PRs, 0 Dependabot alerts, 0 PRs Dependabot, pip-audit limpio y npm audit 0 vulnerabilidades; DOC.4/#171 transferido como trabajo diferido. |
 | G126 | `0.1.26.01-beta` | PLAN.2 R2 — R2 — replanificación maestra post-G125 hacia 1.0: grafo canónico, clasificación pre/post-1.0, DOC.4 y auditoría previsional, PERSIST/REP/DEPLOY, programa UX granular dinámico UX.7–UX.x, contrato multiportal #189 y reconciliación integral de gobierno | `0.1.26.01-beta` | Issue #155; rama plan/plan2-r2-replanificacion-maestra; auditoría integral de Issues reconciliada; Quality Gate FULL 11 PASS / 0 FAIL; 1613 unittest OK; pytest 1653 passed + 7913 subtests; 173 Markdown auditados; 17 familias / 78 identificadores; integridad 656 archivos / 84 directorios canónicos; git diff --check limpio; preflight final #166 con main G125 sin cambios, 0 PRs abiertos, 0 Dependabot alerts abiertos, dependency manifests sin cambios, pip check limpio, pip-audit sin vulnerabilidades y contrato npm raíz N/A. |
 | G127 | `0.1.27.02-beta` | MANT.2 R2 — R2 — mantenimiento coordinado post-G126: Uvicorn 0.53.0, resolución de #204/#205, reauditoría Dependabot limpia e institucionalización del checklist obligatorio de Issues | `0.1.27.02-beta` | Issue #206; Draft PR #207; CP1 17d4c498; CP2 1e69029; CP3 9186f4d; pip check/pip-audit verdes; Repository Quality Gate, Python Compatibility y Dependency Security verdes; 0 PRs/ramas/alerts Dependabot abiertos. |
+| G128 | `0.128.2.0-beta` | VER.2 R6 — R6 — reforma final revision-aware v2 | `0.128.2.0-beta` | Issue #164; Draft PR #208; CP1–CP6B remotos verdes; preflight #166 limpio. |
 <!-- LEDGER-G122-G126:END -->
 
 <!-- DOC3-G125-PROMOTION:START -->

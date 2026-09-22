@@ -1,7 +1,7 @@
 # Transparencia del producto
 
 **Estado:** Vigente
-**Versión de aplicación revisada:** `0.1.27.02-beta` — MANT.2 R2/G127-E02 publicado; VER.2 R6/#164 en curso.
+**Versión de aplicación revisada:** `0.128.2.0-beta` — VER.2 R6/G128-E02-C0 aceptado localmente; publicación pendiente.
 **Versión base histórica:** `0.0.25-beta`
 **Versión base histórica preservada:** `0.0.23-beta`
 **Base documental preservada:** GOV.1.3 R4 — 2026-08-17

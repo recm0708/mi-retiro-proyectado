@@ -2,7 +2,7 @@
   "schema_version": 2,
   "project": "Mi Retiro Proyectado",
   "base_commit": "7037addd44253e528c77460b678d2b3ccd540dd5",
-  "accepted_count": 127,
+  "accepted_count": 128,
   "next_candidate": null,
   "historical_tags_immutable": {
     "from": "v0.0.1-beta",
@@ -1913,6 +1913,21 @@
       "state": "R2 — mantenimiento coordinado post-G126: Uvicorn 0.53.0, resolución de #204/#205, reauditoría Dependabot limpia e institucionalización del checklist obligatorio de Issues",
       "anchor": "0.1.27.02-beta",
       "evidence": "Issue #206; Draft PR #207; CP1 17d4c49855e9451833311f49babaa4d284585a87; CP2 1e69029a0b19d0ff1ad6bf37456d1fbcd71ef14a; CP3 9186f4dfecf410cf29606c764532eb438697135e; Uvicorn 0.52.4→0.53.0; Pydantic 2.13.5 + pydantic-core 2.46.5 preservados; pip check PASS; pip-audit --strict sin vulnerabilidades conocidas; Repository Quality Gate, Python Compatibility y Dependency Security verdes; #204/#205 cerrados sin merge directo; 0 PRs/ramas/alerts Dependabot abiertos; política #203 materializada en Issue Forms y protegida por regresión."
+    },
+    {
+      "global_revision": 128,
+      "block": "VER.2",
+      "ordinal": 2,
+      "edition": 2,
+      "functional_revision": "R6",
+      "identifier_schema": 2,
+      "version_format": "revision-aware-v2",
+      "correction_ordinal": 0,
+      "maintenance_ordinal": 0,
+      "revision_aware": "0.128.2.0-beta",
+      "state": "R6 — reforma final revision-aware v2 y separación candidato/integración/publicación",
+      "anchor": "0.128.2.0-beta",
+      "evidence": "Issue #164; Draft PR #208; CP1–CP6B firmados/auditados; preflight #166 limpio; G087/E01 preservado como VER.2 histórico."
     }
   ],
   "excluded": [
@@ -1991,6 +2006,6 @@
   ],
   "reconciled_through_commit": "b97cf61763479b80b8e8724b878089e8bb20fa00",
   "reconciliation_date": "2026-09-19",
-  "next_global": 128,
+  "next_global": 129,
   "next_candidate_block": null
 }

@@ -170,11 +170,10 @@ class TestNOR2R6LedgerData(unittest.TestCase):
             "closed",
             ids["NOR.3"]["status"],
         )
-        self.assertIsNone(
-            registry["current_candidate"]["block"]
-        )
-        self.assertIsNone(
-            registry["current_candidate"]["global_revision"]
+        self.assertEqual("VER.2", registry["current_candidate"]["block"])
+        self.assertEqual(
+            128,
+            registry["current_candidate"]["global_revision"],
         )
 
         matrix = (

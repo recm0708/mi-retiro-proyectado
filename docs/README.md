@@ -1,7 +1,7 @@
 # Índice de documentación
 
 **Estado:** vigente
-**Versión de aplicación:** `0.1.27.02-beta` — MANT.2 R2/G127-E02 publicado; VER.2 R6/#164 en curso; G128 libre sin candidato
+**Versión de aplicación:** `0.128.2.0-beta` — VER.2 R6/G128-E02-C0 aceptado localmente; integración/publicación pendiente; G129 libre
 **Último tag formal legacy:** `v0.0.26-beta`
 **Última actualización transversal:** VER.2 R6/#164 — CP5.1 cerrado; CP6 en curso — 2026-09-21
 **Cierres históricos preservados:** UX.4.6i / PR #34 — 841 pruebas; UX.4.6e R9 — `v0.0.25-beta`
@@ -26,25 +26,23 @@
 <!-- NOR3-G122-PROMOTION:END -->
 
 <!-- POST-NOR3-INTERMEDIATE-SEQUENCE:START -->
-## Estado vigente post-G127 / VER.2 R6 en curso
+## Estado vigente — candidato VER.2 R6 materializado
 
-MANT.2 R2/#206 está cerrado, integrado y publicado como **G127/E02**
-(`0.1.27.02-beta`) sobre
+MANT.2 R2/#206 permanece publicado como **G127/E02** (`0.1.27.02-beta`) sobre
 `main@2df33a5c24d1c7cea1a6db91539a92da02c91500`, mediante PR #207,
 tag firmado `v0.1.27.02-beta` y GitHub Release prerelease 392412590.
 
-El preflight #166 posterior a G127/E02 quedó **CLEAN** y habilitó
-VER.2 R6/#164.
+El preflight #166 posterior a G127 quedó CLEAN. VER.2 R6/#164 alcanzó un
+candidato material aceptable y **G128/E02/C0 queda materializado localmente
+como `0.128.2.0-beta`** dentro del Draft PR #208.
 
-VER.2 R6/#164 está en ejecución mediante la rama
-`ver/ver2-r6-revision-aware` y el Draft PR #208. CP1–CP5.1 están
-cerrados y auditados remotamente.
+G128 está aceptado/versionado pero todavía **no está publicado**: faltan el
+checkpoint firmado, auditoría remota, integración a `main`, revalidación,
+tag firmado y GitHub Release prerelease.
 
-**G128 permanece libre** y sin candidato, bloque ni `VERSION` preasignados.
-La existencia de rama, commits, checkpoints o PR no consume un Global.
-
-La siguiente fase material ordinaria después de publicar VER.2 es
-**DOC.4 R1 / #171**, salvo inserción obligatoria de MANT.2 por #166.
+**G129 es el siguiente Global aritmético** y permanece libre, sin candidato,
+bloque ni `VERSION` preasignados. Después de publicar VER.2 y repetir #166
+limpio corresponde **DOC.4 R1 / #171**.
 <!-- POST-NOR3-INTERMEDIATE-SEQUENCE:END -->
 
 
@@ -52,7 +50,7 @@ Este archivo es el punto de entrada para la documentación técnica, funcional, 
 
 ## Estado de normalización del repositorio
 
-**Estado actual:** MANT.2 R2/#206 está cerrado/publicado como G127/E02 (`0.1.27.02-beta`); el preflight post-G127 #166 quedó CLEAN; VER.2 R6/#164 está en ejecución mediante Draft PR #208 y G128 permanece libre, sin candidato ni `VERSION` preasignados.
+**Estado actual:** G127/E02 permanece publicado como `0.1.27.02-beta`; VER.2 R6/#164 materializó G128/E02/C0 como `0.128.2.0-beta` en Draft PR #208, pendiente de integración/publicación; G129 permanece libre.
 
 Estado de la fase:
 
