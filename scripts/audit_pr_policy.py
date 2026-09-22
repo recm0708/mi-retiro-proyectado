@@ -15,6 +15,7 @@ responsabilidad adicional del ruleset de la rama.
 from __future__ import annotations
 
 import argparse
+import json
 import re
 import subprocess
 import sys
@@ -28,9 +29,19 @@ TRUSTED_BOTS = {
     "dependabot[bot]",
 }
 
+LEDGER_PATH = (
+    "data/governance/"
+    "pre-1-0-revision-ledger.json"
+)
+
+MANIFEST_PATH = (
+    "data/governance/"
+    "release-publication-manifest.json"
+)
+
 REVISION_METADATA_FILES = {
-    "data/governance/pre-1-0-revision-ledger.json",
-    "data/governance/release-publication-manifest.json",
+    LEDGER_PATH,
+    MANIFEST_PATH,
 }
 
 REVISION_STATE_FILES = {
@@ -176,13 +187,186 @@ def merge_commits(
     )
 
 
+def json_from_ref(
+    ref: str,
+    path: str,
+) -> dict:
+    """Lee un objeto JSON versionado desde una referencia Git."""
+
+    result = run_git(
+        "show",
+        f"{ref}:{path}",
+    )
+
+    if result.returncode != 0:
+        raise RuntimeError(
+            f"No se pudo leer {path} desde {ref}:\n"
+            + result.stdout
+            + result.stderr
+        )
+
+    try:
+        data = json.loads(
+            result.stdout
+        )
+    except json.JSONDecodeError as error:
+        raise RuntimeError(
+            f"{path} en {ref} no contiene JSON válido."
+        ) from error
+
+    if not isinstance(
+        data,
+        dict,
+    ):
+        raise RuntimeError(
+            f"{path} en {ref} debe contener un objeto JSON."
+        )
+
+    return data
+
+
+def revision_state_snapshot(
+    ledger: dict,
+) -> dict:
+    """Extrae solo el estado material coordinado con publicación."""
+
+    entries = ledger.get(
+        "entries"
+    )
+
+    current = (
+        entries[-1]
+        if isinstance(entries, list)
+        and entries
+        and isinstance(entries[-1], dict)
+        else {}
+    )
+
+    next_global = ledger.get(
+        "next_global"
+    )
+
+    if next_global is None:
+        next_global = ledger.get(
+            "next_global_if_ver2_accepted"
+        )
+
+    edition = current.get(
+        "edition"
+    )
+
+    if edition is None:
+        edition = current.get(
+            "ordinal"
+        )
+
+    return {
+        "accepted_count": ledger.get(
+            "accepted_count"
+        ),
+        "next_global": next_global,
+        "next_candidate": ledger.get(
+            "next_candidate"
+        ),
+        "next_candidate_block": ledger.get(
+            "next_candidate_block"
+        ),
+        "current_entry": {
+            "global_revision": current.get(
+                "global_revision"
+            ),
+            "block": current.get(
+                "block"
+            ),
+            "edition": edition,
+            "functional_revision": current.get(
+                "functional_revision"
+            ),
+            "revision_aware": current.get(
+                "revision_aware"
+            ),
+        },
+    }
+
+
+def ledger_preserves_revision_state(
+    base_ledger: dict,
+    head_ledger: dict,
+) -> bool:
+    """Indica si un cambio de ledger conserva el estado material."""
+
+    return (
+        revision_state_snapshot(
+            base_ledger
+        )
+        == revision_state_snapshot(
+            head_ledger
+        )
+    )
+
+
+def manifest_release_snapshot(
+    manifest: dict,
+) -> dict:
+    """Extrae solo el contenido que determina las notas del Release."""
+
+    return {
+        "version": manifest.get(
+            "version"
+        ),
+        "block": manifest.get(
+            "block"
+        ),
+        "revision": manifest.get(
+            "revision"
+        ),
+        "summary": manifest.get(
+            "summary"
+        ),
+        "changes": manifest.get(
+            "changes"
+        ),
+        "validation": manifest.get(
+            "validation"
+        ),
+        "evidence": manifest.get(
+            "evidence"
+        ),
+        "next_step": manifest.get(
+            "next_step"
+        ),
+    }
+
+
+def manifest_preserves_release_snapshot(
+    base_manifest: dict,
+    head_manifest: dict,
+) -> bool:
+    """Indica si una migración conserva el Release input inmutable."""
+
+    return (
+        manifest_release_snapshot(
+            base_manifest
+        )
+        == manifest_release_snapshot(
+            head_manifest
+        )
+    )
+
+
 def revision_state_errors(
     files: list[str],
+    *,
+    base: str | None = None,
+    head: str | None = None,
 ) -> list[str]:
-    """Valida que el cambio respete el estado revision-aware esperado."""
+    """Valida promoción de VERSION sin acoplar candidato y manifest."""
+
     changed = (
         REVISION_STATE_FILES
-        & set(files)
+        & set(
+            files
+        )
     )
 
     if not changed:
@@ -199,31 +383,46 @@ def revision_state_errors(
                 "Una promoción revision-aware que modifica "
                 "VERSION debe actualizar ledger y manifiesto. "
                 "Faltan: "
-                + ", ".join(missing)
+                + ", ".join(
+                    missing
+                )
             ]
 
         return []
 
-    metadata_changed = (
-        REVISION_METADATA_FILES
-        & changed
-    )
+    # Con VERSION estable, el ledger puede evolucionar
+    # independientemente: contiene candidato/estado aceptado,
+    # no el snapshot de notas del Release.
+    if MANIFEST_PATH not in changed:
+        return []
 
     if (
-        metadata_changed
-        and metadata_changed
-        != REVISION_METADATA_FILES
+        base is None
+        or head is None
     ):
-        missing = sorted(
-            REVISION_METADATA_FILES
-            - metadata_changed
-        )
-
         return [
-            "Los metadatos revision-aware de candidato deben "
-            "cambiar de forma coordinada cuando VERSION "
-            "permanece estable. Faltan: "
-            + ", ".join(missing)
+            "Un cambio del manifest con VERSION estable "
+            "requiere base y head para comprobar que el "
+            "snapshot de Release permanece inmutable."
+        ]
+
+    base_manifest = json_from_ref(
+        base,
+        MANIFEST_PATH,
+    )
+
+    head_manifest = json_from_ref(
+        head,
+        MANIFEST_PATH,
+    )
+
+    if not manifest_preserves_release_snapshot(
+        base_manifest,
+        head_manifest,
+    ):
+        return [
+            "El contenido del snapshot de Release no puede "
+            "cambiar mientras VERSION permanece estable."
         ]
 
     return []
@@ -348,7 +547,11 @@ def audit_pr(
     )
 
     errors.extend(
-        revision_state_errors(files)
+        revision_state_errors(
+            files,
+            base=base,
+            head=head,
+        )
     )
 
     if merges:

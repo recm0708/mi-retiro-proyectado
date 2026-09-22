@@ -1,7 +1,7 @@
 # Proceso de release
 
 **Estado:** Vigente
-**Versión de aplicación:** `0.1.27.02-beta` — MANT.2 R2/G127-E02 aceptado localmente; publicación pendiente; G128 libre sin candidato.
+**Versión de aplicación:** `0.128.2.0-beta` — VER.2 R6/G128-E02-C0 aceptado localmente; integración/publicación pendiente; G129 libre.
 **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
 **Último tag formal legacy:** `v0.0.26-beta`
 **Versión base histórica preservada:** `0.0.23-beta`
@@ -29,54 +29,33 @@
 <!-- NOR3-G122-PROMOTION:END -->
 
 <!-- POST-NOR3-INTERMEDIATE-SEQUENCE:START -->
-## Estado vigente post-G126 / MANT.2 R2 — candidato G127/E02
+## Estado vigente — candidato VER.2 R6 materializado
 
-PLAN.2 R2/#155 permanece cerrado, integrado y publicado como **G126/E01**
-(`0.1.26.01-beta`) sobre `main@1819f59f95731dc652ad62d84d6a5ad87ad3f8a4`,
-mediante PR #202, tag firmado `v0.1.26.01-beta` y GitHub Release prerelease 390399947.
+MANT.2 R2/#206 permanece publicado como **G127/E02** (`0.1.27.02-beta`) sobre
+`main@2df33a5c24d1c7cea1a6db91539a92da02c91500`, mediante PR #207,
+tag firmado `v0.1.27.02-beta` y GitHub Release prerelease 392412590.
 
-El preflight #166 previo a VER.2 detectó #204/#205 e insertó MANT.2 R2/#206.
-La integración coordinada acepta `uvicorn 0.53.0`, conserva
-`pydantic==2.13.5` + `pydantic_core==2.46.5`, cierra #204/#205 sin merge
-directo, deja 0 PRs Dependabot, 0 ramas `dependabot/*` y 0 alerts abiertos, e
-institucionaliza mediante #203 el checklist obligatorio de Issues.
+El preflight #166 posterior a G127 quedó CLEAN. VER.2 R6/#164 alcanzó un
+candidato material aceptable y **G128/E02/C0 queda materializado localmente
+como `0.128.2.0-beta`** dentro del Draft PR #208.
 
-MANT.2 R2/#206 queda **materializado y aceptado localmente como G127/E02**
-(`0.1.27.02-beta`) en el Draft PR #207. Integración, revalidación de `main`, tag firmado
-y GitHub Release prerelease todavía están pendientes.
+G128 está aceptado/versionado pero todavía **no está publicado**: faltan el
+checkpoint firmado, auditoría remota, integración a `main`, revalidación,
+tag firmado y GitHub Release prerelease.
 
-**G128 permanece libre** y sin candidato, bloque ni `VERSION` preasignados.
-
-La continuidad material vigente es:
-
-1. **publicar MANT.2 R2 / G127-E02 / #206**;
-2. **preflight fresco #166** después de la publicación;
-3. **VER.2 R6 / #164** solo si #166 queda limpio;
-4. **DOC.4 R1 / #171**;
-5. **#142** y derivados funcionales obligatorios;
-6. **PERSIST.1 / #130 → REP.1 / #143 → DEPLOY.1 / #157**;
-7. **UX.7→UX.x / #129** bajo #189;
-8. **SEC.2 R7 → rendimiento → A11Y.2 → REV.1 → #153 → DOC.1 R6 → QA.1 → REL.1**.
+**G129 es el siguiente Global aritmético** y permanece libre, sin candidato,
+bloque ni `VERSION` preasignados. Después de publicar VER.2 y repetir #166
+limpio corresponde **DOC.4 R1 / #171**.
 <!-- POST-NOR3-INTERMEDIATE-SEQUENCE:END -->
 
 
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado de publicación vigente
-
-- `VERSION` materializa `0.1.27.02-beta` para MANT.2 R2/G127-E02 aceptado localmente.
-- G126/E01 está integrado/publicado en
-  `main@1819f59f95731dc652ad62d84d6a5ad87ad3f8a4` mediante tag firmado
-  `v0.1.26.01-beta` y GitHub Release prerelease 390399947.
-- G125/E01, G124/E13 y G123/E01 permanecen como betas anteriores publicadas.
-- MANT.2 R2/#206 está aceptado localmente como G127/E02 (`0.1.27.02-beta`), pendiente de publicación.
-- G128 permanece libre, sin candidato, bloque ni VERSION.
-- VER.2 R6/#164 solo podrá iniciar después de publicar MANT.2 R2 y repetir #166 limpio.
-- PERSIST.1 permanece planificado detrás de
-  VER.2 → DOC.4 → #142/derivados.
-- La automatización no crea ni firma tags.
-- Los tags publicados permanecen inmutables; cualquier tag posterior exige
-  integración, revalidación de `main` y firma local.
-- Un Release incompatible falla cerrado y solo HTTP 404 autoriza creación.
+- `VERSION` materializa `0.128.2.0-beta` para VER.2 R6/G128-E02-C0.
+- G128 está aceptado localmente pero aún no tiene tag ni GitHub Release.
+- G127/E02 permanece publicado mediante `v0.1.27.02-beta` / Release 392412590.
+- G129 permanece libre, sin candidato, bloque ni VERSION.
+- Los tags publicados permanecen inmutables.
 <!-- DOC1-R1-POST-MANT1:END -->
 
 Este procedimiento complementa `VERSIONING.md`, `RELEASES.md`, `CHANGELOG.md`, `GOVERNANCE.md`, `LICENSE`, `THIRD_PARTY_NOTICES.md`, `docs/governance/licensing-and-distribution.md`, `docs/archive/governance/pre-1-0-versioning-audit.md`, `docs/governance/pre-1-0-revision-ledger.md`, `docs/archive/governance/ver2-revision-decision-matrix.md`, `data/governance/pre-1-0-revision-ledger.json` y `docs/governance/master-plan-to-1-0.md`.
@@ -91,10 +70,11 @@ La historia beta publicada conserva la familia legacy:
 0.0.N-beta
 ```
 
-Los estados beta nuevos posteriores a VER.2 usan:
+Los estados revision-aware v1 ya publicados permanecen inmutables. Los
+estados beta prospectivos desde G128 usan:
 
 ```text
-0.GG.RR.EE-beta
+0.<GLOBAL>.<EDITION>.<CORRECTION>-beta
 ```
 
 La primera versión oficial objetivo usa cuatro componentes y se prevé inicialmente como `1.0.0.0`.
@@ -117,9 +97,7 @@ Sí puede consumir un nuevo `G` un estado de mantenimiento, seguridad, gobierno,
 
 El candidato reserva el siguiente número global, pero ese número solo queda consumido después del cierre satisfactorio. Si falla, se corrige conservando el mismo identificador reservado.
 
-La revisión funcional (`R#`) y el ordinal aceptado (`E##`) no se consideran equivalentes por definición. Cuando una revisión intermedia no consume Global, el ledger puede declarar `functional_revision`; el manifiesto de publicación usa ese valor para mostrar el nombre funcional correcto. DEV.2 R5 = G118/E04 y DEV.2 R6 = G119/E05 son precedentes
-canónicos de revisiones funcionales cuyo ordinal aceptado difiere de la
-revisión funcional. El último estado cerrado/publicado es PLAN.2 R2 = G126/E01 (`0.1.26.01-beta`), integrado en `main@1819f59f95731dc652ad62d84d6a5ad87ad3f8a4` y publicado mediante `v0.1.26.01-beta`. G125/E01 permanece como publicación anterior. MANT.2 R2/#206 está activo sin candidato revision-aware y G127 es el siguiente Global disponible, libre y sin bloque reservado. Después de publicar MANT.2 R2 y repetir #166 limpio corresponde VER.2 R6/#164; PERSIST.1 permanece detrás de VER.2 → DOC.4 → #142/derivados. La ola UX final es dinámica, UX.7→UX.x, bajo #129/#189.
+La revisión funcional y Edition no son equivalentes por definición; `functional_revision` permanece como metadata. DEV.2 R5 = G118/E04 y DEV.2 R6 = G119/E05 siguen siendo precedentes históricos. El último estado publicado continúa siendo MANT.2 R2 = G127/E02 (`0.1.27.02-beta`), integrado en `main@2df33a5c24d1c7cea1a6db91539a92da02c91500`, con tag firmado `v0.1.27.02-beta` y GitHub Release prerelease 392412590. VER.2 R6/#164 ya materializó y validó local/remotamente G128/E02/C0 (`0.128.2.0-beta`) mediante PR #208, listo para integración; G129 permanece libre. PERSIST.1 continúa detrás de VER.2 → DOC.4 → #142/derivados; la ola UX final es UX.7→UX.x bajo #129/#189.
 
 ## 3. Precondiciones
 
@@ -160,7 +138,7 @@ Cuando una fase requiere validación manual, esa aceptación debe registrarse an
 Cuando el alcance está listo para gate:
 
 1. confirmar el último estado aceptado del ledger;
-2. reservar el siguiente `G` y el `EE` correspondiente al bloque;
+2. reservar el siguiente `G` y determinar Edition/Correction según el contrato v2;
 3. construir el identificador según `VERSIONING.md`;
 4. actualizar `VERSION` como **candidato**;
 5. actualizar únicamente las superficies de estado vigente y los documentos materialmente afectados;

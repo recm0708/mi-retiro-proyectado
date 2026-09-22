@@ -47,71 +47,251 @@ def _validate_text_list(data: dict, field: str, errors: list[str]) -> None:
         errors.append(f"{field} solo puede contener texto no vacío.")
 
 
-def validate_manifest(manifest: dict, version: str, ledger: dict) -> list[str]:
-    """Comprueba estructura y campos obligatorios del manifiesto de publicación."""
-    errors = validate_version_against_ledger(version, ledger)
+def validate_manifest(
+    manifest: dict,
+    version: str,
+    ledger: dict,
+) -> list[str]:
+    """Valida el snapshot estable usado para generar notas de release."""
 
-    if manifest.get("schema_version") != 1:
-        errors.append("schema_version debe ser 1.")
+    errors = validate_version_against_ledger(
+        version,
+        ledger,
+    )
 
-    if manifest.get("version") != version:
+    if manifest.get(
+        "schema_version"
+    ) != 2:
+        errors.append(
+            "schema_version debe ser 2."
+        )
+
+    if manifest.get(
+        "snapshot_role"
+    ) != "release-input":
+        errors.append(
+            "snapshot_role debe ser 'release-input'."
+        )
+
+    if manifest.get(
+        "publication_resolution"
+    ) != "runtime":
+        errors.append(
+            "publication_resolution debe ser 'runtime'."
+        )
+
+    if manifest.get(
+        "version"
+    ) != version:
         errors.append(
             "El manifiesto no corresponde a VERSION: "
             f"{manifest.get('version')!r} != {version!r}."
         )
 
-    global_revision, edition = parse_revision_aware(version)
+    global_revision, edition = (
+        parse_revision_aware(
+            version
+        )
+    )
+
+    if manifest.get(
+        "global_revision"
+    ) != global_revision:
+        errors.append(
+            "global_revision del manifest no coincide con VERSION."
+        )
+
+    if manifest.get(
+        "edition"
+    ) != edition:
+        errors.append(
+            "edition del manifest no coincide con VERSION."
+        )
+
     entries = [
         entry
-        for entry in ledger["entries"]
-        if int(entry["global_revision"]) == global_revision
+        for entry in ledger[
+            "entries"
+        ]
+        if int(
+            entry[
+                "global_revision"
+            ]
+        )
+        == global_revision
     ]
 
-    if len(entries) != 1:
+    if len(
+        entries
+    ) != 1:
         errors.append(
-            f"Debe existir una única entrada G{global_revision:03d}."
+            f"Debe existir una única entrada "
+            f"G{global_revision:03d}."
         )
     else:
-        entry = entries[0]
-        if manifest.get("block") != entry.get("block"):
-            errors.append(
-                "El bloque del manifiesto no coincide con el ledger."
-            )
+        entry = entries[
+            0
+        ]
+
         expected_revision = str(
-            entry.get("functional_revision")
-            or f"R{int(entry['ordinal'])}"
+            entry.get(
+                "functional_revision"
+            )
+            or f"R{int(entry['edition'])}"
         )
-        if manifest.get("revision") != expected_revision:
-            errors.append(
-                f"La revisión esperada es {expected_revision}."
-            )
-        if int(entry["ordinal"]) != edition:
-            errors.append(
-                f"E{edition:02d} no coincide con el ordinal "
-                f"{entry['ordinal']} del bloque."
-            )
 
-    for field in ("summary", "changes", "validation", "evidence"):
-        _validate_text_list(manifest, field, errors)
-
-    next_step = manifest.get("next_step")
-    if not isinstance(next_step, dict):
-        errors.append("next_step debe ser un objeto.")
-    else:
-        expected = {
-            "global_revision": int(ledger["next_global"]),
-            "revision_aware": ledger.get("next_candidate"),
-            "block": ledger.get("next_candidate_block"),
+        expected_fields = {
+            "block": entry.get(
+                "block"
+            ),
+            "revision": expected_revision,
+            "identifier_schema": entry.get(
+                "identifier_schema"
+            ),
+            "correction_ordinal": entry.get(
+                "correction_ordinal"
+            ),
+            "maintenance_ordinal": entry.get(
+                "maintenance_ordinal"
+            ),
         }
-        for field, expected_value in expected.items():
-            if next_step.get(field) != expected_value:
+
+        for field, expected_value in (
+            expected_fields.items()
+        ):
+            if manifest.get(
+                field
+            ) != expected_value:
                 errors.append(
-                    f"next_step.{field}={next_step.get(field)!r}; "
-                    f"se esperaba {expected_value!r}."
+                    f"{field} del manifest no coincide "
+                    "con el ledger."
                 )
-        description = next_step.get("description")
-        if not isinstance(description, str) or not description.strip():
-            errors.append("next_step.description debe contener texto.")
+
+        if int(
+            entry[
+                "edition"
+            ]
+        ) != edition:
+            errors.append(
+                f"E{edition:02d} no coincide con "
+                f"edition={entry['edition']} del ledger."
+            )
+
+    for field in (
+        "summary",
+        "changes",
+        "validation",
+        "evidence",
+    ):
+        _validate_text_list(
+            manifest,
+            field,
+            errors,
+        )
+
+    next_step = manifest.get(
+        "next_step"
+    )
+
+    if not isinstance(
+        next_step,
+        dict,
+    ):
+        errors.append(
+            "next_step debe ser un objeto."
+        )
+    else:
+        snapshot_next_global = (
+            next_step.get(
+                "global_revision"
+            )
+        )
+
+        if (
+            not isinstance(
+                snapshot_next_global,
+                int,
+            )
+            or snapshot_next_global
+            != global_revision + 1
+        ):
+            errors.append(
+                "next_step.global_revision debe ser "
+                "el siguiente Global del snapshot."
+            )
+
+        next_revision = next_step.get(
+            "revision_aware"
+        )
+
+        next_block = next_step.get(
+            "block"
+        )
+
+        if (
+            next_revision is None
+        ) != (
+            next_block is None
+        ):
+            errors.append(
+                "next_step.revision_aware y block "
+                "deben ser ambos nulos o ambos definidos."
+            )
+
+        if next_revision is not None:
+            try:
+                (
+                    candidate_global,
+                    _candidate_edition,
+                ) = parse_revision_aware(
+                    str(
+                        next_revision
+                    )
+                )
+            except ValueError as error:
+                errors.append(
+                    str(
+                        error
+                    )
+                )
+            else:
+                if (
+                    candidate_global
+                    != snapshot_next_global
+                ):
+                    errors.append(
+                        "El Global del next_step no coincide "
+                        "con revision_aware."
+                    )
+
+        description = next_step.get(
+            "description"
+        )
+
+        if (
+            not isinstance(
+                description,
+                str,
+            )
+            or not description.strip()
+        ):
+            errors.append(
+                "next_step.description debe contener texto."
+            )
+
+    for forbidden in (
+        "publication_state",
+        "published_commit",
+        "tag_object",
+        "release_id",
+        "published_at",
+    ):
+        if forbidden in manifest:
+            errors.append(
+                "El manifest release-input no debe "
+                "persistir hechos runtime: "
+                + forbidden
+            )
 
     return errors
 

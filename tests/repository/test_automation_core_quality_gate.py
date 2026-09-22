@@ -338,7 +338,7 @@ class TestAutomationCoreQualityGate(unittest.TestCase):
             ROOT / "data" / "governance" / "pre-1-0-revision-ledger.json"
         )
         self.assertEqual(
-            ledger["next_global_if_ver2_accepted"],
+            ledger["next_global"],
             metadata["next_global"],
         )
 

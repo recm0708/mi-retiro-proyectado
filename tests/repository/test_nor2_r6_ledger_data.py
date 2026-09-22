@@ -31,11 +31,11 @@ class TestNOR2R6LedgerData(unittest.TestCase):
 
     def test_invariantes_del_ledger(self):
         raw = json.loads(NEW.read_text(encoding="utf-8"))
-        self.assertEqual(1, raw["schema_version"])
+        self.assertEqual(2, raw["schema_version"])
         accepted = raw["accepted_count"]
         self.assertGreaterEqual(accepted, 109)
         self.assertEqual(accepted, len(raw["entries"]))
-        self.assertEqual(accepted + 1, raw["next_global_if_ver2_accepted"])
+        self.assertNotIn("next_global_if_ver2_accepted", raw)
         self.assertEqual(accepted + 1, raw["next_global"])
         globales = [item["global_revision"] for item in raw["entries"]]
         self.assertEqual(list(range(1, accepted + 1)), globales)
@@ -170,11 +170,10 @@ class TestNOR2R6LedgerData(unittest.TestCase):
             "closed",
             ids["NOR.3"]["status"],
         )
-        self.assertIsNone(
-            registry["current_candidate"]["block"]
-        )
-        self.assertIsNone(
-            registry["current_candidate"]["global_revision"]
+        self.assertEqual("VER.2", registry["current_candidate"]["block"])
+        self.assertEqual(
+            128,
+            registry["current_candidate"]["global_revision"],
         )
 
         matrix = (

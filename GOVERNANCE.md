@@ -3,7 +3,7 @@
 **Proyecto:** Mi Retiro Proyectado
 **Estado:** vigente desde GOV.1.2
 **Fecha de adopción:** 2026-08-18
-**Última revisión de estado:** MANT.2 R2/#206 aceptado localmente como G127/E02 (`0.1.27.02-beta`), publicación pendiente; G128 libre — 2026-09-19
+**Última revisión de estado:** VER.2 R6/#164 materializado como G128/E02/C0 (`0.128.2.0-beta`), pendiente de integración/publicación; G129 libre — 2026-09-21
 
 <!-- NOR3-G122-PROMOTION:START -->
 ## Registro histórico — promoción G122-E01 post-NOR.3
@@ -25,51 +25,33 @@
 <!-- NOR3-G122-PROMOTION:END -->
 
 <!-- POST-NOR3-INTERMEDIATE-SEQUENCE:START -->
-## Estado vigente post-G126 / MANT.2 R2 — candidato G127/E02
+## Estado vigente — candidato VER.2 R6 materializado
 
-PLAN.2 R2/#155 permanece cerrado, integrado y publicado como **G126/E01**
-(`0.1.26.01-beta`) sobre `main@1819f59f95731dc652ad62d84d6a5ad87ad3f8a4`,
-mediante PR #202, tag firmado `v0.1.26.01-beta` y GitHub Release prerelease 390399947.
+MANT.2 R2/#206 permanece publicado como **G127/E02** (`0.1.27.02-beta`) sobre
+`main@2df33a5c24d1c7cea1a6db91539a92da02c91500`, mediante PR #207,
+tag firmado `v0.1.27.02-beta` y GitHub Release prerelease 392412590.
 
-El preflight #166 previo a VER.2 detectó #204/#205 e insertó MANT.2 R2/#206.
-La integración coordinada acepta `uvicorn 0.53.0`, conserva
-`pydantic==2.13.5` + `pydantic_core==2.46.5`, cierra #204/#205 sin merge
-directo, deja 0 PRs Dependabot, 0 ramas `dependabot/*` y 0 alerts abiertos, e
-institucionaliza mediante #203 el checklist obligatorio de Issues.
+El preflight #166 posterior a G127 quedó CLEAN. VER.2 R6/#164 alcanzó un
+candidato material aceptable y **G128/E02/C0 queda materializado localmente
+como `0.128.2.0-beta`** dentro del Draft PR #208.
 
-MANT.2 R2/#206 queda **materializado y aceptado localmente como G127/E02**
-(`0.1.27.02-beta`) en el Draft PR #207. Integración, revalidación de `main`, tag firmado
-y GitHub Release prerelease todavía están pendientes.
+G128 está aceptado/versionado pero todavía **no está publicado**: faltan el
+checkpoint firmado, auditoría remota, integración a `main`, revalidación,
+tag firmado y GitHub Release prerelease.
 
-**G128 permanece libre** y sin candidato, bloque ni `VERSION` preasignados.
-
-La continuidad material vigente es:
-
-1. **publicar MANT.2 R2 / G127-E02 / #206**;
-2. **preflight fresco #166** después de la publicación;
-3. **VER.2 R6 / #164** solo si #166 queda limpio;
-4. **DOC.4 R1 / #171**;
-5. **#142** y derivados funcionales obligatorios;
-6. **PERSIST.1 / #130 → REP.1 / #143 → DEPLOY.1 / #157**;
-7. **UX.7→UX.x / #129** bajo #189;
-8. **SEC.2 R7 → rendimiento → A11Y.2 → REV.1 → #153 → DOC.1 R6 → QA.1 → REL.1**.
+**G129 es el siguiente Global aritmético** y permanece libre, sin candidato,
+bloque ni `VERSION` preasignados. Después de publicar VER.2 y repetir #166
+limpio corresponde **DOC.4 R1 / #171**.
 <!-- POST-NOR3-INTERMEDIATE-SEQUENCE:END -->
 
 
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado de gobierno vigente
-
-- `VERSION` sigue siendo la fuente única y materializa `0.1.27.02-beta` para MANT.2 R2 / G127-E02.
-- PLAN.2 R2/#155 está cerrado/publicado como G126/E01 mediante `v0.1.26.01-beta`.
-- DOC.3 R1/G125 permanece preservado como publicación anterior.
-- MANT.2 R2/#206 está aceptado localmente como G127/E02; #204/#205 quedaron cerrados como sustituidos por #207.
-- G128 permanece libre y `current_candidate` sigue sin asignar.
-- VER.2 R6/#164 permanece bloqueado hasta publicar MANT.2 R2 y repetir #166 limpio.
-- DOC.4/#171 queda después de VER.2; #142/derivados preceden PERSIST.1.
-- El programa UX se gobierna por #129: baseline UX.7–UX.32, expansión UX.33+
-  y sincronización visual multiportal obligatoria mediante #189.
-- Todo tag formal futuro exige integración, revalidación, firma y publicación
-  gobernada conforme a REL.GOV.1 y #166.
+- `VERSION` materializa `0.128.2.0-beta` para VER.2 R6 / G128-E02-C0.
+- G128 está aceptado localmente y pendiente de integración/publicación.
+- G127/E02 / MANT.2 R2 permanece como último estado publicado.
+- G129 permanece libre y sin candidato.
+- DOC.4/#171 queda después de publicar VER.2 y repetir #166.
 <!-- DOC1-R1-POST-MANT1:END -->
 
 ## 1. Propósito
@@ -237,7 +219,8 @@ La política aplicable está en `VERSIONING.md`.
 
 - `VERSION` es la fuente canónica.
 - Los tags formales empiezan con `v`.
-- La familia `0.0.N-beta` es legacy histórica; los estados beta nuevos usan `0.GG.RR.EE-beta` conforme a VER.2 y al ledger reconciliado.
+- La familia `0.0.N-beta` es legacy histórica y la revision-aware v1 publicada permanece inmutable; los estados beta prospectivos desde G128 usan `0.<GLOBAL>.<EDITION>.<CORRECTION>-beta` conforme a VER.2.
+- Ancla histórica v1: la política anterior decía que los estados beta nuevos usan `0.GG.RR.EE-beta`; esa formulación se conserva solo para regresión histórica y queda sustituida prospectivamente por v2 desde G128.
 - La primera versión oficial objetivo es `1.0.0.0`, después de cerrar todos los gates del plan maestro.
 - Las versiones oficiales usan `MAYOR.MENOR.PARCHE.REVISIÓN`; la cuarta posición identifica una revisión/hotfix.
 - El Build es un identificador independiente de seis dígitos para artefactos oficiales reproducibles; no forma parte de `VERSION` ni del tag y no se incrementa por commit.

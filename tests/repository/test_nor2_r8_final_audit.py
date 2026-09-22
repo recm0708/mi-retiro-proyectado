@@ -136,7 +136,7 @@ class TestNOR2R8FinalAudit(unittest.TestCase):
         )
 
         self.assertEqual(
-            1,
+            2,
             raw["schema_version"],
         )
 
@@ -156,9 +156,9 @@ class TestNOR2R8FinalAudit(unittest.TestCase):
             ],
         )
 
-        self.assertEqual(
-            accepted + 1,
-            raw["next_global_if_ver2_accepted"],
+        self.assertNotIn(
+            "next_global_if_ver2_accepted",
+            raw,
         )
 
         self.assertEqual(

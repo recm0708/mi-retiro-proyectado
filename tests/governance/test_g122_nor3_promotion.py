@@ -19,17 +19,17 @@ POLICY = ROOT / "data/governance/repository-structure-policy.json"
 class TestG122NOR3Promotion(unittest.TestCase):
     def test_version_actual_avanza_sin_reescribir_g122(self):
         version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
-        self.assertEqual("0.1.27.02-beta", version)
+        self.assertEqual("0.128.2.0-beta", version)
         self.assertEqual(version, APP_VERSION)
-        self.assertEqual((127, 2), descomponer_version_beta_revision(version))
+        self.assertEqual((128, 2), descomponer_version_beta_revision(version))
         entry = next(x for x in cargar_ledger()["entries"] if x["global_revision"] == 122)
         self.assertEqual("NOR.3", entry["block"])
         self.assertEqual("0.1.22.01-beta", entry["revision_aware"])
 
     def test_ledger_preserva_g122_y_estado_actual_g125(self):
         ledger = cargar_ledger()
-        self.assertEqual(127, ledger["accepted_count"])
-        self.assertEqual(128, ledger["next_global"])
+        self.assertEqual(128, ledger["accepted_count"])
+        self.assertEqual(129, ledger["next_global"])
         self.assertIsNone(ledger["next_candidate"])
         self.assertIsNone(ledger["next_candidate_block"])
         entry = next(x for x in ledger["entries"] if x["global_revision"] == 122)
@@ -44,20 +44,20 @@ class TestG122NOR3Promotion(unittest.TestCase):
         self.assertEqual(["G122"], ids["NOR.3"]["global_refs"])
         self.assertEqual("planned_reserved", ids["PERSIST.1"]["status"])
         candidate = data["current_candidate"]
-        self.assertEqual("unassigned", candidate["state"])
-        self.assertIsNone(candidate["global_revision"])
-        self.assertEqual(128, candidate["next_global_available"])
+        self.assertEqual("accepted_pending_integration", candidate["state"])
+        self.assertEqual(128, candidate["global_revision"])
+        self.assertEqual(129, candidate["next_global_available"])
         self.assertEqual(164, candidate["planning_issue"])
 
     def test_manifest_actual_materializa_mant2_r2(self):
         data = json.loads(MANIFEST.read_text(encoding="utf-8"))
 
-        self.assertEqual("0.1.27.02-beta", data["version"])
-        self.assertEqual("MANT.2", data["block"])
-        self.assertEqual("R2", data["revision"])
+        self.assertEqual("0.128.2.0-beta", data["version"])
+        self.assertEqual("VER.2", data["block"])
+        self.assertEqual("R6", data["revision"])
 
         next_step = data["next_step"]
-        self.assertEqual(128, next_step["global_revision"])
+        self.assertEqual(129, next_step["global_revision"])
         self.assertIsNone(next_step["revision_aware"])
         self.assertIsNone(next_step["block"])
 

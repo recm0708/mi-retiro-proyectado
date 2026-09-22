@@ -527,7 +527,7 @@ def collect_metadata() -> dict:
             "accepted_count"
         ),
         "next_global": ledger.get(
-            "next_global_if_ver2_accepted"
+            "next_global"
         ),
         "next_candidate": ledger.get(
             "next_candidate"

@@ -15,7 +15,7 @@
 </p>
 
 <p align="center">
-  <img alt="Versión 0.1.27.02-beta" src="https://img.shields.io/badge/versi%C3%B3n-0.1.27.02--beta-2563eb">
+  <img alt="Versión 0.128.2.0-beta" src="https://img.shields.io/badge/versi%C3%B3n-0.128.2.0--beta-2563eb">
   <img alt="Python 3.13 y 3.14" src="https://img.shields.io/badge/Python-3.13%20%7C%203.14-3776AB?logo=python&logoColor=white">
   <img alt="Licencia propietaria" src="https://img.shields.io/badge/licencia-propietaria-6B7280">
 </p>
@@ -26,58 +26,38 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 
 ## Estado del proyecto
 
-- **Versión canónica vigente:** `0.1.27.02-beta`, obtenida exclusivamente desde
-  [`VERSION`](VERSION); corresponde a MANT.2 R2 / G127/E02 **aceptado
-  localmente** y pendiente de integración/publicación.
-- **Última publicación formal:** `v0.1.26.01-beta`, tag firmado sobre
-  `main@1819f59f95731dc652ad62d84d6a5ad87ad3f8a4`; GitHub Release prerelease
-  390399947.
-- **Fase material actual:** **MANT.2 R2 / #206 — G127/E02**, en promoción
-  dentro del Draft PR #207.
-- **Mantenimiento coordinado:** Uvicorn 0.53.0; Pydantic 2.13.5 +
-  pydantic-core 2.46.5; #204/#205 cerrados sin merge directo.
-- **Dependabot previo a promoción:** 0 PRs abiertos, 0 ramas `dependabot/*`
-  y 0 alerts abiertos.
-- **Siguiente Global disponible:** G128, libre y sin candidato.
-- **Preflight #166:** debe repetirse después de publicar G127; VER.2 R6/#164
-  permanece bloqueado hasta que ese preflight quede limpio.
-- **Primera versión oficial objetivo:** `1.0.0.0` con `Build 000001`.
-- **Etapa:** desarrollo beta; el repositorio público no equivale por sí solo a
-  un despliegue oficial de producción.
+- **Versión canónica vigente:** `0.128.2.0-beta`; candidato aceptado VER.2 R6 / G128/E02/C0 pendiente de integración/publicación.
+- **Versión de aplicación:** `0.128.2.0-beta` — VER.2 R6 / G128-E02-C0 aceptado localmente; publicación pendiente.
+- **Última publicación formal:** `v0.1.27.02-beta`, sobre `main@2df33a5c24d1c7cea1a6db91539a92da02c91500`; GitHub Release prerelease 392412590.
+- **Fase material actual:** **VER.2 R6 / #164**, G128/E02/C0 materializado mediante PR #208, listo para integración.
+- **Preflight #166 previo al candidato:** CLEAN.
+- **Siguiente Global aritmético:** G129, libre y sin candidato.
+- **Primera versión oficial objetivo:** `1.0.0.0`; el primer identificador de artefacto oficial previsto es `Build 000001`.
+- **Gate futuro de seguridad:** SEC.2 R7 permanece en la ruta pre-1.0 después de la ola UX final.
+- **Etapa:** desarrollo beta.
 
 La visibilidad pública del repositorio **no convierte una beta de desarrollo en versión oficial, no constituye un despliegue de producción y no modifica por sí sola la licencia vigente**.
 
 La versión se obtiene exclusivamente del archivo [`VERSION`](VERSION). La política completa se documenta en [Política de versionado](VERSIONING.md). VER.2 publicó `v0.0.71.01-beta` bajo la denominación original G071/E01; la reconciliación posterior sitúa ese estado en G087/E01 sin alterar el tag, y su evidencia histórica quedó preservada por NOR.2. Los estándares vigentes del repositorio están en [Estándares del repositorio](docs/standards) y el cierre de la normalización se documenta en [Auditorías de normalización del repositorio](docs/audits/repository).
 
 <!-- POST-NOR3-INTERMEDIATE-SEQUENCE:START -->
-## Estado vigente post-G126 / MANT.2 R2 — candidato G127/E02
+## Estado vigente — candidato VER.2 R6 materializado
 
-PLAN.2 R2/#155 permanece cerrado, integrado y publicado como **G126/E01**
-(`0.1.26.01-beta`) sobre `main@1819f59f95731dc652ad62d84d6a5ad87ad3f8a4`,
-mediante PR #202, tag firmado `v0.1.26.01-beta` y GitHub Release prerelease 390399947.
+MANT.2 R2/#206 permanece publicado como **G127/E02** (`0.1.27.02-beta`) sobre
+`main@2df33a5c24d1c7cea1a6db91539a92da02c91500`, mediante PR #207,
+tag firmado `v0.1.27.02-beta` y GitHub Release prerelease 392412590.
 
-El preflight #166 previo a VER.2 detectó #204/#205 e insertó MANT.2 R2/#206.
-La integración coordinada acepta `uvicorn 0.53.0`, conserva
-`pydantic==2.13.5` + `pydantic_core==2.46.5`, cierra #204/#205 sin merge
-directo, deja 0 PRs Dependabot, 0 ramas `dependabot/*` y 0 alerts abiertos, e
-institucionaliza mediante #203 el checklist obligatorio de Issues.
+El preflight #166 posterior a G127 quedó CLEAN. VER.2 R6/#164 alcanzó un
+candidato material aceptable y **G128/E02/C0 queda materializado localmente
+como `0.128.2.0-beta`** dentro del Draft PR #208.
 
-MANT.2 R2/#206 queda **materializado y aceptado localmente como G127/E02**
-(`0.1.27.02-beta`) en el Draft PR #207. Integración, revalidación de `main`, tag firmado
-y GitHub Release prerelease todavía están pendientes.
+G128 está aceptado/versionado pero todavía **no está publicado**: faltan el
+checkpoint firmado, auditoría remota, integración a `main`, revalidación,
+tag firmado y GitHub Release prerelease.
 
-**G128 permanece libre** y sin candidato, bloque ni `VERSION` preasignados.
-
-La continuidad material vigente es:
-
-1. **publicar MANT.2 R2 / G127-E02 / #206**;
-2. **preflight fresco #166** después de la publicación;
-3. **VER.2 R6 / #164** solo si #166 queda limpio;
-4. **DOC.4 R1 / #171**;
-5. **#142** y derivados funcionales obligatorios;
-6. **PERSIST.1 / #130 → REP.1 / #143 → DEPLOY.1 / #157**;
-7. **UX.7→UX.x / #129** bajo #189;
-8. **SEC.2 R7 → rendimiento → A11Y.2 → REV.1 → #153 → DOC.1 R6 → QA.1 → REL.1**.
+**G129 es el siguiente Global aritmético** y permanece libre, sin candidato,
+bloque ni `VERSION` preasignados. Después de publicar VER.2 y repetir #166
+limpio corresponde **DOC.4 R1 / #171**.
 <!-- POST-NOR3-INTERMEDIATE-SEQUENCE:END -->
 
 
@@ -185,7 +165,7 @@ Documentos principales:
 - **[Cierre GOV.1 — Auditoría, Gobierno y Trazabilidad Pre-Beta](docs/archive/governance/gov1-closeout.md)** — auditoría final y decisión de cierre de GOV.1;
 - **[Auditoría de versionado pre-1.0](docs/archive/governance/pre-1-0-versioning-audit.md)** — criterio contable y reconciliación VER.2;
 - **[VER.2 — Matriz de decisión de revisiones aceptadas](docs/archive/governance/ver2-revision-decision-matrix.md)** — decisiones de inclusión/exclusión del contador;
-- **[Ledger de revisiones aceptadas pre-1.0](docs/governance/pre-1-0-revision-ledger.md)** — secuencia reconciliada hasta G127; G128 permanece disponible sin candidato;
+- **[Ledger de revisiones aceptadas pre-1.0](docs/governance/pre-1-0-revision-ledger.md)** — secuencia reconciliada hasta G128; G129 permanece disponible sin candidato;
 - [`data/governance/pre-1-0-revision-ledger.json`](data/governance/pre-1-0-revision-ledger.json) — ledger machine-readable;
 - **[Identificadores de bloques de trabajo](docs/standards/work-block-identifiers.md)** — política canónica de identificadores de bloques;
 - [`data/governance/work-block-registry.json`](data/governance/work-block-registry.json) — registro machine-readable de identificadores históricos, cerrados y planificados;
@@ -211,7 +191,7 @@ El 2026-08-26 se completó el backfill administrativo de GitHub Releases. Con la
 
 Después de `v0.0.26-beta`, UX.4.6f–UX.4.6i continuaron históricamente sobre ese mismo valor de `VERSION`. VER.2 reconstruye todo el tramo sin inventar tags: el último estado aceptado de la base `7037addd` es **G070/E02**, cierre de UX.4.6i.
 
-La nueva familia beta usa `0.GG.RR.EE-beta`. VER.2 R4 promovió `0.0.71.01-beta` bajo la denominación original G071/E01 después de R1, R2 y R3; la reconciliación post-G070 sitúa el estado publicado en G087/E01 y conserva intacto el tag firmado `v0.0.71.01-beta`. No se crean tags revision-aware retrospectivos para G001–G070.
+La familia revision-aware v1 ya publicada conserva `0.<G_HI>.<G_LO>.<EE>-beta`; VER.2 R4 promovió `0.0.71.01-beta` y la historia posterior permanece inmutable. VER.2 R6 define prospectivamente desde G128 la familia v2 `0.<GLOBAL>.<EDITION>.<CORRECTION>-beta`. No se crean tags revision-aware retrospectivos para G001–G070.
 
 Objetivo de release estable:
 
@@ -563,6 +543,18 @@ Las siguientes líneas se conservan como compatibilidad histórica de pruebas an
 - referencia histórica preservada.
 
 <!-- ANCLAS_HISTORICAS_VER2_README_CONSOLIDADAS -->
+
+<!-- VER2-CP6A-HISTORICAL-ANCHORS:START -->
+### Anclas históricas de continuidad
+
+Estas referencias se conservan para regresión y trazabilidad. **No sustituyen
+el estado vigente declarado arriba**.
+
+- DOC.3 R1 cerró/publicó **G125/E01**.
+- **PLAN.2 R2** cerró/publicó **G126/E01** como `0.1.26.01-beta`.
+- MANT.2 R2 cerró/publicó G127/E02 como `0.1.27.02-beta`.
+- G128 permanece libre mientras VER.2 R6 no tenga candidato material.
+<!-- VER2-CP6A-HISTORICAL-ANCHORS:END -->
 
 ## Compatibilidad histórica preservada por VER.2
 

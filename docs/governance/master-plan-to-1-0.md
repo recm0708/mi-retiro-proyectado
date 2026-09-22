@@ -1,19 +1,19 @@
 # Plan maestro hacia Mi Retiro Proyectado 1.0
 
 **Estado:** vigente
-**Último estado publicado:** G126/E01 — PLAN.2 R2
-**Versión publicada:** `0.1.26.01-beta`
-**Fase en curso:** MANT.2 R2 / #206 — G127/E02 aceptado localmente, publicación pendiente
-**Siguiente Global disponible:** G128, libre y no reservado
+**Último estado publicado:** G127/E02 — MANT.2 R2
+**Versión publicada:** `0.1.27.02-beta`
+**Fase en curso:** VER.2 R6 / #164 — G128/E02/C0 `0.128.2.0-beta` aceptado pendiente de integración/publicación
+**Siguiente Global aritmético:** G129, libre y no reservado
 **Objetivo estable:** `1.0.0.0`
-**Fecha de reconciliación:** 2026-09-19
+**Fecha de reconciliación:** 2026-09-21
 
 Este documento es la autoridad narrativa del programa vigente hacia la primera versión oficial. La matriz tabular vive en [Matriz maestra de pendientes hacia 1.0](pre-1-0-pending-matrix.md); la historia aceptada se preserva en ledger, `RELEASES.md`, `CHANGELOG.md`, tags, GitHub Releases y `docs/archive/`.
 
 ## 1. Principios
 
 1. Ninguna fase planificada recibe Global o `VERSION` por anticipado.
-2. G126 está publicado como PLAN.2 R2/E01; MANT.2 R2 queda aceptado localmente como G127/E02 y G128 es el siguiente Global disponible.
+2. G127 está publicado como MANT.2 R2/E02; VER.2 R6 materializó G128/E02/C0 como candidato aceptado pendiente de integración/publicación; G129 queda libre.
 3. Un Global se materializa únicamente con candidato real, validado y aceptable.
 4. Issues y documentación versionada deben describir el mismo programa.
 5. Trabajo material nuevo con responsabilidad propia se inserta inmediatamente en todos los árboles afectados antes de continuar.
@@ -23,33 +23,37 @@ Este documento es la autoridad narrativa del programa vigente hacia la primera v
 9. El programa UX es abierto: el número final UX.x se conoce solo cuando las superficies pre-1.0 están estabilizadas.
 10. `1.0.0.0` se publica únicamente después de QA.1 y REL.1.
 
-## 2. Línea base post-G126
+## 2. Línea base post-G127
 
 ```text
-Global:  G126
-Edition: E01
-Version: 0.1.26.01-beta
-Tag:     v0.1.26.01-beta
-main:    1819f59f95731dc652ad62d84d6a5ad87ad3f8a4
-Release: 390399947
+Global:  G127
+Edition: E02
+Version: 0.1.27.02-beta
+Tag:     v0.1.27.02-beta
+main:    2df33a5c24d1c7cea1a6db91539a92da02c91500
+Release: 392412590
 ```
 
-PLAN.2 R2/#155 está cerrado, integrado y publicado.
-G125/E01 — DOC.3 R1 permanece preservado como publicación inmediatamente anterior.
+MANT.2 R2/#206 está cerrado, integrado y publicado.
+El preflight #166 posterior a G127/E02 quedó CLEAN.
+VER.2 R6/#164 materializó G128/E02/C0 (`0.128.2.0-beta`) mediante Draft PR #208.
+El candidato está aceptado localmente y pendiente de integración/publicación. G129 permanece libre.
 
+<!-- VER2-CP6A-HISTORICAL-ANCHORS:START -->
+### Anclas históricas del programa
 
-El preflight #166 inmediatamente anterior a VER.2 detectó los PRs Dependabot
-#204 y #205. Por la regla permanente de inserción se creó MANT.2 R2/#206 antes
-de VER.2 R6/#164.
+Estas referencias permanecen por trazabilidad y no sustituyen el baseline
+vigente G127/E02:
 
-MANT.2 R2 queda materializado y aceptado localmente como G127/E02 (`0.1.27.02-beta`),
-pendiente de integración/publicación. G128 permanece libre.
+- DOC.3 R1 = **G125/E01**.
+- **PLAN.2 R2** = **G126/E01** / `0.1.26.01-beta`.
+- MANT.2 R2 = G127/E02 / `0.1.27.02-beta`.
+<!-- VER2-CP6A-HISTORICAL-ANCHORS:END -->
 
 ## 3. Árbol definitivo de dependencias
 
 ```text
-G126 / PLAN.2 R2 publicado
-→ MANT.2 R2 / #206
+G127 / MANT.2 R2 publicado
 → VER.2 R6
 → DOC.4 R1
 → #142 auditoría previsional
@@ -82,12 +86,16 @@ Fase cerrada, integrada y publicada como G126/E01. Su programa vigente queda
 preservado como baseline de entrada a MANT.2 R2; ya no representa la fase activa.
 
 ### MANT.2 R2 — #206
-Integra de forma coordinada el trabajo Dependabot detectado por #166. Evalúa
-#204/#205 sin merge directo, preserva reproducibilidad y mantiene G127 libre
-hasta existir candidato material validado.
+Fase cerrada, integrada y publicada como G127/E02 (`0.1.27.02-beta`).
+Reconcilió el trabajo Dependabot detectado por #166 y dejó un preflight
+post-publicación CLEAN. Un nuevo ciclo MANT.2 solo se inserta si #166 detecta
+trabajo material posterior.
 
 ### VER.2 R6 — #164
-Primera fase material planificada después de MANT.2 R2 publicado y de un nuevo #166 limpio. Reforma el contrato revision-aware antes de DOC.4 para que registry, ledger, manifests y tooling sean canonizados una sola vez sobre el modelo final.
+Fase material activa sobre G127/E02 publicado. Reforma el contrato
+revision-aware antes de DOC.4 para que registry, ledger, manifest y tooling
+queden canonizados sobre el modelo final. G128 continúa libre mientras no
+exista candidato material aceptable.
 
 ### DOC.4 R1 — #171
 Después de VER.2. Lotes internos #172 Markdown, #173 estructura/poda y #174 artefactos declarativos. #174 absorbe #176. DOC.4 crea nuevo baseline documental y reinicia la cadencia DOC.3.
@@ -202,7 +210,7 @@ DOC.3 cuenta fases materiales top-level aceptadas, no lotes internos. DOC.4 crea
 ## 11. Clasificación
 
 ### Obligatorios 1.0
-MANT.2 R2/#206 como inserción activa previa, seguido por #164, #171–#174, #142 y derivados obligatorios, #130, #143, #157, #129 y todas las UX.x que registre, #144, #156, #145, #146, #147, #148 y #149.
+MANT.2 R2/#206 permanece como inserción histórica ya cerrada; el trabajo obligatorio activo continúa con #164, #171–#174, #142 y derivados obligatorios, #130, #143, #157, #129 y todas las UX.x que registre, #144, #156, #145, #146, #147, #148 y #149.
 
 ### Transversales obligatorios
 #166, #189, #153 y DOC.3 por cadencia.
@@ -228,8 +236,8 @@ Ninguno identificado.
 - `GOVERNANCE.md`
 - Issues propietarios
 
-El ledger y el manifest mantienen G127 sin candidato material mientras MANT.2 R2/#206 está en curso. La historia publicada G001–G126 permanece inmutable.
+El ledger v2 conserva G127 como último estado aceptado/publicado y mantiene G128 libre. El registry declara VER.2 R6 activo; el manifest de G127 es un snapshot `release-input`. La historia publicada G001–G127 permanece inmutable.
 
 ## 13. Continuidad
 
-La fase material activa es MANT.2 R2/#206. Tras su cierre/publicación se repite #166; VER.2 R6/#164 solo inicia si ese preflight queda limpio.
+La fase material activa es VER.2 R6/#164 sobre G127/E02 publicado. Tras su cierre/publicación corresponde DOC.4 R1/#171; #166 puede insertar MANT.2 R3+ si aparece trabajo material nuevo.

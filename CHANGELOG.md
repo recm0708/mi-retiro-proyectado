@@ -6,9 +6,20 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ## [Unreleased]
 
-- G128 permanece disponible sin candidato, bloque ni VERSION preasignados.
-- Después de publicar G127/E02 debe ejecutarse #166 fresco; VER.2 R6/#164 solo inicia si queda limpio.
+- G129 permanece disponible sin candidato, bloque ni VERSION preasignados.
+- G128/E02/C0 está aceptado localmente para VER.2 R6 y pendiente de integración/publicación; después de publicarlo debe repetirse #166 antes de DOC.4 R1/#171.
 
+
+## [0.128.2.0-beta]
+
+### Versionado y gobierno
+
+- VER.2 R6 materializa **G128/E02/C0** como primer estado aceptado revision-aware v2.
+- `VERSION` avanza a `0.128.2.0-beta`.
+- G127/E02 / MANT.2 R2 permanece como último estado publicado hasta integrar y publicar G128.
+- Ledger, registry y manifest separan snapshot, integración y publicación runtime.
+- G129 permanece libre y sin candidato preasignado.
+- Issue #164 y Draft PR #208 gobiernan el cierre.
 
 ## [0.1.27.02-beta]
 

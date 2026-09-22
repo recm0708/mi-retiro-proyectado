@@ -15,16 +15,16 @@ ROOT = Path(__file__).resolve().parents[2]
 class TestNOR3R1CandidateReconciliation(unittest.TestCase):
     def test_version_actual_preserva_promocion_historica_g122(self):
         version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
-        self.assertEqual("0.1.27.02-beta", version)
+        self.assertEqual("0.128.2.0-beta", version)
         ledger = cargar_ledger()
-        self.assertEqual(127, ledger["accepted_count"])
+        self.assertEqual(128, ledger["accepted_count"])
         entry = next(x for x in ledger["entries"] if x["global_revision"] == 122)
         self.assertEqual("0.1.22.01-beta", entry["revision_aware"])
         self.assertEqual("NOR.3", entry["block"])
 
     def test_g126_disponible_sin_candidato_preasignado(self):
         ledger = cargar_ledger()
-        self.assertEqual(128, ledger["next_global"])
+        self.assertEqual(129, ledger["next_global"])
         self.assertIsNone(ledger["next_candidate"])
         self.assertIsNone(ledger["next_candidate_block"])
 
@@ -45,15 +45,12 @@ class TestNOR3R1CandidateReconciliation(unittest.TestCase):
         self.assertEqual([], ids["PERSIST.1"]["global_refs"])
 
         candidate = registry["current_candidate"]
-        self.assertIsNone(candidate["global_revision"])
-        self.assertIsNone(candidate["revision_aware"])
-        self.assertIsNone(candidate["block"])
-        self.assertIsNone(candidate["revision"])
-        self.assertIsNone(candidate["revision_scope"])
-        self.assertEqual(
-            "unassigned",
-            candidate["state"],
-        )
+        self.assertEqual(128, candidate["global_revision"])
+        self.assertEqual("0.128.2.0-beta", candidate["revision_aware"])
+        self.assertEqual("VER.2", candidate["block"])
+        self.assertEqual("R6", candidate["revision"])
+        self.assertEqual("final_revision_aware_reform", candidate["revision_scope"])
+        self.assertEqual("accepted_pending_integration", candidate["state"])
         self.assertEqual(164, candidate["planning_issue"])
 
     def test_manifest_actual_materializa_mant2_r2(self):
@@ -62,12 +59,12 @@ class TestNOR3R1CandidateReconciliation(unittest.TestCase):
                 encoding="utf-8"
             )
         )
-        self.assertEqual("0.1.27.02-beta", manifest["version"])
-        self.assertEqual("MANT.2", manifest["block"])
-        self.assertEqual("R2", manifest["revision"])
+        self.assertEqual("0.128.2.0-beta", manifest["version"])
+        self.assertEqual("VER.2", manifest["block"])
+        self.assertEqual("R6", manifest["revision"])
 
         next_step = manifest["next_step"]
-        self.assertEqual(128, next_step["global_revision"])
+        self.assertEqual(129, next_step["global_revision"])
         self.assertIsNone(next_step["revision_aware"])
         self.assertIsNone(next_step["block"])
         self.assertIn("G127-E02", next_step["description"])

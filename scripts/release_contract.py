@@ -12,7 +12,19 @@ ROOT = Path(__file__).resolve().parents[1]
 VERSION_PATH = ROOT / "VERSION"
 LEDGER_PATH = ROOT / "data" / "governance" / "pre-1-0-revision-ledger.json"
 
-REVISION_AWARE_RE = re.compile(r"^0\.(?P<gg>\d+)\.(?P<rr>\d{2})\.(?P<ee>\d{2})-beta$")
+REVISION_AWARE_V1_RE = re.compile(
+    r"^0\.(?P<g_hi>0|[1-9][0-9]*)"
+    r"\.(?P<g_lo>[0-9]{2})"
+    r"\.(?P<ee>[0-9]{2})"
+    r"-beta$"
+)
+
+REVISION_AWARE_V2_RE = re.compile(
+    r"^0\.(?P<global>[1-9][0-9]*)"
+    r"\.(?P<ee>[1-9][0-9]*)"
+    r"\.(?P<correction>0|[1-9][0-9]*)"
+    r"-beta$"
+)
 REQUIRED_HEADINGS = (
     "## Estado publicado",
     "## Resumen",
@@ -41,14 +53,68 @@ def read_ledger() -> dict:
     return json.loads(LEDGER_PATH.read_text(encoding="utf-8"))
 
 
-def parse_revision_aware(version: str) -> tuple[int, int]:
-    """Descompone una versión revision-aware en sus componentes gobernados."""
-    match = REVISION_AWARE_RE.fullmatch(version)
-    if not match:
-        raise ValueError(f"Versión beta revision-aware no válida: {version}")
-    global_revision = int(match.group("gg")) * 100 + int(match.group("rr"))
-    edition = int(match.group("ee"))
-    return global_revision, edition
+def parse_revision_aware_components(
+    version: str,
+) -> tuple[int, int, int, int, int]:
+    """Descompone v1/v2 en Global, Edition, Correction, compat y schema.
+
+    El cuarto valor se conserva por compatibilidad de API, pero el ordinal
+    MANT.2 ya no se codifica en VERSION y por ello siempre vale 0 aquí.
+    """
+
+    match_v2 = REVISION_AWARE_V2_RE.fullmatch(version)
+    if match_v2 is not None:
+        global_revision = int(match_v2.group("global"))
+        edition = int(match_v2.group("ee"))
+        correction = int(match_v2.group("correction"))
+
+        if global_revision < 128:
+            raise ValueError(
+                "La familia revision-aware v2 comienza en G128."
+            )
+        if not 1 <= edition <= 99:
+            raise ValueError("Edition debe estar entre 1 y 99.")
+        if not 0 <= correction <= 999:
+            raise ValueError("Correction debe estar entre 0 y 999.")
+
+        return global_revision, edition, correction, 0, 2
+
+    match_v1 = REVISION_AWARE_V1_RE.fullmatch(version)
+    if match_v1 is None:
+        raise ValueError(
+            "Versión beta revision-aware no válida: " + version
+        )
+
+    global_revision = (
+        int(match_v1.group("g_hi")) * 100
+        + int(match_v1.group("g_lo"))
+    )
+    edition = int(match_v1.group("ee"))
+
+    if global_revision <= 0 or edition <= 0:
+        raise ValueError("Global y Edition deben ser mayores que cero.")
+
+    return global_revision, edition, 0, 0, 1
+
+def parse_revision_aware(
+    version: str,
+) -> tuple[int, int]:
+    """Conserva el contrato histórico ``(Global, Edition)``."""
+
+    (
+        global_revision,
+        edition,
+        _correction,
+        _maintenance,
+        _schema,
+    ) = parse_revision_aware_components(
+        version
+    )
+
+    return (
+        global_revision,
+        edition,
+    )
 
 
 def expected_title(version: str) -> str:
@@ -118,7 +184,15 @@ def main() -> int:
     args = build_parser().parse_args()
     version = read_version()
     ledger = read_ledger()
-    global_revision, edition = parse_revision_aware(version)
+    (
+        global_revision,
+        edition,
+        correction,
+        maintenance,
+        revision_schema,
+    ) = parse_revision_aware_components(
+        version
+    )
     title = expected_title(version)
 
     errors = validate_version_against_ledger(version, ledger)
@@ -134,6 +208,9 @@ def main() -> int:
         "tag": f"v{version}",
         "global_revision": global_revision,
         "edition": edition,
+        "correction": correction,
+        "maintenance": maintenance,
+        "revision_schema": revision_schema,
         "title": title,
         "prerelease": version.endswith("-beta"),
         "accepted_count": int(ledger["accepted_count"]),

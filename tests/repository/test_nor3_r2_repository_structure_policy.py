@@ -135,33 +135,67 @@ class TestNOR3R2RepositoryStructurePolicy(unittest.TestCase):
         self.assertEqual(report["result"], "pass")
 
     def test_post_promocion_preserva_scope_r1_r8_y_estado_actual(self):
-        registry = json.loads((ROOT / "data" / "governance" / "work-block-registry.json").read_text(encoding="utf-8"))
+        registry = json.loads(
+            (
+                ROOT
+                / "data"
+                / "governance"
+                / "work-block-registry.json"
+            ).read_text(
+                encoding="utf-8"
+            )
+        )
+
+        self.assertEqual(2, registry["schema_version"])
+
         candidate = registry["current_candidate"]
-        self.assertIsNone(candidate["global_revision"])
-        self.assertIsNone(candidate["revision_aware"])
-        self.assertIsNone(candidate["block"])
-        self.assertIsNone(candidate["revision"])
-        self.assertIsNone(candidate["revision_scope"])
-        self.assertEqual("unassigned", candidate["state"])
-        self.assertEqual(128, candidate["next_global_available"])
-        ids = {item["identifier"]: item for item in registry["identifiers"]}
+
+        self.assertEqual(128, candidate["global_revision"])
+        self.assertEqual("0.128.2.0-beta", candidate["revision_aware"])
+        self.assertEqual("VER.2", candidate["block"])
+        self.assertEqual("R6", candidate["revision"])
+        self.assertEqual("final_revision_aware_reform", candidate["revision_scope"])
+        self.assertEqual("accepted_pending_integration", candidate["state"])
+        self.assertEqual(129, candidate["next_global_available"])
+
+        ids = {
+            item["identifier"]: item
+            for item in registry["identifiers"]
+        }
+
         self.assertEqual("closed", ids["NOR.3"]["status"])
         self.assertEqual("R1-R8", ids["NOR.3"]["active_scope"])
         self.assertEqual(["G122"], ids["NOR.3"]["global_refs"])
+
         self.assertEqual("closed", ids["DOC.3"]["status"])
         self.assertEqual(["G125"], ids["DOC.3"]["global_refs"])
 
+        self.assertEqual(
+            "closed_r2",
+            ids["MANT.2"]["status"],
+        )
+        self.assertEqual("accepted_r6_pending_integration", ids["VER.2"]["status"])
+
+        baseline = registry["accepted_baseline"]
+
+        self.assertEqual(128, baseline["global_revision"])
+        self.assertEqual(
+            "0.128.2.0-beta",
+            baseline["revision_aware"],
+        )
+
         active = registry["active_phase"]
-        self.assertEqual("MANT.2", active["block"])
-        self.assertEqual("R2", active["revision"])
-        self.assertEqual(206, active["issue"])
-        self.assertEqual("accepted_pending_publication", active["state"])
-        self.assertEqual(127, active["global_revision"])
+
+        self.assertEqual("VER.2", active["block"])
+        self.assertEqual("R6", active["revision"])
+        self.assertEqual(164, active["issue"])
+        self.assertEqual("accepted_pending_integration", active["state"])
+        self.assertEqual(128, active["global_revision"])
+        self.assertEqual("0.128.2.0-beta", active["revision_aware"])
 
     def test_pr_policy_permite_candidato_sin_version(self):
         files = [
             "data/governance/pre-1-0-revision-ledger.json",
-            "data/governance/release-publication-manifest.json",
         ]
 
         self.assertEqual(
@@ -184,26 +218,106 @@ class TestNOR3R2RepositoryStructurePolicy(unittest.TestCase):
             errors[0],
         )
 
-    def test_pr_policy_rechaza_metadata_parcial(self):
+    def test_pr_policy_manifest_estable_requiere_contexto_git(self):
         errors = pr_policy.revision_state_errors(
             [
-                "data/governance/pre-1-0-revision-ledger.json"
+                "data/governance/release-publication-manifest.json"
             ]
         )
 
-        self.assertEqual(len(errors), 1)
+        self.assertEqual(
+            1,
+            len(errors),
+        )
+
         self.assertIn(
-            "release-publication-manifest.json",
+            "base y head",
             errors[0],
         )
+
+    def test_pr_policy_normaliza_schema_v1_y_v2_sin_cambiar_estado(
+        self,
+    ):
+        base = {
+            "accepted_count": 127,
+            "next_global_if_ver2_accepted": 128,
+            "next_candidate": None,
+            "next_candidate_block": None,
+            "entries": [
+                {
+                    "global_revision": 127,
+                    "block": "MANT.2",
+                    "ordinal": 2,
+                    "functional_revision": "R2",
+                    "revision_aware": "0.1.27.02-beta",
+                }
+            ],
+        }
+
+        head = {
+            "schema_version": 2,
+            "accepted_count": 127,
+            "next_global": 128,
+            "next_candidate": None,
+            "next_candidate_block": None,
+            "entries": [
+                {
+                    "global_revision": 127,
+                    "block": "MANT.2",
+                    "ordinal": 2,
+                    "edition": 2,
+                    "functional_revision": "R2",
+                    "identifier_schema": 1,
+                    "version_format": "revision-aware-v1",
+                    "correction_ordinal": None,
+                    "maintenance_ordinal": 2,
+                    "revision_aware": "0.1.27.02-beta",
+                }
+            ],
+        }
+
+        self.assertTrue(
+            pr_policy.ledger_preserves_revision_state(
+                base,
+                head,
+            )
+        )
+
         self.assertEqual(
-            (
-                "Los metadatos revision-aware de candidato deben "
-                "cambiar de forma coordinada cuando VERSION "
-                "permanece estable. Faltan: "
-                "data/governance/release-publication-manifest.json"
-            ),
-            errors[0],
+            pr_policy.revision_state_snapshot(base),
+            pr_policy.revision_state_snapshot(head),
+        )
+
+    def test_pr_policy_detecta_mutacion_material_del_ledger(
+        self,
+    ):
+        base = {
+            "accepted_count": 127,
+            "next_global": 128,
+            "next_candidate": None,
+            "next_candidate_block": None,
+            "entries": [
+                {
+                    "global_revision": 127,
+                    "block": "MANT.2",
+                    "ordinal": 2,
+                    "functional_revision": "R2",
+                    "revision_aware": "0.1.27.02-beta",
+                }
+            ],
+        }
+
+        changed = {
+            **base,
+            "next_candidate": "0.1.28.01.000.000-beta",
+            "next_candidate_block": "SYNTHETIC",
+        }
+
+        self.assertFalse(
+            pr_policy.ledger_preserves_revision_state(
+                base,
+                changed,
+            )
         )
 
     def test_quality_gate_hereda_integridad(self):

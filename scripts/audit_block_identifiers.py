@@ -29,8 +29,8 @@ def main() -> int:
     """Ejecuta el flujo principal del script y devuelve el código de salida."""
     data = json.loads(REGISTRY.read_text(encoding="utf-8"))
 
-    if data.get("schema_version") != 1:
-        print("ERROR: schema_version debe ser 1.")
+    if data.get("schema_version") != 2:
+        print("ERROR: schema_version debe ser 2.")
         return 1
 
     families = [item["prefix"] for item in data["families"]]

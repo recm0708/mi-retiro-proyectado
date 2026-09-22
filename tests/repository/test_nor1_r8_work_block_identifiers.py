@@ -9,7 +9,9 @@ import subprocess
 import sys
 import unittest
 
-from app.core.version import construir_version_beta_revision
+from app.core.version import (
+    construir_version_beta_revision_v2,
+)
 from app.core.version_ledger import (
     LedgerRevisionError,
     cargar_ledger,
@@ -41,14 +43,11 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
             self.assertFalse(ids[ident]["reusable_for_different_scope"])
 
         self.assertEqual("closed", ids["PLAN.2"]["status"])
-        self.assertEqual("accepted_pending_publication_r2", ids["MANT.2"]["status"])
+        self.assertEqual("closed_r2", ids["MANT.2"]["status"])
         self.assertEqual("closed", ids["MANT.1"]["status"])
         self.assertIn("G124/E13", ids["MANT.1"]["meaning"])
         self.assertIn("G124", ids["MANT.1"]["global_refs"])
-        self.assertEqual(
-            "reopened_planned_r6",
-            ids["VER.2"]["status"],
-        )
+        self.assertEqual("accepted_r6_pending_integration", ids["VER.2"]["status"])
         self.assertIn("G114", ids["PLAN.2"]["global_refs"])
         self.assertEqual("closed", ids["UX.5"]["status"])
         self.assertEqual("closed", ids["UX.6"]["status"])
@@ -80,13 +79,13 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
         self.assertEqual(7, entry["ordinal"])
         self.assertEqual("0.1.12.07-beta", entry["revision_aware"])
         candidate = self.data["current_candidate"]
-        self.assertIsNone(candidate["global_revision"])
-        self.assertIsNone(candidate["block"])
-        self.assertIsNone(candidate["revision"])
-        self.assertIsNone(candidate["edition"])
-        self.assertEqual("unassigned", candidate["state"])
-        self.assertEqual(128, candidate["next_global_available"])
-        self.assertIsNone(candidate["next_functional_block_if_accepted"])
+        self.assertEqual(128, candidate["global_revision"])
+        self.assertEqual("VER.2", candidate["block"])
+        self.assertEqual("R6", candidate["revision"])
+        self.assertEqual(2, candidate["edition"])
+        self.assertEqual("accepted_pending_integration", candidate["state"])
+        self.assertEqual(129, candidate["next_global_available"])
+        self.assertEqual("DOC.4", candidate["next_functional_block_if_accepted"])
         self.assertIsNone(candidate["next_functional_global_if_accepted"])
 
     def test_candidato_reabierto_continua_ordinal_del_bloque(self):
@@ -102,7 +101,7 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
 
         candidato = copy.deepcopy(ledger)
         candidato["next_candidate_block"] = "NOR.1"
-        candidato["next_candidate"] = construir_version_beta_revision(
+        candidato["next_candidate"] = construir_version_beta_revision_v2(
             siguiente_global,
             8,
         )
@@ -110,7 +109,7 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
 
         invalido = copy.deepcopy(ledger)
         invalido["next_candidate_block"] = "NOR.1"
-        invalido["next_candidate"] = construir_version_beta_revision(
+        invalido["next_candidate"] = construir_version_beta_revision_v2(
             siguiente_global,
             1,
         )
@@ -121,7 +120,7 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
         ledger = cargar_ledger()
         candidato = copy.deepcopy(ledger)
         candidato["next_candidate_block"] = "PERSIST.1"
-        candidato["next_candidate"] = construir_version_beta_revision(
+        candidato["next_candidate"] = construir_version_beta_revision_v2(
             ledger["next_global"],
             1,
         )

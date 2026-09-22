@@ -20,59 +20,43 @@
 <!-- NOR3-G122-PROMOTION:END -->
 
 <!-- POST-NOR3-INTERMEDIATE-SEQUENCE:START -->
-## Estado vigente post-G126 / MANT.2 R2 — candidato G127/E02
+## Estado vigente — candidato VER.2 R6 materializado
 
-PLAN.2 R2/#155 permanece cerrado, integrado y publicado como **G126/E01**
-(`0.1.26.01-beta`) sobre `main@1819f59f95731dc652ad62d84d6a5ad87ad3f8a4`,
-mediante PR #202, tag firmado `v0.1.26.01-beta` y GitHub Release prerelease 390399947.
+MANT.2 R2/#206 permanece publicado como **G127/E02** (`0.1.27.02-beta`) sobre
+`main@2df33a5c24d1c7cea1a6db91539a92da02c91500`, mediante PR #207,
+tag firmado `v0.1.27.02-beta` y GitHub Release prerelease 392412590.
 
-El preflight #166 previo a VER.2 detectó #204/#205 e insertó MANT.2 R2/#206.
-La integración coordinada acepta `uvicorn 0.53.0`, conserva
-`pydantic==2.13.5` + `pydantic_core==2.46.5`, cierra #204/#205 sin merge
-directo, deja 0 PRs Dependabot, 0 ramas `dependabot/*` y 0 alerts abiertos, e
-institucionaliza mediante #203 el checklist obligatorio de Issues.
+El preflight #166 posterior a G127 quedó CLEAN. VER.2 R6/#164 alcanzó un
+candidato material aceptable y **G128/E02/C0 queda materializado localmente
+como `0.128.2.0-beta`** dentro del Draft PR #208.
 
-MANT.2 R2/#206 queda **materializado y aceptado localmente como G127/E02**
-(`0.1.27.02-beta`) en el Draft PR #207. Integración, revalidación de `main`, tag firmado
-y GitHub Release prerelease todavía están pendientes.
+G128 está aceptado/versionado pero todavía **no está publicado**: faltan el
+checkpoint firmado, auditoría remota, integración a `main`, revalidación,
+tag firmado y GitHub Release prerelease.
 
-**G128 permanece libre** y sin candidato, bloque ni `VERSION` preasignados.
-
-La continuidad material vigente es:
-
-1. **publicar MANT.2 R2 / G127-E02 / #206**;
-2. **preflight fresco #166** después de la publicación;
-3. **VER.2 R6 / #164** solo si #166 queda limpio;
-4. **DOC.4 R1 / #171**;
-5. **#142** y derivados funcionales obligatorios;
-6. **PERSIST.1 / #130 → REP.1 / #143 → DEPLOY.1 / #157**;
-7. **UX.7→UX.x / #129** bajo #189;
-8. **SEC.2 R7 → rendimiento → A11Y.2 → REV.1 → #153 → DOC.1 R6 → QA.1 → REL.1**.
+**G129 es el siguiente Global aritmético** y permanece libre, sin candidato,
+bloque ni `VERSION` preasignados. Después de publicar VER.2 y repetir #166
+limpio corresponde **DOC.4 R1 / #171**.
 <!-- POST-NOR3-INTERMEDIATE-SEQUENCE:END -->
 
 
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado de seguridad vigente
-
-La versión canónica vigente es `0.1.27.02-beta` / G127/E02 y está aceptada localmente para MANT.2 R2, pendiente de integración/publicación. La última publicación formal permanece `v0.1.26.01-beta` / G126/E01; G125/E01 se conserva como publicación histórica anterior.
-
-- PLAN.2 R2/#155 está cerrado/publicado como G126/E01.
-- El preflight fresco #166 previo a VER.2 detectó #204/#205 y activó MANT.2 R2/#206.
-- MANT.2 R2/#206 está aceptado localmente como G127/E02 (`0.1.27.02-beta`), pendiente de integración/publicación; G128 sigue libre.
-- Login humano y Bearer técnico continúan separados.
-- PERSIST.1, REP.1 y DEPLOY.1 permanecen pendientes antes de la ola UX final.
-- SEC.2 R7/#144 se ejecutará únicamente después de cerrar toda UX.7→UX.x y de
-  que #189 confirme ausencia de drift visual shared bloqueante.
-- REL.GOV.1 mantiene la firma del tag fuera de GitHub Actions.
+La versión canónica candidata es `0.128.2.0-beta` / G128/E02/C0 para VER.2 R6, aceptada localmente y todavía no publicada.
+- G127/E02 / MANT.2 R2 permanece publicado mediante `v0.1.27.02-beta` y Release 392412590.
+- G125/E01 permanece preservado como publicación histórica anterior.
+- G129 permanece libre y sin candidato.
+- SEC.2 R7/#144 permanece detrás de la ola UX final y gate #189.
 <!-- DOC1-R1-POST-MANT1:END -->
 
 ## Versiones soportadas
 
-Mi Retiro Proyectado se encuentra en **desarrollo beta**. Los estados históricos conservan la familia legacy `0.0.N-beta`; VER.2 adopta para candidatos y estados nuevos la familia revision-aware `0.GG.RR.EE-beta`. El repositorio de código es público, pero la aplicación no se declara todavía como versión oficial ni como despliegue de producción.
+Mi Retiro Proyectado se encuentra en **desarrollo beta**. La familia legacy `0.0.N-beta` y la revision-aware v1 publicada permanecen históricas e inmutables; los estados prospectivos desde G128 usan `0.<GLOBAL>.<EDITION>.<CORRECTION>-beta`. El repositorio de código es público, pero la aplicación no se declara todavía como versión oficial ni como despliegue de producción.
 
 | Línea | Soporte de seguridad |
 | --- | --- |
-| `0.1.27.02-beta` | Beta vigente candidata G127/E02 / MANT.2 R2 aceptada localmente; integración/publicación pendiente; gates CP2/CP3 y reauditoría Dependabot en verde |
+| `0.128.2.0-beta` | Beta vigente candidata G128/E02/C0 / VER.2 R6; integración, tag y Release pendientes |
+| `0.1.27.02-beta` | Beta vigente publicada G127/E02 / MANT.2 R2; tag firmado `v0.1.27.02-beta`, GitHub Release prerelease 392412590 y preflight post-publicación #166 CLEAN |
 | `0.1.26.01-beta` | Beta previa publicada G126/E01 / PLAN.2 R2 mediante tag firmado `v0.1.26.01-beta` y GitHub Release prerelease 390399947 |
 | `0.1.25.01-beta` | Beta previa publicada G125/E01 / DOC.3 R1 mediante tag firmado `v0.1.25.01-beta` y GitHub Release prerelease |
 | `0.1.24.13-beta` | Beta previa G124/E13 publicada para MANT.1 R8 mediante PR #170, tag firmado `v0.1.24.13-beta` y GitHub Release prerelease |
@@ -159,6 +143,9 @@ Esta función está habilitada y complementa el canal privado alternativo indica
 <!-- ANCLAS_HISTORICAS_VER2_SECURITY_CONSOLIDADAS -->
 
 ## Compatibilidad histórica preservada por VER.2
+
+Referencia legacy histórica preservada por pruebas de regresión: `v0.0.71.01-beta` fue publicado bajo la denominación histórica G071/E01 y permanece inmutable.
+
 
 | Versión | Estado de soporte |
 | --- | --- |

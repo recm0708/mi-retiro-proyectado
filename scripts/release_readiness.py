@@ -182,7 +182,7 @@ def build_report() -> dict:
     )
 
     next_global = ledger.get(
-        "next_global_if_ver2_accepted"
+        "next_global"
     )
 
     next_candidate = ledger.get(
@@ -242,42 +242,27 @@ def build_report() -> dict:
             "manifiesto de publicación."
         )
 
-    next_step = manifest.get(
+    snapshot_role = manifest.get(
+        "snapshot_role"
+    )
+
+    if snapshot_role != "release-input":
+        errors.append(
+            "El manifest debe declarar snapshot_role=release-input."
+        )
+
+    manifest_next_step = manifest.get(
         "next_step"
     )
 
     if not isinstance(
-        next_step,
+        manifest_next_step,
         dict,
     ):
         errors.append(
             "El manifiesto requiere next_step."
         )
-        next_step = {}
-
-    if next_step.get(
-        "global_revision"
-    ) != next_global:
-        errors.append(
-            "next_step.global_revision no "
-            "coincide con el ledger."
-        )
-
-    if next_step.get(
-        "revision_aware"
-    ) != next_candidate:
-        errors.append(
-            "next_step.revision_aware no "
-            "coincide con el ledger."
-        )
-
-    if next_step.get(
-        "block"
-    ) != next_block:
-        errors.append(
-            "next_step.block no coincide "
-            "con el ledger."
-        )
+        manifest_next_step = {}
 
     tag = tag_state(
         version
@@ -311,11 +296,15 @@ def build_report() -> dict:
         "accepted_revision": current_entry.get(
             "functional_revision"
         ),
+        "manifest_snapshot_role": snapshot_role,
         "manifest_block": manifest.get(
             "block"
         ),
         "manifest_revision": manifest.get(
             "revision"
+        ),
+        "manifest_next_global": manifest_next_step.get(
+            "global_revision"
         ),
         "next_global": next_global,
         "next_candidate": next_candidate,
@@ -348,9 +337,10 @@ def render_markdown(
             f"`G{report['accepted_count']:03d}`"
         ),
         (
-            "- **Estado publicado documentado:** "
+            "- **Snapshot de release versionado:** "
             f"`{report['manifest_block']} "
-            f"{report['manifest_revision']}`"
+            f"{report['manifest_revision']}` "
+            f"(`{report['manifest_snapshot_role']}`)"
         ),
         (
             "- **Siguiente candidato:** "

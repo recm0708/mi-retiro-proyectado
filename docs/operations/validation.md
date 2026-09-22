@@ -1,13 +1,13 @@
 # Validación
 
 **Estado:** Vigente
-**Versión revisada:** `0.1.27.02-beta` — MANT.2 R2/G127-E02 aceptado localmente; publicación pendiente.
+**Versión revisada:** `0.128.2.0-beta` — VER.2 R6/G128-E02-C0 aceptado localmente; publicación pendiente.
 **Versión base histórica:** `0.0.25-beta`
 **Base documental histórica:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal histórica preservada:** UX.4.6e R8 — validación funcional y procedencia editable — 2026-08-19
 **Última revisión transversal:** UX.4.6f R2 integrada y cierre del Paso 4 — 2026-08-20
 **Revisión de normalización:** NOR.1 R7 — cierre de estándares y preparación de NOR.2 — 2026-08-24
-**Última revisión operativa:** MANT.2 R2/#206 — materialización G127/E02 — 2026-09-19
+**Última revisión operativa:** VER.2 R6/#164 — materialización G128/E02/C0 — 2026-09-21
 **Clasificación:** Técnica / Calidad
 **Naturaleza documental:** Registro vivo acumulativo — mantiene la estrategia vigente y evidencia histórica de gates protegida por regresiones; los resultados históricos no se reescriben como si pertenecieran al estado actual.
 
@@ -734,10 +734,10 @@ python -m pip check
 
 ## 3. Inventario actual de pruebas
 
-Inventario vigente: **225 módulos**.
+Inventario vigente: **227 módulos**.
 
 El inventario se deriva de todos los módulos `test_*.py` ubicados bajo `tests/` y se mantiene
-sincronizado con la suite versionada. En la frontera vigente, PLAN.2 R2/#155 está publicado como G126/E01 (`0.1.26.01-beta`), MANT.2 R2/#206 está aceptado localmente como G127/E02 (`0.1.27.02-beta`) y G128 continúa libre
+sincronizado con la suite versionada. En la frontera vigente, MANT.2 R2/#206 está publicado como G127/E02 (`0.1.27.02-beta`), VER.2 R6/#164 está en ejecución sin candidato material y G128 continúa libre
 y sin candidato. Las regresiones específicas protegen el programa pre-1.0,
 la separación entre historia y estado vivo, el baseline UX.7–UX.32,
 la expansión abierta UX.33+ y la ausencia de preasignación de G128.
@@ -832,6 +832,7 @@ la expansión abierta UX.33+ y la ausencia de preasignación de G128.
 - `tests/governance/test_ux6_r7_documentation_closure.py`
 - `tests/governance/test_ver2_documentacion_vigente.py`
 - `tests/governance/test_ver2_ledger_estructurado.py`
+- `tests/governance/test_ver2_publication_state_model.py`
 - `tests/governance/test_ver2_r1_reconciliacion_post_doc1.py`
 - `tests/governance/test_ver2_r2_documentacion_viva_post_r1.py`
 - `tests/governance/test_ver2_r3_decision_version_candidata_post_r2.py`
@@ -969,6 +970,8 @@ la expansión abierta UX.33+ y la ausencia de preasignación de G128.
 - `tests/shared/test_ux6_r3_r4_motion_accessibility.py`
 - `tests/shared/test_visual_identity_pre_r8.py`
 - `tests/shared/test_visual_stabilization.py`
+
+- `tests/governance/test_ver2_r6_g128_candidate.py`
 
 ## 4. Categorías
 

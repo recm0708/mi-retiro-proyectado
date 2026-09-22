@@ -88,16 +88,10 @@ class TestDOC1R4LiveStateSanitization(unittest.TestCase):
         )
 
         candidate = registry["current_candidate"]
-        self.assertEqual(
-            "unassigned",
-            candidate["state"],
-        )
-        self.assertIsNone(candidate["global_revision"])
-        self.assertIsNone(candidate["block"])
-        self.assertEqual(
-            128,
-            candidate["next_global_available"],
-        )
+        self.assertEqual("accepted_pending_integration", candidate["state"])
+        self.assertEqual(128, candidate["global_revision"])
+        self.assertEqual("VER.2", candidate["block"])
+        self.assertEqual(129, candidate["next_global_available"])
 
     def test_ledger_markdown_registra_g115(self):
         text=(ROOT/"docs/governance/pre-1-0-revision-ledger.md").read_text(encoding="utf-8"); self.assertIn("| G115 | `0.1.15.04-beta` | DOC.1 R4",text)

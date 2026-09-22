@@ -25,13 +25,13 @@ class TestPLAN2R2Program(unittest.TestCase):
 
     def test_g126_permanece_preservado_y_g127_e02_es_estado_actual(self):
         self.assertEqual(
-            "0.1.27.02-beta",
+            "0.128.2.0-beta",
             (ROOT / "VERSION").read_text(encoding="utf-8").strip(),
         )
 
         ledger = cargar_ledger()
-        self.assertEqual(127, ledger["accepted_count"])
-        self.assertEqual(128, ledger["next_global"])
+        self.assertEqual(128, ledger["accepted_count"])
+        self.assertEqual(129, ledger["next_global"])
 
         g126 = next(
             item
@@ -58,12 +58,12 @@ class TestPLAN2R2Program(unittest.TestCase):
         )
         candidate = registry["current_candidate"]
 
-        self.assertEqual("unassigned", candidate["state"])
-        self.assertIsNone(candidate["global_revision"])
-        self.assertIsNone(candidate["revision_aware"])
-        self.assertIsNone(candidate["block"])
+        self.assertEqual("accepted_pending_integration", candidate["state"])
+        self.assertEqual(128, candidate["global_revision"])
+        self.assertEqual("0.128.2.0-beta", candidate["revision_aware"])
+        self.assertEqual("VER.2", candidate["block"])
         self.assertEqual(164, candidate["planning_issue"])
-        self.assertEqual(128, candidate["next_global_available"])
+        self.assertEqual(129, candidate["next_global_available"])
 
         ids = {
             item["identifier"]: item
@@ -75,7 +75,7 @@ class TestPLAN2R2Program(unittest.TestCase):
             ids["PLAN.2"]["global_refs"],
         )
         self.assertEqual(
-            "accepted_pending_publication_r2",
+            "closed_r2",
             ids["MANT.2"]["status"],
         )
         self.assertEqual(
