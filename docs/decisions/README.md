@@ -1,33 +1,25 @@
 # Registro de decisiones técnicas
 
-**Estado:** Vigente
+**Estado:** vigente
 **Versión de aplicación revisada:** `0.129.3.0-beta`
-**Versión base histórica:** `0.0.25-beta`
-**Base documental histórica:** `0.0.23-beta` — GOV.1.3 R4 — 2026-08-17
-**Revisión documental:** GOV.1.3 R4 — 2026-08-17
-**Última actualización de gobierno:** PLAN.1 / ADR-168 — 2026-08-20
-**Última actualización técnica:** mantenimiento post-G119 / ADR-180–ADR-181 — 2026-08-31
-**Clasificación:** Técnica / Gobierno / Auditoría
-**Naturaleza documental:** Registro vivo acumulativo — el índice y el cuerpo ADR permanecen juntos como contrato canónico; las decisiones históricas no se extraen ni modernizan si hacerlo altera su trazabilidad o las regresiones que las protegen.
+**Clasificación:** decisiones técnicas / registro vivo acumulativo
 **ADR indexadas:** 181 (`ADR-001` a `ADR-181`)
 
-<!-- DOC1-R1-REVISION-MANUAL:START -->
 ## Nota de lectura vigente
 
-- Las ADR históricas no se reescriben.
-- `VERSION` materializa `0.128.2.0-beta` para VER.2 R6 / G128-E02-C0 aceptado localmente; MANT.2 R2 / G127-E02 permanece como última publicación formal y DOC.3 R1 como G125/E01 histórico.
-- G124/E13 está cerrado/publicado mediante PR #170,
-  `main@f9d181ceaaf4824bf8807d9237d0e19e71d3b29c`, tag firmado
-  `v0.1.24.13-beta` y GitHub Release prerelease.
-- G123/E01 permanece publicado mediante `v0.1.23.01-beta`.
-- G121/E01 permanece publicado mediante `v0.1.21.01-beta`.
-- UX.6 R1–R8 permanece cerrado/publicado dentro de G121/E01.
-- NOR.3 R1–R8 permanece cerrado/aceptado como G122/E01 mediante PR #162 /
-  merge `b97cf61763479b80b8e8724b878089e8bb20fa00`.
-- DOC.3 R1/#154 permanece publicado como G125/E01; PLAN.2 R2/#155 está cerrado/publicado como G126/E01 (`0.1.26.01-beta`); MANT.2 R2/#206 está cerrado/publicado como G127/E02 (`0.1.27.02-beta`); VER.2 R6/#164 materializó G128/E02/C0 (`0.128.2.0-beta`) y G129 queda libre sin candidato/bloque asignado.
-- PERSIST.1 permanece planificado, no iniciado y sin Global preasignado.
-- SEC.2 R1–R6 permanece cerrado y su historia se conserva.
-<!-- DOC1-R1-REVISION-MANUAL:END -->
+Este archivo es la autoridad acumulativa de decisiones ADR. Conserva cada
+decisión en su contexto original y no moderniza retrospectivamente su contenido.
+
+- El campo **Estado** de cada ADR y sus relaciones explícitas de sustitución
+  determinan su vigencia.
+- Una ADR sustituida o histórica no se elimina si conserva trazabilidad.
+- El estado operativo actual del repositorio no se resume aquí: se consulta en
+  [`VERSION`](../../VERSION), [Política de versionado](../../VERSIONING.md),
+  [Roadmap](../governance/roadmap.md) y las autoridades de gobierno
+  correspondientes.
+- Los documentos de arquitectura, producto, seguridad y operaciones describen
+  el contrato resultante vigente; las ADR explican las decisiones que llevaron
+  a ese contrato.
 
 Este registro conserva decisiones de arquitectura, modelado, UX, precisión, seguridad y aplicación normativa. Una ADR explica por qué el proyecto adoptó una decisión; no crea una norma jurídica.
 
