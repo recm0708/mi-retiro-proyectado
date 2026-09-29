@@ -6,7 +6,7 @@
 **Versión base histórica preservada:** `0.0.23-beta`
 **Base documental:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal histórica:** GOV.1.5 R3 — 2026-08-18
-**Última revisión documental:** MANT.2 R2 — 2026-09-19
+**Última revisión documental:** MANT.2 R3 — 2026-09-28
 **Clasificación:** Técnica / Terceros / Auditoría
 
 Este inventario distingue dependencias directas, snapshot transitivo, recursos externos y servicios de red. GOV.1.7 adopta una licencia propietaria para materiales originales sin relicenciar dependencias upstream.
@@ -21,7 +21,7 @@ Las versiones corresponden al `requirements.txt` vigente. La estructura document
 | Jinja2 | 3.1.6 | Plantillas HTML | BSD-3-Clause | Render local del servidor | Revisar autoescape/plantillas |
 | Pydantic | 2.13.5 | Validación/modelos | MIT | Validación local de estructuras | Revisar cambios de esquema/core |
 | python-multipart | 0.0.32 | Recepción multipart de archivos | Apache-2.0 | Procesa cargas recibidas por FastAPI | Sensible a frontera de upload |
-| pypdf | 6.18.1 | Extracción y lectura controlada de PDF | BSD-3-Clause | Procesa PDF en memoria; sin red propia | Dependencia crítica de parser; mantener regresiones específicas en cada actualización |
+| pypdf | 6.19.0 | Extracción y lectura controlada de PDF | BSD-3-Clause | Procesa PDF en memoria; sin red propia | Dependencia crítica de parser; mantener regresiones específicas en cada actualización |
 | Uvicorn | 0.53.0 | Servidor ASGI | BSD-3-Clause | Sirve la aplicación; la red depende del modo de ejecución | HTTP/2/zttp y zuvloop continúan opt-in; revisar configuración de despliegue |
 
 Fuentes upstream de licencia verificadas documentalmente:
@@ -193,7 +193,25 @@ La aceptación requiere instalación reproducible, `pip check`,
 y CI remoto en verde. Después de validar #207, #204/#205 deben cerrarse o
 marcarse como sustituidos con trazabilidad a la decisión coordinada.
 
-### 7.3. Mantenimiento pre-G118
+### 7.3. MANT.2 R3 — pypdf 6.19.0 post-G128
+
+El preflight fresco #166 previo a DOC.4 detectó el PR Dependabot #210,
+que propone `pypdf 6.18.1` → `6.19.0`. La actualización no se integra
+directamente desde el PR automático: MANT.2 R3/#211 la coordina mediante
+el Draft PR #212 con inventario, licencias, guards y regresiones del proyecto.
+
+pypdf 6.19.0 es una release estable publicada el 2026-09-16 y conserva
+licencia BSD-3-Clause. Su changelog upstream clasifica como `Security (SEC)`
+el límite de tamaño de las etiquetas alfabéticas de página. Mi Retiro
+Proyectado utiliza `PdfReader` en Ficha Digital y Mi Retiro Seguro.
+
+La aceptación exige que la versión instalada coincida con el pin vigente,
+que continúe operativo el roundtrip `PdfWriter` → `PdfReader`, que ambos
+importadores rechacen de forma controlada PDFs digitales sin texto y que
+se mantengan sus límites de páginas. También requiere `pip check`,
+`pip-audit --strict`, Quality Gate completo y CI remoto en verde.
+
+### 7.4. Mantenimiento pre-G118
 
 El mantenimiento pre-G118 actualiza las dos dependencias directas propuestas por Dependabot sin consumir un Global ni modificar `VERSION`:
 
@@ -202,7 +220,7 @@ El mantenimiento pre-G118 actualiza las dos dependencias directas propuestas por
 
 Los guards de inventario obtienen la versión esperada desde `requirements.txt` y exigen que esta documentación y `THIRD_PARTY_NOTICES.md` permanezcan sincronizados con el pin vigente.
 
-### 7.4. Antecedente histórico G062
+### 7.5. Antecedente histórico G062
 
 La actualización a `pypdf 6.16.1` conservó las regresiones específicas introducidas con `6.15.0`. El salto `6.15.0` → `6.16.1` incorporó correcciones upstream de seguridad y robustez relacionadas con ciclos e iteraciones limitadas durante el procesamiento PDF.
 
