@@ -20,607 +20,206 @@
   <img alt="Licencia propietaria" src="https://img.shields.io/badge/licencia-propietaria-6B7280">
 </p>
 
-Mi Retiro Proyectado es una aplicación web local e independiente para **estimar, explicar y comparar escenarios de retiro** de personas aseguradas de la Caja de Seguro Social (CSS) de Panamá.
+Mi Retiro Proyectado es una aplicación web para **estimar, explicar y comparar
+escenarios de retiro** de personas aseguradas de la Caja de Seguro Social
+(CSS) de Panamá. El proyecto se ejecuta localmente, mantiene sus reglas
+previsionales y fuentes versionadas y busca hacer explícitos los supuestos,
+datos utilizados y resultados de cada simulación.
 
-> **No es una aplicación oficial de la CSS.** No emite certificaciones, no sustituye una resolución administrativa y sus resultados dependen de los datos suministrados, de las reglas implementadas y de la normativa aplicable a cada caso.
+> **Mi Retiro Proyectado no es una aplicación oficial de la CSS.** Sus
+> resultados son estimaciones informativas: no emiten certificaciones, no
+> sustituyen resoluciones administrativas y dependen de los datos suministrados,
+> de las reglas implementadas y de la normativa aplicable a cada caso.
 
 ## Estado del proyecto
 
-- **Versión canónica vigente:** `0.129.3.0-beta`; candidato MANT.2 R3 / G129-E03-C0 pendiente de integración/publicación.
-- **Última publicación formal:** `v0.128.2.0-beta`; GitHub Release prerelease 393386700.
-- **Fase material actual:** **MANT.2 R3 / #211**, mediante Draft PR #212.
-- **Dependabot:** #210 cerrado sin merge como superseded; 0 PRs Dependabot abiertos.
-- **Siguiente Global aritmético:** G130, libre y sin candidato.
-- **Siguiente fase ordinaria:** DOC.4 R1/#171 solo después de publicar G129 y repetir #166 CLEAN.
-- **Gate de seguridad posterior:** SEC.2 R7 permanece planificado en la secuencia vigente antes de los gates finales.
-- **Primera versión oficial objetivo:** `1.0.0.0` con `Build 000001`.
 - **Etapa:** desarrollo beta.
+- **Versión de desarrollo:** `0.129.3.0-beta`, definida por [`VERSION`](VERSION).
+- **Compatibilidad de desarrollo:** Python 3.13 y 3.14.
+- **Modelo de ejecución:** aplicación web local; el repositorio público no
+  representa por sí mismo un despliegue de producción.
+- **Objetivo de primera versión oficial:** `1.0.0.0`.
 
-La visibilidad pública del repositorio **no convierte una beta de desarrollo en versión oficial, no constituye un despliegue de producción y no modifica por sí sola la licencia vigente**.
+La política de numeración, aceptación y publicación se mantiene en
+[Política de versionado](VERSIONING.md). El historial de estados publicados se
+conserva en [Releases](RELEASES.md), [Changelog](CHANGELOG.md), Git, tags y
+GitHub Releases; el README no replica esa cronología.
 
-La versión se obtiene exclusivamente del archivo [`VERSION`](VERSION). La política completa se documenta en [Política de versionado](VERSIONING.md). VER.2 publicó `v0.0.71.01-beta` bajo la denominación original G071/E01; la reconciliación posterior sitúa ese estado en G087/E01 sin alterar el tag, y su evidencia histórica quedó preservada por NOR.2. Los estándares vigentes del repositorio están en [Estándares del repositorio](docs/standards) y el cierre de la normalización se documenta en [Auditorías de normalización del repositorio](docs/audits/repository).
+## Qué permite hacer
 
-<!-- POST-NOR3-INTERMEDIATE-SEQUENCE:START -->
-## Estado vigente — candidato MANT.2 R3 materializado
+La experiencia principal usa un asistente de seis pasos para:
 
-VER.2 R6/#164 está cerrado, integrado y publicado como **G128/E02/C0**
-(`0.128.2.0-beta`) mediante PR #208, tag firmado `v0.128.2.0-beta` y
-GitHub Release prerelease 393386700.
-
-El preflight #166 previo a DOC.4 detectó el PR #210 y abrió MANT.2 R3/#211.
-CP1 separó la evidencia G123 del pin vivo; CP2 integró `pypdf 6.19.0` con
-gates locales/remotos verdes. #210 quedó cerrado sin merge como superseded.
-
-**G129/E03/C0 queda materializado localmente como `0.129.3.0-beta`** para
-MANT.2 R3 mediante Draft PR #212, pendiente de integración/publicación.
-
-**G130 es el siguiente Global aritmético** y permanece libre. Después de
-publicar G129 debe repetirse #166; solo CLEAN habilita DOC.4 R1/#171.
-<!-- POST-NOR3-INTERMEDIATE-SEQUENCE:END -->
-
-
-<!-- AUTOMATION-POST-G119:START -->
-
-## Automatización y calidad
-
-El repositorio mantiene un gate reproducible común para desarrollo local,
-hooks y GitHub Actions:
-
-```powershell
-python -m pip install -r requirements-dev.txt
-python scripts/quality_gate.py --full
-```
-
-La infraestructura cubre integridad estructural y documental, política y firmas
-de Pull Requests, Repository Health, Release Readiness, dependencias y supply
-chain, enlaces externos programados, tags firmados, autoetiquetado y baseline
-Visual/Accessibility con Playwright y axe.
-
-La migración post-G119 quedó completada. `Repository Quality Gate` y
-`Python Compatibility` son los required checks canónicos de `main`; los
-workflows legacy de CI, gobernanza y Markdown fueron retirados después de
-demostrar equivalencia remota y migrar el ruleset sin perder protección.
-
-Esta automatización corresponde a mantenimiento post-G119 y no consume
-G120/E01.
-
-El cierre operativo de la migración se integró mediante PR #117, que retiró
-los workflows legacy después de migrar el ruleset sin pérdida de protección.
-El mantenimiento coordinado PR #118 actualizó Pydantic/Pydantic Core,
-`actions/dependency-review-action` y la configuración de Dependabot con sus
-regresiones y documentación correspondientes. Ambos cambios son mantenimiento
-posterior a G119/E05 y no consumen G120/E01.
-<!-- AUTOMATION-POST-G119:END -->
-
-## Capacidades implementadas
-
-La aplicación dispone de un asistente de seis pasos para:
-
-1. registrar datos personales y previsionales;
-2. analizar cuotas acreditadas y supuestos de cotización futura;
-3. construir y revisar historial salarial, detalle del año actual e información proveniente de documentos compatibles;
+1. registrar datos personales y previsionales necesarios para la simulación;
+2. revisar cuotas acreditadas y supuestos de cotización futura;
+3. construir y validar el historial salarial y la información importada;
 4. proyectar escenarios salariales;
-5. construir escenarios de retiro;
-6. calcular, explicar y comparar resultados previsionales.
+5. configurar escenarios de retiro;
+6. calcular, explicar y comparar resultados.
 
-Los tres motores generales principales implementados son:
+Los motores generales implementados cubren:
 
 - **SEBD — Subsistema Exclusivamente de Beneficio Definido**;
 - **Subsistema Mixto**;
 - **SUCGS — Sistema Único de Capitalización con Garantía Solidaria**.
 
-El alcance jurídico y matemático exacto de cada motor se encuentra en la documentación normativa y técnica. No debe asumirse que el motor general cubre regímenes especiales no documentados.
+La cobertura exacta, las reglas aplicadas, las limitaciones y las fuentes se
+documentan en [Especificación funcional](docs/product/functional-specification.md),
+[Motor de cálculo](docs/architecture/calculation-engine.md),
+[Marco normativo](docs/regulatory/regulatory-framework.md) y
+[Limitaciones conocidas](docs/product/known-limitations.md).
 
-La aplicación dispone además de **Developer Diagnostics** y de un
-**Portal Developer** interno. Su activación, modelo de acceso, rutas locales y
-controles de seguridad se documentan en
-[Developer Diagnostics y acceso al portal de desarrollo](#developer-diagnostics-y-acceso-al-portal-de-desarrollo).
-Estas capacidades son exclusivas de desarrollo y no constituyen telemetría de
-producto ni envían logs automáticamente a terceros.
+El repositorio también incluye herramientas internas de desarrollo, entre ellas
+Developer Diagnostics y el Portal Developer. Esas superficies no forman parte
+de la experiencia previsional pública y su contrato técnico se documenta en
+[Centro de desarrollo](docs/architecture/development-center.md) y
+[Observabilidad y logs](docs/operations/observability-and-logs.md).
 
-## Principios de diseño
+## Principios del proyecto
 
-El proyecto aplica estos criterios:
-
-- fórmulas previsionales en Python, no duplicadas en JavaScript;
+- fórmulas previsionales centralizadas en Python;
 - parámetros normativos versionados en `regulations/`;
-- separación explícita entre datos acreditados y proyectados;
+- distinción explícita entre datos acreditados, importados y proyectados;
 - trazabilidad de fuentes, decisiones e hipótesis;
-- datos faltantes explícitos en vez de parámetros inventados;
+- datos faltantes visibles en lugar de parámetros inventados;
 - procesamiento local y minimización de datos personales;
-- observabilidad de desarrollo sin logging de PII ni valores financieros;
-- pruebas automatizadas y CI antes de cerrar hitos;
-- documentación como parte obligatoria de cada cambio;
-- sincronización de código, pruebas, interfaz, normativa y documentación cuando un cambio altera contratos compartidos.
+- protección de secretos, PII y datos financieros en logs y pruebas;
+- pruebas automatizadas y gates reproducibles antes de integrar cambios;
+- documentación, normativa, código y pruebas sincronizados cuando comparten un
+  mismo contrato.
 
-## Documentación
+## Inicio rápido
 
-El punto de entrada de la documentación es [Índice de documentación](docs/README.md).
+### Requisitos
 
-Documentos principales:
-
-- **[Especificación funcional](docs/product/functional-specification.md)** — comportamiento funcional;
-- **[Arquitectura](docs/architecture/system-architecture.md)** — arquitectura y componentes;
-- **[Modelo de datos](docs/architecture/data-model.md)** — contratos y estructuras;
-- **[Motor de cálculo](docs/architecture/calculation-engine.md)** — flujo técnico de cálculo;
-- **[Cómo se calcula — contrato de transparencia](docs/product/calculation-guide.md)** — contrato de transparencia de la guía pública de cálculo;
-- **[Normativa](docs/regulatory/regulatory-framework.md)** — interpretación y aplicación normativa;
-- **[Fuentes normativas y enlaces oficiales](docs/regulatory/regulatory-sources.md)** — fuentes oficiales;
-- **[Archivo offline de fuentes oficiales](docs/regulatory/sources/official/README.md)** — copias preservadas con URL de origen y SHA-256;
-- **[Identidad visual de Mi Retiro Proyectado](docs/product/visual-identity.md)** — logo oficial, derivados, favicons y Social Preview;
-- **[Observabilidad y Developer Diagnostics](docs/operations/observability-and-logs.md)** — Developer Diagnostics, esquema y privacidad de logs;
-- **[Validación](docs/operations/validation.md)** — estrategia y evidencia de pruebas;
-- **[Seguridad y privacidad](docs/security/security-and-privacy.md)** — controles técnicos de seguridad y privacidad;
-- **[Modelo de amenazas](docs/security/threat-model.md)** — threat model vigente;
-- **[Procedimiento de derechos del titular](docs/security/data-subject-rights-procedure.md)** — ejercicio de derechos;
-- **[Procedimiento de respuesta a incidentes de seguridad y privacidad](docs/security/security-incident-procedure.md)** — respuesta a incidentes;
-- **[Evaluación de terceros, despliegue y revisión pre-publicación](docs/security/third-party-deployment-assessment.md)** — terceros, TLS y gates de despliegue;
-- **[Política de seguridad](SECURITY.md)** — reporte responsable de vulnerabilidades;
-- **[Auditoría de GitHub y controles de repositorio](docs/archive/governance/github-audit.md)** — controles GitHub y auditoría automática;
-- **[Preparación pública de GitHub](docs/operations/github-public-repository.md)** — metadata, topics, labels, badges, Social Preview y seguridad del repositorio público;
-- **[Auditoría integral del repositorio — 2026-08-18](docs/archive/governance/repository-audit-2026-08-18.md)** — auditoría integral post-GOV.1 del repositorio;
-- **[Auditoría transversal UX.4.6e R7](docs/archive/ux/ux46e-r7-audit-2026-08-18.md)** — auditoría transversal de coherencia de UX.4.6e;
-- **[Cierre GOV.1 — Auditoría, Gobierno y Trazabilidad Pre-Beta](docs/archive/governance/gov1-closeout.md)** — auditoría final y decisión de cierre de GOV.1;
-- **[Auditoría de versionado pre-1.0](docs/archive/governance/pre-1-0-versioning-audit.md)** — criterio contable y reconciliación VER.2;
-- **[VER.2 — Matriz de decisión de revisiones aceptadas](docs/archive/governance/ver2-revision-decision-matrix.md)** — decisiones de inclusión/exclusión del contador;
-- **[Ledger de revisiones aceptadas pre-1.0](docs/governance/pre-1-0-revision-ledger.md)** — secuencia reconciliada hasta G128; G129 permanece disponible sin candidato;
-- [`data/governance/pre-1-0-revision-ledger.json`](data/governance/pre-1-0-revision-ledger.json) — ledger machine-readable;
-- **[Identificadores de bloques de trabajo](docs/standards/work-block-identifiers.md)** — política canónica de identificadores de bloques;
-- [`data/governance/work-block-registry.json`](data/governance/work-block-registry.json) — registro machine-readable de identificadores históricos, cerrados y planificados;
-- **[Licencia y estrategia de distribución](docs/governance/licensing-and-distribution.md)** — decisión de licencia y estrategia de distribución;
-- **[Avisos de terceros](THIRD_PARTY_NOTICES.md)** — avisos y obligaciones de terceros;
-- **[Roadmap](docs/governance/roadmap.md)** — estado actual y próximos hitos;
-- **[Matriz maestra de pendientes hacia 1.0](docs/governance/pre-1-0-pending-matrix.md)** — matriz maestra viva de trabajo pendiente hasta `1.0.0.0`;
-- **[Plan maestro hacia Mi Retiro Proyectado 1.0](docs/governance/master-plan-to-1-0.md)** — secuencia de 14 bloques hasta la primera versión oficial;
-- **[Registro de decisiones técnicas](docs/decisions/README.md)** — decisiones ADR;
-- **[Registro histórico de cambios](docs/archive/governance/historical-change-registry.md)** — mapa histórico de evolución;
-- **[Código de conducta](CODE_OF_CONDUCT.md)** — reglas de participación y convivencia;
-- **[Soporte](SUPPORT.md)** — rutas de soporte y reporte.
-
-La documentación vigente debe apuntar únicamente a rutas canónicas actuales. Las fases cerradas se preservan mediante Git y, cuando conservan valor documental independiente, bajo `docs/archive/`; NOR.2 no mantiene stubs permanentes de rutas antiguas solo por compatibilidad documental.
-
-## Versiones e historia
-
-`0.0.1-beta` a `0.0.21-beta` son **estados reconstruidos retrospectivamente** a partir del historial Git. No fueron tags publicados en sus fechas originales.
-
-`0.0.22-beta` fue la primera versión formal adoptada bajo la política de GOV.1.2; `0.0.23-beta` cerró GOV.1.3; `0.0.24-beta` cerró integralmente GOV.1; `0.0.25-beta` cerró UX.4.6e; y `0.0.26-beta` cerró PLAN.1. Sus tags publicados permanecen firmados e inmutables.
-
-El 2026-08-26 se completó el backfill administrativo de GitHub Releases. Con la publicación formal de G119/E05, el repositorio **contaba entonces** con **38 tags formales reales** y **38 GitHub Releases**. Las publicaciones revision-aware posteriores se conservan como hitos adicionales e inmutables. Los Releases de `v0.0.1-beta`–`v0.0.26-beta` creados retrospectivamente no cambian la fecha histórica, firma ni commit objetivo de sus tags.
-
-Después de `v0.0.26-beta`, UX.4.6f–UX.4.6i continuaron históricamente sobre ese mismo valor de `VERSION`. VER.2 reconstruye todo el tramo sin inventar tags: el último estado aceptado de la base `7037addd` es **G070/E02**, cierre de UX.4.6i.
-
-La familia revision-aware v1 ya publicada conserva `0.<G_HI>.<G_LO>.<EE>-beta`; VER.2 R4 promovió `0.0.71.01-beta` y la historia posterior permanece inmutable. VER.2 R6 define prospectivamente desde G128 la familia v2 `0.<GLOBAL>.<EDITION>.<CORRECTION>-beta`. No se crean tags revision-aware retrospectivos para G001–G070.
-
-Objetivo de release estable:
-
-```text
-Versión 1.0.0.0
-Build 000001
-Tag v1.0.0.0
-```
-
-Consultar:
-
-- **[Registro de versiones y estados del proyecto](RELEASES.md)** — versiones, rangos Git y releases formales;
-- **[Changelog](CHANGELOG.md)** — cambios notables por versión;
-- **[Auditoría de versionado pre-1.0](docs/archive/governance/pre-1-0-versioning-audit.md)** — criterio de reconciliación;
-- **[VER.2 — Matriz de decisión de revisiones aceptadas](docs/archive/governance/ver2-revision-decision-matrix.md)** — matriz de decisiones contables;
-- **[Ledger de revisiones aceptadas pre-1.0](docs/governance/pre-1-0-revision-ledger.md)** — contador global pre-1.0;
-- [`data/governance/pre-1-0-revision-ledger.json`](data/governance/pre-1-0-revision-ledger.json) — representación machine-readable;
-- **[Registro histórico de cambios](docs/archive/governance/historical-change-registry.md)** — mapa cronológico para auditoría.
-
-Git continúa siendo la evidencia primaria de autores, fechas, hashes y contenido histórico.
-
-## Arquitectura canónica del repositorio
-
-El siguiente árbol representa los **directorios versionados y canónicos**
-derivados del inventario real de Git. No intenta listar individualmente todos
-los archivos de código, documentación o pruebas, pero sí muestra todas las
-carpetas y subcarpetas canónicas vigentes y los archivos transversales de la
-raíz.
-
-```text
-mi-retiro-proyectado/
-├── .githooks/
-├── .github/
-│   ├── ISSUE_TEMPLATE/
-│   └── workflows/
-├── .vscode/
-│   └── schemas/
-├── app/
-│   ├── cli/
-│   ├── core/
-│   ├── engines/
-│   ├── models/
-│   ├── portals/
-│   │   ├── asegurado/
-│   │   └── developer/
-│   ├── services/
-│   ├── static/
-│   │   ├── asegurado/
-│   │   │   ├── css/
-│   │   │   └── js/
-│   │   ├── developer/
-│   │   │   ├── css/
-│   │   │   └── js/
-│   │   └── shared/
-│   │       ├── css/
-│   │       ├── img/
-│   │       │   └── brand/
-│   │       └── js/
-│   └── templates/
-│       ├── asegurado/
-│       │   └── partials/
-│       ├── developer/
-│       └── shared/
-│           └── partials/
-├── assets/
-│   ├── brand/
-│   │   ├── icons/
-│   │   ├── logos/
-│   │   └── source/
-│   └── social/
-├── data/
-│   ├── audits/
-│   └── governance/
-├── docs/
-│   ├── architecture/
-│   ├── archive/
-│   │   ├── governance/
-│   │   ├── regulatory-privacy/
-│   │   ├── technical/
-│   │   └── ux/
-│   ├── audits/
-│   │   ├── documentation/
-│   │   ├── governance/
-│   │   ├── repository/
-│   │   └── security/
-│   ├── decisions/
-│   ├── governance/
-│   ├── operations/
-│   ├── product/
-│   ├── regulatory/
-│   │   └── sources/
-│   │       └── official/
-│   │           ├── pensions/
-│   │           │   ├── normative/
-│   │           │   └── reference/
-│   │           └── privacy/
-│   │               └── normative/
-│   ├── security/
-│   ├── standards/
-│   └── templates/
-│       ├── documentation/
-│       └── file-structure/
-├── regulations/
-├── scripts/
-├── tests/
-│   ├── domain/
-│   ├── governance/
-│   ├── portals/
-│   │   ├── asegurado/
-│   │   └── developer/
-│   ├── regression/
-│   ├── repository/
-│   ├── security/
-│   ├── shared/
-│   └── validation_cases/
-├── .editorconfig
-├── .gitattributes
-├── .gitignore
-├── .markdownlint-cli2.jsonc
-├── CHANGELOG.md
-├── CODE_OF_CONDUCT.md
-├── CONTRIBUTING.md
-├── GOVERNANCE.md
-├── LICENSE
-├── README.md
-├── RELEASES.md
-├── requirements.txt
-├── requirements-dev.txt
-├── SECURITY.md
-├── SUPPORT.md
-├── THIRD_PARTY_NOTICES.md
-├── VERSION
-└── VERSIONING.md
-```
-
-### Responsabilidad de cada área
-
-| Área | Contenido y responsabilidad |
-| --- | --- |
-| `.githooks/` | Hooks Git versionados utilizados por el gate local, incluido el delegador `pre-commit`. |
-| `.github/` | Configuración específica de GitHub: workflows, plantillas de issues, CODEOWNERS, Dependabot, release configuration y claves públicas autorizadas. |
-| `.vscode/` | Configuración reproducible del workspace de VS Code y schemas locales fijados para validación de configuración sin depender de red. |
-| `app/cli/` | Comandos administrativos locales, incluida la CLI del Portal Developer. |
-| `app/core/` | Configuración, seguridad, sesiones, identidad Developer, observabilidad, dinero, normativa, versionado y utilidades transversales. |
-| `app/engines/` | Motores previsionales y reglas ejecutables de SEBD, Mixto, SUCGS y elegibilidad. |
-| `app/models/` | Modelos y contratos de datos de la simulación, resultados, comparación y trazabilidad. |
-| `app/services/` | Orquestación y transformación de datos entre modelos, motores, importadores, cronologías, resultados y presentación. |
-| `app/static/` | Recursos servidos por la aplicación: CSS, JavaScript e imágenes de runtime. |
-| `app/templates/` | Plantillas Jinja2 de páginas y parciales reutilizables. |
-| `assets/brand/` | Fuentes maestras, logos e iconos oficiales de identidad visual. |
-| `assets/social/` | Recursos destinados a presentación social y metadata del repositorio. |
-| `data/` | Ledgers y manifiestos machine-readable versionados. El estado Developer real no se versiona. |
-| `docs/architecture/` | Arquitectura técnica, modelos, motores y Portal Developer. |
-| `docs/archive/` | Evidencia histórica cerrada que conserva valor de auditoría y no representa por sí sola el estado vigente. |
-| `docs/audits/` | Auditorías versionables de documentación, gobierno, repositorio y seguridad. |
-| `docs/decisions/` | Registro de decisiones y ADR del proyecto. |
-| `docs/governance/` | Roadmap, planificación, ledgers, versionado operativo y gobierno pre-1.0. |
-| `docs/operations/` | Desarrollo, validación, observabilidad, releases, dependencias y operación técnica. |
-| `docs/product/` | Especificación funcional, transparencia, limitaciones, identidad visual y comportamiento del producto. |
-| `docs/regulatory/` | Marco normativo, fuentes oficiales y documentación de los sistemas previsionales. |
-| `docs/security/` | Seguridad, privacidad, threat model, procedimientos y evaluaciones de riesgo. |
-| `docs/standards/` | Estándares canónicos de archivos, documentación, nomenclatura y estructura. |
-| `docs/templates/` | Plantillas documentales y plantillas técnicas por tipo de archivo. |
-| `regulations/` | Parámetros normativos versionados en JSON consumidos por la aplicación. |
-| `scripts/` | Auditores, validadores, herramientas de release y automatización de mantenimiento. |
-| `tests/` | Suite organizada por ownership semántico: dominio, portales, contratos compartidos, repositorio, gobierno, seguridad y regresión. |
-| `tests/validation_cases/` | Casos sintéticos/versionables para validaciones específicas; los originales privados permanecen fuera de Git. |
-
-Los archivos de la raíz tienen responsabilidades transversales: versión,
-licencia, gobierno, seguridad, soporte, contribución, releases, changelog,
-dependencias y configuración del repositorio.
-
-### Elementos locales que no pertenecen al árbol canónico
-
-El workspace puede contener elementos legítimos que Git ignora y que por tanto
-no aparecen en el árbol anterior:
-
-- `.git/` — metadata interna del clon;
-- `.venv/` — entorno virtual local de Python;
-- `.pytest_cache/` y `__pycache__/` — cachés regenerables;
-- `logs/` y `logs/diagnostico/` — observabilidad local;
-- `data/developer/` — estado SQLite local del Portal Developer;
-- `_deliverables/` — entregables o evidencia local cuando se necesiten;
-- `_entregas/` — nombre heredado bloqueado únicamente para evitar su
-  reaparición accidental.
-
-Estos elementos no deben versionarse. Que existan físicamente no representa
-una divergencia del árbol canónico mientras permanezcan correctamente
-ignorados.
-
-## Instalación para desarrollo local
-
-Requisitos principales:
-
-- Python compatible con el proyecto;
 - Git;
-- PowerShell en los ejemplos de Windows;
-- Node.js LTS para el gate de desarrollo y la validación sintáctica de JavaScript; no forma parte del runtime de la aplicación.
+- Python compatible con el proyecto;
+- PowerShell para los ejemplos de Windows;
+- Node.js LTS cuando se ejecute el gate completo de desarrollo.
 
-Clonar:
+### Clonar y preparar el entorno
 
 ```powershell
 git clone https://github.com/recm0708/mi-retiro-proyectado.git
 cd mi-retiro-proyectado
-```
 
-Crear el entorno virtual:
-
-```powershell
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
-```
 
-Instalar dependencias:
-
-```powershell
-python -m pip install -r requirements.txt
-```
-
-Para desarrollo, pruebas y automatización se instala el tooling adicional versionado:
-
-```powershell
 python -m pip install -r requirements-dev.txt
 ```
 
-`requirements-dev.txt` incluye `requirements.txt`, por lo que puede utilizarse directamente en un entorno de desarrollo nuevo.
+`requirements-dev.txt` incluye las dependencias de runtime definidas en
+`requirements.txt`.
 
-Activar una sola vez por clon el gate que protege la creación de commits:
+### Ejecutar la aplicación
+
+```powershell
+python -m uvicorn app.main:app --reload
+```
+
+Abrir <http://127.0.0.1:8000> en el navegador.
+
+Las funciones administrativas y de diagnóstico permanecen desactivadas o
+protegidas según su configuración. No se incluyen credenciales predeterminadas
+en el repositorio. Para trabajar con esas superficies, consulta
+[Centro de desarrollo](docs/architecture/development-center.md).
+
+## Validación
+
+El gate local completo es:
+
+```powershell
+python scripts/quality_gate.py --full
+```
+
+En un clon nuevo puede configurarse el hook Git versionado con:
 
 ```powershell
 .\scripts\configure_git_hooks.ps1
 ```
 
-Ejecutar:
-
-```powershell
-python -m uvicorn app.main:app --reload
-```
-
-Abrir:
-
-```text
-http://127.0.0.1:8000
-```
-
-Para habilitar Developer Diagnostics o el Portal Developer durante
-el desarrollo, consulta la sección
-[Developer Diagnostics y acceso al portal de desarrollo](#developer-diagnostics-y-acceso-al-portal-de-desarrollo),
-que concentra el contrato vigente de activación, autenticación y rutas locales.
-
-## Validación mínima
-
-Antes de cerrar un cambio ordinario, instala el tooling de desarrollo y ejecuta
-el gate canónico:
-
-```powershell
-python -m pip install -r requirements-dev.txt
-python scripts/quality_gate.py --full
-```
-
-Cuando se modifique el tooling Node de automatización, revisar además:
+Cuando se modifique el tooling Node de automatización también debe revisarse:
 
 ```powershell
 npm audit --prefix scripts --audit-level=high
 ```
 
-GitHub complementa el gate local con PR Policy, `Python Compatibility`,
-Dependency Security y los demás controles aplicables al alcance de cada Pull
-Request.
+GitHub Actions complementa el gate local con compatibilidad de Python,
+seguridad de dependencias, política de Pull Requests, verificaciones de
+repositorio y controles visuales/de accesibilidad cuando corresponda.
 
-## Privacidad y datos personales
+## Documentación
 
-La simulación previsional no utiliza cuentas de usuario ni una base de datos permanente de simulaciones. El Portal Developer sí dispone de cuentas administrativas locales, separadas de los datos previsionales. Los documentos seleccionados para importación se procesan bajo los controles documentados y los originales personales no deben incorporarse al repositorio público.
+El índice canónico y el mapa de autoridades se encuentran en
+[Documentación de Mi Retiro Proyectado](docs/README.md).
 
-Developer Diagnostics no debe registrar cuerpos HTTP, contenido PDF, identidad, salarios, cuotas detalladas, montos de pensión, cookies, tokens ni mensajes de excepción potencialmente sensibles. Los logs son locales, rotan y están excluidos de Git.
+Puntos de entrada principales:
 
-Los casos de validación versionados deben ser sintéticos o estar anonimizados de forma irreversible para el propósito de la prueba.
+| Necesidad | Documento |
+| --- | --- |
+| Comportamiento funcional | [Especificación funcional](docs/product/functional-specification.md) |
+| Cómo se calcula | [Guía de cálculo](docs/product/calculation-guide.md) |
+| Arquitectura | [Arquitectura del sistema](docs/architecture/system-architecture.md) |
+| Modelo de datos | [Modelo de datos](docs/architecture/data-model.md) |
+| Normativa | [Marco normativo](docs/regulatory/regulatory-framework.md) |
+| Fuentes oficiales | [Fuentes regulatorias](docs/regulatory/regulatory-sources.md) |
+| Seguridad y privacidad | [Seguridad y privacidad](docs/security/security-and-privacy.md) |
+| Desarrollo local | [Guía de desarrollo](docs/operations/development-guide.md) |
+| Validación | [Validación](docs/operations/validation.md) |
+| Releases | [Proceso de release](docs/operations/release-process.md) |
+| Gobierno | [Gobierno del proyecto](GOVERNANCE.md) |
+| Versionado | [Política de versionado](VERSIONING.md) |
+| Roadmap | [Roadmap](docs/governance/roadmap.md) |
+| Estándares | [Estándares del repositorio](docs/standards/README.md) |
 
-Consultar:
+La documentación viva describe contratos vigentes. La evidencia cerrada se
+mantiene en auditorías, registros explícitamente acumulativos, Git y, cuando
+conserva valor independiente, en `docs/archive/`.
 
-- **[Política de privacidad y tratamiento de datos](docs/security/privacy-policy.md)**;
-- **[Términos de uso, privacidad y tratamiento de datos](docs/security/terms-and-privacy.md)**;
-- **[Matriz interna de alineación con Ley 81 de 2019](docs/regulatory/law-81-compliance.md)**;
-- **[Observabilidad y Developer Diagnostics](docs/operations/observability-and-logs.md)**;
-- **[Casos de validación](tests/validation_cases/README.md)**.
+## Privacidad y seguridad
 
-## Gobierno y contribución
+La simulación previsional se diseña para procesamiento local y no requiere una
+base permanente de simulaciones de usuarios. El Portal Developer mantiene su
+estado administrativo local separado de los datos previsionales.
 
-- **[Gobierno del proyecto](GOVERNANCE.md)** — responsabilidades y gobierno;
-- **[Guía de contribución](CONTRIBUTING.md)** — flujo de trabajo;
-- **[Política de versionado](VERSIONING.md)** — versionado;
-- [`.github/CODEOWNERS`](.github/CODEOWNERS) — propiedad de revisión;
-- **[Registro de decisiones técnicas](docs/decisions/README.md)** — ADR;
-- **[Código de conducta](CODE_OF_CONDUCT.md)** — normas de participación;
-- **[Soporte](SUPPORT.md)** — rutas de consulta y reporte.
+No deben versionarse documentos personales, credenciales, cookies, tokens,
+salarios reales, historiales identificables ni otros datos sensibles. Los casos
+de validación versionados deben ser sintéticos o estar anonimizados de forma
+irreversible para su finalidad de prueba.
+
+Referencias:
+
+- [Política de privacidad](docs/security/privacy-policy.md);
+- [Términos de uso y privacidad](docs/security/terms-and-privacy.md);
+- [Seguridad y privacidad](docs/security/security-and-privacy.md);
+- [Modelo de amenazas](docs/security/threat-model.md);
+- [Política de seguridad y reporte de vulnerabilidades](SECURITY.md).
+
+## Contribución y soporte
+
+Antes de proponer cambios consulta:
+
+- [Guía de contribución](CONTRIBUTING.md);
+- [Gobierno del proyecto](GOVERNANCE.md);
+- [Estándares del repositorio](docs/standards/README.md);
+- [Soporte](SUPPORT.md);
+- [Código de conducta](CODE_OF_CONDUCT.md).
 
 ## Licencia
 
-Los materiales originales de Mi Retiro Proyectado se mantienen bajo una **licencia propietaria pre-beta / todos los derechos reservados**. La disponibilidad pública del código fuente **no concede por sí sola permiso** para copiar, modificar, redistribuir, sublicenciar, explotar comercialmente o crear obras derivadas.
+Los materiales originales de Mi Retiro Proyectado se distribuyen bajo una
+**licencia propietaria / todos los derechos reservados**. La disponibilidad
+pública del código fuente no concede por sí sola permiso para copiar,
+modificar, redistribuir, sublicenciar, explotar comercialmente o crear obras
+derivadas.
 
-Consultar:
+Consulta [`LICENSE`](LICENSE),
+[Licencia y estrategia de distribución](docs/governance/licensing-and-distribution.md)
+y [Avisos de terceros](THIRD_PARTY_NOTICES.md).
 
-- [`LICENSE`](LICENSE);
-- **[Licencia y estrategia de distribución](docs/governance/licensing-and-distribution.md)**;
-- **[Avisos de terceros](THIRD_PARTY_NOTICES.md)**.
+## Responsable
 
-Las dependencias y materiales de terceros conservan sus propias licencias y derechos.
+**Rubén Enrique Cañizares Miranda — Panamá**
 
-## Responsable del proyecto
-
-**Responsable:** Rubén Enrique Cañizares Miranda — Panamá
-
-El proyecto mantiene una identidad independiente de la Caja de Seguro Social de Panamá.
-
-## Anclas históricas preservadas por pruebas de regresión
-
-Las siguientes líneas se conservan como compatibilidad histórica de pruebas anteriores. No reemplazan el estado vigente declarado en la sección **Estado del proyecto**.
-
-- **DOC.1 R1:** cerrado — auditoría Markdown post-MANT.1 preservada como hito histórico.
-- **DOC.1 R2:** cerrado — auditoría integral Markdown post-NOR.2 preservada como hito histórico.
-- **GOV.1:** cerrado.
-- **PLAN.1:** cerrado.
-- **DEV.2:** cerrado.
-- **NOR.1:** cerrado en R7; referencia histórica del cierre de estándares.
-- **NOR.2 R2:** cerrado; referencia histórica de la matriz de migración.
-- **NOR.2 R3:** cerrado; referencia histórica de la migración técnica.
-- **NOR.2 R4:** cerrado; referencia histórica de la migración documental viva.
-- **NOR.2 R5:** cerrado; referencia histórica del archivo documental.
-- **NOR.2 R6:** cerrado; referencia histórica del checkpoint de ledger G070.
-- **NOR.2 R7:** cerrado; referencia histórica de artefactos locales.
-- **NOR.2 R8:** cerrado; referencia histórica del cierre integral.
-- **SEC.2:** R1 cerrado; hardening CodeQL del informe imprimible y normalización técnica de GitHub Actions completados. Esta línea es una ancla histórica; el estado vigente es SEC.2 R1–R6 cerrado.
-- **G071/E01 promovido en `VERSION`:** declaración histórica de VER.2 R4; AUD.SEC2 R1 documenta la reconciliación posterior que sitúa ese estado en G087 sin alterar el tag publicado.
-
-- **Bloque transversal activo:** VER.2 — ancla histórica previa a DOC.1 R1; el estado vigente actual lo define la línea base post-MANT.1.
-- **Bloque transversal pendiente:** VER.2 — ancla histórica previa al cierre post-MANT.1; el estado vigente lo define DOC.1 R1 y la línea base documental.
-- **Siguiente bloque funcional:** DEV.2 — ancla histórica de cierre DEV.2; DEV.2 queda preservado como bloque funcional cerrado.
-- repositorio de código público — formulación histórica preservada; el estado vigente usa repositorio público y ejecución local.
-- 21 labels y 20/20 topics configurados.
-- 21 labels y 20/20 topics.
-- **720 pruebas en `OK`** — evidencia histórica PLAN.1.
-- **841 pruebas** — evidencia histórica UX.4.6i / DEV.2.
-- **UX.4.6f:** cerrado — evidencia histórica del cierre funcional UX.4.6f.
-- R1 → R1.2 → R1.3 → R1.4 — secuencia histórica UX.4.6i.
-- **Versión histórica VER.2:** `0.0.71.01-beta` — publicada originalmente como G071/E01 y reconciliada posteriormente como G087/E01; el tag firmado `v0.0.71.01-beta` permanece inmutable.
-- `sebd-panama` adoptado.
-- tag firmado `v0.0.26-beta` publicado.
-- Social Preview e identidad visual oficial configurados.
-- referencia histórica preservada.
-
-<!-- ANCLAS_HISTORICAS_VER2_README_CONSOLIDADAS -->
-
-<!-- VER2-CP6A-HISTORICAL-ANCHORS:START -->
-### Anclas históricas de continuidad
-
-Estas referencias se conservan para regresión y trazabilidad. **No sustituyen
-el estado vigente declarado arriba**.
-
-- DOC.3 R1 cerró/publicó **G125/E01**.
-- **PLAN.2 R2** cerró/publicó **G126/E01** como `0.1.26.01-beta`.
-- MANT.2 R2 cerró/publicó G127/E02 como `0.1.27.02-beta`.
-- G128 permanece libre mientras VER.2 R6 no tenga candidato material.
-<!-- VER2-CP6A-HISTORICAL-ANCHORS:END -->
-
-## Compatibilidad histórica preservada por VER.2
-
-Estas referencias conservan evidencia de regresiones históricas sin cambiar el estado vigente de VER.2.
-
-- **Versión candidata de VER.2:** `0.0.26-beta` — referencia legacy preservada para las pruebas históricas previas a la reconciliación revision-aware.
-- **GOV.1.8:** Auditoría final y cierre pre-beta de gobierno preservado como cierre histórico del programa GOV.1.
-- **GOV.1.4:** Observabilidad y Developer Diagnostics cerrado.
-- **GOV.1.5:** Seguridad, privacidad y transparencia cerrado internamente.
-- **GOV.1.7:** Licencia propietaria pre-beta.
-- **UX.4.6e:** cerrada en `0.0.25-beta`; R8/R9 quedan preservadas como cierre funcional y documental histórico antes de los bloques UX.4.6f–UX.4.6i.
-- UX.4.6e R9.1 se conserva como candidato local histórico validado con 660 pruebas en `OK`.
-- PR #21 integrado por squash preserva el cierre histórico de UX.4.6e R9.2 en `0.0.25-beta`.
-- Tag histórico `v0.0.25-beta` preservado como cierre formal de UX.4.6e.
-- **PLAN.1:** cerrado en `0.0.26-beta`; PR #23 y PR #24 preservan el cierre legacy antes de la reconciliación revision-aware.
-- `0.1.0-beta.1` se conserva como referencia histórica previa a PLAN.1; VER.2 no la reactiva como familia vigente.
-- Badge histórico preservado: `img.shields.io/badge/versi%C3%B3n-0.0.26--beta`.
-
-## Developer Diagnostics y acceso al portal de desarrollo
-
-Developer Diagnostics es una capacidad exclusiva de desarrollo local. Permanece
-desactivada por defecto y no forma parte de una telemetría de usuarios.
-
-Inicio normal de la aplicación:
-
-```powershell
-python -m uvicorn app.main:app --reload
-```
-
-Acceso local:
-
-```text
-http://127.0.0.1:8000
-```
-
-Activación temporal de diagnósticos y de la superficie administrativa:
-
-```powershell
-$env:MRP_DEV_MODE = "1"
-$env:MRP_ADMIN_ENABLED = "1"
-python -m uvicorn app.main:app --reload
-
-# Solo para el contrato técnico Bearer legado, si se necesita:
-# $env:MRP_ADMIN_SECRET = "<define-tu-secreto-local-no-versionado>"
-```
-
-No existe una clave administrativa predeterminada ni una cuenta Developer
-predeterminada en el repositorio. El acceso humano requiere una identidad
-Developer local previamente provisionada. `MRP_ADMIN_SECRET`/`MRP_ADMIN_TOKEN` quedan reservados al contrato
-técnico Bearer legado y **no autentican el login humano**. Ninguna credencial
-debe publicarse, compartirse ni versionarse. `MRP_ADMIN_ENABLED` actúa como
-kill switch: si no vale `1`, el Portal Developer permanece bloqueado aunque
-exista una sesión anterior.
-
-Accesos locales:
-
-- aplicación: <http://127.0.0.1:8000>;
-- Portal Developer humano: <http://127.0.0.1:8000/dev>;
-- compatibilidad de entrada: <http://127.0.0.1:8000/dev/login>;
-- acceso técnico legado: <http://127.0.0.1:8000/dev/centro-desarrollo>.
-
-El login del navegador crea una sesión administrativa temporal mediante la
-cookie técnica `mrp_admin_session`, `HttpOnly`, con `SameSite` configurable,
-expiración por inactividad y límite absoluto. Para un despliegue interno HTTPS
-debe configurarse `MRP_ADMIN_COOKIE_SECURE=1`. El cierre de sesión se realiza
-mediante `POST /dev/logout`.
-
-La activación de Developer Diagnostics no habilita por sí sola funciones
-administrativas. SEC.2 mantiene además autenticación Bearer para clientes
-técnicos, eventos de auditoría locales y prohibiciones de registrar secretos,
-cookies o información sensible.
+Mi Retiro Proyectado mantiene una identidad independiente de la Caja de Seguro
+Social de Panamá.
