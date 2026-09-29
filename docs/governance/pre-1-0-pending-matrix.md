@@ -1,94 +1,91 @@
 # Matriz maestra de pendientes hacia 1.0
 
 **Estado:** vigente / documento vivo
-**Último estado publicado:** G127/E02 — MANT.2 R2
-**Versión publicada:** `0.1.27.02-beta`
-**Fase activa:** VER.2 R6 / #164 — G128/E02/C0 `0.128.2.0-beta` aceptado pendiente de integración/publicación
-**Siguiente Global aritmético:** G129, libre y no reservado
-**Última reconciliación:** 2026-09-21 — CP6A-R1 cerrado; CP6B en curso
+**Baseline publicado:** G129/E03/C0 — `0.129.3.0-beta`
+**Fase material activa:** DOC.4 R1 / #171
+**Siguiente Global aritmético:** G130, libre y sin candidato
+**Objetivo:** `1.0.0.0`
 
-Esta matriz es la autoridad tabular del trabajo pendiente hacia `1.0.0.0`. No preasigna Globals futuros. El orden expresa dependencias reales; cada estado material aceptado recibe Global/versión únicamente con candidato validado conforme a `VERSIONING.md`.
+## 1. Función
 
-Como antecedentes inmediatos preservados, G125/E01 — DOC.3 R1 y G126/E01 — PLAN.2 R2 permanecen en el ledger histórico; el estado publicado vigente es G127/E02 — MANT.2 R2.
+Esta matriz es la autoridad tabular del **trabajo todavía pendiente** hacia
+`1.0.0.0`.
 
-El baseline publicado vigente es **G127/E02 — MANT.2 R2** (`0.1.27.02-beta`). VER.2 R6/#164 materializó **G128/E02/C0** (`0.128.2.0-beta`) como candidato aceptado pendiente de integración/publicación; G129 permanece libre.
+Los estados ya cerrados no se mantienen como filas “pendientes”; su evidencia
+está en ledger, Releases, Git e Issues cerradas.
 
-## 1. Reglas
+## 2. Reglas
 
-1. G128/E02/C0 — VER.2 R6 es el último estado publicado e inmutable.
-2. MANT.2 R3/#211 materializó G129/E03/C0 como `0.129.3.0-beta` y está pendiente de integración/publicación.
-3. G130 permanece libre, sin candidato, bloque ni VERSION asignados.
-4. Todo pendiente debe tener owner, clasificación y dependencia explícitos.
-5. Trabajo material nuevo se inserta en todos los árboles afectados antes de continuar.
-6. #166 puede insertar MANT.2 R2+ en cualquier frontera material.
-7. #172–#174 son lotes internos DOC.4 y no consumen Globals propios.
-8. DOC.3 se ejecuta por cadencia y no recibe Global por planificación.
-9. El programa UX es dinámico: UX.7–UX.32 es el baseline conocido; UX.33+ se crea consecutivamente si aparece una nueva superficie visual pre-1.0.
-10. #189 gobierna la sincronización visual multiportal y no consume Global propio.
-11. SEC.2 R7 no se habilita hasta cerrar **toda** UX.x obligatoria realmente registrada y el gate #189 sin drift.
-12. Roadmap, plan maestro, esta matriz, registry e Issues deben coincidir.
+1. Todo pendiente tiene owner y dependencia identificables.
+2. No se preasignan Globals o `VERSION` a trabajo planificado.
+3. Una fase activa puede existir con `current_candidate = unassigned`.
+4. Trabajo material nuevo se inserta antes de continuar.
+5. #166 puede insertar MANT.2 cuando aparezca deuda material de dependencias.
+6. Los lotes internos de DOC.4 no consumen Globals propios.
+7. DOC.3 se ejecuta por cadencia, no por reserva anticipada.
+8. UX.7–UX.32 es el baseline conocido; UX.33+ se crea si aparece otra
+   superficie pre-1.0.
+9. #189 gobierna sincronización visual multiportal.
+10. Roadmap, plan maestro, registry, ledger e Issues deben coincidir.
 
-## 2. Grafo canónico
+## 3. Grafo canónico
 
 ```text
-G126 / PLAN.2 R2 publicado
-→ G127 / MANT.2 R2 publicado
-→ VER.2 R6
-→ DOC.4 R1
+DOC.4 R1
 → #142 auditoría previsional
 → [derivados funcionales obligatorios, si existen]
 → PERSIST.1
 → REP.1
 → DEPLOY.1
-→ UX.7 → UX.8 → ... → UX.x final necesario
-→ #189 sin drift visual shared
+→ UX.7 → UX.x final necesario
+→ #189 sin drift shared
 → SEC.2 R7
 → rendimiento #156
 → A11Y.2
 → REV.1
-→ #153 settings GitHub
+→ settings GitHub #153
 → DOC.1 R6
 → QA.1
 → REL.1
 → 1.0.0.0
 ```
 
-#166/MANT.2 y DOC.3 son transversales al grafo.
+#166, #203, #214, DOC.3 y #189 son transversales.
 
-## 3. Pendientes obligatorios pre-1.0
+## 4. Pendientes obligatorios pre-1.0
 
-| Orden lógico | Identificador / Issue | Clasificación | Dependencia de entrada | Criterio principal de cierre | Estado |
+| Orden | Identificador / Issue | Clasificación | Dependencia | Criterio principal de cierre | Estado actual |
 | ---: | --- | --- | --- | --- | --- |
-| 1 | MANT.2 R2 / #206 | baseline cerrado | G126 publicado + #166 | dependencias reconciliadas y publicación formal | Cerrado/publicado G127/E02 |
-| 2 | VER.2 R6 / #164 | obligatorio 1.0 | G127 publicado + #166 CLEAN | modelo revision-aware, documentación y guards reconciliados | En ejecución; G128 libre |
-| 3 | DOC.4 R1 / #171 | obligatorio 1.0 | VER.2 publicado + #166 | documentación/no-código current-state-only reingenierizados | Espera VER.2 |
-| 3A | DOC.4 Lote A / #172 | interno DOC.4 | #171 abierto | 100 % Markdown revisado 1:1 | Sin Global |
-| 3B | DOC.4 Lote B / #173 | interno DOC.4 | decisiones #172 | poda/movimientos/fusiones/enlaces reconciliados | Sin Global |
-| 3C | DOC.4 Lote C / #174 | interno DOC.4 | #171 abierto | artefactos declarativos reconciliados; #176 resuelto | Sin Global |
-| 4 | Auditoría previsional / #142 | obligatorio 1.0 | DOC.4 publicado + #166 | cobertura SEBD/Mixto/SUCGS demostrada; faltantes con owner | Espera DOC.4 |
-| 4.x | Derivados funcionales #142 | condicional obligatorio 1.0 | hallazgo material #142 | prestación/modalidad necesaria implementada/probada | Se crean solo si se demuestra necesidad |
-| 5 | PERSIST.1 / #130 | obligatorio 1.0 | #142 + derivados cerrados + #166 | persistencia voluntaria/versionada + auditoría técnica | Espera alcance funcional |
-| 6 | REP.1 / #143 | obligatorio 1.0 | PERSIST.1 + #166 | PDF/exportaciones reales; nueva UI con UX owner si aparece | Espera PERSIST.1 |
-| 7 | DEPLOY.1 / #157 | obligatorio 1.0 | REP.1 + #166 | runtime/hosting/HTTPS/CI-CD y toda nueva UI con UX owner | Espera REP.1 |
-| 8…x | Programa UX / #129 | obligatorio 1.0 | #142/derivados + PERSIST + REP + DEPLOY | toda UX.x registrada cerrada/absorbida; ninguna superficie sin owner | Baseline UX.7–UX.32; extensible |
-| x+1 | UX/GOV / #189 | transversal obligatorio | durante toda la ola UX | sin drift visual shared ni derivados bloqueantes | Política activa, sin Global |
-| x+2 | SEC.2 R7 / #144 | obligatorio 1.0 | toda UX.x cerrada + #189 sin drift + #166 | threat model/hardening final | Espera cierre real UX |
-| x+3 | Rendimiento / #156 | obligatorio 1.0 | SEC.2 R7 | línea base reproducible; problemas materiales resueltos | Espera SEC.2 |
-| x+4 | A11Y.2 / #145 | obligatorio 1.0 | #156 + #166 | WCAG 2.2/AT/reflow/forced-colors en superficies finales | Espera rendimiento |
-| x+5 | REV.1 / #146 | obligatorio 1.0 | A11Y.2 + #166 | normativa/jurídica/privacidad/terceros finales | Espera A11Y.2 |
-| x+6 | Settings GitHub / #153 | transversal obligatorio | REV.1 | settings públicos/security/release/deploy revalidados | Sin Global mientras sea gate manual |
-| x+7 | DOC.1 R6 / #147 | obligatorio 1.0 | #153 + #166 | documentación final congelada | Espera #153 |
+| 1 | DOC.4 R1 / #171 | obligatorio 1.0 | G129 publicado + #166 CLEAN | corpus documental/no ejecutable current-state-only, autoridades y árbol reconciliados | **En ejecución**; sin Global asignado |
+| 1A | DOC.4 Lote A / #172 | interno DOC.4 | #171 activo | 100 % Markdown revisado 1:1 | En ejecución |
+| 1B | DOC.4 Lote B / #173 | interno DOC.4 | decisiones documentales | poda/movimientos/fusiones/renombres/enlaces reconciliados | En ejecución |
+| 1C | DOC.4 Lote C / #174 | interno DOC.4 | #171 activo | artefactos declarativos reconciliados; #176 absorbido | En ejecución |
+| 1D | Saneamiento / #209 | interno DOC.4 | #171 activo | rutas/nombre heredado/.venv clasificados y saneados | En ejecución; parte local pendiente |
+| 1E | Guardas documentales / #215 | interno DOC.4 | cambios de Lotes A/B/C | tests/auditores protegen invariantes actuales sin reinstalar historia | En ejecución |
+| 2 | Auditoría previsional / #142 | obligatorio 1.0 | DOC.4 cerrado/publicado + #166 | cobertura SEBD/Mixto/SUCGS demostrada; faltantes con owner | Espera DOC.4 |
+| 2.x | Derivados de #142 | condicional obligatorio | hallazgo material #142 | prestación/modalidad requerida implementada y probada | Se crean solo si existe necesidad |
+| 3 | PERSIST.1 / #130 | obligatorio 1.0 | #142 + derivados + #166 | persistencia voluntaria/versionada, migraciones y auditoría técnica | Espera alcance funcional |
+| 4 | REP.1 / #143 | obligatorio 1.0 | PERSIST.1 + #166 | informes/exportaciones reales y reproducibles | Espera PERSIST.1 |
+| 5 | DEPLOY.1 / #157 | obligatorio 1.0 | REP.1 + #166 | runtime/hosting/HTTPS/CI-CD definidos | Espera REP.1 |
+| 6…x | Programa UX / #129 | obligatorio 1.0 | #142/derivados + PERSIST + REP + DEPLOY | todas las UX.x necesarias cerradas y sin superficies huérfanas | Baseline UX.7–UX.32; extensible |
+| x+1 | UX/GOV / #189 | transversal UX | durante toda la ola UX | sin drift shared ni derivados bloqueantes | Política activa |
+| x+2 | SEC.2 R7 / #144 | obligatorio 1.0 | UX completa + #189 + #166 | hardening final | Espera UX |
+| x+3 | Rendimiento / #156 | obligatorio 1.0 | SEC.2 R7 | línea base reproducible y problemas materiales resueltos | Espera SEC.2 |
+| x+4 | A11Y.2 / #145 | obligatorio 1.0 | #156 + #166 | auditoría accesibilidad final | Espera rendimiento |
+| x+5 | REV.1 / #146 | obligatorio 1.0 | A11Y.2 + #166 | revisión normativa/jurídica/privacidad/terceros | Espera A11Y.2 |
+| x+6 | Settings GitHub / #153 | transversal final | REV.1 | configuración revalidada | Espera REV.1 |
+| x+7 | DOC.1 R6 / #147 | obligatorio 1.0 | #153 + #166 | freeze documental final | Espera #153 |
 | x+8 | QA.1 / #148 | obligatorio 1.0 | todos los previos + #166 | candidato beta final sin bloqueantes | Espera DOC.1 R6 |
-| x+9 | REL.1 / #149 | obligatorio 1.0 | QA.1 + #166 | build/SBOM/firma/tag/Release oficiales | Último bloque |
+| x+9 | REL.1 / #149 | obligatorio 1.0 | QA.1 + #166 | Build/SBOM/firma/tag/Release oficiales | Último bloque |
 
-## 4. Baseline UX conocido
+## 5. Baseline UX conocido
 
-### Inicio y Simulación
+### Inicio y simulación
 
 | UX | Issue | Superficie |
 | --- | ---: | --- |
 | UX.7 | #133 | Inicio Asegurado `/` + Inicio/Resumen Developer `/dev` autenticado |
-| UX.8 | #134 | `/simulacion` — entrada y selección Manual/Asistida antes del Paso 1 |
+| UX.8 | #134 | `/simulacion` — entrada y selección Manual/Asistida |
 | UX.9 | #177 | Paso 1 — Datos personales |
 | UX.10 | #178 | Paso 2 — Cuotas |
 | UX.11 | #179 | Paso 3 — Historial y base salarial |
@@ -100,9 +97,9 @@ G126 / PLAN.2 R2 publicado
 
 | UX | Issue | Superficie |
 | --- | ---: | --- |
-| UX.15 | #183 | `/comparar` — Escenarios/Comparación |
+| UX.15 | #183 | `/comparar` |
 | UX.16 | #184 | `/como-se-calcula` |
-| UX.17 | #185 | `/metodologia` — Fuentes/Metodología |
+| UX.17 | #185 | `/metodologia` |
 | UX.18 | #186 | modal Términos/privacidad/consentimiento |
 | UX.19 | #187 | modal Gestión de datos |
 | UX.20 | #188 | modal Mi Retiro Seguro |
@@ -124,84 +121,81 @@ G126 / PLAN.2 R2 publicado
 | UX.31 | #200 | Acceso técnico |
 | UX.32 | #201 | Centro de desarrollo legacy, si continúa soportado |
 
-UX.7 es la única combinación deliberada de dos superficies porque ambas representan la página de Inicio/identidad de cada portal. El login Developer tiene UX.23 propia.
+UX.7 mantiene la agrupación deliberada ya definida para las dos páginas de
+Inicio. El login Developer conserva UX.23 propia.
 
-## 5. Expansión UX.33+
+## 6. Expansión UX.33+
 
-Si #142/derivados, PERSIST.1, REP.1, DEPLOY.1 o una UX previa crea/descubre una nueva superficie material:
+Si #142/derivados, PERSIST.1, REP.1, DEPLOY.1 o una UX descubre/crea otra
+superficie material:
 
-1. crear la siguiente UX.x consecutiva;
+1. crear la siguiente UX consecutiva;
 2. crear Issue propietario;
-3. incorporar inmediatamente la nueva UX a #129/#155 y fuentes vivas;
+3. actualizar #129 y autoridades vivas;
 4. aplicar #189;
 5. no renumerar UX existentes;
 6. no preasignar Global/VERSION.
 
-## 6. Contrato visual multiportal #189
-
-Todo cambio debe clasificarse como `shared` o `portal-specific`. Si es shared —tokens, tipografía, colores, botones, inputs, tarjetas, tablas genéricas, badges/alerts, spacing, bordes/radios/sombras, foco, temas, forced-colors, motion, selector de apariencia, footer u otros patrones comunes— debe implementarse/sincronizarse donde aplique en todos los portales.
-
-Una UX.x no puede cerrar dejando otro portal desincronizado. Si una dependencia real impide sincronizar en la misma fase, debe existir un Issue derivado bloqueante antes del cierre.
-
 ## 7. Gate de salida UX
 
-La ola termina cuando:
+La ola UX termina cuando:
 
-- [ ] todas las UX.x obligatorias registradas están cerradas/absorbidas;
-- [ ] ninguna superficie visual material pre-1.0 carece de UX owner/clasificación;
-- [ ] no existe derivado bloqueante de sincronización shared;
-- [ ] #189 confirma ausencia de drift visual shared conocido;
-- [ ] todo hallazgo fuera de alcance fue transferido.
+- todas las UX.x obligatorias están cerradas/absorbidas;
+- ninguna superficie pre-1.0 carece de owner;
+- no existe derivado bloqueante shared;
+- #189 confirma ausencia de drift shared conocido;
+- todo hallazgo fuera de alcance tiene owner.
 
 Solo entonces se habilita SEC.2 R7.
 
-## 8. Post-1.0
+## 8. Políticas y trabajo transversal
 
-| Issue | Trabajo | Clasificación |
+| Issue / bloque | Función | Global propio |
+| --- | --- | --- |
+| #166 | preflight Dependabot/limpieza por fase | No |
+| #203 | workspace remoto, SYNC POINTS y transferencia canónica | No |
+| #214 | briefing/aprobación antes de una fase nueva | No |
+| DOC.3 | auditoría documental por cadencia | Solo si materializa una fase propia aceptada |
+| #189 | sincronización visual multiportal | No |
+| #153 | settings GitHub final | No mientras sea gate manual |
+| #176 | absorbido por #174 | No |
+
+## 9. Post-1.0
+
+| Issue | Trabajo | Estado programático |
 | ---: | --- | --- |
 | #131 | i18n español/inglés | post-1.0 |
 | #150 | sesiones/accesos Developer avanzados | post-1.0 |
 | #151 | notificaciones Developer | post-1.0 |
 | #152 | Bearer granular | post-1.0 por defecto; escalable por SEC.2 R7 |
 
-Si una capacidad post-1.0 se escala antes de 1.0 y crea UI visible, debe crear una nueva UX.x y volver a cerrar el gate #129/#189.
-
-## 9. Transversales / absorbidos / cerrados
-
-| Issue / bloque | Clasificación | Owner / regla |
-| --- | --- | --- |
-| #166 | transversal permanente | preflight Dependabot/limpieza por fase |
-| MANT.2 R2+ | transversal condicional | inserción por dependencia material |
-| DOC.3 | transversal por cadencia | auditoría periódica; DOC.4 resetea baseline |
-| #189 | transversal UX | sincronización multiportal y expansión UX.x |
-| #153 | transversal final | settings GitHub |
-| #176 | absorbido | #174 |
-| #141 | cerrado | umbrella consumido por PLAN.2 R2 |
+Si una capacidad se escala a pre-1.0 y crea UI, recibe también una UX.x.
 
 ## 10. Cadencia DOC.3
 
-Cuenta fases materiales top-level aceptadas, no lotes internos. DOC.4 crea nuevo baseline y reinicia el contador. Por defecto la siguiente DOC.3 integral ocurre después de la segunda fase material aceptada desde ese baseline, salvo impacto documental alto que justifique adelanto/reset. No se crea ahora DOC.3 R2 ni se reserva Global.
+DOC.4 crea un nuevo baseline y reinicia el contador de cadencia documental.
 
-## 11. Opcionales 1.0
+La siguiente DOC.3 integral ocurre por defecto después de la segunda fase
+material top-level aceptada desde ese baseline, salvo impacto alto que
+justifique adelanto. No se reserva ahora una DOC.3 futura ni un Global.
 
-**Ninguno identificado.**
-
-## 12. Invariantes de versionado durante VER.2 R6
+## 11. Invariantes actuales
 
 ```text
 VERSION = 0.129.3.0-beta
 accepted_baseline = G129/E03/C0 / MANT.2 R3
-published_baseline = G128/E02/C0 / VER.2 R6
-active_phase = MANT.2 R3 / #211
-current_candidate = accepted_pending_integration
+active_phase = DOC.4 R1 / #171
+current_candidate = unassigned
 next_global_available = 130
-G129 = libre / no reservado
+G130 = libre / sin bloque / sin VERSION
 ```
 
-El ledger v2 registra historia aceptada y candidato; el registry declara el
-baseline G127/E02 y VER.2 R6 como fase activa. El manifest de G127 es un
-snapshot `release-input`; los hechos de publicación se resuelven en runtime.
+El manifest vigente corresponde al estado G129 y su `next_step` debe describir
+la situación posterior a la publicación sin convertir G130 en candidato.
 
-## 13. Próxima frontera
+## 12. Próxima frontera
 
-VER.2 R6/#164 materializó G128/E02/C0 (`0.128.2.0-beta`) sobre el baseline publicado G127/E02. G129 continúa libre. La siguiente fase material ordinaria es DOC.4 R1/#171 después de publicar VER.2, salvo que #166 detecte trabajo material nuevo y requiera insertar MANT.2 R3+.
+La siguiente fase ordinaria después de DOC.4 es #142. Antes de abrirla debe
+existir cierre/publicación de DOC.4 y un preflight #166 fresco que la habilite.
+
+Si #166 detecta mantenimiento material, ese trabajo se inserta antes de #142.
