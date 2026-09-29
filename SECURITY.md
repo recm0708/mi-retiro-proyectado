@@ -42,6 +42,7 @@ publicar G129 debe repetirse #166; solo CLEAN habilita DOC.4 R1/#171.
 ## Estado de seguridad vigente
 La versión canónica candidata es `0.129.3.0-beta` / G129/E03/C0 para MANT.2 R3, aceptada localmente y todavía no publicada.
 - G128/E02/C0 / VER.2 R6 permanece publicado mediante `v0.128.2.0-beta` y Release 393386700.
+- Ancla historica preservada: G125/E01 / DOC.3 R1 permanece publicado como `v0.1.25.01-beta`.
 - `pypdf 6.19.0` está integrado con `pip-audit --strict` limpio y Dependency Security remoto verde.
 - G130 permanece libre y sin candidato.
 - SEC.2 R7/#144 permanece detrás de la ola UX final y gate #189.
