@@ -1,173 +1,198 @@
 # Proceso de release
 
-**Estado:** Vigente
-**Versión de aplicación:** `0.129.3.0-beta` — VER.2 R6/G128-E02-C0 aceptado localmente; integración/publicación pendiente; G129 libre.
-**Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
-**Último tag formal legacy:** `v0.0.26-beta`
-**Versión base histórica preservada:** `0.0.23-beta`
-**Base documental:** GOV.1.3 R4 — 2026-08-17
-**Revisión transversal:** REL.GOV.1 — gobierno de GitHub Releases — 2026-08-26
-**Clasificación:** Gobierno / Release / Auditoría
+**Estado:** vigente
+**Clasificación:** gobierno / publicación
 
-<!-- NOR3-G122-PROMOTION:START -->
-## Registro histórico — promoción G122-E01 post-NOR.3
+## Propósito
 
-> **Checkpoint histórico preservado.** Este bloque describe el estado inmediatamente posterior a la integración de NOR.3 y anterior a MANT.2 R1 / MANT.1 R8. No representa el estado vigente del repositorio; las secciones vigentes posteriores de este documento tienen precedencia.
+Este documento define cómo un estado aceptado de Mi Retiro Proyectado pasa de
+candidato versionado a estado integrado, tag firmado y GitHub Release.
 
-- `VERSION` materializa `0.1.22.01-beta` para NOR.3 R8 / G122-E01.
-- NOR.3 R1–R8 quedó integrado/aceptado mediante PR #162 / merge
-  `b97cf61763479b80b8e8724b878089e8bb20fa00`.
-- La revalidación automática de `main` quedó GREEN: Repository Quality Gate,
-  Visual & Accessibility y CodeQL finalizaron en `success`.
-- G123 es el siguiente Global disponible, pero **no tiene candidato ni bloque
-  preasignado**.
-- PERSIST.1 permanece planificado y no iniciado, sin Global preasignado.
-- `v0.1.21.01-beta` / G121/E01 permanece como última publicación revision-aware
-  hasta completar el tag/release firmado de G122/E01.
-- `v0.1.22.01-beta` queda pendiente de creación/firma local y de la
-  verificación/publicación gobernada por REL.GOV.1.
-<!-- NOR3-G122-PROMOTION:END -->
+La numeración se rige por [Política de versionado](../../VERSIONING.md). Este
+procedimiento no mantiene una cronología de promociones: esa historia pertenece
+a [Releases](../../RELEASES.md), Git, tags y GitHub Releases.
 
-<!-- POST-NOR3-INTERMEDIATE-SEQUENCE:START -->
-## Estado vigente — candidato VER.2 R6 materializado
+## Principios
 
-MANT.2 R2/#206 permanece publicado como **G127/E02** (`0.1.27.02-beta`) sobre
-`main@2df33a5c24d1c7cea1a6db91539a92da02c91500`, mediante PR #207,
-tag firmado `v0.1.27.02-beta` y GitHub Release prerelease 392412590.
+- Un tag formal identifica un estado integrado y revalidado.
+- Un candidato no se presenta como publicación antes de que exista el tag.
+- Una fase planificada no recibe Global o `VERSION` por anticipado.
+- El número candidato solo se materializa cuando existe un estado real que puede
+  someterse al gate revision-aware.
+- Un fallo previo a aceptación se corrige dentro del mismo candidato y no
+  consume otro Global.
+- Tags y Releases publicados no se mueven para ocultar cambios posteriores.
+- GitHub Actions puede verificar y publicar metadata, pero no crea ni firma el
+  tag del mantenedor.
 
-El preflight #166 posterior a G127 quedó CLEAN. VER.2 R6/#164 alcanzó un
-candidato material aceptable y **G128/E02/C0 queda materializado localmente
-como `0.128.2.0-beta`** dentro del Draft PR #208.
+## Autoridades
 
-G128 está aceptado/versionado pero todavía **no está publicado**: faltan el
-checkpoint firmado, auditoría remota, integración a `main`, revalidación,
-tag firmado y GitHub Release prerelease.
+El cierre debe mantener coherentes:
 
-**G129 es el siguiente Global aritmético** y permanece libre, sin candidato,
-bloque ni `VERSION` preasignados. Después de publicar VER.2 y repetir #166
-limpio corresponde **DOC.4 R1 / #171**.
-<!-- POST-NOR3-INTERMEDIATE-SEQUENCE:END -->
+- [`VERSION`](../../VERSION);
+- [ledger Markdown](../governance/pre-1-0-revision-ledger.md);
+- [ledger JSON](../../data/governance/pre-1-0-revision-ledger.json);
+- [registro de bloques](../../data/governance/work-block-registry.json);
+- [manifest de publicación](../../data/governance/release-publication-manifest.json);
+- [Changelog](../../CHANGELOG.md);
+- [Releases](../../RELEASES.md);
+- documentación afectada por el cambio.
 
+El ledger registra la secuencia de estados aceptados. El manifest es una entrada
+estructurada para la publicación del estado materializado; no es un segundo
+ledger ni un roadmap.
 
-<!-- DOC1-R1-POST-MANT1:START -->
-## Estado de publicación vigente
-- `VERSION` materializa `0.129.3.0-beta` para MANT.2 R3/G129-E03-C0.
-- G129 está aceptado localmente pero aún no tiene tag ni GitHub Release.
-- G128/E02/C0 permanece publicado mediante `v0.128.2.0-beta` y Release 393386700.
-- G130 permanece libre; DOC.4 exige publicación G129 + #166 CLEAN.
+## Qué constituye un estado aceptable
 
-## 1. Principio
+Un mantenimiento técnico, cambio funcional, seguridad, dependencia, gobierno o
+documentación puede producir una nueva beta cuando crea una configuración
+materialmente distinta y auditable.
 
-Un tag formal identifica un estado **cerrado, reproducible y validado**. No se etiqueta un árbol que todavía está pendiente de validación.
+No crean otro estado por sí solos:
 
-La historia beta publicada conserva la familia legacy:
+- commits separados de una misma revisión;
+- checkpoints;
+- un intento que todavía no supera gates;
+- PR, squash, CI o tag que solo materializan el mismo estado;
+- revalidaciones sin cambio material;
+- trabajo meramente planificado.
 
-```text
-0.0.N-beta
-```
+La decisión contable se toma conforme a `VERSIONING.md` y al ledger.
 
-Los estados revision-aware v1 ya publicados permanecen inmutables. Los
-estados beta prospectivos desde G128 usan:
+## Precondiciones
 
-```text
-0.<GLOBAL>.<EDITION>.<CORRECTION>-beta
-```
+Antes de materializar un candidato:
 
-La primera versión oficial objetivo usa cuatro componentes y se prevé inicialmente como `1.0.0.0`.
+1. la fase tiene Issue propietaria y alcance aprobado;
+2. sus dependencias de entrada están satisfechas;
+3. el preflight transversal aplicable está vigente;
+4. el último estado publicado/aceptado es trazable;
+5. el siguiente Global aritmético no está reservado por planificación;
+6. el árbol de trabajo no contiene cambios ajenos;
+7. los riesgos y validaciones de la fase están definidos.
 
-El identificador `Build` es independiente de `VERSION`. No se inventa ni se incrementa por commit; se materializa cuando REL.1 disponga de un proceso reproducible de generación de artefactos oficiales.
+Una fase recién abierta puede trabajar sin tocar `VERSION` hasta que exista un
+candidato material suficientemente completo para aplicar el contrato
+revision-aware.
 
-## 2. Qué constituye una revisión aceptada
+## Validación previa a la materialización
 
-Antes de preparar una nueva beta revision-aware debe verificarse que el cambio representa un **estado aceptado** según `VERSIONING.md` y el ledger.
-
-No consumen un nuevo `G` por sí solos:
-
-- commits separados de implementación, pruebas y documentación del mismo estado;
-- candidatos sujetos a validación manual o automática;
-- un intento que falla su gate;
-- el PR, squash, CI o tag que únicamente materializa el mismo estado;
-- un checkpoint que solo consolida estados ya contabilizados y deja pendiente la siguiente revisión funcional.
-
-Sí puede consumir un nuevo `G` un estado de mantenimiento, seguridad, gobierno, dependencias o documentación cuando sea materialmente independiente, tenga evidencia propia de aceptación y constituya una configuración auditable distinta.
-
-El candidato reserva el siguiente número global, pero ese número solo queda consumido después del cierre satisfactorio. Si falla, se corrige conservando el mismo identificador reservado.
-
-La revisión funcional y Edition no son equivalentes por definición; `functional_revision` permanece como metadata. DEV.2 R5 = G118/E04 y DEV.2 R6 = G119/E05 siguen siendo precedentes históricos. El último estado publicado continúa siendo MANT.2 R2 = G127/E02 (`0.1.27.02-beta`), integrado en `main@2df33a5c24d1c7cea1a6db91539a92da02c91500`, con tag firmado `v0.1.27.02-beta` y GitHub Release prerelease 392412590. VER.2 R6/#164 ya materializó y validó local/remotamente G128/E02/C0 (`0.128.2.0-beta`) mediante PR #208, listo para integración; G129 permanece libre. PERSIST.1 continúa detrás de VER.2 → DOC.4 → #142/derivados; la ola UX final es UX.7→UX.x bajo #129/#189.
-
-## 3. Precondiciones
-
-El cierre revisa explícitamente `CHANGELOG.md`, `RELEASES.md`, `VERSION`, ledger, registry y manifiesto de publicación.
-
-Antes del cierre:
-
-- hito funcional/técnico/documental terminado;
-- código, pruebas y documentación dependiente coherentes;
-- working tree controlado;
-- versión anterior y último `G` aceptado trazables;
-- siguiente `G` sin duplicados ni huecos en el ledger;
-- limitaciones conocidas actualizadas cuando corresponda;
-- licencia del proyecto coherente con el objetivo de distribución;
-- `THIRD_PARTY_NOTICES.md` revisado si el artefacto incluye componentes de terceros.
-
-## 4. Validación del hito antes del incremento
-
-Ejecutar, como mínimo:
+Como mínimo, y ampliando según el alcance:
 
 ```powershell
 python -m pip check
 git diff --check
 python -m compileall app
+python -m unittest discover -s tests -q
+```
 
+Para JavaScript modificado:
+
+```powershell
 Get-ChildItem .\app\static\js\*.js | ForEach-Object {
     node --check $_.FullName
     if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 }
-
-python -m unittest discover -s tests -q
 ```
 
-No se registra como “validado” un conteo que no se haya ejecutado realmente.
+Cuando el cambio es visual, interactivo, normativo, de seguridad o de
+persistencia se añaden las validaciones específicas correspondientes.
 
-Cuando una fase requiere validación manual, esa aceptación debe registrarse antes de declarar el estado cerrado.
+Un conteo o resultado no se documenta como ejecutado si no existe evidencia de
+su ejecución real.
 
-## 5. Preparación del candidato
+## Materialización del candidato
 
-Cuando el alcance está listo para gate:
+Cuando el estado tiene contenido material verificable:
 
-1. confirmar el último estado aceptado del ledger;
-2. reservar el siguiente `G` y determinar Edition/Correction según el contrato v2;
-3. construir el identificador según `VERSIONING.md`;
-4. actualizar `VERSION` como **candidato**;
-5. actualizar únicamente las superficies de estado vigente y los documentos materialmente afectados;
-6. no reescribir metadata histórica de documentos de dominio solo para copiar la versión nueva;
-7. mantener los cambios bajo `Unreleased` mientras el estado no se haya integrado;
-8. actualizar `roadmap.md`, ledger/auditoría y trazabilidad;
-9. actualizar tests de coherencia sin fijar innecesariamente versiones históricas como estado eterno;
-10. revisar licencia/terceros si el contenido distribuible cambió;
-11. si se trata de un artefacto oficial, asignar Build únicamente con el mecanismo canónico de REL.1.
+1. confirmar el último Global aceptado;
+2. determinar Global/Edition/Correction según `VERSIONING.md`;
+3. actualizar `VERSION` al identificador candidato;
+4. registrar el candidato en ledger/registry/manifest según sus contratos;
+5. actualizar únicamente documentación viva realmente afectada;
+6. mantener cambios notables bajo `[Unreleased]` mientras no exista
+   publicación;
+7. ejecutar validadores estructurados;
+8. comprobar que no se preasigna el Global posterior.
 
-Durante esta etapa el número está reservado pero **no aceptado**.
+La materialización permite validar un identificador concreto, pero **no equivale
+a integración ni publicación**.
 
-## 6. Validación del candidato
+## Manifest de publicación
 
-Después de preparar `VERSION`:
+`data/governance/release-publication-manifest.json` es el input
+machine-readable del flujo de Release.
 
-- repetir suite completa;
-- ejecutar `python -m pip check`;
-- repetir `git diff --check`;
-- comprobar `VERSION`, `APP_VERSION`, FastAPI y footer;
-- ejecutar el validador del ledger estructurado y comprobar que preserve G001–G070 sin huecos ni duplicados;
-- comprobar que `VERSION` corresponda al último estado aceptado o al candidato reservado del ledger mediante `python scripts/release_contract.py`;
-- comprobar README, ROADMAP, SECURITY, CHANGELOG, RELEASES y proceso de release;
-- comprobar que un candidato no se presente como tag/release ya publicado;
-- revisar que no existan logs, PDFs personales o secretos preparados para commit;
-- comprobar avisos/licencias de terceros cuando corresponda;
-- para artefactos oficiales, comprobar correspondencia entre versión, Build, hashes y contenido reproducible.
+Debe declarar:
 
-## 7. Commit de cierre
+- versión y estado revision-aware que se está publicando;
+- bloque/revisión;
+- resumen;
+- cambios principales;
+- validación ejecutada;
+- evidencia;
+- siguiente Global aritmético y, solo si existe realmente, el siguiente
+  candidato material.
 
-El cierre de versión debe quedar en uno o más commits lógicos **firmados** en el flujo ordinario del mantenedor.
+### Snapshot y resolución runtime
+
+El manifest usa:
+
+- `snapshot_role = "release-input"`;
+- `publication_resolution = "runtime"`.
+
+Eso significa que commit publicado, objeto de tag y tipo de Release se resuelven
+cuando el workflow procesa el tag, no se congelan como hechos futuros dentro del
+manifest.
+
+Campos como `publication_state`, `published_commit`, `tag_object`,
+`release_id` o `published_at` no se escriben manualmente en el snapshot de
+entrada.
+
+### Regla de `next_step`
+
+`next_step` describe **lo que viene después del estado que se está
+publicando**.
+
+Por tanto, su `description`:
+
+- puede indicar que el siguiente Global continúa libre;
+- puede describir una fase siguiente ya aprobada;
+- puede declarar dependencias posteriores a la publicación;
+- **no debe afirmar que el propio estado del manifest sigue pendiente de
+  integración/publicación**, porque las notas se renderizan cuando el tag ya
+  representa un estado publicado;
+- no debe preasignar versión/bloque al siguiente Global cuando todavía no existe
+  candidato material.
+
+Esta regla evita que una nota generada correctamente bajo `## Estado publicado`
+termine contradiciéndose en `## Siguiente paso`.
+
+El contrato del manifest se valida con:
+
+```powershell
+python scripts/release_publication.py --check-manifest
+```
+
+## Validación del candidato
+
+Después de materializar `VERSION`:
+
+- ejecutar el Quality Gate completo;
+- comprobar `VERSION`, aplicación y superficies que lo consumen;
+- validar continuidad y unicidad del ledger;
+- validar registry/manifest;
+- ejecutar `python scripts/release_contract.py` según el modo aplicable;
+- revisar README/roadmap/gobierno solo cuando realmente describan ese estado;
+- comprobar que el candidato no se presenta como tag/Release ya publicado;
+- revisar terceros/licencias si cambia el contenido distribuible;
+- verificar que no se hayan preparado para commit secretos, datos personales,
+  dumps o artefactos locales.
+
+## Commit canónico
+
+El estado final de la rama canónica se confirma con commit firmado por el
+mantenedor.
 
 ```powershell
 git verify-commit HEAD
@@ -175,53 +200,42 @@ git log --show-signature -1
 git status
 ```
 
-El árbol debe quedar limpio y la firma debe verificarse cuando el commit haya sido creado desde el flujo local firmado.
+Los commits temporales de un workspace asistido no sustituyen el commit
+canónico firmado ni se integran directamente a `main`.
 
-Los commits técnicos producidos por integraciones autorizadas pueden existir durante el armado del candidato; el gate definitivo sigue siendo PR protegido, CI e integración verificada conforme a la política del repositorio.
+## Pull Request e integración
 
-## 8. Pull Request, integración y CI remota
+`main` no recibe pushes directos ordinarios.
 
-`main` está protegida y no recibe pushes directos ordinarios.
+El Pull Request canónico debe:
 
-Publicar la rama de trabajo:
+- enlazar las Issues propietarias;
+- declarar alcance y exclusiones;
+- estar actualizado respecto de `main`;
+- superar `Repository Quality Gate`;
+- superar `Python Compatibility`;
+- superar controles adicionales que apliquen;
+- tener conversaciones resueltas;
+- mantener fuera cambios no relacionados.
 
-```powershell
-git push -u origin <rama>
-```
+La integración ordinaria usa `Squash and merge`.
 
-Abrir un Pull Request hacia `main` y confirmar:
-
-- rama actualizada respecto de `main`;
-- check requerido `Repository Quality Gate` en **success**;
-- check requerido `Python Compatibility` en **success**;
-- conversaciones resueltas;
-- ausencia de cambios no relacionados;
-- evidencia local requerida disponible.
-
-La migración de automatización post-G119 está cerrada. `Repository Quality
-Gate` y `Python Compatibility` constituyen los required checks del ruleset de
-`main`. `Dependency Security`, Visual/Accessibility y CodeQL complementan esos
-controles cuando resultan aplicables al alcance del cambio.
-
-La integración ordinaria se realiza mediante `Squash and merge`. El commit resultante en `main` debe cumplir los controles de firma/verificación exigidos por el ruleset.
-
-Después de integrar:
+Después del merge:
 
 ```powershell
 git switch main
 git fetch origin --prune
 git pull --ff-only origin main
+git status
 ```
 
-Confirmar `HEAD == origin/main`, working tree limpio y revalidar el nuevo SHA de `main`.
+Se confirma que `HEAD == origin/main` y se revalida el SHA integrado antes de
+crear el tag.
 
-Solo entonces el `G` reservado se considera **aceptado** y el ledger pasa de “candidato/reservado” a estado cerrado.
+## Tag formal
 
-## 9. Tag formal
-
-Solo después de integrar y revalidar se crea un tag, cuando el cierre determine que corresponde materializar ese estado como hito formal.
-
-La etiqueta se deriva exactamente de `VERSION`:
+El tag se deriva exactamente de `VERSION` y se crea **después** de integrar y
+revalidar:
 
 ```powershell
 $version = (Get-Content .\VERSION).Trim()
@@ -230,233 +244,169 @@ git tag -v "v$version"
 git push origin "v$version"
 ```
 
-Ejemplos:
+Reglas:
 
-```text
-v0.0.26-beta       # último tag legacy histórico
-v0.0.71.01-beta    # tag histórico; reconciliado posteriormente como G087/E01
-v0.1.09.01-beta    # G109/E01, primer release posterior a la reconciliación
-v1.0.0.0
-v1.0.0.1
-```
+- el tag apunta al commit integrado validado;
+- usa una clave autorizada;
+- todo tag nuevo debe verificarse antes de declarar publicación;
+- un tag publicado no se mueve, reutiliza ni elimina para esconder una
+  corrección posterior;
+- una corrección posterior sigue el modelo revision-aware y recibe su propio
+  estado cuando corresponde.
 
-No se crean tags revision-aware retrospectivos para G001–G070.
+No se crean tags revision-aware retrospectivos únicamente para rellenar huecos
+históricos del ledger.
 
-El tag debe apuntar al commit validado y usar una clave autorizada por la política vigente. La creación y firma del tag permanecen fuera de GitHub Actions y bajo control del mantenedor. `.github/workflows/verificar-tags.yml` verifica firma, contrato, correspondencia del tag y pertenencia del commit al historial de `main`; REL.GOV.1 R2 añade después un job separado de publicación.
+## Verificación remota del tag
 
-## 10. Build oficial
+`.github/workflows/verificar-tags.yml` aplica dos fronteras:
 
-`Build` no forma parte de `VERSION` ni del tag.
+1. **verificación**, con permisos de lectura, para firma, `VERSION`, ledger,
+   tag, commit objetivo y pertenencia al historial de `main`;
+2. **publicación del GitHub Release**, que solo se ejecuta después de superar la
+   verificación y es la única parte que requiere escritura sobre Releases.
 
-Para la primera versión oficial prevista:
+El workflow no sustituye la creación/firma local del tag.
 
-```text
-Versión 1.0.0.0
-Build 000001
-Tag v1.0.0.0
-```
+## GitHub Release
 
-REL.1 definirá la fuente canónica del Build, su incremento monotónico, el empaquetado reproducible y la asociación inequívoca entre Build, commit, tag, hashes y artefactos.
+Todo tag formal nuevo gobernado por este proceso debe tener un GitHub Release
+coherente.
 
-Hasta entonces no se publica un Build ficticio.
+### Título
 
-## 11. Inmutabilidad
-
-Después de la migración criptográfica del 2026-08-17, un tag publicado:
-
-- no se mueve;
-- no se reutiliza;
-- no se elimina para ocultar historia;
-- no se fuerza para ocultar una corrección posterior.
-
-La única excepción histórica fue la reemisión firmada de `v0.0.22-beta` y `v0.0.23-beta`, ejecutada el 2026-08-17 preservando sus commits objetivo. Esa excepción no puede repetirse.
-
-Una corrección posterior recibe un nuevo estado aceptado únicamente cuando supera el criterio contable y el gate aplicable.
-
-## 12. GitHub Release
-
-Desde REL.GOV.1, **todo tag formal nuevo** publicado después de esta política debe tener un GitHub Release asociado. Los tags históricos anteriores no se rellenan retroactivamente salvo decisión de auditoría explícita y basada en evidencia. Un estado aceptado que nunca tuvo tag no recibe un Release retroactivo por conveniencia: GitHub Release y tag formal se tratan como una unidad publicada.
-
-### 12.1. Contrato de título
-
-Para una beta revision-aware el título obligatorio es:
+Para una beta revision-aware:
 
 ```text
 Mi Retiro Proyectado v<VERSION> — GNNN/ENN
 ```
 
-Ejemplo vigente:
-
-```text
-Mi Retiro Proyectado v0.1.09.01-beta — G109/E01
-```
-
-El título se obtiene con:
+El título canónico puede obtenerse mediante:
 
 ```powershell
 python scripts\release_contract.py --print-title
 ```
 
-La excepción histórica `v0.0.71.01-beta` conserva su tag original, pero sus metadatos de GitHub Release muestran **G087/E01** y explican que fue publicado originalmente como G071/E01.
+### Cuerpo
 
-### 12.2. Secciones obligatorias del cuerpo
+Las notas contienen, en orden lógico:
 
-Todo Release nuevo debe contener, en este orden lógico, las siguientes secciones:
+1. `## Estado publicado`;
+2. `## Resumen`;
+3. `## Cambios principales`;
+4. `## Validación`;
+5. `## Evidencia`;
+6. `## Siguiente paso`.
 
-1. `## Estado publicado`
-2. `## Resumen`
-3. `## Cambios principales`
-4. `## Validación`
-5. `## Evidencia`
-6. `## Siguiente paso`
+`Estado publicado` incluye versión, tag, G/E, bloque, commit publicado, objeto
+de tag y tipo de Release. Esos valores de publicación se resuelven contra el tag
+real.
 
-Dentro de **Estado publicado** se registran como mínimo versión, tag, G/E, commit objetivo y tipo de publicación. **Validación** debe conservar únicamente conteos realmente ejecutados. **Evidencia** debe identificar PR/merge, CI requerida y verificación del tag. **Siguiente paso** describe planificación, no una garantía de que el roadmap no pueda cambiar después.
+`Validación` conserva únicamente verificaciones realmente ejecutadas.
 
-La estructura de un archivo de notas puede validarse con:
+`Siguiente paso` describe futuro posterior a la publicación y respeta la regla
+de no preasignación.
 
-```powershell
-python scripts\release_contract.py --check-notes .\release-notes.md
-```
+### Prerelease y estable
 
-### 12.3. Prerelease frente a release estable
-
-- una versión terminada en `-beta` se publica con `--prerelease`;
+- una versión terminada en `-beta` se publica como prerelease;
 - una versión oficial estable no se marca como prerelease;
-- no se usa un Release beta como sustituto de una versión oficial;
-- `Build` solo se incorpora cuando REL.1 defina el contrato reproducible correspondiente.
+- una beta no sustituye una versión oficial;
+- Build solo aparece cuando exista el contrato reproducible de REL.1.
 
-### 12.4. Creación controlada
+## Publicación idempotente
 
-REL.GOV.1 R2 mantiene la **creación y firma del tag como operación local del mantenedor**. GitHub Actions no crea ni firma tags.
+El workflow resuelve el tag, renderiza las notas mediante
+`scripts/release_publication.py` y aplica un comportamiento cerrado:
 
-Antes de la promoción se prepara `data/governance/release-publication-manifest.json` con resumen, cambios, validación, evidencia y siguiente paso sustentados. El manifiesto debe corresponder a `VERSION`, al bloque/ordinal aceptado del ledger y al siguiente candidato real. Su contrato se valida con:
+- HTTP 404 permite crear un Release inexistente;
+- HTTP 200 exige coincidencia exacta del Release existente;
+- una diferencia de contrato provoca fallo en vez de reescritura automática;
+- errores de autenticación, permisos, red, rate limit o servidor no se
+  interpretan como “Release inexistente”.
 
-```powershell
-python scripts\release_publication.py --check-manifest
-```
+La automatización no crea commits post-publicación para reescribir el snapshot
+que produjo el tag.
 
-Después de integrar, revalidar `main`, crear el tag anotado/firmado y ejecutar `git push origin "v$version"`, el workflow `.github/workflows/verificar-tags.yml` aplica dos fronteras de permisos:
+## Corrección de metadata de un Release
 
-1. **Verificar tag publicado** usa `contents: read` y valida firma SSH, `VERSION`, ledger, tag, commit objetivo y pertenencia al historial de `main`.
-2. **Publicar GitHub Release** depende del job anterior y es el único que recibe `contents: write`.
+Una edición descriptiva de un GitHub Release puede realizarse cuando exista una
+razón explícita de formato o reconciliación, siempre que:
 
-El segundo job deriva del tag el commit publicado y el objeto de tag, renderiza las notas canónicas mediante `scripts/release_publication.py` y aplica semántica idempotente:
+- no se mueva, elimine ni recree el tag;
+- no cambie el commit objetivo del tag;
+- no se sustituyan conteos históricos por resultados actuales;
+- una reconciliación semántica conserve la denominación/contexto original
+  necesario;
+- la edición tenga trazabilidad en una Issue o auditoría apropiada.
 
-- solo un **HTTP 404** de la API de GitHub autoriza interpretar que el Release no existe y crearlo con `gh release create --verify-tag`;
-- si existe (HTTP 200) y coincide exactamente en tag, título, draft/prerelease y cuerpo, termina en `OK` sin modificarlo;
-- si existe pero difiere del contrato, falla cerrado y no lo reescribe automáticamente;
-- errores de autenticación, permisos, rate limit, servidor, red o cualquier estado distinto de 200/404 fallan cerrado y **no** se reinterpretan como ausencia del Release.
+Una edición de metadata, por sí sola, no consume Global. Si la corrección exige
+cambios en scripts, workflows, tests o contratos versionados, esos cambios sí
+siguen el ciclo revision-aware ordinario.
 
-Las versiones `-beta` se publican como prerelease; una versión estable omite esa marca. `.github/release.yml` continúa disponible para categorización asistida, pero no sustituye el manifiesto ni las notas auditables.
+## Artefactos, privacidad y terceros
 
-El flujo automático **no crea commits post-publicación** ni modifica `main` para cambiar frases temporales. La documentación viva evita declarar estados efímeros como “tag pendiente”; la evidencia primaria de publicación reside en Git/tag firmado, GitHub Release y el workflow correspondiente. Un operador puede usar `gh release create` manualmente solo como recuperación controlada si la automatización no está disponible, respetando exactamente el mismo contrato.
+Si un Release distribuye instaladores, ejecutables, contenedores, ZIP u otros
+artefactos que incorporen terceros, debe conservar:
 
-### 12.5. Edición y reconciliación posterior
+- inventario exacto;
+- hashes reproducibles cuando correspondan;
+- licencias, avisos y NOTICE requeridos;
+- correspondencia entre versión, Build, tag y contenido.
 
-Los metadatos de un GitHub Release pueden corregirse cuando haya errores de formato, redacción o una reconciliación histórica posterior. En ese caso:
+Nunca se adjuntan datos personales, PDFs previsionales, logs sensibles,
+`.env`, tokens, secretos, cookies o dumps de sesión.
 
-- se usa `gh release edit`;
-- **no** se mueve, elimina ni recrea el tag;
-- no se cambia el commit objetivo del tag;
-- una corrección semántica histórica debe indicar la denominación original y la reconciliada;
-- los conteos de pruebas originales se conservan como evidencia histórica y no se sustituyen por los actuales;
-- una edición puramente descriptiva del objeto GitHub Release no consume por sí sola un nuevo Global;
-- si la corrección requiere cambios versionados en política, workflow, scripts, pruebas o documentación viva, esos cambios siguen la contabilidad revision-aware ordinaria.
+## Build oficial
 
-### 12.6. Artefactos, privacidad y terceros
+Build es independiente de `VERSION` y del tag.
 
-Si una futura GitHub Release incluye un instalador, ejecutable autocontenido, contenedor, ZIP o artefacto que incorpore físicamente dependencias de terceros, el Release debe incluir hashes reproducibles cuando correspondan y los textos de licencia, avisos y NOTICE aplicables al contenido realmente distribuido.
+REL.1 definirá:
 
-Nunca se adjuntan PDFs personales, logs con datos sensibles, secretos, `.env`, tokens, volcados de sesión ni archivos diagnósticos sin sanitizar.
+- fuente canónica;
+- incremento monotónico;
+- empaquetado reproducible;
+- asociación entre Build, commit, tag, hashes y artefactos.
 
-## 13. Evidencia de cierre
+Hasta entonces no se publica un Build ficticio.
+
+## Evidencia de cierre
 
 Registrar como mínimo:
 
-- identificador de versión;
-- `G` y `EE` cuando aplique;
-- SHA de rama y SHA integrado;
-- PR;
-- resultado de pruebas locales;
-- CI requerida;
-- tag y objeto tag si se publica;
-- fecha;
+- versión;
+- Global/Edition/Correction cuando aplique;
+- SHA candidato y SHA integrado;
+- Pull Request;
+- validaciones locales;
+- checks remotos;
+- tag y objeto de tag;
+- GitHub Release;
 - limitaciones relevantes;
-- licencia del proyecto;
-- inventario/avisos de terceros cuando el artefacto los incorpore;
-- Build y hashes cuando exista un artefacto oficial.
+- inventario/licencias de terceros cuando correspondan;
+- Build y hashes cuando existan artefactos oficiales.
 
-`RELEASES.md` registra los hitos publicados; el ledger registra la secuencia de estados aceptados; Git/GitHub son la evidencia primaria.
+`RELEASES.md` resume hitos publicados; el ledger conserva estados aceptados;
+Git y GitHub son la evidencia primaria.
 
-## 14. Fallo durante el cierre
+## Fallo durante el cierre
 
-Si falla una validación:
+Si falla una validación antes de aceptación:
 
-- no consumir un nuevo `G`;
+- no consumir otro Global;
 - no crear tag;
-- corregir el mismo candidato;
-- repetir validación;
-- no alterar evidencia previa ya publicada.
+- corregir el candidato;
+- repetir el gate;
+- no alterar evidencia previa publicada.
 
-Si un problema se descubre después de publicar un tag, no se reescribe ese tag. La corrección posterior se procesa como un nuevo candidato.
+Si un defecto material se descubre después de publicar, no se reescribe el tag.
+La corrección se procesa conforme al modelo revision-aware vigente.
 
-<!-- ANCLAS_HISTORICAS_VER2_PROCESO_CONSOLIDADAS -->
+## Compatibilidad histórica
 
-## Compatibilidad histórica preservada por VER.2
+Las familias legacy y revision-aware v1 ya publicadas permanecen inmutables.
+Releases, auditorías y tags anteriores pueden conservar convenciones que eran
+válidas en su momento.
 
-- El cierre formal usa tag anotado y firmado cuando corresponde publicar un hito.
-- La política de tags conserva la inmutabilidad de `v0.0.25-beta` y `v0.0.26-beta`.
-- Todo release con artefacto distribuible debe conservar inventario exacto del artefacto, avisos de terceros y correspondencia entre versión, Build, tag, hashes y contenido publicado.
-- Los releases con artefactos distribuibles deben revisar licencias/NOTICE upstream antes de publicar.
-
-## Reconciliación revision-aware antes de la próxima promoción
-
-Antes de promover el siguiente candidato debe validarse que el ledger vivo
-contenga G001–G110, que G111 sea el siguiente Global y que el snapshot histórico
-G070 conserve su SHA-256. `v0.0.71.01-beta` no se mueve para corregir su
-numeración histórica. REL.GOV.1 quedó aceptado como G110/E01 mediante PR #85 y merge `5cd1cea`.
-La promoción post-merge no consume G111; DOC.2 continúa con G111/E01 (`0.1.11.01-beta`).
-
-## Backfill histórico completado el 2026-08-26
-
-REL.GOV.1 se aplicó también a los tags formales históricos ya existentes:
-
-- inventario confirmado: **29 tags formales reales**;
-- inventario final: **29 GitHub Releases**;
-- `v0.0.1-beta`–`v0.0.26-beta` recibieron Releases retrospectivos administrativos;
-- no se crearon tags nuevos para cubrir huecos inexistentes;
-- la fecha del GitHub Release retrospectivo no sustituye la fecha histórica del hito ni del tag;
-- ningún tag fue movido, borrado o recreado;
-- el backfill de metadata no consume un Global.
-
-La regla futura permanece: un nuevo tag formal debe publicarse con su GitHub Release conforme al contrato de esta guía.
-
-## Replanificación operativa PLAN.2 R1
-
-Después de publicar `v0.1.13.03-beta` (G113/E03), G114/E01
-`0.1.14.01-beta` quedó reservado para PLAN.2 R1. Durante aquel candidato,
-`VERSION` permaneció en `0.1.13.03-beta`. PLAN.2 R1 fue aceptado posteriormente
-y su promoción formal publicó G114/E01.
-
-La automatización práctica de publicación mediante GitHub CLI se evaluará en
-REL.GOV.1 R2. El tag continúa creándose y verificándose localmente con firma
-del mantenedor; la creación del GitHub Release debe ser reproducible mediante
-comandos y un archivo de notas cuando la herramienta esté disponible.
-
-La matriz viva de trabajo pendiente está en
-`docs/governance/pre-1-0-pending-matrix.md`.
-
-## Promoción G114/E01 — PLAN.2 R1
-
-PLAN.2 R1 fue integrado mediante PR #94 / merge `7ded70c` y revalidado con
-1103 pruebas, 148 Markdown y los checks remotos requeridos en `success`.
-
-La promoción PR #95 / merge `5c6d2db` materializó `0.1.14.01-beta`
-como G114/E01 después de la revalidación post-merge. El tag anotado y firmado
-`v0.1.14.01-beta` fue creado sobre ese commit, verificado localmente y por
-GitHub, y publicado junto con su GitHub Release prerelease. El workflow
-`Git Tag Signature Verification` terminó en `success`; `v0.1.13.03-beta`
-permanece preservado como publicación anterior.
-
-El siguiente candidato queda reservado como DOC.1 R4:
-G115/E04 (`0.1.15.04-beta`).
+La política prospectiva se aplica a nuevas publicaciones; no se moderniza la
+historia únicamente para que su redacción coincida con el procedimiento actual.

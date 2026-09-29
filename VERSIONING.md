@@ -1,104 +1,128 @@
 # Política de versionado
 
-**Proyecto:** Mi Retiro Proyectado
-**Estado:** vigente desde GOV.1.2; revisada por PLAN.1 y VER.2
-**Fecha de adopción:** 2026-08-17
-**Revisión de transición a versión oficial:** 2026-08-19
-**Revisión revision-aware:** 2026-08-22
+**Estado:** vigente
 
-<!-- NOR3-G122-PROMOTION:START -->
-## Registro histórico — promoción G122-E01 post-NOR.3
+## Propósito
 
-> **Checkpoint histórico preservado.** Este bloque describe el estado inmediatamente posterior a la integración de NOR.3 y anterior a MANT.2 R1 / MANT.1 R8. No representa el estado vigente del repositorio; las secciones vigentes posteriores de este documento tienen precedencia.
+Esta política define cómo Mi Retiro Proyectado identifica estados de desarrollo,
+publicaciones beta y versiones oficiales sin confundir commits, revisiones
+funcionales, estados aceptados, tags o artefactos distribuibles.
 
-- `VERSION` materializa `0.1.22.01-beta` para NOR.3 R8 / G122-E01.
-- NOR.3 R1–R8 quedó integrado/aceptado mediante PR #162 / merge
-  `b97cf61763479b80b8e8724b878089e8bb20fa00`.
-- La revalidación automática de `main` quedó GREEN: Repository Quality Gate,
-  Visual & Accessibility y CodeQL finalizaron en `success`.
-- G123 es el siguiente Global disponible, pero **no tiene candidato ni bloque
-  preasignado**.
-- PERSIST.1 permanece planificado y no iniciado, sin Global preasignado.
-- `v0.1.21.01-beta` / G121/E01 permanece como última publicación revision-aware
-  hasta completar el tag/release firmado de G122/E01.
-- `v0.1.22.01-beta` queda pendiente de creación/firma local y de la
-  verificación/publicación gobernada por REL.GOV.1.
-<!-- NOR3-G122-PROMOTION:END -->
+La historia completa de estados aceptados pertenece al ledger y a los registros
+de publicación. Este documento describe **el modelo vigente** y la compatibilidad
+necesaria para interpretar identificadores ya publicados.
 
-<!-- POST-NOR3-INTERMEDIATE-SEQUENCE:START -->
-## Estado vigente — MANT.2 R3 / G129-E03-C0 pendiente de integración
+## Fuentes canónicas
 
-VER.2 R6/#164 está publicado como G128/E02/C0 (`0.128.2.0-beta`) mediante PR #208, tag firmado y Release 393386700.
-El preflight #166 previo a DOC.4 detectó #210 y abrió MANT.2 R3/#211.
-CP1 y CP2 están firmados y auditados remotamente; #210 quedó superseded por Draft PR #212.
-MANT.2 R3 materializa G129/E03/C0 como `0.129.3.0-beta`; G130 permanece libre.
-Después de publicar G129 debe repetirse #166 y solo CLEAN habilita DOC.4.
-Un MANT.2 R4+ solo se inserta si un preflight futuro detecta trabajo material nuevo.
-<!-- POST-NOR3-INTERMEDIATE-SEQUENCE:END -->
+La versión de aplicación tiene una única fuente:
 
+- [`VERSION`](VERSION) — versión materializada en el árbol.
 
-<!-- DOC1-R1-POST-MANT1:START -->
-## Estado revision-aware vigente
-- `VERSION` contiene `0.129.3.0-beta` y corresponde a MANT.2 R3 / G129-E03-C0.
-- G129 usa revision-aware-v2 con Edition 3, Correction 0 y `maintenance_ordinal=3`.
-- G128/E02/C0 permanece como último estado publicado.
-- G130 es el siguiente Global disponible, sin candidato ni bloque reservado.
-<!-- DOC1-R1-POST-MANT1:END -->
+El estado revision-aware se conserva en:
 
-## 1. Objetivo
+- [ledger Markdown](docs/governance/pre-1-0-revision-ledger.md) — representación
+  navegable;
+- [ledger machine-readable](data/governance/pre-1-0-revision-ledger.json) —
+  secuencia estructurada de estados aceptados.
 
-Esta política identifica de forma auditable cada estado aceptado de Mi Retiro Proyectado y evita que versión visible, API, documentación, artefactos y Git describan estados diferentes.
+La publicación se rige por:
 
-VER.2 corrige una limitación de la política original `0.0.N-beta`: los hitos formales estaban bien identificados, pero las revisiones internas aceptadas entre releases no podían expresarse sin inventar betas retrospectivas o confundir commits con revisiones.
+- [Proceso de release](docs/operations/release-process.md);
+- [manifest de publicación](data/governance/release-publication-manifest.json);
+- [Releases](RELEASES.md).
 
-## 2. Fuentes canónicas
+La planificación futura se mantiene separada del contador aceptado. Una fase
+planificada no recibe Global, Edition ni valor de `VERSION` por anticipado.
 
-La fuente canónica de la versión de aplicación es el archivo raíz `VERSION`.
+## Conceptos
 
-- `VERSION` contiene una sola línea con la versión de la aplicación.
-- `app/core/version.py` valida y expone ese valor a Python.
-- `app/core/config.py` importa `APP_VERSION`; no mantiene una copia literal.
-- FastAPI usa `APP_VERSION` como versión de la aplicación.
-- Jinja2 recibe `app_version` y el footer muestra el mismo valor.
-- El contador y la procedencia de revisiones aceptadas se auditan en `docs/governance/pre-1-0-revision-ledger.md` y `data/governance/pre-1-0-revision-ledger.json`.
-- `app/core/version_ledger.py` valida continuidad, unicidad y codificación del ledger estructurado.
-- `docs/governance/pre-1-0-pending-matrix.md` ordena el trabajo pendiente hacia 1.0 sin preasignar Globales futuros.
-- La regla que determina qué cuenta y qué no cuenta se documenta en `docs/archive/governance/ver2-revision-decision-matrix.md` y `docs/archive/governance/pre-1-0-versioning-audit.md`.
-- README, CHANGELOG, RELEASES, ROADMAP y el ledger deben corresponder al estado vigente cuando lo describan como actual.
-- Los documentos de dominio pueden conservar la versión en la que fueron revisados; esa metadata es histórica de revisión documental y no una segunda fuente de la versión vigente.
-- La numeración de **Build** es independiente de `VERSION` y solo se materializa cuando exista un proceso reproducible de generación de artefactos oficiales.
+### Estado material
 
-No se deben introducir versiones independientes en plantillas, JavaScript, motores o normativa.
+Es una configuración del proyecto suficientemente distinta como para tener
+valor independiente de auditoría y que ha superado el proceso de aceptación
+aplicable.
 
-## 3. Familias admitidas
+No todo commit, checkpoint o corrección intermedia constituye un estado
+material.
 
-Mi Retiro Proyectado reconoce cuatro familias/etapas de identificadores.
+### Global
 
-### 3.1. Familia beta legacy histórica
+`GLOBAL` es el contador decimal de estados aceptados pre-1.0.
 
-La historia ya publicada conserva:
+Reglas:
+
+- aumenta únicamente cuando se acepta un nuevo estado material;
+- no se consume por planificación;
+- no se consume por un candidato fallido;
+- no se consume por commits separados que forman parte del mismo estado;
+- no se reutiliza una vez aceptado;
+- una fase intermedia descubierta puede ocupar el siguiente Global solo cuando
+  realmente se materializa y se acepta.
+
+El ledger determina el último Global aceptado y el siguiente número
+aritméticamente disponible. Que un número esté disponible **no lo reserva**.
+
+### Edition
+
+`EDITION` identifica el ordinal de un estado aceptado dentro de un mismo
+bloque de trabajo reutilizable o evolutivo.
+
+Puede diferir de la revisión funcional. Por ejemplo, una revisión `R6` no
+implica necesariamente `E06`.
+
+### Revisión funcional
+
+`R#`, `R1.1`, `R3B2` y formas equivalentes describen la posición semántica
+dentro de un bloque. Son metadata de trabajo y no se codifican directamente en
+`VERSION`.
+
+### Correction
+
+En la familia revision-aware v2, `CORRECTION` distingue una corrección material
+posterior a una línea funcional ya aceptada:
+
+- `C0` representa la línea ordinaria;
+- `C1..C999` representa una corrección material dentro de esa línea;
+- una corrección material aceptada consume un nuevo Global;
+- una corrección realizada antes de aceptar el candidato no crea otra Correction
+  ni consume otro Global;
+- una nueva línea funcional vuelve a `C0`.
+
+### Maintenance ordinal
+
+`maintenance_ordinal` permite conservar la secuencia propia de bloques de
+mantenimiento recurrente. Es metadata y no sustituye Global, Edition ni
+Correction.
+
+## Familias de versión
+
+### Beta legacy histórica
+
+Los identificadores legacy usan:
 
 ```text
 0.0.N-beta
 ```
 
-Ejemplos: `0.0.22-beta`, `0.0.25-beta` y `0.0.26-beta`.
+Los tags ya publicados bajo esta familia permanecen inmutables. La familia se
+mantiene únicamente para interpretar historia; no se utiliza para crear nuevos
+estados prospectivos.
 
-Esta familia sigue siendo válida para leer y auditar estados históricos. Los
-tags ya publicados no se renombran ni se mueven.
+### Revision-aware v1 histórica
 
-### 3.2. Familia revision-aware v1 histórica
-
-Los estados revision-aware ya publicados hasta G127 conservan el esquema v1:
+Los estados revision-aware publicados hasta G127 usan:
 
 ```text
 0.<G_HI>.<G_LO>.<EE>-beta
 ```
 
-donde `G_HI = G // 100`, `G_LO = G % 100` se expresa con dos dígitos y
-`EE` es el ordinal aceptado del bloque con dos dígitos.
+donde:
 
-Ejemplos históricos:
+- `G_HI = GLOBAL // 100`;
+- `G_LO = GLOBAL % 100`, con dos dígitos;
+- `EE` es Edition con dos dígitos.
+
+Ejemplos históricos de formato:
 
 ```text
 G071 / E01 -> 0.0.71.01-beta
@@ -106,191 +130,176 @@ G100 / E03 -> 0.1.00.03-beta
 G127 / E02 -> 0.1.27.02-beta
 ```
 
-La notación documental antigua `0.GG.RR.EE-beta` se conserva únicamente al
-citar decisiones o evidencia histórica. No se usa para construir nuevos
-identificadores después de VER.2 R6.
+Estos identificadores y tags no se renombran para adoptar el formato v2.
 
-La **revisión funcional** (`R#`, `R1.1`, `R3B2`, etc.) es metadata semántica y
-no un componente literal de `VERSION`. Puede divergir de Edition.
+### Revision-aware v2 vigente para beta
 
-Precedente histórico de divergencia: DEV.2 R5 = G118/E04 y DEV.2 R6 = G119/E05. Estos estados ya publicados permanecen inmutables bajo la familia v1.
-
-### 3.3. Familia revision-aware v2 prospectiva
-
-A partir del primer estado aceptado posterior a G127 se usa:
+Desde G128, una beta materializada usa:
 
 ```text
 0.<GLOBAL>.<EDITION>.<CORRECTION>-beta
 ```
 
-Reglas:
-
-- `GLOBAL` es el contador global decimal directo y la familia v2 comienza en
-  G128;
-- `EDITION` es el ordinal del estado aceptado dentro del bloque, entre 1 y 99;
-- `CORRECTION` es 0 para la línea ordinaria y 1..999 para una corrección
-  material post-aceptación dentro de la misma línea funcional;
-- una corrección material aceptada consume un nuevo Global;
-- un intento fallido o una corrección previa a aceptación no consume Global;
-- una nueva línea funcional reinicia `CORRECTION` a 0;
-- `maintenance_ordinal` y la revisión funcional permanecen como metadata;
-- el formato largo prospectivo de seis componentes queda sustituido antes de
-  haber sido publicado y no se acepta como v2.
-
-Ejemplos sintéticos:
+Ejemplos de formato:
 
 ```text
-G128 / E2 / C0 -> 0.128.2.0-beta
-G129 / E2 / C1 -> 0.129.2.1-beta
+G128 / E2 / C0  -> 0.128.2.0-beta
 G234 / E7 / C12 -> 0.234.7.12-beta
 ```
 
-G128 permanece publicado como G128/E02/C0 (`0.128.2.0-beta`); G129/E03/C0 está materializado como `0.129.3.0-beta` para MANT.2 R3 y G130 permanece libre.
+Reglas:
 
-### 3.4. Versiones oficiales
+- `GLOBAL` se expresa directamente en decimal;
+- `EDITION` está entre 1 y 99;
+- `CORRECTION` está entre 0 y 999;
+- la revisión funcional y el maintenance ordinal permanecen como metadata;
+- el formato no codifica el nombre del bloque;
+- ledger, `VERSION` y superficies de publicación deben describir el mismo
+  estado material.
 
-Cuando todos los gates de producto se hayan cerrado, la primera versión oficial
-prevista sigue siendo:
+### Versiones oficiales
+
+La primera versión oficial objetivo es:
 
 ```text
 1.0.0.0
 ```
 
-La versión oficial usa cuatro componentes:
+Las versiones oficiales usan cuatro componentes:
 
 ```text
 MAYOR.MENOR.PARCHE.REVISIÓN
 ```
 
-Semántica:
+Semántica prevista:
 
-- **MAYOR**: cambios incompatibles o nueva generación del producto;
-- **MENOR**: capacidades compatibles de alcance relevante;
-- **PARCHE**: correcciones o mejoras compatibles que justifican una nueva
+- **MAYOR:** cambios incompatibles o nueva generación;
+- **MENOR:** capacidades compatibles de alcance relevante;
+- **PARCHE:** correcciones o mejoras compatibles que justifican una nueva
   versión funcional;
-- **REVISIÓN**: hotfix o revisión puntual de una versión oficial ya publicada.
+- **REVISIÓN:** hotfix o revisión puntual de una versión oficial.
 
-La numeración de cuatro componentes es una convención propia del producto y no
-se presenta como SemVer estricto.
+Esta convención es propia del producto y no se presenta como SemVer estricto.
 
-## 4. Qué incrementa el contador global
+## Qué consume un Global
 
-Una entrada consume `G` únicamente si representa un **estado aceptado y auditable**.
+Un estado consume Global cuando, en conjunto:
 
-Reglas:
+1. existe trabajo material identificable;
+2. su alcance y owner están definidos;
+3. el estado resultante es auditable de forma independiente;
+4. los gates aplicables son satisfactorios;
+5. la aceptación queda registrada en el ledger;
+6. `VERSION` codifica exactamente ese estado;
+7. código, pruebas, datos estructurados y documentación dependiente son
+   coherentes.
 
-1. los 21 estados retrospectivos GOV.1.1 cuentan una vez cada uno;
-2. una revisión interna cuenta cuando queda documentada como cerrada, completada o validada y el proyecto avanza desde ese estado;
-3. un candidato pendiente de validación, PR, CI, tag o revisión manual no cuenta todavía como estado aceptado;
-4. un intento que falla el gate no consume un Global nuevo;
-5. los commits `feat/test/docs` de la misma revisión no se cuentan por separado;
-6. PR, squash, CI y tag son evidencia de un estado y no generan otra revisión cuando solo materializan el mismo estado;
-7. un mantenimiento técnico, de seguridad, gobierno, dependencias o documentación puede contar si crea un estado materialmente distinto, validado y aceptado; un checkpoint que solo agrupa estados ya contabilizados no cuenta de nuevo;
-8. no se inventan retrospectivamente revisiones que nunca existieron.
+Pueden consumir Global los cambios funcionales, de seguridad, mantenimiento,
+dependencias, gobierno o documentación cuando generan un estado material
+independiente.
 
-La aplicación concreta de estas reglas está auditada en `docs/archive/governance/ver2-revision-decision-matrix.md`.
+No consumen otro Global por sí mismos:
 
-## 5. Contador global reconstruido
+- commits de implementación, pruebas y documentación del mismo estado;
+- checkpoints de una misma revisión;
+- PR, squash, CI o tag que únicamente materializan la aceptación ya contada;
+- revalidaciones sin cambio material;
+- intentos fallidos;
+- correcciones previas a aceptación;
+- planificación de una fase futura.
 
-La base `main` en `7037addd44253e528c77460b678d2b3ccd540dd5`, correspondiente al cierre de UX.4.6i, contiene según la segunda pasada:
+Los casos históricos concretos y sus inclusiones/exclusiones se documentan en
+las auditorías de versionado y en el ledger, no se duplican en esta política.
 
-```text
-70 estados aceptados
-```
+## Ciclo de un candidato beta
 
-Conceptualmente, el último estado de esa base es:
+### 1. Planificación
 
-```text
-G070 / E02 -> 0.0.70.02-beta
-```
+Una Issue, roadmap o plan puede identificar trabajo futuro, pero mantiene:
 
-Ese identificador **no reemplaza** el valor histórico que el árbol todavía mostraba (`0.0.26-beta`) ni crea un tag retrospectivo.
+- Global sin reservar;
+- Edition sin reservar cuando todavía no existe candidato material;
+- `VERSION` sin modificar.
 
-VER.2 R1 usa como candidato el siguiente estado:
+### 2. Materialización
 
-```text
-G071 / E01 -> 0.0.71.01-beta
-```
+Cuando existe un árbol candidato real y la fase cumple sus condiciones de
+entrada, puede evaluarse el identificador revision-aware que le corresponde.
 
-G071 solo queda consumido como estado aceptado cuando VER.2 supera su ledger estructurado, validador, gate completo, PR/CI e integración. Si el candidato falla, se corrige manteniendo el mismo identificador candidato mientras no se acepte un estado distinto.
+La materialización no convierte por sí sola el candidato en publicación.
 
-## 6. Reconstrucción histórica
+### 3. Aceptación
 
-GOV.1.1 reconstruyó retrospectivamente 21 estados anteriores:
+Antes de aceptar el estado deben quedar coherentes al menos:
 
-```text
-0.0.1-beta ... 0.0.21-beta
-```
+- `VERSION`;
+- ledger Markdown/JSON;
+- artefactos declarativos de gobierno aplicables;
+- pruebas y documentación dependiente;
+- gates exigidos por el alcance.
 
-La reconstrucción se basa en los 80 commits reales existentes hasta `7941f58` y no reescribe commits históricos, autores, fechas, hashes o mensajes.
+### 4. Integración
 
-Durante la migración criptográfica del 2026-08-17 esos estados fueron materializados como tags retrospectivos firmados. Los tags apuntan al commit de cierre ya documentado, conservan su fecha real de creación, declaran en el mensaje la fecha histórica del hito y no existieron como tags en sus fechas históricas.
+El candidato aceptado entra en `main` mediante el flujo protegido del
+repositorio. Los commits canónicos cumplen la política de firma vigente.
 
-El antiguo valor `0.1.0` continúa clasificado como marcador histórico de desarrollo no publicado.
+### 5. Publicación
 
-La reconstrucción revision-aware de G001–G070 es exclusivamente documental. No se crean tags `v0.GG.RR.EE-beta` para estados anteriores a VER.2.
+Después de integrar y revalidar `main`:
 
-## 7. Versiones formales legacy
+1. se crea el tag formal firmado;
+2. se verifica su firma y contrato;
+3. se publica/reconcilia el GitHub Release;
+4. el estado publicado se registra sin reescribir el tag.
 
-`0.0.22-beta` fue el primer estado cuya numeración se adoptó deliberadamente bajo GOV.1.2.
+Un tag no se crea dentro del PR candidato para simular una publicación futura.
 
-Los hitos formales legacy cerrados son:
+## Tags y firmas
 
-```text
-v0.0.22-beta
-v0.0.23-beta
-v0.0.24-beta
-v0.0.25-beta
-v0.0.26-beta
-```
-
-Todos permanecen inmutables. Las fases UX.4.6f–UX.4.6i se desarrollaron históricamente manteniendo `VERSION = 0.0.26-beta`; VER.2 no falsea tags retroactivos para ellas. Su posición se conserva en el ledger mediante G061–G070.
-
-## 8. Tags nuevos
-
-Los tags formales usan el prefijo `v`.
-
-Ejemplos:
+Los tags formales usan el prefijo `v`, por ejemplo:
 
 ```text
-v0.0.71.01-beta
-v0.1.27.02-beta
 v0.128.2.0-beta
 v1.0.0.0
 v1.0.0.1
 ```
 
-Después de la adopción de firma SSH:
+Reglas:
 
-- todo commit nuevo del mantenedor debe estar firmado cuando el flujo local lo permita;
-- todo tag formal nuevo debe estar firmado;
-- se verifica la firma antes de declarar el hito cerrado;
-- `.github/allowed_signers` contiene las claves públicas autorizadas.
+- los commits canónicos nuevos siguen la política de firma SSH;
+- todo tag formal nuevo se firma y verifica;
+- `.github/allowed_signers` contiene las claves públicas autorizadas;
+- un tag publicado no se mueve, sustituye ni elimina para esconder cambios
+  posteriores;
+- una corrección posterior requiere un nuevo estado conforme al modelo, no
+  modificar el tag anterior.
 
-Los tags publicados son inmutables. Un tag formal nuevo no se crea dentro del PR del candidato: se crea únicamente después de merge, revalidación post-merge y verificación de firma, conforme a `docs/operations/release-process.md`.
+Las migraciones criptográficas históricas ya consumidas no crean una excepción
+reutilizable para publicaciones futuras.
 
-## 9. Build oficial
+## Build oficial
 
-Los artefactos distribuibles oficiales usarán un identificador de Build independiente:
+Los artefactos oficiales distribuibles usarán un identificador de Build
+independiente:
 
 ```text
 Build 000001
 Build 000002
 Build 000003
-...
 ```
 
-Reglas:
+El Build:
 
-1. tiene exactamente seis dígitos decimales;
+1. tiene seis dígitos decimales;
 2. es monotónico y no se reutiliza;
-3. no sustituye la versión de aplicación;
-4. no forma parte del archivo `VERSION`;
-5. identifica un artefacto reproducible concreto;
-6. su fuente canónica se incorporará en REL.1;
-7. no se muestra un Build ficticio durante beta.
+3. identifica un artefacto reproducible;
+4. no forma parte de `VERSION`;
+5. no sustituye Global ni la versión de aplicación;
+6. obtiene su fuente canónica cuando REL.1 materialice el proceso de
+   empaquetado oficial;
+7. no se inventa durante beta.
 
-Presentación prevista para la primera versión oficial:
+Presentación objetivo de la primera versión oficial:
 
 ```text
 Mi Retiro Proyectado
@@ -298,134 +307,111 @@ Versión 1.0.0.0
 Build 000001
 ```
 
-## 10. Metadata documental
+## Metadata documental
 
-VER.2 separa dos conceptos que antes se confundían:
+Debe distinguirse:
 
-- **versión vigente/candidata de la aplicación:** únicamente `VERSION` y las superficies de estado actual;
-- **versión en la que un documento fue revisado:** metadata histórica válida del propio documento.
+- **versión de aplicación actual:** procede de `VERSION`;
+- **versión de aplicación revisada por un documento:** puede conservar la base
+  concreta contra la que ese documento fue validado;
+- **versión jurídica, normativa o de esquema:** pertenece a su propio dominio y
+  no se reemplaza por la versión de aplicación.
 
-Por tanto, un documento técnico que diga `Versión de aplicación revisada: 0.0.26-beta` puede conservar esa línea si realmente documenta la base sobre la que fue revisado. No tiene que reescribirse en cada incremento global si su contenido no cambió.
+Un documento histórico, ADR o auditoría no se moderniza únicamente para mostrar
+el valor actual de `VERSION`. Un documento vivo sí debe evitar presentar como
+actual un estado ya superado.
 
-Los documentos que sí describen el estado actual —README, ROADMAP, SECURITY, índice operativo, CHANGELOG/RELEASES vigentes y ledger— deben actualizarse cuando corresponda.
-
-## 11. Diferencia entre identificadores
+## Separación de identificadores
 
 No deben confundirse:
 
 - versión de aplicación: `VERSION`;
-- contador global/local pre-1.0: ledger revision-aware;
-- Build oficial: artefacto reproducible;
-- versión de normativa: `regulations/*.json`;
-- versión jurídica de privacidad/términos: identificador propio del documento legal;
-- versión de esquema de logs: Developer Diagnostics;
-- versión de esquema de datos: futura persistencia migrable;
-- visibilidad del repositorio: configuración de GitHub;
-- estado de despliegue: decisión operativa independiente.
+- estado revision-aware pre-1.0: ledger;
+- revisión funcional: metadata del bloque;
+- Build: artefacto oficial reproducible;
+- versión normativa: `regulations/*.json` o fuente aplicable;
+- versión jurídica de políticas/consentimientos: identificador del documento;
+- versión de esquema de datos/logs: contrato técnico correspondiente;
+- estado de despliegue: decisión operativa independiente;
+- visibilidad del repositorio: configuración de GitHub.
 
-Un cambio en una categoría no obliga automáticamente a modificar las demás.
+Un cambio en una categoría no obliga automáticamente a cambiar las demás.
 
-## 12. Gate de incremento
+## Gates de aceptación
 
-Antes de aceptar una nueva beta revision-aware se debe comprobar:
+Antes de aceptar una nueva beta revision-aware debe comprobarse:
 
-- que el estado anterior esté cerrado y trazable;
-- que la revisión nueva cumpla la definición contable de estado aceptado;
-- que código, pruebas y documentación dependiente coincidan;
-- que el ledger Markdown y JSON tengan secuencia continua sin duplicados;
-- que el validador estructurado acepte el ledger;
-- que `VERSION` codifique exactamente el candidato que se está validando;
-- que se ejecuten los gates exigidos para la etapa;
-- que cualquier tag se cree únicamente después de integración y revalidación.
+- estado anterior trazable;
+- definición contable del nuevo estado;
+- continuidad y unicidad del ledger;
+- correspondencia exacta entre `VERSION` y el candidato;
+- coherencia de manifest/registry cuando apliquen;
+- código, pruebas y documentación dependiente sincronizados;
+- Quality Gate y controles adicionales requeridos;
+- ausencia de una fase intermedia bloqueante conocida;
+- no preasignación silenciosa de Globals futuros.
 
-No existe una transición automática a `1.0.0.0` por alcanzar un valor determinado de `G`.
+No existe transición automática a `1.0.0.0` por alcanzar un Global
+determinado.
 
-## 13. Primera versión oficial
+## Compatibilidad histórica
 
-La primera versión oficial objetivo sigue siendo:
+La historia previa permanece interpretable sin convertirla en política vigente:
 
-```text
-1.0.0.0
-Build 000001
-```
+- los tags legacy publicados son inmutables;
+- los identificadores revision-aware v1 publicados permanecen válidos;
+- G001–G070 pueden reconstruirse documentalmente sin crear tags revision-aware
+  retrospectivos;
+- auditorías, ADR, ledgers, Releases y snapshots históricos pueden conservar
+  nombres y formatos sustituidos cuando describen fielmente su momento;
+- las regresiones históricas deben proteger esa evidencia en su autoridad
+  correspondiente, no obligar a documentos vivos a repetirla.
 
-Antes de materializarla deben estar cerrados, como mínimo:
+La metodología de reconstrucción y reconciliación histórica se conserva en:
+
+- [Auditoría de versionado pre-1.0](docs/archive/governance/pre-1-0-versioning-audit.md);
+- [Matriz de decisiones VER.2](docs/archive/governance/ver2-revision-decision-matrix.md);
+- [Reconciliación post-G070](docs/audits/governance/post-g070-revision-reconciliation.md).
+
+## Primera versión oficial
+
+La primera versión oficial solo se materializa después de cerrar los gates
+definidos por el programa pre-1.0, incluyendo como mínimo:
 
 - alcance funcional previsto;
-- validación de los tres motores;
-- trazabilidad y explicación manual de cálculos;
+- validación de motores y trazabilidad de cálculos;
 - seguridad y privacidad;
 - accesibilidad;
-- persistencia/exportaciones que formen parte del alcance oficial;
-- revisión normativa y jurídica prevista;
+- persistencia/exportaciones incluidas en el alcance oficial;
+- revisión normativa/jurídica prevista;
 - QA integral;
 - empaquetado reproducible;
-- inventario de dependencias y avisos de terceros;
-- hashes y firma del artefacto;
+- inventario y avisos de terceros;
+- hashes/firma del artefacto;
 - documentación final de instalación, uso, soporte y release.
 
-## 14. Prohibiciones
+## Prohibiciones
 
-- No hardcodear la versión visible fuera de la fuente canónica.
+- No hardcodear una segunda fuente de versión visible.
 - No usar Build como sustituto de `VERSION`.
-- No reutilizar un número global ya aceptado para otro estado.
-- No consumir un número global por un candidato fallido.
-- No contar commits `feat/test/docs` como revisiones distintas del mismo estado.
+- No reservar Global/Edition/VERSION por mera planificación.
+- No reutilizar un Global aceptado.
+- No consumir Global por un candidato fallido.
+- No contar commits del mismo estado como revisiones independientes.
 - No crear tags revision-aware retrospectivos para G001–G070.
 - No reescribir commits históricos para añadir firmas.
-- No falsear fechas de creación de tags retrospectivos.
-- No presentar un tag retrospectivo como si hubiera sido publicado en la fecha histórica.
-- No modificar tags publicados para ocultar cambios posteriores.
-- No usar la versión de aplicación como sustituto de la versión normativa o jurídica.
+- No falsear fechas históricas de tags.
+- No mover un tag publicado para corregir un estado posterior.
+- No usar la versión de aplicación como versión normativa o jurídica.
 - No presentar una beta como versión oficial.
-- No presentar `1.0.0.0` como alcanzada antes de cerrar sus gates.
-- No reintroducir `0.1.0-beta.1` como objetivo vigente.
+- No declarar `1.0.0.0` antes de sus gates.
+- No reactivar formatos u objetivos históricos sustituidos como política
+  prospectiva.
 
-## 15. Guard de referencias históricas
+## Referencias
 
-PLAN.1 y VER.2 distinguen entre evidencia histórica legítima y planificación vigente.
-
-Las expresiones antiguas (`0.1.0-beta.1`, beta pública, `0.0.N-beta`, identificadores de revisiones anteriores) pueden conservarse cuando forman parte de:
-
-- snapshots bajo `docs/archive/`;
-- auditorías/cierres/releases/ADR que describen un estado anterior;
-- el ledger y la auditoría VER.2;
-- pruebas históricas cuyo contrato sea precisamente preservar esa evidencia.
-
-No pueden volver a utilizarse como objetivo vigente si la política actual las sustituyó.
-
-Las regresiones documentales deben validar la diferencia entre historia y estado actual, no obligar a que toda documentación pasada copie indefinidamente el valor de `VERSION`.
-
-<!-- ANCLAS_HISTORICAS_VER2_VERSIONING_CONSOLIDADAS -->
-
-## Compatibilidad histórica preservada por VER.2
-
-- No se crean tags revision-aware retrospectivos para G001–G070.
-- Todo commit nuevo debe seguir el flujo ordinario de firma y verificación definido por la política del repositorio.
-- Todo tag formal nuevo debe estar firmado conforme a la política vigente.
-- Todo tag formal nuevo se crea con `git tag -s` y debe verificarse antes de declarar cerrado el hito.
-- La visibilidad pública del repositorio de código no cambia por sí sola la versión de producto, el estado de despliegue ni la licencia aplicable.
-- Las expresiones históricas sustituidas no pueden volver a utilizarse como objetivo vigente.
-- El contrato histórico protegido por `tests/governance/test_plan1_guard_referencias_historicas.py` evita borrar referencias legacy necesarias para auditar cierres anteriores.
-
-### 3.1. Desarrollo pre-beta
-
-Esta sección preserva la separación histórica entre visibilidad pública del repositorio y versión de producto.
-
-## 12. Guard de referencias históricas
-
-El guard de referencias históricas preserva menciones legacy necesarias para no borrar evidencia de cierres anteriores durante una reconciliación transversal.
-
-## Reconciliación extraordinaria post-G070
-
-La primera promoción revision-aware partió de un ledger cuya base auditada
-terminaba en `7037addd` (G070). Antes de la promoción de VER.2 ya existían
-estados aceptados posteriores —DEV.2, MANT.1 y DOC.1— que no habían sido
-incorporados al contador. La auditoría de 2026-08-25 reconstruye la secuencia
-completa hasta SEC.2 R6 y la fija en G108. AUD.SEC2 R1 queda aceptado posteriormente como G109/E01 mediante PR #83 y merge `ec1842d`.
-
-Esta corrección es **prospectiva y documental**: preserva los tags publicados y
-no genera tags retroactivos para G071–G108. El snapshot exacto del ledger G070
-se conserva en `docs/archive/governance/pre-1-0-revision-ledger-g070.json` y la
-matriz de reconciliación vive en
-`docs/audits/governance/post-g070-revision-reconciliation.md`.
+- [Gobierno del proyecto](GOVERNANCE.md);
+- [Proceso de release](docs/operations/release-process.md);
+- [Ledger pre-1.0](docs/governance/pre-1-0-revision-ledger.md);
+- [Plan maestro hacia 1.0](docs/governance/master-plan-to-1-0.md);
+- [Estándares del repositorio](docs/standards/README.md).
