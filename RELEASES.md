@@ -1,25 +1,33 @@
 # Registro de versiones y estados del proyecto
 
-<!-- MANT2-R3-G129-CANDIDATE:START -->
-## Candidato aceptado G129/E03/C0 — MANT.2 R3
-- `VERSION`: `0.129.3.0-beta`.
-- Edition E03 continúa MANT.2 E01/G123 y E02/G127.
-- `functional_revision=R3`, `correction_ordinal=0`, `maintenance_ordinal=3`.
-- Integra `pypdf 6.19.0` y sustituye sin merge el PR #210.
-- Aceptado localmente en Draft PR #212; **no publicado todavía**.
-- Baseline publicado: G128/E02/C0 / `v0.128.2.0-beta` / Release 393386700.
-- G130 permanece libre y sin candidato.
-<!-- MANT2-R3-G129-CANDIDATE:END -->
+## Publicación G129/E03/C0 — MANT.2 R3
 
-<!-- VER2-R6-G128-CANDIDATE:START -->
-## Candidato aceptado G128/E02/C0 — VER.2 R6
-- `VERSION`: `0.128.2.0-beta`.
-- Primer estado materializado con la familia v2 `0.<GLOBAL>.<EDITION>.<CORRECTION>-beta`.
-- Edition E02 continúa G087/E01; `functional_revision=R6`, `correction_ordinal=0`.
-- Aceptado localmente en Draft PR #208; **no publicado todavía**.
-- Baseline publicado: G127/E02 / `v0.1.27.02-beta` / Release 392412590.
-- G129 permanece libre y sin candidato.
-<!-- VER2-R6-G128-CANDIDATE:END -->
+- Versión: `0.129.3.0-beta`.
+- Bloque aceptado: MANT.2 R3.
+- Integración: PR #212; `main@dca3871c3472e20074cf51d85d28eeeccb9b6f32`.
+- Publicación: tag firmado `v0.129.3.0-beta`; objeto de tag
+  `2ffd33ae64e22060e244da63b8bd74eff71eeceb`; GitHub Release prerelease
+  399260564.
+- `pypdf` avanza de 6.18.1 a 6.19.0 y el guard histórico G123 queda separado
+  del pin vivo.
+- PR #210 queda cerrado sin merge como superseded por #212.
+- Edition E03 continúa MANT.2 E01/G123 y E02/G127; Correction C0 identifica la
+  línea ordinaria.
+- G130 permanece como siguiente Global aritmético disponible, sin candidato
+  preasignado.
+
+## Publicación G128/E02/C0 — VER.2 R6
+
+- Versión: `0.128.2.0-beta`.
+- Bloque aceptado: VER.2 R6.
+- Integración: PR #208; `main@0c7f162a41498fc867abd3ad04f114763bcc1c92`.
+- Publicación: tag firmado `v0.128.2.0-beta`; objeto de tag
+  `76074d8dde80444a5c0c38845dbfb3856b359001`; GitHub Release prerelease
+  393386700.
+- Primer estado publicado con la familia
+  `0.<GLOBAL>.<EDITION>.<CORRECTION>-beta`.
+- Edition E02 continúa el estado VER.2 histórico anterior y Correction C0
+  identifica la línea ordinaria.
 
 <!-- MANT2-R2-G127-PROMOTION:START -->
 ## Publicación G127/E02 — MANT.2 R2
