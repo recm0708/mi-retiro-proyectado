@@ -2,7 +2,7 @@
   "schema_version": 2,
   "project": "Mi Retiro Proyectado",
   "base_commit": "7037addd44253e528c77460b678d2b3ccd540dd5",
-  "accepted_count": 128,
+  "accepted_count": 129,
   "next_candidate": null,
   "historical_tags_immutable": {
     "from": "v0.0.1-beta",
@@ -1928,6 +1928,21 @@
       "state": "R6 — reforma final revision-aware v2 y separación candidato/integración/publicación",
       "anchor": "0.128.2.0-beta",
       "evidence": "Issue #164; Draft PR #208; CP1–CP6B firmados/auditados; preflight #166 limpio; G087/E01 preservado como VER.2 histórico."
+    },
+    {
+      "global_revision": 129,
+      "block": "MANT.2",
+      "ordinal": 3,
+      "edition": 3,
+      "functional_revision": "R3",
+      "identifier_schema": 2,
+      "version_format": "revision-aware-v2",
+      "correction_ordinal": 0,
+      "maintenance_ordinal": 3,
+      "revision_aware": "0.129.3.0-beta",
+      "state": "R3 — mantenimiento coordinado post-G128: pypdf 6.19.0, guard histórico G123 desacoplado y reconciliación de Dependabot #210",
+      "anchor": "0.129.3.0-beta",
+      "evidence": "Issue #211; Draft PR #212; CP1 65567a8d978015a1bb0c4c7982659dd07d6b0e35; CP2 652d318e278c5da0493d59b15365cbd9f104f4a6; pypdf 6.18.1→6.19.0; pip check PASS; pip-audit --strict sin vulnerabilidades conocidas; 60 focales OK; Repository Quality Gate, Python Compatibility y Dependency Security remotos verdes; #210 cerrado sin merge; 0 PRs/ramas Dependabot abiertos."
     }
   ],
   "excluded": [
@@ -2006,6 +2021,6 @@
   ],
   "reconciled_through_commit": "b97cf61763479b80b8e8724b878089e8bb20fa00",
   "reconciliation_date": "2026-09-19",
-  "next_global": 129,
+  "next_global": 130,
   "next_candidate_block": null
 }

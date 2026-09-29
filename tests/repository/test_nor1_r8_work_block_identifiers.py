@@ -43,11 +43,11 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
             self.assertFalse(ids[ident]["reusable_for_different_scope"])
 
         self.assertEqual("closed", ids["PLAN.2"]["status"])
-        self.assertEqual("closed_r2", ids["MANT.2"]["status"])
+        self.assertEqual("accepted_r3_pending_integration", ids["MANT.2"]["status"])
         self.assertEqual("closed", ids["MANT.1"]["status"])
         self.assertIn("G124/E13", ids["MANT.1"]["meaning"])
         self.assertIn("G124", ids["MANT.1"]["global_refs"])
-        self.assertEqual("accepted_r6_pending_integration", ids["VER.2"]["status"])
+        self.assertEqual("closed_r6", ids["VER.2"]["status"])
         self.assertIn("G114", ids["PLAN.2"]["global_refs"])
         self.assertEqual("closed", ids["UX.5"]["status"])
         self.assertEqual("closed", ids["UX.6"]["status"])
@@ -74,19 +74,28 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
 
     def test_g112_permanece_aceptado_y_estado_actual_no_preasigna_g126(self):
         ledger = cargar_ledger()
-        entry = next(x for x in ledger["entries"] if x["global_revision"] == 112)
+        entry = next(
+            x for x in ledger["entries"]
+            if x["global_revision"] == 112
+        )
         self.assertEqual("NOR.1", entry["block"])
         self.assertEqual(7, entry["ordinal"])
         self.assertEqual("0.1.12.07-beta", entry["revision_aware"])
+
         candidate = self.data["current_candidate"]
-        self.assertEqual(128, candidate["global_revision"])
-        self.assertEqual("VER.2", candidate["block"])
-        self.assertEqual("R6", candidate["revision"])
-        self.assertEqual(2, candidate["edition"])
+        self.assertEqual(129, candidate["global_revision"])
+        self.assertEqual("MANT.2", candidate["block"])
+        self.assertEqual("R3", candidate["revision"])
+        self.assertEqual(3, candidate["edition"])
         self.assertEqual("accepted_pending_integration", candidate["state"])
-        self.assertEqual(129, candidate["next_global_available"])
-        self.assertEqual("DOC.4", candidate["next_functional_block_if_accepted"])
-        self.assertIsNone(candidate["next_functional_global_if_accepted"])
+        self.assertEqual(130, candidate["next_global_available"])
+        self.assertEqual(
+            "DOC.4",
+            candidate["next_functional_block_if_accepted"],
+        )
+        self.assertIsNone(
+            candidate["next_functional_global_if_accepted"],
+        )
 
     def test_candidato_reabierto_continua_ordinal_del_bloque(self):
         ledger = cargar_ledger()

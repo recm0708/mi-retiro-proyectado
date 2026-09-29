@@ -1,13 +1,13 @@
 # Validación
 
 **Estado:** Vigente
-**Versión revisada:** `0.128.2.0-beta` — VER.2 R6/G128-E02-C0 aceptado localmente; publicación pendiente.
+**Versión revisada:** `0.129.3.0-beta` — MANT.2 R3/G129-E03-C0 aceptado localmente; publicación pendiente.
 **Versión base histórica:** `0.0.25-beta`
 **Base documental histórica:** GOV.1.3 R4 — 2026-08-17
 **Revisión transversal histórica preservada:** UX.4.6e R8 — validación funcional y procedencia editable — 2026-08-19
 **Última revisión transversal:** UX.4.6f R2 integrada y cierre del Paso 4 — 2026-08-20
 **Revisión de normalización:** NOR.1 R7 — cierre de estándares y preparación de NOR.2 — 2026-08-24
-**Última revisión operativa:** VER.2 R6/#164 — materialización G128/E02/C0 — 2026-09-21
+**Última revisión operativa:** MANT.2 R3/#211 — materialización G129/E03/C0 — 2026-09-28
 **Clasificación:** Técnica / Calidad
 **Naturaleza documental:** Registro vivo acumulativo — mantiene la estrategia vigente y evidencia histórica de gates protegida por regresiones; los resultados históricos no se reescriben como si pertenecieran al estado actual.
 
@@ -734,10 +734,10 @@ python -m pip check
 
 ## 3. Inventario actual de pruebas
 
-Inventario vigente: **227 módulos**.
+Inventario vigente: **228 módulos**.
 
 El inventario se deriva de todos los módulos `test_*.py` ubicados bajo `tests/` y se mantiene
-sincronizado con la suite versionada. En la frontera vigente, MANT.2 R2/#206 está publicado como G127/E02 (`0.1.27.02-beta`), VER.2 R6/#164 está en ejecución sin candidato material y G128 continúa libre
+sincronizado con la suite versionada. En la frontera vigente, VER.2 R6/#164 está publicado como G128/E02/C0 (`0.128.2.0-beta`), MANT.2 R3/#211 materializó G129/E03/C0 (`0.129.3.0-beta`) y G130 continúa libre
 y sin candidato. Las regresiones específicas protegen el programa pre-1.0,
 la separación entre historia y estado vivo, el baseline UX.7–UX.32,
 la expansión abierta UX.33+ y la ausencia de preasignación de G128.
@@ -789,6 +789,7 @@ la expansión abierta UX.33+ y la ausencia de preasignación de G128.
 - `tests/governance/test_g124_mant1_r8_promotion.py`
 - `tests/governance/test_g125_doc3_r1_promotion.py`
 - `tests/governance/test_mant2_r2_insertion.py`
+- `tests/governance/test_mant2_r3_g129_candidate.py`
 - `tests/governance/test_git_history_attestation.py`
 - `tests/governance/test_github_label_taxonomy.py`
 - `tests/governance/test_issue_checklist_policy.py`

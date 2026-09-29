@@ -26,41 +26,52 @@ class TestG121PromotionPostMerge(unittest.TestCase):
 
     def test_estado_actual_materializa_g127_e02_y_deja_g128_libre(self):
         ledger = cargar_ledger()
-        self.assertEqual(128, ledger["accepted_count"])
-        self.assertEqual(129, ledger["next_global"])
+        self.assertEqual(129, ledger["accepted_count"])
+        self.assertEqual(130, ledger["next_global"])
         self.assertIsNone(ledger["next_candidate"])
         self.assertIsNone(ledger["next_candidate_block"])
 
         current = ledger["entries"][-1]
-        self.assertEqual(128, current["global_revision"])
-        self.assertEqual("VER.2", current["block"])
-        self.assertEqual(2, current["ordinal"])
-        self.assertEqual("R6", current["functional_revision"])
-        self.assertEqual("0.128.2.0-beta", current["revision_aware"])
+        self.assertEqual(
+            (129, "MANT.2", 3, 3, "R3", "0.129.3.0-beta"),
+            (
+                current["global_revision"],
+                current["block"],
+                current["ordinal"],
+                current["edition"],
+                current["functional_revision"],
+                current["revision_aware"],
+            ),
+        )
 
     def test_registry_preserva_ux6_y_nor3_historicos(self):
-        data = json.loads((ROOT / "data/governance/work-block-registry.json").read_text(encoding="utf-8"))
+        data = json.loads(
+            (ROOT / "data/governance/work-block-registry.json")
+            .read_text(encoding="utf-8")
+        )
         ids = {item["identifier"]: item for item in data["identifiers"]}
         self.assertEqual("closed", ids["UX.6"]["status"])
         self.assertIn("G121", ids["UX.6"]["global_refs"])
         self.assertEqual("closed", ids["NOR.3"]["status"])
         self.assertEqual(["G122"], ids["NOR.3"]["global_refs"])
         self.assertEqual("planned_reserved", ids["PERSIST.1"]["status"])
+
         candidate = data["current_candidate"]
         self.assertEqual("accepted_pending_integration", candidate["state"])
-        self.assertEqual(128, candidate["global_revision"])
-        self.assertEqual(129, candidate["next_global_available"])
+        self.assertEqual(129, candidate["global_revision"])
+        self.assertEqual("MANT.2", candidate["block"])
+        self.assertEqual("R3", candidate["revision"])
+        self.assertEqual(130, candidate["next_global_available"])
 
     def test_manifest_actual_materializa_mant2_r2(self):
         data = json.loads(
-            (ROOT / "data/governance/release-publication-manifest.json").read_text(
-                encoding="utf-8"
-            )
+            (ROOT / "data/governance/release-publication-manifest.json")
+            .read_text(encoding="utf-8")
         )
-        self.assertEqual("0.128.2.0-beta", data["version"])
-        self.assertEqual("VER.2", data["block"])
-        self.assertEqual("R6", data["revision"])
-        self.assertEqual(129, data["next_step"]["global_revision"])
+        self.assertEqual("0.129.3.0-beta", data["version"])
+        self.assertEqual("MANT.2", data["block"])
+        self.assertEqual("R3", data["revision"])
+        self.assertEqual(130, data["next_step"]["global_revision"])
         self.assertIsNone(data["next_step"]["revision_aware"])
         self.assertIsNone(data["next_step"]["block"])
 

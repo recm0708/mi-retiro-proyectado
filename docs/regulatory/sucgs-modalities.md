@@ -1,7 +1,7 @@
 # Sistema Único de Capitalización con Garantía Solidaria (SUCGS)
 
 **Estado:** Vigente
-**Versión de aplicación revisada:** `0.128.2.0-beta`
+**Versión de aplicación revisada:** `0.129.3.0-beta`
 **Versión base histórica:** `0.0.23-beta`
 **Revisión documental:** GOV.1.3 R3 — 2026-08-17
 **Clasificación:** Normativa / Motor

@@ -1,5 +1,16 @@
 # Registro de versiones y estados del proyecto
 
+<!-- MANT2-R3-G129-CANDIDATE:START -->
+## Candidato aceptado G129/E03/C0 — MANT.2 R3
+- `VERSION`: `0.129.3.0-beta`.
+- Edition E03 continúa MANT.2 E01/G123 y E02/G127.
+- `functional_revision=R3`, `correction_ordinal=0`, `maintenance_ordinal=3`.
+- Integra `pypdf 6.19.0` y sustituye sin merge el PR #210.
+- Aceptado localmente en Draft PR #212; **no publicado todavía**.
+- Baseline publicado: G128/E02/C0 / `v0.128.2.0-beta` / Release 393386700.
+- G130 permanece libre y sin candidato.
+<!-- MANT2-R3-G129-CANDIDATE:END -->
+
 <!-- VER2-R6-G128-CANDIDATE:START -->
 ## Candidato aceptado G128/E02/C0 — VER.2 R6
 - `VERSION`: `0.128.2.0-beta`.

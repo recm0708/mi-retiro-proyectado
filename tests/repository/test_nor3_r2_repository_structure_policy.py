@@ -136,62 +136,76 @@ class TestNOR3R2RepositoryStructurePolicy(unittest.TestCase):
 
     def test_post_promocion_preserva_scope_r1_r8_y_estado_actual(self):
         registry = json.loads(
-            (
-                ROOT
-                / "data"
-                / "governance"
-                / "work-block-registry.json"
-            ).read_text(
-                encoding="utf-8"
-            )
+            (ROOT / "data/governance/work-block-registry.json")
+            .read_text(encoding="utf-8")
         )
-
         self.assertEqual(2, registry["schema_version"])
 
         candidate = registry["current_candidate"]
-
-        self.assertEqual(128, candidate["global_revision"])
-        self.assertEqual("0.128.2.0-beta", candidate["revision_aware"])
-        self.assertEqual("VER.2", candidate["block"])
-        self.assertEqual("R6", candidate["revision"])
-        self.assertEqual("final_revision_aware_reform", candidate["revision_scope"])
-        self.assertEqual("accepted_pending_integration", candidate["state"])
-        self.assertEqual(129, candidate["next_global_available"])
+        self.assertEqual(
+            (
+                129,
+                "0.129.3.0-beta",
+                "MANT.2",
+                "R3",
+                "dependency_maintenance_post_g128",
+                "accepted_pending_integration",
+                130,
+            ),
+            (
+                candidate["global_revision"],
+                candidate["revision_aware"],
+                candidate["block"],
+                candidate["revision"],
+                candidate["revision_scope"],
+                candidate["state"],
+                candidate["next_global_available"],
+            ),
+        )
 
         ids = {
             item["identifier"]: item
             for item in registry["identifiers"]
         }
-
         self.assertEqual("closed", ids["NOR.3"]["status"])
         self.assertEqual("R1-R8", ids["NOR.3"]["active_scope"])
         self.assertEqual(["G122"], ids["NOR.3"]["global_refs"])
-
         self.assertEqual("closed", ids["DOC.3"]["status"])
         self.assertEqual(["G125"], ids["DOC.3"]["global_refs"])
-
         self.assertEqual(
-            "closed_r2",
+            "accepted_r3_pending_integration",
             ids["MANT.2"]["status"],
         )
-        self.assertEqual("accepted_r6_pending_integration", ids["VER.2"]["status"])
+        self.assertEqual("closed_r6", ids["VER.2"]["status"])
 
         baseline = registry["accepted_baseline"]
-
-        self.assertEqual(128, baseline["global_revision"])
-        self.assertEqual(
-            "0.128.2.0-beta",
-            baseline["revision_aware"],
-        )
+        self.assertEqual(129, baseline["global_revision"])
+        self.assertEqual("0.129.3.0-beta", baseline["revision_aware"])
+        self.assertEqual("MANT.2", baseline["block"])
 
         active = registry["active_phase"]
-
-        self.assertEqual("VER.2", active["block"])
-        self.assertEqual("R6", active["revision"])
-        self.assertEqual(164, active["issue"])
-        self.assertEqual("accepted_pending_integration", active["state"])
-        self.assertEqual(128, active["global_revision"])
-        self.assertEqual("0.128.2.0-beta", active["revision_aware"])
+        self.assertEqual(
+            (
+                "MANT.2",
+                "R3",
+                211,
+                "accepted_pending_integration",
+                129,
+                "0.129.3.0-beta",
+                128,
+                "0.128.2.0-beta",
+            ),
+            (
+                active["block"],
+                active["revision"],
+                active["issue"],
+                active["state"],
+                active["global_revision"],
+                active["revision_aware"],
+                active["base_global_revision"],
+                active["base_revision_aware"],
+            ),
+        )
 
     def test_pr_policy_permite_candidato_sin_version(self):
         files = [

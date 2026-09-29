@@ -1,7 +1,7 @@
 # Especificación funcional
 
 **Estado:** Vigente con registro RF histórico integrado
-**Versión de aplicación revisada:** `0.128.2.0-beta` — VER.2 R6/G128-E02-C0 aceptado localmente; publicación pendiente.
+**Versión de aplicación revisada:** `0.129.3.0-beta` — VER.2 R6/G128-E02-C0 aceptado localmente; publicación pendiente.
 **Versión base histórica:** `0.0.23-beta`
 **Revisión documental:** DOC.3 R1 — 2026-09-14
 **Actualización funcional vigente:** UX.6 R8 — consolidación funcional App/Developer — 2026-08-22

@@ -14,16 +14,15 @@ ROOT = Path(__file__).resolve().parents[2]
 class TestUX5R7DocumentationClosure(unittest.TestCase):
     def test_estado_vigente_conserva_g121_y_candidato_nor3_g122_e01(self):
         data = json.loads(
-            (ROOT / "data/governance/work-block-registry.json").read_text(
-                encoding="utf-8"
-            )
+            (ROOT / "data/governance/work-block-registry.json")
+            .read_text(encoding="utf-8")
         )
         candidate = data["current_candidate"]
-        self.assertEqual(128, candidate["global_revision"])
-        self.assertEqual("0.128.2.0-beta", candidate["revision_aware"])
-        self.assertEqual("VER.2", candidate["block"])
-        self.assertEqual("R6", candidate["revision"])
-        self.assertEqual(2, candidate["edition"])
+        self.assertEqual(129, candidate["global_revision"])
+        self.assertEqual("0.129.3.0-beta", candidate["revision_aware"])
+        self.assertEqual("MANT.2", candidate["block"])
+        self.assertEqual("R3", candidate["revision"])
+        self.assertEqual(3, candidate["edition"])
         self.assertEqual("accepted_pending_integration", candidate["state"])
 
     def test_ux5_y_ux6_cerrados_nor3_candidato_y_persist1_planificado(self):
@@ -179,7 +178,7 @@ class TestUX5R7DocumentationClosure(unittest.TestCase):
         data = json.loads((ROOT / "data/governance/work-block-registry.json").read_text(encoding="utf-8"))
         ids = {item["identifier"]: item for item in data["identifiers"]}
         self.assertIn("G121", ids["UX.6"]["global_refs"])
-        self.assertEqual("0.128.2.0-beta", (ROOT / "VERSION").read_text(encoding="utf-8").strip())
+        self.assertEqual("0.129.3.0-beta", (ROOT / "VERSION").read_text(encoding="utf-8").strip())
 
 
 if __name__ == "__main__":

@@ -26,43 +26,23 @@
 <!-- NOR3-G122-PROMOTION:END -->
 
 <!-- POST-NOR3-INTERMEDIATE-SEQUENCE:START -->
-## Estado vigente — VER.2 R6 / G128-E02-C0 pendiente de integración
+## Estado vigente — MANT.2 R3 / G129-E03-C0 pendiente de integración
 
-MANT.2 R2/#206 está cerrado, integrado y publicado como **G127/E02**
-(`0.1.27.02-beta`) sobre
-`main@2df33a5c24d1c7cea1a6db91539a92da02c91500`, mediante PR #207,
-tag firmado `v0.1.27.02-beta` y GitHub Release prerelease 392412590.
-
-El preflight #166 posterior a G127/E02 quedó **CLEAN** y habilitó
-VER.2 R6/#164.
-
-VER.2 R6/#164 materializó G128/E02/C0 como `0.128.2.0-beta` mediante la rama
-`ver/ver2-r6-revision-aware` y el PR #208, actualmente listo para integración.
-CP1–CP7 están cerrados y auditados; G128 está aceptado localmente y pendiente
-de integración/publicación. **G129 permanece libre** y sin candidato, bloque ni
-`VERSION` preasignados.
-
-La continuidad material vigente es:
-
-1. **integrar y publicar VER.2 R6 / G128-E02-C0**;
-2. **repetir #166 post-publicación**;
-3. **DOC.4 R1 / #171**;
-4. **#142** y derivados funcionales obligatorios;
-5. **PERSIST.1 / #130 → REP.1 / #143 → DEPLOY.1 / #157**;
-6. **UX.7→UX.x / #129** bajo #189;
-7. **SEC.2 R7 → rendimiento → A11Y.2 → REV.1 → #153 → DOC.1 R6 → QA.1 → REL.1**.
-
-Un MANT.2 R3+ solo se inserta si #166 detecta trabajo material nuevo.
+VER.2 R6/#164 está publicado como G128/E02/C0 (`0.128.2.0-beta`) mediante PR #208, tag firmado y Release 393386700.
+El preflight #166 previo a DOC.4 detectó #210 y abrió MANT.2 R3/#211.
+CP1 y CP2 están firmados y auditados remotamente; #210 quedó superseded por Draft PR #212.
+MANT.2 R3 materializa G129/E03/C0 como `0.129.3.0-beta`; G130 permanece libre.
+Después de publicar G129 debe repetirse #166 y solo CLEAN habilita DOC.4.
+Un MANT.2 R4+ solo se inserta si un preflight futuro detecta trabajo material nuevo.
 <!-- POST-NOR3-INTERMEDIATE-SEQUENCE:END -->
 
 
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado revision-aware vigente
-- `VERSION` contiene `0.128.2.0-beta` y corresponde a VER.2 R6 / G128-E02-C0.
-- G128 es el primer estado aceptado bajo `revision-aware-v2`.
-- G127/E02 permanece como último estado publicado mediante `v0.1.27.02-beta` y Release 392412590.
-- G087/E01 permanece como Edition histórica anterior de VER.2.
-- G129 es el siguiente Global disponible, sin candidato ni bloque reservado.
+- `VERSION` contiene `0.129.3.0-beta` y corresponde a MANT.2 R3 / G129-E03-C0.
+- G129 usa revision-aware-v2 con Edition 3, Correction 0 y `maintenance_ordinal=3`.
+- G128/E02/C0 permanece como último estado publicado.
+- G130 es el siguiente Global disponible, sin candidato ni bloque reservado.
 <!-- DOC1-R1-POST-MANT1:END -->
 
 ## 1. Objetivo
@@ -165,7 +145,7 @@ G129 / E2 / C1 -> 0.129.2.1-beta
 G234 / E7 / C12 -> 0.234.7.12-beta
 ```
 
-G128 ya está materializado como G128/E02/C0 (`0.128.2.0-beta`); G129 permanece libre hasta que exista un candidato material posterior.
+G128 permanece publicado como G128/E02/C0 (`0.128.2.0-beta`); G129/E03/C0 está materializado como `0.129.3.0-beta` para MANT.2 R3 y G130 permanece libre.
 
 ### 3.4. Versiones oficiales
 

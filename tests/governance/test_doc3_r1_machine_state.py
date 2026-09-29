@@ -16,44 +16,73 @@ MANIFEST = ROOT / "data/governance/release-publication-manifest.json"
 class TestDOC3R1PublishedMachineState(unittest.TestCase):
     def test_registry_preserva_g125_publicado_y_g126_libre(self):
         data = json.loads(REGISTRY.read_text(encoding="utf-8"))
-        ids = {
-            item["identifier"]: item
-            for item in data["identifiers"]
-        }
+        ids = {item["identifier"]: item for item in data["identifiers"]}
 
         self.assertEqual(2, data["schema_version"])
 
         candidate = data["current_candidate"]
-        self.assertEqual("accepted_pending_integration", candidate["state"])
-        self.assertEqual(128, candidate["global_revision"])
-        self.assertEqual("0.128.2.0-beta", candidate["revision_aware"])
-        self.assertEqual("VER.2", candidate["block"])
-        self.assertEqual(129, candidate["next_global_available"])
-        self.assertEqual(164, candidate["planning_issue"])
+        self.assertEqual(
+            (
+                "accepted_pending_integration",
+                129,
+                "0.129.3.0-beta",
+                "MANT.2",
+                "R3",
+                "dependency_maintenance_post_g128",
+                3,
+                211,
+                130,
+            ),
+            (
+                candidate["state"],
+                candidate["global_revision"],
+                candidate["revision_aware"],
+                candidate["block"],
+                candidate["revision"],
+                candidate["revision_scope"],
+                candidate["edition"],
+                candidate["planning_issue"],
+                candidate["next_global_available"],
+            ),
+        )
 
         baseline = data["accepted_baseline"]
-        self.assertEqual(128, baseline["global_revision"])
-        self.assertEqual(2, baseline["edition"])
         self.assertEqual(
-            "0.128.2.0-beta",
-            baseline["revision_aware"],
+            (129, 3, "0.129.3.0-beta", "MANT.2", "R3"),
+            (
+                baseline["global_revision"],
+                baseline["edition"],
+                baseline["revision_aware"],
+                baseline["block"],
+                baseline["functional_revision"],
+            ),
         )
-        self.assertEqual("VER.2", baseline["block"])
-        self.assertEqual("R6", baseline["functional_revision"])
 
         active = data["active_phase"]
-        self.assertEqual("VER.2", active["block"])
-        self.assertEqual("R6", active["revision"])
-        self.assertEqual(164, active["issue"])
-        self.assertEqual("accepted_pending_integration", active["state"])
-        self.assertEqual(128, active["global_revision"])
-        self.assertEqual("0.128.2.0-beta", active["revision_aware"])
-        self.assertEqual(127, active["base_global_revision"])
         self.assertEqual(
-            "0.1.27.02-beta",
-            active["base_revision_aware"],
+            (
+                "MANT.2",
+                "R3",
+                211,
+                "accepted_pending_integration",
+                129,
+                "0.129.3.0-beta",
+                128,
+                "0.128.2.0-beta",
+                171,
+            ),
+            (
+                active["block"],
+                active["revision"],
+                active["issue"],
+                active["state"],
+                active["global_revision"],
+                active["revision_aware"],
+                active["base_global_revision"],
+                active["base_revision_aware"],
+                active["next_phase_issue"],
+            ),
         )
-        self.assertEqual(171, active["next_phase_issue"])
 
         doc3 = ids["DOC.3"]
         self.assertEqual("closed", doc3["status"])
@@ -71,57 +100,55 @@ class TestDOC3R1PublishedMachineState(unittest.TestCase):
 
     def test_ledger_preserva_g125_y_estado_actual_g127_e02(self):
         data = json.loads(LEDGER.read_text(encoding="utf-8"))
-
-        self.assertEqual(128, data["accepted_count"])
-        self.assertEqual(129, data["next_global"])
+        self.assertEqual(129, data["accepted_count"])
+        self.assertEqual(130, data["next_global"])
         self.assertEqual(2, data["schema_version"])
         self.assertNotIn("next_global_if_ver2_accepted", data)
         self.assertNotIn("next_candidate_assignment", data)
         self.assertNotIn("active_phase", data)
-
         self.assertIsNone(data["next_candidate"])
         self.assertIsNone(data["next_candidate_block"])
 
         g125 = next(
-            item
-            for item in data["entries"]
+            item for item in data["entries"]
             if item["global_revision"] == 125
         )
-
         self.assertEqual("DOC.3", g125["block"])
         self.assertEqual("R1", g125["functional_revision"])
-        self.assertEqual(
-            "0.1.25.01-beta",
-            g125["revision_aware"],
-        )
+        self.assertEqual("0.1.25.01-beta", g125["revision_aware"])
 
         current = data["entries"][-1]
-
-        self.assertEqual(128, current["global_revision"])
-        self.assertEqual("VER.2", current["block"])
-        self.assertEqual(2, current["ordinal"])
-        self.assertEqual(2, current["edition"])
-        self.assertEqual("R6", current["functional_revision"])
         self.assertEqual(
-            "0.128.2.0-beta",
-            current["revision_aware"],
+            (129, "MANT.2", 3, 3, "R3", "0.129.3.0-beta"),
+            (
+                current["global_revision"],
+                current["block"],
+                current["ordinal"],
+                current["edition"],
+                current["functional_revision"],
+                current["revision_aware"],
+            ),
         )
 
     def test_manifest_actual_materializa_mant2_r2_y_deja_g128_libre(self):
         data = json.loads(MANIFEST.read_text(encoding="utf-8"))
-        self.assertEqual("0.128.2.0-beta", data["version"])
-        self.assertEqual("VER.2", data["block"])
-        self.assertEqual("R6", data["revision"])
+        self.assertEqual("0.129.3.0-beta", data["version"])
+        self.assertEqual("MANT.2", data["block"])
+        self.assertEqual("R3", data["revision"])
 
         next_step = data["next_step"]
-        self.assertEqual(129, next_step["global_revision"])
+        self.assertEqual(130, next_step["global_revision"])
         self.assertIsNone(next_step["revision_aware"])
         self.assertIsNone(next_step["block"])
-        self.assertIn("G127-E02", next_step["description"])
-        self.assertIn("G128", next_step["description"])
-        self.assertIn("VER.2 R6/#164", next_step["description"])
-
-
+        for fragment in (
+            "G129/E03/C0",
+            "MANT.2 R3/#211",
+            "G130",
+            "#166",
+            "DOC.4 R1/#171",
+        ):
+            with self.subTest(fragment=fragment):
+                self.assertIn(fragment, next_step["description"])
 
 if __name__ == "__main__":
     unittest.main()

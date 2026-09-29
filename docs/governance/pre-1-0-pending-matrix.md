@@ -15,9 +15,9 @@ El baseline publicado vigente es **G127/E02 — MANT.2 R2** (`0.1.27.02-beta`). 
 
 ## 1. Reglas
 
-1. G127/E02 — MANT.2 R2 es el último estado publicado e inmutable.
-2. VER.2 R6/#164 materializó G128/E02/C0 como `0.128.2.0-beta` y está pendiente de integración/publicación.
-3. G129 permanece libre, sin candidato, bloque ni VERSION asignados.
+1. G128/E02/C0 — VER.2 R6 es el último estado publicado e inmutable.
+2. MANT.2 R3/#211 materializó G129/E03/C0 como `0.129.3.0-beta` y está pendiente de integración/publicación.
+3. G130 permanece libre, sin candidato, bloque ni VERSION asignados.
 4. Todo pendiente debe tener owner, clasificación y dependencia explícitos.
 5. Trabajo material nuevo se inserta en todos los árboles afectados antes de continuar.
 6. #166 puede insertar MANT.2 R2+ en cualquier frontera material.
@@ -189,12 +189,12 @@ Cuenta fases materiales top-level aceptadas, no lotes internos. DOC.4 crea nuevo
 ## 12. Invariantes de versionado durante VER.2 R6
 
 ```text
-VERSION = 0.128.2.0-beta
-accepted_baseline = G128/E02/C0 / VER.2 R6
-published_baseline = G127/E02 / MANT.2 R2
-active_phase = VER.2 R6 / #164
+VERSION = 0.129.3.0-beta
+accepted_baseline = G129/E03/C0 / MANT.2 R3
+published_baseline = G128/E02/C0 / VER.2 R6
+active_phase = MANT.2 R3 / #211
 current_candidate = accepted_pending_integration
-next_global_available = 129
+next_global_available = 130
 G129 = libre / no reservado
 ```
 

@@ -12,6 +12,7 @@ import unittest
 ROOT = Path(__file__).resolve().parents[2]
 SCRIPT = ROOT / "scripts" / "release_publication.py"
 MANIFEST = ROOT / "data/governance/release-publication-manifest.json"
+LEDGER = ROOT / "data/governance/pre-1-0-revision-ledger.json"
 PUBLISHED_COMMIT = "1111111111111111111111111111111111111111"
 TAG_OBJECT = "2222222222222222222222222222222222222222"
 
@@ -37,25 +38,38 @@ class TestReleasePublication(unittest.TestCase):
         )
         self.assertEqual(0, result.returncode, result.stdout + result.stderr)
 
-    def test_manifest_actual_es_g128_y_deja_g129_libre(self):
-        data = json.loads(MANIFEST.read_text(encoding="utf-8"))
-        self.assertEqual("0.128.2.0-beta", data["version"])
-        self.assertEqual(128, data["global_revision"])
-        self.assertEqual(2, data["edition"])
-        self.assertEqual(2, data["identifier_schema"])
-        self.assertEqual(0, data["correction_ordinal"])
-        self.assertEqual("VER.2", data["block"])
-        self.assertEqual("R6", data["revision"])
-        self.assertEqual(129, data["next_step"]["global_revision"])
+    def current(self):
+        manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
+        ledger = json.loads(LEDGER.read_text(encoding="utf-8"))
+        return manifest, ledger
+
+    def test_manifest_actual_coincide_con_ledger_y_deja_siguiente_libre(self):
+        data, ledger = self.current()
+        last = ledger["entries"][-1]
+        version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
+        self.assertEqual(version, data["version"])
+        self.assertEqual(last["global_revision"], data["global_revision"])
+        self.assertEqual(last["edition"], data["edition"])
+        self.assertEqual(last["identifier_schema"], data["identifier_schema"])
+        self.assertEqual(last["correction_ordinal"], data["correction_ordinal"])
+        self.assertEqual(last["maintenance_ordinal"], data["maintenance_ordinal"])
+        self.assertEqual(last["block"], data["block"])
+        self.assertEqual(last["functional_revision"], data["revision"])
+        self.assertEqual(ledger["next_global"], data["next_step"]["global_revision"])
         self.assertIsNone(data["next_step"]["revision_aware"])
         self.assertIsNone(data["next_step"]["block"])
 
     def test_manifiesto_supera_validacion(self):
+        data, _ = self.current()
         result = self.run_script("--check-manifest")
         self.assertEqual(0, result.returncode, result.stdout + result.stderr)
-        self.assertIn("G128/E02 validado", result.stdout)
+        self.assertIn(
+            f"G{data['global_revision']}/E{data['edition']:02d} validado",
+            result.stdout,
+        )
 
     def test_renderer_incluye_campos_dinamicos_y_secciones(self):
+        data, ledger = self.current()
         with tempfile.TemporaryDirectory() as tmp:
             output = Path(tmp) / "notes.md"
             self.render(output)
@@ -67,34 +81,37 @@ class TestReleasePublication(unittest.TestCase):
             "## Validación",
             "## Evidencia",
             "## Siguiente paso",
-            "G128/E02",
-            "VER.2 R6",
+            f"G{data['global_revision']}/E{data['edition']:02d}",
+            f"{data['block']} {data['revision']}",
             PUBLISHED_COMMIT,
             TAG_OBJECT,
-            "**G129**",
-            "`0.128.2.0-beta`",
-            "VER.2",
-            "G127/E02",
+            f"**G{ledger['next_global']}**",
+            f"`{data['version']}`",
+            data["block"],
         ):
             with self.subTest(fragment=fragment):
                 self.assertIn(fragment, text)
 
-    def test_manifiesto_contiene_evidencia_ver2_r6(self):
-        data = json.loads(MANIFEST.read_text(encoding="utf-8"))
+    def test_manifiesto_contiene_evidencia_mant2_r3(self):
+        data, _ = self.current()
         corpus = json.dumps(data, ensure_ascii=False)
         for fragment in (
-            "Issue #164",
-            "Draft PR #208",
+            "Issue #211",
+            "Draft PR #212",
             "Política #203",
             "Preflight #166",
-            "Baseline publicado G127/E02",
-            "VER.2 R6/#164",
+            "Baseline publicado G128/E02",
             "DOC.4 R1/#171",
         ):
             with self.subTest(fragment=fragment):
                 self.assertIn(fragment, corpus)
 
     def test_release_existente_identico_es_idempotente(self):
+        data, _ = self.current()
+        title = (
+            f"Mi Retiro Proyectado v{data['version']} — "
+            f"G{data['global_revision']}/E{data['edition']:02d}"
+        )
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             notes = root / "notes.md"
@@ -103,8 +120,8 @@ class TestReleasePublication(unittest.TestCase):
             snapshot.write_text(
                 json.dumps(
                     {
-                        "tagName": "v0.128.2.0-beta",
-                        "name": "Mi Retiro Proyectado v0.128.2.0-beta — G128/E02",
+                        "tagName": f"v{data['version']}",
+                        "name": title,
                         "isDraft": False,
                         "isPrerelease": True,
                         "body": notes.read_text(encoding="utf-8"),
