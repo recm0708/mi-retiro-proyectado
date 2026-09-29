@@ -2,9 +2,9 @@
 
 **Estado:** vigente
 **Último estado publicado:** G127/E02 — MANT.2 R2
-**Versión publicada:** `0.1.27.02-beta`
-**Fase en curso:** VER.2 R6 / #164 — G128/E02/C0 `0.128.2.0-beta` aceptado pendiente de integración/publicación
-**Siguiente Global aritmético:** G129, libre y no reservado
+**Versión publicada:** `0.128.2.0-beta`
+**Fase en curso:** MANT.2 R3 / #211 — G129/E03/C0 `0.129.3.0-beta` aceptado pendiente de integración/publicación
+**Siguiente Global aritmético:** G130, libre y no reservado
 **Objetivo estable:** `1.0.0.0`
 **Fecha de reconciliación:** 2026-09-21
 
@@ -35,9 +35,9 @@ Release: 392412590
 ```
 
 MANT.2 R2/#206 está cerrado, integrado y publicado.
-El preflight #166 posterior a G127/E02 quedó CLEAN.
-VER.2 R6/#164 materializó G128/E02/C0 (`0.128.2.0-beta`) mediante Draft PR #208.
-El candidato está aceptado localmente y pendiente de integración/publicación. G129 permanece libre.
+VER.2 R6/#164 está publicado como G128/E02/C0 (`0.128.2.0-beta`).
+El preflight #166 previo a DOC.4 detectó #210 e insertó MANT.2 R3/#211.
+MANT.2 R3 materializó G129/E03/C0 (`0.129.3.0-beta`) mediante Draft PR #212; G130 permanece libre.
 
 <!-- VER2-CP6A-HISTORICAL-ANCHORS:START -->
 ### Anclas históricas del programa

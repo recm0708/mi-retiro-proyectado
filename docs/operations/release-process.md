@@ -1,7 +1,7 @@
 # Proceso de release
 
 **Estado:** Vigente
-**Versión de aplicación:** `0.128.2.0-beta` — VER.2 R6/G128-E02-C0 aceptado localmente; integración/publicación pendiente; G129 libre.
+**Versión de aplicación:** `0.129.3.0-beta` — VER.2 R6/G128-E02-C0 aceptado localmente; integración/publicación pendiente; G129 libre.
 **Último estado aceptado antes de VER.2:** G070/E02 — cierre UX.4.6i
 **Último tag formal legacy:** `v0.0.26-beta`
 **Versión base histórica preservada:** `0.0.23-beta`
@@ -51,14 +51,10 @@ limpio corresponde **DOC.4 R1 / #171**.
 
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado de publicación vigente
-- `VERSION` materializa `0.128.2.0-beta` para VER.2 R6/G128-E02-C0.
-- G128 está aceptado localmente pero aún no tiene tag ni GitHub Release.
-- G127/E02 permanece publicado mediante `v0.1.27.02-beta` / Release 392412590.
-- G129 permanece libre, sin candidato, bloque ni VERSION.
-- Los tags publicados permanecen inmutables.
-<!-- DOC1-R1-POST-MANT1:END -->
-
-Este procedimiento complementa `VERSIONING.md`, `RELEASES.md`, `CHANGELOG.md`, `GOVERNANCE.md`, `LICENSE`, `THIRD_PARTY_NOTICES.md`, `docs/governance/licensing-and-distribution.md`, `docs/archive/governance/pre-1-0-versioning-audit.md`, `docs/governance/pre-1-0-revision-ledger.md`, `docs/archive/governance/ver2-revision-decision-matrix.md`, `data/governance/pre-1-0-revision-ledger.json` y `docs/governance/master-plan-to-1-0.md`.
+- `VERSION` materializa `0.129.3.0-beta` para MANT.2 R3/G129-E03-C0.
+- G129 está aceptado localmente pero aún no tiene tag ni GitHub Release.
+- G128/E02/C0 permanece publicado mediante `v0.128.2.0-beta` y Release 393386700.
+- G130 permanece libre; DOC.4 exige publicación G129 + #166 CLEAN.
 
 ## 1. Principio
 
@@ -100,6 +96,8 @@ El candidato reserva el siguiente número global, pero ese número solo queda co
 La revisión funcional y Edition no son equivalentes por definición; `functional_revision` permanece como metadata. DEV.2 R5 = G118/E04 y DEV.2 R6 = G119/E05 siguen siendo precedentes históricos. El último estado publicado continúa siendo MANT.2 R2 = G127/E02 (`0.1.27.02-beta`), integrado en `main@2df33a5c24d1c7cea1a6db91539a92da02c91500`, con tag firmado `v0.1.27.02-beta` y GitHub Release prerelease 392412590. VER.2 R6/#164 ya materializó y validó local/remotamente G128/E02/C0 (`0.128.2.0-beta`) mediante PR #208, listo para integración; G129 permanece libre. PERSIST.1 continúa detrás de VER.2 → DOC.4 → #142/derivados; la ola UX final es UX.7→UX.x bajo #129/#189.
 
 ## 3. Precondiciones
+
+El cierre revisa explícitamente `CHANGELOG.md`, `RELEASES.md`, `VERSION`, ledger, registry y manifiesto de publicación.
 
 Antes del cierre:
 

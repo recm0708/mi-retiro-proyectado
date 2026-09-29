@@ -1,7 +1,7 @@
 # Índice de documentación
 
 **Estado:** vigente
-**Versión de aplicación:** `0.128.2.0-beta` — VER.2 R6/G128-E02-C0 aceptado localmente; integración/publicación pendiente; G129 libre
+**Versión de aplicación:** `0.129.3.0-beta` — VER.2 R6/G128-E02-C0 aceptado localmente; integración/publicación pendiente; G129 libre
 **Último tag formal legacy:** `v0.0.26-beta`
 **Última actualización transversal:** VER.2 R6/#164 — CP5.1 cerrado; CP6 en curso — 2026-09-21
 **Cierres históricos preservados:** UX.4.6i / PR #34 — 841 pruebas; UX.4.6e R9 — `v0.0.25-beta`
@@ -50,7 +50,7 @@ Este archivo es el punto de entrada para la documentación técnica, funcional, 
 
 ## Estado de normalización del repositorio
 
-**Estado actual:** G127/E02 permanece publicado como `0.1.27.02-beta`; VER.2 R6/#164 materializó G128/E02/C0 como `0.128.2.0-beta` en Draft PR #208, pendiente de integración/publicación; G129 permanece libre.
+**Estado actual:** G128/E02/C0 permanece publicado como `0.128.2.0-beta`; MANT.2 R3/#211 materializó G129/E03/C0 como `0.129.3.0-beta` en Draft PR #212, pendiente de integración/publicación; G130 permanece libre.
 
 Estado de la fase:
 

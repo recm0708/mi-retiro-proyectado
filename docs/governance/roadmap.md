@@ -4,9 +4,9 @@
 **Último estado publicado:** G127/E02 — MANT.2 R2
 **Versión publicada:** `0.1.27.02-beta`
 **`main` publicado de entrada a VER.2 R6:** `2df33a5c24d1c7cea1a6db91539a92da02c91500`
-**Siguiente Global aritmético:** G129, libre y no reservado
-**Fase en curso:** VER.2 R6 / #164 — G128/E02/C0 `0.128.2.0-beta` aceptado, integración/publicación pendiente
-**Fecha de reconciliación:** 2026-09-21
+**Siguiente Global aritmético:** G130, libre y no reservado
+**Fase en curso:** MANT.2 R3 / #211 — G129/E03/C0 `0.129.3.0-beta` aceptado, integración/publicación pendiente
+**Fecha de reconciliación:** 2026-09-28
 
 Este roadmap muestra el programa vigente hacia `1.0.0.0`. La historia de estados aceptados permanece en ledger, `RELEASES.md`, `CHANGELOG.md`, tags, GitHub Releases y `docs/archive/`.
 
@@ -201,4 +201,4 @@ No bloquean `1.0.0.0`:
 
 ## Regla de continuidad
 
-La fase material activa es VER.2 R6/#164 con G128/E02/C0 (`0.128.2.0-beta`) aceptado localmente; G129 permanece libre y sin candidato. Después de publicar VER.2 corresponde DOC.4 R1/#171, salvo que un preflight #166 obligue a insertar MANT.2 R3+.
+La fase material activa es MANT.2 R3/#211 con G129/E03/C0 (`0.129.3.0-beta`) aceptado localmente; G130 permanece libre. Después de publicar G129 debe repetirse #166 y solo CLEAN habilita DOC.4 R1/#171.

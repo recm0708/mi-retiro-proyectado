@@ -15,24 +15,23 @@ ROOT = Path(__file__).resolve().parents[2]
 class TestNOR3R1CandidateReconciliation(unittest.TestCase):
     def test_version_actual_preserva_promocion_historica_g122(self):
         version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
-        self.assertEqual("0.128.2.0-beta", version)
+        self.assertEqual("0.129.3.0-beta", version)
         ledger = cargar_ledger()
-        self.assertEqual(128, ledger["accepted_count"])
+        self.assertEqual(129, ledger["accepted_count"])
         entry = next(x for x in ledger["entries"] if x["global_revision"] == 122)
         self.assertEqual("0.1.22.01-beta", entry["revision_aware"])
         self.assertEqual("NOR.3", entry["block"])
 
     def test_g126_disponible_sin_candidato_preasignado(self):
         ledger = cargar_ledger()
-        self.assertEqual(129, ledger["next_global"])
+        self.assertEqual(130, ledger["next_global"])
         self.assertIsNone(ledger["next_candidate"])
         self.assertIsNone(ledger["next_candidate_block"])
 
     def test_registry_separa_nor3_cerrado_de_persist1(self):
         registry = json.loads(
-            (
-                ROOT / "data/governance/work-block-registry.json"
-            ).read_text(encoding="utf-8")
+            (ROOT / "data/governance/work-block-registry.json")
+            .read_text(encoding="utf-8")
         )
         ids = {
             item["identifier"]: item
@@ -45,31 +44,50 @@ class TestNOR3R1CandidateReconciliation(unittest.TestCase):
         self.assertEqual([], ids["PERSIST.1"]["global_refs"])
 
         candidate = registry["current_candidate"]
-        self.assertEqual(128, candidate["global_revision"])
-        self.assertEqual("0.128.2.0-beta", candidate["revision_aware"])
-        self.assertEqual("VER.2", candidate["block"])
-        self.assertEqual("R6", candidate["revision"])
-        self.assertEqual("final_revision_aware_reform", candidate["revision_scope"])
-        self.assertEqual("accepted_pending_integration", candidate["state"])
-        self.assertEqual(164, candidate["planning_issue"])
+        self.assertEqual(
+            (
+                129,
+                "0.129.3.0-beta",
+                "MANT.2",
+                "R3",
+                "dependency_maintenance_post_g128",
+                "accepted_pending_integration",
+                211,
+                130,
+            ),
+            (
+                candidate["global_revision"],
+                candidate["revision_aware"],
+                candidate["block"],
+                candidate["revision"],
+                candidate["revision_scope"],
+                candidate["state"],
+                candidate["planning_issue"],
+                candidate["next_global_available"],
+            ),
+        )
 
     def test_manifest_actual_materializa_mant2_r2(self):
         manifest = json.loads(
-            (ROOT / "data/governance/release-publication-manifest.json").read_text(
-                encoding="utf-8"
-            )
+            (ROOT / "data/governance/release-publication-manifest.json")
+            .read_text(encoding="utf-8")
         )
-        self.assertEqual("0.128.2.0-beta", manifest["version"])
-        self.assertEqual("VER.2", manifest["block"])
-        self.assertEqual("R6", manifest["revision"])
+        self.assertEqual("0.129.3.0-beta", manifest["version"])
+        self.assertEqual("MANT.2", manifest["block"])
+        self.assertEqual("R3", manifest["revision"])
 
         next_step = manifest["next_step"]
-        self.assertEqual(129, next_step["global_revision"])
+        self.assertEqual(130, next_step["global_revision"])
         self.assertIsNone(next_step["revision_aware"])
         self.assertIsNone(next_step["block"])
-        self.assertIn("G127-E02", next_step["description"])
-        self.assertIn("G128", next_step["description"])
-        self.assertIn("#164", next_step["description"])
+        for fragment in (
+            "G129/E03/C0",
+            "MANT.2 R3/#211",
+            "G130",
+            "DOC.4 R1/#171",
+        ):
+            with self.subTest(fragment=fragment):
+                self.assertIn(fragment, next_step["description"])
 
     def test_historia_nor3_y_programa_vivo_quedan_separados(self):
         ledger = cargar_ledger()

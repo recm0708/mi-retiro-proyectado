@@ -11,47 +11,44 @@ class TestG114PromotionPostMerge(unittest.TestCase):
         self.assertEqual("PLAN.2",entry["block"]); self.assertEqual(1,entry["ordinal"]); self.assertEqual("0.1.14.01-beta",entry["revision_aware"]); self.assertIn("PR #94",entry["evidence"]); self.assertIn("7ded70c",entry["evidence"])
     def test_registro_preserva_g114_y_reconoce_mant2_r2_actual(self):
         data = json.loads(
-            (
-                ROOT
-                / "data/governance/work-block-registry.json"
-            ).read_text(
-                encoding="utf-8"
-            )
+            (ROOT / "data/governance/work-block-registry.json")
+            .read_text(encoding="utf-8")
         )
+        ids = {item["identifier"]: item for item in data["identifiers"]}
 
-        ids = {
-            item["identifier"]: item
-            for item in data["identifiers"]
-        }
-
+        self.assertEqual("closed", ids["PLAN.2"]["status"])
+        self.assertEqual(["G114", "G126"], ids["PLAN.2"]["global_refs"])
         self.assertEqual(
-            "closed",
-            ids["PLAN.2"]["status"],
-        )
-        self.assertEqual(
-            ["G114", "G126"],
-            ids["PLAN.2"]["global_refs"],
-        )
-        self.assertEqual(
-            "closed_r2",
+            "accepted_r3_pending_integration",
             ids["MANT.2"]["status"],
+        )
+        self.assertEqual(
+            ["G123", "G127", "G129"],
+            ids["MANT.2"]["global_refs"],
         )
 
         active = data["active_phase"]
-
-        self.assertEqual("VER.2", active["block"])
-        self.assertEqual("R6", active["revision"])
-        self.assertEqual(164, active["issue"])
-        self.assertEqual("accepted_pending_integration", active["state"])
-        self.assertEqual(128, active["global_revision"])
-        self.assertEqual("0.128.2.0-beta", active["revision_aware"])
         self.assertEqual(
-            127,
-            active["base_global_revision"],
-        )
-        self.assertEqual(
-            "0.1.27.02-beta",
-            active["base_revision_aware"],
+            (
+                "MANT.2",
+                "R3",
+                211,
+                "accepted_pending_integration",
+                129,
+                "0.129.3.0-beta",
+                128,
+                "0.128.2.0-beta",
+            ),
+            (
+                active["block"],
+                active["revision"],
+                active["issue"],
+                active["state"],
+                active["global_revision"],
+                active["revision_aware"],
+                active["base_global_revision"],
+                active["base_revision_aware"],
+            ),
         )
 
     def test_documentacion_preserva_g114_plan2(self):

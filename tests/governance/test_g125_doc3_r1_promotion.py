@@ -17,14 +17,14 @@ ROOT = Path(__file__).resolve().parents[2]
 class TestG125DOC3R1Promotion(unittest.TestCase):
     def test_version_materializa_g125_e01(self):
         version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
-        self.assertEqual("0.128.2.0-beta", version)
+        self.assertEqual("0.129.3.0-beta", version)
         self.assertEqual(version, APP_VERSION)
-        self.assertEqual((128, 2), descomponer_version_beta_revision(version))
+        self.assertEqual((129, 3), descomponer_version_beta_revision(version))
 
     def test_ledger_preserva_g125_y_materializa_g127_e02(self):
         ledger = cargar_ledger()
-        self.assertEqual(128, ledger["accepted_count"])
-        self.assertEqual(129, ledger["next_global"])
+        self.assertEqual(129, ledger["accepted_count"])
+        self.assertEqual(130, ledger["next_global"])
         self.assertIsNone(ledger["next_candidate"])
         self.assertIsNone(ledger["next_candidate_block"])
 
@@ -38,11 +38,16 @@ class TestG125DOC3R1Promotion(unittest.TestCase):
         self.assertEqual("0.1.25.01-beta", g125["revision_aware"])
 
         current = ledger["entries"][-1]
-        self.assertEqual(128, current["global_revision"])
-        self.assertEqual("VER.2", current["block"])
-        self.assertEqual(2, current["ordinal"])
-        self.assertEqual("R6", current["functional_revision"])
-        self.assertEqual("0.128.2.0-beta", current["revision_aware"])
+        self.assertEqual(
+            (129, "MANT.2", 3, "R3", "0.129.3.0-beta"),
+            (
+                current["global_revision"],
+                current["block"],
+                current["ordinal"],
+                current["functional_revision"],
+                current["revision_aware"],
+            ),
+        )
 
     def test_registry_materializa_doc3_y_preserva_doc4_reservado(self):
         registry = json.loads(
@@ -61,25 +66,27 @@ class TestG125DOC3R1Promotion(unittest.TestCase):
         self.assertIn("G126", plan2["global_refs"])
 
         candidate = registry["current_candidate"]
-        self.assertEqual(128, candidate["global_revision"])
-        self.assertEqual("0.128.2.0-beta", candidate["revision_aware"])
-        self.assertEqual("VER.2", candidate["block"])
-        self.assertEqual(129, candidate["next_global_available"])
+        self.assertEqual(129, candidate["global_revision"])
+        self.assertEqual("0.129.3.0-beta", candidate["revision_aware"])
+        self.assertEqual("MANT.2", candidate["block"])
+        self.assertEqual(130, candidate["next_global_available"])
         self.assertEqual("accepted_pending_integration", candidate["state"])
 
     def test_manifest_actual_materializa_mant2_r2(self):
         manifest = json.loads(
-            (
-                ROOT / "data/governance/release-publication-manifest.json"
-            ).read_text(encoding="utf-8")
+            (ROOT / "data/governance/release-publication-manifest.json")
+            .read_text(encoding="utf-8")
         )
-        self.assertEqual("0.128.2.0-beta", manifest["version"])
-        self.assertEqual("VER.2", manifest["block"])
-        self.assertEqual("R6", manifest["revision"])
-        self.assertEqual(129, manifest["next_step"]["global_revision"])
+        self.assertEqual("0.129.3.0-beta", manifest["version"])
+        self.assertEqual("MANT.2", manifest["block"])
+        self.assertEqual("R3", manifest["revision"])
+        self.assertEqual(130, manifest["next_step"]["global_revision"])
         self.assertIsNone(manifest["next_step"]["revision_aware"])
         self.assertIsNone(manifest["next_step"]["block"])
-        self.assertIn("VER.2 R6/#164", manifest["next_step"]["description"])
+        self.assertIn(
+            "MANT.2 R3/#211",
+            manifest["next_step"]["description"],
+        )
 
     def test_evidencia_doc3_declara_materializacion(self):
         audit = (

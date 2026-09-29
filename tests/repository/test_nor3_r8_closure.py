@@ -16,65 +16,64 @@ AUDIT = ROOT / "docs/audits/repository/nor3-r8-closure-audit.md"
 
 class TestNOR3R8Closure(unittest.TestCase):
     def test_cierre_r8_preserva_g122_y_estado_actual(self):
-        data = json.loads(
-            REGISTRY.read_text(
-                encoding="utf-8"
-            )
-        )
-
+        data = json.loads(REGISTRY.read_text(encoding="utf-8"))
         candidate = data["current_candidate"]
 
-        self.assertEqual(128, candidate["global_revision"])
-        self.assertEqual("0.128.2.0-beta", candidate["revision_aware"])
-        self.assertEqual("VER.2", candidate["block"])
-        self.assertEqual("R6", candidate["revision"])
-        self.assertEqual("final_revision_aware_reform", candidate["revision_scope"])
-        self.assertEqual("accepted_pending_integration", candidate["state"])
-        self.assertEqual(129, candidate["next_global_available"])
+        self.assertEqual(
+            (
+                129,
+                "0.129.3.0-beta",
+                "MANT.2",
+                "R3",
+                "dependency_maintenance_post_g128",
+                "accepted_pending_integration",
+                130,
+            ),
+            (
+                candidate["global_revision"],
+                candidate["revision_aware"],
+                candidate["block"],
+                candidate["revision"],
+                candidate["revision_scope"],
+                candidate["state"],
+                candidate["next_global_available"],
+            ),
+        )
 
         identifiers = {
             item["identifier"]: item
             for item in data["identifiers"]
         }
-
+        self.assertEqual("closed", identifiers["NOR.3"]["status"])
+        self.assertEqual("R1-R8", identifiers["NOR.3"]["active_scope"])
+        self.assertEqual(["G122"], identifiers["NOR.3"]["global_refs"])
+        self.assertEqual("closed", identifiers["DOC.3"]["status"])
+        self.assertEqual(["G125"], identifiers["DOC.3"]["global_refs"])
         self.assertEqual(
-            "closed",
-            identifiers["NOR.3"]["status"],
-        )
-        self.assertEqual(
-            "R1-R8",
-            identifiers["NOR.3"]["active_scope"],
-        )
-        self.assertEqual(
-            ["G122"],
-            identifiers["NOR.3"]["global_refs"],
-        )
-
-        self.assertEqual(
-            "closed",
-            identifiers["DOC.3"]["status"],
-        )
-        self.assertEqual(
-            ["G125"],
-            identifiers["DOC.3"]["global_refs"],
-        )
-
-        self.assertEqual(
-            "closed_r2",
+            "accepted_r3_pending_integration",
             identifiers["MANT.2"]["status"],
         )
-        self.assertEqual(
-            "accepted_r6_pending_integration",
-            identifiers["VER.2"]["status"],
-        )
+        self.assertEqual("closed_r6", identifiers["VER.2"]["status"])
 
         active = data["active_phase"]
-
-        self.assertEqual("VER.2", active["block"])
-        self.assertEqual("R6", active["revision"])
-        self.assertEqual(164, active["issue"])
-        self.assertEqual("accepted_pending_integration", active["state"])
-        self.assertEqual(128, active["global_revision"])
+        self.assertEqual(
+            (
+                "MANT.2",
+                "R3",
+                211,
+                "accepted_pending_integration",
+                129,
+                128,
+            ),
+            (
+                active["block"],
+                active["revision"],
+                active["issue"],
+                active["state"],
+                active["global_revision"],
+                active["base_global_revision"],
+            ),
+        )
 
     def test_policy_declara_cierre_r8_sin_simular_auditoria_posterior(self):
         data = json.loads(POLICY.read_text(encoding="utf-8"))

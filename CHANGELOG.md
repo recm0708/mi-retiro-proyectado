@@ -6,6 +6,20 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ## [Unreleased]
 
+- G130 permanece libre y sin candidato.
+- G129/E03/C0 está aceptado localmente para MANT.2 R3 y pendiente de integración/publicación; tras publicarlo debe repetirse #166 antes de DOC.4.
+
+## [0.129.3.0-beta]
+
+### Dependencias y mantenimiento
+
+- MANT.2 R3 materializa **G129/E03/C0** bajo revision-aware v2.
+- `pypdf` avanza de `6.18.1` a `6.19.0`.
+- El guard histórico G123 deja de fijar el pin vivo de `pypdf`.
+- PR #210 queda cerrado sin merge como superseded por Draft PR #212.
+- `VERSION` avanza a `0.129.3.0-beta`; G130 permanece libre.
+
+
 - G129 permanece disponible sin candidato, bloque ni VERSION preasignados.
 - G128/E02/C0 está aceptado localmente para VER.2 R6 y pendiente de integración/publicación; después de publicarlo debe repetirse #166 antes de DOC.4 R1/#171.
 

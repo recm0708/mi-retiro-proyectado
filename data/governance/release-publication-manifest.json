@@ -2,43 +2,45 @@
   "schema_version": 2,
   "snapshot_role": "release-input",
   "publication_resolution": "runtime",
-  "global_revision": 128,
-  "edition": 2,
+  "global_revision": 129,
+  "edition": 3,
   "identifier_schema": 2,
   "correction_ordinal": 0,
-  "maintenance_ordinal": 0,
-  "version": "0.128.2.0-beta",
-  "block": "VER.2",
-  "revision": "R6",
+  "maintenance_ordinal": 3,
+  "version": "0.129.3.0-beta",
+  "block": "MANT.2",
+  "revision": "R3",
   "summary": [
-    "G128/E02/C0 materializa VER.2 R6 como primer estado revision-aware v2 prospectivo.",
-    "Legacy/v1 permanecen inmutables; Build continúa separado de VERSION."
+    "G129/E03/C0 materializa MANT.2 R3 bajo revision-aware v2.",
+    "pypdf 6.19.0 queda integrado de forma coordinada antes de DOC.4."
   ],
   "changes": [
-    "La familia v2 queda fijada como 0.<GLOBAL>.<EDITION>.<CORRECTION>-beta.",
-    "G128 se materializa como 0.128.2.0-beta.",
-    "Edition E02 continúa G087/E01 como estado VER.2 anterior.",
-    "Correction C0 identifica la línea ordinaria y functional_revision=R6 permanece metadata.",
-    "Ledger/registry/manifest/tooling separan snapshot, workflow y publicación runtime."
+    "pypdf avanza de 6.18.1 a 6.19.0 con inventario y avisos sincronizados.",
+    "El guard histórico G123 queda separado del pin vivo de pypdf.",
+    "PR Dependabot #210 queda superseded sin merge por #212.",
+    "Edition E03 continúa MANT.2 E01/G123 y E02/G127; Correction C0 identifica la nueva línea ordinaria.",
+    "maintenance_ordinal=3 y functional_revision=R3 permanecen metadata."
   ],
   "validation": [
-    "CP1–CP6B firmados y auditados remotamente.",
-    "CP6B remoto: Repository Quality Gate, Python Compatibility y CodeQL/Analyze en success.",
-    "Preflight #166 previo al candidato: solo PR #208 abierto; 0 PRs Dependabot y 0 ramas dependabot/*.",
-    "Gate completo local CP7 obligatorio antes del commit firmado."
+    "CP1 remoto: Repository Quality Gate success.",
+    "CP2 remoto: Repository Quality Gate, Python Compatibility y Dependency Security success.",
+    "pip check PASS y pip-audit --strict sin vulnerabilidades conocidas.",
+    "60 focales OK; pre-commit CP2 10 PASS / 0 FAIL con 1644 unittest OK.",
+    "0 PRs Dependabot y 0 ramas remotas Dependabot después de cerrar #210.",
+    "Gate local CP3 obligatorio antes del commit firmado."
   ],
   "evidence": [
-    "Issue #164.",
-    "Draft PR #208.",
-    "Política #203.",
-    "Preflight #166.",
-    "Baseline publicado G127/E02 / v0.1.27.02-beta / Release 392412590.",
-    "Estado VER.2 histórico previo G087/E01 / v0.0.71.01-beta."
+    "Issue #211.",
+    "Draft PR #212.",
+    "PR #210 cerrado sin merge como superseded.",
+    "Preflight #166 previo a DOC.4.",
+    "Baseline publicado G128/E02/C0 / v0.128.2.0-beta / Release 393386700.",
+    "Política #203 — checkpoints remotos auditables y commits firmados."
   ],
   "next_step": {
-    "global_revision": 129,
+    "global_revision": 130,
     "revision_aware": null,
     "block": null,
-    "description": "G128/E02/C0 está aceptado localmente para VER.2 R6/#164 y pendiente de integración/publicación. El baseline publicado anterior es MANT.2 R2/G127-E02. G129 permanece libre; tras publicar G128 y repetir #166 limpio corresponde DOC.4 R1/#171."
+    "description": "G129/E03/C0 está aceptado localmente para MANT.2 R3/#211 y pendiente de integración/publicación. G130 permanece libre; después de publicar G129 y repetir #166 CLEAN corresponde DOC.4 R1/#171."
   }
 }

@@ -20,32 +20,30 @@
 <!-- NOR3-G122-PROMOTION:END -->
 
 <!-- POST-NOR3-INTERMEDIATE-SEQUENCE:START -->
-## Estado vigente — candidato VER.2 R6 materializado
+## Estado vigente — candidato MANT.2 R3 materializado
 
-MANT.2 R2/#206 permanece publicado como **G127/E02** (`0.1.27.02-beta`) sobre
-`main@2df33a5c24d1c7cea1a6db91539a92da02c91500`, mediante PR #207,
-tag firmado `v0.1.27.02-beta` y GitHub Release prerelease 392412590.
+VER.2 R6/#164 está cerrado, integrado y publicado como **G128/E02/C0**
+(`0.128.2.0-beta`) mediante PR #208, tag firmado `v0.128.2.0-beta` y
+GitHub Release prerelease 393386700.
 
-El preflight #166 posterior a G127 quedó CLEAN. VER.2 R6/#164 alcanzó un
-candidato material aceptable y **G128/E02/C0 queda materializado localmente
-como `0.128.2.0-beta`** dentro del Draft PR #208.
+El preflight #166 previo a DOC.4 detectó el PR #210 y abrió MANT.2 R3/#211.
+CP1 separó la evidencia G123 del pin vivo; CP2 integró `pypdf 6.19.0` con
+gates locales/remotos verdes. #210 quedó cerrado sin merge como superseded.
 
-G128 está aceptado/versionado pero todavía **no está publicado**: faltan el
-checkpoint firmado, auditoría remota, integración a `main`, revalidación,
-tag firmado y GitHub Release prerelease.
+**G129/E03/C0 queda materializado localmente como `0.129.3.0-beta`** para
+MANT.2 R3 mediante Draft PR #212, pendiente de integración/publicación.
 
-**G129 es el siguiente Global aritmético** y permanece libre, sin candidato,
-bloque ni `VERSION` preasignados. Después de publicar VER.2 y repetir #166
-limpio corresponde **DOC.4 R1 / #171**.
+**G130 es el siguiente Global aritmético** y permanece libre. Después de
+publicar G129 debe repetirse #166; solo CLEAN habilita DOC.4 R1/#171.
 <!-- POST-NOR3-INTERMEDIATE-SEQUENCE:END -->
 
 
 <!-- DOC1-R1-POST-MANT1:START -->
 ## Estado de seguridad vigente
-La versión canónica candidata es `0.128.2.0-beta` / G128/E02/C0 para VER.2 R6, aceptada localmente y todavía no publicada.
-- G127/E02 / MANT.2 R2 permanece publicado mediante `v0.1.27.02-beta` y Release 392412590.
-- G125/E01 permanece preservado como publicación histórica anterior.
-- G129 permanece libre y sin candidato.
+La versión canónica candidata es `0.129.3.0-beta` / G129/E03/C0 para MANT.2 R3, aceptada localmente y todavía no publicada.
+- G128/E02/C0 / VER.2 R6 permanece publicado mediante `v0.128.2.0-beta` y Release 393386700.
+- `pypdf 6.19.0` está integrado con `pip-audit --strict` limpio y Dependency Security remoto verde.
+- G130 permanece libre y sin candidato.
 - SEC.2 R7/#144 permanece detrás de la ola UX final y gate #189.
 <!-- DOC1-R1-POST-MANT1:END -->
 
@@ -55,7 +53,8 @@ Mi Retiro Proyectado se encuentra en **desarrollo beta**. La familia legacy `0.0
 
 | Línea | Soporte de seguridad |
 | --- | --- |
-| `0.128.2.0-beta` | Beta vigente candidata G128/E02/C0 / VER.2 R6; integración, tag y Release pendientes |
+| `0.129.3.0-beta` | Beta vigente candidata G129/E03/C0 / MANT.2 R3; integración, tag y Release pendientes |
+| `0.128.2.0-beta` | Beta vigente publicada G128/E02/C0 / VER.2 R6; tag firmado y Release 393386700 |
 | `0.1.27.02-beta` | Beta vigente publicada G127/E02 / MANT.2 R2; tag firmado `v0.1.27.02-beta`, GitHub Release prerelease 392412590 y preflight post-publicación #166 CLEAN |
 | `0.1.26.01-beta` | Beta previa publicada G126/E01 / PLAN.2 R2 mediante tag firmado `v0.1.26.01-beta` y GitHub Release prerelease 390399947 |
 | `0.1.25.01-beta` | Beta previa publicada G125/E01 / DOC.3 R1 mediante tag firmado `v0.1.25.01-beta` y GitHub Release prerelease |

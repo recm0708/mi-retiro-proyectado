@@ -15,7 +15,7 @@
 </p>
 
 <p align="center">
-  <img alt="Versión 0.128.2.0-beta" src="https://img.shields.io/badge/versi%C3%B3n-0.128.2.0--beta-2563eb">
+  <img alt="Versión 0.129.3.0-beta" src="https://img.shields.io/badge/versi%C3%B3n-0.129.3.0--beta-2563eb">
   <img alt="Python 3.13 y 3.14" src="https://img.shields.io/badge/Python-3.13%20%7C%203.14-3776AB?logo=python&logoColor=white">
   <img alt="Licencia propietaria" src="https://img.shields.io/badge/licencia-propietaria-6B7280">
 </p>
@@ -26,14 +26,14 @@ Mi Retiro Proyectado es una aplicación web local e independiente para **estimar
 
 ## Estado del proyecto
 
-- **Versión canónica vigente:** `0.128.2.0-beta`; candidato aceptado VER.2 R6 / G128/E02/C0 pendiente de integración/publicación.
-- **Versión de aplicación:** `0.128.2.0-beta` — VER.2 R6 / G128-E02-C0 aceptado localmente; publicación pendiente.
-- **Última publicación formal:** `v0.1.27.02-beta`, sobre `main@2df33a5c24d1c7cea1a6db91539a92da02c91500`; GitHub Release prerelease 392412590.
-- **Fase material actual:** **VER.2 R6 / #164**, G128/E02/C0 materializado mediante PR #208, listo para integración.
-- **Preflight #166 previo al candidato:** CLEAN.
-- **Siguiente Global aritmético:** G129, libre y sin candidato.
-- **Primera versión oficial objetivo:** `1.0.0.0`; el primer identificador de artefacto oficial previsto es `Build 000001`.
-- **Gate futuro de seguridad:** SEC.2 R7 permanece en la ruta pre-1.0 después de la ola UX final.
+- **Versión canónica vigente:** `0.129.3.0-beta`; candidato MANT.2 R3 / G129-E03-C0 pendiente de integración/publicación.
+- **Última publicación formal:** `v0.128.2.0-beta`; GitHub Release prerelease 393386700.
+- **Fase material actual:** **MANT.2 R3 / #211**, mediante Draft PR #212.
+- **Dependabot:** #210 cerrado sin merge como superseded; 0 PRs Dependabot abiertos.
+- **Siguiente Global aritmético:** G130, libre y sin candidato.
+- **Siguiente fase ordinaria:** DOC.4 R1/#171 solo después de publicar G129 y repetir #166 CLEAN.
+- **Gate de seguridad posterior:** SEC.2 R7 permanece planificado en la secuencia vigente antes de los gates finales.
+- **Primera versión oficial objetivo:** `1.0.0.0` con `Build 000001`.
 - **Etapa:** desarrollo beta.
 
 La visibilidad pública del repositorio **no convierte una beta de desarrollo en versión oficial, no constituye un despliegue de producción y no modifica por sí sola la licencia vigente**.
@@ -41,23 +41,21 @@ La visibilidad pública del repositorio **no convierte una beta de desarrollo en
 La versión se obtiene exclusivamente del archivo [`VERSION`](VERSION). La política completa se documenta en [Política de versionado](VERSIONING.md). VER.2 publicó `v0.0.71.01-beta` bajo la denominación original G071/E01; la reconciliación posterior sitúa ese estado en G087/E01 sin alterar el tag, y su evidencia histórica quedó preservada por NOR.2. Los estándares vigentes del repositorio están en [Estándares del repositorio](docs/standards) y el cierre de la normalización se documenta en [Auditorías de normalización del repositorio](docs/audits/repository).
 
 <!-- POST-NOR3-INTERMEDIATE-SEQUENCE:START -->
-## Estado vigente — candidato VER.2 R6 materializado
+## Estado vigente — candidato MANT.2 R3 materializado
 
-MANT.2 R2/#206 permanece publicado como **G127/E02** (`0.1.27.02-beta`) sobre
-`main@2df33a5c24d1c7cea1a6db91539a92da02c91500`, mediante PR #207,
-tag firmado `v0.1.27.02-beta` y GitHub Release prerelease 392412590.
+VER.2 R6/#164 está cerrado, integrado y publicado como **G128/E02/C0**
+(`0.128.2.0-beta`) mediante PR #208, tag firmado `v0.128.2.0-beta` y
+GitHub Release prerelease 393386700.
 
-El preflight #166 posterior a G127 quedó CLEAN. VER.2 R6/#164 alcanzó un
-candidato material aceptable y **G128/E02/C0 queda materializado localmente
-como `0.128.2.0-beta`** dentro del Draft PR #208.
+El preflight #166 previo a DOC.4 detectó el PR #210 y abrió MANT.2 R3/#211.
+CP1 separó la evidencia G123 del pin vivo; CP2 integró `pypdf 6.19.0` con
+gates locales/remotos verdes. #210 quedó cerrado sin merge como superseded.
 
-G128 está aceptado/versionado pero todavía **no está publicado**: faltan el
-checkpoint firmado, auditoría remota, integración a `main`, revalidación,
-tag firmado y GitHub Release prerelease.
+**G129/E03/C0 queda materializado localmente como `0.129.3.0-beta`** para
+MANT.2 R3 mediante Draft PR #212, pendiente de integración/publicación.
 
-**G129 es el siguiente Global aritmético** y permanece libre, sin candidato,
-bloque ni `VERSION` preasignados. Después de publicar VER.2 y repetir #166
-limpio corresponde **DOC.4 R1 / #171**.
+**G130 es el siguiente Global aritmético** y permanece libre. Después de
+publicar G129 debe repetirse #166; solo CLEAN habilita DOC.4 R1/#171.
 <!-- POST-NOR3-INTERMEDIATE-SEQUENCE:END -->
 
 

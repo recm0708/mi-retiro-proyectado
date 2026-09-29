@@ -19,42 +19,75 @@ class TestReleaseGovernanceContract(unittest.TestCase):
         env = os.environ.copy()
         if child_encoding is not None:
             env["PYTHONIOENCODING"] = child_encoding
-        return subprocess.run([sys.executable, str(SCRIPT), *args], cwd=ROOT, text=True, capture_output=True, encoding="utf-8", env=env)
+        return subprocess.run(
+            [sys.executable, str(SCRIPT), *args],
+            cwd=ROOT,
+            text=True,
+            capture_output=True,
+            encoding="utf-8",
+            env=env,
+        )
+
+    def current_expected(self):
+        version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
+        ledger = json.loads(
+            (ROOT / "data/governance/pre-1-0-revision-ledger.json")
+            .read_text(encoding="utf-8")
+        )
+        entry = ledger["entries"][-1]
+        title = (
+            f"Mi Retiro Proyectado v{version} — "
+            f"G{entry['global_revision']}/E{entry['edition']:02d}"
+        )
+        return version, ledger, entry, title
 
     def test_salida_cli_es_utf8_aun_con_pipe_windows_legacy(self):
+        version, _, entry, title = self.current_expected()
         result = self.run_contract("--json", child_encoding="cp1252")
         self.assertEqual(0, result.returncode, result.stdout + result.stderr)
         data = json.loads(result.stdout)
-        self.assertEqual("Mi Retiro Proyectado v0.128.2.0-beta — G128/E02", data["title"])
+        self.assertEqual(title, data["title"])
+        self.assertEqual(version, data["version"])
+        self.assertEqual(entry["global_revision"], data["global_revision"])
 
-    def test_contrato_actual_deriva_titulo_g125(self):
+    def test_contrato_actual_deriva_estado_canonico(self):
+        version, ledger, entry, title = self.current_expected()
         result = self.run_contract("--json")
         self.assertEqual(0, result.returncode, result.stdout + result.stderr)
         data = json.loads(result.stdout)
-        self.assertEqual("0.128.2.0-beta", data["version"])
-        self.assertEqual("v0.128.2.0-beta", data["tag"])
-        self.assertEqual(128, data["global_revision"])
-        self.assertEqual(2, data["edition"])
-        self.assertEqual("Mi Retiro Proyectado v0.128.2.0-beta — G128/E02", data["title"])
+        self.assertEqual(version, data["version"])
+        self.assertEqual(f"v{version}", data["tag"])
+        self.assertEqual(entry["global_revision"], data["global_revision"])
+        self.assertEqual(entry["edition"], data["edition"])
+        self.assertEqual(title, data["title"])
         self.assertTrue(data["prerelease"])
-        self.assertEqual(128, data["accepted_count"])
-        self.assertEqual(129, data["next_global"])
+        self.assertEqual(ledger["accepted_count"], data["accepted_count"])
+        self.assertEqual(ledger["next_global"], data["next_global"])
         self.assertIsNone(data["next_candidate"])
         self.assertIsNone(data["next_candidate_block"])
 
     def test_tag_debe_coincidir_con_version(self):
-        ok = self.run_contract("--check-tag", "v0.128.2.0-beta")
+        version, _, _, _ = self.current_expected()
+        ok = self.run_contract("--check-tag", f"v{version}")
         self.assertEqual(0, ok.returncode, ok.stdout + ok.stderr)
         bad = self.run_contract("--check-tag", "v0.1.24.13-beta")
         self.assertNotEqual(0, bad.returncode)
         self.assertIn("Tag inválido", bad.stdout)
 
     def test_titulo_debe_ser_canonico(self):
-        ok = self.run_contract("--check-title", "Mi Retiro Proyectado v0.128.2.0-beta — G128/E02")
+        _, _, _, title = self.current_expected()
+        ok = self.run_contract("--check-title", title)
         self.assertEqual(0, ok.returncode, ok.stdout + ok.stderr)
 
     def test_notas_requieren_secciones_minimas(self):
-        good = "\n\n".join(("## Estado publicado\n- Versión: prueba", "## Resumen\nResumen.", "## Cambios principales\n- Cambio.", "## Validación\n- OK.", "## Evidencia\n- PR.", "## Siguiente paso\nSiguiente."))
+        good = "\n\n".join((
+            "## Estado publicado\n- Versión: prueba",
+            "## Resumen\nResumen.",
+            "## Cambios principales\n- Cambio.",
+            "## Validación\n- OK.",
+            "## Evidencia\n- PR.",
+            "## Siguiente paso\nSiguiente.",
+        ))
         with tempfile.TemporaryDirectory() as tmp:
             file = Path(tmp) / "notes.md"
             file.write_text(good, encoding="utf-8")
@@ -73,17 +106,29 @@ class TestReleaseGovernanceContract(unittest.TestCase):
 
     def test_politica_documenta_formato_y_publicacion(self):
         text = (ROOT / "docs/operations/release-process.md").read_text(encoding="utf-8")
-        for fragment in ("Mi Retiro Proyectado v<VERSION> — GNNN/ENN", "## Estado publicado", "## Resumen", "## Cambios principales", "## Validación", "## Evidencia", "## Siguiente paso", "todo tag formal nuevo", "no recibe un Release retroactivo", "gh release edit"):
+        for fragment in (
+            "Mi Retiro Proyectado v<VERSION> — GNNN/ENN",
+            "## Estado publicado",
+            "## Resumen",
+            "## Cambios principales",
+            "## Validación",
+            "## Evidencia",
+            "## Siguiente paso",
+            "todo tag formal nuevo",
+            "no recibe un Release retroactivo",
+            "gh release edit",
+        ):
             with self.subTest(fragment=fragment):
                 self.assertIn(fragment, text)
 
-    def test_g125_materializado_y_g126_sin_candidato(self):
-        ledger = json.loads((ROOT / "data/governance/pre-1-0-revision-ledger.json").read_text(encoding="utf-8"))
-        self.assertEqual(128, ledger["accepted_count"])
-        self.assertEqual(129, ledger["next_global"])
+    def test_estado_materializado_y_siguiente_global_sin_candidato(self):
+        version, ledger, entry, _ = self.current_expected()
+        self.assertEqual(ledger["accepted_count"], len(ledger["entries"]))
+        self.assertEqual(ledger["accepted_count"], entry["global_revision"])
+        self.assertEqual(ledger["accepted_count"] + 1, ledger["next_global"])
         self.assertIsNone(ledger["next_candidate"])
         self.assertIsNone(ledger["next_candidate_block"])
-        self.assertEqual("0.128.2.0-beta", (ROOT / "VERSION").read_text(encoding="utf-8").strip())
+        self.assertEqual(version, entry["revision_aware"])
 
 
 if __name__ == "__main__":

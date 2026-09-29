@@ -16,35 +16,57 @@ ROOT = Path(__file__).resolve().parents[2]
 class TestG123MANT2Promotion(unittest.TestCase):
     def test_version_actual_avanza_sin_reescribir_g123(self):
         version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
-        self.assertEqual("0.128.2.0-beta", version)
+        self.assertEqual("0.129.3.0-beta", version)
         self.assertEqual(version, APP_VERSION)
-        self.assertEqual((128, 2), descomponer_version_beta_revision(version))
+        self.assertEqual((129, 3), descomponer_version_beta_revision(version))
 
     def test_ledger_preserva_g123_y_avanza_a_g125(self):
         ledger = cargar_ledger()
-        self.assertEqual(128, ledger["accepted_count"])
-        self.assertEqual(129, ledger["next_global"])
+        self.assertEqual(129, ledger["accepted_count"])
+        self.assertEqual(130, ledger["next_global"])
         self.assertIsNone(ledger["next_candidate"])
         self.assertIsNone(ledger["next_candidate_block"])
-        entry = next(x for x in ledger["entries"] if x["global_revision"] == 123)
+
+        entry = next(
+            x for x in ledger["entries"]
+            if x["global_revision"] == 123
+        )
         self.assertEqual("MANT.2", entry["block"])
         self.assertEqual("R1", entry["functional_revision"])
         self.assertEqual("0.1.23.01-beta", entry["revision_aware"])
 
     def test_registry_y_manifest_preservan_g123_y_reconocen_g125(self):
-        registry = json.loads((ROOT / "data/governance/work-block-registry.json").read_text(encoding="utf-8"))
+        registry = json.loads(
+            (ROOT / "data/governance/work-block-registry.json")
+            .read_text(encoding="utf-8")
+        )
         ids = {x["identifier"]: x for x in registry["identifiers"]}
-        self.assertEqual("closed_r2", ids["MANT.2"]["status"])
-        self.assertEqual(["G123", "G127"], ids["MANT.2"]["global_refs"])
+
+        self.assertEqual(
+            "accepted_r3_pending_integration",
+            ids["MANT.2"]["status"],
+        )
+        self.assertEqual(
+            ["G123", "G127", "G129"],
+            ids["MANT.2"]["global_refs"],
+        )
         self.assertIn("PR #168", ids["MANT.2"]["evidence"])
         self.assertIn("G123/E01", ids["MANT.2"]["evidence"])
         self.assertIn("Issue #206", ids["MANT.2"]["evidence"])
-        self.assertEqual(129, registry["current_candidate"]["next_global_available"])
-        manifest = json.loads((ROOT / "data/governance/release-publication-manifest.json").read_text(encoding="utf-8"))
-        self.assertEqual("0.128.2.0-beta", manifest["version"])
-        self.assertEqual("VER.2", manifest["block"])
-        self.assertEqual("R6", manifest["revision"])
-        self.assertEqual(129, manifest["next_step"]["global_revision"])
+        self.assertIn("Issue #211", ids["MANT.2"]["evidence"])
+        self.assertEqual(
+            130,
+            registry["current_candidate"]["next_global_available"],
+        )
+
+        manifest = json.loads(
+            (ROOT / "data/governance/release-publication-manifest.json")
+            .read_text(encoding="utf-8")
+        )
+        self.assertEqual("0.129.3.0-beta", manifest["version"])
+        self.assertEqual("MANT.2", manifest["block"])
+        self.assertEqual("R3", manifest["revision"])
+        self.assertEqual(130, manifest["next_step"]["global_revision"])
 
     def test_dependencias_historicas_g123_preservadas(self):
         releases = (ROOT / "RELEASES.md").read_text(encoding="utf-8")

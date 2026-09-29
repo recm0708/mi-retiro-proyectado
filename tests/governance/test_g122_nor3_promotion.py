@@ -19,20 +19,28 @@ POLICY = ROOT / "data/governance/repository-structure-policy.json"
 class TestG122NOR3Promotion(unittest.TestCase):
     def test_version_actual_avanza_sin_reescribir_g122(self):
         version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
-        self.assertEqual("0.128.2.0-beta", version)
+        self.assertEqual("0.129.3.0-beta", version)
         self.assertEqual(version, APP_VERSION)
-        self.assertEqual((128, 2), descomponer_version_beta_revision(version))
-        entry = next(x for x in cargar_ledger()["entries"] if x["global_revision"] == 122)
+        self.assertEqual((129, 3), descomponer_version_beta_revision(version))
+
+        entry = next(
+            x for x in cargar_ledger()["entries"]
+            if x["global_revision"] == 122
+        )
         self.assertEqual("NOR.3", entry["block"])
         self.assertEqual("0.1.22.01-beta", entry["revision_aware"])
 
     def test_ledger_preserva_g122_y_estado_actual_g125(self):
         ledger = cargar_ledger()
-        self.assertEqual(128, ledger["accepted_count"])
-        self.assertEqual(129, ledger["next_global"])
+        self.assertEqual(129, ledger["accepted_count"])
+        self.assertEqual(130, ledger["next_global"])
         self.assertIsNone(ledger["next_candidate"])
         self.assertIsNone(ledger["next_candidate_block"])
-        entry = next(x for x in ledger["entries"] if x["global_revision"] == 122)
+
+        entry = next(
+            x for x in ledger["entries"]
+            if x["global_revision"] == 122
+        )
         self.assertEqual(1, entry["ordinal"])
         self.assertEqual("R8", entry["functional_revision"])
         self.assertEqual("0.1.22.01-beta", entry["revision_aware"])
@@ -43,33 +51,49 @@ class TestG122NOR3Promotion(unittest.TestCase):
         self.assertEqual("closed", ids["NOR.3"]["status"])
         self.assertEqual(["G122"], ids["NOR.3"]["global_refs"])
         self.assertEqual("planned_reserved", ids["PERSIST.1"]["status"])
+
         candidate = data["current_candidate"]
-        self.assertEqual("accepted_pending_integration", candidate["state"])
-        self.assertEqual(128, candidate["global_revision"])
-        self.assertEqual(129, candidate["next_global_available"])
-        self.assertEqual(164, candidate["planning_issue"])
+        self.assertEqual(
+            (
+                "accepted_pending_integration",
+                129,
+                "0.129.3.0-beta",
+                "MANT.2",
+                "R3",
+                211,
+                130,
+            ),
+            (
+                candidate["state"],
+                candidate["global_revision"],
+                candidate["revision_aware"],
+                candidate["block"],
+                candidate["revision"],
+                candidate["planning_issue"],
+                candidate["next_global_available"],
+            ),
+        )
 
     def test_manifest_actual_materializa_mant2_r2(self):
         data = json.loads(MANIFEST.read_text(encoding="utf-8"))
-
-        self.assertEqual("0.128.2.0-beta", data["version"])
-        self.assertEqual("VER.2", data["block"])
-        self.assertEqual("R6", data["revision"])
+        self.assertEqual("0.129.3.0-beta", data["version"])
+        self.assertEqual("MANT.2", data["block"])
+        self.assertEqual("R3", data["revision"])
 
         next_step = data["next_step"]
-        self.assertEqual(129, next_step["global_revision"])
+        self.assertEqual(130, next_step["global_revision"])
         self.assertIsNone(next_step["revision_aware"])
         self.assertIsNone(next_step["block"])
 
-        description = next_step["description"]
         for fragment in (
-            "MANT.2 R2/G127-E02",
-            "G128",
-            "VER.2 R6/#164",
+            "G129/E03/C0",
+            "MANT.2 R3/#211",
+            "G130",
             "#166",
+            "DOC.4 R1/#171",
         ):
             with self.subTest(fragment=fragment):
-                self.assertIn(fragment, description)
+                self.assertIn(fragment, next_step["description"])
 
     def test_policy_conserva_procedencia_r2_y_registra_promocion(self):
         data = json.loads(POLICY.read_text(encoding="utf-8"))

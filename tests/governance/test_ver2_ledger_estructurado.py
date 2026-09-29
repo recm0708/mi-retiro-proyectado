@@ -133,8 +133,8 @@ class TestVer2LedgerEstructurado(
                     "global_revision"
                 ]
             ):
-                expected_schema = 2 if entry["global_revision"] == 128 else 1
-                expected_format = "revision-aware-v2" if entry["global_revision"] == 128 else "revision-aware-v1"
+                expected_schema = 2 if entry["global_revision"] >= 128 else 1
+                expected_format = "revision-aware-v2" if entry["global_revision"] >= 128 else "revision-aware-v1"
                 self.assertEqual(expected_schema, entry["identifier_schema"])
                 self.assertEqual(expected_format, entry["version_format"])
 
@@ -152,7 +152,7 @@ class TestVer2LedgerEstructurado(
                     entry,
                 )
 
-                if entry["global_revision"] == 128:
+                if entry["global_revision"] >= 128:
                     self.assertEqual(0, entry["correction_ordinal"])
                 else:
                     self.assertIsNone(entry["correction_ordinal"])
@@ -190,10 +190,18 @@ class TestVer2LedgerEstructurado(
             ],
         )
 
+        self.assertEqual(
+            3,
+            entries[129][
+                "maintenance_ordinal"
+            ],
+        )
+
         for global_revision, entry in entries.items():
             if global_revision in (
                 123,
                 127,
+                129,
             ):
                 continue
 
@@ -208,10 +216,8 @@ class TestVer2LedgerEstructurado(
         self,
     ):
         self.assertEqual(
-            129,
-            self.ledger[
-                "next_global"
-            ],
+            self.ledger["accepted_count"] + 1,
+            self.ledger["next_global"],
         )
 
         self.assertIsNone(
@@ -273,11 +279,11 @@ class TestVer2LedgerEstructurado(
             self.ledger
         )
 
-        altered[
-            "entries"
-        ][-2][
-            "version_format"
-        ] = "revision-aware-v2"
+        target = next(
+            entry for entry in altered["entries"]
+            if entry["global_revision"] == 127
+        )
+        target["version_format"] = "revision-aware-v2"
 
         with self.assertRaises(
             LedgerRevisionError
@@ -327,15 +333,11 @@ class TestVer2LedgerEstructurado(
     def test_validador_acepta_entrada_revision_aware_v2_sintetica(
         self,
     ):
-        altered = deepcopy(
-            self.ledger
-        )
-
-        altered[
-            "entries"
-        ].append(
+        altered = deepcopy(self.ledger)
+        global_revision = altered["next_global"]
+        altered["entries"].append(
             {
-                "global_revision": 129,
+                "global_revision": global_revision,
                 "block": "SYNTHETIC",
                 "ordinal": 1,
                 "edition": 1,
@@ -344,24 +346,15 @@ class TestVer2LedgerEstructurado(
                 "version_format": "revision-aware-v2",
                 "correction_ordinal": 0,
                 "maintenance_ordinal": 0,
-                "revision_aware": "0.129.1.0-beta",
+                "revision_aware": f"0.{global_revision}.1.0-beta",
                 "state": "estado sintético de validación",
                 "anchor": "test-only",
                 "evidence": "test-only",
             }
         )
-
-        altered[
-            "accepted_count"
-        ] = 129
-
-        altered[
-            "next_global"
-        ] = 130
-
-        validar_ledger(
-            altered
-        )
+        altered["accepted_count"] += 1
+        altered["next_global"] += 1
+        validar_ledger(altered)
 
     def test_markdown_preserva_historia_reconciliada(
         self,

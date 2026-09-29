@@ -25,17 +25,16 @@ class TestPLAN2R2Program(unittest.TestCase):
 
     def test_g126_permanece_preservado_y_g127_e02_es_estado_actual(self):
         self.assertEqual(
-            "0.128.2.0-beta",
+            "0.129.3.0-beta",
             (ROOT / "VERSION").read_text(encoding="utf-8").strip(),
         )
 
         ledger = cargar_ledger()
-        self.assertEqual(128, ledger["accepted_count"])
-        self.assertEqual(129, ledger["next_global"])
+        self.assertEqual(129, ledger["accepted_count"])
+        self.assertEqual(130, ledger["next_global"])
 
         g126 = next(
-            item
-            for item in ledger["entries"]
+            item for item in ledger["entries"]
             if item["global_revision"] == 126
         )
         self.assertEqual("PLAN.2", g126["block"])
@@ -44,8 +43,7 @@ class TestPLAN2R2Program(unittest.TestCase):
         self.assertEqual("0.1.26.01-beta", g126["revision_aware"])
 
         g127 = next(
-            item
-            for item in ledger["entries"]
+            item for item in ledger["entries"]
             if item["global_revision"] == 127
         )
         self.assertEqual("MANT.2", g127["block"])
@@ -53,36 +51,27 @@ class TestPLAN2R2Program(unittest.TestCase):
         self.assertEqual(2, g127["ordinal"])
         self.assertEqual("0.1.27.02-beta", g127["revision_aware"])
 
-        registry = json.loads(
-            REGISTRY.read_text(encoding="utf-8")
-        )
+        registry = json.loads(REGISTRY.read_text(encoding="utf-8"))
         candidate = registry["current_candidate"]
-
         self.assertEqual("accepted_pending_integration", candidate["state"])
-        self.assertEqual(128, candidate["global_revision"])
-        self.assertEqual("0.128.2.0-beta", candidate["revision_aware"])
-        self.assertEqual("VER.2", candidate["block"])
-        self.assertEqual(164, candidate["planning_issue"])
-        self.assertEqual(129, candidate["next_global_available"])
+        self.assertEqual(129, candidate["global_revision"])
+        self.assertEqual("0.129.3.0-beta", candidate["revision_aware"])
+        self.assertEqual("MANT.2", candidate["block"])
+        self.assertEqual("R3", candidate["revision"])
+        self.assertEqual(211, candidate["planning_issue"])
+        self.assertEqual(130, candidate["next_global_available"])
 
-        ids = {
-            item["identifier"]: item
-            for item in registry["identifiers"]
-        }
+        ids = {item["identifier"]: item for item in registry["identifiers"]}
         self.assertEqual("closed", ids["PLAN.2"]["status"])
+        self.assertEqual(["G114", "G126"], ids["PLAN.2"]["global_refs"])
         self.assertEqual(
-            ["G114", "G126"],
-            ids["PLAN.2"]["global_refs"],
-        )
-        self.assertEqual(
-            "closed_r2",
+            "accepted_r3_pending_integration",
             ids["MANT.2"]["status"],
         )
         self.assertEqual(
-            ["G123", "G127"],
+            ["G123", "G127", "G129"],
             ids["MANT.2"]["global_refs"],
         )
-
 
     def test_grafo_principal_coloca_ux_despues_de_deploy(self):
         text = self._planning_text()
