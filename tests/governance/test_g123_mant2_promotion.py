@@ -46,13 +46,13 @@ class TestG123MANT2Promotion(unittest.TestCase):
         self.assertEqual("R6", manifest["revision"])
         self.assertEqual(129, manifest["next_step"]["global_revision"])
 
-    def test_dependencias_materializadas(self):
-        req = (ROOT / "requirements.txt").read_text(encoding="utf-8")
-        package = (ROOT / "scripts/package.json").read_text(encoding="utf-8")
-        self.assertIn("httpx2==2.12.0", req)
-        self.assertIn("httpcore2==2.12.0", req)
-        self.assertIn("pypdf==6.18.1", req)
-        self.assertIn('"playwright": "1.63.0"', package)
+    def test_dependencias_historicas_g123_preservadas(self):
+        releases = (ROOT / "RELEASES.md").read_text(encoding="utf-8")
+        self.assertIn("## Promoción G123/E01 — MANT.2 R1", releases)
+        self.assertIn(
+            "`httpx2`/`httpcore2`: 2.12.0; `pypdf`: 6.18.1; Playwright: 1.63.0.",
+            releases,
+        )
 
 
 if __name__ == "__main__":
