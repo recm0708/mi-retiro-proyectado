@@ -37,13 +37,13 @@ class TestGov13DocumentacionR4(unittest.TestCase):
             with self.subTest(nombre=nombre):
                 self.assertIn(f"({nombre})", texto)
 
+
     def test_historia_r4_y_objetivo_vigente_usan_owners_correctos(self):
         history = (
             DOCS
             / "archive/governance/"
             "historical-change-registry.md"
         ).read_text(encoding="utf-8")
-
         ledger = (
             DOCS
             / "governance/pre-1-0-revision-ledger.md"
@@ -53,21 +53,16 @@ class TestGov13DocumentacionR4(unittest.TestCase):
             "R4 — transparencia, auditoría y trazabilidad",
             history,
         )
-        self.assertIn(
-            "GOV.1.3 R4",
-            ledger,
-        )
-        self.assertIn(
-            "0.0.26.04-beta",
-            ledger,
-        )
+        self.assertIn("GOV.1.3 R4", ledger)
+        self.assertIn("0.0.26.04-beta", ledger)
 
         roadmap = (
             DOCS / "governance/roadmap.md"
         ).read_text(encoding="utf-8")
-
         self.assertIn("1.0.0.0", roadmap)
-        self.assertIn("PLAN.2 R2", roadmap)
+        self.assertIn("G129/E03/C0", roadmap)
+        self.assertIn("DOC.4 R1", roadmap)
+        self.assertNotIn("PLAN.2 R2", roadmap)
 
     def test_adr_ids_son_unicos_y_consecutivos(self):
         texto = (DOCS / "decisions/README.md").read_text(encoding="utf-8")
@@ -208,25 +203,43 @@ class TestGov13DocumentacionR4(unittest.TestCase):
         self.assertNotIn("actions/setup-python@v6", texto)
         self.assertNotIn("actions/setup-node@v6", texto)
 
+
     def test_proceso_release_define_gates(self):
-        texto = (DOCS / "operations/release-process.md").read_text(encoding="utf-8")
+        texto = (
+            DOCS / "operations/release-process.md"
+        ).read_text(encoding="utf-8")
+
         for esperado in (
-            "git diff --check",
-            "compileall",
-            "unittest",
+            "Quality Gate completo",
             "`VERSION`",
-            "`CHANGELOG.md`",
-            "`RELEASES.md`",
-            "CI remota",
-            "tag anotado",
+            "ledger",
+            "registry/manifest",
+            "git verify-commit HEAD",
+            "Repository Quality Gate",
+            "Python Compatibility",
+            'git tag -s "v$version"',
+            'git tag -v "v$version"',
+            "GitHub Release",
         ):
-            self.assertIn(esperado, texto)
+            with self.subTest(esperado=esperado):
+                self.assertIn(esperado, texto)
+
 
     def test_proceso_release_prohibe_mover_tag(self):
-        texto = (DOCS / "operations/release-process.md").read_text(encoding="utf-8")
-        self.assertIn("no se mueve", texto)
-        self.assertIn("no se reutiliza", texto)
-        self.assertIn("no crear tag", texto)
+        texto = (
+            DOCS / "operations/release-process.md"
+        ).read_text(encoding="utf-8")
+
+        self.assertIn("un tag publicado no se mueve", texto)
+        self.assertIn("reutiliza ni elimina", texto)
+        self.assertIn(
+            "Una corrección posterior sigue el modelo revision-aware",
+            texto,
+        )
+        self.assertIn(
+            "se crea **después** de integrar y revalidar",
+            texto,
+        )
 
     def test_documentos_r4_sin_espacios_finales(self):
         errores = []

@@ -37,6 +37,7 @@ class TestGov18CierreGobierno(unittest.TestCase):
         self.assertIn("GOV.1.8", cierre)
         self.assertIn("0.1.0-beta.1", cierre)
 
+
     def test_closeout_preserva_gov1_completo_y_reanudacion_ux46e(self):
         cierre = (
             DOCS
@@ -45,31 +46,19 @@ class TestGov18CierreGobierno(unittest.TestCase):
 
         for bloque in range(1, 9):
             with self.subTest(bloque=bloque):
-                self.assertIn(
-                    f"GOV.1.{bloque}",
-                    cierre,
-                )
+                self.assertIn(f"GOV.1.{bloque}", cierre)
 
-        self.assertIn(
-            "GOV.1.8",
-            cierre,
-        )
-        self.assertIn(
-            "UX.4.6e quedó reanudada",
-            cierre,
-        )
-        self.assertIn(
-            "v0.0.24-beta",
-            cierre,
-        )
+        self.assertIn("GOV.1.8", cierre)
+        self.assertIn("UX.4.6e quedó reanudada", cierre)
+        self.assertIn("v0.0.24-beta", cierre)
 
         roadmap = (
             DOCS / "governance/roadmap.md"
         ).read_text(encoding="utf-8")
-
-        self.assertIn("G125/E01", roadmap)
-        self.assertIn("PLAN.2 R2", roadmap)
+        self.assertIn("G129/E03/C0", roadmap)
+        self.assertIn("DOC.4 R1", roadmap)
         self.assertIn("1.0.0.0", roadmap)
+        self.assertNotIn("PLAN.2 R2", roadmap)
 
     def test_releases_documenta_0_0_24_y_tag_firmado(self):
         texto = (ROOT / "RELEASES.md").read_text(encoding="utf-8")
@@ -120,25 +109,22 @@ class TestGov18CierreGobierno(unittest.TestCase):
             with self.subTest(esperado=esperado):
                 self.assertIn(esperado, texto)
 
-    def test_security_soporta_version_candidata(self):
+
+    def test_security_soporta_version_de_desarrollo_actual(self):
         texto = (ROOT / "SECURITY.md").read_text(encoding="utf-8")
         version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
 
-        # GOV.1.8 protege que la versión canónica figure como soportada.
-        # PLAN.1 puede evolucionar el nombre de la etapa sin invalidar ese cierre.
-        fila = next(
-            (
-                linea
-                for linea in texto.splitlines()
-                if linea.startswith(f"| `{version}` |")
-            ),
-            None,
+        self.assertIn(
+            f"**Versión de desarrollo actual:** `{version}`",
+            texto,
         )
-        self.assertIsNotNone(fila)
-        self.assertIn("Beta vigente", fila)
-        self.assertIn("beta vigente", fila.lower())
-        self.assertNotIn("pre-beta vigente", fila)
-        self.assertIn("Históricas; no reciben correcciones independientes", texto)
+        self.assertIn("**Etapa soportada:** desarrollo beta", texto)
+        self.assertIn(
+            "Las versiones beta anteriores, tags y Releases se conservan como historia",
+            texto,
+        )
+        self.assertIn("no reciben mantenimiento independiente", texto)
+        self.assertNotIn("versión candidata", texto.casefold())
 
     def test_regresiones_historicas_declaran_version_base(self):
         casos = (

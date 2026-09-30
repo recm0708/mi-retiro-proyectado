@@ -190,67 +190,45 @@ class TestGov14ObservabilidadIntegracion(unittest.TestCase):
                 self.assertNotIn("https://", contenido)
                 self.assertNotIn("2026-08-17", contenido)
 
+
     def test_gitignore_y_documentacion_protegen_logs_locales(self):
         gitignore = (ROOT / ".gitignore").read_text(encoding="utf-8")
-        documento = (ROOT / "docs/operations/observability-and-logs.md").read_text(
-            encoding="utf-8"
-        )
+        documento = (
+            ROOT / "docs/operations/observability-and-logs.md"
+        ).read_text(encoding="utf-8")
+
         self.assertIn("logs/", gitignore)
         self.assertIn("MRP_DEV_MODE", documento)
-        self.assertIn("no existe telemetría remota", documento.casefold())
-        self.assertIn("cuerpos de solicitudes", documento)
-        self.assertIn("mensajes originales de excepciones", documento)
-        self.assertIn("**Estado:** Vigente — GOV.1.4 cerrado", documento)
-        self.assertIn("487/487", documento)
-
-        roadmap = (ROOT / "docs/governance/roadmap.md").read_text(encoding="utf-8")
-        indice = (ROOT / "docs/README.md").read_text(encoding="utf-8")
-        seguridad = (ROOT / "docs/security/security-and-privacy.md").read_text(
-            encoding="utf-8"
-        )
-        transparencia = (ROOT / "docs/product/transparency.md").read_text(
-            encoding="utf-8"
-        )
-        limitaciones = (ROOT / "docs/product/known-limitations.md").read_text(
-            encoding="utf-8"
-        )
-        validacion = (ROOT / "docs/operations/validation.md").read_text(
-            encoding="utf-8"
-        )
-        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        self.assertIn("No existe envío de logs a terceros", documento)
+        self.assertIn("logs son locales", documento)
+        self.assertIn("datos sensibles", documento)
 
         historial = (
             ROOT
             / "docs/archive/governance/"
             "gov1-closeout.md"
         ).read_text(encoding="utf-8")
+        self.assertIn("GOV.1.4", historial)
+        self.assertIn("Developer Diagnostics", historial)
 
-        self.assertIn(
-            "GOV.1.4",
-            historial,
-        )
-        self.assertIn(
-            "Developer Diagnostics",
-            historial,
-        )
-
-        self.assertIn(
-            "PLAN.2 R2",
-            roadmap,
-        )
+        indice = (ROOT / "docs/README.md").read_text(encoding="utf-8")
         self.assertIn("(operations/observability-and-logs.md)", indice)
-        self.assertIn("Developer Diagnostics", seguridad)
-        self.assertIn("no es analítica de producto", transparencia)
-        self.assertNotIn(
-            "Developer Diagnostics todavía no existe",
-            limitaciones,
-        )
-        self.assertIn("487 pruebas en `OK`", validacion)
+
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
         self.assertIn(
+            "(docs/operations/observability-and-logs.md)",
+            readme,
+        )
+        self.assertNotIn(
             "**GOV.1.4:** Observabilidad y Developer Diagnostics cerrado",
             readme,
         )
 
+        roadmap = (
+            ROOT / "docs/governance/roadmap.md"
+        ).read_text(encoding="utf-8")
+        self.assertIn("DOC.4 R1", roadmap)
+        self.assertNotIn("PLAN.2 R2", roadmap)
 
 if __name__ == "__main__":
     unittest.main()

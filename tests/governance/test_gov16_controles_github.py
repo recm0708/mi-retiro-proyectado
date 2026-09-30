@@ -7,9 +7,17 @@ GH=ROOT/'.github'
 DOCS=ROOT/'docs'
 
 class TestGov16ControlesGithub(unittest.TestCase):
+
     def test_security_policy_existe_y_define_canal_privado(self):
-        t=(ROOT/'SECURITY.md').read_text(encoding='utf-8')
-        self.assertIn('Versiones soportadas',t); self.assertIn('ruben.canizares@outlook.com',t); self.assertIn('No publique una vulnerabilidad explotable como issue público',t)
+        texto = (ROOT / "SECURITY.md").read_text(encoding="utf-8")
+        self.assertIn("## Reportar una vulnerabilidad", texto)
+        self.assertIn(
+            "No publiques una vulnerabilidad explotable como Issue público",
+            texto,
+        )
+        self.assertIn("GitHub Private vulnerability reporting", texto)
+        self.assertIn("ruben.canizares@outlook.com", texto)
+
     def test_issue_forms_separan_error_mejora_y_seguridad(self):
         b=(GH/'ISSUE_TEMPLATE/bug_report.yml').read_text(encoding='utf-8'); f=(GH/'ISSUE_TEMPLATE/feature_request.yml').read_text(encoding='utf-8'); q=(GH/'ISSUE_TEMPLATE/question.yml').read_text(encoding='utf-8'); c=(GH/'ISSUE_TEMPLATE/config.yml').read_text(encoding='utf-8')
         self.assertIn('Reporte de error',b); self.assertIn('Solicitud de mejora',f); self.assertIn('Consulta / soporte',q); self.assertIn('SECURITY.md',b); self.assertIn('blank_issues_enabled: false',c); self.assertIn('/security/policy',c); self.assertIn('recm0708/mi-retiro-proyectado',c)
@@ -141,8 +149,20 @@ class TestGov16ControlesGithub(unittest.TestCase):
         t=(DOCS/'archive/governance/github-audit.md').read_text(encoding='utf-8')
         for e in ('Pull Request obligatorio','Python 3.13','Python 3.14','Auditoría de gobernanza','force push','Dependency graph','Dependabot alerts','PR #17','24/24 tags','mi-retiro-proyectado'): self.assertIn(e,t)
         self.assertTrue((ROOT/'CODE_OF_CONDUCT.md').is_file()); self.assertTrue((ROOT/'SUPPORT.md').is_file()); self.assertTrue((DOCS/'archive/governance/repository-audit-2026-08-18.md').is_file())
-    def test_governance_enlaza_security_y_auditoria(self):
-        t=(ROOT/'GOVERNANCE.md').read_text(encoding='utf-8'); self.assertIn('SECURITY.md',t); self.assertIn('Auditoría de gobernanza',t); self.assertIn('git verify-commit',t)
+
+    def test_governance_enlaza_security_y_controles_vigentes(self):
+        texto = (ROOT / "GOVERNANCE.md").read_text(encoding="utf-8")
+        self.assertIn("[Política de seguridad](SECURITY.md)", texto)
+        self.assertIn("git verify-commit HEAD", texto)
+        self.assertIn("Repository Quality Gate", texto)
+        self.assertIn("Python Compatibility", texto)
+
+        auditoria = (
+            DOCS / "archive/governance/github-audit.md"
+        ).read_text(encoding="utf-8")
+        self.assertIn("Auditoría de gobernanza", auditoria)
+
+
     def test_cierre_gov16_y_gov17_se_preservan_en_closeout(self):
         cierre = (
             DOCS
@@ -157,8 +177,9 @@ class TestGov16ControlesGithub(unittest.TestCase):
         roadmap = (
             DOCS / "governance/roadmap.md"
         ).read_text(encoding="utf-8")
-
-        self.assertIn("PLAN.2 R2", roadmap)
+        self.assertIn("G129/E03/C0", roadmap)
+        self.assertIn("DOC.4 R1", roadmap)
+        self.assertNotIn("PLAN.2 R2", roadmap)
 
     def test_archivos_nuevos_limpios(self):
         ps = [

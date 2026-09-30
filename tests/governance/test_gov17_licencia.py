@@ -68,37 +68,52 @@ class TestGov17Licencia(unittest.TestCase):
         self.assertIn("(THIRD_PARTY_NOTICES.md)", texto)
         self.assertNotIn("**GOV.1.7:**", texto)
 
+
     def test_cierre_gov17_se_preserva_en_closeout(self):
         cierre = (
             DOCS
             / "archive/governance/gov1-closeout.md"
         ).read_text(encoding="utf-8")
-
         self.assertIn("GOV.1.7", cierre)
-        self.assertIn(
-            "licencia propietaria pre-beta",
-            cierre,
-        )
+        self.assertIn("licencia propietaria pre-beta", cierre)
         self.assertIn("GOV.1.8", cierre)
 
         roadmap = (
             DOCS / "governance/roadmap.md"
         ).read_text(encoding="utf-8")
-
-        self.assertIn("PLAN.2 R2", roadmap)
+        self.assertIn("G129/E03/C0", roadmap)
+        self.assertIn("DOC.4 R1", roadmap)
         self.assertIn("1.0.0.0", roadmap)
+        self.assertNotIn("PLAN.2 R2", roadmap)
+
 
     def test_governance_respeta_decision_propietaria(self):
-        texto = (ROOT / "GOVERNANCE.md").read_text(encoding="utf-8")
-        self.assertIn("licencia propietaria pre-beta", texto)
-        self.assertIn("THIRD_PARTY_NOTICES.md", texto)
-        self.assertIn("relicencia", texto)
+        governance = (ROOT / "GOVERNANCE.md").read_text(encoding="utf-8")
+        licencia = (
+            DOCS / "governance/licensing-and-distribution.md"
+        ).read_text(encoding="utf-8")
+
+        self.assertIn("[`LICENSE`](LICENSE)", governance)
+        self.assertIn("THIRD_PARTY_NOTICES.md", governance)
+        self.assertIn("relicencia futura", governance)
+        self.assertIn(
+            "licencia propietaria / todos los derechos reservados",
+            licencia,
+        )
+        self.assertIn("GOV.1.7", licencia)
+
 
     def test_release_exige_avisos_de_terceros(self):
-        texto = (DOCS / "operations/release-process.md").read_text(encoding="utf-8")
-        self.assertIn("THIRD_PARTY_NOTICES.md", texto)
-        self.assertIn("inventario exacto del artefacto", texto)
-        self.assertIn("licencias/NOTICE upstream", texto)
+        texto = (
+            DOCS / "operations/release-process.md"
+        ).read_text(encoding="utf-8")
+        self.assertIn("## Artefactos, privacidad y terceros", texto)
+        self.assertIn("inventario exacto", texto)
+        self.assertIn("licencias, avisos y NOTICE requeridos", texto)
+        self.assertIn(
+            "inventario/licencias de terceros cuando correspondan",
+            texto,
+        )
 
     def test_version_no_cambia_y_archivos_limpios(self):
         licencia_doc = (DOCS / "governance/licensing-and-distribution.md").read_text(

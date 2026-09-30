@@ -52,6 +52,7 @@ class TestGov13Documentacion(unittest.TestCase):
         version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
         self.assertIn(f"## [{version}]", texto)
 
+
     def test_historia_gov13_y_estado_vivo_usan_owners_correctos(self):
         history = (
             ROOT
@@ -72,15 +73,21 @@ class TestGov13Documentacion(unittest.TestCase):
             ROOT / "docs/governance/roadmap.md"
         ).read_text(encoding="utf-8")
 
-        self.assertIn("G125/E01", roadmap)
-        self.assertIn("PLAN.2 R2", roadmap)
-        self.assertIn("G126", roadmap)
+        self.assertIn("G129/E03/C0", roadmap)
+        self.assertIn("DOC.4 R1 / #171", roadmap)
+        self.assertIn("G130, libre y sin candidato", roadmap)
+        self.assertNotIn("PLAN.2 R2", roadmap)
+
 
     def test_indice_separa_documentacion_historica(self):
-        texto = (ROOT / "docs" / "README.md").read_text(encoding="utf-8")
-        self.assertIn("## 12. Historial de evolución", texto)
-        self.assertIn("archive/ux/", texto)
-        self.assertIn("## 13. Releases", texto)
+        indice = (ROOT / "docs/README.md").read_text(encoding="utf-8")
+        archive = (ROOT / "docs/archive/README.md").read_text(encoding="utf-8")
+
+        self.assertIn("| Historia preservada |", indice)
+        self.assertIn("archive/README.md", indice)
+        self.assertIn("[Releases](../RELEASES.md)", indice)
+        self.assertIn("[`ux/`](ux/)", archive)
+        self.assertIn("[`governance/`](governance/)", archive)
 
     def test_editorconfig_exige_limpieza_markdown(self):
         texto = (ROOT / ".editorconfig").read_text(encoding="utf-8")
