@@ -114,32 +114,41 @@ class TestMant1R3YamlGithubDocumentados(unittest.TestCase):
         )
 
         for esperado in (
-            "G125/E01",
-            "PLAN.2 R2",
-            "G126",
-            "MANT.2 R2",
+            "G129/E03/C0",
+            "DOC.4 R1 / #171",
+            "G130, libre y sin candidato",
         ):
             self.assertIn(esperado, roadmap)
 
+        self.assertNotIn("G125/E01", roadmap)
+        self.assertNotIn("PLAN.2 R2", roadmap)
     def test_mant1_r3_no_declara_inicio_de_sec2_ni_cambio_de_version(self):
-        """MANT.1 R3 es mantenimiento previo a SEC.2, no cambio funcional."""
+        """MANT.1 R3 fue mantenimiento histórico; el roadmap describe el programa vigente."""
 
         from app.core.version import APP_VERSION
+
         version = self._leer("VERSION").strip()
         self.assertEqual(APP_VERSION, version)
 
         changelog = self._leer("CHANGELOG.md")
         roadmap = self._leer("docs/governance/roadmap.md")
-        seccion_r3 = changelog.split("### MANT.1 R3", 1)[1].split("### MANT.1 R2", 1)[0]
+        seccion_r3 = changelog.split("### MANT.1 R3", 1)[1].split(
+            "### MANT.1 R2",
+            1,
+        )[0]
 
         self.assertIn("antes de SEC.2", seccion_r3)
-        self.assertIn("no cambia `VERSION`, `APP_VERSION`", seccion_r3)
-        self.assertIn("antes de SEC.2", roadmap)
+        self.assertIn(
+            "no cambia `VERSION`, `APP_VERSION`",
+            seccion_r3,
+        )
 
-        for texto in (changelog, roadmap):
-            with self.subTest():
-                self.assertNotIn("SEC.2 — Hardening integral iniciado", texto)
-
+        self.assertIn("DOC.4 R1", roadmap)
+        self.assertIn("SEC.2 R7", roadmap)
+        self.assertNotIn(
+            "SEC.2 — Hardening integral iniciado",
+            changelog,
+        )
 
 if __name__ == "__main__":
     unittest.main()

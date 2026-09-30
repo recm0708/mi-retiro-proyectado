@@ -129,19 +129,12 @@ class TestMant1ScriptsHooksDocumentados(unittest.TestCase):
             "docs/governance/roadmap.md"
         )
 
-        self.assertIn(
-            "G125/E01",
-            roadmap,
-        )
-        self.assertIn(
-            "PLAN.2 R2",
-            roadmap,
-        )
-        self.assertIn(
-            "MANT.2 R2",
-            roadmap,
-        )
-
+        self.assertIn("G129/E03/C0", roadmap)
+        self.assertIn("DOC.4 R1 / #171", roadmap)
+        self.assertIn("G130, libre y sin candidato", roadmap)
+        self.assertNotIn("G125/E01", roadmap)
+        self.assertNotIn("PLAN.2 R2", roadmap)
+        self.assertNotIn("MANT.2 R2", roadmap)
     def test_mant1_r2_no_promueve_version_ni_toca_motores(self):
         from app.core.version import APP_VERSION
         version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()

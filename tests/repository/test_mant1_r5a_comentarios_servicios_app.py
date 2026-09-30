@@ -120,9 +120,11 @@ class TestMant1R5AComentariosServiciosApp(unittest.TestCase):
             "docs/governance/roadmap.md"
         )
 
-        self.assertIn("G125/E01", roadmap)
-        self.assertIn("PLAN.2 R2", roadmap)
-
+        self.assertIn("G129/E03/C0", roadmap)
+        self.assertIn("DOC.4 R1 / #171", roadmap)
+        self.assertIn("G130, libre y sin candidato", roadmap)
+        self.assertNotIn("G125/E01", roadmap)
+        self.assertNotIn("PLAN.2 R2", roadmap)
     def test_r5a_no_promueve_version_ni_sec2(self):
         from app.core.version import APP_VERSION
         version = self._leer("VERSION").strip()

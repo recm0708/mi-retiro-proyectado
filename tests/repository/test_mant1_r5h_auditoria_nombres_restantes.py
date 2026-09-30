@@ -84,16 +84,28 @@ class TestMant1R5HAuditoriaNombresRestantes(unittest.TestCase):
             with self.subTest(path=path):
                 self.assertTrue((ROOT / path).exists(), path)
 
-    def test_auditoria_r5h_queda_documentada_e_indexada(self):
-        audit = ROOT / "docs" / "archive/technical/remaining-names-audit-r5h.md"
-        index = ROOT / "docs" / "README.md"
+    def test_auditoria_r5h_queda_documentada_y_delegada(self):
+        audit = ROOT / "docs/archive/technical/remaining-names-audit-r5h.md"
+        index = ROOT / "docs/README.md"
+        archive_index = ROOT / "docs/archive/README.md"
 
         self.assertTrue(audit.is_file())
-        self.assertIn(
-            "archive/technical/remaining-names-audit-r5h.md",
-            index.read_text(encoding="utf-8"),
-        )
 
+        index_text = index.read_text(encoding="utf-8")
+        archive_text = archive_index.read_text(encoding="utf-8")
+
+        self.assertIn(
+            "[Índice del archivo](archive/README.md)",
+            index_text,
+        )
+        self.assertIn(
+            "[`technical/`](technical/)",
+            archive_text,
+        )
+        self.assertNotIn(
+            "archive/technical/remaining-names-audit-r5h.md",
+            index_text,
+        )
     def test_validacion_documenta_gate_r5h(self):
         validation = (ROOT / "docs" / "operations/validation.md").read_text(
             encoding="utf-8"

@@ -76,12 +76,17 @@ class TestUX6R7DocumentationClosure(unittest.TestCase):
 
     def test_auditoria_r7_indexada(self):
         target = "ux6-r7-documentation-audit.md"
-        self.assertIn(target, self.docs_index)
+
         self.assertIn(target, self.audits_index)
+        self.assertIn(
+            "[Índice de auditorías](audits/README.md)",
+            self.docs_index,
+        )
+        self.assertNotIn(target, self.docs_index)
+
         self.assertIn("166 Markdown", self.audit)
         self.assertIn("0 enlaces Markdown locales rotos", self.audit)
         self.assertIn("46 documentos VIVO", self.audit)
-
     def test_developer_ux6_documentado(self):
         self.assertIn("developer_user_audit", self.data_model)
         self.assertIn("avatar_relativo", self.data_model)

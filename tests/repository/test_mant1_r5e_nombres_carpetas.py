@@ -111,8 +111,14 @@ class TestMant1R5ENombresCarpetas(unittest.TestCase):
         auditoria = ROOT / "docs" / "archive/technical/folders-audit-r5e.md"
         politica = ROOT / "docs" / "standards/file-structure-by-extension.md"
         indice = ROOT / "docs" / "README.md"
+        indice_archivo = ROOT / "docs" / "archive/README.md"
 
-        for ruta in (auditoria, politica, indice):
+        for ruta in (
+            auditoria,
+            politica,
+            indice,
+            indice_archivo,
+        ):
             with self.subTest(ruta=ruta.as_posix()):
                 self.assertTrue(ruta.exists())
 
@@ -125,15 +131,25 @@ class TestMant1R5ENombresCarpetas(unittest.TestCase):
         self.assertIn("_entregas/", texto)
         self.assertIn("No se renombran archivos", texto)
 
+        indice_texto = indice.read_text(encoding="utf-8")
+        archivo_texto = indice_archivo.read_text(encoding="utf-8")
+
         self.assertIn(
+            "[Índice del archivo](archive/README.md)",
+            indice_texto,
+        )
+        self.assertIn(
+            "[`technical/`](technical/)",
+            archivo_texto,
+        )
+        self.assertNotIn(
             "archive/technical/folders-audit-r5e.md",
-            indice.read_text(encoding="utf-8"),
+            indice_texto,
         )
         self.assertIn(
             "nombres de carpetas",
             politica.read_text(encoding="utf-8"),
         )
-
 
 if __name__ == "__main__":
     unittest.main()
