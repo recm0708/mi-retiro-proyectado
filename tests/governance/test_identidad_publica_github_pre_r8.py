@@ -30,16 +30,17 @@ class TestIdentidadPublicaGithubPreR8(unittest.TestCase):
         cls.roadmap = (DOCS / "governance/roadmap.md").read_text(encoding="utf-8")
         cls.validation = (DOCS / "operations/validation.md").read_text(encoding="utf-8")
 
-    def test_readme_usa_logo_y_checkpoint_no_promovio_beta_publica(self):
+    def test_readme_usa_logo_y_separa_checkpoint_publico_historico(self):
         self.assertIn("assets/brand/logos/logo-mark-512.png", self.readme)
-        self.assertIn("repositorio de código público", self.readme)
-        self.assertIn("Social Preview e identidad visual oficial configurados", self.readme)
-        self.assertIn("0.1.0-beta.1", self.readme)
+        self.assertIn("repositorio público no", self.readme)
+        self.assertNotIn("Social Preview e identidad visual oficial configurados", self.readme)
+        self.assertNotIn("0.1.0-beta.1", self.readme)
         self.assertIn(
             "Checkpoint pre-R8 — identidad visual y repositorio público",
             self.changelog,
         )
         self.assertIn("0.0.24-beta", self.changelog)
+        self.assertIn("**Visibilidad actual:** pública", self.prep)
 
     def test_identidad_visual_define_fuente_derivados_runtime_y_social(self):
         for esperado in (

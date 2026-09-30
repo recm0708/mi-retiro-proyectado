@@ -25,14 +25,26 @@ class TestPlan1R4CandidatoCierre(unittest.TestCase):
         self.assertIn("0.0.26-beta", releases)
         self.assertIn("cierre formal de PLAN.1", releases)
 
-    def test_readme_muestra_candidato_y_preserva_0_0_25_0_0_26(self):
-        texto = (ROOT / "README.md").read_text(encoding="utf-8")
-        self.assertIn(f"**Versión canónica vigente:** `{self.version}`", texto)
-        self.assertIn("PLAN.1:** cerrado en `0.0.26-beta`", texto)
-        self.assertIn("**720 pruebas en `OK`**", texto)
-        self.assertIn("tag firmado `v0.0.26-beta` publicado", texto)
-        self.assertIn("**UX.4.6e:** cerrada en `0.0.25-beta`", texto)
-        self.assertIn("v0.0.25-beta", texto)
+    def test_readme_muestra_estado_vigente_y_release_preserva_plan1(self):
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        releases = (ROOT / "RELEASES.md").read_text(encoding="utf-8")
+
+        self.assertIn(f"**Versión de desarrollo:** `{self.version}`", readme)
+        self.assertIn("**Objetivo de primera versión oficial:** `1.0.0.0`.", readme)
+
+        for marcador in (
+            "PLAN.1:** cerrado",
+            "**720 pruebas en `OK`**",
+            "tag firmado `v0.0.26-beta` publicado",
+            "**UX.4.6e:** cerrada",
+            "v0.0.25-beta",
+        ):
+            self.assertNotIn(marcador, readme)
+
+        self.assertIn("cierre formal de PLAN.1", releases)
+        self.assertIn("**720 pruebas en `OK`**", releases)
+        self.assertIn("v0.0.25-beta", releases)
+        self.assertIn("v0.0.26-beta", releases)
 
     def test_security_soporta_candidato_y_archiva_legacy(self):
         texto = (ROOT / "SECURITY.md").read_text(encoding="utf-8")

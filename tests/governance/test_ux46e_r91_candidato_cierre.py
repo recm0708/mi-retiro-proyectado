@@ -22,20 +22,27 @@ class TestUx46eR91CandidatoCierre(unittest.TestCase):
         self.assertTrue(version_valida(version))
         self.assertIn("0.0.25-beta", (ROOT / "RELEASES.md").read_text(encoding="utf-8"))
 
-    def test_readme_declara_cierre_historico_y_estado_ver2(self):
-        texto = (ROOT / "README.md").read_text(encoding="utf-8")
+    def test_readme_mantiene_estado_vigente_y_release_preserva_cierre_r9(self):
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        releases = (ROOT / "RELEASES.md").read_text(encoding="utf-8")
         version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
-        self.assertIn(f"**Versión canónica vigente:** `{version}`", texto)
-        self.assertIn("**UX.4.6e:** cerrada en `0.0.25-beta`", texto)
-        self.assertIn("PR #21 integrado por squash", texto)
-        self.assertNotIn("**Bloque activo:** UX.4.6e", texto)
-        self.assertIn("**Bloque transversal activo:** VER.2", texto)
-        self.assertIn("**Siguiente bloque funcional:** DEV.2", texto)
 
-        indice = (DOCS / "README.md").read_text(encoding="utf-8")
-        self.assertIn(f"**Versión de aplicación:** `{version}`", indice)
-        self.assertIn("UX.4.6e R9.2", indice)
-        self.assertIn("`v0.0.25-beta`", indice)
+        self.assertIn(f"**Versión de desarrollo:** `{version}`", readme)
+        self.assertIn("[Releases](RELEASES.md)", readme)
+
+        for marcador in (
+            "**UX.4.6e:** cerrada",
+            "PR #21 integrado por squash",
+            "**Bloque activo:** UX.4.6e",
+            "**Bloque transversal activo:** VER.2",
+            "**Siguiente bloque funcional:** DEV.2",
+            "v0.0.25-beta",
+        ):
+            self.assertNotIn(marcador, readme)
+
+        self.assertIn("Cuarta versión formal y cierre de UX.4.6e.", releases)
+        self.assertIn("PR #21 integró el cierre funcional por squash", releases)
+        self.assertIn("tag firmado `v0.0.25-beta`", releases)
 
     def test_security_distingue_candidato_y_lineas_historicas(self):
         texto = (ROOT / "SECURITY.md").read_text(encoding="utf-8")

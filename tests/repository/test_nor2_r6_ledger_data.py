@@ -77,15 +77,16 @@ class TestNOR2R6LedgerData(unittest.TestCase):
                 findings.append(rel)
         self.assertEqual([], findings)
 
-    def test_estado_transversal_evoluciona_sin_perder_nor2(self):
+    def test_estado_vigente_separa_readme_de_historia_nor2(self):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
-        docs = (ROOT / "docs/README.md").read_text(encoding="utf-8")
         ledger = cargar_ledger()
+        version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
 
-        self.assertIn("NOR.2", readme)
-        self.assertIn("NOR.2", docs)
-        self.assertIn("PLAN.2 R2", readme)
-        self.assertIn("SEC.2 R7", readme)
+        self.assertIn(f"**Versión de desarrollo:** `{version}`", readme)
+        self.assertIn("[Documentación de Mi Retiro Proyectado](docs/README.md)", readme)
+        self.assertNotIn("NOR.2", readme)
+        self.assertNotIn("PLAN.2 R2", readme)
+        self.assertNotIn("SEC.2 R7", readme)
 
         entries = {
             item["global_revision"]: item

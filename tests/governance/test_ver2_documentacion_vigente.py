@@ -29,87 +29,37 @@ class TestVer2DocumentacionVigente(unittest.TestCase):
         )
 
     def test_historia_ver2_y_estado_vivo_usan_autoridades_correctas(self):
-        readme = (
-            ROOT / "README.md"
-        ).read_text(encoding="utf-8")
-
-        roadmap = (
-            DOCS / "governance/roadmap.md"
-        ).read_text(encoding="utf-8")
-
-        plan = (
-            DOCS / "governance/master-plan-to-1-0.md"
-        ).read_text(encoding="utf-8")
-
-        security = (
-            ROOT / "SECURITY.md"
-        ).read_text(encoding="utf-8")
-
-        indice = (
-            DOCS / "README.md"
-        ).read_text(encoding="utf-8")
-
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        roadmap = (DOCS / "governance/roadmap.md").read_text(encoding="utf-8")
+        plan = (DOCS / "governance/master-plan-to-1-0.md").read_text(
+            encoding="utf-8"
+        )
+        indice = (DOCS / "README.md").read_text(encoding="utf-8")
         ledger = (
             DOCS / "governance/pre-1-0-revision-ledger.md"
         ).read_text(encoding="utf-8")
-
         audit = (
-            DOCS
-            / "archive/governance/pre-1-0-versioning-audit.md"
+            DOCS / "archive/governance/pre-1-0-versioning-audit.md"
         ).read_text(encoding="utf-8")
 
-        # Estado vivo actual.
         self.assertIn(
-            f"**Versión canónica vigente:** `{VERSION_CANONICA}`",
+            f"**Versión de desarrollo:** `{VERSION_CANONICA}`",
             readme,
         )
+        self.assertNotIn("G071", readme)
+        self.assertNotIn("G087", readme)
+        self.assertNotIn("VER.2 R6", readme)
+
+        for documento in (roadmap, plan):
+            self.assertIn("G129/E03/C0", documento)
+            self.assertIn("DOC.4 R1", documento)
 
         self.assertIn(
-            "G125/E01",
-            roadmap,
-        )
-        self.assertIn(
-            "PLAN.2 R2",
-            roadmap,
-        )
-        self.assertIn(
-            "VER.2 R6",
-            roadmap,
-        )
-
-        self.assertIn(
-            "G125/E01",
-            plan,
-        )
-        self.assertIn(
-            "PLAN.2 R2",
-            plan,
-        )
-        self.assertIn(
-            "VER.2 R6",
-            plan,
-        )
-
-        self.assertIn(
-            f"**Versión de aplicación:** `{VERSION_CANONICA}`",
+            "| Versionado | [Política de versionado](../VERSIONING.md)",
             indice,
         )
-
-        # Historia VER.2 preservada en autoridades apropiadas.
-        self.assertIn(
-            "G071",
-            ledger + audit,
-        )
-        self.assertIn(
-            "G087",
-            ledger + audit,
-        )
-
-        self.assertIn(
-            "| `0.0.71.01-beta` | "
-            "Versión promovida históricamente en VER.2 R4",
-            security,
-        )
+        self.assertIn("G071", ledger + audit)
+        self.assertIn("G087", ledger + audit)
 
     def test_tag_legacy_y_reconciliacion_g071_g087_permanecen_documentados(self):
         versioning = (ROOT / "VERSIONING.md").read_text(encoding="utf-8")

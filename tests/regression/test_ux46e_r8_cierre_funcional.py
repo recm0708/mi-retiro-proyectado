@@ -122,10 +122,16 @@ class TestUx46eR8CierreFuncional(unittest.TestCase):
         self.assertIn("procedencia editable", historico)
 
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
-        self.assertIn("UX.4.6e:** cerrada en `0.0.25-beta`", readme)
-        self.assertIn("660 pruebas en `OK`", readme)
-        self.assertIn("PR #21 integrado por squash", readme)
+        releases = (ROOT / "RELEASES.md").read_text(encoding="utf-8")
+
+        self.assertNotIn("UX.4.6e:** cerrada", readme)
+        self.assertNotIn("660 pruebas en `OK`", readme)
+        self.assertNotIn("PR #21 integrado por squash", readme)
         self.assertNotIn("**Bloque activo:** UX.4.6e", readme)
+
+        self.assertIn("Cuarta versión formal y cierre de UX.4.6e.", releases)
+        self.assertIn("R9.1 alcanzó **660 pruebas en `OK`**", releases)
+        self.assertIn("PR #21 integró el cierre funcional por squash", releases)
 
     def test_validacion_define_gate_documental_652_y_preserva_base_r8(self):
         texto = (DOCS / "operations/validation.md").read_text(encoding="utf-8")

@@ -47,7 +47,7 @@ class TestNOR2R2MigrationMatrix(unittest.TestCase):
         ):
             self.assertIn(valor, texto)
 
-    def test_r2_preserva_evidencia_y_readme_declara_estado_actual(self):
+    def test_r2_preserva_evidencia_y_readme_no_duplica_cierres_historicos(self):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
         matriz_r2 = (
             ROOT
@@ -56,34 +56,34 @@ class TestNOR2R2MigrationMatrix(unittest.TestCase):
             / "repository"
             / "repository-normalization-migration-matrix-nor2-r2.md"
         ).read_text(encoding="utf-8")
+        version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
 
         self.assertIn("NOR.2 R2", matriz_r2)
-        self.assertIn("NOR.1:** cerrado", readme)
-        self.assertIn("NOR.2 R4:** cerrado", readme)
-        self.assertIn("NOR.2 R5:** cerrado", readme)
-        self.assertIn("NOR.2 R6:** cerrado", readme)
-        self.assertIn("NOR.2 R7:** cerrado", readme)
-        self.assertNotIn("NOR.2 R2:** activo", readme)
-        self.assertNotIn("NOR.2 R3:** activo", readme)
-        self.assertIn("DOC.1 R1:** cerrado", readme)
-        self.assertIn("v0.0.71.01-beta", readme)
-        self.assertNotIn("Bloque documental activo:** DOC.1 R1", readme)
-        self.assertNotIn(
-            "tag formal `v0.0.71.01-beta` queda pendiente",
-            readme,
-        )
-        self.assertNotIn("tag formal queda pendiente", readme)
-        self.assertNotIn(
-            "queda reservado para el cierre firmado post-merge",
-            readme,
-        )
+        self.assertIn(f"**Versión de desarrollo:** `{version}`", readme)
+        self.assertIn("[Estándares del repositorio](docs/standards/README.md)", readme)
 
-    def test_readme_usa_directorios_runtime_actuales(self):
-        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        for marcador in (
+            "NOR.1:** cerrado",
+            "NOR.2 R4:** cerrado",
+            "NOR.2 R5:** cerrado",
+            "NOR.2 R6:** cerrado",
+            "NOR.2 R7:** cerrado",
+            "NOR.2 R2:** activo",
+            "NOR.2 R3:** activo",
+            "DOC.1 R1:** cerrado",
+            "v0.0.71.01-beta",
+            "tag formal queda pendiente",
+        ):
+            self.assertNotIn(marcador, readme)
+
+    def test_estandar_estructural_usa_directorios_runtime_actuales(self):
+        estructura = (
+            ROOT / "docs/standards/repository-structure.md"
+        ).read_text(encoding="utf-8")
         for carpeta in ("engines/", "models/", "services/"):
-            self.assertIn(carpeta, readme)
+            self.assertIn(carpeta, estructura)
         for carpeta in ("motores/", "modelos/", "servicios/"):
-            self.assertNotIn(carpeta, readme)
+            self.assertNotIn(carpeta, estructura)
 
     def test_historia_r2_r4_y_programa_vivo_usan_fuentes_correctas(self):
         matriz_r2 = (
