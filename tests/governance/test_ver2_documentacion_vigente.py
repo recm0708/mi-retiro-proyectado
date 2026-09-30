@@ -61,27 +61,28 @@ class TestVer2DocumentacionVigente(unittest.TestCase):
         self.assertIn("G071", ledger + audit)
         self.assertIn("G087", ledger + audit)
 
+
     def test_tag_legacy_y_reconciliacion_g071_g087_permanecen_documentados(self):
         versioning = (ROOT / "VERSIONING.md").read_text(encoding="utf-8")
         releases = (ROOT / "RELEASES.md").read_text(encoding="utf-8")
-        proceso = (DOCS / "operations/release-process.md").read_text(encoding="utf-8")
+        ledger = (
+            DOCS / "governance/pre-1-0-revision-ledger.md"
+        ).read_text(encoding="utf-8")
 
-        self.assertIn(ULTIMO_TAG_LEGACY, versioning)
-        self.assertIn(
-            "Un tag formal nuevo no se crea dentro del PR del candidato",
-            versioning,
-        )
-        self.assertIn(
-            "no existe tag `v0.0.71.01-beta` hasta completar merge",
-            releases,
-        )
-        self.assertIn("v0.0.71.01-beta", proceso)
-        self.assertIn("publicado originalmente como G071/E01", proceso)
-        self.assertIn("G087/E01", proceso)
+        self.assertIn(ULTIMO_TAG_LEGACY, releases)
+        self.assertIn("G071 / E01 -> 0.0.71.01-beta", versioning)
+        self.assertIn("No crear tags revision-aware retrospectivos", versioning)
+        self.assertIn("G071", ledger)
+        self.assertIn("G087", ledger)
+
 
     def test_ledger_y_auditoria_siguen_reconociendo_g071(self):
-        ledger = (DOCS / "governance/pre-1-0-revision-ledger.md").read_text(encoding="utf-8")
-        auditoria = (DOCS / "archive/governance/pre-1-0-versioning-audit.md").read_text(encoding="utf-8")
+        ledger = (
+            DOCS / "governance/pre-1-0-revision-ledger.md"
+        ).read_text(encoding="utf-8")
+        auditoria = (
+            DOCS / "archive/governance/pre-1-0-versioning-audit.md"
+        ).read_text(encoding="utf-8")
         versioning = (ROOT / "VERSIONING.md").read_text(encoding="utf-8")
         indice = (DOCS / "README.md").read_text(encoding="utf-8")
 
@@ -89,13 +90,22 @@ class TestVer2DocumentacionVigente(unittest.TestCase):
         self.assertIn(VERSION_CANONICA, ledger)
         self.assertIn("G071", auditoria)
         self.assertIn("G071 / E01 -> 0.0.71.01-beta", versioning)
-        self.assertIn("version_ledger.py", indice)
+        self.assertIn(
+            "[Ledger pre-1.0](governance/pre-1-0-revision-ledger.md)",
+            indice,
+        )
+
 
     def test_no_tags_revision_aware_retroactivos(self):
         versioning = (ROOT / "VERSIONING.md").read_text(encoding="utf-8")
+        releases = (ROOT / "RELEASES.md").read_text(encoding="utf-8")
 
         for version in range(22, 27):
             tag = f"v0.0.{version}-beta"
-            self.assertIn(tag, versioning)
+            self.assertIn(tag, releases)
 
-        self.assertIn("No crear tags revision-aware retrospectivos", versioning)
+        self.assertIn(
+            "No crear tags revision-aware retrospectivos para G001–G070",
+            versioning,
+        )
+

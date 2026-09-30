@@ -136,12 +136,20 @@ class TestPlan1GuardReferenciasHistoricas(unittest.TestCase):
                 self.assertIn("GOV.1.5 R2", texto)
                 self.assertNotIn("procedimiento interno pre-beta", texto)
 
-    def test_versioning_documenta_guard_y_conserva_heading_historico(self):
+
+    def test_versioning_documenta_guard_y_separa_historia_de_politica_vigente(self):
         texto = (ROOT / "VERSIONING.md").read_text(encoding="utf-8")
-        self.assertIn("## 12. Guard de referencias históricas", texto)
-        self.assertIn("### 3.1. Desarrollo pre-beta", texto)
-        self.assertIn("no pueden volver a utilizarse como objetivo vigente", texto)
-        self.assertIn("tests/governance/test_plan1_guard_referencias_historicas.py", texto)
+
+        self.assertIn("## Compatibilidad histórica", texto)
+        self.assertIn("### Beta legacy histórica", texto)
+        self.assertIn(
+            "no obligar a documentos vivos a repetirla",
+            texto,
+        )
+        self.assertIn(
+            "No reactivar formatos u objetivos históricos sustituidos como política",
+            texto,
+        )
 
     def test_validacion_conserva_cierre_r3b2(self):
         texto = (DOCS / "operations/validation.md").read_text(encoding="utf-8")

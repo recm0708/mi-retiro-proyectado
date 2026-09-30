@@ -18,6 +18,7 @@ DOCS = ROOT / "docs"
 class TestUX46eAuditoriaCoherencia(unittest.TestCase):
     """Protege el gate transversal y su evolución posterior sin reescribir R7."""
 
+
     def test_ledger_preserva_r6_r7_r8_r9_y_cierre_ux46e(self):
         ledger = json.loads(
             (
@@ -26,60 +27,27 @@ class TestUX46eAuditoriaCoherencia(unittest.TestCase):
                 "pre-1-0-revision-ledger.json"
             ).read_text(encoding="utf-8")
         )
-
         entries = {
             item["global_revision"]: item
             for item in ledger["entries"]
         }
 
-        self.assertEqual(
-            "R6 — renumeración/metadata",
-            entries[46]["state"],
-        )
-        self.assertIn(
-            "586 pruebas",
-            entries[46]["evidence"],
-        )
-
-        self.assertEqual(
-            "R7 — auditoría transversal",
-            entries[47]["state"],
-        )
-        self.assertIn(
-            "598 pruebas",
-            entries[47]["evidence"],
-        )
-
-        self.assertEqual(
-            "R8 — validación funcional/procedencia",
-            entries[49]["state"],
-        )
-
-        self.assertEqual(
-            "R9 — cierre formal",
-            entries[50]["state"],
-        )
-        self.assertEqual(
-            "v0.0.25-beta",
-            entries[50]["anchor"],
-        )
-        self.assertIn(
-            "PR #21/#22",
-            entries[50]["evidence"],
-        )
-        self.assertIn(
-            "660 pruebas",
-            entries[50]["evidence"],
-        )
+        self.assertEqual("R6 — renumeración/metadata", entries[46]["state"])
+        self.assertIn("586 pruebas", entries[46]["evidence"])
+        self.assertEqual("R7 — auditoría transversal", entries[47]["state"])
+        self.assertIn("598 pruebas", entries[47]["evidence"])
+        self.assertEqual("R8 — validación funcional/procedencia", entries[49]["state"])
+        self.assertEqual("R9 — cierre formal", entries[50]["state"])
+        self.assertEqual("v0.0.25-beta", entries[50]["anchor"])
+        self.assertIn("PR #21/#22", entries[50]["evidence"])
+        self.assertIn("660 pruebas", entries[50]["evidence"])
 
         roadmap = (
             DOCS / "governance/roadmap.md"
         ).read_text(encoding="utf-8")
-
-        self.assertIn(
-            "PLAN.2 R2",
-            roadmap,
-        )
+        self.assertIn("G129/E03/C0", roadmap)
+        self.assertIn("DOC.4 R1", roadmap)
+        self.assertNotIn("PLAN.2 R2", roadmap)
 
     def test_cierre_ux46e_permanece_en_release_y_no_en_readme_vivo(self):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")

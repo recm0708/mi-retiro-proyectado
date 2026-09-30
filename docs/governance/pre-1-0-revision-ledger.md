@@ -1,10 +1,10 @@
 # Ledger de revisiones aceptadas pre-1.0
 
-**Proyecto:** Mi Retiro Proyectado  
-**Clasificación:** registro vivo acumulativo / autoridad de estados aceptados  
-**Base auditada de reconstrucción:** `7037addd44253e528c77460b678d2b3ccd540dd5`  
-**Contador histórico en esa base:** G070  
-**Último estado aceptado:** G129/E03/C0 — MANT.2 R3 — `0.129.3.0-beta`  
+**Proyecto:** Mi Retiro Proyectado
+**Clasificación:** registro vivo acumulativo / autoridad de estados aceptados
+**Base auditada de reconstrucción:** `7037addd44253e528c77460b678d2b3ccd540dd5`
+**Contador histórico en esa base:** G070
+**Último estado aceptado:** G129/E03/C0 — MANT.2 R3 — `0.129.3.0-beta`
 **Siguiente Global aritmético:** G130, libre y sin candidato
 
 ## Propósito
