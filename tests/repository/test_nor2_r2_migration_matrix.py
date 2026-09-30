@@ -127,14 +127,25 @@ class TestNOR2R2MigrationMatrix(unittest.TestCase):
 
             with self.subTest(ruta=ruta):
                 self.assertIn(
-                    "G125/E01",
+                    "G129/E03/C0",
                     texto,
                 )
                 self.assertIn(
+                    "DOC.4 R1",
+                    texto,
+                )
+                self.assertIn(
+                    "G130",
+                    texto,
+                )
+                self.assertNotIn(
+                    "G125/E01",
+                    texto,
+                )
+                self.assertNotIn(
                     "PLAN.2 R2",
                     texto,
                 )
-
     def test_version_no_cambia(self):
         from app.core.version import APP_VERSION
         version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()

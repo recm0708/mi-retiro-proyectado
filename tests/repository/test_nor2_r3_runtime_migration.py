@@ -151,14 +151,25 @@ class TestNOR2R3RuntimeMigration(unittest.TestCase):
 
             with self.subTest(rel=rel):
                 self.assertIn(
-                    "G125/E01",
+                    "G129/E03/C0",
                     text,
                 )
                 self.assertIn(
+                    "DOC.4 R1",
+                    text,
+                )
+                self.assertIn(
+                    "G130",
+                    text,
+                )
+                self.assertNotIn(
+                    "G125/E01",
+                    text,
+                )
+                self.assertNotIn(
                     "PLAN.2 R2",
                     text,
                 )
-
     def test_evidencia_r3_existe(self):
         report = (
             ROOT

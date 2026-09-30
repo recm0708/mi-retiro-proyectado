@@ -116,10 +116,22 @@ class TestNOR2R4LiveDocumentation(unittest.TestCase):
 
             with self.subTest(rel=rel):
                 self.assertIn(
-                    "G125/E01",
+                    "G129/E03/C0",
                     text,
                 )
                 self.assertIn(
+                    "DOC.4 R1",
+                    text,
+                )
+                self.assertIn(
+                    "G130",
+                    text,
+                )
+                self.assertNotIn(
+                    "G125/E01",
+                    text,
+                )
+                self.assertNotIn(
                     "PLAN.2 R2",
                     text,
                 )
@@ -127,22 +139,24 @@ class TestNOR2R4LiveDocumentation(unittest.TestCase):
         root_readme = (
             ROOT / "README.md"
         ).read_text(encoding="utf-8")
+        docs_index = (
+            ROOT / "docs/README.md"
+        ).read_text(encoding="utf-8")
 
         self.assertIn(
-            "├── docs/\n│   ├── architecture/",
+            "[Documentación de Mi Retiro Proyectado](docs/README.md)",
             root_readme,
         )
-        self.assertIn(
-            "│   └── templates/\n"
-            "│       ├── documentation/\n"
-            "│       └── file-structure/",
-            root_readme,
-        )
-        self.assertIn(
-            "├── regulations/",
-            root_readme,
-        )
-
+        for area in (
+            "architecture/",
+            "archive/",
+            "templates/",
+        ):
+            with self.subTest(area=area):
+                self.assertIn(
+                    area,
+                    docs_index,
+                )
     def test_evidencia_r4_existe(self):
         path = ROOT / "docs/audits/repository/repository-normalization-live-docs-nor2-r4.md"
         self.assertTrue(path.is_file())
