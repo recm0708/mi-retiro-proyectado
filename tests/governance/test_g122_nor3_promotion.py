@@ -69,8 +69,12 @@ class TestG122NOR3Promotion(unittest.TestCase):
         self.assertEqual(171, active["issue"])
         self.assertEqual(129, active["base_global_revision"])
 
-    def test_manifest_actual_materializa_mant2_r2(self):
-        data = json.loads(MANIFEST.read_text(encoding="utf-8"))
+
+    def test_manifest_actual_materializa_g129_y_deja_g130_libre(self):
+        data = json.loads(
+            (ROOT / "data/governance/release-publication-manifest.json")
+            .read_text(encoding="utf-8")
+        )
         self.assertEqual("0.129.3.0-beta", data["version"])
         self.assertEqual("MANT.2", data["block"])
         self.assertEqual("R3", data["revision"])
@@ -81,14 +85,16 @@ class TestG122NOR3Promotion(unittest.TestCase):
         self.assertIsNone(next_step["block"])
 
         for fragment in (
-            "G129/E03/C0",
-            "MANT.2 R3/#211",
             "G130",
-            "#166",
+            "G129/E03/C0",
             "DOC.4 R1/#171",
+            "sin candidato",
         ):
             with self.subTest(fragment=fragment):
                 self.assertIn(fragment, next_step["description"])
+
+        self.assertNotIn("pendiente de integración", next_step["description"])
+        self.assertNotIn("pendiente de publicación", next_step["description"])
 
     def test_policy_conserva_procedencia_r2_y_registra_promocion(self):
         data = json.loads(POLICY.read_text(encoding="utf-8"))

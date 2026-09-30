@@ -71,21 +71,32 @@ class TestG124MANT1R8Promotion(unittest.TestCase):
         self.assertEqual("R1", active["revision"])
         self.assertEqual(129, active["base_global_revision"])
 
-    def test_manifest_actual_materializa_mant2_r2(self):
-        manifest = json.loads(
+
+    def test_manifest_actual_materializa_g129_y_deja_g130_libre(self):
+        data = json.loads(
             (ROOT / "data/governance/release-publication-manifest.json")
             .read_text(encoding="utf-8")
         )
-        self.assertEqual("0.129.3.0-beta", manifest["version"])
-        self.assertEqual("MANT.2", manifest["block"])
-        self.assertEqual("R3", manifest["revision"])
-        self.assertEqual(130, manifest["next_step"]["global_revision"])
-        self.assertIsNone(manifest["next_step"]["revision_aware"])
-        self.assertIsNone(manifest["next_step"]["block"])
-        self.assertIn(
-            "MANT.2 R3/#211",
-            manifest["next_step"]["description"],
-        )
+        self.assertEqual("0.129.3.0-beta", data["version"])
+        self.assertEqual("MANT.2", data["block"])
+        self.assertEqual("R3", data["revision"])
+
+        next_step = data["next_step"]
+        self.assertEqual(130, next_step["global_revision"])
+        self.assertIsNone(next_step["revision_aware"])
+        self.assertIsNone(next_step["block"])
+
+        for fragment in (
+            "G130",
+            "G129/E03/C0",
+            "DOC.4 R1/#171",
+            "sin candidato",
+        ):
+            with self.subTest(fragment=fragment):
+                self.assertIn(fragment, next_step["description"])
+
+        self.assertNotIn("pendiente de integración", next_step["description"])
+        self.assertNotIn("pendiente de publicación", next_step["description"])
 
     def test_evidencia_mant1_r8_conserva_resultado_de_auditoria(self):
         audit = (ROOT / "docs/audits/repository/mant1-r8-scripts-tests-consolidation.md").read_text(encoding="utf-8")

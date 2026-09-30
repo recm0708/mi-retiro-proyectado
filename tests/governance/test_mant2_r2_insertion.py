@@ -55,65 +55,36 @@ class TestMANT2R2Insertion(unittest.TestCase):
             ),
         )
 
-    def test_registry_declara_mant2_r2_aceptado_pendiente_publicacion(self):
+
+    def test_registry_preserva_mant2_historico_y_doc4_activo(self):
         data = json.loads(REGISTRY.read_text(encoding="utf-8"))
+
         candidate = data["current_candidate"]
-        self.assertEqual(
-            (
-                "accepted_pending_integration",
-                129,
-                "0.129.3.0-beta",
-                "MANT.2",
-                "R3",
-                211,
-                130,
-            ),
-            (
-                candidate["state"],
-                candidate["global_revision"],
-                candidate["revision_aware"],
-                candidate["block"],
-                candidate["revision"],
-                candidate["planning_issue"],
-                candidate["next_global_available"],
-            ),
-        )
+        self.assertEqual("unassigned", candidate["state"])
+        self.assertIsNone(candidate["global_revision"])
+        self.assertIsNone(candidate["revision_aware"])
+        self.assertIsNone(candidate["block"])
+        self.assertIsNone(candidate["revision"])
+        self.assertIsNone(candidate["planning_issue"])
+        self.assertEqual(130, candidate["next_global_available"])
 
         active = data["active_phase"]
-        self.assertEqual(
-            (
-                "MANT.2",
-                "R3",
-                211,
-                "accepted_pending_integration",
-                129,
-                "0.129.3.0-beta",
-                171,
-                128,
-                "0.128.2.0-beta",
-            ),
-            (
-                active["block"],
-                active["revision"],
-                active["issue"],
-                active["state"],
-                active["global_revision"],
-                active["revision_aware"],
-                active["next_phase_issue"],
-                active["base_global_revision"],
-                active["base_revision_aware"],
-            ),
-        )
+        self.assertEqual("DOC.4", active["block"])
+        self.assertEqual("R1", active["revision"])
+        self.assertEqual(171, active["issue"])
+        self.assertEqual("in_progress", active["state"])
+        self.assertIsNone(active["global_revision"])
+        self.assertIsNone(active["revision_aware"])
+        self.assertEqual(129, active["base_global_revision"])
+        self.assertEqual("0.129.3.0-beta", active["base_revision_aware"])
 
         ids = {x["identifier"]: x for x in data["identifiers"]}
-        self.assertEqual(
-            "accepted_r3_pending_integration",
-            ids["MANT.2"]["status"],
-        )
+        self.assertEqual("closed_r3_published", ids["MANT.2"]["status"])
         self.assertEqual(
             ["G123", "G127", "G129"],
             ids["MANT.2"]["global_refs"],
         )
+        self.assertEqual("in_progress", ids["DOC.4"]["status"])
 
     def test_ledger_deja_g128_libre_y_ver2_como_siguiente_owner(self):
         data = json.loads(LEDGER.read_text(encoding="utf-8"))
@@ -123,33 +94,43 @@ class TestMANT2R2Insertion(unittest.TestCase):
         self.assertIsNone(data["next_candidate"])
         self.assertIsNone(data["next_candidate_block"])
 
-    def test_manifest_materializa_g127_e02_y_no_preasigna_g128(self):
-        data = json.loads(MANIFEST.read_text(encoding="utf-8"))
-        self.assertEqual(
-            ("0.129.3.0-beta", "MANT.2", "R3"),
-            (data["version"], data["block"], data["revision"]),
-        )
 
-        nxt = data["next_step"]
-        self.assertEqual(130, nxt["global_revision"])
-        self.assertIsNone(nxt["revision_aware"])
-        self.assertIsNone(nxt["block"])
+    def test_manifest_actual_materializa_g129_y_deja_g130_libre(self):
+        data = json.loads(
+            (ROOT / "data/governance/release-publication-manifest.json")
+            .read_text(encoding="utf-8")
+        )
+        self.assertEqual("0.129.3.0-beta", data["version"])
+        self.assertEqual("MANT.2", data["block"])
+        self.assertEqual("R3", data["revision"])
+
+        next_step = data["next_step"]
+        self.assertEqual(130, next_step["global_revision"])
+        self.assertIsNone(next_step["revision_aware"])
+        self.assertIsNone(next_step["block"])
+
         for fragment in (
-            "G129/E03/C0",
-            "MANT.2 R3/#211",
             "G130",
+            "G129/E03/C0",
             "DOC.4 R1/#171",
+            "sin candidato",
         ):
             with self.subTest(fragment=fragment):
-                self.assertIn(fragment, nxt["description"])
+                self.assertIn(fragment, next_step["description"])
 
-    def test_arbol_vivo_conserva_mant2_antes_de_ver2(self):
+        self.assertNotIn("pendiente de integración", next_step["description"])
+        self.assertNotIn("pendiente de publicación", next_step["description"])
+
+
+    def test_arbol_vivo_refleja_doc4_sobre_g129_publicado(self):
         for path in (ROADMAP, MASTER, MATRIX):
             text = path.read_text(encoding="utf-8")
             with self.subTest(path=path.name):
-                self.assertIn("MANT.2 R2", text)
-                self.assertIn("G127/E02", text)
-                self.assertLess(text.index("MANT.2 R2"), text.index("VER.2 R6"))
+                self.assertIn("G129/E03/C0", text)
+                self.assertIn("DOC.4 R1", text)
+                self.assertNotIn("MANT.2 R2", text)
+                self.assertNotIn("G127/E02", text)
+                self.assertNotIn("VER.2 R6", text)
 
 if __name__ == "__main__":
     unittest.main()
