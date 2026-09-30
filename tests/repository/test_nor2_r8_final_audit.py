@@ -166,6 +166,7 @@ class TestNOR2R8FinalAudit(unittest.TestCase):
             raw["next_global"],
         )
 
+
     def test_estado_documental_preserva_r8_y_refleja_estado_posterior(self):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
         docs = (ROOT / "docs/README.md").read_text(encoding="utf-8")
@@ -178,12 +179,9 @@ class TestNOR2R8FinalAudit(unittest.TestCase):
             )
         )
 
-        for text in (readme, docs, traceability):
-            self.assertIn("NOR.2", text)
-
-        self.assertIn("SEC.2", readme)
-        self.assertIn("R1–R6", readme)
-        self.assertIn("AUD.SEC2 R1", docs)
+        self.assertIn("**Versión de desarrollo:** `0.129.3.0-beta`", readme)
+        self.assertNotIn("NOR.2 R8", readme)
+        self.assertIn("[Índice de auditorías](audits/README.md)", docs)
         self.assertIn("checkpoint histórico de NOR.2", traceability)
 
         entries = {
@@ -267,6 +265,7 @@ class TestNOR2R8FinalAudit(unittest.TestCase):
             with self.subTest(value=value):
                 self.assertIn(value, text)
 
+
     def test_historia_nor2_r8_y_programa_vivo_usan_owners_correctos(self):
         evidencia = (
             ROOT
@@ -282,75 +281,39 @@ class TestNOR2R8FinalAudit(unittest.TestCase):
             "11 contradicciones",
             "G001–G070",
         ):
-            with self.subTest(
-                esperado=esperado
-            ):
-                self.assertIn(
-                    esperado,
-                    evidencia,
-                )
+            with self.subTest(esperado=esperado):
+                self.assertIn(esperado, evidencia)
 
         ledger = (
-            ROOT
-            / "docs"
-            / "governance"
-            / "pre-1-0-revision-ledger.md"
+            ROOT / "docs/governance/pre-1-0-revision-ledger.md"
         ).read_text(encoding="utf-8")
+        self.assertIn("G101", ledger)
+        self.assertIn("NOR.2 R8", ledger)
 
-        self.assertIn(
-            "G101",
-            ledger,
-        )
-        self.assertIn(
-            "NOR.2 R8",
-            ledger,
-        )
-
-        changelog = (
-            ROOT / "CHANGELOG.md"
-        ).read_text(encoding="utf-8")
-
+        changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
         validacion = (
-            ROOT
-            / "docs"
-            / "operations"
-            / "validation.md"
+            ROOT / "docs/operations/validation.md"
+        ).read_text(encoding="utf-8")
+        audits_index = (
+            ROOT / "docs/audits/README.md"
         ).read_text(encoding="utf-8")
 
-        indice = (
-            ROOT / "docs/README.md"
-        ).read_text(encoding="utf-8")
-
-        self.assertIn(
-            "NOR.2 R8",
-            changelog,
-        )
-        self.assertIn(
-            "Validación NOR.2 R8",
-            validacion,
-        )
+        self.assertIn("NOR.2 R8", changelog)
+        self.assertIn("Validación NOR.2 R8", validacion)
         self.assertIn(
             "repository-normalization-final-audit-nor2-r8.md",
-            indice,
+            audits_index,
         )
 
         for rel in (
             "docs/governance/roadmap.md",
             "docs/governance/master-plan-to-1-0.md",
         ):
-            text = (
-                ROOT / rel
-            ).read_text(encoding="utf-8")
-
+            text = (ROOT / rel).read_text(encoding="utf-8")
             with self.subTest(rel=rel):
-                self.assertIn(
-                    "G125/E01",
-                    text,
-                )
-                self.assertIn(
-                    "PLAN.2 R2",
-                    text,
-                )
+                self.assertIn("G129/E03/C0", text)
+                self.assertIn("DOC.4 R1", text)
+                self.assertNotIn("G125/E01", text)
 
 if __name__ == "__main__":
     unittest.main()

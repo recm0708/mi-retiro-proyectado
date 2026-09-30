@@ -48,19 +48,35 @@ class TestPlan1GobiernoVersionadoOficial(unittest.TestCase):
             texto,
         )
 
-    def test_governance_adopta_linea_beta_y_objetivo_oficial(self):
-        texto = (ROOT / "GOVERNANCE.md").read_text(encoding="utf-8")
-        self.assertIn("familia `0.0.N-beta` es legacy histórica", texto)
-        self.assertIn("estados beta nuevos usan `0.GG.RR.EE-beta`", texto)
-        self.assertIn("primera versión oficial objetivo es `1.0.0.0`", texto)
-        self.assertIn("MAYOR.MENOR.PARCHE.REVISIÓN", texto)
 
-    def test_governance_separa_build_de_version_tag_y_commit(self):
-        texto = (ROOT / "GOVERNANCE.md").read_text(encoding="utf-8")
-        self.assertIn("identificador independiente de seis dígitos", texto)
-        self.assertIn("no forma parte de `VERSION` ni del tag", texto)
-        self.assertIn("no se incrementa por commit", texto)
-        self.assertIn("no se publica un Build ficticio", texto)
+    def test_governance_delega_modelo_beta_y_objetivo_oficial(self):
+        governance = (ROOT / "GOVERNANCE.md").read_text(encoding="utf-8")
+        versioning = (ROOT / "VERSIONING.md").read_text(encoding="utf-8")
+
+        self.assertIn("[Política de versionado](VERSIONING.md)", governance)
+        self.assertIn("Beta legacy histórica", versioning)
+        self.assertIn("Revision-aware v2 vigente para beta", versioning)
+        self.assertIn("1.0.0.0", versioning)
+        self.assertIn("MAYOR.MENOR.PARCHE.REVISIÓN", versioning)
+
+        self.assertNotIn("0.GG.RR.EE-beta", governance)
+        self.assertNotIn("MAYOR.MENOR.PARCHE.REVISIÓN", governance)
+
+
+    def test_governance_delega_build_y_versionado_a_sus_autoridades(self):
+        governance = (ROOT / "GOVERNANCE.md").read_text(encoding="utf-8")
+        versioning = (ROOT / "VERSIONING.md").read_text(encoding="utf-8")
+        proceso = (
+            DOCS / "operations/release-process.md"
+        ).read_text(encoding="utf-8")
+
+        self.assertIn("[Política de versionado](VERSIONING.md)", governance)
+        self.assertIn("[Proceso de release]", governance)
+        self.assertIn("Build oficial", versioning)
+        self.assertIn("seis dígitos decimales", versioning)
+        self.assertIn("no forma parte de `VERSION`", versioning)
+        self.assertIn("Build es independiente de `VERSION` y del tag", proceso)
+        self.assertIn("Hasta entonces no se publica un Build ficticio", proceso)
 
     def test_changelog_unreleased_registra_plan1_sin_reescribir_hitos(self):
         texto = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")

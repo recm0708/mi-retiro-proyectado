@@ -12,20 +12,28 @@ ROOT = Path(__file__).resolve().parents[2]
 
 
 class TestUX5R7DocumentationClosure(unittest.TestCase):
-    def test_estado_vigente_conserva_g121_y_candidato_nor3_g122_e01(self):
+
+    def test_estado_vigente_preserva_historia_y_deja_g130_sin_candidato(self):
         data = json.loads(
             (ROOT / "data/governance/work-block-registry.json")
             .read_text(encoding="utf-8")
         )
         candidate = data["current_candidate"]
-        self.assertEqual(129, candidate["global_revision"])
-        self.assertEqual("0.129.3.0-beta", candidate["revision_aware"])
-        self.assertEqual("MANT.2", candidate["block"])
-        self.assertEqual("R3", candidate["revision"])
-        self.assertEqual(3, candidate["edition"])
-        self.assertEqual("accepted_pending_integration", candidate["state"])
+        self.assertEqual("unassigned", candidate["state"])
+        self.assertIsNone(candidate["global_revision"])
+        self.assertIsNone(candidate["revision_aware"])
+        self.assertIsNone(candidate["block"])
+        self.assertIsNone(candidate["revision"])
+        self.assertEqual(130, candidate["next_global_available"])
 
-    def test_ux5_y_ux6_cerrados_nor3_candidato_y_persist1_planificado(self):
+        active = data["active_phase"]
+        self.assertEqual("DOC.4", active["block"])
+        self.assertEqual("R1", active["revision"])
+        self.assertEqual(171, active["issue"])
+        self.assertEqual(129, active["base_global_revision"])
+
+
+    def test_ux5_ux6_nor3_historicos_y_doc4_activo(self):
         data = json.loads(
             (ROOT / "data/governance/work-block-registry.json").read_text(
                 encoding="utf-8"
@@ -39,14 +47,16 @@ class TestUX5R7DocumentationClosure(unittest.TestCase):
         self.assertIn("G120", identifiers["UX.5"]["global_refs"])
         self.assertEqual("closed", identifiers["UX.6"]["status"])
         self.assertIn("G121", identifiers["UX.6"]["global_refs"])
-        self.assertEqual("planned_reserved", identifiers["PERSIST.1"]["status"])
         self.assertEqual("closed", identifiers["NOR.3"]["status"])
+        self.assertIn("G122", identifiers["NOR.3"]["global_refs"])
+        self.assertEqual("in_progress", identifiers["DOC.4"]["status"])
+        self.assertEqual("planned_reserved", identifiers["PERSIST.1"]["status"])
 
         candidate = data["current_candidate"]
-        self.assertEqual("DOC.4", candidate["next_functional_block_if_accepted"])
-        self.assertIsNone(
-            candidate["next_functional_global_if_accepted"]
-        )
+        self.assertEqual("unassigned", candidate["state"])
+        self.assertEqual(130, candidate["next_global_available"])
+        self.assertEqual("DOC.4", data["active_phase"]["block"])
+
 
     def test_historia_ux5_ux6_y_programa_vivo_usan_fuentes_correctas(self):
         registry = json.loads(
@@ -54,44 +64,20 @@ class TestUX5R7DocumentationClosure(unittest.TestCase):
                 ROOT / "data/governance/work-block-registry.json"
             ).read_text(encoding="utf-8")
         )
-
         ids = {
             item["identifier"]: item
             for item in registry["identifiers"]
         }
 
-        # Historia materializada.
-        self.assertEqual(
-            "closed",
-            ids["UX.5"]["status"],
-        )
-        self.assertIn(
-            "G120",
-            ids["UX.5"]["global_refs"],
-        )
+        for identifier, global_ref in (
+            ("UX.5", "G120"),
+            ("UX.6", "G121"),
+            ("NOR.3", "G122"),
+        ):
+            self.assertEqual("closed", ids[identifier]["status"])
+            self.assertIn(global_ref, ids[identifier]["global_refs"])
 
-        self.assertEqual(
-            "closed",
-            ids["UX.6"]["status"],
-        )
-        self.assertIn(
-            "G121",
-            ids["UX.6"]["global_refs"],
-        )
-
-        self.assertEqual(
-            "closed",
-            ids["NOR.3"]["status"],
-        )
-        self.assertIn(
-            "G122",
-            ids["NOR.3"]["global_refs"],
-        )
-
-        releases = (
-            ROOT / "RELEASES.md"
-        ).read_text(encoding="utf-8")
-
+        releases = (ROOT / "RELEASES.md").read_text(encoding="utf-8")
         for tag in (
             "v0.1.20.01-beta",
             "v0.1.21.01-beta",
@@ -100,50 +86,35 @@ class TestUX5R7DocumentationClosure(unittest.TestCase):
             with self.subTest(tag=tag):
                 self.assertIn(tag, releases)
 
-        # Programa vivo.
         matrix = (
-            ROOT
-            / "docs/governance/pre-1-0-pending-matrix.md"
+            ROOT / "docs/governance/pre-1-0-pending-matrix.md"
         ).read_text(encoding="utf-8")
+        graph_start = matrix.index("## 3. Grafo canónico")
+        graph_end = matrix.index("## 4. Pendientes obligatorios pre-1.0")
+        graph = matrix[graph_start:graph_end]
 
-        graph_start = matrix.index(
-            "## 2. Grafo canónico"
-        )
-        graph_end = matrix.index(
-            "## 3. Pendientes obligatorios pre-1.0"
-        )
-
-        graph = matrix[
-            graph_start:graph_end
-        ]
-
+        doc4 = graph.index("DOC.4 R1")
+        audit = graph.index("#142 auditoría previsional")
         persist = graph.index("PERSIST.1")
         rep = graph.index("REP.1")
         deploy = graph.index("DEPLOY.1")
         ux7 = graph.index("UX.7")
 
+        self.assertLess(doc4, audit)
+        self.assertLess(audit, persist)
         self.assertLess(persist, rep)
         self.assertLess(rep, deploy)
         self.assertLess(deploy, ux7)
+        self.assertIn("UX.x final necesario", graph)
 
-        self.assertIn(
-            "PLAN.2 R2",
-            graph,
-        )
-        self.assertIn(
-            "UX.x final necesario",
-            graph,
-        )
-
-        # La matriz viva no duplica cierres históricos.
-        self.assertNotIn(
+        for closed_marker in (
             "Cerrado/aceptado G121/E01",
-            matrix,
-        )
-        self.assertNotIn(
             "Cerrado/aceptado G122/E01",
-            matrix,
-        )
+            "PLAN.2 R2",
+            "MANT.2 R2",
+            "VER.2 R6",
+        ):
+            self.assertNotIn(closed_marker, graph)
 
     def test_evidencia_de_cierre_existe(self):
         closure = (

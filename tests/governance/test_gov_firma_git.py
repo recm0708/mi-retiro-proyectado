@@ -85,25 +85,45 @@ class TestGovFirmaGit(unittest.TestCase):
                 gate,
             )
 
-    def test_versioning_distingue_tags_retrospectivos_de_fecha_historica(self):
+
+    def test_versioning_distingue_firmas_actuales_de_historia(self):
         texto = (ROOT / "VERSIONING.md").read_text(encoding="utf-8")
-        self.assertIn("tags retrospectivos firmados", texto)
-        self.assertIn("no existieron como tags en sus fechas históricas", texto)
-        self.assertIn("no reescribe commits históricos", texto)
+        self.assertIn(
+            "No crear tags revision-aware retrospectivos para G001–G070",
+            texto,
+        )
+        self.assertIn(
+            "No reescribir commits históricos para añadir firmas",
+            texto,
+        )
+        self.assertIn("No falsear fechas históricas de tags", texto)
+
 
     def test_versioning_exige_firma_en_nuevos_commits_y_tags(self):
         texto = (ROOT / "VERSIONING.md").read_text(encoding="utf-8")
-        self.assertIn("Todo commit nuevo", texto)
-        self.assertIn("Todo tag formal nuevo", texto)
-        self.assertIn("`git tag -s`", texto)
+        release = (
+            DOCS / "operations/release-process.md"
+        ).read_text(encoding="utf-8")
+        self.assertIn(
+            "los commits canónicos nuevos siguen la política de firma SSH",
+            texto,
+        )
+        self.assertIn(
+            "todo tag formal nuevo se firma y verifica",
+            texto,
+        )
+        self.assertIn(".github/allowed_signers", texto)
+        self.assertIn('git tag -s "v$version"', release)
+
 
     def test_governance_y_contributing_exigen_firma(self):
         gov = (ROOT / "GOVERNANCE.md").read_text(encoding="utf-8")
         con = (ROOT / "CONTRIBUTING.md").read_text(encoding="utf-8")
-        self.assertIn("firma criptográfica", gov)
-        self.assertIn("git verify-commit", gov)
-        self.assertIn("commit.gpgSign", con)
-        self.assertIn("git verify-commit", con)
+        self.assertIn("firma criptográfica SSH", gov)
+        self.assertIn("git verify-commit HEAD", gov)
+        self.assertIn("Los commits canónicos deben estar firmados", con)
+        self.assertIn("firma SSH", con)
+        self.assertIn("git verify-commit HEAD", con)
 
     def test_proceso_release_verifica_commit_y_tag_firmados(self):
         texto = (DOCS / "operations/release-process.md").read_text(encoding="utf-8")
@@ -145,34 +165,28 @@ class TestGovFirmaGit(unittest.TestCase):
         self.assertEqual(list(range(1, max(ids) + 1)), ids)
         self.assertEqual(list(range(1, 160)), ids[:159])
 
+
     def test_firma_historica_y_roadmap_vivo_usan_fuentes_correctas(self):
         roadmap = (
             DOCS / "governance/roadmap.md"
         ).read_text(encoding="utf-8")
 
         self.assertIn(
-            "**Versión publicada:** `0.1.26.01-beta`",
+            "**Versión publicada:** `0.129.3.0-beta`",
             roadmap,
         )
         self.assertIn(
-            "**Fase en curso:** MANT.2 R2 / #206",
+            "**Fase material activa:** DOC.4 R1 / #171",
             roadmap,
         )
-        self.assertIn(
-            "G125/E01",
-            roadmap,
-        )
-        self.assertIn(
-            "G128, libre y no reservado",
-            roadmap,
-        )
+        self.assertIn("G129/E03/C0", roadmap)
+        self.assertIn("G130, libre y sin candidato", roadmap)
 
         migracion = (
             DOCS
             / "archive/governance/"
             "git-signature-migration-2026-08-17.md"
         ).read_text(encoding="utf-8")
-
         for esperado in (
             "Materialización criptográfica:",
             "primer commit posterior a la frontera histórica firmado",
@@ -183,42 +197,29 @@ class TestGovFirmaGit(unittest.TestCase):
             "23/23 targets remotos",
         ):
             with self.subTest(esperado=esperado):
-                self.assertIn(
-                    esperado,
-                    migracion,
-                )
+                self.assertIn(esperado, migracion)
 
         auditoria = (
-            DOCS
-            / "archive/governance/github-audit.md"
-        ).read_text(
-            encoding="utf-8"
-        ).casefold()
-
-        for esperado in (
-            "ruleset",
-            "dependabot",
-            "main",
-        ):
+            DOCS / "archive/governance/github-audit.md"
+        ).read_text(encoding="utf-8").casefold()
+        for esperado in ("ruleset", "dependabot", "main"):
             with self.subTest(esperado=esperado):
-                self.assertIn(
-                    esperado,
-                    auditoria,
-                )
+                self.assertIn(esperado, auditoria)
 
-    def test_indice_changelog_y_validacion_registran_firma(self):
-        indice = (DOCS / "README.md").read_text(encoding="utf-8")
+
+    def test_historia_y_contratos_vigentes_registran_firma(self):
+        migracion = (
+            DOCS
+            / "archive/governance/"
+            "git-signature-migration-2026-08-17.md"
+        ).read_text(encoding="utf-8")
         changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
-        validacion = (DOCS / "operations/validation.md").read_text(encoding="utf-8")
-        self.assertIn("archive/governance/git-signature-migration-2026-08-17.md", indice)
-        self.assertIn(".github/allowed_signers", indice)
+        governance = (ROOT / "GOVERNANCE.md").read_text(encoding="utf-8")
+
+        self.assertIn("23/23 tags", migracion)
+        self.assertTrue((ROOT / ".github/allowed_signers").is_file())
         self.assertIn("firma SSH", changelog)
-        self.assertIn("23/23", changelog)
-        self.assertIn("12 regresiones", validacion)
-        self.assertIn("470 pruebas en `OK`", validacion)
-        self.assertIn("23/23 objetos remotos", validacion)
-        self.assertIn("474 pruebas en `OK`", validacion)
-        self.assertIn("0 Pull Requests abiertos", validacion)
+        self.assertIn("git verify-commit HEAD", governance)
 
         for ruta in (
             ROOT / "CONTRIBUTING.md",
@@ -227,14 +228,10 @@ class TestGovFirmaGit(unittest.TestCase):
         ):
             contenido = ruta.read_text(encoding="utf-8")
             controles = [
-                c for c in contenido
-                if ord(c) < 32 and c not in "\n\r\t"
+                char for char in contenido
+                if ord(char) < 32 and char not in "\n\r\t"
             ]
             self.assertEqual([], controles, f"carácter de control en {ruta}")
-            self.assertIn(
-                r"Get-ChildItem .\app\static\js\*.js",
-                contenido,
-            )
 
 if __name__ == "__main__":
     unittest.main()

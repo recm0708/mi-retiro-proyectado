@@ -60,23 +60,26 @@ class TestDev2R4CierreFinal(unittest.TestCase):
         ):
             self.assertNotIn(prohibido, combinado)
 
-    def test_readme_refleja_dev2_cerrado_y_evidencia_preserva_su_historia(self):
+    def test_readme_enlaza_dev_y_evidencia_preserva_historia_dev2_sec2(self):
         readme = self._leer("README.md")
         documento = self._leer("docs/architecture/development-center.md")
         changelog = self._leer("CHANGELOG.md")
         sec2 = self._leer("docs/audits/security/sec2-final-closure.md")
 
-        self.assertIn("**DEV.2:** cerrado.", readme)
-        self.assertIn("**NOR.2 R4:** cerrado", readme)
-        self.assertIn("**NOR.2 R5:** cerrado", readme)
-        self.assertIn("**NOR.2 R6:** cerrado", readme)
-        self.assertIn("**NOR.2 R7:** cerrado", readme)
         self.assertIn(
-            "**SEC.2:** R1 cerrado; hardening CodeQL del informe "
-            "imprimible y normalización técnica de GitHub Actions "
-            "completados.",
+            "[Centro de desarrollo](docs/architecture/development-center.md)",
             readme,
         )
+        for marcador in (
+            "**DEV.2:** cerrado.",
+            "**NOR.2 R4:** cerrado",
+            "**NOR.2 R5:** cerrado",
+            "**NOR.2 R6:** cerrado",
+            "**NOR.2 R7:** cerrado",
+            "**SEC.2:** R1 cerrado",
+        ):
+            self.assertNotIn(marcador, readme)
+
         self.assertIn("**Estado:** SEC.2 cerrado", sec2)
         self.assertIn("**Alcance completado:** SEC.2 R1–R6", sec2)
         self.assertIn("SEC.2 permanece **cerrado en R1–R6**", sec2)
@@ -89,7 +92,6 @@ class TestDev2R4CierreFinal(unittest.TestCase):
         self.assertIn("G119/E05", documento)
         self.assertIn("### DEV.2 — cierre del Centro de desarrollo", changelog)
         self.assertIn("cierra documentalmente DEV.2", changelog)
-        self.assertIn("deja VER.2 como siguiente cierre transversal", changelog)
 
     def test_arquitectura_conserva_alcance_tecnico_sin_rutas_publicas_nuevas(self):
         arquitectura = self._leer("docs/architecture/system-architecture.md")

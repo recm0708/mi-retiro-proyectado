@@ -77,15 +77,16 @@ class TestNOR2R6LedgerData(unittest.TestCase):
                 findings.append(rel)
         self.assertEqual([], findings)
 
-    def test_estado_transversal_evoluciona_sin_perder_nor2(self):
+    def test_estado_vigente_separa_readme_de_historia_nor2(self):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
-        docs = (ROOT / "docs/README.md").read_text(encoding="utf-8")
         ledger = cargar_ledger()
+        version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
 
-        self.assertIn("NOR.2", readme)
-        self.assertIn("NOR.2", docs)
-        self.assertIn("PLAN.2 R2", readme)
-        self.assertIn("SEC.2 R7", readme)
+        self.assertIn(f"**Versión de desarrollo:** `{version}`", readme)
+        self.assertIn("[Documentación de Mi Retiro Proyectado](docs/README.md)", readme)
+        self.assertNotIn("NOR.2", readme)
+        self.assertNotIn("PLAN.2 R2", readme)
+        self.assertNotIn("SEC.2 R7", readme)
 
         entries = {
             item["global_revision"]: item
@@ -115,8 +116,17 @@ class TestNOR2R6LedgerData(unittest.TestCase):
         self.assertIn("G103-G108", ids["SEC.2"]["global_refs"])
         self.assertEqual("planned_reserved", ids["PERSIST.1"]["status"])
         self.assertEqual("closed", ids["NOR.3"]["status"])
-        self.assertEqual("MANT.2", registry["current_candidate"]["block"])
-        self.assertEqual(129, registry["current_candidate"]["global_revision"])
+
+        candidate = registry["current_candidate"]
+        self.assertEqual("unassigned", candidate["state"])
+        self.assertIsNone(candidate["block"])
+        self.assertIsNone(candidate["global_revision"])
+        self.assertEqual(130, candidate["next_global_available"])
+
+        active = registry["active_phase"]
+        self.assertEqual("DOC.4", active["block"])
+        self.assertEqual("R1", active["revision"])
+        self.assertEqual(129, active["base_global_revision"])
 
         matrix = (
             ROOT / "docs/governance/pre-1-0-pending-matrix.md"

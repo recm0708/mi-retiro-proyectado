@@ -61,28 +61,70 @@ class TestMant1R5GDocumentacion(unittest.TestCase):
 
         self.assertEqual([], faltantes)
 
-    def test_indice_incluye_documentos_relevantes_de_r5g(self):
+    def test_indice_delega_documentos_relevantes_a_sus_autoridades(self):
         indice = (DOCS / "README.md").read_text(encoding="utf-8")
+        decisiones = (DOCS / "decisions/README.md").read_text(
+            encoding="utf-8"
+        )
+        estandares = (DOCS / "standards/README.md").read_text(
+            encoding="utf-8"
+        )
+        archivo = (DOCS / "archive/README.md").read_text(
+            encoding="utf-8"
+        )
 
-        documentos = (
-            "decisions/adr-179-revision-aware-versioning.md",
-            "file-structure-audit-r5d.md",
-            "folders-audit-r5e.md",
-            "files-audit-r5f.md",
-            "documentation-audit-r5g.md",
+        self.assertIn(
             "architecture/development-center.md",
-            "standards/file-structure-by-extension.md",
-            "ux46h-r1-results-audit.md",
+            indice,
+        )
+        self.assertIn(
+            "[Índice de estándares](standards/README.md)",
+            indice,
+        )
+        self.assertIn(
+            "[Índice del archivo](archive/README.md)",
+            indice,
+        )
+
+        self.assertIn(
+            "adr-179-revision-aware-versioning.md",
+            decisiones,
+        )
+        self.assertIn(
+            "file-structure-by-extension.md",
+            estandares,
+        )
+        self.assertIn(
+            "[`technical/`](technical/)",
+            archivo,
+        )
+        self.assertIn(
+            "[`ux/`](ux/)",
+            archivo,
+        )
+
+        historicos = (
+            "archive/technical/file-structure-audit-r5d.md",
+            "archive/technical/folders-audit-r5e.md",
+            "archive/technical/files-audit-r5f.md",
+            "archive/technical/documentation-audit-r5g.md",
+            "archive/ux/ux46h-r1-results-audit.md",
             "archive/ux/ux46a-visual-redesign.md",
             "archive/ux/ux46b-step1-personal-data.md",
             "archive/ux/ux46c-step2-contributions.md",
             "archive/ux/ux46d-step3-history.md",
         )
 
-        for documento in documentos:
-            with self.subTest(documento=documento):
-                self.assertIn(documento, indice)
-
+        for relativo in historicos:
+            with self.subTest(relativo=relativo):
+                self.assertTrue(
+                    (DOCS / relativo).is_file(),
+                    relativo,
+                )
+                self.assertNotIn(
+                    relativo,
+                    indice,
+                )
     def test_changelog_y_validacion_declaran_r5g(self):
         superficies = (
             ROOT / "CHANGELOG.md",

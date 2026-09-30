@@ -212,15 +212,30 @@ class TestAutomationCoreQualityGate(unittest.TestCase):
             with self.subTest(expected=expected):
                 self.assertIn(expected, text)
 
-    def test_readme_representa_arbol_versionable_real(self):
+    def test_politica_estructural_es_autoridad_del_arbol_versionable(self):
         files = audit_repository_integrity.repository_files()
         directories = audit_repository_integrity.canonical_directories(files)
-        roots = audit_repository_integrity.root_files(files)
-        readme_directories, readme_roots = (
-            audit_repository_integrity.parse_readme_tree()
+        policy = audit_repository_integrity.load_structure_policy()
+
+        actual_root_directories = {
+            path.split("/", 1)[0]
+            for path in directories
+        }
+
+        self.assertEqual(
+            set(policy["allowed_root_directories"]),
+            actual_root_directories,
         )
-        self.assertEqual(directories, readme_directories)
-        self.assertEqual(roots, readme_roots)
+
+        blockers = audit_repository_integrity.structure_policy_analysis(
+            files,
+            directories,
+            policy,
+        )
+        self.assertTrue(
+            all(not values for values in blockers.values()),
+            blockers,
+        )
 
     def test_integridad_repo_actual_no_tiene_bloqueadores(self):
         report = audit_repository_integrity.audit_repository()

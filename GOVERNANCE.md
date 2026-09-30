@@ -1,292 +1,218 @@
 # Gobierno del proyecto
 
-**Proyecto:** Mi Retiro Proyectado
-**Estado:** vigente desde GOV.1.2
-**Fecha de adopción:** 2026-08-18
-**Última revisión de estado:** MANT.2 R3/#211 materializado como G129/E03/C0 (`0.129.3.0-beta`), pendiente de integración/publicación; G130 libre — 2026-09-28
+**Estado:** vigente
+**Mantenedor:** Rubén Enrique Cañizares Miranda (`@recm0708`)
 
-<!-- NOR3-G122-PROMOTION:START -->
-## Registro histórico — promoción G122-E01 post-NOR.3
+## Propósito
 
-> **Checkpoint histórico preservado.** Este bloque describe el estado inmediatamente posterior a la integración de NOR.3 y anterior a MANT.2 R1 / MANT.1 R8. No representa el estado vigente del repositorio; las secciones vigentes posteriores de este documento tienen precedencia.
+Este documento define cómo se gobierna Mi Retiro Proyectado: quién mantiene el
+repositorio, cómo se adoptan decisiones, qué controles deben cumplirse y cómo se
+integra trabajo a la rama principal.
 
-- `VERSION` materializa `0.1.22.01-beta` para NOR.3 R8 / G122-E01.
-- NOR.3 R1–R8 quedó integrado/aceptado mediante PR #162 / merge
-  `b97cf61763479b80b8e8724b878089e8bb20fa00`.
-- La revalidación automática de `main` quedó GREEN: Repository Quality Gate,
-  Visual & Accessibility y CodeQL finalizaron en `success`.
-- G123 es el siguiente Global disponible, pero **no tiene candidato ni bloque
-  preasignado**.
-- PERSIST.1 permanece planificado y no iniciado, sin Global preasignado.
-- `v0.1.21.01-beta` / G121/E01 permanece como última publicación revision-aware
-  hasta completar el tag/release firmado de G122/E01.
-- `v0.1.22.01-beta` queda pendiente de creación/firma local y de la
-  verificación/publicación gobernada por REL.GOV.1.
-<!-- NOR3-G122-PROMOTION:END -->
+La historia de fases, promociones y publicaciones no se mantiene aquí. Se
+conserva en Git, Issues, Pull Requests, ADR, auditorías, `CHANGELOG.md`,
+`RELEASES.md` y los registros específicamente históricos.
 
-<!-- POST-NOR3-INTERMEDIATE-SEQUENCE:START -->
-## Estado vigente — candidato MANT.2 R3 materializado
+## Autoridades relacionadas
 
-VER.2 R6/#164 está cerrado, integrado y publicado como **G128/E02/C0**
-(`0.128.2.0-beta`) mediante PR #208, tag firmado `v0.128.2.0-beta` y
-GitHub Release prerelease 393386700.
+- [Política de versionado](VERSIONING.md) — numeración, aceptación y tags.
+- [Proceso de release](docs/operations/release-process.md) — publicación y
+  validación de Releases.
+- [Gobierno de Issues y Pull Requests](docs/governance/github-issues-pr-governance.md)
+  — flujo operativo de trabajo, checkpoints y revisión.
+- [Estándares del repositorio](docs/standards/README.md) — estructura,
+  nomenclatura, documentación y ciclo de vida.
+- [Registro de decisiones](docs/decisions/README.md) — ADR.
+- [Política de seguridad](SECURITY.md) — reporte de vulnerabilidades.
 
-El preflight #166 previo a DOC.4 detectó el PR #210 y abrió MANT.2 R3/#211.
-CP1 separó la evidencia G123 del pin vivo; CP2 integró `pypdf 6.19.0` con
-gates locales/remotos verdes. #210 quedó cerrado sin merge como superseded.
+Cuando una autoridad especializada define un contrato con mayor detalle, este
+documento no lo duplica.
 
-**G129/E03/C0 queda materializado localmente como `0.129.3.0-beta`** para
-MANT.2 R3 mediante Draft PR #212, pendiente de integración/publicación.
+## Mantenimiento y ownership
 
-**G130 es el siguiente Global aritmético** y permanece libre. Después de
-publicar G129 debe repetirse #166; solo CLEAN habilita DOC.4 R1/#171.
-<!-- POST-NOR3-INTERMEDIATE-SEQUENCE:END -->
+El mantenedor principal y responsable de revisión es **Rubén Enrique Cañizares
+Miranda** (`@recm0708`).
 
+`.github/CODEOWNERS` materializa el ownership técnico. CODEOWNERS no constituye
+certificación jurídica ni aprobación de la Caja de Seguro Social de Panamá.
 
-<!-- DOC1-R1-POST-MANT1:START -->
-## Estado de gobierno vigente
-- `VERSION` materializa `0.129.3.0-beta` para MANT.2 R3 / G129-E03-C0.
-- G129 está aceptado localmente y pendiente de integración/publicación mediante Draft PR #212.
-- G128/E02/C0 / VER.2 R6 permanece como último estado publicado.
-- G130 permanece libre y sin candidato.
-- PR #210 quedó superseded sin merge por #212.
-- DOC.4/#171 queda después de publicar G129 y repetir #166 CLEAN.
-<!-- DOC1-R1-POST-MANT1:END -->
+Mientras exista un único mantenedor, las áreas especialmente críticas son:
 
-## 1. Propósito
+- `regulations/`;
+- `app/engines/`;
+- `app/core/`;
+- documentación normativa, de seguridad y privacidad;
+- `.github/`;
+- `VERSION` y artefactos de versionado/publicación.
 
-Este documento define quién mantiene el proyecto, cómo se adoptan decisiones y qué controles mínimos deben cumplirse antes de integrar cambios. Su finalidad es facilitar mantenimiento, revisión independiente y auditoría.
+Si se incorporan nuevos mantenedores, CODEOWNERS debe granularizar las
+responsabilidades sin crear ownership implícito o informal.
 
-## 2. Mantenimiento actual
+## Principios de gobierno
 
-El mantenedor y responsable de revisión actual del repositorio es:
+1. **Trazabilidad:** un cambio relevante debe poder rastrearse desde Git hasta
+   su Issue, código, pruebas, documentación y evidencia aplicable.
+2. **Separación normativa:** una decisión técnica no se presenta como requisito
+   jurídico sin fuente oficial.
+3. **Transparencia:** no se introducen comportamientos deliberadamente ocultos
+   al modelo documental y de auditoría.
+4. **Privacidad por defecto:** pruebas y observabilidad no justifican almacenar
+   datos personales reales innecesarios.
+5. **Reproducibilidad:** una afirmación técnica importante debe poder
+   verificarse mediante código, prueba, fuente o procedimiento documentado.
+6. **Historia íntegra:** una decisión sustituida permanece en su autoridad
+   histórica; la documentación viva no la copia para aparentar continuidad.
+7. **Independencia institucional:** el proyecto no se presenta como producto
+   oficial de la CSS.
+8. **Sincronización transversal:** cuando cambia un contrato compartido se
+   revisan sus consumidores de código, pruebas, interfaz, normativa,
+   documentación y release.
+9. **Trabajo verificable:** las Issues materiales mantienen checklist,
+   evidencia y criterio de cierre.
 
-- **Rubén Enrique Cañizares Miranda** (`@recm0708`).
+## Decisiones
 
-`.github/CODEOWNERS` refleja esta responsabilidad técnica. CODEOWNERS no constituye una certificación jurídica ni una aprobación de la Caja de Seguro Social de Panamá.
+Las decisiones técnicas o arquitectónicas relevantes se documentan mediante ADR
+con numeración consecutiva en
+[Registro de decisiones](docs/decisions/README.md).
 
-## 3. Principios de gobierno
+Una decisión puede quedar vigente, sustituida parcialmente, sustituida o
+rechazada. Las decisiones anteriores no se eliminan para hacer coincidir la
+historia con el criterio actual.
 
-1. **Trazabilidad:** todo cambio relevante debe poder rastrearse desde Git hasta código, pruebas y documentación.
-2. **Separación normativa:** las decisiones técnicas no deben presentarse como requisitos legales sin una fuente oficial.
-3. **Transparencia:** no se introducen comportamientos deliberadamente ocultos al modelo documental y de auditoría del proyecto.
-4. **Privacidad por defecto:** observabilidad y pruebas no justifican almacenar datos personales reales innecesarios.
-5. **Reproducibilidad:** una afirmación técnica importante debe poder verificarse mediante código, prueba, fuente o procedimiento documentado.
-6. **Historia preservada:** una decisión sustituida se marca como tal; no se elimina para aparentar que nunca existió.
-7. **Independencia institucional:** el proyecto no debe presentarse como producto oficial de la CSS.
-8. **Sincronización transversal:** cuando evoluciona un contrato compartido, se revisan conjuntamente código, pruebas, interfaz, normativa, documentación y evidencia de release que dependan de él.
-9. **Issues verificables:** toda Issue nueva debe incluir un checklist real de trabajo y cierre que permanezca actualizado hasta resolver o transferir todos sus puntos aplicables.
+## Ciclo de vida de Issues y fases
 
-## 4. Tipos de cambio
+Toda Issue material debe contener un checklist Markdown verificable que cubra,
+cuando aplique:
 
-### 4.1. Funcionalidad y UX
-
-Requieren:
-
-- implementación;
-- regresiones automatizadas cuando sean razonables;
-- validación manual cuando el comportamiento sea visual o interactivo;
-- actualización de documentación dependiente.
-
-### 4.2. Motores y normativa
-
-Todo cambio de fórmula, parámetro, fecha, tabla o interpretación previsional requiere:
-
-- fuente oficial identificable;
-- prueba de regresión;
-- actualización de `regulations/` cuando corresponda;
-- documentación técnica/normativa;
-- ADR cuando exista interpretación o decisión no trivial.
-
-### 4.3. Seguridad, privacidad y observabilidad
-
-Requieren revisión de:
-
-- datos tratados;
-- datos registrados;
-- retención;
-- exposición externa;
-- mensajes de error;
-- documentación pública y técnica;
-- pruebas de no regresión.
-
-### 4.4. Gobierno y releases
-
-Cambios en versionado, licencia, gobernanza, CI o proceso de publicación deben quedar documentados y no pueden depender únicamente de una convención oral.
-
-### 4.5. Ciclo de vida obligatorio de Issues
-
-Toda Issue nueva, ya sea creada manualmente, mediante Issue Forms, automatización
-o asistencia programática, debe contener al menos un checklist Markdown real con
-elementos `- [ ]` / `- [x]`.
-
-El checklist debe representar trabajo verificable y, cuando aplique, cubrir:
-
-- condiciones y dependencias de entrada;
-- implementación o trabajo principal;
-- pruebas, gates y evidencia;
-- documentación, trazabilidad e Issues derivadas;
+- dependencias y condiciones de entrada;
+- trabajo principal;
+- pruebas y gates;
+- documentación y trazabilidad;
+- remanentes o Issues derivadas;
 - criterio de cierre.
 
-Una casilla solo pasa a `[x]` cuando exista evidencia suficiente de que el punto
-quedó completado. Una Issue material se cierra cuando todos sus puntos
-aplicables y su criterio de cierre estén completos. Si aparece trabajo fuera de
-alcance, debe transferirse a un owner/Issue explícito antes del cierre.
+Una casilla solo se marca como completada cuando exista evidencia suficiente.
+Si aparece trabajo fuera de alcance, debe transferirse a una Issue o owner
+explícito antes del cierre.
 
-Las Issues transversales o recurrentes pueden permanecer abiertas mientras
-exista trabajo recurrente pendiente, pero cada ejecución debe actualizar su
-checklist y conservar evidencia del resultado.
+### Gate de apertura de fase
 
-Los Issue Forms versionados bajo `.github/ISSUE_TEMPLATE/` deben pregenerar un
-checklist de trabajo/cierre. Los guards del repositorio protegen este contrato
-para impedir que nuevas plantillas vuelvan a crear Issues sin seguimiento.
+Al iniciar una fase o revisión material en un chat nuevo, primero se presenta un
+briefing de alcance. Como mínimo debe explicar:
 
-## 5. Decisiones
+- objetivo y problema que resuelve;
+- alcance incluido y exclusiones;
+- baseline, dependencias e Issues relacionadas;
+- orden de trabajo y checkpoints;
+- validaciones previstas;
+- riesgos y posibles efectos colaterales;
+- recomendaciones adicionales que convenga incorporar;
+- reparto de trabajo remoto/local;
+- posible impacto de versionado/publicación;
+- criterio de cierre.
 
-Las decisiones relevantes se documentan mediante ADR consecutivos en `docs/decisions/README.md`.
+La ejecución material comienza únicamente después de la aprobación explícita
+del operador. Las verificaciones de solo lectura necesarias para confirmar el
+estado real pueden realizarse antes de esa aprobación.
 
-Un ADR puede estar:
+## Tipos de cambio
 
-- vigente;
-- sustituido parcialmente;
-- sustituido;
-- rechazado, cuando resulte útil conservar la alternativa evaluada.
+### Funcionalidad y UX
 
-Una decisión antigua no se borra solo porque una revisión posterior cambie el criterio.
+Requieren implementación, regresiones razonables, validación manual cuando el
+comportamiento sea visual/interactivo y actualización de las autoridades
+documentales afectadas.
 
-## 6. Integración a `main`
+### Motores y normativa
 
-Antes de integrar un hito cerrado se exige, como mínimo:
+Un cambio de fórmula, parámetro, fecha, tabla o interpretación previsional
+requiere fuente oficial identificable, pruebas, actualización de
+`regulations/` cuando corresponda, documentación técnica/normativa y ADR si
+existe una decisión no trivial.
 
-```powershell
-python -m compileall app
-python -m unittest discover -s tests -q
-git diff --check
-```
+### Seguridad, privacidad y observabilidad
 
-Para JavaScript modificado se valida además `node --check`.
+Debe revisarse el tratamiento de datos, retención, exposición, logs, mensajes
+de error, terceros, documentación pública y regresiones de seguridad.
 
-Desde la migración criptográfica del 2026-08-17, todo commit nuevo debe incorporar **firma criptográfica SSH**. Antes del push se verifica con:
+### Gobierno, documentación y releases
+
+Los cambios de gobierno, versionado, licencia, CI, estructura documental o
+publicación deben quedar respaldados por una autoridad canónica y no depender
+de convenciones orales o texto duplicado.
+
+## Integración a `main`
+
+El flujo ordinario es:
+
+1. Issue/alcance aprobado;
+2. rama de trabajo;
+3. cambios y validación local;
+4. commit firmado;
+5. push de la rama;
+6. Pull Request;
+7. checks requeridos y revisión;
+8. `Squash and merge` cuando el candidato sea aceptable.
+
+No se usa push directo ordinario a `main`.
+
+Los commits canónicos nuevos deben incorporar firma criptográfica SSH. Antes de
+publicar una rama se verifica, como mínimo:
 
 ```powershell
 git verify-commit HEAD
 git log --show-signature -1
 ```
 
-La CI remota debe permanecer en verde.
+La rama principal está protegida por reglas remotas. Los required checks
+canónicos son `Repository Quality Gate` y `Python Compatibility`; otros
+controles, como Dependency Security, Visual & Accessibility y CodeQL, se
+ejecutan según su contrato y alcance.
 
-GOV.1.6 introdujo históricamente
-`.github/workflows/governance-audit.yml` y el check
-**Auditoría de gobernanza** como control independiente. La migración
-post-G119 absorbió ese contrato, junto con CI y Markdown, dentro del gate
-canónico después de demostrar equivalencia remota en GitHub.
+Los tags formales `v*` son inmutables una vez publicados. La creación de un
+tag o Release no se utiliza como mecanismo para corregir un árbol todavía no
+aceptado.
 
-### Automatización canónica post-G119
+## Versionado y publicación
 
-El ruleset vigente de `main` exige `Repository Quality Gate` y
-`Python Compatibility`.
+`VERSION` es la fuente canónica de la versión de aplicación.
 
-`Repository Quality Gate` centraliza validación técnica, documental, de
-integridad y política de Pull Requests. `Python Compatibility` preserva la
-compatibilidad con Python 3.13.
+La política de numeración y el criterio para consumir Global/Edition/Correction
+se mantienen exclusivamente en [Política de versionado](VERSIONING.md). La
+publicación de tags y GitHub Releases se rige por
+[Proceso de release](docs/operations/release-process.md).
 
-`Dependency Security`, `Visual & Accessibility` y CodeQL permanecen como
-controles complementarios. `verificar-tags.yml` continúa separado por su
-contrato específico de firma y publicación.
+Una fase planificada no recibe Global, Edition o `VERSION` por anticipado. La
+materialización ocurre cuando existe un estado real, validado y aceptable bajo
+el contrato de versionado.
 
-Los workflows legacy `ci.yml`, `governance-audit.yml` y
-`markdown-audit.yml` fueron retirados después de migrar el ruleset, sin abrir
-una ventana de desprotección. CodeQL permanece independiente.
+## Seguridad e incidentes
 
-La migración final quedó integrada mediante PR #117. El mantenimiento
-coordinado PR #118 actualizó la pareja Pydantic/Pydantic Core, Dependency
-Review y la agrupación de Dependabot sin modificar `VERSION`, el ledger ni el
-manifiesto de publicación. Estos cambios son mantenimiento posterior a
-G119/E05 y no consumen G120/E01.
+Las vulnerabilidades explotables, credenciales, datos personales y evidencia
+sensible no se publican en Issues. Se sigue
+[Política de seguridad](SECURITY.md) y, para incidentes,
+[Procedimiento de respuesta](docs/security/security-incident-procedure.md).
 
-La rama predeterminada está protegida mediante un ruleset activo que exige Pull Request, commits verificados, historial lineal, resolución de conversaciones, los checks `Repository Quality Gate` y `Python Compatibility`, rama actualizada antes de integrar y bloqueo de eliminación y force push.
+Dependabot, CodeQL, secret scanning y otros controles automatizados reducen
+riesgo, pero no sustituyen revisión humana ni pruebas de regresión.
 
-El rol `Repository admin` dispone únicamente de bypass mediante Pull Request para recuperación administrativa excepcional.
+## Licencia
 
-La integración ordinaria utiliza ramas de trabajo y `Squash and merge`; no se realizan pushes directos ordinarios a `main`.
+Los materiales originales se mantienen bajo la licencia definida en
+[`LICENSE`](LICENSE). Los componentes de terceros conservan sus propias
+licencias y avisos, documentados en [Avisos de terceros](THIRD_PARTY_NOTICES.md).
 
-Los tags `v*` están cubiertos por un ruleset activo que permite crear nuevas versiones, pero bloquea actualización, eliminación y force push de tags publicados.
+Cualquier relicencia futura requiere una decisión expresa y derechos suficientes
+sobre las contribuciones incorporadas.
 
-## 7. Versiones y tags
+## Cambios a este documento
 
-La política aplicable está en `VERSIONING.md`.
+Una modificación sustancial de gobierno debe:
 
-- `VERSION` es la fuente canónica.
-- Los tags formales empiezan con `v`.
-- La familia `0.0.N-beta` es legacy histórica y la revision-aware v1 publicada permanece inmutable; los estados beta prospectivos desde G128 usan `0.<GLOBAL>.<EDITION>.<CORRECTION>-beta` conforme a VER.2.
-- Ancla histórica v1: la política anterior decía que los estados beta nuevos usan `0.GG.RR.EE-beta`; esa formulación se conserva solo para regresión histórica y queda sustituida prospectivamente por v2 desde G128.
-- La primera versión oficial objetivo es `1.0.0.0`, después de cerrar todos los gates del plan maestro.
-- Las versiones oficiales usan `MAYOR.MENOR.PARCHE.REVISIÓN`; la cuarta posición identifica una revisión/hotfix.
-- El Build es un identificador independiente de seis dígitos para artefactos oficiales reproducibles; no forma parte de `VERSION` ni del tag y no se incrementa por commit.
-- La planificación histórica `0.1.0-beta.1` deja de ser un objetivo vigente; las evidencias históricas que la mencionan se preservan.
-- `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas documentalmente y posteriormente materializadas como tags retrospectivos firmados sin aparentar existencia histórica.
-- `v0.0.22-beta` y `v0.0.23-beta` fueron reemitidos una sola vez como objetos firmados sin cambiar sus commits objetivo; esa excepción ya fue consumida.
-- Después de la migración, todo commit nuevo y todo tag nuevo deben estar firmados. `v0.0.24-beta` y `v0.0.25-beta` fueron creados bajo esta política y se verificaron correctamente.
-- La fuente canónica y asignación del Build se definirán en REL.1; hasta entonces no se publica un Build ficticio.
-- La clave privada nunca se versiona.
-- Desde REL.GOV.1, todo tag formal nuevo debe tener un GitHub Release asociado con título canónico, cuerpo mínimo auditable y estado prerelease/estable coherente con `VERSION`.
-- `docs/operations/release-process.md` es la política canónica de publicación; `.github/release.yml` solo asiste la categorización automática y `scripts/release_contract.py` valida el contrato local de VERSION/ledger/tag/título/notas.
-- La edición de metadatos de un Release histórico puede corregir formato o reconciliación sin mover ni recrear su tag; toda corrección semántica debe conservar la denominación original como evidencia.
-
-## 8. Propiedad y revisión de áreas críticas
-
-Antes de crear o reutilizar una sigla, fase o bloque se consultan `docs/standards/work-block-identifiers.md` y `data/governance/work-block-registry.json`. Los identificadores históricos o planificados no se reasignan; `R...` identifica revisiones, no bloques.
-
-Mientras exista un único mantenedor, `@recm0708` revisa todo el repositorio. Se consideran especialmente críticas:
-
-- `regulations/`;
-- `app/engines/`;
-- `app/core/`;
-- documentación de seguridad, privacidad, normativa y auditoría;
-- `.github/`;
-- archivos de versionado y publicación.
-
-Cuando existan nuevos mantenedores, CODEOWNERS deberá granularizar estas responsabilidades.
-
-## 9. Licencia
-
-GOV.1.7 adopta una **licencia propietaria pre-beta / todos los derechos reservados** para los materiales originales del proyecto.
-
-La denominación histórica de esa decisión de licencia se conserva. PLAN.1 no cambia la licencia: la etapa funcional actual se identifica como beta y cualquier relicencia sigue requiriendo una decisión separada.
-
-- `LICENSE` define el alcance de esos materiales;
-- `THIRD_PARTY_NOTICES.md` separa componentes upstream;
-- `docs/governance/licensing-and-distribution.md` registra alternativas y motivo de la decisión;
-- la disponibilidad del código no concede derechos de reutilización o explotación comercial;
-- una futura relicencia abierta requiere decisión expresa y derechos suficientes sobre contribuciones incorporadas.
-
-La revisión jurídica externa previa a publicación pública/comercial continúa siendo un gate.
-
-## 10. Incidentes y vulnerabilidades
-
-`SECURITY.md` es la política vigente para reportar vulnerabilidades. No deben abrirse como issues públicos vulnerabilidades con detalles explotables, credenciales, datos personales o evidencia sensible.
-
-El repositorio mantiene Dependency graph, Dependabot alerts y Dependabot security updates activos. Dependabot no sustituye revisión humana, pruebas de regresión ni la decisión explícita del mantenedor.
-
-Las plantillas `.github/ISSUE_TEMPLATE/` separan errores ordinarios, solicitudes de mejora y consultas de soporte; `.github/pull_request_template.md` estandariza el contexto mínimo de integración. `CODE_OF_CONDUCT.md` define las normas de participación y `SUPPORT.md` enruta soporte, privacidad y seguridad. `docs/archive/governance/github-audit.md` registra los controles versionados y los settings que requieren verificación periódica en GitHub.
-
-## 11. Cambios a este documento
-
-Toda modificación sustancial de gobierno debe:
-
-- quedar registrada en Git;
-- explicar su motivo;
-- actualizar documentos relacionados;
-- respetar el historial anterior.
-
-<!-- NOR3-GOV-BOOTSTRAP:START -->
-## Gobierno durable de Issues y Pull Requests
-
-La convención canónica de Issues, checkpoints, labels, revisiones por pares,
-Milestones y Pull Requests se mantiene en
-[`docs/governance/github-issues-pr-governance.md`](docs/governance/github-issues-pr-governance.md).
-
-Durante NOR.3 se aplica por defecto la ejecución `R1+R2`, `R3+R4`, `R5+R6`
-y `R7+R8` dentro de un bloque ya autorizado, preservando evidencia individual
-por revisión y separando el par cuando la auditabilidad o el riesgo lo exijan.
-<!-- NOR3-GOV-BOOTSTRAP:END -->
+1. tener Issue o decisión rastreable;
+2. explicar el motivo;
+3. actualizar autoridades relacionadas;
+4. ajustar guardas o plantillas que implementen la regla;
+5. conservar la historia en Git o en su autoridad histórica, no mediante
+   cronologías incrustadas en esta política.

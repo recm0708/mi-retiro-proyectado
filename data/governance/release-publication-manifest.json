@@ -41,6 +41,6 @@
     "global_revision": 130,
     "revision_aware": null,
     "block": null,
-    "description": "G129/E03/C0 está aceptado localmente para MANT.2 R3/#211 y pendiente de integración/publicación. G130 permanece libre; después de publicar G129 y repetir #166 CLEAN corresponde DOC.4 R1/#171."
+    "description": "G130 es el siguiente Global aritméticamente disponible y permanece sin candidato, bloque ni VERSION preasignados. DOC.4 R1/#171 está en ejecución sobre G129/E03/C0 publicado; solo un candidato material validado puede materializar el siguiente Global."
   }
 }

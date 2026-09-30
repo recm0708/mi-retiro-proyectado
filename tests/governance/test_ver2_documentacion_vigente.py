@@ -29,109 +29,60 @@ class TestVer2DocumentacionVigente(unittest.TestCase):
         )
 
     def test_historia_ver2_y_estado_vivo_usan_autoridades_correctas(self):
-        readme = (
-            ROOT / "README.md"
-        ).read_text(encoding="utf-8")
-
-        roadmap = (
-            DOCS / "governance/roadmap.md"
-        ).read_text(encoding="utf-8")
-
-        plan = (
-            DOCS / "governance/master-plan-to-1-0.md"
-        ).read_text(encoding="utf-8")
-
-        security = (
-            ROOT / "SECURITY.md"
-        ).read_text(encoding="utf-8")
-
-        indice = (
-            DOCS / "README.md"
-        ).read_text(encoding="utf-8")
-
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        roadmap = (DOCS / "governance/roadmap.md").read_text(encoding="utf-8")
+        plan = (DOCS / "governance/master-plan-to-1-0.md").read_text(
+            encoding="utf-8"
+        )
+        indice = (DOCS / "README.md").read_text(encoding="utf-8")
         ledger = (
             DOCS / "governance/pre-1-0-revision-ledger.md"
         ).read_text(encoding="utf-8")
-
         audit = (
-            DOCS
-            / "archive/governance/pre-1-0-versioning-audit.md"
+            DOCS / "archive/governance/pre-1-0-versioning-audit.md"
         ).read_text(encoding="utf-8")
 
-        # Estado vivo actual.
         self.assertIn(
-            f"**Versión canónica vigente:** `{VERSION_CANONICA}`",
+            f"**Versión de desarrollo:** `{VERSION_CANONICA}`",
             readme,
         )
+        self.assertNotIn("G071", readme)
+        self.assertNotIn("G087", readme)
+        self.assertNotIn("VER.2 R6", readme)
+
+        for documento in (roadmap, plan):
+            self.assertIn("G129/E03/C0", documento)
+            self.assertIn("DOC.4 R1", documento)
 
         self.assertIn(
-            "G125/E01",
-            roadmap,
-        )
-        self.assertIn(
-            "PLAN.2 R2",
-            roadmap,
-        )
-        self.assertIn(
-            "VER.2 R6",
-            roadmap,
-        )
-
-        self.assertIn(
-            "G125/E01",
-            plan,
-        )
-        self.assertIn(
-            "PLAN.2 R2",
-            plan,
-        )
-        self.assertIn(
-            "VER.2 R6",
-            plan,
-        )
-
-        self.assertIn(
-            f"**Versión de aplicación:** `{VERSION_CANONICA}`",
+            "| Versionado | [Política de versionado](../VERSIONING.md)",
             indice,
         )
+        self.assertIn("G071", ledger + audit)
+        self.assertIn("G087", ledger + audit)
 
-        # Historia VER.2 preservada en autoridades apropiadas.
-        self.assertIn(
-            "G071",
-            ledger + audit,
-        )
-        self.assertIn(
-            "G087",
-            ledger + audit,
-        )
-
-        self.assertIn(
-            "| `0.0.71.01-beta` | "
-            "Versión promovida históricamente en VER.2 R4",
-            security,
-        )
 
     def test_tag_legacy_y_reconciliacion_g071_g087_permanecen_documentados(self):
         versioning = (ROOT / "VERSIONING.md").read_text(encoding="utf-8")
         releases = (ROOT / "RELEASES.md").read_text(encoding="utf-8")
-        proceso = (DOCS / "operations/release-process.md").read_text(encoding="utf-8")
+        ledger = (
+            DOCS / "governance/pre-1-0-revision-ledger.md"
+        ).read_text(encoding="utf-8")
 
-        self.assertIn(ULTIMO_TAG_LEGACY, versioning)
-        self.assertIn(
-            "Un tag formal nuevo no se crea dentro del PR del candidato",
-            versioning,
-        )
-        self.assertIn(
-            "no existe tag `v0.0.71.01-beta` hasta completar merge",
-            releases,
-        )
-        self.assertIn("v0.0.71.01-beta", proceso)
-        self.assertIn("publicado originalmente como G071/E01", proceso)
-        self.assertIn("G087/E01", proceso)
+        self.assertIn(ULTIMO_TAG_LEGACY, releases)
+        self.assertIn("G071 / E01 -> 0.0.71.01-beta", versioning)
+        self.assertIn("No crear tags revision-aware retrospectivos", versioning)
+        self.assertIn("G071", ledger)
+        self.assertIn("G087", ledger)
+
 
     def test_ledger_y_auditoria_siguen_reconociendo_g071(self):
-        ledger = (DOCS / "governance/pre-1-0-revision-ledger.md").read_text(encoding="utf-8")
-        auditoria = (DOCS / "archive/governance/pre-1-0-versioning-audit.md").read_text(encoding="utf-8")
+        ledger = (
+            DOCS / "governance/pre-1-0-revision-ledger.md"
+        ).read_text(encoding="utf-8")
+        auditoria = (
+            DOCS / "archive/governance/pre-1-0-versioning-audit.md"
+        ).read_text(encoding="utf-8")
         versioning = (ROOT / "VERSIONING.md").read_text(encoding="utf-8")
         indice = (DOCS / "README.md").read_text(encoding="utf-8")
 
@@ -139,13 +90,22 @@ class TestVer2DocumentacionVigente(unittest.TestCase):
         self.assertIn(VERSION_CANONICA, ledger)
         self.assertIn("G071", auditoria)
         self.assertIn("G071 / E01 -> 0.0.71.01-beta", versioning)
-        self.assertIn("version_ledger.py", indice)
+        self.assertIn(
+            "[Ledger pre-1.0](governance/pre-1-0-revision-ledger.md)",
+            indice,
+        )
+
 
     def test_no_tags_revision_aware_retroactivos(self):
         versioning = (ROOT / "VERSIONING.md").read_text(encoding="utf-8")
+        releases = (ROOT / "RELEASES.md").read_text(encoding="utf-8")
 
         for version in range(22, 27):
             tag = f"v0.0.{version}-beta"
-            self.assertIn(tag, versioning)
+            self.assertIn(tag, releases)
 
-        self.assertIn("No crear tags revision-aware retrospectivos", versioning)
+        self.assertIn(
+            "No crear tags revision-aware retrospectivos para G001–G070",
+            versioning,
+        )
+

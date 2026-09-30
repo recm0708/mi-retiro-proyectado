@@ -114,13 +114,12 @@ class TestReleaseGovernanceContract(unittest.TestCase):
             "## Validación",
             "## Evidencia",
             "## Siguiente paso",
-            "todo tag formal nuevo",
-            "no recibe un Release retroactivo",
-            "gh release edit",
+            "Todo tag formal nuevo gobernado por este proceso debe tener un GitHub Release",
+            "No se crean tags revision-aware retrospectivos",
+            "Una edición descriptiva de un GitHub Release puede realizarse",
         ):
             with self.subTest(fragment=fragment):
                 self.assertIn(fragment, text)
-
     def test_estado_materializado_y_siguiente_global_sin_candidato(self):
         version, ledger, entry, _ = self.current_expected()
         self.assertEqual(ledger["accepted_count"], len(ledger["entries"]))

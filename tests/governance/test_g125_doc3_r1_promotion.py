@@ -49,16 +49,19 @@ class TestG125DOC3R1Promotion(unittest.TestCase):
             ),
         )
 
-    def test_registry_materializa_doc3_y_preserva_doc4_reservado(self):
+
+    def test_registry_materializa_doc3_y_expone_doc4_activo(self):
         registry = json.loads(
             (ROOT / "data/governance/work-block-registry.json").read_text(
                 encoding="utf-8"
             )
         )
         ids = {item["identifier"]: item for item in registry["identifiers"]}
+
         self.assertEqual("closed", ids["DOC.3"]["status"])
         self.assertIn("G125", ids["DOC.3"]["global_refs"])
-        self.assertEqual("planned_reserved", ids["DOC.4"]["status"])
+        self.assertEqual("in_progress", ids["DOC.4"]["status"])
+        self.assertEqual([], ids["DOC.4"]["global_refs"])
 
         plan2 = ids["PLAN.2"]
         self.assertEqual("closed", plan2["status"])
@@ -66,27 +69,44 @@ class TestG125DOC3R1Promotion(unittest.TestCase):
         self.assertIn("G126", plan2["global_refs"])
 
         candidate = registry["current_candidate"]
-        self.assertEqual(129, candidate["global_revision"])
-        self.assertEqual("0.129.3.0-beta", candidate["revision_aware"])
-        self.assertEqual("MANT.2", candidate["block"])
+        self.assertEqual("unassigned", candidate["state"])
+        self.assertIsNone(candidate["global_revision"])
+        self.assertIsNone(candidate["revision_aware"])
+        self.assertIsNone(candidate["block"])
         self.assertEqual(130, candidate["next_global_available"])
-        self.assertEqual("accepted_pending_integration", candidate["state"])
 
-    def test_manifest_actual_materializa_mant2_r2(self):
-        manifest = json.loads(
+        active = registry["active_phase"]
+        self.assertEqual("DOC.4", active["block"])
+        self.assertEqual("R1", active["revision"])
+        self.assertEqual(171, active["issue"])
+        self.assertEqual(129, active["base_global_revision"])
+
+
+    def test_manifest_actual_materializa_g129_y_deja_g130_libre(self):
+        data = json.loads(
             (ROOT / "data/governance/release-publication-manifest.json")
             .read_text(encoding="utf-8")
         )
-        self.assertEqual("0.129.3.0-beta", manifest["version"])
-        self.assertEqual("MANT.2", manifest["block"])
-        self.assertEqual("R3", manifest["revision"])
-        self.assertEqual(130, manifest["next_step"]["global_revision"])
-        self.assertIsNone(manifest["next_step"]["revision_aware"])
-        self.assertIsNone(manifest["next_step"]["block"])
-        self.assertIn(
-            "MANT.2 R3/#211",
-            manifest["next_step"]["description"],
-        )
+        self.assertEqual("0.129.3.0-beta", data["version"])
+        self.assertEqual("MANT.2", data["block"])
+        self.assertEqual("R3", data["revision"])
+
+        next_step = data["next_step"]
+        self.assertEqual(130, next_step["global_revision"])
+        self.assertIsNone(next_step["revision_aware"])
+        self.assertIsNone(next_step["block"])
+
+        for fragment in (
+            "G130",
+            "G129/E03/C0",
+            "DOC.4 R1/#171",
+            "sin candidato",
+        ):
+            with self.subTest(fragment=fragment):
+                self.assertIn(fragment, next_step["description"])
+
+        self.assertNotIn("pendiente de integración", next_step["description"])
+        self.assertNotIn("pendiente de publicación", next_step["description"])
 
     def test_evidencia_doc3_declara_materializacion(self):
         audit = (

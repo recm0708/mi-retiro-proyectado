@@ -114,43 +114,33 @@ class TestNOR2R7LocalArtifacts(unittest.TestCase):
         self.assertIn("_deliverables/", matrix)
         self.assertIn("MIGRAR LOCAL", matrix)
 
-    def test_version_y_estado_transversal(self):
+    def test_version_vigente_y_cierres_historicos_tienen_owners_distintos(self):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
-        docs = (ROOT / "docs/README.md").read_text(encoding="utf-8")
+        nor2 = (
+            ROOT
+            / "docs/audits/repository/"
+            "repository-normalization-final-audit-nor2-r8.md"
+        ).read_text(encoding="utf-8")
+        sec2 = (
+            ROOT / "docs/audits/security/sec2-final-closure.md"
+        ).read_text(encoding="utf-8")
+        version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
 
-        self.assertIn(
+        self.assertIn(f"**Versión de desarrollo:** `{version}`", readme)
+        for marcador in (
             "**NOR.2 R6:** cerrado",
-            readme,
-        )
-        self.assertIn(
             "**NOR.2 R7:** cerrado",
-            readme,
-        )
-        self.assertIn(
             "**NOR.2 R8:** cerrado",
-            readme,
-        )
-        # NOR.2 queda preservado por sus cierres revisionados R6-R8.
-        # No se exige una línea genérica redundante en el README vivo.
-        self.assertIn(
-            "**SEC.2:** R1 cerrado; hardening CodeQL del informe imprimible y normalización técnica de GitHub Actions completados.",
-            readme,
-        )
+            "**SEC.2:** R1 cerrado",
+        ):
+            self.assertNotIn(marcador, readme)
 
-        self.assertIn("NOR.2 R7", docs)
-        self.assertIn("NOR.2 R8", docs)
-        self.assertIn("SEC.2 R1–R6", docs)
-        self.assertIn("AUD.SEC2 R1", docs)
-
-        version = (
-            ROOT / "VERSION"
-        ).read_text(encoding="utf-8").strip()
+        self.assertIn("NOR.2 R7 figura cerrado", nor2)
+        self.assertIn("NOR.2 R8 figura activo", nor2)
+        self.assertIn("**Alcance completado:** SEC.2 R1–R6", sec2)
 
         from app.core.version import APP_VERSION
-        self.assertEqual(
-            APP_VERSION,
-            version,
-        )
+        self.assertEqual(APP_VERSION, version)
 
 
 if __name__ == "__main__":

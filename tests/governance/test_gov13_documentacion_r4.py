@@ -22,20 +22,51 @@ class TestGov13DocumentacionR4(unittest.TestCase):
     def setUp(self):
         self.version_base = "0.0.23-beta"
 
-    def test_documentos_r4_existen_y_siguen_version_canonica(self):
+
+    def test_documentos_r4_existen_y_respetan_su_tipo_documental(self):
+        live_contracts = {
+            "operations/release-process.md": "# Proceso de release",
+            "decisions/README.md": "# Registro de decisiones",
+        }
+
         for nombre in R4_DOCS:
             with self.subTest(nombre=nombre):
-                p = DOCS / nombre
-                self.assertTrue(p.is_file())
-                texto = p.read_text(encoding="utf-8")
-                self.assertIn(f"`{self.version_base}`", texto)
-                self.assertIn("GOV.1.3 R4", texto)
+                path = DOCS / nombre
+                self.assertTrue(path.is_file())
+                texto = path.read_text(encoding="utf-8")
 
-    def test_indice_enlaza_documentos_r4(self):
-        texto = (DOCS / "README.md").read_text(encoding="utf-8")
-        for nombre in R4_DOCS[:-1]:
+                if nombre in live_contracts:
+                    self.assertIn(live_contracts[nombre], texto)
+                    self.assertNotIn(
+                        "GOV.1.3 R4",
+                        texto,
+                        "un documento vivo no debe depender del marcador histórico R4",
+                    )
+                else:
+                    self.assertIn(f"`{self.version_base}`", texto)
+                    self.assertIn("GOV.1.3 R4", texto)
+
+
+    def test_indices_enlazan_documentos_r4_segun_su_owner(self):
+        indice = (DOCS / "README.md").read_text(encoding="utf-8")
+        archive = (DOCS / "archive/README.md").read_text(encoding="utf-8")
+
+        for nombre in (
+            "product/transparency.md",
+            "product/traceability-matrix.md",
+            "product/known-limitations.md",
+            "operations/third-party-dependencies.md",
+            "operations/release-process.md",
+            "decisions/README.md",
+        ):
             with self.subTest(nombre=nombre):
-                self.assertIn(f"({nombre})", texto)
+                self.assertIn(f"({nombre})", indice)
+
+        self.assertIn("[`technical/`](technical/)", archive)
+        self.assertNotIn(
+            "(archive/technical/calculation-audit.md)",
+            indice,
+        )
 
     def test_historia_r4_y_objetivo_vigente_usan_owners_correctos(self):
         history = (
@@ -43,7 +74,6 @@ class TestGov13DocumentacionR4(unittest.TestCase):
             / "archive/governance/"
             "historical-change-registry.md"
         ).read_text(encoding="utf-8")
-
         ledger = (
             DOCS
             / "governance/pre-1-0-revision-ledger.md"
@@ -53,21 +83,16 @@ class TestGov13DocumentacionR4(unittest.TestCase):
             "R4 — transparencia, auditoría y trazabilidad",
             history,
         )
-        self.assertIn(
-            "GOV.1.3 R4",
-            ledger,
-        )
-        self.assertIn(
-            "0.0.26.04-beta",
-            ledger,
-        )
+        self.assertIn("GOV.1.3 R4", ledger)
+        self.assertIn("0.0.26.04-beta", ledger)
 
         roadmap = (
             DOCS / "governance/roadmap.md"
         ).read_text(encoding="utf-8")
-
         self.assertIn("1.0.0.0", roadmap)
-        self.assertIn("PLAN.2 R2", roadmap)
+        self.assertIn("G129/E03/C0", roadmap)
+        self.assertIn("DOC.4 R1", roadmap)
+        self.assertNotIn("PLAN.2 R2", roadmap)
 
     def test_adr_ids_son_unicos_y_consecutivos(self):
         texto = (DOCS / "decisions/README.md").read_text(encoding="utf-8")
@@ -208,25 +233,48 @@ class TestGov13DocumentacionR4(unittest.TestCase):
         self.assertNotIn("actions/setup-python@v6", texto)
         self.assertNotIn("actions/setup-node@v6", texto)
 
+
     def test_proceso_release_define_gates(self):
-        texto = (DOCS / "operations/release-process.md").read_text(encoding="utf-8")
+        texto = (
+            DOCS / "operations/release-process.md"
+        ).read_text(encoding="utf-8")
+
         for esperado in (
-            "git diff --check",
-            "compileall",
-            "unittest",
+            "Quality Gate completo",
             "`VERSION`",
-            "`CHANGELOG.md`",
-            "`RELEASES.md`",
-            "CI remota",
-            "tag anotado",
+            "ledger",
+            "registry/manifest",
+            "git verify-commit HEAD",
+            "Repository Quality Gate",
+            "Python Compatibility",
+            'git tag -s "v$version"',
+            'git tag -v "v$version"',
+            "GitHub Release",
         ):
-            self.assertIn(esperado, texto)
+            with self.subTest(esperado=esperado):
+                self.assertIn(esperado, texto)
+
+
 
     def test_proceso_release_prohibe_mover_tag(self):
-        texto = (DOCS / "operations/release-process.md").read_text(encoding="utf-8")
-        self.assertIn("no se mueve", texto)
-        self.assertIn("no se reutiliza", texto)
-        self.assertIn("no crear tag", texto)
+        texto = (
+            DOCS / "operations/release-process.md"
+        ).read_text(encoding="utf-8")
+
+        self.assertIn("un tag publicado no se mueve", texto)
+        self.assertIn("reutiliza ni elimina", texto)
+        self.assertIn(
+            "una corrección posterior sigue el modelo revision-aware",
+            texto,
+        )
+        self.assertIn(
+            "El tag se deriva exactamente de `VERSION`",
+            texto,
+        )
+        self.assertIn(
+            "revalidar:",
+            texto,
+        )
 
     def test_documentos_r4_sin_espacios_finales(self):
         errores = []

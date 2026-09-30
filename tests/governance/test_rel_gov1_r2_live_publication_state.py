@@ -66,35 +66,47 @@ class TestRelGovR2LivePublicationState(unittest.TestCase):
         )
         self.assertIn("v0.1.16.05-beta", releases)
 
-    def test_security_preserva_historia_y_declara_estado_actual(self):
-        text = (ROOT / "SECURITY.md").read_text(encoding="utf-8")
-        for fragment in (
-            "| `0.1.18.04-beta` | Beta previa G118/E04 publicada",
-            "| `0.1.19.05-beta` | Beta previa G119/E05 publicada",
-            "| `0.1.20.01-beta` | Beta previa G120/E01 publicada",
-            "| `0.1.21.01-beta` | Beta previa G121/E01 integrada",
-            "| `0.1.22.01-beta` | Beta previa G122/E01 publicada",
-            "| `0.1.23.01-beta` | Beta previa G123/E01 publicada",
-            "| `0.1.24.13-beta` | Beta previa G124/E13 publicada",
-            "| `0.1.25.01-beta` | Beta previa publicada G125/E01",
-        ):
-            with self.subTest(fragment=fragment):
-                self.assertIn(fragment, text)
+    def test_security_delega_historia_y_declara_estado_actual(self):
+        security = (ROOT / "SECURITY.md").read_text(encoding="utf-8")
+        releases = (ROOT / "RELEASES.md").read_text(encoding="utf-8")
+        version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
 
+        self.assertIn("**Etapa soportada:** desarrollo beta", security)
+        self.assertIn(
+            f"**Versión de desarrollo actual:** `{version}`",
+            security,
+        )
+        self.assertIn(
+            "Las versiones beta anteriores, tags y Releases se conservan como historia",
+            security,
+        )
+
+        for historical in (
+            "0.1.18.04-beta",
+            "0.1.19.05-beta",
+            "0.1.20.01-beta",
+            "0.1.21.01-beta",
+            "0.1.22.01-beta",
+            "0.1.23.01-beta",
+            "0.1.24.13-beta",
+            "0.1.25.01-beta",
+        ):
+            with self.subTest(historical=historical):
+                self.assertIn(historical, releases)
+                self.assertNotIn(historical, security)
     def test_proceso_documenta_automatizacion_r2(self):
         text = (ROOT / "docs/operations/release-process.md").read_text(
             encoding="utf-8"
         )
         for fragment in (
             "data/governance/release-publication-manifest.json",
-            "scripts\\release_publication.py --check-manifest",
-            "Publicar GitHub Release",
-            "falla cerrado",
+            "python scripts/release_publication.py --check-manifest",
+            "publicación del GitHub Release",
+            "comportamiento cerrado",
             "no crea commits post-publicación",
         ):
             with self.subTest(fragment=fragment):
                 self.assertIn(fragment, text)
-
     def test_scripts_readme_documenta_release_publication(self):
         text = (ROOT / "scripts/README.md").read_text(encoding="utf-8")
         self.assertIn("release_publication.py", text)
@@ -125,6 +137,7 @@ class TestRelGovR2LivePublicationState(unittest.TestCase):
         releases = (ROOT / "RELEASES.md").read_text(encoding="utf-8")
         security = (ROOT / "SECURITY.md").read_text(encoding="utf-8")
         versioning = (ROOT / "VERSIONING.md").read_text(encoding="utf-8")
+        version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
 
         for fragment in (
             "v0.1.18.04-beta",
@@ -133,10 +146,20 @@ class TestRelGovR2LivePublicationState(unittest.TestCase):
             "378842155",
         ):
             with self.subTest(fragment=fragment):
-                self.assertIn(fragment, readme + releases)
+                self.assertIn(fragment, releases)
 
-        self.assertIn("Beta previa G118/E04 publicada", security)
-        self.assertIn("G119/E05", versioning)
+        self.assertIn(
+            f"**Versión de desarrollo actual:** `{version}`",
+            security,
+        )
+        self.assertIn(
+            "Las versiones beta anteriores, tags y Releases se conservan como historia",
+            security,
+        )
+        self.assertIn(
+            "No crear tags revision-aware retrospectivos para G001–G070",
+            versioning,
+        )
 
         live_state = "\n".join((
             readme,
@@ -153,7 +176,6 @@ class TestRelGovR2LivePublicationState(unittest.TestCase):
         ):
             with self.subTest(stale=stale):
                 self.assertNotIn(stale, live_state)
-
 
 if __name__ == "__main__":
     unittest.main()

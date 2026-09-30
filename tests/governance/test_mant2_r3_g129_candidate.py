@@ -27,22 +27,54 @@ class TestMANT2R3G129Candidate(unittest.TestCase):
             (entry["global_revision"], entry["block"], entry["edition"], entry["functional_revision"], entry["identifier_schema"], entry["correction_ordinal"], entry["maintenance_ordinal"], entry["revision_aware"]),
         )
 
-    def test_registry_y_manifest_g129(self):
-        reg = json.loads((ROOT / "data/governance/work-block-registry.json").read_text(encoding="utf-8"))
+
+    def test_registry_y_manifest_g129_publicado(self):
+        reg = json.loads(
+            (ROOT / "data/governance/work-block-registry.json")
+            .read_text(encoding="utf-8")
+        )
         self.assertEqual(129, reg["accepted_baseline"]["global_revision"])
         self.assertEqual("MANT.2", reg["accepted_baseline"]["block"])
-        self.assertEqual("accepted_pending_integration", reg["current_candidate"]["state"])
-        self.assertEqual(129, reg["current_candidate"]["global_revision"])
-        self.assertEqual(130, reg["current_candidate"]["next_global_available"])
+        self.assertEqual("0.129.3.0-beta", reg["accepted_baseline"]["revision_aware"])
+
+        candidate = reg["current_candidate"]
+        self.assertEqual("unassigned", candidate["state"])
+        self.assertIsNone(candidate["global_revision"])
+        self.assertIsNone(candidate["block"])
+        self.assertEqual(130, candidate["next_global_available"])
+
         ids = {item["identifier"]: item for item in reg["identifiers"]}
-        self.assertEqual("accepted_r3_pending_integration", ids["MANT.2"]["status"])
+        self.assertEqual("closed_r3_published", ids["MANT.2"]["status"])
         self.assertEqual(["G123", "G127", "G129"], ids["MANT.2"]["global_refs"])
-        man = json.loads((ROOT / "data/governance/release-publication-manifest.json").read_text(encoding="utf-8"))
-        self.assertEqual((129, 3, 2, 0, 3, "0.129.3.0-beta", "MANT.2", "R3"), (man["global_revision"], man["edition"], man["identifier_schema"], man["correction_ordinal"], man["maintenance_ordinal"], man["version"], man["block"], man["revision"]))
+        self.assertEqual("in_progress", ids["DOC.4"]["status"])
+
+        active = reg["active_phase"]
+        self.assertEqual("DOC.4", active["block"])
+        self.assertEqual("R1", active["revision"])
+        self.assertEqual(129, active["base_global_revision"])
+
+        man = json.loads(
+            (ROOT / "data/governance/release-publication-manifest.json")
+            .read_text(encoding="utf-8")
+        )
+        self.assertEqual(
+            (129, 3, 2, 0, 3, "0.129.3.0-beta", "MANT.2", "R3"),
+            (
+                man["global_revision"],
+                man["edition"],
+                man["identifier_schema"],
+                man["correction_ordinal"],
+                man["maintenance_ordinal"],
+                man["version"],
+                man["block"],
+                man["revision"],
+            ),
+        )
         self.assertEqual(130, man["next_step"]["global_revision"])
         self.assertIsNone(man["next_step"]["revision_aware"])
         self.assertIsNone(man["next_step"]["block"])
-
+        self.assertIn("DOC.4 R1/#171", man["next_step"]["description"])
+        self.assertIn("sin candidato", man["next_step"]["description"])
 
 if __name__ == "__main__":
     unittest.main()

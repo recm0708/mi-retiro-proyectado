@@ -14,37 +14,22 @@ MANIFEST = ROOT / "data/governance/release-publication-manifest.json"
 
 
 class TestDOC3R1PublishedMachineState(unittest.TestCase):
-    def test_registry_preserva_g125_publicado_y_g126_libre(self):
+
+    def test_registry_preserva_g125_y_expone_baseline_g129_doc4_activo(self):
         data = json.loads(REGISTRY.read_text(encoding="utf-8"))
         ids = {item["identifier"]: item for item in data["identifiers"]}
 
         self.assertEqual(2, data["schema_version"])
 
         candidate = data["current_candidate"]
-        self.assertEqual(
-            (
-                "accepted_pending_integration",
-                129,
-                "0.129.3.0-beta",
-                "MANT.2",
-                "R3",
-                "dependency_maintenance_post_g128",
-                3,
-                211,
-                130,
-            ),
-            (
-                candidate["state"],
-                candidate["global_revision"],
-                candidate["revision_aware"],
-                candidate["block"],
-                candidate["revision"],
-                candidate["revision_scope"],
-                candidate["edition"],
-                candidate["planning_issue"],
-                candidate["next_global_available"],
-            ),
-        )
+        self.assertEqual("unassigned", candidate["state"])
+        self.assertIsNone(candidate["global_revision"])
+        self.assertIsNone(candidate["revision_aware"])
+        self.assertIsNone(candidate["block"])
+        self.assertIsNone(candidate["revision"])
+        self.assertIsNone(candidate["edition"])
+        self.assertIsNone(candidate["planning_issue"])
+        self.assertEqual(130, candidate["next_global_available"])
 
         baseline = data["accepted_baseline"]
         self.assertEqual(
@@ -59,30 +44,15 @@ class TestDOC3R1PublishedMachineState(unittest.TestCase):
         )
 
         active = data["active_phase"]
-        self.assertEqual(
-            (
-                "MANT.2",
-                "R3",
-                211,
-                "accepted_pending_integration",
-                129,
-                "0.129.3.0-beta",
-                128,
-                "0.128.2.0-beta",
-                171,
-            ),
-            (
-                active["block"],
-                active["revision"],
-                active["issue"],
-                active["state"],
-                active["global_revision"],
-                active["revision_aware"],
-                active["base_global_revision"],
-                active["base_revision_aware"],
-                active["next_phase_issue"],
-            ),
-        )
+        self.assertEqual("DOC.4", active["block"])
+        self.assertEqual("R1", active["revision"])
+        self.assertEqual(171, active["issue"])
+        self.assertEqual("in_progress", active["state"])
+        self.assertIsNone(active["global_revision"])
+        self.assertIsNone(active["revision_aware"])
+        self.assertEqual(129, active["base_global_revision"])
+        self.assertEqual("0.129.3.0-beta", active["base_revision_aware"])
+        self.assertEqual(142, active["next_phase_issue"])
 
         doc3 = ids["DOC.3"]
         self.assertEqual("closed", doc3["status"])
@@ -95,7 +65,7 @@ class TestDOC3R1PublishedMachineState(unittest.TestCase):
         self.assertIn("G126", plan2["global_refs"])
 
         doc4 = ids["DOC.4"]
-        self.assertEqual("planned_reserved", doc4["status"])
+        self.assertEqual("in_progress", doc4["status"])
         self.assertEqual([], doc4["global_refs"])
 
     def test_ledger_preserva_g125_y_estado_actual_g127_e02(self):
@@ -130,7 +100,7 @@ class TestDOC3R1PublishedMachineState(unittest.TestCase):
             ),
         )
 
-    def test_manifest_actual_materializa_mant2_r2_y_deja_g128_libre(self):
+    def test_manifest_actual_materializa_mant2_r3_y_deja_g130_libre(self):
         data = json.loads(MANIFEST.read_text(encoding="utf-8"))
         self.assertEqual("0.129.3.0-beta", data["version"])
         self.assertEqual("MANT.2", data["block"])
@@ -141,11 +111,11 @@ class TestDOC3R1PublishedMachineState(unittest.TestCase):
         self.assertIsNone(next_step["revision_aware"])
         self.assertIsNone(next_step["block"])
         for fragment in (
-            "G129/E03/C0",
-            "MANT.2 R3/#211",
             "G130",
-            "#166",
+            "sin candidato",
+            "VERSION preasignados",
             "DOC.4 R1/#171",
+            "G129/E03/C0",
         ):
             with self.subTest(fragment=fragment):
                 self.assertIn(fragment, next_step["description"])

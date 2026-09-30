@@ -56,10 +56,17 @@ class TestUX46eRenumeracionDocumental(unittest.TestCase):
         )
 
         self.assertIn(
+            "G129/E03/C0",
+            self.roadmap,
+        )
+        self.assertIn(
+            "DOC.4 R1 / #171",
+            self.roadmap,
+        )
+        self.assertNotIn(
             "PLAN.2 R2",
             self.roadmap,
         )
-
     def test_r5_r6_r7_permanecen_en_ledger_historico(self):
         ledger = json.loads(
             (

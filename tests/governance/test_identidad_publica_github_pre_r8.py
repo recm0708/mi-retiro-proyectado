@@ -30,16 +30,17 @@ class TestIdentidadPublicaGithubPreR8(unittest.TestCase):
         cls.roadmap = (DOCS / "governance/roadmap.md").read_text(encoding="utf-8")
         cls.validation = (DOCS / "operations/validation.md").read_text(encoding="utf-8")
 
-    def test_readme_usa_logo_y_checkpoint_no_promovio_beta_publica(self):
+    def test_readme_usa_logo_y_separa_checkpoint_publico_historico(self):
         self.assertIn("assets/brand/logos/logo-mark-512.png", self.readme)
-        self.assertIn("repositorio de código público", self.readme)
-        self.assertIn("Social Preview e identidad visual oficial configurados", self.readme)
-        self.assertIn("0.1.0-beta.1", self.readme)
+        self.assertIn("repositorio público no", self.readme)
+        self.assertNotIn("Social Preview e identidad visual oficial configurados", self.readme)
+        self.assertNotIn("0.1.0-beta.1", self.readme)
         self.assertIn(
             "Checkpoint pre-R8 — identidad visual y repositorio público",
             self.changelog,
         )
         self.assertIn("0.0.24-beta", self.changelog)
+        self.assertIn("**Visibilidad actual:** pública", self.prep)
 
     def test_identidad_visual_define_fuente_derivados_runtime_y_social(self):
         for esperado in (
@@ -65,12 +66,13 @@ class TestIdentidadPublicaGithubPreR8(unittest.TestCase):
         self.assertIn("`sebd-panama`", self.prep)
         self.assertIn("assets/social/github-social-preview.png", self.prep)
 
+
     def test_security_usa_private_vulnerability_reporting_como_canal_activo(self):
+        self.assertIn("## Reportar una vulnerabilidad", self.security)
+        self.assertIn("Canal preferido:", self.security)
         self.assertIn("GitHub Private vulnerability reporting", self.security)
-        self.assertIn("Esta función está habilitada", self.security)
-        self.assertIn("Push protection", self.security)
-        self.assertIn("CodeQL con Default setup", self.security)
-        self.assertNotIn("Si la visibilidad/plan permite habilitarla en el futuro", self.security)
+        self.assertIn("CodeQL", self.security)
+        self.assertIn("secret scanning y push protection", self.security)
 
     def test_support_no_envia_vulnerabilidades_a_issues_publicos(self):
         self.assertIn("No publiques detalles explotables en un issue", self.support)
@@ -88,13 +90,15 @@ class TestIdentidadPublicaGithubPreR8(unittest.TestCase):
         self.assertIn("no constituye un despliegue remoto", self.transparency)
         self.assertIn("no declara completada la primera beta pública", self.transparency)
 
-    def test_versioning_separa_visibilidad_de_version_de_producto(self):
-        self.assertIn("### 3.1. Desarrollo pre-beta", self.versioning)
+
+    def test_documento_publico_separa_visibilidad_de_version_de_producto(self):
+        self.assertIn("**Visibilidad actual:** pública", self.prep)
         self.assertIn(
-            "visibilidad pública del repositorio de código no cambia por sí sola",
-            self.versioning,
+            "La publicación del **repositorio de código** no equivale a declarar una versión oficial",
+            self.prep,
         )
-        self.assertIn("visibilidad del repositorio", self.versioning)
+        self.assertIn("`1.0.0.0`", self.prep)
+        self.assertIn("0.0.N-beta", self.prep)
 
     def test_seguridad_privacidad_documenta_controles_publicos_sin_cambiar_runtime(self):
         self.assertIn(
@@ -109,32 +113,23 @@ class TestIdentidadPublicaGithubPreR8(unittest.TestCase):
         ):
             self.assertIn(esperado, self.security_privacy)
 
+
     def test_identidad_pre_r8_y_estado_vivo_usan_owners_correctos(self):
+        self.assertIn("product/visual-identity.md", self.index)
+        self.assertNotIn("Social Preview", self.index)
+
+        self.assertIn("**Visibilidad actual:** pública", self.prep)
         self.assertIn(
-            "product/visual-identity.md",
-            self.index,
-        )
-        self.assertIn(
-            "repositorio público",
-            self.index,
-        )
-        self.assertIn(
-            "Social Preview",
-            self.index,
+            "assets/social/github-social-preview.png",
+            self.prep,
         )
 
         self.assertIn(
             "Checkpoint pre-R8 — identidad visual y repositorio público",
             self.changelog,
         )
-        self.assertIn(
-            "624 pruebas en `OK`",
-            self.changelog,
-        )
-        self.assertIn(
-            "**624 pruebas en `OK`**",
-            self.validation,
-        )
+        self.assertIn("624 pruebas en `OK`", self.changelog)
+        self.assertIn("**624 pruebas en `OK`**", self.validation)
 
         ledger = json.loads(
             (
@@ -143,42 +138,22 @@ class TestIdentidadPublicaGithubPreR8(unittest.TestCase):
                 "pre-1-0-revision-ledger.json"
             ).read_text(encoding="utf-8")
         )
-
         g48 = next(
             item
             for item in ledger["entries"]
             if item["global_revision"] == 48
         )
-
-        self.assertEqual(
-            "UX.4.6e",
-            g48["block"],
-        )
+        self.assertEqual("UX.4.6e", g48["block"])
         self.assertEqual(
             "identidad visual oficial y publicación",
             g48["state"],
         )
-        self.assertIn(
-            "PR #20",
-            g48["evidence"],
-        )
-        self.assertIn(
-            "624 pruebas",
-            g48["evidence"],
-        )
+        self.assertIn("PR #20", g48["evidence"])
+        self.assertIn("624 pruebas", g48["evidence"])
 
-        roadmap = (
-            DOCS / "governance/roadmap.md"
-        ).read_text(encoding="utf-8")
-
-        self.assertIn(
-            "PLAN.2 R2",
-            roadmap,
-        )
-        self.assertIn(
-            "G125/E01",
-            roadmap,
-        )
+        self.assertIn("G129/E03/C0", self.roadmap)
+        self.assertIn("DOC.4 R1", self.roadmap)
+        self.assertNotIn("PLAN.2 R2", self.roadmap)
 
 if __name__ == "__main__":
     unittest.main()

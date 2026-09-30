@@ -58,7 +58,7 @@ class TestUX46ePreparacionPublica(unittest.TestCase):
         self.assertNotIn("repositorio público", self.terminos.lower())
         self.assertNotIn("disponible públicamente", self.terminos.lower())
 
-    def test_readme_muestra_badges_reales_y_estado_actual(self):
+    def test_readme_muestra_badges_reales_sin_repetir_checkpoint_publicacion(self):
         for workflow in (
             "quality-gate.yml",
             "dependency-security.yml",
@@ -80,9 +80,9 @@ class TestUX46ePreparacionPublica(unittest.TestCase):
         )
         self.assertIn("Python-3.13%20%7C%203.14", self.readme)
         self.assertIn("licencia-propietaria", self.readme)
-        self.assertIn("UX.4.6e", self.readme)
-        self.assertIn("21 labels y 20/20 topics configurados", self.readme)
-        self.assertIn("`sebd-panama` adoptado", self.readme)
+        self.assertNotIn("UX.4.6e", self.readme)
+        self.assertNotIn("21 labels y 20/20 topics configurados", self.readme)
+        self.assertNotIn("`sebd-panama` adoptado", self.readme)
 
     def test_documento_publicacion_define_topics_aprobados(self):
         topics = (

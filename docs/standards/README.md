@@ -1,79 +1,93 @@
 # Estándares del repositorio
 
-**Proyecto:** Mi Retiro Proyectado
-**Fase:** NOR.1 — Definición de estándares del repositorio
+**Estado:** vigente
+**Clasificación:** estándar / navegación
 
 ## Propósito
 
-Esta carpeta contiene los documentos canónicos que establecen las reglas de
-organización, nomenclatura y mantenimiento del repositorio.
+Esta carpeta reúne las reglas canónicas para organizar, nombrar, documentar,
+mantener y retirar artefactos del repositorio.
 
-El objetivo es que cualquier archivo, carpeta, documento, componente de código,
-prueba o evidencia creada en el futuro siga una estructura uniforme y que NOR.2
-pueda auditar el árbol existente contra reglas determinísticas.
+Los estándares se aplican al estado actual del árbol y deben mantenerse como
+contratos durables. Las fases que originaron una regla se conservan en Git,
+auditorías o documentación histórica cuando esa procedencia siga siendo
+relevante; no es necesario repetir su cronología en este índice.
 
 ## Alcance
 
-Los estándares definidos aquí aplican a:
+Los estándares cubren:
 
 - estructura de carpetas;
-- nombres de archivos;
+- nombres de archivos y componentes;
 - documentación;
-- código fuente;
+- código y comentarios;
 - archivos de configuración;
-- datos;
+- datos versionados;
 - pruebas;
 - evidencias;
 - raíz del repositorio;
 - artefactos locales no versionados;
-- procesos de reemplazo y migración.
+- creación, sustitución, migración, archivo y eliminación de artefactos;
+- identificadores de bloques de trabajo.
 
 ## Documentos canónicos
 
-- [Estructura del repositorio](repository-structure.md) — estructura y responsabilidades.
-- [Convenciones de nombres](naming-conventions.md) — reglas determinísticas de nombres.
-- [Estándares de archivos](file-standards.md) — requisitos mínimos por tipo de archivo.
-- [Estándares de documentación](documentation-standards.md) — documentación viva, histórica y referencias.
-- [Política de estilo y lint de Markdown](markdown-style-and-lint.md) — reglas de markdownlint, excepciones acotadas y prevención para documentación nueva.
-- [Ciclo de vida de archivos y componentes](artifact-lifecycle.md) — creación, sustitución, archivo y eliminación.
-- [Raíz y artefactos locales](root-and-local-artifacts.md) — raíz, evidencias y artefactos locales.
-- [Identificadores de bloques de trabajo](work-block-identifiers.md) — familias, bloques, revisiones y reglas de asignación.
+- [Estructura del repositorio](repository-structure.md) — organización y
+  responsabilidades de las áreas canónicas.
+- [Convenciones de nombres](naming-conventions.md) — reglas para nombres de
+  archivos, carpetas y componentes.
+- [Estándares de archivos](file-standards.md) — requisitos mínimos por tipo de
+  archivo.
+- [Estándares de documentación](documentation-standards.md) — clasificación,
+  autoridad, mantenimiento, historia y referencias documentales.
+- [Política de estilo y lint de Markdown](markdown-style-and-lint.md) — formato,
+  markdownlint y excepciones acotadas.
+- [Ciclo de vida de archivos y componentes](artifact-lifecycle.md) — creación,
+  sustitución, archivo y eliminación.
+- [Raíz y artefactos locales](root-and-local-artifacts.md) — contenido permitido
+  en raíz y tratamiento de elementos locales.
+- [Estándar de código y comentarios](code-and-comments.md) — comentarios,
+  docstrings y documentación interna.
+- [Estructura de archivos por extensión](file-structure-by-extension.md) —
+  organización interna y comentarios permitidos según extensión.
+- [Identificadores de bloques de trabajo](work-block-identifiers.md) — familias,
+  bloques, revisiones y asignación de identificadores.
 
-Cuando una política técnica anterior contradiga estos documentos, prevalece el
-estándar NOR.1 más reciente. Las reglas especializadas no contradictorias
-continúan vigentes.
+## Autoridad y aplicación
 
-## Idioma de la documentación
+Cada estándar tiene autoridad sobre el tema que declara en su propósito. Si dos
+documentos parecen definir la misma regla, debe eliminarse la duplicación o
+declararse expresamente cuál es la autoridad principal.
 
-El contenido de los documentos del proyecto se redacta en español.
+Las políticas especializadas pueden complementar una regla general, pero no
+contradecirla silenciosamente. Una excepción debe tener alcance mínimo,
+justificación explícita y, cuando corresponda, una validación reproducible.
 
-Se conservan términos técnicos en su idioma original cuando corresponda, por
-ejemplo: GitHub, Python, FastAPI, workflow, commit, branch, pull request, API,
-framework y runtime.
+Los controles automatizados que implementen estos estándares forman parte del
+contrato, pero el texto canónico de la regla permanece en la documentación
+correspondiente. Los auditores y pruebas no deben obligar a documentos vivos a
+conservar cronologías o frases históricas que no formen parte de su función.
 
-Los nombres técnicos de archivos, carpetas y rutas mantienen la convención
-definida por este estándar.
+## Idioma
 
-## Aplicación
+La documentación del proyecto se redacta en español. Los términos técnicos se
+mantienen en su forma oficial cuando resulte más preciso, por ejemplo: GitHub,
+Python, FastAPI, workflow, commit, branch, pull request, API, framework y
+runtime.
 
-NOR.1 consolidó en R7 la definición inicial de las reglas y quedó cerrado
-definitivamente en R8/G112-E07 al incorporar el gobierno canónico de
-identificadores de bloques de trabajo.
+Los nombres técnicos de archivos, carpetas y rutas siguen sus convenciones
+específicas y no se traducen solo por razones de idioma.
 
-NOR.2 auditó y normalizó el repositorio existente contra estas reglas y quedó
-cerrado después de completar R1–R8. SEC.2 quedó cerrado después de R1–R6;
-AUD.SEC2 R1 aplicó nuevamente estos estándares al saneamiento post-cierre.
+## Mantenimiento
 
-DOC.1 R2, ya cerrado, incorporó `scripts/audit_markdown.py` como control
-permanente. En el estado vigente, su ejecución forma parte del
-`Repository Quality Gate`; `Python Compatibility` se conserva como required
-check independiente y la evidencia histórica del antiguo workflow Markdown no
-se reescribe.
+Cuando cambie un estándar:
 
-## Estándares especializados consolidados en NOR.2 R4
+1. se actualiza la autoridad canónica;
+2. se revisan los documentos dependientes;
+3. se ajustan auditores o pruebas que implementen la regla;
+4. se actualizan plantillas si el cambio afecta nuevos artefactos;
+5. se conserva evidencia histórica fuera del documento vivo cuando sea
+   necesaria para trazabilidad.
 
-- [Estándar de código y comentarios](code-and-comments.md) — comentarios, docstrings y documentación interna por tipo de código.
-- [Política de estructura de archivos por extensión](file-structure-by-extension.md) — estructura interna y comentarios permitidos por extensión.
-
-Estos documentos complementan los estándares determinísticos de NOR.1 y no
-restablecen las rutas heredadas de la raíz de `docs/`.
+El índice general de documentación y su mapa de autoridades se encuentran en
+[Documentación de Mi Retiro Proyectado](../README.md).

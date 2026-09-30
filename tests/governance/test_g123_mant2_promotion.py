@@ -35,29 +35,33 @@ class TestG123MANT2Promotion(unittest.TestCase):
         self.assertEqual("R1", entry["functional_revision"])
         self.assertEqual("0.1.23.01-beta", entry["revision_aware"])
 
-    def test_registry_y_manifest_preservan_g123_y_reconocen_g125(self):
+
+    def test_registry_y_manifest_preservan_g123_y_estado_actual_g129(self):
         registry = json.loads(
             (ROOT / "data/governance/work-block-registry.json")
             .read_text(encoding="utf-8")
         )
         ids = {x["identifier"]: x for x in registry["identifiers"]}
 
-        self.assertEqual(
-            "accepted_r3_pending_integration",
-            ids["MANT.2"]["status"],
-        )
+        self.assertEqual("closed_r3_published", ids["MANT.2"]["status"])
         self.assertEqual(
             ["G123", "G127", "G129"],
             ids["MANT.2"]["global_refs"],
         )
-        self.assertIn("PR #168", ids["MANT.2"]["evidence"])
         self.assertIn("G123/E01", ids["MANT.2"]["evidence"])
         self.assertIn("Issue #206", ids["MANT.2"]["evidence"])
         self.assertIn("Issue #211", ids["MANT.2"]["evidence"])
-        self.assertEqual(
-            130,
-            registry["current_candidate"]["next_global_available"],
-        )
+
+        candidate = registry["current_candidate"]
+        self.assertEqual("unassigned", candidate["state"])
+        self.assertIsNone(candidate["global_revision"])
+        self.assertIsNone(candidate["block"])
+        self.assertEqual(130, candidate["next_global_available"])
+
+        active = registry["active_phase"]
+        self.assertEqual("DOC.4", active["block"])
+        self.assertEqual("R1", active["revision"])
+        self.assertEqual(129, active["base_global_revision"])
 
         manifest = json.loads(
             (ROOT / "data/governance/release-publication-manifest.json")
@@ -67,6 +71,8 @@ class TestG123MANT2Promotion(unittest.TestCase):
         self.assertEqual("MANT.2", manifest["block"])
         self.assertEqual("R3", manifest["revision"])
         self.assertEqual(130, manifest["next_step"]["global_revision"])
+        self.assertIsNone(manifest["next_step"]["revision_aware"])
+        self.assertIsNone(manifest["next_step"]["block"])
 
     def test_dependencias_historicas_g123_preservadas(self):
         releases = (ROOT / "RELEASES.md").read_text(encoding="utf-8")

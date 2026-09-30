@@ -45,13 +45,17 @@ class TestPLAN2R1History(unittest.TestCase):
         audit = ROOT / "docs/audits/documentation/post-g113-live-documentation-audit-plan2-r1.md"
         self.assertTrue(audit.is_file())
 
+
     def test_matriz_viva_no_es_fuente_historica_de_r1(self):
         matrix = (
             ROOT / "docs/governance/pre-1-0-pending-matrix.md"
         ).read_text(encoding="utf-8")
-        self.assertIn("PLAN.2 R2", matrix)
-        self.assertIn("1.0.0.0", matrix)
 
+        self.assertIn("DOC.4 R1 / #171", matrix)
+        self.assertIn("G129/E03/C0", matrix)
+        self.assertIn("1.0.0.0", matrix)
+        self.assertNotIn("PLAN.2 R2", matrix)
+        self.assertNotIn("G114", matrix)
 
 if __name__ == "__main__":
     unittest.main()

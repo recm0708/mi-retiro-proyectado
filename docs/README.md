@@ -1,372 +1,192 @@
-# Índice de documentación
-
-**Estado:** vigente
-**Versión de aplicación:** `0.129.3.0-beta` — VER.2 R6/G128-E02-C0 aceptado localmente; integración/publicación pendiente; G129 libre
-**Último tag formal legacy:** `v0.0.26-beta`
-**Última actualización transversal:** VER.2 R6/#164 — CP5.1 cerrado; CP6 en curso — 2026-09-21
-**Cierres históricos preservados:** UX.4.6i / PR #34 — 841 pruebas; UX.4.6e R9 — `v0.0.25-beta`
-
-<!-- NOR3-G122-PROMOTION:START -->
-## Registro histórico — promoción G122-E01 post-NOR.3
-
-> **Checkpoint histórico preservado.** Este bloque describe el estado inmediatamente posterior a la integración de NOR.3 y anterior a MANT.2 R1 / MANT.1 R8. No representa el estado vigente del repositorio; las secciones vigentes posteriores de este documento tienen precedencia.
-
-- `VERSION` materializa `0.1.22.01-beta` para NOR.3 R8 / G122-E01.
-- NOR.3 R1–R8 quedó integrado/aceptado mediante PR #162 / merge
-  `b97cf61763479b80b8e8724b878089e8bb20fa00`.
-- La revalidación automática de `main` quedó GREEN: Repository Quality Gate,
-  Visual & Accessibility y CodeQL finalizaron en `success`.
-- G123 es el siguiente Global disponible, pero **no tiene candidato ni bloque
-  preasignado**.
-- PERSIST.1 permanece planificado y no iniciado, sin Global preasignado.
-- `v0.1.21.01-beta` / G121/E01 permanece como última publicación revision-aware
-  hasta completar el tag/release firmado de G122/E01.
-- `v0.1.22.01-beta` queda pendiente de creación/firma local y de la
-  verificación/publicación gobernada por REL.GOV.1.
-<!-- NOR3-G122-PROMOTION:END -->
-
-<!-- POST-NOR3-INTERMEDIATE-SEQUENCE:START -->
-## Estado vigente — candidato VER.2 R6 materializado
-
-MANT.2 R2/#206 permanece publicado como **G127/E02** (`0.1.27.02-beta`) sobre
-`main@2df33a5c24d1c7cea1a6db91539a92da02c91500`, mediante PR #207,
-tag firmado `v0.1.27.02-beta` y GitHub Release prerelease 392412590.
-
-El preflight #166 posterior a G127 quedó CLEAN. VER.2 R6/#164 alcanzó un
-candidato material aceptable y **G128/E02/C0 queda materializado localmente
-como `0.128.2.0-beta`** dentro del Draft PR #208.
-
-G128 está aceptado/versionado pero todavía **no está publicado**: faltan el
-checkpoint firmado, auditoría remota, integración a `main`, revalidación,
-tag firmado y GitHub Release prerelease.
-
-**G129 es el siguiente Global aritmético** y permanece libre, sin candidato,
-bloque ni `VERSION` preasignados. Después de publicar VER.2 y repetir #166
-limpio corresponde **DOC.4 R1 / #171**.
-<!-- POST-NOR3-INTERMEDIATE-SEQUENCE:END -->
-
-
-Este archivo es el punto de entrada para la documentación técnica, funcional, normativa, de privacidad, validación y auditoría de Mi Retiro Proyectado.
-
-## Estado de normalización del repositorio
-
-**Estado actual:** G128/E02/C0 permanece publicado como `0.128.2.0-beta`; MANT.2 R3/#211 materializó G129/E03/C0 como `0.129.3.0-beta` en Draft PR #212, pendiente de integración/publicación; G130 permanece libre.
-
-Estado de la fase:
-
-- **NOR.1:** cerrado en R8 y aceptado como G112/E07; su política de identificadores queda vigente.
-- **NOR.2 R1:** cerrado; línea base integral del repositorio.
-- **NOR.2 R2:** cerrado; matriz de decisión de migración.
-- **NOR.2 R3:** cerrado; runtime y configuración técnica normalizados.
-- **NOR.2 R4:** cerrado; documentación viva migrada a áreas canónicas.
-- **NOR.2 R5:** cerrado; 36 documentos históricos consolidados en `docs/archive/`.
-- **NOR.2 R6:** cerrado; ledger y datos de alto impacto normalizados.
-- **NOR.2 R7:** cerrado; artefactos locales heredados migrados y depurados.
-- **NOR.2 R8:** cerrado; auditoría integral y cierre formal integrados mediante PR #74.
-- **DOC.1 R2:** cerrado; auditoría integral Markdown post-NOR.2 y controles permanentes incorporados.
-- **DOC.1 R3:** cerrado/aceptado como G113/E03; normalizó 11 referencias inequívocas, formalizó la política de navegación documental y preservó rutas históricas/contractuales.
-- **DOC.2 R1:** cerrado/aceptado como G111/E01; preserva la reconstrucción auditable del CHANGELOG y su evidencia histórica.
-- **PLAN.2 R1:** cerrado/aceptado como G114/E01; formaliza la matriz maestra viva hacia 1.0.
-- **DOC.1 R4:** cerrado/aceptado como G115/E04 mediante PR #96 / merge `9f51229`; saneamiento documental post-G113 completado.
-- **DOC.1 R5:** cerrado/aceptado como G116/E05 mediante PR #101 / merge `6f4266d`; normalización documental integral post-G115 completada.
-- **REL.GOV.1 R2:** cerrado/aceptado como G117/E02 mediante PR #103 / merge `46c464e`; automatización gobernada de Releases y checks completada.
-- **DEV.2 R5:** cerrado/aceptado/publicado como G118/E04 (`0.1.18.04-beta`) mediante PR #107 / merge `bc97db0`, promoción PR #108 / commit `290e84a` y tag `v0.1.18.04-beta`; Portal Developer y separación sesión web/Bearer integrados.
-- **DEV.2 R6:** cerrado/aceptado/publicado como G119/E05 (`0.1.19.05-beta`)
-  mediante PR #111 / merge `bd2accb` y publicado mediante promoción
-  PR #112 / commit `9424ea8`, tag firmado `v0.1.19.05-beta`, workflow
-  de firma #17 y GitHub Release prerelease ID `379454328`; Portal
-  Developer multipágina, identidad, observabilidad, mantenimiento,
-  seguridad y privacidad integrados.
-- **UX.5 R6:** cerrado/aceptado/publicado como G120/E01 (`0.1.20.01-beta`).
-- **UX.6 R1–R8:** cerrado/aceptado/publicado como G121/E01 (`0.1.21.01-beta`) mediante PR #124 y `v0.1.21.01-beta`.
-- **NOR.3 R1–R8:** cerrado/integrado/aceptado/publicado como G122/E01 (`0.1.22.01-beta`) mediante PR #162 / merge `b97cf61763479b80b8e8724b878089e8bb20fa00`.
-- **MANT.2 R1:** cerrado/aceptado/publicado como G123/E01 (`0.1.23.01-beta`).
-- **MANT.1 R8:** cerrado/aceptado/publicado como G124/E13 (`0.1.24.13-beta`) mediante PR #170 y `v0.1.24.13-beta`.
-- **DOC.3 R1:** cerrado/aceptado/publicado como G125/E01 (`0.1.25.01-beta`) mediante `v0.1.25.01-beta`; **PLAN.2 R2/#155:** cerrado/publicado como G126/E01 (`0.1.26.01-beta`); **MANT.2 R2/#206:** activo sin Global preasignado.
-- **SEC.2 R1–R6:** cerrados; CodeQL, autenticación, protección de endpoints, auditoría, sesión web y hardening configurable completados. AUD.SEC2 R1 corrigió el kill switch, alineó documentación/ledger y quedó aceptado como G109/E01.
-
-Evidencia:
-
-- **[Auditoría documental integral UX.6 R7](audits/documentation/ux6-r7-documentation-audit.md)** — inventario de 166 Markdown, clasificación semántica de impacto y frontera hacia R8.
-- **[Atestación histórica Git pre-UX.5](audits/governance/git-history-attestation-pre-ux5.md)** — identidad HIST-0001–HIST-0195, frontera de firma, PR y normalización administrativa en español sin reescritura;
-- **[Índice de auditorías y evidencias](audits/README.md)** — navegación canónica de auditorías documentales, de gobierno, repositorio y seguridad.
-- **[SEC.2 R1 — CodeQL DOM hardening y normalización de workflows](audits/security/sec2-r1-codeql-workflow-hardening.md)** — hardening CodeQL y normalización de workflows SEC.2 R1.
-- **[SEC.2 — Cierre integral y auditoría post-cierre de seguridad](audits/security/sec2-final-closure.md)** — cierre integral SEC.2 R1–R6 y matriz de controles.
-- **[Auditoría integral de documentación Markdown post-SEC.2](audits/documentation/documentation-audit-post-sec2.md)** — auditoría individual de los 140 Markdown del snapshot post-SEC.2.
-
-- **[Línea base de normalización NOR.2 R1](audits/repository/repository-normalization-baseline-nor2-r1.md)** — línea base R1.
-- **[Matriz de decisión de migración NOR.2 R2](audits/repository/repository-normalization-migration-matrix-nor2-r2.md)** — matriz de migración R2.
-- **[NOR.2 R3 — migración de runtime y configuración](audits/repository/repository-normalization-runtime-migration-nor2-r3.md)** — migración técnica R3.
-- **[NOR.2 R4 — migración de documentación viva](audits/repository/repository-normalization-live-docs-nor2-r4.md)** — migración documental viva R4.
-- **[NOR.2 R5 — archivo y consolidación de documentación histórica](audits/repository/repository-normalization-historical-docs-nor2-r5.md)** — consolidación de documentación histórica R5.
-- **[NOR.2 R6 — migración del ledger y datos de alto impacto](audits/repository/repository-normalization-ledger-data-nor2-r6.md)** — normalización del ledger y datos de alto impacto R6.
-- **[NOR.2 R7 — migración y depuración de artefactos locales](audits/repository/repository-normalization-local-artifacts-nor2-r7.md)** — migración y depuración de artefactos locales R7.
-- **[Auditoría integral y cierre formal NOR.2 R8](audits/repository/repository-normalization-final-audit-nor2-r8.md)** — auditoría integral y gate de cierre R8.
-- **[Auditoría integral Markdown post-NOR.2 — DOC.1 R2](audits/documentation/documentation-markdown-audit-doc1-r2.md)** — auditoría integral Markdown post-NOR.2 y controles permanentes de DOC.1 R2.
-- **[Auditoría de referencias navegables Markdown — DOC.1 R3](audits/documentation/documentation-markdown-links-doc1-r3.md)** — auditoría conservadora de referencias navegables y evidencia de aceptación DOC.1 R3 / G113/E03.
-- **[Auditoría semántica de documentación viva post-G113 — PLAN.2 R1](audits/documentation/post-g113-live-documentation-audit-plan2-r1.md)** — auditoría semántica de documentación viva al iniciar PLAN.2 R1.
-- **[DOC.1 R4 — saneamiento semántico de documentación viva post-G114](audits/documentation/documentation-live-state-doc1-r4.md)** — auditoría DOC.1 R4 de estado vivo posterior a la publicación formal de G114/E01.
-- **[Auditoría de normalización documental DOC.1 R5](audits/documentation/documentation-normalization-doc1-r5.md)** — normalización transversal, reconciliación post-G115, plantillas Markdown, endurecimiento del auditor y saneamiento de regresiones históricas.
-- **[Reconciliación integral de documentación post-G119](audits/documentation/post-g119-documentation-reconciliation.md)** — reconciliación semántica, normativa, estructural y de mantenimiento posterior a la publicación G119/E05.
-- **[Auditoría documental integral pre-UX.5](audits/documentation/pre-ux5-documentation-audit.md)** — cierre PREUX5.2 de reconciliación documental antes de UX.5, con G120/E01 preservado.
-- **[Reconstrucción del CHANGELOG histórico — DOC.2 R1](audits/documentation/changelog-reconstruction-doc2-r1.md)** — reconstrucción auditable DOC.2 R1 de 80 commits en 21 estados legacy.
-- **[Estándares del repositorio](standards/README.md)** — estándares canónicos del repositorio.
-- **[Ciclo de vida de artefactos](standards/artifact-lifecycle.md)** — reglas para crear, sustituir, archivar y eliminar artefactos.
-- **[Estándares de documentación](standards/documentation-standards.md)** — clasificación, mantenimiento, navegación y preservación documental.
-- **[Estándares de archivos](standards/file-standards.md)** — requisitos mínimos para archivos versionados.
-- **[Convenciones de nombres](standards/naming-conventions.md)** — reglas determinísticas para archivos y carpetas.
-- **[Estructura del repositorio](standards/repository-structure.md)** — árbol canónico y responsabilidades de las áreas versionadas.
-- **[Raíz y artefactos locales](standards/root-and-local-artifacts.md)** — política de raíz, evidencia temporal y directorios locales ignorados.
-- **[Plantillas del repositorio](templates/README.md)** — índice de plantillas técnicas por extensión y plantillas documentales por función.
-
-## 1. Producto y alcance
-
-- **[Mi Retiro Proyectado](../README.md)** — presentación, alcance, instalación y estado general.
-- **[Especificación funcional](product/functional-specification.md)** — requisitos funcionales.
-- **[Roadmap](governance/roadmap.md)** — estado actual y próximos hitos.
-- **[Matriz maestra de pendientes hacia 1.0](governance/pre-1-0-pending-matrix.md)** — matriz maestra viva de pendientes hasta la primera versión oficial.
-- **[Plan maestro hacia Mi Retiro Proyectado 1.0](governance/master-plan-to-1-0.md)** — secuencia transversal de 14 bloques hasta la primera versión oficial.
-- **[Identidad visual de Mi Retiro Proyectado](product/visual-identity.md)** — logo oficial, activos canónicos, favicons y Social Preview.
-- **[Cómo se calcula — contrato de transparencia](product/calculation-guide.md)** — contrato público de explicación de SEBD, Mixto y SUCGS sin duplicar motores.
-
-## 2. Gobierno y versionado
-
-- **[Gobierno del proyecto](../GOVERNANCE.md)** — gobierno del proyecto.
-- **[Política de versionado](../VERSIONING.md)** — legacy, revision-aware v1 histórica, v2 `0.<GLOBAL>.<EDITION>.<CORRECTION>-beta`, versión oficial de cuatro componentes y Build independiente.
-- [`../VERSION`](../VERSION) — fuente canónica de la versión candidata de aplicación.
-- **[Auditoría de versionado pre-1.0](archive/governance/pre-1-0-versioning-audit.md)** — auditoría del historial, criterio contable y exclusiones de VER.2.
-- **[ADR-179 — El versionado beta usa un ledger de estados aceptados y no cuenta commits como revisiones](decisions/adr-179-revision-aware-versioning.md)** — decisión ADR del esquema revision-aware previo a `1.0.0.0`.
-- **[VER.2 — Segunda pasada de auditoría cruzada](archive/governance/ver2-second-pass-audit.md)** — bitácora de la segunda pasada y correcciones sobre la primera reconstrucción.
-- **[VER.2 — Conteo de segunda pasada](archive/governance/ver2-provisional-count-audit.md)** — cierre del conteo de segunda pasada en G070 antes de VER.2.
-- **[VER.2 — Matriz de decisión de revisiones aceptadas](archive/governance/ver2-revision-decision-matrix.md)** — decisión fila por fila sobre qué consume Global y por qué.
-- **[Ledger de revisiones aceptadas pre-1.0](governance/pre-1-0-revision-ledger.md)** — ledger Markdown reconciliado G001–G120 y siguiente candidato reservado G121/E01 para UX.6 R1.
-- **[Auditoría de reconciliación revision-aware posterior a G070](audits/governance/post-g070-revision-reconciliation.md)** — auditoría de reconstrucción G071–G108.
-- [`pre-1-0-revision-ledger-g070.json`](archive/governance/pre-1-0-revision-ledger-g070.json) — snapshot histórico exacto G070.
-- [`../data/governance/pre-1-0-revision-ledger.json`](../data/governance/pre-1-0-revision-ledger.json) — ledger machine-readable canónico de la reconstrucción.
-- [`../app/core/version_ledger.py`](../app/core/version_ledger.py) — validador de continuidad, unicidad y codificación del ledger estructurado.
-- **[Registro de versiones y estados del proyecto](../RELEASES.md)** — versiones, tags y reconstrucción histórica.
-- **[Changelog](../CHANGELOG.md)** — cambios notables por versión.
-- **[Guía de contribución](../CONTRIBUTING.md)** — flujo de contribución.
-- **[Código de conducta](../CODE_OF_CONDUCT.md)** — normas de participación.
-- **[Soporte](../SUPPORT.md)** — canales de soporte, privacidad y seguridad.
-- **[Plan maestro hacia Mi Retiro Proyectado 1.0](governance/master-plan-to-1-0.md)** — dependencias y gates previos a `1.0.0.0`.
-- **[Migración de firma criptográfica Git — 2026-08-17](archive/governance/git-signature-migration-2026-08-17.md)** — firma SSH y migración histórica controlada.
-- **[Atestación histórica Git pre-UX.5](audits/governance/git-history-attestation-pre-ux5.md)** — inventario ordinal y criptográfico del historial preservado.
-- [`../.github/allowed_signers`](../.github/allowed_signers) — claves públicas autorizadas.
-- **[Auditoría de GitHub y controles de repositorio](archive/governance/github-audit.md)** — controles GitHub, seguridad y auditoría automática.
-- **[Preparación pública de GitHub](operations/github-public-repository.md)** — metadata, topics, labels, badges, Social Preview y seguridad del repositorio público.
-- **[Auditoría integral del repositorio — 2026-08-18](archive/governance/repository-audit-2026-08-18.md)** — auditoría integral local/remota post-GOV.1.
-- **[Auditoría transversal UX.4.6e R7](archive/ux/ux46e-r7-audit-2026-08-18.md)** — auditoría transversal de coherencia de UX.4.6e.
-- **[Auditoría integral PLAN.1 R4](archive/governance/plan1-r4-audit-2026-08-20.md)** — auditoría integral y gates R4.1/R4.2 de PLAN.1.
-- **[Cierre GOV.1 — Auditoría, Gobierno y Trazabilidad Pre-Beta](archive/governance/gov1-closeout.md)** — evidencia definitiva del cierre GOV.1.
-- [`../LICENSE`](../LICENSE) — licencia propietaria de materiales originales.
-- **[Licencia y estrategia de distribución](governance/licensing-and-distribution.md)** — evaluación y decisión de licencia.
-- **[Avisos de terceros](../THIRD_PARTY_NOTICES.md)** — avisos de componentes de terceros.
-
-## 3. Arquitectura
-
-- **[Arquitectura](architecture/system-architecture.md)** — capas, módulos, endpoints y flujo.
-- **[Auditoría de estructura por extensión](archive/technical/file-structure-audit-r5d.md)** — auditoría de política y plantillas por extensión.
-- **[Auditoría de nombres de carpetas — MANT.1 R5E](archive/technical/folders-audit-r5e.md)** — auditoría de nombres de carpetas técnicas y rutas sincronizadas.
-- **[Auditoría MANT.1 R5F — nombres de archivos](archive/technical/files-audit-r5f.md)** — auditoría de nombres de archivos técnicos y referencias sincronizadas.
-- **[Auditoría MANT.1 R5G — documentación vigente](archive/technical/documentation-audit-r5g.md)** — auditoría de cobertura documental, índice y referencias internas.
-- **[Modelo de datos](architecture/data-model.md)** — modelos y contratos.
-- **[Gestión de datos de la simulación](product/simulation-data-management.md)** — estado local, limpieza, restauración e invalidación.
-- **[Observabilidad y Developer Diagnostics](operations/observability-and-logs.md)** — Developer Diagnostics, esquema JSONL, correlación, redacción, retención y exportación.
-
-## 4. Especificación funcional
-
-- **[Especificación funcional](product/functional-specification.md)** — RF y comportamiento del producto.
-- **[Guía interna de desarrollo](operations/development-guide.md)** — convenciones de ingeniería e interfaz.
-- **[Scripts del repositorio](../scripts/README.md)** — automatizaciones versionadas para auditoría, validación, hooks y publicación.
-
-## 5. Motores previsionales
-
-- **[Motor de cálculo](architecture/calculation-engine.md)** — flujo común de cálculo.
-- **[Modalidades de retiro por vejez — SEBD](regulatory/sebd-modalities.md)** — SEBD.
-- **[Subsistema Mixto — diseño y alcance del motor](regulatory/mixto-modalities.md)** — Subsistema Mixto.
-- **[Sistema Único de Capitalización con Garantía Solidaria (SUCGS)](regulatory/sucgs-modalities.md)** — SUCGS.
-
-## 6. Normativa y fuentes
-
-- **[Normativa](regulatory/regulatory-framework.md)** — interpretación y aplicación normativa.
-- **[Fuentes normativas y enlaces oficiales](regulatory/regulatory-sources.md)** — catálogo de fuentes oficiales.
-- **[Fuentes oficiales preservadas](regulatory/sources/official/README.md)** — copias offline verificables de fuentes regulatorias e institucionales.
-- `../regulations/*.json` — parámetros legales versionados.
-
-## 7. Datos y trazabilidad
-
-- **[Modelo de datos](architecture/data-model.md)** — contratos y procedencia.
-- **[Gestión de datos de la simulación](product/simulation-data-management.md)** — ciclo de vida del estado local.
-- **[Registro de decisiones técnicas](decisions/README.md)** — decisiones ADR históricas y vigentes.
-
-## 8. Seguridad y privacidad
-
-- **[Seguridad y privacidad](security/security-and-privacy.md)** — controles técnicos.
-- **[Modelo de amenazas](security/threat-model.md)** — threat model y matriz de riesgos.
-- **[Procedimiento de derechos del titular](security/data-subject-rights-procedure.md)** — ejercicio de derechos.
-- **[Procedimiento de respuesta a incidentes de seguridad y privacidad](security/security-incident-procedure.md)** — incident response.
-- **[Evaluación de terceros, despliegue y revisión pre-publicación](security/third-party-deployment-assessment.md)** — terceros, TLS y gates de despliegue.
-- **[Política de privacidad y tratamiento de datos](security/privacy-policy.md)** — política pública vigente.
-- **[Términos de uso, privacidad y tratamiento de datos](security/terms-and-privacy.md)** — términos y tratamiento de datos.
-- **[Matriz interna de alineación con Ley 81 de 2019](regulatory/law-81-compliance.md)** — matriz interna de alineación.
-- **[Observabilidad y Developer Diagnostics](operations/observability-and-logs.md)** — minimización y manejo local de logs diagnósticos.
-- **[Política de seguridad](../SECURITY.md)** — política y canales privados de reporte responsable de vulnerabilidades.
-
-La publicación del repositorio no elimina la revisión jurídica externa ni cualquier diseño de seguridad específico que requiera un futuro despliegue remoto de la aplicación.
-
-## 9. Transparencia, auditoría y trazabilidad
-
-- **[Transparencia del producto](product/transparency.md)** — fronteras de afirmación y transparencia pública.
-- **[Matriz de trazabilidad](product/traceability-matrix.md)** — requisito/criterio → ADR → implementación → prueba → estado.
-- **[Auditoría de cálculos](archive/technical/calculation-audit.md)** — reproducibilidad y revisión de resultados.
-- **[UX.4.6h R1 — Auditoría del Paso 6: resultados y exportación](archive/ux/ux46h-r1-results-audit.md)** — auditoría de resultados y coherencia visual de UX.4.6h.
-- **[Limitaciones conocidas](product/known-limitations.md)** — límites técnicos, normativos y de despliegue.
-- **[Dependencias y terceros](operations/third-party-dependencies.md)** — dependencias, licencias upstream, conexiones y riesgos.
-- **[Proceso de release](operations/release-process.md)** — gates de cierre, versión, Build, CI y tags.
-- **[Auditoría UX.4.6i R1 — Cómo se calcula](archive/ux/ux46i-r1-calculation-explanation-audit.md)** — auditoría canónica de UX.4.6i; secuencia demostrada R1 → R1.2 → R1.3 → R1.4.
-
-## 10. Validación y calidad
-
-- **[Validación](operations/validation.md)** — estrategia y evidencias.
-- [`../tests/governance/test_ver2_ledger_estructurado.py`](../tests/governance/test_ver2_ledger_estructurado.py) — regresiones del ledger JSON y sus invariantes.
-- [`../tests/governance/test_ver2_version_revision_aware.py`](../tests/governance/test_ver2_version_revision_aware.py) — regresiones del esquema revision-aware.
-- [`../tests/governance/test_ver2_documentacion_vigente.py`](../tests/governance/test_ver2_documentacion_vigente.py) — coherencia de superficies vigentes durante VER.2.
-- **[Casos de validación](../tests/validation_cases/README.md)** — reglas de casos sintéticos/anonimizados.
-- `../.github/workflows/quality-gate.yml` — gate canónico del repositorio y compatibilidad Python.
-- `../.github/workflows/dependency-security.yml` — seguridad de dependencias y supply chain.
-- `../.github/workflows/scheduled-health.yml` — auditoría periódica de salud, enlaces externos y tags.
-- `../.github/workflows/pr-labeler.yml` — clasificación automática de Pull Requests.
-- `../.github/workflows/visual-a11y.yml` — baseline Visual/Accessibility con Playwright y axe.
-- `../.github/workflows/verificar-tags.yml` — verificación criptográfica de tags y publicación autorizada.
-- `../.github/dependabot.yml` — mantenimiento de dependencias Python, npm y GitHub Actions.
-- `Repository Quality Gate` y `Python Compatibility` son los required checks vigentes de `main`; los workflows legacy de CI, gobernanza y Markdown fueron retirados tras completar la migración post-G119.
-
-## 11. Desarrollo y contribución
-
-- **[Guía de contribución](../CONTRIBUTING.md)** — flujo principal.
-- **[Código de conducta](../CODE_OF_CONDUCT.md)** — reglas de convivencia y colaboración.
-- **[Soporte](../SUPPORT.md)** — rutas de consulta y reporte.
-- **[Guía interna de desarrollo](operations/development-guide.md)** — convenciones internas.
-- **[DEV.2 R1–R6 — Centro de desarrollo](architecture/development-center.md)** — DEV.2 queda cerrado hasta R6; R5 permanece aceptado/publicado como G118/E04 y R6 queda aceptado/publicado como G119/E05.
-- **[Política de estructura de archivos por extensión](standards/file-structure-by-extension.md)** — política vigente de estructura, nombres y ubicación de archivos.
-- **[Estándar de código y comentarios](standards/code-and-comments.md)** — patrón permanente de comentarios y docstrings por tecnología.
-- [`../.editorconfig`](../.editorconfig) — formato.
-- [`../.gitattributes`](../.gitattributes) — normalización Git.
-- [`../.gitignore`](../.gitignore) — exclusiones y protección de datos locales.
-
-## 12. Historial de evolución
-
-- **[Registro histórico de cambios](archive/governance/historical-change-registry.md)** — mapa cronológico.
-- **[UX.4.6a — Rediseño visual integral y nueva página de Inicio](archive/ux/ux46a-visual-redesign.md)** — bitácora histórica del rediseño visual UX.4.6a.
-- **[UX.4.6b — Simular / Paso 1 · Datos personales](archive/ux/ux46b-step1-personal-data.md)** — bitácora histórica del Paso 1 de UX.4.6b.
-- **[UX.4.6c — Simular / Paso 2 · Cuotas](archive/ux/ux46c-step2-contributions.md)** — bitácora histórica del Paso 2 de UX.4.6c.
-- **[UX.4.6d — Simular / Paso 3 · Historial](archive/ux/ux46d-step3-history.md)** — bitácora histórica del Paso 3 de UX.4.6d.
-- **[Archivo histórico de documentación](archive/README.md)** — reglas del archivo histórico.
-- [Histórico UX](archive/ux) — bitácoras completas de UX.4.6a–d.
-- [Histórico técnico](archive/technical) — snapshots técnicos previos.
-- [Histórico de normativa, seguridad y privacidad](archive/regulatory-privacy) — snapshots normativos/privacidad previos.
-- [Histórico de gobierno y decisiones](archive/governance) — snapshots de decisiones/gobierno.
-- **[Changelog](archive/changelog-pre-gov1-3.md)** — snapshot del changelog acumulativo anterior a GOV.1.3.
-- **[Roadmap](archive/roadmap-pre-gov1-3.md)** — snapshot del roadmap anterior a GOV.1.3.
-
-Los archivos históricos documentan lo que se pensó, probó o decidió en un momento determinado. No deben interpretarse como contrato vigente si contradicen un documento actual.
-
-## 13. Releases
-
-- **[Registro de versiones y estados del proyecto](../RELEASES.md)** — registro formal y retrospectivo.
-- **[Changelog](../CHANGELOG.md)** — cambios notables.
-- **[Política de versionado](../VERSIONING.md)** — reglas de incremento y tags.
-- **[Auditoría de versionado pre-1.0](archive/governance/pre-1-0-versioning-audit.md)** — reconciliación VER.2.
-- **[Ledger de revisiones aceptadas pre-1.0](governance/pre-1-0-revision-ledger.md)** — contador global.
-- [`../data/governance/pre-1-0-revision-ledger.json`](../data/governance/pre-1-0-revision-ledger.json) — representación estructurada del contador.
-- **[Plan maestro hacia Mi Retiro Proyectado 1.0](governance/master-plan-to-1-0.md)** — gates hasta la primera versión oficial.
-
-## Clasificación documental
-
-Los documentos vigentes pueden utilizar los estados:
-
-- **Vigente**
-- **Borrador**
-- **Pendiente de revisión externa**
-- **Parcialmente sustituido**
-- **Sustituido**
-- **Histórico**
-
-## Regla de mantenimiento
-
-Un cambio no obliga a editar todos los `.md`. Sí obliga a revisar todos los documentos que dependan del cambio y mantener coherencia entre código, normativa versionada, pruebas, documentación vigente, fuentes oficiales e historial de decisiones.
-
-La metadata de versión de revisión de un documento de dominio puede conservar su base histórica aunque `VERSION` avance; solo las superficies que declaran el estado vigente deben seguir la versión canónica actual.
-
-<!-- ANCLAS_HISTORICAS_VER2_INDICE_CONSOLIDADAS -->
-
-## Compatibilidad histórica preservada por VER.2
-
-- **GOV.1.8 — Auditoría final y cierre pre-beta de gobierno** queda preservado como cierre histórico de gobierno.
-- UX.4.6e R9.2 queda preservado como cierre histórico asociado a `0.0.25-beta`.
-- La familia `0.0.N-beta` permanece como línea legacy histórica hasta `v0.0.26-beta`.
-- **Versión candidata de aplicación:** `0.0.26-beta` — referencia legacy preservada para las regresiones históricas de PLAN.1.
-- El contrato histórico mantiene versiones oficiales de cuatro componentes para la línea estable futura.
-- GOV.1.3 R3 preservó el snapshot archive/regulatory-privacy/ como evidencia histórica normativa y de privacidad.
-
-- **[Auditoría MANT.1 R5H — nombres técnicos restantes](archive/technical/remaining-names-audit-r5h.md)** — Auditoría MANT.1 R5H de nombres técnicos restantes.
-
-## MANT.1 R6 — Auditoría funcional post-renombres
-
-- `functional-audit-post-renames-r6.md`: auditoría funcional posterior a los renombres técnicos de MANT.1 R5. Verifica rutas, plantillas, assets, contratos frontend/backend, formularios, cargas de archivo y estructura HTML renderizada.
-
-## MANT.1 R7 — Cierre operativo post-auditoría
-
-- `operational-closeout-post-audit-r7.md`: cierre operativo posterior a R5H/R6. Verifica estado de ramas, evidencias documentales, pruebas focalizadas y protección de archivos sensibles.
-
-## DOC.1 R1 — Auditoría integral Markdown post-MANT.1
-
-- `markdown-audit-post-mant1-doc1-r1.md`: inventario integral de archivos Markdown posterior al cierre de MANT.1.
-- `doc1-r1-markdown-decision-matrix.md`: clasificación de Markdown en actualizar, revisar, preservar histórico, preservar auditoría cerrada o sin cambio inicial.
-- `doc1-r1-markdown-update-context.md`: extracción de contexto para documentos candidatos antes de actualizarlos.
-- `doc1-r1-post-mant1-documentation-baseline.md`: línea base documental vigente para sincronizar README, roadmap, validación, versionado y demás documentos vivos post-MANT.1.
-- `doc1-r1-applicability-only-review.md`: revisión de documentos de soporte o política general marcados como actualizar solo si aplica; no requirieron cambios materiales.
-- `doc1-r1-markdown-documentation-closeout.md`: cierre formal de DOC.1 R1 con alcance revisado, evidencia generada, límites respetados y validación documental.
-
-## VER.2 R1 — Reconciliación post-DOC.1
-
-- **[Auditoría de reconciliación VER.2 R1](archive/governance/ver2-r1-post-doc1-reconciliation-audit.md)**
-- **[Matriz de decisión VER.2 R1](archive/governance/ver2-r1-post-doc1-reconciliation-decision-matrix.md)**
-- **[Decisión operativa VER.2 R1](archive/governance/ver2-r1-post-doc1-operational-decision.md)**
-
-## VER.2 R2 — Documentación viva post-R1
-
-- **[Análisis de contradicciones VER.2 R2](archive/governance/ver2-r2-post-r1-contradiction-analysis.md)**
-- **[Propuesta de corrección de documentación viva VER.2 R2](archive/governance/ver2-r2-live-documentation-correction-proposal.md)**
-- **[Cierre de documentación viva VER.2 R2](archive/governance/ver2-r2-post-r1-live-documentation-closeout.md)**
-
-## VER.2 R3 — Decisión de versión candidata post-R2
-
-- **[Decisión de versión candidata VER.2 R3](archive/governance/ver2-r3-post-r2-candidate-version-decision.md)**
-
-## VER.2 R4 — Promoción controlada G071/E01
-
-- **[Promoción controlada VER.2 R4 G071/E01](archive/governance/ver2-r4-g071-e01-promotion.md)**
-
-## VER.2 R5 — Estabilización post-release
-
-- **[Estabilización post-release VER.2 R5](archive/governance/ver2-r5-post-release-stabilization.md)**
-
-**SEC.2 R6:** hardening de sesión administrativa web preparado para despliegue interno controlado.
-
-## NOR.1 R8 — Identificadores de bloques
-
-- **[Identificadores de bloques de trabajo](standards/work-block-identifiers.md)** — política canónica de familias, bloques y revisiones.
-- **[NOR.1 R8 — auditoría de identificadores de bloques](audits/repository/work-block-identifier-audit-nor1-r8.md)** — auditoría que justifica NOR.1 R8 y la reserva de G112.
-
-<!-- NOR3-R2-STRUCTURE-POLICY:START -->
-## Política estructural machine-readable
-
-NOR.3 R2 formaliza las guardas permanentes del árbol en
-[`governance/repository-structure-policy.md`](governance/repository-structure-policy.md)
-y en `data/governance/repository-structure-policy.json`.
-
-La política es consumida por `scripts/audit_repository_integrity.py` y, por
-extensión, por el Quality Gate completo.
-<!-- NOR3-R2-STRUCTURE-POLICY:END -->
+# Documentación de Mi Retiro Proyectado
+
+## Propósito
+
+Este índice organiza la documentación versionada y define **dónde se encuentra
+la autoridad canónica de cada tema**. Su función es facilitar navegación y
+evitar que un mismo contrato se mantenga en varios documentos con estados
+distintos.
+
+La documentación viva describe el estado y las reglas vigentes. Git, tags,
+Releases, auditorías, ADR, registros acumulativos y `docs/archive/` conservan
+la historia cuando esa historia forma parte legítima de su función.
+
+## Mapa de autoridades
+
+| Tema | Autoridad principal | Complementos |
+| --- | --- | --- |
+| Presentación general del proyecto | [README raíz](../README.md) | [Soporte](../SUPPORT.md) |
+| Comportamiento funcional | [Especificación funcional](product/functional-specification.md) | [Limitaciones conocidas](product/known-limitations.md), [Transparencia](product/transparency.md) |
+| Explicación de resultados y cálculo | [Guía de cálculo](product/calculation-guide.md) | [Motor de cálculo](architecture/calculation-engine.md) |
+| Arquitectura | [Arquitectura del sistema](architecture/system-architecture.md) | [Modelo de datos](architecture/data-model.md), [Centro de desarrollo](architecture/development-center.md) |
+| Marco previsional | [Marco normativo](regulatory/regulatory-framework.md) | [Fuentes regulatorias](regulatory/regulatory-sources.md) |
+| SEBD | [Modalidades SEBD](regulatory/sebd-modalities.md) | [Fuentes regulatorias](regulatory/regulatory-sources.md) |
+| Subsistema Mixto | [Modalidades Mixto](regulatory/mixto-modalities.md) | [Fuentes regulatorias](regulatory/regulatory-sources.md) |
+| SUCGS | [Modalidades SUCGS](regulatory/sucgs-modalities.md) | [Fuentes regulatorias](regulatory/regulatory-sources.md) |
+| Privacidad y seguridad técnica | [Seguridad y privacidad](security/security-and-privacy.md) | [Política de privacidad](security/privacy-policy.md), [Modelo de amenazas](security/threat-model.md) |
+| Desarrollo local | [Guía de desarrollo](operations/development-guide.md) | [Validación](operations/validation.md) |
+| Observabilidad | [Observabilidad y logs](operations/observability-and-logs.md) | [Centro de desarrollo](architecture/development-center.md) |
+| Dependencias de terceros | [Dependencias de terceros](operations/third-party-dependencies.md) | [Avisos de terceros](../THIRD_PARTY_NOTICES.md) |
+| Releases | [Proceso de release](operations/release-process.md) | [Releases](../RELEASES.md), [Changelog](../CHANGELOG.md) |
+| Gobierno del proyecto | [Gobierno](../GOVERNANCE.md) | [Gobierno de Issues y PR](governance/github-issues-pr-governance.md) |
+| Versionado | [Política de versionado](../VERSIONING.md) | [Ledger pre-1.0](governance/pre-1-0-revision-ledger.md) y su representación machine-readable |
+| Planificación hacia 1.0 | [Plan maestro](governance/master-plan-to-1-0.md) | [Roadmap](governance/roadmap.md), [Matriz de pendientes](governance/pre-1-0-pending-matrix.md) |
+| Estructura del repositorio | [Estructura del repositorio](standards/repository-structure.md) | [Política estructural](governance/repository-structure-policy.md) |
+| Estándares | [Índice de estándares](standards/README.md) | Documentos específicos dentro de `standards/` |
+| Decisiones técnicas | [Registro de decisiones](decisions/README.md) | ADR individuales cuando existan |
+| Auditorías | [Índice de auditorías](audits/README.md) | `audits/documentation/`, `audits/governance/`, `audits/repository/`, `audits/security/` |
+| Historia preservada | [Índice del archivo](archive/README.md) | Subíndices de `archive/` |
+| Plantillas | [Índice de plantillas](templates/README.md) | `templates/documentation/`, `templates/file-structure/` |
+
+Cuando dos documentos parecen competir por el mismo tema, debe resolverse la
+duplicación asignando una autoridad principal y haciendo que los demás
+referencien ese contrato en vez de copiarlo.
+
+## Áreas documentales
+
+### Producto
+
+`product/` explica comportamiento, alcance y comunicación de resultados:
+
+- [Especificación funcional](product/functional-specification.md);
+- [Guía de cálculo](product/calculation-guide.md);
+- [Limitaciones conocidas](product/known-limitations.md);
+- [Gestión de datos de simulación](product/simulation-data-management.md);
+- [Matriz de trazabilidad](product/traceability-matrix.md);
+- [Transparencia](product/transparency.md);
+- [Identidad visual](product/visual-identity.md).
+
+### Arquitectura
+
+`architecture/` documenta contratos técnicos internos:
+
+- [Arquitectura del sistema](architecture/system-architecture.md);
+- [Modelo de datos](architecture/data-model.md);
+- [Motor de cálculo](architecture/calculation-engine.md);
+- [Centro de desarrollo](architecture/development-center.md).
+
+### Normativa
+
+`regulatory/` conserva el marco normativo y las fuentes aplicadas:
+
+- [Marco normativo](regulatory/regulatory-framework.md);
+- [Fuentes regulatorias](regulatory/regulatory-sources.md);
+- [Alineación con Ley 81](regulatory/law-81-compliance.md);
+- [Modalidades SEBD](regulatory/sebd-modalities.md);
+- [Modalidades Mixto](regulatory/mixto-modalities.md);
+- [Modalidades SUCGS](regulatory/sucgs-modalities.md);
+- [Fuentes oficiales preservadas](regulatory/sources/official/README.md).
+
+Las copias oficiales conservadas bajo `regulatory/sources/official/` son
+evidencia de procedencia; su existencia no reemplaza la necesidad de identificar
+la fuente oficial y su fecha de consulta.
+
+### Seguridad y privacidad
+
+`security/` contiene políticas técnicas, procedimientos y evaluaciones:
+
+- [Seguridad y privacidad](security/security-and-privacy.md);
+- [Política de privacidad](security/privacy-policy.md);
+- [Términos de uso y privacidad](security/terms-and-privacy.md);
+- [Modelo de amenazas](security/threat-model.md);
+- [Procedimiento de derechos del titular](security/data-subject-rights-procedure.md);
+- [Procedimiento de incidentes](security/security-incident-procedure.md);
+- [Evaluación de terceros y despliegue](security/third-party-deployment-assessment.md).
+
+La política pública para reportar vulnerabilidades se mantiene en
+[`SECURITY.md`](../SECURITY.md).
+
+### Operaciones
+
+`operations/` contiene el contrato operativo del proyecto:
+
+- [Guía de desarrollo](operations/development-guide.md);
+- [Validación](operations/validation.md);
+- [Observabilidad y logs](operations/observability-and-logs.md);
+- [Proceso de release](operations/release-process.md);
+- [Dependencias de terceros](operations/third-party-dependencies.md);
+- [Preparación del repositorio público](operations/github-public-repository.md).
+
+### Gobierno y planificación
+
+`governance/` concentra contratos de gobierno que no pertenecen a la raíz:
+
+- [Plan maestro hacia 1.0](governance/master-plan-to-1-0.md);
+- [Roadmap](governance/roadmap.md);
+- [Matriz de pendientes pre-1.0](governance/pre-1-0-pending-matrix.md);
+- [Ledger de revisiones pre-1.0](governance/pre-1-0-revision-ledger.md);
+- [Gobierno de Issues y Pull Requests](governance/github-issues-pr-governance.md);
+- [Licencia y distribución](governance/licensing-and-distribution.md);
+- [Política estructural](governance/repository-structure-policy.md).
+
+Estos documentos tienen funciones distintas: el plan maestro define la
+secuencia y dependencias; el roadmap comunica la ruta vigente; la matriz de
+pendientes enumera trabajo no completado; el ledger registra estados aceptados.
+
+### Estándares
+
+`standards/` define las reglas canónicas de estructura, nombres, documentación
+y ciclo de vida de artefactos. El punto de entrada es
+[Índice de estándares](standards/README.md).
+
+### Decisiones
+
+`decisions/` contiene ADR y el registro vivo de decisiones técnicas. Las
+decisiones históricas aceptadas no se reescriben para reflejar criterios
+posteriores; cuando una decisión cambia se documenta la relación de sustitución.
+
+### Auditorías
+
+`audits/` conserva auditorías y evidencia versionable. Una auditoría puede
+describir un estado anterior sin que ese estado deba copiarse a documentación
+viva. Consulta [Índice de auditorías](audits/README.md).
+
+### Archivo histórico
+
+`archive/` conserva únicamente documentación cerrada que mantiene valor
+independiente de trazabilidad o contexto. No es una segunda documentación viva
+ni debe consultarse para conocer el estado actual. Consulta
+[Índice del archivo](archive/README.md).
+
+### Plantillas
+
+`templates/` proporciona puntos de partida para documentación y estructuras de
+archivo. Las plantillas no obligan a conservar secciones vacías ni a uniformar
+documentos con funciones distintas.
+
+## Clasificación y conservación de historia
+
+La historia se conserva de acuerdo con la función del artefacto:
+
+- **documentación viva:** describe el contrato o estado vigente;
+- **estándar/política:** define reglas vigentes y excepciones explícitas;
+- **auditoría/evidencia:** conserva el estado observado y el método usado;
+- **ADR/decisión:** conserva la decisión en su contexto y su relación con
+  decisiones posteriores;
+- **registro vivo acumulativo:** mantiene historia solo cuando esa secuencia es
+  parte inseparable del propio contrato;
+- **archivo histórico:** preserva evidencia cerrada con valor independiente;
+- **Git, tags y Releases:** conservan la evolución del árbol y las publicaciones.
+
+Un documento vivo no necesita una sección histórica para demostrar que una fase
+existió. Cuando el contexto histórico sea necesario se enlaza a la autoridad que
+lo conserva.
+
+## Reglas de mantenimiento
+
+1. Cada documento debe tener una función identificable.
+2. Una misma política o contrato vigente debe tener una sola autoridad principal.
+3. Los documentos relacionados enlazan a la autoridad en lugar de copiarla.
+4. Los README de cada área explican esa área; no son bitácoras de todas las fases
+   que la modificaron.
+5. Los enlaces de documentación viva deben resolver contra el árbol actual.
+6. Los movimientos y renombres deben actualizar consumidores, índices y pruebas
+   documentales relacionadas.
+7. La evidencia histórica no se moderniza mecánicamente si hacerlo falsearía el
+   estado que documenta.
+8. Git conserva las versiones anteriores aunque un archivo deje de formar parte
+   del árbol vigente.
+
+Los estándares completos se encuentran en
+[Estándares de documentación](standards/documentation-standards.md) y
+[Política de Markdown](standards/markdown-style-and-lint.md).

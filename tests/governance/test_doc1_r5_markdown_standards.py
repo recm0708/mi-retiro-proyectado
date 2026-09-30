@@ -86,17 +86,21 @@ class TestDoc1R5MarkdownStandards(unittest.TestCase):
         self.assertIn("docs/decisions/README.md", standard)
         self.assertIn("docs/operations/validation.md", standard)
 
-        for rel in (
-            "docs/decisions/README.md",
-            "docs/operations/validation.md",
-        ):
-            with self.subTest(rel=rel):
-                text = (ROOT / rel).read_text(encoding="utf-8")
-                self.assertIn(
-                    "**Naturaleza documental:** Registro vivo acumulativo",
-                    text,
-                )
+        decisions = (
+            ROOT / "docs/decisions/README.md"
+        ).read_text(encoding="utf-8")
+        validation = (
+            ROOT / "docs/operations/validation.md"
+        ).read_text(encoding="utf-8")
 
+        self.assertIn(
+            "**Clasificación:** decisiones técnicas / registro vivo acumulativo",
+            decisions,
+        )
+        self.assertIn(
+            "**Naturaleza documental:** Registro vivo acumulativo",
+            validation,
+        )
     def test_validacion_inventaria_todos_los_modulos_reales(self):
         validation = (
             ROOT / "docs" / "operations" / "validation.md"
@@ -130,31 +134,22 @@ class TestDoc1R5MarkdownStandards(unittest.TestCase):
         self.assertEqual(len(actual), declared)
         self.assertEqual(actual, documented)
 
-    def test_indice_dev2_refleja_r6_publicado(self):
+
+    def test_indice_dev2_enlaza_autoridad_y_documento_preserva_publicacion(self):
         index = (
-            ROOT
-            / "docs"
-            / "README.md"
-        ).read_text(
-            encoding="utf-8"
-        )
+            ROOT / "docs/README.md"
+        ).read_text(encoding="utf-8")
+        dev = (
+            ROOT / "docs/architecture/development-center.md"
+        ).read_text(encoding="utf-8")
 
         self.assertIn(
-            "DEV.2 R1–R6 — Centro de desarrollo",
+            "[Centro de desarrollo](architecture/development-center.md)",
             index,
         )
-
-        self.assertIn(
-            "R6 queda aceptado/publicado como G119/E05",
-            index,
-        )
-
-        self.assertNotIn(
-            "R6 permanece como siguiente candidato funcional",
-            index,
-        )
-
-
+        self.assertNotIn("R6 queda aceptado/publicado como G119/E05", index)
+        self.assertIn("G119/E05", dev)
+        self.assertIn("DEV.2 R6", dev)
 
 if __name__ == "__main__":
     unittest.main()

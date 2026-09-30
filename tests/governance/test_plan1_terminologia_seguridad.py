@@ -14,12 +14,18 @@ class TestPlan1TerminologiaSeguridad(unittest.TestCase):
     def setUp(self):
         self.version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
 
+
     def test_security_declara_desarrollo_beta_y_version_oficial_futura(self):
-        texto = (ROOT / "SECURITY.md").read_text(encoding="utf-8")
-        self.assertIn("**desarrollo beta**", texto)
-        self.assertIn("`0.0.N-beta`", texto)
-        self.assertIn("`1.0.0.0`", texto)
-        self.assertNotIn("desarrollo pre-beta", texto)
+        security = (ROOT / "SECURITY.md").read_text(encoding="utf-8")
+        versioning = (ROOT / "VERSIONING.md").read_text(encoding="utf-8")
+
+        self.assertIn("**Etapa soportada:** desarrollo beta", security)
+        self.assertIn("`1.0.0.0`", security)
+        self.assertNotIn("desarrollo pre-beta", security)
+        self.assertNotIn("0.0.N-beta", security)
+
+        self.assertIn("### Beta legacy histórica", versioning)
+        self.assertIn("0.0.N-beta", versioning)
 
     def test_support_no_presenta_el_producto_como_pre_beta(self):
         texto = (ROOT / "SUPPORT.md").read_text(encoding="utf-8")

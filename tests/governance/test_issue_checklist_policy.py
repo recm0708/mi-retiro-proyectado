@@ -20,19 +20,45 @@ ISSUE_FORMS = (
 
 
 class TestIssueChecklistPolicy(unittest.TestCase):
-    def test_governance_documenta_politica_obligatoria(self):
-        texto = (ROOT / "GOVERNANCE.md").read_text(encoding="utf-8")
+    def test_autoridades_documentan_politica_obligatoria(self):
+        general = (
+            ROOT / "GOVERNANCE.md"
+        ).read_text(encoding="utf-8")
+
+        detalle = (
+            ROOT
+            / "docs/governance/"
+            "github-issues-pr-governance.md"
+        ).read_text(encoding="utf-8")
+
+        self.assertIn(
+            "docs/governance/github-issues-pr-governance.md",
+            general,
+        )
+        self.assertIn(
+            "**Trabajo verificable:**",
+            general,
+        )
+        self.assertIn(
+            "criterio de cierre",
+            general,
+        )
 
         for esperado in (
-            "### 4.5. Ciclo de vida obligatorio de Issues",
-            "Toda Issue nueva",
-            "`- [ ]` / `- [x]`",
+            "## Ciclo de vida y checklist de Issues",
+            "Toda Issue material nueva",
+            "`.github/ISSUE_TEMPLATE/`",
+            "`checklist_trabajo`",
+            "`- [ ]`",
+            "`- [x]`",
             "criterio de cierre",
-            "owner/Issue explícito",
-            ".github/ISSUE_TEMPLATE/",
+            "Issue o owner explícito",
         ):
             with self.subTest(esperado=esperado):
-                self.assertIn(esperado, texto)
+                self.assertIn(
+                    esperado,
+                    detalle,
+                )
 
     def test_issue_forms_pregeneran_checklist_real_y_requerido(self):
         for nombre in ISSUE_FORMS:

@@ -6,8 +6,15 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 
 ## [Unreleased]
 
-- G130 permanece libre y sin candidato.
-- G129/E03/C0 está aceptado localmente para MANT.2 R3 y pendiente de integración/publicación; tras publicarlo debe repetirse #166 antes de DOC.4.
+### Documentación
+
+- DOC.4 R1 inicia la reingeniería documental `current-state-only`.
+- El README raíz se reconstruye como portada del proyecto y deja la cronología
+  en sus autoridades históricas.
+- `docs/README.md` pasa a funcionar como índice y mapa de autoridades.
+- Los README de estándares y decisiones se alinean con su función real sin
+  eliminar evidencia histórica válida.
+
 
 ## [0.129.3.0-beta]
 
@@ -18,10 +25,6 @@ Las versiones `0.0.1-beta` a `0.0.21-beta` fueron reconstruidas retrospectivamen
 - El guard histórico G123 deja de fijar el pin vivo de `pypdf`.
 - PR #210 queda cerrado sin merge como superseded por Draft PR #212.
 - `VERSION` avanza a `0.129.3.0-beta`; G130 permanece libre.
-
-
-- G129 permanece disponible sin candidato, bloque ni VERSION preasignados.
-- G128/E02/C0 está aceptado localmente para VER.2 R6 y pendiente de integración/publicación; después de publicarlo debe repetirse #166 antes de DOC.4 R1/#171.
 
 
 ## [0.128.2.0-beta]

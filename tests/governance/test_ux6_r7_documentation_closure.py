@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+import json
 import unittest
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -47,51 +48,45 @@ class TestUX6R7DocumentationClosure(unittest.TestCase):
             "R8 de auditoría/gate/promoción",
             self.audit,
         )
-    def test_g120_publicado_reconciliado(self):
-        # G120 sigue preservado como historia publicada.
-        # Sus identificadores de publicación viven en RELEASES;
-        # los documentos vivos de gobierno pueden avanzar.
-        corpus_historico = "\\n".join(
-            (
-                self.readme,
-                self.releases,
-                self.security,
-            )
-        )
+    def test_g120_publicado_se_preserva_en_release_no_en_readme_vivo(self):
+        self.assertNotIn("v0.1.20.01-beta", self.readme)
+        self.assertNotIn("G120/E01", self.readme)
 
-        self.assertIn(
-            "v0.1.20.01-beta",
-            corpus_historico,
-        )
-
-        self.assertIn(
-            "383133233",
-            self.releases,
-        )
-
+        self.assertIn("## Promoción G120/E01 — UX.5 R6", self.releases)
+        self.assertIn("v0.1.20.01-beta", self.releases)
+        self.assertIn("383133233", self.releases)
         self.assertIn(
             "7dbcca8071e2726b6aa4f17704bf41b92f6cd5bd",
             self.releases,
         )
 
-        self.assertIn(
-            "0.1.22.01-beta",
-            self.versioning,
+        ledger = json.loads(
+            (
+                ROOT
+                / "data/governance/pre-1-0-revision-ledger.json"
+            ).read_text(encoding="utf-8")
         )
-
-        self.assertIn(
-            "G122/E01",
-            self.versioning,
+        g122 = next(
+            item
+            for item in ledger["entries"]
+            if item["global_revision"] == 122
         )
+        self.assertEqual("0.1.22.01-beta", g122["revision_aware"])
+        self.assertEqual("NOR.3", g122["block"])
 
     def test_auditoria_r7_indexada(self):
         target = "ux6-r7-documentation-audit.md"
-        self.assertIn(target, self.docs_index)
+
         self.assertIn(target, self.audits_index)
+        self.assertIn(
+            "[Índice de auditorías](audits/README.md)",
+            self.docs_index,
+        )
+        self.assertNotIn(target, self.docs_index)
+
         self.assertIn("166 Markdown", self.audit)
         self.assertIn("0 enlaces Markdown locales rotos", self.audit)
         self.assertIn("46 documentos VIVO", self.audit)
-
     def test_developer_ux6_documentado(self):
         self.assertIn("developer_user_audit", self.data_model)
         self.assertIn("avatar_relativo", self.data_model)

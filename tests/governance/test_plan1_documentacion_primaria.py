@@ -15,11 +15,16 @@ class TestPlan1DocumentacionPrimaria(unittest.TestCase):
 
     def test_readme_declara_beta_actual_y_objetivo_oficial(self):
         texto = (ROOT / "README.md").read_text(encoding="utf-8")
-        self.assertIn("**Etapa:** desarrollo beta", texto)
-        self.assertIn("PLAN.1", texto)
-        self.assertIn("**Primera versión oficial objetivo:** `1.0.0.0`", texto)
-        self.assertIn("`Build 000001`", texto)
+        version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
+        releases = (ROOT / "RELEASES.md").read_text(encoding="utf-8")
+
+        self.assertIn("**Etapa:** desarrollo beta.", texto)
+        self.assertIn(f"**Versión de desarrollo:** `{version}`", texto)
+        self.assertIn("**Objetivo de primera versión oficial:** `1.0.0.0`.", texto)
+        self.assertNotIn("PLAN.1", texto)
+        self.assertNotIn("`Build 000001`", texto)
         self.assertNotIn("Primera beta pública objetivo de la aplicación", texto)
+        self.assertIn("Build 000001", releases)
 
     def test_plan1_historico_y_roadmap_vivo_usan_fuentes_correctas(self):
         ledger = json.loads(
@@ -67,9 +72,10 @@ class TestPlan1DocumentacionPrimaria(unittest.TestCase):
         ).read_text(encoding="utf-8")
 
         for esperado in (
-            "PLAN.2 R2",
+            "G129/E03/C0",
+            "DOC.4 R1 / #171",
             "1.0.0.0",
-            "VER.2 R6",
+            "PERSIST.1",
             "REL.1",
         ):
             with self.subTest(esperado=esperado):
@@ -78,6 +84,8 @@ class TestPlan1DocumentacionPrimaria(unittest.TestCase):
                     roadmap,
                 )
 
+        self.assertNotIn("PLAN.2 R2", roadmap)
+        self.assertNotIn("VER.2 R6", roadmap)
     def test_releases_registra_evidencia_final_0_0_25(self):
         texto = (ROOT / "RELEASES.md").read_text(encoding="utf-8")
         self.assertIn("7affa00e2530aeede066c10ecfee8c6dbd49b10b", texto)

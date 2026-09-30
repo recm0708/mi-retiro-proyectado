@@ -33,9 +33,9 @@ class TestG116PromotionPostMerge(unittest.TestCase):
         ids = {item["identifier"]: item for item in data["identifiers"]}
         self.assertIn("G116", ids["DOC.1"]["global_refs"])
 
+
     def test_historia_g116_no_depende_de_matriz_viva(self):
         ledger = cargar_ledger()
-
         entry = next(
             item
             for item in ledger["entries"]
@@ -44,41 +44,40 @@ class TestG116PromotionPostMerge(unittest.TestCase):
 
         self.assertEqual("DOC.1", entry["block"])
         self.assertEqual(5, entry["ordinal"])
-        self.assertEqual(
-            "0.1.16.05-beta",
-            entry["revision_aware"],
-        )
+        self.assertEqual("0.1.16.05-beta", entry["revision_aware"])
 
         matrix = (
             ROOT / "docs/governance/pre-1-0-pending-matrix.md"
         ).read_text(encoding="utf-8")
+        self.assertIn("DOC.4 R1", matrix)
+        self.assertIn("PERSIST.1", matrix)
+        self.assertNotIn("PLAN.2 R2", matrix)
+        self.assertNotIn("Cerrado/aceptado G116/E05", matrix)
 
-        self.assertIn("PLAN.2 R2", matrix)
-        self.assertNotIn(
-            "Cerrado/aceptado G116/E05",
-            matrix,
-        )
+        releases = (ROOT / "RELEASES.md").read_text(encoding="utf-8")
+        self.assertIn("v0.1.16.05-beta", releases)
 
-        releases = (
-            ROOT / "RELEASES.md"
-        ).read_text(encoding="utf-8")
-        self.assertIn(
-            "v0.1.16.05-beta",
-            releases,
-        )
 
     def test_publicacion_g116_permanece_en_fuentes_canonicas(self):
         releases = (ROOT / "RELEASES.md").read_text(encoding="utf-8")
         changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
-        security = (ROOT / "SECURITY.md").read_text(encoding="utf-8")
+        ledger = cargar_ledger()
+        entry = next(
+            item
+            for item in ledger["entries"]
+            if item["global_revision"] == 116
+        )
 
         self.assertIn("v0.1.16.05-beta", releases)
         self.assertIn("0.1.16.05-beta", changelog)
-        self.assertIn(
+        self.assertEqual("DOC.1", entry["block"])
+        self.assertEqual("0.1.16.05-beta", entry["revision_aware"])
+
+        security = (ROOT / "SECURITY.md").read_text(encoding="utf-8")
+        self.assertNotIn(
             "| `0.1.16.05-beta` | Beta previa G116/E05 publicada;",
             security,
         )
-
 
 if __name__ == "__main__":
     unittest.main()
