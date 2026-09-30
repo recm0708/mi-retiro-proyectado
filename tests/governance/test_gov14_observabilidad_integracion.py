@@ -191,6 +191,7 @@ class TestGov14ObservabilidadIntegracion(unittest.TestCase):
                 self.assertNotIn("2026-08-17", contenido)
 
 
+
     def test_gitignore_y_documentacion_protegen_logs_locales(self):
         gitignore = (ROOT / ".gitignore").read_text(encoding="utf-8")
         documento = (
@@ -199,9 +200,11 @@ class TestGov14ObservabilidadIntegracion(unittest.TestCase):
 
         self.assertIn("logs/", gitignore)
         self.assertIn("MRP_DEV_MODE", documento)
+        self.assertIn("No existe telemetría remota automática", documento)
         self.assertIn("No existe envío de logs a terceros", documento)
-        self.assertIn("logs son locales", documento)
-        self.assertIn("datos sensibles", documento)
+        self.assertIn("cuerpos de solicitudes", documento)
+        self.assertIn("mensajes originales de excepciones", documento)
+        self.assertIn("datos personales", documento)
 
         historial = (
             ROOT

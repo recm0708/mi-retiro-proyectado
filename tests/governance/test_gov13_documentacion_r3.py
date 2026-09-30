@@ -153,19 +153,26 @@ class TestGov13DocumentacionR3(unittest.TestCase):
         self.assertEqual([], errores, "Espacios finales: " + ", ".join(errores))
 
 
+
     def test_indice_registra_historico_r3(self):
         indice = (DOCS / "README.md").read_text(encoding="utf-8")
         archive = (DOCS / "archive/README.md").read_text(encoding="utf-8")
 
         self.assertIn("archive/README.md", indice)
-        self.assertIn("regulatory-privacy/", archive)
+        self.assertIn("[`regulatory-privacy/`](regulatory-privacy/)", archive)
+        self.assertIn("desde GOV.1.3", archive)
 
         snapshot = (
             DOCS
             / "archive/regulatory-privacy/"
             "regulatory-framework-pre-gov1-3-r3.md"
+        )
+        self.assertTrue(snapshot.is_file())
+
+        vigente = (
+            DOCS / "regulatory/regulatory-framework.md"
         ).read_text(encoding="utf-8")
-        self.assertIn("GOV.1.3 R3", snapshot)
+        self.assertIn("GOV.1.3 R3", vigente)
 
     def test_validacion_registra_baseline_y_objetivo_r3(self):
         texto = (DOCS / "operations/validation.md").read_text(encoding="utf-8")
