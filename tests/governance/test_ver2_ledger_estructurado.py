@@ -368,7 +368,7 @@ class TestVer2LedgerEstructurado(
         )
 
         self.assertIn(
-            "**G070**",
+            "## Ledger G001–G070",
             ledger_md,
         )
 
