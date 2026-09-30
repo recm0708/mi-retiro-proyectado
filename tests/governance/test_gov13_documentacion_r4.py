@@ -268,7 +268,11 @@ class TestGov13DocumentacionR4(unittest.TestCase):
             texto,
         )
         self.assertIn(
-            "se crea **después** de integrar y revalidar",
+            "El tag se deriva exactamente de `VERSION`",
+            texto,
+        )
+        self.assertIn(
+            "revalidar:",
             texto,
         )
 
