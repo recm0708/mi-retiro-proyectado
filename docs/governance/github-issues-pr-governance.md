@@ -63,6 +63,23 @@ El repositorio no tiene Milestones y la agrupación ya está cubierta por Issues
 umbrella, relaciones, labels, roadmap, registry, ledger y el versionado
 Global/Edition.
 
+## Ciclo de vida y checklist de Issues
+
+Toda Issue material nueva debe mantener un checklist Markdown verificable desde
+su apertura hasta el cierre. Los Issue Forms versionados bajo
+`.github/ISSUE_TEMPLATE/` pre-generan el bloque requerido
+`checklist_trabajo`.
+
+Las casillas usan sintaxis Markdown:
+
+- `- [ ]` para trabajo pendiente;
+- `- [x]` únicamente cuando existe evidencia suficiente.
+
+El checklist cubre dependencias y condiciones de entrada, trabajo principal,
+pruebas y gates, documentación y trazabilidad, remanentes o Issues derivadas y
+criterio de cierre. El trabajo fuera de alcance se transfiere antes del cierre a
+una Issue o owner explícito; no se oculta marcando la Issue como completada.
+
 ## Issue Forms
 
 Se conservan reporte de error, solicitud de mejora y consulta / soporte.
