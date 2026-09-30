@@ -2,7 +2,7 @@
 
 Responsabilidad:
 - derivar la estructura versionable desde Git;
-- contrastar el árbol canónico documentado en README;
+- contrastarla con la política estructural machine-readable;
 - detectar divergencias estructurales y documentales.
 
 Límites:
@@ -27,7 +27,6 @@ from urllib.parse import unquote
 
 
 ROOT = Path(__file__).resolve().parents[1]
-README = ROOT / "README.md"
 STRUCTURE_POLICY = ROOT / "data" / "governance" / "repository-structure-policy.json"
 
 EXCLUDED_ORPHAN_PREFIXES = (
@@ -127,85 +126,6 @@ def root_files(
         for rel in files
         if "/" not in rel
     }
-
-
-def readme_tree_block() -> str:
-    """Obtiene el bloque de arquitectura canónica del README."""
-
-    text = README.read_text(
-        encoding="utf-8"
-    )
-
-    match = re.search(
-        r"## Arquitectura canónica del repositorio"
-        r".*?```text\s*\n"
-        r"(?P<tree>.*?)"
-        r"\n```",
-        text,
-        flags=re.DOTALL,
-    )
-
-    if match is None:
-        raise ValueError(
-            "README no contiene el árbol canónico esperado."
-        )
-
-    return match.group("tree")
-
-
-def parse_readme_tree() -> tuple[set[str], set[str]]:
-    """Reconstruye directorios y archivos raíz del árbol README."""
-
-    tree = readme_tree_block()
-
-    directories: set[str] = set()
-    files_at_root: set[str] = set()
-    stack: dict[int, str] = {}
-
-    pattern = re.compile(
-        r"^(?P<prefix>(?:(?:│   |    ))*)"
-        r"(?:├── |└── )"
-        r"(?P<name>.+?)\s*$"
-    )
-
-    for line in tree.splitlines():
-        match = pattern.match(line)
-
-        if match is None:
-            continue
-
-        prefix = match.group("prefix")
-        name = match.group("name").strip()
-        depth = (len(prefix) // 4) + 1
-
-        for old_depth in list(stack):
-            if old_depth >= depth:
-                del stack[old_depth]
-
-        if name.endswith("/"):
-            component = name[:-1]
-
-            if depth == 1:
-                full = component
-            else:
-                parent = stack.get(depth - 1)
-
-                if parent is None:
-                    raise ValueError(
-                        "Árbol README mal formado cerca de: "
-                        + line
-                    )
-
-                full = parent + "/" + component
-
-            directories.add(full)
-            stack[depth] = full
-            continue
-
-        if depth == 1:
-            files_at_root.add(name)
-
-    return directories, files_at_root
 
 
 def without_fenced_code(
@@ -700,11 +620,6 @@ def audit_repository() -> dict:
     directories = canonical_directories(files)
     roots = root_files(files)
 
-    (
-        readme_directories,
-        readme_roots,
-    ) = parse_readme_tree()
-
     broken, inbound = local_link_analysis(
         files,
         directories,
@@ -730,18 +645,6 @@ def audit_repository() -> dict:
     )
 
     blockers = {
-        "missing_directories": sorted(
-            directories - readme_directories
-        ),
-        "extra_directories": sorted(
-            readme_directories - directories
-        ),
-        "missing_root_files": sorted(
-            roots - readme_roots
-        ),
-        "extra_root_files": sorted(
-            readme_roots - roots
-        ),
         "broken_local_links": broken,
         "orphan_live_documents": orphans,
         "trivial_stubs": stubs,
@@ -767,13 +670,7 @@ def audit_repository() -> dict:
             "canonical_directories": len(
                 directories
             ),
-            "readme_directories": len(
-                readme_directories
-            ),
             "root_files": len(roots),
-            "readme_root_files": len(
-                readme_roots
-            ),
             "markdown_files": len(
                 [
                     rel
