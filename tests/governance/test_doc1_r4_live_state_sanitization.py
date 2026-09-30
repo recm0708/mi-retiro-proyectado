@@ -26,9 +26,9 @@ class TestDOC1R4LiveStateSanitization(unittest.TestCase):
 
         releases = (ROOT / "RELEASES.md").read_text(encoding="utf-8")
         self.assertIn("v0.1.14.01-beta", releases)
+
     def test_historia_g115_y_transicion_actual_usan_fuentes_canonicas(self):
         ledger = cargar_ledger()
-
         expected = {
             115: ("DOC.1", 4, "0.1.15.04-beta"),
             117: ("REL.GOV.1", 2, "0.1.17.02-beta"),
@@ -43,61 +43,60 @@ class TestDOC1R4LiveStateSanitization(unittest.TestCase):
             entry["global_revision"]: entry
             for entry in ledger["entries"]
         }
-
-        for global_revision, (
-            block,
-            ordinal,
-            revision_aware,
-        ) in expected.items():
+        for global_revision, (block, ordinal, revision_aware) in expected.items():
             with self.subTest(global_revision=global_revision):
                 entry = by_global[global_revision]
                 self.assertEqual(block, entry["block"])
                 self.assertEqual(ordinal, entry["ordinal"])
-                self.assertEqual(
-                    revision_aware,
-                    entry["revision_aware"],
-                )
+                self.assertEqual(revision_aware, entry["revision_aware"])
 
         matrix = (
             ROOT / "docs/governance/pre-1-0-pending-matrix.md"
         ).read_text(encoding="utf-8")
-
-        # La matriz es autoridad del trabajo vivo, no un ledger histórico.
-        self.assertIn("PLAN.2 R2", matrix)
-        self.assertIn("VER.2 R6", matrix)
         self.assertIn("DOC.4 R1", matrix)
         self.assertIn("PERSIST.1", matrix)
-        self.assertNotIn(
-            "Cerrado/aceptado G115/E04",
-            matrix,
-        )
+        self.assertNotIn("PLAN.2 R2", matrix)
+        self.assertNotIn("VER.2 R6", matrix)
+        self.assertNotIn("Cerrado/aceptado G115/E04", matrix)
 
-        releases = (
-            ROOT / "RELEASES.md"
-        ).read_text(encoding="utf-8")
-        self.assertIn(
-            "v0.1.15.04-beta",
-            releases,
-        )
+        releases = (ROOT / "RELEASES.md").read_text(encoding="utf-8")
+        self.assertIn("v0.1.15.04-beta", releases)
 
         registry = json.loads(
-            (
-                ROOT
-                / "data/governance/work-block-registry.json"
-            ).read_text(encoding="utf-8")
+            (ROOT / "data/governance/work-block-registry.json")
+            .read_text(encoding="utf-8")
         )
-
         candidate = registry["current_candidate"]
-        self.assertEqual("accepted_pending_integration", candidate["state"])
-        self.assertEqual(129, candidate["global_revision"])
-        self.assertEqual("MANT.2", candidate["block"])
+        self.assertEqual("unassigned", candidate["state"])
+        self.assertIsNone(candidate["global_revision"])
+        self.assertIsNone(candidate["block"])
         self.assertEqual(130, candidate["next_global_available"])
+
+        active = registry["active_phase"]
+        self.assertEqual("DOC.4", active["block"])
+        self.assertEqual("R1", active["revision"])
+        self.assertEqual(171, active["issue"])
+        self.assertEqual(129, active["base_global_revision"])
 
     def test_ledger_markdown_registra_g115(self):
         text=(ROOT/"docs/governance/pre-1-0-revision-ledger.md").read_text(encoding="utf-8"); self.assertIn("| G115 | `0.1.15.04-beta` | DOC.1 R4",text)
+
     def test_historia_y_evidencia_quedan_preservadas(self):
-        self.assertIn("`VERSION` permanece en `0.0.26-beta`",(ROOT/"CHANGELOG.md").read_text(encoding="utf-8"))
-        self.assertIn("`VERSION=0.1.13.03-beta`",(ROOT/"docs/operations/validation.md").read_text(encoding="utf-8"))
-        self.assertIn("Promoción G113/E03",(ROOT/"RELEASES.md").read_text(encoding="utf-8"))
-        self.assertIn("documentation-live-state-doc1-r4.md",(ROOT/"docs/README.md").read_text(encoding="utf-8"))
+        self.assertIn(
+            "`VERSION` permanece en `0.0.26-beta`",
+            (ROOT / "CHANGELOG.md").read_text(encoding="utf-8"),
+        )
+        self.assertIn(
+            "`VERSION=0.1.13.03-beta`",
+            (ROOT / "docs/operations/validation.md").read_text(encoding="utf-8"),
+        )
+        self.assertIn(
+            "Promoción G113/E03",
+            (ROOT / "RELEASES.md").read_text(encoding="utf-8"),
+        )
+        self.assertIn(
+            "documentation-live-state-doc1-r4.md",
+            (ROOT / "docs/audits/README.md").read_text(encoding="utf-8"),
+        )
+
 if __name__ == "__main__": unittest.main()

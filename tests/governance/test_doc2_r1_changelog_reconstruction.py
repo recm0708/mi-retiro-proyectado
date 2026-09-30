@@ -129,16 +129,18 @@ class TestDOC2R1ChangelogReconstruction(unittest.TestCase):
         ).read_text(encoding="utf-8")
         self.assertIn("G111/E01", audit)
 
+
     def test_auditoria_doc2_existe_y_esta_indexada(self):
-        audit_rel = "audits/documentation/changelog-reconstruction-doc2-r1.md"
-        audit = ROOT / "docs" / audit_rel
+        audit_rel = "documentation/changelog-reconstruction-doc2-r1.md"
+        audit = ROOT / "docs/audits" / audit_rel
         self.assertTrue(audit.is_file())
+
         text = audit.read_text(encoding="utf-8")
         self.assertIn("80 commits únicos", text)
         self.assertIn("G111/E01", text)
-        index = (ROOT / "docs/README.md").read_text(encoding="utf-8")
-        self.assertIn(audit_rel, index)
 
+        index = (ROOT / "docs/audits/README.md").read_text(encoding="utf-8")
+        self.assertIn(audit_rel, index)
 
 if __name__ == "__main__":
     unittest.main()

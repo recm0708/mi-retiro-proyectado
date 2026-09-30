@@ -45,18 +45,31 @@ class TestG124MANT1R8Promotion(unittest.TestCase):
         self.assertEqual("R8", entry["functional_revision"])
         self.assertEqual("0.1.24.13-beta", entry["revision_aware"])
 
-    def test_registry_cierra_mant1_y_deja_g126_libre(self):
-        registry = json.loads((ROOT / "data/governance/work-block-registry.json").read_text(encoding="utf-8"))
+
+    def test_registry_cierra_mant1_y_expone_g130_libre(self):
+        registry = json.loads(
+            (ROOT / "data/governance/work-block-registry.json")
+            .read_text(encoding="utf-8")
+        )
         ids = {item["identifier"]: item for item in registry["identifiers"]}
+
         self.assertEqual("closed", ids["MANT.1"]["status"])
         self.assertIn("G074-G085", ids["MANT.1"]["global_refs"])
         self.assertIn("G124", ids["MANT.1"]["global_refs"])
+        self.assertEqual("closed_r3_published", ids["MANT.2"]["status"])
+        self.assertEqual("in_progress", ids["DOC.4"]["status"])
+
         candidate = registry["current_candidate"]
-        self.assertEqual(129, candidate["global_revision"])
-        self.assertEqual("0.129.3.0-beta", candidate["revision_aware"])
-        self.assertEqual("MANT.2", candidate["block"])
+        self.assertEqual("unassigned", candidate["state"])
+        self.assertIsNone(candidate["global_revision"])
+        self.assertIsNone(candidate["revision_aware"])
+        self.assertIsNone(candidate["block"])
         self.assertEqual(130, candidate["next_global_available"])
-        self.assertEqual("accepted_pending_integration", candidate["state"])
+
+        active = registry["active_phase"]
+        self.assertEqual("DOC.4", active["block"])
+        self.assertEqual("R1", active["revision"])
+        self.assertEqual(129, active["base_global_revision"])
 
     def test_manifest_actual_materializa_mant2_r2(self):
         manifest = json.loads(
@@ -81,7 +94,8 @@ class TestG124MANT1R8Promotion(unittest.TestCase):
         self.assertIn("| RETIRAR | 0 | 0 |", audit)
         self.assertIn("220 módulos", audit)
 
-    def test_continuidad_preserva_g124_y_frontera_viva_plan2(self):
+
+    def test_continuidad_preserva_g124_y_frontera_viva_doc4(self):
         ledger = cargar_ledger()
 
         g124 = next(
@@ -94,54 +108,39 @@ class TestG124MANT1R8Promotion(unittest.TestCase):
             for item in ledger["entries"]
             if item["global_revision"] == 125
         )
+        g129 = next(
+            item
+            for item in ledger["entries"]
+            if item["global_revision"] == 129
+        )
 
         self.assertEqual("MANT.1", g124["block"])
         self.assertEqual("R8", g124["functional_revision"])
-        self.assertEqual(
-            "0.1.24.13-beta",
-            g124["revision_aware"],
-        )
+        self.assertEqual("0.1.24.13-beta", g124["revision_aware"])
 
         self.assertEqual("DOC.3", g125["block"])
         self.assertEqual("R1", g125["functional_revision"])
-        self.assertEqual(
-            "0.1.25.01-beta",
-            g125["revision_aware"],
-        )
+        self.assertEqual("0.1.25.01-beta", g125["revision_aware"])
 
-        releases = (
-            ROOT / "RELEASES.md"
-        ).read_text(encoding="utf-8")
+        self.assertEqual("MANT.2", g129["block"])
+        self.assertEqual("R3", g129["functional_revision"])
+        self.assertEqual("0.129.3.0-beta", g129["revision_aware"])
 
-        self.assertIn(
-            "v0.1.24.13-beta",
-            releases,
-        )
-        self.assertIn(
-            "v0.1.25.01-beta",
-            releases,
-        )
+        releases = (ROOT / "RELEASES.md").read_text(encoding="utf-8")
+        self.assertIn("v0.1.24.13-beta", releases)
+        self.assertIn("v0.1.25.01-beta", releases)
+        self.assertIn("v0.129.3.0-beta", releases)
 
         matrix = (
             ROOT / "docs/governance/pre-1-0-pending-matrix.md"
         ).read_text(encoding="utf-8")
-
-        self.assertIn(
-            "G125/E01",
-            matrix,
-        )
-        self.assertIn(
-            "PLAN.2 R2",
-            matrix,
-        )
-        self.assertIn(
-            "G126",
-            matrix,
-        )
-        self.assertNotIn(
-            "Cerrado/aceptado/publicado G124/E13",
-            matrix,
-        )
+        self.assertIn("G129/E03/C0", matrix)
+        self.assertIn("DOC.4 R1", matrix)
+        self.assertIn("PERSIST.1", matrix)
+        self.assertNotIn("G125/E01", matrix)
+        self.assertNotIn("PLAN.2 R2", matrix)
+        self.assertNotIn("G126", matrix)
+        self.assertNotIn("Cerrado/aceptado/publicado G124/E13", matrix)
 
 if __name__ == "__main__":
     unittest.main()

@@ -32,9 +32,9 @@ class TestG115PromotionPostMerge(unittest.TestCase):
         ids = {item["identifier"]: item for item in data["identifiers"]}
         self.assertIn("G115", ids["DOC.1"]["global_refs"])
 
+
     def test_historia_g115_no_depende_de_matriz_viva(self):
         ledger = cargar_ledger()
-
         entry = next(
             item
             for item in ledger["entries"]
@@ -43,28 +43,18 @@ class TestG115PromotionPostMerge(unittest.TestCase):
 
         self.assertEqual("DOC.1", entry["block"])
         self.assertEqual(4, entry["ordinal"])
-        self.assertEqual(
-            "0.1.15.04-beta",
-            entry["revision_aware"],
-        )
+        self.assertEqual("0.1.15.04-beta", entry["revision_aware"])
 
         matrix = (
             ROOT / "docs/governance/pre-1-0-pending-matrix.md"
         ).read_text(encoding="utf-8")
+        self.assertIn("DOC.4 R1", matrix)
+        self.assertIn("PERSIST.1", matrix)
+        self.assertNotIn("PLAN.2 R2", matrix)
+        self.assertNotIn("Cerrado/aceptado G115/E04", matrix)
 
-        self.assertIn("PLAN.2 R2", matrix)
-        self.assertNotIn(
-            "Cerrado/aceptado G115/E04",
-            matrix,
-        )
-
-        releases = (
-            ROOT / "RELEASES.md"
-        ).read_text(encoding="utf-8")
-        self.assertIn(
-            "v0.1.15.04-beta",
-            releases,
-        )
+        releases = (ROOT / "RELEASES.md").read_text(encoding="utf-8")
+        self.assertIn("v0.1.15.04-beta", releases)
 
     def test_publicacion_g115_permanece_preservada(self):
         ledger = cargar_ledger()

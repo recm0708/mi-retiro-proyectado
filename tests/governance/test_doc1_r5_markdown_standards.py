@@ -130,31 +130,22 @@ class TestDoc1R5MarkdownStandards(unittest.TestCase):
         self.assertEqual(len(actual), declared)
         self.assertEqual(actual, documented)
 
-    def test_indice_dev2_refleja_r6_publicado(self):
+
+    def test_indice_dev2_enlaza_autoridad_y_documento_preserva_publicacion(self):
         index = (
-            ROOT
-            / "docs"
-            / "README.md"
-        ).read_text(
-            encoding="utf-8"
-        )
+            ROOT / "docs/README.md"
+        ).read_text(encoding="utf-8")
+        dev = (
+            ROOT / "docs/architecture/development-center.md"
+        ).read_text(encoding="utf-8")
 
         self.assertIn(
-            "DEV.2 R1–R6 — Centro de desarrollo",
+            "[Centro de desarrollo](architecture/development-center.md)",
             index,
         )
-
-        self.assertIn(
-            "R6 queda aceptado/publicado como G119/E05",
-            index,
-        )
-
-        self.assertNotIn(
-            "R6 permanece como siguiente candidato funcional",
-            index,
-        )
-
-
+        self.assertNotIn("R6 queda aceptado/publicado como G119/E05", index)
+        self.assertIn("G119/E05", dev)
+        self.assertIn("DEV.2 R6", dev)
 
 if __name__ == "__main__":
     unittest.main()

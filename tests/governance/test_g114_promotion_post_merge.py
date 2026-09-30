@@ -9,7 +9,8 @@ class TestG114PromotionPostMerge(unittest.TestCase):
     def test_g114_permanece_preservado_en_ledger(self):
         ledger=cargar_ledger(); entry=next(x for x in ledger["entries"] if x["global_revision"]==114)
         self.assertEqual("PLAN.2",entry["block"]); self.assertEqual(1,entry["ordinal"]); self.assertEqual("0.1.14.01-beta",entry["revision_aware"]); self.assertIn("PR #94",entry["evidence"]); self.assertIn("7ded70c",entry["evidence"])
-    def test_registro_preserva_g114_y_reconoce_mant2_r2_actual(self):
+
+    def test_registro_preserva_g114_y_reconoce_g129_doc4_actual(self):
         data = json.loads(
             (ROOT / "data/governance/work-block-registry.json")
             .read_text(encoding="utf-8")
@@ -18,38 +19,26 @@ class TestG114PromotionPostMerge(unittest.TestCase):
 
         self.assertEqual("closed", ids["PLAN.2"]["status"])
         self.assertEqual(["G114", "G126"], ids["PLAN.2"]["global_refs"])
-        self.assertEqual(
-            "accepted_r3_pending_integration",
-            ids["MANT.2"]["status"],
-        )
+        self.assertEqual("closed_r3_published", ids["MANT.2"]["status"])
         self.assertEqual(
             ["G123", "G127", "G129"],
             ids["MANT.2"]["global_refs"],
         )
+        self.assertEqual("in_progress", ids["DOC.4"]["status"])
+
+        candidate = data["current_candidate"]
+        self.assertEqual("unassigned", candidate["state"])
+        self.assertIsNone(candidate["global_revision"])
+        self.assertIsNone(candidate["block"])
+        self.assertEqual(130, candidate["next_global_available"])
 
         active = data["active_phase"]
-        self.assertEqual(
-            (
-                "MANT.2",
-                "R3",
-                211,
-                "accepted_pending_integration",
-                129,
-                "0.129.3.0-beta",
-                128,
-                "0.128.2.0-beta",
-            ),
-            (
-                active["block"],
-                active["revision"],
-                active["issue"],
-                active["state"],
-                active["global_revision"],
-                active["revision_aware"],
-                active["base_global_revision"],
-                active["base_revision_aware"],
-            ),
-        )
+        self.assertEqual("DOC.4", active["block"])
+        self.assertEqual("R1", active["revision"])
+        self.assertEqual(171, active["issue"])
+        self.assertEqual("in_progress", active["state"])
+        self.assertEqual(129, active["base_global_revision"])
+        self.assertEqual("0.129.3.0-beta", active["base_revision_aware"])
 
     def test_documentacion_preserva_g114_plan2(self):
         ledger = cargar_ledger()

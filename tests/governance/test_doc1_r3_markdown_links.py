@@ -94,13 +94,16 @@ class TestDOC1R3MarkdownLinks(unittest.TestCase):
             traceability,
         )
 
+
     def test_auditoria_doc1_r3_esta_indexada(self):
         audit = (
             ROOT
             / "docs/audits/documentation/"
             "documentation-markdown-links-doc1-r3.md"
         )
-        index = (ROOT / "docs/README.md").read_text(encoding="utf-8")
+        index = (
+            ROOT / "docs/audits/README.md"
+        ).read_text(encoding="utf-8")
 
         self.assertTrue(audit.is_file())
         self.assertIn(
