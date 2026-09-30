@@ -840,7 +840,17 @@ def audit_file(
     h1_lines = [
         number
         for number, line in enumerate(lines, start=1)
-        if re.match(r"^#\s+\S", line)
+        if (
+            re.match(r"^#\s+\S", line)
+            or (
+                rel == "README.md"
+                and re.match(
+                    r"^<h1\\b[^>]*>.*</h1>\\s*$",
+                    line,
+                    re.IGNORECASE,
+                )
+            )
+        )
     ]
 
     if not h1_lines:

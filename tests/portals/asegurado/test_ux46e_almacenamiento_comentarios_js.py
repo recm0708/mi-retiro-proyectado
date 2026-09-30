@@ -107,10 +107,25 @@ class TestUX46eAlmacenamientoComentariosJS(unittest.TestCase):
 
     def test_indice_y_contributing_enlazan_estandar(self):
         indice = (DOCS / "README.md").read_text(encoding="utf-8")
-        contributing = (ROOT / "CONTRIBUTING.md").read_text(encoding="utf-8")
-        self.assertIn("standards/code-and-comments.md", indice)
-        self.assertIn("docs/standards/code-and-comments.md", contributing)
+        estandares = (
+            DOCS / "standards/README.md"
+        ).read_text(encoding="utf-8")
+        contributing = (
+            ROOT / "CONTRIBUTING.md"
+        ).read_text(encoding="utf-8")
 
+        self.assertIn(
+            "[Índice de estándares](standards/README.md)",
+            indice,
+        )
+        self.assertIn(
+            "[Estándar de código y comentarios](code-and-comments.md)",
+            estandares,
+        )
+        self.assertIn(
+            "docs/standards/code-and-comments.md",
+            contributing,
+        )
     def test_adr161_documenta_ruptura_pre_beta_sin_fallback(self):
         decisiones = (DOCS / "decisions/README.md").read_text(encoding="utf-8")
         gestion = (DOCS / "product/simulation-data-management.md").read_text(encoding="utf-8")

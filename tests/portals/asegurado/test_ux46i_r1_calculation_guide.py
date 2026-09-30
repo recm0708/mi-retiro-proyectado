@@ -170,15 +170,27 @@ class TestUX46iR1ComoSeCalcula(unittest.TestCase):
         self.assertIn("var(--app-surface)", self.css)
 
     def test_14_documentacion_traza_adr_rf_tr_y_estado_r1(self):
-        decisiones = (ROOT / "docs/decisions/README.md").read_text(encoding="utf-8")
-        especificacion = (ROOT / "docs/product/functional-specification.md").read_text(
-            encoding="utf-8"
-        )
-        matriz = (ROOT / "docs/product/traceability-matrix.md").read_text(encoding="utf-8")
-        readme = (ROOT / "README.md").read_text(encoding="utf-8")
-        roadmap = (ROOT / "docs/governance/roadmap.md").read_text(encoding="utf-8")
-        plan = (ROOT / "docs/governance/master-plan-to-1-0.md").read_text(encoding="utf-8")
-        changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
+        decisiones = (
+            ROOT / "docs/decisions/README.md"
+        ).read_text(encoding="utf-8")
+        especificacion = (
+            ROOT / "docs/product/functional-specification.md"
+        ).read_text(encoding="utf-8")
+        matriz = (
+            ROOT / "docs/product/traceability-matrix.md"
+        ).read_text(encoding="utf-8")
+        readme = (
+            ROOT / "README.md"
+        ).read_text(encoding="utf-8")
+        roadmap = (
+            ROOT / "docs/governance/roadmap.md"
+        ).read_text(encoding="utf-8")
+        plan = (
+            ROOT / "docs/governance/master-plan-to-1-0.md"
+        ).read_text(encoding="utf-8")
+        changelog = (
+            ROOT / "CHANGELOG.md"
+        ).read_text(encoding="utf-8")
         historico = (
             ROOT
             / "docs/archive/governance/doc1-r1-markdown-update-context.md"
@@ -188,8 +200,11 @@ class TestUX46iR1ComoSeCalcula(unittest.TestCase):
         for rf in range(383, 390):
             self.assertIn(f"**RF-{rf}.**", especificacion)
         self.assertIn("| TR-026 |", matriz)
-        self.assertIn("UX.4.6i", readme)
-        self.assertIn("**841 pruebas**", readme)
+        self.assertIn(
+            "[Guía de cálculo](docs/product/calculation-guide.md)",
+            readme,
+        )
+
         self.assertIn("R1.2 — navegación", historico)
         self.assertIn("R1.3 — ejemplos sustituidos", historico)
         self.assertIn("R1.4 — etiqueta **Ejemplo**", historico)
@@ -202,9 +217,16 @@ class TestUX46iR1ComoSeCalcula(unittest.TestCase):
         self.assertNotIn("UX.4.6i R1.1", plan)
         self.assertIn("### UX.4.6i R1 —", changelog)
         self.assertIn("### UX.4.6i — cierre de Cómo se calcula", changelog)
-        self.assertTrue((ROOT / "docs/product/calculation-guide.md").exists())
-        self.assertTrue((ROOT / "docs/archive/ux/ux46i-r1-calculation-explanation-audit.md").exists())
-
+        self.assertTrue(
+            (ROOT / "docs/product/calculation-guide.md").exists()
+        )
+        self.assertTrue(
+            (
+                ROOT
+                / "docs/archive/ux/"
+                "ux46i-r1-calculation-explanation-audit.md"
+            ).exists()
+        )
     def test_15_navbar_ofrece_acceso_directo_y_estado_activo(self):
         base = (ROOT / "app/templates/asegurado/base.html").read_text(encoding="utf-8")
         main = runtime_http_source()
@@ -332,22 +354,32 @@ class TestUX46iR1ComoSeCalcula(unittest.TestCase):
         self.assertNotIn("background: #", self.css)
 
     def test_28_documentacion_registra_cierre_r14_y_gate_841(self):
-        readme = (ROOT / "README.md").read_text(encoding="utf-8")
-        roadmap = (ROOT / "docs/governance/roadmap.md").read_text(encoding="utf-8")
-        plan = (ROOT / "docs/governance/master-plan-to-1-0.md").read_text(encoding="utf-8")
-        validacion = (ROOT / "docs/operations/validation.md").read_text(encoding="utf-8")
-        guia = (ROOT / "docs/product/calculation-guide.md").read_text(encoding="utf-8")
-        changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
+        roadmap = (
+            ROOT / "docs/governance/roadmap.md"
+        ).read_text(encoding="utf-8")
+        plan = (
+            ROOT / "docs/governance/master-plan-to-1-0.md"
+        ).read_text(encoding="utf-8")
+        validacion = (
+            ROOT / "docs/operations/validation.md"
+        ).read_text(encoding="utf-8")
+        guia = (
+            ROOT / "docs/product/calculation-guide.md"
+        ).read_text(encoding="utf-8")
+        changelog = (
+            ROOT / "CHANGELOG.md"
+        ).read_text(encoding="utf-8")
+        ledger = (
+            ROOT / "docs/governance/pre-1-0-revision-ledger.md"
+        ).read_text(encoding="utf-8")
         historico = (
             ROOT
             / "docs/archive/governance/doc1-r1-markdown-update-context.md"
         ).read_text(encoding="utf-8")
 
-        self.assertIn("**DEV.2:** cerrado.", readme)
-        self.assertIn("**NOR.2 R4:** cerrado", readme)
-        self.assertIn("**NOR.2 R5:** cerrado", readme)
-        self.assertIn("**NOR.2 R6:** cerrado", readme)
-        self.assertIn("**NOR.2 R7:** cerrado", readme)
+        self.assertIn("G069", ledger)
+        self.assertIn("G070", ledger)
+        self.assertIn("UX.4.6i", ledger)
         self.assertIn("### UX.4.6i R1 —", changelog)
 
         for revision in (
@@ -366,7 +398,6 @@ class TestUX46iR1ComoSeCalcula(unittest.TestCase):
         self.assertNotIn("UX.4.6i R1.1", plan)
         self.assertIn("841 pruebas en `OK`", validacion)
         self.assertIn("## Cierre de UX.4.6i", guia)
-
     def test_29_r14_etiqueta_visible_usa_ejemplo_sin_coletilla(self):
         self.assertNotIn("Ejemplo con números", self.plantilla)
         self.assertGreaterEqual(
