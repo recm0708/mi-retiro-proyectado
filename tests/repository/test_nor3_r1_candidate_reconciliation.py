@@ -22,13 +22,15 @@ class TestNOR3R1CandidateReconciliation(unittest.TestCase):
         self.assertEqual("0.1.22.01-beta", entry["revision_aware"])
         self.assertEqual("NOR.3", entry["block"])
 
-    def test_g126_disponible_sin_candidato_preasignado(self):
+
+    def test_g130_disponible_sin_candidato_preasignado(self):
         ledger = cargar_ledger()
         self.assertEqual(130, ledger["next_global"])
         self.assertIsNone(ledger["next_candidate"])
         self.assertIsNone(ledger["next_candidate_block"])
 
-    def test_registry_separa_nor3_cerrado_de_persist1(self):
+
+    def test_registry_separa_nor3_cerrado_de_doc4_activo_y_persist1(self):
         registry = json.loads(
             (ROOT / "data/governance/work-block-registry.json")
             .read_text(encoding="utf-8")
@@ -40,34 +42,27 @@ class TestNOR3R1CandidateReconciliation(unittest.TestCase):
 
         self.assertEqual("closed", ids["NOR.3"]["status"])
         self.assertEqual(["G122"], ids["NOR.3"]["global_refs"])
+        self.assertEqual("in_progress", ids["DOC.4"]["status"])
+        self.assertEqual([], ids["DOC.4"]["global_refs"])
         self.assertEqual("planned_reserved", ids["PERSIST.1"]["status"])
-        self.assertEqual([], ids["PERSIST.1"]["global_refs"])
 
         candidate = registry["current_candidate"]
-        self.assertEqual(
-            (
-                129,
-                "0.129.3.0-beta",
-                "MANT.2",
-                "R3",
-                "dependency_maintenance_post_g128",
-                "accepted_pending_integration",
-                211,
-                130,
-            ),
-            (
-                candidate["global_revision"],
-                candidate["revision_aware"],
-                candidate["block"],
-                candidate["revision"],
-                candidate["revision_scope"],
-                candidate["state"],
-                candidate["planning_issue"],
-                candidate["next_global_available"],
-            ),
-        )
+        self.assertEqual("unassigned", candidate["state"])
+        self.assertIsNone(candidate["global_revision"])
+        self.assertIsNone(candidate["revision_aware"])
+        self.assertIsNone(candidate["block"])
+        self.assertIsNone(candidate["revision"])
+        self.assertIsNone(candidate["planning_issue"])
+        self.assertEqual(130, candidate["next_global_available"])
 
-    def test_manifest_actual_materializa_mant2_r2(self):
+        active = registry["active_phase"]
+        self.assertEqual("DOC.4", active["block"])
+        self.assertEqual("R1", active["revision"])
+        self.assertEqual(171, active["issue"])
+        self.assertEqual(129, active["base_global_revision"])
+
+
+    def test_manifest_materializa_g129_publicado_y_siguiente_global_libre(self):
         manifest = json.loads(
             (ROOT / "data/governance/release-publication-manifest.json")
             .read_text(encoding="utf-8")
@@ -81,105 +76,70 @@ class TestNOR3R1CandidateReconciliation(unittest.TestCase):
         self.assertIsNone(next_step["revision_aware"])
         self.assertIsNone(next_step["block"])
         for fragment in (
-            "G129/E03/C0",
-            "MANT.2 R3/#211",
             "G130",
+            "G129/E03/C0",
             "DOC.4 R1/#171",
+            "sin candidato",
         ):
             with self.subTest(fragment=fragment):
                 self.assertIn(fragment, next_step["description"])
+        self.assertNotIn("pendiente de integración", next_step["description"])
+        self.assertNotIn("pendiente de publicación", next_step["description"])
+
 
     def test_historia_nor3_y_programa_vivo_quedan_separados(self):
         ledger = cargar_ledger()
-
         g122 = next(
             item
             for item in ledger["entries"]
             if item["global_revision"] == 122
         )
+        self.assertEqual("NOR.3", g122["block"])
+        self.assertEqual("0.1.22.01-beta", g122["revision_aware"])
 
-        self.assertEqual(
-            "NOR.3",
-            g122["block"],
-        )
-        self.assertEqual(
-            "0.1.22.01-beta",
-            g122["revision_aware"],
-        )
-
-        releases = (
-            ROOT / "RELEASES.md"
-        ).read_text(encoding="utf-8")
-
-        self.assertIn(
-            "Promoción G122/E01 — NOR.3 R8",
-            releases,
-        )
+        releases = (ROOT / "RELEASES.md").read_text(encoding="utf-8")
+        self.assertIn("Promoción G122/E01 — NOR.3 R8", releases)
 
         matrix = (
-            ROOT
-            / "docs/governance/pre-1-0-pending-matrix.md"
+            ROOT / "docs/governance/pre-1-0-pending-matrix.md"
         ).read_text(encoding="utf-8")
+        graph_start = matrix.index("## 3. Grafo canónico")
+        graph_end = matrix.index("## 4. Pendientes obligatorios pre-1.0")
+        graph = matrix[graph_start:graph_end]
 
-        graph_start = matrix.index(
-            "## 2. Grafo canónico"
-        )
-        graph_end = matrix.index(
-            "## 3. Pendientes obligatorios pre-1.0"
-        )
+        self.assertLess(graph.index("DOC.4 R1"), graph.index("#142 auditoría previsional"))
+        self.assertLess(graph.index("#142 auditoría previsional"), graph.index("PERSIST.1"))
+        self.assertLess(graph.index("PERSIST.1"), graph.index("REP.1"))
+        self.assertLess(graph.index("REP.1"), graph.index("DEPLOY.1"))
+        self.assertLess(graph.index("DEPLOY.1"), graph.index("UX.7"))
 
-        graph = matrix[
-            graph_start:graph_end
-        ]
-
-        self.assertLess(
-            graph.index("PLAN.2 R2"),
-            graph.index("MANT.2 R2"),
-        )
-        self.assertLess(
-            graph.index("MANT.2 R2"),
-            graph.index("VER.2 R6"),
-        )
-        self.assertLess(
-            graph.index("VER.2 R6"),
-            graph.index("DOC.4 R1"),
-        )
-        self.assertLess(
-            graph.index("DOC.4 R1"),
-            graph.index("PERSIST.1"),
-        )
-
-        self.assertIn(
+        for historical in (
             "G126/E01",
-            matrix,
-        )
-        self.assertIn(
-            "G126",
-            matrix,
-        )
-
-        self.assertNotIn(
+            "PLAN.2 R2",
+            "MANT.2 R2",
+            "VER.2 R6",
             "**UX.6 R1–R8**",
-            matrix,
-        )
-        self.assertNotIn(
             "**NOR.3 R1–R8**",
-            matrix,
-        )
+        ):
+            self.assertNotIn(historical, graph)
+
 
     def test_nor3_historico_y_estado_vivo_tienen_owners_distintos(self):
-        live_files = (
-            "README.md",
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        self.assertIn("**Versión de desarrollo:** `0.129.3.0-beta`", readme)
+        self.assertNotIn("G122/E01", readme)
+        self.assertNotIn("G126", readme)
+        self.assertNotIn("G127/E02", readme)
+
+        for rel in (
             "docs/governance/master-plan-to-1-0.md",
             "docs/governance/roadmap.md",
-        )
-
-        for rel in live_files:
+        ):
             text = (ROOT / rel).read_text(encoding="utf-8")
             with self.subTest(rel=rel):
-                self.assertIn("G126", text)
-                self.assertIn("MANT.2", text)
-                self.assertIn("G127/E02", text)
+                self.assertIn("G129/E03/C0", text)
+                self.assertIn("DOC.4 R1", text)
+                self.assertNotIn("G127/E02", text)
 
         historical_sources = (
             "CHANGELOG.md",
@@ -187,12 +147,10 @@ class TestNOR3R1CandidateReconciliation(unittest.TestCase):
             "VERSIONING.md",
             "docs/governance/pre-1-0-revision-ledger.md",
         )
-
         corpus = "\n".join(
             (ROOT / rel).read_text(encoding="utf-8")
             for rel in historical_sources
         )
-
         self.assertIn("NOR.3", corpus)
         self.assertIn("G122/E01", corpus)
         self.assertIn("0.1.22.01-beta", corpus)

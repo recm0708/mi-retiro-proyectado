@@ -167,7 +167,7 @@ en la matriz de pendientes.
 
 Si aparece otra superficie material:
 
-1. se crea UX.33 o la siguiente consecutiva;
+1. se crea la siguiente UX consecutiva después del baseline registrado;
 2. recibe Issue propio;
 3. se actualizan #129 y las autoridades vivas;
 4. se aplica #189;

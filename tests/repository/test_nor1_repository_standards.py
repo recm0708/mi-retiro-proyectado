@@ -64,6 +64,7 @@ class TestNOR1Standards(unittest.TestCase):
         self.assertIn("NOR.2", contenido)
         self.assertIn("SEC.2 permanece pausado", contenido)
 
+
     def test_historia_nor1_nor2_y_programa_vivo_usan_owners_correctos(self):
         cierre = (
             ROOT
@@ -75,10 +76,7 @@ class TestNOR1Standards(unittest.TestCase):
 
         self.assertIn("NOR.1", cierre)
         self.assertIn("NOR.2", cierre)
-        self.assertIn(
-            "SEC.2 permanece pausado",
-            cierre,
-        )
+        self.assertIn("SEC.2 permanece pausado", cierre)
 
         ledger = (
             ROOT
@@ -86,7 +84,6 @@ class TestNOR1Standards(unittest.TestCase):
             / "governance"
             / "pre-1-0-revision-ledger.md"
         ).read_text(encoding="utf-8")
-
         for esperado in (
             "G094",
             "NOR.2 R1",
@@ -95,41 +92,22 @@ class TestNOR1Standards(unittest.TestCase):
             "G112",
             "NOR.1 R8",
         ):
-            self.assertIn(
-                esperado,
-                ledger,
-            )
+            self.assertIn(esperado, ledger)
 
-        releases = (
-            ROOT / "RELEASES.md"
-        ).read_text(encoding="utf-8")
-
-        self.assertIn(
-            "NOR.1 R8",
-            releases,
-        )
-        self.assertIn(
-            "NOR.2",
-            releases,
-        )
+        releases = (ROOT / "RELEASES.md").read_text(encoding="utf-8")
+        self.assertIn("NOR.1 R8", releases)
+        self.assertIn("NOR.2", releases)
 
         for rel in (
             "docs/governance/roadmap.md",
             "docs/governance/master-plan-to-1-0.md",
         ):
-            text = (
-                ROOT / rel
-            ).read_text(encoding="utf-8")
-
+            text = (ROOT / rel).read_text(encoding="utf-8")
             with self.subTest(rel=rel):
-                self.assertIn(
-                    "G125/E01",
-                    text,
-                )
-                self.assertIn(
-                    "PLAN.2 R2",
-                    text,
-                )
+                self.assertIn("G129/E03/C0", text)
+                self.assertIn("DOC.4 R1", text)
+                self.assertNotIn("G125/E01", text)
+                self.assertNotIn("PLAN.2 R2", text)
 
 if __name__ == "__main__":
     unittest.main()

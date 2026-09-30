@@ -45,34 +45,29 @@ class TestG122NOR3Promotion(unittest.TestCase):
         self.assertEqual("R8", entry["functional_revision"])
         self.assertEqual("0.1.22.01-beta", entry["revision_aware"])
 
-    def test_registry_preserva_nor3_cerrado_y_estado_actual(self):
+
+    def test_registry_preserva_nor3_cerrado_y_doc4_activo(self):
         data = json.loads(REGISTRY.read_text(encoding="utf-8"))
         ids = {item["identifier"]: item for item in data["identifiers"]}
         self.assertEqual("closed", ids["NOR.3"]["status"])
         self.assertEqual(["G122"], ids["NOR.3"]["global_refs"])
+        self.assertEqual("in_progress", ids["DOC.4"]["status"])
         self.assertEqual("planned_reserved", ids["PERSIST.1"]["status"])
 
         candidate = data["current_candidate"]
-        self.assertEqual(
-            (
-                "accepted_pending_integration",
-                129,
-                "0.129.3.0-beta",
-                "MANT.2",
-                "R3",
-                211,
-                130,
-            ),
-            (
-                candidate["state"],
-                candidate["global_revision"],
-                candidate["revision_aware"],
-                candidate["block"],
-                candidate["revision"],
-                candidate["planning_issue"],
-                candidate["next_global_available"],
-            ),
-        )
+        self.assertEqual("unassigned", candidate["state"])
+        self.assertIsNone(candidate["global_revision"])
+        self.assertIsNone(candidate["revision_aware"])
+        self.assertIsNone(candidate["block"])
+        self.assertIsNone(candidate["revision"])
+        self.assertIsNone(candidate["planning_issue"])
+        self.assertEqual(130, candidate["next_global_available"])
+
+        active = data["active_phase"]
+        self.assertEqual("DOC.4", active["block"])
+        self.assertEqual("R1", active["revision"])
+        self.assertEqual(171, active["issue"])
+        self.assertEqual(129, active["base_global_revision"])
 
     def test_manifest_actual_materializa_mant2_r2(self):
         data = json.loads(MANIFEST.read_text(encoding="utf-8"))

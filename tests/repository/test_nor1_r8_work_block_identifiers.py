@@ -33,6 +33,7 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
         self.assertEqual(len(families), len(set(families)))
         self.assertEqual(len(identifiers), len(set(identifiers)))
 
+
     def test_historicos_y_planificados_quedan_reservados(self):
         ids = {item["identifier"]: item for item in self.data["identifiers"]}
         for ident in (
@@ -43,7 +44,7 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
             self.assertFalse(ids[ident]["reusable_for_different_scope"])
 
         self.assertEqual("closed", ids["PLAN.2"]["status"])
-        self.assertEqual("accepted_r3_pending_integration", ids["MANT.2"]["status"])
+        self.assertEqual("closed_r3_published", ids["MANT.2"]["status"])
         self.assertEqual("closed", ids["MANT.1"]["status"])
         self.assertIn("G124/E13", ids["MANT.1"]["meaning"])
         self.assertIn("G124", ids["MANT.1"]["global_refs"])
@@ -51,9 +52,11 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
         self.assertIn("G114", ids["PLAN.2"]["global_refs"])
         self.assertEqual("closed", ids["UX.5"]["status"])
         self.assertEqual("closed", ids["UX.6"]["status"])
-
+        self.assertEqual("in_progress", ids["DOC.4"]["status"])
+        self.assertEqual([], ids["DOC.4"]["global_refs"])
         self.assertEqual("planned_reserved", ids["PERSIST.1"]["status"])
         self.assertEqual("closed", ids["NOR.3"]["status"])
+
         future_reserved = (
             tuple(f"UX.{number}" for number in range(7, 33))
             + ("REP.1", "DEPLOY.1", "A11Y.2", "REV.1", "QA.1", "REL.1")
@@ -72,7 +75,8 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
         for label in ("LEGACY", "INTEGRIDAD", "POST-GOV"):
             self.assertFalse(labels[label]["reusable_as_family"])
 
-    def test_g112_permanece_aceptado_y_estado_actual_no_preasigna_g126(self):
+
+    def test_g112_permanece_aceptado_y_g130_sigue_sin_candidato(self):
         ledger = cargar_ledger()
         entry = next(
             x for x in ledger["entries"]
@@ -83,19 +87,18 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
         self.assertEqual("0.1.12.07-beta", entry["revision_aware"])
 
         candidate = self.data["current_candidate"]
-        self.assertEqual(129, candidate["global_revision"])
-        self.assertEqual("MANT.2", candidate["block"])
-        self.assertEqual("R3", candidate["revision"])
-        self.assertEqual(3, candidate["edition"])
-        self.assertEqual("accepted_pending_integration", candidate["state"])
+        self.assertEqual("unassigned", candidate["state"])
+        self.assertIsNone(candidate["global_revision"])
+        self.assertIsNone(candidate["block"])
+        self.assertIsNone(candidate["revision"])
+        self.assertIsNone(candidate["edition"])
         self.assertEqual(130, candidate["next_global_available"])
-        self.assertEqual(
-            "DOC.4",
-            candidate["next_functional_block_if_accepted"],
-        )
-        self.assertIsNone(
-            candidate["next_functional_global_if_accepted"],
-        )
+
+        active = self.data["active_phase"]
+        self.assertEqual("DOC.4", active["block"])
+        self.assertEqual("R1", active["revision"])
+        self.assertEqual(171, active["issue"])
+        self.assertEqual(129, active["base_global_revision"])
 
     def test_candidato_reabierto_continua_ordinal_del_bloque(self):
         ledger = cargar_ledger()
@@ -136,13 +139,16 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
 
         validar_ledger(candidato)
 
+
     def test_politica_y_auditoria_estan_indexadas(self):
         standards = (
             ROOT / "docs/standards/README.md"
         ).read_text(encoding="utf-8")
-        docs_index = (ROOT / "docs/README.md").read_text(encoding="utf-8")
+        audits_index = (
+            ROOT / "docs/audits/README.md"
+        ).read_text(encoding="utf-8")
         self.assertIn("work-block-identifiers.md", standards)
-        self.assertIn("work-block-identifier-audit-nor1-r8.md", docs_index)
+        self.assertIn("work-block-identifier-audit-nor1-r8.md", audits_index)
 
     def test_atributos_python_minuscula_no_son_identificadores(self):
         script = (ROOT / "scripts/audit_block_identifiers.py").read_text(
@@ -151,6 +157,7 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
         self.assertIn("[A-Z][A-Z0-9]*", script)
         self.assertIn(r"\d+[A-Za-z0-9]*", script)
         self.assertNotIn("DOC.exists", self.data["non_block_tokens"])
+
 
     def test_historia_y_planificacion_se_validan_en_fuentes_canonicas(self):
         ledger = cargar_ledger()
@@ -166,6 +173,7 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
             125: ("DOC.3", 1, "0.1.25.01-beta"),
             126: ("PLAN.2", 1, "0.1.26.01-beta"),
             127: ("MANT.2", 2, "0.1.27.02-beta"),
+            129: ("MANT.2", 3, "0.129.3.0-beta"),
         }
         for global_revision, expected_entry in expected.items():
             entry = entries[global_revision]
@@ -173,24 +181,24 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
                 self.assertEqual(expected_entry[0], entry["block"])
                 self.assertEqual(expected_entry[1], entry["ordinal"])
                 self.assertEqual(expected_entry[2], entry["revision_aware"])
+
         ids = {item["identifier"]: item for item in self.data["identifiers"]}
         self.assertEqual("closed", ids["NOR.1"]["status"])
         self.assertEqual("closed", ids["PLAN.2"]["status"])
         self.assertEqual("reopened_planned_r6", ids["DOC.1"]["status"])
-        self.assertEqual("planned_reserved", ids["PERSIST.1"]["status"])
         self.assertEqual("closed", ids["NOR.3"]["status"])
         self.assertEqual("closed", ids["DOC.3"]["status"])
         self.assertIn("G125", ids["DOC.3"]["global_refs"])
-        self.assertEqual("planned_reserved", ids["DOC.4"]["status"])
+        self.assertEqual("closed_r3_published", ids["MANT.2"]["status"])
+        self.assertEqual("in_progress", ids["DOC.4"]["status"])
+        self.assertEqual("planned_reserved", ids["PERSIST.1"]["status"])
+
         matrix = (
             ROOT / "docs/governance/pre-1-0-pending-matrix.md"
         ).read_text(encoding="utf-8")
 
         for fragment in (
-            "G126/E01 — PLAN.2 R2",
-            "G127/E02 — MANT.2 R2",
-            "MANT.2 R2 / #206",
-            "VER.2 R6 / #164",
+            "G129/E03/C0",
             "DOC.4 R1 / #171",
             "Auditoría previsional / #142",
             "PERSIST.1 / #130",
@@ -205,27 +213,23 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
             "DOC.1 R6 / #147",
             "QA.1 / #148",
             "REL.1 / #149",
-            "G126",
             "1.0.0.0",
         ):
             with self.subTest(fragment=fragment):
                 self.assertIn(fragment, matrix)
 
-        graph = matrix.split("## 2. Grafo canónico", 1)[1].split(
-            "## 3. Pendientes obligatorios pre-1.0", 1
+        graph = matrix.split("## 3. Grafo canónico", 1)[1].split(
+            "## 4. Pendientes obligatorios pre-1.0", 1
         )[0]
 
         ordered = (
-            "PLAN.2 R2",
-            "MANT.2 R2",
-            "VER.2 R6",
             "DOC.4 R1",
             "#142 auditoría previsional",
             "PERSIST.1",
             "REP.1",
             "DEPLOY.1",
             "UX.7",
-            "#189 sin drift visual shared",
+            "#189 sin drift shared",
             "SEC.2 R7",
             "A11Y.2",
             "REV.1",
@@ -236,6 +240,9 @@ class TestNOR1R8WorkBlockIdentifiers(unittest.TestCase):
         )
         positions = [graph.index(token) for token in ordered]
         self.assertEqual(positions, sorted(positions))
+
+        for historical in ("G126/E01", "G127/E02", "MANT.2 R2", "VER.2 R6"):
+            self.assertNotIn(historical, graph)
 
     def test_marcador_expansion_abierta_no_reserva_ux33(self):
         ids = {

@@ -15,30 +15,17 @@ AUDIT = ROOT / "docs/audits/repository/nor3-r8-closure-audit.md"
 
 
 class TestNOR3R8Closure(unittest.TestCase):
+
     def test_cierre_r8_preserva_g122_y_estado_actual(self):
         data = json.loads(REGISTRY.read_text(encoding="utf-8"))
         candidate = data["current_candidate"]
 
-        self.assertEqual(
-            (
-                129,
-                "0.129.3.0-beta",
-                "MANT.2",
-                "R3",
-                "dependency_maintenance_post_g128",
-                "accepted_pending_integration",
-                130,
-            ),
-            (
-                candidate["global_revision"],
-                candidate["revision_aware"],
-                candidate["block"],
-                candidate["revision"],
-                candidate["revision_scope"],
-                candidate["state"],
-                candidate["next_global_available"],
-            ),
-        )
+        self.assertEqual("unassigned", candidate["state"])
+        self.assertIsNone(candidate["global_revision"])
+        self.assertIsNone(candidate["revision_aware"])
+        self.assertIsNone(candidate["block"])
+        self.assertIsNone(candidate["revision"])
+        self.assertEqual(130, candidate["next_global_available"])
 
         identifiers = {
             item["identifier"]: item
@@ -49,31 +36,17 @@ class TestNOR3R8Closure(unittest.TestCase):
         self.assertEqual(["G122"], identifiers["NOR.3"]["global_refs"])
         self.assertEqual("closed", identifiers["DOC.3"]["status"])
         self.assertEqual(["G125"], identifiers["DOC.3"]["global_refs"])
-        self.assertEqual(
-            "accepted_r3_pending_integration",
-            identifiers["MANT.2"]["status"],
-        )
+        self.assertEqual("closed_r3_published", identifiers["MANT.2"]["status"])
         self.assertEqual("closed_r6", identifiers["VER.2"]["status"])
+        self.assertEqual("in_progress", identifiers["DOC.4"]["status"])
 
         active = data["active_phase"]
-        self.assertEqual(
-            (
-                "MANT.2",
-                "R3",
-                211,
-                "accepted_pending_integration",
-                129,
-                128,
-            ),
-            (
-                active["block"],
-                active["revision"],
-                active["issue"],
-                active["state"],
-                active["global_revision"],
-                active["base_global_revision"],
-            ),
-        )
+        self.assertEqual("DOC.4", active["block"])
+        self.assertEqual("R1", active["revision"])
+        self.assertEqual(171, active["issue"])
+        self.assertEqual("in_progress", active["state"])
+        self.assertIsNone(active["global_revision"])
+        self.assertEqual(129, active["base_global_revision"])
 
     def test_policy_declara_cierre_r8_sin_simular_auditoria_posterior(self):
         data = json.loads(POLICY.read_text(encoding="utf-8"))

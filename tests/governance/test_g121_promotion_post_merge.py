@@ -44,7 +44,8 @@ class TestG121PromotionPostMerge(unittest.TestCase):
             ),
         )
 
-    def test_registry_preserva_ux6_y_nor3_historicos(self):
+
+    def test_registry_preserva_historia_y_expone_doc4_activo(self):
         data = json.loads(
             (ROOT / "data/governance/work-block-registry.json")
             .read_text(encoding="utf-8")
@@ -54,14 +55,21 @@ class TestG121PromotionPostMerge(unittest.TestCase):
         self.assertIn("G121", ids["UX.6"]["global_refs"])
         self.assertEqual("closed", ids["NOR.3"]["status"])
         self.assertEqual(["G122"], ids["NOR.3"]["global_refs"])
+        self.assertEqual("in_progress", ids["DOC.4"]["status"])
         self.assertEqual("planned_reserved", ids["PERSIST.1"]["status"])
 
         candidate = data["current_candidate"]
-        self.assertEqual("accepted_pending_integration", candidate["state"])
-        self.assertEqual(129, candidate["global_revision"])
-        self.assertEqual("MANT.2", candidate["block"])
-        self.assertEqual("R3", candidate["revision"])
+        self.assertEqual("unassigned", candidate["state"])
+        self.assertIsNone(candidate["global_revision"])
+        self.assertIsNone(candidate["block"])
+        self.assertIsNone(candidate["revision"])
         self.assertEqual(130, candidate["next_global_available"])
+
+        active = data["active_phase"]
+        self.assertEqual("DOC.4", active["block"])
+        self.assertEqual("R1", active["revision"])
+        self.assertEqual(171, active["issue"])
+        self.assertEqual(129, active["base_global_revision"])
 
     def test_manifest_actual_materializa_mant2_r2(self):
         data = json.loads(
