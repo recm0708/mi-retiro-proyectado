@@ -81,13 +81,16 @@ class TestUX46eAuditoriaCoherencia(unittest.TestCase):
             roadmap,
         )
 
-    def test_readme_preserva_cierre_r8_r9_sin_congelar_bloque_activo(self):
-        texto = (ROOT / "README.md").read_text(encoding="utf-8")
-        self.assertIn("**UX.4.6e:** cerrada en `0.0.25-beta`", texto)
-        self.assertIn("PR #21 integrado por squash", texto)
-        self.assertIn("21 labels y 20/20 topics", texto)
-        self.assertNotIn("**Bloque activo:** UX.4.6e", texto)
-        self.assertIn("**Bloque transversal activo:** VER.2", texto)
+    def test_cierre_ux46e_permanece_en_release_y_no_en_readme_vivo(self):
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        releases = (ROOT / "RELEASES.md").read_text(encoding="utf-8")
+
+        self.assertIn("Cuarta versión formal y cierre de UX.4.6e.", releases)
+        self.assertIn("PR #21 integró el cierre funcional por squash", releases)
+        self.assertNotIn("**UX.4.6e:**", readme)
+        self.assertNotIn("PR #21 integrado por squash", readme)
+        self.assertNotIn("21 labels y 20/20 topics", readme)
+        self.assertNotIn("**Bloque activo:** UX.4.6e", readme)
 
     def test_auditoria_r7_existe_y_declara_linea_base_y_objetivo(self):
         texto = (DOCS / "archive" / "ux" / "ux46e-r7-audit-2026-08-18.md").read_text(encoding="utf-8")

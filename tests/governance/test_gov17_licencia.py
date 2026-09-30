@@ -61,12 +61,12 @@ class TestGov17Licencia(unittest.TestCase):
         ):
             self.assertIn(esperado, texto)
 
-    def test_readme_declara_licencia_y_cierre_gov17(self):
+    def test_readme_declara_licencia_vigente_sin_repetir_cierre_gov17(self):
         texto = (ROOT / "README.md").read_text(encoding="utf-8")
-        self.assertIn("**GOV.1.7:** Licencia propietaria pre-beta", texto)
-        self.assertIn("cerrado", texto)
+        self.assertIn("**licencia propietaria / todos los derechos reservados**", texto)
         self.assertIn("(LICENSE)", texto)
         self.assertIn("(THIRD_PARTY_NOTICES.md)", texto)
+        self.assertNotIn("**GOV.1.7:**", texto)
 
     def test_cierre_gov17_se_preserva_en_closeout(self):
         cierre = (

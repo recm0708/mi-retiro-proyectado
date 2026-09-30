@@ -21,15 +21,19 @@ class TestGov18CierreGobierno(unittest.TestCase):
         cierre = (DOCS / "archive/governance/gov1-closeout.md").read_text(encoding="utf-8")
         self.assertIn("0.0.24-beta", cierre)
 
-    def test_readme_declara_gov1_cerrado_y_evidencia_preserva_historia(self):
+    def test_readme_separa_estado_vigente_de_cierres_historicos(self):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
         cierre = (DOCS / "archive/governance/gov1-closeout.md").read_text(encoding="utf-8")
 
-        self.assertIn("**GOV.1:** cerrado.", readme)
-        self.assertIn("**NOR.2 R4:** cerrado", readme)
-        self.assertIn("**NOR.2 R5:** cerrado", readme)
-        self.assertIn("**NOR.2 R6:** cerrado", readme)
-        self.assertIn("**NOR.2 R7:** cerrado", readme)
+        self.assertIn("[Gobierno del proyecto](GOVERNANCE.md)", readme)
+        for marcador in (
+            "**GOV.1:** cerrado.",
+            "**NOR.2 R4:** cerrado",
+            "**NOR.2 R5:** cerrado",
+            "**NOR.2 R6:** cerrado",
+            "**NOR.2 R7:** cerrado",
+        ):
+            self.assertNotIn(marcador, readme)
         self.assertIn("GOV.1.8", cierre)
         self.assertIn("0.1.0-beta.1", cierre)
 

@@ -20,13 +20,33 @@ class TestPostSec2IntegralAudit(unittest.TestCase):
         self.assertIn("MRP_ADMIN_ENABLED", texto)
         self.assertIn("G109/E01", texto)
 
-    def test_readme_documenta_acceso_sin_publicar_secreto(self):
-        texto = (ROOT / "README.md").read_text(encoding="utf-8")
-        self.assertIn("http://127.0.0.1:8000/dev/login", texto)
-        self.assertIn("http://127.0.0.1:8000/dev/centro-desarrollo", texto)
-        self.assertIn("MRP_ADMIN_SECRET", texto)
-        self.assertIn("No existe una clave administrativa predeterminada", texto)
-        self.assertIn("<define-tu-secreto-local-no-versionado>", texto)
+    def test_readme_remite_acceso_interno_sin_duplicar_secretos(self):
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        centro = (ROOT / "docs/architecture/development-center.md").read_text(
+            encoding="utf-8"
+        )
+
+        self.assertIn(
+            "[Centro de desarrollo](docs/architecture/development-center.md)",
+            readme,
+        )
+        self.assertIn("No se incluyen credenciales predeterminadas", readme)
+
+        for marcador in (
+            "http://127.0.0.1:8000/dev/login",
+            "http://127.0.0.1:8000/dev/centro-desarrollo",
+            "MRP_ADMIN_SECRET",
+            "<define-tu-secreto-local-no-versionado>",
+        ):
+            self.assertNotIn(marcador, readme)
+
+        for marcador in (
+            "/dev/login",
+            "/dev/centro-desarrollo",
+            "MRP_ADMIN_SECRET",
+            "<secreto-local-no-versionado>",
+        ):
+            self.assertIn(marcador, centro)
 
     def test_snapshot_g070_se_preserva_exactamente(self):
         ruta = ROOT / "docs/archive/governance/pre-1-0-revision-ledger-g070.json"

@@ -15,11 +15,16 @@ class TestPlan1DocumentacionPrimaria(unittest.TestCase):
 
     def test_readme_declara_beta_actual_y_objetivo_oficial(self):
         texto = (ROOT / "README.md").read_text(encoding="utf-8")
-        self.assertIn("**Etapa:** desarrollo beta", texto)
-        self.assertIn("PLAN.1", texto)
-        self.assertIn("**Primera versión oficial objetivo:** `1.0.0.0`", texto)
-        self.assertIn("`Build 000001`", texto)
+        version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
+        releases = (ROOT / "RELEASES.md").read_text(encoding="utf-8")
+
+        self.assertIn("**Etapa:** desarrollo beta.", texto)
+        self.assertIn(f"**Versión de desarrollo:** `{version}`", texto)
+        self.assertIn("**Objetivo de primera versión oficial:** `1.0.0.0`.", texto)
+        self.assertNotIn("PLAN.1", texto)
+        self.assertNotIn("`Build 000001`", texto)
         self.assertNotIn("Primera beta pública objetivo de la aplicación", texto)
+        self.assertIn("Build 000001", releases)
 
     def test_plan1_historico_y_roadmap_vivo_usan_fuentes_correctas(self):
         ledger = json.loads(
