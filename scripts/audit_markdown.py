@@ -845,7 +845,7 @@ def audit_file(
             or (
                 rel == "README.md"
                 and re.match(
-                    r"^<h1\\b[^>]*>.*</h1>\\s*$",
+                    r"^<h1\b[^>]*>.*</h1>\s*$",
                     line,
                     re.IGNORECASE,
                 )
