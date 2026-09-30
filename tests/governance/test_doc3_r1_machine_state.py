@@ -100,7 +100,7 @@ class TestDOC3R1PublishedMachineState(unittest.TestCase):
             ),
         )
 
-    def test_manifest_actual_materializa_mant2_r2_y_deja_g128_libre(self):
+    def test_manifest_actual_materializa_mant2_r3_y_deja_g130_libre(self):
         data = json.loads(MANIFEST.read_text(encoding="utf-8"))
         self.assertEqual("0.129.3.0-beta", data["version"])
         self.assertEqual("MANT.2", data["block"])
@@ -111,11 +111,11 @@ class TestDOC3R1PublishedMachineState(unittest.TestCase):
         self.assertIsNone(next_step["revision_aware"])
         self.assertIsNone(next_step["block"])
         for fragment in (
-            "G129/E03/C0",
-            "MANT.2 R3/#211",
             "G130",
-            "#166",
+            "sin candidato",
+            "VERSION preasignados",
             "DOC.4 R1/#171",
+            "G129/E03/C0",
         ):
             with self.subTest(fragment=fragment):
                 self.assertIn(fragment, next_step["description"])

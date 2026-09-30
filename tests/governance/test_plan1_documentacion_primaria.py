@@ -72,9 +72,10 @@ class TestPlan1DocumentacionPrimaria(unittest.TestCase):
         ).read_text(encoding="utf-8")
 
         for esperado in (
-            "PLAN.2 R2",
+            "G129/E03/C0",
+            "DOC.4 R1 / #171",
             "1.0.0.0",
-            "VER.2 R6",
+            "PERSIST.1",
             "REL.1",
         ):
             with self.subTest(esperado=esperado):
@@ -83,6 +84,8 @@ class TestPlan1DocumentacionPrimaria(unittest.TestCase):
                     roadmap,
                 )
 
+        self.assertNotIn("PLAN.2 R2", roadmap)
+        self.assertNotIn("VER.2 R6", roadmap)
     def test_releases_registra_evidencia_final_0_0_25(self):
         texto = (ROOT / "RELEASES.md").read_text(encoding="utf-8")
         self.assertIn("7affa00e2530aeede066c10ecfee8c6dbd49b10b", texto)

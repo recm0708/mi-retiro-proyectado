@@ -55,13 +55,12 @@ class TestPlan1VersionadoOficial(unittest.TestCase):
             "1.0.0.0",
             "Build 000001",
             "MAYOR.MENOR.PARCHE.REVISIÓN",
-            "seis dígitos",
-            "no forma parte del archivo `VERSION`",
-            "No reintroducir `0.1.0-beta.1` como objetivo vigente",
+            "seis dígitos decimales",
+            "no forma parte de `VERSION`",
+            "No reactivar formatos u objetivos históricos sustituidos como política",
         ):
             with self.subTest(esperado=esperado):
                 self.assertIn(esperado, texto)
-
     def test_programa_historico_plan1_y_plan_vivo_quedan_separados(self):
         registry = json.loads(
             (
@@ -129,23 +128,26 @@ class TestPlan1VersionadoOficial(unittest.TestCase):
         ).read_text(encoding="utf-8")
 
         for esperado in (
-            "G125/E01",
-            "PLAN.2 R2",
-            "VER.2 R6",
-            "DOC.4 R1",
-            "PERSIST.1",
-            "REP.1",
-            "DEPLOY.1",
-            "UX.x final realmente necesario",
-            "SEC.2 R7",
-            "REL.1",
+            "G129/E03/C0",
+            "DOC.4 R1 / #171",
+            "PERSIST.1 / #130",
+            "REP.1 / #143",
+            "DEPLOY.1 / #157",
+            "UX.7 → UX.x",
+            "SEC.2 R7 / #144",
+            "REL.1 / #149",
             "1.0.0.0",
         ):
             with self.subTest(esperado=esperado):
-                self.assertIn(
-                    esperado,
-                    texto,
-                )
+                self.assertIn(esperado, texto)
+
+        for historico in (
+            "G125/E01",
+            "PLAN.2 R2",
+            "VER.2 R6",
+        ):
+            with self.subTest(historico=historico):
+                self.assertNotIn(historico, texto)
 
 if __name__ == "__main__":
     unittest.main()

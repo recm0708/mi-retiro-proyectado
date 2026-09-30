@@ -383,8 +383,10 @@ class TestVer2LedgerEstructurado(
         )
 
         for value in (
-            "G071–G108",
-            "G109",
+            "Reconciliación G071–G121",
+            "G071 | `0.0.71.01-beta`",
+            "G087 | `0.0.87.01-beta`",
+            "G109 | `0.1.09.01-beta`",
             "G110 | `0.1.10.01-beta`",
             "G111 | `0.1.11.01-beta`",
             "G112 | `0.1.12.07-beta`",
@@ -392,7 +394,7 @@ class TestVer2LedgerEstructurado(
             "G114 | `0.1.14.01-beta`",
             "G115 | `0.1.15.04-beta`",
             "G116 | `0.1.16.05-beta`",
-            "`0.0.71.01-beta`",
+            "`v0.0.71.01-beta`",
         ):
             with self.subTest(
                 value=value
@@ -401,7 +403,6 @@ class TestVer2LedgerEstructurado(
                     value,
                     ledger_md,
                 )
-
     def test_archivo_json_no_tiene_bom_y_parsea_directamente(
         self,
     ):

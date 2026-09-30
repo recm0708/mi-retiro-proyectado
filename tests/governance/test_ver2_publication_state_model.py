@@ -49,31 +49,39 @@ class TestVer2PublicationStateModel(unittest.TestCase):
         self.assertEqual(last["functional_revision"], baseline["functional_revision"])
 
         active = self.registry["active_phase"]
+        self.assertEqual("DOC.4", active["block"])
+        self.assertEqual("R1", active["revision"])
+        self.assertEqual(171, active["issue"])
+        self.assertEqual("in_progress", active["state"])
+        self.assertIsNone(active["global_revision"])
+        self.assertIsNone(active["revision_aware"])
+        self.assertEqual(last["global_revision"], active["base_global_revision"])
+        self.assertEqual(last["revision_aware"], active["base_revision_aware"])
+
         candidate = self.registry["current_candidate"]
-        self.assertEqual(last["block"], active["block"])
-        self.assertEqual(last["functional_revision"], active["revision"])
-        self.assertEqual("accepted_pending_integration", active["state"])
-        self.assertEqual(last["global_revision"], active["global_revision"])
-        self.assertEqual(last["revision_aware"], active["revision_aware"])
-
-        self.assertEqual("accepted_pending_integration", candidate["state"])
-        self.assertEqual(last["global_revision"], candidate["global_revision"])
-        self.assertEqual(last["edition"], candidate["edition"])
-        self.assertEqual(self.ledger["next_global"], candidate["next_global_available"])
-
-    def test_mantenimiento_r3_activo_y_ver2_cerrado(self):
+        self.assertEqual("unassigned", candidate["state"])
+        self.assertIsNone(candidate["global_revision"])
+        self.assertIsNone(candidate["revision_aware"])
+        self.assertIsNone(candidate["block"])
+        self.assertIsNone(candidate["edition"])
+        self.assertEqual(
+            self.ledger["next_global"],
+            candidate["next_global_available"],
+        )
+    def test_mantenimiento_r3_publicado_ver2_cerrado_y_doc4_activo(self):
         ids = {
             item["identifier"]: item
             for item in self.registry["identifiers"]
         }
         self.assertEqual(
-            "accepted_r3_pending_integration",
+            "closed_r3_published",
             ids["MANT.2"]["status"],
         )
         self.assertEqual("closed_r6", ids["VER.2"]["status"])
+        self.assertEqual("in_progress", ids["DOC.4"]["status"])
         self.assertIn("G128", ids["VER.2"]["global_refs"])
         self.assertIn("G129", ids["MANT.2"]["global_refs"])
-
+        self.assertEqual([], ids["DOC.4"]["global_refs"])
     def test_manifest_es_snapshot_release_input(self):
         manifest = self.manifest
         last = self.ledger["entries"][-1]

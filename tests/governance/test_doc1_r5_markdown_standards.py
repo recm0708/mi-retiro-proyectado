@@ -86,17 +86,21 @@ class TestDoc1R5MarkdownStandards(unittest.TestCase):
         self.assertIn("docs/decisions/README.md", standard)
         self.assertIn("docs/operations/validation.md", standard)
 
-        for rel in (
-            "docs/decisions/README.md",
-            "docs/operations/validation.md",
-        ):
-            with self.subTest(rel=rel):
-                text = (ROOT / rel).read_text(encoding="utf-8")
-                self.assertIn(
-                    "**Naturaleza documental:** Registro vivo acumulativo",
-                    text,
-                )
+        decisions = (
+            ROOT / "docs/decisions/README.md"
+        ).read_text(encoding="utf-8")
+        validation = (
+            ROOT / "docs/operations/validation.md"
+        ).read_text(encoding="utf-8")
 
+        self.assertIn(
+            "**Clasificación:** decisiones técnicas / registro vivo acumulativo",
+            decisions,
+        )
+        self.assertIn(
+            "**Naturaleza documental:** Registro vivo acumulativo",
+            validation,
+        )
     def test_validacion_inventaria_todos_los_modulos_reales(self):
         validation = (
             ROOT / "docs" / "operations" / "validation.md"
